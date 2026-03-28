@@ -1,0 +1,49 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --input-border-style: solid; /** Border style */
+  --input-width: 100%; /** Inputs are always full width */
+  --input-cursor: text; /** Cursor */
+  --input-placeholder-text-transform: uppercase; /** Placeholder text transform */
+  --input-disabled-cursor: not-allowed; /** Cursor when disabled */
+  --input-error-placeholder-text-transform: uppercase; /** Error placeholder text transform */
+  --input-border-radius: var(--border-radius-none); /** Border radius */
+  --input-border-width: var(--border-width-sm); /** Border width */
+  --input-font-family: var(--font-family-sans); /** Font family */
+  --input-font-size: var(--font-size-3); /** Font size */
+  --input-line-height: var(--line-height-none); /** Line height */
+  --input-transition-duration: var(--motion-duration-fast); /** Transition duration */
+  --input-transition-easing: var(--motion-easing-default); /** Transition easing */
+  --input-bg: var(--color-white); /** Background */
+  --input-focus-ring-width: var(--border-width-sm); /** Focus ring width — 1px so border + ring = 2px visual */
+  --input-focus-ring-inset-offset: var(--border-width-sm); /** Gap between border and focus ring */
+  --input-disabled-opacity: var(--opacity-disabled); /** Opacity when disabled */
+  --input-disabled-bg: var(--color-grey-lightest); /** Background when disabled */
+  --input-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
+  --input-error-bg: var(--color-white); /** Error background */
+  --input-padding-block: var(--control-padding-block); /** Block (vertical) padding */
+  --input-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
+  --input-font-weight: var(--font-weight-default); /** Font weight */
+  --input-color: var(--color-text-default); /** Text color */
+  --input-border-color: var(--color-primary); /** Border color */
+  --input-placeholder-color: var(--color-text-placeholder); /** Placeholder text color */
+  --input-focus-border-color: var(--color-primary); /** Border color on focus */
+  --input-focus-ring-color: var(--color-primary); /** Focus ring color */
+  --input-disabled-border-color: var(--color-primary); /** Border color when disabled */
+  --input-error-color: var(--color-text-default); /** Error text color */
+  --input-error-border-color: var(--color-primary); /** Error border color */
+  --input-error-placeholder-color: var(--color-text-placeholder); /** Error placeholder color */
+  --input-error-focus-border-color: var(--color-primary); /** Error border color on focus */
+  --input-error-focus-ring-color: var(--color-error); /** Error focus ring color */
+  --input-dark-bg: var(--color-background-dark); /** Background on dark surface */
+  --input-dark-border-color: var(--color-text-dark); /** Border color on dark background */
+  --input-dark-placeholder-color: var(--color-text-muted-dark); /** Placeholder color on dark background */
+  --input-dark-focus-border-color: var(--color-text-dark); /** Border color on focus on dark background */
+  --input-dark-focus-ring-color: var(--color-text-dark); /** Focus ring color on dark background */
+  --input-dark-error-focus-ring-color: var(--color-error-dark); /** Error focus ring color on dark background */
+  --input-dark-error-bg: var(--color-background-dark); /** Background in error state on dark surface */
+  --input-dark-error-border-color: var(--color-text-dark); /** Border color in error state on dark background */
+  --input-dark-error-placeholder-color: var(--color-text-muted-dark); /** Placeholder color in error state on dark background */
+}

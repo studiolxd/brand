@@ -1,0 +1,6 @@
+{
+  "border-width": {
+    "sm": { "$value": "1px", "$type": "dimension", "$description": "Default border width" },
+    "md": { "$value": "2px", "$type": "dimension", "$description": "Emphasized border width" }
+  }
+}

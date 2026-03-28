@@ -1,0 +1,15 @@
+{
+  "color": {
+    "text": {
+      "default":     { "$value": "{color.prussian}",       "$type": "color", "$description": "Default text color for light backgrounds" },
+      "dark":        { "$value": "{color.white}",          "$type": "color", "$description": "Text color for dark backgrounds" },
+      "placeholder": { "$value": "{color.grey-dark}", "$type": "color", "$description": "Placeholder text color" },
+      "muted":         { "$value": "{color.grey-darkest}",  "$type": "color", "$description": "Muted text — helper text, secondary labels" },
+      "muted-dark":    { "$value": "{color.grey-light}", "$type": "color", "$description": "Muted text on dark backgrounds" }
+    },
+    "background": {
+      "default": { "$value": "{color.white}",    "$type": "color", "$description": "Default background — light surface" },
+      "dark":    { "$value": "{color.prussian}", "$type": "color", "$description": "Dark background — dark surface" }
+    }
+  }
+}

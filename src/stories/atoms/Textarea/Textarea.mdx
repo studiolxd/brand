@@ -1,0 +1,60 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TextareaStories from "./Textarea.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { textareaBaseTokens, textareaFocusTokens, textareaErrorTokens, textareaDisabledTokens, textareaDarkTokens } from "../../../tokens/components/textarea";
+
+<Meta of={TextareaStories} />
+
+# Textarea
+
+Área de texto multilínea para formularios. Comparte tokens de base con el Input y siempre ocupa el ancho completo de su contenedor.
+
+## Por defecto
+
+<Canvas of={TextareaStories.Default} />
+
+## Error
+
+<Canvas of={TextareaStories.Error} />
+
+## Deshabilitado
+
+<Canvas of={TextareaStories.Disabled} />
+
+## Solo lectura
+
+<Canvas of={TextareaStories.ReadOnly} />
+
+## Oscuro
+
+Variante para usar sobre fondos oscuros o fotografías.
+
+<Canvas of={TextareaStories.Dark} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={textareaBaseTokens} />
+
+### Focus
+
+<TokenTable tokens={textareaFocusTokens} />
+
+### Error
+
+<TokenTable tokens={textareaErrorTokens} />
+
+### Deshabilitado
+
+<TokenTable tokens={textareaDisabledTokens} />
+
+### Oscuro
+
+<TokenTable tokens={textareaDarkTokens} />
+
+## Props
+
+<ArgTypes of={TextareaStories} />

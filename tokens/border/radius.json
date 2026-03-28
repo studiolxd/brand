@@ -1,0 +1,10 @@
+{
+  "border-radius": {
+    "none": { "$value": "0px",    "$type": "dimension", "$description": "No border radius" },
+    "sm":   { "$value": "4px",    "$type": "dimension", "$description": "Small — inputs, badges, chips" },
+    "md":   { "$value": "8px",    "$type": "dimension", "$description": "Medium — buttons, small cards" },
+    "lg":   { "$value": "12px",   "$type": "dimension", "$description": "Large — cards, modals" },
+    "xl":   { "$value": "16px",   "$type": "dimension", "$description": "Extra large — panels, drawers" },
+    "full": { "$value": "9999px", "$type": "dimension", "$description": "Full — pills, circular avatars" }
+  }
+}

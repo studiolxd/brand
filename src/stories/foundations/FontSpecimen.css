@@ -1,0 +1,37 @@
+.font-specimen {
+  margin-top: var(--spacing-7);
+}
+
+.font-specimen .font-specimen__name {
+  font-family: var(--font-specimen-family);
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0 0 var(--spacing-3);
+}
+
+.font-specimen .font-specimen__intro {
+  font-size: 14px;
+  color: #555;
+  margin: 0 0 var(--spacing-4);
+  line-height: 1.6;
+}
+
+.font-specimen .font-specimen__alphabet,
+.font-specimen .font-specimen__symbols {
+  font-family: var(--font-specimen-family);
+  font-size: 16px;
+  font-weight: 300;
+  color: #666;
+  margin: 0 0 var(--spacing-1);
+  line-height: 1.6;
+}
+
+.font-specimen .font-specimen__link {
+  margin: var(--spacing-3) 0 0;
+  font-size: 13px;
+}
+
+.font-specimen .font-specimen__link a {
+  color: #555;
+}

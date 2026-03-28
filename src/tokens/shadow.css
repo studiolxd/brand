@@ -1,0 +1,11 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --shadow-none: none; /** No shadow */
+  --shadow-sm: 0 1px 2px rgba(17,30,48,0.08); /** Subtle — inputs, minor elements */
+  --shadow-md: 0 2px 8px rgba(17,30,48,0.10); /** Medium — cards, dropdowns */
+  --shadow-lg: 0 4px 16px rgba(17,30,48,0.12); /** Large — modals, popovers */
+  --shadow-xl: 0 8px 32px rgba(17,30,48,0.16); /** Extra large — drawers, overlays */
+}

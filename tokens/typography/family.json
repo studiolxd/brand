@@ -1,0 +1,37 @@
+{
+  "font-family": {
+    "sans": {
+      "$value": "\"Google Sans Flex\", system-ui, sans-serif",
+      "$type": "string",
+      "$description": "Primary sans-serif typeface",
+      "$extensions": {
+        "studio-lxd": {
+          "intro": "Google Sans Flex es la tipografía principal del sistema, una fuente variable con pesos de 1 a 1000 y tamaño óptico de 6 a 144.",
+          "link": "https://fonts.google.com/specimen/Google+Sans+Flex"
+        }
+      }
+    },
+    "mono": {
+      "$value": "\"Google Sans Code\", ui-monospace, monospace",
+      "$type": "string",
+      "$description": "Monospace typeface for code",
+      "$extensions": {
+        "studio-lxd": {
+          "intro": "Google Sans Code es la fuente monoespaciada del sistema, diseñada para mostrar código, valores técnicos y contenido preformateado.",
+          "link": "https://fonts.google.com/specimen/Google+Sans+Code"
+        }
+      }
+    },
+    "serif": {
+      "$value": "\"Libre Bodoni\", Georgia, serif",
+      "$type": "string",
+      "$description": "Serif typeface — use only in exceptional cases requiring a serif treatment",
+      "$extensions": {
+        "studio-lxd": {
+          "intro": "Libre Bodoni es una fuente serif de alto contraste inspirada en los clásicos de Bodoni. Su uso debe reservarse para casos excepcionales que requieran tratamiento serif.",
+          "link": "https://fonts.google.com/specimen/Libre+Bodoni"
+        }
+      }
+    }
+  }
+}

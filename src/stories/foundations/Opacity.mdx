@@ -1,0 +1,20 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { OpacityScale } from "./OpacityScale";
+import { TokenTable } from "./TokenTable";
+import { opacityTokens } from "../../tokens/opacity";
+
+<Meta title="Fundamentos/Opacidad" />
+
+# Opacidad
+
+Escala de valores de opacidad para estados y capas de la interfaz. La cuadrícula de fondo muestra el nivel de transparencia real de cada valor.
+
+<OpacityScale tokens={opacityTokens} />
+
+---
+
+## Tokens CSS
+
+<TokenTable tokens={opacityTokens} />
+
+Los tokens están definidos en `tokens/opacity/scale.json`.

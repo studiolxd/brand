@@ -1,0 +1,37 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-white: #ffffff; /** Pure white */
+  --color-black: #000000; /** Pure black */
+  --color-grey-lightest: #f2f2f2; /** Fondos sutiles, chips, tags */
+  --color-grey-light: #d0d0d0; /** Bordes, dividers, separadores */
+  --color-grey-dark: #767676; /** Placeholder, texto secundario */
+  --color-grey-darkest: #4a4a4a; /** Texto deshabilitado, labels inactivos */
+  --color-prussian: #111e30; /** Brand prussian */
+  --color-lavender: #baabff; /** Brand lavender */
+  --color-yellow: #ffcd00; /** Brand yellow */
+  --color-emerald: #20e38e; /** Brand emerald */
+  --color-cayenne: #f05e1c; /** Brand cayenne */
+  --color-red: #b30000; /** System red — error states on light background */
+  --color-red-dark: #ff8585; /** System red — error states on dark background */
+  --color-green: #006616; /** System green — success states on light background */
+  --color-green-dark: #00cc2c; /** System green — success states on dark background */
+  --color-primary: var(--color-prussian); /** Primary brand color — used ~50% of the time */
+  --color-secondary: var(--color-lavender); /** Secondary brand color — used ~20% of the time */
+  --color-tertiary: var(--color-yellow); /** Tertiary brand color — used ~20% of the time */
+  --color-quaternary: var(--color-emerald); /** Quaternary brand color — used ~5% of the time */
+  --color-quinary: var(--color-cayenne); /** Quinary brand color — used ~5% of the time */
+  --color-error: var(--color-red); /** Error role — maps to system red */
+  --color-error-dark: var(--color-red-dark); /** Error role on dark background */
+  --color-success: var(--color-green); /** Success role — maps to system green */
+  --color-success-dark: var(--color-green-dark); /** Success role on dark background */
+  --color-text-default: var(--color-prussian); /** Default text color for light backgrounds */
+  --color-text-dark: var(--color-white); /** Text color for dark backgrounds */
+  --color-text-placeholder: var(--color-grey-dark); /** Placeholder text color */
+  --color-text-muted: var(--color-grey-darkest); /** Muted text — helper text, secondary labels */
+  --color-text-muted-dark: var(--color-grey-light); /** Muted text on dark backgrounds */
+  --color-background-default: var(--color-white); /** Default background — light surface */
+  --color-background-dark: var(--color-prussian); /** Dark background — dark surface */
+}

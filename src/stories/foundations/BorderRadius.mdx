@@ -1,0 +1,20 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { RadiusScale } from "./RadiusScale";
+import { TokenTable } from "./TokenTable";
+import { radiusTokens } from "../../tokens/border";
+
+<Meta title="Fundamentos/Radio de borde" />
+
+# Radio de borde
+
+Escala de border-radius basada en múltiplos de 4px, coherente con la escala de espaciado. `full` se reserva para elementos completamente redondeados como pills o avatares.
+
+<RadiusScale tokens={radiusTokens} />
+
+---
+
+## Tokens CSS
+
+<TokenTable tokens={radiusTokens} />
+
+Los tokens están definidos en `tokens/border/radius.json`.

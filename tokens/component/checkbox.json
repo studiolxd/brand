@@ -1,0 +1,25 @@
+{
+  "checkbox": {
+    "size":                  { "$value": "1.25em",                      "$type": "string",    "$description": "Tamaño del checkbox (ancho y alto)" },
+    "check-size":            { "$value": "0.65em",                      "$type": "string",    "$description": "Tamaño del checkmark interior" },
+    "border-radius":         { "$value": "{border-radius.none}",        "$type": "dimension", "$description": "Border radius" },
+    "border-width":          { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Border width" },
+    "border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Border style" },
+    "border-color":          { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del borde" },
+    "bg":                    { "$value": "transparent",                  "$type": "string",    "$description": "Fondo sin marcar" },
+    "bg-checked":            { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo cuando está marcado" },
+    "check-color":           { "$value": "{color.white}",               "$type": "color",     "$description": "Color del checkmark" },
+    "cursor":                { "$value": "pointer",                      "$type": "string",    "$description": "Cursor" },
+    "transition-duration":   { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de transiciones" },
+    "transition-easing":     { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Easing de transiciones" },
+    "focus-ring-width":      { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Ancho del anillo de foco" },
+    "focus-ring-offset":     { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del anillo de foco respecto al borde" },
+    "focus-ring-color":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
+    "disabled-opacity":      { "$value": "{opacity.disabled}",          "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },
+    "disabled-cursor":       { "$value": "not-allowed",                  "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "dark-border-color":     { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Color del borde sobre fondo oscuro" },
+    "dark-bg-checked":       { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Fondo marcado sobre fondo oscuro" },
+    "dark-check-color":      { "$value": "{color.background.dark}",     "$type": "color",     "$description": "Color del checkmark sobre fondo oscuro" },
+    "dark-focus-ring-color": { "$value": "{color.secondary}",           "$type": "color",     "$description": "Color del anillo de foco sobre fondo oscuro" }
+  }
+}

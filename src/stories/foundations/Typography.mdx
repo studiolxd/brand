@@ -1,0 +1,40 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { FontSpecimen } from "./FontSpecimen";
+import { TokenTable } from "./TokenTable";
+import { familyTokens, fontFamilies, sizeTokens, weightTokens, lineHeightTokens, letterSpacingTokens } from "../../tokens/typography";
+
+<Meta title="Fundamentos/Tipografía" />
+
+# Tipografía
+
+El sistema de diseño de Studio LXD utiliza dos tipografías: una para interfaces y otra para código.
+
+{fontFamilies.map(({ name, fontFamily, intro, link }) => (
+  <FontSpecimen key={name} name={name} fontFamily={fontFamily} intro={intro} link={link} />
+))}
+
+---
+
+## Tokens CSS
+
+### Familias
+
+<TokenTable tokens={familyTokens} />
+
+### Tamaños
+
+<TokenTable tokens={sizeTokens} />
+
+### Pesos
+
+<TokenTable tokens={weightTokens} />
+
+### Altura de línea
+
+<TokenTable tokens={lineHeightTokens} />
+
+### Espaciado de letras
+
+<TokenTable tokens={letterSpacingTokens} />
+
+Los tokens están definidos en `tokens/typography/`.

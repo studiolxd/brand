@@ -1,0 +1,15 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { TokenTable } from "./TokenTable";
+import { componentSizeTokens } from "../../tokens/size";
+
+<Meta title="Fundamentos/Tallas de componente" />
+
+# Tallas de componente
+
+Escala de alturas para elementos de interfaz interactivos: botones de formulario, inputs, selects y otros controles. Garantiza consistencia vertical entre elementos que conviven en el mismo contexto.
+
+## Tokens CSS
+
+<TokenTable tokens={componentSizeTokens} />
+
+Los tokens están definidos en `tokens/size/component.json`.

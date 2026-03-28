@@ -1,0 +1,62 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TextareaFieldStories from "./TextareaField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { textareaFieldBaseTokens, textareaFieldErrorTokens, textareaFieldHelperTokens } from "../../../tokens/molecules/textarea-field";
+
+<Meta of={TextareaFieldStories} />
+
+# TextareaField
+
+Molécula que combina Label, Textarea, texto de ayuda y mensaje de error en un bloque accesible. El label siempre está presente en el DOM (aunque sea invisible) para garantizar la accesibilidad del campo.
+
+## Por defecto
+
+Label oculto visualmente, sin texto auxiliar.
+
+<Canvas of={TextareaFieldStories.Default} />
+
+## Con texto de ayuda
+
+<Canvas of={TextareaFieldStories.ConHelper} />
+
+## Con error
+
+El mensaje de error activa también el estado visual de error en el Textarea.
+
+<Canvas of={TextareaFieldStories.ConError} />
+
+## Deshabilitado
+
+<Canvas of={TextareaFieldStories.Deshabilitado} />
+
+## Con label visible
+
+<Canvas of={TextareaFieldStories.LabelVisible} />
+
+## Oscuro
+
+<Canvas of={TextareaFieldStories.Dark} className="bg-dark" />
+
+## Oscuro con error
+
+<Canvas of={TextareaFieldStories.DarkConError} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={textareaFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={textareaFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={textareaFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={TextareaFieldStories} />

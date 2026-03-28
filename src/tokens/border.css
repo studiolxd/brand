@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --border-radius-none: 0px; /** No border radius */
+  --border-radius-sm: 4px; /** Small — inputs, badges, chips */
+  --border-radius-md: 8px; /** Medium — buttons, small cards */
+  --border-radius-lg: 12px; /** Large — cards, modals */
+  --border-radius-xl: 16px; /** Extra large — panels, drawers */
+  --border-radius-full: 9999px; /** Full — pills, circular avatars */
+  --border-width-sm: 1px; /** Default border width */
+  --border-width-md: 2px; /** Emphasized border width */
+}

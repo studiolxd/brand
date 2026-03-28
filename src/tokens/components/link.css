@@ -1,0 +1,10 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --link-color: inherit; /** Color — heredado del texto circundante */
+  --link-text-decoration: underline; /** Decoración por defecto */
+  --link-text-decoration-hover: none; /** Decoración en hover */
+  --link-cursor: pointer; /** Cursor */
+}

@@ -1,0 +1,8 @@
+{
+  "link": {
+    "color":                 { "$value": "inherit",   "$type": "string", "$description": "Color — heredado del texto circundante" },
+    "text-decoration":       { "$value": "underline", "$type": "string", "$description": "Decoración por defecto" },
+    "text-decoration-hover": { "$value": "none",      "$type": "string", "$description": "Decoración en hover" },
+    "cursor":                { "$value": "pointer",   "$type": "string", "$description": "Cursor" }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "color": {
+    "red":           { "$value": "#B30000", "$type": "color", "$description": "System red — error states on light background" },
+    "red-dark":      { "$value": "#FF8585", "$type": "color", "$description": "System red — error states on dark background" },
+    "green":         { "$value": "#006616", "$type": "color", "$description": "System green — success states on light background" },
+    "green-dark":    { "$value": "#00CC2C", "$type": "color", "$description": "System green — success states on dark background" }
+  }
+}

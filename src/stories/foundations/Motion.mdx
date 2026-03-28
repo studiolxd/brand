@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { MotionScale } from "./MotionScale";
+import { TokenTable } from "./TokenTable";
+import { durationTokens, easingTokens } from "../../tokens/motion";
+
+<Meta title="Fundamentos/Movimiento" />
+
+# Movimiento
+
+Escala de duraciones y curvas de aceleración para transiciones y animaciones. Pasa el cursor sobre cada muestra para ver la transición en acción.
+
+## Duración
+
+<MotionScale tokens={durationTokens} type="duration" />
+
+### Tokens CSS
+
+<TokenTable tokens={durationTokens} />
+
+Los tokens están definidos en `tokens/motion/duration.json`.
+
+---
+
+## Curvas de aceleración
+
+<MotionScale tokens={easingTokens} type="easing" />
+
+### Tokens CSS
+
+<TokenTable tokens={easingTokens} />
+
+Los tokens están definidos en `tokens/motion/easing.json`.

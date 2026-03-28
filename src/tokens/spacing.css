@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --spacing-1: 4px; /** 4px — micro spacing */
+  --spacing-2: 8px; /** 8px — extra small spacing */
+  --spacing-3: 12px; /** 12px — small spacing */
+  --spacing-4: 16px; /** 16px — base spacing */
+  --spacing-5: 24px; /** 24px — medium spacing */
+  --spacing-6: 32px; /** 32px — large spacing */
+  --spacing-7: 48px; /** 48px — extra large spacing */
+  --spacing-8: 64px; /** 64px — 2x large spacing */
+}

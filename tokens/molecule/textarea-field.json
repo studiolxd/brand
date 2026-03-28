@@ -1,0 +1,21 @@
+{
+  "textarea-field": {
+    "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Espacio entre label, textarea, helper y error" },
+
+    "error": {
+      "font-family":  { "$value": "{form.error.font-family}",  "$type": "string",    "$description": "Font family del mensaje de error" },
+      "font-size":    { "$value": "{form.error.font-size}",    "$type": "dimension", "$description": "Font size del mensaje de error" },
+      "font-weight":  { "$value": "{form.error.font-weight}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
+      "line-height":  { "$value": "{form.error.line-height}",  "$type": "number",    "$description": "Line height del mensaje de error" },
+      "color":        { "$value": "{form.error.color}",        "$type": "color",     "$description": "Color del mensaje de error" }
+    },
+
+    "helper": {
+      "font-family":  { "$value": "{form.helper.font-family}",  "$type": "string",    "$description": "Font family del texto de ayuda" },
+      "font-size":    { "$value": "{form.helper.font-size}",    "$type": "dimension", "$description": "Font size del texto de ayuda" },
+      "font-weight":  { "$value": "{form.helper.font-weight}",  "$type": "number",    "$description": "Font weight del texto de ayuda" },
+      "line-height":  { "$value": "{form.helper.line-height}",  "$type": "number",    "$description": "Line height del texto de ayuda" },
+      "color":        { "$value": "{form.helper.color}",        "$type": "color",     "$description": "Color del texto de ayuda" }
+    }
+  }
+}

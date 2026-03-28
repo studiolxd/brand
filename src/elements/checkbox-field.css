@@ -1,0 +1,28 @@
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: var(--checkbox-field-gap);
+  padding-inline: var(--checkbox-field-padding-inline);
+  padding-block: var(--checkbox-field-padding-block);
+  cursor: var(--checkbox-field-cursor);
+}
+
+.checkbox-field__label {
+  font-family: var(--checkbox-field-label-font-family);
+  font-size: var(--checkbox-field-label-font-size);
+  font-weight: var(--checkbox-field-label-font-weight);
+  line-height: var(--checkbox-field-label-line-height);
+  color: var(--checkbox-field-label-color);
+  letter-spacing: var(--checkbox-field-label-letter-spacing);
+  text-transform: var(--checkbox-field-label-text-transform);
+}
+
+.checkbox-field.checkbox-field--disabled {
+  cursor: var(--checkbox-field-disabled-cursor);
+}
+
+/* Dark — contexto padre (.dark) o modificador directo */
+.dark .checkbox-field,
+.checkbox-field.checkbox-field--dark {
+  --checkbox-field-label-color: var(--checkbox-field-label-dark-color);
+}

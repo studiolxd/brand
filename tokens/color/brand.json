@@ -1,0 +1,29 @@
+{
+  "color": {
+    "primary": {
+      "$value": "{color.prussian}",
+      "$type": "color",
+      "$description": "Primary brand color — used ~50% of the time"
+    },
+    "secondary": {
+      "$value": "{color.lavender}",
+      "$type": "color",
+      "$description": "Secondary brand color — used ~20% of the time"
+    },
+    "tertiary": {
+      "$value": "{color.yellow}",
+      "$type": "color",
+      "$description": "Tertiary brand color — used ~20% of the time"
+    },
+    "quaternary": {
+      "$value": "{color.emerald}",
+      "$type": "color",
+      "$description": "Quaternary brand color — used ~5% of the time"
+    },
+    "quinary": {
+      "$value": "{color.cayenne}",
+      "$type": "color",
+      "$description": "Quinary brand color — used ~5% of the time"
+    }
+  }
+}

@@ -1,0 +1,325 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
+import { ContrastMatrix } from "./ContrastMatrix";
+import { TokenTable } from "./TokenTable";
+import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor } from "../../tokens/colors";
+
+<Meta title="Fundamentos/Colores" />
+
+# Colores
+
+El sistema de color de Studio LXD se organiza en cuatro capas: una **paleta de referencia** con los valores crudos, los **colores de marca** que asignan un rol de identidad, los **colores de sistema** para estados funcionales, los **colores de feedback** que asignan un rol semántico a los colores de sistema, y los **tokens semánticos** que expresan roles de texto.
+
+---
+
+## Paleta de referencia
+
+Los tokens de referencia son los valores hex puros. No se usan directamente en componentes — sirven como fuente de verdad a la que apuntan los tokens semánticos.
+
+<ColorPalette>
+  <ColorItem
+    title="Prussian"
+    subtitle="RGB 17, 30, 48 · CMYK 64, 37, 0, 81"
+    colors={{ "--color-prussian": "#111E30" }}
+  />
+  <ColorItem
+    title="Lavender"
+    subtitle="RGB 186, 171, 255 · CMYK 27, 32, 0, 0"
+    colors={{ "--color-lavender": "#BAABFF" }}
+  />
+  <ColorItem
+    title="Yellow"
+    subtitle="RGB 255, 205, 0 · CMYK 0, 19, 100, 0"
+    colors={{ "--color-yellow": "#FFCD00" }}
+  />
+  <ColorItem
+    title="Emerald"
+    subtitle="RGB 32, 227, 142 · CMYK 85, 0, 37, 10"
+    colors={{ "--color-emerald": "#20E38E" }}
+  />
+  <ColorItem
+    title="Cayenne"
+    subtitle="RGB 240, 94, 28 · CMYK 0, 60, 88, 5"
+    colors={{ "--color-cayenne": "#F05E1C" }}
+  />
+</ColorPalette>
+
+---
+
+## Colores de marca
+
+Los tokens de marca expresan la identidad visual. Los componentes siempre referencian tokens semánticos, nunca los de paleta directamente.
+
+<ColorPalette>
+  <ColorItem
+    title="Primario"
+    subtitle="~50% de uso"
+    colors={{ "--color-primary": "#111E30" }}
+  />
+  <ColorItem
+    title="Secundario"
+    subtitle="~20% de uso"
+    colors={{ "--color-secondary": "#BAABFF" }}
+  />
+  <ColorItem
+    title="Terciario"
+    subtitle="~20% de uso"
+    colors={{ "--color-tertiary": "#FFCD00" }}
+  />
+  <ColorItem
+    title="Cuaternario"
+    subtitle="~5% de uso"
+    colors={{ "--color-quaternary": "#20E38E" }}
+  />
+  <ColorItem
+    title="Quinario"
+    subtitle="~5% de uso"
+    colors={{ "--color-quinary": "#F05E1C" }}
+  />
+</ColorPalette>
+
+---
+
+## Neutrales
+
+Colores base del sistema. No forman parte de la identidad de marca pero son esenciales para texto, fondos y estados de interfaz.
+
+<ColorPalette>
+  <ColorItem
+    title="White"
+    subtitle=""
+    colors={{ "--color-white": "#FFFFFF" }}
+  />
+  <ColorItem
+    title="Grey"
+    subtitle="lightest · light · dark · darkest"
+    colors={{
+      "--color-grey-lightest": "#F2F2F2",
+      "--color-grey-light":    "#D0D0D0",
+      "--color-grey-dark":     "#767676",
+      "--color-grey-darkest":  "#4A4A4A",
+    }}
+  />
+  <ColorItem
+    title="Black"
+    subtitle=""
+    colors={{ "--color-black": "#000000" }}
+  />
+</ColorPalette>
+
+---
+
+## Colores de sistema
+
+Colores funcionales, independientes de la paleta de marca. No deben usarse con fines decorativos.
+
+<ColorPalette>
+  <ColorItem
+    title="Red"
+    subtitle=""
+    colors={{ "--color-red": "#B30000" }}
+  />
+  <ColorItem
+    title="Red dark"
+    subtitle=""
+    colors={{ "--color-red-dark": "#FF8585" }}
+  />
+  <ColorItem
+    title="Green"
+    subtitle=""
+    colors={{ "--color-green": "#006616" }}
+  />
+  <ColorItem
+    title="Green dark"
+    subtitle=""
+    colors={{ "--color-green-dark": "#00CC2C" }}
+  />
+</ColorPalette>
+
+---
+
+## Colores de feedback
+
+Asignan un rol semántico a los colores de sistema. Equivalente a la capa de marca pero para estados funcionales.
+
+<ColorPalette>
+  <ColorItem
+    title="Error"
+    subtitle="Error sobre fondo claro"
+    colors={{ "--color-error": "#B30000" }}
+  />
+  <ColorItem
+    title="Error oscuro"
+    subtitle="Error sobre fondo oscuro"
+    colors={{ "--color-error-dark": "#FF8585" }}
+  />
+  <ColorItem
+    title="Success"
+    subtitle="Success sobre fondo claro"
+    colors={{ "--color-success": "#006616" }}
+  />
+  <ColorItem
+    title="Success oscuro"
+    subtitle="Success sobre fondo oscuro"
+    colors={{ "--color-success-dark": "#00CC2C" }}
+  />
+</ColorPalette>
+
+---
+
+## Tokens semánticos
+
+Tokens de interfaz que expresan roles de texto. Los componentes referencian estos tokens para garantizar coherencia y facilitar cambios globales.
+
+<ColorPalette>
+  <ColorItem
+    title="Texto por defecto"
+    subtitle="Texto sobre fondo claro"
+    colors={{ "--color-text-default": "#111E30" }}
+  />
+  <ColorItem
+    title="Texto oscuro"
+    subtitle="Texto sobre fondo oscuro"
+    colors={{ "--color-text-dark": "#FFFFFF" }}
+  />
+  <ColorItem
+    title="Texto atenuado"
+    subtitle="Helper text, etiquetas secundarias"
+    colors={{ "--color-text-muted": "#4A4A4A" }}
+  />
+  <ColorItem
+    title="Texto atenuado oscuro"
+    subtitle="Helper text sobre fondo oscuro"
+    colors={{ "--color-text-muted-dark": "#F2F2F2" }}
+  />
+  <ColorItem
+    title="Texto placeholder"
+    subtitle="Placeholder en inputs"
+    colors={{ "--color-text-placeholder": "#767676" }}
+  />
+  <ColorItem
+    title="Fondo por defecto"
+    subtitle="Superficie clara"
+    colors={{ "--color-background-default": "#FFFFFF" }}
+  />
+  <ColorItem
+    title="Fondo oscuro"
+    subtitle="Superficie oscura"
+    colors={{ "--color-background-dark": "#111E30" }}
+  />
+</ColorPalette>
+
+---
+
+## Tokens CSS
+
+### Paleta de referencia
+
+<TokenTable tokens={paletteTokens} />
+
+### Neutrales
+
+<TokenTable tokens={neutralTokens} />
+
+### Colores de marca
+
+<TokenTable tokens={brandTokens} />
+
+### Colores de sistema
+
+<TokenTable tokens={systemTokens} />
+
+### Colores de feedback
+
+<TokenTable tokens={feedbackTokens} />
+
+### Semánticos
+
+<TokenTable tokens={semanticTokens} />
+
+Los tokens están definidos en `tokens/color/`.
+
+---
+
+## Accesibilidad
+
+Comprobación de contraste WCAG para las combinaciones de texto sobre color de fondo. Se requiere un mínimo de **AAA (7:1)** para texto normal.
+
+### Texto por defecto sobre colores de marca
+
+<ContrastMatrix
+  foregroundLabel="Texto por defecto"
+  foreground={textDefault}
+  colors={brandColors.filter(c => c.name !== "Primary")}
+/>
+
+### Texto oscuro sobre colores de marca
+
+<ContrastMatrix
+  foregroundLabel="Texto oscuro"
+  foreground={textDark}
+  colors={brandColors}
+/>
+
+### Error sobre fondos del sistema
+
+<ContrastMatrix
+  foregroundLabel="Error"
+  foreground={errorColor}
+  colors={backgroundColors}
+/>
+
+### Success sobre fondos del sistema
+
+<ContrastMatrix
+  foregroundLabel="Success"
+  foreground={successColor}
+  colors={backgroundColors}
+/>
+
+### Texto por defecto sobre colores de feedback
+
+<ContrastMatrix
+  foregroundLabel="Texto por defecto"
+  foreground={textDefault}
+  colors={feedbackColors}
+/>
+
+### Texto oscuro sobre colores de feedback
+
+<ContrastMatrix
+  foregroundLabel="Texto oscuro"
+  foreground={textDark}
+  colors={feedbackColors}
+/>
+
+### Error oscuro sobre fondos del sistema
+
+<ContrastMatrix
+  foregroundLabel="Error oscuro"
+  foreground={errorDarkColor}
+  colors={backgroundColors}
+/>
+
+### Success oscuro sobre fondos del sistema
+
+<ContrastMatrix
+  foregroundLabel="Success oscuro"
+  foreground={successDarkColor}
+  colors={backgroundColors}
+/>
+
+### Texto atenuado sobre fondos del sistema
+
+<ContrastMatrix
+  foregroundLabel="Texto atenuado"
+  foreground={textMuted}
+  colors={backgroundColors}
+/>
+
+### Texto atenuado oscuro sobre fondos del sistema
+
+<ContrastMatrix
+  foregroundLabel="Texto atenuado oscuro"
+  foreground={textMutedDark}
+  colors={backgroundColors}
+/>

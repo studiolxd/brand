@@ -1,0 +1,9 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --size-component-sm: 32px; /** Small component height — compact elements */
+  --size-component-md: 40px; /** Medium component height — form buttons, inputs, selects */
+  --size-component-lg: 48px; /** Large component height — prominent form elements */
+}

@@ -1,0 +1,34 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as LabelStories from "./Label.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { labelBaseTokens, labelDarkTokens } from "../../../tokens/components/label";
+
+<Meta of={LabelStories} />
+
+# Label
+
+Etiqueta accesible para campos de formulario. Siempre está asociada a un campo mediante `htmlFor`. Se muestra en mayúsculas y puede ocultarse visualmente sin perder accesibilidad.
+
+## Visible
+
+<Canvas of={LabelStories.Visible} />
+
+## Oscuro
+
+<Canvas of={LabelStories.Dark} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={labelBaseTokens} />
+
+### Oscuro
+
+<TokenTable tokens={labelDarkTokens} />
+
+## Props
+
+<ArgTypes of={LabelStories} />

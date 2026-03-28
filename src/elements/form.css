@@ -1,0 +1,91 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-gap);
+  border-width: var(--form-border-width);
+  border-style: var(--form-border-style);
+  border-color: var(--form-border-color);
+}
+
+/* Separadores entre hijos directos */
+.form > * + * {
+  border-block-start: var(--form-separator-width) var(--form-separator-style) var(--form-separator-color);
+}
+
+/* Button--form: especificidad 0,2,1 gana sobre button.button--form (0,1,1) */
+.form > .button.button--form {
+  border-block-start-color: var(--form-separator-color);
+}
+
+.form--dark {
+  --form-border-color: var(--form-border-dark-color);
+  --form-separator-color: var(--form-separator-dark-color);
+  --form-error-color: var(--form-error-dark-color);
+  --form-helper-color: var(--form-helper-dark-color);
+}
+
+/* Suprimir bordes propios de los hijos — el form dibuja el perímetro */
+/* Especificidad 0,3,0 — gana sobre .input.input--dark (0,2,0) */
+.form > .input-field > .input,
+.form > .input-field > input {
+  --input-border-color: transparent;
+  --input-error-border-color: transparent;
+  --input-disabled-border-color: transparent;
+}
+
+.form > .textarea-field > .textarea,
+.form > .textarea-field > textarea {
+  --textarea-border-color: transparent;
+  --textarea-error-border-color: transparent;
+  --textarea-disabled-border-color: transparent;
+}
+
+/* Heading de formulario — usado por organismos */
+.form__heading {
+  font-family: var(--form-heading-font-family);
+  font-size: var(--form-heading-font-size);
+  font-weight: var(--form-heading-font-weight);
+  line-height: var(--form-heading-line-height);
+  letter-spacing: var(--form-heading-letter-spacing);
+  color: var(--form-heading-color);
+  margin: 0;
+}
+
+.dark .form__heading,
+.form__heading.form__heading--dark {
+  --form-heading-color: var(--form-heading-dark-color);
+}
+
+/* Lista de errores agrupados */
+.form-errors {
+  list-style: none;
+  margin: 0;
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.form-errors__item {
+  font-family: var(--form-error-font-family);
+  font-size: var(--form-error-font-size);
+  font-weight: var(--form-error-font-weight);
+  line-height: var(--form-error-line-height);
+  color: var(--form-error-color);
+}
+
+/* Mensaje de éxito — usado por organismos */
+.form__success {
+  font-family: var(--form-success-font-family);
+  font-size: var(--form-success-font-size);
+  font-weight: var(--form-success-font-weight);
+  line-height: var(--form-success-line-height);
+  color: var(--form-success-color);
+  margin: 0;
+}
+
+.dark .form__success,
+.form__success--dark {
+  --form-success-color: var(--form-success-dark-color);
+}

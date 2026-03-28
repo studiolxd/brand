@@ -1,0 +1,29 @@
+{
+  "color": {
+    "prussian": {
+      "$value": "#111E30",
+      "$type": "color",
+      "$description": "Brand prussian"
+    },
+    "lavender": {
+      "$value": "#BAABFF",
+      "$type": "color",
+      "$description": "Brand lavender"
+    },
+    "yellow": {
+      "$value": "#FFCD00",
+      "$type": "color",
+      "$description": "Brand yellow"
+    },
+    "emerald": {
+      "$value": "#20E38E",
+      "$type": "color",
+      "$description": "Brand emerald"
+    },
+    "cayenne": {
+      "$value": "#F05E1C",
+      "$type": "color",
+      "$description": "Brand cayenne"
+    }
+  }
+}

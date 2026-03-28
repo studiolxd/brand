@@ -1,0 +1,5 @@
+/* Utilidades globales de presentación de stories — no se publican con los componentes */
+
+.bg-dark {
+  background: var(--color-background-dark) !important;
+}

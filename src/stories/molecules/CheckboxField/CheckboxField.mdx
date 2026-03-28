@@ -1,0 +1,50 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CheckboxFieldStories from "./CheckboxField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { checkboxFieldBaseTokens, checkboxFieldDarkTokens } from "../../../tokens/molecules/checkbox-field";
+
+<Meta of={CheckboxFieldStories} />
+
+# CheckboxField
+
+Molécula que combina un checkbox con su texto asociado. El label no lleva mayúsculas ni el tamaño reducido del Label de formulario — usa la tipografía de texto por defecto para integrarse en flujos de lectura (términos, privacidad, opciones de contacto).
+
+## Sin marcar
+
+<Canvas of={CheckboxFieldStories.Default} />
+
+## Marcado
+
+<Canvas of={CheckboxFieldStories.Checked} />
+
+## Deshabilitado
+
+<Canvas of={CheckboxFieldStories.Disabled} />
+
+## Deshabilitado y marcado
+
+<Canvas of={CheckboxFieldStories.DisabledChecked} />
+
+## Oscuro
+
+<Canvas of={CheckboxFieldStories.Dark} className="bg-dark" />
+
+## Oscuro y marcado
+
+<Canvas of={CheckboxFieldStories.DarkChecked} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={checkboxFieldBaseTokens} />
+
+### Oscuro
+
+<TokenTable tokens={checkboxFieldDarkTokens} />
+
+## Props
+
+<ArgTypes of={CheckboxFieldStories} />

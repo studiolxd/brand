@@ -1,0 +1,14 @@
+{
+  "font-size": {
+    "1":  { "$value": "14px", "$type": "dimension", "$description": "UI labels, body small" },
+    "2":  { "$value": "16px", "$type": "dimension", "$description": "Body base" },
+    "3":  { "$value": "18px", "$type": "dimension", "$description": "Body large" },
+    "4":  { "$value": "20px", "$type": "dimension", "$description": "Small subtitles" },
+    "5":  { "$value": "24px", "$type": "dimension", "$description": "Subtitles" },
+    "6":  { "$value": "32px", "$type": "dimension", "$description": "Titles" },
+    "7":  { "$value": "40px", "$type": "dimension", "$description": "Large titles" },
+    "8":  { "$value": "56px", "$type": "dimension", "$description": "Display" },
+    "9":  { "$value": "72px", "$type": "dimension", "$description": "Large display" },
+    "10": { "$value": "96px", "$type": "dimension", "$description": "Extra large display" }
+  }
+}

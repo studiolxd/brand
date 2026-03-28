@@ -1,0 +1,11 @@
+{
+  "motion": {
+    "easing": {
+      "default":    { "$value": "ease",         "$type": "string", "$description": "Curva por defecto" },
+      "in":         { "$value": "ease-in",      "$type": "string", "$description": "Aceleración al entrar" },
+      "out":        { "$value": "ease-out",     "$type": "string", "$description": "Desaceleración al salir" },
+      "in-out":     { "$value": "ease-in-out",  "$type": "string", "$description": "Aceleración y desaceleración" },
+      "linear":     { "$value": "linear",       "$type": "string", "$description": "Velocidad constante" }
+    }
+  }
+}

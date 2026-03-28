@@ -1,0 +1,7 @@
+{
+  "size-component": {
+    "sm": { "$value": "32px", "$type": "dimension", "$description": "Small component height — compact elements" },
+    "md": { "$value": "40px", "$type": "dimension", "$description": "Medium component height — form buttons, inputs, selects" },
+    "lg": { "$value": "48px", "$type": "dimension", "$description": "Large component height — prominent form elements" }
+  }
+}

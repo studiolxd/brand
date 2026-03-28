@@ -1,0 +1,35 @@
+.spacing-scale {
+  margin-top: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.spacing-scale__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.spacing-scale__name {
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  color: #555;
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.spacing-scale__value {
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  color: #888;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.spacing-scale__bar {
+  height: 16px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}

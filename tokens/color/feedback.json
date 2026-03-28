@@ -1,0 +1,8 @@
+{
+  "color": {
+    "error":           { "$value": "{color.red}",           "$type": "color", "$description": "Error role — maps to system red" },
+    "error-dark":      { "$value": "{color.red-dark}",      "$type": "color", "$description": "Error role on dark background" },
+    "success":         { "$value": "{color.green}",         "$type": "color", "$description": "Success role — maps to system green" },
+    "success-dark":    { "$value": "{color.green-dark}",    "$type": "color", "$description": "Success role on dark background" }
+  }
+}

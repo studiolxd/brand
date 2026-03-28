@@ -1,0 +1,56 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FormStories from "./Form.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { formGapTokens, formHeadingTokens, formErrorTokens, formHelperTokens, formSuccessTokens } from "../../../tokens/form";
+
+<Meta of={FormStories} />
+
+# Form
+
+Molécula que envuelve la estructura común de cualquier formulario: contenedor con gap, lista de errores agrupados y zona de acciones. No incluye heading ni maneja estado de éxito — eso corresponde a cada organismo.
+
+Todos los campos de formulario del sistema (InputField, TextareaField, CheckboxField) heredan sus tokens de error y helper de `--form-error-*` y `--form-helper-*`.
+
+## Por defecto
+
+<Canvas of={FormStories.Default} />
+
+## Con errores
+
+<Canvas of={FormStories.ConErrores} />
+
+## Oscuro
+
+<Canvas of={FormStories.Dark} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Gap
+
+<TokenTable tokens={formGapTokens} />
+
+### Heading
+
+Tokens utilizados por los organismos para el heading del formulario.
+
+<TokenTable tokens={formHeadingTokens} />
+
+### Error
+
+<TokenTable tokens={formErrorTokens} />
+
+### Helper
+
+<TokenTable tokens={formHelperTokens} />
+
+### Éxito
+
+Tokens utilizados por los organismos para el mensaje de éxito.
+
+<TokenTable tokens={formSuccessTokens} />
+
+## Props
+
+<ArgTypes of={FormStories} />

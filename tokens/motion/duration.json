@@ -1,0 +1,10 @@
+{
+  "motion": {
+    "duration": {
+      "instant":  { "$value": "0ms",    "$type": "number", "$description": "Sin transición" },
+      "fast":     { "$value": "150ms",  "$type": "number", "$description": "Transiciones rápidas: hover, focus" },
+      "base":     { "$value": "250ms",  "$type": "number", "$description": "Transiciones estándar" },
+      "slow":     { "$value": "400ms",  "$type": "number", "$description": "Transiciones lentas: modales, paneles" }
+    }
+  }
+}

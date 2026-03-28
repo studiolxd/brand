@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --label-text-transform: uppercase; /** Text transform */
+  --label-font-family: var(--font-family-sans); /** Font family */
+  --label-font-size: var(--font-size-1); /** Font size (14px) */
+  --label-font-weight: var(--font-weight-medium); /** Font weight */
+  --label-line-height: var(--line-height-normal); /** Line height */
+  --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
+  --label-color: var(--color-text-default); /** Text color */
+  --label-dark-color: var(--color-text-dark); /** Text color on dark surface */
+}

@@ -1,0 +1,14 @@
+{
+  "font-weight": {
+    "thin":       { "$value": "100", "$type": "number", "$description": "Thin" },
+    "extralight": { "$value": "200", "$type": "number", "$description": "Extra light" },
+    "light":      { "$value": "300", "$type": "number", "$description": "Light" },
+    "regular":    { "$value": "400", "$type": "number", "$description": "Regular" },
+    "medium":     { "$value": "500", "$type": "number", "$description": "Medium" },
+    "semibold":   { "$value": "600", "$type": "number", "$description": "Semibold" },
+    "bold":       { "$value": "700", "$type": "number", "$description": "Bold" },
+    "extrabold":  { "$value": "800", "$type": "number", "$description": "Extra bold" },
+    "black":      { "$value": "900", "$type": "number", "$description": "Black" },
+    "default":    { "$value": "{font-weight.light}", "$type": "number", "$description": "Default text weight — change this to shift the whole system" }
+  }
+}

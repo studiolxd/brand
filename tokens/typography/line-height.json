@@ -1,0 +1,9 @@
+{
+  "line-height": {
+    "none":    { "$value": "1",    "$type": "number", "$description": "Single line elements, icons" },
+    "tight":   { "$value": "1.1",  "$type": "number", "$description": "Display, large headings" },
+    "snug":    { "$value": "1.3",  "$type": "number", "$description": "Medium headings" },
+    "normal":  { "$value": "1.5",  "$type": "number", "$description": "Body text" },
+    "relaxed": { "$value": "1.65", "$type": "number", "$description": "Long-form reading" }
+  }
+}

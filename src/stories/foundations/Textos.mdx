@@ -1,0 +1,48 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Fundamentos/Textos" />
+
+# Textos
+
+Estilos base para los elementos de texto en contexto de lectura: enlaces, párrafos, encabezados y listas.
+
+---
+
+## Enlace
+
+Los enlaces heredan el color del texto circundante. En reposo muestran subrayado; en hover lo ocultan.
+
+<div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBlock: '1.5rem' }}>
+  <div style={{
+    flex: '1',
+    minWidth: '240px',
+    background: 'var(--color-background-default)',
+    color: 'var(--color-text-default)',
+    padding: '1.25rem 1.5rem',
+    borderRadius: '6px',
+    border: '1px solid color-mix(in srgb, currentColor 12%, transparent)',
+  }}>
+    <p style={{ margin: 0, fontSize: '0.75rem', opacity: 0.5, marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Fondo claro</p>
+    Visita nuestra <a href="#">página de inicio</a> para saber más sobre el proyecto.
+  </div>
+  <div style={{
+    flex: '1',
+    minWidth: '240px',
+    background: 'var(--color-background-dark)',
+    color: 'var(--color-text-dark)',
+    padding: '1.25rem 1.5rem',
+    borderRadius: '6px',
+  }}>
+    <p style={{ margin: 0, fontSize: '0.75rem', opacity: 0.5, marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Fondo oscuro</p>
+    Visita nuestra <a href="#">página de inicio</a> para saber más sobre el proyecto.
+  </div>
+</div>
+
+### Tokens
+
+| Token | Valor |
+|---|---|
+| `--link-color` | `inherit` |
+| `--link-text-decoration` | `underline` |
+| `--link-text-decoration-hover` | `none` |
+| `--link-cursor` | `pointer` |

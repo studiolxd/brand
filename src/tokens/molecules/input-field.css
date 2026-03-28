@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --input-field-gap: var(--spacing-2); /** Espacio entre label, input, helper y error */
+  --input-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
+  --input-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
+  --input-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
+  --input-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
+  --input-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
+  --input-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
+  --input-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
+  --input-field-error-color: var(--form-error-color); /** Color del mensaje de error */
+  --input-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
+  --input-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
+}

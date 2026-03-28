@@ -1,0 +1,20 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { ShadowScale } from "./ShadowScale";
+import { TokenTable } from "./TokenTable";
+import { shadowTokens } from "../../tokens/shadow";
+
+<Meta title="Fundamentos/Sombras" />
+
+# Sombras
+
+Escala de sombras usando el color Prussian como base en lugar de negro puro, para un resultado más natural y coherente con la paleta de marca.
+
+<ShadowScale tokens={shadowTokens} />
+
+---
+
+## Tokens CSS
+
+<TokenTable tokens={shadowTokens} />
+
+Los tokens están definidos en `tokens/shadow/scale.json`.

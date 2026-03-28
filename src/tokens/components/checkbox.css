@@ -1,0 +1,27 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --checkbox-size: 1.25em; /** Tamaño del checkbox (ancho y alto) */
+  --checkbox-check-size: 0.65em; /** Tamaño del checkmark interior */
+  --checkbox-border-style: solid; /** Border style */
+  --checkbox-bg: transparent; /** Fondo sin marcar */
+  --checkbox-cursor: pointer; /** Cursor */
+  --checkbox-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --checkbox-border-radius: var(--border-radius-none); /** Border radius */
+  --checkbox-border-width: var(--border-width-sm); /** Border width */
+  --checkbox-check-color: var(--color-white); /** Color del checkmark */
+  --checkbox-transition-duration: var(--motion-duration-fast); /** Duración de transiciones */
+  --checkbox-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
+  --checkbox-focus-ring-width: var(--border-width-md); /** Ancho del anillo de foco */
+  --checkbox-focus-ring-offset: var(--border-width-sm); /** Separación del anillo de foco respecto al borde */
+  --checkbox-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
+  --checkbox-border-color: var(--color-primary); /** Color del borde */
+  --checkbox-bg-checked: var(--color-primary); /** Fondo cuando está marcado */
+  --checkbox-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --checkbox-dark-border-color: var(--color-text-dark); /** Color del borde sobre fondo oscuro */
+  --checkbox-dark-bg-checked: var(--color-text-dark); /** Fondo marcado sobre fondo oscuro */
+  --checkbox-dark-check-color: var(--color-background-dark); /** Color del checkmark sobre fondo oscuro */
+  --checkbox-dark-focus-ring-color: var(--color-secondary); /** Color del anillo de foco sobre fondo oscuro */
+}

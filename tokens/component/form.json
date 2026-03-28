@@ -1,0 +1,50 @@
+{
+  "form": {
+    "gap":                  { "$value": "0",                        "$type": "string",    "$description": "Separación entre campos del formulario" },
+    "border-width":         { "$value": "{control.border-width}",   "$type": "dimension", "$description": "Grosor del borde exterior del formulario" },
+    "border-style":         { "$value": "{control.border-style}",   "$type": "string",    "$description": "Estilo del borde exterior" },
+    "border-color":         { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del borde exterior" },
+    "border-dark-color":    { "$value": "{color.text.dark}",        "$type": "color",     "$description": "Color del borde exterior sobre fondo oscuro" },
+    "separator-width":      { "$value": "{control.border-width}",   "$type": "dimension", "$description": "Grosor del separador entre hijos" },
+    "separator-style":      { "$value": "{control.border-style}",   "$type": "string",    "$description": "Estilo del separador" },
+    "separator-color":      { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del separador" },
+    "separator-dark-color": { "$value": "{color.text.dark}",        "$type": "color",     "$description": "Color del separador sobre fondo oscuro" },
+
+    "heading": {
+      "font-family":    { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Font family del heading" },
+      "font-size":      { "$value": "{font-size.5}",            "$type": "dimension", "$description": "Font size del heading (24px)" },
+      "font-weight":    { "$value": "{font-weight.semibold}",   "$type": "number",    "$description": "Font weight del heading" },
+      "line-height":    { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Line height del heading" },
+      "letter-spacing": { "$value": "{letter-spacing.tight}",   "$type": "dimension", "$description": "Letter spacing del heading" },
+      "color":          { "$value": "{color.text.default}",     "$type": "color",     "$description": "Color del heading" },
+      "dark-color":     { "$value": "{color.text.dark}",        "$type": "color",     "$description": "Color del heading sobre fondo oscuro" }
+    },
+
+    "error": {
+      "font-family":  { "$value": "{font-family.sans}",     "$type": "string",    "$description": "Font family del mensaje de error" },
+      "font-size":    { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Font size del mensaje de error (14px)" },
+      "font-weight":  { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
+      "line-height":  { "$value": "{line-height.normal}",   "$type": "number",    "$description": "Line height del mensaje de error" },
+      "color":        { "$value": "{color.error}",          "$type": "color",     "$description": "Color del mensaje de error" },
+      "dark-color":   { "$value": "{color.error-dark}",     "$type": "color",     "$description": "Color del mensaje de error sobre fondo oscuro" }
+    },
+
+    "helper": {
+      "font-family":  { "$value": "{font-family.sans}",        "$type": "string",    "$description": "Font family del texto de ayuda" },
+      "font-size":    { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Font size del texto de ayuda (14px)" },
+      "font-weight":  { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Font weight del texto de ayuda" },
+      "line-height":  { "$value": "{line-height.normal}",      "$type": "number",    "$description": "Line height del texto de ayuda" },
+      "color":        { "$value": "{color.text.muted}",        "$type": "color",     "$description": "Color del texto de ayuda" },
+      "dark-color":   { "$value": "{color.text.muted-dark}",   "$type": "color",     "$description": "Color del texto de ayuda sobre fondo oscuro" }
+    },
+
+    "success": {
+      "font-family":  { "$value": "{font-family.sans}",     "$type": "string",    "$description": "Font family del mensaje de éxito" },
+      "font-size":    { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Font size del mensaje de éxito (18px)" },
+      "font-weight":  { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Font weight del mensaje de éxito" },
+      "line-height":  { "$value": "{line-height.normal}",   "$type": "number",    "$description": "Line height del mensaje de éxito" },
+      "color":        { "$value": "{color.text.default}",   "$type": "color",     "$description": "Color del mensaje de éxito" },
+      "dark-color":   { "$value": "{color.text.dark}",      "$type": "color",     "$description": "Color del mensaje de éxito sobre fondo oscuro" }
+    }
+  }
+}

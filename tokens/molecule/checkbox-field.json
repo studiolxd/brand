@@ -1,0 +1,19 @@
+{
+  "checkbox-field": {
+    "gap":              { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Separación entre el checkbox y el texto" },
+    "padding-inline":   { "$value": "{control.padding-inline}", "$type": "dimension", "$description": "Padding inline — hereda de control" },
+    "padding-block":    { "$value": "{control.padding-block}",  "$type": "dimension", "$description": "Padding block — hereda de control" },
+    "cursor":           { "$value": "pointer",                  "$type": "string",    "$description": "Cursor" },
+    "disabled-cursor":  { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "label": {
+      "font-family":    { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Familia tipográfica — igual al texto por defecto" },
+      "font-size":      { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Tamaño de fuente — igual al texto por defecto (16px)" },
+      "font-weight":    { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso tipográfico" },
+      "line-height":    { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado" },
+      "color":          { "$value": "{color.text.default}",     "$type": "color",     "$description": "Color del texto" },
+      "letter-spacing": { "$value": "{letter-spacing.normal}",  "$type": "dimension", "$description": "Interletraje — anula la herencia del label base" },
+      "text-transform": { "$value": "none",                     "$type": "string",    "$description": "Sin transformación — anula la herencia del label base" },
+      "dark-color":     { "$value": "{color.text.dark}",        "$type": "color",     "$description": "Color del texto sobre fondo oscuro" }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+.contrast-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing-4);
+  font-size: 14px;
+}
+
+.contrast-matrix th {
+  text-align: left;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-weight: 600;
+  border-bottom: 2px solid #e0e0e0;
+  color: #333;
+}
+
+.contrast-matrix td {
+  padding: var(--spacing-2) var(--spacing-3);
+  border-bottom: 1px solid #efefef;
+  vertical-align: middle;
+}
+
+.contrast-matrix__preview {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  box-sizing: border-box;
+}
+
+.contrast-matrix__ratio {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.contrast-matrix__badge {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.contrast-matrix__badge--aaa {
+  background: #d4edda;
+  color: #1a5c2e;
+}
+
+.contrast-matrix__badge--aa {
+  background: #fff3cd;
+  color: #7a4f00;
+}
+
+.contrast-matrix__badge--fail {
+  background: #f8d7da;
+  color: #721c24;
+}

@@ -1,0 +1,12 @@
+.logo-preview {
+  display: inline-flex;
+  padding: 2rem;
+}
+
+.logo-preview--dark {
+  background-color: var(--color-text-default);
+}
+
+.logo--dark {
+  color: var(--color-text-dark);
+}

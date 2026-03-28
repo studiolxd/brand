@@ -1,0 +1,58 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CheckboxStories from "./Checkbox.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { checkboxBaseTokens, checkboxFocusTokens, checkboxDisabledTokens, checkboxDarkTokens } from "../../../tokens/components/checkbox";
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+Control de selección binaria para formularios. Su apariencia está completamente personalizada mediante CSS, eliminando el estilo nativo del navegador.
+
+## Sin marcar
+
+<Canvas of={CheckboxStories.Default} />
+
+## Marcado
+
+<Canvas of={CheckboxStories.Checked} />
+
+## Deshabilitado
+
+<Canvas of={CheckboxStories.Disabled} />
+
+## Deshabilitado y marcado
+
+<Canvas of={CheckboxStories.DisabledChecked} />
+
+## Oscuro
+
+<Canvas of={CheckboxStories.Dark} className="bg-dark" />
+
+## Oscuro y marcado
+
+<Canvas of={CheckboxStories.DarkChecked} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={checkboxBaseTokens} />
+
+### Focus
+
+<TokenTable tokens={checkboxFocusTokens} />
+
+### Deshabilitado
+
+<TokenTable tokens={checkboxDisabledTokens} />
+
+### Oscuro
+
+<TokenTable tokens={checkboxDarkTokens} />
+
+## Props
+
+<ArgTypes of={CheckboxStories} />

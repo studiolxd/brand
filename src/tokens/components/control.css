@@ -1,0 +1,23 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --control-border-style: solid; /** Estilo del borde */
+  --control-cursor: text; /** Cursor por defecto */
+  --control-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --control-border-radius: var(--border-radius-none); /** Radio del borde */
+  --control-border-width: var(--border-width-sm); /** Grosor del borde */
+  --control-height: var(--size-component-md); /** Altura del control */
+  --control-font-family: var(--font-family-sans); /** Familia tipográfica */
+  --control-font-size: var(--font-size-3); /** Tamaño de fuente */
+  --control-line-height: var(--line-height-none); /** Interlineado */
+  --control-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
+  --control-transition-duration: var(--motion-duration-fast); /** Duración de la transición */
+  --control-transition-easing: var(--motion-easing-default); /** Curva de animación */
+  --control-focus-ring-width: var(--border-width-md); /** Grosor del anillo de foco */
+  --control-focus-ring-inset-offset: var(--border-width-sm); /** Separación entre borde y anillo de foco */
+  --control-padding-inline: var(--spacing-4); /** Padding inline — compartido por controles y elementos de formulario */
+  --control-padding-block: var(--spacing-4); /** Padding block — compartido por controles y elementos de formulario */
+  --control-font-weight: var(--font-weight-default); /** Peso tipográfico */
+}
