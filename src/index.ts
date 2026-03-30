@@ -20,6 +20,7 @@ export { Paragraph } from './stories/atoms/Paragraph/Paragraph';
 export { Select } from './stories/atoms/Select/Select';
 export { Tag } from './stories/atoms/Tag/Tag';
 export { Textarea } from './stories/atoms/Textarea/Textarea';
+export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
 export { Card } from './stories/molecules/Card/Card';

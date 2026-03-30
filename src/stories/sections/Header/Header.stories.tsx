@@ -2,16 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Header } from './Header';
 import { Button } from '../../atoms/Button/Button';
 import { Select } from '../../atoms/Select/Select';
+import { DEFAULT_NAV_ITEMS, DEFAULT_FEATURED_LINK } from '../../constants/navigation';
 
-export const navItems = [
-  { label: 'Inicio', href: '#' },
-  { label: 'Soluciones', href: '#' },
-  { label: 'Proyectos', href: '#' },
-  { label: 'Academia', href: '#' },
-  { label: 'Contacto', href: '#' },
-];
-
-export const featuredLink = { label: 'Cursos online', href: '#' };
+export const navItems = DEFAULT_NAV_ITEMS;
+export const featuredLink = DEFAULT_FEATURED_LINK;
 
 const langOptions = [
   { value: 'es', label: 'ES' },
@@ -47,7 +41,7 @@ const meta: Meta<typeof Header> = {
   },
   decorators: [
     (Story) => (
-      <div style={{ paddingTop: '80px', minHeight: '100vh' }}>
+      <div style={{ paddingBlockStart: 'var(--header-height-overlay)', minHeight: '100vh' }}>
         <Story />
       </div>
     ),
@@ -69,5 +63,4 @@ export const WithoutActions: Story = {
 
 export const Dark: Story = {
   args: { dark: true },
-  globals: { backgrounds: { value: 'dark' } },
 };

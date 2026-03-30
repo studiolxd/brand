@@ -16,11 +16,7 @@ $checkbox-transition-easing: ease; // Easing de transiciones
 $checkbox-focus-ring-width: 2px; // Ancho del anillo de foco
 $checkbox-focus-ring-offset: 1px; // Separación del anillo de foco respecto al borde
 $checkbox-focus-ring-color: #111e30; // Color del anillo de foco
-$checkbox-disabled-opacity: 0.4; // Opacidad cuando está deshabilitado
 $checkbox-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
-$checkbox-dark-border-color: #ffffff; // Color del borde sobre fondo oscuro
-$checkbox-dark-bg-checked: #ffffff; // Fondo marcado sobre fondo oscuro
-$checkbox-dark-check-color: #111e30; // Color del checkmark sobre fondo oscuro
-$checkbox-dark-focus-ring-color: #ffffff; // Color del anillo de foco sobre fondo oscuro
-$checkbox-dark-disabled-border-color: #d0d0d0; // Color del borde deshabilitado sobre fondo oscuro
-$checkbox-dark-disabled-bg-checked: #d0d0d0; // Fondo marcado deshabilitado sobre fondo oscuro
+$checkbox-disabled-border-color: #d0d0d0; // Color del borde cuando está deshabilitado
+$checkbox-disabled-bg-checked: #d0d0d0; // Fondo marcado/indeterminado cuando está deshabilitado
+$checkbox-check-rotate: 15deg; // Rotación del checkmark en animación de entrada/salida

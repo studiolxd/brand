@@ -1,0 +1,54 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SelectStories from "./Select.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { selectTriggerTokens, selectFocusTokens, selectDropdownTokens } from "../../../tokens/components/select";
+
+<Meta of={SelectStories} />
+
+# Select
+
+Selector de opciones basado en Radix UI. Garantiza accesibilidad completa: gestión de foco, ARIA y navegación por teclado (flechas, Enter, Escape).
+
+## Por defecto
+
+<Canvas of={SelectStories.Default} />
+
+## Con valor seleccionado
+
+<Canvas of={SelectStories.WithValue} />
+
+## Controlado
+
+Uso con `value` y `onValueChange` para gestión externa del estado.
+
+<Canvas of={SelectStories.Controlled} />
+
+## Deshabilitado
+
+<Canvas of={SelectStories.Disabled} />
+
+---
+
+## Theming oscuro
+
+El trigger hereda los tokens de `.surface-dark` por cascade normal. El dropdown se renderiza en un **portal Radix** fuera del árbol DOM, por lo que no hereda la cascade. En ese caso hay que pasar `dark` manualmente desde el componente padre.
+
+---
+
+## Tokens
+
+### Trigger
+
+<TokenTable tokens={selectTriggerTokens} />
+
+### Focus
+
+<TokenTable tokens={selectFocusTokens} />
+
+### Dropdown
+
+<TokenTable tokens={selectDropdownTokens} />
+
+## Props
+
+<ArgTypes of={SelectStories} />

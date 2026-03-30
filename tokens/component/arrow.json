@@ -1,0 +1,8 @@
+{
+  "arrow": {
+    "width-default": { "$value": "max(3.125vw, 48px)",         "$type": "string", "$description": "Ancho por defecto (equivalente a md)" },
+    "width-sm":      { "$value": "max(1.5625vw, 24px)",        "$type": "string", "$description": "Ancho tamaño pequeño" },
+    "width-md":      { "$value": "max(3.125vw, 48px)",         "$type": "string", "$description": "Ancho tamaño mediano" },
+    "width-lg":      { "$value": "clamp(72px, 9.375vw, 144px)","$type": "string", "$description": "Ancho tamaño grande (fluido con límite)" }
+  }
+}

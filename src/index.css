@@ -8,3 +8,19 @@
    ========================================================= */
 @import "./tokens/index.css";
 
+/* =========================================================
+   SURFACE THEMING
+   ========================================================= */
+@import "./surface.css";
+
+/* =========================================================
+   BASE
+   ========================================================= */
+body {
+  font-family: var(--text-font-family);
+  font-weight: var(--text-font-weight);
+  font-size: var(--text-font-size);
+  line-height: var(--text-line-height);
+  color: var(--text-color);
+}
+

@@ -7,7 +7,7 @@ $button-border-style: solid; // Border style
 $button-border-color: rgba(0, 0, 0, 0); // Default border color — overridden by variants
 $button-justify-content: center; // Justify content
 $button-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-font-size: 18px; // Font size
+$button-font-size: 1.125rem; // Font size
 $button-font-weight: 300; // Font weight
 $button-line-height: 1; // Line height
 $button-cursor: pointer; // Cursor
@@ -15,26 +15,28 @@ $button-white-space: nowrap; // White space
 $button-text-decoration: none; // Text decoration
 $button-transition-duration: 150ms; // Transition duration
 $button-transition-easing: ease; // Transition easing
-$button-disabled-opacity: 0.4; // Opacity when disabled
 $button-disabled-cursor: not-allowed; // Cursor when disabled
-$button-padding-block: 12px; // Block (vertical) padding
-$button-padding-inline: 32px; // Inline (horizontal) padding
+$button-disabled-bg: #f2f2f2; // Background when disabled — only form button changes bg
+$button-disabled-color: #4a4a4a; // Text color when disabled — light surface
+$button-disabled-border: #4a4a4a; // Border color when disabled — light surface, matches text for contrast
+$button-padding-block: 0.75rem; // Block (vertical) padding
+$button-padding-inline: 2rem; // Inline (horizontal) padding
 $button-focus-ring-width: 2px; // Focus ring width
 $button-focus-ring-style: solid; // Focus ring border style
 $button-focus-ring-offset: 2px; // Focus ring offset
-$button-sm-padding-block: 8px; // Block padding — sm
-$button-sm-padding-inline: 24px; // Inline padding — sm
-$button-sm-font-size: 14px; // Font size — sm
-$button-lg-padding-block: 24px; // Block padding — lg
-$button-lg-padding-inline: 64px; // Inline padding — lg
-$button-lg-font-size: 20px; // Font size — lg
+$button-sm-padding-block: 0.5rem; // Block padding — sm
+$button-sm-padding-inline: 1.5rem; // Inline padding — sm
+$button-sm-font-size: 0.875rem; // Font size — sm
+$button-lg-padding-block: 1.5rem; // Block padding — lg
+$button-lg-padding-inline: 4rem; // Inline padding — lg
+$button-lg-font-size: 1.25rem; // Font size — lg
 $button-block-width: 100%; // Width when block modifier is applied
 $button-primary-border-radius: 9999px; // Border radius
 $button-primary-border-width: 1px; // Border width
 $button-primary-border-style: solid; // Border style
 $button-primary-justify-content: center; // Justify content
 $button-primary-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-primary-font-size: 18px; // Font size
+$button-primary-font-size: 1.125rem; // Font size
 $button-primary-font-weight: 300; // Font weight
 $button-primary-line-height: 1; // Line height
 $button-primary-cursor: pointer; // Cursor
@@ -42,10 +44,11 @@ $button-primary-white-space: nowrap; // White space
 $button-primary-text-decoration: none; // Text decoration
 $button-primary-transition-duration: 150ms; // Transition duration
 $button-primary-transition-easing: ease; // Transition easing
-$button-primary-disabled-opacity: 0.4; // Opacity when disabled
 $button-primary-disabled-cursor: not-allowed; // Cursor when disabled
-$button-primary-padding-block: 12px; // Block (vertical) padding
-$button-primary-padding-inline: 32px; // Inline (horizontal) padding
+$button-primary-disabled-color: #4a4a4a; // Text color when disabled
+$button-primary-disabled-border: #4a4a4a; // Border color when disabled
+$button-primary-padding-block: 0.75rem; // Block (vertical) padding
+$button-primary-padding-inline: 2rem; // Inline (horizontal) padding
 $button-primary-focus-ring-width: 2px; // Focus ring width
 $button-primary-focus-ring-style: solid; // Focus ring border style
 $button-primary-focus-ring-offset: 2px; // Focus ring offset
@@ -59,42 +62,12 @@ $button-primary-hover-border: #111e30; // Hover border color
 $button-primary-active-bg: #111e30; // Active background
 $button-primary-active-color: #ffffff; // Active text color
 $button-primary-active-border: #111e30; // Active border color
-$button-primary-dark-border-radius: 9999px; // Border radius
-$button-primary-dark-border-width: 1px; // Border width
-$button-primary-dark-border-style: solid; // Border style
-$button-primary-dark-justify-content: center; // Justify content
-$button-primary-dark-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-primary-dark-font-size: 18px; // Font size
-$button-primary-dark-font-weight: 300; // Font weight
-$button-primary-dark-line-height: 1; // Line height
-$button-primary-dark-cursor: pointer; // Cursor
-$button-primary-dark-white-space: nowrap; // White space
-$button-primary-dark-text-decoration: none; // Text decoration
-$button-primary-dark-transition-duration: 150ms; // Transition duration
-$button-primary-dark-transition-easing: ease; // Transition easing
-$button-primary-dark-disabled-opacity: 0.4; // Opacity when disabled
-$button-primary-dark-disabled-cursor: not-allowed; // Cursor when disabled
-$button-primary-dark-padding-block: 12px; // Block (vertical) padding
-$button-primary-dark-padding-inline: 32px; // Inline (horizontal) padding
-$button-primary-dark-focus-ring-width: 2px; // Focus ring width
-$button-primary-dark-focus-ring-style: solid; // Focus ring border style
-$button-primary-dark-focus-ring-offset: 2px; // Focus ring offset
-$button-primary-dark-focus-ring-color: #ffffff; // Focus ring color — white on dark background
-$button-primary-dark-bg: #111e30; // Background — inverse surface
-$button-primary-dark-color: #ffffff; // Text color — white
-$button-primary-dark-border: #ffffff; // Border color — white
-$button-primary-dark-hover-bg: #ffffff; // Hover background
-$button-primary-dark-hover-color: #111e30; // Hover text color
-$button-primary-dark-hover-border: #ffffff; // Hover border color
-$button-primary-dark-active-bg: #ffffff; // Active background
-$button-primary-dark-active-color: #111e30; // Active text color
-$button-primary-dark-active-border: #ffffff; // Active border color
 $button-ghost-border-radius: 9999px; // Border radius
 $button-ghost-border-width: 1px; // Border width
 $button-ghost-border-style: solid; // Border style
 $button-ghost-justify-content: center; // Justify content
 $button-ghost-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-ghost-font-size: 18px; // Font size
+$button-ghost-font-size: 1.125rem; // Font size
 $button-ghost-font-weight: 300; // Font weight
 $button-ghost-line-height: 1; // Line height
 $button-ghost-cursor: pointer; // Cursor
@@ -102,17 +75,18 @@ $button-ghost-white-space: nowrap; // White space
 $button-ghost-text-decoration: none; // Text decoration
 $button-ghost-transition-duration: 150ms; // Transition duration
 $button-ghost-transition-easing: ease; // Transition easing
-$button-ghost-disabled-opacity: 0.4; // Opacity when disabled
 $button-ghost-disabled-cursor: not-allowed; // Cursor when disabled
-$button-ghost-padding-block: 12px; // Block (vertical) padding
-$button-ghost-padding-inline: 32px; // Inline (horizontal) padding
+$button-ghost-disabled-color: #d0d0d0; // Text color when disabled — ghost lives on dark photo
+$button-ghost-disabled-border: #d0d0d0; // Border color when disabled — ghost lives on dark photo
+$button-ghost-padding-block: 0.75rem; // Block (vertical) padding
+$button-ghost-padding-inline: 2rem; // Inline (horizontal) padding
 $button-ghost-focus-ring-width: 2px; // Focus ring width
 $button-ghost-focus-ring-style: solid; // Focus ring border style
 $button-ghost-focus-ring-offset: 2px; // Focus ring offset
-$button-ghost-focus-ring-color: #ffffff; // Focus ring color
+$button-ghost-focus-ring-color: #ffffff; // Focus ring color — white on dark photo
 $button-ghost-bg: rgba(0, 0, 0, 0); // Background
-$button-ghost-color: #ffffff; // Text color
-$button-ghost-border: #ffffff; // Border color
+$button-ghost-color: #ffffff; // Text color — white on dark photo
+$button-ghost-border: #ffffff; // Border color — white on dark photo
 $button-ghost-hover-bg: #ffffff; // Hover background
 $button-ghost-hover-color: #111e30; // Hover text color
 $button-ghost-hover-border: #ffffff; // Hover border color
@@ -124,7 +98,7 @@ $button-form-border-width: 1px; // Border width
 $button-form-border-style: solid; // Border style
 $button-form-justify-content: flex-start; // Justify content
 $button-form-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-form-font-size: 18px; // Font size
+$button-form-font-size: 1.125rem; // Font size
 $button-form-font-weight: 300; // Font weight
 $button-form-line-height: 1; // Line height
 $button-form-cursor: pointer; // Cursor
@@ -133,10 +107,12 @@ $button-form-text-decoration: none; // Text decoration
 $button-form-text-transform: uppercase; // Text transform
 $button-form-transition-duration: 150ms; // Transition duration
 $button-form-transition-easing: ease; // Transition easing
-$button-form-disabled-opacity: 0.4; // Opacity when disabled
 $button-form-disabled-cursor: not-allowed; // Cursor when disabled
-$button-form-padding-block: 16px; // Block (vertical) padding
-$button-form-padding-inline: 16px; // Inline (horizontal) padding
+$button-form-disabled-bg: #f2f2f2; // Background when disabled
+$button-form-disabled-color: #4a4a4a; // Text color when disabled
+$button-form-disabled-border: #f2f2f2; // Border color when disabled — matches bg
+$button-form-padding-block: 1rem; // Block (vertical) padding
+$button-form-padding-inline: 1rem; // Inline (horizontal) padding
 $button-form-width: 100%; // Form buttons are always full width
 $button-form-focus-ring-width: 2px; // Focus ring width
 $button-form-focus-ring-style: solid; // Focus ring border style

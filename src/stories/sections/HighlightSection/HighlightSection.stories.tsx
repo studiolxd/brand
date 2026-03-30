@@ -27,9 +27,3 @@ export default meta;
 type Story = StoryObj<typeof HighlightSection>;
 
 export const Default: Story = {};
-
-export const Dark: Story = {
-  decorators: [
-    (Story) => <div className="dark"><Story /></div>,
-  ],
-};

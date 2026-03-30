@@ -10,7 +10,6 @@
     "line-height":           { "$value": "{line-height.none}",             "$type": "number",    "$description": "Interlineado" },
     "cursor":                { "$value": "text",                           "$type": "string",    "$description": "Cursor por defecto" },
     "disabled-cursor":       { "$value": "not-allowed",                    "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
-    "disabled-opacity":      { "$value": "{opacity.disabled}",             "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },
     "transition-duration":   { "$value": "{motion.duration.fast}",         "$type": "number",    "$description": "Duración de la transición" },
     "transition-easing":     { "$value": "{motion.easing.default}",        "$type": "string",    "$description": "Curva de animación" },
     "focus-ring-width":      { "$value": "{border-width.md}",              "$type": "dimension", "$description": "Grosor del anillo de foco" },

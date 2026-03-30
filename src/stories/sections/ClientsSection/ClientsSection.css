@@ -1,7 +1,10 @@
 /* ─── Section ────────────────────────────────────────────── */
 .clients-section {
-  padding-block: var(--spacing-7);
-  border-block-start: var(--border-width-sm) solid currentColor;
+  padding-block: var(--section-padding-block-xl);
+}
+
+.clients-section > .heading {
+  padding-inline: var(--section-padding-inline);
 }
 
 .clients-section .carousel {
@@ -14,14 +17,15 @@
   align-items: center;
   justify-content: center;
   border: none;
-  padding: 0;
-  height: 160px;
+  padding-block: 0;
+  padding-inline: 0;
+  height: var(--clients-section-logo-height);
 }
 
 .clients-section__logo {
   display: block;
-  width: 320px;
-  height: 160px;
+  width: var(--clients-section-logo-width);
+  height: var(--clients-section-logo-height);
   object-fit: contain;
 }
 

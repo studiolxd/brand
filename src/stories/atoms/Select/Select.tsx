@@ -35,7 +35,7 @@ export function Select({
       disabled={disabled}
       onValueChange={onValueChange}
     >
-      <RadixSelect.Trigger className={['select', dark ? 'select--dark' : ''].filter(Boolean).join(' ')} id={id} aria-label={placeholder}>
+      <RadixSelect.Trigger className="select" id={id} aria-label={placeholder}>
         <RadixSelect.Value placeholder={placeholder} />
         <RadixSelect.Icon asChild>
           <Chevron className="select__icon" size="sm" />

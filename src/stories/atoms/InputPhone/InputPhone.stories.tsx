@@ -4,10 +4,16 @@ import { InputPhone } from './InputPhone';
 const meta: Meta<typeof InputPhone> = {
   title: 'Atoms/InputPhone',
   component: InputPhone,
+  parameters: {
+    layout: 'padded',
+  },
   argTypes: {
     disabled:       { control: { type: 'boolean' } },
     error:          { control: { type: 'boolean' } },
-    dark:           { control: { type: 'boolean' } },
+    dark: {
+      control: { type: 'boolean' },
+      description: 'Aplica estilos oscuros al dropdown de país (portal Radix fuera del árbol DOM — no hereda `.surface-dark` por cascade).',
+    },
     defaultCountry: { control: { type: 'text' } },
     placeholder:    { control: { type: 'text' } },
   },
@@ -33,7 +39,8 @@ export const Disabled: Story = {
   args: { disabled: true },
 };
 
-export const Dark: Story = {
-  args: { dark: true },
-  globals: { backgrounds: { value: 'dark' } },
+/** Navega con Tab hasta el input para verificar el focus ring */
+export const FocusVisible: Story = {
+  name: 'Focus visible',
+  parameters: { pseudo: { focusVisible: true } },
 };

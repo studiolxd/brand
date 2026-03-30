@@ -32,7 +32,6 @@
 }
 
 .textarea:disabled {
-  opacity: var(--textarea-disabled-opacity);
   cursor: var(--textarea-disabled-cursor);
   background-color: var(--textarea-disabled-bg);
   color: var(--textarea-disabled-color);
@@ -60,31 +59,3 @@
   border-color: var(--textarea-error-focus-border-color);
 }
 
-/* Dark — contexto padre (.dark) o modificador directo (.textarea--dark) */
-.dark .textarea,
-.textarea.textarea--dark {
-  --textarea-bg: var(--textarea-dark-bg);
-  --textarea-color: var(--textarea-dark-color);
-  --textarea-border-color: var(--textarea-dark-border-color);
-  --textarea-placeholder-color: var(--textarea-dark-placeholder-color);
-  --textarea-focus-border-color: var(--textarea-dark-focus-border-color);
-  --textarea-focus-ring-color: var(--textarea-dark-focus-ring-color);
-  --textarea-error-focus-ring-color: var(--textarea-dark-error-focus-ring-color);
-}
-
-/* Dark + disabled — especificidad triple para ganar sobre :disabled */
-.dark .textarea:disabled,
-.textarea.textarea--dark:disabled {
-  --textarea-disabled-bg: var(--textarea-dark-disabled-bg);
-  --textarea-disabled-color: var(--textarea-dark-disabled-color);
-  --textarea-disabled-border-color: var(--textarea-dark-disabled-border-color);
-  opacity: 1;
-}
-
-/* Dark + error — especificidad triple para ganar sobre .textarea--error */
-.dark .textarea.textarea--error,
-.textarea.textarea--dark.textarea--error {
-  --textarea-error-bg: var(--textarea-dark-error-bg);
-  --textarea-error-border-color: var(--textarea-dark-error-border-color);
-  --textarea-error-placeholder-color: var(--textarea-dark-error-placeholder-color);
-}

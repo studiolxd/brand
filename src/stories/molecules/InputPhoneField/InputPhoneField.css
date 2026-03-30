@@ -1,6 +1,7 @@
 .input-phone-field {
   display: flex;
   flex-direction: column;
+  gap: var(--input-field-gap);
 }
 
 .input-phone-field__error {
@@ -17,18 +18,5 @@
   font-weight: var(--input-field-helper-font-weight);
   line-height: var(--input-field-helper-line-height);
   color: var(--input-field-helper-color);
-  background-color: var(--color-white);
-  padding-block: var(--control-padding-block);
-  padding-inline: var(--control-padding-inline);
 }
 
-.dark .input-phone-field,
-.input-phone-field.input-phone-field--dark {
-  --input-field-error-color: var(--form-error-dark-color);
-  --input-field-helper-color: var(--form-helper-dark-color);
-}
-
-.dark .input-phone-field__helper,
-.input-phone-field.input-phone-field--dark .input-phone-field__helper {
-  background-color: var(--color-background-dark);
-}

@@ -1,9 +1,12 @@
 import { InputPhone } from '../../atoms/InputPhone/InputPhone';
+import { Label } from '../../atoms/Label/Label';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
 
 interface InputPhoneFieldProps {
   id: string;
+  label: string;
+  labelHidden?: boolean;
   value?: string;
   defaultCountry?: Country;
   placeholder?: string;
@@ -19,6 +22,8 @@ interface InputPhoneFieldProps {
 
 export function InputPhoneField({
   id,
+  label,
+  labelHidden = true,
   value,
   defaultCountry,
   placeholder,
@@ -36,7 +41,8 @@ export function InputPhoneField({
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
   return (
-    <div className={['input-phone-field', dark ? 'input-phone-field--dark' : ''].filter(Boolean).join(' ')}>
+    <div className="input-phone-field">
+      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
       <InputPhone
         id={id}
         name={name}

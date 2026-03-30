@@ -4,8 +4,6 @@
 
 :root {
   --highlight-section-max-width: clamp(480px, 66.666%, 860px); /** Ancho máximo del container en desktop */
-  --highlight-section-padding-block: var(--spacing-7); /** Padding vertical */
-  --highlight-section-padding-inline: var(--spacing-4); /** Padding horizontal */
   --highlight-section-gap: var(--spacing-6); /** Separación interna del container */
   --highlight-section-font-size: var(--font-size-9); /** Tamaño del texto destacado */
   --highlight-section-font-weight: var(--font-weight-semibold); /** Peso del texto destacado */

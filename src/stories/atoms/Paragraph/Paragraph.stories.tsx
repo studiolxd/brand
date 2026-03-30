@@ -37,9 +37,12 @@ export const Large: Story = {
   args: { size: 'large' },
 };
 
-export const Dark: Story = {
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Paragraph size="small">Small — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
+      <Paragraph size="default">Default — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
+      <Paragraph size="large">Large — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
+    </div>
+  ),
 };

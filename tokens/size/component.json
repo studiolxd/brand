@@ -1,7 +1,7 @@
 {
   "size-component": {
-    "sm": { "$value": "32px", "$type": "dimension", "$description": "Small component height — compact elements" },
-    "md": { "$value": "40px", "$type": "dimension", "$description": "Medium component height — form buttons, inputs, selects" },
-    "lg": { "$value": "48px", "$type": "dimension", "$description": "Large component height — prominent form elements" }
+    "sm": { "$value": "2rem",   "$type": "dimension", "$description": "2rem (32px) — Small component height — compact elements" },
+    "md": { "$value": "2.5rem", "$type": "dimension", "$description": "2.5rem (40px) — Medium component height — form buttons, inputs, selects" },
+    "lg": { "$value": "3rem",   "$type": "dimension", "$description": "3rem (48px) — Large component height — prominent form elements" }
   }
 }

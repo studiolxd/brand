@@ -37,13 +37,8 @@ export const Open: Story = {
   args: { isOpen: true },
 };
 
-export const Dark: Story = {
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: { backgrounds: { value: 'dark' } },
-};
-
-export const DarkOpen: Story = {
-  args: { isOpen: true },
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: { backgrounds: { value: 'dark' } },
+/** Navega con Tab hasta el botón para verificar el focus ring */
+export const FocusVisible: Story = {
+  name: 'Focus visible',
+  parameters: { pseudo: { focusVisible: true } },
 };

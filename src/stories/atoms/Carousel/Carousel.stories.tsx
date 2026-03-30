@@ -27,6 +27,7 @@ const slideContent = labels.map((label, i) => (
     <div
       style={{
         background: colors[i],
+        color: 'var(--color-text-default)',
         height: '240px',
         display: 'flex',
         alignItems: 'center',
@@ -49,7 +50,7 @@ export const Default: Story = {
 
 /** slideSize personalizado — siempre 1 slide completo */
 export const OnePorView: Story = {
-  name: '1 slide por vista',
+  name: '1 slide per view',
   render: () => (
     <div style={{ padding: '2rem 0' }}>
       <Carousel slideSize="100%">{slideContent}</Carousel>
@@ -57,13 +58,25 @@ export const OnePorView: Story = {
   ),
 };
 
-/** Sobre fondo oscuro — gradientColor para el degradado correcto */
-export const DarkBackground: Story = {
-  name: 'Fondo oscuro',
+/** Sobre fondo oscuro — gradientColor para que el degradado se funda con el contenedor */
+export const OnDark: Story = {
+  name: 'On dark background',
   render: () => (
-    <div className="dark" style={{ background: 'var(--color-background-dark)', padding: '2rem 0' }}>
+    <div
+      className="surface-dark"
+      style={{ backgroundColor: 'var(--color-background-dark)', padding: '2rem 0' }}
+    >
       <Carousel gradientColor="var(--color-background-dark)">{slideContent}</Carousel>
     </div>
   ),
-  globals: { backgrounds: { value: 'dark' } },
+};
+
+/** Sin botones prev/next — útil cuando el scroll se gestiona externamente */
+export const HideButtons: Story = {
+  name: 'Without buttons',
+  render: () => (
+    <div style={{ padding: '2rem 0' }}>
+      <Carousel hideButtons>{slideContent}</Carousel>
+    </div>
+  ),
 };

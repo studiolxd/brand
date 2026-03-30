@@ -1,5 +1,6 @@
 .paragraph {
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   font-family: var(--text-paragraph-font-family);
   font-size: var(--text-paragraph-font-size);
   font-weight: var(--text-paragraph-font-weight);
@@ -16,8 +17,3 @@
   font-size: var(--text-paragraph-large-font-size);
 }
 
-/* Dark — contexto padre (.dark) o modificador directo (.paragraph--dark) */
-.dark .paragraph,
-.paragraph.paragraph--dark {
-  --text-paragraph-color: var(--text-paragraph-dark-color);
-}

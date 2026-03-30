@@ -5,12 +5,12 @@
 }
 
 .project-page__main {
-  padding-block-start: var(--header-height-mobile);
+  padding-block-start: var(--header-height-overlay);
 }
 
 @media (min-width: 1440px) {
   .project-page__main {
-    padding-block-start: var(--header-height-desktop);
+    padding-block-start: var(--header-height-inline);
   }
 }
 
@@ -18,8 +18,8 @@
 .project-page__body {
   max-width: var(--content-measure);
   margin-inline: auto;
-  padding-block: var(--spacing-7);
-  padding-inline: var(--spacing-4);
+  padding-block: var(--section-padding-block-xl);
+  padding-inline: var(--section-padding-inline);
 }
 
 /* ─── Article ─────────────────────────────────────────────── */

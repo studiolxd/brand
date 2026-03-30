@@ -1,0 +1,28 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TagStories from "./Tag.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { tagTokens } from "../../../tokens/components/tag";
+
+<Meta of={TagStories} />
+
+# Tag
+
+Etiqueta en forma de píldora para clasificar o categorizar contenido. Tiene seis variantes de color que mapean a los colores de la paleta del sistema. Se usa en tarjetas, listados de proyectos y filtros.
+
+## Por defecto
+
+<Canvas of={TagStories.Default} />
+
+## Variantes
+
+<Canvas of={TagStories.AllVariants} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={tagTokens} />
+
+## Props
+
+<ArgTypes of={TagStories} />

@@ -1,0 +1,24 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as MethodologySectionStories from "./MethodologySection.stories";
+
+<Meta of={MethodologySectionStories} />
+
+# MethodologySection
+
+Sección que presenta el proceso de trabajo de Studio LXD en forma de pasos numerados. Combina un párrafo introductorio con un botón CTA a la izquierda y una cuadrícula de pasos a la derecha.
+
+El efecto de divisores se logra mediante el color de fondo del contenedor (`--color-background-dark`) que sangra a través de los `gap` entre celdas blancas, simulando bordes sin usar `border` real.
+
+En mobile los pasos se apilan en columna. A partir de 768 px la columna del número ocupa un tercio del ancho del paso (`1fr 3fr`). A partir de 1024 px la sección pasa a un grid de dos columnas: introducción a la izquierda y pasos a la derecha.
+
+La prop `aria-label` es opcional y fue añadida recientemente para permitir etiquetar semánticamente la sección cuando el contexto de la página lo requiera (por ejemplo, cuando hay varias secciones `<section>` contiguas sin encabezado visible).
+
+## Por defecto
+
+<Canvas of={MethodologySectionStories.Default} />
+
+---
+
+## Props
+
+<ArgTypes of={MethodologySectionStories} />

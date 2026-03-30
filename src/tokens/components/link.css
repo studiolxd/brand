@@ -3,13 +3,12 @@
  */
 
 :root {
-  --link-color: inherit; /** Color — heredado del texto circundante */
   --link-text-decoration: underline; /** Decoración por defecto */
   --link-text-decoration-hover: none; /** Decoración en hover */
   --link-cursor: pointer; /** Cursor */
-  --link-focus-ring-width: var(--border-width-sm); /** Grosor del focus ring */
+  --link-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
   --link-focus-ring-offset: var(--border-width-sm); /** Separación entre el enlace y el focus ring */
-  --link-dark-color: var(--color-text-dark); /** Color sobre fondo oscuro */
+  --link-color: var(--color-text-default); /** Color del enlace — mismo que el texto por defecto */
+  --link-color-hover: var(--color-text-default); /** Color del enlace en hover */
   --link-focus-ring-color: var(--color-primary); /** Color del focus ring en fondo claro */
-  --link-dark-focus-ring-color: var(--color-text-dark); /** Color del focus ring en fondo oscuro */
 }

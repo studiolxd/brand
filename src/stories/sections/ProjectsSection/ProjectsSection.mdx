@@ -1,0 +1,26 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ProjectsSectionStories from "./ProjectsSection.stories";
+
+<Meta of={ProjectsSectionStories} />
+
+# ProjectsSection
+
+Sección de proyectos basada en un carrusel horizontal. Cada tarjeta agrupa la categoría (mediante el átomo `Tag`), el título, una imagen en proporción 4:3 y una descripción breve. El botón «Leer más» se marca con `aria-hidden="true"` porque el enlace principal ya incluye `aria-label` con el nombre del proyecto, evitando así duplicidad para lectores de pantalla.
+
+El carrusel muestra un slide completo en móvil, avanza a dos slides y mitades en tableta (≥ 768 px) y a cuatro slides completos en pantallas grandes (≥ 1440 px). La alineación central del carrusel (`align: 'center'`) hace que las tarjetas de los extremos queden parcialmente visibles, invitando al usuario a desplazarse.
+
+## Por defecto
+
+<Canvas of={ProjectsSectionStories.Default} />
+
+---
+
+## Accesibilidad
+
+- El elemento `<a>` de cada tarjeta lleva `aria-label={project.title}`, que actúa como nombre accesible del enlace.
+- El botón «Leer más» lleva `aria-hidden="true"` para no generar un nodo anunciable redundante.
+- Las imágenes usan `alt` con el valor de `photoAlt` si se proporciona o, en su defecto, el título del proyecto.
+
+## Props
+
+<ArgTypes of={ProjectsSectionStories} />

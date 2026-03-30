@@ -10,5 +10,4 @@
   --label-line-height: var(--line-height-normal); /** Line height */
   --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
   --label-color: var(--color-text-default); /** Text color */
-  --label-dark-color: var(--color-text-dark); /** Text color on dark surface */
 }

@@ -25,14 +25,18 @@
   margin-block-start: auto;
 }
 
-/* ─── Descripción — oculta por defecto ───────────────────── */
+/* ─── Descripción — siempre en layout, solo visible al hover ─ */
+/*
+  No usamos max-height trick: la descripción tiene flex:1 y siempre
+  ocupa espacio (clipped por overflow:hidden del primary). Solo cambia
+  opacity/visibility → sin jump en la arrow al colapsar.
+*/
 .card-split__description {
-  max-height: 0;
+  flex: 1;
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
   transition:
-    max-height 0ms linear calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay)),
     opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-desc-transition-delay),
     visibility 0ms var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
 }
@@ -64,11 +68,9 @@
 
 .card-split:hover .card-split__description,
 .card-split:focus-visible .card-split__description {
-  max-height: 20em;
   opacity: 1;
   visibility: visible;
   transition:
-    max-height 0ms linear var(--card-split-desc-transition-delay),
     opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-desc-transition-delay),
     visibility 0ms;
 }

@@ -33,13 +33,12 @@ type Story = StoryObj<typeof Link>;
 
 export const Default: Story = {};
 
-export const External: Story = {
-  args: { external: true },
+/** Navega con Tab hasta el enlace para ver el focus ring */
+export const FocusVisible: Story = {
+  name: 'Focus visible',
+  parameters: { pseudo: { focusVisible: true } },
 };
 
-export const Dark: Story = {
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
+export const External: Story = {
+  args: { external: true },
 };

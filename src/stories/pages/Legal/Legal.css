@@ -5,19 +5,19 @@
 }
 
 .legal-page__main {
-  padding-block-start: var(--header-height-mobile);
+  padding-block-start: var(--header-height-overlay);
 }
 
 @media (min-width: 1440px) {
   .legal-page__main {
-    padding-block-start: var(--header-height-desktop);
+    padding-block-start: var(--header-height-inline);
   }
 }
 
 /* ─── Page header ─────────────────────────────────────────── */
 .legal-page__header {
-  padding-block: var(--spacing-7);
-  padding-inline: var(--spacing-4);
+  padding-block: var(--section-padding-block-xl);
+  padding-inline: var(--section-padding-inline);
 }
 
 .legal-page__title {
@@ -29,15 +29,35 @@
 
 /* ─── Accordion ───────────────────────────────────────────── */
 .legal-accordion__item {
-  border-top: var(--border-width-sm) solid currentColor;
+  border-block-start: var(--border-width-sm) solid currentColor;
+}
+
+/* Heading envuelve el trigger para el outline semántico — sin estilos visuales propios */
+.legal-accordion__heading {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.legal-accordion__title {
+  font-family: var(--text-h2-font-family);
+  font-size: var(--text-h2-font-size);
+  font-weight: var(--text-h2-font-weight);
+  line-height: var(--text-h2-line-height);
+  color: var(--text-h2-color);
+  letter-spacing: var(--text-h2-letter-spacing);
 }
 
 .legal-accordion__header {
   /* reset heredado de button */
-  background: none;
-  border: none;
+  background-color: transparent;
+  border-block: none;
+  border-inline: none;
   border-radius: 0;
-  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;

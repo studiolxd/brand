@@ -15,13 +15,9 @@
     "focus-ring-width":      { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Ancho del anillo de foco" },
     "focus-ring-offset":     { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del anillo de foco respecto al borde" },
     "focus-ring-color":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
-    "disabled-opacity":      { "$value": "{opacity.disabled}",          "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },
-    "disabled-cursor":       { "$value": "not-allowed",                  "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
-    "dark-border-color":     { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Color del borde sobre fondo oscuro" },
-    "dark-bg-checked":       { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Fondo marcado sobre fondo oscuro" },
-    "dark-check-color":      { "$value": "{color.background.dark}",     "$type": "color",     "$description": "Color del checkmark sobre fondo oscuro" },
-    "dark-focus-ring-color":          { "$value": "{color.text.dark}",       "$type": "color",     "$description": "Color del anillo de foco sobre fondo oscuro" },
-    "dark-disabled-border-color":     { "$value": "{color.grey-light}",     "$type": "color",     "$description": "Color del borde deshabilitado sobre fondo oscuro" },
-    "dark-disabled-bg-checked":       { "$value": "{color.grey-light}",     "$type": "color",     "$description": "Fondo marcado deshabilitado sobre fondo oscuro" }
+    "disabled-cursor":          { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "disabled-border-color":    { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
+    "disabled-bg-checked":      { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Fondo marcado/indeterminado cuando está deshabilitado" },
+    "check-rotate":           { "$value": "15deg",                        "$type": "string",    "$description": "Rotación del checkmark en animación de entrada/salida" }
   }
 }

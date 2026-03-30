@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Header } from '../../sections/Header/Header';
+import type { NavItem } from '../../sections/Header/Header';
 import { Footer } from '../../sections/Footer/Footer';
+import { Button } from '../../atoms/Button/Button';
+import { Heading } from '../../atoms/Heading/Heading';
 import { Chevron } from '../../atoms/Chevron/Chevron';
+import { DEFAULT_NAV_ITEMS, DEFAULT_FEATURED_LINK } from '../../constants/navigation';
 import './Legal.css';
 
 interface LegalSection {
@@ -14,17 +18,11 @@ interface LegalProps {
   title: string;
   /** Secciones de contenido en acordeón. */
   sections: LegalSection[];
+  /** Elementos de navegación. */
+  navItems?: NavItem[];
+  /** Enlace destacado del header. */
+  featuredLink?: NavItem;
 }
-
-const navItems = [
-  { label: 'Inicio', href: '#' },
-  { label: 'Soluciones', href: '#' },
-  { label: 'Proyectos', href: '#' },
-  { label: 'Academia', href: '#' },
-  { label: 'Contacto', href: '#' },
-];
-
-const featuredLink = { label: 'Cursos online', href: '#' };
 
 function LegalAccordionItem({ section, index }: { section: LegalSection; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,18 +30,20 @@ function LegalAccordionItem({ section, index }: { section: LegalSection; index: 
 
   return (
     <div className={`legal-accordion__item${isOpen ? ' legal-accordion__item--open' : ''}`}>
-      <button
-        className="legal-accordion__header"
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-expanded={isOpen}
-        aria-controls={id}
-      >
-        <span className="legal-accordion__counter">
-          {String(index + 1).padStart(2, '0')}
-        </span>
-        <h2 className="legal-accordion__title">{section.title}</h2>
-        <Chevron className="legal-accordion__chevron" size="lg" />
-      </button>
+      <Heading level={2} className="legal-accordion__heading">
+        <button
+          className="legal-accordion__header"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-expanded={isOpen}
+          aria-controls={id}
+        >
+          <span className="legal-accordion__counter">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <span className="legal-accordion__title">{section.title}</span>
+          <Chevron className="legal-accordion__chevron" size="lg" />
+        </button>
+      </Heading>
       <div className="legal-accordion__body" id={id} role="region">
         <div className="legal-accordion__body-inner">
           {section.content}
@@ -53,21 +53,21 @@ function LegalAccordionItem({ section, index }: { section: LegalSection; index: 
   );
 }
 
-export function Legal({ title, sections }: LegalProps) {
+export function Legal({ title, sections, navItems = DEFAULT_NAV_ITEMS, featuredLink = DEFAULT_FEATURED_LINK }: LegalProps) {
   return (
     <div className="legal-page">
       <Header
         navItems={navItems}
         featuredLink={featuredLink}
         actions={
-          <a href="https://academy.studiolxd.com" className="btn btn-primary">
+          <Button href="https://academy.studiolxd.com" variant="primary" external>
             Entra a la academia
-          </a>
+          </Button>
         }
       />
-      <main className="legal-page__main">
+      <main id="main-content" className="legal-page__main">
         <div className="legal-page__header">
-          <h1 className="legal-page__title">{title}</h1>
+          <Heading level={1} className="legal-page__title">{title}</Heading>
         </div>
         <div className="legal-accordion">
           {sections.map((section, index) => (

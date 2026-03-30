@@ -28,18 +28,23 @@
   gap: var(--form-gap);
 }
 
+.form > .input-phone-field > .input-phone-field__helper {
+  padding-block: var(--control-padding-block);
+  padding-inline: var(--control-padding-inline);
+}
+
 .form > .input-phone-field > .input-phone > .input-phone__country,
 .form > .input-phone-field > .input-phone .input-phone__number {
   background-color: var(--color-background-default);
 }
 
-/* El botón necesita su propio fondo explícito para que el disabled (opacity) no revele el separador */
 /* Borde = fondo del estado correspondiente para que sea invisible sin cambiar el tamaño */
 .form > .button.button--form {
   background-color: var(--button-form-bg);
   --button-form-border: var(--button-form-bg);
   --button-form-hover-border: var(--button-form-hover-bg);
   --button-form-active-border: var(--button-form-active-bg);
+  --button-form-disabled-border: var(--button-form-bg);
 }
 
 .form > .button.button--form:hover {
@@ -50,47 +55,7 @@
   background-color: var(--button-form-active-bg);
 }
 
-.form--dark,
-.dark .form {
-  --form-border-color: var(--form-border-dark-color);
-  --form-separator-color: var(--form-separator-dark-color);
-  --form-error-color: var(--form-error-dark-color);
-  --form-helper-color: var(--form-helper-dark-color);
-}
-
-.form--dark > .input-field,
-.form--dark > .textarea-field,
-.form--dark > .checkbox-field,
-.form--dark > .form-errors,
-.dark .form > .input-field,
-.dark .form > .textarea-field,
-.dark .form > .checkbox-field,
-.dark .form > .form-errors {
-  background-color: var(--color-background-dark);
-}
-
-.form--dark > .input-phone-field,
-.dark .form > .input-phone-field {
-  background-color: var(--form-separator-dark-color);
-}
-
-.form--dark > .input-phone-field > .input-phone,
-.dark .form > .input-phone-field > .input-phone {
-  background-color: var(--form-separator-dark-color);
-  gap: var(--form-gap);
-}
-
-.form--dark > .input-phone-field > .input-phone > .input-phone__country,
-.form--dark > .input-phone-field > .input-phone .input-phone__number,
-.dark .form > .input-phone-field > .input-phone > .input-phone__country,
-.dark .form > .input-phone-field > .input-phone .input-phone__number {
-  background-color: var(--color-background-dark);
-}
-
-.form--dark > .input-phone-field > .input-phone-field__helper,
-.dark .form > .input-phone-field > .input-phone-field__helper {
-  background-color: var(--color-background-dark);
-}
+/* Dark surface — handled by surface.css via .surface-dark context class */
 
 /* Suprimir bordes propios de los hijos — el form dibuja el perímetro */
 /* Color = fondo del elemento para que el borde sea invisible sin cambiar el tamaño */
@@ -114,27 +79,6 @@
   --textarea-disabled-border-color: var(--color-background-default);
 }
 
-.form--dark > .input-field > .input,
-.dark .form > .input-field > .input {
-  --input-border-color: var(--color-background-dark);
-  --input-error-border-color: var(--color-background-dark);
-  --input-disabled-border-color: var(--color-background-dark);
-}
-
-.form--dark > .textarea-field > .textarea,
-.dark .form > .textarea-field > .textarea {
-  --textarea-border-color: var(--color-background-dark);
-  --textarea-error-border-color: var(--color-background-dark);
-  --textarea-disabled-border-color: var(--color-background-dark);
-}
-
-.form--dark > .input-phone-field > .input-phone,
-.dark .form > .input-phone-field > .input-phone {
-  --input-border-color: var(--color-background-dark);
-  --input-error-border-color: var(--color-background-dark);
-  --input-disabled-border-color: var(--color-background-dark);
-  --input-phone-country-border-color: var(--color-background-dark);
-}
 
 .form-errors {
   list-style: none;

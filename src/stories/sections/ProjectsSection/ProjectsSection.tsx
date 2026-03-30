@@ -1,4 +1,5 @@
 import { Carousel, CarouselSlide } from '../../atoms/Carousel/Carousel';
+import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
 import './ProjectsSection.css';
 
@@ -33,15 +34,15 @@ interface ProjectsSectionProps {
 export function ProjectsSection({ title = 'Proyectos', projects }: ProjectsSectionProps) {
   return (
     <section className="projects-section">
-      <h2>{title}</h2>
+      <Heading level={2}>{title}</Heading>
       <Carousel
         options={{ align: 'center' }}
       >
         {projects.map((project) => (
           <CarouselSlide key={project.id}>
-            <a className="project-card" href={project.href}>
+            <a className="project-card" href={project.href} aria-label={project.title}>
               <Tag variant={project.tagVariant ?? 'default'}>{project.category}</Tag>
-              <h3 className="project-card__title">{project.title}</h3>
+              <Heading level={3} className="project-card__title">{project.title}</Heading>
               <div className="project-card__image-wrap">
                 <img
                   src={project.photo}
@@ -50,7 +51,7 @@ export function ProjectsSection({ title = 'Proyectos', projects }: ProjectsSecti
                 />
               </div>
               <p className="project-card__description">{project.description}</p>
-              <span className="project-card__cta btn btn-primary">Leer más</span>
+              <span className="project-card__cta button button--primary" aria-hidden="true">Leer más</span>
             </a>
           </CarouselSlide>
         ))}

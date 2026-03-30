@@ -8,8 +8,3 @@
   text-transform: var(--label-text-transform);
 }
 
-/* Dark — contexto padre (.dark) o modificador directo (.label--dark) */
-.dark .label,
-.label.label--dark {
-  --label-color: var(--label-dark-color);
-}

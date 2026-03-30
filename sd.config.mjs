@@ -1,4 +1,5 @@
 import StyleDictionary from 'style-dictionary';
+import { writeFileSync } from 'fs';
 
 const cssOptions = { selector: ':root', outputReferences: true };
 const scssOptions = { outputReferences: false };
@@ -33,9 +34,13 @@ const filters = {
   'card-split':  (t) => t.path[0] === 'card-split',
   avatar:      (t) => t.path[0] === 'avatar',
   'input-phone': (t) => t.path[0] === 'input-phone' || t.path[0] === 'phone-input',
+  arrow:         (t) => t.path[0] === 'arrow',
+  chevron:       (t) => t.path[0] === 'chevron',
   'input-field':    (t) => t.path[0] === 'input-field',
   'textarea-field': (t) => t.path[0] === 'textarea-field',
-  'checkbox-field': (t) => t.path[0] === 'checkbox-field',
+  'checkbox-field':  (t) => t.path[0] === 'checkbox-field',
+  'clients-section': (t) => t.path[0] === 'clients-section',
+  section:           (t) => t.path[0] === 'section',
 };
 
 function cssFile(destination, filterKey) {
@@ -54,16 +59,17 @@ const sd = new StyleDictionary({
       transformGroup: 'css',
       buildPath: 'src/tokens/',
       files: [
-        cssFile('colors.css',    'color'),
-        cssFile('breakpoint.css','breakpoint'),
-        cssFile('typography.css','typography'),
-        cssFile('spacing.css',   'spacing'),
-        cssFile('border.css',    'border'),
-        cssFile('shadow.css',    'shadow'),
-        cssFile('size.css',      'size'),
-        cssFile('motion.css',    'motion'),
-        cssFile('opacity.css',   'opacity'),
-        cssFile('form.css',      'form'),
+        cssFile('global/colors.css',    'color'),
+        cssFile('global/breakpoint.css','breakpoint'),
+        cssFile('global/typography.css','typography'),
+        cssFile('global/spacing.css',   'spacing'),
+        cssFile('global/border.css',    'border'),
+        cssFile('global/shadow.css',    'shadow'),
+        cssFile('global/size.css',      'size'),
+        cssFile('global/motion.css',    'motion'),
+        cssFile('global/opacity.css',   'opacity'),
+        cssFile('global/form.css',      'form'),
+        cssFile('global/section.css',   'section'),
         cssFile('components/text.css',             'text'),
         cssFile('components/control.css',          'control'),
         cssFile('components/input.css',            'input'),
@@ -83,25 +89,29 @@ const sd = new StyleDictionary({
         cssFile('components/card-split.css',       'card-split'),
         cssFile('components/avatar.css',           'avatar'),
         cssFile('components/input-phone.css',      'input-phone'),
+        cssFile('components/arrow.css',            'arrow'),
+        cssFile('components/chevron.css',          'chevron'),
         cssFile('molecules/input-field.css',       'input-field'),
         cssFile('molecules/textarea-field.css',    'textarea-field'),
         cssFile('molecules/checkbox-field.css',    'checkbox-field'),
+        cssFile('components/clients-section.css',  'clients-section'),
       ],
     },
     scss: {
       transformGroup: 'scss',
       buildPath: 'src/tokens/scss/',
       files: [
-        scssFile('_colors.scss',    'color'),
-        scssFile('_breakpoint.scss','breakpoint'),
-        scssFile('_typography.scss','typography'),
-        scssFile('_spacing.scss',   'spacing'),
-        scssFile('_border.scss',    'border'),
-        scssFile('_shadow.scss',    'shadow'),
-        scssFile('_size.scss',      'size'),
-        scssFile('_motion.scss',    'motion'),
-        scssFile('_opacity.scss',   'opacity'),
-        scssFile('_form.scss',      'form'),
+        scssFile('global/_colors.scss',    'color'),
+        scssFile('global/_breakpoint.scss','breakpoint'),
+        scssFile('global/_typography.scss','typography'),
+        scssFile('global/_spacing.scss',   'spacing'),
+        scssFile('global/_border.scss',    'border'),
+        scssFile('global/_shadow.scss',    'shadow'),
+        scssFile('global/_size.scss',      'size'),
+        scssFile('global/_motion.scss',    'motion'),
+        scssFile('global/_opacity.scss',   'opacity'),
+        scssFile('global/_form.scss',      'form'),
+        scssFile('global/_section.scss',   'section'),
         scssFile('components/_text.scss',             'text'),
         scssFile('components/_control.scss',          'control'),
         scssFile('components/_input.scss',            'input'),
@@ -121,12 +131,29 @@ const sd = new StyleDictionary({
         scssFile('components/_card-split.scss',       'card-split'),
         scssFile('components/_avatar.scss',           'avatar'),
         scssFile('components/_input-phone.scss',      'input-phone'),
+        scssFile('components/_arrow.scss',            'arrow'),
+        scssFile('components/_chevron.scss',          'chevron'),
         scssFile('molecules/_input-field.scss',       'input-field'),
         scssFile('molecules/_textarea-field.scss',    'textarea-field'),
         scssFile('molecules/_checkbox-field.scss',    'checkbox-field'),
+        scssFile('components/_clients-section.scss',  'clients-section'),
       ],
     },
   },
 });
 
 await sd.buildAllPlatforms();
+
+// Genera el entrypoint legacy (@import) para consumidores que no soportan @use/@forward
+const scssDestinations = sd.options.platforms.scss.files.map((f) => f.destination);
+const toImportPath = (dest) =>
+  dest.replace(/(?:^|\/)_([^/]+)\.scss$/, (_, name) => `/${name}`).replace(/^\//, '');
+const legacyLines = [
+  '// Do not edit directly, this file was auto-generated.',
+  '// Legacy entrypoint — usa @import para compiladores que no soportan @use/@forward.',
+  '',
+  ...scssDestinations.map((dest) => `@import '${toImportPath(dest)}';`),
+  '',
+];
+writeFileSync('src/tokens/scss/_index.legacy.scss', legacyLines.join('\n'));
+console.log('✔︎ src/tokens/scss/_index.legacy.scss');

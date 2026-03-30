@@ -1,0 +1,11 @@
+{
+  "section": {
+    "padding-inline": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding horizontal estándar de las secciones de página" },
+    "padding-block": {
+      "sm": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Padding vertical compacto — secciones con poco aire" },
+      "md": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding vertical base — igual que padding-inline; celdas internas" },
+      "lg": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Padding vertical medio — introductions, bloques internos" },
+      "xl": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Padding vertical amplio — wrapper de sección estándar" }
+    }
+  }
+}

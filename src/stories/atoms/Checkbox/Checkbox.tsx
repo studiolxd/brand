@@ -1,15 +1,17 @@
+import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import './Checkbox.css';
 
 interface CheckboxProps {
-  checked?: boolean;
-  defaultChecked?: boolean;
+  checked?: boolean | 'indeterminate';
+  defaultChecked?: boolean | 'indeterminate';
   disabled?: boolean;
   id?: string;
   name?: string;
   value?: string;
+  required?: boolean;
   'aria-label'?: string;
   'aria-labelledby'?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
 
 export function Checkbox({
@@ -19,23 +21,26 @@ export function Checkbox({
   id,
   name,
   value,
+  required,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledby,
-  onChange,
+  onCheckedChange,
 }: CheckboxProps) {
   return (
-    <input
+    <RadixCheckbox.Root
       className="checkbox"
-      type="checkbox"
       checked={checked}
       defaultChecked={defaultChecked}
       disabled={disabled}
       id={id}
       name={name}
       value={value}
+      required={required}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledby}
-      onChange={onChange}
-    />
+      onCheckedChange={onCheckedChange}
+    >
+      <RadixCheckbox.Indicator className="checkbox__indicator" />
+    </RadixCheckbox.Root>
   );
 }

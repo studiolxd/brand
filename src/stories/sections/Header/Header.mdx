@@ -1,29 +1,88 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as HeaderStories from "./Header.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import {
+  headerDimensionTokens,
+  headerColorTokens,
+  headerLayerTokens,
+  headerMotionTokens,
+  headerShadowTokens,
+} from "../../../tokens/components/header";
 
 <Meta of={HeaderStories} />
 
 # Header
 
-Organismo de navegacion principal. Compone el atomo Logo, el atomo Hamburger y una barra de navegacion responsive.
+Sección de navegación principal del sitio. Compone el átomo `Logo`, el átomo `Hamburger` y una barra de navegación responsive. El header es `position: fixed` y siempre permanece visible en la parte superior de la página.
 
-En mobile (< 1440px), la navegacion se presenta como overlay a pantalla completa que se despliega desde arriba al pulsar el hamburger. En desktop (>= 1440px), el hamburger se oculta y la navegacion se dispone en horizontal.
+## Comportamiento responsive
+
+El header tiene dos modos de visualización según el ancho de ventana:
+
+- **Overlay (< 1440 px):** el menú de navegación se oculta tras el botón hamburger. Al pulsarlo, un panel a pantalla completa se desliza desde arriba con la animación `--header-navbar-transition-*`. Al hacer clic en cualquier enlace el panel se cierra automáticamente.
+- **Inline (>= 1440 px):** el hamburger se oculta y los enlaces de navegación se presentan en horizontal dentro de la misma barra del header.
+
+## Accesibilidad
+
+El header incluye un **skip link** (`<a href="#main-content">Saltar al contenido principal</a>`) oculto visualmente que aparece al recibir foco mediante teclado. Esto permite a usuarios de teclado y lectores de pantalla saltar directamente al contenido sin navegar por todos los enlaces.
+
+El elemento `<nav>` recibe su etiqueta accesible a través de la prop `navLabel` (por defecto `"Main navigation"`).
 
 ## Por defecto
+
+Con `navItems`, `featuredLink` y `actions` configurados.
 
 <Canvas of={HeaderStories.Default} />
 
 ## Sin featured link
 
+Cuando no se pasa `featuredLink`, el enlace destacado lateral desaparece tanto en overlay como en inline.
+
 <Canvas of={HeaderStories.WithoutFeaturedLink} />
 
 ## Sin actions
+
+Cuando no se pasa `actions`, el área de acciones (selector de idioma, botón CTA) se omite.
 
 <Canvas of={HeaderStories.WithoutActions} />
 
 ## Dark
 
-<Canvas of={HeaderStories.Dark} className="bg-dark" />
+La variante oscura se activa con `dark={true}`. Aplica la clase BEM `header--dark` que remapea el fondo y el color de los enlaces a los tokens `--header-dark-bg` y `--header-nav-dark-color`. Es distinta del mecanismo `.surface-dark` — el Header gestiona su propio theming oscuro internamente.
+
+<Canvas of={HeaderStories.Dark} />
+
+---
+
+## Tokens
+
+### Dimensiones y tipografía
+
+Alturas del header y del logo en cada modo, tamaños y pesos de fuente de los enlaces, paddings y gaps.
+
+<TokenTable tokens={headerDimensionTokens} />
+
+### Colores
+
+Fondos y colores de texto en modo claro y oscuro.
+
+<TokenTable tokens={headerColorTokens} />
+
+### Sombra
+
+<TokenTable tokens={headerShadowTokens} />
+
+### Capas (z-index)
+
+El header gestiona cuatro capas de apilamiento para garantizar que el logo y el hamburger queden siempre por encima del panel overlay.
+
+<TokenTable tokens={headerLayerTokens} />
+
+### Movimiento
+
+Duración y easing de la transición de apertura/cierre del panel overlay.
+
+<TokenTable tokens={headerMotionTokens} />
 
 ---
 

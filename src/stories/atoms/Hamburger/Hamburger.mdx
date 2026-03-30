@@ -1,5 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as HamburgerStories from "./Hamburger.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { hamburgerTokens } from "../../../tokens/components/hamburger";
 
 <Meta of={HamburgerStories} />
 
@@ -15,15 +17,17 @@ Botón de tres barras que alterna la visibilidad de la navegación móvil. Anima
 
 <Canvas of={HamburgerStories.Open} />
 
-## Dark
+---
 
-<Canvas of={HamburgerStories.Dark} className="bg-dark" />
+## Theming oscuro
 
-## Dark abierto
-
-<Canvas of={HamburgerStories.DarkOpen} className="bg-dark" />
+El Hamburger no necesita prop `dark` — adapta el color de las barras automáticamente cuando un ancestro tiene la clase `.surface-dark`. No hay portal Radix involucrado, por lo que la cascade CSS funciona de forma normal.
 
 ---
+
+## Tokens
+
+<TokenTable tokens={hamburgerTokens} />
 
 ## Props
 

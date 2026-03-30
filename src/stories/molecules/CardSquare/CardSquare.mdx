@@ -1,0 +1,36 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CardSquareStories from "./CardSquare.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { cardSquareTokens } from "../../../tokens/components/card-square";
+
+<Meta of={CardSquareStories} />
+
+# CardSquare
+
+Tarjeta cuadrada con imagen de fondo y overlay de color en hover. El título y la descripción aparecen superpuestos sobre la imagen; al hacer hover, el color de marca ocupa toda la superficie y la descripción se hace visible.
+
+## Secondary
+
+<Canvas of={CardSquareStories.Secondary} />
+
+## Tertiary
+
+<Canvas of={CardSquareStories.Tertiary} />
+
+## Quaternary
+
+<Canvas of={CardSquareStories.Quaternary} />
+
+## Quinary
+
+<Canvas of={CardSquareStories.Quinary} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={cardSquareTokens} />
+
+## Props
+
+<ArgTypes of={CardSquareStories} />

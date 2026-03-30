@@ -1,4 +1,5 @@
 import './ContactSection.css';
+import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { ContactForm } from '../../organisms/ContactForm/ContactForm';
 
@@ -34,14 +35,7 @@ export function ContactSection({
         </div>
         <aside className="contact-section__cta">
           <Heading level={3}>{whatsappTitle}</Heading>
-          <a
-            href={whatsappHref}
-            className="btn btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {whatsappLabel}
-          </a>
+          <Button href={whatsappHref} variant="primary" external>{whatsappLabel}</Button>
         </aside>
       </div>
       <div className="contact-section__form">

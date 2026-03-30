@@ -6,6 +6,6 @@
     "gap":                   { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Separación entre elementos internos" },
     "panel-transition":      { "$value": "{motion.duration.base}",   "$type": "number",    "$description": "Duración de la animación flex-grow del panel" },
     "desc-transition":       { "$value": "{motion.duration.slow}",   "$type": "number",    "$description": "Duración del fade de la descripción en hover" },
-    "desc-transition-delay": { "$value": "{motion.duration.fast}",   "$type": "number",    "$description": "Delay de la descripción (espera al panel)" }
+    "desc-transition-delay":    { "$value": "{motion.duration.fast}",   "$type": "number",    "$description": "Delay de la descripción (espera al panel)" }
   }
 }

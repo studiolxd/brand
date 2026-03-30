@@ -7,7 +7,7 @@ const withDarkBackground: Decorator = (Story, context) => {
   const isDark = context.globals.backgrounds?.value === 'dark';
   if (!isDark) return <Story />;
   return (
-    <div style={{ background: 'var(--color-background-dark)', minHeight: '100%' }}>
+    <div className="surface-dark" style={{ background: 'var(--color-background-dark)', minHeight: '100%' }}>
       <Story />
     </div>
   );
@@ -37,6 +37,12 @@ const preview: Preview = {
       matchers: {
        color: /(background|color)$/i,
        date: /Date$/i,
+      },
+    },
+
+    options: {
+      storySort: {
+        order: ['Foundations', 'Atoms', 'Molecules', 'Organisms', 'Sections', 'Templates', 'Pages'],
       },
     },
 

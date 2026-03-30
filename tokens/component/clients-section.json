@@ -1,0 +1,6 @@
+{
+  "clients-section": {
+    "logo-height": { "$value": "160px", "$type": "dimension", "$description": "Alto del contenedor de cada logo de cliente" },
+    "logo-width":  { "$value": "320px", "$type": "dimension", "$description": "Ancho del contenedor de cada logo de cliente" }
+  }
+}

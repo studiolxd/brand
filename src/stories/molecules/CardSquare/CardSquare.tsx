@@ -1,5 +1,7 @@
 import './CardSquare.css';
 import { Arrow } from '../../atoms/Arrow/Arrow';
+import { Heading } from '../../atoms/Heading/Heading';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { CardColor } from '../Card/Card';
 
 interface CardSquareImage {
@@ -31,10 +33,10 @@ export function CardSquare({ href, title, description, ctaLabel, color, image }:
         alt={image.alt}
       />
       <div className="card-square__body">
-        <h2 className="card-square__title">{title}</h2>
+        <Heading level={2} className="card-square__title">{title}</Heading>
         <p className="card-square__description">{description}</p>
         <Arrow className="card-square__arrow" size="lg" />
-        <span className="visually-hidden">{ctaLabel}</span>
+        <VisuallyHidden>{ctaLabel}</VisuallyHidden>
       </div>
     </a>
   );

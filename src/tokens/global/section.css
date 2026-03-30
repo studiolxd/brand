@@ -1,0 +1,11 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --section-padding-inline: var(--spacing-4); /** Padding horizontal estándar de las secciones de página */
+  --section-padding-block-sm: var(--spacing-3); /** Padding vertical compacto — secciones con poco aire */
+  --section-padding-block-md: var(--spacing-4); /** Padding vertical base — igual que padding-inline; celdas internas */
+  --section-padding-block-lg: var(--spacing-6); /** Padding vertical medio — introductions, bloques internos */
+  --section-padding-block-xl: var(--spacing-7); /** Padding vertical amplio — wrapper de sección estándar */
+}

@@ -4,9 +4,12 @@ interface LogoProps {
   width?: number;
   height?: number;
   className?: string;
+  /** Versión clara para fondos oscuros. Aplica .logo--dark. */
+  dark?: boolean;
 }
 
-export function Logo({ width, height, className }: LogoProps) {
+export function Logo({ width, height, className, dark = false }: LogoProps) {
+  const classes = ['logo', dark ? 'logo--dark' : '', className].filter(Boolean).join(' ');
   return (
     <>
       <svg
@@ -20,7 +23,7 @@ export function Logo({ width, height, className }: LogoProps) {
         width={width}
         height={height}
         fill="currentColor"
-        className={className ?? 'logo'}
+        className={classes}
         aria-hidden="true"
       >
         <g>

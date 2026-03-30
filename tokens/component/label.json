@@ -6,7 +6,6 @@
     "line-height":    { "$value": "{line-height.normal}",    "$type": "number",    "$description": "Line height" },
     "color":          { "$value": "{color.text.default}",    "$type": "color",     "$description": "Text color" },
     "letter-spacing": { "$value": "{letter-spacing.normal}", "$type": "dimension", "$description": "Letter spacing" },
-    "text-transform": { "$value": "uppercase",               "$type": "string",    "$description": "Text transform" },
-    "dark-color":     { "$value": "{color.text.dark}",       "$type": "color",     "$description": "Text color on dark surface" }
+    "text-transform": { "$value": "uppercase",               "$type": "string",    "$description": "Text transform" }
   }
 }

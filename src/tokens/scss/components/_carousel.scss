@@ -1,7 +1,9 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$carousel-gap: 16px; // Separación entre slides
-$carousel-btn-padding-inline: 24px; // Padding horizontal del botón — define el ancho del área de degradado
+$carousel-gap: 1rem; // Separación entre slides
+$carousel-btn-padding-inline: 1.5rem; // Padding horizontal del botón — define el ancho del área de degradado
 $carousel-btn-color: #111e30; // Color del chevron
 $carousel-gradient-color: #ffffff; // Color de fondo del degradado de los botones prev/next
+$carousel-btn-min-size: 4rem; // Tamaño mínimo del área de click de los botones prev/next (tap target)
+$carousel-btn-vw-size: 4.167vw; // Tamaño fluido del botón en móvil — escala con el viewport (≈1/24 vw)

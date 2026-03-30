@@ -49,7 +49,7 @@
 
 @media (min-width: 768px) {
   .carousel__slide {
-    border-inline-start: var(--border-width-sm) solid currentColor;
+    border-inline-start: var(--border-width-sm) solid var(--carousel-slide-border-color, currentColor);
     padding-inline-start: var(--carousel-gap);
   }
 
@@ -64,11 +64,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: max(4.167vw, 64px);
-  height: max(4.167vw, 64px);
+  width: max(var(--carousel-btn-vw-size), var(--carousel-btn-min-size));
+  height: max(var(--carousel-btn-vw-size), var(--carousel-btn-min-size));
   border: none;
   border-radius: 0;
-  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
   cursor: pointer;
   color: var(--carousel-btn-color);
   background-color: transparent;
@@ -133,14 +134,6 @@
   outline-offset: var(--control-focus-ring-inset-offset);
 }
 
-/* ─── Dark mode ───────────────────────────────────────────── */
-.dark .carousel__slide {
-  color: var(--color-text-dark);
-}
-
-.dark .carousel__btn {
-  --carousel-btn-color: var(--color-text-dark);
-}
 
 /* ─── Chevron direction ───────────────────────────────────── */
 .carousel__chevron--prev {

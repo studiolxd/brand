@@ -1,0 +1,30 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ChevronStories from "./Chevron.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { chevronTokens } from "../../../tokens/components/chevron";
+
+<Meta of={ChevronStories} />
+
+# Chevron
+
+Icono SVG decorativo con forma de ángulo (›). Se usa como indicador de expansión, navegación o dirección en selectores, acordeones y menús. Siempre se renderiza con `aria-hidden="true"` para no ser anunciado por lectores de pantalla.
+
+## Por defecto
+
+<Canvas of={ChevronStories.Default} />
+
+## Tamaños
+
+Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El ancho se controla mediante tokens CSS y es aproximadamente la mitad de ancho que `Arrow` para el mismo nivel de `size`.
+
+<Canvas of={ChevronStories.Sizes} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={chevronTokens} />
+
+## Props
+
+<ArgTypes of={ChevronStories} />

@@ -1,13 +1,12 @@
 {
   "link": {
-    "color":                 { "$value": "inherit",            "$type": "string", "$description": "Color — heredado del texto circundante" },
+    "color":                 { "$value": "{color.text.default}", "$type": "color",  "$description": "Color del enlace — mismo que el texto por defecto" },
+    "color-hover":           { "$value": "{color.text.default}", "$type": "color",  "$description": "Color del enlace en hover" },
     "text-decoration":       { "$value": "underline",          "$type": "string", "$description": "Decoración por defecto" },
     "text-decoration-hover": { "$value": "none",               "$type": "string", "$description": "Decoración en hover" },
     "cursor":                { "$value": "pointer",            "$type": "string", "$description": "Cursor" },
-    "dark-color":            { "$value": "{color.text.dark}",  "$type": "color",  "$description": "Color sobre fondo oscuro" },
-    "focus-ring-width":      { "$value": "{border-width.sm}",  "$type": "dimension", "$description": "Grosor del focus ring" },
+    "focus-ring-width":      { "$value": "{border-width.md}",  "$type": "dimension", "$description": "Grosor del focus ring" },
     "focus-ring-offset":     { "$value": "{border-width.sm}",  "$type": "dimension", "$description": "Separación entre el enlace y el focus ring" },
-    "focus-ring-color":      { "$value": "{color.primary}",    "$type": "color",     "$description": "Color del focus ring en fondo claro" },
-    "dark-focus-ring-color": { "$value": "{color.text.dark}",  "$type": "color",     "$description": "Color del focus ring en fondo oscuro" }
+    "focus-ring-color":      { "$value": "{color.primary}",    "$type": "color",     "$description": "Color del focus ring en fondo claro" }
   }
 }

@@ -3,9 +3,12 @@
  */
 
 :root {
-  --input-phone-country-width: 72px; /** Ancho del selector de país */
+  --input-phone-country-width: 4.5rem; /** Ancho del selector de país */
   --input-phone-country-border-style: solid; /** Estilo del separador */
   --input-phone-content-z-index: 1100; /** Z-index del dropdown de país */
+  --input-phone-content-max-height: 17.5rem; /** Altura máxima del dropdown de país */
+  --input-phone-country-icon-size: 0.625rem; /** Ancho del icono chevron en el selector de país */
   --input-phone-country-border-width: var(--border-width-sm); /** Grosor del separador entre país y número */
+  --input-phone-country-gap: var(--spacing-1); /** Separación entre bandera/código y chevron en el selector de país */
   --input-phone-country-border-color: var(--color-primary); /** Color del separador */
 }

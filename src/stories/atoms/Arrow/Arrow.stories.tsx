@@ -22,6 +22,18 @@ const meta: Meta<typeof Arrow> = {
 export default meta;
 type Story = StoryObj<typeof Arrow>;
 
+export const Default: Story = {};
+
 export const Small: Story = { args: { size: 'sm' } };
 export const Medium: Story = { args: { size: 'md' } };
 export const Large: Story = { args: { size: 'lg' } };
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+      <Arrow size="sm" />
+      <Arrow size="md" />
+      <Arrow size="lg" />
+    </div>
+  ),
+};

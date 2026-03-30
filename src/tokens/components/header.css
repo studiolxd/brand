@@ -3,26 +3,28 @@
  */
 
 :root {
-  --header-height-mobile: 80px; /** Alto del header en mobile (con hamburger) */
-  --header-height-desktop: 100px; /** Alto del header en desktop (nav inline) */
-  --header-logo-height-mobile: 60px; /** Alto del logo en mobile */
-  --header-logo-height-desktop: 60px; /** Alto del logo en desktop */
+  --header-height-overlay: 5rem; /** Alto del header cuando la nav es un overlay (hamburger visible) */
+  --header-height-inline: 6.25rem; /** Alto del header cuando la nav está en línea */
+  --header-logo-height-overlay: 3.75rem; /** Alto del logo en modo overlay */
+  --header-logo-height-inline: 3.75rem; /** Alto del logo en modo inline */
   --header-z-index: 1000; /** Z-index del header */
   --header-controls-z-index: 1001; /** Z-index del logo y hamburger (sobre el backdrop) */
   --header-navbar-z-index: 998; /** Z-index del overlay de navegación */
   --header-backdrop-z-index: 999; /** Z-index del pseudo-elemento backdrop */
-  --header-nav-gap-mobile: 0; /** Separación entre enlaces en mobile */
+  --header-nav-gap-overlay: 0; /** Separación entre enlaces en modo overlay */
   --header-featured-border-color: currentColor; /** Color del borde del featured link */
   --header-shadow: var(--shadow-lg); /** Sombra del header */
   --header-navbar-transition-duration: var(--motion-duration-base); /** Duración del slide de la navbar */
   --header-navbar-transition-easing: var(--motion-easing-in-out); /** Easing del slide de la navbar */
-  --header-nav-font-size-mobile: var(--font-size-6); /** Tamaño de fuente de los enlaces en mobile */
-  --header-nav-font-size-desktop: var(--font-size-2); /** Tamaño de fuente de los enlaces en desktop */
-  --header-nav-font-weight-mobile: var(--font-weight-semibold); /** Peso de fuente de los enlaces en mobile */
-  --header-nav-font-weight-desktop: var(--font-weight-medium); /** Peso de fuente de los enlaces en desktop */
-  --header-nav-padding-block-mobile: var(--spacing-3); /** Padding vertical de la zona de nav en mobile */
-  --header-nav-gap-desktop: var(--spacing-6); /** Separación entre enlaces en desktop */
+  --header-nav-font-size-overlay: var(--font-size-6); /** Tamaño de fuente de los enlaces en modo overlay */
+  --header-nav-font-size-inline: var(--font-size-2); /** Tamaño de fuente de los enlaces en modo inline */
+  --header-nav-font-weight-overlay: var(--font-weight-semibold); /** Peso de fuente de los enlaces en modo overlay */
+  --header-nav-font-weight-inline: var(--font-weight-medium); /** Peso de fuente de los enlaces en modo inline */
+  --header-nav-gap-inline: var(--spacing-6); /** Separación entre enlaces en modo inline */
+  --header-nav-padding-block-overlay: var(--spacing-3); /** Padding vertical de la zona de nav en modo overlay */
   --header-nav-padding-inline: var(--spacing-6); /** Padding horizontal del header y la navbar */
+  --header-actions-gap-overlay: var(--spacing-3); /** Separación entre los elementos de actions en modo overlay */
+  --header-actions-gap-inline: var(--spacing-3); /** Separación entre los elementos de actions en modo inline */
   --header-featured-border-width: var(--border-width-sm); /** Grosor del borde del featured link */
   --header-featured-font-size: var(--font-size-5); /** Tamaño de fuente del featured link */
   --header-featured-font-weight: var(--font-weight-semibold); /** Peso de fuente del featured link */

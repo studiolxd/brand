@@ -1,9 +1,12 @@
 /* ─── Section ────────────────────────────────────────────── */
 .reviews-section {
-  padding-block: var(--spacing-7);
-  border-block-start: var(--border-width-sm) solid currentColor;
+  padding-block: var(--section-padding-block-xl);
   background-color: var(--color-background-dark);
   color: var(--color-text-dark);
+}
+
+.reviews-section > .heading {
+  padding-inline: var(--section-padding-inline);
 }
 
 .reviews-section .carousel {
@@ -32,7 +35,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
-  padding: var(--spacing-5);
+  padding-block: var(--spacing-5);
+  padding-inline: var(--spacing-5);
   height: 100%;
 }
 
@@ -42,7 +46,8 @@
 }
 
 .review-card__quote {
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
 }
 
 .review-card__footer {

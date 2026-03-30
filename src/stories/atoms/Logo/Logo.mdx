@@ -1,21 +1,16 @@
-import { Meta, Story, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as LogoStories from "./Logo.stories";
 
 <Meta of={LogoStories} />
 
 # Logotipo
 
-El logotipo SVG hereda el color del contexto mediante `currentColor`.
+El logotipo SVG hereda el color del contexto mediante `currentColor`. Sobre fondo oscuro adapta el color automáticamente cuando está dentro de un contenedor `.surface-dark`. La prop `dark` aplica directamente la variante clara cuando no hay contexto de superficie disponible.
 
 <Canvas of={LogoStories.Default} />
-
-## Dark
-
-<Canvas of={LogoStories.Dark} />
 
 ---
 
 ## Props
 
 <ArgTypes of={LogoStories} />
-

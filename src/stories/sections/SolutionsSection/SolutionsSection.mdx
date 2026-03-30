@@ -1,0 +1,22 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SolutionsSectionStories from "./SolutionsSection.stories";
+
+<Meta of={SolutionsSectionStories} />
+
+# SolutionsSection
+
+Sección de cuadrícula que presenta las soluciones o servicios de Studio LXD. Internamente usa el átomo `Card` para cada elemento: la sección actúa como contenedor grid y delega toda la presentación del contenido a las tarjetas.
+
+En mobile los items se apilan en una sola columna. A partir de 1024 px el grid pasa a dos columnas iguales (`repeat(2, 1fr)`).
+
+La prop `aria-label` es opcional y permite añadir un nombre accesible a la sección para lectores de pantalla cuando el contexto visual no sea suficiente.
+
+## Por defecto
+
+<Canvas of={SolutionsSectionStories.Default} />
+
+---
+
+## Props
+
+<ArgTypes of={SolutionsSectionStories} />

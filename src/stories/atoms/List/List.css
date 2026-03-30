@@ -1,5 +1,6 @@
 .list {
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   font-family: var(--text-list-font-family);
   font-size: var(--text-list-font-size);
   font-weight: var(--text-list-font-weight);
@@ -20,8 +21,3 @@
   list-style-type: decimal;
 }
 
-/* Dark — contexto padre (.dark) o modificador directo (.list--dark) */
-.dark .list,
-.list.list--dark {
-  --text-list-color: var(--text-list-dark-color);
-}

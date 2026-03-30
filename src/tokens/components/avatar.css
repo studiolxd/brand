@@ -3,6 +3,6 @@
  */
 
 :root {
-  --avatar-size: 80px; /** Diámetro del avatar circular */
+  --avatar-size: 5rem; /** Diámetro del avatar circular */
   --avatar-border-radius: var(--border-radius-full); /** Radio para forma circular */
 }

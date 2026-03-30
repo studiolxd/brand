@@ -1,0 +1,60 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as VisuallyHiddenStories from "./VisuallyHidden.stories";
+
+<Meta of={VisuallyHiddenStories} />
+
+# VisuallyHidden
+
+Átomo de utilidad que oculta contenido visualmente pero lo mantiene accesible para tecnologías de asistencia como lectores de pantalla. El nodo está presente en el DOM y en el árbol de accesibilidad; simplemente no es perceptible para usuarios videntes.
+
+## Técnica CSS
+
+El componente aplica la clase `.visually-hidden` con la técnica moderna basada en `clip-path`:
+
+```css
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}
+```
+
+`clip-path: inset(50%)` es el reemplazo moderno de la propiedad obsoleta `clip: rect(0, 0, 0, 0)`. Recorta el elemento hasta un rectángulo de 0 × 0 px partiendo del 50 % de cada borde, con el mismo efecto visual pero sin depender de una sintaxis desaconsejada. `white-space: nowrap` evita que el texto de 1 px de ancho genere saltos de línea que podrían afectar al layout.
+
+## Cuándo usarlo
+
+Usar `<VisuallyHidden>` cuando hay información que necesitan los lectores de pantalla pero que no debe ser visible:
+
+- Etiquetas de CTAs que visualmente solo muestran "Ver más" pero necesitan contexto: `Ver más<VisuallyHidden> — Proyecto Randstad</VisuallyHidden>`
+- Instrucciones adicionales para elementos interactivos cuyo propósito ya queda claro visualmente
+- Unidades o aclaraciones en tablas de datos donde el contexto visual basta
+
+## Diferencia con `aria-hidden`
+
+`aria-hidden="true"` hace lo contrario: elimina el elemento del árbol de accesibilidad pero lo mantiene visible. Usar `VisuallyHidden` y `aria-hidden` son técnicas complementarias:
+
+| Técnica | Visible | Accesible (AT) |
+|---|---|---|
+| `VisuallyHidden` | No | Sí |
+| `aria-hidden="true"` | Sí | No |
+| `display: none` / `visibility: hidden` | No | No |
+
+Nunca combinar `<VisuallyHidden>` con `aria-hidden="true"` en el mismo elemento, ya que se anularían mutuamente.
+
+## Uso básico
+
+<Canvas of={VisuallyHiddenStories.Default} />
+
+## Etiqueta accesible para un CTA
+
+<Canvas of={VisuallyHiddenStories.CTALabel} />
+
+## Props
+
+<ArgTypes of={VisuallyHiddenStories} />

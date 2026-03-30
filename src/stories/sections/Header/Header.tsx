@@ -3,7 +3,7 @@ import { Logo } from '../../atoms/Logo/Logo';
 import { Hamburger } from '../../atoms/Hamburger/Hamburger';
 import './Header.css';
 
-interface NavItem {
+export interface NavItem {
   label: string;
   href: string;
 }
@@ -38,9 +38,11 @@ export function Header({
       className={[
         'header',
         dark ? 'header--dark' : '',
-        dark ? 'dark' : '',
       ].filter(Boolean).join(' ')}
     >
+      <a href="#main-content" className="header__skip-link">
+        Saltar al contenido principal
+      </a>
       <a href={logoHref} className="header__logo" aria-label={logoLabel}>
         <Logo />
       </a>

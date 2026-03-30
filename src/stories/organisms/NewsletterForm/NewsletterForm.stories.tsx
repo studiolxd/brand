@@ -71,20 +71,3 @@ export const Success: Story = {
     successMessage: '¡Gracias por suscribirte! Ya no te perderás ninguna de nuestras novedades.',
   },
 };
-
-export const Dark: Story = {
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};
-
-export const DarkWithErrors: Story = {
-  args: {
-    errors: ['El email es obligatorio.', 'Debes aceptar la política de privacidad.'],
-  },
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};

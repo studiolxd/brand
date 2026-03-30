@@ -1,0 +1,52 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FooterStories from "./Footer.stories";
+
+<Meta of={FooterStories} />
+
+# Footer
+
+Sección de pie de página del sitio. Activa la superficie oscura (`surface-dark`) de forma intrínseca — todos los componentes que contiene adaptan automáticamente sus tokens al tema oscuro sin necesitar configuración adicional.
+
+## Estructura
+
+El footer se organiza en un grid de tres columnas en desktop (>= 1024 px) y en columna única en móvil:
+
+| Columna | Contenido |
+|---------|-----------|
+| `footer__col--1` | Tagline tipográfico ("Learning / experience / design") + logotipo. Solo visible en desktop. |
+| `footer__col--2` | Formulario de newsletter (`NewsletterForm`) con su heading. |
+| `footer__col--3` | Lista de redes sociales + datos de contacto (email y teléfono). |
+| `footer__bottom` | Barra de pie con enlaces legales (aviso legal, privacidad, cookies). Abarca las tres columnas. |
+
+Los bordes internos entre celdas se consiguen mediante el `gap` del grid y el color de fondo del propio `<footer>` (que sangra por los huecos).
+
+## Clases BEM
+
+- `.footer` — contenedor raíz, también `surface-dark`
+- `.footer__col` — celda de contenido
+- `.footer__col--1` / `--2` / `--3` — modificadores de posición
+- `.footer__tagline` — titular tipográfico en columna 1
+- `.footer__logo` — contenedor del logotipo
+- `.footer__social` — lista de enlaces a redes sociales
+- `.footer__social-link` — enlace individual de red social
+- `.footer__contact` — bloque `<address>` con email y teléfono
+- `.footer__bottom` — barra inferior con legales
+- `.footer__legal` — lista de enlaces legales
+
+## Por defecto
+
+<Canvas of={FooterStories.Default} />
+
+---
+
+## Theming oscuro
+
+El footer aplica `surface-dark` directamente sobre el elemento `<footer>`. No es necesario envolver el footer en ningún contenedor adicional — el theming oscuro está incorporado de forma permanente en este componente.
+
+Todos los componentes descendientes (formularios, botones, inputs) reciben automáticamente sus variantes oscuras a través de la cascada de `.surface-dark` definida en `src/surface.css`.
+
+---
+
+## Props
+
+<ArgTypes of={FooterStories} />

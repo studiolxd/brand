@@ -22,6 +22,18 @@ const meta: Meta<typeof Chevron> = {
 export default meta;
 type Story = StoryObj<typeof Chevron>;
 
+export const Default: Story = {};
+
 export const Small: Story = { args: { size: 'sm' } };
 export const Medium: Story = { args: { size: 'md' } };
 export const Large: Story = { args: { size: 'lg' } };
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+      <Chevron size="sm" />
+      <Chevron size="md" />
+      <Chevron size="lg" />
+    </div>
+  ),
+};

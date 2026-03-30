@@ -1,12 +1,11 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$link-color: inherit; // Color — heredado del texto circundante
+$link-color: #111e30; // Color del enlace — mismo que el texto por defecto
+$link-color-hover: #111e30; // Color del enlace en hover
 $link-text-decoration: underline; // Decoración por defecto
 $link-text-decoration-hover: none; // Decoración en hover
 $link-cursor: pointer; // Cursor
-$link-dark-color: #ffffff; // Color sobre fondo oscuro
-$link-focus-ring-width: 1px; // Grosor del focus ring
+$link-focus-ring-width: 2px; // Grosor del focus ring
 $link-focus-ring-offset: 1px; // Separación entre el enlace y el focus ring
 $link-focus-ring-color: #111e30; // Color del focus ring en fondo claro
-$link-dark-focus-ring-color: #ffffff; // Color del focus ring en fondo oscuro

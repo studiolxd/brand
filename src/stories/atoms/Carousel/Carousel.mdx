@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CarouselStories from "./Carousel.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { carouselTokens } from "../../../tokens/components/carousel";
+
+<Meta of={CarouselStories} />
+
+# Carousel
+
+Carousel horizontal con scroll nativo y botones prev/next. Implementado con [Embla Carousel](https://www.embla-carousel.com/). En móvil los botones aparecen debajo del track; en tablet y desktop se superponen lateralmente con un degradado.
+
+Cada slide se envuelve en `<CarouselSlide>` para mantener el `flex-basis` correcto.
+
+## Por defecto
+
+1,5 slides en móvil, 2,5 en tablet, 3,5 en desktop. Los slides cortados indican que hay más contenido.
+
+<Canvas of={CarouselStories.Default} />
+
+## Un slide por vista
+
+Útil para carousels de pantalla completa. Se pasa `slideSize="100%"` como prop.
+
+<Canvas of={CarouselStories.OnePorView} />
+
+## Sin botones
+
+Oculta los botones prev/next cuando el scroll se controla externamente.
+
+<Canvas of={CarouselStories.HideButtons} />
+
+## Sobre fondo oscuro
+
+La prop `gradientColor` controla el color del degradado de los botones. Debe coincidir con el color de fondo del contenedor para que el efecto sea correcto.
+
+<Canvas of={CarouselStories.OnDark} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={carouselTokens} />
+
+## Props
+
+<ArgTypes of={CarouselStories} />

@@ -1,10 +1,46 @@
+/* ---- Skip link ---- */
+
+.header__skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding-block: 0;
+  padding-inline: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.header__skip-link:focus-visible {
+  position: fixed;
+  inset-block-start: var(--spacing-2);
+  inset-inline-start: var(--spacing-2);
+  width: auto;
+  height: auto;
+  padding-block: var(--spacing-2);
+  padding-inline: var(--spacing-4);
+  margin: 0;
+  overflow: visible;
+  clip-path: none;
+  white-space: nowrap;
+  z-index: 9999;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--font-size-6);
+  outline: var(--border-width-md) solid var(--color-white);
+  outline-offset: var(--spacing-1);
+}
+
 /* ---- Header ---- */
 
 .header {
   position: fixed;
   top: 0;
   width: 100%;
-  height: var(--header-height-mobile);
+  height: var(--header-height-overlay);
   background-color: var(--header-bg);
   display: flex;
   align-items: center;
@@ -20,7 +56,6 @@
   content: "";
   position: absolute;
   inset: 0;
-  margin-top: -1px;
   background-color: var(--header-bg);
   z-index: var(--header-backdrop-z-index);
   pointer-events: none;
@@ -41,11 +76,11 @@
 }
 
 .header__logo svg {
-  height: var(--header-logo-height-mobile);
+  height: var(--header-logo-height-overlay);
   width: auto;
 }
 
-/* ---- Navbar (mobile: fullscreen overlay) ---- */
+/* ---- Navbar (overlay: fullscreen panel) ---- */
 
 .header__navbar {
   position: fixed;
@@ -61,7 +96,7 @@
   transition:
     transform var(--header-navbar-transition-duration) var(--header-navbar-transition-easing),
     visibility 0s linear var(--header-navbar-transition-duration);
-  padding-block-start: var(--header-height-mobile);
+  padding-block-start: var(--header-height-overlay);
   padding-block-end: var(--header-nav-padding-inline);
 }
 
@@ -77,11 +112,11 @@
 /* ---- Featured link ---- */
 
 .header__featured {
-  font-size: var(--header-nav-font-size-mobile);
-  font-weight: var(--header-nav-font-weight-mobile);
+  font-size: var(--header-nav-font-size-overlay);
+  font-weight: var(--header-nav-font-weight-overlay);
   text-decoration: none;
   color: var(--header-nav-color);
-  padding-block: var(--header-nav-padding-block-mobile);
+  padding-block: var(--header-nav-padding-block-overlay);
   padding-inline: var(--header-nav-padding-inline);
   border-block: var(--header-featured-border-width) solid var(--header-featured-border-color);
 }
@@ -91,14 +126,14 @@
 .header__navbar nav {
   display: flex;
   flex-direction: column;
-  gap: var(--header-nav-gap-mobile);
-  padding-block: var(--header-nav-padding-block-mobile);
+  gap: var(--header-nav-gap-overlay);
+  padding-block: var(--header-nav-padding-block-overlay);
   padding-inline: var(--header-nav-padding-inline);
 }
 
 .header__nav-link {
-  font-size: var(--header-nav-font-size-mobile);
-  font-weight: var(--header-nav-font-weight-mobile);
+  font-size: var(--header-nav-font-size-overlay);
+  font-weight: var(--header-nav-font-weight-overlay);
   text-decoration: none;
   color: var(--header-nav-color);
 }
@@ -115,10 +150,10 @@
   padding-inline: var(--header-nav-padding-inline);
   display: flex;
   flex-direction: column;
-  gap: var(--header-nav-gap-mobile);
+  gap: var(--header-actions-gap-overlay);
 }
 
-/* ---- Desktop (>= 1440px) ---- */
+/* ---- Inline nav (>= 1440px) ---- */
 
 @media (min-width: 1440px) {
   .header::after {
@@ -130,11 +165,11 @@
   }
 
   .header {
-    height: var(--header-height-desktop);
+    height: var(--header-height-inline);
   }
 
   .header__logo svg {
-    height: var(--header-logo-height-desktop);
+    height: var(--header-logo-height-inline);
   }
 
   .header__navbar {
@@ -167,20 +202,21 @@
 
   .header__navbar nav {
     flex-direction: row;
-    gap: var(--header-nav-gap-desktop);
-    padding: 0;
+    gap: var(--header-nav-gap-inline);
+    padding-block: 0;
+    padding-inline: 0;
   }
 
   .header__nav-link {
-    font-size: var(--header-nav-font-size-desktop);
-    font-weight: var(--header-nav-font-weight-desktop);
+    font-size: var(--header-nav-font-size-inline);
+    font-weight: var(--header-nav-font-weight-inline);
   }
 
   .header__actions {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--header-nav-gap-desktop);
+    gap: var(--header-actions-gap-inline);
     margin-inline-start: auto;
     margin-block-start: unset;
     padding-inline: 0;

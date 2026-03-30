@@ -3,6 +3,8 @@
  */
 
 :root {
+  --carousel-btn-min-size: 4rem; /** Tamaño mínimo del área de click de los botones prev/next (tap target) */
+  --carousel-btn-vw-size: 4.167vw; /** Tamaño fluido del botón en móvil — escala con el viewport (≈1/24 vw) */
   --carousel-gap: var(--spacing-4); /** Separación entre slides */
   --carousel-btn-padding-inline: var(--spacing-5); /** Padding horizontal del botón — define el ancho del área de degradado */
   --carousel-btn-color: var(--color-primary); /** Color del chevron */

@@ -1,0 +1,34 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HighlightSectionStories from "./HighlightSection.stories";
+
+<Meta of={HighlightSectionStories} />
+
+# HighlightSection
+
+Sección de texto destacado. Muestra un párrafo de gran tamaño tipográfico con alineación configurable, pensada para llamar la atención sobre un mensaje clave.
+
+En la página Home se usa dentro del bloque `home__academy`, junto con el listado de cursos de la academia de Studio LXD. La sección ocupa el ancho completo del contenedor y deja espacio generoso arriba y abajo mediante el token `--section-padding-block-xl`.
+
+La prop `aria-label` es opcional y permite añadir un nombre accesible a la sección cuando el texto visible no sea suficientemente descriptivo para lectores de pantalla.
+
+## Por defecto
+
+Alineación `left` con el texto introductorio de la academia.
+
+<Canvas of={HighlightSectionStories.Default} />
+
+---
+
+## Tokens
+
+| Token | Valor | Descripción |
+|---|---|---|
+| `--highlight-section-max-width` | `clamp(480px, 66.666%, 860px)` | Ancho máximo del container en desktop |
+| `--highlight-section-gap` | `var(--spacing-6)` | Separación interna del container |
+| `--highlight-section-font-size` | `var(--font-size-9)` | Tamaño del texto destacado |
+| `--highlight-section-font-weight` | `var(--font-weight-semibold)` | Peso del texto destacado |
+| `--highlight-section-line-height` | `var(--line-height-tight)` | Interlineado del texto destacado |
+
+## Props
+
+<ArgTypes of={HighlightSectionStories} />

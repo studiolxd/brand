@@ -1,0 +1,48 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as InputPhoneFieldStories from "./InputPhoneField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { inputFieldErrorTokens, inputFieldHelperTokens } from "../../../tokens/molecules/input-field";
+
+<Meta of={InputPhoneFieldStories} />
+
+# InputPhoneField
+
+Molécula que combina InputPhone con texto de ayuda y mensaje de error en un bloque accesible. Hereda los tokens de error y helper de `--input-field-error-*` y `--input-field-helper-*`, igual que InputField y TextareaField.
+
+## Por defecto
+
+<Canvas of={InputPhoneFieldStories.Default} />
+
+## Con texto de ayuda
+
+<Canvas of={InputPhoneFieldStories.WithHelper} />
+
+## Con error
+
+<Canvas of={InputPhoneFieldStories.WithError} />
+
+## Deshabilitado
+
+<Canvas of={InputPhoneFieldStories.Disabled} />
+
+---
+
+## Theming oscuro
+
+El campo adapta sus tokens por cascade desde `.surface-dark`. El dropdown del selector de país es un portal Radix — se controla con la prop `dark` que aplica la clase `__country-content--dark`. Ver documentación del átomo InputPhone.
+
+---
+
+## Tokens
+
+### Error
+
+<TokenTable tokens={inputFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={inputFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={InputPhoneFieldStories} />

@@ -5,13 +5,13 @@ import './Footer.css';
 
 export function Footer() {
   return (
-    <footer className="footer dark">
+    <footer className="footer surface-dark">
       <div className="footer__col footer__col--1">
-        <h2 className="footer__tagline">
+        <Heading level={2} className="footer__tagline">
           <span>Learning</span>
           <span>experience</span>
           <span>design</span>
-        </h2>
+        </Heading>
         <div className="footer__logo">
           <Logo height={50} />
         </div>
@@ -23,10 +23,10 @@ export function Footer() {
         />
       </div>
       <div className="footer__col footer__col--3">
-        <ul>
-          <li><a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a href="#" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <ul className="footer__social">
+          <li><a className="footer__social-link" href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a className="footer__social-link" href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a className="footer__social-link" href="#" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         </ul>
         <address className="footer__contact">
           <a href="mailto:hello@studiolxd.com">hello@studiolxd.com</a>

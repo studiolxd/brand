@@ -1,7 +1,5 @@
 {
   "highlight-section": {
-    "padding-block":   { "$value": "{spacing.7}", "$type": "dimension", "$description": "Padding vertical" },
-    "padding-inline":  { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding horizontal" },
     "gap":             { "$value": "{spacing.6}", "$type": "dimension", "$description": "Separación interna del container" },
     "font-size":       { "$value": "{font-size.9}", "$type": "dimension", "$description": "Tamaño del texto destacado" },
     "font-weight":     { "$value": "{font-weight.semibold}", "$type": "number",    "$description": "Peso del texto destacado" },

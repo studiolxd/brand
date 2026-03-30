@@ -1,14 +1,14 @@
 {
   "font-size": {
-    "1":  { "$value": "14px", "$type": "dimension", "$description": "UI labels, body small" },
-    "2":  { "$value": "16px", "$type": "dimension", "$description": "Body base" },
-    "3":  { "$value": "18px", "$type": "dimension", "$description": "Body large" },
-    "4":  { "$value": "20px", "$type": "dimension", "$description": "Small subtitles" },
-    "5":  { "$value": "24px", "$type": "dimension", "$description": "Subtitles" },
-    "6":  { "$value": "28px", "$type": "dimension", "$description": "Small titles" },
-    "7":  { "$value": "32px", "$type": "dimension", "$description": "Titles" },
-    "8":  { "$value": "40px", "$type": "dimension", "$description": "Large titles" },
-    "9":  { "$value": "56px", "$type": "dimension", "$description": "Display" },
-    "10": { "$value": "72px", "$type": "dimension", "$description": "Large display" }
+    "1":  { "$value": "0.875rem", "$type": "dimension", "$description": "0.875rem (14px) — UI labels, body small" },
+    "2":  { "$value": "1rem",     "$type": "dimension", "$description": "1rem (16px) — Body base" },
+    "3":  { "$value": "1.125rem", "$type": "dimension", "$description": "1.125rem (18px) — Body large" },
+    "4":  { "$value": "1.25rem",  "$type": "dimension", "$description": "1.25rem (20px) — Small subtitles" },
+    "5":  { "$value": "1.5rem",   "$type": "dimension", "$description": "1.5rem (24px) — Subtitles" },
+    "6":  { "$value": "1.75rem",  "$type": "dimension", "$description": "1.75rem (28px) — Small titles" },
+    "7":  { "$value": "2rem",     "$type": "dimension", "$description": "2rem (32px) — Titles" },
+    "8":  { "$value": "2.5rem",   "$type": "dimension", "$description": "2.5rem (40px) — Large titles" },
+    "9":  { "$value": "3.5rem",   "$type": "dimension", "$description": "3.5rem (56px) — Display" },
+    "10": { "$value": "4.5rem",   "$type": "dimension", "$description": "4.5rem (72px) — Large display" }
   }
 }

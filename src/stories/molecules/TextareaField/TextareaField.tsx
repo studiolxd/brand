@@ -62,7 +62,7 @@ export function TextareaField({
         onFocus={onFocus}
       />
       {errorMessage && (
-        <span id={errorId} className="textarea-field__error">{errorMessage}</span>
+        <span id={errorId} className="textarea-field__error" role="alert">{errorMessage}</span>
       )}
       {helperText && (
         <span id={helperId} className="textarea-field__helper">{helperText}</span>

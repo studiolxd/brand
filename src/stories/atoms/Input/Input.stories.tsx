@@ -48,7 +48,7 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-  name: 'Por defecto',
+  name: 'Default',
 };
 
 export const Error: Story = {
@@ -57,27 +57,27 @@ export const Error: Story = {
 };
 
 export const Disabled: Story = {
-  name: 'Deshabilitado',
+  name: 'Disabled',
   args: { disabled: true },
 };
 
 export const ReadOnly: Story = {
-  name: 'Solo lectura',
+  name: 'Read only',
   args: { readOnly: true, value: 'Valor de solo lectura' },
 };
 
 export const Small: Story = {
-  name: 'Pequeño',
+  name: 'Small',
   args: { size: 'sm' },
 };
 
 export const Large: Story = {
-  name: 'Grande',
+  name: 'Large',
   args: { size: 'lg' },
 };
 
 export const Sizes: Story = {
-  name: 'Tamaños',
+  name: 'Sizes',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Input placeholder="Small" size="sm" />
@@ -87,10 +87,8 @@ export const Sizes: Story = {
   ),
 };
 
-export const Dark: Story = {
-  name: 'Oscuro',
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
+/** Navega con Tab hasta el input para verificar el focus ring */
+export const FocusVisible: Story = {
+  name: 'Focus visible',
+  parameters: { pseudo: { focusVisible: true } },
 };

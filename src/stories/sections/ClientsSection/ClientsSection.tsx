@@ -1,5 +1,6 @@
 import AutoScroll from 'embla-carousel-auto-scroll';
 import { Carousel, CarouselSlide } from '../../atoms/Carousel/Carousel';
+import { Heading } from '../../atoms/Heading/Heading';
 import './ClientsSection.css';
 
 interface Client {
@@ -21,7 +22,7 @@ interface ClientsSectionProps {
 export function ClientsSection({ title = 'Hemos trabajado junto a...', clients }: ClientsSectionProps) {
   return (
     <section className="clients-section">
-      <h2>{title}</h2>
+      <Heading level={2}>{title}</Heading>
       <Carousel
         options={{ align: 'start' }}
         plugins={[AutoScroll({ speed: 1, stopOnInteraction: false })]}

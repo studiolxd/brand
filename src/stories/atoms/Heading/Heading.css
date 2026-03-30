@@ -1,5 +1,6 @@
 .heading {
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
 }
 
 .heading.heading--1 {
@@ -56,13 +57,3 @@
   letter-spacing: var(--text-h6-letter-spacing);
 }
 
-/* Dark — contexto padre (.dark) o modificador directo (.heading--dark) */
-.dark .heading,
-.heading.heading--dark {
-  --text-h1-color: var(--text-heading-dark-color);
-  --text-h2-color: var(--text-heading-dark-color);
-  --text-h3-color: var(--text-heading-dark-color);
-  --text-h4-color: var(--text-heading-dark-color);
-  --text-h5-color: var(--text-heading-dark-color);
-  --text-h6-color: var(--text-heading-dark-color);
-}

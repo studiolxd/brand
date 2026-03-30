@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as CheckboxFieldStories from "./CheckboxField.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { checkboxFieldBaseTokens, checkboxFieldDarkTokens } from "../../../tokens/molecules/checkbox-field";
+import { checkboxFieldBaseTokens } from "../../../tokens/molecules/checkbox-field";
 
 <Meta of={CheckboxFieldStories} />
 
@@ -25,25 +25,23 @@ Molécula que combina un checkbox con su texto asociado. El label no lleva mayú
 
 <Canvas of={CheckboxFieldStories.DisabledChecked} />
 
-## Oscuro
+## Con enlace
 
-<Canvas of={CheckboxFieldStories.Dark} className="bg-dark" />
+El prop `label` acepta `React.ReactNode`, por lo que puede incluir un `<Link>` para casos como la aceptación de política de privacidad. Los estilos del enlace se garantizan desde la propia molécula.
 
-## Oscuro y marcado
-
-<Canvas of={CheckboxFieldStories.DarkChecked} className="bg-dark" />
+<Canvas of={CheckboxFieldStories.WithLink} />
 
 ---
+
+## Theming oscuro
+
+En modo oscuro, el color del label se reasigna automáticamente vía la clase `.surface-dark` definida en `surface.css`. No requiere prop adicional — basta con que un ancestro tenga `.surface-dark`.
 
 ## Tokens
 
 ### Base
 
 <TokenTable tokens={checkboxFieldBaseTokens} />
-
-### Oscuro
-
-<TokenTable tokens={checkboxFieldDarkTokens} />
 
 ## Props
 

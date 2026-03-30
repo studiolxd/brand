@@ -17,10 +17,15 @@ const meta: Meta<typeof Logo> = {
       control: { type: 'number' },
       description: 'Ancho del logotipo en píxeles. Si no se define, se ajusta a la altura.',
     },
+    dark: {
+      control: { type: 'boolean' },
+      description: 'Versión clara para fondos oscuros. Aplica .logo--dark. En contextos con .surface-dark el color se hereda automáticamente por cascade.',
+    },
     className: { table: { disable: true } },
   },
   args: {
     height: 100,
+    dark: false,
   },
 };
 
@@ -31,16 +36,6 @@ export const Default: Story = {
   decorators: [
     (Story) => (
       <div className="logo-preview">
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-export const Dark: Story = {
-  decorators: [
-    (Story) => (
-      <div className="logo-preview logo-preview--dark">
         <Story />
       </div>
     ),

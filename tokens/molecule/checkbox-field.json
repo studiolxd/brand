@@ -3,6 +3,7 @@
     "gap":              { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Separación entre el checkbox y el texto" },
     "padding-inline":   { "$value": "{control.padding-inline}", "$type": "dimension", "$description": "Padding inline — hereda de control" },
     "padding-block":    { "$value": "{control.padding-block}",  "$type": "dimension", "$description": "Padding block — hereda de control" },
+    "checkbox-offset":  { "$value": "3px",                      "$type": "dimension", "$description": "Desplazamiento vertical del checkbox para alinearlo con la primera línea de texto" },
     "cursor":           { "$value": "pointer",                  "$type": "string",    "$description": "Cursor" },
     "disabled-cursor":  { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
     "label": {
@@ -12,8 +13,7 @@
       "line-height":    { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado" },
       "color":          { "$value": "{color.text.default}",     "$type": "color",     "$description": "Color del texto" },
       "letter-spacing": { "$value": "{letter-spacing.normal}",  "$type": "dimension", "$description": "Interletraje — anula la herencia del label base" },
-      "text-transform": { "$value": "none",                     "$type": "string",    "$description": "Sin transformación — anula la herencia del label base" },
-      "dark-color":     { "$value": "{color.text.dark}",        "$type": "color",     "$description": "Color del texto sobre fondo oscuro" }
+      "text-transform": { "$value": "none",                     "$type": "string",    "$description": "Sin transformación — anula la herencia del label base" }
     }
   }
 }

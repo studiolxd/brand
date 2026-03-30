@@ -62,7 +62,7 @@ export function InputField({
         onFocus={onFocus}
       />
       {errorMessage && (
-        <span id={errorId} className="input-field__error">{errorMessage}</span>
+        <span id={errorId} className="input-field__error" role="alert">{errorMessage}</span>
       )}
       {helperText && (
         <span id={helperId} className="input-field__helper">{helperText}</span>

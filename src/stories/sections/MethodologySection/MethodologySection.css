@@ -6,7 +6,7 @@
   background-color: var(--color-background-dark);
 }
 
-.dark .methodology-section {
+.surface-dark .methodology-section {
   background-color: var(--color-white);
 }
 
@@ -15,12 +15,12 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--spacing-6);
-  padding-block: var(--spacing-6);
-  padding-inline: var(--spacing-4);
+  padding-block: var(--section-padding-block-lg);
+  padding-inline: var(--section-padding-inline);
   background-color: var(--color-background-default);
 }
 
-.dark .methodology-section .methodology-section__intro {
+.surface-dark .methodology-section .methodology-section__intro {
   background-color: var(--color-background-dark);
 }
 
@@ -38,7 +38,7 @@
   background-color: var(--color-background-dark);
 }
 
-.dark .methodology-section .methodology-section__steps {
+.surface-dark .methodology-section .methodology-section__steps {
   background-color: var(--color-white);
 }
 
@@ -50,7 +50,7 @@
   background-color: var(--color-background-dark);
 }
 
-.dark .methodology-section .methodology-section__step {
+.surface-dark .methodology-section .methodology-section__step {
   background-color: var(--color-white);
 }
 
@@ -59,36 +59,29 @@
   background-color: var(--color-background-default);
 }
 
-.dark .methodology-section .methodology-section__number,
-.dark .methodology-section .methodology-section__text {
+.surface-dark .methodology-section .methodology-section__number,
+.surface-dark .methodology-section .methodology-section__text {
   background-color: var(--color-background-dark);
 }
 
 .methodology-section__number {
-  padding: var(--spacing-4);
+  padding-block: var(--section-padding-block-md);
+  padding-inline: var(--section-padding-inline);
   font-size: var(--font-size-10);
-  font-weight: 10;
+  font-weight: var(--font-weight-thin);
   line-height: var(--line-height-none);
   color: var(--color-primary);
   aspect-ratio: 1;
 }
 
-.dark .methodology-section .methodology-section__number {
+.surface-dark .methodology-section .methodology-section__number {
   color: var(--color-secondary);
 }
 
-.dark .methodology-section .button--primary {
-  --button-primary-bg: var(--button-primary-dark-bg);
-  --button-primary-color: var(--button-primary-dark-color);
-  --button-primary-border: var(--button-primary-dark-border);
-  --button-primary-hover-bg: var(--button-primary-dark-hover-bg);
-  --button-primary-hover-color: var(--button-primary-dark-hover-color);
-  --button-primary-hover-border: var(--button-primary-dark-hover-border);
-  --button-primary-focus-ring-color: var(--button-primary-dark-focus-ring-color);
-}
 
 .methodology-section__text {
-  padding: var(--spacing-4);
+  padding-block: var(--section-padding-block-md);
+  padding-inline: var(--section-padding-inline);
 }
 
 /* ---- md (>= 768px) ---- */

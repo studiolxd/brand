@@ -5,10 +5,10 @@ $input-border-radius: 0px; // Border radius
 $input-border-width: 1px; // Border width
 $input-border-style: solid; // Border style
 $input-width: 100%; // Inputs are always full width
-$input-padding-block: 16px; // Block (vertical) padding
-$input-padding-inline: 16px; // Inline (horizontal) padding
+$input-padding-block: 1rem; // Block (vertical) padding
+$input-padding-inline: 1rem; // Inline (horizontal) padding
 $input-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$input-font-size: 18px; // Font size
+$input-font-size: 1.125rem; // Font size
 $input-font-weight: 300; // Font weight
 $input-line-height: 1; // Line height
 $input-cursor: text; // Cursor
@@ -20,14 +20,13 @@ $input-border-color: #111e30; // Border color
 $input-placeholder-color: #767676; // Placeholder text color
 $input-placeholder-text-transform: uppercase; // Placeholder text transform
 $input-focus-border-color: #111e30; // Border color on focus
-$input-focus-ring-width: 1px; // Focus ring width — 1px so border + ring = 2px visual
+$input-focus-ring-width: 2px; // Focus ring width
 $input-focus-ring-inset-offset: 1px; // Gap between border and focus ring
 $input-focus-ring-color: #111e30; // Focus ring color
-$input-disabled-opacity: 0.4; // Opacity when disabled
 $input-disabled-cursor: not-allowed; // Cursor when disabled
 $input-disabled-bg: #f2f2f2; // Background when disabled
 $input-disabled-color: #4a4a4a; // Text color when disabled
-$input-disabled-border-color: #111e30; // Border color when disabled
+$input-disabled-border-color: #d0d0d0; // Border color when disabled
 $input-error-bg: #ffffff; // Error background
 $input-error-color: #111e30; // Error text color
 $input-error-border-color: #111e30; // Error border color
@@ -35,22 +34,9 @@ $input-error-placeholder-color: #767676; // Error placeholder color
 $input-error-placeholder-text-transform: uppercase; // Error placeholder text transform
 $input-error-focus-border-color: #111e30; // Error border color on focus
 $input-error-focus-ring-color: #b30000; // Error focus ring color
-$input-sm-padding-block: 8px; // Block padding — sm
-$input-sm-padding-inline: 12px; // Inline padding — sm
-$input-sm-font-size: 14px; // Font size — sm
-$input-lg-padding-block: 24px; // Block padding — lg
-$input-lg-padding-inline: 24px; // Inline padding — lg
-$input-lg-font-size: 20px; // Font size — lg
-$input-dark-bg: #111e30; // Background on dark surface
-$input-dark-color: #ffffff; // Text color on dark surface
-$input-dark-border-color: #ffffff; // Border color on dark background
-$input-dark-placeholder-color: #d0d0d0; // Placeholder color on dark background
-$input-dark-focus-border-color: #ffffff; // Border color on focus on dark background
-$input-dark-focus-ring-color: #ffffff; // Focus ring color on dark background
-$input-dark-error-focus-ring-color: #ff8585; // Error focus ring color on dark background
-$input-dark-error-bg: #111e30; // Background in error state on dark surface
-$input-dark-error-border-color: #ffffff; // Border color in error state on dark background
-$input-dark-error-placeholder-color: #d0d0d0; // Placeholder color in error state on dark background
-$input-dark-disabled-bg: #111e30; // Background when disabled on dark surface
-$input-dark-disabled-color: #d0d0d0; // Text color when disabled on dark surface
-$input-dark-disabled-border-color: #d0d0d0; // Border color when disabled on dark surface
+$input-sm-padding-block: 0.5rem; // Block padding — sm
+$input-sm-padding-inline: 0.75rem; // Inline padding — sm
+$input-sm-font-size: 0.875rem; // Font size — sm
+$input-lg-padding-block: 1.5rem; // Block padding — lg
+$input-lg-padding-inline: 1.5rem; // Inline padding — lg
+$input-lg-font-size: 1.25rem; // Font size — lg

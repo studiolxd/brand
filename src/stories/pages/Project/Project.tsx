@@ -1,6 +1,10 @@
 import { Header } from '../../sections/Header/Header';
+import type { NavItem } from '../../sections/Header/Header';
 import { Footer } from '../../sections/Footer/Footer';
+import { Button } from '../../atoms/Button/Button';
+import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
+import { DEFAULT_NAV_ITEMS, DEFAULT_FEATURED_LINK } from '../../constants/navigation';
 import './Project.css';
 
 type TagVariant = 'default' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
@@ -25,17 +29,11 @@ interface ProjectProps {
   description: string;
   /** Secciones de contenido. */
   sections: ProjectSection[];
+  /** Elementos de navegación. */
+  navItems?: NavItem[];
+  /** Enlace destacado del header. */
+  featuredLink?: NavItem;
 }
-
-const navItems = [
-  { label: 'Inicio', href: '#' },
-  { label: 'Soluciones', href: '#' },
-  { label: 'Proyectos', href: '#' },
-  { label: 'Academia', href: '#' },
-  { label: 'Contacto', href: '#' },
-];
-
-const featuredLink = { label: 'Cursos online', href: '#' };
 
 export function Project({
   category,
@@ -45,6 +43,8 @@ export function Project({
   title,
   description,
   sections,
+  navItems = DEFAULT_NAV_ITEMS,
+  featuredLink = DEFAULT_FEATURED_LINK,
 }: ProjectProps) {
   return (
     <div className="project-page">
@@ -52,26 +52,28 @@ export function Project({
         navItems={navItems}
         featuredLink={featuredLink}
         actions={
-          <a href="https://academy.studiolxd.com" className="btn btn-primary">
+          <Button href="https://academy.studiolxd.com" variant="primary" external>
             Entra a la academia
-          </a>
+          </Button>
         }
       />
-      <main className="project-page__main">
+      <main id="main-content" className="project-page__main">
         <div className="project-page__body">
           <article className="project-detail">
             <Tag variant={tagVariant}>{category}</Tag>
-            <h1 className="project-detail__title">{title}</h1>
+            <Heading level={1} className="project-detail__title">{title}</Heading>
             <p className="project-detail__intro">{description}</p>
             <img
               src={photo}
               alt={photoAlt ?? title}
               className="project-detail__photo"
+              width={1200}
+              height={800}
             />
             <div className="project-detail__content">
               {sections.map((section) => (
                 <section key={section.title} className="project-detail__section">
-                  <h2 className="project-detail__section-title">{section.title}</h2>
+                  <Heading level={2} className="project-detail__section-title">{section.title}</Heading>
                   <p className="project-detail__section-body">{section.body}</p>
                 </section>
               ))}

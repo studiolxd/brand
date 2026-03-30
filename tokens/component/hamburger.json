@@ -1,15 +1,15 @@
 {
   "hamburger": {
-    "width":                  { "$value": "33px",                              "$type": "dimension", "$description": "Ancho del botón hamburger" },
-    "height":                 { "$value": "24px",                              "$type": "dimension", "$description": "Alto del botón hamburger" },
-    "bar-height":             { "$value": "4px",                               "$type": "dimension", "$description": "Alto de cada barra" },
+    "width":                  { "$value": "2.0625rem",                         "$type": "dimension", "$description": "Ancho del botón hamburger" },
+    "height":                 { "$value": "1.5rem",                            "$type": "dimension", "$description": "Alto del botón hamburger" },
+    "bar-height":             { "$value": "{spacing.1}",                       "$type": "dimension", "$description": "Alto de cada barra" },
     "bar-color":              { "$value": "{color.text.default}",              "$type": "color",     "$description": "Color de las barras" },
-    "bar-dark-color":         { "$value": "{color.text.dark}",                 "$type": "color",     "$description": "Color de las barras sobre fondo oscuro" },
     "transition-duration":    { "$value": "{motion.duration.slow}",            "$type": "number",    "$description": "Duración de la animación de las barras" },
     "transition-easing":      { "$value": "cubic-bezier(0.77, 0.2, 0.05, 1)", "$type": "string",    "$description": "Easing de la animación de las barras" },
     "opacity-duration":       { "$value": "{motion.duration.base}",            "$type": "number",    "$description": "Duración de la transición de opacidad" },
     "opacity-easing":         { "$value": "{motion.easing.default}",           "$type": "string",    "$description": "Easing de la transición de opacidad" },
     "focus-ring-width":       { "$value": "{border-width.md}",                 "$type": "dimension", "$description": "Grosor del focus ring" },
-    "focus-ring-color":       { "$value": "{color.primary}",                   "$type": "color",     "$description": "Color del focus ring" }
+    "focus-ring-color":       { "$value": "{color.primary}",                   "$type": "color",     "$description": "Color del focus ring" },
+    "bar-translate-y":        { "$value": "0.625rem",                          "$type": "dimension", "$description": "Desplazamiento vertical de las barras al abrir (animación X)" }
   }
 }

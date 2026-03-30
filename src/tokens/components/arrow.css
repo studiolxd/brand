@@ -1,0 +1,10 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --arrow-width-default: max(3.125vw, 48px); /** Ancho por defecto (equivalente a md) */
+  --arrow-width-sm: max(1.5625vw, 24px); /** Ancho tamaño pequeño */
+  --arrow-width-md: max(3.125vw, 48px); /** Ancho tamaño mediano */
+  --arrow-width-lg: clamp(72px, 9.375vw, 144px); /** Ancho tamaño grande (fluido con límite) */
+}

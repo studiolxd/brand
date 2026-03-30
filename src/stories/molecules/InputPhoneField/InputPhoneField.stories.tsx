@@ -14,6 +14,7 @@ const meta: Meta<typeof InputPhoneField> = {
   },
   args: {
     id:           'phone',
+    label:        'Teléfono',
     defaultCountry: 'ES',
     placeholder:  'Escribe tu número de teléfono',
     disabled:     false,
@@ -37,9 +38,4 @@ export const WithError: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true },
-};
-
-export const Dark: Story = {
-  args: { dark: true },
-  globals: { backgrounds: { value: 'dark' } },
 };

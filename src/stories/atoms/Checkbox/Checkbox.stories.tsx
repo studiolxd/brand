@@ -10,7 +10,7 @@ const meta: Meta<typeof Checkbox> = {
   argTypes: {
     checked: {
       control: { type: 'boolean' },
-      description: 'Estado controlado — marcado o no marcado.',
+      description: 'Estado controlado — marcado, desmarcado o indeterminado.',
     },
     defaultChecked: {
       control: { type: 'boolean' },
@@ -19,6 +19,9 @@ const meta: Meta<typeof Checkbox> = {
     disabled: {
       control: { type: 'boolean' },
       description: 'Deshabilita el checkbox.',
+    },
+    onCheckedChange: {
+      description: 'Callback al cambiar el estado. Recibe `true`, `false` o `"indeterminate"`.',
     },
   },
   args: {
@@ -31,37 +34,31 @@ export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {
-  name: 'Sin marcar',
+  name: 'Unchecked',
 };
 
 export const Checked: Story = {
-  name: 'Marcado',
+  name: 'Checked',
   args: { defaultChecked: true },
 };
 
+export const Indeterminate: Story = {
+  name: 'Indeterminate',
+  args: { checked: 'indeterminate' },
+};
+
 export const Disabled: Story = {
-  name: 'Deshabilitado',
+  name: 'Disabled',
   args: { disabled: true },
 };
 
 export const DisabledChecked: Story = {
-  name: 'Deshabilitado y marcado',
+  name: 'Disabled checked',
   args: { disabled: true, defaultChecked: true },
 };
 
-export const Dark: Story = {
-  name: 'Oscuro',
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};
-
-export const DarkChecked: Story = {
-  name: 'Oscuro y marcado',
-  args: { defaultChecked: true },
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
+/** Navega con Tab hasta el checkbox para verificar el focus ring */
+export const FocusVisible: Story = {
+  name: 'Focus visible',
+  parameters: { pseudo: { focusVisible: true } },
 };

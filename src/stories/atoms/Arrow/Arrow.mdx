@@ -1,0 +1,30 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ArrowStories from "./Arrow.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { arrowTokens } from "../../../tokens/components/arrow";
+
+<Meta of={ArrowStories} />
+
+# Flecha
+
+Icono SVG decorativo con forma de flecha horizontal (→). Se usa como indicador de dirección o acción en botones, enlaces y carruseles. Siempre se renderiza con `aria-hidden="true"` para no ser anunciado por lectores de pantalla.
+
+## Por defecto
+
+<Canvas of={ArrowStories.Default} />
+
+## Tamaños
+
+Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El ancho se controla mediante tokens CSS.
+
+<Canvas of={ArrowStories.Sizes} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={arrowTokens} />
+
+## Props
+
+<ArgTypes of={ArrowStories} />

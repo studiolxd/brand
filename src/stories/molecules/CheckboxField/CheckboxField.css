@@ -4,11 +4,11 @@
   gap: var(--checkbox-field-gap);
   padding-inline: var(--checkbox-field-padding-inline);
   padding-block: var(--checkbox-field-padding-block);
-cursor: var(--checkbox-field-cursor);
+  cursor: var(--checkbox-field-cursor);
 }
 
 .checkbox-field .checkbox {
-  margin-block-start: 5px;
+  margin-block-start: var(--checkbox-field-checkbox-offset);
 }
 
 .checkbox-field__label {
@@ -21,13 +21,25 @@ cursor: var(--checkbox-field-cursor);
   text-transform: var(--checkbox-field-label-text-transform);
 }
 
+/* Links dentro del label — especificidad 0,1,1 gana sobre el a {} global */
+.checkbox-field__label a {
+  color: var(--link-color);
+  text-decoration: var(--link-text-decoration);
+  cursor: var(--link-cursor);
+}
+
+.checkbox-field__label a:hover {
+  color: var(--link-color-hover);
+  text-decoration: var(--link-text-decoration-hover);
+}
+
+.checkbox-field__label a:focus-visible {
+  outline: var(--link-focus-ring-width) solid var(--link-focus-ring-color);
+  outline-offset: var(--link-focus-ring-offset);
+}
+
 /* Doble clase para ganar especificidad */
 .checkbox-field.checkbox-field--disabled {
   cursor: var(--checkbox-field-disabled-cursor);
 }
 
-/* Dark — contexto padre (.dark) o modificador directo (.checkbox-field--dark) */
-.dark .checkbox-field,
-.checkbox-field.checkbox-field--dark {
-  --checkbox-field-label-color: var(--checkbox-field-label-dark-color);
-}

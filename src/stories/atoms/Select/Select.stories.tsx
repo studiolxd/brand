@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Select } from './Select';
 
@@ -17,7 +18,10 @@ const meta: Meta<typeof Select> = {
   argTypes: {
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
-    dark: { table: { disable: true } },
+    dark: {
+      control: { type: 'boolean' },
+      description: 'Aplica estilos oscuros al dropdown (portal Radix fuera del árbol DOM — no hereda `.surface-dark` por cascade).',
+    },
   },
   args: {
     options,
@@ -30,6 +34,22 @@ type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {};
 
+/** Uso controlado con onValueChange — el valor seleccionado se muestra debajo */
+export const Controlled: Story = {
+  name: 'Controlled (onValueChange)',
+  render: () => {
+    const [value, setValue] = useState('');
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <Select options={options} placeholder="Seleccionar…" value={value} onValueChange={setValue} />
+        <p style={{ margin: 0, fontSize: '0.875rem' }}>
+          Valor: <strong>{value || '(ninguno)'}</strong>
+        </p>
+      </div>
+    );
+  },
+};
+
 export const WithValue: Story = {
   args: { defaultValue: 'es' },
 };
@@ -38,20 +58,8 @@ export const Disabled: Story = {
   args: { disabled: true, defaultValue: 'es' },
 };
 
-export const Dark: Story = {
-  name: 'Oscuro',
-  args: { defaultValue: 'es' },
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};
-
-export const DarkDisabled: Story = {
-  name: 'Oscuro deshabilitado',
-  args: { disabled: true, defaultValue: 'es' },
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
+/** Navega con Tab hasta el select para verificar el focus ring */
+export const FocusVisible: Story = {
+  name: 'Focus visible',
+  parameters: { pseudo: { focusVisible: true } },
 };

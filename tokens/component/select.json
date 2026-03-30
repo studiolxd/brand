@@ -11,9 +11,9 @@
     "font-weight":            { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Peso tipográfico" },
     "color":                  { "$value": "{color.text.default}",        "$type": "color",     "$description": "Color del texto" },
     "bg":                     { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del trigger" },
-    "icon-size":              { "$value": "10px",                        "$type": "dimension", "$description": "Tamaño del chevron" },
+    "icon-size":              { "$value": "0.625rem",                    "$type": "dimension", "$description": "Tamaño del chevron" },
     "icon-transition":        { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de la transición del icono" },
-    "focus-ring-width":       { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-width":       { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Grosor del anillo de foco" },
     "focus-ring-offset":      { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del anillo de foco" },
     "focus-ring-color":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
     "content-bg":             { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del dropdown" },
@@ -21,16 +21,6 @@
     "content-z-index":        { "$value": "1100",                        "$type": "number",    "$description": "Z-index del dropdown (por encima del header: 1001)" },
     "item-padding-block":     { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding block de cada opción" },
     "item-highlighted-bg":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo de opción resaltada" },
-    "item-highlighted-color": { "$value": "{color.white}",               "$type": "color",     "$description": "Texto de opción resaltada" },
-    "dark-bg":                { "$value": "{color.background.dark}",    "$type": "color",     "$description": "Fondo del trigger en dark" },
-    "dark-color":             { "$value": "{color.text.dark}",          "$type": "color",     "$description": "Color del texto en dark" },
-    "dark-border-color":      { "$value": "{color.text.dark}",          "$type": "color",     "$description": "Color del borde en dark" },
-    "dark-focus-ring-color":  { "$value": "{color.text.dark}",          "$type": "color",     "$description": "Color del anillo de foco en dark" },
-    "dark-content-bg":        { "$value": "{color.background.dark}",    "$type": "color",     "$description": "Fondo del dropdown en dark" },
-    "dark-content-border-color": { "$value": "{color.text.dark}",       "$type": "color",     "$description": "Borde del dropdown en dark" },
-    "dark-item-highlighted-bg":  { "$value": "{color.text.dark}",       "$type": "color",     "$description": "Fondo de opción resaltada en dark" },
-    "dark-item-highlighted-color": { "$value": "{color.background.dark}", "$type": "color",   "$description": "Texto de opción resaltada en dark" },
-    "dark-disabled-color":        { "$value": "{color.grey-light}",      "$type": "color",   "$description": "Color del texto deshabilitado en dark" },
-    "dark-disabled-border-color": { "$value": "{color.grey-light}",      "$type": "color",   "$description": "Color del borde deshabilitado en dark" }
+    "item-highlighted-color": { "$value": "{color.white}",               "$type": "color",     "$description": "Texto de opción resaltada" }
   }
 }

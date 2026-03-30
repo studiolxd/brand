@@ -5,10 +5,6 @@
 }
 
 
-.input-field.input-field--dark {
-  --input-field-error-color: var(--form-error-dark-color);
-  --input-field-helper-color: var(--form-helper-dark-color);
-}
 
 
 .input-field__error {

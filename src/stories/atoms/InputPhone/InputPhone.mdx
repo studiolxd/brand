@@ -1,0 +1,58 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as InputPhoneStories from "./InputPhone.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { inputPhoneTokens } from "../../../tokens/components/input-phone";
+
+<Meta of={InputPhoneStories} />
+
+# InputPhone
+
+Campo de teléfono con selector de país integrado. Internamente combina [react-phone-number-input](https://www.npmjs.com/package/react-phone-number-input) para la normalización E.164 y Radix para el selector desplegable de país.
+
+El valor se normaliza siempre al formato E.164 (p. ej. `+34612345678`).
+
+## Por defecto
+
+País inicial España (`defaultCountry="ES"`).
+
+<Canvas of={InputPhoneStories.Default} />
+
+## Error
+
+<Canvas of={InputPhoneStories.Error} />
+
+## Deshabilitado
+
+<Canvas of={InputPhoneStories.Disabled} />
+
+---
+
+## Theming oscuro
+
+El campo hereda los tokens de `.surface-dark` por cascade normal. El dropdown del selector de país se renderiza en un **portal Radix** fuera del árbol DOM. Para que también adopte el tema oscuro hay que pasar `dark` manualmente.
+
+## Focus visible
+
+El focus ring se aplica al contenedor completo (selector de país + campo numérico) al navegar con teclado.
+
+<Canvas of={InputPhoneStories.FocusVisible} />
+
+---
+
+## Accesibilidad
+
+| Prop | Propósito |
+|------|-----------|
+| `id` | Asocia el campo con un `<label htmlFor>` externo |
+| `name` | Nombre del campo en el submit del formulario |
+| `describedBy` | Vincula el campo a un mensaje de ayuda o error mediante `aria-describedby` |
+
+---
+
+## Tokens
+
+<TokenTable tokens={inputPhoneTokens} />
+
+## Props
+
+<ArgTypes of={InputPhoneStories} />

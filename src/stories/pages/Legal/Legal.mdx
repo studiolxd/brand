@@ -1,0 +1,52 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as LegalStories from "./Legal.stories";
+
+<Meta of={LegalStories} />
+
+# Legal (template)
+
+Template reutilizable para páginas de contenido legal: aviso legal, política de privacidad, política de cookies, etc. El contenido se organiza en un acordeón accesible que expone cada sección de forma progresiva.
+
+## Estructura de landmarks
+
+- `<header>` — navegación principal (componente `Header`)
+- `<main id="main-content">` — título de la página y acordeón; destino del skip link
+- `<footer>` — pie de página (componente `Footer`)
+
+## Jerarquía de encabezados
+
+```
+h1 — título de la página (prop title, ej. "Aviso legal")
+├── h2 — primer item del acordeón (sections[0].title)
+├── h2 — segundo item
+└── h2 — …
+```
+
+Cada item del acordeón está envuelto en un `Heading level={2}` que contiene el `<button>` del trigger. Esto mantiene el outline semántico correcto (h1 → h2) sin romper el patrón de acordeón WAI-ARIA, donde el encabezado debe envolver el botón de control.
+
+## Acordeón WAI-ARIA
+
+El acordeón sigue el patrón [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) de WAI-ARIA:
+
+- El trigger es un `<button>` dentro del `<h2>`, con `aria-expanded` que alterna entre `true` y `false`
+- `aria-controls` apunta al `id` del panel de contenido correspondiente
+- El panel tiene `role="region"` para que los lectores de pantalla puedan navegar a él como landmark
+- La animación de apertura y cierre usa `grid-template-rows: 0fr → 1fr` en lugar de `height`, lo que permite la transición CSS sin JavaScript adicional
+
+El componente interno `LegalAccordionItem` gestiona el estado `isOpen` de forma independiente para cada sección, permitiendo tener varias abiertas a la vez.
+
+## Contador decorativo
+
+Cada encabezado del acordeón muestra un contador numérico (`01`, `02`…) con `font-weight: thin` en color primario. Es puramente decorativo y no aporta información semántica adicional.
+
+## Navegación configurable
+
+Al igual que el template `Project`, las props `navItems` y `featuredLink` permiten personalizar el `Header`. Se usan los valores por defecto si no se pasan.
+
+## Vista previa
+
+<Canvas of={LegalStories.Default} />
+
+## Props
+
+<ArgTypes of={LegalStories} />

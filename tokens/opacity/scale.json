@@ -1,6 +1,5 @@
 {
   "opacity": {
-    "disabled": { "$value": "0.4", "$type": "number", "$description": "Opacidad de elementos deshabilitados" },
     "overlay":  { "$value": "0.6", "$type": "number", "$description": "Opacidad de overlays y fondos semitransparentes" }
   }
 }

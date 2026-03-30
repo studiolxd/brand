@@ -43,10 +43,3 @@ export const AllLevels: Story = {
     </>
   ),
 };
-
-export const Dark: Story = {
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};

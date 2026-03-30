@@ -9,7 +9,7 @@ interface CheckboxFieldProps {
   id?: string;
   name?: string;
   value?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
 
 export function CheckboxField({
@@ -20,7 +20,7 @@ export function CheckboxField({
   id,
   name,
   value,
-  onChange,
+  onCheckedChange,
 }: CheckboxFieldProps) {
   return (
     <label
@@ -36,7 +36,7 @@ export function CheckboxField({
         id={id}
         name={name}
         value={value}
-        onChange={onChange}
+        onCheckedChange={onCheckedChange}
       />
       <span className="checkbox-field__label">{label}</span>
     </label>

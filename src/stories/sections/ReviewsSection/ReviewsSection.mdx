@@ -1,0 +1,33 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ReviewsSectionStories from "./ReviewsSection.stories";
+
+<Meta of={ReviewsSectionStories} />
+
+# ReviewsSection
+
+Sección de testimonios sobre fondo oscuro. Muestra opiniones de alumnado mediante tarjetas (`review-card`) organizadas en un carrusel en bucle infinito (`loop: true`). El componente aplica la clase `.surface-dark` directamente en la etiqueta `<section>`, de modo que todos los tokens de color de los componentes descendientes (tipografía, botones de navegación del carrusel, avatar…) se adaptan automáticamente al tema oscuro sin necesidad de configuración adicional.
+
+El degradado lateral del carrusel usa `gradientColor="var(--color-background-dark)"` para que las tarjetas de los extremos se desvanezcan con suavidad sobre el fondo oscuro de la sección.
+
+Cada tarjeta contiene:
+- Un `Avatar` con la foto del autor (120 px de diámetro).
+- Nombre y cargo del autor renderizados como encabezados de nivel 3 y 4 respectivamente.
+- Un `<blockquote>` con el texto del testimonio.
+
+En mobile la foto y la identidad se apilan verticalmente y se centran. A partir de 768 px se distribuyen en fila.
+
+## Por defecto
+
+<Canvas of={ReviewsSectionStories.Default} />
+
+---
+
+## Theming oscuro
+
+La sección declara `.surface-dark` en su elemento raíz. Esta clase está definida en `src/surface.css` y reasigna los tokens de color de todos los componentes descendientes al tema oscuro. **No es necesario añadir ninguna clase adicional** en los componentes hijos; la cascade se encarga de propagar el tema.
+
+El carrusel de slides muestra 1 slide completo en móvil, 3 slides en tableta (≥ 768 px) y 4 slides en pantallas grandes (≥ 1440 px), alineados al centro.
+
+## Props
+
+<ArgTypes of={ReviewsSectionStories} />

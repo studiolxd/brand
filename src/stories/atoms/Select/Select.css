@@ -92,20 +92,7 @@
   }
 }
 
-/* ─── Dark ────────────────────────────────────────────────── */
-.dark .select,
-.select.select--dark {
-  --select-bg: var(--select-dark-bg);
-  --select-color: var(--select-dark-color);
-  --select-border-color: var(--select-dark-border-color);
-  --select-focus-ring-color: var(--select-dark-focus-ring-color);
-  --select-content-bg: var(--select-dark-content-bg);
-  --select-content-border-color: var(--select-dark-content-border-color);
-  --select-item-highlighted-bg: var(--select-dark-item-highlighted-bg);
-  --select-item-highlighted-color: var(--select-dark-item-highlighted-color);
-}
-
-/* Dark — dropdown content (Portal, fuera del ancestro .dark) */
+/* ─── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
 .select__content.select__content--dark {
   background-color: var(--select-dark-content-bg);
   border-color: var(--select-dark-content-border-color);
@@ -120,10 +107,3 @@
   color: var(--select-dark-item-highlighted-color);
 }
 
-/* Dark + disabled */
-.dark .select:disabled,
-.select.select--dark:disabled {
-  --select-color: var(--select-dark-disabled-color);
-  --select-border-color: var(--select-dark-disabled-border-color);
-  opacity: 1;
-}

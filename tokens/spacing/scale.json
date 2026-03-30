@@ -1,12 +1,12 @@
 {
   "spacing": {
-    "1": { "$value": "4px",  "$type": "dimension", "$description": "4px — micro spacing" },
-    "2": { "$value": "8px",  "$type": "dimension", "$description": "8px — extra small spacing" },
-    "3": { "$value": "12px", "$type": "dimension", "$description": "12px — small spacing" },
-    "4": { "$value": "16px", "$type": "dimension", "$description": "16px — base spacing" },
-    "5": { "$value": "24px", "$type": "dimension", "$description": "24px — medium spacing" },
-    "6": { "$value": "32px", "$type": "dimension", "$description": "32px — large spacing" },
-    "7": { "$value": "48px", "$type": "dimension", "$description": "48px — extra large spacing" },
-    "8": { "$value": "64px", "$type": "dimension", "$description": "64px — 2x large spacing" }
+    "1": { "$value": "0.25rem", "$type": "dimension", "$description": "0.25rem (4px) — micro spacing" },
+    "2": { "$value": "0.5rem",  "$type": "dimension", "$description": "0.5rem (8px) — extra small spacing" },
+    "3": { "$value": "0.75rem", "$type": "dimension", "$description": "0.75rem (12px) — small spacing" },
+    "4": { "$value": "1rem",    "$type": "dimension", "$description": "1rem (16px) — base spacing" },
+    "5": { "$value": "1.5rem",  "$type": "dimension", "$description": "1.5rem (24px) — medium spacing" },
+    "6": { "$value": "2rem",    "$type": "dimension", "$description": "2rem (32px) — large spacing" },
+    "7": { "$value": "3rem",    "$type": "dimension", "$description": "3rem (48px) — extra large spacing" },
+    "8": { "$value": "4rem",    "$type": "dimension", "$description": "4rem (64px) — 2x large spacing" }
   }
 }

@@ -1,0 +1,59 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ContactSectionStories from "./ContactSection.stories";
+
+<Meta of={ContactSectionStories} />
+
+# ContactSection
+
+Sección de página que combina el organismo `ContactForm` con un bloque de CTA alternativo vía WhatsApp. Pensada para ofrecer dos vías de contacto simultáneas: formulario estructurado y mensaje directo.
+
+## Estructura
+
+El layout es un grid de dos columnas en desktop (>= 1024 px) y columna única en móvil:
+
+| Área | Contenido |
+|------|-----------|
+| `contact-section__left` | Columna izquierda: `__intro` con el título + `__cta` con heading y botón de WhatsApp. En móvil este elemento usa `display: contents` para que `__intro` y `__cta` participen directamente en el grid padre con su propio orden. |
+| `contact-section__form` | Columna derecha: el organismo `ContactForm` al completo. |
+
+Los separadores entre celdas se dibujan mediante el `gap` del grid y el color de fondo del `contact-section` (que sangra por los huecos).
+
+## Orden en móvil
+
+En móvil el orden de las áreas es: título (`__intro` → `order: 1`), formulario (`__form` → `order: 2`), CTA WhatsApp (`__cta` → `order: 3`). En desktop el orden CSS se resetea y `__left` ocupa la columna izquierda completa de forma natural.
+
+## Por defecto
+
+<Canvas of={ContactSectionStories.Default} />
+
+## Enviando
+
+Estado de carga mientras el formulario está siendo enviado. La prop `submitting` del `ContactForm` se pasa a través de la prop `form`.
+
+<Canvas of={ContactSectionStories.Submitting} />
+
+## Con errores
+
+El `ContactForm` muestra la lista de errores agrupados. Los mensajes se pasan mediante `form.errors`.
+
+<Canvas of={ContactSectionStories.WithErrors} />
+
+## Éxito
+
+Una vez el envío se completa correctamente, el formulario muestra el mensaje de confirmación. Se activa con `form.success={true}`.
+
+<Canvas of={ContactSectionStories.Success} />
+
+---
+
+## Theming oscuro
+
+Cuando `ContactSection` se coloca dentro de un contenedor con `.surface-dark`, todos sus fondos y los tokens de los campos del formulario se adaptan automáticamente. No es necesario configurar nada adicional en el componente — la lógica oscura se gestiona íntegramente en `src/surface.css`.
+
+El botón primario de WhatsApp también recibe automáticamente sus tokens oscuros a través de la cascada.
+
+---
+
+## Props
+
+<ArgTypes of={ContactSectionStories} />

@@ -39,17 +39,3 @@ export const WithErrors: Story = {
     ),
   },
 };
-
-export const Dark: Story = {
-  args: {
-    errors: ['El email es obligatorio.'],
-    actions: <Button variant="form">Enviar</Button>,
-    children: (
-      <InputField id="form-email-dark" label="Email" labelHidden placeholder="tu@email.com" />
-    ),
-  },
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};

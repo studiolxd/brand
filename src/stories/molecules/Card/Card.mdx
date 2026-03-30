@@ -1,0 +1,38 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CardStories from "./Card.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { cardTokens } from "../../../tokens/components/card";
+
+<Meta of={CardStories} />
+
+# Card
+
+Tarjeta de servicio completamente clicable con color de fondo, título, descripción y flecha indicadora. El CTA (`ctaLabel`) es accesible para lectores de pantalla mediante `VisuallyHidden`, sin duplicar texto visible.
+
+Disponible en cuatro variantes de color (secondary, tertiary, quaternary, quinary) que mapean a la paleta de identidad.
+
+## Secondary
+
+<Canvas of={CardStories.Secondary} />
+
+## Tertiary
+
+<Canvas of={CardStories.Tertiary} />
+
+## Quaternary
+
+<Canvas of={CardStories.Quaternary} />
+
+## Quinary
+
+<Canvas of={CardStories.Quinary} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={cardTokens} />
+
+## Props
+
+<ArgTypes of={CardStories} />

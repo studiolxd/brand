@@ -1,0 +1,34 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ClientsSectionStories from "./ClientsSection.stories";
+
+<Meta of={ClientsSectionStories} />
+
+# ClientsSection
+
+Franja de logotipos de clientes con desplazamiento automático continuo. Internamente usa el átomo `Carousel` con el plugin `embla-carousel-auto-scroll` a velocidad constante (`speed: 1`) y sin pausa al interactuar (`stopOnInteraction: false`). Los botones de navegación se ocultan (`hideButtons`) porque el scroll es continuo y no requiere control manual.
+
+Cada logotipo se renderiza como elemento `<img>` con el atributo `alt` relleno con el nombre del cliente, garantizando que los lectores de pantalla puedan identificar cada marca aunque la imagen no cargue.
+
+## Por defecto
+
+<Canvas of={ClientsSectionStories.Default} />
+
+---
+
+## Tokens
+
+| Token | Valor | Descripción |
+|---|---|---|
+| `--clients-section-logo-height` | `160px` | Alto del contenedor de cada logo de cliente |
+| `--clients-section-logo-width` | `320px` | Ancho del contenedor de cada logo de cliente |
+
+El tamaño de slide del carrusel se fija en `320px` mediante la variable CSS `--carousel-slide-size` sobreescrita en el selector `.clients-section .carousel`.
+
+## Accesibilidad
+
+- Cada `<img>` lleva `alt={client.name}` con el nombre real del cliente.
+- El desplazamiento automático es continuo y decorativo; no hay información que dependa exclusivamente del movimiento.
+
+## Props
+
+<ArgTypes of={ClientsSectionStories} />

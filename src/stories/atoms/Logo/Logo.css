@@ -1,13 +1,13 @@
 .logo-preview {
   display: inline-flex;
-  padding: 2rem;
+  padding-block: var(--spacing-5);
+  padding-inline: var(--spacing-5);
 }
 
 .logo-preview--dark {
   background-color: var(--color-text-default);
 }
 
-.logo--dark,
-.dark .logo {
+.logo--dark {
   color: var(--color-text-dark);
 }

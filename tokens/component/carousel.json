@@ -3,6 +3,8 @@
     "gap":                { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Separación entre slides" },
     "btn-padding-inline": { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Padding horizontal del botón — define el ancho del área de degradado" },
     "btn-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del chevron" },
-    "gradient-color":     { "$value": "{color.background.default}", "$type": "color",   "$description": "Color de fondo del degradado de los botones prev/next" }
+    "gradient-color":     { "$value": "{color.background.default}", "$type": "color",   "$description": "Color de fondo del degradado de los botones prev/next" },
+    "btn-min-size":       { "$value": "4rem",                     "$type": "dimension", "$description": "Tamaño mínimo del área de click de los botones prev/next (tap target)" },
+    "btn-vw-size":        { "$value": "4.167vw",                  "$type": "string",    "$description": "Tamaño fluido del botón en móvil — escala con el viewport (≈1/24 vw)" }
   }
 }

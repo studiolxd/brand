@@ -75,21 +75,3 @@ export const Disabled: Story = {
 export const LabelVisible: Story = {
   args: { labelHidden: false },
 };
-
-export const Dark: Story = {
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};
-
-export const DarkWithError: Story = {
-  args: {
-    error: true,
-    errorMessage: 'Este campo es obligatorio.',
-  },
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};

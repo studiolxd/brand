@@ -34,10 +34,3 @@ export const Unordered: Story = {};
 export const Ordered: Story = {
   args: { type: 'ordered' },
 };
-
-export const Dark: Story = {
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
-};

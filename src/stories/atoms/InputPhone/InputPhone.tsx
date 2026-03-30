@@ -85,7 +85,6 @@ export function InputPhone({
   const classes = [
     'input-phone',
     error ? 'input-phone--error' : '',
-    dark ? 'input-phone--dark' : '',
   ].filter(Boolean).join(' ');
 
   return (

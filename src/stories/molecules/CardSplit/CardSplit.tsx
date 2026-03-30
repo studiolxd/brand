@@ -1,5 +1,7 @@
 import './CardSplit.css';
 import { Arrow } from '../../atoms/Arrow/Arrow';
+import { Heading } from '../../atoms/Heading/Heading';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { CardColor } from '../Card/Card';
 
 interface CardSplitImage {
@@ -26,10 +28,10 @@ export function CardSplit({ href, title, description, ctaLabel, color, image }: 
   return (
     <a href={href} className={['card-split', `card-split--${color}`].join(' ')}>
       <div className="card-split__primary">
-        <h2 className="card-split__title">{title}</h2>
+        <Heading level={2} className="card-split__title">{title}</Heading>
         <p className="card-split__description">{description}</p>
         <Arrow className="card-split__arrow" size="lg" />
-        <span className="visually-hidden">{ctaLabel}</span>
+        <VisuallyHidden>{ctaLabel}</VisuallyHidden>
       </div>
       <div className="card-split__photo">
         <img src={image.src} alt={image.alt} />

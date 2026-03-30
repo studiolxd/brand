@@ -3,6 +3,7 @@
  */
 
 :root {
+  --checkbox-field-checkbox-offset: 3px; /** Desplazamiento vertical del checkbox para alinearlo con la primera línea de texto */
   --checkbox-field-cursor: pointer; /** Cursor */
   --checkbox-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
   --checkbox-field-label-text-transform: none; /** Sin transformación — anula la herencia del label base */
@@ -15,5 +16,4 @@
   --checkbox-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
   --checkbox-field-label-font-weight: var(--font-weight-default); /** Peso tipográfico */
   --checkbox-field-label-color: var(--color-text-default); /** Color del texto */
-  --checkbox-field-label-dark-color: var(--color-text-dark); /** Color del texto sobre fondo oscuro */
 }

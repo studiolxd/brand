@@ -37,7 +37,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 4px;
+  gap: var(--input-phone-country-gap);
   flex-shrink: 0;
   width: var(--input-phone-country-width);
   padding-block: var(--input-padding-block);
@@ -61,7 +61,7 @@
 }
 
 .input-phone__country-icon {
-  width: 10px;
+  width: var(--input-phone-country-icon-size);
   flex-shrink: 0;
   transform: rotate(90deg);
   transition: transform var(--input-transition-duration) var(--motion-easing-default);
@@ -78,7 +78,7 @@
   border-style: var(--input-border-style);
   border-color: var(--input-border-color);
   min-width: var(--radix-select-trigger-width);
-  max-height: 280px;
+  max-height: var(--input-phone-content-max-height);
   overflow-y: auto;
   z-index: var(--input-phone-content-z-index);
 }
@@ -138,25 +138,12 @@
 
 /* ── Disabled ───────────────────────────────────────────────── */
 .input-phone:has(.input-phone__number:disabled) {
-  opacity: var(--input-disabled-opacity);
   background-color: var(--input-disabled-bg);
   border-color: var(--input-disabled-border-color);
   pointer-events: none;
 }
 
-/* ── Dark ───────────────────────────────────────────────────── */
-.dark .input-phone,
-.input-phone.input-phone--dark {
-  --input-bg: var(--input-dark-bg);
-  --input-color: var(--input-dark-color);
-  --input-border-color: var(--input-dark-border-color);
-  --input-placeholder-color: var(--input-dark-placeholder-color);
-  --input-focus-border-color: var(--input-dark-focus-border-color);
-  --input-focus-ring-color: var(--input-dark-focus-ring-color);
-  --input-error-focus-ring-color: var(--input-dark-error-focus-ring-color);
-  --input-phone-country-border-color: var(--input-dark-border-color);
-}
-
+/* ── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
 .input-phone__country-content.input-phone__country-content--dark {
   background-color: var(--input-dark-bg);
   border-color: var(--input-dark-border-color);

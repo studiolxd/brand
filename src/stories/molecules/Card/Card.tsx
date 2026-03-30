@@ -1,5 +1,7 @@
 import './Card.css';
 import { Arrow } from '../../atoms/Arrow/Arrow';
+import { Heading } from '../../atoms/Heading/Heading';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 
 export type CardColor = 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
 
@@ -19,9 +21,9 @@ interface CardProps {
 export function Card({ href, title, description, ctaLabel, color }: CardProps) {
   return (
     <a href={href} className={['card', `card--${color}`].join(' ')}>
-      <h2>{title}</h2>
+      <Heading level={2}>{title}</Heading>
       <p>{description}</p>
-      <span className="visually-hidden">{ctaLabel}</span>
+      <VisuallyHidden>{ctaLabel}</VisuallyHidden>
       <Arrow size="lg" />
     </a>
   );

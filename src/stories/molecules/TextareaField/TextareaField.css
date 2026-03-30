@@ -4,10 +4,6 @@
   gap: var(--textarea-field-gap);
 }
 
-.textarea-field.textarea-field--dark {
-  --textarea-field-error-color: var(--form-error-dark-color);
-  --textarea-field-helper-color: var(--form-helper-dark-color);
-}
 
 .textarea-field__error {
   font-family: var(--textarea-field-error-font-family);

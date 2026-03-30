@@ -1,0 +1,59 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as HomeStories from "./Home.stories";
+
+<Meta of={HomeStories} />
+
+# Home
+
+Página de inicio de Studio LXD. Es una instancia única con contenido real — no es un template parametrizable — por lo que vive en la categoría **Pages** y no en Templates.
+
+## Estructura de landmarks
+
+La página sigue la jerarquía semántica estándar:
+
+- `<header>` — navegación principal (componente `Header`)
+- `<main id="main-content">` — contenido principal; el `id` es el destino del skip link del header
+- `<footer>` — pie de página (componente `Footer`)
+
+El skip link aparece al recibir el foco de teclado y lleva al usuario directamente a `#main-content`, permitiendo saltar la navegación repetitiva. Esto cumple el criterio de éxito 2.4.1 (Bypass Blocks) de WCAG 2.1.
+
+## Jerarquía de encabezados
+
+Cada sección usa `aria-label` para identificarse como landmark de región cuando no existe un encabezado visible propio. El árbol de encabezados visible es el siguiente:
+
+```
+(sin h1 explícito en la hero — la sección de vídeo es decorativa, aria-hidden="true")
+├── SolutionsSection
+├── MethodologySection
+├── ProjectsSection → h2 "Nuestros trabajos"
+├── Academia → HighlightSection + cards de cursos
+├── ReviewsSection → h2 "Lo que dice nuestro alumnado"
+├── ClientsSection → h2 "Clientes"
+└── ContactSection
+```
+
+## Sección de vídeo hero
+
+El bloque `home__video-section` tiene `aria-hidden="true"` porque es puramente decorativo. Sirve dos fuentes de vídeo según la orientación del dispositivo:
+
+- **Landscape** — `home__video-landscape` (visible en horizontal, oculto en portrait)
+- **Portrait** — `home__video-portrait` (visible en vertical, oculto en landscape)
+
+El cambio entre ambas versiones se gestiona con `@media (orientation: portrait)` en CSS, sin JavaScript.
+
+## Sección Academia
+
+La sección de cursos lleva `aria-label="Academia"` y agrupa:
+
+1. `HighlightSection` — texto introductorio centrado sobre la oferta formativa
+2. Una rejilla CSS de tarjetas (`home__courses`): dos `CardSquare` y dos `CardSplit` que enlazan a los cuatro cursos del catálogo actual (Diseño instruccional, Herramientas elearning, Formación de formadores, Moodle y plataformas LMS)
+
+La rejilla pasa de una columna en móvil a dos columnas a partir de 1024 px.
+
+## Separadores visuales
+
+Las secciones `ProjectsSection`, Academia, `ReviewsSection` y `ClientsSection` llevan `border-block-start` con `currentColor` para crear una separación visual sin añadir markup extra.
+
+## Vista previa
+
+<Canvas of={HomeStories.Default} />

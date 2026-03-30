@@ -6,7 +6,8 @@
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
   border: none;
   background: none;
   color: inherit;
@@ -39,7 +40,7 @@
 /* Open state — X animation */
 
 .hamburger[aria-expanded="true"] .hamburger__bar:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
+  transform: translateY(var(--hamburger-bar-translate-y)) rotate(45deg);
 }
 
 .hamburger[aria-expanded="true"] .hamburger__bar:nth-child(2) {
@@ -48,23 +49,6 @@
 }
 
 .hamburger[aria-expanded="true"] .hamburger__bar:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
+  transform: translateY(calc(-1 * var(--hamburger-bar-translate-y))) rotate(-45deg);
 }
 
-/* Dark variant */
-
-.hamburger.hamburger--dark .hamburger__bar {
-  background-color: var(--hamburger-bar-dark-color);
-}
-
-.hamburger.hamburger--dark:focus-visible {
-  outline-color: var(--hamburger-bar-dark-color);
-}
-
-.dark .hamburger .hamburger__bar {
-  background-color: var(--hamburger-bar-dark-color);
-}
-
-.dark .hamburger:focus-visible {
-  outline-color: var(--hamburger-bar-dark-color);
-}

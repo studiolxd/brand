@@ -1,9 +1,12 @@
 {
   "input-phone": {
-    "country-width":        { "$value": "72px",                      "$type": "dimension", "$description": "Ancho del selector de país" },
+    "country-width":        { "$value": "4.5rem",                    "$type": "dimension", "$description": "Ancho del selector de país" },
     "country-border-width": { "$value": "{border-width.sm}",         "$type": "dimension", "$description": "Grosor del separador entre país y número" },
     "country-border-style": { "$value": "solid",                     "$type": "string",    "$description": "Estilo del separador" },
     "country-border-color": { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del separador" },
-    "content-z-index":      { "$value": "1100",                      "$type": "number",    "$description": "Z-index del dropdown de país" }
+    "content-z-index":      { "$value": "1100",                      "$type": "number",    "$description": "Z-index del dropdown de país" },
+    "country-gap":          { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Separación entre bandera/código y chevron en el selector de país" },
+    "content-max-height":   { "$value": "17.5rem",                   "$type": "dimension", "$description": "Altura máxima del dropdown de país" },
+    "country-icon-size":    { "$value": "0.625rem",                  "$type": "dimension", "$description": "Ancho del icono chevron en el selector de país" }
   }
 }

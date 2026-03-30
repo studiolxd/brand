@@ -6,7 +6,7 @@
   border-block-start: var(--border-width-sm) solid var(--color-background-dark);
 }
 
-.dark .contact-section {
+.surface-dark .contact-section {
   background-color: var(--color-white); /* sangra por los gaps = bordes blancos */
   border-block-start-color: var(--color-white);
 }
@@ -19,18 +19,17 @@
 .contact-section__intro,
 .contact-section__cta {
   background-color: var(--color-background-default);
-  padding: 0;
-  padding-inline: var(--spacing-4);
-  padding-block: var(--spacing-4);
+  padding-inline: var(--section-padding-inline);
+  padding-block: var(--section-padding-block-md);
 }
 
 .contact-section__form {
   background-color: var(--color-background-default);
 }
 
-.dark .contact-section .contact-section__intro,
-.dark .contact-section .contact-section__cta,
-.dark .contact-section .contact-section__form {
+.surface-dark .contact-section .contact-section__intro,
+.surface-dark .contact-section .contact-section__cta,
+.surface-dark .contact-section .contact-section__form {
   background-color: var(--color-background-dark);
 }
 
@@ -58,15 +57,7 @@
   --form-border-width: 0;
 }
 
-.dark .contact-section .button--primary {
-  --button-primary-bg: var(--button-primary-dark-bg);
-  --button-primary-color: var(--button-primary-dark-color);
-  --button-primary-border: var(--button-primary-dark-border);
-  --button-primary-hover-bg: var(--button-primary-dark-hover-bg);
-  --button-primary-hover-color: var(--button-primary-dark-hover-color);
-  --button-primary-hover-border: var(--button-primary-dark-hover-border);
-  --button-primary-focus-ring-color: var(--button-primary-dark-focus-ring-color);
-}
+/* Button primary — inherits dark tokens from .surface-dark via surface.css */
 
 /* ---- lg (>= 1024px) ---- */
 
@@ -85,7 +76,7 @@
     grid-row: 1;
   }
 
-  .dark .contact-section .contact-section__left {
+  .surface-dark .contact-section .contact-section__left {
     background-color: var(--color-background-dark);
   }
 

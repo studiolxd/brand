@@ -1,0 +1,24 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AvatarStories from "./Avatar.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { avatarTokens } from "../../../tokens/components/avatar";
+
+<Meta of={AvatarStories} />
+
+# Avatar
+
+Imagen circular para representar a un usuario o persona. Renderiza un elemento `<img>` con forma circular mediante el token `--avatar-border-radius` (valor `--border-radius-full`). Usa `object-fit: cover` para recortar la imagen sin deformarla y `flex-shrink: 0` para mantener su tamaño en contextos flexibles. El atributo `alt` es obligatorio para garantizar la accesibilidad.
+
+## Por defecto
+
+<Canvas of={AvatarStories.Default} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={avatarTokens} />
+
+## Props
+
+<ArgTypes of={AvatarStories} />

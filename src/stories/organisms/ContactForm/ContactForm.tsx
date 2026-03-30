@@ -75,11 +75,13 @@ export function ContactForm({
         label="Prefiero que me llaméis por teléfono"
         disabled={submitting}
         checked={wantCall}
-        onChange={(e) => setWantCall(e.target.checked)}
+        onCheckedChange={(checked) => setWantCall(checked === true)}
       />
       {wantCall && (
         <InputPhoneField
           id="contact-phone-number"
+          label="Teléfono"
+          labelHidden
           placeholder="Escribe aquí tu número de teléfono"
           helperText="Solo utilizaremos tu número de teléfono para hablarte sobre este proyecto."
           disabled={submitting}

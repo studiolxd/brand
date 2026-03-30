@@ -21,21 +21,25 @@ declare interface AvatarProps {
     className?: string;
 }
 
-export declare function Button({ variant, size, block, children, type, disabled, onClick, }: ButtonProps): JSX.Element;
+export declare function Button({ variant, size, block, children, type, disabled, onClick, href, external, }: ButtonProps): JSX.Element;
 
 declare interface ButtonProps {
     /** Visual variant of the button */
-    variant?: 'primary' | 'primary-dark' | 'ghost' | 'form';
+    variant?: 'primary' | 'ghost' | 'form';
     /** Size of the button */
     size?: 'sm' | 'md' | 'lg';
     /** Stretches the button to full container width */
     block?: boolean;
     /** Button label */
     children: React.ReactNode;
-    /** HTML button type */
+    /** HTML button type (ignored when href is set) */
     type?: 'button' | 'submit' | 'reset';
     disabled?: boolean;
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+    /** Renders as <a> when provided */
+    href?: string;
+    /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
+    external?: boolean;
 }
 
 export declare function Card({ href, title, description, ctaLabel, color }: CardProps): JSX.Element;
@@ -127,9 +131,9 @@ declare interface CarouselProps {
     gradientColor?: string;
 }
 
-export declare function Checkbox({ checked, defaultChecked, disabled, id, name, value, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onChange, }: CheckboxProps): JSX.Element;
+export declare function Checkbox({ checked, defaultChecked, disabled, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onCheckedChange, }: CheckboxProps): JSX.Element;
 
-export declare function CheckboxField({ label, checked, defaultChecked, disabled, id, name, value, onChange, }: CheckboxFieldProps): JSX.Element;
+export declare function CheckboxField({ label, checked, defaultChecked, disabled, id, name, value, onCheckedChange, }: CheckboxFieldProps): JSX.Element;
 
 declare interface CheckboxFieldProps {
     label: React.ReactNode;
@@ -139,19 +143,20 @@ declare interface CheckboxFieldProps {
     id?: string;
     name?: string;
     value?: string;
-    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
 
 declare interface CheckboxProps {
-    checked?: boolean;
-    defaultChecked?: boolean;
+    checked?: boolean | 'indeterminate';
+    defaultChecked?: boolean | 'indeterminate';
     disabled?: boolean;
     id?: string;
     name?: string;
     value?: string;
+    required?: boolean;
     'aria-label'?: string;
     'aria-labelledby'?: string;
-    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
 
 export declare function Chevron({ size, className }: ChevronProps): JSX.Element;
@@ -243,11 +248,13 @@ declare interface HeaderProps {
     dark?: boolean;
 }
 
-export declare function Heading({ level, children }: HeadingProps): JSX.Element;
+export declare function Heading({ level, className, children }: HeadingProps): JSX.Element;
 
 declare interface HeadingProps {
     /** Nivel semántico del encabezado (h1–h6). */
     level?: 1 | 2 | 3 | 4 | 5 | 6;
+    /** Clases adicionales para el elemento. */
+    className?: string;
     children: React.ReactNode;
 }
 
@@ -291,10 +298,12 @@ declare interface InputFieldProps {
 
 export declare function InputPhone({ value, defaultCountry, placeholder, disabled, error, dark, id, name, describedBy, onChange, onBlur, }: InputPhoneProps): JSX.Element;
 
-export declare function InputPhoneField({ id, value, defaultCountry, placeholder, disabled, error, errorMessage, helperText, dark, name, onChange, onBlur, }: InputPhoneFieldProps): JSX.Element;
+export declare function InputPhoneField({ id, label, labelHidden, value, defaultCountry, placeholder, disabled, error, errorMessage, helperText, dark, name, onChange, onBlur, }: InputPhoneFieldProps): JSX.Element;
 
 declare interface InputPhoneFieldProps {
     id: string;
+    label: string;
+    labelHidden?: boolean;
     value?: string;
     defaultCountry?: Country;
     placeholder?: string;
@@ -347,13 +356,17 @@ declare interface LabelProps {
     hidden?: boolean;
 }
 
-export declare function Legal({ title, sections }: LegalProps): JSX.Element;
+export declare function Legal({ title, sections, navItems, featuredLink }: LegalProps): JSX.Element;
 
 declare interface LegalProps {
     /** Título de la página legal. */
     title: string;
     /** Secciones de contenido en acordeón. */
     sections: LegalSection[];
+    /** Elementos de navegación. */
+    navItems?: NavItem[];
+    /** Enlace destacado del header. */
+    featuredLink?: NavItem;
 }
 
 declare interface LegalSection {
@@ -361,7 +374,7 @@ declare interface LegalSection {
     content: React.ReactNode;
 }
 
-export declare function Link({ href, children, external }: LinkProps): JSX.Element;
+export declare function Link({ href, children, external, onClick }: LinkProps): JSX.Element;
 
 declare interface LinkProps {
     /** URL de destino. */
@@ -369,6 +382,7 @@ declare interface LinkProps {
     children: React.ReactNode;
     /** Abre el enlace en una nueva pestaña con rel seguro. */
     external?: boolean;
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 export declare function List({ type, children }: ListProps): JSX.Element;
@@ -379,15 +393,17 @@ declare interface ListProps {
     children: React.ReactNode;
 }
 
-export declare function Logo({ width, height, className }: LogoProps): JSX.Element;
+export declare function Logo({ width, height, className, dark }: LogoProps): JSX.Element;
 
 declare interface LogoProps {
     width?: number;
     height?: number;
     className?: string;
+    /** Versión clara para fondos oscuros. Aplica .logo--dark. */
+    dark?: boolean;
 }
 
-export declare function MethodologySection({ intro, ctaLabel, ctaHref, steps, }: MethodologySectionProps): JSX.Element;
+export declare function MethodologySection({ intro, ctaLabel, ctaHref, steps, 'aria-label': ariaLabel, }: MethodologySectionProps): JSX.Element;
 
 declare interface MethodologySectionProps {
     /** Párrafo introductorio. */
@@ -398,6 +414,8 @@ declare interface MethodologySectionProps {
     ctaHref: string;
     /** Lista de pasos (normalmente 4). */
     steps: MethodologyStep[];
+    /** Nombre accesible de la sección (aria-label). */
+    'aria-label'?: string;
 }
 
 declare interface MethodologyStep {
@@ -432,7 +450,7 @@ declare interface ParagraphProps {
     children: React.ReactNode;
 }
 
-export declare function Project({ category, tagVariant, photo, photoAlt, title, description, sections, }: ProjectProps): JSX.Element;
+export declare function Project({ category, tagVariant, photo, photoAlt, title, description, sections, navItems, featuredLink, }: ProjectProps): JSX.Element;
 
 declare interface Project_2 {
     /** Identificador único. */
@@ -468,6 +486,10 @@ declare interface ProjectProps {
     description: string;
     /** Secciones de contenido. */
     sections: ProjectSection[];
+    /** Elementos de navegación. */
+    navItems?: NavItem[];
+    /** Enlace destacado del header. */
+    featuredLink?: NavItem;
 }
 
 declare interface ProjectSection {
@@ -524,11 +546,13 @@ declare interface SelectProps {
     id?: string;
 }
 
-export declare function SolutionsSection({ items }: SolutionsSectionProps): JSX.Element;
+export declare function SolutionsSection({ items, 'aria-label': ariaLabel }: SolutionsSectionProps): JSX.Element;
 
 declare interface SolutionsSectionProps {
     /** Lista de tarjetas a mostrar. */
     items: CardProps_2[];
+    /** Nombre accesible de la sección (aria-label). */
+    'aria-label'?: string;
 }
 
 export declare function Tag({ variant, children }: TagProps): JSX.Element;
@@ -583,6 +607,13 @@ declare interface TextareaProps {
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
     onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
     onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
+}
+
+/** Oculta contenido visualmente pero lo mantiene accesible para lectores de pantalla. */
+export declare function VisuallyHidden({ children }: VisuallyHiddenProps): JSX.Element;
+
+declare interface VisuallyHiddenProps {
+    children: React.ReactNode;
 }
 
 export { }

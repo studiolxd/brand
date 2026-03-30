@@ -31,10 +31,8 @@ export const Visible: Story = {
   name: 'Visible',
 };
 
-export const Dark: Story = {
-  name: 'Oscuro',
-  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
+/** El label está oculto visualmente pero presente en el DOM para lectores de pantalla */
+export const Hidden: Story = {
+  name: 'Visually hidden',
+  args: { hidden: true },
 };
