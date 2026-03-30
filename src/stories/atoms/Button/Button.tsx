@@ -27,10 +27,10 @@ export function Button({
   return (
     <button
       className={[
-        'btn',
-        `btn-${variant}`,
-        size !== 'md' ? `btn-${size}` : '',
-        block ? 'btn-block' : '',
+        'button',
+        `button--${variant}`,
+        size !== 'md' ? `button--${size}` : '',
+        block ? 'button--block' : '',
       ].filter(Boolean).join(' ')}
       type={type}
       disabled={disabled}
