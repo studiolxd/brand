@@ -11,13 +11,13 @@
   --carousel-slide-size: 100%;            /* sm: 1 slide completo */
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .projects-section .carousel {
     --carousel-slide-size: calc(100% / 3); /* md+: 2 slides + mitades */
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
   .projects-section .carousel {
     --carousel-slide-size: calc(100% / 4); /* lg+: 4 slides completos */
   }

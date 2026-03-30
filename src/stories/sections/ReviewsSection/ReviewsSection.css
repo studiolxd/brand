@@ -13,13 +13,13 @@
   --carousel-slide-size: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .reviews-section .carousel {
     --carousel-slide-size: calc(100% / 3);
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
   .reviews-section .carousel {
     --carousel-slide-size: calc(100% / 4);
   }
@@ -63,7 +63,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .review-card__avatar {
     align-self: auto;
   }

@@ -60,7 +60,7 @@
 
 /* ---- md (>= 768px) ---- */
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .methodology-section__step {
     grid-template-columns: 1fr 3fr;
   }
@@ -68,7 +68,7 @@
 
 /* ---- lg (>= 1024px) ---- */
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) /* --breakpoint-lg */ {
   .methodology-section {
     display: grid;
     grid-template-columns: 1fr 1fr;

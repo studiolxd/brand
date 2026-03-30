@@ -87,7 +87,7 @@
   font-size: var(--font-size-1);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) /* --breakpoint-lg */ {
   .footer__legal {
     flex-direction: row;
     flex-wrap: wrap;
@@ -96,7 +96,7 @@
 
 /* ---- lg (>= 1024px) ---- */
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) /* --breakpoint-lg */ {
   .footer {
     grid-template-columns: repeat(3, 1fr);
   }

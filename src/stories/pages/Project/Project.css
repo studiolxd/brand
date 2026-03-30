@@ -8,7 +8,7 @@
   padding-block-start: var(--header-height-overlay);
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
   .project-page__main {
     padding-block-start: var(--header-height-inline);
   }

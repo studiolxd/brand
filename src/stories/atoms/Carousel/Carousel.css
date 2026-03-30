@@ -5,14 +5,14 @@
   --carousel-slide-size: calc(100% / 1.5);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .carousel {
     position: relative;
     --carousel-slide-size: calc(100% / 2.5);
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
   .carousel {
     --carousel-slide-size: calc(100% / 3.5);
   }
@@ -25,7 +25,7 @@
   order: 1;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .carousel__viewport {
     order: unset;
   }
@@ -47,7 +47,7 @@
   min-width: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .carousel__slide {
     border-inline-start: var(--border-width-sm) solid var(--carousel-slide-border-color, currentColor);
     padding-inline-start: var(--carousel-gap);
@@ -85,7 +85,7 @@
   margin-block-start: var(--spacing-4);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) /* --breakpoint-md */ {
   .carousel__btn {
     position: absolute;
     top: 0;

@@ -7,7 +7,7 @@
   padding-block-start: var(--header-height-overlay);
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
   .home__main {
     padding-block-start: var(--header-height-inline);
   }
@@ -29,7 +29,7 @@
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) /* --breakpoint-lg */ {
   .home__courses {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -44,7 +44,7 @@
   overflow: hidden;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
   .home__video-section {
     height: calc(100vh - var(--header-height-inline));
   }

@@ -50,7 +50,7 @@
 
 /* ---- lg (>= 1024px) ---- */
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) /* --breakpoint-lg */ {
   .contact-section {
     grid-template-columns: 1fr 1fr;
     row-gap: 0; /* sin bordes horizontales en desktop: __left es una sola celda */

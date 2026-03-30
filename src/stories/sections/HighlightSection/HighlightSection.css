@@ -24,7 +24,7 @@
 
 /* ---- lg (>= 1024px) ---- */
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) /* --breakpoint-lg */ {
   .highlight-section__container {
     max-width: var(--highlight-section-max-width);
   }

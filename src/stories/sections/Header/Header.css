@@ -155,7 +155,7 @@
 
 /* ---- Inline nav (>= 1440px) ---- */
 
-@media (min-width: 1440px) {
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
   .header::after {
     display: none;
   }
