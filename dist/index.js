@@ -719,9 +719,9 @@ function Se({ value: e, defaultCountry: n = "ES", placeholder: r, disabled: i, e
 		numberInputProps: { "aria-describedby": u }
 	});
 }
-var Ce = ({ className: e, ...n }) => /* @__PURE__ */ t("input", {
+var Ce = (e) => /* @__PURE__ */ t("input", {
 	className: "input-phone__number",
-	...n
+	...e
 });
 Ce.displayName = "InputPhoneField";
 //#endregion

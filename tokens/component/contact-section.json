@@ -1,0 +1,6 @@
+{
+  "contact-section": {
+    "gap-color": { "$value": "{color.background.dark}",    "$type": "color", "$description": "Color del gap entre celdas y borde superior — actúa como borde (gap technique)" },
+    "cell-bg":   { "$value": "{color.background.default}", "$type": "color", "$description": "Fondo de las celdas de contenido" }
+  }
+}

@@ -21,8 +21,9 @@ Cada logotipo se renderiza como elemento `<img>` con el atributo `alt` relleno c
 |---|---|---|
 | `--clients-section-logo-height` | `160px` | Alto del contenedor de cada logo de cliente |
 | `--clients-section-logo-width` | `320px` | Ancho del contenedor de cada logo de cliente |
+| `--clients-section-carousel-slide-size` | `320px` | Ancho del slide del carrusel |
 
-El tamaño de slide del carrusel se fija en `320px` mediante la variable CSS `--carousel-slide-size` sobreescrita en el selector `.clients-section .carousel`.
+El CSS del componente reasigna `--carousel-slide-size` con el valor de `--clients-section-carousel-slide-size`, lo que permite ajustar el ancho del slide sin tocar el CSS del carrusel base.
 
 ## Accesibilidad
 

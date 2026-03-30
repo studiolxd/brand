@@ -8,7 +8,7 @@
 }
 
 .clients-section .carousel {
-  --carousel-slide-size: 320px;
+  --carousel-slide-size: var(--clients-section-carousel-slide-size);
 }
 
 /* ─── Logo slide ─────────────────────────────────────────── */

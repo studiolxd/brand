@@ -225,6 +225,15 @@
   --input-phone-country-border-color: var(--color-background-dark);
 }
 
+/* ─── MethodologySection + ContactSection ─────────────────────────────────── */
+.surface-dark {
+  --methodology-section-gap-color:    var(--color-background-default);
+  --methodology-section-cell-bg:      var(--color-background-dark);
+  --methodology-section-number-color: var(--color-secondary);
+  --contact-section-gap-color:        var(--color-background-default);
+  --contact-section-cell-bg:          var(--color-background-dark);
+}
+
 /* =============================================================
    surface-light — Ghost sobre fotografía clara
 

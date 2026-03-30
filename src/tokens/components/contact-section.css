@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --contact-section-gap-color: var(--color-background-dark); /** Color del gap entre celdas y borde superior — actúa como borde (gap technique) */
+  --contact-section-cell-bg: var(--color-background-default); /** Fondo de las celdas de contenido */
+}

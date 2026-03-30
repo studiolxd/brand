@@ -1,13 +1,9 @@
-/* Gap = border color — las celdas blancas sobre fondo oscuro crean los divisores */
+/* Gap = border color — las celdas sobre el fondo de gap crean los divisores */
 .methodology-section {
   display: flex;
   flex-direction: column;
   gap: var(--border-width-sm);
-  background-color: var(--color-background-dark);
-}
-
-.surface-dark .methodology-section {
-  background-color: var(--color-white);
+  background-color: var(--methodology-section-gap-color);
 }
 
 .methodology-section__intro {
@@ -17,11 +13,7 @@
   gap: var(--spacing-6);
   padding-block: var(--section-padding-block-lg);
   padding-inline: var(--section-padding-inline);
-  background-color: var(--color-background-default);
-}
-
-.surface-dark .methodology-section .methodology-section__intro {
-  background-color: var(--color-background-dark);
+  background-color: var(--methodology-section-cell-bg);
 }
 
 .methodology-section__intro p {
@@ -35,11 +27,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--border-width-sm);
-  background-color: var(--color-background-dark);
-}
-
-.surface-dark .methodology-section .methodology-section__steps {
-  background-color: var(--color-white);
+  background-color: var(--methodology-section-gap-color);
 }
 
 /* Step — gap entre número y texto = borde vertical */
@@ -47,21 +35,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--border-width-sm);
-  background-color: var(--color-background-dark);
-}
-
-.surface-dark .methodology-section .methodology-section__step {
-  background-color: var(--color-white);
+  background-color: var(--methodology-section-gap-color);
 }
 
 .methodology-section__number,
 .methodology-section__text {
-  background-color: var(--color-background-default);
-}
-
-.surface-dark .methodology-section .methodology-section__number,
-.surface-dark .methodology-section .methodology-section__text {
-  background-color: var(--color-background-dark);
+  background-color: var(--methodology-section-cell-bg);
 }
 
 .methodology-section__number {
@@ -70,14 +49,9 @@
   font-size: var(--font-size-10);
   font-weight: var(--font-weight-thin);
   line-height: var(--line-height-none);
-  color: var(--color-primary);
+  color: var(--methodology-section-number-color);
   aspect-ratio: 1;
 }
-
-.surface-dark .methodology-section .methodology-section__number {
-  color: var(--color-secondary);
-}
-
 
 .methodology-section__text {
   padding-block: var(--section-padding-block-md);

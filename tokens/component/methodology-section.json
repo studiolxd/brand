@@ -1,0 +1,7 @@
+{
+  "methodology-section": {
+    "gap-color":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Color del gap entre celdas — actúa como borde (gap technique)" },
+    "cell-bg":      { "$value": "{color.background.default}", "$type": "color", "$description": "Fondo de las celdas de contenido" },
+    "number-color": { "$value": "{color.primary}",            "$type": "color", "$description": "Color tipográfico del número de paso" }
+  }
+}

@@ -1,0 +1,9 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --methodology-section-gap-color: var(--color-background-dark); /** Color del gap entre celdas — actúa como borde (gap technique) */
+  --methodology-section-cell-bg: var(--color-background-default); /** Fondo de las celdas de contenido */
+  --methodology-section-number-color: var(--color-primary); /** Color tipográfico del número de paso */
+}
