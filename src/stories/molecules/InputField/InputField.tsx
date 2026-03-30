@@ -16,7 +16,6 @@ interface InputFieldProps {
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
-  dark?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
@@ -36,7 +35,6 @@ export function InputField({
   error = false,
   errorMessage,
   helperText,
-  dark = false,
   onChange,
   onBlur,
   onFocus,
@@ -46,8 +44,8 @@ export function InputField({
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
   return (
-    <div className={['input-field', dark ? 'input-field--dark' : ''].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} dark={dark}>{label}</Label>
+    <div className="input-field">
+      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
       <Input
         id={id}
         name={name}
@@ -58,7 +56,6 @@ export function InputField({
         disabled={disabled}
         readOnly={readOnly}
         error={error}
-        dark={dark}
         describedBy={describedBy}
         onChange={onChange}
         onBlur={onBlur}

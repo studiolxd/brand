@@ -3,6 +3,8 @@ import './Button.css';
 interface ButtonProps {
   /** Visual variant of the button */
   variant?: 'primary' | 'primary-dark' | 'ghost' | 'form';
+  /** Size of the button */
+  size?: 'sm' | 'md' | 'lg';
   /** Stretches the button to full container width */
   block?: boolean;
   /** Button label */
@@ -15,6 +17,7 @@ interface ButtonProps {
 
 export function Button({
   variant = 'primary',
+  size = 'md',
   block = false,
   children,
   type = 'button',
@@ -26,6 +29,7 @@ export function Button({
       className={[
         'button',
         `button--${variant}`,
+        size !== 'md' ? `button--${size}` : '',
         block ? 'button--block' : '',
       ].filter(Boolean).join(' ')}
       type={type}

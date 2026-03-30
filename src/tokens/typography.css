@@ -19,11 +19,11 @@
   --font-size-3: 18px; /** Body large */
   --font-size-4: 20px; /** Small subtitles */
   --font-size-5: 24px; /** Subtitles */
-  --font-size-6: 32px; /** Titles */
-  --font-size-7: 40px; /** Large titles */
-  --font-size-8: 56px; /** Display */
-  --font-size-9: 72px; /** Large display */
-  --font-size-10: 96px; /** Extra large display */
+  --font-size-6: 28px; /** Small titles */
+  --font-size-7: 32px; /** Titles */
+  --font-size-8: 40px; /** Large titles */
+  --font-size-9: 56px; /** Display */
+  --font-size-10: 72px; /** Large display */
   --font-weight-thin: 100; /** Thin */
   --font-weight-extralight: 200; /** Extra light */
   --font-weight-light: 300; /** Light */

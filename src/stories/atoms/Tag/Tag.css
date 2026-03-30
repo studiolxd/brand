@@ -1,0 +1,41 @@
+.tag {
+  display: inline-block;
+  border-radius: var(--tag-border-radius);
+  font-family: var(--tag-font-family);
+  font-size: var(--tag-font-size);
+  font-weight: var(--tag-font-weight);
+  line-height: var(--tag-line-height);
+  padding-block: var(--tag-padding-block);
+  padding-inline: var(--tag-padding-inline);
+  white-space: nowrap;
+}
+
+.tag--default {
+  background-color: var(--tag-default-bg);
+  color: var(--tag-default-color);
+}
+
+.tag--primary {
+  background-color: var(--tag-primary-bg);
+  color: var(--tag-primary-color);
+}
+
+.tag--secondary {
+  background-color: var(--tag-secondary-bg);
+  color: var(--tag-secondary-color);
+}
+
+.tag--tertiary {
+  background-color: var(--tag-tertiary-bg);
+  color: var(--tag-tertiary-color);
+}
+
+.tag--quaternary {
+  background-color: var(--tag-quaternary-bg);
+  color: var(--tag-quaternary-color);
+}
+
+.tag--quinary {
+  background-color: var(--tag-quinary-bg);
+  color: var(--tag-quinary-color);
+}

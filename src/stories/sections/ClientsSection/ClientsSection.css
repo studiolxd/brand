@@ -1,0 +1,27 @@
+/* ─── Section ────────────────────────────────────────────── */
+.clients-section {
+  padding-block: var(--spacing-7);
+  border-block-start: var(--border-width-sm) solid currentColor;
+}
+
+.clients-section .carousel {
+  --carousel-slide-size: 320px;
+}
+
+/* ─── Logo slide ─────────────────────────────────────────── */
+.clients-section__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  height: 160px;
+}
+
+.clients-section__logo {
+  display: block;
+  width: 320px;
+  height: 160px;
+  object-fit: contain;
+}
+

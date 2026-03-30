@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './Button';
+const hero = 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1280&q=80';
 
 const meta: Meta<typeof Button> = {
-  title: 'Átomos/Botón',
-  component: Button,  
+  title: 'Atoms/Button',
+  component: Button,
   parameters: {
     layout: 'padded',
   },
@@ -12,6 +13,11 @@ const meta: Meta<typeof Button> = {
       control: { type: 'select' },
       options: ['primary', 'primary-dark', 'ghost', 'form'],
       description: 'Variante visual del botón.',
+    },
+    size: {
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del botón.',
     },
     block: {
       control: { type: 'boolean' },
@@ -32,7 +38,9 @@ const meta: Meta<typeof Button> = {
     },
   },
   args: {
-    children: 'Botón',
+    children: 'Button',
+    variant: 'primary',
+    size: 'md',
     disabled: false,
     block: false,
   },
@@ -46,7 +54,6 @@ export const Primary: Story = {
 };
 
 export const PrimaryDark: Story = {
-  name: 'Primary oscuro',
   args: { variant: 'primary-dark' },
   globals: {
     backgrounds: { value: 'dark' },
@@ -55,20 +62,50 @@ export const PrimaryDark: Story = {
 
 export const Ghost: Story = {
   args: { variant: 'ghost' },
-  globals: {
-    backgrounds: { value: 'dark' },
-  },
+  decorators: [
+    (Story) => (
+      <div style={{
+        backgroundImage: `url(${hero})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '2rem',
+      }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Form: Story = {
   args: { variant: 'form' },
 };
 
-export const Bloque: Story = {
-  name: 'En bloque',
+export const Block: Story = {
   args: { variant: 'primary', block: true },
 };
 
-export const Deshabilitado: Story = {
+export const Small: Story = {
+  args: { size: 'sm' },
+};
+
+export const Large: Story = {
+  args: { size: 'lg' },
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <Button variant="primary" size="sm">Small</Button>
+      <Button variant="primary" size="md">Medium</Button>
+      <Button variant="primary" size="lg">Large</Button>
+    </div>
+  ),
+};
+
+export const Disabled: Story = {
   args: { variant: 'primary', disabled: true },
+};
+
+export const FormDisabled: Story = {
+  args: { variant: 'form', disabled: true, block: true },
 };

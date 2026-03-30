@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as InputStories from "./Input.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { inputBaseTokens, inputFocusTokens, inputErrorTokens, inputDisabledTokens, inputDarkTokens } from "../../../tokens/components/input";
+import { inputBaseTokens, inputFocusTokens, inputErrorTokens, inputDisabledTokens, inputDarkTokens, inputSizeTokens } from "../../../tokens/components/input";
 
 <Meta of={InputStories} />
 
@@ -29,6 +29,12 @@ Campo de texto para la introducción de datos en formularios. Siempre ocupa el a
 
 <Canvas of={InputStories.Dark} className="bg-dark" />
 
+## Tamaños
+
+Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica mediante la prop `size`.
+
+<Canvas of={InputStories.Sizes} />
+
 ---
 
 ## Tokens
@@ -52,6 +58,10 @@ Campo de texto para la introducción de datos en formularios. Siempre ocupa el a
 ### Oscuro
 
 <TokenTable tokens={inputDarkTokens} />
+
+### Tamaños
+
+<TokenTable tokens={inputSizeTokens} />
 
 ## Props
 

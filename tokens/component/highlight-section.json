@@ -1,0 +1,11 @@
+{
+  "highlight-section": {
+    "padding-block":   { "$value": "{spacing.7}", "$type": "dimension", "$description": "Padding vertical" },
+    "padding-inline":  { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding horizontal" },
+    "gap":             { "$value": "{spacing.6}", "$type": "dimension", "$description": "Separación interna del container" },
+    "font-size":       { "$value": "{font-size.9}", "$type": "dimension", "$description": "Tamaño del texto destacado" },
+    "font-weight":     { "$value": "{font-weight.semibold}", "$type": "number",    "$description": "Peso del texto destacado" },
+    "line-height":     { "$value": "{line-height.tight}", "$type": "number",    "$description": "Interlineado del texto destacado" },
+    "max-width":       { "$value": "clamp(480px, 66.666%, 860px)", "$type": "string", "$description": "Ancho máximo del container en desktop" }
+  }
+}

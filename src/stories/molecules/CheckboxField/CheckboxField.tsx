@@ -6,7 +6,6 @@ interface CheckboxFieldProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
-  dark?: boolean;
   id?: string;
   name?: string;
   value?: string;
@@ -18,7 +17,6 @@ export function CheckboxField({
   checked,
   defaultChecked,
   disabled,
-  dark = false,
   id,
   name,
   value,
@@ -28,7 +26,6 @@ export function CheckboxField({
     <label
       className={[
         'checkbox-field',
-        dark ? 'checkbox-field--dark' : '',
         disabled ? 'checkbox-field--disabled' : '',
       ].filter(Boolean).join(' ')}
     >
@@ -36,7 +33,6 @@ export function CheckboxField({
         checked={checked}
         defaultChecked={defaultChecked}
         disabled={disabled}
-        dark={dark}
         id={id}
         name={name}
         value={value}

@@ -7,8 +7,8 @@ interface InputProps {
   defaultValue?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   error?: boolean;
-  dark?: boolean;
   id?: string;
   name?: string;
   describedBy?: string;
@@ -24,8 +24,8 @@ export function Input({
   defaultValue,
   disabled,
   readOnly,
+  size = 'md',
   error = false,
-  dark = false,
   id,
   name,
   describedBy,
@@ -35,7 +35,7 @@ export function Input({
 }: InputProps) {
   return (
     <input
-      className={['input', error ? 'input--error' : '', dark ? 'input--dark' : ''].filter(Boolean).join(' ')}
+      className={['input', size !== 'md' ? `input--${size}` : '', error ? 'input--error' : ''].filter(Boolean).join(' ')}
       type={type}
       placeholder={placeholder}
       value={value}

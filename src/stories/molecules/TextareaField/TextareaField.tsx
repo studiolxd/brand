@@ -16,7 +16,6 @@ interface TextareaFieldProps {
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
-  dark?: boolean;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
@@ -36,7 +35,6 @@ export function TextareaField({
   error = false,
   errorMessage,
   helperText,
-  dark = false,
   onChange,
   onBlur,
   onFocus,
@@ -46,8 +44,8 @@ export function TextareaField({
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
 
   return (
-    <div className={['textarea-field', dark ? 'textarea-field--dark' : ''].filter(Boolean).join(' ')}>
-      <Label htmlFor={id} hidden={labelHidden} dark={dark}>{label}</Label>
+    <div className="textarea-field">
+      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
       <Textarea
         id={id}
         name={name}
@@ -58,7 +56,6 @@ export function TextareaField({
         disabled={disabled}
         readOnly={readOnly}
         error={error}
-        dark={dark}
         describedBy={describedBy}
         onChange={onChange}
         onBlur={onBlur}

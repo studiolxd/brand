@@ -1,0 +1,35 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --header-height-mobile: 80px; /** Alto del header en mobile (con hamburger) */
+  --header-height-desktop: 100px; /** Alto del header en desktop (nav inline) */
+  --header-logo-height-mobile: 60px; /** Alto del logo en mobile */
+  --header-logo-height-desktop: 60px; /** Alto del logo en desktop */
+  --header-z-index: 1000; /** Z-index del header */
+  --header-controls-z-index: 1001; /** Z-index del logo y hamburger (sobre el backdrop) */
+  --header-navbar-z-index: 998; /** Z-index del overlay de navegación */
+  --header-backdrop-z-index: 999; /** Z-index del pseudo-elemento backdrop */
+  --header-nav-gap-mobile: 0; /** Separación entre enlaces en mobile */
+  --header-featured-border-color: currentColor; /** Color del borde del featured link */
+  --header-shadow: var(--shadow-lg); /** Sombra del header */
+  --header-navbar-transition-duration: var(--motion-duration-base); /** Duración del slide de la navbar */
+  --header-navbar-transition-easing: var(--motion-easing-in-out); /** Easing del slide de la navbar */
+  --header-nav-font-size-mobile: var(--font-size-6); /** Tamaño de fuente de los enlaces en mobile */
+  --header-nav-font-size-desktop: var(--font-size-2); /** Tamaño de fuente de los enlaces en desktop */
+  --header-nav-font-weight-mobile: var(--font-weight-semibold); /** Peso de fuente de los enlaces en mobile */
+  --header-nav-font-weight-desktop: var(--font-weight-medium); /** Peso de fuente de los enlaces en desktop */
+  --header-nav-padding-block-mobile: var(--spacing-3); /** Padding vertical de la zona de nav en mobile */
+  --header-nav-gap-desktop: var(--spacing-6); /** Separación entre enlaces en desktop */
+  --header-nav-padding-inline: var(--spacing-6); /** Padding horizontal del header y la navbar */
+  --header-featured-border-width: var(--border-width-sm); /** Grosor del borde del featured link */
+  --header-featured-font-size: var(--font-size-5); /** Tamaño de fuente del featured link */
+  --header-featured-font-weight: var(--font-weight-semibold); /** Peso de fuente del featured link */
+  --header-featured-padding-inline: var(--spacing-7); /** Padding horizontal del featured link */
+  --header-featured-margin-inline-end: var(--spacing-7); /** Separación entre el featured link y la navegación */
+  --header-bg: var(--color-background-default); /** Fondo del header */
+  --header-dark-bg: var(--color-background-dark); /** Fondo del header en variante oscura */
+  --header-nav-color: var(--color-text-default); /** Color de los enlaces de navegación */
+  --header-nav-dark-color: var(--color-text-dark); /** Color de los enlaces en variante oscura */
+}

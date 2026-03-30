@@ -4,7 +4,7 @@ import { InputField } from '../InputField/InputField';
 import { Button } from '../../atoms/Button/Button';
 
 const meta: Meta<typeof Form> = {
-  title: 'Moléculas/Form',
+  title: 'Molecules/Form',
   component: Form,
   parameters: {
     layout: 'padded',
@@ -14,21 +14,14 @@ const meta: Meta<typeof Form> = {
       control: { type: 'object' },
       description: 'Lista de mensajes de error agrupados, mostrados sobre las acciones.',
     },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Variante para usar sobre fondo oscuro.',
-    },
   },
-  args: {
-    dark: false,
-  },
+  args: {},
 };
 
 export default meta;
 type Story = StoryObj<typeof Form>;
 
 export const Default: Story = {
-  name: 'Por defecto',
   args: {
     actions: <Button variant="form">Enviar</Button>,
     children: (
@@ -37,8 +30,7 @@ export const Default: Story = {
   },
 };
 
-export const ConErrores: Story = {
-  name: 'Con errores',
+export const WithErrors: Story = {
   args: {
     errors: ['El email es obligatorio.', 'Debes aceptar la política de privacidad.'],
     actions: <Button variant="form">Enviar</Button>,
@@ -49,15 +41,14 @@ export const ConErrores: Story = {
 };
 
 export const Dark: Story = {
-  name: 'Oscuro',
   args: {
-    dark: true,
     errors: ['El email es obligatorio.'],
     actions: <Button variant="form">Enviar</Button>,
     children: (
-      <InputField id="form-email-dark" label="Email" labelHidden placeholder="tu@email.com" dark />
+      <InputField id="form-email-dark" label="Email" labelHidden placeholder="tu@email.com" />
     ),
   },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

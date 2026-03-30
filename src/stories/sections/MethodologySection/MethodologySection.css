@@ -1,0 +1,110 @@
+/* Gap = border color — las celdas blancas sobre fondo oscuro crean los divisores */
+.methodology-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--border-width-sm);
+  background-color: var(--color-background-dark);
+}
+
+.dark .methodology-section {
+  background-color: var(--color-white);
+}
+
+.methodology-section__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-6);
+  padding-block: var(--spacing-6);
+  padding-inline: var(--spacing-4);
+  background-color: var(--color-background-default);
+}
+
+.dark .methodology-section .methodology-section__intro {
+  background-color: var(--color-background-dark);
+}
+
+.methodology-section__intro p {
+  font-size: var(--font-size-9);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+/* Steps — gap vertical entre pasos = borde horizontal */
+.methodology-section__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--border-width-sm);
+  background-color: var(--color-background-dark);
+}
+
+.dark .methodology-section .methodology-section__steps {
+  background-color: var(--color-white);
+}
+
+/* Step — gap entre número y texto = borde vertical */
+.methodology-section__step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--border-width-sm);
+  background-color: var(--color-background-dark);
+}
+
+.dark .methodology-section .methodology-section__step {
+  background-color: var(--color-white);
+}
+
+.methodology-section__number,
+.methodology-section__text {
+  background-color: var(--color-background-default);
+}
+
+.dark .methodology-section .methodology-section__number,
+.dark .methodology-section .methodology-section__text {
+  background-color: var(--color-background-dark);
+}
+
+.methodology-section__number {
+  padding: var(--spacing-4);
+  font-size: var(--font-size-10);
+  font-weight: 10;
+  line-height: var(--line-height-none);
+  color: var(--color-primary);
+  aspect-ratio: 1;
+}
+
+.dark .methodology-section .methodology-section__number {
+  color: var(--color-secondary);
+}
+
+.dark .methodology-section .button--primary {
+  --button-primary-bg: var(--button-primary-dark-bg);
+  --button-primary-color: var(--button-primary-dark-color);
+  --button-primary-border: var(--button-primary-dark-border);
+  --button-primary-hover-bg: var(--button-primary-dark-hover-bg);
+  --button-primary-hover-color: var(--button-primary-dark-hover-color);
+  --button-primary-hover-border: var(--button-primary-dark-hover-border);
+  --button-primary-focus-ring-color: var(--button-primary-dark-focus-ring-color);
+}
+
+.methodology-section__text {
+  padding: var(--spacing-4);
+}
+
+/* ---- md (>= 768px) ---- */
+
+@media (min-width: 768px) {
+  .methodology-section__step {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+
+/* ---- lg (>= 1024px) ---- */
+
+@media (min-width: 1024px) {
+  .methodology-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: unset;
+  }
+}

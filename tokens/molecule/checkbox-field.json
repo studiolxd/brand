@@ -1,6 +1,6 @@
 {
   "checkbox-field": {
-    "gap":              { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Separación entre el checkbox y el texto" },
+    "gap":              { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Separación entre el checkbox y el texto" },
     "padding-inline":   { "$value": "{control.padding-inline}", "$type": "dimension", "$description": "Padding inline — hereda de control" },
     "padding-block":    { "$value": "{control.padding-block}",  "$type": "dimension", "$description": "Padding block — hereda de control" },
     "cursor":           { "$value": "pointer",                  "$type": "string",    "$description": "Cursor" },

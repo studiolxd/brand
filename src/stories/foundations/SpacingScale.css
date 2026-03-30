@@ -12,24 +12,24 @@
 }
 
 .spacing-scale__name {
-  font-family: ui-monospace, monospace;
-  font-size: 13px;
-  color: #555;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-1);
+  color: var(--color-text-muted);
   width: 160px;
   flex-shrink: 0;
 }
 
 .spacing-scale__value {
-  font-family: ui-monospace, monospace;
-  font-size: 13px;
-  color: #888;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-1);
+  color: var(--color-text-muted);
   width: 40px;
   flex-shrink: 0;
 }
 
 .spacing-scale__bar {
-  height: 16px;
+  height: var(--spacing-4);
   background-color: var(--color-primary);
-  border-radius: 2px;
+  border-radius: var(--border-radius-sm);
   flex-shrink: 0;
 }

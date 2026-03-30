@@ -5,16 +5,23 @@
   border-width: var(--form-border-width);
   border-style: var(--form-border-style);
   border-color: var(--form-border-color);
+  background-color: var(--form-separator-color);
 }
 
-/* Separadores entre hijos directos */
-.form > * + * {
-  border-block-start: var(--form-separator-width) var(--form-separator-style) var(--form-separator-color);
+/* Cada hijo directo tapa el background del form — el gap queda visible como separador */
+.form > .input-field,
+.form > .textarea-field,
+.form > .checkbox-field,
+.form > .form-errors {
+  background-color: var(--color-background-default);
 }
 
-/* Button--form: especificidad 0,2,1 gana sobre button.button--form (0,1,1) */
+/* El botón necesita su propio fondo explícito y borde que coincida con él */
 .form > .button.button--form {
-  border-block-start-color: var(--form-separator-color);
+  background-color: var(--button-form-bg);
+  --button-form-border: var(--button-form-bg);
+  --button-form-hover-border: var(--button-form-hover-bg);
+  --button-form-active-border: var(--button-form-active-bg);
 }
 
 .form--dark {
@@ -24,20 +31,40 @@
   --form-helper-color: var(--form-helper-dark-color);
 }
 
-/* Suprimir bordes propios de los hijos — el form dibuja el perímetro */
-/* Especificidad 0,3,0 — gana sobre .input.input--dark (0,2,0) */
+.form--dark > .input-field,
+.form--dark > .textarea-field,
+.form--dark > .checkbox-field,
+.form--dark > .form-errors {
+  background-color: var(--color-background-dark);
+}
+
+/* Suprimir bordes propios de los hijos — color = fondo del elemento */
 .form > .input-field > .input,
 .form > .input-field > input {
-  --input-border-color: transparent;
-  --input-error-border-color: transparent;
-  --input-disabled-border-color: transparent;
+  --input-border-color: var(--color-background-default);
+  --input-error-border-color: var(--color-background-default);
+  --input-disabled-border-color: var(--color-background-default);
 }
 
 .form > .textarea-field > .textarea,
 .form > .textarea-field > textarea {
-  --textarea-border-color: transparent;
-  --textarea-error-border-color: transparent;
-  --textarea-disabled-border-color: transparent;
+  --textarea-border-color: var(--color-background-default);
+  --textarea-error-border-color: var(--color-background-default);
+  --textarea-disabled-border-color: var(--color-background-default);
+}
+
+.form--dark > .input-field > .input,
+.form--dark > .input-field > input {
+  --input-border-color: var(--color-background-dark);
+  --input-error-border-color: var(--color-background-dark);
+  --input-disabled-border-color: var(--color-background-dark);
+}
+
+.form--dark > .textarea-field > .textarea,
+.form--dark > .textarea-field > textarea {
+  --textarea-border-color: var(--color-background-dark);
+  --textarea-error-border-color: var(--color-background-dark);
+  --textarea-disabled-border-color: var(--color-background-dark);
 }
 
 /* Heading de formulario — usado por organismos */

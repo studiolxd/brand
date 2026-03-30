@@ -3,7 +3,7 @@ import './Logo.css';
 import { Logo } from './Logo';
 
 const meta: Meta<typeof Logo> = {
-  title: 'Fundamentos/Logotipo',
+  title: 'Atoms/Logo',
   component: Logo,
   parameters: {
     layout: 'centered',
@@ -17,14 +17,10 @@ const meta: Meta<typeof Logo> = {
       control: { type: 'number' },
       description: 'Ancho del logotipo en píxeles. Si no se define, se ajusta a la altura.',
     },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Versión en blanco para usar sobre fondos oscuros.',
-    },
     className: { table: { disable: true } },
   },
   args: {
-    dark: false,
+    height: 100,
   },
 };
 
@@ -41,11 +37,7 @@ export const Default: Story = {
   ],
 };
 
-export const SobreFondoOscuro: Story = {
-  name: 'Oscuro',
-  args: {
-    dark: true,
-  },
+export const Dark: Story = {
   decorators: [
     (Story) => (
       <div className="logo-preview logo-preview--dark">

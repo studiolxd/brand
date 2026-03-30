@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Textarea } from './Textarea';
 
 const meta: Meta<typeof Textarea> = {
-  title: 'Átomos/Textarea',
+  title: 'Atoms/Textarea',
   component: Textarea,
   parameters: {
     layout: 'padded',
@@ -28,17 +28,12 @@ const meta: Meta<typeof Textarea> = {
       control: { type: 'boolean' },
       description: 'Estado de error.',
     },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Variante para usar sobre fondo oscuro.',
-    },
   },
   args: {
     placeholder: 'Escribe algo…',
     disabled: false,
     readOnly: false,
     error: false,
-    dark: false,
   },
 };
 
@@ -66,7 +61,7 @@ export const ReadOnly: Story = {
 
 export const Dark: Story = {
   name: 'Oscuro',
-  args: { dark: true },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

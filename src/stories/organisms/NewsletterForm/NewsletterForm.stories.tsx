@@ -3,13 +3,12 @@ import { NewsletterForm } from './NewsletterForm';
 
 const privacyLabel = (
   <>
-    He leído y acepto la{' '}
-    <a href="#">política de privacidad</a>
+    He leído la <a href="#">política de privacidad</a> y consiento recibir la newsletter
   </>
 );
 
 const meta: Meta<typeof NewsletterForm> = {
-  title: 'Organismos/NewsletterForm',
+  title: 'Organisms/NewsletterForm',
   component: NewsletterForm,
   parameters: {
     layout: 'padded',
@@ -43,14 +42,9 @@ const meta: Meta<typeof NewsletterForm> = {
       control: { type: 'text' },
       description: 'Mensaje de éxito.',
     },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Variante para usar sobre fondo oscuro.',
-    },
   },
   args: {
     privacyLabel,
-    dark: false,
     submitting: false,
     success: false,
   },
@@ -59,26 +53,19 @@ const meta: Meta<typeof NewsletterForm> = {
 export default meta;
 type Story = StoryObj<typeof NewsletterForm>;
 
-export const Default: Story = {
-  name: 'Por defecto',
+export const Default: Story = {};
+
+export const Submitting: Story = {
+  args: { submitting: true },
 };
 
-export const Enviando: Story = {
-  name: 'Enviando',
-  args: {
-    submitting: true,
-  },
-};
-
-export const ConErrores: Story = {
-  name: 'Con errores',
+export const WithErrors: Story = {
   args: {
     errors: ['El email es obligatorio.', 'Debes aceptar la política de privacidad.'],
   },
 };
 
-export const Exito: Story = {
-  name: 'Éxito',
+export const Success: Story = {
   args: {
     success: true,
     successMessage: '¡Gracias por suscribirte! Ya no te perderás ninguna de nuestras novedades.',
@@ -86,21 +73,17 @@ export const Exito: Story = {
 };
 
 export const Dark: Story = {
-  name: 'Oscuro',
-  args: {
-    dark: true,
-  },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },
 };
 
-export const DarkConErrores: Story = {
-  name: 'Oscuro con errores',
+export const DarkWithErrors: Story = {
   args: {
-    dark: true,
     errors: ['El email es obligatorio.', 'Debes aceptar la política de privacidad.'],
   },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

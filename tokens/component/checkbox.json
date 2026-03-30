@@ -20,6 +20,8 @@
     "dark-border-color":     { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Color del borde sobre fondo oscuro" },
     "dark-bg-checked":       { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Fondo marcado sobre fondo oscuro" },
     "dark-check-color":      { "$value": "{color.background.dark}",     "$type": "color",     "$description": "Color del checkmark sobre fondo oscuro" },
-    "dark-focus-ring-color": { "$value": "{color.secondary}",           "$type": "color",     "$description": "Color del anillo de foco sobre fondo oscuro" }
+    "dark-focus-ring-color":          { "$value": "{color.text.dark}",       "$type": "color",     "$description": "Color del anillo de foco sobre fondo oscuro" },
+    "dark-disabled-border-color":     { "$value": "{color.grey-light}",     "$type": "color",     "$description": "Color del borde deshabilitado sobre fondo oscuro" },
+    "dark-disabled-bg-checked":       { "$value": "{color.grey-light}",     "$type": "color",     "$description": "Fondo marcado deshabilitado sobre fondo oscuro" }
   }
 }

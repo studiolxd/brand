@@ -5,37 +5,135 @@
   border-width: var(--form-border-width);
   border-style: var(--form-border-style);
   border-color: var(--form-border-color);
+  background-color: var(--form-separator-color);
 }
 
-/* Separadores entre hijos directos */
-.form > * + * {
-  border-block-start: var(--form-separator-width) var(--form-separator-style) var(--form-separator-color);
+/* Cada hijo directo tapa el background del form — el gap queda visible como separador */
+.form > .input-field,
+.form > .textarea-field,
+.form > .checkbox-field,
+.form > .form-errors {
+  background-color: var(--color-background-default);
 }
 
-/* Button--form: especificidad 0,2,1 gana sobre button.button--form (0,1,1) */
+/* input-phone-field actúa como sub-contenedor de la misma técnica:
+   su fondo es el separador y el gap interior dibuja la línea entre input y helper */
+.form > .input-phone-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form > .input-phone-field > .input-phone {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form > .input-phone-field > .input-phone > .input-phone__country,
+.form > .input-phone-field > .input-phone .input-phone__number {
+  background-color: var(--color-background-default);
+}
+
+/* El botón necesita su propio fondo explícito para que el disabled (opacity) no revele el separador */
+/* Borde = fondo del estado correspondiente para que sea invisible sin cambiar el tamaño */
 .form > .button.button--form {
-  border-block-start-color: var(--form-separator-color);
+  background-color: var(--button-form-bg);
+  --button-form-border: var(--button-form-bg);
+  --button-form-hover-border: var(--button-form-hover-bg);
+  --button-form-active-border: var(--button-form-active-bg);
 }
 
-.form--dark {
+.form > .button.button--form:hover {
+  background-color: var(--button-form-hover-bg);
+}
+
+.form > .button.button--form:active {
+  background-color: var(--button-form-active-bg);
+}
+
+.form--dark,
+.dark .form {
   --form-border-color: var(--form-border-dark-color);
   --form-separator-color: var(--form-separator-dark-color);
   --form-error-color: var(--form-error-dark-color);
   --form-helper-color: var(--form-helper-dark-color);
 }
 
+.form--dark > .input-field,
+.form--dark > .textarea-field,
+.form--dark > .checkbox-field,
+.form--dark > .form-errors,
+.dark .form > .input-field,
+.dark .form > .textarea-field,
+.dark .form > .checkbox-field,
+.dark .form > .form-errors {
+  background-color: var(--color-background-dark);
+}
+
+.form--dark > .input-phone-field,
+.dark .form > .input-phone-field {
+  background-color: var(--form-separator-dark-color);
+}
+
+.form--dark > .input-phone-field > .input-phone,
+.dark .form > .input-phone-field > .input-phone {
+  background-color: var(--form-separator-dark-color);
+  gap: var(--form-gap);
+}
+
+.form--dark > .input-phone-field > .input-phone > .input-phone__country,
+.form--dark > .input-phone-field > .input-phone .input-phone__number,
+.dark .form > .input-phone-field > .input-phone > .input-phone__country,
+.dark .form > .input-phone-field > .input-phone .input-phone__number {
+  background-color: var(--color-background-dark);
+}
+
+.form--dark > .input-phone-field > .input-phone-field__helper,
+.dark .form > .input-phone-field > .input-phone-field__helper {
+  background-color: var(--color-background-dark);
+}
+
 /* Suprimir bordes propios de los hijos — el form dibuja el perímetro */
+/* Color = fondo del elemento para que el borde sea invisible sin cambiar el tamaño */
 /* Especificidad 0,3,0 — gana sobre .input.input--dark (0,2,0) */
 .form > .input-field > .input {
-  --input-border-color: transparent;
-  --input-error-border-color: transparent;
-  --input-disabled-border-color: transparent;
+  --input-border-color: var(--color-background-default);
+  --input-error-border-color: var(--color-background-default);
+  --input-disabled-border-color: var(--color-background-default);
+}
+
+.form > .input-phone-field > .input-phone {
+  --input-border-color: var(--color-background-default);
+  --input-error-border-color: var(--color-background-default);
+  --input-disabled-border-color: var(--color-background-default);
+  --input-phone-country-border-color: var(--color-background-default);
 }
 
 .form > .textarea-field > .textarea {
-  --textarea-border-color: transparent;
-  --textarea-error-border-color: transparent;
-  --textarea-disabled-border-color: transparent;
+  --textarea-border-color: var(--color-background-default);
+  --textarea-error-border-color: var(--color-background-default);
+  --textarea-disabled-border-color: var(--color-background-default);
+}
+
+.form--dark > .input-field > .input,
+.dark .form > .input-field > .input {
+  --input-border-color: var(--color-background-dark);
+  --input-error-border-color: var(--color-background-dark);
+  --input-disabled-border-color: var(--color-background-dark);
+}
+
+.form--dark > .textarea-field > .textarea,
+.dark .form > .textarea-field > .textarea {
+  --textarea-border-color: var(--color-background-dark);
+  --textarea-error-border-color: var(--color-background-dark);
+  --textarea-disabled-border-color: var(--color-background-dark);
+}
+
+.form--dark > .input-phone-field > .input-phone,
+.dark .form > .input-phone-field > .input-phone {
+  --input-border-color: var(--color-background-dark);
+  --input-error-border-color: var(--color-background-dark);
+  --input-disabled-border-color: var(--color-background-dark);
+  --input-phone-country-border-color: var(--color-background-dark);
 }
 
 .form-errors {

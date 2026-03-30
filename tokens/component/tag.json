@@ -1,0 +1,24 @@
+{
+  "tag": {
+    "border-radius":  { "$value": "{border-radius.full}",    "$type": "dimension", "$description": "Pill shape" },
+    "font-family":    { "$value": "{font-family.sans}",      "$type": "string",    "$description": "Font family" },
+    "font-size":      { "$value": "{font-size.1}",           "$type": "dimension", "$description": "14px — UI label" },
+    "font-weight":    { "$value": "{font-weight.medium}",    "$type": "number",    "$description": "Medium weight" },
+    "line-height":    { "$value": "{line-height.none}",      "$type": "number",    "$description": "Single-line" },
+    "padding-block":  { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Block (vertical) padding" },
+    "padding-inline": { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Inline (horizontal) padding" },
+
+    "default-bg":       { "$value": "{color.grey-lightest}",   "$type": "color", "$description": "Default background" },
+    "default-color":    { "$value": "{color.text.default}",    "$type": "color", "$description": "Default text color" },
+    "primary-bg":       { "$value": "{color.primary}",         "$type": "color", "$description": "Primary (prussian) background" },
+    "primary-color":    { "$value": "{color.text.dark}",       "$type": "color", "$description": "Primary text — white on dark bg" },
+    "secondary-bg":     { "$value": "{color.secondary}",       "$type": "color", "$description": "Secondary (lavender) background" },
+    "secondary-color":  { "$value": "{color.text.default}",    "$type": "color", "$description": "Secondary text — dark on light bg" },
+    "tertiary-bg":      { "$value": "{color.tertiary}",        "$type": "color", "$description": "Tertiary (yellow) background" },
+    "tertiary-color":   { "$value": "{color.text.default}",    "$type": "color", "$description": "Tertiary text — dark on light bg" },
+    "quaternary-bg":    { "$value": "{color.quaternary}",      "$type": "color", "$description": "Quaternary (emerald) background" },
+    "quaternary-color": { "$value": "{color.text.default}",    "$type": "color", "$description": "Quaternary text — dark on light bg" },
+    "quinary-bg":       { "$value": "{color.quinary}",         "$type": "color", "$description": "Quinary (cayenne) background" },
+    "quinary-color":    { "$value": "{color.text.default}",    "$type": "color", "$description": "Quinary text — dark on orange bg" }
+  }
+}

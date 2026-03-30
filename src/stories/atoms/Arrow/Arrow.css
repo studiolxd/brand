@@ -1,0 +1,11 @@
+.arrow {
+  display: block;
+  height: auto;
+  flex-shrink: 0;
+  --arrow-width: max(3.125vw, 48px); /* md por defecto */
+  width: var(--arrow-width);
+}
+
+.arrow--sm { --arrow-width: max(1.5625vw, 24px); }
+.arrow--md { --arrow-width: max(3.125vw, 48px); }
+.arrow--lg { --arrow-width: clamp(72px, 9.375vw, 144px); }

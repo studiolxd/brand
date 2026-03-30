@@ -1,0 +1,58 @@
+import * as RadixSelect from '@radix-ui/react-select';
+import { Chevron } from '../Chevron/Chevron';
+import './Select.css';
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+interface SelectProps {
+  options: SelectOption[];
+  value?: string;
+  defaultValue?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  dark?: boolean;
+  onValueChange?: (value: string) => void;
+  id?: string;
+}
+
+export function Select({
+  options,
+  value,
+  defaultValue,
+  placeholder = 'Seleccionar…',
+  disabled,
+  dark,
+  onValueChange,
+  id,
+}: SelectProps) {
+  return (
+    <RadixSelect.Root
+      value={value}
+      defaultValue={defaultValue}
+      disabled={disabled}
+      onValueChange={onValueChange}
+    >
+      <RadixSelect.Trigger className={['select', dark ? 'select--dark' : ''].filter(Boolean).join(' ')} id={id} aria-label={placeholder}>
+        <RadixSelect.Value placeholder={placeholder} />
+        <RadixSelect.Icon asChild>
+          <Chevron className="select__icon" size="sm" />
+        </RadixSelect.Icon>
+      </RadixSelect.Trigger>
+
+      <RadixSelect.Portal>
+        <RadixSelect.Content className={['select__content', dark ? 'select__content--dark' : ''].filter(Boolean).join(' ')} position="popper">
+          <RadixSelect.Viewport>
+            {options.map(({ value: v, label }) => (
+              <RadixSelect.Item key={v} value={v} className="select__item">
+                <RadixSelect.ItemText>{label}</RadixSelect.ItemText>
+              </RadixSelect.Item>
+            ))}
+          </RadixSelect.Viewport>
+        </RadixSelect.Content>
+      </RadixSelect.Portal>
+    </RadixSelect.Root>
+  );
+}

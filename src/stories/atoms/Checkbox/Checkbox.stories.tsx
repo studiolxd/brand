@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Átomos/Checkbox',
+  title: 'Atoms/Checkbox',
   component: Checkbox,
   parameters: {
     layout: 'padded',
@@ -20,14 +20,9 @@ const meta: Meta<typeof Checkbox> = {
       control: { type: 'boolean' },
       description: 'Deshabilita el checkbox.',
     },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Variante para usar sobre fondo oscuro.',
-    },
   },
   args: {
     disabled: false,
-    dark: false,
     'aria-label': 'Checkbox',
   },
 };
@@ -56,7 +51,7 @@ export const DisabledChecked: Story = {
 
 export const Dark: Story = {
   name: 'Oscuro',
-  args: { dark: true },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },
@@ -64,7 +59,8 @@ export const Dark: Story = {
 
 export const DarkChecked: Story = {
   name: 'Oscuro y marcado',
-  args: { dark: true, defaultChecked: true },
+  args: { defaultChecked: true },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

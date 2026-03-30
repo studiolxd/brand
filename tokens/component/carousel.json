@@ -1,0 +1,8 @@
+{
+  "carousel": {
+    "gap":                { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Separación entre slides" },
+    "btn-padding-inline": { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Padding horizontal del botón — define el ancho del área de degradado" },
+    "btn-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del chevron" },
+    "gradient-color":     { "$value": "{color.background.default}", "$type": "color",   "$description": "Color de fondo del degradado de los botones prev/next" }
+  }
+}

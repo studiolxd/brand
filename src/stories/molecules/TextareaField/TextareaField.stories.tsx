@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextareaField } from './TextareaField';
 
 const meta: Meta<typeof TextareaField> = {
-  title: 'Moléculas/TextareaField',
+  title: 'Molecules/TextareaField',
   component: TextareaField,
   parameters: {
     layout: 'padded',
@@ -54,17 +54,13 @@ const meta: Meta<typeof TextareaField> = {
 export default meta;
 type Story = StoryObj<typeof TextareaField>;
 
-export const Default: Story = {
-  name: 'Por defecto',
-};
+export const Default: Story = {};
 
-export const ConHelper: Story = {
-  name: 'Con texto de ayuda',
+export const WithHelper: Story = {
   args: { helperText: 'Máximo 500 caracteres.' },
 };
 
-export const ConError: Story = {
-  name: 'Con error',
+export const WithError: Story = {
   args: {
     error: true,
     errorMessage: 'Este campo es obligatorio.',
@@ -72,31 +68,27 @@ export const ConError: Story = {
   },
 };
 
-export const Deshabilitado: Story = {
-  name: 'Deshabilitado',
+export const Disabled: Story = {
   args: { disabled: true },
 };
 
 export const LabelVisible: Story = {
-  name: 'Con label visible',
   args: { labelHidden: false },
 };
 
 export const Dark: Story = {
-  name: 'Oscuro',
-  args: { dark: true },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },
 };
 
-export const DarkConError: Story = {
-  name: 'Oscuro con error',
+export const DarkWithError: Story = {
   args: {
-    dark: true,
     error: true,
     errorMessage: 'Este campo es obligatorio.',
   },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

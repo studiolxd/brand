@@ -1,0 +1,38 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ListStories from "./List.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { listBaseTokens, listDarkTokens } from "../../../tokens/components/text";
+
+<Meta of={ListStories} />
+
+# List
+
+Lista con viñetas (`ul`) o numerada (`ol`). Hereda los estilos tipográficos del párrafo. El espacio entre ítems y la sangría izquierda están controlados por tokens. Sin márgenes por defecto.
+
+## Unordered
+
+<Canvas of={ListStories.Unordered} />
+
+## Ordered
+
+<Canvas of={ListStories.Ordered} />
+
+## Dark
+
+<Canvas of={ListStories.Dark} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={listBaseTokens} />
+
+### Oscuro
+
+<TokenTable tokens={listDarkTokens} />
+
+## Props
+
+<ArgTypes of={ListStories} />

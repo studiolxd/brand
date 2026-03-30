@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Input } from './Input';
 
 const meta: Meta<typeof Input> = {
-  title: 'Átomos/Input',
+  title: 'Atoms/Input',
   component: Input,
   parameters: {
     layout: 'padded',
@@ -25,21 +25,22 @@ const meta: Meta<typeof Input> = {
       control: { type: 'boolean' },
       description: 'Input de solo lectura.',
     },
+    size: {
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del input.',
+    },
     error: {
       control: { type: 'boolean' },
       description: 'Estado de error.',
     },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Variante para usar sobre fondo oscuro.',
-    },
   },
   args: {
     placeholder: 'Escribe algo…',
+    size: 'md',
     disabled: false,
     readOnly: false,
     error: false,
-    dark: false,
   },
 };
 
@@ -65,9 +66,30 @@ export const ReadOnly: Story = {
   args: { readOnly: true, value: 'Valor de solo lectura' },
 };
 
+export const Small: Story = {
+  name: 'Pequeño',
+  args: { size: 'sm' },
+};
+
+export const Large: Story = {
+  name: 'Grande',
+  args: { size: 'lg' },
+};
+
+export const Sizes: Story = {
+  name: 'Tamaños',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <Input placeholder="Small" size="sm" />
+      <Input placeholder="Medium" size="md" />
+      <Input placeholder="Large" size="lg" />
+    </div>
+  ),
+};
+
 export const Dark: Story = {
   name: 'Oscuro',
-  args: { dark: true },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

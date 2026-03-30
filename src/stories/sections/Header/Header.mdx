@@ -1,0 +1,32 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HeaderStories from "./Header.stories";
+
+<Meta of={HeaderStories} />
+
+# Header
+
+Organismo de navegacion principal. Compone el atomo Logo, el atomo Hamburger y una barra de navegacion responsive.
+
+En mobile (< 1440px), la navegacion se presenta como overlay a pantalla completa que se despliega desde arriba al pulsar el hamburger. En desktop (>= 1440px), el hamburger se oculta y la navegacion se dispone en horizontal.
+
+## Por defecto
+
+<Canvas of={HeaderStories.Default} />
+
+## Sin featured link
+
+<Canvas of={HeaderStories.WithoutFeaturedLink} />
+
+## Sin actions
+
+<Canvas of={HeaderStories.WithoutActions} />
+
+## Dark
+
+<Canvas of={HeaderStories.Dark} className="bg-dark" />
+
+---
+
+## Props
+
+<ArgTypes of={HeaderStories} />

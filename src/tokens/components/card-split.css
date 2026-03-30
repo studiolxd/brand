@@ -1,0 +1,13 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --card-split-gap: var(--spacing-3); /** Separación entre elementos internos */
+  --card-split-panel-transition: var(--motion-duration-base); /** Duración de la animación flex-grow del panel */
+  --card-split-desc-transition: var(--motion-duration-slow); /** Duración del fade de la descripción en hover */
+  --card-split-desc-transition-delay: var(--motion-duration-fast); /** Delay de la descripción (espera al panel) */
+  --card-split-padding-inline: var(--card-padding-inline); /** Padding horizontal del panel de contenido */
+  --card-split-padding-block-start: var(--card-padding-block-start); /** Padding block start del panel de contenido */
+  --card-split-padding-block-end: var(--card-padding-block-end); /** Padding block end del panel de contenido */
+}

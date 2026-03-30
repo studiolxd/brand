@@ -3,7 +3,7 @@
  */
 
 :root {
-  --form-gap: 0; /** Separación entre campos del formulario */
+  --form-gap: var(--border-width-sm); /** Gap entre campos — actúa como separador (gap technique) */
   --form-border-style: var(--control-border-style); /** Estilo del borde exterior */
   --form-separator-style: var(--control-border-style); /** Estilo del separador */
   --form-heading-font-family: var(--font-family-sans); /** Font family del heading */

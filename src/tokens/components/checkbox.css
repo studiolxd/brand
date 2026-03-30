@@ -17,11 +17,13 @@
   --checkbox-focus-ring-width: var(--border-width-md); /** Ancho del anillo de foco */
   --checkbox-focus-ring-offset: var(--border-width-sm); /** Separación del anillo de foco respecto al borde */
   --checkbox-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
+  --checkbox-dark-disabled-border-color: var(--color-grey-light); /** Color del borde deshabilitado sobre fondo oscuro */
+  --checkbox-dark-disabled-bg-checked: var(--color-grey-light); /** Fondo marcado deshabilitado sobre fondo oscuro */
   --checkbox-border-color: var(--color-primary); /** Color del borde */
   --checkbox-bg-checked: var(--color-primary); /** Fondo cuando está marcado */
   --checkbox-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --checkbox-dark-border-color: var(--color-text-dark); /** Color del borde sobre fondo oscuro */
   --checkbox-dark-bg-checked: var(--color-text-dark); /** Fondo marcado sobre fondo oscuro */
   --checkbox-dark-check-color: var(--color-background-dark); /** Color del checkmark sobre fondo oscuro */
-  --checkbox-dark-focus-ring-color: var(--color-secondary); /** Color del anillo de foco sobre fondo oscuro */
+  --checkbox-dark-focus-ring-color: var(--color-text-dark); /** Color del anillo de foco sobre fondo oscuro */
 }

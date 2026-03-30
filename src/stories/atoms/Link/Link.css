@@ -1,0 +1,22 @@
+.link {
+  color: var(--link-color);
+  text-decoration: var(--link-text-decoration);
+  cursor: var(--link-cursor);
+}
+
+.link:hover {
+  text-decoration: var(--link-text-decoration-hover);
+}
+
+.link:focus-visible {
+  outline: var(--link-focus-ring-width) solid var(--link-focus-ring-color);
+  outline-offset: var(--link-focus-ring-offset);
+}
+
+/* Dark — contexto padre (.dark) o modificador directo (.link--dark) */
+.dark .link,
+.link.link--dark {
+  --link-color: var(--link-dark-color);
+  --link-focus-ring-color: var(--link-dark-focus-ring-color);
+  color: var(--link-dark-color);
+}

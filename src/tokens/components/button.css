@@ -23,10 +23,16 @@
   --button-transition-duration: var(--motion-duration-fast); /** Transition duration */
   --button-transition-easing: var(--motion-easing-default); /** Transition easing */
   --button-disabled-opacity: var(--opacity-disabled); /** Opacity when disabled */
-  --button-padding-block: var(--spacing-4); /** Block (vertical) padding */
+  --button-padding-block: var(--spacing-3); /** Block (vertical) padding */
   --button-padding-inline: var(--spacing-6); /** Inline (horizontal) padding */
   --button-focus-ring-width: var(--border-width-md); /** Focus ring width */
   --button-focus-ring-offset: var(--border-width-md); /** Focus ring offset */
+  --button-sm-padding-block: var(--spacing-2); /** Block padding — sm */
+  --button-sm-padding-inline: var(--spacing-5); /** Inline padding — sm */
+  --button-sm-font-size: var(--font-size-1); /** Font size — sm */
+  --button-lg-padding-block: var(--spacing-5); /** Block padding — lg */
+  --button-lg-padding-inline: var(--spacing-8); /** Inline padding — lg */
+  --button-lg-font-size: var(--font-size-4); /** Font size — lg */
   --button-primary-border-style: var(--button-border-style); /** Border style */
   --button-primary-justify-content: var(--button-justify-content); /** Justify content */
   --button-primary-cursor: var(--button-cursor); /** Cursor */

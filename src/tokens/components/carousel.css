@@ -1,0 +1,10 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --carousel-gap: var(--spacing-4); /** Separación entre slides */
+  --carousel-btn-padding-inline: var(--spacing-5); /** Padding horizontal del botón — define el ancho del área de degradado */
+  --carousel-btn-color: var(--color-primary); /** Color del chevron */
+  --carousel-gradient-color: var(--color-background-default); /** Color de fondo del degradado de los botones prev/next */
+}

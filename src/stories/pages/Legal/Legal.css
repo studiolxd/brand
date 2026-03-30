@@ -1,0 +1,120 @@
+/* ─── Page wrapper ────────────────────────────────────────── */
+.legal-page {
+  min-height: 100vh;
+  background-color: var(--color-background-default);
+}
+
+.legal-page__main {
+  padding-block-start: var(--header-height-mobile);
+}
+
+@media (min-width: 1440px) {
+  .legal-page__main {
+    padding-block-start: var(--header-height-desktop);
+  }
+}
+
+/* ─── Page header ─────────────────────────────────────────── */
+.legal-page__header {
+  padding-block: var(--spacing-7);
+  padding-inline: var(--spacing-4);
+}
+
+.legal-page__title {
+  font-size: var(--font-size-8);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* ─── Accordion ───────────────────────────────────────────── */
+.legal-accordion__item {
+  border-top: var(--border-width-sm) solid currentColor;
+}
+
+.legal-accordion__header {
+  /* reset heredado de button */
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  white-space: normal;
+  text-decoration: none;
+  color: inherit;
+  transition: none;
+  /* layout propio */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: var(--spacing-6);
+  padding-block: var(--spacing-5);
+  padding-inline: var(--spacing-6);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.legal-accordion__header:hover,
+.legal-accordion__header:active {
+  background-color: transparent;
+  color: inherit;
+}
+
+.legal-accordion__counter {
+  font-size: var(--font-size-9);
+  font-weight: var(--font-weight-thin);
+  line-height: var(--line-height-none);
+  color: var(--color-primary);
+  align-self: start;
+}
+
+.legal-accordion__chevron {
+  transform: rotate(90deg);
+  transition: transform var(--motion-duration-slow) var(--motion-easing-in-out);
+  align-self: start;
+  /* --chevron-width se hereda de .chevron--lg en el mismo elemento */
+  margin-block-start: calc(var(--chevron-width) * (2 / 16) * -1);
+}
+
+.legal-accordion__item--open .legal-accordion__chevron {
+  transform: rotate(-90deg);
+}
+
+/* ─── Accordion body — animación con grid-template-rows ──── */
+.legal-accordion__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--motion-duration-slow) var(--motion-easing-in-out);
+}
+
+.legal-accordion__item--open .legal-accordion__body {
+  grid-template-rows: 1fr;
+}
+
+.legal-accordion__body-inner {
+  overflow: hidden;
+  padding-inline: var(--spacing-6);
+  max-width: var(--content-measure);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-relaxed);
+}
+
+.legal-accordion__body-inner ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding-inline-start: var(--spacing-4);
+}
+
+.legal-accordion__item--open .legal-accordion__body-inner {
+  padding-block-end: var(--spacing-6);
+  margin-inline: auto;
+}

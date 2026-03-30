@@ -1,0 +1,148 @@
+/* ─── Wrapper ─────────────────────────────────────────────── */
+.carousel {
+  display: flex;
+  flex-wrap: wrap;
+  --carousel-slide-size: calc(100% / 1.5);
+}
+
+@media (min-width: 768px) {
+  .carousel {
+    position: relative;
+    --carousel-slide-size: calc(100% / 2.5);
+  }
+}
+
+@media (min-width: 1440px) {
+  .carousel {
+    --carousel-slide-size: calc(100% / 3.5);
+  }
+}
+
+/* ─── Viewport (Embla) ────────────────────────────────────── */
+.carousel__viewport {
+  overflow: hidden;
+  width: 100%;
+  order: 1;
+}
+
+@media (min-width: 768px) {
+  .carousel__viewport {
+    order: unset;
+  }
+}
+
+.carousel__track {
+  display: flex;
+  gap: var(--carousel-gap);
+}
+
+/* ─── Slides — tamaño responsivo ──────────────────────────── */
+/*
+  --carousel-slide-size puede sobreescribirse en el wrapper para
+  carousels específicos. Los valores por defecto muestran slides
+  parcialmente cortadas para indicar que hay más contenido.
+*/
+.carousel__slide {
+  flex: 0 0 var(--carousel-slide-size, calc(100% / 1.5));
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .carousel__slide {
+    border-inline-start: var(--border-width-sm) solid currentColor;
+    padding-inline-start: var(--carousel-gap);
+  }
+
+  .carousel__slide:last-child {
+    padding-inline-end: var(--carousel-gap);
+  }
+}
+
+/* ─── Botones prev/next ───────────────────────────────────── */
+.carousel__btn {
+  order: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max(4.167vw, 64px);
+  height: max(4.167vw, 64px);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--carousel-btn-color);
+  background-color: transparent;
+}
+
+/* En móvil: ambos botones alineados a la derecha con separación */
+.carousel__btn--prev {
+  margin-inline-start: auto;
+  margin-block-start: var(--spacing-4);
+}
+
+.carousel__btn--next {
+  margin-block-start: var(--spacing-4);
+}
+
+@media (min-width: 768px) {
+  .carousel__btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: auto;
+    height: auto;
+    order: unset;
+    padding-inline: var(--carousel-btn-padding-inline);
+    margin-block-start: unset;
+  }
+
+  .carousel__btn--prev {
+    left: 0;
+    margin-inline-start: unset;
+    background-image: linear-gradient(
+      to right,
+      var(--carousel-gradient-color),
+      transparent
+    );
+  }
+
+  .carousel__btn--next {
+    right: 0;
+    background-image: linear-gradient(
+      to left,
+      var(--carousel-gradient-color),
+      transparent
+    );
+  }
+}
+
+.carousel__btn:hover,
+.carousel__btn:active {
+  background-color: transparent;
+  color: var(--carousel-btn-color);
+  border-color: transparent;
+}
+
+.carousel__btn:focus {
+  outline: none;
+}
+
+.carousel__btn:focus-visible {
+  outline: var(--control-focus-ring-width) solid var(--carousel-btn-color);
+  outline-offset: var(--control-focus-ring-inset-offset);
+}
+
+/* ─── Dark mode ───────────────────────────────────────────── */
+.dark .carousel__slide {
+  color: var(--color-text-dark);
+}
+
+.dark .carousel__btn {
+  --carousel-btn-color: var(--color-text-dark);
+}
+
+/* ─── Chevron direction ───────────────────────────────────── */
+.carousel__chevron--prev {
+  transform: rotate(180deg);
+}

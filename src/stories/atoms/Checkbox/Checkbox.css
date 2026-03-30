@@ -54,3 +54,11 @@
   --checkbox-check-color: var(--checkbox-dark-check-color);
   --checkbox-focus-ring-color: var(--checkbox-dark-focus-ring-color);
 }
+
+/* Dark + disabled */
+.dark .checkbox:disabled,
+.checkbox.checkbox--dark:disabled {
+  --checkbox-border-color: var(--checkbox-dark-disabled-border-color);
+  --checkbox-bg-checked: var(--checkbox-dark-disabled-bg-checked);
+  opacity: 1;
+}

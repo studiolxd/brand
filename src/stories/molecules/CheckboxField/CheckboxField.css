@@ -1,10 +1,14 @@
 .checkbox-field {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--checkbox-field-gap);
   padding-inline: var(--checkbox-field-padding-inline);
   padding-block: var(--checkbox-field-padding-block);
-  cursor: var(--checkbox-field-cursor);
+cursor: var(--checkbox-field-cursor);
+}
+
+.checkbox-field .checkbox {
+  margin-block-start: 5px;
 }
 
 .checkbox-field__label {

@@ -101,6 +101,31 @@ input[type="search"].input--error:focus-visible {
   border-color: var(--input-error-focus-border-color);
 }
 
+/* Tamaños */
+input[type="text"].input--sm,
+input[type="email"].input--sm,
+input[type="password"].input--sm,
+input[type="number"].input--sm,
+input[type="tel"].input--sm,
+input[type="url"].input--sm,
+input[type="search"].input--sm {
+  --input-padding-block: var(--input-sm-padding-block);
+  --input-padding-inline: var(--input-sm-padding-inline);
+  --input-font-size: var(--input-sm-font-size);
+}
+
+input[type="text"].input--lg,
+input[type="email"].input--lg,
+input[type="password"].input--lg,
+input[type="number"].input--lg,
+input[type="tel"].input--lg,
+input[type="url"].input--lg,
+input[type="search"].input--lg {
+  --input-padding-block: var(--input-lg-padding-block);
+  --input-padding-inline: var(--input-lg-padding-inline);
+  --input-font-size: var(--input-lg-font-size);
+}
+
 /* Dark — contexto padre (.dark) o modificador directo (.input--dark) */
 .dark input[type="text"],
 .dark input[type="email"],

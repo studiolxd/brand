@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import './ContactForm.css';
 import { Form } from '../../molecules/Form/Form';
 import { InputField } from '../../molecules/InputField/InputField';
 import { TextareaField } from '../../molecules/TextareaField/TextareaField';
 import { CheckboxField } from '../../molecules/CheckboxField/CheckboxField';
+import { InputPhoneField } from '../../molecules/InputPhoneField/InputPhoneField';
 import { Button } from '../../atoms/Button/Button';
 
 interface ContactFormProps {
@@ -16,7 +18,6 @@ interface ContactFormProps {
   errors?: string[];
   success?: boolean;
   successMessage?: string;
-  dark?: boolean;
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
@@ -31,12 +32,13 @@ export function ContactForm({
   errors,
   success = false,
   successMessage = '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.',
-  dark = false,
   onSubmit,
 }: ContactFormProps) {
+  const [wantCall, setWantCall] = useState(false);
+
   if (success) {
     return (
-      <p className={['form__success', dark ? 'form__success--dark' : ''].filter(Boolean).join(' ')}>
+      <p className="form__success">
         {successMessage}
       </p>
     );
@@ -45,7 +47,6 @@ export function ContactForm({
   return (
     <Form
       errors={errors}
-      dark={dark}
       onSubmit={onSubmit}
       actions={
         <Button variant="form" disabled={submitting}>
@@ -60,7 +61,6 @@ export function ContactForm({
         type="email"
         placeholder={emailPlaceholder}
         disabled={submitting}
-        dark={dark}
       />
       <TextareaField
         id="contact-message"
@@ -69,13 +69,26 @@ export function ContactForm({
         placeholder={messagePlaceholder}
         rows={messageRows}
         disabled={submitting}
-        dark={dark}
       />
+      <CheckboxField
+        id="contact-phone"
+        label="Prefiero que me llaméis por teléfono"
+        disabled={submitting}
+        checked={wantCall}
+        onChange={(e) => setWantCall(e.target.checked)}
+      />
+      {wantCall && (
+        <InputPhoneField
+          id="contact-phone-number"
+          placeholder="Escribe aquí tu número de teléfono"
+          helperText="Solo utilizaremos tu número de teléfono para hablarte sobre este proyecto."
+          disabled={submitting}
+        />
+      )}
       <CheckboxField
         id="contact-privacy"
         label={privacyLabel}
         disabled={submitting}
-        dark={dark}
       />
     </Form>
   );

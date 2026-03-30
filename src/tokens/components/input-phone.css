@@ -1,0 +1,11 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --input-phone-country-width: 72px; /** Ancho del selector de país */
+  --input-phone-country-border-style: solid; /** Estilo del separador */
+  --input-phone-content-z-index: 1100; /** Z-index del dropdown de país */
+  --input-phone-country-border-width: var(--border-width-sm); /** Grosor del separador entre país y número */
+  --input-phone-country-border-color: var(--color-primary); /** Color del separador */
+}

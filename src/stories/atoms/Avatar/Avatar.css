@@ -1,0 +1,8 @@
+.avatar {
+  display: block;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: var(--avatar-border-radius);
+  object-fit: cover;
+  flex-shrink: 0;
+}

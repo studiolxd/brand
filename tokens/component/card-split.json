@@ -1,0 +1,11 @@
+{
+  "card-split": {
+    "padding-inline":        { "$value": "{card.padding-inline}",        "$type": "dimension", "$description": "Padding horizontal del panel de contenido" },
+    "padding-block-start":   { "$value": "{card.padding-block-start}",   "$type": "dimension", "$description": "Padding block start del panel de contenido" },
+    "padding-block-end":     { "$value": "{card.padding-block-end}",     "$type": "dimension", "$description": "Padding block end del panel de contenido" },
+    "gap":                   { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Separación entre elementos internos" },
+    "panel-transition":      { "$value": "{motion.duration.base}",   "$type": "number",    "$description": "Duración de la animación flex-grow del panel" },
+    "desc-transition":       { "$value": "{motion.duration.slow}",   "$type": "number",    "$description": "Duración del fade de la descripción en hover" },
+    "desc-transition-delay": { "$value": "{motion.duration.fast}",   "$type": "number",    "$description": "Delay de la descripción (espera al panel)" }
+  }
+}

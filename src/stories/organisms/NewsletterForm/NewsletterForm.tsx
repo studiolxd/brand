@@ -13,7 +13,6 @@ interface NewsletterFormProps {
   errors?: string[];
   success?: boolean;
   successMessage?: string;
-  dark?: boolean;
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
@@ -26,22 +25,20 @@ export function NewsletterForm({
   errors,
   success = false,
   successMessage = '¡Gracias por suscribirte! Ya no te perderás ninguna de nuestras novedades.',
-  dark = false,
   onSubmit,
 }: NewsletterFormProps) {
   if (success) {
     return (
-      <p className={['form__success', dark ? 'form__success--dark' : ''].filter(Boolean).join(' ')}>
+      <p className="form__success">
         {successMessage}
       </p>
     );
   }
 
   return (
-    <div className={['newsletter-form', dark ? 'newsletter-form--dark' : ''].filter(Boolean).join(' ')}>
+    <div className="newsletter-form">
       <Form
         errors={errors}
-        dark={dark}
         onSubmit={onSubmit}
         actions={
           <Button variant="form" disabled={submitting}>
@@ -56,13 +53,11 @@ export function NewsletterForm({
           type="email"
           placeholder={emailPlaceholder}
           disabled={submitting}
-          dark={dark}
         />
         <CheckboxField
           id="newsletter-privacy"
           label={privacyLabel}
           disabled={submitting}
-          dark={dark}
         />
       </Form>
     </div>

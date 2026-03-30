@@ -195,6 +195,19 @@
   --button-primary-focus-ring-color: var(--button-primary-dark-focus-ring-color);
 }
 
+/* Tamaños */
+.button.button--sm {
+  padding-block: var(--button-sm-padding-block);
+  padding-inline: var(--button-sm-padding-inline);
+  font-size: var(--button-sm-font-size);
+}
+
+.button.button--lg {
+  padding-block: var(--button-lg-padding-block);
+  padding-inline: var(--button-lg-padding-inline);
+  font-size: var(--button-lg-font-size);
+}
+
 /* Block modifier */
 .button--block {
   width: var(--button-block-width);

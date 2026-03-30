@@ -1,0 +1,10 @@
+{
+  "breakpoint": {
+    "sm":  { "$value": "480px",  "$type": "dimension", "$description": "Small — teléfonos en landscape" },
+    "md":  { "$value": "768px",  "$type": "dimension", "$description": "Medium — tablets" },
+    "lg":  { "$value": "1024px", "$type": "dimension", "$description": "Large — portátiles" },
+    "xl":  { "$value": "1280px", "$type": "dimension", "$description": "Extra large — escritorio" },
+    "2xl": { "$value": "1440px", "$type": "dimension", "$description": "2x large — escritorio ancho" },
+    "3xl": { "$value": "1920px", "$type": "dimension", "$description": "3x large — pantallas grandes y TV" }
+  }
+}

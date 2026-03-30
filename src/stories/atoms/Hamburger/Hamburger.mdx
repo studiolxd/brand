@@ -1,0 +1,30 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HamburgerStories from "./Hamburger.stories";
+
+<Meta of={HamburgerStories} />
+
+# Hamburger
+
+Botón de tres barras que alterna la visibilidad de la navegación móvil. Anima a forma de X mediante CSS cuando `aria-expanded="true"`.
+
+## Por defecto
+
+<Canvas of={HamburgerStories.Default} />
+
+## Abierto
+
+<Canvas of={HamburgerStories.Open} />
+
+## Dark
+
+<Canvas of={HamburgerStories.Dark} className="bg-dark" />
+
+## Dark abierto
+
+<Canvas of={HamburgerStories.DarkOpen} className="bg-dark" />
+
+---
+
+## Props
+
+<ArgTypes of={HamburgerStories} />

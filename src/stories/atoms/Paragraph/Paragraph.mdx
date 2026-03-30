@@ -1,0 +1,43 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ParagraphStories from "./Paragraph.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { paragraphBaseTokens, paragraphSizeTokens, paragraphDarkTokens } from "../../../tokens/components/text";
+
+<Meta of={ParagraphStories} />
+
+# Paragraph
+
+Texto de cuerpo. Tres tamaños disponibles: pequeño (14px), por defecto (16px) y grande (18px). Sin márgenes por defecto — el espaciado es responsabilidad del layout.
+
+## Por defecto
+
+<Canvas of={ParagraphStories.Default} />
+
+## Tamaños
+
+<Canvas of={ParagraphStories.Small} />
+<Canvas of={ParagraphStories.Large} />
+
+## Dark
+
+<Canvas of={ParagraphStories.Dark} className="bg-dark" />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={paragraphBaseTokens} />
+
+### Tamaños
+
+<TokenTable tokens={paragraphSizeTokens} />
+
+### Oscuro
+
+<TokenTable tokens={paragraphDarkTokens} />
+
+## Props
+
+<ArgTypes of={ParagraphStories} />

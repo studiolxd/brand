@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --card-padding-inline: var(--spacing-4); /** Padding horizontal */
+  --card-padding-block-start: var(--spacing-6); /** Padding block start */
+  --card-padding-block-end: var(--spacing-3); /** Padding block end */
+  --card-gap: var(--spacing-3); /** Separación entre elementos internos */
+  --card-description-font-size: var(--font-size-4); /** Tamaño de fuente de la descripción */
+  --card-description-margin-block-end: var(--spacing-7); /** Margen inferior de la descripción */
+}

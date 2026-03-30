@@ -24,6 +24,8 @@
   --textarea-disabled-bg: var(--color-grey-lightest); /** Background when disabled */
   --textarea-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
   --textarea-error-bg: var(--color-white); /** Error background */
+  --textarea-dark-disabled-color: var(--color-grey-light); /** Text color when disabled on dark surface */
+  --textarea-dark-disabled-border-color: var(--color-grey-light); /** Border color when disabled on dark surface */
   --textarea-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --textarea-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --textarea-font-weight: var(--font-weight-default); /** Font weight */
@@ -39,6 +41,7 @@
   --textarea-error-focus-border-color: var(--color-primary); /** Error border color on focus */
   --textarea-error-focus-ring-color: var(--color-error); /** Error focus ring color */
   --textarea-dark-bg: var(--color-background-dark); /** Background on dark surface */
+  --textarea-dark-color: var(--color-text-dark); /** Text color on dark surface */
   --textarea-dark-border-color: var(--color-text-dark); /** Border color on dark background */
   --textarea-dark-placeholder-color: var(--color-text-muted-dark); /** Placeholder color on dark background */
   --textarea-dark-focus-border-color: var(--color-text-dark); /** Border color on focus on dark background */
@@ -47,4 +50,5 @@
   --textarea-dark-error-bg: var(--color-background-dark); /** Background in error state on dark surface */
   --textarea-dark-error-border-color: var(--color-text-dark); /** Border color in error state on dark background */
   --textarea-dark-error-placeholder-color: var(--color-text-muted-dark); /** Placeholder color in error state on dark background */
+  --textarea-dark-disabled-bg: var(--color-background-dark); /** Background when disabled on dark surface */
 }

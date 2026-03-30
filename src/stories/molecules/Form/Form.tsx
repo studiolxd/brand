@@ -2,16 +2,15 @@ import './Form.css';
 
 interface FormProps {
   errors?: string[];
-  dark?: boolean;
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
   actions?: React.ReactNode;
   children: React.ReactNode;
 }
 
-export function Form({ errors, dark = false, onSubmit, actions, children }: FormProps) {
+export function Form({ errors, onSubmit, actions, children }: FormProps) {
   return (
     <form
-      className={['form', dark ? 'form--dark' : ''].filter(Boolean).join(' ')}
+      className="form"
       onSubmit={onSubmit}
       noValidate
     >

@@ -4,7 +4,7 @@
 
 :root {
   --text-font-family: var(--font-family-sans); /** Default font family */
-  --text-font-size: var(--font-size-2); /** Default font size (16px) */
+  --text-font-size: var(--font-size-3); /** Default font size (18px) */
   --text-line-height: var(--line-height-normal); /** Default line height */
   --text-letter-spacing: var(--letter-spacing-normal); /** Default letter spacing */
   --text-heading-font-family: var(--font-family-sans); /** Heading font family */
@@ -24,9 +24,15 @@
   --text-h6-font-size: var(--font-size-5); /** H6 font size (24px) */
   --text-h6-line-height: var(--line-height-snug); /** H6 line height */
   --text-h6-letter-spacing: var(--letter-spacing-normal); /** H6 letter spacing */
+  --text-paragraph-small-font-size: var(--font-size-1); /** Small paragraph font size (14px) */
+  --text-paragraph-large-font-size: var(--font-size-3); /** Large paragraph font size (18px) */
+  --text-list-gap: var(--spacing-2); /** Spacing between list items (8px) */
+  --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
   --text-color: var(--color-text-default); /** Default text color */
+  --text-dark-color: var(--color-text-dark); /** Text color on dark surface */
   --text-heading-color: var(--color-text-default); /** Heading color */
+  --text-heading-dark-color: var(--color-text-dark); /** Heading color on dark surface */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
   --text-h1-font-weight: var(--text-heading-font-weight); /** H1 font weight */
   --text-h1-letter-spacing: var(--text-heading-letter-spacing); /** H1 letter spacing */
@@ -43,10 +49,24 @@
   --text-h5-font-weight: var(--text-heading-font-weight); /** H5 font weight */
   --text-h6-font-family: var(--text-heading-font-family); /** H6 font family */
   --text-h6-font-weight: var(--text-heading-font-weight); /** H6 font weight */
+  --text-paragraph-font-family: var(--text-font-family); /** Paragraph font family */
+  --text-paragraph-font-size: var(--text-font-size); /** Paragraph default font size (16px) */
+  --text-paragraph-line-height: var(--text-line-height); /** Paragraph line height */
+  --text-paragraph-letter-spacing: var(--text-letter-spacing); /** Paragraph letter spacing */
+  --text-paragraph-dark-color: var(--color-text-dark); /** Paragraph color on dark surface */
+  --text-list-dark-color: var(--color-text-dark); /** List color on dark surface */
   --text-h1-color: var(--text-heading-color); /** H1 color */
   --text-h2-color: var(--text-heading-color); /** H2 color */
   --text-h3-color: var(--text-heading-color); /** H3 color */
   --text-h4-color: var(--text-heading-color); /** H4 color */
   --text-h5-color: var(--text-heading-color); /** H5 color */
   --text-h6-color: var(--text-heading-color); /** H6 color */
+  --text-paragraph-font-weight: var(--text-font-weight); /** Paragraph font weight */
+  --text-paragraph-color: var(--text-color); /** Paragraph color */
+  --text-list-font-family: var(--text-paragraph-font-family); /** List font family */
+  --text-list-font-size: var(--text-paragraph-font-size); /** List font size */
+  --text-list-line-height: var(--text-paragraph-line-height); /** List line height */
+  --text-list-letter-spacing: var(--text-paragraph-letter-spacing); /** List letter spacing */
+  --text-list-font-weight: var(--text-paragraph-font-weight); /** List font weight */
+  --text-list-color: var(--text-paragraph-color); /** List text color */
 }

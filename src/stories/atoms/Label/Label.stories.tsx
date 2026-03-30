@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Label } from './Label';
 
 const meta: Meta<typeof Label> = {
-  title: 'Átomos/Label',
+  title: 'Atoms/Label',
   component: Label,
   parameters: {
     layout: 'padded',
@@ -11,10 +11,6 @@ const meta: Meta<typeof Label> = {
     hidden: {
       control: { type: 'boolean' },
       description: 'Oculta el label visualmente pero lo mantiene accesible para lectores de pantalla.',
-    },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Variante para usar sobre fondo oscuro.',
     },
     children: {
       control: { type: 'text' },
@@ -25,7 +21,6 @@ const meta: Meta<typeof Label> = {
     htmlFor: 'ejemplo',
     children: 'Nombre completo',
     hidden: false,
-    dark: false,
   },
 };
 
@@ -38,7 +33,7 @@ export const Visible: Story = {
 
 export const Dark: Story = {
   name: 'Oscuro',
-  args: { dark: true },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

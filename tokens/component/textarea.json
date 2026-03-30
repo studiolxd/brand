@@ -36,6 +36,7 @@
     "error-focus-border-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Error border color on focus" },
     "error-focus-ring-color":           { "$value": "{color.error}",             "$type": "color",     "$description": "Error focus ring color" },
     "dark-bg":                          { "$value": "{color.background.dark}",   "$type": "color",     "$description": "Background on dark surface" },
+    "dark-color":                       { "$value": "{color.text.dark}",         "$type": "color",     "$description": "Text color on dark surface" },
     "dark-border-color":                { "$value": "{color.text.dark}",         "$type": "color",     "$description": "Border color on dark background" },
     "dark-placeholder-color":           { "$value": "{color.text.muted-dark}",   "$type": "color",     "$description": "Placeholder color on dark background" },
     "dark-focus-border-color":          { "$value": "{color.text.dark}",         "$type": "color",     "$description": "Border color on focus on dark background" },
@@ -43,6 +44,9 @@
     "dark-error-focus-ring-color":      { "$value": "{color.error-dark}",        "$type": "color",     "$description": "Error focus ring color on dark background" },
     "dark-error-bg":                    { "$value": "{color.background.dark}",   "$type": "color",     "$description": "Background in error state on dark surface" },
     "dark-error-border-color":          { "$value": "{color.text.dark}",         "$type": "color",     "$description": "Border color in error state on dark background" },
-    "dark-error-placeholder-color":     { "$value": "{color.text.muted-dark}",   "$type": "color",     "$description": "Placeholder color in error state on dark background" }
+    "dark-error-placeholder-color":     { "$value": "{color.text.muted-dark}",   "$type": "color",     "$description": "Placeholder color in error state on dark background" },
+    "dark-disabled-bg":                { "$value": "{color.background.dark}",   "$type": "color",     "$description": "Background when disabled on dark surface" },
+    "dark-disabled-color":             { "$value": "{color.grey-light}",        "$type": "color",     "$description": "Text color when disabled on dark surface" },
+    "dark-disabled-border-color":      { "$value": "{color.grey-light}",        "$type": "color",     "$description": "Border color when disabled on dark surface" }
   }
 }

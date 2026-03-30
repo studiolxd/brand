@@ -1,0 +1,27 @@
+.list {
+  margin: 0;
+  font-family: var(--text-list-font-family);
+  font-size: var(--text-list-font-size);
+  font-weight: var(--text-list-font-weight);
+  line-height: var(--text-list-line-height);
+  color: var(--text-list-color);
+  letter-spacing: var(--text-list-letter-spacing);
+  padding-inline-start: var(--text-list-padding-inline-start);
+  display: flex;
+  flex-direction: column;
+  gap: var(--text-list-gap);
+}
+
+.list.list--unordered {
+  list-style-type: disc;
+}
+
+.list.list--ordered {
+  list-style-type: decimal;
+}
+
+/* Dark — contexto padre (.dark) o modificador directo (.list--dark) */
+.dark .list,
+.list.list--dark {
+  --text-list-color: var(--text-list-dark-color);
+}

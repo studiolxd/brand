@@ -6,7 +6,7 @@
   --checkbox-field-cursor: pointer; /** Cursor */
   --checkbox-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
   --checkbox-field-label-text-transform: none; /** Sin transformación — anula la herencia del label base */
-  --checkbox-field-gap: var(--spacing-2); /** Separación entre el checkbox y el texto */
+  --checkbox-field-gap: var(--spacing-3); /** Separación entre el checkbox y el texto */
   --checkbox-field-label-font-family: var(--font-family-sans); /** Familia tipográfica — igual al texto por defecto */
   --checkbox-field-label-font-size: var(--font-size-3); /** Tamaño de fuente — igual al texto por defecto (16px) */
   --checkbox-field-label-line-height: var(--line-height-normal); /** Interlineado */

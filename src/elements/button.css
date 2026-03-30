@@ -256,6 +256,25 @@ input[type="reset"].button--primary-dark:disabled {
   --button-primary-focus-ring-color: var(--button-primary-dark-focus-ring-color);
 }
 
+/* Tamaños */
+button.button--sm,
+input[type="button"].button--sm,
+input[type="submit"].button--sm,
+input[type="reset"].button--sm {
+  --button-padding-block: var(--button-sm-padding-block);
+  --button-padding-inline: var(--button-sm-padding-inline);
+  --button-font-size: var(--button-sm-font-size);
+}
+
+button.button--lg,
+input[type="button"].button--lg,
+input[type="submit"].button--lg,
+input[type="reset"].button--lg {
+  --button-padding-block: var(--button-lg-padding-block);
+  --button-padding-inline: var(--button-lg-padding-inline);
+  --button-font-size: var(--button-lg-font-size);
+}
+
 /* Block */
 button.button--block,
 input[type="button"].button--block,

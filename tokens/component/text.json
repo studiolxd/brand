@@ -1,17 +1,20 @@
 {
   "text": {
     "font-family":     { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Default font family" },
-    "font-size":       { "$value": "{font-size.2}",               "$type": "dimension", "$description": "Default font size (16px)" },
+    "font-size":       { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Default font size (18px)" },
     "font-weight":     { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Default font weight" },
     "line-height":     { "$value": "{line-height.normal}",        "$type": "number",    "$description": "Default line height" },
     "color":           { "$value": "{color.text.default}",        "$type": "color",     "$description": "Default text color" },
     "letter-spacing":  { "$value": "{letter-spacing.normal}",     "$type": "dimension", "$description": "Default letter spacing" },
 
+    "dark-color": { "$value": "{color.text.dark}", "$type": "color", "$description": "Text color on dark surface" },
+
     "heading": {
       "font-family":    { "$value": "{font-family.sans}",         "$type": "string",    "$description": "Heading font family" },
       "font-weight":    { "$value": "{font-weight.semibold}",     "$type": "number",    "$description": "Heading font weight" },
       "color":          { "$value": "{color.text.default}",       "$type": "color",     "$description": "Heading color" },
-      "letter-spacing": { "$value": "{letter-spacing.tight}",     "$type": "dimension", "$description": "Heading letter spacing" }
+      "letter-spacing": { "$value": "{letter-spacing.tight}",     "$type": "dimension", "$description": "Heading letter spacing" },
+      "dark-color":     { "$value": "{color.text.dark}",          "$type": "color",     "$description": "Heading color on dark surface" }
     },
 
     "h1": {
@@ -66,6 +69,34 @@
       "line-height":    { "$value": "{line-height.snug}",            "$type": "number",    "$description": "H6 line height" },
       "color":          { "$value": "{text.heading.color}",          "$type": "color",     "$description": "H6 color" },
       "letter-spacing": { "$value": "{letter-spacing.normal}",       "$type": "dimension", "$description": "H6 letter spacing" }
+    },
+
+    "paragraph": {
+      "font-family":    { "$value": "{text.font-family}",        "$type": "string",    "$description": "Paragraph font family" },
+      "font-size":      { "$value": "{text.font-size}",          "$type": "dimension", "$description": "Paragraph default font size (16px)" },
+      "font-weight":    { "$value": "{text.font-weight}",        "$type": "number",    "$description": "Paragraph font weight" },
+      "line-height":    { "$value": "{text.line-height}",        "$type": "number",    "$description": "Paragraph line height" },
+      "color":          { "$value": "{text.color}",              "$type": "color",     "$description": "Paragraph color" },
+      "letter-spacing": { "$value": "{text.letter-spacing}",     "$type": "dimension", "$description": "Paragraph letter spacing" },
+      "dark-color":     { "$value": "{color.text.dark}",         "$type": "color",     "$description": "Paragraph color on dark surface" },
+      "small": {
+        "font-size": { "$value": "{font-size.1}", "$type": "dimension", "$description": "Small paragraph font size (14px)" }
+      },
+      "large": {
+        "font-size": { "$value": "{font-size.3}", "$type": "dimension", "$description": "Large paragraph font size (18px)" }
+      }
+    },
+
+    "list": {
+      "font-family":          { "$value": "{text.paragraph.font-family}",    "$type": "string",    "$description": "List font family" },
+      "font-size":            { "$value": "{text.paragraph.font-size}",      "$type": "dimension", "$description": "List font size" },
+      "font-weight":          { "$value": "{text.paragraph.font-weight}",    "$type": "number",    "$description": "List font weight" },
+      "line-height":          { "$value": "{text.paragraph.line-height}",    "$type": "number",    "$description": "List line height" },
+      "color":                { "$value": "{text.paragraph.color}",          "$type": "color",     "$description": "List text color" },
+      "letter-spacing":       { "$value": "{text.paragraph.letter-spacing}", "$type": "dimension", "$description": "List letter spacing" },
+      "dark-color":           { "$value": "{color.text.dark}",               "$type": "color",     "$description": "List color on dark surface" },
+      "gap":                  { "$value": "{spacing.2}",                     "$type": "dimension", "$description": "Spacing between list items (8px)" },
+      "padding-inline-start": { "$value": "{spacing.6}",                     "$type": "dimension", "$description": "Left indent for list (32px)" }
     }
   }
 }

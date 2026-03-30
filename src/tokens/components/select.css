@@ -1,0 +1,38 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --select-border-style: solid; /** Estilo del borde */
+  --select-icon-size: 10px; /** Tamaño del chevron */
+  --select-content-z-index: 1100; /** Z-index del dropdown (por encima del header: 1001) */
+  --select-border-radius: var(--border-radius-none); /** Radio del borde del trigger */
+  --select-border-width: var(--border-width-sm); /** Grosor del borde */
+  --select-font-family: var(--font-family-sans); /** Familia tipográfica */
+  --select-font-size: var(--font-size-3); /** Tamaño de fuente */
+  --select-bg: var(--color-white); /** Fondo del trigger */
+  --select-icon-transition: var(--motion-duration-fast); /** Duración de la transición del icono */
+  --select-focus-ring-width: var(--border-width-sm); /** Grosor del anillo de foco */
+  --select-focus-ring-offset: var(--border-width-sm); /** Separación del anillo de foco */
+  --select-content-bg: var(--color-white); /** Fondo del dropdown */
+  --select-item-padding-block: var(--spacing-2); /** Padding block de cada opción */
+  --select-item-highlighted-color: var(--color-white); /** Texto de opción resaltada */
+  --select-dark-disabled-color: var(--color-grey-light); /** Color del texto deshabilitado en dark */
+  --select-dark-disabled-border-color: var(--color-grey-light); /** Color del borde deshabilitado en dark */
+  --select-border-color: var(--color-primary); /** Color del borde */
+  --select-padding-block: var(--control-padding-block); /** Padding block del trigger */
+  --select-padding-inline: var(--control-padding-inline); /** Padding inline del trigger */
+  --select-font-weight: var(--font-weight-default); /** Peso tipográfico */
+  --select-color: var(--color-text-default); /** Color del texto */
+  --select-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --select-content-border-color: var(--color-primary); /** Borde del dropdown */
+  --select-item-highlighted-bg: var(--color-primary); /** Fondo de opción resaltada */
+  --select-dark-bg: var(--color-background-dark); /** Fondo del trigger en dark */
+  --select-dark-color: var(--color-text-dark); /** Color del texto en dark */
+  --select-dark-border-color: var(--color-text-dark); /** Color del borde en dark */
+  --select-dark-focus-ring-color: var(--color-text-dark); /** Color del anillo de foco en dark */
+  --select-dark-content-bg: var(--color-background-dark); /** Fondo del dropdown en dark */
+  --select-dark-content-border-color: var(--color-text-dark); /** Borde del dropdown en dark */
+  --select-dark-item-highlighted-bg: var(--color-text-dark); /** Fondo de opción resaltada en dark */
+  --select-dark-item-highlighted-color: var(--color-background-dark); /** Texto de opción resaltada en dark */
+}

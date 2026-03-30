@@ -3,11 +3,10 @@ import './Logo.css';
 interface LogoProps {
   width?: number;
   height?: number;
-  dark?: boolean;
   className?: string;
 }
 
-export function Logo({ width, height = 100, dark = false, className }: LogoProps) {
+export function Logo({ width, height, className }: LogoProps) {
   return (
     <>
       <svg
@@ -21,7 +20,7 @@ export function Logo({ width, height = 100, dark = false, className }: LogoProps
         width={width}
         height={height}
         fill="currentColor"
-        className={dark ? 'logo--dark' : className}
+        className={className ?? 'logo'}
         aria-hidden="true"
       >
         <g>

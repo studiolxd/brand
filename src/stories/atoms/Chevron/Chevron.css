@@ -1,0 +1,11 @@
+.chevron {
+  display: block;
+  height: auto;
+  flex-shrink: 0;
+  --chevron-width: max(1.5625vw, 24px); /* md por defecto */
+  width: var(--chevron-width);
+}
+
+.chevron--sm { --chevron-width: max(0.75vw, 12px); }
+.chevron--md { --chevron-width: max(1.5625vw, 24px); }
+.chevron--lg { --chevron-width: max(3.125vw, 48px); }

@@ -1,0 +1,129 @@
+/* ─── Trigger ─────────────────────────────────────────────── */
+.select {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--select-icon-size);
+
+  padding-block: var(--select-padding-block);
+  padding-inline: var(--select-padding-inline);
+
+  font-family: var(--select-font-family);
+  font-size: var(--select-font-size);
+  font-weight: var(--select-font-weight);
+  color: var(--select-color);
+  background-color: var(--select-bg);
+
+  border-width: var(--select-border-width);
+  border-style: var(--select-border-style);
+  border-color: var(--select-border-color);
+  border-radius: var(--select-border-radius);
+
+  cursor: pointer;
+  width: 100%;
+}
+
+.select:focus,
+.select[data-state='open'] {
+  outline: none;
+}
+
+.select:focus-visible {
+  outline: var(--select-focus-ring-width) solid var(--select-focus-ring-color);
+  outline-offset: var(--select-focus-ring-offset);
+}
+
+/* ─── Icon ────────────────────────────────────────────────── */
+.select__icon {
+  width: var(--select-icon-size);
+  flex-shrink: 0;
+  transform: rotate(90deg);
+  transition: transform var(--select-icon-transition) var(--motion-easing-default);
+
+  [data-state='open'] & {
+    transform: rotate(-90deg);
+  }
+}
+
+/* ─── Dropdown ────────────────────────────────────────────── */
+.select__content {
+  background-color: var(--select-content-bg);
+  border-width: var(--select-border-width);
+  border-style: var(--select-border-style);
+  border-color: var(--select-content-border-color);
+  min-width: var(--radix-select-trigger-width);
+  z-index: var(--select-content-z-index);
+
+  &[data-side='bottom'] {
+    border-top: none;
+  }
+
+  &[data-side='top'] {
+    border-bottom: none;
+  }
+}
+
+/* ─── Items ───────────────────────────────────────────────── */
+.select__item {
+  display: flex;
+  align-items: center;
+  padding-block: var(--select-item-padding-block);
+  padding-inline: var(--select-padding-inline);
+  font-size: var(--select-font-size);
+  font-family: var(--select-font-family);
+  cursor: pointer;
+
+  &[data-highlighted] {
+    outline: none;
+    background-color: var(--select-item-highlighted-bg);
+    color: var(--select-item-highlighted-color);
+  }
+}
+
+.select__content[data-side='bottom'] {
+  .select__item + .select__item {
+    border-top: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  }
+}
+
+.select__content[data-side='top'] {
+  .select__item:first-child {
+    border-bottom: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  }
+}
+
+/* ─── Dark ────────────────────────────────────────────────── */
+.dark .select,
+.select.select--dark {
+  --select-bg: var(--select-dark-bg);
+  --select-color: var(--select-dark-color);
+  --select-border-color: var(--select-dark-border-color);
+  --select-focus-ring-color: var(--select-dark-focus-ring-color);
+  --select-content-bg: var(--select-dark-content-bg);
+  --select-content-border-color: var(--select-dark-content-border-color);
+  --select-item-highlighted-bg: var(--select-dark-item-highlighted-bg);
+  --select-item-highlighted-color: var(--select-dark-item-highlighted-color);
+}
+
+/* Dark — dropdown content (Portal, fuera del ancestro .dark) */
+.select__content.select__content--dark {
+  background-color: var(--select-dark-content-bg);
+  border-color: var(--select-dark-content-border-color);
+}
+
+.select__content.select__content--dark .select__item {
+  color: var(--select-dark-color);
+}
+
+.select__content.select__content--dark .select__item[data-highlighted] {
+  background-color: var(--select-dark-item-highlighted-bg);
+  color: var(--select-dark-item-highlighted-color);
+}
+
+/* Dark + disabled */
+.dark .select:disabled,
+.select.select--dark:disabled {
+  --select-color: var(--select-dark-disabled-color);
+  --select-border-color: var(--select-dark-disabled-border-color);
+  opacity: 1;
+}

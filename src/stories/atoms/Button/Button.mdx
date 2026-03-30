@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ButtonStories from "./Button.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonGhostTokens, buttonFormTokens } from "../../../tokens/components/button";
+import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonGhostTokens, buttonFormTokens, buttonSizeTokens } from "../../../tokens/components/button";
 
 <Meta of={ButtonStories} />
 
@@ -15,7 +15,7 @@ Borde en color primario, fondo blanco y texto por defecto. En hover el fondo pas
 
 <Canvas of={ButtonStories.Primary} />
 
-## Primary oscuro
+## Primary Dark
 
 Borde, fondo y texto en color inverso sobre superficie oscura. En hover el fondo y el borde pasan a blanco y el texto a color por defecto. Para usar sobre fondos oscuros.
 
@@ -33,15 +33,21 @@ Fondo en color secundario, texto por defecto alineado a la izquierda y altura m�
 
 <Canvas of={ButtonStories.Form} />
 
-## En bloque
+## Block
 
 Cualquier variante admite el modificador `block` para ocupar todo el ancho del contenedor.
 
-<Canvas of={ButtonStories.Bloque} />
+<Canvas of={ButtonStories.Block} />
 
-## Deshabilitado
+## Tamaños
 
-<Canvas of={ButtonStories.Deshabilitado} />
+Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica mediante la prop `size`.
+
+<Canvas of={ButtonStories.Sizes} />
+
+## Disabled
+
+<Canvas of={ButtonStories.Disabled} />
 
 ---
 
@@ -55,7 +61,7 @@ Cualquier variante admite el modificador `block` para ocupar todo el ancho del c
 
 <TokenTable tokens={buttonPrimaryTokens} />
 
-### Primary oscuro
+### Primary Dark
 
 <TokenTable tokens={buttonPrimaryDarkTokens} />
 
@@ -66,6 +72,10 @@ Cualquier variante admite el modificador `block` para ocupar todo el ancho del c
 ### Form
 
 <TokenTable tokens={buttonFormTokens} />
+
+### Tamaños
+
+<TokenTable tokens={buttonSizeTokens} />
 
 ## Props
 

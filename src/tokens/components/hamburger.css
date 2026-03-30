@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --hamburger-width: 33px; /** Ancho del botón hamburger */
+  --hamburger-height: 24px; /** Alto del botón hamburger */
+  --hamburger-bar-height: 4px; /** Alto de cada barra */
+  --hamburger-transition-easing: cubic-bezier(0.77, 0.2, 0.05, 1); /** Easing de la animación de las barras */
+  --hamburger-transition-duration: var(--motion-duration-slow); /** Duración de la animación de las barras */
+  --hamburger-opacity-duration: var(--motion-duration-base); /** Duración de la transición de opacidad */
+  --hamburger-opacity-easing: var(--motion-easing-default); /** Easing de la transición de opacidad */
+  --hamburger-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --hamburger-bar-color: var(--color-text-default); /** Color de las barras */
+  --hamburger-bar-dark-color: var(--color-text-dark); /** Color de las barras sobre fondo oscuro */
+  --hamburger-focus-ring-color: var(--color-primary); /** Color del focus ring */
+}

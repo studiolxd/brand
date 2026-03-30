@@ -59,15 +59,38 @@
   border-color: var(--input-error-focus-border-color);
 }
 
+/* Tamaños */
+.input.input--sm {
+  --input-padding-block: var(--input-sm-padding-block);
+  --input-padding-inline: var(--input-sm-padding-inline);
+  --input-font-size: var(--input-sm-font-size);
+}
+
+.input.input--lg {
+  --input-padding-block: var(--input-lg-padding-block);
+  --input-padding-inline: var(--input-lg-padding-inline);
+  --input-font-size: var(--input-lg-font-size);
+}
+
 /* Dark — contexto padre (.dark) o modificador directo (.input--dark) */
 .dark .input,
 .input.input--dark {
   --input-bg: var(--input-dark-bg);
+  --input-color: var(--input-dark-color);
   --input-border-color: var(--input-dark-border-color);
   --input-placeholder-color: var(--input-dark-placeholder-color);
   --input-focus-border-color: var(--input-dark-focus-border-color);
   --input-focus-ring-color: var(--input-dark-focus-ring-color);
   --input-error-focus-ring-color: var(--input-dark-error-focus-ring-color);
+}
+
+/* Dark + disabled — especificidad triple para ganar sobre :disabled */
+.dark .input:disabled,
+.input.input--dark:disabled {
+  --input-disabled-bg: var(--input-dark-disabled-bg);
+  --input-disabled-color: var(--input-dark-disabled-color);
+  --input-disabled-border-color: var(--input-dark-disabled-border-color);
+  opacity: 1;
 }
 
 /* Dark + error — especificidad triple para ganar sobre .input--error */

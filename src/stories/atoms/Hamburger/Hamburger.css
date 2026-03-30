@@ -1,0 +1,70 @@
+.hamburger {
+  position: relative;
+  width: var(--hamburger-width);
+  height: var(--hamburger-height);
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.hamburger:hover {
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+.hamburger:focus-visible {
+  outline: var(--hamburger-focus-ring-width) solid var(--hamburger-focus-ring-color);
+  outline-offset: var(--spacing-1);
+}
+
+.hamburger__bar {
+  display: block;
+  width: 100%;
+  height: var(--hamburger-bar-height);
+  background-color: var(--hamburger-bar-color);
+  border-radius: 0;
+  transform-origin: center;
+  transition:
+    transform var(--hamburger-transition-duration) var(--hamburger-transition-easing),
+    opacity var(--hamburger-opacity-duration) var(--hamburger-opacity-easing),
+    background-color var(--hamburger-opacity-duration) var(--hamburger-opacity-easing);
+}
+
+/* Open state — X animation */
+
+.hamburger[aria-expanded="true"] .hamburger__bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] .hamburger__bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger[aria-expanded="true"] .hamburger__bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Dark variant */
+
+.hamburger.hamburger--dark .hamburger__bar {
+  background-color: var(--hamburger-bar-dark-color);
+}
+
+.hamburger.hamburger--dark:focus-visible {
+  outline-color: var(--hamburger-bar-dark-color);
+}
+
+.dark .hamburger .hamburger__bar {
+  background-color: var(--hamburger-bar-dark-color);
+}
+
+.dark .hamburger:focus-visible {
+  outline-color: var(--hamburger-bar-dark-color);
+}

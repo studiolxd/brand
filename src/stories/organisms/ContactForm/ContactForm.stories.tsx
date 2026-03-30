@@ -9,7 +9,7 @@ const privacyLabel = (
 );
 
 const meta: Meta<typeof ContactForm> = {
-  title: 'Organismos/ContactForm',
+  title: 'Organisms/ContactForm',
   component: ContactForm,
   parameters: {
     layout: 'padded',
@@ -51,14 +51,9 @@ const meta: Meta<typeof ContactForm> = {
       control: { type: 'text' },
       description: 'Mensaje de éxito.',
     },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Variante para usar sobre fondo oscuro.',
-    },
   },
   args: {
     privacyLabel,
-    dark: false,
     submitting: false,
     success: false,
   },
@@ -67,47 +62,34 @@ const meta: Meta<typeof ContactForm> = {
 export default meta;
 type Story = StoryObj<typeof ContactForm>;
 
-export const Default: Story = {
-  name: 'Por defecto',
+export const Default: Story = {};
+
+export const Submitting: Story = {
+  args: { submitting: true },
 };
 
-export const Enviando: Story = {
-  name: 'Enviando',
-  args: {
-    submitting: true,
-  },
-};
-
-export const ConErrores: Story = {
-  name: 'Con errores',
+export const WithErrors: Story = {
   args: {
     errors: ['El email es obligatorio.', 'El mensaje es obligatorio.', 'Debes aceptar la política de privacidad.'],
   },
 };
 
-export const Exito: Story = {
-  name: 'Éxito',
-  args: {
-    success: true,
-  },
+export const Success: Story = {
+  args: { success: true },
 };
 
 export const Dark: Story = {
-  name: 'Oscuro',
-  args: {
-    dark: true,
-  },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },
 };
 
-export const DarkConErrores: Story = {
-  name: 'Oscuro con errores',
+export const DarkWithErrors: Story = {
   args: {
-    dark: true,
     errors: ['El email es obligatorio.', 'El mensaje es obligatorio.', 'Debes aceptar la política de privacidad.'],
   },
+  decorators: [(Story) => <div className="dark" style={{ padding: '1rem' }}><Story /></div>],
   globals: {
     backgrounds: { value: 'dark' },
   },

@@ -1,0 +1,69 @@
+.home {
+  min-height: 100vh;
+  background-color: var(--color-background-default);
+}
+
+.home__main {
+  padding-block-start: var(--header-height-mobile);
+}
+
+@media (min-width: 1440px) {
+  .home__main {
+    padding-block-start: var(--header-height-desktop);
+  }
+}
+
+/* ---- Courses section ---- */
+
+.home__courses {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .home__courses {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---- Video section ---- */
+
+.home__video-section {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--header-height-mobile));
+  overflow: hidden;
+}
+
+@media (min-width: 1440px) {
+  .home__video-section {
+    height: calc(100vh - var(--header-height-desktop));
+  }
+}
+
+.home__video-landscape,
+.home__video-portrait {
+  width: 100%;
+  height: 100%;
+}
+
+.home__video-landscape video,
+.home__video-portrait video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home__video-portrait {
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .home__video-landscape {
+    display: none;
+  }
+
+  .home__video-portrait {
+    display: block;
+  }
+}

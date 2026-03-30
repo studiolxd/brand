@@ -23,6 +23,14 @@
   --input-disabled-bg: var(--color-grey-lightest); /** Background when disabled */
   --input-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
   --input-error-bg: var(--color-white); /** Error background */
+  --input-sm-padding-block: var(--spacing-2); /** Block padding — sm */
+  --input-sm-padding-inline: var(--spacing-3); /** Inline padding — sm */
+  --input-sm-font-size: var(--font-size-1); /** Font size — sm */
+  --input-lg-padding-block: var(--spacing-5); /** Block padding — lg */
+  --input-lg-padding-inline: var(--spacing-5); /** Inline padding — lg */
+  --input-lg-font-size: var(--font-size-4); /** Font size — lg */
+  --input-dark-disabled-color: var(--color-grey-light); /** Text color when disabled on dark surface */
+  --input-dark-disabled-border-color: var(--color-grey-light); /** Border color when disabled on dark surface */
   --input-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --input-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --input-font-weight: var(--font-weight-default); /** Font weight */
@@ -38,6 +46,7 @@
   --input-error-focus-border-color: var(--color-primary); /** Error border color on focus */
   --input-error-focus-ring-color: var(--color-error); /** Error focus ring color */
   --input-dark-bg: var(--color-background-dark); /** Background on dark surface */
+  --input-dark-color: var(--color-text-dark); /** Text color on dark surface */
   --input-dark-border-color: var(--color-text-dark); /** Border color on dark background */
   --input-dark-placeholder-color: var(--color-text-muted-dark); /** Placeholder color on dark background */
   --input-dark-focus-border-color: var(--color-text-dark); /** Border color on focus on dark background */
@@ -46,4 +55,5 @@
   --input-dark-error-bg: var(--color-background-dark); /** Background in error state on dark surface */
   --input-dark-error-border-color: var(--color-text-dark); /** Border color in error state on dark background */
   --input-dark-error-placeholder-color: var(--color-text-muted-dark); /** Placeholder color in error state on dark background */
+  --input-dark-disabled-bg: var(--color-background-dark); /** Background when disabled on dark surface */
 }

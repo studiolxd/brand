@@ -1,6 +1,6 @@
 {
   "form": {
-    "gap":                  { "$value": "0",                        "$type": "string",    "$description": "Separación entre campos del formulario" },
+    "gap":                  { "$value": "{border-width.sm}",        "$type": "dimension", "$description": "Gap entre campos — actúa como separador (gap technique)" },
     "border-width":         { "$value": "{control.border-width}",   "$type": "dimension", "$description": "Grosor del borde exterior del formulario" },
     "border-style":         { "$value": "{control.border-style}",   "$type": "string",    "$description": "Estilo del borde exterior" },
     "border-color":         { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del borde exterior" },

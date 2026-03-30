@@ -1,0 +1,13 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --card-square-gap: var(--spacing-3); /** Separación entre elementos internos */
+  --card-square-img-transition: var(--motion-duration-slow); /** Duración del fade de la imagen en hover */
+  --card-square-desc-transition: var(--motion-duration-slow); /** Duración del fade de la descripción en hover */
+  --card-square-desc-transition-delay: var(--motion-duration-fast); /** Delay de la descripción (espera a que la imagen se vaya) */
+  --card-square-padding-inline: var(--card-padding-inline); /** Padding horizontal del contenido */
+  --card-square-padding-block-start: var(--card-padding-block-start); /** Padding block start del contenido */
+  --card-square-padding-block-end: var(--card-padding-block-end); /** Padding block end del contenido */
+}

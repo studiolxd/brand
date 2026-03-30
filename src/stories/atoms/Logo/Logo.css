@@ -7,6 +7,7 @@
   background-color: var(--color-text-default);
 }
 
-.logo--dark {
+.logo--dark,
+.dark .logo {
   color: var(--color-text-dark);
 }

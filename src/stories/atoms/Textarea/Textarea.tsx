@@ -8,7 +8,6 @@ interface TextareaProps {
   disabled?: boolean;
   readOnly?: boolean;
   error?: boolean;
-  dark?: boolean;
   id?: string;
   name?: string;
   describedBy?: string;
@@ -25,7 +24,6 @@ export function Textarea({
   disabled,
   readOnly,
   error = false,
-  dark = false,
   id,
   name,
   describedBy,
@@ -35,7 +33,7 @@ export function Textarea({
 }: TextareaProps) {
   return (
     <textarea
-      className={['textarea', error ? 'textarea--error' : '', dark ? 'textarea--dark' : ''].filter(Boolean).join(' ')}
+      className={['textarea', error ? 'textarea--error' : ''].filter(Boolean).join(' ')}
       placeholder={placeholder}
       value={value}
       defaultValue={defaultValue}

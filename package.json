@@ -10,11 +10,17 @@
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_6b8385c6e01a049"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.2.6",
+    "embla-carousel-auto-scroll": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "libphonenumber-js": "^1.12.41",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "react-phone-number-input": "^3.4.16"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.1",

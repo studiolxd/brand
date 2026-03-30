@@ -1,0 +1,25 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --tag-border-radius: var(--border-radius-full); /** Pill shape */
+  --tag-font-family: var(--font-family-sans); /** Font family */
+  --tag-font-size: var(--font-size-1); /** 14px — UI label */
+  --tag-font-weight: var(--font-weight-medium); /** Medium weight */
+  --tag-line-height: var(--line-height-none); /** Single-line */
+  --tag-padding-block: var(--spacing-1); /** Block (vertical) padding */
+  --tag-padding-inline: var(--spacing-3); /** Inline (horizontal) padding */
+  --tag-default-bg: var(--color-grey-lightest); /** Default background */
+  --tag-default-color: var(--color-text-default); /** Default text color */
+  --tag-primary-bg: var(--color-primary); /** Primary (prussian) background */
+  --tag-primary-color: var(--color-text-dark); /** Primary text — white on dark bg */
+  --tag-secondary-bg: var(--color-secondary); /** Secondary (lavender) background */
+  --tag-secondary-color: var(--color-text-default); /** Secondary text — dark on light bg */
+  --tag-tertiary-bg: var(--color-tertiary); /** Tertiary (yellow) background */
+  --tag-tertiary-color: var(--color-text-default); /** Tertiary text — dark on light bg */
+  --tag-quaternary-bg: var(--color-quaternary); /** Quaternary (emerald) background */
+  --tag-quaternary-color: var(--color-text-default); /** Quaternary text — dark on light bg */
+  --tag-quinary-bg: var(--color-quinary); /** Quinary (cayenne) background */
+  --tag-quinary-color: var(--color-text-default); /** Quinary text — dark on orange bg */
+}

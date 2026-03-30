@@ -4,7 +4,6 @@ interface CheckboxProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
-  dark?: boolean;
   id?: string;
   name?: string;
   value?: string;
@@ -17,7 +16,6 @@ export function Checkbox({
   checked,
   defaultChecked,
   disabled,
-  dark = false,
   id,
   name,
   value,
@@ -27,7 +25,7 @@ export function Checkbox({
 }: CheckboxProps) {
   return (
     <input
-      className={['checkbox', dark ? 'checkbox--dark' : ''].filter(Boolean).join(' ')}
+      className="checkbox"
       type="checkbox"
       checked={checked}
       defaultChecked={defaultChecked}

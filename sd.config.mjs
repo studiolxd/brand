@@ -17,6 +17,12 @@ const sd = new StyleDictionary({
           options: fileOptions,
         },
         {
+          destination: 'breakpoint.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'breakpoint',
+          options: fileOptions,
+        },
+        {
           destination: 'typography.css',
           format: 'css/variables',
           filter: (token) => ['font-family', 'font-size', 'font-weight', 'line-height', 'letter-spacing'].includes(token.path[0]),
@@ -43,7 +49,7 @@ const sd = new StyleDictionary({
         {
           destination: 'size.css',
           format: 'css/variables',
-          filter: (token) => token.path[0] === 'size-component',
+          filter: (token) => token.path[0] === 'size-component' || token.path[0] === 'content',
           options: fileOptions,
         },
         {
@@ -95,6 +101,18 @@ const sd = new StyleDictionary({
           options: fileOptions,
         },
         {
+          destination: 'components/hamburger.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'hamburger',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/header.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'header',
+          options: fileOptions,
+        },
+        {
           destination: 'components/label.css',
           format: 'css/variables',
           filter: (token) => token.path[0] === 'label',
@@ -128,6 +146,60 @@ const sd = new StyleDictionary({
           destination: 'molecules/checkbox-field.css',
           format: 'css/variables',
           filter: (token) => token.path[0] === 'checkbox-field',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/tag.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'tag',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/card.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'card',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/highlight-section.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'highlight-section',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/select.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'select',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/carousel.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'carousel',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/card-square.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'card-square',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/card-split.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'card-split',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/avatar.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'avatar',
+          options: fileOptions,
+        },
+        {
+          destination: 'components/input-phone.css',
+          format: 'css/variables',
+          filter: (token) => token.path[0] === 'input-phone',
           options: fileOptions,
         },
       ],

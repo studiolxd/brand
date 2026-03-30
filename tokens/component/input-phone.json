@@ -1,0 +1,9 @@
+{
+  "input-phone": {
+    "country-width":        { "$value": "72px",                      "$type": "dimension", "$description": "Ancho del selector de país" },
+    "country-border-width": { "$value": "{border-width.sm}",         "$type": "dimension", "$description": "Grosor del separador entre país y número" },
+    "country-border-style": { "$value": "solid",                     "$type": "string",    "$description": "Estilo del separador" },
+    "country-border-color": { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del separador" },
+    "content-z-index":      { "$value": "1100",                      "$type": "number",    "$description": "Z-index del dropdown de país" }
+  }
+}

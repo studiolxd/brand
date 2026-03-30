@@ -1,0 +1,172 @@
+/* ── Reset del button nativo en el trigger de país ─────────── */
+.input-phone__country {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.input-phone__country:hover,
+.input-phone__country:active {
+  background-color: transparent;
+  color: var(--input-color);
+  border-color: inherit;
+}
+
+/* ── Contenedor ─────────────────────────────────────────────── */
+.input-phone {
+  display: flex;
+  align-items: stretch;
+  width: var(--input-width);
+  border-radius: var(--input-border-radius);
+  border-width: var(--input-border-width);
+  border-style: var(--input-border-style);
+  border-color: var(--input-border-color);
+  background-color: var(--input-bg);
+  box-sizing: border-box;
+  transition: border-color var(--input-transition-duration) var(--input-transition-easing);
+}
+
+.input-phone:focus-within {
+  border-color: var(--input-focus-border-color);
+  box-shadow:
+    inset 0 0 0 calc(var(--input-focus-ring-width) + var(--input-focus-ring-inset-offset)) var(--input-focus-ring-color),
+    inset 0 0 0 var(--input-focus-ring-inset-offset) var(--input-bg);
+}
+
+/* ── Selector de país ───────────────────────────────────────── */
+.input-phone__country {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  flex-shrink: 0;
+  width: var(--input-phone-country-width);
+  padding-block: var(--input-padding-block);
+  padding-inline: var(--input-padding-inline);
+  font-family: var(--input-font-family);
+  font-size: var(--input-font-size);
+  font-weight: var(--input-font-weight);
+  color: var(--input-color);
+  background: none;
+  border: none;
+  border-inline-end-width: var(--input-phone-country-border-width);
+  border-inline-end-style: var(--input-phone-country-border-style);
+  border-inline-end-color: var(--input-phone-country-border-color);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.input-phone__country:focus,
+.input-phone__country[data-state='open'] {
+  outline: none;
+}
+
+.input-phone__country-icon {
+  width: 10px;
+  flex-shrink: 0;
+  transform: rotate(90deg);
+  transition: transform var(--input-transition-duration) var(--motion-easing-default);
+}
+
+.input-phone__country[data-state='open'] .input-phone__country-icon {
+  transform: rotate(-90deg);
+}
+
+/* ── Dropdown de país ───────────────────────────────────────── */
+.input-phone__country-content {
+  background-color: var(--input-bg);
+  border-width: var(--input-border-width);
+  border-style: var(--input-border-style);
+  border-color: var(--input-border-color);
+  min-width: var(--radix-select-trigger-width);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: var(--input-phone-content-z-index);
+}
+
+.input-phone__country-item {
+  display: flex;
+  align-items: center;
+  padding-block: var(--spacing-2);
+  padding-inline: var(--input-padding-inline);
+  font-family: var(--input-font-family);
+  font-size: var(--input-font-size);
+  cursor: pointer;
+}
+
+.input-phone__country-item[data-highlighted] {
+  outline: none;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ── Campo numérico ─────────────────────────────────────────── */
+.input-phone .input-phone__number {
+  flex: 1;
+  padding-block: var(--input-padding-block);
+  padding-inline: var(--input-padding-inline);
+  font-family: var(--input-font-family);
+  font-size: var(--input-font-size);
+  font-weight: var(--input-font-weight);
+  color: var(--input-color);
+  background: none;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  width: auto;
+}
+
+.input-phone__number::placeholder {
+  color: var(--input-placeholder-color);
+  text-transform: var(--input-placeholder-text-transform);
+}
+
+/* ── Error ──────────────────────────────────────────────────── */
+.input-phone.input-phone--error {
+  border-color: var(--input-error-border-color);
+}
+
+.input-phone.input-phone--error:focus-within {
+  box-shadow:
+    inset 0 0 0 calc(var(--input-focus-ring-width) + var(--input-focus-ring-inset-offset)) var(--input-error-focus-ring-color),
+    inset 0 0 0 var(--input-focus-ring-inset-offset) var(--input-error-bg);
+  border-color: var(--input-error-focus-border-color);
+}
+
+.input-phone.input-phone--error .input-phone__number::placeholder {
+  color: var(--input-error-placeholder-color);
+}
+
+/* ── Disabled ───────────────────────────────────────────────── */
+.input-phone:has(.input-phone__number:disabled) {
+  opacity: var(--input-disabled-opacity);
+  background-color: var(--input-disabled-bg);
+  border-color: var(--input-disabled-border-color);
+  pointer-events: none;
+}
+
+/* ── Dark ───────────────────────────────────────────────────── */
+.dark .input-phone,
+.input-phone.input-phone--dark {
+  --input-bg: var(--input-dark-bg);
+  --input-color: var(--input-dark-color);
+  --input-border-color: var(--input-dark-border-color);
+  --input-placeholder-color: var(--input-dark-placeholder-color);
+  --input-focus-border-color: var(--input-dark-focus-border-color);
+  --input-focus-ring-color: var(--input-dark-focus-ring-color);
+  --input-error-focus-ring-color: var(--input-dark-error-focus-ring-color);
+  --input-phone-country-border-color: var(--input-dark-border-color);
+}
+
+.input-phone__country-content.input-phone__country-content--dark {
+  background-color: var(--input-dark-bg);
+  border-color: var(--input-dark-border-color);
+}
+
+.input-phone__country-content.input-phone__country-content--dark .input-phone__country-item {
+  color: var(--input-dark-color);
+}
+
+.input-phone__country-content.input-phone__country-content--dark .input-phone__country-item[data-highlighted] {
+  background-color: var(--input-dark-color);
+  color: var(--input-dark-bg);
+}
