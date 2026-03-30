@@ -1,0 +1,261 @@
+/* =============================================================
+   surface.css — Context-based theming
+
+   Añadir la clase al contenedor. Todos los componentes
+   descendientes adaptan sus tokens automáticamente.
+
+   .surface-dark  — sobre fondo oscuro (body dark, secciones oscuras)
+   .surface-light — ghost sobre fotografía clara
+   ============================================================= */
+
+.surface-dark {
+  /* ─── Button primary ──────────────────────────────────────────────────── */
+  --button-primary-bg:              var(--color-background-dark);
+  --button-primary-color:           var(--color-text-dark);
+  --button-primary-border:          var(--color-text-dark);
+  --button-primary-hover-bg:        var(--color-white);
+  --button-primary-hover-color:     var(--color-text-default);
+  --button-primary-hover-border:    var(--color-white);
+  --button-primary-active-bg:       var(--color-white);
+  --button-primary-active-color:    var(--color-text-default);
+  --button-primary-active-border:   var(--color-white);
+  --button-primary-focus-ring-color:var(--color-text-dark);
+
+  /* ─── Input ───────────────────────────────────────────────────────────── */
+  --input-bg:                    var(--color-background-dark);
+  --input-color:                 var(--color-text-dark);
+  --input-border-color:          var(--color-text-dark);
+  --input-placeholder-color:     var(--color-text-muted-dark);
+  --input-focus-border-color:    var(--color-text-dark);
+  --input-focus-ring-color:      var(--color-text-dark);
+  --input-error-focus-ring-color: var(--color-error-dark);
+
+  /* ─── Textarea ────────────────────────────────────────────────────────── */
+  --textarea-bg:                    var(--color-background-dark);
+  --textarea-color:                 var(--color-text-dark);
+  --textarea-border-color:          var(--color-text-dark);
+  --textarea-placeholder-color:     var(--color-text-muted-dark);
+  --textarea-focus-border-color:    var(--color-text-dark);
+  --textarea-focus-ring-color:      var(--color-text-dark);
+  --textarea-error-focus-ring-color:var(--color-error-dark);
+
+  /* ─── Checkbox ────────────────────────────────────────────────────────── */
+  --checkbox-border-color:     var(--color-text-dark);
+  --checkbox-bg-checked:       var(--color-text-dark);
+  --checkbox-check-color:      var(--color-background-dark);
+  --checkbox-focus-ring-color: var(--color-text-dark);
+
+  /* ─── Select ──────────────────────────────────────────────────────────── */
+  --select-bg:                     var(--color-background-dark);
+  --select-color:                  var(--color-text-dark);
+  --select-border-color:           var(--color-text-dark);
+  --select-focus-ring-color:       var(--color-text-dark);
+  --select-content-bg:             var(--color-background-dark);
+  --select-content-border-color:   var(--color-text-dark);
+  --select-item-highlighted-bg:    var(--color-text-dark);
+  --select-item-highlighted-color: var(--color-background-dark);
+
+  /* ─── Heading ─────────────────────────────────────────────────────────── */
+  --text-h1-color: var(--color-text-dark);
+  --text-h2-color: var(--color-text-dark);
+  --text-h3-color: var(--color-text-dark);
+  --text-h4-color: var(--color-text-dark);
+  --text-h5-color: var(--color-text-dark);
+  --text-h6-color: var(--color-text-dark);
+
+  /* ─── Paragraph ───────────────────────────────────────────────────────── */
+  --text-paragraph-color: var(--color-text-dark);
+
+  /* ─── List ────────────────────────────────────────────────────────────── */
+  --text-list-color: var(--color-text-dark);
+
+  /* ─── Link ────────────────────────────────────────────────────────────── */
+  --link-color:           var(--color-text-dark);
+  --link-color-hover:     var(--color-text-dark);
+  --link-focus-ring-color:var(--color-text-dark);
+
+  /* ─── Label ───────────────────────────────────────────────────────────── */
+  --label-color: var(--color-text-dark);
+
+  /* ─── Checkbox field ──────────────────────────────────────────────────── */
+  --checkbox-field-label-color: var(--color-text-dark);
+
+  /* ─── Input field / Textarea field ───────────────────────────────────── */
+  --input-field-error-color:    var(--color-error-dark);
+  --input-field-helper-color:   var(--color-text-muted-dark);
+  --textarea-field-error-color: var(--color-error-dark);
+  --textarea-field-helper-color:var(--color-text-muted-dark);
+
+  /* ─── Form ────────────────────────────────────────────────────────────── */
+  --form-border-color:    var(--color-text-dark);
+  --form-separator-color: var(--color-text-dark);
+  --form-error-color:     var(--color-error-dark);
+  --form-helper-color:    var(--color-text-muted-dark);
+
+  /* ─── Carousel ────────────────────────────────────────────────────────── */
+  --carousel-slide-border-color: var(--color-text-dark);
+  --carousel-btn-color:          var(--color-text-dark);
+}
+
+/* ─── Button: disabled states ────────────────────────────────────────────── */
+
+.surface-dark .button--primary:disabled,
+.surface-dark .button--primary[aria-disabled="true"] {
+  --button-primary-disabled-color: var(--color-grey-light);
+  --button-primary-disabled-border:var(--color-grey-light);
+}
+
+/* ghost siempre vive sobre fondos oscuros; su disabled ya usa grey-light */
+
+.surface-dark .button--form:disabled,
+.surface-dark .button--form[aria-disabled="true"] {
+  --button-form-disabled-bg:    var(--color-grey-darkest);
+  --button-form-disabled-color: var(--color-grey-light);
+  --button-form-disabled-border:var(--color-grey-darkest);
+}
+
+/* ─── Input: disabled and error states ───────────────────────────────────── */
+
+.surface-dark .input:disabled {
+  --input-disabled-bg:           var(--color-grey-darkest);
+  --input-disabled-color:        var(--color-grey-light);
+  --input-disabled-border-color: var(--color-grey-dark);
+}
+
+.surface-dark .input.input--error {
+  --input-error-bg:                  var(--color-background-dark);
+  --input-error-border-color:        var(--color-text-dark);
+  --input-error-placeholder-color:   var(--color-text-muted-dark);
+}
+
+/* ─── Textarea: disabled and error states ────────────────────────────────── */
+
+.surface-dark .textarea:disabled {
+  --textarea-disabled-bg:           var(--color-grey-darkest);
+  --textarea-disabled-color:        var(--color-grey-light);
+  --textarea-disabled-border-color: var(--color-grey-dark);
+}
+
+.surface-dark .textarea.textarea--error {
+  --textarea-error-bg:                var(--color-background-dark);
+  --textarea-error-border-color:      var(--color-text-dark);
+  --textarea-error-placeholder-color: var(--color-text-muted-dark);
+}
+
+/* ─── Checkbox: disabled state ───────────────────────────────────────────── */
+
+.surface-dark .checkbox[data-disabled] {
+  --checkbox-disabled-border-color: var(--color-grey-light);
+  --checkbox-disabled-bg-checked:   var(--color-grey-light);
+}
+
+/* ─── Select: disabled state ─────────────────────────────────────────────── */
+
+.surface-dark .select:disabled {
+  --select-color:       var(--color-grey-light);
+  --select-border-color:var(--color-grey-light);
+  opacity: 1;
+}
+
+/* ─── Logo ────────────────────────────────────────────────────────────────── */
+
+.surface-dark .logo {
+  color: var(--color-text-dark);
+}
+
+/* ─── InputPhoneField ─────────────────────────────────────────────────────── */
+
+.surface-dark .input-phone-field__helper {
+  background-color: var(--color-background-dark);
+}
+
+/* ─── Hamburger ───────────────────────────────────────────────────────────── */
+
+.surface-dark .hamburger .hamburger__bar {
+  background-color: var(--color-text-dark);
+}
+
+.surface-dark .hamburger:focus-visible {
+  outline-color: var(--color-text-dark);
+}
+
+/* ─── Form: field backgrounds and border suppression ─────────────────────── */
+
+.surface-dark .form > .input-field,
+.surface-dark .form > .textarea-field,
+.surface-dark .form > .checkbox-field,
+.surface-dark .form > .form-errors {
+  background-color: var(--color-background-dark);
+}
+
+.surface-dark .form > .input-phone-field {
+  background-color: var(--color-text-dark);
+}
+
+.surface-dark .form > .input-phone-field > .input-phone {
+  background-color: var(--color-text-dark);
+  gap: var(--form-gap);
+}
+
+.surface-dark .form > .input-phone-field > .input-phone > .input-phone__country,
+.surface-dark .form > .input-phone-field > .input-phone .input-phone__number {
+  background-color: var(--color-background-dark);
+}
+
+.surface-dark .form > .input-phone-field > .input-phone-field__helper {
+  background-color: var(--color-background-dark);
+}
+
+.surface-dark .form > .input-field > .input {
+  --input-border-color:          var(--color-background-dark);
+  --input-error-border-color:    var(--color-background-dark);
+  --input-disabled-border-color: var(--color-background-dark);
+}
+
+.surface-dark .form > .textarea-field > .textarea {
+  --textarea-border-color:          var(--color-background-dark);
+  --textarea-error-border-color:    var(--color-background-dark);
+  --textarea-disabled-border-color: var(--color-background-dark);
+}
+
+.surface-dark .form > .input-phone-field > .input-phone {
+  --input-border-color:               var(--color-background-dark);
+  --input-error-border-color:         var(--color-background-dark);
+  --input-disabled-border-color:      var(--color-background-dark);
+  --input-phone-country-border-color: var(--color-background-dark);
+}
+
+/* ─── MethodologySection + ContactSection ─────────────────────────────────── */
+.surface-dark {
+  --methodology-section-gap-color:    var(--color-background-default);
+  --methodology-section-cell-bg:      var(--color-background-dark);
+  --methodology-section-number-color: var(--color-secondary);
+  --contact-section-gap-color:        var(--color-background-default);
+  --contact-section-cell-bg:          var(--color-background-dark);
+}
+
+/* =============================================================
+   surface-light — Ghost sobre fotografía clara
+
+   Solo ghost necesita inversión en fotos claras. El resto de
+   componentes no vive sobre fotografías.
+   ============================================================= */
+
+.surface-light {
+  /* ─── Button ghost ──────────────────────────────────────────────────────── */
+  --button-ghost-color:            var(--color-text-default);
+  --button-ghost-border:           var(--color-text-default);
+  --button-ghost-hover-bg:         var(--color-text-default);
+  --button-ghost-hover-color:      var(--color-text-dark);
+  --button-ghost-hover-border:     var(--color-text-default);
+  --button-ghost-active-bg:        var(--color-text-default);
+  --button-ghost-active-color:     var(--color-text-dark);
+  --button-ghost-active-border:    var(--color-text-default);
+  --button-ghost-focus-ring-color: var(--color-text-default);
+}
+
+.surface-light .button--ghost:disabled,
+.surface-light .button--ghost[aria-disabled="true"] {
+  --button-ghost-disabled-color:  var(--color-grey-darkest);
+  --button-ghost-disabled-border: var(--color-grey-darkest);
+}
