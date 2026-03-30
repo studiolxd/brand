@@ -29,11 +29,15 @@ function u({ size: e = "md", className: n }) {
 }
 //#endregion
 //#region src/stories/atoms/Avatar/Avatar.tsx
-function d({ src: e, alt: n, className: r }) {
+function d({ src: e, alt: n, size: r = "md", className: i }) {
 	return /* @__PURE__ */ t("img", {
 		src: e,
 		alt: n,
-		className: ["avatar", r].filter(Boolean).join(" ")
+		className: [
+			"avatar",
+			`avatar--${r}`,
+			i
+		].filter(Boolean).join(" ")
 	});
 }
 //#endregion
@@ -1506,6 +1510,7 @@ function ze({ title: e = "Lo que dice nuestro alumnado", reviews: r }) {
 					children: [/* @__PURE__ */ t(d, {
 						src: e.photo,
 						alt: e.author,
+						size: "xl",
 						className: "review-card__avatar"
 					}), /* @__PURE__ */ n("div", {
 						className: "review-card__identity",

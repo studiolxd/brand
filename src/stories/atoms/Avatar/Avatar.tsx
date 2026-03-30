@@ -5,16 +5,18 @@ interface AvatarProps {
   src: string;
   /** Texto alternativo accesible. */
   alt: string;
+  /** Talla del avatar. */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   /** Clase adicional. */
   className?: string;
 }
 
-export function Avatar({ src, alt, className }: AvatarProps) {
+export function Avatar({ src, alt, size = 'md', className }: AvatarProps) {
   return (
     <img
       src={src}
       alt={alt}
-      className={['avatar', className].filter(Boolean).join(' ')}
+      className={['avatar', `avatar--${size}`, className].filter(Boolean).join(' ')}
     />
   );
 }

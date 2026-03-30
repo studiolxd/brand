@@ -3,6 +3,9 @@
  */
 
 :root {
-  --avatar-size: 5rem; /** Diámetro del avatar circular */
+  --avatar-size-sm: 1.5rem; /** 24px — avatar inline, navegación */
+  --avatar-size-md: 2.25rem; /** 36px — talla por defecto */
+  --avatar-size-lg: 3.75rem; /** 60px — cards estándar */
+  --avatar-size-xl: 7.5rem; /** 120px — reviewer destacado */
   --avatar-border-radius: var(--border-radius-full); /** Radio para forma circular */
 }

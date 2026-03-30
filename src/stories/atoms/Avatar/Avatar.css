@@ -1,4 +1,5 @@
 .avatar {
+  --avatar-size: var(--avatar-size-md);
   display: block;
   width: var(--avatar-size);
   height: var(--avatar-size);
@@ -6,3 +7,8 @@
   object-fit: cover;
   flex-shrink: 0;
 }
+
+.avatar.avatar--sm { --avatar-size: var(--avatar-size-sm); }
+.avatar.avatar--md { --avatar-size: var(--avatar-size-md); }
+.avatar.avatar--lg { --avatar-size: var(--avatar-size-lg); }
+.avatar.avatar--xl { --avatar-size: var(--avatar-size-xl); }

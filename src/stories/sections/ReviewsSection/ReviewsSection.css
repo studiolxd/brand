@@ -41,7 +41,6 @@
 }
 
 .review-card__avatar {
-  --avatar-size: 120px;
   align-self: center;
 }
 

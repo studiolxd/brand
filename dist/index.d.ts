@@ -10,13 +10,15 @@ declare interface ArrowProps {
     className?: string;
 }
 
-export declare function Avatar({ src, alt, className }: AvatarProps): JSX.Element;
+export declare function Avatar({ src, alt, size, className }: AvatarProps): JSX.Element;
 
 declare interface AvatarProps {
     /** URL de la imagen. */
     src: string;
     /** Texto alternativo accesible. */
     alt: string;
+    /** Talla del avatar. */
+    size?: 'sm' | 'md' | 'lg' | 'xl';
     /** Clase adicional. */
     className?: string;
 }

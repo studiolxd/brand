@@ -1,6 +1,11 @@
 {
   "avatar": {
-    "size":          { "$value": "5rem",                    "$type": "dimension", "$description": "Diámetro del avatar circular" },
-    "border-radius": { "$value": "{border-radius.full}",    "$type": "dimension", "$description": "Radio para forma circular" }
+    "size": {
+      "sm": { "$value": "1.5rem",  "$type": "dimension", "$description": "24px — avatar inline, navegación" },
+      "md": { "$value": "2.25rem", "$type": "dimension", "$description": "36px — talla por defecto" },
+      "lg": { "$value": "3.75rem", "$type": "dimension", "$description": "60px — cards estándar" },
+      "xl": { "$value": "7.5rem",  "$type": "dimension", "$description": "120px — reviewer destacado" }
+    },
+    "border-radius": { "$value": "{border-radius.full}", "$type": "dimension", "$description": "Radio para forma circular" }
   }
 }

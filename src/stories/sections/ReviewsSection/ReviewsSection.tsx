@@ -38,6 +38,7 @@ export function ReviewsSection({ title = 'Lo que dice nuestro alumnado', reviews
                 <Avatar
                   src={review.photo}
                   alt={review.author}
+                  size="xl"
                   className="review-card__avatar"
                 />
                 <div className="review-card__identity">
