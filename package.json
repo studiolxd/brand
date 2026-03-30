@@ -10,7 +10,9 @@
       "types": "./dist/index.d.ts"
     },
     "./css": "./dist/index.css",
-    "./brand.css": "./dist/brand.css"
+    "./brand.css": "./dist/brand.css",
+    "./scss": "./dist/scss/_index.scss",
+    "./scss/*": "./dist/scss/_*.scss"
   },
   "files": [
     "dist"
@@ -20,7 +22,8 @@
     "build": "tsc -b && vite build",
     "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts",
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
-    "prepare": "npm run build:tokens && npm run build:lib && npm run build:css",
+    "build:scss": "cp -r src/tokens/scss dist/scss",
+    "prepare": "npm run build:tokens && npm run build:lib && npm run build:css && npm run build:scss",
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",

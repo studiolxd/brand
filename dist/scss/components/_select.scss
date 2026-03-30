@@ -1,0 +1,35 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$select-border-radius: 0px; // Radio del borde del trigger
+$select-border-width: 1px; // Grosor del borde
+$select-border-style: solid; // Estilo del borde
+$select-border-color: #111e30; // Color del borde
+$select-padding-block: 16px; // Padding block del trigger
+$select-padding-inline: 16px; // Padding inline del trigger
+$select-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
+$select-font-size: 18px; // Tamaño de fuente
+$select-font-weight: 300; // Peso tipográfico
+$select-color: #111e30; // Color del texto
+$select-bg: #ffffff; // Fondo del trigger
+$select-icon-size: 10px; // Tamaño del chevron
+$select-icon-transition: 150ms; // Duración de la transición del icono
+$select-focus-ring-width: 1px; // Grosor del anillo de foco
+$select-focus-ring-offset: 1px; // Separación del anillo de foco
+$select-focus-ring-color: #111e30; // Color del anillo de foco
+$select-content-bg: #ffffff; // Fondo del dropdown
+$select-content-border-color: #111e30; // Borde del dropdown
+$select-content-z-index: 1100; // Z-index del dropdown (por encima del header: 1001)
+$select-item-padding-block: 8px; // Padding block de cada opción
+$select-item-highlighted-bg: #111e30; // Fondo de opción resaltada
+$select-item-highlighted-color: #ffffff; // Texto de opción resaltada
+$select-dark-bg: #111e30; // Fondo del trigger en dark
+$select-dark-color: #ffffff; // Color del texto en dark
+$select-dark-border-color: #ffffff; // Color del borde en dark
+$select-dark-focus-ring-color: #ffffff; // Color del anillo de foco en dark
+$select-dark-content-bg: #111e30; // Fondo del dropdown en dark
+$select-dark-content-border-color: #ffffff; // Borde del dropdown en dark
+$select-dark-item-highlighted-bg: #ffffff; // Fondo de opción resaltada en dark
+$select-dark-item-highlighted-color: #111e30; // Texto de opción resaltada en dark
+$select-dark-disabled-color: #d0d0d0; // Color del texto deshabilitado en dark
+$select-dark-disabled-border-color: #d0d0d0; // Color del borde deshabilitado en dark

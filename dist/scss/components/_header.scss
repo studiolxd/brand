@@ -1,0 +1,32 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$header-height-mobile: 80px; // Alto del header en mobile (con hamburger)
+$header-height-desktop: 100px; // Alto del header en desktop (nav inline)
+$header-logo-height-mobile: 60px; // Alto del logo en mobile
+$header-logo-height-desktop: 60px; // Alto del logo en desktop
+$header-bg: #ffffff; // Fondo del header
+$header-dark-bg: #111e30; // Fondo del header en variante oscura
+$header-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra del header
+$header-z-index: 1000; // Z-index del header
+$header-controls-z-index: 1001; // Z-index del logo y hamburger (sobre el backdrop)
+$header-navbar-z-index: 998; // Z-index del overlay de navegación
+$header-backdrop-z-index: 999; // Z-index del pseudo-elemento backdrop
+$header-navbar-transition-duration: 250ms; // Duración del slide de la navbar
+$header-navbar-transition-easing: ease-in-out; // Easing del slide de la navbar
+$header-nav-font-size-mobile: 28px; // Tamaño de fuente de los enlaces en mobile
+$header-nav-font-size-desktop: 16px; // Tamaño de fuente de los enlaces en desktop
+$header-nav-font-weight-mobile: 600; // Peso de fuente de los enlaces en mobile
+$header-nav-font-weight-desktop: 500; // Peso de fuente de los enlaces en desktop
+$header-nav-color: #111e30; // Color de los enlaces de navegación
+$header-nav-dark-color: #ffffff; // Color de los enlaces en variante oscura
+$header-nav-gap-mobile: 0; // Separación entre enlaces en mobile
+$header-nav-padding-block-mobile: 12px; // Padding vertical de la zona de nav en mobile
+$header-nav-gap-desktop: 32px; // Separación entre enlaces en desktop
+$header-nav-padding-inline: 32px; // Padding horizontal del header y la navbar
+$header-featured-border-width: 1px; // Grosor del borde del featured link
+$header-featured-border-color: currentColor; // Color del borde del featured link
+$header-featured-font-size: 24px; // Tamaño de fuente del featured link
+$header-featured-font-weight: 600; // Peso de fuente del featured link
+$header-featured-padding-inline: 48px; // Padding horizontal del featured link
+$header-featured-margin-inline-end: 48px; // Separación entre el featured link y la navegación
