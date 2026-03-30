@@ -1505,8 +1505,8 @@ function ze({ title: e = "Lo que dice nuestro alumnado", reviews: r }) {
 			gradientColor: "var(--color-background-dark)",
 			children: r.map((e) => /* @__PURE__ */ t(h, { children: /* @__PURE__ */ n("article", {
 				className: "review-card",
-				children: [/* @__PURE__ */ n("footer", {
-					className: "review-card__footer",
+				children: [/* @__PURE__ */ n("div", {
+					className: "review-card__author",
 					children: [/* @__PURE__ */ t(d, {
 						src: e.photo,
 						alt: e.author,
@@ -1516,7 +1516,7 @@ function ze({ title: e = "Lo que dice nuestro alumnado", reviews: r }) {
 						className: "review-card__identity",
 						children: [/* @__PURE__ */ t(R, {
 							level: 3,
-							className: "review-card__author",
+							className: "review-card__name",
 							children: e.author
 						}), /* @__PURE__ */ t(R, {
 							level: 4,

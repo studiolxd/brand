@@ -34,7 +34,7 @@ export function ReviewsSection({ title = 'Lo que dice nuestro alumnado', reviews
         {reviews.map((review) => (
           <CarouselSlide key={review.id}>
             <article className="review-card">
-              <footer className="review-card__footer">
+              <div className="review-card__author">
                 <Avatar
                   src={review.photo}
                   alt={review.author}
@@ -42,10 +42,10 @@ export function ReviewsSection({ title = 'Lo que dice nuestro alumnado', reviews
                   className="review-card__avatar"
                 />
                 <div className="review-card__identity">
-                  <Heading level={3} className="review-card__author">{review.author}</Heading>
+                  <Heading level={3} className="review-card__name">{review.author}</Heading>
                   <Heading level={4} className="review-card__role">{review.role}</Heading>
                 </div>
-              </footer>
+              </div>
               <blockquote className="review-card__quote">{review.quote}</blockquote>
             </article>
           </CarouselSlide>
