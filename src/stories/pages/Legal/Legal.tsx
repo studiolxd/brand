@@ -60,7 +60,7 @@ export function Legal({ title, sections }: LegalProps) {
         navItems={navItems}
         featuredLink={featuredLink}
         actions={
-          <a href="https://academy.studiolxd.com" className="button button--primary">
+          <a href="https://academy.studiolxd.com" className="btn btn-primary">
             Entra a la academia
           </a>
         }

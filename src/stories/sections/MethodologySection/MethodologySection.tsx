@@ -30,7 +30,7 @@ export function MethodologySection({
         <p>{intro}</p>
         <a
           href={ctaHref}
-          className="button button--primary"
+          className="btn btn-primary"
         >
           {ctaLabel}
         </a>

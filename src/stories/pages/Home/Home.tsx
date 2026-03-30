@@ -27,7 +27,7 @@ export function Home() {
       <Header
         navItems={navItems}
         featuredLink={featuredLink}
-        actions={<><Select options={[{ value: 'es', label: 'ES' }, { value: 'en', label: 'EN' }]} defaultValue="es" /><a href="https://academy.studiolxd.com" className="button button--primary">Entra a la academia</a></>}
+        actions={<><Select options={[{ value: 'es', label: 'ES' }, { value: 'en', label: 'EN' }]} defaultValue="es" /><a href="https://academy.studiolxd.com" className="btn btn-primary">Entra a la academia</a></>}
       />
       <main className="home__main">
         <section className="home__video-section" aria-hidden="true">

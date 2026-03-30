@@ -17,7 +17,7 @@
 }
 
 /* El botón necesita su propio fondo explícito y borde que coincida con él */
-.form > .button.button--form {
+.form > .btn.btn-form {
   background-color: var(--button-form-bg);
   --button-form-border: var(--button-form-bg);
   --button-form-hover-border: var(--button-form-hover-bg);

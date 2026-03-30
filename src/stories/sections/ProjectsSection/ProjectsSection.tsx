@@ -50,7 +50,7 @@ export function ProjectsSection({ title = 'Proyectos', projects }: ProjectsSecti
                 />
               </div>
               <p className="project-card__description">{project.description}</p>
-              <span className="project-card__cta button button--primary">Leer más</span>
+              <span className="project-card__cta btn btn-primary">Leer más</span>
             </a>
           </CarouselSlide>
         ))}

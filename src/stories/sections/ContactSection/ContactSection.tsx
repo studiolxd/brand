@@ -36,7 +36,7 @@ export function ContactSection({
           <Heading level={3}>{whatsappTitle}</Heading>
           <a
             href={whatsappHref}
-            className="button button--primary"
+            className="btn btn-primary"
             target="_blank"
             rel="noopener noreferrer"
           >

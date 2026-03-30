@@ -39,10 +39,10 @@ function u({ src: e, alt: n, className: r }) {
 function d({ variant: e = "primary", size: n = "md", block: r = !1, children: i, type: a = "button", disabled: o, onClick: s }) {
 	return /* @__PURE__ */ t("button", {
 		className: [
-			"button",
-			`button--${e}`,
-			n === "md" ? "" : `button--${n}`,
-			r ? "button--block" : ""
+			"btn",
+			`btn-${e}`,
+			n === "md" ? "" : `btn-${n}`,
+			r ? "btn-block" : ""
 		].filter(Boolean).join(" "),
 		type: a,
 		disabled: o,
@@ -741,7 +741,7 @@ function V({ title: e, form: r, whatsappTitle: i, whatsappLabel: a, whatsappHref
 					children: i
 				}), /* @__PURE__ */ t("a", {
 					href: o,
-					className: "button button--primary",
+					className: "btn btn-primary",
 					target: "_blank",
 					rel: "noopener noreferrer",
 					children: a
@@ -919,7 +919,7 @@ function G({ intro: e, ctaLabel: r, ctaHref: i, steps: a }) {
 			className: "methodology-section__intro",
 			children: [/* @__PURE__ */ t("p", { children: e }), /* @__PURE__ */ t("a", {
 				href: i,
-				className: "button button--primary",
+				className: "btn btn-primary",
 				children: r
 			})]
 		}), /* @__PURE__ */ t("div", {
@@ -969,7 +969,7 @@ function K({ title: e = "Proyectos", projects: r }) {
 						children: e.description
 					}),
 					/* @__PURE__ */ t("span", {
-						className: "project-card__cta button button--primary",
+						className: "project-card__cta btn btn-primary",
 						children: "Leer más"
 					})
 				]
@@ -1264,7 +1264,7 @@ function re() {
 					defaultValue: "es"
 				}), /* @__PURE__ */ t("a", {
 					href: "https://academy.studiolxd.com",
-					className: "button button--primary",
+					className: "btn btn-primary",
 					children: "Entra a la academia"
 				})] })
 			}),
@@ -1455,7 +1455,7 @@ function se({ title: e, sections: r }) {
 				featuredLink: ae,
 				actions: /* @__PURE__ */ t("a", {
 					href: "https://academy.studiolxd.com",
-					className: "button button--primary",
+					className: "btn btn-primary",
 					children: "Entra a la academia"
 				})
 			}),
@@ -1515,7 +1515,7 @@ function ue({ category: e, tagVariant: r = "default", photo: i, photoAlt: a, tit
 				featuredLink: le,
 				actions: /* @__PURE__ */ t("a", {
 					href: "https://academy.studiolxd.com",
-					className: "button button--primary",
+					className: "btn btn-primary",
 					children: "Entra a la academia"
 				})
 			}),

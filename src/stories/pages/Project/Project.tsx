@@ -52,7 +52,7 @@ export function Project({
         navItems={navItems}
         featuredLink={featuredLink}
         actions={
-          <a href="https://academy.studiolxd.com" className="button button--primary">
+          <a href="https://academy.studiolxd.com" className="btn btn-primary">
             Entra a la academia
           </a>
         }
