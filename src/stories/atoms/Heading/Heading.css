@@ -57,6 +57,18 @@
   letter-spacing: var(--text-h6-letter-spacing);
 }
 
+/* Size modifiers — sobreescriben el tamaño del nivel */
+.heading.heading--size-1  { font-size: var(--font-size-1); }
+.heading.heading--size-2  { font-size: var(--font-size-2); }
+.heading.heading--size-3  { font-size: var(--font-size-3); }
+.heading.heading--size-4  { font-size: var(--font-size-4); }
+.heading.heading--size-5  { font-size: var(--font-size-5); }
+.heading.heading--size-6  { font-size: var(--font-size-6); }
+.heading.heading--size-7  { font-size: var(--font-size-7); }
+.heading.heading--size-8  { font-size: var(--font-size-8); }
+.heading.heading--size-9  { font-size: var(--font-size-9); }
+.heading.heading--size-10 { font-size: var(--font-size-10); }
+
 /* Weight modifiers — deben ir después de los de nivel para ganar la cascada */
 .heading.heading--thin       { font-weight: var(--font-weight-thin); }
 .heading.heading--extralight { font-weight: var(--font-weight-extralight); }

@@ -26,7 +26,7 @@ interface ReviewsSectionProps {
 export function ReviewsSection({ title = 'Lo que dice nuestro alumnado', reviews }: ReviewsSectionProps) {
   return (
     <section className="reviews-section surface-dark">
-      <Heading level={2}>{title}</Heading>
+      <Heading level={2} weight="semibold">{title}</Heading>
       <Carousel
         options={{ align: 'center', loop: true }}
         gradientColor="var(--color-background-dark)"

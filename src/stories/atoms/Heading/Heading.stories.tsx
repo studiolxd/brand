@@ -18,6 +18,11 @@ const meta: Meta<typeof Heading> = {
       options: [undefined, 'thin', 'extralight', 'light', 'regular', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
       description: 'Peso tipográfico. Sin valor usa el token del nivel (300 por defecto).',
     },
+    size: {
+      control: { type: 'select' },
+      options: [undefined, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      description: 'Tamaño tipográfico. Sin valor usa el tamaño del nivel.',
+    },
     children: {
       control: { type: 'text' },
       description: 'Contenido del encabezado.',
@@ -55,6 +60,16 @@ export const Weights: Story = {
     <>
       {(['thin', 'extralight', 'light', 'regular', 'medium', 'semibold', 'bold', 'extrabold', 'black'] as const).map((w) => (
         <Heading key={w} level={2} weight={w}>{w}</Heading>
+      ))}
+    </>
+  ),
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <>
+      {([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const).map((s) => (
+        <Heading key={s} level={2} size={s}>size-{s}</Heading>
       ))}
     </>
   ),

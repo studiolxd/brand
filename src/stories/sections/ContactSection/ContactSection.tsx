@@ -31,7 +31,7 @@ export function ContactSection({
     >
       <div className="contact-section__left">
         <div className="contact-section__intro">
-          <Heading level={2}>{title}</Heading>
+          <Heading level={2} weight="semibold">{title}</Heading>
         </div>
         <aside className="contact-section__cta">
           <Heading level={3}>{whatsappTitle}</Heading>

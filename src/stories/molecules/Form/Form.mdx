@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as FormStories from "./Form.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { formGapTokens, formHeadingTokens, formErrorTokens, formHelperTokens, formSuccessTokens } from "../../../tokens/form";
+import { formGapTokens, formHeadingTokens, formHeadingDarkTokens, formErrorTokens, formErrorDarkTokens, formHelperTokens, formHelperDarkTokens, formSuccessTokens, formSuccessDarkTokens } from "../../../tokens/form";
 
 <Meta of={FormStories} />
 
@@ -39,19 +39,27 @@ Tokens utilizados por los organismos para el heading del formulario.
 
 <TokenTable tokens={formHeadingTokens} />
 
+<TokenTable tokens={formHeadingDarkTokens} />
+
 ### Error
 
 <TokenTable tokens={formErrorTokens} />
 
+<TokenTable tokens={formErrorDarkTokens} />
+
 ### Helper
 
 <TokenTable tokens={formHelperTokens} />
+
+<TokenTable tokens={formHelperDarkTokens} />
 
 ### Éxito
 
 Tokens utilizados por los organismos para el mensaje de éxito.
 
 <TokenTable tokens={formSuccessTokens} />
+
+<TokenTable tokens={formSuccessDarkTokens} />
 
 ## Props
 

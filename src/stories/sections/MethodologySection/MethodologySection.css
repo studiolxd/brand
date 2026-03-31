@@ -16,12 +16,6 @@
   background-color: var(--methodology-section-cell-bg);
 }
 
-.methodology-section__intro p {
-  font-size: var(--font-size-9);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-}
-
 /* Steps — gap vertical entre pasos = borde horizontal */
 .methodology-section__steps {
   display: flex;
@@ -47,7 +41,7 @@
   padding-block: var(--section-padding-block-md);
   padding-inline: var(--section-padding-inline);
   font-size: var(--font-size-10);
-  font-weight: var(--font-weight-thin);
+  font-weight: var(--font-weight-light);
   line-height: var(--line-height-none);
   color: var(--methodology-section-number-color);
   aspect-ratio: 1;

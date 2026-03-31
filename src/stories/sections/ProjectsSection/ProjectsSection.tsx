@@ -34,7 +34,7 @@ interface ProjectsSectionProps {
 export function ProjectsSection({ title = 'Proyectos', projects }: ProjectsSectionProps) {
   return (
     <section className="projects-section">
-      <Heading level={2}>{title}</Heading>
+      <Heading level={2} weight="semibold">{title}</Heading>
       <Carousel
         options={{ align: 'center' }}
       >

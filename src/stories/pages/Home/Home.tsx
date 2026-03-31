@@ -101,7 +101,7 @@ export function Home() {
           </div>
         </section>
         <ReviewsSection title="Lo que dice nuestro alumnado" reviews={reviews} />
-        <ClientsSection title="Clientes" clients={clients} />
+        <ClientsSection title="Hemos trabajado junto a..." clients={clients} />
         <ContactSection {...contactArgs} />
       </main>
       <Footer />

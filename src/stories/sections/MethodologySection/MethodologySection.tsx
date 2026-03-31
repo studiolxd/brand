@@ -1,4 +1,5 @@
 import { Button } from '../../atoms/Button/Button';
+import { Heading } from '../../atoms/Heading/Heading';
 import './MethodologySection.css';
 
 interface MethodologyStep {
@@ -7,7 +8,7 @@ interface MethodologyStep {
 }
 
 interface MethodologySectionProps {
-  /** Párrafo introductorio. */
+  /** Encabezado introductorio. */
   intro: string;
   /** Texto del botón CTA. */
   ctaLabel: string;
@@ -29,7 +30,7 @@ export function MethodologySection({
   return (
     <section className="methodology-section" aria-label={ariaLabel}>
       <div className="methodology-section__intro">
-        <p>{intro}</p>
+        <Heading level={2} weight="semibold">{intro}</Heading>
         <Button href={ctaHref} variant="primary">{ctaLabel}</Button>
       </div>
       <div className="methodology-section__steps">

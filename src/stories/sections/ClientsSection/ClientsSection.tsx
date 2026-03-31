@@ -22,7 +22,7 @@ interface ClientsSectionProps {
 export function ClientsSection({ title = 'Hemos trabajado junto a...', clients }: ClientsSectionProps) {
   return (
     <section className="clients-section">
-      <Heading level={2}>{title}</Heading>
+      <Heading level={2} weight="semibold">{title}</Heading>
       <Carousel
         options={{ align: 'start' }}
         plugins={[AutoScroll({ speed: 1, stopOnInteraction: false })]}
