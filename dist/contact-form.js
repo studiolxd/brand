@@ -20,6 +20,7 @@ var u = c(function({ emailLabel: c = "Email", emailPlaceholder: u = "Escribe aqu
 		onSubmit: T,
 		actions: /* @__PURE__ */ o(e, {
 			variant: "form",
+			type: "submit",
 			disabled: b,
 			children: b ? x : y
 		}),

@@ -17,6 +17,7 @@ function o({ emailPlaceholder: o = "Escribe aquí tu correo electrónico", priva
 			onSubmit: m,
 			actions: /* @__PURE__ */ i(e, {
 				variant: "form",
+				type: "submit",
 				disabled: l,
 				children: l ? u : c
 			}),

@@ -41,7 +41,7 @@ export function NewsletterForm({
         errors={errors}
         onSubmit={onSubmit}
         actions={
-          <Button variant="form" disabled={submitting}>
+          <Button variant="form" type="submit" disabled={submitting}>
             {submitting ? submittingLabel : buttonLabel}
           </Button>
         }
