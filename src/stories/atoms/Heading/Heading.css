@@ -3,16 +3,6 @@
   margin-inline: 0;
 }
 
-.heading.heading--thin      { font-weight: var(--font-weight-thin); }
-.heading.heading--extralight { font-weight: var(--font-weight-extralight); }
-.heading.heading--light     { font-weight: var(--font-weight-light); }
-.heading.heading--regular   { font-weight: var(--font-weight-regular); }
-.heading.heading--medium    { font-weight: var(--font-weight-medium); }
-.heading.heading--semibold  { font-weight: var(--font-weight-semibold); }
-.heading.heading--bold      { font-weight: var(--font-weight-bold); }
-.heading.heading--extrabold { font-weight: var(--font-weight-extrabold); }
-.heading.heading--black     { font-weight: var(--font-weight-black); }
-
 .heading.heading--1 {
   font-family: var(--text-h1-font-family);
   font-size: var(--text-h1-font-size);
@@ -67,3 +57,13 @@
   letter-spacing: var(--text-h6-letter-spacing);
 }
 
+/* Weight modifiers — deben ir después de los de nivel para ganar la cascada */
+.heading.heading--thin       { font-weight: var(--font-weight-thin); }
+.heading.heading--extralight { font-weight: var(--font-weight-extralight); }
+.heading.heading--light      { font-weight: var(--font-weight-light); }
+.heading.heading--regular    { font-weight: var(--font-weight-regular); }
+.heading.heading--medium     { font-weight: var(--font-weight-medium); }
+.heading.heading--semibold   { font-weight: var(--font-weight-semibold); }
+.heading.heading--bold       { font-weight: var(--font-weight-bold); }
+.heading.heading--extrabold  { font-weight: var(--font-weight-extrabold); }
+.heading.heading--black      { font-weight: var(--font-weight-black); }
