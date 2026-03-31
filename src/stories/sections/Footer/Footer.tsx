@@ -1,6 +1,7 @@
 import { NewsletterForm } from '../../organisms/NewsletterForm/NewsletterForm';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Logo } from '../../atoms/Logo/Logo';
+import { Link } from '../../atoms/Link/Link';
 import './Footer.css';
 
 export function Footer() {
@@ -19,25 +20,25 @@ export function Footer() {
       <div className="footer__col footer__col--2">
         <Heading level={3}>Suscríbete a nuestra newsletter</Heading>
         <NewsletterForm
-          privacyLabel={<>He leído la <a href="#">política de privacidad</a> y consiento recibir la newsletter</>}
+          privacyLabel={<>He leído la <Link href="#">política de privacidad</Link> y consiento recibir la newsletter</>}
         />
       </div>
       <div className="footer__col footer__col--3">
         <ul className="footer__social">
-          <li><a className="footer__social-link" href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a className="footer__social-link" href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a className="footer__social-link" href="#" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><Link href="#" external className="footer__social-link">LinkedIn</Link></li>
+          <li><Link href="#" external className="footer__social-link">Instagram</Link></li>
+          <li><Link href="#" external className="footer__social-link">GitHub</Link></li>
         </ul>
         <address className="footer__contact">
-          <a href="mailto:hello@studiolxd.com">hello@studiolxd.com</a>
-          <a href="tel:+34623752862">+34 623 752 862</a>
+          <Link href="mailto:hello@studiolxd.com">hello@studiolxd.com</Link>
+          <Link href="tel:+34623752862">+34 623 752 862</Link>
         </address>
       </div>
       <div className="footer__bottom">
         <ul className="footer__legal">
-          <li><a href="#">Aviso legal</a></li>
-          <li><a href="#">Política de privacidad</a></li>
-          <li><a href="#">Política de cookies</a></li>
+          <li><Link href="#">Aviso legal</Link></li>
+          <li><Link href="#">Política de privacidad</Link></li>
+          <li><Link href="#">Política de cookies</Link></li>
         </ul>
       </div>
     </footer>

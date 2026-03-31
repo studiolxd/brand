@@ -376,7 +376,7 @@ declare interface LegalSection {
     content: React.ReactNode;
 }
 
-export declare function Link({ href, children, external, onClick }: LinkProps): JSX.Element;
+export declare function Link({ href, children, external, className, onClick }: LinkProps): JSX.Element;
 
 declare interface LinkProps {
     /** URL de destino. */
@@ -384,6 +384,8 @@ declare interface LinkProps {
     children: React.ReactNode;
     /** Abre el enlace en una nueva pestaña con rel seguro. */
     external?: boolean;
+    /** Clase adicional para variantes contextuales. */
+    className?: string;
     onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 

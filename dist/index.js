@@ -655,7 +655,7 @@ function R({ level: e = 2, className: n, children: r }) {
 }
 //#endregion
 //#region src/stories/atoms/Input/Input.tsx
-function z({ type: e = "text", placeholder: n, value: r, defaultValue: i, disabled: a, readOnly: o, size: s = "md", error: c = !1, id: l, name: u, describedBy: d, onChange: f, onBlur: p, onFocus: m }) {
+function xe({ type: e = "text", placeholder: n, value: r, defaultValue: i, disabled: a, readOnly: o, size: s = "md", error: c = !1, id: l, name: u, describedBy: d, onChange: f, onBlur: p, onFocus: m }) {
 	return /* @__PURE__ */ t("input", {
 		className: [
 			"input",
@@ -679,7 +679,7 @@ function z({ type: e = "text", placeholder: n, value: r, defaultValue: i, disabl
 }
 //#endregion
 //#region src/stories/atoms/InputPhone/InputPhone.tsx
-function xe({ value: e, onChange: r, options: i, disabled: a, dark: c }) {
+function Se({ value: e, onChange: r, options: i, disabled: a, dark: c }) {
 	let l = "__intl__", u = (e) => e ?? l, d = (e) => e === l ? void 0 : e;
 	return /* @__PURE__ */ n(o.Root, {
 		value: u(e),
@@ -706,7 +706,7 @@ function xe({ value: e, onChange: r, options: i, disabled: a, dark: c }) {
 		}) })]
 	});
 }
-function Se({ value: e, defaultCountry: n = "ES", placeholder: r, disabled: i, error: a = !1, dark: o, id: s, name: l, describedBy: u, onChange: d, onBlur: f }) {
+function Ce({ value: e, defaultCountry: n = "ES", placeholder: r, disabled: i, error: a = !1, dark: o, id: s, name: l, describedBy: u, onChange: d, onBlur: f }) {
 	return /* @__PURE__ */ t(c, {
 		className: ["input-phone", a ? "input-phone--error" : ""].filter(Boolean).join(" "),
 		value: e,
@@ -715,22 +715,22 @@ function Se({ value: e, defaultCountry: n = "ES", placeholder: r, disabled: i, e
 		disabled: i,
 		id: s,
 		name: l,
-		inputComponent: Ce,
-		countrySelectComponent: xe,
+		inputComponent: we,
+		countrySelectComponent: Se,
 		countrySelectProps: { dark: o },
 		onChange: (e) => d?.(e),
 		onBlur: f,
 		numberInputProps: { "aria-describedby": u }
 	});
 }
-var Ce = (e) => /* @__PURE__ */ t("input", {
+var we = (e) => /* @__PURE__ */ t("input", {
 	className: "input-phone__number",
 	...e
 });
-Ce.displayName = "InputPhoneField";
+we.displayName = "InputPhoneField";
 //#endregion
 //#region src/stories/atoms/Label/Label.tsx
-function B({ htmlFor: e, children: n, hidden: r = !1 }) {
+function z({ htmlFor: e, children: n, hidden: r = !1 }) {
 	return /* @__PURE__ */ t("label", {
 		htmlFor: e,
 		className: ["label", r ? "visually-hidden" : ""].filter(Boolean).join(" "),
@@ -739,10 +739,11 @@ function B({ htmlFor: e, children: n, hidden: r = !1 }) {
 }
 //#endregion
 //#region src/stories/atoms/Link/Link.tsx
-function we({ href: e, children: n, external: r = !1, onClick: i }) {
+function B({ href: e, children: n, external: r = !1, className: i, onClick: a }) {
 	return /* @__PURE__ */ t("a", {
 		href: e,
-		onClick: i,
+		className: i,
+		onClick: a,
 		...r ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
@@ -994,12 +995,12 @@ function J({ id: e, label: r, labelHidden: i = !0, name: a, type: o, placeholder
 	return /* @__PURE__ */ n("div", {
 		className: "input-field",
 		children: [
-			/* @__PURE__ */ t(B, {
+			/* @__PURE__ */ t(z, {
 				htmlFor: e,
 				hidden: i,
 				children: r
 			}),
-			/* @__PURE__ */ t(z, {
+			/* @__PURE__ */ t(xe, {
 				id: e,
 				name: a,
 				type: o,
@@ -1035,12 +1036,12 @@ function Ae({ id: e, label: r, labelHidden: i = !0, value: a, defaultCountry: o,
 	return /* @__PURE__ */ n("div", {
 		className: "input-phone-field",
 		children: [
-			/* @__PURE__ */ t(B, {
+			/* @__PURE__ */ t(z, {
 				htmlFor: e,
 				hidden: i,
 				children: r
 			}),
-			/* @__PURE__ */ t(Se, {
+			/* @__PURE__ */ t(Ce, {
 				id: e,
 				name: p,
 				value: a,
@@ -1073,7 +1074,7 @@ function je({ id: e, label: r, labelHidden: i = !0, name: a, placeholder: o, val
 	return /* @__PURE__ */ n("div", {
 		className: "textarea-field",
 		children: [
-			/* @__PURE__ */ t(B, {
+			/* @__PURE__ */ t(z, {
 				htmlFor: e,
 				hidden: i,
 				children: r
@@ -1278,7 +1279,7 @@ function Y() {
 					children: "Suscríbete a nuestra newsletter"
 				}), /* @__PURE__ */ t(Ne, { privacyLabel: /* @__PURE__ */ n(e, { children: [
 					"He leído la ",
-					/* @__PURE__ */ t("a", {
+					/* @__PURE__ */ t(B, {
 						href: "#",
 						children: "política de privacidad"
 					}),
@@ -1290,34 +1291,31 @@ function Y() {
 				children: [/* @__PURE__ */ n("ul", {
 					className: "footer__social",
 					children: [
-						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t("a", {
-							className: "footer__social-link",
+						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t(B, {
 							href: "#",
-							target: "_blank",
-							rel: "noopener noreferrer",
+							external: !0,
+							className: "footer__social-link",
 							children: "LinkedIn"
 						}) }),
-						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t("a", {
-							className: "footer__social-link",
+						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t(B, {
 							href: "#",
-							target: "_blank",
-							rel: "noopener noreferrer",
+							external: !0,
+							className: "footer__social-link",
 							children: "Instagram"
 						}) }),
-						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t("a", {
-							className: "footer__social-link",
+						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t(B, {
 							href: "#",
-							target: "_blank",
-							rel: "noopener noreferrer",
+							external: !0,
+							className: "footer__social-link",
 							children: "GitHub"
 						}) })
 					]
 				}), /* @__PURE__ */ n("address", {
 					className: "footer__contact",
-					children: [/* @__PURE__ */ t("a", {
+					children: [/* @__PURE__ */ t(B, {
 						href: "mailto:hello@studiolxd.com",
 						children: "hello@studiolxd.com"
-					}), /* @__PURE__ */ t("a", {
+					}), /* @__PURE__ */ t(B, {
 						href: "tel:+34623752862",
 						children: "+34 623 752 862"
 					})]
@@ -1328,15 +1326,15 @@ function Y() {
 				children: /* @__PURE__ */ n("ul", {
 					className: "footer__legal",
 					children: [
-						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t("a", {
+						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t(B, {
 							href: "#",
 							children: "Aviso legal"
 						}) }),
-						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t("a", {
+						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t(B, {
 							href: "#",
 							children: "Política de privacidad"
 						}) }),
-						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t("a", {
+						/* @__PURE__ */ t("li", { children: /* @__PURE__ */ t(B, {
 							href: "#",
 							children: "Política de cookies"
 						}) })
@@ -2056,4 +2054,4 @@ function Ye({ category: e, tagVariant: r = "default", photo: i, photoAlt: a, tit
 	});
 }
 //#endregion
-export { u as Arrow, d as Avatar, f as Button, ke as Card, W as CardSplit, G as CardSquare, m as Carousel, I as Checkbox, K as CheckboxField, p as Chevron, Pe as ClientsSection, Me as ContactForm, Fe as ContactSection, Y as Footer, q as Form, L as Hamburger, X as Header, R as Heading, Ie as HighlightSection, Ke as Home, z as Input, J as InputField, Se as InputPhone, Ae as InputPhoneField, B as Label, Je as Legal, we as Link, Te as List, V as Logo, Le as MethodologySection, Ne as NewsletterForm, Ee as Paragraph, Ye as Project, Re as ProjectsSection, ze as ReviewsSection, De as Select, Z as SolutionsSection, H as Tag, Oe as Textarea, je as TextareaField, U as VisuallyHidden };
+export { u as Arrow, d as Avatar, f as Button, ke as Card, W as CardSplit, G as CardSquare, m as Carousel, I as Checkbox, K as CheckboxField, p as Chevron, Pe as ClientsSection, Me as ContactForm, Fe as ContactSection, Y as Footer, q as Form, L as Hamburger, X as Header, R as Heading, Ie as HighlightSection, Ke as Home, xe as Input, J as InputField, Ce as InputPhone, Ae as InputPhoneField, z as Label, Je as Legal, B as Link, Te as List, V as Logo, Le as MethodologySection, Ne as NewsletterForm, Ee as Paragraph, Ye as Project, Re as ProjectsSection, ze as ReviewsSection, De as Select, Z as SolutionsSection, H as Tag, Oe as Textarea, je as TextareaField, U as VisuallyHidden };
