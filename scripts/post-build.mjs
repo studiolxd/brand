@@ -11,6 +11,8 @@ const sectionCss = {
   'projects-section':    'src/stories/sections/ProjectsSection/ProjectsSection.css',
   'reviews-section':     'src/stories/sections/ReviewsSection/ReviewsSection.css',
   'solutions-section':   'src/stories/sections/SolutionsSection/SolutionsSection.css',
+  'project-template':    'src/stories/pages/Project/Project.css',
+  'legal-template':      'src/stories/pages/Legal/Legal.css',
 };
 
 const dist = 'dist';
