@@ -27,7 +27,7 @@ export default meta;
 type Story = StoryObj<typeof Radio>;
 
 export const Default: Story = {
-  name: 'Grupo sin selección',
+  name: 'Unchecked',
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
       <Radio name="demo" value="a" aria-label="Opción A" />
@@ -38,7 +38,7 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  name: 'Con selección',
+  name: 'Checked',
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
       <Radio name="demo-checked" value="a" aria-label="Opción A" defaultChecked />
@@ -49,7 +49,7 @@ export const Checked: Story = {
 };
 
 export const Disabled: Story = {
-  name: 'Deshabilitado',
+  name: 'Disabled',
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
       <Radio name="demo-disabled" value="a" aria-label="Opción A" disabled />
@@ -60,7 +60,7 @@ export const Disabled: Story = {
 };
 
 export const DisabledChecked: Story = {
-  name: 'Deshabilitado con selección',
+  name: 'Disabled checked',
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
       <Radio name="demo-disabled-checked" value="a" aria-label="Opción A" defaultChecked disabled />

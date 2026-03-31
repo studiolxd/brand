@@ -32,7 +32,7 @@ export default meta;
 type Story = StoryObj<typeof RadioField>;
 
 export const Default: Story = {
-  name: 'Grupo sin selección',
+  name: 'Unchecked',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <RadioField name="demo" value="a" label="Opción A" />
@@ -43,7 +43,7 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  name: 'Con selección',
+  name: 'Checked',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <RadioField name="demo-checked" value="a" label="Opción A" defaultChecked />
@@ -54,7 +54,7 @@ export const Checked: Story = {
 };
 
 export const Disabled: Story = {
-  name: 'Deshabilitado',
+  name: 'Disabled',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <RadioField name="demo-disabled" value="a" label="Opción A" disabled />
@@ -65,7 +65,7 @@ export const Disabled: Story = {
 };
 
 export const DisabledChecked: Story = {
-  name: 'Deshabilitado con selección',
+  name: 'Disabled checked',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <RadioField name="demo-disabled-checked" value="a" label="Opción A" defaultChecked disabled />
@@ -76,7 +76,7 @@ export const DisabledChecked: Story = {
 };
 
 export const WithLink: Story = {
-  name: 'Con enlace en el label',
+  name: 'With link',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <RadioField name="demo-link" value="a" label="Opción A" />
