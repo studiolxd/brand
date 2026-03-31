@@ -1,0 +1,62 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as RadioFieldStories from "./RadioField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { radioFieldBaseTokens } from "../../../tokens/molecules/radio-field";
+
+<Meta of={RadioFieldStories} />
+
+# RadioField
+
+Molécula que combina un `Radio` con su texto asociado. El label usa la tipografía de texto por defecto — sin mayúsculas ni tamaño reducido — para integrarse de forma natural en listas de opciones.
+
+Para que los radios sean mutuamente excluyentes, todos los `RadioField` del mismo grupo deben compartir el prop `name`.
+
+## Sin selección
+
+<Canvas of={RadioFieldStories.Default} />
+
+## Con selección
+
+<Canvas of={RadioFieldStories.Checked} />
+
+## Deshabilitado
+
+<Canvas of={RadioFieldStories.Disabled} />
+
+## Deshabilitado con selección
+
+<Canvas of={RadioFieldStories.DisabledChecked} />
+
+## Con enlace en el label
+
+El prop `label` acepta `React.ReactNode`, por lo que puede incluir un `<Link>` para textos con hipervínculos. Los estilos del enlace se garantizan desde la propia molécula.
+
+<Canvas of={RadioFieldStories.WithLink} />
+
+---
+
+## Uso
+
+```tsx
+import { RadioField } from '@studiolxd/brand/radio-field';
+
+<RadioField name="plan" value="basico"  label="Básico"   defaultChecked />
+<RadioField name="plan" value="pro"     label="Pro" />
+<RadioField name="plan" value="empresa" label="Empresa" />
+```
+
+---
+
+## Theming oscuro
+
+En modo oscuro, el color del label se reasigna automáticamente vía la clase `.surface-dark` definida en `surface.css`. No requiere prop adicional.
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={radioFieldBaseTokens} />
+
+## Props
+
+<ArgTypes of={RadioFieldStories} />

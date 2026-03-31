@@ -1,0 +1,64 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as RadioStories from "./Radio.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { radioBaseTokens, radioFocusTokens, radioDisabledTokens } from "../../../tokens/components/radio";
+
+<Meta of={RadioStories} />
+
+# Radio
+
+Control de selección exclusiva dentro de un grupo. Al compartir el mismo `name`, los radios son mutuamente excluyentes: seleccionar uno deselecciona el resto. Utiliza el elemento `<input type="radio">` nativo — no necesita Radix, ya es accesible por defecto.
+
+## Sin selección
+
+<Canvas of={RadioStories.Default} />
+
+## Con selección
+
+<Canvas of={RadioStories.Checked} />
+
+## Deshabilitado
+
+<Canvas of={RadioStories.Disabled} />
+
+## Deshabilitado con selección
+
+<Canvas of={RadioStories.DisabledChecked} />
+
+## Focus visible
+
+<Canvas of={RadioStories.FocusVisible} />
+
+---
+
+## Uso
+
+```tsx
+import { Radio } from '@studiolxd/brand/radio';
+
+<Radio name="plan" value="basico"   aria-label="Básico"    defaultChecked />
+<Radio name="plan" value="pro"      aria-label="Pro" />
+<Radio name="plan" value="empresa"  aria-label="Empresa" />
+```
+
+Todos los radios del mismo grupo deben compartir el atributo `name`. El `value` identifica la opción seleccionada al enviar el formulario. Para uso controlado, pasa `checked` y `onChange`.
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={radioBaseTokens} />
+
+### Focus
+
+<TokenTable tokens={radioFocusTokens} />
+
+### Deshabilitado
+
+<TokenTable tokens={radioDisabledTokens} />
+
+## Props
+
+<ArgTypes of={RadioStories} />
