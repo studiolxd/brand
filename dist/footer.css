@@ -42,6 +42,12 @@
   --form-border-width: 0;
 }
 
+.footer__col--2 .form__success {
+  background-color: var(--color-background-dark);
+  padding-inline: var(--section-padding-inline);
+  padding-block: var(--section-padding-block-md);
+}
+
 .footer__col--2 .heading {
   padding-block: var(--section-padding-block-md);
   padding-inline: var(--section-padding-inline);
