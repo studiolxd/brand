@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --footer-gap-color: var(--color-background-default); /** Color del gap entre celdas — actúa como separador (gap technique) */
+  --footer-col-bg: var(--color-background-dark); /** Fondo de las celdas del footer */
+}

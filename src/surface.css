@@ -226,10 +226,8 @@
   --input-phone-country-border-color: var(--color-background-dark);
 }
 
-/* ─── Footer + MethodologySection + ContactSection ────────────────────────── */
+/* ─── MethodologySection + ContactSection ─────────────────────────────────── */
 .surface-dark {
-  --footer-gap-color:                 var(--color-background-default);
-  --footer-col-bg:                    var(--color-background-dark);
   --methodology-section-gap-color:    var(--color-background-default);
   --methodology-section-cell-bg:      var(--color-background-dark);
   --methodology-section-number-color: var(--color-secondary);

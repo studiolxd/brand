@@ -1,0 +1,6 @@
+{
+  "footer": {
+    "gap-color": { "$value": "{color.background.default}", "$type": "color", "$description": "Color del gap entre celdas — actúa como separador (gap technique)" },
+    "col-bg":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo de las celdas del footer" }
+  }
+}

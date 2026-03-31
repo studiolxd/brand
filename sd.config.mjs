@@ -44,6 +44,7 @@ const filters = {
   'clients-section':    (t) => t.path[0] === 'clients-section',
   'methodology-section':(t) => t.path[0] === 'methodology-section',
   'contact-section':    (t) => t.path[0] === 'contact-section',
+  footer:               (t) => t.path[0] === 'footer',
   section:              (t) => t.path[0] === 'section',
 };
 
@@ -103,6 +104,7 @@ const sd = new StyleDictionary({
         cssFile('components/clients-section.css',     'clients-section'),
         cssFile('components/methodology-section.css', 'methodology-section'),
         cssFile('components/contact-section.css',     'contact-section'),
+        cssFile('components/footer.css',              'footer'),
       ],
     },
     scss: {
@@ -149,6 +151,7 @@ const sd = new StyleDictionary({
         scssFile('components/_clients-section.scss',     'clients-section'),
         scssFile('components/_methodology-section.scss', 'methodology-section'),
         scssFile('components/_contact-section.scss',     'contact-section'),
+        scssFile('components/_footer.scss',              'footer'),
       ],
     },
   },
