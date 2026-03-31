@@ -106,7 +106,7 @@ export function InputPhone({
   );
 }
 
-const InputPhoneField = (props: Omit<React.InputHTMLAttributes<HTMLInputElement>, 'className'>) => (
-  <input className="input-phone__number" {...props} />
+const InputPhoneField = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
+  <input {...props} className="input-phone__number" />
 );
 InputPhoneField.displayName = 'InputPhoneField';

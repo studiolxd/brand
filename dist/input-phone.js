@@ -51,8 +51,8 @@ function s({ value: e, defaultCountry: n = "ES", placeholder: r, disabled: i, er
 	});
 }
 var c = (e) => /* @__PURE__ */ t("input", {
-	className: "input-phone__number",
-	...e
+	...e,
+	className: "input-phone__number"
 });
 c.displayName = "InputPhoneField";
 //#endregion

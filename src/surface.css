@@ -163,12 +163,6 @@
   color: var(--color-text-dark);
 }
 
-/* ─── InputPhoneField ─────────────────────────────────────────────────────── */
-
-.surface-dark .input-phone-field__helper {
-  background-color: var(--color-background-dark);
-}
-
 /* ─── Hamburger ───────────────────────────────────────────────────────────── */
 
 .surface-dark .hamburger .hamburger__bar {
