@@ -10,7 +10,7 @@ npm run storybook        # Launch Storybook on port 6006
 
 # Build
 npm run build:tokens     # Regenerar tokens CSS+SCSS desde Style Dictionary (sd.config.mjs)
-npm run build:lib        # Build de librería React → dist/
+npm run build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
 npm run build:css        # Bundle CSS standalone → dist/brand.css
 npm run build:scss       # Copiar tokens SCSS → dist/scss/
 npm run prepare          # Ejecuta los cuatro builds anteriores (se lanza automáticamente en npm install)
@@ -21,6 +21,8 @@ npm run lint             # Run ESLint (flat config format)
 ```
 
 > **IMPORTANTE:** Cada vez que se modifique un archivo JSON de tokens, ejecutar `npm run build:tokens` antes de commitear. Los CSS bajo `src/tokens/` son auto-generados y se sobreescriben en el siguiente build.
+>
+> **IMPORTANTE:** `npm run build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css` ni `dist/tokens.css`. Después de `build:lib` ejecutar siempre `npm run build:css && npm run build:tokens-css`, o usar `npm run prepare` para el build completo.
 
 Testing: Storybook Vitest addon con Playwright (Chromium). No hay `npm test` separado.
 
