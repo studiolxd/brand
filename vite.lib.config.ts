@@ -1,27 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import dts from 'vite-plugin-dts';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+import { entryPoints } from './scripts/entry-points.mjs';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    dts({
-      include: ['src/index.ts', 'src/stories/**/*.tsx'],
-      exclude: ['src/stories/**/*.stories.tsx'],
-      tsconfigPath: './tsconfig.app.json',
-      rollupTypes: true,
-    }),
-  ],
+  plugins: [react()],
   publicDir: false,
   build: {
     lib: {
-      entry: path.resolve(dirname, 'src/index.ts'),
-      name: 'StudioLXDBrand',
-      fileName: 'index',
+      entry: entryPoints,
       formats: ['es'],
     },
     rollupOptions: {
@@ -29,9 +15,20 @@ export default defineConfig({
         'react',
         'react-dom',
         'react/jsx-runtime',
+        /^@radix-ui\//,
+        /^embla-carousel/,
+        'react-phone-number-input',
+        /^react-phone-number-input\//,
+        'libphonenumber-js',
+        /^libphonenumber-js\//,
       ],
+      output: {
+        entryFileNames: '[name].js',
+        chunkFileNames: '_shared/[name].js',
+        assetFileNames: '[name][extname]',
+      },
     },
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     outDir: 'dist',
     emptyOutDir: true,
   },

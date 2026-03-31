@@ -1,0 +1,52 @@
+export const entryPoints = {
+  // Atoms
+  'arrow':               'src/stories/atoms/Arrow/Arrow.tsx',
+  'avatar':              'src/stories/atoms/Avatar/Avatar.tsx',
+  'button':              'src/stories/atoms/Button/Button.tsx',
+  'carousel':            'src/stories/atoms/Carousel/Carousel.tsx',
+  'checkbox':            'src/stories/atoms/Checkbox/Checkbox.tsx',
+  'chevron':             'src/stories/atoms/Chevron/Chevron.tsx',
+  'hamburger':           'src/stories/atoms/Hamburger/Hamburger.tsx',
+  'heading':             'src/stories/atoms/Heading/Heading.tsx',
+  'input':               'src/stories/atoms/Input/Input.tsx',
+  'input-phone':         'src/stories/atoms/InputPhone/InputPhone.tsx',
+  'label':               'src/stories/atoms/Label/Label.tsx',
+  'link':                'src/stories/atoms/Link/Link.tsx',
+  'list':                'src/stories/atoms/List/List.tsx',
+  'logo':                'src/stories/atoms/Logo/Logo.tsx',
+  'paragraph':           'src/stories/atoms/Paragraph/Paragraph.tsx',
+  'select':              'src/stories/atoms/Select/Select.tsx',
+  'tag':                 'src/stories/atoms/Tag/Tag.tsx',
+  'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
+  'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
+  // Molecules
+  'card':                'src/stories/molecules/Card/Card.tsx',
+  'card-split':          'src/stories/molecules/CardSplit/CardSplit.tsx',
+  'card-square':         'src/stories/molecules/CardSquare/CardSquare.tsx',
+  'checkbox-field':      'src/stories/molecules/CheckboxField/CheckboxField.tsx',
+  'form':                'src/stories/molecules/Form/Form.tsx',
+  'input-field':         'src/stories/molecules/InputField/InputField.tsx',
+  'input-phone-field':   'src/stories/molecules/InputPhoneField/InputPhoneField.tsx',
+  'textarea-field':      'src/stories/molecules/TextareaField/TextareaField.tsx',
+  // Organisms
+  'contact-form':        'src/stories/organisms/ContactForm/ContactForm.tsx',
+  'newsletter-form':     'src/stories/organisms/NewsletterForm/NewsletterForm.tsx',
+  // Sections
+  'clients-section':     'src/stories/sections/ClientsSection/ClientsSection.tsx',
+  'contact-section':     'src/stories/sections/ContactSection/ContactSection.tsx',
+  'footer':              'src/stories/sections/Footer/Footer.tsx',
+  'header':              'src/stories/sections/Header/Header.tsx',
+  'highlight-section':   'src/stories/sections/HighlightSection/HighlightSection.tsx',
+  'methodology-section': 'src/stories/sections/MethodologySection/MethodologySection.tsx',
+  'projects-section':    'src/stories/sections/ProjectsSection/ProjectsSection.tsx',
+  'reviews-section':     'src/stories/sections/ReviewsSection/ReviewsSection.tsx',
+  'solutions-section':   'src/stories/sections/SolutionsSection/SolutionsSection.tsx',
+};
+
+export const clientComponents = new Set([
+  'button', 'carousel', 'checkbox', 'hamburger', 'input', 'input-phone',
+  'link', 'select', 'textarea', 'checkbox-field', 'form', 'input-field',
+  'input-phone-field', 'textarea-field', 'contact-form', 'newsletter-form',
+  'clients-section', 'contact-section', 'footer', 'header',
+  'projects-section', 'reviews-section',
+]);

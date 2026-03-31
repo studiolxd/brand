@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist/_types"
+  },
+  "include": [
+    "src/stories/**/*.tsx",
+    "src/stories/**/*.ts"
+  ],
+  "exclude": [
+    "src/stories/**/*.stories.tsx",
+    "src/stories/foundations/**"
+  ]
+}
