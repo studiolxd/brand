@@ -29,7 +29,6 @@
   background-color: var(--color-primary);
   color: var(--color-white);
   text-decoration: none;
-  font-size: var(--font-size-6);
   outline: var(--border-width-md) solid var(--color-white);
   outline-offset: var(--spacing-1);
 }
