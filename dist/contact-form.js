@@ -9,55 +9,55 @@ import { TextareaField as a } from "./textarea-field.js";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
 import { useState as c } from "react";
 //#region src/stories/organisms/ContactForm/ContactForm.tsx
-function l({ emailPlaceholder: l = "Escribe aquí tu correo electrónico", messagePlaceholder: u = "Escribe aquí tu mensaje", messageRows: d = 5, privacyLabel: f, buttonLabel: p = "Enviar mensaje", submitting: m = !1, submittingLabel: h = "Enviando…", errors: g, success: _ = !1, successMessage: v = "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.", onSubmit: y }) {
-	let [b, x] = c(!1);
-	return _ ? /* @__PURE__ */ o("p", {
+function l({ emailLabel: l = "Email", emailPlaceholder: u = "Escribe aquí tu correo electrónico", messageLabel: d = "Mensaje", messagePlaceholder: f = "Escribe aquí tu mensaje", messageRows: p = 5, wantCallLabel: m = "Prefiero que me llaméis por teléfono", phoneLabel: h = "Teléfono", phonePlaceholder: g = "Escribe aquí tu número de teléfono", phoneHelper: _ = "Solo utilizaremos tu número de teléfono para hablarte sobre este proyecto.", privacyLabel: v, buttonLabel: y = "Enviar mensaje", submitting: b = !1, submittingLabel: x = "Enviando…", errors: S, success: C = !1, successMessage: w = "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.", onSubmit: T }) {
+	let [E, D] = c(!1);
+	return C ? /* @__PURE__ */ o("p", {
 		className: "form__success",
-		children: v
+		children: w
 	}) : /* @__PURE__ */ s(n, {
-		errors: g,
-		onSubmit: y,
+		errors: S,
+		onSubmit: T,
 		actions: /* @__PURE__ */ o(e, {
 			variant: "form",
-			disabled: m,
-			children: m ? h : p
+			disabled: b,
+			children: b ? x : y
 		}),
 		children: [
 			/* @__PURE__ */ o(r, {
 				id: "contact-email",
-				label: "Email",
+				label: l,
 				labelHidden: !0,
 				type: "email",
-				placeholder: l,
-				disabled: m
+				placeholder: u,
+				disabled: b
 			}),
 			/* @__PURE__ */ o(a, {
 				id: "contact-message",
-				label: "Mensaje",
+				label: d,
 				labelHidden: !0,
-				placeholder: u,
-				rows: d,
-				disabled: m
+				placeholder: f,
+				rows: p,
+				disabled: b
 			}),
 			/* @__PURE__ */ o(t, {
 				id: "contact-phone",
-				label: "Prefiero que me llaméis por teléfono",
-				disabled: m,
-				checked: b,
-				onCheckedChange: (e) => x(e === !0)
+				label: m,
+				disabled: b,
+				checked: E,
+				onCheckedChange: (e) => D(e === !0)
 			}),
-			b && /* @__PURE__ */ o(i, {
+			E && /* @__PURE__ */ o(i, {
 				id: "contact-phone-number",
-				label: "Teléfono",
+				label: h,
 				labelHidden: !0,
-				placeholder: "Escribe aquí tu número de teléfono",
-				helperText: "Solo utilizaremos tu número de teléfono para hablarte sobre este proyecto.",
-				disabled: m
+				placeholder: g,
+				helperText: _,
+				disabled: b
 			}),
 			/* @__PURE__ */ o(t, {
 				id: "contact-privacy",
-				label: f,
-				disabled: m
+				label: v,
+				disabled: b
 			})
 		]
 	});

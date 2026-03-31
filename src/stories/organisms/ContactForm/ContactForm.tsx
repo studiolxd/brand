@@ -8,9 +8,15 @@ import { InputPhoneField } from '../../molecules/InputPhoneField/InputPhoneField
 import { Button } from '../../atoms/Button/Button';
 
 interface ContactFormProps {
+  emailLabel?: string;
   emailPlaceholder?: string;
+  messageLabel?: string;
   messagePlaceholder?: string;
   messageRows?: number;
+  wantCallLabel?: string;
+  phoneLabel?: string;
+  phonePlaceholder?: string;
+  phoneHelper?: string;
   privacyLabel: React.ReactNode;
   buttonLabel?: string;
   submitting?: boolean;
@@ -22,9 +28,15 @@ interface ContactFormProps {
 }
 
 export function ContactForm({
+  emailLabel = 'Email',
   emailPlaceholder = 'Escribe aquí tu correo electrónico',
+  messageLabel = 'Mensaje',
   messagePlaceholder = 'Escribe aquí tu mensaje',
   messageRows = 5,
+  wantCallLabel = 'Prefiero que me llaméis por teléfono',
+  phoneLabel = 'Teléfono',
+  phonePlaceholder = 'Escribe aquí tu número de teléfono',
+  phoneHelper = 'Solo utilizaremos tu número de teléfono para hablarte sobre este proyecto.',
   privacyLabel,
   buttonLabel = 'Enviar mensaje',
   submitting = false,
@@ -56,7 +68,7 @@ export function ContactForm({
     >
       <InputField
         id="contact-email"
-        label="Email"
+        label={emailLabel}
         labelHidden
         type="email"
         placeholder={emailPlaceholder}
@@ -64,7 +76,7 @@ export function ContactForm({
       />
       <TextareaField
         id="contact-message"
-        label="Mensaje"
+        label={messageLabel}
         labelHidden
         placeholder={messagePlaceholder}
         rows={messageRows}
@@ -72,7 +84,7 @@ export function ContactForm({
       />
       <CheckboxField
         id="contact-phone"
-        label="Prefiero que me llaméis por teléfono"
+        label={wantCallLabel}
         disabled={submitting}
         checked={wantCall}
         onCheckedChange={(checked) => setWantCall(checked === true)}
@@ -80,10 +92,10 @@ export function ContactForm({
       {wantCall && (
         <InputPhoneField
           id="contact-phone-number"
-          label="Teléfono"
+          label={phoneLabel}
           labelHidden
-          placeholder="Escribe aquí tu número de teléfono"
-          helperText="Solo utilizaremos tu número de teléfono para hablarte sobre este proyecto."
+          placeholder={phonePlaceholder}
+          helperText={phoneHelper}
           disabled={submitting}
         />
       )}
