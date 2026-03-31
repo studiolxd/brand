@@ -160,11 +160,6 @@
 
 /* ─── Footer ─────────────────────────────────────────────────────────────── */
 
-.surface-dark .footer__col,
-.surface-dark .footer__bottom {
-  background-color: var(--color-background-dark);
-}
-
 .surface-dark .form-spacer {
   background-color: var(--color-background-dark);
 }
