@@ -1,0 +1,72 @@
+/* ─── Section ────────────────────────────────────────────── */
+.projects-section {
+  padding-block: var(--section-padding-block-xl);
+  padding-inline: var(--section-padding-inline);
+}
+
+
+.projects-section .carousel {
+  --carousel-slide-size: 100%;            /* sm: 1 slide completo */
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .projects-section .carousel {
+    --carousel-slide-size: calc(100% / 3); /* md+: 2 slides + mitades */
+  }
+}
+
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
+  .projects-section .carousel {
+    --carousel-slide-size: calc(100% / 4); /* lg+: 4 slides completos */
+  }
+}
+
+/* ─── Slides ──────────────────────────────────────────────── */
+.projects-section .carousel__slide {
+  display: flex;
+}
+
+/* ─── Project card ────────────────────────────────────────── */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  text-decoration: none;
+  height: 100%;
+}
+
+/* ─── Image wrapper ───────────────────────────────────────── */
+.project-card__image-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.project-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── CTA ─────────────────────────────────────────────────── */
+.project-card__cta {
+  margin-block-start: auto;
+  align-self: flex-start;
+}
+
+/* ─── Tag y título — encima (antes) de la foto ────────────── */
+.project-card > .tag {
+  align-self: flex-start;
+}
+
+.project-card__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+

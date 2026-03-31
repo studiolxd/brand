@@ -1,0 +1,31 @@
+/* ─── Section ────────────────────────────────────────────── */
+.clients-section {
+  padding-block: var(--section-padding-block-xl);
+}
+
+.clients-section > .heading {
+  padding-inline: var(--section-padding-inline);
+}
+
+.clients-section .carousel {
+  --carousel-slide-size: var(--clients-section-carousel-slide-size);
+}
+
+/* ─── Logo slide ─────────────────────────────────────────── */
+.clients-section__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding-block: 0;
+  padding-inline: 0;
+  height: var(--clients-section-logo-height);
+}
+
+.clients-section__logo {
+  display: block;
+  width: var(--clients-section-logo-width);
+  height: var(--clients-section-logo-height);
+  object-fit: contain;
+}
+
