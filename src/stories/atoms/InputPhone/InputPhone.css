@@ -99,9 +99,17 @@
   color: var(--color-white);
 }
 
+/* ── Wrapper de país (react-phone-number-input) ─────────────── */
+.input-phone .PhoneInputCountry {
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
 /* ── Campo numérico ─────────────────────────────────────────── */
 .input-phone .input-phone__number {
   flex: 1;
+  min-width: 0;
   padding-block: var(--input-padding-block);
   padding-inline: var(--input-padding-inline);
   font-family: var(--input-font-family);
@@ -112,7 +120,6 @@
   border: none;
   outline: none;
   box-sizing: border-box;
-  width: auto;
 }
 
 .input-phone__number::placeholder {
