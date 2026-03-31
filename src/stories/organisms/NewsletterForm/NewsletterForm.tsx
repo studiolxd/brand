@@ -60,7 +60,7 @@ export function NewsletterForm({
           disabled={submitting}
         />
       </Form>
-      <div className="newsletter-form__spacer" />
+      <div className="form-spacer" />
     </div>
   );
 }
