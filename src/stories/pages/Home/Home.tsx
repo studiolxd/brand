@@ -1,4 +1,5 @@
 import { Header } from '../../sections/Header/Header';
+import { HeroVideo } from '../../atoms/HeroVideo/HeroVideo';
 import { Button } from '../../atoms/Button/Button';
 import { Select } from '../../atoms/Select/Select';
 import { SolutionsSection } from '../../sections/SolutionsSection/SolutionsSection';
@@ -25,20 +26,10 @@ export function Home() {
         actions={<><Select options={[{ value: 'es', label: 'ES' }, { value: 'en', label: 'EN' }]} defaultValue="es" /><Button href="https://academy.studiolxd.com" variant="primary" external>Entra a la academia</Button></>}
       />
       <main id="main-content" className="home__main">
-        <section className="home__video-section" aria-hidden="true">
-          <div className="home__video-landscape">
-            <video autoPlay loop muted playsInline>
-              <source src="/videos/hero-landscape.webm" type="video/webm" />
-              <source src="/videos/hero-landscape.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div className="home__video-portrait">
-            <video autoPlay loop muted playsInline>
-              <source src="/videos/hero-portrait.webm" type="video/webm" />
-              <source src="/videos/hero-portrait.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </section>
+        <HeroVideo
+          landscape={{ webm: '/videos/hero-landscape.webm', mp4: '/videos/hero-landscape.mp4' }}
+          portrait={{ webm: '/videos/hero-portrait.webm', mp4: '/videos/hero-portrait.mp4' }}
+        />
         <SolutionsSection aria-label="Soluciones" items={solutionItems} />
         <MethodologySection
           aria-label="Metodología"

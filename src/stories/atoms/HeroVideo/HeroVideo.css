@@ -1,14 +1,8 @@
 .hero-video {
   position: relative;
   width: 100%;
-  height: calc(100vh - var(--header-height-overlay));
+  height: 100vh;
   overflow: hidden;
-}
-
-@media (min-width: 1440px) /* --breakpoint-2xl */ {
-  .hero-video {
-    height: calc(100vh - var(--header-height-inline));
-  }
 }
 
 .hero-video__landscape,
