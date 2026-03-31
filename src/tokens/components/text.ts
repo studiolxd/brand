@@ -2,7 +2,7 @@ import type { Token } from '../utils';
 
 export const headingBaseTokens: Token[] = [
   { name: '--text-heading-font-family',    value: 'var(--font-family-sans)',       description: 'Font family' },
-  { name: '--text-heading-font-weight',    value: 'var(--font-weight-semibold)',   description: 'Font weight' },
+  { name: '--text-heading-font-weight',    value: 'var(--font-weight-default)',    description: 'Font weight (300 por defecto)' },
   { name: '--text-heading-color',          value: 'var(--color-text-default)',     description: 'Color del texto' },
   { name: '--text-heading-letter-spacing', value: 'var(--letter-spacing-tight)',   description: 'Letter spacing' },
 ];
