@@ -1,0 +1,39 @@
+.hero-video {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--header-height-overlay));
+  overflow: hidden;
+}
+
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
+  .hero-video {
+    height: calc(100vh - var(--header-height-inline));
+  }
+}
+
+.hero-video__landscape,
+.hero-video__portrait {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-video__landscape video,
+.hero-video__portrait video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-video__portrait {
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .hero-video__landscape {
+    display: none;
+  }
+
+  .hero-video__portrait {
+    display: block;
+  }
+}
