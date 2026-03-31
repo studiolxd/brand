@@ -36,8 +36,6 @@
     "./textarea-field":      { "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",           "import": "./dist/textarea-field.js" },
     "./contact-form":        { "types": "./dist/_types/organisms/ContactForm/ContactForm.d.ts",               "import": "./dist/contact-form.js" },
     "./newsletter-form":     { "types": "./dist/_types/organisms/NewsletterForm/NewsletterForm.d.ts",         "import": "./dist/newsletter-form.js" },
-    "./project-template":    { "types": "./dist/_types/pages/Project/Project.d.ts",                            "import": "./dist/project-template.js" },
-    "./legal-template":      { "types": "./dist/_types/pages/Legal/Legal.d.ts",                                "import": "./dist/legal-template.js" },
     "./css":                  "./dist/brand.css",
     "./brand.css":            "./dist/brand.css",
     "./tokens.css":           "./dist/tokens.css",
