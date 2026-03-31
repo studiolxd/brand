@@ -41,6 +41,7 @@
     "./contact-section.css":     "./dist/contact-section.css",
     "./footer.css":              "./dist/footer.css",
     "./header.css":              "./dist/header.css",
+    "./highlight-section.css":   "./dist/highlight-section.css",
     "./methodology-section.css": "./dist/methodology-section.css",
     "./projects-section.css":    "./dist/projects-section.css",
     "./reviews-section.css":     "./dist/reviews-section.css",

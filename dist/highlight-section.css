@@ -1,0 +1,9 @@
+.highlight-section {
+  padding-block: var(--section-padding-block-xl);
+  padding-inline: var(--section-padding-inline);
+}
+
+.surface-dark .highlight-section {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
+}
