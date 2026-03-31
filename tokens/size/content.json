@@ -1,5 +1,5 @@
 {
   "content": {
-    "measure": { "$value": "66ch", "$type": "dimension", "$description": "Ancho máximo de línea de texto — legibilidad óptima" }
+    "measure": { "$value": "50rem", "$type": "dimension", "$description": "Ancho máximo de contenido (800px) — legibilidad óptima" }
   }
 }

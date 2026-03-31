@@ -22,7 +22,7 @@
   --header-nav-font-weight-inline: var(--font-weight-medium); /** Peso de fuente de los enlaces en modo inline */
   --header-nav-gap-inline: var(--spacing-6); /** Separación entre enlaces en modo inline */
   --header-nav-padding-block-overlay: var(--spacing-3); /** Padding vertical de la zona de nav en modo overlay */
-  --header-nav-padding-inline: var(--spacing-6); /** Padding horizontal del header y la navbar */
+  --header-nav-padding-inline: var(--spacing-4); /** Padding horizontal del header y la navbar — igual que section-padding-inline */
   --header-actions-gap-overlay: var(--spacing-3); /** Separación entre los elementos de actions en modo overlay */
   --header-actions-gap-inline: var(--spacing-3); /** Separación entre los elementos de actions en modo inline */
   --header-featured-border-width: var(--border-width-sm); /** Grosor del borde del featured link */

@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import { TokenTable } from "./TokenTable";
-import { componentSizeTokens } from "../../tokens/size";
+import { componentSizeTokens, contentSizeTokens } from "../../tokens/size";
 
 <Meta title="Foundations/Tallas de componente" />
 
@@ -13,3 +13,13 @@ Escala de alturas para elementos de interfaz interactivos: botones de formulario
 <TokenTable tokens={componentSizeTokens} />
 
 Los tokens están definidos en `tokens/size/component.json`.
+
+---
+
+## Medida de contenido
+
+Ancho máximo para bloques de texto y secciones de contenido. Garantiza legibilidad óptima y consistencia entre páginas.
+
+<TokenTable tokens={contentSizeTokens} />
+
+Los tokens están definidos en `tokens/size/content.json`.

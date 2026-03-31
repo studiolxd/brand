@@ -4,6 +4,6 @@
     "font-size":       { "$value": "{font-size.9}", "$type": "dimension", "$description": "Tamaño del texto destacado" },
     "font-weight":     { "$value": "{font-weight.semibold}", "$type": "number",    "$description": "Peso del texto destacado" },
     "line-height":     { "$value": "{line-height.tight}", "$type": "number",    "$description": "Interlineado del texto destacado" },
-    "max-width":       { "$value": "clamp(480px, 66.666%, 860px)", "$type": "string", "$description": "Ancho máximo del container en desktop" }
+    "max-width":       { "$value": "{content.measure}", "$type": "dimension", "$description": "Ancho máximo del container en desktop" }
   }
 }

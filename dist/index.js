@@ -643,15 +643,16 @@ function L({ isOpen: e = !1, onClick: r, label: i = "Menu" }) {
 }
 //#endregion
 //#region src/stories/atoms/Heading/Heading.tsx
-function R({ level: e = 2, weight: n, className: r, children: i }) {
+function R({ level: e = 2, weight: n, size: r, className: i, children: a }) {
 	return /* @__PURE__ */ t(`h${e}`, {
 		className: [
 			"heading",
 			`heading--${e}`,
 			n && `heading--${n}`,
-			r
+			r && `heading--size-${r}`,
+			i
 		].filter(Boolean).join(" "),
-		children: i
+		children: a
 	});
 }
 //#endregion
@@ -877,6 +878,7 @@ function ke({ href: e, title: r, description: i, ctaLabel: a, color: o }) {
 		children: [
 			/* @__PURE__ */ t(R, {
 				level: 2,
+				weight: "semibold",
 				children: r
 			}),
 			/* @__PURE__ */ t("p", { children: i }),
@@ -896,6 +898,7 @@ function W({ href: e, title: r, description: i, ctaLabel: a, color: o, image: s 
 			children: [
 				/* @__PURE__ */ t(R, {
 					level: 2,
+					weight: "semibold",
 					className: "card-split__title",
 					children: r
 				}),
@@ -933,6 +936,7 @@ function G({ href: e, title: r, description: i, ctaLabel: a, color: o, image: s 
 			children: [
 				/* @__PURE__ */ t(R, {
 					level: 2,
+					weight: "semibold",
 					className: "card-square__title",
 					children: r
 				}),
@@ -1202,6 +1206,7 @@ function Pe({ title: e = "Hemos trabajado junto a...", clients: r }) {
 		className: "clients-section",
 		children: [/* @__PURE__ */ t(R, {
 			level: 2,
+			weight: "semibold",
 			children: e
 		}), /* @__PURE__ */ t(m, {
 			options: { align: "start" },
@@ -1232,6 +1237,7 @@ function Fe({ title: e, form: r, whatsappTitle: i, whatsappLabel: a, whatsappHre
 				className: "contact-section__intro",
 				children: /* @__PURE__ */ t(R, {
 					level: 2,
+					weight: "semibold",
 					children: e
 				})
 			}), /* @__PURE__ */ n("aside", {
@@ -1422,7 +1428,11 @@ function Le({ intro: e, ctaLabel: r, ctaHref: i, steps: a, "aria-label": o }) {
 		"aria-label": o,
 		children: [/* @__PURE__ */ n("div", {
 			className: "methodology-section__intro",
-			children: [/* @__PURE__ */ t("p", { children: e }), /* @__PURE__ */ t(f, {
+			children: [/* @__PURE__ */ t(R, {
+				level: 2,
+				weight: "semibold",
+				children: e
+			}), /* @__PURE__ */ t(f, {
 				href: i,
 				variant: "primary",
 				children: r
@@ -1449,6 +1459,7 @@ function Re({ title: e = "Proyectos", projects: r }) {
 		className: "projects-section",
 		children: [/* @__PURE__ */ t(R, {
 			level: 2,
+			weight: "semibold",
 			children: e
 		}), /* @__PURE__ */ t(m, {
 			options: { align: "center" },
@@ -1495,6 +1506,7 @@ function ze({ title: e = "Lo que dice nuestro alumnado", reviews: r }) {
 		className: "reviews-section surface-dark",
 		children: [/* @__PURE__ */ t(R, {
 			level: 2,
+			weight: "semibold",
 			children: e
 		}), /* @__PURE__ */ t(m, {
 			options: {
@@ -1902,7 +1914,7 @@ function Ke() {
 						reviews: Be
 					}),
 					/* @__PURE__ */ t(Pe, {
-						title: "Clientes",
+						title: "Hemos trabajado junto a...",
 						clients: He
 					}),
 					/* @__PURE__ */ t(Fe, { ...Ge })
