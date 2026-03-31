@@ -1,5 +1,10 @@
 .newsletter-form {
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: var(--form-gap);
+}
+
+.newsletter-form__spacer {
+  flex: 1;
 }
