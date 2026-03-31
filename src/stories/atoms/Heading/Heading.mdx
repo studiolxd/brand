@@ -9,9 +9,19 @@ import { headingBaseTokens, headingLevelTokens, headingDarkTokens } from "../../
 
 Encabezados semánticos de `h1` a `h6`. El nivel controla tanto el tag HTML como el tamaño tipográfico. Sin márgenes por defecto — el espaciado es responsabilidad del layout.
 
+El peso por defecto de todos los niveles es **300 (light)**, controlado por el token `--text-heading-font-weight`. La prop `weight` permite sobrescribirlo puntualmente sin tocar los tokens.
+
 ## Todos los niveles
 
 <Canvas of={HeadingStories.AllLevels} />
+
+---
+
+## Pesos
+
+La prop `weight` acepta cualquier paso de la escala tipográfica. Sin prop, el encabezado usa el peso del token (300).
+
+<Canvas of={HeadingStories.Weights} />
 
 ---
 

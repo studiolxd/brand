@@ -13,10 +13,16 @@ const meta: Meta<typeof Heading> = {
       options: [1, 2, 3, 4, 5, 6],
       description: 'Nivel semántico del encabezado (h1–h6).',
     },
+    weight: {
+      control: { type: 'select' },
+      options: [undefined, 'thin', 'extralight', 'light', 'regular', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
+      description: 'Peso tipográfico. Sin valor usa el token del nivel (300 por defecto).',
+    },
     children: {
       control: { type: 'text' },
       description: 'Contenido del encabezado.',
     },
+    className: { table: { disable: true } },
   },
   args: {
     children: 'Heading example',
@@ -39,6 +45,16 @@ export const AllLevels: Story = {
     <>
       {([1, 2, 3, 4, 5, 6] as const).map((lvl) => (
         <Heading key={lvl} level={lvl}>Heading {lvl}</Heading>
+      ))}
+    </>
+  ),
+};
+
+export const Weights: Story = {
+  render: () => (
+    <>
+      {(['thin', 'extralight', 'light', 'regular', 'medium', 'semibold', 'bold', 'extrabold', 'black'] as const).map((w) => (
+        <Heading key={w} level={2} weight={w}>{w}</Heading>
       ))}
     </>
   ),
