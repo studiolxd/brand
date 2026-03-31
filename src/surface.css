@@ -158,13 +158,6 @@
   opacity: 1;
 }
 
-/* ─── Footer ─────────────────────────────────────────────────────────────── */
-
-.surface-dark .footer__col,
-.surface-dark .footer__bottom {
-  background-color: var(--color-background-dark);
-}
-
 /* ─── Logo ────────────────────────────────────────────────────────────────── */
 
 .surface-dark .logo {
