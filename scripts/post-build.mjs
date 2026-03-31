@@ -6,7 +6,6 @@ const sectionCss = {
   'contact-section':     'src/stories/sections/ContactSection/ContactSection.css',
   'footer':              'src/stories/sections/Footer/Footer.css',
   'header':              'src/stories/sections/Header/Header.css',
-  'highlight-section':   'src/stories/sections/HighlightSection/HighlightSection.css',
   'methodology-section': 'src/stories/sections/MethodologySection/MethodologySection.css',
   'projects-section':    'src/stories/sections/ProjectsSection/ProjectsSection.css',
   'reviews-section':     'src/stories/sections/ReviewsSection/ReviewsSection.css',

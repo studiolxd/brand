@@ -18,5 +18,5 @@ interface ContactFormProps {
     successMessage?: string;
     onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
-export declare function ContactForm({ emailLabel, emailPlaceholder, messageLabel, messagePlaceholder, messageRows, wantCallLabel, phoneLabel, phonePlaceholder, phoneHelper, privacyLabel, buttonLabel, submitting, submittingLabel, errors, success, successMessage, onSubmit, }: ContactFormProps): import("react/jsx-runtime").JSX.Element;
+export declare const ContactForm: import("react").ForwardRefExoticComponent<ContactFormProps & import("react").RefAttributes<HTMLFormElement>>;
 export {};

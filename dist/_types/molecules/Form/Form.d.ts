@@ -5,5 +5,5 @@ interface FormProps {
     actions?: React.ReactNode;
     children: React.ReactNode;
 }
-export declare function Form({ errors, onSubmit, actions, children }: FormProps): import("react/jsx-runtime").JSX.Element;
+export declare const Form: import("react").ForwardRefExoticComponent<FormProps & import("react").RefAttributes<HTMLFormElement>>;
 export {};
