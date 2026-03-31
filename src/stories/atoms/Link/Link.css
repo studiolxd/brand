@@ -1,16 +1,2 @@
-a {
-  color: var(--link-color);
-  text-decoration: var(--link-text-decoration);
-  cursor: var(--link-cursor);
-}
-
-a:hover {
-  color: var(--link-color-hover);
-  text-decoration: var(--link-text-decoration-hover);
-}
-
-a:focus-visible {
-  outline: var(--link-focus-ring-width) solid var(--link-focus-ring-color);
-  outline-offset: var(--link-focus-ring-offset);
-}
-
+/* Los estilos base de <a> viven en src/index.css (estilos globales de elemento).
+   Este archivo se mantiene para futuras variantes o modificadores de Link. */
