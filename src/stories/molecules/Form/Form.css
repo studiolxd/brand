@@ -31,6 +31,7 @@
 .form > .input-phone-field > .input-phone-field__helper {
   padding-block: var(--control-padding-block);
   padding-inline: var(--control-padding-inline);
+  background-color: var(--color-background-default);
 }
 
 .form > .input-phone-field > .input-phone > .input-phone__country,
