@@ -48,6 +48,7 @@
     "./projects-section.css":    "./dist/projects-section.css",
     "./reviews-section.css":     "./dist/reviews-section.css",
     "./solutions-section.css":   "./dist/solutions-section.css",
+    "./courses-section.css":     "./dist/courses-section.css",
     "./project-template.css":    "./dist/project-template.css",
     "./legal-template.css":      "./dist/legal-template.css",
     "./scss":                  "./src/tokens/scss/_index.scss",
