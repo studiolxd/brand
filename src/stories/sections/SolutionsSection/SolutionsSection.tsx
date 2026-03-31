@@ -4,15 +4,16 @@ import { Card } from '../../molecules/Card/Card';
 type CardProps = React.ComponentPropsWithoutRef<typeof Card>;
 
 interface SolutionsSectionProps {
+  id?: string;
   /** Lista de tarjetas a mostrar. */
   items: CardProps[];
   /** Nombre accesible de la sección (aria-label). */
   'aria-label'?: string;
 }
 
-export function SolutionsSection({ items, 'aria-label': ariaLabel }: SolutionsSectionProps) {
+export function SolutionsSection({ id, items, 'aria-label': ariaLabel }: SolutionsSectionProps) {
   return (
-    <section className="solutions-section" aria-label={ariaLabel}>
+    <section id={id} className="solutions-section" aria-label={ariaLabel}>
       {items.map((item) => (
         <Card key={item.title} {...item} />
       ))}

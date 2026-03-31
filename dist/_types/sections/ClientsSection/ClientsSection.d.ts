@@ -8,10 +8,11 @@ interface Client {
     logo: string;
 }
 interface ClientsSectionProps {
+    id?: string;
     /** Título de la sección. */
     title?: string;
     /** Lista de clientes. */
     clients: Client[];
 }
-export declare function ClientsSection({ title, clients }: ClientsSectionProps): import("react/jsx-runtime").JSX.Element;
+export declare function ClientsSection({ id, title, clients }: ClientsSectionProps): import("react/jsx-runtime").JSX.Element;
 export {};

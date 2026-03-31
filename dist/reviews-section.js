@@ -5,20 +5,21 @@ import { Carousel as t, CarouselSlide as n } from "./carousel.js";
 import { Heading as r } from "./heading.js";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/sections/ReviewsSection/ReviewsSection.tsx
-function o({ title: o = "Lo que dice nuestro alumnado", reviews: s }) {
+function o({ id: o, title: s = "Lo que dice nuestro alumnado", reviews: c }) {
 	return /* @__PURE__ */ a("section", {
+		id: o,
 		className: "reviews-section surface-dark",
 		children: [/* @__PURE__ */ i(r, {
 			level: 2,
 			weight: "semibold",
-			children: o
+			children: s
 		}), /* @__PURE__ */ i(t, {
 			options: {
 				align: "center",
 				loop: !0
 			},
 			gradientColor: "var(--color-background-dark)",
-			children: s.map((t) => /* @__PURE__ */ i(n, { children: /* @__PURE__ */ a("article", {
+			children: c.map((t) => /* @__PURE__ */ i(n, { children: /* @__PURE__ */ a("article", {
 				className: "review-card",
 				children: [/* @__PURE__ */ a("div", {
 					className: "review-card__author",

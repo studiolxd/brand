@@ -13,15 +13,16 @@ interface Client {
 }
 
 interface ClientsSectionProps {
+  id?: string;
   /** Título de la sección. */
   title?: string;
   /** Lista de clientes. */
   clients: Client[];
 }
 
-export function ClientsSection({ title = 'Hemos trabajado junto a...', clients }: ClientsSectionProps) {
+export function ClientsSection({ id, title = 'Hemos trabajado junto a...', clients }: ClientsSectionProps) {
   return (
-    <section className="clients-section">
+    <section id={id} className="clients-section">
       <Heading level={2} weight="semibold">{title}</Heading>
       <Carousel
         options={{ align: 'start' }}

@@ -8,6 +8,7 @@ interface MethodologyStep {
 }
 
 interface MethodologySectionProps {
+  id?: string;
   /** Encabezado introductorio. */
   intro: string;
   /** Texto del botón CTA. */
@@ -21,6 +22,7 @@ interface MethodologySectionProps {
 }
 
 export function MethodologySection({
+  id,
   intro,
   ctaLabel,
   ctaHref,
@@ -28,7 +30,7 @@ export function MethodologySection({
   'aria-label': ariaLabel,
 }: MethodologySectionProps) {
   return (
-    <section className="methodology-section" aria-label={ariaLabel}>
+    <section id={id} className="methodology-section" aria-label={ariaLabel}>
       <div className="methodology-section__intro">
         <Heading level={2} weight="semibold">{intro}</Heading>
         <Button href={ctaHref} variant="primary">{ctaLabel}</Button>

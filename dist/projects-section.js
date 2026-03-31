@@ -5,16 +5,17 @@ import { Heading as n } from "./heading.js";
 import { Tag as r } from "./tag.js";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/sections/ProjectsSection/ProjectsSection.tsx
-function o({ title: o = "Proyectos", projects: s }) {
+function o({ id: o, title: s = "Proyectos", projects: c }) {
 	return /* @__PURE__ */ a("section", {
+		id: o,
 		className: "projects-section",
 		children: [/* @__PURE__ */ i(n, {
 			level: 2,
 			weight: "semibold",
-			children: o
+			children: s
 		}), /* @__PURE__ */ i(e, {
 			options: { align: "center" },
-			children: s.map((e) => /* @__PURE__ */ i(t, { children: /* @__PURE__ */ a("a", {
+			children: c.map((e) => /* @__PURE__ */ i(t, { children: /* @__PURE__ */ a("a", {
 				className: "project-card",
 				href: e.href,
 				"aria-label": e.title,

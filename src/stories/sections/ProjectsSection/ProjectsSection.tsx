@@ -25,15 +25,16 @@ interface Project {
 }
 
 interface ProjectsSectionProps {
+  id?: string;
   /** Título de la sección. */
   title?: string;
   /** Lista de proyectos. */
   projects: Project[];
 }
 
-export function ProjectsSection({ title = 'Proyectos', projects }: ProjectsSectionProps) {
+export function ProjectsSection({ id, title = 'Proyectos', projects }: ProjectsSectionProps) {
   return (
-    <section className="projects-section">
+    <section id={id} className="projects-section">
       <Heading level={2} weight="semibold">{title}</Heading>
       <Carousel
         options={{ align: 'center' }}

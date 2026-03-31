@@ -17,15 +17,16 @@ interface Review {
 }
 
 interface ReviewsSectionProps {
+  id?: string;
   /** Título de la sección. */
   title?: string;
   /** Lista de opiniones. */
   reviews: Review[];
 }
 
-export function ReviewsSection({ title = 'Lo que dice nuestro alumnado', reviews }: ReviewsSectionProps) {
+export function ReviewsSection({ id, title = 'Lo que dice nuestro alumnado', reviews }: ReviewsSectionProps) {
   return (
-    <section className="reviews-section surface-dark">
+    <section id={id} className="reviews-section surface-dark">
       <Heading level={2} weight="semibold">{title}</Heading>
       <Carousel
         options={{ align: 'center', loop: true }}

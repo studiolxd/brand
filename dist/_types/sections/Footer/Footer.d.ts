@@ -1,2 +1,6 @@
 import './Footer.css';
-export declare function Footer(): import("react/jsx-runtime").JSX.Element;
+interface FooterProps {
+    id?: string;
+}
+export declare function Footer({ id }: FooterProps): import("react/jsx-runtime").JSX.Element;
+export {};

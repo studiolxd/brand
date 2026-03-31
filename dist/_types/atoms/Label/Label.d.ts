@@ -1,5 +1,4 @@
 import './Label.css';
-import '../VisuallyHidden/VisuallyHidden.css';
 interface LabelProps {
     htmlFor: string;
     children: React.ReactNode;

@@ -9,6 +9,7 @@ export interface NavItem {
 }
 
 interface HeaderProps {
+  id?: string;
   navItems: NavItem[];
   featuredLink?: NavItem;
   actions?: React.ReactNode;
@@ -19,6 +20,7 @@ interface HeaderProps {
 }
 
 export function Header({
+  id,
   navItems,
   featuredLink,
   actions,
@@ -35,6 +37,7 @@ export function Header({
 
   return (
     <header
+      id={id}
       className={[
         'header',
         dark ? 'header--dark' : '',

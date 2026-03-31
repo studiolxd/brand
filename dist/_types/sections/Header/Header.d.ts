@@ -4,6 +4,7 @@ export interface NavItem {
     href: string;
 }
 interface HeaderProps {
+    id?: string;
     navItems: NavItem[];
     featuredLink?: NavItem;
     actions?: React.ReactNode;
@@ -12,5 +13,5 @@ interface HeaderProps {
     navLabel?: string;
     dark?: boolean;
 }
-export declare function Header({ navItems, featuredLink, actions, logoHref, logoLabel, navLabel, dark, }: HeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function Header({ id, navItems, featuredLink, actions, logoHref, logoLabel, navLabel, dark, }: HeaderProps): import("react/jsx-runtime").JSX.Element;
 export {};

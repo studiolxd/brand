@@ -1,5 +1,6 @@
 import './HighlightSection.css';
 interface HighlightSectionProps {
+    id?: string;
     /** Texto destacado. */
     text: string;
     /** Alineación horizontal del bloque de texto. */
@@ -9,5 +10,5 @@ interface HighlightSectionProps {
     /** Clases adicionales para el container. */
     className?: string;
 }
-export declare function HighlightSection({ text, align, textAlign, className }: HighlightSectionProps): import("react/jsx-runtime").JSX.Element;
+export declare function HighlightSection({ id, text, align, textAlign, className }: HighlightSectionProps): import("react/jsx-runtime").JSX.Element;
 export {};

@@ -6,6 +6,7 @@ import { ContactForm } from '../../organisms/ContactForm/ContactForm';
 type ContactFormProps = React.ComponentPropsWithoutRef<typeof ContactForm>;
 
 interface ContactSectionProps {
+  id?: string;
   /** Título del bloque de contacto. */
   title: string;
   /** Props del formulario de contacto. */
@@ -19,6 +20,7 @@ interface ContactSectionProps {
 }
 
 export function ContactSection({
+  id,
   title,
   form,
   whatsappTitle,
@@ -26,9 +28,7 @@ export function ContactSection({
   whatsappHref,
 }: ContactSectionProps) {
   return (
-    <section
-      className="contact-section"
-    >
+    <section id={id} className="contact-section">
       <div className="contact-section__left">
         <div className="contact-section__intro">
           <Heading level={2} weight="semibold">{title}</Heading>

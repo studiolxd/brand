@@ -6,8 +6,9 @@ import { Logo as n } from "./logo.js";
 import { NewsletterForm as r } from "./newsletter-form.js";
 import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/sections/Footer/Footer.tsx
-function s() {
+function s({ id: s }) {
 	return /* @__PURE__ */ o("footer", {
+		id: s,
 		className: "footer surface-dark",
 		children: [
 			/* @__PURE__ */ o("div", {

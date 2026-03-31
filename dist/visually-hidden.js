@@ -1,4 +1,4 @@
-/* empty css                       */
+import './visually-hidden.css';
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx
 function t({ children: t }) {

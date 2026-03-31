@@ -5,12 +5,13 @@ import { Logo as t } from "./logo.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { useState as i } from "react";
 //#region src/stories/sections/Header/Header.tsx
-function a({ navItems: a, featuredLink: o, actions: s, logoHref: c = "/", logoLabel: l = "Studio LXD — ir al inicio", navLabel: u = "Main navigation", dark: d = !1 }) {
-	let [f, p] = i(!1), m = () => {
-		p(!1);
+function a({ id: a, navItems: o, featuredLink: s, actions: c, logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", navLabel: d = "Main navigation", dark: f = !1 }) {
+	let [p, m] = i(!1), h = () => {
+		m(!1);
 	};
 	return /* @__PURE__ */ r("header", {
-		className: ["header", d ? "header--dark" : ""].filter(Boolean).join(" "),
+		id: a,
+		className: ["header", f ? "header--dark" : ""].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ n("a", {
 				href: "#main-content",
@@ -18,38 +19,38 @@ function a({ navItems: a, featuredLink: o, actions: s, logoHref: c = "/", logoLa
 				children: "Saltar al contenido principal"
 			}),
 			/* @__PURE__ */ n("a", {
-				href: c,
+				href: l,
 				className: "header__logo",
-				"aria-label": l,
+				"aria-label": u,
 				children: /* @__PURE__ */ n(t, {})
 			}),
 			/* @__PURE__ */ n(e, {
-				isOpen: f,
-				onClick: () => p(!f),
-				label: f ? "Cerrar menu" : "Abrir menu"
+				isOpen: p,
+				onClick: () => m(!p),
+				label: p ? "Cerrar menu" : "Abrir menu"
 			}),
 			/* @__PURE__ */ r("div", {
 				className: "header__navbar",
-				"aria-hidden": !f,
+				"aria-hidden": !p,
 				children: [
-					o && /* @__PURE__ */ n("a", {
-						href: o.href,
+					s && /* @__PURE__ */ n("a", {
+						href: s.href,
 						className: "header__featured",
-						onClick: m,
-						children: o.label
+						onClick: h,
+						children: s.label
 					}),
 					/* @__PURE__ */ n("nav", {
-						"aria-label": u,
-						children: a.map((e) => /* @__PURE__ */ n("a", {
+						"aria-label": d,
+						children: o.map((e) => /* @__PURE__ */ n("a", {
 							href: e.href,
 							className: "header__nav-link",
-							onClick: m,
+							onClick: h,
 							children: e.label
 						}, e.href))
 					}),
-					s && /* @__PURE__ */ n("div", {
+					c && /* @__PURE__ */ n("div", {
 						className: "header__actions",
-						children: s
+						children: c
 					})
 				]
 			})

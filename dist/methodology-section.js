@@ -3,24 +3,25 @@ import { Button as e } from "./button.js";
 import { Heading as t } from "./heading.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/sections/MethodologySection/MethodologySection.tsx
-function i({ intro: i, ctaLabel: a, ctaHref: o, steps: s, "aria-label": c }) {
+function i({ id: i, intro: a, ctaLabel: o, ctaHref: s, steps: c, "aria-label": l }) {
 	return /* @__PURE__ */ r("section", {
+		id: i,
 		className: "methodology-section",
-		"aria-label": c,
+		"aria-label": l,
 		children: [/* @__PURE__ */ r("div", {
 			className: "methodology-section__intro",
 			children: [/* @__PURE__ */ n(t, {
 				level: 2,
 				weight: "semibold",
-				children: i
-			}), /* @__PURE__ */ n(e, {
-				href: o,
-				variant: "primary",
 				children: a
+			}), /* @__PURE__ */ n(e, {
+				href: s,
+				variant: "primary",
+				children: o
 			})]
 		}), /* @__PURE__ */ n("div", {
 			className: "methodology-section__steps",
-			children: s.map((e, t) => /* @__PURE__ */ r("div", {
+			children: c.map((e, t) => /* @__PURE__ */ r("div", {
 				className: "methodology-section__step",
 				children: [/* @__PURE__ */ n("div", {
 					className: "methodology-section__number",

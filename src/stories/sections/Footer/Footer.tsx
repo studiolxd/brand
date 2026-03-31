@@ -4,9 +4,13 @@ import { Logo } from '../../atoms/Logo/Logo';
 import { Link } from '../../atoms/Link/Link';
 import './Footer.css';
 
-export function Footer() {
+interface FooterProps {
+  id?: string;
+}
+
+export function Footer({ id }: FooterProps) {
   return (
-    <footer className="footer surface-dark">
+    <footer id={id} className="footer surface-dark">
       <div className="footer__col footer__col--1">
         <Heading level={2} className="footer__tagline">
           <span>Learning</span>

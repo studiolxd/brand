@@ -2,6 +2,7 @@ import './ContactSection.css';
 import { ContactForm } from '../../organisms/ContactForm/ContactForm';
 type ContactFormProps = React.ComponentPropsWithoutRef<typeof ContactForm>;
 interface ContactSectionProps {
+    id?: string;
     /** Título del bloque de contacto. */
     title: string;
     /** Props del formulario de contacto. */
@@ -13,5 +14,5 @@ interface ContactSectionProps {
     /** URL del enlace de WhatsApp. */
     whatsappHref: string;
 }
-export declare function ContactSection({ title, form, whatsappTitle, whatsappLabel, whatsappHref, }: ContactSectionProps): import("react/jsx-runtime").JSX.Element;
+export declare function ContactSection({ id, title, form, whatsappTitle, whatsappLabel, whatsappHref, }: ContactSectionProps): import("react/jsx-runtime").JSX.Element;
 export {};

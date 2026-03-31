@@ -1,6 +1,7 @@
 import './HighlightSection.css';
 
 interface HighlightSectionProps {
+  id?: string;
   /** Texto destacado. */
   text: string;
   /** Alineación horizontal del bloque de texto. */
@@ -11,9 +12,9 @@ interface HighlightSectionProps {
   className?: string;
 }
 
-export function HighlightSection({ text, align = 'left', textAlign, className }: HighlightSectionProps) {
+export function HighlightSection({ id, text, align = 'left', textAlign, className }: HighlightSectionProps) {
   return (
-    <section className="highlight-section">
+    <section id={id} className="highlight-section">
       <div className={['highlight-section__container', align !== 'left' ? `highlight-section__container--${align}` : '', textAlign ? `highlight-section__container--text-${textAlign}` : '', className].filter(Boolean).join(' ')}>
         <p>{text}</p>
       </div>

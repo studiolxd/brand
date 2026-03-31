@@ -1,17 +1,18 @@
 import './highlight-section.css';
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/sections/HighlightSection/HighlightSection.tsx
-function t({ text: t, align: n = "left", textAlign: r, className: i }) {
+function t({ id: t, text: n, align: r = "left", textAlign: i, className: a }) {
 	return /* @__PURE__ */ e("section", {
+		id: t,
 		className: "highlight-section",
 		children: /* @__PURE__ */ e("div", {
 			className: [
 				"highlight-section__container",
-				n === "left" ? "" : `highlight-section__container--${n}`,
-				r ? `highlight-section__container--text-${r}` : "",
-				i
+				r === "left" ? "" : `highlight-section__container--${r}`,
+				i ? `highlight-section__container--text-${i}` : "",
+				a
 			].filter(Boolean).join(" "),
-			children: /* @__PURE__ */ e("p", { children: t })
+			children: /* @__PURE__ */ e("p", { children: n })
 		})
 	});
 }
