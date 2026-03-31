@@ -2,7 +2,7 @@ import './hero-video.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 //#region src/stories/atoms/HeroVideo/HeroVideo.tsx
 function n({ landscape: n, portrait: r }) {
-	return /* @__PURE__ */ t("section", {
+	return /* @__PURE__ */ t("div", {
 		className: "hero-video",
 		"aria-hidden": "true",
 		children: [/* @__PURE__ */ e("div", {

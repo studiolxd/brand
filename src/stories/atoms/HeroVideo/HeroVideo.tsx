@@ -14,7 +14,7 @@ interface HeroVideoProps {
 
 export function HeroVideo({ landscape, portrait }: HeroVideoProps) {
   return (
-    <section className="hero-video" aria-hidden="true">
+    <div className="hero-video" aria-hidden="true">
       <div className="hero-video__landscape">
         <video autoPlay loop muted playsInline>
           {landscape.webm && <source src={landscape.webm} type="video/webm" />}
@@ -27,6 +27,6 @@ export function HeroVideo({ landscape, portrait }: HeroVideoProps) {
           {portrait.mp4  && <source src={portrait.mp4}  type="video/mp4"  />}
         </video>
       </div>
-    </section>
+    </div>
   );
 }
