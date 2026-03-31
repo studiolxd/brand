@@ -1,0 +1,19 @@
+{
+  "radio-field": {
+    "gap":              { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Separación entre el radio y el texto" },
+    "padding-inline":   { "$value": "{control.padding-inline}", "$type": "dimension", "$description": "Padding inline — hereda de control" },
+    "padding-block":    { "$value": "{control.padding-block}",  "$type": "dimension", "$description": "Padding block — hereda de control" },
+    "radio-offset":     { "$value": "3px",                      "$type": "dimension", "$description": "Desplazamiento vertical del radio para alinearlo con la primera línea de texto" },
+    "cursor":           { "$value": "pointer",                  "$type": "string",    "$description": "Cursor" },
+    "disabled-cursor":  { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "label": {
+      "font-family":    { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Familia tipográfica" },
+      "font-size":      { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Tamaño de fuente (16px)" },
+      "font-weight":    { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso tipográfico" },
+      "line-height":    { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado" },
+      "color":          { "$value": "{color.text.default}",     "$type": "color",     "$description": "Color del texto" },
+      "letter-spacing": { "$value": "{letter-spacing.normal}",  "$type": "dimension", "$description": "Interletraje" },
+      "text-transform": { "$value": "none",                     "$type": "string",    "$description": "Sin transformación" }
+    }
+  }
+}

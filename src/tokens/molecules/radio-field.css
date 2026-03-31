@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --radio-field-radio-offset: 3px; /** Desplazamiento vertical del radio para alinearlo con la primera línea de texto */
+  --radio-field-cursor: pointer; /** Cursor */
+  --radio-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --radio-field-label-text-transform: none; /** Sin transformación */
+  --radio-field-gap: var(--spacing-3); /** Separación entre el radio y el texto */
+  --radio-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
+  --radio-field-label-font-size: var(--font-size-3); /** Tamaño de fuente (16px) */
+  --radio-field-label-line-height: var(--line-height-normal); /** Interlineado */
+  --radio-field-label-letter-spacing: var(--letter-spacing-normal); /** Interletraje */
+  --radio-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
+  --radio-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
+  --radio-field-label-font-weight: var(--font-weight-default); /** Peso tipográfico */
+  --radio-field-label-color: var(--color-text-default); /** Color del texto */
+}

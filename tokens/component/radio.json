@@ -1,0 +1,21 @@
+{
+  "radio": {
+    "size":                  { "$value": "1.25em",                      "$type": "string",    "$description": "Tamaño del radio (ancho y alto)" },
+    "dot-size":              { "$value": "0.5em",                       "$type": "string",    "$description": "Tamaño del punto interior" },
+    "border-radius":         { "$value": "50%",                         "$type": "string",    "$description": "Border radius (círculo)" },
+    "border-width":          { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Border width" },
+    "border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Border style" },
+    "border-color":          { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del borde" },
+    "bg":                    { "$value": "transparent",                  "$type": "string",    "$description": "Fondo sin seleccionar" },
+    "dot-color":             { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del punto cuando está seleccionado" },
+    "cursor":                { "$value": "pointer",                      "$type": "string",    "$description": "Cursor" },
+    "transition-duration":   { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de transiciones" },
+    "transition-easing":     { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Easing de transiciones" },
+    "focus-ring-width":      { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Ancho del anillo de foco" },
+    "focus-ring-offset":     { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del anillo de foco respecto al borde" },
+    "focus-ring-color":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
+    "disabled-cursor":          { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "disabled-border-color":    { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
+    "disabled-dot-color":       { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del punto cuando está deshabilitado y seleccionado" }
+  }
+}

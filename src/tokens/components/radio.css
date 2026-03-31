@@ -1,0 +1,23 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --radio-size: 1.25em; /** Tamaño del radio (ancho y alto) */
+  --radio-dot-size: 0.5em; /** Tamaño del punto interior */
+  --radio-border-radius: 50%; /** Border radius (círculo) */
+  --radio-border-style: solid; /** Border style */
+  --radio-bg: transparent; /** Fondo sin seleccionar */
+  --radio-cursor: pointer; /** Cursor */
+  --radio-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --radio-border-width: var(--border-width-sm); /** Border width */
+  --radio-transition-duration: var(--motion-duration-fast); /** Duración de transiciones */
+  --radio-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
+  --radio-focus-ring-width: var(--border-width-md); /** Ancho del anillo de foco */
+  --radio-focus-ring-offset: var(--border-width-sm); /** Separación del anillo de foco respecto al borde */
+  --radio-disabled-border-color: var(--color-grey-light); /** Color del borde cuando está deshabilitado */
+  --radio-disabled-dot-color: var(--color-grey-light); /** Color del punto cuando está deshabilitado y seleccionado */
+  --radio-border-color: var(--color-primary); /** Color del borde */
+  --radio-dot-color: var(--color-primary); /** Color del punto cuando está seleccionado */
+  --radio-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}

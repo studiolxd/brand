@@ -5,6 +5,7 @@ export const entryPoints = {
   'button':              'src/stories/atoms/Button/Button.tsx',
   'carousel':            'src/stories/atoms/Carousel/Carousel.tsx',
   'checkbox':            'src/stories/atoms/Checkbox/Checkbox.tsx',
+  'radio':               'src/stories/atoms/Radio/Radio.tsx',
   'chevron':             'src/stories/atoms/Chevron/Chevron.tsx',
   'hamburger':           'src/stories/atoms/Hamburger/Hamburger.tsx',
   'heading':             'src/stories/atoms/Heading/Heading.tsx',
@@ -26,6 +27,7 @@ export const entryPoints = {
   'card-split':          'src/stories/molecules/CardSplit/CardSplit.tsx',
   'card-square':         'src/stories/molecules/CardSquare/CardSquare.tsx',
   'checkbox-field':      'src/stories/molecules/CheckboxField/CheckboxField.tsx',
+  'radio-field':         'src/stories/molecules/RadioField/RadioField.tsx',
   'form':                'src/stories/molecules/Form/Form.tsx',
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
   'input-phone-field':   'src/stories/molecules/InputPhoneField/InputPhoneField.tsx',
@@ -36,7 +38,7 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'button', 'carousel', 'checkbox', 'hamburger', 'input', 'input-phone',
-  'link', 'select', 'textarea', 'checkbox-field', 'form', 'input-field',
+  'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'input', 'input-phone',
+  'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form', 'input-field',
   'input-phone-field', 'textarea-field', 'contact-form', 'newsletter-form',
 ]);

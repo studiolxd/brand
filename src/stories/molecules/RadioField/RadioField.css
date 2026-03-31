@@ -1,0 +1,44 @@
+.radio-field {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--radio-field-gap);
+  padding-inline: var(--radio-field-padding-inline);
+  padding-block: var(--radio-field-padding-block);
+  cursor: var(--radio-field-cursor);
+}
+
+.radio-field .radio {
+  margin-block-start: var(--radio-field-radio-offset);
+}
+
+.radio-field__label {
+  font-family: var(--radio-field-label-font-family);
+  font-size: var(--radio-field-label-font-size);
+  font-weight: var(--radio-field-label-font-weight);
+  line-height: var(--radio-field-label-line-height);
+  color: var(--radio-field-label-color);
+  letter-spacing: var(--radio-field-label-letter-spacing);
+  text-transform: var(--radio-field-label-text-transform);
+}
+
+/* Links dentro del label */
+.radio-field__label a {
+  color: var(--link-color);
+  text-decoration: var(--link-text-decoration);
+  cursor: var(--link-cursor);
+}
+
+.radio-field__label a:hover {
+  color: var(--link-color-hover);
+  text-decoration: var(--link-text-decoration-hover);
+}
+
+.radio-field__label a:focus-visible {
+  outline: var(--link-focus-ring-width) solid var(--link-focus-ring-color);
+  outline-offset: var(--link-focus-ring-offset);
+}
+
+/* Doble clase para ganar especificidad */
+.radio-field.radio-field--disabled {
+  cursor: var(--radio-field-disabled-cursor);
+}
