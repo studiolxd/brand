@@ -22,6 +22,7 @@
     "./tag":                 { "types": "./dist/_types/atoms/Tag/Tag.d.ts",                                   "import": "./dist/tag.js" },
     "./textarea":            { "types": "./dist/_types/atoms/Textarea/Textarea.d.ts",                         "import": "./dist/textarea.js" },
     "./hero-video":          { "types": "./dist/_types/atoms/HeroVideo/HeroVideo.d.ts",                     "import": "./dist/hero-video.js" },
+    "./highlight":           { "types": "./dist/_types/atoms/Highlight/Highlight.d.ts",                     "import": "./dist/highlight.js" },
     "./visually-hidden":     { "types": "./dist/_types/atoms/VisuallyHidden/VisuallyHidden.d.ts",             "import": "./dist/visually-hidden.js" },
     "./card":                { "types": "./dist/_types/molecules/Card/Card.d.ts",                             "import": "./dist/card.js" },
     "./card-split":          { "types": "./dist/_types/molecules/CardSplit/CardSplit.d.ts",                   "import": "./dist/card-split.js" },

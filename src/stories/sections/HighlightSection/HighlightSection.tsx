@@ -1,3 +1,4 @@
+import { Highlight } from '../../atoms/Highlight/Highlight';
 import './HighlightSection.css';
 
 interface HighlightSectionProps {
@@ -15,9 +16,7 @@ interface HighlightSectionProps {
 export function HighlightSection({ id, text, align = 'left', textAlign, className }: HighlightSectionProps) {
   return (
     <section id={id} className="highlight-section">
-      <div className={['highlight-section__container', align !== 'left' ? `highlight-section__container--${align}` : '', textAlign ? `highlight-section__container--text-${textAlign}` : '', className].filter(Boolean).join(' ')}>
-        <p>{text}</p>
-      </div>
+      <Highlight text={text} align={align} textAlign={textAlign} className={className} />
     </section>
   );
 }
