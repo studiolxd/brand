@@ -8,7 +8,6 @@
   --text-line-height: var(--line-height-normal); /** Default line height */
   --text-letter-spacing: var(--letter-spacing-normal); /** Default letter spacing */
   --text-heading-font-family: var(--font-family-sans); /** Heading font family */
-  --text-heading-font-weight: var(--font-weight-semibold); /** Heading font weight */
   --text-heading-letter-spacing: var(--letter-spacing-tight); /** Heading letter spacing */
   --text-h1-font-size: var(--font-size-10); /** H1 font size (72px) */
   --text-h1-line-height: var(--line-height-tight); /** H1 line height */
@@ -32,32 +31,33 @@
   --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
   --text-color: var(--color-text-default); /** Default text color */
+  --text-heading-font-weight: var(--font-weight-default); /** Heading font weight */
   --text-heading-color: var(--color-text-default); /** Heading color */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
-  --text-h1-font-weight: var(--text-heading-font-weight); /** H1 font weight */
   --text-h1-letter-spacing: var(--text-heading-letter-spacing); /** H1 letter spacing */
   --text-h2-font-family: var(--text-heading-font-family); /** H2 font family */
-  --text-h2-font-weight: var(--text-heading-font-weight); /** H2 font weight */
   --text-h2-letter-spacing: var(--text-heading-letter-spacing); /** H2 letter spacing */
   --text-h3-font-family: var(--text-heading-font-family); /** H3 font family */
-  --text-h3-font-weight: var(--text-heading-font-weight); /** H3 font weight */
   --text-h3-letter-spacing: var(--text-heading-letter-spacing); /** H3 letter spacing */
   --text-h4-font-family: var(--text-heading-font-family); /** H4 font family */
-  --text-h4-font-weight: var(--text-heading-font-weight); /** H4 font weight */
   --text-h4-letter-spacing: var(--text-heading-letter-spacing); /** H4 letter spacing */
   --text-h5-font-family: var(--text-heading-font-family); /** H5 font family */
-  --text-h5-font-weight: var(--text-heading-font-weight); /** H5 font weight */
   --text-h6-font-family: var(--text-heading-font-family); /** H6 font family */
-  --text-h6-font-weight: var(--text-heading-font-weight); /** H6 font weight */
   --text-paragraph-font-family: var(--text-font-family); /** Paragraph font family */
   --text-paragraph-font-size: var(--text-font-size); /** Paragraph default font size (18px) */
   --text-paragraph-line-height: var(--text-line-height); /** Paragraph line height */
   --text-paragraph-letter-spacing: var(--text-letter-spacing); /** Paragraph letter spacing */
+  --text-h1-font-weight: var(--text-heading-font-weight); /** H1 font weight */
   --text-h1-color: var(--text-heading-color); /** H1 color */
+  --text-h2-font-weight: var(--text-heading-font-weight); /** H2 font weight */
   --text-h2-color: var(--text-heading-color); /** H2 color */
+  --text-h3-font-weight: var(--text-heading-font-weight); /** H3 font weight */
   --text-h3-color: var(--text-heading-color); /** H3 color */
+  --text-h4-font-weight: var(--text-heading-font-weight); /** H4 font weight */
   --text-h4-color: var(--text-heading-color); /** H4 color */
+  --text-h5-font-weight: var(--text-heading-font-weight); /** H5 font weight */
   --text-h5-color: var(--text-heading-color); /** H5 color */
+  --text-h6-font-weight: var(--text-heading-font-weight); /** H6 font weight */
   --text-h6-color: var(--text-heading-color); /** H6 color */
   --text-paragraph-font-weight: var(--text-font-weight); /** Paragraph font weight */
   --text-paragraph-color: var(--text-color); /** Paragraph color */

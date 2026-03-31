@@ -643,14 +643,15 @@ function L({ isOpen: e = !1, onClick: r, label: i = "Menu" }) {
 }
 //#endregion
 //#region src/stories/atoms/Heading/Heading.tsx
-function R({ level: e = 2, className: n, children: r }) {
+function R({ level: e = 2, weight: n, className: r, children: i }) {
 	return /* @__PURE__ */ t(`h${e}`, {
 		className: [
 			"heading",
 			`heading--${e}`,
-			n
+			n && `heading--${n}`,
+			r
 		].filter(Boolean).join(" "),
-		children: r
+		children: i
 	});
 }
 //#endregion

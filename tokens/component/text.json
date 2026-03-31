@@ -9,7 +9,7 @@
 
     "heading": {
       "font-family":    { "$value": "{font-family.sans}",         "$type": "string",    "$description": "Heading font family" },
-      "font-weight":    { "$value": "{font-weight.semibold}",     "$type": "number",    "$description": "Heading font weight" },
+      "font-weight":    { "$value": "{font-weight.default}",      "$type": "number",    "$description": "Heading font weight" },
       "color":          { "$value": "{color.text.default}",       "$type": "color",     "$description": "Heading color" },
       "letter-spacing": { "$value": "{letter-spacing.tight}",     "$type": "dimension", "$description": "Heading letter spacing" }
     },

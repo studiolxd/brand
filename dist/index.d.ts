@@ -250,15 +250,19 @@ declare interface HeaderProps {
     dark?: boolean;
 }
 
-export declare function Heading({ level, className, children }: HeadingProps): JSX.Element;
+export declare function Heading({ level, weight, className, children }: HeadingProps): JSX.Element;
 
 declare interface HeadingProps {
     /** Nivel semántico del encabezado (h1–h6). */
     level?: 1 | 2 | 3 | 4 | 5 | 6;
+    /** Peso tipográfico. Por defecto hereda el token del nivel (300). */
+    weight?: HeadingWeight;
     /** Clases adicionales para el elemento. */
     className?: string;
     children: React.ReactNode;
 }
+
+declare type HeadingWeight = 'thin' | 'extralight' | 'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
 
 export declare function HighlightSection({ text, align, textAlign, className }: HighlightSectionProps): JSX.Element;
 
