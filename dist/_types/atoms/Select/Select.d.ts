@@ -2,6 +2,8 @@ import './Select.css';
 export interface SelectOption {
     value: string;
     label: string;
+    /** Etiqueta accesible de la opción. Si no se pasa, usa label. */
+    'aria-label'?: string;
 }
 interface SelectProps {
     options: SelectOption[];

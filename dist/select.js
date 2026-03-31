@@ -24,9 +24,10 @@ function i({ options: i, value: a, defaultValue: o, placeholder: s = "Selecciona
 		}), /* @__PURE__ */ t(r.Portal, { children: /* @__PURE__ */ t(r.Content, {
 			className: ["select__content", l ? "select__content--dark" : ""].filter(Boolean).join(" "),
 			position: "popper",
-			children: /* @__PURE__ */ t(r.Viewport, { children: i.map(({ value: e, label: n }) => /* @__PURE__ */ t(r.Item, {
+			children: /* @__PURE__ */ t(r.Viewport, { children: i.map(({ value: e, label: n, "aria-label": i }) => /* @__PURE__ */ t(r.Item, {
 				value: e,
 				className: "select__item",
+				"aria-label": i,
 				children: /* @__PURE__ */ t(r.ItemText, { children: n })
 			}, e)) })
 		}) })]

@@ -5,6 +5,8 @@ import './Select.css';
 export interface SelectOption {
   value: string;
   label: string;
+  /** Etiqueta accesible de la opción. Si no se pasa, usa label. */
+  'aria-label'?: string;
 }
 
 interface SelectProps {
@@ -48,8 +50,8 @@ export function Select({
       <RadixSelect.Portal>
         <RadixSelect.Content className={['select__content', dark ? 'select__content--dark' : ''].filter(Boolean).join(' ')} position="popper">
           <RadixSelect.Viewport>
-            {options.map(({ value: v, label }) => (
-              <RadixSelect.Item key={v} value={v} className="select__item">
+            {options.map(({ value: v, label, 'aria-label': optionAriaLabel }) => (
+              <RadixSelect.Item key={v} value={v} className="select__item" aria-label={optionAriaLabel}>
                 <RadixSelect.ItemText>{label}</RadixSelect.ItemText>
               </RadixSelect.Item>
             ))}
