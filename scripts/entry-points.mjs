@@ -35,21 +35,14 @@ export const entryPoints = {
   // Organisms
   'contact-form':        'src/stories/organisms/ContactForm/ContactForm.tsx',
   'newsletter-form':     'src/stories/organisms/NewsletterForm/NewsletterForm.tsx',
-  // Sections (temporal)
-  'clients-section':     'src/stories/sections/ClientsSection/ClientsSection.tsx',
-  'contact-section':     'src/stories/sections/ContactSection/ContactSection.tsx',
-  'footer':              'src/stories/sections/Footer/Footer.tsx',
-  'header':              'src/stories/sections/Header/Header.tsx',
-  'highlight-section':   'src/stories/sections/HighlightSection/HighlightSection.tsx',
-  'methodology-section': 'src/stories/sections/MethodologySection/MethodologySection.tsx',
-  'projects-section':    'src/stories/sections/ProjectsSection/ProjectsSection.tsx',
-  'reviews-section':     'src/stories/sections/ReviewsSection/ReviewsSection.tsx',
-  'solutions-section':   'src/stories/sections/SolutionsSection/SolutionsSection.tsx',
+  // Templates
+  'project-template':    'src/stories/pages/Project/Project.tsx',
+  'legal-template':      'src/stories/pages/Legal/Legal.tsx',
 };
 
 export const clientComponents = new Set([
   'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'input', 'input-phone',
   'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form', 'input-field',
   'input-phone-field', 'textarea-field', 'contact-form', 'newsletter-form',
-  'clients-section', 'contact-section', 'footer', 'header', 'projects-section', 'reviews-section',
+  'project-template', 'legal-template',
 ]);
