@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import './ContactForm.css';
 import { Form } from '../../molecules/Form/Form';
 import { InputField } from '../../molecules/InputField/InputField';
@@ -27,7 +27,7 @@ interface ContactFormProps {
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
-export function ContactForm({
+export const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(function ContactForm({
   emailLabel = 'Email',
   emailPlaceholder = 'Escribe aquí tu correo electrónico',
   messageLabel = 'Mensaje',
@@ -45,7 +45,7 @@ export function ContactForm({
   success = false,
   successMessage = '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.',
   onSubmit,
-}: ContactFormProps) {
+}: ContactFormProps, ref) {
   const [wantCall, setWantCall] = useState(false);
 
   if (success) {
@@ -58,6 +58,7 @@ export function ContactForm({
 
   return (
     <Form
+      ref={ref}
       errors={errors}
       onSubmit={onSubmit}
       actions={
@@ -106,4 +107,4 @@ export function ContactForm({
       />
     </Form>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import './Form.css';
 
 interface FormProps {
@@ -7,9 +8,13 @@ interface FormProps {
   children: React.ReactNode;
 }
 
-export function Form({ errors, onSubmit, actions, children }: FormProps) {
+export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
+  { errors, onSubmit, actions, children },
+  ref,
+) {
   return (
     <form
+      ref={ref}
       className="form"
       onSubmit={onSubmit}
       noValidate
@@ -25,4 +30,4 @@ export function Form({ errors, onSubmit, actions, children }: FormProps) {
       {actions}
     </form>
   );
-}
+});

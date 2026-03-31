@@ -1,9 +1,11 @@
 'use client';
 import './form.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { forwardRef as n } from "react";
 //#region src/stories/molecules/Form/Form.tsx
-function n({ errors: n, onSubmit: r, actions: i, children: a }) {
+var r = n(function({ errors: n, onSubmit: r, actions: i, children: a }, o) {
 	return /* @__PURE__ */ t("form", {
+		ref: o,
 		className: "form",
 		onSubmit: r,
 		noValidate: !0,
@@ -20,6 +22,6 @@ function n({ errors: n, onSubmit: r, actions: i, children: a }) {
 			i
 		]
 	});
-}
+});
 //#endregion
-export { n as Form };
+export { r as Form };
