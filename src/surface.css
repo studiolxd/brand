@@ -91,6 +91,7 @@
   --form-separator-color: var(--color-text-dark);
   --form-error-color:     var(--color-error-dark);
   --form-helper-color:    var(--color-text-muted-dark);
+  --form-success-color:   var(--color-text-dark);
 
   /* ─── Carousel ────────────────────────────────────────────────────────── */
   --carousel-slide-border-color: var(--color-text-dark);

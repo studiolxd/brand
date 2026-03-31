@@ -66,6 +66,7 @@ export const WithErrors: Story = {
 };
 
 export const Success: Story = {
+  name: 'Success',
   args: {
     success: true,
     successMessage: '¡Gracias por suscribirte! Ya no te perderás ninguna de nuestras novedades.',

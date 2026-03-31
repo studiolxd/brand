@@ -58,6 +58,17 @@
 
 /* Dark surface — handled by surface.css via .surface-dark context class */
 
+.form__success {
+  margin: 0;
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+  font-family: var(--form-success-font-family);
+  font-size: var(--form-success-font-size);
+  font-weight: var(--form-success-font-weight);
+  line-height: var(--form-success-line-height);
+  color: var(--form-success-color);
+}
+
 /* Suprimir bordes propios de los hijos — el form dibuja el perímetro */
 /* Color = fondo del elemento para que el borde sea invisible sin cambiar el tamaño */
 /* Especificidad 0,3,0 — gana sobre .input.input--dark (0,2,0) */

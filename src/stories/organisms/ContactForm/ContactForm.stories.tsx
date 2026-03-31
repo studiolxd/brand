@@ -75,5 +75,6 @@ export const WithErrors: Story = {
 };
 
 export const Success: Story = {
+  name: 'Success',
   args: { success: true },
 };
