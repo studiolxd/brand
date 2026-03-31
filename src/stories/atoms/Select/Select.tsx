@@ -16,6 +16,8 @@ interface SelectProps {
   dark?: boolean;
   onValueChange?: (value: string) => void;
   id?: string;
+  /** Etiqueta accesible del trigger. Si no se pasa, usa el placeholder. */
+  'aria-label'?: string;
 }
 
 export function Select({
@@ -27,6 +29,7 @@ export function Select({
   dark,
   onValueChange,
   id,
+  'aria-label': ariaLabel,
 }: SelectProps) {
   return (
     <RadixSelect.Root
@@ -35,7 +38,7 @@ export function Select({
       disabled={disabled}
       onValueChange={onValueChange}
     >
-      <RadixSelect.Trigger className="select" id={id} aria-label={placeholder}>
+      <RadixSelect.Trigger className="select" id={id} aria-label={ariaLabel ?? placeholder}>
         <RadixSelect.Value placeholder={placeholder} />
         <RadixSelect.Icon asChild>
           <Chevron className="select__icon" size="sm" />
