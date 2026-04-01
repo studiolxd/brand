@@ -39,9 +39,13 @@ export function MethodologySection({
         {steps.map((step, i) => (
           <div key={step.text} className="methodology-section__step">
             <div className="methodology-section__number">
-              {String(i + 1).padStart(2, '0')}
+              <span className="methodology-section__number-inner">
+                {String(i + 1).padStart(2, '0')}
+              </span>
             </div>
-            <div className="methodology-section__text">{step.text}</div>
+            <div className="methodology-section__text">
+              <span className="methodology-section__text-inner">{step.text}</span>
+            </div>
           </div>
         ))}
       </div>

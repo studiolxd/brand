@@ -16,15 +16,18 @@
 
 /* ─── Page header ─────────────────────────────────────────── */
 .legal-page__header {
-  padding-block: var(--section-padding-block-xl);
+  min-height: calc(100vh - var(--header-height-overlay));
+  padding-block-end: var(--section-padding-block-xl);
   padding-inline: var(--section-padding-inline);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.legal-page__title {
-  font-size: var(--font-size-8);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-  letter-spacing: var(--letter-spacing-tight);
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
+  .legal-page__header {
+    min-height: calc(100vh - var(--header-height-inline));
+  }
 }
 
 /* ─── Accordion ───────────────────────────────────────────── */
@@ -87,7 +90,7 @@
 
 .legal-accordion__counter {
   font-size: var(--font-size-9);
-  font-weight: var(--font-weight-thin);
+  font-weight: var(--font-weight-light);
   line-height: var(--line-height-none);
   color: var(--color-primary);
   align-self: start;

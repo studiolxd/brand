@@ -67,7 +67,7 @@ export function Legal({ title, sections, navItems = DEFAULT_NAV_ITEMS, featuredL
       />
       <main id="main-content" className="legal-page__main">
         <div className="legal-page__header">
-          <Heading level={1} className="legal-page__title">{title}</Heading>
+          <Heading level={1} size={10} weight="bold">{title}</Heading>
         </div>
         <div className="legal-accordion">
           {sections.map((section, index) => (

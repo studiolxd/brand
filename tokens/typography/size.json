@@ -9,6 +9,6 @@
     "7":  { "$value": "2rem",     "$type": "dimension", "$description": "2rem (32px) — Titles" },
     "8":  { "$value": "2.5rem",   "$type": "dimension", "$description": "2.5rem (40px) — Large titles" },
     "9":  { "$value": "3.5rem",   "$type": "dimension", "$description": "3.5rem (56px) — Display" },
-    "10": { "$value": "4.5rem",   "$type": "dimension", "$description": "4.5rem (72px) — Large display" }
+    "10": { "$value": "6rem",     "$type": "dimension", "$description": "6rem (96px) — Large display" }
   }
 }
