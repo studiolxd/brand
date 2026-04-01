@@ -8,6 +8,7 @@
     "padding-inline":         { "$value": "{control.padding-inline}",    "$type": "dimension", "$description": "Padding inline del trigger" },
     "font-family":            { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Familia tipográfica" },
     "font-size":              { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Tamaño de fuente" },
+    "line-height":            { "$value": "{control.line-height}",       "$type": "number",    "$description": "Interlineado del trigger" },
     "font-weight":            { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Peso tipográfico" },
     "color":                  { "$value": "{color.text.default}",        "$type": "color",     "$description": "Color del texto" },
     "bg":                     { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del trigger" },

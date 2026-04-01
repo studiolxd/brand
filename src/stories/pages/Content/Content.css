@@ -18,6 +18,7 @@
   align-items: start;
   padding-block: var(--section-padding-block-md);
   padding-inline: var(--section-padding-inline);
+  border-block-end: var(--border-width-sm) solid var(--color-primary);
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {

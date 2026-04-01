@@ -144,6 +144,10 @@
 
 /* ---- Actions ---- */
 
+.header__actions .select {
+  padding-block: var(--button-padding-block);
+}
+
 .header__actions {
   margin-block-start: auto;
   padding-inline: var(--header-nav-padding-inline);

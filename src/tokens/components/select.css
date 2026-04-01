@@ -20,6 +20,7 @@
   --select-border-color: var(--color-primary); /** Color del borde */
   --select-padding-block: var(--control-padding-block); /** Padding block del trigger */
   --select-padding-inline: var(--control-padding-inline); /** Padding inline del trigger */
+  --select-line-height: var(--control-line-height); /** Interlineado del trigger */
   --select-font-weight: var(--font-weight-default); /** Peso tipográfico */
   --select-color: var(--color-text-default); /** Color del texto */
   --select-focus-ring-color: var(--color-primary); /** Color del anillo de foco */

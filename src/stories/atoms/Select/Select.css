@@ -10,6 +10,7 @@
 
   font-family: var(--select-font-family);
   font-size: var(--select-font-size);
+  line-height: var(--select-line-height);
   font-weight: var(--select-font-weight);
   color: var(--select-color);
   background-color: var(--select-bg);
