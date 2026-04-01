@@ -16,13 +16,13 @@
 
 @media (min-width: 768px) /* --breakpoint-md */ {
   .reviews-section .carousel {
-    --carousel-slide-size: calc(100% / 3);
+    --carousel-slide-size: calc(100% / 2);
   }
 }
 
 @media (min-width: 1440px) /* --breakpoint-2xl */ {
   .reviews-section .carousel {
-    --carousel-slide-size: calc(100% / 4);
+    --carousel-slide-size: calc(100% / 3);
   }
 }
 
