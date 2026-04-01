@@ -45,6 +45,18 @@
 
 .card-split__title {
   max-width: 50cqi;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .card-split__title {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
 }
 
 /* ─── Focus ring ──────────────────────────────────────────── */

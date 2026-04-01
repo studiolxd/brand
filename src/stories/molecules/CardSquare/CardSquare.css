@@ -34,6 +34,14 @@
   margin-block-start: auto;
 }
 
+/* ─── Título — máximo 3 líneas en móvil ──────────────────── */
+.card-square__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ─── Descripción — oculta en móvil y sm ─────────────────── */
 .card-square__description {
   display: none;
@@ -83,6 +91,12 @@
     z-index: 1;
     height: 100%;
     aspect-ratio: auto;
+  }
+
+  .card-square__title {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
   }
 
   .card-square__description {
