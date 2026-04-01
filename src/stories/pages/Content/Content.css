@@ -60,8 +60,6 @@
 
 .content-page__section-title,
 .content-page__section-content {
-  padding-block: var(--section-padding-block-md);
-  padding-inline: var(--section-padding-inline);
   background-color: var(--color-background-default);
 }
 
