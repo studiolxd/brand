@@ -1,0 +1,42 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HighlightStories from "./Highlight.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { highlightSectionTokens } from "../../../tokens/components/highlight-section";
+
+<Meta of={HighlightStories} />
+
+# Highlight
+
+Bloque de texto destacado para frases o declaraciones de impacto. Renderiza un `<p>` dentro de un `<div>` contenedor que gestiona el alineado y el ancho máximo en desktop.
+
+El tamaño y el peso son configurables por prop. Sin props, usa los tokens del componente (`font-size-9` / semibold por defecto en el token, `font-size-8` por defecto cuando se usa desde `HighlightSection`).
+
+## Default
+
+<Canvas of={HighlightStories.Default} />
+
+---
+
+## Tamaños
+
+La prop `size` acepta cualquier paso de la escala tipográfica (1–10) y sobreescribe el token de tamaño.
+
+<Canvas of={HighlightStories.Sizes} />
+
+---
+
+## Pesos
+
+La prop `weight` acepta cualquier paso de la escala de pesos y sobreescribe el token de peso.
+
+<Canvas of={HighlightStories.Weights} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={highlightSectionTokens} />
+
+## Props
+
+<ArgTypes of={HighlightStories} />

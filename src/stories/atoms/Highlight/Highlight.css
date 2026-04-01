@@ -28,3 +28,26 @@
 .highlight--text-left   { text-align: left; }
 .highlight--text-center { text-align: center; }
 .highlight--text-right  { text-align: right; }
+
+/* ─── Size modifiers ──────────────────────────────────────── */
+.highlight.highlight--size-1  p { font-size: var(--font-size-1); }
+.highlight.highlight--size-2  p { font-size: var(--font-size-2); }
+.highlight.highlight--size-3  p { font-size: var(--font-size-3); }
+.highlight.highlight--size-4  p { font-size: var(--font-size-4); }
+.highlight.highlight--size-5  p { font-size: var(--font-size-5); }
+.highlight.highlight--size-6  p { font-size: var(--font-size-6); }
+.highlight.highlight--size-7  p { font-size: var(--font-size-7); }
+.highlight.highlight--size-8  p { font-size: var(--font-size-8); }
+.highlight.highlight--size-9  p { font-size: var(--font-size-9); }
+.highlight.highlight--size-10 p { font-size: var(--font-size-10); }
+
+/* ─── Weight modifiers ────────────────────────────────────── */
+.highlight.highlight--thin       p { font-weight: var(--font-weight-thin); }
+.highlight.highlight--extralight p { font-weight: var(--font-weight-extralight); }
+.highlight.highlight--light      p { font-weight: var(--font-weight-light); }
+.highlight.highlight--regular    p { font-weight: var(--font-weight-regular); }
+.highlight.highlight--medium     p { font-weight: var(--font-weight-medium); }
+.highlight.highlight--semibold   p { font-weight: var(--font-weight-semibold); }
+.highlight.highlight--bold       p { font-weight: var(--font-weight-bold); }
+.highlight.highlight--extrabold  p { font-weight: var(--font-weight-extrabold); }
+.highlight.highlight--black      p { font-weight: var(--font-weight-black); }
