@@ -61,7 +61,7 @@ export function Article({
         <div className="article-page__body">
           <article className="article-detail">
             <Tag variant={tagVariant}>{category}</Tag>
-            <Heading level={1} className="article-detail__title">{title}</Heading>
+            <Heading level={1} size={8} className="article-detail__title">{title}</Heading>
             <p className="article-detail__intro">{description}</p>
             <img
               src={photo}
@@ -73,7 +73,7 @@ export function Article({
             <div className="article-detail__content">
               {sections.map((section) => (
                 <section key={section.title} className="article-detail__section">
-                  <Heading level={2} className="article-detail__section-title">{section.title}</Heading>
+                  <Heading level={2} size={7} className="article-detail__section-title">{section.title}</Heading>
                   <p className="article-detail__section-body">{section.body}</p>
                 </section>
               ))}

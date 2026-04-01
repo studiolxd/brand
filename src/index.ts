@@ -47,3 +47,4 @@ export { SolutionsSection } from './stories/sections/SolutionsSection/SolutionsS
 export { Home } from './stories/pages/Home/Home';
 export { Legal } from './stories/pages/Legal/Legal';
 export { Article } from './stories/pages/Article/Article';
+export { Content } from './stories/pages/Content/Content';

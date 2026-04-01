@@ -49,6 +49,7 @@
     "./courses-section.css":     "./dist/courses-section.css",
     "./article-template.css":    "./dist/article-template.css",
     "./legal-template.css":      "./dist/legal-template.css",
+    "./content-template.css":    "./dist/content-template.css",
     "./scss":                  "./src/tokens/scss/_index.scss",
     "./scss/global/*":         "./src/tokens/scss/global/_*.scss",
     "./scss/components/*":     "./src/tokens/scss/components/_*.scss",

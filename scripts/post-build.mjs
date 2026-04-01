@@ -14,6 +14,7 @@ const sectionCss = {
   'courses-section':     'src/stories/sections/CoursesSection/CoursesSection.css',
   'article-template':    'src/stories/pages/Article/Article.css',
   'legal-template':      'src/stories/pages/Legal/Legal.css',
+  'content-template':    'src/stories/pages/Content/Content.css',
 };
 
 const dist = 'dist';
