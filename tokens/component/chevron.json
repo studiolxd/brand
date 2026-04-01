@@ -1,8 +1,9 @@
 {
   "chevron": {
-    "width-default": { "$value": "max(1.5625vw, 24px)", "$type": "string", "$description": "Ancho por defecto (equivalente a md)" },
-    "width-sm":      { "$value": "max(0.75vw, 12px)",   "$type": "string", "$description": "Ancho tamaño pequeño" },
-    "width-md":      { "$value": "max(1.5625vw, 24px)", "$type": "string", "$description": "Ancho tamaño mediano" },
-    "width-lg":      { "$value": "max(3.125vw, 48px)",  "$type": "string", "$description": "Ancho tamaño grande" }
+    "size-xs": { "$value": "8px",  "$type": "dimension", "$description": "Tamaño extra pequeño" },
+    "size-sm": { "$value": "18px", "$type": "dimension", "$description": "Tamaño pequeño" },
+    "size-md": { "$value": "24px", "$type": "dimension", "$description": "Tamaño mediano" },
+    "size-lg": { "$value": "48px", "$type": "dimension", "$description": "Tamaño grande" },
+    "size-xl": { "$value": "64px", "$type": "dimension", "$description": "Tamaño extra grande" }
   }
 }

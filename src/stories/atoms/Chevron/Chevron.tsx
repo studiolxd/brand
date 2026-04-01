@@ -1,7 +1,7 @@
 import './Chevron.css';
 
 interface ChevronProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   className?: string;
 }
 
@@ -15,11 +15,11 @@ export function Chevron({ size, className }: ChevronProps) {
       className={classes}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 4 12 16"
+      viewBox="0 0 12 12"
       fill="none"
       stroke="currentColor"
     >
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M2 6 L8 12 L2 18" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 0 L9 6 L3 12" />
     </svg>
   );
 }

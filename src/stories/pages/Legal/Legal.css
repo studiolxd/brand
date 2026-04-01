@@ -56,6 +56,8 @@
   line-height: var(--text-h2-line-height);
   color: var(--text-h2-color);
   letter-spacing: var(--text-h2-letter-spacing);
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .legal-accordion__header {
@@ -76,7 +78,7 @@
   transition: none;
   /* layout propio */
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr var(--chevron-size-lg);
   align-items: start;
   gap: var(--spacing-6);
   padding-block: var(--spacing-5);
@@ -95,18 +97,18 @@
 
 .legal-accordion__counter {
   font-size: var(--font-size-9);
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-weight-black);
   line-height: var(--line-height-none);
   color: var(--color-primary);
   align-self: start;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .legal-accordion__chevron {
   transform: rotate(90deg);
   transition: transform var(--motion-duration-slow) var(--motion-easing-in-out);
-  align-self: start;
-  /* --chevron-width se hereda de .chevron--lg en el mismo elemento */
-  margin-block-start: calc(var(--chevron-width) * (2 / 16) * -1);
+  margin-block-start: calc(var(--chevron-size-lg) * -1 / 4);
 }
 
 .legal-accordion__item--open .legal-accordion__chevron {
@@ -128,6 +130,7 @@
   overflow: hidden;
   padding-inline: var(--spacing-6);
   max-width: var(--content-measure);
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
@@ -144,5 +147,4 @@
 
 .legal-accordion__item--open .legal-accordion__body-inner {
   padding-block-end: var(--spacing-6);
-  margin-inline: auto;
 }

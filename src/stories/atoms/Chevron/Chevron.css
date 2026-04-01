@@ -2,10 +2,13 @@
   display: block;
   height: auto;
   flex-shrink: 0;
-  --chevron-width: var(--chevron-width-md); /* md por defecto */
-  width: var(--chevron-width);
+  --chevron-size: var(--chevron-size-md); /* md por defecto */
+  width: var(--chevron-size);
+  height: var(--chevron-size);
 }
 
-.chevron--sm { --chevron-width: var(--chevron-width-sm); }
-.chevron--md { --chevron-width: var(--chevron-width-md); }
-.chevron--lg { --chevron-width: var(--chevron-width-lg); }
+.chevron--xs { --chevron-size: var(--chevron-size-xs); }
+.chevron--sm { --chevron-size: var(--chevron-size-sm); }
+.chevron--md { --chevron-size: var(--chevron-size-md); }
+.chevron--lg { --chevron-size: var(--chevron-size-lg); }
+.chevron--xl { --chevron-size: var(--chevron-size-xl); }
