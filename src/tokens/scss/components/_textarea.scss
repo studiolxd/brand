@@ -11,6 +11,7 @@ $textarea-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
 $textarea-font-size: 1.125rem; // Font size
 $textarea-font-weight: 300; // Font weight
 $textarea-line-height: 1.5; // Line height
+$textarea-min-height: 15rem; // 15rem (240px) — altura mínima del textarea
 $textarea-resize: vertical; // Resize direction
 $textarea-cursor: text; // Cursor
 $textarea-transition-duration: 150ms; // Transition duration

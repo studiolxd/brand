@@ -10,6 +10,7 @@
     "font-size":                        { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Font size" },
     "font-weight":                      { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Font weight" },
     "line-height":                      { "$value": "{line-height.normal}",      "$type": "number",    "$description": "Line height" },
+    "min-height":                        { "$value": "15rem",                     "$type": "dimension", "$description": "15rem (240px) — altura mínima del textarea" },
     "resize":                           { "$value": "vertical",                  "$type": "string",    "$description": "Resize direction" },
     "cursor":                           { "$value": "text",                      "$type": "string",    "$description": "Cursor" },
     "transition-duration":              { "$value": "{motion.duration.fast}",    "$type": "number",    "$description": "Transition duration" },

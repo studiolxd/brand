@@ -1,5 +1,6 @@
 .textarea {
   width: var(--textarea-width);
+  min-height: var(--textarea-min-height);
   padding-block: var(--textarea-padding-block);
   padding-inline: var(--textarea-padding-inline);
   border-radius: var(--textarea-border-radius);

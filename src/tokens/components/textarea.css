@@ -5,6 +5,7 @@
 :root {
   --textarea-border-style: solid; /** Border style */
   --textarea-width: 100%; /** Textarea is always full width */
+  --textarea-min-height: 15rem; /** 15rem (240px) — altura mínima del textarea */
   --textarea-resize: vertical; /** Resize direction */
   --textarea-cursor: text; /** Cursor */
   --textarea-placeholder-text-transform: uppercase; /** Placeholder text transform */
