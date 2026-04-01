@@ -6,5 +6,5 @@ $card-split-padding-block-start: 1rem; // Padding block start del panel de conte
 $card-split-padding-block-end: 0.75rem; // Padding block end del panel de contenido
 $card-split-gap: 0.75rem; // Separación entre elementos internos
 $card-split-panel-transition: 250ms; // Duración de la animación flex-grow del panel
-$card-split-desc-transition: 400ms; // Duración del fade de la descripción en hover
-$card-split-desc-transition-delay: 150ms; // Delay de la descripción (espera al panel)
+$card-split-desc-transition: 250ms; // Duración del fade de la descripción en hover
+$card-split-desc-transition-delay: 0ms; // Delay de la descripción (espera al panel)

@@ -90,13 +90,12 @@
   .card-split__primary {
     flex: 1;
     aspect-ratio: auto;
-    height: 100%;
     transition: flex-grow var(--card-split-panel-transition) var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
   }
 
   .card-split__description {
     display: block;
-    flex: 1;
+    height: 0;
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
@@ -108,7 +107,6 @@
   .card-split__photo {
     flex: 1;
     aspect-ratio: auto;
-    height: 100%;
     transition: flex-grow var(--card-split-panel-transition) var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
   }
 
@@ -131,10 +129,11 @@
 
   .card-split:hover .card-split__description,
   .card-split:focus-visible .card-split__description {
+    height: auto;
     opacity: 1;
     visibility: visible;
     transition:
-      opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-desc-transition-delay),
+      opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-panel-transition),
       visibility 0ms;
   }
 }
