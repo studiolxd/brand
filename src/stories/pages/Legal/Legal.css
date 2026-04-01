@@ -50,6 +50,7 @@
 }
 
 .legal-accordion__title {
+  grid-area: title;
   font-family: var(--text-h4-font-family);
   font-size: var(--text-h4-font-size);
   font-weight: var(--text-h4-font-weight);
@@ -78,7 +79,10 @@
   transition: none;
   /* layout propio */
   display: grid;
-  grid-template-columns: auto 1fr var(--chevron-size-lg);
+  grid-template-columns: 1fr var(--chevron-size-lg);
+  grid-template-areas:
+    "counter chevron"
+    "title   title";
   align-items: start;
   gap: var(--spacing-6);
   padding-block: var(--spacing-5);
@@ -89,6 +93,13 @@
   box-sizing: border-box;
 }
 
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .legal-accordion__header {
+    grid-template-columns: auto 1fr var(--chevron-size-lg);
+    grid-template-areas: "counter title chevron";
+  }
+}
+
 .legal-accordion__header:hover,
 .legal-accordion__header:active {
   background-color: transparent;
@@ -96,6 +107,7 @@
 }
 
 .legal-accordion__counter {
+  grid-area: counter;
   font-size: var(--font-size-9);
   font-weight: var(--font-weight-black);
   line-height: var(--line-height-none);
@@ -106,6 +118,7 @@
 }
 
 .legal-accordion__chevron {
+  grid-area: chevron;
   transform: rotate(90deg);
   transition: transform var(--motion-duration-slow) var(--motion-easing-in-out);
   margin-block-start: calc(var(--chevron-size-lg) * -1 / 4);
