@@ -1,9 +1,4 @@
 /* ─── Page wrapper ────────────────────────────────────────── */
-.content-page {
-  min-height: 100vh;
-  background-color: var(--color-background-default);
-}
-
 .content-page__main {
   padding-block-start: var(--header-height-overlay);
 }
@@ -15,22 +10,30 @@
 }
 
 /* ─── Body ────────────────────────────────────────────────── */
-.content-page__body {
-  padding-block: var(--section-padding-block-md);
-  padding-inline: var(--section-padding-inline);
-}
 
 .content-page__header {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--section-padding-block-xl);
   align-items: start;
+  padding-block: var(--section-padding-block-md);
+  padding-inline: var(--section-padding-inline);
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {
   .content-page__header {
-    min-height: 50vh;
+    min-height: calc(100vh - var(--header-height-overlay));
     grid-template-columns: 1fr 1fr;
+  }
+
+  .content-page__description {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+@media (min-width: 1440px) /* --breakpoint-2xl */ {
+  .content-page__header {
+    min-height: calc(100vh - var(--header-height-inline));
   }
 }
 
@@ -38,3 +41,37 @@
   font-size: var(--font-size-8);
   line-height: var(--line-height-snug);
 }
+
+/* ─── Content section ─────────────────────────────────────── */
+.content-page__section {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .content-page__section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .content-page__section--reversed .content-page__section-title { order: 2; }
+  .content-page__section--reversed .content-page__section-content { order: 1; }
+}
+
+.content-page__section-title,
+.content-page__section-content {
+  padding-block: var(--section-padding-block-md);
+  padding-inline: var(--section-padding-inline);
+  background-color: var(--color-background-default);
+}
+
+.content-page__section-title--secondary,
+.content-page__section-content--secondary { background-color: var(--color-secondary); }
+
+.content-page__section-title--tertiary,
+.content-page__section-content--tertiary  { background-color: var(--color-tertiary); }
+
+.content-page__section-title--quaternary,
+.content-page__section-content--quaternary { background-color: var(--color-quaternary); }
+
+.content-page__section-title--quinary,
+.content-page__section-content--quinary   { background-color: var(--color-quinary); }

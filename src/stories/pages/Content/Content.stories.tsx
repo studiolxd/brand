@@ -14,7 +14,20 @@ type Story = StoryObj<typeof Content>;
 
 export const Default: Story = {
   args: {
-    title: 'Contenidos elearning',
+    title: 'Soluciones',
     description: 'Descubre nuestra colección de recursos y materiales para el aprendizaje digital.',
+    sections: [
+      { title: 'Contenidos elearning', color: 'secondary', colorSide: 'left' },
+      { title: 'Plataformas elearning', color: 'tertiary', colorSide: 'right' },
+    ],
+    contactSection: {
+      title: '¿Hablamos?',
+      whatsappTitle: 'O escríbenos por WhatsApp',
+      whatsappLabel: 'Abrir WhatsApp',
+      whatsappHref: 'https://wa.me/34600000000',
+      form: {
+        privacyLabel: 'He leído y acepto la política de privacidad',
+      },
+    },
   },
 };
