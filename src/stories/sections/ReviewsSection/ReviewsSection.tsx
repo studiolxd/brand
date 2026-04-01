@@ -43,8 +43,8 @@ export function ReviewsSection({ id, title = 'Lo que dice nuestro alumnado', rev
                   className="review-card__avatar"
                 />
                 <div className="review-card__identity">
-                  <Heading level={3} className="review-card__name">{review.author}</Heading>
-                  <Heading level={4} className="review-card__role">{review.role}</Heading>
+                  <Heading level={3} size={7} className="review-card__name">{review.author}</Heading>
+                  <Heading level={4} size={6} className="review-card__role">{review.role}</Heading>
                 </div>
               </div>
               <blockquote className="review-card__quote">{review.quote}</blockquote>
