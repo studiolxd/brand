@@ -1,6 +1,7 @@
 import './CardSquare.css';
 import { Arrow } from '../../atoms/Arrow/Arrow';
 import { Heading } from '../../atoms/Heading/Heading';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { CardColor } from '../Card/Card';
 
@@ -34,7 +35,7 @@ export function CardSquare({ href, title, description, ctaLabel, color, image }:
       />
       <div className="card-square__body">
         <Heading level={2} size={8} weight="semibold" className="card-square__title">{title}</Heading>
-        <p className="card-square__description">{description}</p>
+        <Paragraph size="large" className="card-square__description">{description}</Paragraph>
         <Arrow className="card-square__arrow" size="lg" />
         <VisuallyHidden>{ctaLabel}</VisuallyHidden>
       </div>

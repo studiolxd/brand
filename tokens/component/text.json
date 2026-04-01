@@ -80,7 +80,7 @@
         "line-height": { "$value": "{line-height.relaxed}",  "$type": "number",    "$description": "Small paragraph line height" }
       },
       "large": {
-        "font-size":   { "$value": "{font-size.4}",          "$type": "dimension", "$description": "Large paragraph font size (20px)" },
+        "font-size":   { "$value": "{font-size.5}",          "$type": "dimension", "$description": "Large paragraph font size (24px)" },
         "line-height": { "$value": "{line-height.snug}",     "$type": "number",    "$description": "Large paragraph line height" }
       }
     },

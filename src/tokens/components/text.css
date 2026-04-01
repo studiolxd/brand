@@ -25,7 +25,7 @@
   --text-h6-letter-spacing: var(--letter-spacing-normal); /** H6 letter spacing */
   --text-paragraph-small-font-size: var(--font-size-1); /** Small paragraph font size (14px) */
   --text-paragraph-small-line-height: var(--line-height-relaxed); /** Small paragraph line height */
-  --text-paragraph-large-font-size: var(--font-size-4); /** Large paragraph font size (20px) */
+  --text-paragraph-large-font-size: var(--font-size-5); /** Large paragraph font size (24px) */
   --text-paragraph-large-line-height: var(--line-height-snug); /** Large paragraph line height */
   --text-list-gap: var(--spacing-2); /** Spacing between list items (8px) */
   --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
