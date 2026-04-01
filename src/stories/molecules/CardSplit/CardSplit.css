@@ -1,5 +1,6 @@
 /* ─── Base ────────────────────────────────────────────────── */
 .card-split {
+  container-type: inline-size;
   display: flex;
   aspect-ratio: 2 / 1;
   overflow: hidden;
@@ -69,14 +70,7 @@
 }
 
 .card-split__title {
-  max-width: 100%;
-  transition: max-width var(--card-split-panel-transition) var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
-}
-
-.card-split:hover .card-split__title,
-.card-split:focus-visible .card-split__title {
-  max-width: 50%;
-  transition-delay: 0ms;
+  max-width: 50cqi;
 }
 
 .card-split:hover .card-split__description,
