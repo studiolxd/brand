@@ -7,7 +7,7 @@
 
 .reviews-section > .heading {
   padding-inline: var(--section-padding-inline);
-  padding-block-end: var(--section-padding-block-md);
+  padding-block-end: var(--section-padding-block-xl);
 }
 
 .reviews-section .carousel {
