@@ -46,8 +46,8 @@
 }
 
 .methodology-section__number-inner {
-  font-size: var(--font-size-10);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-9);
+  font-weight: var(--font-weight-black);
   line-height: var(--line-height-none);
   color: var(--methodology-section-number-color);
   text-box-trim: trim-both;
