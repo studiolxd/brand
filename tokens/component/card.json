@@ -1,7 +1,7 @@
 {
   "card": {
     "padding-inline":           { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding horizontal" },
-    "padding-block-start":      { "$value": "{spacing.6}", "$type": "dimension", "$description": "Padding block start" },
+    "padding-block-start":      { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding block start" },
     "padding-block-end":        { "$value": "{spacing.3}", "$type": "dimension", "$description": "Padding block end" },
     "gap":                      { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre elementos internos" },
     "description-font-size":    { "$value": "{font-size.4}", "$type": "dimension", "$description": "Tamaño de fuente de la descripción" },
