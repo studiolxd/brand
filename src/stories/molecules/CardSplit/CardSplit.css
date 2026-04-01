@@ -1,52 +1,39 @@
-/* ─── Base ────────────────────────────────────────────────── */
+/* ─── Base (mobile) — color block arriba + imagen abajo ──── */
 .card-split {
   container-type: inline-size;
+  position: relative;
   display: flex;
-  aspect-ratio: 2 / 1;
-  overflow: hidden;
+  flex-direction: column;
   text-decoration: none;
   color: var(--color-text-default);
 }
 
 /* ─── Panel izquierdo (color) ─────────────────────────────── */
 .card-split__primary {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  aspect-ratio: 2 / 1;
   padding-inline: var(--card-split-padding-inline);
   padding-block-start: var(--card-split-padding-block-start);
   padding-block-end: var(--card-split-padding-block-end);
   gap: var(--card-split-gap);
   overflow: hidden;
-  transition: flex-grow var(--card-split-panel-transition) var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
 }
 
 .card-split__arrow {
   margin-block-start: auto;
 }
 
-/* ─── Descripción — siempre en layout, solo visible al hover ─ */
-/*
-  No usamos max-height trick: la descripción tiene flex:1 y siempre
-  ocupa espacio (clipped por overflow:hidden del primary). Solo cambia
-  opacity/visibility → sin jump en la arrow al colapsar.
-*/
+/* ─── Descripción — oculta en móvil ──────────────────────── */
 .card-split__description {
-  flex: 1;
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-desc-transition-delay),
-    visibility 0ms var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
+  display: none;
 }
 
 /* ─── Panel derecho (imagen) ──────────────────────────────── */
 .card-split__photo {
-  flex: 1;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
-  transition: flex-grow var(--card-split-panel-transition) var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
 }
 
 .card-split__photo img {
@@ -56,37 +43,11 @@
   display: block;
 }
 
-/* ─── Hover — el color crece, la foto se encoge ───────────── */
-.card-split:hover .card-split__primary,
-.card-split:focus-visible .card-split__primary {
-  flex-grow: 2;
-  transition-delay: 0ms;
-}
-
-.card-split:hover .card-split__photo,
-.card-split:focus-visible .card-split__photo {
-  flex-grow: 0;
-  transition-delay: 0ms;
-}
-
 .card-split__title {
   max-width: 50cqi;
 }
 
-.card-split:hover .card-split__description,
-.card-split:focus-visible .card-split__description {
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-desc-transition-delay),
-    visibility 0ms;
-}
-
 /* ─── Focus ring ──────────────────────────────────────────── */
-.card-split {
-  position: relative;
-}
-
 .card-split:focus {
   outline: none;
 }
@@ -105,3 +66,63 @@
 .card-split.card-split--tertiary   .card-split__primary { background-color: var(--color-tertiary); }
 .card-split.card-split--quaternary .card-split__primary { background-color: var(--color-quaternary); }
 .card-split.card-split--quinary    .card-split__primary { background-color: var(--color-quinary); }
+
+/* ─── Desktop md+ — layout horizontal con hover ──────────── */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .card-split {
+    flex-direction: row;
+    aspect-ratio: 2 / 1;
+    overflow: hidden;
+  }
+
+  .card-split__primary {
+    flex: 1;
+    aspect-ratio: auto;
+    height: 100%;
+    transition: flex-grow var(--card-split-panel-transition) var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
+  }
+
+  .card-split__description {
+    display: block;
+    flex: 1;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-desc-transition-delay),
+      visibility 0ms var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
+  }
+
+  .card-split__photo {
+    flex: 1;
+    aspect-ratio: auto;
+    height: 100%;
+    transition: flex-grow var(--card-split-panel-transition) var(--motion-easing-default) calc(var(--card-split-desc-transition) + var(--card-split-desc-transition-delay));
+  }
+
+  .card-split__photo img {
+    height: 100%;
+  }
+
+  /* ─── Hover — el color crece, la foto se encoge ─────────── */
+  .card-split:hover .card-split__primary,
+  .card-split:focus-visible .card-split__primary {
+    flex-grow: 2;
+    transition-delay: 0ms;
+  }
+
+  .card-split:hover .card-split__photo,
+  .card-split:focus-visible .card-split__photo {
+    flex-grow: 0;
+    transition-delay: 0ms;
+  }
+
+  .card-split:hover .card-split__description,
+  .card-split:focus-visible .card-split__description {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity var(--card-split-desc-transition) var(--motion-easing-default) var(--card-split-desc-transition-delay),
+      visibility 0ms;
+  }
+}

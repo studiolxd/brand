@@ -1,32 +1,29 @@
-/* ─── Base ────────────────────────────────────────────────── */
+/* ─── Base (mobile) — color block arriba + imagen abajo ──── */
 .card-square {
   position: relative;
-  display: block;
-  aspect-ratio: 1;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: var(--color-text-default);
 }
 
-/* ─── Imagen de fondo ─────────────────────────────────────── */
+/* ─── Imagen ──────────────────────────────────────────────── */
 .card-square__image {
-  position: absolute;
-  inset: 0;
+  order: 2;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 2 / 1;
   object-fit: cover;
-  transition: opacity var(--card-square-img-transition) var(--motion-easing-default);
+  display: block;
 }
 
-/* ─── Contenido (encima de la imagen, z-index 1) ─────────── */
+/* ─── Contenido (color block) ─────────────────────────────── */
 .card-square__body {
-  position: relative;
-  z-index: 1;
+  order: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
-  height: 100%;
+  aspect-ratio: 2 / 1;
   padding-inline: var(--card-square-padding-inline);
   padding-block-start: var(--card-square-padding-block-start);
   padding-block-end: var(--card-square-padding-block-end);
@@ -37,28 +34,9 @@
   margin-block-start: auto;
 }
 
-/* ─── Descripción — oculta por defecto ───────────────────── */
+/* ─── Descripción — oculta en móvil y sm ─────────────────── */
 .card-square__description {
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity var(--card-square-desc-transition) var(--motion-easing-default) var(--card-square-desc-transition-delay),
-    visibility 0ms var(--motion-easing-default) calc(var(--card-square-desc-transition) + var(--card-square-desc-transition-delay));
-}
-
-/* ─── Hover ───────────────────────────────────────────────── */
-.card-square:hover .card-square__image,
-.card-square:focus-visible .card-square__image {
-  opacity: 0;
-}
-
-.card-square:hover .card-square__description,
-.card-square:focus-visible .card-square__description {
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity var(--card-square-desc-transition) var(--motion-easing-default) var(--card-square-desc-transition-delay),
-    visibility 0ms;
+  display: none;
 }
 
 /* ─── Focus ring ──────────────────────────────────────────── */
@@ -75,8 +53,58 @@
   pointer-events: none;
 }
 
-/* ─── Colores de fondo (overlay en hover) ─────────────────── */
+/* ─── Colores del bloque ──────────────────────────────────── */
 .card-square.card-square--secondary  { background-color: var(--color-secondary); }
 .card-square.card-square--tertiary   { background-color: var(--color-tertiary); }
 .card-square.card-square--quaternary { background-color: var(--color-quaternary); }
 .card-square.card-square--quinary    { background-color: var(--color-quinary); }
+
+/* ─── Desktop md+ — square con hover ─────────────────────── */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .card-square {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .card-square__image {
+    order: unset;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    transition: opacity var(--card-square-img-transition) var(--motion-easing-default);
+  }
+
+  .card-square__body {
+    order: unset;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .card-square__description {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--card-square-desc-transition) var(--motion-easing-default) var(--card-square-desc-transition-delay),
+      visibility 0ms var(--motion-easing-default) calc(var(--card-square-desc-transition) + var(--card-square-desc-transition-delay));
+  }
+
+  .card-square:hover .card-square__image,
+  .card-square:focus-visible .card-square__image {
+    opacity: 0;
+  }
+
+  .card-square:hover .card-square__description,
+  .card-square:focus-visible .card-square__description {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity var(--card-square-desc-transition) var(--motion-easing-default) var(--card-square-desc-transition-delay),
+      visibility 0ms;
+  }
+}
