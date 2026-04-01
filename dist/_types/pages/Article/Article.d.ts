@@ -1,12 +1,12 @@
 import type { NavItem } from '../../sections/Header/Header';
-import './Project.css';
+import './Article.css';
 type TagVariant = 'default' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
-interface ProjectSection {
+interface ArticleSection {
     title: string;
     body: string;
 }
-interface ProjectProps {
-    /** Categoría del proyecto. */
+interface ArticleProps {
+    /** Categoría del artículo. */
     category: string;
     /** Variante de color del tag de categoría. */
     tagVariant?: TagVariant;
@@ -14,16 +14,16 @@ interface ProjectProps {
     photo: string;
     /** Texto alternativo de la imagen. */
     photoAlt?: string;
-    /** Título del proyecto. */
+    /** Título del artículo. */
     title: string;
     /** Párrafo introductorio. */
     description: string;
     /** Secciones de contenido. */
-    sections: ProjectSection[];
+    sections: ArticleSection[];
     /** Elementos de navegación. */
     navItems?: NavItem[];
     /** Enlace destacado del header. */
     featuredLink?: NavItem;
 }
-export declare function Project({ category, tagVariant, photo, photoAlt, title, description, sections, navItems, featuredLink, }: ProjectProps): import("react/jsx-runtime").JSX.Element;
+export declare function Article({ category, tagVariant, photo, photoAlt, title, description, sections, navItems, featuredLink, }: ArticleProps): import("react/jsx-runtime").JSX.Element;
 export {};

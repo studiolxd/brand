@@ -11,6 +11,7 @@ function a({ href: a, title: o, description: s, ctaLabel: c, color: l }) {
 		children: [
 			/* @__PURE__ */ r(t, {
 				level: 2,
+				size: 8,
 				weight: "semibold",
 				children: o
 			}),

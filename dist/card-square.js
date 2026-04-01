@@ -1,38 +1,41 @@
 import './card-square.css';
 import { Arrow as e } from "./arrow.js";
 import { Heading as t } from "./heading.js";
-import { VisuallyHidden as n } from "./visually-hidden.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { Paragraph as n } from "./paragraph.js";
+import { VisuallyHidden as r } from "./visually-hidden.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/CardSquare/CardSquare.tsx
-function a({ href: a, title: o, description: s, ctaLabel: c, color: l, image: u }) {
-	return /* @__PURE__ */ i("a", {
-		href: a,
-		className: ["card-square", `card-square--${l}`].join(" "),
-		children: [/* @__PURE__ */ r("img", {
+function o({ href: o, title: s, description: c, ctaLabel: l, color: u, image: d }) {
+	return /* @__PURE__ */ a("a", {
+		href: o,
+		className: ["card-square", `card-square--${u}`].join(" "),
+		children: [/* @__PURE__ */ i("img", {
 			className: "card-square__image",
-			src: u.src,
-			alt: u.alt
-		}), /* @__PURE__ */ i("div", {
+			src: d.src,
+			alt: d.alt
+		}), /* @__PURE__ */ a("div", {
 			className: "card-square__body",
 			children: [
-				/* @__PURE__ */ r(t, {
+				/* @__PURE__ */ i(t, {
 					level: 2,
+					size: 8,
 					weight: "semibold",
 					className: "card-square__title",
-					children: o
-				}),
-				/* @__PURE__ */ r("p", {
-					className: "card-square__description",
 					children: s
 				}),
-				/* @__PURE__ */ r(e, {
+				/* @__PURE__ */ i(n, {
+					size: "large",
+					className: "card-square__description",
+					children: c
+				}),
+				/* @__PURE__ */ i(e, {
 					className: "card-square__arrow",
 					size: "lg"
 				}),
-				/* @__PURE__ */ r(n, { children: c })
+				/* @__PURE__ */ i(r, { children: l })
 			]
 		})]
 	});
 }
 //#endregion
-export { a as CardSquare };
+export { o as CardSquare };

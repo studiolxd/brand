@@ -1,21 +1,21 @@
 /* ─── Page wrapper ────────────────────────────────────────── */
-.project-page {
+.article-page {
   min-height: 100vh;
   background-color: var(--color-background-default);
 }
 
-.project-page__main {
+.article-page__main {
   padding-block-start: var(--header-height-overlay);
 }
 
 @media (min-width: 1440px) /* --breakpoint-2xl */ {
-  .project-page__main {
+  .article-page__main {
     padding-block-start: var(--header-height-inline);
   }
 }
 
 /* ─── Centred body ────────────────────────────────────────── */
-.project-page__body {
+.article-page__body {
   max-width: var(--content-measure);
   margin-inline: auto;
   padding-block: var(--section-padding-block-xl);
@@ -23,20 +23,20 @@
 }
 
 /* ─── Article ─────────────────────────────────────────────── */
-.project-detail {
+.article-detail {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--spacing-5);
 }
 
-.project-detail__intro {
+.article-detail__intro {
   font-size: var(--font-size-3);
   line-height: var(--line-height-normal);
   color: var(--color-text-muted);
 }
 
-.project-detail__photo {
+.article-detail__photo {
   width: 100%;
   height: auto;
   aspect-ratio: 3 / 2;
@@ -44,20 +44,20 @@
   display: block;
 }
 
-/* ─── Content sections ────────────────────────────────────────── */
-.project-detail__content {
+/* ─── Content sections ────────────────────────────────────── */
+.article-detail__content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-5);
 }
 
-.project-detail__section {
+.article-detail__section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
 }
 
-.project-detail__section-body {
+.article-detail__section-body {
   font-size: var(--font-size-2);
   line-height: var(--line-height-relaxed);
 }

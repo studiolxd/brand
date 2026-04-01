@@ -1,16 +1,16 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
-import * as ProjectStories from "./Project.stories";
+import * as ArticleStories from "./Article.stories";
 
-<Meta of={ProjectStories} />
+<Meta of={ArticleStories} />
 
-# Proyecto (template)
+# Article (template)
 
-Template reutilizable para páginas de caso de estudio o proyecto individual. A diferencia de `Pages/Home`, esta plantilla recibe todo su contenido mediante props y puede instanciarse para cualquier proyecto del portfolio.
+Template reutilizable para páginas de artículo, caso de estudio o proyecto individual. A diferencia de `Pages/Home`, esta plantilla recibe todo su contenido mediante props y puede instanciarse para cualquier artículo del portfolio.
 
 ## Estructura de landmarks
 
 - `<header>` — navegación principal (componente `Header`)
-- `<main id="main-content">` — contenido del proyecto; destino del skip link
+- `<main id="main-content">` — contenido del artículo; destino del skip link
 - `<footer>` — pie de página (componente `Footer`)
 
 El `id="main-content"` garantiza que el skip link del `Header` pueda llevar al usuario directamente al artículo, cumpliendo WCAG 2.4.1.
@@ -20,20 +20,20 @@ El `id="main-content"` garantiza que el skip link del `Header` pueda llevar al u
 Dentro de `<main>` la estructura es:
 
 ```
-h1 — título del proyecto (prop title)
+h1 — título del artículo (prop title)
 ├── h2 — primera sección de contenido (prop sections[0].title)
 ├── h2 — segunda sección
 └── h2 — …
 ```
 
-El `h1` es el título del proyecto pasado mediante la prop `title`. Cada elemento de `sections` genera un `<section>` con su propio `h2`, formando una jerarquía plana y válida.
+El `h1` es el título del artículo pasado mediante la prop `title`. Cada elemento de `sections` genera un `<section>` con su propio `h2`, formando una jerarquía plana y válida.
 
-## Artículo del proyecto
+## Artículo
 
 El contenido principal se renderiza dentro de un elemento `<article>` con las siguientes partes en orden:
 
-1. `Tag` — categoría del proyecto (prop `category`, coloreada con `tagVariant`)
-2. `Heading level={1}` — título del proyecto
+1. `Tag` — categoría del artículo (prop `category`, coloreada con `tagVariant`)
+2. `Heading level={1}` — título del artículo
 3. Párrafo introductorio — resumen ejecutivo (prop `description`)
 4. Imagen destacada — `aspect-ratio: 3/2`, ocupa el 100 % del ancho disponible; el `alt` se toma de `photoAlt` o, si no se proporciona, del `title`
 5. Secciones de contenido — lista de `{ title, body }` pasada en `sections`
@@ -44,8 +44,8 @@ Las props `navItems` y `featuredLink` permiten personalizar la navegación del `
 
 ## Vista previa
 
-<Canvas of={ProjectStories.Default} />
+<Canvas of={ArticleStories.Default} />
 
 ## Props
 
-<ArgTypes of={ProjectStories} />
+<ArgTypes of={ArticleStories} />

@@ -12,7 +12,7 @@ const sectionCss = {
   'reviews-section':     'src/stories/sections/ReviewsSection/ReviewsSection.css',
   'solutions-section':   'src/stories/sections/SolutionsSection/SolutionsSection.css',
   'courses-section':     'src/stories/sections/CoursesSection/CoursesSection.css',
-  'project-template':    'src/stories/pages/Project/Project.css',
+  'article-template':    'src/stories/pages/Article/Article.css',
   'legal-template':      'src/stories/pages/Legal/Legal.css',
 };
 

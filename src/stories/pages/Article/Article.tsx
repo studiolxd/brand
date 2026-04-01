@@ -5,17 +5,17 @@ import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
 import { DEFAULT_NAV_ITEMS, DEFAULT_FEATURED_LINK } from '../../constants/navigation';
-import './Project.css';
+import './Article.css';
 
 type TagVariant = 'default' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
 
-interface ProjectSection {
+interface ArticleSection {
   title: string;
   body: string;
 }
 
-interface ProjectProps {
-  /** Categoría del proyecto. */
+interface ArticleProps {
+  /** Categoría del artículo. */
   category: string;
   /** Variante de color del tag de categoría. */
   tagVariant?: TagVariant;
@@ -23,19 +23,19 @@ interface ProjectProps {
   photo: string;
   /** Texto alternativo de la imagen. */
   photoAlt?: string;
-  /** Título del proyecto. */
+  /** Título del artículo. */
   title: string;
   /** Párrafo introductorio. */
   description: string;
   /** Secciones de contenido. */
-  sections: ProjectSection[];
+  sections: ArticleSection[];
   /** Elementos de navegación. */
   navItems?: NavItem[];
   /** Enlace destacado del header. */
   featuredLink?: NavItem;
 }
 
-export function Project({
+export function Article({
   category,
   tagVariant = 'default',
   photo,
@@ -45,9 +45,9 @@ export function Project({
   sections,
   navItems = DEFAULT_NAV_ITEMS,
   featuredLink = DEFAULT_FEATURED_LINK,
-}: ProjectProps) {
+}: ArticleProps) {
   return (
-    <div className="project-page">
+    <div className="article-page">
       <Header
         navItems={navItems}
         featuredLink={featuredLink}
@@ -57,24 +57,24 @@ export function Project({
           </Button>
         }
       />
-      <main id="main-content" className="project-page__main">
-        <div className="project-page__body">
-          <article className="project-detail">
+      <main id="main-content" className="article-page__main">
+        <div className="article-page__body">
+          <article className="article-detail">
             <Tag variant={tagVariant}>{category}</Tag>
-            <Heading level={1} className="project-detail__title">{title}</Heading>
-            <p className="project-detail__intro">{description}</p>
+            <Heading level={1} className="article-detail__title">{title}</Heading>
+            <p className="article-detail__intro">{description}</p>
             <img
               src={photo}
               alt={photoAlt ?? title}
-              className="project-detail__photo"
+              className="article-detail__photo"
               width={1200}
               height={800}
             />
-            <div className="project-detail__content">
+            <div className="article-detail__content">
               {sections.map((section) => (
-                <section key={section.title} className="project-detail__section">
-                  <Heading level={2} className="project-detail__section-title">{section.title}</Heading>
-                  <p className="project-detail__section-body">{section.body}</p>
+                <section key={section.title} className="article-detail__section">
+                  <Heading level={2} className="article-detail__section-title">{section.title}</Heading>
+                  <p className="article-detail__section-body">{section.body}</p>
                 </section>
               ))}
             </div>

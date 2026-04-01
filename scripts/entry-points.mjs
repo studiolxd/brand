@@ -32,13 +32,10 @@ export const entryPoints = {
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
   'input-phone-field':   'src/stories/molecules/InputPhoneField/InputPhoneField.tsx',
   'textarea-field':      'src/stories/molecules/TextareaField/TextareaField.tsx',
-  // Organisms
-  'contact-form':        'src/stories/organisms/ContactForm/ContactForm.tsx',
-  'newsletter-form':     'src/stories/organisms/NewsletterForm/NewsletterForm.tsx',
 };
 
 export const clientComponents = new Set([
   'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'input', 'input-phone',
   'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form', 'input-field',
-  'input-phone-field', 'textarea-field', 'contact-form', 'newsletter-form',
+  'input-phone-field', 'textarea-field',
 ]);

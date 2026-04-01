@@ -1,6 +1,23 @@
 import './ContactSection.css';
-import { ContactForm } from '../../organisms/ContactForm/ContactForm';
-type ContactFormProps = React.ComponentPropsWithoutRef<typeof ContactForm>;
+interface ContactFormProps {
+    emailLabel?: string;
+    emailPlaceholder?: string;
+    messageLabel?: string;
+    messagePlaceholder?: string;
+    messageRows?: number;
+    wantCallLabel?: string;
+    phoneLabel?: string;
+    phonePlaceholder?: string;
+    phoneHelper?: string;
+    privacyLabel: React.ReactNode;
+    buttonLabel?: string;
+    submitting?: boolean;
+    submittingLabel?: string;
+    errors?: string[];
+    success?: boolean;
+    successMessage?: string;
+    onSubmit?: React.FormEventHandler<HTMLFormElement>;
+}
 interface ContactSectionProps {
     id?: string;
     /** Título del bloque de contacto. */

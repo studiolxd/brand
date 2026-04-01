@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Project } from './Project';
+import { Article } from './Article';
 
-const meta: Meta<typeof Project> = {
-  title: 'Templates/Project',
-  component: Project,
+const meta: Meta<typeof Article> = {
+  title: 'Templates/Article',
+  component: Article,
   parameters: { layout: 'fullscreen' },
 };
 
 export default meta;
-type Story = StoryObj<typeof Project>;
+type Story = StoryObj<typeof Article>;
 
-export const Default: Story = {  
+export const Default: Story = {
   args: {
     category: 'E-learning',
     tagVariant: 'secondary',

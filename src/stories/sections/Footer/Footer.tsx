@@ -1,4 +1,7 @@
-import { NewsletterForm } from '../../organisms/NewsletterForm/NewsletterForm';
+import { Form } from '../../molecules/Form/Form';
+import { InputField } from '../../molecules/InputField/InputField';
+import { CheckboxField } from '../../molecules/CheckboxField/CheckboxField';
+import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Logo } from '../../atoms/Logo/Logo';
 import { Link } from '../../atoms/Link/Link';
@@ -23,9 +26,26 @@ export function Footer({ id }: FooterProps) {
       </div>
       <div className="footer__col footer__col--2">
         <Heading level={3}>Suscríbete a nuestra newsletter</Heading>
-        <NewsletterForm
-          privacyLabel={<>He leído la <Link href="#">política de privacidad</Link> y consiento recibir la newsletter</>}
-        />
+        <div className="newsletter-form">
+          <Form
+            actions={
+              <Button variant="form" type="submit">Suscríbeme a la newsletter</Button>
+            }
+          >
+            <InputField
+              id="newsletter-email"
+              label="Email"
+              labelHidden
+              type="email"
+              placeholder="Escribe aquí tu correo electrónico"
+            />
+            <CheckboxField
+              id="newsletter-privacy"
+              label={<>He leído la <Link href="#">política de privacidad</Link> y consiento recibir la newsletter</>}
+            />
+          </Form>
+          <div className="form-spacer" />
+        </div>
       </div>
       <div className="footer__col footer__col--3">
         <ul className="footer__social">

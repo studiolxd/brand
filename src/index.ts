@@ -32,10 +32,6 @@ export { InputField } from './stories/molecules/InputField/InputField';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 
-// ─── Organisms ───────────────────────────────────────────────
-export { ContactForm } from './stories/organisms/ContactForm/ContactForm';
-export { NewsletterForm } from './stories/organisms/NewsletterForm/NewsletterForm';
-
 // ─── Sections ────────────────────────────────────────────────
 export { ClientsSection } from './stories/sections/ClientsSection/ClientsSection';
 export { ContactSection } from './stories/sections/ContactSection/ContactSection';
@@ -50,4 +46,4 @@ export { SolutionsSection } from './stories/sections/SolutionsSection/SolutionsS
 // ─── Page templates ──────────────────────────────────────────
 export { Home } from './stories/pages/Home/Home';
 export { Legal } from './stories/pages/Legal/Legal';
-export { Project } from './stories/pages/Project/Project';
+export { Article } from './stories/pages/Article/Article';
