@@ -1,5 +1,6 @@
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import './MethodologySection.css';
 
 interface MethodologyStep {
@@ -44,7 +45,7 @@ export function MethodologySection({
               </span>
             </div>
             <div className="methodology-section__text">
-              <span className="methodology-section__text-inner">{step.text}</span>
+              <Paragraph size="large" className="methodology-section__text-inner">{step.text}</Paragraph>
             </div>
           </div>
         ))}
