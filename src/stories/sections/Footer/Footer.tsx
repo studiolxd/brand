@@ -48,15 +48,15 @@ export function Footer({ id }: FooterProps) {
         </div>
       </div>
       <div className="footer__col footer__col--3">
+        <address className="footer__contact">
+          <Link href="mailto:hello@studiolxd.com">hello@studiolxd.com</Link>
+          <Link href="tel:+34623752862">+34 623 752 862</Link>
+        </address>
         <ul className="footer__social">
           <li><Link href="#" external className="footer__social-link">LinkedIn</Link></li>
           <li><Link href="#" external className="footer__social-link">Instagram</Link></li>
           <li><Link href="#" external className="footer__social-link">GitHub</Link></li>
         </ul>
-        <address className="footer__contact">
-          <Link href="mailto:hello@studiolxd.com">hello@studiolxd.com</Link>
-          <Link href="tel:+34623752862">+34 623 752 862</Link>
-        </address>
       </div>
       <div className="footer__bottom">
         <ul className="footer__legal">
