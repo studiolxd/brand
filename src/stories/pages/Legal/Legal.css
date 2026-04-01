@@ -30,6 +30,11 @@
   }
 }
 
+.legal-page__header .heading {
+  text-box-trim: trim-both;
+  text-box-edge: cap text;
+}
+
 /* ─── Accordion ───────────────────────────────────────────── */
 .legal-accordion__item {
   border-block-start: var(--border-width-sm) solid currentColor;
