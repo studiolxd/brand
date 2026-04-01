@@ -1,0 +1,54 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ContentStories from "./Content.stories";
+
+<Meta of={ContentStories} />
+
+# Content (template)
+
+Template reutilizable para páginas de listado o categoría con un encabezado introductorio de dos columnas. Pensado para páginas de contenidos, recursos o cualquier sección que necesite un título grande acompañado de una descripción.
+
+## Estructura de landmarks
+
+- `<header>` — navegación principal (componente `Header`)
+- `<main id="main-content">` — cabecera con título y descripción, seguida del contenido de la página
+- `<footer>` — pie de página (componente `Footer`)
+
+## Jerarquía de encabezados
+
+```
+h1 — título de la página (prop title)
+```
+
+El contenido adicional (`children`) es libre — quien consuma el template es responsable de mantener la jerarquía de encabezados a partir de `h2`.
+
+## Cabecera en grid
+
+La cabecera (`.content-page__header`) muestra el título y la descripción en un grid de dos columnas a partir de `md` (768px). En móvil se apilan en una sola columna. La altura mínima del grid en desktop es `50vh`.
+
+## Uso en la web consumidora
+
+```tsx
+import "@studiolxd/brand/content-template.css";
+
+<div className="content-page">
+  <Header ... />
+  <main id="main-content" className="content-page__main">
+    <div className="content-page__body">
+      <div className="content-page__header">
+        <h1 className="heading heading--1 heading--size-8 heading--bold">Título</h1>
+        <p className="content-page__description">Descripción introductoria.</p>
+      </div>
+      {/* contenido de la página */}
+    </div>
+  </main>
+  <Footer />
+</div>
+```
+
+## Vista previa
+
+<Canvas of={ContentStories.Default} />
+
+## Props
+
+<ArgTypes of={ContentStories} />
