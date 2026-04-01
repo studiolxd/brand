@@ -18,7 +18,7 @@ interface HighlightProps {
   className?: string;
 }
 
-export function Highlight({ text, size, weight, align = 'left', textAlign, className }: HighlightProps) {
+export function Highlight({ text, size = 8, weight, align = 'left', textAlign, className }: HighlightProps) {
   return (
     <div className={[
       'highlight',
