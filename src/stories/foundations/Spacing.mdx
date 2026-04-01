@@ -2,6 +2,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
 import { SpacingScale } from "./SpacingScale";
 import { TokenTable } from "./TokenTable";
 import { spacingTokens } from "../../tokens/spacing";
+import { sectionTokens } from "../../tokens/layout";
 
 <Meta title="Foundations/Espaciado" />
 
@@ -18,3 +19,13 @@ Escala de espaciado basada en múltiplos de 4px. Los tokens están numerados par
 <TokenTable tokens={spacingTokens} />
 
 Los tokens están definidos en `tokens/spacing/scale.json`.
+
+---
+
+## Padding de sección
+
+Tokens de padding para secciones de página. Definen los ritmos verticales y horizontales estándar del layout.
+
+<TokenTable tokens={sectionTokens} />
+
+Los tokens están definidos en `tokens/layout/section.json`.

@@ -4,6 +4,10 @@
   padding-inline: var(--section-padding-inline);
 }
 
+.projects-section > .heading {
+  padding-block-end: var(--section-padding-block-md);
+}
+
 
 .projects-section .carousel {
   --carousel-slide-size: 100%;            /* sm: 1 slide completo */

@@ -19,6 +19,7 @@
 
 .footer__logo {
   margin-block-start: auto;
+  padding-block-start: var(--section-padding-block-xl);
 }
 
 .footer__col,
