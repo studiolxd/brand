@@ -21,7 +21,7 @@ interface CardProps {
 export function Card({ href, title, description, ctaLabel, color }: CardProps) {
   return (
     <a href={href} className={['card', `card--${color}`].join(' ')}>
-      <Heading level={2} weight="semibold">{title}</Heading>
+      <Heading level={2} size={8} weight="semibold">{title}</Heading>
       <p>{description}</p>
       <VisuallyHidden>{ctaLabel}</VisuallyHidden>
       <Arrow size="lg" />
