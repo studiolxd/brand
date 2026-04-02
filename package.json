@@ -99,6 +99,10 @@
       "types": "./dist/_types/molecules/Card/Card.d.ts",
       "import": "./dist/card.js"
     },
+    "./project-card": {
+      "types": "./dist/_types/molecules/ProjectCard/ProjectCard.d.ts",
+      "import": "./dist/project-card.js"
+    },
     "./card-split": {
       "types": "./dist/_types/molecules/CardSplit/CardSplit.d.ts",
       "import": "./dist/card-split.js"
@@ -130,6 +134,14 @@
     "./textarea-field": {
       "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",
       "import": "./dist/textarea-field.js"
+    },
+    "./project-carousel": {
+      "types": "./dist/_types/organisms/ProjectCarousel/ProjectCarousel.d.ts",
+      "import": "./dist/project-carousel.js"
+    },
+    "./project-grid": {
+      "types": "./dist/_types/organisms/ProjectGrid/ProjectGrid.d.ts",
+      "import": "./dist/project-grid.js"
     },
     "./css": "./dist/brand.css",
     "./brand.css": "./dist/brand.css",

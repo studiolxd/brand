@@ -28,6 +28,7 @@ export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
 export { Card } from './stories/molecules/Card/Card';
+export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export { CardSplit } from './stories/molecules/CardSplit/CardSplit';
 export { CardSquare } from './stories/molecules/CardSquare/CardSquare';
 export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
@@ -36,6 +37,10 @@ export { InputField } from './stories/molecules/InputField/InputField';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
+
+// ─── Organisms ──────────────────────────────────────────────
+export { ProjectCarousel } from './stories/organisms/ProjectCarousel/ProjectCarousel';
+export { ProjectGrid } from './stories/organisms/ProjectGrid/ProjectGrid';
 
 // ─── Sections ────────────────────────────────────────────────
 export { ClientsSection } from './stories/sections/ClientsSection/ClientsSection';

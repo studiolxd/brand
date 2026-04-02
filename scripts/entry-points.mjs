@@ -25,6 +25,7 @@ export const entryPoints = {
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   // Molecules
   'card':                'src/stories/molecules/Card/Card.tsx',
+  'project-card':        'src/stories/molecules/ProjectCard/ProjectCard.tsx',
   'card-split':          'src/stories/molecules/CardSplit/CardSplit.tsx',
   'card-square':         'src/stories/molecules/CardSquare/CardSquare.tsx',
   'checkbox-field':      'src/stories/molecules/CheckboxField/CheckboxField.tsx',
@@ -33,10 +34,13 @@ export const entryPoints = {
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
   'input-phone-field':   'src/stories/molecules/InputPhoneField/InputPhoneField.tsx',
   'textarea-field':      'src/stories/molecules/TextareaField/TextareaField.tsx',
+  // Organisms
+  'project-carousel':    'src/stories/organisms/ProjectCarousel/ProjectCarousel.tsx',
+  'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
 };
 
 export const clientComponents = new Set([
   'accordion', 'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form',
-  'input-field', 'input-phone-field', 'textarea-field',
+  'input-field', 'input-phone-field', 'textarea-field', 'project-carousel', 'project-grid',
 ]);

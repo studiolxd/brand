@@ -1,0 +1,125 @@
+/* ─── Filter ──────────────────────────────────────────────── */
+.project-grid__filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  padding-inline: var(--section-padding-inline);
+  padding-block: var(--spacing-4);
+}
+
+.project-grid__filter button {
+  cursor: pointer;
+  border-block: none;
+  border-inline: none;
+  opacity: var(--opacity-disabled);
+}
+
+.project-grid__filter .project-grid__tag--active {
+  opacity: 1;
+}
+
+/* ─── Grid ────────────────────────────────────────────────── */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--border-width-sm);
+  background-color: var(--color-background-dark);
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) /* --breakpoint-xl */ {
+  .project-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* ─── Cards inside grid ──────────────────────────────────── */
+.project-grid .project-card {
+  padding-inline: var(--section-padding-inline);
+  padding-block: var(--spacing-4);
+  background-color: var(--color-background-default);
+  height: auto;
+}
+
+.project-grid .project-card .project-card__cta {
+  align-self: stretch;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .project-grid .project-card {
+    grid-row: span 5;
+    display: grid;
+    grid-template-rows: subgrid;
+  }
+
+  .project-grid .project-card .tag,
+  .project-grid .project-card .project-card__cta {
+    align-self: start;
+  }
+}
+
+/* ─── First card destacada (xl) ──────────────────────────── */
+@media (min-width: 1280px) /* --breakpoint-xl */ {
+  .project-grid .project-card:first-child {
+    grid-column: span 3;
+    grid-row: span 10;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-grid .project-card:first-child .project-card__image-wrap {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .project-grid .project-card:first-child .project-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ─── Cards no-destacadas: tamaño reducido ───────────────── */
+.project-grid .project-card:not(:first-child) .project-card__cta {
+  padding-block: var(--button-primary-padding-block);
+  padding-inline: var(--button-primary-padding-inline);
+  font-size: var(--button-primary-font-size);
+}
+
+.project-grid .project-card:not(:first-child) .project-card__title {
+  font-size: var(--text-h3-font-size);
+}
+
+.project-grid .project-card:not(:first-child) .project-card__description {
+  font-size: var(--text-paragraph-font-size);
+}
+
+/* ─── Empty cells ────────────────────────────────────────── */
+.project-grid__empty {
+  background-color: var(--color-background-default);
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .project-grid__empty {
+    grid-row: span 5;
+  }
+}
+
+.project-grid__empty--xl-only {
+  display: none;
+}
+
+@media (min-width: 1280px) /* --breakpoint-xl */ {
+  .project-grid__empty--xl-only {
+    display: grid;
+  }
+
+  .project-grid__empty--md-only {
+    display: none;
+  }
+}

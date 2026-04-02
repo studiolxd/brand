@@ -1,0 +1,1 @@
+.project-carousel{--carousel-slide-size:100%}@media (width>=768px){.project-carousel{--carousel-slide-size:calc(100% / 3)}}@media (width>=1440px){.project-carousel{--carousel-slide-size:calc(100% / 4)}}.project-carousel .carousel__slide{display:flex}

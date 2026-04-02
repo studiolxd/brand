@@ -1,23 +1,5 @@
+import type { Project } from '../../molecules/ProjectCard/ProjectCard';
 import './ProjectsSection.css';
-type TagVariant = 'default' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
-interface Project {
-    /** Identificador único. */
-    id: string;
-    /** Categoría — se muestra como tag. */
-    category: string;
-    /** Variante de color del tag. */
-    tagVariant?: TagVariant;
-    /** URL de la imagen. */
-    photo: string;
-    /** Texto alternativo de la imagen. */
-    photoAlt?: string;
-    /** Título del proyecto. */
-    title: string;
-    /** Descripción breve. */
-    description: string;
-    /** URL de destino del proyecto. */
-    href?: string;
-}
 interface ProjectsSectionProps {
     id?: string;
     /** Título de la sección. */
