@@ -1,0 +1,66 @@
+/* ─── Custom properties con valores por defecto ──────────── */
+.steps {
+  --steps-gap-color: var(--color-background-dark);
+  --steps-cell-bg: var(--color-background-default);
+  --steps-number-color: var(--color-primary);
+}
+
+/* ─── Steps wrapper ──────────────────────────────────────── */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--border-width-sm);
+  background-color: var(--steps-gap-color);
+}
+
+/* ─── Step item ──────────────────────────────────────────── */
+.steps__item {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.steps__number,
+.steps__text {
+  background-color: var(--steps-cell-bg);
+}
+
+.steps__number {
+  display: flex;
+  align-items: flex-start;
+  padding-block: var(--section-padding-block-md);
+  padding-inline: var(--section-padding-inline);
+}
+
+.steps__number-inner {
+  font-size: var(--font-size-9);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-none);
+  color: var(--steps-number-color);
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+.steps__text {
+  display: flex;
+  align-items: flex-start;
+  padding-block: var(--section-padding-block-md);
+  padding-inline: var(--section-padding-inline);
+}
+
+.steps__text-inner {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
+
+/* ─── md (>= 768px) ─────────────────────────────────────── */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .steps__item {
+    grid-template-columns: 1fr 3fr;
+    gap: var(--border-width-sm);
+    background-color: var(--steps-gap-color);
+  }
+
+  .steps__number {
+    aspect-ratio: 1;
+  }
+}

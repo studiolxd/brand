@@ -1,9 +1,16 @@
-/* Gap = border color — las celdas sobre el fondo de gap crean los divisores */
+/* ─── Section wrapper ────────────────────────────────────── */
 .methodology-section {
   display: flex;
   flex-direction: column;
   gap: var(--border-width-sm);
   background-color: var(--methodology-section-gap-color);
+}
+
+/* Remap tokens de Steps con valores de methodology */
+.methodology-section .steps {
+  --steps-gap-color: var(--methodology-section-gap-color);
+  --steps-cell-bg: var(--methodology-section-cell-bg);
+  --steps-number-color: var(--methodology-section-number-color);
 }
 
 .methodology-section__intro {
@@ -16,66 +23,7 @@
   background-color: var(--methodology-section-cell-bg);
 }
 
-/* Steps — gap vertical entre pasos = borde horizontal */
-.methodology-section__steps {
-  display: flex;
-  flex-direction: column;
-  gap: var(--border-width-sm);
-  background-color: var(--methodology-section-gap-color);
-}
-
-/* Step — gap entre número y texto = borde vertical */
-.methodology-section__step {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--border-width-sm);
-  background-color: var(--methodology-section-gap-color);
-}
-
-.methodology-section__number,
-.methodology-section__text {
-  background-color: var(--methodology-section-cell-bg);
-}
-
-.methodology-section__number {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: flex-start;
-  padding-block: var(--section-padding-block-md);
-  padding-inline: var(--section-padding-inline);
-}
-
-.methodology-section__number-inner {
-  font-size: var(--font-size-9);
-  font-weight: var(--font-weight-black);
-  line-height: var(--line-height-none);
-  color: var(--methodology-section-number-color);
-  text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
-}
-
-.methodology-section__text {
-  display: flex;
-  align-items: flex-start;
-  padding-block: var(--section-padding-block-md);
-  padding-inline: var(--section-padding-inline);
-}
-
-.methodology-section__text-inner {
-  text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
-}
-
-/* ---- md (>= 768px) ---- */
-
-@media (min-width: 768px) /* --breakpoint-md */ {
-  .methodology-section__step {
-    grid-template-columns: 1fr 3fr;
-  }
-}
-
-/* ---- lg (>= 1024px) ---- */
-
+/* ─── lg (>= 1024px) ────────────────────────────────────── */
 @media (min-width: 1024px) /* --breakpoint-lg */ {
   .methodology-section {
     display: grid;

@@ -1,12 +1,8 @@
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
-import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { Steps } from '../../organisms/Steps/Steps';
+import type { Step } from '../../organisms/Steps/Steps';
 import './MethodologySection.css';
-
-interface MethodologyStep {
-  /** Texto del paso. */
-  text: string;
-}
 
 interface MethodologySectionProps {
   id?: string;
@@ -16,8 +12,8 @@ interface MethodologySectionProps {
   ctaLabel: string;
   /** URL del botón CTA. */
   ctaHref: string;
-  /** Lista de pasos (normalmente 4). */
-  steps: MethodologyStep[];
+  /** Lista de pasos. */
+  steps: Step[];
   /** Nombre accesible de la sección (aria-label). */
   'aria-label'?: string;
 }
@@ -36,20 +32,7 @@ export function MethodologySection({
         <Heading level={2} weight="semibold">{intro}</Heading>
         <Button href={ctaHref} variant="primary">{ctaLabel}</Button>
       </div>
-      <div className="methodology-section__steps">
-        {steps.map((step, i) => (
-          <div key={step.text} className="methodology-section__step">
-            <div className="methodology-section__number">
-              <span className="methodology-section__number-inner">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-            </div>
-            <div className="methodology-section__text">
-              <Paragraph size="large" className="methodology-section__text-inner">{step.text}</Paragraph>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Steps steps={steps} />
     </section>
   );
 }

@@ -143,6 +143,10 @@
       "types": "./dist/_types/organisms/ProjectGrid/ProjectGrid.d.ts",
       "import": "./dist/project-grid.js"
     },
+    "./steps": {
+      "types": "./dist/_types/organisms/Steps/Steps.d.ts",
+      "import": "./dist/steps.js"
+    },
     "./css": "./dist/brand.css",
     "./brand.css": "./dist/brand.css",
     "./tokens.css": "./dist/tokens.css",

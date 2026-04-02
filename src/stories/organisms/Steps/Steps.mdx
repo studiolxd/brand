@@ -1,0 +1,37 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as StepsStories from "./Steps.stories";
+
+<Meta of={StepsStories} />
+
+# Steps
+
+Lista de pasos numerados (01, 02, ...) con texto descriptivo. Componente genérico reutilizable en cualquier contexto: metodología, procesos, instrucciones, onboarding, etc.
+
+Acepta un número variable de pasos — se adapta tanto a listas cortas (4 pasos en un resumen) como largas (7+ pasos en una página dedicada).
+
+## Layout responsive
+
+- **Móvil**: número y texto apilados en una columna.
+- **Tablet** (≥ 768px): número a la izquierda (1/4) y texto a la derecha (3/4), con el número en aspect-ratio cuadrado.
+
+El fondo oscuro entre celdas actúa como separador visual (gap mínimo con `border-width-sm`).
+
+## Personalización
+
+Los colores se controlan con custom properties CSS que se pueden sobreescribir desde el contexto padre:
+
+- `--steps-gap-color` — color del separador entre pasos (default: `--color-background-dark`)
+- `--steps-cell-bg` — fondo de cada celda (default: `--color-background-default`)
+- `--steps-number-color` — color del número (default: `--color-primary`)
+
+## 4 pasos
+
+<Canvas of={StepsStories.FourSteps} />
+
+## 7 pasos
+
+<Canvas of={StepsStories.SevenSteps} />
+
+## Props
+
+<ArgTypes of={StepsStories} />

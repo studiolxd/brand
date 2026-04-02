@@ -1,8 +1,5 @@
+import type { Step } from '../../organisms/Steps/Steps';
 import './MethodologySection.css';
-interface MethodologyStep {
-    /** Texto del paso. */
-    text: string;
-}
 interface MethodologySectionProps {
     id?: string;
     /** Encabezado introductorio. */
@@ -11,8 +8,8 @@ interface MethodologySectionProps {
     ctaLabel: string;
     /** URL del botón CTA. */
     ctaHref: string;
-    /** Lista de pasos (normalmente 4). */
-    steps: MethodologyStep[];
+    /** Lista de pasos. */
+    steps: Step[];
     /** Nombre accesible de la sección (aria-label). */
     'aria-label'?: string;
 }

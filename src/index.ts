@@ -41,6 +41,7 @@ export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 // ─── Organisms ──────────────────────────────────────────────
 export { ProjectCarousel } from './stories/organisms/ProjectCarousel/ProjectCarousel';
 export { ProjectGrid } from './stories/organisms/ProjectGrid/ProjectGrid';
+export { Steps } from './stories/organisms/Steps/Steps';
 
 // ─── Sections ────────────────────────────────────────────────
 export { ClientsSection } from './stories/sections/ClientsSection/ClientsSection';

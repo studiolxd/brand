@@ -37,6 +37,7 @@ export const entryPoints = {
   // Organisms
   'project-carousel':    'src/stories/organisms/ProjectCarousel/ProjectCarousel.tsx',
   'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
+  'steps':               'src/stories/organisms/Steps/Steps.tsx',
 };
 
 export const clientComponents = new Set([
