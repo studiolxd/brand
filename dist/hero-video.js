@@ -1,6 +1,5 @@
 'use client';
 import './hero-video.css';
-"use client";
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 import { useEffect as n, useRef as r } from "react";
 //#region src/stories/atoms/HeroVideo/HeroVideo.tsx
