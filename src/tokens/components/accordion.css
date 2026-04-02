@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --accordion-border-color: currentColor; /** Color del borde separador */
+  --accordion-trigger-cursor: pointer; /** Cursor del trigger */
+  --accordion-border-width: var(--border-width-sm); /** Ancho del borde separador entre items */
+  --accordion-trigger-padding-block: var(--spacing-5); /** Padding vertical del trigger */
+  --accordion-trigger-padding-inline: var(--spacing-6); /** Padding horizontal del trigger */
+  --accordion-trigger-gap: var(--spacing-4); /** Gap entre texto y chevron */
+  --accordion-content-padding-block: var(--spacing-6); /** Padding vertical del contenido */
+  --accordion-content-padding-inline: var(--spacing-6); /** Padding horizontal del contenido */
+  --accordion-transition-duration: var(--motion-duration-slow); /** Duración de la transición abrir/cerrar */
+  --accordion-transition-easing: var(--motion-easing-in-out); /** Easing de la transición abrir/cerrar */
+  --accordion-focus-ring-width: var(--border-width-md); /** Ancho del anillo de foco */
+  --accordion-focus-ring-offset: var(--border-width-sm); /** Offset del anillo de foco */
+  --accordion-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}

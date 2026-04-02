@@ -1,0 +1,17 @@
+{
+  "accordion": {
+    "border-width":          { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Ancho del borde separador entre items" },
+    "border-color":          { "$value": "currentColor",                "$type": "string",    "$description": "Color del borde separador" },
+    "trigger-padding-block":  { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Padding vertical del trigger" },
+    "trigger-padding-inline": { "$value": "{spacing.6}",               "$type": "dimension", "$description": "Padding horizontal del trigger" },
+    "trigger-gap":            { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Gap entre texto y chevron" },
+    "trigger-cursor":         { "$value": "pointer",                    "$type": "string",    "$description": "Cursor del trigger" },
+    "content-padding-block":  { "$value": "{spacing.6}",               "$type": "dimension", "$description": "Padding vertical del contenido" },
+    "content-padding-inline": { "$value": "{spacing.6}",               "$type": "dimension", "$description": "Padding horizontal del contenido" },
+    "transition-duration":    { "$value": "{motion.duration.slow}",    "$type": "string",    "$description": "Duración de la transición abrir/cerrar" },
+    "transition-easing":      { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de la transición abrir/cerrar" },
+    "focus-ring-width":       { "$value": "{border-width.md}",         "$type": "dimension", "$description": "Ancho del anillo de foco" },
+    "focus-ring-offset":      { "$value": "{border-width.sm}",         "$type": "dimension", "$description": "Offset del anillo de foco" },
+    "focus-ring-color":       { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del anillo de foco" }
+  }
+}

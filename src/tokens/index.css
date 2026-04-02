@@ -9,6 +9,7 @@
 @import "./global/opacity.css";
 @import "./global/form.css";
 @import "./global/section.css";
+@import "./components/accordion.css";
 @import "./components/text.css";
 @import "./components/link.css";
 @import "./components/tag.css";

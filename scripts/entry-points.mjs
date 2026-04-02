@@ -1,5 +1,6 @@
 export const entryPoints = {
   // Atoms
+  'accordion':           'src/stories/atoms/Accordion/Accordion.tsx',
   'arrow':               'src/stories/atoms/Arrow/Arrow.tsx',
   'avatar':              'src/stories/atoms/Avatar/Avatar.tsx',
   'button':              'src/stories/atoms/Button/Button.tsx',
@@ -35,7 +36,7 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
+  'accordion', 'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form',
   'input-field', 'input-phone-field', 'textarea-field',
 ]);

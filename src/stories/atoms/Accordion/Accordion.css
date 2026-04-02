@@ -1,0 +1,83 @@
+.accordion {
+  width: 100%;
+}
+
+/* ─── Item ───────────────────────────────────────────────── */
+.accordion__item {
+  border-block-start: var(--accordion-border-width) solid var(--accordion-border-color);
+}
+
+/* ─── Header reset ───────────────────────────────────────── */
+.accordion__header {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin-block: 0;
+}
+
+/* ─── Trigger ────────────────────────────────────────────── */
+.accordion__trigger {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--accordion-trigger-gap);
+  padding-block: var(--accordion-trigger-padding-block);
+  padding-inline: var(--accordion-trigger-padding-inline);
+  cursor: var(--accordion-trigger-cursor);
+  text-align: start;
+}
+
+.accordion__trigger:focus-visible {
+  outline: var(--accordion-focus-ring-width) solid var(--accordion-focus-ring-color);
+  outline-offset: var(--accordion-focus-ring-offset);
+}
+
+/* ─── Trigger text ───────────────────────────────────────── */
+.accordion__trigger-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Chevron ────────────────────────────────────────────── */
+.accordion__chevron {
+  flex-shrink: 0;
+  transform: rotate(90deg);
+  transition: transform var(--accordion-transition-duration) var(--accordion-transition-easing);
+}
+
+.accordion__trigger[data-state="open"] .accordion__chevron {
+  transform: rotate(-90deg);
+}
+
+/* ─── Content — animación con keyframes + variable Radix ─── */
+.accordion__content {
+  overflow: hidden;
+}
+
+.accordion__content[data-state="open"] {
+  animation: accordion-open var(--accordion-transition-duration) var(--accordion-transition-easing);
+}
+
+.accordion__content[data-state="closed"] {
+  animation: accordion-close var(--accordion-transition-duration) var(--accordion-transition-easing);
+}
+
+@keyframes accordion-open {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-close {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+
+.accordion__content-inner {
+  padding-block: var(--accordion-content-padding-block);
+  padding-inline: var(--accordion-content-padding-inline);
+}
