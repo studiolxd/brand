@@ -38,18 +38,32 @@
 }
 
 .methodology-section__number {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: flex-start;
   padding-block: var(--section-padding-block-md);
   padding-inline: var(--section-padding-inline);
-  font-size: var(--font-size-10);
-  font-weight: var(--font-weight-light);
+}
+
+.methodology-section__number-inner {
+  font-size: var(--font-size-9);
+  font-weight: var(--font-weight-black);
   line-height: var(--line-height-none);
   color: var(--methodology-section-number-color);
-  aspect-ratio: 1;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .methodology-section__text {
+  display: flex;
+  align-items: flex-start;
   padding-block: var(--section-padding-block-md);
   padding-inline: var(--section-padding-inline);
+}
+
+.methodology-section__text-inner {
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 /* ---- md (>= 768px) ---- */

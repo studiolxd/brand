@@ -35,7 +35,7 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'input', 'input-phone',
-  'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form', 'input-field',
-  'input-phone-field', 'textarea-field',
+  'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
+  'input-phone', 'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form',
+  'input-field', 'input-phone-field', 'textarea-field',
 ]);

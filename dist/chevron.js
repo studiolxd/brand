@@ -10,13 +10,13 @@ function t({ size: t, className: n }) {
 		].filter(Boolean).join(" "),
 		"aria-hidden": "true",
 		xmlns: "http://www.w3.org/2000/svg",
-		viewBox: "0 4 12 16",
+		viewBox: "0 0 12 12",
 		fill: "none",
 		stroke: "currentColor",
 		children: /* @__PURE__ */ e("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M2 6 L8 12 L2 18"
+			d: "M3 0 L9 6 L3 12"
 		})
 	});
 }
