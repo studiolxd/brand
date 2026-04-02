@@ -1,0 +1,34 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ProjectGridStories from "./ProjectGrid.stories";
+
+<Meta of={ProjectGridStories} />
+
+# ProjectGrid
+
+Grid responsive de tarjetas de proyecto (`ProjectCard`) con filtrado por tags. Pensado para la página completa de proyectos donde se muestran todos los proyectos con posibilidad de filtrar por categoría.
+
+## Layout responsive
+
+- **Móvil**: 1 columna.
+- **Tablet** (≥ 768px): 2 columnas, cada card ocupa 5 filas con subgrid.
+- **Desktop** (≥ 1280px): 6 columnas, la primera card se destaca ocupando 3 columnas × 10 filas.
+
+El fondo oscuro entre cards actúa como separador visual (gap mínimo con `border-width-sm`).
+
+## Filtrado por tags
+
+Los filtros muestran los tags únicos extraídos de los proyectos. Al hacer clic en un tag se alterna su estado activo/inactivo. Si se deseleccionan todos los tags, se vuelven a activar todos automáticamente.
+
+Se pueden ocultar los filtros con `hideTags`.
+
+## Ejemplo con filtros
+
+<Canvas of={ProjectGridStories.Default} />
+
+## Sin filtros
+
+<Canvas of={ProjectGridStories.WithoutTags} />
+
+## Props
+
+<ArgTypes of={ProjectGridStories} />

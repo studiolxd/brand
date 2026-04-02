@@ -1,0 +1,18 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ProjectCardStories from "./ProjectCard.stories";
+
+<Meta of={ProjectCardStories} />
+
+# ProjectCard
+
+Tarjeta de proyecto completamente clicable. Muestra categoría (tag con variante de color), título, imagen, descripción breve y un CTA visual. Es la unidad base reutilizada tanto en `ProjectCarousel` como en `ProjectGrid`.
+
+El texto del CTA se controla con la prop `ctaLabel` (por defecto "Leer más"), lo que permite inyectar traducciones desde la aplicación consumidora.
+
+## Ejemplo
+
+<Canvas of={ProjectCardStories.Default} />
+
+## Props
+
+<ArgTypes of={ProjectCardStories} />

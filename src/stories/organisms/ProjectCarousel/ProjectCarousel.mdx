@@ -1,0 +1,23 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ProjectCarouselStories from "./ProjectCarousel.stories";
+
+<Meta of={ProjectCarouselStories} />
+
+# ProjectCarousel
+
+Carousel horizontal de tarjetas de proyecto (`ProjectCard`). Pensado como vista teaser o resumen — por ejemplo en la home — donde se muestran algunos proyectos destacados con scroll lateral.
+
+El número de slides visibles se adapta al viewport:
+- **Móvil**: 1 slide completo.
+- **Tablet** (≥ 768px): ~3 slides con mitades visibles.
+- **Desktop** (≥ 1440px): 4 slides completos.
+
+No incluye título ni wrapper de sección — eso lo aporta `ProjectsSection` u otro contenedor.
+
+## Ejemplo
+
+<Canvas of={ProjectCarouselStories.Default} />
+
+## Props
+
+<ArgTypes of={ProjectCarouselStories} />
