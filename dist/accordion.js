@@ -22,17 +22,17 @@ function a({ className: e, children: r, ...i }) {
 		children: r
 	});
 }
-function o({ className: i, children: a }) {
+function o({ className: i, chevronSize: a = "sm", children: o }) {
 	return /* @__PURE__ */ n(t.Header, {
 		className: "accordion__header",
 		children: /* @__PURE__ */ r(t.Trigger, {
 			className: ["accordion__trigger", i].filter(Boolean).join(" "),
 			children: [/* @__PURE__ */ n("span", {
 				className: "accordion__trigger-text",
-				children: a
+				children: o
 			}), /* @__PURE__ */ n(e, {
 				className: "accordion__chevron",
-				size: "sm"
+				size: a
 			})]
 		})
 	});

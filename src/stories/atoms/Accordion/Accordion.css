@@ -78,6 +78,6 @@
 }
 
 .accordion__content-inner {
-  padding-block: var(--accordion-content-padding-block);
+  padding-block-end: var(--accordion-content-padding-block);
   padding-inline: var(--accordion-content-padding-inline);
 }

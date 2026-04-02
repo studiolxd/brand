@@ -66,17 +66,19 @@ export function AccordionItem({ className, children, ...props }: AccordionItemPr
 /* ─── Trigger ────────────────────────────────────────────── */
 interface AccordionTriggerProps {
   className?: string;
+  /** Tamaño del chevron indicador. */
+  chevronSize?: 'sm' | 'md' | 'lg';
   children: ReactNode;
 }
 
-export function AccordionTrigger({ className, children }: AccordionTriggerProps) {
+export function AccordionTrigger({ className, chevronSize = 'sm', children }: AccordionTriggerProps) {
   return (
     <RadixAccordion.Header className="accordion__header">
       <RadixAccordion.Trigger
         className={['accordion__trigger', className].filter(Boolean).join(' ')}
       >
         <span className="accordion__trigger-text">{children}</span>
-        <Chevron className="accordion__chevron" size="sm" />
+        <Chevron className="accordion__chevron" size={chevronSize} />
       </RadixAccordion.Trigger>
     </RadixAccordion.Header>
   );

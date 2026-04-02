@@ -35,18 +35,40 @@
   text-box-edge: cap text;
 }
 
-/* ─── Accordion ───────────────────────────────────────────── */
-.legal-accordion__item {
-  border-block-start: var(--border-width-sm) solid currentColor;
+/* ─── Accordion — overrides sobre el átomo genérico ──────── */
+
+/* Trigger: layout grid con counter + title + chevron */
+.legal-accordion .accordion__trigger.legal-accordion__trigger {
+  display: grid;
+  grid-template-columns: 1fr var(--chevron-size-lg);
+  grid-template-areas:
+    "counter chevron"
+    "title   title";
+  align-items: start;
+  gap: var(--spacing-6);
 }
 
-/* Heading envuelve el trigger para el outline semántico — sin estilos visuales propios */
-.legal-accordion__heading {
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
-  color: inherit;
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .legal-accordion .accordion__trigger.legal-accordion__trigger {
+    grid-template-columns: auto 1fr var(--chevron-size-lg);
+    grid-template-areas: "counter title chevron";
+  }
+}
+
+/* El trigger-text envuelve counter + title; no necesita layout propio */
+.legal-accordion .accordion__trigger-text {
+  display: contents;
+}
+
+.legal-accordion__counter {
+  grid-area: counter;
+  font-size: var(--font-size-9);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-none);
+  color: var(--color-primary);
+  align-self: start;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .legal-accordion__title {
@@ -61,87 +83,14 @@
   text-box-edge: cap alphabetic;
 }
 
-.legal-accordion__header {
-  /* reset heredado de button */
-  background-color: transparent;
-  border-block: none;
-  border-inline: none;
-  border-radius: 0;
-  padding-block: 0;
-  padding-inline: 0;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  white-space: normal;
-  text-decoration: none;
-  color: inherit;
-  transition: none;
-  /* layout propio */
-  display: grid;
-  grid-template-columns: 1fr var(--chevron-size-lg);
-  grid-template-areas:
-    "counter chevron"
-    "title   title";
-  align-items: start;
-  gap: var(--spacing-6);
-  padding-block: var(--spacing-5);
-  padding-inline: var(--spacing-6);
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  box-sizing: border-box;
-}
-
-@media (min-width: 768px) /* --breakpoint-md */ {
-  .legal-accordion__header {
-    grid-template-columns: auto 1fr var(--chevron-size-lg);
-    grid-template-areas: "counter title chevron";
-  }
-}
-
-.legal-accordion__header:hover,
-.legal-accordion__header:active {
-  background-color: transparent;
-  color: inherit;
-}
-
-.legal-accordion__counter {
-  grid-area: counter;
-  font-size: var(--font-size-9);
-  font-weight: var(--font-weight-black);
-  line-height: var(--line-height-none);
-  color: var(--color-primary);
-  align-self: start;
-  text-box-trim: trim-both;
-  text-box-edge: cap alphabetic;
-}
-
-.legal-accordion__chevron {
+/* Chevron: posicionado en el grid, con offset vertical */
+.legal-accordion .accordion__chevron {
   grid-area: chevron;
-  transform: rotate(90deg);
-  transition: transform var(--motion-duration-slow) var(--motion-easing-in-out);
   margin-block-start: calc(var(--chevron-size-lg) * -1 / 4);
 }
 
-.legal-accordion__item--open .legal-accordion__chevron {
-  transform: rotate(-90deg);
-}
-
-/* ─── Accordion body — animación con grid-template-rows ──── */
-.legal-accordion__body {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows var(--motion-duration-slow) var(--motion-easing-in-out);
-}
-
-.legal-accordion__item--open .legal-accordion__body {
-  grid-template-rows: 1fr;
-}
-
-.legal-accordion__body-inner {
-  overflow: hidden;
-  padding-inline: var(--spacing-6);
+/* Content body: centrado con measure máximo */
+.legal-accordion .accordion__content-inner {
   max-width: var(--content-measure);
   margin-inline: auto;
   display: flex;
@@ -151,13 +100,9 @@
   line-height: var(--line-height-relaxed);
 }
 
-.legal-accordion__body-inner ul {
+.legal-accordion .accordion__content-inner ul {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
   padding-inline-start: var(--spacing-4);
-}
-
-.legal-accordion__item--open .legal-accordion__body-inner {
-  padding-block-end: var(--spacing-6);
 }

@@ -31,9 +31,11 @@ interface AccordionItemProps {
 export declare function AccordionItem({ className, children, ...props }: AccordionItemProps): import("react/jsx-runtime").JSX.Element;
 interface AccordionTriggerProps {
     className?: string;
+    /** Tamaño del chevron indicador. */
+    chevronSize?: 'sm' | 'md' | 'lg';
     children: ReactNode;
 }
-export declare function AccordionTrigger({ className, children }: AccordionTriggerProps): import("react/jsx-runtime").JSX.Element;
+export declare function AccordionTrigger({ className, chevronSize, children }: AccordionTriggerProps): import("react/jsx-runtime").JSX.Element;
 interface AccordionContentProps {
     className?: string;
     children: ReactNode;

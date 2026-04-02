@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { Header } from '../../sections/Header/Header';
 import type { NavItem } from '../../sections/Header/Header';
 import { Footer } from '../../sections/Footer/Footer';
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../../atoms/Accordion/Accordion';
 import { DEFAULT_NAV_ITEMS, DEFAULT_FEATURED_LINK } from '../../constants/navigation';
 import './Legal.css';
 
@@ -24,35 +23,6 @@ interface LegalProps {
   featuredLink?: NavItem;
 }
 
-function LegalAccordionItem({ section, index }: { section: LegalSection; index: number }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const id = `legal-section-${index}`;
-
-  return (
-    <div className={`legal-accordion__item${isOpen ? ' legal-accordion__item--open' : ''}`}>
-      <Heading level={2} className="legal-accordion__heading">
-        <button
-          className="legal-accordion__header"
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-expanded={isOpen}
-          aria-controls={id}
-        >
-          <span className="legal-accordion__counter">
-            {String(index + 1).padStart(2, '0')}
-          </span>
-          <span className="legal-accordion__title">{section.title}</span>
-          <Chevron className="legal-accordion__chevron" size="lg" />
-        </button>
-      </Heading>
-      <div className="legal-accordion__body" id={id} role="region">
-        <div className="legal-accordion__body-inner">
-          {section.content}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function Legal({ title, sections, navItems = DEFAULT_NAV_ITEMS, featuredLink = DEFAULT_FEATURED_LINK }: LegalProps) {
   return (
     <div className="legal-page">
@@ -69,11 +39,21 @@ export function Legal({ title, sections, navItems = DEFAULT_NAV_ITEMS, featuredL
         <div className="legal-page__header">
           <Heading level={1} size={10} weight="black">{title}</Heading>
         </div>
-        <div className="legal-accordion">
+        <Accordion type="single" className="legal-accordion">
           {sections.map((section, index) => (
-            <LegalAccordionItem key={section.title} section={section} index={index} />
+            <AccordionItem key={section.title} value={`section-${index}`}>
+              <AccordionTrigger className="legal-accordion__trigger" chevronSize="lg">
+                <span className="legal-accordion__counter">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="legal-accordion__title">{section.title}</span>
+              </AccordionTrigger>
+              <AccordionContent className="legal-accordion__body">
+                {section.content}
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </main>
       <Footer />
     </div>
