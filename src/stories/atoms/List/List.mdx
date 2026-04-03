@@ -7,7 +7,9 @@ import { listBaseTokens, listDarkTokens } from "../../../tokens/components/text"
 
 # List
 
-Lista con viñetas (`ul`) o numerada (`ol`). Hereda los estilos tipográficos del párrafo. El espacio entre ítems y la sangría izquierda están controlados por tokens. Sin márgenes por defecto.
+Lista con viñetas (`ul`), numerada (`ol`) o sin decoración (`plain`). Hereda los estilos tipográficos del párrafo. El espacio entre ítems y la sangría izquierda están controlados por tokens. Sin márgenes por defecto.
+
+La variante `plain` elimina viñetas y sangría, ideal para listas de navegación, enlaces sociales u otros contextos donde la semántica de lista es necesaria pero la decoración visual no.
 
 ## Unordered
 
@@ -16,6 +18,10 @@ Lista con viñetas (`ul`) o numerada (`ol`). Hereda los estilos tipográficos de
 ## Ordered
 
 <Canvas of={ListStories.Ordered} />
+
+## Plain
+
+<Canvas of={ListStories.Plain} />
 
 ---
 

@@ -10,8 +10,8 @@ const meta: Meta<typeof List> = {
   argTypes: {
     type: {
       control: { type: 'select' },
-      options: ['unordered', 'ordered'],
-      description: 'Tipo de lista: con viñetas o numerada.',
+      options: ['unordered', 'ordered', 'plain'],
+      description: 'Tipo de lista: con viñetas, numerada o sin decoración.',
     },
   },
   args: {
@@ -33,4 +33,8 @@ export const Unordered: Story = {};
 
 export const Ordered: Story = {
   args: { type: 'ordered' },
+};
+
+export const Plain: Story = {
+  args: { type: 'plain' },
 };

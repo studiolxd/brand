@@ -21,3 +21,8 @@
   list-style-type: decimal;
 }
 
+.list.list--plain {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
