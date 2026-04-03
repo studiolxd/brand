@@ -15,6 +15,18 @@
   }
 }
 
+/* ─── Cards inside carousel ──────────────────────────────── */
+.project-carousel .project-card {
+  padding-block: var(--spacing-4);
+  padding-inline: var(--section-padding-inline);
+}
+
+@media (min-width: 480px) /* --breakpoint-sm */ {
+  .project-carousel .project-card {
+    padding-inline: 0;
+  }
+}
+
 /* ─── Slides ──────────────────────────────────────────────── */
 .project-carousel .carousel__slide {
   display: flex;
