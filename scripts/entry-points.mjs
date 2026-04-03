@@ -37,6 +37,7 @@ export const entryPoints = {
   // Organisms
   'project-carousel':    'src/stories/organisms/ProjectCarousel/ProjectCarousel.tsx',
   'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
+  'review-carousel':     'src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx',
   'steps':               'src/stories/organisms/Steps/Steps.tsx',
 };
 

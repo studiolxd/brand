@@ -1,0 +1,28 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ReviewCarouselStories from "./ReviewCarousel.stories";
+
+<Meta of={ReviewCarouselStories} />
+
+# ReviewCarousel
+
+Carousel horizontal de testimonios. Muestra tarjetas con avatar, nombre, cargo y cita de cada persona. Implementado sobre el átomo `Carousel` con Embla Carousel.
+
+Pensado para usarse sobre fondo oscuro (`.surface-dark`). La prop `gradientColor` del carousel interno ya apunta a `--color-background-dark` para que los degradados laterales se integren correctamente.
+
+## Slides por vista
+
+| Breakpoint | Slides |
+|---|---|
+| Mobile (< 768px) | 1 |
+| Tablet (>= 768px) | 2 |
+| Desktop (>= 1440px) | 3 |
+
+## Por defecto
+
+<Canvas of={ReviewCarouselStories.Default} />
+
+---
+
+## Props
+
+<ArgTypes of={ReviewCarouselStories} />

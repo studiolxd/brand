@@ -32,7 +32,10 @@ function i({ projects: i, hideTags: a = !1, className: o }) {
 			}, e))
 		}), /* @__PURE__ */ n("div", {
 			className: "project-grid",
-			children: [f.map((n) => /* @__PURE__ */ t(e, { project: n }, n.id)), Array.from({ length: h }).map((e, n) => /* @__PURE__ */ t("div", {
+			children: [f.map((n) => /* @__PURE__ */ t(e, {
+				project: n,
+				hideTag: a
+			}, n.id)), Array.from({ length: h }).map((e, n) => /* @__PURE__ */ t("div", {
 				className: [
 					"project-grid__empty",
 					n >= g && m > p && "project-grid__empty--xl-only",

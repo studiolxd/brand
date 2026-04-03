@@ -1,0 +1,46 @@
+import './review-carousel.css';
+import { Avatar as e } from "./avatar.js";
+import { Carousel as t, CarouselSlide as n } from "./carousel.js";
+import { Heading as r } from "./heading.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+//#region src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx
+function o({ reviews: o, className: s }) {
+	return /* @__PURE__ */ i(t, {
+		options: {
+			align: "center",
+			loop: !0
+		},
+		gradientColor: "var(--color-background-dark)",
+		className: ["review-carousel", s].filter(Boolean).join(" "),
+		children: o.map((t) => /* @__PURE__ */ i(n, { children: /* @__PURE__ */ a("article", {
+			className: "review-card",
+			children: [/* @__PURE__ */ a("div", {
+				className: "review-card__author",
+				children: [/* @__PURE__ */ i(e, {
+					src: t.photo,
+					alt: t.author,
+					size: "xl",
+					className: "review-card__avatar"
+				}), /* @__PURE__ */ a("div", {
+					className: "review-card__identity",
+					children: [/* @__PURE__ */ i(r, {
+						level: 3,
+						size: 7,
+						className: "review-card__name",
+						children: t.author
+					}), /* @__PURE__ */ i(r, {
+						level: 4,
+						size: 6,
+						className: "review-card__role",
+						children: t.role
+					})]
+				})]
+			}), /* @__PURE__ */ i("blockquote", {
+				className: "review-card__quote",
+				children: t.quote
+			})]
+		}) }, t.id))
+	});
+}
+//#endregion
+export { o as ReviewCarousel };
