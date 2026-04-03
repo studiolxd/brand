@@ -1,3 +1,4 @@
+import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
 import './ProjectCard.css';
@@ -42,25 +43,33 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
     ctaLabel = 'Leer más',
   } = project;
 
+  const image = (
+    <div className="project-card__image-wrap">
+      <img
+        src={photo}
+        alt={photoAlt ?? title}
+        className="project-card__image"
+      />
+    </div>
+  );
+
   return (
-    <a
-      className={['project-card', className].filter(Boolean).join(' ')}
-      href={href}
-      aria-label={title}
-    >
+    <div className={['project-card', className].filter(Boolean).join(' ')}>
       <Tag variant={tagVariant}>{category}</Tag>
-      <Heading level={3} className="project-card__title">{title}</Heading>
-      <div className="project-card__image-wrap">
-        <img
-          src={photo}
-          alt={photoAlt ?? title}
-          className="project-card__image"
-        />
-      </div>
+      <Heading level={3} className="project-card__title">
+        {href ? <a href={href} className="project-card__title-link">{title}</a> : title}
+      </Heading>
+      {href ? (
+        <a href={href} className="project-card__image-link" tabIndex={-1} aria-hidden="true">
+          {image}
+        </a>
+      ) : (
+        image
+      )}
       <p className="project-card__description">{description}</p>
-      <span className="project-card__cta button button--primary" aria-hidden="true">
-        {ctaLabel}
-      </span>
-    </a>
+      <div className="project-card__cta">
+        <Button href={href}>{ctaLabel}</Button>
+      </div>
+    </div>
   );
 }

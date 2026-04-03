@@ -57,7 +57,11 @@
     grid-template-rows: subgrid;
   }
 
-  .project-grid .project-card .tag,
+  .project-grid .project-card .tag {
+    align-self: start;
+    justify-self: start;
+  }
+
   .project-grid .project-card .project-card__cta {
     align-self: start;
   }
@@ -85,7 +89,7 @@
 }
 
 /* ─── Cards no-destacadas: tamaño reducido ───────────────── */
-.project-grid .project-card:not(:first-child) .project-card__cta {
+.project-grid .project-card:not(:first-child) .project-card__cta .button {
   padding-block: var(--button-primary-padding-block);
   padding-inline: var(--button-primary-padding-inline);
   font-size: var(--button-primary-font-size);

@@ -1,43 +1,54 @@
 import './project-card.css';
-import { Heading as e } from "./heading.js";
-import { Tag as t } from "./tag.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { Button as e } from "./button.js";
+import { Heading as t } from "./heading.js";
+import { Tag as n } from "./tag.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/ProjectCard/ProjectCard.tsx
-function i({ project: i, className: a }) {
-	let { category: o, tagVariant: s = "default", photo: c, photoAlt: l, title: u, description: d, href: f, ctaLabel: p = "Leer más" } = i;
-	return /* @__PURE__ */ r("a", {
-		className: ["project-card", a].filter(Boolean).join(" "),
-		href: f,
-		"aria-label": u,
+function a({ project: a, className: o }) {
+	let { category: s, tagVariant: c = "default", photo: l, photoAlt: u, title: d, description: f, href: p, ctaLabel: m = "Leer más" } = a, h = /* @__PURE__ */ r("div", {
+		className: "project-card__image-wrap",
+		children: /* @__PURE__ */ r("img", {
+			src: l,
+			alt: u ?? d,
+			className: "project-card__image"
+		})
+	});
+	return /* @__PURE__ */ i("div", {
+		className: ["project-card", o].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ n(t, {
-				variant: s,
-				children: o
+			/* @__PURE__ */ r(n, {
+				variant: c,
+				children: s
 			}),
-			/* @__PURE__ */ n(e, {
+			/* @__PURE__ */ r(t, {
 				level: 3,
 				className: "project-card__title",
-				children: u
+				children: p ? /* @__PURE__ */ r("a", {
+					href: p,
+					className: "project-card__title-link",
+					children: d
+				}) : d
 			}),
-			/* @__PURE__ */ n("div", {
-				className: "project-card__image-wrap",
-				children: /* @__PURE__ */ n("img", {
-					src: c,
-					alt: l ?? u,
-					className: "project-card__image"
-				})
-			}),
-			/* @__PURE__ */ n("p", {
-				className: "project-card__description",
-				children: d
-			}),
-			/* @__PURE__ */ n("span", {
-				className: "project-card__cta button button--primary",
+			p ? /* @__PURE__ */ r("a", {
+				href: p,
+				className: "project-card__image-link",
+				tabIndex: -1,
 				"aria-hidden": "true",
-				children: p
+				children: h
+			}) : h,
+			/* @__PURE__ */ r("p", {
+				className: "project-card__description",
+				children: f
+			}),
+			/* @__PURE__ */ r("div", {
+				className: "project-card__cta",
+				children: /* @__PURE__ */ r(e, {
+					href: p,
+					children: m
+				})
 			})
 		]
 	});
 }
 //#endregion
-export { i as ProjectCard };
+export { a as ProjectCard };
