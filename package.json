@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -142,6 +142,10 @@
     "./project-grid": {
       "types": "./dist/_types/organisms/ProjectGrid/ProjectGrid.d.ts",
       "import": "./dist/project-grid.js"
+    },
+    "./review-carousel": {
+      "types": "./dist/_types/organisms/ReviewCarousel/ReviewCarousel.d.ts",
+      "import": "./dist/review-carousel.js"
     },
     "./steps": {
       "types": "./dist/_types/organisms/Steps/Steps.d.ts",
