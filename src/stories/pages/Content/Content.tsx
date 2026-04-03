@@ -50,7 +50,7 @@ export function Content({ title, description, sections, contactSection, navItems
       />
       <main id="main-content" className="content-page__main">
         <div className="content-page__header">
-          <Heading level={1} size={8} weight="semibold">{title}</Heading>
+          <Heading level={1} size={8} weight="medium">{title}</Heading>
           {description && <p className="content-page__description">{description}</p>}
         </div>
         {sections?.map((section, i) => {
@@ -63,7 +63,7 @@ export function Content({ title, description, sections, contactSection, navItems
           return (
             <div key={i} className={['content-page__section', reversed ? 'content-page__section--reversed' : ''].filter(Boolean).join(' ')}>
               <div className={titleClass}>
-                <Heading level={2} size={8} weight="semibold">{section.title}</Heading>
+                <Heading level={2} size={8} weight="medium">{section.title}</Heading>
               </div>
               <div className={contentClass}>{section.content}</div>
             </div>

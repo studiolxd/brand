@@ -14,7 +14,7 @@ interface ProjectsSectionProps {
 export function ProjectsSection({ id, title = 'Proyectos', projects }: ProjectsSectionProps) {
   return (
     <section id={id} className="projects-section">
-      <Heading level={2} weight="semibold">{title}</Heading>
+      <Heading level={2} weight="medium">{title}</Heading>
       <ProjectCarousel projects={projects} />
     </section>
   );

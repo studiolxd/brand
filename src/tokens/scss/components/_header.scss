@@ -16,7 +16,7 @@ $header-navbar-transition-duration: 250ms; // Duración del slide de la navbar
 $header-navbar-transition-easing: ease-in-out; // Easing del slide de la navbar
 $header-nav-font-size-overlay: 1.75rem; // Tamaño de fuente de los enlaces en modo overlay
 $header-nav-font-size-inline: 1rem; // Tamaño de fuente de los enlaces en modo inline
-$header-nav-font-weight-overlay: 600; // Peso de fuente de los enlaces en modo overlay
+$header-nav-font-weight-overlay: 500; // Peso de fuente de los enlaces en modo overlay
 $header-nav-font-weight-inline: 500; // Peso de fuente de los enlaces en modo inline
 $header-nav-color: #111e30; // Color de los enlaces de navegación
 $header-nav-dark-color: #ffffff; // Color de los enlaces en variante oscura
@@ -29,6 +29,6 @@ $header-actions-gap-inline: 0.75rem; // Separación entre los elementos de actio
 $header-featured-border-width: 1px; // Grosor del borde del featured link
 $header-featured-border-color: currentColor; // Color del borde del featured link
 $header-featured-font-size: 1.5rem; // Tamaño de fuente del featured link
-$header-featured-font-weight: 600; // Peso de fuente del featured link
+$header-featured-font-weight: 500; // Peso de fuente del featured link
 $header-featured-padding-inline: 3rem; // Padding horizontal del featured link
 $header-featured-margin-inline-end: 3rem; // Separación entre el featured link y la navegación

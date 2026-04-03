@@ -12,7 +12,7 @@ function a({ href: a, title: o, description: s, ctaLabel: c, color: l }) {
 			/* @__PURE__ */ r(t, {
 				level: 2,
 				size: 8,
-				weight: "semibold",
+				weight: "medium",
 				children: o
 			}),
 			/* @__PURE__ */ r("p", { children: s }),

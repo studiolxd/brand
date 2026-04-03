@@ -8,7 +8,7 @@
   --form-separator-style: var(--control-border-style); /** Estilo del separador */
   --form-heading-font-family: var(--font-family-sans); /** Font family del heading */
   --form-heading-font-size: var(--font-size-5); /** Font size del heading (24px) */
-  --form-heading-font-weight: var(--font-weight-semibold); /** Font weight del heading */
+  --form-heading-font-weight: var(--font-weight-medium); /** Font weight del heading */
   --form-heading-line-height: var(--line-height-snug); /** Line height del heading */
   --form-heading-letter-spacing: var(--letter-spacing-tight); /** Letter spacing del heading */
   --form-error-font-family: var(--font-family-sans); /** Font family del mensaje de error */

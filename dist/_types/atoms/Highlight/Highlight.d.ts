@@ -6,7 +6,7 @@ interface HighlightProps {
     text: string;
     /** Tamaño tipográfico. Por defecto usa el token del componente (size 8 = 40px). */
     size?: HighlightSize;
-    /** Peso tipográfico. Por defecto usa el token del componente (semibold). */
+    /** Peso tipográfico. Por defecto usa el token del componente (medium). */
     weight?: HighlightWeight;
     /** Alineación horizontal del bloque. */
     align?: 'left' | 'center' | 'right';

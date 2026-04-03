@@ -15,7 +15,7 @@
     "navbar-transition-easing":      { "$value": "{motion.easing.in-out}",      "$type": "string",    "$description": "Easing del slide de la navbar" },
     "nav-font-size-overlay":         { "$value": "{font-size.6}",               "$type": "dimension", "$description": "Tamaño de fuente de los enlaces en modo overlay" },
     "nav-font-size-inline":          { "$value": "{font-size.2}",               "$type": "dimension", "$description": "Tamaño de fuente de los enlaces en modo inline" },
-    "nav-font-weight-overlay":       { "$value": "{font-weight.semibold}",       "$type": "number",    "$description": "Peso de fuente de los enlaces en modo overlay" },
+    "nav-font-weight-overlay":       { "$value": "{font-weight.medium}",       "$type": "number",    "$description": "Peso de fuente de los enlaces en modo overlay" },
     "nav-font-weight-inline":        { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso de fuente de los enlaces en modo inline" },
     "nav-color":                     { "$value": "{color.text.default}",         "$type": "color",     "$description": "Color de los enlaces de navegación" },
     "nav-dark-color":                { "$value": "{color.text.dark}",            "$type": "color",     "$description": "Color de los enlaces en variante oscura" },
@@ -28,7 +28,7 @@
     "featured-border-width":         { "$value": "{border-width.sm}",            "$type": "dimension", "$description": "Grosor del borde del featured link" },
     "featured-border-color":         { "$value": "currentColor",                 "$type": "color",     "$description": "Color del borde del featured link" },
     "featured-font-size":            { "$value": "{font-size.5}",                "$type": "dimension", "$description": "Tamaño de fuente del featured link" },
-    "featured-font-weight":          { "$value": "{font-weight.semibold}",        "$type": "number",    "$description": "Peso de fuente del featured link" },
+    "featured-font-weight":          { "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso de fuente del featured link" },
     "featured-padding-inline":       { "$value": "{spacing.7}",                  "$type": "dimension", "$description": "Padding horizontal del featured link" },
     "featured-margin-inline-end":    { "$value": "{spacing.7}",                  "$type": "dimension", "$description": "Separación entre el featured link y la navegación" }
   }

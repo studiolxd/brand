@@ -15,7 +15,7 @@ function o({ href: o, title: s, description: c, ctaLabel: l, color: u, image: d 
 				/* @__PURE__ */ i(t, {
 					level: 2,
 					size: 8,
-					weight: "semibold",
+					weight: "medium",
 					className: "card-split__title",
 					children: s
 				}),

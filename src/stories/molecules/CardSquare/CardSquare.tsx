@@ -34,7 +34,7 @@ export function CardSquare({ href, title, description, ctaLabel, color, image }:
         alt={image.alt}
       />
       <div className="card-square__body">
-        <Heading level={2} size={8} weight="semibold" className="card-square__title">{title}</Heading>
+        <Heading level={2} size={8} weight="medium" className="card-square__title">{title}</Heading>
         <Paragraph size="large" className="card-square__description">{description}</Paragraph>
         <Arrow className="card-square__arrow" size="lg" />
         <VisuallyHidden>{ctaLabel}</VisuallyHidden>

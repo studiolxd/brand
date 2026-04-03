@@ -29,7 +29,7 @@ export function MethodologySection({
   return (
     <section id={id} className="methodology-section" aria-label={ariaLabel}>
       <div className="methodology-section__intro">
-        <Heading level={2} weight="semibold">{intro}</Heading>
+        <Heading level={2} weight="medium">{intro}</Heading>
         <Button href={ctaHref} variant="primary">{ctaLabel}</Button>
       </div>
       <Steps steps={steps} />

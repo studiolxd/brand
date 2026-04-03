@@ -16,7 +16,7 @@ export { type Review };
 export function ReviewsSection({ id, title = 'Lo que dice nuestro alumnado', reviews }: ReviewsSectionProps) {
   return (
     <section id={id} className="reviews-section surface-dark">
-      <Heading level={2} weight="semibold">{title}</Heading>
+      <Heading level={2} weight="medium">{title}</Heading>
       <ReviewCarousel reviews={reviews} />
     </section>
   );

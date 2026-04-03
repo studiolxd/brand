@@ -11,7 +11,7 @@
     "heading": {
       "font-family":    { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Font family del heading" },
       "font-size":      { "$value": "{font-size.5}",            "$type": "dimension", "$description": "Font size del heading (24px)" },
-      "font-weight":    { "$value": "{font-weight.semibold}",   "$type": "number",    "$description": "Font weight del heading" },
+      "font-weight":    { "$value": "{font-weight.medium}",   "$type": "number",    "$description": "Font weight del heading" },
       "line-height":    { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Line height del heading" },
       "letter-spacing": { "$value": "{letter-spacing.tight}",   "$type": "dimension", "$description": "Letter spacing del heading" },
       "color":          { "$value": "{color.text.default}",     "$type": "color",     "$description": "Color del heading" }
