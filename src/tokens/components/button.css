@@ -43,6 +43,13 @@
   --button-primary-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-primary-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-primary-bg: var(--color-white); /** Background */
+  --button-secondary-border-style: var(--button-border-style); /** Border style */
+  --button-secondary-justify-content: var(--button-justify-content); /** Justify content */
+  --button-secondary-cursor: var(--button-cursor); /** Cursor */
+  --button-secondary-white-space: var(--button-white-space); /** White space */
+  --button-secondary-text-decoration: var(--button-text-decoration); /** Text decoration */
+  --button-secondary-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
+  --button-secondary-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-ghost-border-style: var(--button-border-style); /** Border style */
   --button-ghost-justify-content: var(--button-justify-content); /** Justify content */
   --button-ghost-cursor: var(--button-cursor); /** Cursor */
@@ -88,6 +95,29 @@
   --button-primary-active-bg: var(--color-primary); /** Active background */
   --button-primary-active-color: var(--color-text-dark); /** Active text color */
   --button-primary-active-border: var(--color-primary); /** Active border color */
+  --button-secondary-border-radius: var(--button-border-radius); /** Border radius */
+  --button-secondary-border-width: var(--button-border-width); /** Border width */
+  --button-secondary-font-family: var(--button-font-family); /** Font family */
+  --button-secondary-font-size: var(--button-font-size); /** Font size */
+  --button-secondary-line-height: var(--button-line-height); /** Line height */
+  --button-secondary-transition-duration: var(--button-transition-duration); /** Transition duration */
+  --button-secondary-transition-easing: var(--button-transition-easing); /** Transition easing */
+  --button-secondary-disabled-color: var(--button-disabled-color); /** Text color when disabled */
+  --button-secondary-disabled-border: var(--button-disabled-border); /** Border color when disabled */
+  --button-secondary-padding-block: var(--button-padding-block); /** Block (vertical) padding */
+  --button-secondary-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
+  --button-secondary-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
+  --button-secondary-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
+  --button-secondary-focus-ring-color: var(--color-secondary); /** Focus ring color */
+  --button-secondary-bg: var(--color-secondary); /** Background */
+  --button-secondary-color: var(--color-primary); /** Text color */
+  --button-secondary-border: var(--color-secondary); /** Border color */
+  --button-secondary-hover-bg: var(--color-tertiary); /** Hover background */
+  --button-secondary-hover-color: var(--color-primary); /** Hover text color */
+  --button-secondary-hover-border: var(--color-tertiary); /** Hover border color */
+  --button-secondary-active-bg: var(--color-tertiary); /** Active background */
+  --button-secondary-active-color: var(--color-primary); /** Active text color */
+  --button-secondary-active-border: var(--color-tertiary); /** Active border color */
   --button-ghost-border-radius: var(--button-border-radius); /** Border radius */
   --button-ghost-border-width: var(--button-border-width); /** Border width */
   --button-ghost-font-family: var(--button-font-family); /** Font family */
@@ -127,6 +157,7 @@
   --button-form-active-color: var(--color-text-default); /** Active text color */
   --button-form-active-border: var(--color-tertiary); /** Active border color — matches active bg */
   --button-primary-font-weight: var(--button-font-weight); /** Font weight */
+  --button-secondary-font-weight: var(--button-font-weight); /** Font weight */
   --button-ghost-font-weight: var(--button-font-weight); /** Font weight */
   --button-form-font-weight: var(--button-font-weight); /** Font weight */
 }

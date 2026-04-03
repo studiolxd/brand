@@ -62,6 +62,37 @@ $button-primary-hover-border: #111e30; // Hover border color
 $button-primary-active-bg: #111e30; // Active background
 $button-primary-active-color: #ffffff; // Active text color
 $button-primary-active-border: #111e30; // Active border color
+$button-secondary-border-radius: 9999px; // Border radius
+$button-secondary-border-width: 1px; // Border width
+$button-secondary-border-style: solid; // Border style
+$button-secondary-justify-content: center; // Justify content
+$button-secondary-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$button-secondary-font-size: 1.125rem; // Font size
+$button-secondary-font-weight: 300; // Font weight
+$button-secondary-line-height: 1; // Line height
+$button-secondary-cursor: pointer; // Cursor
+$button-secondary-white-space: nowrap; // White space
+$button-secondary-text-decoration: none; // Text decoration
+$button-secondary-transition-duration: 150ms; // Transition duration
+$button-secondary-transition-easing: ease; // Transition easing
+$button-secondary-disabled-cursor: not-allowed; // Cursor when disabled
+$button-secondary-disabled-color: #4a4a4a; // Text color when disabled
+$button-secondary-disabled-border: #4a4a4a; // Border color when disabled
+$button-secondary-padding-block: 0.75rem; // Block (vertical) padding
+$button-secondary-padding-inline: 2rem; // Inline (horizontal) padding
+$button-secondary-focus-ring-width: 2px; // Focus ring width
+$button-secondary-focus-ring-style: solid; // Focus ring border style
+$button-secondary-focus-ring-offset: 2px; // Focus ring offset
+$button-secondary-focus-ring-color: #baabff; // Focus ring color
+$button-secondary-bg: #baabff; // Background
+$button-secondary-color: #111e30; // Text color
+$button-secondary-border: #baabff; // Border color
+$button-secondary-hover-bg: #ffcd00; // Hover background
+$button-secondary-hover-color: #111e30; // Hover text color
+$button-secondary-hover-border: #ffcd00; // Hover border color
+$button-secondary-active-bg: #ffcd00; // Active background
+$button-secondary-active-color: #111e30; // Active text color
+$button-secondary-active-border: #ffcd00; // Active border color
 $button-ghost-border-radius: 9999px; // Border radius
 $button-ghost-border-width: 1px; // Border width
 $button-ghost-border-style: solid; // Border style
