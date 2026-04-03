@@ -148,3 +148,25 @@ Strict mode (`tsconfig.app.json`). Sin locals ni parámetros sin usar — el bui
 ## ESLint
 
 ESLint 9 flat config (`eslint.config.js`). TypeScript, React Hooks, React Refresh y Storybook. Ignora `dist/`.
+
+## Versionado
+
+El paquete sigue **semver** y se distribuye vía git tags. Los consumidores (la web) pinean a un tag específico (`github:studiolxd/brand#v0.1.0`).
+
+### Reglas
+
+- **patch** (`0.1.0` → `0.1.1`): bug fixes, regeneración de dist, ajustes de tokens que no cambian la API.
+- **minor** (`0.1.0` → `0.2.0`): nuevos componentes, nuevas props, nuevas variantes, nuevos tokens.
+- **major** (`0.2.0` → `1.0.0`): breaking changes — props renombradas/eliminadas, clases BEM renombradas, tokens eliminados.
+
+### Flujo al publicar cambios
+
+1. Actualizar `"version"` en `package.json` según el tipo de cambio.
+2. Commit con mensaje que refleje el cambio (ej. `feat: add plain type to List atom`).
+3. Crear tag y push:
+   ```bash
+   git tag v<version>
+   git push origin main --tags
+   ```
+
+> **IMPORTANTE:** Cada push a `main` debe ir acompañado de un tag si incluye cambios funcionales. Los commits puramente internos (docs, refactors sin impacto en consumidores) pueden agruparse bajo un solo tag.
