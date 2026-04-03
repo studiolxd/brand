@@ -33,7 +33,8 @@ export function ProjectGrid({ projects, hideTags = false, className }: ProjectGr
   const toggleTag = (variant: string) => {
     setActiveTags((prev) => {
       const next = new Set(prev);
-      next.has(variant) ? next.delete(variant) : next.add(variant);
+      if (next.has(variant)) next.delete(variant);
+      else next.add(variant);
       return next.size === 0 ? new Set(allVariants) : next;
     });
   };
@@ -70,7 +71,7 @@ export function ProjectGrid({ projects, hideTags = false, className }: ProjectGr
       )}
       <div className="project-grid">
         {filtered.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard key={project.id} project={project} hideTag={hideTags} />
         ))}
         {Array.from({ length: totalEmpty }).map((_, i) => {
           const isXlOnly = i >= commonEmpty && xlEmpty > mdEmpty;
