@@ -15,6 +15,7 @@ function i({ children: i, options: a, plugins: o, hideButtons: s, className: c, 
 	return /* @__PURE__ */ n("div", {
 		className: ["carousel", c].filter(Boolean).join(" "),
 		style: p,
+		"aria-roledescription": "carousel",
 		children: [
 			!s && /* @__PURE__ */ t("button", {
 				className: "carousel__btn carousel__btn--prev",
@@ -50,6 +51,8 @@ function i({ children: i, options: a, plugins: o, hideButtons: s, className: c, 
 function a({ children: e, className: n }) {
 	return /* @__PURE__ */ t("div", {
 		className: ["carousel__slide", n].filter(Boolean).join(" "),
+		role: "group",
+		"aria-roledescription": "slide",
 		children: e
 	});
 }
