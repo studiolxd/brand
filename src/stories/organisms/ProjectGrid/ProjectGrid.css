@@ -91,12 +91,14 @@
   font-size: var(--button-primary-font-size);
 }
 
-.project-grid .project-card:not(:first-child) .project-card__title {
-  font-size: var(--text-h3-font-size);
-}
+@media (min-width: 1280px) /* --breakpoint-xl */ {
+  .project-grid .project-card:not(:first-child) .project-card__title {
+    font-size: var(--text-h6-font-size);
+  }
 
-.project-grid .project-card:not(:first-child) .project-card__description {
-  font-size: var(--text-paragraph-font-size);
+  .project-grid .project-card:not(:first-child) .project-card__description {
+    font-size: var(--text-paragraph-small-font-size);
+  }
 }
 
 /* ─── Empty cells ────────────────────────────────────────── */

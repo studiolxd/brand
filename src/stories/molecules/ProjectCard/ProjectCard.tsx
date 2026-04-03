@@ -1,5 +1,6 @@
 import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
+import '../../atoms/Button/Button.css';
 import './ProjectCard.css';
 
 export type TagVariant = 'default' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';

@@ -17,7 +17,6 @@
 
 /* ─── Cards inside carousel ──────────────────────────────── */
 .project-carousel .project-card {
-  padding-block: var(--spacing-4);
   padding-inline: var(--section-padding-inline);
 }
 
@@ -30,4 +29,6 @@
 /* ─── Slides ──────────────────────────────────────────────── */
 .project-carousel .carousel__slide {
   display: flex;
+  padding-block: var(--spacing-4);
 }
+
