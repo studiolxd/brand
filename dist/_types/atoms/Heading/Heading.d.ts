@@ -10,7 +10,9 @@ interface HeadingProps {
     size?: HeadingSize;
     /** Clases adicionales para el elemento. */
     className?: string;
+    /** Identificador HTML del elemento. */
+    id?: string;
     children: React.ReactNode;
 }
-export declare function Heading({ level, weight, size, className, children }: HeadingProps): import("react/jsx-runtime").JSX.Element;
+export declare function Heading({ level, weight, size, className, id, children }: HeadingProps): import("react/jsx-runtime").JSX.Element;
 export {};
