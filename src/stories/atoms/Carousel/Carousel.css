@@ -78,11 +78,11 @@
 /* En móvil: ambos botones alineados a la derecha con separación */
 .carousel__btn--prev {
   margin-inline-start: auto;
-  margin-block-start: var(--spacing-4);
+  margin-block-end: var(--spacing-4);
 }
 
 .carousel__btn--next {
-  margin-block-start: var(--spacing-4);
+  margin-block-end: var(--spacing-4);
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {
@@ -95,7 +95,7 @@
     height: auto;
     order: unset;
     padding-inline: var(--carousel-btn-padding-inline);
-    margin-block-start: unset;
+    margin-block-end: unset;
   }
 
   .carousel__btn--prev {

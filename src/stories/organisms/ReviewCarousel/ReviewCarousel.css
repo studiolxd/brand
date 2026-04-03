@@ -1,16 +1,16 @@
 /* ─── Carousel sizing ────────────────────────────────────── */
-.review-carousel {
+.carousel.review-carousel {
   --carousel-slide-size: 100%;
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {
-  .review-carousel {
+  .carousel.review-carousel {
     --carousel-slide-size: calc(100% / 2);
   }
 }
 
 @media (min-width: 1440px) /* --breakpoint-2xl */ {
-  .review-carousel {
+  .carousel.review-carousel {
     --carousel-slide-size: calc(100% / 3);
   }
 }
@@ -18,6 +18,7 @@
 /* ─── Slides ──────────────────────────────────────────────── */
 .review-carousel .carousel__slide {
   display: flex;
+  padding-block: var(--spacing-4);
 }
 
 /* ─── Review card ────────────────────────────────────────── */
@@ -55,6 +56,7 @@
 }
 
 .review-card__quote {
-  margin-block: 0;
-  margin-inline: 0;
+  margin: 0;
+  margin-block-start: var(--section-spacing-md);
+  color: var(--text-paragraph-color);
 }

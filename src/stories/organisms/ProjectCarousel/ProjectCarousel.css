@@ -1,16 +1,16 @@
 /* ─── Carousel sizing ────────────────────────────────────── */
-.project-carousel {
+.carousel.project-carousel {
   --carousel-slide-size: 100%;
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {
-  .project-carousel {
+  .carousel.project-carousel {
     --carousel-slide-size: calc(100% / 3);
   }
 }
 
 @media (min-width: 1440px) /* --breakpoint-2xl */ {
-  .project-carousel {
+  .carousel.project-carousel {
     --carousel-slide-size: calc(100% / 4);
   }
 }
