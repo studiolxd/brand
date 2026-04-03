@@ -12,6 +12,11 @@ const refMap: Record<string, string> = {
   ...Object.fromEntries(Object.entries(palette.color).map(([k, v]) => [`color.${k}`, v.$value])),  
   ...Object.fromEntries(Object.entries(brand.color).map(([k, v]) => [`color.${k}`, v.$value])),  
   ...Object.fromEntries(Object.entries(neutral.color).map(([k, v]) => [`color.${k}`, v.$value])),
+  ...Object.fromEntries(
+    Object.entries(semantic.color).flatMap(([group, entries]) =>
+      Object.entries(entries as Record<string, { $value: string }>).map(([k, v]) => [`color.${group}.${k}`, v.$value])
+    )
+  ),
 };
 
 export default create({
