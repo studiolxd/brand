@@ -9,34 +9,8 @@
 @import "./tokens/index.css";
 
 /* =========================================================
-   SURFACE THEMING
+   STYLESHEETS
    ========================================================= */
-@import "./surface.css";
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-@import "./reduced-motion.css";
-
-/* =========================================================
-   BASE
-   ========================================================= */
-body {
-  font-family: var(--text-font-family);
-  font-weight: var(--text-font-weight);
-  font-size: var(--text-font-size);
-  line-height: var(--text-line-height);
-  color: var(--text-color);
-}
-
-p {
-  margin-block: 0;
-  margin-inline: 0;
-}
-
-ul, ol {
-  margin-block: 0;
-  margin-inline: 0;
-  padding-inline: 0;
-}
-
+@import "./stylesheets/base.css";
+@import "./stylesheets/surface.css";
+@import "./stylesheets/reduced-motion.css";

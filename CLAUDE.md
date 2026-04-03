@@ -70,7 +70,7 @@ Los átomos que no tienen un elemento HTML unívoco (Button con variantes, Input
 
 ### Theming de superficie (dark)
 
-El theming oscuro se gestiona con la clase de contexto `.surface-dark` definida en `src/surface.css`. **No usar la clase `.dark` — está eliminada.**
+El theming oscuro se gestiona con la clase de contexto `.surface-dark` definida en `src/stylesheets/surface.css`. **No usar la clase `.dark` — está eliminada.**
 
 - Añadir `.surface-dark` a cualquier contenedor para que todos los componentes descendientes adapten automáticamente sus tokens al tema oscuro.
 - Los tokens oscuros se remapean en un único bloque `.surface-dark { }` en `surface.css` — **nunca en los CSS individuales de componente**.
