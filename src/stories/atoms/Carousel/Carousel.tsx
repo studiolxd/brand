@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import { Chevron } from '../Chevron/Chevron';
@@ -25,10 +26,56 @@ interface CarouselProps {
    * Útil en secciones con fondo oscuro o de color.
    */
   gradientColor?: string;
+  /** Texto accesible del botón "anterior". Por defecto "Anterior". */
+  prevLabel?: string;
+  /** Texto accesible del botón "siguiente". Por defecto "Siguiente". */
+  nextLabel?: string;
 }
 
-export function Carousel({ children, options, plugins, hideButtons, className, slideSize, gradientColor }: CarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, ...options }, plugins);
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export function Carousel({
+  children,
+  options,
+  plugins,
+  hideButtons,
+  className,
+  slideSize,
+  gradientColor,
+  prevLabel = 'Anterior',
+  nextLabel = 'Siguiente',
+}: CarouselProps) {
+  const effectivePlugins = prefersReducedMotion ? [] : plugins;
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, ...options }, effectivePlugins);
+
+  useEffect(() => {
+    const node = emblaApi?.rootNode();
+    if (!node) return;
+
+    const plugins = emblaApi?.plugins() as Record<string, { stop?: () => void; play?: () => void }> | undefined;
+    const pause = () => {
+      plugins?.autoScroll?.stop?.();
+      plugins?.autoplay?.stop?.();
+    };
+    const resume = () => {
+      plugins?.autoScroll?.play?.();
+      plugins?.autoplay?.play?.();
+    };
+
+    node.addEventListener('mouseenter', pause);
+    node.addEventListener('mouseleave', resume);
+    node.addEventListener('focusin', pause);
+    node.addEventListener('focusout', resume);
+
+    return () => {
+      node.removeEventListener('mouseenter', pause);
+      node.removeEventListener('mouseleave', resume);
+      node.removeEventListener('focusin', pause);
+      node.removeEventListener('focusout', resume);
+    };
+  }, [emblaApi]);
 
   const style = {
     ...(slideSize ? { '--carousel-slide-size': slideSize } : {}),
@@ -36,12 +83,12 @@ export function Carousel({ children, options, plugins, hideButtons, className, s
   } as React.CSSProperties;
 
   return (
-    <div className={['carousel', className].filter(Boolean).join(' ')} style={style} aria-roledescription="carousel">
+    <div className={['carousel', className].filter(Boolean).join(' ')} style={style} role="region" aria-roledescription="carousel">
       {!hideButtons && (
         <button
           className="carousel__btn carousel__btn--prev"
           onClick={() => emblaApi?.scrollPrev()}
-          aria-label="Anterior"
+          aria-label={prevLabel}
           type="button"
         >
           <Chevron className="carousel__chevron carousel__chevron--prev" size="lg" />
@@ -58,7 +105,7 @@ export function Carousel({ children, options, plugins, hideButtons, className, s
         <button
           className="carousel__btn carousel__btn--next"
           onClick={() => emblaApi?.scrollNext()}
-          aria-label="Siguiente"
+          aria-label={nextLabel}
           type="button"
         >
           <Chevron className="carousel__chevron" size="lg" />

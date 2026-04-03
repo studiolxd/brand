@@ -22,8 +22,12 @@ interface CarouselProps {
      * Útil en secciones con fondo oscuro o de color.
      */
     gradientColor?: string;
+    /** Texto accesible del botón "anterior". Por defecto "Anterior". */
+    prevLabel?: string;
+    /** Texto accesible del botón "siguiente". Por defecto "Siguiente". */
+    nextLabel?: string;
 }
-export declare function Carousel({ children, options, plugins, hideButtons, className, slideSize, gradientColor }: CarouselProps): import("react/jsx-runtime").JSX.Element;
+export declare function Carousel({ children, options, plugins, hideButtons, className, slideSize, gradientColor, prevLabel, nextLabel, }: CarouselProps): import("react/jsx-runtime").JSX.Element;
 interface CarouselSlideProps {
     children: React.ReactNode;
     className?: string;
