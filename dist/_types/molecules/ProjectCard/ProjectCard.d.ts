@@ -22,7 +22,9 @@ export interface Project {
 }
 interface ProjectCardProps {
     project: Project;
+    /** Oculta el tag de categoría. */
+    hideTag?: boolean;
     className?: string;
 }
-export declare function ProjectCard({ project, className }: ProjectCardProps): import("react/jsx-runtime").JSX.Element;
+export declare function ProjectCard({ project, hideTag, className }: ProjectCardProps): import("react/jsx-runtime").JSX.Element;
 export {};

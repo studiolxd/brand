@@ -5,10 +5,12 @@ import './ProjectCarousel.css';
 
 interface ProjectCarouselProps {
   projects: Project[];
+  /** Oculta el tag de categoría en cada ProjectCard. */
+  hideTags?: boolean;
   className?: string;
 }
 
-export function ProjectCarousel({ projects, className }: ProjectCarouselProps) {
+export function ProjectCarousel({ projects, hideTags = false, className }: ProjectCarouselProps) {
   return (
     <Carousel
       options={{ align: 'center' }}
@@ -16,7 +18,7 @@ export function ProjectCarousel({ projects, className }: ProjectCarouselProps) {
     >
       {projects.map((project) => (
         <CarouselSlide key={project.id}>
-          <ProjectCard project={project} />
+          <ProjectCard project={project} hideTag={hideTags} />
         </CarouselSlide>
       ))}
     </Carousel>

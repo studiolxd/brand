@@ -4,47 +4,47 @@ import { Heading as t } from "./heading.js";
 import { Tag as n } from "./tag.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/ProjectCard/ProjectCard.tsx
-function a({ project: a, className: o }) {
-	let { category: s, tagVariant: c = "default", photo: l, photoAlt: u, title: d, description: f, href: p, ctaLabel: m = "Leer más" } = a, h = /* @__PURE__ */ r("div", {
+function a({ project: a, hideTag: o = !1, className: s }) {
+	let { category: c, tagVariant: l = "default", photo: u, photoAlt: d, title: f, description: p, href: m, ctaLabel: h = "Leer más" } = a, g = /* @__PURE__ */ r("div", {
 		className: "project-card__image-wrap",
 		children: /* @__PURE__ */ r("img", {
-			src: l,
-			alt: u ?? d,
+			src: u,
+			alt: d ?? f,
 			className: "project-card__image"
 		})
 	});
 	return /* @__PURE__ */ i("div", {
-		className: ["project-card", o].filter(Boolean).join(" "),
+		className: ["project-card", s].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r(n, {
-				variant: c,
-				children: s
+			!o && /* @__PURE__ */ r(n, {
+				variant: l,
+				children: c
 			}),
 			/* @__PURE__ */ r(t, {
 				level: 3,
 				className: "project-card__title",
-				children: p ? /* @__PURE__ */ r("a", {
-					href: p,
+				children: m ? /* @__PURE__ */ r("a", {
+					href: m,
 					className: "project-card__title-link",
-					children: d
-				}) : d
+					children: f
+				}) : f
 			}),
-			p ? /* @__PURE__ */ r("a", {
-				href: p,
+			m ? /* @__PURE__ */ r("a", {
+				href: m,
 				className: "project-card__image-link",
 				tabIndex: -1,
 				"aria-hidden": "true",
-				children: h
-			}) : h,
+				children: g
+			}) : g,
 			/* @__PURE__ */ r("p", {
 				className: "project-card__description",
-				children: f
+				children: p
 			}),
 			/* @__PURE__ */ r("div", {
 				className: "project-card__cta",
 				children: /* @__PURE__ */ r(e, {
-					href: p,
-					children: m
+					href: m,
+					children: h
 				})
 			})
 		]

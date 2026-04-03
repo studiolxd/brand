@@ -28,10 +28,12 @@ export interface Project {
 
 interface ProjectCardProps {
   project: Project;
+  /** Oculta el tag de categoría. */
+  hideTag?: boolean;
   className?: string;
 }
 
-export function ProjectCard({ project, className }: ProjectCardProps) {
+export function ProjectCard({ project, hideTag = false, className }: ProjectCardProps) {
   const {
     category,
     tagVariant = 'default',
@@ -55,7 +57,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
 
   return (
     <div className={['project-card', className].filter(Boolean).join(' ')}>
-      <Tag variant={tagVariant}>{category}</Tag>
+      {!hideTag && <Tag variant={tagVariant}>{category}</Tag>}
       <Heading level={3} className="project-card__title">
         {href ? <a href={href} className="project-card__title-link">{title}</a> : title}
       </Heading>
