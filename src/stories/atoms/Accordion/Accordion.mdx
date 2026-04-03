@@ -1,0 +1,54 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AccordionStories from "./Accordion.stories";
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+Componente colapsable que permite mostrar y ocultar contenido en secciones apiladas. Implementado con [Radix UI Accordion](https://www.radix-ui.com/primitives/docs/components/accordion), que gestiona la accesibilidad (WAI-ARIA Accordion Pattern), el foco por teclado y la animacion de apertura/cierre.
+
+## Composicion
+
+El componente se compone de cuatro piezas que se usan juntas:
+
+| Sub-componente | Descripcion |
+|---|---|
+| `Accordion` | Raiz. Define el modo (`single` o `multiple`) y gestiona el estado. |
+| `AccordionItem` | Envuelve cada seccion colapsable. Requiere un `value` unico. |
+| `AccordionTrigger` | Boton que abre/cierra el item. Incluye un `Chevron` indicador. |
+| `AccordionContent` | Contenido que se muestra u oculta con animacion. |
+
+## Modos
+
+### Single
+
+Solo un item puede estar abierto a la vez. La prop `collapsible` (por defecto `true`) permite cerrar todos los items.
+
+<Canvas of={AccordionStories.Single} />
+
+### Multiple
+
+Varios items pueden estar abiertos simultaneamente.
+
+<Canvas of={AccordionStories.Multiple} />
+
+---
+
+## CSS y Radix
+
+Los componentes Radix usan atributos `data-*` en lugar de pseudo-clases CSS:
+
+- `data-state="open"` / `data-state="closed"` en `AccordionItem`, `AccordionTrigger` y `AccordionContent`
+- `data-disabled` cuando el item esta deshabilitado
+
+Ejemplo de selector CSS:
+
+```css
+.accordion__trigger[data-state="open"] .accordion__chevron {
+  transform: rotate(180deg);
+}
+```
+
+## Props
+
+<ArgTypes of={AccordionStories} />

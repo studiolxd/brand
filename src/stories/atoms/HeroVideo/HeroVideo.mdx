@@ -1,0 +1,38 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HeroVideoStories from "./HeroVideo.stories";
+
+<Meta of={HeroVideoStories} />
+
+# HeroVideo
+
+Video hero decorativo a pantalla completa. Muestra un video en bucle sin sonido ni controles, pensado como fondo visual de la seccion principal de la pagina.
+
+El componente es puramente decorativo y lleva `aria-hidden="true"`, por lo que los lectores de pantalla lo ignoran completamente.
+
+## Dos fuentes responsive
+
+El componente recibe dos fuentes de video independientes:
+
+| Prop | Visible en |
+|---|---|
+| `landscape` | Pantallas en orientacion horizontal (desktop, tablet apaisada) |
+| `portrait` | Pantallas en orientacion vertical (movil, tablet vertical) |
+
+Cada fuente acepta los formatos `webm` y `mp4`. Se recomienda proporcionar ambos formatos para maxima compatibilidad, con `webm` como primera opcion (menor peso).
+
+```tsx
+<HeroVideo
+  landscape={{ webm: '/hero-land.webm', mp4: '/hero-land.mp4' }}
+  portrait={{ webm: '/hero-port.webm', mp4: '/hero-port.mp4' }}
+/>
+```
+
+## Por defecto
+
+<Canvas of={HeroVideoStories.Default} />
+
+---
+
+## Props
+
+<ArgTypes of={HeroVideoStories} />

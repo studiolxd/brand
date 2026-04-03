@@ -1,0 +1,32 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CoursesSectionStories from "./CoursesSection.stories";
+
+<Meta of={CoursesSectionStories} />
+
+# CoursesSection
+
+Seccion contenedora para el listado de cursos. Actua como wrapper que aplica el layout de grid responsivo para las cards de cursos (`CardSquare` y `CardSplit`).
+
+El componente recibe los cards como `children`, lo que permite combinar libremente distintos tipos de card segun las necesidades del contenido.
+
+## Uso
+
+```tsx
+<CoursesSection>
+  <CardSquare href="/curso-1" color="secondary" title="..." description="..." />
+  <CardSquare href="/curso-2" color="tertiary" title="..." description="..." />
+  <CardSplit href="/curso-3" color="quaternary" title="..." description="..." />
+</CoursesSection>
+```
+
+## Por defecto
+
+Combinacion de dos `CardSquare` y dos `CardSplit` con distintas variantes de color.
+
+<Canvas of={CoursesSectionStories.Default} />
+
+---
+
+## Props
+
+<ArgTypes of={CoursesSectionStories} />
