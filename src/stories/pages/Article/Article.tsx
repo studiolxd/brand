@@ -68,7 +68,7 @@ export function Article({
               alt={photoAlt ?? title}
               className="article-detail__photo"
               width={1200}
-              height={800}
+              height={675}
             />
             <div className="article-detail__content">
               {sections.map((section) => (
