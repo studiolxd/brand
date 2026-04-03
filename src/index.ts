@@ -42,15 +42,3 @@ export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 export { ProjectCarousel } from './stories/organisms/ProjectCarousel/ProjectCarousel';
 export { ProjectGrid } from './stories/organisms/ProjectGrid/ProjectGrid';
 export { Steps } from './stories/organisms/Steps/Steps';
-
-// ─── Sections ────────────────────────────────────────────────
-export { ClientsSection } from './stories/sections/ClientsSection/ClientsSection';
-export { ContactSection } from './stories/sections/ContactSection/ContactSection';
-export { CoursesSection } from './stories/sections/CoursesSection/CoursesSection';
-export { Footer } from './stories/sections/Footer/Footer';
-export { Header } from './stories/sections/Header/Header';
-export { HighlightSection } from './stories/sections/HighlightSection/HighlightSection';
-export { MethodologySection } from './stories/sections/MethodologySection/MethodologySection';
-export { ProjectsSection } from './stories/sections/ProjectsSection/ProjectsSection';
-export { ReviewsSection } from './stories/sections/ReviewsSection/ReviewsSection';
-export { SolutionsSection } from './stories/sections/SolutionsSection/SolutionsSection';
