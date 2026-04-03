@@ -36,7 +36,7 @@ export function Carousel({ children, options, plugins, hideButtons, className, s
   } as React.CSSProperties;
 
   return (
-    <div className={['carousel', className].filter(Boolean).join(' ')} style={style}>
+    <div className={['carousel', className].filter(Boolean).join(' ')} style={style} aria-roledescription="carousel">
       {!hideButtons && (
         <button
           className="carousel__btn carousel__btn--prev"
@@ -75,7 +75,7 @@ interface CarouselSlideProps {
 
 export function CarouselSlide({ children, className }: CarouselSlideProps) {
   return (
-    <div className={['carousel__slide', className].filter(Boolean).join(' ')}>
+    <div className={['carousel__slide', className].filter(Boolean).join(' ')} role="group" aria-roledescription="slide">
       {children}
     </div>
   );
