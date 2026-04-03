@@ -20,7 +20,7 @@
     "nav-color":                     { "$value": "{color.text.default}",         "$type": "color",     "$description": "Color de los enlaces de navegación" },
     "nav-dark-color":                { "$value": "{color.text.dark}",            "$type": "color",     "$description": "Color de los enlaces en variante oscura" },
     "nav-gap-overlay":               { "$value": "0",                            "$type": "dimension", "$description": "Separación entre enlaces en modo overlay" },
-    "nav-gap-inline":                { "$value": "{spacing.6}",                  "$type": "dimension", "$description": "Separación entre enlaces en modo inline" },
+    "nav-gap-inline":                { "$value": "{spacing.4}",                  "$type": "dimension", "$description": "Separación entre enlaces en modo inline" },
     "nav-padding-block-overlay":     { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Padding vertical de la zona de nav en modo overlay" },
     "nav-padding-inline":            { "$value": "{spacing.4}",                  "$type": "dimension", "$description": "Padding horizontal del header y la navbar — igual que section-padding-inline" },
     "actions-gap-overlay":           { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Separación entre los elementos de actions en modo overlay" },
