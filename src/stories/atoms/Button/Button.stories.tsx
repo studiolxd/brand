@@ -37,6 +37,10 @@ const meta: Meta<typeof Button> = {
       options: ['button', 'submit', 'reset'],
       description: 'Tipo HTML del botón.',
     },
+    asChild: {
+      control: { type: 'boolean' },
+      description: 'Fusiona las props del Button sobre el elemento hijo en lugar de renderizar un wrapper. Útil para pasar un componente de enrutamiento (p.ej. Next.js Link) sin perder la navegación client-side.',
+    },
   },
   args: {
     children: 'Button',
@@ -158,4 +162,18 @@ export const AsLinkDisabled: Story = {
 export const FocusVisible: Story = {
   name: 'Focus visible',
   parameters: { pseudo: { focusVisible: true } },
+};
+
+/**
+ * Con `asChild`, Button fusiona sus clases y handlers sobre el elemento hijo.
+ * En producción el hijo sería `<Link>` de Next.js; aquí usamos `<a>` como stand-in.
+ */
+export const AsChild: Story = {
+  name: 'asChild (router link)',
+  render: (args) => (
+    <Button {...args} asChild>
+      <a href="#">Ir a proyectos</a>
+    </Button>
+  ),
+  args: { variant: 'primary' },
 };

@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot';
 import './Button.css';
 
 interface ButtonProps {
@@ -17,6 +18,8 @@ interface ButtonProps {
   href?: string;
   /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
   external?: boolean;
+  /** Merges props onto the child element instead of rendering a wrapper (e.g. Next.js Link) */
+  asChild?: boolean;
 }
 
 export function Button({
@@ -29,6 +32,7 @@ export function Button({
   onClick,
   href,
   external = false,
+  asChild = false,
 }: ButtonProps) {
   const classes = [
     'button',
@@ -36,6 +40,14 @@ export function Button({
     size !== 'md' ? `button--${size}` : '',
     block ? 'button--block' : '',
   ].filter(Boolean).join(' ');
+
+  if (asChild) {
+    return (
+      <Slot className={classes} onClick={onClick as React.MouseEventHandler<HTMLElement>}>
+        {children}
+      </Slot>
+    );
+  }
 
   if (href !== undefined) {
     return (

@@ -61,6 +61,37 @@ Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica
 
 ---
 
+## Como enlace
+
+### href
+
+Cuando se pasa la prop `href`, el botón renderiza un `<a>` nativo. Apropiado para enlaces externos o cuando no se usa un router.
+
+<Canvas of={ButtonStories.AsLink} />
+
+El estado `disabled` en este caso añade `aria-disabled="true"` y elimina el `href`, ya que el atributo `disabled` nativo no existe en `<a>`.
+
+<Canvas of={ButtonStories.AsLinkDisabled} />
+
+### asChild (Next.js Link y otros routers)
+
+Con la prop `asChild`, Button fusiona sus clases y event handlers directamente sobre el elemento hijo, sin añadir ningún elemento wrapper. Esto preserva la navegación client-side del router:
+
+```tsx
+import Link from 'next/link';
+import { Button } from '@studiolxd/brand';
+
+<Button asChild variant="primary">
+  <Link href="/proyectos">Ver proyectos</Link>
+</Button>
+```
+
+En Storybook se muestra con un `<a>` como stand-in del componente `Link` del router:
+
+<Canvas of={ButtonStories.AsChild} />
+
+---
+
 ## Tokens
 
 ### Base
