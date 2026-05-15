@@ -48,6 +48,8 @@ const filters = {
   'contact-section':    (t) => t.path[0] === 'contact-section',
   footer:               (t) => t.path[0] === 'footer',
   section:              (t) => t.path[0] === 'section',
+  'dots-button':        (t) => t.path[0] === 'dots-button',
+  'context-menu':       (t) => t.path[0] === 'context-menu',
 };
 
 function cssFile(destination, filterKey) {
@@ -109,6 +111,8 @@ const sd = new StyleDictionary({
         cssFile('components/methodology-section.css', 'methodology-section'),
         cssFile('components/contact-section.css',     'contact-section'),
         cssFile('components/footer.css',              'footer'),
+        cssFile('components/dots-button.css',         'dots-button'),
+        cssFile('molecules/context-menu.css',         'context-menu'),
       ],
     },
     scss: {
@@ -158,6 +162,8 @@ const sd = new StyleDictionary({
         scssFile('components/_methodology-section.scss', 'methodology-section'),
         scssFile('components/_contact-section.scss',     'contact-section'),
         scssFile('components/_footer.scss',              'footer'),
+        scssFile('components/_dots-button.scss',         'dots-button'),
+        scssFile('molecules/_context-menu.scss',         'context-menu'),
       ],
     },
   },

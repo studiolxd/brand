@@ -9,6 +9,8 @@ export { Button } from './stories/atoms/Button/Button';
 export { Carousel } from './stories/atoms/Carousel/Carousel';
 export { Checkbox } from './stories/atoms/Checkbox/Checkbox';
 export { Chevron } from './stories/atoms/Chevron/Chevron';
+export { DotsButton } from './stories/atoms/DotsButton/DotsButton';
+export type { DotsButtonProps } from './stories/atoms/DotsButton/DotsButton';
 export { Hamburger } from './stories/atoms/Hamburger/Hamburger';
 export { Heading } from './stories/atoms/Heading/Heading';
 export { HeroVideo } from './stories/atoms/HeroVideo/HeroVideo';
@@ -30,6 +32,8 @@ export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 // ─── Molecules ───────────────────────────────────────────────
 export { Breadcrumb } from './stories/molecules/Breadcrumb/Breadcrumb';
 export type { BreadcrumbItem, BreadcrumbProps, BreadcrumbRenderLinkProps } from './stories/molecules/Breadcrumb/Breadcrumb';
+export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
+export type { ContextMenuItem, ContextMenuButtonItem, ContextMenuLinkItem, ContextMenuSeparator, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
 export { Card } from './stories/molecules/Card/Card';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export { CardSplit } from './stories/molecules/CardSplit/CardSplit';

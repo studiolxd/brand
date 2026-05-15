@@ -41,3 +41,5 @@
 @import "./components/methodology-section.css";
 @import "./components/contact-section.css";
 @import "./components/footer.css";
+@import "./components/dots-button.css";
+@import "./molecules/context-menu.css";

@@ -1,0 +1,24 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --dots-button-sm-size: 1.5rem; /** Tamaño total del botón — sm */
+  --dots-button-md-size: 2rem; /** Tamaño total del botón — md */
+  --dots-button-lg-size: 2.5rem; /** Tamaño total del botón — lg */
+  --dots-button-dot-diameter: 0.25rem; /** Diámetro de cada punto */
+  --dots-button-dot-gap: 0.1875rem; /** Espacio entre puntos */
+  --dots-button-bg: rgba(0, 0, 0, 0); /** Fondo por defecto */
+  --dots-button-cursor: pointer; /** Cursor por defecto */
+  --dots-button-disabled-cursor: not-allowed; /** Cursor deshabilitado */
+  --dots-button-hover-bg: var(--color-grey-lightest); /** Fondo al hacer hover */
+  --dots-button-active-bg: var(--color-grey-light); /** Fondo al hacer active */
+  --dots-button-border-radius: var(--border-radius-full); /** Radio del botón */
+  --dots-button-disabled-color: var(--color-grey-darkest); /** Color de puntos deshabilitado */
+  --dots-button-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --dots-button-focus-ring-offset: var(--border-width-md); /** Offset del focus ring */
+  --dots-button-transition-duration: var(--motion-duration-fast); /** Duración de transición */
+  --dots-button-transition-easing: var(--motion-easing-default); /** Easing de transición */
+  --dots-button-color: var(--color-text-on-light); /** Color de los puntos */
+  --dots-button-focus-ring-color: var(--color-primary); /** Color del focus ring */
+}
