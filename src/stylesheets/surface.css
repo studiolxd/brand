@@ -90,8 +90,8 @@
   /* ─── Breadcrumb ──────────────────────────────────────────────────────── */
   --breadcrumb-link-color:       var(--color-text-on-dark);
   --breadcrumb-link-color-hover: var(--color-text-on-dark);
-  --breadcrumb-current-color:    var(--color-text-muted-on-dark);
-  --breadcrumb-separator-color:  var(--color-text-muted-on-dark);
+  --breadcrumb-current-color:    var(--color-text-on-dark);
+  --breadcrumb-separator-color:  var(--color-text-on-dark);
   --breadcrumb-focus-ring-color: var(--color-text-on-dark);
 
   /* ─── Link ────────────────────────────────────────────────────────────── */
