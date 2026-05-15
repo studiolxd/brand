@@ -47,7 +47,7 @@ export function Home() {
           <div className="home__courses">
             <CardSquare
               href="#"
-              color="secondary"
+              color="accent-1"
               title="Diseño instruccional"
               description="Aprende a diseñar experiencias de aprendizaje efectivas combinando pedagogía, diseño y tecnología."
               ctaLabel="Ver más sobre diseño instruccional"
@@ -58,7 +58,7 @@ export function Home() {
             />
             <CardSquare
               href="#"
-              color="tertiary"
+              color="accent-2"
               title="Herramientas elearning"
               description="Domina las principales herramientas de autoría para crear contenidos interactivos y atractivos."
               ctaLabel="Ver más sobre herramientas elearning"
@@ -69,7 +69,7 @@ export function Home() {
             />
             <CardSplit
               href="#"
-              color="quaternary"
+              color="support-1"
               title="Formación de formadores"
               description="Desarrolla las competencias clave para facilitar sesiones formativas presenciales y online con impacto real."
               ctaLabel="Ver más sobre formación de formadores"
@@ -80,7 +80,7 @@ export function Home() {
             />
             <CardSplit
               href="#"
-              color="quinary"
+              color="support-2"
               title="Moodle y plataformas LMS"
               description="Configura y personaliza tu plataforma de formación online para ofrecer la mejor experiencia a tus estudiantes."
               ctaLabel="Ver más sobre Moodle y plataformas LMS"

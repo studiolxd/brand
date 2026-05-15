@@ -1,7 +1,7 @@
 {
   "link": {
-    "color":                 { "$value": "{color.text.default}", "$type": "color",  "$description": "Color del enlace — mismo que el texto por defecto" },
-    "color-hover":           { "$value": "{color.text.default}", "$type": "color",  "$description": "Color del enlace en hover" },
+    "color":                 { "$value": "{color.text.on-light}", "$type": "color",  "$description": "Color del enlace — mismo que el texto por defecto" },
+    "color-hover":           { "$value": "{color.text.on-light}", "$type": "color",  "$description": "Color del enlace en hover" },
     "text-decoration":       { "$value": "underline",          "$type": "string", "$description": "Decoración por defecto" },
     "text-decoration-hover": { "$value": "none",               "$type": "string", "$description": "Decoración en hover" },
     "cursor":                { "$value": "pointer",            "$type": "string", "$description": "Cursor" },

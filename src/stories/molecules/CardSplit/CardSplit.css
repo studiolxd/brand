@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: var(--color-text-default);
+  color: var(--color-text-on-light);
 }
 
 /* ─── Panel izquierdo (color) ─────────────────────────────── */
@@ -74,10 +74,10 @@
 }
 
 /* ─── Colores del panel izquierdo ─────────────────────────── */
-.card-split.card-split--secondary  .card-split__primary { background-color: var(--color-secondary); }
-.card-split.card-split--tertiary   .card-split__primary { background-color: var(--color-tertiary); }
-.card-split.card-split--quaternary .card-split__primary { background-color: var(--color-quaternary); }
-.card-split.card-split--quinary    .card-split__primary { background-color: var(--color-quinary); }
+.card-split.card-split--accent-1  .card-split__primary { background-color: var(--color-accent-1); }
+.card-split.card-split--accent-2  .card-split__primary { background-color: var(--color-accent-2); }
+.card-split.card-split--support-1 .card-split__primary { background-color: var(--color-support-1); }
+.card-split.card-split--support-2 .card-split__primary { background-color: var(--color-support-2); }
 
 /* ─── Desktop md+ — layout horizontal con hover ──────────── */
 @media (min-width: 768px) /* --breakpoint-md */ {

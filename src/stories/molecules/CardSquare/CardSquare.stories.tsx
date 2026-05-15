@@ -15,7 +15,7 @@ const meta: Meta<typeof CardSquare> = {
   argTypes: {
     color: {
       control: { type: 'select' },
-      options: ['secondary', 'tertiary', 'quaternary', 'quinary'],
+      options: ['accent-1', 'accent-2', 'support-1', 'support-2'],
       description: 'Color del overlay al hacer hover.',
     },
   },
@@ -31,7 +31,7 @@ const meta: Meta<typeof CardSquare> = {
 export default meta;
 type Story = StoryObj<typeof CardSquare>;
 
-export const Secondary: Story = { args: { color: 'secondary' } };
-export const Tertiary: Story = { args: { color: 'tertiary' } };
-export const Quaternary: Story = { args: { color: 'quaternary' } };
-export const Quinary: Story = { args: { color: 'quinary' } };
+export const Accent1: Story = { args: { color: 'accent-1' } };
+export const Accent2: Story = { args: { color: 'accent-2' } };
+export const Support1: Story = { args: { color: 'support-1' } };
+export const Support2: Story = { args: { color: 'support-2' } };

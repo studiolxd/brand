@@ -31,15 +31,15 @@
   --input-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --input-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --input-font-weight: var(--font-weight-default); /** Font weight */
-  --input-color: var(--color-text-default); /** Text color */
+  --input-color: var(--color-text-on-light); /** Text color */
   --input-border-color: var(--color-primary); /** Border color */
   --input-placeholder-color: var(--color-text-placeholder); /** Placeholder text color */
   --input-focus-border-color: var(--color-primary); /** Border color on focus */
   --input-focus-ring-width: var(--control-focus-ring-width); /** Focus ring width */
   --input-focus-ring-color: var(--color-primary); /** Focus ring color */
-  --input-error-color: var(--color-text-default); /** Error text color */
+  --input-error-color: var(--color-text-on-light); /** Error text color */
   --input-error-border-color: var(--color-primary); /** Error border color */
   --input-error-placeholder-color: var(--color-text-placeholder); /** Error placeholder color */
   --input-error-focus-border-color: var(--color-primary); /** Error border color on focus */
-  --input-error-focus-ring-color: var(--color-error); /** Error focus ring color */
+  --input-error-focus-ring-color: var(--color-error-on-light); /** Error focus ring color */
 }

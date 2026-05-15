@@ -12,28 +12,28 @@ export declare const reviews: {
 export declare const projects: ({
     id: string;
     category: string;
-    tagVariant: "secondary";
+    tagVariant: "accent-1";
     photo: string;
     title: string;
     description: string;
 } | {
     id: string;
     category: string;
-    tagVariant: "tertiary";
+    tagVariant: "accent-2";
     photo: string;
     title: string;
     description: string;
 } | {
     id: string;
     category: string;
-    tagVariant: "quaternary";
+    tagVariant: "support-1";
     photo: string;
     title: string;
     description: string;
 } | {
     id: string;
     category: string;
-    tagVariant: "quinary";
+    tagVariant: "support-2";
     photo: string;
     title: string;
     description: string;
@@ -55,13 +55,13 @@ export declare const steps: {
 }[];
 export declare const solutionItems: ({
     href: string;
-    color: "secondary";
+    color: "accent-1";
     title: string;
     description: string;
     ctaLabel: string;
 } | {
     href: string;
-    color: "tertiary";
+    color: "accent-2";
     title: string;
     description: string;
     ctaLabel: string;

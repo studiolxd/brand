@@ -10,7 +10,7 @@ const meta: Meta<typeof Tag> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'primary', 'secondary', 'tertiary', 'quaternary', 'quinary'],
+      options: ['default', 'primary', 'accent-1', 'accent-2', 'support-1', 'support-2'],
       description: 'Variante de color del tag.',
     },
     children: {
@@ -33,20 +33,20 @@ export const Primary: Story = {
   args: { variant: 'primary', children: 'Diseño instruccional' },
 };
 
-export const Secondary: Story = {
-  args: { variant: 'secondary', children: 'Formación presencial' },
+export const Accent1: Story = {
+  args: { variant: 'accent-1', children: 'Formación presencial' },
 };
 
-export const Tertiary: Story = {
-  args: { variant: 'tertiary', children: 'Plataformas LMS' },
+export const Accent2: Story = {
+  args: { variant: 'accent-2', children: 'Plataformas LMS' },
 };
 
-export const Quaternary: Story = {
-  args: { variant: 'quaternary', children: 'Consultoría' },
+export const Support1: Story = {
+  args: { variant: 'support-1', children: 'Consultoría' },
 };
 
-export const Quinary: Story = {
-  args: { variant: 'quinary', children: 'E-learning' },
+export const Support2: Story = {
+  args: { variant: 'support-2', children: 'E-learning' },
 };
 
 export const AllVariants: Story = {
@@ -54,10 +54,10 @@ export const AllVariants: Story = {
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
       <Tag variant="default">E-learning</Tag>
       <Tag variant="primary">Diseño instruccional</Tag>
-      <Tag variant="secondary">Formación presencial</Tag>
-      <Tag variant="tertiary">Plataformas LMS</Tag>
-      <Tag variant="quaternary">Consultoría</Tag>
-      <Tag variant="quinary">E-learning</Tag>
+      <Tag variant="accent-1">Formación presencial</Tag>
+      <Tag variant="accent-2">Plataformas LMS</Tag>
+      <Tag variant="support-1">Consultoría</Tag>
+      <Tag variant="support-2">E-learning</Tag>
     </div>
   ),
 };

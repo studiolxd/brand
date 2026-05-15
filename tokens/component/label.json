@@ -4,7 +4,7 @@
     "font-size":      { "$value": "{font-size.1}",           "$type": "dimension", "$description": "Font size (14px)" },
     "font-weight":    { "$value": "{font-weight.medium}",    "$type": "number",    "$description": "Font weight" },
     "line-height":    { "$value": "{line-height.normal}",    "$type": "number",    "$description": "Line height" },
-    "color":          { "$value": "{color.text.default}",    "$type": "color",     "$description": "Text color" },
+    "color":          { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Text color" },
     "letter-spacing": { "$value": "{letter-spacing.normal}", "$type": "dimension", "$description": "Letter spacing" },
     "text-transform": { "$value": "uppercase",               "$type": "string",    "$description": "Text transform" }
   }

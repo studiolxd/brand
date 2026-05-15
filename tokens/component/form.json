@@ -14,7 +14,7 @@
       "font-weight":    { "$value": "{font-weight.medium}",   "$type": "number",    "$description": "Font weight del heading" },
       "line-height":    { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Line height del heading" },
       "letter-spacing": { "$value": "{letter-spacing.tight}",   "$type": "dimension", "$description": "Letter spacing del heading" },
-      "color":          { "$value": "{color.text.default}",     "$type": "color",     "$description": "Color del heading" }
+      "color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del heading" }
     },
 
     "error": {
@@ -22,7 +22,7 @@
       "font-size":    { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Font size del mensaje de error (14px)" },
       "font-weight":  { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
       "line-height":  { "$value": "{line-height.normal}",   "$type": "number",    "$description": "Line height del mensaje de error" },
-      "color":        { "$value": "{color.error}",          "$type": "color",     "$description": "Color del mensaje de error" }
+      "color":        { "$value": "{color.error-on-light}",  "$type": "color",     "$description": "Color del mensaje de error" }
     },
 
     "helper": {
@@ -30,7 +30,7 @@
       "font-size":    { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Font size del texto de ayuda (14px)" },
       "font-weight":  { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Font weight del texto de ayuda" },
       "line-height":  { "$value": "{line-height.normal}",      "$type": "number",    "$description": "Line height del texto de ayuda" },
-      "color":        { "$value": "{color.text.muted}",        "$type": "color",     "$description": "Color del texto de ayuda" }
+      "color":        { "$value": "{color.text.muted-on-light}",        "$type": "color",     "$description": "Color del texto de ayuda" }
     },
 
     "success": {
@@ -38,7 +38,7 @@
       "font-size":    { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Font size del mensaje de éxito (18px)" },
       "font-weight":  { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Font weight del mensaje de éxito" },
       "line-height":  { "$value": "{line-height.normal}",   "$type": "number",    "$description": "Line height del mensaje de éxito" },
-      "color":        { "$value": "{color.text.default}",   "$type": "color",     "$description": "Color del mensaje de éxito" }
+      "color":        { "$value": "{color.text.on-light}",   "$type": "color",     "$description": "Color del mensaje de éxito" }
     }
   }
 }

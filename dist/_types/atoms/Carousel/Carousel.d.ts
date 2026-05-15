@@ -18,7 +18,7 @@ interface CarouselProps {
     slideSize?: string;
     /**
      * Color de fondo sobre el que se dibuja el degradado de los botones.
-     * Por defecto hereda --color-background-default.
+     * Por defecto hereda --color-background-light.
      * Útil en secciones con fondo oscuro o de color.
      */
     gradientColor?: string;

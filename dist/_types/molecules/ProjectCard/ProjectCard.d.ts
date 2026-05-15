@@ -1,5 +1,5 @@
 import './ProjectCard.css';
-export type TagVariant = 'default' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
+export type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 export interface Project {
     /** Identificador único. */
     id: string;

@@ -15,7 +15,7 @@ const meta: Meta<typeof CardSplit> = {
   argTypes: {
     color: {
       control: { type: 'select' },
-      options: ['secondary', 'tertiary', 'quaternary', 'quinary'],
+      options: ['accent-1', 'accent-2', 'support-1', 'support-2'],
       description: 'Color del panel izquierdo.',
     },
   },
@@ -31,7 +31,7 @@ const meta: Meta<typeof CardSplit> = {
 export default meta;
 type Story = StoryObj<typeof CardSplit>;
 
-export const Secondary: Story = { args: { color: 'secondary' } };
-export const Tertiary: Story = { args: { color: 'tertiary' } };
-export const Quaternary: Story = { args: { color: 'quaternary' } };
-export const Quinary: Story = { args: { color: 'quinary' } };
+export const Accent1: Story = { args: { color: 'accent-1' } };
+export const Accent2: Story = { args: { color: 'accent-2' } };
+export const Support1: Story = { args: { color: 'support-1' } };
+export const Support2: Story = { args: { color: 'support-2' } };

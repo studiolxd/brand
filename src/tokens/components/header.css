@@ -30,8 +30,8 @@
   --header-featured-font-weight: var(--font-weight-medium); /** Peso de fuente del featured link */
   --header-featured-padding-inline: var(--spacing-7); /** Padding horizontal del featured link */
   --header-featured-margin-inline-end: var(--spacing-7); /** Separación entre el featured link y la navegación */
-  --header-bg: var(--color-background-default); /** Fondo del header */
+  --header-bg: var(--color-background-light); /** Fondo del header */
   --header-dark-bg: var(--color-background-dark); /** Fondo del header en variante oscura */
-  --header-nav-color: var(--color-text-default); /** Color de los enlaces de navegación */
-  --header-nav-dark-color: var(--color-text-dark); /** Color de los enlaces en variante oscura */
+  --header-nav-color: var(--color-text-on-light); /** Color de los enlaces de navegación */
+  --header-nav-dark-color: var(--color-text-on-dark); /** Color de los enlaces en variante oscura */
 }

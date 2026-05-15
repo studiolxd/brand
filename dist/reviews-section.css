@@ -2,7 +2,7 @@
 .reviews-section {
   padding-block: var(--section-padding-block-xl);
   background-color: var(--color-background-dark);
-  color: var(--color-text-dark);
+  color: var(--color-text-on-dark);
 }
 
 .reviews-section > .heading {

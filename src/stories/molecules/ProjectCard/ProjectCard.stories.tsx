@@ -17,7 +17,7 @@ export const Default: Story = {
     project: {
       id: 'onboarding-randstad',
       category: 'E-learning',
-      tagVariant: 'secondary',
+      tagVariant: 'accent-1',
       photo: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80&fit=crop',
       title: 'Onboarding digital para Randstad',
       description: 'Diseñamos un itinerario de incorporación 100% online para 1.200 nuevos empleados al año.',

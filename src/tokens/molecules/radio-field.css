@@ -15,5 +15,5 @@
   --radio-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
   --radio-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
   --radio-field-label-font-weight: var(--font-weight-default); /** Peso tipográfico */
-  --radio-field-label-color: var(--color-text-default); /** Color del texto */
+  --radio-field-label-color: var(--color-text-on-light); /** Color del texto */
 }

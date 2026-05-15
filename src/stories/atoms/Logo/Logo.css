@@ -5,9 +5,9 @@
 }
 
 .logo-preview--dark {
-  background-color: var(--color-text-default);
+  background-color: var(--color-text-on-light);
 }
 
 .logo--dark {
-  color: var(--color-text-dark);
+  color: var(--color-text-on-dark);
 }

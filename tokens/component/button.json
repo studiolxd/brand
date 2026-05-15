@@ -54,16 +54,16 @@
       "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
       "focus-ring-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Focus ring color" },
       "bg":                 { "$value": "{color.white}",               "$type": "color",     "$description": "Background" },
-      "color":              { "$value": "{color.text.default}",        "$type": "color",     "$description": "Text color" },
+      "color":              { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Text color" },
       "border":             { "$value": "{color.primary}",             "$type": "color",     "$description": "Border color" },
       "hover-bg":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Hover background" },
-      "hover-color":        { "$value": "{color.text.dark}",        "$type": "color",     "$description": "Hover text color" },
+      "hover-color":        { "$value": "{color.text.on-dark}",        "$type": "color",     "$description": "Hover text color" },
       "hover-border":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Hover border color" },
       "active-bg":          { "$value": "{color.primary}",             "$type": "color",     "$description": "Active background" },
-      "active-color":       { "$value": "{color.text.dark}",        "$type": "color",     "$description": "Active text color" },
+      "active-color":       { "$value": "{color.text.on-dark}",        "$type": "color",     "$description": "Active text color" },
       "active-border":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Active border color" }
     },
-    "secondary": {
+    "accent-1": {
       "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
       "border-width":       { "$value": "{button.border-width}",       "$type": "dimension", "$description": "Border width" },
       "border-style":       { "$value": "{button.border-style}",       "$type": "string",    "$description": "Border style" },
@@ -85,16 +85,16 @@
       "focus-ring-width":   { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
       "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
       "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
-      "focus-ring-color":   { "$value": "{color.secondary}",           "$type": "color",     "$description": "Focus ring color" },
-      "bg":                 { "$value": "{color.secondary}",           "$type": "color",     "$description": "Background" },
+      "focus-ring-color":   { "$value": "{color.accent-1}",           "$type": "color",     "$description": "Focus ring color" },
+      "bg":                 { "$value": "{color.accent-1}",           "$type": "color",     "$description": "Background" },
       "color":              { "$value": "{color.primary}",             "$type": "color",     "$description": "Text color" },
-      "border":             { "$value": "{color.secondary}",           "$type": "color",     "$description": "Border color" },
-      "hover-bg":           { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Hover background" },
+      "border":             { "$value": "{color.accent-1}",           "$type": "color",     "$description": "Border color" },
+      "hover-bg":           { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover background" },
       "hover-color":        { "$value": "{color.primary}",             "$type": "color",     "$description": "Hover text color" },
-      "hover-border":       { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Hover border color" },
-      "active-bg":          { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Active background" },
+      "hover-border":       { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover border color" },
+      "active-bg":          { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active background" },
       "active-color":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Active text color" },
-      "active-border":      { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Active border color" }
+      "active-border":      { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active border color" }
     },
     "ghost": {
       "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
@@ -120,13 +120,13 @@
       "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
       "focus-ring-color":   { "$value": "{color.white}",               "$type": "color",     "$description": "Focus ring color — white on dark photo" },
       "bg":                 { "$value": "transparent",                 "$type": "color",     "$description": "Background" },
-      "color":              { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Text color — white on dark photo" },
-      "border":             { "$value": "{color.text.dark}",           "$type": "color",     "$description": "Border color — white on dark photo" },
+      "color":              { "$value": "{color.text.on-dark}",           "$type": "color",     "$description": "Text color — white on dark photo" },
+      "border":             { "$value": "{color.text.on-dark}",           "$type": "color",     "$description": "Border color — white on dark photo" },
       "hover-bg":           { "$value": "{color.white}",               "$type": "color",     "$description": "Hover background" },
-      "hover-color":        { "$value": "{color.text.default}",        "$type": "color",     "$description": "Hover text color" },
+      "hover-color":        { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Hover text color" },
       "hover-border":       { "$value": "{color.white}",               "$type": "color",     "$description": "Hover border color" },
       "active-bg":          { "$value": "{color.white}",               "$type": "color",     "$description": "Active background" },
-      "active-color":       { "$value": "{color.text.default}",        "$type": "color",     "$description": "Active text color" },
+      "active-color":       { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Active text color" },
       "active-border":      { "$value": "{color.white}",               "$type": "color",     "$description": "Active border color" }
     },
     "form": {
@@ -155,15 +155,15 @@
       "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
       "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
       "focus-ring-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Focus ring color" },
-      "bg":                 { "$value": "{color.secondary}",           "$type": "color",     "$description": "Background" },
-      "color":              { "$value": "{color.text.default}",        "$type": "color",     "$description": "Text color" },
-      "border":             { "$value": "{color.secondary}",           "$type": "color",     "$description": "Border color — matches bg so inset ring has a natural 1px gap" },
-      "hover-bg":           { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Hover background" },
-      "hover-color":        { "$value": "{color.text.default}",        "$type": "color",     "$description": "Hover text color" },
-      "hover-border":       { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Hover border color — matches hover bg" },
-      "active-bg":          { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Active background" },
-      "active-color":       { "$value": "{color.text.default}",        "$type": "color",     "$description": "Active text color" },
-      "active-border":      { "$value": "{color.tertiary}",            "$type": "color",     "$description": "Active border color — matches active bg" }
+      "bg":                 { "$value": "{color.accent-1}",           "$type": "color",     "$description": "Background" },
+      "color":              { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Text color" },
+      "border":             { "$value": "{color.accent-1}",           "$type": "color",     "$description": "Border color — matches bg so inset ring has a natural 1px gap" },
+      "hover-bg":           { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover background" },
+      "hover-color":        { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Hover text color" },
+      "hover-border":       { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover border color — matches hover bg" },
+      "active-bg":          { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active background" },
+      "active-color":       { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Active text color" },
+      "active-border":      { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active border color — matches active bg" }
     }
   }
 }

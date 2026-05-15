@@ -8,7 +8,7 @@
   --link-cursor: pointer; /** Cursor */
   --link-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
   --link-focus-ring-offset: var(--border-width-sm); /** Separación entre el enlace y el focus ring */
-  --link-color: var(--color-text-default); /** Color del enlace — mismo que el texto por defecto */
-  --link-color-hover: var(--color-text-default); /** Color del enlace en hover */
+  --link-color: var(--color-text-on-light); /** Color del enlace — mismo que el texto por defecto */
+  --link-color-hover: var(--color-text-on-light); /** Color del enlace en hover */
   --link-focus-ring-color: var(--color-primary); /** Color del focus ring en fondo claro */
 }

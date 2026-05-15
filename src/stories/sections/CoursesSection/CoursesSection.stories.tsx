@@ -19,7 +19,7 @@ export const Default: Story = {
     <CoursesSection {...args}>
       <CardSquare
         href="#"
-        color="secondary"
+        color="accent-1"
         image={{ src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80&fit=crop', alt: '' }}
         title="Articulate Storyline"
         description="Crea contenidos elearning interactivos."
@@ -27,7 +27,7 @@ export const Default: Story = {
       />
       <CardSquare
         href="#"
-        color="tertiary"
+        color="accent-2"
         image={{ src: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&fit=crop', alt: '' }}
         title="Articulate Rise"
         description="Domina Rise para crear contenidos elearning responsive."
@@ -35,7 +35,7 @@ export const Default: Story = {
       />
       <CardSplit
         href="#"
-        color="quaternary"
+        color="support-1"
         image={{ src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80&fit=crop', alt: '' }}
         title="Diseño instruccional para elearning"
         description="Crea experiencias de aprendizaje online transformadoras."
@@ -43,7 +43,7 @@ export const Default: Story = {
       />
       <CardSplit
         href="#"
-        color="quinary"
+        color="support-2"
         image={{ src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80&fit=crop', alt: '' }}
         title="Iniciación a JavaScript para Storyline"
         description="Lleva al siguiente nivel la interactividad de tus contenidos elearning con JavaScript."

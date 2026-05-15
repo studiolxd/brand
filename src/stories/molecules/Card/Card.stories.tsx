@@ -10,7 +10,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     color: {
       control: { type: 'select' },
-      options: ['secondary', 'tertiary', 'quaternary', 'quinary'],
+      options: ['accent-1', 'accent-2', 'support-1', 'support-2'],
       description: 'Color de fondo.',
     },
   },
@@ -23,38 +23,38 @@ const meta: Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof Card>;
 
-export const Secondary: Story = {
+export const Accent1: Story = {
   args: {
-    color: 'secondary',
+    color: 'accent-1',
     title: 'Contenidos elearning',
     description: 'Diseñamos contenidos multimedia interactivos para formación online, utilizando estándares como SCORM y xAPI.',
     ctaLabel: 'Ver más sobre contenidos elearning',
   },
 };
 
-export const Tertiary: Story = {
+export const Accent2: Story = {
   args: {
-    color: 'tertiary',
+    color: 'accent-2',
     title: 'Plataformas elearning',
     description: 'Desarrollamos plataformas elearning adaptadas a tu identidad visual y centradas en las personas usuarias para lograr una experiencia de aprendizaje gratificante.',
     ctaLabel: 'Ver más sobre plataformas elearning',
   },
 };
 
-export const Quaternary: Story = {
+export const Support1: Story = {
   args: {
-    color: 'quaternary',
+    color: 'support-1',
     title: 'Título de ejemplo',
-    description: 'Descripción de ejemplo para la variante quaternary (emerald).',
+    description: 'Descripción de ejemplo para la variante support-1 (emerald).',
     ctaLabel: 'Ver más',
   },
 };
 
-export const Quinary: Story = {
+export const Support2: Story = {
   args: {
-    color: 'quinary',
+    color: 'support-2',
     title: 'Título de ejemplo',
-    description: 'Descripción de ejemplo para la variante quinary (cayenne).',
+    description: 'Descripción de ejemplo para la variante support-2 (cayenne).',
     ctaLabel: 'Ver más',
   },
 };

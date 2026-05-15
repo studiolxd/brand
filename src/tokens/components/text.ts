@@ -8,7 +8,7 @@ export const headingBaseTokens = all.filter(t => t.name.startsWith('--text-headi
 export const headingLevelTokens = all.filter(t => /^--text-h[1-6]-/.test(t.name));
 
 export const headingDarkTokens: Token[] = [
-  { name: '--text-heading-dark-color', value: 'var(--color-text-dark)', description: 'Color del texto sobre fondo oscuro' },
+  { name: '--text-heading-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
 ];
 
 export const paragraphBaseTokens = all.filter(t =>
@@ -23,11 +23,11 @@ export const paragraphSizeTokens = all.filter(t =>
 );
 
 export const paragraphDarkTokens: Token[] = [
-  { name: '--text-paragraph-dark-color', value: 'var(--color-text-dark)', description: 'Color del texto sobre fondo oscuro' },
+  { name: '--text-paragraph-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
 ];
 
 export const listBaseTokens = all.filter(t => t.name.startsWith('--text-list-'));
 
 export const listDarkTokens: Token[] = [
-  { name: '--text-list-dark-color', value: 'var(--color-text-dark)', description: 'Color del texto sobre fondo oscuro' },
+  { name: '--text-list-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
 ];

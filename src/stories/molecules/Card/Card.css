@@ -19,7 +19,7 @@
   margin-block-start: auto;
 }
 
-.card.card--secondary  { background-color: var(--color-secondary); }
-.card.card--tertiary   { background-color: var(--color-tertiary); }
-.card.card--quaternary { background-color: var(--color-quaternary); }
-.card.card--quinary    { background-color: var(--color-quinary); }
+.card.card--accent-1  { background-color: var(--color-accent-1); }
+.card.card--accent-2  { background-color: var(--color-accent-2); }
+.card.card--support-1 { background-color: var(--color-support-1); }
+.card.card--support-2 { background-color: var(--color-support-2); }

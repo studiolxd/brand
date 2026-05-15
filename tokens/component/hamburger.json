@@ -3,7 +3,7 @@
     "width":                  { "$value": "2.0625rem",                         "$type": "dimension", "$description": "Ancho del botón hamburger" },
     "height":                 { "$value": "1.5rem",                            "$type": "dimension", "$description": "Alto del botón hamburger" },
     "bar-height":             { "$value": "{spacing.1}",                       "$type": "dimension", "$description": "Alto de cada barra" },
-    "bar-color":              { "$value": "{color.text.default}",              "$type": "color",     "$description": "Color de las barras" },
+    "bar-color":              { "$value": "{color.text.on-light}",              "$type": "color",     "$description": "Color de las barras" },
     "transition-duration":    { "$value": "{motion.duration.slow}",            "$type": "number",    "$description": "Duración de la animación de las barras" },
     "transition-easing":      { "$value": "cubic-bezier(0.77, 0.2, 0.05, 1)", "$type": "string",    "$description": "Easing de la animación de las barras" },
     "opacity-duration":       { "$value": "{motion.duration.base}",            "$type": "number",    "$description": "Duración de la transición de opacidad" },

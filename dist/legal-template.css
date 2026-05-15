@@ -1,7 +1,7 @@
 /* ─── Page wrapper ────────────────────────────────────────── */
 .legal-page {
   min-height: 100vh;
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-light);
 }
 
 .legal-page__main {

@@ -1,7 +1,7 @@
 /* ─── Page wrapper ────────────────────────────────────────── */
 .article-page {
   min-height: 100vh;
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-light);
 }
 
 .article-page__main {
@@ -33,7 +33,7 @@
 .article-detail__intro {
   font-size: var(--font-size-3);
   line-height: var(--line-height-normal);
-  color: var(--color-text-muted);
+  color: var(--color-text-muted-on-light);
 }
 
 .article-detail__photo {

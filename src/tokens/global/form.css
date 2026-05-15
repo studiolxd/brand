@@ -24,11 +24,11 @@
   --form-border-color: var(--color-primary); /** Color del borde exterior */
   --form-separator-width: var(--control-border-width); /** Grosor del separador entre hijos */
   --form-separator-color: var(--color-primary); /** Color del separador */
-  --form-heading-color: var(--color-text-default); /** Color del heading */
+  --form-heading-color: var(--color-text-on-light); /** Color del heading */
   --form-error-font-weight: var(--font-weight-default); /** Font weight del mensaje de error */
-  --form-error-color: var(--color-error); /** Color del mensaje de error */
+  --form-error-color: var(--color-error-on-light); /** Color del mensaje de error */
   --form-helper-font-weight: var(--font-weight-default); /** Font weight del texto de ayuda */
-  --form-helper-color: var(--color-text-muted); /** Color del texto de ayuda */
+  --form-helper-color: var(--color-text-muted-on-light); /** Color del texto de ayuda */
   --form-success-font-weight: var(--font-weight-default); /** Font weight del mensaje de éxito */
-  --form-success-color: var(--color-text-default); /** Color del mensaje de éxito */
+  --form-success-color: var(--color-text-on-light); /** Color del mensaje de éxito */
 }

@@ -6,5 +6,5 @@ const all = flattenTokens(labelJson as never);
 export const labelBaseTokens = all;
 
 export const labelDarkTokens: Token[] = [
-  { name: '--label-dark-color', value: 'var(--color-text-dark)', description: 'Color del texto sobre fondo oscuro' },
+  { name: '--label-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
 ];

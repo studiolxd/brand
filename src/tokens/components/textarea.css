@@ -27,15 +27,15 @@
   --textarea-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --textarea-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --textarea-font-weight: var(--font-weight-default); /** Font weight */
-  --textarea-color: var(--color-text-default); /** Text color */
+  --textarea-color: var(--color-text-on-light); /** Text color */
   --textarea-border-color: var(--color-primary); /** Border color */
   --textarea-placeholder-color: var(--color-text-placeholder); /** Placeholder text color */
   --textarea-focus-border-color: var(--color-primary); /** Border color on focus */
   --textarea-focus-ring-width: var(--control-focus-ring-width); /** Focus ring width */
   --textarea-focus-ring-color: var(--color-primary); /** Focus ring color */
-  --textarea-error-color: var(--color-text-default); /** Error text color */
+  --textarea-error-color: var(--color-text-on-light); /** Error text color */
   --textarea-error-border-color: var(--color-primary); /** Error border color */
   --textarea-error-placeholder-color: var(--color-text-placeholder); /** Error placeholder color */
   --textarea-error-focus-border-color: var(--color-primary); /** Error border color on focus */
-  --textarea-error-focus-ring-color: var(--color-error); /** Error focus ring color */
+  --textarea-error-focus-ring-color: var(--color-error-on-light); /** Error focus ring color */
 }

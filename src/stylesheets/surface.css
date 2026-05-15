@@ -11,91 +11,91 @@
 .surface-dark {
   /* ─── Button primary ──────────────────────────────────────────────────── */
   --button-primary-bg:              var(--color-background-dark);
-  --button-primary-color:           var(--color-text-dark);
-  --button-primary-border:          var(--color-text-dark);
+  --button-primary-color:           var(--color-text-on-dark);
+  --button-primary-border:          var(--color-text-on-dark);
   --button-primary-hover-bg:        var(--color-white);
-  --button-primary-hover-color:     var(--color-text-default);
+  --button-primary-hover-color:     var(--color-text-on-light);
   --button-primary-hover-border:    var(--color-white);
   --button-primary-active-bg:       var(--color-white);
-  --button-primary-active-color:    var(--color-text-default);
+  --button-primary-active-color:    var(--color-text-on-light);
   --button-primary-active-border:   var(--color-white);
-  --button-primary-focus-ring-color:var(--color-text-dark);
+  --button-primary-focus-ring-color:var(--color-text-on-dark);
 
   /* ─── Input ───────────────────────────────────────────────────────────── */
   --input-bg:                    var(--color-background-dark);
-  --input-color:                 var(--color-text-dark);
-  --input-border-color:          var(--color-text-dark);
-  --input-placeholder-color:     var(--color-text-muted-dark);
-  --input-focus-border-color:    var(--color-text-dark);
-  --input-focus-ring-color:      var(--color-text-dark);
-  --input-error-focus-ring-color: var(--color-error-dark);
+  --input-color:                 var(--color-text-on-dark);
+  --input-border-color:          var(--color-text-on-dark);
+  --input-placeholder-color:     var(--color-text-muted-on-dark);
+  --input-focus-border-color:    var(--color-text-on-dark);
+  --input-focus-ring-color:      var(--color-text-on-dark);
+  --input-error-focus-ring-color: var(--color-error-on-dark);
 
   /* ─── Textarea ────────────────────────────────────────────────────────── */
   --textarea-bg:                    var(--color-background-dark);
-  --textarea-color:                 var(--color-text-dark);
-  --textarea-border-color:          var(--color-text-dark);
-  --textarea-placeholder-color:     var(--color-text-muted-dark);
-  --textarea-focus-border-color:    var(--color-text-dark);
-  --textarea-focus-ring-color:      var(--color-text-dark);
-  --textarea-error-focus-ring-color:var(--color-error-dark);
+  --textarea-color:                 var(--color-text-on-dark);
+  --textarea-border-color:          var(--color-text-on-dark);
+  --textarea-placeholder-color:     var(--color-text-muted-on-dark);
+  --textarea-focus-border-color:    var(--color-text-on-dark);
+  --textarea-focus-ring-color:      var(--color-text-on-dark);
+  --textarea-error-focus-ring-color:var(--color-error-on-dark);
 
   /* ─── Checkbox ────────────────────────────────────────────────────────── */
-  --checkbox-border-color:     var(--color-text-dark);
-  --checkbox-bg-checked:       var(--color-text-dark);
+  --checkbox-border-color:     var(--color-text-on-dark);
+  --checkbox-bg-checked:       var(--color-text-on-dark);
   --checkbox-check-color:      var(--color-background-dark);
-  --checkbox-focus-ring-color: var(--color-text-dark);
+  --checkbox-focus-ring-color: var(--color-text-on-dark);
 
   /* ─── Select ──────────────────────────────────────────────────────────── */
   --select-bg:                     var(--color-background-dark);
-  --select-color:                  var(--color-text-dark);
-  --select-border-color:           var(--color-text-dark);
-  --select-focus-ring-color:       var(--color-text-dark);
+  --select-color:                  var(--color-text-on-dark);
+  --select-border-color:           var(--color-text-on-dark);
+  --select-focus-ring-color:       var(--color-text-on-dark);
   --select-content-bg:             var(--color-background-dark);
-  --select-content-border-color:   var(--color-text-dark);
-  --select-item-highlighted-bg:    var(--color-text-dark);
+  --select-content-border-color:   var(--color-text-on-dark);
+  --select-item-highlighted-bg:    var(--color-text-on-dark);
   --select-item-highlighted-color: var(--color-background-dark);
 
   /* ─── Heading ─────────────────────────────────────────────────────────── */
-  --text-h1-color: var(--color-text-dark);
-  --text-h2-color: var(--color-text-dark);
-  --text-h3-color: var(--color-text-dark);
-  --text-h4-color: var(--color-text-dark);
-  --text-h5-color: var(--color-text-dark);
-  --text-h6-color: var(--color-text-dark);
+  --text-h1-color: var(--color-text-on-dark);
+  --text-h2-color: var(--color-text-on-dark);
+  --text-h3-color: var(--color-text-on-dark);
+  --text-h4-color: var(--color-text-on-dark);
+  --text-h5-color: var(--color-text-on-dark);
+  --text-h6-color: var(--color-text-on-dark);
 
   /* ─── Paragraph ───────────────────────────────────────────────────────── */
-  --text-paragraph-color: var(--color-text-dark);
+  --text-paragraph-color: var(--color-text-on-dark);
 
   /* ─── List ────────────────────────────────────────────────────────────── */
-  --text-list-color: var(--color-text-dark);
+  --text-list-color: var(--color-text-on-dark);
 
   /* ─── Link ────────────────────────────────────────────────────────────── */
-  --link-color:           var(--color-text-dark);
-  --link-color-hover:     var(--color-text-dark);
-  --link-focus-ring-color:var(--color-text-dark);
+  --link-color:           var(--color-text-on-dark);
+  --link-color-hover:     var(--color-text-on-dark);
+  --link-focus-ring-color:var(--color-text-on-dark);
 
   /* ─── Label ───────────────────────────────────────────────────────────── */
-  --label-color: var(--color-text-dark);
+  --label-color: var(--color-text-on-dark);
 
   /* ─── Checkbox field ──────────────────────────────────────────────────── */
-  --checkbox-field-label-color: var(--color-text-dark);
+  --checkbox-field-label-color: var(--color-text-on-dark);
 
   /* ─── Input field / Textarea field ───────────────────────────────────── */
-  --input-field-error-color:    var(--color-error-dark);
-  --input-field-helper-color:   var(--color-text-muted-dark);
-  --textarea-field-error-color: var(--color-error-dark);
-  --textarea-field-helper-color:var(--color-text-muted-dark);
+  --input-field-error-color:    var(--color-error-on-dark);
+  --input-field-helper-color:   var(--color-text-muted-on-dark);
+  --textarea-field-error-color: var(--color-error-on-dark);
+  --textarea-field-helper-color:var(--color-text-muted-on-dark);
 
   /* ─── Form ────────────────────────────────────────────────────────────── */
-  --form-border-color:    var(--color-text-dark);
-  --form-separator-color: var(--color-text-dark);
-  --form-error-color:     var(--color-error-dark);
-  --form-helper-color:    var(--color-text-muted-dark);
-  --form-success-color:   var(--color-text-dark);
+  --form-border-color:    var(--color-text-on-dark);
+  --form-separator-color: var(--color-text-on-dark);
+  --form-error-color:     var(--color-error-on-dark);
+  --form-helper-color:    var(--color-text-muted-on-dark);
+  --form-success-color:   var(--color-text-on-dark);
 
   /* ─── Carousel ────────────────────────────────────────────────────────── */
-  --carousel-slide-border-color: var(--color-text-dark);
-  --carousel-btn-color:          var(--color-text-dark);
+  --carousel-slide-border-color: var(--color-text-on-dark);
+  --carousel-btn-color:          var(--color-text-on-dark);
 }
 
 /* ─── Button: disabled states ────────────────────────────────────────────── */
@@ -125,8 +125,8 @@
 
 .surface-dark .input.input--error {
   --input-error-bg:                  var(--color-background-dark);
-  --input-error-border-color:        var(--color-text-dark);
-  --input-error-placeholder-color:   var(--color-text-muted-dark);
+  --input-error-border-color:        var(--color-text-on-dark);
+  --input-error-placeholder-color:   var(--color-text-muted-on-dark);
 }
 
 /* ─── Textarea: disabled and error states ────────────────────────────────── */
@@ -139,8 +139,8 @@
 
 .surface-dark .textarea.textarea--error {
   --textarea-error-bg:                var(--color-background-dark);
-  --textarea-error-border-color:      var(--color-text-dark);
-  --textarea-error-placeholder-color: var(--color-text-muted-dark);
+  --textarea-error-border-color:      var(--color-text-on-dark);
+  --textarea-error-placeholder-color: var(--color-text-muted-on-dark);
 }
 
 /* ─── Checkbox: disabled state ───────────────────────────────────────────── */
@@ -167,17 +167,17 @@
 /* ─── Logo ────────────────────────────────────────────────────────────────── */
 
 .surface-dark .logo {
-  color: var(--color-text-dark);
+  color: var(--color-text-on-dark);
 }
 
 /* ─── Hamburger ───────────────────────────────────────────────────────────── */
 
 .surface-dark .hamburger .hamburger__bar {
-  background-color: var(--color-text-dark);
+  background-color: var(--color-text-on-dark);
 }
 
 .surface-dark .hamburger:focus-visible {
-  outline-color: var(--color-text-dark);
+  outline-color: var(--color-text-on-dark);
 }
 
 /* ─── Form success ────────────────────────────────────────────────────────── */
@@ -196,11 +196,11 @@
 }
 
 .surface-dark .form > .input-phone-field {
-  background-color: var(--color-text-dark);
+  background-color: var(--color-text-on-dark);
 }
 
 .surface-dark .form > .input-phone-field > .input-phone {
-  background-color: var(--color-text-dark);
+  background-color: var(--color-text-on-dark);
   gap: var(--form-gap);
 }
 
@@ -234,10 +234,10 @@
 
 /* ─── MethodologySection + ContactSection ─────────────────────────────────── */
 .surface-dark {
-  --methodology-section-gap-color:    var(--color-background-default);
+  --methodology-section-gap-color:    var(--color-background-light);
   --methodology-section-cell-bg:      var(--color-background-dark);
-  --methodology-section-number-color: var(--color-secondary);
-  --contact-section-gap-color:        var(--color-background-default);
+  --methodology-section-number-color: var(--color-accent-1);
+  --contact-section-gap-color:        var(--color-background-light);
   --contact-section-cell-bg:          var(--color-background-dark);
 }
 
@@ -250,15 +250,15 @@
 
 .surface-light {
   /* ─── Button ghost ──────────────────────────────────────────────────────── */
-  --button-ghost-color:            var(--color-text-default);
-  --button-ghost-border:           var(--color-text-default);
-  --button-ghost-hover-bg:         var(--color-text-default);
-  --button-ghost-hover-color:      var(--color-text-dark);
-  --button-ghost-hover-border:     var(--color-text-default);
-  --button-ghost-active-bg:        var(--color-text-default);
-  --button-ghost-active-color:     var(--color-text-dark);
-  --button-ghost-active-border:    var(--color-text-default);
-  --button-ghost-focus-ring-color: var(--color-text-default);
+  --button-ghost-color:            var(--color-text-on-light);
+  --button-ghost-border:           var(--color-text-on-light);
+  --button-ghost-hover-bg:         var(--color-text-on-light);
+  --button-ghost-hover-color:      var(--color-text-on-dark);
+  --button-ghost-hover-border:     var(--color-text-on-light);
+  --button-ghost-active-bg:        var(--color-text-on-light);
+  --button-ghost-active-color:     var(--color-text-on-dark);
+  --button-ghost-active-border:    var(--color-text-on-light);
+  --button-ghost-focus-ring-color: var(--color-text-on-light);
 }
 
 .surface-light .button--ghost:disabled,

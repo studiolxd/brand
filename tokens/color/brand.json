@@ -5,25 +5,25 @@
       "$type": "color",
       "$description": "Primary brand color — used ~50% of the time"
     },
-    "secondary": {
+    "accent-1": {
       "$value": "{color.lavender}",
       "$type": "color",
-      "$description": "Secondary brand color — used ~20% of the time"
+      "$description": "Accent 1 brand color — used ~20% of the time"
     },
-    "tertiary": {
+    "accent-2": {
       "$value": "{color.yellow}",
       "$type": "color",
-      "$description": "Tertiary brand color — used ~20% of the time"
+      "$description": "Accent 2 brand color — used ~20% of the time"
     },
-    "quaternary": {
+    "support-1": {
       "$value": "{color.emerald}",
       "$type": "color",
-      "$description": "Quaternary brand color — used ~5% of the time"
+      "$description": "Support 1 brand color — used ~5% of the time"
     },
-    "quinary": {
+    "support-2": {
       "$value": "{color.cayenne}",
       "$type": "color",
-      "$description": "Quinary brand color — used ~5% of the time"
+      "$description": "Support 2 brand color — used ~5% of the time"
     }
   }
 }

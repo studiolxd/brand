@@ -36,18 +36,18 @@ const refMap: Record<string, string> = {
 };
 
 
-export const textDefault        = resolveRef(semantic.color.text.default.$value, refMap);
-export const textDark           = resolveRef(semantic.color.text.dark.$value, refMap);
-export const textMuted          = resolveRef(semantic.color.text.muted.$value, refMap);
-export const textMutedDark      = resolveRef(semantic.color.text['muted-dark'].$value, refMap);
-export const errorColor          = resolveRef(feedback.color.error.$value, refMap);
-export const successColor        = resolveRef(feedback.color.success.$value, refMap);
-export const errorDarkColor      = resolveRef(feedback.color['error-dark'].$value, refMap);
-export const successDarkColor    = resolveRef(feedback.color['success-dark'].$value, refMap);
+export const textDefault        = resolveRef(semantic.color.text['on-light'].$value, refMap);
+export const textDark           = resolveRef(semantic.color.text['on-dark'].$value, refMap);
+export const textMuted          = resolveRef(semantic.color.text['muted-on-light'].$value, refMap);
+export const textMutedDark      = resolveRef(semantic.color.text['muted-on-dark'].$value, refMap);
+export const errorColor          = resolveRef(feedback.color['error-on-light'].$value, refMap);
+export const successColor        = resolveRef(feedback.color['success-on-light'].$value, refMap);
+export const errorDarkColor      = resolveRef(feedback.color['error-on-dark'].$value, refMap);
+export const successDarkColor    = resolveRef(feedback.color['success-on-dark'].$value, refMap);
 
 export const backgroundColors = [
-  { name: 'Background default', token: '--color-background-default', hex: resolveRef(semantic.color.background.default.$value, refMap) },
-  { name: 'Background dark',    token: '--color-background-dark',    hex: resolveRef(semantic.color.background.dark.$value, refMap) },
+  { name: 'Background light', token: '--color-background-light', hex: resolveRef(semantic.color.background.light.$value, refMap) },
+  { name: 'Background dark',  token: '--color-background-dark',  hex: resolveRef(semantic.color.background.dark.$value, refMap) },
 ];
 
 export const brandColors = Object.entries(brand.color as Record<string, TokenEntry>).map(([name, token]) => ({

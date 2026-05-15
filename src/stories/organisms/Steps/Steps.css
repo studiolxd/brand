@@ -1,7 +1,7 @@
 /* ─── Custom properties con valores por defecto ──────────── */
 .steps {
   --steps-gap-color: var(--color-background-dark);
-  --steps-cell-bg: var(--color-background-default);
+  --steps-cell-bg: var(--color-background-light);
   --steps-number-color: var(--color-primary);
 }
 

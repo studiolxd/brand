@@ -1,5 +1,5 @@
 import './Tag.css';
-type TagVariant = 'default' | 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
+type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 interface TagProps {
     /** Variante de color del tag. */
     variant?: TagVariant;

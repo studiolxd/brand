@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: var(--color-text-default);
+  color: var(--color-text-on-light);
 }
 
 /* ─── Imagen ──────────────────────────────────────────────── */
@@ -62,10 +62,10 @@
 }
 
 /* ─── Colores del bloque ──────────────────────────────────── */
-.card-square.card-square--secondary  { background-color: var(--color-secondary); }
-.card-square.card-square--tertiary   { background-color: var(--color-tertiary); }
-.card-square.card-square--quaternary { background-color: var(--color-quaternary); }
-.card-square.card-square--quinary    { background-color: var(--color-quinary); }
+.card-square.card-square--accent-1  { background-color: var(--color-accent-1); }
+.card-square.card-square--accent-2  { background-color: var(--color-accent-2); }
+.card-square.card-square--support-1 { background-color: var(--color-support-1); }
+.card-square.card-square--support-2 { background-color: var(--color-support-2); }
 
 /* ─── Desktop md+ — square con hover ─────────────────────── */
 @media (min-width: 768px) /* --breakpoint-md */ {

@@ -9,16 +9,16 @@
     "padding-inline": { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Inline (horizontal) padding" },
 
     "default-bg":       { "$value": "{color.grey-lightest}",   "$type": "color", "$description": "Default background" },
-    "default-color":    { "$value": "{color.text.default}",    "$type": "color", "$description": "Default text color" },
+    "default-color":    { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Default text color" },
     "primary-bg":       { "$value": "{color.primary}",         "$type": "color", "$description": "Primary (prussian) background" },
-    "primary-color":    { "$value": "{color.text.dark}",       "$type": "color", "$description": "Primary text — white on dark bg" },
-    "secondary-bg":     { "$value": "{color.secondary}",       "$type": "color", "$description": "Secondary (lavender) background" },
-    "secondary-color":  { "$value": "{color.text.default}",    "$type": "color", "$description": "Secondary text — dark on light bg" },
-    "tertiary-bg":      { "$value": "{color.tertiary}",        "$type": "color", "$description": "Tertiary (yellow) background" },
-    "tertiary-color":   { "$value": "{color.text.default}",    "$type": "color", "$description": "Tertiary text — dark on light bg" },
-    "quaternary-bg":    { "$value": "{color.quaternary}",      "$type": "color", "$description": "Quaternary (emerald) background" },
-    "quaternary-color": { "$value": "{color.text.default}",    "$type": "color", "$description": "Quaternary text — dark on light bg" },
-    "quinary-bg":       { "$value": "{color.quinary}",         "$type": "color", "$description": "Quinary (cayenne) background" },
-    "quinary-color":    { "$value": "{color.text.default}",    "$type": "color", "$description": "Quinary text — dark on orange bg" }
+    "primary-color":    { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Primary text — white on dark bg" },
+    "accent-1-bg":     { "$value": "{color.accent-1}",       "$type": "color", "$description": "Accent 1 (lavender) background" },
+    "accent-1-color":  { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Accent 1 text — dark on light bg" },
+    "accent-2-bg":      { "$value": "{color.accent-2}",        "$type": "color", "$description": "Accent 2 (yellow) background" },
+    "accent-2-color":   { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Accent 2 text — dark on light bg" },
+    "support-1-bg":    { "$value": "{color.support-1}",      "$type": "color", "$description": "Support 1 (emerald) background" },
+    "support-1-color": { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Support 1 text — dark on light bg" },
+    "support-2-bg":       { "$value": "{color.support-2}",         "$type": "color", "$description": "Support 2 (cayenne) background" },
+    "support-2-color":    { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Support 2 text — dark on orange bg" }
   }
 }

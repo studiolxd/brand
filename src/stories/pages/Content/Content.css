@@ -60,17 +60,17 @@
 
 .content-page__section-title,
 .content-page__section-content {
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-light);
 }
 
-.content-page__section-title--secondary,
-.content-page__section-content--secondary { background-color: var(--color-secondary); }
+.content-page__section-title--accent-1,
+.content-page__section-content--accent-1 { background-color: var(--color-accent-1); }
 
-.content-page__section-title--tertiary,
-.content-page__section-content--tertiary  { background-color: var(--color-tertiary); }
+.content-page__section-title--accent-2,
+.content-page__section-content--accent-2  { background-color: var(--color-accent-2); }
 
-.content-page__section-title--quaternary,
-.content-page__section-content--quaternary { background-color: var(--color-quaternary); }
+.content-page__section-title--support-1,
+.content-page__section-content--support-1 { background-color: var(--color-support-1); }
 
-.content-page__section-title--quinary,
-.content-page__section-content--quinary   { background-color: var(--color-quinary); }
+.content-page__section-title--support-2,
+.content-page__section-content--support-2 { background-color: var(--color-support-2); }

@@ -9,5 +9,5 @@
   --label-font-weight: var(--font-weight-medium); /** Font weight */
   --label-line-height: var(--line-height-normal); /** Line height */
   --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
-  --label-color: var(--color-text-default); /** Text color */
+  --label-color: var(--color-text-on-light); /** Text color */
 }

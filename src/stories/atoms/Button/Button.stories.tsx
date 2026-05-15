@@ -12,7 +12,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'ghost', 'form'],
+      options: ['primary', 'accent-1', 'ghost', 'form'],
       description: 'Variante visual del botón.',
     },
     size: {
@@ -55,8 +55,8 @@ export const Primary: Story = {
 };
 
 
-export const Secondary: Story = {
-  args: { variant: 'secondary' },
+export const Accent1: Story = {
+  args: { variant: 'accent-1' },
 };
 
 /** Ghost sobre fotografía oscura (comportamiento por defecto) */

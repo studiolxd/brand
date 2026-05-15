@@ -14,7 +14,7 @@
 .spacing-scale__name {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-1);
-  color: var(--color-text-muted);
+  color: var(--color-text-muted-on-light);
   width: 160px;
   flex-shrink: 0;
 }
@@ -22,7 +22,7 @@
 .spacing-scale__value {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-1);
-  color: var(--color-text-muted);
+  color: var(--color-text-muted-on-light);
   width: 40px;
   flex-shrink: 0;
 }

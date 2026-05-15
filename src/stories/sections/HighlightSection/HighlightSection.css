@@ -5,5 +5,5 @@
 
 .surface-dark .highlight-section {
   background-color: var(--color-background-dark);
-  color: var(--color-text-dark);
+  color: var(--color-text-on-dark);
 }

@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Article>;
 export const Default: Story = {
   args: {
     category: 'E-learning',
-    tagVariant: 'secondary',
+    tagVariant: 'accent-1',
     photo: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80&fit=crop',
     title: 'Onboarding digital para Randstad',
     description:

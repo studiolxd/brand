@@ -22,12 +22,12 @@ const refMap: Record<string, string> = {
 export default create({
   base: 'light',
   colorPrimary: resolveRef(brand.color.primary.$value, refMap),
-  colorSecondary: resolveRef(brand.color.secondary.$value, refMap),
+  colorSecondary: resolveRef(brand.color['accent-1'].$value, refMap),
 
-  appBg: resolveRef(semantic.color.background.default.$value, refMap),
-  appContentBg: resolveRef(semantic.color.background.default.$value, refMap),
-  appHoverBg: resolveRef(brand.color.secondary.$value, refMap),
-  appPreviewBg: resolveRef(semantic.color.background.default.$value, refMap),
+  appBg: resolveRef(semantic.color.background.light.$value, refMap),
+  appContentBg: resolveRef(semantic.color.background.light.$value, refMap),
+  appHoverBg: resolveRef(brand.color['accent-1'].$value, refMap),
+  appPreviewBg: resolveRef(semantic.color.background.light.$value, refMap),
 
   appBorderColor: resolveRef(brand.color.primary.$value, refMap),
   appBorderRadius: 0,
@@ -35,14 +35,14 @@ export default create({
   fontBase: family['font-family'].sans.$value,
   fontCode: family['font-family'].mono.$value,  
 
-  textColor: resolveRef(semantic.color.text.default.$value, refMap),
-  textInverseColor: resolveRef(semantic.color.text.dark.$value, refMap),
-  textMutedColor: resolveRef(semantic.color.text.placeholder.$value, refMap),  
+  textColor: resolveRef(semantic.color.text['on-light'].$value, refMap),
+  textInverseColor: resolveRef(semantic.color.text['on-dark'].$value, refMap),
+  textMutedColor: resolveRef(semantic.color.text.placeholder.$value, refMap),
 
-  barTextColor: resolveRef(semantic.color.text.default.$value, refMap),
-  barHoverColor: resolveRef(brand.color.secondary.$value, refMap),
-  barSelectedColor: resolveRef(brand.color.secondary.$value, refMap),
-  barBg: resolveRef(semantic.color.background.default.$value, refMap),
+  barTextColor: resolveRef(semantic.color.text['on-light'].$value, refMap),
+  barHoverColor: resolveRef(brand.color['accent-1'].$value, refMap),
+  barSelectedColor: resolveRef(brand.color['accent-1'].$value, refMap),
+  barBg: resolveRef(semantic.color.background.light.$value, refMap),
 
   buttonBg: resolveRef(brand.color.primary.$value, refMap),
   buttonBorder: resolveRef(button.button.primary.border.$value, refMap),

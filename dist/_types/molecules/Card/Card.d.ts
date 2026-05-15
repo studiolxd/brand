@@ -1,5 +1,5 @@
 import './Card.css';
-export type CardColor = 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
+export type CardColor = 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 interface CardProps {
     /** URL de destino — todo el bloque es clicable. */
     href: string;

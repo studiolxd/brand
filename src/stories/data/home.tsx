@@ -66,7 +66,7 @@ export const projects = [
   {
     id: 'onboarding-randstad',
     category: 'E-learning',
-    tagVariant: 'secondary' as const,
+    tagVariant: 'accent-1' as const,
     photo: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80&fit=crop',
     title: 'Onboarding digital para Randstad',
     description: 'Diseñamos un itinerario de incorporación 100% online para 1.200 nuevos empleados al año.',
@@ -74,7 +74,7 @@ export const projects = [
   {
     id: 'liderazgo-retail',
     category: 'Formación presencial',
-    tagVariant: 'tertiary' as const,
+    tagVariant: 'accent-2' as const,
     photo: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&fit=crop',
     title: 'Taller de liderazgo para mandos intermedios',
     description: 'Programa presencial de tres módulos para 80 responsables de equipo de una empresa del sector retail.',
@@ -82,7 +82,7 @@ export const projects = [
   {
     id: 'catalogo-grupo-mayo',
     category: 'Diseño instruccional',
-    tagVariant: 'quaternary' as const,
+    tagVariant: 'support-1' as const,
     photo: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80&fit=crop',
     title: 'Rediseño del catálogo formativo de Grupo Mayo',
     description: 'Auditamos y rediseñamos desde cero un catálogo de 40 cursos desactualizados.',
@@ -90,7 +90,7 @@ export const projects = [
   {
     id: 'moodle-junta-andalucia',
     category: 'Plataformas LMS',
-    tagVariant: 'quinary' as const,
+    tagVariant: 'support-2' as const,
     photo: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80&fit=crop',
     title: 'Implantación de Moodle para la Junta de Andalucía',
     description: 'Configuramos y personalizamos una instancia de Moodle para 15.000 usuarios.',
@@ -106,7 +106,7 @@ export const projects = [
   {
     id: 'compliance-elearning',
     category: 'E-learning',
-    tagVariant: 'secondary' as const,
+    tagVariant: 'accent-1' as const,
     photo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80&fit=crop',
     title: 'Curso de compliance y prevención de riesgos',
     description: 'Módulo e-learning con escenarios de decisión ramificados para garantizar la comprensión real de la normativa.',
@@ -114,7 +114,7 @@ export const projects = [
   {
     id: 'guia-formadores-sawy',
     category: 'Diseño instruccional',
-    tagVariant: 'quaternary' as const,
+    tagVariant: 'support-1' as const,
     photo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80&fit=crop',
     title: 'Guía didáctica para formadores internos de Sawy',
     description: 'Creamos una guía metodológica para que el equipo interno pudiera replicar y actualizar los contenidos.',
@@ -122,7 +122,7 @@ export const projects = [
   {
     id: 'migracion-lms',
     category: 'Plataformas LMS',
-    tagVariant: 'quinary' as const,
+    tagVariant: 'support-2' as const,
     photo: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80&fit=crop',
     title: 'Migración de TalentLMS a Canvas',
     description: 'Gestionamos la migración completa de contenidos, usuarios y datos históricos.',
@@ -149,14 +149,14 @@ export const steps = [
 export const solutionItems = [
   {
     href: '#',
-    color: 'secondary' as const,
+    color: 'accent-1' as const,
     title: 'Contenidos elearning',
     description: 'Diseñamos contenidos multimedia interactivos para formación online, utilizando estándares como SCORM y xAPI.',
     ctaLabel: 'Ver más sobre contenidos elearning',
   },
   {
     href: '#',
-    color: 'tertiary' as const,
+    color: 'accent-2' as const,
     title: 'Plataformas elearning',
     description: 'Desarrollamos plataformas elearning adaptadas a tu identidad visual y centradas en las personas usuarias para lograr una experiencia de aprendizaje gratificante.',
     ctaLabel: 'Ver más sobre plataformas elearning',

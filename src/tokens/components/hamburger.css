@@ -12,6 +12,6 @@
   --hamburger-opacity-duration: var(--motion-duration-base); /** Duración de la transición de opacidad */
   --hamburger-opacity-easing: var(--motion-easing-default); /** Easing de la transición de opacidad */
   --hamburger-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --hamburger-bar-color: var(--color-text-default); /** Color de las barras */
+  --hamburger-bar-color: var(--color-text-on-light); /** Color de las barras */
   --hamburger-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }

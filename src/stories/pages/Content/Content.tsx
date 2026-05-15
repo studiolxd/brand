@@ -8,7 +8,7 @@ import type { ComponentProps } from 'react';
 import { DEFAULT_NAV_ITEMS, DEFAULT_FEATURED_LINK } from '../../constants/navigation';
 import './Content.css';
 
-type SectionColor = 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
+type SectionColor = 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 
 interface ContentSection {
   /** Título de la sección (columna coloreada). */

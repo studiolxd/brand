@@ -17,8 +17,8 @@ export const Default: Story = {
     title: 'Soluciones',
     description: 'Descubre nuestra colección de recursos y materiales para el aprendizaje digital.',
     sections: [
-      { title: 'Contenidos elearning', color: 'secondary', colorSide: 'left' },
-      { title: 'Plataformas elearning', color: 'tertiary', colorSide: 'right' },
+      { title: 'Contenidos elearning', color: 'accent-1', colorSide: 'left' },
+      { title: 'Plataformas elearning', color: 'accent-2', colorSide: 'right' },
     ],
     contactSection: {
       title: '¿Hablamos?',

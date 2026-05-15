@@ -6,5 +6,5 @@ const all = flattenTokens(linkJson as never);
 export const linkBaseTokens = all;
 
 export const linkDarkTokens: Token[] = [
-  { name: '--link-dark-color', value: 'var(--color-text-dark)', description: 'Color sobre fondo oscuro' },
+  { name: '--link-dark-color', value: 'var(--color-text-on-dark)', description: 'Color sobre fondo oscuro' },
 ];

@@ -20,22 +20,22 @@
   color: var(--tag-primary-color);
 }
 
-.tag--secondary {
-  background-color: var(--tag-secondary-bg);
-  color: var(--tag-secondary-color);
+.tag--accent-1 {
+  background-color: var(--tag-accent-1-bg);
+  color: var(--tag-accent-1-color);
 }
 
-.tag--tertiary {
-  background-color: var(--tag-tertiary-bg);
-  color: var(--tag-tertiary-color);
+.tag--accent-2 {
+  background-color: var(--tag-accent-2-bg);
+  color: var(--tag-accent-2-color);
 }
 
-.tag--quaternary {
-  background-color: var(--tag-quaternary-bg);
-  color: var(--tag-quaternary-color);
+.tag--support-1 {
+  background-color: var(--tag-support-1-bg);
+  color: var(--tag-support-1-color);
 }
 
-.tag--quinary {
-  background-color: var(--tag-quinary-bg);
-  color: var(--tag-quinary-color);
+.tag--support-2 {
+  background-color: var(--tag-support-2-bg);
+  color: var(--tag-support-2-color);
 }

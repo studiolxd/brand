@@ -30,9 +30,9 @@
   --text-list-gap: var(--spacing-2); /** Spacing between list items (8px) */
   --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
-  --text-color: var(--color-text-default); /** Default text color */
+  --text-color: var(--color-text-on-light); /** Default text color */
   --text-heading-font-weight: var(--font-weight-default); /** Heading font weight */
-  --text-heading-color: var(--color-text-default); /** Heading color */
+  --text-heading-color: var(--color-text-on-light); /** Heading color */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
   --text-h1-letter-spacing: var(--text-heading-letter-spacing); /** H1 letter spacing */
   --text-h2-font-family: var(--text-heading-font-family); /** H2 font family */

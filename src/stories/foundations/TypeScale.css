@@ -22,7 +22,7 @@
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-default);
   line-height: var(--line-height-tight);
-  color: var(--color-text-default);
+  color: var(--color-text-on-light);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -38,7 +38,7 @@
 .type-scale__value {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-1);
-  color: var(--color-text-muted);
+  color: var(--color-text-muted-on-light);
 }
 
 .type-scale__value::before {
@@ -50,7 +50,7 @@
 .type-scale__desc {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-1);
-  color: var(--color-text-muted);
+  color: var(--color-text-muted-on-light);
 }
 
 .type-scale__desc::before {

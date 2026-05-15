@@ -13,11 +13,11 @@ export default meta;
 type Story = StoryObj<typeof Carousel>;
 
 const colors = [
-  'var(--color-secondary)',
-  'var(--color-tertiary)',
-  'var(--color-quaternary)',
-  'var(--color-quinary)',
-  'var(--color-secondary)',
+  'var(--color-accent-1)',
+  'var(--color-accent-2)',
+  'var(--color-support-1)',
+  'var(--color-support-2)',
+  'var(--color-accent-1)',
 ];
 
 const labels = ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5'];
@@ -27,7 +27,7 @@ const slideContent = labels.map((label, i) => (
     <div
       style={{
         background: colors[i],
-        color: 'var(--color-text-default)',
+        color: 'var(--color-text-on-light)',
         height: '240px',
         display: 'flex',
         alignItems: 'center',

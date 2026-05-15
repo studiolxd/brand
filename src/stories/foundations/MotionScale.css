@@ -14,7 +14,7 @@
 .motion-scale__swatch {
   width: 80px;
   height: 48px;
-  background-color: var(--color-secondary);
+  background-color: var(--color-accent-1);
   border-radius: var(--border-radius-md);
   flex-shrink: 0;
   cursor: pointer;

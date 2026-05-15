@@ -13,7 +13,7 @@
 .form > .textarea-field,
 .form > .checkbox-field,
 .form > .form-errors {
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-light);
 }
 
 /* input-phone-field actúa como sub-contenedor de la misma técnica:
@@ -31,12 +31,12 @@
 .form > .input-phone-field > .input-phone-field__helper {
   padding-block: var(--control-padding-block);
   padding-inline: var(--control-padding-inline);
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-light);
 }
 
 .form > .input-phone-field > .input-phone > .input-phone__country,
 .form > .input-phone-field > .input-phone .input-phone__number {
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-light);
 }
 
 /* Borde = fondo del estado correspondiente para que sea invisible sin cambiar el tamaño */
@@ -73,22 +73,22 @@
 /* Color = fondo del elemento para que el borde sea invisible sin cambiar el tamaño */
 /* Especificidad 0,3,0 — gana sobre .input.input--dark (0,2,0) */
 .form > .input-field > .input {
-  --input-border-color: var(--color-background-default);
-  --input-error-border-color: var(--color-background-default);
-  --input-disabled-border-color: var(--color-background-default);
+  --input-border-color: var(--color-background-light);
+  --input-error-border-color: var(--color-background-light);
+  --input-disabled-border-color: var(--color-background-light);
 }
 
 .form > .input-phone-field > .input-phone {
-  --input-border-color: var(--color-background-default);
-  --input-error-border-color: var(--color-background-default);
-  --input-disabled-border-color: var(--color-background-default);
-  --input-phone-country-border-color: var(--color-background-default);
+  --input-border-color: var(--color-background-light);
+  --input-error-border-color: var(--color-background-light);
+  --input-disabled-border-color: var(--color-background-light);
+  --input-phone-country-border-color: var(--color-background-light);
 }
 
 .form > .textarea-field > .textarea {
-  --textarea-border-color: var(--color-background-default);
-  --textarea-error-border-color: var(--color-background-default);
-  --textarea-disabled-border-color: var(--color-background-default);
+  --textarea-border-color: var(--color-background-light);
+  --textarea-error-border-color: var(--color-background-light);
+  --textarea-disabled-border-color: var(--color-background-light);
 }
 
 

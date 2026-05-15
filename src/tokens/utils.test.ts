@@ -50,7 +50,7 @@ describe('flattenTokens', () => {
       },
     };
     expect(flattenTokens(tree)).toEqual([
-      { name: '--color-text-default', value: '#111e30', description: undefined },
+      { name: '--color-text-on-light', value: '#111e30', description: undefined },
     ]);
   });
 
