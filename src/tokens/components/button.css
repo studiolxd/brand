@@ -48,6 +48,14 @@
   --button-accent-text-decoration: var(--button-text-decoration); /** Text decoration */
   --button-accent-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-accent-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
+  --button-destructive-border-style: var(--button-border-style); /** Border style */
+  --button-destructive-justify-content: var(--button-justify-content); /** Justify content */
+  --button-destructive-cursor: var(--button-cursor); /** Cursor */
+  --button-destructive-white-space: var(--button-white-space); /** White space */
+  --button-destructive-text-decoration: var(--button-text-decoration); /** Text decoration */
+  --button-destructive-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
+  --button-destructive-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
+  --button-destructive-bg: var(--color-white); /** Background */
   --button-outline-border-style: var(--button-border-style); /** Border style */
   --button-outline-justify-content: var(--button-justify-content); /** Justify content */
   --button-outline-cursor: var(--button-cursor); /** Cursor */
@@ -108,6 +116,28 @@
   --button-accent-active-bg: var(--color-accent-2); /** Active background */
   --button-accent-active-color: var(--color-primary); /** Active text color */
   --button-accent-active-border: var(--color-accent-2); /** Active border color */
+  --button-destructive-border-radius: var(--button-border-radius); /** Border radius */
+  --button-destructive-border-width: var(--button-border-width); /** Border width */
+  --button-destructive-font-family: var(--button-font-family); /** Font family */
+  --button-destructive-font-size: var(--button-font-size); /** Font size */
+  --button-destructive-line-height: var(--button-line-height); /** Line height */
+  --button-destructive-transition-duration: var(--button-transition-duration); /** Transition duration */
+  --button-destructive-transition-easing: var(--button-transition-easing); /** Transition easing */
+  --button-destructive-disabled-color: var(--button-disabled-color); /** Text color when disabled */
+  --button-destructive-disabled-border: var(--button-disabled-border); /** Border color when disabled */
+  --button-destructive-padding-block: var(--button-padding-block); /** Block (vertical) padding */
+  --button-destructive-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
+  --button-destructive-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
+  --button-destructive-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
+  --button-destructive-focus-ring-color: var(--color-destructive-on-light); /** Focus ring color */
+  --button-destructive-color: var(--color-destructive-on-light); /** Text color */
+  --button-destructive-border: var(--color-destructive-on-light); /** Border color */
+  --button-destructive-hover-bg: var(--color-destructive-on-light); /** Hover background */
+  --button-destructive-hover-color: var(--color-text-on-dark); /** Hover text color */
+  --button-destructive-hover-border: var(--color-destructive-on-light); /** Hover border color */
+  --button-destructive-active-bg: var(--color-destructive-on-light); /** Active background */
+  --button-destructive-active-color: var(--color-text-on-dark); /** Active text color */
+  --button-destructive-active-border: var(--color-destructive-on-light); /** Active border color */
   --button-outline-border-radius: var(--button-border-radius); /** Border radius */
   --button-outline-border-width: var(--button-border-width); /** Border width */
   --button-outline-font-family: var(--button-font-family); /** Font family */
@@ -125,5 +155,6 @@
   --button-outline-active-color: var(--color-text-on-light); /** Active text color */
   --button-primary-font-weight: var(--button-font-weight); /** Font weight */
   --button-accent-font-weight: var(--button-font-weight); /** Font weight */
+  --button-destructive-font-weight: var(--button-font-weight); /** Font weight */
   --button-outline-font-weight: var(--button-font-weight); /** Font weight */
 }

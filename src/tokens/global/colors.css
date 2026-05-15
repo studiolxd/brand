@@ -27,6 +27,8 @@
   --color-error-on-dark: var(--color-red-on-dark); /** Error role on dark background */
   --color-success-on-light: var(--color-green-on-light); /** Success role — maps to system green */
   --color-success-on-dark: var(--color-green-on-dark); /** Success role on dark background */
+  --color-destructive-on-light: var(--color-red-on-light); /** Destructive action role — maps to system red */
+  --color-destructive-on-dark: var(--color-red-on-dark); /** Destructive action role on dark background */
   --color-text-on-light: var(--color-prussian); /** Text color for light backgrounds */
   --color-text-on-dark: var(--color-white); /** Text color for dark backgrounds */
   --color-text-placeholder: var(--color-grey-dark); /** Placeholder text color */

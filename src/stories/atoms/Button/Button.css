@@ -95,6 +95,52 @@
   pointer-events: none;
 }
 
+/* Destructive */
+.button--destructive {
+  justify-content: var(--button-destructive-justify-content);
+  padding-block: var(--button-destructive-padding-block);
+  padding-inline: var(--button-destructive-padding-inline);
+  border-radius: var(--button-destructive-border-radius);
+  border-width: var(--button-destructive-border-width);
+  border-style: var(--button-destructive-border-style);
+  border-color: var(--button-destructive-border);
+  font-family: var(--button-destructive-font-family);
+  font-size: var(--button-destructive-font-size);
+  font-weight: var(--button-destructive-font-weight);
+  line-height: var(--button-destructive-line-height);
+  cursor: var(--button-destructive-cursor);
+  white-space: var(--button-destructive-white-space);
+  text-decoration: var(--button-destructive-text-decoration);
+  background-color: var(--button-destructive-bg);
+  color: var(--button-destructive-color);
+  transition: background-color var(--button-destructive-transition-duration) var(--button-destructive-transition-easing), color var(--button-destructive-transition-duration) var(--button-destructive-transition-easing), border-color var(--button-destructive-transition-duration) var(--button-destructive-transition-easing);
+}
+
+.button--destructive:hover {
+  background-color: var(--button-destructive-hover-bg);
+  color: var(--button-destructive-hover-color);
+  border-color: var(--button-destructive-hover-border);
+}
+
+.button--destructive:active {
+  background-color: var(--button-destructive-active-bg);
+  color: var(--button-destructive-active-color);
+  border-color: var(--button-destructive-active-border);
+}
+
+.button--destructive:focus-visible {
+  outline: var(--button-destructive-focus-ring-width) var(--button-destructive-focus-ring-style) var(--button-destructive-focus-ring-color);
+  outline-offset: var(--button-destructive-focus-ring-offset);
+}
+
+.button--destructive:disabled,
+.button--destructive[aria-disabled="true"] {
+  color: var(--button-destructive-disabled-color);
+  border-color: var(--button-destructive-disabled-border);
+  cursor: var(--button-destructive-disabled-cursor);
+  pointer-events: none;
+}
+
 /* Outline */
 .button--outline {
   justify-content: var(--button-outline-justify-content);

@@ -1,8 +1,10 @@
 {
   "color": {
-    "error-on-light":   { "$value": "{color.red-on-light}",   "$type": "color", "$description": "Error role — maps to system red" },
-    "error-on-dark":    { "$value": "{color.red-on-dark}",    "$type": "color", "$description": "Error role on dark background" },
-    "success-on-light": { "$value": "{color.green-on-light}", "$type": "color", "$description": "Success role — maps to system green" },
-    "success-on-dark":  { "$value": "{color.green-on-dark}",  "$type": "color", "$description": "Success role on dark background" }
+    "error-on-light":       { "$value": "{color.red-on-light}",   "$type": "color", "$description": "Error role — maps to system red" },
+    "error-on-dark":        { "$value": "{color.red-on-dark}",    "$type": "color", "$description": "Error role on dark background" },
+    "success-on-light":     { "$value": "{color.green-on-light}", "$type": "color", "$description": "Success role — maps to system green" },
+    "success-on-dark":      { "$value": "{color.green-on-dark}",  "$type": "color", "$description": "Success role on dark background" },
+    "destructive-on-light": { "$value": "{color.red-on-light}",   "$type": "color", "$description": "Destructive action role — maps to system red" },
+    "destructive-on-dark":  { "$value": "{color.red-on-dark}",    "$type": "color", "$description": "Destructive action role on dark background" }
   }
 }

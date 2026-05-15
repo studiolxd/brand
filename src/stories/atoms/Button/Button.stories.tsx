@@ -12,7 +12,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'accent', 'outline'],
+      options: ['primary', 'accent', 'outline', 'destructive'],
       description: 'Variante visual del botón.',
     },
     size: {
@@ -57,6 +57,10 @@ export const Primary: Story = {
 
 export const Accent: Story = {
   args: { variant: 'accent' },
+};
+
+export const Destructive: Story = {
+  args: { variant: 'destructive' },
 };
 
 export const OutlineOnDark: Story = {

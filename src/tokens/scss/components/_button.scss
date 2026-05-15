@@ -93,6 +93,37 @@ $button-accent-hover-border: #ffcd00; // Hover border color
 $button-accent-active-bg: #ffcd00; // Active background
 $button-accent-active-color: #111e30; // Active text color
 $button-accent-active-border: #ffcd00; // Active border color
+$button-destructive-border-radius: 9999px; // Border radius
+$button-destructive-border-width: 1px; // Border width
+$button-destructive-border-style: solid; // Border style
+$button-destructive-justify-content: center; // Justify content
+$button-destructive-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$button-destructive-font-size: 1.125rem; // Font size
+$button-destructive-font-weight: 300; // Font weight
+$button-destructive-line-height: 1; // Line height
+$button-destructive-cursor: pointer; // Cursor
+$button-destructive-white-space: nowrap; // White space
+$button-destructive-text-decoration: none; // Text decoration
+$button-destructive-transition-duration: 150ms; // Transition duration
+$button-destructive-transition-easing: ease; // Transition easing
+$button-destructive-disabled-cursor: not-allowed; // Cursor when disabled
+$button-destructive-disabled-color: #4a4a4a; // Text color when disabled
+$button-destructive-disabled-border: #4a4a4a; // Border color when disabled
+$button-destructive-padding-block: 0.75rem; // Block (vertical) padding
+$button-destructive-padding-inline: 2rem; // Inline (horizontal) padding
+$button-destructive-focus-ring-width: 2px; // Focus ring width
+$button-destructive-focus-ring-style: solid; // Focus ring border style
+$button-destructive-focus-ring-offset: 2px; // Focus ring offset
+$button-destructive-focus-ring-color: #b30000; // Focus ring color
+$button-destructive-bg: #ffffff; // Background
+$button-destructive-color: #b30000; // Text color
+$button-destructive-border: #b30000; // Border color
+$button-destructive-hover-bg: #b30000; // Hover background
+$button-destructive-hover-color: #ffffff; // Hover text color
+$button-destructive-hover-border: #b30000; // Hover border color
+$button-destructive-active-bg: #b30000; // Active background
+$button-destructive-active-color: #ffffff; // Active text color
+$button-destructive-active-border: #b30000; // Active border color
 $button-outline-border-radius: 9999px; // Border radius
 $button-outline-border-width: 1px; // Border width
 $button-outline-border-style: solid; // Border style
