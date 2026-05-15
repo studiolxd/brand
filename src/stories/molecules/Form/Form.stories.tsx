@@ -27,7 +27,7 @@ type Story = StoryObj<typeof Form>;
 
 export const Default: Story = {
   args: {
-    actions: <Button variant="form">Enviar</Button>,
+    actions: <Button variant="accent" block>Enviar</Button>,
     children: (
       <InputField id="form-email" label="Email" labelHidden placeholder="tu@email.com" />
     ),
@@ -42,7 +42,7 @@ export const Success: Story = {
 export const WithErrors: Story = {
   args: {
     errors: ['El email es obligatorio.', 'Debes aceptar la política de privacidad.'],
-    actions: <Button variant="form">Enviar</Button>,
+    actions: <Button variant="accent" block>Enviar</Button>,
     children: (
       <InputField id="form-email-error" label="Email" labelHidden placeholder="tu@email.com" />
     ),
@@ -61,7 +61,7 @@ export const ContactFormExample: Story = {
     const [wantCall, setWantCall] = useState(false);
     return (
       <Form
-        actions={<Button variant="form" type="submit">Enviar mensaje</Button>}
+        actions={<Button variant="accent" block type="submit">Enviar mensaje</Button>}
       >
         <InputField id="ex-contact-email" label="Email" labelHidden type="email" placeholder="Escribe aquí tu correo electrónico" />
         <TextareaField id="ex-contact-message" label="Mensaje" labelHidden placeholder="Escribe aquí tu mensaje" rows={5} />
@@ -90,7 +90,7 @@ export const NewsletterFormExample: Story = {
   name: 'Ejemplo: NewsletterForm',
   render: () => (
     <Form
-      actions={<Button variant="form" type="submit">Suscríbeme a la newsletter</Button>}
+      actions={<Button variant="accent" block type="submit">Suscríbeme a la newsletter</Button>}
     >
       <InputField id="ex-newsletter-email" label="Email" labelHidden type="email" placeholder="Escribe aquí tu correo electrónico" />
       <CheckboxField id="ex-newsletter-privacy" label={privacyLabel} />

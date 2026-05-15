@@ -1,13 +1,13 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ButtonStories from "./Button.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonGhostTokens, buttonFormTokens, buttonSizeTokens } from "../../../tokens/components/button";
+import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonAccentTokens, buttonOutlineTokens, buttonSizeTokens } from "../../../tokens/components/button";
 
 <Meta of={ButtonStories} />
 
 # Botón
 
-El botón es el elemento de acción principal del sistema. Existen cuatro variantes con roles distintos.
+El botón es el elemento de acción principal del sistema. Existen tres variantes con roles distintos.
 
 ## Primary
 
@@ -15,19 +15,19 @@ Borde en color primario, fondo blanco y texto por defecto. En hover el fondo pas
 
 <Canvas of={ButtonStories.Primary} />
 
-## Ghost
+## Accent
 
-Borde y texto en color inverso sobre fondo transparente. En hover el fondo y el borde pasan a blanco y el texto a color por defecto. Reservado exclusivamente para su uso sobre fotografías.
+Fondo en color accent-1 y texto oscuro. En hover el fondo pasa a accent-2. El texto es siempre oscuro para garantizar contraste suficiente.
 
-<Canvas of={ButtonStories.GhostOnDark} />
+<Canvas of={ButtonStories.Accent} />
 
-<Canvas of={ButtonStories.GhostOnLight} />
+## Outline
 
-## Form
+Borde y texto en color inverso sobre fondo transparente. En hover el fondo y el borde pasan a blanco y el texto a color por defecto. Para usar sobre fotografías o fondos oscuros.
 
-Fondo en color secundario, texto por defecto alineado a la izquierda y altura mínima fija. En hover el fondo pasa a color terciario. Usado en formularios y listados de acciones.
+<Canvas of={ButtonStories.OutlineOnDark} />
 
-<Canvas of={ButtonStories.Form} />
+<Canvas of={ButtonStories.OutlineOnLight} />
 
 ## Block
 
@@ -61,13 +61,13 @@ Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica
 
 <TokenTable tokens={buttonPrimaryDarkTokens} />
 
-### Ghost
+### Accent
 
-<TokenTable tokens={buttonGhostTokens} />
+<TokenTable tokens={buttonAccentTokens} />
 
-### Form
+### Outline
 
-<TokenTable tokens={buttonFormTokens} />
+<TokenTable tokens={buttonOutlineTokens} />
 
 ### Tamaños
 

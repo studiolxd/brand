@@ -39,24 +39,6 @@
   background-color: var(--color-background-light);
 }
 
-/* Borde = fondo del estado correspondiente para que sea invisible sin cambiar el tamaño */
-.form > .button.button--form {
-  background-color: var(--button-form-bg);
-  --button-form-border: var(--button-form-bg);
-  --button-form-hover-border: var(--button-form-hover-bg);
-  --button-form-active-border: var(--button-form-active-bg);
-  --button-form-disabled-border: var(--button-form-bg);
-}
-
-.form > .button.button--form:hover {
-  background-color: var(--button-form-hover-bg);
-}
-
-.form > .button.button--form:active {
-  background-color: var(--button-form-active-bg);
-}
-
-/* Dark surface — handled by surface.css via .surface-dark context class */
 
 .form__success {
   margin: 0;

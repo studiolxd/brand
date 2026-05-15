@@ -59,7 +59,7 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(function Conta
       errors={errors}
       onSubmit={onSubmit}
       actions={
-        <Button variant="form" type="submit" disabled={submitting}>
+        <Button variant="accent" block type="submit" disabled={submitting}>
           {submitting ? submittingLabel : buttonLabel}
         </Button>
       }

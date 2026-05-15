@@ -5,7 +5,7 @@
    descendientes adaptan sus tokens automáticamente.
 
    .surface-dark  — sobre fondo oscuro (body dark, secciones oscuras)
-   .surface-light — ghost sobre fotografía clara
+   .surface-light — outline sobre fotografía clara
    ============================================================= */
 
 .surface-dark {
@@ -104,15 +104,6 @@
 .surface-dark .button--primary[aria-disabled="true"] {
   --button-primary-disabled-color: var(--color-grey-light);
   --button-primary-disabled-border:var(--color-grey-light);
-}
-
-/* ghost siempre vive sobre fondos oscuros; su disabled ya usa grey-light */
-
-.surface-dark .button--form:disabled,
-.surface-dark .button--form[aria-disabled="true"] {
-  --button-form-disabled-bg:    var(--color-grey-darkest);
-  --button-form-disabled-color: var(--color-grey-light);
-  --button-form-disabled-border:var(--color-grey-darkest);
 }
 
 /* ─── Input: disabled and error states ───────────────────────────────────── */
@@ -242,27 +233,26 @@
 }
 
 /* =============================================================
-   surface-light — Ghost sobre fotografía clara
+   surface-light — Outline sobre fotografía clara
 
-   Solo ghost necesita inversión en fotos claras. El resto de
-   componentes no vive sobre fotografías.
+   Solo outline necesita inversión en fotos claras.
    ============================================================= */
 
 .surface-light {
-  /* ─── Button ghost ──────────────────────────────────────────────────────── */
-  --button-ghost-color:            var(--color-text-on-light);
-  --button-ghost-border:           var(--color-text-on-light);
-  --button-ghost-hover-bg:         var(--color-text-on-light);
-  --button-ghost-hover-color:      var(--color-text-on-dark);
-  --button-ghost-hover-border:     var(--color-text-on-light);
-  --button-ghost-active-bg:        var(--color-text-on-light);
-  --button-ghost-active-color:     var(--color-text-on-dark);
-  --button-ghost-active-border:    var(--color-text-on-light);
-  --button-ghost-focus-ring-color: var(--color-text-on-light);
+  /* ─── Button outline ──────────────────────────────────────────────────────── */
+  --button-outline-color:            var(--color-text-on-light);
+  --button-outline-border:           var(--color-text-on-light);
+  --button-outline-hover-bg:         var(--color-text-on-light);
+  --button-outline-hover-color:      var(--color-text-on-dark);
+  --button-outline-hover-border:     var(--color-text-on-light);
+  --button-outline-active-bg:        var(--color-text-on-light);
+  --button-outline-active-color:     var(--color-text-on-dark);
+  --button-outline-active-border:    var(--color-text-on-light);
+  --button-outline-focus-ring-color: var(--color-text-on-light);
 }
 
-.surface-light .button--ghost:disabled,
-.surface-light .button--ghost[aria-disabled="true"] {
-  --button-ghost-disabled-color:  var(--color-grey-darkest);
-  --button-ghost-disabled-border: var(--color-grey-darkest);
+.surface-light .button--outline:disabled,
+.surface-light .button--outline[aria-disabled="true"] {
+  --button-outline-disabled-color:  var(--color-grey-darkest);
+  --button-outline-disabled-border: var(--color-grey-darkest);
 }

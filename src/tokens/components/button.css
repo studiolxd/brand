@@ -12,9 +12,7 @@
   --button-disabled-cursor: not-allowed; /** Cursor when disabled */
   --button-focus-ring-style: solid; /** Focus ring border style */
   --button-block-width: 100%; /** Width when block modifier is applied */
-  --button-ghost-bg: rgba(0, 0, 0, 0); /** Background */
-  --button-form-justify-content: flex-start; /** Justify content */
-  --button-form-text-transform: uppercase; /** Text transform */
+  --button-outline-bg: rgba(0, 0, 0, 0); /** Background */
   --button-border-radius: var(--border-radius-full); /** Border radius */
   --button-border-width: var(--border-width-sm); /** Border width */
   --button-font-family: var(--font-family-sans); /** Font family */
@@ -32,7 +30,7 @@
   --button-sm-padding-block: var(--spacing-2); /** Block padding — sm */
   --button-sm-padding-inline: var(--spacing-5); /** Inline padding — sm */
   --button-sm-font-size: var(--font-size-1); /** Font size — sm */
-  --button-lg-padding-block: var(--spacing-5); /** Block padding — lg */
+  --button-lg-padding-block: var(--spacing-4); /** Block padding — lg */
   --button-lg-padding-inline: var(--spacing-8); /** Inline padding — lg */
   --button-lg-font-size: var(--font-size-4); /** Font size — lg */
   --button-primary-border-style: var(--button-border-style); /** Border style */
@@ -43,35 +41,27 @@
   --button-primary-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-primary-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-primary-bg: var(--color-white); /** Background */
-  --button-accent-1-border-style: var(--button-border-style); /** Border style */
-  --button-accent-1-justify-content: var(--button-justify-content); /** Justify content */
-  --button-accent-1-cursor: var(--button-cursor); /** Cursor */
-  --button-accent-1-white-space: var(--button-white-space); /** White space */
-  --button-accent-1-text-decoration: var(--button-text-decoration); /** Text decoration */
-  --button-accent-1-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
-  --button-accent-1-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
-  --button-ghost-border-style: var(--button-border-style); /** Border style */
-  --button-ghost-justify-content: var(--button-justify-content); /** Justify content */
-  --button-ghost-cursor: var(--button-cursor); /** Cursor */
-  --button-ghost-white-space: var(--button-white-space); /** White space */
-  --button-ghost-text-decoration: var(--button-text-decoration); /** Text decoration */
-  --button-ghost-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
-  --button-ghost-disabled-color: var(--color-grey-light); /** Text color when disabled — ghost lives on dark photo */
-  --button-ghost-disabled-border: var(--color-grey-light); /** Border color when disabled — ghost lives on dark photo */
-  --button-ghost-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
-  --button-ghost-focus-ring-color: var(--color-white); /** Focus ring color — white on dark photo */
-  --button-ghost-hover-bg: var(--color-white); /** Hover background */
-  --button-ghost-hover-border: var(--color-white); /** Hover border color */
-  --button-ghost-active-bg: var(--color-white); /** Active background */
-  --button-ghost-active-border: var(--color-white); /** Active border color */
-  --button-form-border-radius: var(--border-radius-none); /** Border radius */
-  --button-form-border-style: var(--button-border-style); /** Border style */
-  --button-form-cursor: var(--button-cursor); /** Cursor */
-  --button-form-white-space: var(--button-white-space); /** White space */
-  --button-form-text-decoration: var(--button-text-decoration); /** Text decoration */
-  --button-form-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
-  --button-form-width: var(--button-block-width); /** Form buttons are always full width */
-  --button-form-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
+  --button-accent-border-style: var(--button-border-style); /** Border style */
+  --button-accent-justify-content: var(--button-justify-content); /** Justify content */
+  --button-accent-cursor: var(--button-cursor); /** Cursor */
+  --button-accent-white-space: var(--button-white-space); /** White space */
+  --button-accent-text-decoration: var(--button-text-decoration); /** Text decoration */
+  --button-accent-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
+  --button-accent-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
+  --button-outline-border-style: var(--button-border-style); /** Border style */
+  --button-outline-justify-content: var(--button-justify-content); /** Justify content */
+  --button-outline-cursor: var(--button-cursor); /** Cursor */
+  --button-outline-white-space: var(--button-white-space); /** White space */
+  --button-outline-text-decoration: var(--button-text-decoration); /** Text decoration */
+  --button-outline-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
+  --button-outline-disabled-color: var(--color-grey-light); /** Text color when disabled */
+  --button-outline-disabled-border: var(--color-grey-light); /** Border color when disabled */
+  --button-outline-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
+  --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — white on dark backgrounds */
+  --button-outline-hover-bg: var(--color-white); /** Hover background */
+  --button-outline-hover-border: var(--color-white); /** Hover border color */
+  --button-outline-active-bg: var(--color-white); /** Active background */
+  --button-outline-active-border: var(--color-white); /** Active border color */
   --button-font-weight: var(--font-weight-default); /** Font weight */
   --button-primary-border-radius: var(--button-border-radius); /** Border radius */
   --button-primary-border-width: var(--button-border-width); /** Border width */
@@ -95,69 +85,45 @@
   --button-primary-active-bg: var(--color-primary); /** Active background */
   --button-primary-active-color: var(--color-text-on-dark); /** Active text color */
   --button-primary-active-border: var(--color-primary); /** Active border color */
-  --button-accent-1-border-radius: var(--button-border-radius); /** Border radius */
-  --button-accent-1-border-width: var(--button-border-width); /** Border width */
-  --button-accent-1-font-family: var(--button-font-family); /** Font family */
-  --button-accent-1-font-size: var(--button-font-size); /** Font size */
-  --button-accent-1-line-height: var(--button-line-height); /** Line height */
-  --button-accent-1-transition-duration: var(--button-transition-duration); /** Transition duration */
-  --button-accent-1-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-accent-1-disabled-color: var(--button-disabled-color); /** Text color when disabled */
-  --button-accent-1-disabled-border: var(--button-disabled-border); /** Border color when disabled */
-  --button-accent-1-padding-block: var(--button-padding-block); /** Block (vertical) padding */
-  --button-accent-1-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
-  --button-accent-1-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
-  --button-accent-1-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
-  --button-accent-1-focus-ring-color: var(--color-accent-1); /** Focus ring color */
-  --button-accent-1-bg: var(--color-accent-1); /** Background */
-  --button-accent-1-color: var(--color-primary); /** Text color */
-  --button-accent-1-border: var(--color-accent-1); /** Border color */
-  --button-accent-1-hover-bg: var(--color-accent-2); /** Hover background */
-  --button-accent-1-hover-color: var(--color-primary); /** Hover text color */
-  --button-accent-1-hover-border: var(--color-accent-2); /** Hover border color */
-  --button-accent-1-active-bg: var(--color-accent-2); /** Active background */
-  --button-accent-1-active-color: var(--color-primary); /** Active text color */
-  --button-accent-1-active-border: var(--color-accent-2); /** Active border color */
-  --button-ghost-border-radius: var(--button-border-radius); /** Border radius */
-  --button-ghost-border-width: var(--button-border-width); /** Border width */
-  --button-ghost-font-family: var(--button-font-family); /** Font family */
-  --button-ghost-font-size: var(--button-font-size); /** Font size */
-  --button-ghost-line-height: var(--button-line-height); /** Line height */
-  --button-ghost-transition-duration: var(--button-transition-duration); /** Transition duration */
-  --button-ghost-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-ghost-padding-block: var(--button-padding-block); /** Block (vertical) padding */
-  --button-ghost-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
-  --button-ghost-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
-  --button-ghost-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
-  --button-ghost-color: var(--color-text-on-dark); /** Text color — white on dark photo */
-  --button-ghost-border: var(--color-text-on-dark); /** Border color — white on dark photo */
-  --button-ghost-hover-color: var(--color-text-on-light); /** Hover text color */
-  --button-ghost-active-color: var(--color-text-on-light); /** Active text color */
-  --button-form-border-width: var(--button-border-width); /** Border width */
-  --button-form-font-family: var(--button-font-family); /** Font family */
-  --button-form-font-size: var(--button-font-size); /** Font size */
-  --button-form-line-height: var(--button-line-height); /** Line height */
-  --button-form-transition-duration: var(--button-transition-duration); /** Transition duration */
-  --button-form-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-form-disabled-bg: var(--button-disabled-bg); /** Background when disabled */
-  --button-form-disabled-color: var(--button-disabled-color); /** Text color when disabled */
-  --button-form-disabled-border: var(--button-disabled-bg); /** Border color when disabled — matches bg */
-  --button-form-padding-block: var(--control-padding-block); /** Block (vertical) padding */
-  --button-form-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
-  --button-form-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
-  --button-form-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
-  --button-form-focus-ring-color: var(--color-primary); /** Focus ring color */
-  --button-form-bg: var(--color-accent-1); /** Background */
-  --button-form-color: var(--color-text-on-light); /** Text color */
-  --button-form-border: var(--color-accent-1); /** Border color — matches bg so inset ring has a natural 1px gap */
-  --button-form-hover-bg: var(--color-accent-2); /** Hover background */
-  --button-form-hover-color: var(--color-text-on-light); /** Hover text color */
-  --button-form-hover-border: var(--color-accent-2); /** Hover border color — matches hover bg */
-  --button-form-active-bg: var(--color-accent-2); /** Active background */
-  --button-form-active-color: var(--color-text-on-light); /** Active text color */
-  --button-form-active-border: var(--color-accent-2); /** Active border color — matches active bg */
+  --button-accent-border-radius: var(--button-border-radius); /** Border radius */
+  --button-accent-border-width: var(--button-border-width); /** Border width */
+  --button-accent-font-family: var(--button-font-family); /** Font family */
+  --button-accent-font-size: var(--button-font-size); /** Font size */
+  --button-accent-line-height: var(--button-line-height); /** Line height */
+  --button-accent-transition-duration: var(--button-transition-duration); /** Transition duration */
+  --button-accent-transition-easing: var(--button-transition-easing); /** Transition easing */
+  --button-accent-disabled-color: var(--button-disabled-color); /** Text color when disabled */
+  --button-accent-disabled-border: var(--button-disabled-border); /** Border color when disabled */
+  --button-accent-padding-block: var(--button-padding-block); /** Block (vertical) padding */
+  --button-accent-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
+  --button-accent-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
+  --button-accent-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
+  --button-accent-focus-ring-color: var(--color-accent-1); /** Focus ring color */
+  --button-accent-bg: var(--color-accent-1); /** Background */
+  --button-accent-color: var(--color-primary); /** Text color */
+  --button-accent-border: var(--color-accent-1); /** Border color */
+  --button-accent-hover-bg: var(--color-accent-2); /** Hover background */
+  --button-accent-hover-color: var(--color-primary); /** Hover text color */
+  --button-accent-hover-border: var(--color-accent-2); /** Hover border color */
+  --button-accent-active-bg: var(--color-accent-2); /** Active background */
+  --button-accent-active-color: var(--color-primary); /** Active text color */
+  --button-accent-active-border: var(--color-accent-2); /** Active border color */
+  --button-outline-border-radius: var(--button-border-radius); /** Border radius */
+  --button-outline-border-width: var(--button-border-width); /** Border width */
+  --button-outline-font-family: var(--button-font-family); /** Font family */
+  --button-outline-font-size: var(--button-font-size); /** Font size */
+  --button-outline-line-height: var(--button-line-height); /** Line height */
+  --button-outline-transition-duration: var(--button-transition-duration); /** Transition duration */
+  --button-outline-transition-easing: var(--button-transition-easing); /** Transition easing */
+  --button-outline-padding-block: var(--button-padding-block); /** Block (vertical) padding */
+  --button-outline-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
+  --button-outline-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
+  --button-outline-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
+  --button-outline-color: var(--color-text-on-dark); /** Text color */
+  --button-outline-border: var(--color-text-on-dark); /** Border color */
+  --button-outline-hover-color: var(--color-text-on-light); /** Hover text color */
+  --button-outline-active-color: var(--color-text-on-light); /** Active text color */
   --button-primary-font-weight: var(--button-font-weight); /** Font weight */
-  --button-accent-1-font-weight: var(--button-font-weight); /** Font weight */
-  --button-ghost-font-weight: var(--button-font-weight); /** Font weight */
-  --button-form-font-weight: var(--button-font-weight); /** Font weight */
+  --button-accent-font-weight: var(--button-font-weight); /** Font weight */
+  --button-outline-font-weight: var(--button-font-weight); /** Font weight */
 }

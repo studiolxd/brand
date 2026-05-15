@@ -27,7 +27,7 @@ $button-focus-ring-offset: 2px; // Focus ring offset
 $button-sm-padding-block: 0.5rem; // Block padding — sm
 $button-sm-padding-inline: 1.5rem; // Inline padding — sm
 $button-sm-font-size: 0.875rem; // Font size — sm
-$button-lg-padding-block: 1.5rem; // Block padding — lg
+$button-lg-padding-block: 1rem; // Block padding — lg
 $button-lg-padding-inline: 4rem; // Inline padding — lg
 $button-lg-font-size: 1.25rem; // Font size — lg
 $button-block-width: 100%; // Width when block modifier is applied
@@ -62,99 +62,65 @@ $button-primary-hover-border: #111e30; // Hover border color
 $button-primary-active-bg: #111e30; // Active background
 $button-primary-active-color: #ffffff; // Active text color
 $button-primary-active-border: #111e30; // Active border color
-$button-accent-1-border-radius: 9999px; // Border radius
-$button-accent-1-border-width: 1px; // Border width
-$button-accent-1-border-style: solid; // Border style
-$button-accent-1-justify-content: center; // Justify content
-$button-accent-1-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-accent-1-font-size: 1.125rem; // Font size
-$button-accent-1-font-weight: 300; // Font weight
-$button-accent-1-line-height: 1; // Line height
-$button-accent-1-cursor: pointer; // Cursor
-$button-accent-1-white-space: nowrap; // White space
-$button-accent-1-text-decoration: none; // Text decoration
-$button-accent-1-transition-duration: 150ms; // Transition duration
-$button-accent-1-transition-easing: ease; // Transition easing
-$button-accent-1-disabled-cursor: not-allowed; // Cursor when disabled
-$button-accent-1-disabled-color: #4a4a4a; // Text color when disabled
-$button-accent-1-disabled-border: #4a4a4a; // Border color when disabled
-$button-accent-1-padding-block: 0.75rem; // Block (vertical) padding
-$button-accent-1-padding-inline: 2rem; // Inline (horizontal) padding
-$button-accent-1-focus-ring-width: 2px; // Focus ring width
-$button-accent-1-focus-ring-style: solid; // Focus ring border style
-$button-accent-1-focus-ring-offset: 2px; // Focus ring offset
-$button-accent-1-focus-ring-color: #baabff; // Focus ring color
-$button-accent-1-bg: #baabff; // Background
-$button-accent-1-color: #111e30; // Text color
-$button-accent-1-border: #baabff; // Border color
-$button-accent-1-hover-bg: #ffcd00; // Hover background
-$button-accent-1-hover-color: #111e30; // Hover text color
-$button-accent-1-hover-border: #ffcd00; // Hover border color
-$button-accent-1-active-bg: #ffcd00; // Active background
-$button-accent-1-active-color: #111e30; // Active text color
-$button-accent-1-active-border: #ffcd00; // Active border color
-$button-ghost-border-radius: 9999px; // Border radius
-$button-ghost-border-width: 1px; // Border width
-$button-ghost-border-style: solid; // Border style
-$button-ghost-justify-content: center; // Justify content
-$button-ghost-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-ghost-font-size: 1.125rem; // Font size
-$button-ghost-font-weight: 300; // Font weight
-$button-ghost-line-height: 1; // Line height
-$button-ghost-cursor: pointer; // Cursor
-$button-ghost-white-space: nowrap; // White space
-$button-ghost-text-decoration: none; // Text decoration
-$button-ghost-transition-duration: 150ms; // Transition duration
-$button-ghost-transition-easing: ease; // Transition easing
-$button-ghost-disabled-cursor: not-allowed; // Cursor when disabled
-$button-ghost-disabled-color: #d0d0d0; // Text color when disabled — ghost lives on dark photo
-$button-ghost-disabled-border: #d0d0d0; // Border color when disabled — ghost lives on dark photo
-$button-ghost-padding-block: 0.75rem; // Block (vertical) padding
-$button-ghost-padding-inline: 2rem; // Inline (horizontal) padding
-$button-ghost-focus-ring-width: 2px; // Focus ring width
-$button-ghost-focus-ring-style: solid; // Focus ring border style
-$button-ghost-focus-ring-offset: 2px; // Focus ring offset
-$button-ghost-focus-ring-color: #ffffff; // Focus ring color — white on dark photo
-$button-ghost-bg: rgba(0, 0, 0, 0); // Background
-$button-ghost-color: #ffffff; // Text color — white on dark photo
-$button-ghost-border: #ffffff; // Border color — white on dark photo
-$button-ghost-hover-bg: #ffffff; // Hover background
-$button-ghost-hover-color: #111e30; // Hover text color
-$button-ghost-hover-border: #ffffff; // Hover border color
-$button-ghost-active-bg: #ffffff; // Active background
-$button-ghost-active-color: #111e30; // Active text color
-$button-ghost-active-border: #ffffff; // Active border color
-$button-form-border-radius: 0px; // Border radius
-$button-form-border-width: 1px; // Border width
-$button-form-border-style: solid; // Border style
-$button-form-justify-content: flex-start; // Justify content
-$button-form-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-form-font-size: 1.125rem; // Font size
-$button-form-font-weight: 300; // Font weight
-$button-form-line-height: 1; // Line height
-$button-form-cursor: pointer; // Cursor
-$button-form-white-space: nowrap; // White space
-$button-form-text-decoration: none; // Text decoration
-$button-form-text-transform: uppercase; // Text transform
-$button-form-transition-duration: 150ms; // Transition duration
-$button-form-transition-easing: ease; // Transition easing
-$button-form-disabled-cursor: not-allowed; // Cursor when disabled
-$button-form-disabled-bg: #f2f2f2; // Background when disabled
-$button-form-disabled-color: #4a4a4a; // Text color when disabled
-$button-form-disabled-border: #f2f2f2; // Border color when disabled — matches bg
-$button-form-padding-block: 1rem; // Block (vertical) padding
-$button-form-padding-inline: 1rem; // Inline (horizontal) padding
-$button-form-width: 100%; // Form buttons are always full width
-$button-form-focus-ring-width: 2px; // Focus ring width
-$button-form-focus-ring-style: solid; // Focus ring border style
-$button-form-focus-ring-offset: 2px; // Focus ring offset
-$button-form-focus-ring-color: #111e30; // Focus ring color
-$button-form-bg: #baabff; // Background
-$button-form-color: #111e30; // Text color
-$button-form-border: #baabff; // Border color — matches bg so inset ring has a natural 1px gap
-$button-form-hover-bg: #ffcd00; // Hover background
-$button-form-hover-color: #111e30; // Hover text color
-$button-form-hover-border: #ffcd00; // Hover border color — matches hover bg
-$button-form-active-bg: #ffcd00; // Active background
-$button-form-active-color: #111e30; // Active text color
-$button-form-active-border: #ffcd00; // Active border color — matches active bg
+$button-accent-border-radius: 9999px; // Border radius
+$button-accent-border-width: 1px; // Border width
+$button-accent-border-style: solid; // Border style
+$button-accent-justify-content: center; // Justify content
+$button-accent-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$button-accent-font-size: 1.125rem; // Font size
+$button-accent-font-weight: 300; // Font weight
+$button-accent-line-height: 1; // Line height
+$button-accent-cursor: pointer; // Cursor
+$button-accent-white-space: nowrap; // White space
+$button-accent-text-decoration: none; // Text decoration
+$button-accent-transition-duration: 150ms; // Transition duration
+$button-accent-transition-easing: ease; // Transition easing
+$button-accent-disabled-cursor: not-allowed; // Cursor when disabled
+$button-accent-disabled-color: #4a4a4a; // Text color when disabled
+$button-accent-disabled-border: #4a4a4a; // Border color when disabled
+$button-accent-padding-block: 0.75rem; // Block (vertical) padding
+$button-accent-padding-inline: 2rem; // Inline (horizontal) padding
+$button-accent-focus-ring-width: 2px; // Focus ring width
+$button-accent-focus-ring-style: solid; // Focus ring border style
+$button-accent-focus-ring-offset: 2px; // Focus ring offset
+$button-accent-focus-ring-color: #baabff; // Focus ring color
+$button-accent-bg: #baabff; // Background
+$button-accent-color: #111e30; // Text color
+$button-accent-border: #baabff; // Border color
+$button-accent-hover-bg: #ffcd00; // Hover background
+$button-accent-hover-color: #111e30; // Hover text color
+$button-accent-hover-border: #ffcd00; // Hover border color
+$button-accent-active-bg: #ffcd00; // Active background
+$button-accent-active-color: #111e30; // Active text color
+$button-accent-active-border: #ffcd00; // Active border color
+$button-outline-border-radius: 9999px; // Border radius
+$button-outline-border-width: 1px; // Border width
+$button-outline-border-style: solid; // Border style
+$button-outline-justify-content: center; // Justify content
+$button-outline-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$button-outline-font-size: 1.125rem; // Font size
+$button-outline-font-weight: 300; // Font weight
+$button-outline-line-height: 1; // Line height
+$button-outline-cursor: pointer; // Cursor
+$button-outline-white-space: nowrap; // White space
+$button-outline-text-decoration: none; // Text decoration
+$button-outline-transition-duration: 150ms; // Transition duration
+$button-outline-transition-easing: ease; // Transition easing
+$button-outline-disabled-cursor: not-allowed; // Cursor when disabled
+$button-outline-disabled-color: #d0d0d0; // Text color when disabled
+$button-outline-disabled-border: #d0d0d0; // Border color when disabled
+$button-outline-padding-block: 0.75rem; // Block (vertical) padding
+$button-outline-padding-inline: 2rem; // Inline (horizontal) padding
+$button-outline-focus-ring-width: 2px; // Focus ring width
+$button-outline-focus-ring-style: solid; // Focus ring border style
+$button-outline-focus-ring-offset: 2px; // Focus ring offset
+$button-outline-focus-ring-color: #ffffff; // Focus ring color — white on dark backgrounds
+$button-outline-bg: rgba(0, 0, 0, 0); // Background
+$button-outline-color: #ffffff; // Text color
+$button-outline-border: #ffffff; // Border color
+$button-outline-hover-bg: #ffffff; // Hover background
+$button-outline-hover-color: #111e30; // Hover text color
+$button-outline-hover-border: #ffffff; // Hover border color
+$button-outline-active-bg: #ffffff; // Active background
+$button-outline-active-color: #111e30; // Active text color
+$button-outline-active-border: #ffffff; // Active border color

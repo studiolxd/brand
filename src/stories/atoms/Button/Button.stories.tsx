@@ -12,7 +12,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'accent-1', 'ghost', 'form'],
+      options: ['primary', 'accent', 'outline'],
       description: 'Variante visual del botón.',
     },
     size: {
@@ -55,14 +55,13 @@ export const Primary: Story = {
 };
 
 
-export const Accent1: Story = {
-  args: { variant: 'accent-1' },
+export const Accent: Story = {
+  args: { variant: 'accent' },
 };
 
-/** Ghost sobre fotografía oscura (comportamiento por defecto) */
-export const GhostOnDark: Story = {
-  name: 'Ghost — dark photo',
-  args: { variant: 'ghost' },
+export const OutlineOnDark: Story = {
+  name: 'Outline — dark photo',
+  args: { variant: 'outline' },
   decorators: [
     (Story) => (
       <div style={{
@@ -77,10 +76,9 @@ export const GhostOnDark: Story = {
   ],
 };
 
-/** Ghost sobre fotografía clara — añadir .surface-light al contenedor */
-export const GhostOnLight: Story = {
-  name: 'Ghost — light photo',
-  args: { variant: 'ghost' },
+export const OutlineOnLight: Story = {
+  name: 'Outline — light photo',
+  args: { variant: 'outline' },
   decorators: [
     (Story) => (
       <div
@@ -96,10 +94,6 @@ export const GhostOnLight: Story = {
       </div>
     ),
   ],
-};
-
-export const Form: Story = {
-  args: { variant: 'form' },
 };
 
 export const Block: Story = {
@@ -126,10 +120,6 @@ export const Sizes: Story = {
 
 export const Disabled: Story = {
   args: { variant: 'primary', disabled: true },
-};
-
-export const FormDisabled: Story = {
-  args: { variant: 'form', disabled: true, block: true },
 };
 
 /** Renderiza como <a> cuando se pasa href */
