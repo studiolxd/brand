@@ -1,13 +1,13 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ButtonStories from "./Button.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonAccentTokens, buttonOutlineTokens, buttonDestructiveTokens, buttonSizeTokens } from "../../../tokens/components/button";
+import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonAccentTokens, buttonOutlineTokens, buttonDestructiveTokens, buttonGhostTokens, buttonSizeTokens } from "../../../tokens/components/button";
 
 <Meta of={ButtonStories} />
 
 # Botón
 
-El botón es el elemento de acción principal del sistema. Existen cuatro variantes con roles distintos.
+El botón es el elemento de acción principal del sistema. Existen cinco variantes con roles distintos.
 
 ## Primary
 
@@ -34,6 +34,14 @@ Borde y texto en color inverso sobre fondo transparente. En hover el fondo y el 
 <Canvas of={ButtonStories.OutlineOnDark} />
 
 <Canvas of={ButtonStories.OutlineOnLight} />
+
+## Ghost
+
+Sin borde ni fondo. El texto toma el color por defecto de la superficie (oscuro sobre fondo claro, claro sobre fondo oscuro). En hover aparece subrayado. Para acciones secundarias de bajo peso visual, como cancelar, volver o acciones en línea dentro de un bloque de texto.
+
+<Canvas of={ButtonStories.GhostOnLight} />
+
+<Canvas of={ButtonStories.GhostOnDark} />
 
 ## Block
 
@@ -78,6 +86,10 @@ Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica
 ### Destructive
 
 <TokenTable tokens={buttonDestructiveTokens} />
+
+### Ghost
+
+<TokenTable tokens={buttonGhostTokens} />
 
 ### Tamaños
 

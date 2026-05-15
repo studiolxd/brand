@@ -155,3 +155,34 @@ $button-outline-hover-border: #ffffff; // Hover border color
 $button-outline-active-bg: #ffffff; // Active background
 $button-outline-active-color: #111e30; // Active text color
 $button-outline-active-border: #ffffff; // Active border color
+$button-ghost-border-radius: 9999px; // Border radius
+$button-ghost-border-width: 1px; // Border width — kept at 1px to match box model of other variants
+$button-ghost-border-style: solid; // Border style
+$button-ghost-justify-content: center; // Justify content
+$button-ghost-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$button-ghost-font-size: 1.125rem; // Font size
+$button-ghost-font-weight: 300; // Font weight
+$button-ghost-line-height: 1; // Line height
+$button-ghost-cursor: pointer; // Cursor
+$button-ghost-white-space: nowrap; // White space
+$button-ghost-text-decoration: none; // Text decoration — base state (none)
+$button-ghost-hover-text-decoration: underline; // Text decoration on hover
+$button-ghost-transition-duration: 150ms; // Transition duration
+$button-ghost-transition-easing: ease; // Transition easing
+$button-ghost-disabled-cursor: not-allowed; // Cursor when disabled
+$button-ghost-disabled-color: #4a4a4a; // Text color when disabled — light surface
+$button-ghost-padding-block: 0.75rem; // Block (vertical) padding
+$button-ghost-padding-inline: 2rem; // Inline (horizontal) padding
+$button-ghost-focus-ring-width: 2px; // Focus ring width
+$button-ghost-focus-ring-style: solid; // Focus ring border style
+$button-ghost-focus-ring-offset: 2px; // Focus ring offset
+$button-ghost-focus-ring-color: #111e30; // Focus ring color — light surface
+$button-ghost-bg: rgba(0, 0, 0, 0); // Background — always transparent
+$button-ghost-color: #111e30; // Text color — light surface
+$button-ghost-border: rgba(0, 0, 0, 0); // Border color — transparent to preserve box model
+$button-ghost-hover-bg: rgba(0, 0, 0, 0); // Hover background — stays transparent
+$button-ghost-hover-color: #111e30; // Hover text color — unchanged
+$button-ghost-hover-border: rgba(0, 0, 0, 0); // Hover border — stays transparent
+$button-ghost-active-bg: rgba(0, 0, 0, 0); // Active background — stays transparent
+$button-ghost-active-color: #111e30; // Active text color — unchanged
+$button-ghost-active-border: rgba(0, 0, 0, 0); // Active border — stays transparent

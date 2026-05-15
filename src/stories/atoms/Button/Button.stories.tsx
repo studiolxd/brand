@@ -12,7 +12,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'accent', 'outline', 'destructive'],
+      options: ['primary', 'accent', 'outline', 'destructive', 'ghost'],
       description: 'Variante visual del botón.',
     },
     size: {
@@ -61,6 +61,23 @@ export const Accent: Story = {
 
 export const Destructive: Story = {
   args: { variant: 'destructive' },
+};
+
+export const GhostOnLight: Story = {
+  name: 'Ghost — light surface',
+  args: { variant: 'ghost' },
+};
+
+export const GhostOnDark: Story = {
+  name: 'Ghost — dark surface',
+  args: { variant: 'ghost' },
+  decorators: [
+    (Story) => (
+      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const OutlineOnDark: Story = {

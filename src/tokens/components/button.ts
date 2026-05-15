@@ -9,4 +9,5 @@ export const buttonPrimaryDarkTokens = all.filter(t => t.name.startsWith('--butt
 export const buttonAccentTokens      = all.filter(t => t.name.startsWith('--button-accent'));
 export const buttonOutlineTokens     = all.filter(t => t.name.startsWith('--button-outline'));
 export const buttonDestructiveTokens = all.filter(t => t.name.startsWith('--button-destructive'));
+export const buttonGhostTokens       = all.filter(t => t.name.startsWith('--button-ghost'));
 export const buttonSizeTokens        = all.filter(t => t.name.match(/--button-(sm|lg)-/));

@@ -21,6 +21,12 @@
   --button-primary-active-border:   var(--color-white);
   --button-primary-focus-ring-color:var(--color-text-on-dark);
 
+  /* ─── Button ghost ───────────────────────────────────────────────────── */
+  --button-ghost-color:             var(--color-text-on-dark);
+  --button-ghost-hover-color:       var(--color-text-on-dark);
+  --button-ghost-active-color:      var(--color-text-on-dark);
+  --button-ghost-focus-ring-color:  var(--color-text-on-dark);
+
   /* ─── Button destructive ──────────────────────────────────────────────── */
   --button-destructive-bg:              var(--color-background-dark);
   --button-destructive-color:           var(--color-destructive-on-dark);
@@ -122,6 +128,11 @@
 .surface-dark .button--destructive[aria-disabled="true"] {
   --button-destructive-disabled-color: var(--color-grey-light);
   --button-destructive-disabled-border:var(--color-grey-light);
+}
+
+.surface-dark .button--ghost:disabled,
+.surface-dark .button--ghost[aria-disabled="true"] {
+  --button-ghost-disabled-color: var(--color-grey-light);
 }
 
 /* ─── Input: disabled and error states ───────────────────────────────────── */

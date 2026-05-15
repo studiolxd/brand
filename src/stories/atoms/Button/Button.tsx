@@ -2,7 +2,7 @@ import './Button.css';
 
 interface ButtonProps {
   /** Visual variant of the button */
-  variant?: 'primary' | 'accent' | 'outline' | 'destructive';
+  variant?: 'primary' | 'accent' | 'outline' | 'destructive' | 'ghost';
   /** Size of the button */
   size?: 'sm' | 'md' | 'lg';
   /** Stretches the button to full container width */

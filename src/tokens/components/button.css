@@ -13,6 +13,13 @@
   --button-focus-ring-style: solid; /** Focus ring border style */
   --button-block-width: 100%; /** Width when block modifier is applied */
   --button-outline-bg: rgba(0, 0, 0, 0); /** Background */
+  --button-ghost-hover-text-decoration: underline; /** Text decoration on hover */
+  --button-ghost-bg: rgba(0, 0, 0, 0); /** Background — always transparent */
+  --button-ghost-border: rgba(0, 0, 0, 0); /** Border color — transparent to preserve box model */
+  --button-ghost-hover-bg: rgba(0, 0, 0, 0); /** Hover background — stays transparent */
+  --button-ghost-hover-border: rgba(0, 0, 0, 0); /** Hover border — stays transparent */
+  --button-ghost-active-bg: rgba(0, 0, 0, 0); /** Active background — stays transparent */
+  --button-ghost-active-border: rgba(0, 0, 0, 0); /** Active border — stays transparent */
   --button-border-radius: var(--border-radius-full); /** Border radius */
   --button-border-width: var(--border-width-sm); /** Border width */
   --button-font-family: var(--font-family-sans); /** Font family */
@@ -70,6 +77,13 @@
   --button-outline-hover-border: var(--color-white); /** Hover border color */
   --button-outline-active-bg: var(--color-white); /** Active background */
   --button-outline-active-border: var(--color-white); /** Active border color */
+  --button-ghost-border-style: var(--button-border-style); /** Border style */
+  --button-ghost-justify-content: var(--button-justify-content); /** Justify content */
+  --button-ghost-cursor: var(--button-cursor); /** Cursor */
+  --button-ghost-white-space: var(--button-white-space); /** White space */
+  --button-ghost-text-decoration: var(--button-text-decoration); /** Text decoration — base state (none) */
+  --button-ghost-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
+  --button-ghost-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-font-weight: var(--font-weight-default); /** Font weight */
   --button-primary-border-radius: var(--button-border-radius); /** Border radius */
   --button-primary-border-width: var(--button-border-width); /** Border width */
@@ -153,8 +167,25 @@
   --button-outline-border: var(--color-text-on-dark); /** Border color */
   --button-outline-hover-color: var(--color-text-on-light); /** Hover text color */
   --button-outline-active-color: var(--color-text-on-light); /** Active text color */
+  --button-ghost-border-radius: var(--button-border-radius); /** Border radius */
+  --button-ghost-border-width: var(--button-border-width); /** Border width — kept at 1px to match box model of other variants */
+  --button-ghost-font-family: var(--button-font-family); /** Font family */
+  --button-ghost-font-size: var(--button-font-size); /** Font size */
+  --button-ghost-line-height: var(--button-line-height); /** Line height */
+  --button-ghost-transition-duration: var(--button-transition-duration); /** Transition duration */
+  --button-ghost-transition-easing: var(--button-transition-easing); /** Transition easing */
+  --button-ghost-disabled-color: var(--button-disabled-color); /** Text color when disabled — light surface */
+  --button-ghost-padding-block: var(--button-padding-block); /** Block (vertical) padding */
+  --button-ghost-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
+  --button-ghost-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
+  --button-ghost-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
+  --button-ghost-focus-ring-color: var(--color-primary); /** Focus ring color — light surface */
+  --button-ghost-color: var(--color-text-on-light); /** Text color — light surface */
+  --button-ghost-hover-color: var(--color-text-on-light); /** Hover text color — unchanged */
+  --button-ghost-active-color: var(--color-text-on-light); /** Active text color — unchanged */
   --button-primary-font-weight: var(--button-font-weight); /** Font weight */
   --button-accent-font-weight: var(--button-font-weight); /** Font weight */
   --button-destructive-font-weight: var(--button-font-weight); /** Font weight */
   --button-outline-font-weight: var(--button-font-weight); /** Font weight */
+  --button-ghost-font-weight: var(--button-font-weight); /** Font weight */
 }
