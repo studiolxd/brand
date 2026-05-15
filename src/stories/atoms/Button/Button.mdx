@@ -1,13 +1,13 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ButtonStories from "./Button.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonAccentTokens, buttonOutlineTokens, buttonDestructiveTokens, buttonGhostTokens, buttonSizeTokens } from "../../../tokens/components/button";
+import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonAccentTokens, buttonOutlineTokens, buttonGhostTokens, buttonSizeTokens } from "../../../tokens/components/button";
 
 <Meta of={ButtonStories} />
 
 # Botón
 
-El botón es el elemento de acción principal del sistema. Existen cinco variantes con roles distintos.
+El botón es el elemento de acción principal del sistema. Existen cuatro variantes con roles distintos.
 
 ## Primary
 
@@ -19,13 +19,9 @@ Borde en color primario, fondo blanco y texto por defecto. En hover el fondo pas
 
 Fondo en color accent-1 y texto oscuro. En hover el fondo pasa a accent-2. El texto es siempre oscuro para garantizar contraste suficiente.
 
+> **Nota:** La prop `destructive` no tiene efecto sobre la variante `accent`. El color de fondo del accent es parte de su identidad visual y no es compatible semánticamente con la intención destructiva. Usa `variant="primary" destructive` o `variant="ghost" destructive` para acciones de alto riesgo.
+
 <Canvas of={ButtonStories.Accent} />
-
-## Destructive
-
-Borde y texto en color destructivo (rojo) sobre fondo blanco. En hover el fondo pasa a rojo y el texto a inverso. Para acciones irreversibles o de alto riesgo (eliminar, desconectar, cancelar suscripción…).
-
-<Canvas of={ButtonStories.Destructive} />
 
 ## Outline
 
@@ -113,10 +109,6 @@ En Storybook se muestra con un `<a>` como stand-in del componente `Link` del rou
 ### Outline
 
 <TokenTable tokens={buttonOutlineTokens} />
-
-### Destructive
-
-<TokenTable tokens={buttonDestructiveTokens} />
 
 ### Ghost
 

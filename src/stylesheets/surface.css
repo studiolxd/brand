@@ -27,18 +27,6 @@
   --button-ghost-active-color:      var(--color-text-on-dark);
   --button-ghost-focus-ring-color:  var(--color-text-on-dark);
 
-  /* ─── Button destructive ──────────────────────────────────────────────── */
-  --button-destructive-bg:              var(--color-background-dark);
-  --button-destructive-color:           var(--color-destructive-on-dark);
-  --button-destructive-border:          var(--color-destructive-on-dark);
-  --button-destructive-hover-bg:        var(--color-destructive-on-dark);
-  --button-destructive-hover-color:     var(--color-text-on-light);
-  --button-destructive-hover-border:    var(--color-destructive-on-dark);
-  --button-destructive-active-bg:       var(--color-destructive-on-dark);
-  --button-destructive-active-color:    var(--color-text-on-light);
-  --button-destructive-active-border:   var(--color-destructive-on-dark);
-  --button-destructive-focus-ring-color:var(--color-destructive-on-dark);
-
   /* ─── Input ───────────────────────────────────────────────────────────── */
   --input-bg:                    var(--color-background-dark);
   --input-color:                 var(--color-text-on-dark);
@@ -131,15 +119,67 @@
   --button-primary-disabled-border:var(--color-grey-light);
 }
 
-.surface-dark .button--destructive:disabled,
-.surface-dark .button--destructive[aria-disabled="true"] {
-  --button-destructive-disabled-color: var(--color-grey-light);
-  --button-destructive-disabled-border:var(--color-grey-light);
-}
-
 .surface-dark .button--ghost:disabled,
 .surface-dark .button--ghost[aria-disabled="true"] {
   --button-ghost-disabled-color: var(--color-grey-light);
+}
+
+.surface-dark .button--primary.button--destructive-intent {
+  color: var(--color-destructive-on-dark);
+  border-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--primary.button--destructive-intent:hover {
+  background-color: var(--color-destructive-on-dark);
+  color: var(--color-text-on-light);
+  border-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--primary.button--destructive-intent:active {
+  background-color: var(--color-destructive-on-dark);
+  color: var(--color-text-on-light);
+  border-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--primary.button--destructive-intent:focus-visible {
+  outline-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--outline.button--destructive-intent {
+  color: var(--color-destructive-on-dark);
+  border-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--outline.button--destructive-intent:hover {
+  background-color: var(--color-destructive-on-dark);
+  color: var(--color-text-on-light);
+  border-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--outline.button--destructive-intent:active {
+  background-color: var(--color-destructive-on-dark);
+  color: var(--color-text-on-light);
+  border-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--outline.button--destructive-intent:focus-visible {
+  outline-color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--ghost.button--destructive-intent {
+  color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--ghost.button--destructive-intent:hover {
+  color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--ghost.button--destructive-intent:active {
+  color: var(--color-destructive-on-dark);
+}
+
+.surface-dark .button--ghost.button--destructive-intent:focus-visible {
+  outline-color: var(--color-destructive-on-dark);
 }
 
 /* ─── Input: disabled and error states ───────────────────────────────────── */

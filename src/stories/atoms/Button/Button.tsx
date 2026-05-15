@@ -2,9 +2,11 @@ import { forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import './Button.css';
 
-interface ButtonProps {
+export interface ButtonProps {
   /** Visual variant of the button */
-  variant?: 'primary' | 'accent' | 'outline' | 'destructive' | 'ghost';
+  variant?: 'primary' | 'accent' | 'outline' | 'ghost';
+  /** Applies destructive (red) color intent — composable with any variant, designed for ghost */
+  destructive?: boolean;
   /** Size of the button */
   size?: 'sm' | 'md' | 'lg';
   /** Stretches the button to full container width */
@@ -25,6 +27,7 @@ interface ButtonProps {
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   variant = 'primary',
+  destructive = false,
   size = 'md',
   block = false,
   children,
@@ -38,6 +41,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   const classes = [
     'button',
     `button--${variant}`,
+    destructive ? 'button--destructive-intent' : '',
     size !== 'md' ? `button--${size}` : '',
     block ? 'button--block' : '',
   ].filter(Boolean).join(' ');

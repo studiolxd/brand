@@ -12,8 +12,12 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'accent', 'outline', 'destructive', 'ghost'],
+      options: ['primary', 'accent', 'outline', 'ghost'],
       description: 'Variante visual del botón.',
+    },
+    destructive: {
+      control: { type: 'boolean' },
+      description: 'Aplica color rojo de intención destructiva. Composable con cualquier variante; diseñado para ghost.',
     },
     size: {
       control: { type: 'select' },
@@ -63,13 +67,47 @@ export const Accent: Story = {
   args: { variant: 'accent' },
 };
 
-export const Destructive: Story = {
-  args: { variant: 'destructive' },
+export const AllDestructiveIntent: Story = {
+  name: 'Destructive intent — todas las variantes',
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button variant="primary" destructive>Primary</Button>
+      <Button variant="ghost" destructive>Ghost</Button>
+    </div>
+  ),
+};
+
+export const AllDestructiveIntentOnDark: Story = {
+  name: 'Destructive intent — todas las variantes, dark surface',
+  render: () => (
+    <div className="surface-dark" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+      <Button variant="primary" destructive>Primary</Button>
+      <Button variant="outline" destructive>Outline</Button>
+      <Button variant="ghost" destructive>Ghost</Button>
+    </div>
+  ),
 };
 
 export const GhostOnLight: Story = {
   name: 'Ghost — light surface',
   args: { variant: 'ghost' },
+};
+
+export const GhostDestructive: Story = {
+  name: 'Ghost — destructive intent',
+  args: { variant: 'ghost', destructive: true, children: 'Eliminar' },
+};
+
+export const GhostDestructiveOnDark: Story = {
+  name: 'Ghost — destructive intent, dark surface',
+  args: { variant: 'ghost', destructive: true, children: 'Eliminar' },
+  decorators: [
+    (Story) => (
+      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const GhostOnDark: Story = {

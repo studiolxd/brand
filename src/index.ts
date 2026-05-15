@@ -6,6 +6,7 @@ export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './
 export { Arrow } from './stories/atoms/Arrow/Arrow';
 export { Avatar } from './stories/atoms/Avatar/Avatar';
 export { Button } from './stories/atoms/Button/Button';
+export type { ButtonProps } from './stories/atoms/Button/Button';
 export { Carousel } from './stories/atoms/Carousel/Carousel';
 export { Checkbox } from './stories/atoms/Checkbox/Checkbox';
 export { Chevron } from './stories/atoms/Chevron/Chevron';
