@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ContextMenuStories from "./ContextMenu.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { contextMenuPanelTokens, contextMenuItemTokens, contextMenuDestructiveTokens, contextMenuSeparatorTokens } from "../../../tokens/molecules/context-menu";
+
+<Meta of={ContextMenuStories} />
+
+# ContextMenu
+
+Menú contextual activado por un botón de tres puntos (`DotsButton`). Basado en `@radix-ui/react-dropdown-menu`, que gestiona foco, ARIA y navegación por teclado (↑↓ Enter Escape) de forma nativa.
+
+## Por defecto
+
+Ítems de tipo botón, link y separador. El ítem destructivo aparece en rojo.
+
+<Canvas of={ContextMenuStories.Default} />
+
+## Ítems destructivos
+
+La prop `destructive: true` colorea el ítem en rojo. En hover el fondo pasa a rojo y el texto a blanco. Funciona tanto en botones como en links.
+
+<Canvas of={ContextMenuStories.ConDestructivos} />
+
+## Ítems deshabilitados
+
+La prop `disabled: true` reduce la opacidad e impide la interacción. En links deshabilitados se elimina el `href` y se añade `aria-disabled="true"` para comunicar el estado a lectores de pantalla.
+
+<Canvas of={ContextMenuStories.ConItemsDeshabilitados} />
+
+## Trigger vertical
+
+<Canvas of={ContextMenuStories.TriggerVertical} />
+
+## Tamaño del trigger
+
+<Canvas of={ContextMenuStories.TriggerSm} />
+<Canvas of={ContextMenuStories.TriggerLg} />
+
+## Posición
+
+Por defecto el menú se abre hacia abajo alineado a la derecha (`side="bottom"` `align="end"`). Radix lo reposiciona automáticamente si no cabe en pantalla. Las props `side` y `align` permiten forzar una posición inicial.
+
+<Canvas of={ContextMenuStories.AbreArriba} />
+
+---
+
+## Integración con router (renderLink)
+
+Para que los links del menú usen el router de la aplicación (Next.js, React Router…), se pasa una prop `renderLink`. El patrón es idéntico al del componente `Breadcrumb`.
+
+```tsx
+import Link from 'next/link';
+import { ContextMenu } from '@studiolxd/brand';
+
+<ContextMenu
+  items={[
+    { type: 'link', label: 'Ver proyecto', href: '/proyectos/1' },
+    { type: 'button', label: 'Eliminar', onClick: handleDelete, destructive: true },
+  ]}
+  renderLink={({ href, children, className }) => (
+    <Link href={href} className={className}>{children}</Link>
+  )}
+/>
+```
+
+Sin `renderLink`, los links se renderizan como `<a>` nativos.
+
+<Canvas of={ContextMenuStories.ConRenderLink} />
+
+---
+
+## Theming oscuro
+
+En modo oscuro todos los tokens del panel, ítems, separadores y estados destructivos se remapean automáticamente vía `.surface-dark`.
+
+---
+
+## Tokens
+
+### Panel
+
+<TokenTable tokens={contextMenuPanelTokens} />
+
+### Ítems
+
+<TokenTable tokens={contextMenuItemTokens} />
+
+### Destructivo
+
+<TokenTable tokens={contextMenuDestructiveTokens} />
+
+### Separador
+
+<TokenTable tokens={contextMenuSeparatorTokens} />
+
+## Props
+
+<ArgTypes of={ContextMenuStories} />

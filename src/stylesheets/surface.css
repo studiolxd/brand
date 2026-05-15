@@ -274,12 +274,15 @@
   --dots-button-focus-ring-color: var(--color-text-on-dark);
 
   /* ─── ContextMenu ─────────────────────────────────────────────────────────── */
-  --context-menu-bg:              var(--color-background-dark);
-  --context-menu-border-color:    rgba(255, 255, 255, 0.15);
-  --context-menu-item-color:      var(--color-text-on-dark);
-  --context-menu-item-hover-bg:   rgba(255, 255, 255, 0.08);
-  --context-menu-item-hover-color:var(--color-text-on-dark);
-  --context-menu-separator-color: rgba(255, 255, 255, 0.15);
+  --context-menu-bg:                          var(--color-background-dark);
+  --context-menu-border-color:                rgba(255, 255, 255, 0.15);
+  --context-menu-item-color:                  var(--color-text-on-dark);
+  --context-menu-item-hover-bg:               rgba(255, 255, 255, 0.08);
+  --context-menu-item-hover-color:            var(--color-text-on-dark);
+  --context-menu-separator-color:             rgba(255, 255, 255, 0.15);
+  --context-menu-item-destructive-color:      var(--color-destructive-on-dark);
+  --context-menu-item-destructive-hover-bg:   var(--color-destructive-on-dark);
+  --context-menu-item-destructive-hover-color:var(--color-white);
 }
 
 /* =============================================================

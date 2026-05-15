@@ -1,0 +1,64 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DotsButtonStories from "./DotsButton.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { dotsButtonTokens, dotsButtonSizeTokens } from "../../../tokens/components/dots-button";
+
+<Meta of={DotsButtonStories} />
+
+# DotsButton
+
+Botón icónico de tres puntos para activar menús contextuales u otras acciones secundarias. Se exporta de forma independiente y también se usa internamente como trigger del componente `ContextMenu`.
+
+## Por defecto
+
+Orientación horizontal, tamaño `md`.
+
+<Canvas of={DotsButtonStories.Default} />
+
+## Tamaños
+
+Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`.
+
+<Canvas of={DotsButtonStories.Sizes} />
+
+## Orientación vertical
+
+<Canvas of={DotsButtonStories.Vertical} />
+
+## Deshabilitado
+
+<Canvas of={DotsButtonStories.Disabled} />
+
+---
+
+## Theming oscuro
+
+En modo oscuro los puntos y los estados de hover/active/focus se remapean automáticamente vía `.surface-dark`.
+
+---
+
+## Uso como trigger de ContextMenu
+
+El `DotsButton` usa `forwardRef` y extiende `React.ButtonHTMLAttributes<HTMLButtonElement>`, lo que permite que `DropdownMenu.Trigger asChild` de Radix inyecte sus props directamente:
+
+```tsx
+<DropdownMenu.Trigger asChild>
+  <DotsButton aria-label="Más opciones" />
+</DropdownMenu.Trigger>
+```
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={dotsButtonTokens} />
+
+### Tamaños
+
+<TokenTable tokens={dotsButtonSizeTokens} />
+
+## Props
+
+<ArgTypes of={DotsButtonStories} />

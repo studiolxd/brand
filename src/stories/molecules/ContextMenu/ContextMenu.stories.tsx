@@ -4,7 +4,6 @@ import { ContextMenu } from './ContextMenu';
 const meta = {
   title: 'Molecules/ContextMenu',
   component: ContextMenu,
-  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem' }}>
@@ -23,7 +22,7 @@ const baseItems = [
   { type: 'separator' as const },
   { type: 'link' as const, label: 'Ver detalle', href: '/proyecto/1' },
   { type: 'separator' as const },
-  { type: 'button' as const, label: 'Eliminar', onClick: () => alert('Eliminar') },
+  { type: 'button' as const, label: 'Eliminar', onClick: () => alert('Eliminar'), destructive: true },
 ];
 
 export const Default: Story = {
@@ -78,6 +77,18 @@ export const AbreArriba: Story = {
     items: baseItems,
     side: 'top',
     align: 'end',
+  },
+};
+
+export const ConDestructivos: Story = {
+  args: {
+    items: [
+      { type: 'button' as const, label: 'Duplicar', onClick: () => alert('Duplicar') },
+      { type: 'link' as const, label: 'Ver detalle', href: '/proyecto/1' },
+      { type: 'separator' as const },
+      { type: 'button' as const, label: 'Archivar', onClick: () => alert('Archivar'), destructive: true },
+      { type: 'link' as const, label: 'Borrar permanentemente', href: '/eliminar/1', destructive: true },
+    ],
   },
 };
 

@@ -21,6 +21,9 @@
     "separator-color":        { "$value": "{color.grey-light}",        "$type": "color",     "$description": "Color del separador" },
     "separator-height":       { "$value": "{border-width.sm}",         "$type": "dimension", "$description": "Alto del separador" },
     "separator-margin-block": { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Margen vertical del separador" },
+    "item-destructive-color":       { "$value": "{color.destructive-on-light}", "$type": "color", "$description": "Color de texto de ítem destructivo" },
+    "item-destructive-hover-bg":    { "$value": "{color.destructive-on-light}", "$type": "color", "$description": "Fondo de ítem destructivo al hover" },
+    "item-destructive-hover-color": { "$value": "{color.white}",                "$type": "color", "$description": "Color de texto de ítem destructivo al hover" },
     "disabled-opacity":       { "$value": "{opacity.disabled}",        "$type": "number",    "$description": "Opacidad de ítems deshabilitados" },
     "transition-duration":    { "$value": "{motion.duration.fast}",    "$type": "number",    "$description": "Duración de transición de ítems" },
     "transition-easing":      { "$value": "{motion.easing.default}",   "$type": "string",    "$description": "Easing de transición de ítems" }

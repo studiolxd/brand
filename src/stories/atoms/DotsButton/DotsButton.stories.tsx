@@ -4,7 +4,6 @@ import { DotsButton } from './DotsButton';
 const meta = {
   title: 'Atoms/DotsButton',
   component: DotsButton,
-  tags: ['autodocs'],
   argTypes: {
     size: {
       control: 'select',

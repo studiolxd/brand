@@ -8,6 +8,7 @@ export type ContextMenuButtonItem = {
   label: string;
   onClick: () => void;
   disabled?: boolean;
+  destructive?: boolean;
 };
 
 export type ContextMenuLinkItem = {
@@ -15,6 +16,7 @@ export type ContextMenuLinkItem = {
   label: string;
   href: string;
   disabled?: boolean;
+  destructive?: boolean;
 };
 
 export type ContextMenuSeparator = {
@@ -47,6 +49,12 @@ export interface ContextMenuProps {
 
 function defaultRenderLink({ href, children, className }: ContextMenuRenderLinkProps) {
   return <a href={href} className={className}>{children}</a>;
+}
+
+function itemClass(destructive?: boolean) {
+  return ['context-menu__item', destructive ? 'context-menu__item--destructive' : '']
+    .filter(Boolean)
+    .join(' ');
 }
 
 export function ContextMenu({
@@ -92,7 +100,7 @@ export function ContextMenu({
                 return (
                   <DropdownMenu.Item
                     key={index}
-                    className="context-menu__item"
+                    className={itemClass(item.destructive)}
                     disabled
                   >
                     {item.label}
@@ -104,7 +112,7 @@ export function ContextMenu({
                   {renderLink({
                     href: item.href,
                     children: item.label,
-                    className: 'context-menu__item',
+                    className: itemClass(item.destructive),
                   })}
                 </DropdownMenu.Item>
               );
@@ -113,7 +121,7 @@ export function ContextMenu({
             return (
               <DropdownMenu.Item
                 key={index}
-                className="context-menu__item"
+                className={itemClass(item.destructive)}
                 disabled={item.disabled}
                 onSelect={item.disabled ? undefined : item.onClick}
               >

@@ -43,6 +43,15 @@
   pointer-events: none;
 }
 
+.context-menu__item.context-menu__item--destructive {
+  color: var(--context-menu-item-destructive-color);
+}
+
+.context-menu__item.context-menu__item--destructive[data-highlighted] {
+  background-color: var(--context-menu-item-destructive-hover-bg);
+  color: var(--context-menu-item-destructive-hover-color);
+}
+
 
 .context-menu__separator {
   height: var(--context-menu-separator-height);

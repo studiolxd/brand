@@ -22,6 +22,9 @@ $context-menu-item-cursor: pointer; // Cursor de ítems
 $context-menu-separator-color: #d0d0d0; // Color del separador
 $context-menu-separator-height: 1px; // Alto del separador
 $context-menu-separator-margin-block: 0.5rem; // Margen vertical del separador
+$context-menu-item-destructive-color: #b30000; // Color de texto de ítem destructivo
+$context-menu-item-destructive-hover-bg: #b30000; // Fondo de ítem destructivo al hover
+$context-menu-item-destructive-hover-color: #ffffff; // Color de texto de ítem destructivo al hover
 $context-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
 $context-menu-transition-duration: 150ms; // Duración de transición de ítems
 $context-menu-transition-easing: ease; // Easing de transición de ítems
