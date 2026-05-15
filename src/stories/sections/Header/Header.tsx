@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Logo } from '../../atoms/Logo/Logo';
 import { Hamburger } from '../../atoms/Hamburger/Hamburger';
+import { SkipLink } from '../../atoms/SkipLink/SkipLink';
 import './Header.css';
 
 export interface NavItem {
@@ -43,9 +44,7 @@ export function Header({
         dark ? 'header--dark' : '',
       ].filter(Boolean).join(' ')}
     >
-      <a href="#main-content" className="header__skip-link">
-        Saltar al contenido principal
-      </a>
+      <SkipLink href="#main-content">Saltar al contenido principal</SkipLink>
       <a href={logoHref} className="header__logo" aria-label={logoLabel}>
         <Logo />
       </a>

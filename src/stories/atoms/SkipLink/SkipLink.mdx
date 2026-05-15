@@ -1,0 +1,41 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SkipLinkStories from "./SkipLink.stories";
+
+<Meta of={SkipLinkStories} />
+
+# SkipLink
+
+Átomo de navegación accesible que permite a los usuarios de teclado saltar bloques repetitivos (cabeceras, menús de navegación) e ir directamente al contenido principal. Es invisible por defecto y solo se revela cuando recibe el foco por teclado.
+
+## Cuándo usarlo
+
+Colocar `<SkipLink>` como **primer elemento del DOM** de la página, antes del `<Header>`, apuntando al `id` del contenedor de contenido principal:
+
+```tsx
+<SkipLink href="#main-content">Saltar al contenido principal</SkipLink>
+<Header ... />
+<main id="main-content">
+  ...
+</main>
+```
+
+## Diferencia con VisuallyHidden
+
+| Componente | Visible | Accesible (AT) | Visible al focusearse |
+|---|---|---|---|
+| `VisuallyHidden` | No | Sí | No |
+| `SkipLink` | No | Sí | **Sí** |
+
+`VisuallyHidden` sirve para añadir contexto semántico invisible. `SkipLink` es interactivo y necesita revelarse visualmente cuando el usuario lo activa con el teclado — de lo contrario, los usuarios de teclado no tienen retroalimentación visual de que existe.
+
+## Estado oculto (por defecto)
+
+<Canvas of={SkipLinkStories.Default} />
+
+## Estado revelado (al recibir foco)
+
+<Canvas of={SkipLinkStories.FocusVisible} />
+
+## Props
+
+<ArgTypes of={SkipLinkStories} />

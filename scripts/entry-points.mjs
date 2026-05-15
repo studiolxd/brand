@@ -22,6 +22,7 @@ export const entryPoints = {
   'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
   'hero-video':          'src/stories/atoms/HeroVideo/HeroVideo.tsx',
   'highlight':           'src/stories/atoms/Highlight/Highlight.tsx',
+  'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   // Molecules
   'card':                'src/stories/molecules/Card/Card.tsx',

@@ -1,31 +1,36 @@
 'use client';
 import './button.css';
 import { jsx as e } from "react/jsx-runtime";
+import { Slot as t } from "@radix-ui/react-slot";
 //#region src/stories/atoms/Button/Button.tsx
-function t({ variant: t = "primary", size: n = "md", block: r = !1, children: i, type: a = "button", disabled: o, onClick: s, href: c, external: l = !1 }) {
-	let u = [
+function n({ variant: n = "primary", size: r = "md", block: i = !1, children: a, type: o = "button", disabled: s, onClick: c, href: l, external: u = !1, asChild: d = !1 }) {
+	let f = [
 		"button",
-		`button--${t}`,
-		n === "md" ? "" : `button--${n}`,
-		r ? "button--block" : ""
+		`button--${n}`,
+		r === "md" ? "" : `button--${r}`,
+		i ? "button--block" : ""
 	].filter(Boolean).join(" ");
-	return c === void 0 ? /* @__PURE__ */ e("button", {
-		className: u,
-		type: a,
-		disabled: o,
-		onClick: s,
-		children: i
+	return d ? /* @__PURE__ */ e(t, {
+		className: f,
+		onClick: c,
+		children: a
+	}) : l === void 0 ? /* @__PURE__ */ e("button", {
+		className: f,
+		type: o,
+		disabled: s,
+		onClick: c,
+		children: a
 	}) : /* @__PURE__ */ e("a", {
-		className: u,
-		href: o ? void 0 : c,
-		"aria-disabled": o ? !0 : void 0,
-		onClick: s,
-		...l ? {
+		className: f,
+		href: s ? void 0 : l,
+		"aria-disabled": s ? !0 : void 0,
+		onClick: c,
+		...u ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		children: i
+		children: a
 	});
 }
 //#endregion
-export { t as Button };
+export { n as Button };

@@ -1,7 +1,7 @@
 import './Button.css';
 interface ButtonProps {
     /** Visual variant of the button */
-    variant?: 'primary' | 'accent' | 'outline';
+    variant?: 'primary' | 'accent' | 'outline' | 'destructive' | 'ghost';
     /** Size of the button */
     size?: 'sm' | 'md' | 'lg';
     /** Stretches the button to full container width */
@@ -16,6 +16,8 @@ interface ButtonProps {
     href?: string;
     /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
     external?: boolean;
+    /** Merges props onto the child element instead of rendering a wrapper (e.g. Next.js Link) */
+    asChild?: boolean;
 }
-export declare function Button({ variant, size, block, children, type, disabled, onClick, href, external, }: ButtonProps): import("react/jsx-runtime").JSX.Element;
+export declare function Button({ variant, size, block, children, type, disabled, onClick, href, external, asChild, }: ButtonProps): import("react/jsx-runtime").JSX.Element;
 export {};

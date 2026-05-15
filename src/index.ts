@@ -22,6 +22,7 @@ export { Logo } from './stories/atoms/Logo/Logo';
 export { Paragraph } from './stories/atoms/Paragraph/Paragraph';
 export { Radio } from './stories/atoms/Radio/Radio';
 export { Select } from './stories/atoms/Select/Select';
+export { SkipLink } from './stories/atoms/SkipLink/SkipLink';
 export { Tag } from './stories/atoms/Tag/Tag';
 export { Textarea } from './stories/atoms/Textarea/Textarea';
 export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
