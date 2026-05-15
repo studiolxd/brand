@@ -49,7 +49,9 @@ const filters = {
   footer:               (t) => t.path[0] === 'footer',
   section:              (t) => t.path[0] === 'section',
   'dots-button':        (t) => t.path[0] === 'dots-button',
+  'floating-panel':     (t) => t.path[0] === 'floating-panel',
   'context-menu':       (t) => t.path[0] === 'context-menu',
+  popover:              (t) => t.path[0] === 'popover',
 };
 
 function cssFile(destination, filterKey) {
@@ -112,7 +114,9 @@ const sd = new StyleDictionary({
         cssFile('components/contact-section.css',     'contact-section'),
         cssFile('components/footer.css',              'footer'),
         cssFile('components/dots-button.css',         'dots-button'),
+        cssFile('components/floating-panel.css',      'floating-panel'),
         cssFile('molecules/context-menu.css',         'context-menu'),
+        cssFile('components/popover.css',             'popover'),
       ],
     },
     scss: {
@@ -163,7 +167,9 @@ const sd = new StyleDictionary({
         scssFile('components/_contact-section.scss',     'contact-section'),
         scssFile('components/_footer.scss',              'footer'),
         scssFile('components/_dots-button.scss',         'dots-button'),
+        scssFile('components/_floating-panel.scss',      'floating-panel'),
         scssFile('molecules/_context-menu.scss',         'context-menu'),
+        scssFile('components/_popover.scss',             'popover'),
       ],
     },
   },

@@ -42,4 +42,6 @@
 @import "./components/contact-section.css";
 @import "./components/footer.css";
 @import "./components/dots-button.css";
+@import "./components/floating-panel.css";
 @import "./molecules/context-menu.css";
+@import "./components/popover.css";

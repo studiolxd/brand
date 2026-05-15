@@ -1,0 +1,14 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --floating-panel-z-index: 50; /** Capa z */
+  --floating-panel-border-width: var(--border-width-sm); /** Grosor del borde */
+  --floating-panel-border-color: var(--color-grey-light); /** Color del borde */
+  --floating-panel-border-radius: var(--border-radius-lg); /** Radio de las esquinas */
+  --floating-panel-shadow: var(--shadow-md); /** Sombra */
+  --floating-panel-transition-duration: var(--motion-duration-fast); /** Duración de la animación de entrada/salida */
+  --floating-panel-transition-easing: var(--motion-easing-default); /** Easing de la animación */
+  --floating-panel-bg: var(--color-background-light); /** Fondo de cualquier panel flotante (popover, context-menu…) */
+}

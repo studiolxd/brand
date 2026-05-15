@@ -48,6 +48,16 @@ Cada componente tiene tres archivos co-localizados:
 
 **Storybook MCP**: configurado en `localhost:6006`. Usar siempre las herramientas MCP para verificar props antes de usarlas — nunca asumir propiedades.
 
+### Checklist para añadir un nuevo componente
+
+Cada componente nuevo debe registrarse en **tres sitios** o no estará disponible para los consumidores del paquete:
+
+1. **`scripts/entry-points.mjs`** — añadir entrada en `entryPoints` con la ruta al `.tsx`. Si el componente tiene estado interno, eventos o usa hooks del browser, añadirlo también a `clientComponents` (genera el `'use client'` en el `.js` compilado).
+2. **`package.json` › `exports`** — añadir entrada `"./nombre"` con `types` apuntando a `dist/_types/.../Component.d.ts` e `import` apuntando a `dist/nombre.js`.
+3. **`src/index.ts`** — añadir `export { Componente }` y `export type { ComponenteProps }` en la sección correspondiente (Atoms / Molecules / …), en orden alfabético.
+
+> **IMPORTANTE:** Olvidar `entry-points.mjs` o `package.json › exports` deja el componente con tipos pero sin `.js` compilado — el consumidor puede importar el tipo pero falla en runtime.
+
 ## CSS y tokens
 
 ### Reglas no negociables

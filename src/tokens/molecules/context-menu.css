@@ -4,10 +4,6 @@
 
 :root {
   --context-menu-item-cursor: pointer; /** Cursor de ítems */
-  --context-menu-border-width: var(--border-width-sm); /** Grosor del borde del panel */
-  --context-menu-border-color: var(--color-grey-light); /** Color del borde del panel */
-  --context-menu-border-radius: var(--border-radius-lg); /** Radio del panel */
-  --context-menu-shadow: var(--shadow-md); /** Sombra del panel */
   --context-menu-padding-block: var(--spacing-2); /** Padding vertical del panel */
   --context-menu-padding-inline: var(--spacing-2); /** Padding lateral del panel — separa el hover del borde */
   --context-menu-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
@@ -22,12 +18,16 @@
   --context-menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --context-menu-item-destructive-hover-color: var(--color-white); /** Color de texto de ítem destructivo al hover */
   --context-menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
-  --context-menu-transition-duration: var(--motion-duration-fast); /** Duración de transición de ítems */
-  --context-menu-transition-easing: var(--motion-easing-default); /** Easing de transición de ítems */
-  --context-menu-bg: var(--color-background-light); /** Fondo del panel */
+  --context-menu-border-width: var(--floating-panel-border-width); /** Grosor del borde del panel */
+  --context-menu-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
+  --context-menu-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
+  --context-menu-shadow: var(--floating-panel-shadow); /** Sombra del panel */
   --context-menu-item-font-weight: var(--font-weight-default); /** Peso de texto de ítems */
   --context-menu-item-color: var(--color-text-on-light); /** Color de texto de ítems */
   --context-menu-item-hover-color: var(--color-text-on-light); /** Color de texto de ítem al hover */
   --context-menu-item-destructive-color: var(--color-destructive-on-light); /** Color de texto de ítem destructivo */
   --context-menu-item-destructive-hover-bg: var(--color-destructive-on-light); /** Fondo de ítem destructivo al hover */
+  --context-menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición de ítems */
+  --context-menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición de ítems */
+  --context-menu-bg: var(--floating-panel-bg); /** Fondo del panel */
 }

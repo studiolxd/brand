@@ -1,0 +1,16 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --popover-padding-block: var(--spacing-4); /** Padding vertical del panel */
+  --popover-padding-inline: var(--spacing-4); /** Padding horizontal del panel */
+  --popover-z-index: var(--floating-panel-z-index); /** z-index del panel flotante */
+  --popover-border-width: var(--floating-panel-border-width); /** Grosor del borde */
+  --popover-border-color: var(--floating-panel-border-color); /** Color del borde */
+  --popover-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
+  --popover-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --popover-transition-duration: var(--floating-panel-transition-duration); /** Duración de la animación de entrada/salida */
+  --popover-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
+  --popover-bg: var(--floating-panel-bg); /** Fondo del panel */
+}

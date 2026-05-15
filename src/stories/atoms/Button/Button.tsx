@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import './Button.css';
 
@@ -22,7 +23,7 @@ interface ButtonProps {
   asChild?: boolean;
 }
 
-export function Button({
+export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   variant = 'primary',
   size = 'md',
   block = false,
@@ -33,7 +34,7 @@ export function Button({
   href,
   external = false,
   asChild = false,
-}: ButtonProps) {
+}, ref) {
   const classes = [
     'button',
     `button--${variant}`,
@@ -43,7 +44,7 @@ export function Button({
 
   if (asChild) {
     return (
-      <Slot className={classes} onClick={onClick as React.MouseEventHandler<HTMLElement>}>
+      <Slot ref={ref} className={classes} onClick={onClick as React.MouseEventHandler<HTMLElement>}>
         {children}
       </Slot>
     );
@@ -52,6 +53,7 @@ export function Button({
   if (href !== undefined) {
     return (
       <a
+        ref={ref as React.Ref<HTMLAnchorElement>}
         className={classes}
         href={disabled ? undefined : href}
         aria-disabled={disabled ? true : undefined}
@@ -65,6 +67,7 @@ export function Button({
 
   return (
     <button
+      ref={ref as React.Ref<HTMLButtonElement>}
       className={classes}
       type={type}
       disabled={disabled}
@@ -73,4 +76,4 @@ export function Button({
       {children}
     </button>
   );
-}
+});

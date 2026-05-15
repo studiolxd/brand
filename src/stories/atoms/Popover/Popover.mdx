@@ -1,0 +1,52 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as PopoverStories from './Popover.stories';
+
+<Meta of={PopoverStories} />
+
+# Popover
+
+Contenedor flotante genérico que puede alojar cualquier contenido: texto informativo, filtros, formularios compactos, date pickers, etc. Para menús de acciones con semántica ARIA correcta (`role="menu"`), usa el componente `ContextMenu`.
+
+El panel se posiciona automáticamente respecto al trigger usando `@radix-ui/react-popover`. Se abre y cierra con animación de fade + scale.
+
+## Uso básico
+
+<Canvas of={PopoverStories.Default} />
+<Controls of={PopoverStories.Default} />
+
+## Con DotsButton
+
+El Popover acepta cualquier nodo como trigger. Combinado con `DotsButton` ofrece una alternativa al `ContextMenu` cuando el contenido no requiere semántica de menú.
+
+<Canvas of={PopoverStories.ConDotsButton} />
+
+## Posición del panel
+
+La prop `side` controla en qué lado del trigger aparece el panel. La prop `align` controla la alineación dentro de ese eje.
+
+<Canvas of={PopoverStories.Posiciones} />
+
+## Modo controlado
+
+Cuando se pasan `open` y `onOpenChange`, el estado queda en manos del componente padre.
+
+<Canvas of={PopoverStories.Controlado} />
+
+## Tema oscuro
+
+Añadir `.surface-dark` a cualquier contenedor ancestro aplica el tema oscuro automáticamente.
+
+## Tokens disponibles
+
+| Token | Descripción |
+|---|---|
+| `--popover-bg` | Fondo del panel |
+| `--popover-border-color` | Color del borde |
+| `--popover-border-width` | Grosor del borde |
+| `--popover-border-radius` | Radio de las esquinas |
+| `--popover-shadow` | Sombra |
+| `--popover-padding-block` | Padding vertical |
+| `--popover-padding-inline` | Padding horizontal |
+| `--popover-z-index` | Capa z del panel |
+| `--popover-transition-duration` | Duración de la animación (ms) |
+| `--popover-transition-easing` | Easing de la animación |

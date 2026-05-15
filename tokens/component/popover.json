@@ -1,0 +1,14 @@
+{
+  "popover": {
+    "bg":                  { "$value": "{floating-panel.bg}",                "$type": "color",     "$description": "Fondo del panel" },
+    "border-width":        { "$value": "{floating-panel.border-width}",       "$type": "dimension", "$description": "Grosor del borde" },
+    "border-color":        { "$value": "{floating-panel.border-color}",       "$type": "color",     "$description": "Color del borde" },
+    "border-radius":       { "$value": "{floating-panel.border-radius}",      "$type": "dimension", "$description": "Radio del panel" },
+    "shadow":              { "$value": "{floating-panel.shadow}",             "$type": "shadow",    "$description": "Sombra del panel" },
+    "padding-block":       { "$value": "{spacing.4}",                         "$type": "dimension", "$description": "Padding vertical del panel" },
+    "padding-inline":      { "$value": "{spacing.4}",                         "$type": "dimension", "$description": "Padding horizontal del panel" },
+    "z-index":             { "$value": "{floating-panel.z-index}",            "$type": "number",    "$description": "z-index del panel flotante" },
+    "transition-duration": { "$value": "{floating-panel.transition-duration}", "$type": "number",    "$description": "Duración de la animación de entrada/salida" },
+    "transition-easing":   { "$value": "{floating-panel.transition-easing}",  "$type": "string",    "$description": "Easing de la animación" }
+  }
+}

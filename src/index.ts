@@ -22,6 +22,8 @@ export { Link } from './stories/atoms/Link/Link';
 export { List } from './stories/atoms/List/List';
 export { Logo } from './stories/atoms/Logo/Logo';
 export { Paragraph } from './stories/atoms/Paragraph/Paragraph';
+export { Popover } from './stories/atoms/Popover/Popover';
+export type { PopoverProps } from './stories/atoms/Popover/Popover';
 export { Radio } from './stories/atoms/Radio/Radio';
 export { Select } from './stories/atoms/Select/Select';
 export { SkipLink } from './stories/atoms/SkipLink/SkipLink';

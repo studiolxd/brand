@@ -273,9 +273,11 @@
   --dots-button-active-bg: rgba(255, 255, 255, 0.2);
   --dots-button-focus-ring-color: var(--color-text-on-dark);
 
+  /* ─── FloatingPanel (base de Popover y ContextMenu) ─────────────────────── */
+  --floating-panel-bg:           var(--color-background-dark);
+  --floating-panel-border-color: rgba(255, 255, 255, 0.15);
+
   /* ─── ContextMenu ─────────────────────────────────────────────────────────── */
-  --context-menu-bg:                          var(--color-background-dark);
-  --context-menu-border-color:                rgba(255, 255, 255, 0.15);
   --context-menu-item-color:                  var(--color-text-on-dark);
   --context-menu-item-hover-bg:               rgba(255, 255, 255, 0.08);
   --context-menu-item-hover-color:            var(--color-text-on-dark);
