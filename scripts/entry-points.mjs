@@ -25,6 +25,7 @@ export const entryPoints = {
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   // Molecules
+  'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
   'card':                'src/stories/molecules/Card/Card.tsx',
   'project-card':        'src/stories/molecules/ProjectCard/ProjectCard.tsx',
   'card-split':          'src/stories/molecules/CardSplit/CardSplit.tsx',

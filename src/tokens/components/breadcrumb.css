@@ -1,0 +1,23 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --breadcrumb-padding-inline: 0; /** Sin padding lateral */
+  --breadcrumb-link-text-decoration: none; /** Sin subrayado por defecto */
+  --breadcrumb-link-text-decoration-hover: underline; /** Subrayado en hover */
+  --breadcrumb-font-family: var(--font-family-sans); /** Font family */
+  --breadcrumb-font-size: var(--font-size-1); /** 14px — UI nav label */
+  --breadcrumb-line-height: var(--line-height-none); /** Single-line */
+  --breadcrumb-gap: var(--spacing-2); /** Gap entre items y separadores */
+  --breadcrumb-padding-block: var(--spacing-1); /** Padding vertical del nav */
+  --breadcrumb-current-font-weight: var(--font-weight-medium); /** Peso del item activo */
+  --breadcrumb-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --breadcrumb-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
+  --breadcrumb-font-weight: var(--font-weight-default); /** Font weight base */
+  --breadcrumb-separator-color: var(--color-text-muted-on-light); /** Color del separador */
+  --breadcrumb-link-color: var(--color-text-on-light); /** Color del link navegable */
+  --breadcrumb-link-color-hover: var(--color-primary); /** Color del link en hover */
+  --breadcrumb-current-color: var(--color-text-muted-on-light); /** Color del item activo (página actual) */
+  --breadcrumb-focus-ring-color: var(--color-primary); /** Color del focus ring */
+}

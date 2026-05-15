@@ -1,0 +1,21 @@
+{
+  "breadcrumb": {
+    "font-family":                { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Font family" },
+    "font-size":                  { "$value": "{font-size.1}",               "$type": "dimension", "$description": "14px — UI nav label" },
+    "font-weight":                { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Font weight base" },
+    "line-height":                { "$value": "{line-height.none}",          "$type": "number",    "$description": "Single-line" },
+    "gap":                        { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Gap entre items y separadores" },
+    "padding-block":              { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Padding vertical del nav" },
+    "padding-inline":             { "$value": "0",                           "$type": "dimension", "$description": "Sin padding lateral" },
+    "separator-color":            { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del separador" },
+    "link-color":                 { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del link navegable" },
+    "link-color-hover":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del link en hover" },
+    "link-text-decoration":       { "$value": "none",                        "$type": "string",    "$description": "Sin subrayado por defecto" },
+    "link-text-decoration-hover": { "$value": "underline",                   "$type": "string",    "$description": "Subrayado en hover" },
+    "current-color":              { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del item activo (página actual)" },
+    "current-font-weight":        { "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso del item activo" },
+    "focus-ring-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del focus ring" },
+    "focus-ring-width":           { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Grosor del focus ring" },
+    "focus-ring-offset":          { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del focus ring" }
+  }
+}
