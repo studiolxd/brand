@@ -91,6 +91,10 @@
       "types": "./dist/_types/atoms/Highlight/Highlight.d.ts",
       "import": "./dist/highlight.js"
     },
+    "./skip-link": {
+      "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
+      "import": "./dist/skip-link.js"
+    },
     "./visually-hidden": {
       "types": "./dist/_types/atoms/VisuallyHidden/VisuallyHidden.d.ts",
       "import": "./dist/visually-hidden.js"
