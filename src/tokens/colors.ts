@@ -56,6 +56,18 @@ export const successBgColor = { name: 'Success bg', token: '--color-green-bg',  
 export const dangerBgColor  = { name: 'Danger bg',  token: '--color-red-bg',         hex: system.color['red-bg'].$value };
 export const neutralBgColor = { name: 'Neutral bg', token: '--color-grey-lightest',  hex: neutral.color['grey-lightest'].$value };
 
+export const infoColorDark    = resolveRef(feedback.color['info-on-dark'].$value, refMap);
+export const warningColorDark = resolveRef(feedback.color['warning-on-dark'].$value, refMap);
+export const successColorDark = resolveRef(feedback.color['success-on-dark'].$value, refMap);
+export const dangerColorDark  = resolveRef(feedback.color['error-on-dark'].$value, refMap);
+export const neutralColorDark = neutral.color['grey-light'].$value;
+
+export const infoBgDarkColor    = { name: 'Info bg (oscuro)',    token: '--color-blue-bg-dark',    hex: system.color['blue-bg-dark'].$value };
+export const warningBgDarkColor = { name: 'Warning bg (oscuro)', token: '--color-amber-bg-dark',   hex: system.color['amber-bg-dark'].$value };
+export const successBgDarkColor = { name: 'Success bg (oscuro)', token: '--color-green-bg-dark',   hex: system.color['green-bg-dark'].$value };
+export const dangerBgDarkColor  = { name: 'Danger bg (oscuro)',  token: '--color-red-bg-dark',     hex: system.color['red-bg-dark'].$value };
+export const neutralBgDarkColor = { name: 'Neutral bg (oscuro)', token: '--color-neutral-bg-dark', hex: system.color['neutral-bg-dark'].$value };
+
 export const backgroundColors = [
   { name: 'Background light', token: '--color-background-light', hex: resolveRef(semantic.color.background.light.$value, refMap) },
   { name: 'Background dark',  token: '--color-background-dark',  hex: resolveRef(semantic.color.background.dark.$value, refMap) },

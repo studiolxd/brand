@@ -43,7 +43,12 @@ $color-blue-on-dark: #82b4ff; // System blue — info states on dark background
 $color-amber: #7a4500; // System amber — warning states on light background (AAA on tinted bg)
 $color-amber-on-dark: #ffd280; // System amber — warning states on dark background
 $color-green-dark: #005a14; // System green dark — success text on tinted backgrounds (AAA on green-bg)
-$color-blue-bg: #e8f0fe; // Info state background tint
-$color-amber-bg: #fff8e1; // Warning state background tint
-$color-green-bg: #e6f4ea; // Success state background tint
+$color-blue-bg: #e8f0fe; // Info state background tint — light surface
+$color-amber-bg: #fff8e1; // Warning state background tint — light surface
+$color-green-bg: #e6f4ea; // Success state background tint — light surface
 $color-red-bg: #ffffff; // Danger state background — white so destructive-on-light achieves AAA (7.10:1)
+$color-blue-bg-dark: #111e38; // Info state background tint — dark surface (AAA 7.18:1 with blue-on-dark)
+$color-amber-bg-dark: #221e0a; // Warning state background tint — dark surface (AAA ~12:1 with amber-on-dark)
+$color-green-bg-dark: #0e1e10; // Success state background tint — dark surface (AAA 8.28:1 with green-on-dark)
+$color-red-bg-dark: #1a0e0e; // Danger state background tint — dark surface (AAA 8.05:1 with red-on-dark)
+$color-neutral-bg-dark: #1e2530; // Neutral state background tint — dark surface (AAA ~12:1 with grey-lightest)

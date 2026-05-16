@@ -1,7 +1,7 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
 import { ContrastMatrix } from "./ContrastMatrix";
 import { TokenTable } from "./TokenTable";
-import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor } from "../../tokens/colors";
+import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor, infoColorDark, warningColorDark, successColorDark, dangerColorDark, neutralColorDark, infoBgDarkColor, warningBgDarkColor, successBgDarkColor, dangerBgDarkColor, neutralBgDarkColor } from "../../tokens/colors";
 
 <Meta title="Foundations/Colores" />
 
@@ -136,7 +136,7 @@ Colores funcionales, independientes de la paleta de marca. No deben usarse con f
   <ColorItem
     title="Blue"
     subtitle="Info on light · Info on dark"
-    colors={{ "--color-blue": "#1558B0", "--color-blue-on-dark": "#82B4FF" }}
+    colors={{ "--color-blue": "#0F4B9B", "--color-blue-on-dark": "#82B4FF" }}
   />
   <ColorItem
     title="Amber"
@@ -144,13 +144,29 @@ Colores funcionales, independientes de la paleta de marca. No deben usarse con f
     colors={{ "--color-amber": "#7A4500", "--color-amber-on-dark": "#FFD280" }}
   />
   <ColorItem
-    title="Fondos de estado"
+    title="Green dark"
+    subtitle="Success text sobre fondo tintado (AAA)"
+    colors={{ "--color-green-dark": "#005A14" }}
+  />
+  <ColorItem
+    title="Fondos de estado (claro)"
     subtitle="Info · Warning · Success · Danger"
     colors={{
       "--color-blue-bg":  "#E8F0FE",
       "--color-amber-bg": "#FFF8E1",
       "--color-green-bg": "#E6F4EA",
-      "--color-red-bg":   "#FCE8E8",
+      "--color-red-bg":   "#FFFFFF",
+    }}
+  />
+  <ColorItem
+    title="Fondos de estado (oscuro)"
+    subtitle="Info · Warning · Success · Danger · Neutral"
+    colors={{
+      "--color-blue-bg-dark":    "#111E38",
+      "--color-amber-bg-dark":   "#221E0A",
+      "--color-green-bg-dark":   "#0E1E10",
+      "--color-red-bg-dark":     "#1A0E0E",
+      "--color-neutral-bg-dark": "#1E2530",
     }}
   />
 </ColorPalette>
@@ -369,3 +385,29 @@ Comprobación de contraste para cada combinación texto/fondo de las variantes s
 ### Neutral
 
 <ContrastMatrix foregroundLabel="Neutral" foreground={neutralTextColor} colors={[neutralBgColor]} />
+
+---
+
+## Accesibilidad — colores de estado (tags, fondo oscuro)
+
+Comprobación de contraste para las variantes semánticas del componente `Tag` sobre superficie oscura (`.surface-dark`). Se requiere un mínimo de **AAA (7:1)** para texto normal.
+
+### Info (oscuro)
+
+<ContrastMatrix foregroundLabel="Info (oscuro)" foreground={infoColorDark} colors={[infoBgDarkColor]} />
+
+### Warning (oscuro)
+
+<ContrastMatrix foregroundLabel="Warning (oscuro)" foreground={warningColorDark} colors={[warningBgDarkColor]} />
+
+### Success (oscuro)
+
+<ContrastMatrix foregroundLabel="Success (oscuro)" foreground={successColorDark} colors={[successBgDarkColor]} />
+
+### Danger (oscuro)
+
+<ContrastMatrix foregroundLabel="Danger (oscuro)" foreground={dangerColorDark} colors={[dangerBgDarkColor]} />
+
+### Neutral (oscuro)
+
+<ContrastMatrix foregroundLabel="Neutral (oscuro)" foreground={neutralColorDark} colors={[neutralBgDarkColor]} />

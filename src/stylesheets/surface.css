@@ -336,6 +336,18 @@
   --context-menu-item-destructive-color:      var(--color-destructive-on-dark);
   --context-menu-item-destructive-hover-bg:   var(--color-destructive-on-dark);
   --context-menu-item-destructive-hover-color:var(--color-white);
+
+  /* ─── Tag semantic variants ───────────────────────────────────────────────── */
+  --tag-neutral-bg:    var(--color-neutral-bg-dark);
+  --tag-neutral-color: var(--color-text-muted-on-dark);
+  --tag-info-bg:       var(--color-blue-bg-dark);
+  --tag-info-color:    var(--color-info-on-dark);
+  --tag-warning-bg:    var(--color-amber-bg-dark);
+  --tag-warning-color: var(--color-warning-on-dark);
+  --tag-success-bg:    var(--color-green-bg-dark);
+  --tag-success-color: var(--color-success-on-dark);
+  --tag-danger-bg:     var(--color-red-bg-dark);
+  --tag-danger-color:  var(--color-error-on-dark);
 }
 
 /* =============================================================
