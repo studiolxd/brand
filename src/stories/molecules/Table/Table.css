@@ -124,6 +124,10 @@
 
 /* ── Size: sm ────────────────────────────────────────── */
 
+.table.table--sm {
+  font-size: var(--table-sm-font-size);
+}
+
 .table.table--sm .table__header {
   padding-block: var(--table-sm-header-padding-block);
   padding-inline: var(--table-sm-header-padding-inline);

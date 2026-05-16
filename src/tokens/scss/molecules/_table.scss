@@ -2,7 +2,7 @@
 // Do not edit directly, this file was auto-generated.
 
 $table-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$table-font-size: 0.875rem; // 14px — UI label size
+$table-font-size: 1.125rem; // 18px — Body default size
 $table-font-weight: 300; // Font weight base
 $table-line-height: 1.5; // Normal line height para celdas multilínea
 $table-color: #111e30; // Color de texto base
@@ -27,6 +27,7 @@ $table-focus-ring-width: 2px; // Grosor del focus ring
 $table-focus-ring-offset: 1px; // Separación del focus ring
 $table-transition-duration: 150ms; // Duración de transiciones de hover
 $table-transition-easing: ease; // Easing de transiciones
+$table-sm-font-size: 0.875rem; // 14px — UI label size — variante sm
 $table-sm-header-padding-block: 0.5rem; // Padding block del encabezado — variante sm
 $table-sm-header-padding-inline: 0.5rem; // Padding inline del encabezado — variante sm
 $table-sm-cell-padding-block: 0.5rem; // Padding block de celda — variante sm

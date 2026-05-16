@@ -6,7 +6,7 @@
   --table-bg: rgba(0, 0, 0, 0); /** Fondo de la tabla */
   --table-sort-icon-inactive-opacity: 0.35; /** Opacidad del icono de sort cuando sortable pero sin sort activo */
   --table-font-family: var(--font-family-sans); /** Font family */
-  --table-font-size: var(--font-size-1); /** 14px — UI label size */
+  --table-font-size: var(--font-size-3); /** 18px — Body default size */
   --table-line-height: var(--line-height-normal); /** Normal line height para celdas multilínea */
   --table-border-width: var(--border-width-sm); /** Grosor de separadores de fila */
   --table-border-color: var(--color-grey-light); /** Color de separadores de fila */
@@ -24,6 +24,7 @@
   --table-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --table-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de hover */
   --table-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
+  --table-sm-font-size: var(--font-size-1); /** 14px — UI label size — variante sm */
   --table-sm-header-padding-block: var(--spacing-2); /** Padding block del encabezado — variante sm */
   --table-sm-header-padding-inline: var(--spacing-2); /** Padding inline del encabezado — variante sm */
   --table-sm-cell-padding-block: var(--spacing-2); /** Padding block de celda — variante sm */
