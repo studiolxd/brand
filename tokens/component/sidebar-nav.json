@@ -17,6 +17,7 @@
     "item-color":                { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítems" },
     "item-hover-bg":             { "$value": "{color.grey-lightest}",     "$type": "color",     "$description": "Fondo de ítem al hover" },
     "item-hover-color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítem al hover" },
+    "item-active-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de ítem activo y focus ring" },
     "item-active-font-weight":   { "$value": "{font-weight.medium}",      "$type": "number",    "$description": "Peso de ítem activo" },
     "item-gap":                  { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Gap entre ítems dentro de un grupo" },
     "item-icon-size":            { "$value": "1rem",                      "$type": "dimension", "$description": "Tamaño del icono opcional de ítem" },

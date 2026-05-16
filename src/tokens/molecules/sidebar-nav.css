@@ -28,4 +28,5 @@
   --sidebar-nav-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --sidebar-nav-item-color: var(--color-text-on-light); /** Color de ítems */
   --sidebar-nav-item-hover-color: var(--color-text-on-light); /** Color de ítem al hover */
+  --sidebar-nav-item-active-color: var(--color-primary); /** Color de ítem activo y focus ring */
 }
