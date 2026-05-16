@@ -25,6 +25,7 @@ export const entryPoints = {
   'hero-video':          'src/stories/atoms/HeroVideo/HeroVideo.tsx',
   'highlight':           'src/stories/atoms/Highlight/Highlight.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
+  'tabs':                'src/stories/atoms/Tabs/Tabs.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   // Molecules
   'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
@@ -64,4 +65,5 @@ export const clientComponents = new Set([
   'app-shell',
   'modal',
   'org-switcher', 'user-menu', 'sidebar-nav',
+  'tabs',
 ]);

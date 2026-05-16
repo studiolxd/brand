@@ -337,6 +337,13 @@
   --context-menu-item-destructive-hover-bg:   var(--color-destructive-on-dark);
   --context-menu-item-destructive-hover-color:var(--color-white);
 
+  /* ─── Tabs ───────────────────────────────────────────────────────────────── */
+  --tabs-list-border-color:      rgba(255, 255, 255, 0.2);
+  --tabs-trigger-color:          var(--color-text-muted-on-dark);
+  --tabs-trigger-hover-color:    var(--color-text-on-dark);
+  --tabs-trigger-active-color:   var(--color-text-on-dark);
+  --tabs-focus-ring-color:       var(--color-text-on-dark);
+
   /* ─── Tag semantic variants ───────────────────────────────────────────────── */
   --tag-neutral-bg:    var(--color-neutral-bg-dark);
   --tag-neutral-color: var(--color-text-muted-on-dark);

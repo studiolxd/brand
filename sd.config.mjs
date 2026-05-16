@@ -59,6 +59,7 @@ const filters = {
   'user-menu':          (t) => t.path[0] === 'user-menu',
   'sidebar-nav':        (t) => t.path[0] === 'sidebar-nav',
   modal:               (t) => t.path[0] === 'modal',
+  tabs:                (t) => t.path[0] === 'tabs',
 };
 
 function cssFile(destination, filterKey) {
@@ -131,6 +132,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/user-menu.css',            'user-menu'),
         cssFile('molecules/sidebar-nav.css',          'sidebar-nav'),
         cssFile('molecules/modal.css',                'modal'),
+        cssFile('components/tabs.css',               'tabs'),
       ],
     },
     scss: {
@@ -191,6 +193,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_user-menu.scss',            'user-menu'),
         scssFile('molecules/_sidebar-nav.scss',          'sidebar-nav'),
         scssFile('molecules/_modal.scss',                'modal'),
+        scssFile('components/_tabs.scss',               'tabs'),
       ],
     },
   },

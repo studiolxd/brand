@@ -1,0 +1,24 @@
+{
+  "tabs": {
+    "list-border-width":         { "$value": "{border-width.sm}",        "$type": "dimension", "$description": "Ancho del borde inferior de la lista de tabs" },
+    "list-border-color":         { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del borde inferior de la lista" },
+    "list-gap":                  { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Gap entre triggers" },
+    "trigger-padding-block":     { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical del trigger" },
+    "trigger-padding-inline":    { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding horizontal del trigger" },
+    "trigger-font-size":         { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Tamaño de fuente del trigger" },
+    "trigger-font-weight":       { "$value": "{font-weight.default}",    "$type": "string",    "$description": "Peso de fuente por defecto" },
+    "trigger-active-weight":     { "$value": "{font-weight.semibold}",   "$type": "string",    "$description": "Peso de fuente del tab activo" },
+    "trigger-color":             { "$value": "{color.grey-dark}",        "$type": "color",     "$description": "Color del trigger inactivo" },
+    "trigger-hover-color":       { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del trigger en hover" },
+    "trigger-active-color":      { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del trigger activo" },
+    "trigger-indicator-width":   { "$value": "{border-width.md}",        "$type": "dimension", "$description": "Grosor del indicador activo (underline)" },
+    "trigger-indicator-color":   { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del indicador activo" },
+    "trigger-pill-bg-active":    { "$value": "{color.primary}",          "$type": "color",     "$description": "Fondo del trigger activo en variante pill" },
+    "trigger-pill-color-active": { "$value": "{color.white}",            "$type": "color",     "$description": "Texto del trigger activo en variante pill" },
+    "trigger-border-radius":     { "$value": "{border-radius.sm}",       "$type": "dimension", "$description": "Radio de borde del trigger (pill + focus ring)" },
+    "focus-ring-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco" },
+    "content-padding-block":     { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding vertical del panel de contenido" },
+    "transition-duration":       { "$value": "{motion.duration.fast}",   "$type": "string",    "$description": "Duración de la transición de color" },
+    "transition-easing":         { "$value": "{motion.easing.in-out}",   "$type": "string",    "$description": "Easing de la transición" }
+  }
+}
