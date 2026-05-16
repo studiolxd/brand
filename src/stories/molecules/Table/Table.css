@@ -51,12 +51,6 @@
 .table__header.table__header--sortable {
   cursor: pointer;
   user-select: none;
-  transition:
-    background-color calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing);
-}
-
-.table__header.table__header--sortable:hover {
-  background-color: var(--table-header-hover-bg);
 }
 
 .table__header.table__header--sortable:focus-visible {
