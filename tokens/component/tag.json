@@ -19,6 +19,17 @@
     "support-1-bg":    { "$value": "{color.support-1}",      "$type": "color", "$description": "Support 1 (emerald) background" },
     "support-1-color": { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Support 1 text — dark on light bg" },
     "support-2-bg":       { "$value": "{color.support-2}",         "$type": "color", "$description": "Support 2 (cayenne) background" },
-    "support-2-color":    { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Support 2 text — dark on orange bg" }
+    "support-2-color":    { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Support 2 text — dark on orange bg" },
+
+    "neutral-bg":    { "$value": "{color.grey-lightest}",        "$type": "color", "$description": "Neutral semantic — background" },
+    "neutral-color": { "$value": "{color.grey-darkest}",         "$type": "color", "$description": "Neutral semantic — muted text" },
+    "info-bg":       { "$value": "{color.blue-bg}",              "$type": "color", "$description": "Info semantic — background tint" },
+    "info-color":    { "$value": "{color.info-on-light}",        "$type": "color", "$description": "Info semantic — text" },
+    "warning-bg":    { "$value": "{color.amber-bg}",             "$type": "color", "$description": "Warning semantic — background tint" },
+    "warning-color": { "$value": "{color.warning-on-light}",     "$type": "color", "$description": "Warning semantic — text" },
+    "success-bg":    { "$value": "{color.green-bg}",             "$type": "color", "$description": "Success semantic — background tint" },
+    "success-color": { "$value": "{color.success-on-light}",     "$type": "color", "$description": "Success semantic — text" },
+    "danger-bg":     { "$value": "{color.red-bg}",               "$type": "color", "$description": "Danger semantic — background tint" },
+    "danger-color":  { "$value": "{color.destructive-on-light}", "$type": "color", "$description": "Danger semantic — text" }
   }
 }

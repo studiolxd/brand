@@ -1,7 +1,7 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
 import { ContrastMatrix } from "./ContrastMatrix";
 import { TokenTable } from "./TokenTable";
-import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor } from "../../tokens/colors";
+import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor } from "../../tokens/colors";
 
 <Meta title="Foundations/Colores" />
 
@@ -132,6 +132,26 @@ Colores funcionales, independientes de la paleta de marca. No deben usarse con f
     title="Green on dark"
     subtitle=""
     colors={{ "--color-green-on-dark": "#00CC2C" }}
+  />
+  <ColorItem
+    title="Blue"
+    subtitle="Info on light · Info on dark"
+    colors={{ "--color-blue": "#1558B0", "--color-blue-on-dark": "#82B4FF" }}
+  />
+  <ColorItem
+    title="Amber"
+    subtitle="Warning on light · Warning on dark"
+    colors={{ "--color-amber": "#7A4500", "--color-amber-on-dark": "#FFD280" }}
+  />
+  <ColorItem
+    title="Fondos de estado"
+    subtitle="Info · Warning · Success · Danger"
+    colors={{
+      "--color-blue-bg":  "#E8F0FE",
+      "--color-amber-bg": "#FFF8E1",
+      "--color-green-bg": "#E6F4EA",
+      "--color-red-bg":   "#FCE8E8",
+    }}
   />
 </ColorPalette>
 
@@ -323,3 +343,29 @@ Comprobación de contraste WCAG para las combinaciones de texto sobre color de f
   foreground={textMutedDark}
   colors={backgroundColors}
 />
+
+---
+
+## Accesibilidad — colores de estado (tags)
+
+Comprobación de contraste para cada combinación texto/fondo de las variantes semánticas del componente `Tag`. Se requiere un mínimo de **AAA (7:1)** para texto normal.
+
+### Info
+
+<ContrastMatrix foregroundLabel="Info" foreground={infoColor} colors={[infoBgColor]} />
+
+### Warning
+
+<ContrastMatrix foregroundLabel="Warning" foreground={warningColor} colors={[warningBgColor]} />
+
+### Success
+
+<ContrastMatrix foregroundLabel="Success" foreground={successColor} colors={[successBgColor]} />
+
+### Danger
+
+<ContrastMatrix foregroundLabel="Danger" foreground={errorColor} colors={[dangerBgColor]} />
+
+### Neutral
+
+<ContrastMatrix foregroundLabel="Neutral" foreground={neutralTextColor} colors={[neutralBgColor]} />

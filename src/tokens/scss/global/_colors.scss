@@ -12,6 +12,10 @@ $color-success-on-light: #006616; // Success role — maps to system green
 $color-success-on-dark: #00cc2c; // Success role on dark background
 $color-destructive-on-light: #b30000; // Destructive action role — maps to system red
 $color-destructive-on-dark: #ff8585; // Destructive action role on dark background
+$color-info-on-light: #1558b0; // Info role — maps to system blue
+$color-info-on-dark: #82b4ff; // Info role on dark background
+$color-warning-on-light: #7a4500; // Warning role — maps to system amber
+$color-warning-on-dark: #ffd280; // Warning role on dark background
 $color-white: #ffffff; // Pure white
 $color-black: #000000; // Pure black
 $color-grey-lightest: #f2f2f2; // Fondos sutiles, chips, tags
@@ -34,3 +38,11 @@ $color-red-on-light: #b30000; // System red — error states on light background
 $color-red-on-dark: #ff8585; // System red — error states on dark background
 $color-green-on-light: #006616; // System green — success states on light background
 $color-green-on-dark: #00cc2c; // System green — success states on dark background
+$color-blue: #1558b0; // System blue — info states on light background
+$color-blue-on-dark: #82b4ff; // System blue — info states on dark background
+$color-amber: #7a4500; // System amber — warning states on light background
+$color-amber-on-dark: #ffd280; // System amber — warning states on dark background
+$color-blue-bg: #e8f0fe; // Info state background tint
+$color-amber-bg: #fff8e1; // Warning state background tint
+$color-green-bg: #e6f4ea; // Success state background tint
+$color-red-bg: #fce8e8; // Danger state background tint

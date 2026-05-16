@@ -18,6 +18,14 @@
   --color-red-on-dark: #ff8585; /** System red — error states on dark background */
   --color-green-on-light: #006616; /** System green — success states on light background */
   --color-green-on-dark: #00cc2c; /** System green — success states on dark background */
+  --color-blue: #1558b0; /** System blue — info states on light background */
+  --color-blue-on-dark: #82b4ff; /** System blue — info states on dark background */
+  --color-amber: #7a4500; /** System amber — warning states on light background */
+  --color-amber-on-dark: #ffd280; /** System amber — warning states on dark background */
+  --color-blue-bg: #e8f0fe; /** Info state background tint */
+  --color-amber-bg: #fff8e1; /** Warning state background tint */
+  --color-green-bg: #e6f4ea; /** Success state background tint */
+  --color-red-bg: #fce8e8; /** Danger state background tint */
   --color-primary: var(--color-prussian); /** Primary brand color — used ~50% of the time */
   --color-accent-1: var(--color-lavender); /** Accent 1 brand color — used ~20% of the time */
   --color-accent-2: var(--color-yellow); /** Accent 2 brand color — used ~20% of the time */
@@ -29,6 +37,10 @@
   --color-success-on-dark: var(--color-green-on-dark); /** Success role on dark background */
   --color-destructive-on-light: var(--color-red-on-light); /** Destructive action role — maps to system red */
   --color-destructive-on-dark: var(--color-red-on-dark); /** Destructive action role on dark background */
+  --color-info-on-light: var(--color-blue); /** Info role — maps to system blue */
+  --color-info-on-dark: var(--color-blue-on-dark); /** Info role on dark background */
+  --color-warning-on-light: var(--color-amber); /** Warning role — maps to system amber */
+  --color-warning-on-dark: var(--color-amber-on-dark); /** Warning role on dark background */
   --color-text-on-light: var(--color-prussian); /** Text color for light backgrounds */
   --color-text-on-dark: var(--color-white); /** Text color for dark backgrounds */
   --color-text-placeholder: var(--color-grey-dark); /** Placeholder text color */

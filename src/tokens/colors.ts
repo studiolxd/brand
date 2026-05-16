@@ -44,6 +44,15 @@ export const errorColor          = resolveRef(feedback.color['error-on-light'].$
 export const successColor        = resolveRef(feedback.color['success-on-light'].$value, refMap);
 export const errorDarkColor      = resolveRef(feedback.color['error-on-dark'].$value, refMap);
 export const successDarkColor    = resolveRef(feedback.color['success-on-dark'].$value, refMap);
+export const infoColor           = resolveRef(feedback.color['info-on-light'].$value, refMap);
+export const warningColor        = resolveRef(feedback.color['warning-on-light'].$value, refMap);
+export const neutralTextColor    = resolveRef(neutral.color['grey-darkest'].$value, refMap);
+
+export const infoBgColor    = { name: 'Info bg',    token: '--color-blue-bg',        hex: system.color['blue-bg'].$value };
+export const warningBgColor = { name: 'Warning bg', token: '--color-amber-bg',       hex: system.color['amber-bg'].$value };
+export const successBgColor = { name: 'Success bg', token: '--color-green-bg',       hex: system.color['green-bg'].$value };
+export const dangerBgColor  = { name: 'Danger bg',  token: '--color-red-bg',         hex: system.color['red-bg'].$value };
+export const neutralBgColor = { name: 'Neutral bg', token: '--color-grey-lightest',  hex: neutral.color['grey-lightest'].$value };
 
 export const backgroundColors = [
   { name: 'Background light', token: '--color-background-light', hex: resolveRef(semantic.color.background.light.$value, refMap) },

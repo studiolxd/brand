@@ -39,3 +39,28 @@
   background-color: var(--tag-support-2-bg);
   color: var(--tag-support-2-color);
 }
+
+.tag--neutral {
+  background-color: var(--tag-neutral-bg);
+  color: var(--tag-neutral-color);
+}
+
+.tag--info {
+  background-color: var(--tag-info-bg);
+  color: var(--tag-info-color);
+}
+
+.tag--warning {
+  background-color: var(--tag-warning-bg);
+  color: var(--tag-warning-color);
+}
+
+.tag--success {
+  background-color: var(--tag-success-bg);
+  color: var(--tag-success-color);
+}
+
+.tag--danger {
+  background-color: var(--tag-danger-bg);
+  color: var(--tag-danger-color);
+}
