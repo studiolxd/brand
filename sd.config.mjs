@@ -52,6 +52,7 @@ const filters = {
   'floating-panel':     (t) => t.path[0] === 'floating-panel',
   'context-menu':       (t) => t.path[0] === 'context-menu',
   popover:              (t) => t.path[0] === 'popover',
+  pagination:           (t) => t.path[0] === 'pagination',
 };
 
 function cssFile(destination, filterKey) {
@@ -117,6 +118,7 @@ const sd = new StyleDictionary({
         cssFile('components/floating-panel.css',      'floating-panel'),
         cssFile('molecules/context-menu.css',         'context-menu'),
         cssFile('components/popover.css',             'popover'),
+        cssFile('molecules/pagination.css',           'pagination'),
       ],
     },
     scss: {
@@ -170,6 +172,7 @@ const sd = new StyleDictionary({
         scssFile('components/_floating-panel.scss',      'floating-panel'),
         scssFile('molecules/_context-menu.scss',         'context-menu'),
         scssFile('components/_popover.scss',             'popover'),
+        scssFile('molecules/_pagination.scss',           'pagination'),
       ],
     },
   },

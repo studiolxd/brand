@@ -28,6 +28,7 @@ export const entryPoints = {
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   // Molecules
   'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
+  'pagination':          'src/stories/molecules/Pagination/Pagination.tsx',
   'context-menu':        'src/stories/molecules/ContextMenu/ContextMenu.tsx',
   'card':                'src/stories/molecules/Card/Card.tsx',
   'project-card':        'src/stories/molecules/ProjectCard/ProjectCard.tsx',
@@ -50,5 +51,5 @@ export const clientComponents = new Set([
   'accordion', 'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form',
   'input-field', 'input-phone-field', 'textarea-field', 'project-carousel', 'project-grid',
-  'dots-button', 'context-menu', 'popover',
+  'dots-button', 'context-menu', 'popover', 'pagination',
 ]);

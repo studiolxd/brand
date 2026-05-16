@@ -1,7 +1,9 @@
 import './Button.css';
-interface ButtonProps {
+export interface ButtonProps {
     /** Visual variant of the button */
-    variant?: 'primary' | 'accent' | 'outline' | 'destructive' | 'ghost';
+    variant?: 'primary' | 'accent' | 'outline' | 'ghost';
+    /** Applies destructive (red) color intent — composable with any variant, designed for ghost */
+    destructive?: boolean;
     /** Size of the button */
     size?: 'sm' | 'md' | 'lg';
     /** Stretches the button to full container width */
@@ -19,5 +21,4 @@ interface ButtonProps {
     /** Merges props onto the child element instead of rendering a wrapper (e.g. Next.js Link) */
     asChild?: boolean;
 }
-export declare function Button({ variant, size, block, children, type, disabled, onClick, href, external, asChild, }: ButtonProps): import("react/jsx-runtime").JSX.Element;
-export {};
+export declare const Button: import("react").ForwardRefExoticComponent<ButtonProps & import("react").RefAttributes<HTMLElement>>;

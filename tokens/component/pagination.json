@@ -1,0 +1,31 @@
+{
+  "pagination": {
+    "font-family":         { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Font family" },
+    "font-size":           { "$value": "{font-size.1}",               "$type": "dimension", "$description": "14px — UI nav label" },
+    "font-weight":         { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Font weight base" },
+    "line-height":         { "$value": "{line-height.none}",          "$type": "number",    "$description": "Single line" },
+    "gap":                 { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Gap entre secciones del nav" },
+    "controls-gap":        { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Gap entre botones de paginación" },
+    "padding-block":       { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Padding vertical del nav" },
+    "padding-inline":      { "$value": "0",                           "$type": "dimension", "$description": "Sin padding lateral" },
+    "summary-color":       { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del texto de total de resultados" },
+    "btn-min-width":       { "$value": "{spacing.6}",                 "$type": "dimension", "$description": "Ancho mínimo de los botones de página" },
+    "btn-padding-block":   { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding vertical de los botones" },
+    "btn-padding-inline":  { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding horizontal de los botones" },
+    "btn-radius":          { "$value": "{border-radius.sm}",          "$type": "dimension", "$description": "Radio de borde de los botones" },
+    "btn-color":           { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color de texto de los botones" },
+    "btn-bg":              { "$value": "transparent",                 "$type": "color",     "$description": "Fondo de los botones" },
+    "btn-hover-bg":        { "$value": "{color.grey-lightest}",       "$type": "color",     "$description": "Fondo en hover" },
+    "btn-hover-color":     { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Texto en hover" },
+    "btn-current-bg":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo de la página activa" },
+    "btn-current-color":   { "$value": "{color.text.on-dark}",        "$type": "color",     "$description": "Texto de la página activa" },
+    "btn-disabled-color":  { "$value": "{color.grey-dark}",           "$type": "color",     "$description": "Texto cuando está deshabilitado" },
+    "btn-disabled-cursor": { "$value": "not-allowed",                 "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "ellipsis-color":      { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del ellipsis" },
+    "focus-ring-color":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del focus ring" },
+    "focus-ring-width":    { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Grosor del focus ring" },
+    "focus-ring-offset":   { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del focus ring" },
+    "transition-duration": { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de las transiciones" },
+    "transition-easing":   { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Easing de las transiciones" }
+  }
+}

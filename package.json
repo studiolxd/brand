@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -18,6 +18,10 @@
     "./breadcrumb": {
       "types": "./dist/_types/molecules/Breadcrumb/Breadcrumb.d.ts",
       "import": "./dist/breadcrumb.js"
+    },
+    "./pagination": {
+      "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",
+      "import": "./dist/pagination.js"
     },
     "./context-menu": {
       "types": "./dist/_types/molecules/ContextMenu/ContextMenu.d.ts",

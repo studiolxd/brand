@@ -45,6 +45,8 @@ export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
 export { Form } from './stories/molecules/Form/Form';
 export { InputField } from './stories/molecules/InputField/InputField';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
+export { Pagination } from './stories/molecules/Pagination/Pagination';
+export type { PaginationProps } from './stories/molecules/Pagination/Pagination';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 

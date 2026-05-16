@@ -317,6 +317,17 @@
   --floating-panel-bg:           var(--color-background-dark);
   --floating-panel-border-color: rgba(255, 255, 255, 0.15);
 
+  /* ─── Pagination ─────────────────────────────────────────────────────────── */
+  --pagination-summary-color:      var(--color-text-on-dark);
+  --pagination-btn-color:          var(--color-text-on-dark);
+  --pagination-btn-hover-bg:       rgba(255, 255, 255, 0.12);
+  --pagination-btn-hover-color:    var(--color-text-on-dark);
+  --pagination-btn-current-bg:     var(--color-text-on-dark);
+  --pagination-btn-current-color:  var(--color-background-dark);
+  --pagination-btn-disabled-color: var(--color-grey-light);
+  --pagination-ellipsis-color:     var(--color-grey-light);
+  --pagination-focus-ring-color:   var(--color-text-on-dark);
+
   /* ─── ContextMenu ─────────────────────────────────────────────────────────── */
   --context-menu-item-color:                  var(--color-text-on-dark);
   --context-menu-item-hover-bg:               rgba(255, 255, 255, 0.08);

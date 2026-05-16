@@ -1,0 +1,100 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as PaginationStories from "./Pagination.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { paginationLayoutTokens, paginationButtonTokens, paginationFocusTokens, paginationEllipsisTokens } from "../../../tokens/molecules/pagination";
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+Componente de paginación controlado. Muestra controles de navegación (Anterior / páginas / Siguiente) con ellipsis automático. Soporta de forma opcional el recuento de resultados y el selector de registros por página.
+
+## Por defecto
+
+10 páginas, página activa resaltada, ellipsis cuando hay más páginas de las que caben en la ventana.
+
+<Canvas of={PaginationStories.Default} />
+
+## Con total de resultados
+
+La prop `showTotal` añade el texto "X resultados" antes de los controles.
+
+<Canvas of={PaginationStories.ConTotal} />
+
+## Con selector de registros por página
+
+Cuando se pasa `onPageSizeChange`, aparece un `Select` con las opciones de página. Las opciones por defecto son 10, 20, 50, 100 y Todos; se pueden personalizar con `pageSizeOptions`.
+
+<Canvas of={PaginationStories.ConSelectorDePagina} />
+
+## Completo
+
+Total de resultados + selector de página + controles.
+
+<Canvas of={PaginationStories.Completo} />
+
+## Pocas páginas
+
+Con tres páginas o menos no aparece ellipsis.
+
+<Canvas of={PaginationStories.PocasPaginas} />
+
+## Página en el centro
+
+Cuando la página activa está en el centro se muestran la página anterior y la siguiente, con ellipsis a ambos lados.
+
+<Canvas of={PaginationStories.PaginaDelMedio} />
+
+## Páginas finales
+
+<Canvas of={PaginationStories.UltimasPaginas} />
+
+---
+
+## Integración con router (hrefBuilder)
+
+Cuando los números de página deben ser enlaces reales (para SEO, SSR o comportamientos nativos del navegador como cmd+click), se pasa la prop `hrefBuilder`.
+
+```tsx
+import { Pagination } from '@studiolxd/brand';
+
+<Pagination
+  total={200}
+  page={currentPage}
+  pageSize={10}
+  hrefBuilder={(p) => `/proyectos?page=${p}`}
+  onPageChange={(p) => router.push(`/proyectos?page=${p}`)}
+/>
+```
+
+Sin `onPageChange`, la navegación ocurre únicamente mediante el href nativo.
+
+<Canvas of={PaginationStories.ConLinks} />
+
+## Dark mode
+
+<Canvas of={PaginationStories.DarkMode} />
+
+---
+
+## Props
+
+<ArgTypes of={PaginationStories} />
+
+---
+
+## Tokens — layout
+
+<TokenTable tokens={paginationLayoutTokens} />
+
+## Tokens — botones
+
+<TokenTable tokens={paginationButtonTokens} />
+
+## Tokens — focus ring
+
+<TokenTable tokens={paginationFocusTokens} />
+
+## Tokens — ellipsis
+
+<TokenTable tokens={paginationEllipsisTokens} />

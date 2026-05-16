@@ -1,0 +1,83 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pagination-gap);
+  padding-block: var(--pagination-padding-block);
+  padding-inline: var(--pagination-padding-inline);
+  font-family: var(--pagination-font-family);
+  font-size: var(--pagination-font-size);
+  font-weight: var(--pagination-font-weight);
+  line-height: var(--pagination-line-height);
+}
+
+.pagination__summary {
+  color: var(--pagination-summary-color);
+}
+
+.pagination__size-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--pagination-controls-gap);
+}
+
+.pagination__size-label {
+  color: var(--pagination-summary-color);
+  white-space: nowrap;
+}
+
+.pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--pagination-controls-gap);
+}
+
+.pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--pagination-btn-min-width);
+  padding-block: var(--pagination-btn-padding-block);
+  padding-inline: var(--pagination-btn-padding-inline);
+  border-radius: var(--pagination-btn-radius);
+  background-color: var(--pagination-btn-bg);
+  color: var(--pagination-btn-color);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition-property: background-color, color;
+  transition-duration: var(--pagination-transition-duration);
+  transition-timing-function: var(--pagination-transition-easing);
+}
+
+.pagination__btn:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--pagination-btn-hover-bg);
+  color: var(--pagination-btn-hover-color);
+}
+
+.pagination__btn:focus-visible {
+  outline: var(--pagination-focus-ring-width) solid var(--pagination-focus-ring-color);
+  outline-offset: var(--pagination-focus-ring-offset);
+}
+
+.pagination__btn.pagination__btn--current {
+  background-color: var(--pagination-btn-current-bg);
+  color: var(--pagination-btn-current-color);
+  cursor: default;
+}
+
+.pagination__btn--nav {
+  min-width: auto;
+}
+
+.pagination__btn:disabled,
+.pagination__btn[aria-disabled='true'] {
+  color: var(--pagination-btn-disabled-color);
+  cursor: var(--pagination-btn-disabled-cursor);
+}
+
+.pagination__ellipsis {
+  padding-block: var(--pagination-btn-padding-block);
+  padding-inline: var(--pagination-btn-padding-inline);
+  color: var(--pagination-ellipsis-color);
+}
