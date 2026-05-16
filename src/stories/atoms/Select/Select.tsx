@@ -48,7 +48,7 @@ export function Select({
       </RadixSelect.Trigger>
 
       <RadixSelect.Portal>
-        <RadixSelect.Content className={['select__content', dark ? 'select__content--dark' : ''].filter(Boolean).join(' ')} position="popper">
+        <RadixSelect.Content className={['select__content', dark ? 'select__content--dark' : ''].filter(Boolean).join(' ')} position="popper" sideOffset={-1}>
           <RadixSelect.Viewport>
             {options.map(({ value: v, label, 'aria-label': optionAriaLabel }) => (
               <RadixSelect.Item key={v} value={v} className="select__item" aria-label={optionAriaLabel}>

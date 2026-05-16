@@ -16,7 +16,7 @@ $select-bg: #ffffff; // Fondo del trigger
 $select-icon-size: 0.625rem; // Tamaño del chevron
 $select-icon-transition: 150ms; // Duración de la transición del icono
 $select-focus-ring-width: 2px; // Grosor del anillo de foco
-$select-focus-ring-offset: 1px; // Separación del anillo de foco
+$select-focus-ring-offset: -3px; // Offset del anillo de foco (negativo = inset)
 $select-focus-ring-color: #111e30; // Color del anillo de foco
 $select-content-bg: #ffffff; // Fondo del dropdown
 $select-content-border-color: #111e30; // Borde del dropdown

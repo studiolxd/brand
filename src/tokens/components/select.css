@@ -5,6 +5,7 @@
 :root {
   --select-border-style: solid; /** Estilo del borde */
   --select-icon-size: 0.625rem; /** Tamaño del chevron */
+  --select-focus-ring-offset: -3px; /** Offset del anillo de foco (negativo = inset) */
   --select-content-z-index: 1100; /** Z-index del dropdown (por encima del header: 1001) */
   --select-border-radius: var(--border-radius-none); /** Radio del borde del trigger */
   --select-border-width: var(--border-width-sm); /** Grosor del borde */
@@ -13,7 +14,6 @@
   --select-bg: var(--color-white); /** Fondo del trigger */
   --select-icon-transition: var(--motion-duration-fast); /** Duración de la transición del icono */
   --select-focus-ring-width: var(--border-width-md); /** Grosor del anillo de foco */
-  --select-focus-ring-offset: var(--border-width-sm); /** Separación del anillo de foco */
   --select-content-bg: var(--color-white); /** Fondo del dropdown */
   --select-item-padding-block: var(--spacing-2); /** Padding block de cada opción */
   --select-item-highlighted-color: var(--color-white); /** Texto de opción resaltada */

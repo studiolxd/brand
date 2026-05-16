@@ -57,12 +57,10 @@
 
   &[data-side='bottom'] {
     border-top: none;
-    margin-block-start: calc(-1 * var(--select-border-width));
   }
 
   &[data-side='top'] {
     border-bottom: none;
-    margin-block-end: calc(-1 * var(--select-border-width));
   }
 }
 

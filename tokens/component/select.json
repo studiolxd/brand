@@ -15,7 +15,7 @@
     "icon-size":              { "$value": "0.625rem",                    "$type": "dimension", "$description": "Tamaño del chevron" },
     "icon-transition":        { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de la transición del icono" },
     "focus-ring-width":       { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Grosor del anillo de foco" },
-    "focus-ring-offset":      { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "focus-ring-offset":      { "$value": "-3px",                        "$type": "dimension", "$description": "Offset del anillo de foco (negativo = inset)" },
     "focus-ring-color":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
     "content-bg":             { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del dropdown" },
     "content-border-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Borde del dropdown" },
