@@ -251,15 +251,21 @@
 }
 
 /* Tamaños */
-.button.button--sm {
+.button.button--sm:not(.button--ghost) {
   padding-block: var(--button-sm-padding-block);
   padding-inline: var(--button-sm-padding-inline);
+}
+
+.button.button--sm {
   font-size: var(--button-sm-font-size);
 }
 
-.button.button--lg {
+.button.button--lg:not(.button--ghost) {
   padding-block: var(--button-lg-padding-block);
   padding-inline: var(--button-lg-padding-inline);
+}
+
+.button.button--lg {
   font-size: var(--button-lg-font-size);
 }
 
