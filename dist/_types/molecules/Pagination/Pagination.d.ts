@@ -1,3 +1,4 @@
+import type { ComponentType, AnchorHTMLAttributes } from 'react';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
 export interface PaginationProps {
@@ -24,8 +25,14 @@ export interface PaginationProps {
     pageSizeOptions?: SelectOption[];
     /** Mostrar "X resultados" antes de los controles. Default: false */
     showTotal?: boolean;
+    /**
+     * Componente Link del router. Default: "a" (recarga completa).
+     * Acepta next/link, react-router Link, etc. — cualquier componente
+     * que acepte las props estándar de <a> (href, className, …).
+     */
+    linkComponent?: ComponentType<AnchorHTMLAttributes<HTMLAnchorElement>>;
     /** aria-label del <nav>. Default: "Paginación" */
     ariaLabel?: string;
     className?: string;
 }
-export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, onPageSizeChange, pageSizeOptions, showTotal, ariaLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, ariaLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;

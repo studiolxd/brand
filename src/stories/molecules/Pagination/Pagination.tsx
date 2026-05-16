@@ -1,3 +1,4 @@
+import type { ComponentType, AnchorHTMLAttributes } from 'react';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
@@ -34,6 +35,12 @@ export interface PaginationProps {
   pageSizeOptions?: SelectOption[];
   /** Mostrar "X resultados" antes de los controles. Default: false */
   showTotal?: boolean;
+  /**
+   * Componente Link del router. Default: "a" (recarga completa).
+   * Acepta next/link, react-router Link, etc. — cualquier componente
+   * que acepte las props estándar de <a> (href, className, …).
+   */
+  linkComponent?: ComponentType<AnchorHTMLAttributes<HTMLAnchorElement>>;
   /** aria-label del <nav>. Default: "Paginación" */
   ariaLabel?: string;
   className?: string;
@@ -58,6 +65,7 @@ export function Pagination({
   pageSize,
   onPageChange,
   hrefBuilder,
+  linkComponent,
   onPageSizeChange,
   pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
   showTotal = false,
@@ -65,6 +73,8 @@ export function Pagination({
   className,
 }: PaginationProps) {
   if (total === 0) return null;
+
+  const A = linkComponent ?? 'a';
 
   const totalPages = pageSize === 'all' ? 1 : Math.ceil(total / pageSize);
   const pageItems = totalPages > 1 ? getPageWindow(page, totalPages) : [];
@@ -85,7 +95,7 @@ export function Pagination({
 
     if (hrefBuilder) {
       return (
-        <a
+        <A
           key={item}
           href={isCurrent ? undefined : hrefBuilder(item)}
           className={btnClass}
@@ -99,7 +109,7 @@ export function Pagination({
           }
         >
           {item}
-        </a>
+        </A>
       );
     }
 
@@ -120,7 +130,7 @@ export function Pagination({
   function renderNavBtn(targetPage: number, label: string, ariaLabelText: string, isDisabled: boolean) {
     if (hrefBuilder) {
       return (
-        <a
+        <A
           href={isDisabled ? undefined : hrefBuilder(targetPage)}
           className="pagination__btn pagination__btn--nav"
           aria-label={ariaLabelText}
@@ -132,7 +142,7 @@ export function Pagination({
           }
         >
           {label}
-        </a>
+        </A>
       );
     }
 
