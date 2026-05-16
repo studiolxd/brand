@@ -48,3 +48,6 @@
 @import "./molecules/pagination.css";
 @import "./molecules/table.css";
 @import "./components/sidebar.css";
+@import "./molecules/org-switcher.css";
+@import "./molecules/user-menu.css";
+@import "./molecules/sidebar-nav.css";

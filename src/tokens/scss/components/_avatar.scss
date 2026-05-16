@@ -6,3 +6,7 @@ $avatar-size-md: 2.25rem; // 36px — talla por defecto
 $avatar-size-lg: 3.75rem; // 60px — cards estándar
 $avatar-size-xl: 7.5rem; // 120px — reviewer destacado
 $avatar-border-radius: 9999px; // Radio para forma circular
+$avatar-border-radius-square: 4px; // Radio para forma cuadrada (logos de org)
+$avatar-initials-bg: #111e30; // Fondo del fallback de iniciales
+$avatar-initials-color: #ffffff; // Color del texto de iniciales
+$avatar-initials-font-weight: 500; // Peso del texto de iniciales

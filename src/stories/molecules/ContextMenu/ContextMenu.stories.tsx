@@ -92,6 +92,19 @@ export const ConDestructivos: Story = {
   },
 };
 
+export const ConIconos: Story = {
+  args: {
+    items: [
+      { type: 'button' as const, label: 'Duplicar', icon: '⧉', onClick: () => alert('Duplicar') },
+      { type: 'button' as const, label: 'Editar', icon: '✎', onClick: () => alert('Editar') },
+      { type: 'separator' as const },
+      { type: 'link' as const, label: 'Ver detalle', icon: '↗', href: '/proyecto/1' },
+      { type: 'separator' as const },
+      { type: 'button' as const, label: 'Eliminar', icon: '✕', onClick: () => alert('Eliminar'), destructive: true },
+    ],
+  },
+};
+
 export const ConRenderLink: Story = {
   name: 'Con renderLink personalizado',
   args: {

@@ -1,0 +1,31 @@
+{
+  "sidebar-nav": {
+    "gap":                       { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Gap entre grupos" },
+    "group-trigger-padding-block":  { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Padding vertical del trigger de grupo" },
+    "group-trigger-padding-inline": { "$value": "{spacing.3}",            "$type": "dimension", "$description": "Padding horizontal del trigger de grupo" },
+    "group-trigger-gap":         { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Gap entre texto y chevron del grupo" },
+    "group-label-font-size":     { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Tamaño de texto de etiqueta de grupo" },
+    "group-label-font-weight":   { "$value": "{font-weight.semibold}",    "$type": "number",    "$description": "Peso del texto de etiqueta de grupo" },
+    "group-label-color":         { "$value": "{color.text.muted-on-light}","$type": "color",     "$description": "Color de la etiqueta de grupo" },
+    "group-label-letter-spacing":{ "$value": "{letter-spacing.wide}",     "$type": "string",    "$description": "Espaciado de letras de la etiqueta" },
+    "item-padding-block":        { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Padding vertical de cada ítem" },
+    "item-padding-inline":       { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Padding horizontal de cada ítem (mayor para indentar respecto al trigger del grupo)" },
+    "item-border-radius":        { "$value": "{border-radius.sm}",        "$type": "dimension", "$description": "Radio de cada ítem" },
+    "item-font-size":            { "$value": "{font-size.2}",             "$type": "dimension", "$description": "Tamaño de texto de ítems" },
+    "item-font-weight":          { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Peso de ítems" },
+    "item-line-height":          { "$value": "{line-height.snug}",        "$type": "number",    "$description": "Interlineado de ítems" },
+    "item-color":                { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítems" },
+    "item-hover-bg":             { "$value": "{color.grey-lightest}",     "$type": "color",     "$description": "Fondo de ítem al hover" },
+    "item-hover-color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítem al hover" },
+    "item-active-bg":            { "$value": "{color.grey-lightest}",     "$type": "color",     "$description": "Fondo de ítem activo" },
+    "item-active-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de ítem activo" },
+    "item-active-font-weight":   { "$value": "{font-weight.medium}",      "$type": "number",    "$description": "Peso de ítem activo" },
+    "item-active-indicator-width":{ "$value": "2px",                      "$type": "dimension", "$description": "Ancho del indicador activo (borde izquierdo)" },
+    "item-active-indicator-color":{ "$value": "{color.primary}",          "$type": "color",     "$description": "Color del indicador activo" },
+    "item-gap":                  { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Gap entre ítems dentro de un grupo" },
+    "item-icon-size":            { "$value": "1rem",                      "$type": "dimension", "$description": "Tamaño del icono opcional de ítem" },
+    "item-icon-gap":             { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Gap entre icono y texto del ítem" },
+    "transition-duration":       { "$value": "{motion.duration.fast}",    "$type": "string",    "$description": "Duración de transición de ítems" },
+    "transition-easing":         { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de transición de ítems" }
+  }
+}

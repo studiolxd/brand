@@ -1,14 +1,30 @@
 .avatar {
   --avatar-size: var(--avatar-size-md);
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: var(--avatar-size);
   height: var(--avatar-size);
   border-radius: var(--avatar-border-radius);
   object-fit: cover;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .avatar.avatar--sm { --avatar-size: var(--avatar-size-sm); }
 .avatar.avatar--md { --avatar-size: var(--avatar-size-md); }
 .avatar.avatar--lg { --avatar-size: var(--avatar-size-lg); }
 .avatar.avatar--xl { --avatar-size: var(--avatar-size-xl); }
+
+.avatar.avatar--square {
+  border-radius: var(--avatar-border-radius-square);
+}
+
+.avatar.avatar--initials {
+  background-color: var(--avatar-initials-bg);
+  color: var(--avatar-initials-color);
+  font-size: calc(var(--avatar-size) * 0.4);
+  font-weight: var(--avatar-initials-font-weight);
+  line-height: 1;
+  user-select: none;
+}

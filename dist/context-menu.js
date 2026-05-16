@@ -1,57 +1,47 @@
 'use client';
 import './context-menu.css';
 import { DotsButton as e } from "./dots-button.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import * as r from "@radix-ui/react-dropdown-menu";
+import { t } from "./_shared/dropdownItems.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import * as i from "@radix-ui/react-dropdown-menu";
 //#region src/stories/molecules/ContextMenu/ContextMenu.tsx
-function i({ href: e, children: n, className: r }) {
-	return /* @__PURE__ */ t("a", {
+function a({ href: e, children: t, className: r }) {
+	return /* @__PURE__ */ n("a", {
 		href: e,
 		className: r,
-		children: n
+		children: t
 	});
 }
-function a(e) {
+function o(e) {
 	return ["context-menu__item", e ? "context-menu__item--destructive" : ""].filter(Boolean).join(" ");
 }
-function o({ items: o, renderLink: s = i, onOpenChange: c, side: l = "bottom", align: u = "end", minWidth: d = "10rem", maxWidth: f, triggerSize: p = "md", triggerOrientation: m = "horizontal", triggerAriaLabel: h = "Más opciones" }) {
-	return /* @__PURE__ */ n(r.Root, {
-		onOpenChange: c,
-		children: [/* @__PURE__ */ t(r.Trigger, {
+function s({ items: s, renderLink: c = a, onOpenChange: l, side: u = "bottom", align: d = "end", minWidth: f = "10rem", maxWidth: p, triggerSize: m = "md", triggerOrientation: h = "horizontal", triggerAriaLabel: g = "Más opciones" }) {
+	return /* @__PURE__ */ r(i.Root, {
+		onOpenChange: l,
+		children: [/* @__PURE__ */ n(i.Trigger, {
 			asChild: !0,
-			children: /* @__PURE__ */ t(e, {
-				size: p,
-				orientation: m,
-				"aria-label": h
+			children: /* @__PURE__ */ n(e, {
+				size: m,
+				orientation: h,
+				"aria-label": g
 			})
-		}), /* @__PURE__ */ t(r.Portal, { children: /* @__PURE__ */ t(r.Content, {
+		}), /* @__PURE__ */ n(i.Portal, { children: /* @__PURE__ */ n(i.Content, {
 			className: "context-menu__content",
-			side: l,
-			align: u,
+			side: u,
+			align: d,
 			sideOffset: 4,
 			style: {
-				minWidth: d,
-				...f ? { maxWidth: f } : {}
+				minWidth: f,
+				...p ? { maxWidth: p } : {}
 			},
-			children: o.map((e, n) => e.type === "separator" ? /* @__PURE__ */ t(r.Separator, { className: "context-menu__separator" }, n) : e.type === "link" ? e.disabled ? /* @__PURE__ */ t(r.Item, {
-				className: a(e.destructive),
-				disabled: !0,
-				children: e.label
-			}, n) : /* @__PURE__ */ t(r.Item, {
-				asChild: !0,
-				children: s({
-					href: e.href,
-					children: e.label,
-					className: a(e.destructive)
-				})
-			}, n) : /* @__PURE__ */ t(r.Item, {
-				className: a(e.destructive),
-				disabled: e.disabled,
-				onSelect: e.disabled ? void 0 : e.onClick,
-				children: e.label
-			}, n))
+			children: t({
+				items: s,
+				itemClass: o,
+				separatorClass: "context-menu__separator",
+				renderLink: c
+			})
 		}) })]
 	});
 }
 //#endregion
-export { o as ContextMenu };
+export { s as ContextMenu };

@@ -41,6 +41,9 @@ export const entryPoints = {
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
   'input-phone-field':   'src/stories/molecules/InputPhoneField/InputPhoneField.tsx',
   'textarea-field':      'src/stories/molecules/TextareaField/TextareaField.tsx',
+  'org-switcher':        'src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx',
+  'user-menu':           'src/stories/molecules/UserMenu/UserMenu.tsx',
+  'sidebar-nav':         'src/stories/molecules/SidebarNav/SidebarNav.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
@@ -58,4 +61,5 @@ export const clientComponents = new Set([
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'sidebar',
   'app-shell',
+  'org-switcher', 'user-menu', 'sidebar-nav',
 ]);

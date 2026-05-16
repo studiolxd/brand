@@ -47,10 +47,16 @@ export { InputField } from './stories/molecules/InputField/InputField';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { Pagination } from './stories/molecules/Pagination/Pagination';
 export type { PaginationProps } from './stories/molecules/Pagination/Pagination';
+export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';
+export type { OrgSwitcherProps, OrgOption } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
+export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';
+export type { SidebarNavProps, SidebarNavGroup, SidebarNavItem, SidebarNavRenderLinkProps } from './stories/molecules/SidebarNav/SidebarNav';
 export { Table } from './stories/molecules/Table/Table';
 export type { TableProps, TableHeaderProps, TableRowProps } from './stories/molecules/Table/Table';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
+export { UserMenu } from './stories/molecules/UserMenu/UserMenu';
+export type { UserMenuProps } from './stories/molecules/UserMenu/UserMenu';
 
 // ─── Sections ───────────────────────────────────────────────
 export { AppShell } from './stories/sections/AppShell/AppShell';

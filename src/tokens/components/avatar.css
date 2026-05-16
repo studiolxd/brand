@@ -8,4 +8,8 @@
   --avatar-size-lg: 3.75rem; /** 60px — cards estándar */
   --avatar-size-xl: 7.5rem; /** 120px — reviewer destacado */
   --avatar-border-radius: var(--border-radius-full); /** Radio para forma circular */
+  --avatar-border-radius-square: var(--border-radius-sm); /** Radio para forma cuadrada (logos de org) */
+  --avatar-initials-color: var(--color-white); /** Color del texto de iniciales */
+  --avatar-initials-font-weight: var(--font-weight-medium); /** Peso del texto de iniciales */
+  --avatar-initials-bg: var(--color-primary); /** Fondo del fallback de iniciales */
 }

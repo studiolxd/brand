@@ -11,13 +11,22 @@ const meta: Meta<typeof Avatar> = {
       options: ['sm', 'md', 'lg', 'xl'],
       description: 'Talla del avatar.',
     },
+    shape: {
+      control: { type: 'select' },
+      options: ['circle', 'square'],
+      description: 'Forma del avatar.',
+    },
     src: {
       control: { type: 'text' },
-      description: 'URL de la imagen.',
+      description: 'URL de la imagen. Si se omite, se muestran iniciales.',
     },
     alt: {
       control: { type: 'text' },
-      description: 'Texto alternativo accesible.',
+      description: 'Texto alternativo para la imagen.',
+    },
+    name: {
+      control: { type: 'text' },
+      description: 'Nombre completo — genera las iniciales como fallback.',
     },
     className: { table: { disable: true } },
   },
@@ -25,6 +34,7 @@ const meta: Meta<typeof Avatar> = {
     src: 'https://i.pravatar.cc/120?img=47',
     alt: 'Ana García',
     size: 'md',
+    shape: 'circle',
   },
 };
 
@@ -37,3 +47,22 @@ export const Sm: Story = { args: { size: 'sm' } };
 export const Md: Story = { args: { size: 'md' } };
 export const Lg: Story = { args: { size: 'lg' } };
 export const Xl: Story = { args: { size: 'xl' } };
+
+export const Iniciales: Story = {
+  args: { src: undefined, name: 'Ana García', alt: undefined },
+};
+
+export const InicialesNombreSimple: Story = {
+  args: { src: undefined, name: 'Alejandro', alt: undefined },
+};
+
+export const InicialesSquare: Story = {
+  args: { src: undefined, name: 'Studio LXD', alt: undefined, shape: 'square' },
+};
+
+export const Square: Story = {
+  args: {
+    src: 'https://placehold.co/120x120/1a2b4a/ffffff?text=S',
+    shape: 'square',
+  },
+};

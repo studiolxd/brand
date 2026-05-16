@@ -6,6 +6,10 @@
       "lg": { "$value": "3.75rem", "$type": "dimension", "$description": "60px — cards estándar" },
       "xl": { "$value": "7.5rem",  "$type": "dimension", "$description": "120px — reviewer destacado" }
     },
-    "border-radius": { "$value": "{border-radius.full}", "$type": "dimension", "$description": "Radio para forma circular" }
+    "border-radius":        { "$value": "{border-radius.full}", "$type": "dimension", "$description": "Radio para forma circular" },
+    "border-radius-square": { "$value": "{border-radius.sm}",   "$type": "dimension", "$description": "Radio para forma cuadrada (logos de org)" },
+    "initials-bg":          { "$value": "{color.primary}",      "$type": "color",     "$description": "Fondo del fallback de iniciales" },
+    "initials-color":       { "$value": "{color.white}",        "$type": "color",     "$description": "Color del texto de iniciales" },
+    "initials-font-weight": { "$value": "{font-weight.medium}", "$type": "number",    "$description": "Peso del texto de iniciales" }
   }
 }

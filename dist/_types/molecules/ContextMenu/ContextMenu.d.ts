@@ -3,6 +3,7 @@ import './ContextMenu.css';
 export type ContextMenuButtonItem = {
     type: 'button';
     label: string;
+    icon?: ReactNode;
     onClick: () => void;
     disabled?: boolean;
     destructive?: boolean;
@@ -10,6 +11,7 @@ export type ContextMenuButtonItem = {
 export type ContextMenuLinkItem = {
     type: 'link';
     label: string;
+    icon?: ReactNode;
     href: string;
     disabled?: boolean;
     destructive?: boolean;

@@ -9,6 +9,7 @@
     "padding-inline":      { "$value": "{spacing.2}",                         "$type": "dimension", "$description": "Padding lateral del panel — separa el hover del borde" },
     "item-padding-block":  { "$value": "{spacing.2}",                         "$type": "dimension", "$description": "Padding vertical de cada ítem" },
     "item-padding-inline": { "$value": "{spacing.4}",                         "$type": "dimension", "$description": "Padding horizontal de cada ítem" },
+    "item-icon-gap":       { "$value": "{spacing.2}",                         "$type": "dimension", "$description": "Gap entre icono y texto del ítem" },
     "item-border-radius":  { "$value": "{border-radius.sm}",                  "$type": "dimension", "$description": "Radio de cada ítem" },
     "item-font-family":    { "$value": "{font-family.sans}",                  "$type": "string",    "$description": "Tipografía de ítems" },
     "item-font-size":      { "$value": "{font-size.2}",                       "$type": "dimension", "$description": "Tamaño de texto de ítems" },

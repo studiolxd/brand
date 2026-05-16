@@ -8,6 +8,7 @@
   --context-menu-padding-inline: var(--spacing-2); /** Padding lateral del panel — separa el hover del borde */
   --context-menu-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
   --context-menu-item-padding-inline: var(--spacing-4); /** Padding horizontal de cada ítem */
+  --context-menu-item-icon-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --context-menu-item-border-radius: var(--border-radius-sm); /** Radio de cada ítem */
   --context-menu-item-font-family: var(--font-family-sans); /** Tipografía de ítems */
   --context-menu-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */

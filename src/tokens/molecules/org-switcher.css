@@ -1,0 +1,42 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --org-switcher-logo-size: 2rem; /** Tamaño del cuadrado del logo/iniciales */
+  --org-switcher-content-min-width: 14rem; /** Ancho mínimo del dropdown */
+  --org-switcher-logo-border-radius: var(--border-radius-sm); /** Radio del logo/iniciales */
+  --org-switcher-initials-font-size: var(--font-size-1); /** Tamaño de texto de las iniciales */
+  --org-switcher-initials-font-weight: var(--font-weight-medium); /** Peso de las iniciales */
+  --org-switcher-initials-color: var(--color-white); /** Color de texto de las iniciales */
+  --org-switcher-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger */
+  --org-switcher-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger */
+  --org-switcher-trigger-gap: var(--spacing-3); /** Espacio entre logo y nombre */
+  --org-switcher-trigger-border-radius: var(--border-radius-sm); /** Radio del trigger */
+  --org-switcher-trigger-hover-bg: var(--color-grey-lightest); /** Fondo del trigger al hover */
+  --org-switcher-name-font-size: var(--font-size-2); /** Tamaño de texto del nombre de la org */
+  --org-switcher-name-font-weight: var(--font-weight-medium); /** Peso del nombre de la org */
+  --org-switcher-content-padding-block: var(--spacing-2); /** Padding vertical del panel */
+  --org-switcher-content-padding-inline: var(--spacing-2); /** Padding horizontal del panel */
+  --org-switcher-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
+  --org-switcher-item-padding-inline: var(--spacing-3); /** Padding horizontal de cada ítem */
+  --org-switcher-item-border-radius: var(--border-radius-sm); /** Radio de cada ítem */
+  --org-switcher-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
+  --org-switcher-item-hover-bg: var(--color-grey-lightest); /** Fondo de ítem al hover */
+  --org-switcher-item-active-bg: var(--color-grey-lightest); /** Fondo de ítem de org activa */
+  --org-switcher-separator-color: var(--color-grey-light); /** Color del separador */
+  --org-switcher-separator-height: var(--border-width-sm); /** Alto del separador */
+  --org-switcher-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
+  --org-switcher-initials-bg: var(--color-primary); /** Fondo del cuadrado de iniciales */
+  --org-switcher-name-color: var(--color-text-on-light); /** Color del nombre de la org */
+  --org-switcher-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
+  --org-switcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
+  --org-switcher-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
+  --org-switcher-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --org-switcher-item-font-weight: var(--font-weight-default); /** Peso de ítems */
+  --org-switcher-item-color: var(--color-text-on-light); /** Color de ítems */
+  --org-switcher-item-active-color: var(--color-primary); /** Color de ítem de org activa */
+  --org-switcher-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
+  --org-switcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
+  --org-switcher-content-bg: var(--floating-panel-bg); /** Fondo del panel */
+}

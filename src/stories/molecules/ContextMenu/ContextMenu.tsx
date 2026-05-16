@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DotsButton } from '../../atoms/DotsButton/DotsButton';
+import { renderDropdownItems } from '../_shared/dropdownItems';
 import './ContextMenu.css';
 
 export type ContextMenuButtonItem = {
   type: 'button';
   label: string;
+  icon?: ReactNode;
   onClick: () => void;
   disabled?: boolean;
   destructive?: boolean;
@@ -14,6 +16,7 @@ export type ContextMenuButtonItem = {
 export type ContextMenuLinkItem = {
   type: 'link';
   label: string;
+  icon?: ReactNode;
   href: string;
   disabled?: boolean;
   destructive?: boolean;
@@ -90,44 +93,11 @@ export function ContextMenu({
             ...(maxWidth ? { maxWidth } : {}),
           }}
         >
-          {items.map((item, index) => {
-            if (item.type === 'separator') {
-              return <DropdownMenu.Separator key={index} className="context-menu__separator" />;
-            }
-
-            if (item.type === 'link') {
-              if (item.disabled) {
-                return (
-                  <DropdownMenu.Item
-                    key={index}
-                    className={itemClass(item.destructive)}
-                    disabled
-                  >
-                    {item.label}
-                  </DropdownMenu.Item>
-                );
-              }
-              return (
-                <DropdownMenu.Item key={index} asChild>
-                  {renderLink({
-                    href: item.href,
-                    children: item.label,
-                    className: itemClass(item.destructive),
-                  })}
-                </DropdownMenu.Item>
-              );
-            }
-
-            return (
-              <DropdownMenu.Item
-                key={index}
-                className={itemClass(item.destructive)}
-                disabled={item.disabled}
-                onSelect={item.disabled ? undefined : item.onClick}
-              >
-                {item.label}
-              </DropdownMenu.Item>
-            );
+          {renderDropdownItems({
+            items,
+            itemClass,
+            separatorClass: 'context-menu__separator',
+            renderLink,
           })}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
