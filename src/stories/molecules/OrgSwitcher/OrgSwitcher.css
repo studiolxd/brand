@@ -98,6 +98,7 @@
   font-size: var(--org-switcher-item-font-size);
   font-weight: var(--org-switcher-item-font-weight);
   color: var(--org-switcher-item-color);
+  text-decoration: none;
   cursor: pointer;
   outline: none;
   transition: background-color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);

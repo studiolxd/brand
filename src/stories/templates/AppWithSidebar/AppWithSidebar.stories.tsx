@@ -75,6 +75,9 @@ function SidebarContent({ orgSwitcherOpen, userMenuOpen }: SidebarContentProps) 
         organizations={orgs}
         onOrgChange={() => {}}
         defaultOpen={orgSwitcherOpen}
+        items={[
+          { type: 'link', label: 'Administrar organizaciones', href: '#orgs' },
+        ]}
       />
 
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
