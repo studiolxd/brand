@@ -1,6 +1,8 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import type { ReactNode } from 'react';
 import { Avatar } from '../../atoms/Avatar/Avatar';
 import { Chevron } from '../../atoms/Chevron/Chevron';
+import type { ContextMenuItem, ContextMenuRenderLinkProps } from '../ContextMenu/ContextMenu';
 import './OrgSwitcher.css';
 
 export interface OrgOption {
@@ -14,9 +16,11 @@ export interface OrgSwitcherProps {
   organizations: OrgOption[];
   onOrgChange: (id: string) => void;
   defaultOpen?: boolean;
+  items?: ContextMenuItem[];
+  renderLink?: (props: ContextMenuRenderLinkProps) => ReactNode;
 }
 
-export function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen }: OrgSwitcherProps) {
+export function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen, items, renderLink }: OrgSwitcherProps) {
   const others = organizations.filter((o) => o.id !== current.id);
 
   return (
@@ -54,6 +58,38 @@ export function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen }
               <span>{org.name}</span>
             </DropdownMenu.Item>
           ))}
+
+          {items && items.length > 0 && (
+            <>
+              <DropdownMenu.Separator className="org-switcher__separator" />
+              {items.map((item, i) => {
+                if (item.type === 'separator') {
+                  return <DropdownMenu.Separator key={i} className="org-switcher__separator" />;
+                }
+                if (item.type === 'link') {
+                  return (
+                    <DropdownMenu.Item key={i} className="org-switcher__item" disabled={item.disabled} asChild>
+                      {renderLink
+                        ? renderLink({ href: item.href, children: item.label, className: '' })
+                        : <a href={item.href}>{item.label}</a>
+                      }
+                    </DropdownMenu.Item>
+                  );
+                }
+                return (
+                  <DropdownMenu.Item
+                    key={i}
+                    className={`org-switcher__item${item.destructive ? ' org-switcher__item--destructive' : ''}`}
+                    disabled={item.disabled}
+                    onSelect={item.onClick}
+                  >
+                    {item.icon && item.icon}
+                    {item.label}
+                  </DropdownMenu.Item>
+                );
+              })}
+            </>
+          )}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

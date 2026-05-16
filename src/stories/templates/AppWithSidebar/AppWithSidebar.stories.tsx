@@ -22,8 +22,9 @@ const orgs = [
   { id: 'vertex', name: 'Vertex Design' },
 ];
 
-const navGroups = [
+const navEntries = [
   {
+    kind: 'group' as const,
     id: 'general',
     label: 'General',
     items: [
@@ -33,6 +34,7 @@ const navGroups = [
     ],
   },
   {
+    kind: 'group' as const,
     id: 'workspace',
     label: 'Espacio de trabajo',
     items: [
@@ -42,6 +44,7 @@ const navGroups = [
     ],
   },
   {
+    kind: 'group' as const,
     id: 'settings',
     label: 'Configuración',
     items: [
@@ -76,7 +79,7 @@ function SidebarContent({ orgSwitcherOpen, userMenuOpen }: SidebarContentProps) 
 
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
         <SidebarNav
-          groups={navGroups}
+          entries={navEntries}
           defaultValue={['general', 'workspace']}
         />
       </div>

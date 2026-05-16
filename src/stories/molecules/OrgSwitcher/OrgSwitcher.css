@@ -119,3 +119,13 @@
   margin-block: var(--org-switcher-separator-margin-block);
   border: none;
 }
+
+/* ─── Ítem destructivo ───────────────────────────────────── */
+.org-switcher__item.org-switcher__item--destructive {
+  color: var(--context-menu-item-destructive-color);
+}
+
+.org-switcher__item.org-switcher__item--destructive[data-highlighted] {
+  background-color: var(--context-menu-item-destructive-hover-bg);
+  color: var(--context-menu-item-destructive-hover-color);
+}

@@ -11,13 +11,25 @@ export interface SidebarNavItem {
   icon?: ReactNode;
 }
 
-export interface SidebarNavGroup {
+export interface SidebarNavLinkEntry {
+  kind: 'link';
+  id: string;
+  label: string;
+  href: string;
+  active?: boolean;
+  icon?: ReactNode;
+}
+
+export interface SidebarNavGroupEntry {
+  kind: 'group';
   id: string;
   label: string;
   /** Cuando se especifica, el label de la categoría se renderiza como enlace. */
   href?: string;
   items: SidebarNavItem[];
 }
+
+export type SidebarNavEntry = SidebarNavLinkEntry | SidebarNavGroupEntry;
 
 export type SidebarNavRenderLinkProps = {
   href: string;
@@ -27,7 +39,7 @@ export type SidebarNavRenderLinkProps = {
 };
 
 export interface SidebarNavProps {
-  groups: SidebarNavGroup[];
+  entries: SidebarNavEntry[];
   defaultValue?: string[];
   value?: string[];
   onValueChange?: (value: string[]) => void;
@@ -43,7 +55,7 @@ function defaultRenderLink({ href, children, className, 'aria-current': ariaCurr
 }
 
 export function SidebarNav({
-  groups,
+  entries,
   defaultValue,
   value,
   onValueChange,
@@ -56,51 +68,80 @@ export function SidebarNav({
   return (
     <nav className="sidebar-nav">
       <RadixAccordion.Root className="sidebar-nav__accordion" {...accordionProps}>
-        {groups.map((group) => (
-          <RadixAccordion.Item key={group.id} value={group.id} className="sidebar-nav__group">
-            <RadixAccordion.Header className="sidebar-nav__group-header">
-              {group.href
-                ? renderLink({ href: group.href, className: 'sidebar-nav__group-label', children: group.label })
-                : <span className="sidebar-nav__group-label">{group.label}</span>
-              }
-              <RadixAccordion.Trigger className="sidebar-nav__group-chevron">
-                <Chevron className="sidebar-nav__group-chevron-icon" size="sm" />
-              </RadixAccordion.Trigger>
-            </RadixAccordion.Header>
-            <RadixAccordion.Content className="sidebar-nav__group-content">
-              <div className="sidebar-nav__group-content-inner">
-                <ul className="sidebar-nav__items" role="list">
-                  {group.items.map((item) => {
-                    const cls = [
-                      'sidebar-nav__item',
-                      item.active ? 'sidebar-nav__item--active' : '',
-                    ].filter(Boolean).join(' ');
+        {entries.map((entry) => {
+          if (entry.kind === 'link') {
+            const cls = [
+              'sidebar-nav__top-link',
+              entry.active ? 'sidebar-nav__top-link--active' : '',
+            ].filter(Boolean).join(' ');
 
-                    return (
-                      <li key={item.id}>
-                        {renderLink({
-                          href: item.href,
-                          className: cls,
-                          'aria-current': item.active ? 'page' : undefined,
-                          children: (
-                            <>
-                              {item.icon && (
-                                <span className="sidebar-nav__item-icon" aria-hidden="true">
-                                  {item.icon}
-                                </span>
-                              )}
-                              <span>{item.label}</span>
-                            </>
-                          ),
-                        })}
-                      </li>
-                    );
-                  })}
-                </ul>
+            return (
+              <div key={entry.id}>
+                {renderLink({
+                  href: entry.href,
+                  className: cls,
+                  'aria-current': entry.active ? 'page' : undefined,
+                  children: (
+                    <>
+                      {entry.icon && (
+                        <span className="sidebar-nav__item-icon" aria-hidden="true">
+                          {entry.icon}
+                        </span>
+                      )}
+                      <span>{entry.label}</span>
+                    </>
+                  ),
+                })}
               </div>
-            </RadixAccordion.Content>
-          </RadixAccordion.Item>
-        ))}
+            );
+          }
+
+          return (
+            <RadixAccordion.Item key={entry.id} value={entry.id} className="sidebar-nav__group">
+              <RadixAccordion.Header className="sidebar-nav__group-header">
+                {entry.href
+                  ? renderLink({ href: entry.href, className: 'sidebar-nav__group-label', children: entry.label })
+                  : <span className="sidebar-nav__group-label">{entry.label}</span>
+                }
+                <RadixAccordion.Trigger className="sidebar-nav__group-chevron">
+                  <Chevron className="sidebar-nav__group-chevron-icon" size="sm" />
+                </RadixAccordion.Trigger>
+              </RadixAccordion.Header>
+              <RadixAccordion.Content className="sidebar-nav__group-content">
+                <div className="sidebar-nav__group-content-inner">
+                  <ul className="sidebar-nav__items" role="list">
+                    {entry.items.map((item) => {
+                      const cls = [
+                        'sidebar-nav__item',
+                        item.active ? 'sidebar-nav__item--active' : '',
+                      ].filter(Boolean).join(' ');
+
+                      return (
+                        <li key={item.id}>
+                          {renderLink({
+                            href: item.href,
+                            className: cls,
+                            'aria-current': item.active ? 'page' : undefined,
+                            children: (
+                              <>
+                                {item.icon && (
+                                  <span className="sidebar-nav__item-icon" aria-hidden="true">
+                                    {item.icon}
+                                  </span>
+                                )}
+                                <span>{item.label}</span>
+                              </>
+                            ),
+                          })}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </RadixAccordion.Content>
+            </RadixAccordion.Item>
+          );
+        })}
       </RadixAccordion.Root>
     </nav>
   );

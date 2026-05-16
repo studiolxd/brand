@@ -17,8 +17,9 @@ const meta: Meta<typeof AppShell> = {
 export default meta;
 type Story = StoryObj<typeof AppShell>;
 
-const sidebarNavGroups = [
+const sidebarNavEntries = [
   {
+    kind: 'group' as const,
     id: 'general',
     label: 'General',
     href: '#general',
@@ -29,6 +30,7 @@ const sidebarNavGroups = [
     ],
   },
   {
+    kind: 'group' as const,
     id: 'workspace',
     label: 'Espacio de trabajo',
     items: [
@@ -38,6 +40,7 @@ const sidebarNavGroups = [
     ],
   },
   {
+    kind: 'group' as const,
     id: 'settings',
     label: 'Configuración',
     items: [
@@ -63,7 +66,7 @@ const SampleSidebarContent = () => (
   <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '1rem' }}>
     <OrgSwitcher current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />
     <div style={{ flex: 1, overflow: 'auto' }}>
-      <SidebarNav groups={sidebarNavGroups} defaultValue={['general', 'workspace']} />
+      <SidebarNav entries={sidebarNavEntries} defaultValue={['general', 'workspace']} />
     </div>
     <UserMenu
       name="Ana García"

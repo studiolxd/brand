@@ -12,8 +12,9 @@ const meta: Meta<typeof SidebarNav> = {
 export default meta;
 type Story = StoryObj<typeof SidebarNav>;
 
-const groups = [
+const entries = [
   {
+    kind: 'group' as const,
     id: 'general',
     label: 'General',
     href: '#general',
@@ -24,6 +25,7 @@ const groups = [
     ],
   },
   {
+    kind: 'group' as const,
     id: 'workspace',
     label: 'Espacio de trabajo',
     items: [
@@ -33,6 +35,7 @@ const groups = [
     ],
   },
   {
+    kind: 'group' as const,
     id: 'settings',
     label: 'Configuración',
     items: [
@@ -45,21 +48,32 @@ const groups = [
 
 export const Default: Story = {
   args: {
-    groups,
+    entries,
     defaultValue: ['general', 'workspace'],
   },
 };
 
 export const TodosCerrados: Story = {
   args: {
-    groups,
+    entries,
     defaultValue: [],
   },
 };
 
 export const TodosAbiertos: Story = {
   args: {
-    groups,
+    entries,
     defaultValue: ['general', 'workspace', 'settings'],
+  },
+};
+
+export const ConEnlaceDirecto: Story = {
+  args: {
+    entries: [
+      { kind: 'link', id: 'home', label: 'Inicio', href: '#home', active: true },
+      ...entries,
+      { kind: 'link', id: 'help', label: 'Ayuda', href: '#help' },
+    ],
+    defaultValue: ['general'],
   },
 };
