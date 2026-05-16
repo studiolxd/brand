@@ -1,0 +1,36 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --table-bg: rgba(0, 0, 0, 0); /** Fondo de la tabla */
+  --table-sort-icon-inactive-opacity: 0.35; /** Opacidad del icono de sort cuando sortable pero sin sort activo */
+  --table-font-family: var(--font-family-sans); /** Font family */
+  --table-font-size: var(--font-size-1); /** 14px — UI label size */
+  --table-line-height: var(--line-height-normal); /** Normal line height para celdas multilínea */
+  --table-border-width: var(--border-width-sm); /** Grosor de separadores de fila */
+  --table-border-color: var(--color-grey-light); /** Color de separadores de fila */
+  --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
+  --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */
+  --table-header-font-weight: var(--font-weight-semibold); /** Peso tipográfico del encabezado */
+  --table-header-border-width: var(--border-width-md); /** Borde inferior del thead — más grueso que los separadores */
+  --table-header-hover-bg: var(--color-grey-lightest); /** Fondo en hover de columna sortable */
+  --table-sort-icon-color: var(--color-grey-dark); /** Color del icono de sort inactivo */
+  --table-cell-padding-block: var(--spacing-3); /** Padding block de celda */
+  --table-cell-padding-inline: var(--spacing-3); /** Padding inline de celda */
+  --table-row-border-color: var(--color-grey-light); /** Color del separador entre filas */
+  --table-row-hover-bg: var(--color-grey-lightest); /** Fondo de fila interactiva en hover */
+  --table-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --table-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
+  --table-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de hover */
+  --table-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
+  --table-sm-header-padding-block: var(--spacing-2); /** Padding block del encabezado — variante sm */
+  --table-sm-header-padding-inline: var(--spacing-2); /** Padding inline del encabezado — variante sm */
+  --table-sm-cell-padding-block: var(--spacing-2); /** Padding block de celda — variante sm */
+  --table-sm-cell-padding-inline: var(--spacing-2); /** Padding inline de celda — variante sm */
+  --table-font-weight: var(--font-weight-default); /** Font weight base */
+  --table-color: var(--color-text-on-light); /** Color de texto base */
+  --table-header-border-color: var(--color-text-on-light); /** Color del borde inferior del thead */
+  --table-sort-icon-active-color: var(--color-primary); /** Color del icono de sort activo */
+  --table-focus-ring-color: var(--color-primary); /** Color del focus ring */
+}

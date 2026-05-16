@@ -1,0 +1,135 @@
+@import '../../../tokens/molecules/table.css';
+
+.table__wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--table-font-family);
+  font-size: var(--table-font-size);
+  font-weight: var(--table-font-weight);
+  line-height: var(--table-line-height);
+  color: var(--table-color);
+  background: var(--table-bg);
+}
+
+/* Caption — visually hidden pero accesible para lectores de pantalla */
+.table caption.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+
+.table__header {
+  padding-block: var(--table-header-padding-block);
+  padding-inline: var(--table-header-padding-inline);
+  font-weight: var(--table-header-font-weight);
+  text-align: left;
+  border-bottom-width: var(--table-header-border-width);
+  border-bottom-style: solid;
+  border-bottom-color: var(--table-header-border-color);
+  white-space: nowrap;
+}
+
+.table__header-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* Sortable headers */
+.table__header.table__header--sortable {
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing);
+}
+
+.table__header.table__header--sortable:hover {
+  background-color: var(--table-header-hover-bg);
+}
+
+.table__header.table__header--sortable:focus-visible {
+  outline: var(--table-focus-ring-width) solid var(--table-focus-ring-color);
+  outline-offset: calc(var(--table-focus-ring-offset) * -1);
+}
+
+/* ── Sort icon ───────────────────────────────────────── */
+
+.table__sort-icon {
+  color: var(--table-sort-icon-color);
+  opacity: var(--table-sort-icon-inactive-opacity);
+  transform: rotate(90deg); /* Chevron apunta ↓ en estado neutro */
+  transition:
+    transform calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing),
+    opacity calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing),
+    color calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing);
+  flex-shrink: 0;
+}
+
+.table__header--sorted-asc .table__sort-icon {
+  color: var(--table-sort-icon-active-color);
+  opacity: 1;
+  transform: rotate(-90deg); /* Chevron apunta ↑ */
+}
+
+.table__header--sorted-desc .table__sort-icon {
+  color: var(--table-sort-icon-active-color);
+  opacity: 1;
+  transform: rotate(90deg); /* Chevron apunta ↓ */
+}
+
+/* ── Rows ────────────────────────────────────────────── */
+
+.table__row {
+  border-bottom-width: var(--table-border-width);
+  border-bottom-style: solid;
+  border-bottom-color: var(--table-row-border-color);
+  transition: background-color calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing);
+}
+
+.table tbody .table__row:last-child {
+  border-bottom: none;
+}
+
+.table__row.table__row--interactive {
+  cursor: pointer;
+}
+
+.table__row.table__row--interactive:hover {
+  background-color: var(--table-row-hover-bg);
+}
+
+.table__row.table__row--interactive:focus-visible {
+  outline: var(--table-focus-ring-width) solid var(--table-focus-ring-color);
+  outline-offset: calc(var(--table-focus-ring-offset) * -1);
+}
+
+/* ── Cells ───────────────────────────────────────────── */
+
+.table__cell {
+  padding-block: var(--table-cell-padding-block);
+  padding-inline: var(--table-cell-padding-inline);
+}
+
+/* ── Size: sm ────────────────────────────────────────── */
+
+.table.table--sm .table__header {
+  padding-block: var(--table-sm-header-padding-block);
+  padding-inline: var(--table-sm-header-padding-inline);
+}
+
+.table.table--sm .table__cell {
+  padding-block: var(--table-sm-cell-padding-block);
+  padding-inline: var(--table-sm-cell-padding-inline);
+}

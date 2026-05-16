@@ -1,0 +1,33 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$table-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$table-font-size: 0.875rem; // 14px — UI label size
+$table-font-weight: 300; // Font weight base
+$table-line-height: 1.5; // Normal line height para celdas multilínea
+$table-color: #111e30; // Color de texto base
+$table-bg: rgba(0, 0, 0, 0); // Fondo de la tabla
+$table-border-width: 1px; // Grosor de separadores de fila
+$table-border-color: #d0d0d0; // Color de separadores de fila
+$table-header-padding-block: 0.75rem; // Padding block del encabezado
+$table-header-padding-inline: 0.75rem; // Padding inline del encabezado
+$table-header-font-weight: 600; // Peso tipográfico del encabezado
+$table-header-border-width: 2px; // Borde inferior del thead — más grueso que los separadores
+$table-header-border-color: #111e30; // Color del borde inferior del thead
+$table-header-hover-bg: #f2f2f2; // Fondo en hover de columna sortable
+$table-sort-icon-color: #767676; // Color del icono de sort inactivo
+$table-sort-icon-active-color: #111e30; // Color del icono de sort activo
+$table-sort-icon-inactive-opacity: 0.35; // Opacidad del icono de sort cuando sortable pero sin sort activo
+$table-cell-padding-block: 0.75rem; // Padding block de celda
+$table-cell-padding-inline: 0.75rem; // Padding inline de celda
+$table-row-border-color: #d0d0d0; // Color del separador entre filas
+$table-row-hover-bg: #f2f2f2; // Fondo de fila interactiva en hover
+$table-focus-ring-color: #111e30; // Color del focus ring
+$table-focus-ring-width: 2px; // Grosor del focus ring
+$table-focus-ring-offset: 1px; // Separación del focus ring
+$table-transition-duration: 150ms; // Duración de transiciones de hover
+$table-transition-easing: ease; // Easing de transiciones
+$table-sm-header-padding-block: 0.5rem; // Padding block del encabezado — variante sm
+$table-sm-header-padding-inline: 0.5rem; // Padding inline del encabezado — variante sm
+$table-sm-cell-padding-block: 0.5rem; // Padding block de celda — variante sm
+$table-sm-cell-padding-inline: 0.5rem; // Padding inline de celda — variante sm

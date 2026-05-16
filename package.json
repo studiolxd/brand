@@ -31,6 +31,10 @@
       "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",
       "import": "./dist/pagination.js"
     },
+    "./table": {
+      "types": "./dist/_types/molecules/Table/Table.d.ts",
+      "import": "./dist/table.js"
+    },
     "./context-menu": {
       "types": "./dist/_types/molecules/ContextMenu/ContextMenu.d.ts",
       "import": "./dist/context-menu.js"

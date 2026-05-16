@@ -53,6 +53,8 @@ const filters = {
   'context-menu':       (t) => t.path[0] === 'context-menu',
   popover:              (t) => t.path[0] === 'popover',
   pagination:           (t) => t.path[0] === 'pagination',
+  sidebar:              (t) => t.path[0] === 'sidebar',
+  table:                (t) => t.path[0] === 'table',
 };
 
 function cssFile(destination, filterKey) {
@@ -119,6 +121,8 @@ const sd = new StyleDictionary({
         cssFile('molecules/context-menu.css',         'context-menu'),
         cssFile('components/popover.css',             'popover'),
         cssFile('molecules/pagination.css',           'pagination'),
+        cssFile('components/sidebar.css',             'sidebar'),
+        cssFile('molecules/table.css',                'table'),
       ],
     },
     scss: {
@@ -173,6 +177,8 @@ const sd = new StyleDictionary({
         scssFile('molecules/_context-menu.scss',         'context-menu'),
         scssFile('components/_popover.scss',             'popover'),
         scssFile('molecules/_pagination.scss',           'pagination'),
+        scssFile('components/_sidebar.scss',             'sidebar'),
+        scssFile('molecules/_table.scss',                'table'),
       ],
     },
   },
