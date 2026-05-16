@@ -74,6 +74,19 @@ export const WithRadios: Story = {
   ),
 };
 
+export const Disabled: Story = {
+  args: {
+    legend: 'Información personal',
+    disabled: true,
+  },
+  render: (args) => (
+    <Fieldset {...args}>
+      <InputField id="nombre-disabled" label="Nombre" name="nombre" />
+      <InputField id="apellidos-disabled" label="Apellidos" name="apellidos" />
+    </Fieldset>
+  ),
+};
+
 export const AllLevels: Story = {
   render: () => (
     <>

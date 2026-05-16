@@ -16,6 +16,8 @@ export interface FieldsetProps {
   className?: string;
   /** Identificador HTML del fieldset. */
   id?: string;
+  /** Deshabilita todos los controles descendientes en un solo punto. */
+  disabled?: boolean;
   children: React.ReactNode;
 }
 
@@ -26,6 +28,7 @@ export function Fieldset({
   size,
   className,
   id,
+  disabled,
   children,
 }: FieldsetProps) {
   const legendClasses = [
@@ -39,6 +42,7 @@ export function Fieldset({
     <fieldset
       className={['fieldset', className].filter(Boolean).join(' ')}
       id={id}
+      disabled={disabled}
     >
       <legend className={legendClasses}>{legend}</legend>
       {children}
