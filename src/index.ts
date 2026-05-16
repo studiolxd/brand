@@ -54,6 +54,8 @@ export type { PaginationProps } from './stories/molecules/Pagination/Pagination'
 export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export type { OrgSwitcherProps, OrgOption } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
+export { SelectField } from './stories/molecules/SelectField/SelectField';
+export type { SelectFieldProps } from './stories/molecules/SelectField/SelectField';
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';
 export type { SidebarNavProps, SidebarNavEntry, SidebarNavLinkEntry, SidebarNavGroupEntry, SidebarNavItem, SidebarNavRenderLinkProps } from './stories/molecules/SidebarNav/SidebarNav';
 export { Table } from './stories/molecules/Table/Table';

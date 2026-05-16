@@ -40,6 +40,7 @@ export const entryPoints = {
   'radio-field':         'src/stories/molecules/RadioField/RadioField.tsx',
   'form':                'src/stories/molecules/Form/Form.tsx',
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
+  'select-field':        'src/stories/molecules/SelectField/SelectField.tsx',
   'input-phone-field':   'src/stories/molecules/InputPhoneField/InputPhoneField.tsx',
   'textarea-field':      'src/stories/molecules/TextareaField/TextareaField.tsx',
   'org-switcher':        'src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx',
@@ -59,7 +60,7 @@ export const entryPoints = {
 export const clientComponents = new Set([
   'accordion', 'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'select', 'textarea', 'checkbox-field', 'radio-field', 'form',
-  'input-field', 'input-phone-field', 'textarea-field', 'project-carousel', 'project-grid',
+  'input-field', 'select-field', 'input-phone-field', 'textarea-field', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'sidebar',
   'app-shell',

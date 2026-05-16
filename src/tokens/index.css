@@ -27,6 +27,7 @@
 @import "./components/header.css";
 @import "./molecules/input-field.css";
 @import "./molecules/textarea-field.css";
+@import "./molecules/select-field.css";
 @import "./molecules/checkbox-field.css";
 @import "./molecules/radio-field.css";
 @import "./components/select.css";

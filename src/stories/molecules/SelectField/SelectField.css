@@ -1,0 +1,25 @@
+.select-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--select-field-gap);
+}
+
+.select-field--error .select {
+  --select-border-color: var(--color-error-on-light);
+}
+
+.select-field__error {
+  font-family: var(--select-field-error-font-family);
+  font-size: var(--select-field-error-font-size);
+  font-weight: var(--select-field-error-font-weight);
+  line-height: var(--select-field-error-line-height);
+  color: var(--select-field-error-color);
+}
+
+.select-field__helper {
+  font-family: var(--select-field-helper-font-family);
+  font-size: var(--select-field-helper-font-size);
+  font-weight: var(--select-field-helper-font-weight);
+  line-height: var(--select-field-helper-line-height);
+  color: var(--select-field-helper-color);
+}

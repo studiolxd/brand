@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -182,6 +182,10 @@
     "./input-field": {
       "types": "./dist/_types/molecules/InputField/InputField.d.ts",
       "import": "./dist/input-field.js"
+    },
+    "./select-field": {
+      "types": "./dist/_types/molecules/SelectField/SelectField.d.ts",
+      "import": "./dist/select-field.js"
     },
     "./input-phone-field": {
       "types": "./dist/_types/molecules/InputPhoneField/InputPhoneField.d.ts",
