@@ -1,5 +1,6 @@
+import * as RadixAccordion from '@radix-ui/react-accordion';
 import type { ReactNode } from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../atoms/Accordion/Accordion';
+import { Chevron } from '../../atoms/Chevron/Chevron';
 import './SidebarNav.css';
 
 export interface SidebarNavItem {
@@ -13,6 +14,8 @@ export interface SidebarNavItem {
 export interface SidebarNavGroup {
   id: string;
   label: string;
+  /** Cuando se especifica, el label de la categoría se renderiza como enlace. */
+  href?: string;
   items: SidebarNavItem[];
 }
 
@@ -52,45 +55,53 @@ export function SidebarNav({
 
   return (
     <nav className="sidebar-nav">
-      <Accordion className="sidebar-nav__accordion" {...accordionProps}>
+      <RadixAccordion.Root className="sidebar-nav__accordion" {...accordionProps}>
         {groups.map((group) => (
-          <AccordionItem key={group.id} value={group.id} className="sidebar-nav__group">
-            <AccordionTrigger className="sidebar-nav__group-trigger" chevronSize="sm">
-              <span className="sidebar-nav__group-label">{group.label}</span>
-            </AccordionTrigger>
-            <AccordionContent className="sidebar-nav__group-content">
-              <ul className="sidebar-nav__items" role="list">
-                {group.items.map((item) => {
-                  const cls = [
-                    'sidebar-nav__item',
-                    item.active ? 'sidebar-nav__item--active' : '',
-                  ].filter(Boolean).join(' ');
+          <RadixAccordion.Item key={group.id} value={group.id} className="sidebar-nav__group">
+            <RadixAccordion.Header className="sidebar-nav__group-header">
+              {group.href
+                ? renderLink({ href: group.href, className: 'sidebar-nav__group-label', children: group.label })
+                : <span className="sidebar-nav__group-label">{group.label}</span>
+              }
+              <RadixAccordion.Trigger className="sidebar-nav__group-chevron">
+                <Chevron className="sidebar-nav__group-chevron-icon" size="sm" />
+              </RadixAccordion.Trigger>
+            </RadixAccordion.Header>
+            <RadixAccordion.Content className="sidebar-nav__group-content">
+              <div className="sidebar-nav__group-content-inner">
+                <ul className="sidebar-nav__items" role="list">
+                  {group.items.map((item) => {
+                    const cls = [
+                      'sidebar-nav__item',
+                      item.active ? 'sidebar-nav__item--active' : '',
+                    ].filter(Boolean).join(' ');
 
-                  return (
-                    <li key={item.id}>
-                      {renderLink({
-                        href: item.href,
-                        className: cls,
-                        'aria-current': item.active ? 'page' : undefined,
-                        children: (
-                          <>
-                            {item.icon && (
-                              <span className="sidebar-nav__item-icon" aria-hidden="true">
-                                {item.icon}
-                              </span>
-                            )}
-                            <span>{item.label}</span>
-                          </>
-                        ),
-                      })}
-                    </li>
-                  );
-                })}
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
+                    return (
+                      <li key={item.id}>
+                        {renderLink({
+                          href: item.href,
+                          className: cls,
+                          'aria-current': item.active ? 'page' : undefined,
+                          children: (
+                            <>
+                              {item.icon && (
+                                <span className="sidebar-nav__item-icon" aria-hidden="true">
+                                  {item.icon}
+                                </span>
+                              )}
+                              <span>{item.label}</span>
+                            </>
+                          ),
+                        })}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </RadixAccordion.Content>
+          </RadixAccordion.Item>
         ))}
-      </Accordion>
+      </RadixAccordion.Root>
     </nav>
   );
 }

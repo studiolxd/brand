@@ -3,13 +3,12 @@
  */
 
 :root {
-  --sidebar-nav-item-active-indicator-width: 2px; /** Ancho del indicador activo (borde izquierdo) */
   --sidebar-nav-item-icon-size: 1rem; /** Tamaño del icono opcional de ítem */
   --sidebar-nav-gap: var(--spacing-1); /** Gap entre grupos */
   --sidebar-nav-group-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger de grupo */
   --sidebar-nav-group-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger de grupo */
   --sidebar-nav-group-trigger-gap: var(--spacing-2); /** Gap entre texto y chevron del grupo */
-  --sidebar-nav-group-label-font-size: var(--font-size-1); /** Tamaño de texto de etiqueta de grupo */
+  --sidebar-nav-group-label-font-size: var(--font-size-3); /** Tamaño de texto de etiqueta de grupo */
   --sidebar-nav-group-label-font-weight: var(--font-weight-semibold); /** Peso del texto de etiqueta de grupo */
   --sidebar-nav-group-label-letter-spacing: var(--letter-spacing-wide); /** Espaciado de letras de la etiqueta */
   --sidebar-nav-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
@@ -18,16 +17,15 @@
   --sidebar-nav-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
   --sidebar-nav-item-line-height: var(--line-height-snug); /** Interlineado de ítems */
   --sidebar-nav-item-hover-bg: var(--color-grey-lightest); /** Fondo de ítem al hover */
-  --sidebar-nav-item-active-bg: var(--color-grey-lightest); /** Fondo de ítem activo */
   --sidebar-nav-item-active-font-weight: var(--font-weight-medium); /** Peso de ítem activo */
   --sidebar-nav-item-gap: var(--spacing-1); /** Gap entre ítems dentro de un grupo */
   --sidebar-nav-item-icon-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --sidebar-nav-transition-duration: var(--motion-duration-fast); /** Duración de transición de ítems */
   --sidebar-nav-transition-easing: var(--motion-easing-in-out); /** Easing de transición de ítems */
-  --sidebar-nav-group-label-color: var(--color-text-muted-on-light); /** Color de la etiqueta de grupo */
+  --sidebar-nav-group-transition-duration: var(--motion-duration-fast); /** Duración de la animación de apertura/cierre de grupo */
+  --sidebar-nav-group-transition-easing: var(--motion-easing-in-out); /** Easing de la animación de apertura/cierre de grupo */
+  --sidebar-nav-group-label-color: var(--color-primary); /** Color de la etiqueta de grupo */
   --sidebar-nav-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --sidebar-nav-item-color: var(--color-text-on-light); /** Color de ítems */
   --sidebar-nav-item-hover-color: var(--color-text-on-light); /** Color de ítem al hover */
-  --sidebar-nav-item-active-color: var(--color-primary); /** Color de ítem activo */
-  --sidebar-nav-item-active-indicator-color: var(--color-primary); /** Color del indicador activo */
 }

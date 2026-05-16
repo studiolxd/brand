@@ -109,8 +109,6 @@
 
 .org-switcher__item--active,
 .org-switcher__item--active[data-highlighted] {
-  background-color: var(--org-switcher-item-active-bg);
-  color: var(--org-switcher-item-active-color);
   font-weight: var(--org-switcher-name-font-weight);
 }
 

@@ -9,28 +9,87 @@
   gap: var(--sidebar-nav-gap);
 }
 
-/* ─── Grupo (AccordionItem) ──────────────────────────────── */
-.sidebar-nav__group {
-  border-block-start: none;
-}
+/* ─── Grupo ──────────────────────────────────────────────── */
+.sidebar-nav__group {}
 
-/* ─── Trigger de grupo ───────────────────────────────────── */
-.sidebar-nav__group-trigger {
+/* ─── Cabecera de grupo ──────────────────────────────────── */
+.sidebar-nav__group-header {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin-block: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sidebar-nav-group-trigger-gap);
   padding-block: var(--sidebar-nav-group-trigger-padding-block);
   padding-inline: var(--sidebar-nav-group-trigger-padding-inline);
-  gap: var(--sidebar-nav-group-trigger-gap);
 }
 
 .sidebar-nav__group-label {
+  flex: 1;
+  min-width: 0;
   font-size: var(--sidebar-nav-group-label-font-size);
   font-weight: var(--sidebar-nav-group-label-font-weight);
   color: var(--sidebar-nav-group-label-color);
   letter-spacing: var(--sidebar-nav-group-label-letter-spacing);
-  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* ─── Botón chevron (solo toggle) ────────────────────────── */
+.sidebar-nav__group-chevron {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.sidebar-nav__group-chevron:focus-visible {
+  outline: 2px solid var(--sidebar-nav-item-active-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── Icono chevron ──────────────────────────────────────── */
+.sidebar-nav__group-chevron-icon {
+  flex-shrink: 0;
+  transform: rotate(90deg);
+  transition: transform var(--sidebar-nav-group-transition-duration) var(--sidebar-nav-group-transition-easing);
+}
+
+.sidebar-nav__group-chevron[data-state="open"] .sidebar-nav__group-chevron-icon {
+  transform: rotate(-90deg);
 }
 
 /* ─── Contenido del grupo ────────────────────────────────── */
-.sidebar-nav__group-content > .accordion__content-inner {
+.sidebar-nav__group-content {
+  overflow: hidden;
+}
+
+.sidebar-nav__group-content[data-state="open"] {
+  animation: sidebar-nav-group-open var(--sidebar-nav-group-transition-duration) var(--sidebar-nav-group-transition-easing);
+}
+
+.sidebar-nav__group-content[data-state="closed"] {
+  animation: sidebar-nav-group-close var(--sidebar-nav-group-transition-duration) var(--sidebar-nav-group-transition-easing);
+}
+
+@keyframes sidebar-nav-group-open {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes sidebar-nav-group-close {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+
+.sidebar-nav__group-content-inner {
   padding-block-end: 0;
   padding-inline: 0;
 }
@@ -75,11 +134,7 @@
 
 /* ─── Ítem activo ────────────────────────────────────────── */
 .sidebar-nav__item.sidebar-nav__item--active {
-  background-color: var(--sidebar-nav-item-active-bg);
-  color: var(--sidebar-nav-item-active-color);
   font-weight: var(--sidebar-nav-item-active-font-weight);
-  border-inline-start: var(--sidebar-nav-item-active-indicator-width) solid var(--sidebar-nav-item-active-indicator-color);
-  padding-inline-start: calc(var(--sidebar-nav-item-padding-inline) - var(--sidebar-nav-item-active-indicator-width));
 }
 
 /* ─── Icono ──────────────────────────────────────────────── */

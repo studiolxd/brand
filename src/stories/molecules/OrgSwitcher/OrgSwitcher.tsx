@@ -44,21 +44,16 @@ export function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen }
             <span>{current.name}</span>
           </DropdownMenu.CheckboxItem>
 
-          {others.length > 0 && (
-            <>
-              <DropdownMenu.Separator className="org-switcher__separator" />
-              {others.map((org) => (
-                <DropdownMenu.Item
-                  key={org.id}
-                  className="org-switcher__item"
-                  onSelect={() => onOrgChange(org.id)}
-                >
-                  <Avatar src={org.logoUrl} name={org.name} alt="" size="sm" shape="square" />
-                  <span>{org.name}</span>
-                </DropdownMenu.Item>
-              ))}
-            </>
-          )}
+          {others.map((org) => (
+            <DropdownMenu.Item
+              key={org.id}
+              className="org-switcher__item"
+              onSelect={() => onOrgChange(org.id)}
+            >
+              <Avatar src={org.logoUrl} name={org.name} alt="" size="sm" shape="square" />
+              <span>{org.name}</span>
+            </DropdownMenu.Item>
+          ))}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

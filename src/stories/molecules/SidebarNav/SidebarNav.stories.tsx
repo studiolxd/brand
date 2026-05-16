@@ -16,6 +16,7 @@ const groups = [
   {
     id: 'general',
     label: 'General',
+    href: '#general',
     items: [
       { id: 'dashboard', label: 'Dashboard', href: '#dashboard', active: true },
       { id: 'activity', label: 'Actividad', href: '#activity' },
