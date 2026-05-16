@@ -99,17 +99,14 @@ function a({ total: a, page: o, pageSize: s, onPageChange: c, hrefBuilder: l, li
 				className: "pagination__summary",
 				children: [a, " resultados"]
 			}),
-			d && /* @__PURE__ */ n("div", {
+			d && /* @__PURE__ */ t("div", {
 				className: "pagination__size-selector",
-				children: [/* @__PURE__ */ t("span", {
-					className: "pagination__size-label",
-					children: "Registros por página"
-				}), /* @__PURE__ */ t(e, {
+				children: /* @__PURE__ */ t(e, {
 					options: f,
 					value: s === "all" ? "all" : String(s),
 					onValueChange: d,
 					"aria-label": "Registros por página"
-				})]
+				})
 			}),
 			_ > 1 && /* @__PURE__ */ n("div", {
 				className: "pagination__controls",
