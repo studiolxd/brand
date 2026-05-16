@@ -24,12 +24,12 @@
     "neutral-bg":    { "$value": "{color.grey-lightest}",        "$type": "color", "$description": "Neutral semantic — background" },
     "neutral-color": { "$value": "{color.grey-darkest}",         "$type": "color", "$description": "Neutral semantic — muted text" },
     "info-bg":       { "$value": "{color.blue-bg}",              "$type": "color", "$description": "Info semantic — background tint" },
-    "info-color":    { "$value": "{color.info-on-light}",        "$type": "color", "$description": "Info semantic — text" },
+    "info-color":    { "$value": "{color.blue}",                 "$type": "color", "$description": "Info semantic — text (AAA on blue-bg)" },
     "warning-bg":    { "$value": "{color.amber-bg}",             "$type": "color", "$description": "Warning semantic — background tint" },
     "warning-color": { "$value": "{color.warning-on-light}",     "$type": "color", "$description": "Warning semantic — text" },
     "success-bg":    { "$value": "{color.green-bg}",             "$type": "color", "$description": "Success semantic — background tint" },
-    "success-color": { "$value": "{color.success-on-light}",     "$type": "color", "$description": "Success semantic — text" },
+    "success-color": { "$value": "{color.green-dark}",           "$type": "color", "$description": "Success semantic — text (AAA on green-bg)" },
     "danger-bg":     { "$value": "{color.red-bg}",               "$type": "color", "$description": "Danger semantic — background tint" },
-    "danger-color":  { "$value": "{color.destructive-on-light}", "$type": "color", "$description": "Danger semantic — text" }
+    "danger-color":  { "$value": "{color.destructive-on-light}",  "$type": "color", "$description": "Danger semantic — text (AAA 7.10:1 on white bg)" }
   }
 }

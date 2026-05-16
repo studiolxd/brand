@@ -14,18 +14,19 @@
   --color-yellow: #ffcd00; /** Brand yellow */
   --color-emerald: #20e38e; /** Brand emerald */
   --color-cayenne: #f05e1c; /** Brand cayenne */
-  --color-red-on-light: #b30000; /** System red — error states on light background */
+  --color-red-on-light: #b30000; /** System red — error states on light background (AAA on white) */
   --color-red-on-dark: #ff8585; /** System red — error states on dark background */
-  --color-green-on-light: #006616; /** System green — success states on light background */
+  --color-green-on-light: #006616; /** System green — success states on light background (AAA on white) */
   --color-green-on-dark: #00cc2c; /** System green — success states on dark background */
-  --color-blue: #1558b0; /** System blue — info states on light background */
+  --color-blue: #0f4b9b; /** System blue — info states on light background (AAA on white and tinted bg) */
   --color-blue-on-dark: #82b4ff; /** System blue — info states on dark background */
-  --color-amber: #7a4500; /** System amber — warning states on light background */
+  --color-amber: #7a4500; /** System amber — warning states on light background (AAA on tinted bg) */
   --color-amber-on-dark: #ffd280; /** System amber — warning states on dark background */
+  --color-green-dark: #005a14; /** System green dark — success text on tinted backgrounds (AAA on green-bg) */
   --color-blue-bg: #e8f0fe; /** Info state background tint */
   --color-amber-bg: #fff8e1; /** Warning state background tint */
   --color-green-bg: #e6f4ea; /** Success state background tint */
-  --color-red-bg: #fce8e8; /** Danger state background tint */
+  --color-red-bg: #ffffff; /** Danger state background — white so destructive-on-light achieves AAA (7.10:1) */
   --color-primary: var(--color-prussian); /** Primary brand color — used ~50% of the time */
   --color-accent-1: var(--color-lavender); /** Accent 1 brand color — used ~20% of the time */
   --color-accent-2: var(--color-yellow); /** Accent 2 brand color — used ~20% of the time */

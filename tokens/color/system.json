@@ -1,16 +1,17 @@
 {
   "color": {
-    "red-on-light":   { "$value": "#B30000", "$type": "color", "$description": "System red — error states on light background" },
+    "red-on-light":   { "$value": "#B30000", "$type": "color", "$description": "System red — error states on light background (AAA on white)" },
     "red-on-dark":    { "$value": "#FF8585", "$type": "color", "$description": "System red — error states on dark background" },
-    "green-on-light": { "$value": "#006616", "$type": "color", "$description": "System green — success states on light background" },
+    "green-on-light": { "$value": "#006616", "$type": "color", "$description": "System green — success states on light background (AAA on white)" },
     "green-on-dark":  { "$value": "#00CC2C", "$type": "color", "$description": "System green — success states on dark background" },
-    "blue":           { "$value": "#1558B0", "$type": "color", "$description": "System blue — info states on light background" },
+    "blue":           { "$value": "#0F4B9B", "$type": "color", "$description": "System blue — info states on light background (AAA on white and tinted bg)" },
     "blue-on-dark":   { "$value": "#82B4FF", "$type": "color", "$description": "System blue — info states on dark background" },
-    "amber":          { "$value": "#7A4500", "$type": "color", "$description": "System amber — warning states on light background" },
+    "amber":          { "$value": "#7A4500", "$type": "color", "$description": "System amber — warning states on light background (AAA on tinted bg)" },
     "amber-on-dark":  { "$value": "#FFD280", "$type": "color", "$description": "System amber — warning states on dark background" },
+    "green-dark":     { "$value": "#005A14", "$type": "color", "$description": "System green dark — success text on tinted backgrounds (AAA on green-bg)" },
     "blue-bg":        { "$value": "#E8F0FE", "$type": "color", "$description": "Info state background tint" },
     "amber-bg":       { "$value": "#FFF8E1", "$type": "color", "$description": "Warning state background tint" },
     "green-bg":       { "$value": "#E6F4EA", "$type": "color", "$description": "Success state background tint" },
-    "red-bg":         { "$value": "#FCE8E8", "$type": "color", "$description": "Danger state background tint" }
+    "red-bg":         { "$value": "#FFFFFF", "$type": "color", "$description": "Danger state background — white so destructive-on-light achieves AAA (7.10:1)" }
   }
 }

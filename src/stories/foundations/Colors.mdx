@@ -1,7 +1,7 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
 import { ContrastMatrix } from "./ContrastMatrix";
 import { TokenTable } from "./TokenTable";
-import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor } from "../../tokens/colors";
+import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor } from "../../tokens/colors";
 
 <Meta title="Foundations/Colores" />
 
@@ -360,11 +360,11 @@ Comprobación de contraste para cada combinación texto/fondo de las variantes s
 
 ### Success
 
-<ContrastMatrix foregroundLabel="Success" foreground={successColor} colors={[successBgColor]} />
+<ContrastMatrix foregroundLabel="Success" foreground={successTagColor} colors={[successBgColor]} />
 
 ### Danger
 
-<ContrastMatrix foregroundLabel="Danger" foreground={errorColor} colors={[dangerBgColor]} />
+<ContrastMatrix foregroundLabel="Danger" foreground={dangerTagColor} colors={[dangerBgColor]} />
 
 ### Neutral
 

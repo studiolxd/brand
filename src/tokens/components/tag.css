@@ -14,8 +14,10 @@
   --tag-neutral-bg: var(--color-grey-lightest); /** Neutral semantic — background */
   --tag-neutral-color: var(--color-grey-darkest); /** Neutral semantic — muted text */
   --tag-info-bg: var(--color-blue-bg); /** Info semantic — background tint */
+  --tag-info-color: var(--color-blue); /** Info semantic — text (AAA on blue-bg) */
   --tag-warning-bg: var(--color-amber-bg); /** Warning semantic — background tint */
   --tag-success-bg: var(--color-green-bg); /** Success semantic — background tint */
+  --tag-success-color: var(--color-green-dark); /** Success semantic — text (AAA on green-bg) */
   --tag-danger-bg: var(--color-red-bg); /** Danger semantic — background tint */
   --tag-default-color: var(--color-text-on-light); /** Default text color */
   --tag-primary-bg: var(--color-primary); /** Primary (prussian) background */
@@ -28,8 +30,6 @@
   --tag-support-1-color: var(--color-text-on-light); /** Support 1 text — dark on light bg */
   --tag-support-2-bg: var(--color-support-2); /** Support 2 (cayenne) background */
   --tag-support-2-color: var(--color-text-on-light); /** Support 2 text — dark on orange bg */
-  --tag-info-color: var(--color-info-on-light); /** Info semantic — text */
   --tag-warning-color: var(--color-warning-on-light); /** Warning semantic — text */
-  --tag-success-color: var(--color-success-on-light); /** Success semantic — text */
-  --tag-danger-color: var(--color-destructive-on-light); /** Danger semantic — text */
+  --tag-danger-color: var(--color-destructive-on-light); /** Danger semantic — text (AAA 7.10:1 on white bg) */
 }

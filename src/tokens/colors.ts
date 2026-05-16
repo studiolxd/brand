@@ -44,8 +44,10 @@ export const errorColor          = resolveRef(feedback.color['error-on-light'].$
 export const successColor        = resolveRef(feedback.color['success-on-light'].$value, refMap);
 export const errorDarkColor      = resolveRef(feedback.color['error-on-dark'].$value, refMap);
 export const successDarkColor    = resolveRef(feedback.color['success-on-dark'].$value, refMap);
-export const infoColor           = resolveRef(feedback.color['info-on-light'].$value, refMap);
+export const infoColor           = resolveRef(system.color['blue'].$value, refMap);
 export const warningColor        = resolveRef(feedback.color['warning-on-light'].$value, refMap);
+export const successTagColor     = resolveRef(system.color['green-dark'].$value, refMap);
+export const dangerTagColor      = resolveRef(feedback.color['destructive-on-light'].$value, refMap);
 export const neutralTextColor    = resolveRef(neutral.color['grey-darkest'].$value, refMap);
 
 export const infoBgColor    = { name: 'Info bg',    token: '--color-blue-bg',        hex: system.color['blue-bg'].$value };
