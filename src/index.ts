@@ -55,6 +55,8 @@ export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 // ─── Sections ───────────────────────────────────────────────
 export { AppShell } from './stories/sections/AppShell/AppShell';
 export type { AppShellProps } from './stories/sections/AppShell/AppShell';
+export { useSidebar } from './stories/sections/AppShell/SidebarContext';
+export type { SidebarContextValue } from './stories/sections/AppShell/SidebarContext';
 export { Sidebar } from './stories/sections/Sidebar/Sidebar';
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 

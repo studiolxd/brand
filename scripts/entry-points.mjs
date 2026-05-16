@@ -57,4 +57,5 @@ export const clientComponents = new Set([
   'input-field', 'input-phone-field', 'textarea-field', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'sidebar',
+  'app-shell',
 ]);
