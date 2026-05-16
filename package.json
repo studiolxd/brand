@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -78,6 +78,10 @@
     "./hamburger": {
       "types": "./dist/_types/atoms/Hamburger/Hamburger.d.ts",
       "import": "./dist/hamburger.js"
+    },
+    "./fieldset": {
+      "types": "./dist/_types/atoms/Fieldset/Fieldset.d.ts",
+      "import": "./dist/fieldset.js"
     },
     "./heading": {
       "types": "./dist/_types/atoms/Heading/Heading.d.ts",

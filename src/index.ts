@@ -13,6 +13,8 @@ export { Chevron } from './stories/atoms/Chevron/Chevron';
 export { DotsButton } from './stories/atoms/DotsButton/DotsButton';
 export type { DotsButtonProps } from './stories/atoms/DotsButton/DotsButton';
 export { Hamburger } from './stories/atoms/Hamburger/Hamburger';
+export { Fieldset } from './stories/atoms/Fieldset/Fieldset';
+export type { FieldsetProps } from './stories/atoms/Fieldset/Fieldset';
 export { Heading } from './stories/atoms/Heading/Heading';
 export { HeroVideo } from './stories/atoms/HeroVideo/HeroVideo';
 export { Highlight } from './stories/atoms/Highlight/Highlight';

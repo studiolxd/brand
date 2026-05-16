@@ -9,6 +9,7 @@ export const entryPoints = {
   'radio':               'src/stories/atoms/Radio/Radio.tsx',
   'chevron':             'src/stories/atoms/Chevron/Chevron.tsx',
   'hamburger':           'src/stories/atoms/Hamburger/Hamburger.tsx',
+  'fieldset':            'src/stories/atoms/Fieldset/Fieldset.tsx',
   'heading':             'src/stories/atoms/Heading/Heading.tsx',
   'input':               'src/stories/atoms/Input/Input.tsx',
   'input-phone':         'src/stories/atoms/InputPhone/InputPhone.tsx',
