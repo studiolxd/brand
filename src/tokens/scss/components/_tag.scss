@@ -20,13 +20,13 @@ $tag-support-1-bg: #20e38e; // Support 1 (emerald) background
 $tag-support-1-color: #111e30; // Support 1 text — dark on light bg
 $tag-support-2-bg: #f05e1c; // Support 2 (cayenne) background
 $tag-support-2-color: #111e30; // Support 2 text — dark on orange bg
-$tag-neutral-bg: #f2f2f2; // Neutral semantic — background
-$tag-neutral-color: #4a4a4a; // Neutral semantic — muted text
-$tag-info-bg: #e8f0fe; // Info semantic — background tint
-$tag-info-color: #0f4b9b; // Info semantic — text (AAA on blue-bg)
-$tag-warning-bg: #fff8e1; // Warning semantic — background tint
-$tag-warning-color: #7a4500; // Warning semantic — text
+$tag-neutral-bg: #4a4a4a; // Neutral semantic — background (AAA ~8.9:1 with white text)
+$tag-neutral-color: #ffffff; // Neutral semantic — white text on dark grey
+$tag-info-bg: #111e30; // Info semantic — prussian background (AAA ~16.9:1 with white text)
+$tag-info-color: #ffffff; // Info semantic — white text on prussian
+$tag-warning-bg: #ffcd00; // Warning semantic — brand yellow background (AAA ~10.3:1 with prussian text)
+$tag-warning-color: #111e30; // Warning semantic — prussian text on yellow
 $tag-success-bg: #e6f4ea; // Success semantic — background tint
 $tag-success-color: #005a14; // Success semantic — text (AAA on green-bg)
-$tag-danger-bg: #ffffff; // Danger semantic — background tint
-$tag-danger-color: #b30000; // Danger semantic — text (AAA 7.10:1 on white bg)
+$tag-danger-bg: #b30000; // Danger semantic — brand red background (AAA ~7.2:1 with white text)
+$tag-danger-color: #ffffff; // Danger semantic — white text on red
