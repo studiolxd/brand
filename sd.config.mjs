@@ -58,6 +58,7 @@ const filters = {
   'org-switcher':       (t) => t.path[0] === 'org-switcher',
   'user-menu':          (t) => t.path[0] === 'user-menu',
   'sidebar-nav':        (t) => t.path[0] === 'sidebar-nav',
+  modal:               (t) => t.path[0] === 'modal',
 };
 
 function cssFile(destination, filterKey) {
@@ -129,6 +130,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/org-switcher.css',         'org-switcher'),
         cssFile('molecules/user-menu.css',            'user-menu'),
         cssFile('molecules/sidebar-nav.css',          'sidebar-nav'),
+        cssFile('molecules/modal.css',                'modal'),
       ],
     },
     scss: {
@@ -188,6 +190,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_org-switcher.scss',         'org-switcher'),
         scssFile('molecules/_user-menu.scss',            'user-menu'),
         scssFile('molecules/_sidebar-nav.scss',          'sidebar-nav'),
+        scssFile('molecules/_modal.scss',                'modal'),
       ],
     },
   },

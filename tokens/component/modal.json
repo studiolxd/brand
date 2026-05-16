@@ -1,0 +1,20 @@
+{
+  "modal": {
+    "z-index":              { "$value": 1001,                         "$type": "number",    "$description": "z-index del panel modal" },
+    "backdrop-z-index":     { "$value": 1000,                         "$type": "number",    "$description": "z-index del backdrop" },
+    "backdrop-bg":          { "$value": "{color.black}",              "$type": "color",     "$description": "Color del backdrop/scrim" },
+    "backdrop-opacity":     { "$value": "{opacity.overlay}",          "$type": "number",    "$description": "Opacidad del backdrop (0.6)" },
+    "bg":                   { "$value": "{color.background.light}",   "$type": "color",     "$description": "Fondo del panel modal" },
+    "border-radius":        { "$value": "{border-radius.lg}",         "$type": "dimension", "$description": "Radio del panel" },
+    "shadow":               { "$value": "{shadow.xl}",                "$type": "shadow",    "$description": "Sombra de elevación" },
+    "padding-block":        { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Padding vertical del panel" },
+    "padding-inline":       { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Padding horizontal del panel" },
+    "header-gap":           { "$value": "{spacing.4}",                "$type": "dimension", "$description": "Gap entre título y botón ✕" },
+    "title-font-size":      { "$value": "{font-size.5}",              "$type": "dimension", "$description": "Tamaño del título (1.5rem)" },
+    "title-font-weight":    { "$value": "{font-weight.semibold}",     "$type": "number",    "$description": "Peso del título" },
+    "title-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título" },
+    "width-max":            { "$value": "560px",                      "$type": "dimension", "$description": "Anchura máxima del panel" },
+    "transition-duration":  { "$value": "{motion.duration.base}",     "$type": "number",    "$description": "Duración de la animación entrada/salida" },
+    "transition-easing":    { "$value": "{motion.easing.in-out}",     "$type": "string",    "$description": "Easing de la animación" }
+  }
+}

@@ -44,6 +44,8 @@ export { CardSquare } from './stories/molecules/CardSquare/CardSquare';
 export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
 export { Form } from './stories/molecules/Form/Form';
 export { InputField } from './stories/molecules/InputField/InputField';
+export { Modal } from './stories/molecules/Modal/Modal';
+export type { ModalProps } from './stories/molecules/Modal/Modal';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { Pagination } from './stories/molecules/Pagination/Pagination';
 export type { PaginationProps } from './stories/molecules/Pagination/Pagination';

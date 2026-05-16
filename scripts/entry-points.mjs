@@ -43,6 +43,7 @@ export const entryPoints = {
   'textarea-field':      'src/stories/molecules/TextareaField/TextareaField.tsx',
   'org-switcher':        'src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx',
   'user-menu':           'src/stories/molecules/UserMenu/UserMenu.tsx',
+  'modal':               'src/stories/molecules/Modal/Modal.tsx',
   'sidebar-nav':         'src/stories/molecules/SidebarNav/SidebarNav.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
@@ -61,5 +62,6 @@ export const clientComponents = new Set([
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'sidebar',
   'app-shell',
+  'modal',
   'org-switcher', 'user-menu', 'sidebar-nav',
 ]);

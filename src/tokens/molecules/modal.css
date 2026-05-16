@@ -1,0 +1,22 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --modal-z-index: 1001; /** z-index del panel modal */
+  --modal-backdrop-z-index: 1000; /** z-index del backdrop */
+  --modal-width-max: 560px; /** Anchura máxima del panel */
+  --modal-backdrop-bg: var(--color-black); /** Color del backdrop/scrim */
+  --modal-backdrop-opacity: var(--opacity-overlay); /** Opacidad del backdrop (0.6) */
+  --modal-border-radius: var(--border-radius-lg); /** Radio del panel */
+  --modal-shadow: var(--shadow-xl); /** Sombra de elevación */
+  --modal-padding-block: var(--spacing-6); /** Padding vertical del panel */
+  --modal-padding-inline: var(--spacing-6); /** Padding horizontal del panel */
+  --modal-header-gap: var(--spacing-4); /** Gap entre título y botón ✕ */
+  --modal-title-font-size: var(--font-size-5); /** Tamaño del título (1.5rem) */
+  --modal-title-font-weight: var(--font-weight-semibold); /** Peso del título */
+  --modal-transition-duration: var(--motion-duration-base); /** Duración de la animación entrada/salida */
+  --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
+  --modal-bg: var(--color-background-light); /** Fondo del panel modal */
+  --modal-title-color: var(--color-text-on-light); /** Color del título */
+}
