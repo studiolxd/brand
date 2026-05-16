@@ -170,7 +170,7 @@ export function Pagination({
 
   return (
     <nav
-      className={['pagination', size !== 'md' ? `pagination--${size}` : '', className].filter(Boolean).join(' ')}
+      className={['pagination', `pagination--${size}`, className].filter(Boolean).join(' ')}
       aria-label={ariaLabel}
     >
       {hasMeta && (

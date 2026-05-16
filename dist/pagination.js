@@ -98,7 +98,7 @@ function o({ total: o, page: s, pageSize: c, onPageChange: l, hrefBuilder: u, li
 	return /* @__PURE__ */ r("nav", {
 		className: [
 			"pagination",
-			h === "md" ? "" : `pagination--${h}`,
+			`pagination--${h}`,
 			_
 		].filter(Boolean).join(" "),
 		"aria-label": g,
