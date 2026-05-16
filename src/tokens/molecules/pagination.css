@@ -28,7 +28,8 @@
   --pagination-sm-btn-padding-block: var(--spacing-1); /** Padding block de botones — variante sm */
   --pagination-sm-btn-padding-inline: var(--spacing-1); /** Padding inline de botones — variante sm */
   --pagination-sm-btn-min-width: var(--spacing-5); /** Ancho mínimo de botones de página — variante sm */
-  --pagination-lg-font-size: var(--font-size-2); /** Font size — variante lg (16px) */
+  --pagination-md-font-size: var(--font-size-3); /** Font size — variante md (18px) */
+  --pagination-lg-font-size: var(--font-size-4); /** Font size — variante lg (20px) */
   --pagination-lg-btn-padding-block: var(--spacing-3); /** Padding block de botones — variante lg */
   --pagination-lg-btn-padding-inline: var(--spacing-3); /** Padding inline de botones — variante lg */
   --pagination-lg-btn-min-width: var(--spacing-7); /** Ancho mínimo de botones de página — variante lg */

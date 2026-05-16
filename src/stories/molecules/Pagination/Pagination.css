@@ -111,6 +111,19 @@
   padding-inline: var(--pagination-sm-btn-padding-inline);
 }
 
+/* ─── Md variant ─────────────────────────────────────────────────────────── */
+.pagination.pagination--md {
+  font-size: var(--pagination-md-font-size);
+}
+
+.pagination.pagination--md .pagination__btn {
+  font-size: var(--pagination-md-font-size);
+}
+
+.pagination.pagination--md .pagination__ellipsis {
+  font-size: var(--pagination-md-font-size);
+}
+
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
 .pagination.pagination--lg {
   font-size: var(--pagination-lg-font-size);
