@@ -48,7 +48,10 @@ const entries = [
 
 export const Default: Story = {
   args: {
-    entries,
+    entries: [
+      { kind: 'link', id: 'home', label: 'Inicio', href: '#home' },
+      ...entries,
+    ],
     defaultValue: ['general', 'workspace'],
   },
 };

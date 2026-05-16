@@ -141,23 +141,15 @@
 .sidebar-nav__top-link {
   display: flex;
   align-items: center;
-  gap: var(--sidebar-nav-item-icon-gap);
-  padding-block: var(--sidebar-nav-item-padding-block);
-  padding-inline: var(--sidebar-nav-item-padding-inline);
-  border-radius: var(--sidebar-nav-item-border-radius);
-  font-size: var(--sidebar-nav-item-font-size);
-  font-weight: var(--sidebar-nav-item-font-weight);
-  line-height: var(--sidebar-nav-item-line-height);
-  color: var(--sidebar-nav-item-color);
+  gap: var(--sidebar-nav-group-trigger-gap);
+  padding-block: var(--sidebar-nav-group-trigger-padding-block);
+  padding-inline: var(--sidebar-nav-group-trigger-padding-inline);
+  font-size: var(--sidebar-nav-group-label-font-size);
+  font-weight: var(--sidebar-nav-group-label-font-weight);
+  letter-spacing: var(--sidebar-nav-group-label-letter-spacing);
+  color: var(--sidebar-nav-group-label-color);
   text-decoration: none;
-  transition:
-    background-color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
-    color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
-}
-
-.sidebar-nav__top-link:hover {
-  background-color: var(--sidebar-nav-item-hover-bg);
-  color: var(--sidebar-nav-item-hover-color);
+  transition: color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }
 
 .sidebar-nav__top-link:focus-visible {
@@ -166,7 +158,7 @@
 }
 
 .sidebar-nav__top-link.sidebar-nav__top-link--active {
-  font-weight: var(--sidebar-nav-item-active-font-weight);
+  color: var(--sidebar-nav-item-active-color);
 }
 
 /* ─── Icono ──────────────────────────────────────────────── */
