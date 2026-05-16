@@ -15,8 +15,8 @@ export interface PaginationProps {
   total: number;
   /** Página activa (1-indexed) */
   page: number;
-  /** Registros por página. Si pageSize <= 0 se interpreta como "todos". */
-  pageSize: number;
+  /** Registros por página. "all" muestra todos los registros sin paginación. */
+  pageSize: number | 'all';
   /**
    * Callback al cambiar de página. Opcional cuando se usa hrefBuilder
    * (la navegación ocurre mediante el href nativo del <a>).
@@ -66,7 +66,7 @@ export function Pagination({
 }: PaginationProps) {
   if (total === 0) return null;
 
-  const totalPages = pageSize > 0 ? Math.ceil(total / pageSize) : 1;
+  const totalPages = pageSize === 'all' ? 1 : Math.ceil(total / pageSize);
   const pageItems = totalPages > 1 ? getPageWindow(page, totalPages) : [];
 
   function renderPageItem(item: number | '...', index: number) {
@@ -161,7 +161,7 @@ export function Pagination({
           <span className="pagination__size-label">Registros por página</span>
           <Select
             options={pageSizeOptions}
-            value={String(pageSize)}
+            value={pageSize === 'all' ? 'all' : String(pageSize)}
             onValueChange={onPageSizeChange}
             aria-label="Registros por página"
           />

@@ -5,8 +5,8 @@ export interface PaginationProps {
     total: number;
     /** Página activa (1-indexed) */
     page: number;
-    /** Registros por página. Si pageSize <= 0 se interpreta como "todos". */
-    pageSize: number;
+    /** Registros por página. "all" muestra todos los registros sin paginación. */
+    pageSize: number | 'all';
     /**
      * Callback al cambiar de página. Opcional cuando se usa hrefBuilder
      * (la navegación ocurre mediante el href nativo del <a>).

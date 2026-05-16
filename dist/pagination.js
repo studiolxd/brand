@@ -46,7 +46,7 @@ function i(e, t) {
 }
 function a({ total: a, page: o, pageSize: s, onPageChange: c, hrefBuilder: l, onPageSizeChange: u, pageSizeOptions: d = r, showTotal: f = !1, ariaLabel: p = "Paginación", className: m }) {
 	if (a === 0) return null;
-	let h = s > 0 ? Math.ceil(a / s) : 1, g = h > 1 ? i(o, h) : [];
+	let h = s === "all" ? 1 : Math.ceil(a / s), g = h > 1 ? i(o, h) : [];
 	function _(e, n) {
 		if (e === "...") return /* @__PURE__ */ t("span", {
 			className: "pagination__ellipsis",
@@ -106,7 +106,7 @@ function a({ total: a, page: o, pageSize: s, onPageChange: c, hrefBuilder: l, on
 					children: "Registros por página"
 				}), /* @__PURE__ */ t(e, {
 					options: d,
-					value: String(s),
+					value: s === "all" ? "all" : String(s),
 					onValueChange: u,
 					"aria-label": "Registros por página"
 				})]
