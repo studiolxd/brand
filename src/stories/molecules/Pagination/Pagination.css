@@ -21,11 +21,6 @@
   gap: var(--pagination-controls-gap);
 }
 
-.pagination__size-label {
-  color: var(--pagination-summary-color);
-  white-space: nowrap;
-}
-
 .pagination__controls {
   display: flex;
   align-items: center;

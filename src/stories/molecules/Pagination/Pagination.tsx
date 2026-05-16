@@ -169,7 +169,6 @@ export function Pagination({
       )}
       {onPageSizeChange && (
         <div className="pagination__size-selector">
-          <span className="pagination__size-label">Registros por página</span>
           <Select
             options={pageSizeOptions}
             value={pageSize === 'all' ? 'all' : String(pageSize)}

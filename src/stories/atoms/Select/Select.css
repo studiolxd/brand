@@ -79,18 +79,14 @@
     background-color: var(--select-item-highlighted-bg);
     color: var(--select-item-highlighted-color);
   }
-}
 
-.select__content[data-side='bottom'] {
-  .select__item + .select__item {
-    border-top: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+  &[data-state='checked'] {
+    font-weight: var(--font-weight-bold);
   }
 }
 
-.select__content[data-side='top'] {
-  .select__item:first-child {
-    border-bottom: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
-  }
+.select__content .select__item + .select__item {
+  border-top: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
 }
 
 /* ─── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
