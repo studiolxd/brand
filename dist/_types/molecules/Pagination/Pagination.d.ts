@@ -1,4 +1,4 @@
-import type { ComponentType, AnchorHTMLAttributes } from 'react';
+import type { ComponentType } from 'react';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
 export interface PaginationProps {
@@ -30,7 +30,7 @@ export interface PaginationProps {
      * Acepta next/link, react-router Link, etc. — cualquier componente
      * que acepte las props estándar de <a> (href, className, …).
      */
-    linkComponent?: ComponentType<AnchorHTMLAttributes<HTMLAnchorElement>>;
+    linkComponent?: ComponentType<any>;
     /** aria-label del <nav>. Default: "Paginación" */
     ariaLabel?: string;
     className?: string;
