@@ -1,0 +1,87 @@
+/* ---- Sidebar ---- */
+
+/* Wrapper — flex item que participa en el layout de AppShell en desktop */
+.sidebar {
+  flex-shrink: 0;
+  width: var(--sidebar-width);
+  overflow: hidden;
+  transition: width var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+}
+
+.sidebar[data-open="false"] {
+  width: 0;
+}
+
+/* Panel — área de contenido visible */
+.sidebar__panel {
+  width: var(--sidebar-width);
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  border-inline-end: 1px solid var(--sidebar-border-color);
+  padding-inline: var(--sidebar-padding-inline);
+  padding-block: var(--sidebar-padding-block);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Backdrop — oculto en desktop */
+.sidebar__backdrop {
+  display: none;
+}
+
+/* === Mobile (< breakpoint lg, 1024px) === */
+@media (max-width: 1023px) {
+  /* El wrapper no ocupa espacio en el layout — el contenido ocupa el 100% */
+  .sidebar {
+    width: 0;
+    transition: none;
+  }
+
+  /* Panel como overlay fijo sobre el contenido */
+  .sidebar__panel {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-inline-end: none;
+    z-index: var(--sidebar-z-index);
+    transform: translateX(-100%);
+    visibility: hidden;
+    /* Al cerrar: primero anima el translate, luego oculta con visibility */
+    transition:
+      transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
+      visibility 0s var(--sidebar-transition-duration);
+  }
+
+  .sidebar[data-open="true"] .sidebar__panel {
+    transform: translateX(0);
+    visibility: visible;
+    /* Al abrir: visible inmediatamente, anima el translate */
+    transition:
+      transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
+      visibility 0s 0s;
+  }
+
+  /* Backdrop semitransparente que cubre el contenido */
+  .sidebar__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: var(--sidebar-backdrop-bg);
+    z-index: calc(var(--sidebar-z-index) - 1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+  }
+
+  .sidebar[data-open="true"] .sidebar__backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* === Dark surface === */
+.surface-dark .sidebar__panel {
+  background-color: var(--color-background-dark);
+  border-inline-end-color: color-mix(in srgb, var(--sidebar-border-color), transparent 60%);
+}

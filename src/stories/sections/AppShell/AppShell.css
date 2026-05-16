@@ -1,0 +1,12 @@
+/* ---- AppShell ---- */
+
+.app-shell {
+  display: flex;
+  min-height: 100dvh;
+}
+
+.app-shell__content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+}
