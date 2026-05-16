@@ -2,11 +2,15 @@
 
 .app-shell {
   display: flex;
-  min-height: 100dvh;
+  height: 100dvh;
 }
 
 .app-shell__content {
   flex: 1;
   min-width: 0;
   overflow: auto;
+  padding-block-start: env(safe-area-inset-top);
+  padding-block-end: env(safe-area-inset-bottom);
+  padding-inline-start: env(safe-area-inset-left);
+  padding-inline-end: env(safe-area-inset-right);
 }
