@@ -31,8 +31,10 @@ export interface PaginationProps {
      * que acepte las props estándar de <a> (href, className, …).
      */
     linkComponent?: ComponentType<any>;
+    /** Tamaño del componente. Default: "md" */
+    size?: 'sm' | 'md' | 'lg';
     /** aria-label del <nav>. Default: "Paginación" */
     ariaLabel?: string;
     className?: string;
 }
-export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, ariaLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;

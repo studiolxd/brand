@@ -16,6 +16,7 @@ interface InputFieldProps {
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
+  size?: 'sm' | 'md' | 'lg';
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
@@ -32,6 +33,7 @@ export function InputField({
   defaultValue,
   disabled,
   readOnly,
+  size = 'md',
   error = false,
   errorMessage,
   helperText,
@@ -55,6 +57,7 @@ export function InputField({
         defaultValue={defaultValue}
         disabled={disabled}
         readOnly={readOnly}
+        size={size}
         error={error}
         describedBy={describedBy}
         onChange={onChange}

@@ -24,6 +24,12 @@
   --textarea-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
   --textarea-disabled-border-color: var(--color-grey-light); /** Border color when disabled */
   --textarea-error-bg: var(--color-white); /** Error background */
+  --textarea-sm-padding-block: var(--spacing-2); /** Block padding — variante sm */
+  --textarea-sm-padding-inline: var(--spacing-3); /** Inline padding — variante sm */
+  --textarea-sm-font-size: var(--font-size-1); /** Font size — variante sm (14px) */
+  --textarea-lg-padding-block: var(--spacing-5); /** Block padding — variante lg */
+  --textarea-lg-padding-inline: var(--spacing-5); /** Inline padding — variante lg */
+  --textarea-lg-font-size: var(--font-size-4); /** Font size — variante lg (20px) */
   --textarea-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --textarea-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --textarea-font-weight: var(--font-weight-default); /** Font weight */

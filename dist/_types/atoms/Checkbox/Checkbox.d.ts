@@ -3,6 +3,7 @@ interface CheckboxProps {
     checked?: boolean | 'indeterminate';
     defaultChecked?: boolean | 'indeterminate';
     disabled?: boolean;
+    size?: 'sm' | 'md' | 'lg';
     id?: string;
     name?: string;
     value?: string;
@@ -11,5 +12,5 @@ interface CheckboxProps {
     'aria-labelledby'?: string;
     onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
-export declare function Checkbox({ checked, defaultChecked, disabled, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onCheckedChange, }: CheckboxProps): import("react/jsx-runtime").JSX.Element;
+export declare function Checkbox({ checked, defaultChecked, disabled, size, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onCheckedChange, }: CheckboxProps): import("react/jsx-runtime").JSX.Element;
 export {};

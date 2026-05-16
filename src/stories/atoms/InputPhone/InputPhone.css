@@ -150,6 +150,29 @@
   pointer-events: none;
 }
 
+/* ── Size variants ──────────────────────────────────────────────────────── */
+.input-phone.input-phone--sm {
+  --input-padding-block: var(--input-sm-padding-block);
+  --input-padding-inline: var(--input-sm-padding-inline);
+  --input-font-size: var(--input-sm-font-size);
+  --input-phone-country-width: var(--input-phone-sm-country-width);
+}
+
+.input-phone.input-phone--lg {
+  --input-padding-block: var(--input-lg-padding-block);
+  --input-padding-inline: var(--input-lg-padding-inline);
+  --input-font-size: var(--input-lg-font-size);
+  --input-phone-country-width: var(--input-phone-lg-country-width);
+}
+
+.input-phone__country-content--sm .input-phone__country-item {
+  font-size: var(--input-sm-font-size);
+}
+
+.input-phone__country-content--lg .input-phone__country-item {
+  font-size: var(--input-lg-font-size);
+}
+
 /* ── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
 .input-phone__country-content.input-phone__country-content--dark {
   background-color: var(--input-dark-bg);

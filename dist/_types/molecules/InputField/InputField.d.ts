@@ -13,9 +13,10 @@ interface InputFieldProps {
     error?: boolean;
     errorMessage?: string;
     helperText?: string;
+    size?: 'sm' | 'md' | 'lg';
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function InputField({ id, label, labelHidden, name, type, placeholder, value, defaultValue, disabled, readOnly, error, errorMessage, helperText, onChange, onBlur, onFocus, }: InputFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function InputField({ id, label, labelHidden, name, type, placeholder, value, defaultValue, disabled, readOnly, size, error, errorMessage, helperText, onChange, onBlur, onFocus, }: InputFieldProps): import("react/jsx-runtime").JSX.Element;
 export {};

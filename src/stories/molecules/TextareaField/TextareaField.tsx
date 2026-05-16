@@ -16,6 +16,7 @@ interface TextareaFieldProps {
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
+  size?: 'sm' | 'md' | 'lg';
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
@@ -32,6 +33,7 @@ export function TextareaField({
   rows,
   disabled,
   readOnly,
+  size = 'md',
   error = false,
   errorMessage,
   helperText,
@@ -55,6 +57,7 @@ export function TextareaField({
         rows={rows}
         disabled={disabled}
         readOnly={readOnly}
+        size={size}
         error={error}
         describedBy={describedBy}
         onChange={onChange}

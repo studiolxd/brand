@@ -43,3 +43,16 @@
   cursor: var(--checkbox-field-disabled-cursor);
 }
 
+/* ─── Size variants ──────────────────────────────────────────── */
+.checkbox-field.checkbox-field--sm {
+  gap: var(--checkbox-field-sm-gap);
+  padding-inline: var(--checkbox-field-sm-padding-inline);
+  padding-block: var(--checkbox-field-sm-padding-block);
+}
+
+.checkbox-field.checkbox-field--lg {
+  gap: var(--checkbox-field-lg-gap);
+  padding-inline: var(--checkbox-field-lg-padding-inline);
+  padding-block: var(--checkbox-field-lg-padding-block);
+}
+

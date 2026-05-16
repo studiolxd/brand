@@ -3,6 +3,7 @@ interface RadioProps {
     checked?: boolean;
     defaultChecked?: boolean;
     disabled?: boolean;
+    size?: 'sm' | 'md' | 'lg';
     id?: string;
     name?: string;
     value?: string;
@@ -11,5 +12,5 @@ interface RadioProps {
     'aria-labelledby'?: string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
-export declare function Radio({ checked, defaultChecked, disabled, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onChange, }: RadioProps): import("react/jsx-runtime").JSX.Element;
+export declare function Radio({ checked, defaultChecked, disabled, size, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onChange, }: RadioProps): import("react/jsx-runtime").JSX.Element;
 export {};

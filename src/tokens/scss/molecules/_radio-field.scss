@@ -7,6 +7,12 @@ $radio-field-padding-block: 1rem; // Padding block — hereda de control
 $radio-field-radio-offset: 3px; // Desplazamiento vertical del radio para alinearlo con la primera línea de texto
 $radio-field-cursor: pointer; // Cursor
 $radio-field-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
+$radio-field-sm-gap: 0.5rem; // Gap — variante sm
+$radio-field-sm-padding-inline: 0.75rem; // Padding inline — variante sm
+$radio-field-sm-padding-block: 0.5rem; // Padding block — variante sm
+$radio-field-lg-gap: 1rem; // Gap — variante lg
+$radio-field-lg-padding-inline: 1.5rem; // Padding inline — variante lg
+$radio-field-lg-padding-block: 1.5rem; // Padding block — variante lg
 $radio-field-label-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
 $radio-field-label-font-size: 1.125rem; // Tamaño de fuente (16px)
 $radio-field-label-font-weight: 300; // Peso tipográfico

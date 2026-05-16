@@ -6,6 +6,7 @@ interface RadioFieldProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   id?: string;
   name?: string;
   value?: string;
@@ -17,6 +18,7 @@ export function RadioField({
   checked,
   defaultChecked,
   disabled,
+  size = 'md',
   id,
   name,
   value,
@@ -26,6 +28,7 @@ export function RadioField({
     <label
       className={[
         'radio-field',
+        size !== 'md' ? `radio-field--${size}` : '',
         disabled ? 'radio-field--disabled' : '',
       ].filter(Boolean).join(' ')}
     >
@@ -33,6 +36,7 @@ export function RadioField({
         checked={checked}
         defaultChecked={defaultChecked}
         disabled={disabled}
+        size={size}
         id={id}
         name={name}
         value={value}

@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react';
+import { Chevron } from '../../atoms/Chevron/Chevron';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
@@ -42,6 +43,8 @@ export interface PaginationProps {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   linkComponent?: ComponentType<any>;
+  /** Tamaño del componente. Default: "md" */
+  size?: 'sm' | 'md' | 'lg';
   /** aria-label del <nav>. Default: "Paginación" */
   ariaLabel?: string;
   className?: string;
@@ -70,6 +73,7 @@ export function Pagination({
   onPageSizeChange,
   pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
   showTotal = false,
+  size = 'md',
   ariaLabel = 'Paginación',
   className,
 }: PaginationProps) {
@@ -101,7 +105,6 @@ export function Pagination({
           href={isCurrent ? undefined : hrefBuilder(item)}
           className={btnClass}
           aria-current={isCurrent ? 'page' : undefined}
-          aria-disabled={isCurrent ? 'true' : undefined}
           aria-label={`Página ${item}`}
           onClick={
             !isCurrent && onPageChange
@@ -118,17 +121,21 @@ export function Pagination({
       <button
         key={item}
         className={btnClass}
-        disabled={isCurrent}
         aria-current={isCurrent ? 'page' : undefined}
         aria-label={`Página ${item}`}
-        onClick={() => onPageChange?.(item as number)}
+        onClick={isCurrent ? undefined : () => onPageChange?.(item as number)}
       >
         {item}
       </button>
     );
   }
 
-  function renderNavBtn(targetPage: number, label: string, ariaLabelText: string, isDisabled: boolean) {
+  function renderNavBtn(targetPage: number, direction: 'prev' | 'next', isDisabled: boolean) {
+    const ariaLabelText = direction === 'prev' ? 'Página anterior' : 'Página siguiente';
+    const chevronClass = direction === 'prev' ? 'pagination__chevron--prev' : undefined;
+    const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+    const icon = <Chevron size={chevronSize} className={chevronClass} />;
+
     if (hrefBuilder) {
       return (
         <A
@@ -142,7 +149,7 @@ export function Pagination({
               : undefined
           }
         >
-          {label}
+          {icon}
         </A>
       );
     }
@@ -154,34 +161,41 @@ export function Pagination({
         aria-label={ariaLabelText}
         onClick={() => onPageChange?.(targetPage)}
       >
-        {label}
+        {icon}
       </button>
     );
   }
 
+  const hasMeta = showTotal || !!onPageSizeChange;
+
   return (
     <nav
-      className={['pagination', className].filter(Boolean).join(' ')}
+      className={['pagination', size !== 'md' ? `pagination--${size}` : '', className].filter(Boolean).join(' ')}
       aria-label={ariaLabel}
     >
-      {showTotal && (
-        <span className="pagination__summary">{total} resultados</span>
-      )}
-      {onPageSizeChange && (
-        <div className="pagination__size-selector">
-          <Select
-            options={pageSizeOptions}
-            value={pageSize === 'all' ? 'all' : String(pageSize)}
-            onValueChange={onPageSizeChange}
-            aria-label="Registros por página"
-          />
+      {hasMeta && (
+        <div className="pagination__meta">
+          {showTotal && (
+            <span className="pagination__summary">{total} resultados</span>
+          )}
+          {onPageSizeChange && (
+            <div className="pagination__size-selector">
+              <Select
+                options={pageSizeOptions}
+                value={pageSize === 'all' ? 'all' : String(pageSize)}
+                onValueChange={onPageSizeChange}
+                aria-label="Registros por página"
+                size={size}
+              />
+            </div>
+          )}
         </div>
       )}
       {totalPages > 1 && (
         <div className="pagination__controls" role="group" aria-label="Páginas">
-          {renderNavBtn(page - 1, 'Anterior', 'Página anterior', page <= 1)}
+          {renderNavBtn(page - 1, 'prev', page <= 1)}
           {pageItems.map((item, i) => renderPageItem(item, i))}
-          {renderNavBtn(page + 1, 'Siguiente', 'Página siguiente', page >= totalPages)}
+          {renderNavBtn(page + 1, 'next', page >= totalPages)}
         </div>
       )}
     </nav>

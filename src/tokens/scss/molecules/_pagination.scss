@@ -16,10 +16,12 @@ $pagination-btn-padding-inline: 0.5rem; // Padding horizontal de los botones
 $pagination-btn-radius: 4px; // Radio de borde de los botones
 $pagination-btn-color: #111e30; // Color de texto de los botones
 $pagination-btn-bg: rgba(0, 0, 0, 0); // Fondo de los botones
-$pagination-btn-hover-bg: #f2f2f2; // Fondo en hover
+$pagination-btn-hover-bg: rgba(0, 0, 0, 0); // Fondo en hover — ghost style, sin cambio de fondo
 $pagination-btn-hover-color: #111e30; // Texto en hover
-$pagination-btn-current-bg: #111e30; // Fondo de la página activa
-$pagination-btn-current-color: #ffffff; // Texto de la página activa
+$pagination-btn-hover-text-decoration: underline; // Decoración de texto en hover — estilo ghost
+$pagination-btn-current-bg: rgba(0, 0, 0, 0); // Fondo de la página activa — sin fondo
+$pagination-btn-current-color: #111e30; // Texto de la página activa
+$pagination-btn-current-font-weight: 700; // Peso tipográfico de la página activa
 $pagination-btn-disabled-color: #767676; // Texto cuando está deshabilitado
 $pagination-btn-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
 $pagination-ellipsis-color: #4a4a4a; // Color del ellipsis
@@ -28,3 +30,10 @@ $pagination-focus-ring-width: 2px; // Grosor del focus ring
 $pagination-focus-ring-offset: 1px; // Separación del focus ring
 $pagination-transition-duration: 150ms; // Duración de las transiciones
 $pagination-transition-easing: ease; // Easing de las transiciones
+$pagination-sm-btn-padding-block: 0.25rem; // Padding block de botones — variante sm
+$pagination-sm-btn-padding-inline: 0.25rem; // Padding inline de botones — variante sm
+$pagination-sm-btn-min-width: 1.5rem; // Ancho mínimo de botones de página — variante sm
+$pagination-lg-font-size: 1rem; // Font size — variante lg (16px)
+$pagination-lg-btn-padding-block: 0.75rem; // Padding block de botones — variante lg
+$pagination-lg-btn-padding-inline: 0.75rem; // Padding inline de botones — variante lg
+$pagination-lg-btn-min-width: 3rem; // Ancho mínimo de botones de página — variante lg

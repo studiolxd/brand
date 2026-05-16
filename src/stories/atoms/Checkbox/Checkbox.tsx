@@ -5,6 +5,7 @@ interface CheckboxProps {
   checked?: boolean | 'indeterminate';
   defaultChecked?: boolean | 'indeterminate';
   disabled?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   id?: string;
   name?: string;
   value?: string;
@@ -18,6 +19,7 @@ export function Checkbox({
   checked,
   defaultChecked,
   disabled,
+  size = 'md',
   id,
   name,
   value,
@@ -26,9 +28,11 @@ export function Checkbox({
   'aria-labelledby': ariaLabelledby,
   onCheckedChange,
 }: CheckboxProps) {
+  const className = ['checkbox', size !== 'md' ? `checkbox--${size}` : ''].filter(Boolean).join(' ');
+
   return (
     <RadixCheckbox.Root
-      className="checkbox"
+      className={className}
       checked={checked}
       defaultChecked={defaultChecked}
       disabled={disabled}

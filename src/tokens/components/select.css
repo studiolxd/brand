@@ -17,6 +17,14 @@
   --select-content-bg: var(--color-white); /** Fondo del dropdown */
   --select-item-padding-block: var(--spacing-2); /** Padding block de cada opción */
   --select-item-highlighted-color: var(--color-white); /** Texto de opción resaltada */
+  --select-sm-font-size: var(--font-size-1); /** Tamaño de fuente — variante sm (14px) */
+  --select-sm-padding-block: var(--spacing-1); /** Padding block del trigger — variante sm */
+  --select-sm-padding-inline: var(--spacing-2); /** Padding inline del trigger — variante sm */
+  --select-sm-item-padding-block: var(--spacing-1); /** Padding block de cada opción — variante sm */
+  --select-lg-font-size: var(--font-size-4); /** Tamaño de fuente — variante lg (20px) */
+  --select-lg-padding-block: var(--spacing-5); /** Padding block del trigger — variante lg */
+  --select-lg-padding-inline: var(--spacing-5); /** Padding inline del trigger — variante lg */
+  --select-lg-item-padding-block: var(--spacing-3); /** Padding block de cada opción — variante lg */
   --select-border-color: var(--color-primary); /** Color del borde */
   --select-padding-block: var(--control-padding-block); /** Padding block del trigger */
   --select-padding-inline: var(--control-padding-inline); /** Padding inline del trigger */

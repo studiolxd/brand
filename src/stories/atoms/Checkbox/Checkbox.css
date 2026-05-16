@@ -64,3 +64,14 @@
   background-color: var(--checkbox-disabled-bg-checked);
   border-color: var(--checkbox-disabled-border-color);
 }
+
+/* ─── Size variants ──────────────────────────────────────────── */
+.checkbox.checkbox--sm {
+  --checkbox-size: var(--checkbox-sm-size);
+  --checkbox-check-size: var(--checkbox-sm-check-size);
+}
+
+.checkbox.checkbox--lg {
+  --checkbox-size: var(--checkbox-lg-size);
+  --checkbox-check-size: var(--checkbox-lg-check-size);
+}

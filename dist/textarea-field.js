@@ -4,8 +4,8 @@ import { Label as e } from "./label.js";
 import { Textarea as t } from "./textarea.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-function i({ id: i, label: a, labelHidden: o = !0, name: s, placeholder: c, value: l, defaultValue: u, rows: d, disabled: f, readOnly: p, error: m = !1, errorMessage: h, helperText: g, onChange: _, onBlur: v, onFocus: y }) {
-	let b = h ? `${i}-error` : void 0, x = g ? `${i}-helper` : void 0, S = [b, x].filter(Boolean).join(" ") || void 0;
+function i({ id: i, label: a, labelHidden: o = !0, name: s, placeholder: c, value: l, defaultValue: u, rows: d, disabled: f, readOnly: p, size: m = "md", error: h = !1, errorMessage: g, helperText: _, onChange: v, onBlur: y, onFocus: b }) {
+	let x = g ? `${i}-error` : void 0, S = _ ? `${i}-helper` : void 0, C = [x, S].filter(Boolean).join(" ") || void 0;
 	return /* @__PURE__ */ r("div", {
 		className: "textarea-field",
 		children: [
@@ -23,22 +23,23 @@ function i({ id: i, label: a, labelHidden: o = !0, name: s, placeholder: c, valu
 				rows: d,
 				disabled: f,
 				readOnly: p,
-				error: m,
-				describedBy: S,
-				onChange: _,
-				onBlur: v,
-				onFocus: y
-			}),
-			h && /* @__PURE__ */ n("span", {
-				id: b,
-				className: "textarea-field__error",
-				role: "alert",
-				children: h
+				size: m,
+				error: h,
+				describedBy: C,
+				onChange: v,
+				onBlur: y,
+				onFocus: b
 			}),
 			g && /* @__PURE__ */ n("span", {
 				id: x,
-				className: "textarea-field__helper",
+				className: "textarea-field__error",
+				role: "alert",
 				children: g
+			}),
+			_ && /* @__PURE__ */ n("span", {
+				id: S,
+				className: "textarea-field__helper",
+				children: _
 			})
 		]
 	});

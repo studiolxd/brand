@@ -8,6 +8,12 @@
   --radio-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
   --radio-field-label-text-transform: none; /** Sin transformación */
   --radio-field-gap: var(--spacing-3); /** Separación entre el radio y el texto */
+  --radio-field-sm-gap: var(--spacing-2); /** Gap — variante sm */
+  --radio-field-sm-padding-inline: var(--spacing-3); /** Padding inline — variante sm */
+  --radio-field-sm-padding-block: var(--spacing-2); /** Padding block — variante sm */
+  --radio-field-lg-gap: var(--spacing-4); /** Gap — variante lg */
+  --radio-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
+  --radio-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
   --radio-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
   --radio-field-label-font-size: var(--font-size-3); /** Tamaño de fuente (16px) */
   --radio-field-label-line-height: var(--line-height-normal); /** Interlineado */

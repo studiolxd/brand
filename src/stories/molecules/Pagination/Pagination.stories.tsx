@@ -125,6 +125,26 @@ export const ConLinks: Story = {
   },
 };
 
+export const Sm: Story = {
+  name: 'Sm — compacto',
+  render: (args) => {
+    const [page, setPage] = useState(args.page);
+    const [pageSize, setPageSize] = useState(String(args.pageSize));
+    const ps = pageSize === 'all' ? 0 : Number(pageSize);
+    return (
+      <Pagination
+        {...args}
+        size="sm"
+        page={page}
+        pageSize={ps}
+        onPageChange={setPage}
+        onPageSizeChange={(s) => { setPageSize(s); setPage(1); }}
+        showTotal
+      />
+    );
+  },
+};
+
 export const DarkMode: Story = {
   name: 'Dark mode',
   render: (args) => {

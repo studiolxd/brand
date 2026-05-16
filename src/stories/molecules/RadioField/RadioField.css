@@ -42,3 +42,16 @@
 .radio-field.radio-field--disabled {
   cursor: var(--radio-field-disabled-cursor);
 }
+
+/* ─── Size variants ──────────────────────────────────────────── */
+.radio-field.radio-field--sm {
+  gap: var(--radio-field-sm-gap);
+  padding-inline: var(--radio-field-sm-padding-inline);
+  padding-block: var(--radio-field-sm-padding-block);
+}
+
+.radio-field.radio-field--lg {
+  gap: var(--radio-field-lg-gap);
+  padding-inline: var(--radio-field-lg-padding-inline);
+  padding-block: var(--radio-field-lg-padding-block);
+}

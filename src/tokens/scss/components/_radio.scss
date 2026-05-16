@@ -18,3 +18,7 @@ $radio-focus-ring-color: #111e30; // Color del anillo de foco
 $radio-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
 $radio-disabled-border-color: #d0d0d0; // Color del borde cuando está deshabilitado
 $radio-disabled-dot-color: #d0d0d0; // Color del punto cuando está deshabilitado y seleccionado
+$radio-sm-size: 1rem; // Tamaño del radio — variante sm (16px)
+$radio-sm-dot-size: 0.4rem; // Tamaño del punto interior — variante sm
+$radio-lg-size: 1.5rem; // Tamaño del radio — variante lg (24px)
+$radio-lg-dot-size: 0.65rem; // Tamaño del punto interior — variante lg

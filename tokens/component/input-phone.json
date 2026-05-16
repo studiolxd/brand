@@ -7,6 +7,8 @@
     "content-z-index":      { "$value": "1100",                      "$type": "number",    "$description": "Z-index del dropdown de país" },
     "country-gap":          { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Separación entre bandera/código y chevron en el selector de país" },
     "content-max-height":   { "$value": "17.5rem",                   "$type": "dimension", "$description": "Altura máxima del dropdown de país" },
-    "country-icon-size":    { "$value": "0.625rem",                  "$type": "dimension", "$description": "Ancho del icono chevron en el selector de país" }
+    "country-icon-size":    { "$value": "0.625rem",                  "$type": "dimension", "$description": "Ancho del icono chevron en el selector de país" },
+    "sm-country-width":     { "$value": "3.5rem",                    "$type": "dimension", "$description": "Ancho del selector de país — variante sm" },
+    "lg-country-width":     { "$value": "5.5rem",                    "$type": "dimension", "$description": "Ancho del selector de país — variante lg" }
   }
 }

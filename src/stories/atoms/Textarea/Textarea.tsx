@@ -7,6 +7,7 @@ interface TextareaProps {
   rows?: number;
   disabled?: boolean;
   readOnly?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   error?: boolean;
   id?: string;
   name?: string;
@@ -23,6 +24,7 @@ export function Textarea({
   rows,
   disabled,
   readOnly,
+  size = 'md',
   error = false,
   id,
   name,
@@ -33,7 +35,7 @@ export function Textarea({
 }: TextareaProps) {
   return (
     <textarea
-      className={['textarea', error ? 'textarea--error' : ''].filter(Boolean).join(' ')}
+      className={['textarea', size !== 'md' ? `textarea--${size}` : '', error ? 'textarea--error' : ''].filter(Boolean).join(' ')}
       placeholder={placeholder}
       value={value}
       defaultValue={defaultValue}

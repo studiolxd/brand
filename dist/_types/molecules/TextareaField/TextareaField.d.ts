@@ -13,9 +13,10 @@ interface TextareaFieldProps {
     error?: boolean;
     errorMessage?: string;
     helperText?: string;
+    size?: 'sm' | 'md' | 'lg';
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
     onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
     onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
 }
-export declare function TextareaField({ id, label, labelHidden, name, placeholder, value, defaultValue, rows, disabled, readOnly, error, errorMessage, helperText, onChange, onBlur, onFocus, }: TextareaFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function TextareaField({ id, label, labelHidden, name, placeholder, value, defaultValue, rows, disabled, readOnly, size, error, errorMessage, helperText, onChange, onBlur, onFocus, }: TextareaFieldProps): import("react/jsx-runtime").JSX.Element;
 export {};

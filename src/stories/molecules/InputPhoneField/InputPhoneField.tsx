@@ -15,6 +15,7 @@ interface InputPhoneFieldProps {
   errorMessage?: string;
   helperText?: string;
   dark?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   name?: string;
   onChange?: (value: string | undefined) => void;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -32,6 +33,7 @@ export function InputPhoneField({
   errorMessage,
   helperText,
   dark,
+  size = 'md',
   name,
   onChange,
   onBlur,
@@ -52,6 +54,7 @@ export function InputPhoneField({
         disabled={disabled}
         error={error}
         dark={dark}
+        size={size}
         describedBy={describedBy}
         onChange={onChange}
         onBlur={onBlur}

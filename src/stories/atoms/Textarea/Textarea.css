@@ -60,3 +60,16 @@
   border-color: var(--textarea-error-focus-border-color);
 }
 
+/* ─── Size variants ──────────────────────────────────────────── */
+.textarea.textarea--sm {
+  --textarea-padding-block: var(--textarea-sm-padding-block);
+  --textarea-padding-inline: var(--textarea-sm-padding-inline);
+  --textarea-font-size: var(--textarea-sm-font-size);
+}
+
+.textarea.textarea--lg {
+  --textarea-padding-block: var(--textarea-lg-padding-block);
+  --textarea-padding-inline: var(--textarea-lg-padding-inline);
+  --textarea-font-size: var(--textarea-lg-font-size);
+}
+

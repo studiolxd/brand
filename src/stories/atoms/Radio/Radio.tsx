@@ -4,6 +4,7 @@ interface RadioProps {
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   id?: string;
   name?: string;
   value?: string;
@@ -17,6 +18,7 @@ export function Radio({
   checked,
   defaultChecked,
   disabled,
+  size = 'md',
   id,
   name,
   value,
@@ -25,10 +27,12 @@ export function Radio({
   'aria-labelledby': ariaLabelledby,
   onChange,
 }: RadioProps) {
+  const className = ['radio', size !== 'md' ? `radio--${size}` : ''].filter(Boolean).join(' ');
+
   return (
     <input
       type="radio"
-      className="radio"
+      className={className}
       checked={checked}
       defaultChecked={defaultChecked}
       disabled={disabled}

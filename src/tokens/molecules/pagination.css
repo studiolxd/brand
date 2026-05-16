@@ -5,6 +5,9 @@
 :root {
   --pagination-padding-inline: 0; /** Sin padding lateral */
   --pagination-btn-bg: rgba(0, 0, 0, 0); /** Fondo de los botones */
+  --pagination-btn-hover-bg: rgba(0, 0, 0, 0); /** Fondo en hover — ghost style, sin cambio de fondo */
+  --pagination-btn-hover-text-decoration: underline; /** Decoración de texto en hover — estilo ghost */
+  --pagination-btn-current-bg: rgba(0, 0, 0, 0); /** Fondo de la página activa — sin fondo */
   --pagination-btn-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
   --pagination-font-family: var(--font-family-sans); /** Font family */
   --pagination-font-size: var(--font-size-1); /** 14px — UI nav label */
@@ -16,18 +19,24 @@
   --pagination-btn-padding-block: var(--spacing-2); /** Padding vertical de los botones */
   --pagination-btn-padding-inline: var(--spacing-2); /** Padding horizontal de los botones */
   --pagination-btn-radius: var(--border-radius-sm); /** Radio de borde de los botones */
-  --pagination-btn-hover-bg: var(--color-grey-lightest); /** Fondo en hover */
+  --pagination-btn-current-font-weight: var(--font-weight-bold); /** Peso tipográfico de la página activa */
   --pagination-btn-disabled-color: var(--color-grey-dark); /** Texto cuando está deshabilitado */
   --pagination-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
   --pagination-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --pagination-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
   --pagination-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
+  --pagination-sm-btn-padding-block: var(--spacing-1); /** Padding block de botones — variante sm */
+  --pagination-sm-btn-padding-inline: var(--spacing-1); /** Padding inline de botones — variante sm */
+  --pagination-sm-btn-min-width: var(--spacing-5); /** Ancho mínimo de botones de página — variante sm */
+  --pagination-lg-font-size: var(--font-size-2); /** Font size — variante lg (16px) */
+  --pagination-lg-btn-padding-block: var(--spacing-3); /** Padding block de botones — variante lg */
+  --pagination-lg-btn-padding-inline: var(--spacing-3); /** Padding inline de botones — variante lg */
+  --pagination-lg-btn-min-width: var(--spacing-7); /** Ancho mínimo de botones de página — variante lg */
   --pagination-font-weight: var(--font-weight-default); /** Font weight base */
   --pagination-summary-color: var(--color-text-on-light); /** Color del texto de total de resultados */
   --pagination-btn-color: var(--color-text-on-light); /** Color de texto de los botones */
   --pagination-btn-hover-color: var(--color-text-on-light); /** Texto en hover */
-  --pagination-btn-current-bg: var(--color-primary); /** Fondo de la página activa */
-  --pagination-btn-current-color: var(--color-text-on-dark); /** Texto de la página activa */
+  --pagination-btn-current-color: var(--color-text-on-light); /** Texto de la página activa */
   --pagination-ellipsis-color: var(--color-text-muted-on-light); /** Color del ellipsis */
   --pagination-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }

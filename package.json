@@ -1,11 +1,19 @@
 {
   "name": "@studiolxd/brand",
-  "version": "3.1.6",
+  "version": "3.2.0",
   "type": "module",
   "exports": {
     "./accordion": {
       "types": "./dist/_types/atoms/Accordion/Accordion.d.ts",
       "import": "./dist/accordion.js"
+    },
+    "./app-shell": {
+      "types": "./dist/_types/sections/AppShell/AppShell.d.ts",
+      "import": "./dist/app-shell.js"
+    },
+    "./sidebar": {
+      "types": "./dist/_types/sections/Sidebar/Sidebar.d.ts",
+      "import": "./dist/sidebar.js"
     },
     "./arrow": {
       "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",

@@ -18,6 +18,10 @@
     "disabled-cursor":          { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
     "disabled-border-color":    { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
     "disabled-bg-checked":      { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Fondo marcado/indeterminado cuando está deshabilitado" },
-    "check-rotate":           { "$value": "15deg",                        "$type": "string",    "$description": "Rotación del checkmark en animación de entrada/salida" }
+    "check-rotate":           { "$value": "15deg",                        "$type": "string",    "$description": "Rotación del checkmark en animación de entrada/salida" },
+    "sm-size":                { "$value": "1rem",                         "$type": "dimension", "$description": "Tamaño del checkbox — variante sm (16px)" },
+    "sm-check-size":          { "$value": "0.55rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante sm" },
+    "lg-size":                { "$value": "1.5rem",                       "$type": "dimension", "$description": "Tamaño del checkbox — variante lg (24px)" },
+    "lg-check-size":          { "$value": "0.85rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante lg" }
   }
 }

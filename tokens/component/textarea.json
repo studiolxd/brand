@@ -34,6 +34,12 @@
     "error-placeholder-color":          { "$value": "{color.text.placeholder}",  "$type": "color",     "$description": "Error placeholder color" },
     "error-placeholder-text-transform": { "$value": "uppercase",                 "$type": "string",    "$description": "Error placeholder text transform" },
     "error-focus-border-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Error border color on focus" },
-    "error-focus-ring-color":           { "$value": "{color.error-on-light}",    "$type": "color",     "$description": "Error focus ring color" }
+    "error-focus-ring-color":           { "$value": "{color.error-on-light}",    "$type": "color",     "$description": "Error focus ring color" },
+    "sm-padding-block":                 { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Block padding — variante sm" },
+    "sm-padding-inline":                { "$value": "{spacing.3}",               "$type": "dimension", "$description": "Inline padding — variante sm" },
+    "sm-font-size":                     { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Font size — variante sm (14px)" },
+    "lg-padding-block":                 { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Block padding — variante lg" },
+    "lg-padding-inline":                { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Inline padding — variante lg" },
+    "lg-font-size":                     { "$value": "{font-size.4}",             "$type": "dimension", "$description": "Font size — variante lg (20px)" }
   }
 }

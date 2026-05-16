@@ -1,0 +1,15 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --sidebar-width: 15rem; /** Ancho del panel en desktop */
+  --sidebar-z-index: 200; /** Z-index del panel en mobile (overlay) */
+  --sidebar-backdrop-bg: rgba(0, 0, 0, 0.4); /** Fondo del backdrop en móvil */
+  --sidebar-border-color: var(--color-grey-light); /** Borde derecho del panel en desktop */
+  --sidebar-padding-inline: var(--spacing-5); /** Padding horizontal interno del panel */
+  --sidebar-padding-block: var(--spacing-5); /** Padding vertical interno del panel */
+  --sidebar-transition-duration: var(--motion-duration-slow); /** Duración de la animación de apertura/cierre */
+  --sidebar-transition-easing: var(--motion-easing-in-out); /** Curva de animación de apertura/cierre */
+  --sidebar-bg: var(--color-background-light); /** Fondo del panel de la sidebar */
+}

@@ -11,12 +11,19 @@ interface CountrySelectProps {
   options: { value: Country | undefined; label: string }[];
   disabled?: boolean;
   dark?: boolean;
+  size?: 'sm' | 'md' | 'lg';
 }
 
-function CountrySelect({ value, onChange, options, disabled, dark }: CountrySelectProps) {
+function CountrySelect({ value, onChange, options, disabled, dark, size = 'md' }: CountrySelectProps) {
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;
   const fromVal = (v: string): Country => (v === INTL ? (undefined as unknown as Country) : (v as Country));
+  const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+  const contentClass = [
+    'input-phone__country-content',
+    size !== 'md' ? `input-phone__country-content--${size}` : '',
+    dark ? 'input-phone__country-content--dark' : '',
+  ].filter(Boolean).join(' ');
 
   return (
     <RadixSelect.Root
@@ -29,13 +36,13 @@ function CountrySelect({ value, onChange, options, disabled, dark }: CountrySele
           {value ? `+${getCountryCallingCode(value)}` : '🌐'}
         </RadixSelect.Value>
         <RadixSelect.Icon asChild>
-          <Chevron className="input-phone__country-icon" size="sm" />
+          <Chevron className="input-phone__country-icon" size={chevronSize} />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
 
       <RadixSelect.Portal>
         <RadixSelect.Content
-          className={['input-phone__country-content', dark ? 'input-phone__country-content--dark' : ''].filter(Boolean).join(' ')}
+          className={contentClass}
           position="popper"
         >
           <RadixSelect.Viewport>
@@ -62,6 +69,7 @@ interface InputPhoneProps {
   disabled?: boolean;
   error?: boolean;
   dark?: boolean;
+  size?: 'sm' | 'md' | 'lg';
   id?: string;
   name?: string;
   describedBy?: string;
@@ -76,6 +84,7 @@ export function InputPhone({
   disabled,
   error = false,
   dark,
+  size = 'md',
   id,
   name,
   describedBy,
@@ -85,6 +94,7 @@ export function InputPhone({
   const classes = [
     'input-phone',
     error ? 'input-phone--error' : '',
+    size !== 'md' ? `input-phone--${size}` : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -98,7 +108,7 @@ export function InputPhone({
       name={name}
       inputComponent={InputPhoneField}
       countrySelectComponent={CountrySelect}
-      countrySelectProps={{ dark }}
+      countrySelectProps={{ dark, size }}
       onChange={(v) => onChange?.(v)}
       onBlur={onBlur}
       numberInputProps={{ 'aria-describedby': describedBy }}

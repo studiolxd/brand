@@ -12,9 +12,10 @@ interface InputPhoneFieldProps {
     errorMessage?: string;
     helperText?: string;
     dark?: boolean;
+    size?: 'sm' | 'md' | 'lg';
     name?: string;
     onChange?: (value: string | undefined) => void;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function InputPhoneField({ id, label, labelHidden, value, defaultCountry, placeholder, disabled, error, errorMessage, helperText, dark, name, onChange, onBlur, }: InputPhoneFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function InputPhoneField({ id, label, labelHidden, value, defaultCountry, placeholder, disabled, error, errorMessage, helperText, dark, size, name, onChange, onBlur, }: InputPhoneFieldProps): import("react/jsx-runtime").JSX.Element;
 export {};

@@ -16,6 +16,10 @@
     "focus-ring-color":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
     "disabled-cursor":          { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
     "disabled-border-color":    { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
-    "disabled-dot-color":       { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del punto cuando está deshabilitado y seleccionado" }
+    "disabled-dot-color":       { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del punto cuando está deshabilitado y seleccionado" },
+    "sm-size":                  { "$value": "1rem",                     "$type": "dimension", "$description": "Tamaño del radio — variante sm (16px)" },
+    "sm-dot-size":              { "$value": "0.4rem",                   "$type": "dimension", "$description": "Tamaño del punto interior — variante sm" },
+    "lg-size":                  { "$value": "1.5rem",                   "$type": "dimension", "$description": "Tamaño del radio — variante lg (24px)" },
+    "lg-dot-size":              { "$value": "0.65rem",                  "$type": "dimension", "$description": "Tamaño del punto interior — variante lg" }
   }
 }

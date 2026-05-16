@@ -98,6 +98,30 @@
   border-bottom: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
 }
 
+/* ─── Sm variant ─────────────────────────────────────────────────────────── */
+.select.select--sm {
+  font-size: var(--select-sm-font-size);
+  padding-block: var(--select-sm-padding-block);
+  padding-inline: var(--select-sm-padding-inline);
+}
+
+.select__content--sm .select__item {
+  font-size: var(--select-sm-font-size);
+  padding-block: var(--select-sm-item-padding-block);
+}
+
+/* ─── Lg variant ─────────────────────────────────────────────────────────── */
+.select.select--lg {
+  font-size: var(--select-lg-font-size);
+  padding-block: var(--select-lg-padding-block);
+  padding-inline: var(--select-lg-padding-inline);
+}
+
+.select__content--lg .select__item {
+  font-size: var(--select-lg-font-size);
+  padding-block: var(--select-lg-item-padding-block);
+}
+
 /* ─── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
 .select__content.select__content--dark {
   background-color: var(--select-dark-content-bg);

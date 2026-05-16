@@ -6,6 +6,12 @@
     "checkbox-offset":  { "$value": "3px",                      "$type": "dimension", "$description": "Desplazamiento vertical del checkbox para alinearlo con la primera línea de texto" },
     "cursor":           { "$value": "pointer",                  "$type": "string",    "$description": "Cursor" },
     "disabled-cursor":  { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "sm-gap":           { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Gap — variante sm" },
+    "sm-padding-inline":{ "$value": "{spacing.3}",             "$type": "dimension", "$description": "Padding inline — variante sm" },
+    "sm-padding-block": { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Padding block — variante sm" },
+    "lg-gap":           { "$value": "{spacing.4}",             "$type": "dimension", "$description": "Gap — variante lg" },
+    "lg-padding-inline":{ "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding inline — variante lg" },
+    "lg-padding-block": { "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding block — variante lg" },
     "label": {
       "font-family":    { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Familia tipográfica — igual al texto por defecto" },
       "font-size":      { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Tamaño de fuente — igual al texto por defecto (16px)" },

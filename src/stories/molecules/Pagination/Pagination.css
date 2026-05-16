@@ -15,6 +15,12 @@
   color: var(--pagination-summary-color);
 }
 
+.pagination__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--pagination-controls-gap);
+}
+
 .pagination__size-selector {
   display: flex;
   align-items: center;
@@ -25,6 +31,7 @@
   display: flex;
   align-items: center;
   gap: var(--pagination-controls-gap);
+  margin-inline-start: auto;
 }
 
 .pagination__btn {
@@ -48,6 +55,7 @@
 .pagination__btn:hover:not(:disabled):not([aria-disabled='true']) {
   background-color: var(--pagination-btn-hover-bg);
   color: var(--pagination-btn-hover-color);
+  text-decoration: var(--pagination-btn-hover-text-decoration);
 }
 
 .pagination__btn:focus-visible {
@@ -58,11 +66,17 @@
 .pagination__btn.pagination__btn--current {
   background-color: var(--pagination-btn-current-bg);
   color: var(--pagination-btn-current-color);
+  font-weight: var(--pagination-btn-current-font-weight);
   cursor: default;
+  pointer-events: none;
 }
 
 .pagination__btn--nav {
   min-width: auto;
+}
+
+.pagination__chevron--prev {
+  transform: rotate(180deg);
 }
 
 .pagination__btn:disabled,
@@ -75,4 +89,46 @@
   padding-block: var(--pagination-btn-padding-block);
   padding-inline: var(--pagination-btn-padding-inline);
   color: var(--pagination-ellipsis-color);
+}
+
+/* ─── Sm variant ─────────────────────────────────────────────────────────── */
+.pagination.pagination--sm {
+  font-size: var(--pagination-font-size);
+}
+
+.pagination.pagination--sm .pagination__btn {
+  padding-block: var(--pagination-sm-btn-padding-block);
+  padding-inline: var(--pagination-sm-btn-padding-inline);
+  min-width: var(--pagination-sm-btn-min-width);
+}
+
+.pagination.pagination--sm .pagination__btn--nav {
+  min-width: auto;
+}
+
+.pagination.pagination--sm .pagination__ellipsis {
+  padding-block: var(--pagination-sm-btn-padding-block);
+  padding-inline: var(--pagination-sm-btn-padding-inline);
+}
+
+/* ─── Lg variant ─────────────────────────────────────────────────────────── */
+.pagination.pagination--lg {
+  font-size: var(--pagination-lg-font-size);
+}
+
+.pagination.pagination--lg .pagination__btn {
+  font-size: var(--pagination-lg-font-size);
+  padding-block: var(--pagination-lg-btn-padding-block);
+  padding-inline: var(--pagination-lg-btn-padding-inline);
+  min-width: var(--pagination-lg-btn-min-width);
+}
+
+.pagination.pagination--lg .pagination__btn--nav {
+  min-width: auto;
+}
+
+.pagination.pagination--lg .pagination__ellipsis {
+  font-size: var(--pagination-lg-font-size);
+  padding-block: var(--pagination-lg-btn-padding-block);
+  padding-inline: var(--pagination-lg-btn-padding-inline);
 }

@@ -46,3 +46,14 @@
 .radio:disabled:checked::before {
   background-color: var(--radio-disabled-dot-color);
 }
+
+/* ─── Size variants ──────────────────────────────────────────── */
+.radio.radio--sm {
+  --radio-size: var(--radio-sm-size);
+  --radio-dot-size: var(--radio-sm-dot-size);
+}
+
+.radio.radio--lg {
+  --radio-size: var(--radio-lg-size);
+  --radio-dot-size: var(--radio-lg-dot-size);
+}
