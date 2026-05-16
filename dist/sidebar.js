@@ -1,21 +1,26 @@
 'use client';
 import './sidebar.css';
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { t as e } from "./_shared/SidebarContext.js";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { useContext as r } from "react";
 //#region src/stories/sections/Sidebar/Sidebar.tsx
-function n({ open: n, onOpenChange: r, children: i, id: a }) {
-	return /* @__PURE__ */ t("div", {
+function i({ open: i, onOpenChange: a, children: o, id: s }) {
+	let c = r(e), l = i !== void 0, u = l ? i : c?.open ?? !1, d = () => {
+		l ? a?.(!1) : c?.setOpen(!1);
+	};
+	return /* @__PURE__ */ n("div", {
 		className: "sidebar",
-		"data-open": n ? "true" : "false",
-		id: a,
-		children: [/* @__PURE__ */ e("div", {
+		"data-open": u ? "true" : "false",
+		id: s,
+		children: [/* @__PURE__ */ t("div", {
 			className: "sidebar__backdrop",
-			onClick: () => r?.(!1),
+			onClick: d,
 			"aria-hidden": "true"
-		}), /* @__PURE__ */ e("div", {
+		}), /* @__PURE__ */ t("div", {
 			className: "sidebar__panel",
-			children: i
+			children: o
 		})]
 	});
 }
 //#endregion
-export { n as Sidebar };
+export { i as Sidebar };

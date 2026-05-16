@@ -1,1 +1,1 @@
-.app-shell{min-height:100dvh;display:flex}.app-shell__content{flex:1;min-width:0;overflow:auto}
+.app-shell{height:100dvh;display:flex}.app-shell__content{min-width:0;flex:1;padding-block-start:env(safe-area-inset-top);padding-block-end:env(safe-area-inset-bottom);padding-inline-start:env(safe-area-inset-left);padding-inline-end:env(safe-area-inset-right);overflow:auto}

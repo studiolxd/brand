@@ -1,7 +1,10 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import './AppShell.css';
+export { useSidebar } from './SidebarContext';
+export type { SidebarContextValue } from './SidebarContext';
 export interface AppShellProps {
     sidebar: ReactNode;
     children: ReactNode;
+    defaultOpen?: boolean;
 }
-export declare function AppShell({ sidebar, children }: AppShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppShell({ sidebar, children, defaultOpen }: AppShellProps): import("react/jsx-runtime").JSX.Element;
