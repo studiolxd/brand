@@ -3,14 +3,30 @@
 .app-shell {
   display: flex;
   height: 100dvh;
+  position: relative;
+  overflow-x: clip;
 }
 
 .app-shell__content {
   flex: 1;
   min-width: 0;
   overflow: auto;
+  background-color: var(--color-bg-page);
+  box-sizing: border-box;
   padding-block-start: env(safe-area-inset-top);
   padding-block-end: env(safe-area-inset-bottom);
-  padding-inline-start: env(safe-area-inset-left);
+  padding-inline-start: var(--sidebar-width);
   padding-inline-end: env(safe-area-inset-right);
+  transition: padding-inline-start var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+}
+
+.app-shell:has(.sidebar[data-open="false"]) .app-shell__content {
+  padding-inline-start: env(safe-area-inset-left);
+}
+
+@media (max-width: 1023px) {
+  .app-shell__content {
+    padding-inline-start: env(safe-area-inset-left);
+    transition: none;
+  }
 }

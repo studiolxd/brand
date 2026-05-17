@@ -1,18 +1,13 @@
 /* ---- Sidebar ---- */
 
-/* Wrapper — flex item que participa en el layout de AppShell en desktop */
+/* Wrapper — posicionado absolute en desktop, sin transform (no afecta position:fixed en mobile) */
 .sidebar {
-  flex-shrink: 0;
-  width: var(--sidebar-width);
-  transition: width var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+  position: absolute;
+  inset-block: 0;
+  inline-size: var(--sidebar-width);
 }
 
-.sidebar[data-open="false"] {
-  width: 0;
-  overflow: hidden;
-}
-
-/* Panel — área de contenido visible */
+/* Panel — maneja su propia animación en desktop y mobile */
 .sidebar__panel {
   width: var(--sidebar-width);
   height: 100%;
@@ -22,6 +17,17 @@
   padding-block: var(--sidebar-padding-block);
   overflow-y: auto;
   box-sizing: border-box;
+  transition:
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
+    visibility 0s 0s;
+}
+
+.sidebar[data-open="false"] .sidebar__panel {
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition:
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
+    visibility 0s var(--sidebar-transition-duration);
 }
 
 /* Backdrop — oculto en desktop */
@@ -31,10 +37,9 @@
 
 /* === Mobile (< breakpoint lg, 1024px) === */
 @media (max-width: 1023px) {
-  /* El wrapper no ocupa espacio en el layout — el contenido ocupa el 100% */
+  /* El wrapper no ocupa espacio — se colapsa a 0 */
   .sidebar {
-    width: 0;
-    transition: none;
+    inline-size: 0;
   }
 
   /* Panel como overlay fijo sobre el contenido */
