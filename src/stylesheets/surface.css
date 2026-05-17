@@ -125,61 +125,61 @@
 }
 
 .surface-dark .button--primary.button--destructive-intent {
-  color: var(--color-destructive-on-dark);
-  border-color: var(--color-destructive-on-dark);
+  color: var(--color-error-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--primary.button--destructive-intent:hover {
-  background-color: var(--color-destructive-on-dark);
+  background-color: var(--color-error-on-dark);
   color: var(--color-text-on-light);
-  border-color: var(--color-destructive-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--primary.button--destructive-intent:active {
-  background-color: var(--color-destructive-on-dark);
+  background-color: var(--color-error-on-dark);
   color: var(--color-text-on-light);
-  border-color: var(--color-destructive-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--primary.button--destructive-intent:focus-visible {
-  outline-color: var(--color-destructive-on-dark);
+  outline-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--outline.button--destructive-intent {
-  color: var(--color-destructive-on-dark);
-  border-color: var(--color-destructive-on-dark);
+  color: var(--color-error-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--outline.button--destructive-intent:hover {
-  background-color: var(--color-destructive-on-dark);
+  background-color: var(--color-error-on-dark);
   color: var(--color-text-on-light);
-  border-color: var(--color-destructive-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--outline.button--destructive-intent:active {
-  background-color: var(--color-destructive-on-dark);
+  background-color: var(--color-error-on-dark);
   color: var(--color-text-on-light);
-  border-color: var(--color-destructive-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--outline.button--destructive-intent:focus-visible {
-  outline-color: var(--color-destructive-on-dark);
+  outline-color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--ghost.button--destructive-intent {
-  color: var(--color-destructive-on-dark);
+  color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--ghost.button--destructive-intent:hover {
-  color: var(--color-destructive-on-dark);
+  color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--ghost.button--destructive-intent:active {
-  color: var(--color-destructive-on-dark);
+  color: var(--color-error-on-dark);
 }
 
 .surface-dark .button--ghost.button--destructive-intent:focus-visible {
-  outline-color: var(--color-destructive-on-dark);
+  outline-color: var(--color-error-on-dark);
 }
 
 /* ─── Input: disabled and error states ───────────────────────────────────── */
@@ -333,8 +333,8 @@
   --context-menu-item-hover-bg:               rgba(255, 255, 255, 0.08);
   --context-menu-item-hover-color:            var(--color-text-on-dark);
   --context-menu-separator-color:             rgba(255, 255, 255, 0.15);
-  --context-menu-item-destructive-color:      var(--color-destructive-on-dark);
-  --context-menu-item-destructive-hover-bg:   var(--color-destructive-on-dark);
+  --context-menu-item-destructive-color:      var(--color-error-on-dark);
+  --context-menu-item-destructive-hover-bg:   var(--color-error-on-dark);
   --context-menu-item-destructive-hover-color:var(--color-white);
 
   /* ─── Tabs ───────────────────────────────────────────────────────────────── */
@@ -344,17 +344,6 @@
   --tabs-trigger-active-color:   var(--color-text-on-dark);
   --tabs-focus-ring-color:       var(--color-text-on-dark);
 
-  /* ─── Tag semantic variants ───────────────────────────────────────────────── */
-  --tag-neutral-bg:    var(--color-neutral-bg-dark);
-  --tag-neutral-color: var(--color-text-muted-on-dark);
-  --tag-info-bg:       var(--color-blue-bg-dark);
-  --tag-info-color:    var(--color-info-on-dark);
-  --tag-warning-bg:    var(--color-amber-bg-dark);
-  --tag-warning-color: var(--color-warning-on-dark);
-  --tag-success-bg:    var(--color-green-bg-dark);
-  --tag-success-color: var(--color-success-on-dark);
-  --tag-danger-bg:     var(--color-red-bg-dark);
-  --tag-danger-color:  var(--color-error-on-dark);
 }
 
 /* =============================================================

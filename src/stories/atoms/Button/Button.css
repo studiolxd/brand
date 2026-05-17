@@ -213,24 +213,24 @@
 
 /* Outline + destructive intent */
 .button--outline.button--destructive-intent {
-  color: var(--color-destructive-on-dark);
-  border-color: var(--color-destructive-on-dark);
+  color: var(--color-error-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .button--outline.button--destructive-intent:hover {
-  background-color: var(--color-destructive-on-dark);
+  background-color: var(--color-error-on-dark);
   color: var(--color-text-on-light);
-  border-color: var(--color-destructive-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .button--outline.button--destructive-intent:active {
-  background-color: var(--color-destructive-on-dark);
+  background-color: var(--color-error-on-dark);
   color: var(--color-text-on-light);
-  border-color: var(--color-destructive-on-dark);
+  border-color: var(--color-error-on-dark);
 }
 
 .button--outline.button--destructive-intent:focus-visible {
-  outline-color: var(--color-destructive-on-dark);
+  outline-color: var(--color-error-on-dark);
 }
 
 /* Ghost + destructive intent */

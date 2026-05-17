@@ -114,14 +114,14 @@ Colores funcionales, independientes de la paleta de marca. No deben usarse con f
 
 <ColorPalette>
   <ColorItem
-    title="Blue"
-    subtitle="Info on light · Info on dark"
-    colors={{ "--color-blue": "#0F4B9B", "--color-blue-on-dark": "#82B4FF" }}
+    title="Red"
+    subtitle="Error/Destructive on light · Error on dark"
+    colors={{ "--color-red-on-light": "#B30000", "--color-red-on-dark": "#FF8585" }}
   />
   <ColorItem
-    title="Amber"
-    subtitle="Warning on light · Warning on dark"
-    colors={{ "--color-amber": "#7A4500", "--color-amber-on-dark": "#FFD280" }}
+    title="Green"
+    subtitle="Success on light · Success on dark"
+    colors={{ "--color-green-on-light": "#006616", "--color-green-on-dark": "#00CC2C" }}
   />
   <ColorItem
     title="Green dark"
@@ -129,25 +129,9 @@ Colores funcionales, independientes de la paleta de marca. No deben usarse con f
     colors={{ "--color-green-dark": "#005A14" }}
   />
   <ColorItem
-    title="Fondos de estado (claro)"
-    subtitle="Info · Warning · Success · Danger"
-    colors={{
-      "--color-blue-bg":  "#E8F0FE",
-      "--color-amber-bg": "#FFF8E1",
-      "--color-green-bg": "#E6F4EA",
-      "--color-red-bg":   "#FFFFFF",
-    }}
-  />
-  <ColorItem
-    title="Fondos de estado (oscuro)"
-    subtitle="Info · Warning · Success · Danger · Neutral"
-    colors={{
-      "--color-blue-bg-dark":    "#111E38",
-      "--color-amber-bg-dark":   "#221E0A",
-      "--color-green-bg-dark":   "#0E1E10",
-      "--color-red-bg-dark":     "#1A0E0E",
-      "--color-neutral-bg-dark": "#1E2530",
-    }}
+    title="Fondo éxito"
+    subtitle="Success tag background"
+    colors={{ "--color-green-bg": "#E6F4EA" }}
   />
 </ColorPalette>
 
@@ -170,18 +154,8 @@ Asignan un rol semántico a los colores de sistema. Equivalente a la capa de mar
   />
   <ColorItem
     title="Destructive"
-    subtitle="Destructive on light · Destructive on dark"
-    colors={{ "--color-destructive-on-light": "#B30000", "--color-destructive-on-dark": "#FF8585" }}
-  />
-  <ColorItem
-    title="Info"
-    subtitle="Info on light · Info on dark"
-    colors={{ "--color-info-on-light": "#0F4B9B", "--color-info-on-dark": "#82B4FF" }}
-  />
-  <ColorItem
-    title="Warning"
-    subtitle="Warning on light · Warning on dark"
-    colors={{ "--color-warning-on-light": "#7A4500", "--color-warning-on-dark": "#FFD280" }}
+    subtitle="Destructive on light"
+    colors={{ "--color-destructive-on-light": "#B30000" }}
   />
 </ColorPalette>
 

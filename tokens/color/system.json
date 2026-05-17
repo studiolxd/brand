@@ -4,19 +4,7 @@
     "red-on-dark":    { "$value": "#FF8585", "$type": "color", "$description": "System red — error states on dark background" },
     "green-on-light": { "$value": "#006616", "$type": "color", "$description": "System green — success states on light background (AAA on white)" },
     "green-on-dark":  { "$value": "#00CC2C", "$type": "color", "$description": "System green — success states on dark background" },
-    "blue":           { "$value": "#0F4B9B", "$type": "color", "$description": "System blue — info states on light background (AAA on white and tinted bg)" },
-    "blue-on-dark":   { "$value": "#82B4FF", "$type": "color", "$description": "System blue — info states on dark background" },
-    "amber":          { "$value": "#7A4500", "$type": "color", "$description": "System amber — warning states on light background (AAA on tinted bg)" },
-    "amber-on-dark":  { "$value": "#FFD280", "$type": "color", "$description": "System amber — warning states on dark background" },
     "green-dark":     { "$value": "#005A14", "$type": "color", "$description": "System green dark — success text on tinted backgrounds (AAA on green-bg)" },
-    "blue-bg":        { "$value": "#E8F0FE", "$type": "color", "$description": "Info state background tint — light surface" },
-    "amber-bg":       { "$value": "#FFF8E1", "$type": "color", "$description": "Warning state background tint — light surface" },
-    "green-bg":       { "$value": "#E6F4EA", "$type": "color", "$description": "Success state background tint — light surface" },
-    "red-bg":         { "$value": "#FFFFFF", "$type": "color", "$description": "Danger state background — white so destructive-on-light achieves AAA (7.10:1)" },
-    "blue-bg-dark":    { "$value": "#111E38", "$type": "color", "$description": "Info state background tint — dark surface (AAA 7.18:1 with blue-on-dark)" },
-    "amber-bg-dark":   { "$value": "#221E0A", "$type": "color", "$description": "Warning state background tint — dark surface (AAA ~12:1 with amber-on-dark)" },
-    "green-bg-dark":   { "$value": "#0E1E10", "$type": "color", "$description": "Success state background tint — dark surface (AAA 8.28:1 with green-on-dark)" },
-    "red-bg-dark":     { "$value": "#1A0E0E", "$type": "color", "$description": "Danger state background tint — dark surface (AAA 8.05:1 with red-on-dark)" },
-    "neutral-bg-dark": { "$value": "#1E2530", "$type": "color", "$description": "Neutral state background tint — dark surface (AAA ~12:1 with grey-lightest)" }
+    "green-bg":       { "$value": "#E6F4EA", "$type": "color", "$description": "Success state background tint — light surface" }
   }
 }
