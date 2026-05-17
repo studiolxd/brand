@@ -50,6 +50,7 @@ export const entryPoints = {
   'sidebar-nav':         'src/stories/molecules/SidebarNav/SidebarNav.tsx',
   'calendar':            'src/stories/molecules/Calendar/Calendar.tsx',
   'calendar-planner':    'src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx',
+  'calendar-roster':     'src/stories/molecules/CalendarRoster/CalendarRoster.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
@@ -72,4 +73,5 @@ export const clientComponents = new Set([
   'tabs',
   'calendar',
   'calendar-planner',
+  'calendar-roster',
 ]);

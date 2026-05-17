@@ -26,6 +26,12 @@ export interface CalendarPlannerProps {
   maxItemsPerDay?: number;
   /** Callback al pulsar "+N más" en una celda */
   onMoreClick?: (date: Date, events: PlannerEvent[]) => void;
+  /**
+   * Callback al hacer click en cualquier celda de día (incluso días vacíos y externos).
+   * Recibe la fecha de la celda y el array de eventos de ese día (vacío si no hay ninguno).
+   * Compatible con renderDay: el click se dispara en el contenedor de la celda.
+   */
+  onDayClick?: (date: Date, events: PlannerEvent[]) => void;
   /** Mes visible (modo controlado) */
   month?: Date;
   /** Mes inicial en modo no controlado */
@@ -100,6 +106,7 @@ export function CalendarPlanner({
   renderDay,
   maxItemsPerDay = 3,
   onMoreClick,
+  onDayClick,
   month: monthProp,
   defaultMonth,
   onMonthChange,
@@ -216,8 +223,9 @@ export function CalendarPlanner({
                 <div
                   key={date.toISOString()}
                   role="gridcell"
-                  className={cellClass}
+                  className={[cellClass, onDayClick ? 'calendar-planner__cell--clickable' : ''].filter(Boolean).join(' ')}
                   aria-current={isToday ? 'date' : undefined}
+                  onClick={onDayClick ? () => onDayClick(date, dayEvents) : undefined}
                 >
                   <span className={numberClass} aria-label={dayNumberFormatter.format(date)}>
                     {date.getDate()}

@@ -104,6 +104,14 @@
   background-color: var(--calendar-planner-cell-outside-bg);
 }
 
+.calendar-planner__cell.calendar-planner__cell--clickable {
+  cursor: pointer;
+}
+
+.calendar-planner__cell.calendar-planner__cell--clickable:hover {
+  background-color: var(--calendar-planner-day-hover-bg);
+}
+
 /* ─── Day number ──────────────────────────────────────────────────────────── */
 
 .calendar-planner__day-number {

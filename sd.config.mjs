@@ -63,6 +63,7 @@ const filters = {
   tabs:                (t) => t.path[0] === 'tabs',
   calendar:            (t) => t.path[0] === 'calendar',
   'calendar-planner':  (t) => t.path[0] === 'calendar-planner',
+  'calendar-roster':   (t) => t.path[0] === 'calendar-roster',
 };
 
 function cssFile(destination, filterKey) {
@@ -139,6 +140,7 @@ const sd = new StyleDictionary({
         cssFile('components/tabs.css',               'tabs'),
         cssFile('molecules/calendar.css',            'calendar'),
         cssFile('molecules/calendar-planner.css',   'calendar-planner'),
+        cssFile('molecules/calendar-roster.css',    'calendar-roster'),
       ],
     },
     scss: {
@@ -203,6 +205,7 @@ const sd = new StyleDictionary({
         scssFile('components/_tabs.scss',               'tabs'),
         scssFile('molecules/_calendar.scss',            'calendar'),
         scssFile('molecules/_calendar-planner.scss',   'calendar-planner'),
+        scssFile('molecules/_calendar-roster.scss',    'calendar-roster'),
       ],
     },
   },

@@ -1,0 +1,69 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --calendar-roster-th-name-width: 10rem; /** Ancho de la columna de nombre */
+  --calendar-roster-th-day-width: 2.5rem; /** Ancho mínimo de cada columna de día */
+  --calendar-roster-th-day-sub-font-size: 0.625rem; /** Tamaño de la letra del día de semana */
+  --calendar-roster-cell-holiday-bg: #e5e7eb; /** Fondo de celdas festivas */
+  --calendar-roster-schedule-font-size: 0.6875rem; /** Tamaño del texto de horario (11px) */
+  --calendar-roster-chip-font-size: 0.6875rem; /** Tamaño del texto del chip (11px) */
+  --calendar-roster-chip-padding-block: 2px; /** Padding vertical del chip */
+  --calendar-roster-chip-holiday-bg: #e5e7eb; /** Fondo chip festivo */
+  --calendar-roster-chip-vacation-bg: #dbeafe; /** Fondo chip vacaciones */
+  --calendar-roster-chip-vacation-color: #1d4ed8; /** Texto chip vacaciones */
+  --calendar-roster-chip-absence-bg: #fee2e2; /** Fondo chip ausencia */
+  --calendar-roster-chip-absence-color: #b91c1c; /** Texto chip ausencia */
+  --calendar-roster-chip-recovery-bg: #d1fae5; /** Fondo chip recuperación */
+  --calendar-roster-chip-recovery-color: #065f46; /** Texto chip recuperación */
+  --calendar-roster-chip-birthday-bg: #fce7f3; /** Fondo chip cumpleaños */
+  --calendar-roster-chip-birthday-color: #9d174d; /** Texto chip cumpleaños */
+  --calendar-roster-font-family: var(--font-family-sans); /** Familia tipográfica base */
+  --calendar-roster-nav-hover-bg: var(--color-grey-lightest); /** Fondo hover de los botones de navegación */
+  --calendar-roster-nav-disabled-color: var(--color-grey-dark); /** Color deshabilitado */
+  --calendar-roster-nav-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --calendar-roster-nav-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
+  --calendar-roster-nav-radius: var(--border-radius-sm); /** Radio del botón de navegación */
+  --calendar-roster-title-font-size: var(--font-size-2); /** Tamaño del título del mes */
+  --calendar-roster-title-font-weight: var(--font-weight-bold); /** Peso del título del mes */
+  --calendar-roster-border-color: var(--color-grey-light); /** Color de los bordes del grid */
+  --calendar-roster-border-width: var(--border-width-sm); /** Grosor de los bordes del grid */
+  --calendar-roster-th-name-font-size: var(--font-size-1); /** Tamaño del encabezado de nombre */
+  --calendar-roster-th-name-font-weight: var(--font-weight-bold); /** Peso del encabezado de nombre */
+  --calendar-roster-th-name-padding-block: var(--spacing-2); /** Padding vertical del encabezado de nombre */
+  --calendar-roster-th-name-padding-inline: var(--spacing-3); /** Padding horizontal del encabezado de nombre */
+  --calendar-roster-th-day-font-size: var(--font-size-1); /** Tamaño del número de día */
+  --calendar-roster-th-day-padding-block: var(--spacing-2); /** Padding vertical del encabezado de día */
+  --calendar-roster-th-day-today-radius: var(--border-radius-sm); /** Radio del badge del día de hoy */
+  --calendar-roster-td-name-font-size: var(--font-size-1); /** Tamaño del nombre del empleado */
+  --calendar-roster-td-name-padding-block: var(--spacing-2); /** Padding vertical de la celda de nombre */
+  --calendar-roster-td-name-padding-inline: var(--spacing-3); /** Padding horizontal de la celda de nombre */
+  --calendar-roster-cell-padding-block: var(--spacing-1); /** Padding vertical de las celdas de datos */
+  --calendar-roster-cell-padding-inline: var(--spacing-1); /** Padding horizontal de las celdas de datos */
+  --calendar-roster-cell-weekend-bg: var(--color-grey-lightest); /** Fondo de celdas de fin de semana */
+  --calendar-roster-chip-font-weight: var(--font-weight-bold); /** Peso del texto del chip */
+  --calendar-roster-chip-padding-inline: var(--spacing-1); /** Padding horizontal del chip */
+  --calendar-roster-chip-radius: var(--border-radius-sm); /** Radio del chip */
+  --calendar-roster-chip-holiday-color: var(--color-grey-darkest); /** Texto chip festivo */
+  --calendar-roster-legend-gap: var(--spacing-3); /** Gap entre elementos de la leyenda */
+  --calendar-roster-legend-font-size: var(--font-size-1); /** Tamaño del texto de la leyenda */
+  --calendar-roster-legend-swatch-size: var(--spacing-3); /** Tamaño del cuadradito de color en la leyenda */
+  --calendar-roster-legend-swatch-radius: var(--border-radius-sm); /** Radio del cuadradito de color */
+  --calendar-roster-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
+  --calendar-roster-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
+  --calendar-roster-nav-color: var(--color-text-on-light); /** Color de los botones prev/next */
+  --calendar-roster-nav-focus-ring-color: var(--color-primary); /** Focus ring de navegación */
+  --calendar-roster-title-color: var(--color-text-on-light); /** Color del título del mes */
+  --calendar-roster-th-name-color: var(--color-text-muted-on-light); /** Color del encabezado de nombre */
+  --calendar-roster-th-name-bg: var(--color-background-light); /** Fondo sticky de la columna de nombre */
+  --calendar-roster-th-day-color: var(--color-text-on-light); /** Color del encabezado de día */
+  --calendar-roster-th-day-bg: var(--color-background-light); /** Fondo del encabezado de día */
+  --calendar-roster-th-day-today-color: var(--color-background-light); /** Texto del encabezado del día de hoy */
+  --calendar-roster-th-day-today-bg: var(--color-primary); /** Fondo del encabezado del día de hoy */
+  --calendar-roster-td-name-color: var(--color-text-on-light); /** Color del nombre del empleado */
+  --calendar-roster-td-name-bg: var(--color-background-light); /** Fondo sticky de la celda de nombre */
+  --calendar-roster-cell-bg: var(--color-background-light); /** Fondo de celdas de día laborable */
+  --calendar-roster-schedule-color: var(--color-text-on-light); /** Color del texto de horario */
+  --calendar-roster-legend-color: var(--color-text-muted-on-light); /** Color del texto de la leyenda */
+}

@@ -43,6 +43,8 @@ export { Calendar } from './stories/molecules/Calendar/Calendar';
 export type { CalendarProps } from './stories/molecules/Calendar/Calendar';
 export { CalendarPlanner } from './stories/molecules/CalendarPlanner/CalendarPlanner';
 export type { CalendarPlannerProps, PlannerEvent } from './stories/molecules/CalendarPlanner/CalendarPlanner';
+export { CalendarRoster } from './stories/molecules/CalendarRoster/CalendarRoster';
+export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType } from './stories/molecules/CalendarRoster/CalendarRoster';
 export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
 export type { ContextMenuItem, ContextMenuButtonItem, ContextMenuLinkItem, ContextMenuSeparator, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
 export { Card } from './stories/molecules/Card/Card';

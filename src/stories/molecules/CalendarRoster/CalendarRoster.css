@@ -1,0 +1,258 @@
+.calendar-roster {
+  display: flex;
+  flex-direction: column;
+  gap: var(--calendar-roster-legend-gap);
+  font-family: var(--calendar-roster-font-family);
+}
+
+/* ─── Navigation ──────────────────────────────────────────────────────────── */
+
+.calendar-roster__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--calendar-roster-legend-gap);
+}
+
+.calendar-roster__title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--calendar-roster-font-family);
+  font-size: var(--calendar-roster-title-font-size);
+  font-weight: var(--calendar-roster-title-font-weight);
+  color: var(--calendar-roster-title-color);
+}
+
+.calendar-roster__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--calendar-roster-chip-padding-block);
+  padding-inline: var(--calendar-roster-chip-padding-block);
+  border: none;
+  border-radius: var(--calendar-roster-nav-radius);
+  background-color: transparent;
+  color: var(--calendar-roster-nav-color);
+  cursor: pointer;
+  text-decoration: none;
+  transition-property: background-color;
+  transition-duration: var(--calendar-roster-transition-duration);
+  transition-timing-function: var(--calendar-roster-transition-easing);
+}
+
+.calendar-roster__nav-btn:hover {
+  background-color: var(--calendar-roster-nav-hover-bg);
+}
+
+.calendar-roster__nav-btn:focus-visible {
+  outline: var(--calendar-roster-nav-focus-ring-width) solid var(--calendar-roster-nav-focus-ring-color);
+  outline-offset: var(--calendar-roster-nav-focus-ring-offset);
+}
+
+.calendar-roster__chevron--prev {
+  transform: rotate(180deg);
+}
+
+/* ─── Scrollable wrapper ──────────────────────────────────────────────────── */
+
+.calendar-roster__wrap {
+  overflow-x: auto;
+  overflow-y: visible;
+  border: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  border-radius: var(--calendar-roster-nav-radius);
+}
+
+/* ─── Table ───────────────────────────────────────────────────────────────── */
+
+.calendar-roster__table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--calendar-roster-font-family);
+  white-space: nowrap;
+}
+
+/* ─── Name column header (sticky) ─────────────────────────────────────────── */
+
+.calendar-roster__th-name {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  min-width: var(--calendar-roster-th-name-width);
+  max-width: var(--calendar-roster-th-name-width);
+  padding-block: var(--calendar-roster-th-name-padding-block);
+  padding-inline: var(--calendar-roster-th-name-padding-inline);
+  background-color: var(--calendar-roster-th-name-bg);
+  font-size: var(--calendar-roster-th-name-font-size);
+  font-weight: var(--calendar-roster-th-name-font-weight);
+  color: var(--calendar-roster-th-name-color);
+  text-align: start;
+  border-block-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  border-inline-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+}
+
+/* ─── Day column headers ──────────────────────────────────────────────────── */
+
+.calendar-roster__th-day {
+  min-width: var(--calendar-roster-th-day-width);
+  padding-block: var(--calendar-roster-th-day-padding-block);
+  padding-inline: 0;
+  text-align: center;
+  font-size: var(--calendar-roster-th-day-font-size);
+  color: var(--calendar-roster-th-day-color);
+  background-color: var(--calendar-roster-th-day-bg);
+  border-block-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  border-inline-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  vertical-align: middle;
+}
+
+.calendar-roster__th-day--weekend {
+  background-color: var(--calendar-roster-cell-weekend-bg);
+}
+
+.calendar-roster__th-day-number {
+  font-size: var(--calendar-roster-th-day-font-size);
+  font-weight: var(--calendar-roster-th-name-font-weight);
+  line-height: 1.2;
+}
+
+.calendar-roster__th-day-sub {
+  font-size: var(--calendar-roster-th-day-sub-font-size);
+  color: var(--calendar-roster-th-name-color);
+  line-height: 1;
+}
+
+/* Today highlight in header */
+.calendar-roster__th-day--today .calendar-roster__th-day-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--calendar-roster-th-day-today-radius);
+  background-color: var(--calendar-roster-th-day-today-bg);
+  color: var(--calendar-roster-th-day-today-color);
+}
+
+/* ─── Name cells (sticky) ─────────────────────────────────────────────────── */
+
+.calendar-roster__td-name {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  min-width: var(--calendar-roster-th-name-width);
+  max-width: var(--calendar-roster-th-name-width);
+  padding-block: var(--calendar-roster-td-name-padding-block);
+  padding-inline: var(--calendar-roster-td-name-padding-inline);
+  background-color: var(--calendar-roster-td-name-bg);
+  font-size: var(--calendar-roster-td-name-font-size);
+  color: var(--calendar-roster-td-name-color);
+  border-block-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  border-inline-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Data cells ──────────────────────────────────────────────────────────── */
+
+.calendar-roster__cell {
+  padding-block: var(--calendar-roster-cell-padding-block);
+  padding-inline: var(--calendar-roster-cell-padding-inline);
+  background-color: var(--calendar-roster-cell-bg);
+  border-block-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  border-inline-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.calendar-roster__cell--weekend {
+  background-color: var(--calendar-roster-cell-weekend-bg);
+}
+
+.calendar-roster__cell--holiday {
+  background-color: var(--calendar-roster-cell-holiday-bg);
+}
+
+.calendar-roster__cell--today {
+  outline: 2px solid var(--calendar-roster-th-day-today-bg);
+  outline-offset: -2px;
+}
+
+/* ─── Schedule text ───────────────────────────────────────────────────────── */
+
+.calendar-roster__schedule {
+  font-size: var(--calendar-roster-schedule-font-size);
+  color: var(--calendar-roster-schedule-color);
+  white-space: nowrap;
+}
+
+/* ─── Chips ───────────────────────────────────────────────────────────────── */
+
+.calendar-roster__chip {
+  display: inline-block;
+  padding-block: var(--calendar-roster-chip-padding-block);
+  padding-inline: var(--calendar-roster-chip-padding-inline);
+  border-radius: var(--calendar-roster-chip-radius);
+  font-size: var(--calendar-roster-chip-font-size);
+  font-weight: var(--calendar-roster-chip-font-weight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.calendar-roster__chip--holiday {
+  background-color: var(--calendar-roster-chip-holiday-bg);
+  color: var(--calendar-roster-chip-holiday-color);
+}
+
+.calendar-roster__chip--vacation {
+  background-color: var(--calendar-roster-chip-vacation-bg);
+  color: var(--calendar-roster-chip-vacation-color);
+}
+
+.calendar-roster__chip--absence {
+  background-color: var(--calendar-roster-chip-absence-bg);
+  color: var(--calendar-roster-chip-absence-color);
+}
+
+.calendar-roster__chip--recovery {
+  background-color: var(--calendar-roster-chip-recovery-bg);
+  color: var(--calendar-roster-chip-recovery-color);
+}
+
+.calendar-roster__chip--birthday {
+  background-color: var(--calendar-roster-chip-birthday-bg);
+  color: var(--calendar-roster-chip-birthday-color);
+}
+
+/* ─── Legend ──────────────────────────────────────────────────────────────── */
+
+.calendar-roster__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--calendar-roster-legend-gap);
+}
+
+.calendar-roster__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--calendar-roster-chip-padding-inline);
+  font-size: var(--calendar-roster-legend-font-size);
+  color: var(--calendar-roster-legend-color);
+}
+
+.calendar-roster__legend-swatch {
+  display: inline-block;
+  width: var(--calendar-roster-legend-swatch-size);
+  height: var(--calendar-roster-legend-swatch-size);
+  border-radius: var(--calendar-roster-legend-swatch-radius);
+  flex-shrink: 0;
+}
+
+.calendar-roster__legend-swatch--holiday  { background-color: var(--calendar-roster-chip-holiday-bg); }
+.calendar-roster__legend-swatch--vacation { background-color: var(--calendar-roster-chip-vacation-bg); }
+.calendar-roster__legend-swatch--absence  { background-color: var(--calendar-roster-chip-absence-bg); }
+.calendar-roster__legend-swatch--recovery { background-color: var(--calendar-roster-chip-recovery-bg); }
+.calendar-roster__legend-swatch--birthday { background-color: var(--calendar-roster-chip-birthday-bg); }

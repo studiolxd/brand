@@ -344,6 +344,26 @@
   --tabs-trigger-active-color:   var(--color-text-on-dark);
   --tabs-focus-ring-color:       var(--color-text-on-dark);
 
+  /* ─── CalendarRoster ─────────────────────────────────────────────────────── */
+  --calendar-roster-nav-color:               var(--color-text-on-dark);
+  --calendar-roster-nav-hover-bg:            rgba(255, 255, 255, 0.12);
+  --calendar-roster-nav-focus-ring-color:    var(--color-text-on-dark);
+  --calendar-roster-title-color:             var(--color-text-on-dark);
+  --calendar-roster-border-color:            rgba(255, 255, 255, 0.15);
+  --calendar-roster-th-name-bg:              var(--color-background-dark);
+  --calendar-roster-th-name-color:           var(--color-text-muted-on-dark);
+  --calendar-roster-th-day-color:            var(--color-text-on-dark);
+  --calendar-roster-th-day-bg:              var(--color-background-dark);
+  --calendar-roster-th-day-today-bg:         var(--color-text-on-dark);
+  --calendar-roster-th-day-today-color:      var(--color-background-dark);
+  --calendar-roster-td-name-bg:              var(--color-background-dark);
+  --calendar-roster-td-name-color:           var(--color-text-on-dark);
+  --calendar-roster-cell-bg:                 transparent;
+  --calendar-roster-cell-weekend-bg:         rgba(255, 255, 255, 0.04);
+  --calendar-roster-cell-holiday-bg:         rgba(255, 255, 255, 0.08);
+  --calendar-roster-schedule-color:          var(--color-text-muted-on-dark);
+  --calendar-roster-legend-color:            var(--color-text-muted-on-dark);
+
   /* ─── CalendarPlanner ────────────────────────────────────────────────────── */
   --calendar-planner-nav-color:               var(--color-text-on-dark);
   --calendar-planner-nav-hover-bg:            rgba(255, 255, 255, 0.12);

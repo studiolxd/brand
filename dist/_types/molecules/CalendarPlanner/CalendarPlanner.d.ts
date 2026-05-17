@@ -19,6 +19,12 @@ export interface CalendarPlannerProps {
     maxItemsPerDay?: number;
     /** Callback al pulsar "+N más" en una celda */
     onMoreClick?: (date: Date, events: PlannerEvent[]) => void;
+    /**
+     * Callback al hacer click en cualquier celda de día (incluso días vacíos y externos).
+     * Recibe la fecha de la celda y el array de eventos de ese día (vacío si no hay ninguno).
+     * Compatible con renderDay: el click se dispara en el contenedor de la celda.
+     */
+    onDayClick?: (date: Date, events: PlannerEvent[]) => void;
     /** Mes visible (modo controlado) */
     month?: Date;
     /** Mes inicial en modo no controlado */
@@ -33,5 +39,5 @@ export interface CalendarPlannerProps {
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
 export {};

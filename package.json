@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -36,6 +36,10 @@
     "./calendar-planner": {
       "types": "./dist/_types/molecules/CalendarPlanner/CalendarPlanner.d.ts",
       "import": "./dist/calendar-planner.js"
+    },
+    "./calendar-roster": {
+      "types": "./dist/_types/molecules/CalendarRoster/CalendarRoster.d.ts",
+      "import": "./dist/calendar-roster.js"
     },
     "./card": {
       "types": "./dist/_types/molecules/Card/Card.d.ts",

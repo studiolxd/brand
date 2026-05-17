@@ -1,0 +1,66 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$calendar-roster-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
+$calendar-roster-nav-color: #111e30; // Color de los botones prev/next
+$calendar-roster-nav-hover-bg: #f2f2f2; // Fondo hover de los botones de navegación
+$calendar-roster-nav-disabled-color: #767676; // Color deshabilitado
+$calendar-roster-nav-focus-ring-color: #111e30; // Focus ring de navegación
+$calendar-roster-nav-focus-ring-width: 2px; // Grosor del focus ring
+$calendar-roster-nav-focus-ring-offset: 1px; // Separación del focus ring
+$calendar-roster-nav-radius: 4px; // Radio del botón de navegación
+$calendar-roster-title-font-size: 1rem; // Tamaño del título del mes
+$calendar-roster-title-font-weight: 700; // Peso del título del mes
+$calendar-roster-title-color: #111e30; // Color del título del mes
+$calendar-roster-border-color: #d0d0d0; // Color de los bordes del grid
+$calendar-roster-border-width: 1px; // Grosor de los bordes del grid
+$calendar-roster-th-name-width: 10rem; // Ancho de la columna de nombre
+$calendar-roster-th-name-font-size: 0.875rem; // Tamaño del encabezado de nombre
+$calendar-roster-th-name-font-weight: 700; // Peso del encabezado de nombre
+$calendar-roster-th-name-color: #4a4a4a; // Color del encabezado de nombre
+$calendar-roster-th-name-bg: #ffffff; // Fondo sticky de la columna de nombre
+$calendar-roster-th-name-padding-block: 0.5rem; // Padding vertical del encabezado de nombre
+$calendar-roster-th-name-padding-inline: 0.75rem; // Padding horizontal del encabezado de nombre
+$calendar-roster-th-day-width: 2.5rem; // Ancho mínimo de cada columna de día
+$calendar-roster-th-day-font-size: 0.875rem; // Tamaño del número de día
+$calendar-roster-th-day-sub-font-size: 0.625rem; // Tamaño de la letra del día de semana
+$calendar-roster-th-day-color: #111e30; // Color del encabezado de día
+$calendar-roster-th-day-padding-block: 0.5rem; // Padding vertical del encabezado de día
+$calendar-roster-th-day-bg: #ffffff; // Fondo del encabezado de día
+$calendar-roster-th-day-today-color: #ffffff; // Texto del encabezado del día de hoy
+$calendar-roster-th-day-today-bg: #111e30; // Fondo del encabezado del día de hoy
+$calendar-roster-th-day-today-radius: 4px; // Radio del badge del día de hoy
+$calendar-roster-td-name-font-size: 0.875rem; // Tamaño del nombre del empleado
+$calendar-roster-td-name-color: #111e30; // Color del nombre del empleado
+$calendar-roster-td-name-bg: #ffffff; // Fondo sticky de la celda de nombre
+$calendar-roster-td-name-padding-block: 0.5rem; // Padding vertical de la celda de nombre
+$calendar-roster-td-name-padding-inline: 0.75rem; // Padding horizontal de la celda de nombre
+$calendar-roster-cell-padding-block: 0.25rem; // Padding vertical de las celdas de datos
+$calendar-roster-cell-padding-inline: 0.25rem; // Padding horizontal de las celdas de datos
+$calendar-roster-cell-bg: #ffffff; // Fondo de celdas de día laborable
+$calendar-roster-cell-weekend-bg: #f2f2f2; // Fondo de celdas de fin de semana
+$calendar-roster-cell-holiday-bg: #e5e7eb; // Fondo de celdas festivas
+$calendar-roster-schedule-font-size: 0.6875rem; // Tamaño del texto de horario (11px)
+$calendar-roster-schedule-color: #111e30; // Color del texto de horario
+$calendar-roster-chip-font-size: 0.6875rem; // Tamaño del texto del chip (11px)
+$calendar-roster-chip-font-weight: 700; // Peso del texto del chip
+$calendar-roster-chip-padding-block: 2px; // Padding vertical del chip
+$calendar-roster-chip-padding-inline: 0.25rem; // Padding horizontal del chip
+$calendar-roster-chip-radius: 4px; // Radio del chip
+$calendar-roster-chip-holiday-bg: #e5e7eb; // Fondo chip festivo
+$calendar-roster-chip-holiday-color: #4a4a4a; // Texto chip festivo
+$calendar-roster-chip-vacation-bg: #dbeafe; // Fondo chip vacaciones
+$calendar-roster-chip-vacation-color: #1d4ed8; // Texto chip vacaciones
+$calendar-roster-chip-absence-bg: #fee2e2; // Fondo chip ausencia
+$calendar-roster-chip-absence-color: #b91c1c; // Texto chip ausencia
+$calendar-roster-chip-recovery-bg: #d1fae5; // Fondo chip recuperación
+$calendar-roster-chip-recovery-color: #065f46; // Texto chip recuperación
+$calendar-roster-chip-birthday-bg: #fce7f3; // Fondo chip cumpleaños
+$calendar-roster-chip-birthday-color: #9d174d; // Texto chip cumpleaños
+$calendar-roster-legend-gap: 0.75rem; // Gap entre elementos de la leyenda
+$calendar-roster-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
+$calendar-roster-legend-color: #4a4a4a; // Color del texto de la leyenda
+$calendar-roster-legend-swatch-size: 0.75rem; // Tamaño del cuadradito de color en la leyenda
+$calendar-roster-legend-swatch-radius: 4px; // Radio del cuadradito de color
+$calendar-roster-transition-duration: 150ms; // Duración de las transiciones
+$calendar-roster-transition-easing: ease; // Easing de las transiciones
