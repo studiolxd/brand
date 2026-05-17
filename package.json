@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "4.5.9",
+  "version": "4.6.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -11,53 +11,43 @@
       "types": "./dist/_types/sections/AppShell/AppShell.d.ts",
       "import": "./dist/app-shell.js"
     },
-    "./sidebar": {
-      "types": "./dist/_types/sections/Sidebar/Sidebar.d.ts",
-      "import": "./dist/sidebar.js"
-    },
-    "./org-switcher": {
-      "types": "./dist/_types/molecules/OrgSwitcher/OrgSwitcher.d.ts",
-      "import": "./dist/org-switcher.js"
-    },
-    "./user-menu": {
-      "types": "./dist/_types/molecules/UserMenu/UserMenu.d.ts",
-      "import": "./dist/user-menu.js"
-    },
-    "./sidebar-nav": {
-      "types": "./dist/_types/molecules/SidebarNav/SidebarNav.d.ts",
-      "import": "./dist/sidebar-nav.js"
-    },
     "./arrow": {
       "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",
       "import": "./dist/arrow.js"
     },
+    "./article-template.css": "./dist/article-template.css",
     "./avatar": {
       "types": "./dist/_types/atoms/Avatar/Avatar.d.ts",
       "import": "./dist/avatar.js"
     },
+    "./brand.css": "./dist/brand.css",
     "./breadcrumb": {
       "types": "./dist/_types/molecules/Breadcrumb/Breadcrumb.d.ts",
       "import": "./dist/breadcrumb.js"
     },
-    "./modal": {
-      "types": "./dist/_types/molecules/Modal/Modal.d.ts",
-      "import": "./dist/modal.js"
-    },
-    "./pagination": {
-      "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",
-      "import": "./dist/pagination.js"
-    },
-    "./table": {
-      "types": "./dist/_types/molecules/Table/Table.d.ts",
-      "import": "./dist/table.js"
-    },
-    "./context-menu": {
-      "types": "./dist/_types/molecules/ContextMenu/ContextMenu.d.ts",
-      "import": "./dist/context-menu.js"
-    },
     "./button": {
       "types": "./dist/_types/atoms/Button/Button.d.ts",
       "import": "./dist/button.js"
+    },
+    "./calendar": {
+      "types": "./dist/_types/molecules/Calendar/Calendar.d.ts",
+      "import": "./dist/calendar.js"
+    },
+    "./calendar-planner": {
+      "types": "./dist/_types/molecules/CalendarPlanner/CalendarPlanner.d.ts",
+      "import": "./dist/calendar-planner.js"
+    },
+    "./card": {
+      "types": "./dist/_types/molecules/Card/Card.d.ts",
+      "import": "./dist/card.js"
+    },
+    "./card-split": {
+      "types": "./dist/_types/molecules/CardSplit/CardSplit.d.ts",
+      "import": "./dist/card-split.js"
+    },
+    "./card-square": {
+      "types": "./dist/_types/molecules/CardSquare/CardSquare.d.ts",
+      "import": "./dist/card-square.js"
     },
     "./carousel": {
       "types": "./dist/_types/atoms/Carousel/Carousel.d.ts",
@@ -67,38 +57,75 @@
       "types": "./dist/_types/atoms/Checkbox/Checkbox.d.ts",
       "import": "./dist/checkbox.js"
     },
-    "./radio": {
-      "types": "./dist/_types/atoms/Radio/Radio.d.ts",
-      "import": "./dist/radio.js"
+    "./checkbox-field": {
+      "types": "./dist/_types/molecules/CheckboxField/CheckboxField.d.ts",
+      "import": "./dist/checkbox-field.js"
     },
     "./chevron": {
       "types": "./dist/_types/atoms/Chevron/Chevron.d.ts",
       "import": "./dist/chevron.js"
     },
-    "./hamburger": {
-      "types": "./dist/_types/atoms/Hamburger/Hamburger.d.ts",
-      "import": "./dist/hamburger.js"
+    "./clients-section.css": "./dist/clients-section.css",
+    "./contact-section.css": "./dist/contact-section.css",
+    "./content-template.css": "./dist/content-template.css",
+    "./context-menu": {
+      "types": "./dist/_types/molecules/ContextMenu/ContextMenu.d.ts",
+      "import": "./dist/context-menu.js"
+    },
+    "./courses-section.css": "./dist/courses-section.css",
+    "./css": "./dist/brand.css",
+    "./dots-button": {
+      "types": "./dist/_types/atoms/DotsButton/DotsButton.d.ts",
+      "import": "./dist/dots-button.js"
     },
     "./fieldset": {
       "types": "./dist/_types/atoms/Fieldset/Fieldset.d.ts",
       "import": "./dist/fieldset.js"
     },
+    "./footer.css": "./dist/footer.css",
+    "./form": {
+      "types": "./dist/_types/molecules/Form/Form.d.ts",
+      "import": "./dist/form.js"
+    },
+    "./hamburger": {
+      "types": "./dist/_types/atoms/Hamburger/Hamburger.d.ts",
+      "import": "./dist/hamburger.js"
+    },
+    "./header.css": "./dist/header.css",
     "./heading": {
       "types": "./dist/_types/atoms/Heading/Heading.d.ts",
       "import": "./dist/heading.js"
     },
+    "./hero-video": {
+      "types": "./dist/_types/atoms/HeroVideo/HeroVideo.d.ts",
+      "import": "./dist/hero-video.js"
+    },
+    "./highlight": {
+      "types": "./dist/_types/atoms/Highlight/Highlight.d.ts",
+      "import": "./dist/highlight.js"
+    },
+    "./highlight-section.css": "./dist/highlight-section.css",
     "./input": {
       "types": "./dist/_types/atoms/Input/Input.d.ts",
       "import": "./dist/input.js"
+    },
+    "./input-field": {
+      "types": "./dist/_types/molecules/InputField/InputField.d.ts",
+      "import": "./dist/input-field.js"
     },
     "./input-phone": {
       "types": "./dist/_types/atoms/InputPhone/InputPhone.d.ts",
       "import": "./dist/input-phone.js"
     },
+    "./input-phone-field": {
+      "types": "./dist/_types/molecules/InputPhoneField/InputPhoneField.d.ts",
+      "import": "./dist/input-phone-field.js"
+    },
     "./label": {
       "types": "./dist/_types/atoms/Label/Label.d.ts",
       "import": "./dist/label.js"
     },
+    "./legal-template.css": "./dist/legal-template.css",
     "./link": {
       "types": "./dist/_types/atoms/Link/Link.d.ts",
       "import": "./dist/link.js"
@@ -111,9 +138,18 @@
       "types": "./dist/_types/atoms/Logo/Logo.d.ts",
       "import": "./dist/logo.js"
     },
-    "./dots-button": {
-      "types": "./dist/_types/atoms/DotsButton/DotsButton.d.ts",
-      "import": "./dist/dots-button.js"
+    "./methodology-section.css": "./dist/methodology-section.css",
+    "./modal": {
+      "types": "./dist/_types/molecules/Modal/Modal.d.ts",
+      "import": "./dist/modal.js"
+    },
+    "./org-switcher": {
+      "types": "./dist/_types/molecules/OrgSwitcher/OrgSwitcher.d.ts",
+      "import": "./dist/org-switcher.js"
+    },
+    "./pagination": {
+      "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",
+      "import": "./dist/pagination.js"
     },
     "./paragraph": {
       "types": "./dist/_types/atoms/Paragraph/Paragraph.d.ts",
@@ -123,81 +159,9 @@
       "types": "./dist/_types/atoms/Popover/Popover.d.ts",
       "import": "./dist/popover.js"
     },
-    "./select": {
-      "types": "./dist/_types/atoms/Select/Select.d.ts",
-      "import": "./dist/select.js"
-    },
-    "./tag": {
-      "types": "./dist/_types/atoms/Tag/Tag.d.ts",
-      "import": "./dist/tag.js"
-    },
-    "./tabs": {
-      "types": "./dist/_types/atoms/Tabs/Tabs.d.ts",
-      "import": "./dist/tabs.js"
-    },
-    "./textarea": {
-      "types": "./dist/_types/atoms/Textarea/Textarea.d.ts",
-      "import": "./dist/textarea.js"
-    },
-    "./hero-video": {
-      "types": "./dist/_types/atoms/HeroVideo/HeroVideo.d.ts",
-      "import": "./dist/hero-video.js"
-    },
-    "./highlight": {
-      "types": "./dist/_types/atoms/Highlight/Highlight.d.ts",
-      "import": "./dist/highlight.js"
-    },
-    "./skip-link": {
-      "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
-      "import": "./dist/skip-link.js"
-    },
-    "./visually-hidden": {
-      "types": "./dist/_types/atoms/VisuallyHidden/VisuallyHidden.d.ts",
-      "import": "./dist/visually-hidden.js"
-    },
-    "./card": {
-      "types": "./dist/_types/molecules/Card/Card.d.ts",
-      "import": "./dist/card.js"
-    },
     "./project-card": {
       "types": "./dist/_types/molecules/ProjectCard/ProjectCard.d.ts",
       "import": "./dist/project-card.js"
-    },
-    "./card-split": {
-      "types": "./dist/_types/molecules/CardSplit/CardSplit.d.ts",
-      "import": "./dist/card-split.js"
-    },
-    "./card-square": {
-      "types": "./dist/_types/molecules/CardSquare/CardSquare.d.ts",
-      "import": "./dist/card-square.js"
-    },
-    "./checkbox-field": {
-      "types": "./dist/_types/molecules/CheckboxField/CheckboxField.d.ts",
-      "import": "./dist/checkbox-field.js"
-    },
-    "./radio-field": {
-      "types": "./dist/_types/molecules/RadioField/RadioField.d.ts",
-      "import": "./dist/radio-field.js"
-    },
-    "./form": {
-      "types": "./dist/_types/molecules/Form/Form.d.ts",
-      "import": "./dist/form.js"
-    },
-    "./input-field": {
-      "types": "./dist/_types/molecules/InputField/InputField.d.ts",
-      "import": "./dist/input-field.js"
-    },
-    "./select-field": {
-      "types": "./dist/_types/molecules/SelectField/SelectField.d.ts",
-      "import": "./dist/select-field.js"
-    },
-    "./input-phone-field": {
-      "types": "./dist/_types/molecules/InputPhoneField/InputPhoneField.d.ts",
-      "import": "./dist/input-phone-field.js"
-    },
-    "./textarea-field": {
-      "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",
-      "import": "./dist/textarea-field.js"
     },
     "./project-carousel": {
       "types": "./dist/_types/organisms/ProjectCarousel/ProjectCarousel.d.ts",
@@ -207,34 +171,78 @@
       "types": "./dist/_types/organisms/ProjectGrid/ProjectGrid.d.ts",
       "import": "./dist/project-grid.js"
     },
+    "./projects-section.css": "./dist/projects-section.css",
+    "./radio": {
+      "types": "./dist/_types/atoms/Radio/Radio.d.ts",
+      "import": "./dist/radio.js"
+    },
+    "./radio-field": {
+      "types": "./dist/_types/molecules/RadioField/RadioField.d.ts",
+      "import": "./dist/radio-field.js"
+    },
     "./review-carousel": {
       "types": "./dist/_types/organisms/ReviewCarousel/ReviewCarousel.d.ts",
       "import": "./dist/review-carousel.js"
     },
+    "./reviews-section.css": "./dist/reviews-section.css",
+    "./scss": "./src/tokens/scss/_index.scss",
+    "./scss/components/*": "./src/tokens/scss/components/_*.scss",
+    "./scss/global/*": "./src/tokens/scss/global/_*.scss",
+    "./scss/molecules/*": "./src/tokens/scss/molecules/_*.scss",
+    "./select": {
+      "types": "./dist/_types/atoms/Select/Select.d.ts",
+      "import": "./dist/select.js"
+    },
+    "./select-field": {
+      "types": "./dist/_types/molecules/SelectField/SelectField.d.ts",
+      "import": "./dist/select-field.js"
+    },
+    "./sidebar": {
+      "types": "./dist/_types/sections/Sidebar/Sidebar.d.ts",
+      "import": "./dist/sidebar.js"
+    },
+    "./sidebar-nav": {
+      "types": "./dist/_types/molecules/SidebarNav/SidebarNav.d.ts",
+      "import": "./dist/sidebar-nav.js"
+    },
+    "./skip-link": {
+      "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
+      "import": "./dist/skip-link.js"
+    },
+    "./solutions-section.css": "./dist/solutions-section.css",
     "./steps": {
       "types": "./dist/_types/organisms/Steps/Steps.d.ts",
       "import": "./dist/steps.js"
     },
-    "./css": "./dist/brand.css",
-    "./brand.css": "./dist/brand.css",
+    "./table": {
+      "types": "./dist/_types/molecules/Table/Table.d.ts",
+      "import": "./dist/table.js"
+    },
+    "./tabs": {
+      "types": "./dist/_types/atoms/Tabs/Tabs.d.ts",
+      "import": "./dist/tabs.js"
+    },
+    "./tag": {
+      "types": "./dist/_types/atoms/Tag/Tag.d.ts",
+      "import": "./dist/tag.js"
+    },
+    "./textarea": {
+      "types": "./dist/_types/atoms/Textarea/Textarea.d.ts",
+      "import": "./dist/textarea.js"
+    },
+    "./textarea-field": {
+      "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",
+      "import": "./dist/textarea-field.js"
+    },
     "./tokens.css": "./dist/tokens.css",
-    "./clients-section.css": "./dist/clients-section.css",
-    "./contact-section.css": "./dist/contact-section.css",
-    "./footer.css": "./dist/footer.css",
-    "./header.css": "./dist/header.css",
-    "./highlight-section.css": "./dist/highlight-section.css",
-    "./methodology-section.css": "./dist/methodology-section.css",
-    "./projects-section.css": "./dist/projects-section.css",
-    "./reviews-section.css": "./dist/reviews-section.css",
-    "./solutions-section.css": "./dist/solutions-section.css",
-    "./courses-section.css": "./dist/courses-section.css",
-    "./article-template.css": "./dist/article-template.css",
-    "./legal-template.css": "./dist/legal-template.css",
-    "./content-template.css": "./dist/content-template.css",
-    "./scss": "./src/tokens/scss/_index.scss",
-    "./scss/global/*": "./src/tokens/scss/global/_*.scss",
-    "./scss/components/*": "./src/tokens/scss/components/_*.scss",
-    "./scss/molecules/*": "./src/tokens/scss/molecules/_*.scss"
+    "./user-menu": {
+      "types": "./dist/_types/molecules/UserMenu/UserMenu.d.ts",
+      "import": "./dist/user-menu.js"
+    },
+    "./visually-hidden": {
+      "types": "./dist/_types/atoms/VisuallyHidden/VisuallyHidden.d.ts",
+      "import": "./dist/visually-hidden.js"
+    }
   },
   "files": [
     "dist",

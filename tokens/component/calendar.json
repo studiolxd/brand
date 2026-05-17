@@ -1,0 +1,57 @@
+{
+  "calendar": {
+    "gap":                       { "$value": "{spacing.2}",                "$type": "dimension", "$description": "Gap entre cabecera y cuadrícula" },
+    "grid-gap":                  { "$value": "{spacing.1}",                "$type": "dimension", "$description": "Gap entre celdas del grid" },
+    "padding-block":             { "$value": "{spacing.3}",                "$type": "dimension", "$description": "Padding vertical del componente" },
+    "padding-inline":            { "$value": "{spacing.3}",                "$type": "dimension", "$description": "Padding horizontal del componente" },
+    "font-family":               { "$value": "{font-family.sans}",         "$type": "string",    "$description": "Familia tipográfica base" },
+
+    "nav-color":                 { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color de los botones prev/next" },
+    "nav-hover-bg":              { "$value": "{color.grey-lightest}",      "$type": "color",     "$description": "Fondo hover de los botones de navegación" },
+    "nav-disabled-color":        { "$value": "{color.grey-dark}",          "$type": "color",     "$description": "Color deshabilitado de los botones de navegación" },
+    "nav-disabled-cursor":       { "$value": "not-allowed",                "$type": "string",    "$description": "Cursor deshabilitado" },
+    "nav-focus-ring-color":      { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del focus ring de los botones de navegación" },
+    "nav-focus-ring-width":      { "$value": "{border-width.md}",          "$type": "dimension", "$description": "Grosor del focus ring" },
+    "nav-focus-ring-offset":     { "$value": "{border-width.sm}",          "$type": "dimension", "$description": "Separación del focus ring" },
+
+    "title-font-size":           { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño del título del mes — md" },
+    "title-font-weight":         { "$value": "{font-weight.bold}",         "$type": "number",    "$description": "Peso del título del mes" },
+    "title-color":               { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título del mes" },
+
+    "weekday-font-size":         { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño de las cabeceras de día de semana" },
+    "weekday-color":             { "$value": "{color.text.muted-on-light}","$type": "color",     "$description": "Color de las cabeceras de día de semana" },
+
+    "day-size":                  { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Tamaño (ancho y alto) de los botones de día — md" },
+    "day-font-size":             { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño de fuente de los días" },
+    "day-font-weight":           { "$value": "{font-weight.default}",      "$type": "number",    "$description": "Peso de fuente de los días" },
+    "day-radius":                { "$value": "{border-radius.sm}",         "$type": "dimension", "$description": "Radio de borde de los botones de día" },
+    "day-color":                 { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color de texto de los días" },
+    "day-bg":                    { "$value": "transparent",                "$type": "color",     "$description": "Fondo base de los días" },
+    "day-hover-bg":              { "$value": "{color.grey-lightest}",      "$type": "color",     "$description": "Fondo hover de los días" },
+    "day-focus-ring-color":      { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del focus ring de los días" },
+    "day-focus-ring-width":      { "$value": "{border-width.md}",          "$type": "dimension", "$description": "Grosor del focus ring de los días" },
+    "day-focus-ring-offset":     { "$value": "{border-width.sm}",          "$type": "dimension", "$description": "Separación del focus ring de los días" },
+
+    "today-color":               { "$value": "{color.primary}",            "$type": "color",     "$description": "Color de texto del día de hoy" },
+    "today-font-weight":         { "$value": "{font-weight.bold}",         "$type": "number",    "$description": "Peso de fuente del día de hoy" },
+    "today-border-color":        { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del indicador (borde inferior) del día de hoy" },
+
+    "selected-bg":               { "$value": "{color.primary}",            "$type": "color",     "$description": "Fondo del día seleccionado" },
+    "selected-color":            { "$value": "{color.text.on-dark}",       "$type": "color",     "$description": "Texto del día seleccionado" },
+
+    "outside-color":             { "$value": "{color.grey-dark}",          "$type": "color",     "$description": "Color de los días fuera del mes actual (contraste ≥4.5:1)" },
+
+    "disabled-color":            { "$value": "{color.grey-dark}",          "$type": "color",     "$description": "Color de los días deshabilitados" },
+    "disabled-cursor":           { "$value": "not-allowed",                "$type": "string",    "$description": "Cursor de los días deshabilitados" },
+
+    "transition-duration":       { "$value": "{motion.duration.fast}",     "$type": "number",    "$description": "Duración de las transiciones" },
+    "transition-easing":         { "$value": "{motion.easing.default}",    "$type": "string",    "$description": "Easing de las transiciones" },
+
+    "sm-day-size":               { "$value": "{spacing.5}",                "$type": "dimension", "$description": "Tamaño de los botones de día — sm" },
+    "sm-title-font-size":        { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño del título — sm" },
+
+    "lg-day-size":               { "$value": "{spacing.7}",                "$type": "dimension", "$description": "Tamaño de los botones de día — lg" },
+    "lg-title-font-size":        { "$value": "{font-size.3}",              "$type": "dimension", "$description": "Tamaño del título — lg" },
+    "lg-day-font-size":          { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño de fuente de los días — lg" }
+  }
+}

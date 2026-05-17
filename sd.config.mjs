@@ -61,6 +61,8 @@ const filters = {
   'sidebar-nav':        (t) => t.path[0] === 'sidebar-nav',
   modal:               (t) => t.path[0] === 'modal',
   tabs:                (t) => t.path[0] === 'tabs',
+  calendar:            (t) => t.path[0] === 'calendar',
+  'calendar-planner':  (t) => t.path[0] === 'calendar-planner',
 };
 
 function cssFile(destination, filterKey) {
@@ -135,6 +137,8 @@ const sd = new StyleDictionary({
         cssFile('molecules/sidebar-nav.css',          'sidebar-nav'),
         cssFile('molecules/modal.css',                'modal'),
         cssFile('components/tabs.css',               'tabs'),
+        cssFile('molecules/calendar.css',            'calendar'),
+        cssFile('molecules/calendar-planner.css',   'calendar-planner'),
       ],
     },
     scss: {
@@ -197,6 +201,8 @@ const sd = new StyleDictionary({
         scssFile('molecules/_sidebar-nav.scss',          'sidebar-nav'),
         scssFile('molecules/_modal.scss',                'modal'),
         scssFile('components/_tabs.scss',               'tabs'),
+        scssFile('molecules/_calendar.scss',            'calendar'),
+        scssFile('molecules/_calendar-planner.scss',   'calendar-planner'),
       ],
     },
   },

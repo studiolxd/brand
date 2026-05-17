@@ -1,0 +1,47 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --calendar-planner-nav-disabled-cursor: not-allowed; /** Cursor deshabilitado */
+  --calendar-planner-cell-min-height: 6rem; /** Altura mínima de cada celda de día — md */
+  --calendar-planner-cell-bg: rgba(0, 0, 0, 0); /** Fondo base de las celdas */
+  --calendar-planner-sm-cell-min-height: 4rem; /** Altura mínima de celda — sm */
+  --calendar-planner-lg-cell-min-height: 9rem; /** Altura mínima de celda — lg */
+  --calendar-planner-gap: var(--spacing-2); /** Gap entre cabecera y cuadrícula */
+  --calendar-planner-font-family: var(--font-family-sans); /** Familia tipográfica base */
+  --calendar-planner-nav-hover-bg: var(--color-grey-lightest); /** Fondo hover de los botones de navegación */
+  --calendar-planner-nav-disabled-color: var(--color-grey-dark); /** Color deshabilitado de los botones de navegación */
+  --calendar-planner-nav-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --calendar-planner-nav-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
+  --calendar-planner-nav-radius: var(--border-radius-sm); /** Radio de borde del botón de navegación */
+  --calendar-planner-title-font-size: var(--font-size-2); /** Tamaño del título del mes */
+  --calendar-planner-title-font-weight: var(--font-weight-bold); /** Peso del título del mes */
+  --calendar-planner-weekday-font-size: var(--font-size-1); /** Tamaño de las cabeceras de día de semana */
+  --calendar-planner-weekday-font-weight: var(--font-weight-bold); /** Peso de las cabeceras de día de semana */
+  --calendar-planner-weekday-padding-block: var(--spacing-2); /** Padding vertical de las cabeceras */
+  --calendar-planner-grid-border-color: var(--color-grey-light); /** Color de los bordes del grid */
+  --calendar-planner-grid-border-width: var(--border-width-sm); /** Grosor de los bordes del grid */
+  --calendar-planner-cell-padding-block: var(--spacing-2); /** Padding vertical de la celda */
+  --calendar-planner-cell-padding-inline: var(--spacing-2); /** Padding horizontal de la celda */
+  --calendar-planner-cell-outside-bg: var(--color-grey-lightest); /** Fondo de las celdas fuera del mes */
+  --calendar-planner-day-number-font-size: var(--font-size-1); /** Tamaño del número del día */
+  --calendar-planner-day-number-font-weight: var(--font-weight-bold); /** Peso del número del día */
+  --calendar-planner-day-number-size: var(--spacing-5); /** Tamaño (ancho y alto) del badge con el número */
+  --calendar-planner-day-number-radius: var(--border-radius-sm); /** Radio del badge del número */
+  --calendar-planner-day-number-outside-color: var(--color-grey-darkest); /** Color del número en días fuera del mes (contraste ≥4.5:1 sobre grey-lightest) */
+  --calendar-planner-items-gap: var(--spacing-1); /** Gap entre elementos/tags dentro de la celda */
+  --calendar-planner-more-font-size: var(--font-size-1); /** Tamaño del texto '+N más' */
+  --calendar-planner-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
+  --calendar-planner-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
+  --calendar-planner-nav-color: var(--color-text-on-light); /** Color de los botones prev/next */
+  --calendar-planner-nav-focus-ring-color: var(--color-primary); /** Color del focus ring de los botones de navegación */
+  --calendar-planner-title-color: var(--color-text-on-light); /** Color del título del mes */
+  --calendar-planner-weekday-color: var(--color-text-muted-on-light); /** Color de las cabeceras de día de semana */
+  --calendar-planner-cell-today-number-bg: var(--color-primary); /** Fondo del número del día de hoy */
+  --calendar-planner-cell-today-number-color: var(--color-text-on-dark); /** Color del número del día de hoy */
+  --calendar-planner-day-number-color: var(--color-text-on-light); /** Color del número del día */
+  --calendar-planner-more-color: var(--color-text-muted-on-light); /** Color del texto '+N más' */
+  --calendar-planner-more-hover-color: var(--color-text-on-light); /** Color hover del texto '+N más' */
+  --calendar-planner-more-focus-ring-color: var(--color-primary); /** Color del focus ring del botón '+N más' */
+}

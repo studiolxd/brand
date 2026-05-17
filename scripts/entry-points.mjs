@@ -48,6 +48,8 @@ export const entryPoints = {
   'user-menu':           'src/stories/molecules/UserMenu/UserMenu.tsx',
   'modal':               'src/stories/molecules/Modal/Modal.tsx',
   'sidebar-nav':         'src/stories/molecules/SidebarNav/SidebarNav.tsx',
+  'calendar':            'src/stories/molecules/Calendar/Calendar.tsx',
+  'calendar-planner':    'src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
@@ -68,4 +70,6 @@ export const clientComponents = new Set([
   'modal',
   'org-switcher', 'user-menu', 'sidebar-nav',
   'tabs',
+  'calendar',
+  'calendar-planner',
 ]);

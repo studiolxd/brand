@@ -1,0 +1,187 @@
+.calendar-planner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--calendar-planner-gap);
+  font-family: var(--calendar-planner-font-family);
+  width: 100%;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.calendar-planner__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--calendar-planner-items-gap);
+}
+
+.calendar-planner__title {
+  flex: 1;
+  text-align: center;
+  margin-block: 0;
+  font-family: var(--calendar-planner-font-family);
+  font-size: var(--calendar-planner-title-font-size);
+  font-weight: var(--calendar-planner-title-font-weight);
+  color: var(--calendar-planner-title-color);
+}
+
+/* ─── Nav buttons ─────────────────────────────────────────────────────────── */
+
+.calendar-planner__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--calendar-planner-items-gap);
+  padding-inline: var(--calendar-planner-items-gap);
+  border: none;
+  border-radius: var(--calendar-planner-nav-radius);
+  background-color: transparent;
+  color: var(--calendar-planner-nav-color);
+  cursor: pointer;
+  transition-property: background-color;
+  transition-duration: var(--calendar-planner-transition-duration);
+  transition-timing-function: var(--calendar-planner-transition-easing);
+}
+
+.calendar-planner__nav:hover {
+  background-color: var(--calendar-planner-nav-hover-bg);
+}
+
+.calendar-planner__nav:focus-visible {
+  outline: var(--calendar-planner-nav-focus-ring-width) solid var(--calendar-planner-nav-focus-ring-color);
+  outline-offset: var(--calendar-planner-nav-focus-ring-offset);
+}
+
+.calendar-planner__chevron--prev {
+  transform: rotate(180deg);
+}
+
+/* ─── Grid ────────────────────────────────────────────────────────────────── */
+
+.calendar-planner__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-block-start: var(--calendar-planner-grid-border-width) solid var(--calendar-planner-grid-border-color);
+  border-inline-start: var(--calendar-planner-grid-border-width) solid var(--calendar-planner-grid-border-color);
+}
+
+.calendar-planner__row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* ─── Weekday headers ─────────────────────────────────────────────────────── */
+
+.calendar-planner__weekday {
+  padding-block: var(--calendar-planner-weekday-padding-block);
+  padding-inline: var(--calendar-planner-cell-padding-inline);
+  font-size: var(--calendar-planner-weekday-font-size);
+  font-weight: var(--calendar-planner-weekday-font-weight);
+  color: var(--calendar-planner-weekday-color);
+  text-align: center;
+  border-block-end: var(--calendar-planner-grid-border-width) solid var(--calendar-planner-grid-border-color);
+  border-inline-end: var(--calendar-planner-grid-border-width) solid var(--calendar-planner-grid-border-color);
+  font-family: var(--calendar-planner-font-family);
+}
+
+/* ─── Day cells ───────────────────────────────────────────────────────────── */
+
+.calendar-planner__cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--calendar-planner-items-gap);
+  min-height: var(--calendar-planner-cell-min-height);
+  min-width: 0;
+  overflow: hidden;
+  padding-block: var(--calendar-planner-cell-padding-block);
+  padding-inline: var(--calendar-planner-cell-padding-inline);
+  background-color: var(--calendar-planner-cell-bg);
+  border-block-end: var(--calendar-planner-grid-border-width) solid var(--calendar-planner-grid-border-color);
+  border-inline-end: var(--calendar-planner-grid-border-width) solid var(--calendar-planner-grid-border-color);
+}
+
+.calendar-planner__cell.calendar-planner__cell--outside {
+  background-color: var(--calendar-planner-cell-outside-bg);
+}
+
+/* ─── Day number ──────────────────────────────────────────────────────────── */
+
+.calendar-planner__day-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  width: var(--calendar-planner-day-number-size);
+  height: var(--calendar-planner-day-number-size);
+  border-radius: var(--calendar-planner-day-number-radius);
+  font-size: var(--calendar-planner-day-number-font-size);
+  font-weight: var(--calendar-planner-day-number-font-weight);
+  color: var(--calendar-planner-day-number-color);
+  font-family: var(--calendar-planner-font-family);
+  flex-shrink: 0;
+}
+
+.calendar-planner__day-number.calendar-planner__day-number--outside {
+  color: var(--calendar-planner-day-number-outside-color);
+}
+
+.calendar-planner__day-number.calendar-planner__day-number--today {
+  background-color: var(--calendar-planner-cell-today-number-bg);
+  color: var(--calendar-planner-cell-today-number-color);
+}
+
+/* ─── Cell body ───────────────────────────────────────────────────────────── */
+
+.calendar-planner__cell-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--calendar-planner-items-gap);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.calendar-planner__cell-body .tag {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── More button ─────────────────────────────────────────────────────────── */
+
+.calendar-planner__more {
+  display: inline-block;
+  padding-block: 0;
+  padding-inline: 0;
+  border: none;
+  background: none;
+  font-family: var(--calendar-planner-font-family);
+  font-size: var(--calendar-planner-more-font-size);
+  color: var(--calendar-planner-more-color);
+  cursor: pointer;
+  text-align: start;
+  transition-property: color;
+  transition-duration: var(--calendar-planner-transition-duration);
+  transition-timing-function: var(--calendar-planner-transition-easing);
+}
+
+.calendar-planner__more:hover {
+  color: var(--calendar-planner-more-hover-color);
+}
+
+.calendar-planner__more:focus-visible {
+  outline: var(--calendar-planner-nav-focus-ring-width) solid var(--calendar-planner-more-focus-ring-color);
+  outline-offset: var(--calendar-planner-nav-focus-ring-offset);
+}
+
+/* ─── Sm variant ─────────────────────────────────────────────────────────── */
+
+.calendar-planner.calendar-planner--sm .calendar-planner__cell {
+  min-height: var(--calendar-planner-sm-cell-min-height);
+}
+
+/* ─── Lg variant ─────────────────────────────────────────────────────────── */
+
+.calendar-planner.calendar-planner--lg .calendar-planner__cell {
+  min-height: var(--calendar-planner-lg-cell-min-height);
+}

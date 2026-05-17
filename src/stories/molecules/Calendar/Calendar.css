@@ -1,0 +1,187 @@
+.calendar {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--calendar-gap);
+  padding-block: var(--calendar-padding-block);
+  padding-inline: var(--calendar-padding-inline);
+  font-family: var(--calendar-font-family);
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--calendar-grid-gap);
+}
+
+.calendar__title {
+  flex: 1;
+  text-align: center;
+  margin-block: 0;
+  font-family: var(--calendar-font-family);
+  font-size: var(--calendar-title-font-size);
+  font-weight: var(--calendar-title-font-weight);
+  color: var(--calendar-title-color);
+}
+
+/* ─── Nav buttons ─────────────────────────────────────────────────────────── */
+
+.calendar__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--calendar-grid-gap);
+  padding-inline: var(--calendar-grid-gap);
+  border: none;
+  border-radius: var(--calendar-day-radius);
+  background-color: transparent;
+  color: var(--calendar-nav-color);
+  cursor: pointer;
+  transition-property: background-color;
+  transition-duration: var(--calendar-transition-duration);
+  transition-timing-function: var(--calendar-transition-easing);
+}
+
+.calendar__nav:hover:not(:disabled) {
+  background-color: var(--calendar-nav-hover-bg);
+}
+
+.calendar__nav:focus-visible {
+  outline: var(--calendar-nav-focus-ring-width) solid var(--calendar-nav-focus-ring-color);
+  outline-offset: var(--calendar-nav-focus-ring-offset);
+}
+
+.calendar__nav:disabled {
+  color: var(--calendar-nav-disabled-color);
+  cursor: var(--calendar-nav-disabled-cursor);
+}
+
+.calendar__chevron--prev {
+  transform: rotate(180deg);
+}
+
+/* ─── Grid ────────────────────────────────────────────────────────────────── */
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--calendar-grid-gap);
+}
+
+/* Las filas son transparentes al grid — sus hijos participan directamente en la cuadrícula */
+.calendar__row {
+  display: contents;
+}
+
+.calendar__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--calendar-day-size);
+  height: var(--calendar-day-size);
+  font-size: var(--calendar-weekday-font-size);
+  color: var(--calendar-weekday-color);
+  font-family: var(--calendar-font-family);
+  user-select: none;
+}
+
+/* ─── Day buttons ─────────────────────────────────────────────────────────── */
+
+.calendar__day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--calendar-day-size);
+  height: var(--calendar-day-size);
+  border: none;
+  border-radius: var(--calendar-day-radius);
+  background-color: var(--calendar-day-bg);
+  color: var(--calendar-day-color);
+  font-family: var(--calendar-font-family);
+  font-size: var(--calendar-day-font-size);
+  font-weight: var(--calendar-day-font-weight);
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: var(--calendar-transition-duration);
+  transition-timing-function: var(--calendar-transition-easing);
+  position: relative;
+}
+
+.calendar__day:hover:not(.calendar__day--disabled):not(.calendar__day--selected) {
+  background-color: var(--calendar-day-hover-bg);
+}
+
+.calendar__day:focus-visible {
+  outline: var(--calendar-day-focus-ring-width) solid var(--calendar-day-focus-ring-color);
+  outline-offset: var(--calendar-day-focus-ring-offset);
+}
+
+/* Outside month */
+.calendar__day.calendar__day--outside {
+  color: var(--calendar-outside-color);
+}
+
+/* Today */
+.calendar__day.calendar__day--today {
+  color: var(--calendar-today-color);
+  font-weight: var(--calendar-today-font-weight);
+}
+
+.calendar__day.calendar__day--today::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--calendar-today-border-color);
+}
+
+/* Selected */
+.calendar__day.calendar__day--selected {
+  background-color: var(--calendar-selected-bg);
+  color: var(--calendar-selected-color);
+}
+
+.calendar__day.calendar__day--selected.calendar__day--today::after {
+  background-color: var(--calendar-selected-color);
+}
+
+/* Disabled */
+.calendar__day.calendar__day--disabled {
+  color: var(--calendar-disabled-color);
+  cursor: var(--calendar-disabled-cursor);
+  pointer-events: none;
+}
+
+/* ─── Sm variant ─────────────────────────────────────────────────────────── */
+
+.calendar.calendar--sm .calendar__title {
+  font-size: var(--calendar-sm-title-font-size);
+}
+
+.calendar.calendar--sm .calendar__day,
+.calendar.calendar--sm .calendar__weekday {
+  width: var(--calendar-sm-day-size);
+  height: var(--calendar-sm-day-size);
+}
+
+/* ─── Lg variant ─────────────────────────────────────────────────────────── */
+
+.calendar.calendar--lg .calendar__title {
+  font-size: var(--calendar-lg-title-font-size);
+}
+
+.calendar.calendar--lg .calendar__day,
+.calendar.calendar--lg .calendar__weekday {
+  width: var(--calendar-lg-day-size);
+  height: var(--calendar-lg-day-size);
+}
+
+.calendar.calendar--lg .calendar__day {
+  font-size: var(--calendar-lg-day-font-size);
+}

@@ -344,6 +344,41 @@
   --tabs-trigger-active-color:   var(--color-text-on-dark);
   --tabs-focus-ring-color:       var(--color-text-on-dark);
 
+  /* ─── CalendarPlanner ────────────────────────────────────────────────────── */
+  --calendar-planner-nav-color:               var(--color-text-on-dark);
+  --calendar-planner-nav-hover-bg:            rgba(255, 255, 255, 0.12);
+  --calendar-planner-nav-disabled-color:      var(--color-grey-light);
+  --calendar-planner-nav-focus-ring-color:    var(--color-text-on-dark);
+  --calendar-planner-title-color:             var(--color-text-on-dark);
+  --calendar-planner-weekday-color:           var(--color-text-muted-on-dark);
+  --calendar-planner-grid-border-color:       rgba(255, 255, 255, 0.15);
+  --calendar-planner-cell-bg:                 transparent;
+  --calendar-planner-cell-outside-bg:         rgba(255, 255, 255, 0.04);
+  --calendar-planner-cell-today-number-bg:    var(--color-text-on-dark);
+  --calendar-planner-cell-today-number-color: var(--color-background-dark);
+  --calendar-planner-day-number-color:        var(--color-text-on-dark);
+  --calendar-planner-day-number-outside-color:var(--color-grey-light);
+  --calendar-planner-more-color:              var(--color-text-muted-on-dark);
+  --calendar-planner-more-hover-color:        var(--color-text-on-dark);
+  --calendar-planner-more-focus-ring-color:   var(--color-text-on-dark);
+
+  /* ─── Calendar ───────────────────────────────────────────────────────────── */
+  --calendar-nav-color:          var(--color-text-on-dark);
+  --calendar-nav-hover-bg:       rgba(255, 255, 255, 0.12);
+  --calendar-nav-disabled-color: var(--color-grey-light);
+  --calendar-nav-focus-ring-color: var(--color-text-on-dark);
+  --calendar-title-color:        var(--color-text-on-dark);
+  --calendar-weekday-color:      var(--color-text-muted-on-dark);
+  --calendar-day-color:          var(--color-text-on-dark);
+  --calendar-day-hover-bg:       rgba(255, 255, 255, 0.12);
+  --calendar-day-focus-ring-color: var(--color-text-on-dark);
+  --calendar-today-color:        var(--color-text-on-dark);
+  --calendar-today-border-color: var(--color-text-on-dark);
+  --calendar-selected-bg:        var(--color-text-on-dark);
+  --calendar-selected-color:     var(--color-background-dark);
+  --calendar-outside-color:      var(--color-grey-light);
+  --calendar-disabled-color:     var(--color-grey-light);
+
 }
 
 /* =============================================================

@@ -1,0 +1,56 @@
+{
+  "calendar-planner": {
+    "gap":                     { "$value": "{spacing.2}",                "$type": "dimension", "$description": "Gap entre cabecera y cuadrícula" },
+    "font-family":             { "$value": "{font-family.sans}",         "$type": "string",    "$description": "Familia tipográfica base" },
+
+    "nav-color":               { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color de los botones prev/next" },
+    "nav-hover-bg":            { "$value": "{color.grey-lightest}",      "$type": "color",     "$description": "Fondo hover de los botones de navegación" },
+    "nav-disabled-color":      { "$value": "{color.grey-dark}",          "$type": "color",     "$description": "Color deshabilitado de los botones de navegación" },
+    "nav-disabled-cursor":     { "$value": "not-allowed",                "$type": "string",    "$description": "Cursor deshabilitado" },
+    "nav-focus-ring-color":    { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del focus ring de los botones de navegación" },
+    "nav-focus-ring-width":    { "$value": "{border-width.md}",          "$type": "dimension", "$description": "Grosor del focus ring" },
+    "nav-focus-ring-offset":   { "$value": "{border-width.sm}",          "$type": "dimension", "$description": "Separación del focus ring" },
+    "nav-radius":              { "$value": "{border-radius.sm}",         "$type": "dimension", "$description": "Radio de borde del botón de navegación" },
+
+    "title-font-size":         { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño del título del mes" },
+    "title-font-weight":       { "$value": "{font-weight.bold}",         "$type": "number",    "$description": "Peso del título del mes" },
+    "title-color":             { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título del mes" },
+
+    "weekday-font-size":       { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño de las cabeceras de día de semana" },
+    "weekday-font-weight":     { "$value": "{font-weight.bold}",         "$type": "number",    "$description": "Peso de las cabeceras de día de semana" },
+    "weekday-color":           { "$value": "{color.text.muted-on-light}","$type": "color",     "$description": "Color de las cabeceras de día de semana" },
+    "weekday-padding-block":   { "$value": "{spacing.2}",                "$type": "dimension", "$description": "Padding vertical de las cabeceras" },
+
+    "grid-border-color":       { "$value": "{color.grey-light}",         "$type": "color",     "$description": "Color de los bordes del grid" },
+    "grid-border-width":       { "$value": "{border-width.sm}",          "$type": "dimension", "$description": "Grosor de los bordes del grid" },
+
+    "cell-min-height":         { "$value": "6rem",                       "$type": "dimension", "$description": "Altura mínima de cada celda de día — md" },
+    "cell-padding-block":      { "$value": "{spacing.2}",                "$type": "dimension", "$description": "Padding vertical de la celda" },
+    "cell-padding-inline":     { "$value": "{spacing.2}",                "$type": "dimension", "$description": "Padding horizontal de la celda" },
+    "cell-bg":                 { "$value": "transparent",                "$type": "color",     "$description": "Fondo base de las celdas" },
+
+    "cell-today-number-bg":    { "$value": "{color.primary}",            "$type": "color",     "$description": "Fondo del número del día de hoy" },
+    "cell-today-number-color": { "$value": "{color.text.on-dark}",       "$type": "color",     "$description": "Color del número del día de hoy" },
+    "cell-outside-bg":         { "$value": "{color.grey-lightest}",      "$type": "color",     "$description": "Fondo de las celdas fuera del mes" },
+
+    "day-number-font-size":    { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño del número del día" },
+    "day-number-font-weight":  { "$value": "{font-weight.bold}",         "$type": "number",    "$description": "Peso del número del día" },
+    "day-number-color":        { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del número del día" },
+    "day-number-size":         { "$value": "{spacing.5}",                "$type": "dimension", "$description": "Tamaño (ancho y alto) del badge con el número" },
+    "day-number-radius":       { "$value": "{border-radius.sm}",         "$type": "dimension", "$description": "Radio del badge del número" },
+    "day-number-outside-color":{ "$value": "{color.grey-darkest}",       "$type": "color",     "$description": "Color del número en días fuera del mes (contraste ≥4.5:1 sobre grey-lightest)" },
+
+    "items-gap":               { "$value": "{spacing.1}",                "$type": "dimension", "$description": "Gap entre elementos/tags dentro de la celda" },
+
+    "more-font-size":          { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño del texto '+N más'" },
+    "more-color":              { "$value": "{color.text.muted-on-light}","$type": "color",     "$description": "Color del texto '+N más'" },
+    "more-hover-color":        { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color hover del texto '+N más'" },
+    "more-focus-ring-color":   { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del focus ring del botón '+N más'" },
+
+    "transition-duration":     { "$value": "{motion.duration.fast}",     "$type": "number",    "$description": "Duración de las transiciones" },
+    "transition-easing":       { "$value": "{motion.easing.default}",    "$type": "string",    "$description": "Easing de las transiciones" },
+
+    "sm-cell-min-height":      { "$value": "4rem",                       "$type": "dimension", "$description": "Altura mínima de celda — sm" },
+    "lg-cell-min-height":      { "$value": "9rem",                       "$type": "dimension", "$description": "Altura mínima de celda — lg" }
+  }
+}
