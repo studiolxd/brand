@@ -2,7 +2,7 @@
   "sidebar": {
     "width":               { "$value": "15rem",                          "$type": "dimension", "$description": "Ancho del panel en desktop" },
     "bg":                  { "$value": "{color.background.light}",       "$type": "color",     "$description": "Fondo del panel de la sidebar" },
-    "border-color":        { "$value": "{color.grey-light}",             "$type": "color",     "$description": "Borde derecho del panel en desktop" },
+    "shadow":              { "$value": "4px 0 16px rgba(17,30,48,0.12)", "$type": "shadow",    "$description": "Sombra del panel hacia la derecha — mismos parámetros que shadow.lg" },
     "padding-inline":      { "$value": "{spacing.4}",                    "$type": "dimension", "$description": "Padding horizontal interno del panel" },
     "padding-block":       { "$value": "{spacing.4}",                    "$type": "dimension", "$description": "Padding vertical interno del panel" },
     "z-index":             { "$value": "200",                            "$type": "number",    "$description": "Z-index del panel en mobile (overlay)" },

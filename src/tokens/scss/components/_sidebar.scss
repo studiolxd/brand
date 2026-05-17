@@ -3,7 +3,7 @@
 
 $sidebar-width: 15rem; // Ancho del panel en desktop
 $sidebar-bg: #ffffff; // Fondo del panel de la sidebar
-$sidebar-border-color: #d0d0d0; // Borde derecho del panel en desktop
+$sidebar-shadow: 4px 0 16px rgba(17,30,48,0.12); // Sombra del panel hacia la derecha — mismos parámetros que shadow.lg
 $sidebar-padding-inline: 1rem; // Padding horizontal interno del panel
 $sidebar-padding-block: 1rem; // Padding vertical interno del panel
 $sidebar-z-index: 200; // Z-index del panel en mobile (overlay)
