@@ -1,7 +1,7 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
 import { ContrastMatrix } from "./ContrastMatrix";
 import { TokenTable } from "./TokenTable";
-import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor, infoColorDark, warningColorDark, successColorDark, dangerColorDark, neutralColorDark, infoBgDarkColor, warningBgDarkColor, successBgDarkColor, dangerBgDarkColor, neutralBgDarkColor } from "../../tokens/colors";
+import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor } from "../../tokens/colors";
 
 <Meta title="Foundations/Colores" />
 
@@ -371,28 +371,3 @@ Comprobación de contraste para cada combinación texto/fondo de las variantes s
 
 <ContrastMatrix foregroundLabel="Neutral" foreground={neutralTextColor} colors={[neutralBgColor]} />
 
----
-
-## Accesibilidad — colores de estado (tags, fondo oscuro)
-
-Comprobación de contraste para las variantes semánticas del componente `Tag` sobre superficie oscura (`.surface-dark`). Se requiere un mínimo de **AAA (7:1)** para texto normal.
-
-### Info (oscuro)
-
-<ContrastMatrix foregroundLabel="Info (oscuro)" foreground={infoColorDark} colors={[infoBgDarkColor]} />
-
-### Warning (oscuro)
-
-<ContrastMatrix foregroundLabel="Warning (oscuro)" foreground={warningColorDark} colors={[warningBgDarkColor]} />
-
-### Success (oscuro)
-
-<ContrastMatrix foregroundLabel="Success (oscuro)" foreground={successColorDark} colors={[successBgDarkColor]} />
-
-### Danger (oscuro)
-
-<ContrastMatrix foregroundLabel="Danger (oscuro)" foreground={dangerColorDark} colors={[dangerBgDarkColor]} />
-
-### Neutral (oscuro)
-
-<ContrastMatrix foregroundLabel="Neutral (oscuro)" foreground={neutralColorDark} colors={[neutralBgDarkColor]} />

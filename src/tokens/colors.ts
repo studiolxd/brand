@@ -4,6 +4,7 @@ import brand from '../../tokens/color/brand.json';
 import semantic from '../../tokens/color/semantic.json';
 import system from '../../tokens/color/system.json';
 import feedback from '../../tokens/color/feedback.json';
+import tag from '../../tokens/component/tag.json';
 import { flattenTokens, resolveRef } from './utils';
 
 type TokenEntry = { $value: string; $type: string; $description: string };
@@ -44,29 +45,20 @@ export const errorColor          = resolveRef(feedback.color['error-on-light'].$
 export const successColor        = resolveRef(feedback.color['success-on-light'].$value, refMap);
 export const errorDarkColor      = resolveRef(feedback.color['error-on-dark'].$value, refMap);
 export const successDarkColor    = resolveRef(feedback.color['success-on-dark'].$value, refMap);
-export const infoColor           = resolveRef(system.color['blue'].$value, refMap);
-export const warningColor        = resolveRef(feedback.color['warning-on-light'].$value, refMap);
-export const successTagColor     = resolveRef(system.color['green-dark'].$value, refMap);
-export const dangerTagColor      = resolveRef(feedback.color['destructive-on-light'].$value, refMap);
-export const neutralTextColor    = resolveRef(neutral.color['grey-darkest'].$value, refMap);
+type TagTokenEntry = { $value: string; $type: string; $description: string };
+const t = tag.tag as Record<string, TagTokenEntry>;
 
-export const infoBgColor    = { name: 'Info bg',    token: '--color-blue-bg',        hex: system.color['blue-bg'].$value };
-export const warningBgColor = { name: 'Warning bg', token: '--color-amber-bg',       hex: system.color['amber-bg'].$value };
-export const successBgColor = { name: 'Success bg', token: '--color-green-bg',       hex: system.color['green-bg'].$value };
-export const dangerBgColor  = { name: 'Danger bg',  token: '--color-red-bg',         hex: system.color['red-bg'].$value };
-export const neutralBgColor = { name: 'Neutral bg', token: '--color-grey-lightest',  hex: neutral.color['grey-lightest'].$value };
+export const infoColor        = resolveRef(t['info-color'].$value, refMap);
+export const warningColor     = resolveRef(t['warning-color'].$value, refMap);
+export const successTagColor  = resolveRef(t['success-color'].$value, refMap);
+export const dangerTagColor   = resolveRef(t['danger-color'].$value, refMap);
+export const neutralTextColor = resolveRef(t['neutral-color'].$value, refMap);
 
-export const infoColorDark    = resolveRef(feedback.color['info-on-dark'].$value, refMap);
-export const warningColorDark = resolveRef(feedback.color['warning-on-dark'].$value, refMap);
-export const successColorDark = resolveRef(feedback.color['success-on-dark'].$value, refMap);
-export const dangerColorDark  = resolveRef(feedback.color['error-on-dark'].$value, refMap);
-export const neutralColorDark = neutral.color['grey-light'].$value;
-
-export const infoBgDarkColor    = { name: 'Info bg (oscuro)',    token: '--color-blue-bg-dark',    hex: system.color['blue-bg-dark'].$value };
-export const warningBgDarkColor = { name: 'Warning bg (oscuro)', token: '--color-amber-bg-dark',   hex: system.color['amber-bg-dark'].$value };
-export const successBgDarkColor = { name: 'Success bg (oscuro)', token: '--color-green-bg-dark',   hex: system.color['green-bg-dark'].$value };
-export const dangerBgDarkColor  = { name: 'Danger bg (oscuro)',  token: '--color-red-bg-dark',     hex: system.color['red-bg-dark'].$value };
-export const neutralBgDarkColor = { name: 'Neutral bg (oscuro)', token: '--color-neutral-bg-dark', hex: system.color['neutral-bg-dark'].$value };
+export const infoBgColor    = { name: 'Info bg',    token: '--tag-info-bg',     hex: resolveRef(t['info-bg'].$value, refMap) };
+export const warningBgColor = { name: 'Warning bg', token: '--tag-warning-bg',  hex: resolveRef(t['warning-bg'].$value, refMap) };
+export const successBgColor = { name: 'Success bg', token: '--tag-success-bg',  hex: resolveRef(t['success-bg'].$value, refMap) };
+export const dangerBgColor  = { name: 'Danger bg',  token: '--tag-danger-bg',   hex: resolveRef(t['danger-bg'].$value, refMap) };
+export const neutralBgColor = { name: 'Neutral bg', token: '--tag-neutral-bg',  hex: resolveRef(t['neutral-bg'].$value, refMap) };
 
 export const backgroundColors = [
   { name: 'Background light', token: '--color-background-light', hex: resolveRef(semantic.color.background.light.$value, refMap) },
