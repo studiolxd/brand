@@ -4,12 +4,12 @@
 .sidebar {
   flex-shrink: 0;
   width: var(--sidebar-width);
-  overflow: hidden;
   transition: width var(--sidebar-transition-duration) var(--sidebar-transition-easing);
 }
 
 .sidebar[data-open="false"] {
   width: 0;
+  overflow: hidden;
 }
 
 /* Panel — área de contenido visible */
