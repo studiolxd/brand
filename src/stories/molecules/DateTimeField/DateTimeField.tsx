@@ -19,6 +19,7 @@ export interface DateTimeFieldProps {
   disabledDates?: CalendarProps['disabledDates'];
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
+  readOnly?: boolean;
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
@@ -49,6 +50,7 @@ export function DateTimeField({
   disabledDates,
   size = 'md',
   disabled,
+  readOnly,
   error = false,
   errorMessage,
   helperText,
@@ -90,6 +92,7 @@ export function DateTimeField({
           disabledDates={disabledDates}
           size={size}
           disabled={disabled}
+          readOnly={readOnly}
           error={error}
           locale={locale}
         />
@@ -99,6 +102,7 @@ export function DateTimeField({
           step={timeStep}
           size={size}
           disabled={disabled}
+          readOnly={readOnly}
           error={error}
         />
       </div>

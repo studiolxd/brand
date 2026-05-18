@@ -13,6 +13,7 @@ export interface DatePickerProps {
   disabledDates?: CalendarProps['disabledDates'];
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
+  readOnly?: boolean;
   error?: boolean;
   locale?: string;
   /** id aplicado al botón trigger */
@@ -39,12 +40,21 @@ export function DatePicker({
   disabledDates,
   size = 'md',
   disabled,
+  readOnly,
   error = false,
   locale = 'es-ES',
   id,
   describedBy,
 }: DatePickerProps) {
   const [open, setOpen] = useState(false);
+
+  const handleOpenChange = useCallback(
+    (nextOpen: boolean) => {
+      if (readOnly && nextOpen) return;
+      setOpen(nextOpen);
+    },
+    [readOnly]
+  );
 
   const handleSelect = useCallback(
     (date: Date) => {
@@ -71,6 +81,7 @@ export function DatePicker({
       disabled={disabled}
       aria-haspopup="dialog"
       aria-expanded={open}
+      aria-readonly={readOnly || undefined}
       aria-describedby={describedBy}
     >
       {displayValue ?? placeholder}
@@ -81,7 +92,7 @@ export function DatePicker({
     <Popover
       trigger={trigger}
       open={open}
-      onOpenChange={setOpen}
+      onOpenChange={handleOpenChange}
       side="bottom"
       align="start"
       sideOffset={-1}

@@ -14,6 +14,7 @@ export interface TimeSelectProps {
   step?: number;
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
+  readOnly?: boolean;
   error?: boolean;
   dark?: boolean;
   /** id aplicado al trigger de horas */
@@ -30,6 +31,7 @@ export function TimeSelect({
   step = 5,
   size = 'md',
   disabled,
+  readOnly,
   error,
   dark,
   id,
@@ -76,6 +78,7 @@ export function TimeSelect({
         placeholder="HH"
         size={size}
         disabled={disabled}
+        readOnly={readOnly}
         dark={dark}
         aria-label="Horas"
         onValueChange={handleHourChange}
@@ -87,6 +90,7 @@ export function TimeSelect({
         placeholder="MM"
         size={size}
         disabled={disabled}
+        readOnly={readOnly}
         dark={dark}
         aria-label="Minutos"
         onValueChange={handleMinuteChange}

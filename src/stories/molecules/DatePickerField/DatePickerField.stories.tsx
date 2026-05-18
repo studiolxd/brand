@@ -85,6 +85,21 @@ export const Disabled: Story = {
   },
 };
 
+export const ReadOnly: Story = {
+  name: 'Solo lectura',
+  args: {
+    value: new Date(2026, 4, 18),
+    readOnly: true,
+    labelHidden: false,
+  },
+  play: async ({ canvas }) => {
+    const trigger = canvas.getByRole('button');
+    await expect(trigger).toHaveAttribute('aria-readonly', 'true');
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  },
+};
+
 export const WithMinMax: Story = {
   name: 'Con rango min/max',
   render: (args) => {

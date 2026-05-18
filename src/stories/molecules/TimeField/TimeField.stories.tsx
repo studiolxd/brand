@@ -86,6 +86,22 @@ export const Disabled: Story = {
   },
 };
 
+export const ReadOnly: Story = {
+  name: 'Solo lectura',
+  args: {
+    value: { h: 10, m: 30 },
+    readOnly: true,
+    labelHidden: false,
+  },
+  play: async ({ canvas }) => {
+    const triggers = canvas.getAllByRole('combobox');
+    await expect(triggers[0]).toHaveAttribute('aria-readonly', 'true');
+    await expect(triggers[1]).toHaveAttribute('aria-readonly', 'true');
+    await userEvent.click(triggers[0]);
+    await expect(within(document.body).queryByRole('listbox')).toBeNull();
+  },
+};
+
 export const Step15: Story = {
   name: 'Paso 15 minutos',
   render: (args) => {

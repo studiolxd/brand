@@ -12,6 +12,7 @@ export interface TimeFieldProps {
   step?: number;
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
+  readOnly?: boolean;
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
@@ -27,6 +28,7 @@ export function TimeField({
   step,
   size,
   disabled,
+  readOnly,
   error = false,
   errorMessage,
   helperText,
@@ -50,6 +52,7 @@ export function TimeField({
         step={step}
         size={size}
         disabled={disabled}
+        readOnly={readOnly}
         error={error}
         dark={dark}
       />

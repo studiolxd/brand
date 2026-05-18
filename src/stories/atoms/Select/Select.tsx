@@ -15,6 +15,7 @@ interface SelectProps {
   defaultValue?: string;
   placeholder?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   dark?: boolean;
   size?: 'sm' | 'md' | 'lg';
   onValueChange?: (value: string) => void;
@@ -29,6 +30,7 @@ export function Select({
   defaultValue,
   placeholder = 'Seleccionar…',
   disabled,
+  readOnly,
   dark,
   size = 'md',
   onValueChange,
@@ -48,9 +50,11 @@ export function Select({
       value={value}
       defaultValue={defaultValue}
       disabled={disabled}
-      onValueChange={onValueChange}
+      open={readOnly ? false : undefined}
+      onOpenChange={readOnly ? () => {} : undefined}
+      onValueChange={readOnly ? undefined : onValueChange}
     >
-      <RadixSelect.Trigger className={triggerClass} id={id} aria-label={ariaLabel ?? placeholder}>
+      <RadixSelect.Trigger className={triggerClass} id={id} aria-label={ariaLabel ?? placeholder} aria-readonly={readOnly || undefined}>
         <RadixSelect.Value placeholder={placeholder} />
         <RadixSelect.Icon asChild>
           <Chevron className="select__icon" size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'} />
