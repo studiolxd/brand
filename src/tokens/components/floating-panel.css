@@ -3,7 +3,7 @@
  */
 
 :root {
-  --floating-panel-z-index: 50; /** Capa z */
+  --floating-panel-z-index: 1100; /** Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales */
   --floating-panel-border-width: var(--border-width-sm); /** Grosor del borde */
   --floating-panel-border-color: var(--color-grey-light); /** Color del borde */
   --floating-panel-border-radius: var(--border-radius-lg); /** Radio de las esquinas */

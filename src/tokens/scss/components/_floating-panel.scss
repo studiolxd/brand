@@ -6,6 +6,6 @@ $floating-panel-border-width: 1px; // Grosor del borde
 $floating-panel-border-color: #d0d0d0; // Color del borde
 $floating-panel-border-radius: 12px; // Radio de las esquinas
 $floating-panel-shadow: 0 2px 8px rgba(17,30,48,0.10); // Sombra
-$floating-panel-z-index: 50; // Capa z
+$floating-panel-z-index: 1100; // Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales
 $floating-panel-transition-duration: 150ms; // Duración de la animación de entrada/salida
 $floating-panel-transition-easing: ease; // Easing de la animación
