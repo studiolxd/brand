@@ -56,8 +56,8 @@
 }
 
 .tag--success {
-  background-color: var(--tag-success-bg);
-  color: var(--tag-success-color);
+  background-color: var(--color-success-on-light);
+  color: var(--color-text-on-dark);
 }
 
 .tag--danger {
