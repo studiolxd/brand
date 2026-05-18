@@ -1,5 +1,3 @@
-import './Link.css';
-
 interface LinkProps {
   /** URL de destino. */
   href: string;
