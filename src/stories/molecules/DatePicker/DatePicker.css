@@ -1,0 +1,75 @@
+/* ─── Trigger ────────────────────────────────────────────────────── */
+.date-picker__trigger {
+  display: block;
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+
+  padding-block: var(--input-padding-block);
+  padding-inline: var(--input-padding-inline);
+
+  font-family: var(--input-font-family);
+  font-size: var(--input-font-size);
+  line-height: var(--input-line-height);
+  font-weight: var(--input-font-weight);
+  color: var(--input-color);
+  background-color: var(--input-bg);
+
+  border-width: var(--input-border-width);
+  border-style: var(--input-border-style);
+  border-color: var(--input-border-color);
+  border-radius: var(--input-border-radius);
+
+  transition:
+    border-color var(--input-transition-duration) var(--input-transition-easing),
+    box-shadow   var(--input-transition-duration) var(--input-transition-easing);
+}
+
+.date-picker__trigger--placeholder {
+  color: var(--input-placeholder-color);
+  text-transform: var(--input-placeholder-text-transform);
+}
+
+.date-picker__trigger--error {
+  border-color: var(--input-error-border-color);
+}
+
+.date-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--input-focus-border-color);
+  box-shadow:
+    inset 0 0 0 var(--input-focus-ring-inset-offset) var(--input-bg),
+    inset 0 0 0 calc(var(--input-focus-ring-inset-offset) + var(--input-focus-ring-width)) var(--input-focus-ring-color);
+}
+
+.date-picker__trigger--error:focus-visible {
+  box-shadow:
+    inset 0 0 0 var(--input-focus-ring-inset-offset) var(--input-error-bg),
+    inset 0 0 0 calc(var(--input-focus-ring-inset-offset) + var(--input-focus-ring-width)) var(--input-error-focus-ring-color);
+}
+
+.date-picker__trigger:disabled {
+  cursor: var(--input-disabled-cursor);
+  background-color: var(--input-disabled-bg);
+  color: var(--input-disabled-color);
+  border-color: var(--input-disabled-border-color);
+}
+
+/* ─── Size variants ──────────────────────────────────────────────── */
+.date-picker__trigger--sm {
+  padding-block: var(--input-sm-padding-block);
+  padding-inline: var(--input-sm-padding-inline);
+  font-size: var(--input-sm-font-size);
+}
+
+.date-picker__trigger--lg {
+  padding-block: var(--input-lg-padding-block);
+  padding-inline: var(--input-lg-padding-inline);
+  font-size: var(--input-lg-font-size);
+}
+
+/* ─── Popover sin padding propio (el Calendar controla el suyo) ─── */
+.date-picker__popover {
+  padding-block: 0;
+  padding-inline: 0;
+}

@@ -1,0 +1,23 @@
+@import "../../../tokens/molecules/date-picker-field.css";
+
+.date-picker-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--date-picker-field-gap);
+}
+
+.date-picker-field__error {
+  font-family: var(--date-picker-field-error-font-family);
+  font-size: var(--date-picker-field-error-font-size);
+  font-weight: var(--date-picker-field-error-font-weight);
+  line-height: var(--date-picker-field-error-line-height);
+  color: var(--date-picker-field-error-color);
+}
+
+.date-picker-field__helper {
+  font-family: var(--date-picker-field-helper-font-family);
+  font-size: var(--date-picker-field-helper-font-size);
+  font-weight: var(--date-picker-field-helper-font-weight);
+  line-height: var(--date-picker-field-helper-line-height);
+  color: var(--date-picker-field-helper-color);
+}

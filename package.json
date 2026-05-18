@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "4.9.3",
+  "version": "4.10.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -28,6 +28,18 @@
     "./button": {
       "types": "./dist/_types/atoms/Button/Button.d.ts",
       "import": "./dist/button.js"
+    },
+    "./date-picker": {
+      "types": "./dist/_types/molecules/DatePicker/DatePicker.d.ts",
+      "import": "./dist/date-picker.js"
+    },
+    "./date-picker-field": {
+      "types": "./dist/_types/molecules/DatePickerField/DatePickerField.d.ts",
+      "import": "./dist/date-picker-field.js"
+    },
+    "./date-time-field": {
+      "types": "./dist/_types/molecules/DateTimeField/DateTimeField.d.ts",
+      "import": "./dist/date-time-field.js"
     },
     "./calendar": {
       "types": "./dist/_types/molecules/Calendar/Calendar.d.ts",
@@ -230,9 +242,17 @@
       "types": "./dist/_types/atoms/Tag/Tag.d.ts",
       "import": "./dist/tag.js"
     },
+    "./time-select": {
+      "types": "./dist/_types/atoms/TimeSelect/TimeSelect.d.ts",
+      "import": "./dist/time-select.js"
+    },
     "./textarea": {
       "types": "./dist/_types/atoms/Textarea/Textarea.d.ts",
       "import": "./dist/textarea.js"
+    },
+    "./time-field": {
+      "types": "./dist/_types/molecules/TimeField/TimeField.d.ts",
+      "import": "./dist/time-field.js"
     },
     "./textarea-field": {
       "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",

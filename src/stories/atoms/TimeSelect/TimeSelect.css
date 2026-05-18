@@ -1,0 +1,14 @@
+@import "../../../tokens/components/time-select.css";
+
+.time-select {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--time-select-gap);
+}
+
+.time-select__sep {
+  color: var(--time-select-sep-color);
+  font-family: var(--font-family-sans);
+  line-height: var(--line-height-none);
+  user-select: none;
+}

@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --time-select-gap: var(--spacing-1); /** Espacio entre selector de horas, separador y selector de minutos */
+  --time-select-sep-color: var(--color-text-on-light); /** Color del separador : */
+}

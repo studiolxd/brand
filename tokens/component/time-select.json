@@ -1,0 +1,6 @@
+{
+  "time-select": {
+    "gap": { "$value": "{spacing.1}", "$type": "dimension", "$description": "Espacio entre selector de horas, separador y selector de minutos" },
+    "sep-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color del separador :" }
+  }
+}

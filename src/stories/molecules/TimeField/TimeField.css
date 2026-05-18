@@ -1,0 +1,27 @@
+@import "../../../tokens/molecules/time-field.css";
+
+.time-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--time-field-gap);
+}
+
+.time-field--error .select {
+  --select-border-color: var(--color-error-on-light);
+}
+
+.time-field__error {
+  font-family: var(--time-field-error-font-family);
+  font-size: var(--time-field-error-font-size);
+  font-weight: var(--time-field-error-font-weight);
+  line-height: var(--time-field-error-line-height);
+  color: var(--time-field-error-color);
+}
+
+.time-field__helper {
+  font-family: var(--time-field-helper-font-family);
+  font-size: var(--time-field-helper-font-size);
+  font-weight: var(--time-field-helper-font-weight);
+  line-height: var(--time-field-helper-line-height);
+  color: var(--time-field-helper-color);
+}

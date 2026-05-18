@@ -64,6 +64,10 @@ const filters = {
   calendar:            (t) => t.path[0] === 'calendar',
   'calendar-planner':  (t) => t.path[0] === 'calendar-planner',
   'calendar-roster':   (t) => t.path[0] === 'calendar-roster',
+  'time-select':       (t) => t.path[0] === 'time-select',
+  'time-field':        (t) => t.path[0] === 'time-field',
+  'date-picker-field': (t) => t.path[0] === 'date-picker-field',
+  'date-time-field':   (t) => t.path[0] === 'date-time-field',
 };
 
 function cssFile(destination, filterKey) {
@@ -141,6 +145,10 @@ const sd = new StyleDictionary({
         cssFile('molecules/calendar.css',            'calendar'),
         cssFile('molecules/calendar-planner.css',   'calendar-planner'),
         cssFile('molecules/calendar-roster.css',    'calendar-roster'),
+        cssFile('components/time-select.css',       'time-select'),
+        cssFile('molecules/time-field.css',         'time-field'),
+        cssFile('molecules/date-picker-field.css',  'date-picker-field'),
+        cssFile('molecules/date-time-field.css',    'date-time-field'),
       ],
     },
     scss: {
@@ -206,6 +214,10 @@ const sd = new StyleDictionary({
         scssFile('molecules/_calendar.scss',            'calendar'),
         scssFile('molecules/_calendar-planner.scss',   'calendar-planner'),
         scssFile('molecules/_calendar-roster.scss',    'calendar-roster'),
+        scssFile('components/_time-select.scss',       'time-select'),
+        scssFile('molecules/_time-field.scss',         'time-field'),
+        scssFile('molecules/_date-picker-field.scss',  'date-picker-field'),
+        scssFile('molecules/_date-time-field.scss',    'date-time-field'),
       ],
     },
   },
