@@ -226,6 +226,10 @@
       "import": "./dist/skip-link.js"
     },
     "./solutions-section.css": "./dist/solutions-section.css",
+    "./login-form": {
+      "types": "./dist/_types/organisms/LoginForm/LoginForm.d.ts",
+      "import": "./dist/login-form.js"
+    },
     "./steps": {
       "types": "./dist/_types/organisms/Steps/Steps.d.ts",
       "import": "./dist/steps.js"

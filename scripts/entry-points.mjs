@@ -60,6 +60,7 @@ export const entryPoints = {
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
   // Organisms
+  'login-form':          'src/stories/organisms/LoginForm/LoginForm.tsx',
   'project-carousel':    'src/stories/organisms/ProjectCarousel/ProjectCarousel.tsx',
   'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
   'review-carousel':     'src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx',
@@ -69,7 +70,7 @@ export const entryPoints = {
 export const clientComponents = new Set([
   'accordion', 'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'form',
-  'input-field', 'select-field', 'input-phone-field', 'textarea-field', 'project-carousel', 'project-grid',
+  'input-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'sidebar',
   'app-shell',

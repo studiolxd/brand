@@ -91,6 +91,8 @@ export { Sidebar } from './stories/sections/Sidebar/Sidebar';
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 
 // ─── Organisms ──────────────────────────────────────────────
+export { LoginForm } from './stories/organisms/LoginForm/LoginForm';
+export type { LoginFormProps } from './stories/organisms/LoginForm/LoginForm';
 export { ProjectCarousel } from './stories/organisms/ProjectCarousel/ProjectCarousel';
 export { ProjectGrid } from './stories/organisms/ProjectGrid/ProjectGrid';
 export { ReviewCarousel } from './stories/organisms/ReviewCarousel/ReviewCarousel';
