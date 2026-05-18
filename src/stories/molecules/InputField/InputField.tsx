@@ -52,7 +52,7 @@ export function InputField({
         id={id}
         name={name}
         type={type}
-        placeholder={placeholder}
+        placeholder={placeholder ?? (labelHidden ? label : undefined)}
         value={value}
         defaultValue={defaultValue}
         disabled={disabled}

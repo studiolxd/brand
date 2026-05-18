@@ -51,7 +51,7 @@ export function TextareaField({
       <Textarea
         id={id}
         name={name}
-        placeholder={placeholder}
+        placeholder={placeholder ?? (labelHidden ? label : undefined)}
         value={value}
         defaultValue={defaultValue}
         rows={rows}
