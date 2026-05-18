@@ -193,3 +193,11 @@
 .calendar-planner.calendar-planner--lg .calendar-planner__cell {
   min-height: var(--calendar-planner-lg-cell-min-height);
 }
+
+/* ─── Modal events list ───────────────────────────────────────────────────── */
+
+.calendar-planner__modal-events {
+  display: flex;
+  flex-direction: column;
+  gap: var(--calendar-planner-items-gap);
+}

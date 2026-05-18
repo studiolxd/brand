@@ -1,6 +1,7 @@
 import { useState, useCallback, type ReactNode } from 'react';
 import { Chevron } from '../../atoms/Chevron/Chevron';
 import { Tag } from '../../atoms/Tag/Tag';
+import { Modal } from '../Modal/Modal';
 import './CalendarPlanner.css';
 
 type TagVariant =
@@ -118,6 +119,9 @@ export function CalendarPlanner({
   const [internalMonth, setInternalMonth] = useState<Date>(
     () => monthProp ?? defaultMonth ?? new Date()
   );
+  const [modalDay, setModalDay] = useState<{ date: Date; events: PlannerEvent[] } | null>(null);
+
+  const closeModal = useCallback(() => setModalDay(null), []);
 
   const currentMonth = monthProp ?? internalMonth;
 
@@ -134,6 +138,8 @@ export function CalendarPlanner({
 
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
   const title = titleFormatter.format(currentMonth);
+
+  const modalTitleFormatter = new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   const weekdayFormatter = new Intl.DateTimeFormat(locale, { weekday: 'short' });
   const weekdays = Array.from({ length: 7 }, (_, i) => {
@@ -245,7 +251,11 @@ export function CalendarPlanner({
                           <button
                             type="button"
                             className="calendar-planner__more"
-                            onClick={() => onMoreClick?.(date, dayEvents)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setModalDay({ date, events: dayEvents });
+                              onMoreClick?.(date, dayEvents);
+                            }}
                           >
                             +{overflow} más
                           </button>
@@ -259,6 +269,20 @@ export function CalendarPlanner({
           </div>
         ))}
       </div>
+
+      <Modal
+        open={modalDay !== null}
+        onClose={closeModal}
+        title={modalDay ? modalTitleFormatter.format(modalDay.date) : undefined}
+      >
+        <div className="calendar-planner__modal-events">
+          {modalDay?.events.map((event) => (
+            <Tag key={event.id} variant={event.variant ?? 'default'}>
+              {event.label}
+            </Tag>
+          ))}
+        </div>
+      </Modal>
     </div>
   );
 }
