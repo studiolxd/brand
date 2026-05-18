@@ -74,6 +74,20 @@
 }
 
 
+.form__actions {
+  display: flex;
+  align-items: stretch;
+  padding-block: var(--control-padding-block);
+  padding-inline: var(--control-padding-inline);
+  background-color: var(--color-background-light);
+}
+
+@media (min-width: 768px) {
+  .form__actions {
+    align-items: flex-end;
+  }
+}
+
 .form-errors {
   list-style: none;
   margin: 0;

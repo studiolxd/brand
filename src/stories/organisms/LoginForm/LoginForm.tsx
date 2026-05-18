@@ -53,7 +53,7 @@ export function LoginForm({
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form>
-      <Button block disabled={loading} onClick={handleSubmit}>
+      <Button variant="primary" disabled={loading} onClick={handleSubmit}>
         {loading ? 'Iniciando sesión…' : 'Iniciar sesión'}
       </Button>
     </div>

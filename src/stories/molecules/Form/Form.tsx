@@ -27,7 +27,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
           ))}
         </ul>
       )}
-      {actions}
+      {actions && <div className="form__actions">{actions}</div>}
     </form>
   );
 });
