@@ -40,6 +40,7 @@ $calendar-roster-cell-padding-inline: 0.25rem; // Padding horizontal de las celd
 $calendar-roster-cell-bg: #ffffff; // Fondo de celdas de día laborable
 $calendar-roster-cell-weekend-bg: #f2f2f2; // Fondo de celdas de fin de semana
 $calendar-roster-cell-holiday-bg: #e5e7eb; // Fondo de celdas festivas
+$calendar-roster-cell-non-working-bg: #f2f2f2; // Fondo de celdas no laborables (laborable sin turno asignado)
 $calendar-roster-schedule-font-size: 0.6875rem; // Tamaño del texto de horario (11px)
 $calendar-roster-schedule-color: #111e30; // Color del texto de horario
 $calendar-roster-chip-font-size: 0.6875rem; // Tamaño del texto del chip (11px)

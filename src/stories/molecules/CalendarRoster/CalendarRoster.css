@@ -173,6 +173,10 @@
   background-color: var(--calendar-roster-cell-holiday-bg);
 }
 
+.calendar-roster__cell--non-working {
+  background-color: var(--calendar-roster-cell-non-working-bg);
+}
+
 .calendar-roster__cell--today {
   outline: 2px solid var(--calendar-roster-th-day-today-bg);
   outline-offset: -2px;
@@ -251,8 +255,9 @@
   flex-shrink: 0;
 }
 
-.calendar-roster__legend-swatch--holiday  { background-color: var(--calendar-roster-chip-holiday-bg); }
-.calendar-roster__legend-swatch--vacation { background-color: var(--calendar-roster-chip-vacation-bg); }
-.calendar-roster__legend-swatch--absence  { background-color: var(--calendar-roster-chip-absence-bg); }
-.calendar-roster__legend-swatch--recovery { background-color: var(--calendar-roster-chip-recovery-bg); }
-.calendar-roster__legend-swatch--birthday { background-color: var(--calendar-roster-chip-birthday-bg); }
+.calendar-roster__legend-swatch--holiday     { background-color: var(--calendar-roster-chip-holiday-bg); }
+.calendar-roster__legend-swatch--vacation    { background-color: var(--calendar-roster-chip-vacation-bg); }
+.calendar-roster__legend-swatch--absence     { background-color: var(--calendar-roster-chip-absence-bg); }
+.calendar-roster__legend-swatch--recovery    { background-color: var(--calendar-roster-chip-recovery-bg); }
+.calendar-roster__legend-swatch--birthday    { background-color: var(--calendar-roster-chip-birthday-bg); }
+.calendar-roster__legend-swatch--non-working { background-color: var(--calendar-roster-cell-non-working-bg); }

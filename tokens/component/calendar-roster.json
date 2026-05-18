@@ -47,6 +47,7 @@
     "cell-bg":                   { "$value": "{color.background.light}",     "$type": "color",     "$description": "Fondo de celdas de día laborable" },
     "cell-weekend-bg":           { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo de celdas de fin de semana" },
     "cell-holiday-bg":           { "$value": "#E5E7EB",                      "$type": "color",     "$description": "Fondo de celdas festivas" },
+    "cell-non-working-bg":       { "$value": "{color.grey-lightest}",         "$type": "color",     "$description": "Fondo de celdas no laborables (laborable sin turno asignado)" },
 
     "schedule-font-size":        { "$value": "0.6875rem",                    "$type": "dimension", "$description": "Tamaño del texto de horario (11px)" },
     "schedule-color":            { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del texto de horario" },

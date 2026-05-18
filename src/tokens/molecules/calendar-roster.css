@@ -42,6 +42,7 @@
   --calendar-roster-cell-padding-block: var(--spacing-1); /** Padding vertical de las celdas de datos */
   --calendar-roster-cell-padding-inline: var(--spacing-1); /** Padding horizontal de las celdas de datos */
   --calendar-roster-cell-weekend-bg: var(--color-grey-lightest); /** Fondo de celdas de fin de semana */
+  --calendar-roster-cell-non-working-bg: var(--color-grey-lightest); /** Fondo de celdas no laborables (laborable sin turno asignado) */
   --calendar-roster-chip-font-weight: var(--font-weight-bold); /** Peso del texto del chip */
   --calendar-roster-chip-padding-inline: var(--spacing-1); /** Padding horizontal del chip */
   --calendar-roster-chip-radius: var(--border-radius-sm); /** Radio del chip */

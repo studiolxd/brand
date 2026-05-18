@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 import { Chevron } from '../../atoms/Chevron/Chevron';
 import './CalendarRoster.css';
 
@@ -8,7 +8,8 @@ export type RosterCellType =
   | 'vacation'
   | 'absence'
   | 'recovery'
-  | 'birthday';
+  | 'birthday'
+  | 'non-working';
 
 export interface RosterCell {
   type: RosterCellType;
@@ -44,6 +45,12 @@ export interface CalendarRosterProps {
   /** Componente Link del router. Default: "a" */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   linkComponent?: ComponentType<any>;
+  /**
+   * Render prop para personalizar el contenido interno de cada celda.
+   * El componente sigue siendo responsable del <td> y sus clases (--weekend, --today, --holiday, --non-working).
+   * Cuando se pasa, sustituye al renderizado por defecto de chips/schedule.
+   */
+  renderCell?: (day: number, date: Date, cell: RosterCell | null) => ReactNode;
   /** Etiqueta de la columna de nombre. Default: 'Empleado' */
   nameLabel?: string;
   /** Muestra la leyenda al final. Default: true */
@@ -74,11 +81,12 @@ function getDaysInMonth(month: Date): Date[] {
 }
 
 const LEGEND_ITEMS: { type: Exclude<RosterCellType, 'schedule'>; label: string }[] = [
-  { type: 'holiday',  label: 'Festivo' },
-  { type: 'vacation', label: 'Vacaciones' },
-  { type: 'absence',  label: 'Ausencia' },
-  { type: 'recovery', label: 'Recuperación' },
-  { type: 'birthday', label: 'Cumpleaños' },
+  { type: 'holiday',     label: 'Festivo' },
+  { type: 'vacation',    label: 'Vacaciones' },
+  { type: 'absence',     label: 'Ausencia' },
+  { type: 'recovery',    label: 'Recuperación' },
+  { type: 'birthday',    label: 'Cumpleaños' },
+  { type: 'non-working', label: 'No laborable' },
 ];
 
 export function CalendarRoster({
@@ -87,6 +95,7 @@ export function CalendarRoster({
   onMonthChange,
   hrefBuilder,
   linkComponent,
+  renderCell,
   nameLabel = 'Empleado',
   showLegend = true,
   locale = 'es-ES',
@@ -189,11 +198,13 @@ export function CalendarRoster({
                   const weekend = isWeekend(day);
                   const isToday = isSameDay(day, today);
                   const isHolidayBg = cell?.type === 'holiday';
+                  const isNonWorking = cell?.type === 'non-working';
 
                   const cellClass = [
                     'calendar-roster__cell',
                     weekend && 'calendar-roster__cell--weekend',
                     isHolidayBg && 'calendar-roster__cell--holiday',
+                    isNonWorking && 'calendar-roster__cell--non-working',
                     isToday && 'calendar-roster__cell--today',
                   ]
                     .filter(Boolean)
@@ -201,16 +212,22 @@ export function CalendarRoster({
 
                   return (
                     <td key={d} className={cellClass}>
-                      {cell?.type === 'schedule' && (
-                        <span className="calendar-roster__schedule">{cell.label}</span>
-                      )}
-                      {cell && cell.type !== 'schedule' && (
-                        <span
-                          className={`calendar-roster__chip calendar-roster__chip--${cell.type}`}
-                          title={cell.label}
-                        >
-                          {cell.type === 'birthday' ? `🎂 ${cell.label}` : cell.label}
-                        </span>
+                      {renderCell ? (
+                        renderCell(d, day, cell)
+                      ) : (
+                        <>
+                          {cell?.type === 'schedule' && (
+                            <span className="calendar-roster__schedule">{cell.label}</span>
+                          )}
+                          {cell && cell.type !== 'schedule' && cell.type !== 'non-working' && (
+                            <span
+                              className={`calendar-roster__chip calendar-roster__chip--${cell.type}`}
+                              title={cell.label}
+                            >
+                              {cell.type === 'birthday' ? `🎂 ${cell.label}` : cell.label}
+                            </span>
+                          )}
+                        </>
                       )}
                     </td>
                   );
