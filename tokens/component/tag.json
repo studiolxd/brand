@@ -27,6 +27,8 @@
     "info-color":    { "$value": "{color.white}",         "$type": "color", "$description": "Info semantic — white text on prussian" },
     "warning-bg":    { "$value": "{color.yellow}",        "$type": "color", "$description": "Warning semantic — brand yellow background (AAA ~10.3:1 with prussian text)" },
     "warning-color": { "$value": "{color.prussian}",      "$type": "color", "$description": "Warning semantic — prussian text on yellow" },
+    "success-bg":    { "$value": "{color.success-on-light}", "$type": "color", "$description": "Success semantic — dark green background (AAA ~8.9:1 with white text)" },
+    "success-color": { "$value": "{color.white}",          "$type": "color", "$description": "Success semantic — white text on dark green" },
     "danger-bg":     { "$value": "{color.red-on-light}",  "$type": "color", "$description": "Danger semantic — brand red background (AAA ~7.2:1 with white text)" },
     "danger-color":  { "$value": "{color.white}",         "$type": "color", "$description": "Danger semantic — white text on red" }
   }

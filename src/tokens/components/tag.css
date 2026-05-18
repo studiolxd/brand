@@ -17,6 +17,7 @@
   --tag-info-color: var(--color-white); /** Info semantic — white text on prussian */
   --tag-warning-bg: var(--color-yellow); /** Warning semantic — brand yellow background (AAA ~10.3:1 with prussian text) */
   --tag-warning-color: var(--color-prussian); /** Warning semantic — prussian text on yellow */
+  --tag-success-color: var(--color-white); /** Success semantic — white text on dark green */
   --tag-danger-bg: var(--color-red-on-light); /** Danger semantic — brand red background (AAA ~7.2:1 with white text) */
   --tag-danger-color: var(--color-white); /** Danger semantic — white text on red */
   --tag-default-color: var(--color-text-on-light); /** Default text color */
@@ -30,4 +31,5 @@
   --tag-support-1-color: var(--color-text-on-light); /** Support 1 text — dark on light bg */
   --tag-support-2-bg: var(--color-support-2); /** Support 2 (cayenne) background */
   --tag-support-2-color: var(--color-text-on-light); /** Support 2 text — dark on orange bg */
+  --tag-success-bg: var(--color-success-on-light); /** Success semantic — dark green background (AAA ~8.9:1 with white text) */
 }
