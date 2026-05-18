@@ -21,11 +21,19 @@
   --button-primary-active-border:   var(--color-white);
   --button-primary-focus-ring-color:var(--color-text-on-dark);
 
+  /* ─── Button text ────────────────────────────────────────────────────── */
+  --button-text-color:              var(--color-text-on-dark);
+  --button-text-hover-color:        var(--color-text-on-dark);
+  --button-text-active-color:       var(--color-text-on-dark);
+  --button-text-focus-ring-color:   var(--color-text-on-dark);
+
   /* ─── Button ghost ───────────────────────────────────────────────────── */
   --button-ghost-color:             var(--color-text-on-dark);
   --button-ghost-hover-color:       var(--color-text-on-dark);
   --button-ghost-active-color:      var(--color-text-on-dark);
   --button-ghost-focus-ring-color:  var(--color-text-on-dark);
+  --button-ghost-hover-bg:          rgba(255, 255, 255, 0.1);
+  --button-ghost-active-bg:         rgba(255, 255, 255, 0.18);
 
   /* ─── Input ───────────────────────────────────────────────────────────── */
   --input-bg:                    var(--color-background-dark);
@@ -119,6 +127,11 @@
   --button-primary-disabled-border:var(--color-grey-light);
 }
 
+.surface-dark .button--text:disabled,
+.surface-dark .button--text[aria-disabled="true"] {
+  --button-text-disabled-color: var(--color-grey-light);
+}
+
 .surface-dark .button--ghost:disabled,
 .surface-dark .button--ghost[aria-disabled="true"] {
   --button-ghost-disabled-color: var(--color-grey-light);
@@ -166,19 +179,19 @@
   outline-color: var(--color-error-on-dark);
 }
 
-.surface-dark .button--ghost.button--destructive-intent {
+.surface-dark .button--text.button--destructive-intent {
   color: var(--color-error-on-dark);
 }
 
-.surface-dark .button--ghost.button--destructive-intent:hover {
+.surface-dark .button--text.button--destructive-intent:hover {
   color: var(--color-error-on-dark);
 }
 
-.surface-dark .button--ghost.button--destructive-intent:active {
+.surface-dark .button--text.button--destructive-intent:active {
   color: var(--color-error-on-dark);
 }
 
-.surface-dark .button--ghost.button--destructive-intent:focus-visible {
+.surface-dark .button--text.button--destructive-intent:focus-visible {
   outline-color: var(--color-error-on-dark);
 }
 

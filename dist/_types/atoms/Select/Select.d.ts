@@ -11,6 +11,7 @@ interface SelectProps {
     defaultValue?: string;
     placeholder?: string;
     disabled?: boolean;
+    readOnly?: boolean;
     dark?: boolean;
     size?: 'sm' | 'md' | 'lg';
     onValueChange?: (value: string) => void;
@@ -18,5 +19,5 @@ interface SelectProps {
     /** Etiqueta accesible del trigger. Si no se pasa, usa el placeholder. */
     'aria-label'?: string;
 }
-export declare function Select({ options, value, defaultValue, placeholder, disabled, dark, size, onValueChange, id, 'aria-label': ariaLabel, }: SelectProps): import("react/jsx-runtime").JSX.Element;
+export declare function Select({ options, value, defaultValue, placeholder, disabled, readOnly, dark, size, onValueChange, id, 'aria-label': ariaLabel, }: SelectProps): import("react/jsx-runtime").JSX.Element;
 export {};

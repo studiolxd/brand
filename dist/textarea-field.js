@@ -17,7 +17,7 @@ function i({ id: i, label: a, labelHidden: o = !0, name: s, placeholder: c, valu
 			/* @__PURE__ */ n(t, {
 				id: i,
 				name: s,
-				placeholder: c,
+				placeholder: c ?? (o ? a : void 0),
 				value: l,
 				defaultValue: u,
 				rows: d,

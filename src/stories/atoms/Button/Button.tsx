@@ -4,8 +4,8 @@ import './Button.css';
 
 export interface ButtonProps {
   /** Visual variant of the button */
-  variant?: 'primary' | 'accent' | 'outline' | 'ghost';
-  /** Applies destructive (red) color intent — composable with any variant, designed for ghost */
+  variant?: 'primary' | 'outline' | 'ghost' | 'text';
+  /** Applies destructive (red) color intent — composable with outline and text */
   destructive?: boolean;
   /** Size of the button */
   size?: 'sm' | 'md' | 'lg';

@@ -2,6 +2,9 @@ import { useState, type ReactNode } from 'react';
 import { SidebarContext } from './SidebarContext';
 import './AppShell.css';
 
+export { useSidebar } from './SidebarContext';
+export type { SidebarContextValue } from './SidebarContext';
+
 
 function getInitialOpen(defaultOpen?: boolean): boolean {
   if (defaultOpen !== undefined) return defaultOpen;

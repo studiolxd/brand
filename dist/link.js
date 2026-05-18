@@ -1,5 +1,4 @@
 'use client';
-import './link.css';
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/atoms/Link/Link.tsx
 function t({ href: t, children: n, external: r = !1, className: i, onClick: a }) {

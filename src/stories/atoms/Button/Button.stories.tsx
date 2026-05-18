@@ -12,12 +12,12 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'accent', 'outline', 'ghost'],
+      options: ['primary', 'outline', 'ghost', 'text'],
       description: 'Variante visual del botón.',
     },
     destructive: {
       control: { type: 'boolean' },
-      description: 'Aplica color rojo de intención destructiva. Composable con cualquier variante; diseñado para ghost.',
+      description: 'Aplica color rojo de intención destructiva. Composable con outline y text.',
     },
     size: {
       control: { type: 'select' },
@@ -63,27 +63,12 @@ export const Primary: Story = {
 };
 
 
-export const Accent: Story = {
-  args: { variant: 'accent' },
-};
-
 export const AllDestructiveIntent: Story = {
-  name: 'Destructive intent — todas las variantes',
-  render: () => (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Button variant="primary" destructive>Primary</Button>
-      <Button variant="ghost" destructive>Ghost</Button>
-    </div>
-  ),
-};
-
-export const AllDestructiveIntentOnDark: Story = {
-  name: 'Destructive intent — todas las variantes, dark surface',
+  name: 'Destructive intent — outline + text, dark surface',
   render: () => (
     <div className="surface-dark" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
-      <Button variant="primary" destructive>Primary</Button>
       <Button variant="outline" destructive>Outline</Button>
-      <Button variant="ghost" destructive>Ghost</Button>
+      <Button variant="text" destructive>Text</Button>
     </div>
   ),
 };
@@ -93,14 +78,9 @@ export const GhostOnLight: Story = {
   args: { variant: 'ghost' },
 };
 
-export const GhostDestructive: Story = {
-  name: 'Ghost — destructive intent',
-  args: { variant: 'ghost', destructive: true, children: 'Eliminar' },
-};
-
-export const GhostDestructiveOnDark: Story = {
-  name: 'Ghost — destructive intent, dark surface',
-  args: { variant: 'ghost', destructive: true, children: 'Eliminar' },
+export const GhostOnDark: Story = {
+  name: 'Ghost — dark surface',
+  args: { variant: 'ghost' },
   decorators: [
     (Story) => (
       <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
@@ -110,9 +90,31 @@ export const GhostDestructiveOnDark: Story = {
   ],
 };
 
-export const GhostOnDark: Story = {
-  name: 'Ghost — dark surface',
-  args: { variant: 'ghost' },
+export const TextOnLight: Story = {
+  name: 'Text — light surface',
+  args: { variant: 'text' },
+};
+
+export const TextDestructive: Story = {
+  name: 'Text — destructive intent',
+  args: { variant: 'text', destructive: true, children: 'Eliminar' },
+};
+
+export const TextDestructiveOnDark: Story = {
+  name: 'Text — destructive intent, dark surface',
+  args: { variant: 'text', destructive: true, children: 'Eliminar' },
+  decorators: [
+    (Story) => (
+      <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const TextOnDark: Story = {
+  name: 'Text — dark surface',
+  args: { variant: 'text' },
   decorators: [
     (Story) => (
       <div className="surface-dark" style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}>

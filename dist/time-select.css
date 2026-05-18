@@ -1,0 +1,1 @@
+:root{--time-select-gap:var(--spacing-1);--time-select-sep-color:var(--color-text-on-light)}.time-select{align-items:center;gap:var(--time-select-gap);display:inline-flex}.time-select__sep{color:var(--time-select-sep-color);font-family:var(--font-family-sans);line-height:var(--line-height-none);-webkit-user-select:none;user-select:none}

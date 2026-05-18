@@ -52,47 +52,16 @@ $button-primary-padding-inline: 2rem; // Inline (horizontal) padding
 $button-primary-focus-ring-width: 2px; // Focus ring width
 $button-primary-focus-ring-style: solid; // Focus ring border style
 $button-primary-focus-ring-offset: 2px; // Focus ring offset
-$button-primary-focus-ring-color: #111e30; // Focus ring color
-$button-primary-bg: #ffffff; // Background
+$button-primary-focus-ring-color: #baabff; // Focus ring color
+$button-primary-bg: #baabff; // Background
 $button-primary-color: #111e30; // Text color
-$button-primary-border: #111e30; // Border color
-$button-primary-hover-bg: #111e30; // Hover background
-$button-primary-hover-color: #ffffff; // Hover text color
-$button-primary-hover-border: #111e30; // Hover border color
-$button-primary-active-bg: #111e30; // Active background
-$button-primary-active-color: #ffffff; // Active text color
-$button-primary-active-border: #111e30; // Active border color
-$button-accent-border-radius: 9999px; // Border radius
-$button-accent-border-width: 1px; // Border width
-$button-accent-border-style: solid; // Border style
-$button-accent-justify-content: center; // Justify content
-$button-accent-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-accent-font-size: 1.125rem; // Font size
-$button-accent-font-weight: 300; // Font weight
-$button-accent-line-height: 1; // Line height
-$button-accent-cursor: pointer; // Cursor
-$button-accent-white-space: nowrap; // White space
-$button-accent-text-decoration: none; // Text decoration
-$button-accent-transition-duration: 150ms; // Transition duration
-$button-accent-transition-easing: ease; // Transition easing
-$button-accent-disabled-cursor: not-allowed; // Cursor when disabled
-$button-accent-disabled-color: #4a4a4a; // Text color when disabled
-$button-accent-disabled-border: #4a4a4a; // Border color when disabled
-$button-accent-padding-block: 0.75rem; // Block (vertical) padding
-$button-accent-padding-inline: 2rem; // Inline (horizontal) padding
-$button-accent-focus-ring-width: 2px; // Focus ring width
-$button-accent-focus-ring-style: solid; // Focus ring border style
-$button-accent-focus-ring-offset: 2px; // Focus ring offset
-$button-accent-focus-ring-color: #baabff; // Focus ring color
-$button-accent-bg: #baabff; // Background
-$button-accent-color: #111e30; // Text color
-$button-accent-border: #baabff; // Border color
-$button-accent-hover-bg: #ffcd00; // Hover background
-$button-accent-hover-color: #111e30; // Hover text color
-$button-accent-hover-border: #ffcd00; // Hover border color
-$button-accent-active-bg: #ffcd00; // Active background
-$button-accent-active-color: #111e30; // Active text color
-$button-accent-active-border: #ffcd00; // Active border color
+$button-primary-border: #baabff; // Border color
+$button-primary-hover-bg: #ffcd00; // Hover background
+$button-primary-hover-color: #111e30; // Hover text color
+$button-primary-hover-border: #ffcd00; // Hover border color
+$button-primary-active-bg: #ffcd00; // Active background
+$button-primary-active-color: #111e30; // Active text color
+$button-primary-active-border: #ffcd00; // Active border color
 $button-destructive-border-radius: 9999px; // Border radius
 $button-destructive-border-width: 1px; // Border width
 $button-destructive-border-style: solid; // Border style
@@ -155,8 +124,39 @@ $button-outline-hover-border: #ffffff; // Hover border color
 $button-outline-active-bg: #ffffff; // Active background
 $button-outline-active-color: #111e30; // Active text color
 $button-outline-active-border: #ffffff; // Active border color
+$button-text-border-radius: 9999px; // Border radius
+$button-text-border-width: 0; // Border width — 0 para uso inline en texto
+$button-text-border-style: solid; // Border style
+$button-text-justify-content: center; // Justify content
+$button-text-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$button-text-font-size: 1.125rem; // Font size
+$button-text-font-weight: 300; // Font weight
+$button-text-line-height: 1; // Line height
+$button-text-cursor: pointer; // Cursor
+$button-text-white-space: nowrap; // White space
+$button-text-text-decoration: none; // Text decoration — base state (none)
+$button-text-hover-text-decoration: underline; // Text decoration on hover
+$button-text-transition-duration: 150ms; // Transition duration
+$button-text-transition-easing: ease; // Transition easing
+$button-text-disabled-cursor: not-allowed; // Cursor when disabled
+$button-text-disabled-color: #4a4a4a; // Text color when disabled — light surface
+$button-text-padding-block: 0; // Block (vertical) padding — 0 para uso inline en texto
+$button-text-padding-inline: 0; // Inline (horizontal) padding — 0 para uso inline en texto
+$button-text-focus-ring-width: 2px; // Focus ring width
+$button-text-focus-ring-style: solid; // Focus ring border style
+$button-text-focus-ring-offset: 2px; // Focus ring offset
+$button-text-focus-ring-color: #111e30; // Focus ring color — light surface
+$button-text-bg: rgba(0, 0, 0, 0); // Background — always transparent
+$button-text-color: #111e30; // Text color — light surface
+$button-text-border: rgba(0, 0, 0, 0); // Border color — transparent
+$button-text-hover-bg: rgba(0, 0, 0, 0); // Hover background — stays transparent
+$button-text-hover-color: #111e30; // Hover text color — unchanged
+$button-text-hover-border: rgba(0, 0, 0, 0); // Hover border — stays transparent
+$button-text-active-bg: rgba(0, 0, 0, 0); // Active background — stays transparent
+$button-text-active-color: #111e30; // Active text color — unchanged
+$button-text-active-border: rgba(0, 0, 0, 0); // Active border — stays transparent
 $button-ghost-border-radius: 9999px; // Border radius
-$button-ghost-border-width: 0; // Border width — 0 para uso inline en texto
+$button-ghost-border-width: 0; // Sin borde — fondo reemplaza al borde en hover
 $button-ghost-border-style: solid; // Border style
 $button-ghost-justify-content: center; // Justify content
 $button-ghost-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
@@ -165,24 +165,23 @@ $button-ghost-font-weight: 300; // Font weight
 $button-ghost-line-height: 1; // Line height
 $button-ghost-cursor: pointer; // Cursor
 $button-ghost-white-space: nowrap; // White space
-$button-ghost-text-decoration: none; // Text decoration — base state (none)
-$button-ghost-hover-text-decoration: underline; // Text decoration on hover
+$button-ghost-text-decoration: none; // Text decoration
 $button-ghost-transition-duration: 150ms; // Transition duration
 $button-ghost-transition-easing: ease; // Transition easing
 $button-ghost-disabled-cursor: not-allowed; // Cursor when disabled
-$button-ghost-disabled-color: #4a4a4a; // Text color when disabled — light surface
-$button-ghost-padding-block: 0; // Block (vertical) padding — 0 para uso inline en texto
-$button-ghost-padding-inline: 0; // Inline (horizontal) padding — 0 para uso inline en texto
+$button-ghost-disabled-color: #4a4a4a; // Text color when disabled
+$button-ghost-padding-block: 0.75rem; // Block (vertical) padding
+$button-ghost-padding-inline: 2rem; // Inline (horizontal) padding
 $button-ghost-focus-ring-width: 2px; // Focus ring width
 $button-ghost-focus-ring-style: solid; // Focus ring border style
 $button-ghost-focus-ring-offset: 2px; // Focus ring offset
-$button-ghost-focus-ring-color: #111e30; // Focus ring color — light surface
-$button-ghost-bg: rgba(0, 0, 0, 0); // Background — always transparent
-$button-ghost-color: #111e30; // Text color — light surface
+$button-ghost-focus-ring-color: #111e30; // Focus ring color
+$button-ghost-bg: rgba(0, 0, 0, 0); // Background — transparente en reposo
+$button-ghost-color: #111e30; // Text color
 $button-ghost-border: rgba(0, 0, 0, 0); // Border color — transparent
-$button-ghost-hover-bg: rgba(0, 0, 0, 0); // Hover background — stays transparent
-$button-ghost-hover-color: #111e30; // Hover text color — unchanged
-$button-ghost-hover-border: rgba(0, 0, 0, 0); // Hover border — stays transparent
-$button-ghost-active-bg: rgba(0, 0, 0, 0); // Active background — stays transparent
-$button-ghost-active-color: #111e30; // Active text color — unchanged
-$button-ghost-active-border: rgba(0, 0, 0, 0); // Active border — stays transparent
+$button-ghost-hover-bg: #f2f2f2; // Hover background — fondo sutil
+$button-ghost-hover-color: #111e30; // Hover text color — sin cambio
+$button-ghost-hover-border: rgba(0, 0, 0, 0); // Hover border — transparent
+$button-ghost-active-bg: #d0d0d0; // Active background
+$button-ghost-active-color: #111e30; // Active text color
+$button-ghost-active-border: rgba(0, 0, 0, 0); // Active border — transparent

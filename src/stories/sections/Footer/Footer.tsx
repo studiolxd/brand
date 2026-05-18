@@ -29,7 +29,7 @@ export function Footer({ id }: FooterProps) {
         <div className="newsletter-form">
           <Form
             actions={
-              <Button variant="accent" block type="submit">Suscríbeme a la newsletter</Button>
+              <Button variant="primary" block type="submit">Suscríbeme a la newsletter</Button>
             }
           >
             <InputField

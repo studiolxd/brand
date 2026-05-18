@@ -8,18 +8,23 @@ function i({ children: e }) {
 	return /* @__PURE__ */ n("thead", { children: e });
 }
 function a({ children: e }) {
+	return /* @__PURE__ */ n("tfoot", { children: e });
+}
+function o({ children: e }) {
 	return /* @__PURE__ */ n("tbody", { children: e });
 }
-function o({ sortable: i = !1, sorted: a = !1, onSort: o, children: s }) {
-	let c = [
+function s({ sortable: i = !1, sorted: a = !1, onSort: o, children: s, className: c, scope: l = "col", ...u }) {
+	let d = [
 		"table__header",
 		i ? "table__header--sortable" : "",
 		a === "asc" ? "table__header--sorted-asc" : "",
-		a === "desc" ? "table__header--sorted-desc" : ""
+		a === "desc" ? "table__header--sorted-desc" : "",
+		c
 	].filter(Boolean).join(" ");
 	return i ? /* @__PURE__ */ n("th", {
-		scope: "col",
-		className: c,
+		...u,
+		scope: l,
+		className: d,
 		onClick: o,
 		onKeyDown: (e) => {
 			(e.key === "Enter" || e.key === " ") && (e.preventDefault(), o?.());
@@ -38,15 +43,21 @@ function o({ sortable: i = !1, sorted: a = !1, onSort: o, children: s }) {
 			]
 		})
 	}) : /* @__PURE__ */ n("th", {
-		scope: "col",
-		className: c,
+		...u,
+		scope: l,
+		className: d,
 		children: s
 	});
 }
-function s({ onClick: e, interactive: t = !1, children: r }) {
-	let i = t || !!e, a = ["table__row", i ? "table__row--interactive" : ""].filter(Boolean).join(" ");
-	return i ? /* @__PURE__ */ n("tr", {
-		className: a,
+function c({ onClick: e, interactive: t = !1, children: r, className: i, ...a }) {
+	let o = t || !!e, s = [
+		"table__row",
+		o ? "table__row--interactive" : "",
+		i
+	].filter(Boolean).join(" ");
+	return o ? /* @__PURE__ */ n("tr", {
+		...a,
+		className: s,
 		onClick: e,
 		onKeyDown: (t) => {
 			(t.key === "Enter" || t.key === " ") && (t.preventDefault(), e?.());
@@ -54,17 +65,20 @@ function s({ onClick: e, interactive: t = !1, children: r }) {
 		tabIndex: 0,
 		children: r
 	}) : /* @__PURE__ */ n("tr", {
-		className: a,
+		...a,
+		className: s,
 		children: r
 	});
 }
-function c({ children: e }) {
+function l({ children: e, className: t, ...r }) {
+	let i = ["table__cell", t].filter(Boolean).join(" ");
 	return /* @__PURE__ */ n("td", {
-		className: "table__cell",
+		...r,
+		className: i,
 		children: e
 	});
 }
-function l({ caption: e, children: t, size: i = "md" }) {
+function u({ caption: e, children: t, size: i = "md" }) {
 	return /* @__PURE__ */ n("div", {
 		className: "table__wrapper",
 		children: /* @__PURE__ */ r("table", {
@@ -76,6 +90,6 @@ function l({ caption: e, children: t, size: i = "md" }) {
 		})
 	});
 }
-l.Head = i, l.Header = o, l.Body = a, l.Row = s, l.Cell = c;
+u.Head = i, u.Footer = a, u.Header = s, u.Body = o, u.Row = c, u.Cell = l;
 //#endregion
-export { l as Table };
+export { u as Table };

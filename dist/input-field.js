@@ -18,7 +18,7 @@ function i({ id: i, label: a, labelHidden: o = !0, name: s, type: c, placeholder
 				id: i,
 				name: s,
 				type: c,
-				placeholder: l,
+				placeholder: l ?? (o ? a : void 0),
 				value: u,
 				defaultValue: d,
 				disabled: f,
