@@ -190,46 +190,6 @@
   white-space: nowrap;
 }
 
-/* ─── Chips ───────────────────────────────────────────────────────────────── */
-
-.calendar-roster__chip {
-  display: inline-block;
-  padding-block: var(--calendar-roster-chip-padding-block);
-  padding-inline: var(--calendar-roster-chip-padding-inline);
-  border-radius: var(--calendar-roster-chip-radius);
-  font-size: var(--calendar-roster-chip-font-size);
-  font-weight: var(--calendar-roster-chip-font-weight);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.calendar-roster__chip--holiday {
-  background-color: var(--calendar-roster-chip-holiday-bg);
-  color: var(--calendar-roster-chip-holiday-color);
-}
-
-.calendar-roster__chip--vacation {
-  background-color: var(--calendar-roster-chip-vacation-bg);
-  color: var(--calendar-roster-chip-vacation-color);
-}
-
-.calendar-roster__chip--absence {
-  background-color: var(--calendar-roster-chip-absence-bg);
-  color: var(--calendar-roster-chip-absence-color);
-}
-
-.calendar-roster__chip--recovery {
-  background-color: var(--calendar-roster-chip-recovery-bg);
-  color: var(--calendar-roster-chip-recovery-color);
-}
-
-.calendar-roster__chip--birthday {
-  background-color: var(--calendar-roster-chip-birthday-bg);
-  color: var(--calendar-roster-chip-birthday-color);
-}
-
 /* ─── Legend ──────────────────────────────────────────────────────────────── */
 
 .calendar-roster__legend {
@@ -255,9 +215,4 @@
   flex-shrink: 0;
 }
 
-.calendar-roster__legend-swatch--holiday     { background-color: var(--calendar-roster-chip-holiday-bg); }
-.calendar-roster__legend-swatch--vacation    { background-color: var(--calendar-roster-chip-vacation-bg); }
-.calendar-roster__legend-swatch--absence     { background-color: var(--calendar-roster-chip-absence-bg); }
-.calendar-roster__legend-swatch--recovery    { background-color: var(--calendar-roster-chip-recovery-bg); }
-.calendar-roster__legend-swatch--birthday    { background-color: var(--calendar-roster-chip-birthday-bg); }
 .calendar-roster__legend-swatch--non-working { background-color: var(--calendar-roster-cell-non-working-bg); }

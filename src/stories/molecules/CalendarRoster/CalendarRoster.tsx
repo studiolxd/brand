@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from 'react';
 import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Tag } from '../../atoms/Tag/Tag';
 import './CalendarRoster.css';
 
 export type RosterCellType =
@@ -79,6 +80,18 @@ function getDaysInMonth(month: Date): Date[] {
   const total = new Date(year, m + 1, 0).getDate();
   return Array.from({ length: total }, (_, i) => new Date(year, m, i + 1));
 }
+
+type TagVariant =
+  | 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2'
+  | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
+
+const CELL_TYPE_VARIANT: Record<Exclude<RosterCellType, 'schedule' | 'non-working'>, TagVariant> = {
+  holiday:  'neutral',
+  vacation: 'info',
+  absence:  'danger',
+  recovery: 'success',
+  birthday: 'info',
+};
 
 const LEGEND_ITEMS: { type: Exclude<RosterCellType, 'schedule'>; label: string }[] = [
   { type: 'holiday',     label: 'Festivo' },
@@ -220,12 +233,9 @@ export function CalendarRoster({
                             <span className="calendar-roster__schedule">{cell.label}</span>
                           )}
                           {cell && cell.type !== 'schedule' && cell.type !== 'non-working' && (
-                            <span
-                              className={`calendar-roster__chip calendar-roster__chip--${cell.type}`}
-                              title={cell.label}
-                            >
+                            <Tag variant={CELL_TYPE_VARIANT[cell.type]}>
                               {cell.type === 'birthday' ? `🎂 ${cell.label}` : cell.label}
-                            </span>
+                            </Tag>
                           )}
                         </>
                       )}
@@ -243,8 +253,14 @@ export function CalendarRoster({
         <div className="calendar-roster__legend" aria-label="Leyenda">
           {LEGEND_ITEMS.map(({ type, label }) => (
             <span key={type} className="calendar-roster__legend-item">
-              <span className={`calendar-roster__legend-swatch calendar-roster__legend-swatch--${type}`} />
-              {label}
+              {type === 'non-working' ? (
+                <>
+                  <span className="calendar-roster__legend-swatch calendar-roster__legend-swatch--non-working" />
+                  {label}
+                </>
+              ) : (
+                <Tag variant={CELL_TYPE_VARIANT[type]}>{label}</Tag>
+              )}
             </span>
           ))}
         </div>

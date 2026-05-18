@@ -52,26 +52,8 @@
     "schedule-font-size":        { "$value": "0.6875rem",                    "$type": "dimension", "$description": "Tamaño del texto de horario (11px)" },
     "schedule-color":            { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del texto de horario" },
 
-    "chip-font-size":            { "$value": "0.6875rem",                    "$type": "dimension", "$description": "Tamaño del texto del chip (11px)" },
-    "chip-font-weight":          { "$value": "{font-weight.bold}",           "$type": "number",    "$description": "Peso del texto del chip" },
-    "chip-padding-block":        { "$value": "2px",                          "$type": "dimension", "$description": "Padding vertical del chip" },
-    "chip-padding-inline":       { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Padding horizontal del chip" },
-    "chip-radius":               { "$value": "{border-radius.sm}",           "$type": "dimension", "$description": "Radio del chip" },
-
-    "chip-holiday-bg":           { "$value": "#E5E7EB",                      "$type": "color",     "$description": "Fondo chip festivo" },
-    "chip-holiday-color":        { "$value": "{color.grey-darkest}",         "$type": "color",     "$description": "Texto chip festivo" },
-
-    "chip-vacation-bg":          { "$value": "#DBEaFE",                      "$type": "color",     "$description": "Fondo chip vacaciones" },
-    "chip-vacation-color":       { "$value": "#1D4ED8",                      "$type": "color",     "$description": "Texto chip vacaciones" },
-
-    "chip-absence-bg":           { "$value": "#FEE2E2",                      "$type": "color",     "$description": "Fondo chip ausencia" },
-    "chip-absence-color":        { "$value": "#B91C1C",                      "$type": "color",     "$description": "Texto chip ausencia" },
-
-    "chip-recovery-bg":          { "$value": "#D1FAE5",                      "$type": "color",     "$description": "Fondo chip recuperación" },
-    "chip-recovery-color":       { "$value": "#065F46",                      "$type": "color",     "$description": "Texto chip recuperación" },
-
-    "chip-birthday-bg":          { "$value": "#FCE7F3",                      "$type": "color",     "$description": "Fondo chip cumpleaños" },
-    "chip-birthday-color":       { "$value": "#9D174D",                      "$type": "color",     "$description": "Texto chip cumpleaños" },
+    "chip-padding-block":        { "$value": "2px",                          "$type": "dimension", "$description": "Padding vertical del botón de navegación" },
+    "chip-padding-inline":       { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Gap de la leyenda por item" },
 
     "legend-gap":                { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Gap entre elementos de la leyenda" },
     "legend-font-size":          { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño del texto de la leyenda" },

@@ -43,21 +43,8 @@ $calendar-roster-cell-holiday-bg: #e5e7eb; // Fondo de celdas festivas
 $calendar-roster-cell-non-working-bg: #f2f2f2; // Fondo de celdas no laborables (laborable sin turno asignado)
 $calendar-roster-schedule-font-size: 0.6875rem; // Tamaño del texto de horario (11px)
 $calendar-roster-schedule-color: #111e30; // Color del texto de horario
-$calendar-roster-chip-font-size: 0.6875rem; // Tamaño del texto del chip (11px)
-$calendar-roster-chip-font-weight: 700; // Peso del texto del chip
-$calendar-roster-chip-padding-block: 2px; // Padding vertical del chip
-$calendar-roster-chip-padding-inline: 0.25rem; // Padding horizontal del chip
-$calendar-roster-chip-radius: 4px; // Radio del chip
-$calendar-roster-chip-holiday-bg: #e5e7eb; // Fondo chip festivo
-$calendar-roster-chip-holiday-color: #4a4a4a; // Texto chip festivo
-$calendar-roster-chip-vacation-bg: #dbeafe; // Fondo chip vacaciones
-$calendar-roster-chip-vacation-color: #1d4ed8; // Texto chip vacaciones
-$calendar-roster-chip-absence-bg: #fee2e2; // Fondo chip ausencia
-$calendar-roster-chip-absence-color: #b91c1c; // Texto chip ausencia
-$calendar-roster-chip-recovery-bg: #d1fae5; // Fondo chip recuperación
-$calendar-roster-chip-recovery-color: #065f46; // Texto chip recuperación
-$calendar-roster-chip-birthday-bg: #fce7f3; // Fondo chip cumpleaños
-$calendar-roster-chip-birthday-color: #9d174d; // Texto chip cumpleaños
+$calendar-roster-chip-padding-block: 2px; // Padding vertical del botón de navegación
+$calendar-roster-chip-padding-inline: 0.25rem; // Gap de la leyenda por item
 $calendar-roster-legend-gap: 0.75rem; // Gap entre elementos de la leyenda
 $calendar-roster-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
 $calendar-roster-legend-color: #4a4a4a; // Color del texto de la leyenda

@@ -8,17 +8,7 @@
   --calendar-roster-th-day-sub-font-size: 0.625rem; /** Tamaño de la letra del día de semana */
   --calendar-roster-cell-holiday-bg: #e5e7eb; /** Fondo de celdas festivas */
   --calendar-roster-schedule-font-size: 0.6875rem; /** Tamaño del texto de horario (11px) */
-  --calendar-roster-chip-font-size: 0.6875rem; /** Tamaño del texto del chip (11px) */
-  --calendar-roster-chip-padding-block: 2px; /** Padding vertical del chip */
-  --calendar-roster-chip-holiday-bg: #e5e7eb; /** Fondo chip festivo */
-  --calendar-roster-chip-vacation-bg: #dbeafe; /** Fondo chip vacaciones */
-  --calendar-roster-chip-vacation-color: #1d4ed8; /** Texto chip vacaciones */
-  --calendar-roster-chip-absence-bg: #fee2e2; /** Fondo chip ausencia */
-  --calendar-roster-chip-absence-color: #b91c1c; /** Texto chip ausencia */
-  --calendar-roster-chip-recovery-bg: #d1fae5; /** Fondo chip recuperación */
-  --calendar-roster-chip-recovery-color: #065f46; /** Texto chip recuperación */
-  --calendar-roster-chip-birthday-bg: #fce7f3; /** Fondo chip cumpleaños */
-  --calendar-roster-chip-birthday-color: #9d174d; /** Texto chip cumpleaños */
+  --calendar-roster-chip-padding-block: 2px; /** Padding vertical del botón de navegación */
   --calendar-roster-font-family: var(--font-family-sans); /** Familia tipográfica base */
   --calendar-roster-nav-hover-bg: var(--color-grey-lightest); /** Fondo hover de los botones de navegación */
   --calendar-roster-nav-disabled-color: var(--color-grey-dark); /** Color deshabilitado */
@@ -43,10 +33,7 @@
   --calendar-roster-cell-padding-inline: var(--spacing-1); /** Padding horizontal de las celdas de datos */
   --calendar-roster-cell-weekend-bg: var(--color-grey-lightest); /** Fondo de celdas de fin de semana */
   --calendar-roster-cell-non-working-bg: var(--color-grey-lightest); /** Fondo de celdas no laborables (laborable sin turno asignado) */
-  --calendar-roster-chip-font-weight: var(--font-weight-bold); /** Peso del texto del chip */
-  --calendar-roster-chip-padding-inline: var(--spacing-1); /** Padding horizontal del chip */
-  --calendar-roster-chip-radius: var(--border-radius-sm); /** Radio del chip */
-  --calendar-roster-chip-holiday-color: var(--color-grey-darkest); /** Texto chip festivo */
+  --calendar-roster-chip-padding-inline: var(--spacing-1); /** Gap de la leyenda por item */
   --calendar-roster-legend-gap: var(--spacing-3); /** Gap entre elementos de la leyenda */
   --calendar-roster-legend-font-size: var(--font-size-1); /** Tamaño del texto de la leyenda */
   --calendar-roster-legend-swatch-size: var(--spacing-3); /** Tamaño del cuadradito de color en la leyenda */
