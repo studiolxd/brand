@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "4.11.1",
+  "version": "4.11.2",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -142,6 +142,7 @@
       "import": "./dist/label.js"
     },
     "./legal-template.css": "./dist/legal-template.css",
+    "./link.css": "./dist/link.css",
     "./link": {
       "types": "./dist/_types/atoms/Link/Link.d.ts",
       "import": "./dist/link.js"
