@@ -11,7 +11,7 @@ export interface TableProps {
   size?: 'sm' | 'md';
 }
 
-export interface TableHeaderProps {
+export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
   /** Si esta columna admite ordenación */
   sortable?: boolean;
   /** Dirección activa. Solo relevante si sortable */
@@ -21,28 +21,45 @@ export interface TableHeaderProps {
   children: ReactNode;
 }
 
-export interface TableRowProps {
-  /** Si se pasa, la fila es interactiva (cursor pointer, focusable, responde a teclado) */
+/** onClick tipado como () => void para mantener la API de interactividad con teclado */
+export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowElement>, 'onClick'> {
   onClick?: () => void;
   /** Alternativa explícita a onClick para control manual */
   interactive?: boolean;
   children: ReactNode;
 }
 
+export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+  children?: ReactNode;
+}
+
 function TableHead({ children }: { children: ReactNode }) {
   return <thead>{children}</thead>;
+}
+
+function TableFoot({ children }: { children: ReactNode }) {
+  return <tfoot>{children}</tfoot>;
 }
 
 function TableBody({ children }: { children: ReactNode }) {
   return <tbody>{children}</tbody>;
 }
 
-function TableHeader({ sortable = false, sorted = false, onSort, children }: TableHeaderProps) {
+function TableHeader({
+  sortable = false,
+  sorted = false,
+  onSort,
+  children,
+  className,
+  scope = 'col',
+  ...rest
+}: TableHeaderProps) {
   const classes = [
     'table__header',
     sortable ? 'table__header--sortable' : '',
     sorted === 'asc' ? 'table__header--sorted-asc' : '',
     sorted === 'desc' ? 'table__header--sorted-desc' : '',
+    className,
   ]
     .filter(Boolean)
     .join(' ');
@@ -50,7 +67,8 @@ function TableHeader({ sortable = false, sorted = false, onSort, children }: Tab
   if (sortable) {
     return (
       <th
-        scope="col"
+        {...rest}
+        scope={scope}
         className={classes}
         onClick={onSort}
         onKeyDown={(e) => {
@@ -80,21 +98,28 @@ function TableHeader({ sortable = false, sorted = false, onSort, children }: Tab
   }
 
   return (
-    <th scope="col" className={classes}>
+    <th {...rest} scope={scope} className={classes}>
       {children}
     </th>
   );
 }
 
-function TableRow({ onClick, interactive = false, children }: TableRowProps) {
+function TableRow({
+  onClick,
+  interactive = false,
+  children,
+  className,
+  ...rest
+}: TableRowProps) {
   const isInteractive = interactive || !!onClick;
-  const classes = ['table__row', isInteractive ? 'table__row--interactive' : '']
+  const classes = ['table__row', isInteractive ? 'table__row--interactive' : '', className]
     .filter(Boolean)
     .join(' ');
 
   if (isInteractive) {
     return (
       <tr
+        {...rest}
         className={classes}
         onClick={onClick}
         onKeyDown={(e) => {
@@ -110,11 +135,20 @@ function TableRow({ onClick, interactive = false, children }: TableRowProps) {
     );
   }
 
-  return <tr className={classes}>{children}</tr>;
+  return (
+    <tr {...rest} className={classes}>
+      {children}
+    </tr>
+  );
 }
 
-function TableCell({ children }: { children: ReactNode }) {
-  return <td className="table__cell">{children}</td>;
+function TableCell({ children, className, ...rest }: TableCellProps) {
+  const classes = ['table__cell', className].filter(Boolean).join(' ');
+  return (
+    <td {...rest} className={classes}>
+      {children}
+    </td>
+  );
 }
 
 export function Table({ caption, children, size = 'md' }: TableProps) {
@@ -131,6 +165,7 @@ export function Table({ caption, children, size = 'md' }: TableProps) {
 }
 
 Table.Head = TableHead;
+Table.Footer = TableFoot;
 Table.Header = TableHeader;
 Table.Body = TableBody;
 Table.Row = TableRow;

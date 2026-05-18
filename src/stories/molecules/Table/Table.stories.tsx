@@ -133,6 +133,38 @@ export const ConFilasInteractivas: Story = {
   },
 };
 
+export const ConFooterYColspan: Story = {
+  name: 'Con Footer y colSpan',
+  render: () => (
+    <Table caption="Resumen de proyectos con totales">
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>Nombre</Table.Header>
+          <Table.Header>Cliente</Table.Header>
+          <Table.Header>Fecha</Table.Header>
+          <Table.Header>Estado</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {PROYECTOS.map((p) => (
+          <Table.Row key={p.nombre}>
+            <Table.Header scope="row">{p.nombre}</Table.Header>
+            <Table.Cell>{p.cliente}</Table.Cell>
+            <Table.Cell>{p.fecha}</Table.Cell>
+            <Table.Cell>{p.estado}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+      <Table.Footer>
+        <Table.Row>
+          <Table.Cell colSpan={3}>Total proyectos</Table.Cell>
+          <Table.Cell>{PROYECTOS.length}</Table.Cell>
+        </Table.Row>
+      </Table.Footer>
+    </Table>
+  ),
+};
+
 export const Sm: Story = {
   render: () => (
     <Table caption="Listado compacto de proyectos" size="sm">

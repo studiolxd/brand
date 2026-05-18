@@ -75,7 +75,7 @@ export type { SelectFieldProps } from './stories/molecules/SelectField/SelectFie
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';
 export type { SidebarNavProps, SidebarNavEntry, SidebarNavLinkEntry, SidebarNavGroupEntry, SidebarNavItem, SidebarNavRenderLinkProps } from './stories/molecules/SidebarNav/SidebarNav';
 export { Table } from './stories/molecules/Table/Table';
-export type { TableProps, TableHeaderProps, TableRowProps } from './stories/molecules/Table/Table';
+export type { TableProps, TableHeaderProps, TableRowProps, TableCellProps } from './stories/molecules/Table/Table';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 export { TimeField } from './stories/molecules/TimeField/TimeField';
 export type { TimeFieldProps } from './stories/molecules/TimeField/TimeField';
