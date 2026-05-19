@@ -35,6 +35,17 @@
   --button-ghost-hover-bg:          rgba(255, 255, 255, 0.1);
   --button-ghost-active-bg:         rgba(255, 255, 255, 0.18);
 
+  /* ─── Button destructive intent ──────────────────────────────────────── */
+  --button-destructive-color:            var(--color-error-on-dark);
+  --button-destructive-border:           var(--color-error-on-dark);
+  --button-destructive-hover-bg:         var(--color-error-on-dark);
+  --button-destructive-hover-color:      var(--color-text-on-light);
+  --button-destructive-hover-border:     var(--color-error-on-dark);
+  --button-destructive-active-bg:        var(--color-error-on-dark);
+  --button-destructive-active-color:     var(--color-text-on-light);
+  --button-destructive-active-border:    var(--color-error-on-dark);
+  --button-destructive-focus-ring-color: var(--color-error-on-dark);
+
   /* ─── Input ───────────────────────────────────────────────────────────── */
   --input-bg:                    var(--color-background-dark);
   --input-color:                 var(--color-text-on-dark);

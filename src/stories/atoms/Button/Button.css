@@ -188,41 +188,41 @@
 
 /* Outline + destructive intent */
 .button--outline.button--destructive-intent {
-  color: var(--color-error-on-dark);
-  border-color: var(--color-error-on-dark);
+  color: var(--button-destructive-color);
+  border-color: var(--button-destructive-border);
 }
 
 .button--outline.button--destructive-intent:hover {
-  background-color: var(--color-error-on-dark);
-  color: var(--color-text-on-light);
-  border-color: var(--color-error-on-dark);
+  background-color: var(--button-destructive-hover-bg);
+  color: var(--button-destructive-hover-color);
+  border-color: var(--button-destructive-hover-border);
 }
 
 .button--outline.button--destructive-intent:active {
-  background-color: var(--color-error-on-dark);
-  color: var(--color-text-on-light);
-  border-color: var(--color-error-on-dark);
+  background-color: var(--button-destructive-active-bg);
+  color: var(--button-destructive-active-color);
+  border-color: var(--button-destructive-active-border);
 }
 
 .button--outline.button--destructive-intent:focus-visible {
-  outline-color: var(--color-error-on-dark);
+  outline-color: var(--button-destructive-focus-ring-color);
 }
 
 /* Text + destructive intent */
 .button--text.button--destructive-intent {
-  color: var(--color-destructive-on-light);
+  color: var(--button-destructive-color);
 }
 
 .button--text.button--destructive-intent:hover {
-  color: var(--color-destructive-on-light);
+  color: var(--button-destructive-color);
 }
 
 .button--text.button--destructive-intent:active {
-  color: var(--color-destructive-on-light);
+  color: var(--button-destructive-color);
 }
 
 .button--text.button--destructive-intent:focus-visible {
-  outline-color: var(--color-destructive-on-light);
+  outline-color: var(--button-destructive-focus-ring-color);
 }
 
 /* Tamaños */

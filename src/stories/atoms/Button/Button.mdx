@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ButtonStories from "./Button.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonAccentTokens, buttonOutlineTokens, buttonGhostTokens, buttonSizeTokens } from "../../../tokens/components/button";
+import { buttonBaseTokens, buttonPrimaryTokens, buttonPrimaryDarkTokens, buttonOutlineTokens, buttonGhostTokens, buttonSizeTokens } from "../../../tokens/components/button";
 
 <Meta of={ButtonStories} />
 
@@ -21,7 +21,7 @@ Fondo en color accent-1 y texto oscuro. En hover el fondo pasa a accent-2. El te
 
 > **Nota:** La prop `destructive` no tiene efecto sobre la variante `accent`. El color de fondo del accent es parte de su identidad visual y no es compatible semánticamente con la intención destructiva. Usa `variant="primary" destructive` o `variant="ghost" destructive` para acciones de alto riesgo.
 
-<Canvas of={ButtonStories.Accent} />
+<Canvas of={ButtonStories.Primary} />
 
 ## Outline
 
@@ -101,10 +101,6 @@ En Storybook se muestra con un `<a>` como stand-in del componente `Link` del rou
 ### Primary Dark
 
 <TokenTable tokens={buttonPrimaryDarkTokens} />
-
-### Accent
-
-<TokenTable tokens={buttonAccentTokens} />
 
 ### Outline
 
