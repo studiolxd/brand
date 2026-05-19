@@ -5,7 +5,7 @@
     "group-trigger-padding-inline": { "$value": "{spacing.3}",            "$type": "dimension", "$description": "Padding horizontal del trigger de grupo" },
     "group-trigger-gap":         { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Gap entre texto y chevron del grupo" },
     "group-label-font-size":     { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Tamaño de texto de etiqueta de grupo" },
-    "group-label-font-weight":   { "$value": "{font-weight.semibold}",    "$type": "number",    "$description": "Peso del texto de etiqueta de grupo" },
+    "group-label-font-weight":   { "$value": "{font-weight.medium}",    "$type": "number",    "$description": "Peso del texto de etiqueta de grupo" },
     "group-label-color":         { "$value": "{color.primary}",            "$type": "color",     "$description": "Color de la etiqueta de grupo" },
     "group-label-letter-spacing":{ "$value": "{letter-spacing.wide}",     "$type": "string",    "$description": "Espaciado de letras de la etiqueta" },
     "item-padding-block":        { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Padding vertical de cada ítem" },

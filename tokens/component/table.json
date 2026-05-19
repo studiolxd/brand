@@ -12,7 +12,7 @@
 
     "header-padding-block":   { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding block del encabezado" },
     "header-padding-inline":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding inline del encabezado" },
-    "header-font-weight":     { "$value": "{font-weight.semibold}",   "$type": "number",    "$description": "Peso tipográfico del encabezado" },
+    "header-font-weight":     { "$value": "{font-weight.medium}",   "$type": "number",    "$description": "Peso tipográfico del encabezado" },
     "header-border-width":    { "$value": "{border-width.md}",        "$type": "dimension", "$description": "Borde inferior del thead — más grueso que los separadores" },
     "header-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde inferior del thead" },
     "header-hover-bg":        { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo en hover de columna sortable" },

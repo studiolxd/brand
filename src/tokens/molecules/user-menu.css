@@ -20,7 +20,7 @@
   --user-menu-header-padding-block: var(--spacing-3); /** Padding vertical de la cabecera del dropdown */
   --user-menu-header-padding-inline: var(--spacing-4); /** Padding horizontal de la cabecera del dropdown */
   --user-menu-header-name-font-size: var(--font-size-2); /** Tamaño del nombre en la cabecera */
-  --user-menu-header-name-font-weight: var(--font-weight-semibold); /** Peso del nombre en la cabecera */
+  --user-menu-header-name-font-weight: var(--font-weight-medium); /** Peso del nombre en la cabecera */
   --user-menu-header-email-font-size: var(--font-size-1); /** Tamaño del email en la cabecera */
   --user-menu-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
   --user-menu-item-padding-inline: var(--spacing-4); /** Padding horizontal de cada ítem */

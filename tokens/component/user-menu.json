@@ -24,7 +24,7 @@
     "header-padding-block":   { "$value": "{spacing.3}",                   "$type": "dimension", "$description": "Padding vertical de la cabecera del dropdown" },
     "header-padding-inline":  { "$value": "{spacing.4}",                   "$type": "dimension", "$description": "Padding horizontal de la cabecera del dropdown" },
     "header-name-font-size":  { "$value": "{font-size.2}",                 "$type": "dimension", "$description": "Tamaño del nombre en la cabecera" },
-    "header-name-font-weight":{ "$value": "{font-weight.semibold}",        "$type": "number",    "$description": "Peso del nombre en la cabecera" },
+    "header-name-font-weight":{ "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso del nombre en la cabecera" },
     "header-name-color":      { "$value": "{color.text.on-light}",         "$type": "color",     "$description": "Color del nombre en la cabecera" },
     "header-email-font-size": { "$value": "{font-size.1}",                 "$type": "dimension", "$description": "Tamaño del email en la cabecera" },
     "header-email-color":     { "$value": "{color.text.muted-on-light}",   "$type": "color",     "$description": "Color del email en la cabecera" },

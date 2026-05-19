@@ -11,7 +11,7 @@
     "padding-inline":       { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Padding horizontal del panel" },
     "header-gap":           { "$value": "{spacing.4}",                "$type": "dimension", "$description": "Gap entre título y botón ✕" },
     "title-font-size":      { "$value": "{font-size.5}",              "$type": "dimension", "$description": "Tamaño del título (1.5rem)" },
-    "title-font-weight":    { "$value": "{font-weight.semibold}",     "$type": "number",    "$description": "Peso del título" },
+    "title-font-weight":    { "$value": "{font-weight.medium}",     "$type": "number",    "$description": "Peso del título" },
     "title-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título" },
     "width-max":            { "$value": "560px",                      "$type": "dimension", "$description": "Anchura máxima del panel" },
     "transition-duration":  { "$value": "{motion.duration.base}",     "$type": "number",    "$description": "Duración de la animación entrada/salida" },

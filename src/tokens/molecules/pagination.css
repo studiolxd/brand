@@ -19,7 +19,7 @@
   --pagination-btn-padding-block: var(--spacing-2); /** Padding vertical de los botones */
   --pagination-btn-padding-inline: var(--spacing-2); /** Padding horizontal de los botones */
   --pagination-btn-radius: var(--border-radius-sm); /** Radio de borde de los botones */
-  --pagination-btn-current-font-weight: var(--font-weight-bold); /** Peso tipográfico de la página activa */
+  --pagination-btn-current-font-weight: var(--font-weight-medium); /** Peso tipográfico de la página activa */
   --pagination-btn-disabled-color: var(--color-grey-dark); /** Texto cuando está deshabilitado */
   --pagination-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
   --pagination-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */

@@ -12,7 +12,7 @@
   --table-border-color: var(--color-grey-light); /** Color de separadores de fila */
   --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
   --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */
-  --table-header-font-weight: var(--font-weight-semibold); /** Peso tipográfico del encabezado */
+  --table-header-font-weight: var(--font-weight-medium); /** Peso tipográfico del encabezado */
   --table-header-border-width: var(--border-width-md); /** Borde inferior del thead — más grueso que los separadores */
   --table-header-hover-bg: var(--color-grey-lightest); /** Fondo en hover de columna sortable */
   --table-sort-icon-color: var(--color-grey-dark); /** Color del icono de sort inactivo */

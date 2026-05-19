@@ -16,11 +16,11 @@
   --calendar-roster-nav-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --calendar-roster-nav-radius: var(--border-radius-sm); /** Radio del botón de navegación */
   --calendar-roster-title-font-size: var(--font-size-2); /** Tamaño del título del mes */
-  --calendar-roster-title-font-weight: var(--font-weight-bold); /** Peso del título del mes */
+  --calendar-roster-title-font-weight: var(--font-weight-medium); /** Peso del título del mes */
   --calendar-roster-border-color: var(--color-grey-light); /** Color de los bordes del grid */
   --calendar-roster-border-width: var(--border-width-sm); /** Grosor de los bordes del grid */
   --calendar-roster-th-name-font-size: var(--font-size-1); /** Tamaño del encabezado de nombre */
-  --calendar-roster-th-name-font-weight: var(--font-weight-bold); /** Peso del encabezado de nombre */
+  --calendar-roster-th-name-font-weight: var(--font-weight-medium); /** Peso del encabezado de nombre */
   --calendar-roster-th-name-padding-block: var(--spacing-2); /** Padding vertical del encabezado de nombre */
   --calendar-roster-th-name-padding-inline: var(--spacing-3); /** Padding horizontal del encabezado de nombre */
   --calendar-roster-th-day-font-size: var(--font-size-1); /** Tamaño del número de día */

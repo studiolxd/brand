@@ -20,7 +20,7 @@
     "btn-hover-text-decoration": { "$value": "underline",                   "$type": "string",    "$description": "Decoración de texto en hover — estilo ghost" },
     "btn-current-bg":        { "$value": "transparent",                 "$type": "color",     "$description": "Fondo de la página activa — sin fondo" },
     "btn-current-color":     { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Texto de la página activa" },
-    "btn-current-font-weight": { "$value": "{font-weight.bold}",        "$type": "number",    "$description": "Peso tipográfico de la página activa" },
+    "btn-current-font-weight": { "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso tipográfico de la página activa" },
     "btn-disabled-color":  { "$value": "{color.grey-dark}",           "$type": "color",     "$description": "Texto cuando está deshabilitado" },
     "btn-disabled-cursor": { "$value": "not-allowed",                 "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
     "ellipsis-color":      { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del ellipsis" },

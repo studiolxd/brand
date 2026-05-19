@@ -9,7 +9,7 @@
   --sidebar-nav-group-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger de grupo */
   --sidebar-nav-group-trigger-gap: var(--spacing-2); /** Gap entre texto y chevron del grupo */
   --sidebar-nav-group-label-font-size: var(--font-size-3); /** Tamaño de texto de etiqueta de grupo */
-  --sidebar-nav-group-label-font-weight: var(--font-weight-semibold); /** Peso del texto de etiqueta de grupo */
+  --sidebar-nav-group-label-font-weight: var(--font-weight-medium); /** Peso del texto de etiqueta de grupo */
   --sidebar-nav-group-label-letter-spacing: var(--letter-spacing-wide); /** Espaciado de letras de la etiqueta */
   --sidebar-nav-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
   --sidebar-nav-item-padding-inline: var(--spacing-4); /** Padding horizontal de cada ítem (mayor para indentar respecto al trigger del grupo) */

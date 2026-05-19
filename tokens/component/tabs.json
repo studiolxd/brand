@@ -7,7 +7,7 @@
     "trigger-padding-inline":    { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding horizontal del trigger" },
     "trigger-font-size":         { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Tamaño de fuente del trigger" },
     "trigger-font-weight":       { "$value": "{font-weight.default}",    "$type": "string",    "$description": "Peso de fuente por defecto" },
-    "trigger-active-weight":     { "$value": "{font-weight.semibold}",   "$type": "string",    "$description": "Peso de fuente del tab activo" },
+    "trigger-active-weight":     { "$value": "{font-weight.medium}",   "$type": "string",    "$description": "Peso de fuente del tab activo" },
     "trigger-color":             { "$value": "{color.grey-dark}",        "$type": "color",     "$description": "Color del trigger inactivo" },
     "trigger-hover-color":       { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del trigger en hover" },
     "trigger-active-color":      { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del trigger activo" },

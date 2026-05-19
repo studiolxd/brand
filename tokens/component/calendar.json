@@ -15,7 +15,7 @@
     "nav-focus-ring-offset":     { "$value": "{border-width.sm}",          "$type": "dimension", "$description": "Separación del focus ring" },
 
     "title-font-size":           { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño del título del mes — md" },
-    "title-font-weight":         { "$value": "{font-weight.bold}",         "$type": "number",    "$description": "Peso del título del mes" },
+    "title-font-weight":         { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso del título del mes" },
     "title-color":               { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título del mes" },
 
     "weekday-font-size":         { "$value": "{font-size.1}",              "$type": "dimension", "$description": "Tamaño de las cabeceras de día de semana" },
@@ -33,7 +33,7 @@
     "day-focus-ring-offset":     { "$value": "{border-width.sm}",          "$type": "dimension", "$description": "Separación del focus ring de los días" },
 
     "today-color":               { "$value": "{color.primary}",            "$type": "color",     "$description": "Color de texto del día de hoy" },
-    "today-font-weight":         { "$value": "{font-weight.bold}",         "$type": "number",    "$description": "Peso de fuente del día de hoy" },
+    "today-font-weight":         { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso de fuente del día de hoy" },
     "today-border-color":        { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del indicador (borde inferior) del día de hoy" },
 
     "selected-bg":               { "$value": "{color.primary}",            "$type": "color",     "$description": "Fondo del día seleccionado" },

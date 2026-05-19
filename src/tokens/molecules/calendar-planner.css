@@ -16,9 +16,9 @@
   --calendar-planner-nav-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --calendar-planner-nav-radius: var(--border-radius-sm); /** Radio de borde del botón de navegación */
   --calendar-planner-title-font-size: var(--font-size-2); /** Tamaño del título del mes */
-  --calendar-planner-title-font-weight: var(--font-weight-bold); /** Peso del título del mes */
+  --calendar-planner-title-font-weight: var(--font-weight-medium); /** Peso del título del mes */
   --calendar-planner-weekday-font-size: var(--font-size-1); /** Tamaño de las cabeceras de día de semana */
-  --calendar-planner-weekday-font-weight: var(--font-weight-bold); /** Peso de las cabeceras de día de semana */
+  --calendar-planner-weekday-font-weight: var(--font-weight-medium); /** Peso de las cabeceras de día de semana */
   --calendar-planner-weekday-padding-block: var(--spacing-2); /** Padding vertical de las cabeceras */
   --calendar-planner-grid-border-color: var(--color-grey-light); /** Color de los bordes del grid */
   --calendar-planner-grid-border-width: var(--border-width-sm); /** Grosor de los bordes del grid */
@@ -26,7 +26,7 @@
   --calendar-planner-cell-padding-inline: var(--spacing-2); /** Padding horizontal de la celda */
   --calendar-planner-cell-outside-bg: var(--color-grey-lightest); /** Fondo de las celdas fuera del mes */
   --calendar-planner-day-number-font-size: var(--font-size-1); /** Tamaño del número del día */
-  --calendar-planner-day-number-font-weight: var(--font-weight-bold); /** Peso del número del día */
+  --calendar-planner-day-number-font-weight: var(--font-weight-medium); /** Peso del número del día */
   --calendar-planner-day-number-size: var(--spacing-5); /** Tamaño (ancho y alto) del badge con el número */
   --calendar-planner-day-number-radius: var(--border-radius-sm); /** Radio del badge del número */
   --calendar-planner-day-number-outside-color: var(--color-grey-darkest); /** Color del número en días fuera del mes (contraste ≥4.5:1 sobre grey-lightest) */
