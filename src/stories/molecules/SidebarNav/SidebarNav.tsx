@@ -103,14 +103,24 @@ export function SidebarNav({
           return (
             <RadixAccordion.Item key={entry.id} value={entry.id} className="sidebar-nav__group">
               <RadixAccordion.Header className="sidebar-nav__group-header">
-                {entry.icon && (
-                  <span className="sidebar-nav__item-icon" aria-hidden="true" title={entry.label}>
-                    {entry.icon}
-                  </span>
-                )}
                 {entry.href
-                  ? renderLink({ href: entry.href, className: 'sidebar-nav__group-label', title: entry.label, children: <span className="sidebar-nav__item-label">{entry.label}</span> })
-                  : <span className="sidebar-nav__group-label"><span className="sidebar-nav__item-label">{entry.label}</span></span>
+                  ? renderLink({
+                      href: entry.href,
+                      className: 'sidebar-nav__group-label',
+                      title: entry.label,
+                      children: (
+                        <>
+                          {entry.icon && <span className="sidebar-nav__item-icon" aria-hidden="true">{entry.icon}</span>}
+                          <span className="sidebar-nav__item-label">{entry.label}</span>
+                        </>
+                      ),
+                    })
+                  : (
+                    <span className="sidebar-nav__group-label">
+                      {entry.icon && <span className="sidebar-nav__item-icon" aria-hidden="true">{entry.icon}</span>}
+                      <span className="sidebar-nav__item-label">{entry.label}</span>
+                    </span>
+                  )
                 }
                 <RadixAccordion.Trigger className="sidebar-nav__group-chevron">
                   <Chevron className="sidebar-nav__group-chevron-icon" size="sm" />
