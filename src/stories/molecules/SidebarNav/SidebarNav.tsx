@@ -116,7 +116,7 @@ export function SidebarNav({
                       ),
                     })
                   : (
-                    <span className="sidebar-nav__group-label">
+                    <span className="sidebar-nav__group-label" title={entry.label}>
                       {entry.icon && <span className="sidebar-nav__item-icon" aria-hidden="true">{entry.icon}</span>}
                       <span className="sidebar-nav__item-label">{entry.label}</span>
                     </span>

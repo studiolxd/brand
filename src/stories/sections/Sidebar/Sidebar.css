@@ -126,10 +126,13 @@
   padding-inline: var(--spacing-1);
 }
 
-.sidebar[data-collapsed="true"] .sidebar-nav__group-label,
 .sidebar[data-collapsed="true"] .sidebar-nav__group-chevron,
 .sidebar[data-collapsed="true"] .sidebar-nav__group-content {
   display: none;
+}
+
+.sidebar[data-collapsed="true"] .sidebar-nav__group-label {
+  flex: none;
 }
 
 /* ── Mobile (< 1024px) ───────────────────────────────────── */

@@ -31,6 +31,9 @@
 .sidebar-nav__group-label {
   flex: 1;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sidebar-nav-item-icon-gap);
   font-size: var(--sidebar-nav-group-label-font-size);
   font-weight: var(--sidebar-nav-group-label-font-weight);
   color: var(--sidebar-nav-group-label-color);
