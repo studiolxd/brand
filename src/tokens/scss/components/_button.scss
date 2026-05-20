@@ -45,7 +45,8 @@ $button-primary-text-decoration: none; // Text decoration
 $button-primary-transition-duration: 150ms; // Transition duration
 $button-primary-transition-easing: ease; // Transition easing
 $button-primary-disabled-cursor: not-allowed; // Cursor when disabled
-$button-primary-disabled-color: #4a4a4a; // Text color when disabled
+$button-primary-disabled-bg: #4a4a4a; // Background when disabled — filled with the disabled border color
+$button-primary-disabled-color: #ffffff; // Text color when disabled — white on grey background
 $button-primary-disabled-border: #4a4a4a; // Border color when disabled
 $button-primary-padding-block: 0.75rem; // Block (vertical) padding
 $button-primary-padding-inline: 2rem; // Inline (horizontal) padding

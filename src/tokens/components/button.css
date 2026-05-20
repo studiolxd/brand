@@ -54,6 +54,7 @@
   --button-primary-white-space: var(--button-white-space); /** White space */
   --button-primary-text-decoration: var(--button-text-decoration); /** Text decoration */
   --button-primary-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
+  --button-primary-disabled-color: var(--color-white); /** Text color when disabled — white on grey background */
   --button-primary-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-destructive-border-style: var(--button-border-style); /** Border style */
   --button-destructive-justify-content: var(--button-justify-content); /** Justify content */
@@ -101,7 +102,7 @@
   --button-primary-line-height: var(--button-line-height); /** Line height */
   --button-primary-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-primary-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-primary-disabled-color: var(--button-disabled-color); /** Text color when disabled */
+  --button-primary-disabled-bg: var(--button-disabled-border); /** Background when disabled — filled with the disabled border color */
   --button-primary-disabled-border: var(--button-disabled-border); /** Border color when disabled */
   --button-primary-padding-block: var(--button-padding-block); /** Block (vertical) padding */
   --button-primary-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */

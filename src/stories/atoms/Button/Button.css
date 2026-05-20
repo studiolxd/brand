@@ -43,6 +43,7 @@
 
 .button--primary:disabled,
 .button--primary[aria-disabled="true"] {
+  background-color: var(--button-primary-disabled-bg);
   color: var(--button-primary-disabled-color);
   border-color: var(--button-primary-disabled-border);
   cursor: var(--button-primary-disabled-cursor);
