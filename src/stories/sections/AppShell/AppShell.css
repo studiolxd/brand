@@ -15,20 +15,12 @@
   box-sizing: border-box;
   padding-block-start: env(safe-area-inset-top);
   padding-block-end: env(safe-area-inset-bottom);
-  padding-inline-start: var(--sidebar-width);
   padding-inline-end: env(safe-area-inset-right);
-  transition: padding-inline-start var(--sidebar-transition-duration) var(--sidebar-transition-easing);
 }
 
-/* Desktop: cuando colapsada, padding = ancho colapsado */
-.app-shell:has(.sidebar[data-collapsed="true"]) .app-shell__content {
-  padding-inline-start: var(--sidebar-collapsed-width);
-}
-
-/* Mobile: siempre padding = ancho colapsado (la tira siempre ocupa espacio) */
+/* Mobile: sidebar es position:fixed, el contenido necesita offset */
 @media (max-width: 1023px) {
   .app-shell__content {
     padding-inline-start: var(--sidebar-collapsed-width);
-    transition: none;
   }
 }
