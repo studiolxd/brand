@@ -4,6 +4,7 @@ import './HeroVideo.css';
 interface VideoSource {
   webm?: string;
   mp4?: string;
+  poster?: string;
 }
 
 interface HeroVideoProps {
@@ -25,13 +26,13 @@ export function HeroVideo({ landscape, portrait }: HeroVideoProps) {
   return (
     <div className="hero-video" aria-hidden="true">
       <div className="hero-video__landscape">
-        <video ref={landscapeRef} autoPlay loop muted playsInline>
+        <video ref={landscapeRef} autoPlay loop muted playsInline poster={landscape.poster}>
           {landscape.webm && <source src={landscape.webm} type="video/webm" />}
           {landscape.mp4  && <source src={landscape.mp4}  type="video/mp4"  />}
         </video>
       </div>
       <div className="hero-video__portrait">
-        <video ref={portraitRef} autoPlay loop muted playsInline>
+        <video ref={portraitRef} autoPlay loop muted playsInline poster={portrait.poster}>
           {portrait.webm && <source src={portrait.webm} type="video/webm" />}
           {portrait.mp4  && <source src={portrait.mp4}  type="video/mp4"  />}
         </video>
