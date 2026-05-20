@@ -50,36 +50,36 @@ function o({ entries: o, defaultValue: s, value: c, onValueChange: l, renderLink
 					className: "sidebar-nav__group",
 					children: [/* @__PURE__ */ i(t.Header, {
 						className: "sidebar-nav__group-header",
-						children: [
-							a.icon && /* @__PURE__ */ r("span", {
+						children: [a.href ? u({
+							href: a.href,
+							className: "sidebar-nav__group-label",
+							title: a.label,
+							children: /* @__PURE__ */ i(n, { children: [a.icon && /* @__PURE__ */ r("span", {
 								className: "sidebar-nav__item-icon",
 								"aria-hidden": "true",
-								title: a.label,
 								children: a.icon
-							}),
-							a.href ? u({
-								href: a.href,
-								className: "sidebar-nav__group-label",
-								title: a.label,
-								children: /* @__PURE__ */ r("span", {
-									className: "sidebar-nav__item-label",
-									children: a.label
-								})
-							}) : /* @__PURE__ */ r("span", {
-								className: "sidebar-nav__group-label",
-								children: /* @__PURE__ */ r("span", {
-									className: "sidebar-nav__item-label",
-									children: a.label
-								})
-							}),
-							/* @__PURE__ */ r(t.Trigger, {
-								className: "sidebar-nav__group-chevron",
-								children: /* @__PURE__ */ r(e, {
-									className: "sidebar-nav__group-chevron-icon",
-									size: "sm"
-								})
+							}), /* @__PURE__ */ r("span", {
+								className: "sidebar-nav__item-label",
+								children: a.label
+							})] })
+						}) : /* @__PURE__ */ i("span", {
+							className: "sidebar-nav__group-label",
+							title: a.label,
+							children: [a.icon && /* @__PURE__ */ r("span", {
+								className: "sidebar-nav__item-icon",
+								"aria-hidden": "true",
+								children: a.icon
+							}), /* @__PURE__ */ r("span", {
+								className: "sidebar-nav__item-label",
+								children: a.label
+							})]
+						}), /* @__PURE__ */ r(t.Trigger, {
+							className: "sidebar-nav__group-chevron",
+							children: /* @__PURE__ */ r(e, {
+								className: "sidebar-nav__group-chevron-icon",
+								size: "sm"
 							})
-						]
+						})]
 					}), /* @__PURE__ */ r(t.Content, {
 						className: "sidebar-nav__group-content",
 						children: /* @__PURE__ */ r("div", {
