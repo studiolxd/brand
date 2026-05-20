@@ -1,6 +1,7 @@
 {
   "sidebar": {
     "width":               { "$value": "15rem",                          "$type": "dimension", "$description": "Ancho del panel en desktop" },
+    "collapsed-width":     { "$value": "4.5rem",                         "$type": "dimension", "$description": "Ancho del panel cuando está plegado" },
     "bg":                  { "$value": "{color.background.light}",       "$type": "color",     "$description": "Fondo del panel de la sidebar" },
     "shadow":              { "$value": "4px 0 16px rgba(17,30,48,0.12)", "$type": "shadow",    "$description": "Sombra del panel hacia la derecha — mismos parámetros que shadow.lg" },
     "padding-inline":      { "$value": "{spacing.4}",                    "$type": "dimension", "$description": "Padding horizontal interno del panel" },

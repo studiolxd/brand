@@ -4,11 +4,12 @@ import { Chevron as e } from "./chevron.js";
 import * as t from "@radix-ui/react-accordion";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/SidebarNav/SidebarNav.tsx
-function a({ href: e, children: t, className: n, "aria-current": i }) {
+function a({ href: e, children: t, className: n, title: i, "aria-current": a }) {
 	return /* @__PURE__ */ r("a", {
 		href: e,
 		className: n,
-		"aria-current": i,
+		title: i,
+		"aria-current": a,
 		children: t
 	});
 }
@@ -32,12 +33,16 @@ function o({ entries: o, defaultValue: s, value: c, onValueChange: l, renderLink
 					return /* @__PURE__ */ r("div", { children: u({
 						href: a.href,
 						className: e,
+						title: a.label,
 						"aria-current": a.active ? "page" : void 0,
 						children: /* @__PURE__ */ i(n, { children: [a.icon && /* @__PURE__ */ r("span", {
 							className: "sidebar-nav__item-icon",
 							"aria-hidden": "true",
 							children: a.icon
-						}), /* @__PURE__ */ r("span", { children: a.label })] })
+						}), /* @__PURE__ */ r("span", {
+							className: "sidebar-nav__item-label",
+							children: a.label
+						})] })
 					}) }, a.id);
 				}
 				return /* @__PURE__ */ i(t.Item, {
@@ -45,20 +50,36 @@ function o({ entries: o, defaultValue: s, value: c, onValueChange: l, renderLink
 					className: "sidebar-nav__group",
 					children: [/* @__PURE__ */ i(t.Header, {
 						className: "sidebar-nav__group-header",
-						children: [a.href ? u({
-							href: a.href,
-							className: "sidebar-nav__group-label",
-							children: a.label
-						}) : /* @__PURE__ */ r("span", {
-							className: "sidebar-nav__group-label",
-							children: a.label
-						}), /* @__PURE__ */ r(t.Trigger, {
-							className: "sidebar-nav__group-chevron",
-							children: /* @__PURE__ */ r(e, {
-								className: "sidebar-nav__group-chevron-icon",
-								size: "sm"
+						children: [
+							a.icon && /* @__PURE__ */ r("span", {
+								className: "sidebar-nav__item-icon",
+								"aria-hidden": "true",
+								title: a.label,
+								children: a.icon
+							}),
+							a.href ? u({
+								href: a.href,
+								className: "sidebar-nav__group-label",
+								title: a.label,
+								children: /* @__PURE__ */ r("span", {
+									className: "sidebar-nav__item-label",
+									children: a.label
+								})
+							}) : /* @__PURE__ */ r("span", {
+								className: "sidebar-nav__group-label",
+								children: /* @__PURE__ */ r("span", {
+									className: "sidebar-nav__item-label",
+									children: a.label
+								})
+							}),
+							/* @__PURE__ */ r(t.Trigger, {
+								className: "sidebar-nav__group-chevron",
+								children: /* @__PURE__ */ r(e, {
+									className: "sidebar-nav__group-chevron-icon",
+									size: "sm"
+								})
 							})
-						})]
+						]
 					}), /* @__PURE__ */ r(t.Content, {
 						className: "sidebar-nav__group-content",
 						children: /* @__PURE__ */ r("div", {
@@ -76,7 +97,10 @@ function o({ entries: o, defaultValue: s, value: c, onValueChange: l, renderLink
 											className: "sidebar-nav__item-icon",
 											"aria-hidden": "true",
 											children: e.icon
-										}), /* @__PURE__ */ r("span", { children: e.label })] })
+										}), /* @__PURE__ */ r("span", {
+											className: "sidebar-nav__item-label",
+											children: e.label
+										})] })
 									}) }, e.id);
 								})
 							})

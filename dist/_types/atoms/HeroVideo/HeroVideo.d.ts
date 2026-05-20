@@ -2,6 +2,7 @@ import './HeroVideo.css';
 interface VideoSource {
     webm?: string;
     mp4?: string;
+    poster?: string;
 }
 interface HeroVideoProps {
     /** Vídeo para orientación landscape. */

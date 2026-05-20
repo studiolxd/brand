@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppShell } from '../../sections/AppShell/AppShell';
 import { Sidebar } from '../../sections/Sidebar/Sidebar';
-import { useSidebar } from '../../sections/AppShell/SidebarContext';
+import { Logo } from '../../atoms/Logo/Logo';
 import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
 import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
@@ -22,11 +22,30 @@ const orgs = [
   { id: 'vertex', name: 'Vertex Design' },
 ];
 
+const IconGeneral = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+  </svg>
+);
+
+const IconWorkspace = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
+  </svg>
+);
+
+const IconSettings = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+  </svg>
+);
+
 const navEntries = [
   {
     kind: 'group' as const,
     id: 'general',
     label: 'General',
+    icon: <IconGeneral />,
     items: [
       { id: 'dashboard', label: 'Dashboard', href: '#dashboard', active: true },
       { id: 'activity', label: 'Actividad', href: '#activity' },
@@ -37,6 +56,7 @@ const navEntries = [
     kind: 'group' as const,
     id: 'workspace',
     label: 'Espacio de trabajo',
+    icon: <IconWorkspace />,
     items: [
       { id: 'projects', label: 'Proyectos', href: '#projects' },
       { id: 'tasks', label: 'Tareas', href: '#tasks' },
@@ -47,6 +67,7 @@ const navEntries = [
     kind: 'group' as const,
     id: 'settings',
     label: 'Configuración',
+    icon: <IconSettings />,
     items: [
       { id: 'team', label: 'Equipo', href: '#team' },
       { id: 'billing', label: 'Facturación', href: '#billing' },
@@ -100,16 +121,8 @@ function SidebarContent({ orgSwitcherOpen, userMenuOpen }: SidebarContentProps) 
 }
 
 function MainContent() {
-  const { open, setOpen } = useSidebar();
   return (
     <div style={{ padding: '2rem' }}>
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        style={{ marginBlockEnd: '1.5rem', display: 'block' }}
-      >
-        {open ? 'Cerrar sidebar' : 'Abrir sidebar'}
-      </button>
       <h1 style={{ marginBlock: '0 0.5rem', fontSize: '1.5rem', fontWeight: 600 }}>Dashboard</h1>
       <p style={{ color: '#6B7280' }}>Bienvenido a tu espacio de trabajo.</p>
     </div>
@@ -118,7 +131,7 @@ function MainContent() {
 
 export const Default: Story = {
   render: () => (
-    <AppShell sidebar={<Sidebar><SidebarContent /></Sidebar>}>
+    <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent /></Sidebar>}>
       <MainContent />
     </AppShell>
   ),
@@ -126,7 +139,7 @@ export const Default: Story = {
 
 export const SidebarCerrada: Story = {
   render: () => (
-    <AppShell defaultOpen={false} sidebar={<Sidebar><SidebarContent /></Sidebar>}>
+    <AppShell defaultCollapsed sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent /></Sidebar>}>
       <MainContent />
     </AppShell>
   ),
@@ -134,7 +147,7 @@ export const SidebarCerrada: Story = {
 
 export const OrgSwitcherAbierto: Story = {
   render: () => (
-    <AppShell sidebar={<Sidebar><SidebarContent orgSwitcherOpen /></Sidebar>}>
+    <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent orgSwitcherOpen /></Sidebar>}>
       <MainContent />
     </AppShell>
   ),
@@ -142,7 +155,7 @@ export const OrgSwitcherAbierto: Story = {
 
 export const UserMenuAbierto: Story = {
   render: () => (
-    <AppShell sidebar={<Sidebar><SidebarContent userMenuOpen /></Sidebar>}>
+    <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent userMenuOpen /></Sidebar>}>
       <MainContent />
     </AppShell>
   ),

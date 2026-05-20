@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
 
 export interface SidebarContextValue {
-  open: boolean;
-  setOpen: (open: boolean) => void;
+  collapsed: boolean;
+  setCollapsed: (collapsed: boolean) => void;
 }
 
 export const SidebarContext = createContext<SidebarContextValue | null>(null);

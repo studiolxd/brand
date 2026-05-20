@@ -16,7 +16,7 @@ interface ContactFormProps {
     errors?: string[];
     success?: boolean;
     successMessage?: string;
-    onSubmit?: React.FormEventHandler<HTMLFormElement>;
+    onSubmit?: React.ComponentProps<'form'>['onSubmit'];
 }
 interface ContactSectionProps {
     id?: string;

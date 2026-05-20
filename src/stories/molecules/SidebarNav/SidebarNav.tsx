@@ -26,6 +26,8 @@ export interface SidebarNavGroupEntry {
   label: string;
   /** Cuando se especifica, el label de la categoría se renderiza como enlace. */
   href?: string;
+  /** Icono del grupo, visible en modo colapsado. */
+  icon?: ReactNode;
   items: SidebarNavItem[];
 }
 
@@ -35,6 +37,7 @@ export type SidebarNavRenderLinkProps = {
   href: string;
   children: ReactNode;
   className: string;
+  title?: string;
   'aria-current'?: 'page';
 };
 
@@ -46,9 +49,9 @@ export interface SidebarNavProps {
   renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
 }
 
-function defaultRenderLink({ href, children, className, 'aria-current': ariaCurrent }: SidebarNavRenderLinkProps) {
+function defaultRenderLink({ href, children, className, title, 'aria-current': ariaCurrent }: SidebarNavRenderLinkProps) {
   return (
-    <a href={href} className={className} aria-current={ariaCurrent}>
+    <a href={href} className={className} title={title} aria-current={ariaCurrent}>
       {children}
     </a>
   );
@@ -80,6 +83,7 @@ export function SidebarNav({
                 {renderLink({
                   href: entry.href,
                   className: cls,
+                  title: entry.label,
                   'aria-current': entry.active ? 'page' : undefined,
                   children: (
                     <>
@@ -88,7 +92,7 @@ export function SidebarNav({
                           {entry.icon}
                         </span>
                       )}
-                      <span>{entry.label}</span>
+                      <span className="sidebar-nav__item-label">{entry.label}</span>
                     </>
                   ),
                 })}
@@ -99,9 +103,14 @@ export function SidebarNav({
           return (
             <RadixAccordion.Item key={entry.id} value={entry.id} className="sidebar-nav__group">
               <RadixAccordion.Header className="sidebar-nav__group-header">
+                {entry.icon && (
+                  <span className="sidebar-nav__item-icon" aria-hidden="true" title={entry.label}>
+                    {entry.icon}
+                  </span>
+                )}
                 {entry.href
-                  ? renderLink({ href: entry.href, className: 'sidebar-nav__group-label', children: entry.label })
-                  : <span className="sidebar-nav__group-label">{entry.label}</span>
+                  ? renderLink({ href: entry.href, className: 'sidebar-nav__group-label', title: entry.label, children: <span className="sidebar-nav__item-label">{entry.label}</span> })
+                  : <span className="sidebar-nav__group-label"><span className="sidebar-nav__item-label">{entry.label}</span></span>
                 }
                 <RadixAccordion.Trigger className="sidebar-nav__group-chevron">
                   <Chevron className="sidebar-nav__group-chevron-icon" size="sm" />
@@ -129,7 +138,7 @@ export function SidebarNav({
                                     {item.icon}
                                   </span>
                                 )}
-                                <span>{item.label}</span>
+                                <span className="sidebar-nav__item-label">{item.label}</span>
                               </>
                             ),
                           })}

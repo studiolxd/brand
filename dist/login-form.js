@@ -46,7 +46,7 @@ function c({ onSubmit: c, errors: l, loading: u = !1, title: d = "Iniciar sesió
 				})]
 			}),
 			/* @__PURE__ */ a(e, {
-				block: !0,
+				variant: "primary",
 				disabled: u,
 				onClick: g,
 				children: u ? "Iniciando sesión…" : "Iniciar sesión"

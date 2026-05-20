@@ -6,23 +6,17 @@ export { useSidebar } from './SidebarContext';
 export type { SidebarContextValue } from './SidebarContext';
 
 
-function getInitialOpen(defaultOpen?: boolean): boolean {
-  if (defaultOpen !== undefined) return defaultOpen;
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(min-width: 1024px)').matches;
-}
-
 export interface AppShellProps {
   sidebar: ReactNode;
   children: ReactNode;
-  defaultOpen?: boolean;
+  defaultCollapsed?: boolean;
 }
 
-export function AppShell({ sidebar, children, defaultOpen }: AppShellProps) {
-  const [open, setOpen] = useState(() => getInitialOpen(defaultOpen));
+export function AppShell({ sidebar, children, defaultCollapsed = false }: AppShellProps) {
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   return (
-    <SidebarContext.Provider value={{ open, setOpen }}>
+    <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
       <div className="app-shell">
         {sidebar}
         <div className="app-shell__content">{children}</div>

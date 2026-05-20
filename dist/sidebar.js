@@ -1,26 +1,37 @@
 'use client';
 import './sidebar.css';
-import { t as e } from "./_shared/SidebarContext.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { useContext as r } from "react";
+import { Chevron as e } from "./chevron.js";
+import { t } from "./_shared/SidebarContext.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { useContext as i, useState as a } from "react";
 //#region src/stories/sections/Sidebar/Sidebar.tsx
-function i({ open: i, onOpenChange: a, children: o, id: s }) {
-	let c = r(e), l = i !== void 0, u = l ? i : c?.open ?? !1, d = () => {
-		l ? a?.(!1) : c?.setOpen(!1);
-	};
-	return /* @__PURE__ */ n("div", {
+function o({ logo: o, children: s, id: c }) {
+	let l = i(t), [u, d] = a(!1), f = l ? l.collapsed : u, p = l ? l.setCollapsed : d;
+	return /* @__PURE__ */ r("div", {
 		className: "sidebar",
-		"data-open": u ? "true" : "false",
-		id: s,
-		children: [/* @__PURE__ */ t("div", {
-			className: "sidebar__backdrop",
-			onClick: d,
-			"aria-hidden": "true"
-		}), /* @__PURE__ */ t("div", {
+		"data-collapsed": f ? "true" : "false",
+		id: c,
+		children: [/* @__PURE__ */ r("div", {
+			className: "sidebar__header",
+			children: [/* @__PURE__ */ n("div", {
+				className: "sidebar__logo",
+				children: o
+			}), /* @__PURE__ */ n("button", {
+				type: "button",
+				className: "sidebar__collapse-btn",
+				onClick: () => p(!f),
+				"aria-expanded": !f,
+				"aria-label": f ? "Expandir sidebar" : "Plegar sidebar",
+				children: /* @__PURE__ */ n(e, {
+					className: "sidebar__collapse-icon",
+					size: "sm"
+				})
+			})]
+		}), /* @__PURE__ */ n("div", {
 			className: "sidebar__panel",
-			children: o
+			children: s
 		})]
 	});
 }
 //#endregion
-export { i as Sidebar };
+export { o as Sidebar };

@@ -5,6 +5,6 @@ export type { SidebarContextValue } from './SidebarContext';
 export interface AppShellProps {
     sidebar: ReactNode;
     children: ReactNode;
-    defaultOpen?: boolean;
+    defaultCollapsed?: boolean;
 }
-export declare function AppShell({ sidebar, children, defaultOpen }: AppShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppShell({ sidebar, children, defaultCollapsed }: AppShellProps): import("react/jsx-runtime").JSX.Element;

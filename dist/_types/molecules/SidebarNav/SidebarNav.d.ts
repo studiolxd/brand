@@ -21,6 +21,8 @@ export interface SidebarNavGroupEntry {
     label: string;
     /** Cuando se especifica, el label de la categoría se renderiza como enlace. */
     href?: string;
+    /** Icono del grupo, visible en modo colapsado. */
+    icon?: ReactNode;
     items: SidebarNavItem[];
 }
 export type SidebarNavEntry = SidebarNavLinkEntry | SidebarNavGroupEntry;
@@ -28,6 +30,7 @@ export type SidebarNavRenderLinkProps = {
     href: string;
     children: ReactNode;
     className: string;
+    title?: string;
     'aria-current'?: 'page';
 };
 export interface SidebarNavProps {

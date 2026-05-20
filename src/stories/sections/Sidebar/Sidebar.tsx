@@ -1,30 +1,34 @@
-import { useContext, type ReactNode } from 'react';
+import { useContext, useState, type ReactNode } from 'react';
 import { SidebarContext } from '../AppShell/SidebarContext';
+import { Chevron } from '../../atoms/Chevron/Chevron';
 import './Sidebar.css';
 
 export interface SidebarProps {
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
+  logo?: ReactNode;
   children: ReactNode;
   id?: string;
 }
 
-export function Sidebar({ open: openProp, onOpenChange, children, id }: SidebarProps) {
+export function Sidebar({ logo, children, id }: SidebarProps) {
   const ctx = useContext(SidebarContext);
-  const isControlled = openProp !== undefined;
-  const open = isControlled ? openProp : (ctx?.open ?? false);
-
-  const handleClose = () => {
-    if (isControlled) {
-      onOpenChange?.(false);
-    } else {
-      ctx?.setOpen(false);
-    }
-  };
+  const [localCollapsed, setLocalCollapsed] = useState(false);
+  const collapsed = ctx ? ctx.collapsed : localCollapsed;
+  const setCollapsed = ctx ? ctx.setCollapsed : setLocalCollapsed;
 
   return (
-    <div className="sidebar" data-open={open ? 'true' : 'false'} id={id}>
-      <div className="sidebar__backdrop" onClick={handleClose} aria-hidden="true" />
+    <div className="sidebar" data-collapsed={collapsed ? 'true' : 'false'} id={id}>
+      <div className="sidebar__header">
+        <div className="sidebar__logo">{logo}</div>
+        <button
+          type="button"
+          className="sidebar__collapse-btn"
+          onClick={() => setCollapsed(!collapsed)}
+          aria-expanded={!collapsed}
+          aria-label={collapsed ? 'Expandir sidebar' : 'Plegar sidebar'}
+        >
+          <Chevron className="sidebar__collapse-icon" size="sm" />
+        </button>
+      </div>
       <div className="sidebar__panel">{children}</div>
     </div>
   );

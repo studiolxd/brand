@@ -9,18 +9,20 @@ var r = n(function({ errors: n, onSubmit: r, actions: i, children: a }, o) {
 		className: "form",
 		onSubmit: r,
 		noValidate: !0,
-		children: [
-			a,
-			n && n.length > 0 && /* @__PURE__ */ e("ul", {
+		children: [/* @__PURE__ */ t("div", {
+			className: "form__fields",
+			children: [a, n && n.length > 0 && /* @__PURE__ */ e("ul", {
 				className: "form-errors",
 				role: "alert",
 				children: n.map((t) => /* @__PURE__ */ e("li", {
 					className: "form-errors__item",
 					children: t
 				}, t))
-			}),
-			i
-		]
+			})]
+		}), i && /* @__PURE__ */ e("div", {
+			className: "form__actions",
+			children: i
+		})]
 	});
 });
 //#endregion

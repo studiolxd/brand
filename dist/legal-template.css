@@ -63,7 +63,7 @@
 .legal-accordion__counter {
   grid-area: counter;
   font-size: var(--font-size-9);
-  font-weight: var(--font-weight-black);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-none);
   color: var(--color-primary);
   align-self: start;

@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { AppShell } from '../AppShell/AppShell';
 import { Sidebar } from './Sidebar';
+import { Logo } from '../../atoms/Logo/Logo';
 
 const meta: Meta<typeof Sidebar> = {
   title: 'Sections/Sidebar',
@@ -23,38 +24,22 @@ const SampleContent = () => (
   </nav>
 );
 
-export const Open: Story = {
-  render: () => {
-    const [open, setOpen] = useState(true);
-    return (
-      <div style={{ display: 'flex', minHeight: '100dvh' }}>
-        <Sidebar open={open} onOpenChange={setOpen}>
-          <SampleContent />
-        </Sidebar>
-        <div style={{ flex: 1, padding: '2rem' }}>
-          <button onClick={() => setOpen((v) => !v)} type="button">
-            Toggle sidebar
-          </button>
-        </div>
+export const Expanded: Story = {
+  render: () => (
+    <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><SampleContent /></Sidebar>}>
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
       </div>
-    );
-  },
+    </AppShell>
+  ),
 };
 
-export const Closed: Story = {
-  render: () => {
-    const [open, setOpen] = useState(false);
-    return (
-      <div style={{ display: 'flex', minHeight: '100dvh' }}>
-        <Sidebar open={open} onOpenChange={setOpen}>
-          <SampleContent />
-        </Sidebar>
-        <div style={{ flex: 1, padding: '2rem' }}>
-          <button onClick={() => setOpen((v) => !v)} type="button">
-            Toggle sidebar (cerrada)
-          </button>
-        </div>
+export const Collapsed: Story = {
+  render: () => (
+    <AppShell defaultCollapsed sidebar={<Sidebar logo={<Logo height={24} />}><SampleContent /></Sidebar>}>
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
       </div>
-    );
-  },
+    </AppShell>
+  ),
 };

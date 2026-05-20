@@ -1,91 +1,157 @@
 /* ---- Sidebar ---- */
 
-/* Wrapper — posicionado absolute en desktop, sin transform (no afecta position:fixed en mobile) */
+/* ── Base (desktop) ──────────────────────────────────────── */
 .sidebar {
-  position: absolute;
-  inset-block: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   inline-size: var(--sidebar-width);
-}
-
-/* Panel — maneja su propia animación en desktop y mobile */
-.sidebar__panel {
-  width: var(--sidebar-width);
   height: 100%;
   background-color: var(--sidebar-bg);
   box-shadow: var(--sidebar-shadow);
-  padding-inline: var(--sidebar-padding-inline);
-  padding-block: var(--sidebar-padding-block);
-  overflow-y: auto;
   box-sizing: border-box;
-  transition:
-    transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
-    visibility 0s 0s;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: inline-size var(--sidebar-transition-duration) var(--sidebar-transition-easing);
 }
 
-.sidebar[data-open="false"] .sidebar__panel {
-  transform: translateX(-100%);
-  visibility: hidden;
-  transition:
-    transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
-    visibility 0s var(--sidebar-transition-duration);
+.sidebar[data-collapsed="true"] {
+  inline-size: var(--sidebar-collapsed-width);
 }
 
-/* Backdrop — oculto en desktop */
-.sidebar__backdrop {
+/* ── Header ──────────────────────────────────────────────── */
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-block: var(--sidebar-padding-block);
+  padding-inline: var(--sidebar-padding-inline);
+  flex-shrink: 0;
+}
+
+.sidebar__logo {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  transition:
+    opacity var(--sidebar-transition-duration) var(--sidebar-transition-easing),
+    flex var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+}
+
+.sidebar[data-collapsed="true"] .sidebar__logo {
+  flex: 0;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+}
+
+/* ── Botón chevron ───────────────────────────────────────── */
+.sidebar__collapse-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-1);
+  color: var(--color-text-muted);
+  transition: background-color var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+}
+
+.sidebar__collapse-btn:hover {
+  background-color: var(--color-bg-subtle);
+}
+
+.sidebar__collapse-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Chevron base apunta →. Expandida: ← (plegar). Colapsada: → (desplegar). */
+.sidebar__collapse-icon {
+  transform: rotate(180deg);
+  transition: transform var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+}
+
+.sidebar[data-collapsed="true"] .sidebar__collapse-icon {
+  transform: rotate(0deg);
+}
+
+/* ── Panel scrollable ────────────────────────────────────── */
+.sidebar__panel {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-inline: var(--sidebar-padding-inline);
+  padding-block-end: var(--sidebar-padding-block);
+  box-sizing: border-box;
+}
+
+/* ── OrgSwitcher colapsado ───────────────────────────────── */
+.sidebar[data-collapsed="true"] .org-switcher__trigger {
+  justify-content: center;
+  padding-inline: var(--spacing-1);
+}
+
+.sidebar[data-collapsed="true"] .org-switcher__name,
+.sidebar[data-collapsed="true"] .org-switcher__chevron {
   display: none;
 }
 
-/* === Mobile (< breakpoint lg, 1024px) === */
+/* ── UserMenu colapsado ──────────────────────────────────── */
+.sidebar[data-collapsed="true"] .user-menu__trigger {
+  justify-content: center;
+  padding-inline: var(--spacing-1);
+}
+
+.sidebar[data-collapsed="true"] .user-menu__name,
+.sidebar[data-collapsed="true"] .user-menu__chevron {
+  display: none;
+}
+
+/* ── SidebarNav colapsado ────────────────────────────────── */
+.sidebar[data-collapsed="true"] .sidebar-nav__top-link {
+  justify-content: center;
+  padding-inline: var(--spacing-1);
+}
+
+.sidebar[data-collapsed="true"] .sidebar-nav__item-label {
+  display: none;
+}
+
+.sidebar[data-collapsed="true"] .sidebar-nav__group-header {
+  justify-content: center;
+  padding-inline: var(--spacing-1);
+}
+
+.sidebar[data-collapsed="true"] .sidebar-nav__group-label,
+.sidebar[data-collapsed="true"] .sidebar-nav__group-chevron,
+.sidebar[data-collapsed="true"] .sidebar-nav__group-content {
+  display: none;
+}
+
+/* ── Mobile (< 1024px) ───────────────────────────────────── */
 @media (max-width: 1023px) {
-  /* El wrapper no ocupa espacio — se colapsa a 0 */
+  /* La tira colapsada es siempre fija y visible */
   .sidebar {
-    inline-size: 0;
-  }
-
-  /* Panel como overlay fijo sobre el contenido */
-  .sidebar__panel {
     position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: none;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: var(--sidebar-collapsed-width);
     z-index: var(--sidebar-z-index);
-    transform: translateX(-100%);
-    visibility: hidden;
-    /* Al cerrar: primero anima el translate, luego oculta con visibility */
-    transition:
-      transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
-      visibility 0s var(--sidebar-transition-duration);
+    box-shadow: var(--sidebar-shadow);
+    transition: inline-size var(--sidebar-transition-duration) var(--sidebar-transition-easing);
   }
 
-  .sidebar[data-open="true"] .sidebar__panel {
-    transform: translateX(0);
-    visibility: visible;
-    /* Al abrir: visible inmediatamente, anima el translate */
-    transition:
-      transform var(--sidebar-transition-duration) var(--sidebar-transition-easing),
-      visibility 0s 0s;
-  }
-
-  /* Backdrop semitransparente que cubre el contenido */
-  .sidebar__backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background-color: var(--sidebar-backdrop-bg);
-    z-index: calc(var(--sidebar-z-index) - 1);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--sidebar-transition-duration) var(--sidebar-transition-easing);
-  }
-
-  .sidebar[data-open="true"] .sidebar__backdrop {
-    opacity: 1;
-    pointer-events: auto;
+  /* Expandida en mobile = overlay pantalla completa */
+  .sidebar[data-collapsed="false"] {
+    inline-size: 100%;
   }
 }
 
-/* === Dark surface === */
-.surface-dark .sidebar__panel {
+/* ── Dark surface ────────────────────────────────────────── */
+.surface-dark .sidebar {
   background-color: var(--color-background-dark);
 }

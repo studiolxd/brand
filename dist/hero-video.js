@@ -18,6 +18,7 @@ function i({ landscape: i, portrait: a }) {
 				loop: !0,
 				muted: !0,
 				playsInline: !0,
+				poster: i.poster,
 				children: [i.webm && /* @__PURE__ */ e("source", {
 					src: i.webm,
 					type: "video/webm"
@@ -34,6 +35,7 @@ function i({ landscape: i, portrait: a }) {
 				loop: !0,
 				muted: !0,
 				playsInline: !0,
+				poster: a.poster,
 				children: [a.webm && /* @__PURE__ */ e("source", {
 					src: a.webm,
 					type: "video/webm"

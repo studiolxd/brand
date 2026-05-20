@@ -20,13 +20,15 @@
   transition: padding-inline-start var(--sidebar-transition-duration) var(--sidebar-transition-easing);
 }
 
-.app-shell:has(.sidebar[data-open="false"]) .app-shell__content {
-  padding-inline-start: env(safe-area-inset-left);
+/* Desktop: cuando colapsada, padding = ancho colapsado */
+.app-shell:has(.sidebar[data-collapsed="true"]) .app-shell__content {
+  padding-inline-start: var(--sidebar-collapsed-width);
 }
 
+/* Mobile: siempre padding = ancho colapsado (la tira siempre ocupa espacio) */
 @media (max-width: 1023px) {
   .app-shell__content {
-    padding-inline-start: env(safe-area-inset-left);
+    padding-inline-start: var(--sidebar-collapsed-width);
     transition: none;
   }
 }
