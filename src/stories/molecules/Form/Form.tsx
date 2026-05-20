@@ -3,7 +3,7 @@ import './Form.css';
 
 interface FormProps {
   errors?: string[];
-  onSubmit?: React.FormEventHandler<HTMLFormElement>;
+  onSubmit?: React.ComponentProps<'form'>['onSubmit'];
   actions?: React.ReactNode;
   children: React.ReactNode;
 }
