@@ -1,0 +1,25 @@
+.multi-select-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--multi-select-field-gap);
+}
+
+.multi-select-field--error .multi-select {
+  --multi-select-border-color: var(--color-error-on-light);
+}
+
+.multi-select-field__error {
+  font-family: var(--multi-select-field-error-font-family);
+  font-size: var(--multi-select-field-error-font-size);
+  font-weight: var(--multi-select-field-error-font-weight);
+  line-height: var(--multi-select-field-error-line-height);
+  color: var(--multi-select-field-error-color);
+}
+
+.multi-select-field__helper {
+  font-family: var(--multi-select-field-helper-font-family);
+  font-size: var(--multi-select-field-helper-font-size);
+  font-weight: var(--multi-select-field-helper-font-weight);
+  line-height: var(--multi-select-field-helper-line-height);
+  color: var(--multi-select-field-helper-color);
+}

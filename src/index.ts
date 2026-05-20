@@ -27,6 +27,8 @@ export { Logo } from './stories/atoms/Logo/Logo';
 export { Paragraph } from './stories/atoms/Paragraph/Paragraph';
 export { Popover } from './stories/atoms/Popover/Popover';
 export type { PopoverProps } from './stories/atoms/Popover/Popover';
+export { MultiSelect } from './stories/atoms/MultiSelect/MultiSelect';
+export type { MultiSelectOption, MultiSelectProps } from './stories/atoms/MultiSelect/MultiSelect';
 export { Radio } from './stories/atoms/Radio/Radio';
 export { Select } from './stories/atoms/Select/Select';
 export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';
@@ -70,6 +72,8 @@ export type { PaginationProps } from './stories/molecules/Pagination/Pagination'
 export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export type { OrgSwitcherProps, OrgOption } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
+export { MultiSelectField } from './stories/molecules/MultiSelectField/MultiSelectField';
+export type { MultiSelectFieldProps } from './stories/molecules/MultiSelectField/MultiSelectField';
 export { SelectField } from './stories/molecules/SelectField/SelectField';
 export type { SelectFieldProps } from './stories/molecules/SelectField/SelectField';
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';

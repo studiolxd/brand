@@ -1,0 +1,46 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --multi-select-border-style: var(--select-border-style); /** Estilo del borde */
+  --multi-select-icon-size: var(--select-icon-size); /** Tamaño del chevron */
+  --multi-select-focus-ring-offset: var(--select-focus-ring-offset); /** Offset del anillo de foco (negativo = inset) */
+  --multi-select-content-z-index: var(--select-content-z-index); /** Z-index del dropdown */
+  --multi-select-pill-color: var(--color-white); /** Texto de la pill */
+  --multi-select-pill-border-radius: var(--border-radius-full); /** Radio de la pill */
+  --multi-select-pill-padding-block: var(--spacing-1); /** Padding block de la pill */
+  --multi-select-pill-padding-inline: var(--spacing-2); /** Padding inline de la pill */
+  --multi-select-pill-gap: var(--spacing-1); /** Separación entre texto y botón × en la pill */
+  --multi-select-pill-font-size: var(--font-size-1); /** Tamaño de fuente de la pill */
+  --multi-select-values-gap: var(--spacing-1); /** Separación entre pills */
+  --multi-select-border-radius: var(--select-border-radius); /** Radio del borde del trigger */
+  --multi-select-border-width: var(--select-border-width); /** Grosor del borde */
+  --multi-select-font-family: var(--select-font-family); /** Familia tipográfica */
+  --multi-select-font-size: var(--select-font-size); /** Tamaño de fuente */
+  --multi-select-placeholder-color: var(--color-text-muted-on-light); /** Color del placeholder */
+  --multi-select-bg: var(--select-bg); /** Fondo del trigger */
+  --multi-select-icon-transition: var(--select-icon-transition); /** Duración de la transición del icono */
+  --multi-select-focus-ring-width: var(--select-focus-ring-width); /** Grosor del anillo de foco */
+  --multi-select-content-bg: var(--select-content-bg); /** Fondo del dropdown */
+  --multi-select-item-padding-block: var(--select-item-padding-block); /** Padding block de cada opción */
+  --multi-select-item-highlighted-color: var(--select-item-highlighted-color); /** Texto de opción en foco/hover */
+  --multi-select-pill-bg: var(--color-primary); /** Fondo de la pill de valor seleccionado */
+  --multi-select-sm-font-size: var(--select-sm-font-size); /** Tamaño de fuente — variante sm */
+  --multi-select-sm-padding-block: var(--select-sm-padding-block); /** Padding block del trigger — variante sm */
+  --multi-select-sm-padding-inline: var(--select-sm-padding-inline); /** Padding inline del trigger — variante sm */
+  --multi-select-sm-item-padding-block: var(--select-sm-item-padding-block); /** Padding block de cada opción — variante sm */
+  --multi-select-lg-font-size: var(--select-lg-font-size); /** Tamaño de fuente — variante lg */
+  --multi-select-lg-padding-block: var(--select-lg-padding-block); /** Padding block del trigger — variante lg */
+  --multi-select-lg-padding-inline: var(--select-lg-padding-inline); /** Padding inline del trigger — variante lg */
+  --multi-select-lg-item-padding-block: var(--select-lg-item-padding-block); /** Padding block de cada opción — variante lg */
+  --multi-select-border-color: var(--select-border-color); /** Color del borde */
+  --multi-select-padding-block: var(--select-padding-block); /** Padding block del trigger */
+  --multi-select-padding-inline: var(--select-padding-inline); /** Padding inline del trigger */
+  --multi-select-line-height: var(--select-line-height); /** Interlineado del trigger */
+  --multi-select-font-weight: var(--select-font-weight); /** Peso tipográfico */
+  --multi-select-color: var(--select-color); /** Color del texto */
+  --multi-select-focus-ring-color: var(--select-focus-ring-color); /** Color del anillo de foco */
+  --multi-select-content-border-color: var(--select-content-border-color); /** Borde del dropdown */
+  --multi-select-item-highlighted-bg: var(--select-item-highlighted-bg); /** Fondo de opción en foco/hover */
+}

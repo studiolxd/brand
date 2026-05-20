@@ -28,9 +28,11 @@
 @import "./molecules/input-field.css";
 @import "./molecules/textarea-field.css";
 @import "./molecules/select-field.css";
+@import "./molecules/multi-select-field.css";
 @import "./molecules/checkbox-field.css";
 @import "./molecules/radio-field.css";
 @import "./components/select.css";
+@import "./components/multi-select.css";
 @import "./components/carousel.css";
 @import "./components/card-square.css";
 @import "./components/card-split.css";

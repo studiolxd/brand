@@ -70,6 +70,17 @@
   --checkbox-check-color:      var(--color-background-dark);
   --checkbox-focus-ring-color: var(--color-text-on-dark);
 
+  /* ─── MultiSelect ────────────────────────────────────────────────────────── */
+  --multi-select-bg:                     var(--color-background-dark);
+  --multi-select-color:                  var(--color-text-on-dark);
+  --multi-select-border-color:           var(--color-text-on-dark);
+  --multi-select-focus-ring-color:       var(--color-text-on-dark);
+  --multi-select-placeholder-color:      var(--color-text-muted-on-dark);
+  --multi-select-content-bg:             var(--color-background-dark);
+  --multi-select-content-border-color:   var(--color-text-on-dark);
+  --multi-select-item-highlighted-bg:    var(--color-text-on-dark);
+  --multi-select-item-highlighted-color: var(--color-background-dark);
+
   /* ─── Select ──────────────────────────────────────────────────────────── */
   --select-bg:                     var(--color-background-dark);
   --select-color:                  var(--color-text-on-dark);

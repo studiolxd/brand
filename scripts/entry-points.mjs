@@ -20,6 +20,7 @@ export const entryPoints = {
   'dots-button':         'src/stories/atoms/DotsButton/DotsButton.tsx',
   'paragraph':           'src/stories/atoms/Paragraph/Paragraph.tsx',
   'popover':             'src/stories/atoms/Popover/Popover.tsx',
+  'multi-select':        'src/stories/atoms/MultiSelect/MultiSelect.tsx',
   'select':              'src/stories/atoms/Select/Select.tsx',
   'time-select':         'src/stories/atoms/TimeSelect/TimeSelect.tsx',
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
@@ -42,6 +43,7 @@ export const entryPoints = {
   'radio-field':         'src/stories/molecules/RadioField/RadioField.tsx',
   'form':                'src/stories/molecules/Form/Form.tsx',
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
+  'multi-select-field':  'src/stories/molecules/MultiSelectField/MultiSelectField.tsx',
   'select-field':        'src/stories/molecules/SelectField/SelectField.tsx',
   'input-phone-field':   'src/stories/molecules/InputPhoneField/InputPhoneField.tsx',
   'textarea-field':      'src/stories/molecules/TextareaField/TextareaField.tsx',
@@ -69,8 +71,8 @@ export const entryPoints = {
 
 export const clientComponents = new Set([
   'accordion', 'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
-  'input-phone', 'link', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'form',
-  'input-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
+  'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'form',
+  'input-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'sidebar',
   'app-shell',

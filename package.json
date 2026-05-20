@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.0.4",
+  "version": "5.1.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -205,6 +205,14 @@
     "./scss/components/*": "./src/tokens/scss/components/_*.scss",
     "./scss/global/*": "./src/tokens/scss/global/_*.scss",
     "./scss/molecules/*": "./src/tokens/scss/molecules/_*.scss",
+    "./multi-select": {
+      "types": "./dist/_types/atoms/MultiSelect/MultiSelect.d.ts",
+      "import": "./dist/multi-select.js"
+    },
+    "./multi-select-field": {
+      "types": "./dist/_types/molecules/MultiSelectField/MultiSelectField.d.ts",
+      "import": "./dist/multi-select-field.js"
+    },
     "./select": {
       "types": "./dist/_types/atoms/Select/Select.d.ts",
       "import": "./dist/select.js"
