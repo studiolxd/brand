@@ -1,6 +1,8 @@
 @import "../stories/atoms/Link/Link.css";
 
 html {
+  color-scheme: light;
+
   @media (prefers-reduced-motion: no-preference) {
     scroll-behavior: smooth;
   }
