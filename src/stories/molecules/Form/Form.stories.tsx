@@ -25,6 +25,10 @@ const meta: Meta<typeof Form> = {
 export default meta;
 type Story = StoryObj<typeof Form>;
 
+const privacyLabel = (
+  <>He leído y acepto la <a href="/privacidad">política de privacidad</a>.</>
+);
+
 export const Default: Story = {
   args: {
     actions: <Button variant="primary">Enviar</Button>,
@@ -41,19 +45,37 @@ export const Success: Story = {
 
 export const WithErrors: Story = {
   args: {
-    errors: ['El email es obligatorio.', 'Debes aceptar la política de privacidad.'],
+    errors: ['No se ha podido enviar el formulario. Por favor, inténtalo de nuevo más tarde.'],
     actions: <Button variant="primary">Enviar</Button>,
     children: (
-      <InputField id="form-email-error" label="Email" labelHidden placeholder="tu@email.com" />
+      <>
+        <InputField
+          id="form-name-error"
+          label="Nombre"
+          labelHidden={false}
+          placeholder="Tu nombre"
+          error
+          errorMessage="El nombre es obligatorio."
+        />
+        <InputField
+          id="form-email-error"
+          label="Email"
+          labelHidden={false}
+          type="email"
+          placeholder="tu@email.com"
+          error
+          errorMessage="Introduce un email válido."
+        />
+        <CheckboxField
+          id="form-privacy-error"
+          label={privacyLabel}
+        />
+      </>
     ),
   },
 };
 
 /* ─── Ejemplos de composición ─────────────────────────────── */
-
-const privacyLabel = (
-  <>He leído y acepto la <a href="/privacidad">política de privacidad</a>.</>
-);
 
 export const ContactFormExample: Story = {
   name: 'Ejemplo: ContactForm',

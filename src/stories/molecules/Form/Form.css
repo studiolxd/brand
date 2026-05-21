@@ -14,11 +14,58 @@
 }
 
 /* Cada hijo directo tapa el background del form__fields — el gap queda visible como separador */
-.form__fields > .input-field,
-.form__fields > .textarea-field,
 .form__fields > .checkbox-field,
 .form__fields > .form-errors {
   background-color: var(--color-background-light);
+}
+
+/* textarea-field aplica la misma técnica de separadores que input-field */
+.form__fields > .textarea-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .textarea-field > .label,
+.form__fields > .textarea-field > .textarea,
+.form__fields > .textarea-field > .textarea-field__error,
+.form__fields > .textarea-field > .textarea-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .textarea-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .textarea-field > .textarea-field__error,
+.form__fields > .textarea-field > .textarea-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+/* input-field aplica la técnica de separadores internamente:
+   el contenedor expone form-separator-color y cada sub-elemento lo tapa con background-light */
+.form__fields > .input-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .input-field > .label,
+.form__fields > .input-field > .input,
+.form__fields > .input-field > .input-field__error,
+.form__fields > .input-field > .input-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .input-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .input-field > .input-field__error,
+.form__fields > .input-field > .input-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
 }
 
 /* input-phone-field actúa como sub-contenedor de la misma técnica:
@@ -101,10 +148,14 @@
 }
 
 .form-errors {
-  list-style: none;
-  margin: 0;
   padding-inline: var(--control-padding-inline);
   padding-block: var(--control-padding-block);
+}
+
+.form-errors__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-1);

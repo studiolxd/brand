@@ -22,11 +22,13 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
       <div className="form__fields">
         {children}
         {errors && errors.length > 0 && (
-          <ul className="form-errors" role="alert">
-            {errors.map((error) => (
-              <li key={error} className="form-errors__item">{error}</li>
-            ))}
-          </ul>
+          <div role="alert" className="form-errors">
+            <ul className="form-errors__list">
+              {errors.map((error) => (
+                <li key={error} className="form-errors__item">{error}</li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
       {actions && <div className="form__actions">{actions}</div>}
