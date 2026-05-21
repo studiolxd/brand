@@ -1,9 +1,9 @@
 import './visually-hidden.css';
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx
-function t({ children: t }) {
+function t({ children: t, className: n }) {
 	return /* @__PURE__ */ e("span", {
-		className: "visually-hidden",
+		className: ["visually-hidden", n].filter(Boolean).join(" "),
 		children: t
 	});
 }

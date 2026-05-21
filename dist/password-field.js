@@ -1,8 +1,8 @@
 'use client';
 import './password-field.css';
-import { Input as e } from "./input.js";
-import { Label as t } from "./label.js";
-import { VisuallyHidden as n } from "./visually-hidden.js";
+import { VisuallyHidden as e } from "./visually-hidden.js";
+import { Input as t } from "./input.js";
+import { Label as n } from "./label.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 import { useState as a } from "react";
 //#region src/stories/molecules/PasswordField/PasswordField.tsx
@@ -11,14 +11,14 @@ function o({ id: o, label: l, labelHidden: u = !0, name: d, placeholder: f, valu
 	return /* @__PURE__ */ i("div", {
 		className: "password-field",
 		children: [
-			/* @__PURE__ */ r(t, {
+			/* @__PURE__ */ r(n, {
 				htmlFor: o,
 				hidden: u,
 				children: l
 			}),
 			/* @__PURE__ */ i("div", {
 				className: "password-field__wrapper",
-				children: [/* @__PURE__ */ r(e, {
+				children: [/* @__PURE__ */ r(t, {
 					id: o,
 					name: d,
 					type: w ? "text" : "password",
@@ -40,7 +40,7 @@ function o({ id: o, label: l, labelHidden: u = !0, name: d, placeholder: f, valu
 					disabled: h,
 					"aria-controls": o,
 					"aria-pressed": w,
-					children: [/* @__PURE__ */ r(n, { children: w ? "Ocultar contraseña" : "Mostrar contraseña" }), r(w ? c : s, {})]
+					children: [/* @__PURE__ */ r(e, { children: w ? "Ocultar contraseña" : "Mostrar contraseña" }), r(w ? c : s, {})]
 				})]
 			}),
 			y && /* @__PURE__ */ r("span", {

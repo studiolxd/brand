@@ -1,8 +1,8 @@
 import './card-square.css';
-import { Arrow as e } from "./arrow.js";
-import { Heading as t } from "./heading.js";
-import { Paragraph as n } from "./paragraph.js";
-import { VisuallyHidden as r } from "./visually-hidden.js";
+import { VisuallyHidden as e } from "./visually-hidden.js";
+import { Arrow as t } from "./arrow.js";
+import { Heading as n } from "./heading.js";
+import { Paragraph as r } from "./paragraph.js";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/CardSquare/CardSquare.tsx
 function o({ href: o, title: s, description: c, ctaLabel: l, color: u, image: d }) {
@@ -16,22 +16,22 @@ function o({ href: o, title: s, description: c, ctaLabel: l, color: u, image: d 
 		}), /* @__PURE__ */ a("div", {
 			className: "card-square__body",
 			children: [
-				/* @__PURE__ */ i(t, {
+				/* @__PURE__ */ i(n, {
 					level: 2,
 					size: 8,
 					className: "card-square__title",
 					children: s
 				}),
-				/* @__PURE__ */ i(n, {
+				/* @__PURE__ */ i(r, {
 					size: "large",
 					className: "card-square__description",
 					children: c
 				}),
-				/* @__PURE__ */ i(e, {
+				/* @__PURE__ */ i(t, {
 					className: "card-square__arrow",
 					size: "lg"
 				}),
-				/* @__PURE__ */ i(r, { children: l })
+				/* @__PURE__ */ i(e, { children: l })
 			]
 		})]
 	});
