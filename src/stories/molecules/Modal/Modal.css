@@ -86,7 +86,6 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: var(--font-size-2);
   color: var(--color-grey-dark);
   border-radius: var(--border-radius-sm);
   flex-shrink: 0;

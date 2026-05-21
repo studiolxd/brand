@@ -10,6 +10,7 @@ export const entryPoints = {
   'checkbox':            'src/stories/atoms/Checkbox/Checkbox.tsx',
   'radio':               'src/stories/atoms/Radio/Radio.tsx',
   'chevron':             'src/stories/atoms/Chevron/Chevron.tsx',
+  'close':               'src/stories/atoms/Close/Close.tsx',
   'hamburger':           'src/stories/atoms/Hamburger/Hamburger.tsx',
   'fieldset':            'src/stories/atoms/Fieldset/Fieldset.tsx',
   'heading':             'src/stories/atoms/Heading/Heading.tsx',

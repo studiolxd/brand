@@ -1,0 +1,15 @@
+@import '../../../tokens/components/close.css';
+
+.close {
+  display: block;
+  flex-shrink: 0;
+  --close-size: var(--close-size-md);
+  width: var(--close-size);
+  height: var(--close-size);
+}
+
+.close--xs { --close-size: var(--close-size-xs); }
+.close--sm { --close-size: var(--close-size-sm); }
+.close--md { --close-size: var(--close-size-md); }
+.close--lg { --close-size: var(--close-size-lg); }
+.close--xl { --close-size: var(--close-size-xl); }

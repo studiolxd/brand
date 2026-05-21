@@ -8,7 +8,7 @@
   --modal-width-max: 560px; /** Anchura máxima del panel */
   --modal-backdrop-bg: var(--color-black); /** Color del backdrop/scrim */
   --modal-backdrop-opacity: var(--opacity-overlay); /** Opacidad del backdrop (0.6) */
-  --modal-border-radius: var(--border-radius-lg); /** Radio del panel */
+  --modal-border-radius: var(--border-radius-none); /** Radio del panel */
   --modal-shadow: var(--shadow-xl); /** Sombra de elevación */
   --modal-padding-block: var(--spacing-6); /** Padding vertical del panel */
   --modal-padding-inline: var(--spacing-6); /** Padding horizontal del panel */

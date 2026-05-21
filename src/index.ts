@@ -14,6 +14,7 @@ export type { ButtonProps } from './stories/atoms/Button/Button';
 export { Carousel } from './stories/atoms/Carousel/Carousel';
 export { Checkbox } from './stories/atoms/Checkbox/Checkbox';
 export { Chevron } from './stories/atoms/Chevron/Chevron';
+export { Close } from './stories/atoms/Close/Close';
 export { DotsButton } from './stories/atoms/DotsButton/DotsButton';
 export type { DotsButtonProps } from './stories/atoms/DotsButton/DotsButton';
 export { Hamburger } from './stories/atoms/Hamburger/Hamburger';

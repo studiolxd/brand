@@ -3,6 +3,7 @@
 import { useState, useRef, useId, useCallback, useEffect } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
+import { Close } from '../Close/Close';
 import './AsyncSelect.css';
 
 export interface AsyncSelectOption {
@@ -201,8 +202,8 @@ export function AsyncSelect({
               tabIndex={-1}
               onMouseDown={handleClear}
             >
-              ×
-            </button>
+              <Close size="xs" />
+</button>
           )}
         </div>
       </RadixPopover.Anchor>
