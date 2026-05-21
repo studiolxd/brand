@@ -1,0 +1,29 @@
+{
+  "progress-bar": {
+    "height-sm":            { "$value": "{spacing.2}",           "$type": "dimension", "$description": "8px — compact bar without label" },
+    "height-md":            { "$value": "{spacing.5}",           "$type": "dimension", "$description": "24px — default bar" },
+    "height-lg":            { "$value": "{spacing.6}",           "$type": "dimension", "$description": "32px — large bar" },
+    "border-radius":        { "$value": "{border-radius.full}",  "$type": "dimension", "$description": "Pill shape" },
+    "track-bg":             { "$value": "{color.grey-lightest}", "$type": "color",     "$description": "Track background on light surface" },
+    "transition-duration":  { "$value": "{motion.duration.base}","$type": "number",    "$description": "Fill transition duration" },
+    "transition-easing":    { "$value": "{motion.easing.in-out}","$type": "string",    "$description": "Fill transition easing" },
+    "font-family":          { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Label font family" },
+    "font-size":            { "$value": "{font-size.1}",         "$type": "dimension", "$description": "14px — label size" },
+    "font-weight":          { "$value": "{font-weight.medium}",  "$type": "number",    "$description": "Medium weight label" },
+    "label-gap":            { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Gap between fill edge and outside label" },
+    "label-padding-inline": { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Inline padding for label inside fill" },
+
+    "primary-fill":                 { "$value": "{color.primary}",       "$type": "color", "$description": "Primary (prussian) fill color" },
+    "primary-label-inside-color":   { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "White label on dark prussian fill" },
+    "accent-1-fill":                { "$value": "{color.accent-1}",      "$type": "color", "$description": "Accent 1 (lavender) fill color" },
+    "accent-1-label-inside-color":  { "$value": "{color.text.on-light}", "$type": "color", "$description": "Dark label on lavender fill" },
+    "accent-2-fill":                { "$value": "{color.accent-2}",      "$type": "color", "$description": "Accent 2 (yellow) fill color" },
+    "accent-2-label-inside-color":  { "$value": "{color.text.on-light}", "$type": "color", "$description": "Dark label on yellow fill" },
+    "support-1-fill":               { "$value": "{color.support-1}",     "$type": "color", "$description": "Support 1 (emerald) fill color" },
+    "support-1-label-inside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Dark label on emerald fill" },
+    "support-2-fill":               { "$value": "{color.support-2}",     "$type": "color", "$description": "Support 2 (cayenne) fill color" },
+    "support-2-label-inside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Dark label on cayenne fill" },
+
+    "label-outside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Label color when on unfilled track background" }
+  }
+}

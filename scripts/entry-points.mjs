@@ -22,6 +22,7 @@ export const entryPoints = {
   'logo':                'src/stories/atoms/Logo/Logo.tsx',
   'dots-button':         'src/stories/atoms/DotsButton/DotsButton.tsx',
   'paragraph':           'src/stories/atoms/Paragraph/Paragraph.tsx',
+  'progress-bar':        'src/stories/atoms/ProgressBar/ProgressBar.tsx',
   'popover':             'src/stories/atoms/Popover/Popover.tsx',
   'multi-select':        'src/stories/atoms/MultiSelect/MultiSelect.tsx',
   'select':              'src/stories/atoms/Select/Select.tsx',

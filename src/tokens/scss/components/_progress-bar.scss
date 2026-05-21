@@ -1,0 +1,26 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$progress-bar-height-sm: 0.5rem; // 8px — compact bar without label
+$progress-bar-height-md: 1.5rem; // 24px — default bar
+$progress-bar-height-lg: 2rem; // 32px — large bar
+$progress-bar-border-radius: 9999px; // Pill shape
+$progress-bar-track-bg: #f2f2f2; // Track background on light surface
+$progress-bar-transition-duration: 250ms; // Fill transition duration
+$progress-bar-transition-easing: ease-in-out; // Fill transition easing
+$progress-bar-font-family: "Google Sans Flex", system-ui, sans-serif; // Label font family
+$progress-bar-font-size: 0.875rem; // 14px — label size
+$progress-bar-font-weight: 500; // Medium weight label
+$progress-bar-label-gap: 0.5rem; // Gap between fill edge and outside label
+$progress-bar-label-padding-inline: 0.5rem; // Inline padding for label inside fill
+$progress-bar-primary-fill: #111e30; // Primary (prussian) fill color
+$progress-bar-primary-label-inside-color: #ffffff; // White label on dark prussian fill
+$progress-bar-accent-1-fill: #baabff; // Accent 1 (lavender) fill color
+$progress-bar-accent-1-label-inside-color: #111e30; // Dark label on lavender fill
+$progress-bar-accent-2-fill: #ffcd00; // Accent 2 (yellow) fill color
+$progress-bar-accent-2-label-inside-color: #111e30; // Dark label on yellow fill
+$progress-bar-support-1-fill: #20e38e; // Support 1 (emerald) fill color
+$progress-bar-support-1-label-inside-color: #111e30; // Dark label on emerald fill
+$progress-bar-support-2-fill: #f05e1c; // Support 2 (cayenne) fill color
+$progress-bar-support-2-label-inside-color: #111e30; // Dark label on cayenne fill
+$progress-bar-label-outside-color: #111e30; // Label color when on unfilled track background

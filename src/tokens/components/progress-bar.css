@@ -1,0 +1,29 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --progress-bar-height-sm: var(--spacing-2); /** 8px — compact bar without label */
+  --progress-bar-height-md: var(--spacing-5); /** 24px — default bar */
+  --progress-bar-height-lg: var(--spacing-6); /** 32px — large bar */
+  --progress-bar-border-radius: var(--border-radius-full); /** Pill shape */
+  --progress-bar-track-bg: var(--color-grey-lightest); /** Track background on light surface */
+  --progress-bar-transition-duration: var(--motion-duration-base); /** Fill transition duration */
+  --progress-bar-transition-easing: var(--motion-easing-in-out); /** Fill transition easing */
+  --progress-bar-font-family: var(--font-family-sans); /** Label font family */
+  --progress-bar-font-size: var(--font-size-1); /** 14px — label size */
+  --progress-bar-font-weight: var(--font-weight-medium); /** Medium weight label */
+  --progress-bar-label-gap: var(--spacing-2); /** Gap between fill edge and outside label */
+  --progress-bar-label-padding-inline: var(--spacing-2); /** Inline padding for label inside fill */
+  --progress-bar-primary-fill: var(--color-primary); /** Primary (prussian) fill color */
+  --progress-bar-primary-label-inside-color: var(--color-text-on-dark); /** White label on dark prussian fill */
+  --progress-bar-accent-1-fill: var(--color-accent-1); /** Accent 1 (lavender) fill color */
+  --progress-bar-accent-1-label-inside-color: var(--color-text-on-light); /** Dark label on lavender fill */
+  --progress-bar-accent-2-fill: var(--color-accent-2); /** Accent 2 (yellow) fill color */
+  --progress-bar-accent-2-label-inside-color: var(--color-text-on-light); /** Dark label on yellow fill */
+  --progress-bar-support-1-fill: var(--color-support-1); /** Support 1 (emerald) fill color */
+  --progress-bar-support-1-label-inside-color: var(--color-text-on-light); /** Dark label on emerald fill */
+  --progress-bar-support-2-fill: var(--color-support-2); /** Support 2 (cayenne) fill color */
+  --progress-bar-support-2-label-inside-color: var(--color-text-on-light); /** Dark label on cayenne fill */
+  --progress-bar-label-outside-color: var(--color-text-on-light); /** Label color when on unfilled track background */
+}

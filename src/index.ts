@@ -30,6 +30,8 @@ export { Link } from './stories/atoms/Link/Link';
 export { List } from './stories/atoms/List/List';
 export { Logo } from './stories/atoms/Logo/Logo';
 export { Paragraph } from './stories/atoms/Paragraph/Paragraph';
+export { ProgressBar } from './stories/atoms/ProgressBar/ProgressBar';
+export type { ProgressBarProps, ProgressBarVariant, ProgressBarSize } from './stories/atoms/ProgressBar/ProgressBar';
 export { Popover } from './stories/atoms/Popover/Popover';
 export type { PopoverProps } from './stories/atoms/Popover/Popover';
 export { MultiSelect } from './stories/atoms/MultiSelect/MultiSelect';

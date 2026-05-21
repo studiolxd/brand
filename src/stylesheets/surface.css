@@ -438,6 +438,10 @@
   --calendar-outside-color:      var(--color-grey-light);
   --calendar-disabled-color:     var(--color-grey-light);
 
+  /* ─── ProgressBar ────────────────────────────────────────────────────────── */
+  --progress-bar-track-bg:           var(--color-grey-darkest);
+  --progress-bar-label-outside-color:var(--color-text-on-dark);
+
 }
 
 /* =============================================================

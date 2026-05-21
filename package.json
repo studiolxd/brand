@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.5.0",
+  "version": "5.6.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -198,6 +198,10 @@
     "./paragraph": {
       "types": "./dist/_types/atoms/Paragraph/Paragraph.d.ts",
       "import": "./dist/paragraph.js"
+    },
+    "./progress-bar": {
+      "types": "./dist/_types/atoms/ProgressBar/ProgressBar.d.ts",
+      "import": "./dist/progress-bar.js"
     },
     "./popover": {
       "types": "./dist/_types/atoms/Popover/Popover.d.ts",

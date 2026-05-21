@@ -75,6 +75,7 @@ const filters = {
   'switcher-field':    (t) => t.path[0] === 'switcher-field',
   'password-field':    (t) => t.path[0] === 'password-field',
   'empty-state':       (t) => t.path[0] === 'empty-state',
+  'progress-bar':      (t) => t.path[0] === 'progress-bar',
 };
 
 function cssFile(destination, filterKey) {
@@ -163,6 +164,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/switcher-field.css',     'switcher-field'),
         cssFile('molecules/password-field.css',     'password-field'),
         cssFile('molecules/empty-state.css',        'empty-state'),
+        cssFile('components/progress-bar.css',      'progress-bar'),
       ],
     },
     scss: {
@@ -239,6 +241,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_switcher-field.scss',      'switcher-field'),
         scssFile('molecules/_password-field.scss',      'password-field'),
         scssFile('molecules/_empty-state.scss',         'empty-state'),
+        scssFile('components/_progress-bar.scss',       'progress-bar'),
       ],
     },
   },
