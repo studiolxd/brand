@@ -104,6 +104,10 @@
   transition: background-color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
 }
 
+.org-switcher__item:focus-visible {
+  outline: none;
+}
+
 .org-switcher__item[data-highlighted] {
   background-color: var(--org-switcher-item-hover-bg);
 }

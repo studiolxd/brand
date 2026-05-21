@@ -52,6 +52,10 @@
     color var(--context-menu-transition-duration) var(--context-menu-transition-easing);
 }
 
+.context-menu__item:focus-visible {
+  outline: none;
+}
+
 .context-menu__item[data-highlighted] {
   background-color: var(--context-menu-item-hover-bg);
   color: var(--context-menu-item-hover-color);
