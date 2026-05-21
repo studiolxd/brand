@@ -68,6 +68,7 @@ export const entryPoints = {
   'calendar-roster':     'src/stories/molecules/CalendarRoster/CalendarRoster.tsx',
   'empty-state':         'src/stories/molecules/EmptyState/EmptyState.tsx',
   'password-field':      'src/stories/molecules/PasswordField/PasswordField.tsx',
+  'toaster':             'src/stories/molecules/Toast/Toaster.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
@@ -98,4 +99,5 @@ export const clientComponents = new Set([
   'calendar-planner',
   'calendar-roster',
   'password-field',
+  'toaster',
 ]);

@@ -1,0 +1,31 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$toast-z-index: 1200; // z-index — por encima de floating-panel (1100)
+$toast-width: 360px; // Anchura de cada toast
+$toast-gap: 0.5rem; // Gap entre toasts apilados
+$toast-inset-block-end: 1.5rem; // Distancia al borde inferior de la ventana
+$toast-inset-inline-end: 1.5rem; // Distancia al borde derecho de la ventana
+$toast-padding-block: 0.75rem; // Padding vertical del toast
+$toast-padding-inline: 1rem; // Padding horizontal del toast
+$toast-border-radius: 8px; // Radio de esquinas
+$toast-border-width: 1px; // Grosor del borde
+$toast-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra de elevación
+$toast-bg: #ffffff; // Fondo del toast (todos los tipos)
+$toast-border-color: #111e30; // Borde por defecto — prussian
+$toast-title-font-size: 0.875rem; // Tamaño del título (14px)
+$toast-title-font-weight: 500; // Peso del título
+$toast-title-color: #111e30; // Color del título
+$toast-description-font-size: 0.875rem; // Tamaño de la descripción (14px)
+$toast-description-color: #4a4a4a; // Color de la descripción
+$toast-close-color: #4a4a4a; // Color del botón de cierre
+$toast-close-hover-color: #111e30; // Color del botón de cierre en hover
+$toast-duration-in: 250ms; // Duración animación de entrada (250ms)
+$toast-duration-out: 250ms; // Duración animación de salida (250ms)
+$toast-easing: ease-out; // Curva de animación
+$toast-success-border-color: #006616; // Borde success
+$toast-success-title-color: #006616; // Color título success
+$toast-success-description-color: #006616; // Color descripción success
+$toast-error-border-color: #b30000; // Borde error
+$toast-error-title-color: #b30000; // Color título error
+$toast-error-description-color: #b30000; // Color descripción error

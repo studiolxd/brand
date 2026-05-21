@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.6.0",
+  "version": "5.7.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -310,6 +310,10 @@
       "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",
       "import": "./dist/textarea-field.js"
     },
+    "./toaster": {
+      "types": "./dist/_types/molecules/Toast/Toaster.d.ts",
+      "import": "./dist/toaster.js"
+    },
     "./tokens.css": "./dist/tokens.css",
     "./user-menu": {
       "types": "./dist/_types/molecules/UserMenu/UserMenu.d.ts",
@@ -356,7 +360,8 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "sonner": "^2.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
@@ -388,6 +393,7 @@
     "postcss-import": "^16.1.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "sonner": "^2.0.7",
     "react-phone-number-input": "^3.4.16",
     "storybook": "^10.4.0",
     "storybook-addon-pseudo-states": "^10.4.0",

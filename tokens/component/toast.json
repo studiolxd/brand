@@ -1,0 +1,35 @@
+{
+  "toast": {
+    "z-index":              { "$value": 1200,                           "$type": "number",    "$description": "z-index — por encima de floating-panel (1100)" },
+    "width":                { "$value": "360px",                        "$type": "dimension", "$description": "Anchura de cada toast" },
+    "gap":                  { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Gap entre toasts apilados" },
+    "inset-block-end":      { "$value": "{spacing.5}",                  "$type": "dimension", "$description": "Distancia al borde inferior de la ventana" },
+    "inset-inline-end":     { "$value": "{spacing.5}",                  "$type": "dimension", "$description": "Distancia al borde derecho de la ventana" },
+    "padding-block":        { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Padding vertical del toast" },
+    "padding-inline":       { "$value": "{spacing.4}",                  "$type": "dimension", "$description": "Padding horizontal del toast" },
+    "border-radius":        { "$value": "{border-radius.md}",           "$type": "dimension", "$description": "Radio de esquinas" },
+    "border-width":         { "$value": "{border-width.sm}",            "$type": "dimension", "$description": "Grosor del borde" },
+    "shadow":               { "$value": "{shadow.lg}",                  "$type": "shadow",    "$description": "Sombra de elevación" },
+
+    "bg":                   { "$value": "{color.background.light}",     "$type": "color",     "$description": "Fondo del toast (todos los tipos)" },
+    "border-color":         { "$value": "{color.primary}",              "$type": "color",     "$description": "Borde por defecto — prussian" },
+    "title-font-size":      { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño del título (14px)" },
+    "title-font-weight":    { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso del título" },
+    "title-color":          { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del título" },
+    "description-font-size":{ "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño de la descripción (14px)" },
+    "description-color":    { "$value": "{color.text.muted-on-light}",  "$type": "color",     "$description": "Color de la descripción" },
+    "close-color":          { "$value": "{color.text.muted-on-light}",  "$type": "color",     "$description": "Color del botón de cierre" },
+    "close-hover-color":    { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del botón de cierre en hover" },
+    "duration-in":          { "$value": "{motion.duration.base}",       "$type": "number",    "$description": "Duración animación de entrada (250ms)" },
+    "duration-out":         { "$value": "{motion.duration.base}",       "$type": "number",    "$description": "Duración animación de salida (250ms)" },
+    "easing":               { "$value": "{motion.easing.out}",          "$type": "string",    "$description": "Curva de animación" },
+
+    "success-border-color":         { "$value": "{color.success-on-light}", "$type": "color", "$description": "Borde success" },
+    "success-title-color":          { "$value": "{color.success-on-light}", "$type": "color", "$description": "Color título success" },
+    "success-description-color":    { "$value": "{color.success-on-light}", "$type": "color", "$description": "Color descripción success" },
+
+    "error-border-color":           { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Borde error" },
+    "error-title-color":            { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Color título error" },
+    "error-description-color":      { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Color descripción error" }
+  }
+}
