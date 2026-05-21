@@ -19,6 +19,7 @@
   border-style: var(--multi-select-border-style);
   border-color: var(--multi-select-border-color);
   border-radius: var(--multi-select-border-radius);
+  box-sizing: border-box;
 
   cursor: pointer;
   width: 100%;
