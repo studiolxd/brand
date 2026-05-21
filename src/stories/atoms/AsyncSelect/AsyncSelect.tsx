@@ -85,7 +85,12 @@ export function AsyncSelect({
   }
 
   function handleInputBlur() {
-    setOpen(false);
+    requestAnimationFrame(() => {
+      const active = document.activeElement;
+      const inInput = inputRef.current === active;
+      const inPopover = document.getElementById(listboxId)?.contains(active);
+      if (!inInput && !inPopover) setOpen(false);
+    });
   }
 
   function handleSelect(option: AsyncSelectOption) {

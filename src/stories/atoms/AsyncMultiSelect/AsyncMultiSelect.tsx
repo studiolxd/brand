@@ -85,7 +85,12 @@ export function AsyncMultiSelect({
   }
 
   function handleInputBlur() {
-    setOpen(false);
+    requestAnimationFrame(() => {
+      const active = document.activeElement;
+      const inInput = inputRef.current === active;
+      const inPopover = document.getElementById(listboxId)?.contains(active);
+      if (!inInput && !inPopover) setOpen(false);
+    });
   }
 
   function toggleValue(v: string) {

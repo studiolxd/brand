@@ -25,7 +25,10 @@ function c({ onSearch: c, value: l, onValueChange: u, selectedOption: d, placeho
 		p || m || (C(""), D([]), k(!1), x(!0), z(""));
 	}
 	function H() {
-		x(!1);
+		requestAnimationFrame(() => {
+			let e = document.activeElement, t = F.current === e, n = document.getElementById(I)?.contains(e);
+			!t && !n && x(!1);
+		});
 	}
 	function U(e) {
 		l === void 0 && (j(e.value), N(e)), u?.(e.value, e), x(!1), C("");
