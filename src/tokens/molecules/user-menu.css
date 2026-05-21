@@ -15,6 +15,7 @@
   --user-menu-trigger-hover-bg: var(--color-grey-lightest); /** Fondo del trigger al hover */
   --user-menu-name-font-size: var(--font-size-2); /** Tamaño de texto del nombre */
   --user-menu-name-font-weight: var(--font-weight-medium); /** Peso del nombre */
+  --user-menu-content-z-index: var(--floating-panel-z-index); /** Z-index del dropdown (por encima del sidebar en mobile) */
   --user-menu-content-padding-block: var(--spacing-2); /** Padding vertical del panel */
   --user-menu-content-padding-inline: var(--spacing-2); /** Padding horizontal del panel */
   --user-menu-header-padding-block: var(--spacing-3); /** Padding vertical de la cabecera del dropdown */

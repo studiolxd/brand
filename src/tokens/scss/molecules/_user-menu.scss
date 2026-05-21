@@ -20,6 +20,7 @@ $user-menu-content-border-width: 1px; // Borde del panel
 $user-menu-content-border-color: #111e30; // Color del borde del panel
 $user-menu-content-border-radius: 0px; // Radio del panel
 $user-menu-content-shadow: none; // Sombra del panel
+$user-menu-content-z-index: 1100; // Z-index del dropdown (por encima del sidebar en mobile)
 $user-menu-content-padding-block: 0.5rem; // Padding vertical del panel
 $user-menu-content-padding-inline: 0.5rem; // Padding horizontal del panel
 $user-menu-header-padding-block: 0.75rem; // Padding vertical de la cabecera del dropdown

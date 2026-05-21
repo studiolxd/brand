@@ -16,6 +16,7 @@
   --org-switcher-trigger-hover-bg: var(--color-grey-lightest); /** Fondo del trigger al hover */
   --org-switcher-name-font-size: var(--font-size-2); /** Tamaño de texto del nombre de la org */
   --org-switcher-name-font-weight: var(--font-weight-medium); /** Peso del nombre de la org */
+  --org-switcher-content-z-index: var(--floating-panel-z-index); /** Z-index del dropdown (por encima del sidebar en mobile) */
   --org-switcher-content-padding-block: var(--spacing-2); /** Padding vertical del panel */
   --org-switcher-content-padding-inline: var(--spacing-2); /** Padding horizontal del panel */
   --org-switcher-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */

@@ -74,7 +74,7 @@
   padding-block: var(--org-switcher-content-padding-block);
   padding-inline: var(--org-switcher-content-padding-inline);
   min-width: var(--org-switcher-content-min-width);
-  z-index: 50;
+  z-index: var(--org-switcher-content-z-index);
   outline: none;
   transform-origin: var(--radix-dropdown-menu-content-transform-origin);
 }

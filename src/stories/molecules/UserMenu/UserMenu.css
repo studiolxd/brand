@@ -74,7 +74,7 @@
   padding-block: var(--user-menu-content-padding-block);
   padding-inline: var(--user-menu-content-padding-inline);
   min-width: var(--user-menu-content-min-width);
-  z-index: 50;
+  z-index: var(--user-menu-content-z-index);
   outline: none;
   transform-origin: var(--radix-dropdown-menu-content-transform-origin);
 }

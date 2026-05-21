@@ -21,6 +21,7 @@ $org-switcher-content-border-width: 1px; // Borde del panel
 $org-switcher-content-border-color: #111e30; // Color del borde del panel
 $org-switcher-content-border-radius: 0px; // Radio del panel
 $org-switcher-content-shadow: none; // Sombra del panel
+$org-switcher-content-z-index: 1100; // Z-index del dropdown (por encima del sidebar en mobile)
 $org-switcher-content-padding-block: 0.5rem; // Padding vertical del panel
 $org-switcher-content-padding-inline: 0.5rem; // Padding horizontal del panel
 $org-switcher-item-padding-block: 0.5rem; // Padding vertical de cada ítem
