@@ -45,12 +45,15 @@
 /* ── Toast card ─────────────────────────────────────────────── */
 
 .toast {
+  position: relative;
   background-color: var(--toast-bg);
   border: var(--toast-border-width) solid var(--toast-border-color);
   border-radius: var(--toast-border-radius);
   box-shadow: var(--toast-shadow);
   padding-block: var(--toast-padding-block);
   padding-inline: var(--toast-padding-inline);
+  /* Deja espacio para el botón de cierre absoluto */
+  padding-inline-end: calc(var(--spacing-5) + var(--spacing-3));
 
   display: flex;
   align-items: flex-start;
@@ -97,18 +100,20 @@
   margin-block-start: var(--spacing-1);
 }
 
-/* ── Botón de cierre ────────────────────────────────────────── */
+/* ── Botón de cierre — esquina superior derecha ─────────────── */
 
 .toast__close {
+  position: absolute;
+  inset-block-start: var(--spacing-2);
+  inset-inline-end: var(--spacing-2);
+
   appearance: none;
   background: none;
   border: none;
   padding-block: 0;
   padding-inline: 0;
   margin: 0;
-  margin-inline-start: auto;
   cursor: pointer;
-  flex-shrink: 0;
 
   display: inline-flex;
   align-items: center;

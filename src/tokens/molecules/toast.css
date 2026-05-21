@@ -10,7 +10,7 @@
   --toast-inset-inline-end: var(--spacing-5); /** Distancia al borde derecho de la ventana */
   --toast-padding-block: var(--spacing-3); /** Padding vertical del toast */
   --toast-padding-inline: var(--spacing-4); /** Padding horizontal del toast */
-  --toast-border-radius: var(--border-radius-md); /** Radio de esquinas */
+  --toast-border-radius: var(--border-radius-none); /** Sin radio de esquinas */
   --toast-border-width: var(--border-width-sm); /** Grosor del borde */
   --toast-shadow: var(--shadow-lg); /** Sombra de elevación */
   --toast-title-font-size: var(--font-size-1); /** Tamaño del título (14px) */

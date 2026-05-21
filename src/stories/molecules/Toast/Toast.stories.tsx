@@ -7,6 +7,14 @@ const meta: Meta<typeof Toaster> = {
   title: 'Moléculas/Toaster',
   component: Toaster,
   parameters: { layout: 'centered' },
+  decorators: [
+    (Story, context) => (
+      <>
+        <Toaster position={context.args.position} />
+        <Story />
+      </>
+    ),
+  ],
   argTypes: {
     position: {
       control: { type: 'select' },
@@ -22,83 +30,65 @@ type Story = StoryObj<typeof Toaster>;
 
 export const Default: Story = {
   name: 'Default',
-  render: (args) => (
-    <>
-      <Toaster {...args} />
-      <Button onClick={() => toast('Cambios guardados')}>Mostrar toast</Button>
-    </>
+  render: () => (
+    <Button onClick={() => toast('Cambios guardados')}>Mostrar toast</Button>
   ),
 };
 
 export const Success: Story = {
   name: 'Success',
-  render: (args) => (
-    <>
-      <Toaster {...args} />
-      <Button onClick={() => toast.success('Proyecto guardado correctamente')}>
-        Mostrar success
-      </Button>
-    </>
+  render: () => (
+    <Button onClick={() => toast.success('Proyecto guardado correctamente')}>
+      Mostrar success
+    </Button>
   ),
 };
 
 export const Error: Story = {
   name: 'Error',
-  render: (args) => (
-    <>
-      <Toaster {...args} />
-      <Button variant="outline" onClick={() => toast.error('No se pudo guardar el proyecto')}>
-        Mostrar error
-      </Button>
-    </>
+  render: () => (
+    <Button onClick={() => toast.error('No se pudo guardar el proyecto')}>
+      Mostrar error
+    </Button>
   ),
 };
 
 export const Warning: Story = {
   name: 'Warning',
-  render: (args) => (
-    <>
-      <Toaster {...args} />
-      <Button variant="outline" onClick={() => toast.warning('Tienes cambios sin guardar')}>
-        Mostrar warning
-      </Button>
-    </>
+  render: () => (
+    <Button onClick={() => toast.warning('Tienes cambios sin guardar')}>
+      Mostrar warning
+    </Button>
   ),
 };
 
 export const WithDescription: Story = {
   name: 'Con descripción',
-  render: (args) => (
-    <>
-      <Toaster {...args} />
-      <Button
-        onClick={() =>
-          toast.success('Proyecto guardado', {
-            description: 'Los cambios se han guardado correctamente.',
-          })
-        }
-      >
-        Mostrar con descripción
-      </Button>
-    </>
+  render: () => (
+    <Button
+      onClick={() =>
+        toast.success('Proyecto guardado', {
+          description: 'Los cambios se han guardado correctamente.',
+        })
+      }
+    >
+      Mostrar con descripción
+    </Button>
   ),
 };
 
 export const Persistent: Story = {
   name: 'Persistente',
-  render: (args) => (
-    <>
-      <Toaster {...args} />
-      <Button
-        variant="outline"
-        onClick={() =>
-          toast('Esta notificación no desaparece sola', {
-            duration: Infinity,
-          })
-        }
-      >
-        Mostrar persistente
-      </Button>
-    </>
+  render: () => (
+    <Button
+      variant="outline"
+      onClick={() =>
+        toast('Esta notificación no desaparece sola', {
+          duration: Infinity,
+        })
+      }
+    >
+      Mostrar persistente
+    </Button>
   ),
 };

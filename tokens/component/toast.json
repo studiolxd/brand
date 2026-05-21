@@ -7,7 +7,7 @@
     "inset-inline-end":     { "$value": "{spacing.5}",                  "$type": "dimension", "$description": "Distancia al borde derecho de la ventana" },
     "padding-block":        { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Padding vertical del toast" },
     "padding-inline":       { "$value": "{spacing.4}",                  "$type": "dimension", "$description": "Padding horizontal del toast" },
-    "border-radius":        { "$value": "{border-radius.md}",           "$type": "dimension", "$description": "Radio de esquinas" },
+    "border-radius":        { "$value": "{border-radius.none}",         "$type": "dimension", "$description": "Sin radio de esquinas" },
     "border-width":         { "$value": "{border-width.sm}",            "$type": "dimension", "$description": "Grosor del borde" },
     "shadow":               { "$value": "{shadow.lg}",                  "$type": "shadow",    "$description": "Sombra de elevación" },
 
