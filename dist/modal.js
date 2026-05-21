@@ -14,6 +14,7 @@ function a({ open: a, onClose: o, title: s, children: c, dark: l = !1 }) {
 		children: /* @__PURE__ */ r(i.Portal, { children: [/* @__PURE__ */ n(i.Overlay, { className: "modal__overlay" }), /* @__PURE__ */ r(i.Content, {
 			className: u,
 			"aria-describedby": void 0,
+			onOpenAutoFocus: (e) => e.preventDefault(),
 			children: [s ? /* @__PURE__ */ r("header", {
 				className: "modal__header",
 				children: [/* @__PURE__ */ n(i.Title, {

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useId, useCallback } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
+import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
 import './AsyncMultiSelect.css';
 
 export interface AsyncMultiSelectOption {
@@ -170,6 +171,7 @@ export function AsyncMultiSelect({
       </RadixPopover.Anchor>
 
       <RadixPopover.Portal>
+        <DismissableLayerBranch>
         <RadixPopover.Content
           className={contentClass}
           align="start"
@@ -228,6 +230,7 @@ export function AsyncMultiSelect({
             })}
           </div>
         </RadixPopover.Content>
+        </DismissableLayerBranch>
       </RadixPopover.Portal>
     </RadixPopover.Root>
   );

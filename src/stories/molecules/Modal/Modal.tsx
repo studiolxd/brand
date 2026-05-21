@@ -17,7 +17,7 @@ export function Modal({ open, onClose, title, children, dark = false }: ModalPro
     <Dialog.Root open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <Dialog.Portal>
         <Dialog.Overlay className="modal__overlay" />
-        <Dialog.Content className={contentClass} aria-describedby={undefined}>
+        <Dialog.Content className={contentClass} aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}>
           {title ? (
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
