@@ -82,7 +82,7 @@
 .form__actions {
   display: flex;
   padding-block: var(--control-padding-block);
-  padding-inline: var(--control-padding-inline);
+  padding-inline: 0;
   background-color: var(--color-background-light);
 }
 
