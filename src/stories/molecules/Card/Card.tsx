@@ -3,7 +3,7 @@ import { Arrow } from '../../atoms/Arrow/Arrow';
 import { Heading } from '../../atoms/Heading/Heading';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 
-export type CardColor = 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+export type CardColor = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 
 interface CardProps {
   /** URL de destino — todo el bloque es clicable. */

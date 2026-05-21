@@ -442,6 +442,11 @@
   --progress-bar-track-bg:           var(--color-grey-darkest);
   --progress-bar-label-outside-color:var(--color-text-on-dark);
 
+  /* ─── Card outline ───────────────────────────────────────────────────────── */
+  --card-outline-bg:           var(--color-background-dark);
+  --card-outline-color:        var(--color-text-on-dark);
+  --card-outline-border-color: var(--color-text-on-dark);
+
 }
 
 /* =============================================================

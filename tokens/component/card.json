@@ -5,6 +5,14 @@
     "padding-block-end":        { "$value": "{spacing.3}", "$type": "dimension", "$description": "Padding block end" },
     "gap":                      { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre elementos internos" },
     "description-font-size":    { "$value": "{font-size.4}", "$type": "dimension", "$description": "Tamaño de fuente de la descripción" },
-    "description-margin-block-end": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Margen inferior de la descripción" }
+    "description-margin-block-end": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Margen inferior de la descripción" },
+
+    "primary-bg":    { "$value": "{color.primary}",         "$type": "color", "$description": "Variante primary — fondo prussian" },
+    "primary-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Variante primary — texto blanco sobre fondo oscuro" },
+
+    "outline-bg":           { "$value": "{color.background.light}", "$type": "color",     "$description": "Variante outline — fondo blanco (light)" },
+    "outline-color":        { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Variante outline — texto oscuro sobre blanco" },
+    "outline-border-color": { "$value": "{color.primary}",          "$type": "color",     "$description": "Variante outline — borde prussian" },
+    "outline-border-width": { "$value": "{border-width.sm}",        "$type": "dimension", "$description": "Variante outline — grosor de borde" }
   }
 }

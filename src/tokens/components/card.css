@@ -9,4 +9,10 @@
   --card-gap: var(--spacing-3); /** Separación entre elementos internos */
   --card-description-font-size: var(--font-size-4); /** Tamaño de fuente de la descripción */
   --card-description-margin-block-end: var(--spacing-7); /** Margen inferior de la descripción */
+  --card-outline-border-width: var(--border-width-sm); /** Variante outline — grosor de borde */
+  --card-primary-bg: var(--color-primary); /** Variante primary — fondo prussian */
+  --card-primary-color: var(--color-text-on-dark); /** Variante primary — texto blanco sobre fondo oscuro */
+  --card-outline-bg: var(--color-background-light); /** Variante outline — fondo blanco (light) */
+  --card-outline-color: var(--color-text-on-light); /** Variante outline — texto oscuro sobre blanco */
+  --card-outline-border-color: var(--color-primary); /** Variante outline — borde prussian */
 }

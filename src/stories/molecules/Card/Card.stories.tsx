@@ -10,7 +10,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     color: {
       control: { type: 'select' },
-      options: ['accent-1', 'accent-2', 'support-1', 'support-2'],
+      options: ['primary', 'outline', 'accent-1', 'accent-2', 'support-1', 'support-2'],
       description: 'Color de fondo.',
     },
   },
@@ -22,6 +22,24 @@ const meta: Meta<typeof Card> = {
 
 export default meta;
 type Story = StoryObj<typeof Card>;
+
+export const Primary: Story = {
+  args: {
+    color: 'primary',
+    title: 'Diseño instruccional',
+    description: 'Creamos experiencias de aprendizaje efectivas y atractivas centradas en el usuario.',
+    ctaLabel: 'Ver más sobre diseño instruccional',
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    color: 'outline',
+    title: 'Plataformas LMS',
+    description: 'Desarrollamos plataformas de aprendizaje adaptadas a tu identidad visual.',
+    ctaLabel: 'Ver más sobre plataformas LMS',
+  },
+};
 
 export const Accent1: Story = {
   args: {
