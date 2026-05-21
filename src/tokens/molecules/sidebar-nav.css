@@ -3,7 +3,7 @@
  */
 
 :root {
-  --sidebar-nav-item-icon-size: 1rem; /** Tamaño del icono opcional de ítem */
+  --sidebar-nav-item-icon-size: 2rem; /** Tamaño del icono opcional de ítem */
   --sidebar-nav-gap: var(--spacing-1); /** Gap entre grupos */
   --sidebar-nav-group-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger de grupo */
   --sidebar-nav-group-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger de grupo */

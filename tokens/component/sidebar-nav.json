@@ -20,7 +20,7 @@
     "item-active-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de ítem activo y focus ring" },
     "item-active-font-weight":   { "$value": "{font-weight.medium}",      "$type": "number",    "$description": "Peso de ítem activo" },
     "item-gap":                  { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Gap entre ítems dentro de un grupo" },
-    "item-icon-size":            { "$value": "1rem",                      "$type": "dimension", "$description": "Tamaño del icono opcional de ítem" },
+    "item-icon-size":            { "$value": "2rem",                      "$type": "dimension", "$description": "Tamaño del icono opcional de ítem" },
     "item-icon-gap":             { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Gap entre icono y texto del ítem" },
     "transition-duration":            { "$value": "{motion.duration.fast}",    "$type": "string",    "$description": "Duración de transición de ítems" },
     "transition-easing":              { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de transición de ítems" },
