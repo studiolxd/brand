@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -145,9 +145,17 @@
       "types": "./dist/_types/atoms/Input/Input.d.ts",
       "import": "./dist/input.js"
     },
+    "./empty-state": {
+      "types": "./dist/_types/molecules/EmptyState/EmptyState.d.ts",
+      "import": "./dist/empty-state.js"
+    },
     "./input-field": {
       "types": "./dist/_types/molecules/InputField/InputField.d.ts",
       "import": "./dist/input-field.js"
+    },
+    "./password-field": {
+      "types": "./dist/_types/molecules/PasswordField/PasswordField.d.ts",
+      "import": "./dist/password-field.js"
     },
     "./input-phone": {
       "types": "./dist/_types/atoms/InputPhone/InputPhone.d.ts",

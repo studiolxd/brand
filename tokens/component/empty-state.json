@@ -1,0 +1,18 @@
+{
+  "empty-state": {
+    "gap":                     { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Gap entre icono, cuerpo y acción" },
+    "body-gap":                { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Gap entre título y descripción" },
+    "padding-block":           { "$value": "{spacing.7}",               "$type": "dimension", "$description": "Padding vertical del contenedor" },
+    "padding-inline":          { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Padding horizontal del contenedor" },
+    "icon-size":               { "$value": "3rem",                      "$type": "dimension", "$description": "Tamaño del icono — variante md" },
+    "icon-size-sm":            { "$value": "2rem",                      "$type": "dimension", "$description": "Tamaño del icono — variante sm" },
+    "icon-color":              { "$value": "{color.text.muted-on-light}","$type": "color",     "$description": "Color del icono" },
+    "title-font-family":       { "$value": "{font-family.sans}",        "$type": "string",    "$description": "Familia tipográfica del título" },
+    "title-font-size":         { "$value": "{font-size.5}",             "$type": "dimension", "$description": "Tamaño tipográfico del título" },
+    "title-font-weight":       { "$value": "{font-weight.medium}",      "$type": "number",    "$description": "Peso del título" },
+    "title-color":             { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del título" },
+    "description-font-family": { "$value": "{font-family.sans}",        "$type": "string",    "$description": "Familia tipográfica de la descripción" },
+    "description-font-size":   { "$value": "{font-size.2}",             "$type": "dimension", "$description": "Tamaño tipográfico de la descripción" },
+    "description-color":       { "$value": "{color.text.muted-on-light}","$type": "color",     "$description": "Color de la descripción" }
+  }
+}

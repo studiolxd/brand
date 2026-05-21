@@ -73,6 +73,8 @@ const filters = {
   'date-time-field':   (t) => t.path[0] === 'date-time-field',
   switcher:            (t) => t.path[0] === 'switcher',
   'switcher-field':    (t) => t.path[0] === 'switcher-field',
+  'password-field':    (t) => t.path[0] === 'password-field',
+  'empty-state':       (t) => t.path[0] === 'empty-state',
 };
 
 function cssFile(destination, filterKey) {
@@ -159,6 +161,8 @@ const sd = new StyleDictionary({
         cssFile('molecules/date-time-field.css',    'date-time-field'),
         cssFile('components/switcher.css',          'switcher'),
         cssFile('molecules/switcher-field.css',     'switcher-field'),
+        cssFile('molecules/password-field.css',     'password-field'),
+        cssFile('molecules/empty-state.css',        'empty-state'),
       ],
     },
     scss: {
@@ -233,6 +237,8 @@ const sd = new StyleDictionary({
         scssFile('molecules/_date-time-field.scss',    'date-time-field'),
         scssFile('components/_switcher.scss',           'switcher'),
         scssFile('molecules/_switcher-field.scss',      'switcher-field'),
+        scssFile('molecules/_password-field.scss',      'password-field'),
+        scssFile('molecules/_empty-state.scss',         'empty-state'),
       ],
     },
   },
