@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  margin-block: var(--sidebar-padding-block);
+  padding-block: var(--sidebar-padding-block);
   padding-inline: var(--sidebar-padding-inline);
   flex-shrink: 0;
 }
@@ -85,7 +85,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-inline: var(--sidebar-padding-inline);
-  padding-block-end: var(--sidebar-padding-block);
+  padding-block: var(--sidebar-padding-block);
   box-sizing: border-box;
 }
 
