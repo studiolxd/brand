@@ -76,6 +76,7 @@ const filters = {
   'password-field':    (t) => t.path[0] === 'password-field',
   'empty-state':       (t) => t.path[0] === 'empty-state',
   'progress-bar':      (t) => t.path[0] === 'progress-bar',
+  spinner:             (t) => t.path[0] === 'spinner',
   toast:               (t) => t.path[0] === 'toast',
 };
 
@@ -166,6 +167,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/password-field.css',     'password-field'),
         cssFile('molecules/empty-state.css',        'empty-state'),
         cssFile('components/progress-bar.css',      'progress-bar'),
+        cssFile('components/spinner.css',           'spinner'),
         cssFile('molecules/toast.css',              'toast'),
       ],
     },
@@ -244,6 +246,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_password-field.scss',      'password-field'),
         scssFile('molecules/_empty-state.scss',         'empty-state'),
         scssFile('components/_progress-bar.scss',       'progress-bar'),
+        scssFile('components/_spinner.scss',            'spinner'),
         scssFile('molecules/_toast.scss',               'toast'),
       ],
     },

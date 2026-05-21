@@ -32,6 +32,7 @@ export const entryPoints = {
   'hero-video':          'src/stories/atoms/HeroVideo/HeroVideo.tsx',
   'highlight':           'src/stories/atoms/Highlight/Highlight.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
+  'spinner':             'src/stories/atoms/Spinner/Spinner.tsx',
   'switcher':            'src/stories/atoms/Switcher/Switcher.tsx',
   'tabs':                'src/stories/atoms/Tabs/Tabs.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',

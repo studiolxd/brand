@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.7.9",
+  "version": "5.8.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -272,6 +272,10 @@
     "./skip-link": {
       "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
       "import": "./dist/skip-link.js"
+    },
+    "./spinner": {
+      "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",
+      "import": "./dist/spinner.js"
     },
     "./solutions-section.css": "./dist/solutions-section.css",
     "./login-form": {

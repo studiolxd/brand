@@ -1,0 +1,13 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --spinner-border-width-sm: 2px; /** Stroke width for sm */
+  --spinner-border-width-md: 2px; /** Stroke width for md */
+  --spinner-border-width-lg: 3px; /** Stroke width for lg */
+  --spinner-animation-duration: 600ms; /** One full rotation duration */
+  --spinner-size-sm: var(--spacing-4); /** 16px — compact spinner */
+  --spinner-size-md: var(--spacing-5); /** 24px — default spinner */
+  --spinner-size-lg: var(--spacing-6); /** 32px — large spinner */
+}

@@ -41,6 +41,8 @@ export { Select } from './stories/atoms/Select/Select';
 export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';
 export type { TimeSelectProps, TimeValue } from './stories/atoms/TimeSelect/TimeSelect';
 export { SkipLink } from './stories/atoms/SkipLink/SkipLink';
+export { Spinner } from './stories/atoms/Spinner/Spinner';
+export type { SpinnerProps, SpinnerSize } from './stories/atoms/Spinner/Spinner';
 export { Switcher } from './stories/atoms/Switcher/Switcher';
 export type { SwitcherProps } from './stories/atoms/Switcher/Switcher';
 export { Tag } from './stories/atoms/Tag/Tag';

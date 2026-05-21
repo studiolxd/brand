@@ -4,6 +4,7 @@ import { useState, useRef, useId, useCallback, useEffect } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
 import { Close } from '../Close/Close';
+import { Spinner } from '../Spinner/Spinner';
 import './AsyncMultiSelect.css';
 
 export interface AsyncMultiSelectOption {
@@ -191,7 +192,7 @@ export function AsyncMultiSelect({
               role="combobox"
             />
           </div>
-          {loading && <span className="async-multi-select__spinner" aria-hidden="true" />}
+          {loading && <Spinner size="sm" aria-hidden />}
         </div>
       </RadixPopover.Anchor>
 
@@ -211,8 +212,8 @@ export function AsyncMultiSelect({
             id={listboxId}
           >
             {loading && (
-              <div className="async-multi-select__loading" role="status" aria-label="Buscando…">
-                <span className="async-multi-select__spinner" aria-hidden="true" />
+              <div className="async-multi-select__loading">
+                <Spinner size="sm" label="Buscando…" />
               </div>
             )}
             {!loading && hasSearched && results.length === 0 && (

@@ -1,0 +1,11 @@
+{
+  "spinner": {
+    "size-sm":          { "$value": "{spacing.4}", "$type": "dimension", "$description": "16px — compact spinner" },
+    "size-md":          { "$value": "{spacing.5}", "$type": "dimension", "$description": "24px — default spinner" },
+    "size-lg":          { "$value": "{spacing.6}", "$type": "dimension", "$description": "32px — large spinner" },
+    "border-width-sm":  { "$value": "2px",         "$type": "dimension", "$description": "Stroke width for sm" },
+    "border-width-md":  { "$value": "2px",         "$type": "dimension", "$description": "Stroke width for md" },
+    "border-width-lg":  { "$value": "3px",         "$type": "dimension", "$description": "Stroke width for lg" },
+    "animation-duration": { "$value": "600ms",     "$type": "number",    "$description": "One full rotation duration" }
+  }
+}

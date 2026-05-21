@@ -99,23 +99,6 @@
   }
 }
 
-/* ─── Spinner ─────────────────────────────────────────────── */
-.async-multi-select__spinner {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border: 2px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: async-multi-select-spin 0.6s linear infinite;
-  flex-shrink: 0;
-  opacity: 0.6;
-}
-
-@keyframes async-multi-select-spin {
-  to { transform: rotate(360deg); }
-}
-
 /* ─── Dropdown ────────────────────────────────────────────── */
 .async-multi-select__content {
   background-color: var(--multi-select-content-bg);
