@@ -68,6 +68,36 @@
   padding-block: var(--control-padding-block);
 }
 
+/* password-field: el wrapper del input actúa como proxy del .input directo */
+.form__fields > .password-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .password-field > .label,
+.form__fields > .password-field > .password-field__wrapper,
+.form__fields > .password-field > .password-field__error,
+.form__fields > .password-field > .password-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .password-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .password-field > .password-field__error,
+.form__fields > .password-field > .password-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .password-field > .password-field__wrapper > .input {
+  --input-border-color: var(--color-background-light);
+  --input-error-border-color: var(--color-background-light);
+  --input-disabled-border-color: var(--color-background-light);
+}
+
 /* input-phone-field actúa como sub-contenedor de la misma técnica:
    su fondo es el separador y el gap interior dibuja la línea entre input y helper */
 .form__fields > .input-phone-field {
