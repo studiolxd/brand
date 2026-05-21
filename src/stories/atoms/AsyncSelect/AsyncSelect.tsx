@@ -136,7 +136,7 @@ export function AsyncSelect({
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixPopover.Root open={open} onOpenChange={next => { if (!next) setOpen(false); }}>
+    <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) setOpen(false); }}>
       <RadixPopover.Anchor asChild>
         <div className={triggerClass} data-state={open ? 'open' : 'closed'}>
           <input
