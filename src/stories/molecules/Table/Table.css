@@ -86,13 +86,10 @@
 /* ── Rows ────────────────────────────────────────────── */
 
 .table__row {
-  border-bottom-width: var(--table-border-width);
-  border-bottom-style: solid;
-  border-bottom-color: var(--table-row-border-color);
   transition: background-color calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing);
 }
 
-.table tbody .table__row:last-child {
+.table tbody .table__row:last-child .table__cell {
   border-bottom: none;
 }
 
@@ -127,6 +124,9 @@
 .table__cell {
   padding-block: var(--table-cell-padding-block);
   padding-inline: var(--table-cell-padding-inline);
+  border-bottom-width: var(--table-border-width);
+  border-bottom-style: solid;
+  border-bottom-color: var(--table-row-border-color);
 }
 
 /* ── Actions column ──────────────────────────────────── */
