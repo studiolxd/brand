@@ -22,6 +22,10 @@ $table-cell-padding-block: 0.75rem; // Padding block de celda
 $table-cell-padding-inline: 0.75rem; // Padding inline de celda
 $table-row-border-color: #d0d0d0; // Color del separador entre filas
 $table-row-hover-bg: #f2f2f2; // Fondo de fila interactiva en hover
+$table-footer-bg: #f2f2f2; // Fondo del tfoot
+$table-footer-border-width: 2px; // Borde superior del tfoot — mismo grosor que el del thead
+$table-footer-border-color: #111e30; // Color del borde superior del tfoot
+$table-footer-font-weight: 500; // Peso tipográfico de las celdas del footer
 $table-focus-ring-color: #111e30; // Color del focus ring
 $table-focus-ring-width: 2px; // Grosor del focus ring
 $table-focus-ring-offset: 1px; // Separación del focus ring

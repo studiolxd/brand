@@ -20,6 +20,9 @@
   --table-cell-padding-inline: var(--spacing-3); /** Padding inline de celda */
   --table-row-border-color: var(--color-grey-light); /** Color del separador entre filas */
   --table-row-hover-bg: var(--color-grey-lightest); /** Fondo de fila interactiva en hover */
+  --table-footer-bg: var(--color-grey-lightest); /** Fondo del tfoot */
+  --table-footer-border-width: var(--border-width-md); /** Borde superior del tfoot — mismo grosor que el del thead */
+  --table-footer-font-weight: var(--font-weight-medium); /** Peso tipográfico de las celdas del footer */
   --table-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
   --table-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --table-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de hover */
@@ -33,5 +36,6 @@
   --table-color: var(--color-text-on-light); /** Color de texto base */
   --table-header-border-color: var(--color-text-on-light); /** Color del borde inferior del thead */
   --table-sort-icon-active-color: var(--color-primary); /** Color del icono de sort activo */
+  --table-footer-border-color: var(--color-text-on-light); /** Color del borde superior del tfoot */
   --table-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }

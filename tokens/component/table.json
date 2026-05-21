@@ -27,6 +27,11 @@
     "row-border-color":       { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del separador entre filas" },
     "row-hover-bg":           { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo de fila interactiva en hover" },
 
+    "footer-bg":              { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo del tfoot" },
+    "footer-border-width":    { "$value": "{border-width.md}",        "$type": "dimension", "$description": "Borde superior del tfoot — mismo grosor que el del thead" },
+    "footer-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde superior del tfoot" },
+    "footer-font-weight":     { "$value": "{font-weight.medium}",     "$type": "number",    "$description": "Peso tipográfico de las celdas del footer" },
+
     "focus-ring-color":       { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del focus ring" },
     "focus-ring-width":       { "$value": "{border-width.md}",        "$type": "dimension", "$description": "Grosor del focus ring" },
     "focus-ring-offset":      { "$value": "{border-width.sm}",        "$type": "dimension", "$description": "Separación del focus ring" },

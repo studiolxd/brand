@@ -109,6 +109,19 @@
   outline-offset: calc(var(--table-focus-ring-offset) * -1);
 }
 
+/* ── Footer ─────────────────────────────────────────── */
+
+.table tfoot {
+  background-color: var(--table-footer-bg);
+  border-top-width: var(--table-footer-border-width);
+  border-top-style: solid;
+  border-top-color: var(--table-footer-border-color);
+}
+
+.table tfoot .table__cell {
+  font-weight: var(--table-footer-font-weight);
+}
+
 /* ── Cells ───────────────────────────────────────────── */
 
 .table__cell {
