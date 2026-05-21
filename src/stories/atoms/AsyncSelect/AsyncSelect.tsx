@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useId, useCallback } from 'react';
+import { useState, useRef, useId, useCallback, useEffect } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
 import './AsyncSelect.css';
@@ -45,15 +45,22 @@ export function AsyncSelect({
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<AsyncSelectOption[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [internalValue, setInternalValue] = useState<string | null>(null);
   const [internalSelectedOption, setInternalSelectedOption] = useState<AsyncSelectOption | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
+  const itemIdPrefix = useId();
 
   const currentValue = value !== undefined ? value : internalValue;
   const currentSelectedOption = selectedOption !== undefined ? selectedOption : internalSelectedOption;
+
+  const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
+
+  // Reset active index when results change or popover closes
+  useEffect(() => { setActiveIndex(-1); }, [results]);
 
   const runSearch = useCallback(async (q: string) => {
     setLoading(true);
@@ -78,20 +85,12 @@ export function AsyncSelect({
 
   function handleInputFocus() {
     if (disabled || readOnly) return;
+    setActiveIndex(-1);
     setQuery('');
     setResults([]);
     setHasSearched(false);
     setOpen(true);
     void runSearch('');
-  }
-
-  function handleInputBlur() {
-    requestAnimationFrame(() => {
-      const active = document.activeElement;
-      const inInput = inputRef.current === active;
-      const inPopover = document.getElementById(listboxId)?.contains(active);
-      if (!inInput && !inPopover) setOpen(false);
-    });
   }
 
   function handleSelect(option: AsyncSelectOption) {
@@ -101,6 +100,7 @@ export function AsyncSelect({
     }
     onValueChange?.(option.value, option);
     setOpen(false);
+    setActiveIndex(-1);
     setQuery('');
   }
 
@@ -118,13 +118,27 @@ export function AsyncSelect({
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Escape') {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!open) {
+        setOpen(true);
+        void runSearch(query);
+      } else {
+        setActiveIndex(i => Math.min(i + 1, results.length - 1));
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveIndex(i => Math.max(i - 1, -1));
+    } else if (e.key === 'Enter' && activeIndex >= 0 && results[activeIndex]) {
+      e.preventDefault();
+      handleSelect(results[activeIndex]);
+    } else if (e.key === 'Escape') {
       setOpen(false);
       setQuery('');
-    } else if (e.key === 'ArrowDown' && open) {
-      e.preventDefault();
-      const first = document.getElementById(listboxId)?.querySelector<HTMLElement>('[role="option"]');
-      first?.focus();
+      setActiveIndex(-1);
+    } else if (e.key === 'Tab') {
+      setOpen(false);
+      setActiveIndex(-1);
     }
   }
 
@@ -143,7 +157,7 @@ export function AsyncSelect({
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) setOpen(false); }}>
+    <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) { setOpen(false); setActiveIndex(-1); } }}>
       <RadixPopover.Anchor asChild>
         <div ref={anchorRef} className={triggerClass} data-state={open ? 'open' : 'closed'}>
           <input
@@ -154,7 +168,6 @@ export function AsyncSelect({
             value={displayValue}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             disabled={disabled}
@@ -164,6 +177,7 @@ export function AsyncSelect({
             aria-expanded={open}
             aria-haspopup="listbox"
             aria-controls={listboxId}
+            aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
             autoComplete="off"
             role="combobox"
           />
@@ -195,21 +209,6 @@ export function AsyncSelect({
             role="listbox"
             aria-label={ariaLabel ?? placeholder}
             id={listboxId}
-            onKeyDown={e => {
-              const items = Array.from(e.currentTarget.querySelectorAll<HTMLElement>('[role="option"]'));
-              const idx = items.indexOf(document.activeElement as HTMLElement);
-              if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                items[Math.min(idx + 1, items.length - 1)]?.focus();
-              } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (idx <= 0) inputRef.current?.focus();
-                else items[idx - 1]?.focus();
-              } else if (e.key === 'Escape') {
-                setOpen(false);
-                inputRef.current?.focus();
-              }
-            }}
           >
             {loading && (
               <div className="async-select__loading" role="status" aria-label="Buscando…">
@@ -219,20 +218,25 @@ export function AsyncSelect({
             {!loading && hasSearched && results.length === 0 && (
               <div className="async-select__empty">Sin resultados</div>
             )}
-            {!loading && results.map(option => {
+            {!loading && results.map((option, index) => {
               const isSelected = option.value === currentValue;
+              const isActive = activeIndex === index;
               return (
-                <button
+                <div
                   key={option.value}
-                  type="button"
+                  id={itemId(index)}
                   role="option"
                   aria-selected={isSelected}
-                  className={['async-select__item', isSelected ? 'async-select__item--selected' : ''].filter(Boolean).join(' ')}
-                  onMouseDown={e => e.preventDefault()}
+                  className={[
+                    'async-select__item',
+                    isSelected ? 'async-select__item--selected' : '',
+                    isActive ? 'async-select__item--active' : '',
+                  ].filter(Boolean).join(' ')}
+                  onPointerDown={e => e.preventDefault()}
                   onClick={() => handleSelect(option)}
                 >
                   {option.label}
-                </button>
+                </div>
               );
             })}
           </div>

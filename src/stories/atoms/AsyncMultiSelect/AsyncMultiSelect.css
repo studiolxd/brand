@@ -175,6 +175,12 @@
   &.async-multi-select__item--selected {
     font-weight: var(--font-weight-bold);
   }
+
+  &.async-multi-select__item--active {
+    outline: none;
+    background-color: var(--multi-select-item-highlighted-bg);
+    color: var(--multi-select-item-highlighted-color);
+  }
 }
 
 .async-multi-select__content .async-multi-select__item + .async-multi-select__item {
@@ -265,7 +271,8 @@
 }
 
 .async-multi-select__content.async-multi-select__content--dark .async-multi-select__item:focus-visible,
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item:hover {
+.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item:hover,
+.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item--active {
   background-color: var(--color-text-on-dark);
   color: var(--color-background-dark);
 }

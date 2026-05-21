@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useId, useCallback } from 'react';
+import { useState, useRef, useId, useCallback, useEffect } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
 import './AsyncMultiSelect.css';
@@ -47,13 +47,20 @@ export function AsyncMultiSelect({
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<AsyncMultiSelectOption[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
+  const itemIdPrefix = useId();
 
   const currentValues = value !== undefined ? value : internalValues;
+
+  const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
+
+  // Reset active index when results change or popover closes
+  useEffect(() => { setActiveIndex(-1); }, [results]);
 
   const runSearch = useCallback(async (q: string) => {
     setLoading(true);
@@ -78,20 +85,12 @@ export function AsyncMultiSelect({
 
   function handleInputFocus() {
     if (disabled || readOnly) return;
+    setActiveIndex(-1);
     setQuery('');
     setResults([]);
     setHasSearched(false);
     setOpen(true);
     void runSearch('');
-  }
-
-  function handleInputBlur() {
-    requestAnimationFrame(() => {
-      const active = document.activeElement;
-      const inInput = inputRef.current === active;
-      const inPopover = document.getElementById(listboxId)?.contains(active);
-      if (!inInput && !inPopover) setOpen(false);
-    });
   }
 
   function toggleValue(v: string) {
@@ -103,13 +102,28 @@ export function AsyncMultiSelect({
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Escape') {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!open) {
+        setOpen(true);
+        void runSearch(query);
+      } else {
+        setActiveIndex(i => Math.min(i + 1, results.length - 1));
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveIndex(i => Math.max(i - 1, -1));
+    } else if (e.key === 'Enter' && activeIndex >= 0 && results[activeIndex]) {
+      e.preventDefault();
+      toggleValue(results[activeIndex].value);
+      inputRef.current?.focus();
+    } else if (e.key === 'Escape') {
       setOpen(false);
       setQuery('');
-    } else if (e.key === 'ArrowDown' && open) {
-      e.preventDefault();
-      const first = document.getElementById(listboxId)?.querySelector<HTMLElement>('[role="option"]');
-      first?.focus();
+      setActiveIndex(-1);
+    } else if (e.key === 'Tab') {
+      setOpen(false);
+      setActiveIndex(-1);
     } else if (e.key === 'Backspace' && query === '' && currentValues.length > 0) {
       const last = currentValues[currentValues.length - 1];
       toggleValue(last);
@@ -130,7 +144,7 @@ export function AsyncMultiSelect({
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) setOpen(false); }}>
+    <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) { setOpen(false); setActiveIndex(-1); } }}>
       <RadixPopover.Anchor asChild>
         <div ref={anchorRef} className={triggerClass} data-state={open ? 'open' : 'closed'}>
           <div className="async-multi-select__input-area">
@@ -158,7 +172,6 @@ export function AsyncMultiSelect({
               value={query}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
               onKeyDown={handleKeyDown}
               placeholder={currentValues.length === 0 ? placeholder : undefined}
               disabled={disabled}
@@ -168,6 +181,7 @@ export function AsyncMultiSelect({
               aria-expanded={open}
               aria-haspopup="listbox"
               aria-controls={listboxId}
+              aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
               autoComplete="off"
               role="combobox"
             />
@@ -190,21 +204,6 @@ export function AsyncMultiSelect({
             aria-multiselectable="true"
             aria-label={ariaLabel ?? placeholder}
             id={listboxId}
-            onKeyDown={e => {
-              const items = Array.from(e.currentTarget.querySelectorAll<HTMLElement>('[role="option"]'));
-              const idx = items.indexOf(document.activeElement as HTMLElement);
-              if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                items[Math.min(idx + 1, items.length - 1)]?.focus();
-              } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (idx <= 0) inputRef.current?.focus();
-                else items[idx - 1]?.focus();
-              } else if (e.key === 'Escape') {
-                setOpen(false);
-                inputRef.current?.focus();
-              }
-            }}
           >
             {loading && (
               <div className="async-multi-select__loading" role="status" aria-label="Buscando…">
@@ -216,22 +215,26 @@ export function AsyncMultiSelect({
             )}
             {!loading && results.map((option, index) => {
               const isSelected = currentValues.includes(option.value);
+              const isActive = activeIndex === index;
               return (
-                <button
+                <div
                   key={option.value}
-                  type="button"
+                  id={itemId(index)}
                   role="option"
                   aria-selected={isSelected}
-                  className={['async-multi-select__item', isSelected ? 'async-multi-select__item--selected' : ''].filter(Boolean).join(' ')}
-                  tabIndex={index === 0 ? 0 : -1}
-                  onMouseDown={e => e.preventDefault()}
+                  className={[
+                    'async-multi-select__item',
+                    isSelected ? 'async-multi-select__item--selected' : '',
+                    isActive ? 'async-multi-select__item--active' : '',
+                  ].filter(Boolean).join(' ')}
+                  onPointerDown={e => e.preventDefault()}
                   onClick={() => { toggleValue(option.value); inputRef.current?.focus(); }}
                 >
                   <span className="async-multi-select__item-check" aria-hidden="true">
                     <span className="async-multi-select__item-check-mark" />
                   </span>
                   <span>{option.label}</span>
-                </button>
+                </div>
               );
             })}
           </div>

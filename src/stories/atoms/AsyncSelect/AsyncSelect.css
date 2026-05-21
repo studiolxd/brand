@@ -147,6 +147,12 @@
   &.async-select__item--selected {
     font-weight: var(--font-weight-bold);
   }
+
+  &.async-select__item--active {
+    outline: none;
+    background-color: var(--multi-select-item-highlighted-bg);
+    color: var(--multi-select-item-highlighted-color);
+  }
 }
 
 .async-select__content .async-select__item + .async-select__item {
@@ -196,7 +202,8 @@
 }
 
 .async-select__content.async-select__content--dark .async-select__item:focus-visible,
-.async-select__content.async-select__content--dark .async-select__item:hover {
+.async-select__content.async-select__content--dark .async-select__item:hover,
+.async-select__content.async-select__content--dark .async-select__item--active {
   background-color: var(--color-text-on-dark);
   color: var(--color-background-dark);
 }
