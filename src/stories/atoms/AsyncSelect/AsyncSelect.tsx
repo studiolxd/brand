@@ -49,6 +49,7 @@ export function AsyncSelect({
   const [internalSelectedOption, setInternalSelectedOption] = useState<AsyncSelectOption | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const anchorRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
 
   const currentValue = value !== undefined ? value : internalValue;
@@ -144,7 +145,7 @@ export function AsyncSelect({
   return (
     <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) setOpen(false); }}>
       <RadixPopover.Anchor asChild>
-        <div className={triggerClass} data-state={open ? 'open' : 'closed'}>
+        <div ref={anchorRef} className={triggerClass} data-state={open ? 'open' : 'closed'}>
           <input
             ref={inputRef}
             id={id}
@@ -188,7 +189,7 @@ export function AsyncSelect({
           align="start"
           sideOffset={-1}
           onOpenAutoFocus={e => e.preventDefault()}
-          onInteractOutside={() => setOpen(false)}
+          onInteractOutside={e => { if (anchorRef.current?.contains(e.target as Node)) return; setOpen(false); }}
         >
           <div
             role="listbox"

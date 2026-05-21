@@ -7,7 +7,7 @@ import * as o from "@radix-ui/react-popover";
 import { DismissableLayerBranch as s } from "@radix-ui/react-dismissable-layer";
 //#region src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx
 function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, selectedOptions: f = [], placeholder: p = "Buscar…", disabled: m, readOnly: h, dark: g, size: _ = "md", id: v, "aria-label": y, "aria-describedby": b }) {
-	let [x, S] = a(!1), [C, w] = a(""), [T, E] = a(!1), [D, O] = a([]), [k, A] = a(!1), [j, M] = a(u), N = i(null), P = i(null), F = r(), I = l === void 0 ? j : l, L = n(async (e) => {
+	let [x, S] = a(!1), [C, w] = a(""), [T, E] = a(!1), [D, O] = a([]), [k, A] = a(!1), [j, M] = a(u), N = i(null), P = i(null), F = i(null), I = r(), L = l === void 0 ? j : l, R = n(async (e) => {
 		E(!0), A(!1);
 		try {
 			O(await c(e));
@@ -17,37 +17,37 @@ function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, sele
 			E(!1), A(!0);
 		}
 	}, [c]);
-	function R(e) {
+	function z(e) {
 		let t = e.target.value;
-		w(t), N.current && clearTimeout(N.current), N.current = setTimeout(() => void L(t), 300);
-	}
-	function z() {
-		m || h || (w(""), O([]), A(!1), S(!0), L(""));
+		w(t), N.current && clearTimeout(N.current), N.current = setTimeout(() => void R(t), 300);
 	}
 	function B() {
+		m || h || (w(""), O([]), A(!1), S(!0), R(""));
+	}
+	function V() {
 		requestAnimationFrame(() => {
-			let e = document.activeElement, t = P.current === e, n = document.getElementById(F)?.contains(e);
+			let e = document.activeElement, t = P.current === e, n = document.getElementById(I)?.contains(e);
 			!t && !n && S(!1);
 		});
 	}
-	function V(e) {
-		let t = I.includes(e) ? I.filter((t) => t !== e) : [...I, e];
+	function H(e) {
+		let t = L.includes(e) ? L.filter((t) => t !== e) : [...L, e];
 		l === void 0 && M(t), d?.(t);
 	}
-	function H(e) {
+	function U(e) {
 		if (e.key === "Escape") S(!1), w("");
-		else if (e.key === "ArrowDown" && x) e.preventDefault(), (document.getElementById(F)?.querySelector("[role=\"option\"]"))?.focus();
-		else if (e.key === "Backspace" && C === "" && I.length > 0) {
-			let e = I[I.length - 1];
-			V(e);
+		else if (e.key === "ArrowDown" && x) e.preventDefault(), (document.getElementById(I)?.querySelector("[role=\"option\"]"))?.focus();
+		else if (e.key === "Backspace" && C === "" && L.length > 0) {
+			let e = L[L.length - 1];
+			H(e);
 		}
 	}
-	let U = [
+	let W = [
 		"async-multi-select",
 		_ === "md" ? "" : `async-multi-select--${_}`,
 		m ? "async-multi-select--disabled" : "",
 		x ? "async-multi-select--open" : ""
-	].filter(Boolean).join(" "), W = [
+	].filter(Boolean).join(" "), G = [
 		"async-multi-select__content",
 		_ === "md" ? "" : `async-multi-select__content--${_}`,
 		g ? "async-multi-select__content--dark" : ""
@@ -61,7 +61,8 @@ function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, sele
 		children: [/* @__PURE__ */ e(o.Anchor, {
 			asChild: !0,
 			children: /* @__PURE__ */ t("div", {
-				className: U,
+				ref: F,
+				className: W,
 				"data-state": x ? "open" : "closed",
 				children: [/* @__PURE__ */ t("div", {
 					className: "async-multi-select__input-area",
@@ -76,7 +77,7 @@ function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, sele
 							"aria-label": `Quitar ${n.label}`,
 							tabIndex: -1,
 							onMouseDown: (e) => {
-								e.preventDefault(), V(n.value);
+								e.preventDefault(), H(n.value);
 							},
 							children: "×"
 						})]
@@ -86,18 +87,18 @@ function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, sele
 						type: "text",
 						className: "async-multi-select__input",
 						value: C,
-						onChange: R,
-						onFocus: z,
-						onBlur: B,
-						onKeyDown: H,
-						placeholder: I.length === 0 ? p : void 0,
+						onChange: z,
+						onFocus: B,
+						onBlur: V,
+						onKeyDown: U,
+						placeholder: L.length === 0 ? p : void 0,
 						disabled: m,
 						readOnly: h,
 						"aria-label": y ?? p,
 						"aria-describedby": b,
 						"aria-expanded": x,
 						"aria-haspopup": "listbox",
-						"aria-controls": F,
+						"aria-controls": I,
 						autoComplete: "off",
 						role: "combobox"
 					})]
@@ -107,16 +108,18 @@ function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, sele
 				})]
 			})
 		}), /* @__PURE__ */ e(o.Portal, { children: /* @__PURE__ */ e(s, { children: /* @__PURE__ */ e(o.Content, {
-			className: W,
+			className: G,
 			align: "start",
 			sideOffset: -1,
 			onOpenAutoFocus: (e) => e.preventDefault(),
-			onInteractOutside: () => S(!1),
+			onInteractOutside: (e) => {
+				F.current?.contains(e.target) || S(!1);
+			},
 			children: /* @__PURE__ */ t("div", {
 				role: "listbox",
 				"aria-multiselectable": "true",
 				"aria-label": y ?? p,
-				id: F,
+				id: I,
 				onKeyDown: (e) => {
 					let t = Array.from(e.currentTarget.querySelectorAll("[role=\"option\"]")), n = t.indexOf(document.activeElement);
 					e.key === "ArrowDown" ? (e.preventDefault(), t[Math.min(n + 1, t.length - 1)]?.focus()) : e.key === "ArrowUp" ? (e.preventDefault(), n <= 0 ? P.current?.focus() : t[n - 1]?.focus()) : e.key === "Escape" && (S(!1), P.current?.focus());
@@ -136,7 +139,7 @@ function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, sele
 						children: "Sin resultados"
 					}),
 					!T && D.map((n, r) => {
-						let i = I.includes(n.value);
+						let i = L.includes(n.value);
 						return /* @__PURE__ */ t("button", {
 							type: "button",
 							role: "option",
@@ -145,7 +148,7 @@ function c({ onSearch: c, value: l, defaultValue: u = [], onValueChange: d, sele
 							tabIndex: r === 0 ? 0 : -1,
 							onMouseDown: (e) => e.preventDefault(),
 							onClick: () => {
-								V(n.value), P.current?.focus();
+								H(n.value), P.current?.focus();
 							},
 							children: [/* @__PURE__ */ e("span", {
 								className: "async-multi-select__item-check",

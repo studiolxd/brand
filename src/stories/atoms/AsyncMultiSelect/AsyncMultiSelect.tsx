@@ -50,6 +50,7 @@ export function AsyncMultiSelect({
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const anchorRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
 
   const currentValues = value !== undefined ? value : internalValues;
@@ -131,7 +132,7 @@ export function AsyncMultiSelect({
   return (
     <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) setOpen(false); }}>
       <RadixPopover.Anchor asChild>
-        <div className={triggerClass} data-state={open ? 'open' : 'closed'}>
+        <div ref={anchorRef} className={triggerClass} data-state={open ? 'open' : 'closed'}>
           <div className="async-multi-select__input-area">
             {selectedOptions.map(opt => (
               <span key={opt.value} className="async-multi-select__pill">
@@ -182,7 +183,7 @@ export function AsyncMultiSelect({
           align="start"
           sideOffset={-1}
           onOpenAutoFocus={e => e.preventDefault()}
-          onInteractOutside={() => setOpen(false)}
+          onInteractOutside={e => { if (anchorRef.current?.contains(e.target as Node)) return; setOpen(false); }}
         >
           <div
             role="listbox"
