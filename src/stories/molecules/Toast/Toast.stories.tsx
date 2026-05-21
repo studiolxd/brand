@@ -4,7 +4,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Toaster } from './Toaster';
 
 const meta: Meta<typeof Toaster> = {
-  title: 'Moléculas/Toaster',
+  title: 'Molecules/Toaster',
   component: Toaster,
   parameters: { layout: 'centered' },
   decorators: [

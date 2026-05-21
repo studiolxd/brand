@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Table } from './Table';
 
 const meta: Meta<typeof Table> = {
-  title: 'Moléculas/Table',
+  title: 'Molecules/Table',
   component: Table,
   parameters: {
     layout: 'padded',
