@@ -5,6 +5,7 @@ import { InputField } from '../InputField/InputField';
 import { TextareaField } from '../TextareaField/TextareaField';
 import { CheckboxField } from '../CheckboxField/CheckboxField';
 import { InputPhoneField } from '../InputPhoneField/InputPhoneField';
+import { PasswordField } from '../PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
 
 const meta: Meta<typeof Form> = {
@@ -106,6 +107,48 @@ export const ContactFormExample: Story = {
       </Form>
     );
   },
+};
+
+export const LoginFormExample: Story = {
+  name: 'Ejemplo: LoginForm',
+  render: () => (
+    <Form
+      actions={<Button variant="primary" type="submit" block>Iniciar sesión</Button>}
+    >
+      <InputField id="ex-login-email" label="Email" labelHidden={false} type="email" placeholder="tu@email.com" />
+      <PasswordField id="ex-login-password" label="Contraseña" labelHidden={false} placeholder="Tu contraseña" />
+      <CheckboxField id="ex-login-remember" label="Mantener la sesión iniciada" />
+    </Form>
+  ),
+};
+
+export const LoginFormWithErrorsExample: Story = {
+  name: 'Ejemplo: LoginForm con errores',
+  render: () => (
+    <Form
+      errors={['Las credenciales introducidas no son correctas.']}
+      actions={<Button variant="primary" type="submit" block>Iniciar sesión</Button>}
+    >
+      <InputField
+        id="ex-login-error-email"
+        label="Email"
+        labelHidden={false}
+        type="email"
+        placeholder="tu@email.com"
+        error
+        errorMessage="Introduce un email válido."
+      />
+      <PasswordField
+        id="ex-login-error-password"
+        label="Contraseña"
+        labelHidden={false}
+        placeholder="Tu contraseña"
+        error
+        errorMessage="La contraseña no puede estar vacía."
+      />
+      <CheckboxField id="ex-login-error-remember" label="Mantener la sesión iniciada" />
+    </Form>
+  ),
 };
 
 export const NewsletterFormExample: Story = {
