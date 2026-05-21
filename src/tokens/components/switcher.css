@@ -1,0 +1,29 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --switcher-track-width: 2.75em; /** Ancho del track */
+  --switcher-track-height: 1.5em; /** Alto del track */
+  --switcher-track-padding: 0.1875em; /** Padding interior del track — separa el thumb de los bordes */
+  --switcher-thumb-size: 1.125em; /** Tamaño del thumb (cuadrado) */
+  --switcher-cursor: pointer; /** Cursor */
+  --switcher-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --switcher-sm-track-width: 2.25em; /** Ancho del track — variante sm */
+  --switcher-sm-track-height: 1.25em; /** Alto del track — variante sm */
+  --switcher-sm-thumb-size: 0.875em; /** Tamaño del thumb — variante sm */
+  --switcher-lg-track-width: 3.5em; /** Ancho del track — variante lg */
+  --switcher-lg-track-height: 1.875em; /** Alto del track — variante lg */
+  --switcher-lg-thumb-size: 1.5em; /** Tamaño del thumb — variante lg */
+  --switcher-track-bg: var(--color-grey-light); /** Fondo del track — estado off */
+  --switcher-track-border-radius: var(--border-radius-full); /** Radio del track (pill) */
+  --switcher-thumb-bg: var(--color-white); /** Color del thumb */
+  --switcher-thumb-border-radius: var(--border-radius-full); /** Radio del thumb (circular) */
+  --switcher-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
+  --switcher-transition-duration: var(--motion-duration-fast); /** Duración de la transición */
+  --switcher-transition-easing: var(--motion-easing-default); /** Easing de la transición */
+  --switcher-focus-ring-width: var(--border-width-md); /** Grosor del anillo de foco */
+  --switcher-focus-ring-offset: var(--border-width-sm); /** Separación del anillo de foco */
+  --switcher-track-bg-checked: var(--color-primary); /** Fondo del track — estado on */
+  --switcher-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}

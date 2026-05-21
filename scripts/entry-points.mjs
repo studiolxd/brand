@@ -28,6 +28,7 @@ export const entryPoints = {
   'hero-video':          'src/stories/atoms/HeroVideo/HeroVideo.tsx',
   'highlight':           'src/stories/atoms/Highlight/Highlight.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
+  'switcher':            'src/stories/atoms/Switcher/Switcher.tsx',
   'tabs':                'src/stories/atoms/Tabs/Tabs.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   // Molecules
@@ -41,6 +42,7 @@ export const entryPoints = {
   'card-square':         'src/stories/molecules/CardSquare/CardSquare.tsx',
   'checkbox-field':      'src/stories/molecules/CheckboxField/CheckboxField.tsx',
   'radio-field':         'src/stories/molecules/RadioField/RadioField.tsx',
+  'switcher-field':      'src/stories/molecules/SwitcherField/SwitcherField.tsx',
   'form':                'src/stories/molecules/Form/Form.tsx',
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
   'multi-select-field':  'src/stories/molecules/MultiSelectField/MultiSelectField.tsx',
@@ -70,8 +72,8 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'accordion', 'button', 'carousel', 'checkbox', 'radio', 'hamburger', 'hero-video', 'input',
-  'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'form',
+  'accordion', 'button', 'carousel', 'checkbox', 'radio', 'switcher', 'hamburger', 'hero-video', 'input',
+  'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'sidebar',

@@ -1,0 +1,24 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --switcher-field-cursor: pointer; /** Cursor */
+  --switcher-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --switcher-field-label-text-transform: none; /** Sin transformación */
+  --switcher-field-gap: var(--spacing-3); /** Separación entre el switcher y el label */
+  --switcher-field-sm-gap: var(--spacing-2); /** Gap — variante sm */
+  --switcher-field-sm-padding-inline: var(--spacing-3); /** Padding inline — variante sm */
+  --switcher-field-sm-padding-block: var(--spacing-2); /** Padding block — variante sm */
+  --switcher-field-lg-gap: var(--spacing-4); /** Gap — variante lg */
+  --switcher-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
+  --switcher-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
+  --switcher-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
+  --switcher-field-label-font-size: var(--font-size-3); /** Tamaño de fuente (16px) */
+  --switcher-field-label-line-height: var(--line-height-normal); /** Interlineado */
+  --switcher-field-label-letter-spacing: var(--letter-spacing-normal); /** Interletraje */
+  --switcher-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
+  --switcher-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
+  --switcher-field-label-font-weight: var(--font-weight-default); /** Peso tipográfico */
+  --switcher-field-label-color: var(--color-text-on-light); /** Color del label */
+}

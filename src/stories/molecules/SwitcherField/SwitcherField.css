@@ -1,0 +1,35 @@
+.switcher-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--switcher-field-gap);
+  padding-inline: var(--switcher-field-padding-inline);
+  padding-block: var(--switcher-field-padding-block);
+  cursor: var(--switcher-field-cursor);
+}
+
+.switcher-field__label {
+  font-family: var(--switcher-field-label-font-family);
+  font-size: var(--switcher-field-label-font-size);
+  font-weight: var(--switcher-field-label-font-weight);
+  line-height: var(--switcher-field-label-line-height);
+  color: var(--switcher-field-label-color);
+  letter-spacing: var(--switcher-field-label-letter-spacing);
+  text-transform: var(--switcher-field-label-text-transform);
+}
+
+.switcher-field--disabled {
+  cursor: var(--switcher-field-disabled-cursor);
+}
+
+/* ─── Size variants ──────────────────────────────────────────── */
+.switcher-field.switcher-field--sm {
+  --switcher-field-gap: var(--switcher-field-sm-gap);
+  --switcher-field-padding-inline: var(--switcher-field-sm-padding-inline);
+  --switcher-field-padding-block: var(--switcher-field-sm-padding-block);
+}
+
+.switcher-field.switcher-field--lg {
+  --switcher-field-gap: var(--switcher-field-lg-gap);
+  --switcher-field-padding-inline: var(--switcher-field-lg-padding-inline);
+  --switcher-field-padding-block: var(--switcher-field-lg-padding-block);
+}

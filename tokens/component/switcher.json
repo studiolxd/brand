@@ -1,0 +1,27 @@
+{
+  "switcher": {
+    "track-width":         { "$value": "2.75em",                      "$type": "dimension", "$description": "Ancho del track" },
+    "track-height":        { "$value": "1.5em",                       "$type": "dimension", "$description": "Alto del track" },
+    "track-bg":            { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Fondo del track — estado off" },
+    "track-bg-checked":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo del track — estado on" },
+    "track-border-radius": { "$value": "{border-radius.full}",        "$type": "dimension", "$description": "Radio del track (pill)" },
+    "track-padding":       { "$value": "0.1875em",                    "$type": "dimension", "$description": "Padding interior del track — separa el thumb de los bordes" },
+    "thumb-size":          { "$value": "1.125em",                     "$type": "dimension", "$description": "Tamaño del thumb (cuadrado)" },
+    "thumb-bg":            { "$value": "{color.white}",               "$type": "color",     "$description": "Color del thumb" },
+    "thumb-border-radius": { "$value": "{border-radius.full}",        "$type": "dimension", "$description": "Radio del thumb (circular)" },
+    "cursor":              { "$value": "pointer",                      "$type": "string",    "$description": "Cursor" },
+    "disabled-cursor":     { "$value": "not-allowed",                  "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "disabled-opacity":    { "$value": "{opacity.disabled}",          "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },
+    "transition-duration": { "$value": "{motion.duration.fast}",      "$type": "duration",  "$description": "Duración de la transición" },
+    "transition-easing":   { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Easing de la transición" },
+    "focus-ring-width":    { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":   { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "focus-ring-color":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
+    "sm-track-width":      { "$value": "2.25em",                      "$type": "dimension", "$description": "Ancho del track — variante sm" },
+    "sm-track-height":     { "$value": "1.25em",                      "$type": "dimension", "$description": "Alto del track — variante sm" },
+    "sm-thumb-size":       { "$value": "0.875em",                     "$type": "dimension", "$description": "Tamaño del thumb — variante sm" },
+    "lg-track-width":      { "$value": "3.5em",                       "$type": "dimension", "$description": "Ancho del track — variante lg" },
+    "lg-track-height":     { "$value": "1.875em",                     "$type": "dimension", "$description": "Alto del track — variante lg" },
+    "lg-thumb-size":       { "$value": "1.5em",                       "$type": "dimension", "$description": "Tamaño del thumb — variante lg" }
+  }
+}
