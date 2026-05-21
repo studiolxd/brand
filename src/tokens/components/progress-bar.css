@@ -6,7 +6,7 @@
   --progress-bar-height-sm: var(--spacing-2); /** 8px — compact bar without label */
   --progress-bar-height-md: var(--spacing-5); /** 24px — default bar */
   --progress-bar-height-lg: var(--spacing-6); /** 32px — large bar */
-  --progress-bar-border-radius: var(--border-radius-full); /** Pill shape */
+  --progress-bar-border-radius: var(--border-radius-none); /** No border radius */
   --progress-bar-track-bg: var(--color-grey-lightest); /** Track background on light surface */
   --progress-bar-transition-duration: var(--motion-duration-base); /** Fill transition duration */
   --progress-bar-transition-easing: var(--motion-easing-in-out); /** Fill transition easing */

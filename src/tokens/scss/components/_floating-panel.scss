@@ -3,9 +3,9 @@
 
 $floating-panel-bg: #ffffff; // Fondo de cualquier panel flotante (popover, context-menu…)
 $floating-panel-border-width: 1px; // Grosor del borde
-$floating-panel-border-color: #d0d0d0; // Color del borde
-$floating-panel-border-radius: 12px; // Radio de las esquinas
-$floating-panel-shadow: 0 2px 8px rgba(17,30,48,0.10); // Sombra
+$floating-panel-border-color: #111e30; // Color del borde — prussian en modo claro
+$floating-panel-border-radius: 0px; // Sin radio de esquinas
+$floating-panel-shadow: none; // Sin sombra
 $floating-panel-z-index: 1100; // Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales
 $floating-panel-transition-duration: 150ms; // Duración de la animación de entrada/salida
 $floating-panel-transition-easing: ease; // Easing de la animación

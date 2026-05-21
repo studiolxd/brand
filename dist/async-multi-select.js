@@ -1,142 +1,143 @@
 'use client';
 import './async-multi-select.css';
 "use client";
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
-import { useCallback as n, useEffect as r, useId as i, useRef as a, useState as o } from "react";
-import * as s from "@radix-ui/react-popover";
-import { DismissableLayerBranch as c } from "@radix-ui/react-dismissable-layer";
+import { Close as e } from "./close.js";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { useCallback as r, useEffect as i, useId as a, useRef as o, useState as s } from "react";
+import * as c from "@radix-ui/react-popover";
+import { DismissableLayerBranch as l } from "@radix-ui/react-dismissable-layer";
 //#region src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx
-function l({ onSearch: l, value: u, defaultValue: d = [], onValueChange: f, selectedOptions: p = [], placeholder: m = "Buscar…", disabled: h, readOnly: g, dark: _, size: v = "md", id: y, "aria-label": b, "aria-describedby": x }) {
-	let [S, C] = o(!1), [w, T] = o(""), [E, D] = o(!1), [O, k] = o([]), [A, j] = o(!1), [M, N] = o(-1), [P, F] = o(d), I = a(null), L = a(null), R = a(null), z = i(), B = i(), V = u === void 0 ? P : u, H = (e) => `${B}-opt-${e}`;
-	r(() => {
-		N(-1);
-	}, [O]);
-	let U = n(async (e) => {
-		D(!0), j(!1);
+function u({ onSearch: u, value: d, defaultValue: f = [], onValueChange: p, selectedOptions: m = [], placeholder: h = "Buscar…", disabled: g, readOnly: _, dark: v, size: y = "md", id: b, "aria-label": x, "aria-describedby": S }) {
+	let [C, w] = s(!1), [T, E] = s(""), [D, O] = s(!1), [k, A] = s([]), [j, M] = s(!1), [N, P] = s(-1), [F, I] = s(f), L = o(null), R = o(null), z = o(null), B = a(), V = a(), H = d === void 0 ? F : d, U = (e) => `${V}-opt-${e}`;
+	i(() => {
+		P(-1);
+	}, [k]);
+	let W = r(async (e) => {
+		O(!0), M(!1);
 		try {
-			k(await l(e));
+			A(await u(e));
 		} catch {
-			k([]);
+			A([]);
 		} finally {
-			D(!1), j(!0);
+			O(!1), M(!0);
 		}
-	}, [l]);
-	function W(e) {
-		let t = e.target.value;
-		T(t), S || C(!0), I.current && clearTimeout(I.current), I.current = setTimeout(() => void U(t), 300);
-	}
+	}, [u]);
 	function G(e) {
-		h || g || S || (e.preventDefault(), L.current?.focus(), N(-1), T(""), k([]), j(!1), C(!0), U(""));
+		let t = e.target.value;
+		E(t), C || w(!0), L.current && clearTimeout(L.current), L.current = setTimeout(() => void W(t), 300);
 	}
 	function K(e) {
-		let t = V.includes(e) ? V.filter((t) => t !== e) : [...V, e];
-		u === void 0 && F(t), f?.(t);
+		g || _ || C || (e.preventDefault(), R.current?.focus(), P(-1), E(""), A([]), M(!1), w(!0), W(""));
 	}
 	function q(e) {
-		if (e.key === "ArrowDown") e.preventDefault(), S ? N((e) => Math.min(e + 1, O.length - 1)) : (C(!0), U(w));
-		else if (e.key === "ArrowUp") e.preventDefault(), N((e) => Math.max(e - 1, -1));
-		else if (e.key === "Enter" && M >= 0 && O[M]) e.preventDefault(), K(O[M].value), L.current?.focus();
-		else if (e.key === "Escape") C(!1), T(""), N(-1);
-		else if (e.key === "Tab") C(!1), N(-1);
-		else if (e.key === "Backspace" && w === "" && V.length > 0) {
-			let e = V[V.length - 1];
-			K(e);
+		let t = H.includes(e) ? H.filter((t) => t !== e) : [...H, e];
+		d === void 0 && I(t), p?.(t);
+	}
+	function J(e) {
+		if (e.key === "ArrowDown") e.preventDefault(), C ? P((e) => Math.min(e + 1, k.length - 1)) : (w(!0), W(T));
+		else if (e.key === "ArrowUp") e.preventDefault(), P((e) => Math.max(e - 1, -1));
+		else if (e.key === "Enter" && N >= 0 && k[N]) e.preventDefault(), q(k[N].value), R.current?.focus();
+		else if (e.key === "Escape") w(!1), E(""), P(-1);
+		else if (e.key === "Tab") w(!1), P(-1);
+		else if (e.key === "Backspace" && T === "" && H.length > 0) {
+			let e = H[H.length - 1];
+			q(e);
 		}
 	}
-	let J = [
+	let Y = [
 		"async-multi-select",
-		v === "md" ? "" : `async-multi-select--${v}`,
-		h ? "async-multi-select--disabled" : "",
-		S ? "async-multi-select--open" : ""
-	].filter(Boolean).join(" "), Y = [
+		y === "md" ? "" : `async-multi-select--${y}`,
+		g ? "async-multi-select--disabled" : "",
+		C ? "async-multi-select--open" : ""
+	].filter(Boolean).join(" "), X = [
 		"async-multi-select__content",
-		v === "md" ? "" : `async-multi-select__content--${v}`,
-		_ ? "async-multi-select__content--dark" : ""
+		y === "md" ? "" : `async-multi-select__content--${y}`,
+		v ? "async-multi-select__content--dark" : ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ t(s.Root, {
-		open: S,
+	return /* @__PURE__ */ n(c.Root, {
+		open: C,
 		modal: !1,
 		onOpenChange: () => {},
-		children: [/* @__PURE__ */ e(s.Anchor, {
+		children: [/* @__PURE__ */ t(c.Anchor, {
 			asChild: !0,
-			children: /* @__PURE__ */ t("div", {
-				ref: R,
-				className: J,
-				"data-state": S ? "open" : "closed",
-				children: [/* @__PURE__ */ t("div", {
+			children: /* @__PURE__ */ n("div", {
+				ref: z,
+				className: Y,
+				"data-state": C ? "open" : "closed",
+				children: [/* @__PURE__ */ n("div", {
 					className: "async-multi-select__input-area",
-					children: [p.map((n) => /* @__PURE__ */ t("span", {
+					children: [m.map((r) => /* @__PURE__ */ n("span", {
 						className: "async-multi-select__pill",
-						children: [/* @__PURE__ */ e("span", {
+						children: [/* @__PURE__ */ t("span", {
 							className: "async-multi-select__pill-label",
-							children: n.label
-						}), !h && !g && /* @__PURE__ */ e("button", {
+							children: r.label
+						}), !g && !_ && /* @__PURE__ */ t("button", {
 							type: "button",
 							className: "async-multi-select__pill-remove",
-							"aria-label": `Quitar ${n.label}`,
+							"aria-label": `Quitar ${r.label}`,
 							tabIndex: -1,
 							onMouseDown: (e) => {
-								e.preventDefault(), K(n.value);
+								e.preventDefault(), q(r.value);
 							},
-							children: "×"
+							children: /* @__PURE__ */ t(e, { size: "xs" })
 						})]
-					}, n.value)), /* @__PURE__ */ e("input", {
-						ref: L,
-						id: y,
+					}, r.value)), /* @__PURE__ */ t("input", {
+						ref: R,
+						id: b,
 						type: "text",
 						className: "async-multi-select__input",
-						value: w,
-						onChange: W,
-						onPointerDown: G,
-						onKeyDown: q,
-						placeholder: V.length === 0 ? m : void 0,
-						disabled: h,
-						readOnly: g,
-						"aria-label": b ?? m,
-						"aria-describedby": x,
-						"aria-expanded": S,
+						value: T,
+						onChange: G,
+						onPointerDown: K,
+						onKeyDown: J,
+						placeholder: H.length === 0 ? h : void 0,
+						disabled: g,
+						readOnly: _,
+						"aria-label": x ?? h,
+						"aria-describedby": S,
+						"aria-expanded": C,
 						"aria-haspopup": "listbox",
-						"aria-controls": z,
-						"aria-activedescendant": M >= 0 ? H(M) : void 0,
+						"aria-controls": B,
+						"aria-activedescendant": N >= 0 ? U(N) : void 0,
 						autoComplete: "off",
 						role: "combobox"
 					})]
-				}), E && /* @__PURE__ */ e("span", {
+				}), D && /* @__PURE__ */ t("span", {
 					className: "async-multi-select__spinner",
 					"aria-hidden": "true"
 				})]
 			})
-		}), /* @__PURE__ */ e(s.Portal, { children: /* @__PURE__ */ e(c, { children: /* @__PURE__ */ e(s.Content, {
-			className: Y,
+		}), /* @__PURE__ */ t(c.Portal, { children: /* @__PURE__ */ t(l, { children: /* @__PURE__ */ t(c.Content, {
+			className: X,
 			align: "start",
 			sideOffset: -1,
 			onOpenAutoFocus: (e) => e.preventDefault(),
 			onInteractOutside: (e) => {
-				R.current?.contains(e.target) || C(!1);
+				z.current?.contains(e.target) || w(!1);
 			},
-			children: /* @__PURE__ */ t("div", {
+			children: /* @__PURE__ */ n("div", {
 				role: "listbox",
 				"aria-multiselectable": "true",
-				"aria-label": b ?? m,
-				id: z,
+				"aria-label": x ?? h,
+				id: B,
 				children: [
-					E && /* @__PURE__ */ e("div", {
+					D && /* @__PURE__ */ t("div", {
 						className: "async-multi-select__loading",
 						role: "status",
 						"aria-label": "Buscando…",
-						children: /* @__PURE__ */ e("span", {
+						children: /* @__PURE__ */ t("span", {
 							className: "async-multi-select__spinner",
 							"aria-hidden": "true"
 						})
 					}),
-					!E && A && O.length === 0 && /* @__PURE__ */ e("div", {
+					!D && j && k.length === 0 && /* @__PURE__ */ t("div", {
 						className: "async-multi-select__empty",
 						children: "Sin resultados"
 					}),
-					!E && O.map((n, r) => {
-						let i = V.includes(n.value), a = M === r;
-						return /* @__PURE__ */ t("div", {
-							id: H(r),
+					!D && k.map((e, r) => {
+						let i = H.includes(e.value), a = N === r;
+						return /* @__PURE__ */ n("div", {
+							id: U(r),
 							role: "option",
 							"aria-selected": i,
 							className: [
@@ -146,14 +147,14 @@ function l({ onSearch: l, value: u, defaultValue: d = [], onValueChange: f, sele
 							].filter(Boolean).join(" "),
 							onPointerDown: (e) => e.preventDefault(),
 							onClick: () => {
-								K(n.value), L.current?.focus();
+								q(e.value), R.current?.focus();
 							},
-							children: [/* @__PURE__ */ e("span", {
+							children: [/* @__PURE__ */ t("span", {
 								className: "async-multi-select__item-check",
 								"aria-hidden": "true",
-								children: /* @__PURE__ */ e("span", { className: "async-multi-select__item-check-mark" })
-							}), /* @__PURE__ */ e("span", { children: n.label })]
-						}, n.value);
+								children: /* @__PURE__ */ t("span", { className: "async-multi-select__item-check-mark" })
+							}), /* @__PURE__ */ t("span", { children: e.label })]
+						}, e.value);
 					})
 				]
 			})
@@ -161,4 +162,4 @@ function l({ onSearch: l, value: u, defaultValue: d = [], onValueChange: f, sele
 	});
 }
 //#endregion
-export { l as AsyncMultiSelect };
+export { u as AsyncMultiSelect };

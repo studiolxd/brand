@@ -1,46 +1,47 @@
 'use client';
 import './modal.css';
-import { VisuallyHidden as e } from "./visually-hidden.js";
-import { Fragment as t, jsx as n, jsxs as r } from "react/jsx-runtime";
-import * as i from "@radix-ui/react-dialog";
+import { Close as e } from "./close.js";
+import { VisuallyHidden as t } from "./visually-hidden.js";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
+import * as a from "@radix-ui/react-dialog";
 //#region src/stories/molecules/Modal/Modal.tsx
-function a({ open: a, onClose: o, title: s, children: c, dark: l = !1 }) {
-	let u = ["modal__content", l && "modal__content--dark"].filter(Boolean).join(" ");
-	return /* @__PURE__ */ n(i.Root, {
-		open: a,
+function o({ open: o, onClose: s, title: c, children: l, dark: u = !1 }) {
+	let d = ["modal__content", u && "modal__content--dark"].filter(Boolean).join(" ");
+	return /* @__PURE__ */ r(a.Root, {
+		open: o,
 		onOpenChange: (e) => {
-			e || o();
+			e || s();
 		},
-		children: /* @__PURE__ */ r(i.Portal, { children: [/* @__PURE__ */ n(i.Overlay, { className: "modal__overlay" }), /* @__PURE__ */ r(i.Content, {
-			className: u,
+		children: /* @__PURE__ */ i(a.Portal, { children: [/* @__PURE__ */ r(a.Overlay, { className: "modal__overlay" }), /* @__PURE__ */ i(a.Content, {
+			className: d,
 			"aria-describedby": void 0,
 			onOpenAutoFocus: (e) => e.preventDefault(),
-			children: [s ? /* @__PURE__ */ r("header", {
+			children: [c ? /* @__PURE__ */ i("header", {
 				className: "modal__header",
-				children: [/* @__PURE__ */ n(i.Title, {
+				children: [/* @__PURE__ */ r(a.Title, {
 					className: "modal__title",
-					children: s
-				}), /* @__PURE__ */ n(i.Close, {
+					children: c
+				}), /* @__PURE__ */ r(a.Close, {
 					className: "modal__close",
 					"aria-label": "Cerrar",
-					children: "✕"
+					children: /* @__PURE__ */ r(e, { size: "sm" })
 				})]
-			}) : /* @__PURE__ */ r(t, { children: [/* @__PURE__ */ n(i.Title, {
+			}) : /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(a.Title, {
 				asChild: !0,
-				children: /* @__PURE__ */ n(e, { children: "Diálogo" })
-			}), /* @__PURE__ */ n("header", {
+				children: /* @__PURE__ */ r(t, { children: "Diálogo" })
+			}), /* @__PURE__ */ r("header", {
 				className: "modal__header modal__header--no-title",
-				children: /* @__PURE__ */ n(i.Close, {
+				children: /* @__PURE__ */ r(a.Close, {
 					className: "modal__close",
 					"aria-label": "Cerrar",
-					children: "✕"
+					children: /* @__PURE__ */ r(e, { size: "sm" })
 				})
-			})] }), /* @__PURE__ */ n("div", {
+			})] }), /* @__PURE__ */ r("div", {
 				className: "modal__body",
-				children: c
+				children: l
 			})]
 		})] })
 	});
 }
 //#endregion
-export { a as Modal };
+export { o as Modal };

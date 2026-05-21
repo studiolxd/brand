@@ -4,7 +4,7 @@
 $progress-bar-height-sm: 0.5rem; // 8px — compact bar without label
 $progress-bar-height-md: 1.5rem; // 24px — default bar
 $progress-bar-height-lg: 2rem; // 32px — large bar
-$progress-bar-border-radius: 9999px; // Pill shape
+$progress-bar-border-radius: 0px; // No border radius
 $progress-bar-track-bg: #f2f2f2; // Track background on light surface
 $progress-bar-transition-duration: 250ms; // Fill transition duration
 $progress-bar-transition-easing: ease-in-out; // Fill transition easing

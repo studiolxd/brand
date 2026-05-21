@@ -2,111 +2,112 @@
 import './multi-select.css';
 "use client";
 import { Chevron as e } from "./chevron.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { useEffect as r, useId as i, useRef as a, useState as o } from "react";
-import * as s from "@radix-ui/react-popover";
+import { Close as t } from "./close.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { useEffect as i, useId as a, useRef as o, useState as s } from "react";
+import * as c from "@radix-ui/react-popover";
 //#region src/stories/atoms/MultiSelect/MultiSelect.tsx
-function c({ options: c, value: l, defaultValue: u = [], placeholder: d = "Seleccionar…", disabled: f, readOnly: p, dark: m, size: h = "md", onValueChange: g, id: _, "aria-label": v }) {
-	let [y, b] = o(!1), [x, S] = o(u), [C, w] = o(0), T = a(null), E = i(), D = l === void 0 ? x : l;
-	function O(e) {
-		let t = D.includes(e) ? D.filter((t) => t !== e) : [...D, e];
-		l === void 0 && S(t), g?.(t);
-	}
+function l({ options: l, value: u, defaultValue: d = [], placeholder: f = "Seleccionar…", disabled: p, readOnly: m, dark: h, size: g = "md", onValueChange: _, id: v, "aria-label": y }) {
+	let [b, x] = s(!1), [S, C] = s(d), [w, T] = s(0), E = o(null), D = a(), O = u === void 0 ? S : u;
 	function k(e) {
-		f || p || (b(e), e && w(0));
+		let t = O.includes(e) ? O.filter((t) => t !== e) : [...O, e];
+		u === void 0 && C(t), _?.(t);
 	}
-	r(() => {
-		!y || !T.current || T.current.querySelectorAll("[role=\"option\"]")[C]?.focus();
-	}, [C, y]);
 	function A(e) {
-		e.key === "ArrowDown" ? (e.preventDefault(), w((e) => Math.min(e + 1, c.length - 1))) : e.key === "ArrowUp" ? (e.preventDefault(), w((e) => Math.max(e - 1, 0))) : (e.key === " " || e.key === "Enter") && (e.preventDefault(), C >= 0 && C < c.length && O(c[C].value));
+		p || m || (x(e), e && T(0));
 	}
-	let j = [
+	i(() => {
+		!b || !E.current || E.current.querySelectorAll("[role=\"option\"]")[w]?.focus();
+	}, [w, b]);
+	function j(e) {
+		e.key === "ArrowDown" ? (e.preventDefault(), T((e) => Math.min(e + 1, l.length - 1))) : e.key === "ArrowUp" ? (e.preventDefault(), T((e) => Math.max(e - 1, 0))) : (e.key === " " || e.key === "Enter") && (e.preventDefault(), w >= 0 && w < l.length && k(l[w].value));
+	}
+	let M = [
 		"multi-select",
-		h === "md" ? "" : `multi-select--${h}`,
-		f ? "multi-select--disabled" : ""
-	].filter(Boolean).join(" "), M = [
+		g === "md" ? "" : `multi-select--${g}`,
+		p ? "multi-select--disabled" : ""
+	].filter(Boolean).join(" "), N = [
 		"multi-select__content",
-		h === "md" ? "" : `multi-select__content--${h}`,
-		m ? "multi-select__content--dark" : ""
+		g === "md" ? "" : `multi-select__content--${g}`,
+		h ? "multi-select__content--dark" : ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ n(s.Root, {
-		open: y,
-		onOpenChange: k,
-		children: [/* @__PURE__ */ t(s.Trigger, {
+	return /* @__PURE__ */ r(c.Root, {
+		open: b,
+		onOpenChange: A,
+		children: [/* @__PURE__ */ n(c.Trigger, {
 			asChild: !0,
-			children: /* @__PURE__ */ n("div", {
-				className: j,
-				tabIndex: f ? -1 : 0,
+			children: /* @__PURE__ */ r("div", {
+				className: M,
+				tabIndex: p ? -1 : 0,
 				role: "combobox",
-				"aria-expanded": y,
+				"aria-expanded": b,
 				"aria-haspopup": "listbox",
-				"aria-controls": E,
-				"aria-label": v ?? d,
-				"aria-disabled": f || void 0,
-				"aria-readonly": p || void 0,
-				id: _,
-				"data-state": y ? "open" : "closed",
+				"aria-controls": D,
+				"aria-label": y ?? f,
+				"aria-disabled": p || void 0,
+				"aria-readonly": m || void 0,
+				id: v,
+				"data-state": b ? "open" : "closed",
 				onKeyDown: (e) => {
-					(e.key === " " || e.key === "Enter") && (e.preventDefault(), k(!y));
+					(e.key === " " || e.key === "Enter") && (e.preventDefault(), A(!b));
 				},
-				children: [/* @__PURE__ */ t("div", {
+				children: [/* @__PURE__ */ n("div", {
 					className: "multi-select__values",
-					children: D.length === 0 ? /* @__PURE__ */ t("span", {
+					children: O.length === 0 ? /* @__PURE__ */ n("span", {
 						className: "multi-select__placeholder",
-						children: d
-					}) : D.map((e) => {
-						let r = c.find((t) => t.value === e);
-						return r ? /* @__PURE__ */ n("span", {
+						children: f
+					}) : O.map((e) => {
+						let i = l.find((t) => t.value === e);
+						return i ? /* @__PURE__ */ r("span", {
 							className: "multi-select__pill",
-							children: [/* @__PURE__ */ t("span", {
+							children: [/* @__PURE__ */ n("span", {
 								className: "multi-select__pill-label",
-								children: r.label
-							}), !f && !p && /* @__PURE__ */ t("button", {
+								children: i.label
+							}), !p && !m && /* @__PURE__ */ n("button", {
 								type: "button",
 								className: "multi-select__pill-remove",
-								"aria-label": `Quitar ${r.label}`,
+								"aria-label": `Quitar ${i.label}`,
 								tabIndex: -1,
 								onClick: (t) => {
-									t.stopPropagation(), O(e);
+									t.stopPropagation(), k(e);
 								},
-								children: "×"
+								children: /* @__PURE__ */ n(t, { size: "xs" })
 							})]
 						}, e) : null;
 					})
-				}), /* @__PURE__ */ t(e, {
+				}), /* @__PURE__ */ n(e, {
 					className: "multi-select__icon",
-					size: h === "sm" ? "xs" : h === "lg" ? "md" : "sm"
+					size: g === "sm" ? "xs" : g === "lg" ? "md" : "sm"
 				})]
 			})
-		}), /* @__PURE__ */ t(s.Portal, { children: /* @__PURE__ */ t(s.Content, {
-			className: M,
+		}), /* @__PURE__ */ n(c.Portal, { children: /* @__PURE__ */ n(c.Content, {
+			className: N,
 			align: "start",
 			sideOffset: -1,
 			onOpenAutoFocus: (e) => e.preventDefault(),
-			children: /* @__PURE__ */ t("div", {
-				ref: T,
+			children: /* @__PURE__ */ n("div", {
+				ref: E,
 				role: "listbox",
 				"aria-multiselectable": "true",
-				"aria-label": v ?? d,
-				id: E,
-				onKeyDown: A,
-				children: c.map((e, r) => {
-					let i = D.includes(e.value);
-					return /* @__PURE__ */ n("button", {
+				"aria-label": y ?? f,
+				id: D,
+				onKeyDown: j,
+				children: l.map((e, t) => {
+					let i = O.includes(e.value);
+					return /* @__PURE__ */ r("button", {
 						type: "button",
 						role: "option",
 						"aria-selected": i,
 						"aria-label": e["aria-label"] ?? e.label,
 						className: ["multi-select__item", i ? "multi-select__item--selected" : ""].filter(Boolean).join(" "),
-						tabIndex: r === C ? 0 : -1,
-						onClick: () => O(e.value),
-						onFocus: () => w(r),
-						children: [/* @__PURE__ */ t("span", {
+						tabIndex: t === w ? 0 : -1,
+						onClick: () => k(e.value),
+						onFocus: () => T(t),
+						children: [/* @__PURE__ */ n("span", {
 							className: "multi-select__item-check",
 							"aria-hidden": "true",
-							children: /* @__PURE__ */ t("span", { className: "multi-select__item-check-mark" })
-						}), /* @__PURE__ */ t("span", { children: e.label })]
+							children: /* @__PURE__ */ n("span", { className: "multi-select__item-check-mark" })
+						}), /* @__PURE__ */ n("span", { children: e.label })]
 					}, e.value);
 				})
 			})
@@ -114,4 +115,4 @@ function c({ options: c, value: l, defaultValue: u = [], placeholder: d = "Selec
 	});
 }
 //#endregion
-export { c as MultiSelect };
+export { l as MultiSelect };

@@ -1,127 +1,128 @@
 'use client';
 import './async-select.css';
 "use client";
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
-import { useCallback as n, useEffect as r, useId as i, useRef as a, useState as o } from "react";
-import * as s from "@radix-ui/react-popover";
-import { DismissableLayerBranch as c } from "@radix-ui/react-dismissable-layer";
+import { Close as e } from "./close.js";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { useCallback as r, useEffect as i, useId as a, useRef as o, useState as s } from "react";
+import * as c from "@radix-ui/react-popover";
+import { DismissableLayerBranch as l } from "@radix-ui/react-dismissable-layer";
 //#region src/stories/atoms/AsyncSelect/AsyncSelect.tsx
-function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeholder: p = "Buscar…", disabled: m, readOnly: h, dark: g, size: _ = "md", id: v, "aria-label": y, "aria-describedby": b }) {
-	let [x, S] = o(!1), [C, w] = o(""), [T, E] = o(!1), [D, O] = o([]), [k, A] = o(!1), [j, M] = o(-1), [N, P] = o(null), [F, I] = o(null), L = a(null), R = a(null), z = a(null), B = i(), V = i(), H = u === void 0 ? N : u, U = f === void 0 ? F : f, W = (e) => `${V}-opt-${e}`;
-	r(() => {
-		M(-1);
-	}, [D]);
-	let G = n(async (e) => {
-		E(!0), A(!1);
+function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeholder: m = "Buscar…", disabled: h, readOnly: g, dark: _, size: v = "md", id: y, "aria-label": b, "aria-describedby": x }) {
+	let [S, C] = s(!1), [w, T] = s(""), [E, D] = s(!1), [O, k] = s([]), [A, j] = s(!1), [M, N] = s(-1), [P, F] = s(null), [I, L] = s(null), R = o(null), z = o(null), B = o(null), V = a(), H = a(), U = d === void 0 ? P : d, W = p === void 0 ? I : p, G = (e) => `${H}-opt-${e}`;
+	i(() => {
+		N(-1);
+	}, [O]);
+	let K = r(async (e) => {
+		D(!0), j(!1);
 		try {
-			O(await l(e));
+			k(await u(e));
 		} catch {
-			O([]);
+			k([]);
 		} finally {
-			E(!1), A(!0);
+			D(!1), j(!0);
 		}
-	}, [l]);
-	function K(e) {
-		let t = e.target.value;
-		w(t), L.current && clearTimeout(L.current), L.current = setTimeout(() => void G(t), 300);
-	}
+	}, [u]);
 	function q(e) {
-		m || h || x || (e.preventDefault(), R.current?.focus(), M(-1), w(""), O([]), A(!1), S(!0), G(""));
+		let t = e.target.value;
+		T(t), R.current && clearTimeout(R.current), R.current = setTimeout(() => void K(t), 300);
 	}
 	function J(e) {
-		u === void 0 && (P(e.value), I(e)), d?.(e.value, e), S(!1), M(-1), w("");
+		h || g || S || (e.preventDefault(), z.current?.focus(), N(-1), T(""), k([]), j(!1), C(!0), K(""));
 	}
 	function Y(e) {
-		e.stopPropagation(), u === void 0 && (P(null), I(null)), d?.(null, null), w(""), O([]), A(!1), R.current?.focus();
+		d === void 0 && (F(e.value), L(e)), f?.(e.value, e), C(!1), N(-1), T("");
 	}
 	function X(e) {
-		e.key === "ArrowDown" ? (e.preventDefault(), x ? M((e) => Math.min(e + 1, D.length - 1)) : (S(!0), G(C))) : e.key === "ArrowUp" ? (e.preventDefault(), M((e) => Math.max(e - 1, -1))) : e.key === "Enter" && j >= 0 && D[j] ? (e.preventDefault(), J(D[j])) : e.key === "Escape" ? (S(!1), w(""), M(-1)) : e.key === "Tab" ? (S(!1), M(-1)) : !x && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), w(e.key), S(!0), O([]), A(!1), L.current && clearTimeout(L.current), L.current = setTimeout(() => void G(e.key), 300));
+		e.stopPropagation(), d === void 0 && (F(null), L(null)), f?.(null, null), T(""), k([]), j(!1), z.current?.focus();
 	}
-	let Z = x ? C : U?.label ?? "", Q = [
+	function Z(e) {
+		e.key === "ArrowDown" ? (e.preventDefault(), S ? N((e) => Math.min(e + 1, O.length - 1)) : (C(!0), K(w))) : e.key === "ArrowUp" ? (e.preventDefault(), N((e) => Math.max(e - 1, -1))) : e.key === "Enter" && M >= 0 && O[M] ? (e.preventDefault(), Y(O[M])) : e.key === "Escape" ? (C(!1), T(""), N(-1)) : e.key === "Tab" ? (C(!1), N(-1)) : !S && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), T(e.key), C(!0), k([]), j(!1), R.current && clearTimeout(R.current), R.current = setTimeout(() => void K(e.key), 300));
+	}
+	let Q = S ? w : W?.label ?? "", $ = [
 		"async-select",
-		_ === "md" ? "" : `async-select--${_}`,
-		m ? "async-select--disabled" : ""
-	].filter(Boolean).join(" "), $ = [
+		v === "md" ? "" : `async-select--${v}`,
+		h ? "async-select--disabled" : ""
+	].filter(Boolean).join(" "), ee = [
 		"async-select__content",
-		_ === "md" ? "" : `async-select__content--${_}`,
-		g ? "async-select__content--dark" : ""
+		v === "md" ? "" : `async-select__content--${v}`,
+		_ ? "async-select__content--dark" : ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ t(s.Root, {
-		open: x,
+	return /* @__PURE__ */ n(c.Root, {
+		open: S,
 		modal: !1,
 		onOpenChange: () => {},
-		children: [/* @__PURE__ */ e(s.Anchor, {
+		children: [/* @__PURE__ */ t(c.Anchor, {
 			asChild: !0,
-			children: /* @__PURE__ */ t("div", {
-				ref: z,
-				className: Q,
-				"data-state": x ? "open" : "closed",
+			children: /* @__PURE__ */ n("div", {
+				ref: B,
+				className: $,
+				"data-state": S ? "open" : "closed",
 				children: [
-					/* @__PURE__ */ e("input", {
-						ref: R,
-						id: v,
+					/* @__PURE__ */ t("input", {
+						ref: z,
+						id: y,
 						type: "text",
 						className: "async-select__input",
-						value: Z,
-						onChange: K,
-						onPointerDown: q,
-						onKeyDown: X,
-						placeholder: p,
-						disabled: m,
-						readOnly: h,
-						"aria-label": y ?? p,
-						"aria-describedby": b,
-						"aria-expanded": x,
+						value: Q,
+						onChange: q,
+						onPointerDown: J,
+						onKeyDown: Z,
+						placeholder: m,
+						disabled: h,
+						readOnly: g,
+						"aria-label": b ?? m,
+						"aria-describedby": x,
+						"aria-expanded": S,
 						"aria-haspopup": "listbox",
-						"aria-controls": B,
-						"aria-activedescendant": j >= 0 ? W(j) : void 0,
+						"aria-controls": V,
+						"aria-activedescendant": M >= 0 ? G(M) : void 0,
 						autoComplete: "off",
 						role: "combobox"
 					}),
-					T && /* @__PURE__ */ e("span", {
+					E && /* @__PURE__ */ t("span", {
 						className: "async-select__spinner",
 						"aria-hidden": "true"
 					}),
-					!T && H && !m && !h && /* @__PURE__ */ e("button", {
+					!E && U && !h && !g && /* @__PURE__ */ t("button", {
 						type: "button",
 						className: "async-select__clear",
 						"aria-label": "Limpiar selección",
 						tabIndex: -1,
-						onMouseDown: Y,
-						children: "×"
+						onMouseDown: X,
+						children: /* @__PURE__ */ t(e, { size: "xs" })
 					})
 				]
 			})
-		}), /* @__PURE__ */ e(s.Portal, { children: /* @__PURE__ */ e(c, { children: /* @__PURE__ */ e(s.Content, {
-			className: $,
+		}), /* @__PURE__ */ t(c.Portal, { children: /* @__PURE__ */ t(l, { children: /* @__PURE__ */ t(c.Content, {
+			className: ee,
 			align: "start",
 			sideOffset: -1,
 			onOpenAutoFocus: (e) => e.preventDefault(),
 			onInteractOutside: (e) => {
-				z.current?.contains(e.target) || S(!1);
+				B.current?.contains(e.target) || C(!1);
 			},
-			children: /* @__PURE__ */ t("div", {
+			children: /* @__PURE__ */ n("div", {
 				role: "listbox",
-				"aria-label": y ?? p,
-				id: B,
+				"aria-label": b ?? m,
+				id: V,
 				children: [
-					T && /* @__PURE__ */ e("div", {
+					E && /* @__PURE__ */ t("div", {
 						className: "async-select__loading",
 						role: "status",
 						"aria-label": "Buscando…",
-						children: /* @__PURE__ */ e("span", {
+						children: /* @__PURE__ */ t("span", {
 							className: "async-select__spinner",
 							"aria-hidden": "true"
 						})
 					}),
-					!T && k && D.length === 0 && /* @__PURE__ */ e("div", {
+					!E && A && O.length === 0 && /* @__PURE__ */ t("div", {
 						className: "async-select__empty",
 						children: "Sin resultados"
 					}),
-					!T && D.map((t, n) => {
-						let r = t.value === H, i = j === n;
-						return /* @__PURE__ */ e("div", {
-							id: W(n),
+					!E && O.map((e, n) => {
+						let r = e.value === U, i = M === n;
+						return /* @__PURE__ */ t("div", {
+							id: G(n),
 							role: "option",
 							"aria-selected": r,
 							className: [
@@ -130,9 +131,9 @@ function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeho
 								i ? "async-select__item--active" : ""
 							].filter(Boolean).join(" "),
 							onPointerDown: (e) => e.preventDefault(),
-							onClick: () => J(t),
-							children: t.label
-						}, t.value);
+							onClick: () => Y(e),
+							children: e.label
+						}, e.value);
 					})
 				]
 			})
@@ -140,4 +141,4 @@ function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeho
 	});
 }
 //#endregion
-export { l as AsyncSelect };
+export { u as AsyncSelect };

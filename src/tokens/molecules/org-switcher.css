@@ -30,7 +30,6 @@
   --org-switcher-initials-bg: var(--color-primary); /** Fondo del cuadrado de iniciales */
   --org-switcher-name-color: var(--color-text-on-light); /** Color del nombre de la org */
   --org-switcher-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
-  --org-switcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --org-switcher-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --org-switcher-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
   --org-switcher-item-font-weight: var(--font-weight-default); /** Peso de ítems */
@@ -39,4 +38,5 @@
   --org-switcher-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --org-switcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
   --org-switcher-content-bg: var(--floating-panel-bg); /** Fondo del panel */
+  --org-switcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
 }

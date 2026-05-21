@@ -37,7 +37,6 @@
   --user-menu-initials-bg: var(--color-primary); /** Fondo del círculo de iniciales */
   --user-menu-name-color: var(--color-text-on-light); /** Color del nombre */
   --user-menu-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
-  --user-menu-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --user-menu-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --user-menu-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
   --user-menu-header-name-color: var(--color-text-on-light); /** Color del nombre en la cabecera */
@@ -50,4 +49,5 @@
   --user-menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --user-menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
   --user-menu-content-bg: var(--floating-panel-bg); /** Fondo del panel */
+  --user-menu-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
 }
