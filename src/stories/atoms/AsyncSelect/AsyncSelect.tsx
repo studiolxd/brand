@@ -83,8 +83,11 @@ export function AsyncSelect({
     debounceRef.current = setTimeout(() => void runSearch(q), 300);
   }
 
-  function handleInputFocus() {
+  function handleInputPointerDown(e: React.PointerEvent<HTMLInputElement>) {
     if (disabled || readOnly) return;
+    if (open) return;
+    e.preventDefault();
+    inputRef.current?.focus();
     setActiveIndex(-1);
     setQuery('');
     setResults([]);
@@ -139,6 +142,14 @@ export function AsyncSelect({
     } else if (e.key === 'Tab') {
       setOpen(false);
       setActiveIndex(-1);
+    } else if (!open && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      setQuery(e.key);
+      setOpen(true);
+      setResults([]);
+      setHasSearched(false);
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => void runSearch(e.key), 300);
     }
   }
 
@@ -157,7 +168,7 @@ export function AsyncSelect({
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) { setOpen(false); setActiveIndex(-1); } }}>
+    <RadixPopover.Root open={open} modal={false} onOpenChange={() => {}}>
       <RadixPopover.Anchor asChild>
         <div ref={anchorRef} className={triggerClass} data-state={open ? 'open' : 'closed'}>
           <input
@@ -167,7 +178,7 @@ export function AsyncSelect({
             className="async-select__input"
             value={displayValue}
             onChange={handleInputChange}
-            onFocus={handleInputFocus}
+            onPointerDown={handleInputPointerDown}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             disabled={disabled}

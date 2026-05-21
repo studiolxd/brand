@@ -23,10 +23,10 @@ function l({ onSearch: l, value: u, defaultValue: d = [], onValueChange: f, sele
 	}, [l]);
 	function W(e) {
 		let t = e.target.value;
-		T(t), I.current && clearTimeout(I.current), I.current = setTimeout(() => void U(t), 300);
+		T(t), S || C(!0), I.current && clearTimeout(I.current), I.current = setTimeout(() => void U(t), 300);
 	}
-	function G() {
-		h || g || (N(-1), T(""), k([]), j(!1), C(!0), U(""));
+	function G(e) {
+		h || g || S || (e.preventDefault(), L.current?.focus(), N(-1), T(""), k([]), j(!1), C(!0), U(""));
 	}
 	function K(e) {
 		let t = V.includes(e) ? V.filter((t) => t !== e) : [...V, e];
@@ -56,9 +56,7 @@ function l({ onSearch: l, value: u, defaultValue: d = [], onValueChange: f, sele
 	return /* @__PURE__ */ t(s.Root, {
 		open: S,
 		modal: !1,
-		onOpenChange: (e) => {
-			e || (C(!1), N(-1));
-		},
+		onOpenChange: () => {},
 		children: [/* @__PURE__ */ e(s.Anchor, {
 			asChild: !0,
 			children: /* @__PURE__ */ t("div", {
@@ -89,7 +87,7 @@ function l({ onSearch: l, value: u, defaultValue: d = [], onValueChange: f, sele
 						className: "async-multi-select__input",
 						value: w,
 						onChange: W,
-						onFocus: G,
+						onPointerDown: G,
 						onKeyDown: q,
 						placeholder: V.length === 0 ? m : void 0,
 						disabled: h,

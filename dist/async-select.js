@@ -25,8 +25,8 @@ function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeho
 		let t = e.target.value;
 		w(t), L.current && clearTimeout(L.current), L.current = setTimeout(() => void G(t), 300);
 	}
-	function q() {
-		m || h || (M(-1), w(""), O([]), A(!1), S(!0), G(""));
+	function q(e) {
+		m || h || x || (e.preventDefault(), R.current?.focus(), M(-1), w(""), O([]), A(!1), S(!0), G(""));
 	}
 	function J(e) {
 		u === void 0 && (P(e.value), I(e)), d?.(e.value, e), S(!1), M(-1), w("");
@@ -35,7 +35,7 @@ function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeho
 		e.stopPropagation(), u === void 0 && (P(null), I(null)), d?.(null, null), w(""), O([]), A(!1), R.current?.focus();
 	}
 	function X(e) {
-		e.key === "ArrowDown" ? (e.preventDefault(), x ? M((e) => Math.min(e + 1, D.length - 1)) : (S(!0), G(C))) : e.key === "ArrowUp" ? (e.preventDefault(), M((e) => Math.max(e - 1, -1))) : e.key === "Enter" && j >= 0 && D[j] ? (e.preventDefault(), J(D[j])) : e.key === "Escape" ? (S(!1), w(""), M(-1)) : e.key === "Tab" && (S(!1), M(-1));
+		e.key === "ArrowDown" ? (e.preventDefault(), x ? M((e) => Math.min(e + 1, D.length - 1)) : (S(!0), G(C))) : e.key === "ArrowUp" ? (e.preventDefault(), M((e) => Math.max(e - 1, -1))) : e.key === "Enter" && j >= 0 && D[j] ? (e.preventDefault(), J(D[j])) : e.key === "Escape" ? (S(!1), w(""), M(-1)) : e.key === "Tab" ? (S(!1), M(-1)) : !x && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), w(e.key), S(!0), O([]), A(!1), L.current && clearTimeout(L.current), L.current = setTimeout(() => void G(e.key), 300));
 	}
 	let Z = x ? C : U?.label ?? "", Q = [
 		"async-select",
@@ -49,9 +49,7 @@ function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeho
 	return /* @__PURE__ */ t(s.Root, {
 		open: x,
 		modal: !1,
-		onOpenChange: (e) => {
-			e || (S(!1), M(-1));
-		},
+		onOpenChange: () => {},
 		children: [/* @__PURE__ */ e(s.Anchor, {
 			asChild: !0,
 			children: /* @__PURE__ */ t("div", {
@@ -66,7 +64,7 @@ function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeho
 						className: "async-select__input",
 						value: Z,
 						onChange: K,
-						onFocus: q,
+						onPointerDown: q,
 						onKeyDown: X,
 						placeholder: p,
 						disabled: m,

@@ -3,6 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Modal } from './Modal';
 import { Button } from '../../atoms/Button/Button';
 import { InputField } from '../InputField/InputField';
+import { AsyncSelectField } from '../AsyncSelectField/AsyncSelectField';
+import type { AsyncSelectOption } from '../AsyncSelectField/AsyncSelectField';
+import { AsyncMultiSelectField } from '../AsyncMultiSelectField/AsyncMultiSelectField';
+import type { AsyncMultiSelectOption } from '../AsyncMultiSelectField/AsyncMultiSelectField';
 
 const meta: Meta<typeof Modal> = {
   title: 'Molecules/Modal',
@@ -74,6 +78,71 @@ export const Dark: Story = {
             <InputField id="motivo-dark" label="Motivo" placeholder="Indica el motivo" />
             <Button type="submit">Guardar</Button>
           </form>
+        </Modal>
+      </>
+    );
+  },
+};
+
+const EMPLOYEES: AsyncSelectOption[] = [
+  { value: '1', label: 'Ana García' },
+  { value: '2', label: 'Carlos López' },
+  { value: '3', label: 'María Fernández' },
+  { value: '4', label: 'Juan Martínez' },
+  { value: '5', label: 'Laura Sánchez' },
+];
+
+function mockSearch(query: string): Promise<AsyncSelectOption[]> {
+  return new Promise(resolve =>
+    setTimeout(() => {
+      const q = query.toLowerCase();
+      resolve(q ? EMPLOYEES.filter(e => e.label.toLowerCase().includes(q)) : EMPLOYEES);
+    }, 400),
+  );
+}
+
+export const WithAsyncSelect: Story = {
+  name: 'Con AsyncSelect',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState<string | null>(null);
+    const [selectedOption, setSelectedOption] = useState<AsyncSelectOption | null>(null);
+    const [multiValue, setMultiValue] = useState<string[]>([]);
+    const [selectedMulti, setSelectedMulti] = useState<AsyncMultiSelectOption[]>([]);
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Abrir modal con AsyncSelect</Button>
+        <Modal open={open} onClose={() => setOpen(false)} title="Asignar empleados">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <AsyncSelectField
+              id="modal-employee"
+              label="Empleado responsable"
+              onSearch={mockSearch}
+              placeholder="Buscar empleado…"
+              value={value}
+              selectedOption={selectedOption}
+              onValueChange={(v, opt) => { setValue(v); setSelectedOption(opt); }}
+            />
+            <AsyncMultiSelectField
+              id="modal-employees"
+              label="Equipo"
+              onSearch={q => mockSearch(q) as Promise<AsyncMultiSelectOption[]>}
+              placeholder="Buscar empleados…"
+              value={multiValue}
+              selectedOptions={selectedMulti}
+              onValueChange={(vals) => {
+                setMultiValue(vals);
+                setSelectedMulti(EMPLOYEES.filter(e => vals.includes(e.value)));
+              }}
+            />
+            <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-text-on-light)' }}>
+              Responsable: <strong>{selectedOption?.label ?? '(ninguno)'}</strong>
+              {' · '}
+              Equipo: <strong>{selectedMulti.map(e => e.label).join(', ') || '(ninguno)'}</strong>
+            </p>
+            <Button onClick={() => setOpen(false)}>Guardar</Button>
+          </div>
         </Modal>
       </>
     );

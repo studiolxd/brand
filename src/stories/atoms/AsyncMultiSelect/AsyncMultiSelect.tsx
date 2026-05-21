@@ -79,12 +79,16 @@ export function AsyncMultiSelect({
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const q = e.target.value;
     setQuery(q);
+    if (!open) setOpen(true);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => void runSearch(q), 300);
   }
 
-  function handleInputFocus() {
+  function handleInputPointerDown(e: React.PointerEvent<HTMLInputElement>) {
     if (disabled || readOnly) return;
+    if (open) return;
+    e.preventDefault();
+    inputRef.current?.focus();
     setActiveIndex(-1);
     setQuery('');
     setResults([]);
@@ -144,7 +148,7 @@ export function AsyncMultiSelect({
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixPopover.Root open={open} modal={false} onOpenChange={next => { if (!next) { setOpen(false); setActiveIndex(-1); } }}>
+    <RadixPopover.Root open={open} modal={false} onOpenChange={() => {}}>
       <RadixPopover.Anchor asChild>
         <div ref={anchorRef} className={triggerClass} data-state={open ? 'open' : 'closed'}>
           <div className="async-multi-select__input-area">
@@ -171,7 +175,7 @@ export function AsyncMultiSelect({
               className="async-multi-select__input"
               value={query}
               onChange={handleInputChange}
-              onFocus={handleInputFocus}
+              onPointerDown={handleInputPointerDown}
               onKeyDown={handleKeyDown}
               placeholder={currentValues.length === 0 ? placeholder : undefined}
               disabled={disabled}
