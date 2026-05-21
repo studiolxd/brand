@@ -122,6 +122,32 @@
 }
 
 
+/* otp-field: aplica la técnica de separadores igual que input-field,
+   pero SIN suprimir los bordes de las celdas individuales — son múltiples inputs en línea */
+.form__fields > .otp-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .otp-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .otp-field > [data-otp-input] {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .otp-field > .otp-field__error,
+.form__fields > .otp-field > .otp-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+  background-color: var(--color-background-light);
+}
+
 .form__success {
   margin: 0;
   padding-inline: var(--control-padding-inline);

@@ -7,6 +7,7 @@ import { CheckboxField } from '../CheckboxField/CheckboxField';
 import { InputPhoneField } from '../InputPhoneField/InputPhoneField';
 import { PasswordField } from '../PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
+import { OtpField } from '../OtpField/OtpField';
 
 const meta: Meta<typeof Form> = {
   title: 'Molecules/Form',
@@ -147,6 +148,18 @@ export const LoginFormWithErrorsExample: Story = {
         errorMessage="La contraseña no puede estar vacía."
       />
       <CheckboxField id="ex-login-error-remember" label="Mantener la sesión iniciada" />
+    </Form>
+  ),
+};
+
+export const OtpFormExample: Story = {
+  name: 'Ejemplo: Form con OtpField',
+  render: () => (
+    <Form
+      actions={<Button variant="primary" type="submit" block>Verificar</Button>}
+    >
+      <InputField id="ex-otp-email" label="Email" labelHidden={false} type="email" placeholder="tu@email.com" />
+      <OtpField id="ex-otp-code" label="Código de verificación" length={6} helperText="Revisa tu correo electrónico." />
     </Form>
   ),
 };
