@@ -8,27 +8,36 @@
   --toast-gap: var(--spacing-2); /** Gap entre toasts apilados */
   --toast-inset-block-end: var(--spacing-5); /** Distancia al borde inferior de la ventana */
   --toast-inset-inline-end: var(--spacing-5); /** Distancia al borde derecho de la ventana */
-  --toast-padding-block: var(--spacing-3); /** Padding vertical del toast */
-  --toast-padding-inline: var(--spacing-4); /** Padding horizontal del toast */
+  --toast-padding-block: var(--spacing-4); /** Padding vertical del toast (16px) */
+  --toast-padding-inline: var(--spacing-5); /** Padding horizontal del toast (24px) */
   --toast-border-radius: var(--border-radius-none); /** Sin radio de esquinas */
   --toast-border-width: var(--border-width-sm); /** Grosor del borde */
   --toast-shadow: var(--shadow-lg); /** Sombra de elevación */
-  --toast-title-font-size: var(--font-size-1); /** Tamaño del título (14px) */
+  --toast-title-font-size: var(--font-size-2); /** Tamaño del título (16px) */
   --toast-title-font-weight: var(--font-weight-medium); /** Peso del título */
   --toast-description-font-size: var(--font-size-1); /** Tamaño de la descripción (14px) */
+  --toast-close-size: var(--close-size-sm); /** Tamaño del icono de cierre (18px) */
   --toast-duration-in: var(--motion-duration-base); /** Duración animación de entrada (250ms) */
   --toast-duration-out: var(--motion-duration-base); /** Duración animación de salida (250ms) */
   --toast-easing: var(--motion-easing-out); /** Curva de animación */
-  --toast-bg: var(--color-background-light); /** Fondo del toast (todos los tipos) */
-  --toast-border-color: var(--color-primary); /** Borde por defecto — prussian */
-  --toast-title-color: var(--color-text-on-light); /** Color del título */
-  --toast-description-color: var(--color-text-muted-on-light); /** Color de la descripción */
-  --toast-close-color: var(--color-text-muted-on-light); /** Color del botón de cierre */
-  --toast-close-hover-color: var(--color-text-on-light); /** Color del botón de cierre en hover */
-  --toast-success-border-color: var(--color-success-on-light); /** Borde success */
-  --toast-success-title-color: var(--color-success-on-light); /** Color título success */
-  --toast-success-description-color: var(--color-success-on-light); /** Color descripción success */
-  --toast-error-border-color: var(--color-error-on-light); /** Borde error */
-  --toast-error-title-color: var(--color-error-on-light); /** Color título error */
-  --toast-error-description-color: var(--color-error-on-light); /** Color descripción error */
+  --toast-bg: var(--color-primary); /** Fondo del toast por defecto — prussian */
+  --toast-border-color: var(--color-primary); /** Borde igual al fondo — invisible */
+  --toast-title-color: var(--color-text-on-dark); /** Texto blanco sobre fondo oscuro */
+  --toast-description-color: var(--color-text-muted-on-dark); /** Descripción atenuada sobre fondo oscuro */
+  --toast-close-color: var(--color-text-on-dark); /** Color del botón de cierre — blanco */
+  --toast-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover */
+  --toast-success-bg: var(--color-success-on-light); /** Fondo success — verde semántico */
+  --toast-success-border-color: var(--color-success-on-light); /** Borde igual al fondo success */
+  --toast-success-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo success */
+  --toast-success-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo success */
+  --toast-error-bg: var(--color-error-on-light); /** Fondo error — rojo semántico */
+  --toast-error-border-color: var(--color-error-on-light); /** Borde igual al fondo error */
+  --toast-error-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo error */
+  --toast-error-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo error */
+  --toast-warning-bg: var(--color-accent-2); /** Fondo warning — amarillo brand */
+  --toast-warning-border-color: var(--color-accent-2); /** Borde igual al fondo warning */
+  --toast-warning-title-color: var(--color-primary); /** Título prussian sobre fondo amarillo (contraste AAA) */
+  --toast-warning-description-color: var(--color-primary); /** Descripción prussian sobre fondo amarillo */
+  --toast-warning-close-color: var(--color-primary); /** Aspa de cierre oscura sobre fondo amarillo */
+  --toast-warning-close-hover-color: var(--color-primary); /** Aspa de cierre oscura en hover */
 }

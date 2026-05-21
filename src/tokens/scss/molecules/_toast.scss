@@ -6,26 +6,35 @@ $toast-width: 360px; // Anchura de cada toast
 $toast-gap: 0.5rem; // Gap entre toasts apilados
 $toast-inset-block-end: 1.5rem; // Distancia al borde inferior de la ventana
 $toast-inset-inline-end: 1.5rem; // Distancia al borde derecho de la ventana
-$toast-padding-block: 0.75rem; // Padding vertical del toast
-$toast-padding-inline: 1rem; // Padding horizontal del toast
+$toast-padding-block: 1rem; // Padding vertical del toast (16px)
+$toast-padding-inline: 1.5rem; // Padding horizontal del toast (24px)
 $toast-border-radius: 0px; // Sin radio de esquinas
 $toast-border-width: 1px; // Grosor del borde
 $toast-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra de elevación
-$toast-bg: #ffffff; // Fondo del toast (todos los tipos)
-$toast-border-color: #111e30; // Borde por defecto — prussian
-$toast-title-font-size: 0.875rem; // Tamaño del título (14px)
+$toast-bg: #111e30; // Fondo del toast por defecto — prussian
+$toast-border-color: #111e30; // Borde igual al fondo — invisible
+$toast-title-font-size: 1rem; // Tamaño del título (16px)
 $toast-title-font-weight: 500; // Peso del título
-$toast-title-color: #111e30; // Color del título
+$toast-title-color: #ffffff; // Texto blanco sobre fondo oscuro
 $toast-description-font-size: 0.875rem; // Tamaño de la descripción (14px)
-$toast-description-color: #4a4a4a; // Color de la descripción
-$toast-close-color: #4a4a4a; // Color del botón de cierre
-$toast-close-hover-color: #111e30; // Color del botón de cierre en hover
+$toast-description-color: #d0d0d0; // Descripción atenuada sobre fondo oscuro
+$toast-close-color: #ffffff; // Color del botón de cierre — blanco
+$toast-close-hover-color: #ffffff; // Color del botón de cierre en hover
+$toast-close-size: 18px; // Tamaño del icono de cierre (18px)
 $toast-duration-in: 250ms; // Duración animación de entrada (250ms)
 $toast-duration-out: 250ms; // Duración animación de salida (250ms)
 $toast-easing: ease-out; // Curva de animación
-$toast-success-border-color: #006616; // Borde success
-$toast-success-title-color: #006616; // Color título success
-$toast-success-description-color: #006616; // Color descripción success
-$toast-error-border-color: #b30000; // Borde error
-$toast-error-title-color: #b30000; // Color título error
-$toast-error-description-color: #b30000; // Color descripción error
+$toast-success-bg: #006616; // Fondo success — verde semántico
+$toast-success-border-color: #006616; // Borde igual al fondo success
+$toast-success-title-color: #ffffff; // Título blanco sobre fondo success
+$toast-success-description-color: #ffffff; // Descripción blanca sobre fondo success
+$toast-error-bg: #b30000; // Fondo error — rojo semántico
+$toast-error-border-color: #b30000; // Borde igual al fondo error
+$toast-error-title-color: #ffffff; // Título blanco sobre fondo error
+$toast-error-description-color: #ffffff; // Descripción blanca sobre fondo error
+$toast-warning-bg: #ffcd00; // Fondo warning — amarillo brand
+$toast-warning-border-color: #ffcd00; // Borde igual al fondo warning
+$toast-warning-title-color: #111e30; // Título prussian sobre fondo amarillo (contraste AAA)
+$toast-warning-description-color: #111e30; // Descripción prussian sobre fondo amarillo
+$toast-warning-close-color: #111e30; // Aspa de cierre oscura sobre fondo amarillo
+$toast-warning-close-hover-color: #111e30; // Aspa de cierre oscura en hover

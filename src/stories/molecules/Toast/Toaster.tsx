@@ -13,7 +13,7 @@ export function Toaster({ position = 'bottom-right' }: ToasterProps) {
       position={position}
       gap={8}
       className="toaster"
-      icons={{ close: <Close size="xs" /> }}
+      icons={{ close: <Close size="sm" /> }}
       toastOptions={{
         unstyled: true,
         classNames: {

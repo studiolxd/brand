@@ -63,6 +63,13 @@
   cursor: default;
 }
 
+/* Bloquea el padding en hover para que el CSS de Sonner no lo altere */
+.toast:hover {
+  padding-block: var(--toast-padding-block);
+  padding-inline: var(--toast-padding-inline);
+  padding-inline-end: calc(var(--spacing-5) + var(--spacing-3));
+}
+
 .toast[data-state='open'] {
   animation: toast-in var(--toast-duration-in) var(--toast-easing) both;
 }
@@ -71,18 +78,13 @@
   animation: toast-out var(--toast-duration-out) var(--toast-easing) both;
 }
 
-/* ── Contenido ──────────────────────────────────────────────── */
+/* ── Icono de tipo — oculto ─────────────────────────────────── */
 
 .toast__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 1rem;
-  height: 1rem;
-  margin-block-start: 0.1em;
-  color: var(--toast-border-color);
+  display: none;
 }
+
+/* ── Contenido ──────────────────────────────────────────────── */
 
 .toast__title {
   font-size: var(--toast-title-font-size);
@@ -104,8 +106,12 @@
 
 .toast__close {
   position: absolute;
+  /* Propiedades lógicas + físicas para máxima compatibilidad con Sonner */
   inset-block-start: var(--spacing-2);
   inset-inline-end: var(--spacing-2);
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  left: auto;
 
   appearance: none;
   background: none;
@@ -118,8 +124,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-5);
-  height: var(--spacing-5);
+  /* El hit area es ligeramente mayor que el icono */
+  width: calc(var(--toast-close-size) + var(--spacing-2));
+  height: calc(var(--toast-close-size) + var(--spacing-2));
 
   color: var(--toast-close-color);
   border-radius: var(--border-radius-sm);
@@ -129,24 +136,39 @@
 
 .toast__close:hover {
   color: var(--toast-close-hover-color);
-  background-color: var(--color-grey-lightest);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .toast__close:focus-visible {
-  outline: var(--border-width-md) solid var(--color-primary);
+  outline: var(--border-width-md) solid currentColor;
   outline-offset: 2px;
 }
 
 /* ── Variantes ──────────────────────────────────────────────── */
 
 .toast.toast--success {
+  --toast-bg:                   var(--toast-success-bg);
   --toast-border-color:         var(--toast-success-border-color);
   --toast-title-color:          var(--toast-success-title-color);
   --toast-description-color:    var(--toast-success-description-color);
 }
 
 .toast.toast--error {
+  --toast-bg:                   var(--toast-error-bg);
   --toast-border-color:         var(--toast-error-border-color);
   --toast-title-color:          var(--toast-error-title-color);
   --toast-description-color:    var(--toast-error-description-color);
+}
+
+.toast.toast--warning {
+  --toast-bg:                   var(--toast-warning-bg);
+  --toast-border-color:         var(--toast-warning-border-color);
+  --toast-title-color:          var(--toast-warning-title-color);
+  --toast-description-color:    var(--toast-warning-description-color);
+  --toast-close-color:          var(--toast-warning-close-color);
+  --toast-close-hover-color:    var(--toast-warning-close-hover-color);
+}
+
+.toast.toast--warning .toast__close:hover {
+  background-color: color-mix(in srgb, var(--toast-warning-close-color) 8%, transparent);
 }

@@ -623,7 +623,7 @@ function O({ position: n = "bottom-right" }) {
 		position: n,
 		gap: 8,
 		className: "toaster",
-		icons: { close: /* @__PURE__ */ t(e, { size: "xs" }) },
+		icons: { close: /* @__PURE__ */ t(e, { size: "sm" }) },
 		toastOptions: {
 			unstyled: !0,
 			classNames: {
