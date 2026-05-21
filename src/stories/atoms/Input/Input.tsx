@@ -12,9 +12,16 @@ interface InputProps {
   id?: string;
   name?: string;
   describedBy?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
+  pattern?: string;
+  maxLength?: number;
+  autoComplete?: string;
+  ariaLabel?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onPaste?: React.ClipboardEventHandler<HTMLInputElement>;
 }
 
 export function Input({
@@ -29,9 +36,16 @@ export function Input({
   id,
   name,
   describedBy,
+  inputMode,
+  pattern,
+  maxLength,
+  autoComplete,
+  ariaLabel,
   onChange,
   onBlur,
   onFocus,
+  onKeyDown,
+  onPaste,
 }: InputProps) {
   return (
     <input
@@ -46,9 +60,16 @@ export function Input({
       name={name}
       aria-invalid={error || undefined}
       aria-describedby={describedBy}
+      aria-label={ariaLabel}
+      inputMode={inputMode}
+      pattern={pattern}
+      maxLength={maxLength}
+      autoComplete={autoComplete}
       onChange={onChange}
       onBlur={onBlur}
       onFocus={onFocus}
+      onKeyDown={onKeyDown}
+      onPaste={onPaste}
     />
   );
 }

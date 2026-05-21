@@ -11,7 +11,7 @@ interface CardProps {
   /** Título de la tarjeta. */
   title: string;
   /** Descripción. */
-  description: string;
+  description?: string;
   /** Texto accesible del CTA (visually-hidden). */
   ctaLabel: string;
   /** Color de fondo. */
@@ -22,7 +22,7 @@ export function Card({ href, title, description, ctaLabel, color }: CardProps) {
   return (
     <a href={href} className={['card', `card--${color}`].join(' ')}>
       <Heading level={2} size={8}>{title}</Heading>
-      <p>{description}</p>
+      {description && <p>{description}</p>}
       <VisuallyHidden>{ctaLabel}</VisuallyHidden>
       <Arrow size="lg" />
     </a>

@@ -1,0 +1,10 @@
+[data-otp-input] {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+[data-otp-input] .input {
+  text-align: center;
+  width: 3.5ch;
+  padding-inline: 0;
+}

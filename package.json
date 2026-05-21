@@ -145,6 +145,10 @@
       "types": "./dist/_types/atoms/Input/Input.d.ts",
       "import": "./dist/input.js"
     },
+    "./otp-input": {
+      "types": "./dist/_types/atoms/OtpInput/OtpInput.d.ts",
+      "import": "./dist/otp-input.js"
+    },
     "./empty-state": {
       "types": "./dist/_types/molecules/EmptyState/EmptyState.d.ts",
       "import": "./dist/empty-state.js"
@@ -152,6 +156,10 @@
     "./input-field": {
       "types": "./dist/_types/molecules/InputField/InputField.d.ts",
       "import": "./dist/input-field.js"
+    },
+    "./otp-field": {
+      "types": "./dist/_types/molecules/OtpField/OtpField.d.ts",
+      "import": "./dist/otp-field.js"
     },
     "./password-field": {
       "types": "./dist/_types/molecules/PasswordField/PasswordField.d.ts",
