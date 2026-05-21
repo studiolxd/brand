@@ -81,7 +81,6 @@ export const Persistent: Story = {
   name: 'Persistente',
   render: () => (
     <Button
-      variant="outline"
       onClick={() =>
         toast('Esta notificación no desaparece sola', {
           duration: Infinity,
