@@ -42,6 +42,7 @@ export const entryPoints = {
   'async-select-field':  'src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx',
   'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
   'pagination':          'src/stories/molecules/Pagination/Pagination.tsx',
+  'prev-next-nav':       'src/stories/molecules/PrevNextNav/PrevNextNav.tsx',
   'table':               'src/stories/molecules/Table/Table.tsx',
   'context-menu':        'src/stories/molecules/ContextMenu/ContextMenu.tsx',
   'card':                'src/stories/molecules/Card/Card.tsx',

@@ -129,6 +129,12 @@
   padding-inline: var(--table-cell-padding-inline);
 }
 
+/* ── Actions column ──────────────────────────────────── */
+
+.table__header.table__header--actions {
+  width: 1px;
+}
+
 /* ── Size: sm ────────────────────────────────────────── */
 
 .table.table--sm {

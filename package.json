@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.11.0",
+  "version": "5.12.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -202,6 +202,10 @@
     "./pagination": {
       "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",
       "import": "./dist/pagination.js"
+    },
+    "./prev-next-nav": {
+      "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
+      "import": "./dist/prev-next-nav.js"
     },
     "./paragraph": {
       "types": "./dist/_types/atoms/Paragraph/Paragraph.d.ts",

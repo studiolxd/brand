@@ -18,7 +18,11 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
   sorted?: 'asc' | 'desc' | false;
   /** Handler de click/teclado. Solo relevante si sortable */
   onSort?: () => void;
-  children: ReactNode;
+  /** Marca esta columna como columna de acciones: ancho mínimo y cabecera oculta visualmente */
+  actions?: boolean;
+  /** Texto accesible de la cabecera de acciones. Default: "Acciones" */
+  actionsLabel?: string;
+  children?: ReactNode;
 }
 
 /** onClick tipado como () => void para mantener la API de interactividad con teclado */
@@ -49,6 +53,8 @@ function TableHeader({
   sortable = false,
   sorted = false,
   onSort,
+  actions = false,
+  actionsLabel = 'Acciones',
   children,
   className,
   scope = 'col',
@@ -59,6 +65,7 @@ function TableHeader({
     sortable ? 'table__header--sortable' : '',
     sorted === 'asc' ? 'table__header--sorted-asc' : '',
     sorted === 'desc' ? 'table__header--sorted-desc' : '',
+    actions ? 'table__header--actions' : '',
     className,
   ]
     .filter(Boolean)
@@ -93,6 +100,14 @@ function TableHeader({
                 : 'Activar ordenación'}
           </VisuallyHidden>
         </span>
+      </th>
+    );
+  }
+
+  if (actions) {
+    return (
+      <th {...rest} scope={scope} className={classes}>
+        <VisuallyHidden>{children ?? actionsLabel}</VisuallyHidden>
       </th>
     );
   }

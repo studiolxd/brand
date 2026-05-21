@@ -1,0 +1,20 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --prev-next-nav-font-family: var(--font-family-sans); /** Font family */
+  --prev-next-nav-font-size: var(--font-size-1); /** 14px — UI label */
+  --prev-next-nav-gap: var(--spacing-3); /** Gap entre botones y label — variante md */
+  --prev-next-nav-sm-gap: var(--spacing-2); /** Gap entre botones y label — variante sm */
+  --prev-next-nav-label-font-weight: var(--font-weight-medium); /** Peso tipográfico del label central */
+  --prev-next-nav-btn-disabled-color: var(--color-grey-dark); /** Color cuando el botón está deshabilitado */
+  --prev-next-nav-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --prev-next-nav-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
+  --prev-next-nav-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
+  --prev-next-nav-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
+  --prev-next-nav-label-color: var(--color-text-on-light); /** Color del label central */
+  --prev-next-nav-btn-color: var(--color-text-on-light); /** Color de los botones de navegación */
+  --prev-next-nav-btn-hover-color: var(--color-primary); /** Color en hover */
+  --prev-next-nav-focus-ring-color: var(--color-primary); /** Color del focus ring */
+}

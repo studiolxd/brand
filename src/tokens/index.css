@@ -49,6 +49,7 @@
 @import "./molecules/context-menu.css";
 @import "./components/popover.css";
 @import "./molecules/pagination.css";
+@import "./molecules/prev-next-nav.css";
 @import "./molecules/table.css";
 @import "./components/sidebar.css";
 @import "./molecules/org-switcher.css";

@@ -13,18 +13,19 @@ function a({ children: e }) {
 function o({ children: e }) {
 	return /* @__PURE__ */ n("tbody", { children: e });
 }
-function s({ sortable: i = !1, sorted: a = !1, onSort: o, children: s, className: c, scope: l = "col", ...u }) {
-	let d = [
+function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", children: l, className: u, scope: d = "col", ...f }) {
+	let p = [
 		"table__header",
 		i ? "table__header--sortable" : "",
 		a === "asc" ? "table__header--sorted-asc" : "",
 		a === "desc" ? "table__header--sorted-desc" : "",
-		c
+		s ? "table__header--actions" : "",
+		u
 	].filter(Boolean).join(" ");
 	return i ? /* @__PURE__ */ n("th", {
-		...u,
-		scope: l,
-		className: d,
+		...f,
+		scope: d,
+		className: p,
 		onClick: o,
 		onKeyDown: (e) => {
 			(e.key === "Enter" || e.key === " ") && (e.preventDefault(), o?.());
@@ -34,7 +35,7 @@ function s({ sortable: i = !1, sorted: a = !1, onSort: o, children: s, className
 		children: /* @__PURE__ */ r("span", {
 			className: "table__header-content",
 			children: [
-				s,
+				l,
 				/* @__PURE__ */ n(e, {
 					size: "xs",
 					className: "table__sort-icon"
@@ -42,11 +43,16 @@ function s({ sortable: i = !1, sorted: a = !1, onSort: o, children: s, className
 				/* @__PURE__ */ n(t, { children: a === "asc" ? "Ordenado ascendente" : a === "desc" ? "Ordenado descendente" : "Activar ordenación" })
 			]
 		})
+	}) : s ? /* @__PURE__ */ n("th", {
+		...f,
+		scope: d,
+		className: p,
+		children: /* @__PURE__ */ n(t, { children: l ?? c })
 	}) : /* @__PURE__ */ n("th", {
-		...u,
-		scope: l,
-		className: d,
-		children: s
+		...f,
+		scope: d,
+		className: p,
+		children: l
 	});
 }
 function c({ onClick: e, interactive: t = !1, children: r, className: i, ...a }) {

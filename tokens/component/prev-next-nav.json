@@ -1,0 +1,18 @@
+{
+  "prev-next-nav": {
+    "font-family":         { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Font family" },
+    "font-size":           { "$value": "{font-size.1}",               "$type": "dimension", "$description": "14px — UI label" },
+    "gap":                 { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Gap entre botones y label — variante md" },
+    "sm-gap":              { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Gap entre botones y label — variante sm" },
+    "label-font-weight":   { "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso tipográfico del label central" },
+    "label-color":         { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del label central" },
+    "btn-color":           { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color de los botones de navegación" },
+    "btn-hover-color":     { "$value": "{color.primary}",             "$type": "color",     "$description": "Color en hover" },
+    "btn-disabled-color":  { "$value": "{color.grey-dark}",           "$type": "color",     "$description": "Color cuando el botón está deshabilitado" },
+    "focus-ring-color":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del focus ring" },
+    "focus-ring-width":    { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Grosor del focus ring" },
+    "focus-ring-offset":   { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del focus ring" },
+    "transition-duration": { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de las transiciones" },
+    "transition-easing":   { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Easing de las transiciones" }
+  }
+}

@@ -14,7 +14,11 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
     sorted?: 'asc' | 'desc' | false;
     /** Handler de click/teclado. Solo relevante si sortable */
     onSort?: () => void;
-    children: ReactNode;
+    /** Marca esta columna como columna de acciones: ancho mínimo y cabecera oculta visualmente */
+    actions?: boolean;
+    /** Texto accesible de la cabecera de acciones. Default: "Acciones" */
+    actionsLabel?: string;
+    children?: ReactNode;
 }
 /** onClick tipado como () => void para mantener la API de interactividad con teclado */
 export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowElement>, 'onClick'> {
@@ -35,7 +39,7 @@ declare function TableFoot({ children }: {
 declare function TableBody({ children }: {
     children: ReactNode;
 }): import("react/jsx-runtime").JSX.Element;
-declare function TableHeader({ sortable, sorted, onSort, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
+declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
 declare function TableRow({ onClick, interactive, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
 declare function TableCell({ children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
 export declare function Table({ caption, children, size }: TableProps): import("react/jsx-runtime").JSX.Element;

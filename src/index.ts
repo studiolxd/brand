@@ -92,6 +92,8 @@ export type { ModalProps } from './stories/molecules/Modal/Modal';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { Pagination } from './stories/molecules/Pagination/Pagination';
 export type { PaginationProps } from './stories/molecules/Pagination/Pagination';
+export { PrevNextNav } from './stories/molecules/PrevNextNav/PrevNextNav';
+export type { PrevNextNavProps } from './stories/molecules/PrevNextNav/PrevNextNav';
 export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export type { OrgSwitcherProps, OrgOption } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
