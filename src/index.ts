@@ -3,6 +3,10 @@ import './index.css';
 
 // ─── Atoms ───────────────────────────────────────────────────
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './stories/atoms/Accordion/Accordion';
+export { AsyncMultiSelect } from './stories/atoms/AsyncMultiSelect/AsyncMultiSelect';
+export type { AsyncMultiSelectOption, AsyncMultiSelectProps } from './stories/atoms/AsyncMultiSelect/AsyncMultiSelect';
+export { AsyncSelect } from './stories/atoms/AsyncSelect/AsyncSelect';
+export type { AsyncSelectOption, AsyncSelectProps } from './stories/atoms/AsyncSelect/AsyncSelect';
 export { Arrow } from './stories/atoms/Arrow/Arrow';
 export { Avatar } from './stories/atoms/Avatar/Avatar';
 export { Button } from './stories/atoms/Button/Button';
@@ -43,6 +47,10 @@ export { Textarea } from './stories/atoms/Textarea/Textarea';
 export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
+export { AsyncMultiSelectField } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
+export type { AsyncMultiSelectFieldProps } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
+export { AsyncSelectField } from './stories/molecules/AsyncSelectField/AsyncSelectField';
+export type { AsyncSelectFieldProps } from './stories/molecules/AsyncSelectField/AsyncSelectField';
 export { Breadcrumb } from './stories/molecules/Breadcrumb/Breadcrumb';
 export type { BreadcrumbItem, BreadcrumbProps, BreadcrumbRenderLinkProps } from './stories/molecules/Breadcrumb/Breadcrumb';
 export { DatePicker } from './stories/molecules/DatePicker/DatePicker';

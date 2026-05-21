@@ -1,0 +1,211 @@
+/* ─── Trigger ─────────────────────────────────────────────── */
+.async-select {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--multi-select-icon-size);
+
+  padding-block: var(--multi-select-padding-block);
+  padding-inline: var(--multi-select-padding-inline);
+
+  font-family: var(--multi-select-font-family);
+  font-size: var(--multi-select-font-size);
+  line-height: var(--multi-select-line-height);
+  font-weight: var(--multi-select-font-weight);
+  color: var(--multi-select-color);
+  background-color: var(--multi-select-bg);
+
+  border-width: var(--multi-select-border-width);
+  border-style: var(--multi-select-border-style);
+  border-color: var(--multi-select-border-color);
+  border-radius: var(--multi-select-border-radius);
+
+  width: 100%;
+
+  &:focus-within {
+    outline: var(--multi-select-focus-ring-width) solid var(--multi-select-focus-ring-color);
+    outline-offset: var(--multi-select-focus-ring-offset);
+  }
+}
+
+.async-select.async-select--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Input ───────────────────────────────────────────────── */
+.async-select__input {
+  all: unset;
+  flex: 1;
+  min-width: 0;
+  cursor: text;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+
+  &::placeholder {
+    color: var(--multi-select-placeholder-color);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+/* ─── Clear button ────────────────────────────────────────── */
+.async-select__clear {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  line-height: 1;
+  font-size: var(--multi-select-font-size);
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+/* ─── Spinner ─────────────────────────────────────────────── */
+.async-select__spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: async-select-spin 0.6s linear infinite;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+@keyframes async-select-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Dropdown ────────────────────────────────────────────── */
+.async-select__content {
+  background-color: var(--multi-select-content-bg);
+  border-width: var(--multi-select-border-width);
+  border-style: var(--multi-select-border-style);
+  border-color: var(--multi-select-content-border-color);
+  min-width: var(--radix-popover-trigger-width);
+  z-index: var(--multi-select-content-z-index);
+
+  &[data-side='bottom'] {
+    border-top: none;
+  }
+
+  &[data-side='top'] {
+    border-bottom: none;
+  }
+}
+
+/* ─── Loading & empty states ──────────────────────────────── */
+.async-select__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--multi-select-item-padding-block);
+  padding-inline: var(--multi-select-padding-inline);
+}
+
+.async-select__empty {
+  padding-block: var(--multi-select-item-padding-block);
+  padding-inline: var(--multi-select-padding-inline);
+  font-size: var(--multi-select-font-size);
+  font-family: var(--multi-select-font-family);
+  color: var(--multi-select-placeholder-color);
+}
+
+/* ─── Items ───────────────────────────────────────────────── */
+.async-select__item {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-block: var(--multi-select-item-padding-block);
+  padding-inline: var(--multi-select-padding-inline);
+  font-size: var(--multi-select-font-size);
+  font-family: var(--multi-select-font-family);
+  color: var(--multi-select-color);
+  cursor: pointer;
+
+  &:focus-visible,
+  &:hover {
+    outline: none;
+    background-color: var(--multi-select-item-highlighted-bg);
+    color: var(--multi-select-item-highlighted-color);
+  }
+
+  &.async-select__item--selected {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.async-select__content .async-select__item + .async-select__item {
+  border-top: var(--multi-select-border-width) var(--multi-select-border-style) var(--multi-select-content-border-color);
+}
+
+.async-select__content[data-side='bottom'] .async-select__item:first-child {
+  border-top: var(--multi-select-border-width) var(--multi-select-border-style) var(--multi-select-content-border-color);
+}
+
+.async-select__content[data-side='top'] .async-select__item:last-child {
+  border-bottom: var(--multi-select-border-width) var(--multi-select-border-style) var(--multi-select-content-border-color);
+}
+
+/* ─── Sm variant ─────────────────────────────────────────────────────────── */
+.async-select.async-select--sm {
+  font-size: var(--multi-select-sm-font-size);
+  padding-block: var(--multi-select-sm-padding-block);
+  padding-inline: var(--multi-select-sm-padding-inline);
+}
+
+.async-select__content--sm .async-select__item {
+  font-size: var(--multi-select-sm-font-size);
+  padding-block: var(--multi-select-sm-item-padding-block);
+}
+
+/* ─── Lg variant ─────────────────────────────────────────────────────────── */
+.async-select.async-select--lg {
+  font-size: var(--multi-select-lg-font-size);
+  padding-block: var(--multi-select-lg-padding-block);
+  padding-inline: var(--multi-select-lg-padding-inline);
+}
+
+.async-select__content--lg .async-select__item {
+  font-size: var(--multi-select-lg-font-size);
+  padding-block: var(--multi-select-lg-item-padding-block);
+}
+
+/* ─── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
+.async-select__content.async-select__content--dark {
+  background-color: var(--color-background-dark);
+  border-color: var(--color-text-on-dark);
+}
+
+.async-select__content.async-select__content--dark .async-select__item {
+  color: var(--color-text-on-dark);
+}
+
+.async-select__content.async-select__content--dark .async-select__item:focus-visible,
+.async-select__content.async-select__content--dark .async-select__item:hover {
+  background-color: var(--color-text-on-dark);
+  color: var(--color-background-dark);
+}
+
+.async-select__content.async-select__content--dark .async-select__empty {
+  color: var(--color-text-on-dark);
+  opacity: 0.6;
+}
+
+.async-select__content.async-select__content--dark .async-select__item + .async-select__item {
+  border-color: var(--color-text-on-dark);
+}

@@ -1,6 +1,8 @@
 export const entryPoints = {
   // Atoms
   'accordion':           'src/stories/atoms/Accordion/Accordion.tsx',
+  'async-multi-select':  'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',
+  'async-select':        'src/stories/atoms/AsyncSelect/AsyncSelect.tsx',
   'arrow':               'src/stories/atoms/Arrow/Arrow.tsx',
   'avatar':              'src/stories/atoms/Avatar/Avatar.tsx',
   'button':              'src/stories/atoms/Button/Button.tsx',
@@ -32,6 +34,8 @@ export const entryPoints = {
   'tabs':                'src/stories/atoms/Tabs/Tabs.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   // Molecules
+  'async-multi-select-field': 'src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx',
+  'async-select-field':  'src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx',
   'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
   'pagination':          'src/stories/molecules/Pagination/Pagination.tsx',
   'table':               'src/stories/molecules/Table/Table.tsx',
@@ -72,7 +76,8 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'accordion', 'button', 'carousel', 'checkbox', 'radio', 'switcher', 'hamburger', 'hero-video', 'input',
+  'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field',
+  'button', 'carousel', 'checkbox', 'radio', 'switcher', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',

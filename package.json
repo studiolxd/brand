@@ -11,6 +11,22 @@
       "types": "./dist/_types/sections/AppShell/AppShell.d.ts",
       "import": "./dist/app-shell.js"
     },
+    "./async-multi-select": {
+      "types": "./dist/_types/atoms/AsyncMultiSelect/AsyncMultiSelect.d.ts",
+      "import": "./dist/async-multi-select.js"
+    },
+    "./async-multi-select-field": {
+      "types": "./dist/_types/molecules/AsyncMultiSelectField/AsyncMultiSelectField.d.ts",
+      "import": "./dist/async-multi-select-field.js"
+    },
+    "./async-select": {
+      "types": "./dist/_types/atoms/AsyncSelect/AsyncSelect.d.ts",
+      "import": "./dist/async-select.js"
+    },
+    "./async-select-field": {
+      "types": "./dist/_types/molecules/AsyncSelectField/AsyncSelectField.d.ts",
+      "import": "./dist/async-select-field.js"
+    },
     "./arrow": {
       "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",
       "import": "./dist/arrow.js"
