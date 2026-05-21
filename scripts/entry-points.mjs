@@ -37,6 +37,7 @@ export const entryPoints = {
   'switcher':            'src/stories/atoms/Switcher/Switcher.tsx',
   'tabs':                'src/stories/atoms/Tabs/Tabs.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
+  'number-input':        'src/stories/atoms/NumberInput/NumberInput.tsx',
   // Molecules
   'async-multi-select-field': 'src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx',
   'async-select-field':  'src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx',
@@ -73,6 +74,7 @@ export const entryPoints = {
   'empty-state':         'src/stories/molecules/EmptyState/EmptyState.tsx',
   'password-field':      'src/stories/molecules/PasswordField/PasswordField.tsx',
   'toaster':             'src/stories/molecules/Toast/Toaster.tsx',
+  'number-input-field':  'src/stories/molecules/NumberInputField/NumberInputField.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
@@ -104,4 +106,6 @@ export const clientComponents = new Set([
   'calendar-roster',
   'password-field',
   'toaster',
+  'number-input',
+  'number-input-field',
 ]);

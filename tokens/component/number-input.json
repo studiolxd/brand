@@ -1,0 +1,46 @@
+{
+  "number-input": {
+    "border-radius":       { "$value": "{input.border-radius}",       "$type": "dimension", "$description": "Border radius del contenedor" },
+    "border-width":        { "$value": "{input.border-width}",        "$type": "dimension", "$description": "Grosor del borde" },
+    "border-style":        { "$value": "solid",                       "$type": "string",    "$description": "Estilo del borde" },
+    "border-color":        { "$value": "{input.border-color}",        "$type": "color",     "$description": "Color del borde" },
+    "bg":                  { "$value": "{input.bg}",                  "$type": "color",     "$description": "Fondo del contenedor" },
+    "color":               { "$value": "{input.color}",               "$type": "color",     "$description": "Color del texto" },
+    "font-family":         { "$value": "{input.font-family}",         "$type": "string",    "$description": "Font family" },
+    "font-size":           { "$value": "{input.font-size}",           "$type": "dimension", "$description": "Font size" },
+    "font-weight":         { "$value": "{input.font-weight}",         "$type": "number",    "$description": "Font weight" },
+    "line-height":         { "$value": "{input.line-height}",         "$type": "number",    "$description": "Line height" },
+    "padding-block":       { "$value": "{input.padding-block}",       "$type": "dimension", "$description": "Padding vertical del campo" },
+    "transition-duration": { "$value": "{input.transition-duration}", "$type": "number",    "$description": "Duración de la transición" },
+    "transition-easing":   { "$value": "{input.transition-easing}",   "$type": "string",    "$description": "Easing de la transición" },
+
+    "btn-width":           { "$value": "{spacing.6}",                 "$type": "dimension", "$description": "Ancho de los botones +/−" },
+    "btn-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del icono de los botones" },
+    "btn-bg":              { "$value": "transparent",                 "$type": "string",    "$description": "Fondo de los botones" },
+    "btn-hover-bg":        { "$value": "{color.grey-lightest}",       "$type": "color",     "$description": "Fondo de los botones en hover" },
+    "btn-separator-color": { "$value": "{input.border-color}",        "$type": "color",     "$description": "Color del separador entre botón y campo" },
+    "btn-font-size":       { "$value": "{font-size.4}",               "$type": "dimension", "$description": "Tamaño del símbolo +/−" },
+
+    "focus-ring-width":        { "$value": "{input.focus-ring-width}",        "$type": "dimension", "$description": "Grosor del focus ring" },
+    "focus-ring-inset-offset": { "$value": "{input.focus-ring-inset-offset}", "$type": "dimension", "$description": "Gap entre borde y focus ring" },
+    "focus-ring-color":        { "$value": "{input.focus-ring-color}",        "$type": "color",     "$description": "Color del focus ring" },
+    "focus-border-color":      { "$value": "{input.focus-border-color}",      "$type": "color",     "$description": "Color del borde en foco" },
+
+    "disabled-cursor":       { "$value": "{input.disabled-cursor}",       "$type": "string", "$description": "Cursor cuando deshabilitado" },
+    "disabled-bg":           { "$value": "{input.disabled-bg}",           "$type": "color",  "$description": "Fondo cuando deshabilitado" },
+    "disabled-color":        { "$value": "{input.disabled-color}",        "$type": "color",  "$description": "Texto cuando deshabilitado" },
+    "disabled-border-color": { "$value": "{input.disabled-border-color}", "$type": "color",  "$description": "Borde cuando deshabilitado" },
+    "disabled-btn-color":    { "$value": "{input.disabled-color}",        "$type": "color",  "$description": "Color del icono de botones cuando deshabilitado" },
+
+    "error-border-color":       { "$value": "{input.error-border-color}",       "$type": "color", "$description": "Color del borde en error" },
+    "error-bg":                 { "$value": "{input.error-bg}",                 "$type": "color", "$description": "Fondo en error" },
+    "error-color":              { "$value": "{input.error-color}",              "$type": "color", "$description": "Texto en error" },
+    "error-focus-border-color": { "$value": "{input.error-focus-border-color}", "$type": "color", "$description": "Borde en foco+error" },
+    "error-focus-ring-color":   { "$value": "{input.error-focus-ring-color}",   "$type": "color", "$description": "Focus ring en error" },
+
+    "sm-font-size":   { "$value": "{input.sm-font-size}",   "$type": "dimension", "$description": "Font size — sm" },
+    "sm-padding-block":{ "$value": "{input.sm-padding-block}","$type": "dimension", "$description": "Padding vertical — sm" },
+    "lg-font-size":   { "$value": "{input.lg-font-size}",   "$type": "dimension", "$description": "Font size — lg" },
+    "lg-padding-block":{ "$value": "{input.lg-padding-block}","$type": "dimension", "$description": "Padding vertical — lg" }
+  }
+}

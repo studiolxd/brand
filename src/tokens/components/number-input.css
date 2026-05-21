@@ -1,0 +1,43 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --number-input-border-style: solid; /** Estilo del borde */
+  --number-input-btn-bg: transparent; /** Fondo de los botones */
+  --number-input-btn-width: var(--spacing-6); /** Ancho de los botones +/− */
+  --number-input-btn-hover-bg: var(--color-grey-lightest); /** Fondo de los botones en hover */
+  --number-input-btn-font-size: var(--font-size-4); /** Tamaño del símbolo +/− */
+  --number-input-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando deshabilitado */
+  --number-input-border-radius: var(--input-border-radius); /** Border radius del contenedor */
+  --number-input-border-width: var(--input-border-width); /** Grosor del borde */
+  --number-input-bg: var(--input-bg); /** Fondo del contenedor */
+  --number-input-font-family: var(--input-font-family); /** Font family */
+  --number-input-font-size: var(--input-font-size); /** Font size */
+  --number-input-line-height: var(--input-line-height); /** Line height */
+  --number-input-transition-duration: var(--input-transition-duration); /** Duración de la transición */
+  --number-input-transition-easing: var(--input-transition-easing); /** Easing de la transición */
+  --number-input-btn-color: var(--color-primary); /** Color del icono de los botones */
+  --number-input-focus-ring-inset-offset: var(--input-focus-ring-inset-offset); /** Gap entre borde y focus ring */
+  --number-input-disabled-bg: var(--input-disabled-bg); /** Fondo cuando deshabilitado */
+  --number-input-disabled-color: var(--input-disabled-color); /** Texto cuando deshabilitado */
+  --number-input-disabled-border-color: var(--input-disabled-border-color); /** Borde cuando deshabilitado */
+  --number-input-disabled-btn-color: var(--input-disabled-color); /** Color del icono de botones cuando deshabilitado */
+  --number-input-error-bg: var(--input-error-bg); /** Fondo en error */
+  --number-input-sm-font-size: var(--input-sm-font-size); /** Font size — sm */
+  --number-input-sm-padding-block: var(--input-sm-padding-block); /** Padding vertical — sm */
+  --number-input-lg-font-size: var(--input-lg-font-size); /** Font size — lg */
+  --number-input-lg-padding-block: var(--input-lg-padding-block); /** Padding vertical — lg */
+  --number-input-border-color: var(--input-border-color); /** Color del borde */
+  --number-input-color: var(--input-color); /** Color del texto */
+  --number-input-font-weight: var(--input-font-weight); /** Font weight */
+  --number-input-padding-block: var(--input-padding-block); /** Padding vertical del campo */
+  --number-input-btn-separator-color: var(--input-border-color); /** Color del separador entre botón y campo */
+  --number-input-focus-ring-width: var(--input-focus-ring-width); /** Grosor del focus ring */
+  --number-input-focus-ring-color: var(--input-focus-ring-color); /** Color del focus ring */
+  --number-input-focus-border-color: var(--input-focus-border-color); /** Color del borde en foco */
+  --number-input-error-border-color: var(--input-error-border-color); /** Color del borde en error */
+  --number-input-error-color: var(--input-error-color); /** Texto en error */
+  --number-input-error-focus-border-color: var(--input-error-focus-border-color); /** Borde en foco+error */
+  --number-input-error-focus-ring-color: var(--input-error-focus-ring-color); /** Focus ring en error */
+}

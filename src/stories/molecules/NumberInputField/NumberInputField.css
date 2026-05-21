@@ -1,0 +1,21 @@
+.number-input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--number-input-field-gap);
+}
+
+.number-input-field__error {
+  font-family: var(--number-input-field-error-font-family);
+  font-size: var(--number-input-field-error-font-size);
+  font-weight: var(--number-input-field-error-font-weight);
+  line-height: var(--number-input-field-error-line-height);
+  color: var(--number-input-field-error-color);
+}
+
+.number-input-field__helper {
+  font-family: var(--number-input-field-helper-font-family);
+  font-size: var(--number-input-field-helper-font-size);
+  font-weight: var(--number-input-field-helper-font-weight);
+  line-height: var(--number-input-field-helper-line-height);
+  color: var(--number-input-field-helper-color);
+}

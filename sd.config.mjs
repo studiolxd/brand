@@ -79,6 +79,8 @@ const filters = {
   'progress-bar':      (t) => t.path[0] === 'progress-bar',
   spinner:             (t) => t.path[0] === 'spinner',
   toast:               (t) => t.path[0] === 'toast',
+  'number-input':       (t) => t.path[0] === 'number-input',
+  'number-input-field': (t) => t.path[0] === 'number-input-field',
 };
 
 function cssFile(destination, filterKey) {
@@ -171,6 +173,8 @@ const sd = new StyleDictionary({
         cssFile('components/progress-bar.css',      'progress-bar'),
         cssFile('components/spinner.css',           'spinner'),
         cssFile('molecules/toast.css',              'toast'),
+        cssFile('components/number-input.css',      'number-input'),
+        cssFile('molecules/number-input-field.css', 'number-input-field'),
       ],
     },
     scss: {
@@ -251,6 +255,8 @@ const sd = new StyleDictionary({
         scssFile('components/_progress-bar.scss',       'progress-bar'),
         scssFile('components/_spinner.scss',            'spinner'),
         scssFile('molecules/_toast.scss',               'toast'),
+        scssFile('components/_number-input.scss',      'number-input'),
+        scssFile('molecules/_number-input-field.scss', 'number-input-field'),
       ],
     },
   },

@@ -70,3 +70,5 @@
 @import "./molecules/empty-state.css";
 @import "./components/progress-bar.css";
 @import "./components/spinner.css";
+@import "./components/number-input.css";
+@import "./molecules/number-input-field.css";
