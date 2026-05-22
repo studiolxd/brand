@@ -18,6 +18,7 @@
 }
 
 .description-list > dt {
+  align-self: center;
   font-family: var(--label-font-family);
   font-size: var(--label-font-size);
   font-weight: var(--label-font-weight);
