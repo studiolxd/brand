@@ -6,5 +6,6 @@ export interface AppShellProps {
     sidebar: ReactNode;
     children: ReactNode;
     defaultCollapsed?: boolean;
+    storageKey?: string;
 }
-export declare function AppShell({ sidebar, children, defaultCollapsed }: AppShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppShell({ sidebar, children, defaultCollapsed, storageKey }: AppShellProps): import("react/jsx-runtime").JSX.Element;
