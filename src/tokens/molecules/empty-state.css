@@ -9,6 +9,8 @@
   --empty-state-body-gap: var(--spacing-2); /** Gap entre título y descripción */
   --empty-state-padding-block: var(--spacing-7); /** Padding vertical del contenedor */
   --empty-state-padding-inline: var(--spacing-5); /** Padding horizontal del contenedor */
+  --empty-state-title-font-size-sm: var(--font-size-4); /** Tamaño tipográfico del título — variante sm */
+  --empty-state-description-font-size-sm: var(--font-size-1); /** Tamaño tipográfico de la descripción — variante sm */
   --empty-state-icon-color: var(--color-grey-dark); /** Color del icono */
   --empty-state-title-font-family: var(--font-family-sans); /** Familia tipográfica del título */
   --empty-state-title-font-size: var(--font-size-5); /** Tamaño tipográfico del título */

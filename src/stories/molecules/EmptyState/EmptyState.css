@@ -49,3 +49,11 @@
   width: var(--empty-state-icon-size-sm);
   height: var(--empty-state-icon-size-sm);
 }
+
+.empty-state.empty-state--sm .empty-state__title {
+  font-size: var(--empty-state-title-font-size-sm);
+}
+
+.empty-state.empty-state--sm .empty-state__description {
+  font-size: var(--empty-state-description-font-size-sm);
+}
