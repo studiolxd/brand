@@ -9,12 +9,12 @@
   --empty-state-body-gap: var(--spacing-2); /** Gap entre título y descripción */
   --empty-state-padding-block: var(--spacing-7); /** Padding vertical del contenedor */
   --empty-state-padding-inline: var(--spacing-5); /** Padding horizontal del contenedor */
+  --empty-state-icon-color: var(--color-grey-dark); /** Color del icono */
   --empty-state-title-font-family: var(--font-family-sans); /** Familia tipográfica del título */
   --empty-state-title-font-size: var(--font-size-5); /** Tamaño tipográfico del título */
   --empty-state-title-font-weight: var(--font-weight-medium); /** Peso del título */
+  --empty-state-title-color: var(--color-grey-dark); /** Color del título */
   --empty-state-description-font-family: var(--font-family-sans); /** Familia tipográfica de la descripción */
   --empty-state-description-font-size: var(--font-size-2); /** Tamaño tipográfico de la descripción */
-  --empty-state-icon-color: var(--color-text-muted-on-light); /** Color del icono */
-  --empty-state-title-color: var(--color-text-on-light); /** Color del título */
-  --empty-state-description-color: var(--color-text-muted-on-light); /** Color de la descripción */
+  --empty-state-description-color: var(--color-grey-dark); /** Color de la descripción */
 }

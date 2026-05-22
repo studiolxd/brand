@@ -9,7 +9,7 @@ const meta = {
   argTypes: {
     name: {
       control: 'select',
-      options: ['arrow', 'chevron', 'close', 'eye', 'eye-off'] satisfies IconName[],
+      options: ['arrow', 'chevron', 'close', 'eye', 'eye-off', 'folder', 'search'] satisfies IconName[],
     },
     size: {
       control: 'select',
@@ -26,7 +26,7 @@ export const Default: Story = {};
 export const AllIcons: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
-      {(['arrow', 'chevron', 'close', 'eye', 'eye-off'] satisfies IconName[]).map((name) => (
+      {(['arrow', 'chevron', 'close', 'eye', 'eye-off', 'folder', 'search'] satisfies IconName[]).map((name) => (
         <div key={name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
           <Icon {...args} name={name} />
           <span style={{ fontSize: '0.75rem', color: 'var(--color-text-subtle, #595959)' }}>{name}</span>

@@ -1,23 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import { EmptyState } from './EmptyState';
-
-function FolderIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="1.5"/>
-      <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-    </svg>
-  );
-}
+import { Icon } from '../../atoms/Icon/Icon';
 
 const meta: Meta<typeof EmptyState> = {
   title: 'Molecules/EmptyState',
@@ -49,14 +33,14 @@ export const WithDescription: Story = {
 
 export const WithIcon: Story = {
   args: {
-    icon: <FolderIcon />,
+    icon: <Icon name="folder" size="xl" />,
     description: 'Esta carpeta está vacía. Crea un proyecto para empezar.',
   },
 };
 
 export const WithAction: Story = {
   args: {
-    icon: <FolderIcon />,
+    icon: <Icon name="folder" size="xl" />,
     description: 'No tienes proyectos todavía.',
     action: { label: 'Crear proyecto', onClick: fn() },
   },
@@ -64,7 +48,7 @@ export const WithAction: Story = {
 
 export const SearchResult: Story = {
   args: {
-    icon: <SearchIcon />,
+    icon: <Icon name="search" size="xl" />,
     title: 'Sin resultados',
     description: 'No se han encontrado coincidencias para tu búsqueda.',
   },
@@ -73,7 +57,7 @@ export const SearchResult: Story = {
 export const Small: Story = {
   args: {
     size: 'sm',
-    icon: <FolderIcon />,
+    icon: <Icon name="folder" size="lg" />,
     description: 'No hay datos disponibles.',
     action: { label: 'Añadir', onClick: fn() },
   },
