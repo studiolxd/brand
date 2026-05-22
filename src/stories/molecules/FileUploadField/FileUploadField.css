@@ -1,0 +1,21 @@
+.file-upload-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--file-upload-field-gap);
+}
+
+.file-upload-field__error {
+  font-family: var(--file-upload-field-error-font-family);
+  font-size: var(--file-upload-field-error-font-size);
+  font-weight: var(--file-upload-field-error-font-weight);
+  line-height: var(--file-upload-field-error-line-height);
+  color: var(--file-upload-field-error-color);
+}
+
+.file-upload-field__helper {
+  font-family: var(--file-upload-field-helper-font-family);
+  font-size: var(--file-upload-field-helper-font-size);
+  font-weight: var(--file-upload-field-helper-font-weight);
+  line-height: var(--file-upload-field-helper-line-height);
+  color: var(--file-upload-field-helper-color);
+}

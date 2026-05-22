@@ -38,7 +38,9 @@ export const entryPoints = {
   'tabs':                'src/stories/atoms/Tabs/Tabs.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   'number-input':        'src/stories/atoms/NumberInput/NumberInput.tsx',
+  'file-upload':         'src/stories/atoms/FileUpload/FileUpload.tsx',
   // Molecules
+  'alert':                   'src/stories/molecules/Alert/Alert.tsx',
   'async-multi-select-field': 'src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx',
   'async-select-field':  'src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx',
   'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
@@ -75,6 +77,7 @@ export const entryPoints = {
   'password-field':      'src/stories/molecules/PasswordField/PasswordField.tsx',
   'toaster':             'src/stories/molecules/Toast/Toaster.tsx',
   'number-input-field':  'src/stories/molecules/NumberInputField/NumberInputField.tsx',
+  'file-upload-field':   'src/stories/molecules/FileUploadField/FileUploadField.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
@@ -87,7 +90,7 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field',
+  'alert', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field',
   'button', 'carousel', 'checkbox', 'radio', 'switcher', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
@@ -108,4 +111,6 @@ export const clientComponents = new Set([
   'toaster',
   'number-input',
   'number-input-field',
+  'file-upload',
+  'file-upload-field',
 ]);

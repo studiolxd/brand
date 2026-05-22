@@ -78,9 +78,12 @@ const filters = {
   'empty-state':       (t) => t.path[0] === 'empty-state',
   'progress-bar':      (t) => t.path[0] === 'progress-bar',
   spinner:             (t) => t.path[0] === 'spinner',
+  alert:               (t) => t.path[0] === 'alert',
   toast:               (t) => t.path[0] === 'toast',
   'number-input':       (t) => t.path[0] === 'number-input',
   'number-input-field': (t) => t.path[0] === 'number-input-field',
+  'file-upload':        (t) => t.path[0] === 'file-upload',
+  'file-upload-field':  (t) => t.path[0] === 'file-upload-field',
 };
 
 function cssFile(destination, filterKey) {
@@ -172,9 +175,12 @@ const sd = new StyleDictionary({
         cssFile('molecules/empty-state.css',        'empty-state'),
         cssFile('components/progress-bar.css',      'progress-bar'),
         cssFile('components/spinner.css',           'spinner'),
+        cssFile('molecules/alert.css',              'alert'),
         cssFile('molecules/toast.css',              'toast'),
         cssFile('components/number-input.css',      'number-input'),
         cssFile('molecules/number-input-field.css', 'number-input-field'),
+        cssFile('components/file-upload.css',       'file-upload'),
+        cssFile('molecules/file-upload-field.css',  'file-upload-field'),
       ],
     },
     scss: {
@@ -254,9 +260,12 @@ const sd = new StyleDictionary({
         scssFile('molecules/_empty-state.scss',         'empty-state'),
         scssFile('components/_progress-bar.scss',       'progress-bar'),
         scssFile('components/_spinner.scss',            'spinner'),
+        scssFile('molecules/_alert.scss',               'alert'),
         scssFile('molecules/_toast.scss',               'toast'),
         scssFile('components/_number-input.scss',      'number-input'),
         scssFile('molecules/_number-input-field.scss', 'number-input-field'),
+        scssFile('components/_file-upload.scss',       'file-upload'),
+        scssFile('molecules/_file-upload-field.scss',  'file-upload-field'),
       ],
     },
   },

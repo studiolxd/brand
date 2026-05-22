@@ -26,6 +26,8 @@ export { Highlight } from './stories/atoms/Highlight/Highlight';
 export { Input } from './stories/atoms/Input/Input';
 export { NumberInput } from './stories/atoms/NumberInput/NumberInput';
 export type { NumberInputProps } from './stories/atoms/NumberInput/NumberInput';
+export { FileUpload } from './stories/atoms/FileUpload/FileUpload';
+export type { FileUploadProps } from './stories/atoms/FileUpload/FileUpload';
 export { InputPhone } from './stories/atoms/InputPhone/InputPhone';
 export { OtpInput } from './stories/atoms/OtpInput/OtpInput';
 export type { OtpInputProps } from './stories/atoms/OtpInput/OtpInput';
@@ -56,6 +58,8 @@ export { Textarea } from './stories/atoms/Textarea/Textarea';
 export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
+export { Alert } from './stories/molecules/Alert/Alert';
+export type { AlertProps } from './stories/molecules/Alert/Alert';
 export { AsyncMultiSelectField } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
 export type { AsyncMultiSelectFieldProps } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
 export { AsyncSelectField } from './stories/molecules/AsyncSelectField/AsyncSelectField';
@@ -87,6 +91,8 @@ export { Form } from './stories/molecules/Form/Form';
 export { InputField } from './stories/molecules/InputField/InputField';
 export { NumberInputField } from './stories/molecules/NumberInputField/NumberInputField';
 export type { NumberInputFieldProps } from './stories/molecules/NumberInputField/NumberInputField';
+export { FileUploadField } from './stories/molecules/FileUploadField/FileUploadField';
+export type { FileUploadFieldProps } from './stories/molecules/FileUploadField/FileUploadField';
 export { OtpField } from './stories/molecules/OtpField/OtpField';
 export type { OtpFieldProps } from './stories/molecules/OtpField/OtpField';
 export { PasswordField } from './stories/molecules/PasswordField/PasswordField';

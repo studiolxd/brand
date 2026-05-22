@@ -1,0 +1,55 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$file-upload-border-color: #d0d0d0; // Borde del dropzone por defecto
+$file-upload-border-style: dashed; // Estilo de borde del dropzone
+$file-upload-border-width: 1px; // Grosor del borde
+$file-upload-border-radius: 8px; // Radio de esquinas del dropzone
+$file-upload-bg: #f2f2f2; // Fondo del dropzone
+$file-upload-padding-block: 3rem; // Padding vertical del dropzone
+$file-upload-padding-inline: 1.5rem; // Padding horizontal del dropzone
+$file-upload-gap: 0.25rem; // Espacio entre elementos dentro del dropzone
+$file-upload-text-color: #111e30; // Color del texto principal
+$file-upload-subtext-color: #4a4a4a; // Color del texto secundario y restricciones
+$file-upload-icon-color: #111e30; // Color del icono upload
+$file-upload-transition-duration: 150ms; // Duración de transiciones de estado
+$file-upload-transition-easing: ease; // Easing de transiciones
+$file-upload-drag-border-color: #111e30; // Borde cuando hay drag activo
+$file-upload-drag-border-style: solid; // Estilo de borde en drag activo
+$file-upload-drag-bg: #ffffff; // Fondo en drag activo
+$file-upload-error-border-color: #b30000; // Borde en estado de error
+$file-upload-error-border-style: solid; // Estilo de borde en error
+$file-upload-error-bg: #f2f2f2; // Fondo en estado de error
+$file-upload-disabled-opacity: 0.5; // Opacidad cuando está deshabilitado
+$file-upload-list-gap: 0.5rem; // Espacio entre items de la lista
+$file-upload-list-margin-block-start: 0.75rem; // Margen superior de la lista de archivos
+$file-upload-item-bg: #ffffff; // Fondo de cada item
+$file-upload-item-border-color: #d0d0d0; // Borde de cada item
+$file-upload-item-border-width: 1px; // Grosor de borde del item
+$file-upload-item-border-radius: 4px; // Radio de esquinas del item
+$file-upload-item-padding-block: 0.5rem; // Padding vertical del item
+$file-upload-item-padding-inline: 0.75rem; // Padding horizontal del item
+$file-upload-item-gap: 0.75rem; // Espacio entre thumb, info y botón
+$file-upload-item-name-font-family: "Google Sans Flex", system-ui, sans-serif; // Fuente del nombre de archivo
+$file-upload-item-name-font-size: 1rem; // Tamaño del nombre de archivo
+$file-upload-item-name-font-weight: 300; // Peso del nombre de archivo
+$file-upload-item-name-color: #111e30; // Color del nombre de archivo
+$file-upload-item-size-font-size: 0.875rem; // Tamaño del peso del archivo
+$file-upload-item-size-color: #4a4a4a; // Color del peso del archivo
+$file-upload-item-error-color: #b30000; // Color del mensaje de error por archivo
+$file-upload-item-error-font-size: 0.875rem; // Tamaño del mensaje de error por archivo
+$file-upload-item-error-border-color: #b30000; // Borde del item con error
+$file-upload-item-error-bg: #ffffff; // Fondo del item con error
+$file-upload-thumb-size: 2.5rem; // Tamaño del thumbnail
+$file-upload-thumb-border-radius: 4px; // Radio del thumbnail
+$file-upload-thumb-bg: #f2f2f2; // Fondo del thumb para iconos (no imagen)
+$file-upload-thumb-icon-color: #767676; // Color del icono de archivo genérico
+$file-upload-remove-color: #4a4a4a; // Color del botón eliminar
+$file-upload-remove-color-hover: #b30000; // Color del botón eliminar al hacer hover
+$file-upload-progress-margin-block-start: 0.75rem; // Margen superior de la barra de progreso
+$file-upload-progress-height: 0.375rem; // Altura de la barra de progreso
+$file-upload-progress-bg: #d0d0d0; // Fondo del track de progreso
+$file-upload-progress-fill: #111e30; // Color del relleno de progreso
+$file-upload-progress-border-radius: 9999px; // Radio de la barra de progreso
+$file-upload-progress-transition-duration: 250ms; // Duración de la transición del progreso
+$file-upload-progress-transition-easing: ease-in-out; // Easing de la transición del progreso

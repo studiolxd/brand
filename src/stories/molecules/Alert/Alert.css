@@ -1,0 +1,111 @@
+@import '../../../tokens/molecules/alert.css';
+
+/* ── Alert card ─────────────────────────────────────────────── */
+
+.alert {
+  position: relative;
+  background-color: var(--alert-bg);
+  border: var(--alert-border-width) solid var(--alert-border-color);
+  border-radius: var(--alert-border-radius);
+  padding-block: var(--alert-padding-block);
+  padding-inline: var(--alert-padding-inline);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  box-sizing: border-box;
+}
+
+/* Deja espacio para el botón de cierre absoluto */
+.alert.alert--dismissible {
+  padding-inline-end: calc(var(--spacing-5) + var(--spacing-3));
+}
+
+/* ── Contenido ──────────────────────────────────────────────── */
+
+.alert__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert__title {
+  font-size: var(--alert-title-font-size);
+  font-weight: var(--alert-title-font-weight);
+  color: var(--alert-title-color);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.alert__description {
+  font-size: var(--alert-description-font-size);
+  color: var(--alert-description-color);
+  line-height: 1.4;
+  margin: 0;
+  margin-block-start: var(--spacing-1);
+}
+
+/* ── Botón de cierre — esquina superior derecha ─────────────── */
+
+.alert__close {
+  position: absolute;
+  inset-block-start: var(--spacing-2);
+  inset-inline-end: var(--spacing-2);
+
+  appearance: none;
+  background: none;
+  border: none;
+  padding-block: 0;
+  padding-inline: 0;
+  margin: 0;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--alert-close-size) + var(--spacing-2));
+  height: calc(var(--alert-close-size) + var(--spacing-2));
+
+  color: var(--alert-close-color);
+  border-radius: var(--border-radius-sm);
+  transition: color var(--motion-duration-fast) var(--motion-easing-default),
+              background-color var(--motion-duration-fast) var(--motion-easing-default);
+}
+
+.alert__close:hover {
+  color: var(--alert-close-hover-color);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.alert__close:focus-visible {
+  outline: var(--border-width-md) solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ── Variantes ──────────────────────────────────────────────── */
+
+.alert.alert--success {
+  --alert-bg:                   var(--alert-success-bg);
+  --alert-border-color:         var(--alert-success-border-color);
+  --alert-title-color:          var(--alert-success-title-color);
+  --alert-description-color:    var(--alert-success-description-color);
+}
+
+.alert.alert--error {
+  --alert-bg:                   var(--alert-error-bg);
+  --alert-border-color:         var(--alert-error-border-color);
+  --alert-title-color:          var(--alert-error-title-color);
+  --alert-description-color:    var(--alert-error-description-color);
+}
+
+.alert.alert--warning {
+  --alert-bg:                   var(--alert-warning-bg);
+  --alert-border-color:         var(--alert-warning-border-color);
+  --alert-title-color:          var(--alert-warning-title-color);
+  --alert-description-color:    var(--alert-warning-description-color);
+  --alert-close-color:          var(--alert-warning-close-color);
+  --alert-close-hover-color:    var(--alert-warning-close-hover-color);
+}
+
+.alert.alert--warning .alert__close:hover {
+  background-color: color-mix(in srgb, var(--alert-warning-close-color) 8%, transparent);
+}

@@ -1,0 +1,65 @@
+{
+  "file-upload": {
+    "border-color":                { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Borde del dropzone por defecto" },
+    "border-style":                { "$value": "dashed",                      "$type": "string",    "$description": "Estilo de borde del dropzone" },
+    "border-width":                { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Grosor del borde" },
+    "border-radius":               { "$value": "{border-radius.md}",          "$type": "dimension", "$description": "Radio de esquinas del dropzone" },
+    "bg":                          { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del dropzone" },
+    "padding-block":               { "$value": "{spacing.7}",                 "$type": "dimension", "$description": "Padding vertical del dropzone" },
+    "padding-inline":              { "$value": "{spacing.5}",                 "$type": "dimension", "$description": "Padding horizontal del dropzone" },
+    "gap":                         { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Espacio entre elementos dentro del dropzone" },
+    "text-color":                  { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del texto principal" },
+    "subtext-color":               { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del texto secundario y restricciones" },
+    "icon-color":                  { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del icono upload" },
+    "transition-duration":         { "$value": "{motion.duration.fast}",      "$type": "number",    "$description": "Duración de transiciones de estado" },
+    "transition-easing":           { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Easing de transiciones" },
+
+    "drag-border-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Borde cuando hay drag activo" },
+    "drag-border-style":           { "$value": "solid",                       "$type": "string",    "$description": "Estilo de borde en drag activo" },
+    "drag-bg":                     { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo en drag activo" },
+
+    "error-border-color":          { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Borde en estado de error" },
+    "error-border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Estilo de borde en error" },
+    "error-bg":                    { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo en estado de error" },
+
+    "disabled-opacity":            { "$value": "0.5",                         "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },
+
+    "list-gap":                    { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Espacio entre items de la lista" },
+    "list-margin-block-start":     { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Margen superior de la lista de archivos" },
+
+    "item-bg":                     { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo de cada item" },
+    "item-border-color":           { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Borde de cada item" },
+    "item-border-width":           { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Grosor de borde del item" },
+    "item-border-radius":          { "$value": "{border-radius.sm}",          "$type": "dimension", "$description": "Radio de esquinas del item" },
+    "item-padding-block":          { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding vertical del item" },
+    "item-padding-inline":         { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Padding horizontal del item" },
+    "item-gap":                    { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Espacio entre thumb, info y botón" },
+    "item-name-font-family":       { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Fuente del nombre de archivo" },
+    "item-name-font-size":         { "$value": "{font-size.2}",               "$type": "dimension", "$description": "Tamaño del nombre de archivo" },
+    "item-name-font-weight":       { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Peso del nombre de archivo" },
+    "item-name-color":             { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del nombre de archivo" },
+    "item-size-font-size":         { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Tamaño del peso del archivo" },
+    "item-size-color":             { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del peso del archivo" },
+    "item-error-color":            { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Color del mensaje de error por archivo" },
+    "item-error-font-size":        { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Tamaño del mensaje de error por archivo" },
+
+    "item-error-border-color":     { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Borde del item con error" },
+    "item-error-bg":               { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del item con error" },
+
+    "thumb-size":                  { "$value": "2.5rem",                      "$type": "dimension", "$description": "Tamaño del thumbnail" },
+    "thumb-border-radius":         { "$value": "{border-radius.sm}",          "$type": "dimension", "$description": "Radio del thumbnail" },
+    "thumb-bg":                    { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del thumb para iconos (no imagen)" },
+    "thumb-icon-color":            { "$value": "{color.grey-dark}",           "$type": "color",     "$description": "Color del icono de archivo genérico" },
+
+    "remove-color":                { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del botón eliminar" },
+    "remove-color-hover":          { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover" },
+
+    "progress-margin-block-start": { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Margen superior de la barra de progreso" },
+    "progress-height":             { "$value": "0.375rem",                    "$type": "dimension", "$description": "Altura de la barra de progreso" },
+    "progress-bg":                 { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Fondo del track de progreso" },
+    "progress-fill":               { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del relleno de progreso" },
+    "progress-border-radius":      { "$value": "{border-radius.full}",        "$type": "dimension", "$description": "Radio de la barra de progreso" },
+    "progress-transition-duration":{ "$value": "{motion.duration.base}",      "$type": "number",    "$description": "Duración de la transición del progreso" },
+    "progress-transition-easing":  { "$value": "{motion.easing.in-out}",      "$type": "string",    "$description": "Easing de la transición del progreso" }
+  }
+}

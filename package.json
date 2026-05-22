@@ -1,11 +1,15 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.13.0",
+  "version": "5.14.0",
   "type": "module",
   "exports": {
     "./accordion": {
       "types": "./dist/_types/atoms/Accordion/Accordion.d.ts",
       "import": "./dist/accordion.js"
+    },
+    "./alert": {
+      "types": "./dist/_types/stories/molecules/Alert/Alert.d.ts",
+      "import": "./dist/alert.js"
     },
     "./app-shell": {
       "types": "./dist/_types/sections/AppShell/AppShell.d.ts",
@@ -152,6 +156,14 @@
     "./number-input-field": {
       "types": "./dist/_types/molecules/NumberInputField/NumberInputField.d.ts",
       "import": "./dist/number-input-field.js"
+    },
+    "./file-upload": {
+      "types": "./dist/_types/atoms/FileUpload/FileUpload.d.ts",
+      "import": "./dist/file-upload.js"
+    },
+    "./file-upload-field": {
+      "types": "./dist/_types/molecules/FileUploadField/FileUploadField.d.ts",
+      "import": "./dist/file-upload-field.js"
     },
     "./otp-input": {
       "types": "./dist/_types/atoms/OtpInput/OtpInput.d.ts",

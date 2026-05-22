@@ -1,0 +1,34 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --alert-padding-block: var(--spacing-4); /** Padding vertical del alert (16px) */
+  --alert-padding-inline: var(--spacing-5); /** Padding horizontal del alert (24px) */
+  --alert-border-radius: var(--border-radius-none); /** Sin radio de esquinas */
+  --alert-border-width: var(--border-width-sm); /** Grosor del borde */
+  --alert-title-font-size: var(--font-size-2); /** Tamaño del título (16px) */
+  --alert-title-font-weight: var(--font-weight-medium); /** Peso del título */
+  --alert-description-font-size: var(--font-size-1); /** Tamaño de la descripción (14px) */
+  --alert-close-size: var(--close-size-sm); /** Tamaño del icono de cierre (18px) */
+  --alert-bg: var(--color-primary); /** Fondo por defecto — prussian */
+  --alert-border-color: var(--color-primary); /** Borde igual al fondo — invisible */
+  --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre fondo oscuro */
+  --alert-description-color: var(--color-text-muted-on-dark); /** Descripción atenuada sobre fondo oscuro */
+  --alert-close-color: var(--color-text-on-dark); /** Color del botón de cierre — blanco */
+  --alert-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover */
+  --alert-success-bg: var(--color-success-on-light); /** Fondo success — verde semántico */
+  --alert-success-border-color: var(--color-success-on-light); /** Borde igual al fondo success */
+  --alert-success-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo success */
+  --alert-success-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo success */
+  --alert-error-bg: var(--color-error-on-light); /** Fondo error — rojo semántico */
+  --alert-error-border-color: var(--color-error-on-light); /** Borde igual al fondo error */
+  --alert-error-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo error */
+  --alert-error-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo error */
+  --alert-warning-bg: var(--color-accent-2); /** Fondo warning — amarillo brand */
+  --alert-warning-border-color: var(--color-accent-2); /** Borde igual al fondo warning */
+  --alert-warning-title-color: var(--color-primary); /** Título prussian sobre fondo amarillo (contraste AAA) */
+  --alert-warning-description-color: var(--color-primary); /** Descripción prussian sobre fondo amarillo */
+  --alert-warning-close-color: var(--color-primary); /** Aspa de cierre oscura sobre fondo amarillo */
+  --alert-warning-close-hover-color: var(--color-primary); /** Aspa de cierre oscura en hover */
+}

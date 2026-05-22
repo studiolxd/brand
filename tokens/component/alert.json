@@ -1,0 +1,36 @@
+{
+  "alert": {
+    "padding-block":        { "$value": "{spacing.4}",                  "$type": "dimension", "$description": "Padding vertical del alert (16px)" },
+    "padding-inline":       { "$value": "{spacing.5}",                  "$type": "dimension", "$description": "Padding horizontal del alert (24px)" },
+    "border-radius":        { "$value": "{border-radius.none}",         "$type": "dimension", "$description": "Sin radio de esquinas" },
+    "border-width":         { "$value": "{border-width.sm}",            "$type": "dimension", "$description": "Grosor del borde" },
+
+    "bg":                   { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo por defecto — prussian" },
+    "border-color":         { "$value": "{color.primary}",              "$type": "color",     "$description": "Borde igual al fondo — invisible" },
+    "title-font-size":      { "$value": "{font-size.2}",                "$type": "dimension", "$description": "Tamaño del título (16px)" },
+    "title-font-weight":    { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso del título" },
+    "title-color":          { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Texto blanco sobre fondo oscuro" },
+    "description-font-size":{ "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño de la descripción (14px)" },
+    "description-color":    { "$value": "{color.text.muted-on-dark}",   "$type": "color",     "$description": "Descripción atenuada sobre fondo oscuro" },
+    "close-color":          { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre — blanco" },
+    "close-hover-color":    { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre en hover" },
+    "close-size":           { "$value": "{close.size-sm}",              "$type": "dimension", "$description": "Tamaño del icono de cierre (18px)" },
+
+    "success-bg":                    { "$value": "{color.success-on-light}", "$type": "color", "$description": "Fondo success — verde semántico" },
+    "success-border-color":          { "$value": "{color.success-on-light}", "$type": "color", "$description": "Borde igual al fondo success" },
+    "success-title-color":           { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Título blanco sobre fondo success" },
+    "success-description-color":     { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Descripción blanca sobre fondo success" },
+
+    "error-bg":                      { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Fondo error — rojo semántico" },
+    "error-border-color":            { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Borde igual al fondo error" },
+    "error-title-color":             { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Título blanco sobre fondo error" },
+    "error-description-color":       { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Descripción blanca sobre fondo error" },
+
+    "warning-bg":                    { "$value": "{color.accent-2}",         "$type": "color", "$description": "Fondo warning — amarillo brand" },
+    "warning-border-color":          { "$value": "{color.accent-2}",         "$type": "color", "$description": "Borde igual al fondo warning" },
+    "warning-title-color":           { "$value": "{color.primary}",          "$type": "color", "$description": "Título prussian sobre fondo amarillo (contraste AAA)" },
+    "warning-description-color":     { "$value": "{color.primary}",          "$type": "color", "$description": "Descripción prussian sobre fondo amarillo" },
+    "warning-close-color":           { "$value": "{color.primary}",          "$type": "color", "$description": "Aspa de cierre oscura sobre fondo amarillo" },
+    "warning-close-hover-color":     { "$value": "{color.primary}",          "$type": "color", "$description": "Aspa de cierre oscura en hover" }
+  }
+}

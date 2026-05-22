@@ -1,0 +1,58 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --file-upload-border-style: dashed; /** Estilo de borde del dropzone */
+  --file-upload-drag-border-style: solid; /** Estilo de borde en drag activo */
+  --file-upload-error-border-style: solid; /** Estilo de borde en error */
+  --file-upload-disabled-opacity: 0.5; /** Opacidad cuando está deshabilitado */
+  --file-upload-thumb-size: 2.5rem; /** Tamaño del thumbnail */
+  --file-upload-progress-height: 0.375rem; /** Altura de la barra de progreso */
+  --file-upload-border-color: var(--color-grey-light); /** Borde del dropzone por defecto */
+  --file-upload-border-width: var(--border-width-sm); /** Grosor del borde */
+  --file-upload-border-radius: var(--border-radius-md); /** Radio de esquinas del dropzone */
+  --file-upload-bg: var(--color-grey-lightest); /** Fondo del dropzone */
+  --file-upload-padding-block: var(--spacing-7); /** Padding vertical del dropzone */
+  --file-upload-padding-inline: var(--spacing-5); /** Padding horizontal del dropzone */
+  --file-upload-gap: var(--spacing-1); /** Espacio entre elementos dentro del dropzone */
+  --file-upload-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de estado */
+  --file-upload-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
+  --file-upload-drag-bg: var(--color-white); /** Fondo en drag activo */
+  --file-upload-error-bg: var(--color-grey-lightest); /** Fondo en estado de error */
+  --file-upload-list-gap: var(--spacing-2); /** Espacio entre items de la lista */
+  --file-upload-list-margin-block-start: var(--spacing-3); /** Margen superior de la lista de archivos */
+  --file-upload-item-bg: var(--color-white); /** Fondo de cada item */
+  --file-upload-item-border-color: var(--color-grey-light); /** Borde de cada item */
+  --file-upload-item-border-width: var(--border-width-sm); /** Grosor de borde del item */
+  --file-upload-item-border-radius: var(--border-radius-sm); /** Radio de esquinas del item */
+  --file-upload-item-padding-block: var(--spacing-2); /** Padding vertical del item */
+  --file-upload-item-padding-inline: var(--spacing-3); /** Padding horizontal del item */
+  --file-upload-item-gap: var(--spacing-3); /** Espacio entre thumb, info y botón */
+  --file-upload-item-name-font-family: var(--font-family-sans); /** Fuente del nombre de archivo */
+  --file-upload-item-name-font-size: var(--font-size-2); /** Tamaño del nombre de archivo */
+  --file-upload-item-size-font-size: var(--font-size-1); /** Tamaño del peso del archivo */
+  --file-upload-item-error-font-size: var(--font-size-1); /** Tamaño del mensaje de error por archivo */
+  --file-upload-item-error-bg: var(--color-white); /** Fondo del item con error */
+  --file-upload-thumb-border-radius: var(--border-radius-sm); /** Radio del thumbnail */
+  --file-upload-thumb-bg: var(--color-grey-lightest); /** Fondo del thumb para iconos (no imagen) */
+  --file-upload-thumb-icon-color: var(--color-grey-dark); /** Color del icono de archivo genérico */
+  --file-upload-progress-margin-block-start: var(--spacing-3); /** Margen superior de la barra de progreso */
+  --file-upload-progress-bg: var(--color-grey-light); /** Fondo del track de progreso */
+  --file-upload-progress-border-radius: var(--border-radius-full); /** Radio de la barra de progreso */
+  --file-upload-progress-transition-duration: var(--motion-duration-base); /** Duración de la transición del progreso */
+  --file-upload-progress-transition-easing: var(--motion-easing-in-out); /** Easing de la transición del progreso */
+  --file-upload-text-color: var(--color-text-on-light); /** Color del texto principal */
+  --file-upload-subtext-color: var(--color-text-muted-on-light); /** Color del texto secundario y restricciones */
+  --file-upload-icon-color: var(--color-text-on-light); /** Color del icono upload */
+  --file-upload-drag-border-color: var(--color-primary); /** Borde cuando hay drag activo */
+  --file-upload-error-border-color: var(--color-error-on-light); /** Borde en estado de error */
+  --file-upload-item-name-font-weight: var(--font-weight-default); /** Peso del nombre de archivo */
+  --file-upload-item-name-color: var(--color-text-on-light); /** Color del nombre de archivo */
+  --file-upload-item-size-color: var(--color-text-muted-on-light); /** Color del peso del archivo */
+  --file-upload-item-error-color: var(--color-error-on-light); /** Color del mensaje de error por archivo */
+  --file-upload-item-error-border-color: var(--color-error-on-light); /** Borde del item con error */
+  --file-upload-remove-color: var(--color-text-muted-on-light); /** Color del botón eliminar */
+  --file-upload-remove-color-hover: var(--color-error-on-light); /** Color del botón eliminar al hacer hover */
+  --file-upload-progress-fill: var(--color-primary); /** Color del relleno de progreso */
+}

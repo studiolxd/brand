@@ -1,0 +1,216 @@
+.file-upload {
+  width: 100%;
+}
+
+/* ── Dropzone ─────────────────────────────────────────── */
+
+.file-upload__dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--file-upload-gap);
+  width: 100%;
+  padding-block: var(--file-upload-padding-block);
+  padding-inline: var(--file-upload-padding-inline);
+  border-width: var(--file-upload-border-width);
+  border-style: var(--file-upload-border-style);
+  border-color: var(--file-upload-border-color);
+  border-radius: var(--file-upload-border-radius);
+  background-color: var(--file-upload-bg);
+  color: var(--file-upload-text-color);
+  cursor: pointer;
+  transition:
+    border-color var(--file-upload-transition-duration) var(--file-upload-transition-easing),
+    background-color var(--file-upload-transition-duration) var(--file-upload-transition-easing);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.file-upload__dropzone:focus-visible {
+  outline: var(--input-focus-ring-width) solid var(--input-focus-ring-color);
+  outline-offset: 2px;
+}
+
+/* ── Drag activo ──────────────────────────────────────── */
+
+.file-upload.file-upload--dragging .file-upload__dropzone {
+  border-style: var(--file-upload-drag-border-style);
+  border-color: var(--file-upload-drag-border-color);
+  background-color: var(--file-upload-drag-bg);
+}
+
+/* ── Estado error (campo) ─────────────────────────────── */
+
+.file-upload.file-upload--error .file-upload__dropzone {
+  border-style: var(--file-upload-error-border-style);
+  border-color: var(--file-upload-error-border-color);
+  background-color: var(--file-upload-error-bg);
+}
+
+/* ── Deshabilitado ────────────────────────────────────── */
+
+.file-upload.file-upload--disabled .file-upload__dropzone {
+  opacity: var(--file-upload-disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Contenido del dropzone ───────────────────────────── */
+
+.file-upload__icon {
+  color: var(--file-upload-icon-color);
+  flex-shrink: 0;
+  margin-block-end: var(--file-upload-gap);
+}
+
+.file-upload__text {
+  font-family: var(--file-upload-item-name-font-family);
+  font-size: var(--file-upload-item-name-font-size);
+  font-weight: var(--file-upload-item-name-font-weight);
+  color: var(--file-upload-text-color);
+}
+
+.file-upload__text--secondary {
+  color: var(--file-upload-subtext-color);
+  font-weight: var(--font-weight-default);
+}
+
+.file-upload__subtext {
+  font-family: var(--file-upload-item-name-font-family);
+  font-size: var(--file-upload-item-size-font-size);
+  color: var(--file-upload-subtext-color);
+  margin-block-start: var(--file-upload-gap);
+}
+
+/* ── Lista de archivos ────────────────────────────────── */
+
+.file-upload__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-block-start: var(--file-upload-list-margin-block-start);
+  display: flex;
+  flex-direction: column;
+  gap: var(--file-upload-list-gap);
+}
+
+/* ── Item ─────────────────────────────────────────────── */
+
+.file-upload__item {
+  display: flex;
+  align-items: center;
+  gap: var(--file-upload-item-gap);
+  padding-block: var(--file-upload-item-padding-block);
+  padding-inline: var(--file-upload-item-padding-inline);
+  border-width: var(--file-upload-item-border-width);
+  border-style: solid;
+  border-color: var(--file-upload-item-border-color);
+  border-radius: var(--file-upload-item-border-radius);
+  background-color: var(--file-upload-item-bg);
+}
+
+.file-upload__item.file-upload__item--error {
+  border-color: var(--file-upload-item-error-border-color);
+  background-color: var(--file-upload-item-error-bg);
+}
+
+/* ── Thumbnail ────────────────────────────────────────── */
+
+.file-upload__item-thumb {
+  flex-shrink: 0;
+  width: var(--file-upload-thumb-size);
+  height: var(--file-upload-thumb-size);
+  border-radius: var(--file-upload-thumb-border-radius);
+  background-color: var(--file-upload-thumb-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--file-upload-thumb-icon-color);
+}
+
+.file-upload__item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Info ─────────────────────────────────────────────── */
+
+.file-upload__item-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.file-upload__item-name {
+  font-family: var(--file-upload-item-name-font-family);
+  font-size: var(--file-upload-item-name-font-size);
+  font-weight: var(--file-upload-item-name-font-weight);
+  color: var(--file-upload-item-name-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-upload__item-size {
+  font-family: var(--file-upload-item-name-font-family);
+  font-size: var(--file-upload-item-size-font-size);
+  color: var(--file-upload-item-size-color);
+}
+
+.file-upload__item-error-msg {
+  font-family: var(--file-upload-item-name-font-family);
+  font-size: var(--file-upload-item-error-font-size);
+  color: var(--file-upload-item-error-color);
+}
+
+/* ── Botón eliminar ───────────────────────────────────── */
+
+.file-upload__item-remove {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--file-upload-remove-color);
+  transition: color var(--file-upload-transition-duration) var(--file-upload-transition-easing);
+  line-height: 1;
+}
+
+.file-upload__item-remove:hover {
+  color: var(--file-upload-remove-color-hover);
+}
+
+.file-upload__item-remove:focus-visible {
+  outline: var(--input-focus-ring-width) solid var(--input-focus-ring-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Progreso ─────────────────────────────────────────── */
+
+.file-upload__progress {
+  margin-block-start: var(--file-upload-progress-margin-block-start);
+  width: 100%;
+  height: var(--file-upload-progress-height);
+  background-color: var(--file-upload-progress-bg);
+  border-radius: var(--file-upload-progress-border-radius);
+  overflow: hidden;
+}
+
+.file-upload__progress-bar {
+  height: 100%;
+  width: var(--file-upload-progress, 0%);
+  background-color: var(--file-upload-progress-fill);
+  border-radius: var(--file-upload-progress-border-radius);
+  transition:
+    width var(--file-upload-progress-transition-duration) var(--file-upload-progress-transition-easing);
+}

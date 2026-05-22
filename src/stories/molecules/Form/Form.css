@@ -159,6 +159,34 @@
   color: var(--form-success-color);
 }
 
+/* file-upload-field: misma técnica de separadores que input-field */
+.form__fields > .file-upload-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .file-upload-field > .label,
+.form__fields > .file-upload-field > .file-upload,
+.form__fields > .file-upload-field > .file-upload-field__error,
+.form__fields > .file-upload-field > .file-upload-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .file-upload-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .file-upload-field > .file-upload {
+  padding-inline: var(--control-padding-inline);
+}
+
+.form__fields > .file-upload-field > .file-upload-field__error,
+.form__fields > .file-upload-field > .file-upload-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
 /* Suprimir bordes propios de los hijos — el form__fields dibuja el perímetro */
 /* Color = fondo del elemento para que el borde sea invisible sin cambiar el tamaño */
 /* Especificidad 0,3,0 — gana sobre .input.input--dark (0,2,0) */

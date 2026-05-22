@@ -136,6 +136,10 @@
   --form-helper-color:    var(--color-text-muted-on-dark);
   --form-success-color:   var(--color-text-on-dark);
 
+  /* ─── File upload field ─────────────────────────────────────────────── */
+  --file-upload-field-error-color:  var(--color-error-on-dark);
+  --file-upload-field-helper-color: var(--color-text-muted-on-dark);
+
   /* ─── Carousel ────────────────────────────────────────────────────────── */
   --carousel-slide-border-color: var(--color-text-on-dark);
   --carousel-btn-color:          var(--color-text-on-dark);
