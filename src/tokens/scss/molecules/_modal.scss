@@ -15,5 +15,6 @@ $modal-title-font-size: 2rem; // Tamaño del título (2rem)
 $modal-title-font-weight: 500; // Peso del título
 $modal-title-color: #111e30; // Color del título
 $modal-width-max: 560px; // Anchura máxima del panel
+$modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable)
 $modal-transition-duration: 250ms; // Duración de la animación entrada/salida
 $modal-transition-easing: ease-in-out; // Easing de la animación

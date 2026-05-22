@@ -14,6 +14,7 @@
     "title-font-weight":    { "$value": "{font-weight.medium}",     "$type": "number",    "$description": "Peso del título" },
     "title-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título" },
     "width-max":            { "$value": "560px",                      "$type": "dimension", "$description": "Anchura máxima del panel" },
+    "max-height":           { "$value": "90dvh",                      "$type": "dimension", "$description": "Altura máxima del panel modal (dvh para móviles con barra de navegador variable)" },
     "transition-duration":  { "$value": "{motion.duration.base}",     "$type": "number",    "$description": "Duración de la animación entrada/salida" },
     "transition-easing":    { "$value": "{motion.easing.in-out}",     "$type": "string",    "$description": "Easing de la animación" }
   }

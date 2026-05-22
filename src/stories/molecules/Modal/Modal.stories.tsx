@@ -149,6 +149,28 @@ export const WithAsyncSelect: Story = {
   },
 };
 
+export const WithLongContent: Story = {
+  name: 'Contenido largo (scroll)',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Abrir modal con contenido largo</Button>
+        <Modal open={open} onClose={() => setOpen(false)} title="Listado de empleados">
+          <ul style={{ margin: '0 0 1.5rem', padding: '0 0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {Array.from({ length: 30 }, (_, i) => (
+              <li key={i} style={{ color: 'var(--color-text-on-light)' }}>
+                Empleado {i + 1} — ejemplo de fila con contenido
+              </li>
+            ))}
+          </ul>
+          <Button onClick={() => setOpen(false)}>Cerrar</Button>
+        </Modal>
+      </>
+    );
+  },
+};
+
 export const NoTitle: Story = {
   name: 'Sin título',
   render: () => {

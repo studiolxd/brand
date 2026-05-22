@@ -41,6 +41,9 @@
   z-index: var(--modal-z-index);
   width: 90vw;
   max-width: var(--modal-width-max);
+  max-height: var(--modal-max-height);
+  display: flex;
+  flex-direction: column;
   background-color: var(--modal-bg);
   border-radius: var(--modal-border-radius);
   box-shadow: var(--modal-shadow);
@@ -103,7 +106,9 @@
 }
 
 .modal__body {
-  /* contenedor del children — sin padding adicional, hereda del content */
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 /* =============================================================
