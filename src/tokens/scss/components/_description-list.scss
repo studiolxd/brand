@@ -1,11 +1,9 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$description-list-border-width: 1px; // Grosor del borde exterior
-$description-list-border-style: solid; // Estilo del borde exterior
-$description-list-border-color: #111e30; // Color del borde exterior
-$description-list-gap: 1px; // Gap entre celdas — actúa como separador (gap technique)
-$description-list-separator-color: #111e30; // Color de fondo del contenedor — visible en los gaps
+$description-list-border-width: 1px; // Grosor del borde exterior y separadores internos
+$description-list-border-style: solid; // Estilo del borde
+$description-list-border-color: #111e30; // Color del borde
 $description-list-cell-padding-block: 0.75rem; // Padding vertical de cada celda
 $description-list-cell-padding-inline: 1rem; // Padding horizontal de cada celda
 $description-list-value-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del valor (dd)

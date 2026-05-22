@@ -1,8 +1,6 @@
 .description-list {
   display: grid;
   grid-template-columns: max-content 1fr;
-  background-color: var(--description-list-separator-color);
-  gap: var(--description-list-gap);
   border-width: var(--description-list-border-width);
   border-style: var(--description-list-border-style);
   border-color: var(--description-list-border-color);
@@ -11,14 +9,25 @@
 
 .description-list > dt,
 .description-list > dd {
-  background-color: var(--color-background-light);
   padding-block: var(--description-list-cell-padding-block);
   padding-inline: var(--description-list-cell-padding-inline);
   margin: 0;
+  border-bottom-width: var(--description-list-border-width);
+  border-bottom-style: var(--description-list-border-style);
+  border-bottom-color: var(--description-list-border-color);
+}
+
+.description-list > dt:last-of-type,
+.description-list > dd:last-of-type {
+  border-bottom: none;
 }
 
 .description-list > dt {
-  align-self: center;
+  display: flex;
+  align-items: center;
+  border-right-width: var(--description-list-border-width);
+  border-right-style: var(--description-list-border-style);
+  border-right-color: var(--description-list-border-color);
   font-family: var(--label-font-family);
   font-size: var(--label-font-size);
   font-weight: var(--label-font-weight);

@@ -1,10 +1,8 @@
 {
   "description-list": {
-    "border-width":        { "$value": "{control.border-width}",    "$type": "dimension", "$description": "Grosor del borde exterior" },
-    "border-style":        { "$value": "{control.border-style}",    "$type": "string",    "$description": "Estilo del borde exterior" },
-    "border-color":        { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del borde exterior" },
-    "gap":                 { "$value": "{form.gap}",                "$type": "dimension", "$description": "Gap entre celdas — actúa como separador (gap technique)" },
-    "separator-color":     { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de fondo del contenedor — visible en los gaps" },
+    "border-width":        { "$value": "{control.border-width}",    "$type": "dimension", "$description": "Grosor del borde exterior y separadores internos" },
+    "border-style":        { "$value": "{control.border-style}",    "$type": "string",    "$description": "Estilo del borde" },
+    "border-color":        { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del borde" },
     "cell-padding-block":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical de cada celda" },
     "cell-padding-inline": { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding horizontal de cada celda" },
     "value-font-family":   { "$value": "{control.font-family}",    "$type": "string",    "$description": "Font family del valor (dd)" },
