@@ -1,7 +1,7 @@
 'use client';
 import './async-select.css';
 "use client";
-import { Close as e } from "./close.js";
+import { Icon as e } from "./icon.js";
 import { Spinner as t } from "./spinner.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { useCallback as i, useEffect as a, useId as o, useRef as s, useState as c } from "react";
@@ -90,7 +90,10 @@ function d({ onSearch: d, value: f, onValueChange: p, selectedOption: m, placeho
 						"aria-label": "Limpiar selección",
 						tabIndex: -1,
 						onMouseDown: Z,
-						children: /* @__PURE__ */ n(e, { size: "xs" })
+						children: /* @__PURE__ */ n(e, {
+							name: "close",
+							size: "xs"
+						})
 					})
 				]
 			})

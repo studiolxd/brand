@@ -1,6 +1,6 @@
 'use client';
 import './table.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/Table/Table.tsx
@@ -37,6 +37,7 @@ function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actio
 			children: [
 				l,
 				/* @__PURE__ */ n(e, {
+					name: "chevron",
 					size: "xs",
 					className: "table__sort-icon"
 				}),

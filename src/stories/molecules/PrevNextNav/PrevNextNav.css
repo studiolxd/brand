@@ -35,7 +35,7 @@
   border-radius: 2px;
 }
 
-.prev-next-nav__btn--prev .chevron {
+.prev-next-nav__btn--prev .icon {
   transform: rotate(180deg);
 }
 

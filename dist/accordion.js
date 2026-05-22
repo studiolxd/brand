@@ -1,6 +1,6 @@
 'use client';
 import './accordion.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import * as t from "@radix-ui/react-accordion";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/atoms/Accordion/Accordion.tsx
@@ -31,6 +31,7 @@ function o({ className: i, chevronSize: a = "sm", children: o }) {
 				className: "accordion__trigger-text",
 				children: o
 			}), /* @__PURE__ */ n(e, {
+				name: "chevron",
 				className: "accordion__chevron",
 				size: a
 			})]

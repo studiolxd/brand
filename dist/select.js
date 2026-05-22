@@ -1,6 +1,6 @@
 'use client';
 import './select.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import * as r from "@radix-ui/react-select";
 //#region src/stories/atoms/Select/Select.tsx
@@ -25,6 +25,7 @@ function i({ options: i, value: a, defaultValue: o, placeholder: s = "Selecciona
 			children: [/* @__PURE__ */ t(r.Value, { placeholder: s }), /* @__PURE__ */ t(r.Icon, {
 				asChild: !0,
 				children: /* @__PURE__ */ t(e, {
+					name: "chevron",
 					className: "select__icon",
 					size: d === "sm" ? "xs" : d === "lg" ? "md" : "sm"
 				})

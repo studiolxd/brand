@@ -1,6 +1,6 @@
 'use client';
 import './calendar-roster.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { Tag as t } from "./tag.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/CalendarRoster/CalendarRoster.tsx
@@ -62,6 +62,7 @@ function u({ rows: u, month: d, onMonthChange: f, hrefBuilder: p, linkComponent:
 				e.preventDefault(), f(t);
 			} : void 0,
 			children: /* @__PURE__ */ r(e, {
+				name: "chevron",
 				size: "sm",
 				className: a
 			})
@@ -71,6 +72,7 @@ function u({ rows: u, month: d, onMonthChange: f, hrefBuilder: p, linkComponent:
 			"aria-label": i,
 			onClick: () => f?.(t),
 			children: /* @__PURE__ */ r(e, {
+				name: "chevron",
 				size: "sm",
 				className: a
 			})

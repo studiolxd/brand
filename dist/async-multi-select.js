@@ -1,7 +1,7 @@
 'use client';
 import './async-multi-select.css';
 "use client";
-import { Close as e } from "./close.js";
+import { Icon as e } from "./icon.js";
 import { Spinner as t } from "./spinner.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { useCallback as i, useEffect as a, useId as o, useRef as s, useState as c } from "react";
@@ -80,7 +80,10 @@ function d({ onSearch: d, value: f, defaultValue: p = [], onValueChange: m, sele
 							onMouseDown: (e) => {
 								e.preventDefault(), J(t.value);
 							},
-							children: /* @__PURE__ */ n(e, { size: "xs" })
+							children: /* @__PURE__ */ n(e, {
+								name: "close",
+								size: "xs"
+							})
 						})]
 					}, t.value)), /* @__PURE__ */ n("input", {
 						ref: z,

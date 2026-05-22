@@ -1,5 +1,5 @@
 import './prev-next-nav.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/molecules/PrevNextNav/PrevNextNav.tsx
 function r({ href: n, onClick: r, label: i, disabled: a, direction: o, chevronSize: s }) {
@@ -7,11 +7,15 @@ function r({ href: n, onClick: r, label: i, disabled: a, direction: o, chevronSi
 		"prev-next-nav__btn",
 		`prev-next-nav__btn--${o}`,
 		a ? "prev-next-nav__btn--disabled" : ""
-	].filter(Boolean).join(" "), l = /* @__PURE__ */ t(e, { size: s });
-	return a ? /* @__PURE__ */ t("span", {
+	].filter(Boolean).join(" "), l = /* @__PURE__ */ t(e, {
+		name: "chevron",
+		size: s
+	});
+	return a ? /* @__PURE__ */ t("button", {
+		type: "button",
 		className: c,
 		"aria-label": i,
-		"aria-disabled": "true",
+		disabled: !0,
 		children: l
 	}) : n ? /* @__PURE__ */ t("a", {
 		href: n,

@@ -1,6 +1,6 @@
 'use client';
 import './org-switcher.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { Avatar as t } from "./avatar.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import * as a from "@radix-ui/react-dropdown-menu";
@@ -28,6 +28,7 @@ function o({ current: o, organizations: s, onOrgChange: c, defaultOpen: l, items
 						children: o.name
 					}),
 					/* @__PURE__ */ r(e, {
+						name: "chevron",
 						size: "sm",
 						className: "org-switcher__chevron"
 					})

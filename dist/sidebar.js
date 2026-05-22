@@ -1,6 +1,6 @@
 'use client';
 import './sidebar.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { t } from "./_shared/SidebarContext.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { useContext as i, useState as a } from "react";
@@ -23,6 +23,7 @@ function o({ logo: o, children: s, id: c }) {
 				"aria-expanded": !f,
 				"aria-label": f ? "Expandir sidebar" : "Plegar sidebar",
 				children: /* @__PURE__ */ n(e, {
+					name: "chevron",
 					className: "sidebar__collapse-icon",
 					size: "sm"
 				})

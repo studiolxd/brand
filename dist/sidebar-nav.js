@@ -1,6 +1,6 @@
 'use client';
 import './sidebar-nav.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import * as t from "@radix-ui/react-accordion";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/SidebarNav/SidebarNav.tsx
@@ -76,6 +76,7 @@ function o({ entries: o, defaultValue: s, value: c, onValueChange: l, renderLink
 						}), /* @__PURE__ */ r(t.Trigger, {
 							className: "sidebar-nav__group-chevron",
 							children: /* @__PURE__ */ r(e, {
+								name: "chevron",
 								className: "sidebar-nav__group-chevron-icon",
 								size: "sm"
 							})

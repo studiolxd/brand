@@ -1,6 +1,6 @@
 'use client';
 import './modal.css';
-import { Close as e } from "./close.js";
+import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import * as a from "@radix-ui/react-dialog";
@@ -24,7 +24,10 @@ function o({ open: o, onClose: s, title: c, children: l, dark: u = !1 }) {
 				}), /* @__PURE__ */ r(a.Close, {
 					className: "modal__close",
 					"aria-label": "Cerrar",
-					children: /* @__PURE__ */ r(e, { size: "sm" })
+					children: /* @__PURE__ */ r(e, {
+						name: "close",
+						size: "sm"
+					})
 				})]
 			}) : /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(a.Title, {
 				asChild: !0,
@@ -34,7 +37,10 @@ function o({ open: o, onClose: s, title: c, children: l, dark: u = !1 }) {
 				children: /* @__PURE__ */ r(a.Close, {
 					className: "modal__close",
 					"aria-label": "Cerrar",
-					children: /* @__PURE__ */ r(e, { size: "sm" })
+					children: /* @__PURE__ */ r(e, {
+						name: "close",
+						size: "sm"
+					})
 				})
 			})] }), /* @__PURE__ */ r("div", {
 				className: "modal__body",

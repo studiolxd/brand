@@ -1,6 +1,6 @@
 'use client';
 import './calendar-planner.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { Tag as t } from "./tag.js";
 import { Modal as n } from "./modal.js";
 import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
@@ -70,6 +70,7 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 						"aria-label": "Mes anterior",
 						onClick: () => k(R),
 						children: /* @__PURE__ */ i(e, {
+							name: "chevron",
 							size: j,
 							className: "calendar-planner__chevron--prev"
 						})
@@ -85,7 +86,10 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 						className: "calendar-planner__nav",
 						"aria-label": "Mes siguiente",
 						onClick: () => k(z),
-						children: /* @__PURE__ */ i(e, { size: j })
+						children: /* @__PURE__ */ i(e, {
+							name: "chevron",
+							size: j
+						})
 					})
 				]
 			}),

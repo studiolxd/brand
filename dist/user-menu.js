@@ -1,6 +1,6 @@
 'use client';
 import './user-menu.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { Avatar as t } from "./avatar.js";
 import { t as n } from "./_shared/dropdownItems.js";
 import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
@@ -38,6 +38,7 @@ function l({ name: l, email: u, avatarUrl: d, items: f = [], renderLink: p = s, 
 						children: l
 					}),
 					/* @__PURE__ */ i(e, {
+						name: "chevron",
 						size: "sm",
 						className: "user-menu__chevron"
 					})

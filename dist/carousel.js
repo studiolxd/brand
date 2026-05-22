@@ -1,6 +1,6 @@
 'use client';
 import './carousel.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import { useEffect as r } from "react";
 import i from "embla-carousel-react";
@@ -39,6 +39,7 @@ function o({ children: o, options: s, plugins: c, hideButtons: l, className: u, 
 				"aria-label": p,
 				type: "button",
 				children: /* @__PURE__ */ t(e, {
+					name: "chevron",
 					className: "carousel__chevron carousel__chevron--prev",
 					size: "lg"
 				})
@@ -57,6 +58,7 @@ function o({ children: o, options: s, plugins: c, hideButtons: l, className: u, 
 				"aria-label": m,
 				type: "button",
 				children: /* @__PURE__ */ t(e, {
+					name: "chevron",
 					className: "carousel__chevron",
 					size: "lg"
 				})

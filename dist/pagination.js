@@ -1,6 +1,6 @@
 'use client';
 import './pagination.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { Select as t } from "./select.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/Pagination/Pagination.tsx
@@ -74,6 +74,7 @@ function o({ total: o, page: s, pageSize: c, onPageChange: l, hrefBuilder: u, li
 	}
 	function S(t, r, i) {
 		let a = r === "prev" ? "Página anterior" : "Página siguiente", o = /* @__PURE__ */ n(e, {
+			name: "chevron",
 			size: h === "sm" ? "xs" : h === "lg" ? "md" : "sm",
 			className: r === "prev" ? "pagination__chevron--prev" : void 0
 		});

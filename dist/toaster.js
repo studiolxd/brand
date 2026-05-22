@@ -1,6 +1,6 @@
 'use client';
 import './toaster.css';
-import { Close as e } from "./close.js";
+import { Icon as e } from "./icon.js";
 import { jsx as t } from "react/jsx-runtime";
 import n from "react";
 import r from "react-dom";
@@ -623,7 +623,10 @@ function O({ position: n = "bottom-right" }) {
 		position: n,
 		gap: 8,
 		className: "toaster",
-		icons: { close: /* @__PURE__ */ t(e, { size: "sm" }) },
+		icons: { close: /* @__PURE__ */ t(e, {
+			name: "close",
+			size: "sm"
+		}) },
 		toastOptions: {
 			unstyled: !0,
 			classNames: {

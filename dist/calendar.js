@@ -1,6 +1,6 @@
 'use client';
 import './calendar.css';
-import { Chevron as e } from "./chevron.js";
+import { Icon as e } from "./icon.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import { useCallback as r, useState as i } from "react";
 //#region src/stories/molecules/Calendar/Calendar.tsx
@@ -70,6 +70,7 @@ function l({ value: l, onChange: u, defaultMonth: d, month: f, onMonthChange: p,
 					disabled: P,
 					onClick: () => w(M),
 					children: /* @__PURE__ */ t(e, {
+						name: "chevron",
 						size: D,
 						className: "calendar__chevron--prev"
 					})
@@ -86,7 +87,10 @@ function l({ value: l, onChange: u, defaultMonth: d, month: f, onMonthChange: p,
 					"aria-label": "Mes siguiente",
 					disabled: F,
 					onClick: () => w(N),
-					children: /* @__PURE__ */ t(e, { size: D })
+					children: /* @__PURE__ */ t(e, {
+						name: "chevron",
+						size: D
+					})
 				})
 			]
 		}), /* @__PURE__ */ n("div", {
