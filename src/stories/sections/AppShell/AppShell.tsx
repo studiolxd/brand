@@ -12,8 +12,11 @@ export interface AppShellProps {
   defaultCollapsed?: boolean;
 }
 
-export function AppShell({ sidebar, children, defaultCollapsed = false }: AppShellProps) {
-  const [collapsed, setCollapsed] = useState(defaultCollapsed);
+export function AppShell({ sidebar, children, defaultCollapsed }: AppShellProps) {
+  const [collapsed, setCollapsed] = useState(() => {
+    if (defaultCollapsed !== undefined) return defaultCollapsed;
+    return typeof window !== 'undefined' && window.innerWidth < 1024;
+  });
 
   return (
     <SidebarContext.Provider value={{ collapsed, setCollapsed }}>

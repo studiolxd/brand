@@ -135,8 +135,8 @@ $button-text-font-weight: 300; // Font weight
 $button-text-line-height: 1; // Line height
 $button-text-cursor: pointer; // Cursor
 $button-text-white-space: nowrap; // White space
-$button-text-text-decoration: none; // Text decoration — base state (none)
-$button-text-hover-text-decoration: underline; // Text decoration on hover
+$button-text-text-decoration: underline; // Text decoration — base state (underline)
+$button-text-hover-text-decoration: none; // Text decoration on hover
 $button-text-transition-duration: 150ms; // Transition duration
 $button-text-transition-easing: ease; // Transition easing
 $button-text-disabled-cursor: not-allowed; // Cursor when disabled

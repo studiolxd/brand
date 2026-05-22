@@ -14,7 +14,8 @@
   --button-block-width: 100%; /** Width when block modifier is applied */
   --button-outline-bg: rgba(0, 0, 0, 0); /** Background */
   --button-text-border-width: 0; /** Border width — 0 para uso inline en texto */
-  --button-text-hover-text-decoration: underline; /** Text decoration on hover */
+  --button-text-text-decoration: underline; /** Text decoration — base state (underline) */
+  --button-text-hover-text-decoration: none; /** Text decoration on hover */
   --button-text-padding-block: 0; /** Block (vertical) padding — 0 para uso inline en texto */
   --button-text-padding-inline: 0; /** Inline (horizontal) padding — 0 para uso inline en texto */
   --button-text-bg: rgba(0, 0, 0, 0); /** Background — always transparent */
@@ -82,7 +83,6 @@
   --button-text-justify-content: var(--button-justify-content); /** Justify content */
   --button-text-cursor: var(--button-cursor); /** Cursor */
   --button-text-white-space: var(--button-white-space); /** White space */
-  --button-text-text-decoration: var(--button-text-decoration); /** Text decoration — base state (none) */
   --button-text-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-text-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-ghost-border-style: var(--button-border-style); /** Border style */
