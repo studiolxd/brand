@@ -4,7 +4,8 @@
 
 :root {
   --prev-next-nav-font-family: var(--font-family-sans); /** Font family */
-  --prev-next-nav-font-size: var(--font-size-1); /** 14px — UI label */
+  --prev-next-nav-font-size: var(--font-size-2); /** 16px — Body base (variante md) */
+  --prev-next-nav-sm-font-size: var(--font-size-1); /** 14px — UI label (variante sm) */
   --prev-next-nav-gap: var(--spacing-3); /** Gap entre botones y label — variante md */
   --prev-next-nav-sm-gap: var(--spacing-2); /** Gap entre botones y label — variante sm */
   --prev-next-nav-label-font-weight: var(--font-weight-medium); /** Peso tipográfico del label central */

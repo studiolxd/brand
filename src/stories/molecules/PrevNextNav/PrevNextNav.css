@@ -52,3 +52,7 @@
   font-weight: var(--prev-next-nav-label-font-weight);
   color: var(--prev-next-nav-label-color);
 }
+
+.prev-next-nav.prev-next-nav--sm .prev-next-nav__label {
+  font-size: var(--prev-next-nav-sm-font-size);
+}

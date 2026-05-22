@@ -27,7 +27,7 @@ interface NavControlProps {
   label: string;
   disabled: boolean;
   direction: 'prev' | 'next';
-  chevronSize: 'xs' | 'sm';
+  chevronSize: 'xs' | 'sm' | 'md';
 }
 
 function NavControl({ href, onClick, label, disabled, direction, chevronSize }: NavControlProps) {
@@ -74,7 +74,7 @@ export function PrevNextNav({
   label,
   size = 'md',
 }: PrevNextNavProps) {
-  const chevronSize = size === 'sm' ? 'xs' : 'sm';
+  const chevronSize = size === 'sm' ? 'sm' : 'md';
   const classes = ['prev-next-nav', size === 'sm' ? 'prev-next-nav--sm' : '']
     .filter(Boolean)
     .join(' ');

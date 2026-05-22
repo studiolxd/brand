@@ -1,7 +1,8 @@
 {
   "prev-next-nav": {
     "font-family":         { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Font family" },
-    "font-size":           { "$value": "{font-size.1}",               "$type": "dimension", "$description": "14px — UI label" },
+    "font-size":           { "$value": "{font-size.2}",               "$type": "dimension", "$description": "16px — Body base (variante md)" },
+    "sm-font-size":        { "$value": "{font-size.1}",               "$type": "dimension", "$description": "14px — UI label (variante sm)" },
     "gap":                 { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Gap entre botones y label — variante md" },
     "sm-gap":              { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Gap entre botones y label — variante sm" },
     "label-font-weight":   { "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso tipográfico del label central" },
