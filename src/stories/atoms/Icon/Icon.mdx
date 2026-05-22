@@ -1,0 +1,33 @@
+import { Meta, IconGallery, IconItem, Controls, Story } from "@storybook/addon-docs/blocks";
+import * as IconStories from "./Icon.stories";
+import { Icon, ICON_NAMES } from "./Icon";
+
+<Meta of={IconStories} />
+
+# Iconos
+
+Colección de iconos del sistema de diseño. Todos usan `currentColor` — su color se hereda del contexto CSS.
+
+<IconGallery>
+  {ICON_NAMES.map((name) => (
+    <IconItem key={name} name={name}>
+      <Icon name={name} size="md" />
+    </IconItem>
+  ))}
+</IconGallery>
+
+## Uso
+
+```tsx
+import { Icon } from '@studiolxd/brand/icon';
+
+<Icon name="chevron" size="md" />
+```
+
+## Tamaños
+
+<Story of={IconStories.AllSizes} />
+
+## Props
+
+<Controls of={IconStories.Default} />

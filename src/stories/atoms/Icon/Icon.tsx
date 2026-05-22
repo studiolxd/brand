@@ -160,6 +160,8 @@ const ICONS = {
 
 export type IconName = keyof typeof ICONS;
 
+export const ICON_NAMES = Object.keys(ICONS) as IconName[];
+
 export interface IconProps {
   name: IconName;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
