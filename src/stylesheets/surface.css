@@ -35,6 +35,17 @@
   --button-ghost-hover-bg:          rgba(255, 255, 255, 0.1);
   --button-ghost-active-bg:         rgba(255, 255, 255, 0.18);
 
+  /* ─── Button outline ──────────────────────────────────────────────────── */
+  --button-outline-color:            var(--color-text-on-dark);
+  --button-outline-border:           var(--color-text-on-dark);
+  --button-outline-hover-bg:         var(--color-white);
+  --button-outline-hover-color:      var(--color-text-on-light);
+  --button-outline-hover-border:     var(--color-white);
+  --button-outline-active-bg:        var(--color-white);
+  --button-outline-active-color:     var(--color-text-on-light);
+  --button-outline-active-border:    var(--color-white);
+  --button-outline-focus-ring-color: var(--color-white);
+
   /* ─── Button destructive intent ──────────────────────────────────────── */
   --button-destructive-color:            var(--color-error-on-dark);
   --button-destructive-border:           var(--color-error-on-dark);
@@ -459,22 +470,7 @@
 
 /* =============================================================
    surface-light — Outline sobre fotografía clara
-
-   Solo outline necesita inversión en fotos claras.
    ============================================================= */
-
-.surface-light {
-  /* ─── Button outline ──────────────────────────────────────────────────────── */
-  --button-outline-color:            var(--color-text-on-light);
-  --button-outline-border:           var(--color-text-on-light);
-  --button-outline-hover-bg:         var(--color-text-on-light);
-  --button-outline-hover-color:      var(--color-text-on-dark);
-  --button-outline-hover-border:     var(--color-text-on-light);
-  --button-outline-active-bg:        var(--color-text-on-light);
-  --button-outline-active-color:     var(--color-text-on-dark);
-  --button-outline-active-border:    var(--color-text-on-light);
-  --button-outline-focus-ring-color: var(--color-text-on-light);
-}
 
 .surface-light .button--outline:disabled,
 .surface-light .button--outline[aria-disabled="true"] {

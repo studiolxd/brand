@@ -74,11 +74,6 @@
   --button-outline-disabled-color: var(--color-grey-light); /** Text color when disabled */
   --button-outline-disabled-border: var(--color-grey-light); /** Border color when disabled */
   --button-outline-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
-  --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — white on dark backgrounds */
-  --button-outline-hover-bg: var(--color-white); /** Hover background */
-  --button-outline-hover-border: var(--color-white); /** Hover border color */
-  --button-outline-active-bg: var(--color-white); /** Active background */
-  --button-outline-active-border: var(--color-white); /** Active border color */
   --button-text-border-style: var(--button-border-style); /** Border style */
   --button-text-justify-content: var(--button-justify-content); /** Justify content */
   --button-text-cursor: var(--button-cursor); /** Cursor */
@@ -151,10 +146,15 @@
   --button-outline-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
   --button-outline-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-outline-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
-  --button-outline-color: var(--color-text-on-dark); /** Text color */
-  --button-outline-border: var(--color-text-on-dark); /** Border color */
-  --button-outline-hover-color: var(--color-text-on-light); /** Hover text color */
-  --button-outline-active-color: var(--color-text-on-light); /** Active text color */
+  --button-outline-focus-ring-color: var(--color-text-on-light); /** Focus ring color — dark on light backgrounds */
+  --button-outline-color: var(--color-text-on-light); /** Text color */
+  --button-outline-border: var(--color-text-on-light); /** Border color */
+  --button-outline-hover-bg: var(--color-text-on-light); /** Hover background */
+  --button-outline-hover-color: var(--color-text-on-dark); /** Hover text color */
+  --button-outline-hover-border: var(--color-text-on-light); /** Hover border color */
+  --button-outline-active-bg: var(--color-text-on-light); /** Active background */
+  --button-outline-active-color: var(--color-text-on-dark); /** Active text color */
+  --button-outline-active-border: var(--color-text-on-light); /** Active border color */
   --button-text-border-radius: var(--button-border-radius); /** Border radius */
   --button-text-font-family: var(--button-font-family); /** Font family */
   --button-text-font-size: var(--button-font-size); /** Font size */

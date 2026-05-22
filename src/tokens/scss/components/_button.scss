@@ -115,16 +115,16 @@ $button-outline-padding-inline: 2rem; // Inline (horizontal) padding
 $button-outline-focus-ring-width: 2px; // Focus ring width
 $button-outline-focus-ring-style: solid; // Focus ring border style
 $button-outline-focus-ring-offset: 2px; // Focus ring offset
-$button-outline-focus-ring-color: #ffffff; // Focus ring color — white on dark backgrounds
+$button-outline-focus-ring-color: #111e30; // Focus ring color — dark on light backgrounds
 $button-outline-bg: rgba(0, 0, 0, 0); // Background
-$button-outline-color: #ffffff; // Text color
-$button-outline-border: #ffffff; // Border color
-$button-outline-hover-bg: #ffffff; // Hover background
-$button-outline-hover-color: #111e30; // Hover text color
-$button-outline-hover-border: #ffffff; // Hover border color
-$button-outline-active-bg: #ffffff; // Active background
-$button-outline-active-color: #111e30; // Active text color
-$button-outline-active-border: #ffffff; // Active border color
+$button-outline-color: #111e30; // Text color
+$button-outline-border: #111e30; // Border color
+$button-outline-hover-bg: #111e30; // Hover background
+$button-outline-hover-color: #ffffff; // Hover text color
+$button-outline-hover-border: #111e30; // Hover border color
+$button-outline-active-bg: #111e30; // Active background
+$button-outline-active-color: #ffffff; // Active text color
+$button-outline-active-border: #111e30; // Active border color
 $button-text-border-radius: 9999px; // Border radius
 $button-text-border-width: 0; // Border width — 0 para uso inline en texto
 $button-text-border-style: solid; // Border style
