@@ -31,7 +31,7 @@ export function AppShell({ sidebar, children, defaultCollapsed, storageKey = DEF
       setCollapsedState(stored === 'true');
     }
 
-    setMounted(true);
+    const rafId = requestAnimationFrame(() => setMounted(true));
 
     const mq = window.matchMedia(MOBILE_MQ);
     const handleBreakpoint = (e: MediaQueryListEvent) => {
@@ -43,7 +43,10 @@ export function AppShell({ sidebar, children, defaultCollapsed, storageKey = DEF
       }
     };
     mq.addEventListener('change', handleBreakpoint);
-    return () => mq.removeEventListener('change', handleBreakpoint);
+    return () => {
+      cancelAnimationFrame(rafId);
+      mq.removeEventListener('change', handleBreakpoint);
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setCollapsed = useCallback((value: boolean) => {
