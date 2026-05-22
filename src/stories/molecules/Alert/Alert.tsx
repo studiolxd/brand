@@ -6,7 +6,7 @@ import './Alert.css';
 export interface AlertProps {
   variant?: 'default' | 'success' | 'error' | 'warning';
   title: string;
-  description?: string;
+  description?: React.ReactNode;
   dismissible?: boolean;
   onDismiss?: () => void;
   className?: string;
@@ -45,7 +45,7 @@ export function Alert({
     <div role="alert" className={classes}>
       <div className="alert__content">
         <p className="alert__title">{title}</p>
-        {description && <p className="alert__description">{description}</p>}
+        {description && <div className="alert__description">{description}</div>}
       </div>
       {dismissible && (
         <button type="button" className="alert__close" onClick={handleDismiss}>
