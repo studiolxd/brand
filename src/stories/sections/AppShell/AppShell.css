@@ -1,5 +1,13 @@
 /* ---- AppShell ---- */
 
+/* Suprimir transiciones durante la inicialización del estado */
+.app-shell:not([data-mounted]) *,
+.app-shell:not([data-mounted]) *::before,
+.app-shell:not([data-mounted]) *::after {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
+}
+
 .app-shell {
   display: flex;
   height: 100dvh;
