@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.14.2",
+  "version": "5.14.3",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -8,7 +8,7 @@
       "import": "./dist/accordion.js"
     },
     "./alert": {
-      "types": "./dist/_types/stories/molecules/Alert/Alert.d.ts",
+      "types": "./dist/_types/molecules/Alert/Alert.d.ts",
       "import": "./dist/alert.js"
     },
     "./app-shell": {
