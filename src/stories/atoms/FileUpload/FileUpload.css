@@ -4,6 +4,14 @@
 
 /* ── Dropzone ─────────────────────────────────────────── */
 
+/* Variables locales que los estados pueden sobreescribir */
+.file-upload__dropzone {
+  --_drop-color: var(--file-upload-border-color);
+  --_drop-bg:    var(--file-upload-bg);
+  --_dash:       16px;
+  --_gap:        10px;
+}
+
 .file-upload__dropzone {
   display: flex;
   flex-direction: column;
@@ -13,15 +21,24 @@
   width: 100%;
   padding-block: var(--file-upload-padding-block);
   padding-inline: var(--file-upload-padding-inline);
-  border-width: var(--file-upload-border-width);
-  border-style: var(--file-upload-border-style);
-  border-color: var(--file-upload-border-color);
-  border-radius: var(--file-upload-border-radius);
-  background-color: var(--file-upload-bg);
+  /* Borde discontinuo con trazos largos via gradiente */
+  background-image:
+    repeating-linear-gradient(90deg,  var(--_drop-color) 0, var(--_drop-color) var(--_dash), transparent var(--_dash), transparent calc(var(--_dash) + var(--_gap))),
+    repeating-linear-gradient(90deg,  var(--_drop-color) 0, var(--_drop-color) var(--_dash), transparent var(--_dash), transparent calc(var(--_dash) + var(--_gap))),
+    repeating-linear-gradient(180deg, var(--_drop-color) 0, var(--_drop-color) var(--_dash), transparent var(--_dash), transparent calc(var(--_dash) + var(--_gap))),
+    repeating-linear-gradient(180deg, var(--_drop-color) 0, var(--_drop-color) var(--_dash), transparent var(--_dash), transparent calc(var(--_dash) + var(--_gap)));
+  background-size:
+    100% var(--file-upload-border-width),
+    100% var(--file-upload-border-width),
+    var(--file-upload-border-width) 100%,
+    var(--file-upload-border-width) 100%;
+  background-position: 0 0, 0 100%, 0 0, 100% 0;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-color: var(--_drop-bg);
   color: var(--file-upload-text-color);
   cursor: pointer;
   transition:
-    border-color var(--file-upload-transition-duration) var(--file-upload-transition-easing),
+    background-image var(--file-upload-transition-duration) var(--file-upload-transition-easing),
     background-color var(--file-upload-transition-duration) var(--file-upload-transition-easing);
   text-align: center;
   box-sizing: border-box;
@@ -36,17 +53,15 @@
 /* ── Drag activo ──────────────────────────────────────── */
 
 .file-upload.file-upload--dragging .file-upload__dropzone {
-  border-style: var(--file-upload-drag-border-style);
-  border-color: var(--file-upload-drag-border-color);
-  background-color: var(--file-upload-drag-bg);
+  --_drop-color: var(--file-upload-drag-border-color);
+  --_drop-bg:    var(--file-upload-drag-bg);
 }
 
 /* ── Estado error (campo) ─────────────────────────────── */
 
 .file-upload.file-upload--error .file-upload__dropzone {
-  border-style: var(--file-upload-error-border-style);
-  border-color: var(--file-upload-error-border-color);
-  background-color: var(--file-upload-error-bg);
+  --_drop-color: var(--file-upload-error-border-color);
+  --_drop-bg:    var(--file-upload-error-bg);
 }
 
 /* ── Deshabilitado ────────────────────────────────────── */

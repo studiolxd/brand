@@ -69,6 +69,47 @@ export const Disabled: Story = {
   },
 };
 
+export const WithFiles: Story = {
+  name: 'Con archivos seleccionados',
+  render: (args) => {
+    const pdf  = new File(['%PDF-1.4 mock'], 'propuesta-proyecto.pdf', { type: 'application/pdf' });
+    const word = new File(['mock'], 'brief-cliente.docx', { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const big  = new File([new ArrayBuffer(12 * 1024 * 1024)], 'video-pesado.mp4', { type: 'video/mp4' });
+    return (
+      <FileUpload
+        {...args}
+        multiple
+        maxSize={10 * 1024 * 1024}
+        defaultValue={[pdf, word, big]}
+        ariaLabel="Subir archivos"
+      />
+    );
+  },
+};
+
+export const WithImageFiles: Story = {
+  name: 'Con imágenes seleccionadas',
+  render: (args) => {
+    const svgBlob = new Blob(
+      ['<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="#BAABFF"/><text x="100" y="115" font-size="40" text-anchor="middle" fill="#111E30">IMG</text></svg>'],
+      { type: 'image/svg+xml' },
+    );
+    const img1 = new File([svgBlob], 'portada.png',   { type: 'image/png' });
+    const img2 = new File([svgBlob], 'galeria-01.jpg', { type: 'image/jpeg' });
+    const img3 = new File([svgBlob], 'logo-final.svg', { type: 'image/svg+xml' });
+    return (
+      <FileUpload
+        {...args}
+        multiple
+        accept="image/*"
+        maxFiles={5}
+        defaultValue={[img1, img2, img3]}
+        ariaLabel="Subir imágenes"
+      />
+    );
+  },
+};
+
 export const Controlled: Story = {
   render: (args) => {
     const [files, setFiles] = useState<File[]>([]);
