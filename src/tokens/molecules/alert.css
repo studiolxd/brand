@@ -10,7 +10,7 @@
   --alert-title-font-size: var(--font-size-2); /** Tamaño del título (16px) */
   --alert-title-font-weight: var(--font-weight-medium); /** Peso del título */
   --alert-description-font-size: var(--font-size-1); /** Tamaño de la descripción (14px) */
-  --alert-close-size: var(--close-size-sm); /** Tamaño del icono de cierre (18px) */
+  --alert-close-size: var(--icon-size-sm); /** Tamaño del icono de cierre (18px) */
   --alert-bg: var(--color-primary); /** Fondo por defecto — prussian */
   --alert-border-color: var(--color-primary); /** Borde igual al fondo — invisible */
   --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre fondo oscuro */

@@ -16,7 +16,7 @@
   --toast-title-font-size: var(--font-size-2); /** Tamaño del título (16px) */
   --toast-title-font-weight: var(--font-weight-medium); /** Peso del título */
   --toast-description-font-size: var(--font-size-1); /** Tamaño de la descripción (14px) */
-  --toast-close-size: var(--close-size-sm); /** Tamaño del icono de cierre (18px) */
+  --toast-close-size: var(--icon-size-sm); /** Tamaño del icono de cierre (18px) */
   --toast-duration-in: var(--motion-duration-base); /** Duración animación de entrada (250ms) */
   --toast-duration-out: var(--motion-duration-base); /** Duración animación de salida (250ms) */
   --toast-easing: var(--motion-easing-out); /** Curva de animación */

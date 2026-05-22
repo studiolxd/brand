@@ -20,7 +20,7 @@
     "description-color":    { "$value": "{color.text.muted-on-dark}",   "$type": "color",     "$description": "Descripción atenuada sobre fondo oscuro" },
     "close-color":          { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre — blanco" },
     "close-hover-color":    { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre en hover" },
-    "close-size":           { "$value": "{close.size-sm}",              "$type": "dimension", "$description": "Tamaño del icono de cierre (18px)" },
+    "close-size":           { "$value": "{icon.size-sm}",               "$type": "dimension", "$description": "Tamaño del icono de cierre (18px)" },
     "duration-in":          { "$value": "{motion.duration.base}",       "$type": "number",    "$description": "Duración animación de entrada (250ms)" },
     "duration-out":         { "$value": "{motion.duration.base}",       "$type": "number",    "$description": "Duración animación de salida (250ms)" },
     "easing":               { "$value": "{motion.easing.out}",          "$type": "string",    "$description": "Curva de animación" },

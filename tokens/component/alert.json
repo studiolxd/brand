@@ -14,7 +14,7 @@
     "description-color":    { "$value": "{color.text.muted-on-dark}",   "$type": "color",     "$description": "Descripción atenuada sobre fondo oscuro" },
     "close-color":          { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre — blanco" },
     "close-hover-color":    { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre en hover" },
-    "close-size":           { "$value": "{close.size-sm}",              "$type": "dimension", "$description": "Tamaño del icono de cierre (18px)" },
+    "close-size":           { "$value": "{icon.size-sm}",               "$type": "dimension", "$description": "Tamaño del icono de cierre (18px)" },
 
     "success-bg":                    { "$value": "{color.success-on-light}", "$type": "color", "$description": "Fondo success — verde semántico" },
     "success-border-color":          { "$value": "{color.success-on-light}", "$type": "color", "$description": "Borde igual al fondo success" },
