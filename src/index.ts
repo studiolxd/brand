@@ -8,6 +8,8 @@ export type { AsyncMultiSelectOption, AsyncMultiSelectProps } from './stories/at
 export { AsyncSelect } from './stories/atoms/AsyncSelect/AsyncSelect';
 export type { AsyncSelectOption, AsyncSelectProps } from './stories/atoms/AsyncSelect/AsyncSelect';
 export { Arrow } from './stories/atoms/Arrow/Arrow';
+export { DescriptionList } from './stories/atoms/DescriptionList/DescriptionList';
+export type { DescriptionListProps } from './stories/atoms/DescriptionList/DescriptionList';
 export { Avatar } from './stories/atoms/Avatar/Avatar';
 export { Button } from './stories/atoms/Button/Button';
 export type { ButtonProps } from './stories/atoms/Button/Button';

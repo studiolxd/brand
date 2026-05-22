@@ -143,6 +143,11 @@
   /* ─── Carousel ────────────────────────────────────────────────────────── */
   --carousel-slide-border-color: var(--color-text-on-dark);
   --carousel-btn-color:          var(--color-text-on-dark);
+
+  /* ─── DescriptionList ─────────────────────────────────────────────────────── */
+  --description-list-border-color:    var(--color-text-on-dark);
+  --description-list-separator-color: var(--color-text-on-dark);
+  --description-list-value-color:     var(--color-text-on-dark);
 }
 
 /* ─── Button: disabled states ────────────────────────────────────────────── */
@@ -339,6 +344,13 @@
 }
 
 .surface-dark .form__actions {
+  background-color: var(--color-background-dark);
+}
+
+/* ─── DescriptionList ────────────────────────────────────────────────────────── */
+
+.surface-dark .description-list > dt,
+.surface-dark .description-list > dd {
   background-color: var(--color-background-dark);
 }
 

@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --description-list-border-style: var(--control-border-style); /** Estilo del borde exterior */
+  --description-list-cell-padding-block: var(--spacing-3); /** Padding vertical de cada celda */
+  --description-list-cell-padding-inline: var(--spacing-4); /** Padding horizontal de cada celda */
+  --description-list-value-font-size: var(--font-size-3); /** Font size del valor (18px) */
+  --description-list-value-line-height: var(--line-height-normal); /** Line height del valor */
+  --description-list-border-width: var(--control-border-width); /** Grosor del borde exterior */
+  --description-list-border-color: var(--color-primary); /** Color del borde exterior */
+  --description-list-gap: var(--form-gap); /** Gap entre celdas — actúa como separador (gap technique) */
+  --description-list-separator-color: var(--color-primary); /** Color de fondo del contenedor — visible en los gaps */
+  --description-list-value-font-family: var(--control-font-family); /** Font family del valor (dd) */
+  --description-list-value-font-weight: var(--font-weight-default); /** Font weight del valor */
+  --description-list-value-color: var(--color-text-on-light); /** Color del valor (dd) */
+}

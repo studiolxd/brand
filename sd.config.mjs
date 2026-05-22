@@ -83,6 +83,7 @@ const filters = {
   'number-input-field': (t) => t.path[0] === 'number-input-field',
   'file-upload':        (t) => t.path[0] === 'file-upload',
   'file-upload-field':  (t) => t.path[0] === 'file-upload-field',
+  'description-list':   (t) => t.path[0] === 'description-list',
 };
 
 function cssFile(destination, filterKey) {
@@ -179,6 +180,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/number-input-field.css', 'number-input-field'),
         cssFile('components/file-upload.css',       'file-upload'),
         cssFile('molecules/file-upload-field.css',  'file-upload-field'),
+        cssFile('components/description-list.css', 'description-list'),
       ],
     },
     scss: {
@@ -263,6 +265,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_number-input-field.scss', 'number-input-field'),
         scssFile('components/_file-upload.scss',       'file-upload'),
         scssFile('molecules/_file-upload-field.scss',  'file-upload-field'),
+        scssFile('components/_description-list.scss',  'description-list'),
       ],
     },
   },

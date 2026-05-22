@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.15.12",
+  "version": "5.16.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -18,6 +18,10 @@
     "./arrow": {
       "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",
       "import": "./dist/arrow.js"
+    },
+    "./description-list": {
+      "types": "./dist/_types/atoms/DescriptionList/DescriptionList.d.ts",
+      "import": "./dist/description-list.js"
     },
     "./article-template.css": "./dist/article-template.css",
     "./async-multi-select": {

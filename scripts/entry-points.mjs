@@ -4,6 +4,7 @@ export const entryPoints = {
   'async-multi-select':  'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',
   'async-select':        'src/stories/atoms/AsyncSelect/AsyncSelect.tsx',
   'arrow':               'src/stories/atoms/Arrow/Arrow.tsx',
+  'description-list':    'src/stories/atoms/DescriptionList/DescriptionList.tsx',
   'avatar':              'src/stories/atoms/Avatar/Avatar.tsx',
   'button':              'src/stories/atoms/Button/Button.tsx',
   'carousel':            'src/stories/atoms/Carousel/Carousel.tsx',
