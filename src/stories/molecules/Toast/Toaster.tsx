@@ -1,5 +1,5 @@
 import { Toaster as SonnerToaster } from 'sonner';
-import { Close } from '../../atoms/Close/Close';
+import { Icon } from '../../atoms/Icon/Icon';
 import './Toast.css';
 
 export interface ToasterProps {
@@ -13,7 +13,7 @@ export function Toaster({ position = 'bottom-right' }: ToasterProps) {
       position={position}
       gap={8}
       className="toaster"
-      icons={{ close: <Close size="sm" /> }}
+      icons={{ close: <Icon name="close" size="sm" /> }}
       toastOptions={{
         unstyled: true,
         classNames: {

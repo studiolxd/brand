@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Close } from '../../atoms/Close/Close';
+import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Modal.css';
 
@@ -22,7 +22,7 @@ export function Modal({ open, onClose, title, children, dark = false }: ModalPro
           {title ? (
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
-              <Dialog.Close className="modal__close" aria-label="Cerrar"><Close size="sm" /></Dialog.Close>
+              <Dialog.Close className="modal__close" aria-label="Cerrar"><Icon name="close" size="sm" /></Dialog.Close>
             </header>
           ) : (
             <>
@@ -30,7 +30,7 @@ export function Modal({ open, onClose, title, children, dark = false }: ModalPro
                 <VisuallyHidden>Diálogo</VisuallyHidden>
               </Dialog.Title>
               <header className="modal__header modal__header--no-title">
-                <Dialog.Close className="modal__close" aria-label="Cerrar"><Close size="sm" /></Dialog.Close>
+                <Dialog.Close className="modal__close" aria-label="Cerrar"><Icon name="close" size="sm" /></Dialog.Close>
               </header>
             </>
           )}

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import './PrevNextNav.css';
 
 export interface PrevNextNavProps {
@@ -39,7 +39,7 @@ function NavControl({ href, onClick, label, disabled, direction, chevronSize }: 
     .filter(Boolean)
     .join(' ');
 
-  const chevron = <Chevron size={chevronSize} />;
+  const chevron = <Icon name="chevron" size={chevronSize} />;
 
   if (disabled) {
     return (

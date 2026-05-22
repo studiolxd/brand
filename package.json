@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.14.3",
+  "version": "5.15.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -15,6 +15,11 @@
       "types": "./dist/_types/sections/AppShell/AppShell.d.ts",
       "import": "./dist/app-shell.js"
     },
+    "./arrow": {
+      "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",
+      "import": "./dist/arrow.js"
+    },
+    "./article-template.css": "./dist/article-template.css",
     "./async-multi-select": {
       "types": "./dist/_types/atoms/AsyncMultiSelect/AsyncMultiSelect.d.ts",
       "import": "./dist/async-multi-select.js"
@@ -31,11 +36,6 @@
       "types": "./dist/_types/molecules/AsyncSelectField/AsyncSelectField.d.ts",
       "import": "./dist/async-select-field.js"
     },
-    "./arrow": {
-      "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",
-      "import": "./dist/arrow.js"
-    },
-    "./article-template.css": "./dist/article-template.css",
     "./avatar": {
       "types": "./dist/_types/atoms/Avatar/Avatar.d.ts",
       "import": "./dist/avatar.js"
@@ -48,18 +48,6 @@
     "./button": {
       "types": "./dist/_types/atoms/Button/Button.d.ts",
       "import": "./dist/button.js"
-    },
-    "./date-picker": {
-      "types": "./dist/_types/molecules/DatePicker/DatePicker.d.ts",
-      "import": "./dist/date-picker.js"
-    },
-    "./date-picker-field": {
-      "types": "./dist/_types/molecules/DatePickerField/DatePickerField.d.ts",
-      "import": "./dist/date-picker-field.js"
-    },
-    "./date-time-field": {
-      "types": "./dist/_types/molecules/DateTimeField/DateTimeField.d.ts",
-      "import": "./dist/date-time-field.js"
     },
     "./calendar": {
       "types": "./dist/_types/molecules/Calendar/Calendar.d.ts",
@@ -97,14 +85,6 @@
       "types": "./dist/_types/molecules/CheckboxField/CheckboxField.d.ts",
       "import": "./dist/checkbox-field.js"
     },
-    "./chevron": {
-      "types": "./dist/_types/atoms/Chevron/Chevron.d.ts",
-      "import": "./dist/chevron.js"
-    },
-    "./close": {
-      "types": "./dist/_types/atoms/Close/Close.d.ts",
-      "import": "./dist/close.js"
-    },
     "./clients-section.css": "./dist/clients-section.css",
     "./contact-section.css": "./dist/contact-section.css",
     "./content-template.css": "./dist/content-template.css",
@@ -114,13 +94,37 @@
     },
     "./courses-section.css": "./dist/courses-section.css",
     "./css": "./dist/brand.css",
+    "./date-picker": {
+      "types": "./dist/_types/molecules/DatePicker/DatePicker.d.ts",
+      "import": "./dist/date-picker.js"
+    },
+    "./date-picker-field": {
+      "types": "./dist/_types/molecules/DatePickerField/DatePickerField.d.ts",
+      "import": "./dist/date-picker-field.js"
+    },
+    "./date-time-field": {
+      "types": "./dist/_types/molecules/DateTimeField/DateTimeField.d.ts",
+      "import": "./dist/date-time-field.js"
+    },
     "./dots-button": {
       "types": "./dist/_types/atoms/DotsButton/DotsButton.d.ts",
       "import": "./dist/dots-button.js"
     },
+    "./empty-state": {
+      "types": "./dist/_types/molecules/EmptyState/EmptyState.d.ts",
+      "import": "./dist/empty-state.js"
+    },
     "./fieldset": {
       "types": "./dist/_types/atoms/Fieldset/Fieldset.d.ts",
       "import": "./dist/fieldset.js"
+    },
+    "./file-upload": {
+      "types": "./dist/_types/atoms/FileUpload/FileUpload.d.ts",
+      "import": "./dist/file-upload.js"
+    },
+    "./file-upload-field": {
+      "types": "./dist/_types/molecules/FileUploadField/FileUploadField.d.ts",
+      "import": "./dist/file-upload-field.js"
     },
     "./footer.css": "./dist/footer.css",
     "./form": {
@@ -145,45 +149,17 @@
       "import": "./dist/highlight.js"
     },
     "./highlight-section.css": "./dist/highlight-section.css",
+    "./icon": {
+      "types": "./dist/_types/atoms/Icon/Icon.d.ts",
+      "import": "./dist/icon.js"
+    },
     "./input": {
       "types": "./dist/_types/atoms/Input/Input.d.ts",
       "import": "./dist/input.js"
     },
-    "./number-input": {
-      "types": "./dist/_types/atoms/NumberInput/NumberInput.d.ts",
-      "import": "./dist/number-input.js"
-    },
-    "./number-input-field": {
-      "types": "./dist/_types/molecules/NumberInputField/NumberInputField.d.ts",
-      "import": "./dist/number-input-field.js"
-    },
-    "./file-upload": {
-      "types": "./dist/_types/atoms/FileUpload/FileUpload.d.ts",
-      "import": "./dist/file-upload.js"
-    },
-    "./file-upload-field": {
-      "types": "./dist/_types/molecules/FileUploadField/FileUploadField.d.ts",
-      "import": "./dist/file-upload-field.js"
-    },
-    "./otp-input": {
-      "types": "./dist/_types/atoms/OtpInput/OtpInput.d.ts",
-      "import": "./dist/otp-input.js"
-    },
-    "./empty-state": {
-      "types": "./dist/_types/molecules/EmptyState/EmptyState.d.ts",
-      "import": "./dist/empty-state.js"
-    },
     "./input-field": {
       "types": "./dist/_types/molecules/InputField/InputField.d.ts",
       "import": "./dist/input-field.js"
-    },
-    "./otp-field": {
-      "types": "./dist/_types/molecules/OtpField/OtpField.d.ts",
-      "import": "./dist/otp-field.js"
-    },
-    "./password-field": {
-      "types": "./dist/_types/molecules/PasswordField/PasswordField.d.ts",
-      "import": "./dist/password-field.js"
     },
     "./input-phone": {
       "types": "./dist/_types/atoms/InputPhone/InputPhone.d.ts",
@@ -206,6 +182,10 @@
       "types": "./dist/_types/atoms/List/List.d.ts",
       "import": "./dist/list.js"
     },
+    "./login-form": {
+      "types": "./dist/_types/organisms/LoginForm/LoginForm.d.ts",
+      "import": "./dist/login-form.js"
+    },
     "./logo": {
       "types": "./dist/_types/atoms/Logo/Logo.d.ts",
       "import": "./dist/logo.js"
@@ -215,29 +195,57 @@
       "types": "./dist/_types/molecules/Modal/Modal.d.ts",
       "import": "./dist/modal.js"
     },
+    "./multi-select": {
+      "types": "./dist/_types/atoms/MultiSelect/MultiSelect.d.ts",
+      "import": "./dist/multi-select.js"
+    },
+    "./multi-select-field": {
+      "types": "./dist/_types/molecules/MultiSelectField/MultiSelectField.d.ts",
+      "import": "./dist/multi-select-field.js"
+    },
+    "./number-input": {
+      "types": "./dist/_types/atoms/NumberInput/NumberInput.d.ts",
+      "import": "./dist/number-input.js"
+    },
+    "./number-input-field": {
+      "types": "./dist/_types/molecules/NumberInputField/NumberInputField.d.ts",
+      "import": "./dist/number-input-field.js"
+    },
     "./org-switcher": {
       "types": "./dist/_types/molecules/OrgSwitcher/OrgSwitcher.d.ts",
       "import": "./dist/org-switcher.js"
+    },
+    "./otp-field": {
+      "types": "./dist/_types/molecules/OtpField/OtpField.d.ts",
+      "import": "./dist/otp-field.js"
+    },
+    "./otp-input": {
+      "types": "./dist/_types/atoms/OtpInput/OtpInput.d.ts",
+      "import": "./dist/otp-input.js"
     },
     "./pagination": {
       "types": "./dist/_types/molecules/Pagination/Pagination.d.ts",
       "import": "./dist/pagination.js"
     },
-    "./prev-next-nav": {
-      "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
-      "import": "./dist/prev-next-nav.js"
-    },
     "./paragraph": {
       "types": "./dist/_types/atoms/Paragraph/Paragraph.d.ts",
       "import": "./dist/paragraph.js"
     },
-    "./progress-bar": {
-      "types": "./dist/_types/atoms/ProgressBar/ProgressBar.d.ts",
-      "import": "./dist/progress-bar.js"
+    "./password-field": {
+      "types": "./dist/_types/molecules/PasswordField/PasswordField.d.ts",
+      "import": "./dist/password-field.js"
     },
     "./popover": {
       "types": "./dist/_types/atoms/Popover/Popover.d.ts",
       "import": "./dist/popover.js"
+    },
+    "./prev-next-nav": {
+      "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
+      "import": "./dist/prev-next-nav.js"
+    },
+    "./progress-bar": {
+      "types": "./dist/_types/atoms/ProgressBar/ProgressBar.d.ts",
+      "import": "./dist/progress-bar.js"
     },
     "./project-card": {
       "types": "./dist/_types/molecules/ProjectCard/ProjectCard.d.ts",
@@ -260,14 +268,6 @@
       "types": "./dist/_types/molecules/RadioField/RadioField.d.ts",
       "import": "./dist/radio-field.js"
     },
-    "./switcher": {
-      "types": "./dist/_types/atoms/Switcher/Switcher.d.ts",
-      "import": "./dist/switcher.js"
-    },
-    "./switcher-field": {
-      "types": "./dist/_types/molecules/SwitcherField/SwitcherField.d.ts",
-      "import": "./dist/switcher-field.js"
-    },
     "./review-carousel": {
       "types": "./dist/_types/organisms/ReviewCarousel/ReviewCarousel.d.ts",
       "import": "./dist/review-carousel.js"
@@ -277,14 +277,6 @@
     "./scss/components/*": "./src/tokens/scss/components/_*.scss",
     "./scss/global/*": "./src/tokens/scss/global/_*.scss",
     "./scss/molecules/*": "./src/tokens/scss/molecules/_*.scss",
-    "./multi-select": {
-      "types": "./dist/_types/atoms/MultiSelect/MultiSelect.d.ts",
-      "import": "./dist/multi-select.js"
-    },
-    "./multi-select-field": {
-      "types": "./dist/_types/molecules/MultiSelectField/MultiSelectField.d.ts",
-      "import": "./dist/multi-select-field.js"
-    },
     "./select": {
       "types": "./dist/_types/atoms/Select/Select.d.ts",
       "import": "./dist/select.js"
@@ -305,18 +297,22 @@
       "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
       "import": "./dist/skip-link.js"
     },
+    "./solutions-section.css": "./dist/solutions-section.css",
     "./spinner": {
       "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",
       "import": "./dist/spinner.js"
     },
-    "./solutions-section.css": "./dist/solutions-section.css",
-    "./login-form": {
-      "types": "./dist/_types/organisms/LoginForm/LoginForm.d.ts",
-      "import": "./dist/login-form.js"
-    },
     "./steps": {
       "types": "./dist/_types/organisms/Steps/Steps.d.ts",
       "import": "./dist/steps.js"
+    },
+    "./switcher": {
+      "types": "./dist/_types/atoms/Switcher/Switcher.d.ts",
+      "import": "./dist/switcher.js"
+    },
+    "./switcher-field": {
+      "types": "./dist/_types/molecules/SwitcherField/SwitcherField.d.ts",
+      "import": "./dist/switcher-field.js"
     },
     "./table": {
       "types": "./dist/_types/molecules/Table/Table.d.ts",
@@ -330,21 +326,21 @@
       "types": "./dist/_types/atoms/Tag/Tag.d.ts",
       "import": "./dist/tag.js"
     },
-    "./time-select": {
-      "types": "./dist/_types/atoms/TimeSelect/TimeSelect.d.ts",
-      "import": "./dist/time-select.js"
-    },
     "./textarea": {
       "types": "./dist/_types/atoms/Textarea/Textarea.d.ts",
       "import": "./dist/textarea.js"
+    },
+    "./textarea-field": {
+      "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",
+      "import": "./dist/textarea-field.js"
     },
     "./time-field": {
       "types": "./dist/_types/molecules/TimeField/TimeField.d.ts",
       "import": "./dist/time-field.js"
     },
-    "./textarea-field": {
-      "types": "./dist/_types/molecules/TextareaField/TextareaField.d.ts",
-      "import": "./dist/textarea-field.js"
+    "./time-select": {
+      "types": "./dist/_types/atoms/TimeSelect/TimeSelect.d.ts",
+      "import": "./dist/time-select.js"
     },
     "./toaster": {
       "types": "./dist/_types/molecules/Toast/Toaster.d.ts",

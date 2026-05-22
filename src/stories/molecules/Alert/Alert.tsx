@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Close } from '../../atoms/Close/Close';
+import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Alert.css';
 
@@ -49,7 +49,7 @@ export function Alert({
       </div>
       {dismissible && (
         <button type="button" className="alert__close" onClick={handleDismiss}>
-          <Close size="sm" />
+          <Icon name="close" size="sm" />
           <VisuallyHidden>Cerrar</VisuallyHidden>
         </button>
       )}

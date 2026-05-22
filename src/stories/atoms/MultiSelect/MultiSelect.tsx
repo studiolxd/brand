@@ -2,8 +2,7 @@
 
 import { useState, useRef, useEffect, useId } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
-import { Chevron } from '../Chevron/Chevron';
-import { Close } from '../Close/Close';
+import { Icon } from '../Icon/Icon';
 import './MultiSelect.css';
 
 export interface MultiSelectOption {
@@ -134,7 +133,7 @@ export function MultiSelect({
                         tabIndex={-1}
                         onClick={e => { e.stopPropagation(); toggleValue(v); }}
                       >
-                        <Close size="xs" />
+                        <Icon name="close" size="xs" />
 </button>
                     )}
                   </span>
@@ -142,7 +141,8 @@ export function MultiSelect({
               })
             )}
           </div>
-          <Chevron
+          <Icon
+            name="chevron"
             className="multi-select__icon"
             size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
           />

@@ -3,7 +3,7 @@
 import { useState, useRef, useId, useCallback, useEffect } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
-import { Close } from '../Close/Close';
+import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
 import './AsyncMultiSelect.css';
 
@@ -165,7 +165,7 @@ export function AsyncMultiSelect({
                     tabIndex={-1}
                     onMouseDown={e => { e.preventDefault(); toggleValue(opt.value); }}
                   >
-                    <Close size="xs" />
+                    <Icon name="close" size="xs" />
 </button>
                 )}
               </span>

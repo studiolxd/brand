@@ -1,5 +1,5 @@
 {
-  "close": {
+  "icon": {
     "size-xs": { "$value": "8px",  "$type": "dimension", "$description": "Tamaño extra pequeño" },
     "size-sm": { "$value": "18px", "$type": "dimension", "$description": "Tamaño pequeño" },
     "size-md": { "$value": "24px", "$type": "dimension", "$description": "Tamaño mediano" },

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Table.css';
 
@@ -91,7 +91,7 @@ function TableHeader({
       >
         <span className="table__header-content">
           {children}
-          <Chevron size="xs" className="table__sort-icon" />
+          <Icon name="chevron" size="xs" className="table__sort-icon" />
           <VisuallyHidden>
             {sorted === 'asc'
               ? 'Ordenado ascendente'

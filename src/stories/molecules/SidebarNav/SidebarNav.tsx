@@ -1,6 +1,6 @@
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import type { ReactNode } from 'react';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import './SidebarNav.css';
 
 export interface SidebarNavItem {
@@ -123,7 +123,7 @@ export function SidebarNav({
                   )
                 }
                 <RadixAccordion.Trigger className="sidebar-nav__group-chevron">
-                  <Chevron className="sidebar-nav__group-chevron-icon" size="sm" />
+                  <Icon name="chevron" className="sidebar-nav__group-chevron-icon" size="sm" />
                 </RadixAccordion.Trigger>
               </RadixAccordion.Header>
               <RadixAccordion.Content className="sidebar-nav__group-content">

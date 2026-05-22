@@ -1,6 +1,6 @@
 import { useContext, useState, type ReactNode } from 'react';
 import { SidebarContext } from '../AppShell/SidebarContext';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import './Sidebar.css';
 
 export interface SidebarProps {
@@ -26,7 +26,7 @@ export function Sidebar({ logo, children, id }: SidebarProps) {
           aria-expanded={!collapsed}
           aria-label={collapsed ? 'Expandir sidebar' : 'Plegar sidebar'}
         >
-          <Chevron className="sidebar__collapse-icon" size="sm" />
+          <Icon name="chevron" className="sidebar__collapse-icon" size="sm" />
         </button>
       </div>
       <div className="sidebar__panel">{children}</div>
