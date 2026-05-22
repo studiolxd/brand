@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { SidebarContext } from './SidebarContext';
 import './AppShell.css';
 
@@ -13,10 +13,13 @@ export interface AppShellProps {
 }
 
 export function AppShell({ sidebar, children, defaultCollapsed }: AppShellProps) {
-  const [collapsed, setCollapsed] = useState(() => {
-    if (defaultCollapsed !== undefined) return defaultCollapsed;
-    return typeof window !== 'undefined' && window.innerWidth < 1024;
-  });
+  const [collapsed, setCollapsed] = useState(defaultCollapsed ?? false);
+
+  useEffect(() => {
+    if (defaultCollapsed === undefined) {
+      setCollapsed(window.innerWidth < 1024);
+    }
+  }, [defaultCollapsed]);
 
   return (
     <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
