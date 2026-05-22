@@ -91,7 +91,7 @@ export function Carousel({
           aria-label={prevLabel}
           type="button"
         >
-          <Chevron className="carousel__chevron carousel__chevron--prev" size="lg" />
+          <Icon name="chevron" className="carousel__chevron carousel__chevron--prev" size="lg" />
         </button>
       )}
 
@@ -108,7 +108,7 @@ export function Carousel({
           aria-label={nextLabel}
           type="button"
         >
-          <Chevron className="carousel__chevron" size="lg" />
+          <Icon name="chevron" className="carousel__chevron" size="lg" />
         </button>
       )}
     </div>
