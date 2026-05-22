@@ -19,6 +19,12 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M2 2 L10 10 M10 2 L2 10" />
     ),
   },
+  dot: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <circle cx="12" cy="12" r="5" fill="currentColor" stroke="none" />
+    ),
+  },
   eye: {
     viewBox: '0 0 24 24',
     render: () => (
