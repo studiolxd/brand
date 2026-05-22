@@ -1,6 +1,6 @@
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import type { ReactNode } from 'react';
-import { Chevron } from '../Chevron/Chevron';
+import { Icon } from '../Icon/Icon';
 import './Accordion.css';
 
 /* ─── Single ─────────────────────────────────────────────── */
@@ -78,7 +78,7 @@ export function AccordionTrigger({ className, chevronSize = 'sm', children }: Ac
         className={['accordion__trigger', className].filter(Boolean).join(' ')}
       >
         <span className="accordion__trigger-text">{children}</span>
-        <Chevron className="accordion__chevron" size={chevronSize} />
+        <Icon name="chevron" className="accordion__chevron" size={chevronSize} />
       </RadixAccordion.Trigger>
     </RadixAccordion.Header>
   );

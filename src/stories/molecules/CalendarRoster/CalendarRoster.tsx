@@ -1,5 +1,5 @@
 import type { ComponentType, ReactNode } from 'react';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import { Tag } from '../../atoms/Tag/Tag';
 import './CalendarRoster.css';
 
@@ -138,7 +138,7 @@ export function CalendarRoster({
           aria-label={label}
           onClick={onMonthChange ? (e: React.MouseEvent) => { e.preventDefault(); onMonthChange(target); } : undefined}
         >
-          <Chevron size="sm" className={chevronClass} />
+          <Icon name="chevron" size="sm" className={chevronClass} />
         </A>
       );
     }
@@ -150,7 +150,7 @@ export function CalendarRoster({
         aria-label={label}
         onClick={() => onMonthChange?.(target)}
       >
-        <Chevron size="sm" className={chevronClass} />
+        <Icon name="chevron" size="sm" className={chevronClass} />
       </button>
     );
   }

@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
@@ -134,7 +134,7 @@ export function Pagination({
     const ariaLabelText = direction === 'prev' ? 'Página anterior' : 'Página siguiente';
     const chevronClass = direction === 'prev' ? 'pagination__chevron--prev' : undefined;
     const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
-    const icon = <Chevron size={chevronSize} className={chevronClass} />;
+    const icon = <Icon name="chevron" size={chevronSize} className={chevronClass} />;
 
     if (hrefBuilder) {
       return (

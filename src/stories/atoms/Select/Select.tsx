@@ -1,5 +1,5 @@
 import * as RadixSelect from '@radix-ui/react-select';
-import { Chevron } from '../Chevron/Chevron';
+import { Icon } from '../Icon/Icon';
 import './Select.css';
 
 export interface SelectOption {
@@ -57,7 +57,7 @@ export function Select({
       <RadixSelect.Trigger className={triggerClass} id={id} aria-label={ariaLabel ?? placeholder} aria-readonly={readOnly || undefined}>
         <RadixSelect.Value placeholder={placeholder} />
         <RadixSelect.Icon asChild>
-          <Chevron className="select__icon" size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'} />
+          <Icon name="chevron" className="select__icon" size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'} />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
 

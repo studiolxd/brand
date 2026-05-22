@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
-import { Chevron } from '../Chevron/Chevron';
+import { Icon } from '../Icon/Icon';
 import './Carousel.css';
 
 interface CarouselProps {

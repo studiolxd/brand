@@ -1,5 +1,5 @@
 import { useState, useCallback, type ReactNode } from 'react';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import { Tag } from '../../atoms/Tag/Tag';
 import { Modal } from '../Modal/Modal';
 import './CalendarPlanner.css';
@@ -172,7 +172,7 @@ export function CalendarPlanner({
             aria-label="Mes anterior"
             onClick={() => handleMonthChange(prevMonth)}
           >
-            <Chevron size={chevronSize} className="calendar-planner__chevron--prev" />
+            <Icon name="chevron" size={chevronSize} className="calendar-planner__chevron--prev" />
           </button>
         )}
         <h2 id={titleId} className="calendar-planner__title" aria-live="polite">
@@ -185,7 +185,7 @@ export function CalendarPlanner({
             aria-label="Mes siguiente"
             onClick={() => handleMonthChange(nextMonth)}
           >
-            <Chevron size={chevronSize} />
+            <Icon name="chevron" size={chevronSize} />
           </button>
         )}
       </div>

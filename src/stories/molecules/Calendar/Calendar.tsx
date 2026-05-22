@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import './Calendar.css';
 
 export interface CalendarProps {
@@ -170,7 +170,7 @@ export function Calendar({
             disabled={prevDisabled}
             onClick={() => handleMonthChange(prevMonth)}
           >
-            <Chevron size={chevronSize} className="calendar__chevron--prev" />
+            <Icon name="chevron" size={chevronSize} className="calendar__chevron--prev" />
           </button>
         )}
         <h2 id={titleId} className="calendar__title" aria-live="polite">
@@ -184,7 +184,7 @@ export function Calendar({
             disabled={nextDisabled}
             onClick={() => handleMonthChange(nextMonth)}
           >
-            <Chevron size={chevronSize} />
+            <Icon name="chevron" size={chevronSize} />
           </button>
         )}
       </div>

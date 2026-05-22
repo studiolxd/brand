@@ -2,7 +2,7 @@ import * as RadixSelect from '@radix-ui/react-select';
 import { getCountryCallingCode } from 'libphonenumber-js';
 import PhoneInputLib from 'react-phone-number-input';
 import type { Country } from 'react-phone-number-input';
-import { Chevron } from '../Chevron/Chevron';
+import { Icon } from '../Icon/Icon';
 import './InputPhone.css';
 
 interface CountrySelectProps {
@@ -36,7 +36,7 @@ function CountrySelect({ value, onChange, options, disabled, dark, size = 'md' }
           {value ? `+${getCountryCallingCode(value)}` : '🌐'}
         </RadixSelect.Value>
         <RadixSelect.Icon asChild>
-          <Chevron className="input-phone__country-icon" size={chevronSize} />
+          <Icon name="chevron" className="input-phone__country-icon" size={chevronSize} />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
 

@@ -1,7 +1,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import type { ReactNode } from 'react';
 import { Avatar } from '../../atoms/Avatar/Avatar';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import type { ContextMenuItem, ContextMenuRenderLinkProps } from '../ContextMenu/ContextMenu';
 import { renderDropdownItems } from '../_shared/dropdownItems';
 import './UserMenu.css';
@@ -41,7 +41,7 @@ export function UserMenu({
         <button type="button" className="user-menu__trigger">
           <Avatar src={avatarUrl} name={name} alt="" size="sm" className="user-menu__avatar" />
           <span className="user-menu__name">{name}</span>
-          <Chevron size="sm" className="user-menu__chevron" />
+          <Icon name="chevron" size="sm" className="user-menu__chevron" />
         </button>
       </DropdownMenu.Trigger>
 

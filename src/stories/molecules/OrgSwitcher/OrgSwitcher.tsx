@@ -1,7 +1,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import type { ReactNode } from 'react';
 import { Avatar } from '../../atoms/Avatar/Avatar';
-import { Chevron } from '../../atoms/Chevron/Chevron';
+import { Icon } from '../../atoms/Icon/Icon';
 import type { ContextMenuItem, ContextMenuRenderLinkProps } from '../ContextMenu/ContextMenu';
 import './OrgSwitcher.css';
 
@@ -29,7 +29,7 @@ export function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen, 
         <button type="button" className="org-switcher__trigger">
           <Avatar src={current.logoUrl} name={current.name} alt="" size="sm" shape="square" className="org-switcher__logo" />
           <span className="org-switcher__name">{current.name}</span>
-          <Chevron size="sm" className="org-switcher__chevron" />
+          <Icon name="chevron" size="sm" className="org-switcher__chevron" />
         </button>
       </DropdownMenu.Trigger>
 
