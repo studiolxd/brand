@@ -1,0 +1,9 @@
+{
+  "typing-indicator": {
+    "dot-size":             { "$value": "0.375rem",                 "$type": "dimension", "$description": "Tamaño de cada punto (6px)" },
+    "dot-gap":              { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Separación entre puntos" },
+    "dot-color":            { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color de los puntos" },
+    "dot-opacity-inactive": { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Opacidad del punto en reposo" },
+    "animation-duration":   { "$value": "{motion.duration.slow}",   "$type": "string",    "$description": "Duración del ciclo de animación" }
+  }
+}

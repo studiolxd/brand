@@ -1,0 +1,26 @@
+.message-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--message-composer-gap);
+  padding-block: var(--message-composer-padding-block);
+  padding-inline: var(--message-composer-padding-inline);
+  border-radius: var(--message-composer-border-radius);
+  border: 1px solid var(--message-composer-border-color);
+  background-color: var(--message-composer-bg);
+}
+
+.message-composer .textarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  box-shadow: none;
+  padding-block: 0;
+  padding-inline: 0;
+  background: transparent;
+  min-height: unset;
+}
+
+.message-composer .textarea:focus {
+  outline: none;
+  box-shadow: none;
+}

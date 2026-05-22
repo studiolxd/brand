@@ -1,0 +1,7 @@
+{
+  "conversation-thread": {
+    "gap":            { "$value": "{spacing.4}",  "$type": "dimension", "$description": "Separación vertical entre mensajes" },
+    "padding-block":  { "$value": "{spacing.6}",  "$type": "dimension", "$description": "Padding vertical del hilo" },
+    "padding-inline": { "$value": "{spacing.6}",  "$type": "dimension", "$description": "Padding horizontal del hilo" }
+  }
+}

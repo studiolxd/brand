@@ -15,6 +15,7 @@ interface TextareaProps {
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
 }
 
 export function Textarea({
@@ -32,6 +33,7 @@ export function Textarea({
   onChange,
   onBlur,
   onFocus,
+  onKeyDown,
 }: TextareaProps) {
   return (
     <textarea
@@ -49,6 +51,7 @@ export function Textarea({
       onChange={onChange}
       onBlur={onBlur}
       onFocus={onFocus}
+      onKeyDown={onKeyDown}
     />
   );
 }

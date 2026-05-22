@@ -56,3 +56,21 @@ export const NombreLargo: Story = {
     items: defaultItems,
   },
 };
+
+export const ConNotificaciones: Story = {
+  args: {
+    name: 'Ana García',
+    email: 'ana.garcia@studiolxd.com',
+    notificationCount: 5,
+    items: defaultItems,
+  },
+};
+
+export const MuchasNotificaciones: Story = {
+  args: {
+    name: 'Ana García',
+    email: 'ana.garcia@studiolxd.com',
+    notificationCount: 120,
+    items: defaultItems,
+  },
+};

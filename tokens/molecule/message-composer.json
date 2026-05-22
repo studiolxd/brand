@@ -1,0 +1,10 @@
+{
+  "message-composer": {
+    "gap":            { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Separación entre textarea y botón" },
+    "padding-block":  { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Padding vertical del contenedor" },
+    "padding-inline": { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Padding horizontal del contenedor" },
+    "border-radius":  { "$value": "{border-radius.lg}",   "$type": "dimension", "$description": "Radio del contenedor" },
+    "border-color":   { "$value": "{color.grey-light}",    "$type": "color",     "$description": "Color del borde" },
+    "bg":             { "$value": "{color.white}",         "$type": "color",     "$description": "Fondo del composer" }
+  }
+}

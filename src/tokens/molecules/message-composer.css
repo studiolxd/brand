@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --message-composer-gap: var(--spacing-2); /** Separación entre textarea y botón */
+  --message-composer-padding-block: var(--spacing-3); /** Padding vertical del contenedor */
+  --message-composer-padding-inline: var(--spacing-4); /** Padding horizontal del contenedor */
+  --message-composer-border-radius: var(--border-radius-lg); /** Radio del contenedor */
+  --message-composer-border-color: var(--color-grey-light); /** Color del borde */
+  --message-composer-bg: var(--color-white); /** Fondo del composer */
+}

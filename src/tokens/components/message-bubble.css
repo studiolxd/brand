@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --message-bubble-max-width: 75%; /** Anchura máxima del globo */
+  --message-bubble-padding-block: var(--spacing-3); /** Padding vertical del globo */
+  --message-bubble-padding-inline: var(--spacing-4); /** Padding horizontal del globo */
+  --message-bubble-border-radius: var(--border-radius-lg); /** Radio base del globo */
+  --message-bubble-font-family: var(--font-family-sans); /** Familia tipográfica */
+  --message-bubble-font-size: var(--font-size-2); /** Tamaño de fuente — 15px UI */
+  --message-bubble-line-height: var(--line-height-relaxed); /** Interlineado */
+  --message-bubble-assistant-bg: var(--color-grey-lightest); /** Fondo del mensaje del asistente */
+  --message-bubble-font-weight: var(--font-weight-default); /** Peso tipográfico */
+  --message-bubble-user-bg: var(--color-primary); /** Fondo del mensaje del usuario */
+  --message-bubble-user-color: var(--color-text-on-dark); /** Color de texto del mensaje del usuario */
+  --message-bubble-assistant-color: var(--color-text-on-light); /** Color de texto del mensaje del asistente */
+}

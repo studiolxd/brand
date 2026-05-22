@@ -1,0 +1,9 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --conversation-thread-gap: var(--spacing-4); /** Separación vertical entre mensajes */
+  --conversation-thread-padding-block: var(--spacing-6); /** Padding vertical del hilo */
+  --conversation-thread-padding-inline: var(--spacing-6); /** Padding horizontal del hilo */
+}

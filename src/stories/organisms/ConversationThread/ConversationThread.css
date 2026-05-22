@@ -1,0 +1,8 @@
+.conversation-thread {
+  display: flex;
+  flex-direction: column;
+  gap: var(--conversation-thread-gap);
+  padding-block: var(--conversation-thread-padding-block);
+  padding-inline: var(--conversation-thread-padding-inline);
+  overflow-y: auto;
+}

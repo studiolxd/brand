@@ -1,0 +1,28 @@
+{
+  "number-badge": {
+    "min-size":       { "$value": "1.25rem",              "$type": "dimension", "$description": "Tamaño mínimo del badge (20px) — permite acomodar dos dígitos" },
+    "padding-inline": { "$value": "{spacing.1}",           "$type": "dimension", "$description": "Padding horizontal para números de más de un dígito" },
+    "border-radius":  { "$value": "{border-radius.full}",  "$type": "dimension", "$description": "Forma circular" },
+    "font-family":    { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Familia tipográfica" },
+    "font-size":      { "$value": "{font-size.1}",         "$type": "dimension", "$description": "Tamaño de fuente — 14px" },
+    "font-weight":    { "$value": "{font-weight.semibold}", "$type": "number",    "$description": "Seminegrita para legibilidad en tamaño pequeño" },
+    "line-height":    { "$value": "{line-height.none}",    "$type": "number",    "$description": "Sin interlineado extra — centrado por flexbox" },
+
+    "primary-bg":     { "$value": "{color.primary}",          "$type": "color", "$description": "Fondo primary (prussian)" },
+    "primary-color":  { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Texto sobre primary" },
+    "accent-1-bg":    { "$value": "{color.accent-1}",         "$type": "color", "$description": "Fondo accent-1 (lavender)" },
+    "accent-1-color": { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre accent-1" },
+    "accent-2-bg":    { "$value": "{color.accent-2}",         "$type": "color", "$description": "Fondo accent-2 (yellow)" },
+    "accent-2-color": { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre accent-2" },
+    "support-1-bg":   { "$value": "{color.support-1}",        "$type": "color", "$description": "Fondo support-1 (emerald)" },
+    "support-1-color":{ "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre support-1" },
+    "support-2-bg":   { "$value": "{color.support-2}",        "$type": "color", "$description": "Fondo support-2 (cayenne)" },
+    "support-2-color":{ "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre support-2" },
+    "danger-bg":      { "$value": "{color.red-on-light}",     "$type": "color", "$description": "Fondo danger (red)" },
+    "danger-color":   { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre danger" },
+    "success-bg":     { "$value": "{color.success-on-light}", "$type": "color", "$description": "Fondo success (green)" },
+    "success-color":  { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre success" },
+    "neutral-bg":     { "$value": "{color.grey-darkest}",     "$type": "color", "$description": "Fondo neutral (dark grey)" },
+    "neutral-color":  { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre neutral" }
+  }
+}

@@ -22,11 +22,28 @@
   outline-offset: 2px;
 }
 
+/* ─── Avatar wrapper (posición relativa para el badge) ───── */
+.user-menu__avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
 /* ─── Avatar override ────────────────────────────────────── */
 .user-menu__avatar {
   --avatar-size-sm: var(--user-menu-avatar-size);
   --avatar-initials-bg: var(--user-menu-initials-bg);
   --avatar-initials-color: var(--user-menu-initials-color);
+}
+
+/* ─── Badge de notificaciones ────────────────────────────── */
+.user-menu__notification-badge {
+  position: absolute;
+  inset-block-start: -0.25rem;
+  inset-inline-end: -0.375rem;
+  /* Sobreescribe tamaño mínimo para un badge más compacto en este contexto */
+  --number-badge-min-size: 1rem;
+  --number-badge-font-size: 0.625rem;
+  --number-badge-padding-inline: 0.125rem;
 }
 
 /* ─── Nombre en trigger ──────────────────────────────────── */

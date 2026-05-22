@@ -1,0 +1,29 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --number-badge-min-size: 1.25rem; /** Tamaño mínimo del badge (20px) — permite acomodar dos dígitos */
+  --number-badge-padding-inline: var(--spacing-1); /** Padding horizontal para números de más de un dígito */
+  --number-badge-border-radius: var(--border-radius-full); /** Forma circular */
+  --number-badge-font-family: var(--font-family-sans); /** Familia tipográfica */
+  --number-badge-font-size: var(--font-size-1); /** Tamaño de fuente — 14px */
+  --number-badge-font-weight: var(--font-weight-semibold); /** Seminegrita para legibilidad en tamaño pequeño */
+  --number-badge-line-height: var(--line-height-none); /** Sin interlineado extra — centrado por flexbox */
+  --number-badge-danger-bg: var(--color-red-on-light); /** Fondo danger (red) */
+  --number-badge-danger-color: var(--color-white); /** Texto sobre danger */
+  --number-badge-success-color: var(--color-white); /** Texto sobre success */
+  --number-badge-neutral-bg: var(--color-grey-darkest); /** Fondo neutral (dark grey) */
+  --number-badge-neutral-color: var(--color-white); /** Texto sobre neutral */
+  --number-badge-primary-bg: var(--color-primary); /** Fondo primary (prussian) */
+  --number-badge-primary-color: var(--color-text-on-dark); /** Texto sobre primary */
+  --number-badge-accent-1-bg: var(--color-accent-1); /** Fondo accent-1 (lavender) */
+  --number-badge-accent-1-color: var(--color-text-on-light); /** Texto sobre accent-1 */
+  --number-badge-accent-2-bg: var(--color-accent-2); /** Fondo accent-2 (yellow) */
+  --number-badge-accent-2-color: var(--color-text-on-light); /** Texto sobre accent-2 */
+  --number-badge-support-1-bg: var(--color-support-1); /** Fondo support-1 (emerald) */
+  --number-badge-support-1-color: var(--color-text-on-light); /** Texto sobre support-1 */
+  --number-badge-support-2-bg: var(--color-support-2); /** Fondo support-2 (cayenne) */
+  --number-badge-support-2-color: var(--color-text-on-light); /** Texto sobre support-2 */
+  --number-badge-success-bg: var(--color-success-on-light); /** Fondo success (green) */
+}

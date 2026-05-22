@@ -1,0 +1,19 @@
+{
+  "message-bubble": {
+    "padding-block":  { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Padding vertical del globo" },
+    "padding-inline": { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Padding horizontal del globo" },
+    "border-radius":  { "$value": "{border-radius.lg}",    "$type": "dimension", "$description": "Radio base del globo" },
+    "max-width":      { "$value": "75%",                   "$type": "dimension", "$description": "Anchura máxima del globo" },
+
+    "font-family":    { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Familia tipográfica" },
+    "font-size":      { "$value": "{font-size.2}",         "$type": "dimension", "$description": "Tamaño de fuente — 15px UI" },
+    "font-weight":    { "$value": "{font-weight.default}", "$type": "number",    "$description": "Peso tipográfico" },
+    "line-height":    { "$value": "{line-height.relaxed}", "$type": "number",    "$description": "Interlineado" },
+
+    "user-bg":        { "$value": "{color.primary}",       "$type": "color",     "$description": "Fondo del mensaje del usuario" },
+    "user-color":     { "$value": "{color.text.on-dark}",  "$type": "color",     "$description": "Color de texto del mensaje del usuario" },
+
+    "assistant-bg":   { "$value": "{color.grey-lightest}", "$type": "color",     "$description": "Fondo del mensaje del asistente" },
+    "assistant-color":{ "$value": "{color.text.on-light}", "$type": "color",     "$description": "Color de texto del mensaje del asistente" }
+  }
+}

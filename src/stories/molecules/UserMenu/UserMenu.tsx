@@ -2,6 +2,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import type { ReactNode } from 'react';
 import { Avatar } from '../../atoms/Avatar/Avatar';
 import { Icon } from '../../atoms/Icon/Icon';
+import { NumberBadge } from '../../atoms/NumberBadge/NumberBadge';
 import type { ContextMenuItem, ContextMenuRenderLinkProps } from '../ContextMenu/ContextMenu';
 import { renderDropdownItems } from '../_shared/dropdownItems';
 import './UserMenu.css';
@@ -10,6 +11,8 @@ export interface UserMenuProps {
   name: string;
   email: string;
   avatarUrl?: string;
+  /** Número de notificaciones sin leer. Si es 0 o undefined, no se muestra el badge. */
+  notificationCount?: number;
   items?: ContextMenuItem[];
   renderLink?: (props: ContextMenuRenderLinkProps) => ReactNode;
   onOpenChange?: (open: boolean) => void;
@@ -30,6 +33,7 @@ export function UserMenu({
   name,
   email,
   avatarUrl,
+  notificationCount,
   items = [],
   renderLink = defaultRenderLink,
   onOpenChange,
@@ -39,7 +43,17 @@ export function UserMenu({
     <DropdownMenu.Root onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
       <DropdownMenu.Trigger asChild>
         <button type="button" className="user-menu__trigger">
-          <Avatar src={avatarUrl} name={name} alt="" size="sm" className="user-menu__avatar" />
+          <span className="user-menu__avatar-wrap">
+            <Avatar src={avatarUrl} name={name} alt="" size="sm" className="user-menu__avatar" />
+            {!!notificationCount && notificationCount > 0 && (
+              <NumberBadge
+                count={notificationCount}
+                variant="danger"
+                aria-label={`${notificationCount} notificaciones sin leer`}
+                className="user-menu__notification-badge"
+              />
+            )}
+          </span>
           <span className="user-menu__name">{name}</span>
           <Icon name="chevron" size="sm" className="user-menu__chevron" />
         </button>

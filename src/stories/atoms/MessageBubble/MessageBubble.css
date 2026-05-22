@@ -1,0 +1,25 @@
+.message-bubble {
+  padding-block: var(--message-bubble-padding-block);
+  padding-inline: var(--message-bubble-padding-inline);
+  border-radius: var(--message-bubble-border-radius);
+  max-width: var(--message-bubble-max-width);
+
+  font-family: var(--message-bubble-font-family);
+  font-size: var(--message-bubble-font-size);
+  font-weight: var(--message-bubble-font-weight);
+  line-height: var(--message-bubble-line-height);
+}
+
+.message-bubble--user {
+  background-color: var(--message-bubble-user-bg);
+  color: var(--message-bubble-user-color);
+  border-end-end-radius: 0.25rem;
+  margin-inline-start: auto;
+}
+
+.message-bubble--assistant {
+  background-color: var(--message-bubble-assistant-bg);
+  color: var(--message-bubble-assistant-color);
+  border-end-start-radius: 0.25rem;
+  margin-inline-end: auto;
+}

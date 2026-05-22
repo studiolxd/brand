@@ -84,6 +84,11 @@ const filters = {
   'file-upload':        (t) => t.path[0] === 'file-upload',
   'file-upload-field':  (t) => t.path[0] === 'file-upload-field',
   'description-list':   (t) => t.path[0] === 'description-list',
+  'number-badge':       (t) => t.path[0] === 'number-badge',
+  'message-bubble':     (t) => t.path[0] === 'message-bubble',
+  'typing-indicator':   (t) => t.path[0] === 'typing-indicator',
+  'message-composer':   (t) => t.path[0] === 'message-composer',
+  'conversation-thread':(t) => t.path[0] === 'conversation-thread',
 };
 
 function cssFile(destination, filterKey) {
@@ -181,6 +186,11 @@ const sd = new StyleDictionary({
         cssFile('components/file-upload.css',       'file-upload'),
         cssFile('molecules/file-upload-field.css',  'file-upload-field'),
         cssFile('components/description-list.css', 'description-list'),
+        cssFile('components/number-badge.css',     'number-badge'),
+        cssFile('components/message-bubble.css',   'message-bubble'),
+        cssFile('components/typing-indicator.css', 'typing-indicator'),
+        cssFile('molecules/message-composer.css',  'message-composer'),
+        cssFile('molecules/conversation-thread.css','conversation-thread'),
       ],
     },
     scss: {
@@ -266,6 +276,11 @@ const sd = new StyleDictionary({
         scssFile('components/_file-upload.scss',       'file-upload'),
         scssFile('molecules/_file-upload-field.scss',  'file-upload-field'),
         scssFile('components/_description-list.scss',  'description-list'),
+        scssFile('components/_number-badge.scss',      'number-badge'),
+        scssFile('components/_message-bubble.scss',    'message-bubble'),
+        scssFile('components/_typing-indicator.scss',  'typing-indicator'),
+        scssFile('molecules/_message-composer.scss',   'message-composer'),
+        scssFile('molecules/_conversation-thread.scss','conversation-thread'),
       ],
     },
   },

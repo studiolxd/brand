@@ -1,0 +1,26 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$number-badge-min-size: 1.25rem; // Tamaño mínimo del badge (20px) — permite acomodar dos dígitos
+$number-badge-padding-inline: 0.25rem; // Padding horizontal para números de más de un dígito
+$number-badge-border-radius: 9999px; // Forma circular
+$number-badge-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
+$number-badge-font-size: 0.875rem; // Tamaño de fuente — 14px
+$number-badge-font-weight: 600; // Seminegrita para legibilidad en tamaño pequeño
+$number-badge-line-height: 1; // Sin interlineado extra — centrado por flexbox
+$number-badge-primary-bg: #111e30; // Fondo primary (prussian)
+$number-badge-primary-color: #ffffff; // Texto sobre primary
+$number-badge-accent-1-bg: #baabff; // Fondo accent-1 (lavender)
+$number-badge-accent-1-color: #111e30; // Texto sobre accent-1
+$number-badge-accent-2-bg: #ffcd00; // Fondo accent-2 (yellow)
+$number-badge-accent-2-color: #111e30; // Texto sobre accent-2
+$number-badge-support-1-bg: #20e38e; // Fondo support-1 (emerald)
+$number-badge-support-1-color: #111e30; // Texto sobre support-1
+$number-badge-support-2-bg: #f05e1c; // Fondo support-2 (cayenne)
+$number-badge-support-2-color: #111e30; // Texto sobre support-2
+$number-badge-danger-bg: #b30000; // Fondo danger (red)
+$number-badge-danger-color: #ffffff; // Texto sobre danger
+$number-badge-success-bg: #006616; // Fondo success (green)
+$number-badge-success-color: #ffffff; // Texto sobre success
+$number-badge-neutral-bg: #4a4a4a; // Fondo neutral (dark grey)
+$number-badge-neutral-color: #ffffff; // Texto sobre neutral

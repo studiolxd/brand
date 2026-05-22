@@ -1,0 +1,25 @@
+.number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--number-badge-min-size);
+  height: var(--number-badge-min-size);
+  padding-inline: var(--number-badge-padding-inline);
+  border-radius: var(--number-badge-border-radius);
+
+  font-family: var(--number-badge-font-family);
+  font-size: var(--number-badge-font-size);
+  font-weight: var(--number-badge-font-weight);
+  line-height: var(--number-badge-line-height);
+  white-space: nowrap;
+}
+
+/* ─── Variantes ──────────────────────────────────────────── */
+.number-badge--primary   { background-color: var(--number-badge-primary-bg);   color: var(--number-badge-primary-color); }
+.number-badge--accent-1  { background-color: var(--number-badge-accent-1-bg);  color: var(--number-badge-accent-1-color); }
+.number-badge--accent-2  { background-color: var(--number-badge-accent-2-bg);  color: var(--number-badge-accent-2-color); }
+.number-badge--support-1 { background-color: var(--number-badge-support-1-bg); color: var(--number-badge-support-1-color); }
+.number-badge--support-2 { background-color: var(--number-badge-support-2-bg); color: var(--number-badge-support-2-color); }
+.number-badge--danger    { background-color: var(--number-badge-danger-bg);    color: var(--number-badge-danger-color); }
+.number-badge--success   { background-color: var(--number-badge-success-bg);   color: var(--number-badge-success-color); }
+.number-badge--neutral   { background-color: var(--number-badge-neutral-bg);   color: var(--number-badge-neutral-color); }

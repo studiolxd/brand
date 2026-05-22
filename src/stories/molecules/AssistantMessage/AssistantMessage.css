@@ -1,0 +1,21 @@
+.assistant-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-1);
+}
+
+.assistant-message__model {
+  font-family: var(--message-bubble-font-family);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-grey-dark);
+  padding-inline: var(--spacing-1);
+}
+
+.assistant-message__timestamp {
+  font-family: var(--message-bubble-font-family);
+  font-size: var(--font-size-1);
+  color: var(--color-grey-dark);
+  padding-inline: var(--spacing-1);
+}

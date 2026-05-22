@@ -39,6 +39,9 @@ export const entryPoints = {
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
   'number-input':        'src/stories/atoms/NumberInput/NumberInput.tsx',
   'file-upload':         'src/stories/atoms/FileUpload/FileUpload.tsx',
+  'number-badge':        'src/stories/atoms/NumberBadge/NumberBadge.tsx',
+  'message-bubble':      'src/stories/atoms/MessageBubble/MessageBubble.tsx',
+  'typing-indicator':    'src/stories/atoms/TypingIndicator/TypingIndicator.tsx',
   // Molecules
   'alert':                   'src/stories/molecules/Alert/Alert.tsx',
   'async-multi-select-field': 'src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx',
@@ -78,6 +81,10 @@ export const entryPoints = {
   'toaster':             'src/stories/molecules/Toast/Toaster.tsx',
   'number-input-field':  'src/stories/molecules/NumberInputField/NumberInputField.tsx',
   'file-upload-field':   'src/stories/molecules/FileUploadField/FileUploadField.tsx',
+  'user-message':        'src/stories/molecules/UserMessage/UserMessage.tsx',
+  'assistant-message':   'src/stories/molecules/AssistantMessage/AssistantMessage.tsx',
+  'model-selector':      'src/stories/molecules/ModelSelector/ModelSelector.tsx',
+  'message-composer':    'src/stories/molecules/MessageComposer/MessageComposer.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
@@ -87,6 +94,7 @@ export const entryPoints = {
   'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
   'review-carousel':     'src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx',
   'steps':               'src/stories/organisms/Steps/Steps.tsx',
+  'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
 };
 
 export const clientComponents = new Set([
@@ -113,4 +121,6 @@ export const clientComponents = new Set([
   'number-input-field',
   'file-upload',
   'file-upload-field',
+  'message-composer',
+  'conversation-thread',
 ]);
