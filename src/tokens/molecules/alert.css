@@ -7,9 +7,9 @@
   --alert-padding-inline: var(--spacing-5); /** Padding horizontal del alert (24px) */
   --alert-border-radius: var(--border-radius-none); /** Sin radio de esquinas */
   --alert-border-width: var(--border-width-sm); /** Grosor del borde */
-  --alert-title-font-size: var(--font-size-2); /** Tamaño del título (16px) */
+  --alert-title-font-size: var(--font-size-3); /** Tamaño del título (18px — text default) */
   --alert-title-font-weight: var(--font-weight-medium); /** Peso del título */
-  --alert-description-font-size: var(--font-size-1); /** Tamaño de la descripción (14px) */
+  --alert-description-font-size: var(--font-size-3); /** Tamaño de la descripción (18px — text default) */
   --alert-close-size: var(--icon-size-sm); /** Tamaño del icono de cierre (18px) */
   --alert-bg: var(--color-primary); /** Fondo por defecto — prussian */
   --alert-border-color: var(--color-primary); /** Borde igual al fondo — invisible */

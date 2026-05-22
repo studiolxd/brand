@@ -7,10 +7,10 @@ $alert-border-radius: 0px; // Sin radio de esquinas
 $alert-border-width: 1px; // Grosor del borde
 $alert-bg: #111e30; // Fondo por defecto — prussian
 $alert-border-color: #111e30; // Borde igual al fondo — invisible
-$alert-title-font-size: 1rem; // Tamaño del título (16px)
+$alert-title-font-size: 1.125rem; // Tamaño del título (18px — text default)
 $alert-title-font-weight: 500; // Peso del título
 $alert-title-color: #ffffff; // Texto blanco sobre fondo oscuro
-$alert-description-font-size: 0.875rem; // Tamaño de la descripción (14px)
+$alert-description-font-size: 1.125rem; // Tamaño de la descripción (18px — text default)
 $alert-description-color: #d0d0d0; // Descripción atenuada sobre fondo oscuro
 $alert-close-color: #ffffff; // Color del botón de cierre — blanco
 $alert-close-hover-color: #ffffff; // Color del botón de cierre en hover

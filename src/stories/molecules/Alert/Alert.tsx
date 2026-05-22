@@ -27,6 +27,7 @@ export function Alert({
   const classes = [
     'alert',
     variant !== 'default' ? `alert--${variant}` : '',
+    variant !== 'warning' ? 'surface-dark' : '',
     dismissible ? 'alert--dismissible' : '',
     className ?? '',
   ]
