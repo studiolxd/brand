@@ -89,6 +89,7 @@ const filters = {
   'typing-indicator':   (t) => t.path[0] === 'typing-indicator',
   'message-composer':   (t) => t.path[0] === 'message-composer',
   'conversation-thread':(t) => t.path[0] === 'conversation-thread',
+  'conversation-list':  (t) => t.path[0] === 'conversation-list',
 };
 
 function cssFile(destination, filterKey) {
@@ -191,6 +192,7 @@ const sd = new StyleDictionary({
         cssFile('components/typing-indicator.css', 'typing-indicator'),
         cssFile('molecules/message-composer.css',  'message-composer'),
         cssFile('molecules/conversation-thread.css','conversation-thread'),
+        cssFile('molecules/conversation-list.css', 'conversation-list'),
       ],
     },
     scss: {
@@ -281,6 +283,7 @@ const sd = new StyleDictionary({
         scssFile('components/_typing-indicator.scss',  'typing-indicator'),
         scssFile('molecules/_message-composer.scss',   'message-composer'),
         scssFile('molecules/_conversation-thread.scss','conversation-thread'),
+        scssFile('molecules/_conversation-list.scss', 'conversation-list'),
       ],
     },
   },

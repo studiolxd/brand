@@ -3,9 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppShell } from '../../sections/AppShell/AppShell';
 import { Sidebar } from '../../sections/Sidebar/Sidebar';
 import { Logo } from '../../atoms/Logo/Logo';
-import { Button } from '../../atoms/Button/Button';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
 import { SelectField } from '../../molecules/SelectField/SelectField';
+import { ConversationList } from '../../molecules/ConversationList/ConversationList';
+import type { ConversationItem } from '../../molecules/ConversationList/ConversationList';
 import { ConversationThread } from '../../organisms/ConversationThread/ConversationThread';
 import { MessageComposer } from '../../molecules/MessageComposer/MessageComposer';
 import type { ConversationMessage } from '../../organisms/ConversationThread/ConversationThread';
@@ -63,53 +64,34 @@ const INITIAL_MESSAGES: ConversationMessage[] = [
   },
 ];
 
-const recentChats = [
-  { id: 'c1', label: 'Autenticación JWT', active: true },
+const INITIAL_CHATS: ConversationItem[] = [
+  { id: 'c1', label: 'Autenticación JWT' },
   { id: 'c2', label: 'Diseño de base de datos' },
   { id: 'c3', label: 'Configurar CI/CD con GitHub Actions' },
   { id: 'c4', label: 'Revisión de pull request' },
   { id: 'c5', label: 'Optimización de consultas SQL' },
 ];
 
-function ChatSidebar() {
+interface ChatSidebarProps {
+  conversations: ConversationItem[];
+  activeId: string;
+  onNew: () => void;
+  onSelect: (id: string) => void;
+  onDelete: (id: string) => void;
+}
+
+function ChatSidebar({ conversations, activeId, onNew, onSelect, onDelete }: ChatSidebarProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div style={{ paddingBlock: 'var(--spacing-3)', paddingInline: 'var(--spacing-3)' }}>
-        <Button variant="ghost" size="sm" block onClick={() => {}}>
-          + Nueva conversación
-        </Button>
+      <div style={{ flex: 1, overflowY: 'auto', paddingBlock: 'var(--spacing-3)' }}>
+        <ConversationList
+          conversations={conversations}
+          activeId={activeId}
+          onNew={onNew}
+          onSelect={onSelect}
+          onDelete={onDelete}
+        />
       </div>
-
-      <nav
-        aria-label="Conversaciones recientes"
-        style={{ flex: 1, overflowY: 'auto', paddingInline: 'var(--spacing-2)' }}
-      >
-        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 'var(--spacing-1)' }}>
-          {recentChats.map((chat) => (
-            <li key={chat.id}>
-              <button
-                type="button"
-                aria-current={chat.active ? 'page' : undefined}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  textAlign: 'start',
-                  padding: 'var(--spacing-2) var(--spacing-3)',
-                  borderRadius: 'var(--radius-md)',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: 'var(--font-size-body)',
-                  color: chat.active ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                  background: chat.active ? 'var(--color-bg-subtle)' : 'transparent',
-                  fontWeight: chat.active ? 500 : 400,
-                }}
-              >
-                {chat.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
 
       <div style={{ borderBlockStart: '1px solid var(--sidebar-border-color, var(--color-border-subtle))', paddingBlockStart: 'var(--spacing-1)' }}>
         <UserMenu
@@ -154,7 +136,6 @@ function ChatMain({ messages, onSend, isStreaming, model, onModelChange }: ChatM
           options={modelOptions}
           value={model}
           onValueChange={onModelChange}
-          size="sm"
         />
       </header>
 
@@ -173,60 +154,89 @@ function ChatMain({ messages, onSend, isStreaming, model, onModelChange }: ChatM
           borderBlockStart: '1px solid var(--color-border-subtle)',
         }}
       >
-        <div style={{ maxWidth: '48rem', marginInline: 'auto' }}>
           <MessageComposer onSend={onSend} disabled={isStreaming} />
-        </div>
       </div>
     </div>
   );
 }
 
-export const Default: Story = {
-  render: () => {
-    const [messages, setMessages] = useState<ConversationMessage[]>(INITIAL_MESSAGES);
-    const [isStreaming, setIsStreaming] = useState(false);
-    const [model, setModel] = useState('claude-sonnet');
+function useChatState(initialMessages: ConversationMessage[]) {
+  const [conversations, setConversations] = useState<ConversationItem[]>(INITIAL_CHATS);
+  const [activeId, setActiveId] = useState('c1');
+  const [messages, setMessages] = useState<ConversationMessage[]>(initialMessages);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [model, setModel] = useState('claude-sonnet');
 
-    function handleSend(text: string) {
-      const userMsg: ConversationMessage = {
-        id: String(Date.now()),
-        role: 'user',
-        content: text,
+  function handleNew() {
+    const id = `c${Date.now()}`;
+    setConversations((prev) => [{ id, label: 'Nueva conversación' }, ...prev]);
+    setActiveId(id);
+    setMessages([]);
+  }
+
+  function handleSelect(id: string) {
+    setActiveId(id);
+    setMessages([]);
+  }
+
+  function handleDelete(id: string) {
+    setConversations((prev) => {
+      const next = prev.filter((c) => c.id !== id);
+      if (activeId === id) {
+        setActiveId(next[0]?.id ?? '');
+        setMessages([]);
+      }
+      return next;
+    });
+  }
+
+  function handleSend(text: string) {
+    const modelLabel = modelOptions.find((o) => o.value === model)?.label;
+    const userMsg: ConversationMessage = {
+      id: String(Date.now()),
+      role: 'user',
+      content: text,
+      timestamp: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' }),
+    };
+    const streamingId = String(Date.now() + 1);
+    const streamingMsg: ConversationMessage = { id: streamingId, role: 'assistant', model: modelLabel, isStreaming: true };
+
+    setMessages((prev) => [...prev, userMsg, streamingMsg]);
+    setIsStreaming(true);
+
+    setTimeout(() => {
+      const reply: ConversationMessage = {
+        id: streamingId,
+        role: 'assistant',
+        model: modelLabel,
+        content: 'Esta es una respuesta simulada del asistente. En una integración real, aquí llegaría el contenido generado por el modelo.',
         timestamp: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' }),
       };
+      setMessages((prev) => prev.map((m) => (m.id === streamingId ? reply : m)));
+      setIsStreaming(false);
+    }, 2000);
+  }
 
-      const streamingMsg: ConversationMessage = {
-        id: String(Date.now() + 1),
-        role: 'assistant',
-        model: modelOptions.find((o) => o.value === model)?.label,
-        isStreaming: true,
-      };
+  return { conversations, activeId, messages, isStreaming, model, setModel, handleNew, handleSelect, handleDelete, handleSend };
+}
 
-      setMessages((prev) => [...prev, userMsg, streamingMsg]);
-      setIsStreaming(true);
-
-      setTimeout(() => {
-        const reply: ConversationMessage = {
-          id: streamingMsg.id,
-          role: 'assistant',
-          model: modelOptions.find((o) => o.value === model)?.label,
-          content: 'Esta es una respuesta simulada del asistente. En una integración real, aquí llegaría el contenido generado por el modelo.',
-          timestamp: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' }),
-        };
-        setMessages((prev) => prev.map((m) => (m.id === streamingMsg.id ? reply : m)));
-        setIsStreaming(false);
-      }, 2000);
-    }
+export const Default: Story = {
+  render: () => {
+    const { conversations, activeId, messages, isStreaming, model, setModel, handleNew, handleSelect, handleDelete, handleSend } = useChatState(INITIAL_MESSAGES);
 
     return (
-      <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><ChatSidebar /></Sidebar>}>
-        <ChatMain
-          messages={messages}
-          onSend={handleSend}
-          isStreaming={isStreaming}
-          model={model}
-          onModelChange={setModel}
-        />
+      <AppShell sidebar={
+        <Sidebar logo={<Logo height={24} />}>
+          <ChatSidebar
+            conversations={conversations}
+            activeId={activeId}
+            onNew={handleNew}
+            onSelect={handleSelect}
+            onDelete={handleDelete}
+          />
+        </Sidebar>
+      }>
+        <ChatMain messages={messages} onSend={handleSend} isStreaming={isStreaming} model={model} onModelChange={setModel} />
       </AppShell>
     );
   },
@@ -234,50 +244,21 @@ export const Default: Story = {
 
 export const Vacia: Story = {
   render: () => {
-    const [messages, setMessages] = useState<ConversationMessage[]>([]);
-    const [isStreaming, setIsStreaming] = useState(false);
-    const [model, setModel] = useState('claude-sonnet');
-
-    function handleSend(text: string) {
-      const userMsg: ConversationMessage = {
-        id: String(Date.now()),
-        role: 'user',
-        content: text,
-        timestamp: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' }),
-      };
-
-      const streamingMsg: ConversationMessage = {
-        id: String(Date.now() + 1),
-        role: 'assistant',
-        model: modelOptions.find((o) => o.value === model)?.label,
-        isStreaming: true,
-      };
-
-      setMessages([userMsg, streamingMsg]);
-      setIsStreaming(true);
-
-      setTimeout(() => {
-        const reply: ConversationMessage = {
-          id: streamingMsg.id,
-          role: 'assistant',
-          model: modelOptions.find((o) => o.value === model)?.label,
-          content: 'Esta es una respuesta simulada del asistente. En una integración real, aquí llegaría el contenido generado por el modelo.',
-          timestamp: new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' }),
-        };
-        setMessages((prev) => prev.map((m) => (m.id === streamingMsg.id ? reply : m)));
-        setIsStreaming(false);
-      }, 2000);
-    }
+    const { conversations, activeId, messages, isStreaming, model, setModel, handleNew, handleSelect, handleDelete, handleSend } = useChatState([]);
 
     return (
-      <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><ChatSidebar /></Sidebar>}>
-        <ChatMain
-          messages={messages}
-          onSend={handleSend}
-          isStreaming={isStreaming}
-          model={model}
-          onModelChange={setModel}
-        />
+      <AppShell sidebar={
+        <Sidebar logo={<Logo height={24} />}>
+          <ChatSidebar
+            conversations={conversations}
+            activeId={activeId}
+            onNew={handleNew}
+            onSelect={handleSelect}
+            onDelete={handleDelete}
+          />
+        </Sidebar>
+      }>
+        <ChatMain messages={messages} onSend={handleSend} isStreaming={isStreaming} model={model} onModelChange={setModel} />
       </AppShell>
     );
   },

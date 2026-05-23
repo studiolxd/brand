@@ -1,0 +1,120 @@
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.conversation-list__header {
+  padding-inline: var(--conversation-list-padding-inline);
+}
+
+.conversation-list__new {
+  display: block;
+  width: 100%;
+  padding-block: var(--conversation-list-item-padding-block);
+  padding-inline: var(--conversation-list-item-padding-inline);
+  border-radius: var(--conversation-list-item-border-radius);
+  border: 1px dashed var(--color-grey-light);
+  background: transparent;
+  color: var(--conversation-list-item-color);
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-ui);
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--motion-duration-fast) var(--motion-ease-default),
+              border-color var(--motion-duration-fast) var(--motion-ease-default);
+}
+
+.conversation-list__new:hover {
+  background-color: var(--conversation-list-item-hover-bg);
+  border-color: var(--color-grey);
+}
+
+.conversation-list__new:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.conversation-list__nav {
+  padding-inline: var(--conversation-list-padding-inline);
+}
+
+.conversation-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--conversation-list-gap);
+}
+
+.conversation-list__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: var(--conversation-list-item-border-radius);
+}
+
+.conversation-list__item:hover {
+  background-color: var(--conversation-list-item-hover-bg);
+}
+
+.conversation-list__item:hover .conversation-list__delete {
+  opacity: 1;
+}
+
+.conversation-list__label {
+  flex: 1;
+  min-width: 0;
+  padding-block: var(--conversation-list-item-padding-block);
+  padding-inline: var(--conversation-list-item-padding-inline);
+  border: none;
+  background: transparent;
+  color: var(--conversation-list-item-color);
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-ui);
+  text-align: start;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: var(--conversation-list-item-border-radius);
+}
+
+.conversation-list__label--active {
+  color: var(--conversation-list-item-active-color);
+  font-weight: 500;
+}
+
+.conversation-list__label:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.conversation-list__delete {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--spacing-1);
+  padding-inline: var(--spacing-2);
+  margin-inline-end: var(--spacing-1);
+  border: none;
+  background: transparent;
+  color: var(--conversation-list-delete-color);
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  opacity: 0;
+  transition: opacity var(--motion-duration-fast) var(--motion-ease-default),
+              color var(--motion-duration-fast) var(--motion-ease-default);
+}
+
+.conversation-list__delete:hover {
+  color: var(--conversation-list-delete-hover-color);
+}
+
+.conversation-list__delete:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}

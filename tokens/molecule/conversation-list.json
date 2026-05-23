@@ -1,0 +1,15 @@
+{
+  "conversation-list": {
+    "gap":                   { "$value": "{spacing.1}",          "$type": "dimension", "$description": "Separación entre items" },
+    "padding-inline":        { "$value": "{spacing.2}",          "$type": "dimension", "$description": "Padding horizontal de la lista" },
+    "item-padding-block":    { "$value": "{spacing.2}",          "$type": "dimension", "$description": "Padding vertical de cada item" },
+    "item-padding-inline":   { "$value": "{spacing.3}",          "$type": "dimension", "$description": "Padding horizontal de cada item" },
+    "item-border-radius":    { "$value": "{border-radius.md}",   "$type": "dimension", "$description": "Radio de cada item" },
+    "item-color":            { "$value": "{color.grey-dark}",    "$type": "color",     "$description": "Color de texto de item inactivo" },
+    "item-active-color":     { "$value": "{color.prussian}",     "$type": "color",     "$description": "Color de texto de item activo" },
+    "item-active-bg":        { "$value": "{color.grey-lightest}", "$type": "color",    "$description": "Fondo de item activo" },
+    "item-hover-bg":         { "$value": "{color.grey-lightest}", "$type": "color",    "$description": "Fondo de item en hover" },
+    "delete-color":          { "$value": "{color.grey-dark}",         "$type": "color",     "$description": "Color del botón de eliminar" },
+    "delete-hover-color":    { "$value": "{color.destructive-on-light}", "$type": "color", "$description": "Color del botón de eliminar en hover" }
+  }
+}

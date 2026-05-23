@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --conversation-list-gap: var(--spacing-1); /** Separación entre items */
+  --conversation-list-padding-inline: var(--spacing-2); /** Padding horizontal de la lista */
+  --conversation-list-item-padding-block: var(--spacing-2); /** Padding vertical de cada item */
+  --conversation-list-item-padding-inline: var(--spacing-3); /** Padding horizontal de cada item */
+  --conversation-list-item-border-radius: var(--border-radius-md); /** Radio de cada item */
+  --conversation-list-item-color: var(--color-grey-dark); /** Color de texto de item inactivo */
+  --conversation-list-item-active-color: var(--color-prussian); /** Color de texto de item activo */
+  --conversation-list-item-active-bg: var(--color-grey-lightest); /** Fondo de item activo */
+  --conversation-list-item-hover-bg: var(--color-grey-lightest); /** Fondo de item en hover */
+  --conversation-list-delete-color: var(--color-grey-dark); /** Color del botón de eliminar */
+  --conversation-list-delete-hover-color: var(--color-destructive-on-light); /** Color del botón de eliminar en hover */
+}

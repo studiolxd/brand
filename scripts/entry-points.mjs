@@ -83,7 +83,8 @@ export const entryPoints = {
   'file-upload-field':   'src/stories/molecules/FileUploadField/FileUploadField.tsx',
   'user-message':        'src/stories/molecules/UserMessage/UserMessage.tsx',
   'assistant-message':   'src/stories/molecules/AssistantMessage/AssistantMessage.tsx',
-  'message-composer':    'src/stories/molecules/MessageComposer/MessageComposer.tsx',
+  'message-composer':      'src/stories/molecules/MessageComposer/MessageComposer.tsx',
+  'conversation-list':     'src/stories/molecules/ConversationList/ConversationList.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',

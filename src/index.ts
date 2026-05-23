@@ -135,6 +135,8 @@ export { UserMenu } from './stories/molecules/UserMenu/UserMenu';
 export type { UserMenuProps } from './stories/molecules/UserMenu/UserMenu';
 export { AssistantMessage } from './stories/molecules/AssistantMessage/AssistantMessage';
 export type { AssistantMessageProps } from './stories/molecules/AssistantMessage/AssistantMessage';
+export { ConversationList } from './stories/molecules/ConversationList/ConversationList';
+export type { ConversationListProps, ConversationItem } from './stories/molecules/ConversationList/ConversationList';
 export { MessageComposer } from './stories/molecules/MessageComposer/MessageComposer';
 export type { MessageComposerProps } from './stories/molecules/MessageComposer/MessageComposer';
 export { UserMessage } from './stories/molecules/UserMessage/UserMessage';

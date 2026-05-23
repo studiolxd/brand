@@ -4,6 +4,6 @@
 $message-composer-gap: 0.5rem; // Separación entre textarea y botón
 $message-composer-padding-block: 0.75rem; // Padding vertical del contenedor
 $message-composer-padding-inline: 1rem; // Padding horizontal del contenedor
-$message-composer-border-radius: 12px; // Radio del contenedor
-$message-composer-border-color: #d0d0d0; // Color del borde
-$message-composer-bg: #ffffff; // Fondo del composer
+$message-composer-border-radius: 0px; // Radio del contenedor — cascada desde textarea
+$message-composer-border-color: #111e30; // Color del borde — cascada desde textarea
+$message-composer-bg: #ffffff; // Fondo del composer — cascada desde textarea
