@@ -159,10 +159,7 @@ const ICONS = {
   retry: {
     viewBox: '0 0 24 24',
     render: () => (
-      <>
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18.93 8 A 8 8 0 1 1 12 4" />
-        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 1.5 L12 4 L9 6.5" />
-      </>
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4.05 11 a8 8 0 1 1 .5 4 m-.5 5 v-5 h5" />
     ),
   },
 } as const;
