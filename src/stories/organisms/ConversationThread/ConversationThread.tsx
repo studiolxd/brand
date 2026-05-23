@@ -28,7 +28,7 @@ export function ConversationThread({ messages, streamingLabel }: ConversationThr
   }, [messages]);
 
   return (
-    <div className="conversation-thread" aria-live="polite" aria-label="Conversación">
+    <div className="conversation-thread" role="log" aria-label="Conversación">
       {messages.map((message) =>
         message.role === 'user' ? (
           <UserMessage key={message.id} timestamp={message.timestamp}>

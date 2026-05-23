@@ -137,8 +137,6 @@ export { AssistantMessage } from './stories/molecules/AssistantMessage/Assistant
 export type { AssistantMessageProps } from './stories/molecules/AssistantMessage/AssistantMessage';
 export { MessageComposer } from './stories/molecules/MessageComposer/MessageComposer';
 export type { MessageComposerProps } from './stories/molecules/MessageComposer/MessageComposer';
-export { ModelSelector } from './stories/molecules/ModelSelector/ModelSelector';
-export type { ModelSelectorProps } from './stories/molecules/ModelSelector/ModelSelector';
 export { UserMessage } from './stories/molecules/UserMessage/UserMessage';
 export type { UserMessageProps } from './stories/molecules/UserMessage/UserMessage';
 
@@ -158,5 +156,3 @@ export { ProjectGrid } from './stories/organisms/ProjectGrid/ProjectGrid';
 export { ReviewCarousel } from './stories/organisms/ReviewCarousel/ReviewCarousel';
 export type { Review } from './stories/organisms/ReviewCarousel/ReviewCarousel';
 export { Steps } from './stories/organisms/Steps/Steps';
-export { ConversationThread } from './stories/organisms/ConversationThread/ConversationThread';
-export type { ConversationThreadProps, ConversationMessage } from './stories/organisms/ConversationThread/ConversationThread';

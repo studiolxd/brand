@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "5.19.2",
+  "version": "6.0.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -354,10 +354,6 @@
       "types": "./dist/_types/molecules/AssistantMessage/AssistantMessage.d.ts",
       "import": "./dist/assistant-message.js"
     },
-    "./conversation-thread": {
-      "types": "./dist/_types/organisms/ConversationThread/ConversationThread.d.ts",
-      "import": "./dist/conversation-thread.js"
-    },
     "./number-badge": {
       "types": "./dist/_types/atoms/NumberBadge/NumberBadge.d.ts",
       "import": "./dist/number-badge.js"
@@ -369,10 +365,6 @@
     "./message-composer": {
       "types": "./dist/_types/molecules/MessageComposer/MessageComposer.d.ts",
       "import": "./dist/message-composer.js"
-    },
-    "./model-selector": {
-      "types": "./dist/_types/molecules/ModelSelector/ModelSelector.d.ts",
-      "import": "./dist/model-selector.js"
     },
     "./typing-indicator": {
       "types": "./dist/_types/atoms/TypingIndicator/TypingIndicator.d.ts",

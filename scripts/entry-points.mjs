@@ -83,7 +83,6 @@ export const entryPoints = {
   'file-upload-field':   'src/stories/molecules/FileUploadField/FileUploadField.tsx',
   'user-message':        'src/stories/molecules/UserMessage/UserMessage.tsx',
   'assistant-message':   'src/stories/molecules/AssistantMessage/AssistantMessage.tsx',
-  'model-selector':      'src/stories/molecules/ModelSelector/ModelSelector.tsx',
   'message-composer':    'src/stories/molecules/MessageComposer/MessageComposer.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
@@ -94,7 +93,6 @@ export const entryPoints = {
   'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
   'review-carousel':     'src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx',
   'steps':               'src/stories/organisms/Steps/Steps.tsx',
-  'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
 };
 
 export const clientComponents = new Set([
@@ -122,5 +120,4 @@ export const clientComponents = new Set([
   'file-upload',
   'file-upload-field',
   'message-composer',
-  'conversation-thread',
 ]);
