@@ -24,3 +24,7 @@
   outline: none;
   box-shadow: none;
 }
+
+.message-composer .textarea:disabled {
+  background-color: transparent;
+}

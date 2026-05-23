@@ -33,7 +33,7 @@ export function MessageComposer({ onSend, placeholder = 'Escribe un mensaje…',
         placeholder={placeholder}
         value={value}
         disabled={disabled}
-        rows={1}
+        rows={2}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
       />
