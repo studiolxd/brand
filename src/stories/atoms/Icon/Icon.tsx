@@ -156,6 +156,15 @@ const ICONS = {
       </>
     ),
   },
+  retry: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M18.93 8 A 8 8 0 1 1 12 4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M9 1.5 L12 4 L9 6.5" />
+      </>
+    ),
+  },
 } as const;
 
 export type IconName = keyof typeof ICONS;
