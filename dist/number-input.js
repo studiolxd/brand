@@ -14,32 +14,23 @@ function i({ value: i, defaultValue: a = 0, min: o, max: s, step: c = 1, disable
 		E,
 		b,
 		_
-	]), O = () => {
-		l || u || D(T - c);
-	}, k = () => {
-		l || u || D(T + c);
-	}, A = (e) => {
-		let t = parseFloat(e.target.value);
-		isNaN(t) || D(t);
-	}, j = (e) => {
-		w(!0), y?.(e);
-	}, M = (e) => {
-		w(!1), v?.(e);
-	}, N = [
-		"number-input",
-		d === "md" ? "" : `number-input--${d}`,
-		f ? "number-input--error" : "",
-		l ? "number-input--disabled" : "",
-		C ? "number-input--focused" : ""
-	].filter(Boolean).join(" "), P = l || u || o !== void 0 && T <= o, F = l || u || s !== void 0 && T >= s;
+	]);
 	return /* @__PURE__ */ t("div", {
-		className: N,
+		className: [
+			"number-input",
+			d === "md" ? "" : `number-input--${d}`,
+			f ? "number-input--error" : "",
+			l ? "number-input--disabled" : "",
+			C ? "number-input--focused" : ""
+		].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ e("button", {
 				className: "number-input__btn number-input__btn--decrement",
 				type: "button",
-				onClick: O,
-				disabled: P,
+				onClick: () => {
+					l || u || D(T - c);
+				},
+				disabled: l || u || o !== void 0 && T <= o,
 				"aria-label": "Decrementar",
 				tabIndex: -1,
 				children: "−"
@@ -57,15 +48,24 @@ function i({ value: i, defaultValue: a = 0, min: o, max: s, step: c = 1, disable
 				"aria-invalid": f || void 0,
 				"aria-describedby": h,
 				"aria-label": g,
-				onChange: A,
-				onFocus: j,
-				onBlur: M
+				onChange: (e) => {
+					let t = parseFloat(e.target.value);
+					isNaN(t) || D(t);
+				},
+				onFocus: (e) => {
+					w(!0), y?.(e);
+				},
+				onBlur: (e) => {
+					w(!1), v?.(e);
+				}
 			}),
 			/* @__PURE__ */ e("button", {
 				className: "number-input__btn number-input__btn--increment",
 				type: "button",
-				onClick: k,
-				disabled: F,
+				onClick: () => {
+					l || u || D(T + c);
+				},
+				disabled: l || u || s !== void 0 && T >= s,
 				"aria-label": "Incrementar",
 				tabIndex: -1,
 				children: "+"

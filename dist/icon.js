@@ -26,6 +26,16 @@ var r = {
 			d: "M2 2 L10 10 M10 2 L2 10"
 		})
 	},
+	dot: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("circle", {
+			cx: "12",
+			cy: "12",
+			r: "5",
+			fill: "currentColor",
+			stroke: "none"
+		})
+	},
 	eye: {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("path", {
@@ -61,9 +71,339 @@ var r = {
 				d: "M4 4 L20 20"
 			})
 		] })
+	},
+	briefcase: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M12 12l0 .01"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M3 13a20 20 0 0 0 18 0"
+			})
+		] })
+	},
+	"chart-infographic": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M3 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M7 3v4h4"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M9 17l0 4"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M17 14l0 7"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M13 13l0 8"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M21 12l0 9"
+			})
+		] })
+	},
+	dashboard: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1"
+			})
+		] })
+	},
+	headset: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M4 14v-3a8 8 0 1 1 16 0v3"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M18 19c0 1.657 -2.686 3 -6 3"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M4 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M15 14a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2v-3"
+			})
+		] })
+	},
+	"layout-kanban": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M4 4l6 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M14 4l6 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M4 10a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -8"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M14 10a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2l0 -2"
+			})
+		] })
+	},
+	"report-money": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M12 17v1m0 -8v1"
+			})
+		] })
+	},
+	"shield-lock": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M11 11a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M12 12l0 2.5"
+			})
+		] })
+	},
+	sparkles: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6"
+		})
+	},
+	"users-group": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M17 10h2a2 2 0 0 1 2 2v1"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M3 13v-1a2 2 0 0 1 2 -2h2"
+			})
+		] })
+	},
+	folder: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M22 19a2 2 0 0 1 -2 2H4a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2h5l2 3h9a2 2 0 0 1 2 2z"
+		})
+	},
+	search: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("circle", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			cx: "11",
+			cy: "11",
+			r: "8"
+		}), /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			d: "M21 21 L16.65 16.65"
+		})] })
+	},
+	retry: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M4.05 11 a8 8 0 1 1 .5 4 m-.5 5 v-5 h5"
+		})
 	}
-};
-function i({ name: e, size: n = "md", className: i }) {
+}, i = Object.keys(r);
+function a({ name: e, size: n = "md", className: i }) {
 	let a = r[e];
 	return /* @__PURE__ */ t("svg", {
 		className: [
@@ -80,4 +420,4 @@ function i({ name: e, size: n = "md", className: i }) {
 	});
 }
 //#endregion
-export { i as Icon };
+export { i as ICON_NAMES, a as Icon };

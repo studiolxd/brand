@@ -8,6 +8,7 @@ import { InputPhoneField } from '../InputPhoneField/InputPhoneField';
 import { PasswordField } from '../PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
 import { OtpField } from '../OtpField/OtpField';
+import { Fieldset } from '../../atoms/Fieldset/Fieldset';
 
 const meta: Meta<typeof Form> = {
   title: 'Molecules/Form',
@@ -172,6 +173,24 @@ export const NewsletterFormExample: Story = {
     >
       <InputField id="ex-newsletter-email" label="Email" labelHidden type="email" placeholder="Escribe aquí tu correo electrónico" />
       <CheckboxField id="ex-newsletter-privacy" label={privacyLabel} />
+    </Form>
+  ),
+};
+
+export const FieldsetExample: Story = {
+  name: 'Ejemplo: Form con Fieldset',
+  render: () => (
+    <Form
+      actions={<Button variant="primary" type="submit">Enviar</Button>}
+    >
+      <InputField id="ex-fs-name" label="Nombre" labelHidden={false} placeholder="Tu nombre" />
+      <Fieldset legend="Dirección">
+        <InputField id="ex-fs-street" label="Calle" labelHidden={false} placeholder="Calle y número" />
+        <InputField id="ex-fs-city" label="Ciudad" labelHidden={false} placeholder="Ciudad" />
+        <InputField id="ex-fs-zip" label="Código postal" labelHidden={false} placeholder="00000" />
+      </Fieldset>
+      <TextareaField id="ex-fs-notes" label="Notas adicionales" labelHidden={false} placeholder="Cualquier información adicional" rows={3} />
+      <CheckboxField id="ex-fs-privacy" label={privacyLabel} />
     </Form>
   ),
 };

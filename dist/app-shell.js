@@ -8,11 +8,13 @@ var s = "(max-width: 1023px)", c = "sidebar-collapsed";
 function l({ sidebar: e, children: l, defaultCollapsed: u, storageKey: d = c }) {
 	let [f, p] = o(u ?? !1), [m, h] = o(!1);
 	a(() => {
-		window.matchMedia(s).matches ? p(!0) : p(u === void 0 ? localStorage.getItem(d) === "true" : u), h(!0);
-		let e = window.matchMedia(s), t = (e) => {
+		window.matchMedia(s).matches ? p(!0) : p(u === void 0 ? localStorage.getItem(d) === "true" : u);
+		let e = requestAnimationFrame(() => h(!0)), t = window.matchMedia(s), n = (e) => {
 			e.matches ? p(!0) : p(localStorage.getItem(d) === "true");
 		};
-		return e.addEventListener("change", t), () => e.removeEventListener("change", t);
+		return t.addEventListener("change", n), () => {
+			cancelAnimationFrame(e), t.removeEventListener("change", n);
+		};
 	}, []);
 	let g = i((e) => {
 		p(e), window.matchMedia(s).matches || localStorage.setItem(d, String(e));

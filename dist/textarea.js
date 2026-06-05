@@ -2,7 +2,7 @@
 import './textarea.css';
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/atoms/Textarea/Textarea.tsx
-function t({ placeholder: t, value: n, defaultValue: r, rows: i, disabled: a, readOnly: o, size: s = "md", error: c = !1, id: l, name: u, describedBy: d, onChange: f, onBlur: p, onFocus: m }) {
+function t({ placeholder: t, value: n, defaultValue: r, rows: i, disabled: a, readOnly: o, size: s = "md", error: c = !1, id: l, name: u, describedBy: d, onChange: f, onBlur: p, onFocus: m, onKeyDown: h }) {
 	return /* @__PURE__ */ e("textarea", {
 		className: [
 			"textarea",
@@ -21,7 +21,8 @@ function t({ placeholder: t, value: n, defaultValue: r, rows: i, disabled: a, re
 		"aria-describedby": d,
 		onChange: f,
 		onBlur: p,
-		onFocus: m
+		onFocus: m,
+		onKeyDown: h
 	});
 }
 //#endregion

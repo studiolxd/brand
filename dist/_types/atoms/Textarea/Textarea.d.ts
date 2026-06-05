@@ -14,6 +14,7 @@ interface TextareaProps {
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
     onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
     onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
+    onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
 }
-export declare function Textarea({ placeholder, value, defaultValue, rows, disabled, readOnly, size, error, id, name, describedBy, onChange, onBlur, onFocus, }: TextareaProps): import("react/jsx-runtime").JSX.Element;
+export declare function Textarea({ placeholder, value, defaultValue, rows, disabled, readOnly, size, error, id, name, describedBy, onChange, onBlur, onFocus, onKeyDown, }: TextareaProps): import("react/jsx-runtime").JSX.Element;
 export {};

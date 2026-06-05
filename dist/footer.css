@@ -29,25 +29,6 @@
   padding-inline: var(--section-padding-inline);
 }
 
-.footer__col--2 {
-  padding-block: 0;
-  padding-inline: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--border-width-sm);
-  background-color: var(--footer-gap-color);
-}
-
-/* El grid del footer ya dibuja los bordes — suprimir el del form para no duplicarlos */
-.footer__col--2 .form {
-  --form-border-width: 0;
-}
-
-.footer__col--2 .heading {
-  padding-block: var(--section-padding-block-md);
-  padding-inline: var(--section-padding-inline);
-  background-color: var(--footer-col-bg);
-}
 
 .footer__col--3 {
   display: flex;

@@ -4,7 +4,7 @@ import { Icon as e } from "./icon.js";
 import { jsx as t } from "react/jsx-runtime";
 import n from "react";
 import r from "react-dom";
-//#region node_modules/sonner/dist/index.mjs
+//#region node_modules/.pnpm/sonner@2.0.7_react-dom@19.2.6_react@19.2.6__react@19.2.6/node_modules/sonner/dist/index.mjs
 function i(e) {
 	if (!e || typeof document > "u") return;
 	let t = document.head || document.getElementsByTagName("head")[0], n = document.createElement("style");

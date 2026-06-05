@@ -31,7 +31,7 @@ function r({ href: n, onClick: r, label: i, disabled: a, direction: o, chevronSi
 	});
 }
 function i({ prevHref: e, nextHref: i, prevOnClick: a, nextOnClick: o, prevLabel: s = "Anterior", nextLabel: c = "Siguiente", label: l, size: u = "md" }) {
-	let d = u === "sm" ? "xs" : "sm";
+	let d = u === "sm" ? "sm" : "md";
 	return /* @__PURE__ */ n("div", {
 		className: ["prev-next-nav", u === "sm" ? "prev-next-nav--sm" : ""].filter(Boolean).join(" "),
 		children: [

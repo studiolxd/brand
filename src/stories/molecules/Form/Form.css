@@ -159,6 +159,113 @@
   color: var(--form-success-color);
 }
 
+/* fieldset: sub-contenedor que participa en la técnica de separadores */
+.form__fields > .fieldset {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .fieldset > .fieldset__legend {
+  background-color: var(--color-background-light);
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+  border-block-end: var(--form-gap) solid var(--form-separator-color);
+}
+
+.form__fields > .fieldset > .checkbox-field,
+.form__fields > .fieldset > .form-errors {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .fieldset > .input-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .fieldset > .input-field > .label,
+.form__fields > .fieldset > .input-field > .input,
+.form__fields > .fieldset > .input-field > .input-field__error,
+.form__fields > .fieldset > .input-field > .input-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .fieldset > .input-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .input-field > .input-field__error,
+.form__fields > .fieldset > .input-field > .input-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .input-field > .input {
+  --input-border-color: var(--color-background-light);
+  --input-error-border-color: var(--color-background-light);
+  --input-disabled-border-color: var(--color-background-light);
+}
+
+.form__fields > .fieldset > .textarea-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .fieldset > .textarea-field > .label,
+.form__fields > .fieldset > .textarea-field > .textarea,
+.form__fields > .fieldset > .textarea-field > .textarea-field__error,
+.form__fields > .fieldset > .textarea-field > .textarea-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .fieldset > .textarea-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .textarea-field > .textarea-field__error,
+.form__fields > .fieldset > .textarea-field > .textarea-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .textarea-field > .textarea {
+  --textarea-border-color: var(--color-background-light);
+  --textarea-error-border-color: var(--color-background-light);
+  --textarea-disabled-border-color: var(--color-background-light);
+}
+
+.form__fields > .fieldset > .password-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .fieldset > .password-field > .label,
+.form__fields > .fieldset > .password-field > .password-field__wrapper,
+.form__fields > .fieldset > .password-field > .password-field__error,
+.form__fields > .fieldset > .password-field > .password-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .fieldset > .password-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .password-field > .password-field__error,
+.form__fields > .fieldset > .password-field > .password-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .password-field > .password-field__wrapper > .input {
+  --input-border-color: var(--color-background-light);
+  --input-error-border-color: var(--color-background-light);
+  --input-disabled-border-color: var(--color-background-light);
+}
+
 /* file-upload-field: misma técnica de separadores que input-field */
 .form__fields > .file-upload-field {
   background-color: var(--form-separator-color);
@@ -183,6 +290,33 @@
 
 .form__fields > .file-upload-field > .file-upload-field__error,
 .form__fields > .file-upload-field > .file-upload-field__helper {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .file-upload-field {
+  background-color: var(--form-separator-color);
+  gap: var(--form-gap);
+}
+
+.form__fields > .fieldset > .file-upload-field > .label,
+.form__fields > .fieldset > .file-upload-field > .file-upload,
+.form__fields > .fieldset > .file-upload-field > .file-upload-field__error,
+.form__fields > .fieldset > .file-upload-field > .file-upload-field__helper {
+  background-color: var(--color-background-light);
+}
+
+.form__fields > .fieldset > .file-upload-field > .label {
+  padding-inline: var(--control-padding-inline);
+  padding-block: var(--control-padding-block);
+}
+
+.form__fields > .fieldset > .file-upload-field > .file-upload {
+  padding-inline: var(--control-padding-inline);
+}
+
+.form__fields > .fieldset > .file-upload-field > .file-upload-field__error,
+.form__fields > .fieldset > .file-upload-field > .file-upload-field__helper {
   padding-inline: var(--control-padding-inline);
   padding-block: var(--control-padding-block);
 }

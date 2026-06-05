@@ -1,0 +1,1 @@
+.user-message{align-items:flex-end;gap:var(--spacing-1);flex-direction:column;display:flex}.user-message__timestamp{font-family:var(--message-bubble-font-family);font-size:var(--font-size-1);color:var(--color-grey-dark);padding-inline:var(--spacing-1)}
