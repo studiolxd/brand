@@ -291,10 +291,21 @@ const sd = new StyleDictionary({
 
 await sd.buildAllPlatforms();
 
-// Genera el entrypoint legacy (@import) para consumidores que no soportan @use/@forward
+// Genera los entrypoints SCSS a partir de las salidas de la plataforma scss:
+// - _index.scss: @forward (Sass moderno)
+// - _index.legacy.scss: @import (compiladores sin @use/@forward, ej. scssphp de Moodle)
 const scssDestinations = sd.options.platforms.scss.files.map((f) => f.destination);
 const toImportPath = (dest) =>
   dest.replace(/(?:^|\/)_([^/]+)\.scss$/, (_, name) => `/${name}`).replace(/^\//, '');
+const indexLines = [
+  '// Do not edit directly, this file was auto-generated.',
+  '// Entrypoint moderno — usa @forward; requiere soporte de @use/@forward.',
+  '',
+  ...scssDestinations.map((dest) => `@forward '${toImportPath(dest)}';`),
+  '',
+];
+writeFileSync('src/tokens/scss/_index.scss', indexLines.join('\n'));
+console.log('✔︎ src/tokens/scss/_index.scss');
 const legacyLines = [
   '// Do not edit directly, this file was auto-generated.',
   '// Legacy entrypoint — usa @import para compiladores que no soportan @use/@forward.',

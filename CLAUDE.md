@@ -12,7 +12,7 @@ npm run storybook        # Launch Storybook on port 6006
 npm run build:tokens     # Regenerar tokens CSS+SCSS desde Style Dictionary (sd.config.mjs)
 npm run build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
 npm run build:css        # Bundle CSS standalone → dist/brand.css
-npm run build:scss       # Copiar tokens SCSS → dist/scss/
+npm run build:tokens-css # Bundle de tokens CSS → dist/tokens.css
 npm run prepare          # Ejecuta los cuatro builds anteriores (se lanza automáticamente en npm install)
 npm run build-storybook  # Build estático de Storybook
 
@@ -31,7 +31,7 @@ Testing: Storybook Vitest addon con Playwright (Chromium). No hay `npm test` sep
 Librería de componentes React distribuida como paquete npm vía git (`@studiolxd/brand`). Dos salidas de build:
 
 - **`dist/index.js` + `dist/index.css`** — componentes React (ESM) + estilos. Para cualquier aplicación React.
-- **`dist/scss/_index.scss`** — tokens SCSS sin `var()`, con valores resueltos. Para cualquier aplicación que no use React y necesite los tokens (PHP, servidor, herramientas de diseño…).
+- **`src/tokens/scss/`** — tokens SCSS sin `var()`, con valores resueltos, distribuidos directamente desde el repo (no pasan por `dist/`). Para cualquier aplicación que no use React y necesite los tokens (PHP, servidor, herramientas de diseño…). Dos entrypoints auto-generados por `build:tokens`: `_index.scss` (`@forward`, Sass moderno — export `./scss`) y `_index.legacy.scss` (`@import`, para compiladores sin `@use`/`@forward` como el scssphp de Moodle — export `./scss/legacy`). También hay exports por fichero: `./scss/global/*`, `./scss/components/*`, `./scss/molecules/*`.
 
 **Atomic Design** en `src/stories/`:
 - `atoms/` — elementos básicos (Button, Input, Link…)
@@ -129,7 +129,7 @@ Excepción: `Label` aplica `visually-hidden` directamente sobre el elemento `<la
 
 ### Distribución SCSS
 
-Las aplicaciones no-React reciben **solo los tokens SCSS** (`dist/scss/`), no los componentes ni el CSS de componentes. El CSS de componentes (clases BEM) es un detalle de implementación interno de React y no se expone. Los tokens SCSS tienen valores resueltos (`outputReferences: false`) para que puedan usarse sin dependencia de CSS custom properties.
+Las aplicaciones no-React reciben **solo los tokens SCSS** (`src/tokens/scss/`, vía los exports `./scss`, `./scss/legacy` y `./scss/{global,components,molecules}/*`), no los componentes ni el CSS de componentes. El CSS de componentes (clases BEM) es un detalle de implementación interno de React y no se expone. Los tokens SCSS tienen valores resueltos (`outputReferences: false`) para que puedan usarse sin dependencia de CSS custom properties.
 
 ## Storybook
 
