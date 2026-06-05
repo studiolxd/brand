@@ -78,10 +78,10 @@ const SampleSidebarContent = () => (
 );
 
 const SampleMainContent = () => {
-  const { open, setOpen } = useSidebar();
+  const { collapsed, setCollapsed } = useSidebar();
   return (
     <div style={{ padding: '2rem' }}>
-      <button onClick={() => setOpen(!open)} type="button" style={{ marginBlockEnd: '1rem' }}>
+      <button onClick={() => setCollapsed(!collapsed)} type="button" style={{ marginBlockEnd: '1rem' }}>
         Toggle sidebar
       </button>
       <h1>Contenido principal</h1>
@@ -100,7 +100,7 @@ export const Default: Story = {
 
 export const SidebarClosed: Story = {
   render: () => (
-    <AppShell defaultOpen={false} sidebar={<Sidebar><SampleSidebarContent /></Sidebar>}>
+    <AppShell defaultCollapsed sidebar={<Sidebar><SampleSidebarContent /></Sidebar>}>
       <SampleMainContent />
     </AppShell>
   ),
