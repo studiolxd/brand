@@ -28,7 +28,6 @@ export default meta;
 type Story = StoryObj<typeof Label>;
 
 export const Visible: Story = {
-  name: 'Visible',
 };
 
 /** El label está oculto visualmente pero presente en el DOM para lectores de pantalla */

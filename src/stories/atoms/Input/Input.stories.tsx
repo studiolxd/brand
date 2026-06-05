@@ -48,16 +48,13 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-  name: 'Default',
 };
 
 export const Error: Story = {
-  name: 'Error',
   args: { error: true },
 };
 
 export const Disabled: Story = {
-  name: 'Disabled',
   args: { disabled: true },
 };
 
@@ -67,17 +64,14 @@ export const ReadOnly: Story = {
 };
 
 export const Small: Story = {
-  name: 'Small',
   args: { size: 'sm' },
 };
 
 export const Large: Story = {
-  name: 'Large',
   args: { size: 'lg' },
 };
 
 export const Sizes: Story = {
-  name: 'Sizes',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Input placeholder="Small" size="sm" />

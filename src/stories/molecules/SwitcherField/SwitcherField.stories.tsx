@@ -48,7 +48,6 @@ export const Default: Story = {
 };
 
 export const On: Story = {
-  name: 'On',
   args: { defaultChecked: true },
 };
 
@@ -63,7 +62,6 @@ export const DisabledOn: Story = {
 };
 
 export const Sizes: Story = {
-  name: 'Sizes',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <SwitcherField size="sm" label="Pequeño" defaultChecked />

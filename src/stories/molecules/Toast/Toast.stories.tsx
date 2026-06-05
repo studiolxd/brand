@@ -29,14 +29,12 @@ export default meta;
 type Story = StoryObj<typeof Toaster>;
 
 export const Default: Story = {
-  name: 'Default',
   render: () => (
     <Button onClick={() => toast('Cambios guardados')}>Mostrar toast</Button>
   ),
 };
 
 export const Success: Story = {
-  name: 'Success',
   render: () => (
     <Button onClick={() => toast.success('Proyecto guardado correctamente')}>
       Mostrar success
@@ -45,7 +43,6 @@ export const Success: Story = {
 };
 
 export const Error: Story = {
-  name: 'Error',
   render: () => (
     <Button onClick={() => toast.error('No se pudo guardar el proyecto')}>
       Mostrar error
@@ -54,7 +51,6 @@ export const Error: Story = {
 };
 
 export const Warning: Story = {
-  name: 'Warning',
   render: () => (
     <Button onClick={() => toast.warning('Tienes cambios sin guardar')}>
       Mostrar warning

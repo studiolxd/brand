@@ -41,16 +41,13 @@ export default meta;
 type Story = StoryObj<typeof Textarea>;
 
 export const Default: Story = {
-  name: 'Default',
 };
 
 export const Error: Story = {
-  name: 'Error',
   args: { error: true },
 };
 
 export const Disabled: Story = {
-  name: 'Disabled',
   args: { disabled: true },
 };
 

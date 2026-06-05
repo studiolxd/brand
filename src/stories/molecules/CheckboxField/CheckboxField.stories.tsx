@@ -40,12 +40,10 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  name: 'Checked',
   args: { defaultChecked: true },
 };
 
 export const Disabled: Story = {
-  name: 'Disabled',
   args: { disabled: true },
 };
 

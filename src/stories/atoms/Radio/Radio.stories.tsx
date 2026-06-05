@@ -38,7 +38,6 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  name: 'Checked',
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
       <Radio name="demo-checked" value="a" aria-label="Opción A" defaultChecked />
@@ -49,7 +48,6 @@ export const Checked: Story = {
 };
 
 export const Disabled: Story = {
-  name: 'Disabled',
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
       <Radio name="demo-disabled" value="a" aria-label="Opción A" disabled />

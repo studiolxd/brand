@@ -2,37 +2,48 @@
 import './app-shell.css';
 import { n as e, t } from "./_shared/SidebarContext.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { useCallback as i, useEffect as a, useState as o } from "react";
+import { useCallback as i, useEffect as a, useState as o, useSyncExternalStore as s } from "react";
 //#region src/stories/sections/AppShell/AppShell.tsx
-var s = "(max-width: 1023px)", c = "sidebar-collapsed";
-function l({ sidebar: e, children: l, defaultCollapsed: u, storageKey: d = c }) {
-	let [f, p] = o(u ?? !1), [m, h] = o(!1);
+var c = "(max-width: 1023px)", l = "sidebar-collapsed";
+function u(e) {
+	let t = window.matchMedia(c);
+	return t.addEventListener("change", e), () => t.removeEventListener("change", e);
+}
+var d = () => window.matchMedia(c).matches, f = () => !1, p = /* @__PURE__ */ new Set();
+function m(e) {
+	return p.add(e), window.addEventListener("storage", e), () => {
+		p.delete(e), window.removeEventListener("storage", e);
+	};
+}
+function h(e, t) {
+	localStorage.setItem(e, t), p.forEach((e) => e());
+}
+var g = () => null;
+function _({ sidebar: e, children: p, defaultCollapsed: _, storageKey: v = l }) {
+	let y = s(u, d, f), b = s(m, () => localStorage.getItem(v), g), [x, S] = o(null), [C, w] = o(!1);
 	a(() => {
-		window.matchMedia(s).matches ? p(!0) : p(u === void 0 ? localStorage.getItem(d) === "true" : u);
-		let e = requestAnimationFrame(() => h(!0)), t = window.matchMedia(s), n = (e) => {
-			e.matches ? p(!0) : p(localStorage.getItem(d) === "true");
-		};
-		return t.addEventListener("change", n), () => {
-			cancelAnimationFrame(e), t.removeEventListener("change", n);
+		let e = requestAnimationFrame(() => w(!0)), t = u(() => S(null));
+		return () => {
+			cancelAnimationFrame(e), t();
 		};
 	}, []);
-	let g = i((e) => {
-		p(e), window.matchMedia(s).matches || localStorage.setItem(d, String(e));
-	}, [d]);
+	let T = x ?? (y ? !0 : _ === void 0 ? b === "true" : _), E = i((e) => {
+		S(e), window.matchMedia(c).matches || h(v, String(e));
+	}, [v]);
 	return /* @__PURE__ */ n(t.Provider, {
 		value: {
-			collapsed: f,
-			setCollapsed: g
+			collapsed: T,
+			setCollapsed: E
 		},
 		children: /* @__PURE__ */ r("div", {
 			className: "app-shell",
-			"data-mounted": m || void 0,
+			"data-mounted": C || void 0,
 			children: [e, /* @__PURE__ */ n("div", {
 				className: "app-shell__content",
-				children: l
+				children: p
 			})]
 		})
 	});
 }
 //#endregion
-export { l as AppShell, e as useSidebar };
+export { _ as AppShell, e as useSidebar };

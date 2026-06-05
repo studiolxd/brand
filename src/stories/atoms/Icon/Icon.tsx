@@ -166,6 +166,9 @@ const ICONS = {
 
 export type IconName = keyof typeof ICONS;
 
+// API pública del subpath ./icon; solo penaliza el HMR de desarrollo
+// (full reload en lugar de hot reload para este archivo).
+// eslint-disable-next-line react-refresh/only-export-components
 export const ICON_NAMES = Object.keys(ICONS) as IconName[];
 
 export interface IconProps {

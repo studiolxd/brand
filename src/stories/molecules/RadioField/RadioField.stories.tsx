@@ -43,7 +43,6 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  name: 'Checked',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <RadioField name="demo-checked" value="a" label="Opción A" defaultChecked />
@@ -54,7 +53,6 @@ export const Checked: Story = {
 };
 
 export const Disabled: Story = {
-  name: 'Disabled',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <RadioField name="demo-disabled" value="a" label="Opción A" disabled />

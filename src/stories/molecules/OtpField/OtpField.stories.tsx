@@ -85,7 +85,6 @@ export const LabelHidden: Story = {
 };
 
 export const Prefilled: Story = {
-  name: 'Prefilled',
   args: { value: '1234', length: 6, helperText: 'Revisa tu correo electrónico.' },
 };
 

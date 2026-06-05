@@ -64,7 +64,6 @@ export const Confirm: Story = {
 };
 
 export const Dark: Story = {
-  name: 'Dark',
   render: () => {
     const [open, setOpen] = useState(false);
     return (

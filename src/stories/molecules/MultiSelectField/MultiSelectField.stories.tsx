@@ -58,7 +58,6 @@ export const LabelHidden: Story = {
 };
 
 export const Controlled: Story = {
-  name: 'Controlled',
   render: () => {
     const [value, setValue] = useState<string[]>([]);
     return (

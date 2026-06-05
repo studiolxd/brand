@@ -117,7 +117,6 @@ function makeRows(month: Date): RosterRow[] {
 }
 
 export const Default: Story = {
-  name: 'Default',
   render: (args) => {
     const [month, setMonth] = useState(new Date(2026, 4, 1)); // Mayo 2026
     return (

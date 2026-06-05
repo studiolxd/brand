@@ -41,7 +41,7 @@ export interface CalendarRosterProps {
    * Si se pasa, los botones prev/next se renderizan como <a>.
    * Compatible con SSR y Next.js. Toma precedencia sobre onMonthChange.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   hrefBuilder?: (month: Date) => string;
   /** Componente Link del router. Default: "a" */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -58,7 +58,6 @@ function makeEvents(): PlannerEvent[] {
 }
 
 export const Default: Story = {
-  name: 'Default',
   render: (args) => <CalendarPlanner {...args} events={makeEvents()} />,
 };
 

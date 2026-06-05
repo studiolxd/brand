@@ -42,7 +42,6 @@ export default meta;
 type Story = StoryObj<typeof OtpInput>;
 
 export const Default: Story = {
-  name: 'Default',
   play: async ({ canvas, args }) => {
     const inputs = canvas.getAllByRole('textbox');
     await userEvent.click(inputs[0]);
@@ -52,7 +51,6 @@ export const Default: Story = {
 };
 
 export const Sizes: Story = {
-  name: 'Sizes',
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <OtpInput length={6} size="sm" id="otp-sm" />
@@ -68,7 +66,6 @@ export const ErrorState: Story = {
 };
 
 export const Disabled: Story = {
-  name: 'Disabled',
   args: { disabled: true, value: '123' },
 };
 
@@ -78,7 +75,6 @@ export const FourDigitPin: Story = {
 };
 
 export const Prefilled: Story = {
-  name: 'Prefilled',
   args: { value: '1234', length: 6 },
 };
 
@@ -105,7 +101,6 @@ export const BackspaceFromEmpty: Story = {
 };
 
 export const Controlled: Story = {
-  name: 'Controlled',
   render: () => {
     const [val, setVal] = useState('');
     return (

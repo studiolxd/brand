@@ -32,7 +32,6 @@ export default meta;
 type Story = StoryObj<typeof Calendar>;
 
 export const Default: Story = {
-  name: 'Default',
   render: (args) => {
     const [value, setValue] = useState<Date | null>(null);
     return <Calendar {...args} value={value} onChange={setValue} />;

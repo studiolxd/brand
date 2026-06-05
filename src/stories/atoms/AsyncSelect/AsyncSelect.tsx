@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useId, useCallback, useEffect } from 'react';
+import { useState, useRef, useId, useCallback } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
 import { Icon } from '../Icon/Icon';
@@ -61,17 +61,16 @@ export function AsyncSelect({
 
   const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
 
-  // Reset active index when results change or popover closes
-  useEffect(() => { setActiveIndex(-1); }, [results]);
-
   const runSearch = useCallback(async (q: string) => {
     setLoading(true);
     setHasSearched(false);
     try {
       const opts = await onSearch(q);
       setResults(opts);
+      setActiveIndex(-1); // reset active index when results change
     } catch {
       setResults([]);
+      setActiveIndex(-1);
     } finally {
       setLoading(false);
       setHasSearched(true);

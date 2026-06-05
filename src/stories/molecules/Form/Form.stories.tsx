@@ -42,7 +42,6 @@ export const Default: Story = {
 };
 
 export const Success: Story = {
-  name: 'Success',
   render: () => <p className="form__success">¡Mensaje enviado! Nos pondremos en contacto contigo pronto.</p>,
 };
 
