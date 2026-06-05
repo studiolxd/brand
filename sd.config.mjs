@@ -197,6 +197,7 @@ const sd = new StyleDictionary({
     },
     scss: {
       transformGroup: 'scss',
+      prefix: 'lxd',
       buildPath: 'src/tokens/scss/',
       files: [
         scssFile('global/_colors.scss',    'color'),

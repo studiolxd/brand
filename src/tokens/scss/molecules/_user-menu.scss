@@ -1,51 +1,51 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$user-menu-avatar-size: 2rem; // Tamaño del avatar/iniciales en el trigger
-$user-menu-initials-font-size: 0.875rem; // Tamaño de texto de las iniciales
-$user-menu-initials-font-weight: 500; // Peso de las iniciales
-$user-menu-initials-color: #ffffff; // Color de texto de las iniciales
-$user-menu-initials-bg: #111e30; // Fondo del círculo de iniciales
-$user-menu-trigger-padding-block: 0.5rem; // Padding vertical del trigger
-$user-menu-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
-$user-menu-trigger-gap: 0.75rem; // Espacio entre avatar y nombre
-$user-menu-trigger-border-radius: 4px; // Radio del trigger
-$user-menu-trigger-hover-bg: #f2f2f2; // Fondo del trigger al hover
-$user-menu-name-font-size: 1rem; // Tamaño de texto del nombre
-$user-menu-name-font-weight: 500; // Peso del nombre
-$user-menu-name-color: #111e30; // Color del nombre
-$user-menu-content-min-width: 14rem; // Ancho mínimo del dropdown
-$user-menu-content-bg: #ffffff; // Fondo del panel
-$user-menu-content-border-width: 1px; // Borde del panel
-$user-menu-content-border-color: #111e30; // Color del borde del panel
-$user-menu-content-border-radius: 0px; // Radio del panel
-$user-menu-content-shadow: none; // Sombra del panel
-$user-menu-content-z-index: 1100; // Z-index del dropdown (por encima del sidebar en mobile)
-$user-menu-content-padding-block: 0.5rem; // Padding vertical del panel
-$user-menu-content-padding-inline: 0.5rem; // Padding horizontal del panel
-$user-menu-header-padding-block: 0.75rem; // Padding vertical de la cabecera del dropdown
-$user-menu-header-padding-inline: 1rem; // Padding horizontal de la cabecera del dropdown
-$user-menu-header-name-font-size: 1rem; // Tamaño del nombre en la cabecera
-$user-menu-header-name-font-weight: 500; // Peso del nombre en la cabecera
-$user-menu-header-name-color: #111e30; // Color del nombre en la cabecera
-$user-menu-header-email-font-size: 0.875rem; // Tamaño del email en la cabecera
-$user-menu-header-email-color: #4a4a4a; // Color del email en la cabecera
-$user-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
-$user-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
-$user-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
-$user-menu-item-border-radius: 4px; // Radio de cada ítem
-$user-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
-$user-menu-item-font-size: 1rem; // Tamaño de texto de ítems
-$user-menu-item-font-weight: 300; // Peso de ítems
-$user-menu-item-color: #111e30; // Color de ítems
-$user-menu-item-hover-bg: #f2f2f2; // Fondo de ítem al hover
-$user-menu-item-hover-color: #111e30; // Color de ítem al hover
-$user-menu-item-destructive-color: #b30000; // Color de ítem destructivo
-$user-menu-item-destructive-hover-bg: #b30000; // Fondo de ítem destructivo al hover
-$user-menu-item-destructive-hover-color: #ffffff; // Color de ítem destructivo al hover
-$user-menu-separator-color: #d0d0d0; // Color del separador
-$user-menu-separator-height: 1px; // Alto del separador
-$user-menu-separator-margin-block: 0.5rem; // Margen vertical del separador
-$user-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
-$user-menu-transition-duration: 150ms; // Duración de transición
-$user-menu-transition-easing: ease; // Easing de transición
+$lxd-user-menu-avatar-size: 2rem; // Tamaño del avatar/iniciales en el trigger
+$lxd-user-menu-initials-font-size: 0.875rem; // Tamaño de texto de las iniciales
+$lxd-user-menu-initials-font-weight: 500; // Peso de las iniciales
+$lxd-user-menu-initials-color: #ffffff; // Color de texto de las iniciales
+$lxd-user-menu-initials-bg: #111e30; // Fondo del círculo de iniciales
+$lxd-user-menu-trigger-padding-block: 0.5rem; // Padding vertical del trigger
+$lxd-user-menu-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
+$lxd-user-menu-trigger-gap: 0.75rem; // Espacio entre avatar y nombre
+$lxd-user-menu-trigger-border-radius: 4px; // Radio del trigger
+$lxd-user-menu-trigger-hover-bg: #f2f2f2; // Fondo del trigger al hover
+$lxd-user-menu-name-font-size: 1rem; // Tamaño de texto del nombre
+$lxd-user-menu-name-font-weight: 500; // Peso del nombre
+$lxd-user-menu-name-color: #111e30; // Color del nombre
+$lxd-user-menu-content-min-width: 14rem; // Ancho mínimo del dropdown
+$lxd-user-menu-content-bg: #ffffff; // Fondo del panel
+$lxd-user-menu-content-border-width: 1px; // Borde del panel
+$lxd-user-menu-content-border-color: #111e30; // Color del borde del panel
+$lxd-user-menu-content-border-radius: 0px; // Radio del panel
+$lxd-user-menu-content-shadow: none; // Sombra del panel
+$lxd-user-menu-content-z-index: 1100; // Z-index del dropdown (por encima del sidebar en mobile)
+$lxd-user-menu-content-padding-block: 0.5rem; // Padding vertical del panel
+$lxd-user-menu-content-padding-inline: 0.5rem; // Padding horizontal del panel
+$lxd-user-menu-header-padding-block: 0.75rem; // Padding vertical de la cabecera del dropdown
+$lxd-user-menu-header-padding-inline: 1rem; // Padding horizontal de la cabecera del dropdown
+$lxd-user-menu-header-name-font-size: 1rem; // Tamaño del nombre en la cabecera
+$lxd-user-menu-header-name-font-weight: 500; // Peso del nombre en la cabecera
+$lxd-user-menu-header-name-color: #111e30; // Color del nombre en la cabecera
+$lxd-user-menu-header-email-font-size: 0.875rem; // Tamaño del email en la cabecera
+$lxd-user-menu-header-email-color: #4a4a4a; // Color del email en la cabecera
+$lxd-user-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
+$lxd-user-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
+$lxd-user-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
+$lxd-user-menu-item-border-radius: 4px; // Radio de cada ítem
+$lxd-user-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
+$lxd-user-menu-item-font-size: 1rem; // Tamaño de texto de ítems
+$lxd-user-menu-item-font-weight: 300; // Peso de ítems
+$lxd-user-menu-item-color: #111e30; // Color de ítems
+$lxd-user-menu-item-hover-bg: #f2f2f2; // Fondo de ítem al hover
+$lxd-user-menu-item-hover-color: #111e30; // Color de ítem al hover
+$lxd-user-menu-item-destructive-color: #b30000; // Color de ítem destructivo
+$lxd-user-menu-item-destructive-hover-bg: #b30000; // Fondo de ítem destructivo al hover
+$lxd-user-menu-item-destructive-hover-color: #ffffff; // Color de ítem destructivo al hover
+$lxd-user-menu-separator-color: #d0d0d0; // Color del separador
+$lxd-user-menu-separator-height: 1px; // Alto del separador
+$lxd-user-menu-separator-margin-block: 0.5rem; // Margen vertical del separador
+$lxd-user-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
+$lxd-user-menu-transition-duration: 150ms; // Duración de transición
+$lxd-user-menu-transition-easing: ease; // Easing de transición

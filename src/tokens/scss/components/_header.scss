@@ -1,34 +1,34 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$header-height-overlay: 5rem; // Alto del header cuando la nav es un overlay (hamburger visible)
-$header-height-inline: 6.25rem; // Alto del header cuando la nav está en línea
-$header-logo-height-overlay: 3.75rem; // Alto del logo en modo overlay
-$header-logo-height-inline: 3.75rem; // Alto del logo en modo inline
-$header-bg: #ffffff; // Fondo del header
-$header-dark-bg: #111e30; // Fondo del header en variante oscura
-$header-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra del header
-$header-z-index: 1000; // Z-index del header
-$header-controls-z-index: 1001; // Z-index del logo y hamburger (sobre el backdrop)
-$header-navbar-z-index: 998; // Z-index del overlay de navegación
-$header-backdrop-z-index: 999; // Z-index del pseudo-elemento backdrop
-$header-navbar-transition-duration: 250ms; // Duración del slide de la navbar
-$header-navbar-transition-easing: ease-in-out; // Easing del slide de la navbar
-$header-nav-font-size-overlay: 1.75rem; // Tamaño de fuente de los enlaces en modo overlay
-$header-nav-font-size-inline: 1rem; // Tamaño de fuente de los enlaces en modo inline
-$header-nav-font-weight-overlay: 500; // Peso de fuente de los enlaces en modo overlay
-$header-nav-font-weight-inline: 500; // Peso de fuente de los enlaces en modo inline
-$header-nav-color: #111e30; // Color de los enlaces de navegación
-$header-nav-dark-color: #ffffff; // Color de los enlaces en variante oscura
-$header-nav-gap-overlay: 0; // Separación entre enlaces en modo overlay
-$header-nav-gap-inline: 1rem; // Separación entre enlaces en modo inline
-$header-nav-padding-block-overlay: 0.75rem; // Padding vertical de la zona de nav en modo overlay
-$header-nav-padding-inline: 1rem; // Padding horizontal del header y la navbar — igual que section-padding-inline
-$header-actions-gap-overlay: 0.75rem; // Separación entre los elementos de actions en modo overlay
-$header-actions-gap-inline: 0.75rem; // Separación entre los elementos de actions en modo inline
-$header-featured-border-width: 1px; // Grosor del borde del featured link
-$header-featured-border-color: currentColor; // Color del borde del featured link
-$header-featured-font-size: 1.5rem; // Tamaño de fuente del featured link
-$header-featured-font-weight: 500; // Peso de fuente del featured link
-$header-featured-padding-inline: 3rem; // Padding horizontal del featured link
-$header-featured-margin-inline-end: 3rem; // Separación entre el featured link y la navegación
+$lxd-header-height-overlay: 5rem; // Alto del header cuando la nav es un overlay (hamburger visible)
+$lxd-header-height-inline: 6.25rem; // Alto del header cuando la nav está en línea
+$lxd-header-logo-height-overlay: 3.75rem; // Alto del logo en modo overlay
+$lxd-header-logo-height-inline: 3.75rem; // Alto del logo en modo inline
+$lxd-header-bg: #ffffff; // Fondo del header
+$lxd-header-dark-bg: #111e30; // Fondo del header en variante oscura
+$lxd-header-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra del header
+$lxd-header-z-index: 1000; // Z-index del header
+$lxd-header-controls-z-index: 1001; // Z-index del logo y hamburger (sobre el backdrop)
+$lxd-header-navbar-z-index: 998; // Z-index del overlay de navegación
+$lxd-header-backdrop-z-index: 999; // Z-index del pseudo-elemento backdrop
+$lxd-header-navbar-transition-duration: 250ms; // Duración del slide de la navbar
+$lxd-header-navbar-transition-easing: ease-in-out; // Easing del slide de la navbar
+$lxd-header-nav-font-size-overlay: 1.75rem; // Tamaño de fuente de los enlaces en modo overlay
+$lxd-header-nav-font-size-inline: 1rem; // Tamaño de fuente de los enlaces en modo inline
+$lxd-header-nav-font-weight-overlay: 500; // Peso de fuente de los enlaces en modo overlay
+$lxd-header-nav-font-weight-inline: 500; // Peso de fuente de los enlaces en modo inline
+$lxd-header-nav-color: #111e30; // Color de los enlaces de navegación
+$lxd-header-nav-dark-color: #ffffff; // Color de los enlaces en variante oscura
+$lxd-header-nav-gap-overlay: 0; // Separación entre enlaces en modo overlay
+$lxd-header-nav-gap-inline: 1rem; // Separación entre enlaces en modo inline
+$lxd-header-nav-padding-block-overlay: 0.75rem; // Padding vertical de la zona de nav en modo overlay
+$lxd-header-nav-padding-inline: 1rem; // Padding horizontal del header y la navbar — igual que section-padding-inline
+$lxd-header-actions-gap-overlay: 0.75rem; // Separación entre los elementos de actions en modo overlay
+$lxd-header-actions-gap-inline: 0.75rem; // Separación entre los elementos de actions en modo inline
+$lxd-header-featured-border-width: 1px; // Grosor del borde del featured link
+$lxd-header-featured-border-color: currentColor; // Color del borde del featured link
+$lxd-header-featured-font-size: 1.5rem; // Tamaño de fuente del featured link
+$lxd-header-featured-font-weight: 500; // Peso de fuente del featured link
+$lxd-header-featured-padding-inline: 3rem; // Padding horizontal del featured link
+$lxd-header-featured-margin-inline-end: 3rem; // Separación entre el featured link y la navegación

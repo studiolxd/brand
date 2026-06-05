@@ -1,43 +1,43 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$multi-select-border-radius: 0px; // Radio del borde del trigger
-$multi-select-border-width: 1px; // Grosor del borde
-$multi-select-border-style: solid; // Estilo del borde
-$multi-select-border-color: #111e30; // Color del borde
-$multi-select-padding-block: 1rem; // Padding block del trigger
-$multi-select-padding-inline: 1rem; // Padding inline del trigger
-$multi-select-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
-$multi-select-font-size: 1.125rem; // Tamaño de fuente
-$multi-select-line-height: 1; // Interlineado del trigger
-$multi-select-font-weight: 300; // Peso tipográfico
-$multi-select-color: #111e30; // Color del texto
-$multi-select-placeholder-color: #4a4a4a; // Color del placeholder
-$multi-select-bg: #ffffff; // Fondo del trigger
-$multi-select-icon-size: 0.625rem; // Tamaño del chevron
-$multi-select-icon-transition: 150ms; // Duración de la transición del icono
-$multi-select-focus-ring-width: 2px; // Grosor del anillo de foco
-$multi-select-focus-ring-offset: -3px; // Offset del anillo de foco (negativo = inset)
-$multi-select-focus-ring-color: #111e30; // Color del anillo de foco
-$multi-select-content-bg: #ffffff; // Fondo del dropdown
-$multi-select-content-border-color: #111e30; // Borde del dropdown
-$multi-select-content-z-index: 1100; // Z-index del dropdown
-$multi-select-item-padding-block: 0.5rem; // Padding block de cada opción
-$multi-select-item-highlighted-bg: #111e30; // Fondo de opción en foco/hover
-$multi-select-item-highlighted-color: #ffffff; // Texto de opción en foco/hover
-$multi-select-pill-bg: #111e30; // Fondo de la pill de valor seleccionado
-$multi-select-pill-color: #ffffff; // Texto de la pill
-$multi-select-pill-border-radius: 9999px; // Radio de la pill
-$multi-select-pill-padding-block: 0.25rem; // Padding block de la pill
-$multi-select-pill-padding-inline: 0.5rem; // Padding inline de la pill
-$multi-select-pill-gap: 0.25rem; // Separación entre texto y botón × en la pill
-$multi-select-pill-font-size: 0.875rem; // Tamaño de fuente de la pill
-$multi-select-values-gap: 0.25rem; // Separación entre pills
-$multi-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm
-$multi-select-sm-padding-block: 0.25rem; // Padding block del trigger — variante sm
-$multi-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
-$multi-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
-$multi-select-lg-font-size: 1.25rem; // Tamaño de fuente — variante lg
-$multi-select-lg-padding-block: 1.5rem; // Padding block del trigger — variante lg
-$multi-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
-$multi-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg
+$lxd-multi-select-border-radius: 0px; // Radio del borde del trigger
+$lxd-multi-select-border-width: 1px; // Grosor del borde
+$lxd-multi-select-border-style: solid; // Estilo del borde
+$lxd-multi-select-border-color: #111e30; // Color del borde
+$lxd-multi-select-padding-block: 1rem; // Padding block del trigger
+$lxd-multi-select-padding-inline: 1rem; // Padding inline del trigger
+$lxd-multi-select-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
+$lxd-multi-select-font-size: 1.125rem; // Tamaño de fuente
+$lxd-multi-select-line-height: 1; // Interlineado del trigger
+$lxd-multi-select-font-weight: 300; // Peso tipográfico
+$lxd-multi-select-color: #111e30; // Color del texto
+$lxd-multi-select-placeholder-color: #4a4a4a; // Color del placeholder
+$lxd-multi-select-bg: #ffffff; // Fondo del trigger
+$lxd-multi-select-icon-size: 0.625rem; // Tamaño del chevron
+$lxd-multi-select-icon-transition: 150ms; // Duración de la transición del icono
+$lxd-multi-select-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-multi-select-focus-ring-offset: -3px; // Offset del anillo de foco (negativo = inset)
+$lxd-multi-select-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-multi-select-content-bg: #ffffff; // Fondo del dropdown
+$lxd-multi-select-content-border-color: #111e30; // Borde del dropdown
+$lxd-multi-select-content-z-index: 1100; // Z-index del dropdown
+$lxd-multi-select-item-padding-block: 0.5rem; // Padding block de cada opción
+$lxd-multi-select-item-highlighted-bg: #111e30; // Fondo de opción en foco/hover
+$lxd-multi-select-item-highlighted-color: #ffffff; // Texto de opción en foco/hover
+$lxd-multi-select-pill-bg: #111e30; // Fondo de la pill de valor seleccionado
+$lxd-multi-select-pill-color: #ffffff; // Texto de la pill
+$lxd-multi-select-pill-border-radius: 9999px; // Radio de la pill
+$lxd-multi-select-pill-padding-block: 0.25rem; // Padding block de la pill
+$lxd-multi-select-pill-padding-inline: 0.5rem; // Padding inline de la pill
+$lxd-multi-select-pill-gap: 0.25rem; // Separación entre texto y botón × en la pill
+$lxd-multi-select-pill-font-size: 0.875rem; // Tamaño de fuente de la pill
+$lxd-multi-select-values-gap: 0.25rem; // Separación entre pills
+$lxd-multi-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm
+$lxd-multi-select-sm-padding-block: 0.25rem; // Padding block del trigger — variante sm
+$lxd-multi-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
+$lxd-multi-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
+$lxd-multi-select-lg-font-size: 1.25rem; // Tamaño de fuente — variante lg
+$lxd-multi-select-lg-padding-block: 1.5rem; // Padding block del trigger — variante lg
+$lxd-multi-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
+$lxd-multi-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg

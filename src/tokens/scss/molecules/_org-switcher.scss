@@ -1,40 +1,40 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$org-switcher-logo-size: 2rem; // Tamaño del cuadrado del logo/iniciales
-$org-switcher-logo-border-radius: 4px; // Radio del logo/iniciales
-$org-switcher-initials-font-size: 0.875rem; // Tamaño de texto de las iniciales
-$org-switcher-initials-font-weight: 500; // Peso de las iniciales
-$org-switcher-initials-color: #ffffff; // Color de texto de las iniciales
-$org-switcher-initials-bg: #111e30; // Fondo del cuadrado de iniciales
-$org-switcher-trigger-padding-block: 0.5rem; // Padding vertical del trigger
-$org-switcher-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
-$org-switcher-trigger-gap: 0.75rem; // Espacio entre logo y nombre
-$org-switcher-trigger-border-radius: 4px; // Radio del trigger
-$org-switcher-trigger-hover-bg: #f2f2f2; // Fondo del trigger al hover
-$org-switcher-name-font-size: 1rem; // Tamaño de texto del nombre de la org
-$org-switcher-name-font-weight: 500; // Peso del nombre de la org
-$org-switcher-name-color: #111e30; // Color del nombre de la org
-$org-switcher-content-min-width: 14rem; // Ancho mínimo del dropdown
-$org-switcher-content-bg: #ffffff; // Fondo del panel
-$org-switcher-content-border-width: 1px; // Borde del panel
-$org-switcher-content-border-color: #111e30; // Color del borde del panel
-$org-switcher-content-border-radius: 0px; // Radio del panel
-$org-switcher-content-shadow: none; // Sombra del panel
-$org-switcher-content-z-index: 1100; // Z-index del dropdown (por encima del sidebar en mobile)
-$org-switcher-content-padding-block: 0.5rem; // Padding vertical del panel
-$org-switcher-content-padding-inline: 0.5rem; // Padding horizontal del panel
-$org-switcher-item-padding-block: 0.5rem; // Padding vertical de cada ítem
-$org-switcher-item-padding-inline: 0.75rem; // Padding horizontal de cada ítem
-$org-switcher-item-border-radius: 4px; // Radio de cada ítem
-$org-switcher-item-font-size: 1rem; // Tamaño de texto de ítems
-$org-switcher-item-font-weight: 300; // Peso de ítems
-$org-switcher-item-color: #111e30; // Color de ítems
-$org-switcher-item-hover-bg: #f2f2f2; // Fondo de ítem al hover
-$org-switcher-item-active-bg: #f2f2f2; // Fondo de ítem de org activa
-$org-switcher-item-active-color: #111e30; // Color de ítem de org activa
-$org-switcher-separator-color: #d0d0d0; // Color del separador
-$org-switcher-separator-height: 1px; // Alto del separador
-$org-switcher-separator-margin-block: 0.5rem; // Margen vertical del separador
-$org-switcher-transition-duration: 150ms; // Duración de transición
-$org-switcher-transition-easing: ease; // Easing de transición
+$lxd-org-switcher-logo-size: 2rem; // Tamaño del cuadrado del logo/iniciales
+$lxd-org-switcher-logo-border-radius: 4px; // Radio del logo/iniciales
+$lxd-org-switcher-initials-font-size: 0.875rem; // Tamaño de texto de las iniciales
+$lxd-org-switcher-initials-font-weight: 500; // Peso de las iniciales
+$lxd-org-switcher-initials-color: #ffffff; // Color de texto de las iniciales
+$lxd-org-switcher-initials-bg: #111e30; // Fondo del cuadrado de iniciales
+$lxd-org-switcher-trigger-padding-block: 0.5rem; // Padding vertical del trigger
+$lxd-org-switcher-trigger-padding-inline: 0.75rem; // Padding horizontal del trigger
+$lxd-org-switcher-trigger-gap: 0.75rem; // Espacio entre logo y nombre
+$lxd-org-switcher-trigger-border-radius: 4px; // Radio del trigger
+$lxd-org-switcher-trigger-hover-bg: #f2f2f2; // Fondo del trigger al hover
+$lxd-org-switcher-name-font-size: 1rem; // Tamaño de texto del nombre de la org
+$lxd-org-switcher-name-font-weight: 500; // Peso del nombre de la org
+$lxd-org-switcher-name-color: #111e30; // Color del nombre de la org
+$lxd-org-switcher-content-min-width: 14rem; // Ancho mínimo del dropdown
+$lxd-org-switcher-content-bg: #ffffff; // Fondo del panel
+$lxd-org-switcher-content-border-width: 1px; // Borde del panel
+$lxd-org-switcher-content-border-color: #111e30; // Color del borde del panel
+$lxd-org-switcher-content-border-radius: 0px; // Radio del panel
+$lxd-org-switcher-content-shadow: none; // Sombra del panel
+$lxd-org-switcher-content-z-index: 1100; // Z-index del dropdown (por encima del sidebar en mobile)
+$lxd-org-switcher-content-padding-block: 0.5rem; // Padding vertical del panel
+$lxd-org-switcher-content-padding-inline: 0.5rem; // Padding horizontal del panel
+$lxd-org-switcher-item-padding-block: 0.5rem; // Padding vertical de cada ítem
+$lxd-org-switcher-item-padding-inline: 0.75rem; // Padding horizontal de cada ítem
+$lxd-org-switcher-item-border-radius: 4px; // Radio de cada ítem
+$lxd-org-switcher-item-font-size: 1rem; // Tamaño de texto de ítems
+$lxd-org-switcher-item-font-weight: 300; // Peso de ítems
+$lxd-org-switcher-item-color: #111e30; // Color de ítems
+$lxd-org-switcher-item-hover-bg: #f2f2f2; // Fondo de ítem al hover
+$lxd-org-switcher-item-active-bg: #f2f2f2; // Fondo de ítem de org activa
+$lxd-org-switcher-item-active-color: #111e30; // Color de ítem de org activa
+$lxd-org-switcher-separator-color: #d0d0d0; // Color del separador
+$lxd-org-switcher-separator-height: 1px; // Alto del separador
+$lxd-org-switcher-separator-margin-block: 0.5rem; // Margen vertical del separador
+$lxd-org-switcher-transition-duration: 150ms; // Duración de transición
+$lxd-org-switcher-transition-easing: ease; // Easing de transición

@@ -1,45 +1,45 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$calendar-gap: 0.5rem; // Gap entre cabecera y cuadrícula
-$calendar-grid-gap: 0.25rem; // Gap entre celdas del grid
-$calendar-padding-block: 0.75rem; // Padding vertical del componente
-$calendar-padding-inline: 0.75rem; // Padding horizontal del componente
-$calendar-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
-$calendar-nav-color: #111e30; // Color de los botones prev/next
-$calendar-nav-hover-bg: #f2f2f2; // Fondo hover de los botones de navegación
-$calendar-nav-disabled-color: #767676; // Color deshabilitado de los botones de navegación
-$calendar-nav-disabled-cursor: not-allowed; // Cursor deshabilitado
-$calendar-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación
-$calendar-nav-focus-ring-width: 2px; // Grosor del focus ring
-$calendar-nav-focus-ring-offset: 1px; // Separación del focus ring
-$calendar-title-font-size: 1rem; // Tamaño del título del mes — md
-$calendar-title-font-weight: 500; // Peso del título del mes
-$calendar-title-color: #111e30; // Color del título del mes
-$calendar-weekday-font-size: 0.875rem; // Tamaño de las cabeceras de día de semana
-$calendar-weekday-color: #4a4a4a; // Color de las cabeceras de día de semana
-$calendar-day-size: 2rem; // Tamaño (ancho y alto) de los botones de día — md
-$calendar-day-font-size: 0.875rem; // Tamaño de fuente de los días
-$calendar-day-font-weight: 300; // Peso de fuente de los días
-$calendar-day-radius: 4px; // Radio de borde de los botones de día
-$calendar-day-color: #111e30; // Color de texto de los días
-$calendar-day-bg: rgba(0, 0, 0, 0); // Fondo base de los días
-$calendar-day-hover-bg: #f2f2f2; // Fondo hover de los días
-$calendar-day-focus-ring-color: #111e30; // Color del focus ring de los días
-$calendar-day-focus-ring-width: 2px; // Grosor del focus ring de los días
-$calendar-day-focus-ring-offset: 1px; // Separación del focus ring de los días
-$calendar-today-color: #111e30; // Color de texto del día de hoy
-$calendar-today-font-weight: 500; // Peso de fuente del día de hoy
-$calendar-today-border-color: #111e30; // Color del indicador (borde inferior) del día de hoy
-$calendar-selected-bg: #111e30; // Fondo del día seleccionado
-$calendar-selected-color: #ffffff; // Texto del día seleccionado
-$calendar-outside-color: #767676; // Color de los días fuera del mes actual (contraste ≥4.5:1)
-$calendar-disabled-color: #767676; // Color de los días deshabilitados
-$calendar-disabled-cursor: not-allowed; // Cursor de los días deshabilitados
-$calendar-transition-duration: 150ms; // Duración de las transiciones
-$calendar-transition-easing: ease; // Easing de las transiciones
-$calendar-sm-day-size: 1.5rem; // Tamaño de los botones de día — sm
-$calendar-sm-title-font-size: 0.875rem; // Tamaño del título — sm
-$calendar-lg-day-size: 3rem; // Tamaño de los botones de día — lg
-$calendar-lg-title-font-size: 1.125rem; // Tamaño del título — lg
-$calendar-lg-day-font-size: 1rem; // Tamaño de fuente de los días — lg
+$lxd-calendar-gap: 0.5rem; // Gap entre cabecera y cuadrícula
+$lxd-calendar-grid-gap: 0.25rem; // Gap entre celdas del grid
+$lxd-calendar-padding-block: 0.75rem; // Padding vertical del componente
+$lxd-calendar-padding-inline: 0.75rem; // Padding horizontal del componente
+$lxd-calendar-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
+$lxd-calendar-nav-color: #111e30; // Color de los botones prev/next
+$lxd-calendar-nav-hover-bg: #f2f2f2; // Fondo hover de los botones de navegación
+$lxd-calendar-nav-disabled-color: #767676; // Color deshabilitado de los botones de navegación
+$lxd-calendar-nav-disabled-cursor: not-allowed; // Cursor deshabilitado
+$lxd-calendar-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación
+$lxd-calendar-nav-focus-ring-width: 2px; // Grosor del focus ring
+$lxd-calendar-nav-focus-ring-offset: 1px; // Separación del focus ring
+$lxd-calendar-title-font-size: 1rem; // Tamaño del título del mes — md
+$lxd-calendar-title-font-weight: 500; // Peso del título del mes
+$lxd-calendar-title-color: #111e30; // Color del título del mes
+$lxd-calendar-weekday-font-size: 0.875rem; // Tamaño de las cabeceras de día de semana
+$lxd-calendar-weekday-color: #4a4a4a; // Color de las cabeceras de día de semana
+$lxd-calendar-day-size: 2rem; // Tamaño (ancho y alto) de los botones de día — md
+$lxd-calendar-day-font-size: 0.875rem; // Tamaño de fuente de los días
+$lxd-calendar-day-font-weight: 300; // Peso de fuente de los días
+$lxd-calendar-day-radius: 4px; // Radio de borde de los botones de día
+$lxd-calendar-day-color: #111e30; // Color de texto de los días
+$lxd-calendar-day-bg: rgba(0, 0, 0, 0); // Fondo base de los días
+$lxd-calendar-day-hover-bg: #f2f2f2; // Fondo hover de los días
+$lxd-calendar-day-focus-ring-color: #111e30; // Color del focus ring de los días
+$lxd-calendar-day-focus-ring-width: 2px; // Grosor del focus ring de los días
+$lxd-calendar-day-focus-ring-offset: 1px; // Separación del focus ring de los días
+$lxd-calendar-today-color: #111e30; // Color de texto del día de hoy
+$lxd-calendar-today-font-weight: 500; // Peso de fuente del día de hoy
+$lxd-calendar-today-border-color: #111e30; // Color del indicador (borde inferior) del día de hoy
+$lxd-calendar-selected-bg: #111e30; // Fondo del día seleccionado
+$lxd-calendar-selected-color: #ffffff; // Texto del día seleccionado
+$lxd-calendar-outside-color: #767676; // Color de los días fuera del mes actual (contraste ≥4.5:1)
+$lxd-calendar-disabled-color: #767676; // Color de los días deshabilitados
+$lxd-calendar-disabled-cursor: not-allowed; // Cursor de los días deshabilitados
+$lxd-calendar-transition-duration: 150ms; // Duración de las transiciones
+$lxd-calendar-transition-easing: ease; // Easing de las transiciones
+$lxd-calendar-sm-day-size: 1.5rem; // Tamaño de los botones de día — sm
+$lxd-calendar-sm-title-font-size: 0.875rem; // Tamaño del título — sm
+$lxd-calendar-lg-day-size: 3rem; // Tamaño de los botones de día — lg
+$lxd-calendar-lg-title-font-size: 1.125rem; // Tamaño del título — lg
+$lxd-calendar-lg-day-font-size: 1rem; // Tamaño de fuente de los días — lg

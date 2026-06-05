@@ -1,40 +1,40 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$pagination-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$pagination-font-size: 0.875rem; // 14px — UI nav label
-$pagination-font-weight: 300; // Font weight base
-$pagination-line-height: 1; // Single line
-$pagination-gap: 0.75rem; // Gap entre secciones del nav
-$pagination-controls-gap: 0.25rem; // Gap entre botones de paginación
-$pagination-padding-block: 0.25rem; // Padding vertical del nav
-$pagination-padding-inline: 0; // Sin padding lateral
-$pagination-summary-color: #111e30; // Color del texto de total de resultados
-$pagination-btn-min-width: 2rem; // Ancho mínimo de los botones de página
-$pagination-btn-padding-block: 0.5rem; // Padding vertical de los botones
-$pagination-btn-padding-inline: 0.5rem; // Padding horizontal de los botones
-$pagination-btn-radius: 4px; // Radio de borde de los botones
-$pagination-btn-color: #111e30; // Color de texto de los botones
-$pagination-btn-bg: rgba(0, 0, 0, 0); // Fondo de los botones
-$pagination-btn-hover-bg: rgba(0, 0, 0, 0); // Fondo en hover — ghost style, sin cambio de fondo
-$pagination-btn-hover-color: #111e30; // Texto en hover
-$pagination-btn-hover-text-decoration: underline; // Decoración de texto en hover — estilo ghost
-$pagination-btn-current-bg: rgba(0, 0, 0, 0); // Fondo de la página activa — sin fondo
-$pagination-btn-current-color: #111e30; // Texto de la página activa
-$pagination-btn-current-font-weight: 500; // Peso tipográfico de la página activa
-$pagination-btn-disabled-color: #767676; // Texto cuando está deshabilitado
-$pagination-btn-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
-$pagination-ellipsis-color: #4a4a4a; // Color del ellipsis
-$pagination-focus-ring-color: #111e30; // Color del focus ring
-$pagination-focus-ring-width: 2px; // Grosor del focus ring
-$pagination-focus-ring-offset: 1px; // Separación del focus ring
-$pagination-transition-duration: 150ms; // Duración de las transiciones
-$pagination-transition-easing: ease; // Easing de las transiciones
-$pagination-sm-btn-padding-block: 0.25rem; // Padding block de botones — variante sm
-$pagination-sm-btn-padding-inline: 0.25rem; // Padding inline de botones — variante sm
-$pagination-sm-btn-min-width: 1.5rem; // Ancho mínimo de botones de página — variante sm
-$pagination-md-font-size: 1.125rem; // Font size — variante md (18px)
-$pagination-lg-font-size: 1.25rem; // Font size — variante lg (20px)
-$pagination-lg-btn-padding-block: 0.75rem; // Padding block de botones — variante lg
-$pagination-lg-btn-padding-inline: 0.75rem; // Padding inline de botones — variante lg
-$pagination-lg-btn-min-width: 3rem; // Ancho mínimo de botones de página — variante lg
+$lxd-pagination-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$lxd-pagination-font-size: 0.875rem; // 14px — UI nav label
+$lxd-pagination-font-weight: 300; // Font weight base
+$lxd-pagination-line-height: 1; // Single line
+$lxd-pagination-gap: 0.75rem; // Gap entre secciones del nav
+$lxd-pagination-controls-gap: 0.25rem; // Gap entre botones de paginación
+$lxd-pagination-padding-block: 0.25rem; // Padding vertical del nav
+$lxd-pagination-padding-inline: 0; // Sin padding lateral
+$lxd-pagination-summary-color: #111e30; // Color del texto de total de resultados
+$lxd-pagination-btn-min-width: 2rem; // Ancho mínimo de los botones de página
+$lxd-pagination-btn-padding-block: 0.5rem; // Padding vertical de los botones
+$lxd-pagination-btn-padding-inline: 0.5rem; // Padding horizontal de los botones
+$lxd-pagination-btn-radius: 4px; // Radio de borde de los botones
+$lxd-pagination-btn-color: #111e30; // Color de texto de los botones
+$lxd-pagination-btn-bg: rgba(0, 0, 0, 0); // Fondo de los botones
+$lxd-pagination-btn-hover-bg: rgba(0, 0, 0, 0); // Fondo en hover — ghost style, sin cambio de fondo
+$lxd-pagination-btn-hover-color: #111e30; // Texto en hover
+$lxd-pagination-btn-hover-text-decoration: underline; // Decoración de texto en hover — estilo ghost
+$lxd-pagination-btn-current-bg: rgba(0, 0, 0, 0); // Fondo de la página activa — sin fondo
+$lxd-pagination-btn-current-color: #111e30; // Texto de la página activa
+$lxd-pagination-btn-current-font-weight: 500; // Peso tipográfico de la página activa
+$lxd-pagination-btn-disabled-color: #767676; // Texto cuando está deshabilitado
+$lxd-pagination-btn-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
+$lxd-pagination-ellipsis-color: #4a4a4a; // Color del ellipsis
+$lxd-pagination-focus-ring-color: #111e30; // Color del focus ring
+$lxd-pagination-focus-ring-width: 2px; // Grosor del focus ring
+$lxd-pagination-focus-ring-offset: 1px; // Separación del focus ring
+$lxd-pagination-transition-duration: 150ms; // Duración de las transiciones
+$lxd-pagination-transition-easing: ease; // Easing de las transiciones
+$lxd-pagination-sm-btn-padding-block: 0.25rem; // Padding block de botones — variante sm
+$lxd-pagination-sm-btn-padding-inline: 0.25rem; // Padding inline de botones — variante sm
+$lxd-pagination-sm-btn-min-width: 1.5rem; // Ancho mínimo de botones de página — variante sm
+$lxd-pagination-md-font-size: 1.125rem; // Font size — variante md (18px)
+$lxd-pagination-lg-font-size: 1.25rem; // Font size — variante lg (20px)
+$lxd-pagination-lg-btn-padding-block: 0.75rem; // Padding block de botones — variante lg
+$lxd-pagination-lg-btn-padding-inline: 0.75rem; // Padding inline de botones — variante lg
+$lxd-pagination-lg-btn-min-width: 3rem; // Ancho mínimo de botones de página — variante lg

@@ -1,188 +1,188 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$button-border-radius: 9999px; // Border radius
-$button-border-width: 1px; // Border width
-$button-border-style: solid; // Border style
-$button-border-color: rgba(0, 0, 0, 0); // Default border color — overridden by variants
-$button-justify-content: center; // Justify content
-$button-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-font-size: 1.125rem; // Font size
-$button-font-weight: 300; // Font weight
-$button-line-height: 1; // Line height
-$button-cursor: pointer; // Cursor
-$button-white-space: nowrap; // White space
-$button-text-decoration: none; // Text decoration
-$button-transition-duration: 150ms; // Transition duration
-$button-transition-easing: ease; // Transition easing
-$button-disabled-cursor: not-allowed; // Cursor when disabled
-$button-disabled-bg: #f2f2f2; // Background when disabled — only form button changes bg
-$button-disabled-color: #4a4a4a; // Text color when disabled — light surface
-$button-disabled-border: #4a4a4a; // Border color when disabled — light surface, matches text for contrast
-$button-padding-block: 0.75rem; // Block (vertical) padding
-$button-padding-inline: 2rem; // Inline (horizontal) padding
-$button-focus-ring-width: 2px; // Focus ring width
-$button-focus-ring-style: solid; // Focus ring border style
-$button-focus-ring-offset: 2px; // Focus ring offset
-$button-sm-padding-block: 0.5rem; // Block padding — sm
-$button-sm-padding-inline: 1.5rem; // Inline padding — sm
-$button-sm-font-size: 0.875rem; // Font size — sm
-$button-lg-padding-block: 1rem; // Block padding — lg
-$button-lg-padding-inline: 4rem; // Inline padding — lg
-$button-lg-font-size: 1.25rem; // Font size — lg
-$button-block-width: 100%; // Width when block modifier is applied
-$button-primary-border-radius: 9999px; // Border radius
-$button-primary-border-width: 1px; // Border width
-$button-primary-border-style: solid; // Border style
-$button-primary-justify-content: center; // Justify content
-$button-primary-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-primary-font-size: 1.125rem; // Font size
-$button-primary-font-weight: 300; // Font weight
-$button-primary-line-height: 1; // Line height
-$button-primary-cursor: pointer; // Cursor
-$button-primary-white-space: nowrap; // White space
-$button-primary-text-decoration: none; // Text decoration
-$button-primary-transition-duration: 150ms; // Transition duration
-$button-primary-transition-easing: ease; // Transition easing
-$button-primary-disabled-cursor: not-allowed; // Cursor when disabled
-$button-primary-disabled-bg: #4a4a4a; // Background when disabled — filled with the disabled border color
-$button-primary-disabled-color: #ffffff; // Text color when disabled — white on grey background
-$button-primary-disabled-border: #4a4a4a; // Border color when disabled
-$button-primary-padding-block: 0.75rem; // Block (vertical) padding
-$button-primary-padding-inline: 2rem; // Inline (horizontal) padding
-$button-primary-focus-ring-width: 2px; // Focus ring width
-$button-primary-focus-ring-style: solid; // Focus ring border style
-$button-primary-focus-ring-offset: 2px; // Focus ring offset
-$button-primary-focus-ring-color: #baabff; // Focus ring color
-$button-primary-bg: #baabff; // Background
-$button-primary-color: #111e30; // Text color
-$button-primary-border: #baabff; // Border color
-$button-primary-hover-bg: #ffcd00; // Hover background
-$button-primary-hover-color: #111e30; // Hover text color
-$button-primary-hover-border: #ffcd00; // Hover border color
-$button-primary-active-bg: #ffcd00; // Active background
-$button-primary-active-color: #111e30; // Active text color
-$button-primary-active-border: #ffcd00; // Active border color
-$button-destructive-border-radius: 9999px; // Border radius
-$button-destructive-border-width: 1px; // Border width
-$button-destructive-border-style: solid; // Border style
-$button-destructive-justify-content: center; // Justify content
-$button-destructive-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-destructive-font-size: 1.125rem; // Font size
-$button-destructive-font-weight: 300; // Font weight
-$button-destructive-line-height: 1; // Line height
-$button-destructive-cursor: pointer; // Cursor
-$button-destructive-white-space: nowrap; // White space
-$button-destructive-text-decoration: none; // Text decoration
-$button-destructive-transition-duration: 150ms; // Transition duration
-$button-destructive-transition-easing: ease; // Transition easing
-$button-destructive-disabled-cursor: not-allowed; // Cursor when disabled
-$button-destructive-disabled-color: #4a4a4a; // Text color when disabled
-$button-destructive-disabled-border: #4a4a4a; // Border color when disabled
-$button-destructive-padding-block: 0.75rem; // Block (vertical) padding
-$button-destructive-padding-inline: 2rem; // Inline (horizontal) padding
-$button-destructive-focus-ring-width: 2px; // Focus ring width
-$button-destructive-focus-ring-style: solid; // Focus ring border style
-$button-destructive-focus-ring-offset: 2px; // Focus ring offset
-$button-destructive-focus-ring-color: #b30000; // Focus ring color
-$button-destructive-bg: #ffffff; // Background
-$button-destructive-color: #b30000; // Text color
-$button-destructive-border: #b30000; // Border color
-$button-destructive-hover-bg: #b30000; // Hover background
-$button-destructive-hover-color: #ffffff; // Hover text color
-$button-destructive-hover-border: #b30000; // Hover border color
-$button-destructive-active-bg: #b30000; // Active background
-$button-destructive-active-color: #ffffff; // Active text color
-$button-destructive-active-border: #b30000; // Active border color
-$button-outline-border-radius: 9999px; // Border radius
-$button-outline-border-width: 1px; // Border width
-$button-outline-border-style: solid; // Border style
-$button-outline-justify-content: center; // Justify content
-$button-outline-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-outline-font-size: 1.125rem; // Font size
-$button-outline-font-weight: 300; // Font weight
-$button-outline-line-height: 1; // Line height
-$button-outline-cursor: pointer; // Cursor
-$button-outline-white-space: nowrap; // White space
-$button-outline-text-decoration: none; // Text decoration
-$button-outline-transition-duration: 150ms; // Transition duration
-$button-outline-transition-easing: ease; // Transition easing
-$button-outline-disabled-cursor: not-allowed; // Cursor when disabled
-$button-outline-disabled-color: #d0d0d0; // Text color when disabled
-$button-outline-disabled-border: #d0d0d0; // Border color when disabled
-$button-outline-padding-block: 0.75rem; // Block (vertical) padding
-$button-outline-padding-inline: 2rem; // Inline (horizontal) padding
-$button-outline-focus-ring-width: 2px; // Focus ring width
-$button-outline-focus-ring-style: solid; // Focus ring border style
-$button-outline-focus-ring-offset: 2px; // Focus ring offset
-$button-outline-focus-ring-color: #111e30; // Focus ring color — dark on light backgrounds
-$button-outline-bg: rgba(0, 0, 0, 0); // Background
-$button-outline-color: #111e30; // Text color
-$button-outline-border: #111e30; // Border color
-$button-outline-hover-bg: #111e30; // Hover background
-$button-outline-hover-color: #ffffff; // Hover text color
-$button-outline-hover-border: #111e30; // Hover border color
-$button-outline-active-bg: #111e30; // Active background
-$button-outline-active-color: #ffffff; // Active text color
-$button-outline-active-border: #111e30; // Active border color
-$button-text-border-radius: 9999px; // Border radius
-$button-text-border-width: 0; // Border width — 0 para uso inline en texto
-$button-text-border-style: solid; // Border style
-$button-text-justify-content: center; // Justify content
-$button-text-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-text-font-size: 1.125rem; // Font size
-$button-text-font-weight: 300; // Font weight
-$button-text-line-height: 1; // Line height
-$button-text-cursor: pointer; // Cursor
-$button-text-white-space: nowrap; // White space
-$button-text-text-decoration: underline; // Text decoration — base state (underline)
-$button-text-hover-text-decoration: none; // Text decoration on hover
-$button-text-transition-duration: 150ms; // Transition duration
-$button-text-transition-easing: ease; // Transition easing
-$button-text-disabled-cursor: not-allowed; // Cursor when disabled
-$button-text-disabled-color: #4a4a4a; // Text color when disabled — light surface
-$button-text-padding-block: 0; // Block (vertical) padding — 0 para uso inline en texto
-$button-text-padding-inline: 0; // Inline (horizontal) padding — 0 para uso inline en texto
-$button-text-focus-ring-width: 2px; // Focus ring width
-$button-text-focus-ring-style: solid; // Focus ring border style
-$button-text-focus-ring-offset: 2px; // Focus ring offset
-$button-text-focus-ring-color: #111e30; // Focus ring color — light surface
-$button-text-bg: rgba(0, 0, 0, 0); // Background — always transparent
-$button-text-color: #111e30; // Text color — light surface
-$button-text-border: rgba(0, 0, 0, 0); // Border color — transparent
-$button-text-hover-bg: rgba(0, 0, 0, 0); // Hover background — stays transparent
-$button-text-hover-color: #111e30; // Hover text color — unchanged
-$button-text-hover-border: rgba(0, 0, 0, 0); // Hover border — stays transparent
-$button-text-active-bg: rgba(0, 0, 0, 0); // Active background — stays transparent
-$button-text-active-color: #111e30; // Active text color — unchanged
-$button-text-active-border: rgba(0, 0, 0, 0); // Active border — stays transparent
-$button-ghost-border-radius: 9999px; // Border radius
-$button-ghost-border-width: 0; // Sin borde — fondo reemplaza al borde en hover
-$button-ghost-border-style: solid; // Border style
-$button-ghost-justify-content: center; // Justify content
-$button-ghost-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$button-ghost-font-size: 1.125rem; // Font size
-$button-ghost-font-weight: 300; // Font weight
-$button-ghost-line-height: 1; // Line height
-$button-ghost-cursor: pointer; // Cursor
-$button-ghost-white-space: nowrap; // White space
-$button-ghost-text-decoration: none; // Text decoration
-$button-ghost-transition-duration: 150ms; // Transition duration
-$button-ghost-transition-easing: ease; // Transition easing
-$button-ghost-disabled-cursor: not-allowed; // Cursor when disabled
-$button-ghost-disabled-color: #4a4a4a; // Text color when disabled
-$button-ghost-padding-block: 0.75rem; // Block (vertical) padding
-$button-ghost-padding-inline: 2rem; // Inline (horizontal) padding
-$button-ghost-focus-ring-width: 2px; // Focus ring width
-$button-ghost-focus-ring-style: solid; // Focus ring border style
-$button-ghost-focus-ring-offset: 2px; // Focus ring offset
-$button-ghost-focus-ring-color: #111e30; // Focus ring color
-$button-ghost-bg: rgba(0, 0, 0, 0); // Background — transparente en reposo
-$button-ghost-color: #111e30; // Text color
-$button-ghost-border: rgba(0, 0, 0, 0); // Border color — transparent
-$button-ghost-hover-bg: #f2f2f2; // Hover background — fondo sutil
-$button-ghost-hover-color: #111e30; // Hover text color — sin cambio
-$button-ghost-hover-border: rgba(0, 0, 0, 0); // Hover border — transparent
-$button-ghost-active-bg: #d0d0d0; // Active background
-$button-ghost-active-color: #111e30; // Active text color
-$button-ghost-active-border: rgba(0, 0, 0, 0); // Active border — transparent
+$lxd-button-border-radius: 9999px; // Border radius
+$lxd-button-border-width: 1px; // Border width
+$lxd-button-border-style: solid; // Border style
+$lxd-button-border-color: rgba(0, 0, 0, 0); // Default border color — overridden by variants
+$lxd-button-justify-content: center; // Justify content
+$lxd-button-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$lxd-button-font-size: 1.125rem; // Font size
+$lxd-button-font-weight: 300; // Font weight
+$lxd-button-line-height: 1; // Line height
+$lxd-button-cursor: pointer; // Cursor
+$lxd-button-white-space: nowrap; // White space
+$lxd-button-text-decoration: none; // Text decoration
+$lxd-button-transition-duration: 150ms; // Transition duration
+$lxd-button-transition-easing: ease; // Transition easing
+$lxd-button-disabled-cursor: not-allowed; // Cursor when disabled
+$lxd-button-disabled-bg: #f2f2f2; // Background when disabled — only form button changes bg
+$lxd-button-disabled-color: #4a4a4a; // Text color when disabled — light surface
+$lxd-button-disabled-border: #4a4a4a; // Border color when disabled — light surface, matches text for contrast
+$lxd-button-padding-block: 0.75rem; // Block (vertical) padding
+$lxd-button-padding-inline: 2rem; // Inline (horizontal) padding
+$lxd-button-focus-ring-width: 2px; // Focus ring width
+$lxd-button-focus-ring-style: solid; // Focus ring border style
+$lxd-button-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-sm-padding-block: 0.5rem; // Block padding — sm
+$lxd-button-sm-padding-inline: 1.5rem; // Inline padding — sm
+$lxd-button-sm-font-size: 0.875rem; // Font size — sm
+$lxd-button-lg-padding-block: 1rem; // Block padding — lg
+$lxd-button-lg-padding-inline: 4rem; // Inline padding — lg
+$lxd-button-lg-font-size: 1.25rem; // Font size — lg
+$lxd-button-block-width: 100%; // Width when block modifier is applied
+$lxd-button-primary-border-radius: 9999px; // Border radius
+$lxd-button-primary-border-width: 1px; // Border width
+$lxd-button-primary-border-style: solid; // Border style
+$lxd-button-primary-justify-content: center; // Justify content
+$lxd-button-primary-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$lxd-button-primary-font-size: 1.125rem; // Font size
+$lxd-button-primary-font-weight: 300; // Font weight
+$lxd-button-primary-line-height: 1; // Line height
+$lxd-button-primary-cursor: pointer; // Cursor
+$lxd-button-primary-white-space: nowrap; // White space
+$lxd-button-primary-text-decoration: none; // Text decoration
+$lxd-button-primary-transition-duration: 150ms; // Transition duration
+$lxd-button-primary-transition-easing: ease; // Transition easing
+$lxd-button-primary-disabled-cursor: not-allowed; // Cursor when disabled
+$lxd-button-primary-disabled-bg: #4a4a4a; // Background when disabled — filled with the disabled border color
+$lxd-button-primary-disabled-color: #ffffff; // Text color when disabled — white on grey background
+$lxd-button-primary-disabled-border: #4a4a4a; // Border color when disabled
+$lxd-button-primary-padding-block: 0.75rem; // Block (vertical) padding
+$lxd-button-primary-padding-inline: 2rem; // Inline (horizontal) padding
+$lxd-button-primary-focus-ring-width: 2px; // Focus ring width
+$lxd-button-primary-focus-ring-style: solid; // Focus ring border style
+$lxd-button-primary-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-primary-focus-ring-color: #baabff; // Focus ring color
+$lxd-button-primary-bg: #baabff; // Background
+$lxd-button-primary-color: #111e30; // Text color
+$lxd-button-primary-border: #baabff; // Border color
+$lxd-button-primary-hover-bg: #ffcd00; // Hover background
+$lxd-button-primary-hover-color: #111e30; // Hover text color
+$lxd-button-primary-hover-border: #ffcd00; // Hover border color
+$lxd-button-primary-active-bg: #ffcd00; // Active background
+$lxd-button-primary-active-color: #111e30; // Active text color
+$lxd-button-primary-active-border: #ffcd00; // Active border color
+$lxd-button-destructive-border-radius: 9999px; // Border radius
+$lxd-button-destructive-border-width: 1px; // Border width
+$lxd-button-destructive-border-style: solid; // Border style
+$lxd-button-destructive-justify-content: center; // Justify content
+$lxd-button-destructive-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$lxd-button-destructive-font-size: 1.125rem; // Font size
+$lxd-button-destructive-font-weight: 300; // Font weight
+$lxd-button-destructive-line-height: 1; // Line height
+$lxd-button-destructive-cursor: pointer; // Cursor
+$lxd-button-destructive-white-space: nowrap; // White space
+$lxd-button-destructive-text-decoration: none; // Text decoration
+$lxd-button-destructive-transition-duration: 150ms; // Transition duration
+$lxd-button-destructive-transition-easing: ease; // Transition easing
+$lxd-button-destructive-disabled-cursor: not-allowed; // Cursor when disabled
+$lxd-button-destructive-disabled-color: #4a4a4a; // Text color when disabled
+$lxd-button-destructive-disabled-border: #4a4a4a; // Border color when disabled
+$lxd-button-destructive-padding-block: 0.75rem; // Block (vertical) padding
+$lxd-button-destructive-padding-inline: 2rem; // Inline (horizontal) padding
+$lxd-button-destructive-focus-ring-width: 2px; // Focus ring width
+$lxd-button-destructive-focus-ring-style: solid; // Focus ring border style
+$lxd-button-destructive-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-destructive-focus-ring-color: #b30000; // Focus ring color
+$lxd-button-destructive-bg: #ffffff; // Background
+$lxd-button-destructive-color: #b30000; // Text color
+$lxd-button-destructive-border: #b30000; // Border color
+$lxd-button-destructive-hover-bg: #b30000; // Hover background
+$lxd-button-destructive-hover-color: #ffffff; // Hover text color
+$lxd-button-destructive-hover-border: #b30000; // Hover border color
+$lxd-button-destructive-active-bg: #b30000; // Active background
+$lxd-button-destructive-active-color: #ffffff; // Active text color
+$lxd-button-destructive-active-border: #b30000; // Active border color
+$lxd-button-outline-border-radius: 9999px; // Border radius
+$lxd-button-outline-border-width: 1px; // Border width
+$lxd-button-outline-border-style: solid; // Border style
+$lxd-button-outline-justify-content: center; // Justify content
+$lxd-button-outline-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$lxd-button-outline-font-size: 1.125rem; // Font size
+$lxd-button-outline-font-weight: 300; // Font weight
+$lxd-button-outline-line-height: 1; // Line height
+$lxd-button-outline-cursor: pointer; // Cursor
+$lxd-button-outline-white-space: nowrap; // White space
+$lxd-button-outline-text-decoration: none; // Text decoration
+$lxd-button-outline-transition-duration: 150ms; // Transition duration
+$lxd-button-outline-transition-easing: ease; // Transition easing
+$lxd-button-outline-disabled-cursor: not-allowed; // Cursor when disabled
+$lxd-button-outline-disabled-color: #d0d0d0; // Text color when disabled
+$lxd-button-outline-disabled-border: #d0d0d0; // Border color when disabled
+$lxd-button-outline-padding-block: 0.75rem; // Block (vertical) padding
+$lxd-button-outline-padding-inline: 2rem; // Inline (horizontal) padding
+$lxd-button-outline-focus-ring-width: 2px; // Focus ring width
+$lxd-button-outline-focus-ring-style: solid; // Focus ring border style
+$lxd-button-outline-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-outline-focus-ring-color: #111e30; // Focus ring color — dark on light backgrounds
+$lxd-button-outline-bg: rgba(0, 0, 0, 0); // Background
+$lxd-button-outline-color: #111e30; // Text color
+$lxd-button-outline-border: #111e30; // Border color
+$lxd-button-outline-hover-bg: #111e30; // Hover background
+$lxd-button-outline-hover-color: #ffffff; // Hover text color
+$lxd-button-outline-hover-border: #111e30; // Hover border color
+$lxd-button-outline-active-bg: #111e30; // Active background
+$lxd-button-outline-active-color: #ffffff; // Active text color
+$lxd-button-outline-active-border: #111e30; // Active border color
+$lxd-button-text-border-radius: 9999px; // Border radius
+$lxd-button-text-border-width: 0; // Border width — 0 para uso inline en texto
+$lxd-button-text-border-style: solid; // Border style
+$lxd-button-text-justify-content: center; // Justify content
+$lxd-button-text-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$lxd-button-text-font-size: 1.125rem; // Font size
+$lxd-button-text-font-weight: 300; // Font weight
+$lxd-button-text-line-height: 1; // Line height
+$lxd-button-text-cursor: pointer; // Cursor
+$lxd-button-text-white-space: nowrap; // White space
+$lxd-button-text-text-decoration: underline; // Text decoration — base state (underline)
+$lxd-button-text-hover-text-decoration: none; // Text decoration on hover
+$lxd-button-text-transition-duration: 150ms; // Transition duration
+$lxd-button-text-transition-easing: ease; // Transition easing
+$lxd-button-text-disabled-cursor: not-allowed; // Cursor when disabled
+$lxd-button-text-disabled-color: #4a4a4a; // Text color when disabled — light surface
+$lxd-button-text-padding-block: 0; // Block (vertical) padding — 0 para uso inline en texto
+$lxd-button-text-padding-inline: 0; // Inline (horizontal) padding — 0 para uso inline en texto
+$lxd-button-text-focus-ring-width: 2px; // Focus ring width
+$lxd-button-text-focus-ring-style: solid; // Focus ring border style
+$lxd-button-text-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-text-focus-ring-color: #111e30; // Focus ring color — light surface
+$lxd-button-text-bg: rgba(0, 0, 0, 0); // Background — always transparent
+$lxd-button-text-color: #111e30; // Text color — light surface
+$lxd-button-text-border: rgba(0, 0, 0, 0); // Border color — transparent
+$lxd-button-text-hover-bg: rgba(0, 0, 0, 0); // Hover background — stays transparent
+$lxd-button-text-hover-color: #111e30; // Hover text color — unchanged
+$lxd-button-text-hover-border: rgba(0, 0, 0, 0); // Hover border — stays transparent
+$lxd-button-text-active-bg: rgba(0, 0, 0, 0); // Active background — stays transparent
+$lxd-button-text-active-color: #111e30; // Active text color — unchanged
+$lxd-button-text-active-border: rgba(0, 0, 0, 0); // Active border — stays transparent
+$lxd-button-ghost-border-radius: 9999px; // Border radius
+$lxd-button-ghost-border-width: 0; // Sin borde — fondo reemplaza al borde en hover
+$lxd-button-ghost-border-style: solid; // Border style
+$lxd-button-ghost-justify-content: center; // Justify content
+$lxd-button-ghost-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
+$lxd-button-ghost-font-size: 1.125rem; // Font size
+$lxd-button-ghost-font-weight: 300; // Font weight
+$lxd-button-ghost-line-height: 1; // Line height
+$lxd-button-ghost-cursor: pointer; // Cursor
+$lxd-button-ghost-white-space: nowrap; // White space
+$lxd-button-ghost-text-decoration: none; // Text decoration
+$lxd-button-ghost-transition-duration: 150ms; // Transition duration
+$lxd-button-ghost-transition-easing: ease; // Transition easing
+$lxd-button-ghost-disabled-cursor: not-allowed; // Cursor when disabled
+$lxd-button-ghost-disabled-color: #4a4a4a; // Text color when disabled
+$lxd-button-ghost-padding-block: 0.75rem; // Block (vertical) padding
+$lxd-button-ghost-padding-inline: 2rem; // Inline (horizontal) padding
+$lxd-button-ghost-focus-ring-width: 2px; // Focus ring width
+$lxd-button-ghost-focus-ring-style: solid; // Focus ring border style
+$lxd-button-ghost-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-ghost-focus-ring-color: #111e30; // Focus ring color
+$lxd-button-ghost-bg: rgba(0, 0, 0, 0); // Background — transparente en reposo
+$lxd-button-ghost-color: #111e30; // Text color
+$lxd-button-ghost-border: rgba(0, 0, 0, 0); // Border color — transparent
+$lxd-button-ghost-hover-bg: #f2f2f2; // Hover background — fondo sutil
+$lxd-button-ghost-hover-color: #111e30; // Hover text color — sin cambio
+$lxd-button-ghost-hover-border: rgba(0, 0, 0, 0); // Hover border — transparent
+$lxd-button-ghost-active-bg: #d0d0d0; // Active background
+$lxd-button-ghost-active-color: #111e30; // Active text color
+$lxd-button-ghost-active-border: rgba(0, 0, 0, 0); // Active border — transparent

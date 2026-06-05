@@ -1,40 +1,40 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$toast-z-index: 1200; // z-index — por encima de floating-panel (1100)
-$toast-width: 360px; // Anchura de cada toast
-$toast-gap: 0.5rem; // Gap entre toasts apilados
-$toast-inset-block-end: 1.5rem; // Distancia al borde inferior de la ventana
-$toast-inset-inline-end: 1.5rem; // Distancia al borde derecho de la ventana
-$toast-padding-block: 1rem; // Padding vertical del toast (16px)
-$toast-padding-inline: 1.5rem; // Padding horizontal del toast (24px)
-$toast-border-radius: 0px; // Sin radio de esquinas
-$toast-border-width: 1px; // Grosor del borde
-$toast-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra de elevación
-$toast-bg: #111e30; // Fondo del toast por defecto — prussian
-$toast-border-color: #111e30; // Borde igual al fondo — invisible
-$toast-title-font-size: 1rem; // Tamaño del título (16px)
-$toast-title-font-weight: 500; // Peso del título
-$toast-title-color: #ffffff; // Texto blanco sobre fondo oscuro
-$toast-description-font-size: 0.875rem; // Tamaño de la descripción (14px)
-$toast-description-color: #d0d0d0; // Descripción atenuada sobre fondo oscuro
-$toast-close-color: #ffffff; // Color del botón de cierre — blanco
-$toast-close-hover-color: #ffffff; // Color del botón de cierre en hover
-$toast-close-size: 18px; // Tamaño del icono de cierre (18px)
-$toast-duration-in: 250ms; // Duración animación de entrada (250ms)
-$toast-duration-out: 250ms; // Duración animación de salida (250ms)
-$toast-easing: ease-out; // Curva de animación
-$toast-success-bg: #006616; // Fondo success — verde semántico
-$toast-success-border-color: #006616; // Borde igual al fondo success
-$toast-success-title-color: #ffffff; // Título blanco sobre fondo success
-$toast-success-description-color: #ffffff; // Descripción blanca sobre fondo success
-$toast-error-bg: #b30000; // Fondo error — rojo semántico
-$toast-error-border-color: #b30000; // Borde igual al fondo error
-$toast-error-title-color: #ffffff; // Título blanco sobre fondo error
-$toast-error-description-color: #ffffff; // Descripción blanca sobre fondo error
-$toast-warning-bg: #ffcd00; // Fondo warning — amarillo brand
-$toast-warning-border-color: #ffcd00; // Borde igual al fondo warning
-$toast-warning-title-color: #111e30; // Título prussian sobre fondo amarillo (contraste AAA)
-$toast-warning-description-color: #111e30; // Descripción prussian sobre fondo amarillo
-$toast-warning-close-color: #111e30; // Aspa de cierre oscura sobre fondo amarillo
-$toast-warning-close-hover-color: #111e30; // Aspa de cierre oscura en hover
+$lxd-toast-z-index: 1200; // z-index — por encima de floating-panel (1100)
+$lxd-toast-width: 360px; // Anchura de cada toast
+$lxd-toast-gap: 0.5rem; // Gap entre toasts apilados
+$lxd-toast-inset-block-end: 1.5rem; // Distancia al borde inferior de la ventana
+$lxd-toast-inset-inline-end: 1.5rem; // Distancia al borde derecho de la ventana
+$lxd-toast-padding-block: 1rem; // Padding vertical del toast (16px)
+$lxd-toast-padding-inline: 1.5rem; // Padding horizontal del toast (24px)
+$lxd-toast-border-radius: 0px; // Sin radio de esquinas
+$lxd-toast-border-width: 1px; // Grosor del borde
+$lxd-toast-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra de elevación
+$lxd-toast-bg: #111e30; // Fondo del toast por defecto — prussian
+$lxd-toast-border-color: #111e30; // Borde igual al fondo — invisible
+$lxd-toast-title-font-size: 1rem; // Tamaño del título (16px)
+$lxd-toast-title-font-weight: 500; // Peso del título
+$lxd-toast-title-color: #ffffff; // Texto blanco sobre fondo oscuro
+$lxd-toast-description-font-size: 0.875rem; // Tamaño de la descripción (14px)
+$lxd-toast-description-color: #d0d0d0; // Descripción atenuada sobre fondo oscuro
+$lxd-toast-close-color: #ffffff; // Color del botón de cierre — blanco
+$lxd-toast-close-hover-color: #ffffff; // Color del botón de cierre en hover
+$lxd-toast-close-size: 18px; // Tamaño del icono de cierre (18px)
+$lxd-toast-duration-in: 250ms; // Duración animación de entrada (250ms)
+$lxd-toast-duration-out: 250ms; // Duración animación de salida (250ms)
+$lxd-toast-easing: ease-out; // Curva de animación
+$lxd-toast-success-bg: #006616; // Fondo success — verde semántico
+$lxd-toast-success-border-color: #006616; // Borde igual al fondo success
+$lxd-toast-success-title-color: #ffffff; // Título blanco sobre fondo success
+$lxd-toast-success-description-color: #ffffff; // Descripción blanca sobre fondo success
+$lxd-toast-error-bg: #b30000; // Fondo error — rojo semántico
+$lxd-toast-error-border-color: #b30000; // Borde igual al fondo error
+$lxd-toast-error-title-color: #ffffff; // Título blanco sobre fondo error
+$lxd-toast-error-description-color: #ffffff; // Descripción blanca sobre fondo error
+$lxd-toast-warning-bg: #ffcd00; // Fondo warning — amarillo brand
+$lxd-toast-warning-border-color: #ffcd00; // Borde igual al fondo warning
+$lxd-toast-warning-title-color: #111e30; // Título prussian sobre fondo amarillo (contraste AAA)
+$lxd-toast-warning-description-color: #111e30; // Descripción prussian sobre fondo amarillo
+$lxd-toast-warning-close-color: #111e30; // Aspa de cierre oscura sobre fondo amarillo
+$lxd-toast-warning-close-hover-color: #111e30; // Aspa de cierre oscura en hover
