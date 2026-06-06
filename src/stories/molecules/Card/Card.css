@@ -8,6 +8,7 @@
   padding-block-start: var(--card-padding-block-start);
   padding-block-end: var(--card-padding-block-end);
   gap: var(--card-gap);
+  border-radius: var(--card-border-radius);
 }
 
 .card p {
