@@ -14,7 +14,7 @@
   --alert-bg: var(--color-primary); /** Fondo por defecto — prussian */
   --alert-border-color: var(--color-primary); /** Borde igual al fondo — invisible */
   --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre fondo oscuro */
-  --alert-description-color: var(--color-text-muted-on-dark); /** Descripción atenuada sobre fondo oscuro */
+  --alert-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo oscuro — igual que el título */
   --alert-close-color: var(--color-text-on-dark); /** Color del botón de cierre — blanco */
   --alert-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover */
   --alert-success-bg: var(--color-success-on-light); /** Fondo success — verde semántico */
