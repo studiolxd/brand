@@ -1,0 +1,9 @@
+node_modules
+dist
+storybook-static
+.git
+.claude
+*.log
+*storybook.log
+Dockerfile
+.dockerignore
