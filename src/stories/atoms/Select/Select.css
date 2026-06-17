@@ -54,7 +54,7 @@
   border-style: var(--select-border-style);
   border-color: var(--select-content-border-color);
   min-width: var(--radix-select-trigger-width);
-  max-height: var(--select-content-max-height);
+  max-height: var(--select-content-max-height, var(--radix-select-content-available-height));
   overflow-y: auto;
   z-index: var(--select-content-z-index);
 
@@ -65,6 +65,14 @@
   &[data-side='top'] {
     border-bottom: none;
   }
+}
+
+/* Radix aplica `overflow: hidden auto` inline en su viewport y oculta su
+   scrollbar globalmente, lo que atrapa la rueda y deja la lista sin scroll
+   visible. Neutralizamos ese overflow para que el scroll lo gestione
+   .select__content (cuyo scrollbar sí es visible y usable). */
+.select__content [data-radix-select-viewport] {
+  overflow: visible !important;
 }
 
 /* ─── Items ───────────────────────────────────────────────── */
