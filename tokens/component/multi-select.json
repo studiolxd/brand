@@ -21,6 +21,7 @@
     "content-bg":             { "$value": "{select.content-bg}",             "$type": "color",     "$description": "Fondo del dropdown" },
     "content-border-color":   { "$value": "{select.content-border-color}",   "$type": "color",     "$description": "Borde del dropdown" },
     "content-z-index":        { "$value": "{select.content-z-index}",        "$type": "number",    "$description": "Z-index del dropdown" },
+    "content-max-height":     { "$value": "var(--radix-popover-content-available-height)", "$type": "string", "$description": "Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Radix)" },
     "item-padding-block":     { "$value": "{select.item-padding-block}",     "$type": "dimension", "$description": "Padding block de cada opción" },
     "item-highlighted-bg":    { "$value": "{select.item-highlighted-bg}",    "$type": "color",     "$description": "Fondo de opción en foco/hover" },
     "item-highlighted-color": { "$value": "{select.item-highlighted-color}", "$type": "color",     "$description": "Texto de opción en foco/hover" },

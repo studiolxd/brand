@@ -20,6 +20,7 @@
     "content-bg":             { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del dropdown" },
     "content-border-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Borde del dropdown" },
     "content-z-index":        { "$value": "1100",                        "$type": "number",    "$description": "Z-index del dropdown (por encima del header: 1001)" },
+    "content-max-height":     { "$value": "var(--radix-select-content-available-height)", "$type": "string", "$description": "Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Radix)" },
     "item-padding-block":     { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding block de cada opción" },
     "item-highlighted-bg":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo de opción resaltada" },
     "item-highlighted-color": { "$value": "{color.white}",               "$type": "color",     "$description": "Texto de opción resaltada" },

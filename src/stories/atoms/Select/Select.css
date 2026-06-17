@@ -54,6 +54,8 @@
   border-style: var(--select-border-style);
   border-color: var(--select-content-border-color);
   min-width: var(--radix-select-trigger-width);
+  max-height: var(--select-content-max-height);
+  overflow-y: auto;
   z-index: var(--select-content-z-index);
 
   &[data-side='bottom'] {

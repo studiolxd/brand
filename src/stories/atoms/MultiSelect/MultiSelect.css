@@ -108,6 +108,8 @@
   border-style: var(--multi-select-border-style);
   border-color: var(--multi-select-content-border-color);
   min-width: var(--radix-popover-trigger-width);
+  max-height: var(--multi-select-content-max-height);
+  overflow-y: auto;
   z-index: var(--multi-select-content-z-index);
 
   &[data-side='bottom'] {

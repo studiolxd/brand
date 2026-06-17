@@ -7,6 +7,7 @@
   --select-icon-size: 0.625rem; /** Tamaño del chevron */
   --select-focus-ring-offset: -3px; /** Offset del anillo de foco (negativo = inset) */
   --select-content-z-index: 1100; /** Z-index del dropdown (por encima del header: 1001) */
+  --select-content-max-height: var(--radix-select-content-available-height); /** Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Radix) */
   --select-border-radius: var(--border-radius-none); /** Radio del borde del trigger */
   --select-border-width: var(--border-width-sm); /** Grosor del borde */
   --select-font-family: var(--font-family-sans); /** Familia tipográfica */

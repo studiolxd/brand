@@ -3,6 +3,7 @@
  */
 
 :root {
+  --multi-select-content-max-height: var(--radix-popover-content-available-height); /** Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Radix) */
   --multi-select-border-style: var(--select-border-style); /** Estilo del borde */
   --multi-select-icon-size: var(--select-icon-size); /** Tamaño del chevron */
   --multi-select-focus-ring-offset: var(--select-focus-ring-offset); /** Offset del anillo de foco (negativo = inset) */

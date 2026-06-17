@@ -22,6 +22,7 @@ $lxd-multi-select-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-multi-select-content-bg: #ffffff; // Fondo del dropdown
 $lxd-multi-select-content-border-color: #111e30; // Borde del dropdown
 $lxd-multi-select-content-z-index: 1100; // Z-index del dropdown
+$lxd-multi-select-content-max-height: var(--radix-popover-content-available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Radix)
 $lxd-multi-select-item-padding-block: 0.5rem; // Padding block de cada opción
 $lxd-multi-select-item-highlighted-bg: #111e30; // Fondo de opción en foco/hover
 $lxd-multi-select-item-highlighted-color: #ffffff; // Texto de opción en foco/hover
