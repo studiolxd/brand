@@ -198,7 +198,7 @@ const ICONS = {
   play: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 4v16a1 1 0 0 0 1.5 .87l13 -8a1 1 0 0 0 0 -1.73l-13 -8a1 1 0 0 0 -1.5 .87" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M7 4 L20 12 L7 20 Z" />
     ),
   },
   pause: {
@@ -213,7 +213,7 @@ const ICONS = {
   stop: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 7a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M5 5 H19 V19 H5 Z" />
     ),
   },
 } as const;
