@@ -7,7 +7,7 @@ $lxd-button-border-style: solid; // Border style
 $lxd-button-border-color: rgba(0, 0, 0, 0); // Default border color — overridden by variants
 $lxd-button-justify-content: center; // Justify content
 $lxd-button-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-button-font-size: 1.125rem; // Font size
+$lxd-button-font-size: 1.25rem; // Font size
 $lxd-button-font-weight: 300; // Font weight
 $lxd-button-line-height: 1; // Line height
 $lxd-button-cursor: pointer; // Cursor
@@ -29,14 +29,14 @@ $lxd-button-sm-padding-inline: 1.5rem; // Inline padding — sm
 $lxd-button-sm-font-size: 0.875rem; // Font size — sm
 $lxd-button-lg-padding-block: 1rem; // Block padding — lg
 $lxd-button-lg-padding-inline: 4rem; // Inline padding — lg
-$lxd-button-lg-font-size: 1.25rem; // Font size — lg
+$lxd-button-lg-font-size: 1.5rem; // Font size — lg
 $lxd-button-block-width: 100%; // Width when block modifier is applied
 $lxd-button-primary-border-radius: 9999px; // Border radius
 $lxd-button-primary-border-width: 1px; // Border width
 $lxd-button-primary-border-style: solid; // Border style
 $lxd-button-primary-justify-content: center; // Justify content
 $lxd-button-primary-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-button-primary-font-size: 1.125rem; // Font size
+$lxd-button-primary-font-size: 1.25rem; // Font size
 $lxd-button-primary-font-weight: 300; // Font weight
 $lxd-button-primary-line-height: 1; // Line height
 $lxd-button-primary-cursor: pointer; // Cursor
@@ -68,7 +68,7 @@ $lxd-button-destructive-border-width: 1px; // Border width
 $lxd-button-destructive-border-style: solid; // Border style
 $lxd-button-destructive-justify-content: center; // Justify content
 $lxd-button-destructive-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-button-destructive-font-size: 1.125rem; // Font size
+$lxd-button-destructive-font-size: 1.25rem; // Font size
 $lxd-button-destructive-font-weight: 300; // Font weight
 $lxd-button-destructive-line-height: 1; // Line height
 $lxd-button-destructive-cursor: pointer; // Cursor
@@ -99,7 +99,7 @@ $lxd-button-outline-border-width: 1px; // Border width
 $lxd-button-outline-border-style: solid; // Border style
 $lxd-button-outline-justify-content: center; // Justify content
 $lxd-button-outline-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-button-outline-font-size: 1.125rem; // Font size
+$lxd-button-outline-font-size: 1.25rem; // Font size
 $lxd-button-outline-font-weight: 300; // Font weight
 $lxd-button-outline-line-height: 1; // Line height
 $lxd-button-outline-cursor: pointer; // Cursor
@@ -130,7 +130,7 @@ $lxd-button-text-border-width: 0; // Border width — 0 para uso inline en texto
 $lxd-button-text-border-style: solid; // Border style
 $lxd-button-text-justify-content: center; // Justify content
 $lxd-button-text-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-button-text-font-size: 1.125rem; // Font size
+$lxd-button-text-font-size: 1.25rem; // Font size
 $lxd-button-text-font-weight: 300; // Font weight
 $lxd-button-text-line-height: 1; // Line height
 $lxd-button-text-cursor: pointer; // Cursor
@@ -161,7 +161,7 @@ $lxd-button-ghost-border-width: 0; // Sin borde — fondo reemplaza al borde en 
 $lxd-button-ghost-border-style: solid; // Border style
 $lxd-button-ghost-justify-content: center; // Justify content
 $lxd-button-ghost-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-button-ghost-font-size: 1.125rem; // Font size
+$lxd-button-ghost-font-size: 1.25rem; // Font size
 $lxd-button-ghost-font-weight: 300; // Font weight
 $lxd-button-ghost-line-height: 1; // Line height
 $lxd-button-ghost-cursor: pointer; // Cursor
