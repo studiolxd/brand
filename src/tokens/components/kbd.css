@@ -20,7 +20,7 @@
   --kbd-sm-font-size: var(--font-size-1); /** 14px — tamaño sm */
   --kbd-sm-padding-block: var(--spacing-1); /** Padding vertical sm (4px) */
   --kbd-sm-padding-inline: var(--spacing-2); /** Padding horizontal sm (8px) */
-  --kbd-lg-font-size: var(--font-size-3); /** 18px — tamaño lg */
+  --kbd-lg-font-size: var(--font-size-2); /** 18px — tamaño lg */
   --kbd-lg-padding-block: var(--spacing-2); /** Padding vertical lg (8px) */
   --kbd-lg-padding-inline: var(--spacing-4); /** Padding horizontal lg (16px) */
   --kbd-color: var(--color-text-on-light); /** Color del símbolo de la tecla */

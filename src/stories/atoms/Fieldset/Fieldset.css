@@ -73,13 +73,13 @@
 /* Size modifiers */
 .fieldset__legend.fieldset__legend--size-1  { font-size: var(--font-size-1); }
 .fieldset__legend.fieldset__legend--size-2  { font-size: var(--font-size-2); }
-.fieldset__legend.fieldset__legend--size-3  { font-size: var(--font-size-3); }
-.fieldset__legend.fieldset__legend--size-4  { font-size: var(--font-size-4); }
-.fieldset__legend.fieldset__legend--size-5  { font-size: var(--font-size-5); }
-.fieldset__legend.fieldset__legend--size-6  { font-size: var(--font-size-6); }
-.fieldset__legend.fieldset__legend--size-7  { font-size: var(--font-size-7); }
-.fieldset__legend.fieldset__legend--size-8  { font-size: var(--font-size-8); }
-.fieldset__legend.fieldset__legend--size-9  { font-size: var(--font-size-9); }
+.fieldset__legend.fieldset__legend--size-3  { font-size: var(--font-size-2); }
+.fieldset__legend.fieldset__legend--size-4  { font-size: var(--font-size-3); }
+.fieldset__legend.fieldset__legend--size-5  { font-size: var(--font-size-4); }
+.fieldset__legend.fieldset__legend--size-6  { font-size: var(--font-size-5); }
+.fieldset__legend.fieldset__legend--size-7  { font-size: var(--font-size-6); }
+.fieldset__legend.fieldset__legend--size-8  { font-size: var(--font-size-7); }
+.fieldset__legend.fieldset__legend--size-9  { font-size: var(--font-size-8); }
 .fieldset__legend.fieldset__legend--size-10 { font-size: var(--font-size-10); }
 
 /* Weight modifiers */

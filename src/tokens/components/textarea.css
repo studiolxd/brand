@@ -14,7 +14,7 @@
   --textarea-border-radius: var(--border-radius-none); /** Border radius */
   --textarea-border-width: var(--border-width-sm); /** Border width */
   --textarea-font-family: var(--font-family-sans); /** Font family */
-  --textarea-font-size: var(--font-size-3); /** Font size */
+  --textarea-font-size: var(--font-size-2); /** Font size */
   --textarea-line-height: var(--line-height-normal); /** Line height */
   --textarea-transition-duration: var(--motion-duration-fast); /** Transition duration */
   --textarea-transition-easing: var(--motion-easing-default); /** Transition easing */
@@ -29,7 +29,7 @@
   --textarea-sm-font-size: var(--font-size-1); /** Font size — variante sm (14px) */
   --textarea-lg-padding-block: var(--spacing-5); /** Block padding — variante lg */
   --textarea-lg-padding-inline: var(--spacing-5); /** Inline padding — variante lg */
-  --textarea-lg-font-size: var(--font-size-4); /** Font size — variante lg (20px) */
+  --textarea-lg-font-size: var(--font-size-3); /** Font size — variante lg (20px) */
   --textarea-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --textarea-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --textarea-font-weight: var(--font-weight-default); /** Font weight */

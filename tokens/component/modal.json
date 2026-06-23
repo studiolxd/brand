@@ -10,7 +10,7 @@
     "padding-block":        { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Padding vertical del panel" },
     "padding-inline":       { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Padding horizontal del panel" },
     "header-gap":           { "$value": "{spacing.4}",                "$type": "dimension", "$description": "Gap entre título y botón ✕" },
-    "title-font-size":      { "$value": "{font-size.7}",              "$type": "dimension", "$description": "Tamaño del título (2rem)" },
+    "title-font-size":      { "$value": "{font-size.6}",              "$type": "dimension", "$description": "Tamaño del título (2rem)" },
     "title-font-weight":    { "$value": "{font-weight.medium}",     "$type": "number",    "$description": "Peso del título" },
     "title-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título" },
     "width-max":            { "$value": "560px",                      "$type": "dimension", "$description": "Anchura máxima del panel" },

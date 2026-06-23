@@ -7,7 +7,7 @@
   --number-input-btn-bg: transparent; /** Fondo de los botones */
   --number-input-btn-width: var(--spacing-6); /** Ancho de los botones +/− */
   --number-input-btn-hover-bg: var(--color-grey-lightest); /** Fondo de los botones en hover */
-  --number-input-btn-font-size: var(--font-size-4); /** Tamaño del símbolo +/− */
+  --number-input-btn-font-size: var(--font-size-3); /** Tamaño del símbolo +/− */
   --number-input-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando deshabilitado */
   --number-input-border-radius: var(--input-border-radius); /** Border radius del contenedor */
   --number-input-border-width: var(--input-border-width); /** Grosor del borde */

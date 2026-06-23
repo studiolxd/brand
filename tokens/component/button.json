@@ -6,7 +6,7 @@
     "border-color":        { "$value": "transparent",            "$type": "color",     "$description": "Default border color — overridden by variants" },
     "justify-content":     { "$value": "center",                 "$type": "string",    "$description": "Justify content" },
     "font-family":         { "$value": "{font-family.sans}",     "$type": "string",    "$description": "Font family" },
-    "font-size":           { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Font size" },
+    "font-size":           { "$value": "{font-size.2}",          "$type": "dimension", "$description": "Font size" },
     "font-weight":         { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Font weight" },
     "line-height":         { "$value": "{line-height.none}",     "$type": "number",    "$description": "Line height" },
     "cursor":              { "$value": "pointer",                "$type": "string",    "$description": "Cursor" },
@@ -28,7 +28,7 @@
     "sm-font-size":        { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Font size — sm" },
     "lg-padding-block":    { "$value": "{spacing.4}",            "$type": "dimension", "$description": "Block padding — lg" },
     "lg-padding-inline":   { "$value": "{spacing.8}",            "$type": "dimension", "$description": "Inline padding — lg" },
-    "lg-font-size":        { "$value": "{font-size.4}",          "$type": "dimension", "$description": "Font size — lg" },
+    "lg-font-size":        { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Font size — lg" },
     "block-width":         { "$value": "100%",                   "$type": "string",    "$description": "Width when block modifier is applied" },
     "primary": {
       "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },

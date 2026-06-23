@@ -6,7 +6,7 @@
     "cell-padding-block":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical de cada celda" },
     "cell-padding-inline": { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding horizontal de cada celda" },
     "value-font-family":   { "$value": "{control.font-family}",    "$type": "string",    "$description": "Font family del valor (dd)" },
-    "value-font-size":     { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Font size del valor (18px)" },
+    "value-font-size":     { "$value": "{font-size.2}",            "$type": "dimension", "$description": "Font size del valor (18px)" },
     "value-font-weight":   { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Font weight del valor" },
     "value-line-height":   { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Line height del valor" },
     "value-color":         { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del valor (dd)" }

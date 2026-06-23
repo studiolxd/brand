@@ -14,7 +14,7 @@
   --switcher-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
   --switcher-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
   --switcher-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
-  --switcher-field-label-font-size: var(--font-size-3); /** Tamaño de fuente (16px) */
+  --switcher-field-label-font-size: var(--font-size-2); /** Tamaño de fuente (16px) */
   --switcher-field-label-line-height: var(--line-height-normal); /** Interlineado */
   --switcher-field-label-letter-spacing: var(--letter-spacing-normal); /** Interletraje */
   --switcher-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */

@@ -19,7 +19,7 @@
     "btn-bg":              { "$value": "transparent",                 "$type": "string",    "$description": "Fondo de los botones" },
     "btn-hover-bg":        { "$value": "{color.grey-lightest}",       "$type": "color",     "$description": "Fondo de los botones en hover" },
     "btn-separator-color": { "$value": "{input.border-color}",        "$type": "color",     "$description": "Color del separador entre botón y campo" },
-    "btn-font-size":       { "$value": "{font-size.4}",               "$type": "dimension", "$description": "Tamaño del símbolo +/−" },
+    "btn-font-size":       { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Tamaño del símbolo +/−" },
 
     "focus-ring-width":        { "$value": "{input.focus-ring-width}",        "$type": "dimension", "$description": "Grosor del focus ring" },
     "focus-ring-inset-offset": { "$value": "{input.focus-ring-inset-offset}", "$type": "dimension", "$description": "Gap entre borde y focus ring" },

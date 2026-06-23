@@ -32,7 +32,7 @@
   --calendar-sm-day-size: var(--spacing-5); /** Tamaño de los botones de día — sm */
   --calendar-sm-title-font-size: var(--font-size-1); /** Tamaño del título — sm */
   --calendar-lg-day-size: var(--spacing-7); /** Tamaño de los botones de día — lg */
-  --calendar-lg-title-font-size: var(--font-size-3); /** Tamaño del título — lg */
+  --calendar-lg-title-font-size: var(--font-size-2); /** Tamaño del título — lg */
   --calendar-lg-day-font-size: var(--font-size-2); /** Tamaño de fuente de los días — lg */
   --calendar-nav-color: var(--color-text-on-light); /** Color de los botones prev/next */
   --calendar-nav-focus-ring-color: var(--color-primary); /** Color del focus ring de los botones de navegación */

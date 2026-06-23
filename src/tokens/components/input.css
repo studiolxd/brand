@@ -12,7 +12,7 @@
   --input-border-radius: var(--border-radius-none); /** Border radius */
   --input-border-width: var(--border-width-sm); /** Border width */
   --input-font-family: var(--font-family-sans); /** Font family */
-  --input-font-size: var(--font-size-3); /** Font size */
+  --input-font-size: var(--font-size-2); /** Font size */
   --input-line-height: var(--line-height-none); /** Line height */
   --input-transition-duration: var(--motion-duration-fast); /** Transition duration */
   --input-transition-easing: var(--motion-easing-default); /** Transition easing */
@@ -27,7 +27,7 @@
   --input-sm-font-size: var(--font-size-1); /** Font size — sm */
   --input-lg-padding-block: var(--spacing-5); /** Block padding — lg */
   --input-lg-padding-inline: var(--spacing-5); /** Inline padding — lg */
-  --input-lg-font-size: var(--font-size-4); /** Font size — lg */
+  --input-lg-font-size: var(--font-size-3); /** Font size — lg */
   --input-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --input-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --input-font-weight: var(--font-weight-default); /** Font weight */

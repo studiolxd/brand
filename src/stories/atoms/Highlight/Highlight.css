@@ -32,13 +32,13 @@
 /* ─── Size modifiers ──────────────────────────────────────── */
 .highlight.highlight--size-1  p { font-size: var(--font-size-1); }
 .highlight.highlight--size-2  p { font-size: var(--font-size-2); }
-.highlight.highlight--size-3  p { font-size: var(--font-size-3); }
-.highlight.highlight--size-4  p { font-size: var(--font-size-4); }
-.highlight.highlight--size-5  p { font-size: var(--font-size-5); }
-.highlight.highlight--size-6  p { font-size: var(--font-size-6); }
-.highlight.highlight--size-7  p { font-size: var(--font-size-7); }
-.highlight.highlight--size-8  p { font-size: var(--font-size-8); }
-.highlight.highlight--size-9  p { font-size: var(--font-size-9); }
+.highlight.highlight--size-3  p { font-size: var(--font-size-2); }
+.highlight.highlight--size-4  p { font-size: var(--font-size-3); }
+.highlight.highlight--size-5  p { font-size: var(--font-size-4); }
+.highlight.highlight--size-6  p { font-size: var(--font-size-5); }
+.highlight.highlight--size-7  p { font-size: var(--font-size-6); }
+.highlight.highlight--size-8  p { font-size: var(--font-size-7); }
+.highlight.highlight--size-9  p { font-size: var(--font-size-8); }
 .highlight.highlight--size-10 p { font-size: var(--font-size-10); }
 
 /* ─── Weight modifiers ────────────────────────────────────── */

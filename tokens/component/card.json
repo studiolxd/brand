@@ -6,7 +6,7 @@
     "gap":                      { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre elementos internos" },
     "border-radius":            { "$value": "{border-radius.none}", "$type": "dimension", "$description": "Radio de esquinas — sin redondeado" },
     "shadow":                   { "$value": "{shadow.none}", "$type": "shadow", "$description": "Sombra — sin sombra" },
-    "description-font-size":    { "$value": "{font-size.4}", "$type": "dimension", "$description": "Tamaño de fuente de la descripción" },
+    "description-font-size":    { "$value": "{font-size.3}", "$type": "dimension", "$description": "Tamaño de fuente de la descripción" },
     "description-margin-block-end": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Margen inferior de la descripción" },
 
     "primary-bg":    { "$value": "{color.primary}",         "$type": "color", "$description": "Variante primary — fondo prussian" },

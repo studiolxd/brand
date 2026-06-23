@@ -14,7 +14,7 @@
     "lg-padding-block": { "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding block — variante lg" },
     "label": {
       "font-family":    { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Familia tipográfica" },
-      "font-size":      { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Tamaño de fuente (16px)" },
+      "font-size":      { "$value": "{font-size.2}",            "$type": "dimension", "$description": "Tamaño de fuente (16px)" },
       "font-weight":    { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso tipográfico" },
       "line-height":    { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado" },
       "color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del texto" },

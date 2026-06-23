@@ -44,7 +44,7 @@
 .footer__social-link,
 .footer__contact a {
   text-decoration: none;
-  font-size: var(--font-size-6);
+  font-size: var(--font-size-5);
 }
 
 .footer__contact {

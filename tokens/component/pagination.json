@@ -32,8 +32,8 @@
     "sm-btn-padding-block":      { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Padding block de botones — variante sm" },
     "sm-btn-padding-inline":     { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Padding inline de botones — variante sm" },
     "sm-btn-min-width":          { "$value": "{spacing.5}",                 "$type": "dimension", "$description": "Ancho mínimo de botones de página — variante sm" },
-    "md-font-size":              { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Font size — variante md (18px)" },
-    "lg-font-size":              { "$value": "{font-size.4}",               "$type": "dimension", "$description": "Font size — variante lg (20px)" },
+    "md-font-size":              { "$value": "{font-size.2}",               "$type": "dimension", "$description": "Font size — variante md (18px)" },
+    "lg-font-size":              { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Font size — variante lg (20px)" },
     "lg-btn-padding-block":      { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Padding block de botones — variante lg" },
     "lg-btn-padding-inline":     { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Padding inline de botones — variante lg" },
     "lg-btn-min-width":          { "$value": "{spacing.7}",                 "$type": "dimension", "$description": "Ancho mínimo de botones de página — variante lg" }

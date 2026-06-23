@@ -11,7 +11,7 @@
   --select-border-radius: var(--border-radius-none); /** Radio del borde del trigger */
   --select-border-width: var(--border-width-sm); /** Grosor del borde */
   --select-font-family: var(--font-family-sans); /** Familia tipográfica */
-  --select-font-size: var(--font-size-3); /** Tamaño de fuente */
+  --select-font-size: var(--font-size-2); /** Tamaño de fuente */
   --select-bg: var(--color-white); /** Fondo del trigger */
   --select-icon-transition: var(--motion-duration-fast); /** Duración de la transición del icono */
   --select-focus-ring-width: var(--border-width-md); /** Grosor del anillo de foco */
@@ -22,7 +22,7 @@
   --select-sm-padding-block: var(--spacing-1); /** Padding block del trigger — variante sm */
   --select-sm-padding-inline: var(--spacing-2); /** Padding inline del trigger — variante sm */
   --select-sm-item-padding-block: var(--spacing-1); /** Padding block de cada opción — variante sm */
-  --select-lg-font-size: var(--font-size-4); /** Tamaño de fuente — variante lg (20px) */
+  --select-lg-font-size: var(--font-size-3); /** Tamaño de fuente — variante lg (20px) */
   --select-lg-padding-block: var(--spacing-5); /** Padding block del trigger — variante lg */
   --select-lg-padding-inline: var(--spacing-5); /** Padding inline del trigger — variante lg */
   --select-lg-item-padding-block: var(--spacing-3); /** Padding block de cada opción — variante lg */

@@ -32,7 +32,7 @@
   --button-border-radius: var(--border-radius-full); /** Border radius */
   --button-border-width: var(--border-width-sm); /** Border width */
   --button-font-family: var(--font-family-sans); /** Font family */
-  --button-font-size: var(--font-size-3); /** Font size */
+  --button-font-size: var(--font-size-2); /** Font size */
   --button-line-height: var(--line-height-none); /** Line height */
   --button-transition-duration: var(--motion-duration-fast); /** Transition duration */
   --button-transition-easing: var(--motion-easing-default); /** Transition easing */
@@ -48,7 +48,7 @@
   --button-sm-font-size: var(--font-size-1); /** Font size — sm */
   --button-lg-padding-block: var(--spacing-4); /** Block padding — lg */
   --button-lg-padding-inline: var(--spacing-8); /** Inline padding — lg */
-  --button-lg-font-size: var(--font-size-4); /** Font size — lg */
+  --button-lg-font-size: var(--font-size-3); /** Font size — lg */
   --button-primary-border-style: var(--button-border-style); /** Border style */
   --button-primary-justify-content: var(--button-justify-content); /** Justify content */
   --button-primary-cursor: var(--button-cursor); /** Cursor */

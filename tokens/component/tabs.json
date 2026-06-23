@@ -5,7 +5,7 @@
     "list-gap":                  { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Gap entre triggers" },
     "trigger-padding-block":     { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical del trigger" },
     "trigger-padding-inline":    { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding horizontal del trigger" },
-    "trigger-font-size":         { "$value": "{font-size.3}",            "$type": "dimension", "$description": "Tamaño de fuente del trigger" },
+    "trigger-font-size":         { "$value": "{font-size.2}",            "$type": "dimension", "$description": "Tamaño de fuente del trigger" },
     "trigger-font-weight":       { "$value": "{font-weight.default}",    "$type": "string",    "$description": "Peso de fuente por defecto" },
     "trigger-active-weight":     { "$value": "{font-weight.medium}",   "$type": "string",    "$description": "Peso de fuente del tab activo" },
     "trigger-color":             { "$value": "{color.grey-dark}",        "$type": "color",     "$description": "Color del trigger inactivo" },

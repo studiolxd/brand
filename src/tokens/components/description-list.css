@@ -6,7 +6,7 @@
   --description-list-border-style: var(--control-border-style); /** Estilo del borde */
   --description-list-cell-padding-block: var(--spacing-3); /** Padding vertical de cada celda */
   --description-list-cell-padding-inline: var(--spacing-4); /** Padding horizontal de cada celda */
-  --description-list-value-font-size: var(--font-size-3); /** Font size del valor (18px) */
+  --description-list-value-font-size: var(--font-size-2); /** Font size del valor (18px) */
   --description-list-value-line-height: var(--line-height-normal); /** Line height del valor */
   --description-list-border-width: var(--control-border-width); /** Grosor del borde exterior y separadores internos */
   --description-list-border-color: var(--color-primary); /** Color del borde */

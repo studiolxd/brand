@@ -15,7 +15,7 @@
   --checkbox-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
   --checkbox-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
   --checkbox-field-label-font-family: var(--font-family-sans); /** Familia tipográfica — igual al texto por defecto */
-  --checkbox-field-label-font-size: var(--font-size-3); /** Tamaño de fuente — igual al texto por defecto (16px) */
+  --checkbox-field-label-font-size: var(--font-size-2); /** Tamaño de fuente — igual al texto por defecto (16px) */
   --checkbox-field-label-line-height: var(--line-height-normal); /** Interlineado */
   --checkbox-field-label-letter-spacing: var(--letter-spacing-normal); /** Interletraje — anula la herencia del label base */
   --checkbox-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */

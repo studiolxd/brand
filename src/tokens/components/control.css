@@ -10,7 +10,7 @@
   --control-border-width: var(--border-width-sm); /** Grosor del borde */
   --control-height: var(--size-component-md); /** Altura del control */
   --control-font-family: var(--font-family-sans); /** Familia tipográfica */
-  --control-font-size: var(--font-size-3); /** Tamaño de fuente */
+  --control-font-size: var(--font-size-2); /** Tamaño de fuente */
   --control-line-height: var(--line-height-none); /** Interlineado */
   --control-transition-duration: var(--motion-duration-fast); /** Duración de la transición */
   --control-transition-easing: var(--motion-easing-default); /** Curva de animación */

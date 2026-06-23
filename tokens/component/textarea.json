@@ -7,7 +7,7 @@
     "padding-block":                    { "$value": "{control.padding-block}",   "$type": "dimension", "$description": "Block (vertical) padding" },
     "padding-inline":                   { "$value": "{control.padding-inline}",  "$type": "dimension", "$description": "Inline (horizontal) padding" },
     "font-family":                      { "$value": "{font-family.sans}",        "$type": "string",    "$description": "Font family" },
-    "font-size":                        { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Font size" },
+    "font-size":                        { "$value": "{font-size.2}",             "$type": "dimension", "$description": "Font size" },
     "font-weight":                      { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Font weight" },
     "line-height":                      { "$value": "{line-height.normal}",      "$type": "number",    "$description": "Line height" },
     "min-height":                        { "$value": "15rem",                     "$type": "dimension", "$description": "15rem (240px) — altura mínima del textarea" },
@@ -40,6 +40,6 @@
     "sm-font-size":                     { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Font size — variante sm (14px)" },
     "lg-padding-block":                 { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Block padding — variante lg" },
     "lg-padding-inline":                { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Inline padding — variante lg" },
-    "lg-font-size":                     { "$value": "{font-size.4}",             "$type": "dimension", "$description": "Font size — variante lg (20px)" }
+    "lg-font-size":                     { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Font size — variante lg (20px)" }
   }
 }

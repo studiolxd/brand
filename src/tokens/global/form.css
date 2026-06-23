@@ -7,7 +7,7 @@
   --form-border-style: var(--control-border-style); /** Estilo del borde exterior */
   --form-separator-style: var(--control-border-style); /** Estilo del separador */
   --form-heading-font-family: var(--font-family-sans); /** Font family del heading */
-  --form-heading-font-size: var(--font-size-5); /** Font size del heading (24px) */
+  --form-heading-font-size: var(--font-size-4); /** Font size del heading (24px) */
   --form-heading-font-weight: var(--font-weight-medium); /** Font weight del heading */
   --form-heading-line-height: var(--line-height-snug); /** Line height del heading */
   --form-heading-letter-spacing: var(--letter-spacing-tight); /** Letter spacing del heading */
@@ -18,7 +18,7 @@
   --form-helper-font-size: var(--font-size-1); /** Font size del texto de ayuda (14px) */
   --form-helper-line-height: var(--line-height-normal); /** Line height del texto de ayuda */
   --form-success-font-family: var(--font-family-sans); /** Font family del mensaje de éxito */
-  --form-success-font-size: var(--font-size-3); /** Font size del mensaje de éxito (18px) */
+  --form-success-font-size: var(--font-size-2); /** Font size del mensaje de éxito (18px) */
   --form-success-line-height: var(--line-height-normal); /** Line height del mensaje de éxito */
   --form-border-width: var(--control-border-width); /** Grosor del borde exterior del formulario */
   --form-border-color: var(--color-primary); /** Color del borde exterior */

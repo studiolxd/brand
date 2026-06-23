@@ -32,7 +32,7 @@
 }
 
 .steps__number-inner {
-  font-size: var(--font-size-9);
+  font-size: var(--font-size-8);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-none);
   color: var(--steps-number-color);

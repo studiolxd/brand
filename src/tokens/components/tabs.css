@@ -8,7 +8,7 @@
   --tabs-list-gap: var(--spacing-1); /** Gap entre triggers */
   --tabs-trigger-padding-block: var(--spacing-3); /** Padding vertical del trigger */
   --tabs-trigger-padding-inline: var(--spacing-4); /** Padding horizontal del trigger */
-  --tabs-trigger-font-size: var(--font-size-3); /** Tamaño de fuente del trigger */
+  --tabs-trigger-font-size: var(--font-size-2); /** Tamaño de fuente del trigger */
   --tabs-trigger-active-weight: var(--font-weight-medium); /** Peso de fuente del tab activo */
   --tabs-trigger-color: var(--color-grey-dark); /** Color del trigger inactivo */
   --tabs-trigger-indicator-width: var(--border-width-md); /** Grosor del indicador activo (underline) */

@@ -14,7 +14,7 @@ $lxd-header-navbar-z-index: 998; // Z-index del overlay de navegación
 $lxd-header-backdrop-z-index: 999; // Z-index del pseudo-elemento backdrop
 $lxd-header-navbar-transition-duration: 250ms; // Duración del slide de la navbar
 $lxd-header-navbar-transition-easing: ease-in-out; // Easing del slide de la navbar
-$lxd-header-nav-font-size-overlay: 2rem; // Tamaño de fuente de los enlaces en modo overlay
+$lxd-header-nav-font-size-overlay: 1.75rem; // Tamaño de fuente de los enlaces en modo overlay
 $lxd-header-nav-font-size-inline: 1rem; // Tamaño de fuente de los enlaces en modo inline
 $lxd-header-nav-font-weight-overlay: 500; // Peso de fuente de los enlaces en modo overlay
 $lxd-header-nav-font-weight-inline: 500; // Peso de fuente de los enlaces en modo inline
@@ -28,7 +28,7 @@ $lxd-header-actions-gap-overlay: 0.75rem; // Separación entre los elementos de 
 $lxd-header-actions-gap-inline: 0.75rem; // Separación entre los elementos de actions en modo inline
 $lxd-header-featured-border-width: 1px; // Grosor del borde del featured link
 $lxd-header-featured-border-color: currentColor; // Color del borde del featured link
-$lxd-header-featured-font-size: 1.75rem; // Tamaño de fuente del featured link
+$lxd-header-featured-font-size: 1.5rem; // Tamaño de fuente del featured link
 $lxd-header-featured-font-weight: 500; // Peso de fuente del featured link
 $lxd-header-featured-padding-inline: 3rem; // Padding horizontal del featured link
 $lxd-header-featured-margin-inline-end: 3rem; // Separación entre el featured link y la navegación

@@ -4,29 +4,29 @@
 
 :root {
   --text-font-family: var(--font-family-sans); /** Default font family */
-  --text-font-size: var(--font-size-3); /** Default font size (18px) */
+  --text-font-size: var(--font-size-2); /** Default font size (18px) */
   --text-line-height: var(--line-height-normal); /** Default line height */
   --text-letter-spacing: var(--letter-spacing-normal); /** Default letter spacing */
   --text-heading-font-family: var(--font-family-sans); /** Heading font family */
   --text-heading-font-weight: var(--font-weight-medium); /** Heading font weight */
   --text-heading-letter-spacing: var(--letter-spacing-tight); /** Heading letter spacing */
-  --text-h1-font-size: var(--font-size-8); /** H1 font size (40px) */
+  --text-h1-font-size: var(--font-size-7); /** H1 font size (40px) */
   --text-h1-line-height: var(--line-height-tight); /** H1 line height */
-  --text-h2-font-size: var(--font-size-7); /** H2 font size (32px) */
+  --text-h2-font-size: var(--font-size-6); /** H2 font size (32px) */
   --text-h2-line-height: var(--line-height-tight); /** H2 line height */
-  --text-h3-font-size: var(--font-size-6); /** H3 font size (28px) */
+  --text-h3-font-size: var(--font-size-5); /** H3 font size (28px) */
   --text-h3-line-height: var(--line-height-tight); /** H3 line height */
-  --text-h4-font-size: var(--font-size-5); /** H4 font size (24px) */
+  --text-h4-font-size: var(--font-size-4); /** H4 font size (24px) */
   --text-h4-line-height: var(--line-height-snug); /** H4 line height */
-  --text-h5-font-size: var(--font-size-4); /** H5 font size (20px) */
+  --text-h5-font-size: var(--font-size-3); /** H5 font size (20px) */
   --text-h5-line-height: var(--line-height-snug); /** H5 line height */
   --text-h5-letter-spacing: var(--letter-spacing-normal); /** H5 letter spacing */
-  --text-h6-font-size: var(--font-size-3); /** H6 font size (18px) */
+  --text-h6-font-size: var(--font-size-2); /** H6 font size (18px) */
   --text-h6-line-height: var(--line-height-snug); /** H6 line height */
   --text-h6-letter-spacing: var(--letter-spacing-normal); /** H6 letter spacing */
   --text-paragraph-small-font-size: var(--font-size-1); /** Small paragraph font size (14px) */
   --text-paragraph-small-line-height: var(--line-height-relaxed); /** Small paragraph line height */
-  --text-paragraph-large-font-size: var(--font-size-5); /** Large paragraph font size (24px) */
+  --text-paragraph-large-font-size: var(--font-size-4); /** Large paragraph font size (24px) */
   --text-paragraph-large-line-height: var(--line-height-snug); /** Large paragraph line height */
   --text-list-gap: var(--spacing-2); /** Spacing between list items (8px) */
   --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
