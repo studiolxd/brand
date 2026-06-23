@@ -392,6 +392,54 @@ var r = {
 			d: "M21 21 L16.65 16.65"
 		})] })
 	},
+	"zoom-in": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "11",
+				cy: "11",
+				r: "8"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M21 21 L16.65 16.65"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M11 8 L11 14 M8 11 L14 11"
+			})
+		] })
+	},
+	"zoom-out": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "11",
+				cy: "11",
+				r: "8"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M21 21 L16.65 16.65"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M8 11 L14 11"
+			})
+		] })
+	},
 	retry: {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ t("path", {
@@ -401,6 +449,49 @@ var r = {
 			strokeLinejoin: "round",
 			d: "M4.05 11 a8 8 0 1 1 .5 4 m-.5 5 v-5 h5"
 		})
+	},
+	lifebuoy: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "12",
+				cy: "12",
+				r: "9"
+			}),
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "12",
+				cy: "12",
+				r: "3"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M15 15 L18.5 18.5"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M9 15 L5.5 18.5"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M15 9 L18.5 5.5"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M9 9 L5.5 5.5"
+			})
+		] })
 	}
 }, i = Object.keys(r);
 function a({ name: e, size: n = "md", className: i }) {

@@ -156,10 +156,43 @@ const ICONS = {
       </>
     ),
   },
+  'zoom-in': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="11" cy="11" r="8" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M21 21 L16.65 16.65" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M11 8 L11 14 M8 11 L14 11" />
+      </>
+    ),
+  },
+  'zoom-out': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="11" cy="11" r="8" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M21 21 L16.65 16.65" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M8 11 L14 11" />
+      </>
+    ),
+  },
   retry: {
     viewBox: '0 0 24 24',
     render: () => (
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4.05 11 a8 8 0 1 1 .5 4 m-.5 5 v-5 h5" />
+    ),
+  },
+  lifebuoy: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="3" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M15 15 L18.5 18.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 15 L5.5 18.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M15 9 L18.5 5.5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 9 L5.5 5.5" />
+      </>
     ),
   },
 } as const;
