@@ -195,6 +195,27 @@ const ICONS = {
       </>
     ),
   },
+  play: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 4v16a1 1 0 0 0 1.5 .87l13 -8a1 1 0 0 0 0 -1.73l-13 -8a1 1 0 0 0 -1.5 .87" />
+    ),
+  },
+  pause: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 5a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M14 5a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+      </>
+    ),
+  },
+  stop: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 7a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+    ),
+  },
 } as const;
 
 export type IconName = keyof typeof ICONS;

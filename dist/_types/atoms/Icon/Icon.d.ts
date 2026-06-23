@@ -84,6 +84,18 @@ declare const ICONS: {
         readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
+    readonly play: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly pause: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly stop: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
 };
 export type IconName = keyof typeof ICONS;
 export declare const ICON_NAMES: IconName[];
