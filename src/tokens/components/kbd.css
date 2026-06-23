@@ -1,0 +1,27 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --kbd-min-size: 1.75rem; /** Tamaño mínimo (28px) — mantiene las teclas de un solo carácter casi cuadradas */
+  --kbd-sm-min-size: 1.5rem; /** Tamaño mínimo sm (24px) */
+  --kbd-lg-min-size: 2.25rem; /** Tamaño mínimo lg (36px) */
+  --kbd-border-radius: var(--border-radius-sm); /** Esquinas suaves de keycap (4px) */
+  --kbd-border-width: var(--border-width-sm); /** Grosor del borde */
+  --kbd-border-color: var(--color-grey-light); /** Borde del keycap */
+  --kbd-bg: var(--color-grey-lightest); /** Fondo del keycap */
+  --kbd-shadow: var(--shadow-sm); /** Sombra sutil que da profundidad de tecla física */
+  --kbd-font-family: var(--font-family-mono); /** Monoespaciada (Google Sans Code) — alineada con contenido técnico */
+  --kbd-font-size: var(--font-size-2); /** 16px — tamaño md (por defecto) */
+  --kbd-font-weight: var(--font-weight-medium); /** Peso medio para legibilidad en tamaño compacto */
+  --kbd-line-height: var(--line-height-none); /** Sin interlineado extra — centrado por flexbox */
+  --kbd-padding-block: var(--spacing-1); /** Padding vertical (4px) */
+  --kbd-padding-inline: var(--spacing-3); /** Padding horizontal (12px) */
+  --kbd-sm-font-size: var(--font-size-1); /** 14px — tamaño sm */
+  --kbd-sm-padding-block: var(--spacing-1); /** Padding vertical sm (4px) */
+  --kbd-sm-padding-inline: var(--spacing-2); /** Padding horizontal sm (8px) */
+  --kbd-lg-font-size: var(--font-size-3); /** 18px — tamaño lg */
+  --kbd-lg-padding-block: var(--spacing-2); /** Padding vertical lg (8px) */
+  --kbd-lg-padding-inline: var(--spacing-4); /** Padding horizontal lg (16px) */
+  --kbd-color: var(--color-text-on-light); /** Color del símbolo de la tecla */
+}

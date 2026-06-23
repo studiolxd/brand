@@ -158,6 +158,11 @@
   /* ─── DescriptionList ─────────────────────────────────────────────────────── */
   --description-list-border-color: var(--color-text-on-dark);
   --description-list-value-color:  var(--color-text-on-dark);
+
+  /* ─── Kbd ─────────────────────────────────────────────────────────────── */
+  --kbd-bg:           rgba(255, 255, 255, 0.08);
+  --kbd-color:        var(--color-text-on-dark);
+  --kbd-border-color: var(--color-text-muted-on-dark);
 }
 
 /* ─── Button: disabled states ────────────────────────────────────────────── */

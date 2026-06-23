@@ -1,0 +1,54 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as KbdStories from "./Kbd.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { kbdTokens } from "../../../tokens/components/kbd";
+
+<Meta of={KbdStories} />
+
+# Kbd
+
+Representa una tecla del teclado mediante el elemento semántico `<kbd>`, con aspecto de keycap acorde a la línea del sistema: tipografía monoespaciada (Google Sans Code), esquinas suaves y una sombra sutil que aporta profundidad de tecla física. Se usa para mostrar atajos de teclado en interfaces, documentación y paletas de comandos.
+
+## Por defecto
+
+<Canvas of={KbdStories.Default} />
+
+## Tamaños
+
+Tres tamaños (`sm`, `md`, `lg`) que comparten el mismo estilo y solo varían tamaño de fuente, padding y ancho mínimo. El ancho mínimo mantiene las teclas de un solo carácter casi cuadradas.
+
+<Canvas of={KbdStories.Sizes} />
+
+## Teclas individuales
+
+El átomo representa siempre una sola tecla. Admite símbolos (`⌘`, `⇧`, `⌥`, `⌃`, `↵`, `⌫`), flechas y etiquetas de texto (`Tab`, `Esc`).
+
+<Canvas of={KbdStories.SingleKeys} />
+
+## Combinaciones
+
+Para una combinación de teclas se componen varios `Kbd` con un separador entre ellos (`+` o `·`). No existe una variante específica para combos: se construyen por composición.
+
+<Canvas of={KbdStories.Combinations} />
+
+## En línea
+
+Dentro de un párrafo, usar el tamaño `sm` para que la tecla se alinee con el texto que la rodea.
+
+<Canvas of={KbdStories.Inline} />
+
+---
+
+## Tokens
+
+Todos los valores derivan de tokens. Los tokens de tamaño (`sm-*`, `lg-*`) solo sobreescriben tamaño de fuente, padding y ancho mínimo; el resto de propiedades son comunes a los tres tamaños.
+
+<TokenTable tokens={kbdTokens} />
+
+## Tema oscuro
+
+Sobre `.surface-dark`, el keycap remapea su fondo a un blanco translúcido y el texto y el borde a sus equivalentes claros. El remapeo vive en `surface.css`, no en el CSS del componente.
+
+## Props
+
+<ArgTypes of={KbdStories} />

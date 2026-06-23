@@ -54,6 +54,8 @@ export type { SpinnerProps, SpinnerSize } from './stories/atoms/Spinner/Spinner'
 export { Switcher } from './stories/atoms/Switcher/Switcher';
 export type { SwitcherProps } from './stories/atoms/Switcher/Switcher';
 export { Tag } from './stories/atoms/Tag/Tag';
+export { Kbd } from './stories/atoms/Kbd/Kbd';
+export type { KbdProps } from './stories/atoms/Kbd/Kbd';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './stories/atoms/Tabs/Tabs';
 export { NumberBadge } from './stories/atoms/NumberBadge/NumberBadge';
 export type { NumberBadgeProps, NumberBadgeVariant } from './stories/atoms/NumberBadge/NumberBadge';

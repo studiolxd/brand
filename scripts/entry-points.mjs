@@ -29,6 +29,7 @@ export const entryPoints = {
   'select':              'src/stories/atoms/Select/Select.tsx',
   'time-select':         'src/stories/atoms/TimeSelect/TimeSelect.tsx',
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
+  'kbd':                 'src/stories/atoms/Kbd/Kbd.tsx',
   'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
   'hero-video':          'src/stories/atoms/HeroVideo/HeroVideo.tsx',
   'highlight':           'src/stories/atoms/Highlight/Highlight.tsx',
