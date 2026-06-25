@@ -7,6 +7,7 @@ export interface NumberInputProps {
   min?: number;
   max?: number;
   step?: number;
+  decimal?: boolean;
   disabled?: boolean;
   readOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
@@ -26,6 +27,7 @@ export function NumberInput({
   min,
   max,
   step = 1,
+  decimal = false,
   disabled = false,
   readOnly = false,
   size = 'md',
@@ -110,8 +112,8 @@ export function NumberInput({
       <input
         className="number-input__field"
         type="text"
-        inputMode="numeric"
-        pattern="[0-9]*"
+        inputMode={decimal ? 'decimal' : 'numeric'}
+        pattern={decimal ? '[0-9]*[.,]?[0-9]*' : '[0-9]*'}
         id={id}
         name={name}
         value={currentValue}

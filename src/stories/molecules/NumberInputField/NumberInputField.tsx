@@ -12,6 +12,7 @@ export interface NumberInputFieldProps {
   min?: number;
   max?: number;
   step?: number;
+  decimal?: boolean;
   disabled?: boolean;
   readOnly?: boolean;
   error?: boolean;
@@ -33,6 +34,7 @@ export function NumberInputField({
   min,
   max,
   step = 1,
+  decimal,
   disabled,
   readOnly,
   size = 'md',
@@ -58,6 +60,7 @@ export function NumberInputField({
         min={min}
         max={max}
         step={step}
+        decimal={decimal}
         disabled={disabled}
         readOnly={readOnly}
         size={size}

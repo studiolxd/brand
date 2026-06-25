@@ -18,6 +18,9 @@ npm run build-storybook  # Build estático de Storybook
 
 # Quality
 npm run lint             # Run ESLint (flat config format)
+
+# Docker — Storybook image → ghcr.io
+docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:latest --push .
 ```
 
 > **IMPORTANTE:** Cada vez que se modifique un archivo JSON de tokens, ejecutar `npm run build:tokens` antes de commitear. Los CSS bajo `src/tokens/` son auto-generados y se sobreescriben en el siguiente build.
