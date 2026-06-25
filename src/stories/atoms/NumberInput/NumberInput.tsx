@@ -43,8 +43,10 @@ export function NumberInput({
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<number>(defaultValue);
   const [focused, setFocused] = useState(false);
+  const [draft, setDraft] = useState<string | null>(null);
 
   const currentValue = isControlled ? value : internalValue;
+  const displayValue = draft !== null ? draft : String(currentValue);
 
   const clamp = useCallback((n: number) => {
     let result = n;
@@ -61,19 +63,22 @@ export function NumberInput({
 
   const handleDecrement = () => {
     if (disabled || readOnly) return;
+    setDraft(null);
     commit(currentValue - step);
   };
 
   const handleIncrement = () => {
     if (disabled || readOnly) return;
+    setDraft(null);
     commit(currentValue + step);
   };
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const parsed = parseFloat(e.target.value);
-    if (!isNaN(parsed)) {
-      commit(parsed);
-    }
+    const raw = e.target.value;
+    setDraft(raw);
+    const normalized = decimal ? raw.replace(',', '.') : raw;
+    const parsed = parseFloat(normalized);
+    if (!isNaN(parsed)) commit(parsed);
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
@@ -83,6 +88,7 @@ export function NumberInput({
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
     setFocused(false);
+    setDraft(null);
     onBlur?.(e);
   };
 
@@ -116,7 +122,7 @@ export function NumberInput({
         pattern={decimal ? '[0-9]*[.,]?[0-9]*' : '[0-9]*'}
         id={id}
         name={name}
-        value={currentValue}
+        value={displayValue}
         disabled={disabled}
         readOnly={readOnly}
         aria-invalid={error || undefined}
