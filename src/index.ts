@@ -26,6 +26,7 @@ export { Heading } from './stories/atoms/Heading/Heading';
 export { HeroVideo } from './stories/atoms/HeroVideo/HeroVideo';
 export { Highlight } from './stories/atoms/Highlight/Highlight';
 export { Input } from './stories/atoms/Input/Input';
+export type { InputProps } from './stories/atoms/Input/Input';
 export { NumberInput } from './stories/atoms/NumberInput/NumberInput';
 export type { NumberInputProps } from './stories/atoms/NumberInput/NumberInput';
 export { FileUpload } from './stories/atoms/FileUpload/FileUpload';
@@ -34,6 +35,7 @@ export { InputPhone } from './stories/atoms/InputPhone/InputPhone';
 export { OtpInput } from './stories/atoms/OtpInput/OtpInput';
 export type { OtpInputProps } from './stories/atoms/OtpInput/OtpInput';
 export { Label } from './stories/atoms/Label/Label';
+export type { LabelProps } from './stories/atoms/Label/Label';
 export { Link } from './stories/atoms/Link/Link';
 export { List } from './stories/atoms/List/List';
 export { Logo } from './stories/atoms/Logo/Logo';
@@ -45,6 +47,7 @@ export type { PopoverProps } from './stories/atoms/Popover/Popover';
 export { MultiSelect } from './stories/atoms/MultiSelect/MultiSelect';
 export type { MultiSelectOption, MultiSelectProps } from './stories/atoms/MultiSelect/MultiSelect';
 export { Radio } from './stories/atoms/Radio/Radio';
+export type { RadioProps } from './stories/atoms/Radio/Radio';
 export { Select } from './stories/atoms/Select/Select';
 export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';
 export type { TimeSelectProps, TimeValue } from './stories/atoms/TimeSelect/TimeSelect';
@@ -65,6 +68,7 @@ export { TypingIndicator } from './stories/atoms/TypingIndicator/TypingIndicator
 export type { TypingIndicatorProps } from './stories/atoms/TypingIndicator/TypingIndicator';
 export type { TabsProps, TabsListProps, TabsTriggerProps, TabsContentProps } from './stories/atoms/Tabs/Tabs';
 export { Textarea } from './stories/atoms/Textarea/Textarea';
+export type { TextareaProps } from './stories/atoms/Textarea/Textarea';
 export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────

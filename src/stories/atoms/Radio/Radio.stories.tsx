@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 import { Radio } from './Radio';
 
 const meta: Meta<typeof Radio> = {
@@ -79,4 +80,22 @@ export const FocusVisible: Story = {
     </div>
   ),
   parameters: { pseudo: { focusVisible: true } },
+};
+
+/**
+ * Test: `className` del consumidor al final, `data-*` passthrough y que el
+ * elemento sigue siendo `input[type=radio]` (type fijo, no sobreescribible).
+ */
+export const PropPassthrough: Story = {
+  name: 'Test — className + data-* passthrough',
+  render: () => (
+    <Radio name="pp" value="a" aria-label="opción" className="extra" data-slot="radio" />
+  ),
+  play: async ({ canvasElement }) => {
+    const radio = canvasElement.querySelector('input')!;
+    await expect(radio).toHaveAttribute('type', 'radio');
+    await expect(radio).toHaveClass('radio', 'extra');
+    await expect(radio.className.trim().endsWith('extra')).toBe(true);
+    await expect(radio).toHaveAttribute('data-slot', 'radio');
+  },
 };

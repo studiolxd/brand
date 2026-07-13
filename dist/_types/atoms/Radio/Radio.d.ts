@@ -1,16 +1,13 @@
 import './Radio.css';
-interface RadioProps {
-    checked?: boolean;
-    defaultChecked?: boolean;
-    disabled?: boolean;
+export interface RadioProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
+    /** Tamaño del radio. Redeclara el `size` nativo (que es numérico). */
     size?: 'sm' | 'md' | 'lg';
-    id?: string;
-    name?: string;
-    value?: string;
-    required?: boolean;
-    'aria-label'?: string;
-    'aria-labelledby'?: string;
-    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
+    className?: string;
 }
-export declare function Radio({ checked, defaultChecked, disabled, size, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onChange, }: RadioProps): import("react/jsx-runtime").JSX.Element;
-export {};
+/**
+ * Radio (input nativo `type="radio"`). Extiende los atributos nativos de `<input>`
+ * y reenvía `{...rest}` al elemento (incluye `ref` para react-hook-form; `data-*`,
+ * `aria-*`, `required`, `checked`, `value`, handlers, etc.).
+ */
+export declare const Radio: import("react").ForwardRefExoticComponent<RadioProps & import("react").RefAttributes<HTMLInputElement>>;

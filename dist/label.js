@@ -1,12 +1,18 @@
 import './label.css';
 import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Label/Label.tsx
-function t({ htmlFor: t, children: n, hidden: r = !1 }) {
+var n = t(function({ children: t, hidden: n = !1, className: r, ...i }, a) {
 	return /* @__PURE__ */ e("label", {
-		htmlFor: t,
-		className: ["label", r ? "visually-hidden" : ""].filter(Boolean).join(" "),
-		children: n
+		ref: a,
+		className: [
+			"label",
+			n ? "visually-hidden" : "",
+			r ?? ""
+		].filter(Boolean).join(" "),
+		...i,
+		children: t
 	});
-}
+});
 //#endregion
-export { t as Label };
+export { n as Label };

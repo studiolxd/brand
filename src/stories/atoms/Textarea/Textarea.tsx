@@ -1,57 +1,44 @@
+import { forwardRef } from 'react';
 import './Textarea.css';
 
-interface TextareaProps {
-  placeholder?: string;
-  value?: string;
-  defaultValue?: string;
-  rows?: number;
-  disabled?: boolean;
-  readOnly?: boolean;
+export interface TextareaProps
+  extends React.ComponentPropsWithoutRef<'textarea'> {
+  /** Tamaño del textarea. */
   size?: 'sm' | 'md' | 'lg';
+  /** Marca el estado de error: aplica la clase `textarea--error` y `aria-invalid`. */
   error?: boolean;
-  id?: string;
-  name?: string;
+  /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
+  className?: string;
+  /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
-  onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
-  onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
-  onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
 }
 
-export function Textarea({
-  placeholder,
-  value,
-  defaultValue,
-  rows,
-  disabled,
-  readOnly,
+/**
+ * Textarea. Extiende los atributos nativos de `<textarea>` y reenvía `{...rest}`
+ * al elemento (incluye `ref` para react-hook-form; `data-*`, `aria-*`, `maxLength`,
+ * `required`, etc.).
+ */
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea({
   size = 'md',
   error = false,
-  id,
-  name,
+  className,
   describedBy,
-  onChange,
-  onBlur,
-  onFocus,
-  onKeyDown,
-}: TextareaProps) {
+  ...rest
+}, ref) {
+  const classes = [
+    'textarea',
+    size !== 'md' ? `textarea--${size}` : '',
+    error ? 'textarea--error' : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
+
   return (
     <textarea
-      className={['textarea', size !== 'md' ? `textarea--${size}` : '', error ? 'textarea--error' : ''].filter(Boolean).join(' ')}
-      placeholder={placeholder}
-      value={value}
-      defaultValue={defaultValue}
-      rows={rows}
-      disabled={disabled}
-      readOnly={readOnly}
-      id={id}
-      name={name}
+      ref={ref}
+      className={classes}
       aria-invalid={error || undefined}
       aria-describedby={describedBy}
-      onChange={onChange}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      onKeyDown={onKeyDown}
+      {...rest}
     />
   );
-}
+});

@@ -1,48 +1,36 @@
+import { forwardRef } from 'react';
 import './Radio.css';
 
-interface RadioProps {
-  checked?: boolean;
-  defaultChecked?: boolean;
-  disabled?: boolean;
+export interface RadioProps
+  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
+  /** Tamaño del radio. Redeclara el `size` nativo (que es numérico). */
   size?: 'sm' | 'md' | 'lg';
-  id?: string;
-  name?: string;
-  value?: string;
-  required?: boolean;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
-export function Radio({
-  checked,
-  defaultChecked,
-  disabled,
+/**
+ * Radio (input nativo `type="radio"`). Extiende los atributos nativos de `<input>`
+ * y reenvía `{...rest}` al elemento (incluye `ref` para react-hook-form; `data-*`,
+ * `aria-*`, `required`, `checked`, `value`, handlers, etc.).
+ */
+export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio({
   size = 'md',
-  id,
-  name,
-  value,
-  required,
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledby,
-  onChange,
-}: RadioProps) {
-  const className = ['radio', size !== 'md' ? `radio--${size}` : ''].filter(Boolean).join(' ');
+  className,
+  ...rest
+}, ref) {
+  const classes = [
+    'radio',
+    size !== 'md' ? `radio--${size}` : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
 
   return (
     <input
+      ref={ref}
+      className={classes}
+      {...rest}
       type="radio"
-      className={className}
-      checked={checked}
-      defaultChecked={defaultChecked}
-      disabled={disabled}
-      id={id}
-      name={name}
-      value={value}
-      required={required}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledby}
-      onChange={onChange}
     />
   );
-}
+});

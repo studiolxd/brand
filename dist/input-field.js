@@ -25,7 +25,7 @@ function i({ id: i, label: a, labelHidden: o = !0, name: s, type: c, placeholder
 				readOnly: p,
 				size: m,
 				error: h,
-				describedBy: C,
+				"aria-describedby": C,
 				onChange: v,
 				onBlur: y,
 				onFocus: b

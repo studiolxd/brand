@@ -1,75 +1,52 @@
+import { forwardRef } from 'react';
 import './Input.css';
 
-interface InputProps {
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
-  placeholder?: string;
-  value?: string;
-  defaultValue?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
+export interface InputProps
+  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size'> {
+  /** Tamaño del input. Redeclara el `size` nativo (que es numérico). */
   size?: 'sm' | 'md' | 'lg';
+  /** Marca el estado de error: aplica la clase `input--error` y `aria-invalid`. */
   error?: boolean;
-  id?: string;
-  name?: string;
+  /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
+  className?: string;
+  /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
-  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
-  pattern?: string;
-  maxLength?: number;
-  autoComplete?: string;
+  /** @deprecated Usa el atributo nativo `aria-label`. */
   ariaLabel?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  onFocus?: React.FocusEventHandler<HTMLInputElement>;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
-  onPaste?: React.ClipboardEventHandler<HTMLInputElement>;
 }
 
-export function Input({
-  type = 'text',
-  placeholder,
-  value,
-  defaultValue,
-  disabled,
-  readOnly,
+/**
+ * Input de texto. Extiende los atributos nativos de `<input>` y reenvía `{...rest}`
+ * al elemento (incluye `ref`, para react-hook-form; `data-*`, `aria-*`, `required`,
+ * `min`/`max`/`step`, etc.).
+ *
+ * Nota: `type` hereda la unión nativa completa (incluye `date`, `datetime-local`…).
+ * Pasar `type="checkbox"/"radio"/"file"…` renderiza pero no aplica su estilado
+ * específico — para eso existen los átomos dedicados del design system.
+ */
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({
   size = 'md',
   error = false,
-  id,
-  name,
+  className,
   describedBy,
-  inputMode,
-  pattern,
-  maxLength,
-  autoComplete,
   ariaLabel,
-  onChange,
-  onBlur,
-  onFocus,
-  onKeyDown,
-  onPaste,
-}: InputProps) {
+  ...rest
+}, ref) {
+  const classes = [
+    'input',
+    size !== 'md' ? `input--${size}` : '',
+    error ? 'input--error' : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
+
   return (
     <input
-      className={['input', size !== 'md' ? `input--${size}` : '', error ? 'input--error' : ''].filter(Boolean).join(' ')}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      defaultValue={defaultValue}
-      disabled={disabled}
-      readOnly={readOnly}
-      id={id}
-      name={name}
+      ref={ref}
+      className={classes}
       aria-invalid={error || undefined}
       aria-describedby={describedBy}
       aria-label={ariaLabel}
-      inputMode={inputMode}
-      pattern={pattern}
-      maxLength={maxLength}
-      autoComplete={autoComplete}
-      onChange={onChange}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      onKeyDown={onKeyDown}
-      onPaste={onPaste}
+      {...rest}
     />
   );
-}
+});

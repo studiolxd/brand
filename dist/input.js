@@ -1,35 +1,22 @@
 'use client';
 import './input.css';
 import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Input/Input.tsx
-function t({ type: t = "text", placeholder: n, value: r, defaultValue: i, disabled: a, readOnly: o, size: s = "md", error: c = !1, id: l, name: u, describedBy: d, inputMode: f, pattern: p, maxLength: m, autoComplete: h, ariaLabel: g, onChange: _, onBlur: v, onFocus: y, onKeyDown: b, onPaste: x }) {
+var n = t(function({ size: t = "md", error: n = !1, className: r, describedBy: i, ariaLabel: a, ...o }, s) {
 	return /* @__PURE__ */ e("input", {
+		ref: s,
 		className: [
 			"input",
-			s === "md" ? "" : `input--${s}`,
-			c ? "input--error" : ""
+			t === "md" ? "" : `input--${t}`,
+			n ? "input--error" : "",
+			r ?? ""
 		].filter(Boolean).join(" "),
-		type: t,
-		placeholder: n,
-		value: r,
-		defaultValue: i,
-		disabled: a,
-		readOnly: o,
-		id: l,
-		name: u,
-		"aria-invalid": c || void 0,
-		"aria-describedby": d,
-		"aria-label": g,
-		inputMode: f,
-		pattern: p,
-		maxLength: m,
-		autoComplete: h,
-		onChange: _,
-		onBlur: v,
-		onFocus: y,
-		onKeyDown: b,
-		onPaste: x
+		"aria-invalid": n || void 0,
+		"aria-describedby": i,
+		"aria-label": a,
+		...o
 	});
-}
+});
 //#endregion
-export { t as Input };
+export { n as Input };

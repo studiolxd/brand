@@ -1,29 +1,21 @@
 'use client';
 import './textarea.css';
 import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Textarea/Textarea.tsx
-function t({ placeholder: t, value: n, defaultValue: r, rows: i, disabled: a, readOnly: o, size: s = "md", error: c = !1, id: l, name: u, describedBy: d, onChange: f, onBlur: p, onFocus: m, onKeyDown: h }) {
+var n = t(function({ size: t = "md", error: n = !1, className: r, describedBy: i, ...a }, o) {
 	return /* @__PURE__ */ e("textarea", {
+		ref: o,
 		className: [
 			"textarea",
-			s === "md" ? "" : `textarea--${s}`,
-			c ? "textarea--error" : ""
+			t === "md" ? "" : `textarea--${t}`,
+			n ? "textarea--error" : "",
+			r ?? ""
 		].filter(Boolean).join(" "),
-		placeholder: t,
-		value: n,
-		defaultValue: r,
-		rows: i,
-		disabled: a,
-		readOnly: o,
-		id: l,
-		name: u,
-		"aria-invalid": c || void 0,
-		"aria-describedby": d,
-		onChange: f,
-		onBlur: p,
-		onFocus: m,
-		onKeyDown: h
+		"aria-invalid": n || void 0,
+		"aria-describedby": i,
+		...a
 	});
-}
+});
 //#endregion
-export { t as Textarea };
+export { n as Textarea };

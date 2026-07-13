@@ -59,7 +59,7 @@ export function InputField({
         readOnly={readOnly}
         size={size}
         error={error}
-        describedBy={describedBy}
+        aria-describedby={describedBy}
         onChange={onChange}
         onBlur={onBlur}
         onFocus={onFocus}
