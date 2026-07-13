@@ -4,14 +4,23 @@ import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/Table/Table.tsx
-function i({ children: e }) {
-	return /* @__PURE__ */ n("thead", { children: e });
+function i({ children: e, ...t }) {
+	return /* @__PURE__ */ n("thead", {
+		...t,
+		children: e
+	});
 }
-function a({ children: e }) {
-	return /* @__PURE__ */ n("tfoot", { children: e });
+function a({ children: e, ...t }) {
+	return /* @__PURE__ */ n("tfoot", {
+		...t,
+		children: e
+	});
 }
-function o({ children: e }) {
-	return /* @__PURE__ */ n("tbody", { children: e });
+function o({ children: e, ...t }) {
+	return /* @__PURE__ */ n("tbody", {
+		...t,
+		children: e
+	});
 }
 function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", children: l, className: u, scope: d = "col", ...f }) {
 	let p = [
@@ -85,12 +94,17 @@ function l({ children: e, className: t, ...r }) {
 		children: e
 	});
 }
-function u({ caption: e, children: t, size: i = "md" }) {
+function u({ caption: e, children: t, size: i = "md", className: a, ...o }) {
 	return /* @__PURE__ */ n("div", {
 		className: "table__wrapper",
 		children: /* @__PURE__ */ r("table", {
-			className: ["table", i === "sm" ? "table--sm" : ""].filter(Boolean).join(" "),
-			children: [/* @__PURE__ */ n("caption", {
+			className: [
+				"table",
+				i === "sm" ? "table--sm" : "",
+				a ?? ""
+			].filter(Boolean).join(" "),
+			...o,
+			children: [e && /* @__PURE__ */ n("caption", {
 				className: "visually-hidden",
 				children: e
 			}), t]

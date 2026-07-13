@@ -1,11 +1,18 @@
 import './tag.css';
 import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Tag/Tag.tsx
-function t({ variant: t = "default", children: n }) {
+var n = t(function({ variant: t = "default", className: n, children: r, ...i }, a) {
 	return /* @__PURE__ */ e("span", {
-		className: ["tag", `tag--${t}`].join(" "),
-		children: n
+		ref: a,
+		className: [
+			"tag",
+			`tag--${t}`,
+			n ?? ""
+		].filter(Boolean).join(" "),
+		...i,
+		children: r
 	});
-}
+});
 //#endregion
-export { t as Tag };
+export { n as Tag };

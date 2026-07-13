@@ -1,10 +1,12 @@
 import './Tag.css';
-type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2' | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
-interface TagProps {
+export type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2' | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
+export interface TagProps extends React.ComponentPropsWithoutRef<'span'> {
     /** Variante de color del tag. */
     variant?: TagVariant;
-    /** Contenido del tag. */
-    children: React.ReactNode;
 }
-export declare function Tag({ variant, children }: TagProps): import("react/jsx-runtime").JSX.Element;
-export {};
+/**
+ * Tag / badge. Extiende los atributos nativos de `<span>` y reenvía `{...rest}`
+ * (`data-*`, `aria-*`, `id`…) al elemento. `className` se concatena tras las
+ * clases propias.
+ */
+export declare const Tag: import("react").ForwardRefExoticComponent<TagProps & import("react").RefAttributes<HTMLSpanElement>>;

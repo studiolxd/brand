@@ -617,10 +617,12 @@ var D = /* @__PURE__ */ n.forwardRef(function(e, t) {
 });
 //#endregion
 //#region src/stories/molecules/Toast/Toaster.tsx
-function O({ position: n = "bottom-right" }) {
+function O({ position: n = "bottom-right", theme: r, containerAriaLabel: i }) {
 	return /* @__PURE__ */ t(D, {
 		closeButton: !0,
 		position: n,
+		theme: r,
+		containerAriaLabel: i,
 		gap: 8,
 		className: "toaster",
 		icons: { close: /* @__PURE__ */ t(e, {

@@ -3,10 +3,13 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Table.css';
 
-export interface TableProps {
-  /** Texto de <caption>. Obligatorio para accesibilidad — se oculta visualmente. */
-  caption: string;
-  children: ReactNode;
+export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
+  /**
+   * Texto de `<caption>` (se oculta visualmente). **Opcional**: sin `caption` no se
+   * renderiza el `<caption>` — el consumidor decide su estrategia de accessible-name
+   * (p. ej. `aria-label` vía rest).
+   */
+  caption?: string;
   /** Variante de densidad. Default: "md" */
   size?: 'sm' | 'md';
 }
@@ -37,16 +40,16 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
   children?: ReactNode;
 }
 
-function TableHead({ children }: { children: ReactNode }) {
-  return <thead>{children}</thead>;
+function TableHead({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
+  return <thead {...rest}>{children}</thead>;
 }
 
-function TableFoot({ children }: { children: ReactNode }) {
-  return <tfoot>{children}</tfoot>;
+function TableFoot({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
+  return <tfoot {...rest}>{children}</tfoot>;
 }
 
-function TableBody({ children }: { children: ReactNode }) {
-  return <tbody>{children}</tbody>;
+function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
+  return <tbody {...rest}>{children}</tbody>;
 }
 
 function TableHeader({
@@ -166,13 +169,13 @@ function TableCell({ children, className, ...rest }: TableCellProps) {
   );
 }
 
-export function Table({ caption, children, size = 'md' }: TableProps) {
-  const classes = ['table', size === 'sm' ? 'table--sm' : ''].filter(Boolean).join(' ');
+export function Table({ caption, children, size = 'md', className, ...rest }: TableProps) {
+  const classes = ['table', size === 'sm' ? 'table--sm' : '', className ?? ''].filter(Boolean).join(' ');
 
   return (
     <div className="table__wrapper">
-      <table className={classes}>
-        <caption className="visually-hidden">{caption}</caption>
+      <table className={classes} {...rest}>
+        {caption && <caption className="visually-hidden">{caption}</caption>}
         {children}
       </table>
     </div>

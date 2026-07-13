@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Table } from './Table';
 
 const meta: Meta<typeof Table> = {
@@ -12,6 +13,36 @@ const meta: Meta<typeof Table> = {
 
 export default meta;
 type Story = StoryObj<typeof Table>;
+
+/**
+ * Test: `data-*`/`aria-*` + `className` aterrizan en `<table>`, `data-*` en `<tbody>`
+ * (Head/Body/Footer), y sin `caption` no se renderiza `<caption>`.
+ */
+export const PropPassthrough: Story = {
+  name: 'Test — rest-spread + caption opcional',
+  render: () => (
+    <Table aria-label="Proyectos" data-slot="table" className="extra">
+      <Table.Body data-slot="tbody">
+        <Table.Row>
+          <Table.Cell>Uno</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  ),
+  play: async ({ canvasElement }) => {
+    const table = canvasElement.querySelector('table')!;
+    await expect(table).toHaveClass('table', 'extra');
+    await expect(table.className.trim().endsWith('extra')).toBe(true);
+    await expect(table).toHaveAttribute('data-slot', 'table');
+    await expect(table).toHaveAttribute('aria-label', 'Proyectos');
+    // sin caption → no se renderiza <caption>
+    await expect(canvasElement.querySelector('caption')).toBeNull();
+    // rest en la sección Body
+    await expect(canvasElement.querySelector('tbody')).toHaveAttribute('data-slot', 'tbody');
+    // sanity: el contenido sigue ahí
+    await expect(within(canvasElement).getByText('Uno')).toBeInTheDocument();
+  },
+};
 
 const PROYECTOS = [
   { nombre: 'Virtualización Rise Cofidis', cliente: 'Cofidis', fecha: '15/05/2026', estado: 'Activo' },

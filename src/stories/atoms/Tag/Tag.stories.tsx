@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Tag } from './Tag';
 
 const meta: Meta<typeof Tag> = {
@@ -26,6 +27,23 @@ const meta: Meta<typeof Tag> = {
 
 export default meta;
 type Story = StoryObj<typeof Tag>;
+
+/** Test: `className` del consumidor al final + `data-*`/`aria-*` passthrough. */
+export const PropPassthrough: Story = {
+  name: 'Test — className + data-* passthrough',
+  render: () => (
+    <Tag variant="primary" className="extra" data-slot="badge" aria-label="estado">
+      Activo
+    </Tag>
+  ),
+  play: async ({ canvasElement }) => {
+    const tag = within(canvasElement).getByText('Activo');
+    await expect(tag).toHaveClass('tag', 'tag--primary', 'extra');
+    await expect(tag.className.trim().endsWith('extra')).toBe(true);
+    await expect(tag).toHaveAttribute('data-slot', 'badge');
+    await expect(tag).toHaveAttribute('aria-label', 'estado');
+  },
+};
 
 export const Default: Story = {};
 

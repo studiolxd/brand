@@ -1,9 +1,12 @@
 import type { ReactNode } from 'react';
 import './Table.css';
-export interface TableProps {
-    /** Texto de <caption>. Obligatorio para accesibilidad — se oculta visualmente. */
-    caption: string;
-    children: ReactNode;
+export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
+    /**
+     * Texto de `<caption>` (se oculta visualmente). **Opcional**: sin `caption` no se
+     * renderiza el `<caption>` — el consumidor decide su estrategia de accessible-name
+     * (p. ej. `aria-label` vía rest).
+     */
+    caption?: string;
     /** Variante de densidad. Default: "md" */
     size?: 'sm' | 'md';
 }
@@ -30,19 +33,13 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
     children?: ReactNode;
 }
-declare function TableHead({ children }: {
-    children: ReactNode;
-}): import("react/jsx-runtime").JSX.Element;
-declare function TableFoot({ children }: {
-    children: ReactNode;
-}): import("react/jsx-runtime").JSX.Element;
-declare function TableBody({ children }: {
-    children: ReactNode;
-}): import("react/jsx-runtime").JSX.Element;
+declare function TableHead({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
+declare function TableFoot({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
+declare function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
 declare function TableRow({ onClick, interactive, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
 declare function TableCell({ children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
-export declare function Table({ caption, children, size }: TableProps): import("react/jsx-runtime").JSX.Element;
+export declare function Table({ caption, children, size, className, ...rest }: TableProps): import("react/jsx-runtime").JSX.Element;
 export declare namespace Table {
     var Head: typeof TableHead;
     var Footer: typeof TableFoot;

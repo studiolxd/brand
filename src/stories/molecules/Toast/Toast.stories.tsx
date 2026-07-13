@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { toast } from 'sonner';
+import { expect, waitFor } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Toaster } from './Toaster';
 
@@ -27,6 +28,25 @@ const meta: Meta<typeof Toaster> = {
 
 export default meta;
 type Story = StoryObj<typeof Toaster>;
+
+/**
+ * Test: `theme` y `containerAriaLabel` se reenvían al `<Toaster>` de sonner.
+ * sonner monta el contenedor en un portal (document.body), fuera del canvas.
+ */
+export const AriaAndTheme: Story = {
+  name: 'Test — theme + containerAriaLabel',
+  render: () => <Toaster theme="dark" containerAriaLabel="Notificaciones DS" />,
+  play: async () => {
+    // containerAriaLabel llega al contenedor de sonner (lo compone como
+    // `${containerAriaLabel} ${hotkey}` → comprobamos por prefijo). El `theme` se
+    // reenvía por la misma línea JSX de passthrough.
+    await waitFor(async () => {
+      await expect(
+        document.body.querySelector('[aria-label^="Notificaciones DS"]'),
+      ).not.toBeNull();
+    });
+  },
+};
 
 export const Default: Story = {
   render: () => (
