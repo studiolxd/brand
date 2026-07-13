@@ -2,46 +2,101 @@
 import './select.css';
 import { Icon as e } from "./icon.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import * as r from "@radix-ui/react-select";
+import { forwardRef as r } from "react";
+import * as i from "@radix-ui/react-select";
 //#region src/stories/atoms/Select/Select.tsx
-function i({ options: i, value: a, defaultValue: o, placeholder: s = "Seleccionar…", disabled: c, readOnly: l, dark: u, size: d = "md", onValueChange: f, id: p, "aria-label": m }) {
-	let h = ["select", d === "md" ? "" : `select--${d}`].filter(Boolean).join(" "), g = [
-		"select__content",
-		d === "md" ? "" : `select__content--${d}`,
-		u ? "select__content--dark" : ""
+var a = i.Root, o = i.Value, s = i.Group, c = r(function({ size: r = "md", className: a, children: o, ...s }, c) {
+	let l = [
+		"select",
+		r === "md" ? "" : `select--${r}`,
+		a ?? ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ n(r.Root, {
-		value: a,
-		defaultValue: o,
-		disabled: c,
-		open: l ? !1 : void 0,
-		onOpenChange: l ? () => {} : void 0,
-		onValueChange: l ? void 0 : f,
-		children: [/* @__PURE__ */ n(r.Trigger, {
-			className: h,
-			id: p,
-			"aria-label": m ?? s,
-			"aria-readonly": l || void 0,
-			children: [/* @__PURE__ */ t(r.Value, { placeholder: s }), /* @__PURE__ */ t(r.Icon, {
-				asChild: !0,
-				children: /* @__PURE__ */ t(e, {
-					name: "chevron",
-					className: "select__icon",
-					size: d === "sm" ? "xs" : d === "lg" ? "md" : "sm"
-				})
-			})]
-		}), /* @__PURE__ */ t(r.Portal, { children: /* @__PURE__ */ t(r.Content, {
-			className: g,
-			position: "popper",
-			sideOffset: -1,
-			children: /* @__PURE__ */ t(r.Viewport, { children: i.map(({ value: e, label: n, "aria-label": i }) => /* @__PURE__ */ t(r.Item, {
+	return /* @__PURE__ */ n(i.Trigger, {
+		ref: c,
+		className: l,
+		...s,
+		children: [o, /* @__PURE__ */ t(i.Icon, {
+			asChild: !0,
+			children: /* @__PURE__ */ t(e, {
+				name: "chevron",
+				className: "select__icon",
+				size: r === "sm" ? "xs" : r === "lg" ? "md" : "sm"
+			})
+		})]
+	});
+}), l = r(function({ size: e = "md", dark: n = !1, className: r, children: a, position: o = "popper", sideOffset: s = -1, ...c }, l) {
+	let u = [
+		"select__content",
+		e === "md" ? "" : `select__content--${e}`,
+		n ? "select__content--dark" : "",
+		r ?? ""
+	].filter(Boolean).join(" ");
+	return /* @__PURE__ */ t(i.Portal, { children: /* @__PURE__ */ t(i.Content, {
+		ref: l,
+		className: u,
+		position: o,
+		sideOffset: s,
+		...c,
+		children: /* @__PURE__ */ t(i.Viewport, { children: a })
+	}) });
+}), u = r(function({ className: e, children: n, ...r }, a) {
+	let o = ["select__item", e ?? ""].filter(Boolean).join(" ");
+	return /* @__PURE__ */ t(i.Item, {
+		ref: a,
+		className: o,
+		...r,
+		children: /* @__PURE__ */ t(i.ItemText, { children: n })
+	});
+}), d = r(function({ className: e, children: n, ...r }, a) {
+	let o = ["select__label", e ?? ""].filter(Boolean).join(" ");
+	return /* @__PURE__ */ t(i.Label, {
+		ref: a,
+		className: o,
+		...r,
+		children: n
+	});
+}), f = r(function({ className: e, ...n }, r) {
+	let a = ["select__separator", e ?? ""].filter(Boolean).join(" ");
+	return /* @__PURE__ */ t(i.Separator, {
+		ref: r,
+		className: a,
+		...n
+	});
+});
+function p({ options: e, value: r, defaultValue: i, placeholder: s = "Seleccionar…", disabled: d, readOnly: f, dark: p, size: m = "md", onValueChange: h, id: g, "aria-label": _ }) {
+	return /* @__PURE__ */ n(a, {
+		value: r,
+		defaultValue: i,
+		disabled: d,
+		open: f ? !1 : void 0,
+		onOpenChange: f ? () => {} : void 0,
+		onValueChange: f ? void 0 : h,
+		children: [/* @__PURE__ */ t(c, {
+			size: m,
+			id: g,
+			"aria-label": _ ?? s,
+			"aria-readonly": f || void 0,
+			children: /* @__PURE__ */ t(o, { placeholder: s })
+		}), /* @__PURE__ */ t(l, {
+			size: m,
+			dark: p,
+			children: e.map(({ value: e, label: n, "aria-label": r }) => /* @__PURE__ */ t(u, {
 				value: e,
-				className: "select__item",
-				"aria-label": i,
-				children: /* @__PURE__ */ t(r.ItemText, { children: n })
-			}, e)) })
-		}) })]
+				"aria-label": r,
+				children: n
+			}, e))
+		})]
 	});
 }
+var m = Object.assign(p, {
+	Root: a,
+	Trigger: c,
+	Value: o,
+	Content: l,
+	Group: s,
+	Label: d,
+	Item: u,
+	Separator: f
+});
 //#endregion
-export { i as Select };
+export { m as Select };

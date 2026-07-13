@@ -50,6 +50,10 @@ export type { MultiSelectOption, MultiSelectProps } from './stories/atoms/MultiS
 export { Radio } from './stories/atoms/Radio/Radio';
 export type { RadioProps } from './stories/atoms/Radio/Radio';
 export { Select } from './stories/atoms/Select/Select';
+export type {
+  SelectProps, SelectOption, SelectTriggerProps, SelectContentProps,
+  SelectItemProps, SelectLabelProps, SelectSeparatorProps,
+} from './stories/atoms/Select/Select';
 export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';
 export type { TimeSelectProps, TimeValue } from './stories/atoms/TimeSelect/TimeSelect';
 export { SkipLink } from './stories/atoms/SkipLink/SkipLink';

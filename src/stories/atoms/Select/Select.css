@@ -133,10 +133,37 @@
   padding-block: var(--select-lg-item-padding-block);
 }
 
+/* ─── Group label + separator (API compuesta) ────────────────────────────── */
+.select__label {
+  padding-block: var(--select-item-padding-block);
+  padding-inline: var(--select-padding-inline);
+  font-family: var(--label-font-family);
+  font-size: var(--label-font-size);
+  font-weight: var(--label-font-weight);
+  line-height: var(--label-line-height);
+  color: var(--label-color);
+  letter-spacing: var(--label-letter-spacing);
+  text-transform: var(--label-text-transform);
+}
+
+.select__separator {
+  height: var(--select-border-width);
+  background-color: var(--select-content-border-color);
+  margin-block: var(--select-item-padding-block);
+}
+
 /* ─── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
 .select__content.select__content--dark {
   background-color: var(--select-dark-content-bg);
   border-color: var(--select-dark-content-border-color);
+}
+
+.select__content.select__content--dark .select__label {
+  color: var(--select-dark-color);
+}
+
+.select__content.select__content--dark .select__separator {
+  background-color: var(--select-dark-content-border-color);
 }
 
 .select__content.select__content--dark .select__item {
