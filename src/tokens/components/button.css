@@ -90,6 +90,9 @@
   --button-ghost-hover-bg: var(--color-grey-lightest); /** Hover background — fondo sutil */
   --button-ghost-active-bg: var(--color-grey-light); /** Active background */
   --button-font-weight: var(--font-weight-default); /** Font weight */
+  --button-icon-only-padding: var(--button-padding-block); /** Inline padding — icon-only (cuadrado, usa el padding vertical), md */
+  --button-icon-only-sm-padding: var(--button-sm-padding-block); /** Inline padding — icon-only, sm */
+  --button-icon-only-lg-padding: var(--button-lg-padding-block); /** Inline padding — icon-only, lg */
   --button-primary-border-radius: var(--button-border-radius); /** Border radius */
   --button-primary-border-width: var(--button-border-width); /** Border width */
   --button-primary-font-family: var(--button-font-family); /** Font family */

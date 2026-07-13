@@ -30,6 +30,9 @@
     "lg-padding-inline":   { "$value": "{spacing.8}",            "$type": "dimension", "$description": "Inline padding — lg" },
     "lg-font-size":        { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Font size — lg" },
     "block-width":         { "$value": "100%",                   "$type": "string",    "$description": "Width when block modifier is applied" },
+    "icon-only-padding":    { "$value": "{button.padding-block}",    "$type": "dimension", "$description": "Inline padding — icon-only (cuadrado, usa el padding vertical), md" },
+    "icon-only-sm-padding": { "$value": "{button.sm-padding-block}", "$type": "dimension", "$description": "Inline padding — icon-only, sm" },
+    "icon-only-lg-padding": { "$value": "{button.lg-padding-block}", "$type": "dimension", "$description": "Inline padding — icon-only, lg" },
     "primary": {
       "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
       "border-width":       { "$value": "{button.border-width}",       "$type": "dimension", "$description": "Border width" },

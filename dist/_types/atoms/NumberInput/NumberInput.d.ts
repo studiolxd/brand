@@ -5,6 +5,7 @@ export interface NumberInputProps {
     min?: number;
     max?: number;
     step?: number;
+    decimal?: boolean;
     disabled?: boolean;
     readOnly?: boolean;
     size?: 'sm' | 'md' | 'lg';
@@ -17,4 +18,4 @@ export interface NumberInputProps {
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function NumberInput({ value, defaultValue, min, max, step, disabled, readOnly, size, error, id, name, describedBy, ariaLabel, onChange, onBlur, onFocus, }: NumberInputProps): import("react/jsx-runtime").JSX.Element;
+export declare function NumberInput({ value, defaultValue, min, max, step, decimal, disabled, readOnly, size, error, id, name, describedBy, ariaLabel, onChange, onBlur, onFocus, }: NumberInputProps): import("react/jsx-runtime").JSX.Element;

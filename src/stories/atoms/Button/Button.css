@@ -249,3 +249,22 @@
 .button--block {
   width: var(--button-block-width);
 }
+
+/* Icon-only — botón cuadrado.
+   Debe ir DESPUÉS de las reglas de tamaño: `.button.button--icon-only.button--sm`
+   y `.button.button--sm:not(.button--text)` tienen la misma especificidad, así que
+   gana la última del fichero. `aspect-ratio: 1` fuerza la forma cuadrada aunque el
+   padding-block heredado de la variante difiera del inline. */
+.button.button--icon-only {
+  padding-inline: var(--button-icon-only-padding);
+  aspect-ratio: 1;
+  justify-content: center;
+}
+
+.button.button--icon-only.button--sm {
+  padding-inline: var(--button-icon-only-sm-padding);
+}
+
+.button.button--icon-only.button--lg {
+  padding-inline: var(--button-icon-only-lg-padding);
+}

@@ -9,6 +9,7 @@ export interface NumberInputFieldProps {
     min?: number;
     max?: number;
     step?: number;
+    decimal?: boolean;
     disabled?: boolean;
     readOnly?: boolean;
     error?: boolean;
@@ -19,4 +20,4 @@ export interface NumberInputFieldProps {
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function NumberInputField({ id, label, labelHidden, name, value, defaultValue, min, max, step, disabled, readOnly, size, error, errorMessage, helperText, onChange, onBlur, onFocus, }: NumberInputFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function NumberInputField({ id, label, labelHidden, name, value, defaultValue, min, max, step, decimal, disabled, readOnly, size, error, errorMessage, helperText, onChange, onBlur, onFocus, }: NumberInputFieldProps): import("react/jsx-runtime").JSX.Element;

@@ -1,5 +1,9 @@
+import type React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Slot } from '@radix-ui/react-slot';
+import { expect, userEvent, within, fn } from 'storybook/test';
 import { Button } from './Button';
+import { Icon } from '../Icon/Icon';
 const heroDark  = 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1280&q=80';
 const heroLight = 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?auto=format&fit=crop&w=1280&q=80';
 
@@ -27,6 +31,10 @@ const meta: Meta<typeof Button> = {
     block: {
       control: { type: 'boolean' },
       description: 'Ocupa todo el ancho del contenedor.',
+    },
+    iconOnly: {
+      control: { type: 'boolean' },
+      description: 'Renderiza un botón cuadrado de solo icono. Componible con variant y size. Requiere aria-label (o texto visually-hidden) para accesibilidad.',
     },
     disabled: {
       control: { type: 'boolean' },
@@ -216,4 +224,109 @@ export const AsChild: Story = {
     </Button>
   ),
   args: { variant: 'primary' },
+};
+
+/**
+ * Botón cuadrado de solo icono. Componible con cualquier `variant` y `size`.
+ * A11y: siempre necesita `aria-label` (o texto con `VisuallyHidden`), porque no
+ * hay texto visible que nombre la acción.
+ */
+export const IconOnly: Story = {
+  name: 'Icon only (md)',
+  render: (args) => (
+    <Button {...args} iconOnly aria-label="Cerrar">
+      <Icon name="close" />
+    </Button>
+  ),
+  args: { variant: 'primary' },
+};
+
+export const IconOnlySmall: Story = {
+  name: 'Icon only — small',
+  render: (args) => (
+    <Button {...args} iconOnly size="sm" aria-label="Cerrar">
+      <Icon name="close" size="sm" />
+    </Button>
+  ),
+  args: { variant: 'primary' },
+};
+
+export const IconOnlyGhost: Story = {
+  name: 'Icon only — ghost',
+  render: (args) => (
+    <Button {...args} iconOnly variant="ghost" aria-label="Buscar">
+      <Icon name="search" />
+    </Button>
+  ),
+};
+
+/**
+ * Test: `className` del consumidor se añade DESPUÉS de las clases propias, y los
+ * atributos `data-*` / `aria-*` no declarados llegan al DOM vía `{...rest}`.
+ */
+export const PropPassthrough: Story = {
+  name: 'Test — className + data-* passthrough',
+  render: () => (
+    <Button
+      className="mi-clase"
+      data-slot="button"
+      data-variant="secondary"
+      aria-label="Guardar"
+    >
+      Guardar
+    </Button>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const btn = canvas.getByRole('button', { name: 'Guardar' });
+    await expect(btn).toHaveClass('button', 'button--primary', 'mi-clase');
+    // el className del consumidor va al final (añade, no sustituye)
+    await expect(btn.className.trim().endsWith('mi-clase')).toBe(true);
+    await expect(btn).toHaveAttribute('data-slot', 'button');
+    await expect(btn).toHaveAttribute('data-variant', 'secondary');
+  },
+};
+
+/** Test: atributos de formulario (`type`, `form`, `name`, `value`) aterrizan en el DOM. */
+export const FormAttributes: Story = {
+  name: 'Test — atributos de formulario',
+  render: () => (
+    <Button type="submit" form="f1" name="intent" value="save">
+      Enviar
+    </Button>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const btn = canvas.getByRole('button', { name: 'Enviar' });
+    await expect(btn).toHaveAttribute('type', 'submit');
+    await expect(btn).toHaveAttribute('form', 'f1');
+    await expect(btn).toHaveAttribute('name', 'intent');
+    await expect(btn).toHaveAttribute('value', 'save');
+  },
+};
+
+/**
+ * Test: composición Radix `<Dialog.Close asChild><Button/></Dialog.Close>`.
+ * El `Slot` exterior inyecta `onClick` y `data-*` sobre el Button; con el spread
+ * de `{...rest}` esas props llegan al elemento y el click se dispara.
+ */
+export const SlotComposition: Story = {
+  name: 'Test — composición Slot (Dialog.Close asChild)',
+  render: (args) => (
+    <Slot
+      onClick={args.onClick as React.MouseEventHandler<HTMLElement>}
+      data-state="open"
+    >
+      <Button>Cerrar</Button>
+    </Slot>
+  ),
+  args: { onClick: fn() },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const btn = canvas.getByRole('button', { name: 'Cerrar' });
+    // props inyectadas por el Slot exterior (como hace Dialog.Close asChild) llegan al DOM
+    await expect(btn).toHaveAttribute('data-state', 'open');
+    await userEvent.click(btn);
+    await expect(args.onClick).toHaveBeenCalled();
+  },
 };

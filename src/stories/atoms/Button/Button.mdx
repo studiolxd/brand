@@ -55,6 +55,22 @@ Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica
 
 <Canvas of={ButtonStories.Disabled} />
 
+## Solo icono
+
+La prop `iconOnly` renderiza un botón cuadrado (`aspect-ratio: 1`) pensado para acciones de solo icono: cerrar un modal, abrir una barra lateral, acciones de tabla. Es componible con cualquier `variant` y con los tres tamaños (`sm`, `md`, `lg`).
+
+<Canvas of={ButtonStories.IconOnly} />
+
+<Canvas of={ButtonStories.IconOnlyGhost} />
+
+> **Accesibilidad:** un botón de solo icono no tiene texto visible que lo nombre, así que **siempre** necesita un `aria-label` (o un texto con el átomo `VisuallyHidden`). Sin él, el botón es inaccesible para lectores de pantalla.
+
+```tsx
+<Button iconOnly variant="ghost" size="sm" aria-label="Cerrar">
+  <Icon name="close" />
+</Button>
+```
+
 ---
 
 ## Como enlace
@@ -85,6 +101,24 @@ import { Button } from '@studiolxd/brand';
 En Storybook se muestra con un `<a>` como stand-in del componente `Link` del router:
 
 <Canvas of={ButtonStories.AsChild} />
+
+---
+
+## Composición y atributos HTML
+
+`Button` extiende los atributos nativos de `<button>` y reenvía cualquier prop no declarada (`data-*`, `aria-*`, `id`, atributos de formulario como `form`, `name`, `value`…) al elemento renderizado, en las tres ramas (`<button>`, `<a>` y `asChild`). Esto permite:
+
+- **Componer con Radix** (`<Dialog.Close asChild><Button/></Dialog.Close>`): las props que el `Slot` inyecta (`onClick`, `aria-*`, `data-state`…) llegan al Button y se aplican al elemento.
+- **Añadir clases** con `className`: se concatena **después** de las clases propias del componente, de modo que el consumidor añade estilos sin sustituir los del design system.
+
+```tsx
+<Button data-slot="button" data-variant="secondary" className="mi-clase">
+  Guardar
+</Button>
+// → <button class="button button--primary mi-clase" data-slot="button" data-variant="secondary">
+```
+
+> **Nota:** el default de `type` sigue siendo `"button"`. Dentro de un `<form>`, si quieres enviarlo pasa `type="submit"` explícitamente (el default nativo de HTML sería `submit`, pero aquí no lo es).
 
 ---
 
