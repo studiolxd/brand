@@ -106,6 +106,7 @@ export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType } from 
 export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
 export type { ContextMenuItem, ContextMenuButtonItem, ContextMenuLinkItem, ContextMenuSeparator, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
 export { Card } from './stories/molecules/Card/Card';
+export type { CardProps, CardColor } from './stories/molecules/Card/Card';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export { CardSplit } from './stories/molecules/CardSplit/CardSplit';
 export { CardSquare } from './stories/molecules/CardSquare/CardSquare';
