@@ -1,24 +1,21 @@
 'use client';
 import './switcher.css';
 import { jsx as e } from "react/jsx-runtime";
-import * as t from "@radix-ui/react-switch";
+import { forwardRef as t } from "react";
+import * as n from "@radix-ui/react-switch";
 //#region src/stories/atoms/Switcher/Switcher.tsx
-function n({ checked: n, defaultChecked: r, disabled: i, size: a = "md", id: o, name: s, value: c, required: l, "aria-label": u, "aria-labelledby": d, onCheckedChange: f }) {
-	let p = ["switcher", a === "md" ? "" : `switcher--${a}`].filter(Boolean).join(" ");
-	return /* @__PURE__ */ e(t.Root, {
-		className: p,
-		checked: n,
-		defaultChecked: r,
-		disabled: i,
-		id: o,
-		name: s,
-		value: c,
-		required: l,
-		"aria-label": u,
-		"aria-labelledby": d,
-		onCheckedChange: f,
-		children: /* @__PURE__ */ e(t.Thumb, { className: "switcher__thumb" })
+var r = t(function({ size: t = "md", className: r, children: i, ...a }, o) {
+	let s = [
+		"switcher",
+		t === "md" ? "" : `switcher--${t}`,
+		r ?? ""
+	].filter(Boolean).join(" ");
+	return /* @__PURE__ */ e(n.Root, {
+		ref: o,
+		className: s,
+		...a,
+		children: /* @__PURE__ */ e(n.Thumb, { className: "switcher__thumb" })
 	});
-}
+});
 //#endregion
-export { n as Switcher };
+export { r as Switcher };

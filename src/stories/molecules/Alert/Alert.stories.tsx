@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Alert } from './Alert';
 
 const meta = {
@@ -20,6 +21,35 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+/**
+ * Test: modo composición (`<Alert.Title>`/`<Alert.Description>` + children arbitrarios),
+ * override de `role` y passthrough de `data-*`/`className`.
+ */
+export const Composition: Story = {
+  name: 'Test — composición + rest-spread',
+  render: () => (
+    <Alert variant="success" role="status" data-slot="alert" className="extra">
+      <Alert.Title data-slot="title">Guardado</Alert.Title>
+      <Alert.Description>
+        Los cambios se guardaron <strong>correctamente</strong>.
+      </Alert.Description>
+    </Alert>
+  ),
+  play: async ({ canvasElement }) => {
+    const root = canvasElement.querySelector('.alert')!;
+    await expect(root).toHaveClass('alert', 'alert--success', 'extra');
+    await expect(root.className.trim().endsWith('extra')).toBe(true);
+    await expect(root).toHaveAttribute('role', 'status'); // override del default 'alert'
+    await expect(root).toHaveAttribute('data-slot', 'alert');
+    // subpartes con sus clases BEM
+    const title = within(canvasElement).getByText('Guardado');
+    await expect(title.tagName).toBe('P');
+    await expect(title).toHaveClass('alert__title');
+    await expect(title).toHaveAttribute('data-slot', 'title');
+    await expect(canvasElement.querySelector('.alert__description')).toBeInTheDocument();
+  },
+};
 
 export const Default: Story = {};
 

@@ -1,16 +1,12 @@
+import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import './Checkbox.css';
-interface CheckboxProps {
-    checked?: boolean | 'indeterminate';
-    defaultChecked?: boolean | 'indeterminate';
-    disabled?: boolean;
+export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof RadixCheckbox.Root> {
     size?: 'sm' | 'md' | 'lg';
-    id?: string;
-    name?: string;
-    value?: string;
-    required?: boolean;
-    'aria-label'?: string;
-    'aria-labelledby'?: string;
-    onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
-export declare function Checkbox({ checked, defaultChecked, disabled, size, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onCheckedChange, }: CheckboxProps): import("react/jsx-runtime").JSX.Element;
-export {};
+/**
+ * Checkbox (Radix). `ref` y `{...rest}` se reenvían al **Radix Root** — el elemento
+ * interactivo con `role="checkbox"` — para soportar react-hook-form (`Controller`) y
+ * la inyección de props del consumidor (`aria-*`, `data-*`, `id`, `name`, `checked`,
+ * `onCheckedChange`…). `className` se concatena tras las clases propias.
+ */
+export declare const Checkbox: import("react").ForwardRefExoticComponent<CheckboxProps & import("react").RefAttributes<HTMLButtonElement>>;

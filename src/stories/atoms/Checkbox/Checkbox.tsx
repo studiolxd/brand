@@ -1,50 +1,27 @@
+import { forwardRef } from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import './Checkbox.css';
 
-interface CheckboxProps {
-  checked?: boolean | 'indeterminate';
-  defaultChecked?: boolean | 'indeterminate';
-  disabled?: boolean;
+export interface CheckboxProps
+  extends React.ComponentPropsWithoutRef<typeof RadixCheckbox.Root> {
   size?: 'sm' | 'md' | 'lg';
-  id?: string;
-  name?: string;
-  value?: string;
-  required?: boolean;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
 
-export function Checkbox({
-  checked,
-  defaultChecked,
-  disabled,
-  size = 'md',
-  id,
-  name,
-  value,
-  required,
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledby,
-  onCheckedChange,
-}: CheckboxProps) {
-  const className = ['checkbox', size !== 'md' ? `checkbox--${size}` : ''].filter(Boolean).join(' ');
+/**
+ * Checkbox (Radix). `ref` y `{...rest}` se reenvían al **Radix Root** — el elemento
+ * interactivo con `role="checkbox"` — para soportar react-hook-form (`Controller`) y
+ * la inyección de props del consumidor (`aria-*`, `data-*`, `id`, `name`, `checked`,
+ * `onCheckedChange`…). `className` se concatena tras las clases propias.
+ */
+export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(function Checkbox(
+  { size = 'md', className, children: _children, ...rest }, ref) {
+  const classes = ['checkbox', size !== 'md' ? `checkbox--${size}` : '', className ?? '']
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <RadixCheckbox.Root
-      className={className}
-      checked={checked}
-      defaultChecked={defaultChecked}
-      disabled={disabled}
-      id={id}
-      name={name}
-      value={value}
-      required={required}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledby}
-      onCheckedChange={onCheckedChange}
-    >
+    <RadixCheckbox.Root ref={ref} className={classes} {...rest}>
       <RadixCheckbox.Indicator className="checkbox__indicator" />
     </RadixCheckbox.Root>
   );
-}
+});

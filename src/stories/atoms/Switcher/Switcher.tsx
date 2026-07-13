@@ -1,50 +1,27 @@
+import { forwardRef } from 'react';
 import * as RadixSwitch from '@radix-ui/react-switch';
 import './Switcher.css';
 
-export interface SwitcherProps {
-  checked?: boolean;
-  defaultChecked?: boolean;
-  disabled?: boolean;
+export interface SwitcherProps
+  extends React.ComponentPropsWithoutRef<typeof RadixSwitch.Root> {
   size?: 'sm' | 'md' | 'lg';
-  id?: string;
-  name?: string;
-  value?: string;
-  required?: boolean;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  onCheckedChange?: (checked: boolean) => void;
 }
 
-export function Switcher({
-  checked,
-  defaultChecked,
-  disabled,
-  size = 'md',
-  id,
-  name,
-  value,
-  required,
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledby,
-  onCheckedChange,
-}: SwitcherProps) {
-  const className = ['switcher', size !== 'md' ? `switcher--${size}` : ''].filter(Boolean).join(' ');
+/**
+ * Switcher (Radix Switch). `ref` y `{...rest}` se reenvían al **Radix Root** — el
+ * elemento interactivo con `role="switch"` — para soportar react-hook-form
+ * (`Controller`) y la inyección de props del consumidor (`aria-*`, `data-*`, `id`,
+ * `name`, `checked`, `onCheckedChange`…). `className` se concatena tras las propias.
+ */
+export const Switcher = forwardRef<HTMLButtonElement, SwitcherProps>(function Switcher(
+  { size = 'md', className, children: _children, ...rest }, ref) {
+  const classes = ['switcher', size !== 'md' ? `switcher--${size}` : '', className ?? '']
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <RadixSwitch.Root
-      className={className}
-      checked={checked}
-      defaultChecked={defaultChecked}
-      disabled={disabled}
-      id={id}
-      name={name}
-      value={value}
-      required={required}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledby}
-      onCheckedChange={onCheckedChange}
-    >
+    <RadixSwitch.Root ref={ref} className={classes} {...rest}>
       <RadixSwitch.Thumb className="switcher__thumb" />
     </RadixSwitch.Root>
   );
-}
+});

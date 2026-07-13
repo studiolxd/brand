@@ -15,6 +15,7 @@ export { Button } from './stories/atoms/Button/Button';
 export type { ButtonProps } from './stories/atoms/Button/Button';
 export { Carousel } from './stories/atoms/Carousel/Carousel';
 export { Checkbox } from './stories/atoms/Checkbox/Checkbox';
+export type { CheckboxProps } from './stories/atoms/Checkbox/Checkbox';
 export { Icon } from './stories/atoms/Icon/Icon';
 export type { IconName, IconProps } from './stories/atoms/Icon/Icon';
 export { DotsButton } from './stories/atoms/DotsButton/DotsButton';
@@ -74,7 +75,7 @@ export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
 export { Alert } from './stories/molecules/Alert/Alert';
-export type { AlertProps } from './stories/molecules/Alert/Alert';
+export type { AlertProps, AlertTitleProps, AlertDescriptionProps } from './stories/molecules/Alert/Alert';
 export { AsyncMultiSelectField } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
 export type { AsyncMultiSelectFieldProps } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
 export { AsyncSelectField } from './stories/molecules/AsyncSelectField/AsyncSelectField';

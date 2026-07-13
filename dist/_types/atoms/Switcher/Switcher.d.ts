@@ -1,15 +1,12 @@
+import * as RadixSwitch from '@radix-ui/react-switch';
 import './Switcher.css';
-export interface SwitcherProps {
-    checked?: boolean;
-    defaultChecked?: boolean;
-    disabled?: boolean;
+export interface SwitcherProps extends React.ComponentPropsWithoutRef<typeof RadixSwitch.Root> {
     size?: 'sm' | 'md' | 'lg';
-    id?: string;
-    name?: string;
-    value?: string;
-    required?: boolean;
-    'aria-label'?: string;
-    'aria-labelledby'?: string;
-    onCheckedChange?: (checked: boolean) => void;
 }
-export declare function Switcher({ checked, defaultChecked, disabled, size, id, name, value, required, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledby, onCheckedChange, }: SwitcherProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Switcher (Radix Switch). `ref` y `{...rest}` se reenvían al **Radix Root** — el
+ * elemento interactivo con `role="switch"` — para soportar react-hook-form
+ * (`Controller`) y la inyección de props del consumidor (`aria-*`, `data-*`, `id`,
+ * `name`, `checked`, `onCheckedChange`…). `className` se concatena tras las propias.
+ */
+export declare const Switcher: import("react").ForwardRefExoticComponent<SwitcherProps & import("react").RefAttributes<HTMLButtonElement>>;
