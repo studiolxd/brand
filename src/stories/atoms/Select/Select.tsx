@@ -1,3 +1,8 @@
+/* eslint-disable react-refresh/only-export-components --
+   Partes re-exportadas de Radix (`SelectRoot`/`Value`/`Group`) + namespace
+   compuesto (`Object.assign`): fast-refresh no las reconoce como componentes. El
+   patrón es intencional (DX cliente + RSC-safe) y fast-refresh no aplica a source
+   de librería. */
 import { forwardRef } from 'react';
 import * as RadixSelect from '@radix-ui/react-select';
 import { Icon } from '../Icon/Icon';
@@ -33,13 +38,13 @@ export interface SelectProps {
  * ───────────────────────────────────────────────────────────────────────────── */
 
 /** Raíz del Select (Radix Root re-exportado). */
-const SelectRoot = RadixSelect.Root;
+export const SelectRoot = RadixSelect.Root;
 
 /** Valor/placeholder del trigger (Radix Value re-exportado). */
-const SelectValue = RadixSelect.Value;
+export const SelectValue = RadixSelect.Value;
 
 /** Agrupa opciones (Radix Group, no visual). */
-const SelectGroup = RadixSelect.Group;
+export const SelectGroup = RadixSelect.Group;
 
 export interface SelectTriggerProps
   extends React.ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {
@@ -47,7 +52,7 @@ export interface SelectTriggerProps
 }
 
 /** Trigger del Select: botón `.select` con el chevron del DS. Los children son el `Select.Value`. */
-const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(function SelectTrigger(
+export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(function SelectTrigger(
   { size = 'md', className, children, ...rest }, ref) {
   const classes = ['select', size !== 'md' ? `select--${size}` : '', className ?? '']
     .filter(Boolean).join(' ');
@@ -72,7 +77,7 @@ export interface SelectContentProps
 }
 
 /** Dropdown del Select: Portal → Content (`.select__content`) → Viewport. `position`/`sideOffset` del DS. */
-const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function SelectContent(
+export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function SelectContent(
   { size = 'md', dark = false, className, children, position = 'popper', sideOffset = -1, ...rest }, ref) {
   const classes = [
     'select__content',
@@ -89,11 +94,10 @@ const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function Se
   );
 });
 
-export interface SelectItemProps
-  extends React.ComponentPropsWithoutRef<typeof RadixSelect.Item> {}
+export type SelectItemProps = React.ComponentPropsWithoutRef<typeof RadixSelect.Item>;
 
 /** Opción del Select (`.select__item`). Los children (texto o JSX) van en `ItemText`. */
-const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(function SelectItem(
+export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(function SelectItem(
   { className, children, ...rest }, ref) {
   const classes = ['select__item', className ?? ''].filter(Boolean).join(' ');
   return (
@@ -103,11 +107,10 @@ const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(function SelectIt
   );
 });
 
-export interface SelectLabelProps
-  extends React.ComponentPropsWithoutRef<typeof RadixSelect.Label> {}
+export type SelectLabelProps = React.ComponentPropsWithoutRef<typeof RadixSelect.Label>;
 
 /** Etiqueta de grupo (`.select__label`, tipografía del label del DS). */
-const SelectLabel = forwardRef<HTMLDivElement, SelectLabelProps>(function SelectLabel(
+export const SelectLabel = forwardRef<HTMLDivElement, SelectLabelProps>(function SelectLabel(
   { className, children, ...rest }, ref) {
   const classes = ['select__label', className ?? ''].filter(Boolean).join(' ');
   return (
@@ -117,11 +120,10 @@ const SelectLabel = forwardRef<HTMLDivElement, SelectLabelProps>(function Select
   );
 });
 
-export interface SelectSeparatorProps
-  extends React.ComponentPropsWithoutRef<typeof RadixSelect.Separator> {}
+export type SelectSeparatorProps = React.ComponentPropsWithoutRef<typeof RadixSelect.Separator>;
 
 /** Separador entre grupos (`.select__separator`). */
-const SelectSeparator = forwardRef<HTMLDivElement, SelectSeparatorProps>(function SelectSeparator(
+export const SelectSeparator = forwardRef<HTMLDivElement, SelectSeparatorProps>(function SelectSeparator(
   { className, ...rest }, ref) {
   const classes = ['select__separator', className ?? ''].filter(Boolean).join(' ');
   return <RadixSelect.Separator ref={ref} className={classes} {...rest} />;
@@ -177,6 +179,10 @@ function SelectClosed({
  *
  * Ambas comparten el mismo motor Radix y las mismas clases: la cerrada está
  * implementada sobre las partes.
+ *
+ * Las partes están disponibles también como **named exports** (`SelectTrigger`,
+ * `SelectContent`, `SelectItem`…): en **Server Components (RSC)** usa los named
+ * exports — el namespace (`Select.Trigger`) requiere contexto cliente.
  */
 export const Select = Object.assign(SelectClosed, {
   Root: SelectRoot,

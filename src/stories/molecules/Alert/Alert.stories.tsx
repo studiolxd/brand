@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { Alert } from './Alert';
+import { Alert, AlertTitle, AlertDescription } from './Alert';
 
 const meta = {
   title: 'Moléculas/Alert',
@@ -21,6 +21,28 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+/**
+ * Test: las subpartes están disponibles como **named exports** (RSC-safe) y son
+ * el mismo componente que el namespace (`Alert.Title === AlertTitle`).
+ */
+export const NamedExports: Story = {
+  name: 'Test — named exports (RSC-safe)',
+  render: () => (
+    <Alert variant="success">
+      <AlertTitle>Título</AlertTitle>
+      <AlertDescription>Descripción</AlertDescription>
+    </Alert>
+  ),
+  play: async ({ canvasElement }) => {
+    // el namespace sigue exponiendo las subpartes (contexto cliente)
+    await expect(Alert.Title).toBeDefined();
+    await expect(Alert.Description).toBeDefined();
+    // los named exports (usados en el render) producen sus clases
+    await expect(canvasElement.querySelector('.alert__title')).toHaveTextContent('Título');
+    await expect(canvasElement.querySelector('.alert__description')).toHaveTextContent('Descripción');
+  },
+};
 
 /**
  * Test: modo composición (`<Alert.Title>`/`<Alert.Description>` + children arbitrarios),

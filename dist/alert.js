@@ -65,4 +65,4 @@ var o = i(function({ className: e, children: t, ...r }, i) {
 	Description: s
 });
 //#endregion
-export { l as Alert };
+export { l as Alert, s as AlertDescription, o as AlertTitle };

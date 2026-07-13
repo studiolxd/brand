@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
-import { Select } from './Select';
+import { Select, SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem } from './Select';
 
 const options = [
   { value: 'es', label: 'Español' },
@@ -34,6 +34,33 @@ export default meta;
 type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {};
+
+/**
+ * Test: las partes están disponibles como **named exports** (RSC-safe) e idénticas
+ * a las del namespace (`Select.Trigger === SelectTrigger`), renderizando igual.
+ */
+export const NamedExports: Story = {
+  name: 'Test — named exports (RSC-safe)',
+  render: () => (
+    <SelectRoot defaultValue="a">
+      <SelectTrigger aria-label="Opción"><SelectValue /></SelectTrigger>
+      <SelectContent>
+        <SelectItem value="a">A</SelectItem>
+      </SelectContent>
+    </SelectRoot>
+  ),
+  play: async ({ canvasElement }) => {
+    // el namespace sigue exponiendo las partes (contexto cliente)
+    await expect(Select.Root).toBeDefined();
+    await expect(Select.Trigger).toBeDefined();
+    await expect(Select.Value).toBeDefined();
+    await expect(Select.Content).toBeDefined();
+    await expect(Select.Item).toBeDefined();
+    // los named exports (usados en el render) producen el trigger con su clase
+    const trigger = within(canvasElement).getByRole('combobox');
+    await expect(trigger).toHaveClass('select');
+  },
+};
 
 /**
  * Test: API compuesta. El `data-*`/`aria-*` del consumidor aterriza en el trigger

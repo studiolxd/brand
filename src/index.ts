@@ -49,7 +49,10 @@ export { MultiSelect } from './stories/atoms/MultiSelect/MultiSelect';
 export type { MultiSelectOption, MultiSelectProps } from './stories/atoms/MultiSelect/MultiSelect';
 export { Radio } from './stories/atoms/Radio/Radio';
 export type { RadioProps } from './stories/atoms/Radio/Radio';
-export { Select } from './stories/atoms/Select/Select';
+export {
+  Select, SelectRoot, SelectTrigger, SelectValue, SelectContent,
+  SelectGroup, SelectLabel, SelectItem, SelectSeparator,
+} from './stories/atoms/Select/Select';
 export type {
   SelectProps, SelectOption, SelectTriggerProps, SelectContentProps,
   SelectItemProps, SelectLabelProps, SelectSeparatorProps,
@@ -78,7 +81,7 @@ export type { TextareaProps } from './stories/atoms/Textarea/Textarea';
 export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
-export { Alert } from './stories/molecules/Alert/Alert';
+export { Alert, AlertTitle, AlertDescription } from './stories/molecules/Alert/Alert';
 export type { AlertProps, AlertTitleProps, AlertDescriptionProps } from './stories/molecules/Alert/Alert';
 export { AsyncMultiSelectField } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
 export type { AsyncMultiSelectFieldProps } from './stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField';
@@ -135,7 +138,9 @@ export { SelectField } from './stories/molecules/SelectField/SelectField';
 export type { SelectFieldProps } from './stories/molecules/SelectField/SelectField';
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';
 export type { SidebarNavProps, SidebarNavEntry, SidebarNavLinkEntry, SidebarNavGroupEntry, SidebarNavItem, SidebarNavRenderLinkProps } from './stories/molecules/SidebarNav/SidebarNav';
-export { Table } from './stories/molecules/Table/Table';
+export {
+  Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell,
+} from './stories/molecules/Table/Table';
 export type { TableProps, TableHeaderProps, TableRowProps, TableCellProps } from './stories/molecules/Table/Table';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 export { Toaster } from './stories/molecules/Toast/Toaster';

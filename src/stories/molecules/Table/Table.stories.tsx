@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { Table } from './Table';
+import { Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell } from './Table';
 
 const meta: Meta<typeof Table> = {
   title: 'Molecules/Table',
@@ -13,6 +13,40 @@ const meta: Meta<typeof Table> = {
 
 export default meta;
 type Story = StoryObj<typeof Table>;
+
+/**
+ * Test: subpartes como **named exports** (RSC-safe), idénticas a las del namespace
+ * (`Table.Head === TableHead`), y renderizan los elementos correctos.
+ */
+export const NamedExports: Story = {
+  name: 'Test — named exports (RSC-safe)',
+  render: () => (
+    <Table caption="Named exports">
+      <TableHead>
+        <TableRow><TableHeader>H</TableHeader></TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow><TableCell>C</TableCell></TableRow>
+      </TableBody>
+      <TableFooter>
+        <TableRow><TableCell>F</TableCell></TableRow>
+      </TableFooter>
+    </Table>
+  ),
+  play: async ({ canvasElement }) => {
+    // el namespace sigue exponiendo las subpartes (contexto cliente)
+    await expect(Table.Head).toBeDefined();
+    await expect(Table.Body).toBeDefined();
+    await expect(Table.Footer).toBeDefined();
+    await expect(Table.Header).toBeDefined();
+    await expect(Table.Row).toBeDefined();
+    await expect(Table.Cell).toBeDefined();
+    // los named exports (usados en el render) producen los elementos correctos
+    await expect(canvasElement.querySelector('thead')).not.toBeNull();
+    await expect(canvasElement.querySelector('tbody')).not.toBeNull();
+    await expect(canvasElement.querySelector('tfoot')).not.toBeNull();
+  },
+};
 
 /**
  * Test: `data-*`/`aria-*` + `className` aterrizan en `<table>`, `data-*` en `<tbody>`

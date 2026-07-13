@@ -113,4 +113,4 @@ function u({ caption: e, children: t, size: i = "md", className: a, ...o }) {
 }
 u.Head = i, u.Footer = a, u.Header = s, u.Body = o, u.Row = c, u.Cell = l;
 //#endregion
-export { u as Table };
+export { u as Table, o as TableBody, l as TableCell, a as TableFooter, i as TableHead, s as TableHeader, c as TableRow };

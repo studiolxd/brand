@@ -40,19 +40,19 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
   children?: ReactNode;
 }
 
-function TableHead({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
+export function TableHead({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
   return <thead {...rest}>{children}</thead>;
 }
 
-function TableFoot({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
+export function TableFooter({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
   return <tfoot {...rest}>{children}</tfoot>;
 }
 
-function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
+export function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>) {
   return <tbody {...rest}>{children}</tbody>;
 }
 
-function TableHeader({
+export function TableHeader({
   sortable = false,
   sorted = false,
   onSort,
@@ -122,7 +122,7 @@ function TableHeader({
   );
 }
 
-function TableRow({
+export function TableRow({
   onClick,
   interactive = false,
   children,
@@ -160,7 +160,7 @@ function TableRow({
   );
 }
 
-function TableCell({ children, className, ...rest }: TableCellProps) {
+export function TableCell({ children, className, ...rest }: TableCellProps) {
   const classes = ['table__cell', className].filter(Boolean).join(' ');
   return (
     <td {...rest} className={classes}>
@@ -182,8 +182,13 @@ export function Table({ caption, children, size = 'md', className, ...rest }: Ta
   );
 }
 
+/**
+ * Subpartes disponibles también como **named exports** (`TableHead`, `TableBody`,
+ * `TableFooter`, `TableHeader`, `TableRow`, `TableCell`): en **Server Components (RSC)**
+ * usa los named exports — el namespace (`Table.Head`) requiere contexto cliente.
+ */
 Table.Head = TableHead;
-Table.Footer = TableFoot;
+Table.Footer = TableFooter;
 Table.Header = TableHeader;
 Table.Body = TableBody;
 Table.Row = TableRow;

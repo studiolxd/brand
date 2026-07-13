@@ -14,7 +14,7 @@ export interface CheckboxProps
  * `onCheckedChange`…). `className` se concatena tras las clases propias.
  */
 export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(function Checkbox(
-  { size = 'md', className, children: _children, ...rest }, ref) {
+  { size = 'md', className, ...rest }, ref) {
   const classes = ['checkbox', size !== 'md' ? `checkbox--${size}` : '', className ?? '']
     .filter(Boolean)
     .join(' ');

@@ -1,3 +1,8 @@
+/* eslint-disable react-refresh/only-export-components --
+   Namespace compuesto (`Object.assign`) + subpartes como named exports: la
+   heurística de fast-refresh no reconoce el `Object.assign` como componente. El
+   patrón es intencional (DX cliente + RSC-safe) y fast-refresh no aplica a source
+   de librería. */
 import { forwardRef, useState } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
@@ -16,7 +21,7 @@ export type AlertTitleProps = React.ComponentPropsWithoutRef<'p'>;
 export type AlertDescriptionProps = React.ComponentPropsWithoutRef<'div'>;
 
 /** Subparte de composición: título del alert. */
-const AlertTitle = forwardRef<HTMLParagraphElement, AlertTitleProps>(function AlertTitle(
+export const AlertTitle = forwardRef<HTMLParagraphElement, AlertTitleProps>(function AlertTitle(
   { className, children, ...rest }, ref) {
   return (
     <p ref={ref} className={['alert__title', className ?? ''].filter(Boolean).join(' ')} {...rest}>
@@ -26,7 +31,7 @@ const AlertTitle = forwardRef<HTMLParagraphElement, AlertTitleProps>(function Al
 });
 
 /** Subparte de composición: descripción del alert. */
-const AlertDescription = forwardRef<HTMLDivElement, AlertDescriptionProps>(function AlertDescription(
+export const AlertDescription = forwardRef<HTMLDivElement, AlertDescriptionProps>(function AlertDescription(
   { className, children, ...rest }, ref) {
   return (
     <div ref={ref} className={['alert__description', className ?? ''].filter(Boolean).join(' ')} {...rest}>
@@ -94,6 +99,11 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   );
 });
 
+/**
+ * Namespace de composición. Las subpartes también están disponibles como **named
+ * exports** (`AlertTitle`, `AlertDescription`): en **Server Components (RSC)** usa los
+ * named exports — el namespace (`Alert.Title`) requiere contexto cliente.
+ */
 export const Alert = Object.assign(AlertRoot, {
   Title: AlertTitle,
   Description: AlertDescription,

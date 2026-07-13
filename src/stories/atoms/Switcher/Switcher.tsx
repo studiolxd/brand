@@ -14,7 +14,7 @@ export interface SwitcherProps
  * `name`, `checked`, `onCheckedChange`…). `className` se concatena tras las propias.
  */
 export const Switcher = forwardRef<HTMLButtonElement, SwitcherProps>(function Switcher(
-  { size = 'md', className, children: _children, ...rest }, ref) {
+  { size = 'md', className, ...rest }, ref) {
   const classes = ['switcher', size !== 'md' ? `switcher--${size}` : '', className ?? '']
     .filter(Boolean)
     .join(' ');
