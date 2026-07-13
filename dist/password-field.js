@@ -5,61 +5,56 @@ import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Input as n } from "./input.js";
 import { Label as r } from "./label.js";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { useState as o } from "react";
+import { forwardRef as o, useId as s, useState as c } from "react";
 //#region src/stories/molecules/PasswordField/PasswordField.tsx
-function s({ id: s, label: c, labelHidden: l = !0, name: u, placeholder: d, value: f, defaultValue: p, disabled: m, readOnly: h, size: g = "md", error: _ = !1, errorMessage: v, helperText: y, onChange: b, onBlur: x, onFocus: S }) {
-	let [C, w] = o(!1), T = v ? `${s}-error` : void 0, E = y ? `${s}-helper` : void 0, D = [T, E].filter(Boolean).join(" ") || void 0;
+var l = o(function({ label: o, labelHidden: l = !0, error: u = !1, errorMessage: d, helperText: f, size: p = "md", showPasswordLabel: m = "Mostrar contraseña", hidePasswordLabel: h = "Ocultar contraseña", className: g, id: _, disabled: v, placeholder: y, ...b }, x) {
+	let S = s(), C = _ ?? S, [w, T] = c(!1), E = d ? `${C}-error` : void 0, D = f ? `${C}-helper` : void 0, O = [E, D].filter(Boolean).join(" ") || void 0;
 	return /* @__PURE__ */ a("div", {
-		className: "password-field",
+		className: ["password-field", g ?? ""].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ i(r, {
-				htmlFor: s,
+			o && /* @__PURE__ */ i(r, {
+				htmlFor: C,
 				hidden: l,
-				children: c
+				children: o
 			}),
 			/* @__PURE__ */ a("div", {
 				className: "password-field__wrapper",
 				children: [/* @__PURE__ */ i(n, {
-					id: s,
-					name: u,
-					type: C ? "text" : "password",
-					placeholder: d ?? (l ? c : void 0),
-					value: f,
-					defaultValue: p,
-					disabled: m,
-					readOnly: h,
-					size: g,
-					error: _,
-					describedBy: D,
-					onChange: b,
-					onBlur: x,
-					onFocus: S
+					ref: x,
+					id: C,
+					size: p,
+					error: u,
+					placeholder: y ?? (o && l ? o : void 0),
+					"aria-describedby": O,
+					...b,
+					type: w ? "text" : "password",
+					disabled: v
 				}), /* @__PURE__ */ a("button", {
 					type: "button",
 					className: "password-field__toggle",
-					onClick: () => w((e) => !e),
-					disabled: m,
-					"aria-controls": s,
-					"aria-pressed": C,
-					children: [/* @__PURE__ */ i(t, { children: C ? "Ocultar contraseña" : "Mostrar contraseña" }), /* @__PURE__ */ i(e, {
-						name: C ? "eye-off" : "eye",
+					onClick: () => T((e) => !e),
+					disabled: v,
+					"aria-controls": C,
+					"aria-pressed": w,
+					children: [/* @__PURE__ */ i(t, { children: w ? h : m }), /* @__PURE__ */ i(e, {
+						name: w ? "eye-off" : "eye",
 						className: "password-field__icon"
 					})]
 				})]
 			}),
-			v && /* @__PURE__ */ i("span", {
-				id: T,
+			d && /* @__PURE__ */ i("span", {
+				id: E,
 				className: "password-field__error",
 				role: "alert",
-				children: v
+				children: d
 			}),
-			y && /* @__PURE__ */ i("span", {
-				id: E,
+			f && /* @__PURE__ */ i("span", {
+				id: D,
 				className: "password-field__helper",
-				children: y
+				children: f
 			})
 		]
 	});
-}
+});
 //#endregion
-export { s as PasswordField };
+export { l as PasswordField };
