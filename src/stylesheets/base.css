@@ -1,4 +1,7 @@
 @import "../stories/atoms/Link/Link.css";
+/* Utilidades globales de accesibilidad — disponibles en brand.css */
+@import "../stories/atoms/VisuallyHidden/VisuallyHidden.css";
+@import "../stories/atoms/SkipLink/SkipLink.css";
 
 html {
   color-scheme: light;
