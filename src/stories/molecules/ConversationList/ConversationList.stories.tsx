@@ -43,6 +43,14 @@ export const SinConversaciones: Story = {
   args: { conversations: [], activeId: undefined },
 };
 
+export const Internacionalizado: Story = {
+  args: {
+    newLabel: 'New conversation',
+    navLabel: 'Conversations',
+    deleteLabel: (label) => `Delete conversation "${label}"`,
+  },
+};
+
 export const Interactivo: Story = {
   render: (args) => {
     const [conversations, setConversations] = useState(SAMPLE);

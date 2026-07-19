@@ -14,6 +14,8 @@ export interface ConversationListProps {
   onSelect: (id: string) => void;
   onDelete: (id: string) => void;
   newLabel?: string;
+  navLabel?: string;
+  deleteLabel?: (label: string) => string;
 }
 
 export function ConversationList({
@@ -23,6 +25,8 @@ export function ConversationList({
   onSelect,
   onDelete,
   newLabel = 'Nueva conversación',
+  navLabel = 'Conversaciones',
+  deleteLabel = (label) => `Eliminar conversación "${label}"`,
 }: ConversationListProps) {
   return (
     <div className="conversation-list">
@@ -32,7 +36,7 @@ export function ConversationList({
         </button>
       </div>
 
-      <nav aria-label="Conversaciones" className="conversation-list__nav">
+      <nav aria-label={navLabel} className="conversation-list__nav">
         <ul className="conversation-list__items" role="list">
           {conversations.map((conv) => {
             const isActive = conv.id === activeId;
@@ -53,7 +57,7 @@ export function ConversationList({
                   tabIndex={-1}
                 >
                   <Icon name="close" size="xs" />
-                  <VisuallyHidden>Eliminar conversación "{conv.label}"</VisuallyHidden>
+                  <VisuallyHidden>{deleteLabel(conv.label)}</VisuallyHidden>
                 </button>
               </li>
             );

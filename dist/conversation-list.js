@@ -3,7 +3,7 @@ import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/ConversationList/ConversationList.tsx
-function i({ conversations: i, activeId: a, onNew: o, onSelect: s, onDelete: c, newLabel: l = "Nueva conversación" }) {
+function i({ conversations: i, activeId: a, onNew: o, onSelect: s, onDelete: c, newLabel: l = "Nueva conversación", navLabel: u = "Conversaciones", deleteLabel: d = (e) => `Eliminar conversación "${e}"` }) {
 	return /* @__PURE__ */ r("div", {
 		className: "conversation-list",
 		children: [/* @__PURE__ */ n("div", {
@@ -15,7 +15,7 @@ function i({ conversations: i, activeId: a, onNew: o, onSelect: s, onDelete: c, 
 				children: l
 			})
 		}), /* @__PURE__ */ n("nav", {
-			"aria-label": "Conversaciones",
+			"aria-label": u,
 			className: "conversation-list__nav",
 			children: /* @__PURE__ */ n("ul", {
 				className: "conversation-list__items",
@@ -40,11 +40,7 @@ function i({ conversations: i, activeId: a, onNew: o, onSelect: s, onDelete: c, 
 							children: [/* @__PURE__ */ n(e, {
 								name: "close",
 								size: "xs"
-							}), /* @__PURE__ */ r(t, { children: [
-								"Eliminar conversación \"",
-								i.label,
-								"\""
-							] })]
+							}), /* @__PURE__ */ n(t, { children: d(i.label) })]
 						})]
 					}, i.id);
 				})

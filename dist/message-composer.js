@@ -3,35 +3,37 @@ import './message-composer.css';
 import { Button as e } from "./button.js";
 import { Textarea as t } from "./textarea.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { useState as i } from "react";
 //#region src/stories/molecules/MessageComposer/MessageComposer.tsx
-function a({ onSend: a, placeholder: o = "Escribe un mensaje…", disabled: s }) {
-	let [c, l] = i("");
-	function u() {
-		let e = c.trim();
-		e && (a(e), l(""));
+function i({ value: i, onChange: a, onSend: o, placeholder: s = "Escribe un mensaje…", disabled: c, sendLabel: l = "Enviar", sendAriaLabel: u = "Enviar mensaje", actions: d, className: f, ...p }) {
+	function m() {
+		i.trim() && o();
 	}
-	function d(e) {
-		e.key === "Enter" && !e.shiftKey && (e.preventDefault(), u());
+	function h(e) {
+		e.key === "Enter" && !e.shiftKey && (e.preventDefault(), m());
 	}
 	return /* @__PURE__ */ r("div", {
-		className: "message-composer",
-		children: [/* @__PURE__ */ n(t, {
-			placeholder: o,
-			value: c,
-			disabled: s,
-			rows: 2,
-			onChange: (e) => l(e.target.value),
-			onKeyDown: d
-		}), /* @__PURE__ */ n(e, {
-			variant: "primary",
-			size: "md",
-			disabled: s || !c.trim(),
-			onClick: u,
-			"aria-label": "Enviar mensaje",
-			children: "Enviar"
-		})]
+		className: `message-composer${f ? ` ${f}` : ""}`,
+		...p,
+		children: [
+			/* @__PURE__ */ n(t, {
+				placeholder: s,
+				value: i,
+				disabled: c,
+				rows: 2,
+				onChange: (e) => a(e.target.value),
+				onKeyDown: h
+			}),
+			/* @__PURE__ */ n(e, {
+				variant: "primary",
+				size: "md",
+				disabled: c || !i.trim(),
+				onClick: m,
+				"aria-label": u,
+				children: l
+			}),
+			d
+		]
 	});
 }
 //#endregion
-export { a as MessageComposer };
+export { i as MessageComposer };
