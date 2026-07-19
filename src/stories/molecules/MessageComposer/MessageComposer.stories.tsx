@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fn, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { MessageComposer } from './MessageComposer';
 
@@ -33,6 +33,17 @@ export const ConTextos: Story = {
   args: {
     sendLabel: 'Enviando…',
     sendAriaLabel: 'Enviar',
+  },
+};
+
+export const EtiquetaAccesible: Story = {
+  args: {
+    inputLabel: 'Escribe un mensaje',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const field = canvas.getByLabelText('Escribe un mensaje');
+    await expect(field.tagName).toBe('TEXTAREA');
   },
 };
 

@@ -13,6 +13,12 @@ export interface MessageComposerProps extends Omit<ComponentProps<'div'>, 'onCha
   sendAriaLabel?: string;
   /** Contenido extra a la derecha del botón de enviar (p. ej. un botón de detener envío, o un selector de modelo). */
   actions?: ReactNode;
+  /** `id` del textarea interno, para asociarlo con un `<label htmlFor>` externo. */
+  inputId?: string;
+  /** `aria-label` del textarea interno. */
+  inputLabel?: string;
+  /** `aria-labelledby` del textarea interno, alternativa a `inputLabel`. */
+  inputLabelledBy?: string;
 }
 
 export function MessageComposer({
@@ -24,6 +30,9 @@ export function MessageComposer({
   sendLabel = 'Enviar',
   sendAriaLabel = 'Enviar mensaje',
   actions,
+  inputId,
+  inputLabel,
+  inputLabelledBy,
   className,
   ...rest
 }: MessageComposerProps) {
@@ -42,6 +51,9 @@ export function MessageComposer({
   return (
     <div className={`message-composer${className ? ` ${className}` : ''}`} {...rest}>
       <Textarea
+        id={inputId}
+        aria-label={inputLabel}
+        aria-labelledby={inputLabelledBy}
         placeholder={placeholder}
         value={value}
         disabled={disabled}
