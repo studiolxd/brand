@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Modal } from './Modal';
 import { Button } from '../../atoms/Button/Button';
 import { InputField } from '../InputField/InputField';
@@ -185,5 +186,29 @@ export const NoTitle: Story = {
         </Modal>
       </>
     );
+  },
+};
+
+export const CustomLabels: Story = {
+  name: 'Textos personalizados (i18n)',
+  render: () => {
+    const [open, setOpen] = useState(true);
+    return (
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        closeLabel="Close"
+        fallbackTitle="Dialog"
+      >
+        <p style={{ margin: 0, color: 'var(--color-text-on-light)' }}>
+          Modal sin título con `closeLabel`/`fallbackTitle` en inglés.
+        </p>
+      </Modal>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body);
+    await expect(canvas.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await expect(canvas.getByText('Dialog')).toBeInTheDocument();
   },
 };

@@ -9,9 +9,19 @@ export interface ModalProps {
   title?: string;
   children: React.ReactNode;
   dark?: boolean;
+  closeLabel?: string;
+  fallbackTitle?: string;
 }
 
-export function Modal({ open, onClose, title, children, dark = false }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  dark = false,
+  closeLabel = 'Cerrar',
+  fallbackTitle = 'Diálogo',
+}: ModalProps) {
   const contentClass = ['modal__content', dark && 'modal__content--dark'].filter(Boolean).join(' ');
 
   return (
@@ -22,15 +32,15 @@ export function Modal({ open, onClose, title, children, dark = false }: ModalPro
           {title ? (
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
-              <Dialog.Close className="modal__close" aria-label="Cerrar"><Icon name="close" size="sm" /></Dialog.Close>
+              <Dialog.Close className="modal__close" aria-label={closeLabel}><Icon name="close" size="sm" /></Dialog.Close>
             </header>
           ) : (
             <>
               <Dialog.Title asChild>
-                <VisuallyHidden>Diálogo</VisuallyHidden>
+                <VisuallyHidden>{fallbackTitle}</VisuallyHidden>
               </Dialog.Title>
               <header className="modal__header modal__header--no-title">
-                <Dialog.Close className="modal__close" aria-label="Cerrar"><Icon name="close" size="sm" /></Dialog.Close>
+                <Dialog.Close className="modal__close" aria-label={closeLabel}><Icon name="close" size="sm" /></Dialog.Close>
               </header>
             </>
           )}
