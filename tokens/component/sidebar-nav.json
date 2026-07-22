@@ -25,6 +25,11 @@
     "transition-duration":            { "$value": "{motion.duration.fast}",    "$type": "string",    "$description": "Duración de transición de ítems" },
     "transition-easing":              { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de transición de ítems" },
     "group-transition-duration":      { "$value": "{motion.duration.fast}",    "$type": "string",    "$description": "Duración de la animación de apertura/cierre de grupo" },
-    "group-transition-easing":        { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de la animación de apertura/cierre de grupo" }
+    "group-transition-easing":        { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de la animación de apertura/cierre de grupo" },
+    "surface-dark-group-label-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la etiqueta de grupo — surface-dark. `group-label-color` (prussian) sería invisible sobre fondo oscuro." },
+    "surface-dark-item-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítems — surface-dark" },
+    "surface-dark-item-hover-bg":     { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo de ítem al hover — surface-dark" },
+    "surface-dark-item-hover-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítem al hover — surface-dark" },
+    "surface-dark-item-active-color": { "$value": "{color.accent-1}",           "$type": "color", "$description": "Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher." }
   }
 }

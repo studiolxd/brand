@@ -18,3 +18,6 @@ $lxd-modal-width-max: 560px; // Anchura máxima del panel
 $lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable)
 $lxd-modal-transition-duration: 250ms; // Duración de la animación entrada/salida
 $lxd-modal-transition-easing: ease-in-out; // Easing de la animación
+$lxd-modal-close-color: #767676; // Color del botón de cierre
+$lxd-modal-close-hover-color: #111e30; // Color del botón de cierre en hover
+$lxd-modal-close-hover-bg: #f2f2f2; // Fondo del botón de cierre en hover

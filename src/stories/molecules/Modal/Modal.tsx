@@ -8,9 +8,17 @@ export interface ModalProps {
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
-  dark?: boolean;
   closeLabel?: string;
   fallbackTitle?: string;
+  /**
+   * Nodo DOM donde montar el portal del modal (reenviado a Radix
+   * `Portal.container`). Por defecto se monta en `document.body`, que
+   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
+   * sin configuración adicional. Solo hace falta pasarlo cuando el Modal
+   * vive dentro de un `.surface-dark` **anidado** (no en la raíz), ya que
+   * ese contexto no llega a `document.body` por la cascada.
+   */
+  container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
 }
 
 export function Modal({
@@ -18,17 +26,15 @@ export function Modal({
   onClose,
   title,
   children,
-  dark = false,
   closeLabel = 'Cerrar',
   fallbackTitle = 'Diálogo',
+  container,
 }: ModalProps) {
-  const contentClass = ['modal__content', dark && 'modal__content--dark'].filter(Boolean).join(' ');
-
   return (
     <Dialog.Root open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
-      <Dialog.Portal>
+      <Dialog.Portal container={container}>
         <Dialog.Overlay className="modal__overlay" />
-        <Dialog.Content className={contentClass} aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}>
+        <Dialog.Content className="modal__content" aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}>
           {title ? (
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>

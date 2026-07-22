@@ -7,6 +7,8 @@
 
     "bg":                   { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo por defecto — prussian" },
     "border-color":         { "$value": "{color.primary}",              "$type": "color",     "$description": "Borde igual al fondo — invisible" },
+    "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo por defecto — surface-dark. `bg` (prussian) coincide con el fondo de la superficie oscura y quedaría invisible sin este override; con borde blanco queda como contorno, igual que Button primary en dark." },
+    "surface-dark-border-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Borde por defecto — surface-dark" },
     "title-font-size":      { "$value": "{font-size.2}",                "$type": "dimension", "$description": "Tamaño del título (18px — text default)" },
     "title-font-weight":    { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso del título" },
     "title-color":          { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Texto blanco sobre fondo oscuro" },

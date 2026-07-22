@@ -30,3 +30,13 @@
   --sidebar-nav-item-hover-color: var(--color-text-on-light); /** Color de ítem al hover */
   --sidebar-nav-item-active-color: var(--color-primary); /** Color de ítem activo y focus ring */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --sidebar-nav-item-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de ítem al hover — surface-dark */
+  --sidebar-nav-group-label-color: var(--color-text-muted-on-dark); /** Color de la etiqueta de grupo — surface-dark. `group-label-color` (prussian) sería invisible sobre fondo oscuro. */
+  --sidebar-nav-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
+  --sidebar-nav-item-hover-color: var(--color-text-on-dark); /** Color de ítem al hover — surface-dark */
+  --sidebar-nav-item-active-color: var(--color-accent-1); /** Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher. */
+}

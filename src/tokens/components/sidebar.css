@@ -14,3 +14,9 @@
   --sidebar-transition-easing: var(--motion-easing-in-out); /** Curva de animación de apertura/cierre */
   --sidebar-bg: var(--color-background-light); /** Fondo del panel de la sidebar */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --sidebar-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
+}

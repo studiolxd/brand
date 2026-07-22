@@ -32,3 +32,10 @@
   --alert-warning-close-color: var(--color-primary); /** Aspa de cierre oscura sobre fondo amarillo */
   --alert-warning-close-hover-color: var(--color-primary); /** Aspa de cierre oscura en hover */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --alert-bg: var(--color-background-dark); /** Fondo por defecto — surface-dark. `bg` (prussian) coincide con el fondo de la superficie oscura y quedaría invisible sin este override; con borde blanco queda como contorno, igual que Button primary en dark. */
+  --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — surface-dark */
+}

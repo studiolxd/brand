@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Modal } from './Modal';
@@ -65,12 +65,21 @@ export const Confirm: Story = {
 };
 
 export const Dark: Story = {
+  name: 'Dark (root-level, html.dark)',
   render: () => {
     const [open, setOpen] = useState(false);
+    // Modal se monta vía Radix Portal en document.body — .surface-dark en un
+    // contenedor no lo alcanza. Para demostrar el modo oscuro real (el que
+    // usan theme managers tipo next-themes) activamos html.dark a nivel raíz
+    // mientras esta story está montada.
+    useEffect(() => {
+      document.documentElement.classList.add('dark');
+      return () => document.documentElement.classList.remove('dark');
+    }, []);
     return (
       <>
         <Button onClick={() => setOpen(true)}>Abrir modal dark</Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Solicitar ausencia" dark>
+        <Modal open={open} onClose={() => setOpen(false)} title="Solicitar ausencia">
           <form
             onSubmit={(e) => { e.preventDefault(); setOpen(false); }}
             style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}

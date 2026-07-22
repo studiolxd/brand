@@ -9,6 +9,7 @@
     "z-index":             { "$value": "200",                            "$type": "number",    "$description": "Z-index del panel en mobile (overlay)" },
     "backdrop-bg":         { "$value": "rgba(0, 0, 0, 0.4)",            "$type": "color",     "$description": "Fondo del backdrop en móvil" },
     "transition-duration": { "$value": "{motion.duration.slow}",         "$type": "number",    "$description": "Duración de la animación de apertura/cierre" },
-    "transition-easing":   { "$value": "{motion.easing.in-out}",         "$type": "string",    "$description": "Curva de animación de apertura/cierre" }
+    "transition-easing":   { "$value": "{motion.easing.in-out}",         "$type": "string",    "$description": "Curva de animación de apertura/cierre" },
+    "surface-dark-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" }
   }
 }

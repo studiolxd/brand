@@ -22,6 +22,8 @@
     "sm-thumb-size":       { "$value": "0.875em",                     "$type": "dimension", "$description": "Tamaño del thumb — variante sm" },
     "lg-track-width":      { "$value": "3.5em",                       "$type": "dimension", "$description": "Ancho del track — variante lg" },
     "lg-track-height":     { "$value": "1.875em",                     "$type": "dimension", "$description": "Alto del track — variante lg" },
-    "lg-thumb-size":       { "$value": "1.5em",                       "$type": "dimension", "$description": "Tamaño del thumb — variante lg" }
+    "lg-thumb-size":       { "$value": "1.5em",                       "$type": "dimension", "$description": "Tamaño del thumb — variante lg" },
+    "surface-dark-track-bg-checked": { "$value": "{color.accent-1}",  "$type": "color", "$description": "Fondo del track (on) — surface-dark. `track-bg-checked` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar." },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro." }
   }
 }

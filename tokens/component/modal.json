@@ -16,6 +16,14 @@
     "width-max":            { "$value": "560px",                      "$type": "dimension", "$description": "Anchura máxima del panel" },
     "max-height":           { "$value": "90dvh",                      "$type": "dimension", "$description": "Altura máxima del panel modal (dvh para móviles con barra de navegador variable)" },
     "transition-duration":  { "$value": "{motion.duration.base}",     "$type": "number",    "$description": "Duración de la animación entrada/salida" },
-    "transition-easing":    { "$value": "{motion.easing.in-out}",     "$type": "string",    "$description": "Easing de la animación" }
+    "transition-easing":    { "$value": "{motion.easing.in-out}",     "$type": "string",    "$description": "Easing de la animación" },
+    "close-color":          { "$value": "{color.grey-dark}",          "$type": "color",     "$description": "Color del botón de cierre" },
+    "close-hover-color":    { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del botón de cierre en hover" },
+    "close-hover-bg":       { "$value": "{color.grey-lightest}",      "$type": "color",     "$description": "Fondo del botón de cierre en hover" },
+    "surface-dark-bg":                { "$value": "{color.background.dark}",   "$type": "color", "$description": "Fondo del panel — surface-dark" },
+    "surface-dark-title-color":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del título — surface-dark" },
+    "surface-dark-close-color":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del botón de cierre — surface-dark" },
+    "surface-dark-close-hover-color": { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del botón de cierre en hover — surface-dark" },
+    "surface-dark-close-hover-bg":    { "$value": "rgba(255, 255, 255, 0.1)",  "$type": "color", "$description": "Fondo del botón de cierre en hover — surface-dark" }
   }
 }

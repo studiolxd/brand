@@ -39,3 +39,19 @@
   --table-footer-border-color: var(--color-text-on-light); /** Color del borde superior del tfoot */
   --table-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --table-border-color: rgba(255, 255, 255, 0.15); /** Separadores de fila — surface-dark */
+  --table-header-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo hover de columna sortable — surface-dark */
+  --table-row-border-color: rgba(255, 255, 255, 0.15); /** Separador entre filas — surface-dark */
+  --table-row-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de fila en hover — surface-dark */
+  --table-footer-bg: rgba(255, 255, 255, 0.04); /** Fondo del tfoot — surface-dark */
+  --table-color: var(--color-text-on-dark); /** Color de texto base — surface-dark */
+  --table-header-border-color: var(--color-text-on-dark); /** Borde inferior del thead — surface-dark */
+  --table-sort-icon-color: var(--color-text-muted-on-dark); /** Icono de sort inactivo — surface-dark */
+  --table-sort-icon-active-color: var(--color-text-on-dark); /** Icono de sort activo — surface-dark */
+  --table-footer-border-color: var(--color-text-on-dark); /** Borde superior del tfoot — surface-dark */
+  --table-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+}

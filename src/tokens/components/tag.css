@@ -33,3 +33,12 @@
   --tag-support-2-color: var(--color-text-on-light); /** Support 2 text — dark on orange bg */
   --tag-success-bg: var(--color-success-on-light); /** Success semantic — dark green background (AAA ~8.9:1 with white text) */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --tag-info-bg: var(--color-white); /** Info background — surface-dark (invertido: `info-bg` es prussian, igual que el fondo de la superficie, quedaría invisible) */
+  --tag-info-color: var(--color-prussian); /** Info text — surface-dark (invertido) */
+  --tag-primary-bg: var(--color-text-on-dark); /** Primary background — surface-dark (invertido: `primary-bg` es prussian, igual que el fondo de la superficie, quedaría invisible) */
+  --tag-primary-color: var(--color-background-dark); /** Primary text — surface-dark (invertido) */
+}

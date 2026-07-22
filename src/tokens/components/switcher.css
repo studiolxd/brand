@@ -27,3 +27,10 @@
   --switcher-track-bg-checked: var(--color-primary); /** Fondo del track — estado on */
   --switcher-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --switcher-track-bg-checked: var(--color-accent-1); /** Fondo del track (on) — surface-dark. `track-bg-checked` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar. */
+  --switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
+}

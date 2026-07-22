@@ -18,6 +18,19 @@
   --modal-title-font-weight: var(--font-weight-medium); /** Peso del título */
   --modal-transition-duration: var(--motion-duration-base); /** Duración de la animación entrada/salida */
   --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
+  --modal-close-color: var(--color-grey-dark); /** Color del botón de cierre */
+  --modal-close-hover-bg: var(--color-grey-lightest); /** Fondo del botón de cierre en hover */
   --modal-bg: var(--color-background-light); /** Fondo del panel modal */
   --modal-title-color: var(--color-text-on-light); /** Color del título */
+  --modal-close-hover-color: var(--color-text-on-light); /** Color del botón de cierre en hover */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --modal-close-hover-bg: rgba(255, 255, 255, 0.1); /** Fondo del botón de cierre en hover — surface-dark */
+  --modal-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
+  --modal-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
+  --modal-close-color: var(--color-text-on-dark); /** Color del botón de cierre — surface-dark */
+  --modal-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover — surface-dark */
 }
