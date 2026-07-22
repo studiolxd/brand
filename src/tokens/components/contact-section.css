@@ -6,3 +6,10 @@
   --contact-section-gap-color: var(--color-background-dark); /** Color del gap entre celdas y borde superior — actúa como borde (gap technique) */
   --contact-section-cell-bg: var(--color-background-light); /** Fondo de las celdas de contenido */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --contact-section-gap-color: var(--color-background-light); /** Color del gap — surface-dark */
+  --contact-section-cell-bg: var(--color-background-dark); /** Fondo de celdas — surface-dark */
+}

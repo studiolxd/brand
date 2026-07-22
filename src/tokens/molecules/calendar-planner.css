@@ -45,3 +45,23 @@
   --calendar-planner-more-hover-color: var(--color-text-on-light); /** Color hover del texto '+N más' */
   --calendar-planner-more-focus-ring-color: var(--color-primary); /** Color del focus ring del botón '+N más' */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --calendar-planner-nav-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover de navegación — surface-dark */
+  --calendar-planner-grid-border-color: rgba(255, 255, 255, 0.15); /** Borde del grid — surface-dark */
+  --calendar-planner-cell-outside-bg: rgba(255, 255, 255, 0.04); /** Fondo de celdas fuera de mes — surface-dark */
+  --calendar-planner-nav-disabled-color: var(--color-grey-light); /** Color deshabilitado de navegación — surface-dark */
+  --calendar-planner-day-number-outside-color: var(--color-grey-light); /** Número fuera de mes — surface-dark */
+  --calendar-planner-nav-color: var(--color-text-on-dark); /** Color de navegación — surface-dark */
+  --calendar-planner-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring de navegación — surface-dark */
+  --calendar-planner-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
+  --calendar-planner-weekday-color: var(--color-text-muted-on-dark); /** Color de cabeceras de día — surface-dark */
+  --calendar-planner-cell-today-number-bg: var(--color-text-on-dark); /** Fondo del número de hoy — surface-dark */
+  --calendar-planner-cell-today-number-color: var(--color-background-dark); /** Texto del número de hoy — surface-dark */
+  --calendar-planner-day-number-color: var(--color-text-on-dark); /** Color del número de día — surface-dark */
+  --calendar-planner-more-color: var(--color-text-muted-on-dark); /** Texto '+N más' — surface-dark */
+  --calendar-planner-more-hover-color: var(--color-text-on-dark); /** Hover de '+N más' — surface-dark */
+  --calendar-planner-more-focus-ring-color: var(--color-text-on-dark); /** Focus ring de '+N más' — surface-dark */
+}

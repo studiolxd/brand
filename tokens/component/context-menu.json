@@ -27,6 +27,13 @@
     "item-destructive-hover-color": { "$value": "{color.white}",               "$type": "color",    "$description": "Color de texto de ítem destructivo al hover" },
     "disabled-opacity":    { "$value": "{opacity.disabled}",                  "$type": "number",    "$description": "Opacidad de ítems deshabilitados" },
     "transition-duration": { "$value": "{floating-panel.transition-duration}", "$type": "number",    "$description": "Duración de transición de ítems" },
-    "transition-easing":   { "$value": "{floating-panel.transition-easing}",  "$type": "string",    "$description": "Easing de transición de ítems" }
+    "transition-easing":   { "$value": "{floating-panel.transition-easing}",  "$type": "string",    "$description": "Easing de transición de ítems" },
+    "surface-dark-item-color":                  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de texto de ítems — surface-dark" },
+    "surface-dark-item-hover-bg":                { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo hover de ítem — surface-dark" },
+    "surface-dark-item-hover-color":              { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Texto hover de ítem — surface-dark" },
+    "surface-dark-separator-color":               { "$value": "rgba(255, 255, 255, 0.15)",  "$type": "color", "$description": "Color del separador — surface-dark" },
+    "surface-dark-item-destructive-color":        { "$value": "{color.error-on-dark}",      "$type": "color", "$description": "Color de ítem destructivo — surface-dark" },
+    "surface-dark-item-destructive-hover-bg":     { "$value": "{color.error-on-dark}",      "$type": "color", "$description": "Fondo hover de ítem destructivo — surface-dark" },
+    "surface-dark-item-destructive-hover-color":  { "$value": "{color.white}",              "$type": "color", "$description": "Texto hover de ítem destructivo — surface-dark" }
   }
 }

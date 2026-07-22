@@ -46,3 +46,23 @@
   --calendar-selected-bg: var(--color-primary); /** Fondo del día seleccionado */
   --calendar-selected-color: var(--color-text-on-dark); /** Texto del día seleccionado */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --calendar-nav-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover de navegación — surface-dark */
+  --calendar-day-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover de días — surface-dark */
+  --calendar-nav-disabled-color: var(--color-grey-light); /** Color deshabilitado de navegación — surface-dark */
+  --calendar-outside-color: var(--color-grey-light); /** Días fuera de mes — surface-dark */
+  --calendar-disabled-color: var(--color-grey-light); /** Días deshabilitados — surface-dark */
+  --calendar-nav-color: var(--color-text-on-dark); /** Color de navegación — surface-dark */
+  --calendar-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring de navegación — surface-dark */
+  --calendar-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
+  --calendar-weekday-color: var(--color-text-muted-on-dark); /** Color de cabeceras de día — surface-dark */
+  --calendar-day-color: var(--color-text-on-dark); /** Color de días — surface-dark */
+  --calendar-day-focus-ring-color: var(--color-text-on-dark); /** Focus ring de días — surface-dark */
+  --calendar-today-color: var(--color-text-on-dark); /** Color del día de hoy — surface-dark */
+  --calendar-today-border-color: var(--color-text-on-dark); /** Borde del día de hoy — surface-dark */
+  --calendar-selected-bg: var(--color-text-on-dark); /** Fondo del día seleccionado — surface-dark */
+  --calendar-selected-color: var(--color-background-dark); /** Texto del día seleccionado — surface-dark */
+}

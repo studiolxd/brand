@@ -7,7 +7,8 @@
       "font-size":    { "$value": "{form.error.font-size}",    "$type": "dimension", "$description": "Font size del mensaje de error" },
       "font-weight":  { "$value": "{form.error.font-weight}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
       "line-height":  { "$value": "{form.error.line-height}",  "$type": "number",    "$description": "Line height del mensaje de error" },
-      "color":        { "$value": "{form.error.color}",        "$type": "color",     "$description": "Color del mensaje de error" }
+      "color":        { "$value": "{form.error.color}",        "$type": "color",     "$description": "Color del mensaje de error" },
+      "surface-dark-color": { "$value": "{color.error-on-dark}", "$type": "color", "$description": "Color del mensaje de error — surface-dark" }
     },
 
     "helper": {
@@ -15,7 +16,8 @@
       "font-size":    { "$value": "{form.helper.font-size}",    "$type": "dimension", "$description": "Font size del texto de ayuda" },
       "font-weight":  { "$value": "{form.helper.font-weight}",  "$type": "number",    "$description": "Font weight del texto de ayuda" },
       "line-height":  { "$value": "{form.helper.line-height}",  "$type": "number",    "$description": "Line height del texto de ayuda" },
-      "color":        { "$value": "{form.helper.color}",        "$type": "color",     "$description": "Color del texto de ayuda" }
+      "color":        { "$value": "{form.helper.color}",        "$type": "color",     "$description": "Color del texto de ayuda" },
+      "surface-dark-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del texto de ayuda — surface-dark" }
     }
   }
 }

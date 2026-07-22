@@ -51,6 +51,21 @@
     "transition-easing":       { "$value": "{motion.easing.default}",    "$type": "string",    "$description": "Easing de las transiciones" },
 
     "sm-cell-min-height":      { "$value": "4rem",                       "$type": "dimension", "$description": "Altura mínima de celda — sm" },
-    "lg-cell-min-height":      { "$value": "9rem",                       "$type": "dimension", "$description": "Altura mínima de celda — lg" }
+    "lg-cell-min-height":      { "$value": "9rem",                       "$type": "dimension", "$description": "Altura mínima de celda — lg" },
+    "surface-dark-nav-color":                  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de navegación — surface-dark" },
+    "surface-dark-nav-hover-bg":               { "$value": "rgba(255, 255, 255, 0.12)",  "$type": "color", "$description": "Fondo hover de navegación — surface-dark" },
+    "surface-dark-nav-disabled-color":         { "$value": "{color.grey-light}",         "$type": "color", "$description": "Color deshabilitado de navegación — surface-dark" },
+    "surface-dark-nav-focus-ring-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de navegación — surface-dark" },
+    "surface-dark-title-color":                { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del título — surface-dark" },
+    "surface-dark-weekday-color":              { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de cabeceras de día — surface-dark" },
+    "surface-dark-grid-border-color":          { "$value": "rgba(255, 255, 255, 0.15)",  "$type": "color", "$description": "Borde del grid — surface-dark" },
+    "surface-dark-cell-outside-bg":            { "$value": "rgba(255, 255, 255, 0.04)",  "$type": "color", "$description": "Fondo de celdas fuera de mes — surface-dark" },
+    "surface-dark-cell-today-number-bg":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo del número de hoy — surface-dark" },
+    "surface-dark-cell-today-number-color":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Texto del número de hoy — surface-dark" },
+    "surface-dark-day-number-color":           { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del número de día — surface-dark" },
+    "surface-dark-day-number-outside-color":   { "$value": "{color.grey-light}",         "$type": "color", "$description": "Número fuera de mes — surface-dark" },
+    "surface-dark-more-color":                 { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Texto '+N más' — surface-dark" },
+    "surface-dark-more-hover-color":           { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Hover de '+N más' — surface-dark" },
+    "surface-dark-more-focus-ring-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de '+N más' — surface-dark" }
   }
 }

@@ -22,6 +22,10 @@
     "sm-size":                { "$value": "1rem",                         "$type": "dimension", "$description": "Tamaño del checkbox — variante sm (16px)" },
     "sm-check-size":          { "$value": "0.55rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante sm" },
     "lg-size":                { "$value": "1.5rem",                       "$type": "dimension", "$description": "Tamaño del checkbox — variante lg (24px)" },
-    "lg-check-size":          { "$value": "0.85rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante lg" }
+    "lg-check-size":          { "$value": "0.85rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante lg" },
+    "surface-dark-border-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Border color — surface-dark" },
+    "surface-dark-bg-checked":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Background when checked — surface-dark" },
+    "surface-dark-check-color":      { "$value": "{color.background.dark}",    "$type": "color", "$description": "Checkmark color — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" }
   }
 }

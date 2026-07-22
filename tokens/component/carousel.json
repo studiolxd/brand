@@ -5,6 +5,8 @@
     "btn-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del chevron" },
     "gradient-color":     { "$value": "{color.background.light}", "$type": "color",   "$description": "Color de fondo del degradado de los botones prev/next" },
     "btn-min-size":       { "$value": "4rem",                     "$type": "dimension", "$description": "Tamaño mínimo del área de click de los botones prev/next (tap target)" },
-    "btn-vw-size":        { "$value": "4.167vw",                  "$type": "string",    "$description": "Tamaño fluido del botón en móvil — escala con el viewport (≈1/24 vw)" }
+    "btn-vw-size":        { "$value": "4.167vw",                  "$type": "string",    "$description": "Tamaño fluido del botón en móvil — escala con el viewport (≈1/24 vw)" },
+    "surface-dark-btn-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del chevron — surface-dark" },
+    "surface-dark-slide-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde del slide — surface-dark. Sin par claro: en modo claro cae al fallback `currentColor` del consumidor (Carousel.css)." }
   }
 }

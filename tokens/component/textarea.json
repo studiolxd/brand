@@ -40,6 +40,13 @@
     "sm-font-size":                     { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Font size — variante sm (14px)" },
     "lg-padding-block":                 { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Block padding — variante lg" },
     "lg-padding-inline":                { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Inline padding — variante lg" },
-    "lg-font-size":                     { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Font size — variante lg (20px)" }
+    "lg-font-size":                     { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Font size — variante lg (20px)" },
+    "surface-dark-bg":                     { "$value": "{color.background.dark}",     "$type": "color", "$description": "Background — surface-dark" },
+    "surface-dark-color":                  { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Text color — surface-dark" },
+    "surface-dark-border-color":           { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Border color — surface-dark" },
+    "surface-dark-placeholder-color":      { "$value": "{color.text.muted-on-dark}",  "$type": "color", "$description": "Placeholder text color — surface-dark" },
+    "surface-dark-focus-border-color":     { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Border color on focus — surface-dark" },
+    "surface-dark-focus-ring-color":       { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Focus ring color — surface-dark" },
+    "surface-dark-error-focus-ring-color": { "$value": "{color.error-on-dark}",       "$type": "color", "$description": "Error focus ring color — surface-dark" }
   }
 }

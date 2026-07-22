@@ -12,3 +12,11 @@
   --link-color-hover: var(--color-text-on-light); /** Color del enlace en hover */
   --link-focus-ring-color: var(--color-primary); /** Color del focus ring en fondo claro */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --link-color: var(--color-text-on-dark); /** Color — surface-dark */
+  --link-color-hover: var(--color-text-on-dark); /** Hover color — surface-dark */
+  --link-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+}

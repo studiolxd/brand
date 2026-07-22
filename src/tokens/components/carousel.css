@@ -10,3 +10,10 @@
   --carousel-btn-color: var(--color-primary); /** Color del chevron */
   --carousel-gradient-color: var(--color-background-light); /** Color de fondo del degradado de los botones prev/next */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --carousel-btn-color: var(--color-text-on-dark); /** Color del chevron — surface-dark */
+  --carousel-slide-border-color: var(--color-text-on-dark); /** Borde del slide — surface-dark. Sin par claro: en modo claro cae al fallback `currentColor` del consumidor (Carousel.css). */
+}

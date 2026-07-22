@@ -7,3 +7,11 @@
   --methodology-section-cell-bg: var(--color-background-light); /** Fondo de las celdas de contenido */
   --methodology-section-number-color: var(--color-primary); /** Color tipográfico del número de paso */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --methodology-section-gap-color: var(--color-background-light); /** Color del gap — surface-dark */
+  --methodology-section-cell-bg: var(--color-background-dark); /** Fondo de celdas — surface-dark */
+  --methodology-section-number-color: var(--color-accent-1); /** Color del número de paso — surface-dark */
+}

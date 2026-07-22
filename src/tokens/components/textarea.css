@@ -45,3 +45,15 @@
   --textarea-error-focus-border-color: var(--color-primary); /** Error border color on focus */
   --textarea-error-focus-ring-color: var(--color-error-on-light); /** Error focus ring color */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --textarea-bg: var(--color-background-dark); /** Background — surface-dark */
+  --textarea-color: var(--color-text-on-dark); /** Text color — surface-dark */
+  --textarea-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
+  --textarea-placeholder-color: var(--color-text-muted-on-dark); /** Placeholder text color — surface-dark */
+  --textarea-focus-border-color: var(--color-text-on-dark); /** Border color on focus — surface-dark */
+  --textarea-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --textarea-error-focus-ring-color: var(--color-error-on-dark); /** Error focus ring color — surface-dark */
+}

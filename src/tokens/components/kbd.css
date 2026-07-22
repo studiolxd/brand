@@ -25,3 +25,11 @@
   --kbd-lg-padding-inline: var(--spacing-4); /** Padding horizontal lg (16px) */
   --kbd-color: var(--color-text-on-light); /** Color del símbolo de la tecla */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --kbd-bg: rgba(255, 255, 255, 0.08); /** Fondo del keycap — surface-dark */
+  --kbd-color: var(--color-text-on-dark); /** Color del símbolo — surface-dark */
+  --kbd-border-color: var(--color-text-muted-on-dark); /** Borde del keycap — surface-dark */
+}

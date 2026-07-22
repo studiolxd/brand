@@ -27,3 +27,12 @@
   --checkbox-bg-checked: var(--color-primary); /** Fondo cuando está marcado */
   --checkbox-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --checkbox-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
+  --checkbox-bg-checked: var(--color-text-on-dark); /** Background when checked — surface-dark */
+  --checkbox-check-color: var(--color-background-dark); /** Checkmark color — surface-dark */
+  --checkbox-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+}

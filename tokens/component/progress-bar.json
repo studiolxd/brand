@@ -24,6 +24,8 @@
     "support-2-fill":               { "$value": "{color.support-2}",     "$type": "color", "$description": "Support 2 (cayenne) fill color" },
     "support-2-label-inside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Dark label on cayenne fill" },
 
-    "label-outside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Label color when on unfilled track background" }
+    "label-outside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Label color when on unfilled track background" },
+    "surface-dark-track-bg":            { "$value": "{color.grey-darkest}", "$type": "color", "$description": "Track background — surface-dark" },
+    "surface-dark-label-outside-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Label color outside — surface-dark" }
   }
 }

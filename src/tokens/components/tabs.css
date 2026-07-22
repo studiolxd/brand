@@ -24,3 +24,13 @@
   --tabs-trigger-pill-bg-active: var(--color-primary); /** Fondo del trigger activo en variante pill */
   --tabs-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --tabs-list-border-color: rgba(255, 255, 255, 0.2); /** Borde inferior de la lista — surface-dark */
+  --tabs-trigger-color: var(--color-text-muted-on-dark); /** Color del trigger inactivo — surface-dark */
+  --tabs-trigger-hover-color: var(--color-text-on-dark); /** Color hover del trigger — surface-dark */
+  --tabs-trigger-active-color: var(--color-text-on-dark); /** Color del trigger activo — surface-dark */
+  --tabs-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+}

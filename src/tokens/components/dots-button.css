@@ -22,3 +22,12 @@
   --dots-button-color: var(--color-text-on-light); /** Color de los puntos */
   --dots-button-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --dots-button-hover-bg: rgba(255, 255, 255, 0.12); /** Hover background — surface-dark */
+  --dots-button-active-bg: rgba(255, 255, 255, 0.2); /** Active background — surface-dark */
+  --dots-button-color: var(--color-text-on-dark); /** Color — surface-dark */
+  --dots-button-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+}

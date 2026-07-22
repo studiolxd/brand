@@ -22,6 +22,9 @@
     "lg-min-size":       { "$value": "2.25rem",            "$type": "dimension", "$description": "Tamaño mínimo lg (36px)" },
     "lg-font-size":      { "$value": "{font-size.2}",      "$type": "dimension", "$description": "18px — tamaño lg" },
     "lg-padding-block":  { "$value": "{spacing.2}",        "$type": "dimension", "$description": "Padding vertical lg (8px)" },
-    "lg-padding-inline": { "$value": "{spacing.4}",        "$type": "dimension", "$description": "Padding horizontal lg (16px)" }
+    "lg-padding-inline": { "$value": "{spacing.4}",        "$type": "dimension", "$description": "Padding horizontal lg (16px)" },
+    "surface-dark-bg":           { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo del keycap — surface-dark" },
+    "surface-dark-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del símbolo — surface-dark" },
+    "surface-dark-border-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Borde del keycap — surface-dark" }
   }
 }

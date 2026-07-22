@@ -41,3 +41,17 @@
   --pagination-ellipsis-color: var(--color-text-muted-on-light); /** Color del ellipsis */
   --pagination-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --pagination-btn-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover — surface-dark */
+  --pagination-btn-disabled-color: var(--color-grey-light); /** Texto deshabilitado — surface-dark */
+  --pagination-ellipsis-color: var(--color-grey-light); /** Color del ellipsis — surface-dark */
+  --pagination-summary-color: var(--color-text-on-dark); /** Color del resumen — surface-dark */
+  --pagination-btn-color: var(--color-text-on-dark); /** Color de botones — surface-dark */
+  --pagination-btn-hover-color: var(--color-text-on-dark); /** Texto hover — surface-dark */
+  --pagination-btn-current-bg: var(--color-text-on-dark); /** Fondo página activa — surface-dark */
+  --pagination-btn-current-color: var(--color-background-dark); /** Texto página activa — surface-dark */
+  --pagination-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+}

@@ -27,3 +27,10 @@
   --progress-bar-support-2-label-inside-color: var(--color-text-on-light); /** Dark label on cayenne fill */
   --progress-bar-label-outside-color: var(--color-text-on-light); /** Label color when on unfilled track background */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --progress-bar-track-bg: var(--color-grey-darkest); /** Track background — surface-dark */
+  --progress-bar-label-outside-color: var(--color-text-on-dark); /** Label color outside — surface-dark */
+}

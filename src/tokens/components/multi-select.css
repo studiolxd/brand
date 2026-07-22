@@ -45,3 +45,17 @@
   --multi-select-content-border-color: var(--select-content-border-color); /** Borde del dropdown */
   --multi-select-item-highlighted-bg: var(--select-item-highlighted-bg); /** Fondo de opción en foco/hover */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --multi-select-bg: var(--color-background-dark); /** Background — surface-dark */
+  --multi-select-color: var(--color-text-on-dark); /** Text color — surface-dark */
+  --multi-select-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
+  --multi-select-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --multi-select-placeholder-color: var(--color-text-muted-on-dark); /** Placeholder color — surface-dark */
+  --multi-select-content-bg: var(--color-background-dark); /** Dropdown background — surface-dark */
+  --multi-select-content-border-color: var(--color-text-on-dark); /** Dropdown border color — surface-dark */
+  --multi-select-item-highlighted-bg: var(--color-text-on-dark); /** Highlighted item background — surface-dark */
+  --multi-select-item-highlighted-color: var(--color-background-dark); /** Highlighted item text — surface-dark */
+}

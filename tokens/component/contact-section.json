@@ -1,6 +1,8 @@
 {
   "contact-section": {
     "gap-color": { "$value": "{color.background.dark}",    "$type": "color", "$description": "Color del gap entre celdas y borde superior — actúa como borde (gap technique)" },
-    "cell-bg":   { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo de las celdas de contenido" }
+    "cell-bg":   { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo de las celdas de contenido" },
+    "surface-dark-gap-color": { "$value": "{color.background.light}", "$type": "color", "$description": "Color del gap — surface-dark" },
+    "surface-dark-cell-bg":   { "$value": "{color.background.dark}",  "$type": "color", "$description": "Fondo de celdas — surface-dark" }
   }
 }

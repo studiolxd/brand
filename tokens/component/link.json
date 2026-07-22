@@ -7,6 +7,9 @@
     "cursor":                { "$value": "pointer",            "$type": "string", "$description": "Cursor" },
     "focus-ring-width":      { "$value": "{border-width.md}",  "$type": "dimension", "$description": "Grosor del focus ring" },
     "focus-ring-offset":     { "$value": "{border-width.sm}",  "$type": "dimension", "$description": "Separación entre el enlace y el focus ring" },
-    "focus-ring-color":      { "$value": "{color.primary}",    "$type": "color",     "$description": "Color del focus ring en fondo claro" }
+    "focus-ring-color":      { "$value": "{color.primary}",    "$type": "color",     "$description": "Color del focus ring en fondo claro" },
+    "surface-dark-color":            { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color — surface-dark" },
+    "surface-dark-color-hover":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Hover color — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Focus ring color — surface-dark" }
   }
 }

@@ -7,6 +7,8 @@
     "shadow":              { "$value": "{shadow.none}",            "$type": "shadow",    "$description": "Sin sombra" },
     "z-index":             { "$value": "1100",                     "$type": "number",    "$description": "Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales" },
     "transition-duration": { "$value": "{motion.duration.fast}",   "$type": "number",    "$description": "Duración de la animación de entrada/salida" },
-    "transition-easing":   { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Easing de la animación" }
+    "transition-easing":   { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Easing de la animación" },
+    "surface-dark-bg":            { "$value": "{color.background.dark}",   "$type": "color", "$description": "Fondo — surface-dark" },
+    "surface-dark-border-color":  { "$value": "rgba(255, 255, 255, 0.15)", "$type": "color", "$description": "Borde — surface-dark" }
   }
 }

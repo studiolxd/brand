@@ -2,6 +2,9 @@
   "methodology-section": {
     "gap-color":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Color del gap entre celdas — actúa como borde (gap technique)" },
     "cell-bg":      { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo de las celdas de contenido" },
-    "number-color": { "$value": "{color.primary}",            "$type": "color", "$description": "Color tipográfico del número de paso" }
+    "number-color": { "$value": "{color.primary}",            "$type": "color", "$description": "Color tipográfico del número de paso" },
+    "surface-dark-gap-color":    { "$value": "{color.background.light}", "$type": "color", "$description": "Color del gap — surface-dark" },
+    "surface-dark-cell-bg":      { "$value": "{color.background.dark}",  "$type": "color", "$description": "Fondo de celdas — surface-dark" },
+    "surface-dark-number-color": { "$value": "{color.accent-1}",         "$type": "color", "$description": "Color del número de paso — surface-dark" }
   }
 }

@@ -15,6 +15,9 @@
     "outline-bg":           { "$value": "{color.background.light}", "$type": "color",     "$description": "Variante outline — fondo blanco (light)" },
     "outline-color":        { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Variante outline — texto oscuro sobre blanco" },
     "outline-border-color": { "$value": "{color.primary}",          "$type": "color",     "$description": "Variante outline — borde prussian" },
-    "outline-border-width": { "$value": "{border-width.sm}",        "$type": "dimension", "$description": "Variante outline — grosor de borde" }
+    "outline-border-width": { "$value": "{border-width.sm}",        "$type": "dimension", "$description": "Variante outline — grosor de borde" },
+    "surface-dark-outline-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Variante outline — fondo, surface-dark" },
+    "surface-dark-outline-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Variante outline — texto, surface-dark" },
+    "surface-dark-outline-border-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Variante outline — borde, surface-dark" }
   }
 }

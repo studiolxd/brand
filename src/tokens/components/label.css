@@ -11,3 +11,9 @@
   --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
   --label-color: var(--color-text-on-light); /** Text color */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --label-color: var(--color-text-on-dark); /** Color — surface-dark */
+}

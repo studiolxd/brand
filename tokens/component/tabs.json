@@ -19,6 +19,11 @@
     "focus-ring-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco" },
     "content-padding-block":     { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding vertical del panel de contenido" },
     "transition-duration":       { "$value": "{motion.duration.fast}",   "$type": "string",    "$description": "Duración de la transición de color" },
-    "transition-easing":         { "$value": "{motion.easing.in-out}",   "$type": "string",    "$description": "Easing de la transición" }
+    "transition-easing":         { "$value": "{motion.easing.in-out}",   "$type": "string",    "$description": "Easing de la transición" },
+    "surface-dark-list-border-color":    { "$value": "rgba(255, 255, 255, 0.2)",  "$type": "color", "$description": "Borde inferior de la lista — surface-dark" },
+    "surface-dark-trigger-color":        { "$value": "{color.text.muted-on-dark}","$type": "color", "$description": "Color del trigger inactivo — surface-dark" },
+    "surface-dark-trigger-hover-color":  { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color hover del trigger — surface-dark" },
+    "surface-dark-trigger-active-color": { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del trigger activo — surface-dark" },
+    "surface-dark-focus-ring-color":     { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring color — surface-dark" }
   }
 }

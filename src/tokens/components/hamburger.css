@@ -15,3 +15,10 @@
   --hamburger-bar-color: var(--color-text-on-light); /** Color de las barras */
   --hamburger-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --hamburger-bar-color: var(--color-text-on-dark); /** Color de las barras — surface-dark */
+  --hamburger-focus-ring-color: var(--color-text-on-dark); /** Color del focus ring — surface-dark */
+}

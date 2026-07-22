@@ -14,3 +14,10 @@
   --description-list-value-font-weight: var(--font-weight-default); /** Font weight del valor */
   --description-list-value-color: var(--color-text-on-light); /** Color del valor (dd) */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --description-list-border-color: var(--color-text-on-dark); /** Color del borde — surface-dark */
+  --description-list-value-color: var(--color-text-on-dark); /** Color del valor — surface-dark */
+}

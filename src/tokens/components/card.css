@@ -18,3 +18,11 @@
   --card-outline-color: var(--color-text-on-light); /** Variante outline — texto oscuro sobre blanco */
   --card-outline-border-color: var(--color-primary); /** Variante outline — borde prussian */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --card-outline-bg: var(--color-background-dark); /** Variante outline — fondo, surface-dark */
+  --card-outline-color: var(--color-text-on-dark); /** Variante outline — texto, surface-dark */
+  --card-outline-border-color: var(--color-text-on-dark); /** Variante outline — borde, surface-dark */
+}

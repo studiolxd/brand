@@ -17,6 +17,10 @@
     "focus-ring-color":     { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del focus ring" },
     "focus-ring-offset":    { "$value": "{border-width.md}",          "$type": "dimension", "$description": "Offset del focus ring" },
     "transition-duration":  { "$value": "{motion.duration.fast}",     "$type": "number",    "$description": "Duración de transición" },
-    "transition-easing":    { "$value": "{motion.easing.default}",    "$type": "string",    "$description": "Easing de transición" }
+    "transition-easing":    { "$value": "{motion.easing.default}",    "$type": "string",    "$description": "Easing de transición" },
+    "surface-dark-color":           { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color — surface-dark" },
+    "surface-dark-hover-bg":        { "$value": "rgba(255, 255, 255, 0.12)", "$type": "color", "$description": "Hover background — surface-dark" },
+    "surface-dark-active-bg":       { "$value": "rgba(255, 255, 255, 0.2)",  "$type": "color", "$description": "Active background — surface-dark" },
+    "surface-dark-focus-ring-color":{ "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring color — surface-dark" }
   }
 }

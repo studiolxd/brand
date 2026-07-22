@@ -19,7 +19,8 @@
       "line-height":    { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado" },
       "color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del texto" },
       "letter-spacing": { "$value": "{letter-spacing.normal}",  "$type": "dimension", "$description": "Interletraje — anula la herencia del label base" },
-      "text-transform": { "$value": "none",                     "$type": "string",    "$description": "Sin transformación — anula la herencia del label base" }
+      "text-transform": { "$value": "none",                     "$type": "string",    "$description": "Sin transformación — anula la herencia del label base" },
+      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del texto — surface-dark" }
     }
   }
 }

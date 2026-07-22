@@ -6,108 +6,15 @@
 
    .surface-dark  — sobre fondo oscuro (body dark, secciones oscuras)
    .surface-light — outline sobre fotografía clara
+
+   La mayoría del remapeo oscuro ya no vive aquí: se genera desde
+   tokens/{component,molecule}/*.json (tokens `surface-dark-*`) vía
+   Style Dictionary — ver `sd.formats.mjs` y CLAUDE.md § Theming de
+   superficie. Este archivo solo conserva overrides que NO se pueden
+   aplanar en un remapeo de token plano (estado combinado, combos BEM
+   sin equivalente en modo claro, o composición estructural específica
+   de Form/Footer que no es un token de componente).
    ============================================================= */
-
-.surface-dark {
-  /* Button (primary/text/ghost/outline/destructive) migrado a
-     tokens/component/button.json (`surface-dark-*`) — generado por
-     Style Dictionary, ver `sd.formats.mjs`. */
-
-  /* Input migrado a tokens/component/input.json (`surface-dark-*`) — queda
-     solo el override de :disabled/:error más abajo (estado-dependiente). */
-
-  /* ─── Textarea ────────────────────────────────────────────────────────── */
-  --textarea-bg:                    var(--color-background-dark);
-  --textarea-color:                 var(--color-text-on-dark);
-  --textarea-border-color:          var(--color-text-on-dark);
-  --textarea-placeholder-color:     var(--color-text-muted-on-dark);
-  --textarea-focus-border-color:    var(--color-text-on-dark);
-  --textarea-focus-ring-color:      var(--color-text-on-dark);
-  --textarea-error-focus-ring-color:var(--color-error-on-dark);
-
-  /* ─── Checkbox ────────────────────────────────────────────────────────── */
-  --checkbox-border-color:     var(--color-text-on-dark);
-  --checkbox-bg-checked:       var(--color-text-on-dark);
-  --checkbox-check-color:      var(--color-background-dark);
-  --checkbox-focus-ring-color: var(--color-text-on-dark);
-
-  /* ─── MultiSelect ────────────────────────────────────────────────────────── */
-  --multi-select-bg:                     var(--color-background-dark);
-  --multi-select-color:                  var(--color-text-on-dark);
-  --multi-select-border-color:           var(--color-text-on-dark);
-  --multi-select-focus-ring-color:       var(--color-text-on-dark);
-  --multi-select-placeholder-color:      var(--color-text-muted-on-dark);
-  --multi-select-content-bg:             var(--color-background-dark);
-  --multi-select-content-border-color:   var(--color-text-on-dark);
-  --multi-select-item-highlighted-bg:    var(--color-text-on-dark);
-  --multi-select-item-highlighted-color: var(--color-background-dark);
-
-  /* Select migrado a tokens/component/select.json (`surface-dark-*`) —
-     queda solo el override de :disabled más abajo (estado-dependiente,
-     no se puede aplanar en un token único). */
-
-  /* ─── Heading ─────────────────────────────────────────────────────────── */
-  --text-h1-color: var(--color-text-on-dark);
-  --text-h2-color: var(--color-text-on-dark);
-  --text-h3-color: var(--color-text-on-dark);
-  --text-h4-color: var(--color-text-on-dark);
-  --text-h5-color: var(--color-text-on-dark);
-  --text-h6-color: var(--color-text-on-dark);
-
-  /* ─── Paragraph ───────────────────────────────────────────────────────── */
-  --text-paragraph-color: var(--color-text-on-dark);
-
-  /* ─── List ────────────────────────────────────────────────────────────── */
-  --text-list-color: var(--color-text-on-dark);
-
-  /* ─── Breadcrumb ──────────────────────────────────────────────────────── */
-  --breadcrumb-link-color:       var(--color-text-on-dark);
-  --breadcrumb-link-color-hover: var(--color-text-on-dark);
-  --breadcrumb-current-color:    var(--color-text-on-dark);
-  --breadcrumb-separator-color:  var(--color-text-on-dark);
-  --breadcrumb-focus-ring-color: var(--color-text-on-dark);
-
-  /* ─── Link ────────────────────────────────────────────────────────────── */
-  --link-color:           var(--color-text-on-dark);
-  --link-color-hover:     var(--color-text-on-dark);
-  --link-focus-ring-color:var(--color-text-on-dark);
-
-  /* ─── Label ───────────────────────────────────────────────────────────── */
-  --label-color: var(--color-text-on-dark);
-
-  /* ─── Checkbox field ──────────────────────────────────────────────────── */
-  --checkbox-field-label-color: var(--color-text-on-dark);
-
-  /* ─── Input field / Textarea field ───────────────────────────────────── */
-  --input-field-error-color:    var(--color-error-on-dark);
-  --input-field-helper-color:   var(--color-text-muted-on-dark);
-  --textarea-field-error-color: var(--color-error-on-dark);
-  --textarea-field-helper-color:var(--color-text-muted-on-dark);
-
-  /* ─── Form ────────────────────────────────────────────────────────────── */
-  --form-border-color:    var(--color-text-on-dark);
-  --form-separator-color: var(--color-text-on-dark);
-  --form-error-color:     var(--color-error-on-dark);
-  --form-helper-color:    var(--color-text-muted-on-dark);
-  --form-success-color:   var(--color-text-on-dark);
-
-  /* ─── File upload field ─────────────────────────────────────────────── */
-  --file-upload-field-error-color:  var(--color-error-on-dark);
-  --file-upload-field-helper-color: var(--color-text-muted-on-dark);
-
-  /* ─── Carousel ────────────────────────────────────────────────────────── */
-  --carousel-slide-border-color: var(--color-text-on-dark);
-  --carousel-btn-color:          var(--color-text-on-dark);
-
-  /* ─── DescriptionList ─────────────────────────────────────────────────────── */
-  --description-list-border-color: var(--color-text-on-dark);
-  --description-list-value-color:  var(--color-text-on-dark);
-
-  /* ─── Kbd ─────────────────────────────────────────────────────────────── */
-  --kbd-bg:           rgba(255, 255, 255, 0.08);
-  --kbd-color:        var(--color-text-on-dark);
-  --kbd-border-color: var(--color-text-muted-on-dark);
-}
 
 /* ─── Button: primary + destructive-intent ───────────────────────────────
    Caso residual: esta combinación de modificadores BEM no tiene regla en
@@ -182,35 +89,43 @@
   opacity: 1;
 }
 
-/* ─── Footer ─────────────────────────────────────────────────────────────── */
+/* ─── Footer: form-spacer ─────────────────────────────────────────────────
+   `.form-spacer` no consume ningún token propio en modo claro (fondo
+   ambiente implícito) — este bg solo aplica para que el spacer combine
+   con el fondo de una sección .surface-dark, no es el par oscuro de un
+   token existente. ────────────────────────────────────────────────────── */
 
 .surface-dark .form-spacer {
   background-color: var(--color-background-dark);
 }
 
-/* ─── Logo ────────────────────────────────────────────────────────────────── */
+/* ─── Logo ─────────────────────────────────────────────────────────────────
+   Logo ya tiene su propia variante manual (`.logo--dark`, ver Logo.css),
+   pensada para cuando el consumidor sabe que el logo va sobre fondo
+   oscuro sin depender de `.surface-dark`. Este override cubre el caso de
+   un Logo sin esa variante que igualmente queda dentro de un contenedor
+   `.surface-dark`. ────────────────────────────────────────────────────── */
 
 .surface-dark .logo {
   color: var(--color-text-on-dark);
 }
 
-/* ─── Hamburger ───────────────────────────────────────────────────────────── */
-
-.surface-dark .hamburger .hamburger__bar {
-  background-color: var(--color-text-on-dark);
-}
-
-.surface-dark .hamburger:focus-visible {
-  outline-color: var(--color-text-on-dark);
-}
-
-/* ─── Form success ────────────────────────────────────────────────────────── */
+/* ─── Form: success message background ───────────────────────────────────
+   `.form__success` ya usa `--form-success-color` (migrado a
+   tokens/component/form.json). El background aquí es una decisión de
+   composición — que el bloque de éxito combine con el fondo de una
+   sección .surface-dark — no el par oscuro de un token de color de
+   `form.success`. ─────────────────────────────────────────────────────── */
 
 .surface-dark .form__success {
   background-color: var(--color-background-dark);
 }
 
-/* ─── Form: field backgrounds and border suppression ─────────────────────── */
+/* ─── Form: field backgrounds and border suppression ─────────────────────
+   Composición estructural específica de cómo Form dispone sus campos
+   dentro de una sección oscura (fondos y bordes de los wrappers de
+   campo para que se fundan con el fondo de la sección) — no son tokens
+   de color de los átomos Input/Textarea/InputPhone en sí. ────────────── */
 
 .surface-dark .form__fields > .input-field,
 .surface-dark .form__fields > .textarea-field,
@@ -258,117 +173,6 @@
 
 .surface-dark .form__actions {
   background-color: var(--color-background-dark);
-}
-
-/* ─── MethodologySection + ContactSection ─────────────────────────────────── */
-.surface-dark {
-  --methodology-section-gap-color:    var(--color-background-light);
-  --methodology-section-cell-bg:      var(--color-background-dark);
-  --methodology-section-number-color: var(--color-accent-1);
-  --contact-section-gap-color:        var(--color-background-light);
-  --contact-section-cell-bg:          var(--color-background-dark);
-
-  /* ─── DotsButton ──────────────────────────────────────────────────────────── */
-  --dots-button-color:     var(--color-text-on-dark);
-  --dots-button-hover-bg:  rgba(255, 255, 255, 0.12);
-  --dots-button-active-bg: rgba(255, 255, 255, 0.2);
-  --dots-button-focus-ring-color: var(--color-text-on-dark);
-
-  /* ─── FloatingPanel (base de Popover y ContextMenu) ─────────────────────── */
-  --floating-panel-bg:           var(--color-background-dark);
-  --floating-panel-border-color: rgba(255, 255, 255, 0.15);
-
-  /* ─── Pagination ─────────────────────────────────────────────────────────── */
-  --pagination-summary-color:      var(--color-text-on-dark);
-  --pagination-btn-color:          var(--color-text-on-dark);
-  --pagination-btn-hover-bg:       rgba(255, 255, 255, 0.12);
-  --pagination-btn-hover-color:    var(--color-text-on-dark);
-  --pagination-btn-current-bg:     var(--color-text-on-dark);
-  --pagination-btn-current-color:  var(--color-background-dark);
-  --pagination-btn-disabled-color: var(--color-grey-light);
-  --pagination-ellipsis-color:     var(--color-grey-light);
-  --pagination-focus-ring-color:   var(--color-text-on-dark);
-
-  /* ─── ContextMenu ─────────────────────────────────────────────────────────── */
-  --context-menu-item-color:                  var(--color-text-on-dark);
-  --context-menu-item-hover-bg:               rgba(255, 255, 255, 0.08);
-  --context-menu-item-hover-color:            var(--color-text-on-dark);
-  --context-menu-separator-color:             rgba(255, 255, 255, 0.15);
-  --context-menu-item-destructive-color:      var(--color-error-on-dark);
-  --context-menu-item-destructive-hover-bg:   var(--color-error-on-dark);
-  --context-menu-item-destructive-hover-color:var(--color-white);
-
-  /* ─── Tabs ───────────────────────────────────────────────────────────────── */
-  --tabs-list-border-color:      rgba(255, 255, 255, 0.2);
-  --tabs-trigger-color:          var(--color-text-muted-on-dark);
-  --tabs-trigger-hover-color:    var(--color-text-on-dark);
-  --tabs-trigger-active-color:   var(--color-text-on-dark);
-  --tabs-focus-ring-color:       var(--color-text-on-dark);
-
-  /* ─── CalendarRoster ─────────────────────────────────────────────────────── */
-  --calendar-roster-nav-color:               var(--color-text-on-dark);
-  --calendar-roster-nav-hover-bg:            rgba(255, 255, 255, 0.12);
-  --calendar-roster-nav-focus-ring-color:    var(--color-text-on-dark);
-  --calendar-roster-title-color:             var(--color-text-on-dark);
-  --calendar-roster-border-color:            rgba(255, 255, 255, 0.15);
-  --calendar-roster-th-name-bg:              var(--color-background-dark);
-  --calendar-roster-th-name-color:           var(--color-text-muted-on-dark);
-  --calendar-roster-th-day-color:            var(--color-text-on-dark);
-  --calendar-roster-th-day-bg:              var(--color-background-dark);
-  --calendar-roster-th-day-today-bg:         var(--color-text-on-dark);
-  --calendar-roster-th-day-today-color:      var(--color-background-dark);
-  --calendar-roster-td-name-bg:              var(--color-background-dark);
-  --calendar-roster-td-name-color:           var(--color-text-on-dark);
-  --calendar-roster-cell-bg:                 transparent;
-  --calendar-roster-cell-weekend-bg:         rgba(255, 255, 255, 0.04);
-  --calendar-roster-cell-holiday-bg:         rgba(255, 255, 255, 0.08);
-  --calendar-roster-schedule-color:          var(--color-text-muted-on-dark);
-  --calendar-roster-legend-color:            var(--color-text-muted-on-dark);
-
-  /* ─── CalendarPlanner ────────────────────────────────────────────────────── */
-  --calendar-planner-nav-color:               var(--color-text-on-dark);
-  --calendar-planner-nav-hover-bg:            rgba(255, 255, 255, 0.12);
-  --calendar-planner-nav-disabled-color:      var(--color-grey-light);
-  --calendar-planner-nav-focus-ring-color:    var(--color-text-on-dark);
-  --calendar-planner-title-color:             var(--color-text-on-dark);
-  --calendar-planner-weekday-color:           var(--color-text-muted-on-dark);
-  --calendar-planner-grid-border-color:       rgba(255, 255, 255, 0.15);
-  --calendar-planner-cell-bg:                 transparent;
-  --calendar-planner-cell-outside-bg:         rgba(255, 255, 255, 0.04);
-  --calendar-planner-cell-today-number-bg:    var(--color-text-on-dark);
-  --calendar-planner-cell-today-number-color: var(--color-background-dark);
-  --calendar-planner-day-number-color:        var(--color-text-on-dark);
-  --calendar-planner-day-number-outside-color:var(--color-grey-light);
-  --calendar-planner-more-color:              var(--color-text-muted-on-dark);
-  --calendar-planner-more-hover-color:        var(--color-text-on-dark);
-  --calendar-planner-more-focus-ring-color:   var(--color-text-on-dark);
-
-  /* ─── Calendar ───────────────────────────────────────────────────────────── */
-  --calendar-nav-color:          var(--color-text-on-dark);
-  --calendar-nav-hover-bg:       rgba(255, 255, 255, 0.12);
-  --calendar-nav-disabled-color: var(--color-grey-light);
-  --calendar-nav-focus-ring-color: var(--color-text-on-dark);
-  --calendar-title-color:        var(--color-text-on-dark);
-  --calendar-weekday-color:      var(--color-text-muted-on-dark);
-  --calendar-day-color:          var(--color-text-on-dark);
-  --calendar-day-hover-bg:       rgba(255, 255, 255, 0.12);
-  --calendar-day-focus-ring-color: var(--color-text-on-dark);
-  --calendar-today-color:        var(--color-text-on-dark);
-  --calendar-today-border-color: var(--color-text-on-dark);
-  --calendar-selected-bg:        var(--color-text-on-dark);
-  --calendar-selected-color:     var(--color-background-dark);
-  --calendar-outside-color:      var(--color-grey-light);
-  --calendar-disabled-color:     var(--color-grey-light);
-
-  /* ─── ProgressBar ────────────────────────────────────────────────────────── */
-  --progress-bar-track-bg:           var(--color-grey-darkest);
-  --progress-bar-label-outside-color:var(--color-text-on-dark);
-
-  /* ─── Card outline ───────────────────────────────────────────────────────── */
-  --card-outline-bg:           var(--color-background-dark);
-  --card-outline-color:        var(--color-text-on-dark);
-  --card-outline-border-color: var(--color-text-on-dark);
-
 }
 
 /* =============================================================

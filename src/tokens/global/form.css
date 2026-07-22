@@ -32,3 +32,13 @@
   --form-success-font-weight: var(--font-weight-default); /** Font weight del mensaje de éxito */
   --form-success-color: var(--color-text-on-light); /** Color del mensaje de éxito */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --form-border-color: var(--color-text-on-dark); /** Color del borde exterior — surface-dark */
+  --form-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
+  --form-error-color: var(--color-error-on-dark); /** Color del mensaje de error — surface-dark */
+  --form-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --form-success-color: var(--color-text-on-dark); /** Color del mensaje de éxito — surface-dark */
+}

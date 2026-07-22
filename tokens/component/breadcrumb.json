@@ -16,6 +16,11 @@
     "current-font-weight":        { "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso del item activo" },
     "focus-ring-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del focus ring" },
     "focus-ring-width":           { "$value": "{border-width.md}",           "$type": "dimension", "$description": "Grosor del focus ring" },
-    "focus-ring-offset":          { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del focus ring" }
+    "focus-ring-offset":          { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Separación del focus ring" },
+    "surface-dark-link-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Link color — surface-dark" },
+    "surface-dark-link-color-hover": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Link hover color — surface-dark" },
+    "surface-dark-current-color":    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Current color — surface-dark" },
+    "surface-dark-separator-color":  { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Separator color — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Focus ring color — surface-dark" }
   }
 }

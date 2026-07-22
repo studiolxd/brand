@@ -36,6 +36,15 @@
     "lg-font-size":              { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Font size — variante lg (20px)" },
     "lg-btn-padding-block":      { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Padding block de botones — variante lg" },
     "lg-btn-padding-inline":     { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Padding inline de botones — variante lg" },
-    "lg-btn-min-width":          { "$value": "{spacing.7}",                 "$type": "dimension", "$description": "Ancho mínimo de botones de página — variante lg" }
+    "lg-btn-min-width":          { "$value": "{spacing.7}",                 "$type": "dimension", "$description": "Ancho mínimo de botones de página — variante lg" },
+    "surface-dark-summary-color":      { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del resumen — surface-dark" },
+    "surface-dark-btn-color":          { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color de botones — surface-dark" },
+    "surface-dark-btn-hover-bg":       { "$value": "rgba(255, 255, 255, 0.12)", "$type": "color", "$description": "Fondo hover — surface-dark" },
+    "surface-dark-btn-hover-color":    { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Texto hover — surface-dark" },
+    "surface-dark-btn-current-bg":     { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Fondo página activa — surface-dark" },
+    "surface-dark-btn-current-color":  { "$value": "{color.background.dark}",   "$type": "color", "$description": "Texto página activa — surface-dark" },
+    "surface-dark-btn-disabled-color": { "$value": "{color.grey-light}",        "$type": "color", "$description": "Texto deshabilitado — surface-dark" },
+    "surface-dark-ellipsis-color":     { "$value": "{color.grey-light}",        "$type": "color", "$description": "Color del ellipsis — surface-dark" },
+    "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring color — surface-dark" }
   }
 }

@@ -68,3 +68,16 @@
   --text-list-font-weight: var(--text-paragraph-font-weight); /** List font weight */
   --text-list-color: var(--text-paragraph-color); /** List text color */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --text-h1-color: var(--color-text-on-dark); /** H1 color — surface-dark */
+  --text-h2-color: var(--color-text-on-dark); /** H2 color — surface-dark */
+  --text-h3-color: var(--color-text-on-dark); /** H3 color — surface-dark */
+  --text-h4-color: var(--color-text-on-dark); /** H4 color — surface-dark */
+  --text-h5-color: var(--color-text-on-dark); /** H5 color — surface-dark */
+  --text-h6-color: var(--color-text-on-dark); /** H6 color — surface-dark */
+  --text-paragraph-color: var(--color-text-on-dark); /** Paragraph color — surface-dark */
+  --text-list-color: var(--color-text-on-dark); /** List color — surface-dark */
+}

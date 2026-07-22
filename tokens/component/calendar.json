@@ -52,6 +52,21 @@
 
     "lg-day-size":               { "$value": "{spacing.7}",                "$type": "dimension", "$description": "Tamaño de los botones de día — lg" },
     "lg-title-font-size":        { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño del título — lg" },
-    "lg-day-font-size":          { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño de fuente de los días — lg" }
+    "lg-day-font-size":          { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño de fuente de los días — lg" },
+    "surface-dark-nav-color":               { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de navegación — surface-dark" },
+    "surface-dark-nav-hover-bg":            { "$value": "rgba(255, 255, 255, 0.12)",  "$type": "color", "$description": "Fondo hover de navegación — surface-dark" },
+    "surface-dark-nav-disabled-color":      { "$value": "{color.grey-light}",         "$type": "color", "$description": "Color deshabilitado de navegación — surface-dark" },
+    "surface-dark-nav-focus-ring-color":    { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de navegación — surface-dark" },
+    "surface-dark-title-color":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del título — surface-dark" },
+    "surface-dark-weekday-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de cabeceras de día — surface-dark" },
+    "surface-dark-day-color":               { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de días — surface-dark" },
+    "surface-dark-day-hover-bg":            { "$value": "rgba(255, 255, 255, 0.12)",  "$type": "color", "$description": "Fondo hover de días — surface-dark" },
+    "surface-dark-day-focus-ring-color":    { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de días — surface-dark" },
+    "surface-dark-today-color":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del día de hoy — surface-dark" },
+    "surface-dark-today-border-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde del día de hoy — surface-dark" },
+    "surface-dark-selected-bg":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo del día seleccionado — surface-dark" },
+    "surface-dark-selected-color":          { "$value": "{color.background.dark}",    "$type": "color", "$description": "Texto del día seleccionado — surface-dark" },
+    "surface-dark-outside-color":           { "$value": "{color.grey-light}",         "$type": "color", "$description": "Días fuera de mes — surface-dark" },
+    "surface-dark-disabled-color":          { "$value": "{color.grey-light}",         "$type": "color", "$description": "Días deshabilitados — surface-dark" }
   }
 }
