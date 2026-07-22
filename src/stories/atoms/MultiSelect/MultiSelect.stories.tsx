@@ -20,10 +20,6 @@ const meta: Meta<typeof MultiSelect> = {
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
     readOnly: { control: 'boolean' },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Aplica estilos oscuros al dropdown (portal Radix fuera del árbol DOM — no hereda `.surface-dark` por cascade).',
-    },
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],

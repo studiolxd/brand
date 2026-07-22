@@ -244,32 +244,3 @@
   padding-block: var(--multi-select-lg-item-padding-block);
 }
 
-/* ─── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
-.async-multi-select__content.async-multi-select__content--dark {
-  background-color: var(--color-background-dark);
-  border-color: var(--color-text-on-dark);
-}
-
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item {
-  color: var(--color-text-on-dark);
-}
-
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item:focus-visible,
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item:hover,
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item--active {
-  background-color: var(--color-text-on-dark);
-  color: var(--color-background-dark);
-}
-
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item-check-mark {
-  background-color: var(--color-background-dark);
-}
-
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__empty {
-  color: var(--color-text-on-dark);
-  opacity: 0.6;
-}
-
-.async-multi-select__content.async-multi-select__content--dark .async-multi-select__item + .async-multi-select__item {
-  border-color: var(--color-text-on-dark);
-}

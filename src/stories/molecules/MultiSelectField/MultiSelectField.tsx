@@ -15,7 +15,6 @@ export interface MultiSelectFieldProps {
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
-  dark?: boolean;
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
@@ -33,7 +32,6 @@ export function MultiSelectField({
   placeholder,
   disabled,
   readOnly,
-  dark,
   size = 'md',
   error = false,
   errorMessage,
@@ -58,7 +56,6 @@ export function MultiSelectField({
         placeholder={placeholder}
         disabled={disabled}
         readOnly={readOnly}
-        dark={dark}
         size={size}
         onValueChange={onValueChange}
       />

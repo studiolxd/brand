@@ -22,11 +22,20 @@ export interface AsyncMultiSelectProps {
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
-  dark?: boolean;
   size?: 'sm' | 'md' | 'lg';
   id?: string;
   'aria-label'?: string;
   'aria-describedby'?: string;
+  /**
+   * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
+   * `Portal.container`). Por defecto se monta en `document.body`, que
+   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
+   * sin configuración adicional. Solo hace falta pasarlo cuando el
+   * AsyncMultiSelect vive dentro de un `.surface-dark` **anidado** (no en
+   * la raíz), ya que ese contexto no llega a `document.body` por la
+   * cascada.
+   */
+  container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
 }
 
 export function AsyncMultiSelect({
@@ -38,11 +47,11 @@ export function AsyncMultiSelect({
   placeholder = 'Buscar…',
   disabled,
   readOnly,
-  dark,
   size = 'md',
   id,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedby,
+  container,
 }: AsyncMultiSelectProps) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -145,7 +154,6 @@ export function AsyncMultiSelect({
   const contentClass = [
     'async-multi-select__content',
     size !== 'md' ? `async-multi-select__content--${size}` : '',
-    dark ? 'async-multi-select__content--dark' : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -195,7 +203,7 @@ export function AsyncMultiSelect({
         </div>
       </RadixPopover.Anchor>
 
-      <RadixPopover.Portal>
+      <RadixPopover.Portal container={container}>
         <DismissableLayerBranch>
         <RadixPopover.Content
           className={contentClass}
