@@ -1,6 +1,6 @@
 {
   "popover": {
-    "bg":                  { "$value": "{floating-panel.bg}",                "$type": "color",     "$description": "Fondo del panel" },
+    "bg":                  { "$value": "{floating-panel.bg}",                "$type": "color",     "$description": "Fondo del panel. Solo superficie — sin tokens de ítem (--popover-item-*): Popover recibe children libres. Para contenido tipo menú (filas con hover/separador), pareja con context-menu-* (ya trae ese contrato + overrides surface-dark). Ver Popover.mdx." },
     "border-width":        { "$value": "{floating-panel.border-width}",       "$type": "dimension", "$description": "Grosor del borde" },
     "border-color":        { "$value": "{floating-panel.border-color}",       "$type": "color",     "$description": "Color del borde" },
     "border-radius":       { "$value": "{floating-panel.border-radius}",      "$type": "dimension", "$description": "Radio del panel" },

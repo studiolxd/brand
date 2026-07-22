@@ -11,6 +11,6 @@
   --popover-shadow: var(--floating-panel-shadow); /** Sombra del panel */
   --popover-transition-duration: var(--floating-panel-transition-duration); /** Duración de la animación de entrada/salida */
   --popover-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
-  --popover-bg: var(--floating-panel-bg); /** Fondo del panel */
+  --popover-bg: var(--floating-panel-bg); /** Fondo del panel. Solo superficie — sin tokens de ítem (--popover-item-*): Popover recibe children libres. Para contenido tipo menú (filas con hover/separador), pareja con context-menu-* (ya trae ese contrato + overrides surface-dark). Ver Popover.mdx. */
   --popover-border-color: var(--floating-panel-border-color); /** Color del borde */
 }

@@ -50,3 +50,18 @@ Añadir `.surface-dark` a cualquier contenedor ancestro aplica el tema oscuro au
 | `--popover-z-index` | Capa z del panel |
 | `--popover-transition-duration` | Duración de la animación (ms) |
 | `--popover-transition-easing` | Easing de la animación |
+
+`--popover-*` cubre **solo la superficie del panel** (fondo, borde, sombra,
+espaciado) — deliberado, porque `Popover` recibe `children: ReactNode`
+libre, sin contrato de ítems. No hay `--popover-item-*` ni
+`--popover-separator-color`, y no van a añadirse: si el contenido que metes
+dentro es una lista de filas/ítems seleccionables (con hover, separadores,
+texto reactivo a `.surface-dark`/tema oscuro), no inventes esos tokens a
+mano — usa la familia **`--context-menu-*`** (`--context-menu-item-color`,
+`--context-menu-item-hover-bg`, `--context-menu-item-hover-color`,
+`--context-menu-separator-color`…), que ya trae ese contrato completo
+(superficie + ítems + estados, con overrides oscuros incluidos) y comparte
+fondo/base con `Popover` vía `--floating-panel-*`. Es el pareado esperado
+para "panel de `Popover` + contenido tipo menú", aunque tu contenido no use
+semántica ARIA `role="menu"` (para eso, considera usar `ContextMenu`
+directamente en vez de recrearlo a mano dentro de un `Popover`).

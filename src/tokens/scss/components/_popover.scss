@@ -1,7 +1,7 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-popover-bg: #ffffff; // Fondo del panel
+$lxd-popover-bg: #ffffff; // Fondo del panel. Solo superficie — sin tokens de ítem (--popover-item-*): Popover recibe children libres. Para contenido tipo menú (filas con hover/separador), pareja con context-menu-* (ya trae ese contrato + overrides surface-dark). Ver Popover.mdx.
 $lxd-popover-border-width: 1px; // Grosor del borde
 $lxd-popover-border-color: #111e30; // Color del borde
 $lxd-popover-border-radius: 0px; // Radio del panel
