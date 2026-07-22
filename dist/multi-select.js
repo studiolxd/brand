@@ -6,11 +6,11 @@ import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import { useEffect as r, useId as i, useRef as a, useState as o } from "react";
 import * as s from "@radix-ui/react-popover";
 //#region src/stories/atoms/MultiSelect/MultiSelect.tsx
-function c({ options: c, value: l, defaultValue: u = [], placeholder: d = "Seleccionar…", disabled: f, readOnly: p, dark: m, size: h = "md", onValueChange: g, id: _, "aria-label": v }) {
+function c({ options: c, value: l, defaultValue: u = [], placeholder: d = "Seleccionar…", disabled: f, readOnly: p, size: m = "md", onValueChange: h, id: g, "aria-label": _, container: v }) {
 	let [y, b] = o(!1), [x, S] = o(u), [C, w] = o(0), T = a(null), E = i(), D = l === void 0 ? x : l;
 	function O(e) {
 		let t = D.includes(e) ? D.filter((t) => t !== e) : [...D, e];
-		l === void 0 && S(t), g?.(t);
+		l === void 0 && S(t), h?.(t);
 	}
 	function k(e) {
 		f || p || (b(e), e && w(0));
@@ -23,13 +23,9 @@ function c({ options: c, value: l, defaultValue: u = [], placeholder: d = "Selec
 	}
 	let j = [
 		"multi-select",
-		h === "md" ? "" : `multi-select--${h}`,
+		m === "md" ? "" : `multi-select--${m}`,
 		f ? "multi-select--disabled" : ""
-	].filter(Boolean).join(" "), M = [
-		"multi-select__content",
-		h === "md" ? "" : `multi-select__content--${h}`,
-		m ? "multi-select__content--dark" : ""
-	].filter(Boolean).join(" ");
+	].filter(Boolean).join(" "), M = ["multi-select__content", m === "md" ? "" : `multi-select__content--${m}`].filter(Boolean).join(" ");
 	return /* @__PURE__ */ n(s.Root, {
 		open: y,
 		onOpenChange: k,
@@ -42,10 +38,10 @@ function c({ options: c, value: l, defaultValue: u = [], placeholder: d = "Selec
 				"aria-expanded": y,
 				"aria-haspopup": "listbox",
 				"aria-controls": E,
-				"aria-label": v ?? d,
+				"aria-label": _ ?? d,
 				"aria-disabled": f || void 0,
 				"aria-readonly": p || void 0,
-				id: _,
+				id: g,
 				"data-state": y ? "open" : "closed",
 				onKeyDown: (e) => {
 					(e.key === " " || e.key === "Enter") && (e.preventDefault(), k(!y));
@@ -80,41 +76,44 @@ function c({ options: c, value: l, defaultValue: u = [], placeholder: d = "Selec
 				}), /* @__PURE__ */ t(e, {
 					name: "chevron",
 					className: "multi-select__icon",
-					size: h === "sm" ? "xs" : h === "lg" ? "md" : "sm"
+					size: m === "sm" ? "xs" : m === "lg" ? "md" : "sm"
 				})]
 			})
-		}), /* @__PURE__ */ t(s.Portal, { children: /* @__PURE__ */ t(s.Content, {
-			className: M,
-			align: "start",
-			sideOffset: -1,
-			onOpenAutoFocus: (e) => e.preventDefault(),
-			children: /* @__PURE__ */ t("div", {
-				ref: T,
-				role: "listbox",
-				"aria-multiselectable": "true",
-				"aria-label": v ?? d,
-				id: E,
-				onKeyDown: A,
-				children: c.map((e, r) => {
-					let i = D.includes(e.value);
-					return /* @__PURE__ */ n("button", {
-						type: "button",
-						role: "option",
-						"aria-selected": i,
-						"aria-label": e["aria-label"] ?? e.label,
-						className: ["multi-select__item", i ? "multi-select__item--selected" : ""].filter(Boolean).join(" "),
-						tabIndex: r === C ? 0 : -1,
-						onClick: () => O(e.value),
-						onFocus: () => w(r),
-						children: [/* @__PURE__ */ t("span", {
-							className: "multi-select__item-check",
-							"aria-hidden": "true",
-							children: /* @__PURE__ */ t("span", { className: "multi-select__item-check-mark" })
-						}), /* @__PURE__ */ t("span", { children: e.label })]
-					}, e.value);
+		}), /* @__PURE__ */ t(s.Portal, {
+			container: v,
+			children: /* @__PURE__ */ t(s.Content, {
+				className: M,
+				align: "start",
+				sideOffset: -1,
+				onOpenAutoFocus: (e) => e.preventDefault(),
+				children: /* @__PURE__ */ t("div", {
+					ref: T,
+					role: "listbox",
+					"aria-multiselectable": "true",
+					"aria-label": _ ?? d,
+					id: E,
+					onKeyDown: A,
+					children: c.map((e, r) => {
+						let i = D.includes(e.value);
+						return /* @__PURE__ */ n("button", {
+							type: "button",
+							role: "option",
+							"aria-selected": i,
+							"aria-label": e["aria-label"] ?? e.label,
+							className: ["multi-select__item", i ? "multi-select__item--selected" : ""].filter(Boolean).join(" "),
+							tabIndex: r === C ? 0 : -1,
+							onClick: () => O(e.value),
+							onFocus: () => w(r),
+							children: [/* @__PURE__ */ t("span", {
+								className: "multi-select__item-check",
+								"aria-hidden": "true",
+								children: /* @__PURE__ */ t("span", { className: "multi-select__item-check-mark" })
+							}), /* @__PURE__ */ t("span", { children: e.label })]
+						}, e.value);
+					})
 				})
 			})
-		}) })]
+		})]
 	});
 }
 //#endregion

@@ -191,32 +191,3 @@
   }
 }
 
-/* ---- Dark variant ---- */
-
-.header.header--dark {
-  background-color: var(--header-dark-bg);
-}
-
-.header.header--dark::after {
-  background-color: var(--header-dark-bg);
-}
-
-.header.header--dark .header__logo {
-  color: var(--header-nav-dark-color);
-}
-
-.header.header--dark .header__navbar {
-  background-color: var(--header-dark-bg);
-}
-
-.header.header--dark .header__featured {
-  color: var(--header-nav-dark-color);
-}
-
-.header.header--dark .header__nav-link {
-  color: var(--header-nav-dark-color);
-}
-
-.header.header--dark .header__nav-link:focus-visible {
-  outline-color: var(--header-nav-dark-color);
-}

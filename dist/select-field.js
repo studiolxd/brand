@@ -11,13 +11,13 @@ function a(e) {
 function o(e) {
 	return e === i ? "" : e;
 }
-function s({ id: s, label: c, labelHidden: l = !1, options: u, value: d, defaultValue: f, placeholder: p, disabled: m, dark: h, size: g = "md", error: _ = !1, errorMessage: v, helperText: y, onValueChange: b }) {
-	let x = v ? `${s}-error` : void 0, S = y ? `${s}-helper` : void 0, C = u.map((e) => e.value === "" ? {
+function s({ id: s, label: c, labelHidden: l = !1, options: u, value: d, defaultValue: f, placeholder: p, disabled: m, size: h = "md", error: g = !1, errorMessage: _, helperText: v, onValueChange: y }) {
+	let b = _ ? `${s}-error` : void 0, x = v ? `${s}-helper` : void 0, S = u.map((e) => e.value === "" ? {
 		...e,
 		value: i
 	} : e);
 	return /* @__PURE__ */ r("div", {
-		className: ["select-field", _ ? "select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["select-field", g ? "select-field--error" : ""].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ n(e, {
 				htmlFor: s,
@@ -26,25 +26,24 @@ function s({ id: s, label: c, labelHidden: l = !1, options: u, value: d, default
 			}),
 			/* @__PURE__ */ n(t, {
 				id: s,
-				options: C,
+				options: S,
 				value: a(d),
 				defaultValue: a(f),
 				placeholder: p,
 				disabled: m,
-				dark: h,
-				size: g,
-				onValueChange: b ? (e) => b(o(e)) : void 0
+				size: h,
+				onValueChange: y ? (e) => y(o(e)) : void 0
+			}),
+			_ && /* @__PURE__ */ n("span", {
+				id: b,
+				className: "select-field__error",
+				role: "alert",
+				children: _
 			}),
 			v && /* @__PURE__ */ n("span", {
 				id: x,
-				className: "select-field__error",
-				role: "alert",
-				children: v
-			}),
-			y && /* @__PURE__ */ n("span", {
-				id: S,
 				className: "select-field__helper",
-				children: y
+				children: v
 			})
 		]
 	});

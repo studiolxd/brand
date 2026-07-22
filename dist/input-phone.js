@@ -6,12 +6,8 @@ import * as r from "@radix-ui/react-select";
 import { getCountryCallingCode as i } from "libphonenumber-js";
 import a from "react-phone-number-input";
 //#region src/stories/atoms/InputPhone/InputPhone.tsx
-function o({ value: a, onChange: o, options: s, disabled: c, dark: l, size: u = "md" }) {
-	let d = "__intl__", f = (e) => e ?? d, p = (e) => e === d ? void 0 : e, m = u === "sm" ? "xs" : u === "lg" ? "md" : "sm", h = [
-		"input-phone__country-content",
-		u === "md" ? "" : `input-phone__country-content--${u}`,
-		l ? "input-phone__country-content--dark" : ""
-	].filter(Boolean).join(" ");
+function o({ value: a, onChange: o, options: s, disabled: c, size: l = "md", container: u }) {
+	let d = "__intl__", f = (e) => e ?? d, p = (e) => e === d ? void 0 : e, m = l === "sm" ? "xs" : l === "lg" ? "md" : "sm", h = ["input-phone__country-content", l === "md" ? "" : `input-phone__country-content--${l}`].filter(Boolean).join(" ");
 	return /* @__PURE__ */ n(r.Root, {
 		value: f(a),
 		onValueChange: (e) => o(p(e)),
@@ -27,39 +23,42 @@ function o({ value: a, onChange: o, options: s, disabled: c, dark: l, size: u = 
 					size: m
 				})
 			})]
-		}), /* @__PURE__ */ t(r.Portal, { children: /* @__PURE__ */ t(r.Content, {
-			className: h,
-			position: "popper",
-			children: /* @__PURE__ */ t(r.Viewport, { children: s.map(({ value: e, label: n }) => /* @__PURE__ */ t(r.Item, {
-				value: f(e),
-				className: "input-phone__country-item",
-				children: /* @__PURE__ */ t(r.ItemText, { children: n })
-			}, f(e))) })
-		}) })]
+		}), /* @__PURE__ */ t(r.Portal, {
+			container: u,
+			children: /* @__PURE__ */ t(r.Content, {
+				className: h,
+				position: "popper",
+				children: /* @__PURE__ */ t(r.Viewport, { children: s.map(({ value: e, label: n }) => /* @__PURE__ */ t(r.Item, {
+					value: f(e),
+					className: "input-phone__country-item",
+					children: /* @__PURE__ */ t(r.ItemText, { children: n })
+				}, f(e))) })
+			})
+		})]
 	});
 }
-function s({ value: e, defaultCountry: n = "ES", placeholder: r, disabled: i, error: s = !1, dark: l, size: u = "md", id: d, name: f, describedBy: p, onChange: m, onBlur: h }) {
+function s({ value: e, defaultCountry: n = "ES", placeholder: r, disabled: i, error: s = !1, size: l = "md", id: u, name: d, describedBy: f, onChange: p, onBlur: m, container: h }) {
 	return /* @__PURE__ */ t(a, {
 		className: [
 			"input-phone",
 			s ? "input-phone--error" : "",
-			u === "md" ? "" : `input-phone--${u}`
+			l === "md" ? "" : `input-phone--${l}`
 		].filter(Boolean).join(" "),
 		value: e,
 		defaultCountry: n,
 		placeholder: r,
 		disabled: i,
-		id: d,
-		name: f,
+		id: u,
+		name: d,
 		inputComponent: c,
 		countrySelectComponent: o,
 		countrySelectProps: {
-			dark: l,
-			size: u
+			size: l,
+			container: h
 		},
-		onChange: (e) => m?.(e),
-		onBlur: h,
-		numberInputProps: { "aria-describedby": p }
+		onChange: (e) => p?.(e),
+		onBlur: m,
+		numberInputProps: { "aria-describedby": f }
 	});
 }
 var c = (e) => /* @__PURE__ */ t("input", {

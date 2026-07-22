@@ -7,44 +7,43 @@ import { useMemo as r } from "react";
 function i(e) {
 	return String(e).padStart(2, "0");
 }
-function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, dark: f, id: p }) {
-	let m = r(() => Array.from({ length: 24 }, (e, t) => ({
+function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f }) {
+	let p = r(() => Array.from({ length: 24 }, (e, t) => ({
 		value: String(t),
 		label: i(t)
-	})), []), h = r(() => {
+	})), []), m = r(() => {
 		let e = [];
 		for (let t = 0; t < 60; t += s) e.push({
 			value: String(t),
 			label: i(t)
 		});
 		return e;
-	}, [s]), g = (e) => {
+	}, [s]), h = (e) => {
 		let t = parseInt(e, 10), n = a?.m ?? 0;
 		o?.({
 			h: t,
 			m: n
 		});
-	}, _ = (e) => {
+	}, g = (e) => {
 		let t = a?.h ?? 0;
 		o?.({
 			h: t,
 			m: parseInt(e, 10)
 		});
-	}, v = ["time-select", d ? "time-select--error" : ""].filter(Boolean).join(" "), y = a == null ? void 0 : String(a.h), b = a == null ? void 0 : String(a.m);
+	}, _ = ["time-select", d ? "time-select--error" : ""].filter(Boolean).join(" "), v = a == null ? void 0 : String(a.h), y = a == null ? void 0 : String(a.m);
 	return /* @__PURE__ */ n("div", {
-		className: v,
+		className: _,
 		children: [
 			/* @__PURE__ */ t(e, {
-				id: p,
-				options: m,
-				value: y,
+				id: f,
+				options: p,
+				value: v,
 				placeholder: "HH",
 				size: c,
 				disabled: l,
 				readOnly: u,
-				dark: f,
 				"aria-label": "Horas",
-				onValueChange: g
+				onValueChange: h
 			}),
 			/* @__PURE__ */ t("span", {
 				className: "time-select__sep",
@@ -52,15 +51,14 @@ function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, re
 				children: ":"
 			}),
 			/* @__PURE__ */ t(e, {
-				options: h,
-				value: b,
+				options: m,
+				value: y,
 				placeholder: "MM",
 				size: c,
 				disabled: l,
 				readOnly: u,
-				dark: f,
 				"aria-label": "Minutos",
-				onValueChange: _
+				onValueChange: g
 			})
 		]
 	});

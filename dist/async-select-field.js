@@ -4,10 +4,10 @@ import { AsyncSelect as e } from "./async-select.js";
 import { Label as t } from "./label.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx
-function i({ id: i, label: a, labelHidden: o = !1, onSearch: s, value: c, onValueChange: l, selectedOption: u, placeholder: d, disabled: f, readOnly: p, dark: m, size: h = "md", error: g = !1, errorMessage: _, helperText: v }) {
-	let y = _ ? `${i}-error` : void 0, b = v ? `${i}-helper` : void 0;
+function i({ id: i, label: a, labelHidden: o = !1, onSearch: s, value: c, onValueChange: l, selectedOption: u, placeholder: d, disabled: f, readOnly: p, size: m = "md", error: h = !1, errorMessage: g, helperText: _ }) {
+	let v = g ? `${i}-error` : void 0, y = _ ? `${i}-helper` : void 0;
 	return /* @__PURE__ */ r("div", {
-		className: ["async-select-field", g ? "async-select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["async-select-field", h ? "async-select-field--error" : ""].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ n(t, {
 				htmlFor: i,
@@ -23,20 +23,19 @@ function i({ id: i, label: a, labelHidden: o = !1, onSearch: s, value: c, onValu
 				placeholder: d,
 				disabled: f,
 				readOnly: p,
-				dark: m,
-				size: h,
-				"aria-describedby": [y, b].filter(Boolean).join(" ") || void 0
+				size: m,
+				"aria-describedby": [v, y].filter(Boolean).join(" ") || void 0
+			}),
+			g && /* @__PURE__ */ n("span", {
+				id: v,
+				className: "async-select-field__error",
+				role: "alert",
+				children: g
 			}),
 			_ && /* @__PURE__ */ n("span", {
 				id: y,
-				className: "async-select-field__error",
-				role: "alert",
-				children: _
-			}),
-			v && /* @__PURE__ */ n("span", {
-				id: b,
 				className: "async-select-field__helper",
-				children: v
+				children: _
 			})
 		]
 	});

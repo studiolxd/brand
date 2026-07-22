@@ -24,21 +24,23 @@ var a = i.Root, o = i.Value, s = i.Group, c = r(function({ size: r = "md", class
 			})
 		})]
 	});
-}), l = r(function({ size: e = "md", dark: n = !1, className: r, children: a, position: o = "popper", sideOffset: s = -1, ...c }, l) {
+}), l = r(function({ size: e = "md", container: n, className: r, children: a, position: o = "popper", sideOffset: s = -1, ...c }, l) {
 	let u = [
 		"select__content",
 		e === "md" ? "" : `select__content--${e}`,
-		n ? "select__content--dark" : "",
 		r ?? ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ t(i.Portal, { children: /* @__PURE__ */ t(i.Content, {
-		ref: l,
-		className: u,
-		position: o,
-		sideOffset: s,
-		...c,
-		children: /* @__PURE__ */ t(i.Viewport, { children: a })
-	}) });
+	return /* @__PURE__ */ t(i.Portal, {
+		container: n,
+		children: /* @__PURE__ */ t(i.Content, {
+			ref: l,
+			className: u,
+			position: o,
+			sideOffset: s,
+			...c,
+			children: /* @__PURE__ */ t(i.Viewport, { children: a })
+		})
+	});
 }), u = r(function({ className: e, children: n, ...r }, a) {
 	let o = ["select__item", e ?? ""].filter(Boolean).join(" ");
 	return /* @__PURE__ */ t(i.Item, {
@@ -63,23 +65,23 @@ var a = i.Root, o = i.Value, s = i.Group, c = r(function({ size: r = "md", class
 		...n
 	});
 });
-function p({ options: e, value: r, defaultValue: i, placeholder: s = "Seleccionar…", disabled: d, readOnly: f, dark: p, size: m = "md", onValueChange: h, id: g, "aria-label": _ }) {
+function p({ options: e, value: r, defaultValue: i, placeholder: s = "Seleccionar…", disabled: d, readOnly: f, size: p = "md", onValueChange: m, id: h, "aria-label": g, container: _ }) {
 	return /* @__PURE__ */ n(a, {
 		value: r,
 		defaultValue: i,
 		disabled: d,
 		open: f ? !1 : void 0,
 		onOpenChange: f ? () => {} : void 0,
-		onValueChange: f ? void 0 : h,
+		onValueChange: f ? void 0 : m,
 		children: [/* @__PURE__ */ t(c, {
-			size: m,
-			id: g,
-			"aria-label": _ ?? s,
+			size: p,
+			id: h,
+			"aria-label": g ?? s,
 			"aria-readonly": f || void 0,
 			children: /* @__PURE__ */ t(o, { placeholder: s })
 		}), /* @__PURE__ */ t(l, {
-			size: m,
-			dark: p,
+			size: p,
+			container: _,
 			children: e.map(({ value: e, label: n, "aria-label": r }) => /* @__PURE__ */ t(u, {
 				value: e,
 				"aria-label": r,

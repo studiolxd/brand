@@ -12,10 +12,9 @@ export interface AsyncSelectFieldProps {
     placeholder?: string;
     disabled?: boolean;
     readOnly?: boolean;
-    dark?: boolean;
     error?: boolean;
     errorMessage?: string;
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
 }
-export declare function AsyncSelectField({ id, label, labelHidden, onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, dark, size, error, errorMessage, helperText, }: AsyncSelectFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function AsyncSelectField({ id, label, labelHidden, onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, size, error, errorMessage, helperText, }: AsyncSelectFieldProps): import("react/jsx-runtime").JSX.Element;

@@ -96,6 +96,106 @@ declare const ICONS: {
         readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
+    readonly sun: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly moon: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly bell: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'book-open': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'chart-bar': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'circle-check': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly check: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'chevrons-up-down': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'credit-card': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly download: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'graduation-cap': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly key: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly logout: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly message: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'device-desktop': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly dots: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'layout-sidebar': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly plus: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly receipt: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'file-text': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly settings: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly 'shield-check': {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly shield: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly user: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly webhook: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
 };
 export type IconName = keyof typeof ICONS;
 export declare const ICON_NAMES: IconName[];

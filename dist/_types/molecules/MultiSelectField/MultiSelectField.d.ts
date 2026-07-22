@@ -11,11 +11,10 @@ export interface MultiSelectFieldProps {
     placeholder?: string;
     disabled?: boolean;
     readOnly?: boolean;
-    dark?: boolean;
     error?: boolean;
     errorMessage?: string;
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
     onValueChange?: (value: string[]) => void;
 }
-export declare function MultiSelectField({ id, label, labelHidden, options, value, defaultValue, placeholder, disabled, readOnly, dark, size, error, errorMessage, helperText, onValueChange, }: MultiSelectFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function MultiSelectField({ id, label, labelHidden, options, value, defaultValue, placeholder, disabled, readOnly, size, error, errorMessage, helperText, onValueChange, }: MultiSelectFieldProps): import("react/jsx-runtime").JSX.Element;

@@ -8,7 +8,7 @@ import { useCallback as i, useId as a, useRef as o, useState as s } from "react"
 import * as c from "@radix-ui/react-popover";
 import { DismissableLayerBranch as l } from "@radix-ui/react-dismissable-layer";
 //#region src/stories/atoms/AsyncSelect/AsyncSelect.tsx
-function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeholder: m = "Buscar…", disabled: h, readOnly: g, dark: _, size: v = "md", id: y, "aria-label": b, "aria-describedby": x }) {
+function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeholder: m = "Buscar…", disabled: h, readOnly: g, size: _ = "md", id: v, "aria-label": y, "aria-describedby": b, container: x }) {
 	let [S, C] = s(!1), [w, T] = s(""), [E, D] = s(!1), [O, k] = s([]), [A, j] = s(!1), [M, N] = s(-1), [P, F] = s(null), [I, L] = s(null), R = o(null), z = o(null), B = o(null), V = a(), H = a(), U = d === void 0 ? P : d, W = p === void 0 ? I : p, G = (e) => `${H}-opt-${e}`, K = i(async (e) => {
 		D(!0), j(!1);
 		try {
@@ -37,13 +37,9 @@ function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeho
 	}
 	let Q = S ? w : W?.label ?? "", $ = [
 		"async-select",
-		v === "md" ? "" : `async-select--${v}`,
+		_ === "md" ? "" : `async-select--${_}`,
 		h ? "async-select--disabled" : ""
-	].filter(Boolean).join(" "), ee = [
-		"async-select__content",
-		v === "md" ? "" : `async-select__content--${v}`,
-		_ ? "async-select__content--dark" : ""
-	].filter(Boolean).join(" ");
+	].filter(Boolean).join(" "), ee = ["async-select__content", _ === "md" ? "" : `async-select__content--${_}`].filter(Boolean).join(" ");
 	return /* @__PURE__ */ r(c.Root, {
 		open: S,
 		modal: !1,
@@ -57,7 +53,7 @@ function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeho
 				children: [
 					/* @__PURE__ */ n("input", {
 						ref: z,
-						id: y,
+						id: v,
 						type: "text",
 						className: "async-select__input",
 						value: Q,
@@ -67,8 +63,8 @@ function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeho
 						placeholder: m,
 						disabled: h,
 						readOnly: g,
-						"aria-label": b ?? m,
-						"aria-describedby": x,
+						"aria-label": y ?? m,
+						"aria-describedby": b,
 						"aria-expanded": S,
 						"aria-haspopup": "listbox",
 						"aria-controls": V,
@@ -93,49 +89,52 @@ function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeho
 					})
 				]
 			})
-		}), /* @__PURE__ */ n(c.Portal, { children: /* @__PURE__ */ n(l, { children: /* @__PURE__ */ n(c.Content, {
-			className: ee,
-			align: "start",
-			sideOffset: -1,
-			onOpenAutoFocus: (e) => e.preventDefault(),
-			onInteractOutside: (e) => {
-				B.current?.contains(e.target) || C(!1);
-			},
-			children: /* @__PURE__ */ r("div", {
-				role: "listbox",
-				"aria-label": b ?? m,
-				id: V,
-				children: [
-					E && /* @__PURE__ */ n("div", {
-						className: "async-select__loading",
-						children: /* @__PURE__ */ n(t, {
-							size: "sm",
-							label: "Buscando…"
+		}), /* @__PURE__ */ n(c.Portal, {
+			container: x,
+			children: /* @__PURE__ */ n(l, { children: /* @__PURE__ */ n(c.Content, {
+				className: ee,
+				align: "start",
+				sideOffset: -1,
+				onOpenAutoFocus: (e) => e.preventDefault(),
+				onInteractOutside: (e) => {
+					B.current?.contains(e.target) || C(!1);
+				},
+				children: /* @__PURE__ */ r("div", {
+					role: "listbox",
+					"aria-label": y ?? m,
+					id: V,
+					children: [
+						E && /* @__PURE__ */ n("div", {
+							className: "async-select__loading",
+							children: /* @__PURE__ */ n(t, {
+								size: "sm",
+								label: "Buscando…"
+							})
+						}),
+						!E && A && O.length === 0 && /* @__PURE__ */ n("div", {
+							className: "async-select__empty",
+							children: "Sin resultados"
+						}),
+						!E && O.map((e, t) => {
+							let r = e.value === U, i = M === t;
+							return /* @__PURE__ */ n("div", {
+								id: G(t),
+								role: "option",
+								"aria-selected": r,
+								className: [
+									"async-select__item",
+									r ? "async-select__item--selected" : "",
+									i ? "async-select__item--active" : ""
+								].filter(Boolean).join(" "),
+								onPointerDown: (e) => e.preventDefault(),
+								onClick: () => Y(e),
+								children: e.label
+							}, e.value);
 						})
-					}),
-					!E && A && O.length === 0 && /* @__PURE__ */ n("div", {
-						className: "async-select__empty",
-						children: "Sin resultados"
-					}),
-					!E && O.map((e, t) => {
-						let r = e.value === U, i = M === t;
-						return /* @__PURE__ */ n("div", {
-							id: G(t),
-							role: "option",
-							"aria-selected": r,
-							className: [
-								"async-select__item",
-								r ? "async-select__item--selected" : "",
-								i ? "async-select__item--active" : ""
-							].filter(Boolean).join(" "),
-							onPointerDown: (e) => e.preventDefault(),
-							onClick: () => Y(e),
-							children: e.label
-						}, e.value);
-					})
-				]
-			})
-		}) }) })]
+					]
+				})
+			}) })
+		})]
 	});
 }
 //#endregion

@@ -12,8 +12,7 @@ export interface TimeSelectProps {
     disabled?: boolean;
     readOnly?: boolean;
     error?: boolean;
-    dark?: boolean;
     /** id aplicado al trigger de horas */
     id?: string;
 }
-export declare function TimeSelect({ value, onChange, step, size, disabled, readOnly, error, dark, id, }: TimeSelectProps): import("react/jsx-runtime").JSX.Element;
+export declare function TimeSelect({ value, onChange, step, size, disabled, readOnly, error, id, }: TimeSelectProps): import("react/jsx-runtime").JSX.Element;

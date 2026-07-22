@@ -11,7 +11,6 @@ interface HeaderProps {
     logoHref?: string;
     logoLabel?: string;
     navLabel?: string;
-    dark?: boolean;
 }
-export declare function Header({ id, navItems, featuredLink, actions, logoHref, logoLabel, navLabel, dark, }: HeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function Header({ id, navItems, featuredLink, actions, logoHref, logoLabel, navLabel, }: HeaderProps): import("react/jsx-runtime").JSX.Element;
 export {};
