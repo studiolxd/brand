@@ -16,7 +16,6 @@ export interface TimeFieldProps {
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
-  dark?: boolean;
 }
 
 export function TimeField({
@@ -32,7 +31,6 @@ export function TimeField({
   error = false,
   errorMessage,
   helperText,
-  dark,
 }: TimeFieldProps) {
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
@@ -54,7 +52,6 @@ export function TimeField({
         disabled={disabled}
         readOnly={readOnly}
         error={error}
-        dark={dark}
       />
       {errorMessage && (
         <span id={errorId} className="time-field__error" role="alert">{errorMessage}</span>

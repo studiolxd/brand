@@ -173,17 +173,3 @@
   font-size: var(--input-lg-font-size);
 }
 
-/* ── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
-.input-phone__country-content.input-phone__country-content--dark {
-  background-color: var(--input-dark-bg);
-  border-color: var(--input-dark-border-color);
-}
-
-.input-phone__country-content.input-phone__country-content--dark .input-phone__country-item {
-  color: var(--input-dark-color);
-}
-
-.input-phone__country-content.input-phone__country-content--dark .input-phone__country-item[data-highlighted] {
-  background-color: var(--input-dark-color);
-  color: var(--input-dark-bg);
-}

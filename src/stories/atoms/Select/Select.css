@@ -152,26 +152,3 @@
   margin-block: var(--select-item-padding-block);
 }
 
-/* ─── Dark portal content (Radix Portal, fuera del árbol DOM) ─────────────── */
-.select__content.select__content--dark {
-  background-color: var(--select-dark-content-bg);
-  border-color: var(--select-dark-content-border-color);
-}
-
-.select__content.select__content--dark .select__label {
-  color: var(--select-dark-color);
-}
-
-.select__content.select__content--dark .select__separator {
-  background-color: var(--select-dark-content-border-color);
-}
-
-.select__content.select__content--dark .select__item {
-  color: var(--select-dark-color);
-}
-
-.select__content.select__content--dark .select__item[data-highlighted] {
-  background-color: var(--select-dark-item-highlighted-bg);
-  color: var(--select-dark-item-highlighted-color);
-}
-

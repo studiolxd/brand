@@ -43,3 +43,15 @@
   --input-error-focus-border-color: var(--color-primary); /** Error border color on focus */
   --input-error-focus-ring-color: var(--color-error-on-light); /** Error focus ring color */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --input-bg: var(--color-background-dark); /** Background — surface-dark */
+  --input-color: var(--color-text-on-dark); /** Text color — surface-dark */
+  --input-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
+  --input-placeholder-color: var(--color-text-muted-on-dark); /** Placeholder text color — surface-dark */
+  --input-focus-border-color: var(--color-text-on-dark); /** Border color on focus — surface-dark */
+  --input-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --input-error-focus-ring-color: var(--color-error-on-dark); /** Error focus ring color — surface-dark */
+}

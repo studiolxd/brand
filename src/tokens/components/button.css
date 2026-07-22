@@ -192,3 +192,50 @@
   --button-text-font-weight: var(--button-font-weight); /** Font weight */
   --button-ghost-font-weight: var(--button-font-weight); /** Font weight */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --button-ghost-hover-bg: rgba(255, 255, 255, 0.1); /** Hover background — surface-dark */
+  --button-ghost-active-bg: rgba(255, 255, 255, 0.18); /** Active background — surface-dark */
+  --button-primary-hover-bg: var(--color-white); /** Hover background — surface-dark */
+  --button-primary-hover-border: var(--color-white); /** Hover border color — surface-dark */
+  --button-primary-active-bg: var(--color-white); /** Active background — surface-dark */
+  --button-primary-active-border: var(--color-white); /** Active border color — surface-dark */
+  --button-primary-disabled-color: var(--color-grey-light); /** Text color when disabled — surface-dark */
+  --button-primary-disabled-border: var(--color-grey-light); /** Border color when disabled — surface-dark */
+  --button-outline-hover-bg: var(--color-white); /** Hover background — surface-dark */
+  --button-outline-hover-border: var(--color-white); /** Hover border color — surface-dark */
+  --button-outline-active-bg: var(--color-white); /** Active background — surface-dark */
+  --button-outline-active-border: var(--color-white); /** Active border color — surface-dark */
+  --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — surface-dark */
+  --button-text-disabled-color: var(--color-grey-light); /** Text color when disabled — surface-dark */
+  --button-ghost-disabled-color: var(--color-grey-light); /** Text color when disabled — surface-dark */
+  --button-primary-bg: var(--color-background-dark); /** Background — surface-dark */
+  --button-primary-color: var(--color-text-on-dark); /** Text color — surface-dark */
+  --button-primary-border: var(--color-text-on-dark); /** Border color — surface-dark */
+  --button-primary-hover-color: var(--color-text-on-light); /** Hover text color — surface-dark */
+  --button-primary-active-color: var(--color-text-on-light); /** Active text color — surface-dark */
+  --button-primary-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --button-destructive-color: var(--color-error-on-dark); /** Text color — surface-dark */
+  --button-destructive-border: var(--color-error-on-dark); /** Border color — surface-dark */
+  --button-destructive-hover-bg: var(--color-error-on-dark); /** Hover background — surface-dark */
+  --button-destructive-hover-color: var(--color-text-on-light); /** Hover text color — surface-dark */
+  --button-destructive-hover-border: var(--color-error-on-dark); /** Hover border color — surface-dark */
+  --button-destructive-active-bg: var(--color-error-on-dark); /** Active background — surface-dark */
+  --button-destructive-active-color: var(--color-text-on-light); /** Active text color — surface-dark */
+  --button-destructive-active-border: var(--color-error-on-dark); /** Active border color — surface-dark */
+  --button-destructive-focus-ring-color: var(--color-error-on-dark); /** Focus ring color — surface-dark */
+  --button-outline-color: var(--color-text-on-dark); /** Text color — surface-dark */
+  --button-outline-border: var(--color-text-on-dark); /** Border color — surface-dark */
+  --button-outline-hover-color: var(--color-text-on-light); /** Hover text color — surface-dark */
+  --button-outline-active-color: var(--color-text-on-light); /** Active text color — surface-dark */
+  --button-text-color: var(--color-text-on-dark); /** Text color — surface-dark */
+  --button-text-hover-color: var(--color-text-on-dark); /** Hover text color — surface-dark */
+  --button-text-active-color: var(--color-text-on-dark); /** Active text color — surface-dark */
+  --button-text-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --button-ghost-color: var(--color-text-on-dark); /** Text color — surface-dark */
+  --button-ghost-hover-color: var(--color-text-on-dark); /** Hover text color — surface-dark */
+  --button-ghost-active-color: var(--color-text-on-dark); /** Active text color — surface-dark */
+  --button-ghost-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+}

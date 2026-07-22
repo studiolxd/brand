@@ -16,7 +16,6 @@ export interface TimeSelectProps {
   disabled?: boolean;
   readOnly?: boolean;
   error?: boolean;
-  dark?: boolean;
   /** id aplicado al trigger de horas */
   id?: string;
 }
@@ -33,7 +32,6 @@ export function TimeSelect({
   disabled,
   readOnly,
   error,
-  dark,
   id,
 }: TimeSelectProps) {
   const hourOptions = useMemo(
@@ -79,7 +77,6 @@ export function TimeSelect({
         size={size}
         disabled={disabled}
         readOnly={readOnly}
-        dark={dark}
         aria-label="Horas"
         onValueChange={handleHourChange}
       />
@@ -91,7 +88,6 @@ export function TimeSelect({
         size={size}
         disabled={disabled}
         readOnly={readOnly}
-        dark={dark}
         aria-label="Minutos"
         onValueChange={handleMinuteChange}
       />

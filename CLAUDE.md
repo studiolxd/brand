@@ -83,12 +83,22 @@ Los átomos que no tienen un elemento HTML unívoco (Button con variantes, Input
 
 ### Theming de superficie (dark)
 
-El theming oscuro se gestiona con la clase de contexto `.surface-dark` definida en `src/stylesheets/surface.css`. **No usar la clase `.dark` — está eliminada.**
+El theming oscuro se genera desde el propio sistema de tokens. Un token de componente `surface-dark-<nombre>` (ej. `button.primary.surface-dark-bg`) es el par oscuro de `<nombre>` (`button.primary.bg`) dentro del mismo grupo JSON. El formato custom `css/variables-with-dark-mode` (`sd.formats.mjs`, registrado en `sd.config.mjs`) separa esos tokens al generar el CSS: los tokens normales van a `:root` de siempre, y cada `surface-dark-<nombre>` remapea la MISMA custom property (`--button-primary-bg`, no `--button-primary-surface-dark-bg`) bajo un selector combinado:
 
-- Añadir `.surface-dark` a cualquier contenedor para que todos los componentes descendientes adapten automáticamente sus tokens al tema oscuro.
-- Los tokens oscuros se remapean en un único bloque `.surface-dark { }` en `surface.css` — **nunca en los CSS individuales de componente**.
-- Excepción: Select e InputPhone mantienen clases `__content--dark` y `__country-content--dark` en sus portales Radix (fuera del árbol DOM, no pueden heredar la cascade).
+```css
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --button-primary-bg: var(--color-background-dark);
+}
+```
+
+- **Activación contextual** (`.surface-dark` en cualquier contenedor anidado) y **activación root-level** (`[data-theme="dark"]` o `html.dark`, para theme managers como `next-themes`) usan el mismo mecanismo — las custom properties se heredan por cascada, así que basta con que el selector matchee un ancestro. **No usar la clase `.dark` a secas fuera de este selector combinado.**
+- **Añadir soporte oscuro a un token existente**: añadir el token hermano `surface-dark-<nombre>` en el JSON de `tokens/component/` o `tokens/molecule/` correspondiente (mismo grupo, mismo nombre con el prefijo) y ejecutar `npm run build:tokens` — no tocar `surface.css` a mano para esto.
+- `src/stylesheets/surface.css` solo debe contener overrides que **no** se puedan expresar como un remapeo de token plano: reglas dependientes de estado combinado (ej. `.surface-dark .select:disabled { --select-color: ...; }`, donde el valor depende de `:disabled` Y del contexto oscuro a la vez) o combinaciones de modificadores BEM sin contraparte en modo claro. Documentar el motivo en un comentario junto a cada regla residual.
+- El prefijo del token es `surface-dark-`, no `dark-` a secas — algunos componentes (ej. `header.json`: `dark-bg`, `nav-dark-color`) ya usan `dark-`/`-dark-` para su propia variante BEM manual (`.header--dark`), consumida como una custom property aparte, no como remapeo contextual. No renombrar esos sin verificar antes que no colisionan con el marcador `surface-dark-`.
 - En Storybook, el decorator global de fondo oscuro ya añade `.surface-dark` automáticamente.
+- Migración en curso: la mayoría de grupos de tokens de componente/molécula (Table, Modal, Toast, Sidebar, Radio, Tag, Avatar, Header…) todavía no tienen tokens `surface-dark-*` — si un componente se ve mal en `.surface-dark` o en modo oscuro root-level, revisar primero si le falta el par oscuro en su JSON antes de parchear con CSS a mano.
 
 ### Radix UI — cuándo usarlo
 
@@ -105,7 +115,7 @@ Usar Radix para componentes con **comportamiento complejo**: máquina de estados
 - `data-disabled` en lugar de `:disabled`
 - `data-state="open"` / `data-state="closed"` para colapsables
 
-**Portales Radix** (Select, InputPhone) renderizan fuera del árbol DOM y no heredan la cascade de `.surface-dark`. Excepción documentada: mantienen clases `__content--dark` y `__country-content--dark` aplicadas manualmente.
+**Portales Radix** (Select, InputPhone) renderizan en `document.body`, fuera del árbol DOM de cualquier contenedor con `.surface-dark` anidado — pero SÍ son descendientes de `<html>`, así que heredan correctamente la activación root-level (`[data-theme="dark"]`/`html.dark`) sin configuración adicional. Por eso `Select`/`InputPhone` ya no tienen prop `dark` ni clases `__content--dark`/`__country-content--dark` (eliminadas). Para el caso residual de un Select/InputPhone dentro de un `.surface-dark` **anidado** (no en la raíz del documento), pasar la prop `container` (reenviada a `RadixSelect.Portal.container`) apuntando a un nodo dentro de ese contenedor, para que el portal se monte ahí en vez de en `document.body` y herede la cascada.
 
 ### Accesibilidad — VisuallyHidden
 

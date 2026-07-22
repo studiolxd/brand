@@ -10,11 +10,12 @@ interface CountrySelectProps {
   onChange: (value: Country) => void;
   options: { value: Country | undefined; label: string }[];
   disabled?: boolean;
-  dark?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /** Ver `InputPhoneProps.container`. */
+  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
 }
 
-function CountrySelect({ value, onChange, options, disabled, dark, size = 'md' }: CountrySelectProps) {
+function CountrySelect({ value, onChange, options, disabled, size = 'md', container }: CountrySelectProps) {
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;
   const fromVal = (v: string): Country => (v === INTL ? (undefined as unknown as Country) : (v as Country));
@@ -22,7 +23,6 @@ function CountrySelect({ value, onChange, options, disabled, dark, size = 'md' }
   const contentClass = [
     'input-phone__country-content',
     size !== 'md' ? `input-phone__country-content--${size}` : '',
-    dark ? 'input-phone__country-content--dark' : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -40,7 +40,7 @@ function CountrySelect({ value, onChange, options, disabled, dark, size = 'md' }
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
 
-      <RadixSelect.Portal>
+      <RadixSelect.Portal container={container}>
         <RadixSelect.Content
           className={contentClass}
           position="popper"
@@ -68,13 +68,21 @@ interface InputPhoneProps {
   placeholder?: string;
   disabled?: boolean;
   error?: boolean;
-  dark?: boolean;
   size?: 'sm' | 'md' | 'lg';
   id?: string;
   name?: string;
   describedBy?: string;
   onChange?: (value: string | undefined) => void;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  /**
+   * Nodo DOM donde montar el portal del dropdown de país (reenviado a Radix
+   * `Portal.container`). Por defecto se monta en `document.body`, que
+   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
+   * sin configuración adicional. Solo hace falta pasarlo cuando el
+   * InputPhone vive dentro de un `.surface-dark` **anidado** (no en la
+   * raíz), ya que ese contexto no llega a `document.body` por la cascada.
+   */
+  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
 }
 
 export function InputPhone({
@@ -83,13 +91,13 @@ export function InputPhone({
   placeholder,
   disabled,
   error = false,
-  dark,
   size = 'md',
   id,
   name,
   describedBy,
   onChange,
   onBlur,
+  container,
 }: InputPhoneProps) {
   const classes = [
     'input-phone',
@@ -108,7 +116,7 @@ export function InputPhone({
       name={name}
       inputComponent={InputPhoneField}
       countrySelectComponent={CountrySelect}
-      countrySelectProps={{ dark, size }}
+      countrySelectProps={{ size, container }}
       onChange={(v) => onChange?.(v)}
       onBlur={onBlur}
       numberInputProps={{ 'aria-describedby': describedBy }}

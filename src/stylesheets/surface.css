@@ -9,62 +9,12 @@
    ============================================================= */
 
 .surface-dark {
-  /* ─── Button primary ──────────────────────────────────────────────────── */
-  --button-primary-bg:              var(--color-background-dark);
-  --button-primary-color:           var(--color-text-on-dark);
-  --button-primary-border:          var(--color-text-on-dark);
-  --button-primary-hover-bg:        var(--color-white);
-  --button-primary-hover-color:     var(--color-text-on-light);
-  --button-primary-hover-border:    var(--color-white);
-  --button-primary-active-bg:       var(--color-white);
-  --button-primary-active-color:    var(--color-text-on-light);
-  --button-primary-active-border:   var(--color-white);
-  --button-primary-focus-ring-color:var(--color-text-on-dark);
+  /* Button (primary/text/ghost/outline/destructive) migrado a
+     tokens/component/button.json (`surface-dark-*`) — generado por
+     Style Dictionary, ver `sd.formats.mjs`. */
 
-  /* ─── Button text ────────────────────────────────────────────────────── */
-  --button-text-color:              var(--color-text-on-dark);
-  --button-text-hover-color:        var(--color-text-on-dark);
-  --button-text-active-color:       var(--color-text-on-dark);
-  --button-text-focus-ring-color:   var(--color-text-on-dark);
-
-  /* ─── Button ghost ───────────────────────────────────────────────────── */
-  --button-ghost-color:             var(--color-text-on-dark);
-  --button-ghost-hover-color:       var(--color-text-on-dark);
-  --button-ghost-active-color:      var(--color-text-on-dark);
-  --button-ghost-focus-ring-color:  var(--color-text-on-dark);
-  --button-ghost-hover-bg:          rgba(255, 255, 255, 0.1);
-  --button-ghost-active-bg:         rgba(255, 255, 255, 0.18);
-
-  /* ─── Button outline ──────────────────────────────────────────────────── */
-  --button-outline-color:            var(--color-text-on-dark);
-  --button-outline-border:           var(--color-text-on-dark);
-  --button-outline-hover-bg:         var(--color-white);
-  --button-outline-hover-color:      var(--color-text-on-light);
-  --button-outline-hover-border:     var(--color-white);
-  --button-outline-active-bg:        var(--color-white);
-  --button-outline-active-color:     var(--color-text-on-light);
-  --button-outline-active-border:    var(--color-white);
-  --button-outline-focus-ring-color: var(--color-white);
-
-  /* ─── Button destructive intent ──────────────────────────────────────── */
-  --button-destructive-color:            var(--color-error-on-dark);
-  --button-destructive-border:           var(--color-error-on-dark);
-  --button-destructive-hover-bg:         var(--color-error-on-dark);
-  --button-destructive-hover-color:      var(--color-text-on-light);
-  --button-destructive-hover-border:     var(--color-error-on-dark);
-  --button-destructive-active-bg:        var(--color-error-on-dark);
-  --button-destructive-active-color:     var(--color-text-on-light);
-  --button-destructive-active-border:    var(--color-error-on-dark);
-  --button-destructive-focus-ring-color: var(--color-error-on-dark);
-
-  /* ─── Input ───────────────────────────────────────────────────────────── */
-  --input-bg:                    var(--color-background-dark);
-  --input-color:                 var(--color-text-on-dark);
-  --input-border-color:          var(--color-text-on-dark);
-  --input-placeholder-color:     var(--color-text-muted-on-dark);
-  --input-focus-border-color:    var(--color-text-on-dark);
-  --input-focus-ring-color:      var(--color-text-on-dark);
-  --input-error-focus-ring-color: var(--color-error-on-dark);
+  /* Input migrado a tokens/component/input.json (`surface-dark-*`) — queda
+     solo el override de :disabled/:error más abajo (estado-dependiente). */
 
   /* ─── Textarea ────────────────────────────────────────────────────────── */
   --textarea-bg:                    var(--color-background-dark);
@@ -92,15 +42,9 @@
   --multi-select-item-highlighted-bg:    var(--color-text-on-dark);
   --multi-select-item-highlighted-color: var(--color-background-dark);
 
-  /* ─── Select ──────────────────────────────────────────────────────────── */
-  --select-bg:                     var(--color-background-dark);
-  --select-color:                  var(--color-text-on-dark);
-  --select-border-color:           var(--color-text-on-dark);
-  --select-focus-ring-color:       var(--color-text-on-dark);
-  --select-content-bg:             var(--color-background-dark);
-  --select-content-border-color:   var(--color-text-on-dark);
-  --select-item-highlighted-bg:    var(--color-text-on-dark);
-  --select-item-highlighted-color: var(--color-background-dark);
+  /* Select migrado a tokens/component/select.json (`surface-dark-*`) —
+     queda solo el override de :disabled más abajo (estado-dependiente,
+     no se puede aplanar en un token único). */
 
   /* ─── Heading ─────────────────────────────────────────────────────────── */
   --text-h1-color: var(--color-text-on-dark);
@@ -165,23 +109,14 @@
   --kbd-border-color: var(--color-text-muted-on-dark);
 }
 
-/* ─── Button: disabled states ────────────────────────────────────────────── */
-
-.surface-dark .button--primary:disabled,
-.surface-dark .button--primary[aria-disabled="true"] {
-  --button-primary-disabled-color: var(--color-grey-light);
-  --button-primary-disabled-border:var(--color-grey-light);
-}
-
-.surface-dark .button--text:disabled,
-.surface-dark .button--text[aria-disabled="true"] {
-  --button-text-disabled-color: var(--color-grey-light);
-}
-
-.surface-dark .button--ghost:disabled,
-.surface-dark .button--ghost[aria-disabled="true"] {
-  --button-ghost-disabled-color: var(--color-grey-light);
-}
+/* ─── Button: primary + destructive-intent ───────────────────────────────
+   Caso residual: esta combinación de modificadores BEM no tiene regla en
+   modo claro en Button.css (a diferencia de outline/text+destructive-intent,
+   que reutilizan las variables --button-destructive-* ya migradas a
+   tokens/component/button.json y por tanto no necesitan nada aquí). No es
+   un remapeo de token — son overrides de propiedad directos para un combo
+   sin equivalente claro, se deja a mano hasta que se decida un diseño para
+   el modo claro de este combo. ────────────────────────────────────────── */
 
 .surface-dark .button--primary.button--destructive-intent {
   color: var(--color-error-on-dark);
@@ -201,43 +136,6 @@
 }
 
 .surface-dark .button--primary.button--destructive-intent:focus-visible {
-  outline-color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--outline.button--destructive-intent {
-  color: var(--color-error-on-dark);
-  border-color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--outline.button--destructive-intent:hover {
-  background-color: var(--color-error-on-dark);
-  color: var(--color-text-on-light);
-  border-color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--outline.button--destructive-intent:active {
-  background-color: var(--color-error-on-dark);
-  color: var(--color-text-on-light);
-  border-color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--outline.button--destructive-intent:focus-visible {
-  outline-color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--text.button--destructive-intent {
-  color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--text.button--destructive-intent:hover {
-  color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--text.button--destructive-intent:active {
-  color: var(--color-error-on-dark);
-}
-
-.surface-dark .button--text.button--destructive-intent:focus-visible {
   outline-color: var(--color-error-on-dark);
 }
 

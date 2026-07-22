@@ -23,12 +23,21 @@ export interface SelectProps {
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
-  dark?: boolean;
   size?: 'sm' | 'md' | 'lg';
   onValueChange?: (value: string) => void;
   id?: string;
   /** Etiqueta accesible del trigger. Si no se pasa, usa el placeholder. */
   'aria-label'?: string;
+  /**
+   * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
+   * `Portal.container`). Por defecto Radix lo monta en `document.body`,
+   * que hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
+   * sin configuración adicional. Solo hace falta pasar `container` cuando
+   * el Select vive dentro de un `.surface-dark` **anidado** (no en la raíz):
+   * ese contexto no llega a `document.body` por la cascada, así que hay que
+   * montar el portal dentro del propio contenedor con la clase.
+   */
+  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -73,20 +82,20 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(f
 export interface SelectContentProps
   extends React.ComponentPropsWithoutRef<typeof RadixSelect.Content> {
   size?: 'sm' | 'md' | 'lg';
-  dark?: boolean;
+  /** Ver `SelectProps.container`. */
+  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
 }
 
 /** Dropdown del Select: Portal → Content (`.select__content`) → Viewport. `position`/`sideOffset` del DS. */
 export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function SelectContent(
-  { size = 'md', dark = false, className, children, position = 'popper', sideOffset = -1, ...rest }, ref) {
+  { size = 'md', container, className, children, position = 'popper', sideOffset = -1, ...rest }, ref) {
   const classes = [
     'select__content',
     size !== 'md' ? `select__content--${size}` : '',
-    dark ? 'select__content--dark' : '',
     className ?? '',
   ].filter(Boolean).join(' ');
   return (
-    <RadixSelect.Portal>
+    <RadixSelect.Portal container={container}>
       <RadixSelect.Content ref={ref} className={classes} position={position} sideOffset={sideOffset} {...rest}>
         <RadixSelect.Viewport>{children}</RadixSelect.Viewport>
       </RadixSelect.Content>
@@ -141,11 +150,11 @@ function SelectClosed({
   placeholder = 'Seleccionar…',
   disabled,
   readOnly,
-  dark,
   size = 'md',
   onValueChange,
   id,
   'aria-label': ariaLabel,
+  container,
 }: SelectProps) {
   return (
     <SelectRoot
@@ -159,7 +168,7 @@ function SelectClosed({
       <SelectTrigger size={size} id={id} aria-label={ariaLabel ?? placeholder} aria-readonly={readOnly || undefined}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent size={size} dark={dark}>
+      <SelectContent size={size} container={container}>
         {options.map(({ value: v, label, 'aria-label': optionAriaLabel }) => (
           <SelectItem key={v} value={v} aria-label={optionAriaLabel}>
             {label}

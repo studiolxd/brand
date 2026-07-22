@@ -36,3 +36,16 @@
   --select-content-border-color: var(--color-primary); /** Borde del dropdown */
   --select-item-highlighted-bg: var(--color-primary); /** Fondo de opción resaltada */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --select-bg: var(--color-background-dark); /** Fondo del trigger — surface-dark */
+  --select-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
+  --select-border-color: var(--color-text-on-dark); /** Color del borde — surface-dark */
+  --select-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — surface-dark */
+  --select-content-bg: var(--color-background-dark); /** Fondo del dropdown — surface-dark */
+  --select-content-border-color: var(--color-text-on-dark); /** Borde del dropdown — surface-dark */
+  --select-item-highlighted-bg: var(--color-text-on-dark); /** Fondo de opción resaltada — surface-dark */
+  --select-item-highlighted-color: var(--color-background-dark); /** Texto de opción resaltada — surface-dark */
+}

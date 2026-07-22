@@ -12,7 +12,6 @@ export interface SelectFieldProps {
   defaultValue?: string;
   placeholder?: string;
   disabled?: boolean;
-  dark?: boolean;
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
@@ -39,7 +38,6 @@ export function SelectField({
   defaultValue,
   placeholder,
   disabled,
-  dark,
   size = 'md',
   error = false,
   errorMessage,
@@ -67,7 +65,6 @@ export function SelectField({
         defaultValue={encode(defaultValue)}
         placeholder={placeholder}
         disabled={disabled}
-        dark={dark}
         size={size}
         onValueChange={onValueChange ? (v) => onValueChange(decode(v)) : undefined}
       />

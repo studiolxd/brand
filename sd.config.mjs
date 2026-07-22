@@ -1,5 +1,8 @@
 import StyleDictionary from 'style-dictionary';
 import { writeFileSync } from 'fs';
+import { registerDarkModeFormat, isDarkToken } from './sd.formats.mjs';
+
+registerDarkModeFormat(StyleDictionary);
 
 const cssOptions = { selector: ':root', outputReferences: true };
 const scssOptions = { outputReferences: false };
@@ -94,11 +97,15 @@ const filters = {
 };
 
 function cssFile(destination, filterKey) {
-  return { destination, format: 'css/variables', filter: filters[filterKey], options: cssOptions };
+  return { destination, format: 'css/variables-with-dark-mode', filter: filters[filterKey], options: cssOptions };
 }
 
 function scssFile(destination, filterKey) {
-  return { destination, format: 'scss/variables', filter: filters[filterKey], options: scssOptions };
+  const baseFilter = filters[filterKey];
+  // Los tokens `surface-dark-*` no se exponen a SCSS: no hay modo runtime
+  // para consumidores no-React, así que solo reciben el valor claro.
+  const filter = (t) => baseFilter(t) && !isDarkToken(t);
+  return { destination, format: 'scss/variables', filter, options: scssOptions };
 }
 
 const sd = new StyleDictionary({

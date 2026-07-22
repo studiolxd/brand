@@ -7,7 +7,6 @@ const meta: Meta<typeof InputPhoneField> = {
   argTypes: {
     disabled:     { control: { type: 'boolean' } },
     error:        { control: { type: 'boolean' } },
-    dark:         { control: { type: 'boolean' } },
     placeholder:  { control: { type: 'text' } },
     helperText:   { control: { type: 'text' } },
     errorMessage: { control: { type: 'text' } },
@@ -19,7 +18,6 @@ const meta: Meta<typeof InputPhoneField> = {
     placeholder:  'Escribe tu número de teléfono',
     disabled:     false,
     error:        false,
-    dark:         false,
   },
 };
 

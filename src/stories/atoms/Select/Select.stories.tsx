@@ -19,10 +19,6 @@ const meta: Meta<typeof Select> = {
   argTypes: {
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
-    dark: {
-      control: { type: 'boolean' },
-      description: 'Aplica estilos oscuros al dropdown (portal Radix fuera del árbol DOM — no hereda `.surface-dark` por cascade).',
-    },
   },
   args: {
     options,

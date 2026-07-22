@@ -14,7 +14,6 @@ interface InputPhoneFieldProps {
   error?: boolean;
   errorMessage?: string;
   helperText?: string;
-  dark?: boolean;
   size?: 'sm' | 'md' | 'lg';
   name?: string;
   onChange?: (value: string | undefined) => void;
@@ -32,7 +31,6 @@ export function InputPhoneField({
   error = false,
   errorMessage,
   helperText,
-  dark,
   size = 'md',
   name,
   onChange,
@@ -53,7 +51,6 @@ export function InputPhoneField({
         placeholder={placeholder}
         disabled={disabled}
         error={error}
-        dark={dark}
         size={size}
         describedBy={describedBy}
         onChange={onChange}
