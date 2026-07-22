@@ -65,19 +65,7 @@
       "hover-border":       { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover border color" },
       "active-bg":          { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active background" },
       "active-color":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Active text color" },
-      "active-border":      { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active border color" },
-      "surface-dark-bg":                 { "$value": "{color.background.dark}", "$type": "color", "$description": "Background — surface-dark" },
-      "surface-dark-color":              { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Text color — surface-dark" },
-      "surface-dark-border":             { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Border color — surface-dark" },
-      "surface-dark-hover-bg":           { "$value": "{color.white}",           "$type": "color", "$description": "Hover background — surface-dark" },
-      "surface-dark-hover-color":        { "$value": "{color.text.on-light}",   "$type": "color", "$description": "Hover text color — surface-dark" },
-      "surface-dark-hover-border":       { "$value": "{color.white}",           "$type": "color", "$description": "Hover border color — surface-dark" },
-      "surface-dark-active-bg":          { "$value": "{color.white}",           "$type": "color", "$description": "Active background — surface-dark" },
-      "surface-dark-active-color":       { "$value": "{color.text.on-light}",   "$type": "color", "$description": "Active text color — surface-dark" },
-      "surface-dark-active-border":      { "$value": "{color.white}",           "$type": "color", "$description": "Active border color — surface-dark" },
-      "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Focus ring color — surface-dark" },
-      "surface-dark-disabled-color":     { "$value": "{color.grey-light}",      "$type": "color", "$description": "Text color when disabled — surface-dark" },
-      "surface-dark-disabled-border":    { "$value": "{color.grey-light}",      "$type": "color", "$description": "Border color when disabled — surface-dark" }
+      "active-border":      { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active border color" }
     },
     "destructive": {
       "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
