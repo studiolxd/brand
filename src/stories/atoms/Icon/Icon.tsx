@@ -216,6 +216,28 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinejoin="miter" d="M5 5 H19 V19 H5 Z" />
     ),
   },
+  sun: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M12 3l0 1" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M12 20l0 1" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 12l1 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M20 12l1 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M5.6 5.6l.7 .7" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M17.7 17.7l.7 .7" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M5.6 18.4l.7 -.7" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M17.7 6.3l.7 -.7" />
+      </>
+    ),
+  },
+  moon: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    ),
+  },
 } as const;
 
 export type IconName = keyof typeof ICONS;
