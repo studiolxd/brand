@@ -5,7 +5,6 @@
     "logo-height-overlay":           { "$value": "3.75rem",                    "$type": "dimension", "$description": "Alto del logo en modo overlay" },
     "logo-height-inline":            { "$value": "3.75rem",                    "$type": "dimension", "$description": "Alto del logo en modo inline" },
     "bg":                            { "$value": "{color.background.light}",  "$type": "color",     "$description": "Fondo del header" },
-    "dark-bg":                       { "$value": "{color.background.dark}",     "$type": "color",     "$description": "Fondo del header en variante oscura" },
     "shadow":                        { "$value": "{shadow.lg}",                 "$type": "shadow",    "$description": "Sombra del header" },
     "z-index":                       { "$value": "1000",                        "$type": "number",    "$description": "Z-index del header" },
     "controls-z-index":              { "$value": "1001",                        "$type": "number",    "$description": "Z-index del logo y hamburger (sobre el backdrop)" },
@@ -18,7 +17,6 @@
     "nav-font-weight-overlay":       { "$value": "{font-weight.medium}",       "$type": "number",    "$description": "Peso de fuente de los enlaces en modo overlay" },
     "nav-font-weight-inline":        { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso de fuente de los enlaces en modo inline" },
     "nav-color":                     { "$value": "{color.text.on-light}",         "$type": "color",     "$description": "Color de los enlaces de navegación" },
-    "nav-dark-color":                { "$value": "{color.text.on-dark}",            "$type": "color",     "$description": "Color de los enlaces en variante oscura" },
     "nav-gap-overlay":               { "$value": "0",                            "$type": "dimension", "$description": "Separación entre enlaces en modo overlay" },
     "nav-gap-inline":                { "$value": "{spacing.4}",                  "$type": "dimension", "$description": "Separación entre enlaces en modo inline" },
     "nav-padding-block-overlay":     { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Padding vertical de la zona de nav en modo overlay" },
@@ -30,6 +28,8 @@
     "featured-font-size":            { "$value": "{font-size.4}",                "$type": "dimension", "$description": "Tamaño de fuente del featured link" },
     "featured-font-weight":          { "$value": "{font-weight.medium}",        "$type": "number",    "$description": "Peso de fuente del featured link" },
     "featured-padding-inline":       { "$value": "{spacing.7}",                  "$type": "dimension", "$description": "Padding horizontal del featured link" },
-    "featured-margin-inline-end":    { "$value": "{spacing.7}",                  "$type": "dimension", "$description": "Separación entre el featured link y la navegación" }
+    "featured-margin-inline-end":    { "$value": "{spacing.7}",                  "$type": "dimension", "$description": "Separación entre el featured link y la navegación" },
+    "surface-dark-bg":               { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del header — surface-dark" },
+    "surface-dark-nav-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Color de los enlaces de navegación — surface-dark" }
   }
 }

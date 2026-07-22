@@ -48,7 +48,7 @@ Cuando no se pasa `actions`, el área de acciones (selector de idioma, botón CT
 
 ## Dark
 
-La variante oscura se activa con `dark={true}`. Aplica la clase BEM `header--dark` que remapea el fondo y el color de los enlaces a los tokens `--header-dark-bg` y `--header-nav-dark-color`. Es distinta del mecanismo `.surface-dark` — el Header gestiona su propio theming oscuro internamente.
+El tema oscuro se activa igual que en el resto del sistema: `.surface-dark` en un contenedor ancestro, o `[data-theme="dark"]`/`html.dark` a nivel raíz (theme managers como `next-themes`). No hace falta ninguna prop ni clase manual — `--header-bg` y `--header-nav-color` ya traen su par `surface-dark-*` en `tokens/component/header.json`.
 
 <Canvas of={HeaderStories.Dark} />
 

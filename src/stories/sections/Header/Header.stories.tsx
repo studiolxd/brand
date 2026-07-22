@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Header } from './Header';
 import { Button } from '../../atoms/Button/Button';
@@ -27,7 +28,6 @@ const meta: Meta<typeof Header> = {
     layout: 'fullscreen',
   },
   argTypes: {
-    dark: { control: { type: 'boolean' } },
     logoHref: { control: { type: 'text' } },
     navLabel: { control: { type: 'text' } },
   },
@@ -37,7 +37,6 @@ const meta: Meta<typeof Header> = {
     actions: sampleActions,
     logoHref: '/',
     navLabel: 'Main navigation',
-    dark: false,
   },
   decorators: [
     (Story) => (
@@ -62,5 +61,15 @@ export const WithoutActions: Story = {
 };
 
 export const Dark: Story = {
-  args: { dark: true },
+  name: 'Dark (root-level, html.dark)',
+  render: (args) => {
+    // Header no tiene prop dark — reacciona a .surface-dark/[data-theme="dark"]/
+    // html.dark igual que el resto del sistema. Activamos html.dark mientras
+    // esta story está montada para demostrarlo.
+    useEffect(() => {
+      document.documentElement.classList.add('dark');
+      return () => document.documentElement.classList.remove('dark');
+    }, []);
+    return <Header {...args} />;
+  },
 };

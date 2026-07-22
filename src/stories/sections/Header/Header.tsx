@@ -17,7 +17,6 @@ interface HeaderProps {
   logoHref?: string;
   logoLabel?: string;
   navLabel?: string;
-  dark?: boolean;
 }
 
 export function Header({
@@ -28,7 +27,6 @@ export function Header({
   logoHref = '/',
   logoLabel = 'Studio LXD — ir al inicio',
   navLabel = 'Main navigation',
-  dark = false,
 }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,13 +35,7 @@ export function Header({
   };
 
   return (
-    <header
-      id={id}
-      className={[
-        'header',
-        dark ? 'header--dark' : '',
-      ].filter(Boolean).join(' ')}
-    >
+    <header id={id} className="header">
       <SkipLink href="#main-content">Saltar al contenido principal</SkipLink>
       <a href={logoHref} className="header__logo" aria-label={logoLabel}>
         <Logo />
