@@ -95,6 +95,7 @@ export const entryPoints = {
   'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
   'review-carousel':     'src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx',
   'steps':               'src/stories/organisms/Steps/Steps.tsx',
+  'pricing-card':        'src/stories/organisms/PricingCard/PricingCard.tsx',
 };
 
 export const clientComponents = new Set([

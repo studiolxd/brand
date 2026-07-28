@@ -1,0 +1,27 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-pricing-card-padding-inline: 1rem; // Padding horizontal — heredado de card
+$lxd-pricing-card-padding-block-start: 1rem; // Padding block start — heredado de card
+$lxd-pricing-card-padding-block-end: 0.75rem; // Padding block end — heredado de card
+$lxd-pricing-card-gap: 0.75rem; // Separación entre secciones internas — heredado de card
+$lxd-pricing-card-border-radius: 0px; // Radio de esquinas — heredado de card
+$lxd-pricing-card-shadow: none; // Sombra de la superficie — heredado de card
+$lxd-pricing-card-bg: #ffffff; // Fondo — heredado de la variante outline de card
+$lxd-pricing-card-color: #111e30; // Texto — heredado de la variante outline de card
+$lxd-pricing-card-border-width: 1px; // Grosor de borde — heredado de la variante outline de card
+$lxd-pricing-card-border-color: #111e30; // Color de borde — heredado de la variante outline de card
+$lxd-pricing-card-plan-name-color: #4a4a4a; // Color del nombre del plan
+$lxd-pricing-card-price-font-size: 3.5rem; // Tamaño de fuente del precio — mismo tamaño que el texto destacado del sistema
+$lxd-pricing-card-price-font-weight: 600; // Peso de fuente del precio — mismo énfasis (semibold) que number-badge
+$lxd-pricing-card-price-line-height: 1; // Line-height del precio — mismo criterio que number-badge (sin interlineado extra)
+$lxd-pricing-card-price-color: #111e30; // Color del precio — heredado de card (el remapeo dark de card.outline-color se propaga automáticamente vía var())
+$lxd-pricing-card-price-suffix-font-size: 0.875rem; // Tamaño de fuente del sufijo (ej. /mes) — mismo tamaño que paragraph small
+$lxd-pricing-card-price-suffix-color: #4a4a4a; // Color del sufijo
+$lxd-pricing-card-price-suffix-margin-inline-start: 0.25rem; // Separación entre precio y sufijo
+$lxd-pricing-card-price-suffix-margin-block-end: 0.25rem; // Ajuste fino para alinear el sufijo con la línea base del precio
+$lxd-pricing-card-feature-icon-gap: 0.5rem; // Separación entre icono y texto de cada feature
+$lxd-pricing-card-featured-border-width: 1px; // Grosor de borde — plan destacado (mismo grosor que la superficie base, solo cambia el color)
+$lxd-pricing-card-featured-border-color: #111e30; // Color de borde — plan destacado
+$lxd-pricing-card-featured-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra — plan destacado (mismo nivel de elevación que header/toast)
+$lxd-pricing-card-featured-label-margin-block-end: 0.5rem; // Separación bajo la etiqueta de plan destacado

@@ -1,0 +1,38 @@
+{
+  "pricing-card": {
+    "padding-inline":      { "$value": "{card.padding-inline}",      "$type": "dimension", "$description": "Padding horizontal — heredado de card" },
+    "padding-block-start": { "$value": "{card.padding-block-start}", "$type": "dimension", "$description": "Padding block start — heredado de card" },
+    "padding-block-end":   { "$value": "{card.padding-block-end}",   "$type": "dimension", "$description": "Padding block end — heredado de card" },
+    "gap":                 { "$value": "{card.gap}",                 "$type": "dimension", "$description": "Separación entre secciones internas — heredado de card" },
+    "border-radius":       { "$value": "{card.border-radius}",       "$type": "dimension", "$description": "Radio de esquinas — heredado de card" },
+    "shadow":               { "$value": "{card.shadow}",              "$type": "shadow",    "$description": "Sombra de la superficie — heredado de card" },
+
+    "bg":           { "$value": "{card.outline-bg}",           "$type": "color", "$description": "Fondo — heredado de la variante outline de card" },
+    "color":        { "$value": "{card.outline-color}",        "$type": "color", "$description": "Texto — heredado de la variante outline de card" },
+    "border-width": { "$value": "{card.outline-border-width}", "$type": "dimension", "$description": "Grosor de borde — heredado de la variante outline de card" },
+    "border-color": { "$value": "{card.outline-border-color}", "$type": "color", "$description": "Color de borde — heredado de la variante outline de card" },
+
+    "plan-name-color": { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Color del nombre del plan" },
+    "surface-dark-plan-name-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del nombre del plan — surface-dark" },
+
+    "price-font-size":   { "$value": "{highlight-section.font-size}",   "$type": "dimension", "$description": "Tamaño de fuente del precio — mismo tamaño que el texto destacado del sistema" },
+    "price-font-weight": { "$value": "{number-badge.font-weight}",      "$type": "number",    "$description": "Peso de fuente del precio — mismo énfasis (semibold) que number-badge" },
+    "price-line-height": { "$value": "{number-badge.line-height}",      "$type": "number",    "$description": "Line-height del precio — mismo criterio que number-badge (sin interlineado extra)" },
+    "price-color":       { "$value": "{card.outline-color}",            "$type": "color",     "$description": "Color del precio — heredado de card (el remapeo dark de card.outline-color se propaga automáticamente vía var())" },
+
+    "price-suffix-font-size":            { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Tamaño de fuente del sufijo (ej. /mes) — mismo tamaño que paragraph small" },
+    "price-suffix-color":                { "$value": "{color.text.muted-on-light}",      "$type": "color", "$description": "Color del sufijo" },
+    "price-suffix-margin-inline-start":  { "$value": "{spacing.1}", "$type": "dimension", "$description": "Separación entre precio y sufijo" },
+    "price-suffix-margin-block-end":     { "$value": "{spacing.1}", "$type": "dimension", "$description": "Ajuste fino para alinear el sufijo con la línea base del precio" },
+    "surface-dark-price-suffix-color":   { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del sufijo — surface-dark" },
+
+    "feature-icon-gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre icono y texto de cada feature" },
+
+    "featured-border-width": { "$value": "{card.outline-border-width}", "$type": "dimension", "$description": "Grosor de borde — plan destacado (mismo grosor que la superficie base, solo cambia el color)" },
+    "featured-border-color": { "$value": "{color.primary}",             "$type": "color",      "$description": "Color de borde — plan destacado" },
+    "featured-shadow":       { "$value": "{shadow.lg}",                 "$type": "shadow",     "$description": "Sombra — plan destacado (mismo nivel de elevación que header/toast)" },
+    "surface-dark-featured-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de borde — plan destacado, surface-dark (evita colisión prussian-sobre-prussian)" },
+
+    "featured-label-margin-block-end": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación bajo la etiqueta de plan destacado" }
+  }
+}

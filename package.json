@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "12.2.0",
+  "version": "12.3.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -246,6 +246,10 @@
     "./prev-next-nav": {
       "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
       "import": "./dist/prev-next-nav.js"
+    },
+    "./pricing-card": {
+      "types": "./dist/_types/organisms/PricingCard/PricingCard.d.ts",
+      "import": "./dist/pricing-card.js"
     },
     "./progress-bar": {
       "types": "./dist/_types/atoms/ProgressBar/ProgressBar.d.ts",
