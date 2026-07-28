@@ -53,6 +53,7 @@ export const entryPoints = {
   'table':               'src/stories/molecules/Table/Table.tsx',
   'context-menu':        'src/stories/molecules/ContextMenu/ContextMenu.tsx',
   'card':                'src/stories/molecules/Card/Card.tsx',
+  'code-block':          'src/stories/molecules/CodeBlock/CodeBlock.tsx',
   'project-card':        'src/stories/molecules/ProjectCard/ProjectCard.tsx',
   'card-split':          'src/stories/molecules/CardSplit/CardSplit.tsx',
   'card-square':         'src/stories/molecules/CardSquare/CardSquare.tsx',
@@ -99,7 +100,7 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'alert', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field',
+  'alert', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
   'button', 'carousel', 'checkbox', 'radio', 'switcher', 'hamburger', 'hero-video', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',

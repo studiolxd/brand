@@ -110,6 +110,8 @@ export type { CardProps, CardColor } from './stories/molecules/Card/Card';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export { CardSplit } from './stories/molecules/CardSplit/CardSplit';
 export { CardSquare } from './stories/molecules/CardSquare/CardSquare';
+export { CodeBlock } from './stories/molecules/CodeBlock/CodeBlock';
+export type { CodeBlockProps } from './stories/molecules/CodeBlock/CodeBlock';
 export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
 export { Form } from './stories/molecules/Form/Form';
 export { InputField } from './stories/molecules/InputField/InputField';

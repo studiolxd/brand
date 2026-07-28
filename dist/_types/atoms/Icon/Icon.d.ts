@@ -132,6 +132,10 @@ declare const ICONS: {
         readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
+    readonly copy: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
     readonly download: {
         readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;

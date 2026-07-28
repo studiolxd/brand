@@ -1,0 +1,20 @@
+{
+  "code-block": {
+    "padding-inline":      { "$value": "{card.padding-inline}",      "$type": "dimension", "$description": "Padding horizontal — heredado de card" },
+    "padding-block-start": { "$value": "{card.padding-block-start}", "$type": "dimension", "$description": "Padding block start — heredado de card" },
+    "padding-block-end":   { "$value": "{card.padding-block-end}",   "$type": "dimension", "$description": "Padding block end — heredado de card" },
+    "border-radius":       { "$value": "{card.border-radius}",       "$type": "dimension", "$description": "Radio de esquinas — heredado de card" },
+    "shadow":              { "$value": "{card.shadow}",               "$type": "shadow",    "$description": "Sombra de la superficie — heredada de card" },
+
+    "bg":           { "$value": "{kbd.bg}",                     "$type": "color",  "$description": "Fondo gris claro — heredado de kbd (mismo tratamiento 'código sobre superficie gris')" },
+    "border-width": { "$value": "{card.outline-border-width}",  "$type": "dimension", "$description": "Grosor de borde — heredado de card (variante outline)" },
+    "border-color": { "$value": "{card.outline-border-color}",  "$type": "color",  "$description": "Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro de kbd" },
+    "color":        { "$value": "{kbd.color}",                  "$type": "color",  "$description": "Color de texto — heredado de kbd" },
+
+    "font-family": { "$value": "{kbd.font-family}",                  "$type": "string",     "$description": "Monoespaciada (Google Sans Code) — heredada de kbd" },
+    "font-size":   { "$value": "{text.paragraph.small.font-size}",   "$type": "dimension",  "$description": "Tamaño de fuente del código — mismo tamaño que paragraph small" },
+    "line-height": { "$value": "{text.paragraph.small.line-height}", "$type": "number",     "$description": "Interlineado del código — mismo criterio que paragraph small" },
+
+    "header-gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación en la cabecera (entre language tag y botón copiar) y entre la cabecera y el código" }
+  }
+}
