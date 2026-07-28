@@ -83,9 +83,13 @@ export const PricingCard = forwardRef<HTMLElement, PricingCardProps>(function Pr
   const classes = ['pricing-card', featured ? 'pricing-card--featured' : '', className ?? '']
     .filter(Boolean)
     .join(' ');
+  const hasFooter = href !== undefined || Boolean(footerLabel);
+  const bodyClasses = ['pricing-card__body', hasFooter ? 'pricing-card__body--with-footer' : '']
+    .filter(Boolean)
+    .join(' ');
 
   const content = (
-    <>
+    <div className={bodyClasses}>
       {featured && featuredLabel && <Tag className="pricing-card__featured-label">{featuredLabel}</Tag>}
       {planName && <Heading level={3} size={1} className="pricing-card__plan-name">{planName}</Heading>}
       {(price || priceSuffix) && (
@@ -105,7 +109,7 @@ export const PricingCard = forwardRef<HTMLElement, PricingCardProps>(function Pr
           ))}
         </List>
       )}
-    </>
+    </div>
   );
 
   if (href !== undefined) {

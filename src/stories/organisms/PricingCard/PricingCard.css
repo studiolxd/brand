@@ -8,16 +8,27 @@
   padding-inline: var(--pricing-card-padding-inline);
   padding-block-start: var(--pricing-card-padding-block-start);
   padding-block-end: var(--pricing-card-padding-block-end);
-  gap: var(--pricing-card-gap);
   border-radius: var(--pricing-card-border-radius);
   border: var(--pricing-card-border-width) solid var(--pricing-card-border-color);
   box-shadow: var(--pricing-card-shadow);
 }
 
+.pricing-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  flex: 1 1 auto;
+  gap: var(--pricing-card-gap);
+}
+
+.pricing-card__body.pricing-card__body--with-footer {
+  padding-block-end: var(--pricing-card-footer-gap-block-start);
+}
+
 .pricing-card.pricing-card--featured {
   border-width: var(--pricing-card-featured-border-width);
   border-color: var(--pricing-card-featured-border-color);
-  box-shadow: var(--pricing-card-featured-shadow);
 }
 
 .pricing-card .pricing-card__featured-label {

@@ -28,9 +28,10 @@
 
     "feature-icon-gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre icono y texto de cada feature" },
 
+    "footer-gap-block-start": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Separación garantizada entre el contenido y el footer (botón o flecha)" },
+
     "featured-border-width": { "$value": "{card.outline-border-width}", "$type": "dimension", "$description": "Grosor de borde — plan destacado (mismo grosor que la superficie base, solo cambia el color)" },
     "featured-border-color": { "$value": "{color.primary}",             "$type": "color",      "$description": "Color de borde — plan destacado" },
-    "featured-shadow":       { "$value": "{shadow.lg}",                 "$type": "shadow",     "$description": "Sombra — plan destacado (mismo nivel de elevación que header/toast)" },
     "surface-dark-featured-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de borde — plan destacado, surface-dark (evita colisión prussian-sobre-prussian)" },
 
     "featured-label-margin-block-end": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación bajo la etiqueta de plan destacado" }

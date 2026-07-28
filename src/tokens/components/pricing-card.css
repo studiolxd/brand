@@ -6,7 +6,7 @@
   --pricing-card-price-suffix-margin-inline-start: var(--spacing-1); /** Separación entre precio y sufijo */
   --pricing-card-price-suffix-margin-block-end: var(--spacing-1); /** Ajuste fino para alinear el sufijo con la línea base del precio */
   --pricing-card-feature-icon-gap: var(--spacing-2); /** Separación entre icono y texto de cada feature */
-  --pricing-card-featured-shadow: var(--shadow-lg); /** Sombra — plan destacado (mismo nivel de elevación que header/toast) */
+  --pricing-card-footer-gap-block-start: var(--spacing-6); /** Separación garantizada entre el contenido y el footer (botón o flecha) */
   --pricing-card-featured-label-margin-block-end: var(--spacing-2); /** Separación bajo la etiqueta de plan destacado */
   --pricing-card-padding-inline: var(--card-padding-inline); /** Padding horizontal — heredado de card */
   --pricing-card-padding-block-start: var(--card-padding-block-start); /** Padding block start — heredado de card */
