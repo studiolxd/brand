@@ -4,7 +4,7 @@
 
 :root {
   --sidebar-width: 15rem; /** Ancho del panel en desktop */
-  --sidebar-collapsed-width: 4.5rem; /** Ancho del panel cuando está plegado */
+  --sidebar-collapsed-width: 3.5rem; /** Ancho del rail plegado: columna de iconos de 2rem con el mismo margen a ambos lados */
   --sidebar-shadow: 4px 0 16px rgba(17,30,48,0.12); /** Sombra del panel hacia la derecha — mismos parámetros que shadow.lg */
   --sidebar-expand-delay: 150; /** Delay (ms) antes de expandir al entrar con el ratón/foco */
   --sidebar-collapse-delay: 100; /** Delay (ms) antes de replegar al salir */

@@ -39,7 +39,9 @@
   align-items: center;
   gap: var(--spacing-2);
   padding-block: var(--sidebar-padding-block);
-  padding-inline: var(--sidebar-padding-inline);
+  /* El logo arranca alineado con la columna de iconos (12px) */
+  padding-inline-start: var(--spacing-3);
+  padding-inline-end: var(--sidebar-padding-inline);
   flex-shrink: 0;
 }
 
@@ -65,7 +67,8 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-inline: var(--sidebar-padding-inline);
+  padding-inline-start: var(--spacing-1);
+  padding-inline-end: var(--sidebar-padding-inline);
   padding-block: var(--sidebar-padding-block);
   box-sizing: border-box;
   scrollbar-width: thin;
@@ -78,7 +81,8 @@
 /* ── Footer fijo (p. ej. UserMenu) ───────────────────────── */
 .sidebar__footer {
   flex-shrink: 0;
-  padding-inline: var(--sidebar-padding-inline);
+  padding-inline-start: var(--spacing-1);
+  padding-inline-end: var(--sidebar-padding-inline);
   padding-block-end: var(--sidebar-padding-block);
 }
 
@@ -130,7 +134,14 @@
 }
 
 /* Los triggers NO se recolocan entre estados: el icono mantiene su
-   posición horizontal y solo el texto aparece a su derecha. */
+   posición horizontal (12px del borde, centrado en el rail de 3.5rem)
+   y solo el texto aparece a su derecha. */
+.sidebar .org-switcher__trigger,
+.sidebar .user-menu__trigger,
+.sidebar .sidebar-nav__top-link,
+.sidebar .sidebar-nav__group-header {
+  padding-inline: var(--spacing-2);
+}
 
 /* ── Mobile (< 1024px): el chrome es AppHeader ───────────── */
 @media (max-width: 1023px) {
