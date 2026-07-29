@@ -11,4 +11,4 @@ export interface PopoverProps {
     sideOffset?: number;
     className?: string;
 }
-export declare function Popover({ trigger, children, open, defaultOpen, onOpenChange, side, align, sideOffset, className, }: PopoverProps): import("react/jsx-runtime").JSX.Element;
+export declare function Popover({ trigger, children, open, defaultOpen, onOpenChange, side, align, sideOffset, className, }: PopoverProps): import("react").JSX.Element;

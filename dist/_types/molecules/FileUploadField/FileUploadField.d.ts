@@ -7,4 +7,4 @@ export interface FileUploadFieldProps extends Omit<FileUploadProps, 'describedBy
     errorMessage?: string;
     helperText?: string;
 }
-export declare function FileUploadField({ id, label, labelHidden, errorMessage, helperText, error, ...rest }: FileUploadFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function FileUploadField({ id, label, labelHidden, errorMessage, helperText, error, ...rest }: FileUploadFieldProps): import("react").JSX.Element;

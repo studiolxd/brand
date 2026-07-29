@@ -9,4 +9,4 @@ export interface CodeBlockProps {
     /** Se añade DESPUÉS de las clases propias del componente. */
     className?: string;
 }
-export declare function CodeBlock({ children, language, copyable, className }: CodeBlockProps): import("react/jsx-runtime").JSX.Element;
+export declare function CodeBlock({ children, language, copyable, className }: CodeBlockProps): import("react").JSX.Element;

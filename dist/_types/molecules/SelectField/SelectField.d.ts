@@ -15,4 +15,4 @@ export interface SelectFieldProps {
     size?: 'sm' | 'md' | 'lg';
     onValueChange?: (value: string) => void;
 }
-export declare function SelectField({ id, label, labelHidden, options, value, defaultValue, placeholder, disabled, size, error, errorMessage, helperText, onValueChange, }: SelectFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function SelectField({ id, label, labelHidden, options, value, defaultValue, placeholder, disabled, size, error, errorMessage, helperText, onValueChange, }: SelectFieldProps): import("react").JSX.Element;

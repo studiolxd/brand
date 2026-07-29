@@ -45,4 +45,4 @@ export interface CalendarRosterProps {
     locale?: string;
     className?: string;
 }
-export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, showLegend, locale, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, showLegend, locale, className, }: CalendarRosterProps): import("react").JSX.Element;

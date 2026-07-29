@@ -4,4 +4,4 @@ export interface UserMessageProps {
     /** Marca de tiempo visible (ej. "14:32"). */
     timestamp?: string;
 }
-export declare function UserMessage({ children, timestamp }: UserMessageProps): import("react/jsx-runtime").JSX.Element;
+export declare function UserMessage({ children, timestamp }: UserMessageProps): import("react").JSX.Element;

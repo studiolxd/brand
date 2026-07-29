@@ -29,4 +29,4 @@ export interface AsyncMultiSelectProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
 }
-export declare function AsyncMultiSelect({ onSearch, value, defaultValue, onValueChange, selectedOptions, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, container, }: AsyncMultiSelectProps): import("react/jsx-runtime").JSX.Element;
+export declare function AsyncMultiSelect({ onSearch, value, defaultValue, onValueChange, selectedOptions, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, container, }: AsyncMultiSelectProps): import("react").JSX.Element;

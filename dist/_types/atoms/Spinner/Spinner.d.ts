@@ -7,4 +7,4 @@ export interface SpinnerProps {
     /** Cuando true, el spinner es puramente decorativo (sin rol ni anuncio). */
     'aria-hidden'?: boolean;
 }
-export declare function Spinner({ size, label, 'aria-hidden': ariaHidden }: SpinnerProps): import("react/jsx-runtime").JSX.Element;
+export declare function Spinner({ size, label, 'aria-hidden': ariaHidden }: SpinnerProps): import("react").JSX.Element;

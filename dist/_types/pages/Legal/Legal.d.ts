@@ -14,5 +14,5 @@ interface LegalProps {
     /** Enlace destacado del header. */
     featuredLink?: NavItem;
 }
-export declare function Legal({ title, sections, navItems, featuredLink }: LegalProps): import("react/jsx-runtime").JSX.Element;
+export declare function Legal({ title, sections, navItems, featuredLink }: LegalProps): import("react").JSX.Element;
 export {};

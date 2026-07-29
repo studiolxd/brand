@@ -8,5 +8,5 @@ interface ProjectGridProps {
     /** Clase adicional. */
     className?: string;
 }
-export declare function ProjectGrid({ projects, hideTags, className }: ProjectGridProps): import("react/jsx-runtime").JSX.Element;
+export declare function ProjectGrid({ projects, hideTags, className }: ProjectGridProps): import("react").JSX.Element;
 export {};

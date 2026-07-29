@@ -4,5 +4,5 @@ interface VisuallyHiddenProps {
     className?: string;
 }
 /** Oculta contenido visualmente pero lo mantiene accesible para lectores de pantalla. */
-export declare function VisuallyHidden({ children, className }: VisuallyHiddenProps): import("react/jsx-runtime").JSX.Element;
+export declare function VisuallyHidden({ children, className }: VisuallyHiddenProps): import("react").JSX.Element;
 export {};

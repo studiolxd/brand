@@ -8,4 +8,4 @@ export interface LoginFormProps {
     loading?: boolean;
     title?: string;
 }
-export declare function LoginForm({ onSubmit, errors, loading, title, }: LoginFormProps): import("react/jsx-runtime").JSX.Element;
+export declare function LoginForm({ onSubmit, errors, loading, title, }: LoginFormProps): import("react").JSX.Element;

@@ -8,7 +8,7 @@
     "padding-block":       { "$value": "{spacing.4}",                    "$type": "dimension", "$description": "Padding vertical interno del panel" },
     "expand-delay":        { "$value": "150",                            "$type": "number",    "$description": "Delay (ms) antes de expandir al entrar con el ratón/foco" },
     "collapse-delay":      { "$value": "100",                            "$type": "number",    "$description": "Delay (ms) antes de replegar al salir" },
-    "transition-duration": { "$value": "{motion.duration.slow}",         "$type": "number",    "$description": "Duración de la animación de expansión/repliegue" },
+    "transition-duration": { "$value": "{motion.duration.base}",         "$type": "number",    "$description": "Duración de la animación de expansión/repliegue" },
     "transition-easing":   { "$value": "{motion.easing.in-out}",         "$type": "string",    "$description": "Curva de animación de apertura/cierre" },
     "surface-dark-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" }
   }

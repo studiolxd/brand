@@ -37,4 +37,4 @@ export interface PaginationProps {
     ariaLabel?: string;
     className?: string;
 }
-export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, className, }: PaginationProps): import("react").JSX.Element | null;

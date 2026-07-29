@@ -16,4 +16,4 @@ export interface BreadcrumbProps {
     ariaLabel?: string;
     className?: string;
 }
-export declare function Breadcrumb({ items, renderLink, separator, ariaLabel, className, }: BreadcrumbProps): import("react/jsx-runtime").JSX.Element;
+export declare function Breadcrumb({ items, renderLink, separator, ariaLabel, className, }: BreadcrumbProps): import("react").JSX.Element;

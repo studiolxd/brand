@@ -7,4 +7,4 @@ export interface SidebarProps {
     footer?: ReactNode;
     id?: string;
 }
-export declare function Sidebar({ logo, children, footer, id }: SidebarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Sidebar({ logo, children, footer, id }: SidebarProps): import("react").JSX.Element;

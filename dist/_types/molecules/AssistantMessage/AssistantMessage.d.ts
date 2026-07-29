@@ -10,4 +10,4 @@ export interface AssistantMessageProps {
     /** Texto anunciado por lectores de pantalla para el estado de escritura. */
     streamingLabel?: string;
 }
-export declare function AssistantMessage({ children, model, timestamp, isStreaming, streamingLabel, }: AssistantMessageProps): import("react/jsx-runtime").JSX.Element;
+export declare function AssistantMessage({ children, model, timestamp, isStreaming, streamingLabel, }: AssistantMessageProps): import("react").JSX.Element;

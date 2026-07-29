@@ -8,5 +8,5 @@ interface SolutionsSectionProps {
     /** Nombre accesible de la sección (aria-label). */
     'aria-label'?: string;
 }
-export declare function SolutionsSection({ id, items, 'aria-label': ariaLabel }: SolutionsSectionProps): import("react/jsx-runtime").JSX.Element;
+export declare function SolutionsSection({ id, items, 'aria-label': ariaLabel }: SolutionsSectionProps): import("react").JSX.Element;
 export {};

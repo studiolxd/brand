@@ -129,18 +129,8 @@
   }
 }
 
-/* ── Triggers centrados en el rail ───────────────────────── */
-.sidebar:not(:hover):not(:focus-within) .org-switcher__trigger,
-.sidebar:not(:hover):not(:focus-within) .user-menu__trigger,
-.sidebar:not(:hover):not(:focus-within) .sidebar-nav__top-link,
-.sidebar:not(:hover):not(:focus-within) .sidebar-nav__group-header {
-  justify-content: center;
-  padding-inline: var(--spacing-1);
-}
-
-.sidebar:not(:hover):not(:focus-within) .sidebar-nav__group-label {
-  flex: none;
-}
+/* Los triggers NO se recolocan entre estados: el icono mantiene su
+   posición horizontal y solo el texto aparece a su derecha. */
 
 /* ── Mobile (< 1024px): el chrome es AppHeader ───────────── */
 @media (max-width: 1023px) {

@@ -5,5 +5,5 @@ interface SkipLinkProps {
     children: React.ReactNode;
 }
 /** Enlace de salto accesible: invisible hasta que recibe foco por teclado. */
-export declare function SkipLink({ href, children }: SkipLinkProps): import("react/jsx-runtime").JSX.Element;
+export declare function SkipLink({ href, children }: SkipLinkProps): import("react").JSX.Element;
 export {};

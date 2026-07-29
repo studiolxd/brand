@@ -39,5 +39,5 @@ export interface CalendarPlannerProps {
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, size, className, }: CalendarPlannerProps): import("react").JSX.Element;
 export {};

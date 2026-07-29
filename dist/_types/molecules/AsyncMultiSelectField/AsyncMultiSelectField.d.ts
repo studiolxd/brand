@@ -18,4 +18,4 @@ export interface AsyncMultiSelectFieldProps {
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
 }
-export declare function AsyncMultiSelectField({ id, label, labelHidden, onSearch, value, defaultValue, onValueChange, selectedOptions, placeholder, disabled, readOnly, size, error, errorMessage, helperText, }: AsyncMultiSelectFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function AsyncMultiSelectField({ id, label, labelHidden, onSearch, value, defaultValue, onValueChange, selectedOptions, placeholder, disabled, readOnly, size, error, errorMessage, helperText, }: AsyncMultiSelectFieldProps): import("react").JSX.Element;

@@ -18,4 +18,4 @@ export interface NumberInputProps {
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function NumberInput({ value, defaultValue, min, max, step, decimal, disabled, readOnly, size, error, id, name, describedBy, ariaLabel, onChange, onBlur, onFocus, }: NumberInputProps): import("react/jsx-runtime").JSX.Element;
+export declare function NumberInput({ value, defaultValue, min, max, step, decimal, disabled, readOnly, size, error, id, name, describedBy, ariaLabel, onChange, onBlur, onFocus, }: NumberInputProps): import("react").JSX.Element;

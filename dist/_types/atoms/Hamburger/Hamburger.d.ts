@@ -5,5 +5,5 @@ interface HamburgerProps extends Omit<ComponentPropsWithRef<'button'>, 'children
     onClick?: () => void;
     label?: string;
 }
-export declare function Hamburger({ isOpen, onClick, label, ...rest }: HamburgerProps): import("react/jsx-runtime").JSX.Element;
+export declare function Hamburger({ isOpen, onClick, label, ...rest }: HamburgerProps): import("react").JSX.Element;
 export {};

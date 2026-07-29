@@ -12,4 +12,4 @@ export interface UserMenuProps {
     onOpenChange?: (open: boolean) => void;
     defaultOpen?: boolean;
 }
-export declare function UserMenu({ name, email, avatarUrl, notificationCount, items, renderLink, onOpenChange, defaultOpen, }: UserMenuProps): import("react/jsx-runtime").JSX.Element;
+export declare function UserMenu({ name, email, avatarUrl, notificationCount, items, renderLink, onOpenChange, defaultOpen, }: UserMenuProps): import("react").JSX.Element;

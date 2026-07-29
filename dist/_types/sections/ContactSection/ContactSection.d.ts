@@ -31,5 +31,5 @@ interface ContactSectionProps {
     /** URL del enlace de WhatsApp. */
     whatsappHref: string;
 }
-export declare function ContactSection({ id, title, form, whatsappTitle, whatsappLabel, whatsappHref, }: ContactSectionProps): import("react/jsx-runtime").JSX.Element;
+export declare function ContactSection({ id, title, form, whatsappTitle, whatsappLabel, whatsappHref, }: ContactSectionProps): import("react").JSX.Element;
 export {};

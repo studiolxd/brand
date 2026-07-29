@@ -70,7 +70,7 @@ function p({ options: e, value: r, defaultValue: i, placeholder: s = "Selecciona
 		value: r,
 		defaultValue: i,
 		disabled: d,
-		open: f ? !1 : void 0,
+		open: !f && void 0,
 		onOpenChange: f ? () => {} : void 0,
 		onValueChange: f ? void 0 : m,
 		children: [/* @__PURE__ */ t(c, {

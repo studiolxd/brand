@@ -10,7 +10,7 @@
   --sidebar-collapse-delay: 100; /** Delay (ms) antes de replegar al salir */
   --sidebar-padding-inline: var(--spacing-4); /** Padding horizontal interno del panel */
   --sidebar-padding-block: var(--spacing-4); /** Padding vertical interno del panel */
-  --sidebar-transition-duration: var(--motion-duration-slow); /** Duración de la animación de expansión/repliegue */
+  --sidebar-transition-duration: var(--motion-duration-base); /** Duración de la animación de expansión/repliegue */
   --sidebar-transition-easing: var(--motion-easing-in-out); /** Curva de animación de apertura/cierre */
   --sidebar-bg: var(--color-background-light); /** Fondo del panel de la sidebar */
 }

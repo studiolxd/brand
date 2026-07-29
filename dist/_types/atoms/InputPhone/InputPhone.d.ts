@@ -23,5 +23,5 @@ interface InputPhoneProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
 }
-export declare function InputPhone({ value, defaultCountry, placeholder, disabled, error, size, id, name, describedBy, onChange, onBlur, container, }: InputPhoneProps): import("react/jsx-runtime").JSX.Element;
+export declare function InputPhone({ value, defaultCountry, placeholder, disabled, error, size, id, name, describedBy, onChange, onBlur, container, }: InputPhoneProps): import("react").JSX.Element;
 export {};

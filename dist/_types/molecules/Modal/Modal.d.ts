@@ -17,4 +17,4 @@ export interface ModalProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
 }
-export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, }: ModalProps): import("react/jsx-runtime").JSX.Element;
+export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, }: ModalProps): import("react").JSX.Element;

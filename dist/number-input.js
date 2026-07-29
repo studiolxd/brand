@@ -14,34 +14,23 @@ function i({ value: i, defaultValue: a = 0, min: o, max: s, step: c = 1, decimal
 		A,
 		x,
 		v
-	]), M = () => {
-		u || d || (D(null), j(O - c));
-	}, N = () => {
-		u || d || (D(null), j(O + c));
-	}, P = (e) => {
-		let t = e.target.value;
-		D(t);
-		let n = l ? t.replace(",", ".") : t, r = parseFloat(n);
-		isNaN(r) || j(r);
-	}, F = (e) => {
-		T(!0), b?.(e);
-	}, I = (e) => {
-		T(!1), D(null), y?.(e);
-	}, L = [
-		"number-input",
-		f === "md" ? "" : `number-input--${f}`,
-		p ? "number-input--error" : "",
-		u ? "number-input--disabled" : "",
-		w ? "number-input--focused" : ""
-	].filter(Boolean).join(" "), R = u || d || o !== void 0 && O <= o, z = u || d || s !== void 0 && O >= s;
+	]);
 	return /* @__PURE__ */ t("div", {
-		className: L,
+		className: [
+			"number-input",
+			f === "md" ? "" : `number-input--${f}`,
+			p ? "number-input--error" : "",
+			u ? "number-input--disabled" : "",
+			w ? "number-input--focused" : ""
+		].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ e("button", {
 				className: "number-input__btn number-input__btn--decrement",
 				type: "button",
-				onClick: M,
-				disabled: R,
+				onClick: () => {
+					u || d || (D(null), j(O - c));
+				},
+				disabled: u || d || o !== void 0 && O <= o,
 				"aria-label": "Decrementar",
 				tabIndex: -1,
 				children: "−"
@@ -59,15 +48,26 @@ function i({ value: i, defaultValue: a = 0, min: o, max: s, step: c = 1, decimal
 				"aria-invalid": p || void 0,
 				"aria-describedby": g,
 				"aria-label": _,
-				onChange: P,
-				onFocus: F,
-				onBlur: I
+				onChange: (e) => {
+					let t = e.target.value;
+					D(t);
+					let n = l ? t.replace(",", ".") : t, r = parseFloat(n);
+					isNaN(r) || j(r);
+				},
+				onFocus: (e) => {
+					T(!0), b?.(e);
+				},
+				onBlur: (e) => {
+					T(!1), D(null), y?.(e);
+				}
 			}),
 			/* @__PURE__ */ e("button", {
 				className: "number-input__btn number-input__btn--increment",
 				type: "button",
-				onClick: N,
-				disabled: z,
+				onClick: () => {
+					u || d || (D(null), j(O + c));
+				},
+				disabled: u || d || s !== void 0 && O >= s,
 				"aria-label": "Incrementar",
 				tabIndex: -1,
 				children: "+"

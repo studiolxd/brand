@@ -18,5 +18,5 @@ interface CardSquareProps {
     /** Imagen de fondo. */
     image: CardSquareImage;
 }
-export declare function CardSquare({ href, title, description, ctaLabel, color, image }: CardSquareProps): import("react/jsx-runtime").JSX.Element;
+export declare function CardSquare({ href, title, description, ctaLabel, color, image }: CardSquareProps): import("react").JSX.Element;
 export {};

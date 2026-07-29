@@ -10,5 +10,5 @@ interface CheckboxFieldProps {
     value?: string;
     onCheckedChange?: (checked: boolean | 'indeterminate') => void;
 }
-export declare function CheckboxField({ label, checked, defaultChecked, disabled, size, id, name, value, onCheckedChange, }: CheckboxFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function CheckboxField({ label, checked, defaultChecked, disabled, size, id, name, value, onCheckedChange, }: CheckboxFieldProps): import("react").JSX.Element;
 export {};

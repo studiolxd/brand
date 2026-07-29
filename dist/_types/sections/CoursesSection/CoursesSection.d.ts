@@ -5,5 +5,5 @@ interface CoursesSectionProps {
     /** Contenido: CardSquare y/o CardSplit. */
     children: ReactNode;
 }
-export declare function CoursesSection({ id, children }: CoursesSectionProps): import("react/jsx-runtime").JSX.Element;
+export declare function CoursesSection({ id, children }: CoursesSectionProps): import("react").JSX.Element;
 export {};

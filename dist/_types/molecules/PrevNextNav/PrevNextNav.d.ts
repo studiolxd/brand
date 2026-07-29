@@ -18,4 +18,4 @@ export interface PrevNextNavProps {
     /** Variante de densidad. Default: "md" */
     size?: 'sm' | 'md';
 }
-export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, label, size, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, label, size, }: PrevNextNavProps): import("react").JSX.Element;

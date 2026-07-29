@@ -10,5 +10,5 @@ interface HeroVideoProps {
     /** Vídeo para orientación portrait. */
     portrait: VideoSource;
 }
-export declare function HeroVideo({ landscape, portrait }: HeroVideoProps): import("react/jsx-runtime").JSX.Element;
+export declare function HeroVideo({ landscape, portrait }: HeroVideoProps): import("react").JSX.Element;
 export {};

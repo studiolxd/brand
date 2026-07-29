@@ -7,5 +7,5 @@ interface ProjectsSectionProps {
     /** Lista de proyectos. */
     projects: Project[];
 }
-export declare function ProjectsSection({ id, title, projects }: ProjectsSectionProps): import("react/jsx-runtime").JSX.Element;
+export declare function ProjectsSection({ id, title, projects }: ProjectsSectionProps): import("react").JSX.Element;
 export {};

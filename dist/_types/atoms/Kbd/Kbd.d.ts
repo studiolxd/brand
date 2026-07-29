@@ -10,4 +10,4 @@ export interface KbdProps {
  * Para combinaciones (p. ej. `Ctrl + K`), componer varios `Kbd` con el
  * separador deseado entre ellos.
  */
-export declare function Kbd({ size, children }: KbdProps): import("react/jsx-runtime").JSX.Element;
+export declare function Kbd({ size, children }: KbdProps): import("react").JSX.Element;

@@ -12,7 +12,8 @@ function u({ onSearch: u, value: d, defaultValue: f = [], onValueChange: p, sele
 	let [C, w] = s(!1), [T, E] = s(""), [D, O] = s(!1), [k, A] = s([]), [j, M] = s(!1), [N, P] = s(-1), [F, I] = s(f), L = o(null), R = o(null), z = o(null), B = a(), V = a(), H = d === void 0 ? F : d, U = (e) => `${V}-opt-${e}`, W = i(async (e) => {
 		O(!0), M(!1);
 		try {
-			A(await u(e)), P(-1);
+			let t = await u(e);
+			A(t), P(-1);
 		} catch {
 			A([]), P(-1);
 		} finally {

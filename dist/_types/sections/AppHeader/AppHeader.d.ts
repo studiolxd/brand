@@ -12,4 +12,4 @@ export interface AppHeaderProps {
     /** id del panel (aria-controls del botón de menú). */
     panelId?: string;
 }
-export declare function AppHeader({ center, end, children, menuLabel, panelId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppHeader({ center, end, children, menuLabel, panelId, }: AppHeaderProps): import("react").JSX.Element;

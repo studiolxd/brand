@@ -26,5 +26,5 @@ interface ProjectCardProps {
     hideTag?: boolean;
     className?: string;
 }
-export declare function ProjectCard({ project, hideTag, className }: ProjectCardProps): import("react/jsx-runtime").JSX.Element;
+export declare function ProjectCard({ project, hideTag, className }: ProjectCardProps): import("react").JSX.Element;
 export {};
