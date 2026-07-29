@@ -53,7 +53,7 @@ El `<pre>` interno usa `overflow-x: auto`, así que una línea muy larga hace sc
 
 ## Tema oscuro
 
-El fondo (`bg`) es la única propiedad sin equivalente en `Card`, así que define su propio remapeo `surface-dark-bg` (blanco translúcido). El resto de propiedades (`color`, `border-color`, `border-width`, `border-radius`, `shadow`, padding) heredan de `Card` y remapean a través de su propia cascada de tokens.
+`bg` y `color` son una excepción deliberada (mismo criterio que `button.primary`): al no tener equivalente en `Card`, forman un par de color autocontenido (gris claro + texto oscuro) que se mantiene idéntico en ambos temas, sin remapeo `surface-dark-*`. `border-color` sí hereda la cascada de `Card` y remapea a blanco en `surface-dark`, para seguir marcando el contorno de la superficie clara sobre una página oscura.
 
 ## Props
 
