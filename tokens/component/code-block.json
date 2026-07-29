@@ -4,14 +4,15 @@
     "padding-block-start": { "$value": "{card.padding-block-start}", "$type": "dimension", "$description": "Padding block start — heredado de card" },
     "padding-block-end":   { "$value": "{card.padding-block-end}",   "$type": "dimension", "$description": "Padding block end — heredado de card" },
     "border-radius":       { "$value": "{card.border-radius}",       "$type": "dimension", "$description": "Radio de esquinas — heredado de card" },
-    "shadow":              { "$value": "{card.shadow}",               "$type": "shadow",    "$description": "Sombra de la superficie — heredada de card" },
+    "shadow":              { "$value": "{card.shadow}",              "$type": "shadow",    "$description": "Sombra de la superficie — heredada de card" },
+    "border-width":        { "$value": "{card.outline-border-width}","$type": "dimension", "$description": "Grosor de borde — heredado de card (variante outline)" },
+    "border-color":        { "$value": "{card.outline-border-color}","$type": "color",     "$description": "Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro" },
+    "color":               { "$value": "{card.outline-color}",       "$type": "color",     "$description": "Color de texto — heredado de card (variante outline)" },
 
-    "bg":           { "$value": "{kbd.bg}",                     "$type": "color",  "$description": "Fondo gris claro — heredado de kbd (mismo tratamiento 'código sobre superficie gris')" },
-    "border-width": { "$value": "{card.outline-border-width}",  "$type": "dimension", "$description": "Grosor de borde — heredado de card (variante outline)" },
-    "border-color": { "$value": "{card.outline-border-color}",  "$type": "color",  "$description": "Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro de kbd" },
-    "color":        { "$value": "{kbd.color}",                  "$type": "color",  "$description": "Color de texto — heredado de kbd" },
+    "bg":            { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Fondo gris claro — propio del componente (card no tiene variante gris)" },
+    "surface-dark-bg": { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo — surface-dark (blanco translúcido, mismo criterio que otros overlays sutiles del sistema)" },
 
-    "font-family": { "$value": "{kbd.font-family}",                  "$type": "string",     "$description": "Monoespaciada (Google Sans Code) — heredada de kbd" },
+    "font-family": { "$value": "{font-family.mono}",                 "$type": "string",     "$description": "Monoespaciada (Google Sans Code) — propia del componente (card no define tipografía)" },
     "font-size":   { "$value": "{text.paragraph.small.font-size}",   "$type": "dimension",  "$description": "Tamaño de fuente del código — mismo tamaño que paragraph small" },
     "line-height": { "$value": "{text.paragraph.small.line-height}", "$type": "number",     "$description": "Interlineado del código — mismo criterio que paragraph small" },
 

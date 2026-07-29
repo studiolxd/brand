@@ -6,11 +6,11 @@ $lxd-code-block-padding-block-start: 1rem; // Padding block start — heredado d
 $lxd-code-block-padding-block-end: 0.75rem; // Padding block end — heredado de card
 $lxd-code-block-border-radius: 0px; // Radio de esquinas — heredado de card
 $lxd-code-block-shadow: none; // Sombra de la superficie — heredada de card
-$lxd-code-block-bg: #f2f2f2; // Fondo gris claro — heredado de kbd (mismo tratamiento 'código sobre superficie gris')
 $lxd-code-block-border-width: 1px; // Grosor de borde — heredado de card (variante outline)
-$lxd-code-block-border-color: #111e30; // Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro de kbd
-$lxd-code-block-color: #111e30; // Color de texto — heredado de kbd
-$lxd-code-block-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada (Google Sans Code) — heredada de kbd
+$lxd-code-block-border-color: #111e30; // Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro
+$lxd-code-block-color: #111e30; // Color de texto — heredado de card (variante outline)
+$lxd-code-block-bg: #f2f2f2; // Fondo gris claro — propio del componente (card no tiene variante gris)
+$lxd-code-block-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada (Google Sans Code) — propia del componente (card no define tipografía)
 $lxd-code-block-font-size: 0.875rem; // Tamaño de fuente del código — mismo tamaño que paragraph small
 $lxd-code-block-line-height: 1.65; // Interlineado del código — mismo criterio que paragraph small
 $lxd-code-block-header-gap: 0.5rem; // Separación en la cabecera (entre language tag y botón copiar) y entre la cabecera y el código

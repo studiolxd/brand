@@ -1,0 +1,60 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CodeBlockStories from "./CodeBlock.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { codeBlockTokens } from "../../../tokens/components/code-block";
+
+<Meta of={CodeBlockStories} />
+
+# CodeBlock
+
+Bloque de código con tipografía monoespaciada (Google Sans Code) sobre una superficie gris clara. Estructuralmente hereda de `Card` (padding, radio de esquinas, sombra y borde de la variante `outline`); el fondo gris y la tipografía monoespaciada son propios del componente, ya que `Card` no define ninguno de los dos.
+
+Cabecera opcional con etiqueta de lenguaje (`language`) y botón de copiar al portapapeles (`copyable`), ambos independientes entre sí.
+
+## Solo código
+
+<Canvas of={CodeBlockStories.SoloCodigo} />
+
+## Con etiqueta de lenguaje
+
+<Canvas of={CodeBlockStories.ConLenguaje} />
+
+## Con botón de copiar
+
+Copia el texto plano del código (vía `textContent`, funciona igual con `children` de texto o con nodos ya resaltados) y muestra un feedback visual breve (icono `check` + `aria-label` "Copiado").
+
+<Canvas of={CodeBlockStories.ConBotonCopiar} />
+
+## Con etiqueta y botón de copiar
+
+<Canvas of={CodeBlockStories.ConLenguajeYCopiar} />
+
+## Código multilínea
+
+<Canvas of={CodeBlockStories.CodigoMultilinea} />
+
+## Línea larga
+
+El `<pre>` interno usa `overflow-x: auto`, así que una línea muy larga hace scroll horizontal sin romper el layout del contenedor.
+
+<Canvas of={CodeBlockStories.LineaLarga} />
+
+## Nodos ya resaltados
+
+`children` acepta texto plano o nodos React ya formateados por un highlighter externo — `CodeBlock` no implementa resaltado de sintaxis propio.
+
+<Canvas of={CodeBlockStories.ConNodosResaltados} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={codeBlockTokens} />
+
+## Tema oscuro
+
+El fondo (`bg`) es la única propiedad sin equivalente en `Card`, así que define su propio remapeo `surface-dark-bg` (blanco translúcido). El resto de propiedades (`color`, `border-color`, `border-width`, `border-radius`, `shadow`, padding) heredan de `Card` y remapean a través de su propia cascada de tokens.
+
+## Props
+
+<ArgTypes of={CodeBlockStories} />
