@@ -14,6 +14,7 @@
   height: 100%;
   background-color: var(--sidebar-bg);
   box-shadow: var(--sidebar-shadow);
+  border-inline-end: var(--sidebar-border-inline-end-width) solid var(--sidebar-border-inline-end-color);
   box-sizing: border-box;
   overflow: hidden;
   flex-shrink: 0;

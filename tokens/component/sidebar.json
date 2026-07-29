@@ -4,12 +4,15 @@
     "collapsed-width":     { "$value": "3.5rem",                         "$type": "dimension", "$description": "Ancho del rail plegado: columna de iconos de 2rem con el mismo margen a ambos lados" },
     "bg":                  { "$value": "{color.background.light}",       "$type": "color",     "$description": "Fondo del panel de la sidebar" },
     "shadow":              { "$value": "4px 0 16px rgba(17,30,48,0.12)", "$type": "shadow",    "$description": "Sombra del panel hacia la derecha — mismos parámetros que shadow.lg" },
+    "border-inline-end-width": { "$value": "{border-width.sm}", "$type": "dimension", "$description": "Grosor del borde derecho. Transparente en modo claro (la sombra ya separa el panel); visible solo en surface-dark, donde la sombra oscura se funde con el fondo oscuro circundante." },
+    "border-inline-end-color": { "$value": "transparent",       "$type": "color",     "$description": "Color del borde derecho — transparente en modo claro" },
     "padding-inline":      { "$value": "{spacing.4}",                    "$type": "dimension", "$description": "Padding horizontal interno del panel" },
     "padding-block":       { "$value": "{spacing.4}",                    "$type": "dimension", "$description": "Padding vertical interno del panel" },
     "expand-delay":        { "$value": "150",                            "$type": "number",    "$description": "Delay (ms) antes de expandir al entrar con el ratón/foco" },
     "collapse-delay":      { "$value": "100",                            "$type": "number",    "$description": "Delay (ms) antes de replegar al salir" },
     "transition-duration": { "$value": "{motion.duration.base}",         "$type": "number",    "$description": "Duración de la animación de expansión/repliegue" },
     "transition-easing":   { "$value": "{motion.easing.in-out}",         "$type": "string",    "$description": "Curva de animación de apertura/cierre" },
-    "surface-dark-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" }
+    "surface-dark-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" },
+    "surface-dark-border-inline-end-color": { "$value": "rgba(255, 255, 255, 0.15)", "$type": "color", "$description": "Borde derecho — surface-dark. Sustituye a la sombra, invisible sobre fondo oscuro." }
   }
 }

@@ -5,6 +5,8 @@ $lxd-sidebar-width: 15rem; // Ancho del panel en desktop
 $lxd-sidebar-collapsed-width: 3.5rem; // Ancho del rail plegado: columna de iconos de 2rem con el mismo margen a ambos lados
 $lxd-sidebar-bg: #ffffff; // Fondo del panel de la sidebar
 $lxd-sidebar-shadow: 4px 0 16px rgba(17,30,48,0.12); // Sombra del panel hacia la derecha — mismos parámetros que shadow.lg
+$lxd-sidebar-border-inline-end-width: 1px; // Grosor del borde derecho. Transparente en modo claro (la sombra ya separa el panel); visible solo en surface-dark, donde la sombra oscura se funde con el fondo oscuro circundante.
+$lxd-sidebar-border-inline-end-color: rgba(0, 0, 0, 0); // Color del borde derecho — transparente en modo claro
 $lxd-sidebar-padding-inline: 1rem; // Padding horizontal interno del panel
 $lxd-sidebar-padding-block: 1rem; // Padding vertical interno del panel
 $lxd-sidebar-expand-delay: 150; // Delay (ms) antes de expandir al entrar con el ratón/foco
