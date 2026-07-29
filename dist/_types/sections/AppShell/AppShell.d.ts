@@ -1,11 +1,12 @@
 import { type ReactNode } from 'react';
 import './AppShell.css';
-export { useSidebar } from './SidebarContext';
-export type { SidebarContextValue } from './SidebarContext';
+export { useAppShell } from './AppShellContext';
+export type { AppShellContextValue } from './AppShellContext';
 export interface AppShellProps {
+    /** Chrome de escritorio (≥1024px): un <Sidebar>. */
     sidebar: ReactNode;
+    /** Chrome móvil (<1024px): un <AppHeader>. */
+    header?: ReactNode;
     children: ReactNode;
-    defaultCollapsed?: boolean;
-    storageKey?: string;
 }
-export declare function AppShell({ sidebar, children, defaultCollapsed, storageKey }: AppShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppShell({ sidebar, header, children }: AppShellProps): import("react/jsx-runtime").JSX.Element;

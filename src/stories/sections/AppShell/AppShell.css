@@ -1,13 +1,5 @@
 /* ---- AppShell ---- */
 
-/* Suprimir transiciones durante la inicialización del estado */
-.app-shell:not([data-mounted]) *,
-.app-shell:not([data-mounted]) *::before,
-.app-shell:not([data-mounted]) *::after {
-  transition-duration: 0s !important;
-  animation-duration: 0s !important;
-}
-
 .app-shell {
   display: flex;
   height: 100dvh;
@@ -26,9 +18,16 @@
   padding-inline-end: env(safe-area-inset-right);
 }
 
-/* Mobile: sidebar es position:fixed, el contenido necesita offset */
+/* Mobile: el chrome es un AppHeader position:fixed arriba; el contenido
+   necesita offset vertical y recuperar el safe-area horizontal izquierdo */
 @media (max-width: 1023px) {
   .app-shell__content {
-    padding-inline-start: var(--sidebar-collapsed-width);
+    padding-block-start: calc(var(--app-header-height) + env(safe-area-inset-top));
+    padding-inline-start: env(safe-area-inset-left);
+  }
+
+  /* Con el panel de navegación abierto, el scroller real queda bloqueado */
+  .app-shell[data-menu-open] .app-shell__content {
+    overflow: hidden;
   }
 }

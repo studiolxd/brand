@@ -1,6 +1,7 @@
+import type { ComponentPropsWithRef } from 'react';
 import './Hamburger.css';
 
-interface HamburgerProps {
+interface HamburgerProps extends Omit<ComponentPropsWithRef<'button'>, 'children'> {
   isOpen?: boolean;
   onClick?: () => void;
   label?: string;
@@ -10,6 +11,7 @@ export function Hamburger({
   isOpen = false,
   onClick,
   label = 'Menu',
+  ...rest
 }: HamburgerProps) {
   return (
     <button
@@ -18,6 +20,7 @@ export function Hamburger({
       aria-label={label}
       aria-expanded={isOpen}
       onClick={onClick}
+      {...rest}
     >
       <span className="hamburger__bar" aria-hidden="true" />
       <span className="hamburger__bar" aria-hidden="true" />

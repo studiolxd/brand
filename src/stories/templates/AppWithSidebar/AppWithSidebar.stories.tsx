@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppShell } from '../../sections/AppShell/AppShell';
+import { AppHeader } from '../../sections/AppHeader/AppHeader';
 import { Sidebar } from '../../sections/Sidebar/Sidebar';
 import { Logo } from '../../atoms/Logo/Logo';
 import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
@@ -83,40 +84,45 @@ const userMenuItems = [
   { type: 'button' as const, label: 'Cerrar sesión', onClick: () => {}, destructive: true },
 ];
 
-interface SidebarContentProps {
+interface ShellProps {
   orgSwitcherOpen?: boolean;
   userMenuOpen?: boolean;
+  children: React.ReactNode;
 }
 
-function SidebarContent({ orgSwitcherOpen, userMenuOpen }: SidebarContentProps) {
+function Shell({ orgSwitcherOpen, userMenuOpen, children }: ShellProps) {
+  const orgSwitcher = (
+    <OrgSwitcher
+      current={orgs[0]}
+      organizations={orgs}
+      onOrgChange={() => {}}
+      defaultOpen={orgSwitcherOpen}
+      items={[
+        { type: 'link', label: 'Administrar organizaciones', href: '#orgs' },
+      ]}
+    />
+  );
+  const nav = <SidebarNav entries={navEntries} defaultValue={['general', 'workspace']} />;
+  const userMenu = (
+    <UserMenu
+      name="Ana García"
+      email="ana.garcia@studiolxd.com"
+      items={userMenuItems}
+      defaultOpen={userMenuOpen}
+    />
+  );
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <OrgSwitcher
-        current={orgs[0]}
-        organizations={orgs}
-        onOrgChange={() => {}}
-        defaultOpen={orgSwitcherOpen}
-        items={[
-          { type: 'link', label: 'Administrar organizaciones', href: '#orgs' },
-        ]}
-      />
-
-      <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
-        <SidebarNav
-          entries={navEntries}
-          defaultValue={['general', 'workspace']}
-        />
-      </div>
-
-      <div style={{ borderBlockStart: '1px solid var(--sidebar-border-color, #E5E7EB)', paddingBlockStart: '0.25rem' }}>
-        <UserMenu
-          name="Ana García"
-          email="ana.garcia@studiolxd.com"
-          items={userMenuItems}
-          defaultOpen={userMenuOpen}
-        />
-      </div>
-    </div>
+    <AppShell
+      sidebar={
+        <Sidebar logo={<Logo height={24} />} footer={userMenu}>
+          {orgSwitcher}
+          {nav}
+        </Sidebar>
+      }
+      header={<AppHeader center={orgSwitcher} end={userMenu}>{nav}</AppHeader>}
+    >
+      {children}
+    </AppShell>
   );
 }
 
@@ -131,32 +137,52 @@ function MainContent() {
 
 export const Default: Story = {
   render: () => (
-    <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent /></Sidebar>}>
+    <Shell>
       <MainContent />
-    </AppShell>
+    </Shell>
   ),
 };
 
-export const SidebarCerrada: Story = {
+export const SidebarExpandida: Story = {
+  parameters: {
+    pseudo: { hover: ['.sidebar'] },
+  },
   render: () => (
-    <AppShell defaultCollapsed sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent /></Sidebar>}>
+    <Shell>
       <MainContent />
-    </AppShell>
+    </Shell>
+  ),
+};
+
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  render: () => (
+    <Shell>
+      <MainContent />
+    </Shell>
   ),
 };
 
 export const OrgSwitcherAbierto: Story = {
+  parameters: {
+    pseudo: { hover: ['.sidebar'] },
+  },
   render: () => (
-    <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent orgSwitcherOpen /></Sidebar>}>
+    <Shell orgSwitcherOpen>
       <MainContent />
-    </AppShell>
+    </Shell>
   ),
 };
 
 export const UserMenuAbierto: Story = {
+  parameters: {
+    pseudo: { hover: ['.sidebar'] },
+  },
   render: () => (
-    <AppShell sidebar={<Sidebar logo={<Logo height={24} />}><SidebarContent userMenuOpen /></Sidebar>}>
+    <Shell userMenuOpen>
       <MainContent />
-    </AppShell>
+    </Shell>
   ),
 };

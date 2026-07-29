@@ -1,38 +1,28 @@
-'use client';
 import './sidebar.css';
-import { Icon as e } from "./icon.js";
-import { t } from "./_shared/SidebarContext.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { useContext as i, useState as a } from "react";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
 //#region src/stories/sections/Sidebar/Sidebar.tsx
-function o({ logo: o, children: s, id: c }) {
-	let l = i(t), [u, d] = a(!1), f = l ? l.collapsed : u, p = l ? l.setCollapsed : d;
-	return /* @__PURE__ */ r("div", {
+function n({ logo: n, children: r, footer: i, id: a }) {
+	return /* @__PURE__ */ t("div", {
 		className: "sidebar",
-		"data-collapsed": f ? "true" : "false",
-		id: c,
-		children: [/* @__PURE__ */ r("div", {
-			className: "sidebar__header",
-			children: [/* @__PURE__ */ n("div", {
-				className: "sidebar__logo",
-				children: o
-			}), /* @__PURE__ */ n("button", {
-				type: "button",
-				className: "sidebar__collapse-btn",
-				onClick: () => p(!f),
-				"aria-expanded": !f,
-				"aria-label": f ? "Expandir sidebar" : "Plegar sidebar",
-				children: /* @__PURE__ */ n(e, {
-					name: "chevron",
-					className: "sidebar__collapse-icon",
-					size: "sm"
+		id: a,
+		children: [
+			n && /* @__PURE__ */ e("div", {
+				className: "sidebar__header",
+				children: /* @__PURE__ */ e("div", {
+					className: "sidebar__logo",
+					children: n
 				})
-			})]
-		}), /* @__PURE__ */ n("div", {
-			className: "sidebar__panel",
-			children: s
-		})]
+			}),
+			/* @__PURE__ */ e("div", {
+				className: "sidebar__panel",
+				children: r
+			}),
+			i && /* @__PURE__ */ e("div", {
+				className: "sidebar__footer",
+				children: i
+			})
+		]
 	});
 }
 //#endregion
-export { o as Sidebar };
+export { n as Sidebar };

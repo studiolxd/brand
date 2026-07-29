@@ -15,6 +15,10 @@
       "types": "./dist/_types/sections/AppShell/AppShell.d.ts",
       "import": "./dist/app-shell.js"
     },
+    "./app-header": {
+      "types": "./dist/_types/sections/AppHeader/AppHeader.d.ts",
+      "import": "./dist/app-header.js"
+    },
     "./arrow": {
       "types": "./dist/_types/atoms/Arrow/Arrow.d.ts",
       "import": "./dist/arrow.js"

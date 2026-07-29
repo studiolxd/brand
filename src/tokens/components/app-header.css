@@ -1,0 +1,22 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --app-header-height: 3.5rem; /** Alto del header de aplicación en móvil */
+  --app-header-shadow: 0 4px 16px rgba(17,30,48,0.12); /** Sombra del header hacia abajo — mismos parámetros que sidebar.shadow */
+  --app-header-z-index: 300; /** Capa z del header y su panel — sobre el contenido, bajo floating-panel (1100) */
+  --app-header-padding-inline: var(--spacing-4); /** Padding horizontal del header */
+  --app-header-gap: var(--spacing-3); /** Separación entre hamburger, centro y final */
+  --app-header-transition-duration: var(--motion-duration-slow); /** Duración de la animación de apertura del panel */
+  --app-header-transition-easing: var(--motion-easing-in-out); /** Curva de la animación de apertura del panel */
+  --app-header-bg: var(--color-background-light); /** Fondo del header */
+  --app-header-panel-bg: var(--color-background-light); /** Fondo del panel de navegación a pantalla completa */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --app-header-bg: var(--color-background-dark); /** Fondo del header — surface-dark */
+  --app-header-panel-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
+}

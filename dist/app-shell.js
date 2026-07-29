@@ -1,49 +1,36 @@
 'use client';
 import './app-shell.css';
-import { n as e, t } from "./_shared/SidebarContext.js";
+import { n as e, t } from "./_shared/AppShellContext.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { useCallback as i, useEffect as a, useState as o, useSyncExternalStore as s } from "react";
+import { useEffect as i, useState as a } from "react";
 //#region src/stories/sections/AppShell/AppShell.tsx
-var c = "(max-width: 1023px)", l = "sidebar-collapsed";
-function u(e) {
-	let t = window.matchMedia(c);
-	return t.addEventListener("change", e), () => t.removeEventListener("change", e);
-}
-var d = () => window.matchMedia(c).matches, f = () => !1, p = /* @__PURE__ */ new Set();
-function m(e) {
-	return p.add(e), window.addEventListener("storage", e), () => {
-		p.delete(e), window.removeEventListener("storage", e);
-	};
-}
-function h(e, t) {
-	localStorage.setItem(e, t), p.forEach((e) => e());
-}
-var g = () => null;
-function _({ sidebar: e, children: p, defaultCollapsed: _, storageKey: v = l }) {
-	let y = s(u, d, f), b = s(m, () => localStorage.getItem(v), g), [x, S] = o(null), [C, w] = o(!1);
-	a(() => {
-		let e = requestAnimationFrame(() => w(!0)), t = u(() => S(null));
-		return () => {
-			cancelAnimationFrame(e), t();
+var o = "(min-width: 1024px)";
+function s({ sidebar: e, header: s, children: c }) {
+	let [l, u] = a(!1);
+	return i(() => {
+		let e = window.matchMedia(o), t = () => {
+			e.matches && u(!1);
 		};
-	}, []);
-	let T = x ?? (y ? !0 : _ === void 0 ? b === "true" : _), E = i((e) => {
-		S(e), window.matchMedia(c).matches || h(v, String(e));
-	}, [v]);
-	return /* @__PURE__ */ n(t.Provider, {
+		return e.addEventListener("change", t), () => e.removeEventListener("change", t);
+	}, []), /* @__PURE__ */ n(t.Provider, {
 		value: {
-			collapsed: T,
-			setCollapsed: E
+			menuOpen: l,
+			setMenuOpen: u
 		},
 		children: /* @__PURE__ */ r("div", {
 			className: "app-shell",
-			"data-mounted": C || void 0,
-			children: [e, /* @__PURE__ */ n("div", {
-				className: "app-shell__content",
-				children: p
-			})]
+			"data-menu-open": l || void 0,
+			children: [
+				s,
+				e,
+				/* @__PURE__ */ n("div", {
+					className: "app-shell__content",
+					inert: l || void 0,
+					children: c
+				})
+			]
 		})
 	});
 }
 //#endregion
-export { _ as AppShell, e as useSidebar };
+export { s as AppShell, e as useAppShell };

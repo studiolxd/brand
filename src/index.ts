@@ -165,8 +165,10 @@ export type { UserMessageProps } from './stories/molecules/UserMessage/UserMessa
 // ─── Sections ───────────────────────────────────────────────
 export { AppShell } from './stories/sections/AppShell/AppShell';
 export type { AppShellProps } from './stories/sections/AppShell/AppShell';
-export { useSidebar } from './stories/sections/AppShell/SidebarContext';
-export type { SidebarContextValue } from './stories/sections/AppShell/SidebarContext';
+export { useAppShell } from './stories/sections/AppShell/AppShellContext';
+export type { AppShellContextValue } from './stories/sections/AppShell/AppShellContext';
+export { AppHeader } from './stories/sections/AppHeader/AppHeader';
+export type { AppHeaderProps } from './stories/sections/AppHeader/AppHeader';
 export { Sidebar } from './stories/sections/Sidebar/Sidebar';
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 

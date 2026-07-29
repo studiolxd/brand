@@ -89,6 +89,7 @@ export const entryPoints = {
   'conversation-list':     'src/stories/molecules/ConversationList/ConversationList.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
+  'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
   // Organisms
   'login-form':          'src/stories/organisms/LoginForm/LoginForm.tsx',
@@ -105,8 +106,8 @@ export const clientComponents = new Set([
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
-  'sidebar',
   'app-shell',
+  'app-header',
   'modal',
   'org-switcher', 'user-menu', 'sidebar-nav',
   'tabs',

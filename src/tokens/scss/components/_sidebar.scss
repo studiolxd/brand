@@ -7,7 +7,7 @@ $lxd-sidebar-bg: #ffffff; // Fondo del panel de la sidebar
 $lxd-sidebar-shadow: 4px 0 16px rgba(17,30,48,0.12); // Sombra del panel hacia la derecha — mismos parámetros que shadow.lg
 $lxd-sidebar-padding-inline: 1rem; // Padding horizontal interno del panel
 $lxd-sidebar-padding-block: 1rem; // Padding vertical interno del panel
-$lxd-sidebar-z-index: 200; // Z-index del panel en mobile (overlay)
-$lxd-sidebar-backdrop-bg: rgba(0, 0, 0, 0.4); // Fondo del backdrop en móvil
-$lxd-sidebar-transition-duration: 400ms; // Duración de la animación de apertura/cierre
+$lxd-sidebar-expand-delay: 150; // Delay (ms) antes de expandir al entrar con el ratón/foco
+$lxd-sidebar-collapse-delay: 100; // Delay (ms) antes de replegar al salir
+$lxd-sidebar-transition-duration: 400ms; // Duración de la animación de expansión/repliegue
 $lxd-sidebar-transition-easing: ease-in-out; // Curva de animación de apertura/cierre

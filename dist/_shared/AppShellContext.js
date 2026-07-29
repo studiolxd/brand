@@ -1,9 +1,9 @@
 import { createContext as e, useContext as t } from "react";
-//#region src/stories/sections/AppShell/SidebarContext.tsx
+//#region src/stories/sections/AppShell/AppShellContext.tsx
 var n = e(null);
 function r() {
 	let e = t(n);
-	if (!e) throw Error("useSidebar must be used within AppShell");
+	if (!e) throw Error("useAppShell must be used within AppShell");
 	return e;
 }
 //#endregion

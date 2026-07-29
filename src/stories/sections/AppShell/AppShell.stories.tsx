@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppShell } from './AppShell';
+import { AppHeader } from '../AppHeader/AppHeader';
 import { Sidebar } from '../Sidebar/Sidebar';
+import { Logo } from '../../atoms/Logo/Logo';
 import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
 import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
-import { useSidebar } from './SidebarContext';
 
 const meta: Meta<typeof AppShell> = {
   title: 'Sections/AppShell',
@@ -62,45 +63,74 @@ const userMenuItems = [
   { type: 'button' as const, label: 'Cerrar sesión', onClick: () => {}, destructive: true },
 ];
 
-const SampleSidebarContent = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '1rem' }}>
-    <OrgSwitcher current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />
-    <div style={{ flex: 1, overflow: 'auto' }}>
-      <SidebarNav entries={sidebarNavEntries} defaultValue={['general', 'workspace']} />
-    </div>
-    <UserMenu
-      name="Ana García"
-      email="ana.garcia@studiolxd.com"
-      avatarUrl="https://placehold.co/32x32/1a2b4a/ffffff?text=AG"
-      items={userMenuItems}
-    />
+const sampleOrgSwitcher = <OrgSwitcher current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />;
+
+const sampleNav = <SidebarNav entries={sidebarNavEntries} defaultValue={['general', 'workspace']} />;
+
+const sampleUserMenu = (
+  <UserMenu
+    name="Ana García"
+    email="ana.garcia@studiolxd.com"
+    notificationCount={3}
+    items={userMenuItems}
+  />
+);
+
+const SampleMainContent = () => (
+  <div style={{ padding: '2rem' }}>
+    <h1>Contenido principal</h1>
+    <p>
+      En desktop la sidebar es un rail plegado que se expande en hover (o al tabular dentro),
+      empujando este bloque. En móvil el chrome es un AppHeader con panel a pantalla completa.
+    </p>
   </div>
 );
 
-const SampleMainContent = () => {
-  const { collapsed, setCollapsed } = useSidebar();
-  return (
-    <div style={{ padding: '2rem' }}>
-      <button onClick={() => setCollapsed(!collapsed)} type="button" style={{ marginBlockEnd: '1rem' }}>
-        Toggle sidebar
-      </button>
-      <h1>Contenido principal</h1>
-      <p>El contenido de la app va aquí. La sidebar empuja este bloque en desktop y se superpone como overlay en móvil.</p>
-    </div>
-  );
-};
+const sampleSidebar = (
+  <Sidebar logo={<Logo height={32} />} footer={sampleUserMenu}>
+    {sampleOrgSwitcher}
+    {sampleNav}
+  </Sidebar>
+);
+
+const sampleHeader = (
+  <AppHeader center={sampleOrgSwitcher} end={sampleUserMenu}>
+    {sampleNav}
+  </AppHeader>
+);
 
 export const Default: Story = {
   render: () => (
-    <AppShell sidebar={<Sidebar><SampleSidebarContent /></Sidebar>}>
+    <AppShell sidebar={sampleSidebar} header={sampleHeader}>
       <SampleMainContent />
     </AppShell>
   ),
 };
 
-export const SidebarClosed: Story = {
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
   render: () => (
-    <AppShell defaultCollapsed sidebar={<Sidebar><SampleSidebarContent /></Sidebar>}>
+    <AppShell sidebar={sampleSidebar} header={sampleHeader}>
+      <SampleMainContent />
+    </AppShell>
+  ),
+};
+
+export const MobilePortal: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  render: () => (
+    <AppShell
+      sidebar={
+        <Sidebar logo={<Logo height={32} />} footer={sampleUserMenu}>
+          {sampleNav}
+        </Sidebar>
+      }
+      header={<AppHeader end={sampleUserMenu}>{sampleNav}</AppHeader>}
+    >
       <SampleMainContent />
     </AppShell>
   ),
