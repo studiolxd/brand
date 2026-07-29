@@ -47,6 +47,16 @@
     "separator-margin-block": { "$value": "{spacing.2}",                   "$type": "dimension", "$description": "Margen vertical del separador" },
     "disabled-opacity":       { "$value": "{opacity.disabled}",            "$type": "number",    "$description": "Opacidad de ítems deshabilitados" },
     "transition-duration":    { "$value": "{floating-panel.transition-duration}", "$type": "number",    "$description": "Duración de transición" },
-    "transition-easing":      { "$value": "{floating-panel.transition-easing}",   "$type": "string",    "$description": "Easing de transición" }
+    "transition-easing":      { "$value": "{floating-panel.transition-easing}",   "$type": "string",    "$description": "Easing de transición" },
+    "surface-dark-trigger-hover-bg":       { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo del trigger al hover — surface-dark" },
+    "surface-dark-name-color":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del nombre — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro." },
+    "surface-dark-header-name-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del nombre en la cabecera del dropdown — surface-dark" },
+    "surface-dark-header-email-color":     { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del email en la cabecera del dropdown — surface-dark" },
+    "surface-dark-item-color":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítems — surface-dark" },
+    "surface-dark-item-hover-bg":          { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo de ítem al hover — surface-dark" },
+    "surface-dark-item-hover-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítem al hover — surface-dark" },
+    "surface-dark-item-destructive-color":       { "$value": "{color.error-on-dark}", "$type": "color", "$description": "Color de ítem destructivo — surface-dark" },
+    "surface-dark-item-destructive-hover-bg":    { "$value": "{color.error-on-dark}", "$type": "color", "$description": "Fondo de ítem destructivo al hover — surface-dark" },
+    "surface-dark-separator-color":        { "$value": "rgba(255, 255, 255, 0.15)",  "$type": "color", "$description": "Color del separador — surface-dark" }
   }
 }

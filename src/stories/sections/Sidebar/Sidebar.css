@@ -114,6 +114,15 @@
   opacity: 0;
 }
 
+/* Los labels nunca deben hacer wrap dentro del rail animado: con
+   allow-discrete son display:block desde el primer frame de la expansión,
+   cuando el rail aún mide 3.5rem, y el wrap desplaza verticalmente todos
+   los iconos hasta que el ancho los alcanza. Mismo tratamiento que ya
+   llevan .org-switcher__name y .user-menu__name. */
+.sidebar .sidebar-nav__item-label {
+  white-space: nowrap;
+}
+
 @starting-style {
   .sidebar:hover .org-switcher__name,
   .sidebar:hover .org-switcher__chevron,

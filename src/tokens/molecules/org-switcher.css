@@ -41,3 +41,15 @@
   --org-switcher-content-bg: var(--floating-panel-bg); /** Fondo del panel */
   --org-switcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --org-switcher-trigger-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo del trigger al hover — surface-dark */
+  --org-switcher-item-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de ítem al hover — surface-dark */
+  --org-switcher-item-active-bg: rgba(255, 255, 255, 0.08); /** Fondo de ítem de org activa — surface-dark */
+  --org-switcher-separator-color: rgba(255, 255, 255, 0.15); /** Color del separador — surface-dark */
+  --org-switcher-name-color: var(--color-text-on-dark); /** Color del nombre de la org — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
+  --org-switcher-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
+  --org-switcher-item-active-color: var(--color-accent-1); /** Color de ítem de org activa — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que sidebar-nav/Switcher. */
+}
