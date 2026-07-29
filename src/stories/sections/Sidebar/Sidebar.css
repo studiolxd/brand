@@ -1,4 +1,6 @@
 /* ---- Sidebar — rail plegado que se expande en hover/focus (≥1024px) ---- */
+/* Modificador --expanded (prop `expanded`): fija el rail desplegado sin
+   depender de hover/foco — se añade junto a esos selectores en cada regla. */
 
 /* ── Base (desktop) ──────────────────────────────────────── */
 .sidebar {
@@ -20,7 +22,8 @@
 }
 
 .sidebar:hover,
-.sidebar:has(:focus-visible) {
+.sidebar:has(:focus-visible),
+.sidebar.sidebar--expanded {
   --_sidebar-delay: calc(var(--sidebar-expand-delay) * 1ms);
   inline-size: var(--sidebar-width);
 }
@@ -55,7 +58,7 @@
   transition-delay: var(--_sidebar-delay);
 }
 
-.sidebar:not(:hover):not(:has(:focus-visible)) .sidebar__logo {
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .sidebar__logo {
   flex: 0;
   opacity: 0;
   pointer-events: none;
@@ -74,7 +77,7 @@
   scrollbar-width: thin;
 }
 
-.sidebar:not(:hover):not(:has(:focus-visible)) .sidebar__panel {
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .sidebar__panel {
   scrollbar-width: none;
 }
 
@@ -103,13 +106,13 @@
   transition-delay: var(--_sidebar-delay);
 }
 
-.sidebar:not(:hover):not(:has(:focus-visible)) .org-switcher__name,
-.sidebar:not(:hover):not(:has(:focus-visible)) .org-switcher__chevron,
-.sidebar:not(:hover):not(:has(:focus-visible)) .user-menu__name,
-.sidebar:not(:hover):not(:has(:focus-visible)) .user-menu__chevron,
-.sidebar:not(:hover):not(:has(:focus-visible)) .sidebar-nav__item-label,
-.sidebar:not(:hover):not(:has(:focus-visible)) .sidebar-nav__group-chevron,
-.sidebar:not(:hover):not(:has(:focus-visible)) .sidebar-nav__group-content {
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .org-switcher__name,
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .org-switcher__chevron,
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .user-menu__name,
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .user-menu__chevron,
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .sidebar-nav__item-label,
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .sidebar-nav__group-chevron,
+.sidebar:not(:hover):not(:has(:focus-visible)):not(.sidebar--expanded) .sidebar-nav__group-content {
   display: none;
   opacity: 0;
 }

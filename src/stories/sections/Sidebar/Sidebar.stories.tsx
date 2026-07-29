@@ -59,3 +59,21 @@ export const ExpandedOnHover: Story = {
   },
   render: renderShell,
 };
+
+/* Rail siempre desplegado vía prop `expanded`, sin depender de hover/foco */
+export const AlwaysExpanded: Story = {
+  render: () => (
+    <AppShell
+      sidebar={
+        <Sidebar logo={<Logo height={24} />} footer={sampleUserMenu} expanded>
+          <SampleContent />
+        </Sidebar>
+      }
+    >
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
+        <p>Rail permanentemente desplegado en escritorio (prop `expanded`).</p>
+      </div>
+    </AppShell>
+  ),
+};

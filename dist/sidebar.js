@@ -1,9 +1,9 @@
 import './sidebar.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 //#region src/stories/sections/Sidebar/Sidebar.tsx
-function n({ logo: n, children: r, footer: i, id: a }) {
+function n({ logo: n, children: r, footer: i, id: a, expanded: o }) {
 	return /* @__PURE__ */ t("div", {
-		className: "sidebar",
+		className: o ? "sidebar sidebar--expanded" : "sidebar",
 		id: a,
 		children: [
 			n && /* @__PURE__ */ e("div", {

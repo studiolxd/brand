@@ -7,11 +7,13 @@ export interface SidebarProps {
   /** Slot inferior fijo (p. ej. UserMenu), fuera del scroll del panel. */
   footer?: ReactNode;
   id?: string;
+  /** Mantiene el rail siempre desplegado en escritorio, sin depender de hover/foco. */
+  expanded?: boolean;
 }
 
-export function Sidebar({ logo, children, footer, id }: SidebarProps) {
+export function Sidebar({ logo, children, footer, id, expanded }: SidebarProps) {
   return (
-    <div className="sidebar" id={id}>
+    <div className={expanded ? 'sidebar sidebar--expanded' : 'sidebar'} id={id}>
       {logo && (
         <div className="sidebar__header">
           <div className="sidebar__logo">{logo}</div>
