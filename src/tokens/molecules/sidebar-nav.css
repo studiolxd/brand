@@ -28,7 +28,8 @@
   --sidebar-nav-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --sidebar-nav-item-color: var(--color-text-on-light); /** Color de ítems */
   --sidebar-nav-item-hover-color: var(--color-text-on-light); /** Color de ítem al hover */
-  --sidebar-nav-item-active-color: var(--color-primary); /** Color de ítem activo y focus ring */
+  --sidebar-nav-item-active-color: var(--color-primary); /** Color de ítem activo */
+  --sidebar-nav-focus-ring-color: var(--color-primary); /** Color del focus ring */
 }
 
 .surface-dark,
@@ -39,4 +40,5 @@ html.dark {
   --sidebar-nav-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
   --sidebar-nav-item-hover-color: var(--color-text-on-dark); /** Color de ítem al hover — surface-dark */
   --sidebar-nav-item-active-color: var(--color-accent-1); /** Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher. */
+  --sidebar-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento. */
 }

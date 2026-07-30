@@ -17,8 +17,9 @@
     "item-color":                { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítems" },
     "item-hover-bg":             { "$value": "{color.grey-lightest}",     "$type": "color",     "$description": "Fondo de ítem al hover" },
     "item-hover-color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítem al hover" },
-    "item-active-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de ítem activo y focus ring" },
+    "item-active-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de ítem activo" },
     "item-active-font-weight":   { "$value": "{font-weight.medium}",      "$type": "number",    "$description": "Peso de ítem activo" },
+    "focus-ring-color":          { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del focus ring" },
     "item-gap":                  { "$value": "{spacing.1}",               "$type": "dimension", "$description": "Gap entre ítems dentro de un grupo" },
     "item-icon-size":            { "$value": "2rem",                      "$type": "dimension", "$description": "Tamaño del icono opcional de ítem" },
     "item-icon-gap":             { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Gap entre icono y texto del ítem" },
@@ -30,6 +31,7 @@
     "surface-dark-item-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítems — surface-dark" },
     "surface-dark-item-hover-bg":     { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo de ítem al hover — surface-dark" },
     "surface-dark-item-hover-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítem al hover — surface-dark" },
-    "surface-dark-item-active-color": { "$value": "{color.accent-1}",           "$type": "color", "$description": "Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher." }
+    "surface-dark-item-active-color": { "$value": "{color.accent-1}",           "$type": "color", "$description": "Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher." },
+    "surface-dark-focus-ring-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento." }
   }
 }

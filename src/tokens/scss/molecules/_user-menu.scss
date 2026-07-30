@@ -11,6 +11,9 @@ $lxd-user-menu-trigger-padding-inline: 0.75rem; // Padding horizontal del trigge
 $lxd-user-menu-trigger-gap: 0.75rem; // Espacio entre avatar y nombre
 $lxd-user-menu-trigger-border-radius: 4px; // Radio del trigger
 $lxd-user-menu-trigger-hover-bg: rgba(0, 0, 0, 0); // Fondo del trigger al hover — sin fondo, estilo ghost
+$lxd-user-menu-focus-ring-color: #111e30; // Color del focus ring
+$lxd-user-menu-focus-ring-width: 2px; // Grosor del focus ring
+$lxd-user-menu-focus-ring-offset: 1px; // Separación del focus ring
 $lxd-user-menu-name-font-size: 1rem; // Tamaño de texto del nombre
 $lxd-user-menu-name-font-weight: 500; // Peso del nombre
 $lxd-user-menu-name-color: #111e30; // Color del nombre

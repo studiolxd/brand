@@ -42,7 +42,7 @@
 }
 
 a.sidebar-nav__group-label:focus-visible {
-  outline: 2px solid var(--sidebar-nav-item-active-color);
+  outline: 2px solid var(--sidebar-nav-focus-ring-color);
   outline-offset: -2px;
 }
 
@@ -58,7 +58,7 @@ a.sidebar-nav__group-label:focus-visible {
 }
 
 .sidebar-nav__group-chevron:focus-visible {
-  outline: 2px solid var(--sidebar-nav-item-active-color);
+  outline: 2px solid var(--sidebar-nav-focus-ring-color);
   outline-offset: 2px;
 }
 
@@ -135,7 +135,7 @@ a.sidebar-nav__group-label:focus-visible {
 }
 
 .sidebar-nav__item:focus-visible {
-  outline: 2px solid var(--sidebar-nav-item-active-color);
+  outline: 2px solid var(--sidebar-nav-focus-ring-color);
   outline-offset: 2px;
 }
 
@@ -160,7 +160,7 @@ a.sidebar-nav__group-label:focus-visible {
 }
 
 .sidebar-nav__top-link:focus-visible {
-  outline: 2px solid var(--sidebar-nav-item-active-color);
+  outline: 2px solid var(--sidebar-nav-focus-ring-color);
   outline-offset: -2px;
 }
 

@@ -12,6 +12,9 @@ $lxd-org-switcher-trigger-padding-inline: 0.75rem; // Padding horizontal del tri
 $lxd-org-switcher-trigger-gap: 0.75rem; // Espacio entre logo y nombre
 $lxd-org-switcher-trigger-border-radius: 4px; // Radio del trigger
 $lxd-org-switcher-trigger-hover-bg: rgba(0, 0, 0, 0); // Fondo del trigger al hover — sin fondo, estilo ghost
+$lxd-org-switcher-focus-ring-color: #111e30; // Color del focus ring
+$lxd-org-switcher-focus-ring-width: 2px; // Grosor del focus ring
+$lxd-org-switcher-focus-ring-offset: 1px; // Separación del focus ring
 $lxd-org-switcher-name-font-size: 1rem; // Tamaño de texto del nombre de la org
 $lxd-org-switcher-name-font-weight: 500; // Peso del nombre de la org
 $lxd-org-switcher-name-color: #111e30; // Color del nombre de la org

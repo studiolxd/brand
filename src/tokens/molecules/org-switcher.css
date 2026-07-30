@@ -14,6 +14,8 @@
   --org-switcher-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger */
   --org-switcher-trigger-gap: var(--spacing-3); /** Espacio entre logo y nombre */
   --org-switcher-trigger-border-radius: var(--border-radius-sm); /** Radio del trigger */
+  --org-switcher-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --org-switcher-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --org-switcher-name-font-size: var(--font-size-2); /** Tamaño de texto del nombre de la org */
   --org-switcher-name-font-weight: var(--font-weight-medium); /** Peso del nombre de la org */
   --org-switcher-content-z-index: var(--floating-panel-z-index); /** Z-index del dropdown (por encima del sidebar en mobile) */
@@ -29,6 +31,7 @@
   --org-switcher-separator-height: var(--border-width-sm); /** Alto del separador */
   --org-switcher-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --org-switcher-initials-bg: var(--color-primary); /** Fondo del cuadrado de iniciales */
+  --org-switcher-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --org-switcher-name-color: var(--color-text-on-light); /** Color del nombre de la org */
   --org-switcher-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
   --org-switcher-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
@@ -49,6 +52,7 @@ html.dark {
   --org-switcher-item-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de ítem al hover — surface-dark */
   --org-switcher-item-active-bg: rgba(255, 255, 255, 0.08); /** Fondo de ítem de org activa — surface-dark */
   --org-switcher-separator-color: rgba(255, 255, 255, 0.15); /** Color del separador — surface-dark */
+  --org-switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --org-switcher-name-color: var(--color-text-on-dark); /** Color del nombre de la org — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
   --org-switcher-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
   --org-switcher-item-active-color: var(--color-accent-1); /** Color de ítem de org activa — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que sidebar-nav/Switcher. */

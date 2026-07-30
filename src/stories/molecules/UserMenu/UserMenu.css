@@ -18,8 +18,8 @@
 }
 
 .user-menu__trigger:focus-visible {
-  outline: 2px solid var(--user-menu-initials-bg);
-  outline-offset: 2px;
+  outline: var(--user-menu-focus-ring-width) solid var(--user-menu-focus-ring-color);
+  outline-offset: var(--user-menu-focus-ring-offset);
 }
 
 /* ─── Avatar wrapper (posición relativa para el badge) ───── */

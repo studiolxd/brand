@@ -18,8 +18,8 @@
 }
 
 .org-switcher__trigger:focus-visible {
-  outline: 2px solid var(--org-switcher-initials-bg);
-  outline-offset: 2px;
+  outline: var(--org-switcher-focus-ring-width) solid var(--org-switcher-focus-ring-color);
+  outline-offset: var(--org-switcher-focus-ring-offset);
 }
 
 /* ─── Logo override (tamaño viene del Avatar) ────────────── */

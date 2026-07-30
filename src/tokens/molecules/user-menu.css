@@ -13,6 +13,8 @@
   --user-menu-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger */
   --user-menu-trigger-gap: var(--spacing-3); /** Espacio entre avatar y nombre */
   --user-menu-trigger-border-radius: var(--border-radius-sm); /** Radio del trigger */
+  --user-menu-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
+  --user-menu-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --user-menu-name-font-size: var(--font-size-2); /** Tamaño de texto del nombre */
   --user-menu-name-font-weight: var(--font-weight-medium); /** Peso del nombre */
   --user-menu-content-z-index: var(--floating-panel-z-index); /** Z-index del dropdown (por encima del sidebar en mobile) */
@@ -36,6 +38,7 @@
   --user-menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --user-menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
   --user-menu-initials-bg: var(--color-primary); /** Fondo del círculo de iniciales */
+  --user-menu-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --user-menu-name-color: var(--color-text-on-light); /** Color del nombre */
   --user-menu-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
   --user-menu-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
@@ -59,6 +62,7 @@ html.dark {
   --user-menu-trigger-hover-bg: rgba(0, 0, 0, 0); /** Fondo del trigger al hover — surface-dark, sin fondo (igual que en claro) */
   --user-menu-item-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de ítem al hover — surface-dark */
   --user-menu-separator-color: rgba(255, 255, 255, 0.15); /** Color del separador — surface-dark */
+  --user-menu-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --user-menu-name-color: var(--color-text-on-dark); /** Color del nombre — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
   --user-menu-header-name-color: var(--color-text-on-dark); /** Color del nombre en la cabecera del dropdown — surface-dark */
   --user-menu-header-email-color: var(--color-text-muted-on-dark); /** Color del email en la cabecera del dropdown — surface-dark */
