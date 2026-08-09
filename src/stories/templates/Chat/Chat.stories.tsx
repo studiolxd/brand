@@ -113,6 +113,13 @@ interface ChatMainProps {
 }
 
 function ChatMain({ messages, onSend, isStreaming, model, onModelChange }: ChatMainProps) {
+  const [draft, setDraft] = useState('');
+
+  function handleSend() {
+    onSend(draft);
+    setDraft('');
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <header
@@ -154,7 +161,13 @@ function ChatMain({ messages, onSend, isStreaming, model, onModelChange }: ChatM
           borderBlockStart: '1px solid var(--color-border-subtle)',
         }}
       >
-          <MessageComposer onSend={onSend} disabled={isStreaming} />
+        <MessageComposer
+          value={draft}
+          onChange={setDraft}
+          onSend={handleSend}
+          disabled={isStreaming}
+          inputLabel="Mensaje"
+        />
       </div>
     </div>
   );

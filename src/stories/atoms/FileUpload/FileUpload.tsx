@@ -45,6 +45,33 @@ function validateFile(
   return null;
 }
 
+/**
+ * Las miniaturas se derivan durante el render en vez de guardarse en estado:
+ * la cache garantiza que un mismo `File` devuelva siempre la misma object URL,
+ * así que la llamada es idempotente y estable ante re-renders y StrictMode.
+ * Con estado haría falta un `setState` dentro de un efecto — un render en
+ * cascada innecesario, además de una violación de `set-state-in-effect`.
+ */
+const thumbUrlCache = new WeakMap<File, string>();
+
+function thumbUrlFor(file: File): string | undefined {
+  if (!file.type.startsWith('image/')) return undefined;
+  let url = thumbUrlCache.get(file);
+  if (!url) {
+    url = URL.createObjectURL(file);
+    thumbUrlCache.set(file, url);
+  }
+  return url;
+}
+
+function revokeThumbUrl(file: File): void {
+  const url = thumbUrlCache.get(file);
+  if (url) {
+    URL.revokeObjectURL(url);
+    thumbUrlCache.delete(file);
+  }
+}
+
 export function FileUpload({
   multiple = false,
   accept,
@@ -65,32 +92,24 @@ export function FileUpload({
   const [internalFiles, setInternalFiles] = useState<File[]>(defaultValue);
   const [fileErrors, setFileErrors] = useState<Map<File, string>>(new Map());
   const [isDragging, setIsDragging] = useState(false);
-  const thumbUrlsRef = useRef<Map<File, string>>(new Map());
-  const [thumbUrls, setThumbUrls] = useState<Map<File, string>>(new Map());
+  const seenFilesRef = useRef<Set<File>>(new Set());
   const inputRef = useRef<HTMLInputElement>(null);
   const generatedId = useId();
   const inputId = id ?? `file-upload-${generatedId}`;
 
   const files = isControlled ? value : internalFiles;
 
+  // Acumula todo File que haya pasado por esta instancia para poder revocar su
+  // miniatura al desmontar, incluso los que salieron de `value` en modo
+  // controlado sin pasar por `removeFile`. Solo se escribe desde efectos.
   useEffect(() => {
-    const prev = thumbUrlsRef.current;
-    const next = new Map<File, string>();
-    files.forEach(file => {
-      if (file.type.startsWith('image/')) {
-        next.set(file, prev.get(file) ?? URL.createObjectURL(file));
-      }
-    });
-    prev.forEach((url, file) => {
-      if (!next.has(file)) URL.revokeObjectURL(url);
-    });
-    thumbUrlsRef.current = next;
-    setThumbUrls(new Map(next));
+    files.forEach(file => seenFilesRef.current.add(file));
   }, [files]);
 
   useEffect(() => {
+    const seen = seenFilesRef.current;
     return () => {
-      thumbUrlsRef.current.forEach(url => URL.revokeObjectURL(url));
+      seen.forEach(revokeThumbUrl);
     };
   }, []);
 
@@ -118,6 +137,7 @@ export function FileUpload({
     const next = current.filter(f => f !== file);
     const errors = new Map(fileErrors);
     errors.delete(file);
+    revokeThumbUrl(file);
     setFileErrors(errors);
     if (!isControlled) setInternalFiles(next);
     onChange?.(next.filter(f => !errors.has(f)));
@@ -228,7 +248,7 @@ export function FileUpload({
         <ul className="file-upload__list" aria-label="Archivos seleccionados">
           {files.map((file, i) => {
             const err = fileErrors.get(file);
-            const thumb = thumbUrls.get(file);
+            const thumb = thumbUrlFor(file);
             return (
               <li
                 key={`${file.name}-${file.size}-${i}`}

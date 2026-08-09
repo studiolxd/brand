@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn, expect, userEvent } from 'storybook/test';
+import { fn, expect, userEvent, within } from 'storybook/test';
 import { DatePicker } from './DatePicker';
 
 const meta: Meta<typeof DatePicker> = {
@@ -121,13 +121,16 @@ export const SelectAndDisplay: Story = {
       />
     );
   },
-  play: async ({ canvas, args }) => {
+  play: async ({ canvas, canvasElement, args }) => {
     const trigger = canvas.getByRole('button');
     await userEvent.click(trigger);
 
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
 
-    const day18 = canvas.getByRole('gridcell', { name: '18' });
+    // El popover del calendario se monta en un portal Radix (document.body),
+    // fuera del canvasElement de la story.
+    const body = within(canvasElement.ownerDocument.body);
+    const day18 = body.getByRole('gridcell', { name: '18' });
     await userEvent.click(day18);
 
     await expect(args.onChange).toHaveBeenCalled();
