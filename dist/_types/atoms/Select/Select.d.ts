@@ -57,7 +57,7 @@ export declare const SelectLabel: import("react").ForwardRefExoticComponent<Omit
 export type SelectSeparatorProps = React.ComponentPropsWithoutRef<typeof RadixSelect.Separator>;
 /** Separador entre grupos (`.select__separator`). */
 export declare const SelectSeparator: import("react").ForwardRefExoticComponent<Omit<RadixSelect.SelectSeparatorProps & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
-declare function SelectClosed({ options, value, defaultValue, placeholder, disabled, readOnly, size, onValueChange, id, 'aria-label': ariaLabel, container, }: SelectProps): import("react").JSX.Element;
+declare function SelectClosed({ options, value, defaultValue, placeholder, disabled, readOnly, size, onValueChange, id, 'aria-label': ariaLabel, container, }: SelectProps): import("react/jsx-runtime").JSX.Element;
 /**
  * Select. Dos formas de uso:
  * - **Cerrada (data-driven)**: `<Select options={[…]} value onValueChange … />`.

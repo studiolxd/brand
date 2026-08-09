@@ -27,4 +27,4 @@ export interface AsyncSelectProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
 }
-export declare function AsyncSelect({ onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, container, }: AsyncSelectProps): import("react").JSX.Element;
+export declare function AsyncSelect({ onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, container, }: AsyncSelectProps): import("react/jsx-runtime").JSX.Element;

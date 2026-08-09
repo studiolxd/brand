@@ -15,4 +15,4 @@ export interface OtpFieldProps {
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
 }
-export declare function OtpField({ id, label, labelHidden, length, value, defaultValue, onChange, onComplete, disabled, readOnly, error, errorMessage, helperText, size, }: OtpFieldProps): import("react").JSX.Element;
+export declare function OtpField({ id, label, labelHidden, length, value, defaultValue, onChange, onComplete, disabled, readOnly, error, errorMessage, helperText, size, }: OtpFieldProps): import("react/jsx-runtime").JSX.Element;

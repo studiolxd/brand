@@ -1,2 +1,2 @@
 import './Home.css';
-export declare function Home(): import("react").JSX.Element;
+export declare function Home(): import("react/jsx-runtime").JSX.Element;

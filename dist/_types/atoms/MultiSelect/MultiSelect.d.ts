@@ -26,4 +26,4 @@ export interface MultiSelectProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
 }
-export declare function MultiSelect({ options, value, defaultValue, placeholder, disabled, readOnly, size, onValueChange, id, 'aria-label': ariaLabel, container, }: MultiSelectProps): import("react").JSX.Element;
+export declare function MultiSelect({ options, value, defaultValue, placeholder, disabled, readOnly, size, onValueChange, id, 'aria-label': ariaLabel, container, }: MultiSelectProps): import("react/jsx-runtime").JSX.Element;

@@ -24,4 +24,4 @@ export interface CalendarProps {
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, size, className, }: CalendarProps): import("react").JSX.Element;
+export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;

@@ -14,5 +14,5 @@ interface ClientsSectionProps {
     /** Lista de clientes. */
     clients: Client[];
 }
-export declare function ClientsSection({ id, title, clients }: ClientsSectionProps): import("react").JSX.Element;
+export declare function ClientsSection({ id, title, clients }: ClientsSectionProps): import("react/jsx-runtime").JSX.Element;
 export {};

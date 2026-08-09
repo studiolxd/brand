@@ -9,4 +9,4 @@ export interface SidebarProps {
     /** Mantiene el rail siempre desplegado en escritorio, sin depender de hover/foco. */
     expanded?: boolean;
 }
-export declare function Sidebar({ logo, children, footer, id, expanded }: SidebarProps): import("react").JSX.Element;
+export declare function Sidebar({ logo, children, footer, id, expanded }: SidebarProps): import("react/jsx-runtime").JSX.Element;

@@ -9,5 +9,5 @@ interface StepsProps {
     /** Clase adicional. */
     className?: string;
 }
-export declare function Steps({ steps, className }: StepsProps): import("react").JSX.Element;
+export declare function Steps({ steps, className }: StepsProps): import("react/jsx-runtime").JSX.Element;
 export {};

@@ -18,5 +18,5 @@ interface CardSplitProps {
     /** Fotografía del panel derecho. */
     image: CardSplitImage;
 }
-export declare function CardSplit({ href, title, description, ctaLabel, color, image }: CardSplitProps): import("react").JSX.Element;
+export declare function CardSplit({ href, title, description, ctaLabel, color, image }: CardSplitProps): import("react/jsx-runtime").JSX.Element;
 export {};

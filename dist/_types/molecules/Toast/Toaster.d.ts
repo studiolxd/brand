@@ -6,4 +6,4 @@ export interface ToasterProps {
     /** aria-label del contenedor de notificaciones (i18n). */
     containerAriaLabel?: string;
 }
-export declare function Toaster({ position, theme, containerAriaLabel }: ToasterProps): import("react").JSX.Element;
+export declare function Toaster({ position, theme, containerAriaLabel }: ToasterProps): import("react/jsx-runtime").JSX.Element;

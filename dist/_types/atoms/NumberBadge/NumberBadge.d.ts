@@ -9,4 +9,4 @@ export interface NumberBadgeProps {
     'aria-label'?: string;
     className?: string;
 }
-export declare function NumberBadge({ count, variant, max, 'aria-label': ariaLabel, className, }: NumberBadgeProps): import("react").JSX.Element;
+export declare function NumberBadge({ count, variant, max, 'aria-label': ariaLabel, className, }: NumberBadgeProps): import("react/jsx-runtime").JSX.Element;

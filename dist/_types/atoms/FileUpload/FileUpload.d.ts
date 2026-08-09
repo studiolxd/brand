@@ -15,4 +15,4 @@ export interface FileUploadProps {
     describedBy?: string;
     ariaLabel?: string;
 }
-export declare function FileUpload({ multiple, accept, maxSize, maxFiles, value, defaultValue, onChange, progress, disabled, error, id, name, describedBy, ariaLabel, }: FileUploadProps): import("react").JSX.Element;
+export declare function FileUpload({ multiple, accept, maxSize, maxFiles, value, defaultValue, onChange, progress, disabled, error, id, name, describedBy, ariaLabel, }: FileUploadProps): import("react/jsx-runtime").JSX.Element;

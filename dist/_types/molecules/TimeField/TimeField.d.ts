@@ -14,4 +14,4 @@ export interface TimeFieldProps {
     errorMessage?: string;
     helperText?: string;
 }
-export declare function TimeField({ id, label, labelHidden, value, onChange, step, size, disabled, readOnly, error, errorMessage, helperText, }: TimeFieldProps): import("react").JSX.Element;
+export declare function TimeField({ id, label, labelHidden, value, onChange, step, size, disabled, readOnly, error, errorMessage, helperText, }: TimeFieldProps): import("react/jsx-runtime").JSX.Element;

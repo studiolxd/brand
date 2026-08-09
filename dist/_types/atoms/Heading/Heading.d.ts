@@ -14,5 +14,5 @@ interface HeadingProps {
     id?: string;
     children: React.ReactNode;
 }
-export declare function Heading({ level, weight, size, className, id, children }: HeadingProps): import("react").JSX.Element;
+export declare function Heading({ level, weight, size, className, id, children }: HeadingProps): import("react/jsx-runtime").JSX.Element;
 export {};

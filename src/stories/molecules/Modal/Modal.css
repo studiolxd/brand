@@ -105,6 +105,13 @@
   outline-offset: var(--button-focus-ring-offset);
 }
 
+.modal__description {
+  font-size: var(--modal-description-font-size);
+  color: var(--modal-description-color);
+  margin-block-start: 0;
+  margin-block-end: var(--modal-description-margin-block-end);
+}
+
 .modal__body {
   overflow-y: auto;
   flex: 1;

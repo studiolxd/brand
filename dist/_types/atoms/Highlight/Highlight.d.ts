@@ -15,5 +15,5 @@ interface HighlightProps {
     /** Clases adicionales. */
     className?: string;
 }
-export declare function Highlight({ text, size, weight, align, textAlign, className }: HighlightProps): import("react").JSX.Element;
+export declare function Highlight({ text, size, weight, align, textAlign, className }: HighlightProps): import("react/jsx-runtime").JSX.Element;
 export {};

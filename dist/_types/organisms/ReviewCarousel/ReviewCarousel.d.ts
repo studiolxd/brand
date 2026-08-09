@@ -17,5 +17,5 @@ interface ReviewCarouselProps {
     /** Clase adicional. */
     className?: string;
 }
-export declare function ReviewCarousel({ reviews, className }: ReviewCarouselProps): import("react").JSX.Element;
+export declare function ReviewCarousel({ reviews, className }: ReviewCarouselProps): import("react/jsx-runtime").JSX.Element;
 export {};

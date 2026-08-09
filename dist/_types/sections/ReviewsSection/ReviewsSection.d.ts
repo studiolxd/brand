@@ -8,4 +8,4 @@ interface ReviewsSectionProps {
     reviews: Review[];
 }
 export { type Review };
-export declare function ReviewsSection({ id, title, reviews }: ReviewsSectionProps): import("react").JSX.Element;
+export declare function ReviewsSection({ id, title, reviews }: ReviewsSectionProps): import("react/jsx-runtime").JSX.Element;

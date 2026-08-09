@@ -5,5 +5,5 @@ interface ListProps {
     className?: string;
     children: React.ReactNode;
 }
-export declare function List({ type, className, children }: ListProps): import("react").JSX.Element;
+export declare function List({ type, className, children }: ListProps): import("react/jsx-runtime").JSX.Element;
 export {};

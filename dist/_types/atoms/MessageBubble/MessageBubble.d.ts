@@ -4,4 +4,4 @@ export interface MessageBubbleProps {
     role: 'user' | 'assistant';
     children: React.ReactNode;
 }
-export declare function MessageBubble({ role, children }: MessageBubbleProps): import("react").JSX.Element;
+export declare function MessageBubble({ role, children }: MessageBubbleProps): import("react/jsx-runtime").JSX.Element;

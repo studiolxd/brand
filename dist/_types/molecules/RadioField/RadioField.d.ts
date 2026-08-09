@@ -10,5 +10,5 @@ interface RadioFieldProps {
     value?: string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
-export declare function RadioField({ label, checked, defaultChecked, disabled, size, id, name, value, onChange, }: RadioFieldProps): import("react").JSX.Element;
+export declare function RadioField({ label, checked, defaultChecked, disabled, size, id, name, value, onChange, }: RadioFieldProps): import("react/jsx-runtime").JSX.Element;
 export {};

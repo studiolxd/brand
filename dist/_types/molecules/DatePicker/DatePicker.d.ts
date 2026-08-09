@@ -17,4 +17,4 @@ export interface DatePickerProps {
     /** aria-describedby para el trigger */
     describedBy?: string;
 }
-export declare function DatePicker({ value, onChange, placeholder, minDate, maxDate, disabledDates, size, disabled, readOnly, error, locale, id, describedBy, }: DatePickerProps): import("react").JSX.Element;
+export declare function DatePicker({ value, onChange, placeholder, minDate, maxDate, disabledDates, size, disabled, readOnly, error, locale, id, describedBy, }: DatePickerProps): import("react/jsx-runtime").JSX.Element;

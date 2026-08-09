@@ -25,5 +25,5 @@ interface ArticleProps {
     /** Enlace destacado del header. */
     featuredLink?: NavItem;
 }
-export declare function Article({ category, tagVariant, photo, photoAlt, title, description, sections, navItems, featuredLink, }: ArticleProps): import("react").JSX.Element;
+export declare function Article({ category, tagVariant, photo, photoAlt, title, description, sections, navItems, featuredLink, }: ArticleProps): import("react/jsx-runtime").JSX.Element;
 export {};

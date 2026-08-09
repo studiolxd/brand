@@ -17,4 +17,4 @@ export interface OtpInputProps {
     id?: string;
     name?: string;
 }
-export declare function OtpInput({ length, value, defaultValue, onChange, onComplete, disabled, readOnly, error, size, describedBy, id, name, }: OtpInputProps): import("react").JSX.Element;
+export declare function OtpInput({ length, value, defaultValue, onChange, onComplete, disabled, readOnly, error, size, describedBy, id, name, }: OtpInputProps): import("react/jsx-runtime").JSX.Element;

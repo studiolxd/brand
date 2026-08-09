@@ -11,4 +11,4 @@ export interface ProgressBarProps {
     /** Etiqueta accesible para lectores de pantalla. */
     label?: string;
 }
-export declare function ProgressBar({ value, variant, size, label }: ProgressBarProps): import("react").JSX.Element;
+export declare function ProgressBar({ value, variant, size, label }: ProgressBarProps): import("react/jsx-runtime").JSX.Element;

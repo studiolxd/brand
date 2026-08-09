@@ -17,4 +17,4 @@ export interface MessageComposerProps extends Omit<ComponentProps<'div'>, 'onCha
     /** `aria-labelledby` del textarea interno, alternativa a `inputLabel`. */
     inputLabelledBy?: string;
 }
-export declare function MessageComposer({ value, onChange, onSend, placeholder, disabled, sendLabel, sendAriaLabel, actions, inputId, inputLabel, inputLabelledBy, className, ...rest }: MessageComposerProps): import("react").JSX.Element;
+export declare function MessageComposer({ value, onChange, onSend, placeholder, disabled, sendLabel, sendAriaLabel, actions, inputId, inputLabel, inputLabelledBy, className, ...rest }: MessageComposerProps): import("react/jsx-runtime").JSX.Element;

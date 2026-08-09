@@ -12,8 +12,7 @@ function u({ onSearch: u, value: d, onValueChange: f, selectedOption: p, placeho
 	let [S, C] = s(!1), [w, T] = s(""), [E, D] = s(!1), [O, k] = s([]), [A, j] = s(!1), [M, N] = s(-1), [P, F] = s(null), [I, L] = s(null), R = o(null), z = o(null), B = o(null), V = a(), H = a(), U = d === void 0 ? P : d, W = p === void 0 ? I : p, G = (e) => `${H}-opt-${e}`, K = i(async (e) => {
 		D(!0), j(!1);
 		try {
-			let t = await u(e);
-			k(t), N(-1);
+			k(await u(e)), N(-1);
 		} catch {
 			k([]), N(-1);
 		} finally {

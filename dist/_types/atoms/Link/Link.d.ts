@@ -8,5 +8,5 @@ interface LinkProps {
     className?: string;
     onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
-export declare function Link({ href, children, external, className, onClick }: LinkProps): import("react").JSX.Element;
+export declare function Link({ href, children, external, className, onClick }: LinkProps): import("react/jsx-runtime").JSX.Element;
 export {};

@@ -198,6 +198,61 @@ export const NoTitle: Story = {
   },
 };
 
+export const WithDescription: Story = {
+  name: 'Con descripción',
+  render: () => {
+    const [open, setOpen] = useState(true);
+    return (
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Cancelar ausencia"
+        description="Se notificará a tu responsable y la ausencia dejará de contar en el calendario del equipo."
+      >
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+          <Button variant="outline" onClick={() => setOpen(false)}>No, volver</Button>
+          <Button destructive onClick={() => setOpen(false)}>Sí, cancelar</Button>
+        </div>
+      </Modal>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body);
+    await expect(canvas.getByRole('dialog')).toHaveAccessibleDescription(
+      'Se notificará a tu responsable y la ausencia dejará de contar en el calendario del equipo.',
+    );
+  },
+};
+
+export const WithExternalDescription: Story = {
+  name: 'Descripción externa (aria-describedby)',
+  render: () => {
+    const [open, setOpen] = useState(true);
+    return (
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Eliminar proyecto"
+        aria-describedby="modal-external-description"
+      >
+        <p id="modal-external-description" style={{ margin: '0 0 1.5rem', color: 'var(--color-text-on-light)' }}>
+          El proyecto y todas sus tareas se eliminarán de forma permanente.
+        </p>
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+          <Button variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
+          <Button destructive onClick={() => setOpen(false)}>Eliminar</Button>
+        </div>
+      </Modal>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body);
+    await expect(canvas.getByRole('dialog')).toHaveAccessibleDescription(
+      'El proyecto y todas sus tareas se eliminarán de forma permanente.',
+    );
+  },
+};
+
 export const CustomLabels: Story = {
   name: 'Textos personalizados (i18n)',
   render: () => {

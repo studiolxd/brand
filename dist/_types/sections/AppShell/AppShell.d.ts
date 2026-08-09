@@ -9,4 +9,4 @@ export interface AppShellProps {
     header?: ReactNode;
     children: ReactNode;
 }
-export declare function AppShell({ sidebar, header, children }: AppShellProps): import("react").JSX.Element;
+export declare function AppShell({ sidebar, header, children }: AppShellProps): import("react/jsx-runtime").JSX.Element;

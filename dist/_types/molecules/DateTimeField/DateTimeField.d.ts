@@ -19,4 +19,4 @@ export interface DateTimeFieldProps {
     helperText?: string;
     locale?: string;
 }
-export declare function DateTimeField({ id, label, labelHidden, value, onChange, placeholder, timeStep, minDate, maxDate, disabledDates, size, disabled, readOnly, error, errorMessage, helperText, locale, }: DateTimeFieldProps): import("react").JSX.Element;
+export declare function DateTimeField({ id, label, labelHidden, value, onChange, placeholder, timeStep, minDate, maxDate, disabledDates, size, disabled, readOnly, error, errorMessage, helperText, locale, }: DateTimeFieldProps): import("react/jsx-runtime").JSX.Element;

@@ -13,4 +13,4 @@ export interface ConversationListProps {
     navLabel?: string;
     deleteLabel?: (label: string) => string;
 }
-export declare function ConversationList({ conversations, activeId, onNew, onSelect, onDelete, newLabel, navLabel, deleteLabel, }: ConversationListProps): import("react").JSX.Element;
+export declare function ConversationList({ conversations, activeId, onNew, onSelect, onDelete, newLabel, navLabel, deleteLabel, }: ConversationListProps): import("react/jsx-runtime").JSX.Element;

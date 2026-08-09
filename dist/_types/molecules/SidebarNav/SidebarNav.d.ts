@@ -40,4 +40,4 @@ export interface SidebarNavProps {
     onValueChange?: (value: string[]) => void;
     renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
 }
-export declare function SidebarNav({ entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react").JSX.Element;
+export declare function SidebarNav({ entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;

@@ -17,4 +17,4 @@ export interface AsyncSelectFieldProps {
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
 }
-export declare function AsyncSelectField({ id, label, labelHidden, onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, size, error, errorMessage, helperText, }: AsyncSelectFieldProps): import("react").JSX.Element;
+export declare function AsyncSelectField({ id, label, labelHidden, onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, size, error, errorMessage, helperText, }: AsyncSelectFieldProps): import("react/jsx-runtime").JSX.Element;

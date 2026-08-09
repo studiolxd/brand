@@ -37,4 +37,4 @@ export interface ContextMenuProps {
     triggerOrientation?: 'horizontal' | 'vertical';
     triggerAriaLabel?: string;
 }
-export declare function ContextMenu({ items, renderLink, onOpenChange, side, align, minWidth, maxWidth, triggerSize, triggerOrientation, triggerAriaLabel, }: ContextMenuProps): import("react").JSX.Element;
+export declare function ContextMenu({ items, renderLink, onOpenChange, side, align, minWidth, maxWidth, triggerSize, triggerOrientation, triggerAriaLabel, }: ContextMenuProps): import("react/jsx-runtime").JSX.Element;

@@ -18,5 +18,5 @@ export interface FieldsetProps {
     disabled?: boolean;
     children: React.ReactNode;
 }
-export declare function Fieldset({ legend, level, weight, size, className, id, disabled, children, }: FieldsetProps): import("react").JSX.Element;
+export declare function Fieldset({ legend, level, weight, size, className, id, disabled, children, }: FieldsetProps): import("react/jsx-runtime").JSX.Element;
 export {};

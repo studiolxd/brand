@@ -11,4 +11,4 @@ export interface EmptyStateProps {
     action?: EmptyStateAction;
     size?: 'sm' | 'md';
 }
-export declare function EmptyState({ title, description, icon, action, size }: EmptyStateProps): import("react").JSX.Element;
+export declare function EmptyState({ title, description, icon, action, size }: EmptyStateProps): import("react/jsx-runtime").JSX.Element;

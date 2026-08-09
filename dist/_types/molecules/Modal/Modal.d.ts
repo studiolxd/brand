@@ -16,5 +16,20 @@ export interface ModalProps {
      * ese contexto no llega a `document.body` por la cascada.
      */
     container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
+    /**
+     * Descripción accesible del modal, renderizada bajo el título como
+     * `Dialog.Description` — Radix se encarga de enlazarla al diálogo. Úsala
+     * cuando el texto descriptivo lo aporte el propio Modal.
+     */
+    description?: React.ReactNode;
+    /**
+     * Id del elemento que describe el modal, reenviado a `Dialog.Content`. Para
+     * adaptadores que renderizan su propio nodo de descripción dentro de
+     * `children`. Tiene prioridad sobre `description` si se pasan ambas.
+     * Omitida (y sin `description`) se mantiene el comportamiento actual:
+     * `aria-describedby={undefined}`, que silencia el aviso de Radix en modales
+     * sin descripción.
+     */
+    'aria-describedby'?: string;
 }
-export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, }: ModalProps): import("react").JSX.Element;
+export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, }: ModalProps): import("react/jsx-runtime").JSX.Element;

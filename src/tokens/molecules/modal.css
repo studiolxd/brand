@@ -20,9 +20,12 @@
   --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
   --modal-close-color: var(--color-grey-dark); /** Color del botón de cierre */
   --modal-close-hover-bg: var(--color-grey-lightest); /** Fondo del botón de cierre en hover */
+  --modal-description-font-size: var(--font-size-2); /** Tamaño de la descripción del modal */
+  --modal-description-margin-block-end: var(--spacing-4); /** Separación entre la descripción y el cuerpo del modal */
   --modal-bg: var(--color-background-light); /** Fondo del panel modal */
   --modal-title-color: var(--color-text-on-light); /** Color del título */
   --modal-close-hover-color: var(--color-text-on-light); /** Color del botón de cierre en hover */
+  --modal-description-color: var(--color-text-muted-on-light); /** Color de la descripción del modal */
 }
 
 .surface-dark,
@@ -33,4 +36,5 @@ html.dark {
   --modal-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
   --modal-close-color: var(--color-text-on-dark); /** Color del botón de cierre — surface-dark */
   --modal-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover — surface-dark */
+  --modal-description-color: var(--color-text-muted-on-dark); /** Color de la descripción — surface-dark */
 }

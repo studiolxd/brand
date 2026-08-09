@@ -21,24 +21,24 @@ type AccordionRootProps = (AccordionSingleProps | AccordionMultipleProps) & {
     className?: string;
     children: ReactNode;
 };
-export declare function Accordion({ className, children, ...props }: AccordionRootProps): import("react").JSX.Element;
+export declare function Accordion({ className, children, ...props }: AccordionRootProps): import("react/jsx-runtime").JSX.Element;
 interface AccordionItemProps {
     value: string;
     disabled?: boolean;
     className?: string;
     children: ReactNode;
 }
-export declare function AccordionItem({ className, children, ...props }: AccordionItemProps): import("react").JSX.Element;
+export declare function AccordionItem({ className, children, ...props }: AccordionItemProps): import("react/jsx-runtime").JSX.Element;
 interface AccordionTriggerProps {
     className?: string;
     /** Tamaño del chevron indicador. */
     chevronSize?: 'sm' | 'md' | 'lg';
     children: ReactNode;
 }
-export declare function AccordionTrigger({ className, chevronSize, children }: AccordionTriggerProps): import("react").JSX.Element;
+export declare function AccordionTrigger({ className, chevronSize, children }: AccordionTriggerProps): import("react/jsx-runtime").JSX.Element;
 interface AccordionContentProps {
     className?: string;
     children: ReactNode;
 }
-export declare function AccordionContent({ className, children }: AccordionContentProps): import("react").JSX.Element;
+export declare function AccordionContent({ className, children }: AccordionContentProps): import("react/jsx-runtime").JSX.Element;
 export {};

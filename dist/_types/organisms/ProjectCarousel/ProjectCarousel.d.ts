@@ -6,5 +6,5 @@ interface ProjectCarouselProps {
     hideTags?: boolean;
     className?: string;
 }
-export declare function ProjectCarousel({ projects, hideTags, className }: ProjectCarouselProps): import("react").JSX.Element;
+export declare function ProjectCarousel({ projects, hideTags, className }: ProjectCarouselProps): import("react/jsx-runtime").JSX.Element;
 export {};

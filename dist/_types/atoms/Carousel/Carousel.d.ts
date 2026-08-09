@@ -27,10 +27,10 @@ interface CarouselProps {
     /** Texto accesible del botón "siguiente". Por defecto "Siguiente". */
     nextLabel?: string;
 }
-export declare function Carousel({ children, options, plugins, hideButtons, className, slideSize, gradientColor, prevLabel, nextLabel, }: CarouselProps): import("react").JSX.Element;
+export declare function Carousel({ children, options, plugins, hideButtons, className, slideSize, gradientColor, prevLabel, nextLabel, }: CarouselProps): import("react/jsx-runtime").JSX.Element;
 interface CarouselSlideProps {
     children: React.ReactNode;
     className?: string;
 }
-export declare function CarouselSlide({ children, className }: CarouselSlideProps): import("react").JSX.Element;
+export declare function CarouselSlide({ children, className }: CarouselSlideProps): import("react/jsx-runtime").JSX.Element;
 export {};

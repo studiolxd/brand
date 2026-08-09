@@ -16,5 +16,5 @@ interface HighlightSectionProps {
     /** Clases adicionales para el container. */
     className?: string;
 }
-export declare function HighlightSection({ id, text, size, weight, align, textAlign, className }: HighlightSectionProps): import("react").JSX.Element;
+export declare function HighlightSection({ id, text, size, weight, align, textAlign, className }: HighlightSectionProps): import("react/jsx-runtime").JSX.Element;
 export {};

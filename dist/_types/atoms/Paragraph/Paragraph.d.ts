@@ -6,5 +6,5 @@ interface ParagraphProps {
     className?: string;
     children: React.ReactNode;
 }
-export declare function Paragraph({ size, className, children }: ParagraphProps): import("react").JSX.Element;
+export declare function Paragraph({ size, className, children }: ParagraphProps): import("react/jsx-runtime").JSX.Element;
 export {};

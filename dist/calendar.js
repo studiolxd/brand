@@ -43,7 +43,7 @@ function c(e) {
 function l({ value: l, onChange: u, defaultMonth: d, month: f, onMonthChange: p, navigable: m = !0, disabledDates: h, minDate: g, maxDate: _, locale: v = "es-ES", size: y = "md", className: b }) {
 	let [x, S] = i(() => f ?? d ?? (l instanceof Date ? l : /* @__PURE__ */ new Date())), C = f ?? x, w = r((e) => {
 		S(e), p?.(e);
-	}, [p]), T = /* @__PURE__ */ new Date(), E = r((e) => g && e < g || _ && e > _ ? !0 : Array.isArray(h) ? h.some((t) => a(t, e)) : typeof h == "function" && h(e), [
+	}, [p]), T = /* @__PURE__ */ new Date(), E = r((e) => g && e < g || _ && e > _ ? !0 : Array.isArray(h) ? h.some((t) => a(t, e)) : typeof h == "function" ? h(e) : !1, [
 		h,
 		g,
 		_
@@ -110,7 +110,7 @@ function l({ value: l, onChange: u, defaultMonth: d, month: f, onMonthChange: p,
 				role: "row",
 				className: "calendar__row",
 				children: e.map(({ date: e, outside: n }) => {
-					let r = E(e), i = a(e, T), o = l instanceof Date && a(e, l);
+					let r = E(e), i = a(e, T), o = l instanceof Date ? a(e, l) : !1;
 					return /* @__PURE__ */ t("button", {
 						type: "button",
 						role: "gridcell",

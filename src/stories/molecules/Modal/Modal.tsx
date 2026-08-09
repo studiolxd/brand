@@ -19,6 +19,21 @@ export interface ModalProps {
    * ese contexto no llega a `document.body` por la cascada.
    */
   container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
+  /**
+   * Descripción accesible del modal, renderizada bajo el título como
+   * `Dialog.Description` — Radix se encarga de enlazarla al diálogo. Úsala
+   * cuando el texto descriptivo lo aporte el propio Modal.
+   */
+  description?: React.ReactNode;
+  /**
+   * Id del elemento que describe el modal, reenviado a `Dialog.Content`. Para
+   * adaptadores que renderizan su propio nodo de descripción dentro de
+   * `children`. Tiene prioridad sobre `description` si se pasan ambas.
+   * Omitida (y sin `description`) se mantiene el comportamiento actual:
+   * `aria-describedby={undefined}`, que silencia el aviso de Radix en modales
+   * sin descripción.
+   */
+  'aria-describedby'?: string;
 }
 
 export function Modal({
@@ -29,12 +44,24 @@ export function Modal({
   closeLabel = 'Cerrar',
   fallbackTitle = 'Diálogo',
   container,
+  description,
+  'aria-describedby': ariaDescribedBy,
 }: ModalProps) {
+  // Tres casos, y el segundo NO puede pasar la prop: Radix hace
+  // `{...contentProps}` después de su propio `aria-describedby`, así que un
+  // `undefined` explícito borraría el enlace automático a Dialog.Description.
+  const describedByProps =
+    ariaDescribedBy !== undefined
+      ? { 'aria-describedby': ariaDescribedBy }
+      : description != null
+        ? {}
+        : { 'aria-describedby': undefined };
+
   return (
     <Dialog.Root open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <Dialog.Portal container={container}>
         <Dialog.Overlay className="modal__overlay" />
-        <Dialog.Content className="modal__content" aria-describedby={undefined} onOpenAutoFocus={(e) => e.preventDefault()}>
+        <Dialog.Content className="modal__content" {...describedByProps} onOpenAutoFocus={(e) => e.preventDefault()}>
           {title ? (
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
@@ -49,6 +76,9 @@ export function Modal({
                 <Dialog.Close className="modal__close" aria-label={closeLabel}><Icon name="close" size="sm" /></Dialog.Close>
               </header>
             </>
+          )}
+          {description != null && (
+            <Dialog.Description className="modal__description">{description}</Dialog.Description>
           )}
           <div className="modal__body">{children}</div>
         </Dialog.Content>

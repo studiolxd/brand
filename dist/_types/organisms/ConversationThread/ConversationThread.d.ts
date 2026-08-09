@@ -14,4 +14,4 @@ export interface ConversationThreadProps {
     /** Texto accesible para el indicador de escritura. */
     streamingLabel?: string;
 }
-export declare function ConversationThread({ messages, streamingLabel }: ConversationThreadProps): import("react").JSX.Element;
+export declare function ConversationThread({ messages, streamingLabel }: ConversationThreadProps): import("react/jsx-runtime").JSX.Element;

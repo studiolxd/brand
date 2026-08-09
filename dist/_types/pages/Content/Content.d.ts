@@ -27,5 +27,5 @@ interface ContentProps {
     /** Enlace destacado del header. */
     featuredLink?: NavItem;
 }
-export declare function Content({ title, description, sections, contactSection, navItems, featuredLink }: ContentProps): import("react").JSX.Element;
+export declare function Content({ title, description, sections, contactSection, navItems, featuredLink }: ContentProps): import("react/jsx-runtime").JSX.Element;
 export {};

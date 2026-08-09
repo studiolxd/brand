@@ -66,11 +66,11 @@ export declare const solutionItems: ({
     description: string;
     ctaLabel: string;
 })[];
-export declare const privacyLabel: import("react").JSX.Element;
+export declare const privacyLabel: import("react/jsx-runtime").JSX.Element;
 export declare const contactArgs: {
     title: string;
     form: {
-        privacyLabel: import("react").JSX.Element;
+        privacyLabel: import("react/jsx-runtime").JSX.Element;
         emailPlaceholder: string;
         messagePlaceholder: string;
         buttonLabel: string;

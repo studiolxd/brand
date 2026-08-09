@@ -14,4 +14,4 @@ export interface OrgSwitcherProps {
     items?: ContextMenuItem[];
     renderLink?: (props: ContextMenuRenderLinkProps) => ReactNode;
 }
-export declare function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen, items, renderLink }: OrgSwitcherProps): import("react").JSX.Element;
+export declare function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen, items, renderLink }: OrgSwitcherProps): import("react/jsx-runtime").JSX.Element;
