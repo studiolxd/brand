@@ -23,6 +23,16 @@ export interface CalendarProps {
   maxDate?: Date;
   /** Locale para nombres de mes y día. Default: 'es-ES' */
   locale?: string;
+  /**
+   * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  previousMonthLabel?: string;
+  /**
+   * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  nextMonthLabel?: string;
   /** Tamaño del componente. Default: 'md' */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -102,6 +112,8 @@ export function Calendar({
   minDate,
   maxDate,
   locale = 'es-ES',
+  previousMonthLabel = 'Mes anterior',
+  nextMonthLabel = 'Mes siguiente',
   size = 'md',
   className,
 }: CalendarProps) {
@@ -166,7 +178,7 @@ export function Calendar({
           <button
             type="button"
             className="calendar__nav"
-            aria-label="Mes anterior"
+            aria-label={previousMonthLabel}
             disabled={prevDisabled}
             onClick={() => handleMonthChange(prevMonth)}
           >
@@ -180,7 +192,7 @@ export function Calendar({
           <button
             type="button"
             className="calendar__nav"
-            aria-label="Mes siguiente"
+            aria-label={nextMonthLabel}
             disabled={nextDisabled}
             onClick={() => handleMonthChange(nextMonth)}
           >

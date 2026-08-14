@@ -14,5 +14,19 @@ export interface TimeSelectProps {
     error?: boolean;
     /** id aplicado al trigger de horas */
     id?: string;
+    /**
+     * aria-label del selector de horas. Default: "Horas" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    hoursLabel?: string;
+    /**
+     * aria-label del selector de minutos. Default: "Minutos" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    minutesLabel?: string;
+    /** Placeholder del selector de horas. Default: "HH" */
+    hoursPlaceholder?: string;
+    /** Placeholder del selector de minutos. Default: "MM" */
+    minutesPlaceholder?: string;
 }
-export declare function TimeSelect({ value, onChange, step, size, disabled, readOnly, error, id, }: TimeSelectProps): import("react/jsx-runtime").JSX.Element;
+export declare function TimeSelect({ value, onChange, step, size, disabled, readOnly, error, id, hoursLabel, minutesLabel, hoursPlaceholder, minutesPlaceholder, }: TimeSelectProps): import("react/jsx-runtime").JSX.Element;

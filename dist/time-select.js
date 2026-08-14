@@ -7,43 +7,43 @@ import { useMemo as r } from "react";
 function i(e) {
 	return String(e).padStart(2, "0");
 }
-function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f }) {
-	let p = r(() => Array.from({ length: 24 }, (e, t) => ({
+function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f, hoursLabel: p = "Horas", minutesLabel: m = "Minutos", hoursPlaceholder: h = "HH", minutesPlaceholder: g = "MM" }) {
+	let _ = r(() => Array.from({ length: 24 }, (e, t) => ({
 		value: String(t),
 		label: i(t)
-	})), []), m = r(() => {
+	})), []), v = r(() => {
 		let e = [];
 		for (let t = 0; t < 60; t += s) e.push({
 			value: String(t),
 			label: i(t)
 		});
 		return e;
-	}, [s]), h = (e) => {
+	}, [s]), y = (e) => {
 		let t = parseInt(e, 10), n = a?.m ?? 0;
 		o?.({
 			h: t,
 			m: n
 		});
-	}, g = (e) => {
+	}, b = (e) => {
 		let t = a?.h ?? 0;
 		o?.({
 			h: t,
 			m: parseInt(e, 10)
 		});
-	}, _ = ["time-select", d ? "time-select--error" : ""].filter(Boolean).join(" "), v = a == null ? void 0 : String(a.h), y = a == null ? void 0 : String(a.m);
+	}, x = ["time-select", d ? "time-select--error" : ""].filter(Boolean).join(" "), S = a == null ? void 0 : String(a.h), C = a == null ? void 0 : String(a.m);
 	return /* @__PURE__ */ n("div", {
-		className: _,
+		className: x,
 		children: [
 			/* @__PURE__ */ t(e, {
 				id: f,
-				options: p,
-				value: v,
-				placeholder: "HH",
+				options: _,
+				value: S,
+				placeholder: h,
 				size: c,
 				disabled: l,
 				readOnly: u,
-				"aria-label": "Horas",
-				onValueChange: h
+				"aria-label": p,
+				onValueChange: y
 			}),
 			/* @__PURE__ */ t("span", {
 				className: "time-select__sep",
@@ -51,14 +51,14 @@ function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, re
 				children: ":"
 			}),
 			/* @__PURE__ */ t(e, {
-				options: m,
-				value: y,
-				placeholder: "MM",
+				options: v,
+				value: C,
+				placeholder: g,
 				size: c,
 				disabled: l,
 				readOnly: u,
-				"aria-label": "Minutos",
-				onValueChange: g
+				"aria-label": m,
+				onValueChange: b
 			})
 		]
 	});

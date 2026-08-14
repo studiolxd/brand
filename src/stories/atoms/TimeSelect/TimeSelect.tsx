@@ -18,6 +18,20 @@ export interface TimeSelectProps {
   error?: boolean;
   /** id aplicado al trigger de horas */
   id?: string;
+  /**
+   * aria-label del selector de horas. Default: "Horas" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  hoursLabel?: string;
+  /**
+   * aria-label del selector de minutos. Default: "Minutos" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  minutesLabel?: string;
+  /** Placeholder del selector de horas. Default: "HH" */
+  hoursPlaceholder?: string;
+  /** Placeholder del selector de minutos. Default: "MM" */
+  minutesPlaceholder?: string;
 }
 
 function pad(n: number): string {
@@ -33,6 +47,10 @@ export function TimeSelect({
   readOnly,
   error,
   id,
+  hoursLabel = 'Horas',
+  minutesLabel = 'Minutos',
+  hoursPlaceholder = 'HH',
+  minutesPlaceholder = 'MM',
 }: TimeSelectProps) {
   const hourOptions = useMemo(
     () => Array.from({ length: 24 }, (_, i) => ({ value: String(i), label: pad(i) })),
@@ -73,22 +91,22 @@ export function TimeSelect({
         id={id}
         options={hourOptions}
         value={hourValue}
-        placeholder="HH"
+        placeholder={hoursPlaceholder}
         size={size}
         disabled={disabled}
         readOnly={readOnly}
-        aria-label="Horas"
+        aria-label={hoursLabel}
         onValueChange={handleHourChange}
       />
       <span className="time-select__sep" aria-hidden="true">:</span>
       <Select
         options={minuteOptions}
         value={minuteValue}
-        placeholder="MM"
+        placeholder={minutesPlaceholder}
         size={size}
         disabled={disabled}
         readOnly={readOnly}
-        aria-label="Minutos"
+        aria-label={minutesLabel}
         onValueChange={handleMinuteChange}
       />
     </div>

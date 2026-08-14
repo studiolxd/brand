@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { useState } from 'react';
 import { FileUpload } from './FileUpload';
 
@@ -149,5 +150,36 @@ export const Controlled: Story = {
         </p>
       </div>
     );
+  },
+};
+
+/**
+ * Test: los textos visibles de la zona de arrastre usan el castellano por defecto
+ * y se sustituyen cuando el consumidor los pasa traducidos.
+ */
+export const Etiquetas: Story = {
+  name: 'Test — textos de la zona de arrastre',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <FileUpload />
+      </div>
+      <div data-testid="traducido">
+        <FileUpload
+          dropzoneLabel="Drag files here"
+          dropzoneHintLabel="or click to select"
+        />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByText('Arrastra archivos aquí')).toBeInTheDocument();
+    await expect(def.getByText('o haz clic para seleccionar')).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByText('Drag files here')).toBeInTheDocument();
+    await expect(en.getByText('or click to select')).toBeInTheDocument();
+    await expect(en.queryByText('Arrastra archivos aquí')).toBeNull();
   },
 };

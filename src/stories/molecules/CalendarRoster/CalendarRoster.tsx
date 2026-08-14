@@ -29,6 +29,11 @@ export interface RosterRow {
   cells: Partial<Record<number, RosterCell | null>>;
 }
 
+export interface LegendItem {
+  type: Exclude<RosterCellType, 'schedule'>;
+  label: string;
+}
+
 export interface CalendarRosterProps {
   /** Filas del cuadrante (empleados / recursos) */
   rows: RosterRow[];
@@ -56,6 +61,26 @@ export interface CalendarRosterProps {
   nameLabel?: string;
   /** Muestra la leyenda al final. Default: true */
   showLegend?: boolean;
+  /**
+   * Entradas de la leyenda, en orden. Default: las seis del sistema con sus etiquetas
+   * en castellano. Es texto **visible**: una app multiidioma debe pasarlas traducidas.
+   */
+  legendItems?: LegendItem[];
+  /**
+   * aria-label de la leyenda. Default: "Leyenda" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  legendLabel?: string;
+  /**
+   * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  previousMonthLabel?: string;
+  /**
+   * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  nextMonthLabel?: string;
   /** Locale para nombres de mes y día. Default: 'es-ES' */
   locale?: string;
   className?: string;
@@ -93,7 +118,7 @@ const CELL_TYPE_VARIANT: Record<Exclude<RosterCellType, 'schedule' | 'non-workin
   birthday: 'info',
 };
 
-const LEGEND_ITEMS: { type: Exclude<RosterCellType, 'schedule'>; label: string }[] = [
+const LEGEND_ITEMS: LegendItem[] = [
   { type: 'holiday',     label: 'Festivo' },
   { type: 'vacation',    label: 'Vacaciones' },
   { type: 'absence',     label: 'Ausencia' },
@@ -112,6 +137,10 @@ export function CalendarRoster({
   nameLabel = 'Empleado',
   showLegend = true,
   locale = 'es-ES',
+  legendItems = LEGEND_ITEMS,
+  legendLabel = 'Leyenda',
+  previousMonthLabel = 'Mes anterior',
+  nextMonthLabel = 'Mes siguiente',
   className,
 }: CalendarRosterProps) {
   const A = linkComponent ?? 'a';
@@ -127,7 +156,7 @@ export function CalendarRoster({
   const dayLetterFormatter = new Intl.DateTimeFormat(locale, { weekday: 'narrow' });
 
   function renderNav(target: Date, direction: 'prev' | 'next') {
-    const label = direction === 'prev' ? 'Mes anterior' : 'Mes siguiente';
+    const label = direction === 'prev' ? previousMonthLabel : nextMonthLabel;
     const chevronClass = direction === 'prev' ? 'calendar-roster__chevron--prev' : undefined;
 
     if (hrefBuilder) {
@@ -250,8 +279,8 @@ export function CalendarRoster({
 
       {/* Leyenda */}
       {showLegend && (
-        <div className="calendar-roster__legend" aria-label="Leyenda">
-          {LEGEND_ITEMS.map(({ type, label }) => (
+        <div className="calendar-roster__legend" aria-label={legendLabel}>
+          {legendItems.map(({ type, label }) => (
             <span key={type} className="calendar-roster__legend-item">
               {type === 'non-working' ? (
                 <>

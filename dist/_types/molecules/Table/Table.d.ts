@@ -21,6 +21,15 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
     actions?: boolean;
     /** Texto accesible de la cabecera de acciones. Default: "Acciones" */
     actionsLabel?: string;
+    /**
+     * Texto accesible del estado de ordenación ascendente. Default: "Ordenado ascendente"
+     * (castellano). Una app multiidioma debe pasarlo traducido.
+     */
+    sortedAscLabel?: string;
+    /** Texto accesible del estado descendente. Default: "Ordenado descendente" */
+    sortedDescLabel?: string;
+    /** Texto accesible de la columna ordenable sin ordenar. Default: "Activar ordenación" */
+    sortableLabel?: string;
     children?: ReactNode;
 }
 /** onClick tipado como () => void para mantener la API de interactividad con teclado */
@@ -36,7 +45,7 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
 export declare function TableHead({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableFooter({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
-export declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, sortedAscLabel, sortedDescLabel, sortableLabel, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
 export declare function TableRow({ onClick, interactive, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
 export declare function TableCell({ children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
 export declare function Table({ caption, children, size, className, ...rest }: TableProps): import("react/jsx-runtime").JSX.Element;

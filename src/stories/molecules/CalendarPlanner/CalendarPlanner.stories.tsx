@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Tag } from '../../atoms/Tag/Tag';
 import { CalendarPlanner, type PlannerEvent } from './CalendarPlanner';
 
@@ -171,4 +172,36 @@ export const Tamanos: Story = {
       </div>
     </div>
   ),
+};
+
+/**
+ * Test: los `aria-label` de navegación de mes usan el castellano por defecto y se
+ * sustituyen cuando el consumidor los pasa traducidos.
+ */
+export const Etiquetas: Story = {
+  name: 'Test — etiquetas de navegación',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <CalendarPlanner events={makeEvents()} />
+      </div>
+      <div data-testid="traducido">
+        <CalendarPlanner
+          events={makeEvents()}
+          previousMonthLabel="Previous month"
+          nextMonthLabel="Next month"
+        />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByLabelText('Mes anterior')).toBeInTheDocument();
+    await expect(def.getByLabelText('Mes siguiente')).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByLabelText('Previous month')).toBeInTheDocument();
+    await expect(en.getByLabelText('Next month')).toBeInTheDocument();
+    await expect(en.queryByLabelText('Mes anterior')).toBeNull();
+  },
 };

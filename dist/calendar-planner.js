@@ -39,26 +39,26 @@ function u(e) {
 	for (let n = 0; n < e.length; n += 7) t.push(e.slice(n, n + 7));
 	return t;
 }
-function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m, onDayClick: h, month: g, defaultMonth: _, onMonthChange: v, navigable: y = !0, locale: b = "es-ES", size: x = "md", className: S }) {
-	let [C, w] = s(() => g ?? _ ?? /* @__PURE__ */ new Date()), [T, E] = s(null), D = o(() => E(null), []), O = g ?? C, k = o((e) => {
-		w(e), v?.(e);
-	}, [v]), A = /* @__PURE__ */ new Date(), j = x === "sm" ? "xs" : x === "lg" ? "md" : "sm", M = new Intl.DateTimeFormat(b, {
+function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m, onDayClick: h, month: g, defaultMonth: _, onMonthChange: v, navigable: y = !0, locale: b = "es-ES", previousMonthLabel: x = "Mes anterior", nextMonthLabel: S = "Mes siguiente", size: C = "md", className: w }) {
+	let [T, E] = s(() => g ?? _ ?? /* @__PURE__ */ new Date()), [D, O] = s(null), k = o(() => O(null), []), A = g ?? T, j = o((e) => {
+		E(e), v?.(e);
+	}, [v]), M = /* @__PURE__ */ new Date(), N = C === "sm" ? "xs" : C === "lg" ? "md" : "sm", P = new Intl.DateTimeFormat(b, {
 		month: "long",
 		year: "numeric"
-	}).format(O), N = new Intl.DateTimeFormat(b, {
+	}).format(A), F = new Intl.DateTimeFormat(b, {
 		weekday: "long",
 		day: "numeric",
 		month: "long",
 		year: "numeric"
-	}), P = new Intl.DateTimeFormat(b, { weekday: "short" }), F = Array.from({ length: 7 }, (e, t) => {
+	}), I = new Intl.DateTimeFormat(b, { weekday: "short" }), L = Array.from({ length: 7 }, (e, t) => {
 		let n = new Date(2025, 0, 6 + t);
-		return P.format(n);
-	}), I = new Intl.DateTimeFormat(b, { day: "numeric" }), L = u(l(O)), R = new Date(O.getFullYear(), O.getMonth() - 1, 1), z = new Date(O.getFullYear(), O.getMonth() + 1, 1), B = (e) => d.filter((t) => c(t.date, e)), V = `planner-title-${O.getFullYear()}-${O.getMonth()}`;
+		return I.format(n);
+	}), R = new Intl.DateTimeFormat(b, { day: "numeric" }), z = u(l(A)), B = new Date(A.getFullYear(), A.getMonth() - 1, 1), V = new Date(A.getFullYear(), A.getMonth() + 1, 1), H = (e) => d.filter((t) => c(t.date, e)), U = `planner-title-${A.getFullYear()}-${A.getMonth()}`;
 	return /* @__PURE__ */ a("div", {
 		className: [
 			"calendar-planner",
-			`calendar-planner--${x}`,
-			S
+			`calendar-planner--${C}`,
+			w
 		].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ a("div", {
@@ -67,28 +67,28 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 					y && /* @__PURE__ */ i("button", {
 						type: "button",
 						className: "calendar-planner__nav",
-						"aria-label": "Mes anterior",
-						onClick: () => k(R),
+						"aria-label": x,
+						onClick: () => j(B),
 						children: /* @__PURE__ */ i(e, {
 							name: "chevron",
-							size: j,
+							size: N,
 							className: "calendar-planner__chevron--prev"
 						})
 					}),
 					/* @__PURE__ */ i("h2", {
-						id: V,
+						id: U,
 						className: "calendar-planner__title",
 						"aria-live": "polite",
-						children: M
+						children: P
 					}),
 					y && /* @__PURE__ */ i("button", {
 						type: "button",
 						className: "calendar-planner__nav",
-						"aria-label": "Mes siguiente",
-						onClick: () => k(z),
+						"aria-label": S,
+						onClick: () => j(V),
 						children: /* @__PURE__ */ i(e, {
 							name: "chevron",
-							size: j
+							size: N
 						})
 					})
 				]
@@ -96,20 +96,20 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 			/* @__PURE__ */ a("div", {
 				className: "calendar-planner__grid",
 				role: "grid",
-				"aria-labelledby": V,
+				"aria-labelledby": U,
 				children: [/* @__PURE__ */ i("div", {
 					role: "row",
 					className: "calendar-planner__row calendar-planner__row--header",
-					children: F.map((e) => /* @__PURE__ */ i("div", {
+					children: L.map((e) => /* @__PURE__ */ i("div", {
 						role: "columnheader",
 						className: "calendar-planner__weekday",
 						children: e
 					}, e))
-				}), L.map((e, n) => /* @__PURE__ */ i("div", {
+				}), z.map((e, n) => /* @__PURE__ */ i("div", {
 					role: "row",
 					className: "calendar-planner__row",
 					children: e.map(({ date: e, outside: n }) => {
-						let o = c(e, A), s = B(e), l = s.slice(0, p), u = s.length - l.length, d = [
+						let o = c(e, M), s = H(e), l = s.slice(0, p), u = s.length - l.length, d = [
 							"calendar-planner__cell",
 							n && "calendar-planner__cell--outside",
 							o && "calendar-planner__cell--today"
@@ -125,7 +125,7 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 							onClick: h ? () => h(e, s) : void 0,
 							children: [/* @__PURE__ */ i("span", {
 								className: g,
-								"aria-label": I.format(e),
+								"aria-label": R.format(e),
 								children: e.getDate()
 							}), /* @__PURE__ */ i("div", {
 								className: "calendar-planner__cell-body",
@@ -136,7 +136,7 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 									type: "button",
 									className: "calendar-planner__more",
 									onClick: (t) => {
-										t.stopPropagation(), E({
+										t.stopPropagation(), O({
 											date: e,
 											events: s
 										}), m?.(e, s);
@@ -153,12 +153,12 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 				}, n))]
 			}),
 			/* @__PURE__ */ i(n, {
-				open: T !== null,
-				onClose: D,
-				title: T ? N.format(T.date) : void 0,
+				open: D !== null,
+				onClose: k,
+				title: D ? F.format(D.date) : void 0,
 				children: /* @__PURE__ */ i("div", {
 					className: "calendar-planner__modal-events",
-					children: T?.events.map((e) => /* @__PURE__ */ i(t, {
+					children: D?.events.map((e) => /* @__PURE__ */ i(t, {
 						variant: e.variant ?? "default",
 						children: e.label
 					}, e.id))

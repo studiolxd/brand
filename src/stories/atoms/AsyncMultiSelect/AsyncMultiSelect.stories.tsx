@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import { AsyncMultiSelect } from './AsyncMultiSelect';
 import type { AsyncMultiSelectOption } from './AsyncMultiSelect';
 
@@ -95,5 +96,42 @@ export const Controlled: Story = {
         </p>
       </div>
     );
+  },
+};
+
+const emptySearchMulti = (): Promise<AsyncMultiSelectOption[]> => Promise.resolve([]);
+
+/**
+ * Test: el mensaje de "sin resultados" (texto **visible**) usa el castellano por
+ * defecto y se sustituye cuando el consumidor lo pasa traducido.
+ */
+export const MensajeVacio: Story = {
+  name: 'Test — mensaje de sin resultados',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
+      <div data-testid="default">
+        <AsyncMultiSelect onSearch={emptySearchMulti} placeholder="Buscar…" />
+      </div>
+      <div data-testid="traducido">
+        <AsyncMultiSelect
+          onSearch={emptySearchMulti}
+          placeholder="Search…"
+          emptyMessage="No results"
+        />
+      </div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // el dropdown se monta en un portal en document.body, fuera de canvasElement
+    const body = within(document.body);
+
+    await userEvent.type(canvas.getByPlaceholderText('Buscar…'), 'zzz');
+    await expect(await body.findByText('Sin resultados')).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+
+    await userEvent.type(canvas.getByPlaceholderText('Search…'), 'zzz');
+    await expect(await body.findByText('No results')).toBeInTheDocument();
+    await expect(body.queryByText('Sin resultados')).toBeNull();
   },
 };

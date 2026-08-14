@@ -8,11 +8,11 @@ import { InputField as i } from "./input-field.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 import { useState as s } from "react";
 //#region src/stories/organisms/LoginForm/LoginForm.tsx
-function c({ onSubmit: c, errors: l, loading: u = !1, title: d = "Iniciar sesión" }) {
-	let [f, p] = s(""), [m, h] = s(""), g = () => {
+function c({ onSubmit: c, errors: l, loading: u = !1, title: d = "Iniciar sesión", emailLabel: f = "Email", passwordLabel: p = "Contraseña", submitLabel: m = "Iniciar sesión", loadingLabel: h = "Iniciando sesión…" }) {
+	let [g, _] = s(""), [v, y] = s(""), b = () => {
 		c?.({
-			email: f,
-			password: m
+			email: g,
+			password: v
 		});
 	};
 	return /* @__PURE__ */ o("div", {
@@ -26,30 +26,30 @@ function c({ onSubmit: c, errors: l, loading: u = !1, title: d = "Iniciar sesió
 			}),
 			/* @__PURE__ */ o(r, {
 				onSubmit: (e) => {
-					e.preventDefault(), g();
+					e.preventDefault(), b();
 				},
 				errors: l,
 				children: [/* @__PURE__ */ a(i, {
 					id: "login-email",
-					label: "Email",
+					label: f,
 					type: "email",
 					name: "email",
-					value: f,
-					onChange: (e) => p(e.target.value)
+					value: g,
+					onChange: (e) => _(e.target.value)
 				}), /* @__PURE__ */ a(i, {
 					id: "login-password",
-					label: "Contraseña",
+					label: p,
 					type: "password",
 					name: "password",
-					value: m,
-					onChange: (e) => h(e.target.value)
+					value: v,
+					onChange: (e) => y(e.target.value)
 				})]
 			}),
 			/* @__PURE__ */ a(e, {
 				variant: "primary",
 				disabled: u,
-				onClick: g,
-				children: u ? "Iniciando sesión…" : "Iniciar sesión"
+				onClick: b,
+				children: u ? h : m
 			})
 		]
 	});

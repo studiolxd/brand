@@ -120,6 +120,34 @@ Usar Radix para componentes con **comportamiento complejo**: máquina de estados
 
 **Portales Radix** (Select, InputPhone) renderizan en `document.body`, fuera del árbol DOM de cualquier contenedor con `.surface-dark` anidado — pero SÍ son descendientes de `<html>`, así que heredan correctamente la activación root-level (`[data-theme="dark"]`/`html.dark`) sin configuración adicional. Por eso `Select`/`InputPhone` ya no tienen prop `dark` ni clases `__content--dark`/`__country-content--dark` (eliminadas). Para el caso residual de un Select/InputPhone dentro de un `.surface-dark` **anidado** (no en la raíz del documento), pasar la prop `container` (reenviada a `RadixSelect.Portal.container`) apuntando a un nodo dentro de ese contenedor, para que el portal se monte ahí en vez de en `document.body` y herede la cascada.
 
+### Textos de componente — siempre prop, nunca cableados
+
+Todo texto que un componente emita **por su cuenta** (no vía `children` ni vía sus datos) va en una
+prop opcional cuyo **default es el texto castellano**. Aplica igual a `aria-label`, a texto para
+lectores de pantalla y a texto visible.
+
+```tsx
+// ✗ Incorrecto — el consumidor multiidioma no puede traducirlo
+<button aria-label="Página siguiente">
+
+// ✓ Correcto
+function Pagination({ nextLabel = 'Página siguiente' }: PaginationProps) {
+  return <button aria-label={nextLabel}>;
+}
+```
+
+- Nombres: `<cosa>Label` para etiquetas y textos cortos, `<cosa>Message` para mensajes,
+  `<cosa>Error` para errores, `<cosa>Hint`/`<cosa>Placeholder` para pistas.
+- Si el texto interpola un valor, la prop es una **función**: `pageLabel?: (page: number) => string`.
+- Las **listas** de opciones se traducen pasando la lista entera (`pageSizeOptions`,
+  `legendItems`), no con una prop de texto por elemento.
+- El JSDoc de la prop indica el default y que es castellano.
+- Meses, días y formatos de fecha **no** son props de texto: van por `locale` (default `'es-ES'`)
+  delegando en `Intl`.
+
+Documentado para los consumidores en `src/stories/foundations/Internacionalizacion.mdx`, que lleva
+la tabla de componentes con props de texto — actualizarla al añadir props nuevas.
+
 ### Accesibilidad — VisuallyHidden
 
 Para texto que debe ser leído por lectores de pantalla pero invisible visualmente, usar el átomo `<VisuallyHidden>` en lugar de `className="visually-hidden"` directamente:

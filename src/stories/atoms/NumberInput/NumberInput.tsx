@@ -16,6 +16,16 @@ export interface NumberInputProps {
   name?: string;
   describedBy?: string;
   ariaLabel?: string;
+  /**
+   * aria-label del botón de decremento. Default: "Decrementar" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  decrementLabel?: string;
+  /**
+   * aria-label del botón de incremento. Default: "Incrementar" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  incrementLabel?: string;
   onChange?: (value: number) => void;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
@@ -36,6 +46,8 @@ export function NumberInput({
   name,
   describedBy,
   ariaLabel,
+  decrementLabel = 'Decrementar',
+  incrementLabel = 'Incrementar',
   onChange,
   onBlur,
   onFocus,
@@ -110,7 +122,7 @@ export function NumberInput({
         type="button"
         onClick={handleDecrement}
         disabled={isDecrementDisabled}
-        aria-label="Decrementar"
+        aria-label={decrementLabel}
         tabIndex={-1}
       >
         −
@@ -137,7 +149,7 @@ export function NumberInput({
         type="button"
         onClick={handleIncrement}
         disabled={isIncrementDisabled}
-        aria-label="Incrementar"
+        aria-label={incrementLabel}
         tabIndex={-1}
       >
         +

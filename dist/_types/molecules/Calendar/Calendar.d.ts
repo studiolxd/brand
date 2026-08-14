@@ -20,8 +20,18 @@ export interface CalendarProps {
     maxDate?: Date;
     /** Locale para nombres de mes y día. Default: 'es-ES' */
     locale?: string;
+    /**
+     * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    previousMonthLabel?: string;
+    /**
+     * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    nextMonthLabel?: string;
     /** Tamaño del componente. Default: 'md' */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, previousMonthLabel, nextMonthLabel, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;

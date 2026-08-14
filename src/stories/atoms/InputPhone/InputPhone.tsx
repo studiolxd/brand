@@ -11,11 +11,13 @@ interface CountrySelectProps {
   options: { value: Country | undefined; label: string }[];
   disabled?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /** Ver `InputPhoneProps.countryLabel`. */
+  countryLabel?: string;
   /** Ver `InputPhoneProps.container`. */
   container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
 }
 
-function CountrySelect({ value, onChange, options, disabled, size = 'md', container }: CountrySelectProps) {
+function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel = 'País', container }: CountrySelectProps) {
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;
   const fromVal = (v: string): Country => (v === INTL ? (undefined as unknown as Country) : (v as Country));
@@ -31,7 +33,7 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', contai
       onValueChange={(v) => onChange(fromVal(v))}
       disabled={disabled}
     >
-      <RadixSelect.Trigger className="input-phone__country" aria-label="País">
+      <RadixSelect.Trigger className="input-phone__country" aria-label={countryLabel}>
         <RadixSelect.Value>
           {value ? `+${getCountryCallingCode(value)}` : '🌐'}
         </RadixSelect.Value>
@@ -75,6 +77,11 @@ interface InputPhoneProps {
   onChange?: (value: string | undefined) => void;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /**
+   * aria-label del selector de país. Default: "País" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  countryLabel?: string;
+  /**
    * Nodo DOM donde montar el portal del dropdown de país (reenviado a Radix
    * `Portal.container`). Por defecto se monta en `document.body`, que
    * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
@@ -97,6 +104,7 @@ export function InputPhone({
   describedBy,
   onChange,
   onBlur,
+  countryLabel,
   container,
 }: InputPhoneProps) {
   const classes = [
@@ -116,7 +124,7 @@ export function InputPhone({
       name={name}
       inputComponent={InputPhoneField}
       countrySelectComponent={CountrySelect}
-      countrySelectProps={{ size, container }}
+      countrySelectProps={{ size, countryLabel, container }}
       onChange={(v) => onChange?.(v)}
       onBlur={onBlur}
       numberInputProps={{ 'aria-describedby': describedBy }}

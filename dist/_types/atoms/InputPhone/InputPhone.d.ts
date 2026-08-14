@@ -14,6 +14,11 @@ interface InputPhoneProps {
     onChange?: (value: string | undefined) => void;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     /**
+     * aria-label del selector de país. Default: "País" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    countryLabel?: string;
+    /**
      * Nodo DOM donde montar el portal del dropdown de país (reenviado a Radix
      * `Portal.container`). Por defecto se monta en `document.body`, que
      * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
@@ -23,5 +28,5 @@ interface InputPhoneProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
 }
-export declare function InputPhone({ value, defaultCountry, placeholder, disabled, error, size, id, name, describedBy, onChange, onBlur, container, }: InputPhoneProps): import("react/jsx-runtime").JSX.Element;
+export declare function InputPhone({ value, defaultCountry, placeholder, disabled, error, size, id, name, describedBy, onChange, onBlur, countryLabel, container, }: InputPhoneProps): import("react/jsx-runtime").JSX.Element;
 export {};

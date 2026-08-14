@@ -16,6 +16,10 @@ export interface RosterRow {
      */
     cells: Partial<Record<number, RosterCell | null>>;
 }
+export interface LegendItem {
+    type: Exclude<RosterCellType, 'schedule'>;
+    label: string;
+}
 export interface CalendarRosterProps {
     /** Filas del cuadrante (empleados / recursos) */
     rows: RosterRow[];
@@ -41,8 +45,28 @@ export interface CalendarRosterProps {
     nameLabel?: string;
     /** Muestra la leyenda al final. Default: true */
     showLegend?: boolean;
+    /**
+     * Entradas de la leyenda, en orden. Default: las seis del sistema con sus etiquetas
+     * en castellano. Es texto **visible**: una app multiidioma debe pasarlas traducidas.
+     */
+    legendItems?: LegendItem[];
+    /**
+     * aria-label de la leyenda. Default: "Leyenda" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    legendLabel?: string;
+    /**
+     * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    previousMonthLabel?: string;
+    /**
+     * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    nextMonthLabel?: string;
     /** Locale para nombres de mes y día. Default: 'es-ES' */
     locale?: string;
     className?: string;
 }
-export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, showLegend, locale, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;

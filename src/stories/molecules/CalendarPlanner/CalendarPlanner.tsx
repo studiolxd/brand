@@ -43,6 +43,16 @@ export interface CalendarPlannerProps {
   navigable?: boolean;
   /** Locale para nombres de mes y día. Default: 'es-ES' */
   locale?: string;
+  /**
+   * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  previousMonthLabel?: string;
+  /**
+   * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  nextMonthLabel?: string;
   /** Tamaño del componente. Default: 'md' */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -113,6 +123,8 @@ export function CalendarPlanner({
   onMonthChange,
   navigable = true,
   locale = 'es-ES',
+  previousMonthLabel = 'Mes anterior',
+  nextMonthLabel = 'Mes siguiente',
   size = 'md',
   className,
 }: CalendarPlannerProps) {
@@ -169,7 +181,7 @@ export function CalendarPlanner({
           <button
             type="button"
             className="calendar-planner__nav"
-            aria-label="Mes anterior"
+            aria-label={previousMonthLabel}
             onClick={() => handleMonthChange(prevMonth)}
           >
             <Icon name="chevron" size={chevronSize} className="calendar-planner__chevron--prev" />
@@ -182,7 +194,7 @@ export function CalendarPlanner({
           <button
             type="button"
             className="calendar-planner__nav"
-            aria-label="Mes siguiente"
+            aria-label={nextMonthLabel}
             onClick={() => handleMonthChange(nextMonth)}
           >
             <Icon name="chevron" size={chevronSize} />

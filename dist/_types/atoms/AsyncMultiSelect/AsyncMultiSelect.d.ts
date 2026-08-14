@@ -19,6 +19,16 @@ export interface AsyncMultiSelectProps {
     'aria-label'?: string;
     'aria-describedby'?: string;
     /**
+     * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
+     * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
+     */
+    emptyMessage?: string;
+    /**
+     * Etiqueta accesible del spinner mientras se busca. Default: "Buscando…" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    loadingLabel?: string;
+    /**
      * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
      * `Portal.container`). Por defecto se monta en `document.body`, que
      * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
@@ -29,4 +39,4 @@ export interface AsyncMultiSelectProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
 }
-export declare function AsyncMultiSelect({ onSearch, value, defaultValue, onValueChange, selectedOptions, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, container, }: AsyncMultiSelectProps): import("react/jsx-runtime").JSX.Element;
+export declare function AsyncMultiSelect({ onSearch, value, defaultValue, onValueChange, selectedOptions, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, emptyMessage, loadingLabel, container, }: AsyncMultiSelectProps): import("react/jsx-runtime").JSX.Element;

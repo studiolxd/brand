@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { ConversationThread } from './ConversationThread';
 import type { ConversationMessage } from './ConversationThread';
 
@@ -66,4 +67,30 @@ export const WithStreaming: Story = {
 
 export const Empty: Story = {
   args: { messages: [] },
+};
+
+/**
+ * Test: el `aria-label` del `role="log"` usa el castellano por defecto y se
+ * sustituye cuando el consumidor lo pasa traducido.
+ */
+export const Etiquetas: Story = {
+  name: 'Test — etiqueta del hilo',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <ConversationThread messages={MESSAGES} />
+      </div>
+      <div data-testid="traducido">
+        <ConversationThread messages={MESSAGES} ariaLabel="Conversation" />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByRole('log', { name: 'Conversación' })).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByRole('log', { name: 'Conversation' })).toBeInTheDocument();
+    await expect(en.queryByRole('log', { name: 'Conversación' })).toBeNull();
+  },
 };

@@ -11,13 +11,27 @@ export interface CodeBlockProps {
   language?: string;
   /** Muestra un botón de copiar al portapapeles en la cabecera. Default: `false`. */
   copyable?: boolean;
+  /**
+   * aria-label del botón de copiar. Default: "Copiar código" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  copyLabel?: string;
+  /** aria-label del botón tras copiar. Default: "Copiado" (castellano). */
+  copiedLabel?: string;
   /** Se añade DESPUÉS de las clases propias del componente. */
   className?: string;
 }
 
 const COPIED_FEEDBACK_MS = 1500;
 
-export function CodeBlock({ children, language, copyable = false, className }: CodeBlockProps) {
+export function CodeBlock({
+  children,
+  language,
+  copyable = false,
+  copyLabel = 'Copiar código',
+  copiedLabel = 'Copiado',
+  className,
+}: CodeBlockProps) {
   const codeRef = useRef<HTMLElement>(null);
   const [copied, setCopied] = useState(false);
 
@@ -46,7 +60,7 @@ export function CodeBlock({ children, language, copyable = false, className }: C
               iconOnly
               variant="ghost"
               size="sm"
-              aria-label={copied ? 'Copiado' : 'Copiar código'}
+              aria-label={copied ? copiedLabel : copyLabel}
               onClick={handleCopy}
               className="code-block__copy"
             >

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { CalendarRoster, type RosterRow } from './CalendarRoster';
 
 const meta: Meta<typeof CalendarRoster> = {
@@ -179,5 +180,58 @@ export const FijaConMesActual: Story = {
         rows={makeRows(month)}
       />
     );
+  },
+};
+
+/**
+ * Test: las etiquetas de la leyenda y de la navegación usan el castellano por
+ * defecto y se sustituyen cuando el consumidor las pasa traducidas.
+ */
+export const Etiquetas: Story = {
+  name: 'Test — leyenda y navegación',
+  render: () => {
+    const month = new Date(2026, 0, 1);
+    return (
+      <>
+        <div data-testid="default">
+          <CalendarRoster rows={makeRows(month)} month={month} onMonthChange={() => {}} />
+        </div>
+        <div data-testid="traducido">
+          <CalendarRoster
+            rows={makeRows(month)}
+            month={month}
+            onMonthChange={() => {}}
+            legendLabel="Legend"
+            previousMonthLabel="Previous month"
+            nextMonthLabel="Next month"
+            legendItems={[
+              { type: 'holiday', label: 'Holiday' },
+              { type: 'vacation', label: 'Vacation' },
+            ]}
+          />
+        </div>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByLabelText('Mes anterior')).toBeInTheDocument();
+    await expect(def.getByLabelText('Leyenda')).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByLabelText('Previous month')).toBeInTheDocument();
+    await expect(en.getByLabelText('Legend')).toBeInTheDocument();
+
+    // la leyenda, acotada a su contenedor (las celdas también muestran estos textos)
+    const defLegend = within(
+      canvasElement.querySelector('[data-testid="default"] .calendar-roster__legend') as HTMLElement,
+    );
+    await expect(defLegend.getByText('Vacaciones')).toBeInTheDocument();
+
+    const enLegend = within(
+      canvasElement.querySelector('[data-testid="traducido"] .calendar-roster__legend') as HTMLElement,
+    );
+    await expect(enLegend.getByText('Vacation')).toBeInTheDocument();
+    await expect(enLegend.queryByText('Vacaciones')).toBeNull();
   },
 };

@@ -254,3 +254,51 @@ export const Sm: Story = {
     </Table>
   ),
 };
+
+/**
+ * Test: el texto accesible del estado de ordenación usa el castellano por defecto
+ * y se sustituye cuando el consumidor lo pasa traducido.
+ */
+export const EtiquetasOrdenacion: Story = {
+  name: 'Test — etiquetas de ordenación',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortable>Nombre</TableHeader>
+              <TableHeader sortable sorted="asc">Fecha</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow><TableCell>a</TableCell><TableCell>b</TableCell></TableRow>
+          </TableBody>
+        </Table>
+      </div>
+      <div data-testid="traducido">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortable sortableLabel="Activate sorting">Name</TableHeader>
+              <TableHeader sortable sorted="asc" sortedAscLabel="Sorted ascending">Date</TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow><TableCell>a</TableCell><TableCell>b</TableCell></TableRow>
+          </TableBody>
+        </Table>
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByText('Activar ordenación')).toBeInTheDocument();
+    await expect(def.getByText('Ordenado ascendente')).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByText('Activate sorting')).toBeInTheDocument();
+    await expect(en.getByText('Sorted ascending')).toBeInTheDocument();
+    await expect(en.queryByText('Activar ordenación')).toBeNull();
+  },
+};

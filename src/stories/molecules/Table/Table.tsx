@@ -25,6 +25,15 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
   actions?: boolean;
   /** Texto accesible de la cabecera de acciones. Default: "Acciones" */
   actionsLabel?: string;
+  /**
+   * Texto accesible del estado de ordenación ascendente. Default: "Ordenado ascendente"
+   * (castellano). Una app multiidioma debe pasarlo traducido.
+   */
+  sortedAscLabel?: string;
+  /** Texto accesible del estado descendente. Default: "Ordenado descendente" */
+  sortedDescLabel?: string;
+  /** Texto accesible de la columna ordenable sin ordenar. Default: "Activar ordenación" */
+  sortableLabel?: string;
   children?: ReactNode;
 }
 
@@ -58,6 +67,9 @@ export function TableHeader({
   onSort,
   actions = false,
   actionsLabel = 'Acciones',
+  sortedAscLabel = 'Ordenado ascendente',
+  sortedDescLabel = 'Ordenado descendente',
+  sortableLabel = 'Activar ordenación',
   children,
   className,
   scope = 'col',
@@ -97,10 +109,10 @@ export function TableHeader({
           <Icon name="chevron" size="xs" className="table__sort-icon" />
           <VisuallyHidden>
             {sorted === 'asc'
-              ? 'Ordenado ascendente'
+              ? sortedAscLabel
               : sorted === 'desc'
-                ? 'Ordenado descendente'
-                : 'Activar ordenación'}
+                ? sortedDescLabel
+                : sortableLabel}
           </VisuallyHidden>
         </span>
       </th>

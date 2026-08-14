@@ -17,6 +17,29 @@ export interface FileUploadProps {
   name?: string;
   describedBy?: string;
   ariaLabel?: string;
+  /**
+   * Texto visible de la zona de arrastre. Default: "Arrastra archivos aquí" (castellano).
+   * Una app multiidioma debe pasarlo traducido — igual que el resto de props de texto.
+   */
+  dropzoneLabel?: string;
+  /** Texto visible mientras se arrastra encima. Default: "Suelta los archivos aquí" */
+  dropzoneActiveLabel?: string;
+  /** Texto visible secundario de la zona. Default: "o haz clic para seleccionar" */
+  dropzoneHintLabel?: string;
+  /** Pista de tamaño máximo. Default: `máx. ${size}` (el tamaño ya viene formateado) */
+  maxSizeHint?: (maxSize: string) => string;
+  /** Pista de número máximo de archivos. Default: `hasta ${n} archivos` */
+  maxFilesHint?: (maxFiles: number) => string;
+  /** aria-label de la lista de archivos. Default: "Archivos seleccionados" */
+  filesLabel?: string;
+  /** aria-label de la barra de progreso. Default: "Progreso de subida" */
+  progressLabel?: string;
+  /** aria-label del botón de eliminar archivo. Default: `Eliminar ${nombre}` */
+  removeFileLabel?: (fileName: string) => string;
+  /** Error de archivo demasiado grande. Default: `Archivo demasiado grande (máx. ${size})` */
+  tooLargeError?: (maxSize: string) => string;
+  /** Error de tipo no admitido. Default: "Tipo de archivo no permitido" */
+  invalidTypeError?: string;
 }
 
 function formatBytes(bytes: number): string {
@@ -29,9 +52,11 @@ function validateFile(
   file: File,
   accept: string | undefined,
   maxSize: number | undefined,
+  tooLargeError: (maxSize: string) => string,
+  invalidTypeError: string,
 ): string | null {
   if (maxSize !== undefined && file.size > maxSize) {
-    return `Archivo demasiado grande (máx. ${formatBytes(maxSize)})`;
+    return tooLargeError(formatBytes(maxSize));
   }
   if (accept) {
     const patterns = accept.split(',').map(s => s.trim());
@@ -40,7 +65,7 @@ function validateFile(
       if (p.endsWith('/*')) return file.type.startsWith(p.slice(0, -2));
       return file.type === p;
     });
-    if (!ok) return 'Tipo de archivo no permitido';
+    if (!ok) return invalidTypeError;
   }
   return null;
 }
@@ -87,6 +112,16 @@ export function FileUpload({
   name,
   describedBy,
   ariaLabel,
+  dropzoneLabel = 'Arrastra archivos aquí',
+  dropzoneActiveLabel = 'Suelta los archivos aquí',
+  dropzoneHintLabel = 'o haz clic para seleccionar',
+  maxSizeHint = (size) => `máx. ${size}`,
+  maxFilesHint = (n) => `hasta ${n} archivos`,
+  filesLabel = 'Archivos seleccionados',
+  progressLabel = 'Progreso de subida',
+  removeFileLabel = (fileName) => `Eliminar ${fileName}`,
+  tooLargeError = (size) => `Archivo demasiado grande (máx. ${size})`,
+  invalidTypeError = 'Tipo de archivo no permitido',
 }: FileUploadProps) {
   const isControlled = value !== undefined;
   const [internalFiles, setInternalFiles] = useState<File[]>(defaultValue);
@@ -122,7 +157,7 @@ export function FileUpload({
 
     for (const file of arr) {
       if (maxFiles !== undefined && nextFiles.filter(f => !errors.has(f)).length >= maxFiles) break;
-      const err = validateFile(file, accept, maxSize);
+      const err = validateFile(file, accept, maxSize, tooLargeError, invalidTypeError);
       if (err) errors.set(file, err);
       nextFiles.push(file);
     }
@@ -130,7 +165,7 @@ export function FileUpload({
     setFileErrors(errors);
     if (!isControlled) setInternalFiles(nextFiles);
     onChange?.(nextFiles.filter(f => !errors.has(f)));
-  }, [disabled, accept, maxSize, maxFiles, isControlled, value, internalFiles, fileErrors, onChange]);
+  }, [disabled, accept, maxSize, maxFiles, isControlled, value, internalFiles, fileErrors, onChange, tooLargeError, invalidTypeError]);
 
   const removeFile = useCallback((file: File) => {
     const current = isControlled ? (value ?? []) : internalFiles;
@@ -185,8 +220,8 @@ export function FileUpload({
 
   const subtextParts: string[] = [];
   if (accept) subtextParts.push(accept);
-  if (maxSize) subtextParts.push(`máx. ${formatBytes(maxSize)}`);
-  if (multiple && maxFiles) subtextParts.push(`hasta ${maxFiles} archivos`);
+  if (maxSize) subtextParts.push(maxSizeHint(formatBytes(maxSize)));
+  if (multiple && maxFiles) subtextParts.push(maxFilesHint(maxFiles));
 
   return (
     <div className={wrapperClasses}>
@@ -234,10 +269,10 @@ export function FileUpload({
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
         <span className="file-upload__text">
-          {isDragging ? 'Suelta los archivos aquí' : 'Arrastra archivos aquí'}
+          {isDragging ? dropzoneActiveLabel : dropzoneLabel}
         </span>
         <span className="file-upload__text file-upload__text--secondary">
-          o haz clic para seleccionar
+          {dropzoneHintLabel}
         </span>
         {subtextParts.length > 0 && (
           <span className="file-upload__subtext">{subtextParts.join(' · ')}</span>
@@ -245,7 +280,7 @@ export function FileUpload({
       </div>
 
       {files.length > 0 && (
-        <ul className="file-upload__list" aria-label="Archivos seleccionados">
+        <ul className="file-upload__list" aria-label={filesLabel}>
           {files.map((file, i) => {
             const err = fileErrors.get(file);
             const thumb = thumbUrlFor(file);
@@ -285,7 +320,7 @@ export function FileUpload({
                   className="file-upload__item-remove"
                   type="button"
                   onClick={() => removeFile(file)}
-                  aria-label={`Eliminar ${file.name}`}
+                  aria-label={removeFileLabel(file.name)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -316,7 +351,7 @@ export function FileUpload({
           aria-valuenow={progress}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-label="Progreso de subida"
+          aria-label={progressLabel}
         >
           <div
             className="file-upload__progress-bar"

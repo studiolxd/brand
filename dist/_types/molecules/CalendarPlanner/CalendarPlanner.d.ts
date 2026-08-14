@@ -35,9 +35,19 @@ export interface CalendarPlannerProps {
     navigable?: boolean;
     /** Locale para nombres de mes y día. Default: 'es-ES' */
     locale?: string;
+    /**
+     * aria-label del botón de mes anterior. Default: "Mes anterior" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    previousMonthLabel?: string;
+    /**
+     * aria-label del botón de mes siguiente. Default: "Mes siguiente" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    nextMonthLabel?: string;
     /** Tamaño del componente. Default: 'md' */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, previousMonthLabel, nextMonthLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
 export {};

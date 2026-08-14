@@ -7,8 +7,8 @@ import { useCallback as r, useEffect as i, useId as a, useRef as o, useState as 
 function c(e) {
 	return e < 1024 ? `${e} B` : e < 1024 * 1024 ? `${(e / 1024).toFixed(1)} KB` : `${(e / (1024 * 1024)).toFixed(1)} MB`;
 }
-function l(e, t, n) {
-	return n !== void 0 && e.size > n ? `Archivo demasiado grande (máx. ${c(n)})` : t && !t.split(",").map((e) => e.trim()).some((t) => t.startsWith(".") ? e.name.toLowerCase().endsWith(t.toLowerCase()) : t.endsWith("/*") ? e.type.startsWith(t.slice(0, -2)) : e.type === t) ? "Tipo de archivo no permitido" : null;
+function l(e, t, n, r, i) {
+	return n !== void 0 && e.size > n ? r(c(n)) : t && !t.split(",").map((e) => e.trim()).some((t) => t.startsWith(".") ? e.name.toLowerCase().endsWith(t.toLowerCase()) : t.endsWith("/*") ? e.type.startsWith(t.slice(0, -2)) : e.type === t) ? i : null;
 }
 var u = /* @__PURE__ */ new WeakMap();
 function d(e) {
@@ -20,86 +20,88 @@ function f(e) {
 	let t = u.get(e);
 	t && (URL.revokeObjectURL(t), u.delete(e));
 }
-function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, defaultValue: _ = [], onChange: v, progress: y, disabled: b = !1, error: x = !1, id: S, name: C, describedBy: w, ariaLabel: T }) {
-	let E = g !== void 0, [D, O] = s(_), [k, A] = s(/* @__PURE__ */ new Map()), [j, M] = s(!1), N = o(/* @__PURE__ */ new Set()), P = o(null), F = a(), I = S ?? `file-upload-${F}`, L = E ? g : D;
+function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, defaultValue: _ = [], onChange: v, progress: y, disabled: b = !1, error: x = !1, id: S, name: C, describedBy: w, ariaLabel: T, dropzoneLabel: E = "Arrastra archivos aquí", dropzoneActiveLabel: D = "Suelta los archivos aquí", dropzoneHintLabel: O = "o haz clic para seleccionar", maxSizeHint: k = (e) => `máx. ${e}`, maxFilesHint: A = (e) => `hasta ${e} archivos`, filesLabel: j = "Archivos seleccionados", progressLabel: ee = "Progreso de subida", removeFileLabel: M = (e) => `Eliminar ${e}`, tooLargeError: N = (e) => `Archivo demasiado grande (máx. ${e})`, invalidTypeError: P = "Tipo de archivo no permitido" }) {
+	let F = g !== void 0, [I, L] = s(_), [R, z] = s(/* @__PURE__ */ new Map()), [B, V] = s(!1), H = o(/* @__PURE__ */ new Set()), U = o(null), W = a(), G = S ?? `file-upload-${W}`, K = F ? g : I;
 	i(() => {
-		L.forEach((e) => N.current.add(e));
-	}, [L]), i(() => {
-		let e = N.current;
+		K.forEach((e) => H.current.add(e));
+	}, [K]), i(() => {
+		let e = H.current;
 		return () => {
 			e.forEach(f);
 		};
 	}, []);
-	let R = r((e) => {
+	let q = r((e) => {
 		if (b) return;
-		let t = Array.from(e), n = E ? g ?? [] : D, r = new Map(k), i = [...n];
+		let t = Array.from(e), n = F ? g ?? [] : I, r = new Map(R), i = [...n];
 		for (let e of t) {
 			if (h !== void 0 && i.filter((e) => !r.has(e)).length >= h) break;
-			let t = l(e, p, m);
+			let t = l(e, p, m, N, P);
 			t && r.set(e, t), i.push(e);
 		}
-		A(r), E || O(i), v?.(i.filter((e) => !r.has(e)));
+		z(r), F || L(i), v?.(i.filter((e) => !r.has(e)));
 	}, [
 		b,
 		p,
 		m,
 		h,
-		E,
+		F,
 		g,
-		D,
-		k,
-		v
-	]), z = r((e) => {
-		let t = (E ? g ?? [] : D).filter((t) => t !== e), n = new Map(k);
-		n.delete(e), f(e), A(n), E || O(t), v?.(t.filter((e) => !n.has(e))), P.current && (P.current.value = "");
+		I,
+		R,
+		v,
+		N,
+		P
+	]), J = r((e) => {
+		let t = (F ? g ?? [] : I).filter((t) => t !== e), n = new Map(R);
+		n.delete(e), f(e), z(n), F || L(t), v?.(t.filter((e) => !n.has(e))), U.current && (U.current.value = "");
 	}, [
-		E,
+		F,
 		g,
-		D,
-		k,
+		I,
+		R,
 		v
-	]), B = (e) => {
-		e.target.files && R(e.target.files);
-	}, V = (e) => {
-		e.preventDefault(), b || M(!0);
-	}, H = (e) => {
-		e.preventDefault(), M(!1);
-	}, U = (e) => {
-		e.preventDefault(), M(!1), !b && e.dataTransfer.files && R(e.dataTransfer.files);
-	}, W = () => {
-		b || P.current?.click();
-	}, G = (e) => {
-		!b && (e.key === "Enter" || e.key === " ") && (e.preventDefault(), P.current?.click());
-	}, K = [
+	]), Y = (e) => {
+		e.target.files && q(e.target.files);
+	}, X = (e) => {
+		e.preventDefault(), b || V(!0);
+	}, Z = (e) => {
+		e.preventDefault(), V(!1);
+	}, Q = (e) => {
+		e.preventDefault(), V(!1), !b && e.dataTransfer.files && q(e.dataTransfer.files);
+	}, te = () => {
+		b || U.current?.click();
+	}, ne = (e) => {
+		!b && (e.key === "Enter" || e.key === " ") && (e.preventDefault(), U.current?.click());
+	}, re = [
 		"file-upload",
-		j ? "file-upload--dragging" : "",
+		B ? "file-upload--dragging" : "",
 		x ? "file-upload--error" : "",
 		b ? "file-upload--disabled" : "",
-		L.length > 0 ? "file-upload--has-files" : ""
-	].filter(Boolean).join(" "), q = [];
-	return p && q.push(p), m && q.push(`máx. ${c(m)}`), u && h && q.push(`hasta ${h} archivos`), /* @__PURE__ */ n("div", {
-		className: K,
+		K.length > 0 ? "file-upload--has-files" : ""
+	].filter(Boolean).join(" "), $ = [];
+	return p && $.push(p), m && $.push(k(c(m))), u && h && $.push(A(h)), /* @__PURE__ */ n("div", {
+		className: re,
 		children: [
 			/* @__PURE__ */ t(e, { children: /* @__PURE__ */ t("input", {
-				ref: P,
+				ref: U,
 				type: "file",
-				id: I,
+				id: G,
 				name: C,
 				multiple: u,
 				accept: p,
 				disabled: b,
 				"aria-label": T,
 				"aria-describedby": w,
-				onChange: B,
+				onChange: Y,
 				tabIndex: -1
 			}) }),
 			/* @__PURE__ */ n("div", {
 				className: "file-upload__dropzone",
-				onClick: W,
-				onKeyDown: G,
-				onDragOver: V,
-				onDragLeave: H,
-				onDrop: U,
+				onClick: te,
+				onKeyDown: ne,
+				onDragOver: X,
+				onDragLeave: Z,
+				onDrop: Q,
 				role: "button",
 				tabIndex: b ? -1 : 0,
 				"aria-disabled": b || void 0,
@@ -129,23 +131,23 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 					}),
 					/* @__PURE__ */ t("span", {
 						className: "file-upload__text",
-						children: j ? "Suelta los archivos aquí" : "Arrastra archivos aquí"
+						children: B ? D : E
 					}),
 					/* @__PURE__ */ t("span", {
 						className: "file-upload__text file-upload__text--secondary",
-						children: "o haz clic para seleccionar"
+						children: O
 					}),
-					q.length > 0 && /* @__PURE__ */ t("span", {
+					$.length > 0 && /* @__PURE__ */ t("span", {
 						className: "file-upload__subtext",
-						children: q.join(" · ")
+						children: $.join(" · ")
 					})
 				]
 			}),
-			L.length > 0 && /* @__PURE__ */ t("ul", {
+			K.length > 0 && /* @__PURE__ */ t("ul", {
 				className: "file-upload__list",
-				"aria-label": "Archivos seleccionados",
-				children: L.map((e, r) => {
-					let i = k.get(e), a = d(e);
+				"aria-label": j,
+				children: K.map((e, r) => {
+					let i = R.get(e), a = d(e);
 					return /* @__PURE__ */ n("li", {
 						className: `file-upload__item${i ? " file-upload__item--error" : ""}`,
 						children: [
@@ -189,8 +191,8 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 							/* @__PURE__ */ t("button", {
 								className: "file-upload__item-remove",
 								type: "button",
-								onClick: () => z(e),
-								"aria-label": `Eliminar ${e.name}`,
+								onClick: () => J(e),
+								"aria-label": M(e.name),
 								children: /* @__PURE__ */ n("svg", {
 									xmlns: "http://www.w3.org/2000/svg",
 									width: "16",
@@ -225,7 +227,7 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 				"aria-valuenow": y,
 				"aria-valuemin": 0,
 				"aria-valuemax": 100,
-				"aria-label": "Progreso de subida",
+				"aria-label": ee,
 				children: /* @__PURE__ */ t("div", {
 					className: "file-upload__progress-bar",
 					style: { "--file-upload-progress": `${y}%` }

@@ -118,3 +118,37 @@ export const ChangeMinute: Story = {
     await expect(args.onChange).toHaveBeenCalledWith({ h: 10, m: 30 });
   },
 };
+
+/**
+ * Test: los `aria-label` y los placeholders de hora/minuto usan el castellano por
+ * defecto y se sustituyen cuando el consumidor los pasa traducidos.
+ */
+export const Etiquetas: Story = {
+  name: 'Test — etiquetas accesibles',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <TimeSelect value={{ h: 9, m: 30 }} />
+      </div>
+      <div data-testid="traducido">
+        <TimeSelect
+          value={{ h: 9, m: 30 }}
+          hoursLabel="Hours"
+          minutesLabel="Minutes"
+          hoursPlaceholder="hh"
+          minutesPlaceholder="mm"
+        />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByLabelText('Horas')).toBeInTheDocument();
+    await expect(def.getByLabelText('Minutos')).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByLabelText('Hours')).toBeInTheDocument();
+    await expect(en.getByLabelText('Minutes')).toBeInTheDocument();
+    await expect(en.queryByLabelText('Horas')).toBeNull();
+  },
+};

@@ -18,9 +18,18 @@ export interface ConversationThreadProps {
   messages: ConversationMessage[];
   /** Texto accesible para el indicador de escritura. */
   streamingLabel?: string;
+  /**
+   * aria-label del `role="log"` que envuelve el hilo. Default: "Conversación"
+   * (castellano). Una app multiidioma debe pasarla traducida.
+   */
+  ariaLabel?: string;
 }
 
-export function ConversationThread({ messages, streamingLabel }: ConversationThreadProps) {
+export function ConversationThread({
+  messages,
+  streamingLabel,
+  ariaLabel = 'Conversación',
+}: ConversationThreadProps) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,7 +37,7 @@ export function ConversationThread({ messages, streamingLabel }: ConversationThr
   }, [messages]);
 
   return (
-    <div className="conversation-thread" role="log" aria-label="Conversación">
+    <div className="conversation-thread" role="log" aria-label={ariaLabel}>
       {messages.map((message) =>
         message.role === 'user' ? (
           <UserMessage key={message.id} timestamp={message.timestamp}>

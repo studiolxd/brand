@@ -40,25 +40,25 @@ function c(e) {
 	for (let n = 0; n < e.length; n += 7) t.push(e.slice(n, n + 7));
 	return t;
 }
-function l({ value: l, onChange: u, defaultMonth: d, month: f, onMonthChange: p, navigable: m = !0, disabledDates: h, minDate: g, maxDate: _, locale: v = "es-ES", size: y = "md", className: b }) {
-	let [x, S] = i(() => f ?? d ?? (l instanceof Date ? l : /* @__PURE__ */ new Date())), C = f ?? x, w = r((e) => {
-		S(e), p?.(e);
-	}, [p]), T = /* @__PURE__ */ new Date(), E = r((e) => g && e < g || _ && e > _ ? !0 : Array.isArray(h) ? h.some((t) => a(t, e)) : typeof h == "function" ? h(e) : !1, [
+function l({ value: l, onChange: u, defaultMonth: d, month: f, onMonthChange: p, navigable: m = !0, disabledDates: h, minDate: g, maxDate: _, locale: v = "es-ES", previousMonthLabel: y = "Mes anterior", nextMonthLabel: b = "Mes siguiente", size: x = "md", className: S }) {
+	let [C, w] = i(() => f ?? d ?? (l instanceof Date ? l : /* @__PURE__ */ new Date())), T = f ?? C, E = r((e) => {
+		w(e), p?.(e);
+	}, [p]), D = /* @__PURE__ */ new Date(), O = r((e) => g && e < g || _ && e > _ ? !0 : Array.isArray(h) ? h.some((t) => a(t, e)) : typeof h == "function" ? h(e) : !1, [
 		h,
 		g,
 		_
-	]), D = y === "sm" ? "xs" : y === "lg" ? "md" : "sm", O = new Intl.DateTimeFormat(v, {
+	]), k = x === "sm" ? "xs" : x === "lg" ? "md" : "sm", A = new Intl.DateTimeFormat(v, {
 		month: "long",
 		year: "numeric"
-	}).format(C), k = new Intl.DateTimeFormat(v, { weekday: "narrow" }), A = Array.from({ length: 7 }, (e, t) => {
+	}).format(T), j = new Intl.DateTimeFormat(v, { weekday: "narrow" }), M = Array.from({ length: 7 }, (e, t) => {
 		let n = new Date(2025, 0, 6 + t);
-		return k.format(n);
-	}), j = c(s(C)), M = new Date(C.getFullYear(), C.getMonth() - 1, 1), N = new Date(C.getFullYear(), C.getMonth() + 1, 1), P = g ? !o(M, g) && M < g : !1, F = _ ? !o(N, _) && N > _ : !1, I = `calendar-title-${C.getFullYear()}-${C.getMonth()}`;
+		return j.format(n);
+	}), N = c(s(T)), P = new Date(T.getFullYear(), T.getMonth() - 1, 1), F = new Date(T.getFullYear(), T.getMonth() + 1, 1), I = g ? !o(P, g) && P < g : !1, L = _ ? !o(F, _) && F > _ : !1, R = `calendar-title-${T.getFullYear()}-${T.getMonth()}`;
 	return /* @__PURE__ */ n("div", {
 		className: [
 			"calendar",
-			`calendar--${y}`,
-			b
+			`calendar--${x}`,
+			S
 		].filter(Boolean).join(" "),
 		children: [/* @__PURE__ */ n("div", {
 			className: "calendar__header",
@@ -66,51 +66,51 @@ function l({ value: l, onChange: u, defaultMonth: d, month: f, onMonthChange: p,
 				m && /* @__PURE__ */ t("button", {
 					type: "button",
 					className: "calendar__nav",
-					"aria-label": "Mes anterior",
-					disabled: P,
-					onClick: () => w(M),
+					"aria-label": y,
+					disabled: I,
+					onClick: () => E(P),
 					children: /* @__PURE__ */ t(e, {
 						name: "chevron",
-						size: D,
+						size: k,
 						className: "calendar__chevron--prev"
 					})
 				}),
 				/* @__PURE__ */ t("h2", {
-					id: I,
+					id: R,
 					className: "calendar__title",
 					"aria-live": "polite",
-					children: O
+					children: A
 				}),
 				m && /* @__PURE__ */ t("button", {
 					type: "button",
 					className: "calendar__nav",
-					"aria-label": "Mes siguiente",
-					disabled: F,
-					onClick: () => w(N),
+					"aria-label": b,
+					disabled: L,
+					onClick: () => E(F),
 					children: /* @__PURE__ */ t(e, {
 						name: "chevron",
-						size: D
+						size: k
 					})
 				})
 			]
 		}), /* @__PURE__ */ n("div", {
 			className: "calendar__grid",
 			role: "grid",
-			"aria-labelledby": I,
+			"aria-labelledby": R,
 			children: [/* @__PURE__ */ t("div", {
 				role: "row",
 				className: "calendar__row",
-				children: A.map((e) => /* @__PURE__ */ t("div", {
+				children: M.map((e) => /* @__PURE__ */ t("div", {
 					role: "columnheader",
 					className: "calendar__weekday",
 					"aria-label": e,
 					children: e
 				}, e))
-			}), j.map((e, n) => /* @__PURE__ */ t("div", {
+			}), N.map((e, n) => /* @__PURE__ */ t("div", {
 				role: "row",
 				className: "calendar__row",
 				children: e.map(({ date: e, outside: n }) => {
-					let r = E(e), i = a(e, T), o = l instanceof Date ? a(e, l) : !1;
+					let r = O(e), i = a(e, D), o = l instanceof Date ? a(e, l) : !1;
 					return /* @__PURE__ */ t("button", {
 						type: "button",
 						role: "gridcell",

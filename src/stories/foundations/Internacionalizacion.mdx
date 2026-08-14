@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Internacionalización" />
+
+# Internacionalización
+
+Los componentes de la librería emiten textos por su cuenta: etiquetas accesibles (`aria-label`,
+texto para lectores de pantalla) y, en algunos casos, texto visible en pantalla — un mensaje de
+"sin resultados", el sumario de una paginación, la zona de arrastre de un campo de archivos.
+
+**Todos esos textos están en castellano por defecto.** La librería nace de un producto en
+castellano y ese es el idioma de partida. Pero una aplicación multiidioma que use un componente
+tal cual **pierde sus traducciones**: un usuario de lector de pantalla en inglés o en alemán oye
+"Página 3" o ve "Sin resultados" en medio de una interfaz traducida.
+
+## La convención
+
+Cada texto que el componente emite por su cuenta es una **prop opcional con el texto castellano
+como valor por defecto**:
+
+```tsx
+// sin props → castellano, como siempre
+<Pagination total={200} page={3} pageSize={10} />
+
+// con props → los textos del consumidor
+<Pagination
+  total={200}
+  page={3}
+  pageSize={10}
+  pageLabel={(p) => t('page', { page: p })}
+  previousLabel={t('previous')}
+  nextLabel={t('next')}
+/>
+```
+
+Reglas de la convención:
+
+- **El default es siempre el texto castellano actual**, así que añadir la prop nunca es un
+  breaking change ni cambia el marcado de quien no la pasa.
+- **Nombre `<cosa>Label`** para etiquetas accesibles y textos cortos; `<cosa>Message` para
+  mensajes; `<cosa>Error` para textos de error; `<cosa>Hint`/`<cosa>Placeholder` para pistas.
+- **Función en vez de string** cuando el texto interpola un valor:
+  `pageLabel?: (page: number) => string`, no un string con marcador.
+- **Listas de opciones se traducen pasando la lista entera**, no con una prop de texto por
+  elemento: `pageSizeOptions` en `Pagination`, `legendItems` en `CalendarRoster`.
+- **El JSDoc de la prop dice cuál es el default y que es castellano**, para que se vea desde el
+  autocompletado del editor.
+
+## Fechas y números
+
+Los componentes de calendario no traducen nombres de mes y día con props de texto: reciben una
+prop **`locale`** (default `'es-ES'`) y delegan en `Intl.DateTimeFormat`. Las props de texto de
+esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegación, la leyenda.
+
+```tsx
+<Calendar locale="de-DE" previousMonthLabel="Vorheriger Monat" nextMonthLabel="Nächster Monat" />
+```
+
+## Componentes con props de texto
+
+| Componente | Props |
+| --- | --- |
+| `Pagination` | `ariaLabel`, `pageLabel`, `previousLabel`, `nextLabel`, `pagesGroupLabel`, `pageSizeLabel`, `totalLabel` — y `pageSizeOptions` para las opciones del selector |
+| `AsyncSelect` | `emptyMessage`, `loadingLabel`, `clearLabel`, `placeholder` |
+| `AsyncMultiSelect` | `emptyMessage`, `loadingLabel`, `placeholder` |
+| `FileUpload` | `dropzoneLabel`, `dropzoneActiveLabel`, `dropzoneHintLabel`, `maxSizeHint`, `maxFilesHint`, `filesLabel`, `progressLabel`, `removeFileLabel`, `tooLargeError`, `invalidTypeError` |
+| `NumberInput` | `decrementLabel`, `incrementLabel` |
+| `TimeSelect` | `hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder` |
+| `InputPhone` | `countryLabel` |
+| `Calendar`, `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel` — más `locale` |
+| `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel` — más `locale` |
+| `Table` (`TableHeader`) | `actionsLabel`, `sortedAscLabel`, `sortedDescLabel`, `sortableLabel` |
+| `CodeBlock` | `copyLabel`, `copiedLabel` |
+| `ConversationThread` | `ariaLabel`, `streamingLabel` |
+| `ConversationList` | `newLabel` |
+| `LoginForm` | `title`, `emailLabel`, `passwordLabel`, `submitLabel`, `loadingLabel` |
+| `PasswordField` | `showPasswordLabel`, `hidePasswordLabel` |
+| `ContextMenu`, `DotsButton` | `triggerAriaLabel` / `aria-label` |
+| `Modal` | `fallbackTitle` |
+| `Select`, `MultiSelect`, `DatePicker` | `placeholder` |
+| `Spinner`, `TypingIndicator` | `label` |
+| `ProjectCard` | `ctaLabel` |
+| `ContactSection` | props de texto de todos sus campos |
+
+## Al añadir un componente nuevo
+
+Si el componente emite algún texto que no venga de sus `children` ni de sus datos, ese texto va
+en una prop con default castellano — no cableado en el JSX. Es la diferencia entre que un
+consumidor pueda traducirlo y que tenga que reimplementar el componente entero para hacerlo.

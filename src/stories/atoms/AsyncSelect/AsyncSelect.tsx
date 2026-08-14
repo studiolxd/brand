@@ -26,6 +26,21 @@ export interface AsyncSelectProps {
   'aria-label'?: string;
   'aria-describedby'?: string;
   /**
+   * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
+   * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
+   */
+  emptyMessage?: string;
+  /**
+   * Etiqueta accesible del spinner mientras se busca. Default: "Buscando…" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  loadingLabel?: string;
+  /**
+   * aria-label del botón de limpiar selección. Default: "Limpiar selección" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  clearLabel?: string;
+  /**
    * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
    * `Portal.container`). Por defecto se monta en `document.body`, que
    * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
@@ -48,6 +63,9 @@ export function AsyncSelect({
   id,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedby,
+  emptyMessage = 'Sin resultados',
+  loadingLabel = 'Buscando…',
+  clearLabel = 'Limpiar selección',
   container,
 }: AsyncSelectProps) {
   const [open, setOpen] = useState(false);
@@ -205,7 +223,7 @@ export function AsyncSelect({
             <button
               type="button"
               className="async-select__clear"
-              aria-label="Limpiar selección"
+              aria-label={clearLabel}
               tabIndex={-1}
               onMouseDown={handleClear}
             >
@@ -231,11 +249,11 @@ export function AsyncSelect({
           >
             {loading && (
               <div className="async-select__loading">
-                <Spinner size="sm" label="Buscando…" />
+                <Spinner size="sm" label={loadingLabel} />
               </div>
             )}
             {!loading && hasSearched && results.length === 0 && (
-              <div className="async-select__empty">Sin resultados</div>
+              <div className="async-select__empty">{emptyMessage}</div>
             )}
             {!loading && results.map((option, index) => {
               const isSelected = option.value === currentValue;

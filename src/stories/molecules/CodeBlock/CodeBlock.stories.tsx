@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { CodeBlock } from './CodeBlock';
 
 const meta: Meta<typeof CodeBlock> = {
@@ -77,4 +78,32 @@ export const ConNodosResaltados: Story = {
       <span style={{ color: '#BAABFF' }}>const</span> mensaje = <span style={{ color: '#20E38E' }}>&apos;resaltado externo&apos;</span>;
     </CodeBlock>
   ),
+};
+
+/**
+ * Test: el `aria-label` del botón de copiar usa el castellano por defecto y se
+ * sustituye cuando el consumidor lo pasa traducido.
+ */
+export const Etiquetas: Story = {
+  name: 'Test — etiqueta del botón de copiar',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <CodeBlock copyable language="ts">const a = 1;</CodeBlock>
+      </div>
+      <div data-testid="traducido">
+        <CodeBlock copyable language="ts" copyLabel="Copy code" copiedLabel="Copied">
+          const a = 1;
+        </CodeBlock>
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByLabelText('Copiar código')).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByLabelText('Copy code')).toBeInTheDocument();
+    await expect(en.queryByLabelText('Copiar código')).toBeNull();
+  },
 };

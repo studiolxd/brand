@@ -27,6 +27,16 @@ export interface AsyncMultiSelectProps {
   'aria-label'?: string;
   'aria-describedby'?: string;
   /**
+   * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
+   * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
+   */
+  emptyMessage?: string;
+  /**
+   * Etiqueta accesible del spinner mientras se busca. Default: "Buscando…" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  loadingLabel?: string;
+  /**
    * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
    * `Portal.container`). Por defecto se monta en `document.body`, que
    * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
@@ -51,6 +61,8 @@ export function AsyncMultiSelect({
   id,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedby,
+  emptyMessage = 'Sin resultados',
+  loadingLabel = 'Buscando…',
   container,
 }: AsyncMultiSelectProps) {
   const [open, setOpen] = useState(false);
@@ -220,11 +232,11 @@ export function AsyncMultiSelect({
           >
             {loading && (
               <div className="async-multi-select__loading">
-                <Spinner size="sm" label="Buscando…" />
+                <Spinner size="sm" label={loadingLabel} />
               </div>
             )}
             {!loading && hasSearched && results.length === 0 && (
-              <div className="async-multi-select__empty">Sin resultados</div>
+              <div className="async-multi-select__empty">{emptyMessage}</div>
             )}
             {!loading && results.map((option, index) => {
               const isSelected = currentValues.includes(option.value);

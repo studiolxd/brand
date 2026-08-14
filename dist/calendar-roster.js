@@ -47,14 +47,14 @@ var c = {
 		label: "No laborable"
 	}
 ];
-function u({ rows: u, month: d, onMonthChange: f, hrefBuilder: p, linkComponent: m, renderCell: h, nameLabel: g = "Empleado", showLegend: _ = !0, locale: v = "es-ES", className: y }) {
-	let b = m ?? "a", x = /* @__PURE__ */ new Date(), S = s(d), C = new Date(d.getFullYear(), d.getMonth() - 1, 1), w = new Date(d.getFullYear(), d.getMonth() + 1, 1), T = new Intl.DateTimeFormat(v, {
+function u({ rows: u, month: d, onMonthChange: f, hrefBuilder: p, linkComponent: m, renderCell: h, nameLabel: g = "Empleado", showLegend: _ = !0, locale: v = "es-ES", legendItems: y = l, legendLabel: b = "Leyenda", previousMonthLabel: x = "Mes anterior", nextMonthLabel: S = "Mes siguiente", className: C }) {
+	let w = m ?? "a", T = /* @__PURE__ */ new Date(), E = s(d), D = new Date(d.getFullYear(), d.getMonth() - 1, 1), O = new Date(d.getFullYear(), d.getMonth() + 1, 1), k = new Intl.DateTimeFormat(v, {
 		month: "long",
 		year: "numeric"
-	}).format(d), E = new Intl.DateTimeFormat(v, { weekday: "narrow" });
-	function D(t, n) {
-		let i = n === "prev" ? "Mes anterior" : "Mes siguiente", a = n === "prev" ? "calendar-roster__chevron--prev" : void 0;
-		return p ? /* @__PURE__ */ r(b, {
+	}).format(d), A = new Intl.DateTimeFormat(v, { weekday: "narrow" });
+	function j(t, n) {
+		let i = n === "prev" ? x : S, a = n === "prev" ? "calendar-roster__chevron--prev" : void 0;
+		return p ? /* @__PURE__ */ r(w, {
 			href: p(t),
 			className: "calendar-roster__nav-btn",
 			"aria-label": i,
@@ -78,37 +78,37 @@ function u({ rows: u, month: d, onMonthChange: f, hrefBuilder: p, linkComponent:
 			})
 		});
 	}
-	let O = `roster-title-${d.getFullYear()}-${d.getMonth()}`;
+	let M = `roster-title-${d.getFullYear()}-${d.getMonth()}`;
 	return /* @__PURE__ */ i("div", {
-		className: ["calendar-roster", y].filter(Boolean).join(" "),
+		className: ["calendar-roster", C].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ i("div", {
 				className: "calendar-roster__nav",
 				children: [
-					D(C, "prev"),
+					j(D, "prev"),
 					/* @__PURE__ */ r("strong", {
-						id: O,
+						id: M,
 						className: "calendar-roster__title",
-						children: T
+						children: k
 					}),
-					D(w, "next")
+					j(O, "next")
 				]
 			}),
 			/* @__PURE__ */ r("div", {
 				className: "calendar-roster__wrap",
 				children: /* @__PURE__ */ i("table", {
 					className: "calendar-roster__table",
-					"aria-labelledby": O,
+					"aria-labelledby": M,
 					children: [/* @__PURE__ */ r("thead", { children: /* @__PURE__ */ i("tr", { children: [/* @__PURE__ */ r("th", {
 						className: "calendar-roster__th-name",
 						scope: "col",
 						children: g
-					}), S.map((e) => {
-						let t = a(e, x), n = [
+					}), E.map((e) => {
+						let t = a(e, T), n = [
 							"calendar-roster__th-day",
 							o(e) && "calendar-roster__th-day--weekend",
 							t && "calendar-roster__th-day--today"
-						].filter(Boolean).join(" "), s = String(e.getDate()).padStart(2, "0"), c = E.format(e);
+						].filter(Boolean).join(" "), s = String(e.getDate()).padStart(2, "0"), c = A.format(e);
 						return /* @__PURE__ */ i("th", {
 							className: n,
 							scope: "col",
@@ -124,8 +124,8 @@ function u({ rows: u, month: d, onMonthChange: f, hrefBuilder: p, linkComponent:
 						className: "calendar-roster__td-name",
 						title: e.name,
 						children: e.name
-					}), S.map((s) => {
-						let l = s.getDate(), u = e.cells[l] ?? null, d = o(s), f = a(s, x), p = u?.type === "holiday", m = u?.type === "non-working";
+					}), E.map((s) => {
+						let l = s.getDate(), u = e.cells[l] ?? null, d = o(s), f = a(s, T), p = u?.type === "holiday", m = u?.type === "non-working";
 						return /* @__PURE__ */ r("td", {
 							className: [
 								"calendar-roster__cell",
@@ -147,8 +147,8 @@ function u({ rows: u, month: d, onMonthChange: f, hrefBuilder: p, linkComponent:
 			}),
 			_ && /* @__PURE__ */ r("div", {
 				className: "calendar-roster__legend",
-				"aria-label": "Leyenda",
-				children: l.map(({ type: e, label: a }) => /* @__PURE__ */ r("span", {
+				"aria-label": b,
+				children: y.map(({ type: e, label: a }) => /* @__PURE__ */ r("span", {
 					className: "calendar-roster__legend-item",
 					children: e === "non-working" ? /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r("span", { className: "calendar-roster__legend-swatch calendar-roster__legend-swatch--non-working" }), a] }) : /* @__PURE__ */ r(t, {
 						variant: c[e],

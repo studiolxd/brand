@@ -7,6 +7,45 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v13.6.0
+
+### Añadido
+
+- **Props de texto en los componentes que aún cableaban castellano.** Misma convención que
+  `Pagination` en `v13.5.0`: prop opcional con el texto actual como default, así que sin pasar
+  nada el marcado no cambia.
+
+  | Componente | Props nuevas |
+  | --- | --- |
+  | `AsyncSelect` | `emptyMessage`, `loadingLabel`, `clearLabel` |
+  | `AsyncMultiSelect` | `emptyMessage`, `loadingLabel` |
+  | `FileUpload` | `dropzoneLabel`, `dropzoneActiveLabel`, `dropzoneHintLabel`, `maxSizeHint`, `maxFilesHint`, `filesLabel`, `progressLabel`, `removeFileLabel`, `tooLargeError`, `invalidTypeError` |
+  | `NumberInput` | `decrementLabel`, `incrementLabel` |
+  | `TimeSelect` | `hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder` |
+  | `InputPhone` | `countryLabel` |
+  | `Calendar`, `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel` |
+  | `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems` |
+  | `Table` (`TableHeader`) | `sortedAscLabel`, `sortedDescLabel`, `sortableLabel` |
+  | `CodeBlock` | `copyLabel`, `copiedLabel` |
+  | `ConversationThread` | `ariaLabel` |
+  | `LoginForm` | `emailLabel`, `passwordLabel`, `submitLabel`, `loadingLabel` |
+
+  Los dos textos **visibles** sin ninguna vía de traducción eran "Sin resultados"
+  (`AsyncSelect`/`AsyncMultiSelect`) y los de la zona de arrastre de `FileUpload`; el resto eran
+  etiquetas accesibles.
+
+- **`LegendItem`** exportado desde el índice del paquete (tipo de `CalendarRoster.legendItems`).
+
+- **Foundations › Internacionalización** — página nueva de Storybook con la convención de props
+  de texto, el criterio de nombres, el tratamiento de fechas vía `locale` y la tabla de todos los
+  componentes con props de texto. La regla equivalente para el desarrollo interno queda en
+  `CLAUDE.md`.
+
+### Cobertura
+
+Una story de test por componente tocado, verificando en cada uno que los textos por defecto se
+siguen emitiendo y que las props pasadas los sustituyen.
+
 ## v13.5.0
 
 ### Añadido

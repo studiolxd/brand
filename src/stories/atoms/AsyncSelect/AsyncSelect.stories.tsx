@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import { AsyncSelect } from './AsyncSelect';
 import type { AsyncSelectOption } from './AsyncSelect';
 
@@ -84,5 +85,69 @@ export const Controlled: Story = {
         </p>
       </div>
     );
+  },
+};
+
+const emptySearch = (): Promise<AsyncSelectOption[]> => Promise.resolve([]);
+
+/**
+ * Test: el mensaje de "sin resultados" (texto **visible**) usa el castellano por
+ * defecto y se sustituye cuando el consumidor lo pasa traducido.
+ */
+export const MensajeVacio: Story = {
+  name: 'Test — mensaje de sin resultados',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
+      <div data-testid="default">
+        <AsyncSelect onSearch={emptySearch} placeholder="Buscar…" />
+      </div>
+      <div data-testid="traducido">
+        <AsyncSelect onSearch={emptySearch} placeholder="Search…" emptyMessage="No results" />
+      </div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // el dropdown se monta en un portal en document.body, fuera de canvasElement
+    const body = within(document.body);
+
+    await userEvent.type(canvas.getByPlaceholderText('Buscar…'), 'zzz');
+    await expect(await body.findByText('Sin resultados')).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+
+    await userEvent.type(canvas.getByPlaceholderText('Search…'), 'zzz');
+    await expect(await body.findByText('No results')).toBeInTheDocument();
+    await expect(body.queryByText('Sin resultados')).toBeNull();
+  },
+};
+
+/**
+ * Test: el `aria-label` del botón de limpiar usa el castellano por defecto y se
+ * sustituye cuando el consumidor lo pasa traducido.
+ */
+export const EtiquetaLimpiar: Story = {
+  name: 'Test — etiqueta de limpiar selección',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <AsyncSelect onSearch={mockSearch} value="1" selectedOption={EMPLOYEES[0]} />
+      </div>
+      <div data-testid="traducido">
+        <AsyncSelect
+          onSearch={mockSearch}
+          value="1"
+          selectedOption={EMPLOYEES[0]}
+          clearLabel="Clear selection"
+        />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByLabelText('Limpiar selección')).toBeInTheDocument();
+
+    const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(en.getByLabelText('Clear selection')).toBeInTheDocument();
+    await expect(en.queryByLabelText('Limpiar selección')).toBeNull();
   },
 };

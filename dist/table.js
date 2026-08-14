@@ -22,19 +22,19 @@ function o({ children: e, ...t }) {
 		children: e
 	});
 }
-function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", children: l, className: u, scope: d = "col", ...f }) {
-	let p = [
+function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", sortedAscLabel: l = "Ordenado ascendente", sortedDescLabel: u = "Ordenado descendente", sortableLabel: d = "Activar ordenación", children: f, className: p, scope: m = "col", ...h }) {
+	let g = [
 		"table__header",
 		i ? "table__header--sortable" : "",
 		a === "asc" ? "table__header--sorted-asc" : "",
 		a === "desc" ? "table__header--sorted-desc" : "",
 		s ? "table__header--actions" : "",
-		u
+		p
 	].filter(Boolean).join(" ");
 	return i ? /* @__PURE__ */ n("th", {
-		...f,
-		scope: d,
-		className: p,
+		...h,
+		scope: m,
+		className: g,
 		onClick: o,
 		onKeyDown: (e) => {
 			(e.key === "Enter" || e.key === " ") && (e.preventDefault(), o?.());
@@ -44,25 +44,25 @@ function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actio
 		children: /* @__PURE__ */ r("span", {
 			className: "table__header-content",
 			children: [
-				l,
+				f,
 				/* @__PURE__ */ n(e, {
 					name: "chevron",
 					size: "xs",
 					className: "table__sort-icon"
 				}),
-				/* @__PURE__ */ n(t, { children: a === "asc" ? "Ordenado ascendente" : a === "desc" ? "Ordenado descendente" : "Activar ordenación" })
+				/* @__PURE__ */ n(t, { children: a === "asc" ? l : a === "desc" ? u : d })
 			]
 		})
 	}) : s ? /* @__PURE__ */ n("th", {
-		...f,
-		scope: d,
-		className: p,
-		children: /* @__PURE__ */ n(t, { children: l ?? c })
+		...h,
+		scope: m,
+		className: g,
+		children: /* @__PURE__ */ n(t, { children: f ?? c })
 	}) : /* @__PURE__ */ n("th", {
-		...f,
-		scope: d,
-		className: p,
-		children: l
+		...h,
+		scope: m,
+		className: g,
+		children: f
 	});
 }
 function c({ onClick: e, interactive: t = !1, children: r, className: i, ...a }) {

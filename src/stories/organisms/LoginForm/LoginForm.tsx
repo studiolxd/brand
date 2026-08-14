@@ -11,6 +11,17 @@ export interface LoginFormProps {
   errors?: string[];
   loading?: boolean;
   title?: string;
+  /** Etiqueta del campo de email. Default: "Email" */
+  emailLabel?: string;
+  /**
+   * Etiqueta del campo de contraseña. Default: "Contraseña" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  passwordLabel?: string;
+  /** Texto del botón de envío. Default: "Iniciar sesión" (castellano). */
+  submitLabel?: string;
+  /** Texto del botón mientras `loading`. Default: "Iniciando sesión…" (castellano). */
+  loadingLabel?: string;
 }
 
 export function LoginForm({
@@ -18,6 +29,10 @@ export function LoginForm({
   errors,
   loading = false,
   title = 'Iniciar sesión',
+  emailLabel = 'Email',
+  passwordLabel = 'Contraseña',
+  submitLabel = 'Iniciar sesión',
+  loadingLabel = 'Iniciando sesión…',
 }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,7 +53,7 @@ export function LoginForm({
       <Form onSubmit={handleFormSubmit} errors={errors}>
         <InputField
           id="login-email"
-          label="Email"
+          label={emailLabel}
           type="email"
           name="email"
           value={email}
@@ -46,7 +61,7 @@ export function LoginForm({
         />
         <InputField
           id="login-password"
-          label="Contraseña"
+          label={passwordLabel}
           type="password"
           name="password"
           value={password}
@@ -54,7 +69,7 @@ export function LoginForm({
         />
       </Form>
       <Button variant="primary" disabled={loading} onClick={handleSubmit}>
-        {loading ? 'Iniciando sesión…' : 'Iniciar sesión'}
+        {loading ? loadingLabel : submitLabel}
       </Button>
     </div>
   );

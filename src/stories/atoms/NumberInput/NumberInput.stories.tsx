@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { useState } from 'react';
 import { NumberInput } from './NumberInput';
 
@@ -71,5 +72,33 @@ export const Controlled: Story = {
         <span style={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>valor: {val}</span>
       </div>
     );
+  },
+};
+
+/**
+ * Test: las etiquetas accesibles de los botones usan el castellano por defecto
+ * y se sustituyen por completo cuando el consumidor las pasa traducidas.
+ */
+export const Etiquetas: Story = {
+  name: 'Test — etiquetas accesibles',
+  render: () => (
+    <>
+      <div data-testid="default">
+        <NumberInput defaultValue={1} />
+      </div>
+      <div data-testid="traducido">
+        <NumberInput defaultValue={1} decrementLabel="Decrease" incrementLabel="Increase" />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const def = within(canvasElement.querySelector('[data-testid="default"]') as HTMLElement);
+    await expect(def.getByLabelText('Decrementar')).toBeInTheDocument();
+    await expect(def.getByLabelText('Incrementar')).toBeInTheDocument();
+
+    const es = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
+    await expect(es.getByLabelText('Decrease')).toBeInTheDocument();
+    await expect(es.getByLabelText('Increase')).toBeInTheDocument();
+    await expect(es.queryByLabelText('Decrementar')).toBeNull();
   },
 };
