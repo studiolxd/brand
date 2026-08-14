@@ -47,6 +47,36 @@ export interface PaginationProps {
   size?: 'sm' | 'md' | 'lg';
   /** aria-label del <nav>. Default: "Paginación" */
   ariaLabel?: string;
+  /**
+   * aria-label de cada botón/enlace de página. Default: `Página ${page}` (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  pageLabel?: (page: number) => string;
+  /**
+   * aria-label del botón "anterior". Default: "Página anterior" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  previousLabel?: string;
+  /**
+   * aria-label del botón "siguiente". Default: "Página siguiente" (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  nextLabel?: string;
+  /**
+   * aria-label del `role="group"` que envuelve los controles de página.
+   * Default: "Páginas" (castellano). Una app multiidioma debe pasarla traducida.
+   */
+  pagesGroupLabel?: string;
+  /**
+   * aria-label del selector de registros por página.
+   * Default: "Registros por página" (castellano). Una app multiidioma debe pasarla traducida.
+   */
+  pageSizeLabel?: string;
+  /**
+   * Texto del sumario que muestra `showTotal`. Default: `${total} resultados` (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  totalLabel?: (total: number) => string;
   className?: string;
 }
 
@@ -75,6 +105,12 @@ export function Pagination({
   showTotal = false,
   size = 'md',
   ariaLabel = 'Paginación',
+  pageLabel = (p) => `Página ${p}`,
+  previousLabel = 'Página anterior',
+  nextLabel = 'Página siguiente',
+  pagesGroupLabel = 'Páginas',
+  pageSizeLabel = 'Registros por página',
+  totalLabel = (t) => `${t} resultados`,
   className,
 }: PaginationProps) {
   if (total === 0) return null;
@@ -105,7 +141,7 @@ export function Pagination({
           href={isCurrent ? undefined : hrefBuilder(item)}
           className={btnClass}
           aria-current={isCurrent ? 'page' : undefined}
-          aria-label={`Página ${item}`}
+          aria-label={pageLabel(item)}
           onClick={
             !isCurrent && onPageChange
               ? (e) => { e.preventDefault(); onPageChange(item as number); }
@@ -122,7 +158,7 @@ export function Pagination({
         key={item}
         className={btnClass}
         aria-current={isCurrent ? 'page' : undefined}
-        aria-label={`Página ${item}`}
+        aria-label={pageLabel(item)}
         onClick={isCurrent ? undefined : () => onPageChange?.(item as number)}
       >
         {item}
@@ -131,7 +167,7 @@ export function Pagination({
   }
 
   function renderNavBtn(targetPage: number, direction: 'prev' | 'next', isDisabled: boolean) {
-    const ariaLabelText = direction === 'prev' ? 'Página anterior' : 'Página siguiente';
+    const ariaLabelText = direction === 'prev' ? previousLabel : nextLabel;
     const chevronClass = direction === 'prev' ? 'pagination__chevron--prev' : undefined;
     const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
     const icon = <Icon name="chevron" size={chevronSize} className={chevronClass} />;
@@ -176,7 +212,7 @@ export function Pagination({
       {hasMeta && (
         <div className="pagination__meta">
           {showTotal && (
-            <span className="pagination__summary">{total} resultados</span>
+            <span className="pagination__summary">{totalLabel(total)}</span>
           )}
           {onPageSizeChange && (
             <div className="pagination__size-selector">
@@ -184,7 +220,7 @@ export function Pagination({
                 options={pageSizeOptions}
                 value={pageSize === 'all' ? 'all' : String(pageSize)}
                 onValueChange={onPageSizeChange}
-                aria-label="Registros por página"
+                aria-label={pageSizeLabel}
                 size={size}
               />
             </div>
@@ -192,7 +228,7 @@ export function Pagination({
         </div>
       )}
       {totalPages > 1 && (
-        <div className="pagination__controls" role="group" aria-label="Páginas">
+        <div className="pagination__controls" role="group" aria-label={pagesGroupLabel}>
           {renderNavBtn(page - 1, 'prev', page <= 1)}
           {pageItems.map((item, i) => renderPageItem(item, i))}
           {renderNavBtn(page + 1, 'next', page >= totalPages)}

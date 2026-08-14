@@ -71,6 +71,45 @@ Sin `onPageChange`, la navegación ocurre únicamente mediante el href nativo.
 
 <Canvas of={PaginationStories.ConLinks} />
 
+## Internacionalización de las etiquetas
+
+Todos los textos que el componente emite por su cuenta —los `aria-label` de los controles y el
+sumario de `showTotal`— están en **castellano por defecto**. Una aplicación multiidioma debe pasar
+sus propias traducciones; si no lo hace, un usuario de lector de pantalla en inglés o alemán oirá
+"Página 3".
+
+| Prop | Default | Dónde aparece |
+| --- | --- | --- |
+| `ariaLabel` | `"Paginación"` | `aria-label` del `<nav>` |
+| `pageLabel` | `` (page) => `Página ${page}` `` | `aria-label` de cada botón/enlace de página |
+| `previousLabel` | `"Página anterior"` | `aria-label` del control anterior |
+| `nextLabel` | `"Página siguiente"` | `aria-label` del control siguiente |
+| `pagesGroupLabel` | `"Páginas"` | `aria-label` del `role="group"` de los controles |
+| `pageSizeLabel` | `"Registros por página"` | `aria-label` del `Select` de registros por página |
+| `totalLabel` | `` (total) => `${total} resultados` `` | texto del sumario cuando `showTotal` |
+
+```tsx
+const t = useTranslations('pagination');
+
+<Pagination
+  total={200}
+  page={currentPage}
+  pageSize={10}
+  showTotal
+  onPageChange={setPage}
+  ariaLabel={t('label')}
+  pageLabel={(p) => t('page', { page: p })}
+  previousLabel={t('previous')}
+  nextLabel={t('next')}
+  pagesGroupLabel={t('pages')}
+  pageSizeLabel={t('pageSize')}
+  totalLabel={(n) => t('total', { count: n })}
+/>
+```
+
+Las etiquetas de las opciones del selector de registros por página (incluida `"Todos"`) no son
+props de texto: se traducen pasando `pageSizeOptions` con los `label` ya traducidos.
+
 ## Dark mode
 
 <Canvas of={PaginationStories.DarkMode} />

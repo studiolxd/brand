@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Pagination } from './Pagination';
 
 const meta: Meta<typeof Pagination> = {
@@ -34,6 +35,69 @@ export const Default: Story = {
   render: (args) => {
     const [page, setPage] = useState(args.page);
     return <Pagination {...args} page={page} onPageChange={setPage} />;
+  },
+};
+
+/**
+ * Test: sin props de etiqueta se siguen emitiendo los textos por defecto en castellano
+ * (retrocompatibilidad — nadie que ya use el componente debe ver un cambio).
+ */
+export const EtiquetasPorDefecto: Story = {
+  name: 'Test — etiquetas por defecto (castellano)',
+  args: { total: 100, page: 3, pageSize: 10 },
+  render: (args) => (
+    <Pagination {...args} onPageChange={() => {}} onPageSizeChange={() => {}} showTotal />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByLabelText('Página 3')).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Página anterior')).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Página siguiente')).toBeInTheDocument();
+    await expect(canvas.getByRole('group', { name: 'Páginas' })).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Registros por página')).toBeInTheDocument();
+    await expect(canvasElement.querySelector('.pagination__summary')).toHaveTextContent(
+      '100 resultados',
+    );
+    await expect(canvas.getByRole('navigation', { name: 'Paginación' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Test: pasando las props de etiqueta, se usan en los `aria-label` y en el sumario
+ * (caso de una app multiidioma que inyecta sus traducciones).
+ */
+export const EtiquetasTraducidas: Story = {
+  name: 'Test — etiquetas traducidas',
+  args: { total: 100, page: 3, pageSize: 10 },
+  render: (args) => (
+    <Pagination
+      {...args}
+      onPageChange={() => {}}
+      onPageSizeChange={() => {}}
+      showTotal
+      ariaLabel="Pagination"
+      pageLabel={(p) => `Page ${p}`}
+      previousLabel="Previous page"
+      nextLabel="Next page"
+      pagesGroupLabel="Pages"
+      pageSizeLabel="Rows per page"
+      totalLabel={(t) => `${t} results`}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByLabelText('Page 3')).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Previous page')).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Next page')).toBeInTheDocument();
+    await expect(canvas.getByRole('group', { name: 'Pages' })).toBeInTheDocument();
+    await expect(canvas.getByLabelText('Rows per page')).toBeInTheDocument();
+    await expect(canvasElement.querySelector('.pagination__summary')).toHaveTextContent(
+      '100 results',
+    );
+    await expect(canvas.getByRole('navigation', { name: 'Pagination' })).toBeInTheDocument();
+    // ninguna etiqueta en castellano sobrevive
+    await expect(canvas.queryByLabelText('Página 3')).toBeNull();
+    await expect(canvas.queryByLabelText('Página anterior')).toBeNull();
   },
 };
 

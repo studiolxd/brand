@@ -35,6 +35,36 @@ export interface PaginationProps {
     size?: 'sm' | 'md' | 'lg';
     /** aria-label del <nav>. Default: "Paginación" */
     ariaLabel?: string;
+    /**
+     * aria-label de cada botón/enlace de página. Default: `Página ${page}` (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    pageLabel?: (page: number) => string;
+    /**
+     * aria-label del botón "anterior". Default: "Página anterior" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    previousLabel?: string;
+    /**
+     * aria-label del botón "siguiente". Default: "Página siguiente" (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    nextLabel?: string;
+    /**
+     * aria-label del `role="group"` que envuelve los controles de página.
+     * Default: "Páginas" (castellano). Una app multiidioma debe pasarla traducida.
+     */
+    pagesGroupLabel?: string;
+    /**
+     * aria-label del selector de registros por página.
+     * Default: "Registros por página" (castellano). Una app multiidioma debe pasarla traducida.
+     */
+    pageSizeLabel?: string;
+    /**
+     * Texto del sumario que muestra `showTotal`. Default: `${total} resultados` (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    totalLabel?: (total: number) => string;
     className?: string;
 }
-export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;

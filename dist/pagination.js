@@ -45,21 +45,21 @@ function a(e, t) {
 		"..."
 	];
 }
-function o({ total: o, page: s, pageSize: c, onPageChange: l, hrefBuilder: u, linkComponent: d, onPageSizeChange: f, pageSizeOptions: p = i, showTotal: m = !1, size: h = "md", ariaLabel: g = "Paginación", className: _ }) {
+function o({ total: o, page: s, pageSize: c, onPageChange: l, hrefBuilder: u, linkComponent: d, onPageSizeChange: f, pageSizeOptions: p = i, showTotal: m = !1, size: h = "md", ariaLabel: g = "Paginación", pageLabel: _ = (e) => `Página ${e}`, previousLabel: v = "Página anterior", nextLabel: y = "Página siguiente", pagesGroupLabel: b = "Páginas", pageSizeLabel: x = "Registros por página", totalLabel: S = (e) => `${e} resultados`, className: C }) {
 	if (o === 0) return null;
-	let v = d ?? "a", y = c === "all" ? 1 : Math.ceil(o / c), b = y > 1 ? a(s, y) : [];
-	function x(e, t) {
+	let w = d ?? "a", T = c === "all" ? 1 : Math.ceil(o / c), E = T > 1 ? a(s, T) : [];
+	function D(e, t) {
 		if (e === "...") return /* @__PURE__ */ n("span", {
 			className: "pagination__ellipsis",
 			"aria-hidden": "true",
 			children: "…"
 		}, `ellipsis-${t}`);
 		let r = e === s, i = ["pagination__btn", r ? "pagination__btn--current" : ""].filter(Boolean).join(" ");
-		return u ? /* @__PURE__ */ n(v, {
+		return u ? /* @__PURE__ */ n(w, {
 			href: r ? void 0 : u(e),
 			className: i,
 			"aria-current": r ? "page" : void 0,
-			"aria-label": `Página ${e}`,
+			"aria-label": _(e),
 			onClick: !r && l ? (t) => {
 				t.preventDefault(), l(e);
 			} : void 0,
@@ -67,18 +67,18 @@ function o({ total: o, page: s, pageSize: c, onPageChange: l, hrefBuilder: u, li
 		}, e) : /* @__PURE__ */ n("button", {
 			className: i,
 			"aria-current": r ? "page" : void 0,
-			"aria-label": `Página ${e}`,
+			"aria-label": _(e),
 			onClick: r ? void 0 : () => l?.(e),
 			children: e
 		}, e);
 	}
-	function S(t, r, i) {
-		let a = r === "prev" ? "Página anterior" : "Página siguiente", o = /* @__PURE__ */ n(e, {
+	function O(t, r, i) {
+		let a = r === "prev" ? v : y, o = /* @__PURE__ */ n(e, {
 			name: "chevron",
 			size: h === "sm" ? "xs" : h === "lg" ? "md" : "sm",
 			className: r === "prev" ? "pagination__chevron--prev" : void 0
 		});
-		return u ? /* @__PURE__ */ n(v, {
+		return u ? /* @__PURE__ */ n(w, {
 			href: i ? void 0 : u(t),
 			className: "pagination__btn pagination__btn--nav",
 			"aria-label": a,
@@ -95,37 +95,37 @@ function o({ total: o, page: s, pageSize: c, onPageChange: l, hrefBuilder: u, li
 			children: o
 		});
 	}
-	let C = m || !!f;
+	let k = m || !!f;
 	return /* @__PURE__ */ r("nav", {
 		className: [
 			"pagination",
 			`pagination--${h}`,
-			_
+			C
 		].filter(Boolean).join(" "),
 		"aria-label": g,
-		children: [C && /* @__PURE__ */ r("div", {
+		children: [k && /* @__PURE__ */ r("div", {
 			className: "pagination__meta",
-			children: [m && /* @__PURE__ */ r("span", {
+			children: [m && /* @__PURE__ */ n("span", {
 				className: "pagination__summary",
-				children: [o, " resultados"]
+				children: S(o)
 			}), f && /* @__PURE__ */ n("div", {
 				className: "pagination__size-selector",
 				children: /* @__PURE__ */ n(t, {
 					options: p,
 					value: c === "all" ? "all" : String(c),
 					onValueChange: f,
-					"aria-label": "Registros por página",
+					"aria-label": x,
 					size: h
 				})
 			})]
-		}), y > 1 && /* @__PURE__ */ r("div", {
+		}), T > 1 && /* @__PURE__ */ r("div", {
 			className: "pagination__controls",
 			role: "group",
-			"aria-label": "Páginas",
+			"aria-label": b,
 			children: [
-				S(s - 1, "prev", s <= 1),
-				b.map((e, t) => x(e, t)),
-				S(s + 1, "next", s >= y)
+				O(s - 1, "prev", s <= 1),
+				E.map((e, t) => D(e, t)),
+				O(s + 1, "next", s >= T)
 			]
 		})]
 	});
