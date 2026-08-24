@@ -1,6 +1,5 @@
 'use client';
 import './async-multi-select.css';
-"use client";
 import { Icon as e } from "./icon.js";
 import { Spinner as t } from "./spinner.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";

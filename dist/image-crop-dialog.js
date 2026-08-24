@@ -1,6 +1,5 @@
 'use client';
 import './image-crop-dialog.css';
-"use client";
 import { Button as e } from "./button.js";
 import { Modal as t } from "./modal.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";

@@ -1,5 +1,5 @@
+'use client';
 import './avatar.css';
-"use client";
 import { jsx as e } from "react/jsx-runtime";
 import { useState as t } from "react";
 //#region src/stories/atoms/Avatar/Avatar.tsx

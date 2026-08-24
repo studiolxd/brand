@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v14.0.4
+
+### Corregido
+
+- **`'use client'` vuelve a la primera línea de todos los bundles.** En `dist/avatar.js` la
+  directiva quedaba detrás del `import './avatar.css'` que inyecta el post-build, y Next la
+  rechaza ("The 'use client' directive must be placed before other expressions"), rompiendo el
+  build de cualquier consumidor que llegara a `Avatar` (p. ej. vía `review-carousel`). El
+  post-build ahora arranca cualquier directiva que el bundler haya dejado dentro del fichero y la
+  repone él mismo en la línea 1, de modo que un entry con `'use client'` en el fuente ya no
+  depende de estar apuntado a mano en `clientComponents` — `avatar` se apunta igualmente.
+
+## v14.0.3
+
+Solo documentación: este fichero estrena las entradas de la serie `v14`.
+
 ## v14.0.2
 
 ### Cambiado

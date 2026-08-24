@@ -1,6 +1,5 @@
 'use client';
 import './command-palette.css';
-"use client";
 import { Modal as e } from "./modal.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import * as r from "react";

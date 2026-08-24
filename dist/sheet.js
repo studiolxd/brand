@@ -1,6 +1,5 @@
 'use client';
 import './sheet.css';
-"use client";
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";

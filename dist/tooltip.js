@@ -1,6 +1,5 @@
 'use client';
 import './tooltip.css';
-"use client";
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 import * as n from "@radix-ui/react-tooltip";
 //#region src/stories/atoms/Tooltip/Tooltip.tsx

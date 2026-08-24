@@ -1,6 +1,5 @@
 'use client';
 import './data-table.css';
-"use client";
 import { Input as e } from "./input.js";
 import { Skeleton as t } from "./skeleton.js";
 import { Pagination as n } from "./pagination.js";

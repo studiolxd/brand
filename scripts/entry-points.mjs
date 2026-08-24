@@ -117,6 +117,7 @@ export const clientComponents = new Set([
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'app-shell',
+  'avatar',
   'app-header',
   'modal',
   'org-switcher', 'user-menu', 'sidebar-nav',

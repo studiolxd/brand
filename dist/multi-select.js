@@ -1,6 +1,5 @@
 'use client';
 import './multi-select.css';
-"use client";
 import { Icon as e } from "./icon.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import { useEffect as r, useId as i, useRef as a, useState as o } from "react";
