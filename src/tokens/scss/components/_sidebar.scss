@@ -13,3 +13,9 @@ $lxd-sidebar-expand-delay: 150; // Delay (ms) antes de expandir al entrar con el
 $lxd-sidebar-collapse-delay: 100; // Delay (ms) antes de replegar al salir
 $lxd-sidebar-transition-duration: 250ms; // Duración de la animación de expansión/repliegue
 $lxd-sidebar-transition-easing: ease-in-out; // Curva de animación de apertura/cierre
+$lxd-sidebar-group-padding-block: 0.5rem; // Padding vertical de una sección del panel
+$lxd-sidebar-group-padding-inline: 0.75rem; // Padding horizontal de una sección del panel
+$lxd-sidebar-group-gap: 0.25rem; // Separación entre elementos dentro de una sección
+$lxd-sidebar-separator-color: #d0d0d0; // Color de la línea divisoria entre secciones
+$lxd-sidebar-separator-height: 1px; // Grosor de la línea divisoria
+$lxd-sidebar-separator-margin-block: 0.5rem; // Margen vertical de la línea divisoria

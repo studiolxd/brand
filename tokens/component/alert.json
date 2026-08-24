@@ -18,15 +18,15 @@
     "close-hover-color":    { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre en hover" },
     "close-size":           { "$value": "{icon.size-sm}",               "$type": "dimension", "$description": "Tamaño del icono de cierre (18px)" },
 
-    "success-bg":                    { "$value": "{color.success-on-light}", "$type": "color", "$description": "Fondo success — verde semántico" },
-    "success-border-color":          { "$value": "{color.success-on-light}", "$type": "color", "$description": "Borde igual al fondo success" },
-    "success-title-color":           { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Título blanco sobre fondo success" },
-    "success-description-color":     { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Descripción blanca sobre fondo success" },
+    "success-bg":                    { "$value": "{color.success-fill}", "$type": "color", "$description": "Fondo success — verde semántico" },
+    "success-border-color":          { "$value": "{color.success-fill}", "$type": "color", "$description": "Borde igual al fondo success" },
+    "success-title-color":           { "$value": "{color.success-fill-text}",     "$type": "color", "$description": "Título blanco sobre fondo success" },
+    "success-description-color":     { "$value": "{color.success-fill-text}",     "$type": "color", "$description": "Descripción blanca sobre fondo success" },
 
-    "error-bg":                      { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Fondo error — rojo semántico" },
-    "error-border-color":            { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Borde igual al fondo error" },
-    "error-title-color":             { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Título blanco sobre fondo error" },
-    "error-description-color":       { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Descripción blanca sobre fondo error" },
+    "error-bg":                      { "$value": "{color.error-fill}",   "$type": "color", "$description": "Fondo error — rojo semántico" },
+    "error-border-color":            { "$value": "{color.error-fill}",   "$type": "color", "$description": "Borde igual al fondo error" },
+    "error-title-color":             { "$value": "{color.error-fill-text}",     "$type": "color", "$description": "Título blanco sobre fondo error" },
+    "error-description-color":       { "$value": "{color.error-fill-text}",     "$type": "color", "$description": "Descripción blanca sobre fondo error" },
 
     "warning-bg":                    { "$value": "{color.accent-2}",         "$type": "color", "$description": "Fondo warning — amarillo brand" },
     "warning-border-color":          { "$value": "{color.accent-2}",         "$type": "color", "$description": "Borde igual al fondo warning" },

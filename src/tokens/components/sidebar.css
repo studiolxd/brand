@@ -14,6 +14,12 @@
   --sidebar-padding-block: var(--spacing-4); /** Padding vertical interno del panel */
   --sidebar-transition-duration: var(--motion-duration-base); /** Duración de la animación de expansión/repliegue */
   --sidebar-transition-easing: var(--motion-easing-in-out); /** Curva de animación de apertura/cierre */
+  --sidebar-group-padding-block: var(--spacing-2); /** Padding vertical de una sección del panel */
+  --sidebar-group-padding-inline: var(--spacing-3); /** Padding horizontal de una sección del panel */
+  --sidebar-group-gap: var(--spacing-1); /** Separación entre elementos dentro de una sección */
+  --sidebar-separator-color: var(--color-grey-light); /** Color de la línea divisoria entre secciones */
+  --sidebar-separator-height: var(--border-width-sm); /** Grosor de la línea divisoria */
+  --sidebar-separator-margin-block: var(--spacing-2); /** Margen vertical de la línea divisoria */
   --sidebar-bg: var(--color-background-light); /** Fondo del panel de la sidebar */
 }
 
@@ -21,5 +27,6 @@
 [data-theme="dark"],
 html.dark {
   --sidebar-border-inline-end-color: rgba(255, 255, 255, 0.15); /** Borde derecho — surface-dark. Sustituye a la sombra, invisible sobre fondo oscuro. */
+  --sidebar-separator-color: rgba(255, 255, 255, 0.15); /** Color de la línea divisoria — surface-dark */
   --sidebar-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
 }

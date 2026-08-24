@@ -5,7 +5,7 @@ import { Tag as n } from "./tag.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/ProjectCard/ProjectCard.tsx
 function a({ project: a, hideTag: o = !1, className: s }) {
-	let { category: c, tagVariant: l = "default", photo: u, photoAlt: d, title: f, description: p, href: m, ctaLabel: h = "Leer más" } = a, g = /* @__PURE__ */ r("div", {
+	let { category: c, tagVariant: l = "neutral", photo: u, photoAlt: d, title: f, description: p, href: m, ctaLabel: h = "Leer más" } = a, g = /* @__PURE__ */ r("div", {
 		className: "project-card__image-wrap",
 		children: /* @__PURE__ */ r("img", {
 			src: u,

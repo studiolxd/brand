@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --tooltip-max-width: 20rem; /** Ancho máximo antes de romper línea */
+  --tooltip-border-radius: var(--border-radius-sm); /** Radio de esquinas del bocadillo */
+  --tooltip-padding-block: var(--spacing-1); /** Padding vertical del bocadillo */
+  --tooltip-padding-inline: var(--spacing-2); /** Padding horizontal del bocadillo */
+  --tooltip-font-family: var(--font-family-sans); /** Tipografía del bocadillo */
+  --tooltip-font-size: var(--font-size-1); /** Tamaño de texto del bocadillo */
+  --tooltip-line-height: var(--line-height-snug); /** Interlineado del bocadillo */
+  --tooltip-z-index: var(--floating-panel-z-index); /** Capa z — la misma que el resto de paneles flotantes */
+  --tooltip-bg: var(--color-background-dark); /** Fondo del bocadillo — superficie invertida para máximo contraste */
+  --tooltip-color: var(--color-text-on-dark); /** Color del texto del bocadillo */
+  --tooltip-transition-duration: var(--floating-panel-transition-duration); /** Duración de la animación de entrada/salida */
+  --tooltip-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
+}

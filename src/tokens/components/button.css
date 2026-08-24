@@ -129,15 +129,15 @@
   --button-destructive-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
   --button-destructive-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-destructive-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
-  --button-destructive-focus-ring-color: var(--color-destructive-on-light); /** Focus ring color */
-  --button-destructive-color: var(--color-destructive-on-light); /** Text color */
-  --button-destructive-border: var(--color-destructive-on-light); /** Border color */
-  --button-destructive-hover-bg: var(--color-destructive-on-light); /** Hover background */
-  --button-destructive-hover-color: var(--color-text-on-dark); /** Hover text color */
-  --button-destructive-hover-border: var(--color-destructive-on-light); /** Hover border color */
-  --button-destructive-active-bg: var(--color-destructive-on-light); /** Active background */
-  --button-destructive-active-color: var(--color-text-on-dark); /** Active text color */
-  --button-destructive-active-border: var(--color-destructive-on-light); /** Active border color */
+  --button-destructive-focus-ring-color: var(--color-destructive-text-on-light); /** Focus ring color */
+  --button-destructive-color: var(--color-destructive-text-on-light); /** Text color */
+  --button-destructive-border: var(--color-destructive-text-on-light); /** Border color */
+  --button-destructive-hover-bg: var(--color-destructive-fill); /** Hover background */
+  --button-destructive-hover-color: var(--color-destructive-fill-text); /** Hover text color */
+  --button-destructive-hover-border: var(--color-destructive-fill); /** Hover border color */
+  --button-destructive-active-bg: var(--color-destructive-fill); /** Active background */
+  --button-destructive-active-color: var(--color-destructive-fill-text); /** Active text color */
+  --button-destructive-active-border: var(--color-destructive-fill); /** Active border color */
   --button-outline-border-radius: var(--button-border-radius); /** Border radius */
   --button-outline-border-width: var(--button-border-width); /** Border width */
   --button-outline-font-family: var(--button-font-family); /** Font family */
@@ -205,15 +205,15 @@ html.dark {
   --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — surface-dark */
   --button-text-disabled-color: var(--color-grey-light); /** Text color when disabled — surface-dark */
   --button-ghost-disabled-color: var(--color-grey-light); /** Text color when disabled — surface-dark */
-  --button-destructive-color: var(--color-error-on-dark); /** Text color — surface-dark */
-  --button-destructive-border: var(--color-error-on-dark); /** Border color — surface-dark */
-  --button-destructive-hover-bg: var(--color-error-on-dark); /** Hover background — surface-dark */
-  --button-destructive-hover-color: var(--color-text-on-light); /** Hover text color — surface-dark */
-  --button-destructive-hover-border: var(--color-error-on-dark); /** Hover border color — surface-dark */
-  --button-destructive-active-bg: var(--color-error-on-dark); /** Active background — surface-dark */
-  --button-destructive-active-color: var(--color-text-on-light); /** Active text color — surface-dark */
-  --button-destructive-active-border: var(--color-error-on-dark); /** Active border color — surface-dark */
-  --button-destructive-focus-ring-color: var(--color-error-on-dark); /** Focus ring color — surface-dark */
+  --button-destructive-color: var(--color-destructive-text-on-dark); /** Text color — surface-dark */
+  --button-destructive-border: var(--color-destructive-text-on-dark); /** Border color — surface-dark */
+  --button-destructive-hover-bg: var(--color-destructive-fill); /** Hover background — surface-dark (fill universal, mismo rojo que en claro) */
+  --button-destructive-hover-color: var(--color-destructive-fill-text); /** Hover text color — surface-dark */
+  --button-destructive-hover-border: var(--color-destructive-fill); /** Hover border color — surface-dark */
+  --button-destructive-active-bg: var(--color-destructive-fill); /** Active background — surface-dark */
+  --button-destructive-active-color: var(--color-destructive-fill-text); /** Active text color — surface-dark */
+  --button-destructive-active-border: var(--color-destructive-fill); /** Active border color — surface-dark */
+  --button-destructive-focus-ring-color: var(--color-destructive-text-on-dark); /** Focus ring color — surface-dark */
   --button-outline-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --button-outline-border: var(--color-text-on-dark); /** Border color — surface-dark */
   --button-outline-hover-color: var(--color-text-on-light); /** Hover text color — surface-dark */

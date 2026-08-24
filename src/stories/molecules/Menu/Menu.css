@@ -1,0 +1,121 @@
+@keyframes menu-open {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes menu-close {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+
+.menu__content {
+  box-sizing: border-box;
+  background-color: var(--menu-bg);
+  border-width: var(--menu-border-width);
+  border-style: solid;
+  border-color: var(--menu-border-color);
+  border-radius: var(--menu-border-radius);
+  box-shadow: var(--menu-shadow);
+  padding-block: var(--menu-padding-block);
+  padding-inline: 0;
+  z-index: var(--menu-z-index);
+  outline: none;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+}
+
+.menu__content[data-state="open"] {
+  animation: menu-open var(--menu-transition-duration) var(--menu-transition-easing);
+}
+
+.menu__content[data-state="closed"] {
+  animation: menu-close var(--menu-transition-duration) var(--menu-transition-easing);
+}
+
+.menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--menu-item-icon-gap);
+  padding-block: var(--menu-item-padding-block);
+  padding-inline: var(--menu-item-padding-inline);
+  margin-inline: var(--menu-padding-inline);
+  border-radius: var(--menu-item-border-radius);
+  font-family: var(--menu-item-font-family);
+  font-size: var(--menu-item-font-size);
+  font-weight: var(--menu-item-font-weight);
+  line-height: var(--menu-item-line-height);
+  color: var(--menu-item-color);
+  cursor: var(--menu-item-cursor);
+  text-decoration: none;
+  outline: none;
+  transition:
+    background-color var(--menu-transition-duration) var(--menu-transition-easing),
+    color var(--menu-transition-duration) var(--menu-transition-easing);
+}
+
+.menu__item:focus-visible {
+  outline: none;
+}
+
+.menu__item[data-highlighted] {
+  background-color: var(--menu-item-hover-bg);
+  color: var(--menu-item-hover-color);
+}
+
+.menu__item[data-disabled] {
+  opacity: var(--menu-disabled-opacity);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.menu__item.menu__item--destructive {
+  color: var(--menu-item-destructive-color);
+}
+
+.menu__item.menu__item--destructive[data-highlighted] {
+  background-color: var(--menu-item-destructive-hover-bg);
+  color: var(--menu-item-destructive-hover-color);
+}
+
+.menu__item svg {
+  flex-shrink: 0;
+  width: var(--menu-item-icon-size);
+  height: var(--menu-item-icon-size);
+}
+
+.menu__label {
+  padding-block: var(--menu-label-padding-block);
+  padding-inline: var(--menu-label-padding-inline);
+  font-family: var(--menu-item-font-family);
+  font-size: var(--menu-label-font-size);
+  font-weight: var(--menu-label-font-weight);
+  color: var(--menu-label-color);
+}
+
+/* El glifo del radio es un `:before` posicionado en absoluto dentro del input,
+   que no aporta altura propia: con su tamaño por defecto no cuadra con el 1lh
+   del texto de la fila y se lee descolocado. Se fija a 1lh y no encoge cuando
+   una etiqueta larga hace saltar la fila. */
+.menu__radio-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--menu-item-icon-size);
+  height: 1lh;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* Las filas de radio no llevan fondo de hover/foco: ya tienen el fondo propio
+   del glifo, y un segundo fondo a lo ancho encima se lee como dos superficies
+   apiladas en vez de como un estado. */
+.menu__item[role="menuitemradio"][data-highlighted] {
+  background-color: transparent;
+}
+
+.menu__separator {
+  height: var(--menu-separator-height);
+  background-color: var(--menu-separator-color);
+  margin-block: var(--menu-separator-margin-block);
+  margin-inline: 0;
+  border: none;
+}

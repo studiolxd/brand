@@ -10,11 +10,6 @@
   white-space: nowrap;
 }
 
-.tag--default {
-  background-color: var(--tag-default-bg);
-  color: var(--tag-default-color);
-}
-
 .tag--primary {
   background-color: var(--tag-primary-bg);
   color: var(--tag-primary-color);

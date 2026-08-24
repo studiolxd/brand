@@ -5,7 +5,7 @@
 }
 
 .multi-select-field--error .multi-select {
-  --multi-select-border-color: var(--color-error-on-light);
+  --multi-select-border-color: var(--color-error-text-on-light);
 }
 
 .multi-select-field__error {

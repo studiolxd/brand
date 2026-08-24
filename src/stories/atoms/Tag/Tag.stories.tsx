@@ -11,7 +11,7 @@ const meta: Meta<typeof Tag> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'neutral', 'info', 'warning', 'success', 'danger'],
+      options: ['primary', 'accent-1', 'accent-2', 'support-1', 'support-2', 'neutral', 'info', 'warning', 'success', 'danger'],
       description: 'Variante de color del tag.',
     },
     children: {
@@ -21,7 +21,7 @@ const meta: Meta<typeof Tag> = {
   },
   args: {
     children: 'E-learning',
-    variant: 'default',
+    variant: 'neutral',
   },
 };
 
@@ -44,8 +44,6 @@ export const PropPassthrough: Story = {
     await expect(tag).toHaveAttribute('aria-label', 'estado');
   },
 };
-
-export const Default: Story = {};
 
 export const Primary: Story = {
   args: { variant: 'primary', children: 'Diseño instruccional' },
@@ -70,7 +68,6 @@ export const Support2: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-      <Tag variant="default">E-learning</Tag>
       <Tag variant="primary">Diseño instruccional</Tag>
       <Tag variant="accent-1">Formación presencial</Tag>
       <Tag variant="accent-2">Plataformas LMS</Tag>

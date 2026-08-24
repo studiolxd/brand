@@ -45,7 +45,7 @@ describe('flattenTokens', () => {
     const tree = {
       color: {
         text: {
-          default: { $value: '#111e30', $type: 'color' },
+          'on-light': { $value: '#111e30', $type: 'color' },
         },
       },
     };

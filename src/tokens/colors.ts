@@ -34,6 +34,10 @@ const refMap: Record<string, string> = {
   ...Object.fromEntries(Object.entries(palette.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
   ...Object.fromEntries(Object.entries(neutral.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
   ...Object.fromEntries(Object.entries(system.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
+  ...Object.fromEntries(Object.entries(feedback.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
+  ...Object.fromEntries(Object.entries(brand.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
+  ...Object.fromEntries(Object.entries(semantic.color.text).map(([k, v]) => [`color.text.${k}`, (v as TokenEntry).$value])),
+  ...Object.fromEntries(Object.entries(semantic.color.background).map(([k, v]) => [`color.background.${k}`, (v as TokenEntry).$value])),
 };
 
 
@@ -41,10 +45,10 @@ export const textDefault        = resolveRef(semantic.color.text['on-light'].$va
 export const textDark           = resolveRef(semantic.color.text['on-dark'].$value, refMap);
 export const textMuted          = resolveRef(semantic.color.text['muted-on-light'].$value, refMap);
 export const textMutedDark      = resolveRef(semantic.color.text['muted-on-dark'].$value, refMap);
-export const errorColor          = resolveRef(feedback.color['error-on-light'].$value, refMap);
-export const successColor        = resolveRef(feedback.color['success-on-light'].$value, refMap);
-export const errorDarkColor      = resolveRef(feedback.color['error-on-dark'].$value, refMap);
-export const successDarkColor    = resolveRef(feedback.color['success-on-dark'].$value, refMap);
+export const errorColor          = resolveRef(feedback.color['error-text-on-light'].$value, refMap);
+export const successColor        = resolveRef(feedback.color['success-text-on-light'].$value, refMap);
+export const errorDarkColor      = resolveRef(feedback.color['error-text-on-dark'].$value, refMap);
+export const successDarkColor    = resolveRef(feedback.color['success-text-on-dark'].$value, refMap);
 type TagTokenEntry = { $value: string; $type: string; $description: string };
 const t = tag.tag as Record<string, TagTokenEntry>;
 
@@ -59,6 +63,11 @@ export const warningBgColor = { name: 'Warning bg', token: '--tag-warning-bg',  
 export const successBgColor = { name: 'Success bg', token: '--tag-success-bg',  hex: resolveRef(t['success-bg'].$value, refMap) };
 export const dangerBgColor  = { name: 'Danger bg',  token: '--tag-danger-bg',   hex: resolveRef(t['danger-bg'].$value, refMap) };
 export const neutralBgColor = { name: 'Neutral bg', token: '--tag-neutral-bg',  hex: resolveRef(t['neutral-bg'].$value, refMap) };
+
+export const support1Color   = resolveRef(t['support-1-color'].$value, refMap);
+export const support2Color   = resolveRef(t['support-2-color'].$value, refMap);
+export const support1BgColor = { name: 'Support 1 bg', token: '--tag-support-1-bg', hex: resolveRef(t['support-1-bg'].$value, refMap) };
+export const support2BgColor = { name: 'Support 2 bg', token: '--tag-support-2-bg', hex: resolveRef(t['support-2-bg'].$value, refMap) };
 
 export const backgroundColors = [
   { name: 'Background light', token: '--color-background-light', hex: resolveRef(semantic.color.background.light.$value, refMap) },

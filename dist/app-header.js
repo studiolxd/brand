@@ -1,5 +1,6 @@
 'use client';
 import './app-header.css';
+"use client";
 import { Hamburger as e } from "./hamburger.js";
 import { t } from "./_shared/AppShellContext.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";

@@ -18,7 +18,7 @@
     "drag-border-style":           { "$value": "solid",                       "$type": "string",    "$description": "Estilo de borde en drag activo" },
     "drag-bg":                     { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo en drag activo" },
 
-    "error-border-color":          { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Borde en estado de error" },
+    "error-border-color":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Borde en estado de error" },
     "error-border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Estilo de borde en error" },
     "error-bg":                    { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo en estado de error" },
 
@@ -40,10 +40,10 @@
     "item-name-color":             { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del nombre de archivo" },
     "item-size-font-size":         { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Tamaño del peso del archivo" },
     "item-size-color":             { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del peso del archivo" },
-    "item-error-color":            { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Color del mensaje de error por archivo" },
+    "item-error-color":            { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color del mensaje de error por archivo" },
     "item-error-font-size":        { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Tamaño del mensaje de error por archivo" },
 
-    "item-error-border-color":     { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Borde del item con error" },
+    "item-error-border-color":     { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Borde del item con error" },
     "item-error-bg":               { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del item con error" },
 
     "thumb-size":                  { "$value": "2.5rem",                      "$type": "dimension", "$description": "Tamaño del thumbnail" },
@@ -52,7 +52,7 @@
     "thumb-icon-color":            { "$value": "{color.grey-dark}",           "$type": "color",     "$description": "Color del icono de archivo genérico" },
 
     "remove-color":                { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del botón eliminar" },
-    "remove-color-hover":          { "$value": "{color.error-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover" },
+    "remove-color-hover":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover" },
 
     "progress-margin-block-start": { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Margen superior de la barra de progreso" },
     "progress-height":             { "$value": "0.375rem",                    "$type": "dimension", "$description": "Altura de la barra de progreso" },

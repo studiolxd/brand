@@ -10,7 +10,6 @@
   --number-badge-font-size: var(--font-size-1); /** Tamaño de fuente — 14px */
   --number-badge-font-weight: var(--font-weight-semibold); /** Seminegrita para legibilidad en tamaño pequeño */
   --number-badge-line-height: var(--line-height-none); /** Sin interlineado extra — centrado por flexbox */
-  --number-badge-danger-bg: var(--color-red-on-light); /** Fondo danger (red) */
   --number-badge-danger-color: var(--color-white); /** Texto sobre danger */
   --number-badge-success-color: var(--color-white); /** Texto sobre success */
   --number-badge-neutral-bg: var(--color-grey-darkest); /** Fondo neutral (dark grey) */
@@ -25,5 +24,6 @@
   --number-badge-support-1-color: var(--color-text-on-light); /** Texto sobre support-1 */
   --number-badge-support-2-bg: var(--color-support-2); /** Fondo support-2 (cayenne) */
   --number-badge-support-2-color: var(--color-text-on-light); /** Texto sobre support-2 */
-  --number-badge-success-bg: var(--color-success-on-light); /** Fondo success (green) */
+  --number-badge-danger-bg: var(--color-error-fill); /** Fondo danger (red) */
+  --number-badge-success-bg: var(--color-success-fill); /** Fondo success (green) */
 }

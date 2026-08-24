@@ -46,13 +46,13 @@
   --file-upload-subtext-color: var(--color-text-muted-on-light); /** Color del texto secundario y restricciones */
   --file-upload-icon-color: var(--color-text-on-light); /** Color del icono upload */
   --file-upload-drag-border-color: var(--color-primary); /** Borde cuando hay drag activo */
-  --file-upload-error-border-color: var(--color-error-on-light); /** Borde en estado de error */
+  --file-upload-error-border-color: var(--color-error-text-on-light); /** Borde en estado de error */
   --file-upload-item-name-font-weight: var(--font-weight-default); /** Peso del nombre de archivo */
   --file-upload-item-name-color: var(--color-text-on-light); /** Color del nombre de archivo */
   --file-upload-item-size-color: var(--color-text-muted-on-light); /** Color del peso del archivo */
-  --file-upload-item-error-color: var(--color-error-on-light); /** Color del mensaje de error por archivo */
-  --file-upload-item-error-border-color: var(--color-error-on-light); /** Borde del item con error */
+  --file-upload-item-error-color: var(--color-error-text-on-light); /** Color del mensaje de error por archivo */
+  --file-upload-item-error-border-color: var(--color-error-text-on-light); /** Borde del item con error */
   --file-upload-remove-color: var(--color-text-muted-on-light); /** Color del botón eliminar */
-  --file-upload-remove-color-hover: var(--color-error-on-light); /** Color del botón eliminar al hacer hover */
+  --file-upload-remove-color-hover: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
   --file-upload-progress-fill: var(--color-primary); /** Color del relleno de progreso */
 }

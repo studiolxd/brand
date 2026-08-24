@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import './Tag.css';
 
 export type TagVariant =
-  | 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2'
+  | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2'
   | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
 
 export interface TagProps extends React.ComponentPropsWithoutRef<'span'> {
@@ -16,7 +16,7 @@ export interface TagProps extends React.ComponentPropsWithoutRef<'span'> {
  * clases propias.
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag({
-  variant = 'default',
+  variant = 'neutral',
   className,
   children,
   ...rest

@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import './Avatar.css';
 
 export interface AvatarProps {
@@ -29,6 +32,10 @@ export function Avatar({
   shape = 'circle',
   className,
 }: AvatarProps) {
+  // Una imagen que falla al cargar degrada a las iniciales (paridad con el
+  // Avatar de Radix que los adaptadores del kit envolvían) — nunca un icono
+  // de imagen rota en el shell.
+  const [failed, setFailed] = useState(false);
   const base = [
     'avatar',
     `avatar--${size}`,
@@ -36,12 +43,13 @@ export function Avatar({
     className,
   ].filter(Boolean).join(' ');
 
-  if (src) {
+  if (src && !failed) {
     return (
       <img
         src={src}
         alt={alt ?? name ?? ''}
         className={base}
+        onError={() => setFailed(true)}
       />
     );
   }

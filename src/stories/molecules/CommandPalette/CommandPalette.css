@@ -1,0 +1,84 @@
+.command-palette {
+  display: flex;
+  flex-direction: column;
+  max-height: var(--command-palette-max-height);
+}
+
+.command-palette__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding-block: var(--command-palette-input-padding-block);
+  padding-inline: var(--command-palette-input-padding-inline);
+  border: 0;
+  border-block-end: var(--command-palette-input-border-width) solid var(--command-palette-input-border-color);
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: var(--command-palette-input-font-size);
+  outline: none;
+}
+
+.command-palette__input::placeholder {
+  color: var(--command-palette-input-placeholder-color);
+}
+
+.command-palette__list {
+  overflow-y: auto;
+  padding: var(--command-palette-list-padding);
+}
+
+.command-palette__empty {
+  padding-block: var(--command-palette-empty-padding-block);
+  padding-inline: var(--command-palette-empty-padding-inline);
+  text-align: center;
+  font-size: var(--command-palette-empty-font-size);
+  color: var(--command-palette-empty-color);
+}
+
+/* cmdk renderiza el título del grupo en un nodo propio, no en el del Group. */
+.command-palette__group [cmdk-group-heading] {
+  padding-block: var(--command-palette-heading-padding-block);
+  padding-inline: var(--command-palette-heading-padding-inline);
+  font-size: var(--command-palette-heading-font-size);
+  font-weight: var(--command-palette-heading-font-weight);
+  color: var(--command-palette-heading-color);
+}
+
+.command-palette__item {
+  display: flex;
+  align-items: center;
+  gap: var(--command-palette-item-gap);
+  padding-block: var(--command-palette-item-padding-block);
+  padding-inline: var(--command-palette-item-padding-inline);
+  border-radius: var(--command-palette-item-border-radius);
+  font-size: var(--command-palette-item-font-size);
+  color: var(--command-palette-item-color);
+  cursor: pointer;
+  outline: none;
+}
+
+.command-palette__item[data-selected='true'] {
+  background-color: var(--command-palette-item-selected-bg);
+  color: var(--command-palette-item-selected-color);
+}
+
+.command-palette__item[data-disabled='true'] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.command-palette__item-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.command-palette__item-icon svg {
+  width: var(--command-palette-item-icon-size);
+  height: var(--command-palette-item-icon-size);
+}
+
+.command-palette__separator {
+  height: var(--command-palette-separator-height);
+  margin-block: var(--command-palette-separator-margin-block);
+  background-color: var(--command-palette-separator-color);
+}

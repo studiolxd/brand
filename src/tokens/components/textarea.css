@@ -43,7 +43,7 @@
   --textarea-error-border-color: var(--color-primary); /** Error border color */
   --textarea-error-placeholder-color: var(--color-text-placeholder); /** Error placeholder color */
   --textarea-error-focus-border-color: var(--color-primary); /** Error border color on focus */
-  --textarea-error-focus-ring-color: var(--color-error-on-light); /** Error focus ring color */
+  --textarea-error-focus-ring-color: var(--color-error-text-on-light); /** Error focus ring color */
 }
 
 .surface-dark,
@@ -55,5 +55,5 @@ html.dark {
   --textarea-placeholder-color: var(--color-text-muted-on-dark); /** Placeholder text color — surface-dark */
   --textarea-focus-border-color: var(--color-text-on-dark); /** Border color on focus — surface-dark */
   --textarea-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
-  --textarea-error-focus-ring-color: var(--color-error-on-dark); /** Error focus ring color — surface-dark */
+  --textarea-error-focus-ring-color: var(--color-error-text-on-dark); /** Error focus ring color — surface-dark */
 }

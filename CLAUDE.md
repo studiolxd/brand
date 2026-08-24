@@ -18,6 +18,8 @@ npm run build-storybook  # Build estático de Storybook
 
 # Quality
 npm run lint             # Run ESLint (flat config format)
+npm test                 # Vitest: proyectos unit (node) + components (jsdom + Testing Library)
+npm run test:stories     # Vitest: stories en navegador (Playwright/Chromium) — pesado
 
 # Docker — Storybook image → ghcr.io
 docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:latest --push .
@@ -27,7 +29,9 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 >
 > **IMPORTANTE:** `npm run build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css` ni `dist/tokens.css`. Después de `build:lib` ejecutar siempre `npm run build:css && npm run build:tokens-css`, o usar `npm run prepare` para el build completo.
 
-Testing: Storybook Vitest addon con Playwright (Chromium). No hay `npm test` separado.
+Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `npm test` corre los dos primeros; `npm run test:stories` el tercero.
+
+Chromatic: el token del proyecto NO va en el package.json — exportar `CHROMATIC_PROJECT_TOKEN` antes de `npm run chromatic`.
 
 ## Architecture
 
@@ -71,6 +75,7 @@ Cada componente nuevo debe registrarse en **tres sitios** o no estará disponibl
 4. **Especificidad BEM.** Los modificadores usan doble clase (`.block.block--modifier`) para ganar sobre el selector base.
 5. **Ejes inline/block, nunca x/y.** Los tokens y propiedades CSS de padding y similares usan siempre `inline`/`block` (alineado con propiedades lógicas CSS). En CSS escribir siempre `padding-block` + `padding-inline` desdoblados, nunca la shorthand `padding: a b`.
 6. **Documentación MDX en castellano.** Cualquier archivo `.mdx` nuevo o modificado debe estar íntegramente en castellano.
+7. **Tokens de feedback (error/success/destructive): el sufijo dice la propiedad CSS de destino.** `*-text-on-light|dark` SOLO `color`/borde/outline sobre la superficie ambiente, jamás `background`; `*-fill` SOLO fondos sólidos (universal: mismo color en superficie clara y oscura); `*-fill-text` para el contenido sobre un fill. NO existe par "tint" (contenedor suave): se retiró el 2026-08-24 por inventado — no reintroducir.
 
 ### Selectores de elemento vs. clase
 
@@ -205,7 +210,7 @@ ESLint 9 flat config (`eslint.config.js`). TypeScript, React Hooks, React Refres
 
 ## Versionado
 
-El paquete sigue **semver** y se distribuye vía git tags. Los consumidores (la web) pinean a un tag específico (`github:studiolxd/brand#v0.1.0`).
+El paquete sigue **semver** y se distribuye vía git tags. Los consumidores pinean a un tag específico (`github:studiolxd/brand#vX.Y.Z`): la web, 360, learn-app, rubik, keycloakify-starter y **las 10 apps de la suite slxd** (monorepo `/Users/suvi/Dev/slxd`, que desde v14 consume este paquete en lugar de su copia `@slxd/ui`, ya retirada). Un breaking aquí rompe a todos al hacer bump: majors con cuidado.
 
 ### Reglas
 

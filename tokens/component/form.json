@@ -24,8 +24,8 @@
       "font-size":    { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Font size del mensaje de error (14px)" },
       "font-weight":  { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
       "line-height":  { "$value": "{line-height.normal}",   "$type": "number",    "$description": "Line height del mensaje de error" },
-      "color":        { "$value": "{color.error-on-light}",  "$type": "color",     "$description": "Color del mensaje de error" },
-      "surface-dark-color": { "$value": "{color.error-on-dark}", "$type": "color", "$description": "Color del mensaje de error — surface-dark" }
+      "color":        { "$value": "{color.error-text-on-light}",  "$type": "color",     "$description": "Color del mensaje de error" },
+      "surface-dark-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Color del mensaje de error — surface-dark" }
     },
 
     "helper": {

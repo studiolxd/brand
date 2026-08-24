@@ -1,12 +1,9 @@
 import { useState, useCallback, type ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Tag } from '../../atoms/Tag/Tag';
+import type { TagVariant } from '../../atoms/Tag/Tag';
 import { Modal } from '../Modal/Modal';
 import './CalendarPlanner.css';
-
-type TagVariant =
-  | 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2'
-  | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
 
 export interface PlannerEvent {
   id: string;
@@ -255,7 +252,7 @@ export function CalendarPlanner({
                     ) : (
                       <>
                         {visible.map((event) => (
-                          <Tag key={event.id} variant={event.variant ?? 'default'}>
+                          <Tag key={event.id} variant={event.variant ?? 'neutral'}>
                             {event.label}
                           </Tag>
                         ))}
@@ -289,7 +286,7 @@ export function CalendarPlanner({
       >
         <div className="calendar-planner__modal-events">
           {modalDay?.events.map((event) => (
-            <Tag key={event.id} variant={event.variant ?? 'default'}>
+            <Tag key={event.id} variant={event.variant ?? 'neutral'}>
               {event.label}
             </Tag>
           ))}

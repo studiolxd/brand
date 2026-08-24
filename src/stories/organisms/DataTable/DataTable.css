@@ -1,0 +1,18 @@
+/* Bloque cohesionado: el hueco entre buscador, tabla y pie es más corto que
+   el de una sección de página. */
+.data-table > * + * {
+  margin-block-start: var(--data-table-block-gap);
+}
+
+.data-table__toolbar,
+.data-table__toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--data-table-toolbar-gap);
+}
+
+/* Una tabla ancha scrollea dentro de su caja, no arrastra la página entera. */
+.data-table__scroll {
+  overflow-x: auto;
+}

@@ -1,9 +1,16 @@
 {
   "color": {
-    "error-on-light":       { "$value": "{color.red-on-light}",   "$type": "color", "$description": "Error role — maps to system red" },
-    "error-on-dark":        { "$value": "{color.red-on-dark}",    "$type": "color", "$description": "Error role on dark background" },
-    "success-on-light":     { "$value": "{color.green-on-light}", "$type": "color", "$description": "Success role — maps to system green" },
-    "success-on-dark":      { "$value": "{color.green-on-dark}",  "$type": "color", "$description": "Success role on dark background" },
-    "destructive-on-light": { "$value": "{color.red-on-light}",   "$type": "color", "$description": "Destructive action role — maps to system red" }
+    "error-text-on-light":       { "$value": "{color.red}",         "$type": "color", "$description": "Error — texto/icono/borde sobre superficie clara. Nunca como background" },
+    "error-text-on-dark":        { "$value": "{color.red-light}",   "$type": "color", "$description": "Error — texto/icono/borde sobre superficie oscura (prussian). Nunca como background" },
+    "error-fill":                { "$value": "{color.red}",         "$type": "color", "$description": "Error — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto" },
+    "error-fill-text":           { "$value": "{color.white}",       "$type": "color", "$description": "Error — contenido sobre error-fill" },
+    "success-text-on-light":     { "$value": "{color.green}",       "$type": "color", "$description": "Success — texto/icono/borde sobre superficie clara. Nunca como background" },
+    "success-text-on-dark":      { "$value": "{color.green-light}", "$type": "color", "$description": "Success — texto/icono/borde sobre superficie oscura (prussian). Nunca como background" },
+    "success-fill":              { "$value": "{color.green}",       "$type": "color", "$description": "Success — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto" },
+    "success-fill-text":         { "$value": "{color.white}",       "$type": "color", "$description": "Success — contenido sobre success-fill" },
+    "destructive-text-on-light": { "$value": "{color.red}",         "$type": "color", "$description": "Destructive — texto/icono/borde sobre superficie clara. Nunca como background" },
+    "destructive-text-on-dark":  { "$value": "{color.red-light}",   "$type": "color", "$description": "Destructive — texto/icono/borde sobre superficie oscura (prussian). Nunca como background" },
+    "destructive-fill":          { "$value": "{color.red}",         "$type": "color", "$description": "Destructive — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto" },
+    "destructive-fill-text":     { "$value": "{color.white}",       "$type": "color", "$description": "Destructive — contenido sobre destructive-fill" }
   }
 }

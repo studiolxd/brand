@@ -25,13 +25,13 @@
     "duration-out":         { "$value": "{motion.duration.base}",       "$type": "number",    "$description": "Duración animación de salida (250ms)" },
     "easing":               { "$value": "{motion.easing.out}",          "$type": "string",    "$description": "Curva de animación" },
 
-    "success-bg":                    { "$value": "{color.success-on-light}", "$type": "color", "$description": "Fondo success — verde semántico" },
-    "success-border-color":          { "$value": "{color.success-on-light}", "$type": "color", "$description": "Borde igual al fondo success" },
+    "success-bg":                    { "$value": "{color.success-fill}", "$type": "color", "$description": "Fondo success — verde semántico" },
+    "success-border-color":          { "$value": "{color.success-fill}", "$type": "color", "$description": "Borde igual al fondo success" },
     "success-title-color":           { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Título blanco sobre fondo success" },
     "success-description-color":     { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Descripción blanca sobre fondo success" },
 
-    "error-bg":                      { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Fondo error — rojo semántico" },
-    "error-border-color":            { "$value": "{color.error-on-light}",   "$type": "color", "$description": "Borde igual al fondo error" },
+    "error-bg":                      { "$value": "{color.error-fill}",   "$type": "color", "$description": "Fondo error — rojo semántico" },
+    "error-border-color":            { "$value": "{color.error-fill}",   "$type": "color", "$description": "Borde igual al fondo error" },
     "error-title-color":             { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Título blanco sobre fondo error" },
     "error-description-color":       { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Descripción blanca sobre fondo error" },
 

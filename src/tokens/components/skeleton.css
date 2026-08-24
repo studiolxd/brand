@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --skeleton-height: 1lh; /** Alto por defecto — una línea de texto */
+  --skeleton-duration: 1400; /** Duración del barrido en ms */
+  --skeleton-bg: var(--color-grey-lightest); /** Fondo base del bloque en carga */
+  --skeleton-highlight: var(--color-white); /** Brillo que recorre el bloque */
+  --skeleton-border-radius: var(--border-radius-sm); /** Radio del bloque */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --skeleton-bg: rgba(255, 255, 255, 0.08); /** Fondo base — surface-dark */
+  --skeleton-highlight: rgba(255, 255, 255, 0.16); /** Brillo — surface-dark */
+}

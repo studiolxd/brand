@@ -13,6 +13,8 @@
   ],
   "exclude": [
     "src/stories/**/*.stories.tsx",
+    "src/stories/**/*.test.tsx",
+    "src/stories/**/*.test.ts",
     "src/stories/foundations/**"
   ]
 }

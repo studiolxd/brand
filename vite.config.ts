@@ -40,6 +40,17 @@ export default defineConfig({
           include: ['src/**/*.test.ts'],
         },
       },
+      {
+        plugins: [react()],
+        test: {
+          name: 'components',
+          environment: 'jsdom',
+          globals: true,
+          setupFiles: ['./test/setup.ts'],
+          include: ['src/**/*.test.tsx'],
+          testTimeout: 20000,
+        },
+      },
     ]
   }
 });

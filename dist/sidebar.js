@@ -24,5 +24,23 @@ function n({ logo: n, children: r, footer: i, id: a, expanded: o }) {
 		]
 	});
 }
+function r({ className: t, ...n }) {
+	return /* @__PURE__ */ e("div", {
+		className: ["sidebar__group", t].filter(Boolean).join(" "),
+		...n
+	});
+}
+function i({ className: t, ...n }) {
+	return /* @__PURE__ */ e("div", {
+		className: ["sidebar__group-content", t].filter(Boolean).join(" "),
+		...n
+	});
+}
+function a({ className: t, ...n }) {
+	return /* @__PURE__ */ e("hr", {
+		className: ["sidebar__separator", t].filter(Boolean).join(" "),
+		...n
+	});
+}
 //#endregion
-export { n as Sidebar };
+export { n as Sidebar, r as SidebarGroup, i as SidebarGroupContent, a as SidebarSeparator };

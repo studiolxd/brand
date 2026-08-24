@@ -26,24 +26,24 @@
    el modo claro de este combo. ────────────────────────────────────────── */
 
 .surface-dark .button--primary.button--destructive-intent {
-  color: var(--color-error-on-dark);
-  border-color: var(--color-error-on-dark);
+  color: var(--color-destructive-text-on-dark);
+  border-color: var(--color-destructive-text-on-dark);
 }
 
 .surface-dark .button--primary.button--destructive-intent:hover {
-  background-color: var(--color-error-on-dark);
-  color: var(--color-text-on-light);
-  border-color: var(--color-error-on-dark);
+  background-color: var(--color-destructive-fill);
+  color: var(--color-destructive-fill-text);
+  border-color: var(--color-destructive-fill);
 }
 
 .surface-dark .button--primary.button--destructive-intent:active {
-  background-color: var(--color-error-on-dark);
-  color: var(--color-text-on-light);
-  border-color: var(--color-error-on-dark);
+  background-color: var(--color-destructive-fill);
+  color: var(--color-destructive-fill-text);
+  border-color: var(--color-destructive-fill);
 }
 
 .surface-dark .button--primary.button--destructive-intent:focus-visible {
-  outline-color: var(--color-error-on-dark);
+  outline-color: var(--color-destructive-text-on-dark);
 }
 
 /* ─── Input: disabled and error states ───────────────────────────────────── */

@@ -130,7 +130,7 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 							}), /* @__PURE__ */ i("div", {
 								className: "calendar-planner__cell-body",
 								children: f ? f(e, s) : /* @__PURE__ */ a(r, { children: [l.map((e) => /* @__PURE__ */ i(t, {
-									variant: e.variant ?? "default",
+									variant: e.variant ?? "neutral",
 									children: e.label
 								}, e.id)), u > 0 && /* @__PURE__ */ a("button", {
 									type: "button",
@@ -159,7 +159,7 @@ function d({ events: d = [], renderDay: f, maxItemsPerDay: p = 3, onMoreClick: m
 				children: /* @__PURE__ */ i("div", {
 					className: "calendar-planner__modal-events",
 					children: D?.events.map((e) => /* @__PURE__ */ i(t, {
-						variant: e.variant ?? "default",
+						variant: e.variant ?? "neutral",
 						children: e.label
 					}, e.id))
 				})

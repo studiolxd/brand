@@ -1,5 +1,6 @@
 'use client';
 import './app-shell.css';
+"use client";
 import { n as e, t } from "./_shared/AppShellContext.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { useEffect as i, useState as a } from "react";

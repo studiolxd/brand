@@ -5,18 +5,18 @@ import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import { useState as r } from "react";
 //#region src/stories/organisms/ProjectGrid/ProjectGrid.tsx
 function i({ projects: i, hideTags: a = !1, className: o }) {
-	let [s, c] = r(() => new Set(i.map((e) => e.tagVariant ?? "default"))), l = i.reduce((e, t) => {
-		let n = t.tagVariant ?? "default";
+	let [s, c] = r(() => new Set(i.map((e) => e.tagVariant ?? "neutral"))), l = i.reduce((e, t) => {
+		let n = t.tagVariant ?? "neutral";
 		return e.some((e) => e.variant === n) || e.push({
 			variant: n,
 			label: t.category
 		}), e;
-	}, []), u = i.map((e) => e.tagVariant ?? "default"), d = (e) => {
+	}, []), u = i.map((e) => e.tagVariant ?? "neutral"), d = (e) => {
 		c((t) => {
 			let n = new Set(t);
 			return n.has(e) ? n.delete(e) : n.add(e), n.size === 0 ? new Set(u) : n;
 		});
-	}, f = i.filter((e) => s.has(e.tagVariant ?? "default")), p = (2 - f.length % 2) % 2, m = f.length >= 7 ? (6 - (f.length - 7) % 6) % 6 : 7 - f.length, h = Math.max(p, m), g = Math.min(p, m);
+	}, f = i.filter((e) => s.has(e.tagVariant ?? "neutral")), p = (2 - f.length % 2) % 2, m = f.length >= 7 ? (6 - (f.length - 7) % 6) % 6 : 7 - f.length, h = Math.max(p, m), g = Math.min(p, m);
 	return /* @__PURE__ */ n("div", {
 		className: ["project-grid-wrapper", o].filter(Boolean).join(" "),
 		children: [!a && /* @__PURE__ */ t("div", {

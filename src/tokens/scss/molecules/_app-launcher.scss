@@ -1,0 +1,38 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-app-launcher-trigger-size: 2.5rem; // Tamaño (cuadrado) del botón de rejilla
+$lxd-app-launcher-trigger-border-radius: 4px; // Radio del trigger
+$lxd-app-launcher-trigger-color: #111e30; // Color del icono de rejilla
+$lxd-app-launcher-trigger-hover-bg: #f2f2f2; // Fondo del trigger al hover
+$lxd-app-launcher-focus-ring-color: #111e30; // Color del focus ring
+$lxd-app-launcher-focus-ring-width: 2px; // Grosor del focus ring
+$lxd-app-launcher-focus-ring-offset: 1px; // Separación del focus ring
+$lxd-app-launcher-content-min-width: 20rem; // Ancho mínimo del popover
+$lxd-app-launcher-content-columns: 3; // Número de columnas de la rejilla de apps
+$lxd-app-launcher-content-gap: 0.25rem; // Espacio entre tiles
+$lxd-app-launcher-content-bg: #ffffff; // Fondo del panel
+$lxd-app-launcher-content-border-width: 1px; // Borde del panel
+$lxd-app-launcher-content-border-color: #111e30; // Color del borde del panel
+$lxd-app-launcher-content-border-radius: 0px; // Radio del panel
+$lxd-app-launcher-content-shadow: none; // Sombra del panel
+$lxd-app-launcher-content-z-index: 1100; // Z-index del popover
+$lxd-app-launcher-content-padding-block: 0.75rem; // Padding vertical del panel
+$lxd-app-launcher-content-padding-inline: 0.75rem; // Padding horizontal del panel
+$lxd-app-launcher-transition-duration: 150ms; // Duración de la animación de entrada/salida
+$lxd-app-launcher-transition-easing: ease; // Easing de la animación
+$lxd-app-launcher-tile-padding-block: 0.5rem; // Padding vertical de cada tile
+$lxd-app-launcher-tile-padding-inline: 0.25rem; // Padding horizontal de cada tile
+$lxd-app-launcher-tile-gap: 0.25rem; // Espacio entre icono y nombre dentro del tile
+$lxd-app-launcher-tile-border-radius: 4px; // Radio de cada tile
+$lxd-app-launcher-tile-hover-bg: #f2f2f2; // Fondo del tile al hover/focus
+$lxd-app-launcher-tile-active-bg: #f2f2f2; // Fondo del tile de la app actual
+$lxd-app-launcher-tile-icon-size: 2.5rem; // Tamaño del cuadrado de icono/inicial
+$lxd-app-launcher-tile-icon-border-radius: 4px; // Radio del cuadrado de icono/inicial
+$lxd-app-launcher-tile-icon-font-size: 1.25rem; // Tamaño de la inicial cuando no hay icono
+$lxd-app-launcher-tile-icon-font-weight: 500; // Peso de la inicial
+$lxd-app-launcher-tile-icon-color: #ffffff; // Color de la inicial sobre el fondo accent
+$lxd-app-launcher-tile-name-font-size: 0.875rem; // Tamaño de texto del nombre de app
+$lxd-app-launcher-tile-name-font-weight: 300; // Peso del nombre de app
+$lxd-app-launcher-tile-name-color: #111e30; // Color del nombre de app
+$lxd-app-launcher-tile-name-active-font-weight: 500; // Peso del nombre — app actual

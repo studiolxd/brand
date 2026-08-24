@@ -1,0 +1,25 @@
+{
+  "sheet": {
+    "bg":                { "$value": "{modal.bg}",                 "$type": "color",     "$description": "Fondo del panel" },
+    "shadow":            { "$value": "{modal.shadow}",             "$type": "shadow",    "$description": "Sombra del panel" },
+    "z-index":           { "$value": "{modal.z-index}",            "$type": "number",    "$description": "Capa z del panel" },
+    "padding-block":     { "$value": "{modal.padding-block}",      "$type": "dimension", "$description": "Padding vertical del panel" },
+    "padding-inline":    { "$value": "{modal.padding-inline}",     "$type": "dimension", "$description": "Padding horizontal del panel" },
+    "gap":               { "$value": "{spacing.4}",                "$type": "dimension", "$description": "Separación entre bloques del panel" },
+    "inline-size":       { "$value": "min(20rem, 85vw)",           "$type": "dimension", "$description": "Ancho cuando entra por un lateral" },
+    "block-size":        { "$value": "85vh",                       "$type": "dimension", "$description": "Alto máximo cuando entra por arriba o abajo" },
+    "backdrop-bg":       { "$value": "{modal.backdrop-bg}",        "$type": "color",     "$description": "Color del velo" },
+    "backdrop-opacity":  { "$value": "{modal.backdrop-opacity}",   "$type": "number",    "$description": "Opacidad del velo" },
+    "backdrop-z-index":  { "$value": "{modal.backdrop-z-index}",   "$type": "number",    "$description": "Capa z del velo" },
+    "header-gap":        { "$value": "{modal.header-gap}",         "$type": "dimension", "$description": "Separación dentro de la cabecera" },
+    "title-color":       { "$value": "{modal.title-color}",        "$type": "color",     "$description": "Color del título" },
+    "title-font-size":   { "$value": "{modal.title-font-size}",    "$type": "dimension", "$description": "Tamaño del título" },
+    "title-font-weight": { "$value": "{modal.title-font-weight}",  "$type": "number",    "$description": "Peso del título" },
+    "description-font-size": { "$value": "{input-field.helper.font-size}", "$type": "dimension", "$description": "Tamaño del texto descriptivo" },
+    "description-color":     { "$value": "{input-field.helper.color}",     "$type": "color",     "$description": "Color del texto descriptivo" },
+    "footer-gap":        { "$value": "{spacing.2}",                "$type": "dimension", "$description": "Separación entre acciones del pie" },
+    "close-inset":       { "$value": "{spacing.3}",                "$type": "dimension", "$description": "Distancia del botón de cierre a la esquina" },
+    "transition-duration": { "$value": "{modal.transition-duration}", "$type": "number", "$description": "Duración de la animación de entrada/salida" },
+    "transition-easing":   { "$value": "{modal.transition-easing}",   "$type": "string", "$description": "Easing de la animación" }
+  }
+}

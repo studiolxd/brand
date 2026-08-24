@@ -1,6 +1,7 @@
 import type { ComponentType, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Tag } from '../../atoms/Tag/Tag';
+import type { TagVariant } from '../../atoms/Tag/Tag';
 import './CalendarRoster.css';
 
 export type RosterCellType =
@@ -105,10 +106,6 @@ function getDaysInMonth(month: Date): Date[] {
   const total = new Date(year, m + 1, 0).getDate();
   return Array.from({ length: total }, (_, i) => new Date(year, m, i + 1));
 }
-
-type TagVariant =
-  | 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2'
-  | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
 
 const CELL_TYPE_VARIANT: Record<Exclude<RosterCellType, 'schedule' | 'non-working'>, TagVariant> = {
   holiday:  'neutral',

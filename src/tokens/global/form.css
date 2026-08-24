@@ -26,7 +26,7 @@
   --form-separator-color: var(--color-primary); /** Color del separador */
   --form-heading-color: var(--color-text-on-light); /** Color del heading */
   --form-error-font-weight: var(--font-weight-default); /** Font weight del mensaje de error */
-  --form-error-color: var(--color-error-on-light); /** Color del mensaje de error */
+  --form-error-color: var(--color-error-text-on-light); /** Color del mensaje de error */
   --form-helper-font-weight: var(--font-weight-default); /** Font weight del texto de ayuda */
   --form-helper-color: var(--color-text-muted-on-light); /** Color del texto de ayuda */
   --form-success-font-weight: var(--font-weight-default); /** Font weight del mensaje de éxito */
@@ -38,7 +38,7 @@
 html.dark {
   --form-border-color: var(--color-text-on-dark); /** Color del borde exterior — surface-dark */
   --form-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
-  --form-error-color: var(--color-error-on-dark); /** Color del mensaje de error — surface-dark */
+  --form-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --form-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
   --form-success-color: var(--color-text-on-dark); /** Color del mensaje de éxito — surface-dark */
 }

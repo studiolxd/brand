@@ -8,8 +8,6 @@
     "padding-block":  { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Block (vertical) padding" },
     "padding-inline": { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Inline (horizontal) padding" },
 
-    "default-bg":       { "$value": "{color.grey-lightest}",   "$type": "color", "$description": "Default background" },
-    "default-color":    { "$value": "{color.text.on-light}",    "$type": "color", "$description": "Default text color" },
     "primary-bg":       { "$value": "{color.primary}",         "$type": "color", "$description": "Primary (prussian) background" },
     "primary-color":    { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Primary text — white on dark bg" },
     "surface-dark-primary-bg":    { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Primary background — surface-dark (invertido: `primary-bg` es prussian, igual que el fondo de la superficie, quedaría invisible)" },
@@ -31,9 +29,9 @@
     "surface-dark-info-color": { "$value": "{color.prussian}", "$type": "color", "$description": "Info text — surface-dark (invertido)" },
     "warning-bg":    { "$value": "{color.yellow}",        "$type": "color", "$description": "Warning semantic — brand yellow background (AAA ~10.3:1 with prussian text)" },
     "warning-color": { "$value": "{color.prussian}",      "$type": "color", "$description": "Warning semantic — prussian text on yellow" },
-    "success-bg":    { "$value": "{color.success-on-light}", "$type": "color", "$description": "Success semantic — dark green background (AAA ~8.9:1 with white text)" },
-    "success-color": { "$value": "{color.white}",          "$type": "color", "$description": "Success semantic — white text on dark green" },
-    "danger-bg":     { "$value": "{color.red-on-light}",  "$type": "color", "$description": "Danger semantic — brand red background (AAA ~7.2:1 with white text)" },
-    "danger-color":  { "$value": "{color.white}",         "$type": "color", "$description": "Danger semantic — white text on red" }
+    "success-bg":    { "$value": "{color.success-fill}", "$type": "color", "$description": "Success semantic — dark green background (AAA ~8.9:1 with white text)" },
+    "success-color": { "$value": "{color.success-fill-text}",          "$type": "color", "$description": "Success semantic — white text on dark green" },
+    "danger-bg":     { "$value": "{color.error-fill}",  "$type": "color", "$description": "Danger semantic — brand red background (AAA ~7.2:1 with white text)" },
+    "danger-color":  { "$value": "{color.error-fill-text}",         "$type": "color", "$description": "Danger semantic — white text on red" }
   }
 }

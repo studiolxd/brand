@@ -19,6 +19,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --input-field-error-color: var(--color-error-on-dark); /** Color del mensaje de error — surface-dark */
+  --input-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --input-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
 }

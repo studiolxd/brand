@@ -8,7 +8,7 @@
       "font-weight":  { "$value": "{form.error.font-weight}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
       "line-height":  { "$value": "{form.error.line-height}",  "$type": "number",    "$description": "Line height del mensaje de error" },
       "color":        { "$value": "{form.error.color}",        "$type": "color",     "$description": "Color del mensaje de error" },
-      "surface-dark-color": { "$value": "{color.error-on-dark}", "$type": "color", "$description": "Color del mensaje de error — surface-dark" }
+      "surface-dark-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Color del mensaje de error — surface-dark" }
     },
 
     "helper": {

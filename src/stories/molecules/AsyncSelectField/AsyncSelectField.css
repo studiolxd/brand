@@ -5,7 +5,7 @@
 }
 
 .async-select-field--error .async-select {
-  --multi-select-border-color: var(--color-error-on-light);
+  --multi-select-border-color: var(--color-error-text-on-light);
 }
 
 .async-select-field__error {

@@ -1,0 +1,131 @@
+@keyframes sheet-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: var(--sheet-backdrop-opacity); }
+}
+
+@keyframes sheet-overlay-out {
+  from { opacity: var(--sheet-backdrop-opacity); }
+  to   { opacity: 0; }
+}
+
+.sheet__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--sheet-backdrop-z-index);
+  background-color: var(--sheet-backdrop-bg);
+  opacity: var(--sheet-backdrop-opacity);
+}
+
+.sheet__overlay[data-state='open'] {
+  animation: sheet-overlay-in var(--sheet-transition-duration) var(--sheet-transition-easing) forwards;
+}
+
+.sheet__overlay[data-state='closed'] {
+  animation: sheet-overlay-out var(--sheet-transition-duration) var(--sheet-transition-easing) forwards;
+}
+
+.sheet {
+  position: fixed;
+  z-index: var(--sheet-z-index);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sheet-gap);
+  padding-block: var(--sheet-padding-block);
+  padding-inline: var(--sheet-padding-inline);
+  background-color: var(--sheet-bg);
+  box-shadow: var(--sheet-shadow);
+  overflow-y: auto;
+  animation-duration: var(--sheet-transition-duration);
+  animation-timing-function: var(--sheet-transition-easing);
+  animation-fill-mode: forwards;
+}
+
+.sheet[data-side='left'],
+.sheet[data-side='right'] {
+  top: 0;
+  bottom: 0;
+  width: var(--sheet-inline-size);
+}
+
+.sheet[data-side='left']  { left: 0; }
+.sheet[data-side='right'] { right: 0; }
+
+.sheet[data-side='top'],
+.sheet[data-side='bottom'] {
+  left: 0;
+  right: 0;
+  max-height: var(--sheet-block-size);
+}
+
+.sheet[data-side='top']    { top: 0; }
+.sheet[data-side='bottom'] { bottom: 0; }
+
+@keyframes sheet-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes sheet-out-right { from { transform: translateX(0); } to { transform: translateX(100%); } }
+@keyframes sheet-in-left  { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes sheet-out-left { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+@keyframes sheet-in-top   { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes sheet-out-top  { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+@keyframes sheet-in-bottom  { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes sheet-out-bottom { from { transform: translateY(0); } to { transform: translateY(100%); } }
+
+.sheet[data-side='right'][data-state='open']   { animation-name: sheet-in-right; }
+.sheet[data-side='right'][data-state='closed'] { animation-name: sheet-out-right; }
+.sheet[data-side='left'][data-state='open']    { animation-name: sheet-in-left; }
+.sheet[data-side='left'][data-state='closed']  { animation-name: sheet-out-left; }
+.sheet[data-side='top'][data-state='open']     { animation-name: sheet-in-top; }
+.sheet[data-side='top'][data-state='closed']   { animation-name: sheet-out-top; }
+.sheet[data-side='bottom'][data-state='open']   { animation-name: sheet-in-bottom; }
+.sheet[data-side='bottom'][data-state='closed'] { animation-name: sheet-out-bottom; }
+
+.sheet__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sheet-header-gap);
+  /* Deja sitio al botón de cierre, que va posicionado sobre la esquina. */
+  padding-inline-end: var(--sheet-padding-inline);
+}
+
+.sheet__title {
+  margin: 0;
+  color: var(--sheet-title-color);
+  font-size: var(--sheet-title-font-size);
+  font-weight: var(--sheet-title-font-weight);
+}
+
+.sheet__description {
+  margin: 0;
+  font-size: var(--sheet-description-font-size);
+  color: var(--sheet-description-color);
+}
+
+.sheet__close {
+  position: absolute;
+  inset-block-start: var(--sheet-close-inset);
+  inset-inline-end: var(--sheet-close-inset);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-1);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--modal-close-color);
+  border-radius: var(--border-radius-sm);
+}
+
+.sheet__close:hover {
+  color: var(--modal-close-hover-color);
+  background-color: var(--modal-close-hover-bg);
+}
+
+.sheet__body {
+  flex: 1;
+  min-height: 0;
+}
+
+.sheet__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sheet-footer-gap);
+}

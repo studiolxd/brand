@@ -1,0 +1,46 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --command-palette-max-height: min(24rem, 60vh); /** Alto máximo de la paleta — la lista scrollea dentro */
+  --command-palette-input-padding-block: var(--spacing-3); /** Padding vertical del buscador */
+  --command-palette-input-padding-inline: var(--spacing-2); /** Padding horizontal del buscador */
+  --command-palette-input-font-size: var(--font-size-3); /** Tamaño de texto del buscador */
+  --command-palette-input-border-width: var(--border-width-sm); /** Grosor de la línea bajo el buscador */
+  --command-palette-list-padding: var(--spacing-1); /** Padding de la lista de resultados */
+  --command-palette-empty-padding-block: var(--spacing-6); /** Padding vertical del estado vacío */
+  --command-palette-empty-padding-inline: var(--spacing-4); /** Padding horizontal del estado vacío */
+  --command-palette-empty-font-size: var(--font-size-2); /** Tamaño de texto del estado vacío */
+  --command-palette-heading-padding-block: var(--spacing-2); /** Padding vertical del título de grupo */
+  --command-palette-heading-padding-inline: var(--spacing-3); /** Padding horizontal del título de grupo */
+  --command-palette-heading-font-size: var(--font-size-1); /** Tamaño de texto del título de grupo */
+  --command-palette-heading-font-weight: var(--font-weight-medium); /** Peso del título de grupo */
+  --command-palette-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
+  --command-palette-item-padding-inline: var(--spacing-3); /** Padding horizontal de cada ítem */
+  --command-palette-item-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
+  --command-palette-item-border-radius: var(--border-radius-sm); /** Radio de cada ítem */
+  --command-palette-item-font-size: var(--font-size-2); /** Tamaño de texto de los ítems */
+  --command-palette-item-icon-size: var(--font-size-4); /** Talla del icono de los ítems */
+  --command-palette-separator-height: var(--border-width-sm); /** Alto del separador */
+  --command-palette-separator-margin-block: var(--spacing-1); /** Margen vertical del separador */
+  --command-palette-input-placeholder-color: var(--color-text-placeholder); /** Color del placeholder del buscador */
+  --command-palette-empty-color: var(--color-text-muted-on-light); /** Color del estado vacío */
+  --command-palette-heading-color: var(--color-text-muted-on-light); /** Color del título de grupo */
+  --command-palette-item-selected-bg: var(--context-menu-item-hover-bg); /** Fondo del ítem seleccionado */
+  --command-palette-separator-color: var(--context-menu-separator-color); /** Color del separador */
+  --command-palette-input-border-color: var(--floating-panel-border-color); /** Color de la línea bajo el buscador */
+  --command-palette-item-color: var(--context-menu-item-color); /** Color de texto de los ítems — comparte lenguaje con ContextMenu */
+  --command-palette-item-selected-color: var(--context-menu-item-hover-color); /** Color de texto del ítem seleccionado */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --command-palette-item-selected-bg: var(--context-menu-surface-dark-item-hover-bg); /** Fondo del ítem seleccionado — surface-dark */
+  --command-palette-separator-color: var(--context-menu-surface-dark-separator-color); /** Color del separador — surface-dark */
+  --command-palette-empty-color: var(--color-text-muted-on-dark); /** Color del estado vacío — surface-dark */
+  --command-palette-heading-color: var(--color-text-muted-on-dark); /** Color del título de grupo — surface-dark */
+  --command-palette-item-color: var(--context-menu-surface-dark-item-color); /** Color de texto de los ítems — surface-dark */
+  --command-palette-item-selected-color: var(--context-menu-surface-dark-item-hover-color); /** Texto del ítem seleccionado — surface-dark */
+}

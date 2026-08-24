@@ -1,9 +1,10 @@
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
+import type { TagVariant } from '../../atoms/Tag/Tag';
 import './ProjectCard.css';
 
-export type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+export type { TagVariant };
 
 export interface Project {
   /** Identificador único. */
@@ -36,7 +37,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, hideTag = false, className }: ProjectCardProps) {
   const {
     category,
-    tagVariant = 'default',
+    tagVariant = 'neutral',
     photo,
     photoAlt,
     title,

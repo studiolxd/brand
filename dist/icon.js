@@ -940,6 +940,74 @@ var r = {
 			})
 		] })
 	},
+	grid: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("circle", {
+				cx: "5",
+				cy: "5",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "12",
+				cy: "5",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "19",
+				cy: "5",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "5",
+				cy: "12",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "12",
+				cy: "12",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "19",
+				cy: "12",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "5",
+				cy: "19",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "12",
+				cy: "19",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			}),
+			/* @__PURE__ */ t("circle", {
+				cx: "19",
+				cy: "19",
+				r: "1.5",
+				fill: "currentColor",
+				stroke: "none"
+			})
+		] })
+	},
 	"layout-sidebar": {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("path", {

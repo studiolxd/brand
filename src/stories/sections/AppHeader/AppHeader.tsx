@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { AppShellContext } from '../AppShell/AppShellContext';
 import { Hamburger } from '../../atoms/Hamburger/Hamburger';

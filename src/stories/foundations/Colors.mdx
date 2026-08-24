@@ -1,7 +1,7 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
 import { ContrastMatrix } from "./ContrastMatrix";
 import { TokenTable } from "./TokenTable";
-import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor } from "../../tokens/colors";
+import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor, support1Color, support2Color, support1BgColor, support2BgColor } from "../../tokens/colors";
 
 <Meta title="Foundations/Colores" />
 
@@ -115,13 +115,13 @@ Colores funcionales, independientes de la paleta de marca. No deben usarse con f
 <ColorPalette>
   <ColorItem
     title="Red"
-    subtitle="Error/Destructive on light · Error on dark"
-    colors={{ "--color-red-on-light": "#B30000", "--color-red-on-dark": "#FF8585" }}
+    subtitle="Base (fill universal + texto en claro) · Light (solo texto sobre prussian)"
+    colors={{ "--color-red": "#B30000", "--color-red-light": "#FF8585" }}
   />
   <ColorItem
     title="Green"
-    subtitle="Success on light · Success on dark"
-    colors={{ "--color-green-on-light": "#006616", "--color-green-on-dark": "#00CC2C" }}
+    subtitle="Base (fill universal + texto en claro) · Light (solo texto sobre prussian)"
+    colors={{ "--color-green": "#006616", "--color-green-light": "#00CC2C" }}
   />
 </ColorPalette>
 
@@ -129,23 +129,42 @@ Colores funcionales, independientes de la paleta de marca. No deben usarse con f
 
 ## Colores de feedback
 
-Asignan un rol semántico a los colores de sistema. Equivalente a la capa de marca pero para estados funcionales.
+Asignan un rol semántico a los colores de sistema. **Regla de uso** — el sufijo
+dice a qué propiedad CSS va destinado el token:
+
+- `*-text-on-light` / `*-text-on-dark` → **solo** `color` / `border-color` /
+  `outline-color` de contenido suelto sobre la superficie ambiente (clara u
+  oscura). **Nunca como `background-color`.**
+- `*-fill` → `background-color` de rellenos sólidos (botones, alerts, toasts,
+  badges). Es **universal**: el mismo rojo/verde base en superficie clara y
+  oscura — no existe un "fill para dark".
+- `*-fill-text` → contenido colocado **sobre** un `*-fill` (blanco).
 
 <ColorPalette>
   <ColorItem
-    title="Error"
-    subtitle="Error on light · Error on dark"
-    colors={{ "--color-error-on-light": "#B30000", "--color-error-on-dark": "#FF8585" }}
+    title="Error — texto"
+    subtitle="error-text-on-light · error-text-on-dark"
+    colors={{ "--color-error-text-on-light": "#B30000", "--color-error-text-on-dark": "#FF8585" }}
   />
   <ColorItem
-    title="Success"
-    subtitle="Success on light · Success on dark"
-    colors={{ "--color-success-on-light": "#006616", "--color-success-on-dark": "#00CC2C" }}
+    title="Error — fill"
+    subtitle="error-fill · error-fill-text"
+    colors={{ "--color-error-fill": "#B30000", "--color-error-fill-text": "#FFFFFF" }}
+  />
+  <ColorItem
+    title="Success — texto"
+    subtitle="success-text-on-light · success-text-on-dark"
+    colors={{ "--color-success-text-on-light": "#006616", "--color-success-text-on-dark": "#00CC2C" }}
+  />
+  <ColorItem
+    title="Success — fill"
+    subtitle="success-fill · success-fill-text"
+    colors={{ "--color-success-fill": "#006616", "--color-success-fill-text": "#FFFFFF" }}
   />
   <ColorItem
     title="Destructive"
-    subtitle="Destructive on light"
-    colors={{ "--color-destructive-on-light": "#B30000" }}
+    subtitle="Alias completo del rol error para acciones destructivas"
+    colors={{ "--color-destructive-text-on-light": "#B30000", "--color-destructive-text-on-dark": "#FF8585", "--color-destructive-fill": "#B30000", "--color-destructive-fill-text": "#FFFFFF" }}
   />
   <ColorItem
     title="Warning"
@@ -153,16 +172,15 @@ Asignan un rol semántico a los colores de sistema. Equivalente a la capa de mar
     colors={{ "--color-yellow": "#FFCD00" }}
   />
   <ColorItem
-    title="Danger"
-    subtitle="Tag danger background — mismo rojo que error/destructive"
-    colors={{ "--color-red-on-light": "#B30000" }}
-  />
-  <ColorItem
     title="Neutral"
     subtitle="Tag neutral background — prussian"
     colors={{ "--color-prussian": "#111E30" }}
   />
 </ColorPalette>
+
+> Los nombres antiguos (`error-on-light`, `red-on-dark`, `green-bg`…) siguen
+> emitiéndose como alias **deprecados** solo para compatibilidad de las apps
+> (`tokens/color/deprecated.json`). Prohibido usarlos en `packages/ui`.
 
 ---
 
@@ -349,4 +367,12 @@ Comprobación de contraste para cada combinación texto/fondo de las variantes s
 ### Neutral
 
 <ContrastMatrix foregroundLabel="Neutral" foreground={neutralTextColor} colors={[neutralBgColor]} />
+
+### Support 1
+
+<ContrastMatrix foregroundLabel="Support 1" foreground={support1Color} colors={[support1BgColor]} />
+
+### Support 2
+
+<ContrastMatrix foregroundLabel="Support 2" foreground={support2Color} colors={[support2BgColor]} />
 

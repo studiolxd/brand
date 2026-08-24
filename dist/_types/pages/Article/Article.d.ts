@@ -1,6 +1,6 @@
 import type { NavItem } from '../../sections/Header/Header';
+import type { TagVariant } from '../../atoms/Tag/Tag';
 import './Article.css';
-type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 interface ArticleSection {
     title: string;
     body: string;

@@ -1,0 +1,107 @@
+import { useMemo } from 'react';
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { useForm, type FieldErrors } from 'react-hook-form';
+import { Input } from '../../atoms/Input/Input';
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormProvider,
+  FormRootMessage,
+} from './FormField';
+
+type Values = { email: string };
+
+function Harness({
+  fieldError,
+  rootError,
+  onSubmit,
+}: {
+  fieldError?: string;
+  rootError?: string;
+  onSubmit?: (values: Values) => void;
+}) {
+  // `errors` lo vigila react-hook-form por referencia: un literal nuevo en
+  // cada render reinyectaría los errores en bucle.
+  const errors = useMemo(
+    () =>
+      ({
+        ...(fieldError ? { email: { type: 'manual', message: fieldError } } : {}),
+        ...(rootError ? { root: { type: 'manual', message: rootError } } : {}),
+      }) as FieldErrors<Values>,
+    [fieldError, rootError],
+  );
+  const form = useForm<Values>({ defaultValues: { email: '' }, errors });
+
+  return (
+    <FormProvider {...form}>
+      <form onSubmit={form.handleSubmit((values) => onSubmit?.(values))}>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Correo</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormDescription>Nunca lo compartimos.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormRootMessage />
+        <button type="submit">Enviar</button>
+      </form>
+    </FormProvider>
+  );
+}
+
+describe('FormField', () => {
+  it('enlaza la etiqueta con el control', () => {
+    render(<Harness />);
+    expect(screen.getByLabelText('Correo')).toBeInTheDocument();
+  });
+
+  it('enlaza la ayuda al control por aria-describedby', () => {
+    render(<Harness />);
+    const input = screen.getByLabelText('Correo');
+    const describedBy = input.getAttribute('aria-describedby');
+    expect(describedBy).toBeTruthy();
+    expect(document.getElementById(describedBy!)).toHaveTextContent('Nunca lo compartimos.');
+  });
+
+  it('sin error, el control no está marcado como inválido y no hay mensaje', () => {
+    render(<Harness />);
+    expect(screen.getByLabelText('Correo')).toHaveAttribute('aria-invalid', 'false');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('con error, marca el control y anuncia el mensaje enlazándolo también', () => {
+    render(<Harness fieldError="Correo no válido" />);
+    const input = screen.getByLabelText('Correo');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    const alert = screen.getByRole('alert');
+    expect(alert).toHaveTextContent('Correo no válido');
+    expect(input.getAttribute('aria-describedby')).toContain(alert.id);
+  });
+
+  it('el error del formulario se anuncia aunque no cuelgue de ningún campo', () => {
+    render(<Harness rootError="No hemos podido guardar" />);
+    expect(screen.getByRole('alert')).toHaveTextContent('No hemos podido guardar');
+  });
+
+  it('el control escribe en el formulario', async () => {
+    const user = userEvent.setup();
+    let submitted: Values | undefined;
+    render(<Harness onSubmit={(values) => { submitted = values; }} />);
+    await user.type(screen.getByLabelText('Correo'), 'ada@studiolxd.com');
+    await user.click(screen.getByRole('button', { name: 'Enviar' }));
+    expect(submitted).toEqual({ email: 'ada@studiolxd.com' });
+  });
+});

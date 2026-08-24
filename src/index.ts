@@ -45,6 +45,33 @@ export { ProgressBar } from './stories/atoms/ProgressBar/ProgressBar';
 export type { ProgressBarProps, ProgressBarVariant, ProgressBarSize } from './stories/atoms/ProgressBar/ProgressBar';
 export { Popover } from './stories/atoms/Popover/Popover';
 export type { PopoverProps } from './stories/atoms/Popover/Popover';
+export { Skeleton } from './stories/atoms/Skeleton/Skeleton';
+export type { SkeletonProps } from './stories/atoms/Skeleton/Skeleton';
+export { Tooltip, TooltipProvider } from './stories/atoms/Tooltip/Tooltip';
+export { ImageCropDialog } from './stories/molecules/ImageCropDialog/ImageCropDialog';
+export type { ImageCropDialogProps } from './stories/molecules/ImageCropDialog/ImageCropDialog';
+export { cropImageToBlob } from './stories/molecules/ImageCropDialog/crop';
+export type { CropRegion, CropToBlobOptions } from './stories/molecules/ImageCropDialog/crop';
+export {
+  FormProvider,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  FormRootMessage,
+  useFormField,
+} from './stories/molecules/FormField/FormField';
+export { DataTable } from './stories/organisms/DataTable/DataTable';
+export type { DataTableProps, DataTableServerPagination, DataTableHeaderLabels, DataTablePaginationLabels } from './stories/organisms/DataTable/DataTable';
+export { Sheet, SheetFooter } from './stories/molecules/Sheet/Sheet';
+export type { SheetProps } from './stories/molecules/Sheet/Sheet';
+export { Menu } from './stories/molecules/Menu/Menu';
+export type { MenuProps, MenuItem, MenuRadioItem, MenuLabelItem } from './stories/molecules/Menu/Menu';
+export { CommandPalette } from './stories/molecules/CommandPalette/CommandPalette';
+export type { CommandPaletteProps, CommandPaletteGroup, CommandPaletteItem } from './stories/molecules/CommandPalette/CommandPalette';
+export type { TooltipProps, TooltipProviderProps } from './stories/atoms/Tooltip/Tooltip';
 export { MultiSelect } from './stories/atoms/MultiSelect/MultiSelect';
 export type { MultiSelectOption, MultiSelectProps } from './stories/atoms/MultiSelect/MultiSelect';
 export { Radio } from './stories/atoms/Radio/Radio';
@@ -132,6 +159,8 @@ export { PrevNextNav } from './stories/molecules/PrevNextNav/PrevNextNav';
 export type { PrevNextNavProps } from './stories/molecules/PrevNextNav/PrevNextNav';
 export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';
 export type { OrgSwitcherProps, OrgOption } from './stories/molecules/OrgSwitcher/OrgSwitcher';
+export { AppLauncher } from './stories/molecules/AppLauncher/AppLauncher';
+export type { AppLauncherProps, LauncherApp, AppLauncherLabels } from './stories/molecules/AppLauncher/AppLauncher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
 export { SwitcherField } from './stories/molecules/SwitcherField/SwitcherField';
 export type { SwitcherFieldProps } from './stories/molecules/SwitcherField/SwitcherField';
@@ -169,10 +198,12 @@ export { useAppShell } from './stories/sections/AppShell/AppShellContext';
 export type { AppShellContextValue } from './stories/sections/AppShell/AppShellContext';
 export { AppHeader } from './stories/sections/AppHeader/AppHeader';
 export type { AppHeaderProps } from './stories/sections/AppHeader/AppHeader';
-export { Sidebar } from './stories/sections/Sidebar/Sidebar';
+export { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator } from './stories/sections/Sidebar/Sidebar';
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 
 // ─── Organisms ──────────────────────────────────────────────
+export { ConversationThread } from './stories/organisms/ConversationThread/ConversationThread';
+export type { ConversationThreadProps, ConversationMessage } from './stories/organisms/ConversationThread/ConversationThread';
 export { LoginForm } from './stories/organisms/LoginForm/LoginForm';
 export type { LoginFormProps } from './stories/organisms/LoginForm/LoginForm';
 export { PricingCard } from './stories/organisms/PricingCard/PricingCard';

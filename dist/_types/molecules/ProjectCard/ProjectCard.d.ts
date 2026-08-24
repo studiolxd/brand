@@ -1,5 +1,6 @@
+import type { TagVariant } from '../../atoms/Tag/Tag';
 import './ProjectCard.css';
-export type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+export type { TagVariant };
 export interface Project {
     /** Identificador único. */
     id: string;
@@ -27,4 +28,3 @@ interface ProjectCardProps {
     className?: string;
 }
 export declare function ProjectCard({ project, hideTag, className }: ProjectCardProps): import("react/jsx-runtime").JSX.Element;
-export {};

@@ -14,12 +14,12 @@ interface ProjectGridProps {
 
 export function ProjectGrid({ projects, hideTags = false, className }: ProjectGridProps) {
   const [activeTags, setActiveTags] = useState<Set<string>>(
-    () => new Set(projects.map((p) => p.tagVariant ?? 'default')),
+    () => new Set(projects.map((p) => p.tagVariant ?? 'neutral')),
   );
 
   const uniqueTags = projects.reduce<Array<{ variant: string; label: string }>>(
     (acc, project) => {
-      const variant = project.tagVariant ?? 'default';
+      const variant = project.tagVariant ?? 'neutral';
       if (!acc.some((tag) => tag.variant === variant)) {
         acc.push({ variant, label: project.category });
       }
@@ -28,7 +28,7 @@ export function ProjectGrid({ projects, hideTags = false, className }: ProjectGr
     [],
   );
 
-  const allVariants = projects.map((p) => p.tagVariant ?? 'default');
+  const allVariants = projects.map((p) => p.tagVariant ?? 'neutral');
 
   const toggleTag = (variant: string) => {
     setActiveTags((prev) => {
@@ -39,7 +39,7 @@ export function ProjectGrid({ projects, hideTags = false, className }: ProjectGr
     });
   };
 
-  const filtered = projects.filter((p) => activeTags.has(p.tagVariant ?? 'default'));
+  const filtered = projects.filter((p) => activeTags.has(p.tagVariant ?? 'neutral'));
 
   /* Celdas vacías para alinear el grid en distintos breakpoints */
   const mdEmpty = (2 - (filtered.length % 2)) % 2;

@@ -32,7 +32,6 @@
   --user-menu-item-font-family: var(--font-family-sans); /** Tipografía de ítems */
   --user-menu-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
   --user-menu-item-hover-bg: var(--color-grey-lightest); /** Fondo de ítem al hover */
-  --user-menu-item-destructive-hover-color: var(--color-white); /** Color de ítem destructivo al hover */
   --user-menu-separator-color: var(--color-grey-light); /** Color del separador */
   --user-menu-separator-height: var(--border-width-sm); /** Alto del separador */
   --user-menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
@@ -48,8 +47,9 @@
   --user-menu-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --user-menu-item-color: var(--color-text-on-light); /** Color de ítems */
   --user-menu-item-hover-color: var(--color-text-on-light); /** Color de ítem al hover */
-  --user-menu-item-destructive-color: var(--color-destructive-on-light); /** Color de ítem destructivo */
-  --user-menu-item-destructive-hover-bg: var(--color-destructive-on-light); /** Fondo de ítem destructivo al hover */
+  --user-menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de ítem destructivo */
+  --user-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover */
+  --user-menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Color de ítem destructivo al hover */
   --user-menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --user-menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
   --user-menu-content-bg: var(--floating-panel-bg); /** Fondo del panel */
@@ -68,6 +68,6 @@ html.dark {
   --user-menu-header-email-color: var(--color-text-muted-on-dark); /** Color del email en la cabecera del dropdown — surface-dark */
   --user-menu-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
   --user-menu-item-hover-color: var(--color-text-on-dark); /** Color de ítem al hover — surface-dark */
-  --user-menu-item-destructive-color: var(--color-error-on-dark); /** Color de ítem destructivo — surface-dark */
-  --user-menu-item-destructive-hover-bg: var(--color-error-on-dark); /** Fondo de ítem destructivo al hover — surface-dark */
+  --user-menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
+  --user-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover — surface-dark (fill universal; el texto hover hereda destructive-fill-text) */
 }

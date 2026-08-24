@@ -167,3 +167,29 @@
 .surface-dark .sidebar {
   background-color: var(--color-background-dark);
 }
+
+/* ── Secciones del panel ─────────────────────────────────── */
+.sidebar__group {
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--sidebar-group-padding-block);
+  padding-inline: var(--sidebar-group-padding-inline);
+  min-width: 0;
+}
+
+.sidebar__group-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sidebar-group-gap);
+  min-width: 0;
+}
+
+.sidebar__separator {
+  block-size: var(--sidebar-separator-height);
+  inline-size: auto;
+  margin-block: var(--sidebar-separator-margin-block);
+  margin-inline: var(--sidebar-group-padding-inline);
+  border: none;
+  background-color: var(--sidebar-separator-color);
+  flex-shrink: 0;
+}

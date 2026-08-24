@@ -1,0 +1,54 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --menu-z-index: var(--floating-panel-z-index); /** Capa z del panel flotante */
+  --menu-item-icon-size: var(--font-size-4); /** Talla del icono y del glifo de radio */
+  --menu-item-cursor: var(--context-menu-item-cursor); /** Cursor de ítems */
+  --menu-label-padding-block: var(--spacing-2); /** Padding vertical del rótulo de sección */
+  --menu-label-padding-inline: var(--spacing-4); /** Padding horizontal del rótulo de sección */
+  --menu-label-font-size: var(--font-size-1); /** Tamaño de texto del rótulo de sección */
+  --menu-label-font-weight: var(--font-weight-medium); /** Peso del rótulo de sección */
+  --menu-padding-block: var(--context-menu-padding-block); /** Padding vertical del panel */
+  --menu-padding-inline: var(--context-menu-padding-inline); /** Padding lateral del panel */
+  --menu-item-padding-block: var(--context-menu-item-padding-block); /** Padding vertical de cada ítem */
+  --menu-item-padding-inline: var(--context-menu-item-padding-inline); /** Padding horizontal de cada ítem */
+  --menu-item-icon-gap: var(--context-menu-item-icon-gap); /** Gap entre icono y texto del ítem */
+  --menu-item-border-radius: var(--context-menu-item-border-radius); /** Radio de cada ítem */
+  --menu-item-font-family: var(--context-menu-item-font-family); /** Tipografía de ítems */
+  --menu-item-font-size: var(--context-menu-item-font-size); /** Tamaño de texto de ítems */
+  --menu-item-line-height: var(--context-menu-item-line-height); /** Interlineado de ítems */
+  --menu-item-hover-bg: var(--context-menu-item-hover-bg); /** Fondo de ítem al hover */
+  --menu-label-color: var(--color-text-muted-on-light); /** Color del rótulo de sección */
+  --menu-separator-color: var(--context-menu-separator-color); /** Color del separador */
+  --menu-separator-height: var(--context-menu-separator-height); /** Alto del separador */
+  --menu-separator-margin-block: var(--context-menu-separator-margin-block); /** Margen vertical del separador */
+  --menu-disabled-opacity: var(--context-menu-disabled-opacity); /** Opacidad de ítems deshabilitados */
+  --menu-border-width: var(--context-menu-border-width); /** Grosor del borde del panel */
+  --menu-border-radius: var(--context-menu-border-radius); /** Radio del panel */
+  --menu-shadow: var(--context-menu-shadow); /** Sombra del panel */
+  --menu-item-font-weight: var(--context-menu-item-font-weight); /** Peso de texto de ítems */
+  --menu-item-color: var(--context-menu-item-color); /** Color de texto de ítems */
+  --menu-item-hover-color: var(--context-menu-item-hover-color); /** Color de texto de ítem al hover */
+  --menu-item-destructive-color: var(--context-menu-item-destructive-color); /** Color de texto de ítem destructivo */
+  --menu-item-destructive-hover-bg: var(--context-menu-item-destructive-hover-bg); /** Fondo de ítem destructivo al hover */
+  --menu-item-destructive-hover-color: var(--context-menu-item-destructive-hover-color); /** Color de texto de ítem destructivo al hover */
+  --menu-transition-duration: var(--context-menu-transition-duration); /** Duración de transición */
+  --menu-transition-easing: var(--context-menu-transition-easing); /** Easing de transición */
+  --menu-bg: var(--context-menu-bg); /** Fondo del panel — mismo lenguaje que ContextMenu */
+  --menu-border-color: var(--context-menu-border-color); /** Color del borde del panel */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --menu-item-hover-bg: var(--context-menu-surface-dark-item-hover-bg); /** Fondo hover de ítem — surface-dark */
+  --menu-separator-color: var(--context-menu-surface-dark-separator-color); /** Color del separador — surface-dark */
+  --menu-label-color: var(--color-text-muted-on-dark); /** Color del rótulo de sección — surface-dark */
+  --menu-item-color: var(--context-menu-surface-dark-item-color); /** Color de texto de ítems — surface-dark */
+  --menu-item-hover-color: var(--context-menu-surface-dark-item-hover-color); /** Texto hover de ítem — surface-dark */
+  --menu-item-destructive-color: var(--context-menu-surface-dark-item-destructive-color); /** Color de ítem destructivo — surface-dark */
+  --menu-item-destructive-hover-bg: var(--context-menu-surface-dark-item-destructive-hover-bg); /** Fondo hover de ítem destructivo — surface-dark */
+  --menu-item-destructive-hover-color: var(--context-menu-surface-dark-item-destructive-hover-color); /** Texto hover de ítem destructivo — surface-dark */
+}

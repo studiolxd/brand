@@ -1,0 +1,5 @@
+{
+  "form-field": {
+    "gap": { "$value": "{spacing.1}", "$type": "dimension", "$description": "Respiro entre la etiqueta, el control y la ayuda/error de un campo" }
+  }
+}

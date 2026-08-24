@@ -11,6 +11,12 @@ export type ContextMenuButtonItem = {
   onClick: () => void;
   disabled?: boolean;
   destructive?: boolean;
+  /**
+   * `false` mantiene el menú abierto tras elegir el ítem — para acciones que
+   * se encadenan (marcar varias cosas) o que dejan al usuario donde estaba.
+   * Por defecto el menú se cierra.
+   */
+  closeOnSelect?: boolean;
 };
 
 export type ContextMenuLinkItem = {

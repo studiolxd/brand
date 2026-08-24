@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable react-refresh/only-export-components --
    Namespace compuesto (`Object.assign`) + subpartes como named exports: la
    heurística de fast-refresh no reconoce el `Object.assign` como componente. El

@@ -10,6 +10,6 @@
     "item-active-bg":        { "$value": "{color.grey-lightest}", "$type": "color",    "$description": "Fondo de item activo" },
     "item-hover-bg":         { "$value": "{color.grey-lightest}", "$type": "color",    "$description": "Fondo de item en hover" },
     "delete-color":          { "$value": "{color.grey-dark}",         "$type": "color",     "$description": "Color del botón de eliminar" },
-    "delete-hover-color":    { "$value": "{color.destructive-on-light}", "$type": "color", "$description": "Color del botón de eliminar en hover" }
+    "delete-hover-color":    { "$value": "{color.destructive-text-on-light}", "$type": "color", "$description": "Color del botón de eliminar en hover" }
   }
 }

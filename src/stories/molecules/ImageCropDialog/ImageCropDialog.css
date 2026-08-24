@@ -1,0 +1,25 @@
+.image-crop-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--image-crop-dialog-gap);
+}
+
+.image-crop-dialog__area {
+  display: flex;
+  justify-content: center;
+  background-color: var(--image-crop-dialog-area-bg);
+  border-radius: var(--image-crop-dialog-area-border-radius);
+  overflow: hidden;
+}
+
+.image-crop-dialog__area img {
+  max-height: var(--image-crop-dialog-area-max-height);
+  max-width: 100%;
+  display: block;
+}
+
+.image-crop-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--image-crop-dialog-actions-gap);
+}

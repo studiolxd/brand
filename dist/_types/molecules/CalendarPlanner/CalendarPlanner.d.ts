@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
+import type { TagVariant } from '../../atoms/Tag/Tag';
 import './CalendarPlanner.css';
-type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2' | 'neutral' | 'info' | 'warning' | 'success' | 'danger';
 export interface PlannerEvent {
     id: string;
     date: Date;
@@ -50,4 +50,3 @@ export interface CalendarPlannerProps {
     className?: string;
 }
 export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, previousMonthLabel, nextMonthLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
-export {};

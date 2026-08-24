@@ -14,22 +14,27 @@
   --color-yellow: #ffcd00; /** Brand yellow */
   --color-emerald: #20e38e; /** Brand emerald */
   --color-cayenne: #f05e1c; /** Brand cayenne */
-  --color-red-on-light: #b30000; /** System red — error states on light background (AAA on white) */
-  --color-red-on-dark: #ff8585; /** System red — error states on dark background */
-  --color-green-on-light: #006616; /** System green — success states on light background (AAA on white) */
-  --color-green-on-dark: #00cc2c; /** System green — success states on dark background */
-  --color-green-dark: #005a14; /** System green dark — success text on tinted backgrounds (AAA on green-bg) */
-  --color-green-bg: #e6f4ea; /** Success state background tint — light surface */
+  --color-red: #b30000; /** System red — base (AAA sobre blanco; fill universal de error/destructive) */
+  --color-red-light: #ff8585; /** System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo */
+  --color-green: #006616; /** System green — base (AAA sobre blanco; fill universal de success) */
+  --color-green-light: #00cc2c; /** System green light — SOLO texto/icono/borde sobre prussian, nunca como fondo */
   --color-primary: var(--color-prussian); /** Primary brand color — used ~50% of the time */
   --color-accent-1: var(--color-lavender); /** Accent 1 brand color — used ~20% of the time */
   --color-accent-2: var(--color-yellow); /** Accent 2 brand color — used ~20% of the time */
   --color-support-1: var(--color-emerald); /** Support 1 brand color — used ~5% of the time */
   --color-support-2: var(--color-cayenne); /** Support 2 brand color — used ~5% of the time */
-  --color-error-on-light: var(--color-red-on-light); /** Error role — maps to system red */
-  --color-error-on-dark: var(--color-red-on-dark); /** Error role on dark background */
-  --color-success-on-light: var(--color-green-on-light); /** Success role — maps to system green */
-  --color-success-on-dark: var(--color-green-on-dark); /** Success role on dark background */
-  --color-destructive-on-light: var(--color-red-on-light); /** Destructive action role — maps to system red */
+  --color-error-text-on-light: var(--color-red); /** Error — texto/icono/borde sobre superficie clara. Nunca como background */
+  --color-error-text-on-dark: var(--color-red-light); /** Error — texto/icono/borde sobre superficie oscura (prussian). Nunca como background */
+  --color-error-fill: var(--color-red); /** Error — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto */
+  --color-error-fill-text: var(--color-white); /** Error — contenido sobre error-fill */
+  --color-success-text-on-light: var(--color-green); /** Success — texto/icono/borde sobre superficie clara. Nunca como background */
+  --color-success-text-on-dark: var(--color-green-light); /** Success — texto/icono/borde sobre superficie oscura (prussian). Nunca como background */
+  --color-success-fill: var(--color-green); /** Success — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto */
+  --color-success-fill-text: var(--color-white); /** Success — contenido sobre success-fill */
+  --color-destructive-text-on-light: var(--color-red); /** Destructive — texto/icono/borde sobre superficie clara. Nunca como background */
+  --color-destructive-text-on-dark: var(--color-red-light); /** Destructive — texto/icono/borde sobre superficie oscura (prussian). Nunca como background */
+  --color-destructive-fill: var(--color-red); /** Destructive — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto */
+  --color-destructive-fill-text: var(--color-white); /** Destructive — contenido sobre destructive-fill */
   --color-text-on-light: var(--color-prussian); /** Text color for light backgrounds */
   --color-text-on-dark: var(--color-white); /** Text color for dark backgrounds */
   --color-text-placeholder: var(--color-grey-dark); /** Placeholder text color */

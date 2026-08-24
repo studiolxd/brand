@@ -1,0 +1,24 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-sheet-bg: #ffffff; // Fondo del panel
+$lxd-sheet-shadow: 0 8px 32px rgba(17,30,48,0.16); // Sombra del panel
+$lxd-sheet-z-index: 1001; // Capa z del panel
+$lxd-sheet-padding-block: 2rem; // Padding vertical del panel
+$lxd-sheet-padding-inline: 2rem; // Padding horizontal del panel
+$lxd-sheet-gap: 1rem; // Separación entre bloques del panel
+$lxd-sheet-inline-size: min(20rem, 85vw); // Ancho cuando entra por un lateral
+$lxd-sheet-block-size: 85vh; // Alto máximo cuando entra por arriba o abajo
+$lxd-sheet-backdrop-bg: #000000; // Color del velo
+$lxd-sheet-backdrop-opacity: 0.6; // Opacidad del velo
+$lxd-sheet-backdrop-z-index: 1000; // Capa z del velo
+$lxd-sheet-header-gap: 1rem; // Separación dentro de la cabecera
+$lxd-sheet-title-color: #111e30; // Color del título
+$lxd-sheet-title-font-size: 2rem; // Tamaño del título
+$lxd-sheet-title-font-weight: 500; // Peso del título
+$lxd-sheet-description-font-size: 0.875rem; // Tamaño del texto descriptivo
+$lxd-sheet-description-color: #4a4a4a; // Color del texto descriptivo
+$lxd-sheet-footer-gap: 0.5rem; // Separación entre acciones del pie
+$lxd-sheet-close-inset: 0.75rem; // Distancia del botón de cierre a la esquina
+$lxd-sheet-transition-duration: 250ms; // Duración de la animación de entrada/salida
+$lxd-sheet-transition-easing: ease-in-out; // Easing de la animación

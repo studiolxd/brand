@@ -17,7 +17,6 @@
   --context-menu-separator-color: var(--color-grey-light); /** Color del separador */
   --context-menu-separator-height: var(--border-width-sm); /** Alto del separador */
   --context-menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
-  --context-menu-item-destructive-hover-color: var(--color-white); /** Color de texto de ítem destructivo al hover */
   --context-menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
   --context-menu-border-width: var(--floating-panel-border-width); /** Grosor del borde del panel */
   --context-menu-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
@@ -25,8 +24,9 @@
   --context-menu-item-font-weight: var(--font-weight-default); /** Peso de texto de ítems */
   --context-menu-item-color: var(--color-text-on-light); /** Color de texto de ítems */
   --context-menu-item-hover-color: var(--color-text-on-light); /** Color de texto de ítem al hover */
-  --context-menu-item-destructive-color: var(--color-destructive-on-light); /** Color de texto de ítem destructivo */
-  --context-menu-item-destructive-hover-bg: var(--color-destructive-on-light); /** Fondo de ítem destructivo al hover */
+  --context-menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de texto de ítem destructivo */
+  --context-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover */
+  --context-menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Color de texto de ítem destructivo al hover */
   --context-menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición de ítems */
   --context-menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición de ítems */
   --context-menu-bg: var(--floating-panel-bg); /** Fondo del panel */
@@ -38,9 +38,9 @@
 html.dark {
   --context-menu-item-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo hover de ítem — surface-dark */
   --context-menu-separator-color: rgba(255, 255, 255, 0.15); /** Color del separador — surface-dark */
-  --context-menu-item-destructive-hover-color: var(--color-white); /** Texto hover de ítem destructivo — surface-dark */
   --context-menu-item-color: var(--color-text-on-dark); /** Color de texto de ítems — surface-dark */
   --context-menu-item-hover-color: var(--color-text-on-dark); /** Texto hover de ítem — surface-dark */
-  --context-menu-item-destructive-color: var(--color-error-on-dark); /** Color de ítem destructivo — surface-dark */
-  --context-menu-item-destructive-hover-bg: var(--color-error-on-dark); /** Fondo hover de ítem destructivo — surface-dark */
+  --context-menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
+  --context-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo hover de ítem destructivo — surface-dark (fill universal) */
+  --context-menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Texto hover de ítem destructivo — surface-dark */
 }

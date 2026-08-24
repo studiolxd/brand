@@ -15,7 +15,7 @@ export function resolveRef(value: string, refMap: Record<string, string>): strin
     const match = current.match(/^\{(.+)\}$/);
     if (!match) return current;
 
-    const next = refMap[match[1]];
+    const next = match[1] !== undefined ? refMap[match[1]] : undefined;
     if (!next || next === current) return current;
 
     current = next;

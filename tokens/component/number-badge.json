@@ -18,9 +18,9 @@
     "support-1-color":{ "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre support-1" },
     "support-2-bg":   { "$value": "{color.support-2}",        "$type": "color", "$description": "Fondo support-2 (cayenne)" },
     "support-2-color":{ "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre support-2" },
-    "danger-bg":      { "$value": "{color.red-on-light}",     "$type": "color", "$description": "Fondo danger (red)" },
+    "danger-bg":      { "$value": "{color.error-fill}",     "$type": "color", "$description": "Fondo danger (red)" },
     "danger-color":   { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre danger" },
-    "success-bg":     { "$value": "{color.success-on-light}", "$type": "color", "$description": "Fondo success (green)" },
+    "success-bg":     { "$value": "{color.success-fill}", "$type": "color", "$description": "Fondo success (green)" },
     "success-color":  { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre success" },
     "neutral-bg":     { "$value": "{color.grey-darkest}",     "$type": "color", "$description": "Fondo neutral (dark grey)" },
     "neutral-color":  { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre neutral" }

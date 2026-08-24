@@ -42,9 +42,9 @@
     "item-color":             { "$value": "{color.text.on-light}",         "$type": "color",     "$description": "Color de ítems" },
     "item-hover-bg":          { "$value": "{color.grey-lightest}",         "$type": "color",     "$description": "Fondo de ítem al hover" },
     "item-hover-color":       { "$value": "{color.text.on-light}",         "$type": "color",     "$description": "Color de ítem al hover" },
-    "item-destructive-color": { "$value": "{color.destructive-on-light}",  "$type": "color",     "$description": "Color de ítem destructivo" },
-    "item-destructive-hover-bg":    { "$value": "{color.destructive-on-light}", "$type": "color", "$description": "Fondo de ítem destructivo al hover" },
-    "item-destructive-hover-color": { "$value": "{color.white}",           "$type": "color",     "$description": "Color de ítem destructivo al hover" },
+    "item-destructive-color": { "$value": "{color.destructive-text-on-light}",  "$type": "color",     "$description": "Color de ítem destructivo" },
+    "item-destructive-hover-bg":    { "$value": "{color.destructive-fill}", "$type": "color", "$description": "Fondo de ítem destructivo al hover" },
+    "item-destructive-hover-color": { "$value": "{color.destructive-fill-text}",           "$type": "color",     "$description": "Color de ítem destructivo al hover" },
     "separator-color":        { "$value": "{color.grey-light}",            "$type": "color",     "$description": "Color del separador" },
     "separator-height":       { "$value": "{border-width.sm}",             "$type": "dimension", "$description": "Alto del separador" },
     "separator-margin-block": { "$value": "{spacing.2}",                   "$type": "dimension", "$description": "Margen vertical del separador" },
@@ -59,8 +59,8 @@
     "surface-dark-item-color":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítems — surface-dark" },
     "surface-dark-item-hover-bg":          { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo de ítem al hover — surface-dark" },
     "surface-dark-item-hover-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítem al hover — surface-dark" },
-    "surface-dark-item-destructive-color":       { "$value": "{color.error-on-dark}", "$type": "color", "$description": "Color de ítem destructivo — surface-dark" },
-    "surface-dark-item-destructive-hover-bg":    { "$value": "{color.error-on-dark}", "$type": "color", "$description": "Fondo de ítem destructivo al hover — surface-dark" },
+    "surface-dark-item-destructive-color":       { "$value": "{color.destructive-text-on-dark}", "$type": "color", "$description": "Color de ítem destructivo — surface-dark" },
+    "surface-dark-item-destructive-hover-bg":    { "$value": "{color.destructive-fill}", "$type": "color", "$description": "Fondo de ítem destructivo al hover — surface-dark (fill universal; el texto hover hereda destructive-fill-text)" },
     "surface-dark-separator-color":        { "$value": "rgba(255, 255, 255, 0.15)",  "$type": "color", "$description": "Color del separador — surface-dark" }
   }
 }

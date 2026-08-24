@@ -1,0 +1,27 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --sheet-inline-size: min(20rem, 85vw); /** Ancho cuando entra por un lateral */
+  --sheet-block-size: 85vh; /** Alto máximo cuando entra por arriba o abajo */
+  --sheet-z-index: var(--modal-z-index); /** Capa z del panel */
+  --sheet-gap: var(--spacing-4); /** Separación entre bloques del panel */
+  --sheet-backdrop-z-index: var(--modal-backdrop-z-index); /** Capa z del velo */
+  --sheet-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
+  --sheet-close-inset: var(--spacing-3); /** Distancia del botón de cierre a la esquina */
+  --sheet-shadow: var(--modal-shadow); /** Sombra del panel */
+  --sheet-padding-block: var(--modal-padding-block); /** Padding vertical del panel */
+  --sheet-padding-inline: var(--modal-padding-inline); /** Padding horizontal del panel */
+  --sheet-backdrop-bg: var(--modal-backdrop-bg); /** Color del velo */
+  --sheet-backdrop-opacity: var(--modal-backdrop-opacity); /** Opacidad del velo */
+  --sheet-header-gap: var(--modal-header-gap); /** Separación dentro de la cabecera */
+  --sheet-title-font-size: var(--modal-title-font-size); /** Tamaño del título */
+  --sheet-title-font-weight: var(--modal-title-font-weight); /** Peso del título */
+  --sheet-transition-duration: var(--modal-transition-duration); /** Duración de la animación de entrada/salida */
+  --sheet-transition-easing: var(--modal-transition-easing); /** Easing de la animación */
+  --sheet-bg: var(--modal-bg); /** Fondo del panel */
+  --sheet-title-color: var(--modal-title-color); /** Color del título */
+  --sheet-description-font-size: var(--input-field-helper-font-size); /** Tamaño del texto descriptivo */
+  --sheet-description-color: var(--input-field-helper-color); /** Color del texto descriptivo */
+}

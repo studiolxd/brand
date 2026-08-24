@@ -1,10 +1,8 @@
 {
   "color": {
-    "red-on-light":   { "$value": "#B30000", "$type": "color", "$description": "System red — error states on light background (AAA on white)" },
-    "red-on-dark":    { "$value": "#FF8585", "$type": "color", "$description": "System red — error states on dark background" },
-    "green-on-light": { "$value": "#006616", "$type": "color", "$description": "System green — success states on light background (AAA on white)" },
-    "green-on-dark":  { "$value": "#00CC2C", "$type": "color", "$description": "System green — success states on dark background" },
-    "green-dark":     { "$value": "#005A14", "$type": "color", "$description": "System green dark — success text on tinted backgrounds (AAA on green-bg)" },
-    "green-bg":       { "$value": "#E6F4EA", "$type": "color", "$description": "Success state background tint — light surface" }
+    "red":         { "$value": "#B30000", "$type": "color", "$description": "System red — base (AAA sobre blanco; fill universal de error/destructive)" },
+    "red-light":   { "$value": "#FF8585", "$type": "color", "$description": "System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo" },
+    "green":       { "$value": "#006616", "$type": "color", "$description": "System green — base (AAA sobre blanco; fill universal de success)" },
+    "green-light": { "$value": "#00CC2C", "$type": "color", "$description": "System green light — SOLO texto/icono/borde sobre prussian, nunca como fondo" }
   }
 }

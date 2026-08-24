@@ -1,0 +1,6 @@
+{
+  "data-table": {
+    "block-gap":   { "$value": "{spacing.4}", "$type": "dimension", "$description": "Separación entre buscador, tabla y paginación — corta, es un bloque cohesionado" },
+    "toolbar-gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre buscador y acciones de la barra" }
+  }
+}

@@ -13,5 +13,5 @@
   --conversation-list-item-active-bg: var(--color-grey-lightest); /** Fondo de item activo */
   --conversation-list-item-hover-bg: var(--color-grey-lightest); /** Fondo de item en hover */
   --conversation-list-delete-color: var(--color-grey-dark); /** Color del botón de eliminar */
-  --conversation-list-delete-hover-color: var(--color-destructive-on-light); /** Color del botón de eliminar en hover */
+  --conversation-list-delete-hover-color: var(--color-destructive-text-on-light); /** Color del botón de eliminar en hover */
 }

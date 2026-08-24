@@ -383,6 +383,22 @@ const ICONS = {
       </>
     ),
   },
+  grid: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle cx="5" cy="5" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="12" cy="5" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="19" cy="5" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="5" cy="19" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="19" cy="19" r="1.5" fill="currentColor" stroke="none" />
+      </>
+    ),
+  },
   'layout-sidebar': {
     viewBox: '0 0 24 24',
     render: () => (

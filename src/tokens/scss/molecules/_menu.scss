@@ -1,0 +1,38 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-menu-bg: #ffffff; // Fondo del panel — mismo lenguaje que ContextMenu
+$lxd-menu-border-width: 1px; // Grosor del borde del panel
+$lxd-menu-border-color: #111e30; // Color del borde del panel
+$lxd-menu-border-radius: 0px; // Radio del panel
+$lxd-menu-shadow: none; // Sombra del panel
+$lxd-menu-z-index: 1100; // Capa z del panel flotante
+$lxd-menu-padding-block: 0.5rem; // Padding vertical del panel
+$lxd-menu-padding-inline: 0.5rem; // Padding lateral del panel
+$lxd-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
+$lxd-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
+$lxd-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
+$lxd-menu-item-icon-size: 1.5rem; // Talla del icono y del glifo de radio
+$lxd-menu-item-border-radius: 4px; // Radio de cada ítem
+$lxd-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
+$lxd-menu-item-font-size: 1rem; // Tamaño de texto de ítems
+$lxd-menu-item-font-weight: 300; // Peso de texto de ítems
+$lxd-menu-item-line-height: 1.3; // Interlineado de ítems
+$lxd-menu-item-color: #111e30; // Color de texto de ítems
+$lxd-menu-item-hover-bg: #f2f2f2; // Fondo de ítem al hover
+$lxd-menu-item-hover-color: #111e30; // Color de texto de ítem al hover
+$lxd-menu-item-cursor: pointer; // Cursor de ítems
+$lxd-menu-item-destructive-color: #b30000; // Color de texto de ítem destructivo
+$lxd-menu-item-destructive-hover-bg: #b30000; // Fondo de ítem destructivo al hover
+$lxd-menu-item-destructive-hover-color: #ffffff; // Color de texto de ítem destructivo al hover
+$lxd-menu-label-padding-block: 0.5rem; // Padding vertical del rótulo de sección
+$lxd-menu-label-padding-inline: 1rem; // Padding horizontal del rótulo de sección
+$lxd-menu-label-font-size: 0.875rem; // Tamaño de texto del rótulo de sección
+$lxd-menu-label-font-weight: 500; // Peso del rótulo de sección
+$lxd-menu-label-color: #4a4a4a; // Color del rótulo de sección
+$lxd-menu-separator-color: #d0d0d0; // Color del separador
+$lxd-menu-separator-height: 1px; // Alto del separador
+$lxd-menu-separator-margin-block: 0.5rem; // Margen vertical del separador
+$lxd-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
+$lxd-menu-transition-duration: 150ms; // Duración de transición
+$lxd-menu-transition-easing: ease; // Easing de transición

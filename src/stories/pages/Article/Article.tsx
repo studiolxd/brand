@@ -4,10 +4,9 @@ import { Footer } from '../../sections/Footer/Footer';
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Tag } from '../../atoms/Tag/Tag';
+import type { TagVariant } from '../../atoms/Tag/Tag';
 import { DEFAULT_NAV_ITEMS, DEFAULT_FEATURED_LINK } from '../../constants/navigation';
 import './Article.css';
-
-type TagVariant = 'default' | 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 
 interface ArticleSection {
   title: string;
@@ -37,7 +36,7 @@ interface ArticleProps {
 
 export function Article({
   category,
-  tagVariant = 'default',
+  tagVariant = 'neutral',
   photo,
   photoAlt,
   title,

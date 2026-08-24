@@ -17,14 +17,14 @@
   --alert-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo oscuro — igual que el título */
   --alert-close-color: var(--color-text-on-dark); /** Color del botón de cierre — blanco */
   --alert-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover */
-  --alert-success-bg: var(--color-success-on-light); /** Fondo success — verde semántico */
-  --alert-success-border-color: var(--color-success-on-light); /** Borde igual al fondo success */
-  --alert-success-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo success */
-  --alert-success-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo success */
-  --alert-error-bg: var(--color-error-on-light); /** Fondo error — rojo semántico */
-  --alert-error-border-color: var(--color-error-on-light); /** Borde igual al fondo error */
-  --alert-error-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo error */
-  --alert-error-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo error */
+  --alert-success-bg: var(--color-success-fill); /** Fondo success — verde semántico */
+  --alert-success-border-color: var(--color-success-fill); /** Borde igual al fondo success */
+  --alert-success-title-color: var(--color-success-fill-text); /** Título blanco sobre fondo success */
+  --alert-success-description-color: var(--color-success-fill-text); /** Descripción blanca sobre fondo success */
+  --alert-error-bg: var(--color-error-fill); /** Fondo error — rojo semántico */
+  --alert-error-border-color: var(--color-error-fill); /** Borde igual al fondo error */
+  --alert-error-title-color: var(--color-error-fill-text); /** Título blanco sobre fondo error */
+  --alert-error-description-color: var(--color-error-fill-text); /** Descripción blanca sobre fondo error */
   --alert-warning-bg: var(--color-accent-2); /** Fondo warning — amarillo brand */
   --alert-warning-border-color: var(--color-accent-2); /** Borde igual al fondo warning */
   --alert-warning-title-color: var(--color-primary); /** Título prussian sobre fondo amarillo (contraste AAA) */

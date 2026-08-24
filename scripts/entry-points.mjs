@@ -43,6 +43,8 @@ export const entryPoints = {
   'number-badge':        'src/stories/atoms/NumberBadge/NumberBadge.tsx',
   'message-bubble':      'src/stories/atoms/MessageBubble/MessageBubble.tsx',
   'typing-indicator':    'src/stories/atoms/TypingIndicator/TypingIndicator.tsx',
+  'skeleton':            'src/stories/atoms/Skeleton/Skeleton.tsx',
+  'tooltip':             'src/stories/atoms/Tooltip/Tooltip.tsx',
   // Molecules
   'alert':                   'src/stories/molecules/Alert/Alert.tsx',
   'async-multi-select-field': 'src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx',
@@ -87,6 +89,12 @@ export const entryPoints = {
   'assistant-message':   'src/stories/molecules/AssistantMessage/AssistantMessage.tsx',
   'message-composer':      'src/stories/molecules/MessageComposer/MessageComposer.tsx',
   'conversation-list':     'src/stories/molecules/ConversationList/ConversationList.tsx',
+  'command-palette':     'src/stories/molecules/CommandPalette/CommandPalette.tsx',
+  'form-field':          'src/stories/molecules/FormField/FormField.tsx',
+  'image-crop-dialog':   'src/stories/molecules/ImageCropDialog/ImageCropDialog.tsx',
+  'menu':                'src/stories/molecules/Menu/Menu.tsx',
+  'sheet':               'src/stories/molecules/Sheet/Sheet.tsx',
+  'app-launcher':        'src/stories/molecules/AppLauncher/AppLauncher.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',
@@ -98,6 +106,8 @@ export const entryPoints = {
   'review-carousel':     'src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx',
   'steps':               'src/stories/organisms/Steps/Steps.tsx',
   'pricing-card':        'src/stories/organisms/PricingCard/PricingCard.tsx',
+  'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
+  'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
 };
 
 export const clientComponents = new Set([
@@ -125,4 +135,13 @@ export const clientComponents = new Set([
   'file-upload',
   'file-upload-field',
   'message-composer',
+  'tooltip',
+  'command-palette',
+  'form-field',
+  'image-crop-dialog',
+  'menu',
+  'sheet',
+  'app-launcher',
+  'data-table',
+  'conversation-thread',
 ]);

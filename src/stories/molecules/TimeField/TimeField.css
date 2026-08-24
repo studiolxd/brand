@@ -7,7 +7,7 @@
 }
 
 .time-field--error .select {
-  --select-border-color: var(--color-error-on-light);
+  --select-border-color: var(--color-error-text-on-light);
 }
 
 .time-field__error {

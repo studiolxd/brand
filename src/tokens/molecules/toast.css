@@ -26,12 +26,12 @@
   --toast-description-color: var(--color-text-muted-on-dark); /** Descripción atenuada sobre fondo oscuro */
   --toast-close-color: var(--color-text-on-dark); /** Color del botón de cierre — blanco */
   --toast-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover */
-  --toast-success-bg: var(--color-success-on-light); /** Fondo success — verde semántico */
-  --toast-success-border-color: var(--color-success-on-light); /** Borde igual al fondo success */
+  --toast-success-bg: var(--color-success-fill); /** Fondo success — verde semántico */
+  --toast-success-border-color: var(--color-success-fill); /** Borde igual al fondo success */
   --toast-success-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo success */
   --toast-success-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo success */
-  --toast-error-bg: var(--color-error-on-light); /** Fondo error — rojo semántico */
-  --toast-error-border-color: var(--color-error-on-light); /** Borde igual al fondo error */
+  --toast-error-bg: var(--color-error-fill); /** Fondo error — rojo semántico */
+  --toast-error-border-color: var(--color-error-fill); /** Borde igual al fondo error */
   --toast-error-title-color: var(--color-text-on-dark); /** Título blanco sobre fondo error */
   --toast-error-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo error */
   --toast-warning-bg: var(--color-accent-2); /** Fondo warning — amarillo brand */

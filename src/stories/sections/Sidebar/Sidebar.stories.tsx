@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppShell } from '../AppShell/AppShell';
-import { Sidebar } from './Sidebar';
+import { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator } from './Sidebar';
 import { Logo } from '../../atoms/Logo/Logo';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
 
@@ -73,6 +73,34 @@ export const AlwaysExpanded: Story = {
       <div style={{ padding: '2rem' }}>
         <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
         <p>Rail permanentemente desplegado en escritorio (prop `expanded`).</p>
+      </div>
+    </AppShell>
+  ),
+};
+
+/* Secciones dentro del panel: un bloque de navegación propio (p. ej. un árbol
+   de carpetas) separado del resto por una línea. */
+export const ConSecciones: Story = {
+  name: 'Con secciones y separador',
+  render: () => (
+    <AppShell
+      sidebar={
+        <Sidebar logo={<Logo height={24} />} footer={sampleUserMenu} expanded>
+          <SampleContent />
+          <SidebarSeparator />
+          <SidebarGroup>
+            <SidebarGroupContent>
+              <a href="#">Cursos</a>
+              <a href="#">Borradores</a>
+              <a href="#">Papelera</a>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </Sidebar>
+      }
+    >
+      <div style={{ padding: '2rem' }}>
+        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
+        <p>El separador y el grupo dan ritmo a un panel con varias secciones.</p>
       </div>
     </AppShell>
   ),

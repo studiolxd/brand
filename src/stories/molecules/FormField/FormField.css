@@ -1,0 +1,27 @@
+/* Dentro de un campo: un respiro entre etiqueta, control y ayuda/error. */
+.form-field > * + * {
+  margin-block-start: var(--form-field-gap);
+}
+
+.form-field__description {
+  font-family: var(--input-field-helper-font-family);
+  font-size: var(--input-field-helper-font-size);
+  font-weight: var(--input-field-helper-font-weight);
+  line-height: var(--input-field-helper-line-height);
+  color: var(--input-field-helper-color);
+  margin: 0;
+}
+
+/* El error del campo y el del formulario entero comparten tratamiento: el
+   `p[role="alert"]` cubre además el patrón manual que usan los formularios
+   cuyo error no cuelga de un solo campo (p. ej. un grupo de checkboxes). */
+.form-field__message,
+.form-error,
+form p[role="alert"] {
+  font-family: var(--input-field-error-font-family);
+  font-size: var(--input-field-error-font-size);
+  font-weight: var(--input-field-error-font-weight);
+  line-height: var(--input-field-error-line-height);
+  color: var(--input-field-error-color);
+  margin: 0;
+}

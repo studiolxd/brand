@@ -32,7 +32,7 @@
     "error-placeholder-color":          { "$value": "{color.text.placeholder}",  "$type": "color",     "$description": "Error placeholder color" },
     "error-placeholder-text-transform": { "$value": "uppercase",                 "$type": "string",    "$description": "Error placeholder text transform" },
     "error-focus-border-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Error border color on focus" },
-    "error-focus-ring-color":           { "$value": "{color.error-on-light}",    "$type": "color",     "$description": "Error focus ring color" },
+    "error-focus-ring-color":           { "$value": "{color.error-text-on-light}",    "$type": "color",     "$description": "Error focus ring color" },
     "sm-padding-block":                 { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Block padding — sm" },
     "sm-padding-inline":                { "$value": "{spacing.3}",               "$type": "dimension", "$description": "Inline padding — sm" },
     "sm-font-size":                     { "$value": "{font-size.1}",             "$type": "dimension", "$description": "Font size — sm" },
@@ -45,6 +45,6 @@
     "surface-dark-placeholder-color":      { "$value": "{color.text.muted-on-dark}",  "$type": "color", "$description": "Placeholder text color — surface-dark" },
     "surface-dark-focus-border-color":     { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Border color on focus — surface-dark" },
     "surface-dark-focus-ring-color":       { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Focus ring color — surface-dark" },
-    "surface-dark-error-focus-ring-color": { "$value": "{color.error-on-dark}",       "$type": "color", "$description": "Error focus ring color — surface-dark" }
+    "surface-dark-error-focus-ring-color": { "$value": "{color.error-text-on-dark}",       "$type": "color", "$description": "Error focus ring color — surface-dark" }
   }
 }
