@@ -31,7 +31,7 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 
 Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `pnpm test` corre los dos primeros; `pnpm test:stories` el tercero.
 
-Chromatic: el token del proyecto NO va en el package.json — exportar `CHROMATIC_PROJECT_TOKEN` antes de `pnpm chromatic`.
+Chromatic: el token del proyecto NO va en el package.json ni en el repo. Vive en `.env` (ignorado por git) como `CHROMATIC_PROJECT_TOKEN`; el CLI lo lee solo. `pnpm chromatic` publica de verdad — para validar sin consumir snapshots, `npx chromatic --dry-run`.
 
 ## Architecture
 

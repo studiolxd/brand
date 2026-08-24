@@ -511,7 +511,7 @@
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/browser-playwright": "^4.1.2",
     "@vitest/coverage-v8": "^4.1.2",
-    "chromatic": "^16.0.0",
+    "chromatic": "^18.5.0",
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "eslint": "^9.39.4",
