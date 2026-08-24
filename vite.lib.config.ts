@@ -21,6 +21,10 @@ export default defineConfig({
         /^react-phone-number-input\//,
         'libphonenumber-js',
         /^libphonenumber-js\//,
+        // Peers con contexto/estado compartido: SIEMPRE externos — bundlearlos
+        // duplica la librería y el contexto no cruza al consumidor.
+        'react-hook-form',
+        'sonner',
       ],
       output: {
         entryFileNames: '[name].js',
