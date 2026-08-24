@@ -26,3 +26,16 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
  * (`data-*`, `aria-*`, `id`…) se reenvía al `<div>`.
  */
 export declare const Card: import("react").ForwardRefExoticComponent<CardProps & import("react").RefAttributes<HTMLElement>>;
+export type CardPartProps = React.ComponentPropsWithoutRef<'div'>;
+/** Fila superior: el bloque de título a un lado y la acción al otro. */
+export declare const CardHeader: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+/** Título de la tarjeta. Un encabezado dentro hereda su escala. */
+export declare const CardTitle: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+/** Texto secundario bajo el título. */
+export declare const CardDescription: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+/** Acción alineada al extremo de la cabecera (menú, botón…). */
+export declare const CardAction: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+/** Cuerpo de la tarjeta. */
+export declare const CardContent: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+/** Pie con las acciones de la tarjeta. */
+export declare const CardFooter: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;

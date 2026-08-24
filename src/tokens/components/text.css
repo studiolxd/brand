@@ -32,6 +32,7 @@
   --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
   --text-font-weight: var(--font-weight-default); /** Default font weight */
   --text-color: var(--color-text-on-light); /** Default text color */
+  --text-background: var(--color-background-light); /** Fondo del lienzo de página (body) */
   --text-heading-color: var(--color-text-on-light); /** Heading color */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
   --text-h1-font-weight: var(--text-heading-font-weight); /** H1 font weight */
@@ -72,6 +73,8 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --text-color: var(--color-text-on-dark); /** Color de texto por defecto — surface-dark */
+  --text-background: var(--color-background-dark); /** Fondo del lienzo de página — surface-dark */
   --text-h1-color: var(--color-text-on-dark); /** H1 color — surface-dark */
   --text-h2-color: var(--color-text-on-dark); /** H2 color — surface-dark */
   --text-h3-color: var(--color-text-on-dark); /** H3 color — surface-dark */

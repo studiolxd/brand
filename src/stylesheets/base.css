@@ -3,15 +3,31 @@
 @import "../stories/atoms/VisuallyHidden/VisuallyHidden.css";
 @import "../stories/atoms/SkipLink/SkipLink.css";
 
+/* Border-box en todo: la regla que cada consumidor acababa reescribiendo.
+   normalize solo lo toca en un par de controles de formulario, así que sin
+   esto cualquier `width` + `padding` de producto se descuadra. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
-  color-scheme: light;
+  /* El lienzo tiene par claro/oscuro (ver body): el navegador debe conocer
+     los dos para pintar scrollbars y controles nativos en consonancia. */
+  color-scheme: light dark;
 
   @media (prefers-reduced-motion: no-preference) {
     scroll-behavior: smooth;
   }
 }
 
+/* Lienzo de la página: fondo y color van SIEMPRE emparejados — un fondo
+   fijado sin su color deja los componentes de superficie oscura ilegibles.
+   Ambos tokens tienen par surface-dark, así que el modo oscuro llega solo
+   con .surface-dark / [data-theme="dark"] / html.dark. */
 body {
+  background-color: var(--text-background);
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
   font-size: var(--text-font-size);

@@ -8,6 +8,9 @@
     "shadow":                   { "$value": "{shadow.none}", "$type": "shadow", "$description": "Sombra — sin sombra" },
     "description-font-size":    { "$value": "{font-size.3}", "$type": "dimension", "$description": "Tamaño de fuente de la descripción" },
     "description-margin-block-end": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Margen inferior de la descripción" },
+    "header-gap":               { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre título y acción en la cabecera" },
+    "title-font-weight":        { "$value": "{font-weight.medium}", "$type": "number", "$description": "Peso del título de la tarjeta" },
+    "footer-gap":               { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre acciones del pie" },
 
     "primary-bg":    { "$value": "{color.primary}",         "$type": "color", "$description": "Variante primary — fondo prussian" },
     "primary-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Variante primary — texto blanco sobre fondo oscuro" },

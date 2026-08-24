@@ -7,6 +7,28 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v15.0.0
+
+### BREAKING
+
+- **Reset global `box-sizing: border-box`** (`*`, `*::before`, `*::after`). Antes
+  brand dejaba el `content-box` del navegador y cada consumidor escribía su propio
+  reset. Si una app ya lo tenía, no nota nada; si no lo tenía, cualquier regla que
+  combine `width`/`inline-size` con `padding` cambia de caja.
+- **`html { color-scheme: light dark }`** (antes `light`). Los controles nativos y
+  las barras de scroll pasan a seguir el tema.
+
+### Añadido
+
+- **Lienzo de página emparejado**: `body` fija ahora `background-color` además del
+  color de texto, con tokens `--text-background` / `--text-color` y sus pares
+  `surface-dark-*`. El modo oscuro del canvas llega solo con `.surface-dark`,
+  `[data-theme="dark"]` o `html.dark`; ya no hace falta que cada app lo repita.
+- **Subpartes componibles de Card**: `CardHeader`, `CardTitle`, `CardDescription`,
+  `CardAction`, `CardContent` y `CardFooter`, con BEM propio (`.card__*`) y tokens
+  `--card-header-gap`, `--card-title-font-weight`, `--card-footer-gap`. Eran divs
+  sin estilar y cinco apps de la suite repetían su maquetación.
+
 ## v14.0.4
 
 ### Corregido

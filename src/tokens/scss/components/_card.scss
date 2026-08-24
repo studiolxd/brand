@@ -9,6 +9,9 @@ $lxd-card-border-radius: 0px; // Radio de esquinas — sin redondeado
 $lxd-card-shadow: none; // Sombra — sin sombra
 $lxd-card-description-font-size: 1.25rem; // Tamaño de fuente de la descripción
 $lxd-card-description-margin-block-end: 3rem; // Margen inferior de la descripción
+$lxd-card-header-gap: 0.75rem; // Separación entre título y acción en la cabecera
+$lxd-card-title-font-weight: 500; // Peso del título de la tarjeta
+$lxd-card-footer-gap: 0.5rem; // Separación entre acciones del pie
 $lxd-card-primary-bg: #111e30; // Variante primary — fondo prussian
 $lxd-card-primary-color: #ffffff; // Variante primary — texto blanco sobre fondo oscuro
 $lxd-card-outline-bg: #ffffff; // Variante outline — fondo blanco (light)

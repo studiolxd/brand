@@ -68,3 +68,58 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
     </div>
   );
 });
+
+/* --------------------------------------------------------------------------
+   Subpartes del modo contenedor. Componer con ellas evita que cada producto
+   se maquete la cabecera, el pie o el título por su cuenta.
+   -------------------------------------------------------------------------- */
+
+export type CardPartProps = React.ComponentPropsWithoutRef<'div'>;
+
+/** Fila superior: el bloque de título a un lado y la acción al otro. */
+export const CardHeader = forwardRef<HTMLDivElement, CardPartProps>(function CardHeader(
+  { className, ...rest },
+  ref,
+) {
+  return <div ref={ref} className={['card__header', className].filter(Boolean).join(' ')} {...rest} />;
+});
+
+/** Título de la tarjeta. Un encabezado dentro hereda su escala. */
+export const CardTitle = forwardRef<HTMLDivElement, CardPartProps>(function CardTitle(
+  { className, ...rest },
+  ref,
+) {
+  return <div ref={ref} className={['card__title', className].filter(Boolean).join(' ')} {...rest} />;
+});
+
+/** Texto secundario bajo el título. */
+export const CardDescription = forwardRef<HTMLDivElement, CardPartProps>(function CardDescription(
+  { className, ...rest },
+  ref,
+) {
+  return <div ref={ref} className={['card__description', className].filter(Boolean).join(' ')} {...rest} />;
+});
+
+/** Acción alineada al extremo de la cabecera (menú, botón…). */
+export const CardAction = forwardRef<HTMLDivElement, CardPartProps>(function CardAction(
+  { className, ...rest },
+  ref,
+) {
+  return <div ref={ref} className={['card__action', className].filter(Boolean).join(' ')} {...rest} />;
+});
+
+/** Cuerpo de la tarjeta. */
+export const CardContent = forwardRef<HTMLDivElement, CardPartProps>(function CardContent(
+  { className, ...rest },
+  ref,
+) {
+  return <div ref={ref} className={['card__content', className].filter(Boolean).join(' ')} {...rest} />;
+});
+
+/** Pie con las acciones de la tarjeta. */
+export const CardFooter = forwardRef<HTMLDivElement, CardPartProps>(function CardFooter(
+  { className, ...rest },
+  ref,
+) {
+  return <div ref={ref} className={['card__footer', className].filter(Boolean).join(' ')} {...rest} />;
+});

@@ -1,6 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { Card } from './Card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardAction,
+  CardContent,
+  CardFooter,
+} from './Card';
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
@@ -136,5 +144,45 @@ export const LinkModeUnchanged: Story = {
     await expect(link).not.toBeNull();
     await expect(link).toHaveClass('card', 'card--primary');
     await expect(canvasElement.querySelector('.arrow')).not.toBeNull();
+  },
+};
+
+/**
+ * Composición con subpartes: cabecera con acción, cuerpo y pie. Antes eran divs
+ * sin estilar y cada producto los maquetaba; ahora vienen con la tarjeta.
+ */
+export const ConSubpartes: Story = {
+  render: () => (
+    <Card>
+      <CardHeader>
+        <CardTitle>
+          <Heading level={3} size={6}>Clave de API</Heading>
+          <CardDescription>Solo lectura</CardDescription>
+        </CardTitle>
+        <CardAction>
+          <Button variant="outline" size="sm">Rotar</Button>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <Paragraph>
+          Creada el 12 de marzo. Se usa para autenticar las llamadas del conector.
+        </Paragraph>
+      </CardContent>
+      <CardFooter>
+        <Button size="sm">Copiar</Button>
+        <Button variant="outline" size="sm" destructive>Revocar</Button>
+      </CardFooter>
+    </Card>
+  ),
+  play: async ({ canvasElement }) => {
+    const header = canvasElement.querySelector('.card__header')!;
+    await expect(header).not.toBeNull();
+    // la cabecera reparte título y acción a los extremos
+    await expect(getComputedStyle(header).justifyContent).toBe('space-between');
+    // el pie alinea sus acciones en fila
+    await expect(getComputedStyle(canvasElement.querySelector('.card__footer')!).display).toBe('flex');
+    // el encabezado dentro del título hereda la escala de la tarjeta
+    const h = canvasElement.querySelector('.card__title h3')!;
+    await expect(getComputedStyle(h).fontSize).toBe(getComputedStyle(canvasElement.querySelector('.card__title')!).fontSize);
   },
 };

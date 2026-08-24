@@ -42,3 +42,49 @@
 .card.card--accent-2  { background-color: var(--color-accent-2); }
 .card.card--support-1 { background-color: var(--color-support-1); }
 .card.card--support-2 { background-color: var(--color-support-2); }
+
+/* --------------------------------------------------------------------------
+   Subpartes componibles (modo contenedor). Antes eran divs sin estilar y cada
+   producto los maquetaba por su cuenta: cinco apps de la suite repetían estas
+   mismas reglas en su CSS.
+   -------------------------------------------------------------------------- */
+
+/* La tarjeta es una columna flex con align-items: flex-start, así que un hijo
+   de bloque encogería hasta su línea más ancha sin este ancho completo. */
+.card__header,
+.card__content,
+.card__footer {
+  inline-size: 100%;
+}
+
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--card-header-gap);
+}
+
+.card__title {
+  font-weight: var(--card-title-font-weight);
+}
+
+/* El título suele contener un encabezado real (cuenta para el esquema del
+   documento): toma la escala tipográfica de la tarjeta, no la del documento.
+   El átomo Heading se estila con doble clase (`.heading.heading--3`, 0-2-0)
+   por la regla BEM del DS, así que aquí hace falta 0-2-1 para ganarle sin
+   depender del orden en que se carguen los CSS de ambos componentes. */
+.card__title :is(h1, h2, h3, h4, h5, h6),
+.card__title :is(h1, h2, h3, h4, h5, h6).heading {
+  margin-block: 0;
+  font: inherit;
+  color: inherit;
+}
+
+.card__description {
+  font-size: var(--card-description-font-size);
+}
+
+.card__footer {
+  display: flex;
+  gap: var(--card-footer-gap);
+}

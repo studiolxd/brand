@@ -5,6 +5,9 @@
     "font-weight":     { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Default font weight" },
     "line-height":     { "$value": "{line-height.normal}",        "$type": "number",    "$description": "Default line height" },
     "color":           { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Default text color" },
+    "background":      { "$value": "{color.background.light}", "$type": "color",  "$description": "Fondo del lienzo de página (body)" },
+    "surface-dark-color":      { "$value": "{color.text.on-dark}",     "$type": "color",  "$description": "Color de texto por defecto — surface-dark" },
+    "surface-dark-background": { "$value": "{color.background.dark}",  "$type": "color",  "$description": "Fondo del lienzo de página — surface-dark" },
     "letter-spacing":  { "$value": "{letter-spacing.normal}",     "$type": "dimension", "$description": "Default letter spacing" },
 
     "heading": {

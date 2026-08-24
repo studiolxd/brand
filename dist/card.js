@@ -32,6 +32,42 @@ var o = a(function({ href: a, title: o, description: s, ctaLabel: c, color: l = 
 			/* @__PURE__ */ r(t, { size: "lg" })
 		]
 	});
+}), s = a(function({ className: e, ...t }, n) {
+	return /* @__PURE__ */ r("div", {
+		ref: n,
+		className: ["card__header", e].filter(Boolean).join(" "),
+		...t
+	});
+}), c = a(function({ className: e, ...t }, n) {
+	return /* @__PURE__ */ r("div", {
+		ref: n,
+		className: ["card__title", e].filter(Boolean).join(" "),
+		...t
+	});
+}), l = a(function({ className: e, ...t }, n) {
+	return /* @__PURE__ */ r("div", {
+		ref: n,
+		className: ["card__description", e].filter(Boolean).join(" "),
+		...t
+	});
+}), u = a(function({ className: e, ...t }, n) {
+	return /* @__PURE__ */ r("div", {
+		ref: n,
+		className: ["card__action", e].filter(Boolean).join(" "),
+		...t
+	});
+}), d = a(function({ className: e, ...t }, n) {
+	return /* @__PURE__ */ r("div", {
+		ref: n,
+		className: ["card__content", e].filter(Boolean).join(" "),
+		...t
+	});
+}), f = a(function({ className: e, ...t }, n) {
+	return /* @__PURE__ */ r("div", {
+		ref: n,
+		className: ["card__footer", e].filter(Boolean).join(" "),
+		...t
+	});
 });
 //#endregion
-export { o as Card };
+export { o as Card, u as CardAction, d as CardContent, l as CardDescription, f as CardFooter, s as CardHeader, c as CardTitle };

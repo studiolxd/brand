@@ -132,8 +132,8 @@ export { CalendarRoster } from './stories/molecules/CalendarRoster/CalendarRoste
 export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType, LegendItem } from './stories/molecules/CalendarRoster/CalendarRoster';
 export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
 export type { ContextMenuItem, ContextMenuButtonItem, ContextMenuLinkItem, ContextMenuSeparator, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
-export { Card } from './stories/molecules/Card/Card';
-export type { CardProps, CardColor } from './stories/molecules/Card/Card';
+export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from './stories/molecules/Card/Card';
+export type { CardProps, CardColor, CardPartProps } from './stories/molecules/Card/Card';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export { CardSplit } from './stories/molecules/CardSplit/CardSplit';
 export { CardSquare } from './stories/molecules/CardSquare/CardSquare';

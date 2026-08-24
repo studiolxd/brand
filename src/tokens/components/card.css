@@ -11,6 +11,9 @@
   --card-shadow: var(--shadow-none); /** Sombra — sin sombra */
   --card-description-font-size: var(--font-size-3); /** Tamaño de fuente de la descripción */
   --card-description-margin-block-end: var(--spacing-7); /** Margen inferior de la descripción */
+  --card-header-gap: var(--spacing-3); /** Separación entre título y acción en la cabecera */
+  --card-title-font-weight: var(--font-weight-medium); /** Peso del título de la tarjeta */
+  --card-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
   --card-outline-border-width: var(--border-width-sm); /** Variante outline — grosor de borde */
   --card-primary-bg: var(--color-primary); /** Variante primary — fondo prussian */
   --card-primary-color: var(--color-text-on-dark); /** Variante primary — texto blanco sobre fondo oscuro */
