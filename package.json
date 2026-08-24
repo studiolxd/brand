@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -455,7 +455,6 @@
     "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && node scripts/post-build.mjs",
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
-    "prepare": "npm run build:tokens && npm run build:lib && npm run build:css && npm run build:tokens-css",
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
@@ -463,7 +462,8 @@
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic",
     "test": "vitest run --project unit --project components",
-    "test:stories": "vitest run --project storybook"
+    "test:stories": "vitest run --project storybook",
+    "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -540,5 +540,6 @@
   },
   "sideEffects": [
     "**/*.css"
-  ]
+  ],
+  "packageManager": "pnpm@10.12.1"
 }

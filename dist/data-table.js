@@ -9,7 +9,7 @@ import { EmptyState as l } from "./empty-state.js";
 import { jsx as u, jsxs as d } from "react/jsx-runtime";
 import * as f from "react";
 import { useState as p } from "react";
-//#region node_modules/@tanstack/table-core/build/lib/index.mjs
+//#region node_modules/.pnpm/@tanstack+table-core@8.21.3/node_modules/@tanstack/table-core/build/lib/index.mjs
 function m(e, t) {
 	return typeof e == "function" ? e(t) : e;
 }
@@ -1524,7 +1524,7 @@ function Le() {
 	}, b(e.options, "debugTable", "getSortedRowModel", () => e._autoResetPageIndex()));
 }
 //#endregion
-//#region node_modules/@tanstack/react-table/build/lib/index.mjs
+//#region node_modules/.pnpm/@tanstack+react-table@8.21.3_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@tanstack/react-table/build/lib/index.mjs
 function Re(e, t) {
 	return e ? ze(e) ? /* @__PURE__ */ f.createElement(e, t) : e : null;
 }

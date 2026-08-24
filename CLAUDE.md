@@ -6,32 +6,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Development
-npm run storybook        # Launch Storybook on port 6006
+pnpm storybook        # Launch Storybook on port 6006
 
 # Build
-npm run build:tokens     # Regenerar tokens CSS+SCSS desde Style Dictionary (sd.config.mjs)
-npm run build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
-npm run build:css        # Bundle CSS standalone → dist/brand.css
-npm run build:tokens-css # Bundle de tokens CSS → dist/tokens.css
-npm run prepare          # Ejecuta los cuatro builds anteriores (se lanza automáticamente en npm install)
-npm run build-storybook  # Build estático de Storybook
+pnpm build:tokens     # Regenerar tokens CSS+SCSS desde Style Dictionary (sd.config.mjs)
+pnpm build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
+pnpm build:css        # Bundle CSS standalone → dist/brand.css
+pnpm build:tokens-css # Bundle de tokens CSS → dist/tokens.css
+pnpm build:all        # Los cuatro builds anteriores, en el orden obligatorio (ya no hay prepare: dist/ va committeado)
+pnpm build-storybook  # Build estático de Storybook
 
 # Quality
-npm run lint             # Run ESLint (flat config format)
-npm test                 # Vitest: proyectos unit (node) + components (jsdom + Testing Library)
-npm run test:stories     # Vitest: stories en navegador (Playwright/Chromium) — pesado
+pnpm lint             # Run ESLint (flat config format)
+pnpm test             # Vitest: proyectos unit (node) + components (jsdom + Testing Library)
+pnpm test:stories     # Vitest: stories en navegador (Playwright/Chromium) — pesado
 
 # Docker — Storybook image → ghcr.io
 docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:latest --push .
 ```
 
-> **IMPORTANTE:** Cada vez que se modifique un archivo JSON de tokens, ejecutar `npm run build:tokens` antes de commitear. Los CSS bajo `src/tokens/` son auto-generados y se sobreescriben en el siguiente build.
+> **IMPORTANTE:** Cada vez que se modifique un archivo JSON de tokens, ejecutar `pnpm build:tokens` antes de commitear. Los CSS bajo `src/tokens/` son auto-generados y se sobreescriben en el siguiente build.
 >
-> **IMPORTANTE:** `npm run build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css` ni `dist/tokens.css`. Después de `build:lib` ejecutar siempre `npm run build:css && npm run build:tokens-css`, o usar `npm run prepare` para el build completo.
+> **IMPORTANTE:** `pnpm build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css` ni `dist/tokens.css`. Después de `build:lib` ejecutar siempre `pnpm build:css && pnpm build:tokens-css`, o usar `pnpm build:all` para el build completo.
 
-Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `npm test` corre los dos primeros; `npm run test:stories` el tercero.
+Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `pnpm test` corre los dos primeros; `pnpm test:stories` el tercero.
 
-Chromatic: el token del proyecto NO va en el package.json — exportar `CHROMATIC_PROJECT_TOKEN` antes de `npm run chromatic`.
+Chromatic: el token del proyecto NO va en el package.json — exportar `CHROMATIC_PROJECT_TOKEN` antes de `pnpm chromatic`.
 
 ## Architecture
 
@@ -71,7 +71,7 @@ Cada componente nuevo debe registrarse en **tres sitios** o no estará disponibl
 
 1. **Token first, siempre.** Toda propiedad CSS debe referenciar un token (`var(--...)`). Sin valores hardcoded (colores, tamaños, espaciado, tipografía, radios…).
 2. **Tokens en cascada.** Los tokens de componente heredan de tokens de control/base cuando aplica (ej. `--input-font-family: var(--control-font-family)`). Esto permite personalización solo con tokens, sin tocar CSS.
-3. **Los archivos de token tienen fuente JSON obligatoria.** Todo CSS bajo `src/tokens/` se genera con Style Dictionary. Flujo para un nuevo conjunto de tokens: (1) crear `tokens/component/<name>.json`, (2) añadir entradas CSS y SCSS en `sd.config.mjs`, (3) ejecutar `npm run build:tokens`. La única excepción manual es `src/tokens/index.css` (manifiesto de imports).
+3. **Los archivos de token tienen fuente JSON obligatoria.** Todo CSS bajo `src/tokens/` se genera con Style Dictionary. Flujo para un nuevo conjunto de tokens: (1) crear `tokens/component/<name>.json`, (2) añadir entradas CSS y SCSS en `sd.config.mjs`, (3) ejecutar `pnpm build:tokens`. La única excepción manual es `src/tokens/index.css` (manifiesto de imports).
 4. **Especificidad BEM.** Los modificadores usan doble clase (`.block.block--modifier`) para ganar sobre el selector base.
 5. **Ejes inline/block, nunca x/y.** Los tokens y propiedades CSS de padding y similares usan siempre `inline`/`block` (alineado con propiedades lógicas CSS). En CSS escribir siempre `padding-block` + `padding-inline` desdoblados, nunca la shorthand `padding: a b`.
 6. **Documentación MDX en castellano.** Cualquier archivo `.mdx` nuevo o modificado debe estar íntegramente en castellano.
@@ -99,7 +99,7 @@ html.dark {
 ```
 
 - **Activación contextual** (`.surface-dark` en cualquier contenedor anidado) y **activación root-level** (`[data-theme="dark"]` o `html.dark`, para theme managers como `next-themes`) usan el mismo mecanismo — las custom properties se heredan por cascada, así que basta con que el selector matchee un ancestro. **No usar la clase `.dark` a secas fuera de este selector combinado.**
-- **Añadir soporte oscuro a un token existente**: añadir el token hermano `surface-dark-<nombre>` en el JSON de `tokens/component/` o `tokens/molecule/` correspondiente (mismo grupo, mismo nombre con el prefijo) y ejecutar `npm run build:tokens` — no tocar `surface.css` a mano para esto.
+- **Añadir soporte oscuro a un token existente**: añadir el token hermano `surface-dark-<nombre>` en el JSON de `tokens/component/` o `tokens/molecule/` correspondiente (mismo grupo, mismo nombre con el prefijo) y ejecutar `pnpm build:tokens` — no tocar `surface.css` a mano para esto.
 - `src/stylesheets/surface.css` solo debe contener overrides que **no** se puedan expresar como un remapeo de token plano: reglas dependientes de estado combinado (ej. `.surface-dark .select:disabled { --select-color: ...; }`, donde el valor depende de `:disabled` Y del contexto oscuro a la vez) o combinaciones de modificadores BEM sin contraparte en modo claro. Documentar el motivo en un comentario junto a cada regla residual.
 - El prefijo del token es `surface-dark-`, no `dark-` a secas — evita colisión con convenciones de nombre ad-hoc que pudiera tener algún componente para su propia variante BEM manual. Antes de añadir un token `surface-dark-*` nuevo, comprobar que no colisiona con un `dark-`/`-dark-` ya existente en ese JSON con otro propósito (histórico: `header.json` tuvo este caso — `dark-bg`/`nav-dark-color` eran una variante BEM manual `.header--dark`, ya migrada al sistema estándar, ver más abajo).
 - En Storybook, el decorator global de fondo oscuro ya añade `.surface-dark` automáticamente.

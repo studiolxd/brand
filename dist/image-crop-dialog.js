@@ -5,7 +5,7 @@ import { Button as e } from "./button.js";
 import { Modal as t } from "./modal.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import i, { PureComponent as a, createRef as o, useRef as s, useState as c } from "react";
-//#region node_modules/react-image-crop/dist/index.js
+//#region node_modules/.pnpm/react-image-crop@11.1.2_react@19.2.4/node_modules/react-image-crop/dist/index.js
 var l = {
 	x: 0,
 	y: 0,

@@ -27,6 +27,3 @@ storybook-static
 coverage
 temp_web
 
-# Este repo usa npm — artefactos de pnpm siempre fuera
-pnpm-workspace.yaml
-pnpm-lock.yaml
