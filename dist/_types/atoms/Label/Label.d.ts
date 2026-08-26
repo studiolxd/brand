@@ -11,7 +11,7 @@ export interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
     hidden?: boolean;
     /**
      * Talla, la misma que la del control al que acompaña (los fields la
-     * propagan): `sm`/`md` 14px, `lg` 16px.
+     * propagan): `sm`/`md` 14px, `lg` 20px (la del control).
      */
     size?: 'sm' | 'md' | 'lg';
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */

@@ -6,7 +6,7 @@
   --label-font-family: var(--font-family-sans); /** Font family */
   --label-font-size: var(--font-size-1); /** Font size (14px) */
   --label-sm-font-size: var(--font-size-1); /** Font size — sm (14px: la etiqueta no baja de la talla de interfaz) */
-  --label-lg-font-size: var(--font-size-2); /** Font size — lg (16px) */
+  --label-lg-font-size: var(--font-size-3); /** Font size — lg (20px: la del control, como en sm) */
   --label-line-height: var(--line-height-normal); /** Line height */
   --label-letter-spacing: var(--letter-spacing-normal); /** Letter spacing */
   --label-font-weight: var(--font-weight-emphasis); /** Font weight */

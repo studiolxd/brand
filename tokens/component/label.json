@@ -3,7 +3,7 @@
     "font-family":    { "$value": "{font-family.sans}",      "$type": "string",    "$description": "Font family" },
     "font-size":      { "$value": "{font-size.1}",           "$type": "dimension", "$description": "Font size (14px)" },
     "sm-font-size":   { "$value": "{font-size.1}",           "$type": "dimension", "$description": "Font size — sm (14px: la etiqueta no baja de la talla de interfaz)" },
-    "lg-font-size":   { "$value": "{font-size.2}",           "$type": "dimension", "$description": "Font size — lg (16px)" },
+    "lg-font-size":   { "$value": "{font-size.3}",           "$type": "dimension", "$description": "Font size — lg (20px: la del control, como en sm)" },
     "font-weight":    { "$value": "{font-weight.emphasis}",    "$type": "number",    "$description": "Font weight" },
     "line-height":    { "$value": "{line-height.normal}",    "$type": "number",    "$description": "Line height" },
     "color":          { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Text color" },

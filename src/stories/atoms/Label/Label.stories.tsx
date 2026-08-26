@@ -12,7 +12,7 @@ const meta: Meta<typeof Label> = {
     size: {
       control: { type: 'radio' },
       options: ['sm', 'md', 'lg'],
-      description: 'Talla, la del control que acompaña: sm/md 14px, lg 16px.',
+      description: 'Talla, la del control que acompaña: sm/md 14px, lg 20px.',
     },
     hidden: {
       control: { type: 'boolean' },
