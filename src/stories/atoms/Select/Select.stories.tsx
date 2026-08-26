@@ -107,6 +107,8 @@ export const Contrato: Story = {
     await expect(md).toHaveAttribute('aria-invalid', 'true');
     await userEvent.click(md);
     const listbox = await within(document.body).findByRole('listbox');
+    // Abierto, el trigger lo marca (data-popup-open): es lo que gira el chevron.
+    await expect(md).toHaveAttribute('data-popup-open');
     await expect(within(listbox).getAllByRole('option')).toHaveLength(4);
     await userEvent.click(within(listbox).getByRole('option', { name: 'Français' }));
     await waitFor(() => expect(within(document.body).queryByRole('listbox')).toBeNull());

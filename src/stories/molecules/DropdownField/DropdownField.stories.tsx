@@ -96,6 +96,10 @@ export const Contrato: Story = {
     await userEvent.click(control);
     const opciones = await within(document.body).findAllByRole('menuitemradio');
     await expect(opciones).toHaveLength(3);
+    // Abierto, el disparador lo dice (aria-expanded) y lo marca (data-popup-open): es lo que gira el chevron.
+    const abierto = canvas.getByRole('button', { name: 'Ordenar por' });
+    await expect(abierto).toHaveAttribute('aria-expanded', 'true');
+    await expect(abierto).toHaveAttribute('data-popup-open');
     await userEvent.click(within(document.body).getByRole('menuitemradio', { name: 'Por nombre' }));
     await expect(canvas.getByRole('button', { name: 'Ordenar por' }).textContent).toContain('Por nombre');
   },

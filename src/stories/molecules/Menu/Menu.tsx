@@ -78,9 +78,15 @@ export function Menu({
   size = 'md',
   className,
 }: MenuProps) {
+  // Base UI reconoce «su» disparador comparando el id del DOM con el id que él
+  // mismo asigna al Trigger: si el `id` va solo en el elemento de `render`, no
+  // casan y el disparador nunca recibe `aria-expanded` ni `data-popup-open`
+  // (el chevron no gira). Se le pasa el id del elemento al Trigger.
+  const triggerElement = trigger as React.ReactElement<Record<string, unknown>>;
+  const triggerId = typeof triggerElement.props?.id === 'string' ? triggerElement.props.id : undefined;
   return (
     <BaseMenu.Root open={open} defaultOpen={defaultOpen} onOpenChange={(next) => onOpenChange?.(next)}>
-      <BaseMenu.Trigger render={trigger as React.ReactElement<Record<string, unknown>>} openOnHover={openOnHover} delay={hoverDelay} />
+      <BaseMenu.Trigger id={triggerId} render={triggerElement} openOnHover={openOnHover} delay={hoverDelay} />
       <BaseMenu.Portal>
         <BaseMenu.Positioner className="menu__positioner" side={side} align={align} sideOffset={sideOffset}>
           <BaseMenu.Popup

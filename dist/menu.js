@@ -8,12 +8,14 @@ function a(e) {
 	return ["menu__item", e ? "menu__item--destructive" : ""].filter(Boolean).join(" ");
 }
 function o({ trigger: o, items: s, value: c, onValueChange: l, renderLink: u = t, open: d, defaultOpen: f, onOpenChange: p, openOnHover: m = !1, hoverDelay: h = 150, side: g = "bottom", align: _ = "start", sideOffset: v = 4, minWidth: y = "10rem", maxWidth: b, size: x = "md", className: S }) {
+	let C = o, w = typeof C.props?.id == "string" ? C.props.id : void 0;
 	return /* @__PURE__ */ r(i.Root, {
 		open: d,
 		defaultOpen: f,
 		onOpenChange: (e) => p?.(e),
 		children: [/* @__PURE__ */ n(i.Trigger, {
-			render: o,
+			id: w,
+			render: C,
 			openOnHover: m,
 			delay: h
 		}), /* @__PURE__ */ n(i.Portal, { children: /* @__PURE__ */ n(i.Positioner, {

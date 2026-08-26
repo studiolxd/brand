@@ -74,6 +74,8 @@ export const Contrato: Story = {
     await expect(boton.querySelector('.user-menu__chevron')).not.toBeNull();
     await userEvent.click(boton);
     const menu = await within(document.body).findByRole('menu');
+    // Abierto, el disparador lo marca (data-popup-open): es lo que gira el chevron.
+    await expect(boton).toHaveAttribute('data-popup-open');
     await expect(within(menu).getByText('ana.garcia@studiolxd.com')).toBeInTheDocument();
     await expect(within(menu).getByRole('menuitem', { name: 'Mi cuenta' })).toHaveAttribute('href', '#cuenta');
     await expect(within(menu).getAllByRole('menuitem')).toHaveLength(3);
