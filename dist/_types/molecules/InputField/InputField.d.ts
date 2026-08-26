@@ -1,5 +1,5 @@
 import './InputField.css';
-interface InputFieldProps {
+export interface InputFieldProps {
     id: string;
     label: string;
     labelHidden?: boolean;
@@ -19,4 +19,3 @@ interface InputFieldProps {
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
 export declare function InputField({ id, label, labelHidden, name, type, placeholder, value, defaultValue, disabled, readOnly, size, error, errorMessage, helperText, onChange, onBlur, onFocus, }: InputFieldProps): import("react/jsx-runtime").JSX.Element;
-export {};
