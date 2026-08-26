@@ -3,13 +3,22 @@
  */
 
 :root {
-  --avatar-size-sm: 1.5rem; /** 24px — avatar inline, navegación */
-  --avatar-size-md: 2.25rem; /** 36px — talla por defecto */
-  --avatar-size-lg: 3.75rem; /** 60px — cards estándar */
-  --avatar-size-xl: 7.5rem; /** 120px — reviewer destacado */
-  --avatar-border-radius: var(--border-radius-full); /** Radio para forma circular */
-  --avatar-border-radius-square: var(--border-radius-sm); /** Radio para forma cuadrada (logos de org) */
-  --avatar-initials-color: var(--color-white); /** Color del texto de iniciales */
-  --avatar-initials-font-weight: var(--font-weight-medium); /** Peso del texto de iniciales */
-  --avatar-initials-bg: var(--color-primary); /** Fondo del fallback de iniciales */
+  --avatar-size-sm: var(--size-component-sm); /** 32px — en barras y menús (UserMenu, OrgSwitcher) */
+  --avatar-size-md: var(--size-component-md); /** 40px — por defecto: listas, tarjetas */
+  --avatar-size-lg: var(--size-component-lg); /** 48px — cabeceras de perfil */
+  --avatar-initials-font-size-sm: var(--font-size-1); /** Iniciales a talla sm */
+  --avatar-initials-font-size-md: var(--font-size-2); /** Iniciales a talla md */
+  --avatar-initials-font-size-lg: var(--font-size-3); /** Iniciales a talla lg */
+  --avatar-border-radius: var(--border-radius-round); /** Personas: círculo */
+  --avatar-border-radius-square: var(--border-radius-default); /** Organizaciones (logos): el radio del sistema */
+  --avatar-initials-bg: var(--color-primary); /** Fondo de las iniciales */
+  --avatar-initials-color: var(--color-text-on-dark); /** Iniciales sobre el fondo */
+  --avatar-initials-font-weight: var(--font-weight-emphasis); /** Iniciales: énfasis */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --avatar-initials-bg: var(--color-text-on-dark); /** Iniciales — surface-dark: se invierten */
+  --avatar-initials-color: var(--color-primary); /** Iniciales — surface-dark */
 }

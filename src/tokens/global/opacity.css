@@ -3,6 +3,6 @@
  */
 
 :root {
-  --opacity-overlay: 0.6; /** Opacidad de overlays y fondos semitransparentes */
-  --opacity-disabled: 0.4; /** Opacidad de elementos deshabilitados */
+  --opacity-overlay: 0.6; /** Velo bajo un modal o una hoja: oscurece la página sin ocultarla */
+  --opacity-disabled: 0.4; /** Controles deshabilitados: el elemento sigue ahí, atenuado */
 }

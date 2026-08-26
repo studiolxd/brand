@@ -1,14 +1,14 @@
 'use client';
 import './input.css';
-import { jsx as e } from "react/jsx-runtime";
-import { forwardRef as t } from "react";
+import { forwardRef as e } from "react";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/atoms/Input/Input.tsx
-var n = t(function({ size: t = "md", error: n = !1, className: r, describedBy: i, ariaLabel: a, ...o }, s) {
-	return /* @__PURE__ */ e("input", {
+var n = e(function({ size: e = "md", error: n = !1, className: r, describedBy: i, ariaLabel: a, ...o }, s) {
+	return /* @__PURE__ */ t("input", {
 		ref: s,
 		className: [
 			"input",
-			t === "md" ? "" : `input--${t}`,
+			e === "md" ? "" : `input--${e}`,
 			n ? "input--error" : "",
 			r ?? ""
 		].filter(Boolean).join(" "),

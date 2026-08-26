@@ -1,7 +1,7 @@
 .footer {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--border-width-sm);
+  gap: var(--border-width-default);
   background-color: var(--footer-gap-color);
   color: var(--color-text-on-dark);
 }

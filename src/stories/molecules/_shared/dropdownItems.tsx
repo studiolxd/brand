@@ -1,23 +1,90 @@
 import type { ReactNode } from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import type { ContextMenuItem, ContextMenuRenderLinkProps } from '../ContextMenu/ContextMenu';
-import type { MenuItem } from '../Menu/Menu';
+import { Menu as BaseMenu } from '@base-ui-components/react/menu';
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Vocabulario de ítems de TODOS los menús del sistema (Menu, ContextMenu,
+ * UserMenu, OrgSwitcher, DropdownField…), rendido sobre el Menu de Base UI.
+ * Cada menú pone sus clases; aquí se define el dato y se traduce al primitivo.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+export type MenuButtonItem = {
+  type: 'button';
+  label: string;
+  icon?: ReactNode;
+  onClick: () => void;
+  disabled?: boolean;
+  destructive?: boolean;
+  /**
+   * `false` mantiene el menú abierto tras elegir el ítem — para acciones que
+   * se encadenan (marcar varias cosas) o que dejan al usuario donde estaba.
+   * Por defecto el menú se cierra.
+   */
+  closeOnSelect?: boolean;
+};
+
+export type MenuLinkItem = {
+  type: 'link';
+  label: string;
+  icon?: ReactNode;
+  href: string;
+  disabled?: boolean;
+  destructive?: boolean;
+};
+
+export type MenuSeparatorItem = {
+  type: 'separator';
+};
+
+/** Rótulo de sección dentro del menú. No es interactivo. */
+export type MenuLabelItem = {
+  type: 'label';
+  label: string;
+};
+
+/**
+ * Ítem de elección exclusiva. El valor activo lo lleva el menú
+ * (`value`/`onValueChange`), como en cualquier grupo de radio.
+ */
+export type MenuRadioItem = {
+  type: 'radio';
+  /** Texto del ítem; admite un nodo para, por ejemplo, marcar el idioma con `lang`. */
+  label: ReactNode;
+  value: string;
+  icon?: ReactNode;
+  disabled?: boolean;
+};
+
+export type MenuItem = MenuButtonItem | MenuLinkItem | MenuSeparatorItem | MenuLabelItem | MenuRadioItem;
+
+/**
+ * Props del enlace de un ítem. Además de `href`, `children` y `className`,
+ * el motor de menú inyecta atributos (role, tabIndex, handlers de teclado…):
+ * el `renderLink` del producto debe **propagarlos todos** a su enlace.
+ */
+export type MenuRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string;
+  children: ReactNode;
+  className: string;
+};
+
+/** Reenvía TODO lo que inyecta Base UI: un renderLink que solo copie href/className rompe el menú. */
+export function defaultRenderLink({ children, ...props }: MenuRenderLinkProps) {
+  return <a {...props}>{children}</a>;
+}
 
 interface RenderDropdownItemsOptions {
-  items: ContextMenuItem[] | MenuItem[];
+  items: MenuItem[];
   itemClass: (destructive?: boolean) => string;
   separatorClass: string;
-  renderLink: (props: ContextMenuRenderLinkProps) => ReactNode;
-  /** Clase de los ítems de tipo `label`. Sin ella, los `label` se ignoran. */
+  renderLink: (props: MenuRenderLinkProps) => ReactNode;
+  /** Clase del rótulo de sección (ítems `label`). Sin ella, no se renderizan. */
   labelClass?: string;
-  /** Clase del glifo decorativo de los ítems de tipo `radio`. */
-  radioIndicatorClass?: string;
-  /** Valor activo del grupo de radio, para pintar el glifo. */
+  /** Valor activo del grupo de radio. */
   radioValue?: string;
   onRadioValueChange?: (value: string) => void;
 }
 
-function itemContent(label: string, icon?: ReactNode) {
+function itemContent(label: ReactNode, icon?: ReactNode) {
   if (!icon) return <>{label}</>;
   return (
     <>
@@ -27,10 +94,8 @@ function itemContent(label: string, icon?: ReactNode) {
   );
 }
 
-/**
- * Agrupa los ítems `radio` consecutivos: Radix exige que vivan dentro de un
- * `RadioGroup`, que es quien conoce el valor activo y emite el cambio.
- */
+/* Agrupa los ítems `radio` consecutivos: el primitivo exige que vivan dentro
+   de un RadioGroup, y una lista puede intercalar radios con otros ítems. */
 function chunkByRadio(items: MenuItem[]): Array<{ radio: boolean; items: MenuItem[] }> {
   return items.reduce<Array<{ radio: boolean; items: MenuItem[] }>>((chunks, item) => {
     const radio = item.type === 'radio';
@@ -47,93 +112,81 @@ export function renderDropdownItems({
   separatorClass,
   renderLink,
   labelClass,
-  radioIndicatorClass,
   radioValue,
   onRadioValueChange,
 }: RenderDropdownItemsOptions): ReactNode {
   const renderOne = (item: MenuItem, key: number): ReactNode => {
     if (item.type === 'separator') {
-      return <DropdownMenu.Separator key={key} className={separatorClass} />;
+      return <BaseMenu.Separator key={key} className={separatorClass} />;
     }
-
     if (item.type === 'label') {
       if (!labelClass) return null;
       return (
-        <DropdownMenu.Label key={key} className={labelClass}>
-          {item.label}
-        </DropdownMenu.Label>
+        <BaseMenu.Group key={key}>
+          <BaseMenu.GroupLabel className={labelClass}>{item.label}</BaseMenu.GroupLabel>
+        </BaseMenu.Group>
       );
     }
-
     if (item.type === 'radio') {
       return (
-        <DropdownMenu.RadioItem
+        <BaseMenu.RadioItem
           key={key}
           className={itemClass()}
           value={item.value}
           disabled={item.disabled}
         >
-          {/* Decorativo: el estado real y la selección viven en el propio
-              RadioItem (role="menuitemradio"). Un input de verdad para que el
-              glifo se pinte; Radix expone su estado en `data-state`, que un
-              `<input type="radio">` no sabe leer — de ahí el `checked`
-              derivado del valor del grupo. */}
-          <input
-            type="radio"
-            checked={radioValue === item.value}
-            readOnly
-            tabIndex={-1}
-            aria-hidden="true"
-            className={radioIndicatorClass}
-          />
           {itemContent(item.label, item.icon)}
-        </DropdownMenu.RadioItem>
+        </BaseMenu.RadioItem>
       );
     }
-
     const content = itemContent(item.label, item.icon);
-
     if (item.type === 'link') {
       if (item.disabled) {
         return (
-          <DropdownMenu.Item key={key} className={itemClass(item.destructive)} disabled>
+          <BaseMenu.Item key={key} className={itemClass(item.destructive)} disabled>
             {content}
-          </DropdownMenu.Item>
+          </BaseMenu.Item>
         );
       }
+      // El enlace lo pone el producto (router); el primitivo le inyecta sus
+      // props a través de la función de render.
       return (
-        <DropdownMenu.Item key={key} asChild>
-          {renderLink({ href: item.href, children: content, className: itemClass(item.destructive) })}
-        </DropdownMenu.Item>
+        <BaseMenu.Item
+          key={key}
+          className={itemClass(item.destructive)}
+          render={(props) =>
+            renderLink({
+              ...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>),
+              href: item.href,
+              className: (props as { className?: string }).className ?? itemClass(item.destructive),
+              children: content,
+            }) as React.ReactElement
+          }
+        />
       );
     }
-
     return (
-      <DropdownMenu.Item
+      <BaseMenu.Item
         key={key}
         className={itemClass(item.destructive)}
         disabled={item.disabled}
-        onSelect={
+        closeOnClick={item.closeOnSelect !== false}
+        onClick={
           item.disabled
             ? undefined
-            : (event) => {
-                // Radix cierra el menú salvo que se cancele el evento.
+            : () => {
                 if (item.closeOnSelect === false) {
-                  event.preventDefault();
                   item.onClick();
                   return;
                 }
-                // Diferido al siguiente tick: si el onClick abre un diálogo
-                // modal mientras el menú aún se está cerrando, el bloqueo de
-                // pointer-events del menú se queda pegado al <body> y la
-                // página entera deja de responder a clics (bug conocido de
-                // Radix DropdownMenu+Dialog).
+                // Diferido: si la acción abre un diálogo, que el menú termine
+                // de cerrarse y devolver el foco antes de que el diálogo lo tome.
                 setTimeout(() => item.onClick(), 0);
               }
         }
       >
         {content}
-      </DropdownMenu.Item>
+      </BaseMenu.Item>
     );
   };
 
@@ -141,7 +194,6 @@ export function renderDropdownItems({
   if (!list.some((item) => item.type === 'radio')) {
     return list.map(renderOne);
   }
-
   let offset = 0;
   return chunkByRadio(list).map((chunk, index) => {
     const start = offset;
@@ -149,13 +201,13 @@ export function renderDropdownItems({
     const rendered = chunk.items.map((item, i) => renderOne(item, start + i));
     if (!chunk.radio) return rendered;
     return (
-      <DropdownMenu.RadioGroup
+      <BaseMenu.RadioGroup
         key={`radio-${index}`}
         value={radioValue}
-        onValueChange={onRadioValueChange}
+        onValueChange={(value) => onRadioValueChange?.(String(value))}
       >
         {rendered}
-      </DropdownMenu.RadioGroup>
+      </BaseMenu.RadioGroup>
     );
   });
 }

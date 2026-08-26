@@ -1,0 +1,9 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-z-index-bar: 100; // Barras fijas de la aplicación: cabecera, barra lateral
+$lxd-z-index-backdrop: 200; // Velo que oscurece la página bajo un modal o una hoja
+$lxd-z-index-modal: 300; // Modales, hojas y paneles de navegación a pantalla completa
+$lxd-z-index-floating: 400; // Paneles anclados a un control: menús, select, popover, tooltip. Por encima del modal, porque un select dentro de un modal debe abrirse sobre él
+$lxd-z-index-toast: 500; // Avisos: siempre visibles, sobre cualquier otra capa
+$lxd-z-index-skip: 600; // Enlace de salto al contenido: lo primero al tabular, sobre todo lo demás

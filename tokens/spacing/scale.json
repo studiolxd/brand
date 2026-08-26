@@ -1,12 +1,12 @@
 {
   "spacing": {
-    "1": { "$value": "0.25rem", "$type": "dimension", "$description": "0.25rem (4px) — micro spacing" },
-    "2": { "$value": "0.5rem",  "$type": "dimension", "$description": "0.5rem (8px) — extra small spacing" },
-    "3": { "$value": "0.75rem", "$type": "dimension", "$description": "0.75rem (12px) — small spacing" },
-    "4": { "$value": "1rem",    "$type": "dimension", "$description": "1rem (16px) — base spacing" },
-    "5": { "$value": "1.5rem",  "$type": "dimension", "$description": "1.5rem (24px) — medium spacing" },
-    "6": { "$value": "2rem",    "$type": "dimension", "$description": "2rem (32px) — large spacing" },
-    "7": { "$value": "3rem",    "$type": "dimension", "$description": "3rem (48px) — extra large spacing" },
-    "8": { "$value": "4rem",    "$type": "dimension", "$description": "4rem (64px) — 2x large spacing" }
+    "1": { "$value": "0.25rem", "$type": "dimension", "$description": "4px — dentro de un control: icono y texto, padding de un badge" },
+    "2": { "$value": "0.5rem",  "$type": "dimension", "$description": "8px — dentro de un control: padding de botones y campos, gap entre iconos" },
+    "3": { "$value": "0.75rem", "$type": "dimension", "$description": "12px — entre elementos de un componente: filas de una lista, cabecera y cuerpo" },
+    "4": { "$value": "1rem",    "$type": "dimension", "$description": "16px — entre elementos de un componente; padding estándar de tarjetas y secciones" },
+    "5": { "$value": "1.5rem",  "$type": "dimension", "$description": "24px — entre componentes" },
+    "6": { "$value": "2rem",    "$type": "dimension", "$description": "32px — entre componentes; bloques de una página" },
+    "7": { "$value": "3rem",    "$type": "dimension", "$description": "48px — entre secciones" },
+    "8": { "$value": "4rem",    "$type": "dimension", "$description": "64px — entre secciones destacadas" }
   }
 }

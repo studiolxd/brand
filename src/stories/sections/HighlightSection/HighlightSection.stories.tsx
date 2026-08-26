@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { HighlightSection } from './HighlightSection';
 
 const meta: Meta<typeof HighlightSection> = {
-  title: 'Sections/HighlightSection',
+  title: 'Por revisar/Sections/HighlightSection',
   component: HighlightSection,
   parameters: {
     layout: 'fullscreen',

@@ -3,20 +3,20 @@
  */
 
 :root {
-  --app-header-height: 3.5rem; /** Alto del header de aplicación en móvil */
-  --app-header-shadow: 0 4px 16px rgba(17,30,48,0.12); /** Sombra del header hacia abajo — mismos parámetros que sidebar.shadow */
-  --app-header-z-index: 300; /** Capa z del header y su panel — sobre el contenido, bajo floating-panel (1100) */
-  --app-header-padding-inline: var(--spacing-4); /** Padding horizontal del header */
-  --app-header-gap: var(--spacing-3); /** Separación entre hamburger, centro y final */
-  --app-header-transition-duration: var(--motion-duration-slow); /** Duración de la animación de apertura del panel */
-  --app-header-transition-easing: var(--motion-easing-in-out); /** Curva de la animación de apertura del panel */
-  --app-header-bg: var(--color-background-light); /** Fondo del header */
-  --app-header-panel-bg: var(--color-background-light); /** Fondo del panel de navegación a pantalla completa */
+  --app-header-content-height: var(--size-component-md); /** Lo más alto que lleva la barra: un control md */
+  --app-header-padding-block: var(--spacing-2); /** Aire arriba y abajo del contenido */
+  --app-header-border-color: var(--color-grey-light); /** Color del borde */
+  --app-header-padding-inline: var(--spacing-4); /** Aire lateral */
+  --app-header-gap: var(--spacing-3); /** Entre el botón de menú, el inicio y los controles del final */
+  --app-header-z-index: var(--z-index-bar); /** Capa de barra fija */
+  --app-header-height: calc(var(--app-header-content-height) + 2 * var(--app-header-padding-block)); /** Altura de la barra: compuesta, 56px */
+  --app-header-bg: var(--color-background-light); /** Fondo */
+  --app-header-border-width: var(--border-width-default); /** Borde inferior que la separa del contenido */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --app-header-bg: var(--color-background-dark); /** Fondo del header — surface-dark */
-  --app-header-panel-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
+  --app-header-border-color: var(--menu-surface-dark-separator-color); /** Borde — surface-dark */
+  --app-header-bg: var(--color-background-dark); /** Fondo — surface-dark */
 }

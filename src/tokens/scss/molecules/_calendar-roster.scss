@@ -4,11 +4,11 @@
 $lxd-calendar-roster-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
 $lxd-calendar-roster-nav-color: #111e30; // Color de los botones prev/next
 $lxd-calendar-roster-nav-hover-bg: #f2f2f2; // Fondo hover de los botones de navegación
-$lxd-calendar-roster-nav-disabled-color: #767676; // Color deshabilitado
+$lxd-calendar-roster-nav-disabled-color: #6b6b6b; // Color deshabilitado
 $lxd-calendar-roster-nav-focus-ring-color: #111e30; // Focus ring de navegación
 $lxd-calendar-roster-nav-focus-ring-width: 2px; // Grosor del focus ring
 $lxd-calendar-roster-nav-focus-ring-offset: 1px; // Separación del focus ring
-$lxd-calendar-roster-nav-radius: 4px; // Radio del botón de navegación
+$lxd-calendar-roster-nav-radius: 0px; // Radio del botón de navegación
 $lxd-calendar-roster-title-font-size: 1rem; // Tamaño del título del mes
 $lxd-calendar-roster-title-font-weight: 500; // Peso del título del mes
 $lxd-calendar-roster-title-color: #111e30; // Color del título del mes
@@ -29,7 +29,7 @@ $lxd-calendar-roster-th-day-padding-block: 0.5rem; // Padding vertical del encab
 $lxd-calendar-roster-th-day-bg: #ffffff; // Fondo del encabezado de día
 $lxd-calendar-roster-th-day-today-color: #ffffff; // Texto del encabezado del día de hoy
 $lxd-calendar-roster-th-day-today-bg: #111e30; // Fondo del encabezado del día de hoy
-$lxd-calendar-roster-th-day-today-radius: 4px; // Radio del badge del día de hoy
+$lxd-calendar-roster-th-day-today-radius: 0px; // Radio del badge del día de hoy
 $lxd-calendar-roster-td-name-font-size: 0.875rem; // Tamaño del nombre del empleado
 $lxd-calendar-roster-td-name-color: #111e30; // Color del nombre del empleado
 $lxd-calendar-roster-td-name-bg: #ffffff; // Fondo sticky de la celda de nombre
@@ -49,6 +49,6 @@ $lxd-calendar-roster-legend-gap: 0.75rem; // Gap entre elementos de la leyenda
 $lxd-calendar-roster-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
 $lxd-calendar-roster-legend-color: #4a4a4a; // Color del texto de la leyenda
 $lxd-calendar-roster-legend-swatch-size: 0.75rem; // Tamaño del cuadradito de color en la leyenda
-$lxd-calendar-roster-legend-swatch-radius: 4px; // Radio del cuadradito de color
+$lxd-calendar-roster-legend-swatch-radius: 0px; // Radio del cuadradito de color
 $lxd-calendar-roster-transition-duration: 150ms; // Duración de las transiciones
 $lxd-calendar-roster-transition-easing: ease; // Easing de las transiciones

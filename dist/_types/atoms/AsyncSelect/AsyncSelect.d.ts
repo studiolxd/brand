@@ -1,4 +1,4 @@
-import * as RadixPopover from '@radix-ui/react-popover';
+import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import './AsyncSelect.css';
 export interface AsyncSelectOption {
     value: string;
@@ -33,13 +33,13 @@ export interface AsyncSelectProps {
      */
     clearLabel?: string;
     /**
-     * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
+     * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
      * `Portal.container`). Por defecto se monta en `document.body`, que
      * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
      * sin configuración adicional. Solo hace falta pasarlo cuando el
      * AsyncSelect vive dentro de un `.surface-dark` **anidado** (no en la
      * raíz), ya que ese contexto no llega a `document.body` por la cascada.
      */
-    container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
+    container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 export declare function AsyncSelect({ onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, emptyMessage, loadingLabel, clearLabel, container, }: AsyncSelectProps): import("react/jsx-runtime").JSX.Element;

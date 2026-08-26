@@ -3,7 +3,7 @@ import { ProjectsSection } from './ProjectsSection';
 import { projects } from '../../data/home';
 
 const meta: Meta<typeof ProjectsSection> = {
-  title: 'Sections/ProjectsSection',
+  title: 'Por revisar/Sections/ProjectsSection',
   component: ProjectsSection,
   parameters: { layout: 'fullscreen' },
 };

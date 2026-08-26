@@ -3,7 +3,7 @@ import { ReviewsSection } from './ReviewsSection';
 import { reviews } from '../../data/home';
 
 const meta: Meta<typeof ReviewsSection> = {
-  title: 'Sections/ReviewsSection',
+  title: 'Por revisar/Sections/ReviewsSection',
   component: ReviewsSection,
   parameters: { layout: 'fullscreen' },
 };

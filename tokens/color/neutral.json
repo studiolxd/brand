@@ -2,9 +2,9 @@
   "color": {
     "white":         { "$value": "#FFFFFF", "$type": "color", "$description": "Pure white" },
     "black":         { "$value": "#000000", "$type": "color", "$description": "Pure black" },
-    "grey-lightest": { "$value": "#F2F2F2", "$type": "color", "$description": "Fondos sutiles, chips, tags" },
+    "grey-lightest": { "$value": "#F2F2F2", "$type": "color", "$description": "Superficie clara secundaria: bloque de código, kbd, burbujas, pie de tabla. Encima, texto prusia o grey-darkest" },
     "grey-light":    { "$value": "#D0D0D0", "$type": "color", "$description": "Bordes, dividers, separadores" },
-    "grey-dark":     { "$value": "#767676", "$type": "color", "$description": "Placeholder, texto secundario" },
-    "grey-darkest":  { "$value": "#4A4A4A", "$type": "color", "$description": "Texto deshabilitado, labels inactivos" }
+    "grey-dark":     { "$value": "#6B6B6B", "$type": "color", "$description": "Iconos de acción secundarios y controles deshabilitados. No es un gris de texto: todo texto va en prusia o grey-darkest" },
+    "grey-darkest":  { "$value": "#4A4A4A", "$type": "color", "$description": "Texto secundario y placeholder en superficie clara (AAA sobre blanco)" }
   }
 }

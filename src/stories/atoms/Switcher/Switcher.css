@@ -13,7 +13,7 @@
   transition: background-color var(--switcher-transition-duration) var(--switcher-transition-easing);
 }
 
-.switcher[data-state="checked"] {
+.switcher[data-checked] {
   background-color: var(--switcher-track-bg-checked);
 }
 
@@ -28,7 +28,7 @@
 }
 
 /* offset = track-width - track-padding*2 - thumb-size */
-.switcher[data-state="checked"] .switcher__thumb {
+.switcher[data-checked] .switcher__thumb {
   transform: translateX(calc(var(--switcher-track-width) - var(--switcher-track-padding) * 2 - var(--switcher-thumb-size)));
 }
 

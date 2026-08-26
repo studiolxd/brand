@@ -1,1 +1,1 @@
-.logo-preview{padding-block:var(--spacing-5);padding-inline:var(--spacing-5);display:inline-flex}.logo-preview--dark{background-color:var(--color-text-on-light)}.logo--dark{color:var(--color-text-on-dark)}
+.logo{inline-size:auto;block-size:var(--logo-height-md);color:var(--logo-color);fill:currentColor;display:block}.logo.logo--sm{block-size:var(--logo-height-sm)}.logo.logo--md{block-size:var(--logo-height-md)}.logo.logo--lg{block-size:var(--logo-height-lg)}

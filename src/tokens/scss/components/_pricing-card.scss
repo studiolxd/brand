@@ -13,7 +13,7 @@ $lxd-pricing-card-border-width: 1px; // Grosor de borde — heredado de la varia
 $lxd-pricing-card-border-color: #111e30; // Color de borde — heredado de la variante outline de card
 $lxd-pricing-card-plan-name-color: #4a4a4a; // Color del nombre del plan
 $lxd-pricing-card-price-font-size: 3.5rem; // Tamaño de fuente del precio — mismo tamaño que el texto destacado del sistema
-$lxd-pricing-card-price-font-weight: 600; // Peso de fuente del precio — mismo énfasis (semibold) que number-badge
+$lxd-pricing-card-price-font-weight: 300; // Peso de fuente del precio — mismo énfasis (semibold) que number-badge
 $lxd-pricing-card-price-line-height: 1; // Line-height del precio — mismo criterio que number-badge (sin interlineado extra)
 $lxd-pricing-card-price-color: #111e30; // Color del precio — heredado de card (el remapeo dark de card.outline-color se propaga automáticamente vía var())
 $lxd-pricing-card-price-suffix-font-size: 0.875rem; // Tamaño de fuente del sufijo (ej. /mes) — mismo tamaño que paragraph small

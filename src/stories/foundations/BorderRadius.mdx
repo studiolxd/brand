@@ -1,20 +1,32 @@
 import { Meta } from "@storybook/addon-docs/blocks";
-import { RadiusScale } from "./RadiusScale";
 import { TokenTable } from "./TokenTable";
-import { radiusTokens } from "../../tokens/border";
+import { radiusRoleTokens, radiusScaleTokens } from "../../tokens/border";
 
 <Meta title="Foundations/Radio de borde" />
 
 # Radio de borde
 
-Escala de border-radius basada en múltiplos de 4px, coherente con la escala de espaciado. `full` se reserva para elementos completamente redondeados como pills o avatares.
+**Las esquinas del sistema son rectas.** Campos, botones, tarjetas, paneles, menús: radio 0. La única curva es la píldora —avatares, tags, badges, interruptores, botones píldora—, que es un círculo completo, no un redondeo.
 
-<RadiusScale tokens={radiusTokens} />
+| Rol | Valor | Uso |
+|---|---|---|
+| `--border-radius-default` | 0 | Toda esquina |
+| `--border-radius-round` | 9999px | Píldoras y círculos |
+
+No hay término medio: una esquina o es recta o es un círculo. Esa es la decisión de identidad, y por eso no existe un rol para 4, 8 o 12px.
+
+La escala completa (4 · 8 · 12 · 16px) queda declarada como primitivo, pero ningún componente la referencia. Si algún día el sistema necesitara una esquina redondeada, se añadiría un rol con su uso; la escala está para que no haya que inventar el valor.
 
 ---
 
-## Tokens CSS
+## Tokens
 
-<TokenTable tokens={radiusTokens} />
+### Roles
 
-Los tokens están definidos en `tokens/border/radius.json`.
+<TokenTable tokens={radiusRoleTokens} />
+
+### Escala
+
+<TokenTable tokens={radiusScaleTokens} />
+
+Definidos en `tokens/border/radius.json`.

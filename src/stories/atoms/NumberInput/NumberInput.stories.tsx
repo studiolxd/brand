@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { NumberInput } from './NumberInput';
 
 const meta = {
-  title: 'Atoms/NumberInput',
+  title: 'Por revisar/Atoms/NumberInput',
   component: NumberInput,
   parameters: { layout: 'centered' },
   args: {
@@ -81,6 +81,7 @@ export const Controlled: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — etiquetas accesibles',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

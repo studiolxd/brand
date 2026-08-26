@@ -1,0 +1,42 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ThemeSwitcherStories from "./ThemeSwitcher.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { themeSwitcherTokens } from "../../../tokens/molecules/theme-switcher";
+
+<Meta of={ThemeSwitcherStories} />
+
+# ThemeSwitcher
+
+Selector de tema: claro, oscuro o el del sistema. **Mismo patrón que `LanguageSwitcher`**: en compacto, un `DropdownField` —etiqueta "Tema" delante y un control rectangular a la altura del sistema con el icono y el nombre del tema actual— que abre un menú de opciones exclusivas; en lista, las tres opciones desplegadas en línea. Vive en los ajustes del menú del sitio (`settings` del `SiteHeader`) y en el pie.
+
+<Canvas of={ThemeSwitcherStories.Compacto} />
+
+## Lista
+
+Para el pie, donde hay sitio y no hace falta esconder nada:
+
+<Canvas of={ThemeSwitcherStories.Lista} />
+
+## Las tres opciones
+
+`system` sigue la preferencia del sistema operativo y es la elección recomendada por defecto: quien nunca haya tocado el selector ve la web como ve todo lo demás. `light` y `dark` la fijan.
+
+## Lo que es del producto
+
+El componente muestra y elige. **Aplicar el tema y recordarlo es del producto**: con `onChange`, pone `html.dark` o `[data-theme="dark"]` —los selectores que voltean los tokens (Foundations → Colores)— y guarda la preferencia donde le convenga. `system` significa escuchar `prefers-color-scheme` y aplicar lo que diga.
+
+<Canvas of={ThemeSwitcherStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- En compacto, la etiqueta (`labels.group`, "Tema") nombra el control por `id`, y este abre un menú de `menuitemradio` que se recorre con las flechas; en lista, un `group` con nombre, un botón por tema y la actual como texto con `aria-current` (no se pulsa: es un dato, no una acción).
+- Los textos entran por `labels`, con castellano por defecto: el producto multiidioma pasa los suyos.
+- Los iconos son decorativos; el texto siempre está.
+
+## Tokens
+
+<TokenTable tokens={themeSwitcherTokens} />
+
+## Props
+
+<ArgTypes of={ThemeSwitcherStories} />

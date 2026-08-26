@@ -3,7 +3,7 @@ import { ProjectCarousel } from './ProjectCarousel';
 import { projects } from '../../data/home';
 
 const meta: Meta<typeof ProjectCarousel> = {
-  title: 'Organisms/ProjectCarousel',
+  title: 'Por revisar/Organisms/ProjectCarousel',
   component: ProjectCarousel,
   parameters: {
     layout: 'fullscreen',

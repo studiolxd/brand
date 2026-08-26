@@ -1,4 +1,4 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import { Dialog } from '@base-ui-components/react/dialog';
 import './Modal.css';
 export interface ModalProps {
     open: boolean;
@@ -8,7 +8,7 @@ export interface ModalProps {
     closeLabel?: string;
     fallbackTitle?: string;
     /**
-     * Nodo DOM donde montar el portal del modal (reenviado a Radix
+     * Nodo DOM donde montar el portal del modal (reenviado a Base UI
      * `Portal.container`). Por defecto se monta en `document.body`, que
      * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
      * sin configuración adicional. Solo hace falta pasarlo cuando el Modal
@@ -18,17 +18,14 @@ export interface ModalProps {
     container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
     /**
      * Descripción accesible del modal, renderizada bajo el título como
-     * `Dialog.Description` — Radix se encarga de enlazarla al diálogo. Úsala
+     * `Dialog.Description` — Base UI se encarga de enlazarla al diálogo. Úsala
      * cuando el texto descriptivo lo aporte el propio Modal.
      */
     description?: React.ReactNode;
     /**
-     * Id del elemento que describe el modal, reenviado a `Dialog.Content`. Para
+     * Id del elemento que describe el modal, reenviado a `Dialog.Popup`. Para
      * adaptadores que renderizan su propio nodo de descripción dentro de
      * `children`. Tiene prioridad sobre `description` si se pasan ambas.
-     * Omitida (y sin `description`) se mantiene el comportamiento actual:
-     * `aria-describedby={undefined}`, que silencia el aviso de Radix en modales
-     * sin descripción.
      */
     'aria-describedby'?: string;
 }

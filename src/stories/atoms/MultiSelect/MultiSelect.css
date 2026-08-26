@@ -26,7 +26,7 @@
 }
 
 .multi-select:focus,
-.multi-select[data-state='open'] {
+.multi-select[data-popup-open] {
   outline: none;
 }
 
@@ -96,7 +96,7 @@
   transform: rotate(90deg);
   transition: transform var(--multi-select-icon-transition) var(--motion-easing-default);
 
-  [data-state='open'] & {
+  [data-popup-open] & {
     transform: rotate(-90deg);
   }
 }
@@ -107,10 +107,9 @@
   border-width: var(--multi-select-border-width);
   border-style: var(--multi-select-border-style);
   border-color: var(--multi-select-content-border-color);
-  min-width: var(--radix-popover-trigger-width);
-  max-height: var(--multi-select-content-max-height, var(--radix-popover-content-available-height));
+  min-width: var(--anchor-width);
+  max-height: var(--multi-select-content-max-height, var(--available-height));
   overflow-y: auto;
-  z-index: var(--multi-select-content-z-index);
 
   &[data-side='bottom'] {
     border-top: none;
@@ -225,3 +224,8 @@
   padding-block: var(--multi-select-lg-item-padding-block);
 }
 
+
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.multi-select__positioner {
+  z-index: var(--multi-select-content-z-index);
+}

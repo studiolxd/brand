@@ -9,11 +9,11 @@
   --code-block-padding-inline: var(--card-padding-inline); /** Padding horizontal — heredado de card */
   --code-block-padding-block-start: var(--card-padding-block-start); /** Padding block start — heredado de card */
   --code-block-padding-block-end: var(--card-padding-block-end); /** Padding block end — heredado de card */
-  --code-block-border-radius: var(--card-border-radius); /** Radio de esquinas — heredado de card */
-  --code-block-shadow: var(--card-shadow); /** Sombra de la superficie — heredada de card */
-  --code-block-border-width: var(--card-outline-border-width); /** Grosor de borde — heredado de card (variante outline) */
   --code-block-color: var(--color-text-on-light); /** Color de texto — fijo, no remapea en surface-dark (ver nota en bg) */
   --code-block-font-size: var(--text-paragraph-small-font-size); /** Tamaño de fuente del código — mismo tamaño que paragraph small */
   --code-block-line-height: var(--text-paragraph-small-line-height); /** Interlineado del código — mismo criterio que paragraph small */
+  --code-block-border-radius: var(--card-border-radius); /** Radio de esquinas — heredado de card */
+  --code-block-shadow: var(--card-shadow); /** Sombra de la superficie — heredada de card */
+  --code-block-border-width: var(--card-outline-border-width); /** Grosor de borde — heredado de card (variante outline) */
   --code-block-border-color: var(--card-outline-border-color); /** Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro */
 }

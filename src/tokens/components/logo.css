@@ -1,0 +1,16 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --logo-height-sm: var(--size-component-sm); /** Alto del logotipo en barras compactas (Sidebar). El ancho sale de la proporción del trazado */
+  --logo-height-md: var(--size-component-md); /** Alto por defecto: cabeceras y formularios de acceso */
+  --logo-height-lg: var(--size-component-lg); /** Alto destacado: pie de página */
+  --logo-color: var(--color-text-on-light); /** Color del trazado sobre superficie clara */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --logo-color: var(--color-text-on-dark); /** Color del trazado — surface-dark */
+}

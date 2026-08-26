@@ -21,7 +21,7 @@ export function Footer({ id }: FooterProps) {
           <span>design</span>
         </Heading>
         <div className="footer__logo">
-          <Logo height={50} />
+          <Logo size="lg" />
         </div>
       </div>
       <div className="footer__col footer__col--2">

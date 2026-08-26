@@ -1,15 +1,21 @@
 import { type ReactNode } from 'react';
 import './AppHeader.css';
 export interface AppHeaderProps {
-    /** Slot central (p. ej. OrgSwitcher). Vacío en portales sin organización. */
-    center?: ReactNode;
-    /** Slot final (p. ej. UserMenu — el CSS del header lo compacta a solo-avatar). */
+    /** Tras el botón de menú: breadcrumb, buscador, título de página… */
+    start?: ReactNode;
+    /** Antes del avatar: la campana con su contador. Sitio fijo. */
+    notifications?: ReactNode;
+    /** Al final, siempre: el `UserMenu` (compacto). */
     end?: ReactNode;
-    /** Contenido del panel de navegación a pantalla completa. */
-    children: ReactNode;
-    /** aria-label del botón de menú. */
+    /** Texto accesible del botón de menú. */
     menuLabel?: string;
-    /** id del panel (aria-controls del botón de menú). */
-    panelId?: string;
+    /** id de la sidebar que gobierna el botón (`aria-controls`). */
+    sidebarId?: string;
 }
-export declare function AppHeader({ center, end, children, menuLabel, panelId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * La barra superior de la aplicación, en todos los anchos. A la izquierda el
+ * botón de menú, que abre el cajón en móvil y pliega/despliega la sidebar en
+ * escritorio; a la derecha, notificaciones y cuenta. Entre medias, lo que la
+ * página necesite.
+ */
+export declare function AppHeader({ start, notifications, end, menuLabel, sidebarId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;

@@ -1,33 +1,32 @@
-import { Meta, IconGallery, IconItem, Controls, Story } from "@storybook/addon-docs/blocks";
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as IconStories from "./Icon.stories";
-import { Icon, ICON_NAMES } from "./Icon";
 
 <Meta of={IconStories} />
 
-# Iconos
+# Icon
 
-Colección de iconos del sistema de diseño. Todos usan `currentColor` — su color se hereda del contexto CSS.
+Un icono del catálogo por su nombre. Qué iconos hay, cómo están dibujados, qué talla va en cada sitio y por qué son decorativos está en **Foundations → Iconografía**; aquí solo está la API.
 
-<IconGallery>
-  {ICON_NAMES.map((name) => (
-    <IconItem key={name} name={name}>
-      <Icon name={name} size="md" />
-    </IconItem>
-  ))}
-</IconGallery>
+<Canvas of={IconStories.PorDefecto} />
 
 ## Uso
 
 ```tsx
 import { Icon } from '@studiolxd/brand/icon';
 
-<Icon name="chevron" size="md" />
+<Icon name="bell" />
+<Icon name="bell" size="sm" />
 ```
 
-## Tamaños
+- **`name`** está tipado con los nombres del catálogo (`IconName`): un nombre que no existe no compila. `ICON_NAMES` expone la lista para selectores y catálogos.
+- **`size`** es una de las cinco tallas de icono, `md` por defecto. Los valores y su uso, en Iconografía.
+- **No hay prop de color**: el icono es `currentColor`. Si un componente necesita un icono de otro color, lo fija en su propio token sobre el elemento que lo contiene.
+- **No admite `aria-label` ni `title`**: el icono es siempre decorativo y el nombre lo lleva el control que lo contiene. La regla y su porqué, en Iconografía.
 
-<Story of={IconStories.AllSizes} />
+<Canvas of={IconStories.Tallas} />
+
+<Canvas of={IconStories.SuperficieOscura} />
 
 ## Props
 
-<Controls of={IconStories.Default} />
+<ArgTypes of={IconStories} />

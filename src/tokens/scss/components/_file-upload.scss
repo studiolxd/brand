@@ -4,7 +4,7 @@
 $lxd-file-upload-border-color: #d0d0d0; // Borde del dropzone por defecto
 $lxd-file-upload-border-style: dashed; // Estilo de borde del dropzone
 $lxd-file-upload-border-width: 1px; // Grosor del borde
-$lxd-file-upload-border-radius: 8px; // Radio de esquinas del dropzone
+$lxd-file-upload-border-radius: 0px; // Radio de esquinas del dropzone
 $lxd-file-upload-bg: #f2f2f2; // Fondo del dropzone
 $lxd-file-upload-padding-block: 3rem; // Padding vertical del dropzone
 $lxd-file-upload-padding-inline: 1.5rem; // Padding horizontal del dropzone
@@ -26,7 +26,7 @@ $lxd-file-upload-list-margin-block-start: 0.75rem; // Margen superior de la list
 $lxd-file-upload-item-bg: #ffffff; // Fondo de cada item
 $lxd-file-upload-item-border-color: #d0d0d0; // Borde de cada item
 $lxd-file-upload-item-border-width: 1px; // Grosor de borde del item
-$lxd-file-upload-item-border-radius: 4px; // Radio de esquinas del item
+$lxd-file-upload-item-border-radius: 0px; // Radio de esquinas del item
 $lxd-file-upload-item-padding-block: 0.5rem; // Padding vertical del item
 $lxd-file-upload-item-padding-inline: 0.75rem; // Padding horizontal del item
 $lxd-file-upload-item-gap: 0.75rem; // Espacio entre thumb, info y botón
@@ -41,9 +41,9 @@ $lxd-file-upload-item-error-font-size: 0.875rem; // Tamaño del mensaje de error
 $lxd-file-upload-item-error-border-color: #b30000; // Borde del item con error
 $lxd-file-upload-item-error-bg: #ffffff; // Fondo del item con error
 $lxd-file-upload-thumb-size: 2.5rem; // Tamaño del thumbnail
-$lxd-file-upload-thumb-border-radius: 4px; // Radio del thumbnail
+$lxd-file-upload-thumb-border-radius: 0px; // Radio del thumbnail
 $lxd-file-upload-thumb-bg: #f2f2f2; // Fondo del thumb para iconos (no imagen)
-$lxd-file-upload-thumb-icon-color: #767676; // Color del icono de archivo genérico
+$lxd-file-upload-thumb-icon-color: #6b6b6b; // Color del icono de archivo genérico
 $lxd-file-upload-remove-color: #4a4a4a; // Color del botón eliminar
 $lxd-file-upload-remove-color-hover: #b30000; // Color del botón eliminar al hacer hover
 $lxd-file-upload-progress-margin-block-start: 0.75rem; // Margen superior de la barra de progreso

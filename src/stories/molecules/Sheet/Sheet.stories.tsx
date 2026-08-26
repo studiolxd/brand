@@ -5,7 +5,7 @@ import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Sheet } from './Sheet';
 
 const meta = {
-  title: 'Molecules/Sheet',
+  title: 'Por revisar/Molecules/Sheet',
   component: Sheet,
 } satisfies Meta<typeof Sheet>;
 
@@ -19,7 +19,7 @@ const body = (
       centrado: sirve para editar algo sin perder de vista dónde estabas.
     </Paragraph>
     <Paragraph>
-      Radix se encarga del foco, del cierre con Escape y del clic fuera.
+      Base UI se encarga del foco, del cierre con Escape y del clic fuera.
     </Paragraph>
   </>
 );

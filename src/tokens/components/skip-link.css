@@ -1,0 +1,24 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --skip-link-padding-block: var(--spacing-2); /** Aire vertical del enlace revelado */
+  --skip-link-padding-inline: var(--spacing-4); /** Aire horizontal del enlace revelado */
+  --skip-link-inset: var(--spacing-2); /** Separación de la esquina de la ventana al revelarse */
+  --skip-link-z-index: var(--z-index-skip); /** Sobre cualquier otra capa: es lo primero al tabular */
+  --skip-link-bg: var(--color-primary); /** Fondo del enlace revelado: relleno de marca */
+  --skip-link-color: var(--color-text-on-dark); /** Texto sobre el relleno */
+  --skip-link-font-weight: var(--font-weight-emphasis); /** Peso del texto: es una acción */
+  --skip-link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --skip-link-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
+  --skip-link-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco: contrasta con el relleno */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --skip-link-bg: var(--color-text-on-dark); /** Fondo — surface-dark: el relleno se invierte para verse sobre prusia */
+  --skip-link-color: var(--color-primary); /** Texto — surface-dark */
+  --skip-link-focus-ring-color: var(--color-primary); /** Anillo de foco — surface-dark */
+}

@@ -19,7 +19,7 @@ function o({ reviews: o, className: s }) {
 				children: [/* @__PURE__ */ i(e, {
 					src: t.photo,
 					alt: t.author,
-					size: "xl",
+					size: "lg",
 					className: "review-card__avatar"
 				}), /* @__PURE__ */ a("div", {
 					className: "review-card__identity",

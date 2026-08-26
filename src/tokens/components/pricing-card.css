@@ -12,21 +12,21 @@
   --pricing-card-padding-block-start: var(--card-padding-block-start); /** Padding block start — heredado de card */
   --pricing-card-padding-block-end: var(--card-padding-block-end); /** Padding block end — heredado de card */
   --pricing-card-gap: var(--card-gap); /** Separación entre secciones internas — heredado de card */
-  --pricing-card-border-radius: var(--card-border-radius); /** Radio de esquinas — heredado de card */
-  --pricing-card-shadow: var(--card-shadow); /** Sombra de la superficie — heredado de card */
-  --pricing-card-border-width: var(--card-outline-border-width); /** Grosor de borde — heredado de la variante outline de card */
   --pricing-card-plan-name-color: var(--color-text-muted-on-light); /** Color del nombre del plan */
   --pricing-card-price-font-size: var(--highlight-section-font-size); /** Tamaño de fuente del precio — mismo tamaño que el texto destacado del sistema */
-  --pricing-card-price-font-weight: var(--number-badge-font-weight); /** Peso de fuente del precio — mismo énfasis (semibold) que number-badge */
   --pricing-card-price-line-height: var(--number-badge-line-height); /** Line-height del precio — mismo criterio que number-badge (sin interlineado extra) */
   --pricing-card-price-suffix-font-size: var(--text-paragraph-small-font-size); /** Tamaño de fuente del sufijo (ej. /mes) — mismo tamaño que paragraph small */
   --pricing-card-price-suffix-color: var(--color-text-muted-on-light); /** Color del sufijo */
-  --pricing-card-featured-border-width: var(--card-outline-border-width); /** Grosor de borde — plan destacado (mismo grosor que la superficie base, solo cambia el color) */
   --pricing-card-featured-border-color: var(--color-primary); /** Color de borde — plan destacado */
+  --pricing-card-border-radius: var(--card-border-radius); /** Radio de esquinas — heredado de card */
+  --pricing-card-shadow: var(--card-shadow); /** Sombra de la superficie — heredado de card */
   --pricing-card-bg: var(--card-outline-bg); /** Fondo — heredado de la variante outline de card */
   --pricing-card-color: var(--card-outline-color); /** Texto — heredado de la variante outline de card */
+  --pricing-card-border-width: var(--card-outline-border-width); /** Grosor de borde — heredado de la variante outline de card */
   --pricing-card-border-color: var(--card-outline-border-color); /** Color de borde — heredado de la variante outline de card */
+  --pricing-card-price-font-weight: var(--number-badge-font-weight); /** Peso de fuente del precio — mismo énfasis (semibold) que number-badge */
   --pricing-card-price-color: var(--card-outline-color); /** Color del precio — heredado de card (el remapeo dark de card.outline-color se propaga automáticamente vía var()) */
+  --pricing-card-featured-border-width: var(--card-outline-border-width); /** Grosor de borde — plan destacado (mismo grosor que la superficie base, solo cambia el color) */
 }
 
 .surface-dark,

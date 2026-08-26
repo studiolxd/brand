@@ -1,12 +1,12 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-number-badge-min-size: 1.25rem; // Tamaño mínimo del badge (20px) — permite acomodar dos dígitos
+$lxd-number-badge-min-size: 1rem; // 16px: una marca, no un control (fuera de la escala de tallas); cabe un dígito redondo, dos en píldora
 $lxd-number-badge-padding-inline: 0.25rem; // Padding horizontal para números de más de un dígito
 $lxd-number-badge-border-radius: 9999px; // Forma circular
 $lxd-number-badge-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
-$lxd-number-badge-font-size: 0.875rem; // Tamaño de fuente — 14px
-$lxd-number-badge-font-weight: 600; // Seminegrita para legibilidad en tamaño pequeño
+$lxd-number-badge-font-size: 0.75rem; // La cifra: el cuerpo de marca (12px)
+$lxd-number-badge-font-weight: 300; // Peso normal: una cifra, no un título
 $lxd-number-badge-line-height: 1; // Sin interlineado extra — centrado por flexbox
 $lxd-number-badge-primary-bg: #111e30; // Fondo primary (prussian)
 $lxd-number-badge-primary-color: #ffffff; // Texto sobre primary

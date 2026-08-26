@@ -1,0 +1,36 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AppHeaderStories from "./AppHeader.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { appHeaderTokens } from "../../../tokens/components/app-header";
+
+<Meta of={AppHeaderStories} />
+
+# AppHeader
+
+La barra superior de la aplicación, **en todos los anchos**: a la izquierda el botón de menú (`MenuButton`), que en móvil abre el cajón y en escritorio pliega y despliega la sidebar; a la derecha las notificaciones y la cuenta (`UserMenu compact`), siempre en ese orden. Entre medias, `start`: lo que la página necesite.
+
+<Canvas of={AppHeaderStories.PorDefecto} />
+<Canvas of={AppHeaderStories.ConInicio} />
+
+## Altura
+
+56px, compuesta: un control md (40) más `spacing.2` arriba y abajo. La misma que el `SiteHeader` de la web.
+
+<Canvas of={AppHeaderStories.SuperficieOscura} />
+
+## Con y sin shell
+
+Dentro de `AppShell` el botón gobierna la sidebar del shell; suelto, lleva su propio estado (para Storybook y pruebas).
+
+## Accesibilidad
+
+- Es el `banner` de la aplicación.
+- El botón de menú dice qué controla (`sidebarId` → `aria-controls`) y si está abierto (`aria-expanded`).
+
+## Tokens
+
+<TokenTable tokens={appHeaderTokens} />
+
+## Props
+
+<ArgTypes of={AppHeaderStories} />

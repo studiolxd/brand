@@ -39,6 +39,12 @@ Sin borde ni fondo. El texto toma el color por defecto de la superficie (oscuro 
 
 <Canvas of={ButtonStories.GhostOnDark} />
 
+## Text
+
+Un `<button>` con la cara de un enlace: sin caja ni altura fija, subrayado en reposo y sin subrayar en hover. Toma sus tokens del átomo `Link` (`button.text.*` → `link.*`), así que enlace y botón-enlace no divergen. Es para acciones que no navegan pero se leen como enlace (deshacer, abrir un panel). Con `destructiveIntent` usa el rojo de texto de error.
+
+<Canvas of={ButtonStories.TextOnLight} />
+
 ## Block
 
 Cualquier variante admite el modificador `block` para ocupar todo el ancho del contenedor.
@@ -47,7 +53,7 @@ Cualquier variante admite el modificador `block` para ocupar todo el ancho del c
 
 ## Tamaños
 
-Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica mediante la prop `size`.
+Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica mediante la prop `size` y es la **talla de componente** del sistema (32/40/48px, ver Foundations → Tallas): el botón fija su altura a la talla y centra el contenido; solo cambian el padding horizontal y el cuerpo de letra. La variante `text` es inline y no tiene caja.
 
 <Canvas of={ButtonStories.Sizes} />
 
@@ -57,7 +63,7 @@ Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica
 
 ## Solo icono
 
-La prop `iconOnly` renderiza un botón cuadrado (`aspect-ratio: 1`) pensado para acciones de solo icono: cerrar un modal, abrir una barra lateral, acciones de tabla. Es componible con cualquier `variant` y con los tres tamaños (`sm`, `md`, `lg`).
+La prop `iconOnly` renderiza un botón cuadrado (su lado es la altura de la talla) pensado para acciones de solo icono: cerrar un modal, abrir una barra lateral, acciones de tabla. Es componible con cualquier `variant` y con los tres tamaños (`sm`, `md`, `lg`).
 
 <Canvas of={ButtonStories.IconOnly} />
 
@@ -85,30 +91,30 @@ El estado `disabled` en este caso añade `aria-disabled="true"` y elimina el `hr
 
 <Canvas of={ButtonStories.AsLinkDisabled} />
 
-### asChild (Next.js Link y otros routers)
+### render (Next.js Link y otros routers)
 
-Con la prop `asChild`, Button fusiona sus clases y event handlers directamente sobre el elemento hijo, sin añadir ningún elemento wrapper. Esto preserva la navegación client-side del router:
+Con la prop `render`, Button aplica sus clases y event handlers sobre el elemento que se le pasa, sin añadir ningún wrapper (patrón `render` de Base UI). Esto preserva la navegación client-side del router:
 
 ```tsx
 import Link from 'next/link';
 import { Button } from '@studiolxd/brand';
 
-<Button asChild variant="primary">
-  <Link href="/proyectos">Ver proyectos</Link>
+<Button render={<Link href="/proyectos" />} variant="primary">
+  Ver proyectos
 </Button>
 ```
 
 En Storybook se muestra con un `<a>` como stand-in del componente `Link` del router:
 
-<Canvas of={ButtonStories.AsChild} />
+<Canvas of={ButtonStories.ConRender} />
 
 ---
 
 ## Composición y atributos HTML
 
-`Button` extiende los atributos nativos de `<button>` y reenvía cualquier prop no declarada (`data-*`, `aria-*`, `id`, atributos de formulario como `form`, `name`, `value`…) al elemento renderizado, en las tres ramas (`<button>`, `<a>` y `asChild`). Esto permite:
+`Button` extiende los atributos nativos de `<button>` y reenvía cualquier prop no declarada (`data-*`, `aria-*`, `id`, atributos de formulario como `form`, `name`, `value`…) al elemento renderizado, en las tres ramas (`<button>`, `<a>` y `render`). Esto permite:
 
-- **Componer con Radix** (`<Dialog.Close asChild><Button/></Dialog.Close>`): las props que el `Slot` inyecta (`onClick`, `aria-*`, `data-state`…) llegan al Button y se aplican al elemento.
+- **Componer con Base UI** (`<Dialog.Close render={<Button/>} />`): las props que el primitivo inyecta (`onClick`, `aria-*`, `data-*`…) llegan al Button y se aplican al elemento.
 - **Añadir clases** con `className`: se concatena **después** de las clases propias del componente, de modo que el consumidor añade estilos sin sustituir los del design system.
 
 ```tsx

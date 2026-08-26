@@ -1,29 +1,51 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent } from 'storybook/test';
 import { SkipLink } from './SkipLink';
+import { Container } from '../Container/Container';
 
 const meta: Meta<typeof SkipLink> = {
   title: 'Atoms/SkipLink',
   component: SkipLink,
-  parameters: {
-    layout: 'padded',
-  },
-  args: {
-    href: '#main-content',
-    children: 'Saltar al contenido principal',
-  },
+  parameters: { layout: 'padded' },
+  args: { href: '#main-content', children: 'Saltar al contenido principal' },
+  argTypes: { className: { table: { disable: true } } },
 };
-
 export default meta;
+
 type Story = StoryObj<typeof SkipLink>;
 
-/**
- * El enlace es invisible por defecto. Navega hasta él con Tab para ver cómo aparece.
- * Usa la story Focus visible para previsualizar el estado revelado.
- */
-export const Default: Story = {};
+/** Oculto: no se ve, pero está en el DOM y es lo primero al tabular. */
+export const Oculto: Story = {};
 
-/** Estado visible al recibir foco por teclado. */
-export const FocusVisible: Story = {
-  name: 'Focus visible',
+/** Con el foco: fijo en la esquina, sobre cualquier otra capa. */
+export const Revelado: Story = {
   parameters: { pseudo: { focusVisible: true } },
+};
+
+/** En superficie oscura el relleno se invierte para verse sobre prusia. */
+export const SuperficieOscura: Story = {
+  parameters: { pseudo: { focusVisible: true } },
+  render: (args) => (
+    <Container surface="dark" space="lg">
+      <SkipLink {...args} />
+    </Container>
+  ),
+};
+
+export const Contrato: Story = {
+  name: 'Test — oculto hasta el foco, y entonces sobre todo',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    const link = canvasElement.querySelector('.skip-link') as HTMLAnchorElement;
+    // oculto: la receta visually-hidden lo deja en 1×1 y recortado
+    await expect(getComputedStyle(link).clipPath).toBe('inset(50%)');
+    await expect(link.getBoundingClientRect().width).toBeLessThanOrEqual(1);
+    // es lo primero al tabular
+    await userEvent.tab();
+    await expect(document.activeElement).toBe(link);
+    const cs = getComputedStyle(link);
+    await expect(cs.position).toBe('fixed');
+    await expect(cs.clipPath).toBe('none');
+    await expect(cs.zIndex).toBe(cs.getPropertyValue('--z-index-skip').trim());
+  },
 };

@@ -35,7 +35,7 @@ export function Legal({ title, sections, navItems = DEFAULT_NAV_ITEMS, featuredL
           </Button>
         }
       />
-      <main id="main-content" className="legal-page__main">
+      <main id="main-content" tabIndex={-1} className="legal-page__main">
         <div className="legal-page__header">
           <Heading level={1} size={10}>{title}</Heading>
         </div>

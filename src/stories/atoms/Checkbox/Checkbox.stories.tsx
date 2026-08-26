@@ -1,11 +1,10 @@
 import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Slot } from '@radix-ui/react-slot';
 import { expect, userEvent, within } from 'storybook/test';
 import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Atoms/Checkbox',
+  title: 'Por revisar/Atoms/Checkbox',
   component: Checkbox,
   parameters: {
     layout: 'padded',
@@ -37,19 +36,22 @@ export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
 /**
- * Test: `forwardRef` + inyección Slot al **Radix Root** (`role="checkbox"`). El `ref`
- * apunta al Root; las props inyectadas (`data-*`, `aria-describedby`) aterrizan ahí;
- * el click alterna `data-state`.
+ * Test: `forwardRef` + composición con `render` de Base UI (`role="checkbox"`). El
+ * `ref` apunta al Root; las props del elemento compuesto (`data-*`,
+ * `aria-describedby`) aterrizan ahí; el click alterna `data-checked`.
  */
 export const RefForwarding: Story = {
-  name: 'Test — forwardRef + Slot (Root)',
+  name: 'Test — forwardRef + render (Root)',
+  tags: ['!dev'],
   render: () => {
-    const ref = useRef<HTMLButtonElement>(null);
+    const ref = useRef<HTMLElement>(null);
     return (
       <div>
-        <Slot data-slot="cb" aria-describedby="cb-help">
-          <Checkbox ref={ref} aria-label="acepto" />
-        </Slot>
+        <Checkbox
+          ref={ref}
+          aria-label="acepto"
+          render={<span data-slot="cb" aria-describedby="cb-help" />}
+        />
         <button
           type="button"
           onClick={() => {
@@ -68,9 +70,9 @@ export const RefForwarding: Story = {
     const cb = canvas.getByRole('checkbox', { name: 'acepto' });
     await expect(cb).toHaveAttribute('data-slot', 'cb');
     await expect(cb).toHaveAttribute('aria-describedby', 'cb-help');
-    await expect(cb).toHaveAttribute('data-state', 'unchecked');
+    await expect(cb).toHaveAttribute('data-unchecked');
     await userEvent.click(cb);
-    await expect(cb).toHaveAttribute('data-state', 'checked');
+    await expect(cb).toHaveAttribute('data-checked');
     // el ref apunta al Root interactivo (role="checkbox")
     await userEvent.click(canvas.getByRole('button', { name: 'probe' }));
     await expect(canvas.getByTestId('cb-probe')).toHaveTextContent('checkbox');

@@ -1,109 +1,31 @@
 {
   "sidebar": {
-    "width": {
-      "$value": "15rem",
-      "$type": "dimension",
-      "$description": "Ancho del panel en desktop"
-    },
-    "collapsed-width": {
-      "$value": "3.5rem",
-      "$type": "dimension",
-      "$description": "Ancho del rail plegado: columna de iconos de 2rem con el mismo margen a ambos lados"
-    },
-    "bg": {
-      "$value": "{color.background.light}",
-      "$type": "color",
-      "$description": "Fondo del panel de la sidebar"
-    },
-    "shadow": {
-      "$value": "4px 0 16px rgba(17,30,48,0.12)",
-      "$type": "shadow",
-      "$description": "Sombra del panel hacia la derecha — mismos parámetros que shadow.lg"
-    },
-    "border-inline-end-width": {
-      "$value": "{border-width.sm}",
-      "$type": "dimension",
-      "$description": "Grosor del borde derecho. Transparente en modo claro (la sombra ya separa el panel); visible solo en surface-dark, donde la sombra oscura se funde con el fondo oscuro circundante."
-    },
-    "border-inline-end-color": {
-      "$value": "transparent",
-      "$type": "color",
-      "$description": "Color del borde derecho — transparente en modo claro"
-    },
-    "padding-inline": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Padding horizontal interno del panel"
-    },
-    "padding-block": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Padding vertical interno del panel"
-    },
-    "expand-delay": {
-      "$value": "150",
-      "$type": "number",
-      "$description": "Delay (ms) antes de expandir al entrar con el ratón/foco"
-    },
-    "collapse-delay": {
-      "$value": "100",
-      "$type": "number",
-      "$description": "Delay (ms) antes de replegar al salir"
-    },
-    "transition-duration": {
-      "$value": "{motion.duration.base}",
-      "$type": "number",
-      "$description": "Duración de la animación de expansión/repliegue"
-    },
-    "transition-easing": {
-      "$value": "{motion.easing.in-out}",
-      "$type": "string",
-      "$description": "Curva de animación de apertura/cierre"
-    },
-    "surface-dark-bg": {
-      "$value": "{color.background.dark}",
-      "$type": "color",
-      "$description": "Fondo del panel — surface-dark"
-    },
-    "surface-dark-border-inline-end-color": {
-      "$value": "rgba(255, 255, 255, 0.15)",
-      "$type": "color",
-      "$description": "Borde derecho — surface-dark. Sustituye a la sombra, invisible sobre fondo oscuro."
-    },
-    "group-padding-block": {
-      "$value": "{spacing.2}",
-      "$type": "dimension",
-      "$description": "Padding vertical de una sección del panel"
-    },
-    "group-padding-inline": {
-      "$value": "{spacing.3}",
-      "$type": "dimension",
-      "$description": "Padding horizontal de una sección del panel"
-    },
-    "group-gap": {
-      "$value": "{spacing.1}",
-      "$type": "dimension",
-      "$description": "Separación entre elementos dentro de una sección"
-    },
-    "separator-color": {
-      "$value": "{color.grey-light}",
-      "$type": "color",
-      "$description": "Color de la línea divisoria entre secciones"
-    },
-    "separator-height": {
-      "$value": "{border-width.sm}",
-      "$type": "dimension",
-      "$description": "Grosor de la línea divisoria"
-    },
-    "separator-margin-block": {
-      "$value": "{spacing.2}",
-      "$type": "dimension",
-      "$description": "Margen vertical de la línea divisoria"
-    },
-    "surface-dark-separator-color": {
-      "$value": "rgba(255, 255, 255, 0.15)",
-      "$type": "color",
-      "$description": "Color de la línea divisoria — surface-dark"
-    }
+    "width":      { "$value": "15rem", "$type": "dimension", "$description": "Ancho por defecto desplegada (240px). Medida de maqueta, como la de lectura: no pertenece a la escala de tallas" },
+    "min-width":  { "$value": "12rem", "$type": "dimension", "$description": "Ancho mínimo desplegada (192px): por debajo, al redimensionar, salta a rail" },
+    "max-width":  { "$value": "24rem", "$type": "dimension", "$description": "Ancho máximo desplegada (384px)" },
+    "rail-width": { "$value": "calc({size-component.md} + 2 * {spacing.2})", "$type": "dimension", "$description": "Ancho del rail: un botón de icono md con su aire a cada lado (56px)" },
+    "bg":         { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo" },
+    "border-width": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Borde que separa la sidebar del contenido" },
+    "border-color": { "$value": "{color.grey-light}",     "$type": "color",     "$description": "Color del borde" },
+    "padding-inline": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire lateral: el mismo a los dos lados en rail y desplegada, así los iconos no se mueven al cambiar de modo" },
+    "padding-block":  { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire vertical de cabecera, panel y pie" },
+    "gap":            { "$value": "{spacing.3}", "$type": "dimension", "$description": "Entre cabecera, panel y pie" },
+    "resizer-width":  { "$value": "{spacing.2}", "$type": "dimension", "$description": "Zona de agarre del asa de redimensión (8px), centrada en el borde" },
+    "resizer-hover-color": { "$value": "{color.primary}", "$type": "color", "$description": "El borde se marca al pasar por el asa o al arrastrar" },
+    "resize-step":    { "$value": "16", "$type": "number", "$description": "Píxeles por pulsación de flecha en el asa (teclado)" },
+    "transition-duration": { "$value": "{motion.duration.base}", "$type": "number", "$description": "Apertura y cierre" },
+    "transition-easing":   { "$value": "{motion.easing.in-out}", "$type": "string", "$description": "Curva de apertura y cierre" },
+    "drawer-z-index":  { "$value": "{z-index.modal}",    "$type": "number", "$description": "En móvil la sidebar es un cajón sobre la página" },
+    "backdrop-z-index": { "$value": "{z-index.backdrop}", "$type": "number", "$description": "Velo bajo el cajón" },
+    "backdrop-bg":      { "$value": "{modal.backdrop-bg}",      "$type": "color",  "$description": "El velo del sistema" },
+    "backdrop-opacity": { "$value": "{modal.backdrop-opacity}", "$type": "number", "$description": "Opacidad del velo, la del sistema" },
+    "group-padding-block":  { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire vertical de una sección del panel" },
+    "group-gap":            { "$value": "{spacing.1}", "$type": "dimension", "$description": "Entre elementos de una sección" },
+    "separator-color":      { "$value": "{color.grey-light}", "$type": "color", "$description": "Línea entre secciones" },
+    "separator-height":     { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea" },
+    "separator-margin-block": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire de la línea" },
+    "surface-dark-bg":           { "$value": "{color.background.dark}",   "$type": "color", "$description": "Fondo — surface-dark" },
+    "surface-dark-border-color": { "$value": "{menu.surface-dark-separator-color}", "$type": "color", "$description": "Borde — surface-dark" },
+    "surface-dark-separator-color": { "$value": "{menu.surface-dark-separator-color}", "$type": "color", "$description": "Línea — surface-dark" }
   }
 }

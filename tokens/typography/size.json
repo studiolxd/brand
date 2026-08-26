@@ -1,6 +1,7 @@
 {
   "font-size": {
-    "1":  { "$value": "0.875rem", "$type": "dimension", "$description": "0.875rem (14px) — UI labels, body small" },
+    "0": { "$value": "0.75rem", "$type": "dimension", "$description": "12px — solo cifras dentro de marcas (contadores); nunca texto" },
+    "1":  { "$value": "0.875rem", "$type": "dimension", "$description": "14px — etiquetas de interfaz, texto pequeño" },
     "2":  { "$value": "1rem",     "$type": "dimension", "$description": "1rem (16px) — Body base" },
     "3":  { "$value": "1.25rem",  "$type": "dimension", "$description": "1.25rem (20px) — Small subtitles" },
     "4":  { "$value": "1.5rem",   "$type": "dimension", "$description": "1.5rem (24px) — Subtitles" },

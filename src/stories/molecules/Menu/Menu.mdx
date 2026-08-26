@@ -1,0 +1,76 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as MenuStories from "./Menu.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { menuPanelTokens, menuItemTokens, menuDestructiveTokens, menuLabelSeparatorTokens } from "../../../tokens/components/menu";
+
+<Meta of={MenuStories} />
+
+# Menu
+
+El desplegable de acciones del sistema, con el disparador que haga falta. Define el **vocabulario de ítems** y la **cara** (tokens `menu.*`) de todos los menús: `ContextMenu` (tres puntos), `UserMenu` (avatar), `OrgSwitcher` y `DropdownField` son este menú con un disparador concreto.
+
+<Canvas of={MenuStories.Default} />
+
+## Disparador
+
+`trigger` es el elemento que abre el menú. El motor le pone encima lo que necesita —`aria-haspopup`, `aria-expanded`, el manejo de teclado— así que vale cualquier botón del sistema: un `Button`, un `DotsButton`, un botón propio.
+
+<Canvas of={MenuStories.TriggerDeIcono} />
+
+## Ítems
+
+`items` describe el menú con datos, no con JSX. Cinco tipos:
+
+| `type` | Qué es |
+|---|---|
+| `button` | Una acción: `label`, `onClick`, `icon`, `destructive`, `disabled`. `closeOnSelect: false` deja el menú abierto tras la acción |
+| `link` | Un enlace: `href` y lo mismo. Lo renderiza `renderLink`, para que sea el enlace del router |
+| `separator` | Una línea entre grupos |
+| `label` | Un rótulo de sección, no interactivo |
+| `radio` | Una opción de elección exclusiva, con `value`; el grupo lo gobiernan `value` y `onValueChange` del menú |
+
+<Canvas of={MenuStories.ConRadio} />
+
+<Canvas of={MenuStories.Mixto} />
+
+## Enlaces del router
+
+`renderLink` recibe `href`, `children`, `className` **y las props que el motor inyecta** (rol, `tabIndex`, manejadores de teclado) y devuelve el enlace del producto. Tiene que propagarlas todas: sin ellas el ítem no se recorre con las flechas ni se activa con Enter.
+
+## Colocación
+
+`side` y `align` colocan el panel respecto al disparador; `sideOffset` lo separa. Si no cabe, el motor lo recoloca solo. El panel vive en la capa `floating`: por encima de un modal, para que un menú dentro de un diálogo se abra sobre él.
+
+## Resaltado
+
+El ítem bajo el ratón o el teclado se resalta con el **relleno de marca** (prusia con texto claro; invertido en superficie oscura). El gris claro no es un fondo de estado en el sistema. El destructivo se resalta con el relleno de error.
+
+## Accesibilidad
+
+- El disparador anuncia que abre un menú y si está abierto; el panel es un `menu` y cada ítem un `menuitem`, `menuitemradio` o enlace.
+- Se recorre con flechas, se activa con Enter o espacio, se cierra con Escape y el foco vuelve al disparador.
+- Los ítems `radio` anuncian su estado (`aria-checked`); a la vista, la elegida va en énfasis.
+
+## Tokens
+
+Son la fuente de todos los menús: `UserMenu`, `OrgSwitcher` y el resto los referencian. Cambiar algo aquí cambia todos.
+
+### Panel
+
+<TokenTable tokens={menuPanelTokens} />
+
+### Ítems
+
+<TokenTable tokens={menuItemTokens} />
+
+### Destructivo
+
+<TokenTable tokens={menuDestructiveTokens} />
+
+### Rótulos, separadores y deshabilitado
+
+<TokenTable tokens={menuLabelSeparatorTokens} />
+
+## Props
+
+<ArgTypes of={MenuStories} />

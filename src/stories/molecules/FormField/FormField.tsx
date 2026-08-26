@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useId, type ComponentProps } from 'react';
-import { Slot } from '@radix-ui/react-slot';
+import { useRender } from '@base-ui-components/react/use-render';
 import {
   Controller,
   FormProvider as RhfFormProvider,
@@ -100,19 +100,18 @@ export function FormLabel({ ...props }: ComponentProps<typeof Label>) {
  * propio: fusiona en su hijo el `id`, el `aria-describedby` y el
  * `aria-invalid` que corresponden al campo.
  */
-export function FormControl({ ...props }: ComponentProps<typeof Slot>) {
+export function FormControl({ children, ...props }: { children: React.ReactElement<Record<string, unknown>> } & Record<string, unknown>) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
-  return (
-    <Slot
-      id={formItemId}
-      aria-describedby={
-        error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId
-      }
-      aria-invalid={!!error}
-      {...props}
-    />
-  );
+  return useRender({
+    render: children,
+    props: {
+      id: formItemId,
+      'aria-describedby': error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId,
+      'aria-invalid': !!error,
+      ...props,
+    },
+  });
 }
 
 /** Texto de ayuda del campo, enlazado al control por `aria-describedby`. */

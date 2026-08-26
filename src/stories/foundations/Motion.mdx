@@ -7,26 +7,57 @@ import { durationTokens, easingTokens } from "../../tokens/motion";
 
 # Movimiento
 
-Escala de duraciones y curvas de aceleración para transiciones y animaciones. Pasa el cursor sobre cada muestra para ver la transición en acción.
+El movimiento del sistema es funcional: confirma una interacción o explica de dónde viene algo. No decora. Tres duraciones según lo que cambia, y una cuarta, `instant`, para lo que no debe animarse.
 
 ## Duración
 
+| Token | Valor | Para |
+|---|---|---|
+| `--motion-duration-instant` | 0ms | Cambios que deben ser inmediatos |
+| `--motion-duration-fast` | 150ms | Respuesta a la interacción: hover, foco, pulsación |
+| `--motion-duration-base` | 250ms | Cambios de estado: abrir un menú, mostrar un tooltip |
+| `--motion-duration-slow` | 400ms | Cambios de contexto: modales, hojas, paneles que entran |
+
+La regla de elección: cuanto más grande es lo que se mueve y más lejos viaja, más tiempo necesita para no parecer un salto. Un botón cambia de color en 150ms; una hoja lateral entra en 400ms.
+
 <MotionScale tokens={durationTokens} type="duration" />
 
-### Tokens CSS
+## Curva
 
-<TokenTable tokens={durationTokens} />
+| Token | Valor | Para |
+|---|---|---|
+| `--motion-easing-default` | ease | Transiciones de propiedad: color, fondo, opacidad |
+| `--motion-easing-out` | ease-out | Salidas: lo que desaparece frena al final |
+| `--motion-easing-in-out` | ease-in-out | Movimiento: paneles y hojas que se desplazan |
 
-Los tokens están definidos en `tokens/motion/duration.json`.
-
----
-
-## Curvas de aceleración
+`in` y `linear` quedan declaradas en la escala, pero ningún componente las usa: una entrada que acelera se percibe como brusca, y el movimiento lineal, como mecánico.
 
 <MotionScale tokens={easingTokens} type="easing" />
 
-### Tokens CSS
+## Movimiento reducido
+
+Cuando el sistema operativo pide reducir el movimiento (`prefers-reduced-motion: reduce`), **las cuatro duraciones pasan a 0ms** en la raíz. Todo componente que transicione con estos tokens deja de animar sin hacer nada; es el motivo de que ninguna duración vaya escrita a mano en un CSS.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0ms;
+    --motion-duration-base: 0ms;
+    --motion-duration-slow: 0ms;
+  }
+}
+```
+
+---
+
+## Tokens
+
+### Duración
+
+<TokenTable tokens={durationTokens} />
+
+### Curva
 
 <TokenTable tokens={easingTokens} />
 
-Los tokens están definidos en `tokens/motion/easing.json`.
+Definidos en `tokens/motion/`.

@@ -6,11 +6,11 @@ $lxd-header-height-inline: 6.25rem; // Alto del header cuando la nav está en l�
 $lxd-header-logo-height-overlay: 3.75rem; // Alto del logo en modo overlay
 $lxd-header-logo-height-inline: 3.75rem; // Alto del logo en modo inline
 $lxd-header-bg: #ffffff; // Fondo del header
-$lxd-header-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra del header
-$lxd-header-z-index: 1000; // Z-index del header
-$lxd-header-controls-z-index: 1001; // Z-index del logo y hamburger (sobre el backdrop)
-$lxd-header-navbar-z-index: 998; // Z-index del overlay de navegación
-$lxd-header-backdrop-z-index: 999; // Z-index del pseudo-elemento backdrop
+$lxd-header-shadow: none; // Sombra del header
+$lxd-header-z-index: 100; // Z-index del header
+$lxd-header-controls-z-index: 400; // Z-index del logo y hamburger (sobre el backdrop)
+$lxd-header-navbar-z-index: 300; // Z-index del overlay de navegación
+$lxd-header-backdrop-z-index: 200; // Z-index del pseudo-elemento backdrop
 $lxd-header-navbar-transition-duration: 250ms; // Duración del slide de la navbar
 $lxd-header-navbar-transition-easing: ease-in-out; // Easing del slide de la navbar
 $lxd-header-nav-font-size-overlay: 1.75rem; // Tamaño de fuente de los enlaces en modo overlay

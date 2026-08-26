@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import * as Dialog from '@radix-ui/react-dialog';
+import { Dialog } from '@base-ui-components/react/dialog';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Sheet.css';
@@ -44,7 +44,7 @@ export function SheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDi
  * `Modal` no cubre — este no se centra, ocupa un lateral (o el borde superior
  * o inferior) y deja ver el contexto detrás.
  *
- * Radix Dialog aporta el portal, el velo, la trampa de foco y el cierre con
+ * Base UI Dialog aporta el portal, el velo, la trampa de foco y el cierre con
  * Escape; el DS pone la superficie y la dirección de entrada.
  */
 export function Sheet({
@@ -62,25 +62,21 @@ export function Sheet({
   className,
 }: SheetProps) {
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      {trigger && <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>}
+    <Dialog.Root open={open} onOpenChange={(next) => onOpenChange(next)}>
+      {trigger && (
+        <Dialog.Trigger render={trigger as React.ReactElement<Record<string, unknown>>} />
+      )}
 
       <Dialog.Portal>
-        <Dialog.Overlay className="sheet__overlay" />
-        <Dialog.Content
+        <Dialog.Backdrop className="sheet__overlay" />
+        <Dialog.Popup
           className={['sheet', className].filter(Boolean).join(' ')}
           data-side={side}
           onAnimationEndCapture={onAnimationEndCapture}
-          // Sin descripción hay que borrar el enlace explícitamente, o Radix
-          // avisa por consola de un diálogo sin describir (mismo trato que
-          // Modal).
-          {...(description == null ? { 'aria-describedby': undefined } : {})}
         >
           <header className="sheet__header">
             {titleHidden ? (
-              <Dialog.Title asChild>
-                <VisuallyHidden>{title}</VisuallyHidden>
-              </Dialog.Title>
+              <Dialog.Title render={<VisuallyHidden>{title}</VisuallyHidden>} />
             ) : (
               <Dialog.Title className="sheet__title">{title}</Dialog.Title>
             )}
@@ -98,7 +94,7 @@ export function Sheet({
           <div className="sheet__body">{children}</div>
 
           {footer && <SheetFooter>{footer}</SheetFooter>}
-        </Dialog.Content>
+        </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>
   );

@@ -1,0 +1,7 @@
+{
+  "notification-button": {
+    "badge-offset": { "$value": "{spacing.2}",        "$type": "dimension", "$description": "Distancia del borde del botón a la esquina del icono (el aire del icono md en un botón md): el contador se centra ahí" },
+    "badge-fill":   { "$value": "{color.error-fill}",  "$type": "color",     "$description": "El contador es rojo: el relleno de error del sistema, universal en claro y oscuro" },
+    "badge-color":  { "$value": "{color.error-fill-text}", "$type": "color", "$description": "Cifra sobre el relleno" }
+  }
+}

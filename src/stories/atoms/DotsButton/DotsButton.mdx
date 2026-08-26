@@ -1,63 +1,29 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as DotsButtonStories from "./DotsButton.stories";
-import { TokenTable } from "../../foundations/TokenTable";
-import { dotsButtonTokens, dotsButtonSizeTokens } from "../../../tokens/components/dots-button";
 
 <Meta of={DotsButtonStories} />
 
 # DotsButton
 
-Botón icónico de tres puntos para activar menús contextuales u otras acciones secundarias. Se exporta de forma independiente y también se usa internamente como trigger del componente `ContextMenu`.
+El botón de «más opciones». Es un `Button` ghost de solo icono con el icono `dots`: no tiene cara ni tokens propios, es el botón del sistema en su talla (32/40/48). Su sitio es disparar un `ContextMenu` (que ya lo incluye) o un `Popover`.
 
-## Por defecto
+<Canvas of={DotsButtonStories.PorDefecto} />
 
-Orientación horizontal, tamaño `md`.
+## Tallas y orientación
 
-<Canvas of={DotsButtonStories.Default} />
-
-## Tamaños
-
-Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`.
-
-<Canvas of={DotsButtonStories.Sizes} />
-
-## Orientación vertical
-
+<Canvas of={DotsButtonStories.Tallas} />
 <Canvas of={DotsButtonStories.Vertical} />
 
-## Deshabilitado
+## Estados
 
-<Canvas of={DotsButtonStories.Disabled} />
+Los del `Button`: hover con el relleno de marca, deshabilitado atenuado, anillo de foco del sistema.
 
----
+<Canvas of={DotsButtonStories.Deshabilitado} />
+<Canvas of={DotsButtonStories.SuperficieOscura} />
 
-## Theming oscuro
+## Accesibilidad
 
-En modo oscuro los puntos y los estados de hover/active/focus se remapean automáticamente vía `.surface-dark`.
-
----
-
-## Uso como trigger de ContextMenu
-
-El `DotsButton` usa `forwardRef` y extiende `React.ButtonHTMLAttributes<HTMLButtonElement>`, lo que permite que `DropdownMenu.Trigger asChild` de Radix inyecte sus props directamente:
-
-```tsx
-<DropdownMenu.Trigger asChild>
-  <DotsButton aria-label="Más opciones" />
-</DropdownMenu.Trigger>
-```
-
----
-
-## Tokens
-
-### Base
-
-<TokenTable tokens={dotsButtonTokens} />
-
-### Tamaños
-
-<TokenTable tokens={dotsButtonSizeTokens} />
+Es un botón de solo icono: **siempre** con `aria-label` («Más opciones» por defecto; el producto lo traduce y, si hay varios en una lista, lo contextualiza: «Más opciones de Proyecto X»).
 
 ## Props
 

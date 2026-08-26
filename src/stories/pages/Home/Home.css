@@ -29,7 +29,7 @@
 .home .home__academy,
 .home .reviews-section,
 .home .clients-section {
-  border-block-start: var(--border-width-sm) solid currentColor;
+  border-block-start: var(--border-width-default) solid currentColor;
 }
 
 /* ---- Courses section ---- */

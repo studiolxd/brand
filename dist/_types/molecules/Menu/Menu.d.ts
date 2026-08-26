@@ -1,44 +1,27 @@
 import type { ReactNode } from 'react';
-import type { ContextMenuItem, ContextMenuRenderLinkProps } from '../ContextMenu/ContextMenu';
+import { type MenuItem, type MenuRenderLinkProps } from '../_shared/dropdownItems';
 import './Menu.css';
-/**
- * Ítem de elección exclusiva. El valor activo lo lleva el propio `Menu`
- * (`value`/`onValueChange`), como en cualquier grupo de radio.
- */
-export type MenuRadioItem = {
-    type: 'radio';
-    label: string;
-    value: string;
-    icon?: ReactNode;
-    disabled?: boolean;
-};
-/** Rótulo de sección dentro del menú. No es interactivo. */
-export type MenuLabelItem = {
-    type: 'label';
-    label: string;
-};
-/**
- * Vocabulario de ítems del menú: el de `ContextMenu` (botón, enlace,
- * separador — donde nació y de donde también tira `UserMenu`) más los dos
- * tipos que solo este menú necesita.
- */
-export type MenuItem = ContextMenuItem | MenuRadioItem | MenuLabelItem;
+export type { MenuItem, MenuButtonItem, MenuLinkItem, MenuSeparatorItem, MenuLabelItem, MenuRadioItem, MenuRenderLinkProps, } from '../_shared/dropdownItems';
 export interface MenuProps {
     /**
-     * Elemento que abre el menú. Se le pasan los props del trigger vía
-     * `asChild`, así que vale cualquier cosa que los reenvíe (un `Button`, un
-     * icono, un avatar…). Es la diferencia con `ContextMenu` (trigger fijo de
-     * tres puntos) y `UserMenu` (trigger fijo de avatar).
+     * Elemento que abre el menú. Recibe las props del trigger por `render`,
+     * así que vale cualquier cosa que las reenvíe (un `Button`, un icono, un
+     * avatar…). `ContextMenu` (tres puntos) y `UserMenu` (avatar) son este
+     * menú con un disparador fijado.
      */
     trigger: ReactNode;
     items: MenuItem[];
     /** Valor activo del grupo de radio. Obligatorio si hay ítems `radio`. */
     value?: string;
     onValueChange?: (value: string) => void;
-    renderLink?: (props: ContextMenuRenderLinkProps) => ReactNode;
+    renderLink?: (props: MenuRenderLinkProps) => ReactNode;
     open?: boolean;
     defaultOpen?: boolean;
     onOpenChange?: (open: boolean) => void;
+    /** Abre también al pasar el ratón por el disparador (flyout). Pulsar sigue funcionando. */
+    openOnHover?: boolean;
+    /** Retardo del hover, en ms. */
+    hoverDelay?: number;
     side?: 'top' | 'right' | 'bottom' | 'left';
     align?: 'start' | 'center' | 'end';
     sideOffset?: number;
@@ -47,9 +30,8 @@ export interface MenuProps {
     className?: string;
 }
 /**
- * Menú desplegable con disparador a medida. Comparte lenguaje visual y
- * vocabulario de ítems con `ContextMenu` y `UserMenu`; lo que añade es poder
- * poner cualquier cosa de trigger y ofrecer ítems de elección exclusiva
- * (`radio`) y rótulos de sección (`label`).
+ * El menú desplegable del sistema: define el vocabulario de ítems y la cara
+ * (tokens `menu.*`) de todos los menús; `ContextMenu`, `UserMenu`,
+ * `OrgSwitcher` o `DropdownField` son este menú con un disparador concreto.
  */
-export declare function Menu({ trigger, items, value, onValueChange, renderLink, open, defaultOpen, onOpenChange, side, align, sideOffset, minWidth, maxWidth, className, }: MenuProps): import("react/jsx-runtime").JSX.Element;
+export declare function Menu({ trigger, items, value, onValueChange, renderLink, open, defaultOpen, onOpenChange, openOnHover, hoverDelay, side, align, sideOffset, minWidth, maxWidth, className, }: MenuProps): import("react/jsx-runtime").JSX.Element;

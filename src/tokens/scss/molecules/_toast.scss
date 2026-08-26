@@ -1,7 +1,7 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-toast-z-index: 1200; // z-index — por encima de floating-panel (1100)
+$lxd-toast-z-index: 500; // z-index — por encima de floating-panel (1100)
 $lxd-toast-width: 360px; // Anchura de cada toast
 $lxd-toast-gap: 0.5rem; // Gap entre toasts apilados
 $lxd-toast-inset-block-end: 1.5rem; // Distancia al borde inferior de la ventana
@@ -10,7 +10,7 @@ $lxd-toast-padding-block: 1rem; // Padding vertical del toast (16px)
 $lxd-toast-padding-inline: 1.5rem; // Padding horizontal del toast (24px)
 $lxd-toast-border-radius: 0px; // Sin radio de esquinas
 $lxd-toast-border-width: 1px; // Grosor del borde
-$lxd-toast-shadow: 0 4px 16px rgba(17,30,48,0.12); // Sombra de elevación
+$lxd-toast-shadow: none; // Sombra de elevación
 $lxd-toast-bg: #111e30; // Fondo del toast por defecto — prussian
 $lxd-toast-border-color: #111e30; // Borde igual al fondo — invisible
 $lxd-toast-title-font-size: 1rem; // Tamaño del título (16px)
@@ -20,7 +20,7 @@ $lxd-toast-description-font-size: 0.875rem; // Tamaño de la descripción (14px)
 $lxd-toast-description-color: #d0d0d0; // Descripción atenuada sobre fondo oscuro
 $lxd-toast-close-color: #ffffff; // Color del botón de cierre — blanco
 $lxd-toast-close-hover-color: #ffffff; // Color del botón de cierre en hover
-$lxd-toast-close-size: 18px; // Tamaño del icono de cierre (18px)
+$lxd-toast-close-size: 16px; // Tamaño del icono de cierre (18px)
 $lxd-toast-duration-in: 250ms; // Duración animación de entrada (250ms)
 $lxd-toast-duration-out: 250ms; // Duración animación de salida (250ms)
 $lxd-toast-easing: ease-out; // Curva de animación

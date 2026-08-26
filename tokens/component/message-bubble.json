@@ -2,7 +2,7 @@
   "message-bubble": {
     "padding-block":  { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Padding vertical del globo" },
     "padding-inline": { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Padding horizontal del globo" },
-    "border-radius":  { "$value": "{border-radius.lg}",    "$type": "dimension", "$description": "Radio base del globo" },
+    "border-radius":  { "$value": "{border-radius.default}",    "$type": "dimension", "$description": "Radio base del globo" },
     "max-width":      { "$value": "75%",                   "$type": "dimension", "$description": "Anchura máxima del globo" },
 
     "font-family":    { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Familia tipográfica" },

@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { TokenTable } from "./TokenTable";
+import { breakpointTokens } from "../../tokens/breakpoint";
+
+<Meta title="Foundations/Puntos de ruptura" />
+
+# Puntos de ruptura
+
+Seis anchos de ventana en los que la maqueta cambia. Dos de ellos son estructurales y el resto, de ajuste:
+
+| Token | Valor | Qué cambia |
+|---|---|---|
+| `--breakpoint-sm` | 480px | Teléfono apaisado |
+| **`--breakpoint-md`** | **768px** | **La maqueta pasa de una columna a varias** |
+| **`--breakpoint-lg`** | **1024px** | **El chrome de aplicación pasa de barra superior (`AppHeader`) a barra lateral (`Sidebar`)** |
+| `--breakpoint-xl` | 1280px | Ancho de las páginas públicas |
+| `--breakpoint-2xl` | 1440px | Escritorio ancho |
+| `--breakpoint-3xl` | 1920px | Pantallas grandes |
+
+La misma escala fija los anchos de contenido del `Container`: el ancho máximo de una página y los puntos en los que se reorganiza salen del mismo sitio, así que nunca se contradicen.
+
+## Cómo se usan
+
+**Primero móvil.** Los estilos base son los de la pantalla pequeña y cada `min-width` añade lo que la pantalla más ancha permite. Una regla solo para móvil —ocultar la barra lateral, por ejemplo— se escribe como `max-width` del punto menos un píxel (`1023px`), para que ninguna anchura caiga en los dos lados a la vez.
+
+**El valor va escrito, con su token al lado.** Las media queries no admiten `var()`, así que el píxel se repite en el CSS y el comentario dice de qué token viene:
+
+```css
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+```
+
+Es la única situación en la que un valor del sistema aparece a mano en un CSS de componente. Sin el comentario, el número es un valor mágico; con él, es un token.
+
+**Los componentes no conocen la ventana, conocen su hueco.** Un componente que deba reorganizarse según el espacio que tiene —no según la pantalla— usa `@container`, con la misma escala como referencia.
+
+---
+
+## Tokens
+
+<TokenTable tokens={breakpointTokens} />
+
+Definidos en `tokens/breakpoint/breakpoint.json`.

@@ -3,13 +3,13 @@
  */
 
 :root {
-  --motion-duration-instant: 0ms; /** Sin transición */
-  --motion-duration-fast: 150ms; /** Transiciones rápidas: hover, focus */
-  --motion-duration-base: 250ms; /** Transiciones estándar */
-  --motion-duration-slow: 400ms; /** Transiciones lentas: modales, paneles */
-  --motion-easing-default: ease; /** Curva por defecto */
-  --motion-easing-in: ease-in; /** Aceleración al entrar */
-  --motion-easing-out: ease-out; /** Desaceleración al salir */
-  --motion-easing-in-out: ease-in-out; /** Aceleración y desaceleración */
-  --motion-easing-linear: linear; /** Velocidad constante */
+  --motion-duration-instant: 0ms; /** Sin transición: cambios que deben ser inmediatos */
+  --motion-duration-fast: 150ms; /** Respuesta a la interacción: hover, foco, pulsación */
+  --motion-duration-base: 250ms; /** Cambios de estado: abrir un menú, mostrar un tooltip */
+  --motion-duration-slow: 400ms; /** Cambios de contexto: modales, hojas, paneles que entran */
+  --motion-easing-default: ease; /** Transiciones de propiedad: color, fondo, opacidad */
+  --motion-easing-in: ease-in; /** Escala. El sistema no lo usa */
+  --motion-easing-out: ease-out; /** Salidas: lo que desaparece frena al final */
+  --motion-easing-in-out: ease-in-out; /** Movimiento: paneles y hojas que se desplazan */
+  --motion-easing-linear: linear; /** Escala. El sistema no lo usa */
 }

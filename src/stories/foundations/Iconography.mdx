@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { IconCatalog, IconSizes } from "./IconCatalog";
+import { TokenTable } from "./TokenTable";
+import { iconSizeTokens } from "../../tokens/icon";
+
+<Meta title="Foundations/Iconografía" />
+
+# Iconografía
+
+Iconos de **trazo**, dibujados en una retícula de 24 y con una sola regla que los hace de la familia: **el trazo mide 1px a cualquier talla**. No se escala con el icono —`vector-effect: non-scaling-stroke`—, así que un icono de 64px tiene el mismo peso de línea que uno de 16, y el mismo que cualquier borde del sistema.
+
+El color es `currentColor`: el icono hereda el del texto que lo rodea y cambia con él, en cualquier superficie y en cualquier estado.
+
+La única forma rellena son **los puntos** —`dot`, `dots`, `grid`—, porque un punto no tiene trazo. Su radio es de 1,5 unidades en la retícula; el punto de estado, `dot`, es mayor porque se usa solo, a la talla más pequeña.
+
+## Tallas
+
+<IconSizes />
+
+| Token | Valor | Para |
+|---|---|---|
+| `--icon-size-xs` | 8px | Marca: el punto de estado, el chevron de un desplegable |
+| `--icon-size-sm` | 16px | Dentro de un control: junto al texto de un botón, en una celda |
+| `--icon-size-md` | 24px | Por defecto: iconos-botón, navegación, listas |
+| `--icon-size-lg` | 48px | Destacado: cabecera de un estado vacío, un aviso |
+| `--icon-size-xl` | 64px | Ilustrativo: estados vacíos a pantalla completa |
+
+Un icono dentro de un control ocupa la talla del icono, no la del control: el botón mide su talla (32, 40 o 48) y el icono de 16 o 24 va centrado dentro.
+
+## Accesibilidad
+
+El icono es **siempre decorativo** (`aria-hidden`): no tiene nombre ni se anuncia. El significado lo lleva el control que lo contiene —el `aria-label` de un botón de icono, el texto de un enlace—, nunca el icono. Un icono solo, sin texto ni etiqueta, no transmite nada a quien no lo ve.
+
+## Catálogo
+
+Cada glifo existe una sola vez. Cuando un componente necesita animar un icono —el `MenuButton` convierte `menu` en `close`— no dibuja el suyo: usa el del catálogo y anima sus líneas, y la forma de destino se deriva de la de origen. Dos dibujos del mismo glifo acaban divergiendo; uno derivado del otro, no.
+
+<IconCatalog />
+
+---
+
+## Tokens
+
+<TokenTable tokens={iconSizeTokens} />
+
+Definidos en `tokens/component/icon.json`.

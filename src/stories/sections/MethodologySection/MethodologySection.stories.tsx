@@ -3,7 +3,7 @@ import { MethodologySection } from './MethodologySection';
 import { steps } from '../../data/home';
 
 const meta: Meta<typeof MethodologySection> = {
-  title: 'Sections/MethodologySection',
+  title: 'Por revisar/Sections/MethodologySection',
   component: MethodologySection,
   parameters: {
     layout: 'fullscreen',

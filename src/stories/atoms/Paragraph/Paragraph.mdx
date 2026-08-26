@@ -1,38 +1,33 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ParagraphStories from "./Paragraph.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { paragraphBaseTokens, paragraphSizeTokens, paragraphDarkTokens } from "../../../tokens/components/text";
+import { paragraphSizeTokens } from "../../../tokens/components/text";
 
 <Meta of={ParagraphStories} />
 
 # Paragraph
 
-Texto de cuerpo. Tres tamaños disponibles: pequeño (14px), por defecto (16px) y grande (18px). Sin márgenes por defecto — el espaciado es responsabilidad del layout.
+Texto de cuerpo. Tres tamaños: `small` para notas y metadatos, el de defecto para leer, y `large` para entradillas y textos de portada. Sin márgenes: el espacio entre párrafos lo pone la maqueta.
 
-## Por defecto
+Un `<p>` crudo se ve exactamente igual que un `<Paragraph>` por defecto: el cuerpo lo pone la base (`body`, tokens `--text-*`), y llega al HTML que no pasa por componentes (contenido de CMS, markdown). El componente solo añade las variantes de tamaño.
 
-<Canvas of={ParagraphStories.Default} />
+<Canvas of={ParagraphStories.PorDefecto} />
 
 ## Tamaños
 
-<Canvas of={ParagraphStories.Small} />
-<Canvas of={ParagraphStories.Large} />
+Los tres salen de la escala compuesta de texto (Foundations → Tipografía): el pequeño baja al paso 1 con interlineado relajado, el grande sube al paso 4 con interlineado ceñido. Los valores exactos, en la tabla de tokens.
 
----
+<Canvas of={ParagraphStories.Tamanos} />
+
+## Medida
+
+El párrafo no limita su ancho: lo hace el contenedor de prosa que lo muestra, con `--content-measure` (70 caracteres). Un párrafo suelto dentro de un `Container` ancho da líneas demasiado largas para leer.
 
 ## Tokens
 
-### Base
-
-<TokenTable tokens={paragraphBaseTokens} />
-
-### Tamaños
+Los del cuerpo por defecto son los del lienzo (`--text-*`, Foundations → Tipografía); el párrafo solo tiene los de sus variantes.
 
 <TokenTable tokens={paragraphSizeTokens} />
-
-### Oscuro
-
-<TokenTable tokens={paragraphDarkTokens} />
 
 ## Props
 

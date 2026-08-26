@@ -6,12 +6,12 @@ import './Avatar.css';
 export interface AvatarProps {
   /** URL de la imagen. Si se omite, se muestran las iniciales calculadas desde `name`. */
   src?: string;
-  /** Texto alternativo accesible para la imagen. Se usa también como fallback de `alt` cuando `name` no está disponible. */
+  /** Nombre accesible. Por defecto, `name`. `alt=""` lo hace decorativo (cuando el nombre ya está al lado). */
   alt?: string;
   /** Nombre completo. Se usa para generar las iniciales cuando no hay `src`. */
   name?: string;
-  /** Talla del avatar. */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  /** Talla del sistema (32/40/48). */
+  size?: 'sm' | 'md' | 'lg';
   /** Forma del avatar. `circle` para personas, `square` para logos de organización. */
   shape?: 'circle' | 'square';
   /** Clase adicional. */
@@ -32,8 +32,7 @@ export function Avatar({
   shape = 'circle',
   className,
 }: AvatarProps) {
-  // Una imagen que falla al cargar degrada a las iniciales (paridad con el
-  // Avatar de Radix que los adaptadores del kit envolvían) — nunca un icono
+  // Una imagen que falla al cargar degrada a las iniciales — nunca un icono
   // de imagen rota en el shell.
   const [failed, setFailed] = useState(false);
   const base = [
@@ -54,8 +53,14 @@ export function Avatar({
     );
   }
 
+  // Sin imagen, las iniciales son una imagen para el lector de pantalla —
+  // salvo que `alt=""` diga que es decorativo.
+  const accessibleName = alt ?? name ?? '';
   return (
-    <span className={`${base} avatar--initials`} aria-hidden="true">
+    <span
+      className={`${base} avatar--initials`}
+      {...(accessibleName ? { role: 'img', 'aria-label': accessibleName } : { 'aria-hidden': true })}
+    >
       {name ? getInitials(name) : '?'}
     </span>
   );

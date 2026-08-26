@@ -3,9 +3,9 @@
  */
 
 :root {
-  --icon-size-xs: 8px; /** Tamaño extra pequeño */
-  --icon-size-sm: 18px; /** Tamaño pequeño */
-  --icon-size-md: 24px; /** Tamaño mediano */
-  --icon-size-lg: 48px; /** Tamaño grande */
-  --icon-size-xl: 64px; /** Tamaño extra grande */
+  --icon-size-xs: 8px; /** Marca: el punto de estado, el chevron de un desplegable */
+  --icon-size-sm: 16px; /** Dentro de un control: junto al texto de un botón, en una celda */
+  --icon-size-md: 24px; /** Por defecto: iconos-botón, navegación, listas */
+  --icon-size-lg: 48px; /** Destacado: cabecera de un estado vacío, un aviso */
+  --icon-size-xl: 64px; /** Ilustrativo: estados vacíos a pantalla completa */
 }

@@ -18,16 +18,15 @@
   box-shadow: var(--menu-shadow);
   padding-block: var(--menu-padding-block);
   padding-inline: 0;
-  z-index: var(--menu-z-index);
   outline: none;
-  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  transform-origin: var(--transform-origin);
 }
 
-.menu__content[data-state="open"] {
+.menu__content[data-open] {
   animation: menu-open var(--menu-transition-duration) var(--menu-transition-easing);
 }
 
-.menu__content[data-state="closed"] {
+.menu__content[data-closed] {
   animation: menu-close var(--menu-transition-duration) var(--menu-transition-easing);
 }
 
@@ -91,26 +90,11 @@
   color: var(--menu-label-color);
 }
 
-/* El glifo del radio es un `:before` posicionado en absoluto dentro del input,
-   que no aporta altura propia: con su tamaño por defecto no cuadra con el 1lh
-   del texto de la fila y se lee descolocado. Se fija a 1lh y no encoge cuando
-   una etiqueta larga hace saltar la fila. */
-.menu__radio-indicator {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--menu-item-icon-size);
-  height: 1lh;
-  flex-shrink: 0;
-  margin: 0;
+/* La opción elegida de un grupo de radio: en énfasis, sin glifo */
+.menu__item[data-checked] {
+  font-weight: var(--menu-item-selected-font-weight);
 }
 
-/* Las filas de radio no llevan fondo de hover/foco: ya tienen el fondo propio
-   del glifo, y un segundo fondo a lo ancho encima se lee como dos superficies
-   apiladas en vez de como un estado. */
-.menu__item[role="menuitemradio"][data-highlighted] {
-  background-color: transparent;
-}
 
 .menu__separator {
   height: var(--menu-separator-height);
@@ -118,4 +102,9 @@
   margin-block: var(--menu-separator-margin-block);
   margin-inline: 0;
   border: none;
+}
+
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.menu__positioner {
+  z-index: var(--menu-z-index);
 }

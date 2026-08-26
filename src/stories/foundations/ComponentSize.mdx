@@ -1,25 +1,36 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import { SizeScale } from "./SizeScale";
 import { TokenTable } from "./TokenTable";
-import { componentSizeTokens, contentSizeTokens } from "../../tokens/size";
+import { componentSizeTokens } from "../../tokens/size";
 
 <Meta title="Foundations/Tallas de componente" />
 
 # Tallas de componente
 
-Escala de alturas para elementos de interfaz interactivos: botones de formulario, inputs, selects y otros controles. Garantiza consistencia vertical entre elementos que conviven en el mismo contexto.
+Tres tallas, en múltiplos de 8px, para todo lo que tiene un lado fijo: la **altura de los controles** y el **lado de los elementos cuadrados**. Un campo `md` y un avatar `md` miden lo mismo, 40px, y por eso se alinean en una fila sin que nadie los ajuste.
 
-## Tokens CSS
+<SizeScale tokens={componentSizeTokens} />
 
-<TokenTable tokens={componentSizeTokens} />
+## Los controles miden su talla
 
-Los tokens están definidos en `tokens/size/component.json`.
+Todo control interactivo de una línea —campo, select, botón, selector de fecha, código de un solo uso— **fija su altura a la talla**: 32, 40 o 48px, exactos. Lo que hay dentro se centra; el padding vertical no existe como decisión. Así una fila de formulario con un campo, un select y un botón queda alineada por construcción, y no por un `min-height` que cada producto tenga que poner.
+
+La altura no sale del padding porque cada control suma ingredientes distintos —un icono de flecha, un borde, una línea de texto con su interlineado— y el resultado nunca coincide. Fijarla es la única forma de que "misma talla" signifique "misma altura".
+
+`md` es la talla por defecto. `sm` es la mínima del sistema: no hay controles más pequeños. `lg` es para controles destacados y para cuando el objetivo táctil debe ser holgado.
+
+`Textarea` queda fuera: crece con el contenido, y su altura mínima es asunto suyo.
+
+## Los cuadrados miden su talla
+
+Avatares, iconos-botón, logos de barra, triggers, miniaturas: el lado es una de las tres tallas. Es lo que permite que un avatar en una cabecera de 40px ocupe justo la altura del control que tiene al lado.
+
+Las marcas de checkbox y radio **no** son tallas de componente: son el tamaño de una marca dentro de una fila de control, y lo fija cada componente.
 
 ---
 
-## Medida de contenido
+## Tokens
 
-Ancho máximo para bloques de texto y secciones de contenido. Garantiza legibilidad óptima y consistencia entre páginas.
+<TokenTable tokens={componentSizeTokens} />
 
-<TokenTable tokens={contentSizeTokens} />
-
-Los tokens están definidos en `tokens/size/content.json`.
+Definidos en `tokens/size/component.json`.

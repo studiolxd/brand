@@ -1,0 +1,60 @@
+.dropdown-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dropdown-field-gap);
+}
+
+.dropdown-field--inline {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* La misma cara que el trigger del Select: rectangular, a la altura del sistema. */
+.dropdown-field__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dropdown-field-content-gap);
+  block-size: var(--dropdown-field-height);
+  padding-block: 0;
+  padding-inline: var(--dropdown-field-padding-inline);
+  font-family: var(--dropdown-field-font-family);
+  font-size: var(--dropdown-field-font-size);
+  font-weight: var(--dropdown-field-font-weight);
+  color: var(--dropdown-field-color);
+  background-color: var(--dropdown-field-bg);
+  border: var(--dropdown-field-border-width) solid var(--dropdown-field-border-color);
+  border-radius: var(--dropdown-field-border-radius);
+  cursor: pointer;
+}
+
+.dropdown-field__control:disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+}
+
+.dropdown-field__control:focus,
+.dropdown-field__control[data-popup-open] {
+  outline: none;
+}
+
+.dropdown-field__control:focus-visible {
+  outline: var(--dropdown-field-focus-ring-width) solid var(--dropdown-field-focus-ring-color);
+  /* Hacia dentro, pegado al borde: como el Select */
+  outline-offset: calc(-1 * (var(--dropdown-field-focus-ring-width) + var(--dropdown-field-border-width)));
+}
+
+.dropdown-field__value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dropdown-field-content-gap);
+}
+
+.dropdown-field__icon {
+  flex-shrink: 0;
+  transform: rotate(90deg);
+  transition: transform var(--dropdown-field-icon-transition) var(--motion-easing-default);
+}
+.dropdown-field__control[data-popup-open] .dropdown-field__icon {
+  transform: rotate(-90deg);
+}

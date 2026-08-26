@@ -7,6 +7,7 @@
   --select-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
   --select-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
   --select-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
+  --select-field-error-border-color: var(--color-error-text-on-light); /** Borde del select en error (texto/borde, nunca fondo) */
   --select-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
   --select-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
   --select-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
@@ -14,4 +15,11 @@
   --select-field-error-color: var(--form-error-color); /** Color del mensaje de error */
   --select-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --select-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --select-field-error-color: var(--color-error-text-on-dark); /** Mensaje de error — surface-dark */
+  --select-field-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
 }

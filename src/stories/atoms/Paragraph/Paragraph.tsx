@@ -1,7 +1,7 @@
 import './Paragraph.css';
 
-interface ParagraphProps {
-  /** Tamaño del texto del párrafo. */
+export interface ParagraphProps {
+  /** Tamaño: `small` para notas y metadatos, `large` para entradillas. */
   size?: 'small' | 'default' | 'large';
   /** Clases adicionales. */
   className?: string;

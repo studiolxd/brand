@@ -1,11 +1,10 @@
 import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Slot } from '@radix-ui/react-slot';
 import { expect, userEvent, within } from 'storybook/test';
 import { Switcher } from './Switcher';
 
 const meta: Meta<typeof Switcher> = {
-  title: 'Atoms/Switcher',
+  title: 'Por revisar/Atoms/Switcher',
   component: Switcher,
   parameters: {
     layout: 'padded',
@@ -43,18 +42,22 @@ export default meta;
 type Story = StoryObj<typeof Switcher>;
 
 /**
- * Test: `forwardRef` + inyección Slot al **Radix Root** (`role="switch"`). El `ref`
- * apunta al Root; las props inyectadas aterrizan ahí; el click alterna `data-state`.
+ * Test: `forwardRef` + composición con `render` de Base UI (`role="switch"`). El
+ * `ref` apunta al Root; las props del elemento compuesto aterrizan ahí; el click
+ * alterna `data-checked`.
  */
 export const RefForwarding: Story = {
-  name: 'Test — forwardRef + Slot (Root)',
+  name: 'Test — forwardRef + render (Root)',
+  tags: ['!dev'],
   render: () => {
-    const ref = useRef<HTMLButtonElement>(null);
+    const ref = useRef<HTMLElement>(null);
     return (
       <div>
-        <Slot data-slot="sw" aria-describedby="sw-help">
-          <Switcher ref={ref} aria-label="notificaciones" />
-        </Slot>
+        <Switcher
+          ref={ref}
+          aria-label="notificaciones"
+          render={<span data-slot="sw" aria-describedby="sw-help" />}
+        />
         <button
           type="button"
           onClick={() => {
@@ -73,9 +76,9 @@ export const RefForwarding: Story = {
     const sw = canvas.getByRole('switch', { name: 'notificaciones' });
     await expect(sw).toHaveAttribute('data-slot', 'sw');
     await expect(sw).toHaveAttribute('aria-describedby', 'sw-help');
-    await expect(sw).toHaveAttribute('data-state', 'unchecked');
+    await expect(sw).toHaveAttribute('data-unchecked');
     await userEvent.click(sw);
-    await expect(sw).toHaveAttribute('data-state', 'checked');
+    await expect(sw).toHaveAttribute('data-checked');
     // el ref apunta al Root interactivo (role="switch")
     await userEvent.click(canvas.getByRole('button', { name: 'probe' }));
     await expect(canvas.getByTestId('sw-probe')).toHaveTextContent('switch');

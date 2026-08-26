@@ -48,7 +48,7 @@ const data: Member[] = NAMES.map((name, index) => ({
 const MemberTable = DataTable<Member, unknown>;
 
 const meta = {
-  title: 'Organisms/DataTable',
+  title: 'Por revisar/Organisms/DataTable',
   component: MemberTable,
 } satisfies Meta<typeof MemberTable>;
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MessageBubble } from './MessageBubble';
 
 const meta = {
-  title: 'Atoms/MessageBubble',
+  title: 'Por revisar/Atoms/MessageBubble',
   component: MessageBubble,
   args: {
     children: 'Hola, ¿en qué puedo ayudarte hoy?',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Content } from './Content';
 
 const meta: Meta<typeof Content> = {
-  title: 'Templates/Content',
+  title: 'Por revisar/Templates/Content',
   component: Content,
   parameters: {
     layout: 'fullscreen',

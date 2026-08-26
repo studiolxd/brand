@@ -1,0 +1,45 @@
+/* Un control cuadrado a su talla; el glifo `menu` centrado dentro. */
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--menu-button-size-md);
+  block-size: var(--menu-button-size-md);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--menu-button-color);
+  cursor: pointer;
+}
+.menu-button.menu-button--sm {
+  inline-size: var(--menu-button-size-sm);
+  block-size: var(--menu-button-size-sm);
+}
+
+.menu-button:focus-visible {
+  outline: var(--menu-button-focus-ring-width) solid var(--menu-button-focus-ring-color);
+  outline-offset: var(--menu-button-focus-ring-offset);
+}
+
+/* Las tres líneas del icono animan por separado, cada una girando sobre su
+   propio centro (fill-box) y desplazándose después. Las longitudes van en
+   unidades del viewBox (24): 6 es el paso entre líneas del glifo, así que la
+   primera y la tercera aterrizan exactamente sobre el aspa de `close`. */
+.menu-button__icon .icon__line {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform var(--menu-button-transition-duration) var(--menu-button-transition-easing),
+    opacity var(--menu-button-transition-duration) var(--menu-button-transition-easing);
+}
+
+.menu-button[aria-expanded="true"] .icon__line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-button[aria-expanded="true"] .icon__line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.menu-button[aria-expanded="true"] .icon__line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}

@@ -5,31 +5,31 @@ $lxd-select-border-radius: 0px; // Radio del borde del trigger
 $lxd-select-border-width: 1px; // Grosor del borde
 $lxd-select-border-style: solid; // Estilo del borde
 $lxd-select-border-color: #111e30; // Color del borde
-$lxd-select-padding-block: 1rem; // Padding block del trigger
+$lxd-select-height: 2.5rem; // Altura del control: la talla md del sistema. Las tallas cambian la altura, no el padding vertical
+$lxd-select-sm-height: 2rem; // Altura — sm
+$lxd-select-lg-height: 3rem; // Altura — lg
 $lxd-select-padding-inline: 1rem; // Padding inline del trigger
+$lxd-select-icon-gap: 0.5rem; // Entre el valor y el chevron (el chevron mide su talla de icono)
 $lxd-select-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
 $lxd-select-font-size: 1rem; // Tamaño de fuente
 $lxd-select-line-height: 1; // Interlineado del trigger
 $lxd-select-font-weight: 300; // Peso tipográfico
 $lxd-select-color: #111e30; // Color del texto
 $lxd-select-bg: #ffffff; // Fondo del trigger
-$lxd-select-icon-size: 0.625rem; // Tamaño del chevron
 $lxd-select-icon-transition: 150ms; // Duración de la transición del icono
 $lxd-select-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-select-focus-ring-offset: -3px; // Offset del anillo de foco (negativo = inset)
 $lxd-select-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-select-content-bg: #ffffff; // Fondo del dropdown
 $lxd-select-content-border-color: #111e30; // Borde del dropdown
-$lxd-select-content-z-index: 1100; // Z-index del dropdown (por encima del header: 1001)
-$lxd-select-content-max-height: var(--radix-select-content-available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Radix)
+$lxd-select-content-z-index: 400; // Capa del desplegable: flotante
+$lxd-select-content-max-height: var(--available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)
 $lxd-select-item-padding-block: 0.5rem; // Padding block de cada opción
+$lxd-select-item-selected-font-weight: 500; // La opción elegida, en énfasis
 $lxd-select-item-highlighted-bg: #111e30; // Fondo de opción resaltada
 $lxd-select-item-highlighted-color: #ffffff; // Texto de opción resaltada
-$lxd-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm (14px)
-$lxd-select-sm-padding-block: 0.25rem; // Padding block del trigger — variante sm
+$lxd-select-sm-font-size: 0.875rem; // Cuerpo — sm
 $lxd-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
 $lxd-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
-$lxd-select-lg-font-size: 1.25rem; // Tamaño de fuente — variante lg (20px)
-$lxd-select-lg-padding-block: 1.5rem; // Padding block del trigger — variante lg
+$lxd-select-lg-font-size: 1.25rem; // Cuerpo — lg
 $lxd-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
 $lxd-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg

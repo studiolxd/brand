@@ -3,10 +3,8 @@
  */
 
 :root {
-  --tag-border-radius: var(--border-radius-full); /** Pill shape */
   --tag-font-family: var(--font-family-sans); /** Font family */
   --tag-font-size: var(--font-size-1); /** 14px — UI label */
-  --tag-font-weight: var(--font-weight-medium); /** Medium weight */
   --tag-line-height: var(--line-height-none); /** Single-line */
   --tag-padding-block: var(--spacing-1); /** Block (vertical) padding */
   --tag-padding-inline: var(--spacing-3); /** Inline (horizontal) padding */
@@ -16,6 +14,8 @@
   --tag-info-color: var(--color-white); /** Info semantic — white text on prussian */
   --tag-warning-bg: var(--color-yellow); /** Warning semantic — brand yellow background (AAA ~10.3:1 with prussian text) */
   --tag-warning-color: var(--color-prussian); /** Warning semantic — prussian text on yellow */
+  --tag-border-radius: var(--border-radius-round); /** Pill shape */
+  --tag-font-weight: var(--font-weight-emphasis); /** Medium weight */
   --tag-primary-bg: var(--color-primary); /** Primary (prussian) background */
   --tag-primary-color: var(--color-text-on-dark); /** Primary text — white on dark bg */
   --tag-accent-1-bg: var(--color-accent-1); /** Accent 1 (lavender) background */

@@ -1,4 +1,4 @@
-import * as RadixSelect from '@radix-ui/react-select';
+import { Select as BaseSelect } from '@base-ui-components/react/select';
 import { getCountryCallingCode } from 'libphonenumber-js';
 import PhoneInputLib from 'react-phone-number-input';
 import type { Country } from 'react-phone-number-input';
@@ -14,7 +14,7 @@ interface CountrySelectProps {
   /** Ver `InputPhoneProps.countryLabel`. */
   countryLabel?: string;
   /** Ver `InputPhoneProps.container`. */
-  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
+  container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 
 function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel = 'País', container }: CountrySelectProps) {
@@ -28,39 +28,39 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', countr
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixSelect.Root
+    <BaseSelect.Root
       value={toVal(value)}
-      onValueChange={(v) => onChange(fromVal(v))}
+      onValueChange={(v) => onChange(fromVal(v as string))}
       disabled={disabled}
     >
-      <RadixSelect.Trigger className="input-phone__country" aria-label={countryLabel}>
-        <RadixSelect.Value>
+      <BaseSelect.Trigger className="input-phone__country" aria-label={countryLabel}>
+        <BaseSelect.Value>
           {value ? `+${getCountryCallingCode(value)}` : '🌐'}
-        </RadixSelect.Value>
-        <RadixSelect.Icon asChild>
-          <Icon name="chevron" className="input-phone__country-icon" size={chevronSize} />
-        </RadixSelect.Icon>
-      </RadixSelect.Trigger>
+        </BaseSelect.Value>
+        <Icon name="chevron" className="input-phone__country-icon" size={chevronSize} />
+      </BaseSelect.Trigger>
 
-      <RadixSelect.Portal container={container}>
-        <RadixSelect.Content
-          className={contentClass}
-          position="popper"
+      <BaseSelect.Portal container={container}>
+        <BaseSelect.Positioner
+          className="input-phone__country-positioner"
+          side="bottom"
+          align="start"
+          alignItemWithTrigger={false}
         >
-          <RadixSelect.Viewport>
+          <BaseSelect.Popup className={contentClass}>
             {options.map(({ value: code, label }) => (
-              <RadixSelect.Item
+              <BaseSelect.Item
                 key={toVal(code)}
                 value={toVal(code)}
                 className="input-phone__country-item"
               >
-                <RadixSelect.ItemText>{label}</RadixSelect.ItemText>
-              </RadixSelect.Item>
+                <BaseSelect.ItemText>{label}</BaseSelect.ItemText>
+              </BaseSelect.Item>
             ))}
-          </RadixSelect.Viewport>
-        </RadixSelect.Content>
-      </RadixSelect.Portal>
-    </RadixSelect.Root>
+          </BaseSelect.Popup>
+        </BaseSelect.Positioner>
+      </BaseSelect.Portal>
+    </BaseSelect.Root>
   );
 }
 
@@ -82,14 +82,14 @@ interface InputPhoneProps {
    */
   countryLabel?: string;
   /**
-   * Nodo DOM donde montar el portal del dropdown de país (reenviado a Radix
-   * `Portal.container`). Por defecto se monta en `document.body`, que
+   * Nodo DOM donde montar el portal del dropdown de país (reenviado a
+   * `Select.Portal` de Base UI). Por defecto se monta en `document.body`, que
    * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
    * sin configuración adicional. Solo hace falta pasarlo cuando el
    * InputPhone vive dentro de un `.surface-dark` **anidado** (no en la
    * raíz), ya que ese contexto no llega a `document.body` por la cascada.
    */
-  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
+  container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 
 export function InputPhone({

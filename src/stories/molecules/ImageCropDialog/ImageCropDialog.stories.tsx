@@ -4,7 +4,7 @@ import { Button } from '../../atoms/Button/Button';
 import { ImageCropDialog } from './ImageCropDialog';
 
 const meta = {
-  title: 'Molecules/ImageCropDialog',
+  title: 'Por revisar/Molecules/ImageCropDialog',
   component: ImageCropDialog,
 } satisfies Meta<typeof ImageCropDialog>;
 

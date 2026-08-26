@@ -14,7 +14,6 @@
   line-height: var(--switcher-field-label-line-height);
   color: var(--switcher-field-label-color);
   letter-spacing: var(--switcher-field-label-letter-spacing);
-  text-transform: var(--switcher-field-label-text-transform);
 }
 
 .switcher-field--disabled {

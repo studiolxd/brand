@@ -57,7 +57,7 @@ export interface CommandPaletteProps {
  * alimenta de forma declarativa con `groups`.
  *
  * `cmdk` aporta el comportamiento (filtrado, navegación con ↑↓, Enter) igual
- * que Radix en el resto del DS; la superficie es la del `Modal`.
+ * que Base UI en el resto del DS; la superficie es la del `Modal`.
  */
 export function CommandPalette({
   open,

@@ -1,10 +1,10 @@
 {
   "motion": {
     "duration": {
-      "instant":  { "$value": "0ms",    "$type": "number", "$description": "Sin transición" },
-      "fast":     { "$value": "150ms",  "$type": "number", "$description": "Transiciones rápidas: hover, focus" },
-      "base":     { "$value": "250ms",  "$type": "number", "$description": "Transiciones estándar" },
-      "slow":     { "$value": "400ms",  "$type": "number", "$description": "Transiciones lentas: modales, paneles" }
+      "instant": { "$value": "0ms",   "$type": "number", "$description": "Sin transición: cambios que deben ser inmediatos" },
+      "fast":    { "$value": "150ms", "$type": "number", "$description": "Respuesta a la interacción: hover, foco, pulsación" },
+      "base":    { "$value": "250ms", "$type": "number", "$description": "Cambios de estado: abrir un menú, mostrar un tooltip" },
+      "slow":    { "$value": "400ms", "$type": "number", "$description": "Cambios de contexto: modales, hojas, paneles que entran" }
     }
   }
 }

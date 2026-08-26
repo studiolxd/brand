@@ -1,0 +1,44 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SiteNavStories from "./SiteNav.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { siteNavTokens } from "../../../tokens/molecules/site-nav";
+
+<Meta of={SiteNavStories} />
+
+# SiteNav
+
+El índice del sitio: grupos con una cabecera y sus enlaces. Es lo que llena el panel del `SiteHeader` y, con la misma forma, el pie de página. Una columna en móvil; a partir de `md`, una columna por grupo —dos, tres o cuatro por fila según el ancho— sin que el producto tenga que maquetar nada.
+
+<Canvas of={SiteNavStories.PorDefecto} />
+
+## Grupos
+
+`groups` describe el índice con datos, no con JSX: cada grupo tiene `label`, `items` y, opcionalmente, `href` — entonces la cabecera es también un enlace, la portada de esa sección. Los enlaces van un punto por debajo de la cabecera de su grupo en la escala tipográfica. Un `item` con `current: true` es la página actual y se marca con `aria-current="page"`; visualmente solo cambia el peso.
+
+Los enlaces son grandes a propósito (`font-size.3`): el panel es una pantalla entera dedicada a navegar, no un menú apretado.
+
+## Móvil
+
+<Canvas of={SiteNavStories.Movil} />
+
+## Superficie
+
+<Canvas of={SiteNavStories.SuperficieOscura} />
+
+## Enrutado
+
+`renderLink` recibe `href`, `children`, `className` y `aria-current` y devuelve el enlace del router del producto (`next/link`, por ejemplo). Sin él, renderiza un `<a>`.
+
+## Accesibilidad
+
+- Es un `nav` con nombre (`label`, "Navegación del sitio" por defecto): una región que el lector de pantalla lista y a la que se salta.
+- Las cabeceras de grupo son encabezados normales (`Heading` de nivel 2 y talla 6, sin estilo propio), así el índice se recorre por encabezados igual que una página.
+- La página actual lleva `aria-current="page"`; el peso es un refuerzo, no el único indicio.
+
+## Tokens
+
+<TokenTable tokens={siteNavTokens} />
+
+## Props
+
+<ArgTypes of={SiteNavStories} />

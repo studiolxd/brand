@@ -22,7 +22,7 @@ function mockSearch(query: string): Promise<AsyncMultiSelectOption[]> {
 }
 
 const meta: Meta<typeof AsyncMultiSelectField> = {
-  title: 'Molecules/AsyncMultiSelectField',
+  title: 'Por revisar/Molecules/AsyncMultiSelectField',
   component: AsyncMultiSelectField,
   parameters: { layout: 'padded' },
   args: {

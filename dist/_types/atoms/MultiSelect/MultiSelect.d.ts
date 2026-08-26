@@ -1,4 +1,4 @@
-import * as RadixPopover from '@radix-ui/react-popover';
+import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import './MultiSelect.css';
 export interface MultiSelectOption {
     value: string;
@@ -17,13 +17,13 @@ export interface MultiSelectProps {
     id?: string;
     'aria-label'?: string;
     /**
-     * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
+     * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
      * `Portal.container`). Por defecto se monta en `document.body`, que
      * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
      * sin configuración adicional. Solo hace falta pasarlo cuando el
      * MultiSelect vive dentro de un `.surface-dark` **anidado** (no en la
      * raíz), ya que ese contexto no llega a `document.body` por la cascada.
      */
-    container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
+    container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 export declare function MultiSelect({ options, value, defaultValue, placeholder, disabled, readOnly, size, onValueChange, id, 'aria-label': ariaLabel, container, }: MultiSelectProps): import("react/jsx-runtime").JSX.Element;

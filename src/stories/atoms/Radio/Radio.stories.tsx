@@ -3,7 +3,7 @@ import { expect } from 'storybook/test';
 import { Radio } from './Radio';
 
 const meta: Meta<typeof Radio> = {
-  title: 'Atoms/Radio',
+  title: 'Por revisar/Atoms/Radio',
   component: Radio,
   parameters: {
     layout: 'padded',
@@ -88,6 +88,7 @@ export const FocusVisible: Story = {
  */
 export const PropPassthrough: Story = {
   name: 'Test — className + data-* passthrough',
+  tags: ['!dev'],
   render: () => (
     <Radio name="pp" value="a" aria-label="opción" className="extra" data-slot="radio" />
   ),

@@ -1,0 +1,18 @@
+{
+  "site-nav": {
+    "group-gap":            { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Separación entre grupos: entre columnas en escritorio, entre bloques en móvil" },
+    "label-margin-block-end": { "$value": "{spacing.3}",            "$type": "dimension", "$description": "Aire entre la cabecera y sus enlaces" },
+    "item-gap":             { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Separación entre enlaces de un grupo" },
+    "item-font-size":       { "$value": "{font-size.4}",            "$type": "dimension", "$description": "Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5)" },
+    "item-font-weight":     { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Enlaces" },
+    "item-line-height":     { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Enlaces" },
+    "item-color":           { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Enlaces" },
+    "item-current-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",  "$description": "Página actual: solo cambia el peso" },
+    "focus-ring-width":     { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Anillo de foco" },
+    "focus-ring-offset":    { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "focus-ring-color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Anillo de foco" },
+
+    "surface-dark-item-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Enlaces — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

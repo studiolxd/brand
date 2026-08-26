@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { Tag } from './Tag';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Atoms/Tag',
+  title: 'Por revisar/Atoms/Tag',
   component: Tag,
   parameters: {
     layout: 'padded',
@@ -31,6 +31,7 @@ type Story = StoryObj<typeof Tag>;
 /** Test: `className` del consumidor al final + `data-*`/`aria-*` passthrough. */
 export const PropPassthrough: Story = {
   name: 'Test — className + data-* passthrough',
+  tags: ['!dev'],
   render: () => (
     <Tag variant="primary" className="extra" data-slot="badge" aria-label="estado">
       Activo

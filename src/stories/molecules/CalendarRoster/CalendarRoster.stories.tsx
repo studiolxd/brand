@@ -4,7 +4,7 @@ import { expect, within } from 'storybook/test';
 import { CalendarRoster, type RosterRow } from './CalendarRoster';
 
 const meta: Meta<typeof CalendarRoster> = {
-  title: 'Molecules/CalendarRoster',
+  title: 'Por revisar/Molecules/CalendarRoster',
   component: CalendarRoster,
   parameters: {
     layout: 'padded',
@@ -189,6 +189,7 @@ export const FijaConMesActual: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — leyenda y navegación',
+  tags: ['!dev'],
   render: () => {
     const month = new Date(2026, 0, 1);
     return (

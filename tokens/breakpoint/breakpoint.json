@@ -1,10 +1,10 @@
 {
   "breakpoint": {
-    "sm":  { "$value": "480px",  "$type": "dimension", "$description": "Small — teléfonos en landscape" },
-    "md":  { "$value": "768px",  "$type": "dimension", "$description": "Medium — tablets" },
-    "lg":  { "$value": "1024px", "$type": "dimension", "$description": "Large — portátiles" },
-    "xl":  { "$value": "1280px", "$type": "dimension", "$description": "Extra large — escritorio" },
-    "2xl": { "$value": "1440px", "$type": "dimension", "$description": "2x large — escritorio ancho" },
-    "3xl": { "$value": "1920px", "$type": "dimension", "$description": "3x large — pantallas grandes y TV" }
+    "sm":  { "$value": "480px",  "$type": "dimension", "$description": "Teléfono apaisado" },
+    "md":  { "$value": "768px",  "$type": "dimension", "$description": "Tableta. Donde la maqueta pasa de una columna a varias" },
+    "lg":  { "$value": "1024px", "$type": "dimension", "$description": "Portátil. Donde el chrome de aplicación pasa de barra superior a barra lateral" },
+    "xl":  { "$value": "1280px", "$type": "dimension", "$description": "Escritorio. Ancho de las páginas públicas" },
+    "2xl": { "$value": "1440px", "$type": "dimension", "$description": "Escritorio ancho" },
+    "3xl": { "$value": "1920px", "$type": "dimension", "$description": "Pantallas grandes" }
   }
 }

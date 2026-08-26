@@ -1,0 +1,46 @@
+.language-switcher--compact {
+  display: inline-flex;
+}
+
+.language-switcher__code {
+  font-size: var(--language-switcher-code-font-size);
+  font-weight: var(--language-switcher-code-font-weight);
+  letter-spacing: var(--language-switcher-code-letter-spacing);
+  text-transform: uppercase;
+}
+
+.language-switcher__chevron {
+  transform: rotate(90deg);
+}
+
+.language-switcher__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--language-switcher-list-gap);
+}
+
+.language-switcher__option {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--language-switcher-list-font-size);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.language-switcher__option:hover {
+  text-decoration: underline;
+}
+.language-switcher__option.language-switcher__option--current {
+  font-weight: var(--language-switcher-list-current-font-weight);
+  text-decoration: none;
+  cursor: default;
+}
+.language-switcher__option:focus-visible {
+  outline: var(--language-switcher-focus-ring-width) solid var(--language-switcher-focus-ring-color);
+  outline-offset: var(--language-switcher-focus-ring-offset);
+}

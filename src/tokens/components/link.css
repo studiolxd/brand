@@ -3,20 +3,20 @@
  */
 
 :root {
-  --link-text-decoration: underline; /** Decoración por defecto */
-  --link-text-decoration-hover: none; /** Decoración en hover */
+  --link-text-decoration: underline; /** En reposo, subrayado: es lo que dice «esto se pulsa» sin depender del color */
+  --link-hover-text-decoration: none; /** En hover el subrayado desaparece */
   --link-cursor: pointer; /** Cursor */
-  --link-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --link-focus-ring-offset: var(--border-width-sm); /** Separación entre el enlace y el focus ring */
-  --link-color: var(--color-text-on-light); /** Color del enlace — mismo que el texto por defecto */
-  --link-color-hover: var(--color-text-on-light); /** Color del enlace en hover */
-  --link-focus-ring-color: var(--color-primary); /** Color del focus ring en fondo claro */
+  --link-color: var(--color-text-on-light); /** El enlace no tiene color propio: es texto, y lo distingue el subrayado */
+  --link-hover-color: var(--color-text-on-light); /** Color en hover */
+  --link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --link-focus-ring-offset: var(--border-width-default); /** Separación entre el enlace y el anillo */
+  --link-focus-ring-color: var(--color-primary); /** Anillo de foco */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
   --link-color: var(--color-text-on-dark); /** Color — surface-dark */
-  --link-color-hover: var(--color-text-on-dark); /** Hover color — surface-dark */
-  --link-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --link-hover-color: var(--color-text-on-dark); /** Hover — surface-dark */
+  --link-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

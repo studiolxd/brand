@@ -1,15 +1,35 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as LogoStories from "./Logo.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { logoTokens } from "../../../tokens/components/logo";
 
 <Meta of={LogoStories} />
 
-# Logotipo
+# Logo
 
-El logotipo SVG hereda el color del contexto mediante `currentColor`. Sobre fondo oscuro adapta el color automáticamente cuando está dentro de un contenedor `.surface-dark`. La prop `dark` aplica directamente la variante clara cuando no hay contexto de superficie disponible.
+El logotipo de Studio LXD como SVG en línea. Su alto es **una talla de componente** —32, 40 o 48px— y el ancho sale de la proporción del trazado: en una barra de 40px mide 40px sin que nadie lo ajuste, y queda alineado con los controles que tenga al lado.
 
-<Canvas of={LogoStories.Default} />
+<Canvas of={LogoStories.PorDefecto} />
 
----
+## Tallas
+
+`sm` para barras compactas (la barra lateral), `md` para cabeceras y formularios de acceso, `lg` para el pie de página. No hay más tamaños: si el logo tiene que ser mayor, es una pieza de marca, no un componente.
+
+<Canvas of={LogoStories.Tallas} />
+
+## Superficie
+
+El trazado toma su color de un token con par oscuro. Dentro de `surface-dark` —una banda oscura, la barra lateral— pasa a claro solo, sin ninguna prop.
+
+<Canvas of={LogoStories.SuperficieOscura} />
+
+## Accesibilidad
+
+El SVG es decorativo (`aria-hidden`). El nombre lo pone el elemento que lo envuelve: el enlace de la cabecera lleva su `aria-label` ("Studio LXD — ir al inicio"), y así el logo se lee como lo que es, un enlace al inicio, y no como una imagen sin texto.
+
+## Tokens
+
+<TokenTable tokens={logoTokens} />
 
 ## Props
 

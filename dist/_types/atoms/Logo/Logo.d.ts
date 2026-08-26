@@ -1,10 +1,15 @@
 import './Logo.css';
-interface LogoProps {
-    width?: number;
-    height?: number;
+/** Alto del logotipo: una talla de componente. El ancho sale de la proporción. */
+export type LogoSize = 'sm' | 'md' | 'lg';
+export interface LogoProps {
+    /** Talla. `md` (40px de alto) por defecto: la de una cabecera. */
+    size?: LogoSize;
     className?: string;
-    /** Versión clara para fondos oscuros. Aplica .logo--dark. */
-    dark?: boolean;
 }
-export declare function Logo({ width, height, className, dark }: LogoProps): import("react/jsx-runtime").JSX.Element;
-export {};
+/**
+ * Logotipo de Studio LXD. Es decorativo (`aria-hidden`): el nombre lo da el
+ * enlace o el elemento que lo envuelve. Hereda el color de la superficie —en
+ * `surface-dark` pasa a claro por tokens— y su alto es una talla de componente,
+ * de modo que en una barra de 40px mide 40px sin que nadie lo ajuste.
+ */
+export declare function Logo({ size, className }: LogoProps): import("react/jsx-runtime").JSX.Element;

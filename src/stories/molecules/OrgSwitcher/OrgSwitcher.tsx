@@ -1,9 +1,12 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Menu as BaseMenu } from '@base-ui-components/react/menu';
 import type { ReactNode } from 'react';
 import { Avatar } from '../../atoms/Avatar/Avatar';
 import { Icon } from '../../atoms/Icon/Icon';
-import type { ContextMenuItem, ContextMenuRenderLinkProps } from '../ContextMenu/ContextMenu';
+import type { MenuItem, MenuRenderLinkProps } from '../Menu/Menu';
+import { renderDropdownItems, defaultRenderLink } from '../_shared/dropdownItems';
+import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './OrgSwitcher.css';
+
 
 export interface OrgOption {
   id: string;
@@ -12,86 +15,70 @@ export interface OrgOption {
 }
 
 export interface OrgSwitcherProps {
+  /** Nombre accesible del botón. Por defecto, «Organización: ‹nombre›». */
+  label?: string;
+  /** Ocupa todo el ancho disponible (en la Sidebar). Por defecto mide lo que su contenido. */
+  block?: boolean;
+  /** Solo el logo. Sin él, lo decide la `Sidebar` (rail). */
+  compact?: boolean;
   current: OrgOption;
   organizations: OrgOption[];
   onOrgChange: (id: string) => void;
   defaultOpen?: boolean;
-  items?: ContextMenuItem[];
-  renderLink?: (props: ContextMenuRenderLinkProps) => ReactNode;
+  items?: MenuItem[];
+  renderLink?: (props: MenuRenderLinkProps) => ReactNode;
 }
 
-export function OrgSwitcher({ current, organizations, onOrgChange, defaultOpen, items, renderLink }: OrgSwitcherProps) {
+export function OrgSwitcher({ label, block = false, compact, current, organizations, onOrgChange, defaultOpen, items, renderLink = defaultRenderLink }: OrgSwitcherProps) {
   const others = organizations.filter((o) => o.id !== current.id);
+  const sidebar = useSidebar();
+  const isCompact = compact ?? sidebar.rail;
 
   return (
-    <DropdownMenu.Root defaultOpen={defaultOpen}>
-      <DropdownMenu.Trigger asChild>
-        <button type="button" className="org-switcher__trigger">
-          <Avatar src={current.logoUrl} name={current.name} alt="" size="sm" shape="square" className="org-switcher__logo" />
-          <span className="org-switcher__name">{current.name}</span>
-          <Icon name="chevron" size="sm" className="org-switcher__chevron" />
-        </button>
-      </DropdownMenu.Trigger>
+    <BaseMenu.Root defaultOpen={defaultOpen}>
+      <BaseMenu.Trigger className={['org-switcher__trigger', block && !isCompact ? 'org-switcher__trigger--block' : '', isCompact ? 'org-switcher__trigger--compact' : ''].filter(Boolean).join(' ')} aria-label={label ?? `Organización: ${current.name}`}>
+          <Avatar src={current.logoUrl} name={current.name} alt="" size="sm" shape="square" />
+          {!isCompact && <span className="org-switcher__name">{current.name}</span>}
+          {!isCompact && <Icon name="chevron" size="sm" className="org-switcher__chevron" />}
+      </BaseMenu.Trigger>
 
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
-          className="org-switcher__content"
-          sideOffset={4}
-          align="start"
-        >
-          <DropdownMenu.CheckboxItem
+      <BaseMenu.Portal>
+        <BaseMenu.Positioner className="org-switcher__positioner" sideOffset={4} align="start">
+        <BaseMenu.Popup className="org-switcher__content">
+          <BaseMenu.CheckboxItem
             className="org-switcher__item org-switcher__item--active"
             checked
             onCheckedChange={() => undefined}
           >
             <Avatar src={current.logoUrl} name={current.name} alt="" size="sm" shape="square" />
             <span>{current.name}</span>
-          </DropdownMenu.CheckboxItem>
+          </BaseMenu.CheckboxItem>
 
           {others.map((org) => (
-            <DropdownMenu.Item
+            <BaseMenu.Item
               key={org.id}
               className="org-switcher__item"
-              onSelect={() => onOrgChange(org.id)}
+              onClick={() => onOrgChange(org.id)}
             >
               <Avatar src={org.logoUrl} name={org.name} alt="" size="sm" shape="square" />
               <span>{org.name}</span>
-            </DropdownMenu.Item>
+            </BaseMenu.Item>
           ))}
 
           {items && items.length > 0 && (
             <>
-              <DropdownMenu.Separator className="org-switcher__separator" />
-              {items.map((item, i) => {
-                if (item.type === 'separator') {
-                  return <DropdownMenu.Separator key={i} className="org-switcher__separator" />;
-                }
-                if (item.type === 'link') {
-                  return (
-                    <DropdownMenu.Item key={i} className="org-switcher__item" disabled={item.disabled} asChild>
-                      {renderLink
-                        ? renderLink({ href: item.href, children: item.label, className: '' })
-                        : <a href={item.href}>{item.label}</a>
-                      }
-                    </DropdownMenu.Item>
-                  );
-                }
-                return (
-                  <DropdownMenu.Item
-                    key={i}
-                    className={`org-switcher__item${item.destructive ? ' org-switcher__item--destructive' : ''}`}
-                    disabled={item.disabled}
-                    onSelect={item.onClick}
-                  >
-                    {item.icon && item.icon}
-                    {item.label}
-                  </DropdownMenu.Item>
-                );
+              <BaseMenu.Separator className="org-switcher__separator" />
+              {renderDropdownItems({
+                items,
+                itemClass: (destructive) => ['org-switcher__item', destructive ? 'org-switcher__item--destructive' : ''].filter(Boolean).join(' '),
+                separatorClass: 'org-switcher__separator',
+                renderLink,
               })}
             </>
           )}
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+        </BaseMenu.Popup>
+        </BaseMenu.Positioner>
+      </BaseMenu.Portal>
+    </BaseMenu.Root>
   );
 }

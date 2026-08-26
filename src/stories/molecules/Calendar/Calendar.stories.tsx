@@ -4,7 +4,7 @@ import { expect, within } from 'storybook/test';
 import { Calendar } from './Calendar';
 
 const meta: Meta<typeof Calendar> = {
-  title: 'Molecules/Calendar',
+  title: 'Por revisar/Molecules/Calendar',
   component: Calendar,
   parameters: {
     layout: 'padded',
@@ -131,6 +131,7 @@ export const Tamanos: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — etiquetas de navegación',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

@@ -6,8 +6,8 @@
   --image-crop-dialog-area-max-height: 60vh; /** Alto máximo del área de recorte — la imagen se ajusta dentro */
   --image-crop-dialog-gap: var(--spacing-4); /** Separación entre el área de recorte y las acciones */
   --image-crop-dialog-area-bg: var(--color-grey-lightest); /** Fondo tras la imagen mientras se recorta */
-  --image-crop-dialog-area-border-radius: var(--border-radius-sm); /** Radio del área de recorte */
   --image-crop-dialog-actions-gap: var(--spacing-2); /** Separación entre los botones de acción */
+  --image-crop-dialog-area-border-radius: var(--border-radius-default); /** Radio del área de recorte */
 }
 
 .surface-dark,

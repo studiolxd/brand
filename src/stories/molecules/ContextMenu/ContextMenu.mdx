@@ -1,97 +1,41 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ContextMenuStories from "./ContextMenu.stories";
-import { TokenTable } from "../../foundations/TokenTable";
-import { contextMenuPanelTokens, contextMenuItemTokens, contextMenuDestructiveTokens, contextMenuSeparatorTokens } from "../../../tokens/molecules/context-menu";
 
 <Meta of={ContextMenuStories} />
 
 # ContextMenu
 
-Menú contextual activado por un botón de tres puntos (`DotsButton`). Basado en `@radix-ui/react-dropdown-menu`, que gestiona foco, ARIA y navegación por teclado (↑↓ Enter Escape) de forma nativa.
+El menú de acciones de una fila, una tarjeta o un elemento: un **`Menu` con el botón de tres puntos como disparador** (`DotsButton`). No tiene ítems, cara ni tokens propios: todo eso es del `Menu`; aquí solo se fija quién lo abre.
 
-## Por defecto
+<Canvas of={ContextMenuStories.PorDefecto} />
 
-Ítems de tipo botón, link y separador. El ítem destructivo aparece en rojo.
+## Ítems
 
-<Canvas of={ContextMenuStories.Default} />
+Los del `Menu` (`type: button | link | separator | label | radio`), con `icon`, `disabled` y `destructive`. El destructivo va al final y separado: es la convención de todos los menús del sistema.
 
-## Ítems destructivos
+<Canvas of={ContextMenuStories.ConIconos} />
+<Canvas of={ContextMenuStories.ConDeshabilitados} />
 
-La prop `destructive: true` colorea el ítem en rojo. En hover el fondo pasa a rojo y el texto a blanco. Funciona tanto en botones como en links.
+## El disparador
 
-<Canvas of={ContextMenuStories.ConDestructivos} />
+`triggerSize` (talla del sistema) y `triggerOrientation`; `label` es su nombre accesible («Más opciones» por defecto): con varios en una lista, contextualízalo («Más opciones de Proyecto 1») para que el lector de pantalla los distinga.
 
-## Ítems deshabilitados
+<Canvas of={ContextMenuStories.CompactoVertical} />
 
-La prop `disabled: true` reduce la opacidad e impide la interacción. En links deshabilitados se elimina el `href` y se añade `aria-disabled="true"` para comunicar el estado a lectores de pantalla.
+## Colocación
 
-<Canvas of={ContextMenuStories.ConItemsDeshabilitados} />
-
-## Trigger vertical
-
-<Canvas of={ContextMenuStories.TriggerVertical} />
-
-## Tamaño del trigger
-
-<Canvas of={ContextMenuStories.TriggerSm} />
-<Canvas of={ContextMenuStories.TriggerLg} />
-
-## Posición
-
-Por defecto el menú se abre hacia abajo alineado a la derecha (`side="bottom"` `align="end"`). Radix lo reposiciona automáticamente si no cabe en pantalla. Las props `side` y `align` permiten forzar una posición inicial.
+Por defecto abre abajo alineado al final (`side="bottom"`, `align="end"`), que es donde suele estar el botón en una fila. Si no cabe, el motor lo recoloca.
 
 <Canvas of={ContextMenuStories.AbreArriba} />
+<Canvas of={ContextMenuStories.SuperficieOscura} />
 
----
+## Enlaces del router
 
-## Integración con router (renderLink)
-
-Para que los links del menú usen el router de la aplicación (Next.js, React Router…), se pasa una prop `renderLink`. El patrón es idéntico al del componente `Breadcrumb`.
-
-```tsx
-import Link from 'next/link';
-import { ContextMenu } from '@studiolxd/brand';
-
-<ContextMenu
-  items={[
-    { type: 'link', label: 'Ver proyecto', href: '/proyectos/1' },
-    { type: 'button', label: 'Eliminar', onClick: handleDelete, destructive: true },
-  ]}
-  renderLink={({ href, children, className }) => (
-    <Link href={href} className={className}>{children}</Link>
-  )}
-/>
-```
-
-Sin `renderLink`, los links se renderizan como `<a>` nativos.
-
-<Canvas of={ContextMenuStories.ConRenderLink} />
-
----
-
-## Theming oscuro
-
-En modo oscuro todos los tokens del panel, ítems, separadores y estados destructivos se remapean automáticamente vía `.surface-dark`.
-
----
+`renderLink` como en `Menu`: recibe `href`, `children`, `className` **y las props que Base UI inyecta**, y debe reenviarlas todas (`<Link {...props}>{children}</Link>`).
 
 ## Tokens
 
-### Panel
-
-<TokenTable tokens={contextMenuPanelTokens} />
-
-### Ítems
-
-<TokenTable tokens={contextMenuItemTokens} />
-
-### Destructivo
-
-<TokenTable tokens={contextMenuDestructiveTokens} />
-
-### Separador
-
-<TokenTable tokens={contextMenuSeparatorTokens} />
+No tiene: usa los de `Menu` (panel, ítems, destructivo, separadores) y los del `Button` ghost para el disparador.
 
 ## Props
 

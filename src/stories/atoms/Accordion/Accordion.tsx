@@ -1,4 +1,4 @@
-import * as RadixAccordion from '@radix-ui/react-accordion';
+import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion';
 import type { ReactNode } from 'react';
 import { Icon } from '../Icon/Icon';
 import './Accordion.css';
@@ -29,18 +29,42 @@ type AccordionRootProps = (AccordionSingleProps | AccordionMultipleProps) & {
   children: ReactNode;
 };
 
-export function Accordion({ className, children, ...props }: AccordionRootProps) {
-  const rootProps = props.type === 'single'
-    ? { ...props, collapsible: props.collapsible ?? true }
-    : props;
+/** Normaliza el valor de la API pública (string | string[]) al array de Base UI. */
+function toArray(value: string | string[] | undefined): string[] | undefined {
+  if (value === undefined) return undefined;
+  if (Array.isArray(value)) return value;
+  return value === '' ? [] : [value];
+}
+
+export function Accordion({ className, children, id, disabled, ...props }: AccordionRootProps) {
+  const multiple = props.type === 'multiple';
+  const collapsible = props.type === 'single' ? props.collapsible ?? true : true;
+  const openValue = props.value;
+
+  const handleValueChange = (next: BaseAccordion.Root.Props['value']) => {
+    const values = (next ?? []) as string[];
+    if (multiple) {
+      (props as AccordionMultipleProps).onValueChange?.(values);
+      return;
+    }
+    // `collapsible={false}`: Base UI no lo cubre, así que ignoramos el cierre del
+    // único item abierto (misma conducta que el `collapsible` de la API previa).
+    if (!collapsible && values.length === 0) return;
+    (props as AccordionSingleProps).onValueChange?.(values[0] ?? '');
+  };
 
   return (
-    <RadixAccordion.Root
+    <BaseAccordion.Root
+      id={id}
+      disabled={disabled}
+      multiple={multiple}
+      value={toArray(openValue)}
+      defaultValue={toArray(props.defaultValue)}
+      onValueChange={handleValueChange}
       className={['accordion', className].filter(Boolean).join(' ')}
-      {...rootProps}
     >
       {children}
-    </RadixAccordion.Root>
+    </BaseAccordion.Root>
   );
 }
 
@@ -54,12 +78,12 @@ interface AccordionItemProps {
 
 export function AccordionItem({ className, children, ...props }: AccordionItemProps) {
   return (
-    <RadixAccordion.Item
+    <BaseAccordion.Item
       className={['accordion__item', className].filter(Boolean).join(' ')}
       {...props}
     >
       {children}
-    </RadixAccordion.Item>
+    </BaseAccordion.Item>
   );
 }
 
@@ -73,14 +97,14 @@ interface AccordionTriggerProps {
 
 export function AccordionTrigger({ className, chevronSize = 'sm', children }: AccordionTriggerProps) {
   return (
-    <RadixAccordion.Header className="accordion__header">
-      <RadixAccordion.Trigger
+    <BaseAccordion.Header className="accordion__header">
+      <BaseAccordion.Trigger
         className={['accordion__trigger', className].filter(Boolean).join(' ')}
       >
         <span className="accordion__trigger-text">{children}</span>
         <Icon name="chevron" className="accordion__chevron" size={chevronSize} />
-      </RadixAccordion.Trigger>
-    </RadixAccordion.Header>
+      </BaseAccordion.Trigger>
+    </BaseAccordion.Header>
   );
 }
 
@@ -92,12 +116,12 @@ interface AccordionContentProps {
 
 export function AccordionContent({ className, children }: AccordionContentProps) {
   return (
-    <RadixAccordion.Content
+    <BaseAccordion.Panel
       className={['accordion__content', className].filter(Boolean).join(' ')}
     >
       <div className="accordion__content-inner">
         {children}
       </div>
-    </RadixAccordion.Content>
+    </BaseAccordion.Panel>
   );
 }

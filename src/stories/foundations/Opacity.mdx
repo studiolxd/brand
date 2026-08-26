@@ -7,14 +7,25 @@ import { opacityTokens } from "../../tokens/opacity";
 
 # Opacidad
 
-Escala de valores de opacidad para estados y capas de la interfaz. La cuadrícula de fondo muestra el nivel de transparencia real de cada valor.
+Dos valores, y son roles, no una escala: el sistema solo atenúa en dos situaciones.
+
+| Rol | Valor | Uso |
+|---|---|---|
+| `--opacity-overlay` | 0,6 | El velo bajo un modal o una hoja: oscurece la página sin ocultarla |
+| `--opacity-disabled` | 0,4 | Controles deshabilitados: el elemento sigue ahí, atenuado |
 
 <OpacityScale tokens={opacityTokens} />
 
+## Lo que no es opacidad
+
+- **Un control deshabilitado se atenúa entero con `disabled`**; no se le cambia el color del texto a un gris más claro. Así el estado se lee igual en cualquier superficie y el texto conserva su contraste relativo.
+- **Mostrar y ocultar** (un panel que aparece, un elemento que se desvanece) va de 0 a 1 como parte de una transición: es un estado, no un valor de la escala, y no lleva token.
+- **El color translúcido** —un borde claro sobre superficie oscura, un fondo de hover— se expresa en el propio color (`rgba`), no con `opacity`, para que no afecte al contenido.
+
 ---
 
-## Tokens CSS
+## Tokens
 
 <TokenTable tokens={opacityTokens} />
 
-Los tokens están definidos en `tokens/opacity/scale.json`.
+Definidos en `tokens/opacity/scale.json`.

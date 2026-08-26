@@ -1,33 +1,34 @@
-/* ---- AppShell ---- */
+/* ---- AppShell: barra arriba; debajo, sidebar y contenido ---- */
 
 .app-shell {
+  --app-shell-sidebar-width: var(--sidebar-width);
   display: flex;
-  height: 100dvh;
+  flex-direction: column;
+  block-size: 100dvh;
+  overflow: clip;
+}
+
+.app-shell__body {
   position: relative;
-  overflow-x: clip;
+  display: flex;
+  flex: 1;
+  min-block-size: 0;
 }
 
 .app-shell__content {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
   overflow: auto;
-  background-color: var(--color-bg-page);
-  box-sizing: border-box;
-  padding-block-start: env(safe-area-inset-top);
   padding-block-end: env(safe-area-inset-bottom);
   padding-inline-end: env(safe-area-inset-right);
 }
 
-/* Mobile: el chrome es un AppHeader position:fixed arriba; el contenido
-   necesita offset vertical y recuperar el safe-area horizontal izquierdo */
-@media (max-width: 1023px) {
-  .app-shell__content {
-    padding-block-start: calc(var(--app-header-height) + env(safe-area-inset-top));
-    padding-inline-start: env(safe-area-inset-left);
-  }
-
-  /* Con el panel de navegación abierto, el scroller real queda bloqueado */
-  .app-shell[data-menu-open] .app-shell__content {
-    overflow: hidden;
-  }
+/* En móvil, la sidebar es un cajón sobre un velo (ver Sidebar.css). */
+.app-shell__backdrop {
+  position: fixed;
+  inset: 0;
+  inset-block-start: calc(var(--app-header-height) + env(safe-area-inset-top));
+  background-color: var(--sidebar-backdrop-bg);
+  opacity: var(--sidebar-backdrop-opacity);
+  z-index: var(--sidebar-backdrop-z-index);
 }

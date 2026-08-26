@@ -1,0 +1,37 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { TokenTable } from "./TokenTable";
+import { zIndexTokens } from "../../tokens/layer";
+
+<Meta title="Foundations/Capas" />
+
+# Capas
+
+Seis capas, de abajo arriba, y cada elemento que se superpone a la página pertenece a una. Un componente nunca lleva un `z-index` inventado: apunta a su capa.
+
+| Capa | Token | Valor | Quién |
+|---|---|---|---|
+| 1 | `--z-index-bar` | 100 | Barras fijas: `AppHeader`, `SiteHeader`, `Sidebar` |
+| 2 | `--z-index-backdrop` | 200 | El velo bajo un modal o una hoja |
+| 3 | `--z-index-modal` | 300 | `Modal`, `Sheet`, el panel de navegación a pantalla completa |
+| 4 | `--z-index-floating` | 400 | Paneles anclados a un control: menús, `Select`, `Popover`, `Tooltip`, `AppLauncher` |
+| 5 | `--z-index-toast` | 500 | Avisos |
+| 6 | `--z-index-skip` | 600 | El enlace de salto al contenido |
+
+## Por qué en este orden
+
+- **Lo flotante va por encima del modal.** Un `Select` o un menú dentro de un modal tienen que abrirse sobre él, no quedar cortados por su borde. Si el modal estuviera más alto, ningún control desplegable funcionaría dentro.
+- **Los avisos, sobre todo.** Un toast debe verse aunque haya un modal abierto y un menú desplegado.
+- **El salto al contenido, lo más alto.** Es lo primero que recibe el foco al tabular, y no puede quedar tapado por nada.
+- **Los valores van de cien en cien** para que, si algún día hace falta una capa intermedia, entre sin renumerar las demás.
+
+## Lo que no es una capa
+
+El apilado **dentro** de un componente —una etiqueta sobre una imagen en una tarjeta, la cabecera fija de una tabla de calendario— usa `z-index` de 1, 2 o 3 en su propio contexto de apilamiento, sin token. Solo compite consigo mismo. Un valor de la escala se usa cuando el elemento sale de su componente y compite con el resto de la página.
+
+---
+
+## Tokens
+
+<TokenTable tokens={zIndexTokens} />
+
+Definidos en `tokens/layer/z-index.json`.

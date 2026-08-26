@@ -1,0 +1,47 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DropdownFieldStories from "./DropdownField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { dropdownFieldTokens } from "../../../tokens/molecules/dropdown-field";
+
+<Meta of={DropdownFieldStories} />
+
+# DropdownField
+
+Campo desplegable: una etiqueta y un control **rectangular a la altura del sistema** que abre un `Menu`. Es el hermano del `SelectField` para cuando las opciones no caben en un `<select>` nativo: llevan icono, son enlaces o acciones, o el valor elegido se muestra con algo más que texto. Su cara es la del Select —mismo borde, misma altura, mismo chevron— para que los dos convivan en un formulario sin que se note cuál es cuál.
+
+<Canvas of={DropdownFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Encima por defecto, como el resto de campos. `inline` la pone delante, para barras y paneles donde el campo va solo (es como lo usa `ThemeSwitcher`). `labelHidden` la deja para los lectores de pantalla; y si no hay etiqueta, `aria-label` es obligatorio: el control nunca se queda sin nombre.
+
+<Canvas of={DropdownFieldStories.EnLinea} />
+<Canvas of={DropdownFieldStories.SinEtiqueta} />
+
+## Contenido del control
+
+`children` es lo que se ve en el control: normalmente el nombre de la opción actual, con su icono si lo tiene. El componente no lo deduce de `items` porque el control puede decir algo distinto de la opción (un resumen, un contador).
+
+<Canvas of={DropdownFieldStories.ConIcono} />
+
+## Opciones
+
+`items` son los del `Menu`: `radio` para elección exclusiva (con `value`/`onValueChange`), `button` para acciones, `link` para navegar. La cara del menú desplegado es la del `Menu`, no la del Select.
+
+<Canvas of={DropdownFieldStories.Deshabilitado} />
+<Canvas of={DropdownFieldStories.SuperficieOscura} />
+
+## Cuándo no
+
+- Si las opciones son texto plano y solo hay que elegir una: `SelectField`, que es un `<select>` de verdad.
+- Si el trigger no debe parecer un campo (un avatar, un código de idioma en la barra): `Menu` directo con el trigger que toque.
+
+## Tokens
+
+Casi todos son referencias a los del `Select`: el control es, a propósito, el mismo.
+
+<TokenTable tokens={dropdownFieldTokens} />
+
+## Props
+
+<ArgTypes of={DropdownFieldStories} />

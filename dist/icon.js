@@ -1,7 +1,23 @@
 import './icon.css';
 import { Fragment as e, jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/atoms/Icon/Icon.tsx
-var r = {
+var r = (() => {
+	let e = [
+		6,
+		12,
+		18
+	], t = 18 / 2 * Math.SQRT1_2, n = (e) => Math.round(e * 100) / 100;
+	return {
+		size: 24,
+		inset: 3,
+		rows: e,
+		step: e[1] - e[0],
+		diag: {
+			a: n(24 / 2 - t),
+			b: n(24 / 2 + t)
+		}
+	};
+})(), i = {
 	arrow: {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ t("path", {
@@ -11,20 +27,32 @@ var r = {
 		})
 	},
 	chevron: {
-		viewBox: "0 0 12 12",
+		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M3 0 L9 6 L3 12"
+			d: "M6 0 L18 12 L6 24"
 		})
 	},
 	close: {
-		viewBox: "0 0 12 12",
+		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M2 2 L10 10 M10 2 L2 10"
+			d: `M${r.diag.a} ${r.diag.a} L${r.diag.b} ${r.diag.b} M${r.diag.b} ${r.diag.a} L${r.diag.a} ${r.diag.b}`
 		})
+	},
+	menu: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t(e, { children: r.rows.map((e) => /* @__PURE__ */ t("line", {
+			className: "icon__line",
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			x1: r.inset,
+			y1: e,
+			x2: r.size - r.inset,
+			y2: e
+		}, e)) })
 	},
 	dot: {
 		viewBox: "0 0 24 24",
@@ -920,21 +948,21 @@ var r = {
 			/* @__PURE__ */ t("circle", {
 				cx: "5",
 				cy: "12",
-				r: "1",
+				r: "1.5",
 				fill: "currentColor",
 				stroke: "none"
 			}),
 			/* @__PURE__ */ t("circle", {
 				cx: "12",
 				cy: "12",
-				r: "1",
+				r: "1.5",
 				fill: "currentColor",
 				stroke: "none"
 			}),
 			/* @__PURE__ */ t("circle", {
 				cx: "19",
 				cy: "12",
-				r: "1",
+				r: "1.5",
 				fill: "currentColor",
 				stroke: "none"
 			})
@@ -1204,14 +1232,14 @@ var r = {
 			})
 		] })
 	}
-}, i = Object.keys(r);
-function a({ name: e, size: n = "md", className: i }) {
-	let a = r[e];
+}, a = Object.keys(i);
+function o({ name: e, size: n = "md", className: r }) {
+	let a = i[e];
 	return /* @__PURE__ */ t("svg", {
 		className: [
 			"icon",
 			`icon--${n}`,
-			i ?? ""
+			r ?? ""
 		].filter(Boolean).join(" "),
 		"aria-hidden": "true",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -1222,4 +1250,4 @@ function a({ name: e, size: n = "md", className: i }) {
 	});
 }
 //#endregion
-export { i as ICON_NAMES, a as Icon };
+export { a as ICON_NAMES, o as Icon, r as MENU_GLYPH };

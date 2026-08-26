@@ -1,15 +1,15 @@
 {
   "app-header": {
-    "height":              { "$value": "3.5rem",                         "$type": "dimension", "$description": "Alto del header de aplicación en móvil" },
-    "bg":                  { "$value": "{color.background.light}",       "$type": "color",     "$description": "Fondo del header" },
-    "shadow":              { "$value": "0 4px 16px rgba(17,30,48,0.12)", "$type": "shadow",    "$description": "Sombra del header hacia abajo — mismos parámetros que sidebar.shadow" },
-    "padding-inline":      { "$value": "{spacing.4}",                    "$type": "dimension", "$description": "Padding horizontal del header" },
-    "gap":                 { "$value": "{spacing.3}",                    "$type": "dimension", "$description": "Separación entre hamburger, centro y final" },
-    "z-index":             { "$value": "300",                            "$type": "number",    "$description": "Capa z del header y su panel — sobre el contenido, bajo floating-panel (1100)" },
-    "panel-bg":            { "$value": "{color.background.light}",       "$type": "color",     "$description": "Fondo del panel de navegación a pantalla completa" },
-    "transition-duration": { "$value": "{motion.duration.slow}",         "$type": "number",    "$description": "Duración de la animación de apertura del panel" },
-    "transition-easing":   { "$value": "{motion.easing.in-out}",         "$type": "string",    "$description": "Curva de la animación de apertura del panel" },
-    "surface-dark-bg":       { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del header — surface-dark" },
-    "surface-dark-panel-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" }
+    "content-height":  { "$value": "{size-component.md}", "$type": "dimension", "$description": "Lo más alto que lleva la barra: un control md" },
+    "padding-block":   { "$value": "{spacing.2}",         "$type": "dimension", "$description": "Aire arriba y abajo del contenido" },
+    "height":          { "$value": "calc({app-header.content-height} + 2 * {app-header.padding-block})", "$type": "dimension", "$description": "Altura de la barra: compuesta, 56px" },
+    "bg":              { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo" },
+    "border-width":    { "$value": "{border-width.default}", "$type": "dimension", "$description": "Borde inferior que la separa del contenido" },
+    "border-color":    { "$value": "{color.grey-light}",     "$type": "color",     "$description": "Color del borde" },
+    "padding-inline":  { "$value": "{spacing.4}",   "$type": "dimension", "$description": "Aire lateral" },
+    "gap":             { "$value": "{spacing.3}",   "$type": "dimension", "$description": "Entre el botón de menú, el inicio y los controles del final" },
+    "z-index":         { "$value": "{z-index.bar}", "$type": "number",    "$description": "Capa de barra fija" },
+    "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo — surface-dark" },
+    "surface-dark-border-color": { "$value": "{menu.surface-dark-separator-color}", "$type": "color", "$description": "Borde — surface-dark" }
   }
 }

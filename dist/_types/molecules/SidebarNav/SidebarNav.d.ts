@@ -26,7 +26,7 @@ export interface SidebarNavGroupEntry {
     items: SidebarNavItem[];
 }
 export type SidebarNavEntry = SidebarNavLinkEntry | SidebarNavGroupEntry;
-export type SidebarNavRenderLinkProps = {
+export type SidebarNavRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
     href: string;
     children: ReactNode;
     className: string;
@@ -34,10 +34,14 @@ export type SidebarNavRenderLinkProps = {
     'aria-current'?: 'page';
 };
 export interface SidebarNavProps {
+    /** Nombre accesible del `nav`. */
+    label?: string;
+    /** Solo iconos: los enlaces con tooltip, los grupos como menú. Sin él, lo decide la `Sidebar` (rail). */
+    rail?: boolean;
     entries: SidebarNavEntry[];
     defaultValue?: string[];
     value?: string[];
     onValueChange?: (value: string[]) => void;
     renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
 }
-export declare function SidebarNav({ entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function SidebarNav({ label, rail, entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;

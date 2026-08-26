@@ -1,11 +1,15 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-border-radius-none: 0px; // No border radius
-$lxd-border-radius-sm: 4px; // Small — inputs, badges, chips
-$lxd-border-radius-md: 8px; // Medium — buttons, small cards
-$lxd-border-radius-lg: 12px; // Large — cards, modals
-$lxd-border-radius-xl: 16px; // Extra large — panels, drawers
-$lxd-border-radius-full: 9999px; // Full — pills, circular avatars
-$lxd-border-width-sm: 1px; // Default border width
-$lxd-border-width-md: 2px; // Emphasized border width
+$lxd-border-radius-none: 0px; // Escala. Valor del rol default
+$lxd-border-radius-sm: 4px; // Escala. El sistema no lo usa
+$lxd-border-radius-md: 8px; // Escala. El sistema no lo usa
+$lxd-border-radius-lg: 12px; // Escala. El sistema no lo usa
+$lxd-border-radius-xl: 16px; // Escala. El sistema no lo usa
+$lxd-border-radius-full: 9999px; // Escala. Valor del rol round
+$lxd-border-radius-default: 0px; // Rol: toda esquina del sistema es recta. Los componentes apuntan aquí, nunca a la escala
+$lxd-border-radius-round: 9999px; // Rol: píldoras y círculos — avatar, tag, badge, interruptor, botón píldora
+$lxd-border-width-sm: 1px; // Escala. Valor del rol default
+$lxd-border-width-md: 2px; // Escala. Valor del rol focus
+$lxd-border-width-default: 1px; // Rol: todo borde del sistema. Los componentes apuntan aquí, nunca a la escala
+$lxd-border-width-focus: 2px; // Rol: anillo de foco, ancho y separación. Solo para outline; nunca como borde

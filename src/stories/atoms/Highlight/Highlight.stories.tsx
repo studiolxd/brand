@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Highlight } from './Highlight';
 
 const meta: Meta<typeof Highlight> = {
-  title: 'Atoms/Highlight',
+  title: 'Por revisar/Atoms/Highlight',
   component: Highlight,
   parameters: {
     layout: 'padded',

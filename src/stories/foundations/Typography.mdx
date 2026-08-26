@@ -1,47 +1,105 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import { FontSpecimen } from "./FontSpecimen";
+import { TextStyles } from "./TextStyles";
 import { TypeScale } from "./TypeScale";
 import { TokenTable } from "./TokenTable";
-import { familyTokens, fontFamilies, sizeTokens, weightTokens, lineHeightTokens, letterSpacingTokens } from "../../tokens/typography";
+import {
+  fontFamilies, textStyles,
+  familyTokens, sizeTokens, weightRoleTokens, weightScaleTokens, lineHeightTokens, letterSpacingTokens, measureTokens,
+} from "../../tokens/typography";
 
 <Meta title="Foundations/Tipografía" />
 
 # Tipografía
 
-El sistema de diseño de Studio LXD utiliza dos tipografías: una para interfaces y otra para código.
+Una familia para todo lo que se lee y otra para el código. Una tercera, serif, existe como excepción de producto y no la usa ningún componente del sistema.
 
-{fontFamilies.map(({ name, fontFamily, intro, link }) => (
-  <FontSpecimen key={name} name={name} fontFamily={fontFamily} intro={intro} link={link} />
+{fontFamilies.map(({ key, name, fontFamily, intro, link }) => (
+  <FontSpecimen key={key} name={name} fontFamily={fontFamily} intro={intro} link={link} />
 ))}
+
+### Las fuentes las carga el producto
+
+El paquete **no incluye los ficheros de fuente**: los tokens solo nombran la familia (`--font-family-sans`, `--font-family-mono`). Cada producto las carga como le convenga —`next/font/google` en las apps Next, un `<link>` a Google Fonts en el resto— con estos requisitos:
+
+- **Google Sans Flex** con los ejes `wght` (peso) y `opsz` (tamaño óptico). Es una fuente variable; el sistema usa dos pesos, pero la fuente los interpola sin ficheros extra.
+- **Google Sans Code** en 300–800, normal e itálica.
+- **Libre Bodoni** solo si el producto la usa.
+- `font-display: swap` y los fallbacks del token (`system-ui`, `ui-monospace`, `Georgia`).
+
+---
+
+## Peso
+
+El sistema usa **dos pesos**, expresados como roles. Los componentes apuntan al rol, nunca a un número:
+
+| Rol | Valor | Uso |
+|---|---|---|
+| `--font-weight-default` | 300 (light) | Cuerpo de texto |
+| `--font-weight-emphasis` | 500 (medium) | Títulos, énfasis local (`strong`, cifras destacadas), etiquetas |
+
+Dos bastan porque la distancia entre ambos es grande: a 16px, el trazo del 500 **dobla** al del 300 (2px frente a 1px), más separación que la de la pareja clásica 400/600. Un título de nivel bajo o una palabra en énfasis se distinguen del cuerpo sin ambigüedad.
+
+El trazo de 1px del cuerpo es el límite de lo legible en pantallas de densidad 1×; sobre superficie oscura el efecto se acentúa. Es el precio de la ligereza, y se asume.
+
+La escala completa de la fuente (100–900) queda disponible como primitivo, pero ningún componente la referencia.
+
+---
+
+## Estilos de texto
+
+Lo que de verdad usan los componentes: cada nivel combina tamaño, peso, interlineado y tracking, y se expone como custom properties con prefijo `--text-h1-*`, `--text-paragraph-*`… Todos los títulos comparten peso (`emphasis`); lo que cambia entre niveles es el tamaño y, con él, el interlineado y el tracking.
+
+<TextStyles styles={textStyles} />
+
+**Los elementos ya vienen vestidos.** `brand.css` aplica estos estilos a `body`, `h1`…`h6`, `p`, `ul`/`ol` y `a` directamente, sin clases: un HTML crudo —contenido de un CMS, markdown, un correo— sale con la tipografía del sistema. Los componentes `Heading` y `Paragraph` no repiten esos estilos: añaden API (tamaño desacoplado del nivel, variantes de párrafo) sobre el elemento ya vestido.
 
 ---
 
 ## Escala de tamaños
 
+Diez pasos, del 14px de las etiquetas al 96px de display. Los seis niveles de título ocupan del 2 al 7; el 8, 9 y 10 son display, para titulares de marketing. Por debajo hay un paso 0 (12px) que **no es texto**: es el cuerpo de las cifras dentro de una marca (el contador de un badge), y no se usa para nada que haya que leer.
+
 <TypeScale tokens={sizeTokens} />
 
 ---
 
-## Tokens CSS
+## Medida de lectura
+
+El ancho cómodo de una línea de texto no depende de la pantalla, depende de cuántos caracteres caben en ella: entre 45 y 75 es la horquilla clásica, y WCAG pide no superar 80. Por eso `--content-measure` se expresa en **caracteres** (`70ch`) y no en píxeles: se resuelve contra la fuente del propio párrafo, y se adapta sola si cambian el tamaño o la familia.
+
+Con Google Sans Flex a 16px, 70ch son unos 505px. Es el ancho máximo de los componentes de prosa (`Article`, `Legal`); la maqueta de página se acota con `Container`, que es otra cosa.
+
+---
+
+## Tokens
 
 ### Familias
 
 <TokenTable tokens={familyTokens} />
 
+### Peso — roles
+
+<TokenTable tokens={weightRoleTokens} />
+
+### Peso — escala de la fuente
+
+<TokenTable tokens={weightScaleTokens} />
+
 ### Tamaños
 
 <TokenTable tokens={sizeTokens} />
 
-### Pesos
-
-<TokenTable tokens={weightTokens} />
-
-### Altura de línea
+### Interlineado
 
 <TokenTable tokens={lineHeightTokens} />
 
-### Espaciado de letras
+### Tracking
 
 <TokenTable tokens={letterSpacingTokens} />
 
-Los tokens están definidos en `tokens/typography/`.
+### Medida
+
+<TokenTable tokens={measureTokens} />
+
+Definidos en `tokens/typography/` y `tokens/size/content.json`.

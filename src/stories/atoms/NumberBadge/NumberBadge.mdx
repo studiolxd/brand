@@ -1,0 +1,37 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as NumberBadgeStories from "./NumberBadge.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { numberBadgeTokens } from "../../../tokens/components/number-badge";
+
+<Meta of={NumberBadgeStories} />
+
+# NumberBadge
+
+Un contador: notificaciones sin leer, elementos en una lista, resultados. Redondo cuando cabe un dígito, píldora cuando hay más, y con tope (`max`, 99 por defecto) a partir del cual dice «99+» en vez de crecer sin fin.
+
+<Canvas of={NumberBadgeStories.PorDefecto} />
+
+## Variantes
+
+Los colores de marca (`primary`, `accent-1`, `accent-2`, `support-1`, `support-2`) y los de feedback (`danger`, `success`) más `neutral`. El texto lleva siempre el color que contrasta con el fondo; no hay que elegirlo.
+
+<Canvas of={NumberBadgeStories.Variantes} />
+
+## Cifras
+
+<Canvas of={NumberBadgeStories.DosDigitosYTope} />
+
+## Accesibilidad
+
+- El texto visible ya es su nombre; con `aria-label` se le da el contexto completo («3 notificaciones sin leer»), que es lo que conviene cuando el badge va pegado a un icono o un avatar.
+- No es un control: no se enfoca ni se pulsa. Si el número abre algo, el control es lo que lo rodea.
+
+## Tokens
+
+El tamaño mínimo (16px) es el de una marca, no el de un control: no pertenece a la escala de tallas. Peso normal: es una cifra, no un título.
+
+<TokenTable tokens={numberBadgeTokens} />
+
+## Props
+
+<ArgTypes of={NumberBadgeStories} />

@@ -1,0 +1,45 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SidebarNavStories from "./SidebarNav.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { sidebarNavTokens } from "../../../tokens/components/sidebar-nav";
+
+<Meta of={SidebarNavStories} />
+
+# SidebarNav
+
+La navegación de una aplicación: grupos plegables con sus enlaces, y enlaces sueltos al mismo nivel. Es lo que llena el `Sidebar` del `AppShell`. Se describe con datos (`entries`), no con JSX: el producto dice qué hay y dónde está; la forma la pone el sistema.
+
+<Canvas of={SidebarNavStories.PorDefecto} />
+
+## Grupos y enlaces
+
+Un `group` tiene `label`, `items` y, si lleva `href`, su cabecera es también un enlace (la portada de la sección) y el chevron es el único control de plegado. Un `link` es un enlace directo del mismo rango. Un ítem con `active: true` es la página actual: `aria-current="page"` y peso de énfasis. Los grupos abiertos se controlan con `defaultValue`/`value` (ids).
+
+<Canvas of={SidebarNavStories.ConEnlacesDirectos} />
+<Canvas of={SidebarNavStories.TodoPlegado} />
+
+## Rail
+
+Con `rail` (o dentro de una `Sidebar` en rail, que lo pone por contexto) cada entrada de primer nivel es un cuadrado a talla md con su icono: los enlaces sueltos llevan tooltip, y los grupos se abren como **menú** —al pulsar y también al pasar el ratón— con la portada de la sección (`href`) como primer enlace y sus entradas debajo. La sección de la página actual se marca con una barra al borde. Sin icono, la inicial del nombre.
+
+<Canvas of={SidebarNavStories.Rail} />
+
+## Estados
+
+El hover es el resalte de los menús (relleno de marca, invertido en oscuro); el activo, solo peso. Los iconos opcionales van a talla `sm`.
+
+<Canvas of={SidebarNavStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- Es un `nav` con nombre (`label`, «Navegación principal» por defecto).
+- Los grupos son un acordeón: el chevron es un botón con `aria-expanded`; la cabecera-enlace navega y no pliega, para que una cosa no tape la otra.
+- `renderLink` para el router del producto, reenviando todas las props.
+
+## Tokens
+
+<TokenTable tokens={sidebarNavTokens} />
+
+## Props
+
+<ArgTypes of={SidebarNavStories} />

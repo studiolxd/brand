@@ -7,7 +7,7 @@ const image = {
 };
 
 const meta: Meta<typeof CardSplit> = {
-  title: 'Molecules/CardSplit',
+  title: 'Por revisar/Molecules/CardSplit',
   component: CardSplit,
   parameters: {
     layout: 'padded',

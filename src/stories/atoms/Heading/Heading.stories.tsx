@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 import { Heading } from './Heading';
 
 const meta: Meta<typeof Heading> = {
@@ -13,11 +14,6 @@ const meta: Meta<typeof Heading> = {
       options: [1, 2, 3, 4, 5, 6],
       description: 'Nivel semántico del encabezado (h1–h6).',
     },
-    weight: {
-      control: { type: 'select' },
-      options: [undefined, 'thin', 'extralight', 'light', 'regular', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
-      description: 'Peso tipográfico. Sin valor usa el token del nivel (300 por defecto).',
-    },
     size: {
       control: { type: 'select' },
       options: [undefined, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -30,7 +26,7 @@ const meta: Meta<typeof Heading> = {
     className: { table: { disable: true } },
   },
   args: {
-    children: 'Heading example',
+    children: 'Ejemplo de encabezado',
     level: 2,
   },
 };
@@ -45,7 +41,7 @@ export const H4: Story = { args: { level: 4 } };
 export const H5: Story = { args: { level: 5 } };
 export const H6: Story = { args: { level: 6 } };
 
-export const AllLevels: Story = {
+export const TodosLosNiveles: Story = {
   render: () => (
     <>
       {([1, 2, 3, 4, 5, 6] as const).map((lvl) => (
@@ -55,17 +51,7 @@ export const AllLevels: Story = {
   ),
 };
 
-export const Weights: Story = {
-  render: () => (
-    <>
-      {(['thin', 'extralight', 'light', 'regular', 'medium', 'semibold', 'bold', 'extrabold', 'black'] as const).map((w) => (
-        <Heading key={w} level={2} weight={w}>{w}</Heading>
-      ))}
-    </>
-  ),
-};
-
-export const Sizes: Story = {
+export const Tamanos: Story = {
   render: () => (
     <>
       {([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const).map((s) => (
@@ -73,4 +59,22 @@ export const Sizes: Story = {
       ))}
     </>
   ),
+};
+
+export const Contrato: Story = {
+  name: 'Test — nivel semántico y tamaño desacoplado',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Heading level={2}>Nivel dos</Heading>
+      <Heading level={2} size={9}>Nivel dos, tamaño de display</Heading>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const [normal, grande] = canvasElement.querySelectorAll('h2');
+    const peso = getComputedStyle(normal).fontWeight;
+    await expect(peso).toBe(getComputedStyle(normal).getPropertyValue('--font-weight-emphasis').trim());
+    await expect(parseFloat(getComputedStyle(grande).fontSize)).toBeGreaterThan(parseFloat(getComputedStyle(normal).fontSize));
+    await expect(getComputedStyle(grande).fontWeight).toBe(peso);
+  },
 };

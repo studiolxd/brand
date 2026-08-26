@@ -50,30 +50,30 @@
   transition: transform var(--accordion-transition-duration) var(--accordion-transition-easing);
 }
 
-.accordion__trigger[data-state="open"] .accordion__chevron {
+.accordion__trigger[data-panel-open] .accordion__chevron {
   transform: rotate(-90deg);
 }
 
-/* ─── Content — animación con keyframes + variable Radix ─── */
+/* ─── Content — animación con keyframes + variable de Base UI ─── */
 .accordion__content {
   overflow: hidden;
 }
 
-.accordion__content[data-state="open"] {
+.accordion__content[data-open] {
   animation: accordion-open var(--accordion-transition-duration) var(--accordion-transition-easing);
 }
 
-.accordion__content[data-state="closed"] {
+.accordion__content[data-closed] {
   animation: accordion-close var(--accordion-transition-duration) var(--accordion-transition-easing);
 }
 
 @keyframes accordion-open {
   from { height: 0; }
-  to   { height: var(--radix-accordion-content-height); }
+  to   { height: var(--collapsible-panel-height); }
 }
 
 @keyframes accordion-close {
-  from { height: var(--radix-accordion-content-height); }
+  from { height: var(--collapsible-panel-height); }
   to   { height: 0; }
 }
 

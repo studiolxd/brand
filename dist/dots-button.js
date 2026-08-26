@@ -1,35 +1,29 @@
 'use client';
 import './dots-button.css';
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { Icon as e } from "./icon.js";
+import { Button as t } from "./button.js";
 import { forwardRef as n } from "react";
+import { jsx as r } from "react/jsx-runtime";
 //#region src/stories/atoms/DotsButton/DotsButton.tsx
-var r = n(function({ size: n = "md", orientation: r = "horizontal", "aria-label": i = "Más opciones", className: a, ...o }, s) {
-	return /* @__PURE__ */ t("button", {
-		ref: s,
-		type: "button",
-		className: [
-			"dots-button",
-			n === "md" ? "" : `dots-button--${n}`,
-			r === "vertical" ? "dots-button--vertical" : "",
-			a
-		].filter(Boolean).join(" "),
-		"aria-label": i,
-		...o,
-		children: [
-			/* @__PURE__ */ e("span", {
-				className: "dots-button__dot",
-				"aria-hidden": "true"
-			}),
-			/* @__PURE__ */ e("span", {
-				className: "dots-button__dot",
-				"aria-hidden": "true"
-			}),
-			/* @__PURE__ */ e("span", {
-				className: "dots-button__dot",
-				"aria-hidden": "true"
-			})
-		]
+var i = n(function({ size: n = "md", orientation: i = "horizontal", "aria-label": a = "Más opciones", className: o, ...s }, c) {
+	let l = [
+		"dots-button",
+		i === "vertical" ? "dots-button--vertical" : "",
+		o
+	].filter(Boolean).join(" ");
+	return /* @__PURE__ */ r(t, {
+		ref: c,
+		variant: "ghost",
+		iconOnly: !0,
+		size: n,
+		"aria-label": a,
+		className: l,
+		...s,
+		children: /* @__PURE__ */ r(e, {
+			name: "dots",
+			size: n === "lg" ? "md" : "sm"
+		})
 	});
 });
 //#endregion
-export { r as DotsButton };
+export { i as DotsButton };

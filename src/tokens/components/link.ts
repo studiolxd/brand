@@ -1,10 +1,4 @@
 import linkJson from '../../../tokens/component/link.json';
-import { flattenTokens, type Token } from '../utils';
+import { flattenTokens } from '../utils';
 
-const all = flattenTokens(linkJson as never);
-
-export const linkBaseTokens = all;
-
-export const linkDarkTokens: Token[] = [
-  { name: '--link-dark-color', value: 'var(--color-text-on-dark)', description: 'Color sobre fondo oscuro' },
-];
+export const linkTokens = flattenTokens(linkJson as never);

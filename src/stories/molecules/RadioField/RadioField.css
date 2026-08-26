@@ -18,7 +18,6 @@
   line-height: var(--radio-field-label-line-height);
   color: var(--radio-field-label-color);
   letter-spacing: var(--radio-field-label-letter-spacing);
-  text-transform: var(--radio-field-label-text-transform);
 }
 
 /* Links dentro del label */
@@ -29,8 +28,8 @@
 }
 
 .radio-field__label a:hover {
-  color: var(--link-color-hover);
-  text-decoration: var(--link-text-decoration-hover);
+  color: var(--link-hover-color);
+  text-decoration: var(--link-hover-text-decoration);
 }
 
 .radio-field__label a:focus-visible {

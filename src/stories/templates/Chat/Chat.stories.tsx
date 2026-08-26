@@ -12,7 +12,7 @@ import { MessageComposer } from '../../molecules/MessageComposer/MessageComposer
 import type { ConversationMessage } from '../../organisms/ConversationThread/ConversationThread';
 
 const meta: Meta = {
-  title: 'Templates/Chat',
+  title: 'Por revisar/Templates/Chat',
   parameters: {
     layout: 'fullscreen',
   },
@@ -239,7 +239,7 @@ export const Default: Story = {
 
     return (
       <AppShell sidebar={
-        <Sidebar logo={<Logo height={24} />}>
+        <Sidebar logo={<Logo size="sm" />}>
           <ChatSidebar
             conversations={conversations}
             activeId={activeId}
@@ -261,7 +261,7 @@ export const Vacia: Story = {
 
     return (
       <AppShell sidebar={
-        <Sidebar logo={<Logo height={24} />}>
+        <Sidebar logo={<Logo size="sm" />}>
           <ChatSidebar
             conversations={conversations}
             activeId={activeId}

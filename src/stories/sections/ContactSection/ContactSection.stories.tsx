@@ -3,7 +3,7 @@ import { ContactSection } from './ContactSection';
 import { contactArgs, privacyLabel } from '../../data/home';
 
 const meta: Meta<typeof ContactSection> = {
-  title: 'Sections/ContactSection',
+  title: 'Por revisar/Sections/ContactSection',
   component: ContactSection,
   parameters: {
     layout: 'fullscreen',

@@ -2,7 +2,7 @@
 .methodology-section {
   display: flex;
   flex-direction: column;
-  gap: var(--border-width-sm);
+  gap: var(--border-width-default);
   background-color: var(--methodology-section-gap-color);
 }
 

@@ -1,5 +1,5 @@
 {
   "content": {
-    "measure": { "$value": "50rem", "$type": "dimension", "$description": "Ancho máximo de contenido (800px) — legibilidad óptima" }
+    "measure": { "$value": "70ch", "$type": "dimension", "$description": "Medida de lectura: 70 caracteres por línea del texto que la usa. Se resuelve contra la fuente del propio párrafo, así que se adapta sola al tamaño y a la familia. Rango cómodo 45-75; WCAG pide como máximo 80" }
   }
 }

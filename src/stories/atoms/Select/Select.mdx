@@ -7,45 +7,53 @@ import { selectTriggerTokens, selectFocusTokens, selectDropdownTokens } from "..
 
 # Select
 
-Selector de opciones basado en Radix UI. Garantiza accesibilidad completa: gestión de foco, ARIA y navegación por teclado (flechas, Enter, Escape).
+Elegir una opción de una lista. Un `combobox` de Base UI: foco, ARIA y teclado (flechas, Enter, Escape, escribir para saltar) resueltos. El control es rectangular, a la altura del sistema, con borde primario y chevron; el desplegable continúa el borde del control y resalta la opción con el relleno de marca.
 
-## Por defecto
+<Canvas of={SelectStories.PorDefecto} />
 
-<Canvas of={SelectStories.Default} />
+## Dos formas de uso
 
-## Con valor seleccionado
+**Cerrada**: `options` (valor + etiqueta), `value`/`defaultValue`, `onValueChange`. Es la del `SelectField` y la del 90 % de los casos.
 
-<Canvas of={SelectStories.WithValue} />
+**Compuesta**: `Select.Root › Trigger › Value` y `Content › Group › Label › Item › Separator`, para grupos, etiquetas de grupo, opciones con JSX o para inyectar props en el trigger. Las partes existen también como *named exports* (`SelectTrigger`…): en Server Components úsalos en vez del namespace. Las dos formas comparten motor y clases.
 
-## Controlado
+<Canvas of={SelectStories.Compuesto} />
 
-Uso con `value` y `onValueChange` para gestión externa del estado.
+## Tallas
 
-<Canvas of={SelectStories.Controlled} />
+`sm`, `md` (por defecto) y `lg` son las tallas del sistema (32/40/48): cambian la altura del control, el cuerpo de letra y el padding horizontal; el chevron toma su talla de icono.
 
-## Deshabilitado
+<Canvas of={SelectStories.Tallas} />
 
-<Canvas of={SelectStories.Disabled} />
+## Estados
 
----
+<Canvas of={SelectStories.ConValor} />
+<Canvas of={SelectStories.Controlado} />
+<Canvas of={SelectStories.Deshabilitado} />
 
-## Theming oscuro
+## Superficie oscura
 
-El trigger hereda los tokens de `.surface-dark` por cascade normal. El dropdown se renderiza en un **portal Radix** fuera del árbol DOM, por lo que no hereda la cascade. En ese caso hay que pasar `dark` manualmente desde el componente padre.
+El control hereda los tokens de `.surface-dark` por cascada. El desplegable va en un portal en `document.body`, que hereda el tema activado en la raíz (`html.dark` / `[data-theme="dark"]`); solo si el Select vive en un `.surface-dark` **anidado** hay que pasar `container` para montar el portal dentro.
 
----
+<Canvas of={SelectStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- El control necesita nombre: en un formulario lo pone la etiqueta del `SelectField`; suelto, `aria-label`.
+- `aria-describedby` y `aria-invalid` llegan al trigger (los pone el campo con su ayuda y su error).
+- El trigger muestra la **etiqueta** de la opción elegida, no su valor.
 
 ## Tokens
 
-### Trigger
+### Control
 
 <TokenTable tokens={selectTriggerTokens} />
 
-### Focus
+### Foco
 
 <TokenTable tokens={selectFocusTokens} />
 
-### Dropdown
+### Desplegable
 
 <TokenTable tokens={selectDropdownTokens} />
 

@@ -3,12 +3,10 @@
  */
 
 :root {
-  --form-gap: var(--border-width-sm); /** Gap entre campos — actúa como separador (gap technique) */
   --form-border-style: var(--control-border-style); /** Estilo del borde exterior */
   --form-separator-style: var(--control-border-style); /** Estilo del separador */
   --form-heading-font-family: var(--font-family-sans); /** Font family del heading */
   --form-heading-font-size: var(--font-size-4); /** Font size del heading (24px) */
-  --form-heading-font-weight: var(--font-weight-medium); /** Font weight del heading */
   --form-heading-line-height: var(--line-height-snug); /** Line height del heading */
   --form-heading-letter-spacing: var(--letter-spacing-tight); /** Letter spacing del heading */
   --form-error-font-family: var(--font-family-sans); /** Font family del mensaje de error */
@@ -20,10 +18,10 @@
   --form-success-font-family: var(--font-family-sans); /** Font family del mensaje de éxito */
   --form-success-font-size: var(--font-size-2); /** Font size del mensaje de éxito (18px) */
   --form-success-line-height: var(--line-height-normal); /** Line height del mensaje de éxito */
-  --form-border-width: var(--control-border-width); /** Grosor del borde exterior del formulario */
+  --form-gap: var(--border-width-default); /** Gap entre campos — actúa como separador (gap technique) */
   --form-border-color: var(--color-primary); /** Color del borde exterior */
-  --form-separator-width: var(--control-border-width); /** Grosor del separador entre hijos */
   --form-separator-color: var(--color-primary); /** Color del separador */
+  --form-heading-font-weight: var(--font-weight-emphasis); /** Font weight del heading */
   --form-heading-color: var(--color-text-on-light); /** Color del heading */
   --form-error-font-weight: var(--font-weight-default); /** Font weight del mensaje de error */
   --form-error-color: var(--color-error-text-on-light); /** Color del mensaje de error */
@@ -31,6 +29,8 @@
   --form-helper-color: var(--color-text-muted-on-light); /** Color del texto de ayuda */
   --form-success-font-weight: var(--font-weight-default); /** Font weight del mensaje de éxito */
   --form-success-color: var(--color-text-on-light); /** Color del mensaje de éxito */
+  --form-border-width: var(--control-border-width); /** Grosor del borde exterior del formulario */
+  --form-separator-width: var(--control-border-width); /** Grosor del separador entre hijos */
 }
 
 .surface-dark,

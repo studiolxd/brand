@@ -1,3 +1,8 @@
+/*
+ * Datos de la página de Colores. TODO sale de los JSON de tokens: la página no
+ * lleva un solo hex escrito a mano, así que no puede desincronizarse de la
+ * fuente. (Antes duplicaba 25 hex a mano y ya mostraba un valor equivocado.)
+ */
 import palette from '../../tokens/color/palette.json';
 import neutral from '../../tokens/color/neutral.json';
 import brand from '../../tokens/color/brand.json';
@@ -8,82 +13,148 @@ import tag from '../../tokens/component/tag.json';
 import { flattenTokens, resolveRef } from './utils';
 
 type TokenEntry = { $value: string; $type: string; $description: string };
-const p = palette.color as Record<string, TokenEntry>;
+type Group = Record<string, TokenEntry>;
 
-export const paletteColors = Object.entries(p).map(([name, token]) => ({
-  name: name.charAt(0).toUpperCase() + name.slice(1),
-  token: `--color-${name}`,
-  hex: token.$value,
-}));
+/* ---- Mapa de resolución: todas las capas de color ------------------------ */
+const entries = (group: Group, prefix: string) =>
+  Object.fromEntries(Object.entries(group).map(([k, v]) => [`${prefix}.${k}`, v.$value]));
 
-export const systemColors = Object.entries(system.color as Record<string, TokenEntry>).map(([name, token]) => ({
-  name: name.charAt(0).toUpperCase() + name.slice(1),
-  token: `--color-${name}`,
-  hex: token.$value,
-}));
-
-export const paletteTokens   = flattenTokens(palette as never);
-export const neutralTokens   = flattenTokens(neutral as never);
-export const brandTokens     = flattenTokens(brand as never);
-export const feedbackTokens  = flattenTokens(feedback as never);
-export const semanticTokens  = flattenTokens(semantic as never);
-export const systemTokens    = flattenTokens(system as never);
-
-// Flat key→value map for resolving DTCG references
 const refMap: Record<string, string> = {
-  ...Object.fromEntries(Object.entries(palette.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
-  ...Object.fromEntries(Object.entries(neutral.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
-  ...Object.fromEntries(Object.entries(system.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
-  ...Object.fromEntries(Object.entries(feedback.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
-  ...Object.fromEntries(Object.entries(brand.color).map(([k, v]) => [`color.${k}`, (v as TokenEntry).$value])),
-  ...Object.fromEntries(Object.entries(semantic.color.text).map(([k, v]) => [`color.text.${k}`, (v as TokenEntry).$value])),
-  ...Object.fromEntries(Object.entries(semantic.color.background).map(([k, v]) => [`color.background.${k}`, (v as TokenEntry).$value])),
+  ...entries(palette.color as Group, 'color'),
+  ...entries(neutral.color as Group, 'color'),
+  ...entries(system.color as Group, 'color'),
+  ...entries(feedback.color as Group, 'color'),
+  ...entries(brand.color as Group, 'color'),
+  ...entries(semantic.color.text as Group, 'color.text'),
+  ...entries(semantic.color.background as Group, 'color.background'),
 };
 
+const hex = (value: string) => resolveRef(value, refMap);
 
-export const textDefault        = resolveRef(semantic.color.text['on-light'].$value, refMap);
-export const textDark           = resolveRef(semantic.color.text['on-dark'].$value, refMap);
-export const textMuted          = resolveRef(semantic.color.text['muted-on-light'].$value, refMap);
-export const textMutedDark      = resolveRef(semantic.color.text['muted-on-dark'].$value, refMap);
-export const errorColor          = resolveRef(feedback.color['error-text-on-light'].$value, refMap);
-export const successColor        = resolveRef(feedback.color['success-text-on-light'].$value, refMap);
-export const errorDarkColor      = resolveRef(feedback.color['error-text-on-dark'].$value, refMap);
-export const successDarkColor    = resolveRef(feedback.color['success-text-on-dark'].$value, refMap);
-type TagTokenEntry = { $value: string; $type: string; $description: string };
-const t = tag.tag as Record<string, TagTokenEntry>;
+/* ---- Tablas de tokens ---------------------------------------------------- */
+export const paletteTokens  = flattenTokens(palette as never);
+export const neutralTokens  = flattenTokens(neutral as never);
+export const brandTokens    = flattenTokens(brand as never);
+export const systemTokens   = flattenTokens(system as never);
+export const feedbackTokens = flattenTokens(feedback as never);
+export const semanticTokens = flattenTokens(semantic as never);
 
-export const infoColor        = resolveRef(t['info-color'].$value, refMap);
-export const warningColor     = resolveRef(t['warning-color'].$value, refMap);
-export const successTagColor  = resolveRef(t['success-color'].$value, refMap);
-export const dangerTagColor   = resolveRef(t['danger-color'].$value, refMap);
-export const neutralTextColor = resolveRef(t['neutral-color'].$value, refMap);
+/* ---- Muestras para <ColorPalette> ---------------------------------------- */
+export interface Swatch {
+  title: string;
+  subtitle: string;
+  colors: Record<string, string>;
+}
 
-export const infoBgColor    = { name: 'Info bg',    token: '--tag-info-bg',     hex: resolveRef(t['info-bg'].$value, refMap) };
-export const warningBgColor = { name: 'Warning bg', token: '--tag-warning-bg',  hex: resolveRef(t['warning-bg'].$value, refMap) };
-export const successBgColor = { name: 'Success bg', token: '--tag-success-bg',  hex: resolveRef(t['success-bg'].$value, refMap) };
-export const dangerBgColor  = { name: 'Danger bg',  token: '--tag-danger-bg',   hex: resolveRef(t['danger-bg'].$value, refMap) };
-export const neutralBgColor = { name: 'Neutral bg', token: '--tag-neutral-bg',  hex: resolveRef(t['neutral-bg'].$value, refMap) };
+const p = palette.color as Group;
+const n = neutral.color as Group;
+const b = brand.color as Group;
+const sys = system.color as Group;
+const fb = feedback.color as Group;
+const txt = semantic.color.text as Group;
+const bg = semantic.color.background as Group;
 
-export const support1Color   = resolveRef(t['support-1-color'].$value, refMap);
-export const support2Color   = resolveRef(t['support-2-color'].$value, refMap);
-export const support1BgColor = { name: 'Support 1 bg', token: '--tag-support-1-bg', hex: resolveRef(t['support-1-bg'].$value, refMap) };
-export const support2BgColor = { name: 'Support 2 bg', token: '--tag-support-2-bg', hex: resolveRef(t['support-2-bg'].$value, refMap) };
+const swatch = (title: string, subtitle: string, tokens: string[], group: Group, prefix = '--color-'): Swatch => ({
+  title,
+  subtitle,
+  colors: Object.fromEntries(tokens.map((t) => [`${prefix}${t}`, hex(group[t].$value)])),
+});
 
-export const backgroundColors = [
-  { name: 'Background light', token: '--color-background-light', hex: resolveRef(semantic.color.background.light.$value, refMap) },
-  { name: 'Background dark',  token: '--color-background-dark',  hex: resolveRef(semantic.color.background.dark.$value, refMap) },
+const PALETTE_ES: Record<string, string> = {
+  prussian: 'Prusia', lavender: 'Lavanda', yellow: 'Amarillo', emerald: 'Esmeralda', cayenne: 'Cayena',
+};
+
+const rgb = (h: string) => {
+  const v = h.replace('#', '');
+  return [0, 2, 4].map((i) => parseInt(v.slice(i, i + 2), 16)).join(', ');
+};
+
+export const paletteSwatches: Swatch[] = Object.keys(p).map((k) =>
+  swatch(PALETTE_ES[k] ?? k, `RGB ${rgb(p[k].$value)}`, [k], p),
+);
+
+export const brandSwatches: Swatch[] = [
+  swatch('Primario', '~50% de uso', ['primary'], b),
+  swatch('Acento 1', '~20% de uso', ['accent-1'], b),
+  swatch('Acento 2', '~20% de uso', ['accent-2'], b),
+  swatch('Soporte 1', '~5% de uso', ['support-1'], b),
+  swatch('Soporte 2', '~5% de uso', ['support-2'], b),
 ];
 
-export const brandColors = Object.entries(brand.color as Record<string, TokenEntry>).map(([name, token]) => ({
-  name: name.charAt(0).toUpperCase() + name.slice(1),
-  token: `--color-${name}`,
-  hex: resolveRef(token.$value, refMap),
-}));
+export const neutralSwatches: Swatch[] = [
+  swatch('Blanco', 'Fondo claro', ['white'], n),
+  swatch('Gris', 'lightest · light · dark · darkest', ['grey-lightest', 'grey-light', 'grey-dark', 'grey-darkest'], n),
+  swatch('Negro', 'Solo para usos puntuales', ['black'], n),
+];
 
-export const feedbackColors = Object.entries(feedback.color as Record<string, TokenEntry>).map(([name, token]) => ({
-  name: name.charAt(0).toUpperCase() + name.slice(1).replace(/-([a-z])/g, (_, c: string) => ` ${c.toUpperCase()}`),
-  token: `--color-${name}`,
-  hex: resolveRef(token.$value, refMap),
-}));
+export const systemSwatches: Swatch[] = [
+  swatch('Rojo', 'base · light', ['red', 'red-light'], sys),
+  swatch('Verde', 'base · light', ['green', 'green-light'], sys),
+];
 
-export const logoTokens = semanticTokens.filter(t => t.name.startsWith('--color-text'));
+const role = (name: string, label: string): Swatch[] => [
+  swatch(`${label} — texto`, `${name}-text-on-light · ${name}-text-on-dark`, [`${name}-text-on-light`, `${name}-text-on-dark`], fb),
+  swatch(`${label} — relleno`, `${name}-fill · ${name}-fill-text`, [`${name}-fill`, `${name}-fill-text`], fb),
+];
+export const feedbackSwatches: Swatch[] = [
+  ...role('error', 'Error'),
+  ...role('success', 'Éxito'),
+  ...role('destructive', 'Destructivo'),
+];
+
+export const semanticSwatches: Swatch[] = [
+  swatch('Texto', 'on-light · on-dark', ['on-light', 'on-dark'], txt, '--color-text-'),
+  swatch('Texto atenuado', 'muted-on-light · muted-on-dark', ['muted-on-light', 'muted-on-dark'], txt, '--color-text-'),
+  swatch('Placeholder', 'placeholder-on-light · placeholder-on-dark', ['placeholder-on-light', 'placeholder-on-dark'], txt, '--color-text-'),
+  swatch('Fondo', 'light · dark', ['light', 'dark'], bg, '--color-background-'),
+];
+
+/* ---- Contraste ------------------------------------------------------------ */
+export interface NamedColor { name: string; token: string; hex: string }
+
+export const surfaces: NamedColor[] = [
+  { name: 'Blanco', token: '--color-background-light', hex: hex(bg.light.$value) },
+  { name: 'Prusia', token: '--color-background-dark', hex: hex(bg.dark.$value) },
+];
+
+/** Todo color que pueda acabar como tinta (texto, icono, borde) sobre una superficie. */
+export const inks: NamedColor[] = [
+  ...Object.keys(p).filter((k) => k !== 'prussian').map((k) => ({ name: PALETTE_ES[k] ?? k, token: `--color-${k}`, hex: hex(p[k].$value) })),
+  { name: 'Texto', token: '--color-text-on-light', hex: hex(txt['on-light'].$value) },
+  { name: 'Texto (oscuro)', token: '--color-text-on-dark', hex: hex(txt['on-dark'].$value) },
+  { name: 'Texto atenuado', token: '--color-text-muted-on-light', hex: hex(txt['muted-on-light'].$value) },
+  { name: 'Texto atenuado (oscuro)', token: '--color-text-muted-on-dark', hex: hex(txt['muted-on-dark'].$value) },
+  { name: 'Placeholder', token: '--color-text-placeholder-on-light', hex: hex(txt['placeholder-on-light'].$value) },
+  { name: 'Placeholder (oscuro)', token: '--color-text-placeholder-on-dark', hex: hex(txt['placeholder-on-dark'].$value) },
+  { name: 'Error — texto', token: '--color-error-text-on-light', hex: hex(fb['error-text-on-light'].$value) },
+  { name: 'Error — texto (oscuro)', token: '--color-error-text-on-dark', hex: hex(fb['error-text-on-dark'].$value) },
+  { name: 'Éxito — texto', token: '--color-success-text-on-light', hex: hex(fb['success-text-on-light'].$value) },
+  { name: 'Éxito — texto (oscuro)', token: '--color-success-text-on-dark', hex: hex(fb['success-text-on-dark'].$value) },
+];
+
+/** Los rellenos de marca y feedback, con la tinta que llevan encima. */
+export const fills: { name: string; fill: NamedColor; ink: NamedColor }[] = [
+  ...(['accent-1', 'accent-2', 'support-1', 'support-2'] as const).map((k) => ({
+    name: brandSwatches.find((s) => Object.keys(s.colors)[0] === `--color-${k}`)?.title ?? k,
+    fill: { name: k, token: `--color-${k}`, hex: hex(b[k].$value) },
+    ink: { name: 'Texto', token: '--color-text-on-light', hex: hex(txt['on-light'].$value) },
+  })),
+  { name: 'Primario', fill: { name: 'primary', token: '--color-primary', hex: hex(b.primary.$value) }, ink: { name: 'Texto (oscuro)', token: '--color-text-on-dark', hex: hex(txt['on-dark'].$value) } },
+  { name: 'Error — relleno', fill: { name: 'error-fill', token: '--color-error-fill', hex: hex(fb['error-fill'].$value) }, ink: { name: 'error-fill-text', token: '--color-error-fill-text', hex: hex(fb['error-fill-text'].$value) } },
+  { name: 'Éxito — relleno', fill: { name: 'success-fill', token: '--color-success-fill', hex: hex(fb['success-fill'].$value) }, ink: { name: 'success-fill-text', token: '--color-success-fill-text', hex: hex(fb['success-fill-text'].$value) } },
+];
+
+/* ---- Tag: lo consume la doc del componente, no la de fundamentos --------- */
+const t = tag.tag as Group;
+const tagPair = (variant: string, label: string) => ({
+  label,
+  ink: hex(t[`${variant}-color`].$value),
+  bg: { name: `${label} — fondo`, token: `--tag-${variant}-bg`, hex: hex(t[`${variant}-bg`].$value) },
+});
+export const tagPairs = [
+  tagPair('info', 'Info'), tagPair('warning', 'Aviso'), tagPair('success', 'Éxito'),
+  tagPair('danger', 'Peligro'), tagPair('neutral', 'Neutral'),
+  tagPair('support-1', 'Soporte 1'), tagPair('support-2', 'Soporte 2'),
+];
+
+export const logoTokens = semanticTokens.filter((tk) => tk.name.startsWith('--color-text'));

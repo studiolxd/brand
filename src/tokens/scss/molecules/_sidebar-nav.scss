@@ -8,21 +8,24 @@ $lxd-sidebar-nav-group-trigger-gap: 0.5rem; // Gap entre texto y chevron del gru
 $lxd-sidebar-nav-group-label-font-size: 1rem; // Tamaño de texto de etiqueta de grupo
 $lxd-sidebar-nav-group-label-font-weight: 500; // Peso del texto de etiqueta de grupo
 $lxd-sidebar-nav-group-label-color: #111e30; // Color de la etiqueta de grupo
-$lxd-sidebar-nav-group-label-letter-spacing: 0.05em; // Espaciado de letras de la etiqueta
 $lxd-sidebar-nav-item-padding-block: 0.5rem; // Padding vertical de cada ítem
-$lxd-sidebar-nav-item-padding-inline: 1rem; // Padding horizontal de cada ítem (mayor para indentar respecto al trigger del grupo)
-$lxd-sidebar-nav-item-border-radius: 4px; // Radio de cada ítem
+$lxd-sidebar-nav-item-padding-inline: 1rem; // Padding horizontal de cada ítem
+$lxd-sidebar-nav-item-padding-inline-start: calc(0.75rem + 2rem + 0.5rem); // Sangría de los ítems: alineados con el texto de la cabecera de su grupo (aire + icono + gap)
+$lxd-sidebar-nav-item-border-radius: 0px; // Radio de cada ítem
 $lxd-sidebar-nav-item-font-size: 1rem; // Tamaño de texto de ítems
 $lxd-sidebar-nav-item-font-weight: 300; // Peso de ítems
 $lxd-sidebar-nav-item-line-height: 1.3; // Interlineado de ítems
 $lxd-sidebar-nav-item-color: #111e30; // Color de ítems
-$lxd-sidebar-nav-item-hover-bg: #f2f2f2; // Fondo de ítem al hover
-$lxd-sidebar-nav-item-hover-color: #111e30; // Color de ítem al hover
+$lxd-sidebar-nav-item-hover-bg: #111e30; // Resalte al hover: el mismo relleno de marca que los menús
+$lxd-sidebar-nav-item-hover-color: #ffffff; // Color de ítem al hover
 $lxd-sidebar-nav-item-active-color: #111e30; // Color de ítem activo
 $lxd-sidebar-nav-item-active-font-weight: 500; // Peso de ítem activo
 $lxd-sidebar-nav-focus-ring-color: #111e30; // Color del focus ring
+$lxd-sidebar-nav-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-sidebar-nav-item-gap: 0.25rem; // Gap entre ítems dentro de un grupo
-$lxd-sidebar-nav-item-icon-size: 2rem; // Tamaño del icono opcional de ítem
+$lxd-sidebar-nav-rail-item-size: 2.5rem; // En rail cada entrada es un cuadrado a talla md, como un botón de icono
+$lxd-sidebar-nav-rail-active-bar-width: 2px; // Barra al borde que marca la sección activa en rail
+$lxd-sidebar-nav-item-icon-size: 2rem; // Icono de ítem: talla sm del sistema
 $lxd-sidebar-nav-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
 $lxd-sidebar-nav-transition-duration: 150ms; // Duración de transición de ítems
 $lxd-sidebar-nav-transition-easing: ease-in-out; // Easing de transición de ítems

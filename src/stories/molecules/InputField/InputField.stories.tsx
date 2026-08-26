@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputField } from './InputField';
 
 const meta: Meta<typeof InputField> = {
-  title: 'Molecules/InputField',
+  title: 'Por revisar/Molecules/InputField',
   component: InputField,
   parameters: {
     layout: 'padded',

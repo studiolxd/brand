@@ -3,9 +3,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--select-icon-size);
+  gap: var(--select-icon-gap);
 
-  padding-block: var(--select-padding-block);
+  block-size: var(--select-height);
+  padding-block: 0;
   padding-inline: var(--select-padding-inline);
 
   font-family: var(--select-font-family);
@@ -26,37 +27,40 @@
 }
 
 .select:focus,
-.select[data-state='open'] {
+.select[data-popup-open] {
   outline: none;
 }
 
 .select:focus-visible {
   outline: var(--select-focus-ring-width) solid var(--select-focus-ring-color);
-  outline-offset: var(--select-focus-ring-offset);
+  /* Hacia dentro, pegado al borde */
+  outline-offset: calc(-1 * (var(--select-focus-ring-width) + var(--select-border-width)));
 }
 
 /* ─── Icon ────────────────────────────────────────────────── */
 .select__icon {
-  width: var(--select-icon-size);
   flex-shrink: 0;
   transform: rotate(90deg);
   transition: transform var(--select-icon-transition) var(--motion-easing-default);
 
-  [data-state='open'] & {
+  [data-popup-open] & {
     transform: rotate(-90deg);
   }
 }
 
 /* ─── Dropdown ────────────────────────────────────────────── */
+.select__positioner {
+  z-index: var(--select-content-z-index);
+}
+
 .select__content {
   background-color: var(--select-content-bg);
   border-width: var(--select-border-width);
   border-style: var(--select-border-style);
   border-color: var(--select-content-border-color);
-  min-width: var(--radix-select-trigger-width);
-  max-height: var(--select-content-max-height, var(--radix-select-content-available-height));
+  min-width: var(--anchor-width);
+  max-height: var(--select-content-max-height, var(--available-height));
   overflow-y: auto;
-  z-index: var(--select-content-z-index);
 
   &[data-side='bottom'] {
     border-top: none;
@@ -65,14 +69,6 @@
   &[data-side='top'] {
     border-bottom: none;
   }
-}
-
-/* Radix aplica `overflow: hidden auto` inline en su viewport y oculta su
-   scrollbar globalmente, lo que atrapa la rueda y deja la lista sin scroll
-   visible. Neutralizamos ese overflow para que el scroll lo gestione
-   .select__content (cuyo scrollbar sí es visible y usable). */
-.select__content [data-radix-select-viewport] {
-  overflow: visible !important;
 }
 
 /* ─── Items ───────────────────────────────────────────────── */
@@ -92,8 +88,8 @@
     color: var(--select-item-highlighted-color);
   }
 
-  &[data-state='checked'] {
-    font-weight: var(--font-weight-bold);
+  &[data-selected] {
+    font-weight: var(--select-item-selected-font-weight);
   }
 }
 
@@ -111,8 +107,8 @@
 
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
 .select.select--sm {
+  block-size: var(--select-sm-height);
   font-size: var(--select-sm-font-size);
-  padding-block: var(--select-sm-padding-block);
   padding-inline: var(--select-sm-padding-inline);
 }
 
@@ -123,8 +119,8 @@
 
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
 .select.select--lg {
+  block-size: var(--select-lg-height);
   font-size: var(--select-lg-font-size);
-  padding-block: var(--select-lg-padding-block);
   padding-inline: var(--select-lg-padding-inline);
 }
 
@@ -143,7 +139,6 @@
   line-height: var(--label-line-height);
   color: var(--label-color);
   letter-spacing: var(--label-letter-spacing);
-  text-transform: var(--label-text-transform);
 }
 
 .select__separator {

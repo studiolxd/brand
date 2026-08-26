@@ -1,0 +1,40 @@
+.theme-switcher__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--theme-switcher-icon-gap);
+}
+
+.theme-switcher__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--theme-switcher-list-gap);
+}
+
+.theme-switcher__option {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--theme-switcher-icon-gap);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--theme-switcher-list-font-size);
+  color: inherit;
+  cursor: pointer;
+}
+.theme-switcher__option:hover {
+  text-decoration: underline;
+}
+/* La actual: en énfasis, sin subrayado y sin cursor de acción */
+.theme-switcher__option.theme-switcher__option--current {
+  font-weight: var(--theme-switcher-list-current-font-weight);
+  text-decoration: none;
+  cursor: default;
+}
+.theme-switcher__option:focus-visible {
+  outline: var(--theme-switcher-focus-ring-width) solid var(--theme-switcher-focus-ring-color);
+  outline-offset: var(--theme-switcher-focus-ring-offset);
+}

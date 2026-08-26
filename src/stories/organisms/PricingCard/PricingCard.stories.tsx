@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PricingCard } from './PricingCard';
 
 const meta: Meta<typeof PricingCard> = {
-  title: 'Organisms/PricingCard',
+  title: 'Por revisar/Organisms/PricingCard',
   component: PricingCard,
   parameters: {
     layout: 'padded',

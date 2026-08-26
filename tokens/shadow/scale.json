@@ -1,9 +1,11 @@
 {
   "shadow": {
-    "none": { "$value": "none",                                "$type": "shadow", "$description": "No shadow" },
-    "sm":   { "$value": "0 1px 2px rgba(17,30,48,0.08)",      "$type": "shadow", "$description": "Subtle — inputs, minor elements" },
-    "md":   { "$value": "0 2px 8px rgba(17,30,48,0.10)",      "$type": "shadow", "$description": "Medium — cards, dropdowns" },
-    "lg":   { "$value": "0 4px 16px rgba(17,30,48,0.12)",     "$type": "shadow", "$description": "Large — modals, popovers" },
-    "xl":   { "$value": "0 8px 32px rgba(17,30,48,0.16)",     "$type": "shadow", "$description": "Extra large — drawers, overlays" }
+    "none": { "$value": "none",                            "$type": "shadow", "$description": "Escala. Valor del rol default" },
+    "sm":   { "$value": "0 1px 2px rgba(17,30,48,0.08)",  "$type": "shadow", "$description": "Escala. El sistema no lo usa" },
+    "md":   { "$value": "0 2px 8px rgba(17,30,48,0.10)",  "$type": "shadow", "$description": "Escala. El sistema no lo usa" },
+    "lg":   { "$value": "0 4px 16px rgba(17,30,48,0.12)", "$type": "shadow", "$description": "Escala. El sistema no lo usa" },
+    "xl":   { "$value": "0 8px 32px rgba(17,30,48,0.16)", "$type": "shadow", "$description": "Escala. El sistema no lo usa" },
+
+    "default": { "$value": "{shadow.none}", "$type": "shadow", "$description": "Rol: ningún elemento del sistema proyecta sombra. La elevación se expresa con borde y con el fondo del panel" }
   }
 }

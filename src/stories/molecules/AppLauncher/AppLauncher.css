@@ -34,18 +34,17 @@
   padding-block: var(--app-launcher-content-padding-block);
   padding-inline: var(--app-launcher-content-padding-inline);
   min-width: var(--app-launcher-content-min-width);
-  z-index: var(--app-launcher-content-z-index);
   outline: none;
-  transform-origin: var(--radix-popover-content-transform-origin);
+  transform-origin: var(--transform-origin);
   animation-duration: calc(var(--app-launcher-transition-duration) * 1ms);
   animation-timing-function: var(--app-launcher-transition-easing);
 }
 
-.app-launcher__content[data-state='open'] {
+.app-launcher__content[data-open] {
   animation-name: app-launcher-in;
 }
 
-.app-launcher__content[data-state='closed'] {
+.app-launcher__content[data-closed] {
   animation-name: app-launcher-out;
 }
 
@@ -178,4 +177,9 @@ html.dark .app-launcher__tile--active {
 [data-theme='dark'] .app-launcher__tile-name,
 html.dark .app-launcher__tile-name {
   color: var(--app-launcher-surface-dark-tile-name-color);
+}
+
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.app-launcher__positioner {
+  z-index: var(--app-launcher-content-z-index);
 }

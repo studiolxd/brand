@@ -5,7 +5,7 @@ import * as AccordionStories from "./Accordion.stories";
 
 # Accordion
 
-Componente colapsable que permite mostrar y ocultar contenido en secciones apiladas. Implementado con [Radix UI Accordion](https://www.radix-ui.com/primitives/docs/components/accordion), que gestiona la accesibilidad (WAI-ARIA Accordion Pattern), el foco por teclado y la animacion de apertura/cierre.
+Componente colapsable que permite mostrar y ocultar contenido en secciones apiladas. Implementado con [Base UI Accordion](https://base-ui.com/react/components/accordion), que gestiona la accesibilidad (WAI-ARIA Accordion Pattern), el foco por teclado y la animacion de apertura/cierre.
 
 ## Composicion
 
@@ -34,17 +34,18 @@ Varios items pueden estar abiertos simultaneamente.
 
 ---
 
-## CSS y Radix
+## CSS y Base UI
 
-Los componentes Radix usan atributos `data-*` en lugar de pseudo-clases CSS:
+Los componentes de Base UI usan atributos `data-*` en lugar de pseudo-clases CSS:
 
-- `data-state="open"` / `data-state="closed"` en `AccordionItem`, `AccordionTrigger` y `AccordionContent`
+- `data-open` / `data-closed` en `AccordionItem` y `AccordionContent`
+- `data-panel-open` en `AccordionTrigger` (presente mientras su panel esta abierto)
 - `data-disabled` cuando el item esta deshabilitado
 
 Ejemplo de selector CSS:
 
 ```css
-.accordion__trigger[data-state="open"] .accordion__chevron {
+.accordion__trigger[data-panel-open] .accordion__chevron {
   transform: rotate(180deg);
 }
 ```

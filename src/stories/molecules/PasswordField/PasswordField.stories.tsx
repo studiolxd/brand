@@ -1,11 +1,23 @@
+import type React from 'react';
 import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Slot } from '@radix-ui/react-slot';
+import { useRender } from '@base-ui-components/react/use-render';
 import { expect, userEvent, within } from 'storybook/test';
 import { PasswordField } from './PasswordField';
 
+/**
+ * Inyecta props sobre su hijo con `useRender` de Base UI, igual que hace el
+ * `FormControl` del DS.
+ */
+function RenderInjector({
+  children,
+  ...props
+}: { children: React.ReactElement<Record<string, unknown>> } & Record<string, unknown>) {
+  return useRender({ render: children, props });
+}
+
 const meta: Meta<typeof PasswordField> = {
-  title: 'Molecules/PasswordField',
+  title: 'Por revisar/Molecules/PasswordField',
   component: PasswordField,
   parameters: {
     layout: 'padded',
@@ -81,6 +93,7 @@ export const ToggleVisibility: Story = {
  */
 export const FieldOnly: Story = {
   name: 'Test — field-only + forwardRef',
+  tags: ['!dev'],
   render: () => {
     const ref = useRef<HTMLInputElement>(null);
     return (
@@ -115,16 +128,17 @@ export const FieldOnly: Story = {
 };
 
 /**
- * Test: inyección estilo FormControl vía Radix Slot en modo solo-campo. `id`,
- * `aria-describedby` y `aria-invalid` aterrizan en el `<input>`; el toggle sigue
- * cableado (`aria-controls`) al `id` inyectado.
+ * Test: inyección estilo FormControl vía `useRender` de Base UI en modo
+ * solo-campo. `id`, `aria-describedby` y `aria-invalid` aterrizan en el
+ * `<input>`; el toggle sigue cableado (`aria-controls`) al `id` inyectado.
  */
-export const SlotInjection: Story = {
-  name: 'Test — inyección Slot (FormControl)',
+export const RenderInjection: Story = {
+  name: 'Test — inyección render (FormControl)',
+  tags: ['!dev'],
   render: () => (
-    <Slot id="pw-input" aria-describedby="pw-desc" aria-invalid>
+    <RenderInjector id="pw-input" aria-describedby="pw-desc" aria-invalid>
       <PasswordField aria-label="password" />
-    </Slot>
+    </RenderInjector>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -141,6 +155,7 @@ export const SlotInjection: Story = {
 /** Test: labels del toggle configurables (i18n) sustituyen los textos por defecto. */
 export const CustomToggleLabels: Story = {
   name: 'Test — toggle labels i18n',
+  tags: ['!dev'],
   args: {
     label: 'Password',
     showPasswordLabel: 'Show password',

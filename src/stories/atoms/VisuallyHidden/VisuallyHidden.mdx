@@ -5,7 +5,7 @@ import * as VisuallyHiddenStories from "./VisuallyHidden.stories";
 
 # VisuallyHidden
 
-Átomo de utilidad que oculta contenido visualmente pero lo mantiene accesible para tecnologías de asistencia como lectores de pantalla. El nodo está presente en el DOM y en el árbol de accesibilidad; simplemente no es perceptible para usuarios videntes.
+Átomo de utilidad que oculta contenido visualmente pero lo mantiene accesible para tecnologías de asistencia como lectores de pantalla. El nodo está presente en el DOM y en el árbol de accesibilidad; simplemente no es perceptible para usuarios videntes. Reenvía `ref` y cualquier atributo (`id`, `aria-*`), así que sirve como `render` de los primitivos de Base UI: un `Dialog.Title` oculto al que apunta `aria-labelledby` sigue nombrando el diálogo.
 
 ## Técnica CSS
 
@@ -49,11 +49,17 @@ Nunca combinar `<VisuallyHidden>` con `aria-hidden="true"` en el mismo elemento,
 
 ## Uso básico
 
-<Canvas of={VisuallyHiddenStories.Default} />
+<Canvas of={VisuallyHiddenStories.PorDefecto} />
 
-## Etiqueta accesible para un CTA
+## Nombre de un botón de solo icono
 
-<Canvas of={VisuallyHiddenStories.CTALabel} />
+Alternativa a `aria-label` cuando el texto debe poder traducirse o seleccionarse como contenido:
+
+<Canvas of={VisuallyHiddenStories.NombreDeBoton} />
+
+## Completar un enlace genérico
+
+<Canvas of={VisuallyHiddenStories.EnlaceCompleto} />
 
 ## Props
 

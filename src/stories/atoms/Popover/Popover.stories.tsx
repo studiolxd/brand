@@ -5,7 +5,7 @@ import { DotsButton } from '../DotsButton/DotsButton';
 import { Button } from '../Button/Button';
 
 const meta = {
-  title: 'Atoms/Popover',
+  title: 'Por revisar/Atoms/Popover',
   component: Popover,
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof Popover>;

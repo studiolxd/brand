@@ -14,7 +14,7 @@
 .opacity-scale__swatch-wrap {
   width: 80px;
   height: 48px;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-default);
   overflow: hidden;
   flex-shrink: 0;
   background-image: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%);

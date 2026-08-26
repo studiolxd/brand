@@ -105,8 +105,7 @@
   border-width: var(--multi-select-border-width);
   border-style: var(--multi-select-border-style);
   border-color: var(--multi-select-content-border-color);
-  min-width: var(--radix-popover-trigger-width);
-  z-index: var(--multi-select-content-z-index);
+  min-width: var(--anchor-width);
 
   &[data-side='bottom'] {
     border-top: none;
@@ -244,3 +243,7 @@
   padding-block: var(--multi-select-lg-item-padding-block);
 }
 
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.async-multi-select__positioner {
+  z-index: var(--multi-select-content-z-index);
+}

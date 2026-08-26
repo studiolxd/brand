@@ -5,7 +5,7 @@
 }
 
 .select-field--error .select {
-  --select-border-color: var(--color-error-text-on-light);
+  --select-border-color: var(--select-field-error-border-color);
 }
 
 .select-field__error {

@@ -21,7 +21,7 @@ const sampleActions = (
 );
 
 const meta: Meta<typeof Header> = {
-  title: 'Sections/Header',
+  title: 'Por revisar/Sections/Header',
   excludeStories: /^[a-z]/,
   component: Header,
   parameters: {

@@ -5,10 +5,10 @@
 :root {
   --color-white: #ffffff; /** Pure white */
   --color-black: #000000; /** Pure black */
-  --color-grey-lightest: #f2f2f2; /** Fondos sutiles, chips, tags */
+  --color-grey-lightest: #f2f2f2; /** Superficie clara secundaria: bloque de código, kbd, burbujas, pie de tabla. Encima, texto prusia o grey-darkest */
   --color-grey-light: #d0d0d0; /** Bordes, dividers, separadores */
-  --color-grey-dark: #767676; /** Placeholder, texto secundario */
-  --color-grey-darkest: #4a4a4a; /** Texto deshabilitado, labels inactivos */
+  --color-grey-dark: #6b6b6b; /** Iconos de acción secundarios y controles deshabilitados. No es un gris de texto: todo texto va en prusia o grey-darkest */
+  --color-grey-darkest: #4a4a4a; /** Texto secundario y placeholder en superficie clara (AAA sobre blanco) */
   --color-prussian: #111e30; /** Brand prussian */
   --color-lavender: #baabff; /** Brand lavender */
   --color-yellow: #ffcd00; /** Brand yellow */
@@ -37,8 +37,9 @@
   --color-destructive-fill-text: var(--color-white); /** Destructive — contenido sobre destructive-fill */
   --color-text-on-light: var(--color-prussian); /** Text color for light backgrounds */
   --color-text-on-dark: var(--color-white); /** Text color for dark backgrounds */
-  --color-text-placeholder: var(--color-grey-dark); /** Placeholder text color */
-  --color-text-muted-on-light: var(--color-grey-darkest); /** Muted text — helper text, secondary labels */
+  --color-text-placeholder-on-light: var(--color-grey-darkest); /** Placeholder sobre superficie clara. Mismo gris que el texto secundario */
+  --color-text-placeholder-on-dark: var(--color-grey-light); /** Placeholder sobre superficie oscura. Mismo gris que el texto secundario */
+  --color-text-muted-on-light: var(--color-grey-darkest); /** Texto secundario: ayudas, etiquetas, metadatos */
   --color-text-muted-on-dark: var(--color-grey-light); /** Muted text on dark backgrounds */
   --color-background-light: var(--color-white); /** Light surface background */
   --color-background-dark: var(--color-prussian); /** Dark surface background */

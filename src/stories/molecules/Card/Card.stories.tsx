@@ -14,7 +14,7 @@ import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 const meta: Meta<typeof Card> = {
-  title: 'Molecules/Card',
+  title: 'Por revisar/Molecules/Card',
   component: Card,
   parameters: {
     layout: 'padded',
@@ -110,6 +110,7 @@ export const Container: Story = {
  */
 export const ContainerMode: Story = {
   name: 'Test — contenedor + passthrough',
+  tags: ['!dev'],
   render: () => (
     <Card data-slot="card" aria-labelledby="card-t" className="extra">
       <Heading level={3} size={6} id="card-t">Formulario</Heading>
@@ -138,6 +139,7 @@ export const ContainerMode: Story = {
 /** Test: modo link (con `href`) — sigue renderizando `<a class="card card--…">` + flecha (criterio 1). */
 export const LinkModeUnchanged: Story = {
   name: 'Test — link mode intacto',
+  tags: ['!dev'],
   args: { href: '#', color: 'primary', title: 'Servicio', ctaLabel: 'Ver más' },
   play: async ({ canvasElement }) => {
     const link = canvasElement.querySelector('a.card')!;

@@ -5,7 +5,7 @@ import { Tag } from '../../atoms/Tag/Tag';
 import { CalendarPlanner, type PlannerEvent } from './CalendarPlanner';
 
 const meta: Meta<typeof CalendarPlanner> = {
-  title: 'Molecules/CalendarPlanner',
+  title: 'Por revisar/Molecules/CalendarPlanner',
   component: CalendarPlanner,
   parameters: {
     layout: 'padded',
@@ -180,6 +180,7 @@ export const Tamanos: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — etiquetas de navegación',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

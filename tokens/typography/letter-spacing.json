@@ -1,6 +1,6 @@
 {
   "letter-spacing": {
-    "tight":  { "$value": "-0.02em", "$type": "dimension", "$description": "Display, large headings" },
+    "tight":  { "$value": "-0.02em", "$type": "dimension", "$description": "-0,02em — display y títulos grandes" },
     "normal": { "$value": "0em",     "$type": "dimension", "$description": "Body text" },
     "wide":   { "$value": "0.05em",  "$type": "dimension", "$description": "Uppercase labels" }
   }

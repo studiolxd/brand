@@ -1,6 +1,6 @@
 'use client';
 import './checkbox-field.css';
-import { Checkbox as e } from "./checkbox.js";
+import { t as e } from "./_shared/Checkbox.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/molecules/CheckboxField/CheckboxField.tsx
 function r({ label: r, checked: i, defaultChecked: a, disabled: o, size: s = "md", id: c, name: l, value: u, onCheckedChange: d }) {

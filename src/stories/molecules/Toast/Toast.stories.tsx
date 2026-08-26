@@ -5,7 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Toaster } from './Toaster';
 
 const meta: Meta<typeof Toaster> = {
-  title: 'Molecules/Toaster',
+  title: 'Por revisar/Molecules/Toaster',
   component: Toaster,
   parameters: { layout: 'centered' },
   decorators: [
@@ -35,6 +35,7 @@ type Story = StoryObj<typeof Toaster>;
  */
 export const AriaAndTheme: Story = {
   name: 'Test — theme + containerAriaLabel',
+  tags: ['!dev'],
   render: () => <Toaster theme="dark" containerAriaLabel="Notificaciones DS" />,
   play: async () => {
     // containerAriaLabel llega al contenedor de sonner (lo compone como

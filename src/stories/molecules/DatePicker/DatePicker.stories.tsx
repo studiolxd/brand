@@ -4,7 +4,7 @@ import { fn, expect, userEvent, within } from 'storybook/test';
 import { DatePicker } from './DatePicker';
 
 const meta: Meta<typeof DatePicker> = {
-  title: 'Molecules/DatePicker',
+  title: 'Por revisar/Molecules/DatePicker',
   component: DatePicker,
   tags: ['autodocs'],
   args: {
@@ -127,7 +127,7 @@ export const SelectAndDisplay: Story = {
 
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
 
-    // El popover del calendario se monta en un portal Radix (document.body),
+    // El popover del calendario se monta en un portal de Base UI (document.body),
     // fuera del canvasElement de la story.
     const body = within(canvasElement.ownerDocument.body);
     const day18 = body.getByRole('gridcell', { name: '18' });

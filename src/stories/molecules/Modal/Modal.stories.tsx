@@ -10,7 +10,7 @@ import { AsyncMultiSelectField } from '../AsyncMultiSelectField/AsyncMultiSelect
 import type { AsyncMultiSelectOption } from '../AsyncMultiSelectField/AsyncMultiSelectField';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Molecules/Modal',
+  title: 'Por revisar/Molecules/Modal',
   component: Modal,
   parameters: {
     layout: 'centered',
@@ -68,7 +68,7 @@ export const Dark: Story = {
   name: 'Dark (root-level, html.dark)',
   render: () => {
     const [open, setOpen] = useState(false);
-    // Modal se monta vía Radix Portal en document.body — .surface-dark en un
+    // Modal se monta vía el portal de Base UI en document.body — .surface-dark en un
     // contenedor no lo alcanza. Para demostrar el modo oscuro real (el que
     // usan theme managers tipo next-themes) activamos html.dark a nivel raíz
     // mientras esta story está montada.

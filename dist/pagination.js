@@ -1,7 +1,7 @@
 'use client';
 import './pagination.css';
 import { Icon as e } from "./icon.js";
-import { Select as t } from "./select.js";
+import { t } from "./_shared/Select.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/Pagination/Pagination.tsx
 var i = [

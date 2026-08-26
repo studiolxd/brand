@@ -1,12 +1,12 @@
 {
   "app-launcher": {
     "trigger-size":           { "$value": "2.5rem",                       "$type": "dimension", "$description": "Tamaño (cuadrado) del botón de rejilla" },
-    "trigger-border-radius":  { "$value": "{border-radius.sm}",           "$type": "dimension", "$description": "Radio del trigger" },
+    "trigger-border-radius":  { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del trigger" },
     "trigger-color":          { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del icono de rejilla" },
     "trigger-hover-bg":       { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del trigger al hover" },
     "focus-ring-color":       { "$value": "{color.primary}",              "$type": "color",     "$description": "Color del focus ring" },
-    "focus-ring-width":       { "$value": "{border-width.md}",            "$type": "dimension", "$description": "Grosor del focus ring" },
-    "focus-ring-offset":      { "$value": "{border-width.sm}",            "$type": "dimension", "$description": "Separación del focus ring" },
+    "focus-ring-width":       { "$value": "{border-width.focus}",            "$type": "dimension", "$description": "Grosor del focus ring" },
+    "focus-ring-offset":      { "$value": "{border-width.default}",            "$type": "dimension", "$description": "Separación del focus ring" },
 
     "content-min-width":      { "$value": "20rem",                        "$type": "dimension", "$description": "Ancho mínimo del popover" },
     "content-columns":        { "$value": "3",                            "$type": "number",    "$description": "Número de columnas de la rejilla de apps" },
@@ -25,20 +25,20 @@
     "tile-padding-block":     { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Padding vertical de cada tile" },
     "tile-padding-inline":    { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Padding horizontal de cada tile" },
     "tile-gap":               { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre icono y nombre dentro del tile" },
-    "tile-border-radius":     { "$value": "{border-radius.sm}",           "$type": "dimension", "$description": "Radio de cada tile" },
+    "tile-border-radius":     { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio de cada tile" },
     "tile-hover-bg":          { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del tile al hover/focus" },
     "tile-active-bg":         { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del tile de la app actual" },
 
     "tile-icon-size":         { "$value": "2.5rem",                       "$type": "dimension", "$description": "Tamaño del cuadrado de icono/inicial" },
-    "tile-icon-border-radius":{ "$value": "{border-radius.sm}",           "$type": "dimension", "$description": "Radio del cuadrado de icono/inicial" },
+    "tile-icon-border-radius":{ "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del cuadrado de icono/inicial" },
     "tile-icon-font-size":    { "$value": "{font-size.3}",                "$type": "dimension", "$description": "Tamaño de la inicial cuando no hay icono" },
-    "tile-icon-font-weight":  { "$value": "{font-weight.medium}",         "$type": "number",    "$description": "Peso de la inicial" },
+    "tile-icon-font-weight":  { "$value": "{font-weight.emphasis}",         "$type": "number",    "$description": "Peso de la inicial" },
     "tile-icon-color":        { "$value": "{color.white}",                "$type": "color",     "$description": "Color de la inicial sobre el fondo accent" },
 
     "tile-name-font-size":    { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño de texto del nombre de app" },
     "tile-name-font-weight":  { "$value": "{font-weight.default}",        "$type": "number",    "$description": "Peso del nombre de app" },
     "tile-name-color":        { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del nombre de app" },
-    "tile-name-active-font-weight": { "$value": "{font-weight.medium}",   "$type": "number",    "$description": "Peso del nombre — app actual" },
+    "tile-name-active-font-weight": { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso del nombre — app actual" },
 
     "surface-dark-trigger-color":     { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Icono de rejilla — surface-dark" },
     "surface-dark-trigger-hover-bg":  { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo del trigger al hover — surface-dark" },

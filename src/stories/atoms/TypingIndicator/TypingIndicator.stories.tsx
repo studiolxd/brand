@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TypingIndicator } from './TypingIndicator';
 
 const meta = {
-  title: 'Atoms/TypingIndicator',
+  title: 'Por revisar/Atoms/TypingIndicator',
   component: TypingIndicator,
   args: {
     label: 'El asistente está escribiendo…',

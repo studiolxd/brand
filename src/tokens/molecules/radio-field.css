@@ -6,7 +6,6 @@
   --radio-field-radio-offset: 3px; /** Desplazamiento vertical del radio para alinearlo con la primera línea de texto */
   --radio-field-cursor: pointer; /** Cursor */
   --radio-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
-  --radio-field-label-text-transform: none; /** Sin transformación */
   --radio-field-gap: var(--spacing-3); /** Separación entre el radio y el texto */
   --radio-field-sm-gap: var(--spacing-2); /** Gap — variante sm */
   --radio-field-sm-padding-inline: var(--spacing-3); /** Padding inline — variante sm */

@@ -1,12 +1,14 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-avatar-size-sm: 1.5rem; // 24px — avatar inline, navegación
-$lxd-avatar-size-md: 2.25rem; // 36px — talla por defecto
-$lxd-avatar-size-lg: 3.75rem; // 60px — cards estándar
-$lxd-avatar-size-xl: 7.5rem; // 120px — reviewer destacado
-$lxd-avatar-border-radius: 9999px; // Radio para forma circular
-$lxd-avatar-border-radius-square: 4px; // Radio para forma cuadrada (logos de org)
-$lxd-avatar-initials-bg: #111e30; // Fondo del fallback de iniciales
-$lxd-avatar-initials-color: #ffffff; // Color del texto de iniciales
-$lxd-avatar-initials-font-weight: 500; // Peso del texto de iniciales
+$lxd-avatar-size-sm: 2rem; // 32px — en barras y menús (UserMenu, OrgSwitcher)
+$lxd-avatar-size-md: 2.5rem; // 40px — por defecto: listas, tarjetas
+$lxd-avatar-size-lg: 3rem; // 48px — cabeceras de perfil
+$lxd-avatar-border-radius: 9999px; // Personas: círculo
+$lxd-avatar-border-radius-square: 0px; // Organizaciones (logos): el radio del sistema
+$lxd-avatar-initials-bg: #111e30; // Fondo de las iniciales
+$lxd-avatar-initials-color: #ffffff; // Iniciales sobre el fondo
+$lxd-avatar-initials-font-weight: 500; // Iniciales: énfasis
+$lxd-avatar-initials-font-size-sm: 0.875rem; // Iniciales a talla sm
+$lxd-avatar-initials-font-size-md: 1rem; // Iniciales a talla md
+$lxd-avatar-initials-font-size-lg: 1.25rem; // Iniciales a talla lg

@@ -1,0 +1,18 @@
+{
+  "site-header": {
+    "height":         { "$value": "{app-header.height}",      "$type": "dimension", "$description": "Alto de la barra — el mismo que el chrome de aplicación, para que ambas superficies coincidan" },
+    "bg":             { "$value": "{color.background.light}", "$type": "color",     "$description": "Fondo de la barra" },
+    "gap":            { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Separación entre logo y controles" },
+    "z-index":        { "$value": "{app-header.z-index}",     "$type": "number",    "$description": "Capa z — sobre el contenido, bajo los paneles flotantes" },
+
+    "panel-bg":                  { "$value": "{color.background.light}", "$type": "color",     "$description": "Fondo del panel de navegación" },
+    "panel-padding-block":       { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire vertical del panel" },
+    "panel-z-index":             { "$value": "{z-index.modal}",          "$type": "number",    "$description": "El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante" },
+    "panel-transition-duration": { "$value": "{motion.duration.slow}",   "$type": "number",    "$description": "Entrada y salida del panel: cambio de contexto" },
+    "panel-transition-easing":   { "$value": "{motion.easing.in-out}",   "$type": "string",    "$description": "Curva del panel: movimiento" },
+    "settings-margin-block-start": { "$value": "{spacing.7}",           "$type": "dimension", "$description": "Aire entre el índice y los ajustes del sitio (tema)" },
+
+    "surface-dark-bg":       { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la barra — surface-dark" },
+    "surface-dark-panel-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" }
+  }
+}

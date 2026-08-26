@@ -11,7 +11,7 @@ import { OtpField } from '../OtpField/OtpField';
 import { Fieldset } from '../../atoms/Fieldset/Fieldset';
 
 const meta: Meta<typeof Form> = {
-  title: 'Molecules/Form',
+  title: 'Por revisar/Molecules/Form',
   component: Form,
   parameters: {
     layout: 'padded',

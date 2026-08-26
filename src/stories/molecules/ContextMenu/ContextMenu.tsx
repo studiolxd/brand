@@ -1,112 +1,53 @@
 import type { ReactNode } from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DotsButton } from '../../atoms/DotsButton/DotsButton';
-import { renderDropdownItems } from '../_shared/dropdownItems';
-import './ContextMenu.css';
+import { Menu, type MenuItem, type MenuRenderLinkProps } from '../Menu/Menu';
 
-export type ContextMenuButtonItem = {
-  type: 'button';
-  label: string;
-  icon?: ReactNode;
-  onClick: () => void;
-  disabled?: boolean;
-  destructive?: boolean;
-  /**
-   * `false` mantiene el menú abierto tras elegir el ítem — para acciones que
-   * se encadenan (marcar varias cosas) o que dejan al usuario donde estaba.
-   * Por defecto el menú se cierra.
-   */
-  closeOnSelect?: boolean;
-};
-
-export type ContextMenuLinkItem = {
-  type: 'link';
-  label: string;
-  icon?: ReactNode;
-  href: string;
-  disabled?: boolean;
-  destructive?: boolean;
-};
-
-export type ContextMenuSeparator = {
-  type: 'separator';
-};
-
-export type ContextMenuItem =
-  | ContextMenuButtonItem
-  | ContextMenuLinkItem
-  | ContextMenuSeparator;
-
-export type ContextMenuRenderLinkProps = {
-  href: string;
-  children: ReactNode;
-  className: string;
-};
+/** Los ítems del ContextMenu son los del `Menu`. */
+export type ContextMenuItem = MenuItem;
+export type ContextMenuRenderLinkProps = MenuRenderLinkProps;
 
 export interface ContextMenuProps {
-  items: ContextMenuItem[];
-  renderLink?: (props: ContextMenuRenderLinkProps) => ReactNode;
+  items: MenuItem[];
+  renderLink?: (props: MenuRenderLinkProps) => ReactNode;
   onOpenChange?: (open: boolean) => void;
   side?: 'top' | 'right' | 'bottom' | 'left';
   align?: 'start' | 'center' | 'end';
   minWidth?: string;
   maxWidth?: string;
+  /** Talla del botón de tres puntos (talla del sistema). */
   triggerSize?: 'sm' | 'md' | 'lg';
   triggerOrientation?: 'horizontal' | 'vertical';
-  triggerAriaLabel?: string;
+  /** Nombre accesible del botón. */
+  label?: string;
 }
 
-function defaultRenderLink({ href, children, className }: ContextMenuRenderLinkProps) {
-  return <a href={href} className={className}>{children}</a>;
-}
-
-function itemClass(destructive?: boolean) {
-  return ['context-menu__item', destructive ? 'context-menu__item--destructive' : '']
-    .filter(Boolean)
-    .join(' ');
-}
-
+/**
+ * El menú de acciones de una fila, una tarjeta, un elemento: un `Menu` cuyo
+ * disparador es el botón de tres puntos (`DotsButton`). Todo lo demás —ítems,
+ * enlaces del router, colocación, cara— es del `Menu`.
+ */
 export function ContextMenu({
   items,
-  renderLink = defaultRenderLink,
+  renderLink,
   onOpenChange,
   side = 'bottom',
   align = 'end',
-  minWidth = '10rem',
+  minWidth,
   maxWidth,
   triggerSize = 'md',
   triggerOrientation = 'horizontal',
-  triggerAriaLabel = 'Más opciones',
+  label = 'Más opciones',
 }: ContextMenuProps) {
   return (
-    <DropdownMenu.Root onOpenChange={onOpenChange}>
-      <DropdownMenu.Trigger asChild>
-        <DotsButton
-          size={triggerSize}
-          orientation={triggerOrientation}
-          aria-label={triggerAriaLabel}
-        />
-      </DropdownMenu.Trigger>
-
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
-          className="context-menu__content"
-          side={side}
-          align={align}
-          sideOffset={4}
-          style={{
-            minWidth,
-            ...(maxWidth ? { maxWidth } : {}),
-          }}
-        >
-          {renderDropdownItems({
-            items,
-            itemClass,
-            separatorClass: 'context-menu__separator',
-            renderLink,
-          })}
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+    <Menu
+      items={items}
+      renderLink={renderLink}
+      onOpenChange={onOpenChange}
+      side={side}
+      align={align}
+      minWidth={minWidth}
+      maxWidth={maxWidth}
+      trigger={<DotsButton size={triggerSize} orientation={triggerOrientation} aria-label={label} />}
+    />
   );
 }

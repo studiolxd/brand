@@ -7,7 +7,7 @@ const image = {
 };
 
 const meta: Meta<typeof CardSquare> = {
-  title: 'Molecules/CardSquare',
+  title: 'Por revisar/Molecules/CardSquare',
   component: CardSquare,
   parameters: {
     layout: 'padded',

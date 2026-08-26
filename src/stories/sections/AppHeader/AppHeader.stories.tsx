@@ -1,101 +1,51 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within, userEvent } from 'storybook/test';
 import { AppHeader } from './AppHeader';
-import { AppShellContext } from '../AppShell/AppShellContext';
-import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
-import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
+import { Heading } from '../../atoms/Heading/Heading';
+import { Container } from '../../atoms/Container/Container';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
+import { NotificationButton } from '../../molecules/NotificationButton/NotificationButton';
+
+const notifications = <NotificationButton count={3} />;
+const end = <UserMenu compact name="Ana García" email="ana.garcia@studiolxd.com" items={[{ type: 'button', label: 'Cerrar sesión', onClick: () => {}, destructive: true }]} />;
 
 const meta: Meta<typeof AppHeader> = {
   title: 'Sections/AppHeader',
   component: AppHeader,
-  parameters: {
-    layout: 'fullscreen',
-    viewport: { defaultViewport: 'mobile1' },
-  },
+  parameters: { layout: 'fullscreen' },
+  args: { notifications, end },
+  argTypes: { start: { table: { disable: true } }, notifications: { table: { disable: true } }, end: { table: { disable: true } } },
 };
-
 export default meta;
 type Story = StoryObj<typeof AppHeader>;
 
-const navEntries = [
-  {
-    kind: 'group' as const,
-    id: 'general',
-    label: 'General',
-    items: [
-      { id: 'dashboard', label: 'Dashboard', href: '#dashboard', active: true },
-      { id: 'activity', label: 'Actividad', href: '#activity' },
-    ],
+/** Menú · (inicio) · notificaciones · cuenta. Igual en móvil y escritorio. */
+export const PorDefecto: Story = {};
+
+/** `start`: lo que la página necesite en la barra — un título, un breadcrumb, un buscador. */
+export const ConInicio: Story = {
+  args: { start: <Heading level={1} size={6}>Proyectos</Heading> },
+};
+
+export const SuperficieOscura: Story = {
+  render: (args) => (
+    <Container surface="dark" space="none">
+      <AppHeader {...args} />
+    </Container>
+  ),
+};
+
+export const Contrato: Story = {
+  name: 'Test — el botón de menú anuncia su estado y lo alterna',
+  tags: ['!dev'],
+  args: { sidebarId: 'sidebar' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Menú de navegación' });
+    await expect(boton).toHaveAttribute('aria-controls', 'sidebar');
+    await expect(boton).toHaveAttribute('aria-expanded', 'false');
+    await userEvent.click(boton);
+    await expect(boton).toHaveAttribute('aria-expanded', 'true');
+    await expect(Math.round(canvas.getByRole('banner').getBoundingClientRect().height)).toBe(56);
   },
-  {
-    kind: 'group' as const,
-    id: 'workspace',
-    label: 'Espacio de trabajo',
-    items: [
-      { id: 'projects', label: 'Proyectos', href: '#projects' },
-      { id: 'tasks', label: 'Tareas', href: '#tasks' },
-    ],
-  },
-];
-
-const orgs = [
-  { id: 'studio', name: 'Studio LXD', logoUrl: 'https://placehold.co/32x32/1a2b4a/ffffff?text=S' },
-  { id: 'acme', name: 'Acme Corp', logoUrl: 'https://placehold.co/32x32/e63946/ffffff?text=A' },
-];
-
-const sampleCenter = <OrgSwitcher current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />;
-
-const sampleEnd = (
-  <UserMenu
-    name="Ana García"
-    email="ana.garcia@studiolxd.com"
-    notificationCount={3}
-    items={[{ type: 'button' as const, label: 'Cerrar sesión', onClick: () => {}, destructive: true }]}
-  />
-);
-
-const sampleNav = <SidebarNav entries={navEntries} defaultValue={['general', 'workspace']} />;
-
-/* Provider con el menú abierto de inicio, para congelar el estado en la story */
-const OpenShell = ({ children }: { children: React.ReactNode }) => {
-  const [menuOpen, setMenuOpen] = useState(true);
-  return (
-    <AppShellContext.Provider value={{ menuOpen, setMenuOpen }}>
-      {children}
-    </AppShellContext.Provider>
-  );
-};
-
-export const Default: Story = {
-  render: () => (
-    <AppHeader center={sampleCenter} end={sampleEnd}>
-      {sampleNav}
-    </AppHeader>
-  ),
-};
-
-export const Open: Story = {
-  render: () => (
-    <OpenShell>
-      <AppHeader center={sampleCenter} end={sampleEnd}>
-        {sampleNav}
-      </AppHeader>
-    </OpenShell>
-  ),
-};
-
-export const WithoutCenter: Story = {
-  render: () => <AppHeader end={sampleEnd}>{sampleNav}</AppHeader>,
-};
-
-export const DarkOpen: Story = {
-  globals: { backgrounds: { value: 'dark' } },
-  render: () => (
-    <OpenShell>
-      <AppHeader center={sampleCenter} end={sampleEnd}>
-        {sampleNav}
-      </AppHeader>
-    </OpenShell>
-  ),
 };

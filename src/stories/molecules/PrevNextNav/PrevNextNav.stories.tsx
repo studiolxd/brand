@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { PrevNextNav } from './PrevNextNav';
 
 const meta: Meta<typeof PrevNextNav> = {
-  title: 'Molecules/PrevNextNav',
+  title: 'Por revisar/Molecules/PrevNextNav',
   component: PrevNextNav,
   parameters: { layout: 'centered' },
   args: {

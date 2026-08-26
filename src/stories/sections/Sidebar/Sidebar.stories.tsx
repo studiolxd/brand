@@ -1,107 +1,70 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AppShell } from '../AppShell/AppShell';
+import { expect, within, userEvent } from 'storybook/test';
 import { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator } from './Sidebar';
 import { Logo } from '../../atoms/Logo/Logo';
-import { UserMenu } from '../../molecules/UserMenu/UserMenu';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
+import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
+import { navEntries, orgs } from '../AppShell/_datos';
 
 const meta: Meta<typeof Sidebar> = {
   title: 'Sections/Sidebar',
   component: Sidebar,
-  parameters: {
-    layout: 'fullscreen',
+  parameters: { layout: 'fullscreen' },
+  args: {
+    logo: <Logo size="sm" />,
+    children: (
+      <>
+        <OrgSwitcher block current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />
+        <SidebarNav entries={navEntries} defaultValue={['workspace']} />
+      </>
+    ),
   },
+  argTypes: { children: { table: { disable: true } }, logo: { table: { disable: true } }, footer: { table: { disable: true } } },
+  render: (args) => <div style={{ blockSize: '100dvh', display: 'flex' }}><Sidebar {...args} /></div>,
 };
-
 export default meta;
 type Story = StoryObj<typeof Sidebar>;
 
-const SampleContent = () => (
-  <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-    <strong style={{ marginBlockEnd: '1rem', display: 'block' }}>Navegación</strong>
-    <a href="#">Inicio</a>
-    <a href="#">Proyectos</a>
-    <a href="#">Equipo</a>
-    <a href="#">Configuración</a>
-  </nav>
-);
+/** Desplegada: logo, organización y navegación. Sin `AppShell`, el modo lo fija `mode`. */
+export const Desplegada: Story = {};
 
-const sampleUserMenu = (
-  <UserMenu
-    name="Ana García"
-    email="ana.garcia@studiolxd.com"
-    items={[{ type: 'button' as const, label: 'Cerrar sesión', onClick: () => {}, destructive: true }]}
-  />
-);
+/** Rail: cada entrada es un icono; los grupos se abren como menú (pulsar o pasar el ratón). */
+export const Rail: Story = { args: { mode: 'rail' } };
 
-const renderShell = () => (
-  <AppShell
-    sidebar={
-      <Sidebar logo={<Logo height={24} />} footer={sampleUserMenu}>
-        <SampleContent />
-      </Sidebar>
-    }
-  >
-    <div style={{ padding: '2rem' }}>
-      <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
-      <p>Rail plegado por defecto; pasa el ratón por encima (o tabula dentro) para expandir.</p>
-    </div>
-  </AppShell>
-);
-
-export const Rail: Story = {
-  render: renderShell,
-};
-
-/* Estado expandido congelado vía pseudo-estado :hover del addon */
-export const ExpandedOnHover: Story = {
-  parameters: {
-    pseudo: { hover: ['.sidebar'] },
-  },
-  render: renderShell,
-};
-
-/* Rail siempre desplegado vía prop `expanded`, sin depender de hover/foco */
-export const AlwaysExpanded: Story = {
-  render: () => (
-    <AppShell
-      sidebar={
-        <Sidebar logo={<Logo height={24} />} footer={sampleUserMenu} expanded>
-          <SampleContent />
-        </Sidebar>
-      }
-    >
-      <div style={{ padding: '2rem' }}>
-        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
-        <p>Rail permanentemente desplegado en escritorio (prop `expanded`).</p>
-      </div>
-    </AppShell>
-  ),
-};
-
-/* Secciones dentro del panel: un bloque de navegación propio (p. ej. un árbol
-   de carpetas) separado del resto por una línea. */
+/** Secciones propias del producto (un árbol de carpetas) con separador. */
 export const ConSecciones: Story = {
-  name: 'Con secciones y separador',
-  render: () => (
-    <AppShell
-      sidebar={
-        <Sidebar logo={<Logo height={24} />} footer={sampleUserMenu} expanded>
-          <SampleContent />
-          <SidebarSeparator />
-          <SidebarGroup>
-            <SidebarGroupContent>
-              <a href="#">Cursos</a>
-              <a href="#">Borradores</a>
-              <a href="#">Papelera</a>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </Sidebar>
-      }
-    >
-      <div style={{ padding: '2rem' }}>
-        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Dashboard</h1>
-        <p>El separador y el grupo dan ritmo a un panel con varias secciones.</p>
-      </div>
-    </AppShell>
-  ),
+  args: {
+    children: (
+      <>
+        <OrgSwitcher block current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />
+        <SidebarNav entries={navEntries} defaultValue={['workspace']} />
+        <SidebarSeparator />
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <Paragraph size="small">Carpetas del producto</Paragraph>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </>
+    ),
+    footer: <Paragraph size="small">v1.0</Paragraph>,
+  },
+};
+
+export const Contrato: Story = {
+  name: 'Test — en rail los grupos son menús con la portada como primer enlace',
+  tags: ['!dev'],
+  args: { mode: 'rail' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const aside = canvas.getByRole('complementary', { name: 'Barra lateral' });
+    await expect(aside).toHaveAttribute('data-state', 'rail');
+    await userEvent.click(within(aside).getByRole('button', { name: 'Espacio de trabajo' }));
+    const menu = await within(document.body).findByRole('menu');
+    const enlaces = within(menu).getAllByRole('menuitem');
+    await expect(enlaces[0]).toHaveTextContent('Espacio de trabajo');
+    await expect(enlaces[0]).toHaveAttribute('href', '#espacio');
+    await expect(enlaces).toHaveLength(4);
+    await userEvent.keyboard('{Escape}');
+  },
 };

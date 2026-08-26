@@ -25,7 +25,7 @@ export function Home() {
         featuredLink={DEFAULT_FEATURED_LINK}
         actions={<><Select options={[{ value: 'es', label: 'ES' }, { value: 'en', label: 'EN' }]} defaultValue="es" /><Button href="https://academy.studiolxd.com" variant="primary" external>Entra a la academia</Button></>}
       />
-      <main id="main-content" className="home__main">
+      <main id="main-content" tabIndex={-1} className="home__main">
         <HeroVideo
           landscape={{ webm: '/videos/hero-landscape.webm', mp4: '/videos/hero-landscape.mp4' }}
           portrait={{ webm: '/videos/hero-portrait.webm', mp4: '/videos/hero-portrait.mp4' }}

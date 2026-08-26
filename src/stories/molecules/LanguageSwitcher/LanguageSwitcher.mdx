@@ -1,0 +1,48 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as LanguageSwitcherStories from "./LanguageSwitcher.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { languageSwitcherTokens } from "../../../tokens/molecules/language-switcher";
+
+<Meta of={LanguageSwitcherStories} />
+
+# LanguageSwitcher
+
+Selector de idioma. Dos formas del mismo control: **compacto** en la barra —el código del idioma actual, que abre un menú— y **lista** en el pie, con los idiomas desplegados.
+
+<Canvas of={LanguageSwitcherStories.Compacto} />
+
+## Por qué así
+
+- **El código, nunca un icono.** "ES" lo lee cualquiera aunque la interfaz esté en un idioma que no entiende, que es justo el caso de quien necesita cambiarlo. Un globo no dice nada, y una bandera es un país, no una lengua.
+- **Cada opción, en su propio idioma.** "Deutsch", no "Alemán": es como cada quien reconoce el suyo. Y cada una lleva `lang`, para que el lector de pantalla la pronuncie en ese idioma.
+- **Visible sin abrir nada.** Por eso va en la barra, en todos los anchos, y no dentro del menú del sitio.
+
+## Lista
+
+En el pie, los idiomas desplegados. Con `hrefFor`, cada uno es un enlace a su versión de la página —cada idioma tiene su URL—; sin él, son botones que llaman a `onChange`.
+
+<Canvas of={LanguageSwitcherStories.Lista} />
+
+<Canvas of={LanguageSwitcherStories.SuperficieOscura} />
+
+## Lo que es del producto
+
+El componente muestra y elige; **enrutar y persistir es del producto**: con `onChange` (o el enlace de `hrefFor`) cambia la URL de idioma, guarda la preferencia si hay sesión, o lo que su enrutador de i18n necesite.
+
+## El idioma actual
+
+En la lista, el idioma actual va en énfasis y **no se pulsa**: es un dato (`aria-current`), no una acción; los demás son enlaces o botones.
+
+## Accesibilidad
+
+- Compacto: el botón lleva el nombre del control (`label`, "Idioma") y el menú es un grupo de radio: el idioma actual está marcado y se elige con teclado.
+- Lista: es un `nav` con nombre; el idioma actual lleva `aria-current`.
+- Cada opción lleva `lang` con su código.
+
+## Tokens
+
+<TokenTable tokens={languageSwitcherTokens} />
+
+## Props
+
+<ArgTypes of={LanguageSwitcherStories} />

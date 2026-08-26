@@ -1,0 +1,44 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as MenuButtonStories from "./MenuButton.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { menuButtonTokens } from "../../../tokens/components/menu-button";
+
+<Meta of={MenuButtonStories} />
+
+# MenuButton
+
+El botón que abre y cierra un menú. Es un control —un cuadrado a su talla, 40px o 32 en `sm`— con el icono `menu` del catálogo centrado dentro. Al abrir, las tres líneas del icono animan hasta formar el aspa del icono `close`.
+
+Las dos formas no pueden divergir: `close` se define a partir de la geometría de `menu` —es su primera y su tercera línea giradas 45° sobre el centro—, así que el aspa en que termina la animación y el icono `close` del catálogo son exactamente el mismo dibujo.
+
+<Canvas of={MenuButtonStories.PorDefecto} />
+
+## Abierto
+
+`isOpen` gobierna el estado: la primera y la tercera línea se cruzan sobre la del medio, que desaparece. El botón no guarda estado; lo lleva quien lo usa (`SiteHeader`, `AppHeader`). Con movimiento reducido el cambio es inmediato, como toda transición del sistema.
+
+<Canvas of={MenuButtonStories.Abierto} />
+
+## Tallas
+
+<Canvas of={MenuButtonStories.Compacto} />
+
+## Superficie
+
+<Canvas of={MenuButtonStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- `aria-expanded` refleja el estado; `aria-controls` —si se pasa— apunta al panel que abre.
+- `label` es el nombre del control y dice **qué abre** ("Menú de navegación"), no qué forma tiene: el icono es decorativo.
+- El anillo de foco es el del sistema: 2px, separado 2px.
+
+<Canvas of={MenuButtonStories.FocoVisible} />
+
+## Tokens
+
+<TokenTable tokens={menuButtonTokens} />
+
+## Props
+
+<ArgTypes of={MenuButtonStories} />

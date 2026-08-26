@@ -25,11 +25,11 @@
   z-index: var(--modal-backdrop-z-index);
 }
 
-.modal__overlay[data-state='open'] {
+.modal__overlay[data-open] {
   animation: modal-overlay-in var(--modal-transition-duration) var(--modal-transition-easing) forwards;
 }
 
-.modal__overlay[data-state='closed'] {
+.modal__overlay[data-closed] {
   animation: modal-overlay-out var(--modal-transition-duration) var(--modal-transition-easing) forwards;
 }
 
@@ -51,11 +51,11 @@
   padding-inline: var(--modal-padding-inline);
 }
 
-.modal__content[data-state='open'] {
+.modal__content[data-open] {
   animation: modal-content-in var(--modal-transition-duration) var(--modal-transition-easing) forwards;
 }
 
-.modal__content[data-state='closed'] {
+.modal__content[data-closed] {
   animation: modal-content-out var(--modal-transition-duration) var(--modal-transition-easing) forwards;
 }
 
@@ -90,7 +90,7 @@
   border: none;
   cursor: pointer;
   color: var(--modal-close-color);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-default);
   flex-shrink: 0;
   transition: color 150ms ease, background-color 150ms ease;
 }

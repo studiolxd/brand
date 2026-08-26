@@ -13,7 +13,7 @@ const SAMPLE: ConversationItem[] = [
 ];
 
 const meta = {
-  title: 'Molecules/ConversationList',
+  title: 'Por revisar/Molecules/ConversationList',
   component: ConversationList,
   args: {
     conversations: SAMPLE,

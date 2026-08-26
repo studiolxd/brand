@@ -1,0 +1,39 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as OrgSwitcherStories from "./OrgSwitcher.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { orgSwitcherTokens } from "../../../tokens/components/org-switcher";
+
+<Meta of={OrgSwitcherStories} />
+
+# OrgSwitcher
+
+La organización (tenant) en la que se está trabajando, y el cambio a otra. Va en el centro del `AppHeader`; en portales sin organización, no va.
+
+<Canvas of={OrgSwitcherStories.PorDefecto} />
+
+## El botón
+
+Logo cuadrado a talla `sm` (`Avatar shape="square"`; sin logo, iniciales), nombre y chevron. El logo es decorativo: el nombre ya está al lado.
+
+<Canvas of={OrgSwitcherStories.ConLogo} />
+
+## El panel
+
+Primero la organización actual, marcada (`menuitemcheckbox` activo); después las demás, que al elegirse avisan por `onOrgChange(id)` — qué hacer con el cambio (enrutar, recargar claims) es del producto. Opcionalmente, `items` con acciones al pie: ajustes de la organización, crear otra…
+
+<Canvas of={OrgSwitcherStories.ConAcciones} />
+<Canvas of={OrgSwitcherStories.OrganizacionUnica} />
+<Canvas of={OrgSwitcherStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- El botón se llama «Organización: ‹nombre›» (`label` para traducirlo).
+- La actual se distingue por `aria-checked`, no solo por el peso.
+
+## Tokens
+
+<TokenTable tokens={orgSwitcherTokens} />
+
+## Props
+
+<ArgTypes of={OrgSwitcherStories} />

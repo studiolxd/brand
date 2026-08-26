@@ -12,20 +12,13 @@
   --calendar-roster-font-family: var(--font-family-sans); /** Familia tipográfica base */
   --calendar-roster-nav-hover-bg: var(--color-grey-lightest); /** Fondo hover de los botones de navegación */
   --calendar-roster-nav-disabled-color: var(--color-grey-dark); /** Color deshabilitado */
-  --calendar-roster-nav-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --calendar-roster-nav-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
-  --calendar-roster-nav-radius: var(--border-radius-sm); /** Radio del botón de navegación */
   --calendar-roster-title-font-size: var(--font-size-2); /** Tamaño del título del mes */
-  --calendar-roster-title-font-weight: var(--font-weight-medium); /** Peso del título del mes */
   --calendar-roster-border-color: var(--color-grey-light); /** Color de los bordes del grid */
-  --calendar-roster-border-width: var(--border-width-sm); /** Grosor de los bordes del grid */
   --calendar-roster-th-name-font-size: var(--font-size-1); /** Tamaño del encabezado de nombre */
-  --calendar-roster-th-name-font-weight: var(--font-weight-medium); /** Peso del encabezado de nombre */
   --calendar-roster-th-name-padding-block: var(--spacing-2); /** Padding vertical del encabezado de nombre */
   --calendar-roster-th-name-padding-inline: var(--spacing-3); /** Padding horizontal del encabezado de nombre */
   --calendar-roster-th-day-font-size: var(--font-size-1); /** Tamaño del número de día */
   --calendar-roster-th-day-padding-block: var(--spacing-2); /** Padding vertical del encabezado de día */
-  --calendar-roster-th-day-today-radius: var(--border-radius-sm); /** Radio del badge del día de hoy */
   --calendar-roster-td-name-font-size: var(--font-size-1); /** Tamaño del nombre del empleado */
   --calendar-roster-td-name-padding-block: var(--spacing-2); /** Padding vertical de la celda de nombre */
   --calendar-roster-td-name-padding-inline: var(--spacing-3); /** Padding horizontal de la celda de nombre */
@@ -37,23 +30,30 @@
   --calendar-roster-legend-gap: var(--spacing-3); /** Gap entre elementos de la leyenda */
   --calendar-roster-legend-font-size: var(--font-size-1); /** Tamaño del texto de la leyenda */
   --calendar-roster-legend-swatch-size: var(--spacing-3); /** Tamaño del cuadradito de color en la leyenda */
-  --calendar-roster-legend-swatch-radius: var(--border-radius-sm); /** Radio del cuadradito de color */
   --calendar-roster-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
   --calendar-roster-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
   --calendar-roster-nav-color: var(--color-text-on-light); /** Color de los botones prev/next */
   --calendar-roster-nav-focus-ring-color: var(--color-primary); /** Focus ring de navegación */
+  --calendar-roster-nav-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
+  --calendar-roster-nav-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
+  --calendar-roster-nav-radius: var(--border-radius-default); /** Radio del botón de navegación */
+  --calendar-roster-title-font-weight: var(--font-weight-emphasis); /** Peso del título del mes */
   --calendar-roster-title-color: var(--color-text-on-light); /** Color del título del mes */
+  --calendar-roster-border-width: var(--border-width-default); /** Grosor de los bordes del grid */
+  --calendar-roster-th-name-font-weight: var(--font-weight-emphasis); /** Peso del encabezado de nombre */
   --calendar-roster-th-name-color: var(--color-text-muted-on-light); /** Color del encabezado de nombre */
   --calendar-roster-th-name-bg: var(--color-background-light); /** Fondo sticky de la columna de nombre */
   --calendar-roster-th-day-color: var(--color-text-on-light); /** Color del encabezado de día */
   --calendar-roster-th-day-bg: var(--color-background-light); /** Fondo del encabezado de día */
   --calendar-roster-th-day-today-color: var(--color-background-light); /** Texto del encabezado del día de hoy */
   --calendar-roster-th-day-today-bg: var(--color-primary); /** Fondo del encabezado del día de hoy */
+  --calendar-roster-th-day-today-radius: var(--border-radius-default); /** Radio del badge del día de hoy */
   --calendar-roster-td-name-color: var(--color-text-on-light); /** Color del nombre del empleado */
   --calendar-roster-td-name-bg: var(--color-background-light); /** Fondo sticky de la celda de nombre */
   --calendar-roster-cell-bg: var(--color-background-light); /** Fondo de celdas de día laborable */
   --calendar-roster-schedule-color: var(--color-text-on-light); /** Color del texto de horario */
   --calendar-roster-legend-color: var(--color-text-muted-on-light); /** Color del texto de la leyenda */
+  --calendar-roster-legend-swatch-radius: var(--border-radius-default); /** Radio del cuadradito de color */
 }
 
 .surface-dark,

@@ -34,7 +34,6 @@
   line-height: var(--label-line-height);
   color: var(--label-color);
   letter-spacing: var(--label-letter-spacing);
-  text-transform: var(--label-text-transform);
 }
 
 .description-list > dd {

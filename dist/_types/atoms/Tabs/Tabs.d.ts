@@ -8,7 +8,7 @@ export interface TabsProps {
     className?: string;
     children: ReactNode;
 }
-export declare function Tabs({ orientation, className, children, ...props }: TabsProps): import("react/jsx-runtime").JSX.Element;
+export declare function Tabs({ orientation, className, children, onValueChange, ...props }: TabsProps): import("react/jsx-runtime").JSX.Element;
 export interface TabsListProps {
     variant?: 'underline' | 'pill';
     className?: string;

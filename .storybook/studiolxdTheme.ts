@@ -37,7 +37,7 @@ export default create({
 
   textColor: resolveRef(semantic.color.text['on-light'].$value, refMap),
   textInverseColor: resolveRef(semantic.color.text['on-dark'].$value, refMap),
-  textMutedColor: resolveRef(semantic.color.text.placeholder.$value, refMap),
+  textMutedColor: resolveRef(semantic.color.text['muted-on-light'].$value, refMap),
 
   barTextColor: resolveRef(semantic.color.text['on-light'].$value, refMap),
   barHoverColor: resolveRef(brand.color['accent-1'].$value, refMap),

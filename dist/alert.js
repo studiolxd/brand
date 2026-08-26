@@ -2,62 +2,62 @@
 import './alert.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { forwardRef as i, useState as a } from "react";
+import { forwardRef as n, useState as r } from "react";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/Alert/Alert.tsx
-var o = i(function({ className: e, children: t, ...r }, i) {
-	return /* @__PURE__ */ n("p", {
-		ref: i,
+var o = n(function({ className: e, children: t, ...n }, r) {
+	return /* @__PURE__ */ i("p", {
+		ref: r,
 		className: ["alert__title", e ?? ""].filter(Boolean).join(" "),
-		...r,
+		...n,
 		children: t
 	});
-}), s = i(function({ className: e, children: t, ...r }, i) {
-	return /* @__PURE__ */ n("div", {
-		ref: i,
+}), s = n(function({ className: e, children: t, ...n }, r) {
+	return /* @__PURE__ */ i("div", {
+		ref: r,
 		className: ["alert__description", e ?? ""].filter(Boolean).join(" "),
-		...r,
+		...n,
 		children: t
 	});
-}), c = i(function({ variant: i = "default", title: o, description: s, dismissible: c = !1, onDismiss: l, className: u, children: d, role: f = "alert", ...p }, m) {
-	let [h, g] = a(!1);
+}), c = n(function({ variant: n = "default", title: o, description: s, dismissible: c = !1, onDismiss: l, className: u, children: d, role: f = "alert", ...p }, m) {
+	let [h, g] = r(!1);
 	if (h) return null;
 	let _ = [
 		"alert",
-		i === "default" ? "" : `alert--${i}`,
-		i === "warning" ? "" : "surface-dark",
+		n === "default" ? "" : `alert--${n}`,
+		n === "warning" ? "" : "surface-dark",
 		c ? "alert--dismissible" : "",
 		u ?? ""
 	].filter(Boolean).join(" ");
 	function v() {
 		l ? l() : g(!0);
 	}
-	return /* @__PURE__ */ r("div", {
+	return /* @__PURE__ */ a("div", {
 		ref: m,
 		role: f,
 		className: _,
 		...p,
-		children: [/* @__PURE__ */ r("div", {
+		children: [/* @__PURE__ */ a("div", {
 			className: "alert__content",
 			children: [
-				o && /* @__PURE__ */ n("p", {
+				o && /* @__PURE__ */ i("p", {
 					className: "alert__title",
 					children: o
 				}),
-				s && /* @__PURE__ */ n("div", {
+				s && /* @__PURE__ */ i("div", {
 					className: "alert__description",
 					children: s
 				}),
 				d
 			]
-		}), c && /* @__PURE__ */ r("button", {
+		}), c && /* @__PURE__ */ a("button", {
 			type: "button",
 			className: "alert__close",
 			onClick: v,
-			children: [/* @__PURE__ */ n(e, {
+			children: [/* @__PURE__ */ i(e, {
 				name: "close",
 				size: "sm"
-			}), /* @__PURE__ */ n(t, { children: "Cerrar" })]
+			}), /* @__PURE__ */ i(t, { children: "Cerrar" })]
 		})]
 	});
 }), l = Object.assign(c, {

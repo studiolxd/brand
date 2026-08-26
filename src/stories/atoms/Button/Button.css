@@ -3,10 +3,16 @@
   align-items: center;
 }
 
+/* Talla: los botones con caja fijan su altura a la talla del sistema
+   (32/40/48) y centran el contenido; la variante text es inline y no tiene caja. */
+.button:not(.button--text) {
+  block-size: var(--button-height);
+  padding-block: 0;
+}
+
 /* Primary */
 .button--primary {
   justify-content: var(--button-primary-justify-content);
-  padding-block: var(--button-primary-padding-block);
   padding-inline: var(--button-primary-padding-inline);
   border-radius: var(--button-primary-border-radius);
   border-width: var(--button-primary-border-width);
@@ -53,7 +59,6 @@
 /* Outline */
 .button--outline {
   justify-content: var(--button-outline-justify-content);
-  padding-block: var(--button-outline-padding-block);
   padding-inline: var(--button-outline-padding-inline);
   border-radius: var(--button-outline-border-radius);
   border-width: var(--button-outline-border-width);
@@ -100,7 +105,6 @@
 /* Text */
 .button--text {
   justify-content: var(--button-text-justify-content);
-  padding-block: var(--button-text-padding-block);
   padding-inline: var(--button-text-padding-inline);
   border-radius: var(--button-text-border-radius);
   border-width: var(--button-text-border-width);
@@ -147,7 +151,6 @@
 /* Ghost */
 .button--ghost {
   justify-content: var(--button-ghost-justify-content);
-  padding-block: var(--button-ghost-padding-block);
   padding-inline: var(--button-ghost-padding-inline);
   border-radius: var(--button-ghost-border-radius);
   border-width: var(--button-ghost-border-width);
@@ -228,7 +231,7 @@
 
 /* Tamaños */
 .button.button--sm:not(.button--text) {
-  padding-block: var(--button-sm-padding-block);
+  block-size: var(--button-sm-height);
   padding-inline: var(--button-sm-padding-inline);
 }
 
@@ -237,7 +240,7 @@
 }
 
 .button.button--lg:not(.button--text) {
-  padding-block: var(--button-lg-padding-block);
+  block-size: var(--button-lg-height);
   padding-inline: var(--button-lg-padding-inline);
 }
 
@@ -250,21 +253,20 @@
   width: var(--button-block-width);
 }
 
-/* Icon-only — botón cuadrado.
-   Debe ir DESPUÉS de las reglas de tamaño: `.button.button--icon-only.button--sm`
-   y `.button.button--sm:not(.button--text)` tienen la misma especificidad, así que
-   gana la última del fichero. `aspect-ratio: 1` fuerza la forma cuadrada aunque el
-   padding-block heredado de la variante difiera del inline. */
+/* Icon-only — botón cuadrado: el lado es la altura de la talla.
+   Va DESPUÉS de las reglas de tamaño para ganar a su padding-inline. */
 .button.button--icon-only {
-  padding-inline: var(--button-icon-only-padding);
-  aspect-ratio: 1;
+  inline-size: var(--button-height);
+  padding-inline: 0;
   justify-content: center;
 }
 
 .button.button--icon-only.button--sm {
-  padding-inline: var(--button-icon-only-sm-padding);
+  inline-size: var(--button-sm-height);
+  padding-inline: 0;
 }
 
 .button.button--icon-only.button--lg {
-  padding-inline: var(--button-icon-only-lg-padding);
+  inline-size: var(--button-lg-height);
+  padding-inline: 0;
 }

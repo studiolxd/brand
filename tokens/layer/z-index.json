@@ -1,0 +1,10 @@
+{
+  "z-index": {
+    "bar":      { "$value": "100", "$type": "number", "$description": "Barras fijas de la aplicación: cabecera, barra lateral" },
+    "backdrop": { "$value": "200", "$type": "number", "$description": "Velo que oscurece la página bajo un modal o una hoja" },
+    "modal":    { "$value": "300", "$type": "number", "$description": "Modales, hojas y paneles de navegación a pantalla completa" },
+    "floating": { "$value": "400", "$type": "number", "$description": "Paneles anclados a un control: menús, select, popover, tooltip. Por encima del modal, porque un select dentro de un modal debe abrirse sobre él" },
+    "toast":    { "$value": "500", "$type": "number", "$description": "Avisos: siempre visibles, sobre cualquier otra capa" },
+    "skip":     { "$value": "600", "$type": "number", "$description": "Enlace de salto al contenido: lo primero al tabular, sobre todo lo demás" }
+  }
+}

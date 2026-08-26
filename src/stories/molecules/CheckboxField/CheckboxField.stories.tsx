@@ -3,7 +3,7 @@ import { Link } from '../../atoms/Link/Link';
 import { CheckboxField } from './CheckboxField';
 
 const meta: Meta<typeof CheckboxField> = {
-  title: 'Molecules/CheckboxField',
+  title: 'Por revisar/Molecules/CheckboxField',
   component: CheckboxField,
   parameters: {
     layout: 'padded',

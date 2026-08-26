@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AssistantMessage } from './AssistantMessage';
 
 const meta = {
-  title: 'Molecules/AssistantMessage',
+  title: 'Por revisar/Molecules/AssistantMessage',
   component: AssistantMessage,
   args: {
     children: 'Hola, soy tu asistente. ¿En qué puedo ayudarte hoy?',

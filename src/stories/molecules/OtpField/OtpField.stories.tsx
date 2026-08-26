@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { OtpField } from './OtpField';
 
 const meta: Meta<typeof OtpField> = {
-  title: 'Molecules/OtpField',
+  title: 'Por revisar/Molecules/OtpField',
   component: OtpField,
   parameters: {
     layout: 'padded',

@@ -13,7 +13,7 @@
 }
 
 .project-card__title-link:hover {
-  text-decoration: var(--link-text-decoration-hover);
+  text-decoration: var(--link-hover-text-decoration);
 }
 
 /* ─── Image link ─────────────────────────────────────────── */

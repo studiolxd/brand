@@ -20,7 +20,8 @@ export { Icon } from './stories/atoms/Icon/Icon';
 export type { IconName, IconProps } from './stories/atoms/Icon/Icon';
 export { DotsButton } from './stories/atoms/DotsButton/DotsButton';
 export type { DotsButtonProps } from './stories/atoms/DotsButton/DotsButton';
-export { Hamburger } from './stories/atoms/Hamburger/Hamburger';
+export { MenuButton } from './stories/atoms/MenuButton/MenuButton';
+export type { MenuButtonProps } from './stories/atoms/MenuButton/MenuButton';
 export { Fieldset } from './stories/atoms/Fieldset/Fieldset';
 export type { FieldsetProps } from './stories/atoms/Fieldset/Fieldset';
 export { Heading } from './stories/atoms/Heading/Heading';
@@ -38,8 +39,10 @@ export type { OtpInputProps } from './stories/atoms/OtpInput/OtpInput';
 export { Label } from './stories/atoms/Label/Label';
 export type { LabelProps } from './stories/atoms/Label/Label';
 export { Link } from './stories/atoms/Link/Link';
+export type { LinkProps } from './stories/atoms/Link/Link';
 export { List } from './stories/atoms/List/List';
 export { Logo } from './stories/atoms/Logo/Logo';
+export type { LogoProps, LogoSize } from './stories/atoms/Logo/Logo';
 export { Paragraph } from './stories/atoms/Paragraph/Paragraph';
 export { ProgressBar } from './stories/atoms/ProgressBar/ProgressBar';
 export type { ProgressBarProps, ProgressBarVariant, ProgressBarSize } from './stories/atoms/ProgressBar/ProgressBar';
@@ -68,7 +71,7 @@ export type { DataTableProps, DataTableServerPagination, DataTableHeaderLabels, 
 export { Sheet, SheetFooter } from './stories/molecules/Sheet/Sheet';
 export type { SheetProps } from './stories/molecules/Sheet/Sheet';
 export { Menu } from './stories/molecules/Menu/Menu';
-export type { MenuProps, MenuItem, MenuRadioItem, MenuLabelItem } from './stories/molecules/Menu/Menu';
+export type { MenuProps, MenuItem, MenuButtonItem, MenuLinkItem, MenuSeparatorItem, MenuRadioItem, MenuLabelItem, MenuRenderLinkProps } from './stories/molecules/Menu/Menu';
 export { CommandPalette } from './stories/molecules/CommandPalette/CommandPalette';
 export type { CommandPaletteProps, CommandPaletteGroup, CommandPaletteItem } from './stories/molecules/CommandPalette/CommandPalette';
 export type { TooltipProps, TooltipProviderProps } from './stories/atoms/Tooltip/Tooltip';
@@ -131,7 +134,7 @@ export type { CalendarPlannerProps, PlannerEvent } from './stories/molecules/Cal
 export { CalendarRoster } from './stories/molecules/CalendarRoster/CalendarRoster';
 export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType, LegendItem } from './stories/molecules/CalendarRoster/CalendarRoster';
 export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
-export type { ContextMenuItem, ContextMenuButtonItem, ContextMenuLinkItem, ContextMenuSeparator, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
+export type { ContextMenuItem, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
 export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from './stories/molecules/Card/Card';
 export type { CardProps, CardColor, CardPartProps } from './stories/molecules/Card/Card';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
@@ -166,6 +169,14 @@ export { SwitcherField } from './stories/molecules/SwitcherField/SwitcherField';
 export type { SwitcherFieldProps } from './stories/molecules/SwitcherField/SwitcherField';
 export { MultiSelectField } from './stories/molecules/MultiSelectField/MultiSelectField';
 export type { MultiSelectFieldProps } from './stories/molecules/MultiSelectField/MultiSelectField';
+export { NotificationButton } from './stories/molecules/NotificationButton/NotificationButton';
+export type { NotificationButtonProps } from './stories/molecules/NotificationButton/NotificationButton';
+export { DropdownField } from './stories/molecules/DropdownField/DropdownField';
+export type { DropdownFieldProps } from './stories/molecules/DropdownField/DropdownField';
+export { LanguageSwitcher } from './stories/molecules/LanguageSwitcher/LanguageSwitcher';
+export type { LanguageSwitcherProps, Language, LanguageSwitcherRenderLinkProps } from './stories/molecules/LanguageSwitcher/LanguageSwitcher';
+export { ThemeSwitcher } from './stories/molecules/ThemeSwitcher/ThemeSwitcher';
+export type { ThemeSwitcherProps, ThemeSwitcherLabels, Theme } from './stories/molecules/ThemeSwitcher/ThemeSwitcher';
 export { SelectField } from './stories/molecules/SelectField/SelectField';
 export type { SelectFieldProps } from './stories/molecules/SelectField/SelectField';
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';
@@ -193,12 +204,13 @@ export type { UserMessageProps } from './stories/molecules/UserMessage/UserMessa
 
 // ─── Sections ───────────────────────────────────────────────
 export { AppShell } from './stories/sections/AppShell/AppShell';
+export type { SidebarState } from './stories/sections/AppShell/AppShell';
 export type { AppShellProps } from './stories/sections/AppShell/AppShell';
 export { useAppShell } from './stories/sections/AppShell/AppShellContext';
 export type { AppShellContextValue } from './stories/sections/AppShell/AppShellContext';
 export { AppHeader } from './stories/sections/AppHeader/AppHeader';
 export type { AppHeaderProps } from './stories/sections/AppHeader/AppHeader';
-export { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator } from './stories/sections/Sidebar/Sidebar';
+export { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator, useSidebar } from './stories/sections/Sidebar/Sidebar';
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 
 // ─── Organisms ──────────────────────────────────────────────

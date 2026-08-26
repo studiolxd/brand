@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { CodeBlock } from './CodeBlock';
 
 const meta: Meta<typeof CodeBlock> = {
-  title: 'Molecules/CodeBlock',
+  title: 'Por revisar/Molecules/CodeBlock',
   component: CodeBlock,
   parameters: {
     layout: 'padded',
@@ -86,6 +86,7 @@ export const ConNodosResaltados: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — etiqueta del botón de copiar',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

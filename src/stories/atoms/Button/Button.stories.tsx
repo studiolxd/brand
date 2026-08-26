@@ -1,9 +1,20 @@
 import type React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Slot } from '@radix-ui/react-slot';
+import { useRender } from '@base-ui-components/react/use-render';
 import { expect, userEvent, within, fn } from 'storybook/test';
 import { Button } from './Button';
 import { Icon } from '../Icon/Icon';
+
+/**
+ * Inyecta props sobre su hijo con `useRender` de Base UI, igual que hace el
+ * `FormControl` del DS.
+ */
+function RenderInjector({
+  children,
+  ...props
+}: { children: React.ReactElement<Record<string, unknown>> } & Record<string, unknown>) {
+  return useRender({ render: children, props });
+}
 const heroDark  = 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1280&q=80';
 const heroLight = 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?auto=format&fit=crop&w=1280&q=80';
 
@@ -48,10 +59,6 @@ const meta: Meta<typeof Button> = {
       control: { type: 'select' },
       options: ['button', 'submit', 'reset'],
       description: 'Tipo HTML del botón.',
-    },
-    asChild: {
-      control: { type: 'boolean' },
-      description: 'Fusiona las props del Button sobre el elemento hijo en lugar de renderizar un wrapper. Útil para pasar un componente de enrutamiento (p.ej. Next.js Link) sin perder la navegación client-side.',
     },
   },
   args: {
@@ -213,14 +220,14 @@ export const FocusVisible: Story = {
 };
 
 /**
- * Con `asChild`, Button fusiona sus clases y handlers sobre el elemento hijo.
- * En producción el hijo sería `<Link>` de Next.js; aquí usamos `<a>` como stand-in.
+ * Con `render`, Button pone sus clases y handlers sobre el elemento indicado.
+ * En producción sería `<Link>` de Next.js; aquí usamos `<a>` como stand-in.
  */
-export const AsChild: Story = {
-  name: 'asChild (router link)',
+export const ConRender: Story = {
+  name: 'render (enlace del router)',
   render: (args) => (
-    <Button {...args} asChild>
-      <a href="#">Ir a proyectos</a>
+    <Button {...args} render={<a href="#" />}>
+      Ir a proyectos
     </Button>
   ),
   args: { variant: 'primary' },
@@ -266,6 +273,7 @@ export const IconOnlyGhost: Story = {
  */
 export const PropPassthrough: Story = {
   name: 'Test — className + data-* passthrough',
+  tags: ['!dev'],
   render: () => (
     <Button
       className="mi-clase"
@@ -290,6 +298,7 @@ export const PropPassthrough: Story = {
 /** Test: atributos de formulario (`type`, `form`, `name`, `value`) aterrizan en el DOM. */
 export const FormAttributes: Story = {
   name: 'Test — atributos de formulario',
+  tags: ['!dev'],
   render: () => (
     <Button type="submit" form="f1" name="intent" value="save">
       Enviar
@@ -306,26 +315,27 @@ export const FormAttributes: Story = {
 };
 
 /**
- * Test: composición Radix `<Dialog.Close asChild><Button/></Dialog.Close>`.
- * El `Slot` exterior inyecta `onClick` y `data-*` sobre el Button; con el spread
- * de `{...rest}` esas props llegan al elemento y el click se dispara.
+ * Test: composición Base UI `<Dialog.Close render={<Button/>} />`. El wrapper
+ * inyecta `onClick` y `data-*` sobre el Button; con el spread de `{...rest}`
+ * esas props llegan al elemento y el click se dispara.
  */
-export const SlotComposition: Story = {
-  name: 'Test — composición Slot (Dialog.Close asChild)',
+export const RenderComposition: Story = {
+  name: 'Test — composición render (Dialog.Close)',
+  tags: ['!dev'],
   render: (args) => (
-    <Slot
+    <RenderInjector
       onClick={args.onClick as React.MouseEventHandler<HTMLElement>}
-      data-state="open"
+      data-open=""
     >
       <Button>Cerrar</Button>
-    </Slot>
+    </RenderInjector>
   ),
   args: { onClick: fn() },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const btn = canvas.getByRole('button', { name: 'Cerrar' });
-    // props inyectadas por el Slot exterior (como hace Dialog.Close asChild) llegan al DOM
-    await expect(btn).toHaveAttribute('data-state', 'open');
+    // props inyectadas desde fuera (como hace Dialog.Close con render) llegan al DOM
+    await expect(btn).toHaveAttribute('data-open');
     await userEvent.click(btn);
     await expect(args.onClick).toHaveBeenCalled();
   },

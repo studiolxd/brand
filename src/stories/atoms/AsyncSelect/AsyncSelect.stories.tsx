@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { AsyncSelect } from './AsyncSelect';
 import type { AsyncSelectOption } from './AsyncSelect';
 
@@ -23,7 +23,7 @@ function mockSearch(query: string): Promise<AsyncSelectOption[]> {
 }
 
 const meta: Meta<typeof AsyncSelect> = {
-  title: 'Atoms/AsyncSelect',
+  title: 'Por revisar/Atoms/AsyncSelect',
   component: AsyncSelect,
   parameters: { layout: 'padded' },
   args: {
@@ -96,6 +96,7 @@ const emptySearch = (): Promise<AsyncSelectOption[]> => Promise.resolve([]);
  */
 export const MensajeVacio: Story = {
   name: 'Test — mensaje de sin resultados',
+  tags: ['!dev'],
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
       <div data-testid="default">
@@ -127,6 +128,7 @@ export const MensajeVacio: Story = {
  */
 export const EtiquetaLimpiar: Story = {
   name: 'Test — etiqueta de limpiar selección',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">
@@ -149,5 +151,57 @@ export const EtiquetaLimpiar: Story = {
     const en = within(canvasElement.querySelector('[data-testid="traducido"]') as HTMLElement);
     await expect(en.getByLabelText('Clear selection')).toBeInTheDocument();
     await expect(en.queryByLabelText('Limpiar selección')).toBeNull();
+  },
+};
+
+/**
+ * Test: ciclo de vida del desplegable sobre Base UI — se abre al pulsar el
+ * input, se ancla debajo del control con su mismo ancho, selecciona con click y
+ * se cierra con Escape y con un click fuera.
+ */
+export const AperturaYCierre: Story = {
+  name: 'Test — apertura, selección y cierre',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <AsyncSelect onSearch={mockSearch} placeholder="Buscar empleado…" />
+      <button type="button">Fuera</button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    const input = canvas.getByPlaceholderText('Buscar empleado…');
+
+    await userEvent.click(input);
+    const option = await body.findByRole('option', { name: 'Ana García' });
+
+    // el popup se ancla al control: mismo borde izquierdo y al menos su ancho
+    const anchor = canvasElement.querySelector('.async-select') as HTMLElement;
+    const popup = option.closest('.async-select__content') as HTMLElement;
+    const anchorRect = anchor.getBoundingClientRect();
+    const popupRect = popup.getBoundingClientRect();
+    // tolerancia = `collisionPadding` por defecto de Base UI (5px), que puede
+    // desplazar el popup cuando el ancla toca el borde del viewport
+    await expect(Math.abs(popupRect.left - anchorRect.left)).toBeLessThanOrEqual(5);
+    await expect(popupRect.top).toBeGreaterThanOrEqual(anchorRect.bottom - 2);
+    await expect(popupRect.width).toBeGreaterThanOrEqual(anchorRect.width - 1);
+
+    // seleccionar cierra el desplegable y muestra la etiqueta
+    await userEvent.click(option);
+    await waitFor(() => expect(body.queryByRole('option', { name: 'Ana García' })).toBeNull());
+    await expect(input).toHaveValue('Ana García');
+
+    // Escape cierra
+    await userEvent.click(input);
+    await body.findByRole('option', { name: 'Ana García' });
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(body.queryByRole('option', { name: 'Ana García' })).toBeNull());
+
+    // un click fuera cierra
+    await userEvent.click(input);
+    await body.findByRole('option', { name: 'Ana García' });
+    await userEvent.click(canvas.getByRole('button', { name: 'Fuera' }));
+    await waitFor(() => expect(body.queryByRole('option', { name: 'Ana García' })).toBeNull());
   },
 };

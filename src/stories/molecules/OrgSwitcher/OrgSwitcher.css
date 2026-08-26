@@ -5,12 +5,23 @@
   display: flex;
   align-items: center;
   gap: var(--org-switcher-trigger-gap);
-  width: 100%;
+  width: auto;
+  max-inline-size: 100%;
   padding-block: var(--org-switcher-trigger-padding-block);
   padding-inline: var(--org-switcher-trigger-padding-inline);
   border-radius: var(--org-switcher-trigger-border-radius);
   cursor: pointer;
   transition: background-color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
+}
+
+.org-switcher__trigger.org-switcher__trigger--block {
+  width: 100%;
+}
+
+/* Compacto (rail): solo el logo, cuadrado */
+.org-switcher__trigger.org-switcher__trigger--compact {
+  padding-inline: 0;
+  justify-content: center;
 }
 
 .org-switcher__trigger:hover {
@@ -20,13 +31,6 @@
 .org-switcher__trigger:focus-visible {
   outline: var(--org-switcher-focus-ring-width) solid var(--org-switcher-focus-ring-color);
   outline-offset: var(--org-switcher-focus-ring-offset);
-}
-
-/* ─── Logo override (tamaño viene del Avatar) ────────────── */
-.org-switcher__logo {
-  --avatar-size-sm: var(--org-switcher-logo-size);
-  --avatar-initials-bg: var(--org-switcher-initials-bg);
-  --avatar-initials-color: var(--org-switcher-initials-color);
 }
 
 /* ─── Nombre ─────────────────────────────────────────────── */
@@ -47,7 +51,7 @@
   transform: rotate(90deg);
 }
 
-.org-switcher__trigger[data-state="open"] .org-switcher__chevron {
+.org-switcher__trigger[data-popup-open] .org-switcher__chevron {
   transform: rotate(-90deg);
 }
 
@@ -74,16 +78,15 @@
   padding-block: var(--org-switcher-content-padding-block);
   padding-inline: var(--org-switcher-content-padding-inline);
   min-width: var(--org-switcher-content-min-width);
-  z-index: var(--org-switcher-content-z-index);
   outline: none;
-  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  transform-origin: var(--transform-origin);
 }
 
-.org-switcher__content[data-state="open"] {
+.org-switcher__content[data-open] {
   animation: org-switcher-open var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
 }
 
-.org-switcher__content[data-state="closed"] {
+.org-switcher__content[data-closed] {
   animation: org-switcher-close var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
 }
 
@@ -101,7 +104,9 @@
   text-decoration: none;
   cursor: pointer;
   outline: none;
-  transition: background-color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
+  transition:
+    background-color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing),
+    color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
 }
 
 .org-switcher__item:focus-visible {
@@ -110,6 +115,7 @@
 
 .org-switcher__item[data-highlighted] {
   background-color: var(--org-switcher-item-hover-bg);
+  color: var(--org-switcher-item-hover-color);
 }
 
 .org-switcher__item--active,
@@ -133,4 +139,9 @@
 .org-switcher__item.org-switcher__item--destructive[data-highlighted] {
   background-color: var(--context-menu-item-destructive-hover-bg);
   color: var(--context-menu-item-destructive-hover-color);
+}
+
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.org-switcher__positioner {
+  z-index: var(--org-switcher-content-z-index);
 }

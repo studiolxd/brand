@@ -1,4 +1,4 @@
-import * as RadixPopover from '@radix-ui/react-popover';
+import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Tag } from '../../atoms/Tag/Tag';
 import './AppLauncher.css';
@@ -42,49 +42,53 @@ export function AppLauncher({
   onOpenChange,
 }: AppLauncherProps) {
   return (
-    <RadixPopover.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
-      <RadixPopover.Trigger asChild>
-        <button type="button" className="app-launcher__trigger" aria-label={labels.open}>
-          <Icon name="grid" size="md" />
-        </button>
-      </RadixPopover.Trigger>
+    <BasePopover.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(next) => onOpenChange?.(next)}
+    >
+      <BasePopover.Trigger
+        render={
+          <button type="button" className="app-launcher__trigger" aria-label={labels.open}>
+            <Icon name="grid" size="md" />
+          </button>
+        }
+      />
 
-      <RadixPopover.Portal>
-        <RadixPopover.Content
-          className="app-launcher__content"
-          sideOffset={4}
-          align="end"
-        >
-          <ul className="app-launcher__grid" role="list">
-            {apps.map((app) => {
-              const isCurrent = app.id === currentAppId;
-              return (
-                <li key={app.id}>
-                  <a
-                    href={app.url}
-                    className={`app-launcher__tile${isCurrent ? ' app-launcher__tile--active' : ''}`}
-                    aria-current={isCurrent ? 'page' : undefined}
-                  >
-                    <span
-                      className="app-launcher__tile-icon"
-                      style={{ backgroundColor: app.accent }}
-                      aria-hidden="true"
+      <BasePopover.Portal>
+        <BasePopover.Positioner className="app-launcher__positioner" sideOffset={4} align="end">
+          <BasePopover.Popup className="app-launcher__content">
+            <ul className="app-launcher__grid" role="list">
+              {apps.map((app) => {
+                const isCurrent = app.id === currentAppId;
+                return (
+                  <li key={app.id}>
+                    <a
+                      href={app.url}
+                      className={`app-launcher__tile${isCurrent ? ' app-launcher__tile--active' : ''}`}
+                      aria-current={isCurrent ? 'page' : undefined}
                     >
-                      {initial(app.name)}
-                    </span>
-                    <span className="app-launcher__tile-name">{app.name}</span>
-                    {app.isNew && (
-                      <Tag variant="info" className="app-launcher__tile-badge">
-                        {labels.new}
-                      </Tag>
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </RadixPopover.Content>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+                      <span
+                        className="app-launcher__tile-icon"
+                        style={{ backgroundColor: app.accent }}
+                        aria-hidden="true"
+                      >
+                        {initial(app.name)}
+                      </span>
+                      <span className="app-launcher__tile-name">{app.name}</span>
+                      {app.isNew && (
+                        <Tag variant="info" className="app-launcher__tile-badge">
+                          {labels.new}
+                        </Tag>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </BasePopover.Popup>
+        </BasePopover.Positioner>
+      </BasePopover.Portal>
+    </BasePopover.Root>
   );
 }

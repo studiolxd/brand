@@ -1,0 +1,38 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AppShellStories from "./AppShell.stories";
+
+<Meta of={AppShellStories} />
+
+# AppShell
+
+El armazón de una aplicación: **barra superior** (`AppHeader`), **barra lateral** (`Sidebar`) y contenido. Es el mismo en todos los anchos; lo que cambia es cómo se comporta la sidebar: columna en escritorio (≥ `breakpoint.lg`), cajón desde la izquierda en móvil.
+
+<Canvas of={AppShellStories.PorDefecto} />
+
+## La sidebar tiene tres estados
+
+- **Desplegada** (`open`): columna con su ancho, redimensionable arrastrando el borde (o con las flechas en el asa, que es un `separator` con teclado). Entre `sidebar.min-width` y `sidebar.max-width`.
+- **Rail** (`rail`): solo iconos, 56px. Se llega a él estrechando por debajo del mínimo o con `Home` en el asa. Los grupos de navegación se abren como menú al pulsar o al pasar el ratón (con la portada de la sección como primer enlace).
+- **Cerrada** (`closed`): el contenido ocupa todo. Se llega con el botón de menú de la barra o estrechando por debajo del rail.
+
+El botón de menú alterna entre desplegada y cerrada (desde rail, despliega). El estado y el ancho viven en el shell y se comparten por contexto (`useAppShell`); **persistirlos es del producto** (`onSidebarChange`, `onSidebarWidthChange`, `defaultSidebar`, `defaultSidebarWidth`).
+
+<Canvas of={AppShellStories.Rail} />
+<Canvas of={AppShellStories.Plegada} />
+
+## Móvil
+
+La misma sidebar entra como cajón sobre un velo; el contenido queda `inert` y sin scroll. Se cierra con Escape, tocando el velo, con el botón de menú o **al navegar** (cualquier enlace dentro de ella). No hay rail ni redimensión: solo abierto o cerrado.
+
+<Canvas of={AppShellStories.Movil} />
+
+## Accesibilidad
+
+- El botón de menú dice qué controla (`aria-controls` con el `id` de la sidebar) y si está abierta (`aria-expanded`).
+- La sidebar es un `aside` con nombre; el contenido es el `main`.
+- El asa es un `separator` vertical con `aria-valuenow`: ← → cambian el ancho a pasos de `sidebar.resize-step`, `Home` va a rail, `End` al máximo.
+- Los tooltips del rail salen de un único `TooltipProvider` que pone el shell.
+
+## Props
+
+<ArgTypes of={AppShellStories} />

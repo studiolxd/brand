@@ -13,18 +13,11 @@
   --calendar-font-family: var(--font-family-sans); /** Familia tipográfica base */
   --calendar-nav-hover-bg: var(--color-grey-lightest); /** Fondo hover de los botones de navegación */
   --calendar-nav-disabled-color: var(--color-grey-dark); /** Color deshabilitado de los botones de navegación */
-  --calendar-nav-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --calendar-nav-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --calendar-title-font-size: var(--font-size-2); /** Tamaño del título del mes — md */
-  --calendar-title-font-weight: var(--font-weight-medium); /** Peso del título del mes */
   --calendar-weekday-font-size: var(--font-size-1); /** Tamaño de las cabeceras de día de semana */
   --calendar-day-size: var(--spacing-6); /** Tamaño (ancho y alto) de los botones de día — md */
   --calendar-day-font-size: var(--font-size-1); /** Tamaño de fuente de los días */
-  --calendar-day-radius: var(--border-radius-sm); /** Radio de borde de los botones de día */
   --calendar-day-hover-bg: var(--color-grey-lightest); /** Fondo hover de los días */
-  --calendar-day-focus-ring-width: var(--border-width-md); /** Grosor del focus ring de los días */
-  --calendar-day-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring de los días */
-  --calendar-today-font-weight: var(--font-weight-medium); /** Peso de fuente del día de hoy */
   --calendar-outside-color: var(--color-grey-dark); /** Color de los días fuera del mes actual (contraste ≥4.5:1) */
   --calendar-disabled-color: var(--color-grey-dark); /** Color de los días deshabilitados */
   --calendar-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
@@ -36,12 +29,19 @@
   --calendar-lg-day-font-size: var(--font-size-2); /** Tamaño de fuente de los días — lg */
   --calendar-nav-color: var(--color-text-on-light); /** Color de los botones prev/next */
   --calendar-nav-focus-ring-color: var(--color-primary); /** Color del focus ring de los botones de navegación */
+  --calendar-nav-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
+  --calendar-nav-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
+  --calendar-title-font-weight: var(--font-weight-emphasis); /** Peso del título del mes */
   --calendar-title-color: var(--color-text-on-light); /** Color del título del mes */
   --calendar-weekday-color: var(--color-text-muted-on-light); /** Color de las cabeceras de día de semana */
   --calendar-day-font-weight: var(--font-weight-default); /** Peso de fuente de los días */
+  --calendar-day-radius: var(--border-radius-default); /** Radio de borde de los botones de día */
   --calendar-day-color: var(--color-text-on-light); /** Color de texto de los días */
   --calendar-day-focus-ring-color: var(--color-primary); /** Color del focus ring de los días */
+  --calendar-day-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring de los días */
+  --calendar-day-focus-ring-offset: var(--border-width-default); /** Separación del focus ring de los días */
   --calendar-today-color: var(--color-primary); /** Color de texto del día de hoy */
+  --calendar-today-font-weight: var(--font-weight-emphasis); /** Peso de fuente del día de hoy */
   --calendar-today-border-color: var(--color-primary); /** Color del indicador (borde inferior) del día de hoy */
   --calendar-selected-bg: var(--color-primary); /** Fondo del día seleccionado */
   --calendar-selected-color: var(--color-text-on-dark); /** Texto del día seleccionado */

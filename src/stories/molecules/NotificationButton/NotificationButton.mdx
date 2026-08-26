@@ -1,0 +1,32 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./NotificationButton.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { notificationButtonTokens } from "../../../tokens/molecules/notification-button";
+
+<Meta of={Stories} />
+
+# NotificationButton
+
+La campana de la barra de la aplicación: un botón de icono (`Button` ghost, talla md, icono `bell` a 24px) con el contador de no leídas **volando sobre su esquina, en rojo**. Es un botón y sirve de disparador: qué abre —un panel, un menú, una página— es del producto. Como el botón de menú de la barra, no cambia de fondo en hover: en la barra los controles son glifos, no botones con caja.
+
+<Canvas of={Stories.PorDefecto} />
+<Canvas of={Stories.SinContador} />
+<Canvas of={Stories.Tope} />
+
+## El rojo
+
+Es `color.error-fill`, el relleno de error del sistema: universal, el mismo en superficie clara y oscura, con `error-fill-text` para la cifra. No hay un rojo aparte para notificaciones: significa «atención pendiente», que es lo que significa el rojo en todo el sistema.
+
+<Canvas of={Stories.SuperficieOscura} />
+
+## Accesibilidad
+
+El nombre del botón lleva el contador («Notificaciones: 3 sin leer»); el badge visible es decorativo para no leerlo dos veces. `label` lo sustituye (traducción, contexto).
+
+## Tokens
+
+<TokenTable tokens={notificationButtonTokens} />
+
+## Props
+
+<ArgTypes of={Stories} />

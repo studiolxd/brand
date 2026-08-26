@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Select, SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem } from './Select';
+import { Container } from '../Container/Container';
 
 const options = [
   { value: 'es', label: 'Español' },
@@ -13,120 +14,129 @@ const options = [
 const meta: Meta<typeof Select> = {
   title: 'Atoms/Select',
   component: Select,
-  parameters: {
-    layout: 'padded',
-  },
+  parameters: { layout: 'padded' },
   argTypes: {
-    placeholder: { control: 'text' },
-    disabled: { control: 'boolean' },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    container: { table: { disable: true } },
   },
-  args: {
-    options,
-    placeholder: 'Seleccionar…',
-  },
+  args: { options, placeholder: 'Seleccionar…', 'aria-label': 'Idioma' },
+  render: (args) => <div style={{ inlineSize: '16rem' }}><Select {...args} /></div>,
 };
-
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-export const Default: Story = {};
+export const PorDefecto: Story = {};
 
-/**
- * Test: las partes están disponibles como **named exports** (RSC-safe) e idénticas
- * a las del namespace (`Select.Trigger === SelectTrigger`), renderizando igual.
- */
-export const NamedExports: Story = {
-  name: 'Test — named exports (RSC-safe)',
-  render: () => (
-    <SelectRoot defaultValue="a">
-      <SelectTrigger aria-label="Opción"><SelectValue /></SelectTrigger>
-      <SelectContent>
-        <SelectItem value="a">A</SelectItem>
-      </SelectContent>
-    </SelectRoot>
+export const ConValor: Story = { args: { defaultValue: 'es' } };
+
+/** Las tres tallas del sistema: 32, 40 y 48 de alto. */
+export const Tallas: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '16rem' }}>
+      <Select {...args} size="sm" defaultValue="es" />
+      <Select {...args} size="md" defaultValue="es" />
+      <Select {...args} size="lg" defaultValue="es" />
+    </div>
   ),
-  play: async ({ canvasElement }) => {
-    // el namespace sigue exponiendo las partes (contexto cliente)
-    await expect(Select.Root).toBeDefined();
-    await expect(Select.Trigger).toBeDefined();
-    await expect(Select.Value).toBeDefined();
-    await expect(Select.Content).toBeDefined();
-    await expect(Select.Item).toBeDefined();
-    // los named exports (usados en el render) producen el trigger con su clase
-    const trigger = within(canvasElement).getByRole('combobox');
-    await expect(trigger).toHaveClass('select');
-  },
 };
 
-/**
- * Test: API compuesta. El `data-*`/`aria-*` del consumidor aterriza en el trigger
- * (criterio 2); una opción renderiza JSX libre (criterio 3); mismas clases que el
- * Select cerrado.
- */
-export const Composition: Story = {
-  name: 'Test — partes compuestas',
-  render: () => (
-    <Select.Root defaultValue="a">
-      <Select.Trigger data-slot="select-trigger" aria-label="Idioma" aria-describedby="help" aria-invalid>
-        <Select.Value placeholder="Elige" />
-      </Select.Trigger>
-      <Select.Content>
-        <Select.Group>
-          <Select.Label>Idiomas</Select.Label>
-          <Select.Item value="a"><em>rico</em></Select.Item>
-          <Select.Item value="b">plano</Select.Item>
-        </Select.Group>
-        <Select.Separator />
-      </Select.Content>
-    </Select.Root>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const trigger = canvas.getByRole('combobox');
-    // mismas clases que el cerrado + rest del consumidor en el trigger
-    await expect(trigger).toHaveClass('select');
-    await expect(trigger).toHaveAttribute('data-slot', 'select-trigger');
-    await expect(trigger).toHaveAttribute('aria-describedby', 'help');
-    await expect(trigger).toHaveAttribute('aria-invalid', 'true');
-    // abrir el dropdown (portal en document.body) y verificar el JSX de la opción
-    await userEvent.click(trigger);
-    const listbox = within(document.body).getByRole('listbox');
-    await expect(within(listbox).getByText('rico').tagName).toBe('EM');
-    // la opción usa la clase del DS
-    await expect(within(listbox).getByText('plano').closest('.select__item')).not.toBeNull();
-    // cerrar el dropdown: el escaneo a11y corre al final; con el Select abierto Radix
-    // marca el fondo con aria-hidden (estado transitorio, no un defecto del componente)
-    await userEvent.keyboard('{Escape}');
-    await expect(within(document.body).queryByRole('listbox')).toBeNull();
-  },
-};
-
-/** Uso controlado con onValueChange — el valor seleccionado se muestra debajo */
-export const Controlled: Story = {
-  name: 'Controlled (onValueChange)',
-  render: () => {
+/** Controlado: `value` + `onValueChange`. */
+export const Controlado: Story = {
+  render: (args) => {
     const [value, setValue] = useState('');
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <Select options={options} placeholder="Seleccionar…" value={value} onValueChange={setValue} />
-        <p style={{ margin: 0, fontSize: '0.875rem' }}>
-          Valor: <strong>{value || '(ninguno)'}</strong>
-        </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', inlineSize: '16rem' }}>
+        <Select {...args} value={value} onValueChange={setValue} />
+        <p style={{ margin: 0 }}>Valor: <strong>{value || '(ninguno)'}</strong></p>
       </div>
     );
   },
 };
 
-export const WithValue: Story = {
+export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'es' } };
+
+/** Compuesto: grupos, etiquetas de grupo, separadores y opciones con JSX. */
+export const Compuesto: Story = {
+  render: () => (
+    <div style={{ inlineSize: '16rem' }}>
+      <Select.Root defaultValue="es">
+        <Select.Trigger aria-label="Idioma"><Select.Value placeholder="Elige" /></Select.Trigger>
+        <Select.Content>
+          <Select.Group>
+            <Select.Label>Europa</Select.Label>
+            <Select.Item value="es">Español</Select.Item>
+            <Select.Item value="fr">Français</Select.Item>
+          </Select.Group>
+          <Select.Separator />
+          <Select.Group>
+            <Select.Label>América</Select.Label>
+            <Select.Item value="pt-BR"><em>Português</em> (Brasil)</Select.Item>
+          </Select.Group>
+        </Select.Content>
+      </Select.Root>
+    </div>
+  ),
+};
+
+export const SuperficieOscura: Story = {
   args: { defaultValue: 'es' },
+  render: (args) => (
+    <Container surface="dark" space="md">
+      <div style={{ inlineSize: '16rem' }}><Select {...args} /></div>
+    </Container>
+  ),
 };
 
-export const Disabled: Story = {
-  args: { disabled: true, defaultValue: 'es' },
+export const Contrato: Story = {
+  name: 'Test — talla, combobox con nombre, elegir por teclado',
+  tags: ['!dev'],
+  render: (args) => (
+    <div style={{ inlineSize: '16rem' }}>
+      <Select {...args} size="sm" aria-label="Pequeño" />
+      <Select {...args} aria-label="Idioma" aria-describedby="ayuda" aria-invalid />
+      <Select {...args} size="lg" aria-label="Grande" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(Math.round(canvas.getByRole('combobox', { name: 'Pequeño' }).getBoundingClientRect().height)).toBe(32);
+    const md = canvas.getByRole('combobox', { name: 'Idioma' });
+    await expect(Math.round(md.getBoundingClientRect().height)).toBe(40);
+    await expect(Math.round(canvas.getByRole('combobox', { name: 'Grande' }).getBoundingClientRect().height)).toBe(48);
+    await expect(md).toHaveAttribute('aria-describedby', 'ayuda');
+    await expect(md).toHaveAttribute('aria-invalid', 'true');
+    await userEvent.click(md);
+    const listbox = await within(document.body).findByRole('listbox');
+    await expect(within(listbox).getAllByRole('option')).toHaveLength(4);
+    await userEvent.click(within(listbox).getByRole('option', { name: 'Français' }));
+    await waitFor(() => expect(within(document.body).queryByRole('listbox')).toBeNull());
+    await expect(md.textContent).toContain('Français');
+  },
 };
 
-/** Navega con Tab hasta el select para verificar el focus ring */
-export const FocusVisible: Story = {
-  name: 'Focus visible',
-  parameters: { pseudo: { focusVisible: true } },
+export const ContratoPartes: Story = {
+  name: 'Test — partes compuestas y named exports (RSC)',
+  tags: ['!dev'],
+  render: () => (
+    <SelectRoot defaultValue="a">
+      <SelectTrigger aria-label="Opción" data-testid="trigger"><SelectValue /></SelectTrigger>
+      <SelectContent>
+        <SelectItem value="a"><em>rica</em></SelectItem>
+        <SelectItem value="b">plana</SelectItem>
+      </SelectContent>
+    </SelectRoot>
+  ),
+  play: async ({ canvasElement }) => {
+    await expect(Select.Trigger).toBe(SelectTrigger);
+    const trigger = within(canvasElement).getByRole('combobox');
+    await expect(trigger).toHaveClass('select');
+    await expect(trigger).toHaveAttribute('data-testid', 'trigger');
+    // el trigger muestra la etiqueta de la opción, no el valor crudo
+    await expect(trigger.textContent).toContain('rica');
+    await userEvent.click(trigger);
+    const listbox = await within(document.body).findByRole('listbox');
+    await expect(within(listbox).getByText('rica').tagName).toBe('EM');
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(within(document.body).queryByRole('listbox')).toBeNull());
+  },
 };

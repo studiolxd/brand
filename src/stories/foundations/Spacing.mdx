@@ -8,24 +8,35 @@ import { sectionTokens } from "../../tokens/layout";
 
 # Espaciado
 
-Escala de espaciado basada en múltiplos de 4px. Los tokens están numerados para permitir la inserción de valores intermedios sin romper la nomenclatura.
+Ocho pasos, del 4px al 64px. **El mínimo es 4px**: no existe nada más fino, porque la estética del sistema es de tamaño grande y separación clara, y un espacio de 2px no se lee como espacio.
+
+La escala no es lineal a propósito. Hasta el 16px crece de 4 en 4, para el interior de los componentes, donde cada píxel cuenta; a partir de ahí crece ×1,5 (24, 32, 48, 64), para separar componentes y secciones, donde lo que importa es el salto entre niveles.
 
 <SpacingScale tokens={spacingTokens} />
 
+## Qué paso usar
+
+| Pasos | Para | Ejemplo |
+|---|---|---|
+| **1 – 2** | Dentro de un control | Icono y su texto, padding de un badge o un botón, gap entre iconos |
+| **3 – 4** | Entre elementos de un componente | Filas de una lista, cabecera y cuerpo de una tarjeta, padding de tarjetas y celdas |
+| **5 – 6** | Entre componentes | Tarjetas de una rejilla, bloques de un formulario |
+| **7 – 8** | Entre secciones | Bandas de una página pública |
+
+Los tokens están numerados y no nombrados (`--spacing-4`, no `--spacing-md`) para que la escala pueda crecer por los extremos sin renombrar nada. Todo espaciado de un componente —padding, gap, margin— apunta a uno de estos ocho valores; un valor que no está en la escala no está en el sistema.
+
 ---
 
-## Tokens CSS
+## Ritmo de sección
 
-<TokenTable tokens={spacingTokens} />
-
-Los tokens están definidos en `tokens/spacing/scale.json`.
-
----
-
-## Padding de sección
-
-Tokens de padding para secciones de página. Definen los ritmos verticales y horizontales estándar del layout.
+El ritmo vertical de la maqueta: cuánto aire lleva una sección de página arriba y abajo. Son alias de la escala con nombre de intención, y es lo que `Container` expone en su prop `space`. El aire lateral es único, `--section-padding-inline`.
 
 <TokenTable tokens={sectionTokens} />
 
-Los tokens están definidos en `tokens/layout/section.json`.
+---
+
+## Tokens
+
+<TokenTable tokens={spacingTokens} />
+
+Definidos en `tokens/spacing/scale.json` y `tokens/layout/section.json`.

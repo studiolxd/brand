@@ -1,11 +1,11 @@
 {
   "number-badge": {
-    "min-size":       { "$value": "1.25rem",              "$type": "dimension", "$description": "Tamaño mínimo del badge (20px) — permite acomodar dos dígitos" },
+    "min-size":       { "$value": "1rem",                 "$type": "dimension", "$description": "16px: una marca, no un control (fuera de la escala de tallas); cabe un dígito redondo, dos en píldora" },
     "padding-inline": { "$value": "{spacing.1}",           "$type": "dimension", "$description": "Padding horizontal para números de más de un dígito" },
-    "border-radius":  { "$value": "{border-radius.full}",  "$type": "dimension", "$description": "Forma circular" },
+    "border-radius":  { "$value": "{border-radius.round}",  "$type": "dimension", "$description": "Forma circular" },
     "font-family":    { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Familia tipográfica" },
-    "font-size":      { "$value": "{font-size.1}",         "$type": "dimension", "$description": "Tamaño de fuente — 14px" },
-    "font-weight":    { "$value": "{font-weight.semibold}", "$type": "number",    "$description": "Seminegrita para legibilidad en tamaño pequeño" },
+    "font-size":      { "$value": "{font-size.0}",         "$type": "dimension", "$description": "La cifra: el cuerpo de marca (12px)" },
+    "font-weight":    { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Peso normal: una cifra, no un título" },
     "line-height":    { "$value": "{line-height.none}",    "$type": "number",    "$description": "Sin interlineado extra — centrado por flexbox" },
 
     "primary-bg":     { "$value": "{color.primary}",          "$type": "color", "$description": "Fondo primary (prussian)" },
@@ -19,10 +19,10 @@
     "support-2-bg":   { "$value": "{color.support-2}",        "$type": "color", "$description": "Fondo support-2 (cayenne)" },
     "support-2-color":{ "$value": "{color.text.on-light}",    "$type": "color", "$description": "Texto sobre support-2" },
     "danger-bg":      { "$value": "{color.error-fill}",     "$type": "color", "$description": "Fondo danger (red)" },
-    "danger-color":   { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre danger" },
+    "danger-color":   { "$value": "{color.error-fill-text}",            "$type": "color", "$description": "Texto sobre danger" },
     "success-bg":     { "$value": "{color.success-fill}", "$type": "color", "$description": "Fondo success (green)" },
-    "success-color":  { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre success" },
+    "success-color":  { "$value": "{color.success-fill-text}",            "$type": "color", "$description": "Texto sobre success" },
     "neutral-bg":     { "$value": "{color.grey-darkest}",     "$type": "color", "$description": "Fondo neutral (dark grey)" },
-    "neutral-color":  { "$value": "{color.white}",            "$type": "color", "$description": "Texto sobre neutral" }
+    "neutral-color":  { "$value": "{color.text.on-dark}",            "$type": "color", "$description": "Texto sobre neutral" }
   }
 }

@@ -37,7 +37,7 @@ export function ReviewCarousel({ reviews, className }: ReviewCarouselProps) {
               <Avatar
                 src={review.photo}
                 alt={review.author}
-                size="xl"
+                size="lg"
                 className="review-card__avatar"
               />
               <div className="review-card__identity">

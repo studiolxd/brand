@@ -3,7 +3,7 @@ import { ReviewCarousel } from './ReviewCarousel';
 import { reviews } from '../../data/home';
 
 const meta: Meta<typeof ReviewCarousel> = {
-  title: 'Organisms/ReviewCarousel',
+  title: 'Por revisar/Organisms/ReviewCarousel',
   component: ReviewCarousel,
   parameters: { layout: 'fullscreen' },
   decorators: [

@@ -85,12 +85,15 @@ describe('Menu', () => {
       <Menu
         trigger={trigger}
         items={[{ type: 'link', label: 'CSV', href: '/export?format=csv' }]}
-        renderLink={({ href, children, className }) => (
-          <a href={href} className={className} data-testid="custom-link">{children}</a>
+        renderLink={({ children, ...props }) => (
+          <a {...props} data-testid="custom-link">{children}</a>
         )}
       />,
     );
     await user.click(screen.getByRole('button', { name: 'Opciones' }));
-    expect(await screen.findByTestId('custom-link')).toHaveAttribute('href', '/export?format=csv');
+    const link = await screen.findByTestId('custom-link');
+    expect(link).toHaveAttribute('href', '/export?format=csv');
+    // Las props que inyecta Base UI (rol, tabIndex…) tienen que llegar al enlace
+    expect(link).toHaveAttribute('role', 'menuitem');
   });
 });

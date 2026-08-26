@@ -3,18 +3,19 @@
  */
 
 :root {
-  --font-family-sans: "Google Sans Flex", system-ui, sans-serif; /** Primary sans-serif typeface */
-  --font-family-mono: "Google Sans Code", ui-monospace, monospace; /** Monospace typeface for code */
-  --font-family-serif: "Libre Bodoni", Georgia, serif; /** Serif typeface — use only in exceptional cases requiring a serif treatment */
-  --letter-spacing-tight: -0.02em; /** Display, large headings */
+  --font-family-sans: "Google Sans Flex", system-ui, sans-serif; /** Familia principal: interfaz y texto. Variable (peso 1-1000, tamaño óptico 6-144) */
+  --font-family-mono: "Google Sans Code", ui-monospace, monospace; /** Código, valores técnicos y contenido preformateado */
+  --font-family-serif: "Libre Bodoni", Georgia, serif; /** Excepción de producto: no la usa ningún componente del sistema. Reservada para piezas editoriales o de marca que un producto decida tratar en serif */
+  --letter-spacing-tight: -0.02em; /** -0,02em — display y títulos grandes */
   --letter-spacing-normal: 0em; /** Body text */
   --letter-spacing-wide: 0.05em; /** Uppercase labels */
   --line-height-none: 1; /** Single line elements, icons */
   --line-height-tight: 1.1; /** Display, large headings */
   --line-height-snug: 1.3; /** Medium headings */
   --line-height-normal: 1.5; /** Body text */
-  --line-height-relaxed: 1.65; /** Long-form reading */
-  --font-size-1: 0.875rem; /** 0.875rem (14px) — UI labels, body small */
+  --line-height-relaxed: 1.65; /** 1,65 — lectura larga */
+  --font-size-0: 0.75rem; /** 12px — solo cifras dentro de marcas (contadores); nunca texto */
+  --font-size-1: 0.875rem; /** 14px — etiquetas de interfaz, texto pequeño */
   --font-size-2: 1rem; /** 1rem (16px) — Body base */
   --font-size-3: 1.25rem; /** 1.25rem (20px) — Small subtitles */
   --font-size-4: 1.5rem; /** 1.5rem (24px) — Subtitles */
@@ -24,14 +25,15 @@
   --font-size-8: 3.5rem; /** 3.5rem (56px) — Small display */
   --font-size-9: 4.5rem; /** 4.5rem (72px) — Display */
   --font-size-10: 6rem; /** 6rem (96px) — Large display */
-  --font-weight-thin: 100; /** Thin */
-  --font-weight-extralight: 200; /** Extra light */
-  --font-weight-light: 300; /** Light */
-  --font-weight-regular: 400; /** Regular */
-  --font-weight-medium: 500; /** Medium */
-  --font-weight-semibold: 600; /** Semibold */
-  --font-weight-bold: 700; /** Bold */
-  --font-weight-extrabold: 800; /** Extra bold */
-  --font-weight-black: 900; /** Black */
-  --font-weight-default: var(--font-weight-light); /** Default text weight — change this to shift the whole system */
+  --font-weight-thin: 100; /** Escala de la fuente variable. El sistema no lo usa */
+  --font-weight-extralight: 200; /** Escala de la fuente variable. El sistema no lo usa */
+  --font-weight-light: 300; /** Cuerpo de texto (rol default) */
+  --font-weight-regular: 400; /** Escala de la fuente variable. El sistema no lo usa */
+  --font-weight-medium: 500; /** Títulos y énfasis (rol emphasis) */
+  --font-weight-semibold: 600; /** Escala de la fuente variable. El sistema no lo usa */
+  --font-weight-bold: 700; /** Escala de la fuente variable. El sistema no lo usa */
+  --font-weight-extrabold: 800; /** Escala de la fuente variable. El sistema no lo usa */
+  --font-weight-black: 900; /** Escala de la fuente variable. El sistema no lo usa */
+  --font-weight-default: var(--font-weight-light); /** Rol: cuerpo de texto. Los componentes apuntan aquí, nunca a la escala */
+  --font-weight-emphasis: var(--font-weight-medium); /** Rol: títulos, énfasis local (strong, cifras destacadas), etiquetas. Dobla el trazo del cuerpo a 16px */
 }

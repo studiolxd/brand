@@ -31,6 +31,10 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 
 Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `pnpm test` corre los dos primeros; `pnpm test:stories` el tercero.
 
+Fundamentos y componentes no se pisan: **Foundations explica el sistema** (reglas, escalas, catálogos, el porqué) y **la doc de un componente explica su API** (props, uso, contrato). Cada hecho vive en un solo sitio; el otro remite. Los tokens globales (`icon.size-*`, `breakpoint.*`…) se tabulan en Foundations; en la doc del componente solo van los tokens propios de ese componente.
+
+Tests de story: toda story de prueba se llama `Test — …` y lleva `tags: ['!dev']`. Sigue ejecutándose en `test:stories` (cada story es un test; `play` añade las afirmaciones), pero no aparece en el catálogo ni en las docs: el Storybook solo enseña usos reales.
+
 Chromatic: el token del proyecto NO va en el package.json ni en el repo. Vive en `.env` (ignorado por git) como `CHROMATIC_PROJECT_TOKEN`; el CLI lo lee solo. `pnpm chromatic` publica de verdad — para validar sin consumir snapshots, `npx chromatic --dry-run`.
 
 ## Architecture
@@ -108,22 +112,14 @@ html.dark {
 - `Button` variante `primary` es una excepción deliberada: NO tiene tokens `surface-dark-*` (se quitaron a propósito) — su fondo es `color.accent-1` (lavender) con texto `color.primary`, un par de color autocontenido que no depende de la superficie ambiente, así que se ve y contrasta igual en `.surface-dark`/`html.dark` que en claro. No añadir un override `surface-dark-*` a `button.primary` sin que sea una decisión de diseño explícita — la instrucción vigente es que se mantenga idéntico en ambos temas.
 - Quedan sin **ningún** estilo oscuro definido — ni antes ni ahora — los componentes que nunca lo tuvieron: Toast, Radio, Avatar, Accordion, Popover, Spinner, EmptyState, PasswordField, NumberInput, FileUpload (átomo), NumberBadge, MessageBubble, TypingIndicator, MessageComposer, ConversationThread/List, OrgSwitcher, UserMenu, DatePicker/DateTime/NumberInput fields. Si uno de estos se ve mal en `.surface-dark`/modo oscuro root-level, no es un bug de regresión — es diseño pendiente: hay que decidir el valor oscuro por primera vez y añadir sus tokens `surface-dark-*`, no parchear con CSS a mano en `surface.css`.
 
-### Radix UI — cuándo usarlo
+### Base UI — el motor de conducta
 
-Usar Radix para componentes con **comportamiento complejo**: máquina de estados, gestión de foco, ARIA, teclado. No usarlo para elementos HTML simples que ya son accesibles por defecto.
+Todo comportamiento accesible complejo (menús, popovers, diálogos, tooltips, select, tabs, acordeón, switch, checkbox, radio) se construye sobre **`@base-ui-components/react`**. **Radix queda prohibido** (`@radix-ui/*` no puede aparecer en `src/`): Base UI es su sucesor, de los mismos autores, y el DS no mezcla motores. Reglas:
 
-| Usar Radix | No usar Radix |
-|---|---|
-| Checkbox (`@radix-ui/react-checkbox`) | Button, Input, Textarea, Link |
-| Select (`@radix-ui/react-select`) | Heading, Paragraph, Label, List |
-| Futuros: Tooltip, Dialog, Tabs, Accordion | Arrow, Chevron, Logo, Tag… |
-
-**CSS con Radix:** los componentes Radix usan `data-*` attributes en lugar de pseudo-clases CSS:
-- `data-state="checked"` en lugar de `:checked`
-- `data-disabled` en lugar de `:disabled`
-- `data-state="open"` / `data-state="closed"` para colapsables
-
-**Portales Radix** (Select, InputPhone) renderizan en `document.body`, fuera del árbol DOM de cualquier contenedor con `.surface-dark` anidado — pero SÍ son descendientes de `<html>`, así que heredan correctamente la activación root-level (`[data-theme="dark"]`/`html.dark`) sin configuración adicional. Por eso `Select`/`InputPhone` ya no tienen prop `dark` ni clases `__content--dark`/`__country-content--dark` (eliminadas). Para el caso residual de un Select/InputPhone dentro de un `.surface-dark` **anidado** (no en la raíz del documento), pasar la prop `container` (reenviada a `RadixSelect.Portal.container`) apuntando a un nodo dentro de ese contenedor, para que el portal se monte ahí en vez de en `document.body` y herede la cascada.
+- **`render`, nunca `asChild`.** Para poner las clases y handlers de un componente sobre otro elemento (un `Link` del router, un botón propio) se usa la prop `render` de Base UI o el hook `useRender` (`@base-ui-components/react/use-render`). `Button` lo expone como `render`.
+- **Estados por atributos de Base UI** en el CSS: `[data-open]` / `[data-closed]` en popups, `[data-popup-open]` en triggers, `[data-highlighted]`, `[data-checked]`, `[data-disabled]`. Nada de `[data-state="…"]`.
+- **Posicionamiento**: `Portal` → `Positioner` (side, align, sideOffset) → `Popup`. La variable `--transform-origin` la pone el Positioner.
+- Los `renderLink` que recibe un menú deben propagar **todas** las props que les llegan: el motor inyecta rol, tabIndex y handlers de teclado en el enlace.
 
 ### Textos de componente — siempre prop, nunca cableados
 

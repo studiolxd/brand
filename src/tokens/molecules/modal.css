@@ -3,19 +3,16 @@
  */
 
 :root {
-  --modal-z-index: 1001; /** z-index del panel modal */
-  --modal-backdrop-z-index: 1000; /** z-index del backdrop */
   --modal-width-max: 560px; /** Anchura máxima del panel */
   --modal-max-height: 90dvh; /** Altura máxima del panel modal (dvh para móviles con barra de navegador variable) */
+  --modal-z-index: var(--z-index-modal); /** z-index del panel modal */
+  --modal-backdrop-z-index: var(--z-index-backdrop); /** z-index del backdrop */
   --modal-backdrop-bg: var(--color-black); /** Color del backdrop/scrim */
   --modal-backdrop-opacity: var(--opacity-overlay); /** Opacidad del backdrop (0.6) */
-  --modal-border-radius: var(--border-radius-none); /** Radio del panel */
-  --modal-shadow: var(--shadow-xl); /** Sombra de elevación */
   --modal-padding-block: var(--spacing-6); /** Padding vertical del panel */
   --modal-padding-inline: var(--spacing-6); /** Padding horizontal del panel */
   --modal-header-gap: var(--spacing-4); /** Gap entre título y botón ✕ */
   --modal-title-font-size: var(--font-size-6); /** Tamaño del título (2rem) */
-  --modal-title-font-weight: var(--font-weight-medium); /** Peso del título */
   --modal-transition-duration: var(--motion-duration-base); /** Duración de la animación entrada/salida */
   --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
   --modal-close-color: var(--color-grey-dark); /** Color del botón de cierre */
@@ -23,6 +20,9 @@
   --modal-description-font-size: var(--font-size-2); /** Tamaño de la descripción del modal */
   --modal-description-margin-block-end: var(--spacing-4); /** Separación entre la descripción y el cuerpo del modal */
   --modal-bg: var(--color-background-light); /** Fondo del panel modal */
+  --modal-border-radius: var(--border-radius-default); /** Radio del panel */
+  --modal-shadow: var(--shadow-default); /** Sombra de elevación */
+  --modal-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
   --modal-title-color: var(--color-text-on-light); /** Color del título */
   --modal-close-hover-color: var(--color-text-on-light); /** Color del botón de cierre en hover */
   --modal-description-color: var(--color-text-muted-on-light); /** Color de la descripción del modal */

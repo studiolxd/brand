@@ -1,33 +1,31 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as LinkStories from "./Link.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { linkBaseTokens, linkDarkTokens } from "../../../tokens/components/link";
+import { linkTokens } from "../../../tokens/components/link";
 
 <Meta of={LinkStories} />
 
 # Link
 
-Enlace de texto. Hereda el color del texto circundante por defecto. En reposo muestra subrayado; en hover lo oculta. La variante `external` añade `target="_blank"` con `rel="noopener noreferrer"` de forma automática.
+Enlace de texto. No tiene color propio: es texto del color del texto, y lo que dice «esto se pulsa» es el **subrayado**, que desaparece en hover. Así funciona dentro de un párrafo, en un pie, sobre superficie oscura, sin depender del color.
 
-## Por defecto
+<Canvas of={LinkStories.PorDefecto} />
+<Canvas of={LinkStories.EnTexto} />
 
-<Canvas of={LinkStories.Default} />
+## La base viste a todos los enlaces
 
-## External
+La cara la pone `brand.css` sobre cualquier `<a>`, sin clases: el HTML de un CMS, un markdown o el `<Link>` de Next.js salen iguales. El componente solo añade API: `external` (nueva pestaña con `rel="noopener noreferrer"`) y el reenvío de `ref` y atributos.
 
-<Canvas of={LinkStories.External} />
+<Canvas of={LinkStories.Externo} />
+<Canvas of={LinkStories.SuperficieOscura} />
 
----
+## Botón con cara de enlace
+
+`Button variant="text"` toma su cara de estos mismos tokens (`button.text.*` → `link.*`): una acción que no navega (abrir un panel, deshacer) pero que se lee como un enlace. Y al revés, `Button href` es un `<a>` con cara de botón. Semántica según lo que hace; cara según lo que pide la maqueta.
 
 ## Tokens
 
-### Base
-
-<TokenTable tokens={linkBaseTokens} />
-
-### Oscuro
-
-<TokenTable tokens={linkDarkTokens} />
+<TokenTable tokens={linkTokens} />
 
 ## Props
 

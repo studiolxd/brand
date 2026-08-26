@@ -11,20 +11,10 @@ export const headingDarkTokens: Token[] = [
   { name: '--text-heading-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
 ];
 
-export const paragraphBaseTokens = all.filter(t =>
-  t.name.startsWith('--text-paragraph-') &&
-  !t.name.startsWith('--text-paragraph-small-') &&
-  !t.name.startsWith('--text-paragraph-large-'),
-);
-
 export const paragraphSizeTokens = all.filter(t =>
   t.name.startsWith('--text-paragraph-small-') ||
   t.name.startsWith('--text-paragraph-large-'),
 );
-
-export const paragraphDarkTokens: Token[] = [
-  { name: '--text-paragraph-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
-];
 
 export const listBaseTokens = all.filter(t => t.name.startsWith('--text-list-'));
 

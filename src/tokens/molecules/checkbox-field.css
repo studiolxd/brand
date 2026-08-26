@@ -6,7 +6,6 @@
   --checkbox-field-checkbox-offset: 3px; /** Desplazamiento vertical del checkbox para alinearlo con la primera línea de texto */
   --checkbox-field-cursor: pointer; /** Cursor */
   --checkbox-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
-  --checkbox-field-label-text-transform: none; /** Sin transformación — anula la herencia del label base */
   --checkbox-field-gap: var(--spacing-3); /** Separación entre el checkbox y el texto */
   --checkbox-field-sm-gap: var(--spacing-2); /** Gap — variante sm */
   --checkbox-field-sm-padding-inline: var(--spacing-3); /** Padding inline — variante sm */

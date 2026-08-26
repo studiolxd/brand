@@ -51,7 +51,7 @@ export function SelectField({
     o.value === '' ? { ...o, value: EMPTY_SENTINEL } : o,
   );
 
-  const containerClass = ['select-field', error ? 'select-field--error' : '']
+  const containerClass = ['select-field', error || errorMessage ? 'select-field--error' : '']
     .filter(Boolean)
     .join(' ');
 
@@ -66,6 +66,8 @@ export function SelectField({
         placeholder={placeholder}
         disabled={disabled}
         size={size}
+        aria-describedby={[errorId, helperId].filter(Boolean).join(' ') || undefined}
+        aria-invalid={error || !!errorMessage}
         onValueChange={onValueChange ? (v) => onValueChange(decode(v)) : undefined}
       />
       {errorMessage && (

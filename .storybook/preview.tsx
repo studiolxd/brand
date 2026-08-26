@@ -42,7 +42,37 @@ const preview: Preview = {
 
     options: {
       storySort: {
-        order: ['Foundations', 'Atoms', 'Molecules', 'Organisms', 'Sections', 'Templates', 'Pages'],
+        // Lo revisado arriba; 'Por revisar' al final, como cola de trabajo que
+        // debe menguar: cada componente rehecho sale de ahí y sube a su sitio.
+        order: [
+          // Fundamentos de lo más visible a lo más estructural: primero lo que
+          // define el aspecto (color, letra, aire), luego forma y profundidad,
+          // después comportamiento, y al final las reglas de composición y
+          // contenido. Los que faltan por crear van en su hueco cuando existan.
+          'Foundations',
+          [
+            'Colores',
+            'Tipografía',
+            'Espaciado',
+            'Tallas de componente',
+            'Bordes',
+            'Radio de borde',
+            'Sombras',
+            'Opacidad',
+            'Movimiento',
+            'Puntos de ruptura',
+            'Capas',
+            'Iconografía',
+            'Internacionalización',
+          ],
+          'Atoms',
+          'Molecules',
+          'Organisms',
+          'Sections',
+          'Templates',
+          'Pages',
+          'Por revisar',
+        ],
       },
     },
 

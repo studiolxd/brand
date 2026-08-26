@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Carousel, CarouselSlide } from './Carousel';
 
 const meta: Meta<typeof Carousel> = {
-  title: 'Atoms/Carousel',
+  title: 'Por revisar/Atoms/Carousel',
   component: Carousel,
   parameters: {
     layout: 'fullscreen',

@@ -5,7 +5,7 @@ import { TimeSelect } from './TimeSelect';
 import type { TimeValue } from './TimeSelect';
 
 const meta: Meta<typeof TimeSelect> = {
-  title: 'Atoms/TimeSelect',
+  title: 'Por revisar/Atoms/TimeSelect',
   component: TimeSelect,
   tags: ['autodocs'],
   args: {
@@ -111,7 +111,8 @@ export const ChangeMinute: Story = {
     const triggers = canvas.getAllByRole('combobox');
     await userEvent.click(triggers[1]);
 
-    const listbox = within(document.body).getByRole('listbox');
+    // Base UI abre el popup en el siguiente frame de animación tras el mousedown
+    const listbox = await within(document.body).findByRole('listbox');
     const option30 = within(listbox).getByText('30');
     await userEvent.click(option30);
 
@@ -125,6 +126,7 @@ export const ChangeMinute: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — etiquetas accesibles',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

@@ -1,5 +1,18 @@
 import './Icon.css';
 
+/**
+ * Geometría del glifo `menu` en la retícula de 24: tres líneas de 18 unidades
+ * (margen 3) a 6, 12 y 18. `close` se deriva de ella: es la línea 1 y la 3
+ * giradas 45° sobre el centro, así que sus extremos son centro ± 9·cos(45°).
+ */
+// eslint-disable-next-line react-refresh/only-export-components -- geometría compartida por `menu` y `close`; vive junto al catálogo a propósito
+export const MENU_GLYPH = (() => {
+  const size = 24, inset = 3, rows = [6, 12, 18];
+  const half = ((size - 2 * inset) / 2) * Math.SQRT1_2;
+  const r = (n: number) => Math.round(n * 100) / 100;
+  return { size, inset, rows, step: rows[1] - rows[0], diag: { a: r(size / 2 - half), b: r(size / 2 + half) } };
+})();
+
 const ICONS = {
   arrow: {
     viewBox: '0 0 24 24',
@@ -8,15 +21,34 @@ const ICONS = {
     ),
   },
   chevron: {
-    viewBox: '0 0 12 12',
+    viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 0 L9 6 L3 12" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M6 0 L18 12 L6 24" />
     ),
   },
   close: {
-    viewBox: '0 0 12 12',
+    viewBox: '0 0 24 24',
+    // El aspa es exactamente lo que resulta de girar 45° las líneas 1 y 3 del
+    // glifo `menu` sobre el centro: misma longitud, mismos extremos. Así el
+    // MenuButton anima de uno a otro sin que las dos formas puedan divergir.
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M2 2 L10 10 M10 2 L2 10" />
+      <path
+        vectorEffect="non-scaling-stroke"
+        strokeWidth="1"
+        d={`M${MENU_GLYPH.diag.a} ${MENU_GLYPH.diag.a} L${MENU_GLYPH.diag.b} ${MENU_GLYPH.diag.b} M${MENU_GLYPH.diag.b} ${MENU_GLYPH.diag.a} L${MENU_GLYPH.diag.a} ${MENU_GLYPH.diag.b}`}
+      />
+    ),
+  },
+  menu: {
+    viewBox: '0 0 24 24',
+    // Tres líneas separadas (no un path) para que el MenuButton pueda animar
+    // cada una por su cuenta hasta formar el aspa de `close`.
+    render: () => (
+      <>
+        {MENU_GLYPH.rows.map((y) => (
+          <line key={y} className="icon__line" vectorEffect="non-scaling-stroke" strokeWidth="1" x1={MENU_GLYPH.inset} y1={y} x2={MENU_GLYPH.size - MENU_GLYPH.inset} y2={y} />
+        ))}
+      </>
     ),
   },
   dot: {
@@ -377,9 +409,9 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <>
-        <circle cx="5" cy="12" r="1" fill="currentColor" stroke="none" />
-        <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
-        <circle cx="19" cy="12" r="1" fill="currentColor" stroke="none" />
+        <circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none" />
       </>
     ),
   },

@@ -1,15 +1,34 @@
 import './Icon.css';
+/**
+ * Geometría del glifo `menu` en la retícula de 24: tres líneas de 18 unidades
+ * (margen 3) a 6, 12 y 18. `close` se deriva de ella: es la línea 1 y la 3
+ * giradas 45° sobre el centro, así que sus extremos son centro ± 9·cos(45°).
+ */
+export declare const MENU_GLYPH: {
+    size: number;
+    inset: number;
+    rows: number[];
+    step: number;
+    diag: {
+        a: number;
+        b: number;
+    };
+};
 declare const ICONS: {
     readonly arrow: {
         readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
     readonly chevron: {
-        readonly viewBox: "0 0 12 12";
+        readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
     readonly close: {
-        readonly viewBox: "0 0 12 12";
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
+    readonly menu: {
+        readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
     readonly dot: {

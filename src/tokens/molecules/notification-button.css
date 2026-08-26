@@ -1,0 +1,9 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --notification-button-badge-offset: var(--spacing-2); /** Distancia del borde del botón a la esquina del icono (el aire del icono md en un botón md): el contador se centra ahí */
+  --notification-button-badge-fill: var(--color-error-fill); /** El contador es rojo: el relleno de error del sistema, universal en claro y oscuro */
+  --notification-button-badge-color: var(--color-error-fill-text); /** Cifra sobre el relleno */
+}

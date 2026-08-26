@@ -1,11 +1,23 @@
+import type React from 'react';
 import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Slot } from '@radix-ui/react-slot';
+import { useRender } from '@base-ui-components/react/use-render';
 import { expect, userEvent, within } from 'storybook/test';
 import { Input } from './Input';
 
+/**
+ * Inyecta props sobre su hijo con `useRender` de Base UI, igual que hace el
+ * `FormControl` del DS.
+ */
+function RenderInjector({
+  children,
+  ...props
+}: { children: React.ReactElement<Record<string, unknown>> } & Record<string, unknown>) {
+  return useRender({ render: children, props });
+}
+
 const meta: Meta<typeof Input> = {
-  title: 'Atoms/Input',
+  title: 'Por revisar/Atoms/Input',
   component: Input,
   parameters: {
     layout: 'padded',
@@ -96,6 +108,7 @@ export const FocusVisible: Story = {
  */
 export const RefForwarding: Story = {
   name: 'Test — forwardRef (react-hook-form)',
+  tags: ['!dev'],
   render: () => {
     const ref = useRef<HTMLInputElement>(null);
     return (
@@ -125,15 +138,17 @@ export const RefForwarding: Story = {
 };
 
 /**
- * Test: inyección estilo FormControl vía Radix Slot. `id`, `aria-describedby` y
- * `aria-invalid` inyectados por el Slot exterior aterrizan en el `<input>` real.
+ * Test: inyección estilo FormControl vía `useRender` de Base UI. `id`,
+ * `aria-describedby` y `aria-invalid` inyectados desde fuera aterrizan en el
+ * `<input>` real.
  */
-export const SlotInjection: Story = {
-  name: 'Test — inyección Slot (FormControl)',
+export const RenderInjection: Story = {
+  name: 'Test — inyección render (FormControl)',
+  tags: ['!dev'],
   render: () => (
-    <Slot id="email-input" aria-describedby="email-help" aria-invalid>
+    <RenderInjector id="email-input" aria-describedby="email-help" aria-invalid>
       <Input aria-label="email" />
-    </Slot>
+    </RenderInjector>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -151,6 +166,7 @@ export const SlotInjection: Story = {
  */
 export const PropPassthrough: Story = {
   name: 'Test — className + data-* + type=date',
+  tags: ['!dev'],
   render: () => (
     <Input type="date" className="extra" data-slot="input" aria-label="fecha" />
   ),

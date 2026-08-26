@@ -48,7 +48,7 @@ export function Content({ title, description, sections, contactSection, navItems
           </Button>
         }
       />
-      <main id="main-content" className="content-page__main">
+      <main id="main-content" tabIndex={-1} className="content-page__main">
         <div className="content-page__header">
           <Heading level={1}>{title}</Heading>
           {description && <p className="content-page__description">{description}</p>}

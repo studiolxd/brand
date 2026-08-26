@@ -34,7 +34,7 @@ export declare function SheetFooter({ className, ...props }: React.HTMLAttribute
  * `Modal` no cubre — este no se centra, ocupa un lateral (o el borde superior
  * o inferior) y deja ver el contexto detrás.
  *
- * Radix Dialog aporta el portal, el velo, la trampa de foco y el cierre con
+ * Base UI Dialog aporta el portal, el velo, la trampa de foco y el cierre con
  * Escape; el DS pone la superficie y la dirección de entrada.
  */
 export declare function Sheet({ open, onOpenChange, side, title, titleHidden, description, footer, children, closeLabel, trigger, onAnimationEndCapture, className, }: SheetProps): import("react/jsx-runtime").JSX.Element;

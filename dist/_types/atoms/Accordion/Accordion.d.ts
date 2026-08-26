@@ -21,7 +21,7 @@ type AccordionRootProps = (AccordionSingleProps | AccordionMultipleProps) & {
     className?: string;
     children: ReactNode;
 };
-export declare function Accordion({ className, children, ...props }: AccordionRootProps): import("react/jsx-runtime").JSX.Element;
+export declare function Accordion({ className, children, id, disabled, ...props }: AccordionRootProps): import("react/jsx-runtime").JSX.Element;
 interface AccordionItemProps {
     value: string;
     disabled?: boolean;

@@ -7,13 +7,33 @@ import { avatarTokens } from "../../../tokens/components/avatar";
 
 # Avatar
 
-Imagen circular para representar a un usuario o persona. Renderiza un elemento `<img>` con forma circular mediante el token `--avatar-border-radius` (valor `--border-radius-full`). Usa `object-fit: cover` para recortar la imagen sin deformarla y `flex-shrink: 0` para mantener su tamaño en contextos flexibles. El atributo `alt` es obligatorio para garantizar la accesibilidad.
+La imagen de una persona o de una organización. Con `src`, un `<img>` recortado (`object-fit: cover`); sin ella —o si la imagen falla al cargar— las **iniciales** del nombre sobre el color primario, nunca un icono de imagen rota.
 
-## Por defecto
+<Canvas of={AvatarStories.PorDefecto} />
 
-<Canvas of={AvatarStories.Default} />
+## Tallas
 
----
+Las tres tallas del sistema (Foundations → Tallas): `sm` 32px en barras y menús, `md` 40px por defecto, `lg` 48px en cabeceras de perfil. Un avatar es un elemento cuadrado y toma su lado de la talla, como un botón de icono. Retratos más grandes (una reseña destacada) no son avatares: los pone el componente que los necesita con su propio token.
+
+<Canvas of={AvatarStories.Tallas} />
+
+## Iniciales
+
+Dos letras: las de las dos primeras palabras del nombre, o las dos primeras del nombre único. El cuerpo de letra sigue a la talla (`initials-font-size-*`).
+
+<Canvas of={AvatarStories.Iniciales} />
+
+## Personas y organizaciones
+
+`shape="circle"` (por defecto) para personas; `shape="square"` para logos de organización, con el radio del sistema.
+
+<Canvas of={AvatarStories.Organizacion} />
+<Canvas of={AvatarStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- El nombre accesible es `alt`, o `name` si no hay `alt`: la imagen lo lleva en su `alt`; las iniciales son un `role="img"` con `aria-label`.
+- `alt=""` lo declara decorativo (imagen sin `alt` o iniciales con `aria-hidden`): úsalo cuando el nombre ya está escrito al lado, como en `UserMenu`, para no leerlo dos veces.
 
 ## Tokens
 

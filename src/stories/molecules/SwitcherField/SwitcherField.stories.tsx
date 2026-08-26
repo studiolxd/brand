@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SwitcherField } from './SwitcherField';
 
 const meta: Meta<typeof SwitcherField> = {
-  title: 'Molecules/SwitcherField',
+  title: 'Por revisar/Molecules/SwitcherField',
   component: SwitcherField,
   parameters: {
     layout: 'padded',

@@ -1,0 +1,30 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --dropdown-field-gap: var(--spacing-2); /** Entre la etiqueta y el control, como en el resto de campos */
+  --dropdown-field-content-gap: var(--spacing-2); /** Entre el contenido del control y el chevron */
+  --dropdown-field-height: var(--control-height); /** El control mide la talla del sistema */
+  --dropdown-field-font-family: var(--select-font-family); /** Familia tipográfica: la del Select */
+  --dropdown-field-font-size: var(--select-font-size); /** Cuerpo: el del Select */
+  --dropdown-field-bg: var(--select-bg); /** Fondo del control */
+  --dropdown-field-icon-transition: var(--select-icon-transition); /** Giro del chevron al abrir */
+  --dropdown-field-padding-inline: var(--select-padding-inline); /** Padding inline del control: el del Select */
+  --dropdown-field-font-weight: var(--select-font-weight); /** Peso: el del Select */
+  --dropdown-field-color: var(--select-color); /** Texto del control */
+  --dropdown-field-border-width: var(--select-border-width); /** Borde rectangular, como el Select */
+  --dropdown-field-border-color: var(--select-border-color); /** Color del borde */
+  --dropdown-field-border-radius: var(--select-border-radius); /** Radio: el del Select (rectangular) */
+  --dropdown-field-focus-ring-width: var(--select-focus-ring-width); /** Anillo de foco */
+  --dropdown-field-focus-ring-color: var(--select-focus-ring-color); /** Anillo de foco */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --dropdown-field-color: var(--color-text-on-dark); /** Texto — surface-dark */
+  --dropdown-field-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --dropdown-field-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
+  --dropdown-field-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

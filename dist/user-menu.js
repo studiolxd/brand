@@ -2,78 +2,76 @@
 import './user-menu.css';
 import { Icon as e } from "./icon.js";
 import { Avatar as t } from "./avatar.js";
-import { NumberBadge as n } from "./number-badge.js";
-import { t as r } from "./_shared/dropdownItems.js";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
-import * as s from "@radix-ui/react-dropdown-menu";
+import { t as n } from "./_shared/Separator.js";
+import { NumberBadge as r } from "./number-badge.js";
+import { a as i, i as a, n as o, o as s, r as c, s as l } from "./_shared/dropdownItems.js";
+import { Fragment as u, jsx as d, jsxs as f } from "react/jsx-runtime";
 //#region src/stories/molecules/UserMenu/UserMenu.tsx
-function c({ href: e, children: t, className: n }) {
-	return /* @__PURE__ */ a("a", {
-		href: e,
-		className: n,
-		children: t
+function p({ children: e, ...t }) {
+	return /* @__PURE__ */ d("a", {
+		...t,
+		children: e
 	});
 }
-function l(e) {
+function m(e) {
 	return ["user-menu__item", e ? "user-menu__item--destructive" : ""].filter(Boolean).join(" ");
 }
-function u({ name: u, email: d, avatarUrl: f, notificationCount: p, items: m = [], renderLink: h = c, onOpenChange: g, defaultOpen: _ }) {
-	return /* @__PURE__ */ o(s.Root, {
-		onOpenChange: g,
-		defaultOpen: _,
-		children: [/* @__PURE__ */ a(s.Trigger, {
-			asChild: !0,
-			children: /* @__PURE__ */ o("button", {
-				type: "button",
-				className: "user-menu__trigger",
-				children: [
-					/* @__PURE__ */ o("span", {
-						className: "user-menu__avatar-wrap",
-						children: [/* @__PURE__ */ a(t, {
-							src: f,
-							name: u,
-							alt: "",
-							size: "sm",
-							className: "user-menu__avatar"
-						}), !!p && p > 0 && /* @__PURE__ */ a(n, {
-							count: p,
-							variant: "danger",
-							"aria-label": `${p} notificaciones sin leer`,
-							className: "user-menu__notification-badge"
-						})]
-					}),
-					/* @__PURE__ */ a("span", {
-						className: "user-menu__name",
-						children: u
-					}),
-					/* @__PURE__ */ a(e, {
-						name: "chevron",
-						size: "sm",
-						className: "user-menu__chevron"
-					})
-				]
-			})
-		}), /* @__PURE__ */ a(s.Portal, { children: /* @__PURE__ */ o(s.Content, {
-			className: "user-menu__content",
+function h({ name: h, email: g, avatarUrl: _, notificationCount: v, items: y = [], label: b, compact: x = !1, renderLink: S = p, onOpenChange: C, defaultOpen: w }) {
+	return /* @__PURE__ */ f(a, {
+		onOpenChange: (e) => C?.(e),
+		defaultOpen: w,
+		children: [/* @__PURE__ */ f(c, {
+			className: ["user-menu__trigger", x ? "user-menu__trigger--compact" : ""].filter(Boolean).join(" "),
+			"aria-label": b ?? `Cuenta de ${h}`,
+			children: [
+				/* @__PURE__ */ f("span", {
+					className: "user-menu__avatar-wrap",
+					children: [/* @__PURE__ */ d(t, {
+						src: _,
+						name: h,
+						alt: "",
+						size: "sm"
+					}), !!v && v > 0 && /* @__PURE__ */ d(r, {
+						count: v,
+						variant: "danger",
+						"aria-label": `${v} notificaciones sin leer`,
+						className: "user-menu__notification-badge"
+					})]
+				}),
+				!x && /* @__PURE__ */ d("span", {
+					className: "user-menu__name",
+					children: h
+				}),
+				/* @__PURE__ */ d(e, {
+					name: "chevron",
+					size: "sm",
+					className: "user-menu__chevron"
+				})
+			]
+		}), /* @__PURE__ */ d(s, { children: /* @__PURE__ */ d(i, {
+			className: "user-menu__positioner",
 			sideOffset: 4,
 			align: "start",
-			children: [/* @__PURE__ */ o("div", {
-				className: "user-menu__header",
-				children: [/* @__PURE__ */ a("span", {
-					className: "user-menu__header-name",
-					children: u
-				}), /* @__PURE__ */ a("span", {
-					className: "user-menu__header-email",
-					children: d
-				})]
-			}), m.length > 0 && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(s.Separator, { className: "user-menu__separator" }), r({
-				items: m,
-				itemClass: l,
-				separatorClass: "user-menu__separator",
-				renderLink: h
-			})] })]
+			children: /* @__PURE__ */ f(l, {
+				className: "user-menu__content",
+				children: [/* @__PURE__ */ f("div", {
+					className: "user-menu__header",
+					children: [/* @__PURE__ */ d("span", {
+						className: "user-menu__header-name",
+						children: h
+					}), /* @__PURE__ */ d("span", {
+						className: "user-menu__header-email",
+						children: g
+					})]
+				}), y.length > 0 && /* @__PURE__ */ f(u, { children: [/* @__PURE__ */ d(n, { className: "user-menu__separator" }), o({
+					items: y,
+					itemClass: m,
+					separatorClass: "user-menu__separator",
+					renderLink: S
+				})] })]
+			})
 		}) })]
 	});
 }
 //#endregion
-export { u as UserMenu };
+export { h as UserMenu };

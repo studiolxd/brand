@@ -1,4 +1,4 @@
-import * as RadixTabs from '@radix-ui/react-tabs';
+import { Tabs as BaseTabs } from '@base-ui-components/react/tabs';
 import type { ReactNode } from 'react';
 import './Tabs.css';
 
@@ -16,16 +16,18 @@ export function Tabs({
   orientation = 'horizontal',
   className,
   children,
+  onValueChange,
   ...props
 }: TabsProps) {
   return (
-    <RadixTabs.Root
+    <BaseTabs.Root
       className={['tabs', className].filter(Boolean).join(' ')}
       orientation={orientation}
+      onValueChange={onValueChange ? (value) => onValueChange(value as string) : undefined}
       {...props}
     >
       {children}
-    </RadixTabs.Root>
+    </BaseTabs.Root>
   );
 }
 
@@ -38,7 +40,10 @@ export interface TabsListProps {
 
 export function TabsList({ variant = 'underline', className, children }: TabsListProps) {
   return (
-    <RadixTabs.List
+    <BaseTabs.List
+      // Base UI activa el tab solo con Enter/Espacio por defecto; el DS mantiene
+      // la activación automática al mover el foco con las flechas.
+      activateOnFocus
       className={[
         'tabs__list',
         variant === 'pill' && 'tabs__list--pill',
@@ -48,7 +53,7 @@ export function TabsList({ variant = 'underline', className, children }: TabsLis
         .join(' ')}
     >
       {children}
-    </RadixTabs.List>
+    </BaseTabs.List>
   );
 }
 
@@ -62,13 +67,13 @@ export interface TabsTriggerProps {
 
 export function TabsTrigger({ value, disabled, className, children }: TabsTriggerProps) {
   return (
-    <RadixTabs.Trigger
+    <BaseTabs.Tab
       value={value}
       disabled={disabled}
       className={['tabs__trigger', className].filter(Boolean).join(' ')}
     >
       {children}
-    </RadixTabs.Trigger>
+    </BaseTabs.Tab>
   );
 }
 
@@ -81,11 +86,11 @@ export interface TabsContentProps {
 
 export function TabsContent({ value, className, children }: TabsContentProps) {
   return (
-    <RadixTabs.Content
+    <BaseTabs.Panel
       value={value}
       className={['tabs__content', className].filter(Boolean).join(' ')}
     >
       {children}
-    </RadixTabs.Content>
+    </BaseTabs.Panel>
   );
 }

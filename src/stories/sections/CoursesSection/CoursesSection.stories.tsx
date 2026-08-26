@@ -4,7 +4,7 @@ import { CardSquare } from '../../molecules/CardSquare/CardSquare';
 import { CardSplit } from '../../molecules/CardSplit/CardSplit';
 
 const meta: Meta<typeof CoursesSection> = {
-  title: 'Sections/CoursesSection',
+  title: 'Por revisar/Sections/CoursesSection',
   component: CoursesSection,
   parameters: {
     layout: 'fullscreen',

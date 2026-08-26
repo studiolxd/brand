@@ -3,71 +3,69 @@
  */
 
 :root {
-  --user-menu-avatar-size: 2rem; /** Tamaño del avatar/iniciales en el trigger */
   --user-menu-trigger-hover-bg: rgba(0, 0, 0, 0); /** Fondo del trigger al hover — sin fondo, estilo ghost */
-  --user-menu-content-min-width: 14rem; /** Ancho mínimo del dropdown */
-  --user-menu-initials-font-size: var(--font-size-1); /** Tamaño de texto de las iniciales */
-  --user-menu-initials-font-weight: var(--font-weight-medium); /** Peso de las iniciales */
-  --user-menu-initials-color: var(--color-white); /** Color de texto de las iniciales */
+  --user-menu-content-min-width: 14rem; /** Ancho mínimo del panel: que quepan nombre y correo en una línea (no es una talla de componente) */
   --user-menu-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger */
   --user-menu-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger */
+  --user-menu-trigger-compact-padding-inline: var(--spacing-1); /** Padding horizontal del botón compacto (solo avatar) */
   --user-menu-trigger-gap: var(--spacing-3); /** Espacio entre avatar y nombre */
-  --user-menu-trigger-border-radius: var(--border-radius-sm); /** Radio del trigger */
-  --user-menu-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --user-menu-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --user-menu-name-font-size: var(--font-size-2); /** Tamaño de texto del nombre */
-  --user-menu-name-font-weight: var(--font-weight-medium); /** Peso del nombre */
-  --user-menu-content-z-index: var(--floating-panel-z-index); /** Z-index del dropdown (por encima del sidebar en mobile) */
+  --user-menu-badge-offset: var(--spacing-1); /** Cuánto asoma el badge de notificaciones por la esquina del avatar */
+  --user-menu-header-gap: var(--spacing-1); /** Entre nombre y correo en la cabecera del panel */
   --user-menu-content-padding-block: var(--spacing-2); /** Padding vertical del panel */
   --user-menu-content-padding-inline: var(--spacing-2); /** Padding horizontal del panel */
   --user-menu-header-padding-block: var(--spacing-3); /** Padding vertical de la cabecera del dropdown */
   --user-menu-header-padding-inline: var(--spacing-4); /** Padding horizontal de la cabecera del dropdown */
   --user-menu-header-name-font-size: var(--font-size-2); /** Tamaño del nombre en la cabecera */
-  --user-menu-header-name-font-weight: var(--font-weight-medium); /** Peso del nombre en la cabecera */
   --user-menu-header-email-font-size: var(--font-size-1); /** Tamaño del email en la cabecera */
   --user-menu-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
   --user-menu-item-padding-inline: var(--spacing-4); /** Padding horizontal de cada ítem */
   --user-menu-item-icon-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
-  --user-menu-item-border-radius: var(--border-radius-sm); /** Radio de cada ítem */
   --user-menu-item-font-family: var(--font-family-sans); /** Tipografía de ítems */
   --user-menu-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
-  --user-menu-item-hover-bg: var(--color-grey-lightest); /** Fondo de ítem al hover */
   --user-menu-separator-color: var(--color-grey-light); /** Color del separador */
-  --user-menu-separator-height: var(--border-width-sm); /** Alto del separador */
   --user-menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --user-menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
-  --user-menu-initials-bg: var(--color-primary); /** Fondo del círculo de iniciales */
+  --user-menu-trigger-border-radius: var(--border-radius-default); /** Radio del trigger */
   --user-menu-focus-ring-color: var(--color-primary); /** Color del focus ring */
+  --user-menu-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
+  --user-menu-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
+  --user-menu-name-font-weight: var(--font-weight-emphasis); /** Peso del nombre */
   --user-menu-name-color: var(--color-text-on-light); /** Color del nombre */
-  --user-menu-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
-  --user-menu-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
-  --user-menu-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --user-menu-content-z-index: var(--floating-panel-z-index); /** Z-index del dropdown (por encima del sidebar en mobile) */
+  --user-menu-header-name-font-weight: var(--font-weight-emphasis); /** Peso del nombre en la cabecera */
   --user-menu-header-name-color: var(--color-text-on-light); /** Color del nombre en la cabecera */
   --user-menu-header-email-color: var(--color-text-muted-on-light); /** Color del email en la cabecera */
+  --user-menu-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
   --user-menu-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --user-menu-item-color: var(--color-text-on-light); /** Color de ítems */
-  --user-menu-item-hover-color: var(--color-text-on-light); /** Color de ítem al hover */
   --user-menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de ítem destructivo */
   --user-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover */
   --user-menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Color de ítem destructivo al hover */
+  --user-menu-separator-height: var(--border-width-default); /** Alto del separador */
   --user-menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --user-menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
   --user-menu-content-bg: var(--floating-panel-bg); /** Fondo del panel */
+  --user-menu-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
   --user-menu-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
+  --user-menu-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
+  --user-menu-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --user-menu-item-hover-bg: var(--menu-item-hover-bg); /** Fondo de ítem al hover */
+  --user-menu-item-hover-color: var(--menu-item-hover-color); /** Color de ítem al hover */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
   --user-menu-trigger-hover-bg: rgba(0, 0, 0, 0); /** Fondo del trigger al hover — surface-dark, sin fondo (igual que en claro) */
-  --user-menu-item-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de ítem al hover — surface-dark */
-  --user-menu-separator-color: rgba(255, 255, 255, 0.15); /** Color del separador — surface-dark */
+  --user-menu-separator-color: var(--menu-surface-dark-separator-color); /** Color del separador — surface-dark */
   --user-menu-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --user-menu-name-color: var(--color-text-on-dark); /** Color del nombre — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
   --user-menu-header-name-color: var(--color-text-on-dark); /** Color del nombre en la cabecera del dropdown — surface-dark */
   --user-menu-header-email-color: var(--color-text-muted-on-dark); /** Color del email en la cabecera del dropdown — surface-dark */
   --user-menu-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
-  --user-menu-item-hover-color: var(--color-text-on-dark); /** Color de ítem al hover — surface-dark */
   --user-menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
   --user-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover — surface-dark (fill universal; el texto hover hereda destructive-fill-text) */
+  --user-menu-item-hover-bg: var(--menu-surface-dark-item-hover-bg); /** Fondo de ítem al hover — surface-dark */
+  --user-menu-item-hover-color: var(--menu-surface-dark-item-hover-color); /** Color de ítem al hover — surface-dark */
 }

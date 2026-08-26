@@ -1,14 +1,16 @@
 {
   "font-weight": {
-    "thin":       { "$value": "100", "$type": "number", "$description": "Thin" },
-    "extralight": { "$value": "200", "$type": "number", "$description": "Extra light" },
-    "light":      { "$value": "300", "$type": "number", "$description": "Light" },
-    "regular":    { "$value": "400", "$type": "number", "$description": "Regular" },
-    "medium":     { "$value": "500", "$type": "number", "$description": "Medium" },
-    "semibold":   { "$value": "600", "$type": "number", "$description": "Semibold" },
-    "bold":       { "$value": "700", "$type": "number", "$description": "Bold" },
-    "extrabold":  { "$value": "800", "$type": "number", "$description": "Extra bold" },
-    "black":      { "$value": "900", "$type": "number", "$description": "Black" },
-    "default":    { "$value": "{font-weight.light}", "$type": "number", "$description": "Default text weight — change this to shift the whole system" }
+    "thin":       { "$value": "100", "$type": "number", "$description": "Escala de la fuente variable. El sistema no lo usa" },
+    "extralight": { "$value": "200", "$type": "number", "$description": "Escala de la fuente variable. El sistema no lo usa" },
+    "light":      { "$value": "300", "$type": "number", "$description": "Cuerpo de texto (rol default)" },
+    "regular":    { "$value": "400", "$type": "number", "$description": "Escala de la fuente variable. El sistema no lo usa" },
+    "medium":     { "$value": "500", "$type": "number", "$description": "Títulos y énfasis (rol emphasis)" },
+    "semibold":   { "$value": "600", "$type": "number", "$description": "Escala de la fuente variable. El sistema no lo usa" },
+    "bold":       { "$value": "700", "$type": "number", "$description": "Escala de la fuente variable. El sistema no lo usa" },
+    "extrabold":  { "$value": "800", "$type": "number", "$description": "Escala de la fuente variable. El sistema no lo usa" },
+    "black":      { "$value": "900", "$type": "number", "$description": "Escala de la fuente variable. El sistema no lo usa" },
+
+    "default":    { "$value": "{font-weight.light}",  "$type": "number", "$description": "Rol: cuerpo de texto. Los componentes apuntan aquí, nunca a la escala" },
+    "emphasis":   { "$value": "{font-weight.medium}", "$type": "number", "$description": "Rol: títulos, énfasis local (strong, cifras destacadas), etiquetas. Dobla el trazo del cuerpo a 16px" }
   }
 }

@@ -8,18 +8,17 @@
   box-shadow: var(--popover-shadow);
   padding-block: var(--popover-padding-block);
   padding-inline: var(--popover-padding-inline);
-  z-index: var(--popover-z-index);
   outline: none;
-  transform-origin: var(--radix-popover-content-transform-origin);
+  transform-origin: var(--transform-origin);
   animation-duration: calc(var(--popover-transition-duration) * 1ms);
   animation-timing-function: var(--popover-transition-easing);
 }
 
-.popover[data-state='open'] {
+.popover[data-open] {
   animation-name: popover-in;
 }
 
-.popover[data-state='closed'] {
+.popover[data-closed] {
   animation-name: popover-out;
 }
 
@@ -43,4 +42,9 @@
     opacity: 0;
     transform: scale(0.95);
   }
+}
+
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.popover__positioner {
+  z-index: var(--popover-z-index);
 }

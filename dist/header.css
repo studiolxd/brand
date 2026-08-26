@@ -27,7 +27,7 @@
 
 /* Logo & hamburger sit above backdrop */
 .header__logo,
-.header .hamburger {
+.header .menu-button {
   z-index: var(--header-controls-z-index);
 }
 
@@ -65,7 +65,7 @@
 }
 
 /* Open state — sibling selector on hamburger */
-.hamburger[aria-expanded="true"] ~ .header__navbar {
+.menu-button[aria-expanded="true"] ~ .header__navbar {
   transform: translateY(0);
   visibility: visible;
   transition:
@@ -103,15 +103,11 @@
 }
 
 .header__nav-link:focus-visible {
-  outline: var(--border-width-md) solid var(--color-primary);
+  outline: var(--border-width-focus) solid var(--color-primary);
   outline-offset: var(--spacing-1);
 }
 
 /* ---- Actions ---- */
-
-.header__actions .select {
-  padding-block: var(--button-padding-block);
-}
 
 .header__actions {
   margin-block-start: auto;
@@ -128,7 +124,7 @@
     display: none;
   }
 
-  .header .hamburger {
+  .header .menu-button {
     display: none;
   }
 

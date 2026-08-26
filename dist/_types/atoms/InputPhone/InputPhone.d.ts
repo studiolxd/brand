@@ -1,4 +1,4 @@
-import * as RadixSelect from '@radix-ui/react-select';
+import { Select as BaseSelect } from '@base-ui-components/react/select';
 import type { Country } from 'react-phone-number-input';
 import './InputPhone.css';
 interface InputPhoneProps {
@@ -19,14 +19,14 @@ interface InputPhoneProps {
      */
     countryLabel?: string;
     /**
-     * Nodo DOM donde montar el portal del dropdown de país (reenviado a Radix
-     * `Portal.container`). Por defecto se monta en `document.body`, que
+     * Nodo DOM donde montar el portal del dropdown de país (reenviado a
+     * `Select.Portal` de Base UI). Por defecto se monta en `document.body`, que
      * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
      * sin configuración adicional. Solo hace falta pasarlo cuando el
      * InputPhone vive dentro de un `.surface-dark` **anidado** (no en la
      * raíz), ya que ese contexto no llega a `document.body` por la cascada.
      */
-    container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
+    container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 export declare function InputPhone({ value, defaultCountry, placeholder, disabled, error, size, id, name, describedBy, onChange, onBlur, countryLabel, container, }: InputPhoneProps): import("react/jsx-runtime").JSX.Element;
 export {};

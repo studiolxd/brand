@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Legal } from './Legal';
 
 const meta: Meta<typeof Legal> = {
-  title: 'Templates/Legal',
+  title: 'Por revisar/Templates/Legal',
   component: Legal,
   parameters: { layout: 'fullscreen' },
 };

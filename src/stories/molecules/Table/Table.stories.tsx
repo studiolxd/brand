@@ -4,7 +4,7 @@ import { expect, within } from 'storybook/test';
 import { Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell } from './Table';
 
 const meta: Meta<typeof Table> = {
-  title: 'Molecules/Table',
+  title: 'Por revisar/Molecules/Table',
   component: Table,
   parameters: {
     layout: 'padded',
@@ -20,6 +20,7 @@ type Story = StoryObj<typeof Table>;
  */
 export const NamedExports: Story = {
   name: 'Test — named exports (RSC-safe)',
+  tags: ['!dev'],
   render: () => (
     <Table caption="Named exports">
       <TableHead>
@@ -54,6 +55,7 @@ export const NamedExports: Story = {
  */
 export const PropPassthrough: Story = {
   name: 'Test — rest-spread + caption opcional',
+  tags: ['!dev'],
   render: () => (
     <Table aria-label="Proyectos" data-slot="table" className="extra">
       <Table.Body data-slot="tbody">
@@ -261,6 +263,7 @@ export const Sm: Story = {
  */
 export const EtiquetasOrdenacion: Story = {
   name: 'Test — etiquetas de ordenación',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

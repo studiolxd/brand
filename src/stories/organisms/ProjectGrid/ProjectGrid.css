@@ -22,7 +22,7 @@
 .project-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--border-width-sm);
+  gap: var(--border-width-default);
   background-color: var(--color-background-dark);
 }
 
@@ -90,7 +90,6 @@
 
 /* ─── Cards no-destacadas: tamaño reducido ───────────────── */
 .project-grid .project-card:not(:first-child) .project-card__cta .button {
-  padding-block: var(--button-primary-padding-block);
   padding-inline: var(--button-primary-padding-inline);
   font-size: var(--button-primary-font-size);
 }

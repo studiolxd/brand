@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Slot } from '@radix-ui/react-slot';
+import { useRender } from '@base-ui-components/react/use-render';
 import './Button.css';
 
 export interface ButtonProps
@@ -28,8 +28,12 @@ export interface ButtonProps
   href?: string;
   /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
   external?: boolean;
-  /** Merges props onto the child element instead of rendering a wrapper (e.g. Next.js Link) */
-  asChild?: boolean;
+  /**
+   * Elemento sobre el que renderizar el botón (p. ej. `<Link href="…" />` de
+   * Next.js): recibe las clases y los handlers del Button. Sustituye al
+   * patrón `asChild`.
+   */
+  render?: React.ReactElement<Record<string, unknown>>;
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye) */
   className?: string;
 }
@@ -46,7 +50,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   onClick,
   href,
   external = false,
-  asChild = false,
+  render,
   className,
   ...rest
 }, ref) {
@@ -60,18 +64,18 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
     className ?? '',
   ].filter(Boolean).join(' ');
 
-  if (asChild) {
-    return (
-      <Slot
-        ref={ref}
-        className={classes}
-        onClick={onClick as React.MouseEventHandler<HTMLElement>}
-        {...(rest as React.HTMLAttributes<HTMLElement>)}
-      >
-        {children}
-      </Slot>
-    );
-  }
+  const rendered = useRender({
+    render,
+    ref,
+    enabled: render !== undefined,
+    props: {
+      className: classes,
+      onClick: onClick as React.MouseEventHandler<HTMLElement>,
+      ...(rest as Record<string, unknown>),
+      children,
+    },
+  });
+  if (rendered) return rendered;
 
   if (href !== undefined) {
     return (

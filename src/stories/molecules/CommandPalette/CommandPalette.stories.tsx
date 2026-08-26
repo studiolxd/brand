@@ -5,7 +5,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { CommandPalette, type CommandPaletteGroup } from './CommandPalette';
 
 const meta = {
-  title: 'Molecules/CommandPalette',
+  title: 'Por revisar/Molecules/CommandPalette',
   component: CommandPalette,
 } satisfies Meta<typeof CommandPalette>;
 

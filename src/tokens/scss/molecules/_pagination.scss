@@ -13,7 +13,7 @@ $lxd-pagination-summary-color: #111e30; // Color del texto de total de resultado
 $lxd-pagination-btn-min-width: 2rem; // Ancho mínimo de los botones de página
 $lxd-pagination-btn-padding-block: 0.5rem; // Padding vertical de los botones
 $lxd-pagination-btn-padding-inline: 0.5rem; // Padding horizontal de los botones
-$lxd-pagination-btn-radius: 4px; // Radio de borde de los botones
+$lxd-pagination-btn-radius: 0px; // Radio de borde de los botones
 $lxd-pagination-btn-color: #111e30; // Color de texto de los botones
 $lxd-pagination-btn-bg: rgba(0, 0, 0, 0); // Fondo de los botones
 $lxd-pagination-btn-hover-bg: rgba(0, 0, 0, 0); // Fondo en hover — ghost style, sin cambio de fondo
@@ -22,7 +22,7 @@ $lxd-pagination-btn-hover-text-decoration: underline; // Decoración de texto en
 $lxd-pagination-btn-current-bg: rgba(0, 0, 0, 0); // Fondo de la página activa — sin fondo
 $lxd-pagination-btn-current-color: #111e30; // Texto de la página activa
 $lxd-pagination-btn-current-font-weight: 500; // Peso tipográfico de la página activa
-$lxd-pagination-btn-disabled-color: #767676; // Texto cuando está deshabilitado
+$lxd-pagination-btn-disabled-color: #6b6b6b; // Texto cuando está deshabilitado
 $lxd-pagination-btn-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
 $lxd-pagination-ellipsis-color: #4a4a4a; // Color del ellipsis
 $lxd-pagination-focus-ring-color: #111e30; // Color del focus ring

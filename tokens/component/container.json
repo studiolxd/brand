@@ -1,0 +1,17 @@
+{
+  "container": {
+    "padding-inline":     { "$value": "{section.padding-inline}", "$type": "dimension", "$description": "Aire lateral entre el borde de la pantalla y el contenido" },
+
+    "max-width-md":       { "$value": "{breakpoint.md}",    "$type": "dimension", "$description": "Ancho del contenido — estrecho" },
+    "max-width-lg":       { "$value": "{breakpoint.lg}",    "$type": "dimension", "$description": "Ancho del contenido — medio" },
+    "max-width-xl":       { "$value": "{breakpoint.xl}",    "$type": "dimension", "$description": "Ancho del contenido — estándar de página pública" },
+    "max-width-2xl":      { "$value": "{breakpoint.2xl}",   "$type": "dimension", "$description": "Ancho del contenido — amplio" },
+    "max-width-3xl":      { "$value": "{breakpoint.3xl}",   "$type": "dimension", "$description": "Ancho del contenido — casi a sangre" },
+
+    "padding-block-sm":   { "$value": "{section.padding-block.sm}",  "$type": "dimension", "$description": "Aire vertical compacto" },
+    "padding-block-md":   { "$value": "{section.padding-block.md}",  "$type": "dimension", "$description": "Aire vertical base" },
+    "padding-block-lg":   { "$value": "{section.padding-block.lg}",  "$type": "dimension", "$description": "Aire vertical medio" },
+    "padding-block-xl":   { "$value": "{section.padding-block.xl}",  "$type": "dimension", "$description": "Aire vertical amplio — banda de sección estándar" },
+    "padding-block-2xl":  { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire vertical extra — bandas destacadas" }
+  }
+}

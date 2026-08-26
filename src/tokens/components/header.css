@@ -7,31 +7,31 @@
   --header-height-inline: 6.25rem; /** Alto del header cuando la nav está en línea */
   --header-logo-height-overlay: 3.75rem; /** Alto del logo en modo overlay */
   --header-logo-height-inline: 3.75rem; /** Alto del logo en modo inline */
-  --header-z-index: 1000; /** Z-index del header */
-  --header-controls-z-index: 1001; /** Z-index del logo y hamburger (sobre el backdrop) */
-  --header-navbar-z-index: 998; /** Z-index del overlay de navegación */
-  --header-backdrop-z-index: 999; /** Z-index del pseudo-elemento backdrop */
   --header-nav-gap-overlay: 0; /** Separación entre enlaces en modo overlay */
   --header-featured-border-color: currentColor; /** Color del borde del featured link */
-  --header-shadow: var(--shadow-lg); /** Sombra del header */
+  --header-z-index: var(--z-index-bar); /** Z-index del header */
+  --header-controls-z-index: var(--z-index-floating); /** Z-index del logo y hamburger (sobre el backdrop) */
+  --header-navbar-z-index: var(--z-index-modal); /** Z-index del overlay de navegación */
+  --header-backdrop-z-index: var(--z-index-backdrop); /** Z-index del pseudo-elemento backdrop */
   --header-navbar-transition-duration: var(--motion-duration-base); /** Duración del slide de la navbar */
   --header-navbar-transition-easing: var(--motion-easing-in-out); /** Easing del slide de la navbar */
   --header-nav-font-size-overlay: var(--font-size-5); /** Tamaño de fuente de los enlaces en modo overlay */
   --header-nav-font-size-inline: var(--font-size-2); /** Tamaño de fuente de los enlaces en modo inline */
-  --header-nav-font-weight-overlay: var(--font-weight-medium); /** Peso de fuente de los enlaces en modo overlay */
-  --header-nav-font-weight-inline: var(--font-weight-medium); /** Peso de fuente de los enlaces en modo inline */
   --header-nav-gap-inline: var(--spacing-4); /** Separación entre enlaces en modo inline */
   --header-nav-padding-block-overlay: var(--spacing-3); /** Padding vertical de la zona de nav en modo overlay */
   --header-nav-padding-inline: var(--spacing-4); /** Padding horizontal del header y la navbar — igual que section-padding-inline */
   --header-actions-gap-overlay: var(--spacing-3); /** Separación entre los elementos de actions en modo overlay */
   --header-actions-gap-inline: var(--spacing-3); /** Separación entre los elementos de actions en modo inline */
-  --header-featured-border-width: var(--border-width-sm); /** Grosor del borde del featured link */
   --header-featured-font-size: var(--font-size-4); /** Tamaño de fuente del featured link */
-  --header-featured-font-weight: var(--font-weight-medium); /** Peso de fuente del featured link */
   --header-featured-padding-inline: var(--spacing-7); /** Padding horizontal del featured link */
   --header-featured-margin-inline-end: var(--spacing-7); /** Separación entre el featured link y la navegación */
   --header-bg: var(--color-background-light); /** Fondo del header */
+  --header-shadow: var(--shadow-default); /** Sombra del header */
+  --header-nav-font-weight-overlay: var(--font-weight-emphasis); /** Peso de fuente de los enlaces en modo overlay */
+  --header-nav-font-weight-inline: var(--font-weight-emphasis); /** Peso de fuente de los enlaces en modo inline */
   --header-nav-color: var(--color-text-on-light); /** Color de los enlaces de navegación */
+  --header-featured-border-width: var(--border-width-default); /** Grosor del borde del featured link */
+  --header-featured-font-weight: var(--font-weight-emphasis); /** Peso de fuente del featured link */
 }
 
 .surface-dark,

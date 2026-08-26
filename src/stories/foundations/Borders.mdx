@@ -1,0 +1,34 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { TokenTable } from "./TokenTable";
+import { widthRoleTokens, widthScaleTokens } from "../../tokens/border";
+
+<Meta title="Foundations/Bordes" />
+
+# Bordes
+
+**Todo borde del sistema mide 1px.** Campos, tarjetas, separadores, cabeceras de tabla, indicadores: un solo grosor, expresado como rol. Los componentes apuntan al rol, nunca a un número.
+
+| Rol | Valor | Uso |
+|---|---|---|
+| `--border-width-default` | 1px | Cualquier borde |
+| `--border-width-focus` | 2px | Solo el anillo de foco: su ancho y su separación del control |
+
+## El anillo de foco no es un borde
+
+El 2px existe por accesibilidad, no por estilo. WCAG 2.4.13 pide que el indicador de foco tenga un perímetro de al menos 2px para que sea visible sin depender del color; por eso el rol `focus` gobierna el `outline` y el `outline-offset` de todo lo enfocable —botones, campos, enlaces, pestañas, días del calendario— y nada más. Un borde de 2px en cualquier otro sitio no está en el sistema.
+
+El color del anillo lo pone cada componente según su superficie (primario en claro, blanco en oscuro); el grosor es el mismo en todas partes.
+
+---
+
+## Tokens
+
+### Roles
+
+<TokenTable tokens={widthRoleTokens} />
+
+### Escala
+
+<TokenTable tokens={widthScaleTokens} />
+
+Definidos en `tokens/border/width.json`.

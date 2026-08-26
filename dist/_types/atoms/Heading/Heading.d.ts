@@ -1,18 +1,22 @@
 import './Heading.css';
-type HeadingWeight = 'thin' | 'extralight' | 'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
-type HeadingSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-interface HeadingProps {
-    /** Nivel semántico del encabezado (h1–h6). */
-    level?: 1 | 2 | 3 | 4 | 5 | 6;
-    /** Peso tipográfico. Por defecto hereda el token del nivel (300). */
-    weight?: HeadingWeight;
-    /** Tamaño tipográfico. Por defecto usa el tamaño del nivel. */
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+export type HeadingSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export interface HeadingProps {
+    /** Nivel semántico del encabezado (`h1`–`h6`). Fija también el tamaño, salvo que `size` lo desacople. */
+    level?: HeadingLevel;
+    /**
+     * Tamaño de la escala tipográfica (1–10), independiente del nivel. Para cuando
+     * el esquema del documento pide un `h2` pero la maqueta pide el tamaño de un
+     * `h5` (el título de una tarjeta, por ejemplo).
+     */
     size?: HeadingSize;
-    /** Clases adicionales para el elemento. */
     className?: string;
-    /** Identificador HTML del elemento. */
     id?: string;
     children: React.ReactNode;
 }
-export declare function Heading({ level, weight, size, className, id, children }: HeadingProps): import("react/jsx-runtime").JSX.Element;
-export {};
+/**
+ * Encabezado semántico. El nivel dice qué es en el esquema del documento; el
+ * tamaño, por defecto, sale del nivel. El peso es siempre el de énfasis del
+ * sistema: un título no elige su peso.
+ */
+export declare function Heading({ level, size, className, id, children }: HeadingProps): import("react/jsx-runtime").JSX.Element;

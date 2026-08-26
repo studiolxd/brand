@@ -1,17 +1,17 @@
 'use client';
 import './time-select.css';
-import { Select as e } from "./select.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { useMemo as r } from "react";
+import { t as e } from "./_shared/Select.js";
+import { useMemo as t } from "react";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/atoms/TimeSelect/TimeSelect.tsx
 function i(e) {
 	return String(e).padStart(2, "0");
 }
 function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f, hoursLabel: p = "Horas", minutesLabel: m = "Minutos", hoursPlaceholder: h = "HH", minutesPlaceholder: g = "MM" }) {
-	let _ = r(() => Array.from({ length: 24 }, (e, t) => ({
+	let _ = t(() => Array.from({ length: 24 }, (e, t) => ({
 		value: String(t),
 		label: i(t)
-	})), []), v = r(() => {
+	})), []), v = t(() => {
 		let e = [];
 		for (let t = 0; t < 60; t += s) e.push({
 			value: String(t),
@@ -31,10 +31,10 @@ function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, re
 			m: parseInt(e, 10)
 		});
 	}, x = ["time-select", d ? "time-select--error" : ""].filter(Boolean).join(" "), S = a == null ? void 0 : String(a.h), C = a == null ? void 0 : String(a.m);
-	return /* @__PURE__ */ n("div", {
+	return /* @__PURE__ */ r("div", {
 		className: x,
 		children: [
-			/* @__PURE__ */ t(e, {
+			/* @__PURE__ */ n(e, {
 				id: f,
 				options: _,
 				value: S,
@@ -45,12 +45,12 @@ function a({ value: a, onChange: o, step: s = 5, size: c = "md", disabled: l, re
 				"aria-label": p,
 				onValueChange: y
 			}),
-			/* @__PURE__ */ t("span", {
+			/* @__PURE__ */ n("span", {
 				className: "time-select__sep",
 				"aria-hidden": "true",
 				children: ":"
 			}),
-			/* @__PURE__ */ t(e, {
+			/* @__PURE__ */ n(e, {
 				options: v,
 				value: C,
 				placeholder: g,

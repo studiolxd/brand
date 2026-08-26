@@ -1,5 +1,4 @@
 import { type ComponentProps } from 'react';
-import { Slot } from '@radix-ui/react-slot';
 import { type ControllerProps, type FieldPath, type FieldValues } from 'react-hook-form';
 import { Label } from '../../atoms/Label/Label';
 import './FormField.css';
@@ -40,7 +39,9 @@ export declare function FormLabel({ ...props }: ComponentProps<typeof Label>): i
  * propio: fusiona en su hijo el `id`, el `aria-describedby` y el
  * `aria-invalid` que corresponden al campo.
  */
-export declare function FormControl({ ...props }: ComponentProps<typeof Slot>): import("react/jsx-runtime").JSX.Element;
+export declare function FormControl({ children, ...props }: {
+    children: React.ReactElement<Record<string, unknown>>;
+} & Record<string, unknown>): import("react").ReactElement<unknown, string | import("react").JSXElementConstructor<any>>;
 /** Texto de ayuda del campo, enlazado al control por `aria-describedby`. */
 export declare function FormDescription({ className, ...props }: ComponentProps<'p'>): import("react/jsx-runtime").JSX.Element;
 /**

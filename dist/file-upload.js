@@ -1,8 +1,8 @@
 'use client';
 import './file-upload.css';
 import { VisuallyHidden as e } from "./visually-hidden.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { useCallback as r, useEffect as i, useId as a, useRef as o, useState as s } from "react";
+import { useCallback as t, useEffect as n, useId as r, useRef as i, useState as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/atoms/FileUpload/FileUpload.tsx
 function c(e) {
 	return e < 1024 ? `${e} B` : e < 1024 * 1024 ? `${(e / 1024).toFixed(1)} KB` : `${(e / (1024 * 1024)).toFixed(1)} MB`;
@@ -21,16 +21,16 @@ function f(e) {
 	t && (URL.revokeObjectURL(t), u.delete(e));
 }
 function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, defaultValue: _ = [], onChange: v, progress: y, disabled: b = !1, error: x = !1, id: S, name: C, describedBy: w, ariaLabel: T, dropzoneLabel: E = "Arrastra archivos aquí", dropzoneActiveLabel: D = "Suelta los archivos aquí", dropzoneHintLabel: O = "o haz clic para seleccionar", maxSizeHint: k = (e) => `máx. ${e}`, maxFilesHint: A = (e) => `hasta ${e} archivos`, filesLabel: j = "Archivos seleccionados", progressLabel: ee = "Progreso de subida", removeFileLabel: M = (e) => `Eliminar ${e}`, tooLargeError: N = (e) => `Archivo demasiado grande (máx. ${e})`, invalidTypeError: P = "Tipo de archivo no permitido" }) {
-	let F = g !== void 0, [I, L] = s(_), [R, z] = s(/* @__PURE__ */ new Map()), [B, V] = s(!1), H = o(/* @__PURE__ */ new Set()), U = o(null), W = a(), G = S ?? `file-upload-${W}`, K = F ? g : I;
-	i(() => {
+	let F = g !== void 0, [I, L] = a(_), [R, z] = a(/* @__PURE__ */ new Map()), [B, V] = a(!1), H = i(/* @__PURE__ */ new Set()), U = i(null), W = r(), G = S ?? `file-upload-${W}`, K = F ? g : I;
+	n(() => {
 		K.forEach((e) => H.current.add(e));
-	}, [K]), i(() => {
+	}, [K]), n(() => {
 		let e = H.current;
 		return () => {
 			e.forEach(f);
 		};
 	}, []);
-	let q = r((e) => {
+	let q = t((e) => {
 		if (b) return;
 		let t = Array.from(e), n = F ? g ?? [] : I, r = new Map(R), i = [...n];
 		for (let e of t) {
@@ -51,7 +51,7 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 		v,
 		N,
 		P
-	]), J = r((e) => {
+	]), J = t((e) => {
 		let t = (F ? g ?? [] : I).filter((t) => t !== e), n = new Map(R);
 		n.delete(e), f(e), z(n), F || L(t), v?.(t.filter((e) => !n.has(e))), U.current && (U.current.value = "");
 	}, [
@@ -79,10 +79,10 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 		b ? "file-upload--disabled" : "",
 		K.length > 0 ? "file-upload--has-files" : ""
 	].filter(Boolean).join(" "), $ = [];
-	return p && $.push(p), m && $.push(k(c(m))), u && h && $.push(A(h)), /* @__PURE__ */ n("div", {
+	return p && $.push(p), m && $.push(k(c(m))), u && h && $.push(A(h)), /* @__PURE__ */ s("div", {
 		className: re,
 		children: [
-			/* @__PURE__ */ t(e, { children: /* @__PURE__ */ t("input", {
+			/* @__PURE__ */ o(e, { children: /* @__PURE__ */ o("input", {
 				ref: U,
 				type: "file",
 				id: G,
@@ -95,7 +95,7 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 				onChange: Y,
 				tabIndex: -1
 			}) }),
-			/* @__PURE__ */ n("div", {
+			/* @__PURE__ */ s("div", {
 				className: "file-upload__dropzone",
 				onClick: te,
 				onKeyDown: ne,
@@ -106,7 +106,7 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 				tabIndex: b ? -1 : 0,
 				"aria-disabled": b || void 0,
 				children: [
-					/* @__PURE__ */ n("svg", {
+					/* @__PURE__ */ s("svg", {
 						className: "file-upload__icon",
 						xmlns: "http://www.w3.org/2000/svg",
 						width: "24",
@@ -119,9 +119,9 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 						strokeLinejoin: "round",
 						"aria-hidden": "true",
 						children: [
-							/* @__PURE__ */ t("path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }),
-							/* @__PURE__ */ t("polyline", { points: "17 8 12 3 7 8" }),
-							/* @__PURE__ */ t("line", {
+							/* @__PURE__ */ o("path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }),
+							/* @__PURE__ */ o("polyline", { points: "17 8 12 3 7 8" }),
+							/* @__PURE__ */ o("line", {
 								x1: "12",
 								y1: "3",
 								x2: "12",
@@ -129,35 +129,35 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 							})
 						]
 					}),
-					/* @__PURE__ */ t("span", {
+					/* @__PURE__ */ o("span", {
 						className: "file-upload__text",
 						children: B ? D : E
 					}),
-					/* @__PURE__ */ t("span", {
+					/* @__PURE__ */ o("span", {
 						className: "file-upload__text file-upload__text--secondary",
 						children: O
 					}),
-					$.length > 0 && /* @__PURE__ */ t("span", {
+					$.length > 0 && /* @__PURE__ */ o("span", {
 						className: "file-upload__subtext",
 						children: $.join(" · ")
 					})
 				]
 			}),
-			K.length > 0 && /* @__PURE__ */ t("ul", {
+			K.length > 0 && /* @__PURE__ */ o("ul", {
 				className: "file-upload__list",
 				"aria-label": j,
-				children: K.map((e, r) => {
-					let i = R.get(e), a = d(e);
-					return /* @__PURE__ */ n("li", {
-						className: `file-upload__item${i ? " file-upload__item--error" : ""}`,
+				children: K.map((e, t) => {
+					let n = R.get(e), r = d(e);
+					return /* @__PURE__ */ s("li", {
+						className: `file-upload__item${n ? " file-upload__item--error" : ""}`,
 						children: [
-							/* @__PURE__ */ t("div", {
+							/* @__PURE__ */ o("div", {
 								className: "file-upload__item-thumb",
 								"aria-hidden": "true",
-								children: a ? /* @__PURE__ */ t("img", {
-									src: a,
+								children: r ? /* @__PURE__ */ o("img", {
+									src: r,
 									alt: ""
-								}) : /* @__PURE__ */ n("svg", {
+								}) : /* @__PURE__ */ s("svg", {
 									xmlns: "http://www.w3.org/2000/svg",
 									width: "20",
 									height: "20",
@@ -167,33 +167,33 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 									strokeWidth: "1.5",
 									strokeLinecap: "round",
 									strokeLinejoin: "round",
-									children: [/* @__PURE__ */ t("path", { d: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }), /* @__PURE__ */ t("polyline", { points: "14 2 14 8 20 8" })]
+									children: [/* @__PURE__ */ o("path", { d: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }), /* @__PURE__ */ o("polyline", { points: "14 2 14 8 20 8" })]
 								})
 							}),
-							/* @__PURE__ */ n("div", {
+							/* @__PURE__ */ s("div", {
 								className: "file-upload__item-info",
 								children: [
-									/* @__PURE__ */ t("span", {
+									/* @__PURE__ */ o("span", {
 										className: "file-upload__item-name",
 										children: e.name
 									}),
-									/* @__PURE__ */ t("span", {
+									/* @__PURE__ */ o("span", {
 										className: "file-upload__item-size",
 										children: c(e.size)
 									}),
-									i && /* @__PURE__ */ t("span", {
+									n && /* @__PURE__ */ o("span", {
 										className: "file-upload__item-error-msg",
 										role: "alert",
-										children: i
+										children: n
 									})
 								]
 							}),
-							/* @__PURE__ */ t("button", {
+							/* @__PURE__ */ o("button", {
 								className: "file-upload__item-remove",
 								type: "button",
 								onClick: () => J(e),
 								"aria-label": M(e.name),
-								children: /* @__PURE__ */ n("svg", {
+								children: /* @__PURE__ */ s("svg", {
 									xmlns: "http://www.w3.org/2000/svg",
 									width: "16",
 									height: "16",
@@ -204,12 +204,12 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 									strokeLinecap: "round",
 									strokeLinejoin: "round",
 									"aria-hidden": "true",
-									children: [/* @__PURE__ */ t("line", {
+									children: [/* @__PURE__ */ o("line", {
 										x1: "18",
 										y1: "6",
 										x2: "6",
 										y2: "18"
-									}), /* @__PURE__ */ t("line", {
+									}), /* @__PURE__ */ o("line", {
 										x1: "6",
 										y1: "6",
 										x2: "18",
@@ -218,17 +218,17 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 								})
 							})
 						]
-					}, `${e.name}-${e.size}-${r}`);
+					}, `${e.name}-${e.size}-${t}`);
 				})
 			}),
-			y !== void 0 && /* @__PURE__ */ t("div", {
+			y !== void 0 && /* @__PURE__ */ o("div", {
 				className: "file-upload__progress",
 				role: "progressbar",
 				"aria-valuenow": y,
 				"aria-valuemin": 0,
 				"aria-valuemax": 100,
 				"aria-label": ee,
-				children: /* @__PURE__ */ t("div", {
+				children: /* @__PURE__ */ o("div", {
 					className: "file-upload__progress-bar",
 					style: { "--file-upload-progress": `${y}%` }
 				})

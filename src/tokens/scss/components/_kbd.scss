@@ -2,12 +2,12 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-kbd-min-size: 1.75rem; // Tamaño mínimo (28px) — mantiene las teclas de un solo carácter casi cuadradas
-$lxd-kbd-border-radius: 4px; // Esquinas suaves de keycap (4px)
+$lxd-kbd-border-radius: 0px; // Esquinas suaves de keycap (4px)
 $lxd-kbd-border-width: 1px; // Grosor del borde
 $lxd-kbd-border-color: #d0d0d0; // Borde del keycap
 $lxd-kbd-bg: #f2f2f2; // Fondo del keycap
 $lxd-kbd-color: #111e30; // Color del símbolo de la tecla
-$lxd-kbd-shadow: 0 1px 2px rgba(17,30,48,0.08); // Sombra sutil que da profundidad de tecla física
+$lxd-kbd-shadow: none; // Sombra sutil que da profundidad de tecla física
 $lxd-kbd-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada (Google Sans Code) — alineada con contenido técnico
 $lxd-kbd-font-size: 1rem; // 16px — tamaño md (por defecto)
 $lxd-kbd-font-weight: 500; // Peso medio para legibilidad en tamaño compacto

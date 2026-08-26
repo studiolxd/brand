@@ -1,10 +1,10 @@
 'use client';
 import './button.css';
-import { jsx as e } from "react/jsx-runtime";
+import { t as e } from "./_shared/useRender.js";
 import { forwardRef as t } from "react";
-import { Slot as n } from "@radix-ui/react-slot";
+import { jsx as n } from "react/jsx-runtime";
 //#region src/stories/atoms/Button/Button.tsx
-var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md", block: a = !1, iconOnly: o = !1, children: s, type: c = "button", disabled: l, onClick: u, href: d, external: f = !1, asChild: p = !1, className: m, ...h }, g) {
+var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md", block: a = !1, iconOnly: o = !1, children: s, type: c = "button", disabled: l, onClick: u, href: d, external: f = !1, render: p, className: m, ...h }, g) {
 	let _ = [
 		"button",
 		`button--${t}`,
@@ -14,13 +14,17 @@ var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md"
 		o ? "button--icon-only" : "",
 		m ?? ""
 	].filter(Boolean).join(" ");
-	return p ? /* @__PURE__ */ e(n, {
+	return e({
+		render: p,
 		ref: g,
-		className: _,
-		onClick: u,
-		...h,
-		children: s
-	}) : d === void 0 ? /* @__PURE__ */ e("button", {
+		enabled: p !== void 0,
+		props: {
+			className: _,
+			onClick: u,
+			...h,
+			children: s
+		}
+	}) || (d === void 0 ? /* @__PURE__ */ n("button", {
 		ref: g,
 		className: _,
 		type: c,
@@ -28,7 +32,7 @@ var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md"
 		onClick: u,
 		...h,
 		children: s
-	}) : /* @__PURE__ */ e("a", {
+	}) : /* @__PURE__ */ n("a", {
 		ref: g,
 		className: _,
 		href: l ? void 0 : d,
@@ -40,7 +44,7 @@ var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md"
 		} : {},
 		...h,
 		children: s
-	});
+	}));
 });
 //#endregion
 export { r as Button };

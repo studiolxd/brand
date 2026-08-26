@@ -3,10 +3,10 @@
  */
 
 :root {
-  --section-padding-inline: var(--spacing-4); /** Padding horizontal estándar de las secciones de página */
-  --section-padding-block-sm: var(--spacing-3); /** Padding vertical compacto — secciones con poco aire */
-  --section-padding-block-md: var(--spacing-4); /** Padding vertical base — igual que padding-inline; celdas internas */
-  --section-padding-block-lg: var(--spacing-6); /** Padding vertical medio — introductions, bloques internos */
-  --section-padding-block-xl: var(--spacing-7); /** Padding vertical amplio — wrapper de sección estándar */
-  --section-padding-block-2xl: var(--spacing-8); /** Padding vertical extra amplio — secciones destacadas */
+  --section-padding-inline: var(--spacing-4); /** Aire lateral de una sección de página */
+  --section-padding-block-sm: var(--spacing-3); /** Ritmo vertical compacto */
+  --section-padding-block-md: var(--spacing-4); /** Ritmo vertical base: celdas y bloques internos */
+  --section-padding-block-lg: var(--spacing-6); /** Ritmo vertical medio: introducciones, bloques de contenido */
+  --section-padding-block-xl: var(--spacing-7); /** Ritmo vertical amplio: banda de sección estándar */
+  --section-padding-block-2xl: var(--spacing-8); /** Ritmo vertical extra: bandas destacadas */
 }

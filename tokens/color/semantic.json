@@ -3,8 +3,9 @@
     "text": {
       "on-light":     { "$value": "{color.prussian}",      "$type": "color", "$description": "Text color for light backgrounds" },
       "on-dark":      { "$value": "{color.white}",         "$type": "color", "$description": "Text color for dark backgrounds" },
-      "placeholder":  { "$value": "{color.grey-dark}",     "$type": "color", "$description": "Placeholder text color" },
-      "muted-on-light": { "$value": "{color.grey-darkest}", "$type": "color", "$description": "Muted text — helper text, secondary labels" },
+      "placeholder-on-light": { "$value": "{color.grey-darkest}", "$type": "color", "$description": "Placeholder sobre superficie clara. Mismo gris que el texto secundario" },
+      "placeholder-on-dark":  { "$value": "{color.grey-light}",   "$type": "color", "$description": "Placeholder sobre superficie oscura. Mismo gris que el texto secundario" },
+      "muted-on-light": { "$value": "{color.grey-darkest}", "$type": "color", "$description": "Texto secundario: ayudas, etiquetas, metadatos" },
       "muted-on-dark":  { "$value": "{color.grey-light}",  "$type": "color", "$description": "Muted text on dark backgrounds" }
     },
     "background": {

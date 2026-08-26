@@ -2,7 +2,7 @@
   "skeleton": {
     "bg":               { "$value": "{color.grey-lightest}",          "$type": "color",     "$description": "Fondo base del bloque en carga" },
     "highlight":        { "$value": "{color.white}",                  "$type": "color",     "$description": "Brillo que recorre el bloque" },
-    "border-radius":    { "$value": "{border-radius.sm}",             "$type": "dimension", "$description": "Radio del bloque" },
+    "border-radius":    { "$value": "{border-radius.default}",             "$type": "dimension", "$description": "Radio del bloque" },
     "height":           { "$value": "1lh",                            "$type": "dimension", "$description": "Alto por defecto — una línea de texto" },
     "duration":         { "$value": "1400",                           "$type": "number",    "$description": "Duración del barrido en ms" },
     "surface-dark-bg":        { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color",    "$description": "Fondo base — surface-dark" },

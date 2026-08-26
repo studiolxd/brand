@@ -48,7 +48,7 @@ export function LoginForm({
 
   return (
     <div className="login-form">
-      <Logo width={140} />
+      <Logo size="md" />
       <Heading level={2} size={5}>{title}</Heading>
       <Form onSubmit={handleFormSubmit} errors={errors}>
         <InputField

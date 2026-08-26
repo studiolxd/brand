@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Arrow } from './Arrow';
 
 const meta: Meta<typeof Arrow> = {
-  title: 'Atoms/Arrow',
+  title: 'Por revisar/Atoms/Arrow',
   component: Arrow,
   parameters: {
     layout: 'padded',

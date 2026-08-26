@@ -1,11 +1,11 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-link-color: #111e30; // Color del enlace — mismo que el texto por defecto
-$lxd-link-color-hover: #111e30; // Color del enlace en hover
-$lxd-link-text-decoration: underline; // Decoración por defecto
-$lxd-link-text-decoration-hover: none; // Decoración en hover
+$lxd-link-color: #111e30; // El enlace no tiene color propio: es texto, y lo distingue el subrayado
+$lxd-link-hover-color: #111e30; // Color en hover
+$lxd-link-text-decoration: underline; // En reposo, subrayado: es lo que dice «esto se pulsa» sin depender del color
+$lxd-link-hover-text-decoration: none; // En hover el subrayado desaparece
 $lxd-link-cursor: pointer; // Cursor
-$lxd-link-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-link-focus-ring-offset: 1px; // Separación entre el enlace y el focus ring
-$lxd-link-focus-ring-color: #111e30; // Color del focus ring en fondo claro
+$lxd-link-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-link-focus-ring-offset: 1px; // Separación entre el enlace y el anillo
+$lxd-link-focus-ring-color: #111e30; // Anillo de foco

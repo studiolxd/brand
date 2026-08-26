@@ -1,88 +1,147 @@
 'use client';
 import './org-switcher.css';
-import { Icon as e } from "./icon.js";
-import { Avatar as t } from "./avatar.js";
-import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
-import * as a from "@radix-ui/react-dropdown-menu";
+import { t as e } from "./_shared/useControlled.js";
+import { t } from "./_shared/useRenderElement.js";
+import { O as n, R as r, x as i } from "./_shared/floating-ui.utils.dom.js";
+import { n as a } from "./_shared/useCompositeListItem.js";
+import { t as o } from "./_shared/useBaseUiId.js";
+import { Icon as s } from "./icon.js";
+import { Avatar as c } from "./avatar.js";
+import { t as l } from "./_shared/Separator.js";
+import { a as u, c as d, d as f, f as p, i as m, l as h, n as g, o as _, p as v, r as y, s as b, t as x, u as S } from "./_shared/dropdownItems.js";
+import { n as C } from "./_shared/SidebarContext.js";
+import * as w from "react";
+import { Fragment as T, jsx as E, jsxs as D } from "react/jsx-runtime";
+//#region node_modules/.pnpm/@base-ui-components+react@1.0.0-rc.0_@types+react@19.2.14_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@base-ui-components/react/esm/menu/checkbox-item/MenuCheckboxItemContext.js
+var O = /* @__PURE__ */ w.createContext(void 0);
+process.env.NODE_ENV !== "production" && (O.displayName = "MenuCheckboxItemContext");
+//#endregion
+//#region node_modules/.pnpm/@base-ui-components+react@1.0.0-rc.0_@types+react@19.2.14_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@base-ui-components/react/esm/menu/checkbox-item/MenuCheckboxItem.js
+var k = /* @__PURE__ */ w.forwardRef(function(s, c) {
+	let { render: l, className: u, id: d, label: m, nativeButton: g = !1, disabled: _ = !1, closeOnClick: y = !1, checked: b, defaultChecked: x, onCheckedChange: C, ...T } = s, D = a({ label: m }), k = v(!0), A = o(d), { store: j } = p(), M = j.useState("isActive", D.index), N = j.useState("itemProps"), [P, F] = e({
+		controlled: b,
+		default: x ?? !1,
+		name: "MenuCheckboxItem",
+		state: "checked"
+	}), { getItemProps: I, itemRef: L } = f({
+		closeOnClick: y,
+		disabled: _,
+		highlighted: M,
+		id: A,
+		store: j,
+		nativeButton: g,
+		nodeId: k?.nodeId,
+		itemMetadata: S
+	}), R = w.useMemo(() => ({
+		disabled: _,
+		highlighted: M,
+		checked: P
+	}), [
+		_,
+		M,
+		P
+	]), z = r((e) => {
+		let t = {
+			...i(n, e.nativeEvent),
+			preventUnmountOnClose: () => {}
+		};
+		C?.(!P, t), !t.isCanceled && F((e) => !e);
+	}), B = t("div", s, {
+		state: R,
+		stateAttributesMapping: h,
+		props: [
+			N,
+			{
+				role: "menuitemcheckbox",
+				"aria-checked": P,
+				onClick: z
+			},
+			T,
+			I
+		],
+		ref: [
+			L,
+			c,
+			D.ref
+		]
+	});
+	return /* @__PURE__ */ E(O.Provider, {
+		value: R,
+		children: B
+	});
+});
+process.env.NODE_ENV !== "production" && (k.displayName = "MenuCheckboxItem");
+//#endregion
 //#region src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx
-function o({ current: o, organizations: s, onOrgChange: c, defaultOpen: l, items: u, renderLink: d }) {
-	let f = s.filter((e) => e.id !== o.id);
-	return /* @__PURE__ */ i(a.Root, {
-		defaultOpen: l,
-		children: [/* @__PURE__ */ r(a.Trigger, {
-			asChild: !0,
-			children: /* @__PURE__ */ i("button", {
-				type: "button",
-				className: "org-switcher__trigger",
-				children: [
-					/* @__PURE__ */ r(t, {
-						src: o.logoUrl,
-						name: o.name,
-						alt: "",
-						size: "sm",
-						shape: "square",
-						className: "org-switcher__logo"
-					}),
-					/* @__PURE__ */ r("span", {
-						className: "org-switcher__name",
-						children: o.name
-					}),
-					/* @__PURE__ */ r(e, {
-						name: "chevron",
-						size: "sm",
-						className: "org-switcher__chevron"
-					})
-				]
-			})
-		}), /* @__PURE__ */ r(a.Portal, { children: /* @__PURE__ */ i(a.Content, {
-			className: "org-switcher__content",
+function A({ label: e, block: t = !1, compact: n, current: r, organizations: i, onOrgChange: a, defaultOpen: o, items: f, renderLink: p = x }) {
+	let h = i.filter((e) => e.id !== r.id), v = C(), S = n ?? v.rail;
+	return /* @__PURE__ */ D(m, {
+		defaultOpen: o,
+		children: [/* @__PURE__ */ D(y, {
+			className: [
+				"org-switcher__trigger",
+				t && !S ? "org-switcher__trigger--block" : "",
+				S ? "org-switcher__trigger--compact" : ""
+			].filter(Boolean).join(" "),
+			"aria-label": e ?? `Organización: ${r.name}`,
+			children: [
+				/* @__PURE__ */ E(c, {
+					src: r.logoUrl,
+					name: r.name,
+					alt: "",
+					size: "sm",
+					shape: "square"
+				}),
+				!S && /* @__PURE__ */ E("span", {
+					className: "org-switcher__name",
+					children: r.name
+				}),
+				!S && /* @__PURE__ */ E(s, {
+					name: "chevron",
+					size: "sm",
+					className: "org-switcher__chevron"
+				})
+			]
+		}), /* @__PURE__ */ E(_, { children: /* @__PURE__ */ E(u, {
+			className: "org-switcher__positioner",
 			sideOffset: 4,
 			align: "start",
-			children: [
-				/* @__PURE__ */ i(a.CheckboxItem, {
-					className: "org-switcher__item org-switcher__item--active",
-					checked: !0,
-					onCheckedChange: () => void 0,
-					children: [/* @__PURE__ */ r(t, {
-						src: o.logoUrl,
-						name: o.name,
-						alt: "",
-						size: "sm",
-						shape: "square"
-					}), /* @__PURE__ */ r("span", { children: o.name })]
-				}),
-				f.map((e) => /* @__PURE__ */ i(a.Item, {
-					className: "org-switcher__item",
-					onSelect: () => c(e.id),
-					children: [/* @__PURE__ */ r(t, {
-						src: e.logoUrl,
-						name: e.name,
-						alt: "",
-						size: "sm",
-						shape: "square"
-					}), /* @__PURE__ */ r("span", { children: e.name })]
-				}, e.id)),
-				u && u.length > 0 && /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(a.Separator, { className: "org-switcher__separator" }), u.map((e, t) => e.type === "separator" ? /* @__PURE__ */ r(a.Separator, { className: "org-switcher__separator" }, t) : e.type === "link" ? /* @__PURE__ */ r(a.Item, {
-					className: "org-switcher__item",
-					disabled: e.disabled,
-					asChild: !0,
-					children: d ? d({
-						href: e.href,
-						children: e.label,
-						className: ""
-					}) : /* @__PURE__ */ r("a", {
-						href: e.href,
-						children: e.label
-					})
-				}, t) : /* @__PURE__ */ i(a.Item, {
-					className: `org-switcher__item${e.destructive ? " org-switcher__item--destructive" : ""}`,
-					disabled: e.disabled,
-					onSelect: e.onClick,
-					children: [e.icon && e.icon, e.label]
-				}, t))] })
-			]
+			children: /* @__PURE__ */ D(b, {
+				className: "org-switcher__content",
+				children: [
+					/* @__PURE__ */ D(k, {
+						className: "org-switcher__item org-switcher__item--active",
+						checked: !0,
+						onCheckedChange: () => void 0,
+						children: [/* @__PURE__ */ E(c, {
+							src: r.logoUrl,
+							name: r.name,
+							alt: "",
+							size: "sm",
+							shape: "square"
+						}), /* @__PURE__ */ E("span", { children: r.name })]
+					}),
+					h.map((e) => /* @__PURE__ */ D(d, {
+						className: "org-switcher__item",
+						onClick: () => a(e.id),
+						children: [/* @__PURE__ */ E(c, {
+							src: e.logoUrl,
+							name: e.name,
+							alt: "",
+							size: "sm",
+							shape: "square"
+						}), /* @__PURE__ */ E("span", { children: e.name })]
+					}, e.id)),
+					f && f.length > 0 && /* @__PURE__ */ D(T, { children: [/* @__PURE__ */ E(l, { className: "org-switcher__separator" }), g({
+						items: f,
+						itemClass: (e) => ["org-switcher__item", e ? "org-switcher__item--destructive" : ""].filter(Boolean).join(" "),
+						separatorClass: "org-switcher__separator",
+						renderLink: p
+					})] })
+				]
+			})
 		}) })]
 	});
 }
 //#endregion
-export { o as OrgSwitcher };
+export { A as OrgSwitcher };

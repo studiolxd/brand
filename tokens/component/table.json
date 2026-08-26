@@ -7,13 +7,13 @@
     "color":               { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color de texto base" },
     "bg":                  { "$value": "transparent",                 "$type": "color",     "$description": "Fondo de la tabla" },
 
-    "border-width":        { "$value": "{border-width.sm}",           "$type": "dimension", "$description": "Grosor de separadores de fila" },
+    "border-width":        { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor de separadores de fila" },
     "border-color":        { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Color de separadores de fila" },
 
     "header-padding-block":   { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding block del encabezado" },
     "header-padding-inline":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding inline del encabezado" },
-    "header-font-weight":     { "$value": "{font-weight.medium}",   "$type": "number",    "$description": "Peso tipográfico del encabezado" },
-    "header-border-width":    { "$value": "{border-width.md}",        "$type": "dimension", "$description": "Borde inferior del thead — más grueso que los separadores" },
+    "header-font-weight":     { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso tipográfico del encabezado" },
+    "header-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde inferior del thead — más grueso que los separadores" },
     "header-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde inferior del thead" },
     "header-hover-bg":        { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo en hover de columna sortable" },
 
@@ -28,13 +28,13 @@
     "row-hover-bg":           { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo de fila interactiva en hover" },
 
     "footer-bg":              { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo del tfoot" },
-    "footer-border-width":    { "$value": "{border-width.md}",        "$type": "dimension", "$description": "Borde superior del tfoot — mismo grosor que el del thead" },
+    "footer-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde superior del tfoot — mismo grosor que el del thead" },
     "footer-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde superior del tfoot" },
-    "footer-font-weight":     { "$value": "{font-weight.medium}",     "$type": "number",    "$description": "Peso tipográfico de las celdas del footer" },
+    "footer-font-weight":     { "$value": "{font-weight.emphasis}",     "$type": "number",    "$description": "Peso tipográfico de las celdas del footer" },
 
     "focus-ring-color":       { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del focus ring" },
-    "focus-ring-width":       { "$value": "{border-width.md}",        "$type": "dimension", "$description": "Grosor del focus ring" },
-    "focus-ring-offset":      { "$value": "{border-width.sm}",        "$type": "dimension", "$description": "Separación del focus ring" },
+    "focus-ring-width":       { "$value": "{border-width.focus}",        "$type": "dimension", "$description": "Grosor del focus ring" },
+    "focus-ring-offset":      { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Separación del focus ring" },
 
     "transition-duration":    { "$value": "{motion.duration.fast}",   "$type": "number",    "$description": "Duración de transiciones de hover" },
     "transition-easing":      { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Easing de transiciones" },

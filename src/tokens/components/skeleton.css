@@ -7,7 +7,7 @@
   --skeleton-duration: 1400; /** Duración del barrido en ms */
   --skeleton-bg: var(--color-grey-lightest); /** Fondo base del bloque en carga */
   --skeleton-highlight: var(--color-white); /** Brillo que recorre el bloque */
-  --skeleton-border-radius: var(--border-radius-sm); /** Radio del bloque */
+  --skeleton-border-radius: var(--border-radius-default); /** Radio del bloque */
 }
 
 .surface-dark,

@@ -3,12 +3,16 @@
  */
 
 :root {
-  --border-radius-none: 0px; /** No border radius */
-  --border-radius-sm: 4px; /** Small — inputs, badges, chips */
-  --border-radius-md: 8px; /** Medium — buttons, small cards */
-  --border-radius-lg: 12px; /** Large — cards, modals */
-  --border-radius-xl: 16px; /** Extra large — panels, drawers */
-  --border-radius-full: 9999px; /** Full — pills, circular avatars */
-  --border-width-sm: 1px; /** Default border width */
-  --border-width-md: 2px; /** Emphasized border width */
+  --border-radius-none: 0px; /** Escala. Valor del rol default */
+  --border-radius-sm: 4px; /** Escala. El sistema no lo usa */
+  --border-radius-md: 8px; /** Escala. El sistema no lo usa */
+  --border-radius-lg: 12px; /** Escala. El sistema no lo usa */
+  --border-radius-xl: 16px; /** Escala. El sistema no lo usa */
+  --border-radius-full: 9999px; /** Escala. Valor del rol round */
+  --border-width-sm: 1px; /** Escala. Valor del rol default */
+  --border-width-md: 2px; /** Escala. Valor del rol focus */
+  --border-radius-default: var(--border-radius-none); /** Rol: toda esquina del sistema es recta. Los componentes apuntan aquí, nunca a la escala */
+  --border-radius-round: var(--border-radius-full); /** Rol: píldoras y círculos — avatar, tag, badge, interruptor, botón píldora */
+  --border-width-default: var(--border-width-sm); /** Rol: todo borde del sistema. Los componentes apuntan aquí, nunca a la escala */
+  --border-width-focus: var(--border-width-md); /** Rol: anillo de foco, ancho y separación. Solo para outline; nunca como borde */
 }

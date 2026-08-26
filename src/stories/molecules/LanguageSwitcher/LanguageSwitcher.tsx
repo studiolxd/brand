@@ -1,0 +1,119 @@
+'use client';
+
+import type { ReactNode } from 'react';
+import { Menu } from '../Menu/Menu';
+import { Button } from '../../atoms/Button/Button';
+import { Icon } from '../../atoms/Icon/Icon';
+import './LanguageSwitcher.css';
+
+export interface Language {
+  /** Código BCP 47 (`es`, `en`, `pt-BR`). Es el valor y lo que se muestra en la barra. */
+  code: string;
+  /** Nombre del idioma **en ese idioma**: "Español", "English", "Deutsch". Es como cada quien reconoce el suyo. */
+  label: string;
+}
+
+export type LanguageSwitcherRenderLinkProps = {
+  href: string;
+  lang: string;
+  children: ReactNode;
+  className: string;
+  'aria-current'?: 'true';
+};
+
+export interface LanguageSwitcherProps {
+  languages: Language[];
+  /** Código del idioma actual. */
+  value: string;
+  /** Cambio de idioma. Qué hacer con él (enrutar, persistir) es del producto. */
+  onChange?: (code: string) => void;
+  /** Nombre accesible del control. */
+  label?: string;
+  /**
+   * `compact`: un botón con el código (ES) que abre un menú — el de la barra.
+   * `list`: los idiomas desplegados en línea — el del pie.
+   */
+  variant?: 'compact' | 'list';
+  /**
+   * Solo en `list`: enlace por idioma (para que cada versión tenga su URL).
+   * Sin él, la lista es de botones y usa `onChange`.
+   */
+  hrefFor?: (code: string) => string;
+  renderLink?: (props: LanguageSwitcherRenderLinkProps) => ReactNode;
+  className?: string;
+}
+
+function defaultRenderLink({ href, lang, children, className, 'aria-current': current }: LanguageSwitcherRenderLinkProps) {
+  return (
+    <a href={href} lang={lang} className={className} aria-current={current}>
+      {children}
+    </a>
+  );
+}
+
+/**
+ * Selector de idioma. Nunca un icono: el código de dos letras lo lee cualquiera
+ * aunque no entienda la interfaz, y las opciones van en su propio idioma. Es un
+ * componente del sistema porque aparece en la barra y en el pie de todos los
+ * sitios; el enrutado y la persistencia se quedan en el producto.
+ */
+export function LanguageSwitcher({
+  languages,
+  value,
+  onChange,
+  label = 'Idioma',
+  variant = 'compact',
+  hrefFor,
+  renderLink = defaultRenderLink,
+  className,
+}: LanguageSwitcherProps) {
+  if (variant === 'list') {
+    const classes = ['language-switcher', 'language-switcher--list', className].filter(Boolean).join(' ');
+    return (
+      <nav className={classes} aria-label={label}>
+        <ul className="language-switcher__list">
+          {languages.map(({ code, label: name }) => {
+            const current = code === value;
+            const cls = ['language-switcher__option', current ? 'language-switcher__option--current' : ''].filter(Boolean).join(' ');
+            return (
+              <li key={code}>
+                {current ? (
+                  // El actual no se pulsa: es un dato, no una acción
+                  <span lang={code} className={cls} aria-current="true">{name}</span>
+                ) : hrefFor ? (
+                  renderLink({ href: hrefFor(code), lang: code, className: cls, children: name })
+                ) : (
+                  <button type="button" lang={code} className={cls} onClick={() => onChange?.(code)}>
+                    {name}
+                  </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    );
+  }
+
+  const classes = ['language-switcher', 'language-switcher--compact', className].filter(Boolean).join(' ');
+  return (
+    <div className={classes}>
+      <Menu
+        align="end"
+        value={value}
+        onValueChange={(code) => onChange?.(code)}
+        items={languages.map(({ code, label: name }) => ({
+          type: 'radio' as const,
+          value: code,
+          label: <span lang={code}>{name}</span>,
+        }))}
+        trigger={
+          <Button variant="ghost" size="md" aria-label={label}>
+            <span className="language-switcher__code" aria-hidden="true">{value}</span>
+            <Icon name="chevron" size="xs" className="language-switcher__chevron" />
+          </Button>
+        }
+      />
+    </div>
+  );
+}

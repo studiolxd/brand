@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import * as RadixPopover from '@radix-ui/react-popover';
+import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import './Popover.css';
 
 export interface PopoverProps {
@@ -26,21 +26,20 @@ export function Popover({
   className,
 }: PopoverProps) {
   return (
-    <RadixPopover.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
-      <RadixPopover.Trigger asChild>
-        {trigger}
-      </RadixPopover.Trigger>
+    <BasePopover.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(next) => onOpenChange?.(next)}
+    >
+      <BasePopover.Trigger render={trigger as React.ReactElement<Record<string, unknown>>} />
 
-      <RadixPopover.Portal>
-        <RadixPopover.Content
-          className={['popover', className].filter(Boolean).join(' ')}
-          side={side}
-          align={align}
-          sideOffset={sideOffset}
-        >
-          {children}
-        </RadixPopover.Content>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+      <BasePopover.Portal>
+        <BasePopover.Positioner className="popover__positioner" side={side} align={align} sideOffset={sideOffset}>
+          <BasePopover.Popup className={['popover', className].filter(Boolean).join(' ')}>
+            {children}
+          </BasePopover.Popup>
+        </BasePopover.Positioner>
+      </BasePopover.Portal>
+    </BasePopover.Root>
   );
 }

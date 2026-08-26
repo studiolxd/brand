@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { Alert, AlertTitle, AlertDescription } from './Alert';
 
 const meta = {
-  title: 'Moléculas/Alert',
+  title: 'Por revisar/Molecules/Alert',
   component: Alert,
   parameters: { layout: 'padded' },
   argTypes: {
@@ -28,6 +28,7 @@ type Story = StoryObj<typeof meta>;
  */
 export const NamedExports: Story = {
   name: 'Test — named exports (RSC-safe)',
+  tags: ['!dev'],
   render: () => (
     <Alert variant="success">
       <AlertTitle>Título</AlertTitle>
@@ -50,6 +51,7 @@ export const NamedExports: Story = {
  */
 export const Composition: Story = {
   name: 'Test — composición + rest-spread',
+  tags: ['!dev'],
   render: () => (
     <Alert variant="success" role="status" data-slot="alert" className="extra">
       <Alert.Title data-slot="title">Guardado</Alert.Title>

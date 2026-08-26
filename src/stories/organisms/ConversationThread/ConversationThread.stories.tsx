@@ -34,7 +34,7 @@ const MESSAGES: ConversationMessage[] = [
 ];
 
 const meta = {
-  title: 'Organisms/ConversationThread',
+  title: 'Por revisar/Organisms/ConversationThread',
   component: ConversationThread,
   decorators: [
     (Story) => (
@@ -75,6 +75,7 @@ export const Empty: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — etiqueta del hilo',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

@@ -18,11 +18,7 @@
   --pagination-btn-min-width: var(--spacing-6); /** Ancho mínimo de los botones de página */
   --pagination-btn-padding-block: var(--spacing-2); /** Padding vertical de los botones */
   --pagination-btn-padding-inline: var(--spacing-2); /** Padding horizontal de los botones */
-  --pagination-btn-radius: var(--border-radius-sm); /** Radio de borde de los botones */
-  --pagination-btn-current-font-weight: var(--font-weight-medium); /** Peso tipográfico de la página activa */
   --pagination-btn-disabled-color: var(--color-grey-dark); /** Texto cuando está deshabilitado */
-  --pagination-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --pagination-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --pagination-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
   --pagination-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
   --pagination-sm-btn-padding-block: var(--spacing-1); /** Padding block de botones — variante sm */
@@ -35,11 +31,15 @@
   --pagination-lg-btn-min-width: var(--spacing-7); /** Ancho mínimo de botones de página — variante lg */
   --pagination-font-weight: var(--font-weight-default); /** Font weight base */
   --pagination-summary-color: var(--color-text-on-light); /** Color del texto de total de resultados */
+  --pagination-btn-radius: var(--border-radius-default); /** Radio de borde de los botones */
   --pagination-btn-color: var(--color-text-on-light); /** Color de texto de los botones */
   --pagination-btn-hover-color: var(--color-text-on-light); /** Texto en hover */
   --pagination-btn-current-color: var(--color-text-on-light); /** Texto de la página activa */
+  --pagination-btn-current-font-weight: var(--font-weight-emphasis); /** Peso tipográfico de la página activa */
   --pagination-ellipsis-color: var(--color-text-muted-on-light); /** Color del ellipsis */
   --pagination-focus-ring-color: var(--color-primary); /** Color del focus ring */
+  --pagination-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
+  --pagination-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
 }
 
 .surface-dark,

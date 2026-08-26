@@ -56,7 +56,7 @@ export function Article({
           </Button>
         }
       />
-      <main id="main-content" className="article-page__main">
+      <main id="main-content" tabIndex={-1} className="article-page__main">
         <div className="article-page__body">
           <article className="article-detail">
             <Tag variant={tagVariant}>{category}</Tag>

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NumberInputField } from './NumberInputField';
 
 const meta = {
-  title: 'Molecules/NumberInputField',
+  title: 'Por revisar/Molecules/NumberInputField',
   component: NumberInputField,
   parameters: { layout: 'centered' },
   args: {

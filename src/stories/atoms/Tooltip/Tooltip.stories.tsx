@@ -3,7 +3,7 @@ import { Button } from '../Button/Button';
 import { Tooltip, TooltipProvider } from './Tooltip';
 
 const meta = {
-  title: 'Atoms/Tooltip',
+  title: 'Por revisar/Atoms/Tooltip',
   component: Tooltip,
   decorators: [
     (Story) => (

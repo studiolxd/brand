@@ -1,0 +1,49 @@
+/*
+ * Banda a sangre con contenido acotado. El bloque ocupa el 100% del ancho
+ * disponible — ahí es donde se pinta el fondo, que llega de lado a lado de la
+ * pantalla — y el elemento interior es el que limita la medida del contenido y
+ * se centra. Sin el interior, un fondo a sangre obligaría a cada producto a
+ * escribir su propio "romper el max-width del padre".
+ */
+.container {
+  inline-size: 100%;
+  /* En móviles con muesca o esquinas redondeadas, el aire lateral nunca debe
+     ser menor que la zona segura del sistema: si no, el contenido se mete
+     bajo el bisel en horizontal. */
+  padding-inline:
+    max(var(--container-padding-inline), env(safe-area-inset-left))
+    max(var(--container-padding-inline), env(safe-area-inset-right));
+}
+
+.container__inner {
+  margin-inline: auto;
+  /* Sin límite explícito, el interior es tan ancho como la banda: la variante
+     `full` no necesita regla propia. */
+  max-inline-size: 100%;
+}
+
+.container__inner.container__inner--md      { max-inline-size: var(--container-max-width-md); }
+.container__inner.container__inner--lg      { max-inline-size: var(--container-max-width-lg); }
+.container__inner.container__inner--xl      { max-inline-size: var(--container-max-width-xl); }
+.container__inner.container__inner--2xl     { max-inline-size: var(--container-max-width-2xl); }
+.container__inner.container__inner--3xl     { max-inline-size: var(--container-max-width-3xl); }
+
+.container.container--space-sm  { padding-block: var(--container-padding-block-sm); }
+.container.container--space-md  { padding-block: var(--container-padding-block-md); }
+.container.container--space-lg  { padding-block: var(--container-padding-block-lg); }
+.container.container--space-xl  { padding-block: var(--container-padding-block-xl); }
+.container.container--space-2xl { padding-block: var(--container-padding-block-2xl); }
+
+/* Banda con superficie propia: pinta el lienzo con el mismo token que el body,
+   que dentro de .surface-dark ya resuelve al fondo oscuro. Fondo y color del
+   contenido voltean juntos, que es la regla del lienzo emparejado. */
+.container.container--surface {
+  background-color: var(--text-background);
+  color: var(--text-color);
+}
+
+/* Sin aire lateral: para bandas cuyo contenido llega al borde (un carrusel que
+   sangra, una imagen a pantalla completa). */
+.container.container--flush {
+  padding-inline: 0;
+}

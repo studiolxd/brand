@@ -56,7 +56,7 @@
 }
 
 .input-phone__country:focus,
-.input-phone__country[data-state='open'] {
+.input-phone__country[data-popup-open] {
   outline: none;
 }
 
@@ -67,20 +67,23 @@
   transition: transform var(--input-transition-duration) var(--motion-easing-default);
 }
 
-.input-phone__country[data-state='open'] .input-phone__country-icon {
+.input-phone__country[data-popup-open] .input-phone__country-icon {
   transform: rotate(-90deg);
 }
 
 /* ── Dropdown de país ───────────────────────────────────────── */
+.input-phone__country-positioner {
+  z-index: var(--input-phone-content-z-index);
+}
+
 .input-phone__country-content {
   background-color: var(--input-bg);
   border-width: var(--input-border-width);
   border-style: var(--input-border-style);
   border-color: var(--input-border-color);
-  min-width: var(--radix-select-trigger-width);
+  min-width: var(--anchor-width);
   max-height: var(--input-phone-content-max-height);
   overflow-y: auto;
-  z-index: var(--input-phone-content-z-index);
 }
 
 .input-phone__country-item {

@@ -6,6 +6,6 @@ $lxd-floating-panel-border-width: 1px; // Grosor del borde
 $lxd-floating-panel-border-color: #111e30; // Color del borde — prussian en modo claro
 $lxd-floating-panel-border-radius: 0px; // Sin radio de esquinas
 $lxd-floating-panel-shadow: none; // Sin sombra
-$lxd-floating-panel-z-index: 1100; // Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales
+$lxd-floating-panel-z-index: 400; // Capa z — por encima del modal (1001) para que los paneles flotantes sean visibles dentro de modales
 $lxd-floating-panel-transition-duration: 150ms; // Duración de la animación de entrada/salida
 $lxd-floating-panel-transition-easing: ease; // Easing de la animación

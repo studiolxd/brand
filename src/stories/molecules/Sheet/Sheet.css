@@ -16,11 +16,11 @@
   opacity: var(--sheet-backdrop-opacity);
 }
 
-.sheet__overlay[data-state='open'] {
+.sheet__overlay[data-open] {
   animation: sheet-overlay-in var(--sheet-transition-duration) var(--sheet-transition-easing) forwards;
 }
 
-.sheet__overlay[data-state='closed'] {
+.sheet__overlay[data-closed] {
   animation: sheet-overlay-out var(--sheet-transition-duration) var(--sheet-transition-easing) forwards;
 }
 
@@ -69,14 +69,14 @@
 @keyframes sheet-in-bottom  { from { transform: translateY(100%); } to { transform: translateY(0); } }
 @keyframes sheet-out-bottom { from { transform: translateY(0); } to { transform: translateY(100%); } }
 
-.sheet[data-side='right'][data-state='open']   { animation-name: sheet-in-right; }
-.sheet[data-side='right'][data-state='closed'] { animation-name: sheet-out-right; }
-.sheet[data-side='left'][data-state='open']    { animation-name: sheet-in-left; }
-.sheet[data-side='left'][data-state='closed']  { animation-name: sheet-out-left; }
-.sheet[data-side='top'][data-state='open']     { animation-name: sheet-in-top; }
-.sheet[data-side='top'][data-state='closed']   { animation-name: sheet-out-top; }
-.sheet[data-side='bottom'][data-state='open']   { animation-name: sheet-in-bottom; }
-.sheet[data-side='bottom'][data-state='closed'] { animation-name: sheet-out-bottom; }
+.sheet[data-side='right'][data-open]   { animation-name: sheet-in-right; }
+.sheet[data-side='right'][data-closed] { animation-name: sheet-out-right; }
+.sheet[data-side='left'][data-open]    { animation-name: sheet-in-left; }
+.sheet[data-side='left'][data-closed]  { animation-name: sheet-out-left; }
+.sheet[data-side='top'][data-open]     { animation-name: sheet-in-top; }
+.sheet[data-side='top'][data-closed]   { animation-name: sheet-out-top; }
+.sheet[data-side='bottom'][data-open]   { animation-name: sheet-in-bottom; }
+.sheet[data-side='bottom'][data-closed] { animation-name: sheet-out-bottom; }
 
 .sheet__header {
   display: flex;
@@ -111,7 +111,7 @@
   border: none;
   cursor: pointer;
   color: var(--modal-close-color);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-default);
 }
 
 .sheet__close:hover {

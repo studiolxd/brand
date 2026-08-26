@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useRef, useId, useCallback } from 'react';
-import * as RadixPopover from '@radix-ui/react-popover';
-import { DismissableLayerBranch } from '@radix-ui/react-dismissable-layer';
+import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
 import './AsyncSelect.css';
@@ -41,14 +40,14 @@ export interface AsyncSelectProps {
    */
   clearLabel?: string;
   /**
-   * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
+   * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
    * `Portal.container`). Por defecto se monta en `document.body`, que
    * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
    * sin configuración adicional. Solo hace falta pasarlo cuando el
    * AsyncSelect vive dentro de un `.surface-dark` **anidado** (no en la
    * raíz), ya que ese contexto no llega a `document.body` por la cascada.
    */
-  container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
+  container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 
 export function AsyncSelect({
@@ -180,6 +179,22 @@ export function AsyncSelect({
     }
   }
 
+  /**
+   * Base UI notifica los cierres (Escape, click fuera). Se ignora el click
+   * fuera cuando nace dentro del propio control: sin `Trigger`, el input
+   * cuenta como "fuera" para el gestor de dismissal.
+   */
+  function handleOpenChange(next: boolean, details: BasePopover.Root.ChangeEventDetails) {
+    if (next) return;
+    if (details.reason === 'outside-press') {
+      const target = details.event?.target;
+      if (target instanceof Node && anchorRef.current?.contains(target)) return;
+    }
+    setOpen(false);
+    setQuery('');
+    setActiveIndex(-1);
+  }
+
   const displayValue = open ? query : (currentSelectedOption?.label ?? '');
 
   const triggerClass = [
@@ -194,92 +209,89 @@ export function AsyncSelect({
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixPopover.Root open={open} modal={false} onOpenChange={() => {}}>
-      <RadixPopover.Anchor asChild>
-        <div ref={anchorRef} className={triggerClass} data-state={open ? 'open' : 'closed'}>
-          <input
-            ref={inputRef}
-            id={id}
-            type="text"
-            className="async-select__input"
-            value={displayValue}
-            onChange={handleInputChange}
-            onPointerDown={handleInputPointerDown}
-            onKeyDown={handleKeyDown}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-            aria-label={ariaLabel ?? placeholder}
-            aria-describedby={ariaDescribedby}
-            aria-expanded={open}
-            aria-haspopup="listbox"
-            aria-controls={listboxId}
-            aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
-            autoComplete="off"
-            role="combobox"
-          />
-          {loading && <Spinner size="sm" aria-hidden />}
-          {!loading && currentValue && !disabled && !readOnly && (
-            <button
-              type="button"
-              className="async-select__clear"
-              aria-label={clearLabel}
-              tabIndex={-1}
-              onMouseDown={handleClear}
-            >
-              <Icon name="close" size="xs" />
-</button>
-          )}
-        </div>
-      </RadixPopover.Anchor>
+    <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
+      <div ref={anchorRef} className={triggerClass} data-popup-open={open || undefined}>
+        <input
+          ref={inputRef}
+          id={id}
+          type="text"
+          className="async-select__input"
+          value={displayValue}
+          onChange={handleInputChange}
+          onPointerDown={handleInputPointerDown}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          disabled={disabled}
+          readOnly={readOnly}
+          aria-label={ariaLabel ?? placeholder}
+          aria-describedby={ariaDescribedby}
+          aria-expanded={open}
+          aria-haspopup="listbox"
+          aria-controls={listboxId}
+          aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
+          autoComplete="off"
+          role="combobox"
+        />
+        {loading && <Spinner size="sm" aria-hidden />}
+        {!loading && currentValue && !disabled && !readOnly && (
+          <button
+            type="button"
+            className="async-select__clear"
+            aria-label={clearLabel}
+            tabIndex={-1}
+            onMouseDown={handleClear}
+          >
+            <Icon name="close" size="xs" />
+          </button>
+        )}
+      </div>
 
-      <RadixPopover.Portal container={container}>
-        <DismissableLayerBranch>
-        <RadixPopover.Content
-          className={contentClass}
+      <BasePopover.Portal container={container}>
+        <BasePopover.Positioner
+          className="async-select__positioner"
+          anchor={anchorRef}
           align="start"
           sideOffset={-1}
-          onOpenAutoFocus={e => e.preventDefault()}
-          onInteractOutside={e => { if (anchorRef.current?.contains(e.target as Node)) return; setOpen(false); }}
         >
-          <div
-            role="listbox"
-            aria-label={ariaLabel ?? placeholder}
-            id={listboxId}
-          >
-            {loading && (
-              <div className="async-select__loading">
-                <Spinner size="sm" label={loadingLabel} />
-              </div>
-            )}
-            {!loading && hasSearched && results.length === 0 && (
-              <div className="async-select__empty">{emptyMessage}</div>
-            )}
-            {!loading && results.map((option, index) => {
-              const isSelected = option.value === currentValue;
-              const isActive = activeIndex === index;
-              return (
-                <div
-                  key={option.value}
-                  id={itemId(index)}
-                  role="option"
-                  aria-selected={isSelected}
-                  className={[
-                    'async-select__item',
-                    isSelected ? 'async-select__item--selected' : '',
-                    isActive ? 'async-select__item--active' : '',
-                  ].filter(Boolean).join(' ')}
-                  onPointerDown={e => e.preventDefault()}
-                  onClick={() => handleSelect(option)}
-                >
-                  {option.label}
+          <BasePopover.Popup className={contentClass} initialFocus={false} finalFocus={false}>
+            <div
+              role="listbox"
+              aria-label={ariaLabel ?? placeholder}
+              id={listboxId}
+            >
+              {loading && (
+                <div className="async-select__loading">
+                  <Spinner size="sm" label={loadingLabel} />
                 </div>
-              );
-            })}
-          </div>
-        </RadixPopover.Content>
-        </DismissableLayerBranch>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+              )}
+              {!loading && hasSearched && results.length === 0 && (
+                <div className="async-select__empty">{emptyMessage}</div>
+              )}
+              {!loading && results.map((option, index) => {
+                const isSelected = option.value === currentValue;
+                const isActive = activeIndex === index;
+                return (
+                  <div
+                    key={option.value}
+                    id={itemId(index)}
+                    role="option"
+                    aria-selected={isSelected}
+                    className={[
+                      'async-select__item',
+                      isSelected ? 'async-select__item--selected' : '',
+                      isActive ? 'async-select__item--active' : '',
+                    ].filter(Boolean).join(' ')}
+                    onPointerDown={e => e.preventDefault()}
+                    onClick={() => handleSelect(option)}
+                  >
+                    {option.label}
+                  </div>
+                );
+              })}
+            </div>
+          </BasePopover.Popup>
+        </BasePopover.Positioner>
+      </BasePopover.Portal>
+    </BasePopover.Root>
   );
 }

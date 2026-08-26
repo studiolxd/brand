@@ -5,7 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { MessageComposer } from './MessageComposer';
 
 const meta = {
-  title: 'Molecules/MessageComposer',
+  title: 'Por revisar/Molecules/MessageComposer',
   component: MessageComposer,
   args: {
     value: '',

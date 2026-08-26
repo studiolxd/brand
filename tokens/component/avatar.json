@@ -1,15 +1,19 @@
 {
   "avatar": {
     "size": {
-      "sm": { "$value": "1.5rem",  "$type": "dimension", "$description": "24px — avatar inline, navegación" },
-      "md": { "$value": "2.25rem", "$type": "dimension", "$description": "36px — talla por defecto" },
-      "lg": { "$value": "3.75rem", "$type": "dimension", "$description": "60px — cards estándar" },
-      "xl": { "$value": "7.5rem",  "$type": "dimension", "$description": "120px — reviewer destacado" }
+      "sm": { "$value": "{size-component.sm}", "$type": "dimension", "$description": "32px — en barras y menús (UserMenu, OrgSwitcher)" },
+      "md": { "$value": "{size-component.md}", "$type": "dimension", "$description": "40px — por defecto: listas, tarjetas" },
+      "lg": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "48px — cabeceras de perfil" }
     },
-    "border-radius":        { "$value": "{border-radius.full}", "$type": "dimension", "$description": "Radio para forma circular" },
-    "border-radius-square": { "$value": "{border-radius.sm}",   "$type": "dimension", "$description": "Radio para forma cuadrada (logos de org)" },
-    "initials-bg":          { "$value": "{color.primary}",      "$type": "color",     "$description": "Fondo del fallback de iniciales" },
-    "initials-color":       { "$value": "{color.white}",        "$type": "color",     "$description": "Color del texto de iniciales" },
-    "initials-font-weight": { "$value": "{font-weight.medium}", "$type": "number",    "$description": "Peso del texto de iniciales" }
+    "border-radius":        { "$value": "{border-radius.round}",   "$type": "dimension", "$description": "Personas: círculo" },
+    "border-radius-square": { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Organizaciones (logos): el radio del sistema" },
+    "initials-bg":          { "$value": "{color.primary}",         "$type": "color",     "$description": "Fondo de las iniciales" },
+    "initials-color":       { "$value": "{color.text.on-dark}",    "$type": "color",     "$description": "Iniciales sobre el fondo" },
+    "initials-font-weight": { "$value": "{font-weight.emphasis}",  "$type": "number",    "$description": "Iniciales: énfasis" },
+    "initials-font-size-sm": { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Iniciales a talla sm" },
+    "initials-font-size-md": { "$value": "{font-size.2}",          "$type": "dimension", "$description": "Iniciales a talla md" },
+    "initials-font-size-lg": { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Iniciales a talla lg" },
+    "surface-dark-initials-bg":    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Iniciales — surface-dark: se invierten" },
+    "surface-dark-initials-color": { "$value": "{color.primary}",      "$type": "color", "$description": "Iniciales — surface-dark" }
   }
 }

@@ -7,19 +7,19 @@
   --card-padding-block-start: var(--spacing-4); /** Padding block start */
   --card-padding-block-end: var(--spacing-3); /** Padding block end */
   --card-gap: var(--spacing-3); /** Separación entre elementos internos */
-  --card-border-radius: var(--border-radius-none); /** Radio de esquinas — sin redondeado */
-  --card-shadow: var(--shadow-none); /** Sombra — sin sombra */
   --card-description-font-size: var(--font-size-3); /** Tamaño de fuente de la descripción */
   --card-description-margin-block-end: var(--spacing-7); /** Margen inferior de la descripción */
   --card-header-gap: var(--spacing-3); /** Separación entre título y acción en la cabecera */
-  --card-title-font-weight: var(--font-weight-medium); /** Peso del título de la tarjeta */
   --card-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
-  --card-outline-border-width: var(--border-width-sm); /** Variante outline — grosor de borde */
+  --card-border-radius: var(--border-radius-default); /** Radio de esquinas — sin redondeado */
+  --card-shadow: var(--shadow-default); /** Sombra — sin sombra */
+  --card-title-font-weight: var(--font-weight-emphasis); /** Peso del título de la tarjeta */
   --card-primary-bg: var(--color-primary); /** Variante primary — fondo prussian */
   --card-primary-color: var(--color-text-on-dark); /** Variante primary — texto blanco sobre fondo oscuro */
   --card-outline-bg: var(--color-background-light); /** Variante outline — fondo blanco (light) */
   --card-outline-color: var(--color-text-on-light); /** Variante outline — texto oscuro sobre blanco */
   --card-outline-border-color: var(--color-primary); /** Variante outline — borde prussian */
+  --card-outline-border-width: var(--border-width-default); /** Variante outline — grosor de borde */
 }
 
 .surface-dark,

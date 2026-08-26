@@ -1,12 +1,12 @@
 {
   "section": {
-    "padding-inline": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding horizontal estándar de las secciones de página" },
+    "padding-inline": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire lateral de una sección de página" },
     "padding-block": {
-      "sm": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Padding vertical compacto — secciones con poco aire" },
-      "md": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding vertical base — igual que padding-inline; celdas internas" },
-      "lg": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Padding vertical medio — introductions, bloques internos" },
-      "xl":  { "$value": "{spacing.7}", "$type": "dimension", "$description": "Padding vertical amplio — wrapper de sección estándar" },
-      "2xl": { "$value": "{spacing.8}", "$type": "dimension", "$description": "Padding vertical extra amplio — secciones destacadas" }
+      "sm":  { "$value": "{spacing.3}", "$type": "dimension", "$description": "Ritmo vertical compacto" },
+      "md":  { "$value": "{spacing.4}", "$type": "dimension", "$description": "Ritmo vertical base: celdas y bloques internos" },
+      "lg":  { "$value": "{spacing.6}", "$type": "dimension", "$description": "Ritmo vertical medio: introducciones, bloques de contenido" },
+      "xl":  { "$value": "{spacing.7}", "$type": "dimension", "$description": "Ritmo vertical amplio: banda de sección estándar" },
+      "2xl": { "$value": "{spacing.8}", "$type": "dimension", "$description": "Ritmo vertical extra: bandas destacadas" }
     }
   }
 }

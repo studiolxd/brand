@@ -30,6 +30,6 @@
 .spacing-scale__bar {
   height: var(--spacing-4);
   background-color: var(--color-primary);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-default);
   flex-shrink: 0;
 }

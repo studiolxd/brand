@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { InputPhone } from './InputPhone';
 
 const meta: Meta<typeof InputPhone> = {
-  title: 'Atoms/InputPhone',
+  title: 'Por revisar/Atoms/InputPhone',
   component: InputPhone,
   parameters: {
     layout: 'padded',
@@ -47,6 +47,7 @@ export const FocusVisible: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — etiqueta del selector de país',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">

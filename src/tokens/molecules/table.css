@@ -8,12 +8,9 @@
   --table-font-family: var(--font-family-sans); /** Font family */
   --table-font-size: var(--font-size-2); /** 18px — Body default size */
   --table-line-height: var(--line-height-normal); /** Normal line height para celdas multilínea */
-  --table-border-width: var(--border-width-sm); /** Grosor de separadores de fila */
   --table-border-color: var(--color-grey-light); /** Color de separadores de fila */
   --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
   --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */
-  --table-header-font-weight: var(--font-weight-medium); /** Peso tipográfico del encabezado */
-  --table-header-border-width: var(--border-width-md); /** Borde inferior del thead — más grueso que los separadores */
   --table-header-hover-bg: var(--color-grey-lightest); /** Fondo en hover de columna sortable */
   --table-sort-icon-color: var(--color-grey-dark); /** Color del icono de sort inactivo */
   --table-cell-padding-block: var(--spacing-3); /** Padding block de celda */
@@ -21,10 +18,6 @@
   --table-row-border-color: var(--color-grey-light); /** Color del separador entre filas */
   --table-row-hover-bg: var(--color-grey-lightest); /** Fondo de fila interactiva en hover */
   --table-footer-bg: var(--color-grey-lightest); /** Fondo del tfoot */
-  --table-footer-border-width: var(--border-width-md); /** Borde superior del tfoot — mismo grosor que el del thead */
-  --table-footer-font-weight: var(--font-weight-medium); /** Peso tipográfico de las celdas del footer */
-  --table-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --table-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --table-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de hover */
   --table-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
   --table-sm-font-size: var(--font-size-1); /** 14px — UI label size — variante sm */
@@ -34,10 +27,17 @@
   --table-sm-cell-padding-inline: var(--spacing-2); /** Padding inline de celda — variante sm */
   --table-font-weight: var(--font-weight-default); /** Font weight base */
   --table-color: var(--color-text-on-light); /** Color de texto base */
+  --table-border-width: var(--border-width-default); /** Grosor de separadores de fila */
+  --table-header-font-weight: var(--font-weight-emphasis); /** Peso tipográfico del encabezado */
+  --table-header-border-width: var(--border-width-default); /** Borde inferior del thead — más grueso que los separadores */
   --table-header-border-color: var(--color-text-on-light); /** Color del borde inferior del thead */
   --table-sort-icon-active-color: var(--color-primary); /** Color del icono de sort activo */
+  --table-footer-border-width: var(--border-width-default); /** Borde superior del tfoot — mismo grosor que el del thead */
   --table-footer-border-color: var(--color-text-on-light); /** Color del borde superior del tfoot */
+  --table-footer-font-weight: var(--font-weight-emphasis); /** Peso tipográfico de las celdas del footer */
   --table-focus-ring-color: var(--color-primary); /** Color del focus ring */
+  --table-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
+  --table-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
 }
 
 .surface-dark,

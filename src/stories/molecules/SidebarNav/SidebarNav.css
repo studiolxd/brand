@@ -9,9 +9,6 @@
   gap: var(--sidebar-nav-gap);
 }
 
-/* ─── Grupo ──────────────────────────────────────────────── */
-.sidebar-nav__group {}
-
 /* ─── Cabecera de grupo ──────────────────────────────────── */
 .sidebar-nav__group-header {
   font-size: inherit;
@@ -37,13 +34,12 @@
   font-size: var(--sidebar-nav-group-label-font-size);
   font-weight: var(--sidebar-nav-group-label-font-weight);
   color: var(--sidebar-nav-group-label-color);
-  letter-spacing: var(--sidebar-nav-group-label-letter-spacing);
   text-decoration: none;
 }
 
 a.sidebar-nav__group-label:focus-visible {
-  outline: 2px solid var(--sidebar-nav-focus-ring-color);
-  outline-offset: -2px;
+  outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
+  outline-offset: calc(-1 * var(--sidebar-nav-focus-ring-width));
 }
 
 /* ─── Botón chevron (solo toggle) ────────────────────────── */
@@ -58,8 +54,8 @@ a.sidebar-nav__group-label:focus-visible {
 }
 
 .sidebar-nav__group-chevron:focus-visible {
-  outline: 2px solid var(--sidebar-nav-focus-ring-color);
-  outline-offset: 2px;
+  outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
+  outline-offset: var(--sidebar-nav-focus-ring-width);
 }
 
 /* ─── Icono chevron ──────────────────────────────────────── */
@@ -69,7 +65,7 @@ a.sidebar-nav__group-label:focus-visible {
   transition: transform var(--sidebar-nav-group-transition-duration) var(--sidebar-nav-group-transition-easing);
 }
 
-.sidebar-nav__group-chevron[data-state="open"] .sidebar-nav__group-chevron-icon {
+.sidebar-nav__group-chevron[data-panel-open] .sidebar-nav__group-chevron-icon {
   transform: rotate(-90deg);
 }
 
@@ -78,21 +74,21 @@ a.sidebar-nav__group-label:focus-visible {
   overflow: hidden;
 }
 
-.sidebar-nav__group-content[data-state="open"] {
+.sidebar-nav__group-content[data-open] {
   animation: sidebar-nav-group-open var(--sidebar-nav-group-transition-duration) var(--sidebar-nav-group-transition-easing);
 }
 
-.sidebar-nav__group-content[data-state="closed"] {
+.sidebar-nav__group-content[data-closed] {
   animation: sidebar-nav-group-close var(--sidebar-nav-group-transition-duration) var(--sidebar-nav-group-transition-easing);
 }
 
 @keyframes sidebar-nav-group-open {
   from { height: 0; }
-  to   { height: var(--radix-accordion-content-height); }
+  to   { height: var(--collapsible-panel-height); }
 }
 
 @keyframes sidebar-nav-group-close {
-  from { height: var(--radix-accordion-content-height); }
+  from { height: var(--collapsible-panel-height); }
   to   { height: 0; }
 }
 
@@ -117,7 +113,7 @@ a.sidebar-nav__group-label:focus-visible {
   align-items: center;
   gap: var(--sidebar-nav-item-icon-gap);
   padding-block: var(--sidebar-nav-item-padding-block);
-  padding-inline: var(--sidebar-nav-item-padding-inline);
+  padding-inline: var(--sidebar-nav-item-padding-inline-start) var(--sidebar-nav-item-padding-inline);
   border-radius: var(--sidebar-nav-item-border-radius);
   font-size: var(--sidebar-nav-item-font-size);
   font-weight: var(--sidebar-nav-item-font-weight);
@@ -135,8 +131,8 @@ a.sidebar-nav__group-label:focus-visible {
 }
 
 .sidebar-nav__item:focus-visible {
-  outline: 2px solid var(--sidebar-nav-focus-ring-color);
-  outline-offset: 2px;
+  outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
+  outline-offset: var(--sidebar-nav-focus-ring-width);
 }
 
 /* ─── Ítem activo ────────────────────────────────────────── */
@@ -153,15 +149,14 @@ a.sidebar-nav__group-label:focus-visible {
   padding-inline: var(--sidebar-nav-group-trigger-padding-inline);
   font-size: var(--sidebar-nav-group-label-font-size);
   font-weight: var(--sidebar-nav-group-label-font-weight);
-  letter-spacing: var(--sidebar-nav-group-label-letter-spacing);
   color: var(--sidebar-nav-group-label-color);
   text-decoration: none;
   transition: color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }
 
 .sidebar-nav__top-link:focus-visible {
-  outline: 2px solid var(--sidebar-nav-focus-ring-color);
-  outline-offset: -2px;
+  outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
+  outline-offset: calc(-1 * var(--sidebar-nav-focus-ring-width));
 }
 
 .sidebar-nav__top-link.sidebar-nav__top-link--active {
@@ -176,4 +171,54 @@ a.sidebar-nav__group-label:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ─── Rail: solo iconos ──────────────────────────────────── */
+.sidebar-nav__rail {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sidebar-nav-item-gap);
+  align-items: center;
+}
+
+.sidebar-nav__rail-item {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sidebar-nav-rail-item-size);
+  block-size: var(--sidebar-nav-rail-item-size);
+  border-radius: var(--sidebar-nav-item-border-radius);
+  color: var(--sidebar-nav-item-color);
+  cursor: pointer;
+  transition:
+    background-color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
+    color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
+}
+.sidebar-nav__rail-item:hover,
+.sidebar-nav__rail-item[data-popup-open] {
+  background-color: var(--sidebar-nav-item-hover-bg);
+  color: var(--sidebar-nav-item-hover-color);
+}
+.sidebar-nav__rail-item:focus-visible {
+  outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
+  outline-offset: var(--sidebar-nav-focus-ring-width);
+}
+/* La sección de la página actual: marcada con el color de activo y una barra al borde */
+.sidebar-nav__rail-item.sidebar-nav__rail-item--active {
+  color: var(--sidebar-nav-item-active-color);
+  box-shadow: inset var(--sidebar-nav-rail-active-bar-width) 0 0 var(--sidebar-nav-item-active-color);
+}
+.sidebar-nav__rail-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-nav__rail-initial {
+  font-weight: var(--sidebar-nav-item-active-font-weight);
+  text-transform: uppercase;
 }

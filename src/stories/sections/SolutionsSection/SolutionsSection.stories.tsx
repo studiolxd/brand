@@ -3,7 +3,7 @@ import { SolutionsSection } from './SolutionsSection';
 import { solutionItems } from '../../data/home';
 
 const meta: Meta<typeof SolutionsSection> = {
-  title: 'Sections/SolutionsSection',
+  title: 'Por revisar/Sections/SolutionsSection',
   component: SolutionsSection,
   parameters: {
     layout: 'fullscreen',

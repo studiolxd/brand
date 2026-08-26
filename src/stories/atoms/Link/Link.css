@@ -1,3 +1,5 @@
+/* Viste a TODOS los enlaces (`a`) desde la base: un enlace crudo en contenido
+   de CMS o markdown se ve igual que <Link>. El componente solo añade API. */
 a {
   color: var(--link-color);
   text-decoration: var(--link-text-decoration);
@@ -5,12 +7,11 @@ a {
 }
 
 a:hover {
-  color: var(--link-color-hover);
-  text-decoration: var(--link-text-decoration-hover);
+  color: var(--link-hover-color);
+  text-decoration: var(--link-hover-text-decoration);
 }
 
 a:focus-visible {
   outline: var(--link-focus-ring-width) solid var(--link-focus-ring-color);
   outline-offset: var(--link-focus-ring-offset);
 }
-

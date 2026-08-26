@@ -1,17 +1,16 @@
 import './heading.css';
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/atoms/Heading/Heading.tsx
-function t({ level: t = 2, weight: n, size: r, className: i, id: a, children: o }) {
+function t({ level: t = 2, size: n, className: r, id: i, children: a }) {
 	return /* @__PURE__ */ e(`h${t}`, {
 		className: [
 			"heading",
 			`heading--${t}`,
-			n && `heading--${n}`,
-			r && `heading--size-${r}`,
-			i
+			n && `heading--size-${n}`,
+			r
 		].filter(Boolean).join(" "),
-		id: a,
-		children: o
+		id: i,
+		children: a
 	});
 }
 //#endregion

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useId } from 'react';
-import * as RadixPopover from '@radix-ui/react-popover';
+import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import { Icon } from '../Icon/Icon';
 import './MultiSelect.css';
 
@@ -23,14 +23,14 @@ export interface MultiSelectProps {
   id?: string;
   'aria-label'?: string;
   /**
-   * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
+   * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
    * `Portal.container`). Por defecto se monta en `document.body`, que
    * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
    * sin configuración adicional. Solo hace falta pasarlo cuando el
    * MultiSelect vive dentro de un `.surface-dark` **anidado** (no en la
    * raíz), ya que ese contexto no llega a `document.body` por la cascada.
    */
-  container?: React.ComponentPropsWithoutRef<typeof RadixPopover.Portal>['container'];
+  container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 
 export function MultiSelect({
@@ -101,8 +101,10 @@ export function MultiSelect({
   ].filter(Boolean).join(' ');
 
   return (
-    <RadixPopover.Root open={open} onOpenChange={handleOpenChange}>
-      <RadixPopover.Trigger asChild>
+    <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
+      <BasePopover.Trigger
+        nativeButton={false}
+        render={
         <div
           className={triggerClass}
           tabIndex={disabled ? -1 : 0}
@@ -114,13 +116,6 @@ export function MultiSelect({
           aria-disabled={disabled || undefined}
           aria-readonly={readOnly || undefined}
           id={id}
-          data-state={open ? 'open' : 'closed'}
-          onKeyDown={e => {
-            if (e.key === ' ' || e.key === 'Enter') {
-              e.preventDefault();
-              handleOpenChange(!open);
-            }
-          }}
         >
           <div className="multi-select__values">
             {currentValues.length === 0 ? (
@@ -154,47 +149,45 @@ export function MultiSelect({
             size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
           />
         </div>
-      </RadixPopover.Trigger>
+        }
+      />
 
-      <RadixPopover.Portal container={container}>
-        <RadixPopover.Content
-          className={contentClass}
-          align="start"
-          sideOffset={-1}
-          onOpenAutoFocus={e => e.preventDefault()}
-        >
-          <div
-            ref={listboxRef}
-            role="listbox"
-            aria-multiselectable="true"
-            aria-label={ariaLabel ?? placeholder}
-            id={listboxId}
-            onKeyDown={handleListboxKeyDown}
-          >
-            {options.map((option, index) => {
-              const isSelected = currentValues.includes(option.value);
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  role="option"
-                  aria-selected={isSelected}
-                  aria-label={option['aria-label'] ?? option.label}
-                  className={['multi-select__item', isSelected ? 'multi-select__item--selected' : ''].filter(Boolean).join(' ')}
-                  tabIndex={index === focusedIndex ? 0 : -1}
-                  onClick={() => toggleValue(option.value)}
-                  onFocus={() => setFocusedIndex(index)}
-                >
-                  <span className="multi-select__item-check" aria-hidden="true">
-                    <span className="multi-select__item-check-mark" />
-                  </span>
-                  <span>{option.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </RadixPopover.Content>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+      <BasePopover.Portal container={container}>
+        <BasePopover.Positioner className="multi-select__positioner" align="start" sideOffset={-1}>
+          <BasePopover.Popup className={contentClass} initialFocus={false}>
+            <div
+              ref={listboxRef}
+              role="listbox"
+              aria-multiselectable="true"
+              aria-label={ariaLabel ?? placeholder}
+              id={listboxId}
+              onKeyDown={handleListboxKeyDown}
+            >
+              {options.map((option, index) => {
+                const isSelected = currentValues.includes(option.value);
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    role="option"
+                    aria-selected={isSelected}
+                    aria-label={option['aria-label'] ?? option.label}
+                    className={['multi-select__item', isSelected ? 'multi-select__item--selected' : ''].filter(Boolean).join(' ')}
+                    tabIndex={index === focusedIndex ? 0 : -1}
+                    onClick={() => toggleValue(option.value)}
+                    onFocus={() => setFocusedIndex(index)}
+                  >
+                    <span className="multi-select__item-check" aria-hidden="true">
+                      <span className="multi-select__item-check-mark" />
+                    </span>
+                    <span>{option.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </BasePopover.Popup>
+        </BasePopover.Positioner>
+      </BasePopover.Portal>
+    </BasePopover.Root>
   );
 }

@@ -1,0 +1,87 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ContainerStories from "./Container.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { containerWidthTokens, containerSpacingTokens } from "../../../tokens/components/container";
+
+<Meta of={ContainerStories} />
+
+# Container
+
+Banda a sangre con el contenido acotado. Es la pieza que fija el ancho de la
+maqueta en las superficies públicas —cabecera, pie y secciones de la web o del
+hub sin sesión— sin renunciar a que un fondo llegue de lado a lado de la
+pantalla.
+
+Son dos elementos: el **exterior** ocupa el 100% del ancho disponible y es donde
+se pinta el fondo; el **interior** limita la medida del contenido y se centra.
+Con esa separación, sangrar una sección no exige romper el `max-width` de nada:
+el fondo ya está fuera de la columna.
+
+## Por defecto
+
+Ancho `xl`, el de las páginas públicas.
+
+<Canvas of={ContainerStories.PorDefecto} />
+
+## Banda oscura
+
+`surface="dark"` pinta el lienzo oscuro en toda la banda y voltea los tokens de
+lo que contiene —texto, botones, cabecera— en un solo gesto. Fondo y color van
+emparejados: es la misma regla del `body`, aplicada a una sección. Un fondo de
+cualquier otro color se pone sobre el `Container` con la clase que sea; también
+llega de lado a lado.
+
+<Canvas of={ContainerStories.ConFondoASangre} />
+
+## Estrecho
+
+`width="md"` para formularios de acceso, páginas legales o avisos, donde
+el ancho completo dejaría las líneas demasiado largas.
+
+<Canvas of={ContainerStories.Estrecho} />
+
+## Anchos
+
+La escala sale de los breakpoints del sistema: es la misma referencia con la que
+se decide cuándo cambia la maqueta, así que el ancho máximo del contenido y los
+puntos de ruptura no se contradicen. Cada valor de `width` es el sufijo de su
+token (`md` → `--container-max-width-md`); `xl` es el valor por defecto y
+`full` no impone límite: el contenido llega tan lejos como la banda.
+
+**No es una medida de lectura.** El ancho cómodo para texto largo depende de la
+tipografía —cuántos caracteres entran por línea—, no del tamaño de la pantalla,
+y lo fija el componente de prosa que lo muestre. Un `Container` de ancho `xl` con un
+párrafo dentro da líneas de más de cien caracteres: demasiado para leer.
+
+## Aire
+
+`space` aplica padding vertical a la banda, no al contenido, de modo que el fondo
+crece con ella. La escala es el ritmo de sección (`--container-padding-block-*`,
+mismo sufijo que el valor de la prop); `none`, el valor por defecto, no añade
+aire: lo pone quien la usa.
+
+El aire lateral es fijo (`--container-padding-inline`) y nunca baja de la zona
+segura del dispositivo: en móviles con muesca se usa `env(safe-area-inset-*)`
+cuando es mayor, para que el contenido no quede bajo el bisel en horizontal.
+Con `flush` se elimina, para contenido que debe tocar el borde —un carrusel que
+sangra, una imagen a pantalla completa.
+
+## Elemento
+
+`as` elige la etiqueta: usa `header`, `footer`, `main`, `section` o `nav` según
+el papel que cumpla la banda en la página. Por defecto es un `div`, que no
+aporta semántica.
+
+## Tokens
+
+### Anchos
+
+<TokenTable tokens={containerWidthTokens} />
+
+### Espaciado
+
+<TokenTable tokens={containerSpacingTokens} />
+
+## Props
+
+<ArgTypes of={ContainerStories} />

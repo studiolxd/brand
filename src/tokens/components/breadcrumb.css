@@ -11,15 +11,15 @@
   --breadcrumb-line-height: var(--line-height-none); /** Single-line */
   --breadcrumb-gap: var(--spacing-2); /** Gap entre items y separadores */
   --breadcrumb-padding-block: var(--spacing-1); /** Padding vertical del nav */
-  --breadcrumb-current-font-weight: var(--font-weight-medium); /** Peso del item activo */
-  --breadcrumb-focus-ring-width: var(--border-width-md); /** Grosor del focus ring */
-  --breadcrumb-focus-ring-offset: var(--border-width-sm); /** Separación del focus ring */
   --breadcrumb-font-weight: var(--font-weight-default); /** Font weight base */
   --breadcrumb-separator-color: var(--color-text-on-light); /** Color del separador */
   --breadcrumb-link-color: var(--color-text-on-light); /** Color del link navegable */
   --breadcrumb-link-color-hover: var(--color-primary); /** Color del link en hover */
   --breadcrumb-current-color: var(--color-text-on-light); /** Color del item activo (página actual) */
+  --breadcrumb-current-font-weight: var(--font-weight-emphasis); /** Peso del item activo */
   --breadcrumb-focus-ring-color: var(--color-primary); /** Color del focus ring */
+  --breadcrumb-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
+  --breadcrumb-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
 }
 
 .surface-dark,

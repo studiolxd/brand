@@ -31,9 +31,8 @@ type Story = StoryObj<typeof Label>;
 export const Visible: Story = {
 };
 
-/** El label está oculto visualmente pero presente en el DOM para lectores de pantalla */
-export const Hidden: Story = {
-  name: 'Visually hidden',
+/** Oculta visualmente, presente en el DOM para lectores de pantalla. */
+export const Oculta: Story = {
   args: { hidden: true },
 };
 
@@ -43,8 +42,9 @@ export const Hidden: Story = {
  */
 export const PropPassthrough: Story = {
   name: 'Test — className + htmlFor + hidden',
+  tags: ['!dev'],
   render: () => (
-    <Label htmlFor="campo" hidden className="extra" data-slot="label">
+    <Label htmlFor="campo" hidden className="extra" data-testid="etiqueta">
       Etiqueta
     </Label>
   ),
@@ -53,6 +53,6 @@ export const PropPassthrough: Story = {
     await expect(label).toHaveClass('label', 'visually-hidden', 'extra');
     await expect(label.className.trim().endsWith('extra')).toBe(true);
     await expect(label).toHaveAttribute('for', 'campo');
-    await expect(label).toHaveAttribute('data-slot', 'label');
+    await expect(label).toHaveAttribute('data-testid', 'etiqueta');
   },
 };

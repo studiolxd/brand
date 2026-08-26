@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "15.0.0",
+  "version": "16.0.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -163,10 +163,6 @@
       "types": "./dist/_types/molecules/FormField/FormField.d.ts",
       "import": "./dist/form-field.js"
     },
-    "./hamburger": {
-      "types": "./dist/_types/atoms/Hamburger/Hamburger.d.ts",
-      "import": "./dist/hamburger.js"
-    },
     "./header.css": "./dist/header.css",
     "./heading": {
       "types": "./dist/_types/atoms/Heading/Heading.d.ts",
@@ -209,6 +205,22 @@
       "types": "./dist/_types/atoms/Label/Label.d.ts",
       "import": "./dist/label.js"
     },
+    "./language-switcher": {
+      "types": "./dist/_types/molecules/LanguageSwitcher/LanguageSwitcher.d.ts",
+      "import": "./dist/language-switcher.js"
+    },
+    "./theme-switcher": {
+      "types": "./dist/_types/molecules/ThemeSwitcher/ThemeSwitcher.d.ts",
+      "import": "./dist/theme-switcher.js"
+    },
+    "./dropdown-field": {
+      "types": "./dist/_types/molecules/DropdownField/DropdownField.d.ts",
+      "import": "./dist/dropdown-field.js"
+    },
+    "./notification-button": {
+      "types": "./dist/_types/molecules/NotificationButton/NotificationButton.d.ts",
+      "import": "./dist/notification-button.js"
+    },
     "./legal-template.css": "./dist/legal-template.css",
     "./link": {
       "types": "./dist/_types/atoms/Link/Link.d.ts",
@@ -225,6 +237,10 @@
     "./logo": {
       "types": "./dist/_types/atoms/Logo/Logo.d.ts",
       "import": "./dist/logo.js"
+    },
+    "./menu-button": {
+      "types": "./dist/_types/atoms/MenuButton/MenuButton.d.ts",
+      "import": "./dist/menu-button.js"
     },
     "./menu": {
       "types": "./dist/_types/molecules/Menu/Menu.d.ts",
@@ -466,17 +482,7 @@
     "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css"
   },
   "dependencies": {
-    "@radix-ui/react-accordion": "^1.2.12",
-    "@radix-ui/react-checkbox": "^1.3.3",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dismissable-layer": "^1.1.11",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-popover": "^1.1.15",
-    "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-switch": "^1.2.6",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@radix-ui/react-tooltip": "^1.2.16",
+    "@base-ui-components/react": "1.0.0-rc.0",
     "@tanstack/react-table": "^8.21.3",
     "cmdk": "^1.1.1",
     "embla-carousel": "^8.6.0",
@@ -495,8 +501,6 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
     "@eslint/js": "^9.39.4",
-    "@radix-ui/react-checkbox": "^1.3.3",
-    "@radix-ui/react-select": "^2.2.6",
     "@storybook/addon-a11y": "^10.4.6",
     "@storybook/addon-docs": "^10.5.10",
     "@storybook/addon-mcp": "^0.7.0",
@@ -528,6 +532,7 @@
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.85.0",
     "react-phone-number-input": "^3.4.16",
+    "remark-gfm": "^4.0.1",
     "sonner": "^2.0.7",
     "storybook": "^10.5.10",
     "storybook-addon-pseudo-states": "^10.5.10",

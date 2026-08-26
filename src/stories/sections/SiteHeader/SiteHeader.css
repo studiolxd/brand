@@ -1,0 +1,63 @@
+/* Cabecera pública: banda a sangre (Container) con el contenido acotado. */
+.site-header {
+  background-color: var(--site-header-bg);
+  position: relative;
+  z-index: var(--site-header-z-index);
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--site-header-gap);
+  block-size: var(--site-header-height);
+}
+
+.site-header__logo {
+  display: flex;
+  align-items: center;
+  /* El logo es un enlace: sin la línea que brand pone a todo <a>. */
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.site-header__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--site-header-gap);
+}
+
+
+/* El panel: a pantalla completa bajo la barra, en la capa modal. Cerrado sigue
+   en el DOM pero inerte e invisible, para que la entrada y la salida puedan
+   animarse con los tokens de movimiento. */
+.site-header__panel {
+  position: fixed;
+  inset-block-start: var(--site-header-height);
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: var(--site-header-panel-z-index);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: var(--site-header-panel-bg);
+  padding-block: var(--site-header-panel-padding-block);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--spacing-3)));
+  transition:
+    opacity var(--site-header-panel-transition-duration) var(--site-header-panel-transition-easing),
+    transform var(--site-header-panel-transition-duration) var(--site-header-panel-transition-easing),
+    visibility 0s linear var(--site-header-panel-transition-duration);
+}
+.site-header__panel.site-header__panel--open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+
+/* Los ajustes del sitio (tema) cierran el panel: solo aire, sin línea. */
+.site-header__settings {
+  margin-block-start: var(--site-header-settings-margin-block-start);
+}

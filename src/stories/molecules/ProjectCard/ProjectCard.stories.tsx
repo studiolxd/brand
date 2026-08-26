@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProjectCard } from './ProjectCard';
 
 const meta: Meta<typeof ProjectCard> = {
-  title: 'Molecules/ProjectCard',
+  title: 'Por revisar/Molecules/ProjectCard',
   component: ProjectCard,
   parameters: {
     layout: 'padded',

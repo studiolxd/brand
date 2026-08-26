@@ -1,0 +1,23 @@
+{
+  "dropdown-field": {
+    "gap":             { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Entre la etiqueta y el control, como en el resto de campos" },
+    "height":          { "$value": "{control.height}",       "$type": "dimension", "$description": "El control mide la talla del sistema" },
+    "padding-inline":  { "$value": "{select.padding-inline}", "$type": "dimension", "$description": "Padding inline del control: el del Select" },
+    "content-gap":     { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Entre el contenido del control y el chevron" },
+    "font-family":     { "$value": "{select.font-family}",   "$type": "string",    "$description": "Familia tipográfica: la del Select" },
+    "font-size":       { "$value": "{select.font-size}",     "$type": "dimension", "$description": "Cuerpo: el del Select" },
+    "font-weight":     { "$value": "{select.font-weight}",   "$type": "number",    "$description": "Peso: el del Select" },
+    "color":           { "$value": "{select.color}",         "$type": "color",     "$description": "Texto del control" },
+    "bg":              { "$value": "{select.bg}",            "$type": "color",     "$description": "Fondo del control" },
+    "border-width":    { "$value": "{select.border-width}",  "$type": "dimension", "$description": "Borde rectangular, como el Select" },
+    "border-color":    { "$value": "{select.border-color}",  "$type": "color",     "$description": "Color del borde" },
+    "border-radius":   { "$value": "{select.border-radius}", "$type": "dimension", "$description": "Radio: el del Select (rectangular)" },
+    "icon-transition": { "$value": "{select.icon-transition}", "$type": "number",  "$description": "Giro del chevron al abrir" },
+    "focus-ring-width":  { "$value": "{select.focus-ring-width}",  "$type": "dimension", "$description": "Anillo de foco" },
+    "focus-ring-color":  { "$value": "{select.focus-ring-color}",  "$type": "color",     "$description": "Anillo de foco" },
+    "surface-dark-color":            { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Texto — surface-dark" },
+    "surface-dark-bg":               { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo — surface-dark" },
+    "surface-dark-border-color":     { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Borde — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

@@ -1,236 +1,152 @@
 import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
-import { ContrastMatrix } from "./ContrastMatrix";
+import { ContrastGrid, FillGrid } from "./ContrastGrid";
 import { TokenTable } from "./TokenTable";
-import { brandColors, feedbackColors, backgroundColors, paletteTokens, neutralTokens, brandTokens, feedbackTokens, semanticTokens, systemTokens, textDefault, textDark, textMuted, textMutedDark, errorColor, successColor, errorDarkColor, successDarkColor, infoColor, warningColor, successTagColor, dangerTagColor, neutralTextColor, infoBgColor, warningBgColor, successBgColor, dangerBgColor, neutralBgColor, support1Color, support2Color, support1BgColor, support2BgColor } from "../../tokens/colors";
+import {
+  paletteSwatches, neutralSwatches, systemSwatches, brandSwatches, feedbackSwatches, semanticSwatches,
+  paletteTokens, neutralTokens, systemTokens, brandTokens, feedbackTokens, semanticTokens,
+  inks, surfaces, fills,
+} from "../../tokens/colors";
 
 <Meta title="Foundations/Colores" />
 
 # Colores
 
-El sistema de color de Studio LXD se organiza en seis capas: una **paleta de referencia** con los valores crudos, los **neutrales** para texto, fondos y estados de interfaz, los **colores de marca** que asignan un rol de identidad, los **colores de sistema** para estados funcionales, los **colores de feedback** que asignan un rol semántico a los colores de sistema, y los **tokens semánticos** que expresan roles de texto y fondo para los componentes.
+El color se organiza en **tres capas**, y cada una solo puede apuntar a la anterior:
+
+| Capa | Qué contiene | Quién la usa |
+|---|---|---|
+| **Primitivos** | Los valores crudos: la paleta de marca, los neutrales y los colores de sistema | Solo las capas de arriba. Ningún componente los referencia |
+| **Semánticos** | Un *rol* con nombre: `primary`, `error-fill`, `text-on-dark`, `background-light` | Los componentes, siempre |
+| **Componente** | `--button-primary-bg`, `--tag-danger-color`… | El CSS de cada componente |
+
+La regla que lo sostiene: **un componente nunca nombra un color, nombra un rol**. Si mañana el rojo de error cambia, cambia en un sitio. Toda esta página se genera a partir de los ficheros de `tokens/color/`: no hay un solo valor escrito a mano.
 
 ---
 
-## Paleta de referencia
+## Primitivos
 
-Los tokens de referencia son los valores hex puros. No se usan directamente en componentes — sirven como fuente de verdad a la que apuntan los tokens semánticos.
+### Paleta de marca
+
+Cinco colores de identidad. No se usan directamente: son la fuente a la que apuntan los roles de marca.
 
 <ColorPalette>
-  <ColorItem
-    title="Prussian"
-    subtitle="RGB 17, 30, 48 · CMYK 64, 37, 0, 81"
-    colors={{ "--color-prussian": "#111E30" }}
-  />
-  <ColorItem
-    title="Lavender"
-    subtitle="RGB 186, 171, 255 · CMYK 27, 32, 0, 0"
-    colors={{ "--color-lavender": "#BAABFF" }}
-  />
-  <ColorItem
-    title="Yellow"
-    subtitle="RGB 255, 205, 0 · CMYK 0, 19, 100, 0"
-    colors={{ "--color-yellow": "#FFCD00" }}
-  />
-  <ColorItem
-    title="Emerald"
-    subtitle="RGB 32, 227, 142 · CMYK 85, 0, 37, 10"
-    colors={{ "--color-emerald": "#20E38E" }}
-  />
-  <ColorItem
-    title="Cayenne"
-    subtitle="RGB 240, 94, 28 · CMYK 0, 60, 88, 5"
-    colors={{ "--color-cayenne": "#F05E1C" }}
-  />
+  {paletteSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
+</ColorPalette>
+
+### Neutrales
+
+Blanco, negro y cuatro grises para texto, fondos, bordes y estados. No forman parte de la identidad, pero sin ellos no hay interfaz.
+
+<ColorPalette>
+  {neutralSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
+</ColorPalette>
+
+### Sistema
+
+Rojo y verde funcionales, independientes de la marca. Cada uno tiene una versión **base** (legible sobre blanco, y relleno universal) y una **light** (solo legible sobre prusia). No se usan con fines decorativos.
+
+<ColorPalette>
+  {systemSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
 </ColorPalette>
 
 ---
 
-## Colores de marca
+## Semánticos
 
-Los tokens de marca expresan la identidad visual. Los componentes siempre referencian tokens semánticos, nunca los de paleta directamente.
+### Marca
+
+Los cinco primitivos de paleta, con un rol y una proporción de uso orientativa.
 
 <ColorPalette>
-  <ColorItem
-    title="Primario"
-    subtitle="~50% de uso"
-    colors={{ "--color-primary": "#111E30" }}
-  />
-  <ColorItem
-    title="Accent 1"
-    subtitle="~20% de uso"
-    colors={{ "--color-accent-1": "#BAABFF" }}
-  />
-  <ColorItem
-    title="Accent 2"
-    subtitle="~20% de uso"
-    colors={{ "--color-accent-2": "#FFCD00" }}
-  />
-  <ColorItem
-    title="Support 1"
-    subtitle="~5% de uso"
-    colors={{ "--color-support-1": "#20E38E" }}
-  />
-  <ColorItem
-    title="Support 2"
-    subtitle="~5% de uso"
-    colors={{ "--color-support-2": "#F05E1C" }}
-  />
+  {brandSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
+</ColorPalette>
+
+**Los colores de marca son superficie, no tinta.** Lavanda, amarillo y esmeralda no llegan a 3:1 sobre blanco —el mínimo para cualquier uso, incluidos iconos y bordes—, así que en tema claro solo pueden ser **relleno con texto prusia encima**. Sobre prusia, en cambio, los cinco superan 5:1. La matriz de más abajo tiene los números; la consecuencia práctica es esta tabla de rellenos:
+
+<FillGrid fills={fills} />
+
+Cayena es la excepción parcial: con 3,32:1 sobre blanco y 5,05:1 sobre prusia, es el único color de marca válido como tinta en las dos superficies — para texto grande, iconos e indicadores, no para texto normal.
+
+### Feedback
+
+Asignan un rol a los colores de sistema. **El sufijo dice a qué propiedad CSS va el token**:
+
+| Sufijo | Propiedad | Valor |
+|---|---|---|
+| `*-text-on-light` | `color`, `border-color`, `outline-color` sobre superficie clara | Base |
+| `*-text-on-dark` | Lo mismo sobre superficie oscura | Light |
+| `*-fill` | Solo `background-color` de rellenos sólidos. **Universal**: el mismo en claro y oscuro | Base |
+| `*-fill-text` | Contenido colocado sobre un `*-fill` | Blanco |
+
+No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es siempre el color base con blanco encima, en cualquier superficie. `destructive-*` es un alias completo de `error-*` para acciones destructivas.
+
+<ColorPalette>
+  {feedbackSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
+</ColorPalette>
+
+### Texto y fondo
+
+Los roles que consumen los componentes para lo básico: qué color tiene el texto y el lienzo en cada superficie.
+
+<ColorPalette>
+  {semanticSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
 </ColorPalette>
 
 ---
 
-## Neutrales
+## Tema claro y oscuro
 
-Colores base del sistema. No forman parte de la identidad de marca pero son esenciales para texto, fondos y estados de interfaz.
+No hay dos paletas: hay **una**, y cada token que necesita cambiar en oscuro lleva un par `surface-dark-*` en su JSON. Al generar el CSS, ese par remapea la **misma** custom property bajo tres selectores:
 
-<ColorPalette>
-  <ColorItem
-    title="White"
-    subtitle=""
-    colors={{ "--color-white": "#FFFFFF" }}
-  />
-  <ColorItem
-    title="Grey"
-    subtitle="lightest · light · dark · darkest"
-    colors={{
-      "--color-grey-lightest": "#F2F2F2",
-      "--color-grey-light":    "#D0D0D0",
-      "--color-grey-dark":     "#767676",
-      "--color-grey-darkest":  "#4A4A4A",
-    }}
-  />
-  <ColorItem
-    title="Black"
-    subtitle=""
-    colors={{ "--color-black": "#000000" }}
-  />
-</ColorPalette>
+```css
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --text-background: var(--color-background-dark);
+  --text-color: var(--color-text-on-dark);
+  /* …y cada token de componente con par oscuro */
+}
+```
+
+Los tres activan lo mismo, a distinta escala:
+
+- **`html.dark`** o **`[data-theme="dark"]`** en la raíz: toda la página. Es lo que usa un gestor de tema (`next-themes`).
+- **`.surface-dark`** en cualquier contenedor: solo lo que hay dentro. Sirve para una banda oscura en una página clara — un `Container` con esta clase voltea el header, los botones y el texto que contiene.
+
+Las custom properties se heredan por cascada, así que basta con que el selector alcance a un ancestro. Los componentes no saben en qué tema están: leen su token y ya.
+
+**El lienzo va emparejado.** `body` fija a la vez `background-color` y `color` con `--text-background` y `--text-color`, ambos con par oscuro. Fijar un fondo sin su color —o al revés— es el error clásico: los componentes de superficie oscura se vuelven ilegibles sobre un fondo que no volteó con ellos.
 
 ---
 
-## Colores de sistema
+## Accesibilidad
 
-Colores funcionales, independientes de la paleta de marca. No deben usarse con fines decorativos.
+Criterio del sistema: **AA (4,5:1) es el mínimo obligatorio para texto** y AAA (7:1) el objetivo. Para texto grande —24px, o 18,7px en negrita—, iconos, bordes de control e indicadores gráficos, el mínimo baja a **3:1**. Son los umbrales de WCAG 2.2, que es lo que exige EN 301 549 a la administración pública y a la educación.
 
-<ColorPalette>
-  <ColorItem
-    title="Red"
-    subtitle="Base (fill universal + texto en claro) · Light (solo texto sobre prussian)"
-    colors={{ "--color-red": "#B30000", "--color-red-light": "#FF8585" }}
-  />
-  <ColorItem
-    title="Green"
-    subtitle="Base (fill universal + texto en claro) · Light (solo texto sobre prussian)"
-    colors={{ "--color-green": "#006616", "--color-green-light": "#00CC2C" }}
-  />
-</ColorPalette>
+Cada tinta del sistema sobre las dos superficies:
 
----
+<ContrastGrid inks={inks} surfaces={surfaces} />
 
-## Colores de feedback
+Lo que sale de ahí: **sobre blanco solo son tinta prusia, los grises oscuros, el rojo y el verde base**; **sobre prusia lo es todo lo demás**, incluida la paleta de marca entera. No hay ningún color que llegue a 4,5:1 en las dos superficies a la vez —es matemáticamente imposible con este blanco y este prusia—, por eso cada rol de texto tiene su versión `on-light` y `on-dark`.
 
-Asignan un rol semántico a los colores de sistema. **Regla de uso** — el sufijo
-dice a qué propiedad CSS va destinado el token:
+### Los grises de texto
 
-- `*-text-on-light` / `*-text-on-dark` → **solo** `color` / `border-color` /
-  `outline-color` de contenido suelto sobre la superficie ambiente (clara u
-  oscura). **Nunca como `background-color`.**
-- `*-fill` → `background-color` de rellenos sólidos (botones, alerts, toasts,
-  badges). Es **universal**: el mismo rojo/verde base en superficie clara y
-  oscura — no existe un "fill para dark".
-- `*-fill-text` → contenido colocado **sobre** un `*-fill` (blanco).
+En la franja de grises que pasan 7:1 sobre blanco —de prusia a `#595959`— solo caben dos tonos que el ojo distinga. Por eso el sistema tiene **dos tintas de texto en claro y dos en oscuro**, y nada más:
 
-<ColorPalette>
-  <ColorItem
-    title="Error — texto"
-    subtitle="error-text-on-light · error-text-on-dark"
-    colors={{ "--color-error-text-on-light": "#B30000", "--color-error-text-on-dark": "#FF8585" }}
-  />
-  <ColorItem
-    title="Error — fill"
-    subtitle="error-fill · error-fill-text"
-    colors={{ "--color-error-fill": "#B30000", "--color-error-fill-text": "#FFFFFF" }}
-  />
-  <ColorItem
-    title="Success — texto"
-    subtitle="success-text-on-light · success-text-on-dark"
-    colors={{ "--color-success-text-on-light": "#006616", "--color-success-text-on-dark": "#00CC2C" }}
-  />
-  <ColorItem
-    title="Success — fill"
-    subtitle="success-fill · success-fill-text"
-    colors={{ "--color-success-fill": "#006616", "--color-success-fill-text": "#FFFFFF" }}
-  />
-  <ColorItem
-    title="Destructive"
-    subtitle="Alias completo del rol error para acciones destructivas"
-    colors={{ "--color-destructive-text-on-light": "#B30000", "--color-destructive-text-on-dark": "#FF8585", "--color-destructive-fill": "#B30000", "--color-destructive-fill-text": "#FFFFFF" }}
-  />
-  <ColorItem
-    title="Warning"
-    subtitle="Tag warning background — brand yellow"
-    colors={{ "--color-yellow": "#FFCD00" }}
-  />
-  <ColorItem
-    title="Neutral"
-    subtitle="Tag neutral background — prussian"
-    colors={{ "--color-prussian": "#111E30" }}
-  />
-</ColorPalette>
+| Rol | Claro | Oscuro |
+|---|---|---|
+| Texto | prusia | blanco |
+| Texto secundario y placeholder | `grey-darkest` | `grey-light` |
 
-> Los nombres antiguos (`error-on-light`, `red-on-dark`, `green-bg`…) siguen
-> emitiéndose como alias **deprecados** solo para compatibilidad de las apps
-> (`tokens/color/deprecated.json`). Prohibido usarlos en `packages/ui`.
+Un valor escrito se separa de su placeholder por 1,89:1, la misma distancia que hay entre texto y texto secundario. Lo que el usuario necesita leer nunca va en el placeholder: va en la etiqueta y en la ayuda del campo.
+
+`grey-dark` **no es un gris de texto**: es el de los iconos de acción secundarios (cerrar, ordenar) y de los controles deshabilitados. A un icono le basta 3:1 y un control deshabilitado está exento de contraste.
 
 ---
 
-## Tokens semánticos
+## Tokens
 
-Tokens de interfaz que expresan roles de texto. Los componentes referencian estos tokens para garantizar coherencia y facilitar cambios globales.
-
-<ColorPalette>
-  <ColorItem
-    title="Texto por defecto"
-    subtitle="Texto sobre fondo claro"
-    colors={{ "--color-text-on-light": "#111E30" }}
-  />
-  <ColorItem
-    title="Texto oscuro"
-    subtitle="Texto sobre fondo oscuro"
-    colors={{ "--color-text-on-dark": "#FFFFFF" }}
-  />
-  <ColorItem
-    title="Texto atenuado"
-    subtitle="Helper text, etiquetas secundarias"
-    colors={{ "--color-text-muted-on-light": "#4A4A4A" }}
-  />
-  <ColorItem
-    title="Texto atenuado oscuro"
-    subtitle="Helper text sobre fondo oscuro"
-    colors={{ "--color-text-muted-on-dark": "#F2F2F2" }}
-  />
-  <ColorItem
-    title="Texto placeholder"
-    subtitle="Placeholder en inputs"
-    colors={{ "--color-text-placeholder": "#767676" }}
-  />
-  <ColorItem
-    title="Fondo por defecto"
-    subtitle="Superficie clara"
-    colors={{ "--color-background-light": "#FFFFFF" }}
-  />
-  <ColorItem
-    title="Fondo oscuro"
-    subtitle="Superficie oscura"
-    colors={{ "--color-background-dark": "#111E30" }}
-  />
-</ColorPalette>
-
----
-
-## Tokens CSS
-
-### Paleta de referencia
+### Paleta
 
 <TokenTable tokens={paletteTokens} />
 
@@ -238,141 +154,20 @@ Tokens de interfaz que expresan roles de texto. Los componentes referencian esto
 
 <TokenTable tokens={neutralTokens} />
 
-### Colores de marca
-
-<TokenTable tokens={brandTokens} />
-
-### Colores de sistema
+### Sistema
 
 <TokenTable tokens={systemTokens} />
 
-### Colores de feedback
+### Marca
+
+<TokenTable tokens={brandTokens} />
+
+### Feedback
 
 <TokenTable tokens={feedbackTokens} />
 
-### Semánticos
+### Texto y fondo
 
 <TokenTable tokens={semanticTokens} />
 
-Los tokens están definidos en `tokens/color/`.
-
----
-
-## Accesibilidad
-
-Comprobación de contraste WCAG para las combinaciones de texto sobre color de fondo. Se requiere un mínimo de **AAA (7:1)** para texto normal.
-
-### Texto por defecto sobre colores de marca
-
-<ContrastMatrix
-  foregroundLabel="Texto por defecto"
-  foreground={textDefault}
-  colors={brandColors.filter(c => c.name !== "Primary")}
-/>
-
-### Texto oscuro sobre colores de marca
-
-<ContrastMatrix
-  foregroundLabel="Texto oscuro"
-  foreground={textDark}
-  colors={brandColors}
-/>
-
-### Error sobre fondos del sistema
-
-<ContrastMatrix
-  foregroundLabel="Error"
-  foreground={errorColor}
-  colors={backgroundColors}
-/>
-
-### Success sobre fondos del sistema
-
-<ContrastMatrix
-  foregroundLabel="Success"
-  foreground={successColor}
-  colors={backgroundColors}
-/>
-
-### Texto por defecto sobre colores de feedback
-
-<ContrastMatrix
-  foregroundLabel="Texto por defecto"
-  foreground={textDefault}
-  colors={feedbackColors}
-/>
-
-### Texto oscuro sobre colores de feedback
-
-<ContrastMatrix
-  foregroundLabel="Texto oscuro"
-  foreground={textDark}
-  colors={feedbackColors}
-/>
-
-### Error oscuro sobre fondos del sistema
-
-<ContrastMatrix
-  foregroundLabel="Error oscuro"
-  foreground={errorDarkColor}
-  colors={backgroundColors}
-/>
-
-### Success oscuro sobre fondos del sistema
-
-<ContrastMatrix
-  foregroundLabel="Success oscuro"
-  foreground={successDarkColor}
-  colors={backgroundColors}
-/>
-
-### Texto atenuado sobre fondos del sistema
-
-<ContrastMatrix
-  foregroundLabel="Texto atenuado"
-  foreground={textMuted}
-  colors={backgroundColors}
-/>
-
-### Texto atenuado oscuro sobre fondos del sistema
-
-<ContrastMatrix
-  foregroundLabel="Texto atenuado oscuro"
-  foreground={textMutedDark}
-  colors={backgroundColors}
-/>
-
----
-
-## Accesibilidad — colores de estado (tags)
-
-Comprobación de contraste para cada combinación texto/fondo de las variantes semánticas del componente `Tag`. Se requiere un mínimo de **AAA (7:1)** para texto normal.
-
-### Info
-
-<ContrastMatrix foregroundLabel="Info" foreground={infoColor} colors={[infoBgColor]} />
-
-### Warning
-
-<ContrastMatrix foregroundLabel="Warning" foreground={warningColor} colors={[warningBgColor]} />
-
-### Success
-
-<ContrastMatrix foregroundLabel="Success" foreground={successTagColor} colors={[successBgColor]} />
-
-### Danger
-
-<ContrastMatrix foregroundLabel="Danger" foreground={dangerTagColor} colors={[dangerBgColor]} />
-
-### Neutral
-
-<ContrastMatrix foregroundLabel="Neutral" foreground={neutralTextColor} colors={[neutralBgColor]} />
-
-### Support 1
-
-<ContrastMatrix foregroundLabel="Support 1" foreground={support1Color} colors={[support1BgColor]} />
-
-### Support 2
-
-<ContrastMatrix foregroundLabel="Support 2" foreground={support2Color} colors={[support2BgColor]} />
-
+Definidos en `tokens/color/`: `palette.json`, `neutral.json`, `system.json`, `brand.json`, `feedback.json` y `semantic.json`.

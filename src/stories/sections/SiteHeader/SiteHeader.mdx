@@ -1,0 +1,99 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SiteHeaderStories from "./SiteHeader.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { siteHeaderTokens } from "../../../tokens/components/site-header";
+
+<Meta of={SiteHeaderStories} />
+
+# SiteHeader
+
+Cabecera de las páginas públicas: logotipo a la izquierda, botón de menú a la
+derecha. Compone sobre `Container`, así que el fondo llega de lado a lado de la
+pantalla mientras el contenido se queda dentro del ancho de la maqueta.
+
+Es la contraparte de `AppHeader`. Se separan porque resuelven cosas distintas:
+
+| | `SiteHeader` | `AppHeader` |
+|---|---|---|
+| Dónde | Web y zonas sin sesión | Aplicación con sesión |
+| Manda | La marca y la navegación del sitio | El trabajo del usuario |
+| Composición | Logotipo + acciones + idioma + menú | Menú + notificaciones + avatar |
+| Ancho | Acotado por `Container` | Barra completa, fija arriba |
+
+## Por defecto
+
+<Canvas of={SiteHeaderStories.PorDefecto} />
+
+## Con página debajo
+
+La cabecera pone el enlace de salto; **la página pone el destino**: un `main` con `id="main-content"` y `tabIndex={-1}`, para que el foco aterrice de verdad y no solo se desplace la vista. Las plantillas del sistema ya lo llevan; un producto que monte su propia página lo añade.
+
+<Canvas of={SiteHeaderStories.ConPagina} />
+
+## Barra completa
+
+`language` coloca el selector de idioma —un `LanguageSwitcher` compacto— entre las acciones del producto y el botón de menú. Va en la barra, y no dentro del menú, porque quien necesita cambiar de idioma no puede abrir un menú que no lee.
+
+<Canvas of={SiteHeaderStories.Completa} />
+
+## Con acciones
+
+`actions` admite controles propios del sitio —acceso, selector de idioma— que se
+colocan antes del botón de menú.
+
+<Canvas of={SiteHeaderStories.ConAcciones} />
+
+## Superficie oscura
+
+Con `surface-dark`, la barra voltea sus tokens y el fondo sangra igual.
+
+<Canvas of={SiteHeaderStories.SuperficieOscura} />
+
+## Menú
+
+No hay navegación en línea: **el menú es siempre un panel a pantalla completa
+bajo la barra**, en cualquier ancho. Dentro va el índice del sitio —un
+`SiteNav`, que en móvil apila los grupos y en escritorio los pone en
+columnas— y, al final, `settings`: los ajustes del
+sitio, es decir, el selector de tema.
+
+<Canvas of={SiteHeaderStories.MenuAbierto} />
+
+Abierto, la página de debajo no hace scroll; `Escape` lo cierra y devuelve
+el foco al botón; un clic fuera de la cabecera también lo cierra. Cerrado,
+el panel sigue en el DOM pero inerte e invisible: así la entrada y la salida
+se animan con los tokens de movimiento y, con movimiento reducido, son
+inmediatas.
+
+El estado puede gobernarlo el producto con `open` y `onOpenChange` —para
+cerrarlo al navegar, por ejemplo— o dejarse interno si no hace falta.
+
+El panel es una capa `modal`: sobre el contenido, bajo lo flotante. Un
+selector de idioma abierto desde la barra se despliega por encima de él.
+
+## Altura
+
+La misma que la del `AppHeader`, de la que hereda: contenido de talla `md` más `spacing-2` de aire arriba y abajo, 56px. Las dos cabeceras miden lo mismo para que el paso de una superficie pública a una de aplicación no mueva la página.
+
+## Ancho
+
+`width` se pasa tal cual al `Container`: por defecto `xl` (1280px). El fondo no
+depende de esta prop, siempre cubre la ventana entera.
+
+## Accesibilidad
+
+- El botón de menú lleva `aria-expanded` y `aria-controls` apuntando al panel;
+  cerrado, el panel es `inert`: no recibe foco ni lo leen las ayudas técnicas.
+- Se renderiza un `SkipLink` al principio, primer elemento enfocable de la
+  página, apuntando a `#main-content`. `skipLabel` y `skipHref` lo ajustan;
+  pasar `skipLabel` vacío lo omite si el producto ya pone el suyo. El destino
+  lo aporta la página (ver «Con página debajo»).
+- El logotipo es un enlace con `aria-label` propio: el SVG no aporta texto.
+
+## Tokens
+
+<TokenTable tokens={siteHeaderTokens} />
+
+## Props
+
+<ArgTypes of={SiteHeaderStories} />

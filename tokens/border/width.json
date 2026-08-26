@@ -1,6 +1,9 @@
 {
   "border-width": {
-    "sm": { "$value": "1px", "$type": "dimension", "$description": "Default border width" },
-    "md": { "$value": "2px", "$type": "dimension", "$description": "Emphasized border width" }
+    "sm": { "$value": "1px", "$type": "dimension", "$description": "Escala. Valor del rol default" },
+    "md": { "$value": "2px", "$type": "dimension", "$description": "Escala. Valor del rol focus" },
+
+    "default": { "$value": "{border-width.sm}", "$type": "dimension", "$description": "Rol: todo borde del sistema. Los componentes apuntan aquí, nunca a la escala" },
+    "focus":   { "$value": "{border-width.md}", "$type": "dimension", "$description": "Rol: anillo de foco, ancho y separación. Solo para outline; nunca como borde" }
   }
 }

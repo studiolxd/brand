@@ -27,17 +27,17 @@ const meta: Meta<typeof Paragraph> = {
 export default meta;
 type Story = StoryObj<typeof Paragraph>;
 
-export const Default: Story = {};
+export const PorDefecto: Story = {};
 
-export const Small: Story = {
+export const Pequeno: Story = {
   args: { size: 'small' },
 };
 
-export const Large: Story = {
+export const Grande: Story = {
   args: { size: 'large' },
 };
 
-export const Sizes: Story = {
+export const Tamanos: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <Paragraph size="small">Small — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>

@@ -4,7 +4,7 @@ import { EmptyState } from './EmptyState';
 import { Icon } from '../../atoms/Icon/Icon';
 
 const meta: Meta<typeof EmptyState> = {
-  title: 'Molecules/EmptyState',
+  title: 'Por revisar/Molecules/EmptyState',
   component: EmptyState,
   parameters: {
     layout: 'padded',

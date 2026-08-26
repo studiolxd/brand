@@ -3,7 +3,7 @@
     "gap":              { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Separación entre el área de recorte y las acciones" },
     "area-max-height":  { "$value": "60vh",                  "$type": "dimension", "$description": "Alto máximo del área de recorte — la imagen se ajusta dentro" },
     "area-bg":          { "$value": "{color.grey-lightest}", "$type": "color",     "$description": "Fondo tras la imagen mientras se recorta" },
-    "area-border-radius": { "$value": "{border-radius.sm}",  "$type": "dimension", "$description": "Radio del área de recorte" },
+    "area-border-radius": { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio del área de recorte" },
     "actions-gap":      { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Separación entre los botones de acción" },
     "surface-dark-area-bg": { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo del área de recorte — surface-dark" }
   }

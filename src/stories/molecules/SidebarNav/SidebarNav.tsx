@@ -1,6 +1,9 @@
-import * as RadixAccordion from '@radix-ui/react-accordion';
+import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion';
 import type { ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
+import { Menu } from '../Menu/Menu';
+import { Tooltip } from '../../atoms/Tooltip/Tooltip';
+import { useSidebar } from '../../sections/Sidebar/SidebarContext';
 import './SidebarNav.css';
 
 export interface SidebarNavItem {
@@ -33,7 +36,7 @@ export interface SidebarNavGroupEntry {
 
 export type SidebarNavEntry = SidebarNavLinkEntry | SidebarNavGroupEntry;
 
-export type SidebarNavRenderLinkProps = {
+export type SidebarNavRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
   children: ReactNode;
   className: string;
@@ -42,6 +45,10 @@ export type SidebarNavRenderLinkProps = {
 };
 
 export interface SidebarNavProps {
+  /** Nombre accesible del `nav`. */
+  label?: string;
+  /** Solo iconos: los enlaces con tooltip, los grupos como menú. Sin él, lo decide la `Sidebar` (rail). */
+  rail?: boolean;
   entries: SidebarNavEntry[];
   defaultValue?: string[];
   value?: string[];
@@ -49,15 +56,14 @@ export interface SidebarNavProps {
   renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
 }
 
-function defaultRenderLink({ href, children, className, title, 'aria-current': ariaCurrent }: SidebarNavRenderLinkProps) {
-  return (
-    <a href={href} className={className} title={title} aria-current={ariaCurrent}>
-      {children}
-    </a>
-  );
+// Reenvía todo: en rail el enlace vive dentro de un Menu y recibe rol, tabIndex y teclado.
+function defaultRenderLink({ children, ...props }: SidebarNavRenderLinkProps) {
+  return <a {...props}>{children}</a>;
 }
 
 export function SidebarNav({
+  label = 'Navegación principal',
+  rail,
   entries,
   defaultValue,
   value,
@@ -65,12 +71,79 @@ export function SidebarNav({
   renderLink = defaultRenderLink,
 }: SidebarNavProps) {
   const accordionProps = value !== undefined
-    ? { type: 'multiple' as const, value, onValueChange }
-    : { type: 'multiple' as const, defaultValue };
+    ? {
+        value,
+        onValueChange: (next: BaseAccordion.Root.Props['value']) =>
+          onValueChange?.((next ?? []) as string[]),
+      }
+    : { defaultValue };
+
+  const sidebar = useSidebar();
+  const isRail = rail ?? sidebar.rail;
+
+  if (isRail) {
+    return (
+      <nav className="sidebar-nav sidebar-nav--rail" aria-label={label}>
+        <ul className="sidebar-nav__rail" role="list">
+          {entries.map((entry) => {
+            const glyph = (
+              <span className="sidebar-nav__rail-icon" aria-hidden="true">
+                {entry.icon ?? <span className="sidebar-nav__rail-initial">{entry.label.charAt(0)}</span>}
+              </span>
+            );
+            if (entry.kind === 'link') {
+              return (
+                <li key={entry.id}>
+                  <Tooltip label={entry.label} side="right">
+                    {renderLink({
+                      href: entry.href,
+                      className: ['sidebar-nav__rail-item', entry.active ? 'sidebar-nav__rail-item--active' : ''].filter(Boolean).join(' '),
+                      'aria-current': entry.active ? 'page' : undefined,
+                      'aria-label': entry.label,
+                      children: glyph,
+                    } as SidebarNavRenderLinkProps)}
+                  </Tooltip>
+                </li>
+              );
+            }
+            const groupActive = entry.items.some((item) => item.active);
+            // El menú del grupo: si el grupo tiene portada, es el primer enlace; si no, un rótulo.
+            const items = [
+              entry.href
+                ? { type: 'link' as const, label: entry.label, href: entry.href }
+                : { type: 'label' as const, label: entry.label },
+              ...(entry.href ? [{ type: 'separator' as const }] : []),
+              ...entry.items.map((item) => ({ type: 'link' as const, label: item.label, href: item.href })),
+            ];
+            return (
+              <li key={entry.id}>
+                <Menu
+                  items={items}
+                  side="right"
+                  align="start"
+                  openOnHover
+                  renderLink={(props) => renderLink({ ...(props as SidebarNavRenderLinkProps), href: props.href, className: props.className, children: props.children })}
+                  trigger={
+                    <button
+                      type="button"
+                      className={['sidebar-nav__rail-item', groupActive ? 'sidebar-nav__rail-item--active' : ''].filter(Boolean).join(' ')}
+                      aria-label={entry.label}
+                    >
+                      {glyph}
+                    </button>
+                  }
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    );
+  }
 
   return (
-    <nav className="sidebar-nav">
-      <RadixAccordion.Root className="sidebar-nav__accordion" {...accordionProps}>
+    <nav className="sidebar-nav" aria-label={label}>
+      <BaseAccordion.Root className="sidebar-nav__accordion" multiple {...accordionProps}>
         {entries.map((entry) => {
           if (entry.kind === 'link') {
             const cls = [
@@ -101,8 +174,8 @@ export function SidebarNav({
           }
 
           return (
-            <RadixAccordion.Item key={entry.id} value={entry.id} className="sidebar-nav__group">
-              <RadixAccordion.Header className="sidebar-nav__group-header">
+            <BaseAccordion.Item key={entry.id} value={entry.id} className="sidebar-nav__group">
+              <BaseAccordion.Header className="sidebar-nav__group-header">
                 {entry.href
                   ? renderLink({
                       href: entry.href,
@@ -122,11 +195,11 @@ export function SidebarNav({
                     </span>
                   )
                 }
-                <RadixAccordion.Trigger className="sidebar-nav__group-chevron">
+                <BaseAccordion.Trigger className="sidebar-nav__group-chevron">
                   <Icon name="chevron" className="sidebar-nav__group-chevron-icon" size="sm" />
-                </RadixAccordion.Trigger>
-              </RadixAccordion.Header>
-              <RadixAccordion.Content className="sidebar-nav__group-content">
+                </BaseAccordion.Trigger>
+              </BaseAccordion.Header>
+              <BaseAccordion.Panel className="sidebar-nav__group-content">
                 <div className="sidebar-nav__group-content-inner">
                   <ul className="sidebar-nav__items" role="list">
                     {entry.items.map((item) => {
@@ -157,11 +230,11 @@ export function SidebarNav({
                     })}
                   </ul>
                 </div>
-              </RadixAccordion.Content>
-            </RadixAccordion.Item>
+              </BaseAccordion.Panel>
+            </BaseAccordion.Item>
           );
         })}
-      </RadixAccordion.Root>
+      </BaseAccordion.Root>
     </nav>
   );
 }

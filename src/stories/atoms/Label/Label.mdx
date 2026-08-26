@@ -7,11 +7,21 @@ import { labelBaseTokens, labelDarkTokens } from "../../../tokens/components/lab
 
 # Label
 
-Etiqueta accesible para campos de formulario. Siempre está asociada a un campo mediante `htmlFor`. Se muestra en mayúsculas y puede ocultarse visualmente sin perder accesibilidad.
-
-## Visible
+Etiqueta accesible para campos de formulario. Siempre está asociada a un campo mediante `htmlFor`. Va en caja normal —sin mayúsculas ni tracking: es texto, no una marca— y puede ocultarse visualmente sin perder accesibilidad.
 
 <Canvas of={LabelStories.Visible} />
+
+## Oculta
+
+`hidden` la quita de la vista pero no del árbol de accesibilidad (clase `visually-hidden`, del átomo `VisuallyHidden`): el campo sigue teniendo nombre. Es lo que usan los campos con `labelHidden` cuando el contexto ya dice qué es (una barra de búsqueda, un selector en un panel). Sombrea a propósito el atributo nativo `hidden`: para no renderizarla, no se renderiza.
+
+<Canvas of={LabelStories.Oculta} />
+
+## Accesibilidad
+
+- Siempre con `htmlFor` apuntando al `id` del control: así el clic en la etiqueta enfoca el campo y el lector de pantalla lo nombra.
+- Un `placeholder` no es una etiqueta.
+- Cuerpo `font-size.1` con peso de énfasis: se distingue del valor del campo sin gritar.
 
 ---
 

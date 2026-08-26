@@ -1,10 +1,13 @@
 {
   "border-radius": {
-    "none": { "$value": "0px",    "$type": "dimension", "$description": "No border radius" },
-    "sm":   { "$value": "4px",    "$type": "dimension", "$description": "Small — inputs, badges, chips" },
-    "md":   { "$value": "8px",    "$type": "dimension", "$description": "Medium — buttons, small cards" },
-    "lg":   { "$value": "12px",   "$type": "dimension", "$description": "Large — cards, modals" },
-    "xl":   { "$value": "16px",   "$type": "dimension", "$description": "Extra large — panels, drawers" },
-    "full": { "$value": "9999px", "$type": "dimension", "$description": "Full — pills, circular avatars" }
+    "none": { "$value": "0px",    "$type": "dimension", "$description": "Escala. Valor del rol default" },
+    "sm":   { "$value": "4px",    "$type": "dimension", "$description": "Escala. El sistema no lo usa" },
+    "md":   { "$value": "8px",    "$type": "dimension", "$description": "Escala. El sistema no lo usa" },
+    "lg":   { "$value": "12px",   "$type": "dimension", "$description": "Escala. El sistema no lo usa" },
+    "xl":   { "$value": "16px",   "$type": "dimension", "$description": "Escala. El sistema no lo usa" },
+    "full": { "$value": "9999px", "$type": "dimension", "$description": "Escala. Valor del rol round" },
+
+    "default": { "$value": "{border-radius.none}", "$type": "dimension", "$description": "Rol: toda esquina del sistema es recta. Los componentes apuntan aquí, nunca a la escala" },
+    "round":   { "$value": "{border-radius.full}", "$type": "dimension", "$description": "Rol: píldoras y círculos — avatar, tag, badge, interruptor, botón píldora" }
   }
 }

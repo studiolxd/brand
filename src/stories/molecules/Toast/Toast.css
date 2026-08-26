@@ -129,7 +129,7 @@
   height: calc(var(--toast-close-size) + var(--spacing-2));
 
   color: var(--toast-close-color);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-default);
   transition: color var(--motion-duration-fast) var(--motion-easing-default),
               background-color var(--motion-duration-fast) var(--motion-easing-default);
 }
@@ -140,7 +140,7 @@
 }
 
 .toast__close:focus-visible {
-  outline: var(--border-width-md) solid currentColor;
+  outline: var(--border-width-focus) solid currentColor;
   outline-offset: 2px;
 }
 

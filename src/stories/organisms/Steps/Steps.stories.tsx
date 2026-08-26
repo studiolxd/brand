@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Steps } from './Steps';
 
 const meta: Meta<typeof Steps> = {
-  title: 'Organisms/Steps',
+  title: 'Por revisar/Organisms/Steps',
   component: Steps,
   parameters: {
     layout: 'fullscreen',

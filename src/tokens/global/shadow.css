@@ -3,9 +3,10 @@
  */
 
 :root {
-  --shadow-none: none; /** No shadow */
-  --shadow-sm: 0 1px 2px rgba(17,30,48,0.08); /** Subtle — inputs, minor elements */
-  --shadow-md: 0 2px 8px rgba(17,30,48,0.10); /** Medium — cards, dropdowns */
-  --shadow-lg: 0 4px 16px rgba(17,30,48,0.12); /** Large — modals, popovers */
-  --shadow-xl: 0 8px 32px rgba(17,30,48,0.16); /** Extra large — drawers, overlays */
+  --shadow-none: none; /** Escala. Valor del rol default */
+  --shadow-sm: 0 1px 2px rgba(17,30,48,0.08); /** Escala. El sistema no lo usa */
+  --shadow-md: 0 2px 8px rgba(17,30,48,0.10); /** Escala. El sistema no lo usa */
+  --shadow-lg: 0 4px 16px rgba(17,30,48,0.12); /** Escala. El sistema no lo usa */
+  --shadow-xl: 0 8px 32px rgba(17,30,48,0.16); /** Escala. El sistema no lo usa */
+  --shadow-default: var(--shadow-none); /** Rol: ningún elemento del sistema proyecta sombra. La elevación se expresa con borde y con el fondo del panel */
 }

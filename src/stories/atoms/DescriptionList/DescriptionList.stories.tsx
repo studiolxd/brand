@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DescriptionList } from './DescriptionList';
 
 const meta = {
-  title: 'Atoms/DescriptionList',
+  title: 'Por revisar/Atoms/DescriptionList',
   component: DescriptionList,
   tags: ['autodocs'],
 } satisfies Meta<typeof DescriptionList>;

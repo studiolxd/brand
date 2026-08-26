@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as UserMenuStories from "./UserMenu.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { userMenuTokens } from "../../../tokens/components/user-menu";
+
+<Meta of={UserMenuStories} />
+
+# UserMenu
+
+La cuenta de quien ha iniciado sesión: avatar (foto o iniciales), nombre y un menú con su identidad completa y las acciones de cuenta. Vive al final del `AppHeader` en modo `compact` (avatar y chevron, sin nombre).
+
+<Canvas of={UserMenuStories.PorDefecto} />
+
+## El botón
+
+Avatar a talla `sm` (32px), nombre recortado con puntos suspensivos si no cabe, y chevron. El avatar es decorativo (`alt=""`): el nombre ya está escrito al lado. Con `notificationCount`, un `NumberBadge` asoma por la esquina del avatar (`badge-offset`), con tope «99+» y nombre accesible con contexto.
+
+<Canvas of={UserMenuStories.ConNotificaciones} />
+<Canvas of={UserMenuStories.NombreLargo} />
+
+## Compacto
+
+En la barra (`AppHeader`) va con `compact`: avatar, badge y chevron, sin nombre. El chevron se queda para decir que abre un menú; el nombre lo lleva el panel y el nombre accesible del botón.
+
+<Canvas of={UserMenuStories.Compacto} />
+
+## El panel
+
+Un `Menu` de Base UI. Cabecera con nombre y correo (no es un ítem: no se enfoca), separador y los `items` del producto — botones, enlaces (`renderLink` para el router, reenviando todas las props) y un destructivo al final para cerrar sesión. El resalte de los ítems es el de todos los menús: relleno de marca, invertido en oscuro.
+
+<Canvas of={UserMenuStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- El botón se llama «Cuenta de ‹nombre›» (`label` para traducirlo); abre un `menu` que se recorre con las flechas y se cierra con Escape.
+- El badge dice «N notificaciones sin leer», no solo el número.
+
+## Tokens
+
+Panel, ítems y separador referencian los de `context-menu`/`floating-panel`: el UserMenu no tiene un menú propio, tiene el del sistema.
+
+<TokenTable tokens={userMenuTokens} />
+
+## Props
+
+<ArgTypes of={UserMenuStories} />

@@ -9,23 +9,45 @@
   font-family: var(--tooltip-font-family);
   font-size: var(--tooltip-font-size);
   line-height: var(--tooltip-line-height);
-  z-index: var(--tooltip-z-index);
-  transform-origin: var(--radix-tooltip-content-transform-origin);
+  transform-origin: var(--transform-origin);
   animation-duration: calc(var(--tooltip-transition-duration) * 1ms);
   animation-timing-function: var(--tooltip-transition-easing);
 }
 
-.tooltip[data-state='delayed-open'],
-.tooltip[data-state='instant-open'] {
+.tooltip[data-open] {
   animation-name: tooltip-in;
 }
 
-.tooltip[data-state='closed'] {
+.tooltip[data-closed] {
   animation-name: tooltip-out;
 }
 
+/* El SVG lleva la geometría del triángulo; aquí solo el color y el giro que
+   lo hace apuntar al disparador según el lado que resuelva el positioner.
+   Los desplazamientos van en porcentaje (relativos al propio triángulo) para
+   no cablear ninguna medida. */
 .tooltip__arrow {
   fill: var(--tooltip-bg);
+  line-height: 0;
+}
+
+.tooltip__arrow[data-side='top'] {
+  top: 100%;
+}
+
+.tooltip__arrow[data-side='bottom'] {
+  bottom: 100%;
+  rotate: 180deg;
+}
+
+.tooltip__arrow[data-side='left'] {
+  left: 100%;
+  rotate: -90deg;
+}
+
+.tooltip__arrow[data-side='right'] {
+  right: 100%;
+  rotate: 90deg;
 }
 
 @keyframes tooltip-in {
@@ -48,4 +70,9 @@
     opacity: 0;
     transform: scale(0.95);
   }
+}
+
+/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+.tooltip__positioner {
+  z-index: var(--tooltip-z-index);
 }

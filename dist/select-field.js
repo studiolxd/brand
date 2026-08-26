@@ -1,7 +1,7 @@
 'use client';
 import './select-field.css';
-import { Label as e } from "./label.js";
-import { Select as t } from "./select.js";
+import { t as e } from "./_shared/Select.js";
+import { Label as t } from "./label.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/SelectField/SelectField.tsx
 var i = "__empty__";
@@ -17,14 +17,14 @@ function s({ id: s, label: c, labelHidden: l = !1, options: u, value: d, default
 		value: i
 	} : e);
 	return /* @__PURE__ */ r("div", {
-		className: ["select-field", g ? "select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["select-field", g || _ ? "select-field--error" : ""].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ n(e, {
+			/* @__PURE__ */ n(t, {
 				htmlFor: s,
 				hidden: l,
 				children: c
 			}),
-			/* @__PURE__ */ n(t, {
+			/* @__PURE__ */ n(e, {
 				id: s,
 				options: S,
 				value: a(d),
@@ -32,6 +32,8 @@ function s({ id: s, label: c, labelHidden: l = !1, options: u, value: d, default
 				placeholder: p,
 				disabled: m,
 				size: h,
+				"aria-describedby": [b, x].filter(Boolean).join(" ") || void 0,
+				"aria-invalid": g || !!_,
 				onValueChange: y ? (e) => y(o(e)) : void 0
 			}),
 			_ && /* @__PURE__ */ n("span", {

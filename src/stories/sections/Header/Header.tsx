@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Logo } from '../../atoms/Logo/Logo';
-import { Hamburger } from '../../atoms/Hamburger/Hamburger';
+import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import { SkipLink } from '../../atoms/SkipLink/SkipLink';
 import './Header.css';
 
@@ -41,7 +41,7 @@ export function Header({
         <Logo />
       </a>
 
-      <Hamburger
+      <MenuButton
         isOpen={isOpen}
         onClick={() => setIsOpen(!isOpen)}
         label={isOpen ? 'Cerrar menu' : 'Abrir menu'}

@@ -7,6 +7,53 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.0.0
+
+Rediseño del sistema: Base UI como motor, doctrina de tokens cerrada (nada
+inventado: todo referencia la escala), tallas de componente 32/40/48 en todos
+los controles, y el shell de aplicación rehecho. Storybook es la verdad:
+Foundations explica el sistema; cada componente definitivo documenta su API.
+
+### BREAKING
+
+- **Radix → Base UI** (`@base-ui-components/react`). `asChild` desaparece:
+  `Button` y los primitivos usan `render`. `renderLink` de los menús debe
+  reenviar TODAS las props inyectadas (`<Link {...props}>`).
+- **Shell de aplicación**: `AppShell` exige `header` + `sidebar`; la sidebar tiene
+  estado `open | rail | closed` y ancho redimensionable; en móvil es un cajón
+  lateral que se cierra al navegar. `AppHeader` vive en todos los anchos
+  (menú · `start` · `notifications` · `end`) y ya no admite `children`/`center`.
+  `Sidebar` pierde `expanded`. `useAppShell()` cambia (`sidebar`, `setSidebar`,
+  `toggleSidebar`, `closeSidebar`, `sidebarWidth`, `isDesktop`).
+- **Menús**: `Menu` es la fuente (tipos `MenuItem`… y tokens `menu.*`);
+  `ContextMenu` es `Menu` + `DotsButton` (`triggerAriaLabel` → `label`); fuera
+  `context-menu.json` y `dots-button.json`. Ítems `radio` sin glifo: la elegida
+  en énfasis.
+- **Tallas**: `Avatar` y `Select` a 32/40/48 (`Avatar` pierde `xl`); `Button`,
+  `Select` y `DotsButton` fijan altura por talla, sin `padding-block`. `Button`
+  rectangular (`border-radius.default`) y ghost con relleno de marca en hover.
+- **Tipografía**: la base viste `h1`–`h6`, `p` y `a`; `Heading`/`Paragraph` solo
+  añaden modificadores. Fuera los pesos `extralight/regular/semibold/extrabold`
+  y los alias `text.paragraph.*`. `Label` sin mayúsculas.
+- **Tokens retirados**: `select.padding-block/icon-size/focus-ring-offset`,
+  `site-header.settings-border-*`, `user-menu.avatar-size`/`initials-*`,
+  `org-switcher.logo-*`/`initials-*`, `*-label-text-transform`, `link.color-hover`
+  → `link.hover-color` (y `text-decoration-hover` → `hover-text-decoration`).
+
+### Añadido
+
+- Componentes: `Container`, `Logo`, `MenuButton`, `SkipLink`, `SiteHeader`,
+  `SiteNav`, `LanguageSwitcher`, `ThemeSwitcher`, `DropdownField`,
+  `NotificationButton`. `Icon` con `menu`/`close` compartiendo geometría con
+  `MenuButton`.
+- `Menu` con `openOnHover`; `SidebarNav` en rail (iconos, tooltips, grupos como
+  menú con la portada de primer enlace); `OrgSwitcher block`/`compact`;
+  `UserMenu compact`; `Select` con `aria-describedby`/`aria-invalid`;
+  `SelectField` enlaza ayuda y error; `VisuallyHidden` reenvía `ref` y props.
+- Foundations completas (colores, tipografía, espaciado, tallas, bordes, radio,
+  sombras, opacidad, movimiento, puntos de ruptura, capas, iconografía);
+  `z-index.*`, `size-component.*`, `font-size.0` (cifras de marcas).
+
 ## v15.0.0
 
 ### BREAKING

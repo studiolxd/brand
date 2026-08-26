@@ -1,10 +1,19 @@
 /* eslint-disable react-refresh/only-export-components --
-   Partes re-exportadas de Radix (`SelectRoot`/`Value`/`Group`) + namespace
-   compuesto (`Object.assign`): fast-refresh no las reconoce como componentes. El
-   patrón es intencional (DX cliente + RSC-safe) y fast-refresh no aplica a source
-   de librería. */
-import { forwardRef } from 'react';
-import * as RadixSelect from '@radix-ui/react-select';
+   Partes re-exportadas de Base UI (`SelectGroup`), contexto de etiquetas y
+   namespace compuesto (`Object.assign`): fast-refresh no las reconoce como
+   componentes. El patrón es intencional (DX cliente + RSC-safe) y fast-refresh
+   no aplica a source de librería. */
+import {
+  Children,
+  createContext,
+  forwardRef,
+  isValidElement,
+  useContext,
+  useMemo,
+} from 'react';
+import type { ReactNode } from 'react';
+import { Select as BaseSelect } from '@base-ui-components/react/select';
+import type { SeparatorProps as BaseSeparatorProps } from '@base-ui-components/react/separator';
 import { Icon } from '../Icon/Icon';
 import './Select.css';
 
@@ -14,6 +23,11 @@ export interface SelectOption {
   /** Etiqueta accesible de la opción. Si no se pasa, usa label. */
   'aria-label'?: string;
 }
+
+/** Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal`). */
+export type SelectPortalContainer = React.ComponentPropsWithoutRef<
+  typeof BaseSelect.Portal
+>['container'];
 
 export interface SelectProps {
   options: SelectOption[];
@@ -26,37 +40,106 @@ export interface SelectProps {
   size?: 'sm' | 'md' | 'lg';
   onValueChange?: (value: string) => void;
   id?: string;
-  /** Etiqueta accesible del trigger. Si no se pasa, usa el placeholder. */
+  /** Nombre accesible cuando el Select va suelto. En un campo lo nombra la etiqueta (`htmlFor`), que este atributo pisaría: no lo pongas ahí. */
   'aria-label'?: string;
+  /** Ids de ayuda/error que describen el control (lo pone el campo). */
+  'aria-describedby'?: string;
+  /** Estado de error accesible (lo pone el campo). */
+  'aria-invalid'?: boolean;
   /**
-   * Nodo DOM donde montar el portal del dropdown (reenviado a Radix
-   * `Portal.container`). Por defecto Radix lo monta en `document.body`,
-   * que hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
-   * sin configuración adicional. Solo hace falta pasar `container` cuando
-   * el Select vive dentro de un `.surface-dark` **anidado** (no en la raíz):
-   * ese contexto no llega a `document.body` por la cascada, así que hay que
-   * montar el portal dentro del propio contenedor con la clase.
+   * Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal`
+   * de Base UI). Por defecto el portal se monta en `document.body`, que hereda
+   * el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`) sin
+   * configuración adicional. Solo hace falta pasar `container` cuando el Select
+   * vive dentro de un `.surface-dark` **anidado** (no en la raíz): ese contexto
+   * no llega a `document.body` por la cascada, así que hay que montar el portal
+   * dentro del propio contenedor con la clase.
    */
-  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
+  container?: SelectPortalContainer;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
- * Partes compuestas — un motor (Radix), dos capas. Cada parte reenvía las props
- * del primitivo Radix + `{...rest}` (para `data-*`/`aria-*` inyectados por el
- * consumidor, p. ej. FormControl vía Slot) y concatena `className` al final.
+ * Partes compuestas — un motor (Base UI), dos capas. Cada parte reenvía las
+ * props del primitivo Base UI + `{...rest}` (para `data-*`/`aria-*` inyectados
+ * por el consumidor) y concatena `className` al final.
  * ───────────────────────────────────────────────────────────────────────────── */
 
-/** Raíz del Select (Radix Root re-exportado). */
-export const SelectRoot = RadixSelect.Root;
+/**
+ * Etiquetas de las opciones, indexadas por valor. Base UI muestra en el trigger
+ * el valor crudo salvo que se le pasen los `items`; el Root las recoge del árbol
+ * de `Select.Item` y `Select.Value` las resuelve desde aquí.
+ */
+const SelectLabelsContext = createContext<Map<string, ReactNode> | null>(null);
 
-/** Valor/placeholder del trigger (Radix Value re-exportado). */
-export const SelectValue = RadixSelect.Value;
+function collectItemLabels(node: ReactNode, acc: Map<string, ReactNode>): void {
+  Children.forEach(node, (child) => {
+    if (!isValidElement(child)) return;
+    if (child.type === SelectItem) {
+      const { value, children } = child.props as SelectItemProps;
+      if (typeof value === 'string') acc.set(value, children);
+      return;
+    }
+    const { children } = (child.props ?? {}) as { children?: ReactNode };
+    if (children != null) collectItemLabels(children, acc);
+  });
+}
 
-/** Agrupa opciones (Radix Group, no visual). */
-export const SelectGroup = RadixSelect.Group;
+type BaseSelectRootProps = React.ComponentProps<typeof BaseSelect.Root<string>>;
+
+export interface SelectRootProps
+  extends Omit<BaseSelectRootProps, 'onValueChange' | 'multiple'> {
+  onValueChange?: (value: string) => void;
+}
+
+/** Raíz del Select (Base UI Root + índice de etiquetas de las opciones). */
+export function SelectRoot({ children, onValueChange, ...rest }: SelectRootProps) {
+  const labels = useMemo(() => {
+    const map = new Map<string, ReactNode>();
+    collectItemLabels(children, map);
+    return map;
+  }, [children]);
+
+  return (
+    <SelectLabelsContext.Provider value={labels}>
+      <BaseSelect.Root
+        onValueChange={onValueChange ? (value) => onValueChange(value as string) : undefined}
+        {...rest}
+      >
+        {children}
+      </BaseSelect.Root>
+    </SelectLabelsContext.Provider>
+  );
+}
+
+export interface SelectValueProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseSelect.Value>, 'children'> {
+  /** Texto mostrado cuando no hay valor seleccionado. */
+  placeholder?: ReactNode;
+  children?: ReactNode | ((value: string | null) => ReactNode);
+}
+
+/** Valor/placeholder del trigger. */
+export const SelectValue = forwardRef<HTMLSpanElement, SelectValueProps>(function SelectValue(
+  { placeholder, children, ...rest }, ref) {
+  const labels = useContext(SelectLabelsContext);
+
+  return (
+    <BaseSelect.Value ref={ref} {...rest}>
+      {(value: string | null) => {
+        if (typeof children === 'function') return children(value);
+        if (children != null) return children;
+        if (value == null || value === '') return placeholder ?? null;
+        return labels?.get(value) ?? value;
+      }}
+    </BaseSelect.Value>
+  );
+});
+
+/** Agrupa opciones (Base UI Group, no visual). */
+export const SelectGroup = BaseSelect.Group;
 
 export interface SelectTriggerProps
-  extends React.ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {
+  extends React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> {
   size?: 'sm' | 'md' | 'lg';
 }
 
@@ -66,76 +149,89 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(f
   const classes = ['select', size !== 'md' ? `select--${size}` : '', className ?? '']
     .filter(Boolean).join(' ');
   return (
-    <RadixSelect.Trigger ref={ref} className={classes} {...rest}>
+    <BaseSelect.Trigger ref={ref} className={classes} {...rest}>
       {children}
-      <RadixSelect.Icon asChild>
-        <Icon
-          name="chevron"
-          className="select__icon"
-          size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
-        />
-      </RadixSelect.Icon>
-    </RadixSelect.Trigger>
+      <Icon
+        name="chevron"
+        className="select__icon"
+        size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
+      />
+    </BaseSelect.Trigger>
   );
 });
 
 export interface SelectContentProps
-  extends React.ComponentPropsWithoutRef<typeof RadixSelect.Content> {
+  extends React.ComponentPropsWithoutRef<typeof BaseSelect.Popup> {
   size?: 'sm' | 'md' | 'lg';
   /** Ver `SelectProps.container`. */
-  container?: React.ComponentPropsWithoutRef<typeof RadixSelect.Portal>['container'];
+  container?: SelectPortalContainer;
+  /** Lado del trigger donde se despliega. */
+  side?: React.ComponentPropsWithoutRef<typeof BaseSelect.Positioner>['side'];
+  /** Alineación respecto al trigger. */
+  align?: React.ComponentPropsWithoutRef<typeof BaseSelect.Positioner>['align'];
+  sideOffset?: number;
 }
 
-/** Dropdown del Select: Portal → Content (`.select__content`) → Viewport. `position`/`sideOffset` del DS. */
+/** Dropdown del Select: Portal → Positioner → Popup (`.select__content`). */
 export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function SelectContent(
-  { size = 'md', container, className, children, position = 'popper', sideOffset = -1, ...rest }, ref) {
+  { size = 'md', container, className, children, side = 'bottom', align = 'start', sideOffset = -1, ...rest }, ref) {
   const classes = [
     'select__content',
     size !== 'md' ? `select__content--${size}` : '',
     className ?? '',
   ].filter(Boolean).join(' ');
   return (
-    <RadixSelect.Portal container={container}>
-      <RadixSelect.Content ref={ref} className={classes} position={position} sideOffset={sideOffset} {...rest}>
-        <RadixSelect.Viewport>{children}</RadixSelect.Viewport>
-      </RadixSelect.Content>
-    </RadixSelect.Portal>
+    <BaseSelect.Portal container={container}>
+      <BaseSelect.Positioner
+        className="select__positioner"
+        side={side}
+        align={align}
+        sideOffset={sideOffset}
+        alignItemWithTrigger={false}
+      >
+        <BaseSelect.Popup ref={ref} className={classes} {...rest}>
+          {children}
+        </BaseSelect.Popup>
+      </BaseSelect.Positioner>
+    </BaseSelect.Portal>
   );
 });
 
-export type SelectItemProps = React.ComponentPropsWithoutRef<typeof RadixSelect.Item>;
+export type SelectItemProps = React.ComponentPropsWithoutRef<typeof BaseSelect.Item>;
 
 /** Opción del Select (`.select__item`). Los children (texto o JSX) van en `ItemText`. */
 export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(function SelectItem(
   { className, children, ...rest }, ref) {
   const classes = ['select__item', className ?? ''].filter(Boolean).join(' ');
   return (
-    <RadixSelect.Item ref={ref} className={classes} {...rest}>
-      <RadixSelect.ItemText>{children}</RadixSelect.ItemText>
-    </RadixSelect.Item>
+    <BaseSelect.Item ref={ref} className={classes} {...rest}>
+      <BaseSelect.ItemText>{children}</BaseSelect.ItemText>
+    </BaseSelect.Item>
   );
 });
 
-export type SelectLabelProps = React.ComponentPropsWithoutRef<typeof RadixSelect.Label>;
+export type SelectLabelProps = React.ComponentPropsWithoutRef<typeof BaseSelect.GroupLabel>;
 
 /** Etiqueta de grupo (`.select__label`, tipografía del label del DS). */
 export const SelectLabel = forwardRef<HTMLDivElement, SelectLabelProps>(function SelectLabel(
   { className, children, ...rest }, ref) {
   const classes = ['select__label', className ?? ''].filter(Boolean).join(' ');
   return (
-    <RadixSelect.Label ref={ref} className={classes} {...rest}>
+    <BaseSelect.GroupLabel ref={ref} className={classes} {...rest}>
       {children}
-    </RadixSelect.Label>
+    </BaseSelect.GroupLabel>
   );
 });
 
-export type SelectSeparatorProps = React.ComponentPropsWithoutRef<typeof RadixSelect.Separator>;
+export type SelectSeparatorProps = Omit<BaseSeparatorProps, 'className'> & { className?: string };
 
 /** Separador entre grupos (`.select__separator`). */
-export const SelectSeparator = forwardRef<HTMLDivElement, SelectSeparatorProps>(function SelectSeparator(
+export const SelectSeparator: React.ForwardRefExoticComponent<
+  SelectSeparatorProps & React.RefAttributes<HTMLDivElement>
+> = forwardRef<HTMLDivElement, SelectSeparatorProps>(function SelectSeparator(
   { className, ...rest }, ref) {
   const classes = ['select__separator', className ?? ''].filter(Boolean).join(' ');
-  return <RadixSelect.Separator ref={ref} className={classes} {...rest} />;
+  return <BaseSelect.Separator ref={ref} className={classes} {...rest} />;
 });
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -154,6 +250,8 @@ function SelectClosed({
   onValueChange,
   id,
   'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-invalid': ariaInvalid,
   container,
 }: SelectProps) {
   return (
@@ -161,11 +259,10 @@ function SelectClosed({
       value={value}
       defaultValue={defaultValue}
       disabled={disabled}
-      open={readOnly ? false : undefined}
-      onOpenChange={readOnly ? () => {} : undefined}
-      onValueChange={readOnly ? undefined : onValueChange}
+      readOnly={readOnly}
+      onValueChange={onValueChange}
     >
-      <SelectTrigger size={size} id={id} aria-label={ariaLabel ?? placeholder} aria-readonly={readOnly || undefined}>
+      <SelectTrigger size={size} id={id} aria-label={ariaLabel} aria-describedby={ariaDescribedBy} aria-invalid={ariaInvalid || undefined}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent size={size} container={container}>
@@ -186,7 +283,7 @@ function SelectClosed({
  *   <Select.Content><Select.Item/>…</Select.Content></Select.Root>` — para labels
  *   JSX, grupos, o inyección de props del consumidor (FormControl) en el trigger.
  *
- * Ambas comparten el mismo motor Radix y las mismas clases: la cerrada está
+ * Ambas comparten el mismo motor Base UI y las mismas clases: la cerrada está
  * implementada sobre las partes.
  *
  * Las partes están disponibles también como **named exports** (`SelectTrigger`,

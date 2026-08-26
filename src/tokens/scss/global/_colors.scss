@@ -20,10 +20,10 @@ $lxd-color-destructive-fill: #b30000; // Destructive — fondo sólido universal
 $lxd-color-destructive-fill-text: #ffffff; // Destructive — contenido sobre destructive-fill
 $lxd-color-white: #ffffff; // Pure white
 $lxd-color-black: #000000; // Pure black
-$lxd-color-grey-lightest: #f2f2f2; // Fondos sutiles, chips, tags
+$lxd-color-grey-lightest: #f2f2f2; // Superficie clara secundaria: bloque de código, kbd, burbujas, pie de tabla. Encima, texto prusia o grey-darkest
 $lxd-color-grey-light: #d0d0d0; // Bordes, dividers, separadores
-$lxd-color-grey-dark: #767676; // Placeholder, texto secundario
-$lxd-color-grey-darkest: #4a4a4a; // Texto deshabilitado, labels inactivos
+$lxd-color-grey-dark: #6b6b6b; // Iconos de acción secundarios y controles deshabilitados. No es un gris de texto: todo texto va en prusia o grey-darkest
+$lxd-color-grey-darkest: #4a4a4a; // Texto secundario y placeholder en superficie clara (AAA sobre blanco)
 $lxd-color-prussian: #111e30; // Brand prussian
 $lxd-color-lavender: #baabff; // Brand lavender
 $lxd-color-yellow: #ffcd00; // Brand yellow
@@ -31,8 +31,9 @@ $lxd-color-emerald: #20e38e; // Brand emerald
 $lxd-color-cayenne: #f05e1c; // Brand cayenne
 $lxd-color-text-on-light: #111e30; // Text color for light backgrounds
 $lxd-color-text-on-dark: #ffffff; // Text color for dark backgrounds
-$lxd-color-text-placeholder: #767676; // Placeholder text color
-$lxd-color-text-muted-on-light: #4a4a4a; // Muted text — helper text, secondary labels
+$lxd-color-text-placeholder-on-light: #4a4a4a; // Placeholder sobre superficie clara. Mismo gris que el texto secundario
+$lxd-color-text-placeholder-on-dark: #d0d0d0; // Placeholder sobre superficie oscura. Mismo gris que el texto secundario
+$lxd-color-text-muted-on-light: #4a4a4a; // Texto secundario: ayudas, etiquetas, metadatos
 $lxd-color-text-muted-on-dark: #d0d0d0; // Muted text on dark backgrounds
 $lxd-color-background-light: #ffffff; // Light surface background
 $lxd-color-background-dark: #111e30; // Dark surface background

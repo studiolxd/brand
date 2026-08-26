@@ -1,65 +1,48 @@
 'use client';
 
-import { useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useContext, useState, type ReactNode } from 'react';
 import { AppShellContext } from '../AppShell/AppShellContext';
-import { Hamburger } from '../../atoms/Hamburger/Hamburger';
+import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import './AppHeader.css';
 
 export interface AppHeaderProps {
-  /** Slot central (p. ej. OrgSwitcher). Vacío en portales sin organización. */
-  center?: ReactNode;
-  /** Slot final (p. ej. UserMenu — el CSS del header lo compacta a solo-avatar). */
+  /** Tras el botón de menú: breadcrumb, buscador, título de página… */
+  start?: ReactNode;
+  /** Antes del avatar: la campana con su contador. Sitio fijo. */
+  notifications?: ReactNode;
+  /** Al final, siempre: el `UserMenu` (compacto). */
   end?: ReactNode;
-  /** Contenido del panel de navegación a pantalla completa. */
-  children: ReactNode;
-  /** aria-label del botón de menú. */
+  /** Texto accesible del botón de menú. */
   menuLabel?: string;
-  /** id del panel (aria-controls del botón de menú). */
-  panelId?: string;
+  /** id de la sidebar que gobierna el botón (`aria-controls`). */
+  sidebarId?: string;
 }
 
+/**
+ * La barra superior de la aplicación, en todos los anchos. A la izquierda el
+ * botón de menú, que abre el cajón en móvil y pliega/despliega la sidebar en
+ * escritorio; a la derecha, notificaciones y cuenta. Entre medias, lo que la
+ * página necesite.
+ */
 export function AppHeader({
-  center,
+  start,
+  notifications,
   end,
-  children,
   menuLabel = 'Menú de navegación',
-  panelId = 'app-header-panel',
+  sidebarId,
 }: AppHeaderProps) {
-  // Dentro de AppShell usa su contexto; standalone (Storybook) usa estado local.
-  const ctx = useContext(AppShellContext);
+  // Dentro de AppShell gobierna la sidebar; suelto (Storybook), estado local.
+  const shell = useContext(AppShellContext);
   const [localOpen, setLocalOpen] = useState(false);
-  const open = ctx ? ctx.menuOpen : localOpen;
-  const setOpen = ctx ? ctx.setMenuOpen : setLocalOpen;
-
-  const hamburgerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
-      setOpen(false);
-      hamburgerRef.current?.focus();
-    };
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
-  }, [open, setOpen]);
+  const open = shell ? shell.sidebar === 'open' : localOpen;
+  const toggle = shell ? shell.toggleSidebar : () => setLocalOpen((v) => !v);
 
   return (
-    <>
-      <header className="app-header">
-        <Hamburger
-          ref={hamburgerRef}
-          isOpen={open}
-          onClick={() => setOpen(!open)}
-          label={menuLabel}
-          aria-controls={panelId}
-        />
-        <div className="app-header__center">{center}</div>
-        <div className="app-header__end">{end}</div>
-      </header>
-      <div className="app-header__panel" id={panelId} hidden={!open}>
-        {children}
-      </div>
-    </>
+    <header className="app-header">
+      <MenuButton isOpen={open} onClick={toggle} label={menuLabel} aria-controls={sidebarId} aria-expanded={open} />
+      <div className="app-header__start">{start}</div>
+      {notifications && <div className="app-header__notifications">{notifications}</div>}
+      {end && <div className="app-header__end">{end}</div>}
+    </header>
   );
 }

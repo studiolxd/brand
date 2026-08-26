@@ -1,12 +1,12 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-motion-duration-instant: 0ms; // Sin transición
-$lxd-motion-duration-fast: 150ms; // Transiciones rápidas: hover, focus
-$lxd-motion-duration-base: 250ms; // Transiciones estándar
-$lxd-motion-duration-slow: 400ms; // Transiciones lentas: modales, paneles
-$lxd-motion-easing-default: ease; // Curva por defecto
-$lxd-motion-easing-in: ease-in; // Aceleración al entrar
-$lxd-motion-easing-out: ease-out; // Desaceleración al salir
-$lxd-motion-easing-in-out: ease-in-out; // Aceleración y desaceleración
-$lxd-motion-easing-linear: linear; // Velocidad constante
+$lxd-motion-duration-instant: 0ms; // Sin transición: cambios que deben ser inmediatos
+$lxd-motion-duration-fast: 150ms; // Respuesta a la interacción: hover, foco, pulsación
+$lxd-motion-duration-base: 250ms; // Cambios de estado: abrir un menú, mostrar un tooltip
+$lxd-motion-duration-slow: 400ms; // Cambios de contexto: modales, hojas, paneles que entran
+$lxd-motion-easing-default: ease; // Transiciones de propiedad: color, fondo, opacidad
+$lxd-motion-easing-in: ease-in; // Escala. El sistema no lo usa
+$lxd-motion-easing-out: ease-out; // Salidas: lo que desaparece frena al final
+$lxd-motion-easing-in-out: ease-in-out; // Movimiento: paneles y hojas que se desplazan
+$lxd-motion-easing-linear: linear; // Escala. El sistema no lo usa

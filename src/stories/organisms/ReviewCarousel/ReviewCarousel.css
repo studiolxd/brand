@@ -58,5 +58,5 @@
 .review-card__quote {
   margin: 0;
   margin-block-start: var(--section-spacing-md);
-  color: var(--text-paragraph-color);
+  color: var(--text-color);
 }

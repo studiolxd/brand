@@ -15,7 +15,7 @@ export declare function TooltipProvider({ children, delayDuration, skipDelayDura
 export interface TooltipProps {
     /** Contenido del bocadillo. */
     label: ReactNode;
-    /** Elemento que dispara el bocadillo. Recibe los props del trigger vía `asChild`. */
+    /** Elemento que dispara el bocadillo. Recibe los props del trigger vía `render`. */
     children: ReactNode;
     side?: 'top' | 'right' | 'bottom' | 'left';
     align?: 'start' | 'center' | 'end';
@@ -29,8 +29,10 @@ export interface TooltipProps {
     className?: string;
 }
 /**
- * Bocadillo de ayuda sobre un elemento. Radix gestiona foco, ARIA
- * (`aria-describedby`) y el cierre con Escape; el DS pone la superficie.
+ * Bocadillo de ayuda sobre un elemento. Base UI gestiona el retardo, el
+ * posicionamiento y el cierre con Escape; el DS pone la superficie y el
+ * enlace `aria-describedby` entre disparador y bocadillo (Base UI, a
+ * diferencia de otros motores, no lo cablea por su cuenta).
  *
  * Requiere un `TooltipProvider` por encima (normalmente en el shell).
  */

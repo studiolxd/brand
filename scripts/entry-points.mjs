@@ -9,9 +9,10 @@ export const entryPoints = {
   'button':              'src/stories/atoms/Button/Button.tsx',
   'carousel':            'src/stories/atoms/Carousel/Carousel.tsx',
   'checkbox':            'src/stories/atoms/Checkbox/Checkbox.tsx',
+  'container':           'src/stories/atoms/Container/Container.tsx',
   'radio':               'src/stories/atoms/Radio/Radio.tsx',
   'icon':                'src/stories/atoms/Icon/Icon.tsx',
-  'hamburger':           'src/stories/atoms/Hamburger/Hamburger.tsx',
+  'menu-button':         'src/stories/atoms/MenuButton/MenuButton.tsx',
   'fieldset':            'src/stories/atoms/Fieldset/Fieldset.tsx',
   'heading':             'src/stories/atoms/Heading/Heading.tsx',
   'input':               'src/stories/atoms/Input/Input.tsx',
@@ -95,10 +96,16 @@ export const entryPoints = {
   'menu':                'src/stories/molecules/Menu/Menu.tsx',
   'sheet':               'src/stories/molecules/Sheet/Sheet.tsx',
   'app-launcher':        'src/stories/molecules/AppLauncher/AppLauncher.tsx',
+  'site-nav':            'src/stories/molecules/SiteNav/SiteNav.tsx',
+  'language-switcher':   'src/stories/molecules/LanguageSwitcher/LanguageSwitcher.tsx',
+  'theme-switcher':      'src/stories/molecules/ThemeSwitcher/ThemeSwitcher.tsx',
+  'dropdown-field':      'src/stories/molecules/DropdownField/DropdownField.tsx',
+  'notification-button': 'src/stories/molecules/NotificationButton/NotificationButton.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
+  'site-header':         'src/stories/sections/SiteHeader/SiteHeader.tsx',
   // Organisms
   'login-form':          'src/stories/organisms/LoginForm/LoginForm.tsx',
   'project-carousel':    'src/stories/organisms/ProjectCarousel/ProjectCarousel.tsx',
@@ -112,7 +119,7 @@ export const entryPoints = {
 
 export const clientComponents = new Set([
   'alert', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
-  'button', 'carousel', 'checkbox', 'radio', 'switcher', 'hamburger', 'hero-video', 'input',
+  'button', 'carousel', 'checkbox', 'radio', 'switcher', 'menu-button', 'hero-video', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'login-form', 'project-carousel', 'project-grid',
   'dots-button', 'context-menu', 'popover', 'pagination', 'table',
@@ -145,4 +152,9 @@ export const clientComponents = new Set([
   'app-launcher',
   'data-table',
   'conversation-thread',
+  'site-header',
+  'language-switcher',
+  'theme-switcher',
+  'dropdown-field',
+  'notification-button',
 ]);

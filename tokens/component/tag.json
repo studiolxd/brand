@@ -1,9 +1,9 @@
 {
   "tag": {
-    "border-radius":  { "$value": "{border-radius.full}",    "$type": "dimension", "$description": "Pill shape" },
+    "border-radius":  { "$value": "{border-radius.round}",    "$type": "dimension", "$description": "Pill shape" },
     "font-family":    { "$value": "{font-family.sans}",      "$type": "string",    "$description": "Font family" },
     "font-size":      { "$value": "{font-size.1}",           "$type": "dimension", "$description": "14px — UI label" },
-    "font-weight":    { "$value": "{font-weight.medium}",    "$type": "number",    "$description": "Medium weight" },
+    "font-weight":    { "$value": "{font-weight.emphasis}",    "$type": "number",    "$description": "Medium weight" },
     "line-height":    { "$value": "{line-height.none}",      "$type": "number",    "$description": "Single-line" },
     "padding-block":  { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Block (vertical) padding" },
     "padding-inline": { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Inline (horizontal) padding" },

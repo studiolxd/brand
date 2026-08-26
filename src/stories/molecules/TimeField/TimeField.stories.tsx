@@ -5,7 +5,7 @@ import { TimeField } from './TimeField';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 
 const meta: Meta<typeof TimeField> = {
-  title: 'Molecules/TimeField',
+  title: 'Por revisar/Molecules/TimeField',
   component: TimeField,
   tags: ['autodocs'],
   args: {
@@ -137,7 +137,8 @@ export const ChangeHour: Story = {
     const triggers = canvas.getAllByRole('combobox');
     await userEvent.click(triggers[0]);
 
-    const listbox = within(document.body).getByRole('listbox');
+    // Base UI abre el popup en el siguiente frame de animación tras el mousedown
+    const listbox = await within(document.body).findByRole('listbox');
     const option14 = within(listbox).getByText('14');
     await userEvent.click(option14);
 

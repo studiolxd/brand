@@ -103,7 +103,7 @@
   background: transparent;
   color: var(--conversation-list-delete-color);
   cursor: pointer;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-default);
   opacity: 0;
   transition: opacity var(--motion-duration-fast) var(--motion-ease-default),
               color var(--motion-duration-fast) var(--motion-ease-default);

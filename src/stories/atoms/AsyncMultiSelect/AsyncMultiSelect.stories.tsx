@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { AsyncMultiSelect } from './AsyncMultiSelect';
 import type { AsyncMultiSelectOption } from './AsyncMultiSelect';
 
@@ -23,7 +23,7 @@ function mockSearch(query: string): Promise<AsyncMultiSelectOption[]> {
 }
 
 const meta: Meta<typeof AsyncMultiSelect> = {
-  title: 'Atoms/AsyncMultiSelect',
+  title: 'Por revisar/Atoms/AsyncMultiSelect',
   component: AsyncMultiSelect,
   parameters: { layout: 'padded' },
   args: {
@@ -107,6 +107,7 @@ const emptySearchMulti = (): Promise<AsyncMultiSelectOption[]> => Promise.resolv
  */
 export const MensajeVacio: Story = {
   name: 'Test — mensaje de sin resultados',
+  tags: ['!dev'],
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12rem' }}>
       <div data-testid="default">
@@ -133,5 +134,62 @@ export const MensajeVacio: Story = {
     await userEvent.type(canvas.getByPlaceholderText('Search…'), 'zzz');
     await expect(await body.findByText('No results')).toBeInTheDocument();
     await expect(body.queryByText('Sin resultados')).toBeNull();
+  },
+};
+
+/**
+ * Test: ciclo de vida del desplegable sobre Base UI — se abre al pulsar el
+ * input, se ancla debajo del control, permite marcar varias opciones sin
+ * cerrarse y se cierra con Escape y con un click fuera.
+ */
+export const AperturaYCierre: Story = {
+  name: 'Test — apertura, selección múltiple y cierre',
+  tags: ['!dev'],
+  render: () => {
+    const [values, setValues] = useState<string[]>([]);
+    return (
+      <div>
+        <AsyncMultiSelect
+          onSearch={mockSearch}
+          value={values}
+          selectedOptions={EMPLOYEES.filter(e => values.includes(e.value))}
+          placeholder="Buscar empleados…"
+          onValueChange={setValues}
+        />
+        <button type="button">Fuera</button>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    const input = canvas.getByPlaceholderText('Buscar empleados…');
+
+    await userEvent.click(input);
+    const first = await body.findByRole('option', { name: 'Ana García' });
+
+    const anchor = canvasElement.querySelector('.async-multi-select') as HTMLElement;
+    const popup = first.closest('.async-multi-select__content') as HTMLElement;
+    const anchorRect = anchor.getBoundingClientRect();
+    const popupRect = popup.getBoundingClientRect();
+    // tolerancia = `collisionPadding` por defecto de Base UI (5px), que puede
+    // desplazar el popup cuando el ancla toca el borde del viewport
+    await expect(Math.abs(popupRect.left - anchorRect.left)).toBeLessThanOrEqual(5);
+    await expect(popupRect.top).toBeGreaterThanOrEqual(anchorRect.bottom - 2);
+    await expect(popupRect.width).toBeGreaterThanOrEqual(anchorRect.width - 1);
+
+    // marcar dos opciones no cierra el desplegable
+    await userEvent.click(first);
+    await userEvent.click(await body.findByRole('option', { name: 'Carlos López' }));
+    await expect(await body.findByRole('option', { name: 'Ana García' })).toHaveAttribute('aria-selected', 'true');
+    await expect(canvas.getByText('Carlos López')).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(body.queryByRole('option', { name: 'Ana García' })).toBeNull());
+
+    await userEvent.click(input);
+    await body.findByRole('option', { name: 'Ana García' });
+    await userEvent.click(canvas.getByRole('button', { name: 'Fuera' }));
+    await waitFor(() => expect(body.queryByRole('option', { name: 'Ana García' })).toBeNull());
   },
 };

@@ -5,12 +5,12 @@ $lxd-calendar-planner-gap: 0.5rem; // Gap entre cabecera y cuadrícula
 $lxd-calendar-planner-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
 $lxd-calendar-planner-nav-color: #111e30; // Color de los botones prev/next
 $lxd-calendar-planner-nav-hover-bg: #f2f2f2; // Fondo hover de los botones de navegación
-$lxd-calendar-planner-nav-disabled-color: #767676; // Color deshabilitado de los botones de navegación
+$lxd-calendar-planner-nav-disabled-color: #6b6b6b; // Color deshabilitado de los botones de navegación
 $lxd-calendar-planner-nav-disabled-cursor: not-allowed; // Cursor deshabilitado
 $lxd-calendar-planner-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación
 $lxd-calendar-planner-nav-focus-ring-width: 2px; // Grosor del focus ring
 $lxd-calendar-planner-nav-focus-ring-offset: 1px; // Separación del focus ring
-$lxd-calendar-planner-nav-radius: 4px; // Radio de borde del botón de navegación
+$lxd-calendar-planner-nav-radius: 0px; // Radio de borde del botón de navegación
 $lxd-calendar-planner-title-font-size: 1rem; // Tamaño del título del mes
 $lxd-calendar-planner-title-font-weight: 500; // Peso del título del mes
 $lxd-calendar-planner-title-color: #111e30; // Color del título del mes
@@ -31,7 +31,7 @@ $lxd-calendar-planner-day-number-font-size: 0.875rem; // Tamaño del número del
 $lxd-calendar-planner-day-number-font-weight: 500; // Peso del número del día
 $lxd-calendar-planner-day-number-color: #111e30; // Color del número del día
 $lxd-calendar-planner-day-number-size: 1.5rem; // Tamaño (ancho y alto) del badge con el número
-$lxd-calendar-planner-day-number-radius: 4px; // Radio del badge del número
+$lxd-calendar-planner-day-number-radius: 0px; // Radio del badge del número
 $lxd-calendar-planner-day-number-outside-color: #4a4a4a; // Color del número en días fuera del mes (contraste ≥4.5:1 sobre grey-lightest)
 $lxd-calendar-planner-items-gap: 0.25rem; // Gap entre elementos/tags dentro de la celda
 $lxd-calendar-planner-more-font-size: 0.875rem; // Tamaño del texto '+N más'

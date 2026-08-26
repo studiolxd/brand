@@ -1,0 +1,38 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SidebarStories from "./Sidebar.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { sidebarTokens } from "../../../tokens/components/sidebar";
+
+<Meta of={SidebarStories} />
+
+# Sidebar
+
+La barra lateral de la aplicación: logo arriba, el panel (organización, navegación, secciones del producto) y un pie opcional. Su modo —desplegada, rail, cerrada, cajón— lo decide el `AppShell`; suelta, lo fija `mode`.
+
+<Canvas of={SidebarStories.Desplegada} />
+
+## Rail
+
+En rail mide `sidebar.rail-width` (un botón de icono md con su aire) y el aire lateral es **el mismo** que desplegada, así los iconos no se mueven al cambiar de modo. Los hijos que saben de rail (`SidebarNav`) lo leen por contexto (`useSidebar().rail`) y cambian de forma; los demás (`OrgSwitcher`) deben tener sentido a ese ancho o quedarse en el pie/cabecera.
+
+<Canvas of={SidebarStories.Rail} />
+
+## Secciones del producto
+
+`SidebarGroup`, `SidebarGroupContent` y `SidebarSeparator` para bloques propios (un árbol de carpetas): mismo aire y misma línea que el resto del panel.
+
+<Canvas of={SidebarStories.ConSecciones} />
+
+## Redimensión
+
+El asa vive sobre el borde derecho (`sidebar.resizer-width` de zona de agarre). Arrastrar cambia el ancho entre mínimo y máximo; por debajo del mínimo salta a rail; por debajo del rail, se cierra. Con teclado, ← → por pasos, `Home` rail, `End` máximo.
+
+## Tokens
+
+Los anchos son medidas de maqueta, como la de lectura; el rail se compone de la talla md.
+
+<TokenTable tokens={sidebarTokens} />
+
+## Props
+
+<ArgTypes of={SidebarStories} />

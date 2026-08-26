@@ -3,7 +3,7 @@ import { ClientsSection } from './ClientsSection';
 import { clients } from '../../data/home';
 
 const meta: Meta<typeof ClientsSection> = {
-  title: 'Sections/ClientsSection',
+  title: 'Por revisar/Sections/ClientsSection',
   component: ClientsSection,
   parameters: { layout: 'fullscreen' },
 };

@@ -1,40 +1,50 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as SkipLinkStories from "./SkipLink.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { skipLinkTokens } from "../../../tokens/components/skip-link";
 
 <Meta of={SkipLinkStories} />
 
 # SkipLink
 
-Átomo de navegación accesible que permite a los usuarios de teclado saltar bloques repetitivos (cabeceras, menús de navegación) e ir directamente al contenido principal. Es invisible por defecto y solo se revela cuando recibe el foco por teclado.
+Enlace de salto al contenido principal. Quien navega con teclado o lector de pantalla llega a él con el primer `Tab` y, al activarlo, se ahorra la cabecera y la navegación. Oculto hasta que recibe el foco; entonces se fija en la esquina, por encima de cualquier otra capa.
 
-## Cuándo usarlo
+<Canvas of={SkipLinkStories.Revelado} />
 
-Colocar `<SkipLink>` como **primer elemento del DOM** de la página, antes del `<Header>`, apuntando al `id` del contenedor de contenido principal:
+## Uso
+
+`SiteHeader` lo incluye como primer elemento: en una página pública con esa cabecera no hay que añadirlo. En cualquier otra —incluida la aplicación con sesión— va suelto, como **primer elemento del DOM**, apuntando al `id` del contenido principal:
 
 ```tsx
 <SkipLink href="#main-content">Saltar al contenido principal</SkipLink>
-<Header ... />
-<main id="main-content">
-  ...
-</main>
+…
+<main id="main-content">…</main>
 ```
+
+`#main-content` es la convención de todas las plantillas del sistema, y el destino lleva `tabIndex={-1}`: sin él, algunos navegadores desplazan la vista pero no mueven el foco, y el siguiente `Tab` vuelve a empezar por la cabecera que se quería saltar. El enlace no comprueba que el destino exista: es responsabilidad de la página que lo haya.
+
+## Estados
+
+Oculto, es un `VisuallyHidden`: usa exactamente su receta —sigue en el DOM y en el orden de tabulación, solo no se ve—, y por eso no puede desincronizarse de él. Con el foco deshace la receta y se pinta como un relleno de marca con el anillo de foco del sistema.
+
+<Canvas of={SkipLinkStories.Oculto} />
+
+En superficie oscura el relleno se invierte, para que se vea sobre prusia.
+
+<Canvas of={SkipLinkStories.SuperficieOscura} />
 
 ## Diferencia con VisuallyHidden
 
-| Componente | Visible | Accesible (AT) | Visible al focusearse |
+| | Visible | Lo leen las ayudas técnicas | Se revela con el foco |
 |---|---|---|---|
 | `VisuallyHidden` | No | Sí | No |
 | `SkipLink` | No | Sí | **Sí** |
 
-`VisuallyHidden` sirve para añadir contexto semántico invisible. `SkipLink` es interactivo y necesita revelarse visualmente cuando el usuario lo activa con el teclado — de lo contrario, los usuarios de teclado no tienen retroalimentación visual de que existe.
+`VisuallyHidden` añade contexto que solo oyen las ayudas técnicas. `SkipLink` es interactivo: quien lo enfoca con el teclado necesita verlo para saber que existe.
 
-## Estado oculto (por defecto)
+## Tokens
 
-<Canvas of={SkipLinkStories.Default} />
-
-## Estado revelado (al recibir foco)
-
-<Canvas of={SkipLinkStories.FocusVisible} />
+<TokenTable tokens={skipLinkTokens} />
 
 ## Props
 

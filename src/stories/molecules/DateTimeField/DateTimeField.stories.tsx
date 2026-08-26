@@ -4,7 +4,7 @@ import { fn, expect, userEvent, within } from 'storybook/test';
 import { DateTimeField } from './DateTimeField';
 
 const meta: Meta<typeof DateTimeField> = {
-  title: 'Molecules/DateTimeField',
+  title: 'Por revisar/Molecules/DateTimeField',
   component: DateTimeField,
   tags: ['autodocs'],
   args: {
@@ -137,7 +137,7 @@ export const SelectDateThenTime: Story = {
 
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
 
-    // El popover del calendario se monta en un portal Radix (document.body),
+    // El popover del calendario se monta en un portal de Base UI (document.body),
     // fuera del canvasElement de la story.
     const body = within(canvasElement.ownerDocument.body);
     const day18 = body.getByRole('gridcell', { name: '18' });

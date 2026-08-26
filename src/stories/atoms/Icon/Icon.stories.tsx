@@ -1,36 +1,54 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 import { Icon, ICON_NAMES } from './Icon';
+import { Container } from '../Container/Container';
 
 const meta = {
   title: 'Atoms/Icon',
   component: Icon,
   args: { name: 'chevron', size: 'md' },
   argTypes: {
-    name: {
-      control: 'select',
-      options: ICON_NAMES,
-    },
-    size: {
-      control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-    },
+    name: { control: 'select', options: ICON_NAMES },
+    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl'] },
+    className: { table: { disable: true } },
   },
 } satisfies Meta<typeof Icon>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+/** Un icono cualquiera en la talla por defecto. */
+export const PorDefecto: Story = {};
 
-export const AllSizes: Story = {
+/** Las cinco tallas: el trazo mide 1px en todas. */
+export const Tallas: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end' }}>
+    <div style={{ display: 'flex', gap: 'var(--spacing-6)', alignItems: 'flex-end' }}>
       {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map((size) => (
-        <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-          <Icon {...args} size={size} />
-          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-subtle, #595959)' }}>{size}</span>
-        </div>
+        <Icon key={size} {...args} size={size} />
       ))}
     </div>
   ),
+};
+
+/** Hereda el color del texto: en superficie oscura pasa a claro sin ninguna prop. */
+export const SuperficieOscura: Story = {
+  render: (args) => (
+    <Container surface="dark" space="md">
+      <Icon {...args} size="lg" />
+    </Container>
+  ),
+};
+
+export const Contrato: Story = {
+  name: 'Test — talla por token, trazo fijo y decorativo',
+  tags: ['!dev'],
+  args: { name: 'bell', size: 'lg' },
+  play: async ({ canvasElement }) => {
+    const svg = canvasElement.querySelector('svg.icon')!;
+    await expect(Math.round(svg.getBoundingClientRect().width)).toBe(48);
+    await expect(svg).toHaveAttribute('aria-hidden', 'true');
+    const trazo = svg.querySelector('path, line')!;
+    await expect(getComputedStyle(trazo).strokeWidth).toBe('1px');
+  },
 };

@@ -3,7 +3,7 @@ import { ProjectGrid } from './ProjectGrid';
 import { projects } from '../../data/home';
 
 const meta: Meta<typeof ProjectGrid> = {
-  title: 'Organisms/ProjectGrid',
+  title: 'Por revisar/Organisms/ProjectGrid',
   component: ProjectGrid,
   parameters: {
     layout: 'fullscreen',

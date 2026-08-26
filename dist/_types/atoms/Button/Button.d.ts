@@ -24,8 +24,12 @@ export interface ButtonProps extends Omit<React.ComponentPropsWithoutRef<'button
     href?: string;
     /** Adds target="_blank" rel="noopener noreferrer" (solo con href) */
     external?: boolean;
-    /** Merges props onto the child element instead of rendering a wrapper (e.g. Next.js Link) */
-    asChild?: boolean;
+    /**
+     * Elemento sobre el que renderizar el botón (p. ej. `<Link href="…" />` de
+     * Next.js): recibe las clases y los handlers del Button. Sustituye al
+     * patrón `asChild`.
+     */
+    render?: React.ReactElement<Record<string, unknown>>;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye) */
     className?: string;
 }

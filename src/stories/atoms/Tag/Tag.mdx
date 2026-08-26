@@ -2,6 +2,8 @@ import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as TagStories from "./Tag.stories";
 import { TokenTable } from "../../foundations/TokenTable";
 import { tagTokens } from "../../../tokens/components/tag";
+import { ContrastMatrix } from "../../foundations/ContrastMatrix";
+import { tagPairs } from "../../../tokens/colors";
 
 <Meta of={TagStories} />
 
@@ -22,3 +24,11 @@ Etiqueta en forma de píldora para clasificar o categorizar contenido. Tiene cin
 ## Props
 
 <ArgTypes of={TagStories} />
+
+## Accesibilidad
+
+Contraste de cada variante semántica, texto sobre su fondo. Mínimo AA (4,5:1); objetivo AAA (7:1).
+
+{tagPairs.map((p) => (
+  <ContrastMatrix key={p.label} foregroundLabel={p.label} foreground={p.ink} colors={[p.bg]} />
+))}

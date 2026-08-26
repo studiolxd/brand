@@ -7,31 +7,21 @@ import { headingBaseTokens, headingLevelTokens, headingDarkTokens } from "../../
 
 # Heading
 
-Encabezados semánticos de `h1` a `h6`. El nivel controla tanto el tag HTML como el tamaño tipográfico. Sin márgenes por defecto — el espaciado es responsabilidad del layout.
+Encabezado semántico de `h1` a `h6`. El nivel dice qué es en el esquema del documento; el tamaño, por defecto, sale del nivel. Sin márgenes: el espacio entre bloques lo pone la maqueta, no el título.
 
-El peso por defecto de todos los niveles es **300 (light)**, controlado por el token `--text-heading-font-weight`. La prop `weight` permite sobrescribirlo puntualmente sin tocar los tokens.
+Un `<h2>` crudo se ve exactamente igual que `<Heading level={2}>`: el estilo de cada nivel lo da la base (`h1`…`h6` en `brand.css`, tokens `--text-h*`), y llega al HTML que no pasa por componentes. El componente solo añade lo que el elemento no puede hacer solo: desacoplar el tamaño del nivel.
 
-## Todos los niveles
+<Canvas of={HeadingStories.TodosLosNiveles} />
 
-<Canvas of={HeadingStories.AllLevels} />
+## Peso
 
----
+Un título no elige su peso: es siempre el de énfasis del sistema (`--font-weight-emphasis`, 500), el mismo que un `strong` o una cifra destacada. Los dos pesos del sistema y el porqué están en Foundations → Tipografía.
 
-## Pesos
+## Tamaño desacoplado
 
-La prop `weight` acepta cualquier paso de la escala tipográfica. Sin prop, el encabezado usa el peso del token (300).
+`size` toma un paso de la escala (1–10) sin cambiar el nivel. Es para cuando el esquema del documento y la maqueta no coinciden: el título de una tarjeta es un `h2` en su sección, pero se ve con el tamaño de un `h5`; una cifra de portada es un `h2` que se ve como display. La semántica no se toca para conseguir un tamaño.
 
-<Canvas of={HeadingStories.Weights} />
-
----
-
-## Tamaños
-
-La prop `size` acepta cualquier paso de la escala tipográfica (1–10) y sobreescribe el tamaño del nivel. Útil cuando se necesita separar el tamaño visual del nivel semántico.
-
-<Canvas of={HeadingStories.Sizes} />
-
----
+<Canvas of={HeadingStories.Tamanos} />
 
 ## Tokens
 

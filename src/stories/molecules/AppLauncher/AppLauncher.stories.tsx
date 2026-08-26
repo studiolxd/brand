@@ -3,7 +3,7 @@ import { AppLauncher } from './AppLauncher';
 import type { LauncherApp } from './AppLauncher';
 
 const meta: Meta<typeof AppLauncher> = {
-  title: 'Molecules/AppLauncher',
+  title: 'Por revisar/Molecules/AppLauncher',
   component: AppLauncher,
   parameters: {
     layout: 'padded',

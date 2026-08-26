@@ -1,137 +1,90 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { AppShell } from './AppShell';
+import { expect, within, userEvent } from 'storybook/test';
+import { AppShell, useAppShell } from './AppShell';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { Logo } from '../../atoms/Logo/Logo';
+import { Heading } from '../../atoms/Heading/Heading';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { Container } from '../../atoms/Container/Container';
 import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
 import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
+import { NotificationButton } from '../../molecules/NotificationButton/NotificationButton';
+import { navEntries, orgs } from './_datos';
+
+const header = (
+  <AppHeader
+    sidebarId="sidebar"
+    notifications={<NotificationButton count={3} />}
+    end={<UserMenu compact name="Ana García" email="ana.garcia@studiolxd.com" items={[{ type: 'button', label: 'Cerrar sesión', onClick: () => {}, destructive: true }]} />}
+  />
+);
+
+const sidebar = (
+  <Sidebar id="sidebar" logo={<Logo size="sm" />}>
+    <OrgSwitcher block current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />
+    <SidebarNav entries={navEntries} defaultValue={['workspace']} />
+  </Sidebar>
+);
+
+function Estado() {
+  const { sidebar, sidebarWidth, isDesktop } = useAppShell();
+  return (
+    <Paragraph size="small">
+      Sidebar: <strong data-testid="estado">{sidebar}</strong>
+      {isDesktop && sidebarWidth ? ` · ${sidebarWidth}px` : ''} · {isDesktop ? 'escritorio' : 'móvil'}
+    </Paragraph>
+  );
+}
+
+const contenido = (
+  <Container space="lg">
+    <Heading level={1} size={7}>Panel</Heading>
+    <Paragraph>El botón de menú de la barra pliega y despliega la sidebar; arrastra su borde para cambiarle el ancho, o llévalo por debajo del mínimo para dejarla en rail.</Paragraph>
+    <Estado />
+  </Container>
+);
 
 const meta: Meta<typeof AppShell> = {
   title: 'Sections/AppShell',
   component: AppShell,
-  parameters: {
-    layout: 'fullscreen',
-  },
+  parameters: { layout: 'fullscreen' },
+  args: { header, sidebar, children: contenido },
+  argTypes: { header: { table: { disable: true } }, sidebar: { table: { disable: true } }, children: { table: { disable: true } } },
 };
-
 export default meta;
 type Story = StoryObj<typeof AppShell>;
 
-const sidebarNavEntries = [
-  {
-    kind: 'group' as const,
-    id: 'general',
-    label: 'General',
-    href: '#general',
-    items: [
-      { id: 'dashboard', label: 'Dashboard', href: '#dashboard', active: true },
-      { id: 'activity', label: 'Actividad', href: '#activity' },
-      { id: 'inbox', label: 'Bandeja de entrada', href: '#inbox' },
-    ],
-  },
-  {
-    kind: 'group' as const,
-    id: 'workspace',
-    label: 'Espacio de trabajo',
-    items: [
-      { id: 'projects', label: 'Proyectos', href: '#projects' },
-      { id: 'tasks', label: 'Tareas', href: '#tasks' },
-      { id: 'files', label: 'Archivos', href: '#files' },
-    ],
-  },
-  {
-    kind: 'group' as const,
-    id: 'settings',
-    label: 'Configuración',
-    items: [
-      { id: 'team', label: 'Equipo', href: '#team' },
-      { id: 'billing', label: 'Facturación', href: '#billing' },
-      { id: 'integrations', label: 'Integraciones', href: '#integrations' },
-    ],
-  },
-];
+/** Escritorio: barra arriba, sidebar desplegada a la izquierda. */
+export const PorDefecto: Story = {};
 
-const orgs = [
-  { id: 'studio', name: 'Studio LXD', logoUrl: 'https://placehold.co/32x32/1a2b4a/ffffff?text=S' },
-  { id: 'acme', name: 'Acme Corp', logoUrl: 'https://placehold.co/32x32/e63946/ffffff?text=A' },
-];
+/** Sidebar en rail: solo iconos; los grupos se abren como menú al pulsar o al pasar el ratón. */
+export const Rail: Story = { args: { defaultSidebar: 'rail' } };
 
-const userMenuItems = [
-  { type: 'button' as const, label: 'Configuración', onClick: () => {} },
-  { type: 'separator' as const },
-  { type: 'button' as const, label: 'Cerrar sesión', onClick: () => {}, destructive: true },
-];
+export const Plegada: Story = { args: { defaultSidebar: 'closed' } };
 
-const sampleOrgSwitcher = <OrgSwitcher current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />;
-
-const sampleNav = <SidebarNav entries={sidebarNavEntries} defaultValue={['general', 'workspace']} />;
-
-const sampleUserMenu = (
-  <UserMenu
-    name="Ana García"
-    email="ana.garcia@studiolxd.com"
-    notificationCount={3}
-    items={userMenuItems}
-  />
-);
-
-const SampleMainContent = () => (
-  <div style={{ padding: '2rem' }}>
-    <h1>Contenido principal</h1>
-    <p>
-      En desktop la sidebar es un rail plegado que se expande en hover (o al tabular dentro),
-      empujando este bloque. En móvil el chrome es un AppHeader con panel a pantalla completa.
-    </p>
-  </div>
-);
-
-const sampleSidebar = (
-  <Sidebar logo={<Logo height={32} />} footer={sampleUserMenu}>
-    {sampleOrgSwitcher}
-    {sampleNav}
-  </Sidebar>
-);
-
-const sampleHeader = (
-  <AppHeader center={sampleOrgSwitcher} end={sampleUserMenu}>
-    {sampleNav}
-  </AppHeader>
-);
-
-export const Default: Story = {
-  render: () => (
-    <AppShell sidebar={sampleSidebar} header={sampleHeader}>
-      <SampleMainContent />
-    </AppShell>
-  ),
+/** Móvil: la sidebar es un cajón que entra por la izquierda y se cierra al navegar. */
+export const Movil: Story = {
+  globals: { viewport: { value: 'mobile1', isRotated: false } },
 };
 
-export const Mobile: Story = {
-  parameters: {
-    viewport: { defaultViewport: 'mobile1' },
+export const Contrato: Story = {
+  name: 'Test — el botón de menú pliega y despliega; el asa redimensiona por teclado',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Menú de navegación' });
+    await expect(canvas.getByTestId('estado')).toHaveTextContent('open');
+    await userEvent.click(boton);
+    await expect(canvas.getByTestId('estado')).toHaveTextContent('closed');
+    await userEvent.click(boton);
+    await expect(canvas.getByTestId('estado')).toHaveTextContent('open');
+    const asa = canvas.getByRole('separator', { name: 'Ancho de la barra lateral' });
+    asa.focus();
+    await userEvent.keyboard('{Home}');
+    await expect(canvas.getByTestId('estado')).toHaveTextContent('rail');
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(canvas.getByTestId('estado')).toHaveTextContent('open');
   },
-  render: () => (
-    <AppShell sidebar={sampleSidebar} header={sampleHeader}>
-      <SampleMainContent />
-    </AppShell>
-  ),
-};
-
-export const MobilePortal: Story = {
-  parameters: {
-    viewport: { defaultViewport: 'mobile1' },
-  },
-  render: () => (
-    <AppShell
-      sidebar={
-        <Sidebar logo={<Logo height={32} />} footer={sampleUserMenu}>
-          {sampleNav}
-        </Sidebar>
-      }
-      header={<AppHeader end={sampleUserMenu}>{sampleNav}</AppHeader>}
-    >
-      <SampleMainContent />
-    </AppShell>
-  ),
 };

@@ -4,7 +4,7 @@ import { expect, within } from 'storybook/test';
 import { Pagination } from './Pagination';
 
 const meta: Meta<typeof Pagination> = {
-  title: 'Molecules/Pagination',
+  title: 'Por revisar/Molecules/Pagination',
   component: Pagination,
   parameters: {
     layout: 'padded',
@@ -44,6 +44,7 @@ export const Default: Story = {
  */
 export const EtiquetasPorDefecto: Story = {
   name: 'Test — etiquetas por defecto (castellano)',
+  tags: ['!dev'],
   args: { total: 100, page: 3, pageSize: 10 },
   render: (args) => (
     <Pagination {...args} onPageChange={() => {}} onPageSizeChange={() => {}} showTotal />
@@ -68,6 +69,7 @@ export const EtiquetasPorDefecto: Story = {
  */
 export const EtiquetasTraducidas: Story = {
   name: 'Test — etiquetas traducidas',
+  tags: ['!dev'],
   args: { total: 100, page: 3, pageSize: 10 },
   render: (args) => (
     <Pagination

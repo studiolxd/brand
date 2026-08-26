@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { HeroVideo } from './HeroVideo';
 
 const meta: Meta<typeof HeroVideo> = {
-  title: 'Atoms/HeroVideo',
+  title: 'Por revisar/Atoms/HeroVideo',
   component: HeroVideo,
   parameters: {
     layout: 'fullscreen',

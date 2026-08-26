@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { LoginForm } from './LoginForm';
 
 const meta: Meta<typeof LoginForm> = {
-  title: 'Organisms/LoginForm',
+  title: 'Por revisar/Organisms/LoginForm',
   component: LoginForm,
   parameters: {
     layout: 'padded',
@@ -36,6 +36,7 @@ export const Loading: Story = {
  */
 export const EtiquetasPorDefecto: Story = {
   name: 'Test — etiquetas por defecto (castellano)',
+  tags: ['!dev'],
   render: () => <LoginForm />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -49,6 +50,7 @@ export const EtiquetasPorDefecto: Story = {
  */
 export const EtiquetasTraducidas: Story = {
   name: 'Test — etiquetas traducidas',
+  tags: ['!dev'],
   render: () => (
     <LoginForm
       title="Sign in"

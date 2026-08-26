@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --container-max-width-md: var(--breakpoint-md); /** Ancho del contenido — estrecho */
+  --container-max-width-lg: var(--breakpoint-lg); /** Ancho del contenido — medio */
+  --container-max-width-xl: var(--breakpoint-xl); /** Ancho del contenido — estándar de página pública */
+  --container-max-width-2xl: var(--breakpoint-2xl); /** Ancho del contenido — amplio */
+  --container-max-width-3xl: var(--breakpoint-3xl); /** Ancho del contenido — casi a sangre */
+  --container-padding-inline: var(--section-padding-inline); /** Aire lateral entre el borde de la pantalla y el contenido */
+  --container-padding-block-sm: var(--section-padding-block-sm); /** Aire vertical compacto */
+  --container-padding-block-md: var(--section-padding-block-md); /** Aire vertical base */
+  --container-padding-block-lg: var(--section-padding-block-lg); /** Aire vertical medio */
+  --container-padding-block-xl: var(--section-padding-block-xl); /** Aire vertical amplio — banda de sección estándar */
+  --container-padding-block-2xl: var(--section-padding-block-2xl); /** Aire vertical extra — bandas destacadas */
+}

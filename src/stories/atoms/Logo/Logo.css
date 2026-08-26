@@ -1,13 +1,11 @@
-.logo-preview {
-  display: inline-flex;
-  padding-block: var(--spacing-5);
-  padding-inline: var(--spacing-5);
+.logo {
+  display: block;
+  inline-size: auto;
+  block-size: var(--logo-height-md);
+  color: var(--logo-color);
+  fill: currentColor;
 }
 
-.logo-preview--dark {
-  background-color: var(--color-text-on-light);
-}
-
-.logo--dark {
-  color: var(--color-text-on-dark);
-}
+.logo.logo--sm { block-size: var(--logo-height-sm); }
+.logo.logo--md { block-size: var(--logo-height-md); }
+.logo.logo--lg { block-size: var(--logo-height-lg); }

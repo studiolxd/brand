@@ -5,7 +5,7 @@ import { Paragraph } from '../Paragraph/Paragraph';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Atoms/Tabs',
+  title: 'Por revisar/Atoms/Tabs',
   component: Tabs,
   parameters: {
     layout: 'padded',

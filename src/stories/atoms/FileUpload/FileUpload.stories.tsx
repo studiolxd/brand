@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FileUpload } from './FileUpload';
 
 const meta = {
-  title: 'Atoms/FileUpload',
+  title: 'Por revisar/Atoms/FileUpload',
   component: FileUpload,
   parameters: { layout: 'padded' },
   args: {
@@ -159,6 +159,7 @@ export const Controlled: Story = {
  */
 export const Etiquetas: Story = {
   name: 'Test — textos de la zona de arrastre',
+  tags: ['!dev'],
   render: () => (
     <>
       <div data-testid="default">
