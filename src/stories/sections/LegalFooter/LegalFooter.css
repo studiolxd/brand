@@ -10,13 +10,22 @@
   font-size: var(--legal-footer-font-size);
 }
 
+/* En móvil, apilados: cuatro enlaces largos en línea se parten a media
+   palabra y se leen peor que una lista. En escritorio, en fila. */
 .legal-footer__links {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--legal-footer-links-gap);
+  flex-direction: column;
+  gap: var(--legal-footer-links-gap-stacked);
+}
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .legal-footer__links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--legal-footer-links-gap);
+  }
 }
 
 /* Los enlaces son enlaces del sistema (los viste la base): sin estilo propio */

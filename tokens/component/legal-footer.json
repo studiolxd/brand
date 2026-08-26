@@ -3,6 +3,7 @@
     "padding-block": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire arriba y abajo del pie" },
     "gap":           { "$value": "{spacing.3}", "$type": "dimension", "$description": "Entre el título y la lista de enlaces" },
     "links-gap":     { "$value": "{spacing.4}", "$type": "dimension", "$description": "Entre enlaces" },
+    "links-gap-stacked": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre enlaces apilados (móvil, por debajo de md)" },
     "font-size":     { "$value": "{font-size.1}", "$type": "dimension", "$description": "Los enlaces legales, en cuerpo pequeño" },
     "border-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Línea que separa el pie del contenido" },
     "border-color":  { "$value": "{color.grey-light}", "$type": "color", "$description": "Color de la línea" },

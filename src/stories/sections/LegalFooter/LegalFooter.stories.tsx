@@ -23,6 +23,9 @@ export const PorDefecto: Story = {};
 
 export const ConTitulo: Story = { args: { title: 'Legal' } };
 
+/** En móvil los enlaces van apilados. */
+export const EnMovil: Story = { globals: { viewport: { value: 'mobile1' } } };
+
 export const SuperficieOscura: Story = { args: { surface: 'dark' } };
 
 export const Contrato: Story = {
