@@ -3,6 +3,7 @@
  */
 
 :root {
+  --site-header-gap-narrow: var(--spacing-2); /** Separación entre marca y controles en teléfono (por debajo de sm) */
   --site-header-gap: var(--spacing-3); /** Separación entre logo y controles */
   --site-header-panel-z-index: var(--z-index-modal); /** El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante */
   --site-header-panel-transition-duration: var(--motion-duration-slow); /** Entrada y salida del panel: cambio de contexto */

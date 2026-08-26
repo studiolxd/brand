@@ -41,6 +41,7 @@
   .site-header {
     --site-header-content-height: var(--site-header-content-height-narrow);
     --site-header-height: var(--site-header-height-narrow);
+    --site-header-gap: var(--site-header-gap-narrow);
   }
 }
 

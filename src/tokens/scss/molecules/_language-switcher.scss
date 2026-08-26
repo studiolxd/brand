@@ -4,6 +4,7 @@
 $lxd-language-switcher-code-font-size: 0.875rem; // El código de idioma en la barra (ES, EN)
 $lxd-language-switcher-code-font-weight: 500; // El código: es una acción
 $lxd-language-switcher-code-letter-spacing: 0.05em; // El código, en mayúsculas
+$lxd-language-switcher-narrow-padding-inline: 0.5rem; // Padding lateral del control compacto en teléfono (por debajo de sm): solo el código, sin chevron, para que quepa en la barra con marca y menú
 $lxd-language-switcher-list-gap: 1rem; // Separación entre idiomas en la lista desplegada
 $lxd-language-switcher-list-font-size: 1rem; // Idiomas en la lista
 $lxd-language-switcher-list-current-font-weight: 500; // Idioma actual en la lista: solo cambia el peso
