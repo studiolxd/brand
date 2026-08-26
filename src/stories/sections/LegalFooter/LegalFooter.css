@@ -1,0 +1,22 @@
+.legal-footer {
+  border-block-start: var(--legal-footer-border-width) solid var(--legal-footer-border-color);
+}
+
+.legal-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--legal-footer-gap);
+  padding-block: var(--legal-footer-padding-block);
+  font-size: var(--legal-footer-font-size);
+}
+
+.legal-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--legal-footer-links-gap);
+}
+
+/* Los enlaces son enlaces del sistema (los viste la base): sin estilo propio */

@@ -136,7 +136,7 @@ export function AppShell({
           <div className="app-shell__body">
             {sidebar}
             {drawer && <div className="app-shell__backdrop" onClick={closeSidebar} aria-hidden="true" />}
-            <main className="app-shell__content" inert={drawer || undefined}>
+            <main id="main-content" tabIndex={-1} className="app-shell__content" inert={drawer || undefined}>
               {children}
             </main>
           </div>

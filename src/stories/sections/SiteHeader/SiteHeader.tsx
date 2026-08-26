@@ -4,8 +4,18 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Container, type ContainerWidth } from '../../atoms/Container/Container';
 import { Logo } from '../../atoms/Logo/Logo';
 import { MenuButton } from '../../atoms/MenuButton/MenuButton';
-import { SkipLink } from '../../atoms/SkipLink/SkipLink';
 import './SiteHeader.css';
+
+export type SiteHeaderLogoLinkProps = {
+  href: string;
+  className: string;
+  'aria-label': string;
+  children: ReactNode;
+};
+
+function defaultRenderLogoLink({ children, ...props }: SiteHeaderLogoLinkProps) {
+  return <a {...props}>{children}</a>;
+}
 
 export interface SiteHeaderProps {
   /** Destino del logotipo. */
@@ -14,10 +24,15 @@ export interface SiteHeaderProps {
   logoLabel?: string;
   /** aria-label del botón de menú. */
   menuLabel?: string;
-  /** Texto del enlace de salto al contenido. Omítelo para no renderizarlo. */
-  skipLabel?: string;
-  /** Destino del enlace de salto. */
-  skipHref?: string;
+  /** aria-label del botón de menú cuando está abierto («Cerrar menú»). */
+  menuCloseLabel?: string;
+  /** La marca. Por defecto el `Logo` de Studio LXD; un producto de la suite pone la suya. */
+  logo?: ReactNode;
+  /**
+   * Enlace del logotipo para el router del producto. Recibe `href`, `className`,
+   * `aria-label` y `children`, y debe reenviarlos todos.
+   */
+  renderLogoLink?: (props: SiteHeaderLogoLinkProps) => ReactNode;
   /** Ancho del contenido; el fondo siempre llega de lado a lado. */
   width?: ContainerWidth;
   /** Estado del menú cuando lo gobierna el producto. Si se omite, es interno. */
@@ -41,13 +56,16 @@ export interface SiteHeaderProps {
  * de menú, con el contenido acotado por `Container` y el fondo a sangre. El
  * menú es siempre un panel a pantalla completa bajo la barra —no hay
  * navegación en línea— con el índice del sitio y, al final, sus ajustes.
+ * El enlace de salto al contenido no va aquí: lo pone `AppRoot`, una vez por
+ * documento.
  */
 export function SiteHeader({
   logoHref = '/',
   logoLabel = 'Studio LXD — ir al inicio',
   menuLabel = 'Menú de navegación',
-  skipLabel = 'Saltar al contenido principal',
-  skipHref = '#main-content',
+  menuCloseLabel,
+  logo = <Logo />,
+  renderLogoLink = defaultRenderLogoLink,
   width = 'xl',
   open,
   onOpenChange,
@@ -97,22 +115,22 @@ export function SiteHeader({
 
   return (
     <Container ref={headerRef} as="header" width={width} className="site-header" innerClassName="site-header__bar">
-      {skipLabel && <SkipLink href={skipHref}>{skipLabel}</SkipLink>}
-
-      <a href={logoHref} className="site-header__logo" aria-label={logoLabel}>
-        <Logo />
-      </a>
+      {renderLogoLink({ href: logoHref, className: 'site-header__logo', 'aria-label': logoLabel, children: logo })}
 
       <div className="site-header__controls">
         {actions}
         {language}
-        <MenuButton
-          ref={menuButtonRef}
-          isOpen={isOpen}
-          onClick={() => setOpen(!isOpen)}
-          label={menuLabel}
-          aria-controls={hasPanel ? panelId : undefined}
-        />
+        {/* Sin panel no hay menú: un botón que no abre nada es un control muerto */}
+        {hasPanel && (
+          <MenuButton
+            ref={menuButtonRef}
+            isOpen={isOpen}
+            onClick={() => setOpen(!isOpen)}
+            label={menuLabel}
+            closeLabel={menuCloseLabel}
+            aria-controls={panelId}
+          />
+        )}
       </div>
 
       {hasPanel && (

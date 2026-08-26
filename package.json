@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "16.0.5",
+  "version": "16.1.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -220,6 +220,14 @@
     "./site-header": {
       "types": "./dist/_types/sections/SiteHeader/SiteHeader.d.ts",
       "import": "./dist/site-header.js"
+    },
+    "./app-root": {
+      "types": "./dist/_types/sections/AppRoot/AppRoot.d.ts",
+      "import": "./dist/app-root.js"
+    },
+    "./legal-footer": {
+      "types": "./dist/_types/sections/LegalFooter/LegalFooter.d.ts",
+      "import": "./dist/legal-footer.js"
     },
     "./theme-switcher": {
       "types": "./dist/_types/molecules/ThemeSwitcher/ThemeSwitcher.d.ts",

@@ -225,3 +225,8 @@ export { ProjectGrid } from './stories/organisms/ProjectGrid/ProjectGrid';
 export { ReviewCarousel } from './stories/organisms/ReviewCarousel/ReviewCarousel';
 export type { Review } from './stories/organisms/ReviewCarousel/ReviewCarousel';
 export { Steps } from './stories/organisms/Steps/Steps';
+
+export { AppRoot } from './stories/sections/AppRoot/AppRoot';
+export type { AppRootProps } from './stories/sections/AppRoot/AppRoot';
+export { LegalFooter } from './stories/sections/LegalFooter/LegalFooter';
+export type { LegalFooterProps, LegalFooterLink, LegalFooterRenderLinkProps } from './stories/sections/LegalFooter/LegalFooter';

@@ -64,6 +64,21 @@ export const ConAcciones: Story = {
   },
 };
 
+/** Un producto de la suite pone su marca en vez del logotipo de Studio LXD, y enruta el enlace con su router. */
+export const MarcaDelProducto: Story = {
+  args: {
+    logo: <strong>Bricks</strong>,
+    logoLabel: 'Bricks — ir al inicio',
+    renderLogoLink: ({ children, ...props }) => <a {...props} data-router="sí">{children}</a>,
+    children: <SiteNav groups={indice} />,
+  },
+};
+
+/** Sin índice ni ajustes no hay panel, y por tanto tampoco botón de menú: una cabecera de página de error. */
+export const SinMenu: Story = {
+  args: { actions: <Button size="sm" variant="outline">Entrar</Button> },
+};
+
 /** La barra completa: logo, acciones del producto, idioma y menú; en el panel, el índice y los ajustes (tema). */
 export const Completa: Story = {
   args: {
@@ -79,15 +94,14 @@ export const Completa: Story = {
   },
 };
 
-/** Con página debajo: el salto al contenido aterriza en el `main` de la página. */
+/** Con página debajo. El enlace de salto al contenido lo pone `AppRoot`, no la cabecera. */
 export const ConPagina: Story = {
   render: (args) => (
     <>
       <SiteHeader {...args} />
       <Container as="main" id="main-content" tabIndex={-1} space="xl">
         <Paragraph>
-          Contenido principal. Con el foco en la página, el primer <kbd>Tab</kbd> revela el
-          enlace de salto; activarlo trae el foco aquí, saltando la cabecera.
+          Contenido principal de la página, bajo la cabecera.
         </Paragraph>
       </Container>
     </>
@@ -100,6 +114,26 @@ export const SuperficieOscura: Story = {
 };
 
 /** Test: el botón de menú abre y cierra el panel, y lo anuncia. */
+export const ContratoLogo: Story = {
+  name: 'Test — marca y enlace del logotipo por el producto; sin panel no hay botón de menú',
+  tags: ['!dev'],
+  args: {
+    logo: <strong>Bricks</strong>,
+    logoLabel: 'Bricks — ir al inicio',
+    logoHref: '/es',
+    renderLogoLink: ({ children, ...props }) => <a {...props} data-router="sí">{children}</a>,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const logo = canvas.getByRole('link', { name: 'Bricks — ir al inicio' });
+    await expect(logo).toHaveAttribute('href', '/es');
+    await expect(logo).toHaveAttribute('data-router', 'sí');
+    await expect(logo).toHaveClass('site-header__logo');
+    await expect(logo.textContent).toBe('Bricks');
+    await expect(canvas.queryByRole('button', { name: 'Menú de navegación' })).toBeNull();
+  },
+};
+
 export const Comportamiento: Story = {
   name: 'Test — el menú abre y cierra',
   tags: ['!dev'],
@@ -144,22 +178,3 @@ export const Sangrado: Story = {
   },
 };
 
-/** Test: el salto es lo primero al tabular y apunta a un destino enfocable. */
-export const Salto: Story = {
-  name: 'Test — el salto al contenido funciona',
-  tags: ['!dev'],
-  render: ConPagina.render,
-  play: async ({ canvasElement }) => {
-    const skip = canvasElement.querySelector('.skip-link') as HTMLAnchorElement;
-    const main = canvasElement.querySelector('#main-content') as HTMLElement;
-    // primer Tab → el enlace de salto
-    await userEvent.tab();
-    await expect(document.activeElement).toBe(skip);
-    // apunta al destino, y el destino puede recibir el foco (tabIndex=-1):
-    // es lo que hace que activar el ancla mueva el foco y no solo la vista.
-    await expect(skip.getAttribute('href')).toBe('#main-content');
-    await expect(main.tabIndex).toBe(-1);
-    main.focus();
-    await expect(document.activeElement).toBe(main);
-  },
-};

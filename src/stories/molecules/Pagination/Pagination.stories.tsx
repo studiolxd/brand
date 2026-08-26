@@ -225,3 +225,30 @@ export const DarkMode: Story = {
     );
   },
 };
+
+
+/** Listados por cursor: no se sabe cuántas páginas hay; solo anterior y siguiente, por enlace o por manejador. */
+export const PorCursor: Story = {
+  args: { mode: 'cursor', nextHref: '?cursor=abc', previousHref: undefined },
+};
+
+export const ContratoCursorYHrefs: Story = {
+  name: 'Test — modo cursor y enlaces precalculados',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Pagination mode="cursor" nextHref="?cursor=abc" ariaLabel="Cursor" />
+      <Pagination pageCount={3} page={2} hrefs={{ 1: '?p=1', 2: '?p=2', 3: '?p=3' }} ariaLabel="Páginas" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const cursor = within(canvas.getByRole('navigation', { name: 'Cursor' }));
+    await expect(cursor.getByRole('button', { name: 'Página anterior' })).toBeDisabled();
+    await expect(cursor.getByRole('link', { name: 'Página siguiente' })).toHaveAttribute('href', '?cursor=abc');
+    const pages = within(canvas.getByRole('navigation', { name: 'Páginas' }));
+    await expect(pages.getByRole('link', { name: 'Página 3' })).toHaveAttribute('href', '?p=3');
+    // la actual no es un enlace (sin href): es un dato marcado con aria-current
+    await expect(pages.getByText('2').closest('[aria-current="page"]')).not.toBeNull();
+  },
+};

@@ -1,0 +1,22 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AppRootStories from "./AppRoot.stories";
+
+<Meta of={AppRootStories} />
+
+# AppRoot
+
+La raíz de cualquier sitio o aplicación de Studio LXD. Va en el **layout raíz**, envolviendo a todo, y hace una sola cosa: poner el **enlace de salto al contenido** una vez por documento, antes de cualquier cabecera, apuntando a `#main-content`.
+
+<Canvas of={AppRootStories.PorDefecto} />
+
+## Por qué aquí y no en la cabecera
+
+El salto debe ser el primer elemento enfocable de la página y debe existir exactamente una vez. Si lo pusiera cada cabecera (`SiteHeader`, `AppHeader`), una página de error sin cabecera se quedaría sin él y una con dos cabeceras lo tendría dos veces. Por eso ni `SiteHeader` ni `AppHeader` lo pintan: lo pinta la raíz.
+
+## Lo que pide a la página
+
+Un destino enfocable: el contenido principal con `id="main-content"` y `tabIndex={-1}` (un `Container as="main"` en la web; el `main` del `AppShell` en las aplicaciones lo lleva ya). `skipHref` lo cambia si el producto usa otro id; `skipLabel` lo traduce.
+
+## Props
+
+<ArgTypes of={AppRootStories} />

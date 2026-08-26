@@ -1,0 +1,31 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as LegalFooterStories from "./LegalFooter.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { legalFooterTokens } from "../../../tokens/components/legal-footer";
+
+<Meta of={LegalFooterStories} />
+
+# LegalFooter
+
+El pie legal de las aplicaciones de la suite: los enlaces a aviso legal, privacidad, cookies y condiciones, **y nada más**. Un `footer` (`contentinfo`) con el contenido acotado por `Container` y el fondo a sangre, como el `SiteHeader`.
+
+<Canvas of={LegalFooterStories.PorDefecto} />
+
+## Qué lleva
+
+`links` (id, texto, destino) y, si hace falta, un `title` encima. Los enlaces son enlaces del sistema (los viste la base) y se enrutan con `renderLink`, que debe reenviar todas las props. La web pública tiene su propio pie con más contenido; este es para las aplicaciones.
+
+<Canvas of={LegalFooterStories.ConTitulo} />
+<Canvas of={LegalFooterStories.SuperficieOscura} />
+
+## Accesibilidad
+
+`nav` con nombre (`label`, «Legal» por defecto; el producto lo traduce) dentro del `contentinfo`.
+
+## Tokens
+
+<TokenTable tokens={legalFooterTokens} />
+
+## Props
+
+<ArgTypes of={LegalFooterStories} />

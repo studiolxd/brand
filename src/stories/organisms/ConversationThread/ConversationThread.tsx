@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { AssistantMessage } from '../../molecules/AssistantMessage/AssistantMessage';
 import { UserMessage } from '../../molecules/UserMessage/UserMessage';
 import './ConversationThread.css';
@@ -15,7 +15,10 @@ export interface ConversationMessage {
 }
 
 export interface ConversationThreadProps {
-  messages: ConversationMessage[];
+  /** Mensajes a pintar con `UserMessage`/`AssistantMessage`. Con `children`, no hace falta. */
+  messages?: ConversationMessage[];
+  /** Burbujas ya montadas por el producto (mensajes con herramientas, adjuntos…): el hilo pone el contenedor, el `role="log"` y el autoscroll. */
+  children?: ReactNode;
   /** Texto accesible para el indicador de escritura. */
   streamingLabel?: string;
   /**
@@ -26,7 +29,8 @@ export interface ConversationThreadProps {
 }
 
 export function ConversationThread({
-  messages,
+  messages = [],
+  children,
   streamingLabel,
   ariaLabel = 'Conversación',
 }: ConversationThreadProps) {
@@ -34,11 +38,11 @@ export function ConversationThread({
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, children]);
 
   return (
     <div className="conversation-thread" role="log" aria-label={ariaLabel}>
-      {messages.map((message) =>
+      {children ?? messages.map((message) =>
         message.role === 'user' ? (
           <UserMessage key={message.id} timestamp={message.timestamp}>
             {message.content}

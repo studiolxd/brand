@@ -3,69 +3,71 @@ import './site-header.css';
 import { Container as e } from "./container.js";
 import { MenuButton as t } from "./menu-button.js";
 import { Logo as n } from "./logo.js";
-import { SkipLink as r } from "./skip-link.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { useEffect as o, useRef as s, useState as c } from "react";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { useEffect as a, useRef as o, useState as s } from "react";
 //#region src/stories/sections/SiteHeader/SiteHeader.tsx
-function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", skipLabel: f = "Saltar al contenido principal", skipHref: p = "#main-content", width: m = "xl", open: h, onOpenChange: g, children: _, settings: v, panelId: y = "site-header-panel", actions: b, language: x }) {
-	let [S, C] = c(!1), w = h !== void 0, T = w ? h : S, E = !!(_ || v), D = s(null), O = s(null), k = (e) => {
-		w || C(e), g?.(e);
+function c({ children: e, ...t }) {
+	return /* @__PURE__ */ r("a", {
+		...t,
+		children: e
+	});
+}
+function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", menuCloseLabel: f, logo: p = /* @__PURE__ */ r(n, {}), renderLogoLink: m = c, width: h = "xl", open: g, onOpenChange: _, children: v, settings: y, panelId: b = "site-header-panel", actions: x, language: S }) {
+	let [C, w] = s(!1), T = g !== void 0, E = T ? g : C, D = !!(v || y), O = o(null), k = o(null), A = (e) => {
+		T || w(e), _?.(e);
 	};
-	return o(() => {
-		if (!T) return;
+	return a(() => {
+		if (!E) return;
 		let e = (e) => {
-			e.key === "Escape" && (k(!1), O.current?.focus());
+			e.key === "Escape" && (A(!1), k.current?.focus());
 		}, t = (e) => {
-			D.current?.contains(e.target) || k(!1);
+			O.current?.contains(e.target) || A(!1);
 		};
 		document.addEventListener("keydown", e), document.addEventListener("pointerdown", t);
 		let n = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.removeEventListener("pointerdown", t), document.body.style.overflow = n;
 		};
-	}, [T]), /* @__PURE__ */ a(e, {
-		ref: D,
+	}, [E]), /* @__PURE__ */ i(e, {
+		ref: O,
 		as: "header",
-		width: m,
+		width: h,
 		className: "site-header",
 		innerClassName: "site-header__bar",
 		children: [
-			f && /* @__PURE__ */ i(r, {
-				href: p,
-				children: f
-			}),
-			/* @__PURE__ */ i("a", {
+			m({
 				href: l,
 				className: "site-header__logo",
 				"aria-label": u,
-				children: /* @__PURE__ */ i(n, {})
+				children: p
 			}),
-			/* @__PURE__ */ a("div", {
+			/* @__PURE__ */ i("div", {
 				className: "site-header__controls",
 				children: [
-					b,
 					x,
-					/* @__PURE__ */ i(t, {
-						ref: O,
-						isOpen: T,
-						onClick: () => k(!T),
+					S,
+					D && /* @__PURE__ */ r(t, {
+						ref: k,
+						isOpen: E,
+						onClick: () => A(!E),
 						label: d,
-						"aria-controls": E ? y : void 0
+						closeLabel: f,
+						"aria-controls": b
 					})
 				]
 			}),
-			E && /* @__PURE__ */ i("div", {
-				className: ["site-header__panel", T ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
-				id: y,
-				inert: !T,
-				"aria-hidden": !T,
-				children: /* @__PURE__ */ a(e, {
-					width: m,
+			D && /* @__PURE__ */ r("div", {
+				className: ["site-header__panel", E ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
+				id: b,
+				inert: !E,
+				"aria-hidden": !E,
+				children: /* @__PURE__ */ i(e, {
+					width: h,
 					space: "none",
 					innerClassName: "site-header__panel-inner",
-					children: [_, v && /* @__PURE__ */ i("div", {
+					children: [v, y && /* @__PURE__ */ r("div", {
 						className: "site-header__settings",
-						children: v
+						children: y
 					})]
 				})
 			})

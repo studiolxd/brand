@@ -18,8 +18,9 @@ export interface ThemeSwitcherProps {
     /**
      * `compact`: un `DropdownField` (etiqueta + control rectangular) con el icono y el nombre del tema actual — el del panel.
      * `list`: las tres opciones desplegadas en línea — el del pie.
+     * `icon`: solo el icono del tema actual, como botón de icono que abre el menú — para una barra sin sitio.
      */
-    variant?: 'compact' | 'list';
+    variant?: 'compact' | 'list' | 'icon';
     className?: string;
 }
 /**

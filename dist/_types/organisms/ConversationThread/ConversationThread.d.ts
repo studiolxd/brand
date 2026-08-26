@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import './ConversationThread.css';
 export interface ConversationMessage {
     id: string;
@@ -10,7 +11,10 @@ export interface ConversationMessage {
     isStreaming?: boolean;
 }
 export interface ConversationThreadProps {
-    messages: ConversationMessage[];
+    /** Mensajes a pintar con `UserMessage`/`AssistantMessage`. Con `children`, no hace falta. */
+    messages?: ConversationMessage[];
+    /** Burbujas ya montadas por el producto (mensajes con herramientas, adjuntos…): el hilo pone el contenedor, el `role="log"` y el autoscroll. */
+    children?: ReactNode;
     /** Texto accesible para el indicador de escritura. */
     streamingLabel?: string;
     /**
@@ -19,4 +23,4 @@ export interface ConversationThreadProps {
      */
     ariaLabel?: string;
 }
-export declare function ConversationThread({ messages, streamingLabel, ariaLabel, }: ConversationThreadProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConversationThread({ messages, children, streamingLabel, ariaLabel, }: ConversationThreadProps): import("react/jsx-runtime").JSX.Element;

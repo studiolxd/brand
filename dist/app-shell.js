@@ -63,6 +63,8 @@ function d({ header: t, sidebar: l, children: d, defaultSidebar: f = "open", sid
 						"aria-hidden": "true"
 					}),
 					/* @__PURE__ */ r("main", {
+						id: "main-content",
+						tabIndex: -1,
 						className: "app-shell__content",
 						inert: A || void 0,
 						children: d

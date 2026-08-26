@@ -9,6 +9,8 @@ export interface AppHeaderProps {
     end?: ReactNode;
     /** Texto accesible del botón de menú. */
     menuLabel?: string;
+    /** Texto accesible del botón cuando la sidebar está abierta («Cerrar menú»). */
+    menuCloseLabel?: string;
     /** id de la sidebar que gobierna el botón (`aria-controls`). */
     sidebarId?: string;
 }
@@ -18,4 +20,4 @@ export interface AppHeaderProps {
  * escritorio; a la derecha, notificaciones y cuenta. Entre medias, lo que la
  * página necesite.
  */
-export declare function AppHeader({ start, notifications, end, menuLabel, sidebarId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppHeader({ start, notifications, end, menuLabel, menuCloseLabel, sidebarId, }: AppHeaderProps): import("react/jsx-runtime").JSX.Element;

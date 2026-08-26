@@ -13,12 +13,27 @@ const DEFAULT_PAGE_SIZE_OPTIONS: SelectOption[] = [
 ];
 
 export interface PaginationProps {
-  /** Total de registros */
-  total: number;
-  /** Página activa (1-indexed) */
-  page: number;
+  /**
+   * Con páginas numeradas (`pages`, por defecto) o solo anterior/siguiente
+   * (`cursor`): para listados por cursor, donde no se sabe cuántas páginas hay.
+   */
+  mode?: 'pages' | 'cursor';
+  /** Total de registros. Con `pageCount` o en modo `cursor` no hace falta. */
+  total?: number;
+  /** Número de páginas, cuando quien pagina ya lo sabe (en vez de `total` + `pageSize`). */
+  pageCount?: number;
+  /** Página activa (1-indexed). En modo `cursor`, opcional. */
+  page?: number;
   /** Registros por página. "all" muestra todos los registros sin paginación. */
-  pageSize: number | 'all';
+  pageSize?: number | 'all';
+  /** Enlaces por página, ya calculados (útil desde un Server Component, donde no se puede pasar una función). */
+  hrefs?: Record<number, string>;
+  /** Modo `cursor`: enlaces de anterior/siguiente. Sin ellos, el botón va deshabilitado. */
+  previousHref?: string;
+  nextHref?: string;
+  /** Modo `cursor`: manejadores de anterior/siguiente cuando no hay enlaces. */
+  onPrevious?: () => void;
+  onNext?: () => void;
   /**
    * Callback al cambiar de página. Opcional cuando se usa hrefBuilder
    * (la navegación ocurre mediante el href nativo del <a>).
@@ -94,11 +109,18 @@ function getPageWindow(page: number, totalPages: number): (number | '...')[] {
 }
 
 export function Pagination({
-  total,
-  page,
-  pageSize,
+  mode = 'pages',
+  total = 0,
+  pageCount,
+  page = 1,
+  pageSize = 10,
+  hrefs,
+  previousHref,
+  nextHref,
+  onPrevious,
+  onNext,
   onPageChange,
-  hrefBuilder,
+  hrefBuilder: hrefBuilderProp,
   linkComponent,
   onPageSizeChange,
   pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
@@ -113,11 +135,39 @@ export function Pagination({
   totalLabel = (t) => `${t} resultados`,
   className,
 }: PaginationProps) {
-  if (total === 0) return null;
-
+  const hrefBuilder = hrefBuilderProp ?? (hrefs ? (p: number) => hrefs[p] : undefined);
   const A = linkComponent ?? 'a';
 
-  const totalPages = pageSize === 'all' ? 1 : Math.ceil(total / pageSize);
+  if (mode === 'cursor') {
+    const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
+    const nav = (direction: 'prev' | 'next') => {
+      const href = direction === 'prev' ? previousHref : nextHref;
+      const handler = direction === 'prev' ? onPrevious : onNext;
+      const disabled = !href && !handler;
+      const label = direction === 'prev' ? previousLabel : nextLabel;
+      const icon = <Icon name="chevron" size={chevronSize} className={direction === 'prev' ? 'pagination__chevron--prev' : undefined} />;
+      if (href) {
+        return (
+          <A href={href} className="pagination__btn pagination__btn--nav" aria-label={label}>{icon}</A>
+        );
+      }
+      return (
+        <button className="pagination__btn pagination__btn--nav" disabled={disabled} aria-label={label} onClick={handler}>{icon}</button>
+      );
+    };
+    return (
+      <nav className={['pagination', `pagination--${size}`, className].filter(Boolean).join(' ')} aria-label={ariaLabel}>
+        <div className="pagination__controls" role="group" aria-label={pagesGroupLabel}>
+          {nav('prev')}
+          {nav('next')}
+        </div>
+      </nav>
+    );
+  }
+
+  if (pageCount === undefined && total === 0) return null;
+
+  const totalPages = pageCount ?? (pageSize === 'all' ? 1 : Math.ceil(total / pageSize));
   const pageItems = totalPages > 1 ? getPageWindow(page, totalPages) : [];
 
   function renderPageItem(item: number | '...', index: number) {

@@ -5,17 +5,18 @@ import { t } from "./_shared/AppShellContext.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { useContext as i, useState as a } from "react";
 //#region src/stories/sections/AppHeader/AppHeader.tsx
-function o({ start: o, notifications: s, end: c, menuLabel: l = "Menú de navegación", sidebarId: u }) {
-	let d = i(t), [f, p] = a(!1), m = d ? d.sidebar === "open" : f;
+function o({ start: o, notifications: s, end: c, menuLabel: l = "Menú de navegación", menuCloseLabel: u, sidebarId: d }) {
+	let f = i(t), [p, m] = a(!1), h = f ? f.sidebar === "open" : p;
 	return /* @__PURE__ */ r("header", {
 		className: "app-header",
 		children: [
 			/* @__PURE__ */ n(e, {
-				isOpen: m,
-				onClick: d ? d.toggleSidebar : () => p((e) => !e),
+				isOpen: h,
+				onClick: f ? f.toggleSidebar : () => m((e) => !e),
 				label: l,
-				"aria-controls": u,
-				"aria-expanded": m
+				closeLabel: u,
+				"aria-controls": d,
+				"aria-expanded": h
 			}),
 			/* @__PURE__ */ n("div", {
 				className: "app-header__start",

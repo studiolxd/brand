@@ -31,3 +31,4 @@ temp_web
 # Secretos locales (token de Chromatic, etc.) — nunca al repo
 .env
 .env.*
+.worktrees/

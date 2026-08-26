@@ -1,10 +1,12 @@
 'use client';
 import './theme-switcher.css';
 import { Icon as e } from "./icon.js";
-import { DropdownField as t } from "./dropdown-field.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { Button as t } from "./button.js";
+import { Menu as n } from "./menu.js";
+import { DropdownField as r } from "./dropdown-field.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/ThemeSwitcher/ThemeSwitcher.tsx
-var i = [
+var o = [
 	{
 		value: "light",
 		icon: "sun"
@@ -18,73 +20,91 @@ var i = [
 		icon: "device-desktop"
 	}
 ];
-function a({ value: a, onChange: o, labels: s, id: c = "theme-switcher", variant: l = "compact", className: u }) {
-	let d = {
+function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant: d = "compact", className: f }) {
+	let p = {
 		group: "Tema",
 		light: "Claro",
 		dark: "Oscuro",
 		system: "Sistema",
-		...s
-	}, f = i.find((e) => e.value === a) ?? i[2];
-	if (l === "list") return /* @__PURE__ */ n("div", {
+		...l
+	}, m = o.find((e) => e.value === s) ?? o[2];
+	if (d === "list") return /* @__PURE__ */ i("div", {
 		className: [
 			"theme-switcher",
 			"theme-switcher--list",
-			u
+			f
 		].filter(Boolean).join(" "),
 		role: "group",
-		"aria-label": d.group,
-		children: /* @__PURE__ */ n("ul", {
+		"aria-label": p.group,
+		children: /* @__PURE__ */ i("ul", {
 			className: "theme-switcher__list",
-			children: i.map(({ value: t, icon: i }) => {
-				let s = t === a, c = ["theme-switcher__option", s ? "theme-switcher__option--current" : ""].filter(Boolean).join(" ");
-				return /* @__PURE__ */ n("li", { children: s ? /* @__PURE__ */ r("span", {
-					className: c,
+			children: o.map(({ value: t, icon: n }) => {
+				let r = t === s, o = ["theme-switcher__option", r ? "theme-switcher__option--current" : ""].filter(Boolean).join(" ");
+				return /* @__PURE__ */ i("li", { children: r ? /* @__PURE__ */ a("span", {
+					className: o,
 					"aria-current": "true",
-					children: [/* @__PURE__ */ n(e, {
-						name: i,
+					children: [/* @__PURE__ */ i(e, {
+						name: n,
 						size: "sm"
-					}), /* @__PURE__ */ n("span", { children: d[t] })]
-				}) : /* @__PURE__ */ r("button", {
+					}), /* @__PURE__ */ i("span", { children: p[t] })]
+				}) : /* @__PURE__ */ a("button", {
 					type: "button",
-					className: c,
-					onClick: () => o?.(t),
-					children: [/* @__PURE__ */ n(e, {
-						name: i,
+					className: o,
+					onClick: () => c?.(t),
+					children: [/* @__PURE__ */ i(e, {
+						name: n,
 						size: "sm"
-					}), /* @__PURE__ */ n("span", { children: d[t] })]
+					}), /* @__PURE__ */ i("span", { children: p[t] })]
 				}) }, t);
 			})
 		})
 	});
-	let p = [
+	let h = o.map(({ value: t, icon: n }) => ({
+		type: "radio",
+		value: t,
+		label: /* @__PURE__ */ a("span", {
+			className: "theme-switcher__item",
+			children: [/* @__PURE__ */ i(e, {
+				name: n,
+				size: "sm"
+			}), p[t]]
+		})
+	}));
+	if (d === "icon") return /* @__PURE__ */ i(n, {
+		className: f,
+		align: "end",
+		value: s,
+		onValueChange: (e) => c?.(e),
+		items: h,
+		trigger: /* @__PURE__ */ i(t, {
+			variant: "ghost",
+			size: "md",
+			iconOnly: !0,
+			"aria-label": `${p.group}: ${p[m.value]}`,
+			children: /* @__PURE__ */ i(e, {
+				name: m.icon,
+				size: "md"
+			})
+		})
+	});
+	let g = [
 		"theme-switcher",
 		"theme-switcher--compact",
-		u
+		f
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ r(t, {
-		id: c,
-		label: d.group,
+	return /* @__PURE__ */ a(r, {
+		id: u,
+		label: p.group,
 		inline: !0,
-		className: p,
-		value: a,
-		onValueChange: (e) => o?.(e),
-		items: i.map(({ value: t, icon: i }) => ({
-			type: "radio",
-			value: t,
-			label: /* @__PURE__ */ r("span", {
-				className: "theme-switcher__item",
-				children: [/* @__PURE__ */ n(e, {
-					name: i,
-					size: "sm"
-				}), d[t]]
-			})
-		})),
-		children: [/* @__PURE__ */ n(e, {
-			name: f.icon,
+		className: g,
+		value: s,
+		onValueChange: (e) => c?.(e),
+		items: h,
+		children: [/* @__PURE__ */ i(e, {
+			name: m.icon,
 			size: "sm"
-		}), d[f.value]]
+		}), p[m.value]]
 	});
 }
 //#endregion
-export { a as ThemeSwitcher };
+export { s as ThemeSwitcher };

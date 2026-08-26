@@ -40,6 +40,7 @@
 @import "./molecules/language-switcher.css";
 @import "./molecules/theme-switcher.css";
 @import "./molecules/dropdown-field.css";
+@import "./components/legal-footer.css";
 @import "./molecules/notification-button.css";
 @import "./molecules/textarea-field.css";
 @import "./molecules/select-field.css";

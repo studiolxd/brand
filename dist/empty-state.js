@@ -2,9 +2,14 @@ import './empty-state.css';
 import { Button as e } from "./button.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/molecules/EmptyState/EmptyState.tsx
-function r({ title: r, description: i, icon: a, action: o, size: s = "md" }) {
+function r({ title: r, description: i, icon: a, action: o, size: s = "md", className: c, ...l }) {
 	return /* @__PURE__ */ n("div", {
-		className: ["empty-state", s === "sm" ? "empty-state--sm" : ""].filter(Boolean).join(" "),
+		className: [
+			"empty-state",
+			s === "sm" ? "empty-state--sm" : "",
+			c
+		].filter(Boolean).join(" "),
+		...l,
 		children: [
 			a && /* @__PURE__ */ t("div", {
 				className: "empty-state__icon",

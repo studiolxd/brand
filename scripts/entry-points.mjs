@@ -106,6 +106,8 @@ export const entryPoints = {
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
   'site-header':         'src/stories/sections/SiteHeader/SiteHeader.tsx',
+  'app-root':            'src/stories/sections/AppRoot/AppRoot.tsx',
+  'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
   // Organisms
   'login-form':          'src/stories/organisms/LoginForm/LoginForm.tsx',
   'project-carousel':    'src/stories/organisms/ProjectCarousel/ProjectCarousel.tsx',

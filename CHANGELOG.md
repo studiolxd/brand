@@ -7,6 +7,31 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.1.0
+
+### Añadido
+
+- **`AppRoot`**: la raíz de cualquier sitio o app; pone el enlace de salto al
+  contenido una vez por documento. `SiteHeader` y `AppHeader` **dejan de pintarlo**
+  (fuera `skipLabel`/`skipHref` del SiteHeader); el `main` del `AppShell` es el
+  destino (`#main-content`, `tabIndex=-1`).
+- **`LegalFooter`**: el pie legal de las aplicaciones (enlaces legales, título
+  opcional, `renderLink`, `Container`, `surface="dark"`).
+- `SiteHeader`: `logo` (la marca del producto), `renderLogoLink` (router),
+  `menuCloseLabel`; sin `children` ni `settings` no se pinta el botón de menú.
+- `MenuButton` / `AppHeader`: `closeLabel` / `menuCloseLabel`.
+- `ThemeSwitcher variant="icon"`: solo el icono del tema actual, para barras.
+- `Pagination`: `mode="cursor"` (anterior/siguiente por `previousHref`/`nextHref`
+  o `onPrevious`/`onNext`), `hrefs` precalculados y `pageCount`; `total`, `page` y
+  `pageSize` pasan a opcionales.
+- `EmptyState` reenvía atributos al contenedor (`role="status"`, `aria-live`).
+- `ConversationThread` admite `children`: el producto monta las burbujas y el hilo
+  pone contenedor, `role="log"` y autoscroll.
+
+### Cambiado
+
+- `SiteHeader` ya no acepta `skipLabel`/`skipHref` (ver `AppRoot`).
+
 ## v16.0.5
 
 ### Corregido

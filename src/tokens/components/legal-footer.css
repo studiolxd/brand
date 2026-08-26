@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --legal-footer-padding-block: var(--spacing-5); /** Aire arriba y abajo del pie */
+  --legal-footer-gap: var(--spacing-3); /** Entre el título y la lista de enlaces */
+  --legal-footer-links-gap: var(--spacing-4); /** Entre enlaces */
+  --legal-footer-font-size: var(--font-size-1); /** Los enlaces legales, en cuerpo pequeño */
+  --legal-footer-border-color: var(--color-grey-light); /** Color de la línea */
+  --legal-footer-border-width: var(--border-width-default); /** Línea que separa el pie del contenido */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --legal-footer-border-color: var(--menu-surface-dark-separator-color); /** Línea — surface-dark */
+}

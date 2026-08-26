@@ -7,6 +7,8 @@ export interface MenuButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
   isOpen?: boolean;
   /** Texto accesible. Dice qué abre, no qué forma tiene. */
   label?: string;
+  /** Texto accesible cuando el menú está abierto («Cerrar menú»). Sin él, se usa `label` con `aria-expanded`. */
+  closeLabel?: string;
   /** Talla del botón: un cuadrado de 32 o 40px. */
   size?: 'sm' | 'md';
 }
@@ -17,12 +19,12 @@ export interface MenuButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
  * son la misma geometría, así que el botón nunca diverge del catálogo.
  */
 export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(function MenuButton(
-  { isOpen = false, label = 'Menú', size = 'md', className, ...rest },
+  { isOpen = false, label = 'Menú', closeLabel, size = 'md', className, ...rest },
   ref,
 ) {
   const classes = ['menu-button', `menu-button--${size}`, className].filter(Boolean).join(' ');
   return (
-    <button ref={ref} type="button" className={classes} aria-label={label} aria-expanded={isOpen} {...rest}>
+    <button ref={ref} type="button" className={classes} aria-label={isOpen && closeLabel ? closeLabel : label} aria-expanded={isOpen} {...rest}>
       <Icon name="menu" size="md" className="menu-button__icon" />
     </button>
   );

@@ -14,6 +14,8 @@ export interface AppHeaderProps {
   end?: ReactNode;
   /** Texto accesible del botón de menú. */
   menuLabel?: string;
+  /** Texto accesible del botón cuando la sidebar está abierta («Cerrar menú»). */
+  menuCloseLabel?: string;
   /** id de la sidebar que gobierna el botón (`aria-controls`). */
   sidebarId?: string;
 }
@@ -29,6 +31,7 @@ export function AppHeader({
   notifications,
   end,
   menuLabel = 'Menú de navegación',
+  menuCloseLabel,
   sidebarId,
 }: AppHeaderProps) {
   // Dentro de AppShell gobierna la sidebar; suelto (Storybook), estado local.
@@ -39,7 +42,7 @@ export function AppHeader({
 
   return (
     <header className="app-header">
-      <MenuButton isOpen={open} onClick={toggle} label={menuLabel} aria-controls={sidebarId} aria-expanded={open} />
+      <MenuButton isOpen={open} onClick={toggle} label={menuLabel} closeLabel={menuCloseLabel} aria-controls={sidebarId} aria-expanded={open} />
       <div className="app-header__start">{start}</div>
       {notifications && <div className="app-header__notifications">{notifications}</div>}
       {end && <div className="app-header__end">{end}</div>}

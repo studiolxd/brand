@@ -16,7 +16,7 @@ const meta: Meta<typeof ThemeSwitcher> = {
   args: { value: 'system' },
   argTypes: {
     value: { control: 'select', options: ['light', 'dark', 'system'] },
-    variant: { control: 'select', options: ['compact', 'list'] },
+    variant: { control: 'select', options: ['compact', 'list', 'icon'] },
     className: { table: { disable: true } },
   },
   render: (args) => <Controlado {...args} />,
@@ -27,6 +27,9 @@ type Story = StoryObj<typeof ThemeSwitcher>;
 
 /** En el panel: un `DropdownField` con la etiqueta delante y el tema actual en el control. */
 export const Compacto: Story = {};
+
+/** Solo icono: para una barra sin sitio para la etiqueta. El nombre accesible lleva el tema actual. */
+export const Icono: Story = { args: { variant: 'icon' } };
 
 /** En el pie: las tres opciones desplegadas. */
 export const Lista: Story = {

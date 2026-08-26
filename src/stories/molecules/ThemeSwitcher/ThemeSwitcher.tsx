@@ -1,6 +1,8 @@
 'use client';
 
 import { DropdownField } from '../DropdownField/DropdownField';
+import { Menu } from '../Menu/Menu';
+import { Button } from '../../atoms/Button/Button';
 import { Icon, type IconName } from '../../atoms/Icon/Icon';
 import './ThemeSwitcher.css';
 
@@ -25,8 +27,9 @@ export interface ThemeSwitcherProps {
   /**
    * `compact`: un `DropdownField` (etiqueta + control rectangular) con el icono y el nombre del tema actual — el del panel.
    * `list`: las tres opciones desplegadas en línea — el del pie.
+   * `icon`: solo el icono del tema actual, como botón de icono que abre el menú — para una barra sin sitio.
    */
-  variant?: 'compact' | 'list';
+  variant?: 'compact' | 'list' | 'icon';
   className?: string;
 }
 
@@ -76,6 +79,34 @@ export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', 
     );
   }
 
+  const items = OPTIONS.map(({ value: option, icon }) => ({
+    type: 'radio' as const,
+    value: option,
+    label: (
+      <span className="theme-switcher__item">
+        <Icon name={icon} size="sm" />
+        {text[option]}
+      </span>
+    ),
+  }));
+
+  if (variant === 'icon') {
+    return (
+      <Menu
+        className={className}
+        align="end"
+        value={value}
+        onValueChange={(next) => onChange?.(next as Theme)}
+        items={items}
+        trigger={
+          <Button variant="ghost" size="md" iconOnly aria-label={`${text.group}: ${text[current.value]}`}>
+            <Icon name={current.icon} size="md" />
+          </Button>
+        }
+      />
+    );
+  }
+
   const classes = ['theme-switcher', 'theme-switcher--compact', className].filter(Boolean).join(' ');
   return (
     <DropdownField
@@ -85,16 +116,7 @@ export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', 
       className={classes}
       value={value}
       onValueChange={(next) => onChange?.(next as Theme)}
-      items={OPTIONS.map(({ value: option, icon }) => ({
-        type: 'radio' as const,
-        value: option,
-        label: (
-          <span className="theme-switcher__item">
-            <Icon name={icon} size="sm" />
-            {text[option]}
-          </span>
-        ),
-      }))}
+      items={items}
     >
       <Icon name={current.icon} size="sm" />
       {text[current.value]}

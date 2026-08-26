@@ -1,6 +1,12 @@
 import { type ReactNode } from 'react';
 import { type ContainerWidth } from '../../atoms/Container/Container';
 import './SiteHeader.css';
+export type SiteHeaderLogoLinkProps = {
+    href: string;
+    className: string;
+    'aria-label': string;
+    children: ReactNode;
+};
 export interface SiteHeaderProps {
     /** Destino del logotipo. */
     logoHref?: string;
@@ -8,10 +14,15 @@ export interface SiteHeaderProps {
     logoLabel?: string;
     /** aria-label del botón de menú. */
     menuLabel?: string;
-    /** Texto del enlace de salto al contenido. Omítelo para no renderizarlo. */
-    skipLabel?: string;
-    /** Destino del enlace de salto. */
-    skipHref?: string;
+    /** aria-label del botón de menú cuando está abierto («Cerrar menú»). */
+    menuCloseLabel?: string;
+    /** La marca. Por defecto el `Logo` de Studio LXD; un producto de la suite pone la suya. */
+    logo?: ReactNode;
+    /**
+     * Enlace del logotipo para el router del producto. Recibe `href`, `className`,
+     * `aria-label` y `children`, y debe reenviarlos todos.
+     */
+    renderLogoLink?: (props: SiteHeaderLogoLinkProps) => ReactNode;
     /** Ancho del contenido; el fondo siempre llega de lado a lado. */
     width?: ContainerWidth;
     /** Estado del menú cuando lo gobierna el producto. Si se omite, es interno. */
@@ -34,5 +45,7 @@ export interface SiteHeaderProps {
  * de menú, con el contenido acotado por `Container` y el fondo a sangre. El
  * menú es siempre un panel a pantalla completa bajo la barra —no hay
  * navegación en línea— con el índice del sitio y, al final, sus ajustes.
+ * El enlace de salto al contenido no va aquí: lo pone `AppRoot`, una vez por
+ * documento.
  */
-export declare function SiteHeader({ logoHref, logoLabel, menuLabel, skipLabel, skipHref, width, open, onOpenChange, children, settings, panelId, actions, language, }: SiteHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function SiteHeader({ logoHref, logoLabel, menuLabel, menuCloseLabel, logo, renderLogoLink, width, open, onOpenChange, children, settings, panelId, actions, language, }: SiteHeaderProps): import("react/jsx-runtime").JSX.Element;

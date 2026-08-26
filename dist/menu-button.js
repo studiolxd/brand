@@ -4,18 +4,18 @@ import { Icon as e } from "./icon.js";
 import { jsx as t } from "react/jsx-runtime";
 import { forwardRef as n } from "react";
 //#region src/stories/atoms/MenuButton/MenuButton.tsx
-var r = n(function({ isOpen: n = !1, label: r = "Menú", size: i = "md", className: a, ...o }, s) {
+var r = n(function({ isOpen: n = !1, label: r = "Menú", closeLabel: i, size: a = "md", className: o, ...s }, c) {
 	return /* @__PURE__ */ t("button", {
-		ref: s,
+		ref: c,
 		type: "button",
 		className: [
 			"menu-button",
-			`menu-button--${i}`,
-			a
+			`menu-button--${a}`,
+			o
 		].filter(Boolean).join(" "),
-		"aria-label": r,
+		"aria-label": n && i ? i : r,
 		"aria-expanded": n,
-		...o,
+		...s,
 		children: /* @__PURE__ */ t(e, {
 			name: "menu",
 			size: "md",

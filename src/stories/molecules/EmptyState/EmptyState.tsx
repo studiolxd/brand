@@ -7,7 +7,7 @@ export interface EmptyStateAction {
   href?: string;
 }
 
-export interface EmptyStateProps {
+export interface EmptyStateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   title: string;
   description?: string;
   icon?: React.ReactNode;
@@ -15,10 +15,12 @@ export interface EmptyStateProps {
   size?: 'sm' | 'md';
 }
 
-export function EmptyState({ title, description, icon, action, size = 'md' }: EmptyStateProps) {
+export function EmptyState({ title, description, icon, action, size = 'md', className, ...rest }: EmptyStateProps) {
+  // `...rest` al contenedor: un estado vacío que aparece tras filtrar se anuncia con role="status"/aria-live.
   return (
     <div
-      className={['empty-state', size === 'sm' ? 'empty-state--sm' : ''].filter(Boolean).join(' ')}
+      className={['empty-state', size === 'sm' ? 'empty-state--sm' : '', className].filter(Boolean).join(' ')}
+      {...rest}
     >
       {icon && <div className="empty-state__icon">{icon}</div>}
       <div className="empty-state__body">

@@ -2,12 +2,27 @@ import type { ComponentType } from 'react';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
 export interface PaginationProps {
-    /** Total de registros */
-    total: number;
-    /** Página activa (1-indexed) */
-    page: number;
+    /**
+     * Con páginas numeradas (`pages`, por defecto) o solo anterior/siguiente
+     * (`cursor`): para listados por cursor, donde no se sabe cuántas páginas hay.
+     */
+    mode?: 'pages' | 'cursor';
+    /** Total de registros. Con `pageCount` o en modo `cursor` no hace falta. */
+    total?: number;
+    /** Número de páginas, cuando quien pagina ya lo sabe (en vez de `total` + `pageSize`). */
+    pageCount?: number;
+    /** Página activa (1-indexed). En modo `cursor`, opcional. */
+    page?: number;
     /** Registros por página. "all" muestra todos los registros sin paginación. */
-    pageSize: number | 'all';
+    pageSize?: number | 'all';
+    /** Enlaces por página, ya calculados (útil desde un Server Component, donde no se puede pasar una función). */
+    hrefs?: Record<number, string>;
+    /** Modo `cursor`: enlaces de anterior/siguiente. Sin ellos, el botón va deshabilitado. */
+    previousHref?: string;
+    nextHref?: string;
+    /** Modo `cursor`: manejadores de anterior/siguiente cuando no hay enlaces. */
+    onPrevious?: () => void;
+    onNext?: () => void;
     /**
      * Callback al cambiar de página. Opcional cuando se usa hrefBuilder
      * (la navegación ocurre mediante el href nativo del <a>).
@@ -67,4 +82,4 @@ export interface PaginationProps {
     totalLabel?: (total: number) => string;
     className?: string;
 }
-export declare function Pagination({ total, page, pageSize, onPageChange, hrefBuilder, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ mode, total, pageCount, page, pageSize, hrefs, previousHref, nextHref, onPrevious, onNext, onPageChange, hrefBuilder: hrefBuilderProp, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;

@@ -5,6 +5,8 @@ export interface MenuButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
     isOpen?: boolean;
     /** Texto accesible. Dice qué abre, no qué forma tiene. */
     label?: string;
+    /** Texto accesible cuando el menú está abierto («Cerrar menú»). Sin él, se usa `label` con `aria-expanded`. */
+    closeLabel?: string;
     /** Talla del botón: un cuadrado de 32 o 40px. */
     size?: 'sm' | 'md';
 }

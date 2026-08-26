@@ -42,6 +42,8 @@ La cabecera pone el enlace de salto; **la página pone el destino**: un `main` c
 colocan antes del botón de menú.
 
 <Canvas of={SiteHeaderStories.ConAcciones} />
+<Canvas of={SiteHeaderStories.MarcaDelProducto} />
+<Canvas of={SiteHeaderStories.SinMenu} />
 
 ## Superficie oscura
 
@@ -84,11 +86,15 @@ depende de esta prop, siempre cubre la ventana entera.
 
 - El botón de menú lleva `aria-expanded` y `aria-controls` apuntando al panel;
   cerrado, el panel es `inert`: no recibe foco ni lo leen las ayudas técnicas.
-- Se renderiza un `SkipLink` al principio, primer elemento enfocable de la
-  página, apuntando a `#main-content`. `skipLabel` y `skipHref` lo ajustan;
-  pasar `skipLabel` vacío lo omite si el producto ya pone el suyo. El destino
-  lo aporta la página (ver «Con página debajo»).
+- El enlace de salto al contenido **no** lo pone la cabecera: lo pone `AppRoot`,
+  una sola vez por documento y antes de cualquier otro elemento enfocable.
 - El logotipo es un enlace con `aria-label` propio: el SVG no aporta texto.
+  `logo` cambia la marca (un producto de la suite pone la suya) y
+  `renderLogoLink` lo enruta con el router del producto, reenviando todas las
+  props.
+- Sin `children` ni `settings` no hay panel, y el botón de menú no se pinta:
+  un control que no abre nada es un control muerto. `menuCloseLabel` da el
+  nombre del botón cuando está abierto («Cerrar menú»).
 
 ## Tokens
 
