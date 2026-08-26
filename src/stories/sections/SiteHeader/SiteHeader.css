@@ -16,6 +16,9 @@
 .site-header__logo {
   display: flex;
   align-items: center;
+  /* El trazado del logotipo ya lleva aire alrededor: se descuenta el padding
+     del Container para que la marca quede alineada con el contenido. */
+  margin-inline-start: var(--site-header-logo-margin-inline-start);
   /* El logo es un enlace: sin la línea que brand pone a todo <a>. */
   text-decoration: none;
   color: inherit;
