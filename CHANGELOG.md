@@ -7,6 +7,31 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v18.0.0
+
+### Rompe
+
+- `SiteHeader`: la ranura `language` ya no va en la barra; se pinta en los
+  ajustes del panel, delante de `settings` (tema) — en fila en escritorio,
+  apilados en móvil (`settings-gap`). La barra queda en marca + acciones + menú.
+  La API no cambia; cambia dónde aparece.
+
+### Añadido
+
+- `SiteShell`: cabecera, contenido y pie en columna con la altura mínima de la
+  pantalla; el pie siempre abajo, scroll del documento. Export `./site-shell`.
+- `Label` admite `size` (`sm`/`md` 14px, `lg` 16px); todos los fields con `size`
+  se lo propagan a su etiqueta. `CheckboxField`, `RadioField` y `SwitcherField`
+  escalan su etiqueta (`sm/lg-label-font-size`).
+- `SiteHeader` responsive: por debajo de `md` barra 64 / marca 48
+  (`content-height-compact`, `height-compact`); por debajo de `sm` barra 56 /
+  marca 40 (`content-height-narrow`, `height-narrow`, `gap-narrow`). La marca de
+  la ranura mide lo que la barra le da.
+
+### Corregido
+
+- El panel del `SiteHeader` solo desliza (cortina con `clip-path`), sin fundido.
+
 ## v17.1.0
 
 ### Añadido
