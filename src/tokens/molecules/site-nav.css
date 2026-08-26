@@ -3,6 +3,7 @@
  */
 
 :root {
+  --site-nav-item-hover-text-decoration: underline; /** Enlaces en hover: subrayado en claro */
   --site-nav-group-gap: var(--spacing-6); /** Separación entre grupos: entre columnas en escritorio, entre bloques en móvil */
   --site-nav-label-margin-block-end: var(--spacing-3); /** Aire entre la cabecera y sus enlaces */
   --site-nav-item-gap: var(--spacing-3); /** Separación entre enlaces de un grupo */
@@ -10,6 +11,7 @@
   --site-nav-item-line-height: var(--line-height-snug); /** Enlaces */
   --site-nav-item-font-weight: var(--font-weight-default); /** Enlaces */
   --site-nav-item-color: var(--color-text-on-light); /** Enlaces */
+  --site-nav-item-hover-color: var(--color-text-on-light); /** Enlaces en hover: en claro no cambia el color, se subrayan */
   --site-nav-item-current-font-weight: var(--font-weight-emphasis); /** Página actual: solo cambia el peso */
   --site-nav-focus-ring-width: var(--border-width-focus); /** Anillo de foco */
   --site-nav-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
@@ -19,6 +21,8 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --site-nav-item-hover-text-decoration: none; /** Enlaces en hover — surface-dark: sin subrayado */
   --site-nav-item-color: var(--color-text-on-dark); /** Enlaces — surface-dark */
+  --site-nav-item-hover-color: var(--color-accent-1); /** Enlaces en hover — surface-dark: color de acento en vez de subrayado */
   --site-nav-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

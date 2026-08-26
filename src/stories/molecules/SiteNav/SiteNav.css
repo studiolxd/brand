@@ -43,9 +43,11 @@
   line-height: var(--site-nav-item-line-height);
   color: var(--site-nav-item-color);
 }
+/* Hover: en claro, subrayado; en oscuro, color de acento sin subrayado (tokens). */
 .site-nav__link:hover,
 .site-nav__label-link:hover {
-  text-decoration: underline;
+  color: var(--site-nav-item-hover-color);
+  text-decoration: var(--site-nav-item-hover-text-decoration);
 }
 .site-nav__link.site-nav__link--current {
   font-weight: var(--site-nav-item-current-font-weight);
