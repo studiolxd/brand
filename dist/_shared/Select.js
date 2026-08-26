@@ -52,13 +52,12 @@ var D = g(null);
 function O(e, t) {
 	h.forEach(e, (e) => {
 		if (!v(e)) return;
-		if (e.type === P) {
-			let { value: n, children: r } = e.props;
-			typeof n == "string" && t.set(n, r);
+		let n = e.props ?? {};
+		if (e.type === P || typeof n.value == "string" && e.type !== k) {
+			typeof n.value == "string" && t.set(n.value, n.children);
 			return;
 		}
-		let { children: n } = e.props ?? {};
-		n != null && O(n, t);
+		n.children != null && O(n.children, t);
 	});
 }
 function k({ children: e, onValueChange: t, ...n }) {

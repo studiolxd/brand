@@ -1,7 +1,9 @@
 import { Switch as BaseSwitch } from '@base-ui-components/react/switch';
 import './Switcher.css';
 type BaseSwitchRootProps = Omit<React.ComponentPropsWithoutRef<typeof BaseSwitch.Root>, 'className'>;
-export interface SwitcherProps extends BaseSwitchRootProps {
+export interface SwitcherProps extends Omit<BaseSwitchRootProps, 'onCheckedChange'> {
+    /** Cambio de estado. Solo el estado: el DS no expone los detalles del evento. */
+    onCheckedChange?: (checked: boolean) => void;
     size?: 'sm' | 'md' | 'lg';
     /** Valor enviado con el formulario cuando está activo. Default del navegador: `"on"`. */
     value?: string;

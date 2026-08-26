@@ -74,13 +74,14 @@ const SelectLabelsContext = createContext<Map<string, ReactNode> | null>(null);
 function collectItemLabels(node: ReactNode, acc: Map<string, ReactNode>): void {
   Children.forEach(node, (child) => {
     if (!isValidElement(child)) return;
-    if (child.type === SelectItem) {
-      const { value, children } = child.props as SelectItemProps;
-      if (typeof value === 'string') acc.set(value, children);
+    const props = (child.props ?? {}) as { value?: unknown; children?: ReactNode };
+    // Una opción es cualquier elemento con `value` de texto: el propio
+    // `Select.Item` o un wrapper del producto que lo envuelva.
+    if (child.type === SelectItem || (typeof props.value === 'string' && child.type !== SelectRoot)) {
+      if (typeof props.value === 'string') acc.set(props.value, props.children);
       return;
     }
-    const { children } = (child.props ?? {}) as { children?: ReactNode };
-    if (children != null) collectItemLabels(children, acc);
+    if (props.children != null) collectItemLabels(props.children, acc);
   });
 }
 

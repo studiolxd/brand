@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.0.1
+
+### Corregido
+
+- `Switcher` y `Checkbox`: `onCheckedChange` recibe solo el estado (Base UI
+  añadía un segundo argumento con los detalles del evento).
+- `Select`: el trigger resuelve la etiqueta de la opción elegida aunque los
+  `Select.Item` vengan envueltos por un wrapper del producto.
+
 ## v16.0.0
 
 Rediseño del sistema: Base UI como motor, doctrina de tokens cerrada (nada

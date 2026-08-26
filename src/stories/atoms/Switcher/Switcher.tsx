@@ -7,7 +7,9 @@ type BaseSwitchRootProps = Omit<
   'className'
 >;
 
-export interface SwitcherProps extends BaseSwitchRootProps {
+export interface SwitcherProps extends Omit<BaseSwitchRootProps, 'onCheckedChange'> {
+  /** Cambio de estado. Solo el estado: el DS no expone los detalles del evento. */
+  onCheckedChange?: (checked: boolean) => void;
   size?: 'sm' | 'md' | 'lg';
   /** Valor enviado con el formulario cuando está activo. Default del navegador: `"on"`. */
   value?: string;
@@ -22,7 +24,7 @@ export interface SwitcherProps extends BaseSwitchRootProps {
  * Para componer con otro elemento, usa la prop `render` de Base UI.
  */
 export const Switcher = forwardRef<HTMLElement, SwitcherProps>(function Switcher(
-  { size = 'md', className, value, ...rest }, ref) {
+  { size = 'md', className, value, onCheckedChange, ...rest }, ref) {
   const classes = ['switcher', size !== 'md' ? `switcher--${size}` : '', className ?? '']
     .filter(Boolean)
     .join(' ');
@@ -36,7 +38,15 @@ export const Switcher = forwardRef<HTMLElement, SwitcherProps>(function Switcher
   }, [value]);
 
   return (
-    <BaseSwitch.Root ref={ref} className={classes} inputRef={inputRef} {...rest}>
+    <BaseSwitch.Root
+      ref={ref}
+      className={classes}
+      inputRef={inputRef}
+      // Contrato del DS: solo el estado. Base UI añade un segundo argumento
+      // (detalles del evento) que aquí no forma parte de la API.
+      onCheckedChange={onCheckedChange ? (checked) => onCheckedChange(checked) : undefined}
+      {...rest}
+    >
       <BaseSwitch.Thumb className="switcher__thumb" />
     </BaseSwitch.Root>
   );

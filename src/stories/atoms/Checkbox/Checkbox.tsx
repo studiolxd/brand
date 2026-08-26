@@ -24,7 +24,7 @@ export interface CheckboxProps extends BaseCheckboxRootProps {
  * propias. Para componer con otro elemento, usa la prop `render` de Base UI.
  */
 export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox(
-  { size = 'md', className, checked, indeterminate, ...rest }, ref) {
+  { size = 'md', className, checked, indeterminate, onCheckedChange, ...rest }, ref) {
   const classes = ['checkbox', size !== 'md' ? `checkbox--${size}` : '', className ?? '']
     .filter(Boolean)
     .join(' ');
@@ -38,6 +38,8 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox
       checked={checked === 'indeterminate' ? false : checked}
       indeterminate={isIndeterminate}
       aria-checked={isIndeterminate ? 'mixed' : undefined}
+      // Contrato del DS: solo el estado (Base UI añade los detalles del evento).
+      onCheckedChange={onCheckedChange ? (next) => onCheckedChange(next) : undefined}
       {...rest}
     >
       <BaseCheckbox.Indicator className="checkbox__indicator" keepMounted />
