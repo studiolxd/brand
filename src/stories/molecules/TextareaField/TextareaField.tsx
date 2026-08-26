@@ -2,7 +2,7 @@ import './TextareaField.css';
 import { Label } from '../../atoms/Label/Label';
 import { Textarea } from '../../atoms/Textarea/Textarea';
 
-interface TextareaFieldProps {
+export interface TextareaFieldProps {
   id: string;
   label: string;
   labelHidden?: boolean;
@@ -44,6 +44,8 @@ export function TextareaField({
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+  // Un mensaje de error implica estado de error, como en SelectField
+  const hasError = error || !!errorMessage;
 
   return (
     <div className="textarea-field">
@@ -58,7 +60,7 @@ export function TextareaField({
         disabled={disabled}
         readOnly={readOnly}
         size={size}
-        error={error}
+        error={hasError}
         aria-describedby={describedBy}
         onChange={onChange}
         onBlur={onBlur}

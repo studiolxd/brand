@@ -94,24 +94,56 @@ de 32px como control.
       a la talla, `padding-block` retirado, icon-only = lado a la talla.
 - [x] **Select** — hecho (2026-08-26): `--select-height/sm/lg` a la talla, sin
       `padding-block`; SelectField enlaza ayuda/error por `aria-describedby`.
-- [ ] **Input / DatePicker / OtpInput / InputPhone / TimeSelect /
-      MultiSelect / AsyncSelect** — fijar `block-size` a `--control-height`
-      (o a la talla `sm`/`lg` en sus variantes) y centrar el contenido; las
-      variantes dejan de hacerse por padding-block. `control.height` pasa a
-      gobernar de verdad (hoy no lo consume ningún CSS).
+- [x] **Input / DatePicker / OtpInput / InputPhone / TimeSelect /
+      MultiSelect / AsyncSelect** — hecho (2026-08-26): `input.height/sm/lg`
+      y `multi-select.height/sm/lg` a `size-component.*`, `padding-block: 0`,
+      fuera los `padding-block`/`sm-`/`lg-padding-block` de `input`,
+      `number-input` y `multi-select`. Miden 32/40/48 con test de story:
+      Input, NumberInput, InputPhone, OtpInput, MultiSelect, AsyncSelect,
+      AsyncMultiSelect, DatePicker y PasswordField (TimeSelect compone Select,
+      que ya medía). Los dos triggers con pills (MultiSelect,
+      AsyncMultiSelect) usan `min-block-size`: miden la talla exacta con una
+      línea y crecen solo si las pills envuelven.
+      `control.height` sigue consumiéndose solo desde `dropdown-field`; los
+      campos apuntan a `size-component.*` directamente, como Button y Select.
 - [x] **Hamburger** → rehecho como `MenuButton` a talla (40/32), barras 1px.
 - [ ] Suben a `sm` (32px): **Kbd** sm y md (1.5 / 1.75rem).
 - [x] **UserMenu** avatar, **OrgSwitcher** logo y **SidebarNav** icono → `sm`
       (2026-08-25; Avatar entero a tallas 32/40/48, sin `xl`).
 - [x] **DotsButton** → Button ghost iconOnly a talla (32/40/48), sin tokens propios (2026-08-26).
 - [ ] Pasan a token sin cambiar de tamaño: **AppLauncher** trigger 2.5rem, **FileUpload** miniatura
-      2.5rem, **PasswordField** toggle 2.5rem, **DotsButton** lg 2.5rem →
-      `md`; **EmptyState** icono 3rem → `lg`.
+      2.5rem, **DotsButton** lg 2.5rem → `md`; **EmptyState** icono 3rem → `lg`.
+- [x] **PasswordField** toggle 2.5rem → `size-component.md`, con
+      `sm-`/`lg-toggle-size` para que el botón siga siendo cuadrado a la talla
+      del campo; el icono pasa de `1.125rem` crudo a `icon.size-sm` (18 → 16px),
+      y el hueco a su derecha (`input-padding-inline-end`, antes `3rem`) es
+      ahora el propio ancho del toggle.
 - [ ] **Carousel** — botones a 4rem (64px): bajar a `lg` o justificar.
 - [ ] **Checkbox / Radio** — sus `sm-size`/`lg-size` (1rem / 1.5rem) no son
       tallas de componente: son marcas. Se quedan como tokens propios.
 - [x] **AppHeader** / **SiteHeader** — la altura ya no es un número propio:
       `calc(content-height md + 2 × spacing.2)` = 56px, compuesto en tokens.
+
+## Campos de texto — deudas detectadas al pasarlos a definitivos (2026-08-26)
+
+- [ ] **Placeholder en versalitas.** `input.placeholder-text-transform` y
+      `textarea.placeholder-text-transform` (y sus pares `error-*`) valen
+      `uppercase`. Con `Label` ya en caja normal y el placeholder del `Select`
+      en caja normal, el del campo de texto es el único que grita. No se ha
+      tocado por ser decisión de diseño, no de talla: decidir si baja a `none`
+      (y entonces los cuatro tokens sobran) o si se queda.
+- [ ] **`textarea.min-height: 15rem`** es un valor suelto (240px) sin escala
+      detrás: no hay token de altura para lo multilínea. Decidir de qué se
+      deriva —múltiplo de la talla, número de líneas— y crear el token; hoy
+      hace que un `rows` pequeño no se note (todo por debajo de ~9 filas mide
+      lo mismo).
+- [ ] **`control.padding-block`** ya no lo usa ningún control de una línea:
+      queda para `Textarea` (multilínea) y para el aire de las filas del
+      `Form` y de los campos de casilla (CheckboxField, RadioField,
+      SwitcherField). Si esos se revisan y dejan de usarlo, el token se va.
+- [ ] **`InputField` y `TextareaField` ocultan la etiqueta por defecto**
+      (`labelHidden = true`), al revés que `SelectField`. Unificar el default
+      es breaking: dejarlo para el próximo major.
 
 ## Bordes y radio (2026-08-25)
 
@@ -233,8 +265,23 @@ DropdownField (nuevo). Derivados pendientes:
 - [ ] **MultiSelect / AsyncSelect / AsyncMultiSelect**: sus tokens referenciaban
       `select.padding-block`, `select.icon-size` y `select.focus-ring-offset`
       (retirados); ahora llevan los valores que resolvían (raw `0.625rem`,
-      `-3px`). Al revisarlos: altura por talla, chevron por talla de icono,
-      offset de foco por calc como el Select.
+      `-3px`). Al revisarlos: chevron por talla de icono y offset de foco por
+      calc como el Select. La altura ya está resuelta (ver «Tallas de
+      componente»).
+
+## Input / InputField / Textarea / TextareaField definitivos (2026-08-26)
+
+- [x] Salen de `Por revisar/`: `Atoms/Input`, `Atoms/Textarea`,
+      `Molecules/InputField`, `Molecules/TextareaField`.
+- [x] Stories en castellano con test de contrato: altura 32/40/48 medida en
+      Input e InputField; en Textarea, que la altura la manda el contenido y no
+      la talla; `aria-describedby` / `aria-invalid` enlazados desde el campo,
+      como en `SelectField`.
+- [x] MDX con API, tallas, estados, superficie oscura y accesibilidad; tablas
+      de tokens por grupo (`textareaSizeTokens` nuevo).
+- [x] Un `errorMessage` implica estado de error en los dos campos (antes solo
+      lo hacía la prop `error`, al revés que `SelectField`).
+- [x] `InputFieldProps` y `TextareaFieldProps` se exportan desde `src/index.ts`.
 
 ## Menús: Menu es la fuente (2026-08-26)
 

@@ -7,41 +7,44 @@ import { textareaFieldBaseTokens, textareaFieldErrorTokens, textareaFieldHelperT
 
 # TextareaField
 
-Molécula que combina Label, Textarea, texto de ayuda y mensaje de error en un bloque accesible. El label siempre está presente en el DOM (aunque sea invisible) para garantizar la accesibilidad del campo.
+El `Textarea` como campo de formulario: etiqueta, control, texto de ayuda y mensaje de error, apilados con el mismo ritmo que el resto de campos (`InputField`, `SelectField`…). Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
 
-## Por defecto
+<Canvas of={TextareaFieldStories.PorDefecto} />
 
-Label oculto visualmente, sin texto auxiliar.
+## Etiqueta
 
-<Canvas of={TextareaFieldStories.Default} />
+Siempre hay etiqueta (`label`), enlazada por `id`. `labelHidden` la deja solo para los lectores de pantalla cuando el contexto ya dice qué es el campo; en ese caso, si no se pasa `placeholder`, el campo usa el texto de la etiqueta como placeholder.
 
-## Con texto de ayuda
+<Canvas of={TextareaFieldStories.EtiquetaOculta} />
 
-<Canvas of={TextareaFieldStories.WithHelper} />
+## Ayuda y error
 
-## Con error
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados al control por `aria-describedby`, y el error también por `aria-invalid`. El borde en error usa el color de texto de error (`error-text-on-light`), nunca un fondo.
 
-El mensaje de error activa también el estado visual de error en el Textarea.
+<Canvas of={TextareaFieldStories.ConAyuda} />
+<Canvas of={TextareaFieldStories.ConError} />
 
-<Canvas of={TextareaFieldStories.WithError} />
+## Tallas
 
-## Deshabilitado
+`size` viaja al `Textarea`, que es la excepción de la regla de tallas: no fija su altura a 32/40/48 porque es multilínea. La talla cambia el cuerpo de letra y el aire; la altura la manda `rows` sobre una altura mínima.
 
-<Canvas of={TextareaFieldStories.Disabled} />
+<Canvas of={TextareaFieldStories.Tallas} />
 
-## Label visible
+## Estados
 
-<Canvas of={TextareaFieldStories.LabelVisible} />
+<Canvas of={TextareaFieldStories.ConValor} />
+<Canvas of={TextareaFieldStories.Deshabilitado} />
+<Canvas of={TextareaFieldStories.SuperficieOscura} />
 
----
+## Accesibilidad
 
-## Theming oscuro
-
-En modo oscuro, todos los tokens del campo se remapean automáticamente vía `.surface-dark`. No requiere prop adicional.
-
----
+- La etiqueta va enlazada por `htmlFor`/`id`: `id` es obligatorio.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 
 ## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `Textarea`.
 
 ### Base
 

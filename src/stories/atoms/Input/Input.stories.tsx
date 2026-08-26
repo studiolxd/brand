@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useRender } from '@base-ui-components/react/use-render';
 import { expect, userEvent, within } from 'storybook/test';
 import { Input } from './Input';
+import { Container } from '../Container/Container';
 
 /**
  * Inyecta props sobre su hijo con `useRender` de Base UI, igual que hace el
@@ -17,38 +18,17 @@ function RenderInjector({
 }
 
 const meta: Meta<typeof Input> = {
-  title: 'Por revisar/Atoms/Input',
+  title: 'Atoms/Input',
   component: Input,
-  parameters: {
-    layout: 'padded',
-  },
+  parameters: { layout: 'padded' },
   argTypes: {
     type: {
       control: { type: 'select' },
       options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'date', 'datetime-local'],
-      description: 'Tipo HTML del input (unión nativa completa).',
     },
-    placeholder: {
-      control: { type: 'text' },
-      description: 'Texto de placeholder.',
-    },
-    disabled: {
-      control: { type: 'boolean' },
-      description: 'Deshabilita el input.',
-    },
-    readOnly: {
-      control: { type: 'boolean' },
-      description: 'Input de solo lectura.',
-    },
-    size: {
-      control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
-      description: 'Tamaño del input.',
-    },
-    error: {
-      control: { type: 'boolean' },
-      description: 'Estado de error.',
-    },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    describedBy: { table: { disable: true } },
+    ariaLabel: { table: { disable: true } },
   },
   args: {
     placeholder: 'Escribe algo…',
@@ -56,57 +36,77 @@ const meta: Meta<typeof Input> = {
     disabled: false,
     readOnly: false,
     error: false,
+    'aria-label': 'Nombre',
   },
+  render: (args) => <div style={{ inlineSize: '20rem' }}><Input {...args} /></div>,
 };
-
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const Default: Story = {
-};
+export const PorDefecto: Story = {};
 
-export const Error: Story = {
-  args: { error: true },
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
-};
-
-export const ReadOnly: Story = {
-  name: 'Read only',
-  args: { readOnly: true, value: 'Valor de solo lectura' },
-};
-
-export const Small: Story = {
-  args: { size: 'sm' },
-};
-
-export const Large: Story = {
-  args: { size: 'lg' },
-};
-
-export const Sizes: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Input placeholder="Small" size="sm" />
-      <Input placeholder="Medium" size="md" />
-      <Input placeholder="Large" size="lg" />
+/** Las tres tallas del sistema: 32, 40 y 48 de alto. Cambian la altura y el aire horizontal, nunca el padding vertical. */
+export const Tallas: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '20rem' }}>
+      <Input {...args} size="sm" placeholder="Pequeño" />
+      <Input {...args} size="md" placeholder="Mediano" />
+      <Input {...args} size="lg" placeholder="Grande" />
     </div>
   ),
 };
 
-/** Navega con Tab hasta el input para verificar el focus ring */
-export const FocusVisible: Story = {
-  name: 'Focus visible',
+/** El error se dice en el borde y en el mensaje del campo, nunca con un fondo. */
+export const ConError: Story = { args: { error: true } };
+
+export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'No se puede editar' } };
+
+export const SoloLectura: Story = { args: { readOnly: true, defaultValue: 'Valor de solo lectura' } };
+
+export const SuperficieOscura: Story = {
+  render: (args) => (
+    <Container surface="dark" space="md">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '20rem' }}>
+        <Input {...args} />
+        <Input {...args} error />
+      </div>
+    </Container>
+  ),
+};
+
+/** Navega con Tab hasta el campo para ver el anillo de foco. */
+export const Foco: Story = {
+  name: 'Foco visible',
   parameters: { pseudo: { focusVisible: true } },
+};
+
+export const Contrato: Story = {
+  name: 'Test — talla y atributos de accesibilidad',
+  tags: ['!dev'],
+  render: (args) => (
+    <div style={{ inlineSize: '20rem' }}>
+      <Input {...args} size="sm" aria-label="Pequeño" />
+      <Input {...args} size="md" aria-label="Mediano" aria-describedby="ayuda" error />
+      <Input {...args} size="lg" aria-label="Grande" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(Math.round(canvas.getByRole('textbox', { name: 'Pequeño' }).getBoundingClientRect().height)).toBe(32);
+    const md = canvas.getByRole('textbox', { name: 'Mediano' });
+    await expect(Math.round(md.getBoundingClientRect().height)).toBe(40);
+    await expect(Math.round(canvas.getByRole('textbox', { name: 'Grande' }).getBoundingClientRect().height)).toBe(48);
+    await expect(md).toHaveAttribute('aria-describedby', 'ayuda');
+    await expect(md).toHaveAttribute('aria-invalid', 'true');
+    await expect(md).toHaveClass('input', 'input--error');
+  },
 };
 
 /**
  * Test: `forwardRef`. react-hook-form registra el campo con `{...register("x")}`,
- * que esparce `ref` — debe apuntar al `<input>` real para leer el valor (uncontrolled).
+ * que esparce `ref` — debe apuntar al `<input>` real para leer el valor (no controlado).
  */
-export const RefForwarding: Story = {
+export const ContratoRef: Story = {
   name: 'Test — forwardRef (react-hook-form)',
   tags: ['!dev'],
   render: () => {
@@ -142,7 +142,7 @@ export const RefForwarding: Story = {
  * `aria-describedby` y `aria-invalid` inyectados desde fuera aterrizan en el
  * `<input>` real.
  */
-export const RenderInjection: Story = {
+export const ContratoInyeccion: Story = {
   name: 'Test — inyección render (FormControl)',
   tags: ['!dev'],
   render: () => (
@@ -164,7 +164,7 @@ export const RenderInjection: Story = {
  * Test: `className` del consumidor al final, `data-*` passthrough y `type` nativo
  * completo (`date`).
  */
-export const PropPassthrough: Story = {
+export const ContratoProps: Story = {
   name: 'Test — className + data-* + type=date',
   tags: ['!dev'],
   render: () => (
