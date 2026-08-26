@@ -142,6 +142,10 @@ Un valor escrito se separa de su placeholder por 1,89:1, la misma distancia que 
 
 `grey-dark` **no es un gris de texto**: es el de los iconos de acción secundarios (cerrar, ordenar) y de los controles deshabilitados. A un icono le basta 3:1 y un control deshabilitado está exento de contraste.
 
+### Los bordes
+
+**Los bordes y separadores son siempre tinta: prusia sobre claro, blanco sobre oscuro** (`color.primary` / `color.text.on-dark`). No hay bordes grises ni blancos translúcidos: un borde que no se ve no separa nada. Las únicas excepciones son estados con color propio —error, éxito, aviso— y los controles deshabilitados, que van en `grey-light` porque están exentos de contraste.
+
 ---
 
 ## Tokens

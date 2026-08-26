@@ -23,7 +23,6 @@
   --user-menu-item-icon-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --user-menu-item-font-family: var(--font-family-sans); /** Tipografía de ítems */
   --user-menu-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
-  --user-menu-separator-color: var(--color-grey-light); /** Color del separador */
   --user-menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --user-menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
   --user-menu-trigger-border-radius: var(--border-radius-default); /** Radio del trigger */
@@ -42,6 +41,7 @@
   --user-menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de ítem destructivo */
   --user-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover */
   --user-menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Color de ítem destructivo al hover */
+  --user-menu-separator-color: var(--color-primary); /** Color del separador */
   --user-menu-separator-height: var(--border-width-default); /** Alto del separador */
   --user-menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --user-menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */

@@ -43,7 +43,7 @@
     "item-destructive-color": { "$value": "{color.destructive-text-on-light}",  "$type": "color",     "$description": "Color de ítem destructivo" },
     "item-destructive-hover-bg":    { "$value": "{color.destructive-fill}", "$type": "color", "$description": "Fondo de ítem destructivo al hover" },
     "item-destructive-hover-color": { "$value": "{color.destructive-fill-text}",           "$type": "color",     "$description": "Color de ítem destructivo al hover" },
-    "separator-color":        { "$value": "{color.grey-light}",            "$type": "color",     "$description": "Color del separador" },
+    "separator-color":        { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del separador" },
     "separator-height":       { "$value": "{border-width.default}",             "$type": "dimension", "$description": "Alto del separador" },
     "separator-margin-block": { "$value": "{spacing.2}",                   "$type": "dimension", "$description": "Margen vertical del separador" },
     "disabled-opacity":       { "$value": "{opacity.disabled}",            "$type": "number",    "$description": "Opacidad de ítems deshabilitados" },

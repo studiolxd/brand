@@ -29,7 +29,7 @@
     "item-hover-bg":          { "$value": "{menu.item-hover-bg}",         "$type": "color",     "$description": "Fondo de ítem al hover: el resalte de los menús" },
     "item-hover-color":       { "$value": "{menu.item-hover-color}",      "$type": "color",     "$description": "Texto de ítem al hover" },
     "surface-dark-item-hover-color": { "$value": "{menu.surface-dark-item-hover-color}", "$type": "color", "$description": "Texto de ítem al hover — surface-dark" },
-    "separator-color":        { "$value": "{color.grey-light}",            "$type": "color",     "$description": "Color del separador" },
+    "separator-color":        { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del separador" },
     "separator-height":       { "$value": "{border-width.default}",             "$type": "dimension", "$description": "Alto del separador" },
     "separator-margin-block": { "$value": "{spacing.2}",                   "$type": "dimension", "$description": "Margen vertical del separador" },
     "transition-duration":    { "$value": "{floating-panel.transition-duration}", "$type": "number",    "$description": "Duración de transición" },
