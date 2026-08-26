@@ -40,6 +40,8 @@ export type MenuRadioItem = {
     value: string;
     icon?: ReactNode;
     disabled?: boolean;
+    /** `false` deja el menú abierto tras elegir (para marcar varias cosas seguidas). Por defecto se cierra. */
+    closeOnSelect?: boolean;
 };
 export type MenuItem = MenuButtonItem | MenuLinkItem | MenuSeparatorItem | MenuLabelItem | MenuRadioItem;
 /**

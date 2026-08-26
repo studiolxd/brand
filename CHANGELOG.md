@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v17.0.0
+
+### BREAKING
+
+- **`InputField` y `TextareaField` muestran la etiqueta por defecto**
+  (`labelHidden` pasa de `true` a `false`, como `SelectField`). Con la etiqueta
+  oculta y sin `placeholder`, la etiqueta sigue sirviendo de placeholder.
+- **Placeholder en caja normal**: fuera los tokens `input.placeholder-text-transform`,
+  `textarea.placeholder-text-transform` y sus pares `error-*`.
+- `textarea.min-height` deja de ser un `15rem` suelto: se deriva de
+  `textarea.rows` (4) × interlineado × cuerpo + aire + borde, por talla
+  (`sm-min-height` / `min-height` / `lg-min-height`).
+
+### Corregido
+
+- Los ítems `radio` de los menús cierran el menú al elegir (`closeOnSelect`
+  para dejarlo abierto); Base UI los dejaba abiertos.
+- `SiteHeader`: elegir en un menú del panel (tema, idioma) ya no cierra el panel.
+
 ## v16.4.0
 
 ### Añadido

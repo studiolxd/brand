@@ -104,7 +104,11 @@ export function SiteHeader({
       menuButtonRef.current?.focus();
     };
     const onPointerDown = (event: PointerEvent) => {
-      if (headerRef.current?.contains(event.target as Node)) return;
+      const target = event.target as Element | null;
+      if (headerRef.current?.contains(target)) return;
+      // Los menús del panel (tema, idioma…) viven en un portal fuera de la
+      // cabecera: pulsar una de sus opciones no es «fuera».
+      if (target?.closest('[role="menu"], [role="listbox"], [role="dialog"]')) return;
       setOpen(false);
     };
     document.addEventListener('keydown', onKeyDown);

@@ -21,7 +21,8 @@ function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", me
 		let e = (e) => {
 			e.key === "Escape" && (M(!1), j.current?.focus());
 		}, t = (e) => {
-			A.current?.contains(e.target) || M(!1);
+			let t = e.target;
+			A.current?.contains(t) || t?.closest("[role=\"menu\"], [role=\"listbox\"], [role=\"dialog\"]") || M(!1);
 		};
 		document.addEventListener("keydown", e), document.addEventListener("pointerdown", t);
 		let n = document.body.style.overflow;

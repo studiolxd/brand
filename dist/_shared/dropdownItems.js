@@ -33,6 +33,7 @@ function s({ items: e, itemClass: n, separatorClass: i, renderLink: s, labelClas
 			className: n(),
 			value: e.value,
 			disabled: e.disabled,
+			closeOnClick: e.closeOnSelect !== !1,
 			children: a(e.label, e.icon)
 		}, o);
 		let l = a(e.label, e.icon);

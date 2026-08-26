@@ -52,6 +52,8 @@ export type MenuRadioItem = {
   value: string;
   icon?: ReactNode;
   disabled?: boolean;
+  /** `false` deja el menú abierto tras elegir (para marcar varias cosas seguidas). Por defecto se cierra. */
+  closeOnSelect?: boolean;
 };
 
 export type MenuItem = MenuButtonItem | MenuLinkItem | MenuSeparatorItem | MenuLabelItem | MenuRadioItem;
@@ -134,6 +136,8 @@ export function renderDropdownItems({
           className={itemClass()}
           value={item.value}
           disabled={item.disabled}
+          // Base UI deja abierto el menú al elegir un radio; en el sistema, elegir cierra
+          closeOnClick={item.closeOnSelect !== false}
         >
           {itemContent(item.label, item.icon)}
         </BaseMenu.RadioItem>

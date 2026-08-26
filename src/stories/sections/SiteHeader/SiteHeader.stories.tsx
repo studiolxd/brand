@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within, userEvent } from 'storybook/test';
+import { expect, within, userEvent, waitFor } from 'storybook/test';
 import { SiteHeader } from './SiteHeader';
 import { Button } from '../../atoms/Button/Button';
 import { Container } from '../../atoms/Container/Container';
@@ -131,6 +131,22 @@ export const ContratoLogo: Story = {
     await expect(logo).toHaveClass('site-header__logo');
     await expect(logo.textContent).toBe('Bricks');
     await expect(canvas.queryByRole('button', { name: 'Menú de navegación' })).toBeNull();
+  },
+};
+
+export const ContratoAjustes: Story = {
+  name: 'Test — elegir en un menú del panel no cierra el panel',
+  tags: ['!dev'],
+  args: { settings: <ThemeSwitcher value="system" />, children: <SiteNav groups={indice} /> },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Menú de navegación' }));
+    await userEvent.click(canvas.getByRole('button', { name: 'Tema' }));
+    const opcion = await within(document.body).findByRole('menuitemradio', { name: 'Oscuro' });
+    await userEvent.click(opcion);
+    // el menú se cierra; el panel sigue abierto
+    await waitFor(() => expect(within(document.body).queryByRole('menu')).toBeNull());
+    await expect(canvas.getByRole('button', { name: 'Menú de navegación' })).toHaveAttribute('aria-expanded', 'true');
   },
 };
 
