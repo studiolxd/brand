@@ -51,7 +51,7 @@ export interface SiteHeaderProps {
   panelId?: string;
   /** Controles del producto en la barra (acceso, CTA…). */
   actions?: ReactNode;
-  /** El selector de idioma, entre las acciones y el botón de menú: un `LanguageSwitcher` compacto. */
+  /** El selector de idioma (`LanguageSwitcher` compacto): en los ajustes del panel, delante del tema. */
   language?: ReactNode;
 }
 
@@ -84,7 +84,7 @@ export function SiteHeader({
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : internalOpen;
-  const hasPanel = Boolean(children || settings);
+  const hasPanel = Boolean(children || settings || language);
 
   const headerRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -129,7 +129,6 @@ export function SiteHeader({
 
       <div className="site-header__controls">
         {actions}
-        {language}
         {/* Sin panel no hay menú: un botón que no abre nada es un control muerto */}
         {hasPanel && (
           <MenuButton
@@ -153,7 +152,12 @@ export function SiteHeader({
         >
           <Container width={width} space="none" innerClassName="site-header__panel-inner">
             {children}
-            {settings && <div className="site-header__settings">{settings}</div>}
+            {(language || settings) && (
+              <div className="site-header__settings">
+                {language}
+                {settings}
+              </div>
+            )}
           </Container>
         </div>
       )}

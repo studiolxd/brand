@@ -79,7 +79,7 @@ export const SinMenu: Story = {
   args: { actions: <Button variant="outline">Entrar</Button> },
 };
 
-/** La barra completa: logo, acciones del producto, idioma y menú; en el panel, el índice y los ajustes (tema). */
+/** Completa: logo, acciones del producto y menú en la barra; en el panel, el índice y los ajustes (idioma y tema). */
 export const Completa: Story = {
   args: {
     actions: <Button variant="outline">Entrar</Button>,

@@ -42,7 +42,7 @@ export interface SiteHeaderProps {
     panelId?: string;
     /** Controles del producto en la barra (acceso, CTA…). */
     actions?: ReactNode;
-    /** El selector de idioma, entre las acciones y el botón de menú: un `LanguageSwitcher` compacto. */
+    /** El selector de idioma (`LanguageSwitcher` compacto): en los ajustes del panel, delante del tema. */
     language?: ReactNode;
 }
 /**

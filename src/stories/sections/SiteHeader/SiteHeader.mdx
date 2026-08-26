@@ -17,7 +17,7 @@ Es la contraparte de `AppHeader`. Se separan porque resuelven cosas distintas:
 |---|---|---|
 | Dónde | Web y zonas sin sesión | Aplicación con sesión |
 | Manda | La marca y la navegación del sitio | El trabajo del usuario |
-| Composición | Logotipo + acciones + idioma + menú | Menú + notificaciones + avatar |
+| Composición | Logotipo + acciones + menú; en el panel, índice + idioma + tema | Menú + notificaciones + avatar |
 | Ancho | Acotado por `Container` | Barra completa, fija arriba |
 
 ## Por defecto
@@ -30,16 +30,16 @@ La cabecera pone el enlace de salto; **la página pone el destino**: un `main` c
 
 <Canvas of={SiteHeaderStories.ConPagina} />
 
-## Barra completa
+## Completa
 
-`language` coloca el selector de idioma —un `LanguageSwitcher` compacto— entre las acciones del producto y el botón de menú. Va en la barra, y no dentro del menú, porque quien necesita cambiar de idioma no puede abrir un menú que no lee.
+`language` y `settings` son los ajustes del sitio y van al final del panel: el idioma delante del tema, en fila en escritorio y apilados en móvil. El idioma no va en la barra (decisión del 2026-08-26): con la marca y el botón de menú no cabe en un teléfono, y el botón de menú es un icono universal que no exige leer el idioma para abrirlo.
 
 <Canvas of={SiteHeaderStories.Completa} />
 
 ## Con acciones
 
-`actions` admite controles propios del sitio —acceso, selector de idioma— que se
-colocan antes del botón de menú.
+`actions` admite controles propios del sitio —acceso, CTA— que se colocan
+antes del botón de menú.
 
 <Canvas of={SiteHeaderStories.ConAcciones} />
 <Canvas of={SiteHeaderStories.MarcaDelProducto} />
@@ -71,8 +71,8 @@ son inmediatas.
 El estado puede gobernarlo el producto con `open` y `onOpenChange` —para
 cerrarlo al navegar, por ejemplo— o dejarse interno si no hace falta.
 
-El panel es una capa `modal`: sobre el contenido, bajo lo flotante. Un
-selector de idioma abierto desde la barra se despliega por encima de él.
+El panel es una capa `modal`: sobre el contenido, bajo lo flotante. Los
+menús de idioma y tema, abiertos desde el panel, se despliegan por encima.
 
 ## Altura
 
@@ -85,7 +85,7 @@ depende de esta prop, siempre cubre la ventana entera.
 
 ## En móvil
 
-Por debajo de `md` (768px) la barra pasa a 64px y la marca a 48px (`content-height-compact`, `height-compact`); por debajo de `sm` (480px), a 56px y 40px (`content-height-narrow`, `height-narrow`): con idioma y botón de menú, una marca apaisada cabe en 360px. El idioma no se mete en el menú: quien no lee el idioma no puede abrir un menú. Lo decide la cabecera, no el `Logo`: la marca que va en la ranura mide lo que la barra le da, y el panel arranca de esa misma altura.
+Por debajo de `md` (768px) la barra pasa a 64px y la marca a 48px (`content-height-compact`, `height-compact`); por debajo de `sm` (480px), a 56px y 40px (`content-height-narrow`, `height-narrow`): la marca apaisada y el botón de menú caben en 320px. Lo decide la cabecera, no el `Logo`: la marca que va en la ranura mide lo que la barra le da, y el panel arranca de esa misma altura.
 
 <Canvas of={SiteHeaderStories.EnMovil} />
 

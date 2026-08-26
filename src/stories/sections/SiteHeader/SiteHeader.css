@@ -82,6 +82,19 @@
 }
 
 /* Los ajustes del sitio (tema) cierran el panel: solo aire, sin línea. */
+/* Los ajustes del sitio (idioma, tema) cierran el panel: en escritorio en
+   fila, en móvil apilados. Solo aire, sin línea. */
 .site-header__settings {
   margin-block-start: var(--site-header-settings-margin-block-start);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--site-header-settings-gap);
+}
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .site-header__settings {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }

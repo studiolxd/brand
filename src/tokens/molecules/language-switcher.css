@@ -8,7 +8,6 @@
   --language-switcher-list-gap: var(--spacing-4); /** Separación entre idiomas en la lista desplegada */
   --language-switcher-list-font-size: var(--font-size-2); /** Idiomas en la lista */
   --language-switcher-code-font-weight: var(--font-weight-emphasis); /** El código: es una acción */
-  --language-switcher-narrow-padding-inline: var(--select-sm-padding-inline); /** Padding lateral del control compacto en teléfono (por debajo de sm): solo el código, sin chevron, para que quepa en la barra con marca y menú */
   --language-switcher-list-current-font-weight: var(--font-weight-emphasis); /** Idioma actual en la lista: solo cambia el peso */
   --language-switcher-focus-ring-width: var(--border-width-focus); /** Anillo de foco */
   --language-switcher-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */

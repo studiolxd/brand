@@ -8,7 +8,8 @@
   --site-header-panel-z-index: var(--z-index-modal); /** El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante */
   --site-header-panel-transition-duration: var(--motion-duration-slow); /** Entrada y salida del panel: cambio de contexto */
   --site-header-panel-transition-easing: var(--motion-easing-in-out); /** Curva del panel: movimiento */
-  --site-header-settings-margin-block-start: var(--spacing-7); /** Aire entre el índice y los ajustes del sitio (tema) */
+  --site-header-settings-margin-block-start: var(--spacing-7); /** Aire entre el índice y los ajustes del sitio (idioma, tema) */
+  --site-header-settings-gap: var(--spacing-5); /** Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil */
   --site-header-content-height: var(--logo-height-xl); /** Lo más alto que lleva la barra: el logotipo a talla xl (64px) */
   --site-header-content-height-compact: var(--logo-height-lg); /** Lo más alto que lleva la barra en móvil (por debajo de md): el logotipo a talla lg (48px), para que quepa con los controles */
   --site-header-content-height-narrow: var(--logo-height-md); /** Lo más alto que lleva la barra en teléfono (por debajo de sm): el logotipo a talla md (40px), para caber en 360px con idioma y menú */

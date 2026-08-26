@@ -13,7 +13,7 @@ function c({ children: e, ...t }) {
 	});
 }
 function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", menuCloseLabel: f, logoSize: p = "xl", logo: m = /* @__PURE__ */ r(n, { size: p }), menuButtonSize: h = "lg", renderLogoLink: g = c, width: _ = "xl", open: v, onOpenChange: y, children: b, settings: x, panelId: S = "site-header-panel", actions: C, language: w }) {
-	let [T, E] = s(!1), D = v !== void 0, O = D ? v : T, k = !!(b || x), A = o(null), j = o(null), M = (e) => {
+	let [T, E] = s(!1), D = v !== void 0, O = D ? v : T, k = !!(b || x || w), A = o(null), j = o(null), M = (e) => {
 		D || E(e), y?.(e);
 	};
 	return a(() => {
@@ -44,19 +44,15 @@ function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", me
 			}),
 			/* @__PURE__ */ i("div", {
 				className: "site-header__controls",
-				children: [
-					C,
-					w,
-					k && /* @__PURE__ */ r(t, {
-						ref: j,
-						isOpen: O,
-						onClick: () => M(!O),
-						label: d,
-						closeLabel: f,
-						size: h,
-						"aria-controls": S
-					})
-				]
+				children: [C, k && /* @__PURE__ */ r(t, {
+					ref: j,
+					isOpen: O,
+					onClick: () => M(!O),
+					label: d,
+					closeLabel: f,
+					size: h,
+					"aria-controls": S
+				})]
 			}),
 			k && /* @__PURE__ */ r("div", {
 				className: ["site-header__panel", O ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
@@ -67,9 +63,9 @@ function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", me
 					width: _,
 					space: "none",
 					innerClassName: "site-header__panel-inner",
-					children: [b, x && /* @__PURE__ */ r("div", {
+					children: [b, (w || x) && /* @__PURE__ */ i("div", {
 						className: "site-header__settings",
-						children: x
+						children: [w, x]
 					})]
 				})
 			})
