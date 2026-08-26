@@ -213,22 +213,25 @@ var E = /* @__PURE__ */ _.forwardRef(function(e, t) {
 process.env.NODE_ENV !== "production" && (E.displayName = "CheckboxIndicator");
 //#endregion
 //#region src/stories/atoms/Checkbox/Checkbox.tsx
-var D = oe(function({ size: e = "md", className: t, checked: n, indeterminate: ee, onCheckedChange: r, ...i }, a) {
-	let o = [
+var D = oe(function({ size: e = "md", className: t, checked: n, indeterminate: ee, onCheckedChange: r, id: i, ...a }, o) {
+	let s = [
 		"checkbox",
 		e === "md" ? "" : `checkbox--${e}`,
 		t ?? ""
-	].filter(Boolean).join(" "), s = n === "indeterminate" || ee;
+	].filter(Boolean).join(" "), c = n === "indeterminate" || ee;
 	return /* @__PURE__ */ v(T, {
-		ref: a,
-		className: o,
-		render: /* @__PURE__ */ v("button", { type: "button" }),
+		ref: o,
+		className: s,
+		render: /* @__PURE__ */ v("button", {
+			type: "button",
+			id: i
+		}),
 		nativeButton: !0,
 		checked: n === "indeterminate" ? !1 : n,
-		indeterminate: s,
-		"aria-checked": s ? "mixed" : void 0,
+		indeterminate: c,
+		"aria-checked": c ? "mixed" : void 0,
 		onCheckedChange: r ? (e) => r(e) : void 0,
-		...i,
+		...a,
 		children: /* @__PURE__ */ v(E, {
 			className: "checkbox__indicator",
 			keepMounted: !0

@@ -24,7 +24,7 @@ export interface SwitcherProps extends Omit<BaseSwitchRootProps, 'onCheckedChang
  * Para componer con otro elemento, usa la prop `render` de Base UI.
  */
 export const Switcher = forwardRef<HTMLElement, SwitcherProps>(function Switcher(
-  { size = 'md', className, value, onCheckedChange, ...rest }, ref) {
+  { size = 'md', className, value, onCheckedChange, id, ...rest }, ref) {
   const classes = ['switcher', size !== 'md' ? `switcher--${size}` : '', className ?? '']
     .filter(Boolean)
     .join(' ');
@@ -42,9 +42,10 @@ export const Switcher = forwardRef<HTMLElement, SwitcherProps>(function Switcher
       ref={ref}
       className={classes}
       inputRef={inputRef}
-      // Un <button> de verdad: lo nombra un <label htmlFor> (un span no es
-      // etiquetable), `disabled` es nativo y el teclado viene de serie.
-      render={<button type="button" />}
+      // Un <button> de verdad, y con el `id` en él: Base UI se lo daría al
+      // input oculto, y entonces un <label htmlFor> nombraría al input y no
+      // al interruptor. `disabled` es nativo y el teclado viene de serie.
+      render={<button type="button" id={id} />}
       nativeButton
       // Contrato del DS: solo el estado. Base UI añade un segundo argumento
       // (detalles del evento) que aquí no forma parte de la API.

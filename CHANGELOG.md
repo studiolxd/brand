@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.0.3
+
+### Corregido
+
+- `Switcher` y `Checkbox`: el `id` va en el botón (Base UI lo daba al input
+  oculto), así que `<label htmlFor>` nombra el control. Tests jsdom del contrato.
+
 ## v16.0.2
 
 ### Corregido

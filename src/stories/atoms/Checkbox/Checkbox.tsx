@@ -24,7 +24,7 @@ export interface CheckboxProps extends BaseCheckboxRootProps {
  * propias. Para componer con otro elemento, usa la prop `render` de Base UI.
  */
 export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox(
-  { size = 'md', className, checked, indeterminate, onCheckedChange, ...rest }, ref) {
+  { size = 'md', className, checked, indeterminate, onCheckedChange, id, ...rest }, ref) {
   const classes = ['checkbox', size !== 'md' ? `checkbox--${size}` : '', className ?? '']
     .filter(Boolean)
     .join(' ');
@@ -35,8 +35,9 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox
     <BaseCheckbox.Root
       ref={ref}
       className={classes}
-      // Un <button> de verdad: etiquetable por <label htmlFor>, disabled nativo.
-      render={<button type="button" />}
+      // Un <button> de verdad, con el `id` en él (Base UI se lo daría al input
+      // oculto y el <label htmlFor> no nombraría la casilla); disabled nativo.
+      render={<button type="button" id={id} />}
       nativeButton
       checked={checked === 'indeterminate' ? false : checked}
       indeterminate={isIndeterminate}

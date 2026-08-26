@@ -1,11 +1,11 @@
 import { t as e } from "./useControlled.js";
 import { d as t, m as n, p as r, t as i } from "./useRenderElement.js";
-import { A as a, L as o, R as s, x as c } from "./floating-ui.utils.dom.js";
-import { t as l } from "./useBaseUiId.js";
-import { t as ee } from "./useButton.js";
-import { t as u } from "./visuallyHidden.js";
-import { a as d, i as te, n as f, o as p, r as m, t as h } from "./useValueChanged.js";
-import { t as ne } from "./useLabelableId.js";
+import { A as a, L as o, R as s, x as ee } from "./floating-ui.utils.dom.js";
+import { t as c } from "./useBaseUiId.js";
+import { t as te } from "./useButton.js";
+import { t as l } from "./visuallyHidden.js";
+import { a as u, i as d, n as ne, o as f, r as p, t as m } from "./useValueChanged.js";
+import { t as h } from "./useLabelableId.js";
 import * as g from "react";
 import { forwardRef as _, useCallback as re } from "react";
 import { jsx as v, jsxs as y } from "react/jsx-runtime";
@@ -22,12 +22,12 @@ function x() {
 var S = /* @__PURE__ */ function(e) {
 	return e.checked = "data-checked", e.unchecked = "data-unchecked", e.disabled = "data-disabled", e.readonly = "data-readonly", e.required = "data-required", e.valid = "data-valid", e.invalid = "data-invalid", e.touched = "data-touched", e.dirty = "data-dirty", e.filled = "data-filled", e.focused = "data-focused", e;
 }({}), C = {
-	...p,
+	...f,
 	checked(e) {
 		return e ? { [S.checked]: "" } : { [S.unchecked]: "" };
 	}
-}, w = /* @__PURE__ */ g.forwardRef(function(n, p) {
-	let { checked: _, className: re, defaultChecked: x, id: S, inputRef: w, name: T, nativeButton: E = !1, onCheckedChange: D, readOnly: O = !1, required: k = !1, disabled: ie = !1, render: ae, uncheckedValue: A, ...oe } = n, { clearErrors: se } = te(), { state: j, setTouched: M, setDirty: N, validityData: P, setFilled: F, setFocused: I, shouldValidateOnChange: L, validationMode: R, disabled: z, name: B, validation: V } = d(), { labelId: H } = f(), U = z || ie, W = B ?? T, G = s(D), K = g.useRef(null), q = r(K, w, V.inputRef), J = g.useRef(null), Y = l(), X = ne({
+}, w = /* @__PURE__ */ g.forwardRef(function(n, f) {
+	let { checked: _, className: re, defaultChecked: x, id: S, inputRef: w, name: T, nativeButton: E = !1, onCheckedChange: D, readOnly: O = !1, required: k = !1, disabled: ie = !1, render: ae, uncheckedValue: A, ...oe } = n, { clearErrors: se } = d(), { state: j, setTouched: M, setDirty: N, validityData: P, setFilled: F, setFocused: I, shouldValidateOnChange: L, validationMode: R, disabled: z, name: B, validation: V } = u(), { labelId: H } = ne(), U = z || ie, W = B ?? T, G = s(D), K = g.useRef(null), q = r(K, w, V.inputRef), J = g.useRef(null), Y = c(), X = h({
 		id: S,
 		implicit: !1,
 		controlRef: J
@@ -37,7 +37,7 @@ var S = /* @__PURE__ */ function(e) {
 		name: "Switch",
 		state: "checked"
 	});
-	m({
+	p({
 		id: Y,
 		commit: V.commit,
 		value: Z,
@@ -46,10 +46,10 @@ var S = /* @__PURE__ */ function(e) {
 		getValue: () => Z
 	}), o(() => {
 		K.current && F(K.current.checked);
-	}, [K, F]), h(Z, () => {
+	}, [K, F]), m(Z, () => {
 		se(W), N(Z !== P.initialValue), F(Z), L() ? V.commit(Z) : V.commit(Z, !0);
 	});
-	let { getButtonProps: ce, buttonRef: le } = ee({
+	let { getButtonProps: ce, buttonRef: le } = te({
 		disabled: U,
 		native: E
 	}), ue = {
@@ -74,14 +74,14 @@ var S = /* @__PURE__ */ function(e) {
 		id: X,
 		name: W,
 		required: k,
-		style: u,
+		style: l,
 		tabIndex: -1,
 		type: "checkbox",
 		"aria-hidden": !0,
 		ref: q,
 		onChange(e) {
 			if (e.nativeEvent.defaultPrevented) return;
-			let t = e.target.checked, n = c(a, e.nativeEvent);
+			let t = e.target.checked, n = ee(a, e.nativeEvent);
 			G?.(t, n), !n.isCanceled && Q(t);
 		},
 		onFocus() {
@@ -112,7 +112,7 @@ var S = /* @__PURE__ */ function(e) {
 	]), fe = i("span", n, {
 		state: $,
 		ref: [
-			p,
+			f,
 			J,
 			le
 		],
@@ -141,7 +141,7 @@ process.env.NODE_ENV !== "production" && (w.displayName = "SwitchRoot");
 //#endregion
 //#region node_modules/.pnpm/@base-ui-components+react@1.0.0-rc.0_@types+react@19.2.14_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@base-ui-components/react/esm/switch/thumb/SwitchThumb.js
 var T = /* @__PURE__ */ g.forwardRef(function(e, t) {
-	let { render: n, className: r, ...a } = e, { state: o } = d(), s = x();
+	let { render: n, className: r, ...a } = e, { state: o } = u(), s = x();
 	return i("span", e, {
 		state: {
 			...o,
@@ -155,9 +155,9 @@ var T = /* @__PURE__ */ g.forwardRef(function(e, t) {
 process.env.NODE_ENV !== "production" && (T.displayName = "SwitchThumb");
 //#endregion
 //#region src/stories/atoms/Switcher/Switcher.tsx
-var E = _(function({ size: e = "md", className: t, value: n, onCheckedChange: r, ...i }, a) {
+var E = _(function({ size: e = "md", className: t, value: n, onCheckedChange: r, id: i, ...a }, o) {
 	return /* @__PURE__ */ v(w, {
-		ref: a,
+		ref: o,
 		className: [
 			"switcher",
 			e === "md" ? "" : `switcher--${e}`,
@@ -166,10 +166,13 @@ var E = _(function({ size: e = "md", className: t, value: n, onCheckedChange: r,
 		inputRef: re((e) => {
 			e && n !== void 0 && (e.value = n);
 		}, [n]),
-		render: /* @__PURE__ */ v("button", { type: "button" }),
+		render: /* @__PURE__ */ v("button", {
+			type: "button",
+			id: i
+		}),
 		nativeButton: !0,
 		onCheckedChange: r ? (e) => r(e) : void 0,
-		...i,
+		...a,
 		children: /* @__PURE__ */ v(T, { className: "switcher__thumb" })
 	});
 });
