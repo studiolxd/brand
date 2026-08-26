@@ -83,6 +83,12 @@ En la web manda la marca: el logotipo va a talla `xl` (64px, la talla ilustrativ
 `width` se pasa tal cual al `Container`: por defecto `xl` (1280px). El fondo no
 depende de esta prop, siempre cubre la ventana entera.
 
+## En móvil
+
+Por debajo de `md` (768px) la barra pasa a 64px y la marca a 48px (`content-height-compact`, `height-compact`): el logotipo no desborda ni deja sin sitio a los controles. Lo decide la cabecera, no el `Logo`: la marca que va en la ranura mide lo que la barra le da, y el panel arranca de esa misma altura.
+
+<Canvas of={SiteHeaderStories.EnMovil} />
+
 ## Accesibilidad
 
 - El botón de menú lleva `aria-expanded` y `aria-controls` apuntando al panel;

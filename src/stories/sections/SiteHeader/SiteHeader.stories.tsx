@@ -94,6 +94,12 @@ export const Completa: Story = {
   },
 };
 
+/** En móvil la barra pasa a 64px y la marca a 48px: el logotipo no desborda ni quita sitio a los controles. */
+export const EnMovil: Story = {
+  args: Completa.args,
+  globals: { viewport: { value: 'mobile1' } },
+};
+
 /** Con página debajo. El enlace de salto al contenido lo pone `AppRoot`, no la cabecera. */
 export const ConPagina: Story = {
   render: (args) => (

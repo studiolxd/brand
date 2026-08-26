@@ -21,6 +21,22 @@
   color: inherit;
 }
 
+/* La marca mide lo que la barra le da: así en móvil encoge con ella. Manda
+   la cabecera, no el logotipo, porque el alto de la barra y el arranque del
+   panel salen del mismo token. */
+.site-header__logo > * {
+  block-size: var(--site-header-content-height);
+  inline-size: auto;
+}
+
+/* Móvil: barra y marca compactas para que el logotipo no desborde. */
+@media (max-width: 767.98px) /* < --breakpoint-md */ {
+  .site-header {
+    --site-header-content-height: var(--site-header-content-height-compact);
+    --site-header-height: var(--site-header-height-compact);
+  }
+}
+
 
 .site-header__controls {
   display: flex;
