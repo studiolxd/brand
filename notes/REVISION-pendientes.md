@@ -126,24 +126,33 @@ de 32px como control.
 
 ## Campos de texto — deudas detectadas al pasarlos a definitivos (2026-08-26)
 
-- [ ] **Placeholder en versalitas.** `input.placeholder-text-transform` y
-      `textarea.placeholder-text-transform` (y sus pares `error-*`) valen
-      `uppercase`. Con `Label` ya en caja normal y el placeholder del `Select`
-      en caja normal, el del campo de texto es el único que grita. No se ha
-      tocado por ser decisión de diseño, no de talla: decidir si baja a `none`
-      (y entonces los cuatro tokens sobran) o si se queda.
-- [ ] **`textarea.min-height: 15rem`** es un valor suelto (240px) sin escala
-      detrás: no hay token de altura para lo multilínea. Decidir de qué se
-      deriva —múltiplo de la talla, número de líneas— y crear el token; hoy
-      hace que un `rows` pequeño no se note (todo por debajo de ~9 filas mide
-      lo mismo).
+- [x] **Placeholder en caja normal** (2026-08-26). El placeholder es texto,
+      como el `Label`: fuera los cuatro tokens `*-placeholder-text-transform`
+      de `input` y `textarea` y la propiedad en el CSS de `Input`, `Textarea`,
+      `DatePicker` (trigger en placeholder) e `InputPhone` (los cuatro
+      consumían el token del `input`). Ningún otro campo transformaba la caja
+      del placeholder. Test de story en Input y Textarea.
+- [x] **`textarea.min-height` derivado** (2026-08-26). Fuera el `15rem`
+      suelto: `min-height = rows × line-height × font-size + 2 ×
+      padding-block + 2 × border-width`, con `textarea.rows: 4` (cuatro
+      líneas: dos no se distinguen de un campo de una línea, cinco se comen
+      media pantalla en móvil). md 130px, y `sm-min-height` / `lg-min-height`
+      resuelven la misma fórmula con su cuerpo y su aire (102 / 170px) —
+      hacen falta como tokens propios porque las custom properties se
+      sustituyen en `:root` y no ven el remapeo de la talla. Un `rows` por
+      encima de 4 ya se nota; test de story con las tres medidas.
 - [ ] **`control.padding-block`** ya no lo usa ningún control de una línea:
       queda para `Textarea` (multilínea) y para el aire de las filas del
       `Form` y de los campos de casilla (CheckboxField, RadioField,
       SwitcherField). Si esos se revisan y dejan de usarlo, el token se va.
-- [ ] **`InputField` y `TextareaField` ocultan la etiqueta por defecto**
-      (`labelHidden = true`), al revés que `SelectField`. Unificar el default
-      es breaking: dejarlo para el próximo major.
+- [x] **`InputField` y `TextareaField` muestran la etiqueta por defecto**
+      (2026-08-26): `labelHidden = false`, como `SelectField`. Breaking, va en
+      v17.0.0. `labelHidden` sigue existiendo; con la etiqueta oculta y sin
+      `placeholder` propio se mantiene el préstamo del texto de la etiqueta
+      como placeholder (si no, el control se queda sin pista visible; el
+      nombre accesible lo sigue poniendo la etiqueta). Dentro del DS,
+      `ContactSection` y `Footer` ya pasaban `labelHidden` explícito y no
+      cambian; `LoginForm` no lo pasaba y ahora enseña sus dos etiquetas.
 
 ## Bordes y radio (2026-08-25)
 

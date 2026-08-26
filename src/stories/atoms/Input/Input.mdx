@@ -27,6 +27,12 @@ Suelto se usa fuera de formularios; dentro de uno, va el `InputField`, que le a√
 <Canvas of={InputStories.Deshabilitado} />
 <Canvas of={InputStories.SoloLectura} />
 
+## Placeholder
+
+Va en **caja normal**, como el `Label` y como el placeholder del `Select`: es texto, no una marca. Su color sale de `text.placeholder-on-light|dark`, el gris m√°s oscuro de la escala, para que se lea sin confundirse con un valor escrito.
+
+El placeholder es una pista, nunca la etiqueta: no sustituye al `label` (desaparece al escribir). El nombre del campo lo pone el `InputField`.
+
 ## Superficie oscura
 
 El campo hereda los tokens de `.surface-dark` por cascada; no hay prop de tema.

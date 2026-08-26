@@ -4,7 +4,7 @@ import { Label as e } from "./label.js";
 import { Textarea as t } from "./textarea.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-function i({ id: i, label: a, labelHidden: o = !0, name: s, placeholder: c, value: l, defaultValue: u, rows: d, disabled: f, readOnly: p, size: m = "md", error: h = !1, errorMessage: g, helperText: _, onChange: v, onBlur: y, onFocus: b }) {
+function i({ id: i, label: a, labelHidden: o = !1, name: s, placeholder: c, value: l, defaultValue: u, rows: d, disabled: f, readOnly: p, size: m = "md", error: h = !1, errorMessage: g, helperText: _, onChange: v, onBlur: y, onFocus: b }) {
 	let x = g ? `${i}-error` : void 0, S = _ ? `${i}-helper` : void 0, C = [x, S].filter(Boolean).join(" ") || void 0;
 	return /* @__PURE__ */ r("div", {
 		className: "textarea-field",

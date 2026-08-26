@@ -29,7 +29,6 @@
 
 .date-picker__trigger--placeholder {
   color: var(--input-placeholder-color);
-  text-transform: var(--input-placeholder-text-transform);
 }
 
 .date-picker__trigger--error {

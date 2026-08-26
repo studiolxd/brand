@@ -8,7 +8,7 @@ const meta: Meta<typeof TextareaField> = {
   component: TextareaField,
   parameters: { layout: 'padded' },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] } },
-  args: { id: 'mensaje', label: 'Mensaje', labelHidden: false, rows: 4 },
+  args: { id: 'mensaje', label: 'Mensaje' },
   render: (args) => <div style={{ inlineSize: '24rem' }}><TextareaField {...args} /></div>,
 };
 export default meta;
@@ -64,5 +64,29 @@ export const Contrato: Story = {
     await expect(control).toHaveAttribute('aria-describedby', 'mensaje-error mensaje-helper');
     await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
     await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'mensaje-helper');
+  },
+};
+
+export const ContratoEtiqueta: Story = {
+  name: 'Test — la etiqueta se ve por defecto',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ inlineSize: '24rem' }}>
+      <TextareaField id="e-visible" label="Visible" />
+      <TextareaField id="e-oculta" label="Oculta" labelHidden />
+      <TextareaField id="e-oculta-ph" label="Oculta con placeholder" labelHidden placeholder="Propio" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Por defecto la etiqueta es visible: sin `visually-hidden` y sin placeholder prestado
+    const visible = canvasElement.querySelector('label[for="e-visible"]')!;
+    await expect(visible).not.toHaveClass('visually-hidden');
+    await expect(canvas.getByRole('textbox', { name: 'Visible' })).not.toHaveAttribute('placeholder');
+    // Oculta: sigue nombrando el control y le presta su texto como placeholder
+    await expect(canvasElement.querySelector('label[for="e-oculta"]')).toHaveClass('visually-hidden');
+    await expect(canvas.getByRole('textbox', { name: 'Oculta' })).toHaveAttribute('placeholder', 'Oculta');
+    // Un placeholder propio manda sobre la etiqueta
+    await expect(canvas.getByRole('textbox', { name: 'Oculta con placeholder' })).toHaveAttribute('placeholder', 'Propio');
   },
 };

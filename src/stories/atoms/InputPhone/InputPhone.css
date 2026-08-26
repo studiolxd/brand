@@ -128,7 +128,6 @@
 
 .input-phone__number::placeholder {
   color: var(--input-placeholder-color);
-  text-transform: var(--input-placeholder-text-transform);
 }
 
 /* ── Error ──────────────────────────────────────────────────── */

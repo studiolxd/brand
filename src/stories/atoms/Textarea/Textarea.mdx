@@ -19,6 +19,20 @@ Es la excepción de la regla de tallas del sistema: al ser multilínea **no** fi
 
 <Canvas of={TextareaStories.Tallas} />
 
+## Altura mínima
+
+`min-height` no es un número suelto: se compone de las líneas que el campo mide por defecto.
+
+```
+min-height = rows × line-height × font-size + 2 × padding-block + 2 × border-width
+```
+
+`textarea.rows` vale **4**: dos líneas no se distinguen de un campo de una línea y cinco ya se comen media pantalla en móvil. Con la talla `md` eso son 130px (4 × 1,5 × 16 + 2 × 16 + 2 × 1). Cada talla resuelve la misma fórmula con su cuerpo y su aire, en su propio token (`sm-min-height` 102px, `lg-min-height` 170px).
+
+La consecuencia práctica: un `rows` por encima de 4 **se nota** (el campo crece línea a línea); por debajo, el mínimo manda. Para un campo más corto que el mínimo, baja `--textarea-rows`.
+
+<Canvas of={TextareaStories.AlturaMinima} />
+
 ## Estados
 
 `error` marca el campo: pinta el borde con el color de texto de error y pone `aria-invalid`. El mensaje que explica el error lo pone el campo (`TextareaField`), no el átomo.
@@ -26,6 +40,12 @@ Es la excepción de la regla de tallas del sistema: al ser multilínea **no** fi
 <Canvas of={TextareaStories.ConError} />
 <Canvas of={TextareaStories.Deshabilitado} />
 <Canvas of={TextareaStories.SoloLectura} />
+
+## Placeholder
+
+Va en **caja normal**, como el `Label` y como el placeholder del `Select`: es texto, no una marca. Su color sale de `text.placeholder-on-light|dark`.
+
+El placeholder es una pista, nunca la etiqueta: el nombre del campo lo pone el `TextareaField`.
 
 ## Superficie oscura
 

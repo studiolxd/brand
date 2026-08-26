@@ -21,7 +21,6 @@
 
 .input::placeholder {
   color: var(--input-placeholder-color);
-  text-transform: var(--input-placeholder-text-transform);
 }
 
 .input:focus-visible {
@@ -49,7 +48,6 @@
 
 .input.input--error::placeholder {
   color: var(--input-error-placeholder-color);
-  text-transform: var(--input-error-placeholder-text-transform);
 }
 
 .input.input--error:focus-visible {
