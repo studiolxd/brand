@@ -1,6 +1,8 @@
 .input {
   width: var(--input-width);
-  padding-block: var(--input-padding-block);
+  block-size: var(--input-height);
+  /* La talla manda la altura; el texto lo centra el propio <input> */
+  padding-block: 0;
   padding-inline: var(--input-padding-inline);
   border-radius: var(--input-border-radius);
   border-width: var(--input-border-width);
@@ -58,15 +60,15 @@
   border-color: var(--input-error-focus-border-color);
 }
 
-/* Tamaños */
+/* Tallas — cambian la altura y el aire horizontal, nunca el padding vertical */
 .input.input--sm {
-  --input-padding-block: var(--input-sm-padding-block);
+  --input-height: var(--input-sm-height);
   --input-padding-inline: var(--input-sm-padding-inline);
   --input-font-size: var(--input-sm-font-size);
 }
 
 .input.input--lg {
-  --input-padding-block: var(--input-lg-padding-block);
+  --input-height: var(--input-lg-height);
   --input-padding-inline: var(--input-lg-padding-inline);
   --input-font-size: var(--input-lg-font-size);
 }

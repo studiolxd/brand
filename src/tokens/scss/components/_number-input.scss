@@ -11,7 +11,8 @@ $lxd-number-input-font-family: "Google Sans Flex", system-ui, sans-serif; // Fon
 $lxd-number-input-font-size: 1rem; // Font size
 $lxd-number-input-font-weight: 300; // Font weight
 $lxd-number-input-line-height: 1; // Line height
-$lxd-number-input-padding-block: 1rem; // Padding vertical del campo
+$lxd-number-input-height: 2.5rem; // Altura del control: la talla del sistema, heredada de input
+$lxd-number-input-padding-inline: 1rem; // Padding horizontal del campo
 $lxd-number-input-transition-duration: 150ms; // Duración de la transición
 $lxd-number-input-transition-easing: ease; // Easing de la transición
 $lxd-number-input-btn-width: 2rem; // Ancho de los botones +/−
@@ -35,6 +36,8 @@ $lxd-number-input-error-color: #111e30; // Texto en error
 $lxd-number-input-error-focus-border-color: #111e30; // Borde en foco+error
 $lxd-number-input-error-focus-ring-color: #b30000; // Focus ring en error
 $lxd-number-input-sm-font-size: 0.875rem; // Font size — sm
-$lxd-number-input-sm-padding-block: 0.5rem; // Padding vertical — sm
+$lxd-number-input-sm-height: 2rem; // Altura — sm
+$lxd-number-input-sm-padding-inline: 0.75rem; // Padding horizontal — sm
 $lxd-number-input-lg-font-size: 1.25rem; // Font size — lg
-$lxd-number-input-lg-padding-block: 1.5rem; // Padding vertical — lg
+$lxd-number-input-lg-height: 3rem; // Altura — lg
+$lxd-number-input-lg-padding-inline: 1.5rem; // Padding horizontal — lg

@@ -205,3 +205,23 @@ export const AperturaYCierre: Story = {
     await waitFor(() => expect(body.queryByRole('option', { name: 'Ana García' })).toBeNull());
   },
 };
+
+/** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
+export const ContratoTalla: Story = {
+  name: 'Test — talla del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <div data-t="sm"><AsyncSelect size="sm" onSearch={mockSearch} aria-label="sm" /></div>
+      <div data-t="md"><AsyncSelect size="md" onSearch={mockSearch} aria-label="md" /></div>
+      <div data-t="lg"><AsyncSelect size="lg" onSearch={mockSearch} aria-label="lg" /></div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const alto = (sel: string) =>
+      Math.round(canvasElement.querySelector(sel)!.getBoundingClientRect().height);
+    await expect(alto('[data-t="sm"] .async-select')).toBe(32);
+    await expect(alto('[data-t="md"] .async-select')).toBe(40);
+    await expect(alto('[data-t="lg"] .async-select')).toBe(48);
+  },
+};

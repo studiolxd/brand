@@ -1,37 +1,47 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as InputStories from "./Input.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { inputBaseTokens, inputFocusTokens, inputErrorTokens, inputDisabledTokens, inputDarkTokens, inputSizeTokens } from "../../../tokens/components/input";
+import { inputBaseTokens, inputSizeTokens, inputFocusTokens, inputErrorTokens, inputDisabledTokens, inputDarkTokens } from "../../../tokens/components/input";
 
 <Meta of={InputStories} />
 
 # Input
 
-Campo de texto para la introducción de datos en formularios. Siempre ocupa el ancho completo de su contenedor.
+Campo de texto de una línea. Es un `<input>` nativo con los estilos del sistema: rectangular, borde primario, a la altura de la talla y ocupando siempre el ancho de su contenedor. Extiende los atributos nativos y reenvía todo lo que recibe (`ref`, `data-*`, `aria-*`, `required`, `min`/`max`/`step`…), así que sirve tal cual para react-hook-form o para el `FormControl` de Base UI.
 
-## Por defecto
+Suelto se usa fuera de formularios; dentro de uno, va el `InputField`, que le añade etiqueta, ayuda y error.
 
-<Canvas of={InputStories.Default} />
+<Canvas of={InputStories.PorDefecto} />
 
-## Error
+## Tallas
 
-<Canvas of={InputStories.Error} />
+`sm`, `md` (por defecto) y `lg` son las tallas del sistema (32/40/48). Cambian la **altura** del campo y el aire horizontal, nunca el padding vertical: por eso un Input queda a ras de un `Button` o de un `Select` de la misma talla. El texto lo centra el propio `<input>`.
 
-## Deshabilitado
+<Canvas of={InputStories.Tallas} />
 
-<Canvas of={InputStories.Disabled} />
+## Estados
 
-## Solo lectura
+`error` marca el campo: pinta el borde con el color de texto de error y pone `aria-invalid`. El mensaje que explica el error lo pone el campo (`InputField`), no el átomo.
 
-<Canvas of={InputStories.ReadOnly} />
+<Canvas of={InputStories.ConError} />
+<Canvas of={InputStories.Deshabilitado} />
+<Canvas of={InputStories.SoloLectura} />
 
-## Tamaños
+## Superficie oscura
 
-Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica mediante la prop `size`.
+El campo hereda los tokens de `.surface-dark` por cascada; no hay prop de tema.
 
-<Canvas of={InputStories.Sizes} />
+<Canvas of={InputStories.SuperficieOscura} />
 
----
+## Tipos nativos
+
+`type` hereda la unión nativa completa (`text`, `email`, `password`, `number`, `tel`, `url`, `search`, `date`, `datetime-local`…). Los tipos que tienen átomo propio en el sistema —`checkbox`, `radio`, `file`— renderizan pero no reciben su estilado: para eso están `Checkbox`, `Radio` y `FileUpload`.
+
+## Accesibilidad
+
+- El campo necesita nombre: en un formulario lo pone la etiqueta del `InputField`; suelto, `aria-label`.
+- `aria-describedby` y `aria-invalid` se pasan como atributos nativos y llegan al `<input>` (los pone el campo con su ayuda y su error). Las props `describedBy` y `ariaLabel` quedan obsoletas.
+- El anillo de foco se dibuja hacia dentro, pegado al borde, para no desplazar el layout.
 
 ## Tokens
 
@@ -39,7 +49,11 @@ Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica
 
 <TokenTable tokens={inputBaseTokens} />
 
-### Focus
+### Tallas
+
+<TokenTable tokens={inputSizeTokens} />
+
+### Foco
 
 <TokenTable tokens={inputFocusTokens} />
 
@@ -51,13 +65,9 @@ Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El tamaño se aplica
 
 <TokenTable tokens={inputDisabledTokens} />
 
-### Oscuro
+### Superficie oscura
 
 <TokenTable tokens={inputDarkTokens} />
-
-### Tamaños
-
-<TokenTable tokens={inputSizeTokens} />
 
 ## Props
 

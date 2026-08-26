@@ -5,7 +5,9 @@ $lxd-input-border-radius: 0px; // Border radius
 $lxd-input-border-width: 1px; // Border width
 $lxd-input-border-style: solid; // Border style
 $lxd-input-width: 100%; // Inputs are always full width
-$lxd-input-padding-block: 1rem; // Block (vertical) padding
+$lxd-input-height: 2.5rem; // Altura del campo: la talla md del sistema. Las tallas cambian la altura, no el padding vertical
+$lxd-input-sm-height: 2rem; // Altura — sm
+$lxd-input-lg-height: 3rem; // Altura — lg
 $lxd-input-padding-inline: 1rem; // Inline (horizontal) padding
 $lxd-input-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
 $lxd-input-font-size: 1rem; // Font size
@@ -34,9 +36,7 @@ $lxd-input-error-placeholder-color: #4a4a4a; // Error placeholder color
 $lxd-input-error-placeholder-text-transform: uppercase; // Error placeholder text transform
 $lxd-input-error-focus-border-color: #111e30; // Error border color on focus
 $lxd-input-error-focus-ring-color: #b30000; // Error focus ring color
-$lxd-input-sm-padding-block: 0.5rem; // Block padding — sm
 $lxd-input-sm-padding-inline: 0.75rem; // Inline padding — sm
 $lxd-input-sm-font-size: 0.875rem; // Font size — sm
-$lxd-input-lg-padding-block: 1.5rem; // Block padding — lg
 $lxd-input-lg-padding-inline: 1.5rem; // Inline padding — lg
 $lxd-input-lg-font-size: 1.25rem; // Font size — lg

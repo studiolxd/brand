@@ -1,31 +1,44 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as TextareaStories from "./Textarea.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { textareaBaseTokens, textareaFocusTokens, textareaErrorTokens, textareaDisabledTokens, textareaDarkTokens } from "../../../tokens/components/textarea";
+import { textareaBaseTokens, textareaSizeTokens, textareaFocusTokens, textareaErrorTokens, textareaDisabledTokens, textareaDarkTokens } from "../../../tokens/components/textarea";
 
 <Meta of={TextareaStories} />
 
 # Textarea
 
-Área de texto multilínea para formularios. Comparte tokens de base con el Input y siempre ocupa el ancho completo de su contenedor.
+Campo de texto de varias líneas. Es un `<textarea>` nativo con los estilos del sistema: rectangular, borde primario, ancho completo y redimensionable en vertical. Extiende los atributos nativos y reenvía todo lo que recibe (`ref`, `data-*`, `aria-*`, `rows`, `maxLength`, `required`…).
 
-## Por defecto
+Suelto se usa fuera de formularios; dentro de uno, va el `TextareaField`, que le añade etiqueta, ayuda y error.
 
-<Canvas of={TextareaStories.Default} />
+<Canvas of={TextareaStories.PorDefecto} />
 
-## Error
+## Tallas
 
-<Canvas of={TextareaStories.Error} />
+Es la excepción de la regla de tallas del sistema: al ser multilínea **no** fija su altura a 32/40/48. La altura la manda el contenido —`rows`, y lo que el usuario estire— sobre una altura mínima. Lo que cambia con `sm`, `md` (por defecto) y `lg` es el cuerpo de letra y el aire alrededor del texto, que sí sale del `padding-block` compartido de los controles.
 
-## Deshabilitado
+<Canvas of={TextareaStories.Tallas} />
 
-<Canvas of={TextareaStories.Disabled} />
+## Estados
 
-## Solo lectura
+`error` marca el campo: pinta el borde con el color de texto de error y pone `aria-invalid`. El mensaje que explica el error lo pone el campo (`TextareaField`), no el átomo.
 
-<Canvas of={TextareaStories.ReadOnly} />
+<Canvas of={TextareaStories.ConError} />
+<Canvas of={TextareaStories.Deshabilitado} />
+<Canvas of={TextareaStories.SoloLectura} />
 
----
+## Superficie oscura
+
+El campo hereda los tokens de `.surface-dark` por cascada; no hay prop de tema.
+
+<Canvas of={TextareaStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- El campo necesita nombre: en un formulario lo pone la etiqueta del `TextareaField`; suelto, `aria-label`.
+- `aria-describedby` y `aria-invalid` se pasan como atributos nativos y llegan al `<textarea>` (los pone el campo con su ayuda y su error). La prop `describedBy` queda obsoleta.
+- El anillo de foco se dibuja hacia dentro, pegado al borde, para no desplazar el layout.
+- El redimensionado es vertical: el ancho lo manda el contenedor, así que la medida de lectura no se rompe.
 
 ## Tokens
 
@@ -33,7 +46,11 @@ import { textareaBaseTokens, textareaFocusTokens, textareaErrorTokens, textareaD
 
 <TokenTable tokens={textareaBaseTokens} />
 
-### Focus
+### Tallas
+
+<TokenTable tokens={textareaSizeTokens} />
+
+### Foco
 
 <TokenTable tokens={textareaFocusTokens} />
 
@@ -45,7 +62,7 @@ import { textareaBaseTokens, textareaFocusTokens, textareaErrorTokens, textareaD
 
 <TokenTable tokens={textareaDisabledTokens} />
 
-### Oscuro
+### Superficie oscura
 
 <TokenTable tokens={textareaDarkTokens} />
 

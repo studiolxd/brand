@@ -137,3 +137,23 @@ export const SelectAndDisplay: Story = {
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   },
 };
+
+/** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
+export const ContratoTalla: Story = {
+  name: 'Test — talla del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <div data-t="sm"><DatePicker size="sm" value={null} /></div>
+      <div data-t="md"><DatePicker size="md" value={null} /></div>
+      <div data-t="lg"><DatePicker size="lg" value={null} /></div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const alto = (sel: string) =>
+      Math.round(canvasElement.querySelector(sel)!.getBoundingClientRect().height);
+    await expect(alto('[data-t="sm"] .date-picker__trigger')).toBe(32);
+    await expect(alto('[data-t="md"] .date-picker__trigger')).toBe(40);
+    await expect(alto('[data-t="lg"] .date-picker__trigger')).toBe(48);
+  },
+};

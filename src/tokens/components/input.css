@@ -9,6 +9,9 @@
   --input-placeholder-text-transform: uppercase; /** Placeholder text transform */
   --input-disabled-cursor: not-allowed; /** Cursor when disabled */
   --input-error-placeholder-text-transform: uppercase; /** Error placeholder text transform */
+  --input-height: var(--size-component-md); /** Altura del campo: la talla md del sistema. Las tallas cambian la altura, no el padding vertical */
+  --input-sm-height: var(--size-component-sm); /** Altura — sm */
+  --input-lg-height: var(--size-component-lg); /** Altura — lg */
   --input-font-family: var(--font-family-sans); /** Font family */
   --input-font-size: var(--font-size-2); /** Font size */
   --input-line-height: var(--line-height-none); /** Line height */
@@ -19,15 +22,12 @@
   --input-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
   --input-disabled-border-color: var(--color-grey-light); /** Border color when disabled */
   --input-error-bg: var(--color-white); /** Error background */
-  --input-sm-padding-block: var(--spacing-2); /** Block padding — sm */
   --input-sm-padding-inline: var(--spacing-3); /** Inline padding — sm */
   --input-sm-font-size: var(--font-size-1); /** Font size — sm */
-  --input-lg-padding-block: var(--spacing-5); /** Block padding — lg */
   --input-lg-padding-inline: var(--spacing-5); /** Inline padding — lg */
   --input-lg-font-size: var(--font-size-3); /** Font size — lg */
   --input-border-radius: var(--border-radius-default); /** Border radius */
   --input-border-width: var(--border-width-default); /** Border width */
-  --input-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --input-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --input-font-weight: var(--font-weight-default); /** Font weight */
   --input-color: var(--color-text-on-light); /** Text color */

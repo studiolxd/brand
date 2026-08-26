@@ -16,6 +16,7 @@
   display: flex;
   align-items: stretch;
   width: var(--input-width);
+  block-size: var(--input-height);
   border-radius: var(--input-border-radius);
   border-width: var(--input-border-width);
   border-style: var(--input-border-style);
@@ -40,7 +41,7 @@
   gap: var(--input-phone-country-gap);
   flex-shrink: 0;
   width: var(--input-phone-country-width);
-  padding-block: var(--input-padding-block);
+  padding-block: 0;
   padding-inline: var(--input-padding-inline);
   font-family: var(--input-font-family);
   font-size: var(--input-font-size);
@@ -113,7 +114,7 @@
 .input-phone .input-phone__number {
   flex: 1;
   min-width: 0;
-  padding-block: var(--input-padding-block);
+  padding-block: 0;
   padding-inline: var(--input-padding-inline);
   font-family: var(--input-font-family);
   font-size: var(--input-font-size);
@@ -153,16 +154,16 @@
   pointer-events: none;
 }
 
-/* ── Size variants ──────────────────────────────────────────────────────── */
+/* ── Tallas — cambian la altura, no el padding vertical ─────────────────── */
 .input-phone.input-phone--sm {
-  --input-padding-block: var(--input-sm-padding-block);
+  --input-height: var(--input-sm-height);
   --input-padding-inline: var(--input-sm-padding-inline);
   --input-font-size: var(--input-sm-font-size);
   --input-phone-country-width: var(--input-phone-sm-country-width);
 }
 
 .input-phone.input-phone--lg {
-  --input-padding-block: var(--input-lg-padding-block);
+  --input-height: var(--input-lg-height);
   --input-padding-inline: var(--input-lg-padding-inline);
   --input-font-size: var(--input-lg-font-size);
   --input-phone-country-width: var(--input-phone-lg-country-width);

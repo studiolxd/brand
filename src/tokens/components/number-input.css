@@ -13,6 +13,7 @@
   --number-input-font-family: var(--input-font-family); /** Font family */
   --number-input-font-size: var(--input-font-size); /** Font size */
   --number-input-line-height: var(--input-line-height); /** Line height */
+  --number-input-height: var(--input-height); /** Altura del control: la talla del sistema, heredada de input */
   --number-input-transition-duration: var(--input-transition-duration); /** Duración de la transición */
   --number-input-transition-easing: var(--input-transition-easing); /** Easing de la transición */
   --number-input-btn-color: var(--color-primary); /** Color del icono de los botones */
@@ -22,15 +23,17 @@
   --number-input-disabled-btn-color: var(--input-disabled-color); /** Color del icono de botones cuando deshabilitado */
   --number-input-error-bg: var(--input-error-bg); /** Fondo en error */
   --number-input-sm-font-size: var(--input-sm-font-size); /** Font size — sm */
-  --number-input-sm-padding-block: var(--input-sm-padding-block); /** Padding vertical — sm */
+  --number-input-sm-height: var(--input-sm-height); /** Altura — sm */
+  --number-input-sm-padding-inline: var(--input-sm-padding-inline); /** Padding horizontal — sm */
   --number-input-lg-font-size: var(--input-lg-font-size); /** Font size — lg */
-  --number-input-lg-padding-block: var(--input-lg-padding-block); /** Padding vertical — lg */
+  --number-input-lg-height: var(--input-lg-height); /** Altura — lg */
+  --number-input-lg-padding-inline: var(--input-lg-padding-inline); /** Padding horizontal — lg */
   --number-input-border-radius: var(--input-border-radius); /** Border radius del contenedor */
   --number-input-border-width: var(--input-border-width); /** Grosor del borde */
   --number-input-border-color: var(--input-border-color); /** Color del borde */
   --number-input-color: var(--input-color); /** Color del texto */
   --number-input-font-weight: var(--input-font-weight); /** Font weight */
-  --number-input-padding-block: var(--input-padding-block); /** Padding vertical del campo */
+  --number-input-padding-inline: var(--input-padding-inline); /** Padding horizontal del campo */
   --number-input-btn-separator-color: var(--input-border-color); /** Color del separador entre botón y campo */
   --number-input-focus-ring-inset-offset: var(--input-focus-ring-inset-offset); /** Gap entre borde y focus ring */
   --number-input-focus-ring-color: var(--input-focus-ring-color); /** Color del focus ring */

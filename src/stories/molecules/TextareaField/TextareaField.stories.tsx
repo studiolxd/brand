@@ -1,77 +1,68 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { TextareaField } from './TextareaField';
+import { Container } from '../../atoms/Container/Container';
 
 const meta: Meta<typeof TextareaField> = {
-  title: 'Por revisar/Molecules/TextareaField',
+  title: 'Molecules/TextareaField',
   component: TextareaField,
-  parameters: {
-    layout: 'padded',
-  },
-  argTypes: {
-    label: {
-      control: { type: 'text' },
-      description: 'Texto del label (accesible siempre, visible según labelHidden).',
-    },
-    labelHidden: {
-      control: { type: 'boolean' },
-      description: 'Oculta el label visualmente.',
-    },
-    placeholder: {
-      control: { type: 'text' },
-      description: 'Texto de placeholder.',
-    },
-    rows: {
-      control: { type: 'number' },
-      description: 'Número de filas visibles.',
-    },
-    helperText: {
-      control: { type: 'text' },
-      description: 'Texto de ayuda bajo el textarea.',
-    },
-    errorMessage: {
-      control: { type: 'text' },
-      description: 'Mensaje de error. Activa también el estado error del textarea.',
-    },
-    error: {
-      control: { type: 'boolean' },
-      description: 'Estado de error.',
-    },
-    disabled: {
-      control: { type: 'boolean' },
-      description: 'Deshabilita el campo.',
-    },
-  },
-  args: {
-    id: 'mensaje',
-    label: 'Mensaje',
-    labelHidden: true,
-    placeholder: 'Escribe tu mensaje…',
-    disabled: false,
-    error: false,
-  },
+  parameters: { layout: 'padded' },
+  argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] } },
+  args: { id: 'mensaje', label: 'Mensaje', labelHidden: false, rows: 4 },
+  render: (args) => <div style={{ inlineSize: '24rem' }}><TextareaField {...args} /></div>,
 };
-
 export default meta;
 type Story = StoryObj<typeof TextareaField>;
 
-export const Default: Story = {};
+export const PorDefecto: Story = {};
 
-export const WithHelper: Story = {
+export const ConValor: Story = { args: { defaultValue: 'Buenos días:' } };
+
+export const ConAyuda: Story = {
   args: { helperText: 'Máximo 500 caracteres.' },
 };
 
-export const WithError: Story = {
-  args: {
-    error: true,
-    errorMessage: 'Este campo es obligatorio.',
-    helperText: 'Máximo 500 caracteres.',
+/** El error se dice en texto y en el borde; nunca solo en color. */
+export const ConError: Story = {
+  args: { errorMessage: 'Este campo es obligatorio.', helperText: 'Máximo 500 caracteres.' },
+};
+
+export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'No se puede editar' } };
+
+/** Etiqueta oculta a la vista, presente para el lector de pantalla. Al ocultarla, el placeholder toma su texto. */
+export const EtiquetaOculta: Story = { args: { labelHidden: true } };
+
+/** Las tallas cambian el cuerpo de letra y el aire; la altura la manda el contenido. */
+export const Tallas: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '24rem' }}>
+      <TextareaField {...args} id="talla-sm" size="sm" label="Pequeño" />
+      <TextareaField {...args} id="talla-md" size="md" label="Mediano" />
+      <TextareaField {...args} id="talla-lg" size="lg" label="Grande" />
+    </div>
+  ),
+};
+
+export const SuperficieOscura: Story = {
+  args: { errorMessage: 'Este campo es obligatorio.' },
+  render: (args) => (
+    <Container surface="dark" space="md">
+      <div style={{ inlineSize: '24rem' }}><TextareaField {...args} /></div>
+    </Container>
+  ),
+};
+
+export const Contrato: Story = {
+  name: 'Test — etiqueta, ayuda y error enlazados al control',
+  tags: ['!dev'],
+  args: { helperText: 'Ayuda', errorMessage: 'Obligatorio' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const control = canvas.getByRole('textbox', { name: 'Mensaje' });
+    await expect(control.tagName).toBe('TEXTAREA');
+    await expect(control).toHaveAttribute('aria-invalid', 'true');
+    await expect(control).toHaveAttribute('aria-describedby', 'mensaje-error mensaje-helper');
+    await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
+    await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'mensaje-helper');
   },
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
-};
-
-export const LabelVisible: Story = {
-  args: { labelHidden: false },
 };

@@ -1,5 +1,5 @@
 import './TextareaField.css';
-interface TextareaFieldProps {
+export interface TextareaFieldProps {
     id: string;
     label: string;
     labelHidden?: boolean;
@@ -19,4 +19,3 @@ interface TextareaFieldProps {
     onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
 }
 export declare function TextareaField({ id, label, labelHidden, name, placeholder, value, defaultValue, rows, disabled, readOnly, size, error, errorMessage, helperText, onChange, onBlur, onFocus, }: TextareaFieldProps): import("react/jsx-runtime").JSX.Element;
-export {};

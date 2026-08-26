@@ -4,7 +4,8 @@
   align-items: center;
   gap: var(--multi-select-icon-size);
 
-  padding-block: var(--multi-select-padding-block);
+  block-size: var(--multi-select-height);
+  padding-block: 0;
   padding-inline: var(--multi-select-padding-inline);
 
   font-family: var(--multi-select-font-family);
@@ -153,7 +154,7 @@
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
 .async-select.async-select--sm {
   font-size: var(--multi-select-sm-font-size);
-  padding-block: var(--multi-select-sm-padding-block);
+  --multi-select-height: var(--multi-select-sm-height);
   padding-inline: var(--multi-select-sm-padding-inline);
 }
 
@@ -165,7 +166,7 @@
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
 .async-select.async-select--lg {
   font-size: var(--multi-select-lg-font-size);
-  padding-block: var(--multi-select-lg-padding-block);
+  --multi-select-height: var(--multi-select-lg-height);
   padding-inline: var(--multi-select-lg-padding-inline);
 }
 

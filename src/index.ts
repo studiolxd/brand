@@ -145,6 +145,7 @@ export type { CodeBlockProps } from './stories/molecules/CodeBlock/CodeBlock';
 export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
 export { Form } from './stories/molecules/Form/Form';
 export { InputField } from './stories/molecules/InputField/InputField';
+export type { InputFieldProps } from './stories/molecules/InputField/InputField';
 export { NumberInputField } from './stories/molecules/NumberInputField/NumberInputField';
 export type { NumberInputFieldProps } from './stories/molecules/NumberInputField/NumberInputField';
 export { FileUploadField } from './stories/molecules/FileUploadField/FileUploadField';
@@ -186,6 +187,7 @@ export {
 } from './stories/molecules/Table/Table';
 export type { TableProps, TableHeaderProps, TableRowProps, TableCellProps } from './stories/molecules/Table/Table';
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
+export type { TextareaFieldProps } from './stories/molecules/TextareaField/TextareaField';
 export { Toaster } from './stories/molecules/Toast/Toaster';
 export type { ToasterProps } from './stories/molecules/Toast/Toaster';
 export { toast } from 'sonner';

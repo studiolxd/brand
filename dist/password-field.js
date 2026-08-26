@@ -18,7 +18,7 @@ var l = o(function({ label: o, labelHidden: l = !0, error: u = !1, errorMessage:
 				children: o
 			}),
 			/* @__PURE__ */ a("div", {
-				className: "password-field__wrapper",
+				className: ["password-field__wrapper", p === "md" ? "" : `password-field__wrapper--${p}`].filter(Boolean).join(" "),
 				children: [/* @__PURE__ */ i(n, {
 					ref: x,
 					id: C,

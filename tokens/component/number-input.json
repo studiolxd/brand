@@ -10,7 +10,8 @@
     "font-size":           { "$value": "{input.font-size}",           "$type": "dimension", "$description": "Font size" },
     "font-weight":         { "$value": "{input.font-weight}",         "$type": "number",    "$description": "Font weight" },
     "line-height":         { "$value": "{input.line-height}",         "$type": "number",    "$description": "Line height" },
-    "padding-block":       { "$value": "{input.padding-block}",       "$type": "dimension", "$description": "Padding vertical del campo" },
+    "height":              { "$value": "{input.height}",              "$type": "dimension", "$description": "Altura del control: la talla del sistema, heredada de input" },
+    "padding-inline":      { "$value": "{input.padding-inline}",      "$type": "dimension", "$description": "Padding horizontal del campo" },
     "transition-duration": { "$value": "{input.transition-duration}", "$type": "number",    "$description": "Duración de la transición" },
     "transition-easing":   { "$value": "{input.transition-easing}",   "$type": "string",    "$description": "Easing de la transición" },
 
@@ -39,8 +40,10 @@
     "error-focus-ring-color":   { "$value": "{input.error-focus-ring-color}",   "$type": "color", "$description": "Focus ring en error" },
 
     "sm-font-size":   { "$value": "{input.sm-font-size}",   "$type": "dimension", "$description": "Font size — sm" },
-    "sm-padding-block":{ "$value": "{input.sm-padding-block}","$type": "dimension", "$description": "Padding vertical — sm" },
+    "sm-height":      { "$value": "{input.sm-height}",      "$type": "dimension", "$description": "Altura — sm" },
+    "sm-padding-inline":{ "$value": "{input.sm-padding-inline}","$type": "dimension", "$description": "Padding horizontal — sm" },
     "lg-font-size":   { "$value": "{input.lg-font-size}",   "$type": "dimension", "$description": "Font size — lg" },
-    "lg-padding-block":{ "$value": "{input.lg-padding-block}","$type": "dimension", "$description": "Padding vertical — lg" }
+    "lg-height":      { "$value": "{input.lg-height}",      "$type": "dimension", "$description": "Altura — lg" },
+    "lg-padding-inline":{ "$value": "{input.lg-padding-inline}","$type": "dimension", "$description": "Padding horizontal — lg" }
   }
 }
