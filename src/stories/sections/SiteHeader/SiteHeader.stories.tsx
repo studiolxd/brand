@@ -60,7 +60,7 @@ export const MenuAbierto: Story = {
 /** Con controles propios del sitio antes del menú. */
 export const ConAcciones: Story = {
   args: {
-    actions: <Button size="sm" variant="outline">Entrar</Button>,
+    actions: <Button variant="outline">Entrar</Button>,
   },
 };
 
@@ -76,13 +76,13 @@ export const MarcaDelProducto: Story = {
 
 /** Sin índice ni ajustes no hay panel, y por tanto tampoco botón de menú: una cabecera de página de error. */
 export const SinMenu: Story = {
-  args: { actions: <Button size="sm" variant="outline">Entrar</Button> },
+  args: { actions: <Button variant="outline">Entrar</Button> },
 };
 
 /** La barra completa: logo, acciones del producto, idioma y menú; en el panel, el índice y los ajustes (tema). */
 export const Completa: Story = {
   args: {
-    actions: <Button size="sm" variant="outline">Entrar</Button>,
+    actions: <Button variant="outline">Entrar</Button>,
     settings: <ThemeSwitcher value="system" />,
     language: (
       <LanguageSwitcher
