@@ -4,8 +4,14 @@
 
 :root {
   --dropdown-field-gap: var(--spacing-2); /** Entre la etiqueta y el control, como en el resto de campos */
+  --dropdown-field-sm-height: var(--size-component-sm); /** Altura — sm */
+  --dropdown-field-lg-height: var(--size-component-lg); /** Altura — lg */
   --dropdown-field-content-gap: var(--spacing-2); /** Entre el contenido del control y el chevron */
-  --dropdown-field-height: var(--control-height); /** El control mide la talla del sistema */
+  --dropdown-field-height: var(--control-height); /** El control mide la talla del sistema (md) */
+  --dropdown-field-sm-font-size: var(--select-sm-font-size); /** Cuerpo — sm (el del Select) */
+  --dropdown-field-lg-font-size: var(--select-lg-font-size); /** Cuerpo — lg (el del Select) */
+  --dropdown-field-sm-padding-inline: var(--select-sm-padding-inline); /** Padding inline — sm */
+  --dropdown-field-lg-padding-inline: var(--select-lg-padding-inline); /** Padding inline — lg */
   --dropdown-field-font-family: var(--select-font-family); /** Familia tipográfica: la del Select */
   --dropdown-field-font-size: var(--select-font-size); /** Cuerpo: el del Select */
   --dropdown-field-bg: var(--select-bg); /** Fondo del control */

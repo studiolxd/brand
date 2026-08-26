@@ -2,7 +2,13 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-dropdown-field-gap: 0.5rem; // Entre la etiqueta y el control, como en el resto de campos
-$lxd-dropdown-field-height: 2.5rem; // El control mide la talla del sistema
+$lxd-dropdown-field-height: 2.5rem; // El control mide la talla del sistema (md)
+$lxd-dropdown-field-sm-height: 2rem; // Altura — sm
+$lxd-dropdown-field-lg-height: 3rem; // Altura — lg
+$lxd-dropdown-field-sm-font-size: 0.875rem; // Cuerpo — sm (el del Select)
+$lxd-dropdown-field-lg-font-size: 1.25rem; // Cuerpo — lg (el del Select)
+$lxd-dropdown-field-sm-padding-inline: 0.5rem; // Padding inline — sm
+$lxd-dropdown-field-lg-padding-inline: 1.5rem; // Padding inline — lg
 $lxd-dropdown-field-padding-inline: 1rem; // Padding inline del control: el del Select
 $lxd-dropdown-field-content-gap: 0.5rem; // Entre el contenido del control y el chevron
 $lxd-dropdown-field-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica: la del Select

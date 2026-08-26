@@ -21,6 +21,8 @@ export interface ThemeSwitcherProps {
      * `icon`: solo el icono del tema actual, como botón de icono que abre el menú — para una barra sin sitio.
      */
     variant?: 'compact' | 'list' | 'icon';
+    /** Talla del control compacto (32/40/48): `lg` en superficies públicas, `md` en las aplicaciones. */
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
 /**
@@ -29,4 +31,4 @@ export interface ThemeSwitcherProps {
  * opciones exclusivas; en lista, las opciones desplegadas para el pie. Aplicar el tema y
  * recordarlo es del producto; el componente solo muestra y elige.
  */
-export declare function ThemeSwitcher({ value, onChange, labels, id, variant, className }: ThemeSwitcherProps): import("react/jsx-runtime").JSX.Element;
+export declare function ThemeSwitcher({ value, onChange, labels, id, variant, size, className }: ThemeSwitcherProps): import("react/jsx-runtime").JSX.Element;

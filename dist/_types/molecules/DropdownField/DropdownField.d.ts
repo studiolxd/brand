@@ -19,6 +19,8 @@ export interface DropdownFieldProps {
     children: ReactNode;
     /** `inline`: etiqueta delante del control, en línea. Por defecto, encima como el resto de campos. */
     inline?: boolean;
+    /** Talla del sistema (32/40/48). En superficies públicas, `lg`; dentro de las aplicaciones, `md`. */
+    size?: 'sm' | 'md' | 'lg';
     align?: 'start' | 'center' | 'end';
     disabled?: boolean;
     className?: string;
@@ -29,4 +31,4 @@ export interface DropdownFieldProps {
  * opciones no son un `<select>` — llevan icono, son enlaces o acciones — y
  * su cara es la misma que la del Select para que convivan en un formulario.
  */
-export declare function DropdownField({ id, label, labelHidden, 'aria-label': ariaLabel, items, value, onValueChange, children, inline, align, disabled, className, }: DropdownFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function DropdownField({ id, label, labelHidden, 'aria-label': ariaLabel, items, value, onValueChange, children, inline, size, align, disabled, className, }: DropdownFieldProps): import("react/jsx-runtime").JSX.Element;

@@ -36,6 +36,8 @@ export interface LanguageSwitcherProps {
      */
     hrefFor?: (code: string) => string;
     renderLink?: (props: LanguageSwitcherRenderLinkProps) => ReactNode;
+    /** Talla del control compacto (32/40/48): `lg` en superficies públicas, `md` en las aplicaciones. */
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
 /**
@@ -45,4 +47,4 @@ export interface LanguageSwitcherProps {
  * componente del sistema porque aparece en la barra y en el pie de todos los
  * sitios; el enrutado y la persistencia se quedan en el producto.
  */
-export declare function LanguageSwitcher({ languages, value, onChange, label, id, labelHidden, variant, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;
+export declare function LanguageSwitcher({ languages, value, onChange, label, id, labelHidden, variant, size, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;

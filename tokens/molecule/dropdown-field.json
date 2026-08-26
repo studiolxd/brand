@@ -1,7 +1,13 @@
 {
   "dropdown-field": {
     "gap":             { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Entre la etiqueta y el control, como en el resto de campos" },
-    "height":          { "$value": "{control.height}",       "$type": "dimension", "$description": "El control mide la talla del sistema" },
+    "height":          { "$value": "{control.height}",       "$type": "dimension", "$description": "El control mide la talla del sistema (md)" },
+    "sm-height":       { "$value": "{size-component.sm}",    "$type": "dimension", "$description": "Altura — sm" },
+    "lg-height":       { "$value": "{size-component.lg}",    "$type": "dimension", "$description": "Altura — lg" },
+    "sm-font-size":    { "$value": "{select.sm-font-size}",  "$type": "dimension", "$description": "Cuerpo — sm (el del Select)" },
+    "lg-font-size":    { "$value": "{select.lg-font-size}",  "$type": "dimension", "$description": "Cuerpo — lg (el del Select)" },
+    "sm-padding-inline": { "$value": "{select.sm-padding-inline}", "$type": "dimension", "$description": "Padding inline — sm" },
+    "lg-padding-inline": { "$value": "{select.lg-padding-inline}", "$type": "dimension", "$description": "Padding inline — lg" },
     "padding-inline":  { "$value": "{select.padding-inline}", "$type": "dimension", "$description": "Padding inline del control: el del Select" },
     "content-gap":     { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Entre el contenido del control y el chevron" },
     "font-family":     { "$value": "{select.font-family}",   "$type": "string",    "$description": "Familia tipográfica: la del Select" },

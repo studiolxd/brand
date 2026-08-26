@@ -12,12 +12,12 @@ function n({ href: e, lang: n, children: r, className: i, "aria-current": a }) {
 		children: r
 	});
 }
-function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "language-switcher", labelHidden: c = !0, variant: l = "compact", hrefFor: u, renderLink: d = n, className: f }) {
+function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "language-switcher", labelHidden: c = !0, variant: l = "compact", size: u = "md", hrefFor: d, renderLink: f = n, className: p }) {
 	return l === "list" ? /* @__PURE__ */ t("nav", {
 		className: [
 			"language-switcher",
 			"language-switcher--list",
-			f
+			p
 		].filter(Boolean).join(" "),
 		"aria-label": o,
 		children: /* @__PURE__ */ t("ul", {
@@ -29,8 +29,8 @@ function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "
 					className: o,
 					"aria-current": "true",
 					children: n
-				}) : u ? d({
-					href: u(e),
+				}) : d ? f({
+					href: d(e),
 					lang: e,
 					className: o,
 					children: n
@@ -48,11 +48,12 @@ function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "
 		label: o,
 		labelHidden: c,
 		inline: !0,
+		size: u,
 		align: "end",
 		className: [
 			"language-switcher",
 			"language-switcher--compact",
-			f
+			p
 		].filter(Boolean).join(" "),
 		value: i,
 		onValueChange: (e) => a?.(e),

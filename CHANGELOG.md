@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v17.1.0
+
+### Añadido
+
+- `DropdownField`, `LanguageSwitcher` y `ThemeSwitcher` admiten `size` (32/40/48).
+- Foundations → Tallas: dónde va cada talla — superficies públicas a `lg`,
+  interior de las aplicaciones a `md`.
+
 ## v17.0.1
 
 ### Corregido

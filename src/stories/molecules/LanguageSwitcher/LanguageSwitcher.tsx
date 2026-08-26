@@ -42,6 +42,8 @@ export interface LanguageSwitcherProps {
    */
   hrefFor?: (code: string) => string;
   renderLink?: (props: LanguageSwitcherRenderLinkProps) => ReactNode;
+  /** Talla del control compacto (32/40/48): `lg` en superficies públicas, `md` en las aplicaciones. */
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
@@ -68,6 +70,7 @@ export function LanguageSwitcher({
   id = 'language-switcher',
   labelHidden = true,
   variant = 'compact',
+  size = 'md',
   hrefFor,
   renderLink = defaultRenderLink,
   className,
@@ -107,6 +110,7 @@ export function LanguageSwitcher({
       label={label}
       labelHidden={labelHidden}
       inline
+      size={size}
       align="end"
       className={classes}
       value={value}

@@ -62,6 +62,17 @@ export const ConIcono: Story = {
   ),
 };
 
+/** Las tres tallas del sistema. En las superficies públicas (web, hub sin autenticar) se usa `lg`; dentro de las aplicaciones, `md`. */
+export const Tallas: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
+      <Controlado size="sm" />
+      <Controlado size="md" />
+      <Controlado size="lg" />
+    </div>
+  ),
+};
+
 export const Deshabilitado: Story = { args: { disabled: true } };
 
 export const SuperficieOscura: Story = {
@@ -79,6 +90,8 @@ export const Contrato: Story = {
     const canvas = within(canvasElement);
     const control = canvas.getByRole('button', { name: 'Ordenar por' });
     await expect(Math.round(control.getBoundingClientRect().height)).toBe(40);
+    const lg = canvasElement.querySelector('.dropdown-field--lg .dropdown-field__control');
+    if (lg) await expect(Math.round(lg.getBoundingClientRect().height)).toBe(48);
     await expect(control.textContent).toContain('Más recientes');
     await userEvent.click(control);
     const opciones = await within(document.body).findAllByRole('menuitemradio');

@@ -20,22 +20,22 @@ var o = [
 		icon: "device-desktop"
 	}
 ];
-function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant: d = "compact", className: f }) {
-	let p = {
+function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant: d = "compact", size: f = "md", className: p }) {
+	let m = {
 		group: "Tema",
 		light: "Claro",
 		dark: "Oscuro",
 		system: "Sistema",
 		...l
-	}, m = o.find((e) => e.value === s) ?? o[2];
+	}, h = o.find((e) => e.value === s) ?? o[2];
 	if (d === "list") return /* @__PURE__ */ i("div", {
 		className: [
 			"theme-switcher",
 			"theme-switcher--list",
-			f
+			p
 		].filter(Boolean).join(" "),
 		role: "group",
-		"aria-label": p.group,
+		"aria-label": m.group,
 		children: /* @__PURE__ */ i("ul", {
 			className: "theme-switcher__list",
 			children: o.map(({ value: t, icon: n }) => {
@@ -46,7 +46,7 @@ function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant
 					children: [/* @__PURE__ */ i(e, {
 						name: n,
 						size: "sm"
-					}), /* @__PURE__ */ i("span", { children: p[t] })]
+					}), /* @__PURE__ */ i("span", { children: m[t] })]
 				}) : /* @__PURE__ */ a("button", {
 					type: "button",
 					className: o,
@@ -54,12 +54,12 @@ function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant
 					children: [/* @__PURE__ */ i(e, {
 						name: n,
 						size: "sm"
-					}), /* @__PURE__ */ i("span", { children: p[t] })]
+					}), /* @__PURE__ */ i("span", { children: m[t] })]
 				}) }, t);
 			})
 		})
 	});
-	let h = o.map(({ value: t, icon: n }) => ({
+	let g = o.map(({ value: t, icon: n }) => ({
 		type: "radio",
 		value: t,
 		label: /* @__PURE__ */ a("span", {
@@ -67,43 +67,44 @@ function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant
 			children: [/* @__PURE__ */ i(e, {
 				name: n,
 				size: "sm"
-			}), p[t]]
+			}), m[t]]
 		})
 	}));
 	if (d === "icon") return /* @__PURE__ */ i(n, {
-		className: f,
+		className: p,
 		align: "end",
 		value: s,
 		onValueChange: (e) => c?.(e),
-		items: h,
+		items: g,
 		trigger: /* @__PURE__ */ i(t, {
 			variant: "ghost",
-			size: "md",
+			size: f,
 			iconOnly: !0,
-			"aria-label": `${p.group}: ${p[m.value]}`,
+			"aria-label": `${m.group}: ${m[h.value]}`,
 			children: /* @__PURE__ */ i(e, {
-				name: m.icon,
+				name: h.icon,
 				size: "md"
 			})
 		})
 	});
-	let g = [
+	let _ = [
 		"theme-switcher",
 		"theme-switcher--compact",
-		f
+		p
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ a(r, {
 		id: u,
-		label: p.group,
+		label: m.group,
 		inline: !0,
-		className: g,
+		size: f,
+		className: _,
 		value: s,
 		onValueChange: (e) => c?.(e),
-		items: h,
+		items: g,
 		children: [/* @__PURE__ */ i(e, {
-			name: m.icon,
+			name: h.icon,
 			size: "sm"
-		}), p[m.value]]
+		}), m[h.value]]
 	});
 }
 //#endregion

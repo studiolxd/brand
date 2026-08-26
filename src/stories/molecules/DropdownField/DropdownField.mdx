@@ -18,6 +18,12 @@ Encima por defecto, como el resto de campos. `inline` la pone delante, para barr
 <Canvas of={DropdownFieldStories.EnLinea} />
 <Canvas of={DropdownFieldStories.SinEtiqueta} />
 
+## Tallas
+
+`size` es la talla del sistema: `sm` 32, `md` 40 (por defecto) y `lg` 48, con el cuerpo y el padding del Select. **En las superficies públicas** —la web y el hub sin autenticar— los controles van a `lg`; **dentro de las aplicaciones**, a `md`.
+
+<Canvas of={DropdownFieldStories.Tallas} />
+
 ## Contenido del control
 
 `children` es lo que se ve en el control: normalmente el nombre de la opción actual, con su icono si lo tiene. El componente no lo deduce de `items` porque el control puede decir algo distinto de la opción (un resumen, un contador).

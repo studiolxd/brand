@@ -30,6 +30,8 @@ export interface ThemeSwitcherProps {
    * `icon`: solo el icono del tema actual, como botón de icono que abre el menú — para una barra sin sitio.
    */
   variant?: 'compact' | 'list' | 'icon';
+  /** Talla del control compacto (32/40/48): `lg` en superficies públicas, `md` en las aplicaciones. */
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
@@ -45,7 +47,7 @@ const OPTIONS: Array<{ value: Theme; icon: IconName }> = [
  * opciones exclusivas; en lista, las opciones desplegadas para el pie. Aplicar el tema y
  * recordarlo es del producto; el componente solo muestra y elige.
  */
-export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', variant = 'compact', className }: ThemeSwitcherProps) {
+export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', variant = 'compact', size = 'md', className }: ThemeSwitcherProps) {
   const text = { group: 'Tema', light: 'Claro', dark: 'Oscuro', system: 'Sistema', ...labels };
   const current = OPTIONS.find((o) => o.value === value) ?? OPTIONS[2];
 
@@ -99,7 +101,7 @@ export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', 
         onValueChange={(next) => onChange?.(next as Theme)}
         items={items}
         trigger={
-          <Button variant="ghost" size="md" iconOnly aria-label={`${text.group}: ${text[current.value]}`}>
+          <Button variant="ghost" size={size} iconOnly aria-label={`${text.group}: ${text[current.value]}`}>
             <Icon name={current.icon} size="md" />
           </Button>
         }
@@ -113,6 +115,7 @@ export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', 
       id={id}
       label={text.group}
       inline
+      size={size}
       className={classes}
       value={value}
       onValueChange={(next) => onChange?.(next as Theme)}

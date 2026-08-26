@@ -44,6 +44,18 @@
   outline-offset: calc(-1 * (var(--dropdown-field-focus-ring-width) + var(--dropdown-field-border-width)));
 }
 
+/* Tallas: como el Select, cambian altura, cuerpo y padding horizontal */
+.dropdown-field--sm .dropdown-field__control {
+  block-size: var(--dropdown-field-sm-height);
+  font-size: var(--dropdown-field-sm-font-size);
+  padding-inline: var(--dropdown-field-sm-padding-inline);
+}
+.dropdown-field--lg .dropdown-field__control {
+  block-size: var(--dropdown-field-lg-height);
+  font-size: var(--dropdown-field-lg-font-size);
+  padding-inline: var(--dropdown-field-lg-padding-inline);
+}
+
 .dropdown-field__value {
   display: inline-flex;
   align-items: center;

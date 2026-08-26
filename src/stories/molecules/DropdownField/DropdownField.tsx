@@ -24,6 +24,8 @@ export interface DropdownFieldProps {
   children: ReactNode;
   /** `inline`: etiqueta delante del control, en línea. Por defecto, encima como el resto de campos. */
   inline?: boolean;
+  /** Talla del sistema (32/40/48). En superficies públicas, `lg`; dentro de las aplicaciones, `md`. */
+  size?: 'sm' | 'md' | 'lg';
   align?: 'start' | 'center' | 'end';
   disabled?: boolean;
   className?: string;
@@ -45,11 +47,12 @@ export function DropdownField({
   onValueChange,
   children,
   inline = false,
+  size = 'md',
   align = 'start',
   disabled = false,
   className,
 }: DropdownFieldProps) {
-  const classes = ['dropdown-field', inline ? 'dropdown-field--inline' : '', className].filter(Boolean).join(' ');
+  const classes = ['dropdown-field', inline ? 'dropdown-field--inline' : '', size !== 'md' ? `dropdown-field--${size}` : '', className].filter(Boolean).join(' ');
   return (
     <div className={classes}>
       {label && <Label htmlFor={id} hidden={labelHidden}>{label}</Label>}
