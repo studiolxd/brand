@@ -7,6 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.1.1
+
+### Corregido
+
+- `AppRoot`: `children` opcional (puede ir como hermano antes del contenido).
+
 ## v16.1.0
 
 ### Añadido

@@ -4,7 +4,8 @@ export interface AppRootProps {
     skipLabel?: string;
     /** Destino del salto: el `id` del contenido principal de la página. */
     skipHref?: string;
-    children: ReactNode;
+    /** El resto del documento. Puede ir como hermano (`<AppRoot />` antes del contenido): lo que importa es que el salto sea lo primero. */
+    children?: ReactNode;
 }
 /**
  * La raíz de cualquier sitio o aplicación de Studio LXD: lo primero del
