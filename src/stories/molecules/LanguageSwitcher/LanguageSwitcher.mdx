@@ -7,13 +7,13 @@ import { languageSwitcherTokens } from "../../../tokens/molecules/language-switc
 
 # LanguageSwitcher
 
-Selector de idioma. Dos formas del mismo control: **compacto** en la barra —el código del idioma actual, que abre un menú— y **lista** en el pie, con los idiomas desplegados.
+Selector de idioma. Dos formas del mismo control: **compacto** en los ajustes del menú —el código del idioma actual, que abre un menú— y **lista** en el pie, con los idiomas desplegados.
 
 <Canvas of={LanguageSwitcherStories.Compacto} />
 
-En compacto es un `DropdownField` —el mismo control rectangular a la altura del sistema que el selector de tema— con la etiqueta **oculta** por defecto (`labelHidden`): el código del idioma ya dice qué es, y el nombre accesible lo pone la etiqueta.
+En compacto es un `DropdownField` —el mismo control rectangular a la altura del sistema que el selector de tema— con la etiqueta **visible** («Idioma»), como el selector de tema: van juntos en los ajustes del panel. `labelHidden` la oculta cuando el sitio no tiene espacio (por ejemplo en una barra), y entonces la etiqueta sigue siendo el nombre accesible.
 
-<Canvas of={LanguageSwitcherStories.ConEtiqueta} />
+<Canvas of={LanguageSwitcherStories.EtiquetaOculta} />
 
 ## Por qué así
 

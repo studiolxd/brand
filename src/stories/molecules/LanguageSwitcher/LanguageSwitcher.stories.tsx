@@ -39,7 +39,7 @@ type Story = StoryObj<typeof LanguageSwitcher>;
 export const Compacto: Story = {};
 
 /** Con la etiqueta visible, para un formulario de ajustes. */
-export const ConEtiqueta: Story = { args: { labelHidden: false } };
+export const EtiquetaOculta: Story = { args: { labelHidden: true } };
 
 /** En el pie: los idiomas desplegados. Con `hrefFor`, cada uno es un enlace. */
 export const Lista: Story = {

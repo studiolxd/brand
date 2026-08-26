@@ -5,7 +5,7 @@ import { DropdownField } from '../DropdownField/DropdownField';
 import './LanguageSwitcher.css';
 
 export interface Language {
-  /** Código BCP 47 (`es`, `en`, `pt-BR`). Es el valor y lo que se muestra en la barra. */
+  /** Código BCP 47 (`es`, `en`, `pt-BR`). Es el valor y lo que se muestra en el control. */
   code: string;
   /** Nombre del idioma **en ese idioma**: "Español", "English", "Deutsch". Es como cada quien reconoce el suyo. */
   label: string;
@@ -29,7 +29,7 @@ export interface LanguageSwitcherProps {
   label?: string;
   /** `id` del control en compacto (enlaza la etiqueta). */
   id?: string;
-  /** En compacto, la etiqueta va oculta por defecto: el código del idioma ya dice qué es. */
+  /** Oculta la etiqueta (visible por defecto: en el panel va con su nombre, como el de tema). */
   labelHidden?: boolean;
   /**
    * `compact`: un botón con el código (ES) que abre un menú — el de la barra.
@@ -57,9 +57,9 @@ function defaultRenderLink({ href, lang, children, className, 'aria-current': cu
 
 /**
  * Selector de idioma: el mismo campo desplegable que el de tema (`DropdownField`),
- * con la etiqueta oculta. Nunca un icono: el código de dos letras lo lee cualquiera
+ * con su etiqueta visible. Nunca un icono: el código de dos letras lo lee cualquiera
  * aunque no entienda la interfaz, y las opciones van en su propio idioma. Es un
- * componente del sistema porque aparece en la barra y en el pie de todos los
+ * componente del sistema porque aparece en el menú y en el pie de todos los
  * sitios; el enrutado y la persistencia se quedan en el producto.
  */
 export function LanguageSwitcher({

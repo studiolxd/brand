@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v18.1.0
+
+### Cambiado
+
+- `LanguageSwitcher` compacto: la etiqueta («Idioma») es visible por defecto,
+  como la del selector de tema — ahora van juntos en los ajustes del panel.
+  `labelHidden` sigue disponible.
+
 ## v18.0.0
 
 ### Rompe
