@@ -12,7 +12,7 @@ function n({ href: e, lang: n, children: r, className: i, "aria-current": a }) {
 		children: r
 	});
 }
-function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "language-switcher", labelHidden: c = !0, variant: l = "compact", size: u = "md", hrefFor: d, renderLink: f = n, className: p }) {
+function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "language-switcher", labelHidden: c = !1, variant: l = "compact", size: u = "md", hrefFor: d, renderLink: f = n, className: p }) {
 	return l === "list" ? /* @__PURE__ */ t("nav", {
 		className: [
 			"language-switcher",
