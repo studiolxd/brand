@@ -13,7 +13,8 @@ $lxd-site-header-gap-narrow: 0.5rem; // Separación entre marca y controles en t
 $lxd-site-header-gap: 0.75rem; // Separación entre logo y controles
 $lxd-site-header-z-index: 100; // Capa z — sobre el contenido, bajo los paneles flotantes
 $lxd-site-header-panel-bg: #ffffff; // Fondo del panel de navegación
-$lxd-site-header-panel-padding-block: 3rem; // Aire vertical del panel
+$lxd-site-header-panel-padding-block: 3rem; // Aire superior del panel, entre la barra y el índice
+$lxd-site-header-panel-padding-block-end: 1.5rem; // Aire inferior del panel, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba
 $lxd-site-header-panel-z-index: 300; // El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante
 $lxd-site-header-panel-transition-duration: 400ms; // Entrada y salida del panel: cambio de contexto
 $lxd-site-header-panel-transition-easing: ease-in-out; // Curva del panel: movimiento

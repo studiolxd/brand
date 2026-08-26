@@ -68,7 +68,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   background-color: var(--site-header-panel-bg);
-  padding-block: var(--site-header-panel-padding-block);
+  padding-block: var(--site-header-panel-padding-block) var(--site-header-panel-padding-block-end);
   /* Columna a toda la altura: el índice arriba y los ajustes abajo del todo. */
   display: flex;
   flex-direction: column;
