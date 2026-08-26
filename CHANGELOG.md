@@ -7,6 +7,20 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.2.0
+
+### Cambiado
+
+- **Los campos de texto miden la talla del sistema** (32/40/48), como Button y
+  Select: `Input` y todo lo que hereda de él (`NumberInput`, `InputPhone`,
+  `OtpInput`, `TimeSelect`, `DatePicker`, `MultiSelect`/`AsyncSelect`/
+  `AsyncMultiSelect`, `PasswordField`) fijan `block-size` a la talla; fuera
+  `input.padding-block`/`sm-`/`lg-padding-block`. Los triggers con píldoras usan
+  `min-block-size` y solo crecen al envolver. `PasswordField`: botón cuadrado a
+  la talla del campo. `control.padding-block` queda para lo multilínea.
+- `Input`, `InputField`, `Textarea` y `TextareaField` revisados y definitivos
+  (tests de altura, `aria-describedby`/`aria-invalid` desde el campo, docs).
+
 ## v16.1.1
 
 ### Corregido
