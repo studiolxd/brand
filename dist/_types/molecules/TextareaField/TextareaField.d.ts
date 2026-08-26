@@ -2,6 +2,12 @@ import './TextareaField.css';
 export interface TextareaFieldProps {
     id: string;
     label: string;
+    /**
+     * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
+     * Por defecto `false`: la etiqueta se ve, como en `SelectField`.
+     * Con la etiqueta oculta y sin `placeholder`, el control usa el texto de la
+     * etiqueta como placeholder para no quedarse sin pista visible.
+     */
     labelHidden?: boolean;
     name?: string;
     placeholder?: string;
