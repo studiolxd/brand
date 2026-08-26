@@ -85,7 +85,7 @@ depende de esta prop, siempre cubre la ventana entera.
 
 ## En móvil
 
-Por debajo de `md` (768px) la barra pasa a 64px y la marca a 48px (`content-height-compact`, `height-compact`): el logotipo no desborda ni deja sin sitio a los controles. Lo decide la cabecera, no el `Logo`: la marca que va en la ranura mide lo que la barra le da, y el panel arranca de esa misma altura.
+Por debajo de `md` (768px) la barra pasa a 64px y la marca a 48px (`content-height-compact`, `height-compact`); por debajo de `sm` (480px), a 56px y 40px (`content-height-narrow`, `height-narrow`): con idioma y botón de menú, una marca apaisada cabe en 360px. El idioma no se mete en el menú: quien no lee el idioma no puede abrir un menú. Lo decide la cabecera, no el `Logo`: la marca que va en la ranura mide lo que la barra le da, y el panel arranca de esa misma altura.
 
 <Canvas of={SiteHeaderStories.EnMovil} />
 

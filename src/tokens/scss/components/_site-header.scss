@@ -3,6 +3,8 @@
 
 $lxd-site-header-content-height: 64px; // Lo más alto que lleva la barra: el logotipo a talla xl (64px)
 $lxd-site-header-content-height-compact: 3rem; // Lo más alto que lleva la barra en móvil (por debajo de md): el logotipo a talla lg (48px), para que quepa con los controles
+$lxd-site-header-content-height-narrow: 2.5rem; // Lo más alto que lleva la barra en teléfono (por debajo de sm): el logotipo a talla md (40px), para caber en 360px con idioma y menú
+$lxd-site-header-height-narrow: calc(2.5rem + 2 * 0.5rem); // Alto de la barra en teléfono (56px, la misma que la barra de aplicación)
 $lxd-site-header-height-compact: calc(3rem + 2 * 0.5rem); // Alto de la barra en móvil (64px)
 $lxd-site-header-height: calc(64px + 2 * 0.5rem); // Alto de la barra: el logotipo más el aire del sistema arriba y abajo (80px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan
 $lxd-site-header-bg: #ffffff; // Fondo de la barra

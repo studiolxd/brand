@@ -36,6 +36,13 @@
     --site-header-height: var(--site-header-height-compact);
   }
 }
+/* Teléfono: un escalón más, para que marca, idioma y menú quepan en 360px. */
+@media (max-width: 479.98px) /* < --breakpoint-sm */ {
+  .site-header {
+    --site-header-content-height: var(--site-header-content-height-narrow);
+    --site-header-height: var(--site-header-height-narrow);
+  }
+}
 
 
 .site-header__controls {

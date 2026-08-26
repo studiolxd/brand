@@ -2,6 +2,8 @@
   "site-header": {
     "content-height": { "$value": "{logo.height-xl}",         "$type": "dimension", "$description": "Lo más alto que lleva la barra: el logotipo a talla xl (64px)" },
     "content-height-compact": { "$value": "{logo.height-lg}", "$type": "dimension", "$description": "Lo más alto que lleva la barra en móvil (por debajo de md): el logotipo a talla lg (48px), para que quepa con los controles" },
+    "content-height-narrow":  { "$value": "{logo.height-md}", "$type": "dimension", "$description": "Lo más alto que lleva la barra en teléfono (por debajo de sm): el logotipo a talla md (40px), para caber en 360px con idioma y menú" },
+    "height-narrow":  { "$value": "calc({site-header.content-height-narrow} + 2 * {app-header.padding-block})", "$type": "dimension", "$description": "Alto de la barra en teléfono (56px, la misma que la barra de aplicación)" },
     "height-compact": { "$value": "calc({site-header.content-height-compact} + 2 * {app-header.padding-block})", "$type": "dimension", "$description": "Alto de la barra en móvil (64px)" },
     "height":         { "$value": "calc({site-header.content-height} + 2 * {app-header.padding-block})", "$type": "dimension", "$description": "Alto de la barra: el logotipo más el aire del sistema arriba y abajo (80px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan" },
     "bg":             { "$value": "{color.background.light}", "$type": "color",     "$description": "Fondo de la barra" },
