@@ -3,33 +3,21 @@ import { flattenTokens, type Token } from './utils';
 
 const all = flattenTokens(formJson as never);
 
-export const formGapTokens = all.filter(t =>
-  !t.name.startsWith('--form-heading-') &&
+/** Estructura y aire del formulario: campos, errores, acciones, enlaces y alternativas. */
+export const formLayoutTokens = all.filter(t =>
   !t.name.startsWith('--form-error-') &&
   !t.name.startsWith('--form-helper-') &&
-  !t.name.startsWith('--form-success-'),
+  !t.name.startsWith('--form-success-') &&
+  !t.name.includes('surface-dark'),
 );
 
-export const formHeadingTokens = all.filter(t => t.name.startsWith('--form-heading-'));
+export const formLayoutDarkTokens = all.filter(t => t.name.includes('surface-dark') && t.name.includes('alternatives'));
 
-export const formHeadingDarkTokens: Token[] = [
-  { name: '--form-heading-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del heading sobre fondo oscuro' },
-];
+export const formErrorTokens = all.filter(t => t.name.startsWith('--form-error-') && !t.name.includes('surface-dark'));
+export const formErrorDarkTokens: Token[] = all.filter(t => t.name.startsWith('--form-error-') && t.name.includes('surface-dark'));
 
-export const formErrorTokens = all.filter(t => t.name.startsWith('--form-error-'));
+export const formHelperTokens = all.filter(t => t.name.startsWith('--form-helper-') && !t.name.includes('surface-dark'));
+export const formHelperDarkTokens: Token[] = all.filter(t => t.name.startsWith('--form-helper-') && t.name.includes('surface-dark'));
 
-export const formErrorDarkTokens: Token[] = [
-  { name: '--form-error-dark-color', value: 'var(--color-error-on-dark)', description: 'Color del mensaje de error sobre fondo oscuro' },
-];
-
-export const formHelperTokens = all.filter(t => t.name.startsWith('--form-helper-'));
-
-export const formHelperDarkTokens: Token[] = [
-  { name: '--form-helper-dark-color', value: 'var(--color-text-muted-on-dark)', description: 'Color del texto de ayuda sobre fondo oscuro' },
-];
-
-export const formSuccessTokens = all.filter(t => t.name.startsWith('--form-success-'));
-
-export const formSuccessDarkTokens: Token[] = [
-  { name: '--form-success-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del mensaje de éxito sobre fondo oscuro' },
-];
+export const formSuccessTokens = all.filter(t => t.name.startsWith('--form-success-') && !t.name.includes('surface-dark'));
+export const formSuccessDarkTokens: Token[] = all.filter(t => t.name.startsWith('--form-success-') && t.name.includes('surface-dark'));

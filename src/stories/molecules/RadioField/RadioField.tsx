@@ -1,4 +1,5 @@
 import './RadioField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Radio } from '../../atoms/Radio/Radio';
 
 interface RadioFieldProps {
@@ -18,12 +19,13 @@ export function RadioField({
   checked,
   defaultChecked,
   disabled,
-  size = 'md',
+  size: sizeProp,
   id,
   name,
   value,
   onChange,
 }: RadioFieldProps) {
+  const size = useFormSize(sizeProp);
   return (
     <label
       className={[

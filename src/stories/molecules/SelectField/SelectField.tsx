@@ -1,4 +1,5 @@
 import './SelectField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
@@ -38,12 +39,13 @@ export function SelectField({
   defaultValue,
   placeholder,
   disabled,
-  size = 'md',
+  size: sizeProp,
   error = false,
   errorMessage,
   helperText,
   onValueChange,
 }: SelectFieldProps) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
 

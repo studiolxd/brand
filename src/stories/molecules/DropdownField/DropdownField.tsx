@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu, type MenuItem } from '../Menu/Menu';
@@ -47,11 +48,12 @@ export function DropdownField({
   onValueChange,
   children,
   inline = false,
-  size = 'md',
+  size: sizeProp,
   align = 'start',
   disabled = false,
   className,
 }: DropdownFieldProps) {
+  const size = useFormSize(sizeProp);
   const classes = ['dropdown-field', inline ? 'dropdown-field--inline' : '', size !== 'md' ? `dropdown-field--${size}` : '', className].filter(Boolean).join(' ');
   return (
     <div className={classes}>

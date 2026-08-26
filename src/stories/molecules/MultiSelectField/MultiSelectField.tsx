@@ -1,4 +1,5 @@
 import './MultiSelectField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { MultiSelect } from '../../atoms/MultiSelect/MultiSelect';
 import type { MultiSelectOption } from '../../atoms/MultiSelect/MultiSelect';
@@ -32,12 +33,13 @@ export function MultiSelectField({
   placeholder,
   disabled,
   readOnly,
-  size = 'md',
+  size: sizeProp,
   error = false,
   errorMessage,
   helperText,
   onValueChange,
 }: MultiSelectFieldProps) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
 

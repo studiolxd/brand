@@ -1,4 +1,5 @@
 import './OtpField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { OtpInput } from '../../atoms/OtpInput/OtpInput';
 
@@ -33,8 +34,9 @@ export function OtpField({
   error = false,
   errorMessage,
   helperText,
-  size = 'md',
+  size: sizeProp,
 }: OtpFieldProps) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;

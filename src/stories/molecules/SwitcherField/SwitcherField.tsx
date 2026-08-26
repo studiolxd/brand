@@ -1,4 +1,5 @@
 import './SwitcherField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Switcher } from '../../atoms/Switcher/Switcher';
 
 export interface SwitcherFieldProps {
@@ -19,13 +20,14 @@ export function SwitcherField({
   checked,
   defaultChecked,
   disabled,
-  size = 'md',
+  size: sizeProp,
   id,
   name,
   value,
   required,
   onCheckedChange,
 }: SwitcherFieldProps) {
+  const size = useFormSize(sizeProp);
   const fieldId = id ?? `switcher-field-${String(label).toLowerCase().replace(/\s+/g, '-')}`;
   const sizeClass = size !== 'md' ? `switcher-field--${size}` : '';
   const disabledClass = disabled ? 'switcher-field--disabled' : '';

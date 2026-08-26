@@ -16,5 +16,5 @@ interface InputPhoneFieldProps {
     onChange?: (value: string | undefined) => void;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function InputPhoneField({ id, label, labelHidden, value, defaultCountry, placeholder, disabled, error, errorMessage, helperText, size, name, onChange, onBlur, }: InputPhoneFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function InputPhoneField({ id, label, labelHidden, value, defaultCountry, placeholder, disabled, error, errorMessage, helperText, size: sizeProp, name, onChange, onBlur, }: InputPhoneFieldProps): import("react/jsx-runtime").JSX.Element;
 export {};

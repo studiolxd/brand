@@ -110,7 +110,6 @@ export const entryPoints = {
   'site-shell':          'src/stories/sections/SiteShell/SiteShell.tsx',
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
   // Organisms
-  'login-form':          'src/stories/organisms/LoginForm/LoginForm.tsx',
   'project-carousel':    'src/stories/organisms/ProjectCarousel/ProjectCarousel.tsx',
   'project-grid':        'src/stories/organisms/ProjectGrid/ProjectGrid.tsx',
   'review-carousel':     'src/stories/organisms/ReviewCarousel/ReviewCarousel.tsx',

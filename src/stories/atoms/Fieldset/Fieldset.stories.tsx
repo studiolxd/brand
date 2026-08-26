@@ -5,7 +5,7 @@ import { RadioField } from '../../molecules/RadioField/RadioField';
 import { InputField } from '../../molecules/InputField/InputField';
 
 const meta: Meta<typeof Fieldset> = {
-  title: 'Por revisar/Atoms/Fieldset',
+  title: 'Atoms/Fieldset',
   component: Fieldset,
   parameters: {
     layout: 'padded',

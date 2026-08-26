@@ -254,10 +254,6 @@
       "types": "./dist/_types/atoms/List/List.d.ts",
       "import": "./dist/list.js"
     },
-    "./login-form": {
-      "types": "./dist/_types/organisms/LoginForm/LoginForm.d.ts",
-      "import": "./dist/login-form.js"
-    },
     "./logo": {
       "types": "./dist/_types/atoms/Logo/Logo.d.ts",
       "import": "./dist/logo.js"

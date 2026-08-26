@@ -1,8 +1,10 @@
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import './InputField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 
-export interface InputFieldProps {
+export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'> {
   id: string;
   label: string;
   /**
@@ -28,7 +30,12 @@ export interface InputFieldProps {
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
 
-export function InputField({
+/**
+ * El `ref` y el resto de props nativas de `<input>` van al `<input>` interno
+ * (react-hook-form `register()`, `autoComplete`, `aria-*`, `data-*`…); el
+ * `className` va al contenedor.
+ */
+export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function InputField({
   id,
   label,
   labelHidden = false,
@@ -39,14 +46,17 @@ export function InputField({
   defaultValue,
   disabled,
   readOnly,
-  size = 'md',
+  size: sizeProp,
   error = false,
   errorMessage,
   helperText,
   onChange,
   onBlur,
   onFocus,
-}: InputFieldProps) {
+  className,
+  ...rest
+}: InputFieldProps, ref) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
@@ -54,9 +64,11 @@ export function InputField({
   const hasError = error || !!errorMessage;
 
   return (
-    <div className="input-field">
+    <div className={['input-field', className].filter(Boolean).join(' ')}>
       <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <Input
+        ref={ref}
+        {...rest}
         id={id}
         name={name}
         type={type}
@@ -80,4 +92,4 @@ export function InputField({
       )}
     </div>
   );
-}
+});

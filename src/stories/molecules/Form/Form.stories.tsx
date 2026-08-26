@@ -1,195 +1,108 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Form } from './Form';
 import { InputField } from '../InputField/InputField';
-import { TextareaField } from '../TextareaField/TextareaField';
-import { CheckboxField } from '../CheckboxField/CheckboxField';
-import { InputPhoneField } from '../InputPhoneField/InputPhoneField';
 import { PasswordField } from '../PasswordField/PasswordField';
+import { CheckboxField } from '../CheckboxField/CheckboxField';
 import { Button } from '../../atoms/Button/Button';
-import { OtpField } from '../OtpField/OtpField';
-import { Fieldset } from '../../atoms/Fieldset/Fieldset';
+import { Link } from '../../atoms/Link/Link';
+
+const campos = (
+  <>
+    <InputField id="form-email" label="Correo electrónico" type="email" autoComplete="email" />
+    <PasswordField id="form-password" label="Contraseña" labelHidden={false} autoComplete="current-password" helperText="Entre 8 y 128 caracteres" />
+  </>
+);
 
 const meta: Meta<typeof Form> = {
-  title: 'Por revisar/Molecules/Form',
+  title: 'Molecules/Form',
   component: Form,
-  parameters: {
-    layout: 'padded',
+  parameters: { layout: 'padded' },
+  args: {
+    children: campos,
+    actions: <Button variant="primary" type="submit">Entrar</Button>,
+    onSubmit: (e) => e.preventDefault(),
   },
   argTypes: {
-    errors: {
-      control: { type: 'object' },
-      description: 'Lista de mensajes de error agrupados, mostrados sobre las acciones.',
-    },
+    size: { control: { type: 'radio' }, options: ['sm', 'md', 'lg'], description: 'Talla de todos los campos y botones.' },
+    children: { table: { disable: true } },
+    actions: { table: { disable: true } },
+    links: { table: { disable: true } },
+    alternatives: { table: { disable: true } },
   },
-  args: {},
 };
-
 export default meta;
 type Story = StoryObj<typeof Form>;
 
-const privacyLabel = (
-  <>He leído y acepto la <a href="/privacidad">política de privacidad</a>.</>
-);
+/** Campos apilados y la acción principal. */
+export const PorDefecto: Story = {};
 
-export const Default: Story = {
+/** Con errores del formulario (los que no cuelgan de un campo), enlaces secundarios y alternativas. */
+export const Completo: Story = {
   args: {
-    actions: <Button variant="primary">Enviar</Button>,
-    children: (
-      <InputField id="form-email" label="Email" labelHidden placeholder="tu@email.com" />
-    ),
-  },
-};
-
-export const Success: Story = {
-  render: () => <p className="form__success">¡Mensaje enviado! Nos pondremos en contacto contigo pronto.</p>,
-};
-
-export const WithErrors: Story = {
-  args: {
-    errors: ['No se ha podido enviar el formulario. Por favor, inténtalo de nuevo más tarde.'],
-    actions: <Button variant="primary">Enviar</Button>,
-    children: (
+    errors: ['No hemos podido iniciar sesión. Comprueba el correo y la contraseña.'],
+    links: (
       <>
-        <InputField
-          id="form-name-error"
-          label="Nombre"
-          labelHidden={false}
-          placeholder="Tu nombre"
-          error
-          errorMessage="El nombre es obligatorio."
-        />
-        <InputField
-          id="form-email-error"
-          label="Email"
-          labelHidden={false}
-          type="email"
-          placeholder="tu@email.com"
-          error
-          errorMessage="Introduce un email válido."
-        />
-        <CheckboxField
-          id="form-privacy-error"
-          label={privacyLabel}
-        />
+        <Link href="#recuperar">¿Has olvidado la contraseña?</Link>
+        <Link href="#registro">¿No tienes cuenta?</Link>
+      </>
+    ),
+    alternativesLabel: 'O continúa con',
+    alternatives: (
+      <>
+        <Button variant="outline">Google</Button>
+        <Button variant="outline">Enlace mágico</Button>
       </>
     ),
   },
 };
 
-/* ─── Ejemplos de composición ─────────────────────────────── */
+/** `size="lg"`: la talla llega sola a campos y botones — es la de las superficies públicas. */
+export const TallaGrande: Story = {
+  args: { ...Completo.args, size: 'lg' },
+};
 
-export const ContactFormExample: Story = {
-  name: 'Ejemplo: ContactForm',
-  render: () => {
-    const [wantCall, setWantCall] = useState(false);
-    return (
-      <Form
-        actions={<Button variant="primary" type="submit">Enviar mensaje</Button>}
-      >
-        <InputField id="ex-contact-email" label="Email" labelHidden type="email" placeholder="Escribe aquí tu correo electrónico" />
-        <TextareaField id="ex-contact-message" label="Mensaje" labelHidden placeholder="Escribe aquí tu mensaje" rows={5} />
-        <CheckboxField
-          id="ex-contact-phone"
-          label="Prefiero que me llaméis por teléfono"
-          checked={wantCall}
-          onCheckedChange={(checked) => setWantCall(checked === true)}
-        />
-        {wantCall && (
-          <InputPhoneField
-            id="ex-contact-phone-number"
-            label="Teléfono"
-            labelHidden
-            placeholder="Escribe aquí tu número de teléfono"
-            helperText="Solo utilizaremos tu número de teléfono para hablarte sobre este proyecto."
-          />
-        )}
-        <CheckboxField id="ex-contact-privacy" label={privacyLabel} />
-      </Form>
-    );
+/** Sobre superficie oscura: cada pieza voltea con sus tokens; el Form no añade nada. */
+export const SuperficieOscura: Story = {
+  args: { ...Completo.args },
+  decorators: [(Story) => <div className="surface-dark" style={{ padding: 'var(--spacing-6)' }}><Story /></div>],
+};
+
+/** Con `CheckboxField` y acción secundaria. */
+export const ConCasillaYDosAcciones: Story = {
+  args: {
+    children: (
+      <>
+        {campos}
+        <CheckboxField id="form-terms" label="Acepto las condiciones" />
+      </>
+    ),
+    actions: (
+      <>
+        <Button variant="outline">Cancelar</Button>
+        <Button variant="primary" type="submit">Crear cuenta</Button>
+      </>
+    ),
   },
 };
 
-export const LoginFormExample: Story = {
-  name: 'Ejemplo: LoginForm',
-  render: () => (
-    <Form
-      actions={<Button variant="primary" type="submit" block>Iniciar sesión</Button>}
-    >
-      <InputField id="ex-login-email" label="Email" labelHidden={false} type="email" placeholder="tu@email.com" />
-      <PasswordField id="ex-login-password" label="Contraseña" labelHidden={false} placeholder="Tu contraseña" />
-      <CheckboxField id="ex-login-remember" label="Mantener la sesión iniciada" />
-    </Form>
-  ),
-};
-
-export const LoginFormWithErrorsExample: Story = {
-  name: 'Ejemplo: LoginForm con errores',
-  render: () => (
-    <Form
-      errors={['Las credenciales introducidas no son correctas.']}
-      actions={<Button variant="primary" type="submit" block>Iniciar sesión</Button>}
-    >
-      <InputField
-        id="ex-login-error-email"
-        label="Email"
-        labelHidden={false}
-        type="email"
-        placeholder="tu@email.com"
-        error
-        errorMessage="Introduce un email válido."
-      />
-      <PasswordField
-        id="ex-login-error-password"
-        label="Contraseña"
-        labelHidden={false}
-        placeholder="Tu contraseña"
-        error
-        errorMessage="La contraseña no puede estar vacía."
-      />
-      <CheckboxField id="ex-login-error-remember" label="Mantener la sesión iniciada" />
-    </Form>
-  ),
-};
-
-export const OtpFormExample: Story = {
-  name: 'Ejemplo: Form con OtpField',
-  render: () => (
-    <Form
-      actions={<Button variant="primary" type="submit" block>Verificar</Button>}
-    >
-      <InputField id="ex-otp-email" label="Email" labelHidden={false} type="email" placeholder="tu@email.com" />
-      <OtpField id="ex-otp-code" label="Código de verificación" length={6} helperText="Revisa tu correo electrónico." />
-    </Form>
-  ),
-};
-
-export const NewsletterFormExample: Story = {
-  name: 'Ejemplo: NewsletterForm',
-  render: () => (
-    <Form
-      actions={<Button variant="primary" type="submit">Suscríbeme a la newsletter</Button>}
-    >
-      <InputField id="ex-newsletter-email" label="Email" labelHidden type="email" placeholder="Escribe aquí tu correo electrónico" />
-      <CheckboxField id="ex-newsletter-privacy" label={privacyLabel} />
-    </Form>
-  ),
-};
-
-export const FieldsetExample: Story = {
-  name: 'Ejemplo: Form con Fieldset',
-  render: () => (
-    <Form
-      actions={<Button variant="primary" type="submit">Enviar</Button>}
-    >
-      <InputField id="ex-fs-name" label="Nombre" labelHidden={false} placeholder="Tu nombre" />
-      <Fieldset legend="Dirección">
-        <InputField id="ex-fs-street" label="Calle" labelHidden={false} placeholder="Calle y número" />
-        <InputField id="ex-fs-city" label="Ciudad" labelHidden={false} placeholder="Ciudad" />
-        <InputField id="ex-fs-zip" label="Código postal" labelHidden={false} placeholder="00000" />
-      </Fieldset>
-      <TextareaField id="ex-fs-notes" label="Notas adicionales" labelHidden={false} placeholder="Cualquier información adicional" rows={3} />
-      <CheckboxField id="ex-fs-privacy" label={privacyLabel} />
-    </Form>
-  ),
+export const Contrato: Story = {
+  name: 'Test — talla heredada, errores anunciados, bloques en orden',
+  tags: ['!dev'],
+  args: { ...Completo.args, size: 'lg' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const form = canvasElement.querySelector('form')!;
+    await expect(form).toHaveClass('form', 'form--lg');
+    await expect(form).toHaveAttribute('novalidate');
+    // la talla del Form llega a campos y botones sin pasarla uno a uno
+    await expect(canvas.getByLabelText('Correo electrónico')).toHaveClass('input--lg');
+    await expect(canvas.getByRole('button', { name: 'Entrar' })).toHaveClass('button--lg');
+    await expect(canvas.getByRole('button', { name: 'Google' })).toHaveClass('button--lg');
+    // los errores del formulario se anuncian
+    await expect(canvas.getByRole('alert').textContent).toContain('No hemos podido');
+    // orden: campos → errores → acciones → enlaces → alternativas
+    const orden = Array.from(form.children).map((el) => el.className.split(' ')[0]);
+    await expect(orden).toEqual(['form__fields', 'form__errors', 'form__actions', 'form__links', 'form__alternatives']);
+  },
 };

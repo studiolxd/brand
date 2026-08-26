@@ -1,4 +1,5 @@
 import './CheckboxField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
 
 interface CheckboxFieldProps {
@@ -18,12 +19,13 @@ export function CheckboxField({
   checked,
   defaultChecked,
   disabled,
-  size = 'md',
+  size: sizeProp,
   id,
   name,
   value,
   onCheckedChange,
 }: CheckboxFieldProps) {
+  const size = useFormSize(sizeProp);
   return (
     <label
       className={[

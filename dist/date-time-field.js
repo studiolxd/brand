@@ -1,78 +1,79 @@
 'use client';
 import './date-time-field.css';
-import { Label as e } from "./label.js";
-import { TimeSelect as t } from "./time-select.js";
-import { DatePicker as n } from "./date-picker.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { useCallback as a } from "react";
+import { n as e } from "./_shared/form-size.js";
+import { Label as t } from "./label.js";
+import { TimeSelect as n } from "./time-select.js";
+import { DatePicker as r } from "./date-picker.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { useCallback as o } from "react";
 //#region src/stories/molecules/DateTimeField/DateTimeField.tsx
-function o(e, t) {
+function s(e, t) {
 	let n = new Date(e);
 	return n.setHours(t.h, t.m, 0, 0), n;
 }
-function s(e) {
+function c(e) {
 	return e ? {
 		h: e.getHours(),
 		m: e.getMinutes()
 	} : null;
 }
-function c({ id: c, label: l, labelHidden: u = !0, value: d, onChange: f, placeholder: p, timeStep: m, minDate: h, maxDate: g, disabledDates: _, size: v = "md", disabled: y, readOnly: b, error: x = !1, errorMessage: S, helperText: C, locale: w = "es-ES" }) {
-	let T = `${c}-date`, E = S ? `${c}-error` : void 0, D = C ? `${c}-helper` : void 0, O = a((e) => {
-		let t = s(d) ?? {
+function l({ id: l, label: u, labelHidden: d = !0, value: f, onChange: p, placeholder: m, timeStep: h, minDate: g, maxDate: _, disabledDates: v, size: y, disabled: b, readOnly: x, error: S = !1, errorMessage: C, helperText: w, locale: T = "es-ES" }) {
+	let E = e(y), D = `${l}-date`, O = C ? `${l}-error` : void 0, k = w ? `${l}-helper` : void 0, A = o((e) => {
+		let t = c(f) ?? {
 			h: 0,
 			m: 0
 		};
-		f?.(o(e, t));
-	}, [d, f]), k = a((e) => {
-		d && f?.(o(d, e));
-	}, [d, f]);
-	return /* @__PURE__ */ i("div", {
-		className: ["date-time-field", x ? "date-time-field--error" : ""].filter(Boolean).join(" "),
+		p?.(s(e, t));
+	}, [f, p]), j = o((e) => {
+		f && p?.(s(f, e));
+	}, [f, p]);
+	return /* @__PURE__ */ a("div", {
+		className: ["date-time-field", S ? "date-time-field--error" : ""].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r(e, {
-				htmlFor: T,
-				hidden: u,
-				size: v,
-				children: l
+			/* @__PURE__ */ i(t, {
+				htmlFor: D,
+				hidden: d,
+				size: E,
+				children: u
 			}),
-			/* @__PURE__ */ i("div", {
+			/* @__PURE__ */ a("div", {
 				className: "date-time-field__controls",
-				children: [/* @__PURE__ */ r(n, {
-					id: T,
-					value: d ?? null,
-					onChange: O,
-					placeholder: p,
-					minDate: h,
-					maxDate: g,
-					disabledDates: _,
-					size: v,
-					disabled: y,
-					readOnly: b,
-					error: x,
-					locale: w
-				}), /* @__PURE__ */ r(t, {
-					value: s(d),
-					onChange: k,
-					step: m,
-					size: v,
-					disabled: y,
-					readOnly: b,
-					error: x
+				children: [/* @__PURE__ */ i(r, {
+					id: D,
+					value: f ?? null,
+					onChange: A,
+					placeholder: m,
+					minDate: g,
+					maxDate: _,
+					disabledDates: v,
+					size: E,
+					disabled: b,
+					readOnly: x,
+					error: S,
+					locale: T
+				}), /* @__PURE__ */ i(n, {
+					value: c(f),
+					onChange: j,
+					step: h,
+					size: E,
+					disabled: b,
+					readOnly: x,
+					error: S
 				})]
 			}),
-			S && /* @__PURE__ */ r("span", {
-				id: E,
+			C && /* @__PURE__ */ i("span", {
+				id: O,
 				className: "date-time-field__error",
 				role: "alert",
-				children: S
-			}),
-			C && /* @__PURE__ */ r("span", {
-				id: D,
-				className: "date-time-field__helper",
 				children: C
+			}),
+			w && /* @__PURE__ */ i("span", {
+				id: k,
+				className: "date-time-field__helper",
+				children: w
 			})
 		]
 	});
 }
 //#endregion
-export { c as DateTimeField };
+export { l as DateTimeField };

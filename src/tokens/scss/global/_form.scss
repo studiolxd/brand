@@ -1,19 +1,16 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-form-gap: 1px; // Gap entre campos — actúa como separador (gap technique)
-$lxd-form-border-width: 1px; // Grosor del borde exterior del formulario
-$lxd-form-border-style: solid; // Estilo del borde exterior
-$lxd-form-border-color: #111e30; // Color del borde exterior
-$lxd-form-separator-width: 1px; // Grosor del separador entre hijos
-$lxd-form-separator-style: solid; // Estilo del separador
-$lxd-form-separator-color: #111e30; // Color del separador
-$lxd-form-heading-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del heading
-$lxd-form-heading-font-size: 1.5rem; // Font size del heading (24px)
-$lxd-form-heading-font-weight: 500; // Font weight del heading
-$lxd-form-heading-line-height: 1.3; // Line height del heading
-$lxd-form-heading-letter-spacing: -0.02em; // Letter spacing del heading
-$lxd-form-heading-color: #111e30; // Color del heading
+$lxd-form-gap: 1.5rem; // Aire entre campos
+$lxd-form-errors-gap: 0.25rem; // Aire entre los errores del formulario (los que no cuelgan de un campo)
+$lxd-form-actions-gap: 0.75rem; // Aire entre los botones de la zona de acciones
+$lxd-form-actions-margin-block-start: 2rem; // Aire entre el último campo y las acciones
+$lxd-form-links-gap: 1rem; // Aire entre los enlaces secundarios (¿olvidaste la contraseña?, ¿no tienes cuenta?)
+$lxd-form-links-margin-block-start: 1.5rem; // Aire entre las acciones y los enlaces secundarios
+$lxd-form-alternatives-gap: 0.75rem; // Aire entre las alternativas (acceso con Google, enlace mágico…)
+$lxd-form-alternatives-margin-block-start: 2rem; // Aire entre el bloque principal y las alternativas
+$lxd-form-alternatives-label-font-size: 0.875rem; // El rótulo de las alternativas («o continúa con»)
+$lxd-form-alternatives-label-color: #4a4a4a; // Color del rótulo de las alternativas
 $lxd-form-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de error
 $lxd-form-error-font-size: 0.875rem; // Font size del mensaje de error (14px)
 $lxd-form-error-font-weight: 300; // Font weight del mensaje de error

@@ -1,4 +1,5 @@
 import { InputPhone } from '../../atoms/InputPhone/InputPhone';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
@@ -31,11 +32,12 @@ export function InputPhoneField({
   error = false,
   errorMessage,
   helperText,
-  size = 'md',
+  size: sizeProp,
   name,
   onChange,
   onBlur,
 }: InputPhoneFieldProps) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;

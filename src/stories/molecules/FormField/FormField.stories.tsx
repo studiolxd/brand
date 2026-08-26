@@ -80,7 +80,7 @@ function ProfileForm({
 }
 
 const meta = {
-  title: 'Por revisar/Molecules/FormField',
+  title: 'Molecules/FormField',
   component: ProfileForm,
 } satisfies Meta<typeof ProfileForm>;
 

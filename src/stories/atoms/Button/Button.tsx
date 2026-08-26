@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { useFormSize } from '../../constants/form-size';
 import { useRender } from '@base-ui-components/react/use-render';
 import './Button.css';
 
@@ -41,7 +42,7 @@ export interface ButtonProps
 export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   variant = 'primary',
   destructive = false,
-  size = 'md',
+  size: sizeProp,
   block = false,
   iconOnly = false,
   children,
@@ -54,6 +55,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
   className,
   ...rest
 }, ref) {
+  const size = useFormSize(sizeProp);
   const classes = [
     'button',
     `button--${variant}`,

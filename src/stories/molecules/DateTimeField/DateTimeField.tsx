@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { DatePicker } from '../DatePicker/DatePicker';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
@@ -48,7 +49,7 @@ export function DateTimeField({
   minDate,
   maxDate,
   disabledDates,
-  size = 'md',
+  size: sizeProp,
   disabled,
   readOnly,
   error = false,
@@ -56,6 +57,7 @@ export function DateTimeField({
   helperText,
   locale = 'es-ES',
 }: DateTimeFieldProps) {
+  const size = useFormSize(sizeProp);
   const dateId = `${id}-date`;
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;

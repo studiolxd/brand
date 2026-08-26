@@ -3,12 +3,15 @@
  */
 
 :root {
-  --form-border-style: var(--control-border-style); /** Estilo del borde exterior */
-  --form-separator-style: var(--control-border-style); /** Estilo del separador */
-  --form-heading-font-family: var(--font-family-sans); /** Font family del heading */
-  --form-heading-font-size: var(--font-size-4); /** Font size del heading (24px) */
-  --form-heading-line-height: var(--line-height-snug); /** Line height del heading */
-  --form-heading-letter-spacing: var(--letter-spacing-tight); /** Letter spacing del heading */
+  --form-gap: var(--spacing-5); /** Aire entre campos */
+  --form-errors-gap: var(--spacing-1); /** Aire entre los errores del formulario (los que no cuelgan de un campo) */
+  --form-actions-gap: var(--spacing-3); /** Aire entre los botones de la zona de acciones */
+  --form-actions-margin-block-start: var(--spacing-6); /** Aire entre el último campo y las acciones */
+  --form-links-gap: var(--spacing-4); /** Aire entre los enlaces secundarios (¿olvidaste la contraseña?, ¿no tienes cuenta?) */
+  --form-links-margin-block-start: var(--spacing-5); /** Aire entre las acciones y los enlaces secundarios */
+  --form-alternatives-gap: var(--spacing-3); /** Aire entre las alternativas (acceso con Google, enlace mágico…) */
+  --form-alternatives-margin-block-start: var(--spacing-6); /** Aire entre el bloque principal y las alternativas */
+  --form-alternatives-label-font-size: var(--font-size-1); /** El rótulo de las alternativas («o continúa con») */
   --form-error-font-family: var(--font-family-sans); /** Font family del mensaje de error */
   --form-error-font-size: var(--font-size-1); /** Font size del mensaje de error (14px) */
   --form-error-line-height: var(--line-height-normal); /** Line height del mensaje de error */
@@ -18,26 +21,19 @@
   --form-success-font-family: var(--font-family-sans); /** Font family del mensaje de éxito */
   --form-success-font-size: var(--font-size-2); /** Font size del mensaje de éxito (18px) */
   --form-success-line-height: var(--line-height-normal); /** Line height del mensaje de éxito */
-  --form-gap: var(--border-width-default); /** Gap entre campos — actúa como separador (gap technique) */
-  --form-border-color: var(--color-primary); /** Color del borde exterior */
-  --form-separator-color: var(--color-primary); /** Color del separador */
-  --form-heading-font-weight: var(--font-weight-emphasis); /** Font weight del heading */
-  --form-heading-color: var(--color-text-on-light); /** Color del heading */
+  --form-alternatives-label-color: var(--color-text-muted-on-light); /** Color del rótulo de las alternativas */
   --form-error-font-weight: var(--font-weight-default); /** Font weight del mensaje de error */
   --form-error-color: var(--color-error-text-on-light); /** Color del mensaje de error */
   --form-helper-font-weight: var(--font-weight-default); /** Font weight del texto de ayuda */
   --form-helper-color: var(--color-text-muted-on-light); /** Color del texto de ayuda */
   --form-success-font-weight: var(--font-weight-default); /** Font weight del mensaje de éxito */
   --form-success-color: var(--color-text-on-light); /** Color del mensaje de éxito */
-  --form-border-width: var(--control-border-width); /** Grosor del borde exterior del formulario */
-  --form-separator-width: var(--control-border-width); /** Grosor del separador entre hijos */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --form-border-color: var(--color-text-on-dark); /** Color del borde exterior — surface-dark */
-  --form-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
+  --form-alternatives-label-color: var(--color-text-muted-on-dark); /** Rótulo de las alternativas — surface-dark */
   --form-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --form-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
   --form-success-color: var(--color-text-on-dark); /** Color del mensaje de éxito — surface-dark */

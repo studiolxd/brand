@@ -1,4 +1,5 @@
 import './AsyncSelectField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { AsyncSelect } from '../../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncSelectOption } from '../../atoms/AsyncSelect/AsyncSelect';
@@ -33,11 +34,12 @@ export function AsyncSelectField({
   placeholder,
   disabled,
   readOnly,
-  size = 'md',
+  size: sizeProp,
   error = false,
   errorMessage,
   helperText,
 }: AsyncSelectFieldProps) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
 

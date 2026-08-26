@@ -31,4 +31,4 @@ export interface DropdownFieldProps {
  * opciones no son un `<select>` — llevan icono, son enlaces o acciones — y
  * su cara es la misma que la del Select para que convivan en un formulario.
  */
-export declare function DropdownField({ id, label, labelHidden, 'aria-label': ariaLabel, items, value, onValueChange, children, inline, size, align, disabled, className, }: DropdownFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function DropdownField({ id, label, labelHidden, 'aria-label': ariaLabel, items, value, onValueChange, children, inline, size: sizeProp, align, disabled, className, }: DropdownFieldProps): import("react/jsx-runtime").JSX.Element;

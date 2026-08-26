@@ -17,7 +17,7 @@ function RenderInjector({
 }
 
 const meta: Meta<typeof PasswordField> = {
-  title: 'Por revisar/Molecules/PasswordField',
+  title: 'Molecules/PasswordField',
   component: PasswordField,
   parameters: {
     layout: 'padded',

@@ -1,29 +1,31 @@
 'use client';
 import './checkbox-field.css';
-import { Checkbox as e } from "./checkbox.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { n as e } from "./_shared/form-size.js";
+import { Checkbox as t } from "./checkbox.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/CheckboxField/CheckboxField.tsx
-function r({ label: r, checked: i, defaultChecked: a, disabled: o, size: s = "md", id: c, name: l, value: u, onCheckedChange: d }) {
-	return /* @__PURE__ */ n("label", {
+function i({ label: i, checked: a, defaultChecked: o, disabled: s, size: c, id: l, name: u, value: d, onCheckedChange: f }) {
+	let p = e(c);
+	return /* @__PURE__ */ r("label", {
 		className: [
 			"checkbox-field",
-			s === "md" ? "" : `checkbox-field--${s}`,
-			o ? "checkbox-field--disabled" : ""
+			p === "md" ? "" : `checkbox-field--${p}`,
+			s ? "checkbox-field--disabled" : ""
 		].filter(Boolean).join(" "),
-		children: [/* @__PURE__ */ t(e, {
-			checked: i,
-			defaultChecked: a,
-			disabled: o,
-			size: s,
-			id: c,
-			name: l,
-			value: u,
-			onCheckedChange: d
-		}), /* @__PURE__ */ t("span", {
+		children: [/* @__PURE__ */ n(t, {
+			checked: a,
+			defaultChecked: o,
+			disabled: s,
+			size: p,
+			id: l,
+			name: u,
+			value: d,
+			onCheckedChange: f
+		}), /* @__PURE__ */ n("span", {
 			className: "checkbox-field__label",
-			children: r
+			children: i
 		})]
 	});
 }
 //#endregion
-export { r as CheckboxField };
+export { i as CheckboxField };

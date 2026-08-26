@@ -1,49 +1,50 @@
 'use client';
 import './textarea-field.css';
-import { Label as e } from "./label.js";
-import { Textarea as t } from "./textarea.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { n as e } from "./_shared/form-size.js";
+import { Label as t } from "./label.js";
+import { Textarea as n } from "./textarea.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-function i({ id: i, label: a, labelHidden: o = !1, name: s, placeholder: c, value: l, defaultValue: u, rows: d, disabled: f, readOnly: p, size: m = "md", error: h = !1, errorMessage: g, helperText: _, onChange: v, onBlur: y, onFocus: b }) {
-	let x = g ? `${i}-error` : void 0, S = _ ? `${i}-helper` : void 0, C = [x, S].filter(Boolean).join(" ") || void 0;
-	return /* @__PURE__ */ r("div", {
+function a({ id: a, label: o, labelHidden: s = !1, name: c, placeholder: l, value: u, defaultValue: d, rows: f, disabled: p, readOnly: m, size: h, error: g = !1, errorMessage: _, helperText: v, onChange: y, onBlur: b, onFocus: x }) {
+	let S = e(h), C = _ ? `${a}-error` : void 0, w = v ? `${a}-helper` : void 0, T = [C, w].filter(Boolean).join(" ") || void 0;
+	return /* @__PURE__ */ i("div", {
 		className: "textarea-field",
 		children: [
-			/* @__PURE__ */ n(e, {
-				htmlFor: i,
-				hidden: o,
-				size: m,
-				children: a
+			/* @__PURE__ */ r(t, {
+				htmlFor: a,
+				hidden: s,
+				size: S,
+				children: o
 			}),
-			/* @__PURE__ */ n(t, {
-				id: i,
-				name: s,
-				placeholder: c ?? (o ? a : void 0),
-				value: l,
-				defaultValue: u,
-				rows: d,
-				disabled: f,
-				readOnly: p,
-				size: m,
-				error: h || !!g,
-				"aria-describedby": C,
-				onChange: v,
-				onBlur: y,
-				onFocus: b
+			/* @__PURE__ */ r(n, {
+				id: a,
+				name: c,
+				placeholder: l ?? (s ? o : void 0),
+				value: u,
+				defaultValue: d,
+				rows: f,
+				disabled: p,
+				readOnly: m,
+				size: S,
+				error: g || !!_,
+				"aria-describedby": T,
+				onChange: y,
+				onBlur: b,
+				onFocus: x
 			}),
-			g && /* @__PURE__ */ n("span", {
-				id: x,
+			_ && /* @__PURE__ */ r("span", {
+				id: C,
 				className: "textarea-field__error",
 				role: "alert",
-				children: g
-			}),
-			_ && /* @__PURE__ */ n("span", {
-				id: S,
-				className: "textarea-field__helper",
 				children: _
+			}),
+			v && /* @__PURE__ */ r("span", {
+				id: w,
+				className: "textarea-field__helper",
+				children: v
 			})
 		]
 	});
 }
 //#endregion
-export { i as TextareaField };
+export { a as TextareaField };

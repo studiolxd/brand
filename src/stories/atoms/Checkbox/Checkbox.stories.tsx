@@ -4,7 +4,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Por revisar/Atoms/Checkbox',
+  title: 'Atoms/Checkbox',
   component: Checkbox,
   parameters: {
     layout: 'padded',

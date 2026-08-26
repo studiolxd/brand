@@ -1,5 +1,6 @@
+import { type ComponentPropsWithoutRef } from 'react';
 import './InputField.css';
-export interface InputFieldProps {
+export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'> {
     id: string;
     label: string;
     /**
@@ -24,4 +25,9 @@ export interface InputFieldProps {
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function InputField({ id, label, labelHidden, name, type, placeholder, value, defaultValue, disabled, readOnly, size, error, errorMessage, helperText, onChange, onBlur, onFocus, }: InputFieldProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * El `ref` y el resto de props nativas de `<input>` van al `<input>` interno
+ * (react-hook-form `register()`, `autoComplete`, `aria-*`, `data-*`…); el
+ * `className` va al contenedor.
+ */
+export declare const InputField: import("react").ForwardRefExoticComponent<InputFieldProps & import("react").RefAttributes<HTMLInputElement>>;

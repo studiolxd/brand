@@ -1,39 +1,41 @@
 'use client';
 import './dropdown-field.css';
 import { Icon as e } from "./icon.js";
-import { Label as t } from "./label.js";
-import { Menu as n } from "./menu.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { n as t } from "./_shared/form-size.js";
+import { Label as n } from "./label.js";
+import { Menu as r } from "./menu.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/DropdownField/DropdownField.tsx
-function a({ id: a, label: o, labelHidden: s = !1, "aria-label": c, items: l, value: u, onValueChange: d, children: f, inline: p = !1, size: m = "md", align: h = "start", disabled: g = !1, className: _ }) {
-	return /* @__PURE__ */ i("div", {
+function o({ id: o, label: s, labelHidden: c = !1, "aria-label": l, items: u, value: d, onValueChange: f, children: p, inline: m = !1, size: h, align: g = "start", disabled: _ = !1, className: v }) {
+	let y = t(h);
+	return /* @__PURE__ */ a("div", {
 		className: [
 			"dropdown-field",
-			p ? "dropdown-field--inline" : "",
-			m === "md" ? "" : `dropdown-field--${m}`,
-			_
+			m ? "dropdown-field--inline" : "",
+			y === "md" ? "" : `dropdown-field--${y}`,
+			v
 		].filter(Boolean).join(" "),
-		children: [o && /* @__PURE__ */ r(t, {
-			htmlFor: a,
-			hidden: s,
-			size: m,
-			children: o
-		}), /* @__PURE__ */ r(n, {
-			align: h,
-			size: m,
-			value: u,
-			onValueChange: d,
-			items: l,
-			trigger: /* @__PURE__ */ i("button", {
+		children: [s && /* @__PURE__ */ i(n, {
+			htmlFor: o,
+			hidden: c,
+			size: y,
+			children: s
+		}), /* @__PURE__ */ i(r, {
+			align: g,
+			size: y,
+			value: d,
+			onValueChange: f,
+			items: u,
+			trigger: /* @__PURE__ */ a("button", {
 				type: "button",
-				id: a,
+				id: o,
 				className: "dropdown-field__control",
-				"aria-label": o ? void 0 : c,
-				disabled: g,
-				children: [/* @__PURE__ */ r("span", {
+				"aria-label": s ? void 0 : l,
+				disabled: _,
+				children: [/* @__PURE__ */ i("span", {
 					className: "dropdown-field__value",
-					children: f
-				}), /* @__PURE__ */ r(e, {
+					children: p
+				}), /* @__PURE__ */ i(e, {
 					name: "chevron",
 					size: "sm",
 					className: "dropdown-field__icon",
@@ -44,4 +46,4 @@ function a({ id: a, label: o, labelHidden: s = !1, "aria-label": c, items: l, va
 	});
 }
 //#endregion
-export { a as DropdownField };
+export { o as DropdownField };

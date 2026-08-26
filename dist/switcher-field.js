@@ -1,34 +1,35 @@
 'use client';
 import './switcher-field.css';
-import { Switcher as e } from "./switcher.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { n as e } from "./_shared/form-size.js";
+import { Switcher as t } from "./switcher.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/SwitcherField/SwitcherField.tsx
-function r({ label: r, checked: i, defaultChecked: a, disabled: o, size: s = "md", id: c, name: l, value: u, required: d, onCheckedChange: f }) {
-	let p = c ?? `switcher-field-${String(r).toLowerCase().replace(/\s+/g, "-")}`;
-	return /* @__PURE__ */ n("label", {
+function i({ label: i, checked: a, defaultChecked: o, disabled: s, size: c, id: l, name: u, value: d, required: f, onCheckedChange: p }) {
+	let m = e(c), h = l ?? `switcher-field-${String(i).toLowerCase().replace(/\s+/g, "-")}`;
+	return /* @__PURE__ */ r("label", {
 		className: [
 			"switcher-field",
-			s === "md" ? "" : `switcher-field--${s}`,
-			o ? "switcher-field--disabled" : ""
+			m === "md" ? "" : `switcher-field--${m}`,
+			s ? "switcher-field--disabled" : ""
 		].filter(Boolean).join(" "),
-		htmlFor: p,
-		children: [/* @__PURE__ */ t(e, {
-			id: p,
-			checked: i,
-			defaultChecked: a,
-			disabled: o,
-			size: s,
-			name: l,
-			value: u,
-			required: d,
-			"aria-labelledby": `${p}-label`,
-			onCheckedChange: f
-		}), /* @__PURE__ */ t("span", {
-			id: `${p}-label`,
+		htmlFor: h,
+		children: [/* @__PURE__ */ n(t, {
+			id: h,
+			checked: a,
+			defaultChecked: o,
+			disabled: s,
+			size: m,
+			name: u,
+			value: d,
+			required: f,
+			"aria-labelledby": `${h}-label`,
+			onCheckedChange: p
+		}), /* @__PURE__ */ n("span", {
+			id: `${h}-label`,
 			className: "switcher-field__label",
-			children: r
+			children: i
 		})]
 	});
 }
 //#endregion
-export { r as SwitcherField };
+export { i as SwitcherField };

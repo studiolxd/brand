@@ -11,4 +11,4 @@ export interface SwitcherFieldProps {
     required?: boolean;
     onCheckedChange?: (checked: boolean) => void;
 }
-export declare function SwitcherField({ label, checked, defaultChecked, disabled, size, id, name, value, required, onCheckedChange, }: SwitcherFieldProps): import("react/jsx-runtime").JSX.Element;
+export declare function SwitcherField({ label, checked, defaultChecked, disabled, size: sizeProp, id, name, value, required, onCheckedChange, }: SwitcherFieldProps): import("react/jsx-runtime").JSX.Element;

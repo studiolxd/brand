@@ -1,4 +1,5 @@
 import { forwardRef, useId, useState } from 'react';
+import { useFormSize } from '../../constants/form-size';
 import './PasswordField.css';
 import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
@@ -49,7 +50,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
   error = false,
   errorMessage,
   helperText,
-  size = 'md',
+  size: sizeProp,
   showPasswordLabel = 'Mostrar contraseña',
   hidePasswordLabel = 'Ocultar contraseña',
   className,
@@ -58,6 +59,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
   placeholder,
   ...rest
 }, ref) {
+  const size = useFormSize(sizeProp);
   const reactId = useId();
   const inputId = id ?? reactId;
   const [visible, setVisible] = useState(false);

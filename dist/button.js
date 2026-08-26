@@ -1,50 +1,51 @@
 'use client';
 import './button.css';
-import { jsx as e } from "react/jsx-runtime";
-import { forwardRef as t } from "react";
-import { useRender as n } from "@base-ui-components/react/use-render";
+import { n as e } from "./_shared/form-size.js";
+import { jsx as t } from "react/jsx-runtime";
+import { forwardRef as n } from "react";
+import { useRender as r } from "@base-ui-components/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
-var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md", block: a = !1, iconOnly: o = !1, children: s, type: c = "button", disabled: l, onClick: u, href: d, external: f = !1, render: p, className: m, ...h }, g) {
-	let _ = [
+var i = n(function({ variant: n = "primary", destructive: i = !1, size: a, block: o = !1, iconOnly: s = !1, children: c, type: l = "button", disabled: u, onClick: d, href: f, external: p = !1, render: m, className: h, ...g }, _) {
+	let v = e(a), y = [
 		"button",
-		`button--${t}`,
-		r ? "button--destructive-intent" : "",
-		i === "md" ? "" : `button--${i}`,
-		a ? "button--block" : "",
-		o ? "button--icon-only" : "",
-		m ?? ""
+		`button--${n}`,
+		i ? "button--destructive-intent" : "",
+		v === "md" ? "" : `button--${v}`,
+		o ? "button--block" : "",
+		s ? "button--icon-only" : "",
+		h ?? ""
 	].filter(Boolean).join(" ");
-	return n({
-		render: p,
-		ref: g,
-		enabled: p !== void 0,
+	return r({
+		render: m,
+		ref: _,
+		enabled: m !== void 0,
 		props: {
-			className: _,
-			onClick: u,
-			...h,
-			children: s
+			className: y,
+			onClick: d,
+			...g,
+			children: c
 		}
-	}) || (d === void 0 ? /* @__PURE__ */ e("button", {
-		ref: g,
-		className: _,
-		type: c,
-		disabled: l,
-		onClick: u,
-		...h,
-		children: s
-	}) : /* @__PURE__ */ e("a", {
-		ref: g,
-		className: _,
-		href: l ? void 0 : d,
-		"aria-disabled": l ? !0 : void 0,
-		onClick: u,
-		...f ? {
+	}) || (f === void 0 ? /* @__PURE__ */ t("button", {
+		ref: _,
+		className: y,
+		type: l,
+		disabled: u,
+		onClick: d,
+		...g,
+		children: c
+	}) : /* @__PURE__ */ t("a", {
+		ref: _,
+		className: y,
+		href: u ? void 0 : f,
+		"aria-disabled": u ? !0 : void 0,
+		onClick: d,
+		...p ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		...h,
-		children: s
+		...g,
+		children: c
 	}));
 });
 //#endregion
-export { r as Button };
+export { i as Button };

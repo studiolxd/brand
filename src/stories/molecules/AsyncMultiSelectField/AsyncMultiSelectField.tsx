@@ -1,4 +1,5 @@
 import './AsyncMultiSelectField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { AsyncMultiSelect } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 import type { AsyncMultiSelectOption } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
@@ -35,11 +36,12 @@ export function AsyncMultiSelectField({
   placeholder,
   disabled,
   readOnly,
-  size = 'md',
+  size: sizeProp,
   error = false,
   errorMessage,
   helperText,
 }: AsyncMultiSelectFieldProps) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
 

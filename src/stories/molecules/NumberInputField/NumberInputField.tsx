@@ -1,4 +1,5 @@
 import './NumberInputField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { NumberInput } from '../../atoms/NumberInput/NumberInput';
 
@@ -37,7 +38,7 @@ export function NumberInputField({
   decimal,
   disabled,
   readOnly,
-  size = 'md',
+  size: sizeProp,
   error = false,
   errorMessage,
   helperText,
@@ -45,6 +46,7 @@ export function NumberInputField({
   onBlur,
   onFocus,
 }: NumberInputFieldProps) {
+  const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
