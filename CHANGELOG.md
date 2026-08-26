@@ -7,6 +7,47 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.0.0
+
+### Rompe
+
+- `Form` rediseñado: **solo estructura y aire** (tema claro/oscuro por tokens de
+  cada pieza). Fuera el perímetro y la técnica de separadores del DS anterior
+  (`--form-border-*`, `--form-separator-*`, `--form-heading-*`). Bloques nuevos:
+  `links`, `alternatives` (+ `alternativesLabel`); `size` reparte la talla a
+  campos y botones por contexto; `errors` es una lista `role="alert"`.
+  Las clases `form-errors*` pasan a `form__errors`/`form__error`.
+- `LoginForm` (organismo) retirado: los formularios de acceso son del producto
+  sobre `Form` + `*Field`.
+- Bordes y separadores: siempre prusia sobre claro y blanco sobre oscuro.
+  Fuera `grey-light` y los blancos translúcidos en sidebar, app-header, table,
+  tabs, kbd, file-upload, calendarios, legal-footer, menú, user-menu y
+  org-switcher. `LegalFooter` sin línea.
+- `LanguageSwitcher` compacto muestra el nombre del idioma (no el código); fuera
+  los tokens `code-*`.
+
+### Añadido
+
+- Talla por contexto: `useFormSize` (`constants/form-size`); todos los `*Field`
+  y `Button` toman la talla del `Form` si no se les pasa.
+- `InputField` reenvía `ref` y las props nativas al `<input>` (react-hook-form).
+- `Menu` con `size` (opciones a la talla del disparador, como el `Select`);
+  `DropdownField` y `ThemeSwitcher` la propagan. Icono del valor a la talla del menú.
+- `SiteHeader`: ajustes (idioma, tema) pegados abajo del panel, en fila en
+  escritorio y apilados en móvil; contenido dentro de un marco con borde y aire
+  (`panel-frame-*`, `panel-padding-block-end`); la marca descuenta el aire del
+  Container (`logo-margin-inline-start`); hover de `SiteNav` en oscuro a `accent-1`.
+- `LegalFooter`: enlaces apilados en móvil (`links-gap-stacked`), cuerpo base.
+- `Label` `lg` a 20px (la del control). `PasswordField`: toggle en tinta e icono a
+  la talla del campo.
+- Storybook: `Form`, `FormField`, `PasswordField`, `CheckboxField`, `Checkbox` y
+  `Fieldset` salen de «Por revisar».
+
+### Corregido
+
+- El disparador del `Menu` recibe `aria-expanded`/`data-popup-open` (el chevron
+  de los desplegables gira).
+
 ## v18.1.0
 
 ### Cambiado
