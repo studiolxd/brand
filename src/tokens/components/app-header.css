@@ -5,18 +5,18 @@
 :root {
   --app-header-content-height: var(--size-component-md); /** Lo más alto que lleva la barra: un control md */
   --app-header-padding-block: var(--spacing-2); /** Aire arriba y abajo del contenido */
-  --app-header-border-color: var(--color-grey-light); /** Color del borde */
   --app-header-padding-inline: var(--spacing-4); /** Aire lateral */
   --app-header-gap: var(--spacing-3); /** Entre el botón de menú, el inicio y los controles del final */
   --app-header-z-index: var(--z-index-bar); /** Capa de barra fija */
   --app-header-height: calc(var(--app-header-content-height) + 2 * var(--app-header-padding-block)); /** Altura de la barra: compuesta, 56px */
   --app-header-bg: var(--color-background-light); /** Fondo */
   --app-header-border-width: var(--border-width-default); /** Borde inferior que la separa del contenido */
+  --app-header-border-color: var(--color-primary); /** Color del borde */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --app-header-border-color: var(--menu-surface-dark-separator-color); /** Borde — surface-dark */
   --app-header-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --app-header-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }

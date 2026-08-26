@@ -5,11 +5,11 @@
     "height":          { "$value": "calc({app-header.content-height} + 2 * {app-header.padding-block})", "$type": "dimension", "$description": "Altura de la barra: compuesta, 56px" },
     "bg":              { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo" },
     "border-width":    { "$value": "{border-width.default}", "$type": "dimension", "$description": "Borde inferior que la separa del contenido" },
-    "border-color":    { "$value": "{color.grey-light}",     "$type": "color",     "$description": "Color del borde" },
+    "border-color":    { "$value": "{color.primary}",     "$type": "color",     "$description": "Color del borde" },
     "padding-inline":  { "$value": "{spacing.4}",   "$type": "dimension", "$description": "Aire lateral" },
     "gap":             { "$value": "{spacing.3}",   "$type": "dimension", "$description": "Entre el botón de menú, el inicio y los controles del final" },
     "z-index":         { "$value": "{z-index.bar}", "$type": "number",    "$description": "Capa de barra fija" },
     "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo — surface-dark" },
-    "surface-dark-border-color": { "$value": "{menu.surface-dark-separator-color}", "$type": "color", "$description": "Borde — surface-dark" }
+    "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde — surface-dark" }
   }
 }

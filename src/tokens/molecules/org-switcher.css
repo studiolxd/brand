@@ -42,10 +42,10 @@
 [data-theme="dark"],
 html.dark {
   --org-switcher-trigger-hover-bg: rgba(0, 0, 0, 0); /** Fondo del trigger al hover — surface-dark, sin fondo (igual que en claro) */
-  --org-switcher-separator-color: var(--menu-surface-dark-separator-color); /** Color del separador — surface-dark */
   --org-switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --org-switcher-name-color: var(--color-text-on-dark); /** Color del nombre de la org — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
   --org-switcher-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
   --org-switcher-item-hover-color: var(--menu-surface-dark-item-hover-color); /** Texto de ítem al hover — surface-dark */
   --org-switcher-item-hover-bg: var(--menu-surface-dark-item-hover-bg); /** Fondo de ítem al hover — surface-dark */
+  --org-switcher-separator-color: var(--menu-surface-dark-separator-color); /** Color del separador — surface-dark */
 }

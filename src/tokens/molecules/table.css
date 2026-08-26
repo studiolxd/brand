@@ -8,14 +8,12 @@
   --table-font-family: var(--font-family-sans); /** Font family */
   --table-font-size: var(--font-size-2); /** 18px — Body default size */
   --table-line-height: var(--line-height-normal); /** Normal line height para celdas multilínea */
-  --table-border-color: var(--color-grey-light); /** Color de separadores de fila */
   --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
   --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */
   --table-header-hover-bg: var(--color-grey-lightest); /** Fondo en hover de columna sortable */
   --table-sort-icon-color: var(--color-grey-dark); /** Color del icono de sort inactivo */
   --table-cell-padding-block: var(--spacing-3); /** Padding block de celda */
   --table-cell-padding-inline: var(--spacing-3); /** Padding inline de celda */
-  --table-row-border-color: var(--color-grey-light); /** Color del separador entre filas */
   --table-row-hover-bg: var(--color-grey-lightest); /** Fondo de fila interactiva en hover */
   --table-footer-bg: var(--color-grey-lightest); /** Fondo del tfoot */
   --table-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de hover */
@@ -28,10 +26,12 @@
   --table-font-weight: var(--font-weight-default); /** Font weight base */
   --table-color: var(--color-text-on-light); /** Color de texto base */
   --table-border-width: var(--border-width-default); /** Grosor de separadores de fila */
+  --table-border-color: var(--color-primary); /** Color de separadores de fila */
   --table-header-font-weight: var(--font-weight-emphasis); /** Peso tipográfico del encabezado */
   --table-header-border-width: var(--border-width-default); /** Borde inferior del thead — más grueso que los separadores */
   --table-header-border-color: var(--color-text-on-light); /** Color del borde inferior del thead */
   --table-sort-icon-active-color: var(--color-primary); /** Color del icono de sort activo */
+  --table-row-border-color: var(--color-primary); /** Color del separador entre filas */
   --table-footer-border-width: var(--border-width-default); /** Borde superior del tfoot — mismo grosor que el del thead */
   --table-footer-border-color: var(--color-text-on-light); /** Color del borde superior del tfoot */
   --table-footer-font-weight: var(--font-weight-emphasis); /** Peso tipográfico de las celdas del footer */
@@ -43,15 +43,15 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --table-border-color: rgba(255, 255, 255, 0.15); /** Separadores de fila — surface-dark */
   --table-header-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo hover de columna sortable — surface-dark */
-  --table-row-border-color: rgba(255, 255, 255, 0.15); /** Separador entre filas — surface-dark */
   --table-row-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de fila en hover — surface-dark */
   --table-footer-bg: rgba(255, 255, 255, 0.04); /** Fondo del tfoot — surface-dark */
   --table-color: var(--color-text-on-dark); /** Color de texto base — surface-dark */
+  --table-border-color: var(--color-text-on-dark); /** Separadores de fila — surface-dark */
   --table-header-border-color: var(--color-text-on-dark); /** Borde inferior del thead — surface-dark */
   --table-sort-icon-color: var(--color-text-muted-on-dark); /** Icono de sort inactivo — surface-dark */
   --table-sort-icon-active-color: var(--color-text-on-dark); /** Icono de sort activo — surface-dark */
+  --table-row-border-color: var(--color-text-on-dark); /** Separador entre filas — surface-dark */
   --table-footer-border-color: var(--color-text-on-dark); /** Borde superior del tfoot — surface-dark */
   --table-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
 }

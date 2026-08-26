@@ -1,6 +1,6 @@
 {
   "file-upload": {
-    "border-color":                { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Borde del dropzone por defecto" },
+    "border-color":                { "$value": "{color.primary}",          "$type": "color",     "$description": "Borde del dropzone por defecto" },
     "border-style":                { "$value": "dashed",                      "$type": "string",    "$description": "Estilo de borde del dropzone" },
     "border-width":                { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde" },
     "border-radius":               { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio de esquinas del dropzone" },
@@ -28,7 +28,7 @@
     "list-margin-block-start":     { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Margen superior de la lista de archivos" },
 
     "item-bg":                     { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo de cada item" },
-    "item-border-color":           { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Borde de cada item" },
+    "item-border-color":           { "$value": "{color.primary}",          "$type": "color",     "$description": "Borde de cada item" },
     "item-border-width":           { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor de borde del item" },
     "item-border-radius":          { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio de esquinas del item" },
     "item-padding-block":          { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding vertical del item" },

@@ -15,7 +15,6 @@
   --calendar-planner-title-font-size: var(--font-size-2); /** Tamaño del título del mes */
   --calendar-planner-weekday-font-size: var(--font-size-1); /** Tamaño de las cabeceras de día de semana */
   --calendar-planner-weekday-padding-block: var(--spacing-2); /** Padding vertical de las cabeceras */
-  --calendar-planner-grid-border-color: var(--color-grey-light); /** Color de los bordes del grid */
   --calendar-planner-cell-padding-block: var(--spacing-2); /** Padding vertical de la celda */
   --calendar-planner-cell-padding-inline: var(--spacing-2); /** Padding horizontal de la celda */
   --calendar-planner-cell-outside-bg: var(--color-grey-lightest); /** Fondo de las celdas fuera del mes */
@@ -35,6 +34,7 @@
   --calendar-planner-title-color: var(--color-text-on-light); /** Color del título del mes */
   --calendar-planner-weekday-font-weight: var(--font-weight-emphasis); /** Peso de las cabeceras de día de semana */
   --calendar-planner-weekday-color: var(--color-text-muted-on-light); /** Color de las cabeceras de día de semana */
+  --calendar-planner-grid-border-color: var(--color-primary); /** Color de los bordes del grid */
   --calendar-planner-grid-border-width: var(--border-width-default); /** Grosor de los bordes del grid */
   --calendar-planner-cell-today-number-bg: var(--color-primary); /** Fondo del número del día de hoy */
   --calendar-planner-cell-today-number-color: var(--color-text-on-dark); /** Color del número del día de hoy */
@@ -50,7 +50,6 @@
 [data-theme="dark"],
 html.dark {
   --calendar-planner-nav-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover de navegación — surface-dark */
-  --calendar-planner-grid-border-color: rgba(255, 255, 255, 0.15); /** Borde del grid — surface-dark */
   --calendar-planner-cell-outside-bg: rgba(255, 255, 255, 0.04); /** Fondo de celdas fuera de mes — surface-dark */
   --calendar-planner-nav-disabled-color: var(--color-grey-light); /** Color deshabilitado de navegación — surface-dark */
   --calendar-planner-day-number-outside-color: var(--color-grey-light); /** Número fuera de mes — surface-dark */
@@ -58,6 +57,7 @@ html.dark {
   --calendar-planner-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring de navegación — surface-dark */
   --calendar-planner-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
   --calendar-planner-weekday-color: var(--color-text-muted-on-dark); /** Color de cabeceras de día — surface-dark */
+  --calendar-planner-grid-border-color: var(--color-text-on-dark); /** Borde del grid — surface-dark */
   --calendar-planner-cell-today-number-bg: var(--color-text-on-dark); /** Fondo del número de hoy — surface-dark */
   --calendar-planner-cell-today-number-color: var(--color-background-dark); /** Texto del número de hoy — surface-dark */
   --calendar-planner-day-number-color: var(--color-text-on-dark); /** Color del número de día — surface-dark */

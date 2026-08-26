@@ -16,7 +16,6 @@
   --menu-label-padding-block: var(--spacing-2); /** Padding vertical del rótulo de sección */
   --menu-label-padding-inline: var(--spacing-4); /** Padding horizontal del rótulo de sección */
   --menu-label-font-size: var(--font-size-1); /** Tamaño de texto del rótulo de sección */
-  --menu-separator-color: var(--color-grey-light); /** Color del separador */
   --menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
   --menu-z-index: var(--floating-panel-z-index); /** Capa z del panel flotante */
@@ -35,6 +34,7 @@
   --menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Color de texto de ítem destructivo al hover */
   --menu-label-font-weight: var(--font-weight-emphasis); /** Peso del rótulo de sección */
   --menu-label-color: var(--color-text-muted-on-light); /** Color del rótulo de sección */
+  --menu-separator-color: var(--color-primary); /** Color del separador */
   --menu-separator-height: var(--border-width-default); /** Alto del separador */
   --menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
@@ -48,10 +48,10 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --menu-separator-color: rgba(255, 255, 255, 0.15); /** Color del separador — surface-dark */
   --menu-item-color: var(--color-text-on-dark); /** Color de texto de ítems — surface-dark */
   --menu-item-hover-bg: var(--color-text-on-dark); /** Fondo hover de ítem — surface-dark */
   --menu-item-hover-color: var(--color-primary); /** Texto hover de ítem — surface-dark */
+  --menu-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
   --menu-label-color: var(--color-text-muted-on-dark); /** Color del rótulo de sección — surface-dark */
   --menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
   --menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo hover de ítem destructivo — surface-dark */

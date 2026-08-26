@@ -13,7 +13,6 @@
   --calendar-roster-nav-hover-bg: var(--color-grey-lightest); /** Fondo hover de los botones de navegación */
   --calendar-roster-nav-disabled-color: var(--color-grey-dark); /** Color deshabilitado */
   --calendar-roster-title-font-size: var(--font-size-2); /** Tamaño del título del mes */
-  --calendar-roster-border-color: var(--color-grey-light); /** Color de los bordes del grid */
   --calendar-roster-th-name-font-size: var(--font-size-1); /** Tamaño del encabezado de nombre */
   --calendar-roster-th-name-padding-block: var(--spacing-2); /** Padding vertical del encabezado de nombre */
   --calendar-roster-th-name-padding-inline: var(--spacing-3); /** Padding horizontal del encabezado de nombre */
@@ -39,6 +38,7 @@
   --calendar-roster-nav-radius: var(--border-radius-default); /** Radio del botón de navegación */
   --calendar-roster-title-font-weight: var(--font-weight-emphasis); /** Peso del título del mes */
   --calendar-roster-title-color: var(--color-text-on-light); /** Color del título del mes */
+  --calendar-roster-border-color: var(--color-primary); /** Color de los bordes del grid */
   --calendar-roster-border-width: var(--border-width-default); /** Grosor de los bordes del grid */
   --calendar-roster-th-name-font-weight: var(--font-weight-emphasis); /** Peso del encabezado de nombre */
   --calendar-roster-th-name-color: var(--color-text-muted-on-light); /** Color del encabezado de nombre */
@@ -60,13 +60,13 @@
 [data-theme="dark"],
 html.dark {
   --calendar-roster-nav-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover de navegación — surface-dark */
-  --calendar-roster-border-color: rgba(255, 255, 255, 0.15); /** Color de bordes del grid — surface-dark */
   --calendar-roster-cell-bg: rgba(0, 0, 0, 0); /** Fondo de celdas — surface-dark */
   --calendar-roster-cell-weekend-bg: rgba(255, 255, 255, 0.04); /** Fondo fin de semana — surface-dark */
   --calendar-roster-cell-holiday-bg: rgba(255, 255, 255, 0.08); /** Fondo festivo — surface-dark */
   --calendar-roster-nav-color: var(--color-text-on-dark); /** Color de navegación — surface-dark */
   --calendar-roster-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring de navegación — surface-dark */
   --calendar-roster-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
+  --calendar-roster-border-color: var(--color-text-on-dark); /** Color de bordes del grid — surface-dark */
   --calendar-roster-th-name-bg: var(--color-background-dark); /** Fondo columna de nombre — surface-dark */
   --calendar-roster-th-name-color: var(--color-text-muted-on-dark); /** Color columna de nombre — surface-dark */
   --calendar-roster-th-day-color: var(--color-text-on-dark); /** Color encabezado de día — surface-dark */

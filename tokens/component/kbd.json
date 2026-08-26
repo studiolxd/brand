@@ -3,7 +3,7 @@
     "min-size":       { "$value": "1.75rem",               "$type": "dimension", "$description": "Tamaño mínimo (28px) — mantiene las teclas de un solo carácter casi cuadradas" },
     "border-radius":  { "$value": "{border-radius.default}",    "$type": "dimension", "$description": "Esquinas suaves de keycap (4px)" },
     "border-width":   { "$value": "{border-width.default}",     "$type": "dimension", "$description": "Grosor del borde" },
-    "border-color":   { "$value": "{color.grey-light}",    "$type": "color",     "$description": "Borde del keycap" },
+    "border-color":   { "$value": "{color.primary}",    "$type": "color",     "$description": "Borde del keycap" },
     "bg":             { "$value": "{color.grey-lightest}", "$type": "color",     "$description": "Fondo del keycap" },
     "color":          { "$value": "{color.text.on-light}", "$type": "color",     "$description": "Color del símbolo de la tecla" },
     "shadow":         { "$value": "{shadow.default}",           "$type": "shadow",    "$description": "Sombra sutil que da profundidad de tecla física" },
@@ -25,6 +25,6 @@
     "lg-padding-inline": { "$value": "{spacing.4}",        "$type": "dimension", "$description": "Padding horizontal lg (16px)" },
     "surface-dark-bg":           { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo del keycap — surface-dark" },
     "surface-dark-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del símbolo — surface-dark" },
-    "surface-dark-border-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Borde del keycap — surface-dark" }
+    "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde del keycap — surface-dark" }
   }
 }

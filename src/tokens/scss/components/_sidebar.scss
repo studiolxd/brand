@@ -7,7 +7,7 @@ $lxd-sidebar-max-width: 24rem; // Ancho máximo desplegada (384px)
 $lxd-sidebar-rail-width: calc(2.5rem + 2 * 0.5rem); // Ancho del rail: un botón de icono md con su aire a cada lado (56px)
 $lxd-sidebar-bg: #ffffff; // Fondo
 $lxd-sidebar-border-width: 1px; // Borde que separa la sidebar del contenido
-$lxd-sidebar-border-color: #d0d0d0; // Color del borde
+$lxd-sidebar-border-color: #111e30; // Color del borde
 $lxd-sidebar-padding-inline: 0.5rem; // Aire lateral: el mismo a los dos lados en rail y desplegada, así los iconos no se mueven al cambiar de modo
 $lxd-sidebar-padding-block: 1rem; // Aire vertical de cabecera, panel y pie
 $lxd-sidebar-gap: 0.75rem; // Entre cabecera, panel y pie
@@ -22,6 +22,6 @@ $lxd-sidebar-backdrop-bg: #000000; // El velo del sistema
 $lxd-sidebar-backdrop-opacity: 0.6; // Opacidad del velo, la del sistema
 $lxd-sidebar-group-padding-block: 0.5rem; // Aire vertical de una sección del panel
 $lxd-sidebar-group-gap: 0.25rem; // Entre elementos de una sección
-$lxd-sidebar-separator-color: #d0d0d0; // Línea entre secciones
+$lxd-sidebar-separator-color: #111e30; // Línea entre secciones
 $lxd-sidebar-separator-height: 1px; // Grosor de la línea
 $lxd-sidebar-separator-margin-block: 0.5rem; // Aire de la línea

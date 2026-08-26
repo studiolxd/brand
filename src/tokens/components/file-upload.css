@@ -9,7 +9,6 @@
   --file-upload-disabled-opacity: 0.5; /** Opacidad cuando está deshabilitado */
   --file-upload-thumb-size: 2.5rem; /** Tamaño del thumbnail */
   --file-upload-progress-height: 0.375rem; /** Altura de la barra de progreso */
-  --file-upload-border-color: var(--color-grey-light); /** Borde del dropzone por defecto */
   --file-upload-bg: var(--color-grey-lightest); /** Fondo del dropzone */
   --file-upload-padding-block: var(--spacing-7); /** Padding vertical del dropzone */
   --file-upload-padding-inline: var(--spacing-5); /** Padding horizontal del dropzone */
@@ -21,7 +20,6 @@
   --file-upload-list-gap: var(--spacing-2); /** Espacio entre items de la lista */
   --file-upload-list-margin-block-start: var(--spacing-3); /** Margen superior de la lista de archivos */
   --file-upload-item-bg: var(--color-white); /** Fondo de cada item */
-  --file-upload-item-border-color: var(--color-grey-light); /** Borde de cada item */
   --file-upload-item-padding-block: var(--spacing-2); /** Padding vertical del item */
   --file-upload-item-padding-inline: var(--spacing-3); /** Padding horizontal del item */
   --file-upload-item-gap: var(--spacing-3); /** Espacio entre thumb, info y botón */
@@ -36,6 +34,7 @@
   --file-upload-progress-bg: var(--color-grey-light); /** Fondo del track de progreso */
   --file-upload-progress-transition-duration: var(--motion-duration-base); /** Duración de la transición del progreso */
   --file-upload-progress-transition-easing: var(--motion-easing-in-out); /** Easing de la transición del progreso */
+  --file-upload-border-color: var(--color-primary); /** Borde del dropzone por defecto */
   --file-upload-border-width: var(--border-width-default); /** Grosor del borde */
   --file-upload-border-radius: var(--border-radius-default); /** Radio de esquinas del dropzone */
   --file-upload-text-color: var(--color-text-on-light); /** Color del texto principal */
@@ -43,6 +42,7 @@
   --file-upload-icon-color: var(--color-text-on-light); /** Color del icono upload */
   --file-upload-drag-border-color: var(--color-primary); /** Borde cuando hay drag activo */
   --file-upload-error-border-color: var(--color-error-text-on-light); /** Borde en estado de error */
+  --file-upload-item-border-color: var(--color-primary); /** Borde de cada item */
   --file-upload-item-border-width: var(--border-width-default); /** Grosor de borde del item */
   --file-upload-item-border-radius: var(--border-radius-default); /** Radio de esquinas del item */
   --file-upload-item-name-font-weight: var(--font-weight-default); /** Peso del nombre de archivo */

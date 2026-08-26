@@ -58,7 +58,6 @@
 [data-theme="dark"],
 html.dark {
   --user-menu-trigger-hover-bg: rgba(0, 0, 0, 0); /** Fondo del trigger al hover — surface-dark, sin fondo (igual que en claro) */
-  --user-menu-separator-color: var(--menu-surface-dark-separator-color); /** Color del separador — surface-dark */
   --user-menu-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --user-menu-name-color: var(--color-text-on-dark); /** Color del nombre — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
   --user-menu-header-name-color: var(--color-text-on-dark); /** Color del nombre en la cabecera del dropdown — surface-dark */
@@ -68,4 +67,5 @@ html.dark {
   --user-menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover — surface-dark (fill universal; el texto hover hereda destructive-fill-text) */
   --user-menu-item-hover-bg: var(--menu-surface-dark-item-hover-bg); /** Fondo de ítem al hover — surface-dark */
   --user-menu-item-hover-color: var(--menu-surface-dark-item-hover-color); /** Color de ítem al hover — surface-dark */
+  --user-menu-separator-color: var(--menu-surface-dark-separator-color); /** Color del separador — surface-dark */
 }
