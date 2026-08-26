@@ -104,6 +104,8 @@ import { Button } from '@studiolxd/brand';
 </Button>
 ```
 
+**Solo desde componentes cliente.** `Button` es un componente cliente y `render` es un elemento de React: si se pasa desde un Server Component, el elemento no sobrevive al cruce servidor→cliente y el botón falla en tiempo de ejecución («Element type is invalid»). En un Server Component usa `href` (renderiza un `<a>`); `render={<Link />}` va en componentes marcados con `'use client'`.
+
 En Storybook se muestra con un `<a>` como stand-in del componente `Link` del router:
 
 <Canvas of={ButtonStories.ConRender} />
