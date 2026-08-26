@@ -267,3 +267,18 @@ Al subir el pin, los `AppShell.tsx` de hub, bricks y lmsmarketplace cambian:
 - Entradas de primer nivel del `SidebarNav` con `icon` para que el rail tenga
   glifo (sin él, la inicial).
 - [ ] `Logo`: en rail se oculta; valorar una marca cuadrada para el rail.
+
+## Integración v16 (2026-08-26) — hecho
+
+Suite (10 apps) y web en `brand#v16.0.5`; typecheck, lint y tests en verde
+(único fallo: `bricks zip-parser` zip-bomb, flaky bajo carga, pasa aislado;
+ajeno al DS). Parches sacados por la integración: v16.0.1 (onCheckedChange
+1 arg; etiquetas de Select a través de wrappers), v16.0.2/3 (Switcher y
+Checkbox como <button> nativo con id), v16.0.4 (exports container/site-nav/
+site-header), v16.0.5 (Base UI externo del build).
+
+- [ ] Web: `SiteNav` con un único grupo cuya cabecera repite «Navegación
+      principal»; decidir estructura real del índice (secciones) con contenido.
+- [ ] Web: sin tema oscuro todavía; cuando lo haya, `ThemeSwitcher` en `settings`.
+- [ ] Apps: el `NotificationButton` no se usa aún (el hub lleva la campana en
+      el menú de usuario); cablearlo en `notifications` del shell.
