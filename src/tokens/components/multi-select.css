@@ -7,15 +7,15 @@
   --multi-select-focus-ring-offset: -3px; /** Offset del anillo de foco (negativo = inset) */
   --multi-select-content-max-height: var(--available-height); /** Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI) */
   --multi-select-border-style: var(--select-border-style); /** Estilo del borde */
+  --multi-select-height: var(--size-component-md); /** Altura mínima del trigger: la talla md del sistema. Crece solo si las pills ocupan más de una línea */
+  --multi-select-sm-height: var(--size-component-sm); /** Altura mínima del trigger — sm */
+  --multi-select-lg-height: var(--size-component-lg); /** Altura mínima del trigger — lg */
   --multi-select-pill-color: var(--color-white); /** Texto de la pill */
   --multi-select-pill-padding-block: var(--spacing-1); /** Padding block de la pill */
   --multi-select-pill-padding-inline: var(--spacing-2); /** Padding inline de la pill */
   --multi-select-pill-gap: var(--spacing-1); /** Separación entre texto y botón × en la pill */
   --multi-select-pill-font-size: var(--font-size-1); /** Tamaño de fuente de la pill */
   --multi-select-values-gap: var(--spacing-1); /** Separación entre pills */
-  --multi-select-sm-padding-block: var(--spacing-1); /** Padding block del trigger — variante sm */
-  --multi-select-lg-padding-block: var(--spacing-5); /** Padding block del trigger — variante lg */
-  --multi-select-padding-block: var(--control-padding-block); /** Padding block del trigger */
   --multi-select-font-family: var(--select-font-family); /** Familia tipográfica */
   --multi-select-font-size: var(--select-font-size); /** Tamaño de fuente */
   --multi-select-placeholder-color: var(--color-text-placeholder-on-light); /** Color del placeholder */

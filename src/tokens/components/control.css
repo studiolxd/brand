@@ -6,14 +6,14 @@
   --control-border-style: solid; /** Estilo del borde */
   --control-cursor: text; /** Cursor por defecto */
   --control-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
-  --control-height: var(--size-component-md); /** Altura del control */
+  --control-height: var(--size-component-md); /** Altura del control de una línea: la talla md del sistema */
   --control-font-family: var(--font-family-sans); /** Familia tipográfica */
   --control-font-size: var(--font-size-2); /** Tamaño de fuente */
   --control-line-height: var(--line-height-none); /** Interlineado */
   --control-transition-duration: var(--motion-duration-fast); /** Duración de la transición */
   --control-transition-easing: var(--motion-easing-default); /** Curva de animación */
   --control-padding-inline: var(--spacing-4); /** Padding inline — compartido por controles y elementos de formulario */
-  --control-padding-block: var(--spacing-4); /** Padding block — compartido por controles y elementos de formulario */
+  --control-padding-block: var(--spacing-4); /** Padding block — solo para lo multilínea (Textarea) y para el aire de las filas de formulario. Los controles de una línea fijan su altura a la talla (`height`) con padding vertical 0 */
   --control-border-radius: var(--border-radius-default); /** Radio del borde */
   --control-border-width: var(--border-width-default); /** Grosor del borde */
   --control-font-weight: var(--font-weight-default); /** Peso tipográfico */

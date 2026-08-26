@@ -1,11 +1,13 @@
 /* ─── Trigger ────────────────────────────────────────────────────── */
 .date-picker__trigger {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
+  block-size: var(--input-height);
   text-align: start;
   cursor: pointer;
 
-  padding-block: var(--input-padding-block);
+  padding-block: 0;
   padding-inline: var(--input-padding-inline);
 
   font-family: var(--input-font-family);
@@ -55,15 +57,15 @@
   border-color: var(--input-disabled-border-color);
 }
 
-/* ─── Size variants ──────────────────────────────────────────────── */
+/* ─── Tallas — cambian la altura, no el padding vertical ─────────── */
 .date-picker__trigger--sm {
-  padding-block: var(--input-sm-padding-block);
+  --input-height: var(--input-sm-height);
   padding-inline: var(--input-sm-padding-inline);
   font-size: var(--input-sm-font-size);
 }
 
 .date-picker__trigger--lg {
-  padding-block: var(--input-lg-padding-block);
+  --input-height: var(--input-lg-height);
   padding-inline: var(--input-lg-padding-inline);
   font-size: var(--input-lg-font-size);
 }

@@ -5,7 +5,9 @@ $lxd-multi-select-border-radius: 0px; // Radio del borde del trigger
 $lxd-multi-select-border-width: 1px; // Grosor del borde
 $lxd-multi-select-border-style: solid; // Estilo del borde
 $lxd-multi-select-border-color: #111e30; // Color del borde
-$lxd-multi-select-padding-block: 1rem; // Padding block del trigger
+$lxd-multi-select-height: 2.5rem; // Altura mínima del trigger: la talla md del sistema. Crece solo si las pills ocupan más de una línea
+$lxd-multi-select-sm-height: 2rem; // Altura mínima del trigger — sm
+$lxd-multi-select-lg-height: 3rem; // Altura mínima del trigger — lg
 $lxd-multi-select-padding-inline: 1rem; // Padding inline del trigger
 $lxd-multi-select-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
 $lxd-multi-select-font-size: 1rem; // Tamaño de fuente
@@ -35,10 +37,8 @@ $lxd-multi-select-pill-gap: 0.25rem; // Separación entre texto y botón × en l
 $lxd-multi-select-pill-font-size: 0.875rem; // Tamaño de fuente de la pill
 $lxd-multi-select-values-gap: 0.25rem; // Separación entre pills
 $lxd-multi-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm
-$lxd-multi-select-sm-padding-block: 0.25rem; // Padding block del trigger — variante sm
 $lxd-multi-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
 $lxd-multi-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
 $lxd-multi-select-lg-font-size: 1.25rem; // Tamaño de fuente — variante lg
-$lxd-multi-select-lg-padding-block: 1.5rem; // Padding block del trigger — variante lg
 $lxd-multi-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
 $lxd-multi-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg

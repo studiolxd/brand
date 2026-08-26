@@ -169,3 +169,25 @@ export const CustomToggleLabels: Story = {
     await expect(canvas.getByRole('button', { name: 'Hide password' })).toBeInTheDocument();
   },
 };
+
+/** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
+export const ContratoTalla: Story = {
+  name: 'Test — talla del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <div data-t="sm"><PasswordField size="sm" label="sm" /></div>
+      <div data-t="md"><PasswordField size="md" label="md" /></div>
+      <div data-t="lg"><PasswordField size="lg" label="lg" /></div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const alto = (sel: string) =>
+      Math.round(canvasElement.querySelector(sel)!.getBoundingClientRect().height);
+    // el campo mide la talla y el botón de ver/ocultar es cuadrado a esa misma talla
+    for (const [t, h] of [['sm', 32], ['md', 40], ['lg', 48]] as const) {
+      await expect(alto(`[data-t="${t}"] .input`)).toBe(h);
+      await expect(alto(`[data-t="${t}"] .password-field__toggle`)).toBe(h);
+    }
+  },
+};

@@ -67,3 +67,23 @@ export const Etiquetas: Story = {
     await expect(en.queryByLabelText('País')).toBeNull();
   },
 };
+
+/** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
+export const ContratoTalla: Story = {
+  name: 'Test — talla del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <div data-t="sm"><InputPhone size="sm" defaultCountry="ES" /></div>
+      <div data-t="md"><InputPhone size="md" defaultCountry="ES" /></div>
+      <div data-t="lg"><InputPhone size="lg" defaultCountry="ES" /></div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const alto = (sel: string) =>
+      Math.round(canvasElement.querySelector(sel)!.getBoundingClientRect().height);
+    await expect(alto('[data-t="sm"] .input-phone')).toBe(32);
+    await expect(alto('[data-t="md"] .input-phone')).toBe(40);
+    await expect(alto('[data-t="lg"] .input-phone')).toBe(48);
+  },
+};

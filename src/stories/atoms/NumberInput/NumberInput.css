@@ -1,6 +1,7 @@
 .number-input {
   display: inline-flex;
   align-items: stretch;
+  block-size: var(--number-input-height);
   border-radius: var(--number-input-border-radius);
   border-width: var(--number-input-border-width);
   border-style: var(--number-input-border-style);
@@ -24,8 +25,8 @@
 .number-input__field {
   flex: 1;
   min-width: 0;
-  padding-block: var(--number-input-padding-block);
-  padding-inline: var(--number-input-padding-block); /* mismo token — padding simétrico */
+  padding-block: 0;
+  padding-inline: var(--number-input-padding-inline);
   border: none;
   background-color: transparent;
   color: var(--number-input-color);
@@ -112,13 +113,15 @@
   color: var(--number-input-disabled-btn-color);
 }
 
-/* Tamaños */
+/* Tallas — cambian la altura y el aire horizontal, nunca el padding vertical */
 .number-input.number-input--sm {
-  --number-input-padding-block: var(--number-input-sm-padding-block);
+  --number-input-height: var(--number-input-sm-height);
+  --number-input-padding-inline: var(--number-input-sm-padding-inline);
   --number-input-font-size: var(--number-input-sm-font-size);
 }
 
 .number-input.number-input--lg {
-  --number-input-padding-block: var(--number-input-lg-padding-block);
+  --number-input-height: var(--number-input-lg-height);
+  --number-input-padding-inline: var(--number-input-lg-padding-inline);
   --number-input-font-size: var(--number-input-lg-font-size);
 }

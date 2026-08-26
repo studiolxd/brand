@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 import { MultiSelect } from './MultiSelect';
 
 const options = [
@@ -75,4 +76,25 @@ export const SmSize: Story = {
 export const LgSize: Story = {
   name: 'Size lg',
   args: { size: 'lg', defaultValue: ['design', 'dev'] },
+};
+
+/** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
+export const ContratoTalla: Story = {
+  name: 'Test — talla del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <div data-t="sm"><MultiSelect size="sm" options={options} aria-label="sm" /></div>
+      <div data-t="md"><MultiSelect size="md" options={options} aria-label="md" /></div>
+      <div data-t="lg"><MultiSelect size="lg" options={options} aria-label="lg" /></div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const alto = (sel: string) =>
+      Math.round(canvasElement.querySelector(sel)!.getBoundingClientRect().height);
+    // sin pills, el trigger mide exactamente la talla; con varias líneas de pills crece
+    await expect(alto('[data-t="sm"] .multi-select')).toBe(32);
+    await expect(alto('[data-t="md"] .multi-select')).toBe(40);
+    await expect(alto('[data-t="lg"] .multi-select')).toBe(48);
+  },
 };
