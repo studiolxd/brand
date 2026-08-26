@@ -43,17 +43,17 @@
   background-color: var(--site-header-panel-bg);
   padding-block: var(--site-header-panel-padding-block);
   visibility: hidden;
-  opacity: 0;
-  transform: translateY(calc(-1 * var(--spacing-3)));
+  /* Solo desliza, sin fundido: una cortina que baja desde la barra. Se recorta
+     en vez de trasladarse porque la barra está bajo el panel en la pila de
+     capas y un translateY(-100%) pasaría por encima de ella. */
+  clip-path: inset(0 0 100% 0);
   transition:
-    opacity var(--site-header-panel-transition-duration) var(--site-header-panel-transition-easing),
-    transform var(--site-header-panel-transition-duration) var(--site-header-panel-transition-easing),
+    clip-path var(--site-header-panel-transition-duration) var(--site-header-panel-transition-easing),
     visibility 0s linear var(--site-header-panel-transition-duration);
 }
 .site-header__panel.site-header__panel--open {
   visibility: visible;
-  opacity: 1;
-  transform: none;
+  clip-path: inset(0);
   transition-delay: 0s;
 }
 
