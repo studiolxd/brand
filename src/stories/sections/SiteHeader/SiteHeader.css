@@ -96,6 +96,10 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  /* El Container mide 100%: con margen a los lados desbordaría. Aquí lo
+     dimensiona el flex del panel, no el ancho. */
+  inline-size: auto;
+  min-block-size: 0;
   margin: var(--site-header-panel-frame-margin);
   border: var(--site-header-panel-frame-border-width) solid var(--site-header-panel-frame-border-color);
   padding-block: var(--site-header-panel-padding-block) var(--site-header-panel-padding-block-end);

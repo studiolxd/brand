@@ -1,7 +1,3 @@
-.legal-footer {
-  border-block-start: var(--legal-footer-border-width) solid var(--legal-footer-border-color);
-}
-
 .legal-footer__inner {
   display: flex;
   flex-direction: column;
