@@ -1,6 +1,5 @@
 {
   "language-switcher": {
-    "code-font-size":      { "$value": "{font-size.1}",           "$type": "dimension", "$description": "El código de idioma en la barra (ES, EN)" },
     "code-font-weight":    { "$value": "{font-weight.emphasis}",  "$type": "number",    "$description": "El código: es una acción" },
     "code-letter-spacing": { "$value": "{letter-spacing.wide}",   "$type": "dimension", "$description": "El código, en mayúsculas" },
     "list-gap":            { "$value": "{spacing.4}",             "$type": "dimension", "$description": "Separación entre idiomas en la lista desplegada" },
