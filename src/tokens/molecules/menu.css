@@ -10,6 +10,8 @@
   --menu-item-padding-inline: var(--spacing-4); /** Padding horizontal de cada ítem */
   --menu-item-icon-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --menu-item-icon-size: var(--font-size-4); /** Talla del icono y del glifo de radio */
+  --menu-sm-item-icon-size: var(--icon-size-sm); /** Talla del icono de ítem — talla sm (16px) */
+  --menu-lg-item-icon-size: var(--font-size-4); /** Talla del icono de ítem — talla lg (24px, la base: el ítem ya es grande) */
   --menu-item-font-family: var(--font-family-sans); /** Tipografía de ítems */
   --menu-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
   --menu-item-line-height: var(--line-height-snug); /** Interlineado de ítems */

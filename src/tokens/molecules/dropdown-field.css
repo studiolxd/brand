@@ -9,6 +9,9 @@
   --dropdown-field-content-gap: var(--spacing-2); /** Entre el contenido del control y el chevron */
   --dropdown-field-height: var(--control-height); /** El control mide la talla del sistema (md) */
   --dropdown-field-sm-font-size: var(--select-sm-font-size); /** Cuerpo — sm (el del Select) */
+  --dropdown-field-value-icon-size: var(--menu-item-icon-size); /** Icono dentro del control: la misma talla que en las opciones del menú, para que plegado y desplegado casen */
+  --dropdown-field-sm-value-icon-size: var(--menu-sm-item-icon-size); /** Icono dentro del control — sm */
+  --dropdown-field-lg-value-icon-size: var(--menu-lg-item-icon-size); /** Icono dentro del control — lg */
   --dropdown-field-lg-font-size: var(--select-lg-font-size); /** Cuerpo — lg (el del Select) */
   --dropdown-field-sm-padding-inline: var(--select-sm-padding-inline); /** Padding inline — sm */
   --dropdown-field-lg-padding-inline: var(--select-lg-padding-inline); /** Padding inline — lg */

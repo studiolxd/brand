@@ -12,6 +12,8 @@
     "item-padding-inline": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Padding horizontal de cada ítem" },
     "item-icon-gap":       { "$value": "{spacing.2}",       "$type": "dimension", "$description": "Gap entre icono y texto del ítem" },
     "item-icon-size":      { "$value": "{font-size.4}",                      "$type": "dimension", "$description": "Talla del icono y del glifo de radio" },
+    "sm-item-icon-size":   { "$value": "{icon.size-sm}",                     "$type": "dimension", "$description": "Talla del icono de ítem — talla sm (16px)" },
+    "lg-item-icon-size":   { "$value": "{font-size.4}",                      "$type": "dimension", "$description": "Talla del icono de ítem — talla lg (24px, la base: el ítem ya es grande)" },
     "item-border-radius":  { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio de cada ítem" },
     "item-font-family":    { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Tipografía de ítems" },
     "item-font-size":      { "$value": "{font-size.2}",      "$type": "dimension", "$description": "Tamaño de texto de ítems" },

@@ -115,7 +115,15 @@
   font-size: var(--menu-sm-item-font-size);
   padding-block: var(--menu-sm-item-padding-block);
 }
+.menu__content--sm .menu__item svg {
+  width: var(--menu-sm-item-icon-size);
+  height: var(--menu-sm-item-icon-size);
+}
 .menu__content--lg .menu__item {
   font-size: var(--menu-lg-item-font-size);
   padding-block: var(--menu-lg-item-padding-block);
+}
+.menu__content--lg .menu__item svg {
+  width: var(--menu-lg-item-icon-size);
+  height: var(--menu-lg-item-icon-size);
 }

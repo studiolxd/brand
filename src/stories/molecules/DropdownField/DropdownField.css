@@ -61,6 +61,21 @@
   align-items: center;
   gap: var(--dropdown-field-content-gap);
 }
+/* El icono del valor mide lo mismo que en las opciones del menú (por talla),
+   para que la opción elegida se vea igual plegada que desplegada. */
+.dropdown-field__value .icon {
+  flex-shrink: 0;
+  width: var(--dropdown-field-value-icon-size);
+  height: var(--dropdown-field-value-icon-size);
+}
+.dropdown-field--sm .dropdown-field__value .icon {
+  width: var(--dropdown-field-sm-value-icon-size);
+  height: var(--dropdown-field-sm-value-icon-size);
+}
+.dropdown-field--lg .dropdown-field__value .icon {
+  width: var(--dropdown-field-lg-value-icon-size);
+  height: var(--dropdown-field-lg-value-icon-size);
+}
 
 .dropdown-field__icon {
   flex-shrink: 0;

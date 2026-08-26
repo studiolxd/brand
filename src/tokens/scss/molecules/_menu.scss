@@ -13,6 +13,8 @@ $lxd-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem
 $lxd-menu-item-padding-inline: 1rem; // Padding horizontal de cada ítem
 $lxd-menu-item-icon-gap: 0.5rem; // Gap entre icono y texto del ítem
 $lxd-menu-item-icon-size: 1.5rem; // Talla del icono y del glifo de radio
+$lxd-menu-sm-item-icon-size: 16px; // Talla del icono de ítem — talla sm (16px)
+$lxd-menu-lg-item-icon-size: 1.5rem; // Talla del icono de ítem — talla lg (24px, la base: el ítem ya es grande)
 $lxd-menu-item-border-radius: 0px; // Radio de cada ítem
 $lxd-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de ítems
 $lxd-menu-item-font-size: 1rem; // Tamaño de texto de ítems
