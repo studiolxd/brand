@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v17.0.1
+
+### Corregido
+
+- Paneles flotantes (menús, desplegables, popover, tooltip) sobre superficie
+  oscura: borde blanco (`text.on-dark`), como el control que los abre; era un
+  gris translúcido.
+
 ## v17.0.0
 
 ### BREAKING

@@ -46,9 +46,9 @@ html.dark {
   --app-launcher-trigger-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo del trigger al hover — surface-dark */
   --app-launcher-tile-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de tile al hover — surface-dark */
   --app-launcher-tile-active-bg: rgba(255, 255, 255, 0.08); /** Fondo de tile de app actual — surface-dark */
-  --app-launcher-content-border-color: var(--floating-panel-surface-dark-border-color); /** Borde del panel — surface-dark */
   --app-launcher-trigger-color: var(--color-text-on-dark); /** Icono de rejilla — surface-dark */
   --app-launcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --app-launcher-tile-name-color: var(--color-text-on-dark); /** Nombre de app — surface-dark */
   --app-launcher-content-bg: var(--floating-panel-surface-dark-bg); /** Fondo del panel — surface-dark */
+  --app-launcher-content-border-color: var(--floating-panel-surface-dark-border-color); /** Borde del panel — surface-dark */
 }

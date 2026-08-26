@@ -16,6 +16,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --floating-panel-border-color: rgba(255, 255, 255, 0.15); /** Borde — surface-dark */
   --floating-panel-bg: var(--color-background-dark); /** Fondo — surface-dark */
+  --floating-panel-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }
