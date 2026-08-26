@@ -225,6 +225,10 @@
       "types": "./dist/_types/sections/AppRoot/AppRoot.d.ts",
       "import": "./dist/app-root.js"
     },
+    "./site-shell": {
+      "types": "./dist/_types/sections/SiteShell/SiteShell.d.ts",
+      "import": "./dist/site-shell.js"
+    },
     "./legal-footer": {
       "types": "./dist/_types/sections/LegalFooter/LegalFooter.d.ts",
       "import": "./dist/legal-footer.js"

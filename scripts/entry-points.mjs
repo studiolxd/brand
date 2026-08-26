@@ -107,6 +107,7 @@ export const entryPoints = {
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
   'site-header':         'src/stories/sections/SiteHeader/SiteHeader.tsx',
   'app-root':            'src/stories/sections/AppRoot/AppRoot.tsx',
+  'site-shell':          'src/stories/sections/SiteShell/SiteShell.tsx',
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
   // Organisms
   'login-form':          'src/stories/organisms/LoginForm/LoginForm.tsx',

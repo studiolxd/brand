@@ -1,0 +1,19 @@
+/* Cabecera · contenido · pie en columna, al menos tan alto como la pantalla:
+   el contenido crece y empuja el pie al borde inferior; si sobra, scroll de
+   toda la página (el documento, no un contenedor interno). */
+.site-shell {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+}
+
+.site-shell__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El `main` del producto ocupa todo el hueco, para que sus fondos lleguen al pie. */
+.site-shell__main > * {
+  flex: 1;
+}

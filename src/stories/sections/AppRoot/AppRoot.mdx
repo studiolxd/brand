@@ -17,6 +17,10 @@ El salto debe ser el primer elemento enfocable de la página y debe existir exac
 
 Un destino enfocable: el contenido principal con `id="main-content"` y `tabIndex={-1}` (un `Container as="main"` en la web; el `main` del `AppShell` en las aplicaciones lo lleva ya). `skipHref` lo cambia si el producto usa otro id; `skipLabel` lo traduce.
 
+## Y el marco de la página
+
+`AppRoot` no pinta nodo: el marco que coloca cabecera, contenido y pie —con la altura mínima de la pantalla y el pie abajo— es `SiteShell` en las webs y `AppShell` en las aplicaciones.
+
 ## Props
 
 <ArgTypes of={AppRootStories} />

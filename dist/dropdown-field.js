@@ -16,6 +16,7 @@ function a({ id: a, label: o, labelHidden: s = !1, "aria-label": c, items: l, va
 		children: [o && /* @__PURE__ */ r(t, {
 			htmlFor: a,
 			hidden: s,
+			size: m,
 			children: o
 		}), /* @__PURE__ */ r(n, {
 			align: h,

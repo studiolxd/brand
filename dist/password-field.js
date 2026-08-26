@@ -15,6 +15,7 @@ var l = o(function({ label: o, labelHidden: l = !0, error: u = !1, errorMessage:
 			o && /* @__PURE__ */ i(r, {
 				htmlFor: C,
 				hidden: l,
+				size: p,
 				children: o
 			}),
 			/* @__PURE__ */ a("div", {

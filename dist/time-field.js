@@ -12,6 +12,7 @@ function i({ id: i, label: a, labelHidden: o = !0, value: s, onChange: c, step: 
 			/* @__PURE__ */ n(e, {
 				htmlFor: i,
 				hidden: o,
+				size: u,
 				children: a
 			}),
 			/* @__PURE__ */ n(t, {

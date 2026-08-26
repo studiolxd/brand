@@ -22,6 +22,7 @@ function s({ id: s, label: c, labelHidden: l = !1, options: u, value: d, default
 			/* @__PURE__ */ n(e, {
 				htmlFor: s,
 				hidden: l,
+				size: h,
 				children: c
 			}),
 			/* @__PURE__ */ n(t, {

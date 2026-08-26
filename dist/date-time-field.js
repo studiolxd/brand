@@ -32,6 +32,7 @@ function c({ id: c, label: l, labelHidden: u = !0, value: d, onChange: f, placeh
 			/* @__PURE__ */ r(e, {
 				htmlFor: T,
 				hidden: u,
+				size: v,
 				children: l
 			}),
 			/* @__PURE__ */ i("div", {

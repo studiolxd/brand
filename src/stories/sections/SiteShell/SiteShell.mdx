@@ -1,0 +1,24 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SiteShellStories from "./SiteShell.stories";
+
+<Meta of={SiteShellStories} />
+
+# SiteShell
+
+El marco de una página pública: **cabecera, contenido y pie en columna, al menos tan alto como la pantalla**. Con poco contenido el pie queda pegado al borde inferior; con mucho, la página entera hace scroll y el pie va al final del documento. Es la norma del sistema —ningún producto escribe CSS propio para sujetar el pie— y va en el layout que pinta cabecera y pie, dentro de `AppRoot`.
+
+<Canvas of={SiteShellStories.PocoContenido} />
+
+## Qué lleva
+
+`header` y `footer` son ranuras (`SiteHeader`, `LegalFooter`, o los del producto); `children` es el contenido —el `main` con `id="main-content"` y `tabIndex={-1}`, que es el destino del salto de `AppRoot`—. El `main` del producto ocupa todo el hueco, así que sus fondos llegan hasta el pie.
+
+<Canvas of={SiteShellStories.MuchoContenido} />
+
+## Cuándo no
+
+Las aplicaciones con barra y sidebar usan `AppShell`, que fija la altura a la pantalla y hace scroll dentro del contenido. `SiteShell` es lo contrario: el scroll es el del documento, como corresponde a una web.
+
+## Props
+
+<ArgTypes of={SiteShellStories} />
