@@ -16,7 +16,7 @@ const meta: Meta<typeof MenuButton> = {
   argTypes: {
     isOpen: { control: { type: 'boolean' } },
     label: { control: { type: 'text' } },
-    size: { control: { type: 'select' }, options: ['sm', 'md'] },
+    size: { control: { type: 'select' }, options: ['sm', 'md', 'lg'] },
   },
   args: { isOpen: false, label: 'Menú', size: 'md' },
   render: (args) => <Interactivo {...args} />,
@@ -33,6 +33,9 @@ export const Abierto: Story = { args: { isOpen: true } };
 
 /** Talla compacta, para barras de 32px. */
 export const Compacto: Story = { args: { size: 'sm' } };
+
+/** La cabecera del sitio: 48px con el glifo a 48. */
+export const Grande: Story = { args: { size: 'lg' } };
 
 /** Sobre superficie oscura las barras pasan a claro por tokens. */
 export const SuperficieOscura: Story = {

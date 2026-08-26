@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Container, type ContainerWidth } from '../../atoms/Container/Container';
-import { Logo } from '../../atoms/Logo/Logo';
+import { Logo, type LogoSize } from '../../atoms/Logo/Logo';
 import { MenuButton } from '../../atoms/MenuButton/MenuButton';
 import './SiteHeader.css';
 
@@ -26,8 +26,12 @@ export interface SiteHeaderProps {
   menuLabel?: string;
   /** aria-label del botón de menú cuando está abierto («Cerrar menú»). */
   menuCloseLabel?: string;
-  /** La marca. Por defecto el `Logo` de Studio LXD; un producto de la suite pone la suya. */
+  /** La marca. Por defecto el `Logo` de Studio LXD a `logoSize`; un producto de la suite pone la suya. */
   logo?: ReactNode;
+  /** Talla del logotipo por defecto. `xl` (64px): la cabecera es el sitio de la marca. */
+  logoSize?: LogoSize;
+  /** Talla del botón de menú. `lg` (48px) acompaña al logotipo grande. */
+  menuButtonSize?: 'sm' | 'md' | 'lg';
   /**
    * Enlace del logotipo para el router del producto. Recibe `href`, `className`,
    * `aria-label` y `children`, y debe reenviarlos todos.
@@ -64,7 +68,9 @@ export function SiteHeader({
   logoLabel = 'Studio LXD — ir al inicio',
   menuLabel = 'Menú de navegación',
   menuCloseLabel,
-  logo = <Logo />,
+  logoSize = 'xl',
+  logo = <Logo size={logoSize} />,
+  menuButtonSize = 'lg',
   renderLogoLink = defaultRenderLogoLink,
   width = 'xl',
   open,
@@ -128,6 +134,7 @@ export function SiteHeader({
             onClick={() => setOpen(!isOpen)}
             label={menuLabel}
             closeLabel={menuCloseLabel}
+            size={menuButtonSize}
             aria-controls={panelId}
           />
         )}

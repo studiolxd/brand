@@ -2,6 +2,7 @@
   "menu-button": {
     "size-sm":            { "$value": "{size-component.sm}",   "$type": "dimension", "$description": "Lado del botón en talla sm" },
     "size-md":            { "$value": "{size-component.md}",   "$type": "dimension", "$description": "Lado del botón en talla md (por defecto)" },
+    "size-lg":            { "$value": "{size-component.lg}",   "$type": "dimension", "$description": "Lado del botón en talla lg: la cabecera del sitio, con el glifo a 48px" },
     "color":              { "$value": "{color.text.on-light}", "$type": "color",     "$description": "Color del glifo" },
     "transition-duration":{ "$value": "{motion.duration.base}","$type": "number",    "$description": "Duración del paso de barras a aspa" },
     "transition-easing":  { "$value": "{motion.easing.in-out}","$type": "string",    "$description": "Curva del paso de barras a aspa: movimiento" },

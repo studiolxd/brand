@@ -1,7 +1,8 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-site-header-height: calc(2.5rem + 2 * 0.5rem); // Alto de la barra — el mismo que el chrome de aplicación, para que ambas superficies coincidan
+$lxd-site-header-content-height: 64px; // Lo más alto que lleva la barra: el logotipo a talla xl (64px)
+$lxd-site-header-height: calc(64px + 2 * 0.5rem); // Alto de la barra: el logotipo más el aire del sistema arriba y abajo (80px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan
 $lxd-site-header-bg: #ffffff; // Fondo de la barra
 $lxd-site-header-gap: 0.75rem; // Separación entre logo y controles
 $lxd-site-header-z-index: 100; // Capa z — sobre el contenido, bajo los paneles flotantes

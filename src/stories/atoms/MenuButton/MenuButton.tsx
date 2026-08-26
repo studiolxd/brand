@@ -9,8 +9,8 @@ export interface MenuButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
   label?: string;
   /** Texto accesible cuando el menú está abierto («Cerrar menú»). Sin él, se usa `label` con `aria-expanded`. */
   closeLabel?: string;
-  /** Talla del botón: un cuadrado de 32 o 40px. */
-  size?: 'sm' | 'md';
+  /** Talla del botón: un cuadrado de 32, 40 o 48px. En `lg` el glifo mide 48px. */
+  size?: 'sm' | 'md' | 'lg';
 }
 
 /**
@@ -25,7 +25,7 @@ export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(functio
   const classes = ['menu-button', `menu-button--${size}`, className].filter(Boolean).join(' ');
   return (
     <button ref={ref} type="button" className={classes} aria-label={isOpen && closeLabel ? closeLabel : label} aria-expanded={isOpen} {...rest}>
-      <Icon name="menu" size="md" className="menu-button__icon" />
+      <Icon name="menu" size={size === 'lg' ? 'lg' : 'md'} className="menu-button__icon" />
     </button>
   );
 });

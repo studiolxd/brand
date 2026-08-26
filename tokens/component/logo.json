@@ -3,6 +3,7 @@
     "height-sm": { "$value": "{size-component.sm}", "$type": "dimension", "$description": "Alto del logotipo en barras compactas (Sidebar). El ancho sale de la proporción del trazado" },
     "height-md": { "$value": "{size-component.md}", "$type": "dimension", "$description": "Alto por defecto: cabeceras y formularios de acceso" },
     "height-lg": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Alto destacado: pie de página" },
+    "height-xl": { "$value": "{icon.size-xl}", "$type": "dimension", "$description": "Alto de marca: la cabecera del sitio. Es la talla ilustrativa de la escala de iconos (64px), no una talla de control" },
     "color":     { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color del trazado sobre superficie clara" },
     "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del trazado — surface-dark" }
   }

@@ -7,8 +7,8 @@ export interface MenuButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
     label?: string;
     /** Texto accesible cuando el menú está abierto («Cerrar menú»). Sin él, se usa `label` con `aria-expanded`. */
     closeLabel?: string;
-    /** Talla del botón: un cuadrado de 32 o 40px. */
-    size?: 'sm' | 'md';
+    /** Talla del botón: un cuadrado de 32, 40 o 48px. En `lg` el glifo mide 48px. */
+    size?: 'sm' | 'md' | 'lg';
 }
 /**
  * Botón que abre y cierra un menú. Dibuja el icono `menu` del catálogo y, al

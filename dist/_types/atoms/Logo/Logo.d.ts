@@ -1,6 +1,6 @@
 import './Logo.css';
-/** Alto del logotipo: una talla de componente. El ancho sale de la proporción. */
-export type LogoSize = 'sm' | 'md' | 'lg';
+/** Alto del logotipo: las tallas de componente y, para la cabecera del sitio, `xl` (64px, la talla ilustrativa de la escala de iconos). El ancho sale de la proporción. */
+export type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
 export interface LogoProps {
     /** Talla. `md` (40px de alto) por defecto: la de una cabecera. */
     size?: LogoSize;

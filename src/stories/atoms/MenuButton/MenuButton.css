@@ -15,6 +15,10 @@
   inline-size: var(--menu-button-size-sm);
   block-size: var(--menu-button-size-sm);
 }
+.menu-button.menu-button--lg {
+  inline-size: var(--menu-button-size-lg);
+  block-size: var(--menu-button-size-lg);
+}
 
 .menu-button:focus-visible {
   outline: var(--menu-button-focus-ring-width) solid var(--menu-button-focus-ring-color);

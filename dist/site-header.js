@@ -12,62 +12,63 @@ function c({ children: e, ...t }) {
 		children: e
 	});
 }
-function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", menuCloseLabel: f, logo: p = /* @__PURE__ */ r(n, {}), renderLogoLink: m = c, width: h = "xl", open: g, onOpenChange: _, children: v, settings: y, panelId: b = "site-header-panel", actions: x, language: S }) {
-	let [C, w] = s(!1), T = g !== void 0, E = T ? g : C, D = !!(v || y), O = o(null), k = o(null), A = (e) => {
-		T || w(e), _?.(e);
+function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", menuCloseLabel: f, logoSize: p = "xl", logo: m = /* @__PURE__ */ r(n, { size: p }), menuButtonSize: h = "lg", renderLogoLink: g = c, width: _ = "xl", open: v, onOpenChange: y, children: b, settings: x, panelId: S = "site-header-panel", actions: C, language: w }) {
+	let [T, E] = s(!1), D = v !== void 0, O = D ? v : T, k = !!(b || x), A = o(null), j = o(null), M = (e) => {
+		D || E(e), y?.(e);
 	};
 	return a(() => {
-		if (!E) return;
+		if (!O) return;
 		let e = (e) => {
-			e.key === "Escape" && (A(!1), k.current?.focus());
+			e.key === "Escape" && (M(!1), j.current?.focus());
 		}, t = (e) => {
-			O.current?.contains(e.target) || A(!1);
+			A.current?.contains(e.target) || M(!1);
 		};
 		document.addEventListener("keydown", e), document.addEventListener("pointerdown", t);
 		let n = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.removeEventListener("pointerdown", t), document.body.style.overflow = n;
 		};
-	}, [E]), /* @__PURE__ */ i(e, {
-		ref: O,
+	}, [O]), /* @__PURE__ */ i(e, {
+		ref: A,
 		as: "header",
-		width: h,
+		width: _,
 		className: "site-header",
 		innerClassName: "site-header__bar",
 		children: [
-			m({
+			g({
 				href: l,
 				className: "site-header__logo",
 				"aria-label": u,
-				children: p
+				children: m
 			}),
 			/* @__PURE__ */ i("div", {
 				className: "site-header__controls",
 				children: [
-					x,
-					S,
-					D && /* @__PURE__ */ r(t, {
-						ref: k,
-						isOpen: E,
-						onClick: () => A(!E),
+					C,
+					w,
+					k && /* @__PURE__ */ r(t, {
+						ref: j,
+						isOpen: O,
+						onClick: () => M(!O),
 						label: d,
 						closeLabel: f,
-						"aria-controls": b
+						size: h,
+						"aria-controls": S
 					})
 				]
 			}),
-			D && /* @__PURE__ */ r("div", {
-				className: ["site-header__panel", E ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
-				id: b,
-				inert: !E,
-				"aria-hidden": !E,
+			k && /* @__PURE__ */ r("div", {
+				className: ["site-header__panel", O ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
+				id: S,
+				inert: !O,
+				"aria-hidden": !O,
 				children: /* @__PURE__ */ i(e, {
-					width: h,
+					width: _,
 					space: "none",
 					innerClassName: "site-header__panel-inner",
-					children: [v, y && /* @__PURE__ */ r("div", {
+					children: [b, x && /* @__PURE__ */ r("div", {
 						className: "site-header__settings",
-						children: y
+						children: x
 					})]
 				})
 			})

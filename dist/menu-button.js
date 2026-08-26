@@ -18,7 +18,7 @@ var r = n(function({ isOpen: n = !1, label: r = "Menú", closeLabel: i, size: a 
 		...s,
 		children: /* @__PURE__ */ t(e, {
 			name: "menu",
-			size: "md",
+			size: a === "lg" ? "lg" : "md",
 			className: "menu-button__icon"
 		})
 	});

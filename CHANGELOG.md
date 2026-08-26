@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.4.0
+
+### Añadido
+
+- `Logo size="xl"` (64px, la talla ilustrativa de la escala de iconos) y
+  `MenuButton size="lg"` (48px con el glifo a 48).
+- `SiteHeader`: `logoSize` (por defecto `xl`) y `menuButtonSize` (por defecto
+  `lg`). La barra mide ahora el logotipo más el aire del sistema: **80px**
+  (`site-header.content-height` → `logo.height-xl`); la de aplicación sigue en 56.
+
 ## v16.3.0
 
 ### Cambiado

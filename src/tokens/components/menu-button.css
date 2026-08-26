@@ -5,6 +5,7 @@
 :root {
   --menu-button-size-sm: var(--size-component-sm); /** Lado del botón en talla sm */
   --menu-button-size-md: var(--size-component-md); /** Lado del botón en talla md (por defecto) */
+  --menu-button-size-lg: var(--size-component-lg); /** Lado del botón en talla lg: la cabecera del sitio, con el glifo a 48px */
   --menu-button-transition-duration: var(--motion-duration-base); /** Duración del paso de barras a aspa */
   --menu-button-transition-easing: var(--motion-easing-in-out); /** Curva del paso de barras a aspa: movimiento */
   --menu-button-color: var(--color-text-on-light); /** Color del glifo */

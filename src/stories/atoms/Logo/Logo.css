@@ -9,3 +9,4 @@
 .logo.logo--sm { block-size: var(--logo-height-sm); }
 .logo.logo--md { block-size: var(--logo-height-md); }
 .logo.logo--lg { block-size: var(--logo-height-lg); }
+.logo.logo--xl { block-size: var(--logo-height-xl); }
