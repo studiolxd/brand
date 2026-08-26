@@ -21,7 +21,6 @@
 
 .textarea::placeholder {
   color: var(--textarea-placeholder-color);
-  text-transform: var(--textarea-placeholder-text-transform);
 }
 
 .textarea:focus-visible {
@@ -49,7 +48,6 @@
 
 .textarea.textarea--error::placeholder {
   color: var(--textarea-error-placeholder-color);
-  text-transform: var(--textarea-error-placeholder-text-transform);
 }
 
 .textarea.textarea--error:focus-visible {
@@ -62,12 +60,14 @@
 
 /* ─── Size variants ──────────────────────────────────────────── */
 .textarea.textarea--sm {
+  --textarea-min-height: var(--textarea-sm-min-height);
   --textarea-padding-block: var(--textarea-sm-padding-block);
   --textarea-padding-inline: var(--textarea-sm-padding-inline);
   --textarea-font-size: var(--textarea-sm-font-size);
 }
 
 .textarea.textarea--lg {
+  --textarea-min-height: var(--textarea-lg-min-height);
   --textarea-padding-block: var(--textarea-lg-padding-block);
   --textarea-padding-inline: var(--textarea-lg-padding-inline);
   --textarea-font-size: var(--textarea-lg-font-size);

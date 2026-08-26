@@ -179,3 +179,22 @@ export const ContratoProps: Story = {
     await expect(input).toHaveAttribute('data-slot', 'input');
   },
 };
+
+/** Test: el placeholder va en caja normal, como el resto del texto del sistema. */
+export const ContratoPlaceholder: Story = {
+  name: 'Test — placeholder en caja normal',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ inlineSize: '20rem' }}>
+      <Input placeholder="Escribe algo…" aria-label="Normal" />
+      <Input placeholder="Escribe algo…" aria-label="Con error" error />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    for (const name of ['Normal', 'Con error']) {
+      const el = canvas.getByRole('textbox', { name });
+      await expect(getComputedStyle(el, '::placeholder').textTransform).toBe('none');
+    }
+  },
+};

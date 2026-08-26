@@ -19,7 +19,7 @@ La altura no sale del padding porque cada control suma ingredientes distintos �
 
 `md` es la talla por defecto. `sm` es la mínima del sistema: no hay controles más pequeños. `lg` es para controles destacados y para cuando el objetivo táctil debe ser holgado.
 
-`Textarea` queda fuera: crece con el contenido, y su altura mínima es asunto suyo.
+`Textarea` queda fuera: crece con el contenido. Su altura mínima tampoco es un número suelto —sale de las líneas que el campo mide por defecto (`textarea.rows`), su interlineado, su cuerpo, su aire y sus bordes—; la fórmula está en la doc del componente.
 
 ## Los cuadrados miden su talla
 

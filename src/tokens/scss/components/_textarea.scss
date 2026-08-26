@@ -11,7 +11,8 @@ $lxd-textarea-font-family: "Google Sans Flex", system-ui, sans-serif; // Font fa
 $lxd-textarea-font-size: 1rem; // Font size
 $lxd-textarea-font-weight: 300; // Font weight
 $lxd-textarea-line-height: 1.5; // Line height
-$lxd-textarea-min-height: 15rem; // 15rem (240px) — altura mínima del textarea
+$lxd-textarea-rows: 4; // Líneas de texto que mide el campo por defecto. Cuatro: dos no se distinguen de un campo de una línea y cinco ya ocupa media pantalla en móvil. De aquí sale `min-height`
+$lxd-textarea-min-height: calc(4 * 1.5 * 1rem + 2 * 1rem + 2 * 1px); // Altura mínima: `rows` líneas de texto (rows × interlineado × cuerpo) más el aire de arriba y abajo y los dos bordes. Con la talla md, 130px
 $lxd-textarea-resize: vertical; // Resize direction
 $lxd-textarea-cursor: text; // Cursor
 $lxd-textarea-transition-duration: 150ms; // Transition duration
@@ -20,7 +21,6 @@ $lxd-textarea-bg: #ffffff; // Background
 $lxd-textarea-color: #111e30; // Text color
 $lxd-textarea-border-color: #111e30; // Border color
 $lxd-textarea-placeholder-color: #4a4a4a; // Placeholder text color
-$lxd-textarea-placeholder-text-transform: uppercase; // Placeholder text transform
 $lxd-textarea-focus-border-color: #111e30; // Border color on focus
 $lxd-textarea-focus-ring-width: 2px; // Focus ring width
 $lxd-textarea-focus-ring-inset-offset: 1px; // Gap between border and focus ring
@@ -33,12 +33,13 @@ $lxd-textarea-error-bg: #ffffff; // Error background
 $lxd-textarea-error-color: #111e30; // Error text color
 $lxd-textarea-error-border-color: #111e30; // Error border color
 $lxd-textarea-error-placeholder-color: #4a4a4a; // Error placeholder color
-$lxd-textarea-error-placeholder-text-transform: uppercase; // Error placeholder text transform
 $lxd-textarea-error-focus-border-color: #111e30; // Error border color on focus
 $lxd-textarea-error-focus-ring-color: #b30000; // Error focus ring color
 $lxd-textarea-sm-padding-block: 0.5rem; // Block padding — variante sm
 $lxd-textarea-sm-padding-inline: 0.75rem; // Inline padding — variante sm
 $lxd-textarea-sm-font-size: 0.875rem; // Font size — variante sm (14px)
+$lxd-textarea-sm-min-height: calc(4 * 1.5 * 0.875rem + 2 * 0.5rem + 2 * 1px); // Altura mínima — sm: la misma fórmula con el cuerpo y el aire de la talla (102px)
 $lxd-textarea-lg-padding-block: 1.5rem; // Block padding — variante lg
 $lxd-textarea-lg-padding-inline: 1.5rem; // Inline padding — variante lg
 $lxd-textarea-lg-font-size: 1.25rem; // Font size — variante lg (20px)
+$lxd-textarea-lg-min-height: calc(4 * 1.5 * 1.25rem + 2 * 1.5rem + 2 * 1px); // Altura mínima — lg: la misma fórmula con el cuerpo y el aire de la talla (170px)

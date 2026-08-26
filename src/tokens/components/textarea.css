@@ -5,31 +5,32 @@
 :root {
   --textarea-border-style: solid; /** Border style */
   --textarea-width: 100%; /** Textarea is always full width */
-  --textarea-min-height: 15rem; /** 15rem (240px) — altura mínima del textarea */
+  --textarea-rows: 4; /** Líneas de texto que mide el campo por defecto. Cuatro: dos no se distinguen de un campo de una línea y cinco ya ocupa media pantalla en móvil. De aquí sale `min-height` */
   --textarea-resize: vertical; /** Resize direction */
   --textarea-cursor: text; /** Cursor */
-  --textarea-placeholder-text-transform: uppercase; /** Placeholder text transform */
   --textarea-disabled-cursor: not-allowed; /** Cursor when disabled */
-  --textarea-error-placeholder-text-transform: uppercase; /** Error placeholder text transform */
   --textarea-font-family: var(--font-family-sans); /** Font family */
   --textarea-font-size: var(--font-size-2); /** Font size */
   --textarea-line-height: var(--line-height-normal); /** Line height */
-  --textarea-transition-duration: var(--motion-duration-fast); /** Transition duration */
-  --textarea-transition-easing: var(--motion-easing-default); /** Transition easing */
   --textarea-bg: var(--color-white); /** Background */
   --textarea-disabled-bg: var(--color-grey-lightest); /** Background when disabled */
   --textarea-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
   --textarea-disabled-border-color: var(--color-grey-light); /** Border color when disabled */
   --textarea-error-bg: var(--color-white); /** Error background */
-  --textarea-sm-padding-block: var(--spacing-2); /** Block padding — variante sm */
-  --textarea-sm-padding-inline: var(--spacing-3); /** Inline padding — variante sm */
-  --textarea-sm-font-size: var(--font-size-1); /** Font size — variante sm (14px) */
-  --textarea-lg-padding-block: var(--spacing-5); /** Block padding — variante lg */
-  --textarea-lg-padding-inline: var(--spacing-5); /** Inline padding — variante lg */
-  --textarea-lg-font-size: var(--font-size-3); /** Font size — variante lg (20px) */
   --textarea-border-radius: var(--border-radius-default); /** Border radius */
   --textarea-border-width: var(--border-width-default); /** Border width */
   --textarea-padding-block: var(--control-padding-block); /** Block (vertical) padding */
+  --textarea-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-font-size) + 2 * var(--textarea-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima: `rows` líneas de texto (rows × interlineado × cuerpo) más el aire de arriba y abajo y los dos bordes. Con la talla md, 130px */
+  --textarea-transition-duration: var(--motion-duration-fast); /** Transition duration */
+  --textarea-transition-easing: var(--motion-easing-default); /** Transition easing */
+  --textarea-sm-padding-block: var(--spacing-2); /** Block padding — variante sm */
+  --textarea-sm-padding-inline: var(--spacing-3); /** Inline padding — variante sm */
+  --textarea-sm-font-size: var(--font-size-1); /** Font size — variante sm (14px) */
+  --textarea-sm-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-sm-font-size) + 2 * var(--textarea-sm-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima — sm: la misma fórmula con el cuerpo y el aire de la talla (102px) */
+  --textarea-lg-padding-block: var(--spacing-5); /** Block padding — variante lg */
+  --textarea-lg-padding-inline: var(--spacing-5); /** Inline padding — variante lg */
+  --textarea-lg-font-size: var(--font-size-3); /** Font size — variante lg (20px) */
+  --textarea-lg-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-lg-font-size) + 2 * var(--textarea-lg-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima — lg: la misma fórmula con el cuerpo y el aire de la talla (170px) */
   --textarea-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --textarea-font-weight: var(--font-weight-default); /** Font weight */
   --textarea-color: var(--color-text-on-light); /** Text color */
