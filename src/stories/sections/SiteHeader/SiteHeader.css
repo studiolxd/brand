@@ -69,6 +69,9 @@
   overscroll-behavior: contain;
   background-color: var(--site-header-panel-bg);
   padding-block: var(--site-header-panel-padding-block);
+  /* Columna a toda la altura: el índice arriba y los ajustes abajo del todo. */
+  display: flex;
+  flex-direction: column;
   visibility: hidden;
   /* Solo desliza, sin fundido: una cortina que baja desde la barra. Se recorta
      en vez de trasladarse porque la barra está bajo el panel en la pila de
@@ -84,11 +87,25 @@
   transition-delay: 0s;
 }
 
-/* Los ajustes del sitio (tema) cierran el panel: solo aire, sin línea. */
-/* Los ajustes del sitio (idioma, tema) cierran el panel: en escritorio en
-   fila, en móvil apilados. Solo aire, sin línea. */
+/* El Container del panel y su interior estiran para que los ajustes puedan
+   irse al borde inferior; si el índice es más alto que la pantalla, el panel
+   hace scroll y los ajustes quedan al final del contenido. */
+.site-header__panel > .container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.site-header__panel-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Los ajustes del sitio (idioma, tema) cierran el panel, alineados abajo del
+   todo: en escritorio en fila, en móvil apilados. Solo aire, sin línea. */
 .site-header__settings {
-  margin-block-start: var(--site-header-settings-margin-block-start);
+  margin-block-start: auto;
+  padding-block-start: var(--site-header-settings-margin-block-start);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
