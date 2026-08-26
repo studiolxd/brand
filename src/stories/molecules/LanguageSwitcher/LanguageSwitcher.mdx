@@ -7,7 +7,7 @@ import { languageSwitcherTokens } from "../../../tokens/molecules/language-switc
 
 # LanguageSwitcher
 
-Selector de idioma. Dos formas del mismo control: **compacto** en los ajustes del menú —el código del idioma actual, que abre un menú— y **lista** en el pie, con los idiomas desplegados.
+Selector de idioma. Dos formas del mismo control: **compacto** en los ajustes del menú —el nombre del idioma actual, en su propio idioma, que abre un menú— y **lista** en el pie, con los idiomas desplegados.
 
 <Canvas of={LanguageSwitcherStories.Compacto} />
 
@@ -17,7 +17,7 @@ En compacto es un `DropdownField` —el mismo control rectangular a la altura de
 
 ## Por qué así
 
-- **El código, nunca un icono.** "ES" lo lee cualquiera aunque la interfaz esté en un idioma que no entiende, que es justo el caso de quien necesita cambiarlo. Un globo no dice nada, y una bandera es un país, no una lengua.
+- **El nombre en su idioma, nunca un icono.** «Español» lo lee quien habla español, que es quien lo busca; el código de dos letras era para la barra, donde no cabía más. Un globo no dice nada, y una bandera es un país, no una lengua.
 - **Cada opción, en su propio idioma.** "Deutsch", no "Alemán": es como cada quien reconoce el suyo. Y cada una lleva `lang`, para que el lector de pantalla la pronuncie en ese idioma.
 - **Visible sin abrir nada.** Por eso va en la barra, en todos los anchos, y no dentro del menú del sitio.
 

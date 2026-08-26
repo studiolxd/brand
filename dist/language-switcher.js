@@ -66,8 +66,8 @@ function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "
 			})
 		})),
 		children: /* @__PURE__ */ t("span", {
-			className: "language-switcher__code",
-			children: i
+			lang: i,
+			children: r.find((e) => e.code === i)?.label ?? i
 		})
 	});
 }

@@ -5,7 +5,7 @@ import { DropdownField } from '../DropdownField/DropdownField';
 import './LanguageSwitcher.css';
 
 export interface Language {
-  /** Código BCP 47 (`es`, `en`, `pt-BR`). Es el valor y lo que se muestra en el control. */
+  /** Código BCP 47 (`es`, `en`, `pt-BR`). Es el valor; en el control se muestra el nombre. */
   code: string;
   /** Nombre del idioma **en ese idioma**: "Español", "English", "Deutsch". Es como cada quien reconoce el suyo. */
   label: string;
@@ -121,7 +121,7 @@ export function LanguageSwitcher({
         label: <span lang={code}>{name}</span>,
       }))}
     >
-      <span className="language-switcher__code">{value}</span>
+      <span lang={value}>{languages.find((l) => l.code === value)?.label ?? value}</span>
     </DropdownField>
   );
 }

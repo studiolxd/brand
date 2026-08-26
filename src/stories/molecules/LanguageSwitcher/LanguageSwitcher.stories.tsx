@@ -57,18 +57,18 @@ export const SuperficieOscura: Story = {
 };
 
 export const Contrato: Story = {
-  name: 'Test — código visible, opciones en su idioma, cambio anunciado',
+  name: 'Test — nombre del idioma visible, opciones en su idioma, cambio anunciado',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const boton = canvas.getByRole('button', { name: 'Idioma' });
-    await expect(boton.textContent).toContain('es');
+    await expect(boton.textContent).toContain('Español');
     await userEvent.click(boton);
     // el menú lista los idiomas, cada uno marcado con su `lang`
     const fr = await within(document.body).findByText('Français');
     await expect(fr).toHaveAttribute('lang', 'fr');
     await userEvent.click(fr);
-    await expect(boton.textContent).toContain('fr');
+    await expect(boton.textContent).toContain('Français');
   },
 };
 

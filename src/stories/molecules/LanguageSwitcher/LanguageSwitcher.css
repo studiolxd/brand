@@ -1,10 +1,3 @@
-/* El código hereda talla y peso del control (los del DropdownField, como el
-   de tema): solo añade interletraje y mayúsculas. */
-.language-switcher__code {
-  letter-spacing: var(--language-switcher-code-letter-spacing);
-  text-transform: uppercase;
-}
-
 .language-switcher__list {
   list-style: none;
   margin: 0;

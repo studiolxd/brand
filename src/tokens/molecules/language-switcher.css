@@ -3,7 +3,6 @@
  */
 
 :root {
-  --language-switcher-code-letter-spacing: var(--letter-spacing-wide); /** El código, en mayúsculas */
   --language-switcher-list-gap: var(--spacing-4); /** Separación entre idiomas en la lista desplegada */
   --language-switcher-list-font-size: var(--font-size-2); /** Idiomas en la lista */
   --language-switcher-list-current-font-weight: var(--font-weight-emphasis); /** Idioma actual en la lista: solo cambia el peso */
