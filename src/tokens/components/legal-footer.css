@@ -7,7 +7,7 @@
   --legal-footer-gap: var(--spacing-3); /** Entre el título y la lista de enlaces */
   --legal-footer-links-gap: var(--spacing-4); /** Entre enlaces */
   --legal-footer-links-gap-stacked: var(--spacing-3); /** Separación entre enlaces apilados (móvil, por debajo de md) */
-  --legal-footer-font-size: var(--font-size-1); /** Los enlaces legales, en cuerpo pequeño */
+  --legal-footer-font-size: var(--font-size-2); /** Los enlaces legales, en el cuerpo base (16px): no son letra pequeña */
   --legal-footer-border-color: var(--color-grey-light); /** Color de la línea */
   --legal-footer-border-width: var(--border-width-default); /** Línea que separa el pie del contenido */
 }
