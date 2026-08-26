@@ -1,6 +1,6 @@
 'use client';
 import './switcher-field.css';
-import { t as e } from "./_shared/Switcher.js";
+import { Switcher as e } from "./switcher.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/molecules/SwitcherField/SwitcherField.tsx
 function r({ label: r, checked: i, defaultChecked: a, disabled: o, size: s = "md", id: c, name: l, value: u, required: d, onCheckedChange: f }) {

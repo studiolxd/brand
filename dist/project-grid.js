@@ -1,11 +1,11 @@
 'use client';
 import './project-grid.css';
 import { ProjectCard as e } from "./project-card.js";
-import { useState as t } from "react";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { useState as r } from "react";
 //#region src/stories/organisms/ProjectGrid/ProjectGrid.tsx
 function i({ projects: i, hideTags: a = !1, className: o }) {
-	let [s, c] = t(() => new Set(i.map((e) => e.tagVariant ?? "neutral"))), l = i.reduce((e, t) => {
+	let [s, c] = r(() => new Set(i.map((e) => e.tagVariant ?? "neutral"))), l = i.reduce((e, t) => {
 		let n = t.tagVariant ?? "neutral";
 		return e.some((e) => e.variant === n) || e.push({
 			variant: n,
@@ -17,32 +17,32 @@ function i({ projects: i, hideTags: a = !1, className: o }) {
 			return n.has(e) ? n.delete(e) : n.add(e), n.size === 0 ? new Set(u) : n;
 		});
 	}, f = i.filter((e) => s.has(e.tagVariant ?? "neutral")), p = (2 - f.length % 2) % 2, m = f.length >= 7 ? (6 - (f.length - 7) % 6) % 6 : 7 - f.length, h = Math.max(p, m), g = Math.min(p, m);
-	return /* @__PURE__ */ r("div", {
+	return /* @__PURE__ */ n("div", {
 		className: ["project-grid-wrapper", o].filter(Boolean).join(" "),
-		children: [!a && /* @__PURE__ */ n("div", {
+		children: [!a && /* @__PURE__ */ t("div", {
 			className: "project-grid__filter",
-			children: l.map(({ variant: e, label: t }) => /* @__PURE__ */ n("button", {
+			children: l.map(({ variant: e, label: n }) => /* @__PURE__ */ t("button", {
 				className: [
 					"tag",
 					`tag--${e}`,
 					s.has(e) ? "project-grid__tag--active" : ""
 				].filter(Boolean).join(" "),
 				onClick: () => d(e),
-				children: t
+				children: n
 			}, e))
-		}), /* @__PURE__ */ r("div", {
+		}), /* @__PURE__ */ n("div", {
 			className: "project-grid",
-			children: [f.map((t) => /* @__PURE__ */ n(e, {
-				project: t,
+			children: [f.map((n) => /* @__PURE__ */ t(e, {
+				project: n,
 				hideTag: a
-			}, t.id)), Array.from({ length: h }).map((e, t) => /* @__PURE__ */ n("div", {
+			}, n.id)), Array.from({ length: h }).map((e, n) => /* @__PURE__ */ t("div", {
 				className: [
 					"project-grid__empty",
-					t >= g && m > p && "project-grid__empty--xl-only",
-					t >= g && p > m && "project-grid__empty--md-only"
+					n >= g && m > p && "project-grid__empty--xl-only",
+					n >= g && p > m && "project-grid__empty--md-only"
 				].filter(Boolean).join(" "),
 				"aria-hidden": "true"
-			}, `empty-${t}`))]
+			}, `empty-${n}`))]
 		})]
 	});
 }

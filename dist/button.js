@@ -1,8 +1,8 @@
 'use client';
 import './button.css';
-import { t as e } from "./_shared/useRender.js";
+import { jsx as e } from "react/jsx-runtime";
 import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { useRender as n } from "@base-ui-components/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
 var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md", block: a = !1, iconOnly: o = !1, children: s, type: c = "button", disabled: l, onClick: u, href: d, external: f = !1, render: p, className: m, ...h }, g) {
 	let _ = [
@@ -14,7 +14,7 @@ var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md"
 		o ? "button--icon-only" : "",
 		m ?? ""
 	].filter(Boolean).join(" ");
-	return e({
+	return n({
 		render: p,
 		ref: g,
 		enabled: p !== void 0,
@@ -24,7 +24,7 @@ var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md"
 			...h,
 			children: s
 		}
-	}) || (d === void 0 ? /* @__PURE__ */ n("button", {
+	}) || (d === void 0 ? /* @__PURE__ */ e("button", {
 		ref: g,
 		className: _,
 		type: c,
@@ -32,7 +32,7 @@ var r = t(function({ variant: t = "primary", destructive: r = !1, size: i = "md"
 		onClick: u,
 		...h,
 		children: s
-	}) : /* @__PURE__ */ n("a", {
+	}) : /* @__PURE__ */ e("a", {
 		ref: g,
 		className: _,
 		href: l ? void 0 : d,

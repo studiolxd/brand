@@ -1,12 +1,12 @@
 'use client';
 import './link.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Link/Link.tsx
-var n = e(function({ href: e, children: n, external: r = !1, className: i, ...a }, o) {
-	return /* @__PURE__ */ t("a", {
+var n = t(function({ href: t, children: n, external: r = !1, className: i, ...a }, o) {
+	return /* @__PURE__ */ e("a", {
 		ref: o,
-		href: e,
+		href: t,
 		className: i,
 		...r ? {
 			target: "_blank",

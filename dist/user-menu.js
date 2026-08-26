@@ -2,76 +2,76 @@
 import './user-menu.css';
 import { Icon as e } from "./icon.js";
 import { Avatar as t } from "./avatar.js";
-import { t as n } from "./_shared/Separator.js";
-import { NumberBadge as r } from "./number-badge.js";
-import { a as i, i as a, n as o, o as s, r as c, s as l } from "./_shared/dropdownItems.js";
-import { Fragment as u, jsx as d, jsxs as f } from "react/jsx-runtime";
+import { NumberBadge as n } from "./number-badge.js";
+import { n as r } from "./_shared/dropdownItems.js";
+import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
+import { Menu as s } from "@base-ui-components/react/menu";
 //#region src/stories/molecules/UserMenu/UserMenu.tsx
-function p({ children: e, ...t }) {
-	return /* @__PURE__ */ d("a", {
+function c({ children: e, ...t }) {
+	return /* @__PURE__ */ a("a", {
 		...t,
 		children: e
 	});
 }
-function m(e) {
+function l(e) {
 	return ["user-menu__item", e ? "user-menu__item--destructive" : ""].filter(Boolean).join(" ");
 }
-function h({ name: h, email: g, avatarUrl: _, notificationCount: v, items: y = [], label: b, compact: x = !1, renderLink: S = p, onOpenChange: C, defaultOpen: w }) {
-	return /* @__PURE__ */ f(a, {
-		onOpenChange: (e) => C?.(e),
-		defaultOpen: w,
-		children: [/* @__PURE__ */ f(c, {
-			className: ["user-menu__trigger", x ? "user-menu__trigger--compact" : ""].filter(Boolean).join(" "),
-			"aria-label": b ?? `Cuenta de ${h}`,
+function u({ name: u, email: d, avatarUrl: f, notificationCount: p, items: m = [], label: h, compact: g = !1, renderLink: _ = c, onOpenChange: v, defaultOpen: y }) {
+	return /* @__PURE__ */ o(s.Root, {
+		onOpenChange: (e) => v?.(e),
+		defaultOpen: y,
+		children: [/* @__PURE__ */ o(s.Trigger, {
+			className: ["user-menu__trigger", g ? "user-menu__trigger--compact" : ""].filter(Boolean).join(" "),
+			"aria-label": h ?? `Cuenta de ${u}`,
 			children: [
-				/* @__PURE__ */ f("span", {
+				/* @__PURE__ */ o("span", {
 					className: "user-menu__avatar-wrap",
-					children: [/* @__PURE__ */ d(t, {
-						src: _,
-						name: h,
+					children: [/* @__PURE__ */ a(t, {
+						src: f,
+						name: u,
 						alt: "",
 						size: "sm"
-					}), !!v && v > 0 && /* @__PURE__ */ d(r, {
-						count: v,
+					}), !!p && p > 0 && /* @__PURE__ */ a(n, {
+						count: p,
 						variant: "danger",
-						"aria-label": `${v} notificaciones sin leer`,
+						"aria-label": `${p} notificaciones sin leer`,
 						className: "user-menu__notification-badge"
 					})]
 				}),
-				!x && /* @__PURE__ */ d("span", {
+				!g && /* @__PURE__ */ a("span", {
 					className: "user-menu__name",
-					children: h
+					children: u
 				}),
-				/* @__PURE__ */ d(e, {
+				/* @__PURE__ */ a(e, {
 					name: "chevron",
 					size: "sm",
 					className: "user-menu__chevron"
 				})
 			]
-		}), /* @__PURE__ */ d(s, { children: /* @__PURE__ */ d(i, {
+		}), /* @__PURE__ */ a(s.Portal, { children: /* @__PURE__ */ a(s.Positioner, {
 			className: "user-menu__positioner",
 			sideOffset: 4,
 			align: "start",
-			children: /* @__PURE__ */ f(l, {
+			children: /* @__PURE__ */ o(s.Popup, {
 				className: "user-menu__content",
-				children: [/* @__PURE__ */ f("div", {
+				children: [/* @__PURE__ */ o("div", {
 					className: "user-menu__header",
-					children: [/* @__PURE__ */ d("span", {
+					children: [/* @__PURE__ */ a("span", {
 						className: "user-menu__header-name",
-						children: h
-					}), /* @__PURE__ */ d("span", {
+						children: u
+					}), /* @__PURE__ */ a("span", {
 						className: "user-menu__header-email",
-						children: g
+						children: d
 					})]
-				}), y.length > 0 && /* @__PURE__ */ f(u, { children: [/* @__PURE__ */ d(n, { className: "user-menu__separator" }), o({
-					items: y,
-					itemClass: m,
+				}), m.length > 0 && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(s.Separator, { className: "user-menu__separator" }), r({
+					items: m,
+					itemClass: l,
 					separatorClass: "user-menu__separator",
-					renderLink: S
+					renderLink: _
 				})] })]
 			})
 		}) })]
 	});
 }
 //#endregion
-export { h as UserMenu };
+export { u as UserMenu };

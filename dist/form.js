@@ -1,28 +1,28 @@
 'use client';
 import './form.css';
-import { forwardRef as e } from "react";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { forwardRef as n } from "react";
 //#region src/stories/molecules/Form/Form.tsx
-var r = e(function({ errors: e, onSubmit: r, actions: i, children: a }, o) {
-	return /* @__PURE__ */ n("form", {
+var r = n(function({ errors: n, onSubmit: r, actions: i, children: a }, o) {
+	return /* @__PURE__ */ t("form", {
 		ref: o,
 		className: "form",
 		onSubmit: r,
 		noValidate: !0,
-		children: [/* @__PURE__ */ n("div", {
+		children: [/* @__PURE__ */ t("div", {
 			className: "form__fields",
-			children: [a, e && e.length > 0 && /* @__PURE__ */ t("div", {
+			children: [a, n && n.length > 0 && /* @__PURE__ */ e("div", {
 				role: "alert",
 				className: "form-errors",
-				children: /* @__PURE__ */ t("ul", {
+				children: /* @__PURE__ */ e("ul", {
 					className: "form-errors__list",
-					children: e.map((e) => /* @__PURE__ */ t("li", {
+					children: n.map((t) => /* @__PURE__ */ e("li", {
 						className: "form-errors__item",
-						children: e
-					}, e))
+						children: t
+					}, t))
 				})
 			})]
-		}), i && /* @__PURE__ */ t("div", {
+		}), i && /* @__PURE__ */ e("div", {
 			className: "form__actions",
 			children: i
 		})]

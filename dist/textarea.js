@@ -1,14 +1,14 @@
 'use client';
 import './textarea.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Textarea/Textarea.tsx
-var n = e(function({ size: e = "md", error: n = !1, className: r, describedBy: i, ...a }, o) {
-	return /* @__PURE__ */ t("textarea", {
+var n = t(function({ size: t = "md", error: n = !1, className: r, describedBy: i, ...a }, o) {
+	return /* @__PURE__ */ e("textarea", {
 		ref: o,
 		className: [
 			"textarea",
-			e === "md" ? "" : `textarea--${e}`,
+			t === "md" ? "" : `textarea--${t}`,
 			n ? "textarea--error" : "",
 			r ?? ""
 		].filter(Boolean).join(" "),

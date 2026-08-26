@@ -1,5 +1,5 @@
 import './skip-link.css';
-/* empty css                        */
+/* empty css                       */
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/atoms/SkipLink/SkipLink.tsx
 function t({ href: t, className: n, children: r, ...i }) {

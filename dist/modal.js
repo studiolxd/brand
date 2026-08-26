@@ -2,53 +2,54 @@
 import './modal.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { a as n, i as r, n as i, o as a, r as o, s, t as c } from "./_shared/DialogTitle.js";
-import { Fragment as l, jsx as u, jsxs as d } from "react/jsx-runtime";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
+import { Dialog as a } from "@base-ui-components/react/dialog";
 //#region src/stories/molecules/Modal/Modal.tsx
-function f({ open: f, onClose: p, title: m, children: h, closeLabel: g = "Cerrar", fallbackTitle: _ = "Diálogo", container: v, description: y, "aria-describedby": b }) {
-	return /* @__PURE__ */ u(i, {
-		open: f,
+function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar", fallbackTitle: d = "Diálogo", container: f, description: p, "aria-describedby": m }) {
+	let h = m === void 0 ? {} : { "aria-describedby": m };
+	return /* @__PURE__ */ r(a.Root, {
+		open: o,
 		onOpenChange: (e) => {
-			e || p();
+			e || s();
 		},
-		children: /* @__PURE__ */ d(o, {
-			container: v,
-			children: [/* @__PURE__ */ u(s, { className: "modal__overlay" }), /* @__PURE__ */ d(r, {
+		children: /* @__PURE__ */ i(a.Portal, {
+			container: f,
+			children: [/* @__PURE__ */ r(a.Backdrop, { className: "modal__overlay" }), /* @__PURE__ */ i(a.Popup, {
 				className: "modal__content",
-				...b === void 0 ? {} : { "aria-describedby": b },
+				...h,
 				initialFocus: !1,
 				children: [
-					m ? /* @__PURE__ */ d("header", {
+					c ? /* @__PURE__ */ i("header", {
 						className: "modal__header",
-						children: [/* @__PURE__ */ u(c, {
+						children: [/* @__PURE__ */ r(a.Title, {
 							className: "modal__title",
-							children: m
-						}), /* @__PURE__ */ u(a, {
+							children: c
+						}), /* @__PURE__ */ r(a.Close, {
 							className: "modal__close",
-							"aria-label": g,
-							children: /* @__PURE__ */ u(e, {
+							"aria-label": u,
+							children: /* @__PURE__ */ r(e, {
 								name: "close",
 								size: "sm"
 							})
 						})]
-					}) : /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(c, { render: /* @__PURE__ */ u(t, { children: _ }) }), /* @__PURE__ */ u("header", {
+					}) : /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(a.Title, { render: /* @__PURE__ */ r(t, { children: d }) }), /* @__PURE__ */ r("header", {
 						className: "modal__header modal__header--no-title",
-						children: /* @__PURE__ */ u(a, {
+						children: /* @__PURE__ */ r(a.Close, {
 							className: "modal__close",
-							"aria-label": g,
-							children: /* @__PURE__ */ u(e, {
+							"aria-label": u,
+							children: /* @__PURE__ */ r(e, {
 								name: "close",
 								size: "sm"
 							})
 						})
 					})] }),
-					y != null && /* @__PURE__ */ u(n, {
+					p != null && /* @__PURE__ */ r(a.Description, {
 						className: "modal__description",
-						children: y
+						children: p
 					}),
-					/* @__PURE__ */ u("div", {
+					/* @__PURE__ */ r("div", {
 						className: "modal__body",
-						children: h
+						children: l
 					})
 				]
 			})]
@@ -56,4 +57,4 @@ function f({ open: f, onClose: p, title: m, children: h, closeLabel: g = "Cerrar
 	});
 }
 //#endregion
-export { f as Modal };
+export { o as Modal };

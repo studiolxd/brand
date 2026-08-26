@@ -25,6 +25,10 @@ export default defineConfig({
         // duplica la librería y el contexto no cruza al consumidor.
         'react-hook-form',
         'sonner',
+        // El motor de conducta: externo. Empaquetado arrastra un shim CJS de
+        // `require` (Turbopack lo rechaza en dev) y duplicaría su contexto.
+        '@base-ui-components/react',
+        /^@base-ui-components\/react\//,
       ],
       output: {
         entryFileNames: '[name].js',

@@ -1,45 +1,45 @@
 'use client';
 import './hero-video.css';
-import { useEffect as e, useRef as t } from "react";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { useEffect as n, useRef as r } from "react";
 //#region src/stories/atoms/HeroVideo/HeroVideo.tsx
 function i({ landscape: i, portrait: a }) {
-	let o = t(null), s = t(null);
-	return e(() => {
+	let o = r(null), s = r(null);
+	return n(() => {
 		o.current && (o.current.muted = !0), s.current && (s.current.muted = !0);
-	}, []), /* @__PURE__ */ r("div", {
+	}, []), /* @__PURE__ */ t("div", {
 		className: "hero-video",
 		"aria-hidden": "true",
-		children: [/* @__PURE__ */ n("div", {
+		children: [/* @__PURE__ */ e("div", {
 			className: "hero-video__landscape",
-			children: /* @__PURE__ */ r("video", {
+			children: /* @__PURE__ */ t("video", {
 				ref: o,
 				autoPlay: !0,
 				loop: !0,
 				muted: !0,
 				playsInline: !0,
 				poster: i.poster,
-				children: [i.webm && /* @__PURE__ */ n("source", {
+				children: [i.webm && /* @__PURE__ */ e("source", {
 					src: i.webm,
 					type: "video/webm"
-				}), i.mp4 && /* @__PURE__ */ n("source", {
+				}), i.mp4 && /* @__PURE__ */ e("source", {
 					src: i.mp4,
 					type: "video/mp4"
 				})]
 			})
-		}), /* @__PURE__ */ n("div", {
+		}), /* @__PURE__ */ e("div", {
 			className: "hero-video__portrait",
-			children: /* @__PURE__ */ r("video", {
+			children: /* @__PURE__ */ t("video", {
 				ref: s,
 				autoPlay: !0,
 				loop: !0,
 				muted: !0,
 				playsInline: !0,
 				poster: a.poster,
-				children: [a.webm && /* @__PURE__ */ n("source", {
+				children: [a.webm && /* @__PURE__ */ e("source", {
 					src: a.webm,
 					type: "video/webm"
-				}), a.mp4 && /* @__PURE__ */ n("source", {
+				}), a.mp4 && /* @__PURE__ */ e("source", {
 					src: a.mp4,
 					type: "video/mp4"
 				})]

@@ -1,13 +1,13 @@
 import './tag.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Tag/Tag.tsx
-var n = e(function({ variant: e = "neutral", className: n, children: r, ...i }, a) {
-	return /* @__PURE__ */ t("span", {
+var n = t(function({ variant: t = "neutral", className: n, children: r, ...i }, a) {
+	return /* @__PURE__ */ e("span", {
 		ref: a,
 		className: [
 			"tag",
-			`tag--${e}`,
+			`tag--${t}`,
 			n ?? ""
 		].filter(Boolean).join(" "),
 		...i,

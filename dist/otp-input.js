@@ -1,17 +1,17 @@
 'use client';
 import './otp-input.css';
 import { Input as e } from "./input.js";
-import { useCallback as t, useRef as n, useState as r } from "react";
-import { jsx as i } from "react/jsx-runtime";
+import { jsx as t } from "react/jsx-runtime";
+import { useCallback as n, useRef as r, useState as i } from "react";
 //#region src/stories/atoms/OtpInput/OtpInput.tsx
 function a({ length: a, value: o, defaultValue: s, onChange: c, onComplete: l, disabled: u, readOnly: d, error: f = !1, size: p = "md", describedBy: m, id: h, name: g }) {
-	let _ = o !== void 0, [v, y] = r(() => {
+	let _ = o !== void 0, [v, y] = i(() => {
 		let e = s ?? "";
 		return Array.from({ length: a }, (t, n) => e[n] ?? "");
-	}), b = n(null), x = _ ? Array.from({ length: a }, (e, t) => o[t] ?? "") : v, S = t((e) => {
+	}), b = r(null), x = _ ? Array.from({ length: a }, (e, t) => o[t] ?? "") : v, S = n((e) => {
 		let t = b.current?.querySelectorAll("input");
 		t?.[e] && t[e].focus();
-	}, []), C = t((e) => {
+	}, []), C = n((e) => {
 		_ || y(e);
 		let t = e.join("");
 		c?.(t), e.length === a && e.every((e) => e !== "") && l?.(t);
@@ -20,7 +20,7 @@ function a({ length: a, value: o, defaultValue: s, onChange: c, onComplete: l, d
 		a,
 		c,
 		l
-	]), w = t((e) => (t) => {
+	]), w = n((e) => (t) => {
 		let n = t.target.value.replace(/\D/g, "").slice(-1);
 		if (!n) return;
 		let r = [...x];
@@ -30,7 +30,7 @@ function a({ length: a, value: o, defaultValue: s, onChange: c, onComplete: l, d
 		a,
 		S,
 		C
-	]), T = t((e) => (t) => {
+	]), T = n((e) => (t) => {
 		if (t.key === "Backspace") {
 			t.preventDefault();
 			let n = [...x];
@@ -41,7 +41,7 @@ function a({ length: a, value: o, defaultValue: s, onChange: c, onComplete: l, d
 		a,
 		S,
 		C
-	]), E = t((e) => (t) => {
+	]), E = n((e) => (t) => {
 		t.preventDefault();
 		let n = t.clipboardData.getData("text").replace(/\D/g, "");
 		if (!n) return;
@@ -54,7 +54,7 @@ function a({ length: a, value: o, defaultValue: s, onChange: c, onComplete: l, d
 		S,
 		C
 	]);
-	return /* @__PURE__ */ i("div", {
+	return /* @__PURE__ */ t("div", {
 		ref: b,
 		role: "group",
 		"aria-describedby": m,
@@ -62,25 +62,25 @@ function a({ length: a, value: o, defaultValue: s, onChange: c, onComplete: l, d
 		"data-size": p,
 		"data-error": String(f),
 		"data-disabled": String(!!u),
-		children: Array.from({ length: a }, (t, n) => /* @__PURE__ */ i(e, {
-			id: h ? `${h}-${n}` : void 0,
-			name: g ? `${g}-${n}` : void 0,
+		children: Array.from({ length: a }, (n, r) => /* @__PURE__ */ t(e, {
+			id: h ? `${h}-${r}` : void 0,
+			name: g ? `${g}-${r}` : void 0,
 			type: "text",
 			size: p,
 			error: f,
 			disabled: u,
 			readOnly: d,
-			describedBy: n === 0 ? m : void 0,
+			describedBy: r === 0 ? m : void 0,
 			inputMode: "numeric",
 			pattern: "\\d*",
 			maxLength: 1,
-			autoComplete: n === 0 ? "one-time-code" : "off",
-			ariaLabel: `Dígito ${n + 1} de ${a}`,
-			value: x[n],
-			onChange: w(n),
-			onKeyDown: T(n),
-			onPaste: E(n)
-		}, n))
+			autoComplete: r === 0 ? "one-time-code" : "off",
+			ariaLabel: `Dígito ${r + 1} de ${a}`,
+			value: x[r],
+			onChange: w(r),
+			onKeyDown: T(r),
+			onPaste: E(r)
+		}, r))
 	});
 }
 //#endregion

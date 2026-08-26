@@ -1,7 +1,7 @@
 'use client';
 import './select-field.css';
-import { t as e } from "./_shared/Select.js";
-import { Label as t } from "./label.js";
+import { Label as e } from "./label.js";
+import { Select as t } from "./select.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/SelectField/SelectField.tsx
 var i = "__empty__";
@@ -19,12 +19,12 @@ function s({ id: s, label: c, labelHidden: l = !1, options: u, value: d, default
 	return /* @__PURE__ */ r("div", {
 		className: ["select-field", g || _ ? "select-field--error" : ""].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ n(t, {
+			/* @__PURE__ */ n(e, {
 				htmlFor: s,
 				hidden: l,
 				children: c
 			}),
-			/* @__PURE__ */ n(e, {
+			/* @__PURE__ */ n(t, {
 				id: s,
 				options: S,
 				value: a(d),

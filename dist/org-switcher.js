@@ -1,142 +1,76 @@
 'use client';
 import './org-switcher.css';
-import { t as e } from "./_shared/useControlled.js";
-import { t } from "./_shared/useRenderElement.js";
-import { O as n, R as r, x as i } from "./_shared/floating-ui.utils.dom.js";
-import { n as a } from "./_shared/useCompositeListItem.js";
-import { t as o } from "./_shared/useBaseUiId.js";
-import { Icon as s } from "./icon.js";
-import { Avatar as c } from "./avatar.js";
-import { t as l } from "./_shared/Separator.js";
-import { a as u, c as d, d as f, f as p, i as m, l as h, n as g, o as _, p as v, r as y, s as b, t as x, u as S } from "./_shared/dropdownItems.js";
-import { n as C } from "./_shared/SidebarContext.js";
-import * as w from "react";
-import { Fragment as T, jsx as E, jsxs as D } from "react/jsx-runtime";
-//#region node_modules/.pnpm/@base-ui-components+react@1.0.0-rc.0_@types+react@19.2.14_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@base-ui-components/react/esm/menu/checkbox-item/MenuCheckboxItemContext.js
-var O = /* @__PURE__ */ w.createContext(void 0);
-process.env.NODE_ENV !== "production" && (O.displayName = "MenuCheckboxItemContext");
-//#endregion
-//#region node_modules/.pnpm/@base-ui-components+react@1.0.0-rc.0_@types+react@19.2.14_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@base-ui-components/react/esm/menu/checkbox-item/MenuCheckboxItem.js
-var k = /* @__PURE__ */ w.forwardRef(function(s, c) {
-	let { render: l, className: u, id: d, label: m, nativeButton: g = !1, disabled: _ = !1, closeOnClick: y = !1, checked: b, defaultChecked: x, onCheckedChange: C, ...T } = s, D = a({ label: m }), k = v(!0), A = o(d), { store: j } = p(), M = j.useState("isActive", D.index), N = j.useState("itemProps"), [P, F] = e({
-		controlled: b,
-		default: x ?? !1,
-		name: "MenuCheckboxItem",
-		state: "checked"
-	}), { getItemProps: I, itemRef: L } = f({
-		closeOnClick: y,
-		disabled: _,
-		highlighted: M,
-		id: A,
-		store: j,
-		nativeButton: g,
-		nodeId: k?.nodeId,
-		itemMetadata: S
-	}), R = w.useMemo(() => ({
-		disabled: _,
-		highlighted: M,
-		checked: P
-	}), [
-		_,
-		M,
-		P
-	]), z = r((e) => {
-		let t = {
-			...i(n, e.nativeEvent),
-			preventUnmountOnClose: () => {}
-		};
-		C?.(!P, t), !t.isCanceled && F((e) => !e);
-	}), B = t("div", s, {
-		state: R,
-		stateAttributesMapping: h,
-		props: [
-			N,
-			{
-				role: "menuitemcheckbox",
-				"aria-checked": P,
-				onClick: z
-			},
-			T,
-			I
-		],
-		ref: [
-			L,
-			c,
-			D.ref
-		]
-	});
-	return /* @__PURE__ */ E(O.Provider, {
-		value: R,
-		children: B
-	});
-});
-process.env.NODE_ENV !== "production" && (k.displayName = "MenuCheckboxItem");
-//#endregion
+import { Icon as e } from "./icon.js";
+import { Avatar as t } from "./avatar.js";
+import { n, t as r } from "./_shared/dropdownItems.js";
+import { n as i } from "./_shared/SidebarContext.js";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+import { Menu as c } from "@base-ui-components/react/menu";
 //#region src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx
-function A({ label: e, block: t = !1, compact: n, current: r, organizations: i, onOrgChange: a, defaultOpen: o, items: f, renderLink: p = x }) {
-	let h = i.filter((e) => e.id !== r.id), v = C(), S = n ?? v.rail;
-	return /* @__PURE__ */ D(m, {
-		defaultOpen: o,
-		children: [/* @__PURE__ */ D(y, {
+function l({ label: l, block: u = !1, compact: d, current: f, organizations: p, onOrgChange: m, defaultOpen: h, items: g, renderLink: _ = r }) {
+	let v = p.filter((e) => e.id !== f.id), y = i(), b = d ?? y.rail;
+	return /* @__PURE__ */ s(c.Root, {
+		defaultOpen: h,
+		children: [/* @__PURE__ */ s(c.Trigger, {
 			className: [
 				"org-switcher__trigger",
-				t && !S ? "org-switcher__trigger--block" : "",
-				S ? "org-switcher__trigger--compact" : ""
+				u && !b ? "org-switcher__trigger--block" : "",
+				b ? "org-switcher__trigger--compact" : ""
 			].filter(Boolean).join(" "),
-			"aria-label": e ?? `Organización: ${r.name}`,
+			"aria-label": l ?? `Organización: ${f.name}`,
 			children: [
-				/* @__PURE__ */ E(c, {
-					src: r.logoUrl,
-					name: r.name,
+				/* @__PURE__ */ o(t, {
+					src: f.logoUrl,
+					name: f.name,
 					alt: "",
 					size: "sm",
 					shape: "square"
 				}),
-				!S && /* @__PURE__ */ E("span", {
+				!b && /* @__PURE__ */ o("span", {
 					className: "org-switcher__name",
-					children: r.name
+					children: f.name
 				}),
-				!S && /* @__PURE__ */ E(s, {
+				!b && /* @__PURE__ */ o(e, {
 					name: "chevron",
 					size: "sm",
 					className: "org-switcher__chevron"
 				})
 			]
-		}), /* @__PURE__ */ E(_, { children: /* @__PURE__ */ E(u, {
+		}), /* @__PURE__ */ o(c.Portal, { children: /* @__PURE__ */ o(c.Positioner, {
 			className: "org-switcher__positioner",
 			sideOffset: 4,
 			align: "start",
-			children: /* @__PURE__ */ D(b, {
+			children: /* @__PURE__ */ s(c.Popup, {
 				className: "org-switcher__content",
 				children: [
-					/* @__PURE__ */ D(k, {
+					/* @__PURE__ */ s(c.CheckboxItem, {
 						className: "org-switcher__item org-switcher__item--active",
 						checked: !0,
 						onCheckedChange: () => void 0,
-						children: [/* @__PURE__ */ E(c, {
-							src: r.logoUrl,
-							name: r.name,
+						children: [/* @__PURE__ */ o(t, {
+							src: f.logoUrl,
+							name: f.name,
 							alt: "",
 							size: "sm",
 							shape: "square"
-						}), /* @__PURE__ */ E("span", { children: r.name })]
+						}), /* @__PURE__ */ o("span", { children: f.name })]
 					}),
-					h.map((e) => /* @__PURE__ */ D(d, {
+					v.map((e) => /* @__PURE__ */ s(c.Item, {
 						className: "org-switcher__item",
-						onClick: () => a(e.id),
-						children: [/* @__PURE__ */ E(c, {
+						onClick: () => m(e.id),
+						children: [/* @__PURE__ */ o(t, {
 							src: e.logoUrl,
 							name: e.name,
 							alt: "",
 							size: "sm",
 							shape: "square"
-						}), /* @__PURE__ */ E("span", { children: e.name })]
+						}), /* @__PURE__ */ o("span", { children: e.name })]
 					}, e.id)),
-					f && f.length > 0 && /* @__PURE__ */ D(T, { children: [/* @__PURE__ */ E(l, { className: "org-switcher__separator" }), g({
-						items: f,
+					g && g.length > 0 && /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o(c.Separator, { className: "org-switcher__separator" }), n({
+						items: g,
 						itemClass: (e) => ["org-switcher__item", e ? "org-switcher__item--destructive" : ""].filter(Boolean).join(" "),
 						separatorClass: "org-switcher__separator",
-						renderLink: p
+						renderLink: _
 					})] })
 				]
 			})
@@ -144,4 +78,4 @@ function A({ label: e, block: t = !1, compact: n, current: r, organizations: i, 
 	});
 }
 //#endregion
-export { A as OrgSwitcher };
+export { l as OrgSwitcher };

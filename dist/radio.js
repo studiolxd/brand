@@ -1,14 +1,14 @@
 'use client';
 import './radio.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Radio/Radio.tsx
-var n = e(function({ size: e = "md", className: n, ...r }, i) {
-	return /* @__PURE__ */ t("input", {
+var n = t(function({ size: t = "md", className: n, ...r }, i) {
+	return /* @__PURE__ */ e("input", {
 		ref: i,
 		className: [
 			"radio",
-			e === "md" ? "" : `radio--${e}`,
+			t === "md" ? "" : `radio--${t}`,
 			n ?? ""
 		].filter(Boolean).join(" "),
 		...r,

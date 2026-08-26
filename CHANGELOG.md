@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.0.5
+
+### Corregido
+
+- `@base-ui-components/react` es externo del build (como react-hook-form y
+  sonner): empaquetado arrastraba un shim CJS de `require` que Turbopack rechaza
+  en desarrollo (`dynamic usage of require is not supported`).
+
 ## v16.0.4
 
 ### Corregido

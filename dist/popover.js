@@ -1,25 +1,24 @@
 'use client';
 import './popover.css';
-import { i as e, n as t, r as n, t as r } from "./_shared/PopoverPopup.js";
-import { t as i } from "./_shared/PopoverTrigger.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { Popover as n } from "@base-ui-components/react/popover";
 //#region src/stories/atoms/Popover/Popover.tsx
-function s({ trigger: s, children: c, open: l, defaultOpen: u, onOpenChange: d, side: f = "bottom", align: p = "start", sideOffset: m = 8, className: h }) {
-	return /* @__PURE__ */ o(e, {
-		open: l,
-		defaultOpen: u,
-		onOpenChange: (e) => d?.(e),
-		children: [/* @__PURE__ */ a(i, { render: s }), /* @__PURE__ */ a(n, { children: /* @__PURE__ */ a(t, {
+function r({ trigger: r, children: i, open: a, defaultOpen: o, onOpenChange: s, side: c = "bottom", align: l = "start", sideOffset: u = 8, className: d }) {
+	return /* @__PURE__ */ t(n.Root, {
+		open: a,
+		defaultOpen: o,
+		onOpenChange: (e) => s?.(e),
+		children: [/* @__PURE__ */ e(n.Trigger, { render: r }), /* @__PURE__ */ e(n.Portal, { children: /* @__PURE__ */ e(n.Positioner, {
 			className: "popover__positioner",
-			side: f,
-			align: p,
-			sideOffset: m,
-			children: /* @__PURE__ */ a(r, {
-				className: ["popover", h].filter(Boolean).join(" "),
-				children: c
+			side: c,
+			align: l,
+			sideOffset: u,
+			children: /* @__PURE__ */ e(n.Popup, {
+				className: ["popover", d].filter(Boolean).join(" "),
+				children: i
 			})
 		}) })]
 	});
 }
 //#endregion
-export { s as Popover };
+export { r as Popover };

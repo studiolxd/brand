@@ -1,51 +1,51 @@
 'use client';
 import './sidebar-nav.css';
-import { a as e, i as t, n, r, t as i } from "./_shared/AccordionPanel.js";
-import { Icon as a } from "./icon.js";
-import { t as o } from "./_shared/Tooltip.js";
-import { Menu as s } from "./menu.js";
-import { n as c } from "./_shared/SidebarContext.js";
-import { Fragment as l, jsx as u, jsxs as d } from "react/jsx-runtime";
+import { Icon as e } from "./icon.js";
+import { Tooltip as t } from "./tooltip.js";
+import { Menu as n } from "./menu.js";
+import { n as r } from "./_shared/SidebarContext.js";
+import { Accordion as i } from "@base-ui-components/react/accordion";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/SidebarNav/SidebarNav.tsx
-function f({ children: e, ...t }) {
-	return /* @__PURE__ */ u("a", {
+function c({ children: e, ...t }) {
+	return /* @__PURE__ */ o("a", {
 		...t,
 		children: e
 	});
 }
-function p({ label: p = "Navegación principal", rail: m, entries: h, defaultValue: g, value: _, onValueChange: v, renderLink: y = f }) {
-	let b = _ === void 0 ? { defaultValue: g } : {
-		value: _,
-		onValueChange: (e) => v?.(e ?? [])
-	}, x = c();
-	return m ?? x.rail ? /* @__PURE__ */ u("nav", {
+function l({ label: l = "Navegación principal", rail: u, entries: d, defaultValue: f, value: p, onValueChange: m, renderLink: h = c }) {
+	let g = p === void 0 ? { defaultValue: f } : {
+		value: p,
+		onValueChange: (e) => m?.(e ?? [])
+	}, _ = r();
+	return u ?? _.rail ? /* @__PURE__ */ o("nav", {
 		className: "sidebar-nav sidebar-nav--rail",
-		"aria-label": p,
-		children: /* @__PURE__ */ u("ul", {
+		"aria-label": l,
+		children: /* @__PURE__ */ o("ul", {
 			className: "sidebar-nav__rail",
 			role: "list",
-			children: h.map((e) => {
-				let t = /* @__PURE__ */ u("span", {
+			children: d.map((e) => {
+				let r = /* @__PURE__ */ o("span", {
 					className: "sidebar-nav__rail-icon",
 					"aria-hidden": "true",
-					children: e.icon ?? /* @__PURE__ */ u("span", {
+					children: e.icon ?? /* @__PURE__ */ o("span", {
 						className: "sidebar-nav__rail-initial",
 						children: e.label.charAt(0)
 					})
 				});
-				if (e.kind === "link") return /* @__PURE__ */ u("li", { children: /* @__PURE__ */ u(o, {
+				if (e.kind === "link") return /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(t, {
 					label: e.label,
 					side: "right",
-					children: y({
+					children: h({
 						href: e.href,
 						className: ["sidebar-nav__rail-item", e.active ? "sidebar-nav__rail-item--active" : ""].filter(Boolean).join(" "),
 						"aria-current": e.active ? "page" : void 0,
 						"aria-label": e.label,
-						children: t
+						children: r
 					})
 				}) }, e.id);
-				let n = e.items.some((e) => e.active);
-				return /* @__PURE__ */ u("li", { children: /* @__PURE__ */ u(s, {
+				let i = e.items.some((e) => e.active);
+				return /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(n, {
 					items: [
 						e.href ? {
 							type: "link",
@@ -65,100 +65,100 @@ function p({ label: p = "Navegación principal", rail: m, entries: h, defaultVal
 					side: "right",
 					align: "start",
 					openOnHover: !0,
-					renderLink: (e) => y({
+					renderLink: (e) => h({
 						...e,
 						href: e.href,
 						className: e.className,
 						children: e.children
 					}),
-					trigger: /* @__PURE__ */ u("button", {
+					trigger: /* @__PURE__ */ o("button", {
 						type: "button",
-						className: ["sidebar-nav__rail-item", n ? "sidebar-nav__rail-item--active" : ""].filter(Boolean).join(" "),
+						className: ["sidebar-nav__rail-item", i ? "sidebar-nav__rail-item--active" : ""].filter(Boolean).join(" "),
 						"aria-label": e.label,
-						children: t
+						children: r
 					})
 				}) }, e.id);
 			})
 		})
-	}) : /* @__PURE__ */ u("nav", {
+	}) : /* @__PURE__ */ o("nav", {
 		className: "sidebar-nav",
-		"aria-label": p,
-		children: /* @__PURE__ */ u(e, {
+		"aria-label": l,
+		children: /* @__PURE__ */ o(i.Root, {
 			className: "sidebar-nav__accordion",
 			multiple: !0,
-			...b,
-			children: h.map((e) => {
-				if (e.kind === "link") {
-					let t = ["sidebar-nav__top-link", e.active ? "sidebar-nav__top-link--active" : ""].filter(Boolean).join(" ");
-					return /* @__PURE__ */ u("div", { children: y({
-						href: e.href,
-						className: t,
-						title: e.label,
-						"aria-current": e.active ? "page" : void 0,
-						children: /* @__PURE__ */ d(l, { children: [e.icon && /* @__PURE__ */ u("span", {
+			...g,
+			children: d.map((t) => {
+				if (t.kind === "link") {
+					let e = ["sidebar-nav__top-link", t.active ? "sidebar-nav__top-link--active" : ""].filter(Boolean).join(" ");
+					return /* @__PURE__ */ o("div", { children: h({
+						href: t.href,
+						className: e,
+						title: t.label,
+						"aria-current": t.active ? "page" : void 0,
+						children: /* @__PURE__ */ s(a, { children: [t.icon && /* @__PURE__ */ o("span", {
 							className: "sidebar-nav__item-icon",
 							"aria-hidden": "true",
-							children: e.icon
-						}), /* @__PURE__ */ u("span", {
+							children: t.icon
+						}), /* @__PURE__ */ o("span", {
 							className: "sidebar-nav__item-label",
-							children: e.label
+							children: t.label
 						})] })
-					}) }, e.id);
+					}) }, t.id);
 				}
-				return /* @__PURE__ */ d(t, {
-					value: e.id,
+				return /* @__PURE__ */ s(i.Item, {
+					value: t.id,
 					className: "sidebar-nav__group",
-					children: [/* @__PURE__ */ d(r, {
+					children: [/* @__PURE__ */ s(i.Header, {
 						className: "sidebar-nav__group-header",
-						children: [e.href ? y({
-							href: e.href,
+						children: [t.href ? h({
+							href: t.href,
 							className: "sidebar-nav__group-label",
-							title: e.label,
-							children: /* @__PURE__ */ d(l, { children: [e.icon && /* @__PURE__ */ u("span", {
+							title: t.label,
+							children: /* @__PURE__ */ s(a, { children: [t.icon && /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-icon",
 								"aria-hidden": "true",
-								children: e.icon
-							}), /* @__PURE__ */ u("span", {
+								children: t.icon
+							}), /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-label",
-								children: e.label
+								children: t.label
 							})] })
-						}) : /* @__PURE__ */ d("span", {
+						}) : /* @__PURE__ */ s("span", {
 							className: "sidebar-nav__group-label",
-							title: e.label,
-							children: [e.icon && /* @__PURE__ */ u("span", {
+							title: t.label,
+							children: [t.icon && /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-icon",
 								"aria-hidden": "true",
-								children: e.icon
-							}), /* @__PURE__ */ u("span", {
+								children: t.icon
+							}), /* @__PURE__ */ o("span", {
 								className: "sidebar-nav__item-label",
-								children: e.label
+								children: t.label
 							})]
-						}), /* @__PURE__ */ u(n, {
+						}), /* @__PURE__ */ o(i.Trigger, {
 							className: "sidebar-nav__group-chevron",
-							children: /* @__PURE__ */ u(a, {
+							children: /* @__PURE__ */ o(e, {
 								name: "chevron",
 								className: "sidebar-nav__group-chevron-icon",
 								size: "sm"
 							})
 						})]
-					}), /* @__PURE__ */ u(i, {
+					}), /* @__PURE__ */ o(i.Panel, {
 						className: "sidebar-nav__group-content",
-						children: /* @__PURE__ */ u("div", {
+						children: /* @__PURE__ */ o("div", {
 							className: "sidebar-nav__group-content-inner",
-							children: /* @__PURE__ */ u("ul", {
+							children: /* @__PURE__ */ o("ul", {
 								className: "sidebar-nav__items",
 								role: "list",
-								children: e.items.map((e) => {
+								children: t.items.map((e) => {
 									let t = ["sidebar-nav__item", e.active ? "sidebar-nav__item--active" : ""].filter(Boolean).join(" ");
-									return /* @__PURE__ */ u("li", { children: y({
+									return /* @__PURE__ */ o("li", { children: h({
 										href: e.href,
 										className: t,
 										"aria-current": e.active ? "page" : void 0,
-										children: /* @__PURE__ */ d(l, { children: [e.icon && /* @__PURE__ */ u("span", {
+										children: /* @__PURE__ */ s(a, { children: [e.icon && /* @__PURE__ */ o("span", {
 											className: "sidebar-nav__item-icon",
 											"aria-hidden": "true",
 											children: e.icon
-										}), /* @__PURE__ */ u("span", {
+										}), /* @__PURE__ */ o("span", {
 											className: "sidebar-nav__item-label",
 											children: e.label
 										})] })
@@ -167,10 +167,10 @@ function p({ label: p = "Navegación principal", rail: m, entries: h, defaultVal
 							})
 						})
 					})]
-				}, e.id);
+				}, t.id);
 			})
 		})
 	});
 }
 //#endregion
-export { p as SidebarNav };
+export { l as SidebarNav };

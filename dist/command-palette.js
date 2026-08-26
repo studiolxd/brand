@@ -1,9 +1,9 @@
 'use client';
 import './command-palette.css';
 import { Modal as e } from "./modal.js";
-import * as t from "react";
-import { useEffect as n } from "react";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import * as r from "react";
+import { useEffect as i } from "react";
 import * as a from "@radix-ui/react-dialog";
 import { Primitive as o } from "@radix-ui/react-primitive";
 import { useId as s } from "@radix-ui/react-id";
@@ -25,8 +25,8 @@ function C(e, t, n) {
 }
 //#endregion
 //#region node_modules/.pnpm/cmdk@1.1.1_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react@19.2.14_react-dom_774a6dff9510bebce6a2343405a1ca59/node_modules/cmdk/dist/index.mjs
-var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-heading=\"\"]", D = "[cmdk-item=\"\"]", O = `${D}:not([aria-disabled="true"])`, k = "cmdk-item-select", A = "data-value", ee = (e, t, n) => C(e, t, n), j = t.createContext(void 0), M = () => t.useContext(j), N = t.createContext(void 0), P = () => t.useContext(N), F = t.createContext(void 0), I = t.forwardRef((e, n) => {
-	let r = J(() => ({
+var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-heading=\"\"]", D = "[cmdk-item=\"\"]", O = `${D}:not([aria-disabled="true"])`, k = "cmdk-item-select", A = "data-value", ee = (e, t, n) => C(e, t, n), j = r.createContext(void 0), M = () => r.useContext(j), N = r.createContext(void 0), P = () => r.useContext(N), F = r.createContext(void 0), I = r.forwardRef((e, t) => {
+	let n = J(() => ({
 		search: "",
 		value: e.value ?? e.defaultValue ?? "",
 		selectedItemId: void 0,
@@ -35,30 +35,30 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 			items: /* @__PURE__ */ new Map(),
 			groups: /* @__PURE__ */ new Set()
 		}
-	})), i = J(() => /* @__PURE__ */ new Set()), a = J(() => /* @__PURE__ */ new Map()), c = J(() => /* @__PURE__ */ new Map()), l = J(() => /* @__PURE__ */ new Set()), u = K(e), { label: d, children: f, value: p, onValueChange: m, filter: h, shouldFilter: g, loop: _, disablePointerSelection: v = !1, vimBindings: y = !0, ...b } = e, x = s(), S = s(), C = s(), M = t.useRef(null), P = re();
+	})), i = J(() => /* @__PURE__ */ new Set()), a = J(() => /* @__PURE__ */ new Map()), c = J(() => /* @__PURE__ */ new Map()), l = J(() => /* @__PURE__ */ new Set()), u = K(e), { label: d, children: f, value: p, onValueChange: m, filter: h, shouldFilter: g, loop: _, disablePointerSelection: v = !1, vimBindings: y = !0, ...b } = e, x = s(), S = s(), C = s(), M = r.useRef(null), P = re();
 	q(() => {
 		if (p !== void 0) {
 			let e = p.trim();
-			r.current.value = e, F.emit();
+			n.current.value = e, F.emit();
 		}
 	}, [p]), q(() => {
 		P(6, V);
 	}, []);
-	let F = t.useMemo(() => ({
+	let F = r.useMemo(() => ({
 		subscribe: (e) => (l.current.add(e), () => l.current.delete(e)),
-		snapshot: () => r.current,
-		setState: (e, t, n) => {
+		snapshot: () => n.current,
+		setState: (e, t, r) => {
 			var i, a, o;
-			if (!Object.is(r.current[e], t)) {
-				if (r.current[e] = t, e === "search") B(), R(), P(1, z);
+			if (!Object.is(n.current[e], t)) {
+				if (n.current[e] = t, e === "search") B(), R(), P(1, z);
 				else if (e === "value") {
 					if (document.activeElement.hasAttribute("cmdk-input") || document.activeElement.hasAttribute("cmdk-root")) {
 						let e = document.getElementById(C);
 						e ? e.focus() : (i = document.getElementById(x)) == null || i.focus();
 					}
 					if (P(7, () => {
-						r.current.selectedItemId = H()?.id, F.emit();
-					}), n || P(5, V), u.current?.value !== void 0) {
+						n.current.selectedItemId = H()?.id, F.emit();
+					}), r || P(5, V), u.current?.value !== void 0) {
 						let e = t ?? "";
 						(o = (a = u.current).onValueChange) == null || o.call(a, e);
 						return;
@@ -70,19 +70,19 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 		emit: () => {
 			l.current.forEach((e) => e());
 		}
-	}), []), I = t.useMemo(() => ({
-		value: (e, t, n) => {
+	}), []), I = r.useMemo(() => ({
+		value: (e, t, r) => {
 			t !== c.current.get(e)?.value && (c.current.set(e, {
 				value: t,
-				keywords: n
-			}), r.current.filtered.items.set(e, L(t, n)), P(2, () => {
+				keywords: r
+			}), n.current.filtered.items.set(e, L(t, r)), P(2, () => {
 				R(), F.emit();
 			}));
 		},
 		item: (e, t) => (i.current.add(e), t && (a.current.has(t) ? a.current.get(t).add(e) : a.current.set(t, new Set([e]))), P(3, () => {
-			B(), R(), r.current.value || z(), F.emit();
+			B(), R(), n.current.value || z(), F.emit();
 		}), () => {
-			c.current.delete(e), i.current.delete(e), r.current.filtered.items.delete(e);
+			c.current.delete(e), i.current.delete(e), n.current.filtered.items.delete(e);
 			let t = H();
 			P(4, () => {
 				B(), t?.getAttribute("id") === e && z(), F.emit();
@@ -100,26 +100,26 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 		listInnerRef: M
 	}), []);
 	function L(e, t) {
-		let n = u.current?.filter ?? ee;
-		return e ? n(e, r.current.search, t) : 0;
+		let r = u.current?.filter ?? ee;
+		return e ? r(e, n.current.search, t) : 0;
 	}
 	function R() {
-		if (!r.current.search || u.current.shouldFilter === !1) return;
-		let e = r.current.filtered.items, t = [];
-		r.current.filtered.groups.forEach((n) => {
+		if (!n.current.search || u.current.shouldFilter === !1) return;
+		let e = n.current.filtered.items, t = [];
+		n.current.filtered.groups.forEach((n) => {
 			let r = a.current.get(n), i = 0;
 			r.forEach((t) => {
 				let n = e.get(t);
 				i = Math.max(n, i);
 			}), t.push([n, i]);
 		});
-		let n = M.current;
+		let r = M.current;
 		U().sort((t, n) => {
 			let r = t.getAttribute("id"), i = n.getAttribute("id");
 			return (e.get(i) ?? 0) - (e.get(r) ?? 0);
 		}).forEach((e) => {
 			let t = e.closest(T);
-			t ? t.appendChild(e.parentElement === t ? e : e.closest(`${T} > *`)) : n.appendChild(e.parentElement === n ? e : e.closest(`${T} > *`));
+			t ? t.appendChild(e.parentElement === t ? e : e.closest(`${T} > *`)) : r.appendChild(e.parentElement === r ? e : e.closest(`${T} > *`));
 		}), t.sort((e, t) => t[1] - e[1]).forEach((e) => {
 			let t = M.current?.querySelector(`${w}[${A}="${encodeURIComponent(e[0])}"]`);
 			t?.parentElement.appendChild(t);
@@ -130,21 +130,21 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 		F.setState("value", e || void 0);
 	}
 	function B() {
-		if (!r.current.search || u.current.shouldFilter === !1) {
-			r.current.filtered.count = i.current.size;
+		if (!n.current.search || u.current.shouldFilter === !1) {
+			n.current.filtered.count = i.current.size;
 			return;
 		}
-		r.current.filtered.groups = /* @__PURE__ */ new Set();
+		n.current.filtered.groups = /* @__PURE__ */ new Set();
 		let e = 0;
 		for (let t of i.current) {
-			let n = L(c.current.get(t)?.value ?? "", c.current.get(t)?.keywords ?? []);
-			r.current.filtered.items.set(t, n), n > 0 && e++;
+			let r = L(c.current.get(t)?.value ?? "", c.current.get(t)?.keywords ?? []);
+			n.current.filtered.items.set(t, r), r > 0 && e++;
 		}
-		for (let [e, t] of a.current) for (let n of t) if (r.current.filtered.items.get(n) > 0) {
-			r.current.filtered.groups.add(e);
+		for (let [e, t] of a.current) for (let r of t) if (n.current.filtered.items.get(r) > 0) {
+			n.current.filtered.groups.add(e);
 			break;
 		}
-		r.current.filtered.count = e;
+		n.current.filtered.count = e;
 	}
 	function V() {
 		var e;
@@ -176,8 +176,8 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 	}, $ = (e) => {
 		e.preventDefault(), e.metaKey ? W(0) : e.altKey ? Y(-1) : G(-1);
 	};
-	return t.createElement(o.div, {
-		ref: n,
+	return r.createElement(o.div, {
+		ref: t,
 		tabIndex: -1,
 		...b,
 		"cmdk-root": "",
@@ -216,23 +216,23 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 				}
 			}
 		}
-	}, t.createElement("label", {
+	}, r.createElement("label", {
 		"cmdk-label": "",
 		htmlFor: I.inputId,
 		id: I.labelId,
 		style: ie
-	}, d), Q(e, (e) => t.createElement(N.Provider, { value: F }, t.createElement(j.Provider, { value: I }, e))));
-}), L = t.forwardRef((e, n) => {
-	let r = s(), i = t.useRef(null), a = t.useContext(F), l = M(), u = K(e), d = u.current?.forceMount ?? a?.forceMount;
+	}, d), Q(e, (e) => r.createElement(N.Provider, { value: F }, r.createElement(j.Provider, { value: I }, e))));
+}), L = r.forwardRef((e, t) => {
+	let n = s(), i = r.useRef(null), a = r.useContext(F), l = M(), u = K(e), d = u.current?.forceMount ?? a?.forceMount;
 	q(() => {
-		if (!d) return l.item(r, a?.id);
+		if (!d) return l.item(n, a?.id);
 	}, [d]);
-	let f = X(r, i, [
+	let f = X(n, i, [
 		e.value,
 		e.children,
 		i
-	], e.keywords), p = P(), m = Y((e) => e.value && e.value === f.current), h = Y((e) => d || l.filter() === !1 ? !0 : e.search ? e.filtered.items.get(r) > 0 : !0);
-	t.useEffect(() => {
+	], e.keywords), p = P(), m = Y((e) => e.value && e.value === f.current), h = Y((e) => d || l.filter() === !1 ? !0 : e.search ? e.filtered.items.get(n) > 0 : !0);
+	r.useEffect(() => {
 		let t = i.current;
 		if (!(!t || e.disabled)) return t.addEventListener(k, g), () => t.removeEventListener(k, g);
 	}, [
@@ -249,10 +249,10 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 	}
 	if (!h) return null;
 	let { disabled: v, value: y, onSelect: b, forceMount: x, keywords: S, ...C } = e;
-	return t.createElement(o.div, {
-		ref: c(i, n),
+	return r.createElement(o.div, {
+		ref: c(i, t),
 		...C,
-		id: r,
+		id: n,
 		"cmdk-item": "",
 		role: "option",
 		"aria-disabled": !!v,
@@ -262,47 +262,47 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 		onPointerMove: v || l.getDisablePointerSelection() ? void 0 : _,
 		onClick: v ? void 0 : g
 	}, e.children);
-}), R = t.forwardRef((e, n) => {
-	let { heading: r, children: i, forceMount: a, ...l } = e, u = s(), d = t.useRef(null), f = t.useRef(null), p = s(), m = M(), h = Y((e) => a || m.filter() === !1 ? !0 : e.search ? e.filtered.groups.has(u) : !0);
+}), R = r.forwardRef((e, t) => {
+	let { heading: n, children: i, forceMount: a, ...l } = e, u = s(), d = r.useRef(null), f = r.useRef(null), p = s(), m = M(), h = Y((e) => a || m.filter() === !1 ? !0 : e.search ? e.filtered.groups.has(u) : !0);
 	q(() => m.group(u), []), X(u, d, [
 		e.value,
 		e.heading,
 		f
 	]);
-	let g = t.useMemo(() => ({
+	let g = r.useMemo(() => ({
 		id: u,
 		forceMount: a
 	}), [a]);
-	return t.createElement(o.div, {
-		ref: c(d, n),
+	return r.createElement(o.div, {
+		ref: c(d, t),
 		...l,
 		"cmdk-group": "",
 		role: "presentation",
 		hidden: h ? void 0 : !0
-	}, r && t.createElement("div", {
+	}, n && r.createElement("div", {
 		ref: f,
 		"cmdk-group-heading": "",
 		"aria-hidden": !0,
 		id: p
-	}, r), Q(e, (e) => t.createElement("div", {
+	}, n), Q(e, (e) => r.createElement("div", {
 		"cmdk-group-items": "",
 		role: "group",
-		"aria-labelledby": r ? p : void 0
-	}, t.createElement(F.Provider, { value: g }, e))));
-}), z = t.forwardRef((e, n) => {
-	let { alwaysRender: r, ...i } = e, a = t.useRef(null), s = Y((e) => !e.search);
-	return !r && !s ? null : t.createElement(o.div, {
-		ref: c(a, n),
+		"aria-labelledby": n ? p : void 0
+	}, r.createElement(F.Provider, { value: g }, e))));
+}), z = r.forwardRef((e, t) => {
+	let { alwaysRender: n, ...i } = e, a = r.useRef(null), s = Y((e) => !e.search);
+	return !n && !s ? null : r.createElement(o.div, {
+		ref: c(a, t),
 		...i,
 		"cmdk-separator": "",
 		role: "separator"
 	});
-}), B = t.forwardRef((e, n) => {
-	let { onValueChange: r, ...i } = e, a = e.value != null, s = P(), c = Y((e) => e.search), l = Y((e) => e.selectedItemId), u = M();
-	return t.useEffect(() => {
+}), B = r.forwardRef((e, t) => {
+	let { onValueChange: n, ...i } = e, a = e.value != null, s = P(), c = Y((e) => e.search), l = Y((e) => e.selectedItemId), u = M();
+	return r.useEffect(() => {
 		e.value != null && s.setState("search", e.value);
-	}, [e.value]), t.createElement(o.input, {
-		ref: n,
+	}, [e.value]), r.createElement(o.input, {
+		ref: t,
 		...i,
 		"cmdk-input": "",
 		autoComplete: "off",
@@ -318,12 +318,12 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 		type: "text",
 		value: a ? e.value : c,
 		onChange: (e) => {
-			a || s.setState("search", e.target.value), r?.(e.target.value);
+			a || s.setState("search", e.target.value), n?.(e.target.value);
 		}
 	});
-}), V = t.forwardRef((e, n) => {
-	let { children: r, label: i = "Suggestions", ...a } = e, s = t.useRef(null), l = t.useRef(null), u = Y((e) => e.selectedItemId), d = M();
-	return t.useEffect(() => {
+}), V = r.forwardRef((e, t) => {
+	let { children: n, label: i = "Suggestions", ...a } = e, s = r.useRef(null), l = r.useRef(null), u = Y((e) => e.selectedItemId), d = M();
+	return r.useEffect(() => {
 		if (l.current && s.current) {
 			let e = l.current, t = s.current, n, r = new ResizeObserver(() => {
 				n = requestAnimationFrame(() => {
@@ -335,8 +335,8 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 				cancelAnimationFrame(n), r.unobserve(e);
 			};
 		}
-	}, []), t.createElement(o.div, {
-		ref: c(s, n),
+	}, []), r.createElement(o.div, {
+		ref: c(s, t),
 		...a,
 		"cmdk-list": "",
 		role: "listbox",
@@ -344,43 +344,43 @@ var w = "[cmdk-group=\"\"]", T = "[cmdk-group-items=\"\"]", E = "[cmdk-group-hea
 		"aria-activedescendant": u,
 		"aria-label": i,
 		id: d.listId
-	}, Q(e, (e) => t.createElement("div", {
+	}, Q(e, (e) => r.createElement("div", {
 		ref: c(l, d.listInnerRef),
 		"cmdk-list-sizer": ""
 	}, e)));
-}), H = t.forwardRef((e, n) => {
-	let { open: r, onOpenChange: i, overlayClassName: o, contentClassName: s, container: c, ...l } = e;
-	return t.createElement(a.Root, {
-		open: r,
+}), H = r.forwardRef((e, t) => {
+	let { open: n, onOpenChange: i, overlayClassName: o, contentClassName: s, container: c, ...l } = e;
+	return r.createElement(a.Root, {
+		open: n,
 		onOpenChange: i
-	}, t.createElement(a.Portal, { container: c }, t.createElement(a.Overlay, {
+	}, r.createElement(a.Portal, { container: c }, r.createElement(a.Overlay, {
 		"cmdk-overlay": "",
 		className: o
-	}), t.createElement(a.Content, {
+	}), r.createElement(a.Content, {
 		"aria-label": e.label,
 		"cmdk-dialog": "",
 		className: s
-	}, t.createElement(I, {
-		ref: n,
+	}, r.createElement(I, {
+		ref: t,
 		...l
 	}))));
-}), U = t.forwardRef((e, n) => Y((e) => e.filtered.count === 0) ? t.createElement(o.div, {
-	ref: n,
+}), U = r.forwardRef((e, t) => Y((e) => e.filtered.count === 0) ? r.createElement(o.div, {
+	ref: t,
 	...e,
 	"cmdk-empty": "",
 	role: "presentation"
-}) : null), W = t.forwardRef((e, n) => {
-	let { progress: r, children: i, label: a = "Loading...", ...s } = e;
-	return t.createElement(o.div, {
-		ref: n,
+}) : null), W = r.forwardRef((e, t) => {
+	let { progress: n, children: i, label: a = "Loading...", ...s } = e;
+	return r.createElement(o.div, {
+		ref: t,
 		...s,
 		"cmdk-loading": "",
 		role: "progressbar",
-		"aria-valuenow": r,
+		"aria-valuenow": n,
 		"aria-valuemin": 0,
 		"aria-valuemax": 100,
 		"aria-label": a
-	}, Q(e, (e) => t.createElement("div", { "aria-hidden": !0 }, e)));
+	}, Q(e, (e) => r.createElement("div", { "aria-hidden": !0 }, e)));
 }), G = Object.assign(I, {
 	List: V,
 	Item: L,
@@ -406,47 +406,47 @@ function ne(e, t) {
 	}
 }
 function K(e) {
-	let n = t.useRef(e);
+	let t = r.useRef(e);
 	return q(() => {
-		n.current = e;
-	}), n;
+		t.current = e;
+	}), t;
 }
-var q = typeof window > "u" ? t.useEffect : t.useLayoutEffect;
+var q = typeof window > "u" ? r.useEffect : r.useLayoutEffect;
 function J(e) {
-	let n = t.useRef();
-	return n.current === void 0 && (n.current = e()), n;
+	let t = r.useRef();
+	return t.current === void 0 && (t.current = e()), t;
 }
 function Y(e) {
-	let n = P(), r = () => e(n.snapshot());
-	return t.useSyncExternalStore(n.subscribe, r, r);
+	let t = P(), n = () => e(t.snapshot());
+	return r.useSyncExternalStore(t.subscribe, n, n);
 }
-function X(e, n, r, i = []) {
-	let a = t.useRef(), o = M();
+function X(e, t, n, i = []) {
+	let a = r.useRef(), o = M();
 	return q(() => {
-		var t;
+		var r;
 		let s = (() => {
-			for (let e of r) {
+			for (let e of n) {
 				if (typeof e == "string") return e.trim();
 				if (typeof e == "object" && "current" in e) return e.current ? e.current.textContent?.trim() : a.current;
 			}
 		})(), c = i.map((e) => e.trim());
-		o.value(e, s, c), (t = n.current) == null || t.setAttribute(A, s), a.current = s;
+		o.value(e, s, c), (r = t.current) == null || r.setAttribute(A, s), a.current = s;
 	}), a;
 }
 var re = () => {
-	let [e, n] = t.useState(), r = J(() => /* @__PURE__ */ new Map());
+	let [e, t] = r.useState(), n = J(() => /* @__PURE__ */ new Map());
 	return q(() => {
-		r.current.forEach((e) => e()), r.current = /* @__PURE__ */ new Map();
-	}, [e]), (e, t) => {
-		r.current.set(e, t), n({});
+		n.current.forEach((e) => e()), n.current = /* @__PURE__ */ new Map();
+	}, [e]), (e, r) => {
+		n.current.set(e, r), t({});
 	};
 };
 function Z(e) {
 	let t = e.type;
 	return typeof t == "function" ? t(e.props) : "render" in t ? t.render(e.props) : e;
 }
-function Q({ asChild: e, children: n }, r) {
-	return e && t.isValidElement(n) ? t.cloneElement(Z(n), { ref: n.ref }, r(n.props.children)) : r(n);
+function Q({ asChild: e, children: t }, n) {
+	return e && r.isValidElement(t) ? r.cloneElement(Z(t), { ref: t.ref }, n(t.props.children)) : n(t);
 }
 var ie = {
 	position: "absolute",
@@ -461,43 +461,43 @@ var ie = {
 };
 //#endregion
 //#region src/stories/molecules/CommandPalette/CommandPalette.tsx
-function $({ open: t, onOpenChange: a, groups: o, title: s, placeholder: c, emptyLabel: l, listLabel: u, closeLabel: d, shortcut: f = "k", className: p }) {
-	n(() => {
+function $({ open: r, onOpenChange: a, groups: o, title: s, placeholder: c, emptyLabel: l, listLabel: u, closeLabel: d, shortcut: f = "k", className: p }) {
+	i(() => {
 		if (f === !1) return;
 		let e = (e) => {
-			e.key.toLowerCase() === f && (e.metaKey || e.ctrlKey) && (e.preventDefault(), a(!t));
+			e.key.toLowerCase() === f && (e.metaKey || e.ctrlKey) && (e.preventDefault(), a(!r));
 		};
 		return window.addEventListener("keydown", e), () => window.removeEventListener("keydown", e);
 	}, [
 		f,
-		t,
+		r,
 		a
 	]);
 	let m = o.filter((e) => e.items.length > 0);
-	return /* @__PURE__ */ r(e, {
-		open: t,
+	return /* @__PURE__ */ t(e, {
+		open: r,
 		onClose: () => a(!1),
 		title: s,
 		...d ? { closeLabel: d } : {},
-		children: /* @__PURE__ */ i(G, {
+		children: /* @__PURE__ */ n(G, {
 			className: ["command-palette", p].filter(Boolean).join(" "),
-			children: [/* @__PURE__ */ r(G.Input, {
+			children: [/* @__PURE__ */ t(G.Input, {
 				className: "command-palette__input",
 				placeholder: c,
 				autoFocus: !0
-			}), /* @__PURE__ */ i(G.List, {
+			}), /* @__PURE__ */ n(G.List, {
 				className: "command-palette__list",
 				label: u,
-				children: [/* @__PURE__ */ r(G.Empty, {
+				children: [/* @__PURE__ */ t(G.Empty, {
 					className: "command-palette__empty",
-					children: /* @__PURE__ */ r("span", {
+					children: /* @__PURE__ */ t("span", {
 						role: "status",
 						children: l
 					})
-				}), m.map((e) => /* @__PURE__ */ r(G.Group, {
+				}), m.map((e) => /* @__PURE__ */ t(G.Group, {
 					className: "command-palette__group",
 					heading: e.heading,
-					children: e.items.map((e) => /* @__PURE__ */ i(G.Item, {
+					children: e.items.map((e) => /* @__PURE__ */ n(G.Item, {
 						className: "command-palette__item",
 						value: e.label,
 						keywords: e.keywords,
@@ -505,7 +505,7 @@ function $({ open: t, onOpenChange: a, groups: o, title: s, placeholder: c, empt
 						onSelect: () => {
 							a(!1), e.onSelect();
 						},
-						children: [e.icon && /* @__PURE__ */ r("span", {
+						children: [e.icon && /* @__PURE__ */ t("span", {
 							className: "command-palette__item-icon",
 							"aria-hidden": "true",
 							children: e.icon

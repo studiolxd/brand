@@ -1,137 +1,137 @@
 'use client';
 import './async-select.css';
 import { Icon as e } from "./icon.js";
-import { i as t, n, r, t as i } from "./_shared/PopoverPopup.js";
-import { Spinner as a } from "./spinner.js";
-import { useCallback as o, useId as s, useRef as c, useState as l } from "react";
-import { jsx as u, jsxs as d } from "react/jsx-runtime";
+import { Spinner as t } from "./spinner.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { useCallback as i, useId as a, useRef as o, useState as s } from "react";
+import { Popover as c } from "@base-ui-components/react/popover";
 //#region src/stories/atoms/AsyncSelect/AsyncSelect.tsx
-function f({ onSearch: f, value: p, onValueChange: m, selectedOption: h, placeholder: g = "Buscar…", disabled: _, readOnly: v, size: y = "md", id: b, "aria-label": x, "aria-describedby": S, emptyMessage: C = "Sin resultados", loadingLabel: ee = "Buscando…", clearLabel: w = "Limpiar selección", container: T }) {
-	let [E, D] = l(!1), [O, k] = l(""), [A, j] = l(!1), [M, N] = l([]), [P, F] = l(!1), [I, L] = l(-1), [R, z] = l(null), [B, V] = l(null), H = c(null), U = c(null), W = c(null), G = s(), K = s(), q = p === void 0 ? R : p, J = h === void 0 ? B : h, Y = (e) => `${K}-opt-${e}`, X = o(async (e) => {
-		j(!0), F(!1);
+function l({ onSearch: l, value: u, onValueChange: d, selectedOption: f, placeholder: p = "Buscar…", disabled: m, readOnly: h, size: g = "md", id: _, "aria-label": v, "aria-describedby": y, emptyMessage: b = "Sin resultados", loadingLabel: x = "Buscando…", clearLabel: S = "Limpiar selección", container: C }) {
+	let [w, T] = s(!1), [E, D] = s(""), [O, k] = s(!1), [A, j] = s([]), [M, N] = s(!1), [P, F] = s(-1), [I, L] = s(null), [R, z] = s(null), B = o(null), V = o(null), H = o(null), U = a(), W = a(), G = u === void 0 ? I : u, K = f === void 0 ? R : f, q = (e) => `${W}-opt-${e}`, J = i(async (e) => {
+		k(!0), N(!1);
 		try {
-			N(await f(e)), L(-1);
+			j(await l(e)), F(-1);
 		} catch {
-			N([]), L(-1);
+			j([]), F(-1);
 		} finally {
-			j(!1), F(!0);
+			k(!1), N(!0);
 		}
-	}, [f]);
-	function Z(e) {
+	}, [l]);
+	function Y(e) {
 		let t = e.target.value;
-		k(t), H.current && clearTimeout(H.current), H.current = setTimeout(() => void X(t), 300);
+		D(t), B.current && clearTimeout(B.current), B.current = setTimeout(() => void J(t), 300);
+	}
+	function X(e) {
+		m || h || w || (e.preventDefault(), V.current?.focus(), F(-1), D(""), j([]), N(!1), T(!0), J(""));
+	}
+	function Z(e) {
+		u === void 0 && (L(e.value), z(e)), d?.(e.value, e), T(!1), F(-1), D("");
 	}
 	function Q(e) {
-		_ || v || E || (e.preventDefault(), U.current?.focus(), L(-1), k(""), N([]), F(!1), D(!0), X(""));
+		e.stopPropagation(), u === void 0 && (L(null), z(null)), d?.(null, null), D(""), j([]), N(!1), V.current?.focus();
 	}
 	function $(e) {
-		p === void 0 && (z(e.value), V(e)), m?.(e.value, e), D(!1), L(-1), k("");
+		e.key === "ArrowDown" ? (e.preventDefault(), w ? F((e) => Math.min(e + 1, A.length - 1)) : (T(!0), J(E))) : e.key === "ArrowUp" ? (e.preventDefault(), F((e) => Math.max(e - 1, -1))) : e.key === "Enter" && P >= 0 && A[P] ? (e.preventDefault(), Z(A[P])) : e.key === "Escape" ? (T(!1), D(""), F(-1)) : e.key === "Tab" ? (T(!1), F(-1)) : !w && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), D(e.key), T(!0), j([]), N(!1), B.current && clearTimeout(B.current), B.current = setTimeout(() => void J(e.key), 300));
 	}
-	function te(e) {
-		e.stopPropagation(), p === void 0 && (z(null), V(null)), m?.(null, null), k(""), N([]), F(!1), U.current?.focus();
-	}
-	function ne(e) {
-		e.key === "ArrowDown" ? (e.preventDefault(), E ? L((e) => Math.min(e + 1, M.length - 1)) : (D(!0), X(O))) : e.key === "ArrowUp" ? (e.preventDefault(), L((e) => Math.max(e - 1, -1))) : e.key === "Enter" && I >= 0 && M[I] ? (e.preventDefault(), $(M[I])) : e.key === "Escape" ? (D(!1), k(""), L(-1)) : e.key === "Tab" ? (D(!1), L(-1)) : !E && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && (e.preventDefault(), k(e.key), D(!0), N([]), F(!1), H.current && clearTimeout(H.current), H.current = setTimeout(() => void X(e.key), 300));
-	}
-	function re(e, t) {
+	function ee(e, t) {
 		if (!e) {
 			if (t.reason === "outside-press") {
 				let e = t.event?.target;
-				if (e instanceof Node && W.current?.contains(e)) return;
+				if (e instanceof Node && H.current?.contains(e)) return;
 			}
-			D(!1), k(""), L(-1);
+			T(!1), D(""), F(-1);
 		}
 	}
-	let ie = E ? O : J?.label ?? "", ae = [
+	let te = w ? E : K?.label ?? "", ne = [
 		"async-select",
-		y === "md" ? "" : `async-select--${y}`,
-		_ ? "async-select--disabled" : ""
-	].filter(Boolean).join(" "), oe = ["async-select__content", y === "md" ? "" : `async-select__content--${y}`].filter(Boolean).join(" ");
-	return /* @__PURE__ */ d(t, {
-		open: E,
-		onOpenChange: re,
-		children: [/* @__PURE__ */ d("div", {
-			ref: W,
-			className: ae,
-			"data-popup-open": E || void 0,
+		g === "md" ? "" : `async-select--${g}`,
+		m ? "async-select--disabled" : ""
+	].filter(Boolean).join(" "), re = ["async-select__content", g === "md" ? "" : `async-select__content--${g}`].filter(Boolean).join(" ");
+	return /* @__PURE__ */ r(c.Root, {
+		open: w,
+		onOpenChange: ee,
+		children: [/* @__PURE__ */ r("div", {
+			ref: H,
+			className: ne,
+			"data-popup-open": w || void 0,
 			children: [
-				/* @__PURE__ */ u("input", {
-					ref: U,
-					id: b,
+				/* @__PURE__ */ n("input", {
+					ref: V,
+					id: _,
 					type: "text",
 					className: "async-select__input",
-					value: ie,
-					onChange: Z,
-					onPointerDown: Q,
-					onKeyDown: ne,
-					placeholder: g,
-					disabled: _,
-					readOnly: v,
-					"aria-label": x ?? g,
-					"aria-describedby": S,
-					"aria-expanded": E,
+					value: te,
+					onChange: Y,
+					onPointerDown: X,
+					onKeyDown: $,
+					placeholder: p,
+					disabled: m,
+					readOnly: h,
+					"aria-label": v ?? p,
+					"aria-describedby": y,
+					"aria-expanded": w,
 					"aria-haspopup": "listbox",
-					"aria-controls": G,
-					"aria-activedescendant": I >= 0 ? Y(I) : void 0,
+					"aria-controls": U,
+					"aria-activedescendant": P >= 0 ? q(P) : void 0,
 					autoComplete: "off",
 					role: "combobox"
 				}),
-				A && /* @__PURE__ */ u(a, {
+				O && /* @__PURE__ */ n(t, {
 					size: "sm",
 					"aria-hidden": !0
 				}),
-				!A && q && !_ && !v && /* @__PURE__ */ u("button", {
+				!O && G && !m && !h && /* @__PURE__ */ n("button", {
 					type: "button",
 					className: "async-select__clear",
-					"aria-label": w,
+					"aria-label": S,
 					tabIndex: -1,
-					onMouseDown: te,
-					children: /* @__PURE__ */ u(e, {
+					onMouseDown: Q,
+					children: /* @__PURE__ */ n(e, {
 						name: "close",
 						size: "xs"
 					})
 				})
 			]
-		}), /* @__PURE__ */ u(r, {
-			container: T,
-			children: /* @__PURE__ */ u(n, {
+		}), /* @__PURE__ */ n(c.Portal, {
+			container: C,
+			children: /* @__PURE__ */ n(c.Positioner, {
 				className: "async-select__positioner",
-				anchor: W,
+				anchor: H,
 				align: "start",
 				sideOffset: -1,
-				children: /* @__PURE__ */ u(i, {
-					className: oe,
+				children: /* @__PURE__ */ n(c.Popup, {
+					className: re,
 					initialFocus: !1,
 					finalFocus: !1,
-					children: /* @__PURE__ */ d("div", {
+					children: /* @__PURE__ */ r("div", {
 						role: "listbox",
-						"aria-label": x ?? g,
-						id: G,
+						"aria-label": v ?? p,
+						id: U,
 						children: [
-							A && /* @__PURE__ */ u("div", {
+							O && /* @__PURE__ */ n("div", {
 								className: "async-select__loading",
-								children: /* @__PURE__ */ u(a, {
+								children: /* @__PURE__ */ n(t, {
 									size: "sm",
-									label: ee
+									label: x
 								})
 							}),
-							!A && P && M.length === 0 && /* @__PURE__ */ u("div", {
+							!O && M && A.length === 0 && /* @__PURE__ */ n("div", {
 								className: "async-select__empty",
-								children: C
+								children: b
 							}),
-							!A && M.map((e, t) => {
-								let n = e.value === q, r = I === t;
-								return /* @__PURE__ */ u("div", {
-									id: Y(t),
+							!O && A.map((e, t) => {
+								let r = e.value === G, i = P === t;
+								return /* @__PURE__ */ n("div", {
+									id: q(t),
 									role: "option",
-									"aria-selected": n,
+									"aria-selected": r,
 									className: [
 										"async-select__item",
-										n ? "async-select__item--selected" : "",
-										r ? "async-select__item--active" : ""
+										r ? "async-select__item--selected" : "",
+										i ? "async-select__item--active" : ""
 									].filter(Boolean).join(" "),
 									onPointerDown: (e) => e.preventDefault(),
-									onClick: () => $(e),
+									onClick: () => Z(e),
 									children: e.label
 								}, e.value);
 							})
@@ -143,4 +143,4 @@ function f({ onSearch: f, value: p, onValueChange: m, selectedOption: h, placeho
 	});
 }
 //#endregion
-export { f as AsyncSelect };
+export { l as AsyncSelect };

@@ -1,11 +1,11 @@
 'use client';
 import './menu-button.css';
 import { Icon as e } from "./icon.js";
-import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { jsx as t } from "react/jsx-runtime";
+import { forwardRef as n } from "react";
 //#region src/stories/atoms/MenuButton/MenuButton.tsx
-var r = t(function({ isOpen: t = !1, label: r = "Menú", size: i = "md", className: a, ...o }, s) {
-	return /* @__PURE__ */ n("button", {
+var r = n(function({ isOpen: n = !1, label: r = "Menú", size: i = "md", className: a, ...o }, s) {
+	return /* @__PURE__ */ t("button", {
 		ref: s,
 		type: "button",
 		className: [
@@ -14,9 +14,9 @@ var r = t(function({ isOpen: t = !1, label: r = "Menú", size: i = "md", classNa
 			a
 		].filter(Boolean).join(" "),
 		"aria-label": r,
-		"aria-expanded": t,
+		"aria-expanded": n,
 		...o,
-		children: /* @__PURE__ */ n(e, {
+		children: /* @__PURE__ */ t(e, {
 			name: "menu",
 			size: "md",
 			className: "menu-button__icon"

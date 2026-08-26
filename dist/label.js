@@ -1,9 +1,9 @@
 import './label.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Label/Label.tsx
-var n = e(function({ children: e, hidden: n = !1, className: r, ...i }, a) {
-	return /* @__PURE__ */ t("label", {
+var n = t(function({ children: t, hidden: n = !1, className: r, ...i }, a) {
+	return /* @__PURE__ */ e("label", {
 		ref: a,
 		className: [
 			"label",
@@ -11,7 +11,7 @@ var n = e(function({ children: e, hidden: n = !1, className: r, ...i }, a) {
 			r ?? ""
 		].filter(Boolean).join(" "),
 		...i,
-		children: e
+		children: t
 	});
 });
 //#endregion
