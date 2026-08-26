@@ -13,7 +13,9 @@ El `Textarea` como campo de formulario: etiqueta, control, texto de ayuda y mens
 
 ## Etiqueta
 
-Siempre hay etiqueta (`label`), enlazada por `id`. `labelHidden` la deja solo para los lectores de pantalla cuando el contexto ya dice qué es el campo; en ese caso, si no se pasa `placeholder`, el campo usa el texto de la etiqueta como placeholder.
+Siempre hay etiqueta (`label`), enlazada por `id`, y **por defecto se ve** —igual que en `SelectField`—. `labelHidden` la deja solo para los lectores de pantalla cuando el contexto ya dice qué es el campo (un buscador con lupa, la fila de una tabla, el correo del pie de página).
+
+Con la etiqueta oculta y sin `placeholder` propio, el campo usa el texto de la etiqueta como placeholder: sin eso el control se quedaría sin ninguna pista visible. El nombre accesible lo sigue poniendo la etiqueta, no el placeholder.
 
 <Canvas of={TextareaFieldStories.EtiquetaOculta} />
 

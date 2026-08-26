@@ -8,7 +8,7 @@ const meta: Meta<typeof InputField> = {
   component: InputField,
   parameters: { layout: 'padded' },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] } },
-  args: { id: 'nombre', label: 'Nombre completo', labelHidden: false },
+  args: { id: 'nombre', label: 'Nombre completo' },
   render: (args) => <div style={{ inlineSize: '20rem' }}><InputField {...args} /></div>,
 };
 export default meta;
@@ -82,5 +82,29 @@ export const ContratoTallas: Story = {
     await expect(Math.round(canvas.getByRole('textbox', { name: 'Pequeño' }).getBoundingClientRect().height)).toBe(32);
     await expect(Math.round(canvas.getByRole('textbox', { name: 'Mediano' }).getBoundingClientRect().height)).toBe(40);
     await expect(Math.round(canvas.getByRole('textbox', { name: 'Grande' }).getBoundingClientRect().height)).toBe(48);
+  },
+};
+
+export const ContratoEtiqueta: Story = {
+  name: 'Test — la etiqueta se ve por defecto',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ inlineSize: '20rem' }}>
+      <InputField id="e-visible" label="Visible" />
+      <InputField id="e-oculta" label="Oculta" labelHidden />
+      <InputField id="e-oculta-ph" label="Oculta con placeholder" labelHidden placeholder="Propio" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Por defecto la etiqueta es visible: sin `visually-hidden` y sin placeholder prestado
+    const visible = canvasElement.querySelector('label[for="e-visible"]')!;
+    await expect(visible).not.toHaveClass('visually-hidden');
+    await expect(canvas.getByRole('textbox', { name: 'Visible' })).not.toHaveAttribute('placeholder');
+    // Oculta: sigue nombrando el control y le presta su texto como placeholder
+    await expect(canvasElement.querySelector('label[for="e-oculta"]')).toHaveClass('visually-hidden');
+    await expect(canvas.getByRole('textbox', { name: 'Oculta' })).toHaveAttribute('placeholder', 'Oculta');
+    // Un placeholder propio manda sobre la etiqueta
+    await expect(canvas.getByRole('textbox', { name: 'Oculta con placeholder' })).toHaveAttribute('placeholder', 'Propio');
   },
 };
