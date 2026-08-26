@@ -68,7 +68,6 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   background-color: var(--site-header-panel-bg);
-  padding-block: var(--site-header-panel-padding-block) var(--site-header-panel-padding-block-end);
   /* Columna a toda la altura: el índice arriba y los ajustes abajo del todo. */
   display: flex;
   flex-direction: column;
@@ -90,10 +89,16 @@
 /* El Container del panel y su interior estiran para que los ajustes puedan
    irse al borde inferior; si el índice es más alto que la pantalla, el panel
    hace scroll y los ajustes quedan al final del contenido. */
+/* El contenido va dentro de un marco: un rectángulo con borde, separado del
+   borde del panel por el mismo aire en los cuatro lados. El aire vertical del
+   contenido lo lleva el marco, no el panel. */
 .site-header__panel > .container {
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin: var(--site-header-panel-frame-margin);
+  border: var(--site-header-panel-frame-border-width) solid var(--site-header-panel-frame-border-color);
+  padding-block: var(--site-header-panel-padding-block) var(--site-header-panel-padding-block-end);
 }
 .site-header__panel-inner {
   flex: 1;

@@ -13,8 +13,11 @@ $lxd-site-header-gap-narrow: 0.5rem; // Separación entre marca y controles en t
 $lxd-site-header-gap: 0.75rem; // Separación entre logo y controles
 $lxd-site-header-z-index: 100; // Capa z — sobre el contenido, bajo los paneles flotantes
 $lxd-site-header-panel-bg: #ffffff; // Fondo del panel de navegación
-$lxd-site-header-panel-padding-block: 3rem; // Aire superior del panel, entre la barra y el índice
-$lxd-site-header-panel-padding-block-end: 1.5rem; // Aire inferior del panel, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba
+$lxd-site-header-panel-frame-margin: 1rem; // Aire entre el borde del panel y el marco del contenido, por los cuatro lados
+$lxd-site-header-panel-frame-border-width: 1px; // Grosor del marco que encierra el contenido del panel
+$lxd-site-header-panel-frame-border-color: #d0d0d0; // Color del marco del panel (el de la línea del LegalFooter)
+$lxd-site-header-panel-padding-block: 3rem; // Aire superior dentro del marco, entre su borde y el índice
+$lxd-site-header-panel-padding-block-end: 1.5rem; // Aire inferior dentro del marco, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba
 $lxd-site-header-panel-z-index: 300; // El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante
 $lxd-site-header-panel-transition-duration: 400ms; // Entrada y salida del panel: cambio de contexto
 $lxd-site-header-panel-transition-easing: ease-in-out; // Curva del panel: movimiento
