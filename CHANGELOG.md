@@ -7,6 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.0.4
+
+### Corregido
+
+- Exports `./container`, `./site-nav` y `./site-header` que faltaban en `package.json`.
+
 ## v16.0.3
 
 ### Corregido
