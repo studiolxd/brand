@@ -1,7 +1,6 @@
-/* El código hereda la talla del control (la del DropdownField, como el de
-   tema): solo cambia peso, interletraje y mayúsculas. */
+/* El código hereda talla y peso del control (los del DropdownField, como el
+   de tema): solo añade interletraje y mayúsculas. */
 .language-switcher__code {
-  font-weight: var(--language-switcher-code-font-weight);
   letter-spacing: var(--language-switcher-code-letter-spacing);
   text-transform: uppercase;
 }
