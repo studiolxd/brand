@@ -166,6 +166,8 @@ var E = _(function({ size: e = "md", className: t, value: n, onCheckedChange: r,
 		inputRef: re((e) => {
 			e && n !== void 0 && (e.value = n);
 		}, [n]),
+		render: /* @__PURE__ */ v("button", { type: "button" }),
+		nativeButton: !0,
 		onCheckedChange: r ? (e) => r(e) : void 0,
 		...i,
 		children: /* @__PURE__ */ v(T, { className: "switcher__thumb" })

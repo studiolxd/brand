@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.0.2
+
+### Corregido
+
+- `Switcher` y `Checkbox` renderizan un `<button>` nativo (Base UI ponía un
+  `<span>`): un `<label htmlFor>` vuelve a nombrarlos y `disabled` es nativo.
+
 ## v16.0.1
 
 ### Corregido

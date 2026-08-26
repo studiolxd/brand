@@ -35,6 +35,9 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox
     <BaseCheckbox.Root
       ref={ref}
       className={classes}
+      // Un <button> de verdad: etiquetable por <label htmlFor>, disabled nativo.
+      render={<button type="button" />}
+      nativeButton
       checked={checked === 'indeterminate' ? false : checked}
       indeterminate={isIndeterminate}
       aria-checked={isIndeterminate ? 'mixed' : undefined}

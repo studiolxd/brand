@@ -42,6 +42,10 @@ export const Switcher = forwardRef<HTMLElement, SwitcherProps>(function Switcher
       ref={ref}
       className={classes}
       inputRef={inputRef}
+      // Un <button> de verdad: lo nombra un <label htmlFor> (un span no es
+      // etiquetable), `disabled` es nativo y el teclado viene de serie.
+      render={<button type="button" />}
+      nativeButton
       // Contrato del DS: solo el estado. Base UI añade un segundo argumento
       // (detalles del evento) que aquí no forma parte de la API.
       onCheckedChange={onCheckedChange ? (checked) => onCheckedChange(checked) : undefined}

@@ -222,6 +222,8 @@ var D = oe(function({ size: e = "md", className: t, checked: n, indeterminate: e
 	return /* @__PURE__ */ v(T, {
 		ref: a,
 		className: o,
+		render: /* @__PURE__ */ v("button", { type: "button" }),
+		nativeButton: !0,
 		checked: n === "indeterminate" ? !1 : n,
 		indeterminate: s,
 		"aria-checked": s ? "mixed" : void 0,
