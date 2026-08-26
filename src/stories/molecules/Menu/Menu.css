@@ -108,3 +108,14 @@
 .menu__positioner {
   z-index: var(--menu-z-index);
 }
+
+/* Tallas: como las opciones del Select, cambian cuerpo y padding vertical
+   para que el panel desplegado case con el disparador. */
+.menu__content--sm .menu__item {
+  font-size: var(--menu-sm-item-font-size);
+  padding-block: var(--menu-sm-item-padding-block);
+}
+.menu__content--lg .menu__item {
+  font-size: var(--menu-lg-item-font-size);
+  padding-block: var(--menu-lg-item-padding-block);
+}

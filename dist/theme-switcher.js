@@ -73,6 +73,7 @@ function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant
 	if (d === "icon") return /* @__PURE__ */ i(n, {
 		className: p,
 		align: "end",
+		size: f,
 		value: s,
 		onValueChange: (e) => c?.(e),
 		items: g,

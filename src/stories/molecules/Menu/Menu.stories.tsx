@@ -73,6 +73,27 @@ export const ConRadio: Story = {
   },
 };
 
+/** Tallas: los ítems siguen al disparador (32/40/48), como las opciones del Select. */
+export const Tallas: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 'var(--spacing-5)' }}>
+      {(['sm', 'md', 'lg'] as const).map((size) => (
+        <Menu
+          key={size}
+          size={size}
+          defaultOpen
+          trigger={<Button variant="outline" size={size}>Talla {size}</Button>}
+          items={[
+            { type: 'radio', value: 'light', label: 'Claro' },
+            { type: 'radio', value: 'dark', label: 'Oscuro' },
+          ]}
+          value="light"
+        />
+      ))}
+    </div>
+  ),
+};
+
 export const Mixto: Story = {
   name: 'Radio + acciones + destructivo',
   args: {

@@ -27,6 +27,8 @@ export interface MenuProps {
     sideOffset?: number;
     minWidth?: string;
     maxWidth?: string;
+    /** Talla de los ítems, la del disparador (32/40/48): el panel desplegado casa con el control plegado, como en el Select. */
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
 /**
@@ -34,4 +36,4 @@ export interface MenuProps {
  * (tokens `menu.*`) de todos los menús; `ContextMenu`, `UserMenu`,
  * `OrgSwitcher` o `DropdownField` son este menú con un disparador concreto.
  */
-export declare function Menu({ trigger, items, value, onValueChange, renderLink, open, defaultOpen, onOpenChange, openOnHover, hoverDelay, side, align, sideOffset, minWidth, maxWidth, className, }: MenuProps): import("react/jsx-runtime").JSX.Element;
+export declare function Menu({ trigger, items, value, onValueChange, renderLink, open, defaultOpen, onOpenChange, openOnHover, hoverDelay, side, align, sideOffset, minWidth, maxWidth, size, className, }: MenuProps): import("react/jsx-runtime").JSX.Element;

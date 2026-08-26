@@ -7,7 +7,7 @@ import { Menu as i } from "@base-ui-components/react/menu";
 function a(e) {
 	return ["menu__item", e ? "menu__item--destructive" : ""].filter(Boolean).join(" ");
 }
-function o({ trigger: o, items: s, value: c, onValueChange: l, renderLink: u = t, open: d, defaultOpen: f, onOpenChange: p, openOnHover: m = !1, hoverDelay: h = 150, side: g = "bottom", align: _ = "start", sideOffset: v = 4, minWidth: y = "10rem", maxWidth: b, className: x }) {
+function o({ trigger: o, items: s, value: c, onValueChange: l, renderLink: u = t, open: d, defaultOpen: f, onOpenChange: p, openOnHover: m = !1, hoverDelay: h = 150, side: g = "bottom", align: _ = "start", sideOffset: v = 4, minWidth: y = "10rem", maxWidth: b, size: x = "md", className: S }) {
 	return /* @__PURE__ */ r(i.Root, {
 		open: d,
 		defaultOpen: f,
@@ -22,7 +22,11 @@ function o({ trigger: o, items: s, value: c, onValueChange: l, renderLink: u = t
 			align: _,
 			sideOffset: v,
 			children: /* @__PURE__ */ n(i.Popup, {
-				className: ["menu__content", x].filter(Boolean).join(" "),
+				className: [
+					"menu__content",
+					x === "md" ? "" : `menu__content--${x}`,
+					S
+				].filter(Boolean).join(" "),
 				style: {
 					minWidth: y,
 					...b ? { maxWidth: b } : {}

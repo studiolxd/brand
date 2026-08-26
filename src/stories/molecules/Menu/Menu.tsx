@@ -43,6 +43,8 @@ export interface MenuProps {
   sideOffset?: number;
   minWidth?: string;
   maxWidth?: string;
+  /** Talla de los ítems, la del disparador (32/40/48): el panel desplegado casa con el control plegado, como en el Select. */
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
@@ -73,6 +75,7 @@ export function Menu({
   sideOffset = 4,
   minWidth = '10rem',
   maxWidth,
+  size = 'md',
   className,
 }: MenuProps) {
   return (
@@ -81,7 +84,7 @@ export function Menu({
       <BaseMenu.Portal>
         <BaseMenu.Positioner className="menu__positioner" side={side} align={align} sideOffset={sideOffset}>
           <BaseMenu.Popup
-            className={['menu__content', className].filter(Boolean).join(' ')}
+            className={['menu__content', size !== 'md' ? `menu__content--${size}` : '', className].filter(Boolean).join(' ')}
             style={{ minWidth, ...(maxWidth ? { maxWidth } : {}) }}
           >
             {renderDropdownItems({

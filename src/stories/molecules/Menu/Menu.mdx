@@ -41,6 +41,12 @@ El desplegable de acciones del sistema, con el disparador que haga falta. Define
 
 `side` y `align` colocan el panel respecto al disparador; `sideOffset` lo separa. Si no cabe, el motor lo recoloca solo. El panel vive en la capa `floating`: por encima de un modal, para que un menú dentro de un diálogo se abra sobre él.
 
+## Tallas
+
+`size` (`sm`/`md`/`lg`) pone los ítems a la talla del disparador: cuerpo y padding vertical de las opciones del `Select`, para que el panel desplegado case con el control plegado. `DropdownField` (y con él idioma y tema) lo propaga solo.
+
+<Canvas of={MenuStories.Tallas} />
+
 ## Resaltado
 
 El ítem bajo el ratón o el teclado se resalta con el **relleno de marca** (prusia con texto claro; invertido en superficie oscura). El gris claro no es un fondo de estado en el sistema. El destructivo se resalta con el relleno de error.

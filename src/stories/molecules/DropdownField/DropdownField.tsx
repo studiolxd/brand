@@ -58,6 +58,7 @@ export function DropdownField({
       {label && <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>}
       <Menu
         align={align}
+        size={size}
         value={value}
         onValueChange={onValueChange}
         items={items}

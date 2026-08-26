@@ -21,6 +21,10 @@
   --menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
   --menu-z-index: var(--floating-panel-z-index); /** Capa z del panel flotante */
   --menu-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
+  --menu-sm-item-font-size: var(--select-sm-font-size); /** Tamaño de texto de ítems — talla sm (la del Select, para que el panel case con su disparador) */
+  --menu-sm-item-padding-block: var(--select-sm-item-padding-block); /** Padding vertical de cada ítem — talla sm */
+  --menu-lg-item-font-size: var(--select-lg-font-size); /** Tamaño de texto de ítems — talla lg (la del Select) */
+  --menu-lg-item-padding-block: var(--select-lg-item-padding-block); /** Padding vertical de cada ítem — talla lg */
   --menu-item-font-weight: var(--font-weight-default); /** Peso de texto de ítems */
   --menu-item-color: var(--color-text-on-light); /** Color de texto de ítems */
   --menu-item-hover-bg: var(--color-primary); /** Fondo de ítem al hover */

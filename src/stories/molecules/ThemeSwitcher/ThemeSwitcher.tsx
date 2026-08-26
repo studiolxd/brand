@@ -97,6 +97,7 @@ export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', 
       <Menu
         className={className}
         align="end"
+        size={size}
         value={value}
         onValueChange={(next) => onChange?.(next as Theme)}
         items={items}
