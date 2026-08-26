@@ -80,7 +80,7 @@ export function DateTimeField({
 
   return (
     <div className={cls}>
-      <Label htmlFor={dateId} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={dateId} hidden={labelHidden} size={size}>{label}</Label>
       <div className="date-time-field__controls">
         <DatePicker
           id={dateId}

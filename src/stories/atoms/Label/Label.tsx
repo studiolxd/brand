@@ -11,6 +11,11 @@ export interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
    * no lo renderices.
    */
   hidden?: boolean;
+  /**
+   * Talla, la misma que la del control al que acompaña (los fields la
+   * propagan): `sm`/`md` 14px, `lg` 16px.
+   */
+  size?: 'sm' | 'md' | 'lg';
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
 }
@@ -22,12 +27,14 @@ export interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label({
   children,
   hidden = false,
+  size = 'md',
   className,
   ...rest
 }, ref) {
   const classes = [
     'label',
     hidden ? 'visually-hidden' : '',
+    size !== 'md' ? `label--${size}` : '',
     className ?? '',
   ].filter(Boolean).join(' ');
 

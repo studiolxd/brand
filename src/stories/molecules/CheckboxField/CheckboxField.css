@@ -48,10 +48,16 @@
   padding-inline: var(--checkbox-field-sm-padding-inline);
   padding-block: var(--checkbox-field-sm-padding-block);
 }
+.checkbox-field.checkbox-field--sm .checkbox-field__label {
+  font-size: var(--checkbox-field-sm-label-font-size);
+}
 
 .checkbox-field.checkbox-field--lg {
   gap: var(--checkbox-field-lg-gap);
   padding-inline: var(--checkbox-field-lg-padding-inline);
   padding-block: var(--checkbox-field-lg-padding-block);
+}
+.checkbox-field.checkbox-field--lg .checkbox-field__label {
+  font-size: var(--checkbox-field-lg-label-font-size);
 }
 

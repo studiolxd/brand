@@ -25,10 +25,12 @@
   --switcher-field-gap: var(--switcher-field-sm-gap);
   --switcher-field-padding-inline: var(--switcher-field-sm-padding-inline);
   --switcher-field-padding-block: var(--switcher-field-sm-padding-block);
+  --switcher-field-label-font-size: var(--switcher-field-sm-label-font-size);
 }
 
 .switcher-field.switcher-field--lg {
   --switcher-field-gap: var(--switcher-field-lg-gap);
   --switcher-field-padding-inline: var(--switcher-field-lg-padding-inline);
   --switcher-field-padding-block: var(--switcher-field-lg-padding-block);
+  --switcher-field-label-font-size: var(--switcher-field-lg-label-font-size);
 }

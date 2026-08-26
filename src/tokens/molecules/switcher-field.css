@@ -12,6 +12,8 @@
   --switcher-field-lg-gap: var(--spacing-4); /** Gap — variante lg */
   --switcher-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
   --switcher-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
+  --switcher-field-sm-label-font-size: var(--font-size-1); /** Tamaño de fuente del label — variante sm (14px) */
+  --switcher-field-lg-label-font-size: var(--font-size-3); /** Tamaño de fuente del label — variante lg (20px) */
   --switcher-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
   --switcher-field-label-font-size: var(--font-size-2); /** Tamaño de fuente (16px) */
   --switcher-field-label-line-height: var(--line-height-normal); /** Interlineado */

@@ -41,7 +41,7 @@ export function OtpField({
 
   return (
     <div className="otp-field" data-size={size}>
-      <Label htmlFor={`${id}-0`} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={`${id}-0`} hidden={labelHidden} size={size}>{label}</Label>
       <OtpInput
         id={id}
         length={length}

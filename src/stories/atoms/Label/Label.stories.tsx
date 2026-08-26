@@ -9,6 +9,11 @@ const meta: Meta<typeof Label> = {
     layout: 'padded',
   },
   argTypes: {
+    size: {
+      control: { type: 'radio' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Talla, la del control que acompaña: sm/md 14px, lg 16px.',
+    },
     hidden: {
       control: { type: 'boolean' },
       description: 'Oculta el label visualmente pero lo mantiene accesible para lectores de pantalla.',
@@ -29,6 +34,24 @@ export default meta;
 type Story = StoryObj<typeof Label>;
 
 export const Visible: Story = {
+};
+
+/** Las tres tallas: la etiqueta sigue a la del control (los fields la propagan). */
+export const Tallas: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: 'var(--spacing-3)' }}>
+      <Label htmlFor="sm" size="sm">Talla sm</Label>
+      <Label htmlFor="md" size="md">Talla md</Label>
+      <Label htmlFor="lg" size="lg">Talla lg</Label>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const [sm, md, lg] = Array.from(canvasElement.querySelectorAll('label'));
+    await expect(sm).toHaveClass('label--sm');
+    await expect(md).not.toHaveClass('label--md');
+    await expect(lg).toHaveClass('label--lg');
+    await expect(parseFloat(getComputedStyle(lg).fontSize)).toBeGreaterThan(parseFloat(getComputedStyle(md).fontSize));
+  },
 };
 
 /** Oculta visualmente, presente en el DOM para lectores de pantalla. */

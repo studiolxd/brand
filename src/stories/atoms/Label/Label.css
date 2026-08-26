@@ -10,3 +10,11 @@
   letter-spacing: var(--label-letter-spacing);
 }
 
+/* Tallas: acompañan a la del control (32/40/48) */
+.label--sm {
+  font-size: var(--label-sm-font-size);
+}
+.label--lg {
+  font-size: var(--label-lg-font-size);
+}
+

@@ -48,9 +48,15 @@
   padding-inline: var(--radio-field-sm-padding-inline);
   padding-block: var(--radio-field-sm-padding-block);
 }
+.radio-field.radio-field--sm .radio-field__label {
+  font-size: var(--radio-field-sm-label-font-size);
+}
 
 .radio-field.radio-field--lg {
   gap: var(--radio-field-lg-gap);
   padding-inline: var(--radio-field-lg-padding-inline);
   padding-block: var(--radio-field-lg-padding-block);
+}
+.radio-field.radio-field--lg .radio-field__label {
+  font-size: var(--radio-field-lg-label-font-size);
 }

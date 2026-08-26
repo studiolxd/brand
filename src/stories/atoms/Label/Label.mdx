@@ -11,6 +11,15 @@ Etiqueta accesible para campos de formulario. Siempre está asociada a un campo 
 
 <Canvas of={LabelStories.Visible} />
 
+## Tallas
+
+La etiqueta tiene las tres tallas del sistema y sigue a la del control que
+acompaña: `sm` y `md` a 14px, `lg` a 16px (no existe etiqueta a 12px: esa
+talla es solo para cifras). Los fields propagan su `size` a la etiqueta, así
+que un campo `lg` sube entero, control y etiqueta.
+
+<Canvas of={LabelStories.Tallas} />
+
 ## Oculta
 
 `hidden` la quita de la vista pero no del árbol de accesibilidad (clase `visually-hidden`, del átomo `VisuallyHidden`): el campo sigue teniendo nombre. Es lo que usan los campos con `labelHidden` cuando el contexto ya dice qué es (una barra de búsqueda, un selector en un panel). Sombrea a propósito el atributo nativo `hidden`: para no renderizarla, no se renderiza.

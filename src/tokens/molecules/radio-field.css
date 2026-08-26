@@ -13,6 +13,8 @@
   --radio-field-lg-gap: var(--spacing-4); /** Gap — variante lg */
   --radio-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
   --radio-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
+  --radio-field-sm-label-font-size: var(--font-size-1); /** Tamaño de fuente del label — variante sm (14px) */
+  --radio-field-lg-label-font-size: var(--font-size-3); /** Tamaño de fuente del label — variante lg (20px) */
   --radio-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
   --radio-field-label-font-size: var(--font-size-2); /** Tamaño de fuente (16px) */
   --radio-field-label-line-height: var(--line-height-normal); /** Interlineado */

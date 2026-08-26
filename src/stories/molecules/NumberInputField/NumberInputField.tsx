@@ -51,7 +51,7 @@ export function NumberInputField({
 
   return (
     <div className="number-input-field">
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <NumberInput
         id={id}
         name={name}

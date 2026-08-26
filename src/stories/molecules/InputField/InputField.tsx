@@ -55,7 +55,7 @@ export function InputField({
 
   return (
     <div className="input-field">
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <Input
         id={id}
         name={name}

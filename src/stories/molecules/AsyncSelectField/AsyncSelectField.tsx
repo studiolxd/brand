@@ -47,7 +47,7 @@ export function AsyncSelectField({
 
   return (
     <div className={containerClass}>
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <AsyncSelect
         id={id}
         onSearch={onSearch}

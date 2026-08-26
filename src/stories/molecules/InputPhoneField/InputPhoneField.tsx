@@ -42,7 +42,7 @@ export function InputPhoneField({
 
   return (
     <div className="input-phone-field">
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <InputPhone
         id={id}
         name={name}

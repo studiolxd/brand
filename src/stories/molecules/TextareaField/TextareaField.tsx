@@ -55,7 +55,7 @@ export function TextareaField({
 
   return (
     <div className="textarea-field">
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <Textarea
         id={id}
         name={name}

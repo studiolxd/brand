@@ -55,7 +55,7 @@ export function DropdownField({
   const classes = ['dropdown-field', inline ? 'dropdown-field--inline' : '', size !== 'md' ? `dropdown-field--${size}` : '', className].filter(Boolean).join(' ');
   return (
     <div className={classes}>
-      {label && <Label htmlFor={id} hidden={labelHidden}>{label}</Label>}
+      {label && <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>}
       <Menu
         align={align}
         value={value}

@@ -57,7 +57,7 @@ export function SelectField({
 
   return (
     <div className={containerClass}>
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <Select
         id={id}
         options={encodedOptions}

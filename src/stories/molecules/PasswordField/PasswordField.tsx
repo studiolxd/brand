@@ -67,7 +67,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
 
   return (
     <div className={['password-field', className ?? ''].filter(Boolean).join(' ')}>
-      {label && <Label htmlFor={inputId} hidden={labelHidden}>{label}</Label>}
+      {label && <Label htmlFor={inputId} hidden={labelHidden} size={size}>{label}</Label>}
       <div className={['password-field__wrapper', size !== 'md' ? `password-field__wrapper--${size}` : ''].filter(Boolean).join(' ')}>
         <Input
           ref={ref}

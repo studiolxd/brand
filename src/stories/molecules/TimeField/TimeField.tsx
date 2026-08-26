@@ -42,7 +42,7 @@ export function TimeField({
 
   return (
     <div className={cls}>
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <TimeSelect
         id={id}
         value={value}
