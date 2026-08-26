@@ -35,8 +35,11 @@ export default meta;
 
 type Story = StoryObj<typeof LanguageSwitcher>;
 
-/** En la barra: el código del idioma actual abre el menú. */
+/** En la barra: el mismo campo desplegable que el de tema, con la etiqueta oculta y el código del idioma actual. */
 export const Compacto: Story = {};
+
+/** Con la etiqueta visible, para un formulario de ajustes. */
+export const ConEtiqueta: Story = { args: { labelHidden: false } };
 
 /** En el pie: los idiomas desplegados. Con `hrefFor`, cada uno es un enlace. */
 export const Lista: Story = {

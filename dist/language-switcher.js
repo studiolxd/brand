@@ -1,84 +1,74 @@
 'use client';
 import './language-switcher.css';
-import { Icon as e } from "./icon.js";
-import { Button as t } from "./button.js";
-import { Menu as n } from "./menu.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { DropdownField as e } from "./dropdown-field.js";
+import { jsx as t } from "react/jsx-runtime";
 //#region src/stories/molecules/LanguageSwitcher/LanguageSwitcher.tsx
-function a({ href: e, lang: t, children: n, className: i, "aria-current": a }) {
-	return /* @__PURE__ */ r("a", {
+function n({ href: e, lang: n, children: r, className: i, "aria-current": a }) {
+	return /* @__PURE__ */ t("a", {
 		href: e,
-		lang: t,
+		lang: n,
 		className: i,
 		"aria-current": a,
-		children: n
+		children: r
 	});
 }
-function o({ languages: o, value: s, onChange: c, label: l = "Idioma", variant: u = "compact", hrefFor: d, renderLink: f = a, className: p }) {
-	return u === "list" ? /* @__PURE__ */ r("nav", {
+function r({ languages: r, value: i, onChange: a, label: o = "Idioma", id: s = "language-switcher", labelHidden: c = !0, variant: l = "compact", hrefFor: u, renderLink: d = n, className: f }) {
+	return l === "list" ? /* @__PURE__ */ t("nav", {
 		className: [
 			"language-switcher",
 			"language-switcher--list",
-			p
+			f
 		].filter(Boolean).join(" "),
-		"aria-label": l,
-		children: /* @__PURE__ */ r("ul", {
+		"aria-label": o,
+		children: /* @__PURE__ */ t("ul", {
 			className: "language-switcher__list",
-			children: o.map(({ code: e, label: t }) => {
-				let n = e === s, i = ["language-switcher__option", n ? "language-switcher__option--current" : ""].filter(Boolean).join(" ");
-				return /* @__PURE__ */ r("li", { children: n ? /* @__PURE__ */ r("span", {
+			children: r.map(({ code: e, label: n }) => {
+				let r = e === i, o = ["language-switcher__option", r ? "language-switcher__option--current" : ""].filter(Boolean).join(" ");
+				return /* @__PURE__ */ t("li", { children: r ? /* @__PURE__ */ t("span", {
 					lang: e,
-					className: i,
+					className: o,
 					"aria-current": "true",
-					children: t
-				}) : d ? f({
-					href: d(e),
+					children: n
+				}) : u ? d({
+					href: u(e),
 					lang: e,
-					className: i,
-					children: t
-				}) : /* @__PURE__ */ r("button", {
+					className: o,
+					children: n
+				}) : /* @__PURE__ */ t("button", {
 					type: "button",
 					lang: e,
-					className: i,
-					onClick: () => c?.(e),
-					children: t
+					className: o,
+					onClick: () => a?.(e),
+					children: n
 				}) }, e);
 			})
 		})
-	}) : /* @__PURE__ */ r("div", {
+	}) : /* @__PURE__ */ t(e, {
+		id: s,
+		label: o,
+		labelHidden: c,
+		inline: !0,
+		align: "end",
 		className: [
 			"language-switcher",
 			"language-switcher--compact",
-			p
+			f
 		].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ r(n, {
-			align: "end",
-			value: s,
-			onValueChange: (e) => c?.(e),
-			items: o.map(({ code: e, label: t }) => ({
-				type: "radio",
-				value: e,
-				label: /* @__PURE__ */ r("span", {
-					lang: e,
-					children: t
-				})
-			})),
-			trigger: /* @__PURE__ */ i(t, {
-				variant: "ghost",
-				size: "md",
-				"aria-label": l,
-				children: [/* @__PURE__ */ r("span", {
-					className: "language-switcher__code",
-					"aria-hidden": "true",
-					children: s
-				}), /* @__PURE__ */ r(e, {
-					name: "chevron",
-					size: "xs",
-					className: "language-switcher__chevron"
-				})]
+		value: i,
+		onValueChange: (e) => a?.(e),
+		items: r.map(({ code: e, label: n }) => ({
+			type: "radio",
+			value: e,
+			label: /* @__PURE__ */ t("span", {
+				lang: e,
+				children: n
 			})
+		})),
+		children: /* @__PURE__ */ t("span", {
+			className: "language-switcher__code",
+			children: i
 		})
 	});
 }
 //#endregion
-export { o as LanguageSwitcher };
+export { r as LanguageSwitcher };

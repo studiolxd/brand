@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v16.3.0
+
+### Cambiado
+
+- `LanguageSwitcher` compacto es un `DropdownField` (el mismo control que el
+  selector de tema), con la etiqueta oculta por defecto (`labelHidden`, `id`).
+
 ## v16.2.0
 
 ### Cambiado

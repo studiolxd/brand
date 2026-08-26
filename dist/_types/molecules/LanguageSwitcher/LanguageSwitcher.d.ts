@@ -19,8 +19,12 @@ export interface LanguageSwitcherProps {
     value: string;
     /** Cambio de idioma. Qué hacer con él (enrutar, persistir) es del producto. */
     onChange?: (code: string) => void;
-    /** Nombre accesible del control. */
+    /** Nombre accesible del control (la etiqueta del campo). */
     label?: string;
+    /** `id` del control en compacto (enlaza la etiqueta). */
+    id?: string;
+    /** En compacto, la etiqueta va oculta por defecto: el código del idioma ya dice qué es. */
+    labelHidden?: boolean;
     /**
      * `compact`: un botón con el código (ES) que abre un menú — el de la barra.
      * `list`: los idiomas desplegados en línea — el del pie.
@@ -35,9 +39,10 @@ export interface LanguageSwitcherProps {
     className?: string;
 }
 /**
- * Selector de idioma. Nunca un icono: el código de dos letras lo lee cualquiera
+ * Selector de idioma: el mismo campo desplegable que el de tema (`DropdownField`),
+ * con la etiqueta oculta. Nunca un icono: el código de dos letras lo lee cualquiera
  * aunque no entienda la interfaz, y las opciones van en su propio idioma. Es un
  * componente del sistema porque aparece en la barra y en el pie de todos los
  * sitios; el enrutado y la persistencia se quedan en el producto.
  */
-export declare function LanguageSwitcher({ languages, value, onChange, label, variant, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;
+export declare function LanguageSwitcher({ languages, value, onChange, label, id, labelHidden, variant, hrefFor, renderLink, className, }: LanguageSwitcherProps): import("react/jsx-runtime").JSX.Element;

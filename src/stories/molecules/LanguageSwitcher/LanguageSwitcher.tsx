@@ -1,9 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { Menu } from '../Menu/Menu';
-import { Button } from '../../atoms/Button/Button';
-import { Icon } from '../../atoms/Icon/Icon';
+import { DropdownField } from '../DropdownField/DropdownField';
 import './LanguageSwitcher.css';
 
 export interface Language {
@@ -27,8 +25,12 @@ export interface LanguageSwitcherProps {
   value: string;
   /** Cambio de idioma. Qué hacer con él (enrutar, persistir) es del producto. */
   onChange?: (code: string) => void;
-  /** Nombre accesible del control. */
+  /** Nombre accesible del control (la etiqueta del campo). */
   label?: string;
+  /** `id` del control en compacto (enlaza la etiqueta). */
+  id?: string;
+  /** En compacto, la etiqueta va oculta por defecto: el código del idioma ya dice qué es. */
+  labelHidden?: boolean;
   /**
    * `compact`: un botón con el código (ES) que abre un menú — el de la barra.
    * `list`: los idiomas desplegados en línea — el del pie.
@@ -52,7 +54,8 @@ function defaultRenderLink({ href, lang, children, className, 'aria-current': cu
 }
 
 /**
- * Selector de idioma. Nunca un icono: el código de dos letras lo lee cualquiera
+ * Selector de idioma: el mismo campo desplegable que el de tema (`DropdownField`),
+ * con la etiqueta oculta. Nunca un icono: el código de dos letras lo lee cualquiera
  * aunque no entienda la interfaz, y las opciones van en su propio idioma. Es un
  * componente del sistema porque aparece en la barra y en el pie de todos los
  * sitios; el enrutado y la persistencia se quedan en el producto.
@@ -62,6 +65,8 @@ export function LanguageSwitcher({
   value,
   onChange,
   label = 'Idioma',
+  id = 'language-switcher',
+  labelHidden = true,
   variant = 'compact',
   hrefFor,
   renderLink = defaultRenderLink,
@@ -97,23 +102,22 @@ export function LanguageSwitcher({
 
   const classes = ['language-switcher', 'language-switcher--compact', className].filter(Boolean).join(' ');
   return (
-    <div className={classes}>
-      <Menu
-        align="end"
-        value={value}
-        onValueChange={(code) => onChange?.(code)}
-        items={languages.map(({ code, label: name }) => ({
-          type: 'radio' as const,
-          value: code,
-          label: <span lang={code}>{name}</span>,
-        }))}
-        trigger={
-          <Button variant="ghost" size="md" aria-label={label}>
-            <span className="language-switcher__code" aria-hidden="true">{value}</span>
-            <Icon name="chevron" size="xs" className="language-switcher__chevron" />
-          </Button>
-        }
-      />
-    </div>
+    <DropdownField
+      id={id}
+      label={label}
+      labelHidden={labelHidden}
+      inline
+      align="end"
+      className={classes}
+      value={value}
+      onValueChange={(code) => onChange?.(code)}
+      items={languages.map(({ code, label: name }) => ({
+        type: 'radio' as const,
+        value: code,
+        label: <span lang={code}>{name}</span>,
+      }))}
+    >
+      <span className="language-switcher__code">{value}</span>
+    </DropdownField>
   );
 }

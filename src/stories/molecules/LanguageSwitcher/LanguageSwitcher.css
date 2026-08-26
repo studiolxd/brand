@@ -1,16 +1,8 @@
-.language-switcher--compact {
-  display: inline-flex;
-}
-
 .language-switcher__code {
   font-size: var(--language-switcher-code-font-size);
   font-weight: var(--language-switcher-code-font-weight);
   letter-spacing: var(--language-switcher-code-letter-spacing);
   text-transform: uppercase;
-}
-
-.language-switcher__chevron {
-  transform: rotate(90deg);
 }
 
 .language-switcher__list {

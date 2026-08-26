@@ -11,6 +11,10 @@ Selector de idioma. Dos formas del mismo control: **compacto** en la barra —el
 
 <Canvas of={LanguageSwitcherStories.Compacto} />
 
+En compacto es un `DropdownField` —el mismo control rectangular a la altura del sistema que el selector de tema— con la etiqueta **oculta** por defecto (`labelHidden`): el código del idioma ya dice qué es, y el nombre accesible lo pone la etiqueta.
+
+<Canvas of={LanguageSwitcherStories.ConEtiqueta} />
+
 ## Por qué así
 
 - **El código, nunca un icono.** "ES" lo lee cualquiera aunque la interfaz esté en un idioma que no entiende, que es justo el caso de quien necesita cambiarlo. Un globo no dice nada, y una bandera es un país, no una lengua.
