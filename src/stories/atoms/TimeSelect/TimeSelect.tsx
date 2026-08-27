@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Select } from '../Select/Select';
 import './TimeSelect.css';
 
@@ -18,6 +18,16 @@ export interface TimeSelectProps {
   error?: boolean;
   /** id aplicado al trigger de horas */
   id?: string;
+  /** Nombre del campo en el formulario: se monta un input oculto con `HH:MM`. */
+  name?: string;
+  /** Id de la etiqueta que nombra el grupo (lo pone el campo). */
+  'aria-labelledby'?: string;
+  /** Ids de ayuda/error que describen el grupo (lo pone el campo). */
+  'aria-describedby'?: string;
+  /** Se llama al salir de cualquiera de los dos desplegables. */
+  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+  /** Se añade DESPUÉS de las clases propias del componente. */
+  className?: string;
   /**
    * aria-label del selector de horas. Default: "Horas" (castellano).
    * Una app multiidioma debe pasarla traducida.
@@ -38,7 +48,11 @@ function pad(n: number): string {
   return String(n).padStart(2, '0');
 }
 
-export function TimeSelect({
+/**
+ * Hora repartida en dos desplegables. El `ref` va al de **horas**, que es el
+ * primero que se enfoca.
+ */
+export const TimeSelect = forwardRef<HTMLButtonElement, TimeSelectProps>(function TimeSelect({
   value,
   onChange,
   step = 5,
@@ -47,11 +61,16 @@ export function TimeSelect({
   readOnly,
   error,
   id,
+  name,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
+  onBlur,
+  className,
   hoursLabel = 'Horas',
   minutesLabel = 'Minutos',
   hoursPlaceholder = 'HH',
   minutesPlaceholder = 'MM',
-}: TimeSelectProps) {
+}: TimeSelectProps, ref) {
   const hourOptions = useMemo(
     () => Array.from({ length: 24 }, (_, i) => ({ value: String(i), label: pad(i) })),
     []
@@ -77,17 +96,24 @@ export function TimeSelect({
     onChange?.({ h, m });
   };
 
-  const cls = [
-    'time-select',
-    error ? 'time-select--error' : '',
-  ].filter(Boolean).join(' ');
+  const cls = ['time-select', className ?? ''].filter(Boolean).join(' ');
 
-  const hourValue = value != null ? String(value.h) : undefined;
-  const minuteValue = value != null ? String(value.m) : undefined;
+  // Cadena vacía, no `undefined`: el Select es controlado desde el primer
+  // render (con `undefined` Base UI lo toma por no controlado y avisa al
+  // llegar el primer valor). El `Select.Value` pinta el placeholder con "".
+  const hourValue = value != null ? String(value.h) : '';
+  const minuteValue = value != null ? String(value.m) : '';
 
   return (
-    <div className={cls}>
+    <div
+      className={cls}
+      role="group"
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      aria-invalid={error || undefined}
+    >
       <Select
+        ref={ref}
         id={id}
         options={hourOptions}
         value={hourValue}
@@ -96,7 +122,9 @@ export function TimeSelect({
         disabled={disabled}
         readOnly={readOnly}
         aria-label={hoursLabel}
+        aria-invalid={error}
         onValueChange={handleHourChange}
+        onBlur={onBlur}
       />
       <span className="time-select__sep" aria-hidden="true">:</span>
       <Select
@@ -107,8 +135,18 @@ export function TimeSelect({
         disabled={disabled}
         readOnly={readOnly}
         aria-label={minutesLabel}
+        aria-invalid={error}
         onValueChange={handleMinuteChange}
+        onBlur={onBlur}
       />
+      {/* Lo que se envía con el formulario: `HH:MM`. */}
+      {name && (
+        <input
+          type="hidden"
+          name={name}
+          value={value != null ? `${pad(value.h)}:${pad(value.m)}` : ''}
+        />
+      )}
     </div>
   );
-}
+});

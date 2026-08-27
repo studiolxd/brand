@@ -1,7 +1,5 @@
 {
   "time-select": {
-  "error-border-color":       { "$value": "{color.error-text-on-light}", "$type": "color", "$description": "Borde en error: el color de error" },
-  "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "gap": { "$value": "{spacing.1}", "$type": "dimension", "$description": "Espacio entre selector de horas, separador y selector de minutos" },
     "sep-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color del separador :" }
   }

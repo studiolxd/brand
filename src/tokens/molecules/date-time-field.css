@@ -16,3 +16,10 @@
   --date-time-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --date-time-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --date-time-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --date-time-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+}

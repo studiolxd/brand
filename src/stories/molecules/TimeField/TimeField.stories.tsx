@@ -1,147 +1,168 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn, expect, userEvent, within } from 'storybook/test';
+import { useForm, type ResolverResult } from 'react-hook-form';
+import { Button } from '../../atoms/Button/Button';
+import { FormProvider, FormField } from '../FormField/FormField';
 import { TimeField } from './TimeField';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 
 const meta: Meta<typeof TimeField> = {
-  title: 'Por revisar/Molecules/TimeField',
+  title: 'Molecules/TimeField',
   component: TimeField,
-  tags: ['autodocs'],
-  args: {
-    id: 'time',
-    label: 'Hora',
-    onChange: fn(),
+  parameters: { layout: 'padded' },
+  argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] } },
+  args: { id: 'hora', label: 'Hora de inicio', onChange: fn() },
+  render: (args) => {
+    const [value, setValue] = useState<TimeValue | null>(args.value ?? null);
+    return (
+      <TimeField
+        {...args}
+        value={value}
+        onChange={(v) => { setValue(v); args.onChange?.(v); }}
+      />
+    );
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof TimeField>;
 
-export const Default: Story = {
-  render: (args) => {
-    const [value, setValue] = useState<TimeValue | null>(null);
-    return (
-      <TimeField
-        {...args}
-        value={value}
-        onChange={(v) => { setValue(v); args.onChange?.(v); }}
-      />
-    );
-  },
+export const PorDefecto: Story = {};
+
+export const ConValor: Story = { args: { value: { h: 9, m: 30 } } };
+
+export const ConAyuda: Story = {
+  args: { helperText: 'Horario de oficina: de 9:00 a 18:00.' },
 };
 
-export const WithValue: Story = {
-  render: (args) => {
-    const [value, setValue] = useState<TimeValue | null>({ h: 14, m: 30 });
-    return (
-      <TimeField
-        {...args}
-        value={value}
-        labelHidden={false}
-        onChange={(v) => { setValue(v); args.onChange?.(v); }}
-      />
-    );
-  },
-};
-
-export const WithHelperText: Story = {
-  name: 'Con texto de ayuda',
-  render: (args) => {
-    const [value, setValue] = useState<TimeValue | null>({ h: 9, m: 0 });
-    return (
-      <TimeField
-        {...args}
-        value={value}
-        helperText="Formato 24 horas"
-        labelHidden={false}
-        onChange={(v) => { setValue(v); args.onChange?.(v); }}
-      />
-    );
-  },
-};
-
-export const WithError: Story = {
-  name: 'Con error',
-  render: (args) => {
-    const [value, setValue] = useState<TimeValue | null>(null);
-    return (
-      <TimeField
-        {...args}
-        value={value}
-        error
-        errorMessage="La hora es obligatoria"
-        labelHidden={false}
-        onChange={(v) => { setValue(v); args.onChange?.(v); }}
-      />
-    );
-  },
-};
-
-export const Disabled: Story = {
+/** El error se dice en texto y en el borde de los dos desplegables; nunca solo en color. */
+export const ConError: Story = {
   args: {
-    value: { h: 10, m: 0 },
-    disabled: true,
-    labelHidden: false,
+    errorMessage: 'Elige una hora.',
+    helperText: 'Horario de oficina: de 9:00 a 18:00.',
   },
 };
 
-export const ReadOnly: Story = {
-  name: 'Solo lectura',
-  args: {
-    value: { h: 10, m: 30 },
-    readOnly: true,
-    labelHidden: false,
-  },
-  play: async ({ canvas }) => {
-    const triggers = canvas.getAllByRole('combobox');
-    await expect(triggers[0]).toHaveAttribute('aria-readonly', 'true');
-    await expect(triggers[1]).toHaveAttribute('aria-readonly', 'true');
-    await userEvent.click(triggers[0]);
-    await expect(within(document.body).queryByRole('listbox')).toBeNull();
+export const Deshabilitado: Story = { args: { disabled: true, value: { h: 9, m: 0 } } };
+
+export const SoloLectura: Story = { args: { readOnly: true, value: { h: 9, m: 0 } } };
+
+export const EtiquetaOculta: Story = { args: { labelHidden: true } };
+
+/** `step` decide el salto de los minutos: 5 por defecto, 15 para franjas. */
+export const PasoDeQuince: Story = { args: { step: 15, value: { h: 10, m: 15 } } };
+
+/** Las tres tallas del sistema: cada desplegable mide 32, 40 y 48. */
+export const Tallas: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <TimeField {...args} id="tf-sm" size="sm" label="Pequeño" />
+      <TimeField {...args} id="tf-md" size="md" label="Mediano" />
+      <TimeField {...args} id="tf-lg" size="lg" label="Grande" />
+    </div>
+  ),
+};
+
+export const Contrato: Story = {
+  name: 'Test — etiqueta, ayuda y error enlazados al control',
+  tags: ['!dev'],
+  args: { helperText: 'Ayuda', errorMessage: 'Obligatorio' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Los dos desplegables forman un grupo: la etiqueta nombra al grupo
+    const grupo = canvas.getByRole('group', { name: 'Hora de inicio' });
+    await expect(grupo).toHaveAttribute('aria-describedby', 'hora-error hora-helper');
+    await expect(grupo).toHaveAttribute('aria-invalid', 'true');
+    // Y cada desplegable conserva su propio nombre
+    await expect(canvas.getByRole('combobox', { name: 'Horas' })).toHaveAttribute('aria-invalid', 'true');
+    await expect(canvas.getByRole('combobox', { name: 'Minutos' })).toHaveAttribute('aria-invalid', 'true');
+    await expect(canvasElement.querySelector('#hora')).not.toBeNull();
+    await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
+    await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'hora-helper');
   },
 };
 
-export const Step15: Story = {
-  name: 'Paso 15 minutos',
-  render: (args) => {
-    const [value, setValue] = useState<TimeValue | null>({ h: 8, m: 0 });
-    return (
-      <TimeField
-        {...args}
-        value={value}
-        step={15}
-        helperText="Intervalos de 15 minutos"
-        labelHidden={false}
-        onChange={(v) => { setValue(v); args.onChange?.(v); }}
-      />
-    );
+export const ContratoTallas: Story = {
+  name: 'Test — el control mide la talla del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <TimeField id="tt-sm" size="sm" label="Pequeño" />
+      <TimeField id="tt-md" size="md" label="Mediano" />
+      <TimeField id="tt-lg" size="lg" label="Grande" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const alto = (id: string) =>
+      Math.round(canvasElement.querySelector(`#${id}`)!.getBoundingClientRect().height);
+    await expect(alto('tt-sm')).toBe(32);
+    await expect(alto('tt-md')).toBe(40);
+    await expect(alto('tt-lg')).toBe(48);
   },
 };
 
-export const ChangeHour: Story = {
-  name: 'Cambiar hora y ver resultado',
-  render: (args) => {
-    const [value, setValue] = useState<TimeValue | null>({ h: 10, m: 0 });
-    return (
-      <TimeField
-        {...args}
-        value={value}
-        step={30}
-        labelHidden={false}
-        onChange={(v) => { setValue(v); args.onChange?.(v); }}
-      />
-    );
-  },
-  play: async ({ canvas, args }) => {
-    const triggers = canvas.getAllByRole('combobox');
-    await userEvent.click(triggers[0]);
-
-    // Base UI abre el popup en el siguiente frame de animación tras el mousedown
-    const listbox = await within(document.body).findByRole('listbox');
-    const option14 = within(listbox).getByText('14');
-    await userEvent.click(option14);
-
+/** Elegir hora sube el valor al consumidor. */
+export const ElegirHora: Story = {
+  args: { value: { h: 9, m: 0 } },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('combobox', { name: 'Horas' }));
+    const body = within(canvasElement.ownerDocument.body);
+    await userEvent.click(await body.findByRole('option', { name: '14' }));
     await expect(args.onChange).toHaveBeenCalledWith({ h: 14, m: 0 });
+  },
+};
+
+type Valores = { hora: TimeValue | null };
+
+function resolver(values: Valores): ResolverResult<Valores> {
+  if (values.hora) return { values, errors: {} };
+  return { values: {}, errors: { hora: { type: 'required', message: 'Elige una hora.' } } };
+}
+
+function FormularioRhf() {
+  const form = useForm<Valores>({ defaultValues: { hora: null }, resolver });
+
+  return (
+    <FormProvider {...form}>
+      <form
+        onSubmit={form.handleSubmit(() => {})}
+        style={{ display: 'grid', gap: '1rem', justifyItems: 'start' }}
+      >
+        <FormField
+          control={form.control}
+          name="hora"
+          render={({ field, fieldState }) => (
+            <TimeField
+              ref={field.ref}
+              name={field.name}
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              disabled={field.disabled}
+              label="Hora de inicio"
+              errorMessage={fieldState.error?.message}
+            />
+          )}
+        />
+        <Button type="submit">Guardar</Button>
+      </form>
+    </FormProvider>
+  );
+}
+
+/**
+ * El control son dos desplegables de Base UI: el contrato es `value`/`onChange`
+ * + `name` + `ref` al de horas, no el spread del `field`.
+ */
+export const ConReactHookForm: Story = {
+  name: 'Con react-hook-form',
+  render: () => <FormularioRhf />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Guardar' }));
+    await expect(await canvas.findByRole('alert')).toHaveTextContent('Elige una hora.');
+    await expect(canvas.getByRole('group', { name: 'Hora de inicio' })).toHaveAttribute('aria-invalid', 'true');
   },
 };

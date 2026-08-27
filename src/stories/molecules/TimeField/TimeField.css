@@ -1,13 +1,7 @@
-@import "../../../tokens/molecules/time-field.css";
-
 .time-field {
   display: flex;
   flex-direction: column;
   gap: var(--time-field-gap);
-}
-
-.time-field--error .select {
-  --select-border-color: var(--color-error-text-on-light);
 }
 
 .time-field__error {

@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DateTimeFieldStories from "./DateTimeField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { dateTimeFieldBaseTokens, dateTimeFieldErrorTokens, dateTimeFieldHelperTokens } from "../../../tokens/molecules/date-time-field";
+
+<Meta of={DateTimeFieldStories} />
+
+# DateTimeField
+
+Fecha y hora en un solo campo: un `DatePicker` y un `TimeSelect` que comparten un mismo `Date`, con etiqueta, ayuda y error al ritmo del resto de campos.
+
+Para solo fecha, el campo es `DatePickerField`; para solo hora, `TimeField`.
+
+<Canvas of={DateTimeFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`) y **por defecto se ve**. Como hay dos controles, la etiqueta nombra al **grupo** (`role="group"` + `aria-labelledby`) y `htmlFor` apunta al disparador de la fecha, que es lo primero que se enfoca. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={DateTimeFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone los dos controles en error por sí solo —`error` sirve para marcarlos sin mensaje—. Ambos textos quedan enlazados al grupo por `aria-describedby`.
+
+<Canvas of={DateTimeFieldStories.ConAyuda} />
+<Canvas of={DateTimeFieldStories.ConError} />
+
+## Valor
+
+El valor es un único `Date`: la fecha manda y la hora se aplica sobre ella. Mientras no haya fecha, cambiar la hora no hace nada —no habría día al que colgarla—, así que el orden natural es día y luego hora.
+
+<Canvas of={DateTimeFieldStories.ConValor} />
+<Canvas of={DateTimeFieldStories.PasoDeTreinta} />
+<Canvas of={DateTimeFieldStories.ElegirFechaYHora} />
+
+## Tallas
+
+`size` viaja a los dos controles: cada uno mide 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={DateTimeFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={DateTimeFieldStories.Deshabilitado} />
+<Canvas of={DateTimeFieldStories.SoloLectura} />
+
+## Con react-hook-form
+
+El contrato es `value` / `onChange` + `name` + `ref` al disparador de la fecha. `onChange` entrega el `Date` completo (fecha y hora ya fusionadas); el `name` monta además un input oculto con la fecha en ISO para el envío nativo.
+
+```tsx
+<FormField
+  control={form.control}
+  name="cita"
+  render={({ field, fieldState }) => (
+    <DateTimeField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Fecha y hora de la cita"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={DateTimeFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta nombra el grupo de los dos controles; cada uno conserva su propio nombre («Horas», «Minutos», traducibles con `hoursLabel` y `minutesLabel`).
+- Ayuda y error llegan al grupo por `aria-describedby`; el error marca `aria-invalid`.
+- El mensaje de error se anuncia (`role="alert"`).
+- Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
+
+## Tokens
+
+El campo aporta el ritmo (`gap`), el aire entre fecha y hora (`controls-gap`) y los textos de ayuda y error, que referencian los de `form.*`.
+
+### Base
+
+<TokenTable tokens={dateTimeFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={dateTimeFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={dateTimeFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={DateTimeFieldStories} />

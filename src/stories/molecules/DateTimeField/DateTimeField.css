@@ -1,5 +1,3 @@
-@import "../../../tokens/molecules/date-time-field.css";
-
 .date-time-field {
   display: flex;
   flex-direction: column;
@@ -12,7 +10,8 @@
   gap: var(--date-time-field-controls-gap);
 }
 
-.date-time-field__controls .date-picker-field {
+/* La fecha se lleva el ancho sobrante; la hora ocupa lo suyo. */
+.date-time-field__controls .date-picker__trigger {
   flex: 1;
 }
 

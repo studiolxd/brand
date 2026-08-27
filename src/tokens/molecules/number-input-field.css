@@ -15,3 +15,10 @@
   --number-input-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
   --number-input-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --number-input-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --number-input-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+}

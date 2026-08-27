@@ -1,5 +1,3 @@
-@import "../../../tokens/molecules/date-picker-field.css";
-
 .date-picker-field {
   display: flex;
   flex-direction: column;

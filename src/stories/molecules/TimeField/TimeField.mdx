@@ -1,0 +1,97 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TimeFieldStories from "./TimeField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { timeFieldBaseTokens, timeFieldErrorTokens, timeFieldHelperTokens } from "../../../tokens/molecules/time-field";
+
+<Meta of={TimeFieldStories} />
+
+# TimeField
+
+El `TimeSelect` como campo de formulario: etiqueta, hora repartida en dos desplegables, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+Para fecha y hora juntas, el campo es `DateTimeField`.
+
+<Canvas of={TimeFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`) y **por defecto se ve**. El control son **dos** desplegables, así que la etiqueta nombra al **grupo** (`role="group"` + `aria-labelledby`) y cada desplegable conserva el suyo («Horas», «Minutos»); `htmlFor` apunta al de horas para que el clic en la etiqueta lo enfoque. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={TimeFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados al grupo por `aria-describedby`; el error marca `aria-invalid` en el grupo y en los dos desplegables, que es lo que les pinta el borde.
+
+<Canvas of={TimeFieldStories.ConAyuda} />
+<Canvas of={TimeFieldStories.ConError} />
+
+## Valor y paso
+
+El valor es `{ h, m }`, no una cadena: el campo no formatea horas, las compone. `step` decide el salto de los minutos (5 por defecto).
+
+<Canvas of={TimeFieldStories.ConValor} />
+<Canvas of={TimeFieldStories.PasoDeQuince} />
+<Canvas of={TimeFieldStories.ElegirHora} />
+
+## Tallas
+
+`size` viaja a los dos desplegables: cada uno mide 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={TimeFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={TimeFieldStories.Deshabilitado} />
+<Canvas of={TimeFieldStories.SoloLectura} />
+
+## Con react-hook-form
+
+El contrato es `value` / `onChange` + `name` + `ref` al desplegable de horas. `onChange` entrega `{ h, m }`; el `name` monta además un input oculto con `HH:MM` para el envío nativo.
+
+```tsx
+<FormField
+  control={form.control}
+  name="hora"
+  render={({ field, fieldState }) => (
+    <TimeField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Hora de inicio"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={TimeFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta nombra el grupo; cada desplegable tiene su propia etiqueta, traducible con `hoursLabel` y `minutesLabel`.
+- Ayuda y error llegan al grupo por `aria-describedby`; el error marca `aria-invalid`.
+- El mensaje de error se anuncia (`role="alert"`).
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `TimeSelect`, que compone dos `Select`.
+
+### Base
+
+<TokenTable tokens={timeFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={timeFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={timeFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={TimeFieldStories} />

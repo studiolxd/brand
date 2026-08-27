@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DatePickerFieldStories from "./DatePickerField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { datePickerFieldBaseTokens, datePickerFieldErrorTokens, datePickerFieldHelperTokens } from "../../../tokens/molecules/date-picker-field";
+
+<Meta of={DatePickerFieldStories} />
+
+# DatePickerField
+
+El `DatePicker` como campo de formulario: etiqueta, disparador con la fecha elegida, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+Para fecha **y** hora, el campo es `DateTimeField`; para solo hora, `TimeField`.
+
+<Canvas of={DatePickerFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`), enlazada por `id` al disparador, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={DatePickerFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`.
+
+<Canvas of={DatePickerFieldStories.ConAyuda} />
+<Canvas of={DatePickerFieldStories.ConError} />
+
+## Valor y rango
+
+El campo es **controlado**: `value` + `onChange`. El formato de la fecha mostrada sale de `Intl` con el `locale` (`es-ES` por defecto), no de una plantilla propia. `minDate`, `maxDate` y `disabledDates` acotan lo elegible.
+
+<Canvas of={DatePickerFieldStories.ConValor} />
+<Canvas of={DatePickerFieldStories.ConRango} />
+<Canvas of={DatePickerFieldStories.ElegirFecha} />
+
+## Tallas
+
+`size` viaja al control: el disparador mide 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={DatePickerFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={DatePickerFieldStories.Deshabilitado} />
+<Canvas of={DatePickerFieldStories.SoloLectura} />
+
+## Con react-hook-form
+
+El control es de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onChange` + `name` + `ref` al disparador. `onChange` entrega un `Date`, que es lo que guarda react-hook-form; el `name` monta además un input oculto con la fecha en ISO (`yyyy-mm-dd`) para el envío nativo.
+
+```tsx
+<FormField
+  control={form.control}
+  name="inicio"
+  render={({ field, fieldState }) => (
+    <DatePickerField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Fecha de inicio"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={DatePickerFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al disparador (`aria-haspopup="dialog"`).
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `DatePicker`.
+
+### Base
+
+<TokenTable tokens={datePickerFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={datePickerFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={datePickerFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={DatePickerFieldStories} />
