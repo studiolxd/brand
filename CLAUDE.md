@@ -205,7 +205,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 ```
 
 ### Stories de dark mode y superficie oscura
-No crear stories dedicadas para dark mode. El decorator global `withSurface` en `preview.tsx` aplica `.surface-dark` automáticamente al cambiar el fondo a oscuro desde el switcher de Storybook. Cualquier story se puede explorar en dark mode sin necesidad de duplicarla.
+No crear stories dedicadas para dark mode. El decorator global `withSurface` en `preview.tsx` activa el tema oscuro automáticamente al cambiar el fondo a oscuro desde el switcher de Storybook. Cualquier story se puede explorar en dark mode sin necesidad de duplicarla.
+
+`withSurface` no envuelve la story en un `<div class="surface-dark">`: eso deja fuera los portales (Popover, Menu, Tooltip, Modal, Select renderizan en `document.body`, fuera del árbol de la story). En su lugar pone `data-theme="dark"` en `document.documentElement` (con `useEffect`, limpiando el atributo al desmontar o al volver a claro) — las custom properties `surface-dark-*` cascadean por herencia a cualquier descendiente del `<html>`, portales incluidos, y `body` ya pinta su propio fondo/color desde esos tokens (`base.css`), así que el lienzo del canvas queda coherente sin div adicional.
 
 Distinto es **enseñar** en el catálogo que un componente vive sobre superficie oscura (un `Hero` en una banda oscura, un `SiteNav` en la cabecera). Para eso el mismo decorator lee `parameters.surface`:
 
