@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Modal } from './Modal';
@@ -10,7 +10,7 @@ import { AsyncMultiSelectField } from '../AsyncMultiSelectField/AsyncMultiSelect
 import type { AsyncMultiSelectOption } from '../AsyncMultiSelectField/AsyncMultiSelectField';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Por revisar/Molecules/Modal',
+  title: 'Molecules/Modal',
   component: Modal,
   parameters: {
     layout: 'centered',
@@ -64,22 +64,20 @@ export const Confirm: Story = {
   },
 };
 
-export const Dark: Story = {
-  tags: ['!dev'],
-  name: 'Dark (root-level, html.dark)',
+/**
+ * El decorator `withSurface` activa `data-theme="dark"` en `document.documentElement`
+ * (no envuelve la story en `.surface-dark`), así que las custom properties
+ * `surface-dark-*` cascadean hasta el portal del modal en `document.body` sin
+ * configuración adicional.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
   render: () => {
-    const [open, setOpen] = useState(false);
-    // Modal se monta vía el portal de Base UI en document.body — .surface-dark en un
-    // contenedor no lo alcanza. Para demostrar el modo oscuro real (el que
-    // usan theme managers tipo next-themes) activamos html.dark a nivel raíz
-    // mientras esta story está montada.
-    useEffect(() => {
-      document.documentElement.classList.add('dark');
-      return () => document.documentElement.classList.remove('dark');
-    }, []);
+    const [open, setOpen] = useState(true);
     return (
       <>
-        <Button onClick={() => setOpen(true)}>Abrir modal dark</Button>
+        <Button onClick={() => setOpen(true)}>Abrir modal</Button>
         <Modal open={open} onClose={() => setOpen(false)} title="Solicitar ausencia">
           <form
             onSubmit={(e) => { e.preventDefault(); setOpen(false); }}

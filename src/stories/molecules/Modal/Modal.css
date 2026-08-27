@@ -9,13 +9,13 @@
 }
 
 @keyframes modal-content-in {
-  from { opacity: 0; transform: translate(-50%, calc(-50% - 8px)); }
+  from { opacity: 0; transform: translate(-50%, calc(-50% - var(--modal-content-enter-offset))); }
   to   { opacity: 1; transform: translate(-50%, -50%); }
 }
 
 @keyframes modal-content-out {
   from { opacity: 1; transform: translate(-50%, -50%); }
-  to   { opacity: 0; transform: translate(-50%, calc(-50% - 8px)); }
+  to   { opacity: 0; transform: translate(-50%, calc(-50% - var(--modal-content-enter-offset))); }
 }
 
 .modal__overlay {
@@ -45,6 +45,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--modal-bg);
+  border: var(--modal-border-width) solid var(--modal-border-color);
   border-radius: var(--modal-border-radius);
   box-shadow: var(--modal-shadow);
   padding-block: var(--modal-padding-block);
@@ -80,29 +81,10 @@
   flex: 1;
 }
 
+/* Color, hover y anillo de foco los pone `Button` ghost (mismo patrón que
+   `Alert`/`Toast`); aquí solo el hueco que le corresponde en la cabecera. */
 .modal__close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding-block: var(--spacing-1);
-  padding-inline: var(--spacing-2);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--modal-close-color);
-  border-radius: var(--border-radius-default);
   flex-shrink: 0;
-  transition: color 150ms ease, background-color 150ms ease;
-}
-
-.modal__close:hover {
-  color: var(--modal-close-hover-color);
-  background-color: var(--modal-close-hover-bg);
-}
-
-.modal__close:focus-visible {
-  outline: var(--button-focus-ring-width) var(--button-focus-ring-style) var(--color-primary);
-  outline-offset: var(--button-focus-ring-offset);
 }
 
 .modal__description {

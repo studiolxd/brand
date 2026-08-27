@@ -6,6 +6,8 @@ $lxd-modal-backdrop-z-index: 200; // z-index del backdrop
 $lxd-modal-backdrop-bg: #000000; // Color del backdrop/scrim
 $lxd-modal-backdrop-opacity: 0.6; // Opacidad del backdrop (0.6)
 $lxd-modal-bg: #ffffff; // Fondo del panel modal
+$lxd-modal-border-width: 1px; // Grosor del borde del panel
+$lxd-modal-border-color: rgba(0, 0, 0, 0); // Sin borde en superficie clara: el velo y el fondo blanco ya separan el panel
 $lxd-modal-border-radius: 0px; // Radio del panel
 $lxd-modal-shadow: none; // Sombra de elevación
 $lxd-modal-padding-block: 2rem; // Padding vertical del panel
@@ -14,13 +16,11 @@ $lxd-modal-header-gap: 1rem; // Gap entre título y botón ✕
 $lxd-modal-title-font-size: 2rem; // Tamaño del título (2rem)
 $lxd-modal-title-font-weight: 500; // Peso del título
 $lxd-modal-title-color: #111e30; // Color del título
-$lxd-modal-width-max: 560px; // Anchura máxima del panel
-$lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable)
+$lxd-modal-width-max: 560px; // Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
+$lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max
 $lxd-modal-transition-duration: 250ms; // Duración de la animación entrada/salida
 $lxd-modal-transition-easing: ease-in-out; // Easing de la animación
-$lxd-modal-close-color: #6b6b6b; // Color del botón de cierre
-$lxd-modal-close-hover-color: #111e30; // Color del botón de cierre en hover
-$lxd-modal-close-hover-bg: #f2f2f2; // Fondo del botón de cierre en hover
+$lxd-modal-content-enter-offset: 0.5rem; // Desplazamiento vertical del panel al entrar/salir (8px)
 $lxd-modal-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-modal-description-color: #4a4a4a; // Color de la descripción del modal
 $lxd-modal-description-margin-block-end: 1rem; // Separación entre la descripción y el cuerpo del modal
