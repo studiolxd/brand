@@ -10,7 +10,7 @@
     "item-hover-color":     { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Enlaces en hover: en claro no cambia el color, aparece la línea" },
     "item-underline-offset": { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Separación entre el texto y la línea de hover (2px, más pegada que en los enlaces de texto). Se reserva siempre: la línea no desplaza nada al aparecer" },
     "item-hover-line-width": { "$value": "{link.underline-width}",    "$type": "dimension", "$description": "Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro" },
-    "item-current-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",  "$description": "Página actual: solo cambia el peso" },
+    "item-current-font-weight": { "$value": "{font-weight.default}", "$type": "number",  "$description": "Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta)" },
     "focus-ring-width":     { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Anillo de foco" },
     "focus-ring-offset":    { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Separación del anillo de foco" },
     "focus-ring-color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Anillo de foco" },

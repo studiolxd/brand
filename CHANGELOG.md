@@ -7,6 +7,37 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.0.0
+
+### Rompe
+
+- **Los 14 fields restantes pasan a definitivos** con el contrato completo
+  (`id`/`useId`, `label` + `labelHidden`, `helperText`, `error`+`errorMessage`,
+  `aria-describedby`/`aria-invalid`, `className` al contenedor, `forwardRef` al
+  control real y `name`): RadioField, SwitcherField, SelectField,
+  NumberInputField, InputPhoneField, OtpField, FileUploadField, MultiSelectField,
+  AsyncSelectField, AsyncMultiSelectField, DatePickerField, DateTimeField,
+  TimeField, y DropdownField gana ayuda y error. Cada uno con `Contrato`,
+  `ContratoTallas` y `ConReactHookForm` (FormProvider + FormField reales).
+- Átomos: Radio y Switcher estrenan `error`; NumberInput, InputPhone, OtpInput,
+  FileUpload, Select, MultiSelect, AsyncSelect, AsyncMultiSelect, DatePicker y
+  TimeSelect pasan a `forwardRef` con passthrough nativo y `name`
+  (`describedBy`/`ariaLabel` deprecados). Fuera `multi-select.icon-size`,
+  `multi-select.focus-ring-offset`, `select-field.error.border-color` y
+  `time-select.error-border-color` (crudos o duplicados).
+- `labelHidden` pasa a `false` por defecto en NumberInputField, InputPhoneField,
+  FileUploadField, DatePickerField, DateTimeField y TimeField. El DOM de
+  RadioField/SwitcherField cambia (raíz que apila; `__control` para marca+texto).
+- `SiteNav`: la página actual ya no va en negrita (`item-current-font-weight` =
+  `default`); la marca `aria-current`.
+
+### Corregido
+
+- A11y de los campos: el disparador del MultiSelect se nombra por
+  `aria-labelledby`; los Async* no pisan la etiqueta con el placeholder;
+  TimeField y DateTimeField nombran un `role="group"`; FileUpload lleva ayuda y
+  error a la zona de arrastre; TimeSelect ya no salta de no controlado a controlado.
+
 ## v21.1.1
 
 ### Corregido

@@ -11,7 +11,7 @@ $lxd-site-nav-item-color: #111e30; // Enlaces
 $lxd-site-nav-item-hover-color: #111e30; // Enlaces en hover: en claro no cambia el color, aparece la línea
 $lxd-site-nav-item-underline-offset: 2px; // Separación entre el texto y la línea de hover (2px, más pegada que en los enlaces de texto). Se reserva siempre: la línea no desplaza nada al aparecer
 $lxd-site-nav-item-hover-line-width: 1px; // Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro
-$lxd-site-nav-item-current-font-weight: 500; // Página actual: solo cambia el peso
+$lxd-site-nav-item-current-font-weight: 300; // Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta)
 $lxd-site-nav-focus-ring-width: 2px; // Anillo de foco
 $lxd-site-nav-focus-ring-offset: 2px; // Separación del anillo de foco
 $lxd-site-nav-focus-ring-color: #111e30; // Anillo de foco

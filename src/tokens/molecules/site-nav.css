@@ -12,7 +12,7 @@
   --site-nav-item-color: var(--color-text-on-light); /** Enlaces */
   --site-nav-item-hover-color: var(--color-text-on-light); /** Enlaces en hover: en claro no cambia el color, aparece la línea */
   --site-nav-item-underline-offset: var(--border-width-focus); /** Separación entre el texto y la línea de hover (2px, más pegada que en los enlaces de texto). Se reserva siempre: la línea no desplaza nada al aparecer */
-  --site-nav-item-current-font-weight: var(--font-weight-emphasis); /** Página actual: solo cambia el peso */
+  --site-nav-item-current-font-weight: var(--font-weight-default); /** Página actual: mismo peso que el resto (la marca aria-current y, si hace falta, el producto la resalta) */
   --site-nav-focus-ring-width: var(--border-width-focus); /** Anillo de foco */
   --site-nav-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
   --site-nav-focus-ring-color: var(--color-primary); /** Anillo de foco */
