@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.3.0
+
+### Cambiado
+
+- `PageIntro`: la frase bajo el título es una entradilla (`Paragraph size="large"`,
+  un peldaño por encima del cuerpo); `children` sigue en cuerpo normal.
+
 ## v22.2.1
 
 ### Corregido

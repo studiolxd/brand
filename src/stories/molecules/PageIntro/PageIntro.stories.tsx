@@ -32,6 +32,7 @@ export const Contrato: Story = {
     const header = canvasElement.querySelector('header.page-intro')!;
     await expect(header).toBeInTheDocument();
     await expect(canvas.getByRole('heading', { level: 1 })).toHaveTextContent('¿Olvidaste tu contraseña?');
-    await expect(canvas.getByText(/Ingresa tu correo/)).toBeInTheDocument();
+    const lead = canvas.getByText(/Ingresa tu correo/);
+    await expect(lead).toHaveClass('paragraph--large');
   },
 };

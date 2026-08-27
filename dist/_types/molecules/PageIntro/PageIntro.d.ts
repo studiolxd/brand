@@ -4,7 +4,7 @@ import './PageIntro.css';
 export interface PageIntroProps {
     /** El título de la página: un `Heading` de nivel 1 (o el que diga `level`). */
     title: ReactNode;
-    /** Una frase bajo el título, opcional. */
+    /** La frase bajo el título, opcional: va como entradilla (`Paragraph size="large"`, un peldaño por encima del cuerpo). */
     description?: ReactNode;
     /** Más texto bajo la frase (otro `Paragraph`, una lista…): mismo aire. */
     children?: ReactNode;

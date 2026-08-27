@@ -12,7 +12,10 @@ function i({ title: i, description: a, level: o = 1, size: s, className: c, chil
 				size: s,
 				children: i
 			}),
-			a && /* @__PURE__ */ n(t, { children: a }),
+			a && /* @__PURE__ */ n(t, {
+				size: "large",
+				children: a
+			}),
 			l
 		]
 	});
