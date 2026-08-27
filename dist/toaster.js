@@ -4,13 +4,17 @@ import { Icon as e } from "./icon.js";
 import { jsx as t } from "react/jsx-runtime";
 import { Toaster as n } from "sonner";
 //#region src/stories/molecules/Toast/Toaster.tsx
-function r({ position: r = "bottom-right", theme: i, containerAriaLabel: a }) {
+var r = 5e3, i = 8;
+function a({ position: a = "bottom-right", theme: o, containerAriaLabel: s = "Notificaciones", closeLabel: c = "Cerrar", closeButton: l = !0, duration: u = r, gap: d = i, visibleToasts: f, expand: p }) {
 	return /* @__PURE__ */ t(n, {
-		closeButton: !0,
-		position: r,
-		theme: i,
-		containerAriaLabel: a,
-		gap: 8,
+		closeButton: l,
+		position: a,
+		theme: o,
+		containerAriaLabel: s,
+		duration: u,
+		gap: d,
+		visibleToasts: f,
+		expand: p,
 		className: "toaster",
 		icons: { close: /* @__PURE__ */ t(e, {
 			name: "close",
@@ -18,19 +22,23 @@ function r({ position: r = "bottom-right", theme: i, containerAriaLabel: a }) {
 		}) },
 		toastOptions: {
 			unstyled: !0,
+			closeButtonAriaLabel: c,
 			classNames: {
-				toast: "toast",
-				title: "toast__title",
-				description: "toast__description",
+				toast: [
+					"alert",
+					l ? "alert--dismissible" : "",
+					"toast"
+				].filter(Boolean).join(" "),
+				title: "alert__title",
+				description: "alert__description",
 				closeButton: "toast__close",
 				icon: "toast__icon",
-				success: "toast--success",
-				error: "toast--error",
-				warning: "toast--warning",
-				info: "toast--info"
+				success: "alert--success",
+				error: "alert--error",
+				warning: "alert--warning"
 			}
 		}
 	});
 }
 //#endregion
-export { r as Toaster };
+export { a as Toaster };

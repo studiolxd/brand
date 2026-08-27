@@ -7,6 +7,62 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.8.0
+
+### Cambiado
+
+- `Toast` sale de `Por revisar/` (`Molecules/Toast`) y deja de duplicar al
+  `Alert`: **son el mismo objeto con distinta vida**. La tarjeta del aviso monta
+  ahora las clases y el juego de tokens del alert (`alert`,
+  `alert--<intención>`, `alert--dismissible`, `alert__title`,
+  `alert__description`), así que relleno, borde, aire, tipografía y las cuatro
+  intenciones son literalmente los mismos y se personalizan con `alert.*`.
+  `toast.*` se queda solo con lo suyo: capa, posición, apilado y movimiento.
+- `Toaster`: props nuevas `closeLabel` (etiqueta accesible del aspa, «Cerrar»),
+  `closeButton`, `duration` (5000ms, el reloj se para con el puntero o el foco
+  dentro), `gap`, `visibleToasts` y `expand`. `containerAriaLabel` estrena
+  default castellano («Notificaciones»; antes caía en el «Notifications» del
+  motor). `'use client'` explícito.
+- `Toast`: el aspa deja de llevar color cableado —fuera el
+  `rgba(255, 255, 255, .15)` del hover y el `color-mix(… 8%)` de la variante
+  `warning`—; reproduce la cara del `Button` ghost con los tokens del alert
+  (tinta del título, que voltea sola con la intención, e inversión contra el
+  relleno en hover) y mide `alert.close-size` (32px). Los `--spacing-*` sueltos
+  del CSS salen también de tokens del alert.
+- `Toast`: `dist/toaster.css` incluye ahora el CSS del `Alert`, del que la
+  tarjeta depende de verdad. Sin esto, un consumidor que importara solo el
+  entrypoint `./toaster` se quedaba con la capa pero sin tarjeta.
+- `Toast`: la pila no se sale por el lado en ventanas estrechas — su anchura es
+  `min(toast.max-width, ancho de la ventana − aire lateral)`.
+- Doc: `Toast.mdx` nueva (anatomía, montaje, intenciones, apilado, auto-cierre,
+  superficie oscura, tokens y accesibilidad) y `Toast.test.tsx` nuevo
+  (auto-cierre, `duration: Infinity`, cierre manual, `closeLabel`, la tarjeta es
+  un alert, `containerAriaLabel`). Stories en castellano con contratos `!dev`.
+- Doc: `Alert.mdx` § «Superficie oscura» recoge la decisión explícita — en
+  oscuro el relleno del aviso neutro sigue siendo prusia y el borde es el único
+  separador; **no se añade un neutro oscuro a la paleta**.
+- Doc: `Kbd.mdx` estrena § «Medida» con el porqué de derivar la altura del texto
+  (`cuerpo × interlineado + 2 × aire + 2 × borde`, como `textarea.min-height`) y
+  de no alinearla a los 32px de los controles: un keycap es una marca inline, no
+  un control, y a 32px `sm` y `md` colapsarían en la misma medida.
+- Doc: `Foundations › Internacionalización` añade `Toaster`.
+
+### Eliminado
+
+- Tokens `toast.*` que duplicaban a `alert.*`, **breaking para quien los
+  sobrescribiera** (ninguna app de la suite lo hacía; verificado por `grep`):
+  `padding-block`, `padding-inline`, `border-radius`, `border-width`, `shadow`,
+  `bg`, `border-color`, `title-font-size`, `title-font-weight`, `title-color`,
+  `description-font-size`, `description-color`, `close-color`,
+  `close-hover-color`, `close-size`, y los juegos completos `success-*`,
+  `error-*` y `warning-*`. Su equivalente es el token `alert.*` del mismo
+  nombre.
+- Tokens `toast.width`, `toast.inset-block-end`, `toast.inset-inline-end` y
+  `toast.gap`, renombrados o retirados: la anchura es ahora `toast.max-width`,
+  las distancias al borde son `toast.inset-block` / `toast.inset-inline` (valen
+  para las cuatro esquinas) y el aire entre avisos apilados pasa a ser la prop
+  `gap` del `Toaster`, porque el apilado lo calcula el motor de la cola en JS.
+
 ## v24.7.0
 
 ### Cambiado
