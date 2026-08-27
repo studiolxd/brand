@@ -16,6 +16,17 @@
   --prev-next-nav-btn-color: var(--color-text-on-light); /** Color de los botones de navegación */
   --prev-next-nav-btn-hover-color: var(--color-primary); /** Color en hover */
   --prev-next-nav-focus-ring-color: var(--color-primary); /** Color del focus ring */
+  --prev-next-nav-focus-ring-radius: var(--border-radius-default); /** Radio del anillo de foco — recto, como toda esquina del sistema */
   --prev-next-nav-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
   --prev-next-nav-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --prev-next-nav-btn-disabled-color: var(--color-grey-light); /** Color del botón deshabilitado — surface-dark */
+  --prev-next-nav-label-color: var(--color-text-on-dark); /** Color del label central — surface-dark */
+  --prev-next-nav-btn-color: var(--color-text-on-dark); /** Color de los botones de navegación — surface-dark */
+  --prev-next-nav-btn-hover-color: var(--color-accent-2); /** Color en hover — surface-dark: amarillo, porque el prusia de marca es aquí el fondo */
+  --prev-next-nav-focus-ring-color: var(--color-text-on-dark); /** Color del focus ring — surface-dark */
 }

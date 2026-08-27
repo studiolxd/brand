@@ -34,7 +34,7 @@
 .prev-next-nav__btn:focus-visible {
   outline: var(--prev-next-nav-focus-ring-width) solid var(--prev-next-nav-focus-ring-color);
   outline-offset: var(--prev-next-nav-focus-ring-offset);
-  border-radius: 2px;
+  border-radius: var(--prev-next-nav-focus-ring-radius);
 }
 
 .prev-next-nav__btn--prev .icon {

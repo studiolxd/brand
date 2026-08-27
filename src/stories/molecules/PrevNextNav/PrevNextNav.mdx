@@ -1,0 +1,71 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as PrevNextNavStories from "./PrevNextNav.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { prevNextNavTokens, prevNextNavDarkTokens } from "../../../tokens/molecules/prev-next-nav";
+
+<Meta of={PrevNextNavStories} />
+
+# PrevNextNav
+
+Moverse por una serie ordenada de periodos —semanas, meses, páginas de un
+informe— sin escoger uno concreto: anterior, dónde estoy, siguiente. Es la
+navegación de mes de `CalendarRoster`.
+
+<Canvas of={PrevNextNavStories.ConHref} />
+
+## Enlace o handler
+
+Cada control acepta `href` (navegación real, funciona sin JavaScript y es la
+opción por defecto) o un handler. Con `linkComponent` el `href` se rinde con el
+`Link` del router; y si se pasan los dos, el handler se dispara además del
+enlace, que es como se hace la navegación SPA: `preventDefault()` dentro y ruta
+por el router.
+
+<Canvas of={PrevNextNavStories.ConOnClick} />
+
+## Extremos
+
+Un control sin `href` ni handler queda deshabilitado: así se marca el principio
+y el final de la serie, sin quitar el control de sitio.
+
+<Canvas of={PrevNextNavStories.SinAnterior} />
+
+<Canvas of={PrevNextNavStories.SinSiguiente} />
+
+## Tamaños
+
+`md` toma el cuerpo de la superficie (16px en aplicación, 20px dentro de
+`SiteShell`); `sm` tiene talla propia de rótulo de interfaz.
+
+<Canvas of={PrevNextNavStories.Sm} />
+
+## Superficie oscura
+
+En oscuro el hover no puede ser el prusia de marca —es el propio fondo—, así
+que pasa a amarillo (`color.accent-2`), el mismo criterio que `SiteNav`.
+
+<Canvas of={PrevNextNavStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={prevNextNavTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={prevNextNavDarkTokens} />
+
+## Accesibilidad
+
+- Los dos controles llevan `aria-label` (`prevLabel`/`nextLabel`, castellano
+  por defecto): el chevron solo no dice a dónde lleva.
+- El extremo sin destino es un `<button disabled>`, no un enlace muerto.
+- `labelId` pone un `id` en el rótulo central para que la tabla o la región que
+  navega pueda tomarlo como nombre (`aria-labelledby`).
+- El anillo de foco es el del sistema, con esquina recta
+  (`focus-ring-radius`).
+
+## Props
+
+<ArgTypes of={PrevNextNavStories} />

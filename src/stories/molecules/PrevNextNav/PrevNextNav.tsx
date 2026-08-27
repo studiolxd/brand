@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ComponentType, MouseEvent, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import './PrevNextNav.css';
 
@@ -7,30 +7,55 @@ export interface PrevNextNavProps {
   prevHref?: string;
   /** href del enlace siguiente. Mutuamente exclusivo con nextOnClick */
   nextHref?: string;
-  /** Handler del botón anterior. Mutuamente exclusivo con prevHref */
-  prevOnClick?: () => void;
-  /** Handler del botón siguiente. Mutuamente exclusivo con nextHref */
-  nextOnClick?: () => void;
+  /**
+   * Handler del control anterior. Con `prevHref` puesto se dispara **además**
+   * del enlace: es la puerta para la navegación SPA (`preventDefault()` en el
+   * handler y ruta por el router).
+   */
+  prevOnClick?: (event: MouseEvent<HTMLElement>) => void;
+  /** Handler del control siguiente. Mismo contrato que `prevOnClick`. */
+  nextOnClick?: (event: MouseEvent<HTMLElement>) => void;
   /** aria-label del control anterior. Default: "Anterior" */
   prevLabel?: string;
   /** aria-label del control siguiente. Default: "Siguiente" */
   nextLabel?: string;
   /** Contenido central: texto de periodo, semana, mes, etc. */
   label: ReactNode;
+  /**
+   * id del label central, para que otro elemento pueda tomarlo como nombre
+   * accesible (`aria-labelledby`).
+   */
+  labelId?: string;
+  /**
+   * Componente `Link` del router para los controles con `href`. Default: `"a"`.
+   * Recibe `href` y el resto de props tal cual.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  linkComponent?: ComponentType<any>;
   /** Variante de densidad. Default: "md" */
   size?: 'sm' | 'md';
 }
 
 interface NavControlProps {
   href?: string;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
   label: string;
   disabled: boolean;
   direction: 'prev' | 'next';
   chevronSize: 'xs' | 'sm' | 'md';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  linkComponent?: ComponentType<any>;
 }
 
-function NavControl({ href, onClick, label, disabled, direction, chevronSize }: NavControlProps) {
+function NavControl({
+  href,
+  onClick,
+  label,
+  disabled,
+  direction,
+  chevronSize,
+  linkComponent,
+}: NavControlProps) {
   const className = [
     'prev-next-nav__btn',
     `prev-next-nav__btn--${direction}`,
@@ -50,10 +75,11 @@ function NavControl({ href, onClick, label, disabled, direction, chevronSize }: 
   }
 
   if (href) {
+    const A = linkComponent ?? 'a';
     return (
-      <a href={href} className={className} aria-label={label}>
+      <A href={href} className={className} aria-label={label} onClick={onClick}>
         {chevron}
-      </a>
+      </A>
     );
   }
 
@@ -72,6 +98,8 @@ export function PrevNextNav({
   prevLabel = 'Anterior',
   nextLabel = 'Siguiente',
   label,
+  labelId,
+  linkComponent,
   size = 'md',
 }: PrevNextNavProps) {
   const chevronSize = size === 'sm' ? 'sm' : 'md';
@@ -88,8 +116,11 @@ export function PrevNextNav({
         disabled={!prevHref && !prevOnClick}
         direction="prev"
         chevronSize={chevronSize}
+        linkComponent={linkComponent}
       />
-      <strong className="prev-next-nav__label">{label}</strong>
+      <strong id={labelId} className="prev-next-nav__label">
+        {label}
+      </strong>
       <NavControl
         href={nextHref}
         onClick={nextOnClick}
@@ -97,6 +128,7 @@ export function PrevNextNav({
         disabled={!nextHref && !nextOnClick}
         direction="next"
         chevronSize={chevronSize}
+        linkComponent={linkComponent}
       />
     </div>
   );
