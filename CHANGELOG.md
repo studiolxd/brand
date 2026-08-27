@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.1.0
+
+### Añadido
+
+- `SiteNav`: cada ítem admite `target` y `rel`. Con `target="_blank"` y sin
+  `rel` explícito se aplica `rel="noopener noreferrer"`. Ambos viajan también
+  en las props que recibe `renderLink` (`SiteNavRenderLinkProps`), así que el
+  enlace del router del producto debe reenviarlos. Caso de uso: una entrada del
+  menú que vive en otro dominio (estado del servicio) y abre en pestaña nueva.
+
 ## v24.0.0
 
 ### Eliminado (breaking)

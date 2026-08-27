@@ -17,13 +17,17 @@ El índice del sitio: grupos con una cabecera y sus enlaces. Es lo que llena el 
 
 Los enlaces son grandes a propósito (`font-size.3`): el panel es una pantalla entera dedicada a navegar, no un menú apretado.
 
+## Enlaces fuera del sitio
+
+Un `item` puede llevar `target` y `rel`. Con `target="_blank"` el enlace abre en una pestaña nueva y, si no se pasa `rel`, `SiteNav` aplica `rel="noopener noreferrer"` — el caso típico es una página alojada en otro dominio, como el estado del servicio. Ambos llegan también a `renderLink`, así que el enlace del router del producto debe reenviarlos.
+
 ## Móvil
 
 ## Superficie
 
 ## Enrutado
 
-`renderLink` recibe `href`, `children`, `className` y `aria-current` y devuelve el enlace del router del producto (`next/link`, por ejemplo). Sin él, renderiza un `<a>`.
+`renderLink` recibe `href`, `children`, `className`, `aria-current`, `target` y `rel`, y devuelve el enlace del router del producto (`next/link`, por ejemplo). Sin él, renderiza un `<a>`. `target` y `rel` solo llegan con valor cuando el ítem los declara (o cuando `target="_blank"` impone el `rel`), pero hay que reenviarlos siempre: sin ellos el enlace externo abriría en la misma pestaña.
 
 ## Accesibilidad
 

@@ -6,6 +6,10 @@ export interface SiteNavItem {
     href: string;
     /** Página actual: se marca con `aria-current="page"`. */
     current?: boolean;
+    /** Destino del enlace (`_blank` para abrir en otra pestaña). Útil para enlaces a otro dominio. */
+    target?: string;
+    /** Relación del enlace. Con `target="_blank"` y sin valor, se aplica `noopener noreferrer`. */
+    rel?: string;
 }
 export interface SiteNavGroup {
     id: string;
@@ -20,6 +24,10 @@ export type SiteNavRenderLinkProps = {
     children: ReactNode;
     className: string;
     'aria-current'?: 'page';
+    /** Presente solo si el ítem lo declara; el consumidor debe reenviarlo a su enlace. */
+    target?: string;
+    /** Presente solo si el ítem lo declara o si `target="_blank"` lo impone; reenviar junto a `target`. */
+    rel?: string;
 };
 export interface SiteNavProps {
     groups: SiteNavGroup[];

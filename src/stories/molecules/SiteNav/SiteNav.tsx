@@ -8,6 +8,10 @@ export interface SiteNavItem {
   href: string;
   /** Página actual: se marca con `aria-current="page"`. */
   current?: boolean;
+  /** Destino del enlace (`_blank` para abrir en otra pestaña). Útil para enlaces a otro dominio. */
+  target?: string;
+  /** Relación del enlace. Con `target="_blank"` y sin valor, se aplica `noopener noreferrer`. */
+  rel?: string;
 }
 
 export interface SiteNavGroup {
@@ -24,6 +28,10 @@ export type SiteNavRenderLinkProps = {
   children: ReactNode;
   className: string;
   'aria-current'?: 'page';
+  /** Presente solo si el ítem lo declara; el consumidor debe reenviarlo a su enlace. */
+  target?: string;
+  /** Presente solo si el ítem lo declara o si `target="_blank"` lo impone; reenviar junto a `target`. */
+  rel?: string;
 };
 
 export interface SiteNavProps {
@@ -35,12 +43,25 @@ export interface SiteNavProps {
   className?: string;
 }
 
-function defaultRenderLink({ href, children, className, 'aria-current': ariaCurrent }: SiteNavRenderLinkProps) {
+function defaultRenderLink({
+  href,
+  children,
+  className,
+  'aria-current': ariaCurrent,
+  target,
+  rel,
+}: SiteNavRenderLinkProps) {
   return (
-    <a href={href} className={className} aria-current={ariaCurrent}>
+    <a href={href} className={className} aria-current={ariaCurrent} target={target} rel={rel}>
       {children}
     </a>
   );
+}
+
+/** `target="_blank"` sin `rel` explícito arrastra siempre `noopener noreferrer`. */
+function linkRel(target?: string, rel?: string) {
+  if (rel) return rel;
+  return target === '_blank' ? 'noopener noreferrer' : undefined;
 }
 
 /**
@@ -71,6 +92,8 @@ export function SiteNav({
                   href: item.href,
                   className: ['site-nav__link', item.current ? 'site-nav__link--current' : ''].filter(Boolean).join(' '),
                   'aria-current': item.current ? 'page' : undefined,
+                  target: item.target,
+                  rel: linkRel(item.target, item.rel),
                   children: item.label,
                 })}
               </li>
