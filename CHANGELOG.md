@@ -7,6 +7,40 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.2.0
+
+### Cambiado
+
+- `Card`: los cuatro fondos `accent-1`/`accent-2`/`support-1`/`support-2`
+  —antes primitivo `var(--color-*)` directo en CSS— pasan a tokens de
+  componente propios. La variante `primary` deja de usar `color.primary`
+  como fondo (coincidía con `color.background.dark`: invisible sobre
+  `.surface-dark`) y pasa al patrón autocontenido de `button.primary` —
+  fondo `color.accent-1` (lavanda), texto `color.primary` (prussian), igual
+  en los dos temas. Token huérfano `card.shadow` (ya en `none`) retirado
+  junto con su `box-shadow` en CSS. Doc MDX ampliada (modo link/contenedor,
+  accesibilidad) y story de superficie oscura nueva.
+- `AppLauncher`: se borran 50 líneas de CSS bajo
+  `.surface-dark`/`[data-theme]`/`html.dark` que nunca surtían efecto (el
+  popup va en `Portal`; los tokens oscuros ya funcionan por el mecanismo
+  estándar de activación root-level). `trigger-size`/`tile-icon-size`
+  —2.5rem crudos— pasan a `size-component.md` (mismo valor).
+  `trigger-hover-bg`/`tile-hover-bg`/`tile-active-bg` dejan `grey-lightest`
+  y usan el relleno de marca del patrón Menu/Button ghost, con inversión en
+  superficie oscura. Doc MDX, story de superficie oscura y test de contrato
+  nuevos.
+- `Pagination`: el subrayado del botón en hover —antes `link.underline-width`
+  prestado de `Link`— pasa a `pagination.btn-hover-underline-width`, token
+  propio. Story de superficie oscura nueva.
+- `Skeleton`: `skeleton.duration` pasa de número crudo consumido con
+  `calc(var(*)*1ms)` a `"1400ms"` directo (como `spinner.animation-duration`).
+  Se apaga en `prefers-reduced-motion` (no lo cubría el
+  `--motion-duration-*` global). `skeleton--circle` usa `border-radius.round`
+  en vez de `50%` a mano; `bg` pasa al rol `surface.secondary-on-light` y
+  `surface-dark-bg`/`-highlight` dejan los `rgba` cableados por
+  `surface.secondary-on-dark` y `grey-dark`. Doc MDX nueva, story de
+  superficie oscura y test de contrato.
+
 ## v25.1.0
 
 Revisión de la familia de chat entera: los seis componentes salen de
