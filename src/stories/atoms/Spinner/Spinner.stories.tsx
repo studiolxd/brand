@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Spinner } from './Spinner';
 
 const meta: Meta<typeof Spinner> = {
@@ -46,4 +47,30 @@ export const EnContextoOscuro: Story = {
       <Spinner size="lg" />
     </>
   ),
+};
+
+/** Test: rol y anuncio accesible; el contorno es un `<rect>` sin radio con `pathLength="100"`. */
+export const Accesibilidad: Story = {
+  name: 'Test — rol, label y contorno cuadrado',
+  tags: ['!dev'],
+  args: { label: 'Guardando…' },
+  play: async ({ canvasElement }) => {
+    const status = within(canvasElement).getByRole('status');
+    await expect(status).toHaveAttribute('aria-label', 'Guardando…');
+    const rect = status.querySelector('rect.spinner__stroke');
+    await expect(rect).not.toBeNull();
+    await expect(rect).toHaveAttribute('pathLength', '100');
+    await expect(rect).not.toHaveAttribute('rx');
+  },
+};
+
+/** Test: decorativo — sin rol ni texto anunciado. */
+export const Decorativo: Story = {
+  name: 'Test — aria-hidden',
+  tags: ['!dev'],
+  args: { 'aria-hidden': true },
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).queryByRole('status')).toBeNull();
+    await expect(canvasElement.querySelector('.spinner')).toHaveAttribute('aria-hidden', 'true');
+  },
 };

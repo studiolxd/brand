@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SpinnerStories from "./Spinner.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { spinnerTokens } from "../../../tokens/components/spinner";
+
+<Meta of={SpinnerStories} />
+
+# Spinner
+
+Indicador de espera indeterminada. No es un círculo que gira: es un **cuadrado de solo contorno que se dibuja**. El trazo arranca en la esquina superior izquierda, recorre los cuatro lados y cierra en esa misma esquina con el contorno completo; entonces vuelve a empezar. La metáfora es la de un marco que se completa —la geometría recta de la identidad— en lugar de una rueda.
+
+<Canvas of={SpinnerStories.Default} />
+
+Hereda el color del texto (`currentColor`), así que funciona sobre cualquier superficie sin tokens de color propios.
+
+## Cómo se dibuja
+
+Un `<svg>` con un `<rect>` sin radio (`rx`), `fill="none"` y `stroke="currentColor"`. El rect lleva `pathLength="100"`, y el CSS anima `stroke-dashoffset` de 100 a 0 con `stroke-dasharray: 100`: la longitud del contorno es siempre 100 unidades sea cual sea el tamaño, y el trazado de un rect empieza en su esquina superior izquierda, que es la esquina de arranque. Sin rotación. La curva es `--motion-easing-in-out`; un ciclo dura `--spinner-animation-duration`.
+
+## Tamaños
+
+`sm`, `md` (por defecto) y `lg`. El grosor del trazo va por talla (`spinner.border-width-*`, aplicado al `stroke-width` con `vector-effect: non-scaling-stroke` para que sea píxeles reales, no unidades del viewBox).
+
+<Canvas of={SpinnerStories.Sizes} />
+
+## Sobre fondo oscuro
+
+<Canvas of={SpinnerStories.EnContextoOscuro} />
+
+## Accesibilidad
+
+Por defecto es `role="status"` con `aria-label` y el mismo texto en `VisuallyHidden`. La prop `label` (default castellano, «Cargando…») es el texto anunciado. Con `aria-hidden` el spinner es decorativo: sin rol ni anuncio; úsalo cuando el estado ya lo dice otro elemento (un botón con `loading`, por ejemplo).
+
+## Movimiento reducido
+
+Con `prefers-reduced-motion: reduce` no hay animación: el cuadrado se muestra con el contorno completo, quieto.
+
+---
+
+## Tokens
+
+<TokenTable tokens={spinnerTokens} />
+
+## Props
+
+<ArgTypes of={SpinnerStories} />
