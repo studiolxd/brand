@@ -1,6 +1,6 @@
 import './Arrow.css';
 
-interface ArrowProps {
+export interface ArrowProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }

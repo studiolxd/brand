@@ -5,25 +5,53 @@ import { arrowTokens } from "../../../tokens/components/arrow";
 
 <Meta of={ArrowStories} />
 
-# Flecha
+# Arrow
 
-Icono SVG decorativo con forma de flecha horizontal (→). Se usa como indicador de dirección o acción en botones, enlaces y carruseles. Siempre se renderiza con `aria-hidden="true"` para no ser anunciado por lectores de pantalla.
+Icono SVG decorativo con forma de flecha horizontal (→). Se usa como indicador
+de dirección o acción en botones, enlaces y carruseles (lo consumen `Card` y
+`Sidebar`).
 
-## Por defecto
+<Canvas of={ArrowStories.PorDefecto} />
 
-<Canvas of={ArrowStories.Default} />
+## Anatomía
+
+Una línea horizontal con una punta abierta a la derecha, trazada con
+`stroke="currentColor"`: hereda el color del texto que la rodea, así que no
+necesita variante de color propia. Se renderiza siempre con `aria-hidden="true"`
+porque es puramente decorativa — nunca lleva información que no esté ya en el
+texto o control que acompaña.
 
 ## Tamaños
 
-Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`. El ancho se controla mediante tokens CSS.
+Tres tamaños disponibles: `sm`, `md` (por defecto) y `lg`.
 
 <Canvas of={ArrowStories.Sizes} />
+
+El ancho de cada tamaño es una fórmula fluida, no un peldaño de ninguna escala
+del sistema: es un grafismo decorativo cuyo tamaño acompaña al viewport, no un
+control. `sm` y `md` usan `max()` (crecen con el viewport sin límite superior);
+`lg` usa `clamp()` con un tope de 144px para no desbordar en pantallas anchas.
+La altura es automática (`height: auto`): el SVG mantiene su proporción.
+
+## Superficie oscura
+
+`currentColor` hereda el color del contexto: sobre `.surface-dark` se lee en
+blanco sin ningún token `surface-dark-*` propio.
+
+<Canvas of={ArrowStories.EnSuperficieOscura} />
 
 ---
 
 ## Tokens
 
 <TokenTable tokens={arrowTokens} />
+
+## Accesibilidad
+
+- `aria-hidden="true"` siempre: la flecha es decorativa y nunca es el único
+  portador de significado (el enlace o botón que la envuelve ya lo dice en su
+  propio texto o `aria-label`).
+- Sin estado interactivo propio: no es focalizable ni tiene rol.
 
 ## Props
 
