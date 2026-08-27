@@ -1,52 +1,55 @@
 import './conversation-list.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { Button as n } from "./button.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a } from "react";
 //#region src/stories/molecules/ConversationList/ConversationList.tsx
-function i({ conversations: i, activeId: a, onNew: o, onSelect: s, onDelete: c, newLabel: l = "Nueva conversación", navLabel: u = "Conversaciones", deleteLabel: d = (e) => `Eliminar conversación "${e}"` }) {
-	return /* @__PURE__ */ r("div", {
-		className: "conversation-list",
-		children: [/* @__PURE__ */ n("div", {
+var o = a(function({ conversations: a, activeId: o, onNew: s, onSelect: c, onDelete: l, newLabel: u = "Nueva conversación", navLabel: d = "Conversaciones", deleteLabel: f = (e) => `Eliminar conversación "${e}"`, className: p, ...m }, h) {
+	return /* @__PURE__ */ i("div", {
+		ref: h,
+		className: `conversation-list${p ? ` ${p}` : ""}`,
+		...m,
+		children: [/* @__PURE__ */ r("div", {
 			className: "conversation-list__header",
-			children: /* @__PURE__ */ n("button", {
-				type: "button",
-				className: "conversation-list__new",
-				onClick: o,
-				children: l
+			children: /* @__PURE__ */ r(n, {
+				variant: "outline",
+				block: !0,
+				onClick: s,
+				children: u
 			})
-		}), /* @__PURE__ */ n("nav", {
-			"aria-label": u,
+		}), /* @__PURE__ */ r("nav", {
+			"aria-label": d,
 			className: "conversation-list__nav",
-			children: /* @__PURE__ */ n("ul", {
+			children: /* @__PURE__ */ r("ul", {
 				className: "conversation-list__items",
 				role: "list",
-				children: i.map((i) => {
-					let o = i.id === a;
-					return /* @__PURE__ */ r("li", {
+				children: a.map((n) => {
+					let a = n.id === o;
+					return /* @__PURE__ */ i("li", {
 						className: "conversation-list__item",
-						children: [/* @__PURE__ */ n("button", {
+						children: [/* @__PURE__ */ r("button", {
 							type: "button",
-							className: `conversation-list__label${o ? " conversation-list__label--active" : ""}`,
-							"aria-current": o ? "page" : void 0,
-							onClick: () => s(i.id),
-							children: i.label
-						}), /* @__PURE__ */ r("button", {
+							className: `conversation-list__label${a ? " conversation-list__label--active" : ""}`,
+							"aria-current": a ? "page" : void 0,
+							onClick: () => c(n.id),
+							children: n.label
+						}), /* @__PURE__ */ i("button", {
 							type: "button",
 							className: "conversation-list__delete",
 							onClick: (e) => {
-								e.stopPropagation(), c(i.id);
+								e.stopPropagation(), l(n.id);
 							},
-							tabIndex: -1,
-							children: [/* @__PURE__ */ n(e, {
+							children: [/* @__PURE__ */ r(e, {
 								name: "close",
 								size: "xs"
-							}), /* @__PURE__ */ n(t, { children: d(i.label) })]
+							}), /* @__PURE__ */ r(t, { children: f(n.label) })]
 						})]
-					}, i.id);
+					}, n.id);
 				})
 			})
 		})]
 	});
-}
+});
 //#endregion
-export { i as ConversationList };
+export { o as ConversationList };

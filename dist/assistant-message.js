@@ -1,26 +1,32 @@
 import './assistant-message.css';
 import { MessageBubble as e } from "./message-bubble.js";
 import { TypingIndicator as t } from "./typing-indicator.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { t as n } from "./_shared/messageTimestamp.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a } from "react";
 //#region src/stories/molecules/AssistantMessage/AssistantMessage.tsx
-function i({ children: i, model: a, timestamp: o, isStreaming: s = !1, streamingLabel: c }) {
-	return /* @__PURE__ */ r("div", {
-		className: "assistant-message",
+var o = a(function({ children: a, model: o, timestamp: s, locale: c, timestampFormat: l, isStreaming: u = !1, streamingLabel: d, className: f, ...p }, m) {
+	let h = n(s, c, l);
+	return /* @__PURE__ */ i("div", {
+		ref: m,
+		className: `assistant-message${f ? ` ${f}` : ""}`,
+		...p,
 		children: [
-			a && /* @__PURE__ */ n("span", {
+			o && /* @__PURE__ */ r("span", {
 				className: "assistant-message__model",
-				children: a
-			}),
-			/* @__PURE__ */ n(e, {
-				role: "assistant",
-				children: s ? /* @__PURE__ */ n(t, { label: c }) : i
-			}),
-			o && !s && /* @__PURE__ */ n("time", {
-				className: "assistant-message__timestamp",
 				children: o
+			}),
+			/* @__PURE__ */ r(e, {
+				role: "assistant",
+				children: u ? /* @__PURE__ */ r(t, { label: d }) : a
+			}),
+			h && !u && /* @__PURE__ */ r("time", {
+				className: "assistant-message__timestamp",
+				dateTime: h.dateTime,
+				children: h.label
 			})
 		]
 	});
-}
+});
 //#endregion
-export { i as AssistantMessage };
+export { o as AssistantMessage };

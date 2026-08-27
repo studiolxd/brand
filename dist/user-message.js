@@ -1,18 +1,24 @@
 import './user-message.css';
 import { MessageBubble as e } from "./message-bubble.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { t } from "./_shared/messageTimestamp.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { forwardRef as i } from "react";
 //#region src/stories/molecules/UserMessage/UserMessage.tsx
-function r({ children: r, timestamp: i }) {
-	return /* @__PURE__ */ n("div", {
-		className: "user-message",
-		children: [/* @__PURE__ */ t(e, {
+var a = i(function({ children: i, timestamp: a, locale: o, timestampFormat: s, className: c, ...l }, u) {
+	let d = t(a, o, s);
+	return /* @__PURE__ */ r("div", {
+		ref: u,
+		className: `user-message${c ? ` ${c}` : ""}`,
+		...l,
+		children: [/* @__PURE__ */ n(e, {
 			role: "user",
-			children: r
-		}), i && /* @__PURE__ */ t("time", {
-			className: "user-message__timestamp",
 			children: i
+		}), d && /* @__PURE__ */ n("time", {
+			className: "user-message__timestamp",
+			dateTime: d.dateTime,
+			children: d.label
 		})]
 	});
-}
+});
 //#endregion
-export { r as UserMessage };
+export { a as UserMessage };

@@ -3,30 +3,39 @@ import './conversation-thread.css';
 import { UserMessage as e } from "./user-message.js";
 import { AssistantMessage as t } from "./assistant-message.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { useEffect as i, useRef as a } from "react";
+import { forwardRef as i, useEffect as a, useRef as o } from "react";
 //#region src/stories/organisms/ConversationThread/ConversationThread.tsx
-function o({ messages: o = [], children: s, streamingLabel: c, ariaLabel: l = "Conversación" }) {
-	let u = a(null);
-	return i(() => {
-		u.current?.scrollIntoView({ behavior: "smooth" });
-	}, [o, s]), /* @__PURE__ */ r("div", {
-		className: "conversation-thread",
+function s() {
+	return typeof window > "u" || typeof window.matchMedia != "function" || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+}
+var c = i(function({ messages: i = [], children: c, streamingLabel: l, ariaLabel: u = "Conversación", locale: d, timestampFormat: f, className: p, ...m }, h) {
+	let g = o(null);
+	return a(() => {
+		g.current?.scrollIntoView({ behavior: s() });
+	}, [i, c]), /* @__PURE__ */ r("div", {
+		ref: h,
+		className: `conversation-thread${p ? ` ${p}` : ""}`,
 		role: "log",
-		"aria-label": l,
-		children: [s ?? o.map((r) => r.role === "user" ? /* @__PURE__ */ n(e, {
+		"aria-label": u,
+		...m,
+		children: [c ?? i.map((r) => r.role === "user" ? /* @__PURE__ */ n(e, {
 			timestamp: r.timestamp,
+			locale: d,
+			timestampFormat: f,
 			children: r.content
 		}, r.id) : /* @__PURE__ */ n(t, {
 			model: r.model,
 			timestamp: r.timestamp,
+			locale: d,
+			timestampFormat: f,
 			isStreaming: r.isStreaming,
-			streamingLabel: c,
+			streamingLabel: l,
 			children: r.content
 		}, r.id)), /* @__PURE__ */ n("div", {
-			ref: u,
+			ref: g,
 			"aria-hidden": "true"
 		})]
 	});
-}
+});
 //#endregion
-export { o as ConversationThread };
+export { c as ConversationThread };
