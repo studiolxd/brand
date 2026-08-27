@@ -8,6 +8,7 @@
     "item-line-height":     { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Enlaces" },
     "item-color":           { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Enlaces" },
     "item-hover-color":     { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Enlaces en hover: en claro no cambia el color, aparece la línea" },
+    "item-underline-offset": { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Separación entre el texto y la línea de hover (2px, más pegada que en los enlaces de texto). Se reserva siempre: la línea no desplaza nada al aparecer" },
     "item-hover-line-width": { "$value": "{link.underline-width}",    "$type": "dimension", "$description": "Enlaces en hover: la línea bajo el enlace (como los enlaces de texto), en claro" },
     "item-current-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",  "$description": "Página actual: solo cambia el peso" },
     "focus-ring-width":     { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Anillo de foco" },

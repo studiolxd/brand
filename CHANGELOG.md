@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v21.1.1
+
+### Corregido
+
+- `SiteNav`: la línea de hover ya no desplaza el contenido (el sitio se reserva
+  siempre) y va más pegada al texto (`item-underline-offset` = 2px).
+
 ## v21.1.0
 
 ### Añadido

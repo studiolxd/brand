@@ -35,7 +35,9 @@
 .site-nav__label-link {
   color: inherit;
   text-decoration: none;
-  padding-block-end: 0;
+  /* El sitio de la línea de hover se reserva siempre: nada se mueve al aparecer. */
+  padding-block-end: var(--site-nav-item-underline-offset);
+  /* Sin línea en reposo (la base de los enlaces sí la lleva). */
   box-shadow: none;
 }
 .site-nav__link {
@@ -49,7 +51,6 @@
 .site-nav__link:hover,
 .site-nav__label-link:hover {
   color: var(--site-nav-item-hover-color);
-  padding-block-end: var(--link-underline-offset);
   box-shadow: inset 0 calc(-1 * var(--site-nav-item-hover-line-width)) 0 0 currentColor;
 }
 .site-nav__link.site-nav__link--current {
