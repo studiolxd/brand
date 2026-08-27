@@ -7,6 +7,10 @@
 @import '../../../tokens/molecules/alert.css';
 @import '../../../tokens/molecules/toast.css';
 
+/* La tarjeta del aviso ES un `Alert`: su CSS es una dependencia real, no un
+   adorno. Va antes para que lo de aquí abajo mande. */
+@import '../Alert/Alert.css';
+
 /* Duraciones y curva por token: con `prefers-reduced-motion: reduce` las
    duraciones valen 0ms y el aviso entra y sale sin animación. */
 @keyframes toast-in {

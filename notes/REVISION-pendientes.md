@@ -114,8 +114,10 @@ de 32px como control.
       (1.5 / 1.75 / 2.25rem) se van: `min-size` sale ahora de la fórmula
       `cuerpo × interlineado + 2 × aire + 2 × borde`, igual que
       `textarea.min-height`, así una tecla de un carácter es cuadrada en las
-      tres tallas (24 / 26 / 38px). Si la decisión es que suba a 32px, hay que
-      decidir antes qué pasa con `sm` y `md`, que colapsarían en la misma medida.
+      tres tallas (24 / 26 / 38px). **Decidido (2026-08-27): se queda así.** Un
+      keycap es una marca dentro del texto, no un control de una fila de
+      formulario, y a 32px sería más alto que el renglón que lo rodea; además
+      `sm` y `md` colapsarían en la misma medida. Documentado en Kbd → «Medida».
 - [x] **UserMenu** avatar, **OrgSwitcher** logo y **SidebarNav** icono → `sm`
       (2026-08-25; Avatar entero a tallas 32/40/48, sin `xl`).
 - [x] **DotsButton** → Button ghost iconOnly a talla (32/40/48), sin tokens propios (2026-08-26).
@@ -197,8 +199,9 @@ comprobar que sigue separándose de lo que tiene debajo:
 
 - [ ] **Modal** (tenía `xl`) — el velo hace el trabajo; comprobar borde en
       superficie oscura.
-- [ ] **Toast** (tenía `lg`) — flota sobre contenido arbitrario: necesita
-      borde 1px visible en claro y oscuro.
+- [x] **Toast** (tenía `lg`) — hecho (2026-08-27): fuera el token `toast.shadow`;
+      el borde es el del `Alert` (1px, blanco en el neutro), que separa el aviso
+      del contenido sobre el que flota en claro y en oscuro.
 - [ ] **Sidebar** y **AppHeader** (sombra cruda) — barra fija sobre
       contenido que hace scroll: sustituir por borde inferior/derecho 1px.
 - [x] **Kbd** — el relieve lo daba el borde, no la sombra: el token
@@ -426,16 +429,17 @@ Salen de `Por revisar/`: `Molecules/Alert` y `Molecules/CodeBlock`.
 
 Decisiones pendientes que salen de esta revisión:
 
-- [ ] **`Alert` y `Toast` son el mismo objeto con distinta vida.** Toast repite
-      literalmente la maqueta, las variantes y los tokens de Alert (incluido el
-      aspa a mano con el `rgba(255,255,255,.15)` que Alert ya no tiene). Al
-      revisar `Toast` toca decidir si comparte la cara de Alert (un solo juego
-      de tokens de relleno) o si su elevación flotante justifica los suyos.
-- [ ] **El relleno `default` de Alert es prusia.** Sobre una página oscura se
-      distingue solo por el borde blanco. Si el aviso neutro debe tener cuerpo
-      propio en oscuro, hay que decidir un color de relleno nuevo (no existe en
-      la paleta un neutro oscuro distinto de prusia): es decisión de diseño, no
-      se ha inventado.
+- [x] **`Alert` y `Toast` son el mismo objeto con distinta vida.** Resuelto
+      (2026-08-27): comparten la cara. El toast monta las clases del `Alert`
+      (`alert`, `alert--<intención>`, `alert__title`, `alert__description`) y su
+      juego de tokens; `toast.*` se queda solo con la capa, la posición, el
+      apilado y el movimiento de entrada/salida.
+- [x] **El relleno `default` de Alert es prusia.** Decidido (2026-08-27): se
+      queda, y el borde es el único separador en superficie oscura. **No se
+      añade un neutro oscuro a la paleta** para este caso: sería un color sin
+      rol en el resto del sistema. Un aviso que deba destacar sobre página
+      oscura no es el neutro, es una de las tres intenciones saturadas.
+      Documentado en Alert → «Superficie oscura», y vale igual para el Toast.
 - [x] **`parameters: { surface: 'dark' }`** ya está en `main` (v24.5.0, decorator
       `withSurface`): las stories «En superficie oscura» de Alert y CodeBlock
       usan el parámetro, no `globals.backgrounds`.
@@ -468,3 +472,28 @@ Accordion, Tag, Kbd, List, Popover, DescriptionList y ProgressBar salen de
 - [ ] **`DatePicker`** abre su `Popover` sin `label`: el panel es
       `role="dialog"` sin nombre accesible. La prop ya existe; falta pasarla al
       revisar la molécula.
+
+## Toast definitivo (2026-08-27)
+
+Sale de `Por revisar/`: `Molecules/Toast`. Comparte la cara del `Alert` y se
+queda solo con la capa, la posición, el apilado y el auto-cierre. Lo que queda
+anotado:
+
+- [ ] **El rol ARIA no puede ser por intención.** El motor de la cola (`sonner`)
+      monta una sola región `aria-live="polite"` para toda la pila y no expone
+      el `role` de cada aviso, así que un `toast.error()` no interrumpe como lo
+      hace un `Alert variant="error"` (`role="alert"`). Es la conducta correcta
+      para un mensaje de estado y así está documentado —lo que debe interrumpir
+      va en un `Alert` en el flujo—, pero si el sistema quiere avisos
+      asertivos hay que cambiar de motor.
+- [ ] **Migrar la cola a Base UI** (`@base-ui-components/react/toast`), que sí da
+      rol por aviso y aspa propia. Hoy no se puede: las diez apps de la suite
+      importan `toast` de `sonner` directamente en 143 ficheros; el cambio exige
+      un codemod coordinado con el bump del pin.
+- [ ] **`duration` y `gap` son props, no tokens.** El motor calcula la vida del
+      aviso y el apilado en JS; un token CSS no movería nada y quedaría muerto.
+      Mismo caso que el umbral del 15% de `ProgressBar`. Si algún día el sistema
+      publica sus escalas como JSON resuelto consumible desde TS, repuntar ahí.
+- [ ] **`toast.max-width`** son 360px sueltos: la anchura de una tarjeta
+      flotante no está en ninguna escala. Mismo caso que las alturas de carril
+      de `ProgressBar`.
