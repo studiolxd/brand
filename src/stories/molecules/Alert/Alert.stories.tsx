@@ -85,12 +85,10 @@ export const Composicion: Story = {
  * Superficie oscura. El relleno del alert es autocontenido: se ve igual sobre una
  * página clara y sobre una oscura, y el borde blanco del `default` lo separa del
  * fondo cuando la página ya es prusia.
- *
- * (El decorator global aplica `.surface-dark` al elegir el fondo oscuro; cuando
- * el parámetro `surface` esté en `main`, esta story pasa a `parameters: { surface: 'dark' }`.)
  */
 export const SuperficieOscura: Story = {
-  globals: { backgrounds: { value: 'dark' } },
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
   render: () => (
     <div style={{ display: 'grid', gap: '1rem' }}>
       <Alert dismissible title="Aviso" description="Sobre una página oscura." />

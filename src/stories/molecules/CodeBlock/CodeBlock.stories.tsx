@@ -90,12 +90,10 @@ export const ConNodosResaltados: Story = {
 /**
  * Superficie oscura. El bloque es una superficie clara autocontenida (gris claro
  * con tinta prusia): se ve igual sobre una página clara y sobre una oscura.
- *
- * (El decorator global aplica `.surface-dark` al elegir el fondo oscuro; cuando
- * el parámetro `surface` esté en `main`, esta story pasa a `parameters: { surface: 'dark' }`.)
  */
 export const SuperficieOscura: Story = {
-  globals: { backgrounds: { value: 'dark' } },
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
   args: {
     language: 'tsx',
     copyable: true,

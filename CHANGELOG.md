@@ -37,7 +37,8 @@ para breaking changes.
   `{...rest}`. MDX corregido: la superficie del bloque es autocontenida y su
   borde **no** hereda el remapeo oscuro de `Card`.
 - Ambos salen del grupo «Por revisar» del catálogo: `Molecules/Alert` y
-  `Molecules/CodeBlock`.
+  `Molecules/CodeBlock`. Su story «En superficie oscura» usa el
+  `parameters: { surface: 'dark' }` que llegó en v24.5.0.
 
 ## v24.5.0
 

@@ -425,7 +425,6 @@ Decisiones pendientes que salen de esta revisión:
       propio en oscuro, hay que decidir un color de relleno nuevo (no existe en
       la paleta un neutro oscuro distinto de prusia): es decisión de diseño, no
       se ha inventado.
-- [ ] **`parameters: { surface: 'dark' }`** todavía no está en `main` (lo trae
-      la rama `ds-huecos`). Las stories de superficie oscura de Alert y
-      CodeBlock usan `globals: { backgrounds: { value: 'dark' } }`; al integrar
-      esa rama, cambiarlas al parámetro.
+- [x] **`parameters: { surface: 'dark' }`** ya está en `main` (v24.5.0, decorator
+      `withSurface`): las stories «En superficie oscura» de Alert y CodeBlock
+      usan el parámetro, no `globals.backgrounds`.

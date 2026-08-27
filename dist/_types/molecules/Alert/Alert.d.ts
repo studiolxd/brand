@@ -1,11 +1,17 @@
 import './Alert.css';
+export type AlertVariant = 'default' | 'success' | 'error' | 'warning';
 export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
-    variant?: 'default' | 'success' | 'error' | 'warning';
+    variant?: AlertVariant;
     /** Título del alert. **Opcional**: en modo composición usa `children` (p. ej. `<Alert.Title>`). */
     title?: string;
     description?: React.ReactNode;
     dismissible?: boolean;
     onDismiss?: () => void;
+    /**
+     * Etiqueta accesible del botón de cierre. Default: «Cerrar» (castellano).
+     * Una app multiidioma debe pasarla traducida.
+     */
+    closeLabel?: string;
 }
 export type AlertTitleProps = React.ComponentPropsWithoutRef<'p'>;
 export type AlertDescriptionProps = React.ComponentPropsWithoutRef<'div'>;
