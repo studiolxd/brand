@@ -1,13 +1,19 @@
 import { type ComponentProps } from 'react';
-import { type ControllerProps, type FieldPath, type FieldValues } from 'react-hook-form';
+import { FormProvider as RhfFormProvider, type ControllerProps, type FieldPath, type FieldValues } from 'react-hook-form';
 import { Label } from '../../atoms/Label/Label';
 import './FormField.css';
+type Translate = (message: string) => string;
 /**
- * Proveedor del formulario. Es el `FormProvider` de react-hook-form, expuesto
+ * Proveedor del formulario: el `FormProvider` de react-hook-form, expuesto
  * desde el DS para que los consumidores no tengan que importar dos sitios
- * para montar un campo.
+ * para montar un campo, más `translate`: si los mensajes de error del
+ * esquema son claves de traducción (una política compartida con el
+ * servidor, por ejemplo), `FormMessage` y `FormRootMessage` las pasan por
+ * aquí antes de pintarlas.
  */
-export declare const FormProvider: <TFieldValues extends FieldValues, TContext = any, TTransformedValues = TFieldValues>({ children, watch, getValues, getErrors, getFieldState, setError, clearErrors, setValue, setValues, trigger, formState, resetField, reset, resetDefaultValues, handleSubmit, unregister, control, register, setFocus, subscribe, }: import("react-hook-form").FormProviderProps<TFieldValues, TContext, TTransformedValues>) => React.JSX.Element;
+export declare function FormProvider<TFieldValues extends FieldValues = FieldValues, TContext = unknown, TTransformedValues = TFieldValues>({ translate, children, ...form }: ComponentProps<typeof RhfFormProvider<TFieldValues, TContext, TTransformedValues>> & {
+    translate?: Translate;
+}): import("react/jsx-runtime").JSX.Element;
 /**
  * Un campo controlado: envuelve el `Controller` de react-hook-form y publica
  * su `name` para que el resto de piezas del campo (label, control, mensaje)
@@ -56,3 +62,4 @@ export declare function FormMessage({ className, children, ...props }: Component
  * no tiene campo del que leer, así que va directo al `formState`.
  */
 export declare function FormRootMessage({ className, ...props }: ComponentProps<'p'>): import("react/jsx-runtime").JSX.Element | null;
+export {};

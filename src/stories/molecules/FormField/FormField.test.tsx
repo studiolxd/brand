@@ -21,10 +21,12 @@ function Harness({
   fieldError,
   rootError,
   onSubmit,
+  translate,
 }: {
   fieldError?: string;
   rootError?: string;
   onSubmit?: (values: Values) => void;
+  translate?: (message: string) => string;
 }) {
   // `errors` lo vigila react-hook-form por referencia: un literal nuevo en
   // cada render reinyectaría los errores en bucle.
@@ -39,7 +41,7 @@ function Harness({
   const form = useForm<Values>({ defaultValues: { email: '' }, errors });
 
   return (
-    <FormProvider {...form}>
+    <FormProvider {...form} translate={translate}>
       <form onSubmit={form.handleSubmit((values) => onSubmit?.(values))}>
         <FormField
           control={form.control}
@@ -94,6 +96,16 @@ describe('FormField', () => {
   it('el error del formulario se anuncia aunque no cuelgue de ningún campo', () => {
     render(<Harness rootError="No hemos podido guardar" />);
     expect(screen.getByRole('alert')).toHaveTextContent('No hemos podido guardar');
+  });
+
+  it('con `translate`, los mensajes (claves) se traducen antes de pintarse, en el campo y en la raíz', () => {
+    const diccionario: Record<string, string> = {
+      'errors.email': 'Ese correo no vale',
+      'errors.root': 'No hemos podido guardar',
+    };
+    render(<Harness fieldError="errors.email" rootError="errors.root" translate={(k) => diccionario[k] ?? k} />);
+    const alerts = screen.getAllByRole('alert').map((el) => el.textContent);
+    expect(alerts).toEqual(['Ese correo no vale', 'No hemos podido guardar']);
   });
 
   it('el control escribe en el formulario', async () => {

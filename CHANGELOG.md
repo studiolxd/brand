@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.2.0
+
+### Añadido
+
+- `FormProvider` admite `translate`: `FormMessage` y `FormRootMessage` pasan por
+  ahí los mensajes de error (claves de traducción de una política compartida con
+  el servidor, por ejemplo) antes de pintarlos.
+
 ## v19.1.0
 
 ### Añadido

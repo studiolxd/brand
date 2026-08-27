@@ -13,12 +13,33 @@ import {
 import { Label } from '../../atoms/Label/Label';
 import './FormField.css';
 
+type Translate = (message: string) => string;
+
+const FormTranslateContext = createContext<Translate | undefined>(undefined);
+
 /**
- * Proveedor del formulario. Es el `FormProvider` de react-hook-form, expuesto
+ * Proveedor del formulario: el `FormProvider` de react-hook-form, expuesto
  * desde el DS para que los consumidores no tengan que importar dos sitios
- * para montar un campo.
+ * para montar un campo, más `translate`: si los mensajes de error del
+ * esquema son claves de traducción (una política compartida con el
+ * servidor, por ejemplo), `FormMessage` y `FormRootMessage` las pasan por
+ * aquí antes de pintarlas.
  */
-export const FormProvider = RhfFormProvider;
+export function FormProvider<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = unknown,
+  TTransformedValues = TFieldValues,
+>({
+  translate,
+  children,
+  ...form
+}: ComponentProps<typeof RhfFormProvider<TFieldValues, TContext, TTransformedValues>> & { translate?: Translate }) {
+  return (
+    <FormTranslateContext.Provider value={translate}>
+      <RhfFormProvider {...form}>{children}</RhfFormProvider>
+    </FormTranslateContext.Provider>
+  );
+}
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -133,7 +154,9 @@ export function FormDescription({ className, ...props }: ComponentProps<'p'>) {
  */
 export function FormMessage({ className, children, ...props }: ComponentProps<'p'>) {
   const { error, formMessageId } = useFormField();
-  const body = error ? String(error?.message ?? '') : children;
+  const translate = useContext(FormTranslateContext);
+  const message = error ? String(error?.message ?? '') : '';
+  const body = error ? (translate && message ? translate(message) : message) : children;
 
   if (!body) return null;
 
@@ -157,7 +180,9 @@ export function FormMessage({ className, children, ...props }: ComponentProps<'p
  */
 export function FormRootMessage({ className, ...props }: ComponentProps<'p'>) {
   const { formState } = useFormContext();
-  const body = formState.errors.root?.message;
+  const translate = useContext(FormTranslateContext);
+  const raw = formState.errors.root?.message;
+  const body = raw && translate ? translate(String(raw)) : raw;
 
   if (!body) return null;
 
