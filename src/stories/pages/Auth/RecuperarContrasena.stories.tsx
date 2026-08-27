@@ -5,7 +5,6 @@ import { InputField } from '../../molecules/InputField/InputField';
 import { PasswordField } from '../../molecules/PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
-import { Alert, AlertDescription } from '../../molecules/Alert/Alert';
 
 interface Args { step: 'pedir' | 'enviado' | 'restablecer'; surface: 'light' | 'dark' }
 
@@ -21,19 +20,20 @@ function Recuperar({ step, surface }: Args) {
     );
   }
   return (
-    <AuthPage title="¿Olvidaste tu contraseña?" description="Ingresa tu correo y te enviaremos un enlace para restablecerla." surface={surface}>
+    <AuthPage
+      title="¿Olvidaste tu contraseña?"
+      description="Ingresa tu correo y te enviaremos un enlace para restablecerla."
+      aside={<Link href="#acceso" icon="arrow-left">Volver al inicio de sesión</Link>}
+      surface={surface}
+    >
       <Form
         size="lg"
         blockActions
         onSubmit={(e) => e.preventDefault()}
-        actions={step === 'pedir' ? <Button variant="primary" type="submit">Enviar enlace</Button> : undefined}
-        links={<Link href="#acceso" icon="arrow-left">Volver a iniciar sesión</Link>}
+        success={step === 'enviado' ? 'Si existe una cuenta con ese correo, te hemos enviado un enlace para restablecer la contraseña.' : undefined}
+        actions={<Button variant="primary" type="submit">Enviar enlace</Button>}
       >
-        {step === 'pedir' ? (
-          <InputField id="recuperar-email" label="Correo electrónico" type="email" autoComplete="email" />
-        ) : (
-          <Alert variant="success" role="status"><AlertDescription>Si existe una cuenta con ese correo, te hemos enviado un enlace para restablecer la contraseña.</AlertDescription></Alert>
-        )}
+        <InputField id="recuperar-email" label="Correo electrónico" type="email" autoComplete="email" />
       </Form>
     </AuthPage>
   );

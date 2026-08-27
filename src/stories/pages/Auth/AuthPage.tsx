@@ -34,6 +34,8 @@ export interface AuthPageProps {
   description?: ReactNode;
   /** Más texto bajo la frase. */
   intro?: ReactNode;
+  /** Bajo la cabecera, en la misma columna (un enlace de vuelta): el aire lo pone el PageIntro. */
+  aside?: ReactNode;
   /** Lo que va a la derecha: el formulario. */
   children: ReactNode;
   /** Superficie oscura. */
@@ -41,7 +43,7 @@ export interface AuthPageProps {
 }
 
 /** El chrome público de la suite con la página de acceso dentro: es el layout `(auth)` de hub, con piezas del DS y datos falsos. */
-export function AuthPage({ title, description, intro, children, surface = 'light' }: AuthPageProps) {
+export function AuthPage({ title, description, intro, aside, children, surface = 'light' }: AuthPageProps) {
   const page = (
     <SiteShell
       header={
@@ -56,7 +58,10 @@ export function AuthPage({ title, description, intro, children, surface = 'light
     >
       <Container as="main" id="main-content" tabIndex={-1} space="xl">
         <Columns>
-          <PageIntro title={title} description={description}>{intro}</PageIntro>
+          <>
+            <PageIntro title={title} description={description}>{intro}</PageIntro>
+            {aside}
+          </>
           {children}
         </Columns>
       </Container>
