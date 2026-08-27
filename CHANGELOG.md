@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.2.1
+
+### Corregido
+
+- `Link` `tone="ink"`: faltaba la regla CSS (solo estaban los tokens), así que
+  en oscuro salía amarillo como los `accent`.
+
 ## v22.2.0
 
 ### Añadido

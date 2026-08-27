@@ -37,3 +37,14 @@ a:focus-visible {
 .link__icon {
   flex-shrink: 0;
 }
+
+/* Tono ink: el enlace utilitario (legal, volver, ¿olvidaste la contraseña?) —
+   tinta, línea en reposo y ninguna en hover, igual en las dos superficies. */
+.link--ink {
+  color: var(--link-ink-color);
+  box-shadow: inset 0 calc(-1 * var(--link-ink-underline-width)) 0 0 currentColor;
+}
+.link--ink:hover {
+  color: var(--link-ink-color);
+  box-shadow: inset 0 calc(-1 * var(--link-ink-hover-underline-width)) 0 0 currentColor;
+}

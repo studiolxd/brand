@@ -81,3 +81,14 @@ export const Tonos: Story = {
     </div>
   ),
 };
+
+export const ContratoInk: Story = {
+  name: 'Test — el tono ink lleva su clase y su color de tinta',
+  tags: ['!dev'],
+  render: () => <Link href="#recuperar" tone="ink" data-testid="ink">¿Olvidaste tu contraseña?</Link>,
+  play: async ({ canvasElement }) => {
+    const a = canvasElement.querySelector('[data-testid="ink"]') as HTMLElement;
+    await expect(a).toHaveClass('link--ink');
+    await expect(getComputedStyle(a).boxShadow).not.toBe('none');
+  },
+};
