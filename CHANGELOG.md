@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.0.1
+
+### Corregido
+
+- `OtpField`: el grupo se nombra por `aria-labelledby` con la etiqueta visible,
+  no con un `aria-label` duplicado (los tests por etiqueta encontraban dos).
+
 ## v22.0.0
 
 ### Rompe
