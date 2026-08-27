@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v20.1.1
+
+### Corregido
+
+- `SkipLink`: el anillo de foco iba en el color del texto del relleno (blanco
+  en claro, prusia en oscuro), invisible sobre la página. Ahora es la tinta de
+  la superficie, a 4px, como en los botones.
+
 ## v20.1.0
 
 ### Cambiado

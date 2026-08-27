@@ -7,12 +7,12 @@
     "inset":             { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Separación de la esquina de la ventana al revelarse" },
     "font-weight":       { "$value": "{font-weight.emphasis}",  "$type": "number",    "$description": "Peso del texto: es una acción" },
     "focus-ring-width":  { "$value": "{border-width.focus}",    "$type": "dimension", "$description": "Grosor del anillo de foco" },
-    "focus-ring-offset": { "$value": "{border-width.focus}",    "$type": "dimension", "$description": "Separación del anillo de foco" },
-    "focus-ring-color":  { "$value": "{color.text.on-dark}",    "$type": "color",     "$description": "Anillo de foco: contrasta con el relleno" },
+    "focus-ring-offset": { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Separación del anillo de foco (4px): el hueco es la página, como en los botones" },
+    "focus-ring-color":  { "$value": "{color.primary}",         "$type": "color",     "$description": "Anillo de foco: va por fuera, sobre la página, así que es la tinta de la superficie (prusia), no la que contrasta con el relleno" },
     "z-index":           { "$value": "{z-index.skip}",          "$type": "number",    "$description": "Sobre cualquier otra capa: es lo primero al tabular" },
 
     "surface-dark-bg":               { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Fondo — surface-dark: el relleno se invierte para verse sobre prusia" },
     "surface-dark-color":            { "$value": "{color.primary}",       "$type": "color", "$description": "Texto — surface-dark" },
-    "surface-dark-focus-ring-color": { "$value": "{color.primary}",       "$type": "color", "$description": "Anillo de foco — surface-dark" }
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Anillo de foco — surface-dark (blanco sobre la página prusia)" }
   }
 }

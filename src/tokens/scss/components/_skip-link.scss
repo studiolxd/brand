@@ -8,6 +8,6 @@ $lxd-skip-link-padding-inline: 1rem; // Aire horizontal del enlace revelado
 $lxd-skip-link-inset: 0.5rem; // Separación de la esquina de la ventana al revelarse
 $lxd-skip-link-font-weight: 500; // Peso del texto: es una acción
 $lxd-skip-link-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-skip-link-focus-ring-offset: 2px; // Separación del anillo de foco
-$lxd-skip-link-focus-ring-color: #ffffff; // Anillo de foco: contrasta con el relleno
+$lxd-skip-link-focus-ring-offset: 0.25rem; // Separación del anillo de foco (4px): el hueco es la página, como en los botones
+$lxd-skip-link-focus-ring-color: #111e30; // Anillo de foco: va por fuera, sobre la página, así que es la tinta de la superficie (prusia), no la que contrasta con el relleno
 $lxd-skip-link-z-index: 600; // Sobre cualquier otra capa: es lo primero al tabular
