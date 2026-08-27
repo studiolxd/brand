@@ -1,40 +1,10 @@
 .conversation-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--conversation-list-header-gap);
 }
 
-.conversation-list__header {
-  padding-inline: var(--conversation-list-padding-inline);
-}
-
-.conversation-list__new {
-  display: block;
-  width: 100%;
-  padding-block: var(--conversation-list-item-padding-block);
-  padding-inline: var(--conversation-list-item-padding-inline);
-  border-radius: var(--conversation-list-item-border-radius);
-  border: 1px dashed var(--color-grey-light);
-  background: transparent;
-  color: var(--conversation-list-item-color);
-  font-size: var(--font-size-body);
-  font-family: var(--font-family-ui);
-  text-align: start;
-  cursor: pointer;
-  transition: background-color var(--motion-duration-fast) var(--motion-ease-default),
-              border-color var(--motion-duration-fast) var(--motion-ease-default);
-}
-
-.conversation-list__new:hover {
-  background-color: var(--conversation-list-item-hover-bg);
-  border-color: var(--color-grey);
-}
-
-.conversation-list__new:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
+.conversation-list__header,
 .conversation-list__nav {
   padding-inline: var(--conversation-list-padding-inline);
 }
@@ -49,18 +19,21 @@
 }
 
 .conversation-list__item {
-  position: relative;
   display: flex;
   align-items: center;
   border-radius: var(--conversation-list-item-border-radius);
+  color: var(--conversation-list-item-color);
+  transition:
+    background-color var(--conversation-list-transition-duration) var(--conversation-list-transition-easing),
+    color var(--conversation-list-transition-duration) var(--conversation-list-transition-easing);
 }
 
+/* Bajo el puntero, la fila se rellena de marca y voltea la tinta. El gris
+   claro dejó de ser el fondo de estado del sistema: aquí se resuelve como en
+   el `SidebarNav`, invirtiendo. */
 .conversation-list__item:hover {
   background-color: var(--conversation-list-item-hover-bg);
-}
-
-.conversation-list__item:hover .conversation-list__delete {
-  opacity: 1;
+  color: var(--conversation-list-item-hover-color);
 }
 
 .conversation-list__label {
@@ -70,9 +43,9 @@
   padding-inline: var(--conversation-list-item-padding-inline);
   border: none;
   background: transparent;
-  color: var(--conversation-list-item-color);
-  font-size: var(--font-size-body);
-  font-family: var(--font-family-ui);
+  color: inherit;
+  font-family: var(--conversation-list-item-font-family);
+  font-size: var(--conversation-list-item-font-size);
   text-align: start;
   cursor: pointer;
   white-space: nowrap;
@@ -81,40 +54,65 @@
   border-radius: var(--conversation-list-item-border-radius);
 }
 
+/* La conversación abierta se dice con tinta y peso, no con un fondo. */
 .conversation-list__label--active {
   color: var(--conversation-list-item-active-color);
-  font-weight: 500;
+  font-weight: var(--conversation-list-item-active-font-weight);
+}
+
+.conversation-list__item:hover .conversation-list__label--active {
+  color: inherit;
 }
 
 .conversation-list__label:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: -2px;
+  outline: var(--conversation-list-focus-ring-width) solid var(--conversation-list-focus-ring-color);
+  outline-offset: calc(-1 * var(--conversation-list-focus-ring-width));
 }
 
+/* El aspa está en el orden de tabulación: se ve al pasar el puntero, al
+   recibir el foco y en cuanto se toca. Sin eso, borrar una conversación era
+   imposible sin ratón. */
 .conversation-list__delete {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: var(--spacing-1);
-  padding-inline: var(--spacing-2);
-  margin-inline-end: var(--spacing-1);
+  inline-size: var(--conversation-list-delete-size);
+  block-size: var(--conversation-list-delete-size);
+  margin-inline-end: var(--conversation-list-delete-margin-inline-end);
   border: none;
   background: transparent;
   color: var(--conversation-list-delete-color);
   cursor: pointer;
-  border-radius: var(--border-radius-default);
+  border-radius: var(--conversation-list-delete-border-radius);
   opacity: 0;
-  transition: opacity var(--motion-duration-fast) var(--motion-ease-default),
-              color var(--motion-duration-fast) var(--motion-ease-default);
+  transition:
+    opacity var(--conversation-list-transition-duration) var(--conversation-list-transition-easing),
+    color var(--conversation-list-transition-duration) var(--conversation-list-transition-easing);
 }
 
 .conversation-list__delete:hover {
   color: var(--conversation-list-delete-hover-color);
 }
 
+.conversation-list__item:hover .conversation-list__delete {
+  opacity: 1;
+  color: var(--conversation-list-item-hover-delete-color);
+}
+
+.conversation-list__item:hover .conversation-list__delete:hover {
+  color: var(--conversation-list-item-hover-delete-hover-color);
+}
+
 .conversation-list__delete:focus-visible {
   opacity: 1;
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: var(--conversation-list-focus-ring-width) solid var(--conversation-list-focus-ring-color);
+  outline-offset: calc(-1 * var(--conversation-list-focus-ring-width));
+}
+
+/* Con puntero grueso (táctil) no hay hover que valga: el aspa se ve siempre. */
+@media (hover: none) {
+  .conversation-list__delete {
+    opacity: 1;
+  }
 }

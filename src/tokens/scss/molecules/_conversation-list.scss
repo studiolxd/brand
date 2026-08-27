@@ -1,14 +1,27 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-conversation-list-gap: 0.25rem; // Separación entre items
-$lxd-conversation-list-padding-inline: 0.5rem; // Padding horizontal de la lista
-$lxd-conversation-list-item-padding-block: 0.5rem; // Padding vertical de cada item
-$lxd-conversation-list-item-padding-inline: 0.75rem; // Padding horizontal de cada item
-$lxd-conversation-list-item-border-radius: 0px; // Radio de cada item
-$lxd-conversation-list-item-color: #6b6b6b; // Color de texto de item inactivo
-$lxd-conversation-list-item-active-color: #111e30; // Color de texto de item activo
-$lxd-conversation-list-item-active-bg: #f2f2f2; // Fondo de item activo
-$lxd-conversation-list-item-hover-bg: #f2f2f2; // Fondo de item en hover
-$lxd-conversation-list-delete-color: #6b6b6b; // Color del botón de eliminar
-$lxd-conversation-list-delete-hover-color: #b30000; // Color del botón de eliminar en hover
+$lxd-conversation-list-header-gap: 0.5rem; // Separación entre el botón de conversación nueva y la lista
+$lxd-conversation-list-gap: 0.25rem; // Separación entre conversaciones
+$lxd-conversation-list-padding-inline: 0.5rem; // Aire horizontal de la lista dentro de la columna que la contiene
+$lxd-conversation-list-item-padding-block: 0.5rem; // Aire vertical de cada conversación
+$lxd-conversation-list-item-padding-inline: 0.75rem; // Aire horizontal de cada conversación
+$lxd-conversation-list-item-border-radius: 0px; // Radio de cada conversación: recto, como todo el sistema
+$lxd-conversation-list-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del título de la conversación
+$lxd-conversation-list-item-font-size: 1rem; // El título es texto corriente: hereda el cuerpo de la superficie
+$lxd-conversation-list-item-color: #4a4a4a; // Tinta de una conversación en reposo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)
+$lxd-conversation-list-item-hover-bg: #111e30; // Fondo de la conversación bajo el puntero: relleno de marca, no gris. El gris claro dejó de ser el fondo de estado del sistema
+$lxd-conversation-list-item-hover-color: #ffffff; // Tinta de la conversación bajo el puntero, sobre el relleno de marca
+$lxd-conversation-list-item-active-color: #111e30; // Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo
+$lxd-conversation-list-item-active-font-weight: 500; // Peso de la conversación abierta
+$lxd-conversation-list-delete-size: 2rem; // Lado del botón de borrar: la talla mínima del sistema, para que sea un blanco alcanzable
+$lxd-conversation-list-delete-margin-inline-end: 0.25rem; // Aire entre el botón de borrar y el canto de la fila
+$lxd-conversation-list-delete-border-radius: 0px; // Radio del botón de borrar
+$lxd-conversation-list-delete-color: #6b6b6b; // Tinta del aspa en reposo. Es un icono de acción secundaria, el único sitio donde `grey-dark` sigue valiendo
+$lxd-conversation-list-delete-hover-color: #b30000; // Tinta del aspa bajo el puntero
+$lxd-conversation-list-item-hover-delete-color: #ffffff; // Tinta del aspa cuando su fila está bajo el puntero y por tanto rellena de marca
+$lxd-conversation-list-item-hover-delete-hover-color: #ff8585; // Tinta del aspa bajo el puntero, sobre la fila rellena de marca
+$lxd-conversation-list-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-conversation-list-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-conversation-list-transition-duration: 150ms; // Duración de la transición de color
+$lxd-conversation-list-transition-easing: ease; // Curva de la transición de color

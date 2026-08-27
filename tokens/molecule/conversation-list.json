@@ -1,15 +1,42 @@
 {
   "conversation-list": {
-    "gap":                   { "$value": "{spacing.1}",          "$type": "dimension", "$description": "Separación entre items" },
-    "padding-inline":        { "$value": "{spacing.2}",          "$type": "dimension", "$description": "Padding horizontal de la lista" },
-    "item-padding-block":    { "$value": "{spacing.2}",          "$type": "dimension", "$description": "Padding vertical de cada item" },
-    "item-padding-inline":   { "$value": "{spacing.3}",          "$type": "dimension", "$description": "Padding horizontal de cada item" },
-    "item-border-radius":    { "$value": "{border-radius.default}",   "$type": "dimension", "$description": "Radio de cada item" },
-    "item-color":            { "$value": "{color.grey-dark}",    "$type": "color",     "$description": "Color de texto de item inactivo" },
-    "item-active-color":     { "$value": "{color.prussian}",     "$type": "color",     "$description": "Color de texto de item activo" },
-    "item-active-bg":        { "$value": "{color.grey-lightest}", "$type": "color",    "$description": "Fondo de item activo" },
-    "item-hover-bg":         { "$value": "{color.grey-lightest}", "$type": "color",    "$description": "Fondo de item en hover" },
-    "delete-color":          { "$value": "{color.grey-dark}",         "$type": "color",     "$description": "Color del botón de eliminar" },
-    "delete-hover-color":    { "$value": "{color.destructive-text-on-light}", "$type": "color", "$description": "Color del botón de eliminar en hover" }
+    "header-gap":            { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Separación entre el botón de conversación nueva y la lista" },
+    "gap":                   { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Separación entre conversaciones" },
+    "padding-inline":        { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Aire horizontal de la lista dentro de la columna que la contiene" },
+
+    "item-padding-block":    { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Aire vertical de cada conversación" },
+    "item-padding-inline":   { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Aire horizontal de cada conversación" },
+    "item-border-radius":    { "$value": "{border-radius.default}",     "$type": "dimension", "$description": "Radio de cada conversación: recto, como todo el sistema" },
+    "item-font-family":      { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Familia tipográfica del título de la conversación" },
+    "item-font-size":        { "$value": "{text.font-size}",            "$type": "dimension", "$description": "El título es texto corriente: hereda el cuerpo de la superficie" },
+    "item-color":            { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Tinta de una conversación en reposo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)" },
+    "item-hover-bg":         { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo de la conversación bajo el puntero: relleno de marca, no gris. El gris claro dejó de ser el fondo de estado del sistema" },
+    "item-hover-color":      { "$value": "{color.text.on-dark}",        "$type": "color",     "$description": "Tinta de la conversación bajo el puntero, sobre el relleno de marca" },
+    "item-active-color":     { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo" },
+    "item-active-font-weight": { "$value": "{font-weight.emphasis}",    "$type": "number",    "$description": "Peso de la conversación abierta" },
+
+    "delete-size":               { "$value": "{size-component.sm}",             "$type": "dimension", "$description": "Lado del botón de borrar: la talla mínima del sistema, para que sea un blanco alcanzable" },
+    "delete-margin-inline-end":  { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Aire entre el botón de borrar y el canto de la fila" },
+    "delete-border-radius":      { "$value": "{border-radius.default}",         "$type": "dimension", "$description": "Radio del botón de borrar" },
+    "delete-color":              { "$value": "{color.grey-dark}",               "$type": "color",     "$description": "Tinta del aspa en reposo. Es un icono de acción secundaria, el único sitio donde `grey-dark` sigue valiendo" },
+    "delete-hover-color":        { "$value": "{color.destructive-text-on-light}", "$type": "color",   "$description": "Tinta del aspa bajo el puntero" },
+    "item-hover-delete-color":       { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Tinta del aspa cuando su fila está bajo el puntero y por tanto rellena de marca" },
+    "item-hover-delete-hover-color": { "$value": "{color.destructive-text-on-dark}",  "$type": "color", "$description": "Tinta del aspa bajo el puntero, sobre la fila rellena de marca" },
+
+    "focus-ring-width":      { "$value": "{border-width.focus}",        "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-color":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
+
+    "transition-duration":   { "$value": "{motion.duration.fast}",      "$type": "string",    "$description": "Duración de la transición de color" },
+    "transition-easing":     { "$value": "{motion.easing.default}",     "$type": "string",    "$description": "Curva de la transición de color" },
+
+    "surface-dark-item-color":                  { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Tinta de una conversación en reposo — superficie oscura" },
+    "surface-dark-item-hover-bg":               { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Fondo de la conversación bajo el puntero — superficie oscura" },
+    "surface-dark-item-hover-color":            { "$value": "{color.primary}",                   "$type": "color", "$description": "Tinta de la conversación bajo el puntero — superficie oscura" },
+    "surface-dark-item-active-color":           { "$value": "{color.accent-1}",                  "$type": "color", "$description": "Tinta de la conversación abierta — superficie oscura: lavanda, como en el SidebarNav" },
+    "surface-dark-delete-color":                { "$value": "{color.grey-light}",                "$type": "color", "$description": "Tinta del aspa en reposo — superficie oscura" },
+    "surface-dark-delete-hover-color":          { "$value": "{color.destructive-text-on-dark}",  "$type": "color", "$description": "Tinta del aspa bajo el puntero — superficie oscura" },
+    "surface-dark-item-hover-delete-color":       { "$value": "{color.text.on-light}",             "$type": "color", "$description": "Tinta del aspa sobre fila rellena — superficie oscura (la fila se rellena de blanco)" },
+    "surface-dark-item-hover-delete-hover-color": { "$value": "{color.destructive-text-on-light}", "$type": "color", "$description": "Tinta del aspa bajo el puntero sobre fila rellena — superficie oscura" },
+    "surface-dark-focus-ring-color":            { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Color del anillo de foco — superficie oscura" }
   }
 }

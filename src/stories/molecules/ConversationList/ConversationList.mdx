@@ -1,0 +1,77 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ConversationListStories from "./ConversationList.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { conversationListTokens, conversationListDeleteTokens, conversationListFocusTokens, conversationListDarkTokens } from "../../../tokens/components/conversation-list";
+
+<Meta of={ConversationListStories} />
+
+# ConversationList
+
+La **lista de conversaciones de un chat**: el botón que abre una nueva y la navegación con las que ya existen, cada una con su aspa para borrarla.
+
+Va en la columna lateral de una pantalla de chat. `ChatShell` la coloca; suelta, se monta dentro de un `Sidebar` o de la columna que el producto tenga.
+
+<Canvas of={ConversationListStories.PorDefecto} />
+
+## Cómo se dicen los estados
+
+La lista tenía **cinco custom properties que no existían** en el sistema —`--font-size-body`, `--font-family-ui`, `--color-focus`, `--motion-ease-default` y `--color-grey`—, así que la tipografía caía en la del navegador y **los tres anillos de foco no se pintaban**. Todas salen ahora de tokens propios.
+
+Con eso resuelto, quedaba decidir cómo se ve cada estado, porque el gris claro dejó de ser el fondo de estado del sistema:
+
+- **Bajo el puntero**, la fila se rellena de marca y voltea la tinta, igual que un `Button` ghost o un ítem del `SidebarNav`. Es el patrón del sistema para «esto responde».
+- **La conversación abierta** se dice con **tinta plena y peso de énfasis**, sin fondo. Así el estado abierto no compite con el estado bajo el puntero, que es momentáneo. Se marca además con `aria-current="page"`.
+
+<Canvas of={ConversationListStories.ContratoActiva} />
+
+El botón de conversación nueva es un **`Button variant="outline"`**, no un `<button>` a mano con borde discontinuo: hereda talla, foco, tipografía y par oscuro del átomo.
+
+<Canvas of={ConversationListStories.SinConversaciones} />
+
+Sin conversaciones queda solo el botón. Qué enseñar en ese hueco —un `EmptyState`, nada— lo decide la pantalla que la monta.
+
+## El aspa de borrar
+
+El aspa **estaba fuera del orden de tabulación** (`tabIndex={-1}`) y solo aparecía al pasar el puntero: borrar una conversación era imposible sin ratón. Había incluso una regla `:focus-visible` que no podía dispararse nunca.
+
+Ahora es un botón normal: se alcanza con el tabulador, se ve al recibir el foco y mide la talla mínima del sistema (32px). Con puntero grueso —táctil, donde no hay hover— se ve siempre.
+
+## Superficie oscura
+
+<Canvas of={ConversationListStories.SuperficieOscura} />
+
+Tinta, relleno de la fila, aspa y anillo de foco tienen par oscuro. La conversación abierta se marca en lavanda, como en el `SidebarNav`: sobre prusia, la tinta plena no destacaría.
+
+## Accesibilidad
+
+- La lista va dentro de un **`<nav>` con nombre accesible** (`navLabel`).
+- La conversación abierta lleva **`aria-current="page"`**: el estado no se queda en el color.
+- El **aspa está en el orden de tabulación** y tiene nombre accesible propio, construido con `deleteLabel` a partir del título de la conversación, para que no haya cinco botones llamados «Eliminar».
+- Borrar **no abre** la conversación: el aspa detiene la propagación.
+- Los títulos largos se recortan con puntos suspensivos; el nombre completo sigue en el nombre accesible del aspa.
+
+## Tokens
+
+### De la lista
+
+<TokenTable tokens={conversationListTokens} />
+
+### Del aspa
+
+<TokenTable tokens={conversationListDeleteTokens} />
+
+### Foco
+
+<TokenTable tokens={conversationListFocusTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={conversationListDarkTokens} />
+
+## Props
+
+<ArgTypes of={ConversationListStories} />
+
+## Internacionalización
+
+`newLabel`, `navLabel` y `deleteLabel` —esta última es una función, porque interpola el título— traen default castellano. Ver **Foundations › Internacionalización**.

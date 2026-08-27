@@ -53,6 +53,7 @@
   --async-multi-select-field-helper-font-size: var(--form-helper-font-size);
   --async-select-field-error-font-size: var(--form-error-font-size);
   --async-select-field-helper-font-size: var(--form-helper-font-size);
+  --conversation-list-item-font-size: var(--text-font-size);
   --date-picker-field-error-font-size: var(--form-error-font-size);
   --date-picker-field-helper-font-size: var(--form-helper-font-size);
   --date-time-field-error-font-size: var(--form-error-font-size);
