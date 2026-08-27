@@ -117,56 +117,6 @@
   background-color: var(--color-background-dark);
 }
 
-/* ─── Form: field backgrounds and border suppression ─────────────────────
-   Composición estructural específica de cómo Form dispone sus campos
-   dentro de una sección oscura (fondos y bordes de los wrappers de
-   campo para que se fundan con el fondo de la sección) — no son tokens
-   de color de los átomos Input/Textarea/InputPhone en sí. ────────────── */
-
-.surface-dark .form__fields > .input-field,
-.surface-dark .form__fields > .textarea-field,
-.surface-dark .form__fields > .checkbox-field,
-.surface-dark .form__fields > .form-errors {
-  background-color: var(--color-background-dark);
-}
-
-.surface-dark .form__fields > .input-phone-field {
-  background-color: var(--color-text-on-dark);
-}
-
-.surface-dark .form__fields > .input-phone-field > .input-phone {
-  background-color: var(--color-text-on-dark);
-  gap: var(--form-gap);
-}
-
-.surface-dark .form__fields > .input-phone-field > .input-phone > .input-phone__country,
-.surface-dark .form__fields > .input-phone-field > .input-phone .input-phone__number {
-  background-color: var(--color-background-dark);
-}
-
-.surface-dark .form__fields > .input-phone-field > .input-phone-field__helper {
-  background-color: var(--color-background-dark);
-}
-
-.surface-dark .form__fields > .input-field > .input {
-  --input-border-color:          var(--color-background-dark);
-  --input-error-border-color:    var(--color-background-dark);
-  --input-disabled-border-color: var(--color-background-dark);
-}
-
-.surface-dark .form__fields > .textarea-field > .textarea {
-  --textarea-border-color:          var(--color-background-dark);
-  --textarea-error-border-color:    var(--color-background-dark);
-  --textarea-disabled-border-color: var(--color-background-dark);
-}
-
-.surface-dark .form__fields > .input-phone-field > .input-phone {
-  --input-border-color:               var(--color-background-dark);
-  --input-error-border-color:         var(--color-background-dark);
-  --input-disabled-border-color:      var(--color-background-dark);
-  --input-phone-country-border-color: var(--color-background-dark);
-}
-
 .surface-dark .form__actions {
   background-color: var(--color-background-dark);
 }

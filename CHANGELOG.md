@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v20.2.1
+
+### Corregido
+
+- `surface.css` conservaba reglas de la técnica de separadores del `Form`
+  anterior (`.surface-dark .form__fields > … { --input-border-color: fondo }`):
+  en superficie oscura los campos de un formulario salían sin borde. Fuera.
+
 ## v20.2.0
 
 ### Añadido
