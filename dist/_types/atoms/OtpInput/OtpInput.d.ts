@@ -18,6 +18,8 @@ export interface OtpInputProps {
     'aria-describedby'?: string;
     /** Nombre accesible del grupo cuando va suelto. */
     'aria-label'?: string;
+    /** Nombre accesible del grupo por referencia (la etiqueta visible del campo). */
+    'aria-labelledby'?: string;
     id?: string;
     name?: string;
     /** Se llama al salir de la última celda (react-hook-form lo usa para validar). */

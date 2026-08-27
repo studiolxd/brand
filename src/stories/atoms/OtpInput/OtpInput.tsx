@@ -21,6 +21,8 @@ export interface OtpInputProps {
   'aria-describedby'?: string;
   /** Nombre accesible del grupo cuando va suelto. */
   'aria-label'?: string;
+  /** Nombre accesible del grupo por referencia (la etiqueta visible del campo). */
+  'aria-labelledby'?: string;
   id?: string;
   name?: string;
   /** Se llama al salir de la última celda (react-hook-form lo usa para validar). */
@@ -51,6 +53,7 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
   describedBy,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   id,
   name,
   onBlur,
@@ -132,7 +135,8 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
     <div
       ref={containerRef}
       role="group"
-      aria-label={ariaLabel}
+      aria-label={ariaLabelledBy ? undefined : ariaLabel}
+      aria-labelledby={ariaLabelledBy}
       aria-describedby={describedBy ?? ariaDescribedBy}
       aria-invalid={error || undefined}
       className={className}

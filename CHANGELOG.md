@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.0.2
+
+### Corregido
+
+- `OtpInput` admite `aria-labelledby` (el grupo se nombra por la etiqueta
+  visible del `OtpField`); v22.0.1 lo pasaba sin que el átomo lo aplicara.
+
 ## v22.0.1
 
 ### Corregido
