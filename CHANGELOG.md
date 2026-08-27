@@ -7,6 +7,39 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.10.0
+
+### Cambiado
+
+- `Arrow`: exporta `ArrowProps` desde `src/index.ts` (único átomo de este
+  bloque que no lo hacía). Token huérfano `width-default` (duplicaba
+  `width-md`, sin consumidores) retirado. MDX con anatomía, superficie oscura
+  y accesibilidad.
+- `Breadcrumb`: `renderLink` reenvía ahora todas las props que recibe
+  (`{...props}`, tipo extendido con `AnchorHTMLAttributes<HTMLAnchorElement>`),
+  en vez de recomponer solo `href`/`children`/`className`. `border-radius` del
+  foco pasa de `2px` cableado a `border-radius.default`. `font-size` pasa de
+  `font-size.1` fijo a `text.paragraph.small.font-size` (texto de navegación,
+  respira en `SiteShell`). Doc MDX y stories de contrato/superficie oscura
+  nuevas.
+- `EmptyState`: `title-color`/`description-color` dejan de ser `grey-dark`
+  (texto prohibido) y pasan a `color.text.muted-on-light`, con par
+  `surface-dark-*` nuevo — antes no tenía ningún token oscuro y quedaba
+  ilegible sobre `.surface-dark`. `icon-size` se unifica con `icon.size-lg`
+  (48px); las stories con icono pasan de `size="xl"` a `size="lg"` para
+  coincidir. Doc MDX nueva.
+- `Tabs`: hover de la variante pill —antes `rgba(0,0,0,.06)` cableado— pasa a
+  tokens `trigger-pill-hover-bg`/`-color` con relleno de marca (mismo patrón
+  que `Menu`/`Button ghost`) y par oscuro; el foco —antes `outline: … solid
+  2px` / `outline-offset: 2px` a mano— usa `focus-ring-width`
+  (`border-width.focus`) + `focus-ring-offset` (`border-width.default`); la
+  opacidad del trigger deshabilitado pasa de `0.4` cableado a
+  `opacity.disabled`; `trigger-color` pasa de `grey-dark` a
+  `color.text.muted-on-light`. Se añaden los pares `surface-dark-*` que
+  faltaban para el pill activo y el indicador underline (`color.primary`
+  colisionaba con el fondo de `.surface-dark`, ambos prusia). Doc MDX y
+  stories de contrato/superficie oscura nuevas.
+
 ## v24.9.0
 
 ### Cambiado

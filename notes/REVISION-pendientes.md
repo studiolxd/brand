@@ -33,9 +33,10 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
 
 - [ ] **ConversationList** — `item-color` (grey-dark) es texto → 
       `text-muted-on-light`. Además recibe `item-active-bg` gris encima.
-- [ ] **EmptyState** — `title-color` y `description-color` son grey-dark: es
-      texto → grey-darkest. (`icon-color` puede quedarse: icono.)
-- [ ] **Tabs** — `trigger-color` (grey-dark) es texto → grey-darkest.
+- [x] **EmptyState** — `title-color` y `description-color` eran grey-dark: es
+      texto → `color.text.muted-on-light` (grey-darkest), con par
+      `muted-on-dark` nuevo (2026-08-27). (`icon-color` se queda: icono.)
+- [x] **Tabs** — `trigger-color` (grey-dark) era texto → `color.text.muted-on-light` (2026-08-27).
 - [ ] **Table** — `sort-icon-color` (grey-dark) sobre `header-hover-bg`
       (grey-lightest). Icono: pasa a 3:1, pero rompe la regla.
 - [ ] **Modal** — `close-color` (grey-dark) sobre `close-hover-bg`
@@ -127,7 +128,9 @@ de 32px como control.
       (2026-08-25; Avatar entero a tallas 32/40/48, sin `xl`).
 - [x] **DotsButton** → Button ghost iconOnly a talla (32/40/48), sin tokens propios (2026-08-26).
 - [ ] Pasan a token sin cambiar de tamaño: **AppLauncher** trigger 2.5rem, **FileUpload** miniatura
-      2.5rem, **DotsButton** lg 2.5rem → `md`; **EmptyState** icono 3rem → `lg`.
+      2.5rem, **DotsButton** lg 2.5rem → `md`.
+- [x] **EmptyState** icono 3rem → `icon.size-lg` (2026-08-27, mismo valor 48px). `icon-size-sm` (2rem)
+      queda crudo: no hay un `icon.size-*` que valga 32px (16/24/48); anotado para decisión de diseño.
 - [x] **PasswordField** toggle 2.5rem → `size-component.md`, con
       `sm-`/`lg-toggle-size` para que el botón siga siendo cuadrado a la talla
       del campo; el icono pasa de `1.125rem` crudo a `icon.size-sm` (18 → 16px),
@@ -178,9 +181,8 @@ roles; lo que queda es comprobar visualmente cada componente al revisarlo.
 
 - [ ] **Table** — `header-border-width` y `footer-border-width` bajan de 2px a
       1px. Comprobar que la cabecera sigue leyéndose como tal (peso/fondo).
-- [ ] **Tabs** — `trigger-indicator-width` baja de 2px a 1px. Si el indicador
-      de pestaña activa necesita más presencia, resolverlo con color, no con
-      grosor.
+- [x] **Tabs** — `trigger-indicator-width` ya estaba en `border-width.default`
+      (1px) en el JSON; comprobado visualmente en Storybook (2026-08-27).
 - [x] **Spinner** — el grosor (2/2/3px) es ahora el `stroke-width` del cuadrado
       de contorno, en `spinner.border-width-*` (2026-08-27). Sigue crudo en el JSON.
 - [x] **RadioField** — el `offset` de 3px se retiró (2026-08-27): la marca se
@@ -246,8 +248,9 @@ ContextMenu (tenía 50 crudo en CSS), SkipLink (9999 crudo) y el Header viejo.
 
 - [ ] `icon.size-sm` pasa de 18px a **16px** (a la retícula de 4). 21 usos
       con `size="sm"`: comprobar en Button, Tag, Table, campos con icono.
-- [ ] **EmptyState** — usa `xl` (64) en stories y `lg` (48) en el token
-      `icon-size` crudo (3rem): unificar al revisar.
+- [x] **EmptyState** — usaba `xl` (64) en stories y `lg` (48) en el token
+      `icon-size` crudo (3rem): unificado, stories a `size="lg"` y token a
+      `{icon.size-lg}` (2026-08-27).
 
 ## Logo y MenuButton (2026-08-25) — hechos
 
@@ -505,3 +508,41 @@ anotado:
 - [ ] **`toast.max-width`** son 360px sueltos: la anchura de una tarjeta
       flotante no está en ninguna escala. Mismo caso que las alturas de carril
       de `ProgressBar`.
+
+## Tanda 1 — Arrow, Breadcrumb, EmptyState, Tabs a definitivos (2026-08-27)
+
+Los cuatro salen de `Por revisar/`. MDX, story `EnSuperficieOscura` y story
+`Test — …` (`!dev`, con `play`) nuevos en los cuatro.
+
+- [x] **Arrow** — exporta `ArrowProps` desde `src/index.ts`; `width-default`
+      (duplicaba `width-md`, sin consumidores) retirado del JSON; MDX
+      documenta que las cuatro anchuras son fórmulas fluidas (grafismo
+      decorativo, no control de escala).
+- [x] **Breadcrumb** — `border-radius: 2px` del foco → `var(--border-radius-default)`;
+      `renderLink` reenvía ahora todo lo que reciba (`{...props}`, tipo
+      extendido con `AnchorHTMLAttributes`), como el resto de `renderLink` del
+      sistema; `font-size` → `{text.paragraph.small.font-size}` (texto de
+      navegación, respira en `SiteShell`).
+- [x] **EmptyState** — `title-color`/`description-color` → `color.text.muted-on-light`
+      con par `surface-dark-*` nuevo (`muted-on-dark`): antes no tenía ningún
+      token oscuro y el título quedaba en `grey-darkest` sobre prusia,
+      ilegible; `icon-size` → `{icon.size-lg}` (48px), stories con
+      `Icon size="lg"` en vez de `"xl"` para que coincidan.
+- [x] **Tabs** — hover de la variante pill: `rgba(0,0,0,.06)` cableado →
+      `trigger-pill-hover-bg`/`-color` con relleno de marca (mismo patrón que
+      `Menu`/`Button ghost`, no un gris de estado nuevo) y par
+      `surface-dark-*`; foco: `outline: … solid 2px` / `outline-offset: 2px`
+      cableados → `focus-ring-width` (`border-width.focus`) + `focus-ring-offset`
+      (`border-width.default`); `opacity: 0.4` → `{opacity.disabled}`;
+      `trigger-color` → `color.text.muted-on-light`. Al añadir el par oscuro
+      del pill activo se detectó que `trigger-pill-bg-active` y
+      `trigger-indicator-color` (ambos `color.primary`) colisionaban con el
+      fondo de `.surface-dark` (los dos son prusia): se añadieron
+      `surface-dark-trigger-pill-bg-active`, `-pill-color-active` e
+      `-indicator-color` (blanco/prusia invertidos, patrón `Button primary`).
+- [ ] **`empty-state.icon-size-sm`** (2rem/32px) queda crudo: no hay un
+      `icon.size-*` que valga 32px (la escala es 16/24/48). No se ha inventado
+      uno — decisión pendiente.
+- [ ] **`empty-state.title-font-size`** (`{font-size.4}`, 24px fijo) el plan lo
+      señala como candidato a un token `{text.*}` (es texto corriente, no
+      control) pero no resuelve a cuál — no se ha tocado.
