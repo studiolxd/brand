@@ -8,10 +8,10 @@
   display: block;
   width: var(--typing-indicator-dot-size);
   height: var(--typing-indicator-dot-size);
-  border-radius: 50%;
+  /* Cuadrados, no círculos: la geometría recta de la identidad. Sin border-radius. */
   background-color: var(--typing-indicator-dot-color);
   opacity: var(--typing-indicator-dot-opacity-inactive);
-  animation: typing-bounce var(--typing-indicator-animation-duration) ease-in-out infinite;
+  animation: typing-bounce var(--typing-indicator-animation-duration) var(--motion-easing-in-out) infinite;
 }
 
 .typing-indicator__dot:nth-child(2) {

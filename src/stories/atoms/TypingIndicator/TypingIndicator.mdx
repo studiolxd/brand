@@ -1,0 +1,40 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TypingIndicatorStories from "./TypingIndicator.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { typingIndicatorTokens } from "../../../tokens/components/typing-indicator";
+
+<Meta of={TypingIndicatorStories} />
+
+# TypingIndicator
+
+«Alguien está escribiendo». Tres **puntos cuadrados** —sin radio, la geometría recta de la identidad— que laten en secuencia: cada uno sube y se enciende con un pequeño desfase respecto al anterior. Lo usa `AssistantMessage` mientras llega la respuesta.
+
+<Canvas of={TypingIndicatorStories.Default} />
+
+## Ritmo
+
+Un ciclo dura `--typing-indicator-animation-duration` (`motion.duration.slow`), con curva `--motion-easing-in-out`; el segundo y el tercer punto arrancan a 1/5 y 2/5 del ciclo. En reposo los puntos están a `dot-opacity-inactive` y suben a opacidad plena en el pico.
+
+## Sobre fondo oscuro
+
+<Canvas of={TypingIndicatorStories.EnContextoOscuro} />
+
+## Accesibilidad
+
+`role="status"` con el texto de `label` en `VisuallyHidden` (default castellano, «El asistente está escribiendo…»). Los puntos son decorativos (`aria-hidden`).
+
+## Movimiento reducido
+
+La duración bebe de `motion.duration.slow`, que pasa a 0ms con `prefers-reduced-motion: reduce`: los puntos se quedan quietos en su estado de reposo.
+
+---
+
+## Tokens
+
+`dot-size` conserva su nombre aunque ya no describe un punto redondo: es el lado del cuadrado. Renombrarlo rompería a los consumidores que lo sobrescriben.
+
+<TokenTable tokens={typingIndicatorTokens} />
+
+## Props
+
+<ArgTypes of={TypingIndicatorStories} />
