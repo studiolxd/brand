@@ -42,6 +42,31 @@ rodea.
 
 <Canvas of={KbdStories.TeclasSueltas} />
 
+## Medida
+
+La altura del keycap **se deriva de su propio texto**, no de la escala de tallas
+de componente:
+
+```
+min-size = cuerpo × interlineado + 2 × aire vertical + 2 × borde
+```
+
+Es la misma receta que `textarea.min-height`, y da 24 / 26 / 38px en `sm` / `md`
+/ `lg`. El ancho mínimo usa esa misma cifra, así que una tecla de un carácter
+sale cuadrada en las tres tallas.
+
+**Por qué no se alinea a los 32px de los controles.** La regla de tallas
+(32/40/48) es para lo que se pulsa y se coloca en una fila de formulario: un
+botón, un campo, un select. Un keycap no es eso: es una **marca dentro del
+texto**, no interactiva, que aparece en mitad de un párrafo o dentro de una
+paleta de comandos. Un mínimo de 32px la haría más alta que la línea que la
+rodea y rompería el renglón.
+
+Y hay una razón aritmética además de la conceptual: subir `sm` y `md` al mínimo
+de control las dejaría a las dos en 32px, es decir, **dos tallas idénticas**. La
+escala del keycap solo tiene sentido si cada peldaño se distingue, y lo que la
+separa es el cuerpo del texto, no una medida de control.
+
 ## Superficie oscura
 
 El gris claro del fondo no existe en superficie oscura: el keycap remapea su
