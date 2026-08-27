@@ -7,6 +7,20 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.4.2
+
+### Corregido
+
+- `PageIntro` pone el aire por debajo cuando algo le sigue en la columna
+  (`margin-block-end`), en vez de ponerlo el elemento que sigue.
+
+## v22.4.1
+
+### Corregido
+
+- Texto de ayuda de los campos en oscuro: blanco (16 fields lo tenían aún en
+  `text.muted-on-dark`). Fuera `columns.cell-gap`.
+
 ## v22.4.0
 
 ### Cambiado

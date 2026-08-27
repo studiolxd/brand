@@ -7,7 +7,7 @@ import { pageIntroTokens } from "../../../tokens/molecules/page-intro";
 
 # PageIntro
 
-La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace falta, una **entradilla** debajo —un `Paragraph size="large"`, un peldaño por encima del cuerpo— con el aire justo entre los dos (`gap`). Lo que va en `children` (más texto, un enlace de vuelta) ya es cuerpo normal. Es un `header`. Abre acceso, registro, recuperación de contraseña… y cualquier página que empiece por su nombre; va como celda de `Columns` (título a la izquierda, contenido a la derecha) o directamente en el `Container`.
+La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace falta, una **entradilla** debajo —un `Paragraph size="large"`, un peldaño por encima del cuerpo— con el aire justo entre los dos (`gap`). Lo que va en `children` (más texto) ya es cuerpo normal. Si algo sigue a la cabecera en la misma columna (un enlace de vuelta), el aire lo pone la cabecera (`margin-block-end`), no el elemento. Es un `header`. Abre acceso, registro, recuperación de contraseña… y cualquier página que empiece por su nombre; va como celda de `Columns` (título a la izquierda, contenido a la derecha) o directamente en el `Container`.
 
 <Canvas of={PageIntroStories.ConFrase} />
 <Canvas of={PageIntroStories.SoloTitulo} />
