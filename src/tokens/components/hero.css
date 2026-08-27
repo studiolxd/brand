@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --hero-actions-gap: var(--spacing-4); /** Aire entre los botones de la fila de acciones (16px): entre elementos de un componente */
+  --hero-actions-space-before: var(--spacing-6); /** Aire entre el texto y la fila de acciones (32px): entre componentes */
+}

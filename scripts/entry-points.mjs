@@ -106,6 +106,7 @@ export const entryPoints = {
   'page-intro':          'src/stories/molecules/PageIntro/PageIntro.tsx',
   'site-shell':          'src/stories/sections/SiteShell/SiteShell.tsx',
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
+  'hero':                'src/stories/sections/Hero/Hero.tsx',
   // Organisms
   'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',

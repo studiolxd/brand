@@ -1,0 +1,31 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HeroStories from "./Hero.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { heroTokens } from "../../../tokens/components/hero";
+
+<Meta of={HeroStories} />
+
+# Hero
+
+La cabecera de portada de un sitio público (la home del hub SLXD): el **título** a talla display (`Heading` de nivel 1, `size={10}`), una **frase** debajo (`Paragraph size="large"`) y, si hace falta, sus **botones**. Todo alineado a la izquierda, dentro de una banda amplia: un `Container` `section` a ancho `xl` con el aire vertical de banda destacada (`space="2xl"`). El fondo no es suyo: lo pone la superficie donde vive —el `SiteShell`, o una banda `.surface-dark`—, así que no tiene tokens de color.
+
+<Canvas of={HeroStories.PorDefecto} />
+<Canvas of={HeroStories.SoloTitulo} />
+
+## Medida de lectura
+
+Título y frase se limitan a `--content-measure` (70ch): la medida de lectura del sistema, que se resuelve contra la fuente de cada elemento —el título display ocupa más píxeles que la frase con el mismo número de caracteres—. `Hero` es el primer consumidor de ese token; hasta ahora estaba definido sin uso.
+
+## Aire del título
+
+Entre el título y la frase no hay `gap`: el aire lo pone el propio título por debajo (`--text-heading-space-after`, en em, así que crece con la talla). La fila de acciones sí lleva aire propio por encima (`actions-space-before`) y entre botones (`actions-gap`); envuelve cuando no caben en una línea.
+
+<Canvas of={HeroStories.VariasAcciones} />
+
+## Tokens
+
+<TokenTable tokens={heroTokens} />
+
+## Props
+
+<ArgTypes of={HeroStories} />

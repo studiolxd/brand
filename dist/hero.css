@@ -1,0 +1,1 @@
+.hero__title,.hero__description{max-inline-size:var(--content-measure)}.hero .hero__description{margin:0}.hero__actions{align-items:center;gap:var(--hero-actions-gap);flex-wrap:wrap;margin-block-start:var(--hero-actions-space-before);display:flex}

@@ -1,0 +1,20 @@
+/* Portada: título y frase a la medida de lectura, alineados a la izquierda.
+   El aire bajo el título lo pone el propio título (`--text-heading-space-after`,
+   en em); aquí no hay gap. El fondo es de la superficie, no de la sección. */
+.hero__title,
+.hero__description {
+  max-inline-size: var(--content-measure);
+}
+
+.hero .hero__description {
+  margin: 0;
+}
+
+/* Botones en fila, con envoltura, separados del texto. */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hero-actions-gap);
+  margin-block-start: var(--hero-actions-space-before);
+}

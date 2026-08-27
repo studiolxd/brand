@@ -219,3 +219,5 @@ export { AppRoot } from './stories/sections/AppRoot/AppRoot';
 export type { AppRootProps } from './stories/sections/AppRoot/AppRoot';
 export { LegalFooter } from './stories/sections/LegalFooter/LegalFooter';
 export type { LegalFooterProps, LegalFooterLink, LegalFooterRenderLinkProps } from './stories/sections/LegalFooter/LegalFooter';
+export { Hero } from './stories/sections/Hero/Hero';
+export type { HeroProps } from './stories/sections/Hero/Hero';

@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "24.1.0",
+  "version": "24.2.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -208,6 +208,10 @@
     "./page-intro": {
       "types": "./dist/_types/molecules/PageIntro/PageIntro.d.ts",
       "import": "./dist/page-intro.js"
+    },
+    "./hero": {
+      "types": "./dist/_types/sections/Hero/Hero.d.ts",
+      "import": "./dist/hero.js"
     },
     "./site-shell": {
       "types": "./dist/_types/sections/SiteShell/SiteShell.d.ts",

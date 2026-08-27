@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.2.0
+
+### Añadido
+
+- `Hero` (sección): cabecera de portada de un sitio público. `Container`
+  `section` a ancho `xl` con aire `2xl`; `title` como `Heading` de nivel 1 a
+  talla 10, `description` opcional como `Paragraph size="large"` y `actions`
+  opcional (botones en fila con envoltura). Título y frase limitados a
+  `--content-measure` (primer consumidor del token). Sin color propio: el fondo
+  lo pone la superficie. Tokens nuevos `hero.actions-gap` y
+  `hero.actions-space-before`.
+
 ## v24.1.0
 
 ### Añadido
