@@ -11,6 +11,7 @@ export const entryPoints = {
   'checkbox':            'src/stories/atoms/Checkbox/Checkbox.tsx',
   'container':           'src/stories/atoms/Container/Container.tsx',
   'columns':             'src/stories/atoms/Columns/Columns.tsx',
+  'stack':               'src/stories/atoms/Stack/Stack.tsx',
   'radio':               'src/stories/atoms/Radio/Radio.tsx',
   'icon':                'src/stories/atoms/Icon/Icon.tsx',
   'menu-button':         'src/stories/atoms/MenuButton/MenuButton.tsx',

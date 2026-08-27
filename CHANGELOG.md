@@ -7,6 +7,20 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.5.0
+
+### Añadido
+
+- `Stack` (átomo de maquetación): apila piezas con aire por token (`gap-md/lg`)
+  y `mobileOrder="reverse"` (por debajo de `md`, la última pieza arriba; solo
+  orden visual). Es el envoltorio explícito de una celda de `Columns` con varias
+  piezas. Export `./stack`.
+
+### Cambiado
+
+- `PageIntro` ya no pone aire por debajo (`margin-block-end` retirado): lo pone el
+  `Stack` que lo agrupa con lo que le sigue.
+
 ## v22.4.3
 
 ### Corregido

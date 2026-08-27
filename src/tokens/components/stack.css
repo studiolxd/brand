@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --stack-gap-md: var(--spacing-5); /** Aire entre piezas apiladas — base */
+  --stack-gap-lg: var(--spacing-7); /** Aire entre piezas apiladas — amplio */
+}

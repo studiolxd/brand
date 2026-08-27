@@ -9,6 +9,7 @@ import { LegalFooter } from '../../sections/LegalFooter/LegalFooter';
 import { Container } from '../../atoms/Container/Container';
 import { Columns } from '../../atoms/Columns/Columns';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
+import { Stack } from '../../atoms/Stack/Stack';
 import { Button } from '../../atoms/Button/Button';
 
 const PROVIDER_LABELS: Record<string, string> = { google: 'Google', github: 'GitHub', keycloak: 'Keycloak' };
@@ -58,10 +59,14 @@ export function AuthPage({ title, description, intro, aside, children, surface =
     >
       <Container as="main" id="main-content" tabIndex={-1} space="xl">
         <Columns>
-          <>
+          {aside ? (
+            <Stack mobileOrder="reverse">
+              <PageIntro title={title} description={description}>{intro}</PageIntro>
+              {aside}
+            </Stack>
+          ) : (
             <PageIntro title={title} description={description}>{intro}</PageIntro>
-            {aside}
-          </>
+          )}
           {children}
         </Columns>
       </Container>

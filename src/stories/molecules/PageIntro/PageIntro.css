@@ -9,7 +9,3 @@
   margin: 0;
 }
 
-/* Lo que venga después en la misma columna, separado por la cabecera, no por el hijo. */
-.page-intro:not(:last-child) {
-  margin-block-end: var(--page-intro-margin-block-end);
-}

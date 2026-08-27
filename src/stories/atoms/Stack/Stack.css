@@ -1,0 +1,18 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap-md);
+}
+.stack.stack--gap-lg {
+  gap: var(--stack-gap-lg);
+}
+
+/* En móvil, la última pieza arriba; en escritorio, el orden del JSX. */
+.stack.stack--mobile-reverse {
+  flex-direction: column-reverse;
+}
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .stack.stack--mobile-reverse {
+    flex-direction: column;
+  }
+}

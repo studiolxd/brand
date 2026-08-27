@@ -1,0 +1,6 @@
+{
+  "stack": {
+    "gap-md": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre piezas apiladas — base" },
+    "gap-lg": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Aire entre piezas apiladas — amplio" }
+  }
+}

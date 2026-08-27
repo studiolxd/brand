@@ -1,0 +1,26 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as StackStories from "./Stack.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { stackTokens } from "../../../tokens/components/stack";
+
+<Meta of={StackStories} />
+
+# Stack
+
+Apila piezas con aire por token. Es el envoltorio **explícito** de «estas piezas van juntas» —una cabecera y su enlace de vuelta en una celda de `Columns`—, sin fondo ni semántica (`div.stack`). El molde no decide nada: `Columns` reparte columnas, `Stack` apila dentro de una.
+
+<Canvas of={StackStories.PorDefecto} />
+
+## Orden en móvil
+
+`mobileOrder="reverse"` pone la última pieza arriba por debajo de `md`; en escritorio manda el JSX. Es solo orden **visual**: el DOM y la tabulación no cambian, así que se usa únicamente donde eso no importa —un enlace de vuelta sobre la cabecera en las páginas de acceso—, no para contenido que se lea en secuencia. Cada página decide: una que quiera cabecera y algo debajo en el mismo orden en móvil no lo pasa.
+
+<Canvas of={StackStories.VueltaArribaEnMovil} />
+
+## Tokens
+
+<TokenTable tokens={stackTokens} />
+
+## Props
+
+<ArgTypes of={StackStories} />

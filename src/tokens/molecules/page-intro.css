@@ -4,5 +4,4 @@
 
 :root {
   --page-intro-gap: var(--spacing-3); /** Aire entre el título y la frase de la cabecera de página */
-  --page-intro-margin-block-end: var(--spacing-5); /** Aire por debajo de la cabecera cuando algo la sigue en la misma columna (un enlace de vuelta, más texto) */
 }

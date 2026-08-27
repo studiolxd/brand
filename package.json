@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "22.4.3",
+  "version": "22.5.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -212,6 +212,10 @@
     "./columns": {
       "types": "./dist/_types/atoms/Columns/Columns.d.ts",
       "import": "./dist/columns.js"
+    },
+    "./stack": {
+      "types": "./dist/_types/atoms/Stack/Stack.d.ts",
+      "import": "./dist/stack.js"
     },
     "./container": {
       "types": "./dist/_types/atoms/Container/Container.d.ts",
