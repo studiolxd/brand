@@ -2,54 +2,65 @@
 import './modal.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
-import { Dialog as a } from "@base-ui-components/react/dialog";
+import { Button as n } from "./button.js";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
+import { Dialog as o } from "@base-ui-components/react/dialog";
 //#region src/stories/molecules/Modal/Modal.tsx
-function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar", fallbackTitle: d = "Diálogo", container: f, description: p, "aria-describedby": m }) {
-	let h = m === void 0 ? {} : { "aria-describedby": m };
-	return /* @__PURE__ */ r(a.Root, {
-		open: o,
+function s({ open: s, onClose: c, title: l, children: u, closeLabel: d = "Cerrar", fallbackTitle: f = "Diálogo", container: p, description: m, "aria-describedby": h }) {
+	let g = h === void 0 ? {} : { "aria-describedby": h };
+	return /* @__PURE__ */ i(o.Root, {
+		open: s,
 		onOpenChange: (e) => {
-			e || s();
+			e || c();
 		},
-		children: /* @__PURE__ */ i(a.Portal, {
-			container: f,
-			children: [/* @__PURE__ */ r(a.Backdrop, { className: "modal__overlay" }), /* @__PURE__ */ i(a.Popup, {
+		children: /* @__PURE__ */ a(o.Portal, {
+			container: p,
+			children: [/* @__PURE__ */ i(o.Backdrop, { className: "modal__overlay" }), /* @__PURE__ */ a(o.Popup, {
 				className: "modal__content",
-				...h,
+				...g,
 				initialFocus: !1,
 				children: [
-					c ? /* @__PURE__ */ i("header", {
+					l ? /* @__PURE__ */ a("header", {
 						className: "modal__header",
-						children: [/* @__PURE__ */ r(a.Title, {
+						children: [/* @__PURE__ */ i(o.Title, {
 							className: "modal__title",
-							children: c
-						}), /* @__PURE__ */ r(a.Close, {
+							children: l
+						}), /* @__PURE__ */ i(o.Close, {
 							className: "modal__close",
-							"aria-label": u,
-							children: /* @__PURE__ */ r(e, {
+							"aria-label": d,
+							render: /* @__PURE__ */ i(n, {
+								variant: "ghost",
+								size: "sm",
+								iconOnly: !0
+							}),
+							children: /* @__PURE__ */ i(e, {
 								name: "close",
 								size: "sm"
 							})
 						})]
-					}) : /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(a.Title, { render: /* @__PURE__ */ r(t, { children: d }) }), /* @__PURE__ */ r("header", {
+					}) : /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i(o.Title, { render: /* @__PURE__ */ i(t, { children: f }) }), /* @__PURE__ */ i("header", {
 						className: "modal__header modal__header--no-title",
-						children: /* @__PURE__ */ r(a.Close, {
+						children: /* @__PURE__ */ i(o.Close, {
 							className: "modal__close",
-							"aria-label": u,
-							children: /* @__PURE__ */ r(e, {
+							"aria-label": d,
+							render: /* @__PURE__ */ i(n, {
+								variant: "ghost",
+								size: "sm",
+								iconOnly: !0
+							}),
+							children: /* @__PURE__ */ i(e, {
 								name: "close",
 								size: "sm"
 							})
 						})
 					})] }),
-					p != null && /* @__PURE__ */ r(a.Description, {
+					m != null && /* @__PURE__ */ i(o.Description, {
 						className: "modal__description",
-						children: p
+						children: m
 					}),
-					/* @__PURE__ */ r("div", {
+					/* @__PURE__ */ i("div", {
 						className: "modal__body",
-						children: l
+						children: u
 					})
 				]
 			})]
@@ -57,4 +68,4 @@ function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar
 	});
 }
 //#endregion
-export { o as Modal };
+export { s as Modal };
