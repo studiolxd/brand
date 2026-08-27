@@ -10,7 +10,7 @@
   font-size: var(--tooltip-font-size);
   line-height: var(--tooltip-line-height);
   transform-origin: var(--transform-origin);
-  animation-duration: calc(var(--tooltip-transition-duration) * 1ms);
+  animation-duration: var(--tooltip-transition-duration);
   animation-timing-function: var(--tooltip-transition-easing);
 }
 
