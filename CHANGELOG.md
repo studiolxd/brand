@@ -39,6 +39,39 @@ para breaking changes.
   página de **docs**. Antes teñía el `<html>` entero y dejaba ilegibles todas
   las demás stories de esa página. En el canvas de la story sigue usando el
   `<html>`, que es donde hace falta alcanzar a los portales.
+## v25.4.0
+
+### Cambiado
+
+- `Modal`: el aspa de cierre pasa a `<Button variant="ghost" size="sm" iconOnly>`
+  compuesto con `Dialog.Close` vía `render` (precedente de `Alert`/`Toast`);
+  se retiran `close-color`/`close-hover-color`/`close-hover-bg` y el foco
+  prestado de Button. `calc(-50% - 8px)` de los keyframes de
+  entrada/salida pasa a token (`content-enter-offset`, `spacing.2`). El
+  panel gana borde 1px en superficie oscura (`surface-dark-border-color`,
+  blanco) que lo separa del velo, también oscuro; transparente en
+  superficie clara, donde el velo ya basta. `width-max`/`max-height`
+  quedan documentados como medidas de layout. Story oscura reescrita con
+  `parameters: { surface: 'dark' }` en vez de alternar `html.dark` a mano.
+  Doc MDX nueva.
+- `Sheet`: el aspa deja de tomar prestados `--modal-close-*` y pasa al mismo
+  patrón `Button ghost` de Modal — con ello se resuelve un bug de a11y real,
+  `.sheet__close` no tenía `:focus-visible`. `description-font-size`/
+  `description-color` dejan de tomar prestado `input-field.helper.*` y pasan
+  a referenciar los de `Modal`; verificado en el CSS generado que Sheet
+  hereda el modo oscuro de Modal por cascada real de custom properties, sin
+  declarar tokens `surface-dark-*` propios. Story oscura y story
+  `Test — abre, cierra con el aspa y devuelve el foco` nuevas (antes sin
+  ningún `play`). Doc MDX nueva.
+- `ImageCropDialog`: `area-bg`/`surface-dark-area-bg` dejan de nombrar
+  `color.grey-lightest` y una rgba cableada; pasan al rol
+  `surface.secondary-on-light|dark` (mismo que `Kbd`/`CodeBlock`/
+  `ProgressBar`). Story oscura nueva; el marco de `react-image-crop` se
+  verificó sobre superficie oscura (dibuja sobre la imagen, no sobre
+  `area-bg`, así que su contraste no depende del tema — documentado en el
+  MDX). Doc MDX nueva.
+- Los tres salen de `Por revisar/`: `Molecules/Modal`, `Molecules/Sheet`,
+  `Molecules/ImageCropDialog`.
 
 ## v25.2.0
 

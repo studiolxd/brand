@@ -658,3 +658,37 @@ cuatro salvo Pagination, que ya tenía tests de contrato de una revisión anteri
 Sin decisiones pendientes nuevas de esta tanda: los cuatro componentes cierran sin cabos sueltos
 propios (las líneas que compartían con otros componentes en las listas de arriba —hover/activo de
 `grey-lightest`, tallas, movimiento— se han actualizado quitando `AppLauncher`).
+
+## Tanda 3 — familia diálogo: Modal, Sheet, ImageCropDialog a definitivos (2026-08-27)
+
+Los tres salen de `Por revisar/`, en orden (Sheet toma tokens de Modal;
+ImageCropDialog compone Modal). MDX, story `En superficie oscura` con
+`parameters: { surface: 'dark' }` nuevos en los tres.
+
+- [x] **Modal** — aspa a `<Button variant="ghost" size="sm" iconOnly>` vía
+      `Dialog.Close render`, precedente de `Alert`/`Toast`: fuera
+      `close-color`/`close-hover-color`/`close-hover-bg` y el foco prestado de
+      Button. `calc(-50% - 8px)` de los keyframes → token
+      (`content-enter-offset`, `spacing.2`). Borde 1px en superficie oscura
+      (`surface-dark-border-color`) que separa el panel del velo, también
+      oscuro; transparente en superficie clara. `width-max`/`max-height`
+      documentados como medidas de layout, no de espaciado.
+- [x] **Sheet** — mismo patrón de aspa que Modal (antes tomaba prestados
+      `--modal-close-*` y no tenía `:focus-visible`: bug de a11y real,
+      resuelto al pasar a `Button`). `description-font-size`/`-color` dejan
+      de tomar prestado `input-field.helper.*` y pasan a `{modal.description-*}`.
+      Verificado en el CSS generado que Sheet hereda el modo oscuro de Modal
+      por cascada real de custom properties (`--sheet-title-color:
+      var(--modal-title-color)` se resuelve en el elemento de uso), sin
+      declarar `surface-dark-*` propios — confirmado también visualmente.
+      Story `Test — abre, cierra con el aspa y devuelve el foco` nueva (antes
+      sin ningún `play`).
+- [x] **ImageCropDialog** — `area-bg`/`surface-dark-area-bg` de
+      `color.grey-lightest` + rgba cableada → rol `surface.secondary-on-light|dark`.
+      Marco de `react-image-crop` verificado sobre superficie oscura: dibuja
+      sus marcas (blanco/gris) sobre la imagen, no sobre `area-bg`, así que
+      el contraste no depende del tema — no hace falta sobrescribir sus
+      css-vars; documentado en el MDX. Story `busy` ya existía.
+- CommandPalette compone `Modal` (ya reescrita sobre Base UI en v24.11.0,
+  cmdk/Radix fuera del `dist`) pero no entraba en esta tanda: sigue en
+  `Por revisar/` por su propio motivo, no por este cambio.
