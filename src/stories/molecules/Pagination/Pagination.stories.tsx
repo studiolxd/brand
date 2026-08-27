@@ -4,7 +4,7 @@ import { expect, within } from 'storybook/test';
 import { Pagination } from './Pagination';
 
 const meta: Meta<typeof Pagination> = {
-  title: 'Por revisar/Molecules/Pagination',
+  title: 'Molecules/Pagination',
   component: Pagination,
   parameters: {
     layout: 'padded',
@@ -206,6 +206,23 @@ export const Sm: Story = {
         onPageChange={setPage}
         onPageSizeChange={(s) => { setPageSize(s); setPage(1); }}
         showTotal
+      />
+    );
+  },
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: () => {
+    const [page, setPage] = useState(3);
+    return (
+      <Pagination
+        total={100}
+        page={page}
+        pageSize={10}
+        showTotal
+        onPageChange={setPage}
       />
     );
   },

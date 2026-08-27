@@ -34,6 +34,7 @@
   --pagination-btn-radius: var(--border-radius-default); /** Radio de borde de los botones */
   --pagination-btn-color: var(--color-text-on-light); /** Color de texto de los botones */
   --pagination-btn-hover-color: var(--color-text-on-light); /** Texto en hover */
+  --pagination-btn-hover-underline-width: var(--border-width-default); /** Grosor del subrayado en hover — token propio, no el de Link */
   --pagination-btn-current-color: var(--color-text-on-light); /** Texto de la página activa */
   --pagination-btn-current-font-weight: var(--font-weight-emphasis); /** Peso tipográfico de la página activa */
   --pagination-ellipsis-color: var(--color-text-muted-on-light); /** Color del ellipsis */

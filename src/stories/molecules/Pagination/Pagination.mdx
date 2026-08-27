@@ -113,7 +113,18 @@ props de texto: se traducen pasando `pageSizeOptions` con los `label` ya traduci
 La convención completa (qué componentes tienen props de texto, cómo se nombran, cómo se traducen
 fechas) está en **Foundations › Internacionalización**.
 
-## Dark mode
+## Superficie oscura
+
+<Canvas of={PaginationStories.EnSuperficieOscura} />
+
+## Accesibilidad
+
+- El subrayado del botón en hover usa `pagination.btn-hover-underline-width`, un token propio —
+  no `link.underline-width` — porque el botón de página no es un `Link`, aunque comparta la misma
+  técnica visual (borde inferior, no `text-decoration`).
+- `btn-disabled-color` (`grey-dark`) está exento de la regla «todo texto va en prusia o
+  grey-darkest»: es un control deshabilitado, y `grey-dark` es justo el rol reservado para
+  controles deshabilitados e iconos de acción secundarios.
 
 ---
 

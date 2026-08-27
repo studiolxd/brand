@@ -58,7 +58,7 @@
   color: var(--pagination-btn-hover-color);
   text-decoration: var(--pagination-btn-hover-text-decoration);
   padding-block-end: var(--link-underline-offset);
-  box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
+  box-shadow: inset 0 calc(-1 * var(--pagination-btn-hover-underline-width)) 0 0 currentColor;
 }
 
 .pagination__btn:focus-visible {

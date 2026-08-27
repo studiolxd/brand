@@ -18,6 +18,7 @@
     "btn-hover-bg":              { "$value": "transparent",                 "$type": "color",     "$description": "Fondo en hover — ghost style, sin cambio de fondo" },
     "btn-hover-color":           { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Texto en hover" },
     "btn-hover-text-decoration": { "$value": "none",                   "$type": "string",    "$description": "Decoración de texto en hover — estilo ghost" },
+    "btn-hover-underline-width": { "$value": "{border-width.default}",     "$type": "dimension", "$description": "Grosor del subrayado en hover — token propio, no el de Link" },
     "btn-current-bg":        { "$value": "transparent",                 "$type": "color",     "$description": "Fondo de la página activa — sin fondo" },
     "btn-current-color":     { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Texto de la página activa" },
     "btn-current-font-weight": { "$value": "{font-weight.emphasis}",        "$type": "number",    "$description": "Peso tipográfico de la página activa" },
