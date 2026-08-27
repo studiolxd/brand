@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import './Breadcrumb.css';
 export type BreadcrumbItem = {
     label: string;
     href?: string;
 };
-export type BreadcrumbRenderLinkProps = {
+export type BreadcrumbRenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
     href: string;
     children: ReactNode;
     className: string;

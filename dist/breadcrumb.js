@@ -1,11 +1,10 @@
 import './breadcrumb.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 //#region src/stories/molecules/Breadcrumb/Breadcrumb.tsx
-function n({ href: t, children: n, className: r }) {
+function n({ children: t, ...n }) {
 	return /* @__PURE__ */ e("a", {
-		href: t,
-		className: r,
-		children: n
+		...n,
+		children: t
 	});
 }
 function r({ items: r, renderLink: i = n, separator: a = "/", ariaLabel: o = "Migas de pan", className: s }) {
