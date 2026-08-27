@@ -9,6 +9,15 @@
   --textarea-resize: vertical; /** Resize direction */
   --textarea-cursor: text; /** Cursor */
   --textarea-disabled-cursor: not-allowed; /** Cursor when disabled */
+  --textarea-bare-bg: rgba(0, 0, 0, 0); /** Fondo — variante `bare`: el campo no pinta caja, la pinta el contenedor que lo enmarca */
+  --textarea-bare-border-color: rgba(0, 0, 0, 0); /** Borde — variante `bare`: sin contorno propio */
+  --textarea-bare-min-height: auto; /** Altura mínima — variante `bare`: la manda el contenido (`rows`), no la fórmula de la talla */
+  --textarea-bare-padding-block: 0; /** Aire vertical — variante `bare`: lo pone el contenedor */
+  --textarea-bare-padding-inline: 0; /** Aire horizontal — variante `bare`: lo pone el contenedor */
+  --textarea-bare-focus-ring-width: 0; /** Anillo de foco — variante `bare`: no lo dibuja el campo; el contenedor lo dibuja con `:focus-within` */
+  --textarea-bare-disabled-bg: rgba(0, 0, 0, 0); /** Fondo deshabilitado — variante `bare`: el gris de deshabilitado lo pinta el contenedor, no el campo */
+  --textarea-bare-disabled-border-color: rgba(0, 0, 0, 0); /** Borde deshabilitado — variante `bare` */
+  --textarea-bare-resize: none; /** Redimensionado — variante `bare`: el asa rompería la caja del contenedor */
   --textarea-font-family: var(--font-family-sans); /** Font family */
   --textarea-font-size: var(--font-size-2); /** Font size */
   --textarea-line-height: var(--line-height-normal); /** Line height */
@@ -19,6 +28,7 @@
   --textarea-error-bg: var(--color-white); /** Error background */
   --textarea-border-radius: var(--border-radius-default); /** Border radius */
   --textarea-border-width: var(--border-width-default); /** Border width */
+  --textarea-lg-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-lg-font-size) + 2 * var(--textarea-lg-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima — lg: la misma fórmula con el cuerpo y el aire de la talla (170px) */
   --textarea-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --textarea-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-font-size) + 2 * var(--textarea-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima: `rows` líneas de texto (rows × interlineado × cuerpo) más el aire de arriba y abajo y los dos bordes. Con la talla md, 130px */
   --textarea-transition-duration: var(--motion-duration-fast); /** Transition duration */
@@ -30,7 +40,6 @@
   --textarea-lg-padding-block: var(--spacing-5); /** Block padding — variante lg */
   --textarea-lg-padding-inline: var(--spacing-5); /** Inline padding — variante lg */
   --textarea-lg-font-size: var(--font-size-3); /** Font size — variante lg (20px) */
-  --textarea-lg-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-lg-font-size) + 2 * var(--textarea-lg-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima — lg: la misma fórmula con el cuerpo y el aire de la talla (170px) */
   --textarea-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --textarea-font-weight: var(--font-weight-default); /** Font weight */
   --textarea-color: var(--color-text-on-light); /** Text color */

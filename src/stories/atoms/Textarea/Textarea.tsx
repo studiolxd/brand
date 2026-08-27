@@ -7,6 +7,14 @@ export interface TextareaProps
   size?: 'sm' | 'md' | 'lg';
   /** Marca el estado de error: aplica la clase `textarea--error` y `aria-invalid`. */
   error?: boolean;
+  /**
+   * El campo renuncia a su caja —borde, fondo, aire, altura mínima, asa de
+   * redimensionado y anillo de foco— para que la dibuje el contenedor que lo
+   * enmarca. Es lo que usa `MessageComposer`: un solo marco alrededor del
+   * campo y del botón de enviar. Quien lo monte debe dibujar el foco en ese
+   * contenedor (`:focus-within`), o el campo se queda sin indicador.
+   */
+  bare?: boolean;
   /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
   className?: string;
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
@@ -21,6 +29,7 @@ export interface TextareaProps
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea({
   size = 'md',
   error = false,
+  bare = false,
   className,
   describedBy,
   ...rest
@@ -29,6 +38,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     'textarea',
     size !== 'md' ? `textarea--${size}` : '',
     error ? 'textarea--error' : '',
+    bare ? 'textarea--bare' : '',
     className ?? '',
   ].filter(Boolean).join(' ');
 

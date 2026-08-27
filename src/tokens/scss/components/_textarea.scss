@@ -42,4 +42,13 @@ $lxd-textarea-sm-min-height: calc(4 * 1.5 * 0.875rem + 2 * 0.5rem + 2 * 1px); //
 $lxd-textarea-lg-padding-block: 1.5rem; // Block padding — variante lg
 $lxd-textarea-lg-padding-inline: 1.5rem; // Inline padding — variante lg
 $lxd-textarea-lg-font-size: 1.25rem; // Font size — variante lg (20px)
+$lxd-textarea-bare-bg: rgba(0, 0, 0, 0); // Fondo — variante `bare`: el campo no pinta caja, la pinta el contenedor que lo enmarca
+$lxd-textarea-bare-border-color: rgba(0, 0, 0, 0); // Borde — variante `bare`: sin contorno propio
+$lxd-textarea-bare-min-height: auto; // Altura mínima — variante `bare`: la manda el contenido (`rows`), no la fórmula de la talla
+$lxd-textarea-bare-padding-block: 0; // Aire vertical — variante `bare`: lo pone el contenedor
+$lxd-textarea-bare-padding-inline: 0; // Aire horizontal — variante `bare`: lo pone el contenedor
+$lxd-textarea-bare-focus-ring-width: 0; // Anillo de foco — variante `bare`: no lo dibuja el campo; el contenedor lo dibuja con `:focus-within`
+$lxd-textarea-bare-disabled-bg: rgba(0, 0, 0, 0); // Fondo deshabilitado — variante `bare`: el gris de deshabilitado lo pinta el contenedor, no el campo
+$lxd-textarea-bare-disabled-border-color: rgba(0, 0, 0, 0); // Borde deshabilitado — variante `bare`
+$lxd-textarea-bare-resize: none; // Redimensionado — variante `bare`: el asa rompería la caja del contenedor
 $lxd-textarea-lg-min-height: calc(4 * 1.5 * 1.25rem + 2 * 1.5rem + 2 * 1px); // Altura mínima — lg: la misma fórmula con el cuerpo y el aire de la talla (170px)

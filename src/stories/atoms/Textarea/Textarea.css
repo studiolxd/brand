@@ -101,3 +101,22 @@
     inset 0 0 0 var(--textarea-focus-ring-inset-offset) var(--textarea-error-bg),
     inset 0 0 0 1000px var(--textarea-error-bg);
 }
+
+/* ─── Variante `bare` ────────────────────────────────────────────
+   El campo renuncia a su caja —borde, fondo, aire, altura mínima y anillo de
+   foco— para que la dibuje el contenedor que lo enmarca (el `MessageComposer`).
+   Va después de las tallas: comparte especificidad con ellas y debe ganar. */
+.textarea.textarea--bare {
+  --textarea-bg: var(--textarea-bare-bg);
+  --textarea-border-color: var(--textarea-bare-border-color);
+  --textarea-focus-border-color: var(--textarea-bare-border-color);
+  --textarea-min-height: var(--textarea-bare-min-height);
+  --textarea-padding-block: var(--textarea-bare-padding-block);
+  --textarea-padding-inline: var(--textarea-bare-padding-inline);
+  --textarea-focus-ring-width: var(--textarea-bare-focus-ring-width);
+  --textarea-focus-ring-inset-offset: var(--textarea-bare-focus-ring-width);
+  --textarea-resize: var(--textarea-bare-resize);
+  --textarea-disabled-bg: var(--textarea-bare-disabled-bg);
+  --textarea-disabled-border-color: var(--textarea-bare-disabled-border-color);
+  --textarea-error-bg: var(--textarea-bare-bg);
+}

@@ -54,6 +54,34 @@ export const AlturaMinima: Story = {
   ),
 };
 
+/**
+ * `bare` deja el campo sin caja: sin borde, sin fondo, sin aire, sin altura
+ * mínima, sin asa de redimensionado y sin anillo de foco. La caja la dibuja el
+ * contenedor que lo enmarca —es lo que hace `MessageComposer`, que mete campo y
+ * botón de enviar dentro de un solo marco—. Quien lo monte tiene que dibujar el
+ * foco en ese contenedor con `:focus-within`.
+ */
+export const Bare: Story = {
+  name: 'Sin caja (bare)',
+  render: (args) => (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'flex-end',
+        gap: 'var(--spacing-2)',
+        inlineSize: '24rem',
+        paddingBlock: 'var(--spacing-3)',
+        paddingInline: 'var(--spacing-4)',
+        borderWidth: 'var(--border-width-default)',
+        borderStyle: 'solid',
+        borderColor: 'var(--color-primary)',
+      }}
+    >
+      <Textarea {...args} bare rows={2} placeholder="El marco lo pone el contenedor" />
+    </div>
+  ),
+};
+
 /** El error se dice en el borde y en el mensaje del campo, nunca con un fondo. */
 export const ConError: Story = { args: { error: true } };
 
@@ -173,5 +201,33 @@ export const ContratoPlaceholder: Story = {
       const el = canvas.getByRole('textbox', { name });
       await expect(getComputedStyle(el, '::placeholder').textTransform).toBe('none');
     }
+  },
+};
+
+/** Test: `bare` renuncia a borde, fondo, altura mínima y asa de redimensionado. */
+export const ContratoBare: Story = {
+  name: 'Test — bare no pinta caja',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ inlineSize: '24rem' }}>
+      <Textarea bare rows={2} aria-label="Sin caja" />
+      <Textarea rows={2} aria-label="Con caja" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const bare = canvas.getByRole('textbox', { name: 'Sin caja' });
+    const normal = canvas.getByRole('textbox', { name: 'Con caja' });
+    const bareStyle = getComputedStyle(bare);
+
+    await expect(bareStyle.resize).toBe('none');
+    await expect(bareStyle.paddingTop).toBe('0px');
+    await expect(bareStyle.paddingLeft).toBe('0px');
+    // Transparente en fondo y borde: la caja la pinta el contenedor.
+    await expect(bareStyle.backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    await expect(bareStyle.borderTopColor).toBe('rgba(0, 0, 0, 0)');
+    // Y no arrastra la altura mínima de la talla (130px en md).
+    await expect(bare.getBoundingClientRect().height)
+      .toBeLessThan(normal.getBoundingClientRect().height);
   },
 };

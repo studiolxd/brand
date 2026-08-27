@@ -1,7 +1,8 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as TextareaStories from "./Textarea.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { textareaBaseTokens, textareaSizeTokens, textareaFocusTokens, textareaErrorTokens, textareaDisabledTokens, textareaDarkTokens } from "../../../tokens/components/textarea";
+import { textareaBaseTokens, textareaSizeTokens,
+  textareaBareTokens, textareaFocusTokens, textareaErrorTokens, textareaDisabledTokens, textareaDarkTokens } from "../../../tokens/components/textarea";
 
 <Meta of={TextareaStories} />
 
@@ -41,6 +42,16 @@ La consecuencia práctica: un `rows` por encima de 4 **se nota** (el campo crece
 <Canvas of={TextareaStories.Deshabilitado} />
 <Canvas of={TextareaStories.SoloLectura} />
 
+## Sin caja (`bare`)
+
+<Canvas of={TextareaStories.Bare} />
+
+`bare` deja el campo **sin caja propia**: sin borde, sin fondo, sin aire, sin altura mínima, sin asa de redimensionado y sin anillo de foco. Todo eso lo dibuja el contenedor que lo enmarca.
+
+Existe para que un contenedor que ya es una caja —el `MessageComposer`, que mete el campo y el botón de enviar dentro de un solo marco— no tenga que **pisar el átomo desde fuera** con reglas `.mi-bloque .textarea { border: none }`. Es el mismo criterio que resolvió `UserMenu compact` y `OrgSwitcher block`: la variante la da el átomo, no la escribe el vecino.
+
+Una condición: quien monte un `bare` **tiene que dibujar el foco en el contenedor** (`:focus-within`). Si no, el campo se queda sin indicador de foco.
+
 ## Placeholder
 
 Va en **caja normal**, como el `Label` y como el placeholder del `Select`: es texto, no una marca. Su color sale de `text.placeholder-on-light|dark`.
@@ -67,6 +78,10 @@ El campo hereda los tokens de `.surface-dark` por cascada; no hay prop de tema.
 ### Tallas
 
 <TokenTable tokens={textareaSizeTokens} />
+
+### Sin caja (`bare`)
+
+<TokenTable tokens={textareaBareTokens} />
 
 ### Foco
 
