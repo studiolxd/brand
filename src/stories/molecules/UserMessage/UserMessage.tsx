@@ -1,17 +1,51 @@
+import { forwardRef } from 'react';
 import { MessageBubble } from '../../atoms/MessageBubble/MessageBubble';
+import { formatMessageTimestamp, type MessageTimestamp } from '../_shared/messageTimestamp';
 import './UserMessage.css';
 
-export interface UserMessageProps {
+export interface UserMessageProps extends React.ComponentPropsWithoutRef<'div'> {
   children: React.ReactNode;
-  /** Marca de tiempo visible (ej. "14:32"). */
-  timestamp?: string;
+  /**
+   * Momento del mensaje: un `Date` o una cadena ISO 8601. Se pinta en un
+   * `<time datetime>`, así que tiene que ser el instante, no una hora ya
+   * formateada — de eso se encarga el componente con `Intl`.
+   */
+  timestamp?: MessageTimestamp;
+  /** Locale con el que se formatea la marca de tiempo. Default `'es-ES'`. */
+  locale?: string;
+  /**
+   * Opciones de `Intl.DateTimeFormat` para la marca de tiempo.
+   * Default: hora y minutos a dos dígitos.
+   */
+  timestampFormat?: Intl.DateTimeFormatOptions;
+  /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
-export function UserMessage({ children, timestamp }: UserMessageProps) {
+/**
+ * Un mensaje del usuario dentro del hilo: el globo, alineado al lado de fin, y
+ * su marca de tiempo debajo.
+ *
+ * Reenvía el resto de props del `<div>` (`data-*`, `aria-*`, `id`…) y el `ref`.
+ */
+export const UserMessage = forwardRef<HTMLDivElement, UserMessageProps>(function UserMessage({
+  children,
+  timestamp,
+  locale,
+  timestampFormat,
+  className,
+  ...rest
+}, ref) {
+  const time = formatMessageTimestamp(timestamp, locale, timestampFormat);
+
   return (
-    <div className="user-message">
+    <div ref={ref} className={`user-message${className ? ` ${className}` : ''}`} {...rest}>
       <MessageBubble role="user">{children}</MessageBubble>
-      {timestamp && <time className="user-message__timestamp">{timestamp}</time>}
+      {time && (
+        <time className="user-message__timestamp" dateTime={time.dateTime}>
+          {time.label}
+        </time>
+      )}
     </div>
   );
-}
+});

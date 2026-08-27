@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: var(--spacing-1);
+  gap: var(--user-message-gap);
 }
 
 .user-message__timestamp {
-  font-family: var(--message-bubble-font-family);
-  font-size: var(--font-size-1);
-  color: var(--color-grey-dark);
-  padding-inline: var(--spacing-1);
+  font-family: var(--user-message-timestamp-font-family);
+  font-size: var(--user-message-timestamp-font-size);
+  color: var(--user-message-timestamp-color);
+  padding-inline: var(--user-message-timestamp-padding-inline);
 }

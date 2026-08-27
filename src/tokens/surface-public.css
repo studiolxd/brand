@@ -47,6 +47,8 @@
   --text-h6-font-size: var(--text-size-3);
   --text-list-font-size: var(--text-font-size);
   --text-list-line-height: var(--text-line-height);
+  --assistant-message-model-font-size: var(--text-paragraph-small-font-size);
+  --assistant-message-timestamp-font-size: var(--text-paragraph-small-font-size);
   --async-multi-select-field-error-font-size: var(--form-error-font-size);
   --async-multi-select-field-helper-font-size: var(--form-helper-font-size);
   --async-select-field-error-font-size: var(--form-error-font-size);
@@ -88,4 +90,5 @@
   --textarea-field-helper-font-size: var(--form-helper-font-size);
   --time-field-error-font-size: var(--form-error-font-size);
   --time-field-helper-font-size: var(--form-helper-font-size);
+  --user-message-timestamp-font-size: var(--text-paragraph-small-font-size);
 }

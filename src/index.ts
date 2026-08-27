@@ -219,6 +219,7 @@ export { MessageComposer } from './stories/molecules/MessageComposer/MessageComp
 export type { MessageComposerProps } from './stories/molecules/MessageComposer/MessageComposer';
 export { UserMessage } from './stories/molecules/UserMessage/UserMessage';
 export type { UserMessageProps } from './stories/molecules/UserMessage/UserMessage';
+export type { MessageTimestamp } from './stories/molecules/_shared/messageTimestamp';
 
 // ─── Sections ───────────────────────────────────────────────
 export { AppShell } from './stories/sections/AppShell/AppShell';

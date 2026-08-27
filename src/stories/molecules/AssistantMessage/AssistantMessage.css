@@ -2,20 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--spacing-1);
+  gap: var(--assistant-message-gap);
 }
 
 .assistant-message__model {
-  font-family: var(--message-bubble-font-family);
-  font-size: var(--font-size-1);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-grey-dark);
-  padding-inline: var(--spacing-1);
+  font-family: var(--assistant-message-model-font-family);
+  font-size: var(--assistant-message-model-font-size);
+  font-weight: var(--assistant-message-model-font-weight);
+  color: var(--assistant-message-model-color);
+  padding-inline: var(--assistant-message-model-padding-inline);
 }
 
 .assistant-message__timestamp {
-  font-family: var(--message-bubble-font-family);
-  font-size: var(--font-size-1);
-  color: var(--color-grey-dark);
-  padding-inline: var(--spacing-1);
+  font-family: var(--assistant-message-timestamp-font-family);
+  font-size: var(--assistant-message-timestamp-font-size);
+  color: var(--assistant-message-timestamp-color);
+  padding-inline: var(--assistant-message-timestamp-padding-inline);
 }

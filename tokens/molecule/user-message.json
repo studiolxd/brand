@@ -1,0 +1,12 @@
+{
+  "user-message": {
+    "gap":                  { "$value": "{spacing.1}",                        "$type": "dimension", "$description": "Separación entre el globo y su marca de tiempo" },
+
+    "timestamp-font-family":{ "$value": "{font-family.sans}",                 "$type": "string",    "$description": "Familia tipográfica de la marca de tiempo" },
+    "timestamp-font-size":  { "$value": "{text.paragraph.small.font-size}",   "$type": "dimension", "$description": "Cuerpo de la marca de tiempo: un peldaño por debajo del texto de la superficie" },
+    "timestamp-color":      { "$value": "{color.text.muted-on-light}",        "$type": "color",     "$description": "Tinta de la marca de tiempo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)" },
+    "timestamp-padding-inline": { "$value": "{spacing.1}",                    "$type": "dimension", "$description": "Aire horizontal de la marca de tiempo, para que no quede pegada al canto del globo" },
+
+    "surface-dark-timestamp-color": { "$value": "{color.text.muted-on-dark}", "$type": "color",     "$description": "Tinta de la marca de tiempo — superficie oscura" }
+  }
+}

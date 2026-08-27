@@ -1,0 +1,59 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as UserMessageStories from "./UserMessage.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { userMessageTokens, userMessageDarkTokens } from "../../../tokens/components/user-message";
+
+<Meta of={UserMessageStories} />
+
+# UserMessage
+
+Un **mensaje del usuario** dentro de un hilo de chat: el globo, alineado al lado de fin, y su marca de tiempo debajo.
+
+Es la molécula que envuelve al átomo `MessageBubble`. Su pareja es `AssistantMessage`; las dos las monta `ConversationThread` cuando se le pasa la lista de mensajes, pero se pueden usar sueltas si el producto pinta el hilo a su manera.
+
+<Canvas of={UserMessageStories.PorDefecto} />
+
+## La marca de tiempo
+
+<Canvas of={UserMessageStories.ConMarcaDeTiempo} />
+
+`timestamp` es **el instante**, no la hora ya escrita: un `Date` o una cadena ISO 8601 (`'2026-08-27T14:32:00Z'`). El componente hace dos cosas con él:
+
+- lo escribe en el atributo `datetime` del `<time>`, que es lo que leen las máquinas —lectores de pantalla, buscadores, la propia app cuando reordena—;
+- lo formatea para la pantalla con `Intl`, en el `locale` que toque.
+
+Una hora ya formateada (`'14:32'`) no se puede interpretar: en ese caso **no se pinta nada**, en vez de enseñar «Invalid Date».
+
+<Canvas of={UserMessageStories.OtroIdioma} />
+
+El idioma y el formato van por `locale` (default `'es-ES'`) y `timestampFormat` (opciones de `Intl.DateTimeFormat`, por defecto hora y minutos a dos dígitos). No hay props de texto para meses ni para el formato: eso lo resuelve `Intl`, como en el resto del sistema.
+
+## Superficie oscura
+
+<Canvas of={UserMessageStories.SuperficieOscura} />
+
+La tinta de la marca de tiempo tiene par oscuro. El globo trae el suyo desde `MessageBubble`.
+
+## Accesibilidad
+
+- La marca de tiempo va en un `<time datetime>`: sin el atributo, «14:32» es una cadena cualquiera.
+- Que el mensaje sea del usuario **no puede quedar solo en la alineación**: eso es información visual. En un hilo real lo dice el contexto (el usuario escribe, el asistente responde con su nombre); si el producto necesita decirlo explícitamente, lo pasa como contenido del globo.
+- El color de la hora es el gris de texto secundario del sistema (`text.muted-on-light|dark`), que cumple contraste. No es `grey-dark`, que en este sistema **no es un color de texto**.
+
+## Tokens
+
+<TokenTable tokens={userMessageTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={userMessageDarkTokens} />
+
+Lo que dibuja el globo —contorno, aire, cola— sale de `message-bubble.*`. Ver **Atoms › MessageBubble**.
+
+## Props
+
+<ArgTypes of={UserMessageStories} />
+
+## Internacionalización
+
+`locale` y `timestampFormat` son las dos props que mueven el idioma de este componente. Ver **Foundations › Internacionalización**.

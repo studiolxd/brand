@@ -104,6 +104,8 @@
 @import "./molecules/message-composer.css";
 @import "./molecules/conversation-thread.css";
 @import "./molecules/conversation-list.css";
+@import "./molecules/user-message.css";
+@import "./molecules/assistant-message.css";
 
 /* Remapeo de la superficie pública (`.site-shell`) — va al final: los tokens
    que redefine tienen la misma especificidad que los `:root` de arriba. */

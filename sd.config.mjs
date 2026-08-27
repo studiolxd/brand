@@ -115,6 +115,8 @@ const filters = {
   'async-select-field':     (t) => t.path[0] === 'async-select-field',
   'async-multi-select-field': (t) => t.path[0] === 'async-multi-select-field',
   'conversation-list':  (t) => t.path[0] === 'conversation-list',
+  'user-message':       (t) => t.path[0] === 'user-message',
+  'assistant-message':  (t) => t.path[0] === 'assistant-message',
 };
 
 function cssFile(destination, filterKey) {
@@ -239,6 +241,8 @@ const sd = new StyleDictionary({
         cssFile('molecules/message-composer.css',  'message-composer'),
         cssFile('molecules/conversation-thread.css','conversation-thread'),
         cssFile('molecules/conversation-list.css', 'conversation-list'),
+        cssFile('molecules/user-message.css',      'user-message'),
+        cssFile('molecules/assistant-message.css', 'assistant-message'),
         cssFile('molecules/input-phone-field.css',  'input-phone-field'),
         cssFile('molecules/otp-field.css',          'otp-field'),
         cssFile('molecules/async-select-field.css', 'async-select-field'),
@@ -352,6 +356,8 @@ const sd = new StyleDictionary({
         scssFile('molecules/_message-composer.scss',   'message-composer'),
         scssFile('molecules/_conversation-thread.scss','conversation-thread'),
         scssFile('molecules/_conversation-list.scss', 'conversation-list'),
+        scssFile('molecules/_user-message.scss',      'user-message'),
+        scssFile('molecules/_assistant-message.scss', 'assistant-message'),
         scssFile('molecules/_input-phone-field.scss',  'input-phone-field'),
         scssFile('molecules/_otp-field.scss',          'otp-field'),
         scssFile('molecules/_async-select-field.scss', 'async-select-field'),

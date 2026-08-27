@@ -1,0 +1,13 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-assistant-message-gap: 0.25rem; // Separación entre el nombre del modelo, el globo y la marca de tiempo
+$lxd-assistant-message-model-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del nombre del modelo
+$lxd-assistant-message-model-font-size: 0.875rem; // Cuerpo del nombre del modelo: un peldaño por debajo del texto de la superficie
+$lxd-assistant-message-model-font-weight: 500; // Peso del nombre del modelo: es quien firma la respuesta, se lee antes que la marca de tiempo
+$lxd-assistant-message-model-color: #111e30; // Tinta del nombre del modelo: tinta plena, es contenido y no un dato secundario
+$lxd-assistant-message-model-padding-inline: 0.25rem; // Aire horizontal del nombre del modelo
+$lxd-assistant-message-timestamp-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la marca de tiempo
+$lxd-assistant-message-timestamp-font-size: 0.875rem; // Cuerpo de la marca de tiempo: un peldaño por debajo del texto de la superficie
+$lxd-assistant-message-timestamp-color: #4a4a4a; // Tinta de la marca de tiempo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)
+$lxd-assistant-message-timestamp-padding-inline: 0.25rem; // Aire horizontal de la marca de tiempo

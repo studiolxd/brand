@@ -103,6 +103,8 @@
 @forward 'molecules/message-composer';
 @forward 'molecules/conversation-thread';
 @forward 'molecules/conversation-list';
+@forward 'molecules/user-message';
+@forward 'molecules/assistant-message';
 @forward 'molecules/input-phone-field';
 @forward 'molecules/otp-field';
 @forward 'molecules/async-select-field';

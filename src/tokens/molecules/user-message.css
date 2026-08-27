@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --user-message-gap: var(--spacing-1); /** Separación entre el globo y su marca de tiempo */
+  --user-message-timestamp-font-family: var(--font-family-sans); /** Familia tipográfica de la marca de tiempo */
+  --user-message-timestamp-padding-inline: var(--spacing-1); /** Aire horizontal de la marca de tiempo, para que no quede pegada al canto del globo */
+  --user-message-timestamp-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la marca de tiempo: un peldaño por debajo del texto de la superficie */
+  --user-message-timestamp-color: var(--color-text-muted-on-light); /** Tinta de la marca de tiempo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto) */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --user-message-timestamp-color: var(--color-text-muted-on-dark); /** Tinta de la marca de tiempo — superficie oscura */
+}

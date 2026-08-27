@@ -1,0 +1,65 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AssistantMessageStories from "./AssistantMessage.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { assistantMessageTokens, assistantMessageDarkTokens } from "../../../tokens/components/assistant-message";
+
+<Meta of={AssistantMessageStories} />
+
+# AssistantMessage
+
+Un **mensaje del asistente** dentro de un hilo de chat: el nombre del modelo que firma la respuesta, el globo alineado al lado de inicio y su marca de tiempo debajo.
+
+Es la pareja de `UserMessage`, y como ella envuelve al átomo `MessageBubble`. Lo que añade es la firma y el estado de «escribiendo».
+
+<Canvas of={AssistantMessageStories.PorDefecto} />
+
+## Quién ha respondido
+
+El nombre del modelo es **texto**, no un dato de segunda fila: va en tinta plena y con el peso de énfasis, un peldaño por encima de la marca de tiempo. Es lo que dice quién ha hablado, y es lo que hace que la respuesta no dependa de la alineación para atribuirse.
+
+<Canvas of={AssistantMessageStories.SinModelo} />
+
+Sin `model`, el globo va solo. Vale para un asistente único que no necesita presentarse en cada turno.
+
+## Mientras se genera
+
+<Canvas of={AssistantMessageStories.Generando} />
+
+Con `isStreaming`, el globo lleva el `TypingIndicator` en lugar del contenido, y **la marca de tiempo no se pinta**: todavía no hay un momento que marcar. `streamingLabel` es el texto que anuncian los lectores de pantalla.
+
+## La marca de tiempo
+
+<Canvas of={AssistantMessageStories.ConMarcaDeTiempo} />
+
+`timestamp` es **el instante**, no la hora ya escrita: un `Date` o una cadena ISO 8601. Se escribe en el atributo `datetime` del `<time>` —lo que leen las máquinas— y se formatea para la pantalla con `Intl`, en el `locale` que toque (default `'es-ES'`) y con las opciones de `timestampFormat`. Una hora ya formateada (`'14:33'`) no se puede interpretar y no se pinta nada, en vez de enseñar «Invalid Date».
+
+## Superficie oscura
+
+<Canvas of={AssistantMessageStories.SuperficieOscura} />
+
+El nombre del modelo y la hora tienen par oscuro. El globo trae el suyo desde `MessageBubble`.
+
+## Accesibilidad
+
+- La marca de tiempo va en un `<time datetime>`.
+- **La atribución va en texto**: el nombre del modelo se lee, no se deduce del lado en el que está el globo.
+- Quien anuncia los mensajes nuevos es el hilo (`ConversationThread`, con su `role="log"`), no cada mensaje por su cuenta: si cada globo fuera una región live, un hilo largo sería un griterío.
+- El color de la hora es el gris de texto secundario del sistema (`text.muted-on-light|dark`), que cumple contraste. No es `grey-dark`, que en este sistema **no es un color de texto**.
+
+## Tokens
+
+<TokenTable tokens={assistantMessageTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={assistantMessageDarkTokens} />
+
+Lo que dibuja el globo —contorno, aire, cola— sale de `message-bubble.*`. Ver **Atoms › MessageBubble**.
+
+## Props
+
+<ArgTypes of={AssistantMessageStories} />
+
+## Internacionalización
+
+`streamingLabel` traduce el texto del estado de escritura; `locale` y `timestampFormat` mueven el idioma y el formato de la hora. Ver **Foundations › Internacionalización**.

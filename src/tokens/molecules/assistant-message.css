@@ -1,0 +1,23 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --assistant-message-gap: var(--spacing-1); /** Separación entre el nombre del modelo, el globo y la marca de tiempo */
+  --assistant-message-model-font-family: var(--font-family-sans); /** Familia tipográfica del nombre del modelo */
+  --assistant-message-model-padding-inline: var(--spacing-1); /** Aire horizontal del nombre del modelo */
+  --assistant-message-timestamp-font-family: var(--font-family-sans); /** Familia tipográfica de la marca de tiempo */
+  --assistant-message-timestamp-padding-inline: var(--spacing-1); /** Aire horizontal de la marca de tiempo */
+  --assistant-message-model-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del nombre del modelo: un peldaño por debajo del texto de la superficie */
+  --assistant-message-model-font-weight: var(--font-weight-emphasis); /** Peso del nombre del modelo: es quien firma la respuesta, se lee antes que la marca de tiempo */
+  --assistant-message-model-color: var(--color-text-on-light); /** Tinta del nombre del modelo: tinta plena, es contenido y no un dato secundario */
+  --assistant-message-timestamp-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la marca de tiempo: un peldaño por debajo del texto de la superficie */
+  --assistant-message-timestamp-color: var(--color-text-muted-on-light); /** Tinta de la marca de tiempo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto) */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --assistant-message-model-color: var(--color-text-on-dark); /** Tinta del nombre del modelo — superficie oscura */
+  --assistant-message-timestamp-color: var(--color-text-muted-on-dark); /** Tinta de la marca de tiempo — superficie oscura */
+}
