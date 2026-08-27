@@ -3,34 +3,35 @@
  */
 
 :root {
-  --progress-bar-height-sm: var(--spacing-2); /** 8px — compact bar without label */
-  --progress-bar-height-md: var(--spacing-5); /** 24px — default bar */
-  --progress-bar-height-lg: var(--spacing-6); /** 32px — large bar */
-  --progress-bar-track-bg: var(--color-grey-lightest); /** Track background on light surface */
-  --progress-bar-transition-duration: var(--motion-duration-base); /** Fill transition duration */
-  --progress-bar-transition-easing: var(--motion-easing-in-out); /** Fill transition easing */
-  --progress-bar-font-family: var(--font-family-sans); /** Label font family */
-  --progress-bar-font-size: var(--font-size-1); /** 14px — label size */
-  --progress-bar-label-gap: var(--spacing-2); /** Gap between fill edge and outside label */
-  --progress-bar-label-padding-inline: var(--spacing-2); /** Inline padding for label inside fill */
-  --progress-bar-border-radius: var(--border-radius-default); /** No border radius */
-  --progress-bar-font-weight: var(--font-weight-emphasis); /** Medium weight label */
-  --progress-bar-primary-fill: var(--color-primary); /** Primary (prussian) fill color */
-  --progress-bar-primary-label-inside-color: var(--color-text-on-dark); /** White label on dark prussian fill */
-  --progress-bar-accent-1-fill: var(--color-accent-1); /** Accent 1 (lavender) fill color */
-  --progress-bar-accent-1-label-inside-color: var(--color-text-on-light); /** Dark label on lavender fill */
-  --progress-bar-accent-2-fill: var(--color-accent-2); /** Accent 2 (yellow) fill color */
-  --progress-bar-accent-2-label-inside-color: var(--color-text-on-light); /** Dark label on yellow fill */
-  --progress-bar-support-1-fill: var(--color-support-1); /** Support 1 (emerald) fill color */
-  --progress-bar-support-1-label-inside-color: var(--color-text-on-light); /** Dark label on emerald fill */
-  --progress-bar-support-2-fill: var(--color-support-2); /** Support 2 (cayenne) fill color */
-  --progress-bar-support-2-label-inside-color: var(--color-text-on-light); /** Dark label on cayenne fill */
-  --progress-bar-label-outside-color: var(--color-text-on-light); /** Label color when on unfilled track background */
+  --progress-bar-height-sm: var(--spacing-2); /** 8px — barra compacta, sin etiqueta */
+  --progress-bar-height-md: var(--spacing-5); /** 24px — barra por defecto: la etiqueta cabe dentro */
+  --progress-bar-height-lg: var(--spacing-6); /** 32px — barra destacada */
+  --progress-bar-track-bg: var(--color-grey-lightest); /** Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie) */
+  --progress-bar-transition-duration: var(--motion-duration-base); /** Duración del avance del relleno (cambio de estado) */
+  --progress-bar-transition-easing: var(--motion-easing-in-out); /** Curva del avance del relleno */
+  --progress-bar-font-family: var(--font-family-sans); /** Tipografía de la cifra */
+  --progress-bar-font-size: var(--font-size-1); /** 14px — cuerpo de interfaz de la cifra */
+  --progress-bar-line-height: var(--line-height-none); /** Una línea: la cifra se centra con la altura del carril */
+  --progress-bar-label-gap: var(--spacing-2); /** Hueco entre el borde del relleno y la cifra cuando va fuera */
+  --progress-bar-label-padding-inline: var(--spacing-2); /** Aire de la cifra dentro del relleno */
+  --progress-bar-border-radius: var(--border-radius-default); /** Esquina recta, como todo el sistema */
+  --progress-bar-font-weight: var(--font-weight-emphasis); /** Peso de énfasis de la cifra */
+  --progress-bar-primary-fill: var(--color-primary); /** Marca primaria (prusia) — relleno */
+  --progress-bar-primary-label-inside-color: var(--color-text-on-dark); /** Cifra sobre el relleno prusia */
+  --progress-bar-accent-1-fill: var(--color-accent-1); /** Acento 1 (lavanda) — relleno */
+  --progress-bar-accent-1-label-inside-color: var(--color-text-on-light); /** Cifra sobre el relleno lavanda */
+  --progress-bar-accent-2-fill: var(--color-accent-2); /** Acento 2 (amarillo) — relleno */
+  --progress-bar-accent-2-label-inside-color: var(--color-text-on-light); /** Cifra sobre el relleno amarillo */
+  --progress-bar-support-1-fill: var(--color-support-1); /** Soporte 1 (esmeralda) — relleno */
+  --progress-bar-support-1-label-inside-color: var(--color-text-on-light); /** Cifra sobre el relleno esmeralda */
+  --progress-bar-support-2-fill: var(--color-support-2); /** Soporte 2 (cayena) — relleno */
+  --progress-bar-support-2-label-inside-color: var(--color-text-on-light); /** Cifra sobre el relleno cayena */
+  --progress-bar-label-outside-color: var(--color-text-on-light); /** Color de la cifra cuando va fuera, sobre el carril */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --progress-bar-track-bg: var(--color-grey-darkest); /** Track background — surface-dark */
-  --progress-bar-label-outside-color: var(--color-text-on-dark); /** Label color outside — surface-dark */
+  --progress-bar-track-bg: var(--color-grey-darkest); /** Fondo del carril — surface-dark */
+  --progress-bar-label-outside-color: var(--color-text-on-dark); /** Cifra fuera del relleno — surface-dark */
 }

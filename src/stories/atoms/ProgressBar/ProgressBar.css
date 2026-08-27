@@ -64,7 +64,7 @@
   font-family: var(--progress-bar-font-family);
   font-size: var(--progress-bar-font-size);
   font-weight: var(--progress-bar-font-weight);
-  line-height: 1;
+  line-height: var(--progress-bar-line-height);
   white-space: nowrap;
   user-select: none;
 }

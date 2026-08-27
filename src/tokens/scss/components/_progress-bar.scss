@@ -1,26 +1,27 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-progress-bar-height-sm: 0.5rem; // 8px — compact bar without label
-$lxd-progress-bar-height-md: 1.5rem; // 24px — default bar
-$lxd-progress-bar-height-lg: 2rem; // 32px — large bar
-$lxd-progress-bar-border-radius: 0px; // No border radius
-$lxd-progress-bar-track-bg: #f2f2f2; // Track background on light surface
-$lxd-progress-bar-transition-duration: 250ms; // Fill transition duration
-$lxd-progress-bar-transition-easing: ease-in-out; // Fill transition easing
-$lxd-progress-bar-font-family: "Google Sans Flex", system-ui, sans-serif; // Label font family
-$lxd-progress-bar-font-size: 0.875rem; // 14px — label size
-$lxd-progress-bar-font-weight: 500; // Medium weight label
-$lxd-progress-bar-label-gap: 0.5rem; // Gap between fill edge and outside label
-$lxd-progress-bar-label-padding-inline: 0.5rem; // Inline padding for label inside fill
-$lxd-progress-bar-primary-fill: #111e30; // Primary (prussian) fill color
-$lxd-progress-bar-primary-label-inside-color: #ffffff; // White label on dark prussian fill
-$lxd-progress-bar-accent-1-fill: #baabff; // Accent 1 (lavender) fill color
-$lxd-progress-bar-accent-1-label-inside-color: #111e30; // Dark label on lavender fill
-$lxd-progress-bar-accent-2-fill: #ffcd00; // Accent 2 (yellow) fill color
-$lxd-progress-bar-accent-2-label-inside-color: #111e30; // Dark label on yellow fill
-$lxd-progress-bar-support-1-fill: #20e38e; // Support 1 (emerald) fill color
-$lxd-progress-bar-support-1-label-inside-color: #111e30; // Dark label on emerald fill
-$lxd-progress-bar-support-2-fill: #f05e1c; // Support 2 (cayenne) fill color
-$lxd-progress-bar-support-2-label-inside-color: #111e30; // Dark label on cayenne fill
-$lxd-progress-bar-label-outside-color: #111e30; // Label color when on unfilled track background
+$lxd-progress-bar-height-sm: 0.5rem; // 8px — barra compacta, sin etiqueta
+$lxd-progress-bar-height-md: 1.5rem; // 24px — barra por defecto: la etiqueta cabe dentro
+$lxd-progress-bar-height-lg: 2rem; // 32px — barra destacada
+$lxd-progress-bar-border-radius: 0px; // Esquina recta, como todo el sistema
+$lxd-progress-bar-track-bg: #f2f2f2; // Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie)
+$lxd-progress-bar-transition-duration: 250ms; // Duración del avance del relleno (cambio de estado)
+$lxd-progress-bar-transition-easing: ease-in-out; // Curva del avance del relleno
+$lxd-progress-bar-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la cifra
+$lxd-progress-bar-font-size: 0.875rem; // 14px — cuerpo de interfaz de la cifra
+$lxd-progress-bar-font-weight: 500; // Peso de énfasis de la cifra
+$lxd-progress-bar-line-height: 1; // Una línea: la cifra se centra con la altura del carril
+$lxd-progress-bar-label-gap: 0.5rem; // Hueco entre el borde del relleno y la cifra cuando va fuera
+$lxd-progress-bar-label-padding-inline: 0.5rem; // Aire de la cifra dentro del relleno
+$lxd-progress-bar-primary-fill: #111e30; // Marca primaria (prusia) — relleno
+$lxd-progress-bar-primary-label-inside-color: #ffffff; // Cifra sobre el relleno prusia
+$lxd-progress-bar-accent-1-fill: #baabff; // Acento 1 (lavanda) — relleno
+$lxd-progress-bar-accent-1-label-inside-color: #111e30; // Cifra sobre el relleno lavanda
+$lxd-progress-bar-accent-2-fill: #ffcd00; // Acento 2 (amarillo) — relleno
+$lxd-progress-bar-accent-2-label-inside-color: #111e30; // Cifra sobre el relleno amarillo
+$lxd-progress-bar-support-1-fill: #20e38e; // Soporte 1 (esmeralda) — relleno
+$lxd-progress-bar-support-1-label-inside-color: #111e30; // Cifra sobre el relleno esmeralda
+$lxd-progress-bar-support-2-fill: #f05e1c; // Soporte 2 (cayena) — relleno
+$lxd-progress-bar-support-2-label-inside-color: #111e30; // Cifra sobre el relleno cayena
+$lxd-progress-bar-label-outside-color: #111e30; // Color de la cifra cuando va fuera, sobre el carril

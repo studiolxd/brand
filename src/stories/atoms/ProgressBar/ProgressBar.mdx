@@ -1,0 +1,81 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ProgressBarStories from "./ProgressBar.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { progressBarBaseTokens, progressBarVariantTokens, progressBarDarkTokens } from "../../../tokens/components/progress-bar";
+
+<Meta of={ProgressBarStories} />
+
+# ProgressBar
+
+Cuánto se ha completado de algo con final conocido: una subida, un cuestionario,
+un plan de formación. Si la espera no tiene final conocido —una petición al
+servidor—, lo que toca es `Spinner`.
+
+<Canvas of={ProgressBarStories.PorDefecto} />
+
+## Anatomía
+
+Un carril con un relleno que crece de izquierda a derecha, y la cifra del
+porcentaje. El carril es superficie clara secundaria; el relleno, color de marca.
+Esquinas rectas, como todo el sistema.
+
+La cifra se escribe **dentro** del relleno cuando cabe (a partir del 15%) y
+**fuera**, junto al borde del relleno, cuando no. Es un detalle de presentación:
+para quien usa un lector de pantalla el valor va siempre en `aria-valuenow`.
+
+<Canvas of={ProgressBarStories.UmbralDeLaCifra} />
+
+## Variantes
+
+<Canvas of={ProgressBarStories.Variantes} />
+
+## Tallas
+
+`sm` es una línea de 8px sin cifra, para cuando la barra acompaña a otra cosa;
+`md` (24px) es la de por defecto y `lg` (32px), la destacada. No son tallas de
+control —la barra no es un control—, son alturas de carril.
+
+<Canvas of={ProgressBarStories.Tallas} />
+
+<Canvas of={ProgressBarStories.Extremos} />
+
+## Superficie oscura
+
+El carril pasa al gris oscuro y la cifra de fuera, a blanco. Los rellenos de
+marca no cambian: contrastan en las dos superficies.
+
+<Canvas of={ProgressBarStories.SuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={progressBarBaseTokens} />
+
+### Variantes
+
+<TokenTable tokens={progressBarVariantTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={progressBarDarkTokens} />
+
+## Accesibilidad
+
+- La barra es `role="progressbar"` con `aria-valuenow`, `aria-valuemin`,
+  `aria-valuemax` y `aria-valuetext` (el porcentaje ya escrito).
+- `label` es el nombre accesible: di **qué** avanza («Progreso del proyecto»),
+  no «Barra». Es una prop con texto castellano por defecto («Progreso»), como
+  todo texto que emite un componente del sistema.
+- La cifra visible es `aria-hidden`: si no, el valor se anunciaría dos veces.
+- El valor se acota a 0–100 y se redondea, así que un cálculo con decimales o
+  fuera de rango no rompe el anuncio.
+- El avance usa la duración `base` del sistema: con
+  `prefers-reduced-motion: reduce` vale 0ms y el relleno salta a su medida sin
+  animar.
+- Cada relleno lleva su color de cifra emparejado; ninguna combinación baja de
+  AA.
+
+## Props
+
+<ArgTypes of={ProgressBarStories} />

@@ -1,24 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { ProgressBar } from './ProgressBar';
 
 const meta: Meta<typeof ProgressBar> = {
-  title: 'Por revisar/Atoms/ProgressBar',
+  title: 'Atoms/ProgressBar',
   component: ProgressBar,
-  tags: ['autodocs'],
   parameters: {
     layout: 'padded',
   },
   argTypes: {
     value: {
       control: { type: 'range', min: 0, max: 100, step: 1 },
+      description: 'Porcentaje completado (0–100).',
+    },
+    variant: {
+      control: { type: 'select' },
+      options: ['primary', 'accent-1', 'accent-2', 'support-1', 'support-2'],
+      description: 'Variante de color del relleno.',
+    },
+    size: {
+      control: { type: 'inline-radio' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Talla de la barra. En `sm` no se muestra la cifra.',
+    },
+    label: {
+      control: { type: 'text' },
+      description: 'Nombre accesible: qué está avanzando.',
     },
   },
-};
-
-export default meta;
-type Story = StoryObj<typeof ProgressBar>;
-
-export const Default: Story = {
   args: {
     value: 65,
     variant: 'primary',
@@ -27,83 +36,56 @@ export const Default: Story = {
   },
 };
 
-export const Empty: Story = {
-  args: {
-    value: 0,
-    variant: 'primary',
-    size: 'md',
-    label: 'Sin progreso',
-  },
+export default meta;
+type Story = StoryObj<typeof ProgressBar>;
+
+const columna: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'var(--spacing-4)',
 };
 
-export const LowValue: Story = {
-  name: 'Valor bajo (etiqueta exterior)',
-  args: {
-    value: 8,
-    variant: 'primary',
-    size: 'md',
-    label: 'Inicio del proceso',
-  },
-};
+export const PorDefecto: Story = {};
 
-export const Complete: Story = {
-  name: 'Completado (100%)',
-  args: {
-    value: 100,
-    variant: 'primary',
-    size: 'md',
-    label: 'Tarea completada',
-  },
-};
-
-export const SizeSmall: Story = {
-  name: 'Tamaño sm (sin etiqueta)',
-  args: {
-    value: 45,
-    variant: 'primary',
-    size: 'sm',
-    label: 'Progreso',
-  },
-};
-
-export const SizeLarge: Story = {
-  name: 'Tamaño lg',
-  args: {
-    value: 72,
-    variant: 'primary',
-    size: 'lg',
-    label: 'Progreso del proyecto',
-  },
-};
-
-export const AllVariants: Story = {
-  name: 'Todas las variantes',
+/** Cinco variantes de color de marca. */
+export const Variantes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <ProgressBar value={65} variant="primary"   label="Primary"   />
-      <ProgressBar value={65} variant="accent-1"  label="Accent 1"  />
-      <ProgressBar value={65} variant="accent-2"  label="Accent 2"  />
-      <ProgressBar value={65} variant="support-1" label="Support 1" />
-      <ProgressBar value={65} variant="support-2" label="Support 2" />
+    <div style={columna}>
+      <ProgressBar value={65} variant="primary" label="Primaria" />
+      <ProgressBar value={65} variant="accent-1" label="Acento 1" />
+      <ProgressBar value={65} variant="accent-2" label="Acento 2" />
+      <ProgressBar value={65} variant="support-1" label="Soporte 1" />
+      <ProgressBar value={65} variant="support-2" label="Soporte 2" />
     </div>
   ),
 };
 
-export const AllSizes: Story = {
-  name: 'Todos los tamaños',
+/** Tres tallas. En `sm` la barra es una línea y la cifra no se escribe. */
+export const Tallas: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <ProgressBar value={65} size="sm" label="Small"  />
-      <ProgressBar value={65} size="md" label="Medium" />
-      <ProgressBar value={65} size="lg" label="Large"  />
+    <div style={columna}>
+      <ProgressBar value={65} size="sm" label="Compacta" />
+      <ProgressBar value={65} size="md" label="Por defecto" />
+      <ProgressBar value={65} size="lg" label="Destacada" />
     </div>
   ),
 };
 
-export const LabelThreshold: Story = {
-  name: 'Umbral etiqueta interior/exterior',
+/** Los extremos: sin avance y completada. */
+export const Extremos: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+    <div style={columna}>
+      <ProgressBar value={0} label="Sin empezar" />
+      <ProgressBar value={100} label="Completado" />
+    </div>
+  ),
+};
+
+/** La cifra se escribe dentro del relleno cuando cabe (15% o más) y fuera cuando no. */
+export const UmbralDeLaCifra: Story = {
+  name: 'Umbral de la cifra',
+  render: () => (
+    <div style={{ ...columna, gap: 'var(--spacing-3)' }}>
       {[0, 5, 10, 14, 15, 20, 50, 85, 100].map((v) => (
         <ProgressBar key={v} value={v} label={`Progreso ${v}%`} />
       ))}
@@ -111,25 +93,59 @@ export const LabelThreshold: Story = {
   ),
 };
 
-export const DarkBackground: Story = {
-  tags: ['!dev'],
-  name: 'Sobre fondo oscuro',
+/** Sobre superficie oscura el carril y la cifra de fuera pasan a sus valores oscuros. */
+export const SuperficieOscura: Story = {
+  name: 'Superficie oscura',
+  parameters: { surface: 'dark' },
+  decorators: [
+    (Story) => (
+      <div className="surface-dark" style={{ padding: '2rem', background: 'var(--color-background-dark)' }}>
+        <Story />
+      </div>
+    ),
+  ],
   render: () => (
-    <div
-      className="surface-dark"
-      style={{
-        backgroundColor: '#111E30',
-        padding: '2rem',
-        borderRadius: '8px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-      }}
-    >
-      <ProgressBar value={65} variant="primary"   label="Primary"   />
-      <ProgressBar value={65} variant="accent-1"  label="Accent 1"  />
-      <ProgressBar value={65} variant="accent-2"  label="Accent 2"  />
-      <ProgressBar value={8}  variant="primary"   label="Valor bajo" />
+    <div style={columna}>
+      <ProgressBar value={65} variant="primary" label="Primaria" />
+      <ProgressBar value={65} variant="accent-1" label="Acento 1" />
+      <ProgressBar value={65} variant="accent-2" label="Acento 2" />
+      <ProgressBar value={8} variant="primary" label="Valor bajo" />
     </div>
   ),
+};
+
+/** Test: rol, valores ARIA y nombre accesible. */
+export const Contrato: Story = {
+  name: 'Test — rol y valores ARIA',
+  tags: ['!dev'],
+  args: { value: 65, label: 'Progreso del proyecto' },
+  play: async ({ canvasElement }) => {
+    const barra = within(canvasElement).getByRole('progressbar', { name: 'Progreso del proyecto' });
+    await expect(barra).toHaveAttribute('aria-valuenow', '65');
+    await expect(barra).toHaveAttribute('aria-valuemin', '0');
+    await expect(barra).toHaveAttribute('aria-valuemax', '100');
+    await expect(barra).toHaveAttribute('aria-valuetext', '65%');
+    // La cifra visible es decorativa: el valor lo anuncia aria-valuenow.
+    await expect(barra.querySelector('.progress-bar__label')).toHaveAttribute('aria-hidden', 'true');
+  },
+};
+
+/** Test: el valor se acota a 0–100 y se redondea. */
+export const ContratoValor: Story = {
+  name: 'Test — acotado y redondeo del valor',
+  tags: ['!dev'],
+  args: { value: 65 },
+  render: () => (
+    <>
+      <ProgressBar value={-20} label="Por debajo" />
+      <ProgressBar value={140} label="Por encima" />
+      <ProgressBar value={65.6} label="Con decimales" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('progressbar', { name: 'Por debajo' })).toHaveAttribute('aria-valuenow', '0');
+    await expect(canvas.getByRole('progressbar', { name: 'Por encima' })).toHaveAttribute('aria-valuenow', '100');
+    await expect(canvas.getByRole('progressbar', { name: 'Con decimales' })).toHaveAttribute('aria-valuenow', '66');
+  },
 };
