@@ -1,0 +1,96 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as OtpFieldStories from "./OtpField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { otpFieldBaseTokens, otpFieldErrorTokens, otpFieldHelperTokens } from "../../../tokens/molecules/otp-field";
+
+<Meta of={OtpFieldStories} />
+
+# OtpField
+
+El `OtpInput` como campo de formulario: etiqueta, celdas del código, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+<Canvas of={OtpFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`) y **por defecto se ve**. Va enlazada a la **primera celda** (`<id>-0`), que es donde entra el foco, y además nombra al grupo entero. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={OtpFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby` tanto a la primera celda como al grupo, y el error también marca `aria-invalid`.
+
+<Canvas of={OtpFieldStories.ConAyuda} />
+<Canvas of={OtpFieldStories.ConError} />
+
+## Longitud
+
+`length` decide cuántas celdas hay: 6 para un código por SMS o correo, 4 para un PIN. El valor viaja siempre como una sola cadena de dígitos.
+
+<Canvas of={OtpFieldStories.CuatroDigitos} />
+
+## Tallas
+
+`size` viaja a las celdas: cada una mide 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={OtpFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={OtpFieldStories.ConValor} />
+<Canvas of={OtpFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+`onChange` entrega el código completo (no el evento) y el `ref` va a la primera celda, que es la que react-hook-form enfoca al fallar la validación:
+
+```tsx
+<FormField
+  control={form.control}
+  name="codigo"
+  render={({ field, fieldState }) => (
+    <OtpField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Código de verificación"
+      length={6}
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={OtpFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta apunta a la primera celda y nombra el grupo (`role="group"`).
+- Cada celda tiene su propia etiqueta accesible («Dígito 3 de 6»), traducible con `digitLabel`.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- La primera celda lleva `autoComplete="one-time-code"`: el sistema operativo ofrece el código recibido.
+- Pegar el código completo en cualquier celda lo reparte por las siguientes.
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; las celdas son `Input`.
+
+### Base
+
+<TokenTable tokens={otpFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={otpFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={otpFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={OtpFieldStories} />

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { OtpInput } from './OtpInput';
 
 const meta: Meta<typeof OtpInput> = {
-  title: 'Por revisar/Atoms/OtpInput',
+  title: 'Atoms/OtpInput',
   component: OtpInput,
   parameters: {
     layout: 'padded',

@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { forwardRef, useCallback, useRef, useState } from 'react';
 import { Input } from '../Input/Input';
 import './OtpInput.css';
 
@@ -15,13 +15,30 @@ export interface OtpInputProps {
   readOnly?: boolean;
   error?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  /** Enlaza con el elemento de error/helper externo para screen readers */
+  /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
+  /** Ids de ayuda/error que describen el grupo de celdas (lo pone el campo). */
+  'aria-describedby'?: string;
+  /** Nombre accesible del grupo cuando va suelto. */
+  'aria-label'?: string;
   id?: string;
   name?: string;
+  /** Se llama al salir de la última celda (react-hook-form lo usa para validar). */
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  /** Se añade DESPUÉS de las clases propias del componente. */
+  className?: string;
+  /**
+   * Etiqueta accesible de cada celda. Default: `Dígito N de M` (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  digitLabel?: (index: number, length: number) => string;
 }
 
-export function OtpInput({
+/**
+ * Código de un solo uso repartido en celdas. El `ref` va a la **primera
+ * celda**: es la que react-hook-form enfoca al fallar la validación.
+ */
+export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function OtpInput({
   length,
   value,
   defaultValue,
@@ -32,9 +49,14 @@ export function OtpInput({
   error = false,
   size = 'md',
   describedBy,
+  'aria-describedby': ariaDescribedBy,
+  'aria-label': ariaLabel,
   id,
   name,
-}: OtpInputProps) {
+  onBlur,
+  className,
+  digitLabel = (index, total) => `Dígito ${index} de ${total}`,
+}: OtpInputProps, ref) {
   const isControlled = value !== undefined;
 
   const [internalCells, setInternalCells] = useState<string[]>(() => {
@@ -110,7 +132,10 @@ export function OtpInput({
     <div
       ref={containerRef}
       role="group"
-      aria-describedby={describedBy}
+      aria-label={ariaLabel}
+      aria-describedby={describedBy ?? ariaDescribedBy}
+      aria-invalid={error || undefined}
+      className={className}
       data-otp-input=""
       data-size={size}
       data-error={String(error)}
@@ -119,6 +144,7 @@ export function OtpInput({
       {Array.from({ length }, (_, i) => (
         <Input
           key={i}
+          ref={i === 0 ? ref : undefined}
           id={id ? `${id}-${i}` : undefined}
           name={name ? `${name}-${i}` : undefined}
           type="text"
@@ -126,18 +152,19 @@ export function OtpInput({
           error={error}
           disabled={disabled}
           readOnly={readOnly}
-          describedBy={i === 0 ? describedBy : undefined}
+          aria-describedby={i === 0 ? (describedBy ?? ariaDescribedBy) : undefined}
           inputMode="numeric"
           pattern="\d*"
           maxLength={1}
           autoComplete={i === 0 ? 'one-time-code' : 'off'}
-          ariaLabel={`Dígito ${i + 1} de ${length}`}
+          aria-label={digitLabel(i + 1, length)}
           value={cells[i]}
           onChange={handleChange(i)}
           onKeyDown={handleKeyDown(i)}
           onPaste={handlePaste(i)}
+          onBlur={onBlur}
         />
       ))}
     </div>
   );
-}
+});

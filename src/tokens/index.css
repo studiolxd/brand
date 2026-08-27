@@ -48,6 +48,10 @@
 @import "./molecules/textarea-field.css";
 @import "./molecules/select-field.css";
 @import "./molecules/multi-select-field.css";
+@import "./molecules/async-select-field.css";
+@import "./molecules/async-multi-select-field.css";
+@import "./molecules/input-phone-field.css";
+@import "./molecules/otp-field.css";
 @import "./molecules/checkbox-field.css";
 @import "./molecules/radio-field.css";
 @import "./components/select.css";

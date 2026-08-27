@@ -1,0 +1,85 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as NumberInputFieldStories from "./NumberInputField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { numberInputFieldBaseTokens, numberInputFieldErrorTokens, numberInputFieldHelperTokens } from "../../../tokens/molecules/number-input-field";
+
+<Meta of={NumberInputFieldStories} />
+
+# NumberInputField
+
+El `NumberInput` como campo de formulario: etiqueta, control con incremento y decremento, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+<Canvas of={NumberInputFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`), enlazada por `id`, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`. `labelHidden` la deja solo para los lectores de pantalla cuando el contexto ya dice qué es el campo (la celda de una tabla, una fila de carrito).
+
+<Canvas of={NumberInputFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados al control por `aria-describedby`, y el error también por `aria-invalid`. El borde en error usa el color de texto de error, nunca un fondo.
+
+<Canvas of={NumberInputFieldStories.ConAyuda} />
+<Canvas of={NumberInputFieldStories.ConError} />
+
+## Rango y decimales
+
+`min` y `max` acotan el valor y apagan el botón correspondiente al llegar al tope. Con `decimal`, el campo acepta coma o punto y `step` puede ser fraccionario.
+
+<Canvas of={NumberInputFieldStories.ConMinimoYMaximo} />
+<Canvas of={NumberInputFieldStories.ConDecimales} />
+
+## Tallas
+
+`size` viaja al control: mide 32, 40 o 48, las tallas del sistema. La etiqueta y los textos auxiliares no cambian de cuerpo.
+
+<Canvas of={NumberInputFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={NumberInputFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+El campo reenvía el `ref` y las props nativas al `<input>`, así que el `field` del `Controller` se le pasa entero. `onChange` recibe el número ya normalizado (no el evento), que es justo lo que react-hook-form guarda:
+
+```tsx
+<FormField
+  control={form.control}
+  name="cantidad"
+  render={({ field, fieldState }) => (
+    <NumberInputField {...field} min={0} label="Cantidad" errorMessage={fieldState.error?.message} />
+  )}
+/>
+```
+
+<Canvas of={NumberInputFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id`; sin `id`, el campo genera uno con `useId`.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- Los botones de incremento y decremento están fuera del tabulador: el teclado escribe en el campo.
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `NumberInput`.
+
+### Base
+
+<TokenTable tokens={numberInputFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={numberInputFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={numberInputFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={NumberInputFieldStories} />

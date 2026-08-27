@@ -1,3 +1,4 @@
+import { forwardRef, useMemo, type Ref } from 'react';
 import { Select as BaseSelect } from '@base-ui-components/react/select';
 import { getCountryCallingCode } from 'libphonenumber-js';
 import PhoneInputLib from 'react-phone-number-input';
@@ -64,7 +65,7 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', countr
   );
 }
 
-interface InputPhoneProps {
+export interface InputPhoneProps {
   value?: string;
   defaultCountry?: Country;
   placeholder?: string;
@@ -73,9 +74,19 @@ interface InputPhoneProps {
   size?: 'sm' | 'md' | 'lg';
   id?: string;
   name?: string;
+  /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
+  /** Ids de ayuda/error que describen el control (lo pone el campo). */
+  'aria-describedby'?: string;
+  /** Nombre accesible cuando el control va suelto. */
+  'aria-label'?: string;
+  /** Autocompletado del navegador (`tel`, `off`…). */
+  autoComplete?: string;
+  required?: boolean;
+  readOnly?: boolean;
   onChange?: (value: string | undefined) => void;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
   /**
    * aria-label del selector de país. Default: "País" (castellano).
    * Una app multiidioma debe pasarla traducida.
@@ -92,7 +103,11 @@ interface InputPhoneProps {
   container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 
-export function InputPhone({
+/**
+ * Campo de teléfono con selector de país. El `ref` va al `<input>` real del
+ * número, para que react-hook-form pueda registrarlo y enfocarlo.
+ */
+export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(function InputPhone({
   value,
   defaultCountry = 'ES',
   placeholder,
@@ -102,16 +117,41 @@ export function InputPhone({
   id,
   name,
   describedBy,
+  'aria-describedby': ariaDescribedBy,
+  'aria-label': ariaLabel,
+  autoComplete,
+  required,
+  readOnly,
   onChange,
   onBlur,
+  onFocus,
   countryLabel,
   container,
-}: InputPhoneProps) {
+}: InputPhoneProps, ref) {
   const classes = [
     'input-phone',
     error ? 'input-phone--error' : '',
     size !== 'md' ? `input-phone--${size}` : '',
   ].filter(Boolean).join(' ');
+
+  // `react-phone-number-input` da su `ref` al componente entero, no al input
+  // del número: el nuestro se cuela por el `inputComponent` y se fusiona con el
+  // que la librería inyecta para poder enfocar.
+  const numberInput = useMemo(
+    () =>
+      forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
+        function InputPhoneNumber(props, libRef) {
+          return (
+            <input
+              {...props}
+              ref={(node) => { assignRef(libRef, node); assignRef(ref, node); }}
+              className="input-phone__number"
+            />
+          );
+        },
+      ),
+    [ref],
+  );
 
   return (
     <PhoneInputLib
@@ -120,19 +160,27 @@ export function InputPhone({
       defaultCountry={defaultCountry}
       placeholder={placeholder}
       disabled={disabled}
+      readOnly={readOnly}
+      required={required}
+      autoComplete={autoComplete}
       id={id}
       name={name}
-      inputComponent={InputPhoneField}
+      inputComponent={numberInput}
       countrySelectComponent={CountrySelect}
       countrySelectProps={{ size, countryLabel, container }}
       onChange={(v) => onChange?.(v)}
       onBlur={onBlur}
-      numberInputProps={{ 'aria-describedby': describedBy }}
+      onFocus={onFocus}
+      numberInputProps={{
+        'aria-describedby': ariaDescribedBy ?? describedBy,
+        'aria-label': ariaLabel,
+        'aria-invalid': error || undefined,
+      }}
     />
   );
-}
+});
 
-const InputPhoneField = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
-  <input {...props} className="input-phone__number" />
-);
-InputPhoneField.displayName = 'InputPhoneField';
+function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
+  if (typeof target === 'function') target(node);
+  else if (target) (target as React.RefObject<T | null>).current = node;
+}

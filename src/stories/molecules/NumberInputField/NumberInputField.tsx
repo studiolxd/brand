@@ -1,35 +1,48 @@
+import { forwardRef, useId, type ComponentPropsWithoutRef } from 'react';
 import './NumberInputField.css';
 import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { NumberInput } from '../../atoms/NumberInput/NumberInput';
 
-export interface NumberInputFieldProps {
-  id: string;
+export interface NumberInputFieldProps
+  extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
+  /** `id` del control. Si no se pasa, se genera con `useId`. */
+  id?: string;
   label: string;
+  /**
+   * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
+   * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   */
   labelHidden?: boolean;
-  name?: string;
   value?: number;
   defaultValue?: number;
   min?: number;
   max?: number;
   step?: number;
+  /** Admite decimales (coma o punto). */
   decimal?: boolean;
-  disabled?: boolean;
-  readOnly?: boolean;
+  /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
+  /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
   errorMessage?: string;
+  /** Texto de ayuda, enlazado por `aria-describedby`. */
   helperText?: string;
   size?: 'sm' | 'md' | 'lg';
+  /** Recibe el valor ya normalizado, no el evento. */
   onChange?: (value: number) => void;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+  className?: string;
 }
 
-export function NumberInputField({
-  id,
+/**
+ * El `NumberInput` como campo de formulario. El `ref` y el resto de props
+ * nativas de `<input>` van al input real (react-hook-form, `name`, `onBlur`,
+ * `aria-*`, `data-*`…); el `className`, al contenedor.
+ */
+export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldProps>(function NumberInputField({
+  id: idProp,
   label,
-  labelHidden = true,
-  name,
+  labelHidden = false,
   value,
   defaultValue,
   min,
@@ -42,21 +55,26 @@ export function NumberInputField({
   error = false,
   errorMessage,
   helperText,
+  className,
   onChange,
-  onBlur,
-  onFocus,
-}: NumberInputFieldProps) {
+  ...rest
+}: NumberInputFieldProps, ref) {
   const size = useFormSize(sizeProp);
+  const generatedId = useId();
+  const id = idProp ?? generatedId;
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+  // Un mensaje de error implica estado de error, como en el resto de campos
+  const hasError = error || !!errorMessage;
 
   return (
-    <div className="number-input-field">
+    <div className={['number-input-field', className].filter(Boolean).join(' ')}>
       <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <NumberInput
+        ref={ref}
+        {...rest}
         id={id}
-        name={name}
         value={value}
         defaultValue={defaultValue}
         min={min}
@@ -66,12 +84,9 @@ export function NumberInputField({
         disabled={disabled}
         readOnly={readOnly}
         size={size}
-        error={error || !!errorMessage}
-        describedBy={describedBy}
-        ariaLabel={labelHidden ? label : undefined}
+        error={hasError}
+        aria-describedby={describedBy}
         onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
       />
       {errorMessage && (
         <span id={errorId} className="number-input-field__error" role="alert">{errorMessage}</span>
@@ -81,4 +96,4 @@ export function NumberInputField({
       )}
     </div>
   );
-}
+});

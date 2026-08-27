@@ -47,6 +47,10 @@
   --text-list-font-size: var(--text-font-size);
   --text-list-line-height: var(--text-line-height);
   --toast-title-font-size: var(--text-font-size);
+  --async-multi-select-field-error-font-size: var(--form-error-font-size);
+  --async-multi-select-field-helper-font-size: var(--form-helper-font-size);
+  --async-select-field-error-font-size: var(--form-error-font-size);
+  --async-select-field-helper-font-size: var(--form-helper-font-size);
   --date-picker-field-error-font-size: var(--form-error-font-size);
   --date-picker-field-helper-font-size: var(--form-helper-font-size);
   --date-time-field-error-font-size: var(--form-error-font-size);
@@ -55,10 +59,14 @@
   --file-upload-field-helper-font-size: var(--form-helper-font-size);
   --input-field-error-font-size: var(--form-error-font-size);
   --input-field-helper-font-size: var(--form-helper-font-size);
+  --input-phone-field-error-font-size: var(--form-error-font-size);
+  --input-phone-field-helper-font-size: var(--form-helper-font-size);
   --multi-select-field-error-font-size: var(--form-error-font-size);
   --multi-select-field-helper-font-size: var(--form-helper-font-size);
   --number-input-field-error-font-size: var(--form-error-font-size);
   --number-input-field-helper-font-size: var(--form-helper-font-size);
+  --otp-field-error-font-size: var(--form-error-font-size);
+  --otp-field-helper-font-size: var(--form-helper-font-size);
   --radio-field-sm-label-font-size: var(--text-paragraph-small-font-size);
   --radio-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --radio-field-label-font-size: var(--text-font-size);

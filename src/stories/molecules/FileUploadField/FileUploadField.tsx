@@ -1,37 +1,62 @@
+import { forwardRef, useId } from 'react';
 import './FileUploadField.css';
+import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { FileUpload } from '../../atoms/FileUpload/FileUpload';
 import type { FileUploadProps } from '../../atoms/FileUpload/FileUpload';
 
-export interface FileUploadFieldProps extends Omit<FileUploadProps, 'describedBy'> {
-  id: string;
+export interface FileUploadFieldProps
+  extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'> {
+  /** `id` del control. Si no se pasa, se genera con `useId`. */
+  id?: string;
   label: string;
+  /**
+   * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
+   * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   */
   labelHidden?: boolean;
+  /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
   errorMessage?: string;
+  /** Texto de ayuda, enlazado por `aria-describedby`. */
   helperText?: string;
+  /** Talla del sistema. Solo afecta a la etiqueta: la zona de arrastre no tiene tallas. */
+  size?: 'sm' | 'md' | 'lg';
 }
 
-export function FileUploadField({
-  id,
+/**
+ * El `FileUpload` como campo de formulario. El `ref` va al `<input type="file">`
+ * real (react-hook-form lo registra y lo enfoca al fallar la validación); el
+ * `className`, al contenedor.
+ */
+export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps>(function FileUploadField({
+  id: idProp,
   label,
   labelHidden = false,
   errorMessage,
   helperText,
-  error,
+  error = false,
+  size: sizeProp,
+  className,
   ...rest
-}: FileUploadFieldProps) {
+}: FileUploadFieldProps, ref) {
+  const size = useFormSize(sizeProp);
+  const generatedId = useId();
+  const id = idProp ?? generatedId;
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+  // Un mensaje de error implica estado de error, como en el resto de campos
+  const hasError = error || !!errorMessage;
 
   return (
-    <div className="file-upload-field">
-      <Label htmlFor={id} hidden={labelHidden}>{label}</Label>
+    <div className={['file-upload-field', className].filter(Boolean).join(' ')}>
+      <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <FileUpload
-        id={id}
-        error={error || !!errorMessage}
-        describedBy={describedBy}
+        ref={ref}
         {...rest}
+        id={id}
+        error={hasError}
+        aria-describedby={describedBy}
       />
       {errorMessage && (
         <span id={errorId} className="file-upload-field__error" role="alert">{errorMessage}</span>
@@ -41,4 +66,4 @@ export function FileUploadField({
       )}
     </div>
   );
-}
+});

@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { forwardRef, useState, useCallback, type ComponentPropsWithoutRef } from 'react';
 import './NumberInput.css';
 
-export interface NumberInputProps {
+export interface NumberInputProps
+  extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
   value?: number;
   defaultValue?: number;
   min?: number;
@@ -14,8 +15,12 @@ export interface NumberInputProps {
   error?: boolean;
   id?: string;
   name?: string;
+  /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
+  /** @deprecated Usa el atributo nativo `aria-label`. */
   ariaLabel?: string;
+  /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
+  className?: string;
   /**
    * aria-label del botón de decremento. Default: "Decrementar" (castellano).
    * Una app multiidioma debe pasarla traducida.
@@ -31,7 +36,13 @@ export interface NumberInputProps {
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
 
-export function NumberInput({
+/**
+ * Campo numérico con incremento y decremento. El `ref` y el resto de props
+ * nativas de `<input>` van al input real (react-hook-form, `aria-*`, `data-*`,
+ * `autoComplete`, `required`…); `className` se concatena a las clases del
+ * contenedor.
+ */
+export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(function NumberInput({
   value,
   defaultValue = 0,
   min,
@@ -48,10 +59,12 @@ export function NumberInput({
   ariaLabel,
   decrementLabel = 'Decrementar',
   incrementLabel = 'Incrementar',
+  className,
   onChange,
   onBlur,
   onFocus,
-}: NumberInputProps) {
+  ...rest
+}: NumberInputProps, ref) {
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<number>(defaultValue);
   const [focused, setFocused] = useState(false);
@@ -110,6 +123,7 @@ export function NumberInput({
     error ? 'number-input--error' : '',
     disabled ? 'number-input--disabled' : '',
     focused ? 'number-input--focused' : '',
+    className ?? '',
   ].filter(Boolean).join(' ');
 
   const isDecrementDisabled = disabled || readOnly || (min !== undefined && currentValue <= min);
@@ -128,18 +142,20 @@ export function NumberInput({
         −
       </button>
       <input
+        ref={ref}
         className="number-input__field"
         type="text"
         inputMode={decimal ? 'decimal' : 'numeric'}
         pattern={decimal ? '[0-9]*[.,]?[0-9]*' : '[0-9]*'}
+        aria-invalid={error || undefined}
+        aria-describedby={describedBy}
+        aria-label={ariaLabel}
+        {...rest}
         id={id}
         name={name}
         value={displayValue}
         disabled={disabled}
         readOnly={readOnly}
-        aria-invalid={error || undefined}
-        aria-describedby={describedBy}
-        aria-label={ariaLabel}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -156,4 +172,4 @@ export function NumberInput({
       </button>
     </div>
   );
-}
+});

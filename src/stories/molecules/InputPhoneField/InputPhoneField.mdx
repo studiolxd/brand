@@ -1,47 +1,92 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as InputPhoneFieldStories from "./InputPhoneField.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { inputFieldErrorTokens, inputFieldHelperTokens } from "../../../tokens/molecules/input-field";
+import { inputPhoneFieldBaseTokens, inputPhoneFieldErrorTokens, inputPhoneFieldHelperTokens } from "../../../tokens/molecules/input-phone-field";
 
 <Meta of={InputPhoneFieldStories} />
 
 # InputPhoneField
 
-Molécula que combina InputPhone con texto de ayuda y mensaje de error en un bloque accesible. Hereda los tokens de error y helper de `--input-field-error-*` y `--input-field-helper-*`, igual que InputField y TextareaField.
+El `InputPhone` como campo de formulario: etiqueta, selector de país, número, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
 
-## Por defecto
+<Canvas of={InputPhoneFieldStories.PorDefecto} />
 
-<Canvas of={InputPhoneFieldStories.Default} />
+## Etiqueta
 
-## Con texto de ayuda
+Siempre hay etiqueta (`label`), enlazada por `id` al `<input>` del número —no al selector de país, que tiene su propio nombre accesible (`countryLabel`)—. Sin `id`, el campo genera uno con `useId`.
 
-<Canvas of={InputPhoneFieldStories.WithHelper} />
+<Canvas of={InputPhoneFieldStories.EtiquetaOculta} />
 
-## Con error
+## Ayuda y error
 
-<Canvas of={InputPhoneFieldStories.WithError} />
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`.
 
-## Deshabilitado
+<Canvas of={InputPhoneFieldStories.ConAyuda} />
+<Canvas of={InputPhoneFieldStories.ConError} />
 
-<Canvas of={InputPhoneFieldStories.Disabled} />
+## País
 
----
+`defaultCountry` decide el prefijo con el que arranca el campo (`ES` por defecto). El valor que sale por `onChange` va siempre en formato E.164 (`+34600123456`), independientemente de cómo se escriba.
 
-## Theming oscuro
+<Canvas of={InputPhoneFieldStories.OtroPaisPorDefecto} />
 
-El campo adapta sus tokens por cascade desde `.surface-dark`. El dropdown del selector de país es un portal de Base UI — se controla con la prop `dark` que aplica la clase `__country-content--dark`. Ver documentación del átomo InputPhone.
+## Tallas
 
----
+`size` viaja al control: mide 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={InputPhoneFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={InputPhoneFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+`onChange` entrega el número ya normalizado (E.164), no el evento: se enchufa directo a `field.onChange`. El `ref` llega al `<input>` del número, así que react-hook-form puede enfocarlo al fallar la validación.
+
+```tsx
+<FormField
+  control={form.control}
+  name="telefono"
+  render={({ field, fieldState }) => (
+    <InputPhoneField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Teléfono"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={InputPhoneFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al input del número.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- El selector de país es un `Select` de Base UI con su propia etiqueta (`countryLabel`, «País» por defecto).
 
 ## Tokens
 
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `InputPhone`.
+
+### Base
+
+<TokenTable tokens={inputPhoneFieldBaseTokens} />
+
 ### Error
 
-<TokenTable tokens={inputFieldErrorTokens} />
+<TokenTable tokens={inputPhoneFieldErrorTokens} />
 
 ### Texto de ayuda
 
-<TokenTable tokens={inputFieldHelperTokens} />
+<TokenTable tokens={inputPhoneFieldHelperTokens} />
 
 ## Props
 

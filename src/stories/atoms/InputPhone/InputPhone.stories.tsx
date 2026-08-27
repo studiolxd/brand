@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { InputPhone } from './InputPhone';
 
 const meta: Meta<typeof InputPhone> = {
-  title: 'Por revisar/Atoms/InputPhone',
+  title: 'Atoms/InputPhone',
   component: InputPhone,
   parameters: {
     layout: 'padded',

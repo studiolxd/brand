@@ -1,0 +1,93 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FileUploadFieldStories from "./FileUploadField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { fileUploadFieldBaseTokens, fileUploadFieldErrorTokens, fileUploadFieldHelperTokens } from "../../../tokens/molecules/file-upload-field";
+
+<Meta of={FileUploadFieldStories} />
+
+# FileUploadField
+
+El `FileUpload` como campo de formulario: etiqueta, zona de arrastre, lista de archivos, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+<Canvas of={FileUploadFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`), enlazada por `id` al `<input type="file">` real, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={FileUploadFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Como el input real está oculto y fuera del tabulador, la ayuda y el estado de error viajan **también a la zona de arrastre**, que es lo que se enfoca de verdad.
+
+<Canvas of={FileUploadFieldStories.ConError} />
+
+Los errores por archivo (demasiado grande, tipo no admitido) los pone el propio control junto a cada archivo de la lista: `errorMessage` es el error del campo entero.
+
+## Restricciones
+
+`accept`, `maxSize`, `maxFiles` y `multiple` acotan lo que se admite, y el control las resume bajo la zona de arrastre.
+
+<Canvas of={FileUploadFieldStories.VariosConRestricciones} />
+
+## Dentro de un formulario
+
+<Canvas of={FileUploadFieldStories.DentroDeForm} />
+
+## Estados
+
+<Canvas of={FileUploadFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+`onChange` entrega la lista de `File` válidos, no el evento; el `ref` va al `<input type="file">` real:
+
+```tsx
+<FormField
+  control={form.control}
+  name="adjunto"
+  render={({ field, fieldState }) => (
+    <FileUploadField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Currículum"
+      accept=".pdf"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={FileUploadFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al input de archivo.
+- Ayuda y error llegan por `aria-describedby` al input **y** a la zona de arrastre, que es el elemento que recibe el foco (`role="button"`); el error marca `aria-invalid` en los dos.
+- La zona se activa con Enter y con Espacio, no solo con el ratón.
+- Todos los textos del control son props traducibles (`dropzoneLabel`, `removeFileLabel`, `tooLargeError`…).
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `FileUpload`.
+
+### Base
+
+<TokenTable tokens={fileUploadFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={fileUploadFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={fileUploadFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={FileUploadFieldStories} />

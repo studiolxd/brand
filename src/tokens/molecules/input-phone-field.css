@@ -1,0 +1,24 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --input-phone-field-gap: var(--spacing-2); /** Espacio entre label, control, helper y error */
+  --input-phone-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
+  --input-phone-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
+  --input-phone-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
+  --input-phone-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
+  --input-phone-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
+  --input-phone-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
+  --input-phone-field-error-color: var(--form-error-color); /** Color del mensaje de error */
+  --input-phone-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
+  --input-phone-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
+  --input-phone-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --input-phone-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --input-phone-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+}

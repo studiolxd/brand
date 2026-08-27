@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { NumberInput } from './NumberInput';
 
 const meta = {
-  title: 'Por revisar/Atoms/NumberInput',
+  title: 'Atoms/NumberInput',
   component: NumberInput,
   parameters: { layout: 'centered' },
   args: {

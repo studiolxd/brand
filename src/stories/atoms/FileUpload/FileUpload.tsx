@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect, useId } from 'react';
+import { forwardRef, useState, useCallback, useRef, useEffect, useId, type Ref } from 'react';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import './FileUpload.css';
 
@@ -15,8 +15,19 @@ export interface FileUploadProps {
   error?: boolean;
   id?: string;
   name?: string;
+  /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
+  /** @deprecated Usa el atributo nativo `aria-label`. */
   ariaLabel?: string;
+  /** Ids de ayuda/error que describen el control (lo pone el campo). */
+  'aria-describedby'?: string;
+  /** Nombre accesible cuando el control va suelto. */
+  'aria-label'?: string;
+  required?: boolean;
+  /** Se llama al salir del `<input type="file">` (react-hook-form lo usa para validar). */
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  /** Se añade DESPUÉS de las clases propias del componente. */
+  className?: string;
   /**
    * Texto visible de la zona de arrastre. Default: "Arrastra archivos aquí" (castellano).
    * Una app multiidioma debe pasarlo traducido — igual que el resto de props de texto.
@@ -97,7 +108,17 @@ function revokeThumbUrl(file: File): void {
   }
 }
 
-export function FileUpload({
+function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
+  if (typeof target === 'function') target(node);
+  else if (target) (target as React.RefObject<T | null>).current = node;
+}
+
+/**
+ * Zona de subida de archivos. El `ref` va al `<input type="file">` real, para
+ * que react-hook-form pueda registrarlo y enfocarlo; `className` se concatena
+ * a las clases del contenedor.
+ */
+export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function FileUpload({
   multiple = false,
   accept,
   maxSize,
@@ -112,6 +133,11 @@ export function FileUpload({
   name,
   describedBy,
   ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-label': ariaLabelNative,
+  required,
+  onBlur,
+  className,
   dropzoneLabel = 'Arrastra archivos aquí',
   dropzoneActiveLabel = 'Suelta los archivos aquí',
   dropzoneHintLabel = 'o haz clic para seleccionar',
@@ -122,7 +148,7 @@ export function FileUpload({
   removeFileLabel = (fileName) => `Eliminar ${fileName}`,
   tooLargeError = (size) => `Archivo demasiado grande (máx. ${size})`,
   invalidTypeError = 'Tipo de archivo no permitido',
-}: FileUploadProps) {
+}: FileUploadProps, ref) {
   const isControlled = value !== undefined;
   const [internalFiles, setInternalFiles] = useState<File[]>(defaultValue);
   const [fileErrors, setFileErrors] = useState<Map<File, string>>(new Map());
@@ -216,6 +242,7 @@ export function FileUpload({
     error ? 'file-upload--error' : '',
     disabled ? 'file-upload--disabled' : '',
     files.length > 0 ? 'file-upload--has-files' : '',
+    className ?? '',
   ].filter(Boolean).join(' ');
 
   const subtextParts: string[] = [];
@@ -227,16 +254,19 @@ export function FileUpload({
     <div className={wrapperClasses}>
       <VisuallyHidden>
         <input
-          ref={inputRef}
+          ref={(node) => { inputRef.current = node; assignRef(ref, node); }}
           type="file"
           id={inputId}
           name={name}
           multiple={multiple}
           accept={accept}
           disabled={disabled}
-          aria-label={ariaLabel}
-          aria-describedby={describedBy}
+          required={required}
+          aria-label={ariaLabel ?? ariaLabelNative}
+          aria-describedby={describedBy ?? ariaDescribedBy}
+          aria-invalid={error || undefined}
           onChange={handleInputChange}
+          onBlur={onBlur}
           tabIndex={-1}
         />
       </VisuallyHidden>
@@ -250,6 +280,10 @@ export function FileUpload({
         role="button"
         tabIndex={disabled ? -1 : 0}
         aria-disabled={disabled || undefined}
+        /* El input real está oculto y fuera del tabulador: la zona de arrastre
+           es lo que se enfoca, así que es la que lleva ayuda, error y estado. */
+        aria-describedby={describedBy ?? ariaDescribedBy}
+        aria-invalid={error || undefined}
       >
         <svg
           className="file-upload__icon"
@@ -361,4 +395,4 @@ export function FileUpload({
       )}
     </div>
   );
-}
+});

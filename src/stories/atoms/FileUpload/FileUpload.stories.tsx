@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FileUpload } from './FileUpload';
 
 const meta = {
-  title: 'Por revisar/Atoms/FileUpload',
+  title: 'Atoms/FileUpload',
   component: FileUpload,
   parameters: { layout: 'padded' },
   args: {
