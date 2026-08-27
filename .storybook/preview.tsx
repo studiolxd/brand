@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { Preview, Decorator } from '@storybook/react-vite'
 import '../src/index.css'
 import './preview.css'
@@ -9,17 +10,27 @@ import studiolxdTheme from './studiolxdTheme'
  *   para explorar cualquier story en oscuro sin duplicarla;
  * - desde la propia story, con `parameters: { surface: 'dark' }`, para una
  *   story que ENSEÑA ese uso en el catálogo («En superficie oscura»).
- * En ambos casos envuelve en `.surface-dark`: el lienzo del sistema (fondo y
- * color emparejados en base.css), el mismo que pinta `Container surface="dark"`.
+ * En vez de envolver en `.surface-dark` (que no llega a los portales — Popover,
+ * Menu, Tooltip, Modal, Select renderizan fuera del árbol de la story, en
+ * `document.body`), pone `data-theme="dark"` en `document.documentElement`:
+ * las custom properties remapeadas por surface-dark-* cascadean por herencia
+ * a cualquier descendiente del `<html>`, portales incluidos. `body` ya pinta
+ * su propio fondo/color desde esos tokens (`base.css`), así que el lienzo del
+ * canvas queda coherente sin envolver en un div aparte.
  */
 const withSurface: Decorator = (Story, context) => {
   const isDark = context.globals.backgrounds?.value === 'dark' || context.parameters.surface === 'dark';
-  if (!isDark) return <Story />;
-  return (
-    <div className="surface-dark" style={{ minHeight: '100%' }}>
-      <Story />
-    </div>
-  );
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- decorator de Storybook, no un componente: se invoca como parte del render de cada story y puede usar hooks con seguridad.
+  useEffect(() => {
+    if (!isDark) return;
+    document.documentElement.setAttribute('data-theme', 'dark');
+    return () => {
+      document.documentElement.removeAttribute('data-theme');
+    };
+  }, [isDark]);
+
+  return <Story />;
 };
 
 const preview: Preview = {

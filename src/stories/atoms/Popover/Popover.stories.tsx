@@ -85,6 +85,17 @@ export const Controlado: Story = {
   },
 };
 
+/** El panel es un portal fuera del árbol de la story: hereda el tema oscuro de `document.documentElement`, no de un envoltorio local. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    label: 'Detalles',
+    trigger: <Button>Abrir popover</Button>,
+    children: <Paragraph size="small">Contenido libre dentro del panel flotante.</Paragraph>,
+  },
+};
+
 /** Test: el disparador anuncia el panel, el panel es un diálogo con nombre y Escape cierra. */
 export const Contrato: Story = {
   name: 'Test — contrato ARIA y cierre con Escape',
