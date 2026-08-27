@@ -83,10 +83,6 @@ En la web manda la marca: el logotipo va a talla `xl` (64px, la talla ilustrativ
 `width` se pasa tal cual al `Container`: por defecto `xl` (1280px). El fondo no
 depende de esta prop, siempre cubre la ventana entera.
 
-## El marco del panel
-
-El contenido del panel —índice y ajustes— va dentro de un **marco**: un rectángulo con borde (`panel-frame-border-*`), separado del borde del panel por el mismo aire en los cuatro lados (`panel-frame-margin`). El aire vertical interior es del marco (`panel-padding-block`, `panel-padding-block-end`); el lateral, el del `Container`.
-
 ## La marca y el borde
 
 El trazado del logotipo trae su propio espacio de seguridad, así que con el aire lateral del `Container` encima se veía descolgado del borde del contenido. La cabecera lo descuenta (`logo-margin-inline-start` = −`container.padding-inline`): la tinta de la marca queda alineada con el contenido, y el aire visible es el del propio logotipo.

@@ -5,8 +5,7 @@
 :root {
   --site-header-gap-narrow: var(--spacing-2); /** Separación entre marca y controles en teléfono (por debajo de sm) */
   --site-header-gap: var(--spacing-3); /** Separación entre logo y controles */
-  --site-header-panel-frame-margin: var(--spacing-4); /** Aire entre el borde del panel y el marco del contenido, por los cuatro lados */
-  --site-header-panel-padding-block-end: var(--spacing-5); /** Aire inferior dentro del marco, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba */
+  --site-header-panel-padding-block-end: var(--spacing-5); /** Aire inferior del panel, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba */
   --site-header-panel-z-index: var(--z-index-modal); /** El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante */
   --site-header-panel-transition-duration: var(--motion-duration-slow); /** Entrada y salida del panel: cambio de contexto */
   --site-header-panel-transition-easing: var(--motion-easing-in-out); /** Curva del panel: movimiento */
@@ -18,9 +17,7 @@
   --site-header-bg: var(--color-background-light); /** Fondo de la barra */
   --site-header-z-index: var(--app-header-z-index); /** Capa z — sobre el contenido, bajo los paneles flotantes */
   --site-header-panel-bg: var(--color-background-light); /** Fondo del panel de navegación */
-  --site-header-panel-frame-border-width: var(--border-width-default); /** Grosor del marco que encierra el contenido del panel */
-  --site-header-panel-frame-border-color: var(--color-primary); /** Color del marco del panel (el de la línea del LegalFooter) */
-  --site-header-panel-padding-block: var(--section-padding-block-xl); /** Aire superior dentro del marco, entre su borde y el índice */
+  --site-header-panel-padding-block: var(--section-padding-block-xl); /** Aire superior del panel, entre la barra y el índice */
   --site-header-height-narrow: calc(var(--site-header-content-height-narrow) + 2 * var(--app-header-padding-block)); /** Alto de la barra en teléfono (56px, la misma que la barra de aplicación) */
   --site-header-height-compact: calc(var(--site-header-content-height-compact) + 2 * var(--app-header-padding-block)); /** Alto de la barra en móvil (64px) */
   --site-header-height: calc(var(--site-header-content-height) + 2 * var(--app-header-padding-block)); /** Alto de la barra: el logotipo más el aire del sistema arriba y abajo (80px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan */
@@ -32,5 +29,4 @@
 html.dark {
   --site-header-bg: var(--color-background-dark); /** Fondo de la barra — surface-dark */
   --site-header-panel-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
-  --site-header-panel-frame-border-color: var(--color-text-on-dark); /** Marco del panel — surface-dark */
 }

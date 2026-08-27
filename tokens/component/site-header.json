@@ -13,11 +13,8 @@
     "z-index":        { "$value": "{app-header.z-index}",     "$type": "number",    "$description": "Capa z — sobre el contenido, bajo los paneles flotantes" },
 
     "panel-bg":                  { "$value": "{color.background.light}", "$type": "color",     "$description": "Fondo del panel de navegación" },
-    "panel-frame-margin":        { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Aire entre el borde del panel y el marco del contenido, por los cuatro lados" },
-    "panel-frame-border-width":  { "$value": "{border-width.default}",    "$type": "dimension", "$description": "Grosor del marco que encierra el contenido del panel" },
-    "panel-frame-border-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del marco del panel (el de la línea del LegalFooter)" },
-    "panel-padding-block":       { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire superior dentro del marco, entre su borde y el índice" },
-    "panel-padding-block-end":   { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Aire inferior dentro del marco, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba" },
+    "panel-padding-block":       { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire superior del panel, entre la barra y el índice" },
+    "panel-padding-block-end":   { "$value": "{spacing.5}",               "$type": "dimension", "$description": "Aire inferior del panel, bajo los ajustes (idioma, tema), que van pegados al fondo: menos que arriba" },
     "panel-z-index":             { "$value": "{z-index.modal}",          "$type": "number",    "$description": "El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante" },
     "panel-transition-duration": { "$value": "{motion.duration.slow}",   "$type": "number",    "$description": "Entrada y salida del panel: cambio de contexto" },
     "panel-transition-easing":   { "$value": "{motion.easing.in-out}",   "$type": "string",    "$description": "Curva del panel: movimiento" },
@@ -25,7 +22,6 @@
     "settings-gap":               { "$value": "{spacing.5}",           "$type": "dimension", "$description": "Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil" },
 
     "surface-dark-bg":       { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la barra — surface-dark" },
-    "surface-dark-panel-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" },
-    "surface-dark-panel-frame-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Marco del panel — surface-dark" }
+    "surface-dark-panel-bg": { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del panel — surface-dark" }
   }
 }

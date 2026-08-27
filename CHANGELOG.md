@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.7.0
+
+### Cambiado
+
+- `SiteHeader`: fuera el marco con borde del panel (tokens `panel-frame-*`
+  retirados). El panel vuelve a llevar su aire vertical directamente
+  (`panel-padding-block`, `panel-padding-block-end`).
+
 ## v19.6.0
 
 ### Añadido
