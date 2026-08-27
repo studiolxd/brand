@@ -14,16 +14,18 @@ export const MENU_GLYPH = (() => {
 })();
 
 const ICONS = {
+  // Flecha: la punta es un tercio del largo y abre a 45° (proporción de la
+  // marca), en trazo como el resto de iconos.
   arrow: {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M0 12 H24 M18 6 L24 12 L18 18" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M0 12 H24 M16 4 L24 12 L16 20" />
     ),
   },
   'arrow-left': {
     viewBox: '0 0 24 24',
     render: () => (
-      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M24 12 H0 M6 6 L0 12 L6 18" />
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M24 12 H0 M8 4 L0 12 L8 20" />
     ),
   },
   chevron: {

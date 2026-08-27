@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.9.0
+
+### Cambiado
+
+- Iconos `arrow` y `arrow-left`: la punta es un tercio del largo y abre a 45°
+  (la proporción de la flecha de la marca), en trazo.
+
 ## v19.8.1
 
 ### Corregido

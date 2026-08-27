@@ -23,7 +23,7 @@ var r = (() => {
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M0 12 H24 M18 6 L24 12 L18 18"
+			d: "M0 12 H24 M16 4 L24 12 L16 20"
 		})
 	},
 	"arrow-left": {
@@ -31,7 +31,7 @@ var r = (() => {
 		render: () => /* @__PURE__ */ t("path", {
 			vectorEffect: "non-scaling-stroke",
 			strokeWidth: "1",
-			d: "M24 12 H0 M6 6 L0 12 L6 18"
+			d: "M24 12 H0 M8 4 L0 12 L8 20"
 		})
 	},
 	chevron: {
