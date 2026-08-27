@@ -1,0 +1,26 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --chat-shell-list-narrow-max-height: 12rem; /** Altura máxima de la columna de conversaciones cuando la maqueta cae a una sola columna: pasa a ser una tira con scroll propio sobre el hilo, no media pantalla */
+  --chat-shell-border-style: solid; /** Estilo de las líneas que separan las tres zonas */
+  --chat-shell-list-width: var(--sidebar-width); /** Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación */
+  --chat-shell-list-padding-block: var(--spacing-4); /** Aire vertical de la columna de conversaciones */
+  --chat-shell-header-padding-block: var(--spacing-3); /** Aire vertical de la cabecera del hilo */
+  --chat-shell-header-padding-inline: var(--spacing-6); /** Aire horizontal de la cabecera del hilo */
+  --chat-shell-header-gap: var(--spacing-3); /** Separación entre lo que va en la cabecera del hilo */
+  --chat-shell-composer-padding-block: var(--spacing-4); /** Aire vertical de la zona de escribir */
+  --chat-shell-composer-padding-inline: var(--spacing-6); /** Aire horizontal de la zona de escribir */
+  --chat-shell-breakpoint: var(--breakpoint-lg); /** Donde el armazón pasa de dos columnas a una. El mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral */
+  --chat-shell-border-width: var(--border-width-default); /** Grosor de las líneas que separan las tres zonas */
+  --chat-shell-border-color: var(--color-primary); /** Color de las líneas que separan las tres zonas. Es el único separador: el sistema no proyecta sombra */
+  --chat-shell-bg: var(--color-background-light); /** Fondo del armazón */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --chat-shell-border-color: var(--color-text-on-dark); /** Color de las líneas que separan las tres zonas — superficie oscura */
+  --chat-shell-bg: var(--color-background-dark); /** Fondo del armazón — superficie oscura */
+}

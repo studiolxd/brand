@@ -430,6 +430,10 @@
       "types": "./dist/_types/atoms/MessageBubble/MessageBubble.d.ts",
       "import": "./dist/message-bubble.js"
     },
+    "./chat-shell": {
+      "types": "./dist/_types/templates/ChatShell/ChatShell.d.ts",
+      "import": "./dist/chat-shell.js"
+    },
     "./conversation-list": {
       "types": "./dist/_types/molecules/ConversationList/ConversationList.d.ts",
       "import": "./dist/conversation-list.js"

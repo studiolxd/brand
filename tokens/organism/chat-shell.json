@@ -1,0 +1,23 @@
+{
+  "chat-shell": {
+    "list-width":            { "$value": "{sidebar.width}",         "$type": "dimension", "$description": "Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación" },
+    "list-padding-block":    { "$value": "{spacing.4}",             "$type": "dimension", "$description": "Aire vertical de la columna de conversaciones" },
+    "list-narrow-max-height":{ "$value": "12rem",                   "$type": "dimension", "$description": "Altura máxima de la columna de conversaciones cuando la maqueta cae a una sola columna: pasa a ser una tira con scroll propio sobre el hilo, no media pantalla" },
+
+    "header-padding-block":  { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Aire vertical de la cabecera del hilo" },
+    "header-padding-inline": { "$value": "{spacing.6}",             "$type": "dimension", "$description": "Aire horizontal de la cabecera del hilo" },
+    "header-gap":            { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Separación entre lo que va en la cabecera del hilo" },
+
+    "composer-padding-block":  { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Aire vertical de la zona de escribir" },
+    "composer-padding-inline": { "$value": "{spacing.6}",           "$type": "dimension", "$description": "Aire horizontal de la zona de escribir" },
+
+    "border-width":          { "$value": "{border-width.default}",  "$type": "dimension", "$description": "Grosor de las líneas que separan las tres zonas" },
+    "border-style":          { "$value": "solid",                   "$type": "string",    "$description": "Estilo de las líneas que separan las tres zonas" },
+    "border-color":          { "$value": "{color.primary}",         "$type": "color",     "$description": "Color de las líneas que separan las tres zonas. Es el único separador: el sistema no proyecta sombra" },
+    "bg":                    { "$value": "{color.background.light}", "$type": "color",    "$description": "Fondo del armazón" },
+    "breakpoint":            { "$value": "{breakpoint.lg}",         "$type": "dimension", "$description": "Donde el armazón pasa de dos columnas a una. El mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral" },
+
+    "surface-dark-border-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Color de las líneas que separan las tres zonas — superficie oscura" },
+    "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del armazón — superficie oscura" }
+  }
+}

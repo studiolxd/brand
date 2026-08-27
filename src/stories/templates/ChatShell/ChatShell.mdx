@@ -1,0 +1,74 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ChatShellStories from "./ChatShell.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { chatShellTokens, chatShellDarkTokens } from "../../../tokens/components/chat-shell";
+
+<Meta of={ChatShellStories} />
+
+# ChatShell
+
+El **armazón de una pantalla de chat**: tres zonas —la columna de conversaciones, el hilo y la caja de escribir— colocadas, separadas por línea y con el scroll en el sitio correcto.
+
+Es **solo maqueta**. No lleva estado, no sabe qué es un mensaje y no habla con ningún modelo: quién está abierto, qué se manda y qué llega lo lleva el producto y entra por los slots. Antes esto era una story que montaba a mano `AppShell` + `Sidebar` + los tres componentes de chat, sin componente detrás y sin poder usarse fuera de Storybook.
+
+<Canvas of={ChatShellStories.PorDefecto} />
+
+## Las tres zonas
+
+| Slot | Qué va | Qué hace el armazón |
+| --- | --- | --- |
+| `list` | Un `ConversationList` | Columna lateral con scroll propio |
+| `header` | El título de la conversación y sus controles | Fila fija arriba, con línea debajo |
+| `children` | Un `ConversationThread` | La zona que crece, **la única con scroll** |
+| `composer` | Un `MessageComposer` | Fila fija abajo, con línea encima |
+
+Todos menos `children` son opcionales. Lo que hace que un chat se comporte es que **el scroll vive solo en el hilo**: la cabecera y la caja de escribir se quedan quietas mientras la conversación se desplaza detrás.
+
+<Canvas of={ChatShellStories.Minimo} />
+
+## Con y sin columna
+
+<Canvas of={ChatShellStories.SinColumna} />
+
+Dentro de una aplicación, la columna de conversaciones suele vivir en el `Sidebar` del `AppShell` —que ya sabe recogerse a rail, abrirse como cajón en móvil y cerrarse al navegar—, y entonces `ChatShell` se monta **sin `list`**. El slot está para el chat que va suelto: una página pública, un panel embebido, una demo.
+
+## Responsive
+
+Por debajo de `--breakpoint-lg` —el mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral— el armazón cae a **una sola columna**: la lista se coloca arriba como una tira con su propio scroll y altura acotada, y el hilo se lleva el alto que sobra.
+
+Es una decisión de maqueta, sin JavaScript ni estado: `ChatShell` no monta un cajón lateral porque el sistema ya tiene uno, el del `Sidebar`. Un chat de móvil que necesite la lista a pantalla completa se monta dentro de un `AppShell` y usa ese cajón.
+
+## Superficie oscura
+
+<Canvas of={ChatShellStories.SuperficieOscura} />
+
+Fondo y líneas de separación tienen par oscuro. No hay sombras: las tres zonas se separan con línea de 1px, como todo el sistema.
+
+## La pantalla entera
+
+<Canvas of={ChatShellStories.Integracion} />
+
+Aquí está funcionando de verdad: abrir conversaciones, borrarlas, escribir, ver el indicador mientras se genera la respuesta y recibirla. El estado lo lleva la story, que es exactamente el papel que le toca al producto.
+
+## Accesibilidad
+
+- La columna de conversaciones es un **`<aside>` con nombre accesible** (`listLabel`), y dentro va el `<nav>` del propio `ConversationList`: dos capas con nombre, porque la columna puede llevar más cosas que la lista.
+- La cabecera es un **`<header>`**; el título que se le pase debería ser un encabezado real (`Heading`), para que el chat aparezca en el índice de encabezados.
+- El **hilo es la única zona con scroll**, así que es la única que hay que poder recorrer con teclado. Su `role="log"` lo pone `ConversationThread`.
+- El armazón **no captura el foco** ni reordena nada: el orden de tabulación es el del DOM —lista, cabecera, hilo, composer—.
+
+## Tokens
+
+<TokenTable tokens={chatShellTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={chatShellDarkTokens} />
+
+## Props
+
+<ArgTypes of={ChatShellStories} />
+
+## Internacionalización
+
+`listLabel` es el único texto que emite el armazón. Ver **Foundations › Internacionalización**.

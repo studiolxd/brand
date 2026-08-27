@@ -1,0 +1,16 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-chat-shell-list-width: 15rem; // Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación
+$lxd-chat-shell-list-padding-block: 1rem; // Aire vertical de la columna de conversaciones
+$lxd-chat-shell-list-narrow-max-height: 12rem; // Altura máxima de la columna de conversaciones cuando la maqueta cae a una sola columna: pasa a ser una tira con scroll propio sobre el hilo, no media pantalla
+$lxd-chat-shell-header-padding-block: 0.75rem; // Aire vertical de la cabecera del hilo
+$lxd-chat-shell-header-padding-inline: 2rem; // Aire horizontal de la cabecera del hilo
+$lxd-chat-shell-header-gap: 0.75rem; // Separación entre lo que va en la cabecera del hilo
+$lxd-chat-shell-composer-padding-block: 1rem; // Aire vertical de la zona de escribir
+$lxd-chat-shell-composer-padding-inline: 2rem; // Aire horizontal de la zona de escribir
+$lxd-chat-shell-border-width: 1px; // Grosor de las líneas que separan las tres zonas
+$lxd-chat-shell-border-style: solid; // Estilo de las líneas que separan las tres zonas
+$lxd-chat-shell-border-color: #111e30; // Color de las líneas que separan las tres zonas. Es el único separador: el sistema no proyecta sombra
+$lxd-chat-shell-bg: #ffffff; // Fondo del armazón
+$lxd-chat-shell-breakpoint: 1024px; // Donde el armazón pasa de dos columnas a una. El mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral

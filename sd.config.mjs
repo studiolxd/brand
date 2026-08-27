@@ -117,6 +117,7 @@ const filters = {
   'conversation-list':  (t) => t.path[0] === 'conversation-list',
   'user-message':       (t) => t.path[0] === 'user-message',
   'assistant-message':  (t) => t.path[0] === 'assistant-message',
+  'chat-shell':         (t) => t.path[0] === 'chat-shell',
 };
 
 function cssFile(destination, filterKey) {
@@ -243,6 +244,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/conversation-list.css', 'conversation-list'),
         cssFile('molecules/user-message.css',      'user-message'),
         cssFile('molecules/assistant-message.css', 'assistant-message'),
+        cssFile('molecules/chat-shell.css',        'chat-shell'),
         cssFile('molecules/input-phone-field.css',  'input-phone-field'),
         cssFile('molecules/otp-field.css',          'otp-field'),
         cssFile('molecules/async-select-field.css', 'async-select-field'),
@@ -358,6 +360,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_conversation-list.scss', 'conversation-list'),
         scssFile('molecules/_user-message.scss',      'user-message'),
         scssFile('molecules/_assistant-message.scss', 'assistant-message'),
+        scssFile('molecules/_chat-shell.scss',        'chat-shell'),
         scssFile('molecules/_input-phone-field.scss',  'input-phone-field'),
         scssFile('molecules/_otp-field.scss',          'otp-field'),
         scssFile('molecules/_async-select-field.scss', 'async-select-field'),

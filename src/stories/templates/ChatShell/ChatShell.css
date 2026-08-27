@@ -1,0 +1,78 @@
+/* Una sola columna de partida: la columna de conversaciones queda arriba,
+   como una tira con scroll propio, y el hilo se lleva el alto que sobra.
+   A partir del punto de ruptura se abre en dos columnas. */
+.chat-shell {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  min-block-size: 0;
+  background-color: var(--chat-shell-bg);
+}
+
+.chat-shell__list {
+  flex-shrink: 0;
+  max-block-size: var(--chat-shell-list-narrow-max-height);
+  overflow-y: auto;
+  padding-block: var(--chat-shell-list-padding-block);
+  border-block-end-width: var(--chat-shell-border-width);
+  border-block-end-style: var(--chat-shell-border-style);
+  border-block-end-color: var(--chat-shell-border-color);
+}
+
+/* El hilo, la cabecera y el composer comparten columna: el que crece es el
+   hilo, y es el único con scroll. */
+.chat-shell__main {
+  flex: 1;
+  min-block-size: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-shell__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--chat-shell-header-gap);
+  padding-block: var(--chat-shell-header-padding-block);
+  padding-inline: var(--chat-shell-header-padding-inline);
+  border-block-end-width: var(--chat-shell-border-width);
+  border-block-end-style: var(--chat-shell-border-style);
+  border-block-end-color: var(--chat-shell-border-color);
+}
+
+.chat-shell__thread {
+  flex: 1;
+  min-block-size: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.chat-shell__composer {
+  flex-shrink: 0;
+  padding-block: var(--chat-shell-composer-padding-block);
+  padding-inline: var(--chat-shell-composer-padding-inline);
+  border-block-start-width: var(--chat-shell-border-width);
+  border-block-start-style: var(--chat-shell-border-style);
+  border-block-start-color: var(--chat-shell-border-color);
+}
+
+/* Dos columnas: la de conversaciones a un lado, con su propio scroll, y el
+   resto del armazón al lado. El punto de ruptura es el mismo en el que el
+   chrome de aplicación pasa de barra superior a barra lateral. */
+@media (min-width: 1024px) /* --breakpoint-lg */ {
+  .chat-shell.chat-shell--with-list {
+    flex-direction: row;
+  }
+
+  .chat-shell.chat-shell--with-list .chat-shell__list {
+    inline-size: var(--chat-shell-list-width);
+    max-block-size: none;
+    block-size: 100%;
+    border-block-end: none;
+    border-inline-end-width: var(--chat-shell-border-width);
+    border-inline-end-style: var(--chat-shell-border-style);
+    border-inline-end-color: var(--chat-shell-border-color);
+  }
+}

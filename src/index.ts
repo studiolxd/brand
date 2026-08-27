@@ -244,6 +244,8 @@ export { Hero } from './stories/sections/Hero/Hero';
 export type { HeroProps } from './stories/sections/Hero/Hero';
 
 // ─── Templates ──────────────────────────────────────────────
+export { ChatShell } from './stories/templates/ChatShell/ChatShell';
+export type { ChatShellProps } from './stories/templates/ChatShell/ChatShell';
 export { ErrorPage } from './stories/templates/ErrorPage/ErrorPage';
 export type { ErrorPageProps } from './stories/templates/ErrorPage/ErrorPage';
 export { NotFoundPage } from './stories/templates/NotFoundPage/NotFoundPage';

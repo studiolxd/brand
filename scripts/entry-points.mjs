@@ -113,6 +113,7 @@ export const entryPoints = {
   // Templates
   'not-found-page':      'src/stories/templates/NotFoundPage/NotFoundPage.tsx',
   'error-page':          'src/stories/templates/ErrorPage/ErrorPage.tsx',
+  'chat-shell':          'src/stories/templates/ChatShell/ChatShell.tsx',
   // Organisms
   'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
