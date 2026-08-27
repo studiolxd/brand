@@ -5,6 +5,8 @@ $lxd-link-color: #111e30; // El enlace no tiene color propio: es texto, y lo dis
 $lxd-link-hover-color: #111e30; // Color en hover
 $lxd-link-text-decoration: underline; // En reposo, subrayado: es lo que dice «esto se pulsa» sin depender del color
 $lxd-link-hover-text-decoration: none; // En hover el subrayado desaparece
+$lxd-link-icon-underline-width: 1px; // Con icono, el subrayado es una línea bajo icono y texto (text-decoration no cubre el icono): su grosor
+$lxd-link-icon-underline-offset: 0.25rem; // Con icono, separación entre la línea y el texto
 $lxd-link-icon-gap: 0.5rem; // Aire entre el icono y el texto del enlace
 $lxd-link-cursor: pointer; // Cursor
 $lxd-link-focus-ring-width: 2px; // Grosor del anillo de foco

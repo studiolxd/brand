@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.9.1
+
+### Corregido
+
+- `Link` con icono: el subrayado cubre icono y texto (línea bajo el enlace,
+  `icon-underline-width`/`-offset`); en hover desaparece, como en el resto.
+
 ## v19.9.0
 
 ### Cambiado

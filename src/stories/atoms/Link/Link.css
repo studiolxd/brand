@@ -16,11 +16,20 @@ a:focus-visible {
   outline-offset: var(--link-focus-ring-offset);
 }
 
-/* Con icono: icono y texto en línea, con su aire; el icono no se subraya. */
+/* Con icono: icono y texto en línea, con su aire. El subrayado de
+   text-decoration no cubre un SVG, así que aquí es una línea bajo el enlace
+   entero (icono y texto), con la misma regla: en reposo sí, en hover no. */
 .link--with-icon {
   display: inline-flex;
   align-items: center;
   gap: var(--link-icon-gap);
+  text-decoration: none;
+  padding-block-end: var(--link-icon-underline-offset);
+  border-block-end: var(--link-icon-underline-width) solid currentColor;
+}
+.link--with-icon:hover {
+  text-decoration: none;
+  border-block-end-color: transparent;
 }
 .link__icon {
   flex-shrink: 0;
