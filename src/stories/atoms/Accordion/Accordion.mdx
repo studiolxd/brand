@@ -1,54 +1,84 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as AccordionStories from "./Accordion.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { accordionTokens, accordionDarkTokens } from "../../../tokens/components/accordion";
 
 <Meta of={AccordionStories} />
 
 # Accordion
 
-Componente colapsable que permite mostrar y ocultar contenido en secciones apiladas. Implementado con [Base UI Accordion](https://base-ui.com/react/components/accordion), que gestiona la accesibilidad (WAI-ARIA Accordion Pattern), el foco por teclado y la animacion de apertura/cierre.
+Secciones apiladas que muestran y ocultan su contenido. Sirve para preguntas
+frecuentes, para agrupar bloques largos de una página y para plegar detalles que
+no todo el mundo necesita leer. No es navegación: cada sección pertenece a la
+misma página.
 
-## Composicion
+Se construye sobre [Base UI Accordion](https://base-ui.com/react/components/accordion),
+que aporta el patrón WAI-ARIA, la navegación con teclado y la medida del panel
+para la animación.
 
-El componente se compone de cuatro piezas que se usan juntas:
+<Canvas of={AccordionStories.PorDefecto} />
 
-| Sub-componente | Descripcion |
+## Anatomía
+
+Cuatro piezas que se usan juntas:
+
+| Pieza | Qué es |
 |---|---|
-| `Accordion` | Raiz. Define el modo (`single` o `multiple`) y gestiona el estado. |
-| `AccordionItem` | Envuelve cada seccion colapsable. Requiere un `value` unico. |
-| `AccordionTrigger` | Boton que abre/cierra el item. Incluye un `Chevron` indicador. |
-| `AccordionContent` | Contenido que se muestra u oculta con animacion. |
+| `Accordion` | Raíz. Fija el modo (`single` o `multiple`) y guarda el estado. |
+| `AccordionItem` | Una sección. Necesita un `value` único. |
+| `AccordionTrigger` | El botón que abre y cierra, con su chevron. Va dentro de un `<h3>`. |
+| `AccordionContent` | El contenido que se pliega. |
 
 ## Modos
 
-### Single
-
-Solo un item puede estar abierto a la vez. La prop `collapsible` (por defecto `true`) permite cerrar todos los items.
-
-<Canvas of={AccordionStories.Single} />
-
-### Multiple
-
-Varios items pueden estar abiertos simultaneamente.
+En `single` solo hay una sección abierta a la vez; `collapsible` (por defecto
+`true`) permite cerrarla y quedarse sin ninguna. En `multiple` pueden estar
+abiertas varias.
 
 <Canvas of={AccordionStories.Multiple} />
 
+El `value` sigue el modo: un `string` en `single`, un `string[]` en `multiple`.
+Igual el `defaultValue` y el argumento de `onValueChange`.
+
+## Deshabilitado
+
+`disabled` en la raíz apaga todas las secciones; en un `AccordionItem`, solo la
+suya. Un ítem deshabilitado no abre ni entra en el recorrido de teclado.
+
+<Canvas of={AccordionStories.Deshabilitado} />
+
+## Superficie oscura
+
+El separador y el anillo de foco pasan a blanco por token (`surface-dark-*`), sin
+CSS propio: basta con que un ancestro lleve `.surface-dark` (o la raíz
+`[data-theme="dark"]` / `html.dark`).
+
+<Canvas of={AccordionStories.SuperficieOscura} />
+
 ---
 
-## CSS y Base UI
+## Tokens
 
-Los componentes de Base UI usan atributos `data-*` en lugar de pseudo-clases CSS:
+<TokenTable tokens={accordionTokens} />
 
-- `data-open` / `data-closed` en `AccordionItem` y `AccordionContent`
-- `data-panel-open` en `AccordionTrigger` (presente mientras su panel esta abierto)
-- `data-disabled` cuando el item esta deshabilitado
+### Superficie oscura
 
-Ejemplo de selector CSS:
+<TokenTable tokens={accordionDarkTokens} />
 
-```css
-.accordion__trigger[data-panel-open] .accordion__chevron {
-  transform: rotate(180deg);
-}
-```
+## Accesibilidad
+
+- Cada disparador es un `<button>` dentro de un `<h3>`, con `aria-expanded` y
+  `aria-controls` apuntando al panel, que es `role="region"`. Es el patrón
+  WAI-ARIA de acordeón.
+- Teclado: `Tab` entra y sale del acordeón, las flechas arriba/abajo recorren
+  los disparadores, `Inicio` y `Fin` van al primero y al último, `Espacio` y
+  `Intro` abren o cierran.
+- El foco se ve con el anillo del sistema (2px, `border-width.focus`), en la
+  tinta de la superficie.
+- El movimiento de abrir y cerrar usa las duraciones del sistema; con
+  `prefers-reduced-motion: reduce` valen 0ms y el panel cambia sin animación.
+- El texto del disparador es el nombre accesible de la sección: escribe ahí lo
+  que la identifica, no «Ver más».
 
 ## Props
 

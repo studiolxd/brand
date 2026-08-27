@@ -1,16 +1,16 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-accordion-border-width: 1px; // Ancho del borde separador entre items
-$lxd-accordion-border-color: currentColor; // Color del borde separador
-$lxd-accordion-trigger-padding-block: 1.5rem; // Padding vertical del trigger
-$lxd-accordion-trigger-padding-inline: 2rem; // Padding horizontal del trigger
-$lxd-accordion-trigger-gap: 1rem; // Gap entre texto y chevron
-$lxd-accordion-trigger-cursor: pointer; // Cursor del trigger
-$lxd-accordion-content-padding-block: 2rem; // Padding vertical del contenido
-$lxd-accordion-content-padding-inline: 2rem; // Padding horizontal del contenido
-$lxd-accordion-transition-duration: 400ms; // Duración de la transición abrir/cerrar
-$lxd-accordion-transition-easing: ease-in-out; // Easing de la transición abrir/cerrar
-$lxd-accordion-focus-ring-width: 2px; // Ancho del anillo de foco
-$lxd-accordion-focus-ring-offset: 1px; // Offset del anillo de foco
-$lxd-accordion-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-accordion-border-width: 1px; // Grosor del separador entre ítems
+$lxd-accordion-border-color: #111e30; // Color del separador: tinta de la superficie (prusia en claro)
+$lxd-accordion-trigger-padding-block: 1.5rem; // Aire vertical del disparador
+$lxd-accordion-trigger-padding-inline: 2rem; // Aire horizontal del disparador
+$lxd-accordion-trigger-gap: 1rem; // Hueco entre el texto y el chevron
+$lxd-accordion-trigger-cursor: pointer; // Cursor del disparador
+$lxd-accordion-content-padding-block: 2rem; // Aire inferior del contenido
+$lxd-accordion-content-padding-inline: 2rem; // Aire horizontal del contenido
+$lxd-accordion-transition-duration: 400ms; // Duración de abrir/cerrar (cambio de contexto: el panel entra)
+$lxd-accordion-transition-easing: ease-in-out; // Curva de abrir/cerrar
+$lxd-accordion-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-accordion-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
+$lxd-accordion-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie

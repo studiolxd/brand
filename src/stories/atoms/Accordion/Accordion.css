@@ -2,12 +2,12 @@
   width: 100%;
 }
 
-/* ─── Item ───────────────────────────────────────────────── */
+/* ─── Ítem ───────────────────────────────────────────────── */
 .accordion__item {
   border-block-start: var(--accordion-border-width) solid var(--accordion-border-color);
 }
 
-/* ─── Header reset ───────────────────────────────────────── */
+/* ─── Cabecera: reset del heading que aporta Base UI ──────── */
 .accordion__header {
   font-size: inherit;
   font-weight: inherit;
@@ -17,7 +17,7 @@
   margin-block: 0;
 }
 
-/* ─── Trigger ────────────────────────────────────────────── */
+/* ─── Disparador ─────────────────────────────────────────── */
 .accordion__trigger {
   all: unset;
   box-sizing: border-box;
@@ -37,13 +37,16 @@
   outline-offset: var(--accordion-focus-ring-offset);
 }
 
-/* ─── Trigger text ───────────────────────────────────────── */
+.accordion__trigger[data-disabled] {
+  cursor: default;
+}
+
 .accordion__trigger-text {
   flex: 1;
   min-width: 0;
 }
 
-/* ─── Chevron ────────────────────────────────────────────── */
+/* ─── Chevron: apunta abajo cerrado, arriba abierto ──────── */
 .accordion__chevron {
   flex-shrink: 0;
   transform: rotate(90deg);
@@ -54,7 +57,9 @@
   transform: rotate(-90deg);
 }
 
-/* ─── Content — animación con keyframes + variable de Base UI ─── */
+/* ─── Panel: la altura la mide Base UI (--collapsible-panel-height).
+   Las duraciones son tokens: con prefers-reduced-motion valen 0ms y el panel
+   abre y cierra sin animar. ─────────────────────────────────────── */
 .accordion__content {
   overflow: hidden;
 }
