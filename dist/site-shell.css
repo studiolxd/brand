@@ -1,1 +1,1 @@
-.site-shell{flex-direction:column;min-block-size:100dvh;display:flex}.site-shell__main{flex-direction:column;flex:1;display:flex}.site-shell__main>*{flex:1}
+.site-shell{--text-font-size:var(--site-shell-text-font-size);--text-line-height:var(--site-shell-text-line-height);min-block-size:100dvh;font-size:var(--site-shell-text-font-size);line-height:var(--site-shell-text-line-height);flex-direction:column;display:flex}.site-shell__main{flex-direction:column;flex:1;display:flex}.site-shell__main>*{flex:1}

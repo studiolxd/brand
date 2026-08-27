@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.11.0
+
+### Añadido
+
+- `SiteShell` fija la tipografía de la superficie pública: cuerpo a 20px
+  (`site-shell.text-font-size` = `font-size.3`, la talla de los controles `lg`)
+  y su interlineado. `AppShell` sigue a la base de 16px.
+
 ## v19.10.0
 
 ### Cambiado

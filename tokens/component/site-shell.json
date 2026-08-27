@@ -1,0 +1,6 @@
+{
+  "site-shell": {
+    "text-font-size":   { "$value": "{font-size.3}",         "$type": "dimension", "$description": "Cuerpo de texto de la superficie pública (20px): la talla de los controles lg. Dentro del SiteShell todo el texto que hereda del lienzo va a esta talla; AppShell sigue a la base" },
+    "text-line-height": { "$value": "{line-height.normal}",  "$type": "number",    "$description": "Interlineado del cuerpo en la superficie pública" }
+  }
+}

@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --site-shell-text-font-size: var(--font-size-3); /** Cuerpo de texto de la superficie pública (20px): la talla de los controles lg. Dentro del SiteShell todo el texto que hereda del lienzo va a esta talla; AppShell sigue a la base */
+  --site-shell-text-line-height: var(--line-height-normal); /** Interlineado del cuerpo en la superficie pública */
+}

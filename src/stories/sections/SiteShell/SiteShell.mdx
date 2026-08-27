@@ -1,5 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as SiteShellStories from "./SiteShell.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { siteShellTokens } from "../../../tokens/components/site-shell";
 
 <Meta of={SiteShellStories} />
 
@@ -15,9 +17,17 @@ El marco de una página pública: **cabecera, contenido y pie en columna, al men
 
 <Canvas of={SiteShellStories.MuchoContenido} />
 
+## Tipografía de la superficie pública
+
+Dentro del `SiteShell` el cuerpo de texto va a **20px** (`text-font-size`, la talla de los controles `lg`) con su interlineado: párrafos, enlaces y listas suben a la vez que los formularios. `AppShell` no lo toca y sigue a la base de 16px. Los componentes con talla propia (cabecera, pie, campos, botones) siguen sus tokens.
+
 ## Cuándo no
 
 Las aplicaciones con barra y sidebar usan `AppShell`, que fija la altura a la pantalla y hace scroll dentro del contenido. `SiteShell` es lo contrario: el scroll es el del documento, como corresponde a una web.
+
+## Tokens
+
+<TokenTable tokens={siteShellTokens} />
 
 ## Props
 

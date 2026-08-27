@@ -64,5 +64,7 @@ export const Contrato: Story = {
     const pie = canvas.getByRole('contentinfo');
     await expect(Math.round(pie.getBoundingClientRect().bottom)).toBeGreaterThanOrEqual(Math.round(shell.getBoundingClientRect().bottom) - 1);
     await expect(canvas.getByRole('main')).toBeInTheDocument();
+    // la superficie pública lee a 20px (font-size.3)
+    await expect(getComputedStyle(canvas.getByText(/no flota/)).fontSize).toBe('20px');
   },
 };

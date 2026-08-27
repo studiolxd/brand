@@ -5,6 +5,13 @@
   display: flex;
   flex-direction: column;
   min-block-size: 100dvh;
+  /* La superficie pública lee a 20px, la talla de los controles lg: todo lo
+     que hereda del lienzo (párrafos, enlaces, listas) sube; los componentes
+     con talla propia (cabecera, pie, campos) siguen sus tokens. */
+  --text-font-size: var(--site-shell-text-font-size);
+  --text-line-height: var(--site-shell-text-line-height);
+  font-size: var(--site-shell-text-font-size);
+  line-height: var(--site-shell-text-line-height);
 }
 
 .site-shell__main {
