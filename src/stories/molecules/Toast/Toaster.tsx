@@ -1,28 +1,32 @@
 'use client';
 
-import { Toaster as ToastQueue } from 'sonner';
+import { useEffect } from 'react';
+import { Toast } from '@base-ui-components/react/toast';
+import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
+import {
+  TOAST_DURATION,
+  setToastDefaultDuration,
+  syncLiveToasts,
+  toastManager,
+  type ToastIntent,
+} from './toast';
 import './Toast.css';
 
 /**
- * Vida por defecto de un aviso, en milisegundos. No es un token: la medida la
- * consume el motor de la cola en JS y un token CSS no movería nada. Cinco
- * segundos son los que tarda en leerse un rótulo corto sin llegar a molestar;
- * el reloj se para al pasar el ratón o al entrar el foco.
- */
-const DURATION = 5000;
-
-/**
- * Aire entre avisos apilados, en píxeles — `spacing.2`. Mismo caso que
- * `DURATION`: el apilado lo calcula el motor en JS, no el CSS.
+ * Aire entre avisos desplegados, en píxeles — `toast.gap` (8px). El apilado lo
+ * calcula el CSS a partir de las alturas que mide el motor, así que el número
+ * viaja como custom property.
  */
 const GAP = 8;
 
+export type ToastPosition =
+  | 'bottom-right' | 'bottom-left' | 'bottom-center'
+  | 'top-right' | 'top-left' | 'top-center';
+
 export interface ToasterProps {
   /** Esquina de la ventana donde se monta la pila. Default: `bottom-right`. */
-  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'top-center' | 'bottom-center';
-  /** Tema del toaster, para sincronizar con el tema de la app (p. ej. next-themes). */
-  theme?: 'light' | 'dark' | 'system';
+  position?: ToastPosition;
   /**
    * Nombre accesible de la región de notificaciones. Default: «Notificaciones»
    * (castellano). Una app multiidioma debe pasarlo traducido.
@@ -41,12 +45,88 @@ export interface ToasterProps {
    * `Infinity` (o `duration: Infinity` en la llamada) lo deja fijo.
    */
   duration?: number;
-  /** Aire entre avisos apilados, en píxeles. Default: 8 (`spacing.2`). */
+  /** Aire entre avisos desplegados, en píxeles. Default: 8 (`toast.gap`). */
   gap?: number;
   /** Número de avisos visibles a la vez; el resto espera turno. Default: 3. */
   visibleToasts?: number;
   /** Despliega la pila en vez de dejarla recogida bajo el aviso más nuevo. */
   expand?: boolean;
+}
+
+/** Clase de intención del `Alert` que le toca a cada tipo de aviso. */
+const VARIANT_CLASS: Record<string, string> = {
+  success: 'alert--success',
+  error: 'alert--error',
+  warning: 'alert--warning',
+};
+
+/**
+ * El relleno del aviso es oscuro salvo en `warning` (amarillo): la raíz se
+ * declara superficie oscura para que lo que se componga dentro —el aspa, el
+ * botón de acción— tome su cara clara. Es el mismo criterio del `Alert`.
+ */
+function toastClasses(type: string | undefined, dismissible: boolean) {
+  return [
+    'alert',
+    VARIANT_CLASS[type ?? ''] ?? '',
+    type !== 'warning' ? 'surface-dark' : '',
+    dismissible ? 'alert--dismissible' : '',
+    'toast',
+  ].filter(Boolean).join(' ');
+}
+
+interface ToastListProps extends Required<Pick<ToasterProps, 'position' | 'containerAriaLabel' | 'closeLabel' | 'closeButton' | 'gap'>> {
+  expand?: boolean;
+}
+
+function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap, expand }: ToastListProps) {
+  const { toasts } = Toast.useToastManager();
+  const [side, align] = position.split('-') as ['top' | 'bottom', 'right' | 'left' | 'center'];
+
+  const ids = toasts.map((item) => item.id).join(',');
+  useEffect(() => {
+    syncLiveToasts(ids ? ids.split(',') : []);
+  }, [ids]);
+
+  const classes = [
+    'toaster',
+    side === 'top' ? 'toaster--top' : '',
+    align !== 'right' ? `toaster--${align}` : '',
+    expand ? 'toaster--expanded' : '',
+  ].filter(Boolean).join(' ');
+
+  return (
+    <Toast.Portal>
+      <Toast.Viewport
+        className={classes}
+        aria-label={containerAriaLabel}
+        style={{ '--toast-gap': `${gap}px` } as React.CSSProperties}
+      >
+        {toasts.map((item) => (
+          <Toast.Root
+            key={item.id}
+            toast={item}
+            className={toastClasses(item.type, closeButton)}
+          >
+            <div className="alert__content">
+              <Toast.Title className="alert__title" />
+              <Toast.Description className="alert__description" />
+              <Toast.Action className="toast__action" render={<Button variant="ghost" size="sm" />} />
+            </div>
+            {closeButton && (
+              <Toast.Close
+                className="alert__close"
+                aria-label={closeLabel}
+                render={<Button variant="ghost" size="sm" iconOnly />}
+              >
+                <Icon name="close" size="sm" />
+              </Toast.Close>
+            )}
+          </Toast.Root>
+        ))}
+      </Toast.Viewport>
+    </Toast.Portal>
+  );
 }
 
 /**
@@ -60,42 +140,37 @@ export interface ToasterProps {
  */
 export function Toaster({
   position = 'bottom-right',
-  theme,
   containerAriaLabel = 'Notificaciones',
   closeLabel = 'Cerrar',
   closeButton = true,
-  duration = DURATION,
+  duration = TOAST_DURATION,
   gap = GAP,
-  visibleToasts,
-  expand,
+  visibleToasts = 3,
+  expand = false,
 }: ToasterProps) {
+  const timeout = Number.isFinite(duration) ? duration : 0;
+
+  // El manager vive fuera de React y no ve las props del punto de montaje: le
+  // pasamos la vida por defecto para que un aviso actualizado por `id` dure lo
+  // mismo que uno recién lanzado.
+  useEffect(() => setToastDefaultDuration(timeout), [timeout]);
+
   return (
-    <ToastQueue
-      closeButton={closeButton}
-      position={position}
-      theme={theme}
-      containerAriaLabel={containerAriaLabel}
-      duration={duration}
-      gap={gap}
-      visibleToasts={visibleToasts}
-      expand={expand}
-      className="toaster"
-      icons={{ close: <Icon name="close" size="sm" /> }}
-      toastOptions={{
-        unstyled: true,
-        closeButtonAriaLabel: closeLabel,
-        classNames: {
-          // La tarjeta es un `Alert`: el bloque `toast` solo añade lo suyo.
-          toast:       ['alert', closeButton ? 'alert--dismissible' : '', 'toast'].filter(Boolean).join(' '),
-          title:       'alert__title',
-          description: 'alert__description',
-          closeButton: 'toast__close',
-          icon:        'toast__icon',
-          success:     'alert--success',
-          error:       'alert--error',
-          warning:     'alert--warning',
-        },
-      }}
-    />
+    <Toast.Provider
+      toastManager={toastManager}
+      timeout={timeout}
+      limit={visibleToasts}
+    >
+      <ToastList
+        position={position}
+        containerAriaLabel={containerAriaLabel}
+        closeLabel={closeLabel}
+        closeButton={closeButton}
+        gap={gap}
+        expand={expand}
+      />
+    </Toast.Provider>
   );
 }
+
+export type { ToastIntent };

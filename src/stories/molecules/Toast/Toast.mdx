@@ -20,25 +20,30 @@ Un aviso **efímero y flotante**: aparece como respuesta a una acción, se lee d
 
 ## Montaje
 
-`Toaster` se monta **una vez**, en la raíz de la aplicación. Los avisos se lanzan desde cualquier sitio con `toast(...)`, que el paquete reexporta:
+`Toaster` se monta **una vez**, en la raíz de la aplicación. Los avisos se lanzan desde cualquier sitio con `toast(...)`:
 
 ```tsx
 import { Toaster, toast } from '@studiolxd/brand';
+// o, por punto de entrada:
+// import { Toaster } from '@studiolxd/brand/toaster';
+// import { toast } from '@studiolxd/brand/toast';
 
 // En el layout raíz
 <Toaster />
 
-// En cualquier componente
+// En cualquier componente, manejador o módulo
 toast.success('Proyecto guardado', { description: 'Los cambios se han guardado.' });
 ```
 
+La cola vive **fuera de React** —es un `Toast.createToastManager()` de Base UI—, así que `toast(...)` se puede llamar desde un `catch`, desde un módulo sin componente o desde un manejador cualquiera. Lo que necesita React es el punto de montaje: sin `<Toaster />` no hay dónde pintar el aviso.
+
 ## Anatomía
 
-La tarjeta **es un `Alert`**: rectángulo de relleno sólido, borde de 1px y esquina recta, con título, descripción opcional y aspa. Lo que el toast añade es su marco:
+La tarjeta **es un `Alert`**: rectángulo de relleno sólido, borde de 1px y esquina recta, con título, descripción opcional, acción opcional y aspa. Lo que el toast añade es su marco:
 
-- **La capa** (`.toaster`): posición fija en una esquina de la ventana, a `toast.inset-block` / `toast.inset-inline` del borde, en la capa `z-index.toast`. Su ancho es `toast.max-width`, y en una ventana estrecha cede al ancho disponible menos el aire lateral.
-- **El apilado**: los avisos se ordenan por llegada, el más nuevo delante. `visibleToasts` limita cuántos se ven; `expand` despliega la pila.
-- **El aspa**: aquí no es un `Button` —el elemento lo monta el motor de la cola—, pero reproduce su cara ghost con los tokens del alert: la tinta es la del título, así que voltea sola con la intención, y en hover se invierte contra el relleno. Mide `alert.close-size` (32px, la talla mínima del sistema).
+- **La capa** (`.toaster`, el `Toast.Viewport` de Base UI): posición fija en una esquina de la ventana, a `toast.inset-block` / `toast.inset-inline` del borde, en la capa `z-index.toast`. Su ancho es `toast.max-width`, y en una ventana estrecha cede al ancho disponible menos el aire lateral.
+- **El apilado**: los avisos se ordenan por llegada, el más nuevo delante. Recogida, la pila deja asomar `toast.stack-offset` de cada aviso de detrás y lo encoge `toast.stack-scale` por peldaño; desplegada, cada uno se aparta la altura de los que tiene delante más `toast.gap`. Se despliega sola al pasar el ratón o al entrar el foco, y `expand` la deja desplegada siempre. `visibleToasts` limita cuántos se ven a la vez.
+- **El aspa y la acción**: los dos son `Button variant="ghost" size="sm"` —el aspa además `iconOnly`—, montados sobre `Toast.Close` y `Toast.Action` con la prop `render`. No tienen cara propia: la ponen los tokens del `Button`, que voltea con la superficie del relleno igual que en el `Alert`.
 
 ## Intenciones
 
@@ -47,6 +52,12 @@ La tarjeta **es un `Alert`**: rectángulo de relleno sólido, borde de 1px y esq
 Las cuatro del `Alert`: `toast()` es el neutro prusia, `toast.success()` y `toast.error()` toman el relleno sólido de feedback, y `toast.warning()` el amarillo de marca con tinta prusia. `toast.info()` no tiene relleno propio: cae en el neutro.
 
 <Canvas of={ToastStories.ConDescripcion} />
+
+## Acción
+
+<Canvas of={ToastStories.ConAccion} />
+
+Un aviso lleva **como mucho una** acción, y siempre opcional: el atajo para deshacer lo que se acaba de hacer o para ir a lo que se acaba de crear. Lo que hay que decidir para poder seguir no es un toast: es un `Modal`.
 
 ## Apilado
 
@@ -58,9 +69,42 @@ Las cuatro del `Alert`: `toast()` es el neutro prusia, `toast.success()` y `toas
 
 Un aviso vive `duration` milisegundos —**5000 por defecto**— y se cierra solo. El reloj se detiene mientras el puntero o el foco están dentro de la pila: un aviso nunca desaparece mientras se está leyendo o usando.
 
-`duration` y `gap` son props con un número por defecto, no tokens: el motor de la cola calcula la vida y el apilado en JS, y un token CSS no movería nada. Lo que sí es token es el movimiento de entrada y salida (`toast.duration-in` / `toast.duration-out` / `toast.easing`).
+`duration`, `gap` y `visibleToasts` son props con un número por defecto, no tokens: la vida del aviso y el límite de la cola los cuenta el motor en JS. Lo que sí es token es todo lo que dibuja el CSS —el apilado (`toast.gap`, `toast.stack-offset`, `toast.stack-scale`) y el movimiento (`toast.duration-in` / `toast.duration-out` / `toast.easing` / `toast.enter-scale`)—; `gap` viaja al CSS como custom property, así que la prop y el token son la misma medida.
 
 <Canvas of={ToastStories.Persistente} />
+
+## Espera
+
+<Canvas of={ToastStories.Espera} />
+
+`toast.loading()` abre un aviso que **no se cierra solo**, y devuelve su `id`. Reutilizar ese `id` en cualquier llamada posterior **actualiza el aviso en su sitio** en vez de apilar otro. `toast.promise()` hace lo mismo atado al ciclo de una promesa.
+
+## API del manager
+
+Todos los métodos devuelven el `id` del aviso salvo `dismiss` (nada) y `promise` (la misma promesa).
+
+| Llamada | Qué hace |
+| --- | --- |
+| `toast(title, options?)` | Aviso neutro. Alias: `toast.message` |
+| `toast.success(title, options?)` | Relleno verde |
+| `toast.error(title, options?)` | Relleno rojo. **Interrumpe** al lector de pantalla |
+| `toast.warning(title, options?)` | Relleno amarillo. **Interrumpe** al lector de pantalla |
+| `toast.info(title, options?)` | Cae en el neutro, como en el `Alert` |
+| `toast.loading(title, options?)` | No se cierra solo; se resuelve por `id` |
+| `toast.dismiss(id?)` | Cierra ese aviso, o todos los de la pantalla si no se pasa `id` |
+| `toast.promise(promise, { loading, success, error })` | Un aviso que sigue el ciclo de la promesa |
+
+`options`:
+
+| Prop | Tipo | Qué hace |
+| --- | --- | --- |
+| `id` | `string` | Si ya hay un aviso vivo con ese `id`, lo **actualiza** en su sitio |
+| `description` | `ReactNode` | Segunda línea, bajo el título |
+| `duration` | `number` | Milisegundos de vida. `Infinity` lo deja fijo. Default: el `duration` del `Toaster` |
+| `action` | `{ label, onClick }` | Botón de acción. El rótulo lo pone el consumidor |
+| `onClose` | `() => void` | Se llama al cerrarse, por el aspa o por agotar el tiempo |
+
+En `toast.promise`, cada mensaje es un rótulo suelto o el juego completo de opciones, y `success`/`error` aceptan además una función del valor resuelto o del error.
 
 ## Superficie oscura
 
@@ -72,7 +116,7 @@ El relleno es autocontenido, igual que en el `Alert`: no hay tokens `surface-dar
 
 ## Tokens
 
-### Propios del toast — capa, posición y movimiento
+### Propios del toast — capa, posición, apilado y movimiento
 
 <TokenTable tokens={toastTokens} />
 
@@ -86,12 +130,12 @@ El relleno, el borde, el aire, la tipografía y las cuatro intenciones salen del
 
 ## Accesibilidad
 
-- La pila es una **región live** con nombre accesible (`containerAriaLabel`, «Notificaciones» por defecto), `aria-live="polite"`: los avisos se anuncian cuando el lector de pantalla termina lo que está diciendo, sin interrumpir. Es el comportamiento correcto para un mensaje de estado.
-- Por eso **un mensaje que deba interrumpir no es un toast**: un error que bloquea la tarea va en un `Alert` en el flujo (`role="alert"`, live assertive) o en un `Modal`.
+- **El rol sale de la intención**, igual que en el `Alert`: `error` y `warning` **interrumpen** (`role="alertdialog"` y anuncio asertivo); `default`, `success`, `info` y `loading` informan sin interrumpir (`role="dialog"` dentro de una región `aria-live="polite"`). Aun así, un error que **bloquea la tarea** no es un toast: va en un `Alert` en el flujo o en un `Modal`.
+- La pila es una **región** con nombre accesible (`containerAriaLabel`, «Notificaciones» por defecto).
 - El **auto-cierre se pausa** con el puntero encima o con el foco dentro, así que un aviso no se escapa mientras se lee o mientras se tabula hasta su aspa. Un aviso que el usuario deba poder consultar sin prisa se lanza con `duration: Infinity`.
-- El **aspa** es un `<button>` con nombre accesible (`closeLabel`, «Cerrar» por defecto), de 32px de lado —la talla mínima del sistema— y con anillo de foco propio.
-- La pila está **fuera del orden de tabulación normal**: se alcanza con el atajo que el motor anuncia en el nombre de la región (`alt+T` por defecto).
-- **Movimiento**: la entrada y la salida usan tokens de duración, así que con `prefers-reduced-motion: reduce` valen 0ms y el aviso aparece y desaparece sin animación.
+- La pila está **fuera del orden de tabulación normal**: se alcanza con **F6**, que lleva el foco a la región y despliega la pila. Mientras está recogida, **el aspa está oculta al lector de pantalla** (`aria-hidden`) porque el aviso ya se anuncia entero y su cierre es automático; al desplegarse —con el ratón o con el foco— aparece como el botón que es. La acción, en cambio, se anuncia siempre: es contenido del aviso, no un control del motor.
+- El **aspa** y la **acción** son `Button` ghost de talla `sm`: 32px de lado, la talla mínima del sistema, con el anillo de foco del sistema. El aspa lleva nombre accesible traducible (`closeLabel`, «Cerrar» por defecto).
+- **Movimiento**: la entrada, la salida y el apilado usan tokens de duración, así que con `prefers-reduced-motion: reduce` valen 0ms y el aviso aparece y desaparece sin animación.
 - **Contraste**: los cuatro pares de relleno y tinta son los del `Alert` — blanco sobre prusia, verde y rojo; prusia sobre el amarillo.
 
 ## Props
@@ -100,4 +144,25 @@ El relleno, el borde, el aire, la tipografía y las cuatro intenciones salen del
 
 ## Internacionalización
 
-`containerAriaLabel` y `closeLabel` traducen los dos textos que emite el componente. El resto lo pone el consumidor en cada llamada a `toast(...)`. Ver **Foundations › Internacionalización**.
+`containerAriaLabel` y `closeLabel` traducen los dos textos que emite el componente. El resto —títulos, descripciones y el rótulo de la acción— lo pone el consumidor en cada llamada a `toast(...)`. Ver **Foundations › Internacionalización**.
+
+---
+
+## Migración desde `sonner`
+
+Hasta la v24 la cola era **sonner**, y las aplicaciones importaban `toast` del paquete directamente. Desde la v25 el motor es Base UI y `sonner` desaparece del paquete: el cambio en las apps es el `import`.
+
+| Antes | Después |
+| --- | --- |
+| `import { toast } from 'sonner'` | `import { toast } from '@studiolxd/brand/toast'` |
+| `import { Toaster } from 'sonner'` | `import { Toaster } from '@studiolxd/brand/toaster'` |
+| `import { toast } from '@studiolxd/brand'` | igual (el paquete ya no reexporta sonner) |
+
+Las firmas que usa la suite se mantienen: `toast(msg)`, `toast.success|error|warning|info|loading(msg, options)`, el patrón `const id = toast.loading(…)` → `toast.success(…, { id })`, `toast.dismiss(id?)` y `toast.promise(...)`. Lo que **no** se ha portado, por ser de sonner y no del sistema:
+
+- `toast.custom()` y `toast.message()` con JSX arbitrario — la tarjeta es un `Alert`, no un lienzo. `toast.message` existe como alias del neutro.
+- Las opciones de presentación de sonner (`icon`, `cancel`, `className`, `style`, `richColors`, `position` por aviso, `unstyled`): la cara la pone el sistema, y la posición es del `Toaster`, no del aviso.
+- `onDismiss` / `onAutoClose` por separado: hay un solo `onClose`.
+- La prop `theme` del `Toaster`: el modo oscuro sale de la cascada de tokens (`.surface-dark`, `[data-theme="dark"]`, `html.dark`), no de una prop.
+
+Un aviso actualizado por `id` cuenta su vida con un reloj propio, fuera de la cola: a diferencia del de un aviso recién lanzado, ese reloj **no se pausa** al pasar el ratón por encima.

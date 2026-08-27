@@ -4,9 +4,13 @@
 
 :root {
   --toast-max-width: 360px; /** Ancho máximo de la pila. En pantallas estrechas cede al ancho de la ventana menos el aire lateral */
+  --toast-stack-scale: 0.05; /** Cuánto encoge cada aviso por peldaño de profundidad con la pila recogida (5%) */
+  --toast-enter-scale: 0.97; /** Escala de la que entra y a la que sale el aviso: aparece un punto más pequeño y se va encogiendo */
   --toast-z-index: var(--z-index-toast); /** Capa de la pila — `toast` (500): por encima de modales y paneles flotantes */
   --toast-inset-block: var(--spacing-5); /** Distancia de la pila al borde superior o inferior de la ventana (24px) */
   --toast-inset-inline: var(--spacing-5); /** Distancia de la pila al borde izquierdo o derecho de la ventana (24px) */
+  --toast-gap: var(--spacing-2); /** Aire entre avisos cuando la pila está desplegada (8px). El `Toaster` lo puede sobreescribir con su prop `gap` */
+  --toast-stack-offset: var(--spacing-3); /** Cuánto asoma cada aviso por detrás del de delante con la pila recogida (12px) */
   --toast-duration-in: var(--motion-duration-base); /** Duración de la entrada. Con `prefers-reduced-motion: reduce` vale 0ms y el aviso aparece sin animación */
   --toast-duration-out: var(--motion-duration-base); /** Duración de la salida. Con `prefers-reduced-motion: reduce` vale 0ms */
   --toast-easing: var(--motion-easing-out); /** Curva de entrada y salida — lo que aparece y desaparece frena al final */

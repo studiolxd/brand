@@ -1,8 +1,8 @@
 /* El relleno, el borde, la tipografía y las intenciones del toast son los del
    `Alert`: comparten cara y juego de tokens (`alert.*`). Aquí vive solo lo que
-   es propio de un aviso flotante — la capa, la posición, el apilado, la
-   entrada/salida y el aspa, que aquí no puede ser un `Button` porque el
-   elemento lo monta el motor de la cola. */
+   es propio de un aviso flotante — la capa, la posición, el apilado y el
+   movimiento de entrada y salida. El aspa y el botón de acción son `Button`
+   ghost, así que no ponen CSS propio. */
 @import '../../../tokens/components/button.css';
 @import '../../../tokens/molecules/alert.css';
 @import '../../../tokens/molecules/toast.css';
@@ -11,21 +11,15 @@
    adorno. Va antes para que lo de aquí abajo mande. */
 @import '../Alert/Alert.css';
 
-/* Duraciones y curva por token: con `prefers-reduced-motion: reduce` las
-   duraciones valen 0ms y el aviso entra y sale sin animación. */
-@keyframes toast-in {
-  from { opacity: 0; scale: 0.97; }
-  to   { opacity: 1; scale: 1; }
-}
-
-@keyframes toast-out {
-  from { opacity: 1; scale: 1; }
-  to   { opacity: 0; scale: 0.97; }
-}
-
 /* ── Capa ───────────────────────────────────────────────────── */
+/* La pila es una región fija en una esquina de la ventana. Los avisos van
+   posicionados en absoluto dentro de ella, uno encima de otro; el sentido en el
+   que crece lo lleva `--toast-stack-direction`: hacia arriba (-1) cuando la
+   pila está abajo, hacia abajo (1) cuando está arriba. */
 
 .toaster {
+  --toast-stack-direction: -1;
+
   position: fixed;
   z-index: var(--toast-z-index);
   /* En una ventana estrecha la pila cede: nunca se sale por el lado. */
@@ -33,10 +27,6 @@
     var(--toast-max-width),
     calc(100vw - var(--toast-inset-inline) * 2)
   );
-  list-style: none;
-  padding-block: 0;
-  padding-inline: 0;
-  margin: 0;
   outline: none;
 
   /* Posición por defecto: bottom-right */
@@ -44,17 +34,19 @@
   inset-inline-end: var(--toast-inset-inline);
 }
 
-.toaster[data-y-position='top'] {
+.toaster.toaster--top {
+  --toast-stack-direction: 1;
+
   inset-block-start: var(--toast-inset-block);
   inset-block-end: auto;
 }
 
-.toaster[data-x-position='left'] {
+.toaster.toaster--left {
   inset-inline-start: var(--toast-inset-inline);
   inset-inline-end: auto;
 }
 
-.toaster[data-x-position='center'] {
+.toaster.toaster--center {
   inset-inline-start: 50%;
   inset-inline-end: auto;
   translate: -50% 0;
@@ -62,65 +54,88 @@
 
 /* ── Tarjeta ────────────────────────────────────────────────── */
 /* La caja es la del `Alert` (clases `alert`, `alert--<intención>`,
-   `alert__title`, `alert__description`). El toast solo añade el ancho de la
+   `alert__title`, `alert__description`). El toast solo añade su sitio en la
    pila y su entrada y salida. */
 
 .toast {
-  inline-size: 100%;
-  cursor: default;
-}
-
-.toast[data-state='open'] {
-  animation: toast-in var(--toast-duration-in) var(--toast-easing) both;
-}
-
-.toast[data-state='closed'] {
-  animation: toast-out var(--toast-duration-out) var(--toast-easing) both;
-}
-
-/* El icono de intención del motor no se usa: la intención se lee por el color
-   del relleno, igual que en el `Alert`. */
-.toast__icon {
-  display: none;
-}
-
-/* ── Aspa de cierre ─────────────────────────────────────────── */
-/* El `Alert` delega su aspa en un `Button` ghost; aquí el elemento lo monta el
-   motor de la cola, así que reproducimos su cara con los tokens del alert:
-   la tinta es la del título —voltea sola con la intención— y en hover se
-   invierte contra el relleno, que es lo que hace el ghost. */
-
-.toast .toast__close {
   position: absolute;
-  inset-block-start: var(--alert-close-inset);
-  inset-inline-end: var(--alert-close-inset);
+  inset-inline: 0;
+  inset-block-end: 0;
+  transform-origin: bottom center;
+  cursor: default;
 
-  appearance: none;
-  border: 0;
-  margin: 0;
-  padding-block: 0;
-  padding-inline: 0;
-  inline-size: var(--alert-close-size);
-  block-size: var(--alert-close-size);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  /* El más nuevo delante. En el DOM van al revés —el motor pone el más nuevo
+     primero—, así que el orden de pintado lo fija el índice de la pila. Todo
+     ocurre dentro del contexto de apilamiento del `.toaster`, así que la capa
+     del sistema (`toast.z-index`) vale también aquí de base. */
+  z-index: calc(var(--toast-z-index) - var(--toast-index));
 
-  background-color: transparent;
-  color: var(--alert-title-color);
-  border-radius: var(--alert-border-radius);
+  /* Recogida: cada aviso asoma por detrás del de delante y encoge un peldaño.
+     `--toast-index`, `--toast-offset-y` y `--toast-swipe-movement-*` las pone
+     el motor sobre cada aviso. */
+  transform:
+    translateX(var(--toast-swipe-movement-x, 0px))
+    translateY(calc(
+      var(--toast-swipe-movement-y, 0px) +
+      var(--toast-stack-direction) * var(--toast-index) * var(--toast-stack-offset)
+    ))
+    scale(max(0, 1 - var(--toast-index) * var(--toast-stack-scale)));
+
   transition:
-    color var(--motion-duration-fast) var(--motion-easing-default),
-    background-color var(--motion-duration-fast) var(--motion-easing-default);
+    transform var(--toast-duration-in) var(--toast-easing),
+    opacity var(--toast-duration-in) var(--toast-easing);
 }
 
-.toast .toast__close:hover {
-  background-color: var(--alert-title-color);
-  color: var(--alert-bg);
+.toaster.toaster--top .toast {
+  inset-block-start: 0;
+  inset-block-end: auto;
+  transform-origin: top center;
 }
 
-.toast .toast__close:focus-visible {
-  outline: var(--button-focus-ring-width) var(--button-focus-ring-style) var(--alert-title-color);
-  outline-offset: var(--button-focus-ring-offset);
+/* Desplegada: cada aviso se aparta la altura de los que tiene delante más el
+   aire de `toast.gap`, y ninguno encoge. La pila se despliega al pasar el ratón
+   o al entrar el foco (`data-expanded`, del motor) o siempre con `expand`. */
+.toast[data-expanded],
+.toaster--expanded .toast {
+  transform:
+    translateX(var(--toast-swipe-movement-x, 0px))
+    translateY(calc(
+      var(--toast-swipe-movement-y, 0px) +
+      var(--toast-stack-direction) * (var(--toast-offset-y) + var(--toast-index) * var(--toast-gap))
+    ));
+}
+
+/* Entrada y salida: el aviso llega y se va por el borde de la ventana al que
+   está pegada la pila. Las duraciones son tokens, así que con
+   `prefers-reduced-motion: reduce` valen 0ms y no hay animación. */
+.toast[data-starting-style],
+.toast[data-ending-style] {
+  opacity: 0;
+  transform:
+    translateY(calc(var(--toast-stack-direction) * -100%))
+    scale(var(--toast-enter-scale));
+}
+
+.toast[data-ending-style] {
+  transition-duration: var(--toast-duration-out);
+}
+
+/* Mientras se arrastra para descartar, el aviso sigue al dedo sin transición. */
+.toast[data-swiping] {
+  transition: none;
+}
+
+/* Los avisos que se salen del límite de `visibleToasts` esperan turno fuera de
+   la vista (el motor ya los marca `inert`). */
+.toast[data-limited] {
+  opacity: 0;
+}
+
+/* ── Acción ─────────────────────────────────────────────────── */
+/* Un `Button` ghost bajo el texto; su cara la pone el propio botón, que voltea
+   con la superficie del relleno igual que el aspa. */
+
+.toast .toast__action {
+  margin-block-start: var(--alert-content-gap);
+  margin-inline-start: calc(var(--button-sm-padding-inline) * -1);
 }

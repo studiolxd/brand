@@ -5,6 +5,12 @@
     "inset-block":          { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Distancia de la pila al borde superior o inferior de la ventana (24px)" },
     "inset-inline":         { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Distancia de la pila al borde izquierdo o derecho de la ventana (24px)" },
 
+    "gap":                  { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Aire entre avisos cuando la pila está desplegada (8px). El `Toaster` lo puede sobreescribir con su prop `gap`" },
+    "stack-offset":         { "$value": "{spacing.3}",            "$type": "dimension", "$description": "Cuánto asoma cada aviso por detrás del de delante con la pila recogida (12px)" },
+    "stack-scale":          { "$value": "0.05",                   "$type": "number",    "$description": "Cuánto encoge cada aviso por peldaño de profundidad con la pila recogida (5%)" },
+
+    "enter-scale":          { "$value": "0.97",                   "$type": "number",    "$description": "Escala de la que entra y a la que sale el aviso: aparece un punto más pequeño y se va encogiendo" },
+
     "duration-in":          { "$value": "{motion.duration.base}",  "$type": "number",    "$description": "Duración de la entrada. Con `prefers-reduced-motion: reduce` vale 0ms y el aviso aparece sin animación" },
     "duration-out":         { "$value": "{motion.duration.base}",  "$type": "number",    "$description": "Duración de la salida. Con `prefers-reduced-motion: reduce` vale 0ms" },
     "easing":               { "$value": "{motion.easing.out}",     "$type": "string",    "$description": "Curva de entrada y salida — lo que aparece y desaparece frena al final" }

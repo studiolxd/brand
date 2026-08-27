@@ -5,6 +5,10 @@ $lxd-toast-z-index: 500; // Capa de la pila — `toast` (500): por encima de mod
 $lxd-toast-max-width: 360px; // Ancho máximo de la pila. En pantallas estrechas cede al ancho de la ventana menos el aire lateral
 $lxd-toast-inset-block: 1.5rem; // Distancia de la pila al borde superior o inferior de la ventana (24px)
 $lxd-toast-inset-inline: 1.5rem; // Distancia de la pila al borde izquierdo o derecho de la ventana (24px)
+$lxd-toast-gap: 0.5rem; // Aire entre avisos cuando la pila está desplegada (8px). El `Toaster` lo puede sobreescribir con su prop `gap`
+$lxd-toast-stack-offset: 0.75rem; // Cuánto asoma cada aviso por detrás del de delante con la pila recogida (12px)
+$lxd-toast-stack-scale: 0.05; // Cuánto encoge cada aviso por peldaño de profundidad con la pila recogida (5%)
+$lxd-toast-enter-scale: 0.97; // Escala de la que entra y a la que sale el aviso: aparece un punto más pequeño y se va encogiendo
 $lxd-toast-duration-in: 250ms; // Duración de la entrada. Con `prefers-reduced-motion: reduce` vale 0ms y el aviso aparece sin animación
 $lxd-toast-duration-out: 250ms; // Duración de la salida. Con `prefers-reduced-motion: reduce` vale 0ms
 $lxd-toast-easing: ease-out; // Curva de entrada y salida — lo que aparece y desaparece frena al final

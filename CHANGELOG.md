@@ -7,6 +7,66 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.0.0
+
+### Eliminado (breaking)
+
+- **Fuera `sonner`.** El motor de la cola de avisos pasa a ser
+  `@base-ui-components/react/toast`, el mismo motor de conducta que el resto del
+  sistema. `sonner` desaparece de `dependencies`, de `peerDependencies` y del
+  `dist`: el paquete ya no lo reexporta (`export { toast } from 'sonner'`) ni lo
+  arrastra ninguna salida.
+- **`Toaster` pierde la prop `theme`.** Era la sincronización de tema de sonner;
+  el modo oscuro sale de la cascada de tokens (`.surface-dark`,
+  `[data-theme="dark"]`, `html.dark`).
+- **Las firmas de sonner que no eran del sistema no se han portado**:
+  `toast.custom()`, las opciones de presentación por aviso (`icon`, `cancel`,
+  `className`, `style`, `richColors`, `position`, `unstyled`) y el par
+  `onDismiss`/`onAutoClose`, que se unifica en un solo `onClose`. `toast.message`
+  sobrevive como alias del aviso neutro.
+- **Migración para las apps**: `import { toast } from 'sonner'` →
+  `import { toast } from '@studiolxd/brand/toast'`. La tabla completa está en
+  `Toast.mdx` § «Migración desde sonner».
+
+### Añadido
+
+- **`@studiolxd/brand/toast`**, punto de entrada nuevo con el manager de avisos:
+  `toast(msg)`, `toast.message|success|error|warning|info|loading(msg, options)`,
+  `toast.dismiss(id?)` y `toast.promise(promise, { loading, success, error })`.
+  Cada llamada devuelve el `id` del aviso; reutilizar un `id` vivo **actualiza el
+  aviso en su sitio** en vez de apilar otro (el patrón
+  `const id = toast.loading(…)` → `toast.success(…, { id })`). Opciones:
+  `id`, `description`, `duration` (`Infinity` deja el aviso fijo), `action`
+  (`{ label, onClick }`) y `onClose`.
+- **`Toast`: rol ARIA por intención.** Lo que sonner no permitía: `error` y
+  `warning` interrumpen (`role="alertdialog"` y anuncio asertivo) y el resto
+  informa sin interrumpir (`role="dialog"` en región `aria-live="polite"`). Es el
+  mismo criterio que el `role` por variante del `Alert`.
+- **`Toast`: acción opcional** — un `Button` ghost bajo el texto, montado sobre
+  `Toast.Action` con `render`.
+- Tokens nuevos del apilado y del movimiento: `toast.gap`, `toast.stack-offset`,
+  `toast.stack-scale` y `toast.enter-scale`. El apilado lo dibuja ahora el CSS a
+  partir de las alturas que mide el motor, así que `gap` es a la vez prop y
+  token (la prop viaja como custom property).
+
+### Cambiado
+
+- **`Toast`: el aspa vuelve a ser un `Button` ghost.** Con sonner el elemento lo
+  montaba el motor y había que reproducir su cara a mano; ahora `Toast.Close`
+  monta el `Button variant="ghost" size="sm" iconOnly` del sistema con `render`,
+  y desaparecen las reglas `.toast__close` que imitaban al ghost. El motor oculta
+  el aspa al lector de pantalla mientras la pila está recogida (`aria-hidden`) y
+  la descubre al desplegarla con el ratón o con el foco.
+- **`Toast`: la pila se alcanza con F6** (el atajo de Base UI), que lleva el foco
+  a la región y la despliega.
+- `Toaster`: `visibleToasts` pasa a ser el `limit` del motor y `expand` una clase
+  del CSS; el resto de props (`position`, `containerAriaLabel`, `closeLabel`,
+  `closeButton`, `duration`, `gap`) mantiene su firma y sus defaults castellanos.
+- Doc y pruebas: `Toast.mdx` estrena «Acción», «Espera», «API del manager» y
+  «Migración desde sonner»; stories nuevas de acción y de espera; el test de
+  componente cubre auto-cierre con timers falsos, cierre manual, acción,
+  actualización por `id`, `dismiss` y rol por intención.
+
 ## v24.11.0
 
 ### Cambiado

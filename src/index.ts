@@ -198,8 +198,15 @@ export type { TableProps, TableHeaderProps, TableRowProps, TableCellProps } from
 export { TextareaField } from './stories/molecules/TextareaField/TextareaField';
 export type { TextareaFieldProps } from './stories/molecules/TextareaField/TextareaField';
 export { Toaster } from './stories/molecules/Toast/Toaster';
-export type { ToasterProps } from './stories/molecules/Toast/Toaster';
-export { toast } from 'sonner';
+export type { ToasterProps, ToastPosition } from './stories/molecules/Toast/Toaster';
+export { toast, toastManager } from './stories/molecules/Toast/toast';
+export type {
+  ToastIntent,
+  ToastOptions,
+  ToastActionDescriptor,
+  ToastMessage,
+  ToastPromiseMessages,
+} from './stories/molecules/Toast/toast';
 export { TimeField } from './stories/molecules/TimeField/TimeField';
 export type { TimeFieldProps } from './stories/molecules/TimeField/TimeField';
 export { UserMenu } from './stories/molecules/UserMenu/UserMenu';

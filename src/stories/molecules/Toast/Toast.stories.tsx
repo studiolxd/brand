@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { toast } from 'sonner';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Toaster } from './Toaster';
+import { toast } from './toast';
 
 const meta = {
   title: 'Molecules/Toast',
@@ -23,7 +23,7 @@ const meta = {
       description: 'Esquina de la ventana donde se monta la pila.',
     },
     duration: { control: 'number', description: 'Milisegundos que vive un aviso. Default 5000.' },
-    gap: { control: 'number', description: 'Aire entre avisos apilados, en píxeles.' },
+    gap: { control: 'number', description: 'Aire entre avisos desplegados, en píxeles.' },
     visibleToasts: { control: 'number', description: 'Avisos visibles a la vez. Default 3.' },
     expand: { control: 'boolean', description: 'Despliega la pila en vez de recogerla.' },
     closeButton: { control: 'boolean', description: 'Muestra el aspa de cierre.' },
@@ -69,8 +69,29 @@ export const ConDescripcion: Story = {
 };
 
 /**
- * Los avisos se apilan por orden de llegada, el más nuevo delante. `visibleToasts`
- * limita cuántos se ven a la vez y `expand` despliega la pila.
+ * Un aviso puede llevar **una** acción: el atajo para deshacer lo que se acaba de
+ * hacer o para ir a lo que se acaba de crear. No es sitio para una decisión: lo
+ * que hay que decidir va en un `Modal`.
+ */
+export const ConAccion: Story = {
+  name: 'Con acción',
+  render: () => (
+    <Button
+      onClick={() =>
+        toast('Proyecto archivado', {
+          action: { label: 'Deshacer', onClick: () => toast.success('Proyecto restaurado') },
+        })
+      }
+    >
+      Archivar proyecto
+    </Button>
+  ),
+};
+
+/**
+ * Los avisos se apilan por orden de llegada, el más nuevo delante. La pila se
+ * despliega al pasar el ratón o al entrar el foco; `expand` la deja desplegada
+ * siempre y `visibleToasts` limita cuántos se ven a la vez.
  */
 export const Apilado: Story = {
   args: { expand: true },
@@ -112,6 +133,37 @@ export const Persistente: Story = {
 };
 
 /**
+ * Un aviso de espera se resuelve **en su sitio**: `toast.loading` devuelve un
+ * `id` y la llamada siguiente lo reutiliza. `toast.promise` hace lo mismo atado
+ * al ciclo de una promesa.
+ */
+export const Espera: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+      <Button
+        onClick={() => {
+          const id = toast.loading('Exportando el proyecto…');
+          setTimeout(() => toast.success('Proyecto exportado', { id }), 1500);
+        }}
+      >
+        Con id
+      </Button>
+      <Button
+        onClick={() =>
+          toast.promise(new Promise((resolve) => setTimeout(resolve, 1500)), {
+            loading: 'Guardando…',
+            success: 'Proyecto guardado',
+            error: 'No se pudo guardar',
+          })
+        }
+      >
+        Con promesa
+      </Button>
+    </div>
+  ),
+};
+
+/**
  * El relleno es autocontenido, como el del `Alert`: el aviso se ve igual sobre una
  * página clara y sobre una oscura, y el borde del neutro es lo que dibuja el
  * contorno cuando la página ya es prusia.
@@ -136,7 +188,7 @@ export const ContratoCara: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('button', { name: 'Lanzar' }));
     const aviso = await waitFor(() => {
-      const el = canvasElement.querySelector('.toast');
+      const el = document.querySelector('.toast');
       if (!el) throw new Error('sin aviso');
       return el;
     });
@@ -144,6 +196,36 @@ export const ContratoCara: Story = {
     await expect(aviso.classList.contains('alert--error')).toBe(true);
     await expect(aviso.classList.contains('alert--dismissible')).toBe(true);
     await expect(aviso.querySelector('.alert__title')).not.toBeNull();
+    toast.dismiss();
+  },
+};
+
+/**
+ * Test: el rol lo pone la intención. `error` y `warning` interrumpen
+ * (`alertdialog`); el resto informa sin interrumpir (`dialog`).
+ */
+export const ContratoRol: Story = {
+  name: 'Test — el rol sale de la intención',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Button onClick={() => toast('Neutro')}>Neutro</Button>
+      <Button onClick={() => toast.error('Roto')}>Error</Button>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Neutro' }));
+    await waitFor(async () => {
+      await expect(document.querySelector('.toast')?.getAttribute('role')).toBe('dialog');
+    });
+    toast.dismiss();
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Error' }));
+    await waitFor(async () => {
+      await expect(document.querySelector('.toast')?.getAttribute('role')).toBe('alertdialog');
+    });
+    toast.dismiss();
   },
 };
 
@@ -156,24 +238,30 @@ export const ContratoCierre: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('button', { name: 'Lanzar' }));
-    const aspa = await canvas.findByRole('button', { name: 'Close' });
-    const caja = aspa.getBoundingClientRect();
-    await expect(Math.round(caja.width)).toBe(32);
-    await expect(Math.round(caja.height)).toBe(32);
+    const aspa = await waitFor(() => {
+      const el = document.querySelector<HTMLElement>('.toast .alert__close');
+      if (!el) throw new Error('sin aspa');
+      return el;
+    });
+    await expect(aspa.getAttribute('aria-label')).toBe('Close');
+    // Sin `getBoundingClientRect`: la tarjeta entra con una escala, y lo que se
+    // mide aquí es la caja del botón, no el fotograma de la animación.
+    await expect(aspa.offsetWidth).toBe(32);
+    await expect(aspa.offsetHeight).toBe(32);
+    toast.dismiss();
   },
 };
 
-/** Test: `theme` y `containerAriaLabel` se reenvían a la cola. */
+/** Test: `containerAriaLabel` nombra la región de notificaciones. */
 export const ContratoRegion: Story = {
-  name: 'Test — theme + containerAriaLabel',
+  name: 'Test — containerAriaLabel',
   tags: ['!dev'],
-  args: { theme: 'dark', containerAriaLabel: 'Notificaciones DS' },
+  args: { containerAriaLabel: 'Notificaciones DS' },
   render: () => <span />,
-  play: async ({ canvasElement }) => {
-    // El motor compone el nombre como `${containerAriaLabel} ${atajo}`.
+  play: async () => {
     await waitFor(async () => {
       await expect(
-        canvasElement.querySelector('[aria-label^="Notificaciones DS"]'),
+        document.querySelector('.toaster[aria-label="Notificaciones DS"]'),
       ).not.toBeNull();
     });
   },

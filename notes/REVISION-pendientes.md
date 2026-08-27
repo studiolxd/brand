@@ -491,21 +491,27 @@ Sale de `Por revisar/`: `Molecules/Toast`. Comparte la cara del `Alert` y se
 queda solo con la capa, la posición, el apilado y el auto-cierre. Lo que queda
 anotado:
 
-- [ ] **El rol ARIA no puede ser por intención.** El motor de la cola (`sonner`)
-      monta una sola región `aria-live="polite"` para toda la pila y no expone
-      el `role` de cada aviso, así que un `toast.error()` no interrumpe como lo
-      hace un `Alert variant="error"` (`role="alert"`). Es la conducta correcta
-      para un mensaje de estado y así está documentado —lo que debe interrumpir
-      va en un `Alert` en el flujo—, pero si el sistema quiere avisos
-      asertivos hay que cambiar de motor.
-- [ ] **Migrar la cola a Base UI** (`@base-ui-components/react/toast`), que sí da
-      rol por aviso y aspa propia. Hoy no se puede: las diez apps de la suite
-      importan `toast` de `sonner` directamente en 143 ficheros; el cambio exige
-      un codemod coordinado con el bump del pin.
-- [ ] **`duration` y `gap` son props, no tokens.** El motor calcula la vida del
-      aviso y el apilado en JS; un token CSS no movería nada y quedaría muerto.
-      Mismo caso que el umbral del 15% de `ProgressBar`. Si algún día el sistema
-      publica sus escalas como JSON resuelto consumible desde TS, repuntar ahí.
+- [x] **El rol ARIA ya es por intención.** Resuelto en v25.0.0 al cambiar de
+      motor: Base UI expone `type` y `priority` por aviso, así que `error` y
+      `warning` salen `role="alertdialog"` con anuncio asertivo y el resto
+      `role="dialog"` dentro de la región `aria-live="polite"`. Mismo criterio
+      que el `role` por variante del `Alert`. Sigue en pie la regla de uso: lo
+      que **bloquea** la tarea va en un `Alert` en el flujo o en un `Modal`.
+- [x] **Cola migrada a Base UI** (`@base-ui-components/react/toast`) en v25.0.0.
+      `sonner` fuera de dependencias, de peers y del `dist`. Las apps cambian el
+      `import` (`sonner` → `@studiolxd/brand/toast`); la tabla de migración está
+      en `Toast.mdx`. El aspa y la acción vuelven a ser `Button` ghost.
+- [x] **El apilado ya es de tokens.** El CSS lo dibuja a partir de las alturas
+      que mide el motor: `toast.gap`, `toast.stack-offset`, `toast.stack-scale` y
+      `toast.enter-scale`. `gap` es prop **y** token (la prop viaja como custom
+      property). Siguen siendo solo props `duration` y `visibleToasts`: la vida
+      del aviso y el límite de la cola se cuentan en JS y un token CSS no movería
+      nada. Mismo caso que el umbral del 15% de `ProgressBar`.
+- [ ] **Un aviso actualizado por `id`** (el patrón `loading` → `success`) cuenta
+      su vida con un reloj propio, fuera de la cola: el motor solo programa el
+      suyo al dar de alta el aviso. Consecuencia: ese reloj **no se pausa** al
+      pasar el ratón. Si Base UI expone algún día el reprogramado del temporizador
+      en `update`, quitar el reloj propio de `toast.ts`.
 - [ ] **`toast.max-width`** son 360px sueltos: la anchura de una tarjeta
       flotante no está en ninguna escala. Mismo caso que las alturas de carril
       de `ProgressBar`.
