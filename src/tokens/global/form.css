@@ -13,18 +13,18 @@
   --form-alternatives-gap: var(--spacing-3); /** Aire entre las alternativas (acceso con Google, enlace mágico…) */
   --form-alternatives-margin-block-start: var(--spacing-6); /** Aire entre el bloque principal y las alternativas */
   --form-error-font-family: var(--font-family-sans); /** Font family del mensaje de error */
-  --form-error-font-size: var(--font-size-1); /** Font size del mensaje de error (14px) */
   --form-error-line-height: var(--line-height-normal); /** Line height del mensaje de error */
   --form-helper-font-family: var(--font-family-sans); /** Font family del texto de ayuda */
-  --form-helper-font-size: var(--font-size-1); /** Font size del texto de ayuda (14px) */
   --form-helper-line-height: var(--line-height-normal); /** Line height del texto de ayuda */
   --form-success-font-family: var(--font-family-sans); /** Font family del mensaje de éxito */
-  --form-success-font-size: var(--font-size-2); /** Font size del mensaje de éxito (18px) */
   --form-success-line-height: var(--line-height-normal); /** Line height del mensaje de éxito */
+  --form-error-font-size: var(--text-paragraph-small-font-size); /** El mensaje de error va un peldaño por debajo del cuerpo de la superficie (14px en aplicación, 16px en la pública) */
   --form-error-font-weight: var(--font-weight-default); /** Font weight del mensaje de error */
   --form-error-color: var(--color-error-text-on-light); /** Color del mensaje de error */
+  --form-helper-font-size: var(--text-paragraph-small-font-size); /** El texto de ayuda va un peldaño por debajo del cuerpo de la superficie (14px en aplicación, 16px en la pública) */
   --form-helper-font-weight: var(--font-weight-default); /** Font weight del texto de ayuda */
   --form-helper-color: var(--color-text-on-light); /** Color del texto de ayuda: tinta (prusia), no gris */
+  --form-success-font-size: var(--text-font-size); /** El mensaje de éxito hereda el cuerpo de la superficie */
   --form-success-font-weight: var(--font-weight-default); /** Font weight del mensaje de éxito */
   --form-success-color: var(--color-text-on-light); /** Color del mensaje de éxito */
 }

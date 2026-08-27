@@ -7,6 +7,7 @@ import { LegalFooter } from '../LegalFooter/LegalFooter';
 import { Container } from '../../atoms/Container/Container';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { Alert } from '../../molecules/Alert/Alert';
 
 const indice = [{ id: 'sitio', label: 'Sitio', href: '#sitio', items: [{ id: 'inicio', label: 'Inicio', href: '#inicio' }, { id: 'precios', label: 'Precios', href: '#precios' }] }];
 const legal = [
@@ -66,5 +67,44 @@ export const Contrato: Story = {
     await expect(canvas.getByRole('main')).toBeInTheDocument();
     // la superficie pública lee a 20px (font-size.3)
     await expect(getComputedStyle(canvas.getByText(/no flota/)).fontSize).toBe('20px');
+  },
+};
+
+export const ContratoTipografia: Story = {
+  name: 'Test — la superficie pública lee un peldaño más arriba',
+  tags: ['!dev'],
+  args: {
+    children: (
+      <Container as="main" id="main-content" tabIndex={-1} space="xl">
+        <Heading level={5}>Un título de nivel 5</Heading>
+        <Heading level={2} size={4}>Un título con el tamaño desacoplado</Heading>
+        <Paragraph>El cuerpo de la superficie pública.</Paragraph>
+        <Paragraph size="large">Una entradilla.</Paragraph>
+        <Paragraph size="small">Una nota al pie.</Paragraph>
+        <Alert title="Un aviso" description="Con su descripción." />
+      </Container>
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const px = (el: Element) => parseFloat(getComputedStyle(el).fontSize);
+
+    // El cuerpo va a 20px (font-size.3), la talla de los controles lg.
+    const cuerpo = px(canvas.getByText('El cuerpo de la superficie pública.'));
+    await expect(cuerpo).toBe(20);
+
+    // Un H5 mide más que el cuerpo: la escala de títulos sube con él.
+    await expect(px(canvas.getByRole('heading', { level: 5 }))).toBeGreaterThan(cuerpo);
+
+    // El tamaño desacoplado bebe de la misma escala, así que sube igual.
+    await expect(px(canvas.getByText('Un título con el tamaño desacoplado'))).toBe(24);
+
+    // Los peldaños del párrafo son relativos al cuerpo, no absolutos.
+    await expect(px(canvas.getByText('Una entradilla.'))).toBeGreaterThan(cuerpo);
+    await expect(px(canvas.getByText('Una nota al pie.'))).toBeLessThan(cuerpo);
+
+    // El texto corriente de los componentes hereda el cuerpo de la superficie.
+    await expect(px(canvas.getByText('Un aviso'))).toBe(20);
+    await expect(px(canvas.getByText('Con su descripción.'))).toBe(20);
   },
 };

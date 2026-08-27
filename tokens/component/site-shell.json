@@ -1,6 +1,20 @@
 {
   "site-shell": {
     "text-font-size":   { "$value": "{font-size.3}",         "$type": "dimension", "$description": "Cuerpo de texto de la superficie pública (20px): la talla de los controles lg. Dentro del SiteShell todo el texto que hereda del lienzo va a esta talla; AppShell sigue a la base" },
-    "text-line-height": { "$value": "{line-height.normal}",  "$type": "number",    "$description": "Interlineado del cuerpo en la superficie pública" }
+    "text-line-height": { "$value": "{line-height.normal}",  "$type": "number",    "$description": "Interlineado del cuerpo en la superficie pública" },
+
+    "paragraph-small-font-size": { "$value": "{font-size.2}", "$type": "dimension", "$description": "Párrafo pequeño en la superficie pública (16px): un peldaño por debajo del cuerpo de 20px" },
+    "paragraph-large-font-size": { "$value": "{font-size.4}", "$type": "dimension", "$description": "Párrafo grande en la superficie pública (24px): un peldaño por encima del cuerpo de 20px" },
+
+    "heading-size-1":  { "$value": "{font-size.2}",  "$type": "dimension", "$description": "Paso 1 de la escala de títulos en la superficie pública (16px): un peldaño por encima del paso base" },
+    "heading-size-2":  { "$value": "{font-size.3}",  "$type": "dimension", "$description": "Paso 2 de la escala de títulos en la superficie pública (20px)" },
+    "heading-size-3":  { "$value": "{font-size.3}",  "$type": "dimension", "$description": "Paso 3 de la escala de títulos en la superficie pública (20px) — el de H6: iguala al cuerpo, y se distingue por el peso" },
+    "heading-size-4":  { "$value": "{font-size.4}",  "$type": "dimension", "$description": "Paso 4 de la escala de títulos en la superficie pública (24px) — el de H5: por encima del cuerpo" },
+    "heading-size-5":  { "$value": "{font-size.5}",  "$type": "dimension", "$description": "Paso 5 de la escala de títulos en la superficie pública (28px) — el de H4" },
+    "heading-size-6":  { "$value": "{font-size.6}",  "$type": "dimension", "$description": "Paso 6 de la escala de títulos en la superficie pública (32px) — el de H3" },
+    "heading-size-7":  { "$value": "{font-size.7}",  "$type": "dimension", "$description": "Paso 7 de la escala de títulos en la superficie pública (40px) — el de H2" },
+    "heading-size-8":  { "$value": "{font-size.8}",  "$type": "dimension", "$description": "Paso 8 de la escala de títulos en la superficie pública (56px) — el de H1" },
+    "heading-size-9":  { "$value": "{font-size.9}",  "$type": "dimension", "$description": "Paso 9 de la escala de títulos en la superficie pública (72px) — display pequeño" },
+    "heading-size-10": { "$value": "{font-size.10}", "$type": "dimension", "$description": "Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más" }
   }
 }

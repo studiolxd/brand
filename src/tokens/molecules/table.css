@@ -6,8 +6,6 @@
   --table-bg: rgba(0, 0, 0, 0); /** Fondo de la tabla */
   --table-sort-icon-inactive-opacity: 0.35; /** Opacidad del icono de sort cuando sortable pero sin sort activo */
   --table-font-family: var(--font-family-sans); /** Font family */
-  --table-font-size: var(--font-size-2); /** 18px — Body default size */
-  --table-line-height: var(--line-height-normal); /** Normal line height para celdas multilínea */
   --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
   --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */
   --table-header-hover-bg: var(--color-grey-lightest); /** Fondo en hover de columna sortable */
@@ -23,7 +21,9 @@
   --table-sm-header-padding-inline: var(--spacing-2); /** Padding inline del encabezado — variante sm */
   --table-sm-cell-padding-block: var(--spacing-2); /** Padding block de celda — variante sm */
   --table-sm-cell-padding-inline: var(--spacing-2); /** Padding inline de celda — variante sm */
+  --table-font-size: var(--text-font-size); /** Las celdas heredan el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --table-font-weight: var(--font-weight-default); /** Font weight base */
+  --table-line-height: var(--text-line-height); /** Interlineado heredado del cuerpo de la superficie, para celdas multilínea */
   --table-color: var(--color-text-on-light); /** Color de texto base */
   --table-border-width: var(--border-width-default); /** Grosor de separadores de fila */
   --table-border-color: var(--color-primary); /** Color de separadores de fila */

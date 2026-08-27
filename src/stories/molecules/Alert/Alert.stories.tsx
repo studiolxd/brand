@@ -121,3 +121,18 @@ export const DismissibleWarning: Story = {
     dismissible: true,
   },
 };
+
+export const ContratoCuerpo: Story = {
+  name: 'Test — fuera del SiteShell el texto del alert lee a 16px',
+  tags: ['!dev'],
+  args: {
+    title: 'Un aviso',
+    description: 'Con su descripción.',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const px = (el: Element) => parseFloat(getComputedStyle(el).fontSize);
+    await expect(px(canvas.getByText('Un aviso'))).toBe(16);
+    await expect(px(canvas.getByText('Con su descripción.'))).toBe(16);
+  },
+};

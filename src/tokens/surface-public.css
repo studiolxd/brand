@@ -1,0 +1,69 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ *
+ * La superficie pública: dentro de un SiteShell el cuerpo lee a 20px y la escala
+ * de títulos sube un peldaño. Cada token que hereda del cuerpo se vuelve a
+ * declarar aquí porque un var() dentro de una custom property se resuelve en el
+ * elemento que la declara, no en el que la usa.
+ */
+
+.site-shell {
+  --text-font-size: var(--site-shell-text-font-size);
+  --text-line-height: var(--site-shell-text-line-height);
+  --text-paragraph-small-font-size: var(--site-shell-paragraph-small-font-size);
+  --text-paragraph-large-font-size: var(--site-shell-paragraph-large-font-size);
+  --text-size-1: var(--site-shell-heading-size-1);
+  --text-size-2: var(--site-shell-heading-size-2);
+  --text-size-3: var(--site-shell-heading-size-3);
+  --text-size-4: var(--site-shell-heading-size-4);
+  --text-size-5: var(--site-shell-heading-size-5);
+  --text-size-6: var(--site-shell-heading-size-6);
+  --text-size-7: var(--site-shell-heading-size-7);
+  --text-size-8: var(--site-shell-heading-size-8);
+  --text-size-9: var(--site-shell-heading-size-9);
+  --text-size-10: var(--site-shell-heading-size-10);
+  --alert-title-font-size: var(--text-font-size);
+  --alert-description-font-size: var(--text-font-size);
+  --code-block-font-size: var(--text-paragraph-small-font-size);
+  --description-list-value-font-size: var(--text-font-size);
+  --description-list-value-line-height: var(--text-line-height);
+  --empty-state-description-font-size: var(--text-font-size);
+  --file-upload-item-name-font-size: var(--text-font-size);
+  --form-error-font-size: var(--text-paragraph-small-font-size);
+  --form-helper-font-size: var(--text-paragraph-small-font-size);
+  --form-success-font-size: var(--text-font-size);
+  --message-bubble-font-size: var(--text-font-size);
+  --modal-description-font-size: var(--text-font-size);
+  --prev-next-nav-font-size: var(--text-font-size);
+  --pricing-card-price-suffix-font-size: var(--text-paragraph-small-font-size);
+  --table-font-size: var(--text-font-size);
+  --table-line-height: var(--text-line-height);
+  --text-h1-font-size: var(--text-size-8);
+  --text-h2-font-size: var(--text-size-7);
+  --text-h3-font-size: var(--text-size-6);
+  --text-h4-font-size: var(--text-size-5);
+  --text-h5-font-size: var(--text-size-4);
+  --text-h6-font-size: var(--text-size-3);
+  --text-list-font-size: var(--text-font-size);
+  --text-list-line-height: var(--text-line-height);
+  --toast-title-font-size: var(--text-font-size);
+  --date-picker-field-error-font-size: var(--form-error-font-size);
+  --date-picker-field-helper-font-size: var(--form-helper-font-size);
+  --date-time-field-error-font-size: var(--form-error-font-size);
+  --date-time-field-helper-font-size: var(--form-helper-font-size);
+  --file-upload-field-error-font-size: var(--form-error-font-size);
+  --file-upload-field-helper-font-size: var(--form-helper-font-size);
+  --input-field-error-font-size: var(--form-error-font-size);
+  --input-field-helper-font-size: var(--form-helper-font-size);
+  --multi-select-field-error-font-size: var(--form-error-font-size);
+  --multi-select-field-helper-font-size: var(--form-helper-font-size);
+  --number-input-field-error-font-size: var(--form-error-font-size);
+  --number-input-field-helper-font-size: var(--form-helper-font-size);
+  --select-field-error-font-size: var(--form-error-font-size);
+  --select-field-helper-font-size: var(--form-helper-font-size);
+  --sheet-description-font-size: var(--input-field-helper-font-size);
+  --textarea-field-error-font-size: var(--form-error-font-size);
+  --textarea-field-helper-font-size: var(--form-helper-font-size);
+  --time-field-error-font-size: var(--form-error-font-size);
+  --time-field-helper-font-size: var(--form-helper-font-size);
+}

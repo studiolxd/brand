@@ -31,7 +31,7 @@ $lxd-file-upload-item-padding-block: 0.5rem; // Padding vertical del item
 $lxd-file-upload-item-padding-inline: 0.75rem; // Padding horizontal del item
 $lxd-file-upload-item-gap: 0.75rem; // Espacio entre thumb, info y botón
 $lxd-file-upload-item-name-font-family: "Google Sans Flex", system-ui, sans-serif; // Fuente del nombre de archivo
-$lxd-file-upload-item-name-font-size: 1rem; // Tamaño del nombre de archivo
+$lxd-file-upload-item-name-font-size: 1rem; // El nombre de archivo hereda el cuerpo de la superficie
 $lxd-file-upload-item-name-font-weight: 300; // Peso del nombre de archivo
 $lxd-file-upload-item-name-color: #111e30; // Color del nombre de archivo
 $lxd-file-upload-item-size-font-size: 0.875rem; // Tamaño del peso del archivo

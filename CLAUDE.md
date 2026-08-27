@@ -112,6 +112,15 @@ html.dark {
 - `Button` variante `primary` es una excepción deliberada: NO tiene tokens `surface-dark-*` (se quitaron a propósito) — su fondo es `color.accent-1` (lavender) con texto `color.primary`, un par de color autocontenido que no depende de la superficie ambiente, así que se ve y contrasta igual en `.surface-dark`/`html.dark` que en claro. No añadir un override `surface-dark-*` a `button.primary` sin que sea una decisión de diseño explícita — la instrucción vigente es que se mantenga idéntico en ambos temas.
 - Quedan sin **ningún** estilo oscuro definido — ni antes ni ahora — los componentes que nunca lo tuvieron: Toast, Radio, Avatar, Accordion, Popover, Spinner, EmptyState, PasswordField, NumberInput, FileUpload (átomo), NumberBadge, MessageBubble, TypingIndicator, MessageComposer, ConversationThread/List, OrgSwitcher, UserMenu, DatePicker/DateTime/NumberInput fields. Si uno de estos se ve mal en `.surface-dark`/modo oscuro root-level, no es un bug de regresión — es diseño pendiente: hay que decidir el valor oscuro por primera vez y añadir sus tokens `surface-dark-*`, no parchear con CSS a mano en `surface.css`.
 
+### Dos superficies de lectura (aplicación / pública)
+
+El sistema lee a dos tamaños emparejados con las tallas de control: **aplicación** (cuerpo 16px, controles `md`) y **pública** (dentro de `SiteShell`: cuerpo 20px, controles `lg`, escala de títulos un peldaño arriba). La regla completa está en `src/stories/foundations/Typography.mdx` § «Dos superficies de lectura».
+
+- Los seis niveles y las props `size` de `Heading`/`Highlight`/`Fieldset` beben de una sola escala de títulos, `text.size.1`…`text.size.10` (`--text-size-N`). No usar `--font-size-N` crudo para el tamaño de un título: rompe el peldaño de la superficie pública.
+- `text.paragraph.small|large.font-size` son **peldaños relativos al cuerpo**, no cifras: uno por debajo y uno por encima.
+- Un componente que muestra **texto corriente** referencia `{text.font-size}` (y `{text.line-height}` si lo tiene) o, para letra menor, `{text.paragraph.small.font-size}`. Un componente de **interfaz** (todo lo que tiene tallas `sm`/`md`/`lg`) mantiene su token propio. Un campo dentro de una tabla sigue siendo un campo.
+- **`src/tokens/surface-public.css` es generado** (`pnpm build:tokens`, cola de `sd.config.mjs`). Vuelve a declarar bajo `.site-shell` todo token que referencie esos tokens base, porque un `var()` dentro de una custom property se sustituye en el elemento que la declara: `--alert-title-font-size: var(--text-font-size)` vive en `:root` y llega ya resuelto a 16px. No editarlo a mano; añadir la referencia en el JSON y rebuildear basta.
+
 ### Base UI — el motor de conducta
 
 - `render` recibe un elemento de React: solo desde componentes **cliente**. Desde un Server Component el elemento no cruza al cliente (falla con «Element type is invalid»); ahí, `Button href`.

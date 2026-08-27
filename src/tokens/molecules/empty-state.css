@@ -16,7 +16,7 @@
   --empty-state-title-font-size: var(--font-size-4); /** Tamaño tipográfico del título */
   --empty-state-title-color: var(--color-grey-dark); /** Color del título */
   --empty-state-description-font-family: var(--font-family-sans); /** Familia tipográfica de la descripción */
-  --empty-state-description-font-size: var(--font-size-2); /** Tamaño tipográfico de la descripción */
   --empty-state-description-color: var(--color-grey-dark); /** Color de la descripción */
   --empty-state-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
+  --empty-state-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (la variante sm tiene talla propia) */
 }

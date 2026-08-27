@@ -3,3 +3,15 @@
 
 $lxd-site-shell-text-font-size: 1.25rem; // Cuerpo de texto de la superficie pública (20px): la talla de los controles lg. Dentro del SiteShell todo el texto que hereda del lienzo va a esta talla; AppShell sigue a la base
 $lxd-site-shell-text-line-height: 1.5; // Interlineado del cuerpo en la superficie pública
+$lxd-site-shell-paragraph-small-font-size: 1rem; // Párrafo pequeño en la superficie pública (16px): un peldaño por debajo del cuerpo de 20px
+$lxd-site-shell-paragraph-large-font-size: 1.5rem; // Párrafo grande en la superficie pública (24px): un peldaño por encima del cuerpo de 20px
+$lxd-site-shell-heading-size-1: 1rem; // Paso 1 de la escala de títulos en la superficie pública (16px): un peldaño por encima del paso base
+$lxd-site-shell-heading-size-2: 1.25rem; // Paso 2 de la escala de títulos en la superficie pública (20px)
+$lxd-site-shell-heading-size-3: 1.25rem; // Paso 3 de la escala de títulos en la superficie pública (20px) — el de H6: iguala al cuerpo, y se distingue por el peso
+$lxd-site-shell-heading-size-4: 1.5rem; // Paso 4 de la escala de títulos en la superficie pública (24px) — el de H5: por encima del cuerpo
+$lxd-site-shell-heading-size-5: 1.75rem; // Paso 5 de la escala de títulos en la superficie pública (28px) — el de H4
+$lxd-site-shell-heading-size-6: 2rem; // Paso 6 de la escala de títulos en la superficie pública (32px) — el de H3
+$lxd-site-shell-heading-size-7: 2.5rem; // Paso 7 de la escala de títulos en la superficie pública (40px) — el de H2
+$lxd-site-shell-heading-size-8: 3.5rem; // Paso 8 de la escala de títulos en la superficie pública (56px) — el de H1
+$lxd-site-shell-heading-size-9: 4.5rem; // Paso 9 de la escala de títulos en la superficie pública (72px) — display pequeño
+$lxd-site-shell-heading-size-10: 6rem; // Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más

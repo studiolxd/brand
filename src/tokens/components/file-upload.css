@@ -24,7 +24,6 @@
   --file-upload-item-padding-inline: var(--spacing-3); /** Padding horizontal del item */
   --file-upload-item-gap: var(--spacing-3); /** Espacio entre thumb, info y botón */
   --file-upload-item-name-font-family: var(--font-family-sans); /** Fuente del nombre de archivo */
-  --file-upload-item-name-font-size: var(--font-size-2); /** Tamaño del nombre de archivo */
   --file-upload-item-size-font-size: var(--font-size-1); /** Tamaño del peso del archivo */
   --file-upload-item-error-font-size: var(--font-size-1); /** Tamaño del mensaje de error por archivo */
   --file-upload-item-error-bg: var(--color-white); /** Fondo del item con error */
@@ -45,6 +44,7 @@
   --file-upload-item-border-color: var(--color-primary); /** Borde de cada item */
   --file-upload-item-border-width: var(--border-width-default); /** Grosor de borde del item */
   --file-upload-item-border-radius: var(--border-radius-default); /** Radio de esquinas del item */
+  --file-upload-item-name-font-size: var(--text-font-size); /** El nombre de archivo hereda el cuerpo de la superficie */
   --file-upload-item-name-font-weight: var(--font-weight-default); /** Peso del nombre de archivo */
   --file-upload-item-name-color: var(--color-text-on-light); /** Color del nombre de archivo */
   --file-upload-item-size-color: var(--color-text-muted-on-light); /** Color del peso del archivo */

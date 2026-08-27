@@ -1,13 +1,18 @@
 /* El estilo de cada nivel lo da la base (`h1`…`h6` en stylesheets/base.css):
    un encabezado crudo y un <Heading> se ven igual. Aquí solo lo que el
-   elemento no puede hacer solo: desacoplar el tamaño del nivel. */
-.heading.heading--size-1  { font-size: var(--font-size-1); }
-.heading.heading--size-2  { font-size: var(--font-size-2); }
-.heading.heading--size-3  { font-size: var(--font-size-2); }
-.heading.heading--size-4  { font-size: var(--font-size-3); }
-.heading.heading--size-5  { font-size: var(--font-size-4); }
-.heading.heading--size-6  { font-size: var(--font-size-5); }
-.heading.heading--size-7  { font-size: var(--font-size-6); }
-.heading.heading--size-8  { font-size: var(--font-size-7); }
-.heading.heading--size-9  { font-size: var(--font-size-8); }
-.heading.heading--size-10 { font-size: var(--font-size-10); }
+   elemento no puede hacer solo: desacoplar el tamaño del nivel.
+
+   Los pasos salen de la escala de títulos (`--text-size-*`), la misma de la
+   que beben `--text-h1-font-size`…`--text-h6-font-size`. El SiteShell la
+   remapea un peldaño arriba, así que un `size` fijo también sube en la
+   superficie pública: nivel y tamaño no se separan de la superficie. */
+.heading.heading--size-1  { font-size: var(--text-size-1); }
+.heading.heading--size-2  { font-size: var(--text-size-2); }
+.heading.heading--size-3  { font-size: var(--text-size-3); }
+.heading.heading--size-4  { font-size: var(--text-size-4); }
+.heading.heading--size-5  { font-size: var(--text-size-5); }
+.heading.heading--size-6  { font-size: var(--text-size-6); }
+.heading.heading--size-7  { font-size: var(--text-size-7); }
+.heading.heading--size-8  { font-size: var(--text-size-8); }
+.heading.heading--size-9  { font-size: var(--text-size-9); }
+.heading.heading--size-10 { font-size: var(--text-size-10); }

@@ -4,28 +4,32 @@
 
 :root {
   --text-font-family: var(--font-family-sans); /** Default font family */
-  --text-font-size: var(--font-size-2); /** Default font size (18px) */
+  --text-font-size: var(--font-size-2); /** Cuerpo base (16px). Es el cuerpo de la superficie de aplicación; el SiteShell lo remapea a 20px */
   --text-line-height: var(--line-height-normal); /** Default line height */
   --text-letter-spacing: var(--letter-spacing-normal); /** Default letter spacing */
+  --text-size-1: var(--font-size-1); /** Paso 1 de la escala de títulos (14px) */
+  --text-size-2: var(--font-size-2); /** Paso 2 de la escala de títulos (16px) */
+  --text-size-3: var(--font-size-2); /** Paso 3 de la escala de títulos (16px) — el de H6 */
+  --text-size-4: var(--font-size-3); /** Paso 4 de la escala de títulos (20px) — el de H5 */
+  --text-size-5: var(--font-size-4); /** Paso 5 de la escala de títulos (24px) — el de H4 */
+  --text-size-6: var(--font-size-5); /** Paso 6 de la escala de títulos (28px) — el de H3 */
+  --text-size-7: var(--font-size-6); /** Paso 7 de la escala de títulos (32px) — el de H2 */
+  --text-size-8: var(--font-size-7); /** Paso 8 de la escala de títulos (40px) — el de H1 */
+  --text-size-9: var(--font-size-8); /** Paso 9 de la escala de títulos (56px) — display pequeño */
+  --text-size-10: var(--font-size-10); /** Paso 10 de la escala de títulos (96px) — display */
   --text-heading-font-family: var(--font-family-sans); /** Heading font family */
   --text-heading-letter-spacing: var(--letter-spacing-tight); /** Heading letter spacing */
-  --text-h1-font-size: var(--font-size-7); /** H1 font size (40px) */
   --text-h1-line-height: var(--line-height-tight); /** H1 line height */
-  --text-h2-font-size: var(--font-size-6); /** H2 font size (32px) */
   --text-h2-line-height: var(--line-height-tight); /** H2 line height */
-  --text-h3-font-size: var(--font-size-5); /** H3 font size (28px) */
   --text-h3-line-height: var(--line-height-tight); /** H3 line height */
-  --text-h4-font-size: var(--font-size-4); /** H4 font size (24px) */
   --text-h4-line-height: var(--line-height-snug); /** H4 line height */
-  --text-h5-font-size: var(--font-size-3); /** H5 font size (20px) */
   --text-h5-line-height: var(--line-height-snug); /** H5 line height */
   --text-h5-letter-spacing: var(--letter-spacing-normal); /** H5 letter spacing */
-  --text-h6-font-size: var(--font-size-2); /** H6 font size (18px) */
   --text-h6-line-height: var(--line-height-snug); /** H6 line height */
   --text-h6-letter-spacing: var(--letter-spacing-normal); /** H6 letter spacing */
-  --text-paragraph-small-font-size: var(--font-size-1); /** Small paragraph font size (14px) */
+  --text-paragraph-small-font-size: var(--font-size-1); /** Párrafo pequeño: un peldaño por debajo del cuerpo (14px en base, 16px en la superficie pública) */
   --text-paragraph-small-line-height: var(--line-height-relaxed); /** Small paragraph line height */
-  --text-paragraph-large-font-size: var(--font-size-4); /** Large paragraph font size (24px) */
+  --text-paragraph-large-font-size: var(--font-size-3); /** Párrafo grande: un peldaño por encima del cuerpo (20px en base, 24px en la superficie pública) */
   --text-paragraph-large-line-height: var(--line-height-snug); /** Large paragraph line height */
   --text-list-gap: var(--spacing-2); /** Spacing between list items (8px) */
   --text-list-padding-inline-start: var(--spacing-6); /** Left indent for list (32px) */
@@ -35,15 +39,21 @@
   --text-heading-font-weight: var(--font-weight-emphasis); /** Heading font weight */
   --text-heading-color: var(--color-text-on-light); /** Heading color */
   --text-h1-font-family: var(--text-heading-font-family); /** H1 font family */
+  --text-h1-font-size: var(--text-size-8); /** H1 font size — paso 8 de la escala (40px en base, un peldaño más en la superficie pública) */
   --text-h1-letter-spacing: var(--text-heading-letter-spacing); /** H1 letter spacing */
   --text-h2-font-family: var(--text-heading-font-family); /** H2 font family */
+  --text-h2-font-size: var(--text-size-7); /** H2 font size — paso 7 de la escala (32px en base, un peldaño más en la superficie pública) */
   --text-h2-letter-spacing: var(--text-heading-letter-spacing); /** H2 letter spacing */
   --text-h3-font-family: var(--text-heading-font-family); /** H3 font family */
+  --text-h3-font-size: var(--text-size-6); /** H3 font size — paso 6 de la escala (28px en base, un peldaño más en la superficie pública) */
   --text-h3-letter-spacing: var(--text-heading-letter-spacing); /** H3 letter spacing */
   --text-h4-font-family: var(--text-heading-font-family); /** H4 font family */
+  --text-h4-font-size: var(--text-size-5); /** H4 font size — paso 5 de la escala (24px en base, un peldaño más en la superficie pública) */
   --text-h4-letter-spacing: var(--text-heading-letter-spacing); /** H4 letter spacing */
   --text-h5-font-family: var(--text-heading-font-family); /** H5 font family */
+  --text-h5-font-size: var(--text-size-4); /** H5 font size — paso 4 de la escala (20px en base, un peldaño más en la superficie pública) */
   --text-h6-font-family: var(--text-heading-font-family); /** H6 font family */
+  --text-h6-font-size: var(--text-size-3); /** H6 font size — paso 3 de la escala (16px en base, un peldaño más en la superficie pública) */
   --text-list-font-family: var(--text-font-family); /** List font family */
   --text-list-font-size: var(--text-font-size); /** List font size */
   --text-list-line-height: var(--text-line-height); /** List line height */

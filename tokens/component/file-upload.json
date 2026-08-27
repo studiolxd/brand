@@ -35,7 +35,7 @@
     "item-padding-inline":         { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Padding horizontal del item" },
     "item-gap":                    { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Espacio entre thumb, info y botón" },
     "item-name-font-family":       { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Fuente del nombre de archivo" },
-    "item-name-font-size":         { "$value": "{font-size.2}",               "$type": "dimension", "$description": "Tamaño del nombre de archivo" },
+    "item-name-font-size":         { "$value": "{text.font-size}",            "$type": "dimension", "$description": "El nombre de archivo hereda el cuerpo de la superficie" },
     "item-name-font-weight":       { "$value": "{font-weight.default}",       "$type": "number",    "$description": "Peso del nombre de archivo" },
     "item-name-color":             { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del nombre de archivo" },
     "item-size-font-size":         { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Tamaño del peso del archivo" },

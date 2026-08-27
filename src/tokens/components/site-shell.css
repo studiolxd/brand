@@ -5,4 +5,16 @@
 :root {
   --site-shell-text-font-size: var(--font-size-3); /** Cuerpo de texto de la superficie pública (20px): la talla de los controles lg. Dentro del SiteShell todo el texto que hereda del lienzo va a esta talla; AppShell sigue a la base */
   --site-shell-text-line-height: var(--line-height-normal); /** Interlineado del cuerpo en la superficie pública */
+  --site-shell-paragraph-small-font-size: var(--font-size-2); /** Párrafo pequeño en la superficie pública (16px): un peldaño por debajo del cuerpo de 20px */
+  --site-shell-paragraph-large-font-size: var(--font-size-4); /** Párrafo grande en la superficie pública (24px): un peldaño por encima del cuerpo de 20px */
+  --site-shell-heading-size-1: var(--font-size-2); /** Paso 1 de la escala de títulos en la superficie pública (16px): un peldaño por encima del paso base */
+  --site-shell-heading-size-2: var(--font-size-3); /** Paso 2 de la escala de títulos en la superficie pública (20px) */
+  --site-shell-heading-size-3: var(--font-size-3); /** Paso 3 de la escala de títulos en la superficie pública (20px) — el de H6: iguala al cuerpo, y se distingue por el peso */
+  --site-shell-heading-size-4: var(--font-size-4); /** Paso 4 de la escala de títulos en la superficie pública (24px) — el de H5: por encima del cuerpo */
+  --site-shell-heading-size-5: var(--font-size-5); /** Paso 5 de la escala de títulos en la superficie pública (28px) — el de H4 */
+  --site-shell-heading-size-6: var(--font-size-6); /** Paso 6 de la escala de títulos en la superficie pública (32px) — el de H3 */
+  --site-shell-heading-size-7: var(--font-size-7); /** Paso 7 de la escala de títulos en la superficie pública (40px) — el de H2 */
+  --site-shell-heading-size-8: var(--font-size-8); /** Paso 8 de la escala de títulos en la superficie pública (56px) — el de H1 */
+  --site-shell-heading-size-9: var(--font-size-9); /** Paso 9 de la escala de títulos en la superficie pública (72px) — display pequeño */
+  --site-shell-heading-size-10: var(--font-size-10); /** Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más */
 }

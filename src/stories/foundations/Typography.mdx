@@ -7,6 +7,8 @@ import {
   fontFamilies, textStyles,
   familyTokens, sizeTokens, weightRoleTokens, weightScaleTokens, lineHeightTokens, letterSpacingTokens, measureTokens,
 } from "../../tokens/typography";
+import { headingScaleTokens } from "../../tokens/components/text";
+import { siteShellTypeTokens } from "../../tokens/components/site-shell";
 
 <Meta title="Foundations/Tipografía" />
 
@@ -56,9 +58,50 @@ Lo que de verdad usan los componentes: cada nivel combina tamaño, peso, interli
 
 ---
 
+## Dos superficies de lectura
+
+El sistema lee a dos tamaños, emparejados con las tallas de control (Foundations → Tallas de componente):
+
+- **Aplicación** — la base. `AppShell` y todo lo que no va dentro de un `SiteShell`. Cuerpo **16px**, controles **`md`**.
+- **Pública** — dentro de `SiteShell`. Cuerpo **20px**, controles **`lg`**.
+
+No es un tema ni una prop: es un **contexto**. `SiteShell` remapea los tokens de texto en su subárbol, así que basta con envolver la página; ningún componente recibe un `surface` ni pregunta dónde está.
+
+| | Aplicación (base) | Pública (`SiteShell`) |
+|---|---|---|
+| Cuerpo — `--text-font-size` | 16px | 20px |
+| Párrafo `small` | 14px | 16px |
+| Párrafo `large` | 20px | 24px |
+| H6 | 16px | 20px |
+| H5 | 20px | 24px |
+| H4 | 24px | 28px |
+| H3 | 28px | 32px |
+| H2 | 32px | 40px |
+| H1 | 40px | 56px |
+| Controles | `md` (40px) | `lg` (48px) |
+
+### Los títulos suben un peldaño entero
+
+Si el cuerpo sube y los títulos no, la jerarquía se rompe por abajo: con el cuerpo a 20px, un H5 de 20px mediría lo mismo que el párrafo y un H6 de 16px, menos. Por eso en la superficie pública **la escala de títulos entera sube un paso**: el H5 queda por encima del cuerpo y el H6 lo iguala, distinguiéndose por el peso (`emphasis`, 500) y no por el tamaño.
+
+La escala vive en `--text-size-1`…`--text-size-10`, y de ella beben los seis niveles (`--text-h1-font-size` = `--text-size-8`, y así hasta el H6 = `--text-size-3`), la prop `size` de `Heading`, la de `Highlight` y la del `legend` de `Fieldset`. `SiteShell` remapea los diez pasos de una vez: nivel y tamaño desacoplado se mueven juntos, nunca uno sin el otro. El paso 10 es el techo de la escala y no sube más.
+
+### El párrafo pequeño y el grande son peldaños, no tamaños
+
+`Paragraph size="small"` es **un paso por debajo del cuerpo de la superficie** y `size="large"` **uno por encima**; no son 14px y 24px absolutos. En la aplicación, 14 y 20; en la pública, 16 y 24. Lo mismo vale para los mensajes de error y las ayudas de formulario, que van al peldaño de `small`.
+
+### Qué hereda y qué no
+
+La línea divisoria es si el componente **muestra texto corriente** o si es **interfaz con talla propia**:
+
+- **Hereda el cuerpo** (`{text.font-size}`): el título y la descripción de un `Alert` o un `Toast`, la descripción de un `Modal` o un `EmptyState`, el valor de una `DescriptionList`, las celdas de una `Table`, el rótulo de `PrevNextNav`, un `MessageBubble`, el nombre de archivo de `FileUpload` y el mensaje de éxito de un formulario. Son prosa: si la superficie lee más grande, ellos también. El caso límite es `LegalFooter`, que directamente **no tiene token de cuerpo**: hereda por cascada, como un `<p>` cualquiera.
+- **Talla propia**: campos, `Select`, `Textarea`, botones, menús, `Kbd`, `Tabs`, `Pagination`, avatares, navegación lateral, paleta de comandos, conmutadores y calendarios. Su tamaño sale de su talla (`sm`/`md`/`lg`), que es la que fija el producto, no de la superficie. Un campo dentro de una tabla sigue siendo un campo.
+
+---
+
 ## Escala de tamaños
 
-Diez pasos, del 14px de las etiquetas al 96px de display. Los seis niveles de título ocupan del 2 al 7; el 8, 9 y 10 son display, para titulares de marketing. Por debajo hay un paso 0 (12px) que **no es texto**: es el cuerpo de las cifras dentro de una marca (el contador de un badge), y no se usa para nada que haya que leer.
+Diez pasos, del 14px de las etiquetas al 96px de display. En la superficie de aplicación los seis niveles de título ocupan del 2 al 7 (en la pública, del 3 al 8); el 8, 9 y 10 son display, para titulares de marketing. Por debajo hay un paso 0 (12px) que **no es texto**: es el cuerpo de las cifras dentro de una marca (el contador de un badge), y no se usa para nada que haya que leer.
 
 <TypeScale tokens={sizeTokens} />
 
@@ -89,6 +132,18 @@ Con Google Sans Flex a 16px, 70ch son unos 505px. Es el ancho máximo de los com
 ### Tamaños
 
 <TokenTable tokens={sizeTokens} />
+
+### Escala de títulos
+
+Los diez pasos de los que beben los niveles `h1`…`h6` y las props `size` de `Heading`, `Highlight` y el `legend` de `Fieldset`.
+
+<TokenTable tokens={headingScaleTokens} />
+
+### Superficie pública
+
+Lo que `SiteShell` remapea en su subárbol. Definidos en `tokens/component/site-shell.json`.
+
+<TokenTable tokens={siteShellTypeTokens} />
 
 ### Interlineado
 

@@ -1,5 +1,6 @@
 import StyleDictionary from 'style-dictionary';
-import { writeFileSync } from 'fs';
+import { readdirSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import { registerDarkModeFormat, isDarkToken } from './sd.formats.mjs';
 
 registerDarkModeFormat(StyleDictionary);
@@ -398,3 +399,86 @@ const legacyLines = [
 ];
 writeFileSync('src/tokens/scss/_index.legacy.scss', legacyLines.join('\n'));
 console.log('✔︎ src/tokens/scss/_index.legacy.scss');
+
+/* ---------------------------------------------------------------------------
+ * Superficie pública: `.site-shell`
+ *
+ * Un `var()` dentro de una custom property se sustituye en el elemento que la
+ * declara. `--alert-title-font-size: var(--text-font-size)` vive en `:root`, así
+ * que ya viene resuelto a 16px cuando llega al alert: redefinir `--text-font-size`
+ * en `.site-shell` no lo arrastra. La única forma de que un token que "hereda el
+ * cuerpo" siga a la superficie es volver a declararlo en `.site-shell`, igual que
+ * el modo oscuro vuelve a declarar los suyos en `.surface-dark`.
+ *
+ * Este bloque se genera solo: se parte de los tokens que la superficie pública
+ * redefine (cuerpo, interlineado, peldaños del párrafo y escala de títulos) y se
+ * arrastra, por punto fijo, todo token que los referencie. Añadir
+ * `"{text.font-size}"` a un componente nuevo basta: el remapeo sale del build.
+ * ------------------------------------------------------------------------- */
+const cssName = (path) => `--${path.join('-')}`;
+
+const surfaceSeeds = {
+  'text.font-size':                   '--site-shell-text-font-size',
+  'text.line-height':                 '--site-shell-text-line-height',
+  'text.paragraph.small.font-size':   '--site-shell-paragraph-small-font-size',
+  'text.paragraph.large.font-size':   '--site-shell-paragraph-large-font-size',
+  ...Object.fromEntries(
+    Array.from({ length: 10 }, (_, i) => [`text.size.${i + 1}`, `--site-shell-heading-size-${i + 1}`]),
+  ),
+};
+
+const allTokens = [];
+{
+  const walk = (node, path) => {
+    for (const [key, value] of Object.entries(node)) {
+      if (!value || typeof value !== 'object') continue;
+      if ('$value' in value) allTokens.push({ path: [...path, key], value: value.$value });
+      else walk(value, [...path, key]);
+    }
+  };
+  const files = [];
+  const collect = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) collect(full);
+      else if (entry.name.endsWith('.json')) files.push(full);
+    }
+  };
+  collect('tokens');
+  for (const file of files) walk(JSON.parse(readFileSync(file, 'utf-8')), []);
+}
+
+const surfaceMap = new Map(
+  Object.entries(surfaceSeeds).map(([path, target]) => [path, `var(${target})`]),
+);
+for (let changed = true; changed; ) {
+  changed = false;
+  for (const { path, value } of allTokens) {
+    const dotted = path.join('.');
+    if (surfaceMap.has(dotted)) continue;
+    if (path[0] === 'site-shell') continue;
+    if (path.some((segment) => segment.startsWith('surface-dark-'))) continue;
+    const ref = typeof value === 'string' && value.match(/^\{(.+)\}$/)?.[1];
+    if (!ref || !surfaceMap.has(ref)) continue;
+    surfaceMap.set(dotted, `var(${cssName(ref.split('.'))})`);
+    changed = true;
+  }
+}
+
+const surfaceLines = [
+  '/**',
+  ' * Do not edit directly, this file was auto-generated.',
+  ' *',
+  ' * La superficie pública: dentro de un SiteShell el cuerpo lee a 20px y la escala',
+  ' * de títulos sube un peldaño. Cada token que hereda del cuerpo se vuelve a',
+  ' * declarar aquí porque un var() dentro de una custom property se resuelve en el',
+  ' * elemento que la declara, no en el que la usa.',
+  ' */',
+  '',
+  '.site-shell {',
+  ...[...surfaceMap].map(([path, value]) => `  ${cssName(path.split('.'))}: ${value};`),
+  '}',
+  '',
+];
+writeFileSync('src/tokens/surface-public.css', surfaceLines.join('\n'));
+console.log('✔︎ src/tokens/surface-public.css');

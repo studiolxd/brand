@@ -11,17 +11,17 @@ $lxd-form-links-margin-block-start: 1.5rem; // Aire entre las acciones y los enl
 $lxd-form-alternatives-gap: 0.75rem; // Aire entre las alternativas (acceso con Google, enlace mágico…)
 $lxd-form-alternatives-margin-block-start: 2rem; // Aire entre el bloque principal y las alternativas
 $lxd-form-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de error
-$lxd-form-error-font-size: 0.875rem; // Font size del mensaje de error (14px)
+$lxd-form-error-font-size: 0.875rem; // El mensaje de error va un peldaño por debajo del cuerpo de la superficie (14px en aplicación, 16px en la pública)
 $lxd-form-error-font-weight: 300; // Font weight del mensaje de error
 $lxd-form-error-line-height: 1.5; // Line height del mensaje de error
 $lxd-form-error-color: #b30000; // Color del mensaje de error
 $lxd-form-helper-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del texto de ayuda
-$lxd-form-helper-font-size: 0.875rem; // Font size del texto de ayuda (14px)
+$lxd-form-helper-font-size: 0.875rem; // El texto de ayuda va un peldaño por debajo del cuerpo de la superficie (14px en aplicación, 16px en la pública)
 $lxd-form-helper-font-weight: 300; // Font weight del texto de ayuda
 $lxd-form-helper-line-height: 1.5; // Line height del texto de ayuda
 $lxd-form-helper-color: #111e30; // Color del texto de ayuda: tinta (prusia), no gris
 $lxd-form-success-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de éxito
-$lxd-form-success-font-size: 1rem; // Font size del mensaje de éxito (18px)
+$lxd-form-success-font-size: 1rem; // El mensaje de éxito hereda el cuerpo de la superficie
 $lxd-form-success-font-weight: 300; // Font weight del mensaje de éxito
 $lxd-form-success-line-height: 1.5; // Line height del mensaje de éxito
 $lxd-form-success-color: #111e30; // Color del mensaje de éxito

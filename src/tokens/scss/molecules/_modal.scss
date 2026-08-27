@@ -21,6 +21,6 @@ $lxd-modal-transition-easing: ease-in-out; // Easing de la animación
 $lxd-modal-close-color: #6b6b6b; // Color del botón de cierre
 $lxd-modal-close-hover-color: #111e30; // Color del botón de cierre en hover
 $lxd-modal-close-hover-bg: #f2f2f2; // Fondo del botón de cierre en hover
-$lxd-modal-description-font-size: 1rem; // Tamaño de la descripción del modal
+$lxd-modal-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-modal-description-color: #4a4a4a; // Color de la descripción del modal
 $lxd-modal-description-margin-block-end: 1rem; // Separación entre la descripción y el cuerpo del modal

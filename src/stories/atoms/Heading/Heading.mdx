@@ -19,7 +19,9 @@ Un título no elige su peso: es siempre el de énfasis del sistema (`--font-weig
 
 ## Tamaño desacoplado
 
-`size` toma un paso de la escala (1–10) sin cambiar el nivel. Es para cuando el esquema del documento y la maqueta no coinciden: el título de una tarjeta es un `h2` en su sección, pero se ve con el tamaño de un `h5`; una cifra de portada es un `h2` que se ve como display. La semántica no se toca para conseguir un tamaño.
+`size` toma un paso de la escala de títulos (1–10) sin cambiar el nivel. Es para cuando el esquema del documento y la maqueta no coinciden: el título de una tarjeta es un `h2` en su sección, pero se ve con el tamaño de un `h5`; una cifra de portada es un `h2` que se ve como display. La semántica no se toca para conseguir un tamaño.
+
+Es la misma escala de la que salen los seis niveles (`--text-size-1`…`--text-size-10`; el H1 es el paso 8 y el H6 el 3), y por eso **el tamaño desacoplado sigue a la superficie igual que el nivel**: dentro de un `SiteShell` la escala entera sube un peldaño, así que un `size={5}` mide 24px en la aplicación y 28px en la superficie pública. La regla y la tabla de las dos escalas están en Foundations → Tipografía.
 
 <Canvas of={HeadingStories.Tamanos} />
 
@@ -30,6 +32,8 @@ Un título no elige su peso: es siempre el de énfasis del sistema (`--font-weig
 <TokenTable tokens={headingBaseTokens} />
 
 ### Por nivel
+
+Cada nivel es un paso de la escala de títulos; los pasos y sus valores, en Foundations → Tipografía.
 
 <TokenTable tokens={headingLevelTokens} />
 

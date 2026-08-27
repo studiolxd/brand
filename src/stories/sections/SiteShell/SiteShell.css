@@ -7,9 +7,10 @@
   min-block-size: 100dvh;
   /* La superficie pública lee a 20px, la talla de los controles lg: todo lo
      que hereda del lienzo (párrafos, enlaces, listas) sube; los componentes
-     con talla propia (cabecera, pie, campos) siguen sus tokens. */
-  --text-font-size: var(--site-shell-text-font-size);
-  --text-line-height: var(--site-shell-text-line-height);
+     con talla propia (cabecera, pie, campos) siguen sus tokens. El remapeo de
+     los tokens de texto —cuerpo, peldaños del párrafo y escala de títulos— lo
+     genera el build en `src/tokens/surface-public.css` a partir de los tokens
+     `site-shell.*`; aquí solo queda el tamaño del propio lienzo. */
   font-size: var(--site-shell-text-font-size);
   line-height: var(--site-shell-text-line-height);
 }

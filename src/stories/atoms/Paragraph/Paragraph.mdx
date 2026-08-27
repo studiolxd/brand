@@ -15,7 +15,7 @@ Un `<p>` crudo se ve exactamente igual que un `<Paragraph>` por defecto: el cuer
 
 ## Tamaños
 
-Los tres salen de la escala compuesta de texto (Foundations → Tipografía): el pequeño baja al paso 1 con interlineado relajado, el grande sube al paso 4 con interlineado ceñido. Los valores exactos, en la tabla de tokens.
+Los tres son **peldaños relativos al cuerpo de la superficie**, no tamaños fijos: `small` es un paso por debajo y `large` uno por encima, con su interlineado —relajado el pequeño, ceñido el grande—. En la superficie de aplicación son 14 y 20px; dentro de un `SiteShell`, donde el cuerpo lee a 20px, son 16 y 24px. La regla de las dos escalas está en Foundations → Tipografía; los valores base, en la tabla de tokens.
 
 <Canvas of={ParagraphStories.Tamanos} />
 

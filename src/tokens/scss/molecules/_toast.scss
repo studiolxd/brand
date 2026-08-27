@@ -13,14 +13,14 @@ $lxd-toast-border-width: 1px; // Grosor del borde
 $lxd-toast-shadow: none; // Sombra de elevación
 $lxd-toast-bg: #111e30; // Fondo del toast por defecto — prussian
 $lxd-toast-border-color: #111e30; // Borde igual al fondo — invisible
-$lxd-toast-title-font-size: 1rem; // Tamaño del título (16px)
+$lxd-toast-title-font-size: 1rem; // El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-toast-title-font-weight: 500; // Peso del título
 $lxd-toast-title-color: #ffffff; // Texto blanco sobre fondo oscuro
 $lxd-toast-description-font-size: 0.875rem; // Tamaño de la descripción (14px)
 $lxd-toast-description-color: #d0d0d0; // Descripción atenuada sobre fondo oscuro
 $lxd-toast-close-color: #ffffff; // Color del botón de cierre — blanco
 $lxd-toast-close-hover-color: #ffffff; // Color del botón de cierre en hover
-$lxd-toast-close-size: 16px; // Tamaño del icono de cierre (18px)
+$lxd-toast-close-size: 16px; // Tamaño del icono de cierre (16px)
 $lxd-toast-duration-in: 250ms; // Duración animación de entrada (250ms)
 $lxd-toast-duration-out: 250ms; // Duración animación de salida (250ms)
 $lxd-toast-easing: ease-out; // Curva de animación

@@ -2,9 +2,9 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-table-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family
-$lxd-table-font-size: 1rem; // 18px — Body default size
+$lxd-table-font-size: 1rem; // Las celdas heredan el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-table-font-weight: 300; // Font weight base
-$lxd-table-line-height: 1.5; // Normal line height para celdas multilínea
+$lxd-table-line-height: 1.5; // Interlineado heredado del cuerpo de la superficie, para celdas multilínea
 $lxd-table-color: #111e30; // Color de texto base
 $lxd-table-bg: rgba(0, 0, 0, 0); // Fondo de la tabla
 $lxd-table-border-width: 1px; // Grosor de separadores de fila

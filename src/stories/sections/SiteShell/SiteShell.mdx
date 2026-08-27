@@ -19,7 +19,23 @@ El marco de una página pública: **cabecera, contenido y pie en columna, al men
 
 ## Tipografía de la superficie pública
 
-Dentro del `SiteShell` el cuerpo de texto va a **20px** (`text-font-size`, la talla de los controles `lg`) con su interlineado: párrafos, enlaces y listas suben a la vez que los formularios. `AppShell` no lo toca y sigue a la base de 16px. Los componentes con talla propia (cabecera, pie, campos, botones) siguen sus tokens.
+Dentro del `SiteShell` el cuerpo de texto va a **20px** (`text-font-size`, la talla de los controles `lg`) con su interlineado: párrafos, enlaces, listas y todo lo que hereda del lienzo suben a la vez que los formularios. `AppShell` no lo toca y sigue a la base de 16px.
+
+No es una prop ni un tema: el marco vuelve a declarar los tokens de texto en su subárbol, así que basta con envolver la página. Ese bloque lo genera el build (`src/tokens/surface-public.css`) a partir de los tokens `site-shell.*`: arrastra, por punto fijo, todo token que referencie el cuerpo, los peldaños del párrafo o la escala de títulos. Un componente nuevo que declare `"{text.font-size}"` entra solo.
+
+**Los títulos suben un peldaño entero.** Con el cuerpo a 20px, un H5 de 20px mediría lo mismo que el párrafo y un H6 de 16px, menos. El marco remapea la escala completa (`--text-size-1`…`--text-size-10`, los diez pasos de los que beben los seis niveles y la prop `size` de `Heading`), no cada nivel por separado: así el tamaño desacoplado sube con el nivel y no se descuelga. El H5 queda por encima del cuerpo y el H6 lo iguala, distinguiéndose por el peso.
+
+**Los tamaños del párrafo son peldaños, no cifras.** `small` es un paso por debajo del cuerpo de la superficie y `large` uno por encima: 14/20 en la aplicación, **16/24** aquí.
+
+| | Aplicación | `SiteShell` |
+|---|---|---|
+| Cuerpo | 16px | 20px |
+| Párrafo `small` / `large` | 14 / 20px | 16 / 24px |
+| H6 · H5 · H4 | 16 · 20 · 24px | 20 · 24 · 28px |
+| H3 · H2 · H1 | 28 · 32 · 40px | 32 · 40 · 56px |
+| Controles | `md` | `lg` |
+
+Los componentes con talla propia (cabecera, pie, campos, botones, menús, calendarios) siguen sus tokens y no cambian aquí. Qué hereda y qué no, en Foundations → Tipografía.
 
 ## Cuándo no
 

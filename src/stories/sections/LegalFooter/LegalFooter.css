@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: var(--legal-footer-gap);
   padding-block: var(--legal-footer-padding-block);
-  font-size: var(--legal-footer-font-size);
 }
 
 /* En móvil, apilados: cuatro enlaces largos en línea se parten a media

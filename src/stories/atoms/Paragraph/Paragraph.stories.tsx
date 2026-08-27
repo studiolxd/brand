@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { Paragraph } from './Paragraph';
 
 const meta: Meta<typeof Paragraph> = {
@@ -45,4 +46,24 @@ export const Tamanos: Story = {
       <Paragraph size="large">Large — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Paragraph>
     </div>
   ),
+};
+
+export const ContratoTamanos: Story = {
+  name: 'Test — fuera del SiteShell los peldaños salen del cuerpo base',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <Paragraph>Cuerpo</Paragraph>
+      <Paragraph size="small">Pequeño</Paragraph>
+      <Paragraph size="large">Grande</Paragraph>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const px = (el: Element) => parseFloat(getComputedStyle(el).fontSize);
+    // La superficie de aplicación lee a 16px; small y large son sus vecinos.
+    await expect(px(canvas.getByText('Cuerpo'))).toBe(16);
+    await expect(px(canvas.getByText('Pequeño'))).toBe(14);
+    await expect(px(canvas.getByText('Grande'))).toBe(20);
+  },
 };

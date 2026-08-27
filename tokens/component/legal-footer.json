@@ -3,7 +3,6 @@
     "padding-block": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire arriba y abajo del pie" },
     "gap":           { "$value": "{spacing.3}", "$type": "dimension", "$description": "Entre el título y la lista de enlaces" },
     "links-gap":     { "$value": "{spacing.4}", "$type": "dimension", "$description": "Entre enlaces" },
-    "links-gap-stacked": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre enlaces apilados (móvil, por debajo de md)" },
-    "font-size":     { "$value": "{font-size.2}", "$type": "dimension", "$description": "Los enlaces legales, en el cuerpo base (16px): no son letra pequeña" }
+    "links-gap-stacked": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre enlaces apilados (móvil, por debajo de md)" }
   }
 }

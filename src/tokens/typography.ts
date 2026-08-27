@@ -68,7 +68,7 @@ export interface TextStyle {
 const t = text.text as unknown as Record<string, Record<string, TokenEntry> | TokenEntry>;
 const style = (name: string, path: string, node: Record<string, TokenEntry>): TextStyle => ({
   name,
-  cssPrefix: `--text-${path}`,
+  cssPrefix: path ? `--text-${path}` : '--text',
   size: resolve(node['font-size'].$value),
   weight: resolve(node['font-weight'].$value),
   lineHeight: resolve(node['line-height'].$value),
@@ -79,14 +79,13 @@ const style = (name: string, path: string, node: Record<string, TokenEntry>): Te
   letterSpacingRef: node['letter-spacing'].$value,
 });
 
-const para = t.paragraph as Record<string, Record<string, TokenEntry> | TokenEntry>;
+// El párrafo no tiene nodo propio: es el cuerpo del lienzo (`text.*`), y las
+// variantes solo le pisan tamaño e interlineado.
+const base = t as unknown as Record<string, TokenEntry>;
+const para = t.paragraph as Record<string, Record<string, TokenEntry>>;
 export const textStyles: TextStyle[] = [
   ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const).map((h) => style(h.toUpperCase(), h, t[h] as Record<string, TokenEntry>)),
-  style('Párrafo', 'paragraph', para as Record<string, TokenEntry>),
-  {
-    ...style('Párrafo grande', 'paragraph-large', { ...(para as Record<string, TokenEntry>), ...(para.large as Record<string, TokenEntry>) }),
-  },
-  {
-    ...style('Párrafo pequeño', 'paragraph-small', { ...(para as Record<string, TokenEntry>), ...(para.small as Record<string, TokenEntry>) }),
-  },
+  style('Párrafo', '', base),
+  style('Párrafo grande', 'paragraph-large', { ...base, ...para.large }),
+  style('Párrafo pequeño', 'paragraph-small', { ...base, ...para.small }),
 ];

@@ -7,6 +7,9 @@ export const headingBaseTokens = all.filter(t => t.name.startsWith('--text-headi
 
 export const headingLevelTokens = all.filter(t => /^--text-h[1-6]-/.test(t.name));
 
+/** La escala de títulos: los diez pasos de los que beben los niveles y la prop `size`. */
+export const headingScaleTokens = all.filter(t => /^--text-size-\d+$/.test(t.name));
+
 export const headingDarkTokens: Token[] = [
   { name: '--text-heading-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
 ];
