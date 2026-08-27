@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "24.2.0",
+  "version": "24.3.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -212,6 +212,18 @@
     "./hero": {
       "types": "./dist/_types/sections/Hero/Hero.d.ts",
       "import": "./dist/hero.js"
+    },
+    "./error-boundary": {
+      "types": "./dist/_types/atoms/ErrorBoundary/ErrorBoundary.d.ts",
+      "import": "./dist/error-boundary.js"
+    },
+    "./not-found-page": {
+      "types": "./dist/_types/templates/NotFoundPage/NotFoundPage.d.ts",
+      "import": "./dist/not-found-page.js"
+    },
+    "./error-page": {
+      "types": "./dist/_types/templates/ErrorPage/ErrorPage.d.ts",
+      "import": "./dist/error-page.js"
     },
     "./site-shell": {
       "types": "./dist/_types/sections/SiteShell/SiteShell.d.ts",

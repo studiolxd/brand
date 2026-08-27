@@ -105,6 +105,8 @@ export type { TypingIndicatorProps } from './stories/atoms/TypingIndicator/Typin
 export type { TabsProps, TabsListProps, TabsTriggerProps, TabsContentProps } from './stories/atoms/Tabs/Tabs';
 export { Textarea } from './stories/atoms/Textarea/Textarea';
 export type { TextareaProps } from './stories/atoms/Textarea/Textarea';
+export { ErrorBoundary } from './stories/atoms/ErrorBoundary/ErrorBoundary';
+export type { ErrorBoundaryProps } from './stories/atoms/ErrorBoundary/ErrorBoundary';
 export { VisuallyHidden } from './stories/atoms/VisuallyHidden/VisuallyHidden';
 
 // ─── Molecules ───────────────────────────────────────────────
@@ -221,3 +223,9 @@ export { LegalFooter } from './stories/sections/LegalFooter/LegalFooter';
 export type { LegalFooterProps, LegalFooterLink, LegalFooterRenderLinkProps } from './stories/sections/LegalFooter/LegalFooter';
 export { Hero } from './stories/sections/Hero/Hero';
 export type { HeroProps } from './stories/sections/Hero/Hero';
+
+// ─── Templates ──────────────────────────────────────────────
+export { ErrorPage } from './stories/templates/ErrorPage/ErrorPage';
+export type { ErrorPageProps } from './stories/templates/ErrorPage/ErrorPage';
+export { NotFoundPage } from './stories/templates/NotFoundPage/NotFoundPage';
+export type { NotFoundPageProps } from './stories/templates/NotFoundPage/NotFoundPage';

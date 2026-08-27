@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.3.0
+
+### Añadido
+
+- `ErrorBoundary` (átomo): límite de error de React sin cara ni tokens.
+  `children`, `fallback` (por defecto `null`) y `onError`. Componente de clase
+  cliente: si un hijo lanza al renderizar, pinta el fallback y el resto del
+  árbol sigue vivo.
+- `NotFoundPage` (plantilla): el 404 de un sitio público. `SiteShell` con
+  `header`/`footer` opcionales —cada uno dentro de su `ErrorBoundary`— y un
+  `main` (`Container` `space="xl"`, `id="main-content"`, `tabIndex={-1}`) con
+  `PageIntro` (`title`, `description`) y `homeLink` (el `Link` del producto).
+- `ErrorPage` (plantilla): «algo ha salido mal», misma maqueta que
+  `NotFoundPage` con una fila de `actions` (Button «Reintentar» + enlace «Ir al
+  inicio») en lugar del enlace de vuelta. Regla documentada: en `error.tsx`
+  cabecera sin auth y pie; en `global-error.tsx` ninguno. Token nuevo
+  `error-page.actions-gap`.
+- Exports `./error-boundary`, `./not-found-page` y `./error-page`.
+
 ## v24.2.0
 
 ### Añadido

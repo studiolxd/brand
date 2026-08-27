@@ -1,0 +1,7 @@
+/* La fila de salidas: el botón y el enlace, en línea, con envoltura. */
+.error-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--error-page-actions-gap);
+}

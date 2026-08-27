@@ -1,0 +1,5 @@
+{
+  "error-page": {
+    "actions-gap": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre el botón y el enlace de la fila de acciones (16px): entre elementos de un componente" }
+  }
+}

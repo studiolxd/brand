@@ -38,6 +38,7 @@ export const entryPoints = {
   'switcher':            'src/stories/atoms/Switcher/Switcher.tsx',
   'tabs':                'src/stories/atoms/Tabs/Tabs.tsx',
   'visually-hidden':     'src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx',
+  'error-boundary':      'src/stories/atoms/ErrorBoundary/ErrorBoundary.tsx',
   'number-input':        'src/stories/atoms/NumberInput/NumberInput.tsx',
   'file-upload':         'src/stories/atoms/FileUpload/FileUpload.tsx',
   'number-badge':        'src/stories/atoms/NumberBadge/NumberBadge.tsx',
@@ -107,6 +108,9 @@ export const entryPoints = {
   'site-shell':          'src/stories/sections/SiteShell/SiteShell.tsx',
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
   'hero':                'src/stories/sections/Hero/Hero.tsx',
+  // Templates
+  'not-found-page':      'src/stories/templates/NotFoundPage/NotFoundPage.tsx',
+  'error-page':          'src/stories/templates/ErrorPage/ErrorPage.tsx',
   // Organisms
   'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
@@ -117,7 +121,7 @@ export const clientComponents = new Set([
   'button', 'checkbox', 'radio', 'switcher', 'menu-button', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',
-  'app-shell',
+  'app-shell', 'error-boundary', 'not-found-page', 'error-page',
   'avatar',
   'app-header',
   'modal',

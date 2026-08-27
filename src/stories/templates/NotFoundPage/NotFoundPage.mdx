@@ -1,0 +1,34 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as NotFoundPageStories from "./NotFoundPage.stories";
+
+<Meta of={NotFoundPageStories} />
+
+# NotFoundPage
+
+La plantilla del 404 de un sitio público: el marco (`SiteShell`) con cabecera y pie opcionales, y dentro un `main` (`Container` a aire `xl`, `id="main-content"`, enfocable por el `SkipLink`) con la cabecera de página (`PageIntro`: título y frase) y el **enlace de vuelta**, apilados con `Stack`.
+
+<Canvas of={NotFoundPageStories.SinCabeceraNiPie} />
+<Canvas of={NotFoundPageStories.ConCabeceraYPie} />
+
+## El enlace lo pone el producto
+
+`homeLink` es un nodo: el `Link` del sistema con su icono (`<Link icon="arrow-left">`) renderizado sobre el `Link` del router del producto vía `render`. La plantilla no sabe de rutas ni de idiomas; los textos llegan ya traducidos.
+
+```tsx
+// apps/hub/src/app/[locale]/not-found.tsx
+<NotFoundPage
+  title={t('title')}
+  description={t('code')}
+  homeLink={<Link icon="arrow-left" render={<NextLink href="/" />}>{t('homeLink')}</Link>}
+  header={<PublicHeader />}
+  footer={<PublicFooter />}
+/>
+```
+
+## Cabecera y pie, a salvo
+
+`header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si el chrome del sitio lanza al renderizar, desaparece él y no la página. El 404 sigue mostrando el mensaje y la salida.
+
+## Props
+
+<ArgTypes of={NotFoundPageStories} />

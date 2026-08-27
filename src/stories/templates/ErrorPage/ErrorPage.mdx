@@ -1,0 +1,50 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ErrorPageStories from "./ErrorPage.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { errorPageTokens } from "../../../tokens/components/error-page";
+
+<Meta of={ErrorPageStories} />
+
+# ErrorPage
+
+La plantilla de «algo ha salido mal»: la misma maqueta que `NotFoundPage` —`SiteShell` con cabecera y pie opcionales, y un `main` con `PageIntro`— pero en lugar del enlace de vuelta lleva una **fila de acciones**: el `Button` «Reintentar» y el enlace «Ir al inicio», que pone el producto.
+
+<Canvas of={ErrorPageStories.SinCabeceraNiPie} />
+<Canvas of={ErrorPageStories.ConCabeceraYPie} />
+
+## Qué chrome se pasa en cada límite
+
+Una página de error no puede depender del layout que pudo fallar. La regla, para una app Next:
+
+- **`error.tsx`** (límite de un layout con proveedores): se pasa la **cabecera sin auth** y el pie. Hay i18n y tema; lo que no hay es sesión garantizada, así que ningún menú de usuario.
+- **`global-error.tsx`** (límite del layout raíz): **no se pasa ni cabecera ni pie**. Sin proveedores no hay i18n ni tema, y cualquier pieza que los use lanzaría.
+
+```tsx
+// error.tsx
+'use client';
+export default function Error({ reset }) {
+  return (
+    <ErrorPage
+      title={t('title')}
+      description={t('description')}
+      actions={<><Button type="button" onClick={reset}>{t('retry')}</Button><Link icon="arrow-left" render={<NextLink href="/" />}>{t('home')}</Link></>}
+      header={<PublicHeader auth={false} />}
+      footer={<PublicFooter />}
+    />
+  );
+}
+```
+
+## Cabecera y pie, a salvo
+
+Aun así, `header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si la cabecera lanza al renderizar, desaparece ella y la página sigue con su mensaje y sus salidas.
+
+<Canvas of={ErrorPageStories.CabeceraQueFalla} />
+
+## Tokens
+
+<TokenTable tokens={errorPageTokens} />
+
+## Props
+
+<ArgTypes of={ErrorPageStories} />

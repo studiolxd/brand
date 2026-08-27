@@ -1,0 +1,21 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ErrorBoundaryStories from "./ErrorBoundary.stories";
+
+<Meta of={ErrorBoundaryStories} />
+
+# ErrorBoundary
+
+Límite de error de React sin cara ni tokens: si un hijo lanza al renderizar, pinta `fallback` —nada, por defecto— en lugar de tumbar el árbol entero. Es un componente de clase (React solo expone `componentDidCatch` ahí) y cliente: en Next se puede usar desde un Server Component pasándole hijos, pero el propio límite corre en el cliente.
+
+Su sitio natural son las **páginas de error**: `NotFoundPage` y `ErrorPage` envuelven con él la cabecera y el pie, así que si el chrome del sitio falla (un proveedor que no está, un dato que no llega) la página de error sigue viva y el usuario conserva el mensaje y la salida.
+
+<Canvas of={ErrorBoundaryStories.SinFallback} />
+<Canvas of={ErrorBoundaryStories.ConFallback} />
+
+## Qué atrapa y qué no
+
+Atrapa errores **de render** de los hijos (y de sus ciclos de vida). No atrapa errores en manejadores de eventos, en código asíncrono ni en el propio `fallback`. Solo pinta el fallback: no reintenta ni reinicia; un nuevo montaje del límite vuelve a intentarlo.
+
+## Props
+
+<ArgTypes of={ErrorBoundaryStories} />
