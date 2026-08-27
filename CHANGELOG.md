@@ -7,38 +7,6 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## v25.3.0
-
-### Cambiado
-
-- `Table`: la cabecera ordenable pasa a ser un `<button>` dentro del `<th>`
-  (patrón WAI-ARIA). El `th` conserva `aria-sort`, el nombre accesible del
-  botón es solo el rótulo de la columna —el estado deja de mezclarse con el
-  nombre— y Enter y **Espacio** activan de forma nativa, lo que el
-  `tabIndex` + `onKeyDown` manual anterior no garantizaba. La API pública no
-  cambia (`sortable`/`sorted`/`onSort`); lo que cambia es el DOM interno:
-  `.table__header-content` es ahora el botón. `Table.Row` acepta `selected`
-  (nueva prop) y emite `.table__row--selected`. Los estados salen del gris:
-  el hover de fila interactiva invierte —relleno de marca y tinta clara—
-  como en `Menu` y `SidebarNav`; la fila seleccionada se dice con tinta y
-  peso; `footer-bg` pasa al rol `surface.secondary-on-light`; el hover de una
-  columna ordenable no pinta fondo, lleva el icono de ordenación al color
-  activo; y `sort-icon-color` deja `grey-dark` por `text.muted-on-light`.
-  Tokens huérfanos `border-color` y `header-hover-bg` retirados con sus pares
-  oscuros, y los `rgba()` cableados del par oscuro sustituidos por roles.
-  `gap: 0.375rem` pasa al token propio `header-content-gap` ({spacing.2}),
-  fuera los `@import` de CSS ajeno y documentado el `width: 1px` de la
-  columna de acciones. Doc MDX nueva, story de superficie oscura, story de
-  columna de acciones y test de contrato de la cabecera ordenable.
-- `DataTable`: fuera el `data-state="selected"` —prohibido por la regla de
-  Base UI y, además, atributo muerto que ningún CSS leía—; la selección viaja
-  ahora por la prop `selected` de `Table.Row`. Doc MDX nueva y stories de
-  superficie oscura, con y sin `isLoading`.
-- Storybook: una story marcada `parameters: { surface: 'dark' }` acota su
-  lienzo a un contenedor `.surface-dark` cuando se renderiza dentro de la
-  página de **docs**. Antes teñía el `<html>` entero y dejaba ilegibles todas
-  las demás stories de esa página. En el canvas de la story sigue usando el
-  `<html>`, que es donde hace falta alcanzar a los portales.
 ## v25.4.0
 
 ### Cambiado
@@ -73,6 +41,38 @@ para breaking changes.
 - Los tres salen de `Por revisar/`: `Molecules/Modal`, `Molecules/Sheet`,
   `Molecules/ImageCropDialog`.
 
+## v25.3.0
+
+### Cambiado
+
+- `Table`: la cabecera ordenable pasa a ser un `<button>` dentro del `<th>`
+  (patrón WAI-ARIA). El `th` conserva `aria-sort`, el nombre accesible del
+  botón es solo el rótulo de la columna —el estado deja de mezclarse con el
+  nombre— y Enter y **Espacio** activan de forma nativa, lo que el
+  `tabIndex` + `onKeyDown` manual anterior no garantizaba. La API pública no
+  cambia (`sortable`/`sorted`/`onSort`); lo que cambia es el DOM interno:
+  `.table__header-content` es ahora el botón. `Table.Row` acepta `selected`
+  (nueva prop) y emite `.table__row--selected`. Los estados salen del gris:
+  el hover de fila interactiva invierte —relleno de marca y tinta clara—
+  como en `Menu` y `SidebarNav`; la fila seleccionada se dice con tinta y
+  peso; `footer-bg` pasa al rol `surface.secondary-on-light`; el hover de una
+  columna ordenable no pinta fondo, lleva el icono de ordenación al color
+  activo; y `sort-icon-color` deja `grey-dark` por `text.muted-on-light`.
+  Tokens huérfanos `border-color` y `header-hover-bg` retirados con sus pares
+  oscuros, y los `rgba()` cableados del par oscuro sustituidos por roles.
+  `gap: 0.375rem` pasa al token propio `header-content-gap` ({spacing.2}),
+  fuera los `@import` de CSS ajeno y documentado el `width: 1px` de la
+  columna de acciones. Doc MDX nueva, story de superficie oscura, story de
+  columna de acciones y test de contrato de la cabecera ordenable.
+- `DataTable`: fuera el `data-state="selected"` —prohibido por la regla de
+  Base UI y, además, atributo muerto que ningún CSS leía—; la selección viaja
+  ahora por la prop `selected` de `Table.Row`. Doc MDX nueva y stories de
+  superficie oscura, con y sin `isLoading`.
+- Storybook: una story marcada `parameters: { surface: 'dark' }` acota su
+  lienzo a un contenedor `.surface-dark` cuando se renderiza dentro de la
+  página de **docs**. Antes teñía el `<html>` entero y dejaba ilegibles todas
+  las demás stories de esa página. En el canvas de la story sigue usando el
+  `<html>`, que es donde hace falta alcanzar a los portales.
 ## v25.2.0
 
 ### Cambiado
