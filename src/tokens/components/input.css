@@ -45,6 +45,9 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --input-disabled-bg: var(--color-grey-darkest); /** Fondo deshabilitado — surface-dark */
+  --input-disabled-color: var(--color-grey-light); /** Texto deshabilitado — surface-dark */
+  --input-disabled-border-color: var(--color-grey-dark); /** Borde deshabilitado — surface-dark */
   --input-bg: var(--color-background-dark); /** Background — surface-dark */
   --input-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --input-border-color: var(--color-text-on-dark); /** Border color — surface-dark */

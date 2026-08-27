@@ -50,6 +50,9 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --textarea-disabled-bg: var(--color-grey-darkest); /** Fondo deshabilitado — surface-dark */
+  --textarea-disabled-color: var(--color-grey-light); /** Texto deshabilitado — surface-dark */
+  --textarea-disabled-border-color: var(--color-grey-dark); /** Borde deshabilitado — surface-dark */
   --textarea-bg: var(--color-background-dark); /** Background — surface-dark */
   --textarea-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --textarea-border-color: var(--color-text-on-dark); /** Border color — surface-dark */

@@ -46,7 +46,7 @@
   --form-border-width: 0;
 }
 
-/* Button primary — inherits dark tokens from .surface-dark via surface.css */
+/* Button primary — hereda los tokens oscuros por .surface-dark */
 
 /* ---- lg (>= 1024px) ---- */
 

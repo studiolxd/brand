@@ -26,6 +26,8 @@
     "surface-dark-border-color":     { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Border color — surface-dark" },
     "surface-dark-bg-checked":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Background when checked — surface-dark" },
     "surface-dark-check-color":      { "$value": "{color.background.dark}",    "$type": "color", "$description": "Checkmark color — surface-dark" },
-    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" }
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" },
+    "surface-dark-disabled-border-color": { "$value": "{color.grey-light}", "$type": "color", "$description": "Borde deshabilitado — surface-dark" },
+    "surface-dark-disabled-bg-checked": { "$value": "{color.grey-light}", "$type": "color", "$description": "Fondo marcado deshabilitado — surface-dark" }
   }
 }

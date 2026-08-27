@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v21.0.0
+
+### Rompe
+
+- `src/stylesheets/surface.css` **retirado**: era el último CSS del DS
+  anterior (bordes de error en blanco, disabled a mano, separadores del Form,
+  `.surface-light`, `form-spacer`…). Todo el modo oscuro sale ahora de tokens
+  `surface-dark-*` de cada componente; los estados deshabilitados de `Input`,
+  `Textarea` y `Checkbox` ganan sus tokens oscuros. `.surface-light` deja de existir.
+- `.surface-dark` es un **lienzo**: fija fondo y color emparejados (`base.css`),
+  como el `body`. Sin esto, el texto que solo hereda (párrafos, enlaces) seguía
+  en el color del body dentro de una superficie oscura anidada.
+
 ## v20.2.1
 
 ### Corregido

@@ -24,7 +24,7 @@ En mobile la foto y la identidad se apilan verticalmente y se centran. A partir 
 
 ## Theming oscuro
 
-La sección declara `.surface-dark` en su elemento raíz. Esta clase está definida en `src/surface.css` y reasigna los tokens de color de todos los componentes descendientes al tema oscuro. **No es necesario añadir ninguna clase adicional** en los componentes hijos; la cascade se encarga de propagar el tema.
+La sección declara `.surface-dark` en su elemento raíz. Esa clase es un lienzo (`base.css`) y los tokens `surface-dark-*` de cada componente reasignan sus colores al tema oscuro. **No es necesario añadir ninguna clase adicional** en los componentes hijos; la cascade se encarga de propagar el tema.
 
 El carrusel de slides muestra 1 slide completo en móvil, 3 slides en tableta (≥ 768 px) y 4 slides en pantallas grandes (≥ 1440 px), alineados al centro.
 

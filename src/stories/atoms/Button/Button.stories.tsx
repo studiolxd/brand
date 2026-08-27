@@ -162,7 +162,7 @@ export const OutlineOnLight: Story = {
   decorators: [
     (Story) => (
       <div
-        className="surface-light"
+       
         style={{
           backgroundImage: `url(${heroLight})`,
           backgroundSize: 'cover',

@@ -35,6 +35,14 @@ body {
   color: var(--text-color);
 }
 
+/* Una superficie oscura dentro de una página clara (o al revés) es un lienzo
+   completo: fondo y color emparejados, como el body. Sin esto, los hijos que
+   solo heredan (párrafos, enlaces) seguirían con el color del body. */
+.surface-dark {
+  background-color: var(--text-background);
+  color: var(--text-color);
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin-block: 0;
   margin-inline: 0;

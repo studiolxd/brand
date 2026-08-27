@@ -31,6 +31,8 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --checkbox-disabled-border-color: var(--color-grey-light); /** Borde deshabilitado — surface-dark */
+  --checkbox-disabled-bg-checked: var(--color-grey-light); /** Fondo marcado deshabilitado — surface-dark */
   --checkbox-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --checkbox-bg-checked: var(--color-text-on-dark); /** Background when checked — surface-dark */
   --checkbox-check-color: var(--color-background-dark); /** Checkmark color — surface-dark */
