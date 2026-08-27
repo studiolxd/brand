@@ -17,7 +17,6 @@
   color: var(--skip-link-color);
   font-weight: var(--skip-link-font-weight);
   text-decoration: none;
-  padding-block-end: 0;
   box-shadow: none;
   outline: var(--skip-link-focus-ring-width) solid var(--skip-link-focus-ring-color);
   outline-offset: var(--skip-link-focus-ring-offset);

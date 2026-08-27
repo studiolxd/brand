@@ -122,7 +122,6 @@ a.sidebar-nav__group-label:focus-visible {
   line-height: var(--sidebar-nav-item-line-height);
   color: var(--sidebar-nav-item-color);
   text-decoration: none;
-  padding-block-end: 0;
   box-shadow: none;
   transition:
     background-color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
@@ -155,7 +154,6 @@ a.sidebar-nav__group-label:focus-visible {
   font-weight: var(--sidebar-nav-group-label-font-weight);
   color: var(--sidebar-nav-group-label-color);
   text-decoration: none;
-  padding-block-end: 0;
   box-shadow: none;
   transition: color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }

@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: flex-start;
   text-decoration: none;
-  padding-block-end: 0;
   background-color: var(--pricing-card-bg);
   color: var(--pricing-card-color);
   padding-inline: var(--pricing-card-padding-inline);

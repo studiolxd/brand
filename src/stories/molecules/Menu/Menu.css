@@ -45,7 +45,6 @@
   color: var(--menu-item-color);
   cursor: var(--menu-item-cursor);
   text-decoration: none;
-  padding-block-end: 0;
   box-shadow: none;
   outline: none;
   transition:

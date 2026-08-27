@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v20.1.2
+
+### Corregido
+
+- La anulación de la línea de los enlaces (`padding-block-end: 0`) pisaba el
+  padding propio en 11 componentes (SkipLink, Menu, Card, Pagination, UserMenu,
+  OrgSwitcher, SidebarNav, AppLauncher, CalendarRoster, PricingCard, Header):
+  el SkipLink salía sin aire abajo. Retirada donde el componente ya fija su padding.
+
 ## v20.1.1
 
 ### Corregido

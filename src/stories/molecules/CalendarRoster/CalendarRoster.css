@@ -35,7 +35,6 @@
   color: var(--calendar-roster-nav-color);
   cursor: pointer;
   text-decoration: none;
-  padding-block-end: 0;
   box-shadow: none;
   transition-property: background-color;
   transition-duration: var(--calendar-roster-transition-duration);
