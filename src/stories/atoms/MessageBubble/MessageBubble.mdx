@@ -1,0 +1,73 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as MessageBubbleStories from "./MessageBubble.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { messageBubbleTokens, messageBubbleTailTokens, messageBubbleDarkTokens } from "../../../tokens/components/message-bubble";
+
+<Meta of={MessageBubbleStories} />
+
+# MessageBubble
+
+El **globo de un mensaje de chat**: la caja que envuelve lo que ha dicho alguien. Es el átomo sobre el que se montan `UserMessage` y `AssistantMessage`, que le añaden el nombre del modelo y la marca de tiempo.
+
+Suelto casi nunca se usa: sirve cuando el producto necesita un globo con contenido que no cabe en las dos moléculas (una llamada a herramienta, un adjunto, una tabla) y quiere seguir dentro de la misma cara.
+
+<Canvas of={MessageBubbleStories.LosDosEmisores} />
+
+## El globo es contorno, no relleno
+
+**Ningún globo lleva relleno.** Ni el del usuario ni el del asistente: los dos son un rectángulo de contorno de 1px, con las cuatro esquinas rectas y la misma tinta.
+
+Es la consecuencia de dos reglas del sistema. La primera, que nada proyecta sombra y la elevación se dice con borde. La segunda, que el color de marca se reserva: un hilo de veinte mensajes con la mitad rellenos de prusia es una pared de color, y el prusia del globo del usuario coincidía además con el fondo de la superficie oscura, donde el globo desaparecía.
+
+Lo que separa a un emisor de otro son dos cosas, y ninguna es el color:
+
+- **La alineación.** El usuario a la derecha (`margin-inline-start: auto`), el asistente a la izquierda. Son propiedades lógicas: en una lectura de derecha a izquierda el hilo se voltea entero.
+- **La cola.** Un triángulo que nace en la esquina inferior del lado del emisor y apunta hacia él.
+
+## La cola
+
+<Canvas of={MessageBubbleStories.Asistente} />
+
+Como el globo no tiene relleno, la cola tampoco puede tenerlo: es **puro contorno**. Se dibuja con dos triángulos superpuestos en pseudo-elementos:
+
+- `::before` es el **exterior**, del color del borde. Da la cola entera, maciza.
+- `::after` es el **interior**, del color de la superficie que hay detrás (`tail-fill`). La vacía, dejando solo la línea de 1px de la hipotenusa, y de paso **desborda hacia dentro del globo** lo justo para tapar su borde donde nace la cola: sin eso se vería la pared del globo cruzando la base del triángulo.
+
+El tamaño sale de `tail-size` (una referencia a la escala de espaciado), y el desplazamiento del triángulo interior de `√2 × border-width`, que es lo que mide un borde de 1px medido en perpendicular a una diagonal de 45°.
+
+`tail-fill` es **el color de la superficie de detrás, no un color del globo**. Si el hilo vive sobre una superficie que no es el fondo del sistema, hay que repuntarlo ahí; si no, la cola se ve rellena de blanco sobre esa superficie.
+
+<Canvas of={MessageBubbleStories.MensajeLargo} />
+
+El globo no crece más de `max-width` (75% del hilo), así que un mensaje largo rompe línea en vez de comerse el ancho completo y perder la alineación que distingue al emisor.
+
+## Superficie oscura
+
+<Canvas of={MessageBubbleStories.SuperficieOscura} />
+
+Tinta, contorno y vaciado de la cola tienen par oscuro. El vaciado es el que hace el trabajo fino: al pintarse con el prusia del lienzo en vez de con el blanco, la cola sigue siendo contorno y no un triángulo blanco recortado.
+
+## Accesibilidad
+
+- El globo es un `<div>` sin rol: **la semántica la pone el hilo**. `ConversationThread` es quien monta el `role="log"` con nombre accesible, y quien anuncia los mensajes nuevos.
+- La prop `role` del componente **no es el `role` de ARIA** —dice quién habla, no qué es el elemento—, y por eso el atributo nativo está excluido de las props que se reenvían.
+- Quién ha dicho cada mensaje **no puede quedar solo en la alineación y en la cola**: eso es información visual. `UserMessage` y `AssistantMessage` la ponen en texto (el nombre del modelo, o la etiqueta que pase el producto).
+- El contorno y la tinta cumplen contraste sobre las dos superficies: son los colores de texto del sistema.
+
+## Tokens
+
+### Del globo
+
+<TokenTable tokens={messageBubbleTokens} />
+
+### De la cola
+
+<TokenTable tokens={messageBubbleTailTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={messageBubbleDarkTokens} />
+
+## Props
+
+<ArgTypes of={MessageBubbleStories} />

@@ -1,19 +1,25 @@
 {
   "message-bubble": {
-    "padding-block":  { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Padding vertical del globo" },
-    "padding-inline": { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Padding horizontal del globo" },
-    "border-radius":  { "$value": "{border-radius.default}",    "$type": "dimension", "$description": "Radio base del globo" },
-    "max-width":      { "$value": "75%",                   "$type": "dimension", "$description": "Anchura máxima del globo" },
+    "padding-block":  { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Aire vertical del globo" },
+    "padding-inline": { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Aire horizontal del globo" },
+    "border-radius":  { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Radio del globo: recto en las cuatro esquinas, como todo el sistema. Quien distingue al emisor es la alineación y la cola, no una esquina redondeada" },
+    "border-width":   { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor del contorno del globo y de su cola" },
+    "border-style":   { "$value": "solid",                 "$type": "string",    "$description": "Estilo del contorno" },
+    "max-width":      { "$value": "75%",                   "$type": "dimension", "$description": "Anchura máxima del globo dentro del hilo" },
 
     "font-family":    { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Familia tipográfica" },
     "font-size":      { "$value": "{text.font-size}",      "$type": "dimension", "$description": "El mensaje hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },
     "font-weight":    { "$value": "{font-weight.default}", "$type": "number",    "$description": "Peso tipográfico" },
     "line-height":    { "$value": "{line-height.relaxed}", "$type": "number",    "$description": "Interlineado" },
 
-    "user-bg":        { "$value": "{color.primary}",       "$type": "color",     "$description": "Fondo del mensaje del usuario" },
-    "user-color":     { "$value": "{color.text.on-dark}",  "$type": "color",     "$description": "Color de texto del mensaje del usuario" },
+    "color":          { "$value": "{color.text.on-light}", "$type": "color",     "$description": "Tinta del mensaje. La misma para los dos emisores: el globo no tiene relleno, así que el texto va sobre la superficie" },
+    "border-color":   { "$value": "{color.text.on-light}", "$type": "color",     "$description": "Contorno del globo. Único separador del mensaje: no hay relleno ni sombra" },
 
-    "assistant-bg":   { "$value": "{color.grey-lightest}", "$type": "color",     "$description": "Fondo del mensaje del asistente" },
-    "assistant-color":{ "$value": "{color.text.on-light}", "$type": "color",     "$description": "Color de texto del mensaje del asistente" }
+    "tail-size":      { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Lado de la cola triangular que nace en la esquina inferior del lado del emisor y apunta hacia él" },
+    "tail-fill":      { "$value": "{color.background.light}", "$type": "color",  "$description": "Color con el que se vacía la cola: el de la superficie que hay detrás del globo. Es lo que interrumpe el borde donde nace la cola y deja el triángulo en puro contorno. Si el hilo vive sobre otra superficie, se repunta aquí" },
+
+    "surface-dark-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Tinta del mensaje — superficie oscura" },
+    "surface-dark-border-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Contorno del globo — superficie oscura" },
+    "surface-dark-tail-fill":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Vaciado de la cola — superficie oscura" }
   }
 }
