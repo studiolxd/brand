@@ -22,6 +22,6 @@
   --sheet-shadow: var(--modal-shadow); /** Sombra del panel */
   --sheet-title-color: var(--modal-title-color); /** Color del título */
   --sheet-title-font-weight: var(--modal-title-font-weight); /** Peso del título */
-  --sheet-description-font-size: var(--input-field-helper-font-size); /** Tamaño del texto descriptivo */
-  --sheet-description-color: var(--input-field-helper-color); /** Color del texto descriptivo */
+  --sheet-description-font-size: var(--modal-description-font-size); /** Tamaño del texto descriptivo — hereda el cuerpo de la superficie, como en Modal */
+  --sheet-description-color: var(--modal-description-color); /** Color del texto descriptivo */
 }

@@ -1,0 +1,77 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SheetStories from "./Sheet.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { sheetTokens } from "../../../tokens/components/sheet";
+
+<Meta of={SheetStories} />
+
+# Sheet
+
+Un panel que entra deslizándose por un borde de la pantalla y **deja ver el
+contexto detrás** — el caso que `Modal` no cubre, porque se centra y lo tapa
+todo. Base UI `Dialog` aporta el portal, el velo, la trampa de foco y el
+cierre con Escape o clic fuera; el DS pone la superficie y la dirección de
+entrada.
+
+<Canvas of={SheetStories.Default} />
+
+## Anatomía
+
+- **Cabecera**: `title` (o solo accesible con `titleHidden`) y `description`
+  opcional.
+- **Cierre**: `Dialog.Close` compuesto con `<Button variant="ghost" size="sm" iconOnly>`
+  vía `render` — mismo patrón que `Modal`, `Alert` y `Toast`; el color, el
+  hover y el anillo de foco los pone `Button`.
+- **Cuerpo** (`children`): con scroll propio.
+- **Pie** (`footer` o `<SheetFooter>`, para paneles que cambian de acciones
+  según el paso en el que están): fila de acciones alineada a la derecha.
+
+## Lado de entrada
+
+<Canvas of={SheetStories.Izquierda} />
+<Canvas of={SheetStories.Abajo} />
+
+## Con acciones al pie
+
+<Canvas of={SheetStories.ConPie} />
+
+## Título solo accesible
+
+<Canvas of={SheetStories.TituloOculto} />
+
+## Superficie oscura
+
+<Canvas of={SheetStories.SuperficieOscura} />
+
+`Sheet` no declara sus propios tokens `surface-dark-*`: `bg`, `title-color`
+y `description-color` referencian los de `Modal` (`{modal.bg}`,
+`{modal.title-color}`, `{modal.description-color}`), y esas custom
+properties se remapean bajo `.surface-dark`/`[data-theme="dark"]`/`html.dark`.
+Como el `var()` de un token se resuelve en el elemento donde se **usa**, no
+donde se declara, `--sheet-title-color: var(--modal-title-color)` seguido
+hasta un elemento bajo superficie oscura resuelve ya el valor oscuro —Sheet
+hereda el modo oscuro de Modal por cascada real de CSS, sin duplicar ningún
+valor. El panel se monta en el portal de Base UI (`document.body`); el
+decorator `withSurface` activa `data-theme="dark"` en la raíz del documento,
+así que la cascada llega hasta ahí sin configuración adicional.
+
+---
+
+## Tokens
+
+<TokenTable tokens={sheetTokens} />
+
+## Accesibilidad
+
+- **Nombre accesible**: `title` (visible u oculto con `titleHidden`) nombra
+  el diálogo; con `titleHidden`, sigue montado como `VisuallyHidden` — nunca
+  desaparece del DOM.
+- **Cierre**: el aspa es un `Button` de 32px (`sm`) con su propio anillo de
+  `:focus-visible` — antes de este cambio no tenía ninguno.
+- **Foco**: Base UI atrapa el foco dentro del panel mientras está abierto y
+  lo devuelve al disparador (`trigger`) al cerrarlo.
+- El velo (`Dialog.Backdrop`) cierra el panel al pulsarlo, y Escape también.
+
+## Props
+
+<ArgTypes of={SheetStories} />

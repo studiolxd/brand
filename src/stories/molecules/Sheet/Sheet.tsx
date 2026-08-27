@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { Dialog } from '@base-ui-components/react/dialog';
+import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Sheet.css';
@@ -87,7 +88,11 @@ export function Sheet({
             )}
           </header>
 
-          <Dialog.Close className="sheet__close" aria-label={closeLabel}>
+          <Dialog.Close
+            className="sheet__close"
+            aria-label={closeLabel}
+            render={<Button variant="ghost" size="sm" iconOnly />}
+          >
             <Icon name="close" size="sm" />
           </Dialog.Close>
 

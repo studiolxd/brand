@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Sheet } from './Sheet';
 
 const meta = {
-  title: 'Por revisar/Molecules/Sheet',
+  title: 'Molecules/Sheet',
   component: Sheet,
 } satisfies Meta<typeof Sheet>;
 
@@ -83,4 +84,43 @@ export const TituloOculto: Story = {
     description: undefined,
   },
   render: Demo,
+};
+
+/**
+ * El decorator `withSurface` activa `data-theme="dark"` en `document.documentElement`;
+ * como el panel se monta en el portal de Base UI (`document.body`), las
+ * custom properties `surface-dark-*` de `Modal` —de las que `Sheet` toma
+ * prestadas `bg`, `title-color` y `description-color`— cascadean hasta él
+ * sin configuración adicional.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: Default.args,
+  render: Demo,
+};
+
+export const Contrato: Story = {
+  name: 'Test — abre, cierra con el aspa y devuelve el foco',
+  tags: ['!dev'],
+  args: Default.args,
+  render: Demo,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: 'Abrir panel' });
+
+    await userEvent.click(trigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const dialog = await body.findByRole('dialog', { name: 'Ajustes del bloque' });
+    const closeButton = within(dialog).getByRole('button', { name: 'Cerrar' });
+
+    // El aspa marca foco visible (lo pone `Button`, no un override local).
+    closeButton.focus();
+    await expect(closeButton).toHaveFocus();
+
+    await userEvent.click(closeButton);
+    await expect(dialog).not.toBeInTheDocument();
+    await expect(trigger).toHaveFocus();
+  },
 };
