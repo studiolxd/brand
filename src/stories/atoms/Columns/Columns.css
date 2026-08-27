@@ -1,0 +1,43 @@
+/* Móvil: una columna. Las celdas se apilan con su propio aire. */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--columns-stack-gap-md);
+  align-items: start;
+}
+.columns.columns--gap-lg {
+  gap: var(--columns-stack-gap-lg);
+}
+.columns.columns--align-center { align-items: center; }
+.columns.columns--align-stretch { align-items: stretch; }
+
+/* Apilado inverso: la última celda arriba. Solo en móvil; en columnas manda el orden del JSX. */
+.columns.columns--reverse > .columns__col { order: 1; }
+.columns.columns--reverse > .columns__col:last-child { order: 0; }
+
+.columns__col {
+  min-inline-size: 0;
+}
+
+/* Tableta: 3 y 4 columnas pasan a dos; 2 columnas ya reparte. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .columns {
+    gap: var(--columns-gap-md);
+  }
+  .columns.columns--gap-lg {
+    gap: var(--columns-gap-lg);
+  }
+  .columns.columns--2 { grid-template-columns: var(--columns-ratio-1-1); }
+  .columns.columns--2.columns--ratio-1-2 { grid-template-columns: var(--columns-ratio-1-2); }
+  .columns.columns--2.columns--ratio-2-1 { grid-template-columns: var(--columns-ratio-2-1); }
+  .columns.columns--3,
+  .columns.columns--4 { grid-template-columns: repeat(2, 1fr); }
+  .columns.columns--reverse > .columns__col,
+  .columns.columns--reverse > .columns__col:last-child { order: 0; }
+}
+
+/* Escritorio: el total. */
+@media (min-width: 1024px) /* --breakpoint-lg */ {
+  .columns.columns--3 { grid-template-columns: repeat(3, 1fr); }
+  .columns.columns--4 { grid-template-columns: repeat(4, 1fr); }
+}

@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.4.0
+
+### Añadido
+
+- `Columns` (átomo de maquetación): N celdas iguales en escritorio (2–4),
+  apiladas en móvil; `ratio` con dos columnas (`1:1`, `1:2`, `2:1`), `align`,
+  `gap`, `stackOrder`. Sin semántica ni fondo: la jerarquía la pone el contenido.
+  Export `./columns`.
+
 ## v19.3.1
 
 ### Corregido

@@ -1,0 +1,44 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ColumnsStories from "./Columns.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { columnsTokens } from "../../../tokens/components/columns";
+
+<Meta of={ColumnsStories} />
+
+# Columns
+
+Maquetación en columnas: **N celdas iguales en escritorio, apiladas en móvil**, con el aire por tokens. Es un molde: no sabe qué hay dentro ni jerarquiza. Cada hija es una celda; si una columna es complementaria, lo dice su contenido (`header`, `aside`), no el componente.
+
+<Canvas of={ColumnsStories.DosColumnas} />
+
+## Título y contenido
+
+El caso de las páginas de acceso: a la izquierda el título (y una frase), a la derecha el formulario. Las dos celdas son iguales para el molde; la izquierda es un `header` porque lo es su contenido.
+
+<Canvas of={ColumnsStories.TituloYContenido} />
+
+## Columnas y reparto
+
+`columns` es 2, 3 o 4. Con dos, `ratio` reparte el ancho: `1:1` (mitad y mitad, por defecto), `1:2` o `2:1` — valores cerrados, no libres. Con 3 o 4 se ignora. Por debajo de `md` siempre una columna; 3 y 4 pasan a dos entre `md` y `lg`.
+
+<Canvas of={ColumnsStories.Reparto12} />
+<Canvas of={ColumnsStories.TresColumnas} />
+<Canvas of={ColumnsStories.CuatroColumnas} />
+
+## Alineación, aire y orden
+
+`align` alinea las celdas verticalmente (`start` por defecto, `center`, `stretch`). `gap` es base o amplio, con un valor para columnas y otro para el apilado. `stackOrder="reverse"` pone la última celda arriba en móvil (una imagen que en escritorio va a la derecha y en móvil debe abrir).
+
+<Canvas of={ColumnsStories.ApiladoInverso} />
+
+## Lo que no hace
+
+Ni fondo, ni borde, ni padding: eso es del `Container` de fuera o de las tarjetas de dentro. Ni semántica: no pinta `aside`, `main` ni `section`.
+
+## Tokens
+
+<TokenTable tokens={columnsTokens} />
+
+## Props
+
+<ArgTypes of={ColumnsStories} />
