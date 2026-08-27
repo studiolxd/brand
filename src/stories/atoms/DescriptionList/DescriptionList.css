@@ -12,28 +12,28 @@
   padding-block: var(--description-list-cell-padding-block);
   padding-inline: var(--description-list-cell-padding-inline);
   margin: 0;
-  border-bottom-width: var(--description-list-border-width);
-  border-bottom-style: var(--description-list-border-style);
-  border-bottom-color: var(--description-list-border-color);
+  border-block-end-width: var(--description-list-border-width);
+  border-block-end-style: var(--description-list-border-style);
+  border-block-end-color: var(--description-list-border-color);
 }
 
 .description-list > dt:last-of-type,
 .description-list > dd:last-of-type {
-  border-bottom: none;
+  border-block-end: none;
 }
 
 .description-list > dt {
   display: flex;
   align-items: center;
-  border-right-width: var(--description-list-border-width);
-  border-right-style: var(--description-list-border-style);
-  border-right-color: var(--description-list-border-color);
-  font-family: var(--label-font-family);
-  font-size: var(--label-font-size);
-  font-weight: var(--label-font-weight);
-  line-height: var(--label-line-height);
-  color: var(--label-color);
-  letter-spacing: var(--label-letter-spacing);
+  border-inline-end-width: var(--description-list-border-width);
+  border-inline-end-style: var(--description-list-border-style);
+  border-inline-end-color: var(--description-list-border-color);
+  font-family: var(--description-list-term-font-family);
+  font-size: var(--description-list-term-font-size);
+  font-weight: var(--description-list-term-font-weight);
+  line-height: var(--description-list-term-line-height);
+  letter-spacing: var(--description-list-term-letter-spacing);
+  color: var(--description-list-term-color);
 }
 
 .description-list > dd {

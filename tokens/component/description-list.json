@@ -1,16 +1,23 @@
 {
   "description-list": {
-    "border-width":        { "$value": "{control.border-width}",    "$type": "dimension", "$description": "Grosor del borde exterior y separadores internos" },
+    "border-width":        { "$value": "{control.border-width}",    "$type": "dimension", "$description": "Grosor del borde exterior y de los separadores internos" },
     "border-style":        { "$value": "{control.border-style}",    "$type": "string",    "$description": "Estilo del borde" },
-    "border-color":        { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del borde" },
-    "cell-padding-block":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical de cada celda" },
-    "cell-padding-inline": { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Padding horizontal de cada celda" },
-    "value-font-family":   { "$value": "{control.font-family}",    "$type": "string",    "$description": "Font family del valor (dd)" },
-    "value-font-size":     { "$value": "{text.font-size}",         "$type": "dimension", "$description": "El valor hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },
-    "value-font-weight":   { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Font weight del valor" },
-    "value-line-height":   { "$value": "{text.line-height}",       "$type": "number",    "$description": "Interlineado heredado del cuerpo de la superficie" },
-    "value-color":         { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del valor (dd)" },
-    "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del borde — surface-dark" },
-    "surface-dark-value-color":  { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del valor — surface-dark" }
+    "border-color":        { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del borde: tinta de la superficie" },
+    "cell-padding-block":  { "$value": "{spacing.3}",               "$type": "dimension", "$description": "Aire vertical de cada celda" },
+    "cell-padding-inline": { "$value": "{spacing.4}",               "$type": "dimension", "$description": "Aire horizontal de cada celda" },
+    "term-font-family":    { "$value": "{label.font-family}",       "$type": "string",    "$description": "Tipografía del término (dt): la de las etiquetas" },
+    "term-font-size":      { "$value": "{label.font-size}",         "$type": "dimension", "$description": "Cuerpo del término: el de las etiquetas, no el de la prosa" },
+    "term-font-weight":    { "$value": "{label.font-weight}",       "$type": "number",    "$description": "Peso del término" },
+    "term-line-height":    { "$value": "{label.line-height}",       "$type": "number",    "$description": "Interlineado del término" },
+    "term-letter-spacing": { "$value": "{label.letter-spacing}",    "$type": "dimension", "$description": "Tracking del término" },
+    "term-color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del término" },
+    "value-font-family":   { "$value": "{control.font-family}",     "$type": "string",    "$description": "Tipografía del valor (dd)" },
+    "value-font-size":     { "$value": "{text.font-size}",          "$type": "dimension", "$description": "El valor hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },
+    "value-font-weight":   { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Peso del valor" },
+    "value-line-height":   { "$value": "{text.line-height}",        "$type": "number",    "$description": "Interlineado heredado del cuerpo de la superficie" },
+    "value-color":         { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del valor" },
+    "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde — surface-dark" },
+    "surface-dark-term-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Término — surface-dark" },
+    "surface-dark-value-color":  { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Valor — surface-dark" }
   }
 }

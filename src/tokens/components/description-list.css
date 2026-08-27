@@ -4,20 +4,27 @@
 
 :root {
   --description-list-border-style: var(--control-border-style); /** Estilo del borde */
-  --description-list-cell-padding-block: var(--spacing-3); /** Padding vertical de cada celda */
-  --description-list-cell-padding-inline: var(--spacing-4); /** Padding horizontal de cada celda */
-  --description-list-border-color: var(--color-primary); /** Color del borde */
-  --description-list-value-font-family: var(--control-font-family); /** Font family del valor (dd) */
+  --description-list-cell-padding-block: var(--spacing-3); /** Aire vertical de cada celda */
+  --description-list-cell-padding-inline: var(--spacing-4); /** Aire horizontal de cada celda */
+  --description-list-border-color: var(--color-primary); /** Color del borde: tinta de la superficie */
+  --description-list-term-font-family: var(--label-font-family); /** Tipografía del término (dt): la de las etiquetas */
+  --description-list-term-font-size: var(--label-font-size); /** Cuerpo del término: el de las etiquetas, no el de la prosa */
+  --description-list-term-line-height: var(--label-line-height); /** Interlineado del término */
+  --description-list-term-letter-spacing: var(--label-letter-spacing); /** Tracking del término */
+  --description-list-term-color: var(--color-text-on-light); /** Color del término */
+  --description-list-value-font-family: var(--control-font-family); /** Tipografía del valor (dd) */
   --description-list-value-font-size: var(--text-font-size); /** El valor hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
-  --description-list-value-font-weight: var(--font-weight-default); /** Font weight del valor */
+  --description-list-value-font-weight: var(--font-weight-default); /** Peso del valor */
   --description-list-value-line-height: var(--text-line-height); /** Interlineado heredado del cuerpo de la superficie */
-  --description-list-value-color: var(--color-text-on-light); /** Color del valor (dd) */
-  --description-list-border-width: var(--control-border-width); /** Grosor del borde exterior y separadores internos */
+  --description-list-value-color: var(--color-text-on-light); /** Color del valor */
+  --description-list-border-width: var(--control-border-width); /** Grosor del borde exterior y de los separadores internos */
+  --description-list-term-font-weight: var(--label-font-weight); /** Peso del término */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --description-list-border-color: var(--color-text-on-dark); /** Color del borde — surface-dark */
-  --description-list-value-color: var(--color-text-on-dark); /** Color del valor — surface-dark */
+  --description-list-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
+  --description-list-term-color: var(--color-text-on-dark); /** Término — surface-dark */
+  --description-list-value-color: var(--color-text-on-dark); /** Valor — surface-dark */
 }

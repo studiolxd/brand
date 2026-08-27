@@ -1,0 +1,63 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DescriptionListStories from "./DescriptionList.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { descriptionListTokens, descriptionListDarkTokens } from "../../../tokens/components/description-list";
+
+<Meta of={DescriptionListStories} />
+
+# DescriptionList
+
+Ficha de datos: pares de término y valor, uno por fila. Cliente, servicio, año,
+formato. Es para **propiedades de una sola cosa**; cuando lo que hay son varias
+cosas comparables, con las mismas columnas, lo que toca es una `Table`.
+
+<Canvas of={DescriptionListStories.PorDefecto} />
+
+## Anatomía
+
+Un `<dl>` en rejilla de dos columnas: la del término se ajusta a su contenido y
+la del valor ocupa el resto. Los `<dt>` y `<dd>` los pone quien la usa, en ese
+orden; el componente solo aporta la caja, los separadores y la tipografía.
+
+El término se viste como una **etiqueta** (el cuerpo de interfaz, 14px) y el
+valor como **texto corriente**, que sigue el cuerpo de la superficie: 16px en
+aplicación, 20px dentro de un `SiteShell`.
+
+<Canvas of={DescriptionListStories.ConTextoLargo} />
+
+Un término puede llevar varios valores: se encadenan `<dd>` debajo del mismo
+`<dt>`.
+
+<Canvas of={DescriptionListStories.VariosValores} />
+
+## Superficie oscura
+
+Bordes, término y valor pasan a blanco por tokens `surface-dark-*`.
+
+<Canvas of={DescriptionListStories.SuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={descriptionListTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={descriptionListDarkTokens} />
+
+## Accesibilidad
+
+- El elemento es `<dl>` con `<dt>`/`<dd>`: los lectores de pantalla anuncian la
+  relación término→valor, que es justo la información que aporta la ficha. Una
+  rejilla de `<div>` con la misma pinta no dice nada.
+- El orden importa: cada `<dd>` pertenece al `<dt>` que lo precede. Para varios
+  valores de un mismo término, varios `<dd>` seguidos; no repitas el término.
+- Cuando hay más de una ficha en la página, dale un `aria-label` a cada una para
+  distinguirlas.
+- Término y valor van en la tinta de la superficie (prusia o blanco), ambos AAA:
+  la jerarquía la marca el cuerpo de la letra, no un gris más claro.
+
+## Props
+
+<ArgTypes of={DescriptionListStories} />

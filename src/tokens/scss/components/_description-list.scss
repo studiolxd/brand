@@ -1,13 +1,19 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-description-list-border-width: 1px; // Grosor del borde exterior y separadores internos
+$lxd-description-list-border-width: 1px; // Grosor del borde exterior y de los separadores internos
 $lxd-description-list-border-style: solid; // Estilo del borde
-$lxd-description-list-border-color: #111e30; // Color del borde
-$lxd-description-list-cell-padding-block: 0.75rem; // Padding vertical de cada celda
-$lxd-description-list-cell-padding-inline: 1rem; // Padding horizontal de cada celda
-$lxd-description-list-value-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del valor (dd)
+$lxd-description-list-border-color: #111e30; // Color del borde: tinta de la superficie
+$lxd-description-list-cell-padding-block: 0.75rem; // Aire vertical de cada celda
+$lxd-description-list-cell-padding-inline: 1rem; // Aire horizontal de cada celda
+$lxd-description-list-term-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del término (dt): la de las etiquetas
+$lxd-description-list-term-font-size: 0.875rem; // Cuerpo del término: el de las etiquetas, no el de la prosa
+$lxd-description-list-term-font-weight: 500; // Peso del término
+$lxd-description-list-term-line-height: 1.5; // Interlineado del término
+$lxd-description-list-term-letter-spacing: 0em; // Tracking del término
+$lxd-description-list-term-color: #111e30; // Color del término
+$lxd-description-list-value-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del valor (dd)
 $lxd-description-list-value-font-size: 1rem; // El valor hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
-$lxd-description-list-value-font-weight: 300; // Font weight del valor
+$lxd-description-list-value-font-weight: 300; // Peso del valor
 $lxd-description-list-value-line-height: 1.5; // Interlineado heredado del cuerpo de la superficie
-$lxd-description-list-value-color: #111e30; // Color del valor (dd)
+$lxd-description-list-value-color: #111e30; // Color del valor
