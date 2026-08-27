@@ -1,5 +1,14 @@
+/* El relleno, el borde, la tipografía y las intenciones del toast son los del
+   `Alert`: comparten cara y juego de tokens (`alert.*`). Aquí vive solo lo que
+   es propio de un aviso flotante — la capa, la posición, el apilado, la
+   entrada/salida y el aspa, que aquí no puede ser un `Button` porque el
+   elemento lo monta el motor de la cola. */
+@import '../../../tokens/components/button.css';
+@import '../../../tokens/molecules/alert.css';
 @import '../../../tokens/molecules/toast.css';
 
+/* Duraciones y curva por token: con `prefers-reduced-motion: reduce` las
+   duraciones valen 0ms y el aviso entra y sale sin animación. */
 @keyframes toast-in {
   from { opacity: 0; scale: 0.97; }
   to   { opacity: 1; scale: 1; }
@@ -10,29 +19,34 @@
   to   { opacity: 0; scale: 0.97; }
 }
 
-/* ── Contenedor ─────────────────────────────────────────────── */
+/* ── Capa ───────────────────────────────────────────────────── */
 
 .toaster {
   position: fixed;
   z-index: var(--toast-z-index);
-  width: var(--toast-width);
+  /* En una ventana estrecha la pila cede: nunca se sale por el lado. */
+  inline-size: min(
+    var(--toast-max-width),
+    calc(100vw - var(--toast-inset-inline) * 2)
+  );
   list-style: none;
-  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
   margin: 0;
   outline: none;
 
   /* Posición por defecto: bottom-right */
-  inset-block-end: var(--toast-inset-block-end);
-  inset-inline-end: var(--toast-inset-inline-end);
+  inset-block-end: var(--toast-inset-block);
+  inset-inline-end: var(--toast-inset-inline);
 }
 
 .toaster[data-y-position='top'] {
-  inset-block-start: var(--toast-inset-block-end);
+  inset-block-start: var(--toast-inset-block);
   inset-block-end: auto;
 }
 
 .toaster[data-x-position='left'] {
-  inset-inline-start: var(--toast-inset-inline-end);
+  inset-inline-start: var(--toast-inset-inline);
   inset-inline-end: auto;
 }
 
@@ -42,32 +56,14 @@
   translate: -50% 0;
 }
 
-/* ── Toast card ─────────────────────────────────────────────── */
+/* ── Tarjeta ────────────────────────────────────────────────── */
+/* La caja es la del `Alert` (clases `alert`, `alert--<intención>`,
+   `alert__title`, `alert__description`). El toast solo añade el ancho de la
+   pila y su entrada y salida. */
 
 .toast {
-  position: relative;
-  background-color: var(--toast-bg);
-  border: var(--toast-border-width) solid var(--toast-border-color);
-  border-radius: var(--toast-border-radius);
-  box-shadow: var(--toast-shadow);
-  padding-block: var(--toast-padding-block);
-  padding-inline: var(--toast-padding-inline);
-  /* Deja espacio para el botón de cierre absoluto */
-  padding-inline-end: calc(var(--spacing-5) + var(--spacing-3));
-
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-3);
-  width: 100%;
-  box-sizing: border-box;
+  inline-size: 100%;
   cursor: default;
-}
-
-/* Bloquea el padding en hover para que el CSS de Sonner no lo altere */
-.toast:hover {
-  padding-block: var(--toast-padding-block);
-  padding-inline: var(--toast-padding-inline);
-  padding-inline-end: calc(var(--spacing-5) + var(--spacing-3));
 }
 
 .toast[data-state='open'] {
@@ -78,97 +74,49 @@
   animation: toast-out var(--toast-duration-out) var(--toast-easing) both;
 }
 
-/* ── Icono de tipo — oculto ─────────────────────────────────── */
-
+/* El icono de intención del motor no se usa: la intención se lee por el color
+   del relleno, igual que en el `Alert`. */
 .toast__icon {
   display: none;
 }
 
-/* ── Contenido ──────────────────────────────────────────────── */
+/* ── Aspa de cierre ─────────────────────────────────────────── */
+/* El `Alert` delega su aspa en un `Button` ghost; aquí el elemento lo monta el
+   motor de la cola, así que reproducimos su cara con los tokens del alert:
+   la tinta es la del título —voltea sola con la intención— y en hover se
+   invierte contra el relleno, que es lo que hace el ghost. */
 
-.toast__title {
-  font-size: var(--toast-title-font-size);
-  font-weight: var(--toast-title-font-weight);
-  color: var(--toast-title-color);
-  line-height: 1.4;
-  margin: 0;
-}
-
-.toast__description {
-  font-size: var(--toast-description-font-size);
-  color: var(--toast-description-color);
-  line-height: 1.4;
-  margin: 0;
-  margin-block-start: var(--spacing-1);
-}
-
-/* ── Botón de cierre — esquina superior derecha ─────────────── */
-
-.toast__close {
+.toast .toast__close {
   position: absolute;
-  /* Propiedades lógicas + físicas para máxima compatibilidad con Sonner */
-  inset-block-start: var(--spacing-2);
-  inset-inline-end: var(--spacing-2);
-  top: var(--spacing-2);
-  right: var(--spacing-2);
-  left: auto;
+  inset-block-start: var(--alert-close-inset);
+  inset-inline-end: var(--alert-close-inset);
 
   appearance: none;
-  background: none;
-  border: none;
+  border: 0;
+  margin: 0;
   padding-block: 0;
   padding-inline: 0;
-  margin: 0;
-  cursor: pointer;
-
+  inline-size: var(--alert-close-size);
+  block-size: var(--alert-close-size);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* El hit area es ligeramente mayor que el icono */
-  width: calc(var(--toast-close-size) + var(--spacing-2));
-  height: calc(var(--toast-close-size) + var(--spacing-2));
+  cursor: pointer;
 
-  color: var(--toast-close-color);
-  border-radius: var(--border-radius-default);
-  transition: color var(--motion-duration-fast) var(--motion-easing-default),
-              background-color var(--motion-duration-fast) var(--motion-easing-default);
+  background-color: transparent;
+  color: var(--alert-title-color);
+  border-radius: var(--alert-border-radius);
+  transition:
+    color var(--motion-duration-fast) var(--motion-easing-default),
+    background-color var(--motion-duration-fast) var(--motion-easing-default);
 }
 
-.toast__close:hover {
-  color: var(--toast-close-hover-color);
-  background-color: rgba(255, 255, 255, 0.15);
+.toast .toast__close:hover {
+  background-color: var(--alert-title-color);
+  color: var(--alert-bg);
 }
 
-.toast__close:focus-visible {
-  outline: var(--border-width-focus) solid currentColor;
-  outline-offset: 2px;
-}
-
-/* ── Variantes ──────────────────────────────────────────────── */
-
-.toast.toast--success {
-  --toast-bg:                   var(--toast-success-bg);
-  --toast-border-color:         var(--toast-success-border-color);
-  --toast-title-color:          var(--toast-success-title-color);
-  --toast-description-color:    var(--toast-success-description-color);
-}
-
-.toast.toast--error {
-  --toast-bg:                   var(--toast-error-bg);
-  --toast-border-color:         var(--toast-error-border-color);
-  --toast-title-color:          var(--toast-error-title-color);
-  --toast-description-color:    var(--toast-error-description-color);
-}
-
-.toast.toast--warning {
-  --toast-bg:                   var(--toast-warning-bg);
-  --toast-border-color:         var(--toast-warning-border-color);
-  --toast-title-color:          var(--toast-warning-title-color);
-  --toast-description-color:    var(--toast-warning-description-color);
-  --toast-close-color:          var(--toast-warning-close-color);
-  --toast-close-hover-color:    var(--toast-warning-close-hover-color);
-}
-
-.toast.toast--warning .toast__close:hover {
-  background-color: color-mix(in srgb, var(--toast-warning-close-color) 8%, transparent);
+.toast .toast__close:focus-visible {
+  outline: var(--button-focus-ring-width) var(--button-focus-ring-style) var(--alert-title-color);
+  outline-offset: var(--button-focus-ring-offset);
 }
