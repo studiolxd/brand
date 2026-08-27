@@ -1,0 +1,55 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SkeletonStories from "./Skeleton.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { skeletonTokens, skeletonDarkTokens } from "../../../tokens/components/skeleton";
+
+<Meta of={SkeletonStories} />
+
+# Skeleton
+
+Marcador de contenido que aún está cargando: un bloque plano con un brillo que lo recorre. Es
+puramente decorativo — se oculta a lectores de pantalla (`aria-hidden`) — así que el contenedor que
+lo usa debe anunciar la carga por su cuenta (`aria-busy`, una región viva…).
+
+<Canvas of={SkeletonStories.Default} />
+
+## Párrafo
+
+Varios bloques con anchos distintos simulan líneas de texto.
+
+<Canvas of={SkeletonStories.Parrafo} />
+
+## Ficha con avatar
+
+`circle` da un bloque circular (`border-radius.round`), pensado para avatares.
+
+<Canvas of={SkeletonStories.Ficha} />
+
+## Superficie oscura
+
+<Canvas of={SkeletonStories.EnSuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+- `aria-hidden="true"` siempre: el skeleton no tiene contenido que anunciar. Quien lo usa marca
+  `aria-busy` (o similar) en el contenedor real.
+- El barrido respeta `prefers-reduced-motion`: con el ajuste activo, la animación se apaga y el
+  bloque se muestra como fondo plano — igual que `Spinner`. `skeleton.duration` es un token propio
+  (no una de las `--motion-duration-*` compartidas) porque un bucle infinito no es una transición
+  de propiedad: el sistema de reduced-motion global solo pone a cero las duraciones de transición.
+
+## Props
+
+<ArgTypes of={SkeletonStories} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={skeletonTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={skeletonDarkTokens} />

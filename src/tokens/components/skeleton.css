@@ -4,15 +4,16 @@
 
 :root {
   --skeleton-height: 1lh; /** Alto por defecto — una línea de texto */
-  --skeleton-duration: 1400; /** Duración del barrido en ms */
-  --skeleton-bg: var(--color-grey-lightest); /** Fondo base del bloque en carga */
+  --skeleton-duration: 1400ms; /** Duración del barrido — igual que Spinner, token propio: un bucle no es una transición del sistema */
   --skeleton-highlight: var(--color-white); /** Brillo que recorre el bloque */
+  --skeleton-bg: var(--color-surface-secondary-on-light); /** Fondo base del bloque en carga — superficie clara secundaria, mismo rol que kbd/code-block */
   --skeleton-border-radius: var(--border-radius-default); /** Radio del bloque */
+  --skeleton-circle-border-radius: var(--border-radius-round); /** Radio de la variante circular (avatares) */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --skeleton-bg: rgba(255, 255, 255, 0.08); /** Fondo base — surface-dark */
-  --skeleton-highlight: rgba(255, 255, 255, 0.16); /** Brillo — surface-dark */
+  --skeleton-highlight: var(--color-grey-dark); /** Brillo — surface-dark, un paso más claro que el fondo */
+  --skeleton-bg: var(--color-surface-secondary-on-dark); /** Fondo base — surface-dark */
 }

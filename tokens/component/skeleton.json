@@ -1,11 +1,12 @@
 {
   "skeleton": {
-    "bg":               { "$value": "{color.grey-lightest}",          "$type": "color",     "$description": "Fondo base del bloque en carga" },
+    "bg":               { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo base del bloque en carga — superficie clara secundaria, mismo rol que kbd/code-block" },
     "highlight":        { "$value": "{color.white}",                  "$type": "color",     "$description": "Brillo que recorre el bloque" },
     "border-radius":    { "$value": "{border-radius.default}",             "$type": "dimension", "$description": "Radio del bloque" },
+    "circle-border-radius": { "$value": "{border-radius.round}",       "$type": "dimension", "$description": "Radio de la variante circular (avatares)" },
     "height":           { "$value": "1lh",                            "$type": "dimension", "$description": "Alto por defecto — una línea de texto" },
-    "duration":         { "$value": "1400",                           "$type": "number",    "$description": "Duración del barrido en ms" },
-    "surface-dark-bg":        { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color",    "$description": "Fondo base — surface-dark" },
-    "surface-dark-highlight": { "$value": "rgba(255, 255, 255, 0.16)", "$type": "color",    "$description": "Brillo — surface-dark" }
+    "duration":         { "$value": "1400ms",                         "$type": "number",    "$description": "Duración del barrido — igual que Spinner, token propio: un bucle no es una transición del sistema" },
+    "surface-dark-bg":        { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo base — surface-dark" },
+    "surface-dark-highlight": { "$value": "{color.grey-dark}",         "$type": "color",    "$description": "Brillo — surface-dark, un paso más claro que el fondo" }
   }
 }

@@ -17,11 +17,19 @@
   );
   background-size: 200% 100%;
   background-repeat: no-repeat;
-  animation: skeleton-sweep calc(var(--skeleton-duration) * 1ms) linear infinite;
+  animation: skeleton-sweep var(--skeleton-duration) linear infinite;
 }
 
 .skeleton.skeleton--circle {
-  border-radius: 50%;
+  border-radius: var(--skeleton-circle-border-radius);
   aspect-ratio: 1;
   width: auto;
+}
+
+/* Movimiento reducido: sin barrido, el bloque se muestra como fondo plano. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background-image: none;
+  }
 }
