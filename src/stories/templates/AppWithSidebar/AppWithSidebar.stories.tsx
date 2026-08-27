@@ -62,6 +62,6 @@ type Story = StoryObj<typeof Shell>;
 
 export const Escritorio: Story = {};
 export const Rail: Story = { args: { defaultSidebar: 'rail' } };
-export const Movil: Story = { globals: { viewport: { value: 'mobile1', isRotated: false } } };
+
 export const OrgSwitcherAbierto: Story = { args: { orgSwitcherOpen: true } };
 export const UserMenuAbierto: Story = { args: { userMenuOpen: true } };

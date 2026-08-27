@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Header } from './Header';
 import { Button } from '../../atoms/Button/Button';
@@ -60,16 +59,3 @@ export const WithoutActions: Story = {
   args: { actions: undefined },
 };
 
-export const Dark: Story = {
-  name: 'Dark (root-level, html.dark)',
-  render: (args) => {
-    // Header no tiene prop dark — reacciona a .surface-dark/[data-theme="dark"]/
-    // html.dark igual que el resto del sistema. Activamos html.dark mientras
-    // esta story está montada para demostrarlo.
-    useEffect(() => {
-      document.documentElement.classList.add('dark');
-      return () => document.documentElement.classList.remove('dark');
-    }, []);
-    return <Header {...args} />;
-  },
-};

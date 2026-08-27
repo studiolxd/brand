@@ -1,12 +1,20 @@
 import { forwardRef } from 'react';
+import { useRender } from '@base-ui-components/react/use-render';
+import { Icon, type IconName } from '../Icon/Icon';
 import './Link.css';
 
 export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
-  /** URL de destino. */
-  href: string;
+  /** URL de destino. Con `render`, la lleva el elemento del router. */
+  href?: string;
   children: React.ReactNode;
   /** Abre en nueva pestaña con `rel="noopener noreferrer"`. */
   external?: boolean;
+  /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */
+  icon?: IconName;
+  /** Dónde va el icono: delante (`start`, por defecto) o detrás del texto. */
+  iconPosition?: 'start' | 'end';
+  /** Elemento sobre el que renderizar el enlace: el `Link` del router del producto (`render={<NextLink href="…" />}`), que recibe icono, clases y texto. */
+  render?: React.ReactElement<Record<string, unknown>>;
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -18,18 +26,34 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
  * hace falta: un `<Link>` de Next.js ya es un `<a>` y hereda la misma cara.
  */
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
-  { href, children, external = false, className, ...rest },
+  { href, children, external = false, icon, iconPosition = 'start', render, className, ...rest },
   ref,
 ) {
+  const classes = [icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ') || undefined;
+  const glyph = icon ? <Icon name={icon} size="sm" className="link__icon" /> : null;
+  const content = (
+    <>
+      {iconPosition === 'start' && glyph}
+      {children}
+      {iconPosition === 'end' && glyph}
+    </>
+  );
+  const rendered = useRender({
+    render,
+    ref,
+    enabled: render !== undefined,
+    props: { className: classes, ...(rest as Record<string, unknown>), children: content },
+  });
+  if (rendered) return rendered;
   return (
     <a
       ref={ref}
       href={href}
-      className={className}
+      className={classes}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...rest}
     >
-      {children}
+      {content}
     </a>
   );
 });

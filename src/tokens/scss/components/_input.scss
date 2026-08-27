@@ -30,9 +30,9 @@ $lxd-input-disabled-color: #4a4a4a; // Text color when disabled
 $lxd-input-disabled-border-color: #d0d0d0; // Border color when disabled
 $lxd-input-error-bg: #ffffff; // Error background
 $lxd-input-error-color: #111e30; // Error text color
-$lxd-input-error-border-color: #111e30; // Error border color
+$lxd-input-error-border-color: #b30000; // Borde en error: el color de error (excepción a «bordes en prusia»)
 $lxd-input-error-placeholder-color: #4a4a4a; // Error placeholder color
-$lxd-input-error-focus-border-color: #111e30; // Error border color on focus
+$lxd-input-error-focus-border-color: #b30000; // Borde en foco+error
 $lxd-input-error-focus-ring-color: #b30000; // Error focus ring color
 $lxd-input-sm-padding-inline: 0.75rem; // Inline padding — sm
 $lxd-input-sm-font-size: 0.875rem; // Font size — sm

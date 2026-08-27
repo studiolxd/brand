@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { SidebarNav } from './SidebarNav';
 import { Icon } from '../../atoms/Icon/Icon';
-import { Container } from '../../atoms/Container/Container';
 
 const grupos = [
   {
@@ -78,14 +77,6 @@ export const Rail: Story = {
 
 export const TodoPlegado: Story = {
   args: { defaultValue: [] },
-};
-
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <div style={{ inlineSize: '16rem' }}><SidebarNav {...args} /></div>
-    </Container>
-  ),
 };
 
 export const Contrato: Story = {

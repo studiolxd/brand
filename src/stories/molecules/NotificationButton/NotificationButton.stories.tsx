@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { NotificationButton } from './NotificationButton';
-import { Container } from '../../atoms/Container/Container';
 
 const meta: Meta<typeof NotificationButton> = {
   title: 'Molecules/NotificationButton',
@@ -19,14 +18,6 @@ export const PorDefecto: Story = {};
 export const SinContador: Story = { args: { count: 0 } };
 
 export const Tope: Story = { args: { count: 120 } };
-
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <NotificationButton {...args} />
-    </Container>
-  ),
-};
 
 export const Contrato: Story = {
   name: 'Test — nombre con el contador, badge volando, tope',

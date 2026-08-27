@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Avatar } from './Avatar';
-import { Container } from '../Container/Container';
 
 const meta: Meta<typeof Avatar> = {
   title: 'Atoms/Avatar',
@@ -44,16 +43,6 @@ export const Iniciales: Story = {
 /** Organizaciones: cuadrado con el radio del sistema. */
 export const Organizacion: Story = {
   args: { src: undefined, name: 'Studio LXD', shape: 'square' },
-};
-
-/** Sobre superficie oscura las iniciales se invierten. */
-export const SuperficieOscura: Story = {
-  args: { src: undefined },
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <Avatar {...args} />
-    </Container>
-  ),
 };
 
 export const Contrato: Story = {

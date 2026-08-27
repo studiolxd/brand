@@ -7,6 +7,24 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.8.0
+
+### Añadido
+
+- `Link` con `icon` (+ `iconPosition`) y `render` para el enlace del router del
+  producto; icono `arrow-left`; token `link.icon-gap`.
+- Storybook: sección `Pages/` con acceso, registro, recuperar contraseña,
+  verificar correo y aceptar invitación montadas con el DS.
+
+### Cambiado
+
+- Borde de los campos en error en el color de error (`input`/`textarea`
+  `error-border-color`, `error-focus-border-color`, con variante oscura):
+  excepción explícita a «bordes en prusia».
+- Storybook: fuera las 38 stories «superficie oscura» y «en móvil» sin
+  contrato (la barra de fondos y de viewport ya lo hacen); las que afirman algo
+  quedan como test `!dev`.
+
 ## v19.7.0
 
 ### Cambiado

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { MenuButton } from './MenuButton';
-import { Container } from '../Container/Container';
 
 function Interactivo(props: React.ComponentProps<typeof MenuButton>) {
   const [open, setOpen] = useState(props.isOpen ?? false);
@@ -36,15 +35,6 @@ export const Compacto: Story = { args: { size: 'sm' } };
 
 /** La cabecera del sitio: 48px con el glifo a 48. */
 export const Grande: Story = { args: { size: 'lg' } };
-
-/** Sobre superficie oscura las barras pasan a claro por tokens. */
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <Interactivo {...args} />
-    </Container>
-  ),
-};
 
 /** Con el foco visible, para ver el anillo. */
 export const FocoVisible: Story = {

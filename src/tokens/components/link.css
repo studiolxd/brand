@@ -6,6 +6,7 @@
   --link-text-decoration: underline; /** En reposo, subrayado: es lo que dice «esto se pulsa» sin depender del color */
   --link-hover-text-decoration: none; /** En hover el subrayado desaparece */
   --link-cursor: pointer; /** Cursor */
+  --link-icon-gap: var(--spacing-2); /** Aire entre el icono y el texto del enlace */
   --link-color: var(--color-text-on-light); /** El enlace no tiene color propio: es texto, y lo distingue el subrayado */
   --link-hover-color: var(--color-text-on-light); /** Color en hover */
   --link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */

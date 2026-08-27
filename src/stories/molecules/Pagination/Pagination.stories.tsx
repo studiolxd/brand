@@ -211,22 +211,6 @@ export const Sm: Story = {
   },
 };
 
-export const DarkMode: Story = {
-  name: 'Dark mode',
-  render: (args) => {
-    const [page, setPage] = useState(args.page);
-    return (
-      <div
-        className="surface-dark"
-        style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}
-      >
-        <Pagination {...args} page={page} onPageChange={setPage} showTotal />
-      </div>
-    );
-  },
-};
-
-
 /** Listados por cursor: no se sabe cuántas páginas hay; solo anterior y siguiente, por enlace o por manejador. */
 export const PorCursor: Story = {
   args: { mode: 'cursor', nextHref: '?cursor=abc', previousHref: undefined },

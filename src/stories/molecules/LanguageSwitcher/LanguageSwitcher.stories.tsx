@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { LanguageSwitcher, type Language } from './LanguageSwitcher';
-import { Container } from '../../atoms/Container/Container';
 
 const idiomas: Language[] = [
   { code: 'es', label: 'Español' },
@@ -44,16 +43,6 @@ export const EtiquetaOculta: Story = { args: { labelHidden: true } };
 /** En el pie: los idiomas desplegados. Con `hrefFor`, cada uno es un enlace. */
 export const Lista: Story = {
   args: { variant: 'list', hrefFor: (code) => `/${code}` },
-};
-
-/** Sobre superficie oscura. */
-export const SuperficieOscura: Story = {
-  args: { variant: 'list', hrefFor: (code) => `/${code}` },
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <Controlado {...args} />
-    </Container>
-  ),
 };
 
 export const Contrato: Story = {

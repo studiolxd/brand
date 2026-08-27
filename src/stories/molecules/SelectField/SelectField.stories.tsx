@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { SelectField } from './SelectField';
-import { Container } from '../../atoms/Container/Container';
 
 const options = [
   { value: '', label: 'Selecciona un tipo' },
@@ -38,15 +37,6 @@ export const Deshabilitado: Story = { args: { disabled: true, value: 'part-time'
 
 /** Etiqueta oculta a la vista, presente para el lector de pantalla. */
 export const EtiquetaOculta: Story = { args: { labelHidden: true } };
-
-export const SuperficieOscura: Story = {
-  args: { errorMessage: 'Este campo es obligatorio.' },
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <div style={{ inlineSize: '20rem' }}><SelectField {...args} /></div>
-    </Container>
-  ),
-};
 
 export const Contrato: Story = {
   name: 'Test — etiqueta, ayuda y error enlazados al control',

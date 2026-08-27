@@ -65,6 +65,7 @@ export const Confirm: Story = {
 };
 
 export const Dark: Story = {
+  tags: ['!dev'],
   name: 'Dark (root-level, html.dark)',
   render: () => {
     const [open, setOpen] = useState(false);

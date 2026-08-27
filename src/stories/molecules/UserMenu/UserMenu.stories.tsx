@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { UserMenu } from './UserMenu';
-import { Container } from '../../atoms/Container/Container';
 
 const items = [
   { type: 'link' as const, label: 'Mi cuenta', href: '#cuenta' },
@@ -41,14 +40,6 @@ export const Compacto: Story = {
 export const NombreLargo: Story = {
   args: { name: 'Alejandro Rodríguez Martínez', email: 'alejandro.rodriguez.martinez@empresa.com' },
   render: (args) => <div style={{ inlineSize: '14rem' }}><UserMenu {...args} /></div>,
-};
-
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <UserMenu {...args} />
-    </Container>
-  ),
 };
 
 export const ContratoCompacto: Story = {

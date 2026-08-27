@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { AppHeader } from './AppHeader';
 import { Heading } from '../../atoms/Heading/Heading';
-import { Container } from '../../atoms/Container/Container';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
 import { NotificationButton } from '../../molecules/NotificationButton/NotificationButton';
 
@@ -25,14 +24,6 @@ export const PorDefecto: Story = {};
 /** `start`: lo que la página necesite en la barra — un título, un breadcrumb, un buscador. */
 export const ConInicio: Story = {
   args: { start: <Heading level={1} size={6}>Proyectos</Heading> },
-};
-
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="none">
-      <AppHeader {...args} />
-    </Container>
-  ),
 };
 
 export const Contrato: Story = {

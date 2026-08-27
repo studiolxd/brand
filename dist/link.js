@@ -1,20 +1,40 @@
 'use client';
 import './link.css';
-import { jsx as e } from "react/jsx-runtime";
-import { forwardRef as t } from "react";
+import { Icon as e } from "./icon.js";
+import { Fragment as t, jsx as n, jsxs as r } from "react/jsx-runtime";
+import { forwardRef as i } from "react";
+import { useRender as a } from "@base-ui-components/react/use-render";
 //#region src/stories/atoms/Link/Link.tsx
-var n = t(function({ href: t, children: n, external: r = !1, className: i, ...a }, o) {
-	return /* @__PURE__ */ e("a", {
-		ref: o,
-		href: t,
-		className: i,
-		...r ? {
+var o = i(function({ href: i, children: o, external: s = !1, icon: c, iconPosition: l = "start", render: u, className: d, ...f }, p) {
+	let m = [c ? "link--with-icon" : "", d].filter(Boolean).join(" ") || void 0, h = c ? /* @__PURE__ */ n(e, {
+		name: c,
+		size: "sm",
+		className: "link__icon"
+	}) : null, g = /* @__PURE__ */ r(t, { children: [
+		l === "start" && h,
+		o,
+		l === "end" && h
+	] });
+	return a({
+		render: u,
+		ref: p,
+		enabled: u !== void 0,
+		props: {
+			className: m,
+			...f,
+			children: g
+		}
+	}) || /* @__PURE__ */ n("a", {
+		ref: p,
+		href: i,
+		className: m,
+		...s ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		...a,
-		children: n
+		...f,
+		children: g
 	});
 });
 //#endregion
-export { n as Link };
+export { o as Link };

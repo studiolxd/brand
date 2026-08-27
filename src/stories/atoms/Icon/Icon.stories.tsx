@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect } from 'storybook/test';
 import { Icon, ICON_NAMES } from './Icon';
-import { Container } from '../Container/Container';
 
 const meta = {
   title: 'Atoms/Icon',
@@ -28,15 +27,6 @@ export const Tallas: Story = {
         <Icon key={size} {...args} size={size} />
       ))}
     </div>
-  ),
-};
-
-/** Hereda el color del texto: en superficie oscura pasa a claro sin ninguna prop. */
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <Icon {...args} size="lg" />
-    </Container>
   ),
 };
 

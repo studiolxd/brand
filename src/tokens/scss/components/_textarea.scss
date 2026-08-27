@@ -31,9 +31,9 @@ $lxd-textarea-disabled-color: #4a4a4a; // Text color when disabled
 $lxd-textarea-disabled-border-color: #d0d0d0; // Border color when disabled
 $lxd-textarea-error-bg: #ffffff; // Error background
 $lxd-textarea-error-color: #111e30; // Error text color
-$lxd-textarea-error-border-color: #111e30; // Error border color
+$lxd-textarea-error-border-color: #b30000; // Borde en error: el color de error (excepción a «bordes en prusia»)
 $lxd-textarea-error-placeholder-color: #4a4a4a; // Error placeholder color
-$lxd-textarea-error-focus-border-color: #111e30; // Error border color on focus
+$lxd-textarea-error-focus-border-color: #b30000; // Borde en foco+error
 $lxd-textarea-error-focus-ring-color: #b30000; // Error focus ring color
 $lxd-textarea-sm-padding-block: 0.5rem; // Block padding — variante sm
 $lxd-textarea-sm-padding-inline: 0.75rem; // Inline padding — variante sm

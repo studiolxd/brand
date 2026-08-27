@@ -40,9 +40,9 @@
   --textarea-focus-ring-inset-offset: var(--border-width-default); /** Gap between border and focus ring */
   --textarea-focus-ring-color: var(--color-primary); /** Focus ring color */
   --textarea-error-color: var(--color-text-on-light); /** Error text color */
-  --textarea-error-border-color: var(--color-primary); /** Error border color */
+  --textarea-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (excepción a «bordes en prusia») */
   --textarea-error-placeholder-color: var(--color-text-placeholder-on-light); /** Error placeholder color */
-  --textarea-error-focus-border-color: var(--color-primary); /** Error border color on focus */
+  --textarea-error-focus-border-color: var(--color-error-text-on-light); /** Borde en foco+error */
   --textarea-error-focus-ring-color: var(--color-error-text-on-light); /** Error focus ring color */
   --textarea-focus-ring-width: var(--control-focus-ring-width); /** Focus ring width */
 }
@@ -57,4 +57,6 @@ html.dark {
   --textarea-focus-border-color: var(--color-text-on-dark); /** Border color on focus — surface-dark */
   --textarea-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --textarea-error-focus-ring-color: var(--color-error-text-on-dark); /** Error focus ring color — surface-dark */
+  --textarea-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
+  --textarea-error-focus-border-color: var(--color-error-text-on-dark); /** Borde en foco+error — surface-dark */
 }

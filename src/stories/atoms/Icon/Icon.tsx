@@ -20,6 +20,12 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M0 12 H24 M18 6 L24 12 L18 18" />
     ),
   },
+  'arrow-left': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M24 12 H0 M6 6 L0 12 L6 18" />
+    ),
+  },
   chevron: {
     viewBox: '0 0 24 24',
     render: () => (

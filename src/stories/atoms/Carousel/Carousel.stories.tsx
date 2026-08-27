@@ -58,19 +58,6 @@ export const OnePorView: Story = {
   ),
 };
 
-/** Sobre fondo oscuro — gradientColor para que el degradado se funda con el contenedor */
-export const OnDark: Story = {
-  name: 'On dark background',
-  render: () => (
-    <div
-      className="surface-dark"
-      style={{ backgroundColor: 'var(--color-background-dark)', padding: '2rem 0' }}
-    >
-      <Carousel gradientColor="var(--color-background-dark)">{slideContent}</Carousel>
-    </div>
-  ),
-};
-
 /** Sin botones prev/next — útil cuando el scroll se gestiona externamente */
 export const HideButtons: Story = {
   name: 'Without buttons',

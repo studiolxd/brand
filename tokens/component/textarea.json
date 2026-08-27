@@ -30,9 +30,9 @@
     "disabled-border-color":            { "$value": "{color.grey-light}",        "$type": "color",     "$description": "Border color when disabled" },
     "error-bg":                         { "$value": "{color.white}",             "$type": "color",     "$description": "Error background" },
     "error-color":                      { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Error text color" },
-    "error-border-color":               { "$value": "{color.primary}",           "$type": "color",     "$description": "Error border color" },
+    "error-border-color":               { "$value": "{color.error-text-on-light}",           "$type": "color",     "$description": "Borde en error: el color de error (excepción a «bordes en prusia»)" },
     "error-placeholder-color":          { "$value": "{color.text.placeholder-on-light}",  "$type": "color",     "$description": "Error placeholder color" },
-    "error-focus-border-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Error border color on focus" },
+    "error-focus-border-color":         { "$value": "{color.error-text-on-light}",           "$type": "color",     "$description": "Borde en foco+error" },
     "error-focus-ring-color":           { "$value": "{color.error-text-on-light}",    "$type": "color",     "$description": "Error focus ring color" },
     "sm-padding-block":                 { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Block padding — variante sm" },
     "sm-padding-inline":                { "$value": "{spacing.3}",               "$type": "dimension", "$description": "Inline padding — variante sm" },
@@ -48,6 +48,8 @@
     "surface-dark-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}",  "$type": "color", "$description": "Placeholder text color — surface-dark" },
     "surface-dark-focus-border-color":     { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Border color on focus — surface-dark" },
     "surface-dark-focus-ring-color":       { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Focus ring color — surface-dark" },
-    "surface-dark-error-focus-ring-color": { "$value": "{color.error-text-on-dark}",       "$type": "color", "$description": "Error focus ring color — surface-dark" }
+    "surface-dark-error-focus-ring-color": { "$value": "{color.error-text-on-dark}",       "$type": "color", "$description": "Error focus ring color — surface-dark" },
+    "surface-dark-error-border-color":       { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
+    "surface-dark-error-focus-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en foco+error — surface-dark" }
   }
 }

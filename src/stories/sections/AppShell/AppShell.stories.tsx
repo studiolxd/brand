@@ -64,11 +64,6 @@ export const Rail: Story = { args: { defaultSidebar: 'rail' } };
 
 export const Plegada: Story = { args: { defaultSidebar: 'closed' } };
 
-/** Móvil: la sidebar es un cajón que entra por la izquierda y se cierra al navegar. */
-export const Movil: Story = {
-  globals: { viewport: { value: 'mobile1', isRotated: false } },
-};
-
 export const Contrato: Story = {
   name: 'Test — el botón de menú pliega y despliega; el asa redimensiona por teclado',
   tags: ['!dev'],

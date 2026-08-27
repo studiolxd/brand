@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Select, SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem } from './Select';
-import { Container } from '../Container/Container';
 
 const options = [
   { value: 'es', label: 'Español' },
@@ -75,15 +74,6 @@ export const Compuesto: Story = {
         </Select.Content>
       </Select.Root>
     </div>
-  ),
-};
-
-export const SuperficieOscura: Story = {
-  args: { defaultValue: 'es' },
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <div style={{ inlineSize: '16rem' }}><Select {...args} /></div>
-    </Container>
   ),
 };
 

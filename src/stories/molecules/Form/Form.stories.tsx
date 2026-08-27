@@ -64,12 +64,6 @@ export const TallaGrande: Story = {
   args: { ...Completo.args, size: 'lg' },
 };
 
-/** Sobre superficie oscura: cada pieza voltea con sus tokens; el Form no añade nada. */
-export const SuperficieOscura: Story = {
-  args: { ...Completo.args },
-  decorators: [(Story) => <div className="surface-dark" style={{ padding: 'var(--spacing-6)' }}><Story /></div>],
-};
-
 /** Con `CheckboxField` y acción secundaria. */
 export const ConCasillaYDosAcciones: Story = {
   args: {

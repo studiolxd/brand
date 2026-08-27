@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { DropdownField } from './DropdownField';
 import { Icon } from '../../atoms/Icon/Icon';
-import { Container } from '../../atoms/Container/Container';
 
 const ORDEN = [
   { value: 'recent', label: 'Más recientes' },
@@ -74,14 +73,6 @@ export const Tallas: Story = {
 };
 
 export const Deshabilitado: Story = { args: { disabled: true } };
-
-export const SuperficieOscura: Story = {
-  render: () => (
-    <Container surface="dark" space="md">
-      <Controlado />
-    </Container>
-  ),
-};
 
 export const Contrato: Story = {
   name: 'Test — etiqueta enlazada, control a talla, opciones exclusivas',

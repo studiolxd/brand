@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent, fn } from 'storybook/test';
 import { OrgSwitcher } from './OrgSwitcher';
-import { Container } from '../../atoms/Container/Container';
 
 const orgs = [
   { id: 'studio', name: 'Studio LXD' },
@@ -45,14 +44,6 @@ export const ConAcciones: Story = {
 /** Con una sola organización el menú solo la confirma; el producto puede ocultar el control. */
 export const OrganizacionUnica: Story = {
   args: { organizations: [orgs[0]] },
-};
-
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <OrgSwitcher {...args} />
-    </Container>
-  ),
 };
 
 export const Contrato: Story = {

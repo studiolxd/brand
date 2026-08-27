@@ -14,7 +14,7 @@ function Verificar({ sent, surface }: Args) {
         size="lg"
         onSubmit={(e) => e.preventDefault()}
         actions={sent ? undefined : <Button variant="outline">Reenviar correo</Button>}
-        links={<Link href="#acceso">Iniciar sesión con otra cuenta</Link>}
+        links={<Link href="#acceso" icon="arrow-left">Iniciar sesión con otra cuenta</Link>}
       >
         {sent && <Alert role="status"><AlertDescription>Correo de verificación enviado.</AlertDescription></Alert>}
       </Form>
@@ -35,4 +35,4 @@ type Story = StoryObj<typeof Verificar>;
 /** `/verify-email`: un Form sin campos — reenviar, y el enlace para entrar con otra cuenta. */
 export const PorDefecto: Story = {};
 export const Reenviado: Story = { args: { sent: true } };
-export const SuperficieOscura: Story = { args: { surface: 'dark' } };
+

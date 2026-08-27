@@ -64,6 +64,7 @@ export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'No 
 export const SoloLectura: Story = { args: { readOnly: true, defaultValue: 'Valor de solo lectura' } };
 
 export const SuperficieOscura: Story = {
+  tags: ['!dev'],
   render: (args) => (
     <Container surface="dark" space="md">
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '20rem' }}>

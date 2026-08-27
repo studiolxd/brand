@@ -112,6 +112,7 @@ export const LabelThreshold: Story = {
 };
 
 export const DarkBackground: Story = {
+  tags: ['!dev'],
   name: 'Sobre fondo oscuro',
   render: () => (
     <div

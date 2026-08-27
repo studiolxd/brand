@@ -67,16 +67,3 @@ export const SeparadorChevron: Story = {
   },
 };
 
-export const DarkMode: Story = {
-  name: 'Dark mode',
-  decorators: [
-    (Story) => (
-      <div
-        className="surface-dark"
-        style={{ padding: '2rem', backgroundColor: 'var(--color-background-dark)' }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
-};

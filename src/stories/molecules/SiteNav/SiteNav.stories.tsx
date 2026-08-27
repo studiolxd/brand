@@ -36,11 +36,6 @@ type Story = StoryObj<typeof SiteNav>;
 /** Tres grupos: en escritorio, tres columnas; en móvil, apilados. */
 export const PorDefecto: Story = {};
 
-/** En móvil los grupos van en una sola columna. */
-export const Movil: Story = {
-  globals: { viewport: { value: 'mobile1' } },
-};
-
 /** Sobre superficie oscura. */
 export const SuperficieOscura: Story = {
   render: (args) => (

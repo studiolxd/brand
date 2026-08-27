@@ -34,15 +34,6 @@ export const Tallas: Story = {
   ),
 };
 
-/** Sobre superficie oscura el trazado pasa a claro por tokens, sin prop. */
-export const SuperficieOscura: Story = {
-  render: () => (
-    <Container surface="dark" space="lg">
-      <Logo />
-    </Container>
-  ),
-};
-
 export const Talla: Story = {
   name: 'Test — mide su talla y hereda la superficie',
   tags: ['!dev'],

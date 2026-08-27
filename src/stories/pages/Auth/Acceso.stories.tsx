@@ -65,8 +65,6 @@ export const PorDefecto: Story = {};
 /** Con Google y GitHub, captcha y error del servidor: todo lo que puede aparecer. */
 export const Completa: Story = { args: { socialProviders: ['google', 'github'], captcha: true, serverError: true } };
 export const EnlaceMagico: Story = { args: { magicLink: true } };
-export const SuperficieOscura: Story = { args: { ...Completa.args, surface: 'dark' } };
-export const EnMovil: Story = { args: Completa.args, globals: { viewport: { value: 'mobile1' } } };
 
 export const Contrato: Story = {
   name: 'Test — un h1, main-content, bloques del formulario',

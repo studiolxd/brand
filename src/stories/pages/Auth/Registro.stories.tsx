@@ -47,5 +47,3 @@ type Story = StoryObj<typeof Registro>;
 export const PorDefecto: Story = {};
 export const Completa: Story = { args: { socialProviders: ['google', 'github'], captcha: true, terms: true } };
 export const ConErrorDePolitica: Story = { args: { passwordError: true } };
-export const SuperficieOscura: Story = { args: { ...Completa.args, surface: 'dark' } };
-export const EnMovil: Story = { args: Completa.args, globals: { viewport: { value: 'mobile1' } } };

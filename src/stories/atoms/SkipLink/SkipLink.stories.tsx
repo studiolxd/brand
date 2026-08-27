@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent } from 'storybook/test';
 import { SkipLink } from './SkipLink';
-import { Container } from '../Container/Container';
 
 const meta: Meta<typeof SkipLink> = {
   title: 'Atoms/SkipLink',
@@ -20,16 +19,6 @@ export const Oculto: Story = {};
 /** Con el foco: fijo en la esquina, sobre cualquier otra capa. */
 export const Revelado: Story = {
   parameters: { pseudo: { focusVisible: true } },
-};
-
-/** En superficie oscura el relleno se invierte para verse sobre prusia. */
-export const SuperficieOscura: Story = {
-  parameters: { pseudo: { focusVisible: true } },
-  render: (args) => (
-    <Container surface="dark" space="lg">
-      <SkipLink {...args} />
-    </Container>
-  ),
 };
 
 export const Contrato: Story = {

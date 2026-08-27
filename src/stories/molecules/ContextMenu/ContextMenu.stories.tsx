@@ -63,6 +63,7 @@ export const AbreArriba: Story = {
 };
 
 export const SuperficieOscura: Story = {
+  tags: ['!dev'],
   render: (args) => (
     <Container surface="dark" space="md">
       <div style={{ display: 'flex', justifyContent: 'center' }}><ContextMenu {...args} /></div>

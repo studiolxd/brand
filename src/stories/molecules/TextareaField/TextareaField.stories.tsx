@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { TextareaField } from './TextareaField';
-import { Container } from '../../atoms/Container/Container';
 
 const meta: Meta<typeof TextareaField> = {
   title: 'Molecules/TextareaField',
@@ -40,15 +39,6 @@ export const Tallas: Story = {
       <TextareaField {...args} id="talla-md" size="md" label="Mediano" />
       <TextareaField {...args} id="talla-lg" size="lg" label="Grande" />
     </div>
-  ),
-};
-
-export const SuperficieOscura: Story = {
-  args: { errorMessage: 'Este campo es obligatorio.' },
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <div style={{ inlineSize: '24rem' }}><TextareaField {...args} /></div>
-    </Container>
   ),
 };
 

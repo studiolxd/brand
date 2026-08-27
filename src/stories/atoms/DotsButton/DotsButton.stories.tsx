@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { DotsButton } from './DotsButton';
-import { Container } from '../Container/Container';
 
 const meta = {
   title: 'Atoms/DotsButton',
@@ -33,14 +32,6 @@ export const Tallas: Story = {
 export const Vertical: Story = { args: { orientation: 'vertical' } };
 
 export const Deshabilitado: Story = { args: { disabled: true } };
-
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <DotsButton {...args} />
-    </Container>
-  ),
-};
 
 export const Contrato: Story = {
   name: 'Test — botón con nombre, cuadrado a talla',

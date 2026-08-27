@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Link } from './Link';
 import { Paragraph } from '../Paragraph/Paragraph';
-import { Container } from '../Container/Container';
 
 const meta: Meta<typeof Link> = {
   title: 'Atoms/Link',
@@ -31,14 +30,6 @@ export const Externo: Story = {
   args: { href: 'https://studiolxd.com', children: 'studiolxd.com', external: true },
 };
 
-export const SuperficieOscura: Story = {
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <Paragraph>Un enlace <Link {...args} /> sobre superficie oscura.</Paragraph>
-    </Container>
-  ),
-};
-
 export const Contrato: Story = {
   name: 'Test — externo seguro, atributos reenviados, misma cara que un <a> crudo',
   tags: ['!dev'],
@@ -62,4 +53,19 @@ export const Contrato: Story = {
     await expect(a.textDecorationLine).toBe('underline');
     await expect(a.textDecorationLine).toBe(b.textDecorationLine);
   },
+};
+
+/** Con icono delante («← Volver») o detrás. El icono es decorativo: el texto ya lo dice. */
+export const ConIcono: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 'var(--spacing-5)' }}>
+      <Link href="#acceso" icon="arrow-left">Volver a iniciar sesión</Link>
+      <Link href="#siguiente" icon="arrow" iconPosition="end">Siguiente</Link>
+    </div>
+  ),
+};
+
+/** Sobre el enlace del router: `render` recibe icono, clases y texto. */
+export const ConRender: Story = {
+  render: () => <Link icon="arrow-left" render={<a href="#acceso" data-router="sí" />}>Volver a iniciar sesión</Link>,
 };

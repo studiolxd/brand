@@ -35,8 +35,6 @@ Elegir una opción de una lista. Un `combobox` de Base UI: foco, ARIA y teclado 
 
 El control hereda los tokens de `.surface-dark` por cascada. El desplegable va en un portal en `document.body`, que hereda el tema activado en la raíz (`html.dark` / `[data-theme="dark"]`); solo si el Select vive en un `.surface-dark` **anidado** hay que pasar `container` para montar el portal dentro.
 
-<Canvas of={SelectStories.SuperficieOscura} />
-
 ## Accesibilidad
 
 - El control necesita nombre: en un formulario lo pone la etiqueta del `SelectField`; suelto, `aria-label`.

@@ -1,10 +1,17 @@
+import { type IconName } from '../Icon/Icon';
 import './Link.css';
 export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
-    /** URL de destino. */
-    href: string;
+    /** URL de destino. Con `render`, la lleva el elemento del router. */
+    href?: string;
     children: React.ReactNode;
     /** Abre en nueva pestaña con `rel="noopener noreferrer"`. */
     external?: boolean;
+    /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */
+    icon?: IconName;
+    /** Dónde va el icono: delante (`start`, por defecto) o detrás del texto. */
+    iconPosition?: 'start' | 'end';
+    /** Elemento sobre el que renderizar el enlace: el `Link` del router del producto (`render={<NextLink href="…" />}`), que recibe icono, clases y texto. */
+    render?: React.ReactElement<Record<string, unknown>>;
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }

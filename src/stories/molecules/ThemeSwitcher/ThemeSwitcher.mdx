@@ -31,8 +31,6 @@ Para el pie, donde hay sitio y no hace falta esconder nada:
 
 El componente muestra y elige. **Aplicar el tema y recordarlo es del producto**: con `onChange`, pone `html.dark` o `[data-theme="dark"]` —los selectores que voltean los tokens (Foundations → Colores)— y guarda la preferencia donde le convenga. `system` significa escuchar `prefers-color-scheme` y aplicar lo que diga.
 
-<Canvas of={ThemeSwitcherStories.SuperficieOscura} />
-
 ## Accesibilidad
 
 - En compacto, la etiqueta (`labels.group`, "Tema") nombra el control por `id`, y este abre un menú de `menuitemradio` que se recorre con las flechas; en lista, un `group` con nombre, un botón por tema y la actual como texto con `aria-current` (no se pulsa: es un dato, no una acción).

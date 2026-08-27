@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { ThemeSwitcher, type Theme } from './ThemeSwitcher';
-import { Container } from '../../atoms/Container/Container';
 
 function Controlado(props: React.ComponentProps<typeof ThemeSwitcher>) {
   const [value, setValue] = useState<Theme>(props.value);
@@ -34,16 +33,6 @@ export const Icono: Story = { args: { variant: 'icon' } };
 /** En el pie: las tres opciones desplegadas. */
 export const Lista: Story = {
   args: { variant: 'list' },
-};
-
-/** Sobre superficie oscura. */
-export const SuperficieOscura: Story = {
-  args: { variant: 'list', value: 'dark' },
-  render: (args) => (
-    <Container surface="dark" space="md">
-      <Controlado {...args} />
-    </Container>
-  ),
 };
 
 export const Contrato: Story = {

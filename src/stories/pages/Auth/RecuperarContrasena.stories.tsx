@@ -26,7 +26,7 @@ function Recuperar({ step, surface }: Args) {
         size="lg"
         onSubmit={(e) => e.preventDefault()}
         actions={step === 'pedir' ? <Button variant="primary" type="submit">Enviar enlace</Button> : undefined}
-        links={<Link href="#acceso">Volver a iniciar sesión</Link>}
+        links={<Link href="#acceso" icon="arrow-left">Volver a iniciar sesión</Link>}
       >
         {step === 'pedir' ? (
           <InputField id="recuperar-email" label="Correo electrónico" type="email" autoComplete="email" />
@@ -56,5 +56,3 @@ export const Pedir: Story = {};
 export const Enviado: Story = { args: { step: 'enviado' } };
 /** `/reset-password`: la nueva contraseña, dos veces. */
 export const Restablecer: Story = { args: { step: 'restablecer' } };
-export const SuperficieOscura: Story = { args: { surface: 'dark' } };
-export const EnMovil: Story = { globals: { viewport: { value: 'mobile1' } } };

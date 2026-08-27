@@ -69,4 +69,4 @@ export const SinSesion: Story = {};
 export const ConSesion: Story = { args: { state: 'con-sesion' } };
 export const Invalida: Story = { args: { state: 'invalida' } };
 export const RegistroCerrado: Story = { args: { state: 'registro-cerrado' } };
-export const SuperficieOscura: Story = { args: { state: 'con-sesion', surface: 'dark' } };
+
