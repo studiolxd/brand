@@ -48,7 +48,12 @@ cerrarse al elegir una fecha.
 
 ## Superficie oscura
 
-<Canvas of={PopoverStories.SuperficieOscura} />
+El panel viaja en un **portal**, colgado del `body`: un `.surface-dark` puesto en
+un contenedor de la página no le llega, porque las custom properties se heredan
+por el árbol del DOM y el panel ya no está dentro. Su tema lo pone la raíz
+—`html.dark` o `[data-theme="dark"]`—, que es lo que hace un gestor de tema. Por
+eso no hay una story de superficie oscura: enseñaría un panel claro sobre un
+fondo oscuro y mentiría sobre cómo funciona.
 
 ## Contenido
 

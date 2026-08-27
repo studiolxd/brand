@@ -121,13 +121,6 @@ export const EnUso: Story = {
 export const SuperficieOscura: Story = {
   name: 'Superficie oscura',
   parameters: { surface: 'dark' },
-  decorators: [
-    (Story) => (
-      <div className="surface-dark" style={{ padding: '2rem', background: 'var(--color-background-dark)' }}>
-        <Story />
-      </div>
-    ),
-  ],
   render: () => (
     <div style={fila}>
       <Tag variant="primary">Primaria</Tag>

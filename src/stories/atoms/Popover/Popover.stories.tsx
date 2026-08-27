@@ -85,24 +85,6 @@ export const Controlado: Story = {
   },
 };
 
-/** Sobre superficie oscura el panel toma fondo y borde oscuros de `floating-panel`. */
-export const SuperficieOscura: Story = {
-  name: 'Superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    label: 'Detalles',
-    trigger: <Button>Abrir popover</Button>,
-    children: <Paragraph size="small">Contenido libre dentro del panel flotante.</Paragraph>,
-  },
-  decorators: [
-    (Story) => (
-      <div className="surface-dark" style={{ padding: '4rem', background: 'var(--color-background-dark)' }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
 /** Test: el disparador anuncia el panel, el panel es un diálogo con nombre y Escape cierra. */
 export const Contrato: Story = {
   name: 'Test — contrato ARIA y cierre con Escape',

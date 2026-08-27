@@ -97,13 +97,6 @@ export const UmbralDeLaCifra: Story = {
 export const SuperficieOscura: Story = {
   name: 'Superficie oscura',
   parameters: { surface: 'dark' },
-  decorators: [
-    (Story) => (
-      <div className="surface-dark" style={{ padding: '2rem', background: 'var(--color-background-dark)' }}>
-        <Story />
-      </div>
-    ),
-  ],
   render: () => (
     <div style={columna}>
       <ProgressBar value={65} variant="primary" label="Primaria" />

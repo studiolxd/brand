@@ -63,13 +63,6 @@ export const SuperficieOscura: Story = {
   name: 'Superficie oscura',
   parameters: { surface: 'dark' },
   args: { children: null },
-  decorators: [
-    (Story) => (
-      <div className="surface-dark" style={{ padding: '2rem', background: 'var(--color-background-dark)' }}>
-        <Story />
-      </div>
-    ),
-  ],
   render: () => (
     <DescriptionList>
       <dt>Cliente</dt><dd>Studio LXD</dd>
