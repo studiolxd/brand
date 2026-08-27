@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import './Breadcrumb.css';
 
 export type BreadcrumbItem = {
@@ -6,7 +6,7 @@ export type BreadcrumbItem = {
   href?: string;
 };
 
-export type BreadcrumbRenderLinkProps = {
+export type BreadcrumbRenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
   children: ReactNode;
   className: string;
@@ -20,8 +20,10 @@ export interface BreadcrumbProps {
   className?: string;
 }
 
-function defaultRenderLink({ href, children, className }: BreadcrumbRenderLinkProps) {
-  return <a href={href} className={className}>{children}</a>;
+// Reenvía todo lo que reciba: un renderLink del consumidor (router propio) puede
+// añadir atributos de enlace sin que Breadcrumb tenga que conocerlos.
+function defaultRenderLink({ children, ...props }: BreadcrumbRenderLinkProps) {
+  return <a {...props}>{children}</a>;
 }
 
 export function Breadcrumb({

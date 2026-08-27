@@ -25,6 +25,7 @@
   --alert-title-font-size: var(--text-font-size);
   --alert-description-font-size: var(--text-font-size);
   --alert-description-line-height: var(--text-line-height);
+  --breadcrumb-font-size: var(--text-paragraph-small-font-size);
   --code-block-font-size: var(--text-paragraph-small-font-size);
   --description-list-value-font-size: var(--text-font-size);
   --description-list-value-line-height: var(--text-line-height);

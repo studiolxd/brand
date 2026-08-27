@@ -1,0 +1,71 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as BreadcrumbStories from "./Breadcrumb.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { breadcrumbTokens, breadcrumbDarkTokens } from "../../../tokens/components/breadcrumb";
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+Migas de pan: la ruta de páginas hasta la actual, para orientarse en una
+jerarquía profunda. No sustituye a la navegación principal, la complementa.
+
+<Canvas of={BreadcrumbStories.PorDefecto} />
+
+## Anatomía
+
+Un `<nav>` con nombre accesible (`ariaLabel`, «Migas de pan» por defecto) que
+envuelve una lista (`<ol>`). Cada item es un enlace salvo el último, que es la
+página actual: texto sin enlace, `aria-current="page"` y peso de énfasis. Un
+separador decorativo (`aria-hidden`) entre cada par de items.
+
+Un item sin `href` (aunque no sea el último) se renderiza como texto estático,
+no como enlace roto.
+
+## `renderLink`
+
+Por defecto renderiza un `<a>` nativo. Para integrarlo con el router de la
+aplicación (Next.js `Link`, React Router...), se pasa `renderLink`: recibe
+`href`, `children`, `className` y cualquier otro atributo de enlace, y debe
+reenviarlos todos a su elemento — igual que el `renderLink` por defecto hace
+con `{...props}`.
+
+<Canvas of={BreadcrumbStories.ConRenderLink} />
+
+## Casos
+
+<Canvas of={BreadcrumbStories.ItemSinHref} />
+<Canvas of={BreadcrumbStories.UnSoloItem} />
+<Canvas of={BreadcrumbStories.SeparadorChevron} />
+
+## Superficie oscura
+
+<Canvas of={BreadcrumbStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={breadcrumbTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={breadcrumbDarkTokens} />
+
+## Accesibilidad
+
+- El `<nav>` lleva nombre accesible propio (`ariaLabel`) para distinguirlo de
+  la navegación principal cuando un lector de pantalla lista los puntos de
+  referencia de la página.
+- El item actual es `aria-current="page"`, no un enlace: no tiene sentido
+  enlazar a la página en la que ya se está.
+- El separador es `aria-hidden="true"`: es una marca visual, no información.
+- El foco del enlace usa el anillo del sistema (`focus-ring-*`) con esquina
+  recta.
+- `breadcrumb.font-size` referencia `{text.paragraph.small.font-size}`: es
+  texto de navegación, no un control de interfaz, así que respira en la
+  superficie pública (`SiteShell`) igual que el resto del texto corriente.
+
+## Props
+
+<ArgTypes of={BreadcrumbStories} />

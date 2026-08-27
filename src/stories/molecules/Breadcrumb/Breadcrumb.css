@@ -38,7 +38,7 @@
 .breadcrumb__link:focus-visible {
   outline: var(--breadcrumb-focus-ring-width) solid var(--breadcrumb-focus-ring-color);
   outline-offset: var(--breadcrumb-focus-ring-offset);
-  border-radius: 2px;
+  border-radius: var(--border-radius-default);
 }
 
 .breadcrumb__static {

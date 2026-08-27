@@ -7,10 +7,10 @@
   --breadcrumb-link-text-decoration: none; /** Sin subrayado por defecto */
   --breadcrumb-link-text-decoration-hover: underline; /** Subrayado en hover */
   --breadcrumb-font-family: var(--font-family-sans); /** Font family */
-  --breadcrumb-font-size: var(--font-size-1); /** 14px — UI nav label */
   --breadcrumb-line-height: var(--line-height-none); /** Single-line */
   --breadcrumb-gap: var(--spacing-2); /** Gap entre items y separadores */
   --breadcrumb-padding-block: var(--spacing-1); /** Padding vertical del nav */
+  --breadcrumb-font-size: var(--text-paragraph-small-font-size); /** Texto de navegación, no control: peldaño por debajo del cuerpo (respira en la superficie pública) */
   --breadcrumb-font-weight: var(--font-weight-default); /** Font weight base */
   --breadcrumb-separator-color: var(--color-text-on-light); /** Color del separador */
   --breadcrumb-link-color: var(--color-text-on-light); /** Color del link navegable */
