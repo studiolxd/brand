@@ -105,7 +105,7 @@ export const SoloAcciones: Story = {
 export const Contrato: Story = {
   name: 'Test — talla heredada, errores anunciados, bloques en orden',
   tags: ['!dev'],
-  args: { ...Completo.args, size: 'lg' },
+  args: { ...Completo.args, size: 'lg', blockActions: true },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const form = canvasElement.querySelector('form')!;
@@ -120,6 +120,9 @@ export const Contrato: Story = {
     // orden: campos → errores → acciones → enlaces → alternativas
     const orden = Array.from(form.children).map((el) => el.className.split(' ')[0]);
     await expect(orden).toEqual(['form__fields', 'form__captcha', 'form__errors', 'form__actions', 'form__links', 'form__alternatives']);
+    // en bloque, la principal (última del JSX) queda arriba
+    const acciones = canvasElement.querySelector('.form__actions') as HTMLElement;
+    await expect(getComputedStyle(acciones).flexDirection).toBe('column-reverse');
     // el enlace con texto delante: el texto no es enlace, solo la acción
     await expect(canvas.getByRole('link', { name: 'Regístrate' })).toBeInTheDocument();
   },

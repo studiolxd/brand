@@ -41,6 +41,10 @@
   gap: var(--form-actions-gap);
   margin-block-start: var(--form-actions-margin-block-start);
 }
+/* Sin nada delante (un formulario que es solo acciones), sin aire encima. */
+.form__actions:first-child {
+  margin-block-start: 0;
+}
 .form__actions > * {
   inline-size: 100%;
 }
@@ -53,8 +57,13 @@
     inline-size: auto;
   }
 }
-/* En bloque: apilados y a todo el ancho también en escritorio; las
-   alternativas (sociales) hacen lo mismo. */
+/* En bloque: apilados y a todo el ancho también en escritorio. El orden del
+   JSX es el de la fila (la principal, última, a la derecha); en columna la
+   principal va arriba, por eso se invierte. Las alternativas (sociales) hacen
+   lo mismo en ancho. */
+.form__actions--block {
+  flex-direction: column-reverse;
+}
 .form--block-actions .form__alternatives > .button {
   inline-size: 100%;
 }

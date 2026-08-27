@@ -6,13 +6,15 @@ export interface AuthPageProps {
     description?: ReactNode;
     /** Más texto bajo la frase. */
     intro?: ReactNode;
+    /** Bajo la cabecera, en la misma columna (un enlace de vuelta): el aire lo pone el PageIntro. */
+    aside?: ReactNode;
     /** Lo que va a la derecha: el formulario. */
     children: ReactNode;
     /** Superficie oscura. */
     surface?: 'light' | 'dark';
 }
 /** El chrome público de la suite con la página de acceso dentro: es el layout `(auth)` de hub, con piezas del DS y datos falsos. */
-export declare function AuthPage({ title, description, intro, children, surface }: AuthPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function AuthPage({ title, description, intro, aside, children, surface }: AuthPageProps): import("react/jsx-runtime").JSX.Element;
 /** Botones de acceso con terceros (Google, GitHub, un OIDC…). */
 export declare function SocialButtons({ providers }: {
     providers: string[];

@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.4.3
+
+### Corregido
+
+- `Form`: sin aire encima de las acciones cuando son lo primero (formulario
+  solo de acciones); en `blockActions` la acción principal (última del JSX)
+  queda arriba.
+
 ## v22.4.2
 
 ### Corregido
