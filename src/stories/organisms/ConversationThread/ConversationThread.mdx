@@ -1,0 +1,62 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ConversationThreadStories from "./ConversationThread.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { conversationThreadTokens } from "../../../tokens/components/conversation-thread";
+
+<Meta of={ConversationThreadStories} />
+
+# ConversationThread
+
+El **hilo de una conversación**: el contenedor con scroll que apila los mensajes, los anuncia a los lectores de pantalla y baja solo al último cuando llega uno nuevo.
+
+Es el organismo que cierra la familia de chat: `MessageBubble` pone el globo, `UserMessage` y `AssistantMessage` lo visten, y el hilo los ordena. Para el armazón completo de una pantalla de chat —lista de conversaciones, hilo y composer— está `ChatShell`.
+
+<Canvas of={ConversationThreadStories.PorDefecto} />
+
+## Dos formas de darle contenido
+
+Con **`messages`**, el hilo monta él los globos: cada mensaje dice quién habla (`role`), qué dice (`content`), cuándo (`timestamp`) y, si es del asistente, con qué modelo (`model`) y si todavía se está generando (`isStreaming`).
+
+<Canvas of={ConversationThreadStories.Generando} />
+
+Con **`children`**, el hilo pone solo el contenedor, la región live y el autoscroll, y los globos los monta el producto. Es la salida para lo que no es texto corrido: una llamada a herramienta con su estado, un adjunto, una tabla de resultados.
+
+<Canvas of={ConversationThreadStories.ContenidoPropio} />
+
+Las dos no se mezclan: si hay `children`, `messages` se ignora.
+
+<Canvas of={ConversationThreadStories.Vacio} />
+
+Un hilo sin mensajes es un contenedor vacío, no un `EmptyState`: quien decide qué enseñar cuando no hay nada es la pantalla que lo monta.
+
+## El autoscroll
+
+Al final del hilo hay un **centinela sin altura** (`aria-hidden`) al que se le pide `scrollIntoView` cada vez que cambian los mensajes. Se hace así para no tener que calcular la altura del contenedor ni la del último mensaje, que además crece mientras la respuesta se genera.
+
+El movimiento **respeta `prefers-reduced-motion`**: el hilo consulta la media query en JavaScript —a un `scrollIntoView` no le llega ningún token CSS— y baja de golpe, sin deslizar, para quien ha pedido menos movimiento.
+
+## Superficie oscura
+
+<Canvas of={ConversationThreadStories.SuperficieOscura} />
+
+El hilo no pinta color: el par claro/oscuro lo traen los globos y las marcas de tiempo.
+
+## Accesibilidad
+
+- El hilo es un **`role="log"` con nombre accesible** (`ariaLabel`, «Conversación» por defecto): los mensajes nuevos se anuncian según llegan, sin interrumpir lo que el lector de pantalla esté diciendo. Es la razón de que los globos no sean regiones live por su cuenta — un hilo largo sería un griterío.
+- El **centinela del autoscroll** está fuera del árbol accesible y no ocupa espacio.
+- La **atribución va en texto**, no en la posición del globo: la pone `AssistantMessage` con el nombre del modelo.
+- El movimiento del scroll **se anula con `prefers-reduced-motion: reduce`**.
+- El contenedor tiene scroll propio: hay que dejarlo alcanzable por teclado en el layout que lo monte (`ChatShell` ya lo hace).
+
+## Tokens
+
+<TokenTable tokens={conversationThreadTokens} />
+
+## Props
+
+<ArgTypes of={ConversationThreadStories} />
+
+## Internacionalización
+
+`ariaLabel` y `streamingLabel` traducen los dos textos que emite el hilo; `locale` y `timestampFormat` bajan a las marcas de tiempo de cada mensaje. Ver **Foundations › Internacionalización**.
