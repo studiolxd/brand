@@ -26,11 +26,15 @@
   --switcher-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --switcher-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
   --switcher-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --switcher-error-ring-width: var(--border-width-default); /** Grosor del anillo que marca el error (el track no tiene borde) */
+  --switcher-error-ring-offset: var(--border-width-default); /** Separación del anillo de error */
+  --switcher-error-ring-color: var(--color-error-text-on-light); /** Color del anillo de error */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --switcher-error-ring-color: var(--color-error-text-on-dark); /** Anillo de error — surface-dark */
   --switcher-track-bg-checked: var(--color-accent-1); /** Fondo del track (on) — surface-dark. `track-bg-checked` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar. */
   --switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
 }

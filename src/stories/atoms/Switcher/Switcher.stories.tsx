@@ -4,7 +4,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Switcher } from './Switcher';
 
 const meta: Meta<typeof Switcher> = {
-  title: 'Por revisar/Atoms/Switcher',
+  title: 'Atoms/Switcher',
   component: Switcher,
   parameters: {
     layout: 'padded',
@@ -116,4 +116,21 @@ export const Sizes: Story = {
       <Switcher size="lg" aria-label="Large" defaultChecked />
     </div>
   ),
+};
+
+/** El track no tiene borde: el error se marca con un anillo (`error`). */
+export const ConError: Story = {
+  name: 'En error',
+  args: { error: true, 'aria-label': 'En error' },
+};
+
+export const ContratoError: Story = {
+  name: 'Test — error marca clase y aria-invalid',
+  tags: ['!dev'],
+  args: { error: true, 'aria-label': 'En error' },
+  play: async ({ canvasElement }) => {
+    const control = within(canvasElement).getByRole('switch', { name: 'En error' });
+    await expect(control).toHaveClass('switcher--error');
+    await expect(control).toHaveAttribute('aria-invalid', 'true');
+  },
 };

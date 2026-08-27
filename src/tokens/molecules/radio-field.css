@@ -3,9 +3,9 @@
  */
 
 :root {
-  --radio-field-radio-offset: 3px; /** Desplazamiento vertical del radio para alinearlo con la primera línea de texto */
   --radio-field-cursor: pointer; /** Cursor */
   --radio-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --radio-field-stack-gap: var(--spacing-2); /** Espacio entre la opción, la ayuda y el error — el ritmo del resto de campos */
   --radio-field-gap: var(--spacing-3); /** Separación entre el radio y el texto */
   --radio-field-sm-gap: var(--spacing-2); /** Gap — variante sm */
   --radio-field-sm-padding-inline: var(--spacing-3); /** Padding inline — variante sm */
@@ -13,14 +13,32 @@
   --radio-field-lg-gap: var(--spacing-4); /** Gap — variante lg */
   --radio-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
   --radio-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
-  --radio-field-sm-label-font-size: var(--font-size-1); /** Tamaño de fuente del label — variante sm (14px) */
-  --radio-field-lg-label-font-size: var(--font-size-3); /** Tamaño de fuente del label — variante lg (20px) */
-  --radio-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
-  --radio-field-label-font-size: var(--font-size-2); /** Tamaño de fuente (16px) */
-  --radio-field-label-line-height: var(--line-height-normal); /** Interlineado */
-  --radio-field-label-letter-spacing: var(--letter-spacing-normal); /** Interletraje */
   --radio-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
   --radio-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
-  --radio-field-label-font-weight: var(--font-weight-default); /** Peso tipográfico */
-  --radio-field-label-color: var(--color-text-on-light); /** Color del texto */
+  --radio-field-sm-label-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
+  --radio-field-lg-label-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie */
+  --radio-field-label-font-family: var(--text-font-family); /** Familia tipográfica */
+  --radio-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
+  --radio-field-label-line-height: var(--text-line-height); /** Interlineado */
+  --radio-field-label-letter-spacing: var(--text-letter-spacing); /** Interletraje */
+  --radio-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
+  --radio-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
+  --radio-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
+  --radio-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
+  --radio-field-label-font-weight: var(--text-font-weight); /** Peso tipográfico */
+  --radio-field-label-color: var(--text-color); /** Color del texto */
+  --radio-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
+  --radio-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
+  --radio-field-error-color: var(--form-error-color); /** Color del mensaje de error */
+  --radio-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
+  --radio-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
+  --radio-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --radio-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
+  --radio-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --radio-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
 }

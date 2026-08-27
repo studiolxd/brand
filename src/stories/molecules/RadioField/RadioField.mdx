@@ -1,61 +1,90 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as RadioFieldStories from "./RadioField.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { radioFieldBaseTokens } from "../../../tokens/molecules/radio-field";
+import { radioFieldBaseTokens, radioFieldLabelTokens, radioFieldErrorTokens, radioFieldHelperTokens } from "../../../tokens/molecules/radio-field";
 
 <Meta of={RadioFieldStories} />
 
 # RadioField
 
-Molécula que combina un `Radio` con su texto asociado. El label usa la tipografía de texto por defecto — sin mayúsculas ni tamaño reducido — para integrarse de forma natural en listas de opciones.
+El `Radio` como campo de formulario: marca, texto de la opción, ayuda y error. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
 
-Para que los radios sean mutuamente excluyentes, todos los `RadioField` del mismo grupo deben compartir el prop `name`.
+Para que los radios sean mutuamente excluyentes, todos los del mismo grupo comparten `name`.
 
-## Sin selección
+<Canvas of={RadioFieldStories.PorDefecto} />
 
-<Canvas of={RadioFieldStories.Default} />
+## Etiqueta
 
-## Con selección
+A diferencia del resto de campos, aquí el texto va **a la derecha de la marca** y con la tipografía de texto corriente —el cuerpo de la superficie—, no con la del `Label` de formulario: una opción se lee en línea, no se encabeza. Acepta JSX.
 
-<Canvas of={RadioFieldStories.Checked} />
+<Canvas of={RadioFieldStories.ConEnlace} />
 
-## Deshabilitado
+## Ayuda y error
 
-<Canvas of={RadioFieldStories.Disabled} />
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados al control por `aria-describedby`, y el error también por `aria-invalid`. La marca en error lleva el borde en el color de texto de error, nunca un fondo.
 
-## Deshabilitado con selección
+<Canvas of={RadioFieldStories.ConAyuda} />
+<Canvas of={RadioFieldStories.ConError} />
 
-<Canvas of={RadioFieldStories.DisabledChecked} />
+## Tallas
 
-## Con enlace en el label
+La marca de un radio **no es un control de una línea**: no toma las tallas 32/40/48 del sistema, sino 16, 20 y 24 —es una marca, como la del `Checkbox`—. Lo que sí sigue la superficie es el texto: `sm` un peldaño por debajo del cuerpo, `lg` uno por encima.
 
-El prop `label` acepta `React.ReactNode`, por lo que puede incluir un `<Link>` para textos con hipervínculos. Los estilos del enlace se garantizan desde la propia molécula.
+<Canvas of={RadioFieldStories.Tallas} />
 
-<Canvas of={RadioFieldStories.WithLink} />
+## Estados
 
----
+<Canvas of={RadioFieldStories.ConSeleccion} />
+<Canvas of={RadioFieldStories.Deshabilitado} />
 
-## Uso
+## Con react-hook-form
+
+El campo reenvía el `ref` y las props nativas al `<input type="radio">`, así que el `field` del `Controller` se le pasa entero. El `value` del radio va **después** del spread —es el valor de esa opción, no el del formulario— y `checked` se deriva comparando:
 
 ```tsx
-import { RadioField } from '@studiolxd/brand/radio-field';
-
-<RadioField name="plan" value="basico"  label="Básico"   defaultChecked />
-<RadioField name="plan" value="pro"     label="Pro" />
-<RadioField name="plan" value="empresa" label="Empresa" />
+<FormField
+  control={form.control}
+  name="plan"
+  render={({ field, fieldState }) => (
+    <>
+      <RadioField {...field} value="basico" checked={field.value === 'basico'} label="Básico" />
+      <RadioField
+        {...field}
+        value="pro"
+        checked={field.value === 'pro'}
+        label="Pro"
+        errorMessage={fieldState.error?.message}
+      />
+    </>
+  )}
+/>
 ```
 
----
+<Canvas of={RadioFieldStories.ConReactHookForm} />
 
-## Theming oscuro
+## Accesibilidad
 
-En modo oscuro, el color del label se reasigna automáticamente vía los tokens `surface-dark-*` bajo `.surface-dark`. No requiere prop adicional.
+- El texto está enlazado por `htmlFor`/`id`; sin `id`, el campo genera uno con `useId`.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 
 ## Tokens
 
 ### Base
 
 <TokenTable tokens={radioFieldBaseTokens} />
+
+### Texto de la opción
+
+<TokenTable tokens={radioFieldLabelTokens} />
+
+### Error
+
+<TokenTable tokens={radioFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={radioFieldHelperTokens} />
 
 ## Props
 

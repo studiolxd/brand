@@ -157,6 +157,7 @@ export type { PasswordFieldProps } from './stories/molecules/PasswordField/Passw
 export { Modal } from './stories/molecules/Modal/Modal';
 export type { ModalProps } from './stories/molecules/Modal/Modal';
 export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneField';
+export type { InputPhoneFieldProps } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { Pagination } from './stories/molecules/Pagination/Pagination';
 export type { PaginationProps } from './stories/molecules/Pagination/Pagination';
 export { PrevNextNav } from './stories/molecules/PrevNextNav/PrevNextNav';
@@ -166,6 +167,7 @@ export type { OrgSwitcherProps, OrgOption } from './stories/molecules/OrgSwitche
 export { AppLauncher } from './stories/molecules/AppLauncher/AppLauncher';
 export type { AppLauncherProps, LauncherApp, AppLauncherLabels } from './stories/molecules/AppLauncher/AppLauncher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
+export type { RadioFieldProps } from './stories/molecules/RadioField/RadioField';
 export { SwitcherField } from './stories/molecules/SwitcherField/SwitcherField';
 export type { SwitcherFieldProps } from './stories/molecules/SwitcherField/SwitcherField';
 export { MultiSelectField } from './stories/molecules/MultiSelectField/MultiSelectField';

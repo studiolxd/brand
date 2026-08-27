@@ -4,7 +4,7 @@ import { Label } from '../../atoms/Label/Label';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
 
-interface InputPhoneFieldProps {
+export interface InputPhoneFieldProps {
   id: string;
   label: string;
   labelHidden?: boolean;

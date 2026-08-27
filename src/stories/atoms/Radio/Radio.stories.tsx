@@ -3,7 +3,7 @@ import { expect } from 'storybook/test';
 import { Radio } from './Radio';
 
 const meta: Meta<typeof Radio> = {
-  title: 'Por revisar/Atoms/Radio',
+  title: 'Atoms/Radio',
   component: Radio,
   parameters: {
     layout: 'padded',
@@ -98,5 +98,27 @@ export const PropPassthrough: Story = {
     await expect(radio).toHaveClass('radio', 'extra');
     await expect(radio.className.trim().endsWith('extra')).toBe(true);
     await expect(radio).toHaveAttribute('data-slot', 'radio');
+  },
+};
+
+/** El error se marca en el borde de la marca (`error`), nunca solo en color. */
+export const ConError: Story = {
+  name: 'En error',
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem' }}>
+      <Radio name="error" value="a" aria-label="Opción A" error />
+      <Radio name="error" value="b" aria-label="Opción B" error defaultChecked />
+    </div>
+  ),
+};
+
+export const ContratoError: Story = {
+  name: 'Test — error marca clase y aria-invalid',
+  tags: ['!dev'],
+  render: () => <Radio aria-label="En error" error />,
+  play: async ({ canvasElement }) => {
+    const control = canvasElement.querySelector('input[type="radio"]')!;
+    await expect(control).toHaveClass('radio--error');
+    await expect(control).toHaveAttribute('aria-invalid', 'true');
   },
 };

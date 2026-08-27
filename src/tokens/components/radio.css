@@ -20,8 +20,15 @@
   --radio-disabled-dot-color: var(--color-grey-light); /** Color del punto cuando está deshabilitado y seleccionado */
   --radio-border-width: var(--border-width-default); /** Border width */
   --radio-border-color: var(--color-primary); /** Color del borde */
+  --radio-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (texto/borde, nunca fondo) */
   --radio-dot-color: var(--color-primary); /** Color del punto cuando está seleccionado */
   --radio-focus-ring-width: var(--border-width-focus); /** Ancho del anillo de foco */
   --radio-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco respecto al borde */
   --radio-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --radio-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
 }

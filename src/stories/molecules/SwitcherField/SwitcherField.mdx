@@ -1,0 +1,91 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SwitcherFieldStories from "./SwitcherField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { switcherFieldBaseTokens, switcherFieldLabelTokens, switcherFieldErrorTokens, switcherFieldHelperTokens } from "../../../tokens/molecules/switcher-field";
+
+<Meta of={SwitcherFieldStories} />
+
+# SwitcherField
+
+El `Switcher` como campo de formulario: interruptor, texto, ayuda y error. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+Un interruptor es para lo que **se aplica al momento** (activar avisos, modo oscuro). Para algo que se confirma al enviar el formulario, el campo es un `CheckboxField`.
+
+<Canvas of={SwitcherFieldStories.PorDefecto} />
+
+## Etiqueta
+
+El texto va **a la derecha del interruptor**, con la tipografía de texto corriente —el cuerpo de la superficie—, no con la del `Label` de formulario. Acepta JSX.
+
+El disparador de Base UI es un `<button role="switch">` de verdad y lleva el `id`, así que la etiqueta lo nombra por `htmlFor`; sin `id`, el campo genera uno con `useId`.
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`. El track no tiene borde: el error se marca con un anillo de 1px en el color de texto de error.
+
+<Canvas of={SwitcherFieldStories.ConAyuda} />
+<Canvas of={SwitcherFieldStories.ConError} />
+
+## Tallas
+
+El interruptor es una **marca**, no un control de una línea: no toma las tallas 32/40/48 del sistema. `sm`/`md`/`lg` lo miden 20, 24 y 30 de alto, y mueven el cuerpo del texto un peldaño arriba o abajo del de la superficie.
+
+<Canvas of={SwitcherFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={SwitcherFieldStories.Activado} />
+<Canvas of={SwitcherFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+El control es de Base UI, así que el contrato **no** es el spread del `field`: es `checked` / `onCheckedChange` + `name` + `ref` al disparador (para que react-hook-form pueda enfocarlo al fallar la validación).
+
+```tsx
+<FormField
+  control={form.control}
+  name="avisos"
+  render={({ field, fieldState }) => (
+    <SwitcherField
+      ref={field.ref}
+      name={field.name}
+      checked={field.value}
+      onCheckedChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Activar notificaciones"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={SwitcherFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- El texto está enlazado por `htmlFor`/`id`, y además por `aria-labelledby` desde el disparador.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={switcherFieldBaseTokens} />
+
+### Texto
+
+<TokenTable tokens={switcherFieldLabelTokens} />
+
+### Error
+
+<TokenTable tokens={switcherFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={switcherFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={SwitcherFieldStories} />

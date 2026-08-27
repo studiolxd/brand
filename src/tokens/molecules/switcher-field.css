@@ -5,21 +5,40 @@
 :root {
   --switcher-field-cursor: pointer; /** Cursor */
   --switcher-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
-  --switcher-field-gap: var(--spacing-3); /** Separación entre el switcher y el label */
+  --switcher-field-stack-gap: var(--spacing-2); /** Espacio entre el interruptor, la ayuda y el error — el ritmo del resto de campos */
+  --switcher-field-gap: var(--spacing-3); /** Separación entre el interruptor y el texto */
   --switcher-field-sm-gap: var(--spacing-2); /** Gap — variante sm */
   --switcher-field-sm-padding-inline: var(--spacing-3); /** Padding inline — variante sm */
   --switcher-field-sm-padding-block: var(--spacing-2); /** Padding block — variante sm */
   --switcher-field-lg-gap: var(--spacing-4); /** Gap — variante lg */
   --switcher-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
   --switcher-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
-  --switcher-field-sm-label-font-size: var(--font-size-1); /** Tamaño de fuente del label — variante sm (14px) */
-  --switcher-field-lg-label-font-size: var(--font-size-3); /** Tamaño de fuente del label — variante lg (20px) */
-  --switcher-field-label-font-family: var(--font-family-sans); /** Familia tipográfica */
-  --switcher-field-label-font-size: var(--font-size-2); /** Tamaño de fuente (16px) */
-  --switcher-field-label-line-height: var(--line-height-normal); /** Interlineado */
-  --switcher-field-label-letter-spacing: var(--letter-spacing-normal); /** Interletraje */
   --switcher-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
   --switcher-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
-  --switcher-field-label-font-weight: var(--font-weight-default); /** Peso tipográfico */
-  --switcher-field-label-color: var(--color-text-on-light); /** Color del label */
+  --switcher-field-sm-label-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
+  --switcher-field-lg-label-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie */
+  --switcher-field-label-font-family: var(--text-font-family); /** Familia tipográfica */
+  --switcher-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
+  --switcher-field-label-line-height: var(--text-line-height); /** Interlineado */
+  --switcher-field-label-letter-spacing: var(--text-letter-spacing); /** Interletraje */
+  --switcher-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
+  --switcher-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
+  --switcher-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
+  --switcher-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
+  --switcher-field-label-font-weight: var(--text-font-weight); /** Peso tipográfico */
+  --switcher-field-label-color: var(--text-color); /** Color del texto */
+  --switcher-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
+  --switcher-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
+  --switcher-field-error-color: var(--form-error-color); /** Color del mensaje de error */
+  --switcher-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
+  --switcher-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
+  --switcher-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --switcher-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
+  --switcher-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --switcher-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
 }

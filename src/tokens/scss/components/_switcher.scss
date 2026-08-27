@@ -18,6 +18,9 @@ $lxd-switcher-transition-easing: ease; // Easing de la transición
 $lxd-switcher-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-switcher-focus-ring-offset: 1px; // Separación del anillo de foco
 $lxd-switcher-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-switcher-error-ring-width: 1px; // Grosor del anillo que marca el error (el track no tiene borde)
+$lxd-switcher-error-ring-offset: 1px; // Separación del anillo de error
+$lxd-switcher-error-ring-color: #b30000; // Color del anillo de error
 $lxd-switcher-sm-track-width: 2.25em; // Ancho del track — variante sm
 $lxd-switcher-sm-track-height: 1.25em; // Alto del track — variante sm
 $lxd-switcher-sm-thumb-size: 0.875em; // Tamaño del thumb — variante sm

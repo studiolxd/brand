@@ -1,5 +1,11 @@
 .radio-field {
   display: flex;
+  flex-direction: column;
+  gap: var(--radio-field-stack-gap);
+}
+
+.radio-field__control {
+  display: flex;
   align-items: flex-start;
   gap: var(--radio-field-gap);
   padding-inline: var(--radio-field-padding-inline);
@@ -7,8 +13,13 @@
   cursor: var(--radio-field-cursor);
 }
 
+/* La marca se alinea con la primera línea de texto: la mitad de lo que
+   sobra entre la altura de línea y el lado del radio. Derivado, no un número
+   suelto fuera de la escala de espaciado. */
 .radio-field .radio {
-  margin-block-start: var(--radio-field-radio-offset);
+  margin-block-start: calc(
+    (var(--radio-field-label-line-height) * var(--radio-field-label-font-size) - var(--radio-size)) / 2
+  );
 }
 
 .radio-field__label {
@@ -36,25 +47,39 @@
 }
 
 /* Doble clase para ganar especificidad */
-.radio-field.radio-field--disabled {
+.radio-field.radio-field--disabled .radio-field__control {
   cursor: var(--radio-field-disabled-cursor);
+}
+
+.radio-field__error {
+  padding-inline: var(--radio-field-padding-inline);
+  font-family: var(--radio-field-error-font-family);
+  font-size: var(--radio-field-error-font-size);
+  font-weight: var(--radio-field-error-font-weight);
+  line-height: var(--radio-field-error-line-height);
+  color: var(--radio-field-error-color);
+}
+
+.radio-field__helper {
+  padding-inline: var(--radio-field-padding-inline);
+  font-family: var(--radio-field-helper-font-family);
+  font-size: var(--radio-field-helper-font-size);
+  font-weight: var(--radio-field-helper-font-weight);
+  line-height: var(--radio-field-helper-line-height);
+  color: var(--radio-field-helper-color);
 }
 
 /* ─── Size variants ──────────────────────────────────────────── */
 .radio-field.radio-field--sm {
-  gap: var(--radio-field-sm-gap);
-  padding-inline: var(--radio-field-sm-padding-inline);
-  padding-block: var(--radio-field-sm-padding-block);
-}
-.radio-field.radio-field--sm .radio-field__label {
-  font-size: var(--radio-field-sm-label-font-size);
+  --radio-field-gap: var(--radio-field-sm-gap);
+  --radio-field-padding-inline: var(--radio-field-sm-padding-inline);
+  --radio-field-padding-block: var(--radio-field-sm-padding-block);
+  --radio-field-label-font-size: var(--radio-field-sm-label-font-size);
 }
 
 .radio-field.radio-field--lg {
-  gap: var(--radio-field-lg-gap);
-  padding-inline: var(--radio-field-lg-padding-inline);
-  padding-block: var(--radio-field-lg-padding-block);
-}
-.radio-field.radio-field--lg .radio-field__label {
-  font-size: var(--radio-field-lg-label-font-size);
+  --radio-field-gap: var(--radio-field-lg-gap);
+  --radio-field-padding-inline: var(--radio-field-lg-padding-inline);
+  --radio-field-padding-block: var(--radio-field-lg-padding-block);
+  --radio-field-label-font-size: var(--radio-field-lg-label-font-size);
 }

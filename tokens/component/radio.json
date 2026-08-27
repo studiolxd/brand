@@ -6,6 +6,8 @@
     "border-width":          { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Border width" },
     "border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Border style" },
     "border-color":          { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del borde" },
+    "error-border-color":    { "$value": "{color.error-text-on-light}",  "$type": "color",     "$description": "Borde en error: el color de error (texto/borde, nunca fondo)" },
+    "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "bg":                    { "$value": "transparent",                  "$type": "string",    "$description": "Fondo sin seleccionar" },
     "dot-color":             { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del punto cuando está seleccionado" },
     "cursor":                { "$value": "pointer",                      "$type": "string",    "$description": "Cursor" },

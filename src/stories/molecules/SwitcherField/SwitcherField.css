@@ -1,4 +1,10 @@
 .switcher-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--switcher-field-stack-gap);
+}
+
+.switcher-field__control {
   display: inline-flex;
   align-items: center;
   gap: var(--switcher-field-gap);
@@ -16,8 +22,27 @@
   letter-spacing: var(--switcher-field-label-letter-spacing);
 }
 
-.switcher-field--disabled {
+/* Doble clase para ganar especificidad */
+.switcher-field.switcher-field--disabled .switcher-field__control {
   cursor: var(--switcher-field-disabled-cursor);
+}
+
+.switcher-field__error {
+  padding-inline: var(--switcher-field-padding-inline);
+  font-family: var(--switcher-field-error-font-family);
+  font-size: var(--switcher-field-error-font-size);
+  font-weight: var(--switcher-field-error-font-weight);
+  line-height: var(--switcher-field-error-line-height);
+  color: var(--switcher-field-error-color);
+}
+
+.switcher-field__helper {
+  padding-inline: var(--switcher-field-padding-inline);
+  font-family: var(--switcher-field-helper-font-family);
+  font-size: var(--switcher-field-helper-font-size);
+  font-weight: var(--switcher-field-helper-font-weight);
+  line-height: var(--switcher-field-helper-line-height);
+  color: var(--switcher-field-helper-color);
 }
 
 /* ─── Size variants ──────────────────────────────────────────── */

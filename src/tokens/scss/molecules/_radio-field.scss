@@ -1,10 +1,10 @@
 
 // Do not edit directly, this file was auto-generated.
 
+$lxd-radio-field-stack-gap: 0.5rem; // Espacio entre la opción, la ayuda y el error — el ritmo del resto de campos
 $lxd-radio-field-gap: 0.75rem; // Separación entre el radio y el texto
 $lxd-radio-field-padding-inline: 1rem; // Padding inline — hereda de control
 $lxd-radio-field-padding-block: 1rem; // Padding block — hereda de control
-$lxd-radio-field-radio-offset: 3px; // Desplazamiento vertical del radio para alinearlo con la primera línea de texto
 $lxd-radio-field-cursor: pointer; // Cursor
 $lxd-radio-field-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
 $lxd-radio-field-sm-gap: 0.5rem; // Gap — variante sm
@@ -13,11 +13,21 @@ $lxd-radio-field-sm-padding-block: 0.5rem; // Padding block — variante sm
 $lxd-radio-field-lg-gap: 1rem; // Gap — variante lg
 $lxd-radio-field-lg-padding-inline: 1.5rem; // Padding inline — variante lg
 $lxd-radio-field-lg-padding-block: 1.5rem; // Padding block — variante lg
-$lxd-radio-field-sm-label-font-size: 0.875rem; // Tamaño de fuente del label — variante sm (14px)
-$lxd-radio-field-lg-label-font-size: 1.25rem; // Tamaño de fuente del label — variante lg (20px)
+$lxd-radio-field-sm-label-font-size: 0.875rem; // Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie
+$lxd-radio-field-lg-label-font-size: 1.25rem; // Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie
 $lxd-radio-field-label-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
-$lxd-radio-field-label-font-size: 1rem; // Tamaño de fuente (16px)
+$lxd-radio-field-label-font-size: 1rem; // Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-radio-field-label-font-weight: 300; // Peso tipográfico
 $lxd-radio-field-label-line-height: 1.5; // Interlineado
 $lxd-radio-field-label-color: #111e30; // Color del texto
 $lxd-radio-field-label-letter-spacing: 0em; // Interletraje
+$lxd-radio-field-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de error
+$lxd-radio-field-error-font-size: 0.875rem; // Font size del mensaje de error
+$lxd-radio-field-error-font-weight: 300; // Font weight del mensaje de error
+$lxd-radio-field-error-line-height: 1.5; // Line height del mensaje de error
+$lxd-radio-field-error-color: #b30000; // Color del mensaje de error
+$lxd-radio-field-helper-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del texto de ayuda
+$lxd-radio-field-helper-font-size: 0.875rem; // Font size del texto de ayuda
+$lxd-radio-field-helper-font-weight: 300; // Font weight del texto de ayuda
+$lxd-radio-field-helper-line-height: 1.5; // Line height del texto de ayuda
+$lxd-radio-field-helper-color: #111e30; // Color del texto de ayuda

@@ -11,6 +11,8 @@ export interface SwitcherProps extends Omit<BaseSwitchRootProps, 'onCheckedChang
   /** Cambio de estado. Solo el estado: el DS no expone los detalles del evento. */
   onCheckedChange?: (checked: boolean) => void;
   size?: 'sm' | 'md' | 'lg';
+  /** Marca el estado de error: aplica la clase `switcher--error` y `aria-invalid`. */
+  error?: boolean;
   /** Valor enviado con el formulario cuando está activo. Default del navegador: `"on"`. */
   value?: string;
   className?: string;
@@ -24,10 +26,13 @@ export interface SwitcherProps extends Omit<BaseSwitchRootProps, 'onCheckedChang
  * Para componer con otro elemento, usa la prop `render` de Base UI.
  */
 export const Switcher = forwardRef<HTMLElement, SwitcherProps>(function Switcher(
-  { size = 'md', className, value, onCheckedChange, id, ...rest }, ref) {
-  const classes = ['switcher', size !== 'md' ? `switcher--${size}` : '', className ?? '']
-    .filter(Boolean)
-    .join(' ');
+  { size = 'md', error = false, className, value, onCheckedChange, id, ...rest }, ref) {
+  const classes = [
+    'switcher',
+    size !== 'md' ? `switcher--${size}` : '',
+    error ? 'switcher--error' : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
 
   // Base UI no expone `value`: el input oculto usa el default del navegador ("on").
   // Lo fijamos sobre el propio input para conservar la API pública.
@@ -47,6 +52,7 @@ export const Switcher = forwardRef<HTMLElement, SwitcherProps>(function Switcher
       // al interruptor. `disabled` es nativo y el teclado viene de serie.
       render={<button type="button" id={id} />}
       nativeButton
+      aria-invalid={error || undefined}
       // Contrato del DS: solo el estado. Base UI añade un segundo argumento
       // (detalles del evento) que aquí no forma parte de la API.
       onCheckedChange={onCheckedChange ? (checked) => onCheckedChange(checked) : undefined}

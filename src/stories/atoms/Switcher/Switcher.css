@@ -32,6 +32,13 @@
   transform: translateX(calc(var(--switcher-track-width) - var(--switcher-track-padding) * 2 - var(--switcher-thumb-size)));
 }
 
+/* El track no tiene borde: el error se marca con un anillo. Doble clase para
+   ganar sobre el selector base. */
+.switcher.switcher--error {
+  outline: var(--switcher-error-ring-width) solid var(--switcher-error-ring-color);
+  outline-offset: var(--switcher-error-ring-offset);
+}
+
 .switcher:focus-visible {
   outline: var(--switcher-focus-ring-width) solid var(--switcher-focus-ring-color);
   outline-offset: var(--switcher-focus-ring-offset);
