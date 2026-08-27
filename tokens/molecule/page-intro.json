@@ -1,5 +1,14 @@
 {
   "page-intro": {
-    "gap": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre el título y la frase de la cabecera de página" }
+    "gap": {
+      "$value": "{spacing.3}",
+      "$type": "dimension",
+      "$description": "Aire entre el título y la frase de la cabecera de página"
+    },
+    "margin-block-end": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Aire por debajo de la cabecera cuando algo la sigue en la misma columna (un enlace de vuelta, más texto)"
+    }
   }
 }

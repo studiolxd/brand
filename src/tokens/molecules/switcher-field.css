@@ -40,5 +40,5 @@
 html.dark {
   --switcher-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
   --switcher-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
-  --switcher-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --switcher-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

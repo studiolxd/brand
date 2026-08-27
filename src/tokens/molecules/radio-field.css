@@ -40,5 +40,5 @@
 html.dark {
   --radio-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
   --radio-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
-  --radio-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --radio-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

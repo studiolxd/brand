@@ -20,5 +20,5 @@
 [data-theme="dark"],
 html.dark {
   --number-input-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
-  --number-input-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --number-input-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

@@ -10,5 +10,4 @@
   --columns-gap-lg: var(--spacing-8); /** Aire entre columnas — amplio */
   --columns-stack-gap-md: var(--spacing-6); /** Aire entre celdas apiladas (móvil) — base */
   --columns-stack-gap-lg: var(--spacing-7); /** Aire entre celdas apiladas (móvil) — amplio */
-  --columns-cell-gap: var(--spacing-5); /** Aire entre piezas apiladas dentro de una misma celda (una cabecera y un enlace de vuelta) */
 }

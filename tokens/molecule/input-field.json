@@ -17,7 +17,7 @@
       "font-weight":  { "$value": "{form.helper.font-weight}",  "$type": "number",    "$description": "Font weight del texto de ayuda" },
       "line-height":  { "$value": "{form.helper.line-height}",  "$type": "number",    "$description": "Line height del texto de ayuda" },
       "color":        { "$value": "{form.helper.color}",        "$type": "color",     "$description": "Color del texto de ayuda" },
-      "surface-dark-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del texto de ayuda — surface-dark" }
+      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del texto de ayuda — surface-dark" }
     }
   }
 }

@@ -7,7 +7,7 @@ import { columnsTokens } from "../../../tokens/components/columns";
 
 # Columns
 
-Maquetación en columnas: **N celdas iguales en escritorio, apiladas en móvil**, con el aire por tokens. Es un molde: no sabe qué hay dentro ni jerarquiza. Cada hija es una celda (un `<>…</>` entre otras hijas agrupa varias piezas en una sola celda, apiladas con `cell-gap`); si una columna es complementaria, lo dice su contenido (`header`, `aside`), no el componente.
+Maquetación en columnas: **N celdas iguales en escritorio, apiladas en móvil**, con el aire por tokens. Es un molde: no sabe qué hay dentro ni jerarquiza. Cada hija es una celda (un `<>…</>` entre otras hijas agrupa varias piezas en una sola celda; el aire entre ellas lo pone cada pieza, como el `PageIntro` por debajo); si una columna es complementaria, lo dice su contenido (`header`, `aside`), no el componente.
 
 <Canvas of={ColumnsStories.DosColumnas} />
 

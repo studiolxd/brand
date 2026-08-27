@@ -20,5 +20,5 @@
 [data-theme="dark"],
 html.dark {
   --select-field-error-color: var(--color-error-text-on-dark); /** Mensaje de error — surface-dark */
-  --select-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --select-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

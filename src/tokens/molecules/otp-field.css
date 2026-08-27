@@ -20,5 +20,5 @@
 [data-theme="dark"],
 html.dark {
   --otp-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
-  --otp-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --otp-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

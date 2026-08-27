@@ -20,5 +20,5 @@
 [data-theme="dark"],
 html.dark {
   --file-upload-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
-  --file-upload-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --file-upload-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

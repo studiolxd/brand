@@ -20,5 +20,5 @@
 [data-theme="dark"],
 html.dark {
   --date-picker-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
-  --date-picker-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --date-picker-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }
