@@ -108,7 +108,14 @@ de 32px como control.
       `control.height` sigue consumiéndose solo desde `dropdown-field`; los
       campos apuntan a `size-component.*` directamente, como Button y Select.
 - [x] **Hamburger** → rehecho como `MenuButton` a talla (40/32), barras 1px.
-- [ ] Suben a `sm` (32px): **Kbd** sm y md (1.5 / 1.75rem).
+- [x] **Kbd** — resuelto de otra forma (2026-08-27): el ancho mínimo del keycap no
+      es una talla de componente (no es un control ni un cuadrado de una fila de
+      controles, es una marca dentro del texto). Los tres números sueltos
+      (1.5 / 1.75 / 2.25rem) se van: `min-size` sale ahora de la fórmula
+      `cuerpo × interlineado + 2 × aire + 2 × borde`, igual que
+      `textarea.min-height`, así una tecla de un carácter es cuadrada en las
+      tres tallas (24 / 26 / 38px). Si la decisión es que suba a 32px, hay que
+      decidir antes qué pasa con `sm` y `md`, que colapsarían en la misma medida.
 - [x] **UserMenu** avatar, **OrgSwitcher** logo y **SidebarNav** icono → `sm`
       (2026-08-25; Avatar entero a tallas 32/40/48, sin `xl`).
 - [x] **DotsButton** → Button ghost iconOnly a talla (32/40/48), sin tokens propios (2026-08-26).
@@ -194,8 +201,9 @@ comprobar que sigue separándose de lo que tiene debajo:
       borde 1px visible en claro y oscuro.
 - [ ] **Sidebar** y **AppHeader** (sombra cruda) — barra fija sobre
       contenido que hace scroll: sustituir por borde inferior/derecho 1px.
-- [ ] **Kbd** — comprobar si `kbd.shadow` era el "relieve" de la tecla;
-      si lo era, resolver con borde.
+- [x] **Kbd** — el relieve lo daba el borde, no la sombra: el token
+      `kbd.shadow` (huérfano, ya en `none`) se retira y el CSS deja de
+      declarar `box-shadow` (2026-08-27).
 - [ ] **Header** (Por revisar) — misma sombra cruda que AppHeader.
 
 ## Movimiento (2026-08-25)

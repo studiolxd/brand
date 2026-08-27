@@ -1,24 +1,23 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-kbd-min-size: 1.75rem; // Tamaño mínimo (28px) — mantiene las teclas de un solo carácter casi cuadradas
-$lxd-kbd-border-radius: 0px; // Esquinas suaves de keycap (4px)
-$lxd-kbd-border-width: 1px; // Grosor del borde
-$lxd-kbd-border-color: #111e30; // Borde del keycap
-$lxd-kbd-bg: #f2f2f2; // Fondo del keycap
+$lxd-kbd-border-radius: 0px; // Esquina recta, como todo el sistema
+$lxd-kbd-border-width: 1px; // Grosor del borde: es lo que da relieve a la tecla (el sistema no proyecta sombras)
+$lxd-kbd-border-color: #111e30; // Borde del keycap: tinta de la superficie
+$lxd-kbd-bg: #f2f2f2; // Fondo del keycap: la superficie clara secundaria del sistema
 $lxd-kbd-color: #111e30; // Color del símbolo de la tecla
-$lxd-kbd-shadow: none; // Sombra sutil que da profundidad de tecla física
-$lxd-kbd-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada (Google Sans Code) — alineada con contenido técnico
-$lxd-kbd-font-size: 1rem; // 16px — tamaño md (por defecto)
-$lxd-kbd-font-weight: 500; // Peso medio para legibilidad en tamaño compacto
-$lxd-kbd-line-height: 1; // Sin interlineado extra — centrado por flexbox
-$lxd-kbd-padding-block: 0.25rem; // Padding vertical (4px)
-$lxd-kbd-padding-inline: 0.75rem; // Padding horizontal (12px)
-$lxd-kbd-sm-min-size: 1.5rem; // Tamaño mínimo sm (24px)
-$lxd-kbd-sm-font-size: 0.875rem; // 14px — tamaño sm
-$lxd-kbd-sm-padding-block: 0.25rem; // Padding vertical sm (4px)
-$lxd-kbd-sm-padding-inline: 0.5rem; // Padding horizontal sm (8px)
-$lxd-kbd-lg-min-size: 2.25rem; // Tamaño mínimo lg (36px)
-$lxd-kbd-lg-font-size: 1rem; // 16px — tamaño lg
-$lxd-kbd-lg-padding-block: 0.5rem; // Padding vertical lg (8px)
-$lxd-kbd-lg-padding-inline: 1rem; // Padding horizontal lg (16px)
+$lxd-kbd-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada (Google Sans Code) — alineada con el contenido técnico
+$lxd-kbd-font-size: 1rem; // 16px — talla md (por defecto)
+$lxd-kbd-font-weight: 500; // Peso de énfasis: legibilidad en tamaño compacto
+$lxd-kbd-line-height: 1; // Sin interlineado extra — el contenido se centra con flexbox
+$lxd-kbd-padding-block: 0.25rem; // Aire vertical (4px)
+$lxd-kbd-padding-inline: 0.75rem; // Aire horizontal (12px)
+$lxd-kbd-min-size: calc(1rem * 1 + 2 * 0.25rem + 2 * 1px); // Ancho mínimo: exactamente la altura de la tecla, de modo que una tecla de un carácter sale cuadrada. No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md)
+$lxd-kbd-sm-font-size: 0.875rem; // 14px — talla sm
+$lxd-kbd-sm-padding-block: 0.25rem; // Aire vertical sm (4px)
+$lxd-kbd-sm-padding-inline: 0.5rem; // Aire horizontal sm (8px)
+$lxd-kbd-sm-min-size: calc(0.875rem * 1 + 2 * 0.25rem + 2 * 1px); // Ancho mínimo sm: la misma fórmula con el cuerpo y el aire de la talla (24px)
+$lxd-kbd-lg-font-size: 1.25rem; // 20px — talla lg (el cuerpo de la superficie pública)
+$lxd-kbd-lg-padding-block: 0.5rem; // Aire vertical lg (8px)
+$lxd-kbd-lg-padding-inline: 1rem; // Aire horizontal lg (16px)
+$lxd-kbd-lg-min-size: calc(1.25rem * 1 + 2 * 0.5rem + 2 * 1px); // Ancho mínimo lg: la misma fórmula con el cuerpo y el aire de la talla (38px)

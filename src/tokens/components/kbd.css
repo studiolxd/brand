@@ -3,33 +3,32 @@
  */
 
 :root {
-  --kbd-min-size: 1.75rem; /** Tamaño mínimo (28px) — mantiene las teclas de un solo carácter casi cuadradas */
-  --kbd-sm-min-size: 1.5rem; /** Tamaño mínimo sm (24px) */
-  --kbd-lg-min-size: 2.25rem; /** Tamaño mínimo lg (36px) */
-  --kbd-bg: var(--color-grey-lightest); /** Fondo del keycap */
-  --kbd-font-family: var(--font-family-mono); /** Monoespaciada (Google Sans Code) — alineada con contenido técnico */
-  --kbd-font-size: var(--font-size-2); /** 16px — tamaño md (por defecto) */
-  --kbd-line-height: var(--line-height-none); /** Sin interlineado extra — centrado por flexbox */
-  --kbd-padding-block: var(--spacing-1); /** Padding vertical (4px) */
-  --kbd-padding-inline: var(--spacing-3); /** Padding horizontal (12px) */
-  --kbd-sm-font-size: var(--font-size-1); /** 14px — tamaño sm */
-  --kbd-sm-padding-block: var(--spacing-1); /** Padding vertical sm (4px) */
-  --kbd-sm-padding-inline: var(--spacing-2); /** Padding horizontal sm (8px) */
-  --kbd-lg-font-size: var(--font-size-2); /** 16px — tamaño lg */
-  --kbd-lg-padding-block: var(--spacing-2); /** Padding vertical lg (8px) */
-  --kbd-lg-padding-inline: var(--spacing-4); /** Padding horizontal lg (16px) */
-  --kbd-border-radius: var(--border-radius-default); /** Esquinas suaves de keycap (4px) */
-  --kbd-border-width: var(--border-width-default); /** Grosor del borde */
-  --kbd-border-color: var(--color-primary); /** Borde del keycap */
+  --kbd-bg: var(--color-grey-lightest); /** Fondo del keycap: la superficie clara secundaria del sistema */
+  --kbd-font-family: var(--font-family-mono); /** Monoespaciada (Google Sans Code) — alineada con el contenido técnico */
+  --kbd-font-size: var(--font-size-2); /** 16px — talla md (por defecto) */
+  --kbd-line-height: var(--line-height-none); /** Sin interlineado extra — el contenido se centra con flexbox */
+  --kbd-padding-block: var(--spacing-1); /** Aire vertical (4px) */
+  --kbd-padding-inline: var(--spacing-3); /** Aire horizontal (12px) */
+  --kbd-sm-font-size: var(--font-size-1); /** 14px — talla sm */
+  --kbd-sm-padding-block: var(--spacing-1); /** Aire vertical sm (4px) */
+  --kbd-sm-padding-inline: var(--spacing-2); /** Aire horizontal sm (8px) */
+  --kbd-lg-font-size: var(--font-size-3); /** 20px — talla lg (el cuerpo de la superficie pública) */
+  --kbd-lg-padding-block: var(--spacing-2); /** Aire vertical lg (8px) */
+  --kbd-lg-padding-inline: var(--spacing-4); /** Aire horizontal lg (16px) */
+  --kbd-border-radius: var(--border-radius-default); /** Esquina recta, como todo el sistema */
+  --kbd-border-width: var(--border-width-default); /** Grosor del borde: es lo que da relieve a la tecla (el sistema no proyecta sombras) */
+  --kbd-border-color: var(--color-primary); /** Borde del keycap: tinta de la superficie */
   --kbd-color: var(--color-text-on-light); /** Color del símbolo de la tecla */
-  --kbd-shadow: var(--shadow-default); /** Sombra sutil que da profundidad de tecla física */
-  --kbd-font-weight: var(--font-weight-emphasis); /** Peso medio para legibilidad en tamaño compacto */
+  --kbd-font-weight: var(--font-weight-emphasis); /** Peso de énfasis: legibilidad en tamaño compacto */
+  --kbd-min-size: calc(var(--kbd-font-size) * var(--kbd-line-height) + 2 * var(--kbd-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo: exactamente la altura de la tecla, de modo que una tecla de un carácter sale cuadrada. No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md) */
+  --kbd-sm-min-size: calc(var(--kbd-sm-font-size) * var(--kbd-line-height) + 2 * var(--kbd-sm-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo sm: la misma fórmula con el cuerpo y el aire de la talla (24px) */
+  --kbd-lg-min-size: calc(var(--kbd-lg-font-size) * var(--kbd-line-height) + 2 * var(--kbd-lg-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo lg: la misma fórmula con el cuerpo y el aire de la talla (38px) */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --kbd-bg: rgba(255, 255, 255, 0.08); /** Fondo del keycap — surface-dark */
-  --kbd-color: var(--color-text-on-dark); /** Color del símbolo — surface-dark */
-  --kbd-border-color: var(--color-text-on-dark); /** Borde del keycap — surface-dark */
+  --kbd-bg: rgba(255, 255, 255, 0.08); /** Fondo del keycap — surface-dark: el gris claro no existe en superficie oscura, y el velo translúcido es el mismo recurso que usan Skeleton y Table */
+  --kbd-color: var(--color-text-on-dark); /** Símbolo — surface-dark */
+  --kbd-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
 }

@@ -1,53 +1,81 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as KbdStories from "./Kbd.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { kbdTokens } from "../../../tokens/components/kbd";
+import { kbdTokens, kbdSizeTokens, kbdDarkTokens } from "../../../tokens/components/kbd";
 
 <Meta of={KbdStories} />
 
 # Kbd
 
-Representa una tecla del teclado mediante el elemento semántico `<kbd>`, con aspecto de keycap acorde a la línea del sistema: tipografía monoespaciada (Google Sans Code), esquinas suaves y una sombra sutil que aporta profundidad de tecla física. Se usa para mostrar atajos de teclado en interfaces, documentación y paletas de comandos.
+Una tecla del teclado, con el elemento semántico `<kbd>`. Se usa para escribir
+atajos en la interfaz, en la documentación y en las paletas de comandos: lo que
+hay que pulsar, no lo que hay que leer.
 
-## Por defecto
+<Canvas of={KbdStories.PorDefecto} />
 
-<Canvas of={KbdStories.Default} />
+## Anatomía
 
-## Tamaños
+Un keycap: fondo en la superficie clara secundaria del sistema, borde de 1px y
+símbolo en monoespaciada. El relieve lo da el borde, no una sombra — el sistema
+no proyecta sombras (Foundations → Sombras). La esquina es recta, como todo lo
+que no es píldora ni círculo.
 
-Tres tamaños (`sm`, `md`, `lg`) que comparten el mismo estilo y solo varían tamaño de fuente, padding y ancho mínimo. El ancho mínimo mantiene las teclas de un solo carácter casi cuadradas.
+El átomo representa **una** tecla. Una combinación se compone con varias y un
+separador entre ellas; no hay una variante de combo.
 
-<Canvas of={KbdStories.Sizes} />
+<Canvas of={KbdStories.Combinaciones} />
 
-## Teclas individuales
+## Tallas
 
-El átomo representa siempre una sola tecla. Admite símbolos (`⌘`, `⇧`, `⌥`, `⌃`, `↵`, `⌫`), flechas y etiquetas de texto (`Tab`, `Esc`).
+Tres tallas, que cambian cuerpo y aire. El **ancho mínimo no es una talla de
+componente**: es exactamente la altura de la propia tecla —cuerpo + aire +
+bordes—, de modo que una tecla de un carácter sale cuadrada en las tres. Un
+keycap es una marca dentro del texto, no un control de una fila de formulario,
+así que no se alinea con la escala de 32/40/48.
 
-<Canvas of={KbdStories.SingleKeys} />
+<Canvas of={KbdStories.Tallas} />
 
-## Combinaciones
+En línea, dentro de un párrafo, va `sm`: es la que se alinea con el texto que la
+rodea.
 
-Para una combinación de teclas se componen varios `Kbd` con un separador entre ellos (`+` o `·`). No existe una variante específica para combos: se construyen por composición.
+<Canvas of={KbdStories.EnLinea} />
 
-<Canvas of={KbdStories.Combinations} />
+<Canvas of={KbdStories.TeclasSueltas} />
 
-## En línea
+## Superficie oscura
 
-Dentro de un párrafo, usar el tamaño `sm` para que la tecla se alinee con el texto que la rodea.
+El gris claro del fondo no existe en superficie oscura: el keycap remapea su
+fondo a un velo blanco translúcido —el mismo recurso que usan `Skeleton` y
+`Table`— y el símbolo y el borde a blanco. Todo por tokens `surface-dark-*`, sin
+CSS propio.
 
-<Canvas of={KbdStories.Inline} />
+<Canvas of={KbdStories.SuperficieOscura} />
 
 ---
 
 ## Tokens
 
-Todos los valores derivan de tokens. Los tokens de tamaño (`sm-*`, `lg-*`) solo sobreescriben tamaño de fuente, padding y ancho mínimo; el resto de propiedades son comunes a los tres tamaños.
-
 <TokenTable tokens={kbdTokens} />
 
-## Tema oscuro
+### Tallas
 
-Sobre `.surface-dark`, el keycap remapea su fondo a un blanco translúcido y el texto y el borde a sus equivalentes claros. El remapeo vive en los tokens `surface-dark-*`, no en el CSS del componente.
+<TokenTable tokens={kbdSizeTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={kbdDarkTokens} />
+
+## Accesibilidad
+
+- El elemento es `<kbd>`: los lectores de pantalla lo anuncian como entrada de
+  teclado, y un `<span>` con estilo de tecla no haría eso.
+- Un símbolo suelto (`⌘`, `⌥`, `⌫`) no siempre se lee bien en voz alta. Si el
+  atajo es la única forma de hacer algo, dale un `aria-label` con el nombre de
+  la tecla, o escribe el atajo completo en texto junto al control.
+- El keycap no es interactivo: no lleva foco ni rol. La tecla que representa
+  debe funcionar de verdad en la aplicación; el átomo solo la nombra.
+- El símbolo va sobre el fondo gris claro en prusia (AAA) y sobre el velo oscuro
+  en blanco.
 
 ## Props
 
