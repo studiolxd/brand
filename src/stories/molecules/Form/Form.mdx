@@ -16,7 +16,8 @@ El formulario del sistema: **solo estructura y aire**. Apila los campos, pone de
 - `children`: los campos, apilados con `gap`.
 - `errors`: los errores que no cuelgan de un campo (el fallo del servidor). Se anuncian (`role="alert"`).
 - `actions`: la acción principal y, si hay, la secundaria. En móvil a todo el ancho; en escritorio a la derecha.
-- `links`: enlaces secundarios («¿Has olvidado la contraseña?», «¿No tienes cuenta?»).
+- `links`: enlaces secundarios. Solo la acción es enlace; si lleva texto delante, va en un `Paragraph`: `<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`.
+- `captcha`: el captcha (Turnstile, reCAPTCHA…), entre los campos y las acciones.
 - `alternatives` (+ `alternativesLabel`): otras formas de hacer lo mismo — acceso con Google, enlace mágico — separadas del bloque principal.
 
 <Canvas of={FormStories.Completo} />

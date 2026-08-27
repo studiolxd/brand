@@ -10,6 +10,11 @@
       "$type": "dimension",
       "$description": "Aire entre los errores del formulario (los que no cuelgan de un campo)"
     },
+    "captcha-margin-block-start": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Aire entre el último campo y el captcha"
+    },
     "actions-gap": {
       "$value": "{spacing.3}",
       "$type": "dimension",

@@ -6,8 +6,10 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
     errors?: string[];
     /** La acción principal (y, si hay, la secundaria): botones. */
     actions?: ReactNode;
-    /** Enlaces secundarios bajo las acciones: «¿Has olvidado la contraseña?», «¿No tienes cuenta?». */
+    /** Enlaces secundarios bajo las acciones: «¿Has olvidado la contraseña?», o con texto delante: `<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`. */
     links?: ReactNode;
+    /** El captcha (Turnstile, reCAPTCHA…): entre los campos y las acciones, con su propio aire. */
+    captcha?: ReactNode;
     /** Otras formas de hacer lo mismo: acceso con Google, enlace mágico… Van separadas del bloque principal. */
     alternatives?: ReactNode;
     /** Rótulo sobre las alternativas: «o continúa con». */

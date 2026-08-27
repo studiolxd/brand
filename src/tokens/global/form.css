@@ -5,6 +5,7 @@
 :root {
   --form-gap: var(--spacing-5); /** Aire entre campos */
   --form-errors-gap: var(--spacing-1); /** Aire entre los errores del formulario (los que no cuelgan de un campo) */
+  --form-captcha-margin-block-start: var(--spacing-5); /** Aire entre el último campo y el captcha */
   --form-actions-gap: var(--spacing-3); /** Aire entre los botones de la zona de acciones */
   --form-actions-margin-block-start: var(--spacing-6); /** Aire entre el último campo y las acciones */
   --form-links-gap: var(--spacing-4); /** Aire entre los enlaces secundarios (¿olvidaste la contraseña?, ¿no tienes cuenta?) */

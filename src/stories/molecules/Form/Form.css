@@ -12,6 +12,10 @@
   gap: var(--form-gap);
 }
 
+.form__captcha {
+  margin-block-start: var(--form-captcha-margin-block-start);
+}
+
 .form__errors {
   list-style: none;
   margin: 0;
@@ -49,6 +53,10 @@
   flex-wrap: wrap;
   gap: var(--form-links-gap);
   margin-block-start: var(--form-links-margin-block-start);
+}
+/* Un enlace con texto delante va en un Paragraph: sin margen propio, el aire es el del bloque. */
+.form__links > .paragraph {
+  margin: 0;
 }
 
 .form__alternatives {

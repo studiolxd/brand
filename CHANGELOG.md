@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.1.0
+
+### Añadido
+
+- `Form`: ranura `captcha` (entre los campos y las acciones, `captcha-margin-block-start`)
+  y enlaces secundarios con texto delante (`<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`).
+
 ## v19.0.0
 
 ### Rompe

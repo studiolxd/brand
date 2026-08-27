@@ -6,6 +6,7 @@ import { PasswordField } from '../PasswordField/PasswordField';
 import { CheckboxField } from '../CheckboxField/CheckboxField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 const campos = (
   <>
@@ -43,10 +44,11 @@ export const Completo: Story = {
     errors: ['No hemos podido iniciar sesión. Comprueba el correo y la contraseña.'],
     links: (
       <>
+        <Paragraph>¿No tienes cuenta? <Link href="#registro">Regístrate</Link></Paragraph>
         <Link href="#recuperar">¿Has olvidado la contraseña?</Link>
-        <Link href="#registro">¿No tienes cuenta?</Link>
       </>
     ),
+    captcha: <div style={{ inlineSize: '300px', blockSize: '65px', border: '1px dashed currentColor', display: 'grid', placeItems: 'center' }}>captcha</div>,
     alternativesLabel: 'O continúa con',
     alternatives: (
       <>
@@ -103,6 +105,8 @@ export const Contrato: Story = {
     await expect(canvas.getByRole('alert').textContent).toContain('No hemos podido');
     // orden: campos → errores → acciones → enlaces → alternativas
     const orden = Array.from(form.children).map((el) => el.className.split(' ')[0]);
-    await expect(orden).toEqual(['form__fields', 'form__errors', 'form__actions', 'form__links', 'form__alternatives']);
+    await expect(orden).toEqual(['form__fields', 'form__captcha', 'form__errors', 'form__actions', 'form__links', 'form__alternatives']);
+    // el enlace con texto delante: el texto no es enlace, solo la acción
+    await expect(canvas.getByRole('link', { name: 'Regístrate' })).toBeInTheDocument();
   },
 };

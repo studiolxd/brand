@@ -4,23 +4,27 @@ import { t as e } from "./_shared/form-size.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 import { forwardRef as r } from "react";
 //#region src/stories/molecules/Form/Form.tsx
-var i = r(function({ errors: r, actions: i, links: a, alternatives: o, alternativesLabel: s, size: c, className: l, children: u, ...d }, f) {
-	let p = [
+var i = r(function({ errors: r, actions: i, links: a, alternatives: o, alternativesLabel: s, captcha: c, size: l, className: u, children: d, ...f }, p) {
+	let m = [
 		"form",
-		c && c !== "md" ? `form--${c}` : "",
-		l
+		l && l !== "md" ? `form--${l}` : "",
+		u
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ t(e.Provider, {
-		value: c,
+		value: l,
 		children: /* @__PURE__ */ n("form", {
-			ref: f,
-			className: p,
+			ref: p,
+			className: m,
 			noValidate: !0,
-			...d,
+			...f,
 			children: [
 				/* @__PURE__ */ t("div", {
 					className: "form__fields",
-					children: u
+					children: d
+				}),
+				c && /* @__PURE__ */ t("div", {
+					className: "form__captcha",
+					children: c
 				}),
 				r && r.length > 0 && /* @__PURE__ */ t("ul", {
 					role: "alert",
