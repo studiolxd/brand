@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "23.0.0",
+  "version": "24.0.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -88,21 +88,9 @@
       "types": "./dist/_types/molecules/Card/Card.d.ts",
       "import": "./dist/card.js"
     },
-    "./card-split": {
-      "types": "./dist/_types/molecules/CardSplit/CardSplit.d.ts",
-      "import": "./dist/card-split.js"
-    },
-    "./card-square": {
-      "types": "./dist/_types/molecules/CardSquare/CardSquare.d.ts",
-      "import": "./dist/card-square.js"
-    },
     "./code-block": {
       "types": "./dist/_types/molecules/CodeBlock/CodeBlock.d.ts",
       "import": "./dist/code-block.js"
-    },
-    "./carousel": {
-      "types": "./dist/_types/atoms/Carousel/Carousel.d.ts",
-      "import": "./dist/carousel.js"
     },
     "./checkbox": {
       "types": "./dist/_types/atoms/Checkbox/Checkbox.d.ts",
@@ -112,13 +100,10 @@
       "types": "./dist/_types/molecules/CheckboxField/CheckboxField.d.ts",
       "import": "./dist/checkbox-field.js"
     },
-    "./clients-section.css": "./dist/clients-section.css",
-    "./contact-section.css": "./dist/contact-section.css",
     "./context-menu": {
       "types": "./dist/_types/molecules/ContextMenu/ContextMenu.d.ts",
       "import": "./dist/context-menu.js"
     },
-    "./courses-section.css": "./dist/courses-section.css",
     "./css": "./dist/brand.css",
     "./date-picker": {
       "types": "./dist/_types/molecules/DatePicker/DatePicker.d.ts",
@@ -152,7 +137,6 @@
       "types": "./dist/_types/molecules/FileUploadField/FileUploadField.d.ts",
       "import": "./dist/file-upload-field.js"
     },
-    "./footer.css": "./dist/footer.css",
     "./form": {
       "types": "./dist/_types/molecules/Form/Form.d.ts",
       "import": "./dist/form.js"
@@ -165,15 +149,6 @@
       "types": "./dist/_types/atoms/Heading/Heading.d.ts",
       "import": "./dist/heading.js"
     },
-    "./hero-video": {
-      "types": "./dist/_types/atoms/HeroVideo/HeroVideo.d.ts",
-      "import": "./dist/hero-video.js"
-    },
-    "./highlight": {
-      "types": "./dist/_types/atoms/Highlight/Highlight.d.ts",
-      "import": "./dist/highlight.js"
-    },
-    "./highlight-section.css": "./dist/highlight-section.css",
     "./icon": {
       "types": "./dist/_types/atoms/Icon/Icon.d.ts",
       "import": "./dist/icon.js"
@@ -274,7 +249,6 @@
       "types": "./dist/_types/molecules/Menu/Menu.d.ts",
       "import": "./dist/menu.js"
     },
-    "./methodology-section.css": "./dist/methodology-section.css",
     "./modal": {
       "types": "./dist/_types/molecules/Modal/Modal.d.ts",
       "import": "./dist/modal.js"
@@ -327,27 +301,10 @@
       "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
       "import": "./dist/prev-next-nav.js"
     },
-    "./pricing-card": {
-      "types": "./dist/_types/organisms/PricingCard/PricingCard.d.ts",
-      "import": "./dist/pricing-card.js"
-    },
     "./progress-bar": {
       "types": "./dist/_types/atoms/ProgressBar/ProgressBar.d.ts",
       "import": "./dist/progress-bar.js"
     },
-    "./project-card": {
-      "types": "./dist/_types/molecules/ProjectCard/ProjectCard.d.ts",
-      "import": "./dist/project-card.js"
-    },
-    "./project-carousel": {
-      "types": "./dist/_types/organisms/ProjectCarousel/ProjectCarousel.d.ts",
-      "import": "./dist/project-carousel.js"
-    },
-    "./project-grid": {
-      "types": "./dist/_types/organisms/ProjectGrid/ProjectGrid.d.ts",
-      "import": "./dist/project-grid.js"
-    },
-    "./projects-section.css": "./dist/projects-section.css",
     "./radio": {
       "types": "./dist/_types/atoms/Radio/Radio.d.ts",
       "import": "./dist/radio.js"
@@ -356,11 +313,6 @@
       "types": "./dist/_types/molecules/RadioField/RadioField.d.ts",
       "import": "./dist/radio-field.js"
     },
-    "./review-carousel": {
-      "types": "./dist/_types/organisms/ReviewCarousel/ReviewCarousel.d.ts",
-      "import": "./dist/review-carousel.js"
-    },
-    "./reviews-section.css": "./dist/reviews-section.css",
     "./scss": "./src/tokens/scss/_index.scss",
     "./scss/legacy": "./src/tokens/scss/_index.legacy.scss",
     "./scss/components/*": "./src/tokens/scss/components/_*.scss",
@@ -394,14 +346,9 @@
       "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
       "import": "./dist/skip-link.js"
     },
-    "./solutions-section.css": "./dist/solutions-section.css",
     "./spinner": {
       "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",
       "import": "./dist/spinner.js"
-    },
-    "./steps": {
-      "types": "./dist/_types/organisms/Steps/Steps.d.ts",
-      "import": "./dist/steps.js"
     },
     "./switcher": {
       "types": "./dist/_types/atoms/Switcher/Switcher.d.ts",
@@ -513,9 +460,6 @@
     "@base-ui-components/react": "1.0.0-rc.0",
     "@tanstack/react-table": "^8.21.3",
     "cmdk": "^1.1.1",
-    "embla-carousel": "^8.6.0",
-    "embla-carousel-auto-scroll": "^8.6.0",
-    "embla-carousel-react": "^8.6.0",
     "libphonenumber-js": "^1.12.41",
     "react-image-crop": "^11.1.2",
     "react-phone-number-input": "^3.4.16"
@@ -544,8 +488,6 @@
     "@vitest/browser-playwright": "^4.1.2",
     "@vitest/coverage-v8": "^4.1.2",
     "chromatic": "^18.5.0",
-    "embla-carousel-auto-scroll": "^8.6.0",
-    "embla-carousel-react": "^8.6.0",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",

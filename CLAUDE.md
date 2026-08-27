@@ -48,7 +48,7 @@ Librería de componentes React distribuida como paquete npm vía git (`@studiolx
 - `atoms/` — elementos básicos (Button, Input, Link…)
 - `molecules/` — combinaciones de átomos (InputField, Form…)
 - `organisms/` — secciones complejas (ContactForm…)
-- `sections/` — bloques de página completos (Header, HighlightSection…)
+- `sections/` — bloques de página completos (AppHeader, SiteHeader, SiteShell…)
 - `pages/` — plantillas de página completas
 - `foundations/` — documentación de tokens (colores, tipografía, espaciado…)
 
@@ -116,7 +116,7 @@ html.dark {
 
 El sistema lee a dos tamaños emparejados con las tallas de control: **aplicación** (cuerpo 16px, controles `md`) y **pública** (dentro de `SiteShell`: cuerpo 20px, controles `lg`, escala de títulos un peldaño arriba). La regla completa está en `src/stories/foundations/Typography.mdx` § «Dos superficies de lectura».
 
-- Los seis niveles y las props `size` de `Heading`/`Highlight`/`Fieldset` beben de una sola escala de títulos, `text.size.1`…`text.size.10` (`--text-size-N`). No usar `--font-size-N` crudo para el tamaño de un título: rompe el peldaño de la superficie pública.
+- Los seis niveles y las props `size` de `Heading`/`Fieldset` beben de una sola escala de títulos, `text.size.1`…`text.size.10` (`--text-size-N`). No usar `--font-size-N` crudo para el tamaño de un título: rompe el peldaño de la superficie pública.
 - `text.paragraph.small|large.font-size` son **peldaños relativos al cuerpo**, no cifras: uno por debajo y uno por encima.
 - Un componente que muestra **texto corriente** referencia `{text.font-size}` (y `{text.line-height}` si lo tiene) o, para letra menor, `{text.paragraph.small.font-size}`. Un componente de **interfaz** (todo lo que tiene tallas `sm`/`md`/`lg`) mantiene su token propio. Un campo dentro de una tabla sigue siendo un campo.
 - **`src/tokens/surface-public.css` es generado** (`pnpm build:tokens`, cola de `sd.config.mjs`). Vuelve a declarar bajo `.site-shell` todo token que referencie esos tokens base, porque un `var()` dentro de una custom property se sustituye en el elemento que la declara: `--alert-title-font-size: var(--text-font-size)` vive en `:root` y llega ya resuelto a 16px. No editarlo a mano; añadir la referencia en el JSON y rebuildear basta.

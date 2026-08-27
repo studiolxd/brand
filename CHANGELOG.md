@@ -7,6 +7,39 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.0.0
+
+### Eliminado (breaking)
+
+Fuera todo el legado de la web de studiolxd.com: la suite no lo consume y el DS
+deja de arrastrarlo.
+
+- **Secciones**: `ClientsSection`, `ContactSection`, `CoursesSection`, `Footer`,
+  `HighlightSection`, `MethodologySection`, `ProjectsSection`, `ReviewsSection`,
+  `SolutionsSection`. El pie público vigente es `LegalFooter`.
+- **Organismos**: `ProjectCarousel`, `ProjectGrid`, `ReviewCarousel`,
+  `PricingCard`, `Steps`.
+- **Moléculas**: `ProjectCard`, `CardSplit`, `CardSquare`. Para tarjetas, `Card`.
+- **Átomos**: `Carousel`, `HeroVideo`, `Highlight`. La prop `size` de `Highlight`
+  desaparece de la escala de títulos documentada en Foundations.
+- **Tokens**: `carousel.*`, `card-split.*`, `card-square.*`, `clients-section.*`,
+  `contact-section.*`, `footer.*`, `highlight-section.*`, `methodology-section.*`
+  y `pricing-card.*` — con sus CSS/SCSS generados (`components/carousel`,
+  `components/card-split`, `components/card-square`, `components/clients-section`,
+  `components/contact-section`, `components/footer`,
+  `components/highlight-section`, `components/methodology-section`,
+  `components/pricing-card`). Los tokens `section.*` (`--section-padding-*`) se
+  quedan: los consumen `Container` y `SiteHeader`.
+- **Exports CSS de sección**: `./clients-section.css`, `./contact-section.css`,
+  `./courses-section.css`, `./footer.css`, `./highlight-section.css`,
+  `./methodology-section.css`, `./projects-section.css`, `./reviews-section.css`,
+  `./solutions-section.css` — ya no queda ningún CSS de sección suelto.
+- **Exports de componente**: `./carousel`, `./hero-video`, `./highlight`,
+  `./card-split`, `./card-square`, `./project-card`, `./project-carousel`,
+  `./project-grid`, `./review-carousel`, `./pricing-card`.
+- **Dependencias**: `embla-carousel`, `embla-carousel-react` y
+  `embla-carousel-auto-scroll` (solo las usaban los carruseles).
+
 ## v23.0.0
 
 ### Eliminado (breaking)

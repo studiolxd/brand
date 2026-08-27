@@ -35,14 +35,9 @@
 @forward 'components/stack';
 @forward 'components/skip-link';
 @forward 'components/site-header';
-@forward 'components/pricing-card';
 @forward 'components/code-block';
-@forward 'components/highlight-section';
 @forward 'components/select';
 @forward 'components/multi-select';
-@forward 'components/carousel';
-@forward 'components/card-square';
-@forward 'components/card-split';
 @forward 'components/avatar';
 @forward 'components/input-phone';
 @forward 'components/accordion';
@@ -61,10 +56,6 @@
 @forward 'molecules/multi-select-field';
 @forward 'molecules/checkbox-field';
 @forward 'molecules/radio-field';
-@forward 'components/clients-section';
-@forward 'components/methodology-section';
-@forward 'components/contact-section';
-@forward 'components/footer';
 @forward 'components/floating-panel';
 @forward 'molecules/menu';
 @forward 'molecules/command-palette';

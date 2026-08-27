@@ -84,7 +84,7 @@ No es un tema ni una prop: es un **contexto**. `SiteShell` remapea los tokens de
 
 Si el cuerpo sube y los títulos no, la jerarquía se rompe por abajo: con el cuerpo a 20px, un H5 de 20px mediría lo mismo que el párrafo y un H6 de 16px, menos. Por eso en la superficie pública **la escala de títulos entera sube un paso**: el H5 queda por encima del cuerpo y el H6 lo iguala, distinguiéndose por el peso (`emphasis`, 500) y no por el tamaño.
 
-La escala vive en `--text-size-1`…`--text-size-10`, y de ella beben los seis niveles (`--text-h1-font-size` = `--text-size-8`, y así hasta el H6 = `--text-size-3`), la prop `size` de `Heading`, la de `Highlight` y la del `legend` de `Fieldset`. `SiteShell` remapea los diez pasos de una vez: nivel y tamaño desacoplado se mueven juntos, nunca uno sin el otro. El paso 10 es el techo de la escala y no sube más.
+La escala vive en `--text-size-1`…`--text-size-10`, y de ella beben los seis niveles (`--text-h1-font-size` = `--text-size-8`, y así hasta el H6 = `--text-size-3`), la prop `size` de `Heading` y la del `legend` de `Fieldset`. `SiteShell` remapea los diez pasos de una vez: nivel y tamaño desacoplado se mueven juntos, nunca uno sin el otro. El paso 10 es el techo de la escala y no sube más.
 
 ### El párrafo pequeño y el grande son peldaños, no tamaños
 
@@ -135,7 +135,7 @@ Con Google Sans Flex a 16px, 70ch son unos 505px. Es el ancho máximo de los com
 
 ### Escala de títulos
 
-Los diez pasos de los que beben los niveles `h1`…`h6` y las props `size` de `Heading`, `Highlight` y el `legend` de `Fieldset`.
+Los diez pasos de los que beben los niveles `h1`…`h6` y las props `size` de `Heading` y el `legend` de `Fieldset`.
 
 <TokenTable tokens={headingScaleTokens} />
 

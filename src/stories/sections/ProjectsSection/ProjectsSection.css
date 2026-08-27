@@ -1,9 +1,0 @@
-/* ─── Section ────────────────────────────────────────────── */
-.projects-section {
-  padding-block: var(--section-padding-block-xl);
-  padding-inline: var(--section-padding-inline);
-}
-
-.projects-section > .heading {
-  padding-block-end: var(--section-padding-block-xl);
-}

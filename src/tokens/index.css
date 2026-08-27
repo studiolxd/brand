@@ -23,9 +23,7 @@
 @import "./components/stack.css";
 @import "./components/skip-link.css";
 @import "./components/site-header.css";
-@import "./components/pricing-card.css";
 @import "./components/code-block.css";
-@import "./components/highlight-section.css";
 @import "./components/label.css";
 @import "./components/control.css";
 @import "./components/input.css";
@@ -55,17 +53,10 @@
 @import "./molecules/radio-field.css";
 @import "./components/select.css";
 @import "./components/multi-select.css";
-@import "./components/carousel.css";
-@import "./components/card-square.css";
-@import "./components/card-split.css";
 @import "./components/avatar.css";
 @import "./components/input-phone.css";
 @import "./components/arrow.css";
 @import "./components/icon.css";
-@import "./components/clients-section.css";
-@import "./components/methodology-section.css";
-@import "./components/contact-section.css";
-@import "./components/footer.css";
 @import "./components/floating-panel.css";
 @import "./molecules/menu.css";
 @import "./molecules/command-palette.css";
