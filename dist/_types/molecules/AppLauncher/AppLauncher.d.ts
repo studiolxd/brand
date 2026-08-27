@@ -3,7 +3,11 @@ export interface LauncherApp {
     id: string;
     name: string;
     url: string;
-    /** Color de acento de la app (llega por datos, no del sistema de tokens). */
+    /**
+     * Color de acento de la app. Es un color de dato (cada app externa trae el suyo,
+     * fuera del control del DS), no un token: se aplica con `style` inline sobre
+     * `.app-launcher__tile-icon`, no con una clase ni una custom property del sistema.
+     */
     accent: string;
     isNew?: boolean;
 }
