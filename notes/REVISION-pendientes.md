@@ -12,14 +12,16 @@ componente al revisarlo — no con un gris de fondo por defecto. Hoy lo usan as�
 36 tokens; van cayendo con la revisión:
 
 - [ ] hover de ítem: ContextMenu, UserMenu, OrgSwitcher, SidebarNav,
-      ConversationList, Calendar (día y
-      nav), CalendarPlanner, CalendarRoster, Modal (cierre), DotsButton,
-      ConversationList, Table (fila y cabecera), Calendar (día y
-      nav), CalendarPlanner, CalendarRoster, DotsButton,
+      ConversationList, DotsButton,
       NumberInput, Button (variante con hover gris)
 - [ ] activo: OrgSwitcher, ConversationList
 - [ ] deshabilitado: Button, Input, Textarea
-- [ ] celdas de calendario: fin de semana, no laborable, fuera de mes
+- [x] celdas de calendario: fin de semana, no laborable, fuera de mes
+      (2026-08-27, tanda 6) — `calendar-planner.cell-outside-bg` y las tres de
+      `calendar-roster` (`cell-weekend-bg`, `cell-holiday-bg`,
+      `cell-non-working-bg`) apuntan al rol `color.surface.secondary-on-light|dark`.
+      Las tres del cuadrante comparten valor a propósito: lo que separa festivo,
+      fin de semana y no laborable es el chip que los nombra, no tres grises vecinos.
 
 ## Texto gris sobre `grey-lightest` (Colores, 2026-08-25)
 
@@ -54,9 +56,10 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
 - [x] **Modal** — resuelto (2026-08-27, tanda 3): el aspa pasa a `Button ghost`
       `sm` `iconOnly` (precedente de `Alert`/`Toast`); `close-color`,
       `close-hover-color` y `close-hover-bg` se retiran del JSON.
-- [ ] **Calendar / CalendarPlanner / CalendarRoster** — `outside-color`
-      (grey-dark) es texto (los días fuera de mes se leen): → grey-darkest.
-      `disabled-color` puede quedarse: deshabilitado, exento.
+- [x] **Calendar / CalendarPlanner / CalendarRoster** (2026-08-27, tanda 6) —
+      `calendar.outside-color` → `color.text.muted-on-light` (grey-darkest) con
+      par `muted-on-dark`; el número fuera de mes del planificador hereda de él.
+      `disabled-color` se queda en grey-dark: deshabilitado, exento.
 - [x] **Input / Textarea / MultiSelect / CommandPalette** — placeholder.
       Resuelto en tokens: `text.placeholder-on-light|dark` (grey-darkest /
       grey-light), y fuera los `surface-dark-placeholder-color` que lo
@@ -204,8 +207,10 @@ roles; lo que queda es comprobar visualmente cada componente al revisarlo.
 - [x] **RadioField** — el `offset` de 3px se retiró (2026-08-27): la marca se
       alinea con la primera línea derivando `(altura de línea × cuerpo − lado
       del radio) / 2`, sin número suelto.
-- [ ] **CheckboxField** — sigue con `checkbox-offset: 3px`, y **CalendarRoster**
-      con `chip-padding-block` 2px: espaciado fuera de escala (mínimo 4px).
+- [ ] **CheckboxField** — sigue con `checkbox-offset: 3px`: espaciado fuera de
+      escala (mínimo 4px). El `chip-padding-block` de 2px de **CalendarRoster**
+      se cerró en la tanda 6: era el padding del botón de navegación a mano, y
+      se fue con él al pasar la banda de mes a `PrevNextNav`.
 - [ ] Componentes que pasan de 4px a esquina recta (29 usos, ya repuntados):
       AppLauncher, Avatar (variante cuadrada), Calendar, CalendarPlanner,
       CalendarRoster, CommandPalette, ContextMenu, ConversationList,
@@ -242,7 +247,7 @@ token). Curvas `in` y `linear` declaradas sin uso.
 - [ ] **Spinner** — `animation-duration` ahora 1000ms (un ciclo de dibujo del
       contorno, 2026-08-27). Sigue siendo token propio crudo: un bucle no es una
       transición; decidir si merece un token de motion.
-- [ ] Transiciones con ms a mano en CSS: **CardSplit, PrevNextNav, Table,
+- [ ] Transiciones con ms a mano en CSS: **CardSplit, Table,
       Modal** → `--motion-duration-*`.
       Ojo, el patrón real que hay en esos CSS —y en `Tooltip`— es
       `calc(var(--…-transition-duration) * 1ms)`, de cuando las duraciones eran
@@ -692,3 +697,47 @@ ImageCropDialog compone Modal). MDX, story `En superficie oscura` con
 - CommandPalette compone `Modal` (ya reescrita sobre Base UI en v24.11.0,
   cmdk/Radix fuera del `dist`) pero no entraba en esta tanda: sigue en
   `Por revisar/` por su propio motivo, no por este cambio.
+## Tanda 6 — calendarios: Calendar, CalendarPlanner, CalendarRoster, PrevNextNav (2026-08-27)
+
+Los cuatro salen de `Por revisar/`. MDX, story `EnSuperficieOscura` y story
+`Test — …` (`!dev`, con `play`) nuevos en los cuatro; `Calendar` estrena además
+`Calendar.test.tsx`.
+
+- [x] **Decisión 2a — teclado de la rejilla de `Calendar`** — hecho: roving
+      tabindex (un mes es una parada de tabulador, no 35), flechas de día y de
+      semana, Inicio/Fin dentro de la semana, RePág/AvPág de mes, Mayús+RePág/
+      AvPág de año, y el cruce del borde del mes arrastra el mes visible.
+      Enter/Espacio ya los resolvía el `<button>` nativo. Se comprobó que
+      `DatePicker`, `DatePickerField` y `DateTimeField` siguen en verde.
+- [x] **Decisión 7a — rejilla de mes compartida** —
+      `src/stories/molecules/_shared/calendarGrid` (como `_shared/dropdownItems`):
+      `getCalendarDays`, `chunkWeeks`, `isSameDay`/`isSameMonth`/`shiftMonth`,
+      los nombres de día, la cabecera, la navegación de mes y el hook de teclado.
+      `CalendarPlanner` no es literalmente `Calendar` con `renderDay` —su celda
+      es una caja de contenido, no un botón— pero ya no duplica ni una línea de
+      la rejilla, y sus tokens hacen cascada sobre `{calendar.*}`.
+- [x] **`--calendar-planner-day-hover-bg`** no existía en los tokens generados:
+      el hover de celda estaba muerto. Ahora `cell-hover-bg`/`cell-hover-color`.
+- [x] **Huérfanos retirados** — `calendar-planner.nav-disabled-color` y
+      `nav-disabled-cursor`; `calendar-roster.nav-*`, `title-*` y `transition-*`
+      (se van con la navegación a mano); `calendar.today-border-color` pasa a
+      `today-marker-color`.
+- [x] **`PrevNextNav` en `CalendarRoster`** — sí se podía reutilizar, y se ha
+      hecho. Para cubrir el caso, `PrevNextNav` gana `linkComponent` y `labelId`
+      y sus handlers reciben el evento (`href` + handler = navegación SPA).
+- [x] **Tokens de molécula en la carpeta de molécula** — `calendar`,
+      `calendar-planner`, `calendar-roster` y `prev-next-nav` pasan de
+      `tokens/component/` a `tokens/molecule/`. El CSS/SCSS generado no se mueve.
+- [ ] **`calendar-roster.th-name-width` (10rem) y `th-day-width` (2.5rem)** son
+      medidas de columna, no tallas de control ni aire: se quedan crudas. Mismo
+      caso que las alturas de `ProgressBar` — si el sistema añade una escala de
+      medidas, repuntar ahí.
+- [ ] **`calendar-planner.cell-min-height`** (6/4/9rem) — ídem: altura de celda
+      de parrilla, sin escala donde encajarla.
+- [ ] **El «+N más» de `CalendarPlanner`** mantiene su propia parada de
+      tabulador dentro de una celda de la rejilla. Es una acción distinta de
+      «abrir el día», así que se ha dejado a propósito; si alguna vez la celda
+      llega a tener varios controles, habrá que meterlos en el recorrido de
+      flechas en vez de en el de tabulador.
+- [ ] **`CalendarPlanner` no tiene `minDate`/`maxDate`**: su rejilla no acota
+      meses. No se ha inventado la prop porque no hay caso que la pida.

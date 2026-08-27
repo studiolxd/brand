@@ -7,6 +7,73 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.5.0
+
+### Cambiado
+
+- `Calendar`: la rejilla es ya una rejilla accesible completa. `role="grid"`
+  con filas, cabeceras de columna y celdas —eso ya estaba— más **roving
+  tabindex**: un mes es una sola parada de tabulador, no treinta y cinco.
+  Dentro se navega con ←→ (día), ↑↓ (semana), Inicio/Fin (lunes/domingo de la
+  semana), RePág/AvPág (mes) y Mayús+RePág/AvPág (año); cruzar el borde del
+  mes arrastra el mes visible. Las cabeceras de día llevan el nombre completo
+  en un `<abbr>`, y la rejilla acepta nombre propio por la prop nueva
+  `gridLabel` (`DatePicker` le pasa su `calendarLabel`, así el panel y la
+  rejilla tienen nombre). El marcador del día de hoy deja los `3px`/`4px`/`50%`
+  cableados por `today-marker-offset`/`-size`/`-radius` (esquina recta, como
+  todo el sistema; el token `today-border-color` pasa a llamarse
+  `today-marker-color`). `nav-hover-bg` y `day-hover-bg` dejan `grey-lightest`
+  por el relleno de marca del patrón Menu/Button ghost, con su par de texto
+  (`nav-hover-color`/`day-hover-color`) e inversión en superficie oscura —
+  fuera los `rgba(255,255,255,.12)` a mano. `outside-color` pasa a
+  `color.text.muted-on-light` (los días fuera de mes se leen: son texto). MDX
+  nuevo con la tabla de teclado, story de superficie oscura, story de test y
+  `Calendar.test.tsx` con doce casos.
+- **Rejilla de mes compartida**: `getCalendarDays`, el reparto en semanas, los
+  nombres de día, la cabecera, la navegación de mes y el teclado de la rejilla
+  viven en `src/stories/molecules/_shared/calendarGrid`, que consumen
+  `Calendar`, `CalendarPlanner` y `CalendarRoster`. Es interno: no cambia nada
+  de la API pública.
+- `CalendarPlanner`: deja de reimplementar `Calendar` línea por línea.
+  `calendar-planner.json` se queda con lo que es suyo (bordes de parrilla,
+  altura de celda, badge del número, «+N más») y hace cascada sobre
+  `{calendar.*}` para navegación, título, cabeceras, hover de celda, color del
+  número y transiciones. `--calendar-planner-day-hover-bg` no existía en los
+  tokens generados —el hover estaba muerto—: ahora es `cell-hover-bg`/`-color`.
+  Retirados los huérfanos `nav-disabled-color` y `nav-disabled-cursor`.
+  `cell-outside-bg` deja `grey-lightest` por `color.surface.secondary-*`. Con
+  `onDayClick` la parrilla es ya operable con teclado (mismo roving tabindex y
+  mismas teclas que `Calendar`) y tiene anillo de foco. Prop nueva `gridLabel`.
+  MDX, story de superficie oscura y story de test nuevas.
+- `CalendarRoster`: la banda de mes pasa a ser `PrevNextNav` en vez de un
+  control a mano; se van con ella `renderNav`, su CSS y once tokens
+  (`nav-*`, `title-*`, `transition-*`). `chip-padding-block` (2px, fuera de la
+  escala de 4) desaparece con el botón que lo usaba, y `chip-padding-inline`
+  pasa a `legend-item-gap`, que es lo que hacía. El badge de hoy deja
+  `1.5rem` por `th-day-today-size`, y el recuadro de la columna de hoy deja
+  `outline: 2px`/`-2px` por `cell-today-outline-width`. `cell-weekend-bg`,
+  `cell-holiday-bg` (era `#E5E7EB` a pelo) y `cell-non-working-bg` apuntan los
+  tres al rol `color.surface.secondary-*`: un día no laborable es una
+  superficie, y lo que separa las categorías es el chip que las nombra; par
+  oscuro nuevo para no laborable. `schedule-font-size` (11px) y
+  `th-day-sub-font-size` (10px) entran en la escala (`font-size.0`). La
+  inicial del día lleva `<abbr>`. MDX, story de superficie oscura y story de
+  test nuevas.
+- `PrevNextNav`: `border-radius: 2px` del anillo de foco → `focus-ring-radius`.
+  Par oscuro nuevo (`surface-dark-*`) para rótulo, controles, deshabilitado y
+  anillo de foco; el hover pasa a `color.accent-2` porque en oscuro el prusia
+  de marca es el propio fondo (mismo criterio que `SiteNav`). Props nuevas
+  `linkComponent` (rinde el `href` con el `Link` del router) y `labelId` (id
+  del rótulo, para `aria-labelledby`); `prevOnClick`/`nextOnClick` reciben
+  ahora el evento y se disparan también junto al `href`, que es la puerta de
+  la navegación SPA. MDX, story de superficie oscura y story de test nuevas.
+- Los tokens de `calendar`, `calendar-planner`, `calendar-roster` y
+  `prev-next-nav` se mudan de `tokens/component/` a `tokens/molecule/`, la
+  carpeta que les corresponde. El CSS y el SCSS generados salen donde salían.
+- Los cuatro salen de `Por revisar/`: `Molecules/Calendar`,
+  `Molecules/CalendarPlanner`, `Molecules/CalendarRoster` y
+  `Molecules/PrevNextNav`.
+
 ## v25.4.0
 
 ### Cambiado
@@ -73,6 +140,7 @@ para breaking changes.
   página de **docs**. Antes teñía el `<html>` entero y dejaba ilegibles todas
   las demás stories de esa página. En el canvas de la story sigue usando el
   `<html>`, que es donde hace falta alcanzar a los portales.
+||||||| parent of 4e729bf (chore: v25.5.0 — changelog, versión y pendientes de la tanda de calendarios)
 ## v25.2.0
 
 ### Cambiado
