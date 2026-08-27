@@ -5,7 +5,7 @@ export interface HeroProps {
     title: ReactNode;
     /** La frase bajo el título, opcional: `Paragraph size="large"`. */
     description?: ReactNode;
-    /** Uno o varios botones (`Button`), en fila con envoltura, bajo el texto. */
+    /** Uno o varios botones (`Button`), en fila con envoltura (`Inline`), bajo el texto. */
     actions?: ReactNode;
     className?: string;
     id?: string;

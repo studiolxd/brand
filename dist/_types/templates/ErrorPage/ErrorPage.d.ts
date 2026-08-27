@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import './ErrorPage.css';
 export interface ErrorPageProps {
     /** El título («Algo ha salido mal»): `Heading` de nivel 1 vía `PageIntro`. */
     title: ReactNode;
@@ -13,11 +12,18 @@ export interface ErrorPageProps {
     footer?: ReactNode;
     /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
     id?: string;
+    /**
+     * Con `false` no monta `SiteShell` ni el `main`: solo el contenido (título,
+     * frase y acciones), para pintarlo dentro de un `AppShell` que ya tiene su
+     * `main`. Por defecto `true`. Sin marco, `header`, `footer` e `id` no aplican.
+     */
+    shell?: boolean;
 }
 /**
  * Plantilla de «algo ha salido mal»: misma maqueta que `NotFoundPage` con las
  * acciones en lugar del enlace de vuelta. Cabecera y pie, si se pasan, van
  * cada uno en su `ErrorBoundary`: la página de error no puede depender del
- * layout que pudo fallar.
+ * layout que pudo fallar. Con `shell={false}` devuelve solo el contenido,
+ * para una app que ya tiene su `main`.
  */
-export declare function ErrorPage({ title, description, actions, header, footer, id }: ErrorPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function ErrorPage({ title, description, actions, header, footer, id, shell }: ErrorPageProps): import("react/jsx-runtime").JSX.Element;

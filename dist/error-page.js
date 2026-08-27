@@ -1,30 +1,31 @@
 'use client';
-import './error-page.css';
 import { Container as e } from "./container.js";
 import { Stack as t } from "./stack.js";
-import { ErrorBoundary as n } from "./error-boundary.js";
-import { PageIntro as r } from "./page-intro.js";
-import { SiteShell as i } from "./site-shell.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { Inline as n } from "./inline.js";
+import { ErrorBoundary as r } from "./error-boundary.js";
+import { PageIntro as i } from "./page-intro.js";
+import { SiteShell as a } from "./site-shell.js";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/templates/ErrorPage/ErrorPage.tsx
-function s({ title: s, description: c, actions: l, header: u, footer: d, id: f = "main-content" }) {
-	return /* @__PURE__ */ a(i, {
-		header: u && /* @__PURE__ */ a(n, { children: u }),
-		footer: d && /* @__PURE__ */ a(n, { children: d }),
-		children: /* @__PURE__ */ a(e, {
+function c({ title: c, description: l, actions: u, header: d, footer: f, id: p = "main-content", shell: m = !0 }) {
+	let h = /* @__PURE__ */ s(t, { children: [/* @__PURE__ */ o(i, {
+		title: c,
+		description: l
+	}), /* @__PURE__ */ o(n, {
+		className: "error-page__actions",
+		children: u
+	})] });
+	return m ? /* @__PURE__ */ o(a, {
+		header: d && /* @__PURE__ */ o(r, { children: d }),
+		footer: f && /* @__PURE__ */ o(r, { children: f }),
+		children: /* @__PURE__ */ o(e, {
 			as: "main",
-			id: f,
+			id: p,
 			tabIndex: -1,
 			space: "xl",
-			children: /* @__PURE__ */ o(t, { children: [/* @__PURE__ */ a(r, {
-				title: s,
-				description: c
-			}), /* @__PURE__ */ a("div", {
-				className: "error-page__actions",
-				children: l
-			})] })
+			children: h
 		})
-	});
+	}) : h;
 }
 //#endregion
-export { s as ErrorPage };
+export { c as ErrorPage };
