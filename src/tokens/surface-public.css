@@ -65,6 +65,7 @@
   --input-field-helper-font-size: var(--form-helper-font-size);
   --input-phone-field-error-font-size: var(--form-error-font-size);
   --input-phone-field-helper-font-size: var(--form-helper-font-size);
+  --message-composer-helper-font-size: var(--text-paragraph-small-font-size);
   --multi-select-field-error-font-size: var(--form-error-font-size);
   --multi-select-field-helper-font-size: var(--form-helper-font-size);
   --number-input-field-error-font-size: var(--form-error-font-size);

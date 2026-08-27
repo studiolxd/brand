@@ -1,9 +1,21 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-message-composer-gap: 0.5rem; // Separación entre textarea y botón
-$lxd-message-composer-padding-block: 0.75rem; // Padding vertical del contenedor
-$lxd-message-composer-padding-inline: 1rem; // Padding horizontal del contenedor
-$lxd-message-composer-border-radius: 0px; // Radio del contenedor — cascada desde textarea
-$lxd-message-composer-border-color: #111e30; // Color del borde — cascada desde textarea
-$lxd-message-composer-bg: #ffffff; // Fondo del composer — cascada desde textarea
+$lxd-message-composer-gap: 0.5rem; // Separación entre el campo y los botones dentro del marco
+$lxd-message-composer-padding-block: 0.75rem; // Aire vertical del marco
+$lxd-message-composer-padding-inline: 1rem; // Aire horizontal del marco
+$lxd-message-composer-border-radius: 0px; // Radio del marco — cascada desde textarea
+$lxd-message-composer-border-width: 1px; // Grosor del marco — cascada desde textarea
+$lxd-message-composer-border-style: solid; // Estilo del marco — cascada desde textarea
+$lxd-message-composer-border-color: #111e30; // Color del marco — cascada desde textarea
+$lxd-message-composer-bg: #ffffff; // Fondo del marco — cascada desde textarea
+$lxd-message-composer-focus-border-color: #111e30; // Color del marco con el foco dentro — cascada desde textarea
+$lxd-message-composer-focus-ring-width: 2px; // Grosor del anillo de foco. Lo dibuja el marco, no el campo: el campo va en variante `bare`
+$lxd-message-composer-focus-ring-inset-offset: 1px; // Separación entre el marco y el anillo de foco
+$lxd-message-composer-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-message-composer-disabled-bg: #f2f2f2; // Fondo del marco deshabilitado — cascada desde textarea
+$lxd-message-composer-disabled-border-color: #d0d0d0; // Color del marco deshabilitado — cascada desde textarea
+$lxd-message-composer-helper-gap: 0.5rem; // Separación entre el marco y la línea de ayuda
+$lxd-message-composer-helper-line-height: 1.65; // Interlineado de la línea de ayuda: holgado, porque lleva teclas dentro y en pantalla estrecha rompe en dos renglones
+$lxd-message-composer-helper-font-size: 0.875rem; // Cuerpo de la línea de ayuda: un peldaño por debajo del texto de la superficie
+$lxd-message-composer-helper-color: #4a4a4a; // Tinta de la línea de ayuda

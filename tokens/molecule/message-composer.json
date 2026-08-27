@@ -1,10 +1,33 @@
 {
   "message-composer": {
-    "gap":            { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Separación entre textarea y botón" },
-    "padding-block":  { "$value": "{spacing.3}",           "$type": "dimension", "$description": "Padding vertical del contenedor" },
-    "padding-inline": { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Padding horizontal del contenedor" },
-    "border-radius":  { "$value": "{textarea.border-radius}", "$type": "dimension", "$description": "Radio del contenedor — cascada desde textarea" },
-    "border-color":   { "$value": "{textarea.border-color}", "$type": "color",     "$description": "Color del borde — cascada desde textarea" },
-    "bg":             { "$value": "{textarea.bg}",          "$type": "color",     "$description": "Fondo del composer — cascada desde textarea" }
+    "gap":               { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Separación entre el campo y los botones dentro del marco" },
+    "padding-block":     { "$value": "{spacing.3}",                      "$type": "dimension", "$description": "Aire vertical del marco" },
+    "padding-inline":    { "$value": "{spacing.4}",                      "$type": "dimension", "$description": "Aire horizontal del marco" },
+    "border-radius":     { "$value": "{textarea.border-radius}",         "$type": "dimension", "$description": "Radio del marco — cascada desde textarea" },
+    "border-width":      { "$value": "{textarea.border-width}",          "$type": "dimension", "$description": "Grosor del marco — cascada desde textarea" },
+    "border-style":      { "$value": "{textarea.border-style}",          "$type": "string",    "$description": "Estilo del marco — cascada desde textarea" },
+    "border-color":      { "$value": "{textarea.border-color}",          "$type": "color",     "$description": "Color del marco — cascada desde textarea" },
+    "bg":                { "$value": "{textarea.bg}",                    "$type": "color",     "$description": "Fondo del marco — cascada desde textarea" },
+
+    "focus-border-color":      { "$value": "{textarea.focus-border-color}",      "$type": "color",     "$description": "Color del marco con el foco dentro — cascada desde textarea" },
+    "focus-ring-width":        { "$value": "{textarea.focus-ring-width}",        "$type": "dimension", "$description": "Grosor del anillo de foco. Lo dibuja el marco, no el campo: el campo va en variante `bare`" },
+    "focus-ring-inset-offset": { "$value": "{textarea.focus-ring-inset-offset}", "$type": "dimension", "$description": "Separación entre el marco y el anillo de foco" },
+    "focus-ring-color":        { "$value": "{textarea.focus-ring-color}",        "$type": "color",     "$description": "Color del anillo de foco" },
+
+    "disabled-bg":           { "$value": "{textarea.disabled-bg}",           "$type": "color", "$description": "Fondo del marco deshabilitado — cascada desde textarea" },
+    "disabled-border-color": { "$value": "{textarea.disabled-border-color}", "$type": "color", "$description": "Color del marco deshabilitado — cascada desde textarea" },
+
+    "helper-gap":         { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Separación entre el marco y la línea de ayuda" },
+    "helper-line-height": { "$value": "{line-height.relaxed}",            "$type": "number",    "$description": "Interlineado de la línea de ayuda: holgado, porque lleva teclas dentro y en pantalla estrecha rompe en dos renglones" },
+    "helper-font-size":   { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo de la línea de ayuda: un peldaño por debajo del texto de la superficie" },
+    "helper-color":       { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Tinta de la línea de ayuda" },
+
+    "surface-dark-bg":                    { "$value": "{color.background.dark}",   "$type": "color", "$description": "Fondo del marco — superficie oscura" },
+    "surface-dark-border-color":          { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del marco — superficie oscura" },
+    "surface-dark-focus-border-color":    { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del marco con el foco dentro — superficie oscura" },
+    "surface-dark-focus-ring-color":      { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del anillo de foco — superficie oscura" },
+    "surface-dark-helper-color":          { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta de la línea de ayuda — superficie oscura" },
+    "surface-dark-disabled-bg":           { "$value": "{color.grey-darkest}",      "$type": "color", "$description": "Fondo del marco deshabilitado — superficie oscura" },
+    "surface-dark-disabled-border-color": { "$value": "{color.grey-dark}",         "$type": "color", "$description": "Color del marco deshabilitado — superficie oscura" }
   }
 }

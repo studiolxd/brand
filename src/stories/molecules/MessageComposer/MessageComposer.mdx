@@ -1,0 +1,92 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as MessageComposerStories from "./MessageComposer.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { messageComposerTokens, messageComposerFocusTokens, messageComposerHelperTokens, messageComposerDarkTokens } from "../../../tokens/components/message-composer";
+
+<Meta of={MessageComposerStories} />
+
+# MessageComposer
+
+La **caja de escribir de un chat**: el campo, el botón de enviar y la línea que cuenta el atajo de teclado, todo dentro de un solo marco.
+
+Es un componente **controlado**: `value` y `onChange` los lleva el producto, y `onSend` se dispara cuando el mensaje sale.
+
+<Canvas of={MessageComposerStories.PorDefecto} />
+
+## Un marco, no dos cajas
+
+Dentro hay dos controles —el campo y el botón— pero se leen como una sola caja. Para eso el campo es un **`Textarea` en variante `bare`**: renuncia a su borde, su fondo, su aire, su altura mínima y su anillo de foco, y todo eso lo dibuja el composer.
+
+Antes esto se resolvía **pisando el átomo desde fuera** (`.message-composer .textarea { border: none; box-shadow: none }`), que es el mismo antipatrón que se corrigió en `AppHeader` con `UserMenu` y `OrgSwitcher`. La variante la da el átomo; el vecino no le escribe el CSS.
+
+La consecuencia visible es el **foco**: lo dibuja el marco con `:focus-within`, no el campo. Así el anillo rodea la caja entera —incluido el botón— en vez de recortar el campo por dentro.
+
+<Canvas of={MessageComposerStories.ConTexto} />
+
+## El botón de enviar
+
+<Canvas of={MessageComposerStories.Vacio} />
+
+Sin texto —o solo con espacios— el botón está apagado y `Enter` no hace nada.
+
+El botón **se llama como lo que pone**. Antes tenía texto «Enviar» y `aria-label="Enviar mensaje"` a la vez: el `aria-label` sustituye al nombre visible, así que quien dictaba «Enviar» no activaba un control llamado «Enviar mensaje». Es la regla WCAG *label in name*, y por eso `sendAriaLabel` ya no existe: se traduce `sendLabel` y punto.
+
+<Canvas of={MessageComposerStories.ConAcciones} />
+
+`actions` cuelga más controles a la derecha del botón: un «Detener» mientras el modelo responde, un selector de modelo, un adjuntar.
+
+## El atajo, escrito
+
+<Canvas of={MessageComposerStories.OtraAyuda} />
+
+`Enter` envía y `Mayús + Enter` salta de línea. Eso **no se adivina**, así que va escrito bajo el marco con las teclas de verdad (`Kbd`), y la línea está enlazada al campo con `aria-describedby`: quien usa lector de pantalla la oye al entrar en el campo.
+
+`helperText` sustituye esa línea —para un aviso propio del producto, por ejemplo— y `null` la quita del todo, con lo que también desaparece el `aria-describedby`.
+
+<Canvas of={MessageComposerStories.SinAyuda} />
+
+## Deshabilitado
+
+<Canvas of={MessageComposerStories.Deshabilitado} />
+
+`disabled` apaga el campo y el botón a la vez, y el marco entero se pinta de deshabilitado. Es el estado mientras el modelo responde.
+
+## Superficie oscura
+
+<Canvas of={MessageComposerStories.SuperficieOscura} />
+
+Marco, fondo, anillo de foco y línea de ayuda tienen par oscuro.
+
+## Accesibilidad
+
+- **El campo necesita nombre**: `inputLabel` (o `inputLabelledBy`, o un `<label htmlFor>` externo apuntando a `inputId`). Sin nombre, un campo de texto es un cuadro anónimo.
+- **El nombre del botón es su texto visible.** Nada de `aria-label` que lo contradiga.
+- **El atajo está escrito y enlazado** con `aria-describedby`, no solo implementado.
+- **El foco se ve en el marco**, que es la caja que el ojo lee como el control.
+- El campo no crece con asa de redimensionado (`bare` la quita): rompería la caja. Crece con el contenido según `rows`.
+
+## Tokens
+
+### Del marco
+
+<TokenTable tokens={messageComposerTokens} />
+
+### Foco
+
+<TokenTable tokens={messageComposerFocusTokens} />
+
+### Línea de ayuda
+
+<TokenTable tokens={messageComposerHelperTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={messageComposerDarkTokens} />
+
+## Props
+
+<ArgTypes of={MessageComposerStories} />
+
+## Internacionalización
+
+`placeholder`, `sendLabel` y `helperText` traen default castellano y se traducen pasándolos. Ver **Foundations › Internacionalización**.
