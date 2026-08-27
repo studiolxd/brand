@@ -138,6 +138,21 @@ export const SelectAndDisplay: Story = {
   },
 };
 
+/** Test: el panel del calendario es un diálogo con nombre accesible (`calendarLabel`). */
+export const ContratoNombreAccesible: Story = {
+  name: 'Test — nombre accesible del panel',
+  tags: ['!dev'],
+  render: (args) => <DatePicker {...args} value={null} />,
+  play: async ({ canvas, canvasElement }) => {
+    const trigger = canvas.getByRole('button');
+    await userEvent.click(trigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const panel = body.getByRole('dialog', { name: 'Calendario' });
+    await expect(panel).toBeInTheDocument();
+  },
+};
+
 /** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
 export const ContratoTalla: Story = {
   name: 'Test — talla del sistema',

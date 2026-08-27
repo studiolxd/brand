@@ -24,6 +24,8 @@ export interface DatePickerProps {
   'aria-describedby'?: string;
   /** Nombre accesible cuando el control va suelto. En un campo lo nombra la etiqueta. */
   'aria-label'?: string;
+  /** Nombre accesible del panel del calendario (`role="dialog"`). */
+  calendarLabel?: string;
   /** Nombre del campo en el formulario: se monta un input oculto con la fecha en ISO. */
   name?: string;
   /** Se llama al salir del disparador (react-hook-form lo usa para validar). */
@@ -62,6 +64,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
   describedBy,
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
+  calendarLabel = 'Calendario',
   onBlur,
   className,
 }: DatePickerProps, ref) {
@@ -125,6 +128,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
       )}
     <Popover
       trigger={trigger}
+      label={calendarLabel}
       open={open}
       onOpenChange={handleOpenChange}
       side="bottom"
