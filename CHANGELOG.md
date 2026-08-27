@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.3.0
+
+### Añadido
+
+- `PasswordField` admite `action`: una acción bajo el campo, a la derecha
+  («¿Olvidaste tu contraseña?»), en cuerpo de ayuda (`action-font-size`).
+
 ## v19.2.0
 
 ### Añadido

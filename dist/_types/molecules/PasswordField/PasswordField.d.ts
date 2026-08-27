@@ -14,6 +14,8 @@ export interface PasswordFieldProps extends Omit<React.ComponentPropsWithoutRef<
     errorMessage?: string;
     /** Texto de ayuda propio del componente. */
     helperText?: string;
+    /** Una acción bajo el campo, a la derecha: «¿Olvidaste tu contraseña?» (un `Link` del router). */
+    action?: React.ReactNode;
     /** Tamaño del campo. */
     size?: 'sm' | 'md' | 'lg';
     /** aria-label del toggle cuando la contraseña está oculta. Default: "Mostrar contraseña". */
