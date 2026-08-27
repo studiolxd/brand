@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v23.0.0
+
+### Eliminado (breaking)
+
+- `Header` (la cabecera legacy de studiolxd.com), sus tokens `header.*`
+  (`--header-height-overlay/inline`, `--header-nav-*`…) y `header.css`.
+  La cabecera pública es `SiteHeader` + `SiteNav`.
+- Plantillas de página `Home`, `Content`, `Article` y `Legal` (montaban el
+  `Header`; ningún producto las consumía) y sus CSS `article-template.css`,
+  `content-template.css`, `legal-template.css`. Las secciones que usaban
+  (`ClientsSection`, `Footer`…) siguen.
+
 ## v22.6.1
 
 ### Corregido

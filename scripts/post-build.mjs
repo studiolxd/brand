@@ -5,16 +5,12 @@ const sectionCss = {
   'clients-section':     'src/stories/sections/ClientsSection/ClientsSection.css',
   'contact-section':     'src/stories/sections/ContactSection/ContactSection.css',
   'footer':              'src/stories/sections/Footer/Footer.css',
-  'header':              'src/stories/sections/Header/Header.css',
   'highlight-section':   'src/stories/sections/HighlightSection/HighlightSection.css',
   'methodology-section': 'src/stories/sections/MethodologySection/MethodologySection.css',
   'projects-section':    'src/stories/sections/ProjectsSection/ProjectsSection.css',
   'reviews-section':     'src/stories/sections/ReviewsSection/ReviewsSection.css',
   'solutions-section':   'src/stories/sections/SolutionsSection/SolutionsSection.css',
   'courses-section':     'src/stories/sections/CoursesSection/CoursesSection.css',
-  'article-template':    'src/stories/pages/Article/Article.css',
-  'legal-template':      'src/stories/pages/Legal/Legal.css',
-  'content-template':    'src/stories/pages/Content/Content.css',
 };
 
 const dist = 'dist';
