@@ -61,7 +61,7 @@ export function LegalFooter({
         <ul className="legal-footer__links">
           {links.map((link) => (
             <li key={link.id}>
-              {renderLink({ href: link.href, className: 'legal-footer__link', children: link.label })}
+              {renderLink({ href: link.href, className: 'legal-footer__link link--ink', children: link.label })}
             </li>
           ))}
         </ul>

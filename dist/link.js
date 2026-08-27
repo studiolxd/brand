@@ -5,35 +5,39 @@ import { Fragment as t, jsx as n, jsxs as r } from "react/jsx-runtime";
 import { forwardRef as i } from "react";
 import { useRender as a } from "@base-ui-components/react/use-render";
 //#region src/stories/atoms/Link/Link.tsx
-var o = i(function({ href: i, children: o, external: s = !1, icon: c, iconPosition: l = "start", render: u, className: d, ...f }, p) {
-	let m = [c ? "link--with-icon" : "", d].filter(Boolean).join(" ") || void 0, h = c ? /* @__PURE__ */ n(e, {
-		name: c,
+var o = i(function({ href: i, children: o, external: s = !1, tone: c = "accent", icon: l, iconPosition: u = "start", render: d, className: f, ...p }, m) {
+	let h = [
+		c === "ink" ? "link--ink" : "",
+		l ? "link--with-icon" : "",
+		f
+	].filter(Boolean).join(" ") || void 0, g = l ? /* @__PURE__ */ n(e, {
+		name: l,
 		size: "sm",
 		className: "link__icon"
-	}) : null, g = /* @__PURE__ */ r(t, { children: [
-		l === "start" && h,
+	}) : null, _ = /* @__PURE__ */ r(t, { children: [
+		u === "start" && g,
 		o,
-		l === "end" && h
+		u === "end" && g
 	] });
 	return a({
-		render: u,
-		ref: p,
-		enabled: u !== void 0,
+		render: d,
+		ref: m,
+		enabled: d !== void 0,
 		props: {
-			className: m,
-			...f,
-			children: g
+			className: h,
+			...p,
+			children: _
 		}
 	}) || /* @__PURE__ */ n("a", {
-		ref: p,
+		ref: m,
 		href: i,
-		className: m,
+		className: h,
 		...s ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		...f,
-		children: g
+		...p,
+		children: _
 	});
 });
 //#endregion

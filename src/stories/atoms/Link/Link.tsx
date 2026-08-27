@@ -9,6 +9,13 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
   children: React.ReactNode;
   /** Abre en nueva pestaña con `rel="noopener noreferrer"`. */
   external?: boolean;
+  /**
+   * Tono. `accent` (por defecto): el enlace de texto y de acción — prusia con
+   * línea en claro, amarillo con línea en hover en oscuro. `ink`: el enlace
+   * utilitario (legal, volver, ¿olvidaste la contraseña?) — tinta, línea en
+   * reposo y ninguna en hover, en las dos superficies.
+   */
+  tone?: 'accent' | 'ink';
   /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */
   icon?: IconName;
   /** Dónde va el icono: delante (`start`, por defecto) o detrás del texto. */
@@ -26,10 +33,10 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
  * hace falta: un `<Link>` de Next.js ya es un `<a>` y hereda la misma cara.
  */
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
-  { href, children, external = false, icon, iconPosition = 'start', render, className, ...rest },
+  { href, children, external = false, tone = 'accent', icon, iconPosition = 'start', render, className, ...rest },
   ref,
 ) {
-  const classes = [icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ') || undefined;
+  const classes = [tone === 'ink' ? 'link--ink' : '', icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ') || undefined;
   const glyph = icon ? <Icon name={icon} size="sm" className="link__icon" /> : null;
   const content = (
     <>

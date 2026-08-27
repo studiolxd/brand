@@ -5,6 +5,7 @@
 :root {
   --link-hover-underline-width: 0px; /** Grosor de la línea en hover (en claro desaparece) */
   --link-cursor: pointer; /** Cursor */
+  --link-ink-hover-underline-width: 0px; /** Tono ink: sin línea en hover */
   --link-underline-offset: var(--spacing-1); /** Separación entre el texto y la línea */
   --link-icon-gap: var(--spacing-2); /** Aire entre el icono y el texto del enlace */
   --link-color: var(--color-text-on-light); /** El enlace no tiene color propio: es texto, y lo distingue el subrayado */
@@ -13,6 +14,8 @@
   --link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --link-focus-ring-offset: var(--border-width-default); /** Separación entre el enlace y el anillo */
   --link-focus-ring-color: var(--color-primary); /** Anillo de foco */
+  --link-ink-color: var(--color-text-on-light); /** Tono ink (enlaces utilitarios: legal, volver, ¿olvidaste…?): tinta */
+  --link-ink-underline-width: var(--border-width-default); /** Tono ink: línea en reposo, en las dos superficies */
 }
 
 .surface-dark,
@@ -23,4 +26,5 @@ html.dark {
   --link-hover-color: var(--color-accent-2); /** Hover — surface-dark: amarillo, con línea */
   --link-hover-underline-width: var(--border-width-default); /** Línea en hover — surface-dark */
   --link-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+  --link-ink-color: var(--color-text-on-dark); /** Tono ink — surface-dark: blanco, no amarillo */
 }

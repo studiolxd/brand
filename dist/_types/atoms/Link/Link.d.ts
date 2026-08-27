@@ -6,6 +6,13 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
     children: React.ReactNode;
     /** Abre en nueva pestaña con `rel="noopener noreferrer"`. */
     external?: boolean;
+    /**
+     * Tono. `accent` (por defecto): el enlace de texto y de acción — prusia con
+     * línea en claro, amarillo con línea en hover en oscuro. `ink`: el enlace
+     * utilitario (legal, volver, ¿olvidaste la contraseña?) — tinta, línea en
+     * reposo y ninguna en hover, en las dos superficies.
+     */
+    tone?: 'accent' | 'ink';
     /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */
     icon?: IconName;
     /** Dónde va el icono: delante (`start`, por defecto) o detrás del texto. */

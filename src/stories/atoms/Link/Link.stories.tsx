@@ -71,3 +71,13 @@ export const ConIcono: Story = {
 export const ConRender: Story = {
   render: () => <Link icon="arrow-left" render={<a href="#acceso" data-router="sí" />}>Volver a iniciar sesión</Link>,
 };
+
+/** Dos tonos: `accent` para texto y acciones; `ink` para lo utilitario (legal, volver, ¿olvidaste la contraseña?). */
+export const Tonos: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 'var(--spacing-5)' }}>
+      <Link href="#registro">Regístrate</Link>
+      <Link href="#recuperar" tone="ink">¿Olvidaste tu contraseña?</Link>
+    </div>
+  ),
+};

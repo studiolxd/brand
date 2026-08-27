@@ -27,7 +27,7 @@ function a({ label: a = "Legal", title: o, links: s, renderLink: c = i, width: l
 				className: "legal-footer__links",
 				children: s.map((e) => /* @__PURE__ */ n("li", { children: c({
 					href: e.href,
-					className: "legal-footer__link",
+					className: "legal-footer__link link--ink",
 					children: e.label
 				}) }, e.id))
 			})

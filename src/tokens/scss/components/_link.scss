@@ -11,3 +11,6 @@ $lxd-link-cursor: pointer; // Cursor
 $lxd-link-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-link-focus-ring-offset: 1px; // Separación entre el enlace y el anillo
 $lxd-link-focus-ring-color: #111e30; // Anillo de foco
+$lxd-link-ink-color: #111e30; // Tono ink (enlaces utilitarios: legal, volver, ¿olvidaste…?): tinta
+$lxd-link-ink-underline-width: 1px; // Tono ink: línea en reposo, en las dos superficies
+$lxd-link-ink-hover-underline-width: 0px; // Tono ink: sin línea en hover

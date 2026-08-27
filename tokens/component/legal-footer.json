@@ -19,26 +19,6 @@
       "$value": "{spacing.3}",
       "$type": "dimension",
       "$description": "Separación entre enlaces apilados (móvil, por debajo de md)"
-    },
-    "link-underline-width": {
-      "$value": "{border-width.default}",
-      "$type": "dimension",
-      "$description": "Los enlaces legales llevan línea en reposo (en las dos superficies)"
-    },
-    "link-hover-underline-width": {
-      "$value": "0px",
-      "$type": "dimension",
-      "$description": "…y ninguna en hover"
-    },
-    "surface-dark-link-color": {
-      "$value": "{color.text.on-dark}",
-      "$type": "color",
-      "$description": "Enlaces legales — surface-dark: blanco (tinta), no amarillo"
-    },
-    "link-color": {
-      "$value": "{color.text.on-light}",
-      "$type": "color",
-      "$description": "Enlaces legales: tinta"
     }
   }
 }

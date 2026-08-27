@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.2.0
+
+### Añadido
+
+- `Link` con `tone`: `accent` (por defecto: texto y acciones) e `ink` (utilitario:
+  legal, volver, ¿olvidaste la contraseña? — tinta, línea en reposo y ninguna en
+  hover, igual en claro y oscuro). Tokens `link.ink-*`. `LegalFooter` usa `ink`
+  (fuera sus tokens de enlace propios de v22.1.0).
+
 ## v22.1.0
 
 ### Cambiado
