@@ -3,8 +3,9 @@
  */
 
 :root {
-  --modal-width-max: 560px; /** Anchura máxima del panel */
-  --modal-max-height: 90dvh; /** Altura máxima del panel modal (dvh para móviles con barra de navegador variable) */
+  --modal-border-color: rgba(0, 0, 0, 0); /** Sin borde en superficie clara: el velo y el fondo blanco ya separan el panel */
+  --modal-width-max: 560px; /** Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente */
+  --modal-max-height: 90dvh; /** Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max */
   --modal-z-index: var(--z-index-modal); /** z-index del panel modal */
   --modal-backdrop-z-index: var(--z-index-backdrop); /** z-index del backdrop */
   --modal-backdrop-bg: var(--color-black); /** Color del backdrop/scrim */
@@ -15,15 +16,14 @@
   --modal-title-font-size: var(--font-size-6); /** Tamaño del título (2rem) */
   --modal-transition-duration: var(--motion-duration-base); /** Duración de la animación entrada/salida */
   --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
-  --modal-close-color: var(--color-grey-dark); /** Color del botón de cierre */
-  --modal-close-hover-bg: var(--color-grey-lightest); /** Fondo del botón de cierre en hover */
+  --modal-content-enter-offset: var(--spacing-2); /** Desplazamiento vertical del panel al entrar/salir (8px) */
   --modal-description-margin-block-end: var(--spacing-4); /** Separación entre la descripción y el cuerpo del modal */
   --modal-bg: var(--color-background-light); /** Fondo del panel modal */
+  --modal-border-width: var(--border-width-default); /** Grosor del borde del panel */
   --modal-border-radius: var(--border-radius-default); /** Radio del panel */
   --modal-shadow: var(--shadow-default); /** Sombra de elevación */
   --modal-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
   --modal-title-color: var(--color-text-on-light); /** Color del título */
-  --modal-close-hover-color: var(--color-text-on-light); /** Color del botón de cierre en hover */
   --modal-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --modal-description-color: var(--color-text-muted-on-light); /** Color de la descripción del modal */
 }
@@ -31,10 +31,8 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --modal-close-hover-bg: rgba(255, 255, 255, 0.1); /** Fondo del botón de cierre en hover — surface-dark */
   --modal-bg: var(--color-background-dark); /** Fondo del panel — surface-dark */
   --modal-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
-  --modal-close-color: var(--color-text-on-dark); /** Color del botón de cierre — surface-dark */
-  --modal-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover — surface-dark */
+  --modal-border-color: var(--color-text-on-dark); /** Borde 1px — surface-dark: separa el panel del velo, que también es oscuro */
   --modal-description-color: var(--color-text-muted-on-dark); /** Color de la descripción — surface-dark */
 }

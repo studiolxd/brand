@@ -1,0 +1,97 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ModalStories from "./Modal.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { modalTokens, modalDarkTokens } from "../../../tokens/components/modal";
+
+<Meta of={ModalStories} />
+
+# Modal
+
+Un diálogo centrado que **exige una decisión** antes de que el usuario pueda
+volver a la página: atrapa el foco, bloquea el scroll y bloquea la
+interacción con lo que hay detrás, tras un velo. Es la base de `Sheet`,
+`ImageCropDialog` y `CommandPalette`.
+
+- Para un aviso que convive con la página, `Alert`.
+- Para un panel lateral que deja ver el contexto, `Sheet`.
+
+<Canvas of={ModalStories.WithForm} />
+
+## Anatomía
+
+Base UI `Dialog` aporta el portal, el velo, la trampa de foco y el cierre con
+Escape o clic fuera; el DS pone la superficie, el título y el aspa.
+
+- **Título** (`title`): opcional. Sin él, `fallbackTitle` (default «Diálogo»)
+  se renderiza oculto solo para el nombre accesible — el modal siempre tiene
+  uno, lo vea o no el usuario.
+- **Cierre**: `Dialog.Close` compuesto con `<Button variant="ghost" size="sm" iconOnly>`
+  vía `render` (mismo patrón que `Alert`/`Toast`) — color, hover y anillo de
+  foco los pone `Button`, no el modal.
+- **Descripción** (`description` o `aria-describedby`): opcional, bajo el
+  título.
+- **Cuerpo** (`children`): con scroll propio si el contenido no cabe.
+
+<Canvas of={ModalStories.NoTitle} />
+<Canvas of={ModalStories.WithDescription} />
+<Canvas of={ModalStories.WithExternalDescription} />
+
+## Confirmación
+
+<Canvas of={ModalStories.Confirm} />
+
+## Contenido largo
+
+<Canvas of={ModalStories.WithLongContent} />
+
+## Con campos async
+
+<Canvas of={ModalStories.WithAsyncSelect} />
+
+## Superficie oscura
+
+<Canvas of={ModalStories.SuperficieOscura} />
+
+El modal se monta vía el `Portal` de Base UI en `document.body`: el decorator
+`withSurface` activa `data-theme="dark"` en `document.documentElement`
+(no envuelve la story en `.surface-dark`), así que las custom properties
+`surface-dark-*` cascadean por herencia hasta el portal sin configuración
+adicional.
+
+En superficie oscura el panel lleva **borde 1px** (`surface-dark-border-color`,
+blanco) — en superficie clara el token vale `transparent`: el velo y el fondo
+blanco ya separan el panel sin necesidad de contorno.
+
+## Textos personalizados (i18n)
+
+<Canvas of={ModalStories.CustomLabels} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={modalTokens} />
+
+`width-max` (560px) y `max-height` (90dvh) son medidas de layout — como
+`container.max-width-*` — no de la escala de espaciado ni de tallas de
+componente: por eso van sueltas y no a un token de espaciado.
+
+### Superficie oscura
+
+<TokenTable tokens={modalDarkTokens} />
+
+## Accesibilidad
+
+- **Nombre accesible siempre presente**: con `title`, es el propio texto
+  visible; sin él, `fallbackTitle` se renderiza con `VisuallyHidden`.
+- **Descripción**: `description` monta `Dialog.Description`, que Base UI
+  enlaza automáticamente por `aria-describedby`. Para un adaptador que
+  renderiza su propio nodo de descripción dentro de `children` (como
+  `ImageCropDialog`), pásale el id por la prop `aria-describedby` en su lugar
+  — tiene prioridad sobre `description` si se pasan ambas.
+- **Foco**: Base UI atrapa el foco dentro del panel y lo devuelve al elemento
+  que abrió el modal al cerrarlo. `initialFocus={false}` deja que el propio
+  contenido decida qué recibe el foco inicial en vez de forzarlo al primer
+  elemento focable.
+- **Cierre**: Escape, clic en el velo o el aspa. El aspa es un `Button` de
+  32px (`sm`) — la talla mínima del sistema — con su propio anillo de foco.

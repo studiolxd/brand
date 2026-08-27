@@ -14,6 +14,8 @@ componente al revisarlo — no con un gris de fondo por defecto. Hoy lo usan as�
 - [ ] hover de ítem: ContextMenu, UserMenu, OrgSwitcher, SidebarNav,
       ConversationList, Calendar (día y
       nav), CalendarPlanner, CalendarRoster, Modal (cierre), DotsButton,
+      ConversationList, Table (fila y cabecera), Calendar (día y
+      nav), CalendarPlanner, CalendarRoster, DotsButton,
       NumberInput, Button (variante con hover gris)
 - [ ] activo: OrgSwitcher, ConversationList
 - [ ] deshabilitado: Button, Input, Textarea
@@ -47,6 +49,11 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
       `surface.secondary-on-light`.
 - [ ] **Modal** — `close-color` (grey-dark) sobre `close-hover-bg`
       (grey-lightest). Ídem, icono.
+- [ ] **Table** — `sort-icon-color` (grey-dark) sobre `header-hover-bg`
+      (grey-lightest). Icono: pasa a 3:1, pero rompe la regla.
+- [x] **Modal** — resuelto (2026-08-27, tanda 3): el aspa pasa a `Button ghost`
+      `sm` `iconOnly` (precedente de `Alert`/`Toast`); `close-color`,
+      `close-hover-color` y `close-hover-bg` se retiran del JSON.
 - [ ] **Calendar / CalendarPlanner / CalendarRoster** — `outside-color`
       (grey-dark) es texto (los días fuera de mes se leen): → grey-darkest.
       `disabled-color` puede quedarse: deshabilitado, exento.
@@ -213,8 +220,10 @@ Regla: nada proyecta sombra (`shadow.default` = none). La elevación es fondo +
 borde 1px (+ velo en modales). Ya repuntado en tokens; al revisar cada uno,
 comprobar que sigue separándose de lo que tiene debajo:
 
-- [ ] **Modal** (tenía `xl`) — el velo hace el trabajo; comprobar borde en
-      superficie oscura.
+- [x] **Modal** (tenía `xl`) — hecho (2026-08-27, tanda 3): el velo hace el
+      trabajo en claro (`border-color: transparent`); en `surface-dark` el
+      panel lleva borde 1px blanco (`surface-dark-border-color`) que lo
+      separa del velo, también oscuro.
 - [x] **Toast** (tenía `lg`) — hecho (2026-08-27): fuera el token `toast.shadow`;
       el borde es el del `Alert` (1px, blanco en el neutro), que separa el aviso
       del contenido sobre el que flota en claro y en oscuro.
