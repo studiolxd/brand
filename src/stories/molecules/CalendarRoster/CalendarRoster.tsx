@@ -1,7 +1,8 @@
-import type { ComponentType, ReactNode } from 'react';
-import { Icon } from '../../atoms/Icon/Icon';
+import type { ComponentType, MouseEvent, ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
 import type { TagVariant } from '../../atoms/Tag/Tag';
+import { PrevNextNav } from '../PrevNextNav/PrevNextNav';
+import { isSameDay, shiftMonth } from '../_shared/calendarGrid';
 import './CalendarRoster.css';
 
 export type RosterCellType =
@@ -87,14 +88,6 @@ export interface CalendarRosterProps {
   className?: string;
 }
 
-function isSameDay(a: Date, b: Date): boolean {
-  return (
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate()
-  );
-}
-
 function isWeekend(date: Date): boolean {
   const d = date.getDay();
   return d === 0 || d === 6;
@@ -140,46 +133,26 @@ export function CalendarRoster({
   nextMonthLabel = 'Mes siguiente',
   className,
 }: CalendarRosterProps) {
-  const A = linkComponent ?? 'a';
   const today = new Date();
   const days = getDaysInMonth(month);
 
-  const prevMonth = new Date(month.getFullYear(), month.getMonth() - 1, 1);
-  const nextMonth = new Date(month.getFullYear(), month.getMonth() + 1, 1);
+  const prevMonth = shiftMonth(month, -1);
+  const nextMonth = shiftMonth(month, 1);
 
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
   const title = titleFormatter.format(month);
 
   const dayLetterFormatter = new Intl.DateTimeFormat(locale, { weekday: 'narrow' });
+  const dayNameFormatter = new Intl.DateTimeFormat(locale, { weekday: 'long' });
 
-  function renderNav(target: Date, direction: 'prev' | 'next') {
-    const label = direction === 'prev' ? previousMonthLabel : nextMonthLabel;
-    const chevronClass = direction === 'prev' ? 'calendar-roster__chevron--prev' : undefined;
-
-    if (hrefBuilder) {
-      return (
-        <A
-          href={hrefBuilder(target)}
-          className="calendar-roster__nav-btn"
-          aria-label={label}
-          onClick={onMonthChange ? (e: React.MouseEvent) => { e.preventDefault(); onMonthChange(target); } : undefined}
-        >
-          <Icon name="chevron" size="sm" className={chevronClass} />
-        </A>
-      );
-    }
-
-    return (
-      <button
-        type="button"
-        className="calendar-roster__nav-btn"
-        aria-label={label}
-        onClick={() => onMonthChange?.(target)}
-      >
-        <Icon name="chevron" size="sm" className={chevronClass} />
-      </button>
-    );
-  }
+  // Con `hrefBuilder` los controles son enlaces de verdad; si además hay
+  // `onMonthChange`, el handler corta la navegación y la resuelve el router.
+  const navHandler = onMonthChange
+    ? (target: Date) => (event: MouseEvent<HTMLElement>) => {
+        if (hrefBuilder) event.preventDefault();
+        onMonthChange(target);
+      }
+    : undefined;
 
   const titleId = `roster-title-${month.getFullYear()}-${month.getMonth()}`;
 
@@ -187,11 +160,17 @@ export function CalendarRoster({
     <div className={['calendar-roster', className].filter(Boolean).join(' ')}>
       {/* Navegación */}
       <div className="calendar-roster__nav">
-        {renderNav(prevMonth, 'prev')}
-        <strong id={titleId} className="calendar-roster__title">
-          {title}
-        </strong>
-        {renderNav(nextMonth, 'next')}
+        <PrevNextNav
+          label={title}
+          labelId={titleId}
+          prevHref={hrefBuilder?.(prevMonth)}
+          nextHref={hrefBuilder?.(nextMonth)}
+          prevOnClick={navHandler?.(prevMonth)}
+          nextOnClick={navHandler?.(nextMonth)}
+          prevLabel={previousMonthLabel}
+          nextLabel={nextMonthLabel}
+          linkComponent={linkComponent}
+        />
       </div>
 
       {/* Tabla con scroll horizontal */}
@@ -215,11 +194,14 @@ export function CalendarRoster({
 
                 const dd = String(day.getDate()).padStart(2, '0');
                 const letter = dayLetterFormatter.format(day);
+                const dayName = dayNameFormatter.format(day);
 
                 return (
                   <th key={day.getDate()} className={thClass} scope="col">
                     <div className="calendar-roster__th-day-number">{dd}</div>
-                    <div className="calendar-roster__th-day-sub">{letter}</div>
+                    <div className="calendar-roster__th-day-sub">
+                      <abbr title={dayName}>{letter}</abbr>
+                    </div>
                   </th>
                 );
               })}

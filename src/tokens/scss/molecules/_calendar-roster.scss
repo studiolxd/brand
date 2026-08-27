@@ -2,16 +2,7 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-calendar-roster-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
-$lxd-calendar-roster-nav-color: #111e30; // Color de los botones prev/next
-$lxd-calendar-roster-nav-hover-bg: #f2f2f2; // Fondo hover de los botones de navegación
-$lxd-calendar-roster-nav-disabled-color: #6b6b6b; // Color deshabilitado
-$lxd-calendar-roster-nav-focus-ring-color: #111e30; // Focus ring de navegación
-$lxd-calendar-roster-nav-focus-ring-width: 2px; // Grosor del focus ring
-$lxd-calendar-roster-nav-focus-ring-offset: 1px; // Separación del focus ring
-$lxd-calendar-roster-nav-radius: 0px; // Radio del botón de navegación
-$lxd-calendar-roster-title-font-size: 1rem; // Tamaño del título del mes
-$lxd-calendar-roster-title-font-weight: 500; // Peso del título del mes
-$lxd-calendar-roster-title-color: #111e30; // Color del título del mes
+$lxd-calendar-roster-radius: 0px; // Radio del marco del cuadrante
 $lxd-calendar-roster-border-color: #111e30; // Color de los bordes del grid
 $lxd-calendar-roster-border-width: 1px; // Grosor de los bordes del grid
 $lxd-calendar-roster-th-name-width: 10rem; // Ancho de la columna de nombre
@@ -23,13 +14,14 @@ $lxd-calendar-roster-th-name-padding-block: 0.5rem; // Padding vertical del enca
 $lxd-calendar-roster-th-name-padding-inline: 0.75rem; // Padding horizontal del encabezado de nombre
 $lxd-calendar-roster-th-day-width: 2.5rem; // Ancho mínimo de cada columna de día
 $lxd-calendar-roster-th-day-font-size: 0.875rem; // Tamaño del número de día
-$lxd-calendar-roster-th-day-sub-font-size: 0.625rem; // Tamaño de la letra del día de semana
+$lxd-calendar-roster-th-day-sub-font-size: 0.75rem; // Tamaño de la letra del día de semana
 $lxd-calendar-roster-th-day-color: #111e30; // Color del encabezado de día
 $lxd-calendar-roster-th-day-padding-block: 0.5rem; // Padding vertical del encabezado de día
 $lxd-calendar-roster-th-day-bg: #ffffff; // Fondo del encabezado de día
 $lxd-calendar-roster-th-day-today-color: #ffffff; // Texto del encabezado del día de hoy
 $lxd-calendar-roster-th-day-today-bg: #111e30; // Fondo del encabezado del día de hoy
 $lxd-calendar-roster-th-day-today-radius: 0px; // Radio del badge del día de hoy
+$lxd-calendar-roster-th-day-today-size: 1.5rem; // Lado del badge del día de hoy
 $lxd-calendar-roster-td-name-font-size: 0.875rem; // Tamaño del nombre del empleado
 $lxd-calendar-roster-td-name-color: #111e30; // Color del nombre del empleado
 $lxd-calendar-roster-td-name-bg: #ffffff; // Fondo sticky de la celda de nombre
@@ -38,17 +30,15 @@ $lxd-calendar-roster-td-name-padding-inline: 0.75rem; // Padding horizontal de l
 $lxd-calendar-roster-cell-padding-block: 0.25rem; // Padding vertical de las celdas de datos
 $lxd-calendar-roster-cell-padding-inline: 0.25rem; // Padding horizontal de las celdas de datos
 $lxd-calendar-roster-cell-bg: #ffffff; // Fondo de celdas de día laborable
-$lxd-calendar-roster-cell-weekend-bg: #f2f2f2; // Fondo de celdas de fin de semana
-$lxd-calendar-roster-cell-holiday-bg: #e5e7eb; // Fondo de celdas festivas
+$lxd-calendar-roster-cell-weekend-bg: #f2f2f2; // Fondo de celdas de fin de semana — superficie secundaria, la misma para todo día no laborable: lo que los distingue es el chip, no el gris
+$lxd-calendar-roster-cell-holiday-bg: #f2f2f2; // Fondo de celdas festivas — misma superficie secundaria; el festivo se nombra con su chip
 $lxd-calendar-roster-cell-non-working-bg: #f2f2f2; // Fondo de celdas no laborables (laborable sin turno asignado)
-$lxd-calendar-roster-schedule-font-size: 0.6875rem; // Tamaño del texto de horario (11px)
+$lxd-calendar-roster-cell-today-outline-width: 2px; // Grosor del recuadro de la columna de hoy
+$lxd-calendar-roster-schedule-font-size: 0.75rem; // Tamaño del texto de horario
 $lxd-calendar-roster-schedule-color: #111e30; // Color del texto de horario
-$lxd-calendar-roster-chip-padding-block: 2px; // Padding vertical del botón de navegación
-$lxd-calendar-roster-chip-padding-inline: 0.25rem; // Gap de la leyenda por item
+$lxd-calendar-roster-legend-item-gap: 0.25rem; // Gap entre el chip y su texto dentro de una entrada de la leyenda
 $lxd-calendar-roster-legend-gap: 0.75rem; // Gap entre elementos de la leyenda
 $lxd-calendar-roster-legend-font-size: 0.875rem; // Tamaño del texto de la leyenda
 $lxd-calendar-roster-legend-color: #4a4a4a; // Color del texto de la leyenda
 $lxd-calendar-roster-legend-swatch-size: 0.75rem; // Tamaño del cuadradito de color en la leyenda
 $lxd-calendar-roster-legend-swatch-radius: 0px; // Radio del cuadradito de color
-$lxd-calendar-roster-transition-duration: 150ms; // Duración de las transiciones
-$lxd-calendar-roster-transition-easing: ease; // Easing de las transiciones

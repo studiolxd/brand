@@ -7,51 +7,11 @@
 
 /* ─── Navigation ──────────────────────────────────────────────────────────── */
 
+/* La navegación de mes es `PrevNextNav`: aquí solo se centra en la banda. */
 .calendar-roster__nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--calendar-roster-legend-gap);
-}
-
-.calendar-roster__title {
-  flex: 1;
-  text-align: center;
-  font-family: var(--calendar-roster-font-family);
-  font-size: var(--calendar-roster-title-font-size);
-  font-weight: var(--calendar-roster-title-font-weight);
-  color: var(--calendar-roster-title-color);
-}
-
-.calendar-roster__nav-btn {
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  padding-block: var(--calendar-roster-chip-padding-block);
-  padding-inline: var(--calendar-roster-chip-padding-block);
-  border: none;
-  border-radius: var(--calendar-roster-nav-radius);
-  background-color: transparent;
-  color: var(--calendar-roster-nav-color);
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: none;
-  transition-property: background-color;
-  transition-duration: var(--calendar-roster-transition-duration);
-  transition-timing-function: var(--calendar-roster-transition-easing);
-}
-
-.calendar-roster__nav-btn:hover {
-  background-color: var(--calendar-roster-nav-hover-bg);
-}
-
-.calendar-roster__nav-btn:focus-visible {
-  outline: var(--calendar-roster-nav-focus-ring-width) solid var(--calendar-roster-nav-focus-ring-color);
-  outline-offset: var(--calendar-roster-nav-focus-ring-offset);
-}
-
-.calendar-roster__chevron--prev {
-  transform: rotate(180deg);
 }
 
 /* ─── Scrollable wrapper ──────────────────────────────────────────────────── */
@@ -60,7 +20,7 @@
   overflow-x: auto;
   overflow-y: visible;
   border: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
-  border-radius: var(--calendar-roster-nav-radius);
+  border-radius: var(--calendar-roster-radius);
 }
 
 /* ─── Table ───────────────────────────────────────────────────────────────── */
@@ -122,13 +82,18 @@
   line-height: 1;
 }
 
+.calendar-roster__th-day-sub abbr {
+  text-decoration: none;
+  cursor: inherit;
+}
+
 /* Today highlight in header */
 .calendar-roster__th-day--today .calendar-roster__th-day-number {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--calendar-roster-th-day-today-size);
+  height: var(--calendar-roster-th-day-today-size);
   border-radius: var(--calendar-roster-th-day-today-radius);
   background-color: var(--calendar-roster-th-day-today-bg);
   color: var(--calendar-roster-th-day-today-color);
@@ -179,8 +144,8 @@
 }
 
 .calendar-roster__cell--today {
-  outline: 2px solid var(--calendar-roster-th-day-today-bg);
-  outline-offset: -2px;
+  outline: var(--calendar-roster-cell-today-outline-width) solid var(--calendar-roster-th-day-today-bg);
+  outline-offset: calc(-1 * var(--calendar-roster-cell-today-outline-width));
 }
 
 /* ─── Schedule text ───────────────────────────────────────────────────────── */
@@ -203,7 +168,7 @@
 .calendar-roster__legend-item {
   display: inline-flex;
   align-items: center;
-  gap: var(--calendar-roster-chip-padding-inline);
+  gap: var(--calendar-roster-legend-item-gap);
   font-size: var(--calendar-roster-legend-font-size);
   color: var(--calendar-roster-legend-color);
 }

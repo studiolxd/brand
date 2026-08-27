@@ -1,0 +1,73 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CalendarRosterStories from "./CalendarRoster.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { calendarRosterTokens, calendarRosterDarkTokens } from "../../../tokens/molecules/calendar-roster";
+
+<Meta of={CalendarRosterStories} />
+
+# CalendarRoster
+
+El cuadrante: un mes entero en horizontal, una fila por persona o recurso y una
+columna por día. No es una rejilla de calendario sino una **tabla** —los datos
+se comparan en fila y en columna—, así que se rinde como `<table>` de verdad
+con la columna de nombre fija al hacer scroll.
+
+<Canvas of={CalendarRosterStories.Default} />
+
+## Datos
+
+`rows` es una lista de `{ id, name, cells }`, donde `cells` está indexado por
+número de día (1 = día 1 del mes): solo hay que rellenar los días con dato. El
+`type` de cada celda decide cómo se pinta —`schedule` sale como texto de
+horario, el resto como chip— y `renderCell` sustituye ese contenido sin tocar
+la celda ni sus estados.
+
+## Un solo gris para «no se trabaja»
+
+Fin de semana, festivo y no laborable comparten fondo: la superficie secundaria
+del sistema (`color.surface.secondary-*`). No hay tres grises distintos porque
+el color no es lo que los distingue —lo hace el chip, que los nombra— y tres
+tintes vecinos no se leen como tres categorías, se leen como ruido.
+
+## Navegación de mes
+
+La banda superior es `PrevNextNav`: los mismos dos controles y el mismo rótulo
+que el resto del sistema. Con `hrefBuilder` son enlaces reales (SSR, funciona
+sin JavaScript); con `linkComponent` los rinde el `Link` del router; y con
+`onMonthChange` además el cambio se resuelve en cliente.
+
+<Canvas of={CalendarRosterStories.ConHrefBuilder} />
+
+## Leyenda
+
+<Canvas of={CalendarRosterStories.SinLeyenda} />
+
+## Superficie oscura
+
+<Canvas of={CalendarRosterStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={calendarRosterTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={calendarRosterDarkTokens} />
+
+## Accesibilidad
+
+- Es una `<table>` con `<th scope="col">`: la relación fila/columna la da el
+  marcado, no la maqueta.
+- La tabla toma como nombre el rótulo del mes (`aria-labelledby` sobre el
+  `labelId` de `PrevNextNav`).
+- La inicial del día de la semana lleva el nombre completo en un `<abbr>`.
+- La columna de hoy se recuadra con `cell-today-outline-width`; el recuadro es
+  refuerzo, la fecha ya está escrita en la cabecera.
+- El texto de la leyenda y el de los chips es la fuente de la categoría: el
+  fondo de la celda no la codifica por sí solo.
+
+## Props
+
+<ArgTypes of={CalendarRosterStories} />

@@ -2,17 +2,7 @@
   "calendar-roster": {
     "font-family":               { "$value": "{font-family.sans}",          "$type": "string",    "$description": "Familia tipográfica base" },
 
-    "nav-color":                 { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color de los botones prev/next" },
-    "nav-hover-bg":              { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo hover de los botones de navegación" },
-    "nav-disabled-color":        { "$value": "{color.grey-dark}",            "$type": "color",     "$description": "Color deshabilitado" },
-    "nav-focus-ring-color":      { "$value": "{color.primary}",              "$type": "color",     "$description": "Focus ring de navegación" },
-    "nav-focus-ring-width":      { "$value": "{border-width.focus}",            "$type": "dimension", "$description": "Grosor del focus ring" },
-    "nav-focus-ring-offset":     { "$value": "{border-width.default}",            "$type": "dimension", "$description": "Separación del focus ring" },
-    "nav-radius":                { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del botón de navegación" },
-
-    "title-font-size":           { "$value": "{font-size.2}",                "$type": "dimension", "$description": "Tamaño del título del mes" },
-    "title-font-weight":         { "$value": "{font-weight.emphasis}",           "$type": "number",    "$description": "Peso del título del mes" },
-    "title-color":               { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del título del mes" },
+    "radius":                    { "$value": "{border-radius.default}",      "$type": "dimension", "$description": "Radio del marco del cuadrante" },
 
     "border-color":              { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de los bordes del grid" },
     "border-width":              { "$value": "{border-width.default}",            "$type": "dimension", "$description": "Grosor de los bordes del grid" },
@@ -27,14 +17,15 @@
 
     "th-day-width":              { "$value": "2.5rem",                       "$type": "dimension", "$description": "Ancho mínimo de cada columna de día" },
     "th-day-font-size":          { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño del número de día" },
-    "th-day-sub-font-size":      { "$value": "0.625rem",                     "$type": "dimension", "$description": "Tamaño de la letra del día de semana" },
+    "th-day-sub-font-size":      { "$value": "{font-size.0}",                "$type": "dimension", "$description": "Tamaño de la letra del día de semana" },
     "th-day-color":              { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del encabezado de día" },
     "th-day-padding-block":      { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Padding vertical del encabezado de día" },
     "th-day-bg":                 { "$value": "{color.background.light}",     "$type": "color",     "$description": "Fondo del encabezado de día" },
 
     "th-day-today-color":        { "$value": "{color.background.light}",     "$type": "color",     "$description": "Texto del encabezado del día de hoy" },
     "th-day-today-bg":           { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo del encabezado del día de hoy" },
-    "th-day-today-radius":       { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del badge del día de hoy" },
+    "th-day-today-radius":       { "$value": "{border-radius.default}",      "$type": "dimension", "$description": "Radio del badge del día de hoy" },
+    "th-day-today-size":         { "$value": "{spacing.5}",                  "$type": "dimension", "$description": "Lado del badge del día de hoy" },
 
     "td-name-font-size":         { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño del nombre del empleado" },
     "td-name-color":             { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del nombre del empleado" },
@@ -45,28 +36,21 @@
     "cell-padding-block":        { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Padding vertical de las celdas de datos" },
     "cell-padding-inline":       { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Padding horizontal de las celdas de datos" },
     "cell-bg":                   { "$value": "{color.background.light}",     "$type": "color",     "$description": "Fondo de celdas de día laborable" },
-    "cell-weekend-bg":           { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo de celdas de fin de semana" },
-    "cell-holiday-bg":           { "$value": "#E5E7EB",                      "$type": "color",     "$description": "Fondo de celdas festivas" },
-    "cell-non-working-bg":       { "$value": "{color.grey-lightest}",         "$type": "color",     "$description": "Fondo de celdas no laborables (laborable sin turno asignado)" },
+    "cell-weekend-bg":           { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo de celdas de fin de semana — superficie secundaria, la misma para todo día no laborable: lo que los distingue es el chip, no el gris" },
+    "cell-holiday-bg":           { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo de celdas festivas — misma superficie secundaria; el festivo se nombra con su chip" },
+    "cell-non-working-bg":       { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo de celdas no laborables (laborable sin turno asignado)" },
+    "cell-today-outline-width":  { "$value": "{border-width.focus}",         "$type": "dimension", "$description": "Grosor del recuadro de la columna de hoy" },
 
-    "schedule-font-size":        { "$value": "0.6875rem",                    "$type": "dimension", "$description": "Tamaño del texto de horario (11px)" },
+    "schedule-font-size":        { "$value": "{font-size.0}",                "$type": "dimension", "$description": "Tamaño del texto de horario" },
     "schedule-color":            { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del texto de horario" },
 
-    "chip-padding-block":        { "$value": "2px",                          "$type": "dimension", "$description": "Padding vertical del botón de navegación" },
-    "chip-padding-inline":       { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Gap de la leyenda por item" },
-
+    "legend-item-gap":           { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Gap entre el chip y su texto dentro de una entrada de la leyenda" },
     "legend-gap":                { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Gap entre elementos de la leyenda" },
     "legend-font-size":          { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño del texto de la leyenda" },
     "legend-color":              { "$value": "{color.text.muted-on-light}",  "$type": "color",     "$description": "Color del texto de la leyenda" },
     "legend-swatch-size":        { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Tamaño del cuadradito de color en la leyenda" },
     "legend-swatch-radius":      { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del cuadradito de color" },
 
-    "transition-duration":       { "$value": "{motion.duration.fast}",       "$type": "number",    "$description": "Duración de las transiciones" },
-    "transition-easing":         { "$value": "{motion.easing.default}",      "$type": "string",    "$description": "Easing de las transiciones" },
-    "surface-dark-nav-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de navegación — surface-dark" },
-    "surface-dark-nav-hover-bg":         { "$value": "rgba(255, 255, 255, 0.12)",  "$type": "color", "$description": "Fondo hover de navegación — surface-dark" },
-    "surface-dark-nav-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de navegación — surface-dark" },
-    "surface-dark-title-color":          { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del título — surface-dark" },
     "surface-dark-border-color":         { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Color de bordes del grid — surface-dark" },
     "surface-dark-th-name-bg":           { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo columna de nombre — surface-dark" },
     "surface-dark-th-name-color":        { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color columna de nombre — surface-dark" },
@@ -77,8 +61,9 @@
     "surface-dark-td-name-bg":           { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo celda de nombre — surface-dark" },
     "surface-dark-td-name-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color celda de nombre — surface-dark" },
     "surface-dark-cell-bg":              { "$value": "transparent",                "$type": "color", "$description": "Fondo de celdas — surface-dark" },
-    "surface-dark-cell-weekend-bg":      { "$value": "rgba(255, 255, 255, 0.04)",  "$type": "color", "$description": "Fondo fin de semana — surface-dark" },
-    "surface-dark-cell-holiday-bg":      { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo festivo — surface-dark" },
+    "surface-dark-cell-weekend-bg":      { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo fin de semana — surface-dark" },
+    "surface-dark-cell-holiday-bg":      { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo festivo — surface-dark" },
+    "surface-dark-cell-non-working-bg":  { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo no laborable — surface-dark" },
     "surface-dark-schedule-color":       { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del texto de horario — surface-dark" },
     "surface-dark-legend-color":         { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la leyenda — surface-dark" }
   }

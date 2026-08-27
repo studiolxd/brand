@@ -4,7 +4,7 @@ import { expect, within } from 'storybook/test';
 import { CalendarRoster, type RosterRow } from './CalendarRoster';
 
 const meta: Meta<typeof CalendarRoster> = {
-  title: 'Por revisar/Molecules/CalendarRoster',
+  title: 'Molecules/CalendarRoster',
   component: CalendarRoster,
   parameters: {
     layout: 'padded',
@@ -14,6 +14,9 @@ const meta: Meta<typeof CalendarRoster> = {
     month:          { control: false },
     onMonthChange:  { control: false },
     hrefBuilder:    { control: false },
+    linkComponent:  { control: false },
+    renderCell:     { control: false },
+    legendItems:    { control: false },
     nameLabel:      { control: { type: 'text' } },
     showLegend:     { control: { type: 'boolean' } },
     locale:         { control: { type: 'text' } },
@@ -234,5 +237,46 @@ export const Etiquetas: Story = {
     );
     await expect(enLegend.getByText('Vacation')).toBeInTheDocument();
     await expect(enLegend.queryByText('Vacaciones')).toBeNull();
+  },
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: (args) => {
+    const month = new Date(2026, 4, 1);
+    return <CalendarRoster {...args} month={month} rows={makeRows(month)} />;
+  },
+};
+
+/**
+ * Test: la navegación de mes es `PrevNextNav` — con `hrefBuilder` los controles
+ * son enlaces de verdad y, si además hay `onMonthChange`, el handler corta la
+ * navegación. El rótulo del mes da nombre a la tabla.
+ */
+export const NavegacionCompartida: Story = {
+  name: 'Test — navegación con PrevNextNav',
+  tags: ['!dev'],
+  render: () => {
+    const month = new Date(2026, 4, 1);
+    return (
+      <CalendarRoster
+        rows={makeRows(month)}
+        month={month}
+        hrefBuilder={(m) => `/turnos?month=${m.getFullYear()}-${m.getMonth() + 1}`}
+        onMonthChange={() => {}}
+      />
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const anterior = canvas.getByLabelText('Mes anterior');
+    await expect(anterior.tagName).toBe('A');
+    await expect(anterior).toHaveAttribute('href', '/turnos?month=2026-4');
+    await expect(anterior.closest('.prev-next-nav')).not.toBeNull();
+
+    const tabla = canvas.getByRole('table');
+    await expect(tabla).toHaveAccessibleName(/mayo de 2026/i);
   },
 };
