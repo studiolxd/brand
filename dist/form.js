@@ -18,7 +18,7 @@ var i = r(function({ errors: r, actions: i, links: a, alternatives: o, alternati
 			noValidate: !0,
 			...f,
 			children: [
-				/* @__PURE__ */ t("div", {
+				d && /* @__PURE__ */ t("div", {
 					className: "form__fields",
 					children: d
 				}),

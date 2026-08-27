@@ -13,7 +13,7 @@ El formulario del sistema: **solo estructura y aire**. Apila los campos, pone de
 
 ## Bloques
 
-- `children`: los campos, apilados con `gap`.
+- `children`: los campos, apilados con `gap`. Opcional: un formulario puede ser solo acciones (reenviar un correo, aceptar o rechazar) — ver «Solo acciones».
 - `errors`: los errores que no cuelgan de un campo (el fallo del servidor). Se anuncian (`role="alert"`).
 - `actions`: la acción principal y, si hay, la secundaria. En móvil a todo el ancho; en escritorio a la derecha.
 - `links`: enlaces secundarios. Solo la acción es enlace; si lleva texto delante, va en un `Paragraph`: `<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`.
@@ -33,6 +33,7 @@ El formulario del sistema: **solo estructura y aire**. Apila los campos, pone de
 El `Form` no pinta nada: sobre `surface-dark` cada pieza voltea con sus propios tokens.
 
 <Canvas of={FormStories.SuperficieOscura} />
+<Canvas of={FormStories.SoloAcciones} />
 <Canvas of={FormStories.ConCasillaYDosAcciones} />
 
 ## Lo que ya no es

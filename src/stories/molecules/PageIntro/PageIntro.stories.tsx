@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { PageIntro } from './PageIntro';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 const meta: Meta<typeof PageIntro> = {
   title: 'Molecules/PageIntro',
@@ -17,6 +18,11 @@ export const ConFrase: Story = {};
 
 /** Solo el título: el aire lo sigue poniendo el molde de fuera. */
 export const SoloTitulo: Story = { args: { title: 'Inicia sesión', description: undefined } };
+
+/** Más texto bajo la frase: `children`, con el mismo aire. */
+export const ConMasTexto: Story = {
+  args: { title: 'Tienes una invitación', description: 'ana@studiolxd.com te ha invitado a unirte a Studio LXD.', children: <Paragraph>Te unirás como miembro.</Paragraph> },
+};
 
 export const Contrato: Story = {
   name: 'Test — header con h1 y frase opcional',

@@ -88,6 +88,16 @@ export const ConCasillaYDosAcciones: Story = {
   },
 };
 
+/** Sin campos: solo acciones y un enlace (reenviar un correo, aceptar o rechazar una invitación). */
+export const SoloAcciones: Story = {
+  args: {
+    children: undefined,
+    size: 'lg',
+    actions: <Button variant="outline">Reenviar correo</Button>,
+    links: <Link href="#acceso">Iniciar sesión con otra cuenta</Link>,
+  },
+};
+
 export const Contrato: Story = {
   name: 'Test — talla heredada, errores anunciados, bloques en orden',
   tags: ['!dev'],

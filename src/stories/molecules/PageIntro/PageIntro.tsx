@@ -8,6 +8,8 @@ export interface PageIntroProps {
   title: ReactNode;
   /** Una frase bajo el título, opcional. */
   description?: ReactNode;
+  /** Más texto bajo la frase (otro `Paragraph`, una lista…): mismo aire. */
+  children?: ReactNode;
   /** Nivel del título: 1 por defecto (una cabecera de página). */
   level?: HeadingProps['level'];
   /** Talla tipográfica del título; si no, la que el Heading da a su nivel. */
@@ -21,11 +23,12 @@ export interface PageIntroProps {
  * recuperación… y cualquier página que empiece por su nombre. Va como celda
  * de `Columns` o directamente en el `Container`.
  */
-export function PageIntro({ title, description, level = 1, size, className }: PageIntroProps) {
+export function PageIntro({ title, description, level = 1, size, className, children }: PageIntroProps) {
   return (
     <header className={['page-intro', className].filter(Boolean).join(' ')}>
       <Heading level={level} size={size}>{title}</Heading>
       {description && <Paragraph>{description}</Paragraph>}
+      {children}
     </header>
   );
 }

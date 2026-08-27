@@ -6,6 +6,8 @@ export interface PageIntroProps {
     title: ReactNode;
     /** Una frase bajo el título, opcional. */
     description?: ReactNode;
+    /** Más texto bajo la frase (otro `Paragraph`, una lista…): mismo aire. */
+    children?: ReactNode;
     /** Nivel del título: 1 por defecto (una cabecera de página). */
     level?: HeadingProps['level'];
     /** Talla tipográfica del título; si no, la que el Heading da a su nivel. */
@@ -18,4 +20,4 @@ export interface PageIntroProps {
  * recuperación… y cualquier página que empiece por su nombre. Va como celda
  * de `Columns` o directamente en el `Container`.
  */
-export declare function PageIntro({ title, description, level, size, className }: PageIntroProps): import("react/jsx-runtime").JSX.Element;
+export declare function PageIntro({ title, description, level, size, className, children }: PageIntroProps): import("react/jsx-runtime").JSX.Element;

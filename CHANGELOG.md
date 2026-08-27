@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.6.0
+
+### Añadido
+
+- `Form` sin campos (`children` opcional): solo acciones y enlaces.
+- `PageIntro` admite `children`: más texto bajo la frase, con el mismo aire.
+
 ## v19.5.0
 
 ### Añadido

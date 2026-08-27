@@ -2,6 +2,8 @@ import { type ComponentProps, type ReactNode } from 'react';
 import { type FormSize } from '../../constants/form-size';
 import './Form.css';
 export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
+    /** Los campos. Opcional: un formulario puede ser solo acciones (reenviar un correo, aceptar o rechazar). */
+    children?: ReactNode;
     /** Errores del formulario entero (los que no cuelgan de un campo): el fallo del servidor, por ejemplo. */
     errors?: string[];
     /** La acción principal (y, si hay, la secundaria): botones. */
@@ -16,7 +18,6 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
     alternativesLabel?: string;
     /** Talla de todos los campos y botones (32/40/48): `lg` en superficies públicas, `md` dentro de las aplicaciones. */
     size?: FormSize;
-    children: ReactNode;
 }
 /**
  * El formulario del sistema: solo estructura y aire. Campos apilados, los
