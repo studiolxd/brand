@@ -108,6 +108,7 @@ export const entryPoints = {
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
   'site-header':         'src/stories/sections/SiteHeader/SiteHeader.tsx',
   'app-root':            'src/stories/sections/AppRoot/AppRoot.tsx',
+  'page-intro':          'src/stories/molecules/PageIntro/PageIntro.tsx',
   'site-shell':          'src/stories/sections/SiteShell/SiteShell.tsx',
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
   // Organisms

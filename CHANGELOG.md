@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.5.0
+
+### Añadido
+
+- `PageIntro` (molécula): cabecera de página — título (`Heading` 1) y frase
+  opcional con su aire (`gap`). Un `header`; va como celda de `Columns` o en el
+  `Container`. Export `./page-intro`.
+
 ## v19.4.0
 
 ### Añadido

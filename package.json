@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "19.4.0",
+  "version": "19.5.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -228,6 +228,10 @@
     "./app-root": {
       "types": "./dist/_types/sections/AppRoot/AppRoot.d.ts",
       "import": "./dist/app-root.js"
+    },
+    "./page-intro": {
+      "types": "./dist/_types/molecules/PageIntro/PageIntro.d.ts",
+      "import": "./dist/page-intro.js"
     },
     "./site-shell": {
       "types": "./dist/_types/sections/SiteShell/SiteShell.d.ts",

@@ -1,0 +1,10 @@
+/* Título y frase apilados con su aire; el Paragraph no aporta margen propio. */
+.page-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--page-intro-gap);
+}
+
+.page-intro > .paragraph {
+  margin: 0;
+}
