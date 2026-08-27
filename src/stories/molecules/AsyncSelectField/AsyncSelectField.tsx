@@ -43,7 +43,7 @@ export function AsyncSelectField({
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
 
-  const containerClass = ['async-select-field', error ? 'async-select-field--error' : '']
+  const containerClass = ['async-select-field', error || errorMessage ? 'async-select-field--error' : '']
     .filter(Boolean)
     .join(' ');
 

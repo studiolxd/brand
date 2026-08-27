@@ -8,7 +8,7 @@ import { jsx as r, jsxs as i } from "react/jsx-runtime";
 function a({ id: a, label: o, labelHidden: s = !1, options: c, value: l, defaultValue: u, placeholder: d, disabled: f, readOnly: p, size: m, error: h = !1, errorMessage: g, helperText: _, onValueChange: v }) {
 	let y = e(m), b = g ? `${a}-error` : void 0, x = _ ? `${a}-helper` : void 0;
 	return /* @__PURE__ */ i("div", {
-		className: ["multi-select-field", h ? "multi-select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["multi-select-field", h || g ? "multi-select-field--error" : ""].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ r(t, {
 				htmlFor: a,

@@ -25,6 +25,7 @@
   --select-border-radius: var(--border-radius-default); /** Radio del borde del trigger */
   --select-border-width: var(--border-width-default); /** Grosor del borde */
   --select-border-color: var(--color-primary); /** Color del borde */
+  --select-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (excepción a «bordes en prusia») */
   --select-padding-inline: var(--control-padding-inline); /** Padding inline del trigger */
   --select-line-height: var(--control-line-height); /** Interlineado del trigger */
   --select-font-weight: var(--font-weight-default); /** Peso tipográfico */
@@ -40,6 +41,7 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --select-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --select-bg: var(--color-background-dark); /** Fondo del trigger — surface-dark */
   --select-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
   --select-border-color: var(--color-text-on-dark); /** Color del borde — surface-dark */

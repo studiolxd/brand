@@ -196,3 +196,14 @@ export const ContratoTalla: Story = {
     }
   },
 };
+
+export const ContratoError: Story = {
+  name: 'Test — errorMessage marca el control en error',
+  tags: ['!dev'],
+  args: { label: 'Contraseña', labelHidden: false, errorMessage: 'Incluye al menos un número.' },
+  play: async ({ canvasElement }) => {
+    const input = canvasElement.querySelector('input')!;
+    await expect(input).toHaveClass('input--error');
+    await expect(canvasElement.querySelector('[role="alert"]')).toHaveTextContent('Incluye al menos un número.');
+  },
+};

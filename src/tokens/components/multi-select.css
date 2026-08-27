@@ -16,6 +16,7 @@
   --multi-select-pill-gap: var(--spacing-1); /** Separación entre texto y botón × en la pill */
   --multi-select-pill-font-size: var(--font-size-1); /** Tamaño de fuente de la pill */
   --multi-select-values-gap: var(--spacing-1); /** Separación entre pills */
+  --multi-select-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error */
   --multi-select-font-family: var(--select-font-family); /** Familia tipográfica */
   --multi-select-font-size: var(--select-font-size); /** Tamaño de fuente */
   --multi-select-placeholder-color: var(--color-text-placeholder-on-light); /** Color del placeholder */
@@ -49,6 +50,7 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --multi-select-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --multi-select-bg: var(--color-background-dark); /** Background — surface-dark */
   --multi-select-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --multi-select-border-color: var(--color-text-on-dark); /** Border color — surface-dark */

@@ -43,7 +43,7 @@ export function MultiSelectField({
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
 
-  const containerClass = ['multi-select-field', error ? 'multi-select-field--error' : '']
+  const containerClass = ['multi-select-field', error || errorMessage ? 'multi-select-field--error' : '']
     .filter(Boolean)
     .join(' ');
 

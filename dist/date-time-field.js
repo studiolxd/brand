@@ -49,7 +49,7 @@ function l({ id: l, label: u, labelHidden: d = !0, value: f, onChange: p, placeh
 					size: E,
 					disabled: b,
 					readOnly: x,
-					error: S,
+					error: S || !!C,
 					locale: T
 				}), /* @__PURE__ */ i(n, {
 					value: c(f),
@@ -58,7 +58,7 @@ function l({ id: l, label: u, labelHidden: d = !0, value: f, onChange: p, placeh
 					size: E,
 					disabled: b,
 					readOnly: x,
-					error: S
+					error: S || !!C
 				})]
 			}),
 			C && /* @__PURE__ */ i("span", {

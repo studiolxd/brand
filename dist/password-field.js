@@ -25,7 +25,7 @@ var u = s(function({ label: s, labelHidden: u = !0, error: d = !1, errorMessage:
 					ref: C,
 					id: E,
 					size: w,
-					error: d,
+					error: d || !!f,
 					placeholder: x ?? (s && u ? s : void 0),
 					"aria-describedby": j,
 					...S,

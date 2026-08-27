@@ -147,3 +147,7 @@
   margin-block: var(--select-item-padding-block);
 }
 
+/* Error: el borde en el color de error (el campo pone aria-invalid). */
+.select[aria-invalid="true"] {
+  border-color: var(--select-error-border-color);
+}

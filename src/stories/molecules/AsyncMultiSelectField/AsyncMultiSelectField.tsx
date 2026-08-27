@@ -45,7 +45,7 @@ export function AsyncMultiSelectField({
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
 
-  const containerClass = ['async-multi-select-field', error ? 'async-multi-select-field--error' : '']
+  const containerClass = ['async-multi-select-field', error || errorMessage ? 'async-multi-select-field--error' : '']
     .filter(Boolean)
     .join(' ');
 

@@ -23,3 +23,7 @@
   line-height: var(--multi-select-field-helper-line-height);
   color: var(--multi-select-field-helper-color);
 }
+
+.multi-select-field--error .multi-select {
+  border-color: var(--multi-select-error-border-color);
+}

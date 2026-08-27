@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v20.0.1
+
+### Corregido
+
+- El estado de error de `Input`/`Textarea` en oscuro: fondo del lienzo, texto y
+  placeholder blancos (tokens `surface-dark-error-*`; antes solo lo cubría
+  `.surface-dark` a mano, no `html.dark`).
+- Todos los fields marcan el control en error también cuando solo llega
+  `errorMessage` (PasswordField, InputPhoneField, TimeField, DateTimeField,
+  DatePickerField; los de selección en su contenedor). `Select`, `MultiSelect`,
+  `AsyncSelect`, `AsyncMultiSelect` y `TimeSelect` ganan borde de error
+  (`error-border-color` + variante oscura).
+
 ## v20.0.0
 
 ### Rompe

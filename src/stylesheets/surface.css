@@ -55,9 +55,7 @@
 }
 
 .surface-dark .input.input--error {
-  --input-error-bg:                  var(--color-background-dark);
   --input-error-border-color:        var(--color-text-on-dark);
-  --input-error-placeholder-color:   var(--color-text-muted-on-dark);
 }
 
 /* ─── Textarea: disabled and error states ────────────────────────────────── */
@@ -69,9 +67,7 @@
 }
 
 .surface-dark .textarea.textarea--error {
-  --textarea-error-bg:                var(--color-background-dark);
   --textarea-error-border-color:      var(--color-text-on-dark);
-  --textarea-error-placeholder-color: var(--color-text-muted-on-dark);
 }
 
 /* ─── Checkbox: disabled state ───────────────────────────────────────────── */

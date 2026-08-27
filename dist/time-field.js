@@ -23,7 +23,7 @@ function i({ id: i, label: a, labelHidden: o = !0, value: s, onChange: c, step: 
 				size: u,
 				disabled: d,
 				readOnly: f,
-				error: p
+				error: p || !!m
 			}),
 			m && /* @__PURE__ */ n("span", {
 				id: g,

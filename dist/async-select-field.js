@@ -8,7 +8,7 @@ import { jsx as r, jsxs as i } from "react/jsx-runtime";
 function a({ id: a, label: o, labelHidden: s = !1, onSearch: c, value: l, onValueChange: u, selectedOption: d, placeholder: f, disabled: p, readOnly: m, size: h, error: g = !1, errorMessage: _, helperText: v }) {
 	let y = t(h), b = _ ? `${a}-error` : void 0, x = v ? `${a}-helper` : void 0;
 	return /* @__PURE__ */ i("div", {
-		className: ["async-select-field", g ? "async-select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["async-select-field", g || _ ? "async-select-field--error" : ""].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ r(n, {
 				htmlFor: a,

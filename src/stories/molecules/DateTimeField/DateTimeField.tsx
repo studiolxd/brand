@@ -95,7 +95,7 @@ export function DateTimeField({
           size={size}
           disabled={disabled}
           readOnly={readOnly}
-          error={error}
+          error={error || !!errorMessage}
           locale={locale}
         />
         <TimeSelect
@@ -105,7 +105,7 @@ export function DateTimeField({
           size={size}
           disabled={disabled}
           readOnly={readOnly}
-          error={error}
+          error={error || !!errorMessage}
         />
       </div>
       {errorMessage && (

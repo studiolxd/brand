@@ -58,5 +58,8 @@ html.dark {
   --textarea-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --textarea-error-focus-ring-color: var(--color-error-text-on-dark); /** Error focus ring color — surface-dark */
   --textarea-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
+  --textarea-error-bg: var(--color-background-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
+  --textarea-error-color: var(--color-text-on-dark); /** Texto en error — surface-dark */
+  --textarea-error-placeholder-color: var(--color-text-on-dark); /** Placeholder en error — surface-dark */
   --textarea-error-focus-border-color: var(--color-error-text-on-dark); /** Borde en foco+error — surface-dark */
 }

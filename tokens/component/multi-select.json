@@ -4,6 +4,8 @@
     "border-width":           { "$value": "{select.border-width}",           "$type": "dimension", "$description": "Grosor del borde" },
     "border-style":           { "$value": "{select.border-style}",           "$type": "string",    "$description": "Estilo del borde" },
     "border-color":           { "$value": "{select.border-color}",           "$type": "color",     "$description": "Color del borde" },
+    "error-border-color":       { "$value": "{color.error-text-on-light}", "$type": "color", "$description": "Borde en error: el color de error" },
+    "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "height":                 { "$value": "{size-component.md}",              "$type": "dimension", "$description": "Altura mínima del trigger: la talla md del sistema. Crece solo si las pills ocupan más de una línea" },
     "sm-height":              { "$value": "{size-component.sm}",              "$type": "dimension", "$description": "Altura mínima del trigger — sm" },
     "lg-height":              { "$value": "{size-component.lg}",              "$type": "dimension", "$description": "Altura mínima del trigger — lg" },

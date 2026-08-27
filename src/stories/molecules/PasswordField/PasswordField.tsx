@@ -78,7 +78,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
           ref={ref}
           id={inputId}
           size={size}
-          error={error}
+          error={error || !!errorMessage}
           placeholder={placeholder ?? (label && labelHidden ? label : undefined)}
           aria-describedby={describedBy}
           {...rest}

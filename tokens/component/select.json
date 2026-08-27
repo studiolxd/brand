@@ -4,6 +4,8 @@
     "border-width":           { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde" },
     "border-style":           { "$value": "solid",                       "$type": "string",    "$description": "Estilo del borde" },
     "border-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del borde" },
+    "error-border-color":       { "$value": "{color.error-text-on-light}", "$type": "color", "$description": "Borde en error: el color de error (excepción a «bordes en prusia»)" },
+    "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "height":                 { "$value": "{size-component.md}",        "$type": "dimension", "$description": "Altura del control: la talla md del sistema. Las tallas cambian la altura, no el padding vertical" },
     "sm-height":              { "$value": "{size-component.sm}",        "$type": "dimension", "$description": "Altura — sm" },
     "lg-height":              { "$value": "{size-component.lg}",        "$type": "dimension", "$description": "Altura — lg" },

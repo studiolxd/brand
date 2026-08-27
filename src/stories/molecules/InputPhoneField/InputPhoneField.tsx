@@ -52,7 +52,7 @@ export function InputPhoneField({
         defaultCountry={defaultCountry}
         placeholder={placeholder}
         disabled={disabled}
-        error={error}
+        error={error || !!errorMessage}
         size={size}
         describedBy={describedBy}
         onChange={onChange}

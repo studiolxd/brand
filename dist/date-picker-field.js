@@ -17,7 +17,7 @@ function i({ id: i, label: a, labelHidden: o = !0, errorMessage: s, helperText: 
 			/* @__PURE__ */ n(t, {
 				...u,
 				id: i,
-				error: l,
+				error: l || !!s,
 				describedBy: p
 			}),
 			s && /* @__PURE__ */ n("span", {

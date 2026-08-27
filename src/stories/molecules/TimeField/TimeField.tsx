@@ -51,7 +51,7 @@ export function TimeField({
         size={size}
         disabled={disabled}
         readOnly={readOnly}
-        error={error}
+        error={error || !!errorMessage}
       />
       {errorMessage && (
         <span id={errorId} className="time-field__error" role="alert">{errorMessage}</span>

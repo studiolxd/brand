@@ -30,7 +30,7 @@ export function DatePickerField({
       <DatePicker
         {...pickerProps}
         id={id}
-        error={error}
+        error={error || !!errorMessage}
         describedBy={describedBy}
       />
       {errorMessage && (

@@ -12,3 +12,7 @@
   line-height: var(--line-height-none);
   user-select: none;
 }
+
+.time-select.time-select--error {
+  border-color: var(--time-select-error-border-color);
+}
