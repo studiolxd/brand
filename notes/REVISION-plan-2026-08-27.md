@@ -335,7 +335,7 @@ La rama `toast-definitivo` decide si Toast comparte la cara de Alert. Sea cual s
 ## Decisiones del usuario (2026-08-27, tras el análisis)
 1. Table: (a) `<button>` dentro del `th`, `aria-sort` en el `th`.
 2. Calendar: (a) rejilla accesible completa ahora (`role="grid"`, roving tabindex, flechas, PageUp/Down, Home/End).
-3. MessageBubble: (a) cuatro esquinas rectas; el emisor se distingue por alineación y color.
+3. MessageBubble: esquinas rectas + **colita triangular** (pseudo-elemento, solo contorno, tamaño por token) en la esquina inferior del lado del emisor; además alineación y color.
 4. Globo del usuario: (c) ningún globo lleva relleno; se separan por alineación y borde 1px (par claro/oscuro por token).
 5. MessageComposer: (a) variante `bare` en `Textarea`; fuera el override desde fuera.
 6. CommandPalette: (a) reescribir sobre `Modal` + lista propia de Base UI; fuera cmdk/Radix del dist.
