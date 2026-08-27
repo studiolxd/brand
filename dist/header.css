@@ -31,7 +31,8 @@
   z-index: var(--header-controls-z-index);
 }
 
-.header__logo {
+.header__logo,
+.header__logo:hover {
   display: inline-flex;
   align-items: center;
   text-decoration: none;

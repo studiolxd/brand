@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.6.1
+
+### Corregido
+
+- `SiteHeader`, `Header` y `Sidebar`: el logo enlazado tampoco lleva línea en hover (la
+  regla de hover de la base empataba en especificidad y ganaba por orden).
+
 ## v22.6.0
 
 ### Cambiado

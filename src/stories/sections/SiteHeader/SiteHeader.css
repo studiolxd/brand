@@ -25,6 +25,12 @@
   box-shadow: none;
   color: inherit;
 }
+/* También en hover: la regla de hover de la base (`a:where():hover`, 0-1-0)
+   empata con esta clase y ganaría por orden de carga. */
+.site-header__logo:hover {
+  box-shadow: none;
+  color: inherit;
+}
 
 /* La marca mide lo que la barra le da: así en móvil encoge con ella. Manda
    la cabecera, no el logotipo, porque el alto de la barra y el arranque del

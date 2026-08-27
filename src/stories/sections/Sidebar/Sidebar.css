@@ -42,7 +42,8 @@
 .sidebar__header { padding-block-start: var(--sidebar-padding-block); }
 /* El logo suele ir enlazado a la home del producto: sin la línea que brand
    pone a todo <a> (mismo criterio que `.site-header__logo`). */
-.sidebar__header a {
+.sidebar__header a,
+.sidebar__header a:hover {
   text-decoration: none;
   padding-block-end: 0;
   box-shadow: none;
