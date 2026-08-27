@@ -9,7 +9,6 @@
   padding-block-end: var(--card-padding-block-end);
   gap: var(--card-gap);
   border-radius: var(--card-border-radius);
-  box-shadow: var(--card-shadow);
 }
 
 .card p {
@@ -38,10 +37,10 @@
   border: var(--card-outline-border-width) solid var(--card-outline-border-color);
 }
 
-.card.card--accent-1  { background-color: var(--color-accent-1); }
-.card.card--accent-2  { background-color: var(--color-accent-2); }
-.card.card--support-1 { background-color: var(--color-support-1); }
-.card.card--support-2 { background-color: var(--color-support-2); }
+.card.card--accent-1  { background-color: var(--card-accent-1-bg);  color: var(--card-accent-1-color); }
+.card.card--accent-2  { background-color: var(--card-accent-2-bg);  color: var(--card-accent-2-color); }
+.card.card--support-1 { background-color: var(--card-support-1-bg); color: var(--card-support-1-color); }
+.card.card--support-2 { background-color: var(--card-support-2-bg); color: var(--card-support-2-color); }
 
 /* --------------------------------------------------------------------------
    Subpartes componibles (modo contenedor). Antes eran divs sin estilar y cada

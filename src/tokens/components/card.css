@@ -12,10 +12,17 @@
   --card-header-gap: var(--spacing-3); /** Separación entre título y acción en la cabecera */
   --card-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
   --card-border-radius: var(--border-radius-default); /** Radio de esquinas — sin redondeado */
-  --card-shadow: var(--shadow-default); /** Sombra — sin sombra */
   --card-title-font-weight: var(--font-weight-emphasis); /** Peso del título de la tarjeta */
-  --card-primary-bg: var(--color-primary); /** Variante primary — fondo prussian */
-  --card-primary-color: var(--color-text-on-dark); /** Variante primary — texto blanco sobre fondo oscuro */
+  --card-primary-bg: var(--color-accent-1); /** Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.background.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro */
+  --card-primary-color: var(--color-primary); /** Variante primary — texto prussian sobre el fondo lavanda */
+  --card-accent-1-bg: var(--color-accent-1); /** Variante accent-1 — fondo lavanda */
+  --card-accent-1-color: var(--color-text-on-light); /** Variante accent-1 — texto. Color saturado que ya contrasta en cualquier superficie: sin par surface-dark, como las variantes semánticas de Alert/Tag */
+  --card-accent-2-bg: var(--color-accent-2); /** Variante accent-2 — fondo amarillo */
+  --card-accent-2-color: var(--color-text-on-light); /** Variante accent-2 — texto. Sin par surface-dark: mismo motivo que accent-1 */
+  --card-support-1-bg: var(--color-support-1); /** Variante support-1 — fondo esmeralda */
+  --card-support-1-color: var(--color-text-on-light); /** Variante support-1 — texto. Sin par surface-dark: mismo motivo que accent-1 */
+  --card-support-2-bg: var(--color-support-2); /** Variante support-2 — fondo cayena */
+  --card-support-2-color: var(--color-text-on-light); /** Variante support-2 — texto. Sin par surface-dark: mismo motivo que accent-1 */
   --card-outline-bg: var(--color-background-light); /** Variante outline — fondo blanco (light) */
   --card-outline-color: var(--color-text-on-light); /** Variante outline — texto oscuro sobre blanco */
   --card-outline-border-color: var(--color-primary); /** Variante outline — borde prussian */

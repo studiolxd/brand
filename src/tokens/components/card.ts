@@ -1,4 +1,7 @@
 import card from '../../../tokens/component/card.json';
 import { flattenTokens } from '../utils';
 
-export const cardTokens = flattenTokens(card as never);
+const all = flattenTokens(card as never);
+
+export const cardTokens     = all.filter(t => !t.name.startsWith('--card-surface-dark-'));
+export const cardDarkTokens = all.filter(t => t.name.startsWith('--card-surface-dark-'));

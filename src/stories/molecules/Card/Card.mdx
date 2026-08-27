@@ -1,31 +1,58 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as CardStories from "./Card.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { cardTokens } from "../../../tokens/components/card";
+import { cardTokens, cardDarkTokens } from "../../../tokens/components/card";
 
 <Meta of={CardStories} />
 
 # Card
 
-Tarjeta de servicio completamente clicable con color de fondo, título, descripción y flecha indicadora. El CTA (`ctaLabel`) es accesible para lectores de pantalla mediante `VisuallyHidden`, sin duplicar texto visible.
+Dos modos según `href`. **Con `href`**: *link-card* — todo el bloque es un `<a>` (título +
+descripción + flecha), pensado para navegación. **Sin `href`**: *contenedor* — un `<div>` con
+`children` arbitrarios (formularios, botones), para superficies de aplicación.
 
-Disponible en cuatro variantes de color (accent-1, accent-2, support-1, support-2) que mapean a la paleta de identidad.
+## Modo link — colores
 
-## Accent 1
+Seis variantes de fondo: `primary`, `outline` y cuatro colores de identidad
+(`accent-1`, `accent-2`, `support-1`, `support-2`).
 
+<Canvas of={CardStories.Primary} />
+<Canvas of={CardStories.Outline} />
 <Canvas of={CardStories.Accent1} />
-
-## Accent 2
-
 <Canvas of={CardStories.Accent2} />
-
-## Support 1
-
 <Canvas of={CardStories.Support1} />
-
-## Support 2
-
 <Canvas of={CardStories.Support2} />
+
+## Modo contenedor
+
+Sin `href`, `Card` es una superficie con `children` libres. Las subpartes (`CardHeader`,
+`CardTitle`, `CardDescription`, `CardAction`, `CardContent`, `CardFooter`) evitan que cada
+producto maquete a mano la cabecera, el pie o el título.
+
+<Canvas of={CardStories.Container} />
+<Canvas of={CardStories.ConSubpartes} />
+
+## Superficie oscura
+
+<Canvas of={CardStories.EnSuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+- `outline` es la única variante con par `surface-dark-*` propio (fondo y borde cambian sobre
+  `.surface-dark`/`html.dark`).
+- `primary` usa el mismo patrón que `button.primary`: fondo lavanda (`color.accent-1`) con texto
+  prussian (`color.primary`). No es `background: color.primary`, que coincidiría con
+  `color.background.dark` y desaparecería sobre superficie oscura — es un par de color
+  autocontenido, igual en los dos temas, deliberadamente sin `surface-dark-*`.
+- `accent-1`, `accent-2`, `support-1` y `support-2` son colores saturados que ya contrastan sobre
+  cualquier fondo (el mismo criterio que las variantes semánticas de `Alert`/`Tag`): tampoco
+  llevan par `surface-dark-*`.
+
+## Props
+
+<ArgTypes of={CardStories} />
 
 ---
 
@@ -33,6 +60,6 @@ Disponible en cuatro variantes de color (accent-1, accent-2, support-1, support-
 
 <TokenTable tokens={cardTokens} />
 
-## Props
+### Superficie oscura
 
-<ArgTypes of={CardStories} />
+<TokenTable tokens={cardDarkTokens} />

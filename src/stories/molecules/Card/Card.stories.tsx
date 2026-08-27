@@ -14,7 +14,7 @@ import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 const meta: Meta<typeof Card> = {
-  title: 'Por revisar/Molecules/Card',
+  title: 'Molecules/Card',
   component: Card,
   parameters: {
     layout: 'padded',
@@ -147,6 +147,19 @@ export const LinkModeUnchanged: Story = {
     await expect(link).toHaveClass('card', 'card--primary');
     await expect(canvasElement.querySelector('.arrow')).not.toBeNull();
   },
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '24rem' }}>
+      <Card href="#" color="primary" title="Diseño instruccional" description="Fondo lavanda autocontenido, como Button primary." ctaLabel="Ver más" />
+      <Card href="#" color="outline" title="Plataformas LMS" description="Borde y fondo con par oscuro propio." ctaLabel="Ver más" />
+      <Card href="#" color="accent-1" title="Contenidos elearning" description="Color saturado: mismo aspecto en ambos temas." ctaLabel="Ver más" />
+      <Card href="#" color="support-2" title="Título de ejemplo" description="Variante support-2 (cayenne)." ctaLabel="Ver más" />
+    </div>
+  ),
 };
 
 /**
