@@ -6,7 +6,6 @@ import { InputField } from '../../molecules/InputField/InputField';
 import { PasswordField } from '../../molecules/PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
-import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 interface Args {
   socialProviders: string[];
@@ -19,14 +18,13 @@ interface Args {
 
 function Acceso({ socialProviders, magicLink, captcha, signupOpen, serverError, surface }: Args) {
   return (
-    <AuthPage title="Inicia sesión" surface={surface}>
+    <AuthPage title="Inicia sesión" description={signupOpen ? <>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link></> : undefined} surface={surface}>
       <Form
         size="lg"
         onSubmit={(e) => e.preventDefault()}
         errors={serverError ? ['No hemos podido iniciar sesión. Comprueba el correo y la contraseña.'] : undefined}
         captcha={captcha ? <Captcha /> : undefined}
         actions={<Button variant="primary" type="submit">{magicLink ? 'Enviar enlace' : 'Entrar'}</Button>}
-        links={signupOpen ? <Paragraph>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link></Paragraph> : undefined}
         alternativesLabel={socialProviders.length ? 'O continúa con' : undefined}
         alternatives={socialProviders.length ? <SocialButtons providers={socialProviders} /> : undefined}
       >

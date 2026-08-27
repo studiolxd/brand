@@ -6,7 +6,6 @@ import { PasswordField } from '../../molecules/PasswordField/PasswordField';
 import { CheckboxField } from '../../molecules/CheckboxField/CheckboxField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
-import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 const HINT = 'Al menos 8 caracteres, con una letra minúscula, una letra mayúscula, un número y un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?';
 
@@ -14,13 +13,12 @@ interface Args { socialProviders: string[]; captcha: boolean; terms: boolean; pa
 
 function Registro({ socialProviders, captcha, terms, passwordError, surface }: Args) {
   return (
-    <AuthPage title="Crea una cuenta" surface={surface}>
+    <AuthPage title="Crea una cuenta" description={<>¿Ya tienes una cuenta? <Link href="#acceso">Inicia sesión</Link></>} surface={surface}>
       <Form
         size="lg"
         onSubmit={(e) => e.preventDefault()}
         captcha={captcha ? <Captcha /> : undefined}
         actions={<Button variant="primary" type="submit">Crear cuenta</Button>}
-        links={<Paragraph>¿Ya tienes una cuenta? <Link href="#acceso">Inicia sesión</Link></Paragraph>}
         alternativesLabel={socialProviders.length ? 'O continúa con' : undefined}
         alternatives={socialProviders.length ? <SocialButtons providers={socialProviders} /> : undefined}
       >
