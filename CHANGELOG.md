@@ -7,6 +7,34 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.9.0
+
+### Cambiado
+
+- `Tooltip`, `Table`, `AppLauncher` y `PrevNextNav`: `calc(var(--…-transition-duration) * 1ms)`
+  anulaba la animación (el token ya trae `ms`, así que el `calc` daba `ms²`,
+  inválido). La propiedad toma ahora el token tal cual, como ya hacía
+  `Popover`. `Modal` no tenía el patrón; `Skeleton` se deja intacto porque su
+  duración es un número sin unidad por diseño.
+- Decorator `withSurface` (`.storybook/preview.tsx`): en vez de envolver la
+  story en `<div class="surface-dark">` —que no llega a los portales
+  (`Popover`, `Menu`, `Tooltip`, `Modal`, `Select` renderizan en
+  `document.body`)— pone `data-theme="dark"` en `document.documentElement`.
+  Story «En superficie oscura» en `Popover`, ahora honesta.
+- `DatePicker`: nueva prop `calendarLabel` (default «Calendario») que da
+  nombre accesible al panel del calendario (antes `role="dialog"` sin
+  nombre); `DatePickerField` usa el `label` del campo como nombre del panel
+  por defecto.
+- `DescriptionList`: por debajo de `--breakpoint-md` término y descripción se
+  apilan en una columna (antes `max-content 1fr` apretaba el valor con
+  términos largos en móvil); story «Estrecha».
+- Nuevos roles semánticos `surface.secondary-on-light|on-dark` y
+  `surface.inverse-on-light|on-dark` para los usos de `grey-lightest` /
+  `grey-darkest` como superficie (no como estado): `kbd.bg`,
+  `progress-bar.track-bg`, `code-block.bg` y `tag.neutral-bg` apuntan ahora al
+  rol en vez de al primitivo — mismos valores resueltos, sin cambio visual.
+  Documentados en Foundations/Colores.
+
 ## v24.8.0
 
 ### Cambiado
