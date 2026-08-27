@@ -1,9 +1,10 @@
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import './TextareaField.css';
 import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
 import { Textarea } from '../../atoms/Textarea/Textarea';
 
-export interface TextareaFieldProps {
+export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'> {
   id: string;
   label: string;
   /**
@@ -29,7 +30,12 @@ export interface TextareaFieldProps {
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
 }
 
-export function TextareaField({
+/**
+ * El `ref` y el resto de props nativas de `<textarea>` van al `<textarea>`
+ * interno (react-hook-form `register()`, `aria-*`, `data-*`…); el `className`,
+ * al contenedor.
+ */
+export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>(function TextareaField({
   id,
   label,
   labelHidden = false,
@@ -47,7 +53,9 @@ export function TextareaField({
   onChange,
   onBlur,
   onFocus,
-}: TextareaFieldProps) {
+  className,
+  ...rest
+}: TextareaFieldProps, ref) {
   const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
@@ -56,9 +64,11 @@ export function TextareaField({
   const hasError = error || !!errorMessage;
 
   return (
-    <div className="textarea-field">
+    <div className={['textarea-field', className].filter(Boolean).join(' ')}>
       <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <Textarea
+        ref={ref}
+        {...rest}
         id={id}
         name={name}
         placeholder={placeholder ?? (labelHidden ? label : undefined)}
@@ -82,4 +92,4 @@ export function TextareaField({
       )}
     </div>
   );
-}
+});

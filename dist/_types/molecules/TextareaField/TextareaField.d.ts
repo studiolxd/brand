@@ -1,5 +1,6 @@
+import { type ComponentPropsWithoutRef } from 'react';
 import './TextareaField.css';
-export interface TextareaFieldProps {
+export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'> {
     id: string;
     label: string;
     /**
@@ -24,4 +25,9 @@ export interface TextareaFieldProps {
     onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
     onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
 }
-export declare function TextareaField({ id, label, labelHidden, name, placeholder, value, defaultValue, rows, disabled, readOnly, size: sizeProp, error, errorMessage, helperText, onChange, onBlur, onFocus, }: TextareaFieldProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * El `ref` y el resto de props nativas de `<textarea>` van al `<textarea>`
+ * interno (react-hook-form `register()`, `aria-*`, `data-*`…); el `className`,
+ * al contenedor.
+ */
+export declare const TextareaField: import("react").ForwardRefExoticComponent<TextareaFieldProps & import("react").RefAttributes<HTMLTextAreaElement>>;

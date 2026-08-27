@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v20.2.0
+
+### Añadido
+
+- `TextareaField` reenvía `ref` y las props nativas al `<textarea>` (react-hook-form), como `InputField`.
+- Storybook: `Pages/Contacto`; la sección pasa a llamarse «Páginas públicas».
+
 ## v20.1.2
 
 ### Corregido

@@ -1,10 +1,10 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 
-<Meta title="Pages/Acceso y registro" />
+<Meta title="Pages/Páginas públicas" />
 
-# Páginas de acceso
+# Páginas públicas
 
-Las pantallas de acceso de la suite —acceso, registro, recuperar contraseña, verificar correo, aceptar invitación— **montadas con piezas del DS y datos falsos**: `SiteShell` + `SiteHeader` + `Container` + `Columns` + `PageIntro` + `Form`/`*Field` + `LegalFooter`. Sin lógica: sin react-hook-form real, sin Better Auth, sin router.
+Las pantallas públicas de la suite —acceso, registro, recuperar contraseña, verificar correo, aceptar invitación, contacto— **montadas con piezas del DS y datos falsos**: `SiteShell` + `SiteHeader` + `Container` + `Columns` + `PageIntro` + `Form`/`*Field` + `LegalFooter`. Sin lógica: sin react-hook-form real, sin Better Auth, sin router.
 
 Son **la norma**: si hub las monta distinto, hub está mal. Sirven para ver el conjunto (ritmo vertical, tallas `lg`, dos columnas, móvil, superficie oscura) sin arrancar la aplicación, y para probar el contrato a nivel página (un solo `h1`, `main#main-content`, el salto de `AppRoot`).
 
