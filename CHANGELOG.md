@@ -43,6 +43,7 @@ para breaking changes.
   stories de test (`!dev`) y `CommandPalette.test.tsx` con 13 casos
   (filtrado con y sin acentos, keywords, grupos vacíos, región viva, ↑↓,
   Home/End, Enter, ratón, deshabilitados, Escape y el atajo ⌘K).
+
 ## v24.10.0
 
 ### Cambiado
