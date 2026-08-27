@@ -24,7 +24,7 @@
     "padding-inline":      { "$value": "{spacing.6}",            "$type": "dimension", "$description": "Inline (horizontal) padding" },
     "focus-ring-width":    { "$value": "{border-width.focus}",      "$type": "dimension", "$description": "Focus ring width" },
     "focus-ring-style":    { "$value": "solid",                  "$type": "string",    "$description": "Focus ring border style" },
-    "focus-ring-offset":   { "$value": "{border-width.focus}",      "$type": "dimension", "$description": "Focus ring offset" },
+    "focus-ring-offset":   { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Separación entre el botón y el anillo de foco (4px): el hueco es el fondo de la superficie, y eso lo hace leerse como foco y no como un borde más" },
     "sm-padding-inline":   { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Inline padding — sm" },
     "sm-font-size":        { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Font size — sm" },
     "lg-padding-inline":   { "$value": "{spacing.8}",            "$type": "dimension", "$description": "Inline padding — lg" },
@@ -52,7 +52,7 @@
       "focus-ring-width":   { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
       "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
       "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
-      "focus-ring-color":   { "$value": "{color.accent-1}",            "$type": "color",     "$description": "Focus ring color" },
+      "focus-ring-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Anillo de foco: la tinta de la superficie (prusia), no el lavanda del botón — así se ve como foco, no como borde" },
       "bg":                 { "$value": "{color.accent-1}",            "$type": "color",     "$description": "Background" },
       "color":              { "$value": "{color.primary}",             "$type": "color",     "$description": "Text color" },
       "border":             { "$value": "{color.accent-1}",            "$type": "color",     "$description": "Border color" },
@@ -61,8 +61,9 @@
       "hover-border":       { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover border color" },
       "active-bg":          { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active background" },
       "active-color":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Active text color" },
-      "active-border":      { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active border color" }
-    },
+      "active-border":      { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active border color" },
+      "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark (blanco)" }
+},
     "destructive": {
       "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
       "border-width":       { "$value": "{button.border-width}",       "$type": "dimension", "$description": "Border width" },

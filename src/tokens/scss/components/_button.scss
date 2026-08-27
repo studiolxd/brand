@@ -25,7 +25,7 @@ $lxd-button-lg-height: 3rem; // Altura — lg
 $lxd-button-padding-inline: 2rem; // Inline (horizontal) padding
 $lxd-button-focus-ring-width: 2px; // Focus ring width
 $lxd-button-focus-ring-style: solid; // Focus ring border style
-$lxd-button-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-focus-ring-offset: 0.25rem; // Separación entre el botón y el anillo de foco (4px): el hueco es el fondo de la superficie, y eso lo hace leerse como foco y no como un borde más
 $lxd-button-sm-padding-inline: 1.5rem; // Inline padding — sm
 $lxd-button-sm-font-size: 0.875rem; // Font size — sm
 $lxd-button-lg-padding-inline: 4rem; // Inline padding — lg
@@ -51,8 +51,8 @@ $lxd-button-primary-disabled-border: #4a4a4a; // Border color when disabled
 $lxd-button-primary-padding-inline: 2rem; // Inline (horizontal) padding
 $lxd-button-primary-focus-ring-width: 2px; // Focus ring width
 $lxd-button-primary-focus-ring-style: solid; // Focus ring border style
-$lxd-button-primary-focus-ring-offset: 2px; // Focus ring offset
-$lxd-button-primary-focus-ring-color: #baabff; // Focus ring color
+$lxd-button-primary-focus-ring-offset: 0.25rem; // Focus ring offset
+$lxd-button-primary-focus-ring-color: #111e30; // Anillo de foco: la tinta de la superficie (prusia), no el lavanda del botón — así se ve como foco, no como borde
 $lxd-button-primary-bg: #baabff; // Background
 $lxd-button-primary-color: #111e30; // Text color
 $lxd-button-primary-border: #baabff; // Border color
@@ -81,7 +81,7 @@ $lxd-button-destructive-disabled-border: #4a4a4a; // Border color when disabled
 $lxd-button-destructive-padding-inline: 2rem; // Inline (horizontal) padding
 $lxd-button-destructive-focus-ring-width: 2px; // Focus ring width
 $lxd-button-destructive-focus-ring-style: solid; // Focus ring border style
-$lxd-button-destructive-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-destructive-focus-ring-offset: 0.25rem; // Focus ring offset
 $lxd-button-destructive-focus-ring-color: #b30000; // Focus ring color
 $lxd-button-destructive-bg: #ffffff; // Background
 $lxd-button-destructive-color: #b30000; // Text color
@@ -111,7 +111,7 @@ $lxd-button-outline-disabled-border: #d0d0d0; // Border color when disabled
 $lxd-button-outline-padding-inline: 2rem; // Inline (horizontal) padding
 $lxd-button-outline-focus-ring-width: 2px; // Focus ring width
 $lxd-button-outline-focus-ring-style: solid; // Focus ring border style
-$lxd-button-outline-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-outline-focus-ring-offset: 0.25rem; // Focus ring offset
 $lxd-button-outline-focus-ring-color: #111e30; // Focus ring color — dark on light backgrounds
 $lxd-button-outline-bg: rgba(0, 0, 0, 0); // Background
 $lxd-button-outline-color: #111e30; // Text color
@@ -170,7 +170,7 @@ $lxd-button-ghost-disabled-color: #4a4a4a; // Text color when disabled
 $lxd-button-ghost-padding-inline: 2rem; // Inline (horizontal) padding
 $lxd-button-ghost-focus-ring-width: 2px; // Focus ring width
 $lxd-button-ghost-focus-ring-style: solid; // Focus ring border style
-$lxd-button-ghost-focus-ring-offset: 2px; // Focus ring offset
+$lxd-button-ghost-focus-ring-offset: 0.25rem; // Focus ring offset
 $lxd-button-ghost-focus-ring-color: #111e30; // Focus ring color
 $lxd-button-ghost-bg: rgba(0, 0, 0, 0); // Background — transparente en reposo
 $lxd-button-ghost-color: #111e30; // Text color

@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v20.1.0
+
+### Cambiado
+
+- Anillo de foco de `Button`: por fuera, a 4px del botón (`button.focus-ring-offset`
+  = `spacing.1`), en la tinta de la superficie en todas las variantes — el
+  `primary` deja de usar el lavanda (invisible sobre sí mismo). El hueco es el
+  fondo, y así se lee como foco y no como un borde más.
+
 ## v20.0.1
 
 ### Corregido

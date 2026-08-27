@@ -340,3 +340,17 @@ export const RenderComposition: Story = {
     await expect(args.onClick).toHaveBeenCalled();
   },
 };
+
+export const ContratoFoco: Story = {
+  name: 'Test — anillo de foco por fuera, en la tinta de la superficie',
+  tags: ['!dev'],
+  render: () => <Button variant="primary">Crear cuenta</Button>,
+  play: async ({ canvasElement }) => {
+    const boton = within(canvasElement).getByRole('button', { name: 'Crear cuenta' });
+    await userEvent.tab();
+    await expect(boton).toHaveFocus();
+    const cs = getComputedStyle(boton);
+    await expect(parseFloat(cs.outlineOffset)).toBeGreaterThanOrEqual(4);
+    await expect(cs.outlineColor).not.toBe(cs.backgroundColor);
+  },
+};
