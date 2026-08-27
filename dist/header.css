@@ -35,6 +35,8 @@
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   color: var(--header-nav-color);
   padding-inline-end: var(--header-nav-padding-inline);
 }
@@ -79,6 +81,8 @@
   font-size: var(--header-nav-font-size-overlay);
   font-weight: var(--header-nav-font-weight-overlay);
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   color: var(--header-nav-color);
   padding-block: var(--header-nav-padding-block-overlay);
   padding-inline: var(--header-nav-padding-inline);
@@ -99,6 +103,8 @@
   font-size: var(--header-nav-font-size-overlay);
   font-weight: var(--header-nav-font-weight-overlay);
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   color: var(--header-nav-color);
 }
 

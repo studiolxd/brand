@@ -10,8 +10,8 @@ $lxd-form-links-gap: 1rem; // Aire entre los enlaces secundarios (¿olvidaste la
 $lxd-form-links-margin-block-start: 1.5rem; // Aire entre las acciones y los enlaces secundarios
 $lxd-form-alternatives-gap: 0.75rem; // Aire entre las alternativas (acceso con Google, enlace mágico…)
 $lxd-form-alternatives-margin-block-start: 2rem; // Aire entre el bloque principal y las alternativas
-$lxd-form-alternatives-label-font-size: 0.875rem; // El rótulo de las alternativas («o continúa con»)
-$lxd-form-alternatives-label-color: #4a4a4a; // Color del rótulo de las alternativas
+$lxd-form-alternatives-label-font-size: 1rem; // El rótulo de las alternativas («o continúa con»)
+$lxd-form-alternatives-label-color: #111e30; // Color del rótulo de las alternativas
 $lxd-form-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de error
 $lxd-form-error-font-size: 0.875rem; // Font size del mensaje de error (14px)
 $lxd-form-error-font-weight: 300; // Font weight del mensaje de error
@@ -21,7 +21,7 @@ $lxd-form-helper-font-family: "Google Sans Flex", system-ui, sans-serif; // Font
 $lxd-form-helper-font-size: 0.875rem; // Font size del texto de ayuda (14px)
 $lxd-form-helper-font-weight: 300; // Font weight del texto de ayuda
 $lxd-form-helper-line-height: 1.5; // Line height del texto de ayuda
-$lxd-form-helper-color: #4a4a4a; // Color del texto de ayuda
+$lxd-form-helper-color: #111e30; // Color del texto de ayuda: tinta (prusia), no gris
 $lxd-form-success-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de éxito
 $lxd-form-success-font-size: 1rem; // Font size del mensaje de éxito (18px)
 $lxd-form-success-font-weight: 300; // Font weight del mensaje de éxito

@@ -79,6 +79,8 @@
   padding-inline: var(--app-launcher-tile-padding-inline);
   border-radius: var(--app-launcher-tile-border-radius);
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   text-align: center;
   cursor: pointer;
   outline: none;

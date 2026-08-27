@@ -35,6 +35,8 @@
 .site-nav__label-link {
   color: inherit;
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
 }
 .site-nav__link {
   display: inline-block;

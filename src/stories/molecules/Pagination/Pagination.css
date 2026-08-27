@@ -47,6 +47,8 @@
   border: none;
   cursor: pointer;
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   transition-property: background-color, color;
   transition-duration: var(--pagination-transition-duration);
   transition-timing-function: var(--pagination-transition-easing);

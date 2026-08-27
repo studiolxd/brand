@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   color: var(--color-text-on-light);
 }
 

@@ -23,13 +23,11 @@
 /* Links dentro del label */
 .radio-field__label a {
   color: var(--link-color);
-  text-decoration: var(--link-text-decoration);
   cursor: var(--link-cursor);
 }
 
 .radio-field__label a:hover {
   color: var(--link-hover-color);
-  text-decoration: var(--link-hover-text-decoration);
 }
 
 .radio-field__label a:focus-visible {

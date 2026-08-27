@@ -32,6 +32,8 @@
 .theme-switcher__option.theme-switcher__option--current {
   font-weight: var(--theme-switcher-list-current-font-weight);
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   cursor: default;
 }
 .theme-switcher__option:focus-visible {

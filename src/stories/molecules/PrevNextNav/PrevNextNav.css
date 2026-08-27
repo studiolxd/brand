@@ -17,6 +17,8 @@
   align-items: center;
   color: var(--prev-next-nav-btn-color);
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
   background: none;
   border: none;
   padding-block: 0;

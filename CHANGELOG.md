@@ -7,6 +7,20 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.10.0
+
+### Cambiado
+
+- Enlaces: el subrayado es una **línea bajo el enlace** (sombra interior con
+  `link.underline-width`/`underline-offset`), no `text-decoration`: cubre texto
+  e icono, se separa del texto y desaparece en hover. Los componentes que visten
+  sus propios enlaces la anulan (`box-shadow: none; padding-block-end: 0`);
+  `a.button` queda fuera. Fuera `link.text-decoration`/`hover-text-decoration`.
+- Textos de ayuda de los campos en tinta: prusia sobre claro, blanco sobre
+  oscuro (`form.helper.color`), no gris.
+- `Form`: el rótulo de las alternativas («O continúa con») en cuerpo normal y
+  color de texto, no como pista.
+
 ## v19.9.1
 
 ### Corregido

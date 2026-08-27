@@ -12,7 +12,7 @@
   --form-links-margin-block-start: var(--spacing-5); /** Aire entre las acciones y los enlaces secundarios */
   --form-alternatives-gap: var(--spacing-3); /** Aire entre las alternativas (acceso con Google, enlace mágico…) */
   --form-alternatives-margin-block-start: var(--spacing-6); /** Aire entre el bloque principal y las alternativas */
-  --form-alternatives-label-font-size: var(--font-size-1); /** El rótulo de las alternativas («o continúa con») */
+  --form-alternatives-label-font-size: var(--font-size-2); /** El rótulo de las alternativas («o continúa con») */
   --form-error-font-family: var(--font-family-sans); /** Font family del mensaje de error */
   --form-error-font-size: var(--font-size-1); /** Font size del mensaje de error (14px) */
   --form-error-line-height: var(--line-height-normal); /** Line height del mensaje de error */
@@ -22,11 +22,11 @@
   --form-success-font-family: var(--font-family-sans); /** Font family del mensaje de éxito */
   --form-success-font-size: var(--font-size-2); /** Font size del mensaje de éxito (18px) */
   --form-success-line-height: var(--line-height-normal); /** Line height del mensaje de éxito */
-  --form-alternatives-label-color: var(--color-text-muted-on-light); /** Color del rótulo de las alternativas */
+  --form-alternatives-label-color: var(--color-text-on-light); /** Color del rótulo de las alternativas */
   --form-error-font-weight: var(--font-weight-default); /** Font weight del mensaje de error */
   --form-error-color: var(--color-error-text-on-light); /** Color del mensaje de error */
   --form-helper-font-weight: var(--font-weight-default); /** Font weight del texto de ayuda */
-  --form-helper-color: var(--color-text-muted-on-light); /** Color del texto de ayuda */
+  --form-helper-color: var(--color-text-on-light); /** Color del texto de ayuda: tinta (prusia), no gris */
   --form-success-font-weight: var(--font-weight-default); /** Font weight del mensaje de éxito */
   --form-success-color: var(--color-text-on-light); /** Color del mensaje de éxito */
 }
@@ -34,8 +34,8 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --form-alternatives-label-color: var(--color-text-muted-on-dark); /** Rótulo de las alternativas — surface-dark */
+  --form-alternatives-label-color: var(--color-text-on-dark); /** Rótulo de las alternativas — surface-dark */
   --form-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
-  --form-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
+  --form-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark (blanco) */
   --form-success-color: var(--color-text-on-dark); /** Color del mensaje de éxito — surface-dark */
 }

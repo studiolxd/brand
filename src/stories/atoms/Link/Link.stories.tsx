@@ -50,8 +50,10 @@ export const Contrato: Story = {
     await expect(int).toHaveAttribute('aria-current', 'page');
     const a = getComputedStyle(int); const b = getComputedStyle(canvas.getByTestId('crudo'));
     await expect(a.color).toBe(b.color);
-    await expect(a.textDecorationLine).toBe('underline');
-    await expect(a.textDecorationLine).toBe(b.textDecorationLine);
+    // la línea del enlace es una sombra interior (no text-decoration): igual en <Link> y en <a> crudo
+    await expect(a.textDecorationLine).toBe('none');
+    await expect(b.boxShadow).not.toBe('none');
+    await expect(a.paddingBottom).toBe(b.paddingBottom);
   },
 };
 

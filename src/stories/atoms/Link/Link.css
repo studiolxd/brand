@@ -1,14 +1,22 @@
 /* Viste a TODOS los enlaces (`a`) desde la base: un enlace crudo en contenido
    de CMS o markdown se ve igual que <Link>. El componente solo añade API. */
-a {
+/* El subrayado es una línea bajo el enlace, no text-decoration: cubre texto e
+   icono por igual, se separa del texto (offset) y desaparece en hover. Va como
+   sombra interior para no tocar bordes ni maquetación. Especificidad mínima
+   (:where): los componentes que visten sus propios enlaces la anulan con
+   `box-shadow: none; padding-block-end: 0`, igual que anulaban el subrayado.
+   Los botones-enlace (`a.button`) quedan fuera. */
+a:where(:not(.button)) {
   color: var(--link-color);
-  text-decoration: var(--link-text-decoration);
+  text-decoration: none;
+  padding-block-end: var(--link-underline-offset);
+  box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
   cursor: var(--link-cursor);
 }
 
-a:hover {
+a:where(:not(.button)):hover {
   color: var(--link-hover-color);
-  text-decoration: var(--link-hover-text-decoration);
+  box-shadow: none;
 }
 
 a:focus-visible {
@@ -23,13 +31,6 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: var(--link-icon-gap);
-  text-decoration: none;
-  padding-block-end: var(--link-icon-underline-offset);
-  border-block-end: var(--link-icon-underline-width) solid currentColor;
-}
-.link--with-icon:hover {
-  text-decoration: none;
-  border-block-end-color: transparent;
 }
 .link__icon {
   flex-shrink: 0;

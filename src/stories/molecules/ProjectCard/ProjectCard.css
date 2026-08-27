@@ -10,16 +10,20 @@
 .project-card__title-link {
   color: inherit;
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
 }
 
 .project-card__title-link:hover {
-  text-decoration: var(--link-hover-text-decoration);
+  box-shadow: none;
 }
 
 /* ─── Image link ─────────────────────────────────────────── */
 .project-card__image-link {
   display: block;
   text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
 }
 
 /* ─── Image wrapper ───────────────────────────────────────── */
