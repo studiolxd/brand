@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { Calendar } from './Calendar';
 
 const meta: Meta<typeof Calendar> = {
-  title: 'Por revisar/Molecules/Calendar',
+  title: 'Molecules/Calendar',
   component: Calendar,
   parameters: {
     layout: 'padded',
@@ -18,6 +18,7 @@ const meta: Meta<typeof Calendar> = {
     disabledDates:  { control: false },
     minDate:        { control: false },
     maxDate:        { control: false },
+    gridLabel:      { control: { type: 'text' } },
     navigable:      { control: { type: 'boolean' } },
     locale:         { control: { type: 'text' } },
     size:           { control: { type: 'select' }, options: ['sm', 'md', 'lg'] },
@@ -151,5 +152,44 @@ export const Etiquetas: Story = {
     await expect(en.getByLabelText('Previous month')).toBeInTheDocument();
     await expect(en.getByLabelText('Next month')).toBeInTheDocument();
     await expect(en.queryByLabelText('Mes anterior')).toBeNull();
+  },
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: (args) => {
+    const [value, setValue] = useState<Date | null>(new Date());
+    return <Calendar {...args} value={value} onChange={setValue} />;
+  },
+};
+
+/**
+ * Test: la rejilla es una sola parada de tabulador y se recorre con el teclado
+ * — flechas de día, Inicio/Fin de semana, RePág/AvPág de mes.
+ */
+export const Teclado: Story = {
+  name: 'Test — teclado de la rejilla',
+  tags: ['!dev'],
+  render: () => <Calendar defaultMonth={new Date(2025, 0, 1)} value={new Date(2025, 0, 15)} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const grid = canvas.getByRole('grid');
+    const tabbable = within(grid)
+      .getAllByRole('gridcell')
+      .filter((cell) => cell.getAttribute('tabindex') === '0');
+
+    await expect(tabbable).toHaveLength(1);
+    await expect(tabbable[0]).toHaveTextContent('15');
+
+    tabbable[0].focus();
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(document.activeElement).toHaveTextContent('16');
+
+    await userEvent.keyboard('{ArrowDown}');
+    await expect(document.activeElement).toHaveTextContent('23');
+
+    await userEvent.keyboard('{Home}');
+    await expect(document.activeElement).toHaveTextContent('20');
   },
 };

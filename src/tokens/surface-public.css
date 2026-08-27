@@ -36,7 +36,6 @@
   --form-success-font-size: var(--text-font-size);
   --message-bubble-font-size: var(--text-font-size);
   --modal-description-font-size: var(--text-font-size);
-  --prev-next-nav-font-size: var(--text-font-size);
   --table-font-size: var(--text-font-size);
   --table-line-height: var(--text-line-height);
   --text-h1-font-size: var(--text-size-8);
@@ -73,6 +72,7 @@
   --number-input-field-helper-font-size: var(--form-helper-font-size);
   --otp-field-error-font-size: var(--form-error-font-size);
   --otp-field-helper-font-size: var(--form-helper-font-size);
+  --prev-next-nav-font-size: var(--text-font-size);
   --radio-field-sm-label-font-size: var(--text-paragraph-small-font-size);
   --radio-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --radio-field-label-font-size: var(--text-font-size);

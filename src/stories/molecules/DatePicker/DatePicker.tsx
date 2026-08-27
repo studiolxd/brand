@@ -139,6 +139,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
       <Calendar
         value={value ?? null}
         onChange={handleSelect}
+        gridLabel={calendarLabel}
         minDate={minDate}
         maxDate={maxDate}
         disabledDates={disabledDates}

@@ -46,6 +46,7 @@
 
 .calendar__nav:hover:not(:disabled) {
   background-color: var(--calendar-nav-hover-bg);
+  color: var(--calendar-nav-hover-color);
 }
 
 .calendar__nav:focus-visible {
@@ -73,6 +74,11 @@
 /* Las filas son transparentes al grid — sus hijos participan directamente en la cuadrícula */
 .calendar__row {
   display: contents;
+}
+
+.calendar__weekday abbr {
+  text-decoration: none;
+  cursor: inherit;
 }
 
 .calendar__weekday {
@@ -111,6 +117,7 @@
 
 .calendar__day:hover:not(.calendar__day--disabled):not(.calendar__day--selected) {
   background-color: var(--calendar-day-hover-bg);
+  color: var(--calendar-day-hover-color);
 }
 
 .calendar__day:focus-visible {
@@ -132,13 +139,13 @@
 .calendar__day.calendar__day--today::after {
   content: '';
   position: absolute;
-  bottom: 3px;
+  bottom: var(--calendar-today-marker-offset);
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: var(--calendar-today-border-color);
+  width: var(--calendar-today-marker-size);
+  height: var(--calendar-today-marker-size);
+  border-radius: var(--calendar-today-marker-radius);
+  background-color: var(--calendar-today-marker-color);
 }
 
 /* Selected */
@@ -149,6 +156,10 @@
 
 .calendar__day.calendar__day--selected.calendar__day--today::after {
   background-color: var(--calendar-selected-color);
+}
+
+.calendar__day--today:hover:not(.calendar__day--disabled):not(.calendar__day--selected)::after {
+  background-color: var(--calendar-day-hover-color);
 }
 
 /* Disabled */

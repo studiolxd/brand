@@ -7,7 +7,8 @@ $lxd-calendar-padding-block: 0.75rem; // Padding vertical del componente
 $lxd-calendar-padding-inline: 0.75rem; // Padding horizontal del componente
 $lxd-calendar-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
 $lxd-calendar-nav-color: #111e30; // Color de los botones prev/next
-$lxd-calendar-nav-hover-bg: #f2f2f2; // Fondo hover de los botones de navegación
+$lxd-calendar-nav-hover-bg: #111e30; // Fondo hover de los botones de navegación — relleno de marca, el patrón de Menu/Button ghost (no un gris de estado)
+$lxd-calendar-nav-hover-color: #ffffff; // Color del icono de navegación en hover
 $lxd-calendar-nav-disabled-color: #6b6b6b; // Color deshabilitado de los botones de navegación
 $lxd-calendar-nav-disabled-cursor: not-allowed; // Cursor deshabilitado
 $lxd-calendar-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación
@@ -24,16 +25,20 @@ $lxd-calendar-day-font-weight: 300; // Peso de fuente de los días
 $lxd-calendar-day-radius: 0px; // Radio de borde de los botones de día
 $lxd-calendar-day-color: #111e30; // Color de texto de los días
 $lxd-calendar-day-bg: rgba(0, 0, 0, 0); // Fondo base de los días
-$lxd-calendar-day-hover-bg: #f2f2f2; // Fondo hover de los días
+$lxd-calendar-day-hover-bg: #111e30; // Fondo hover de los días — relleno de marca, el patrón de Menu/Button ghost (no un gris de estado)
+$lxd-calendar-day-hover-color: #ffffff; // Color del texto del día en hover
 $lxd-calendar-day-focus-ring-color: #111e30; // Color del focus ring de los días
 $lxd-calendar-day-focus-ring-width: 2px; // Grosor del focus ring de los días
 $lxd-calendar-day-focus-ring-offset: 1px; // Separación del focus ring de los días
 $lxd-calendar-today-color: #111e30; // Color de texto del día de hoy
 $lxd-calendar-today-font-weight: 500; // Peso de fuente del día de hoy
-$lxd-calendar-today-border-color: #111e30; // Color del indicador (borde inferior) del día de hoy
+$lxd-calendar-today-marker-color: #111e30; // Color del marcador del día de hoy
+$lxd-calendar-today-marker-size: 0.25rem; // Lado del marcador del día de hoy
+$lxd-calendar-today-marker-offset: 0.25rem; // Separación del marcador respecto al borde inferior de la celda
+$lxd-calendar-today-marker-radius: 0px; // Radio del marcador del día de hoy — recto, como toda esquina del sistema
 $lxd-calendar-selected-bg: #111e30; // Fondo del día seleccionado
 $lxd-calendar-selected-color: #ffffff; // Texto del día seleccionado
-$lxd-calendar-outside-color: #6b6b6b; // Color de los días fuera del mes actual (contraste ≥4.5:1)
+$lxd-calendar-outside-color: #4a4a4a; // Color de los días fuera del mes actual — se leen, así que son texto secundario, no gris de icono
 $lxd-calendar-disabled-color: #6b6b6b; // Color de los días deshabilitados
 $lxd-calendar-disabled-cursor: not-allowed; // Cursor de los días deshabilitados
 $lxd-calendar-transition-duration: 150ms; // Duración de las transiciones

@@ -11,14 +11,13 @@
   --calendar-padding-block: var(--spacing-3); /** Padding vertical del componente */
   --calendar-padding-inline: var(--spacing-3); /** Padding horizontal del componente */
   --calendar-font-family: var(--font-family-sans); /** Familia tipográfica base */
-  --calendar-nav-hover-bg: var(--color-grey-lightest); /** Fondo hover de los botones de navegación */
   --calendar-nav-disabled-color: var(--color-grey-dark); /** Color deshabilitado de los botones de navegación */
   --calendar-title-font-size: var(--font-size-2); /** Tamaño del título del mes — md */
   --calendar-weekday-font-size: var(--font-size-1); /** Tamaño de las cabeceras de día de semana */
   --calendar-day-size: var(--spacing-6); /** Tamaño (ancho y alto) de los botones de día — md */
   --calendar-day-font-size: var(--font-size-1); /** Tamaño de fuente de los días */
-  --calendar-day-hover-bg: var(--color-grey-lightest); /** Fondo hover de los días */
-  --calendar-outside-color: var(--color-grey-dark); /** Color de los días fuera del mes actual (contraste ≥4.5:1) */
+  --calendar-today-marker-size: var(--spacing-1); /** Lado del marcador del día de hoy */
+  --calendar-today-marker-offset: var(--spacing-1); /** Separación del marcador respecto al borde inferior de la celda */
   --calendar-disabled-color: var(--color-grey-dark); /** Color de los días deshabilitados */
   --calendar-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
   --calendar-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
@@ -28,6 +27,8 @@
   --calendar-lg-title-font-size: var(--font-size-2); /** Tamaño del título — lg */
   --calendar-lg-day-font-size: var(--font-size-2); /** Tamaño de fuente de los días — lg */
   --calendar-nav-color: var(--color-text-on-light); /** Color de los botones prev/next */
+  --calendar-nav-hover-bg: var(--color-primary); /** Fondo hover de los botones de navegación — relleno de marca, el patrón de Menu/Button ghost (no un gris de estado) */
+  --calendar-nav-hover-color: var(--color-text-on-dark); /** Color del icono de navegación en hover */
   --calendar-nav-focus-ring-color: var(--color-primary); /** Color del focus ring de los botones de navegación */
   --calendar-nav-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
   --calendar-nav-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
@@ -37,32 +38,38 @@
   --calendar-day-font-weight: var(--font-weight-default); /** Peso de fuente de los días */
   --calendar-day-radius: var(--border-radius-default); /** Radio de borde de los botones de día */
   --calendar-day-color: var(--color-text-on-light); /** Color de texto de los días */
+  --calendar-day-hover-bg: var(--color-primary); /** Fondo hover de los días — relleno de marca, el patrón de Menu/Button ghost (no un gris de estado) */
+  --calendar-day-hover-color: var(--color-text-on-dark); /** Color del texto del día en hover */
   --calendar-day-focus-ring-color: var(--color-primary); /** Color del focus ring de los días */
   --calendar-day-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring de los días */
   --calendar-day-focus-ring-offset: var(--border-width-default); /** Separación del focus ring de los días */
   --calendar-today-color: var(--color-primary); /** Color de texto del día de hoy */
   --calendar-today-font-weight: var(--font-weight-emphasis); /** Peso de fuente del día de hoy */
-  --calendar-today-border-color: var(--color-primary); /** Color del indicador (borde inferior) del día de hoy */
+  --calendar-today-marker-color: var(--color-primary); /** Color del marcador del día de hoy */
+  --calendar-today-marker-radius: var(--border-radius-default); /** Radio del marcador del día de hoy — recto, como toda esquina del sistema */
   --calendar-selected-bg: var(--color-primary); /** Fondo del día seleccionado */
   --calendar-selected-color: var(--color-text-on-dark); /** Texto del día seleccionado */
+  --calendar-outside-color: var(--color-text-muted-on-light); /** Color de los días fuera del mes actual — se leen, así que son texto secundario, no gris de icono */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --calendar-nav-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover de navegación — surface-dark */
-  --calendar-day-hover-bg: rgba(255, 255, 255, 0.12); /** Fondo hover de días — surface-dark */
   --calendar-nav-disabled-color: var(--color-grey-light); /** Color deshabilitado de navegación — surface-dark */
-  --calendar-outside-color: var(--color-grey-light); /** Días fuera de mes — surface-dark */
   --calendar-disabled-color: var(--color-grey-light); /** Días deshabilitados — surface-dark */
   --calendar-nav-color: var(--color-text-on-dark); /** Color de navegación — surface-dark */
+  --calendar-nav-hover-bg: var(--color-text-on-dark); /** Fondo hover de navegación — surface-dark */
+  --calendar-nav-hover-color: var(--color-primary); /** Icono de navegación en hover — surface-dark */
   --calendar-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring de navegación — surface-dark */
   --calendar-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
   --calendar-weekday-color: var(--color-text-muted-on-dark); /** Color de cabeceras de día — surface-dark */
   --calendar-day-color: var(--color-text-on-dark); /** Color de días — surface-dark */
+  --calendar-day-hover-bg: var(--color-text-on-dark); /** Fondo hover de días — surface-dark */
+  --calendar-day-hover-color: var(--color-primary); /** Texto del día en hover — surface-dark */
   --calendar-day-focus-ring-color: var(--color-text-on-dark); /** Focus ring de días — surface-dark */
   --calendar-today-color: var(--color-text-on-dark); /** Color del día de hoy — surface-dark */
-  --calendar-today-border-color: var(--color-text-on-dark); /** Borde del día de hoy — surface-dark */
+  --calendar-today-marker-color: var(--color-text-on-dark); /** Marcador del día de hoy — surface-dark */
   --calendar-selected-bg: var(--color-text-on-dark); /** Fondo del día seleccionado — surface-dark */
   --calendar-selected-color: var(--color-background-dark); /** Texto del día seleccionado — surface-dark */
+  --calendar-outside-color: var(--color-text-muted-on-dark); /** Días fuera de mes — surface-dark */
 }

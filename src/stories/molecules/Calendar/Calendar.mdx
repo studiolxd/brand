@@ -1,0 +1,104 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CalendarStories from "./Calendar.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { calendarTokens, calendarDarkTokens } from "../../../tokens/molecules/calendar";
+
+<Meta of={CalendarStories} />
+
+# Calendar
+
+La rejilla de mes del sistema: elige un día. Es la pieza que montan por dentro
+`DatePicker` y `DateTimeField`, y se puede usar suelta cuando el calendario es
+la interfaz y no el desplegable de un campo.
+
+<Canvas of={CalendarStories.Default} />
+
+## Anatomía
+
+Cabecera (mes anterior · nombre del mes · mes siguiente) sobre una rejilla de
+siete columnas: una fila de cabeceras de día y tantas filas de semana como
+ocupe el mes. La semana empieza en lunes y solo se dibujan las semanas que el
+mes realmente ocupa, así que la altura del componente varía de un mes a otro.
+
+Los nombres de mes y de día salen de `Intl` a partir de `locale` (por defecto
+`es-ES`): no son props de texto. Sí lo son los rótulos de los dos botones de
+navegación y el nombre de la rejilla.
+
+## Selección y mes visible
+
+`value`/`onChange` controlan el día elegido; `month`/`onMonthChange` el mes
+visible. Cada par funciona por separado: se puede llevar la selección desde
+fuera y dejar que el componente gestione su propio mes, o al revés.
+
+<Canvas of={CalendarStories.ConSeleccion} />
+
+Con `navigable={false}` desaparecen los dos botones y el mes lo mueve quien
+consuma el componente.
+
+<Canvas of={CalendarStories.Controlado} />
+
+## Días no seleccionables
+
+`minDate`, `maxDate` y `disabledDates` (lista o función) marcan los días que no
+se pueden elegir. Siguen dibujados y siguen siendo alcanzables con el teclado
+—se leen, hay que poder saber que están ahí— pero llevan `aria-disabled` y no
+disparan `onChange`.
+
+<Canvas of={CalendarStories.ConFechasDeshabilitadas} />
+
+## Tamaños
+
+<Canvas of={CalendarStories.Tamanos} />
+
+## Superficie oscura
+
+<Canvas of={CalendarStories.EnSuperficieOscura} />
+
+---
+
+## Teclado
+
+La rejilla sigue el patrón de rejilla de WAI-ARIA: **una sola parada de
+tabulador** para todo el mes (el día seleccionado, o el 1 si no hay
+selección), y dentro se navega con el teclado.
+
+| Tecla | Qué hace |
+|---|---|
+| <kbd>←</kbd> / <kbd>→</kbd> | Día anterior / siguiente |
+| <kbd>↑</kbd> / <kbd>↓</kbd> | Misma columna, semana anterior / siguiente |
+| <kbd>Inicio</kbd> / <kbd>Fin</kbd> | Lunes / domingo de la semana |
+| <kbd>RePág</kbd> / <kbd>AvPág</kbd> | Mes anterior / siguiente |
+| <kbd>Mayús</kbd> + <kbd>RePág</kbd> / <kbd>AvPág</kbd> | Año anterior / siguiente |
+| <kbd>Enter</kbd> / <kbd>Espacio</kbd> | Selecciona el día enfocado |
+| <kbd>Tab</kbd> | Sale de la rejilla |
+
+Cuando el movimiento cruza el borde del mes, el mes visible cambia solo y el
+foco cae en el día de destino.
+
+## Tokens
+
+<TokenTable tokens={calendarTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={calendarDarkTokens} />
+
+## Accesibilidad
+
+- La rejilla es `role="grid"` con filas `role="row"`, cabeceras
+  `role="columnheader"` y días `role="gridcell"`.
+- Su nombre accesible es el del mes visible; dentro de un panel con nombre
+  propio (el `Popover` de `DatePicker`) se pasa por `gridLabel`.
+- El nombre del mes es una región `aria-live="polite"`: al cambiar de mes el
+  lector lo anuncia sin que el foco se mueva de sitio.
+- Hoy lleva `aria-current="date"`; el día elegido, `aria-selected`; los no
+  seleccionables, `aria-disabled` (nunca el `disabled` nativo, que los sacaría
+  del recorrido).
+- Las cabeceras de día enseñan la inicial y llevan el nombre completo en un
+  `<abbr>`: una letra suelta no es un nombre.
+- El hover de días y de navegación es relleno de marca (el patrón de
+  `Menu`/`Button ghost`), no un gris de estado.
+
+## Props
+
+<ArgTypes of={CalendarStories} />
