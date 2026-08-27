@@ -7,13 +7,20 @@ import { codeBlockTokens } from "../../../tokens/components/code-block";
 
 # CodeBlock
 
-Bloque de código con tipografía monoespaciada (Google Sans Code) sobre una superficie gris clara. Estructuralmente hereda de `Card` (padding, radio de esquinas, sombra y borde de la variante `outline`); el fondo gris y la tipografía monoespaciada son propios del componente, ya que `Card` no define ninguno de los dos.
+Un fragmento de código listo para leer y copiar: un comando de instalación, un ejemplo de uso, la respuesta de una API. Es una **superficie clara secundaria** —el gris claro que el sistema reserva para código, teclas y burbujas— sobre el fondo de la página.
 
-Cabecera opcional con etiqueta de lenguaje (`language`) y botón de copiar al portapapeles (`copyable`), ambos independientes entre sí.
+No resalta sintaxis: acepta texto plano o nodos ya formateados por un highlighter externo. Para una tecla suelta (`⌘K`), `Kbd`; para código dentro de un párrafo, el `<code>` de la prosa.
 
-## Solo código
+<Canvas of={CodeBlockStories.PorDefecto} />
 
-<Canvas of={CodeBlockStories.SoloCodigo} />
+## Anatomía
+
+- **Cabecera** (opcional): aparece si hay `language`, `copyable` o ambos.
+  - **Lenguaje**: un `Tag` neutro con el nombre del lenguaje.
+  - **Copiar**: un `Button` ghost a talla `sm`, alineado a la derecha.
+- **Área de código**: un `<pre>` con su propio scroll horizontal, focalizable con teclado.
+
+Estructuralmente hereda de `Card` (aire, esquina recta y borde de la variante `outline`). El fondo gris y la tipografía monoespaciada (Google Sans Code) son propios: `Card` no define ninguno de los dos.
 
 ## Con etiqueta de lenguaje
 
@@ -21,11 +28,9 @@ Cabecera opcional con etiqueta de lenguaje (`language`) y botón de copiar al po
 
 ## Con botón de copiar
 
-Copia el texto plano del código (vía `textContent`, funciona igual con `children` de texto o con nodos ya resaltados) y muestra un feedback visual breve (icono `check` + `aria-label` "Copiado").
+Copia el texto plano del código (vía `textContent`, igual con `children` de texto que con nodos resaltados). El icono pasa a `check` durante un segundo y medio, y el cambio se canta a los lectores de pantalla por una región live.
 
 <Canvas of={CodeBlockStories.ConBotonCopiar} />
-
-## Con etiqueta y botón de copiar
 
 <Canvas of={CodeBlockStories.ConLenguajeYCopiar} />
 
@@ -35,7 +40,7 @@ Copia el texto plano del código (vía `textContent`, funciona igual con `childr
 
 ## Línea larga
 
-El `<pre>` interno usa `overflow-x: auto`, así que una línea muy larga hace scroll horizontal sin romper el layout del contenedor.
+El `<pre>` interno usa `overflow-x: auto`: una línea muy larga hace scroll dentro del bloque, sin desbordar el contenedor ni la página.
 
 <Canvas of={CodeBlockStories.LineaLarga} />
 
@@ -45,15 +50,24 @@ El `<pre>` interno usa `overflow-x: auto`, así que una línea muy larga hace sc
 
 <Canvas of={CodeBlockStories.ConNodosResaltados} />
 
+## Superficie oscura
+
+<Canvas of={CodeBlockStories.SuperficieOscura} />
+
+El bloque es una superficie clara **autocontenida** (mismo criterio que `button.primary`): gris claro con tinta prusia y borde prusia, idéntico sobre página clara y sobre página oscura. No tiene tokens `surface-dark-*`, ni los hereda por referencia a `Card`: un `var()` dentro de una custom property se sustituye donde se declara, así que el remapeo oscuro de `Card` no llega hasta aquí.
+
 ---
 
 ## Tokens
 
 <TokenTable tokens={codeBlockTokens} />
 
-## Tema oscuro
+## Accesibilidad
 
-`bg` y `color` son una excepción deliberada (mismo criterio que `button.primary`): al no tener equivalente en `Card`, forman un par de color autocontenido (gris claro + texto oscuro) que se mantiene idéntico en ambos temas, sin remapeo `surface-dark-*`. `border-color` sí hereda la cascada de `Card` y remapea a blanco en `surface-dark`, para seguir marcando el contorno de la superficie clara sobre una página oscura.
+- El **área de código** lleva `tabindex="0"` y `role="region"` con nombre accesible (`codeLabel`): un contenedor con scroll debe poder recorrerse con teclado, y al ser focalizable necesita anillo de foco propio — el del sistema, con los tokens `focus-ring-*`.
+- El **botón de copiar** mantiene siempre el mismo nombre accesible (`copyLabel`): cambiarlo bajo el foco haría que el lector de pantalla renombrase el botón que el usuario está usando. El resultado se anuncia por separado, en una región `role="status"` (live polite) con `copiedLabel`.
+- Si el portapapeles no está disponible (contexto no seguro, permiso denegado), no hay anuncio de copiado y el código sigue siendo seleccionable a mano.
+- **Contraste**: tinta prusia sobre gris claro, AAA en ambos temas.
 
 ## Props
 
@@ -61,7 +75,4 @@ El `<pre>` interno usa `overflow-x: auto`, así que una línea muy larga hace sc
 
 ## Internacionalización
 
-El `aria-label` del botón de copiar se traduce con las props `copyLabel` y `copiedLabel`.
-
-Los textos por defecto están en castellano. Ver **Foundations › Internacionalización** para la
-convención completa.
+`copyLabel`, `copiedLabel` y `codeLabel` traducen los tres textos que emite el componente; `codeLabel` es una función porque interpola el lenguaje. Ver **Foundations › Internacionalización**.

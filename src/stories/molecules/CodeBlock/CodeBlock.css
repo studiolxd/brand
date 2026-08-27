@@ -1,3 +1,5 @@
+@import '../../../tokens/components/code-block.css';
+
 .code-block {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,6 @@
   color: var(--code-block-color);
   border: var(--code-block-border-width) solid var(--code-block-border-color);
   border-radius: var(--code-block-border-radius);
-  box-shadow: var(--code-block-shadow);
   padding-inline: var(--code-block-padding-inline);
   padding-block-start: var(--code-block-padding-block-start);
   padding-block-end: var(--code-block-padding-block-end);
@@ -22,9 +23,16 @@
   margin-inline-start: auto;
 }
 
+/* El área de código hace su propio scroll horizontal: es focalizable con
+   teclado (`tabindex`), así que necesita anillo de foco propio. */
 .code-block__pre {
   margin: 0;
   overflow-x: auto;
+}
+
+.code-block__pre:focus-visible {
+  outline: var(--code-block-focus-ring-width) var(--code-block-focus-ring-style) var(--code-block-focus-ring-color);
+  outline-offset: var(--code-block-focus-ring-offset);
 }
 
 .code-block__code {

@@ -5,7 +5,6 @@ $lxd-code-block-padding-inline: 1rem; // Padding horizontal — heredado de card
 $lxd-code-block-padding-block-start: 1rem; // Padding block start — heredado de card
 $lxd-code-block-padding-block-end: 0.75rem; // Padding block end — heredado de card
 $lxd-code-block-border-radius: 0px; // Radio de esquinas — heredado de card
-$lxd-code-block-shadow: none; // Sombra de la superficie — heredada de card
 $lxd-code-block-border-width: 1px; // Grosor de borde — heredado de card (variante outline)
 $lxd-code-block-border-color: #111e30; // Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro
 $lxd-code-block-color: #111e30; // Color de texto — fijo, no remapea en surface-dark (ver nota en bg)
@@ -14,3 +13,7 @@ $lxd-code-block-font-family: "Google Sans Code", ui-monospace, monospace; // Mon
 $lxd-code-block-font-size: 0.875rem; // Tamaño de fuente del código — mismo tamaño que paragraph small
 $lxd-code-block-line-height: 1.65; // Interlineado del código — mismo criterio que paragraph small
 $lxd-code-block-header-gap: 0.5rem; // Separación en la cabecera (entre language tag y botón copiar) y entre la cabecera y el código
+$lxd-code-block-focus-ring-width: 2px; // Grosor del anillo de foco del área de código: el `<pre>` con scroll horizontal es focalizable con teclado
+$lxd-code-block-focus-ring-style: solid; // Estilo del anillo de foco del área de código
+$lxd-code-block-focus-ring-offset: 1px; // Separación del anillo de foco respecto al área de código
+$lxd-code-block-focus-ring-color: #111e30; // Color del anillo de foco — prusia, como el borde. No remapea en oscuro: la superficie del bloque es clara en los dos temas
