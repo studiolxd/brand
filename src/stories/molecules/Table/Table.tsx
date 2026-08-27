@@ -42,6 +42,8 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
   onClick?: () => void;
   /** Alternativa explícita a onClick para control manual */
   interactive?: boolean;
+  /** Marca la fila como seleccionada: se dice con tinta y peso, sin fondo. */
+  selected?: boolean;
   children: ReactNode;
 }
 
@@ -92,29 +94,27 @@ export function TableHeader({
         {...rest}
         scope={scope}
         className={classes}
-        onClick={onSort}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onSort?.();
-          }
-        }}
-        tabIndex={0}
         aria-sort={
           sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : 'none'
         }
       >
-        <span className="table__header-content">
+        {/*
+          Patrón WAI-ARIA de tabla ordenable: el estado vive en el `aria-sort` del
+          `th` y la acción en un `<button>` dentro. El botón da activación nativa
+          con Enter y Espacio, y su nombre accesible es solo el rótulo de la
+          columna — el estado no se mezcla con el nombre.
+        */}
+        <button type="button" className="table__header-content" onClick={onSort}>
           {children}
           <Icon name="chevron" size="xs" className="table__sort-icon" />
-          <VisuallyHidden>
-            {sorted === 'asc'
-              ? sortedAscLabel
-              : sorted === 'desc'
-                ? sortedDescLabel
-                : sortableLabel}
-          </VisuallyHidden>
-        </span>
+        </button>
+        <VisuallyHidden>
+          {sorted === 'asc'
+            ? sortedAscLabel
+            : sorted === 'desc'
+              ? sortedDescLabel
+              : sortableLabel}
+        </VisuallyHidden>
       </th>
     );
   }
@@ -137,12 +137,18 @@ export function TableHeader({
 export function TableRow({
   onClick,
   interactive = false,
+  selected = false,
   children,
   className,
   ...rest
 }: TableRowProps) {
   const isInteractive = interactive || !!onClick;
-  const classes = ['table__row', isInteractive ? 'table__row--interactive' : '', className]
+  const classes = [
+    'table__row',
+    isInteractive ? 'table__row--interactive' : '',
+    selected ? 'table__row--selected' : '',
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 

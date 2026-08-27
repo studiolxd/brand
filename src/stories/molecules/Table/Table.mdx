@@ -1,0 +1,147 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TableStories from "./Table.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import {
+  tableBaseTokens,
+  tableHeaderTokens,
+  tableRowTokens,
+  tableFooterTokens,
+  tableFocusTokens,
+  tableSmTokens,
+  tableDarkTokens,
+} from "../../../tokens/molecules/table";
+
+<Meta of={TableStories} />
+
+# Table
+
+Tabla de datos compuesta. `Table` renderiza el `<table>` dentro de un contenedor que
+scrollea en horizontal, y las subpartes (`Table.Head`, `Table.Body`, `Table.Footer`,
+`Table.Row`, `Table.Header`, `Table.Cell`) renderizan los elementos nativos
+correspondientes. No aporta comportamiento: ordenar, filtrar o paginar es tarea de quien
+la usa —o de `DataTable`, que monta ese comportamiento encima con TanStack Table.
+
+Las subpartes están también como **named exports** (`TableHead`, `TableBody`…). En
+**Server Components** hay que usar los named exports: el namespace (`Table.Head`) requiere
+contexto cliente.
+
+## Por defecto
+
+<Canvas of={TableStories.Default} />
+
+## Con ordenación
+
+`Table.Header` acepta `sortable`, `sorted` (`'asc' | 'desc' | false`) y `onSort`. El
+componente no ordena nada: pinta la cabecera, anuncia el estado y avisa del click.
+
+<Canvas of={TableStories.ConSorting} />
+
+## Con filas interactivas
+
+Una `Table.Row` con `onClick` (o `interactive`) se vuelve pulsable y enfocable. `selected`
+marca la fila elegida.
+
+<Canvas of={TableStories.ConFilasInteractivas} />
+
+## Con footer y colSpan
+
+<Canvas of={TableStories.ConFooterYColspan} />
+
+## Con columna de acciones
+
+`Table.Header actions` marca la columna de acciones: su rótulo se oculta visualmente
+(default `"Acciones"`, prop `actionsLabel`) y la columna se encoge a su contenido.
+
+<Canvas of={TableStories.ConColumnaDeAcciones} />
+
+## Densidad compacta
+
+<Canvas of={TableStories.Sm} />
+
+## Superficie oscura
+
+<Canvas of={TableStories.EnSuperficieOscura} />
+
+---
+
+## Cómo se dicen los estados
+
+- **Hover de fila interactiva**: inversión —relleno de marca y tinta clara—, el mismo
+  patrón que `Menu` y `SidebarNav`. No hay fondo gris de estado en el sistema.
+- **Fila seleccionada**: tinta y peso (`row-selected-color`, `row-selected-font-weight`),
+  sin fondo, igual que la conversación abierta del `ConversationList`. Bajo el puntero la
+  fila seleccionada adopta la tinta del hover para seguir leyéndose sobre el relleno.
+- **Hover de una columna ordenable**: no pinta fondo; lleva el icono de ordenación de su
+  opacidad en reposo (`sort-icon-inactive-opacity`) al color activo. La afordancia es el
+  icono, no un rectángulo gris.
+- **Pie de tabla**: `footer-bg` es `surface.secondary-on-light`, superficie clara
+  secundaria —el mismo rol que usan `Kbd` o `CodeBlock`—, no un fondo de estado.
+
+## Ancho de la columna de acciones
+
+`.table__header--actions` lleva `width: 1px`. No fija un ancho: con el reparto automático
+de `<table>` el navegador da el sobrante a las demás columnas y encoge esta a su
+contenido. Es la forma estándar de decir «esta columna ocupa lo mínimo».
+
+## Accesibilidad
+
+- La cabecera ordenable es un **`<button>` dentro del `<th>`** (patrón WAI-ARIA). El `th`
+  conserva `aria-sort` (`ascending` / `descending` / `none`) y el botón aporta la
+  activación nativa con Enter y **Espacio** —lo que el `tabIndex` + `onKeyDown` manual
+  anterior no garantizaba en todos los navegadores.
+- El **nombre accesible del botón es solo el rótulo de la columna**: el estado no se mezcla
+  con el nombre. El texto de estado (`sortedAscLabel`, `sortedDescLabel`, `sortableLabel`)
+  va en un `VisuallyHidden` hermano, dentro de la celda, para los lectores que no anuncian
+  `aria-sort`.
+- `caption` se renderiza oculto visualmente y da nombre a la tabla. Es **opcional**: sin él,
+  el nombre accesible se pasa por `aria-label` a través del rest-spread.
+- La columna de acciones oculta su rótulo visualmente, pero lo conserva para el lector.
+
+## Internacionalización de las etiquetas
+
+Todos los textos que la tabla emite por su cuenta están en **castellano por defecto**.
+
+| Prop | Default | Dónde aparece |
+| --- | --- | --- |
+| `sortableLabel` | `"Activar ordenación"` | texto oculto de una columna ordenable sin ordenar |
+| `sortedAscLabel` | `"Ordenado ascendente"` | texto oculto de la columna ordenada de forma ascendente |
+| `sortedDescLabel` | `"Ordenado descendente"` | texto oculto de la columna ordenada de forma descendente |
+| `actionsLabel` | `"Acciones"` | rótulo oculto de la cabecera de la columna de acciones |
+
+La convención completa está en **Foundations › Internacionalización**.
+
+---
+
+## Props
+
+<ArgTypes of={TableStories} />
+
+---
+
+## Tokens — base
+
+<TokenTable tokens={tableBaseTokens} />
+
+## Tokens — cabecera y ordenación
+
+<TokenTable tokens={tableHeaderTokens} />
+
+## Tokens — filas y celdas
+
+<TokenTable tokens={tableRowTokens} />
+
+## Tokens — pie
+
+<TokenTable tokens={tableFooterTokens} />
+
+## Tokens — focus ring
+
+<TokenTable tokens={tableFocusTokens} />
+
+## Tokens — densidad compacta
+
+<TokenTable tokens={tableSmTokens} />
+
+## Tokens — superficie oscura
+
+<TokenTable tokens={tableDarkTokens} />

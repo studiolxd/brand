@@ -8,22 +8,24 @@ $lxd-table-line-height: 1.5; // Interlineado heredado del cuerpo de la superfici
 $lxd-table-color: #111e30; // Color de texto base
 $lxd-table-bg: rgba(0, 0, 0, 0); // Fondo de la tabla
 $lxd-table-border-width: 1px; // Grosor de separadores de fila
-$lxd-table-border-color: #111e30; // Color de separadores de fila
 $lxd-table-header-padding-block: 0.75rem; // Padding block del encabezado
 $lxd-table-header-padding-inline: 0.75rem; // Padding inline del encabezado
 $lxd-table-header-font-weight: 500; // Peso tipográfico del encabezado
-$lxd-table-header-border-width: 1px; // Borde inferior del thead — más grueso que los separadores
+$lxd-table-header-border-width: 1px; // Borde inferior del thead — 1px, como todo borde del sistema; la cabecera se lee por peso, no por grosor
+$lxd-table-header-content-gap: 0.5rem; // Separación entre el rótulo de la columna y el icono de ordenación
 $lxd-table-header-border-color: #111e30; // Color del borde inferior del thead
-$lxd-table-header-hover-bg: #f2f2f2; // Fondo en hover de columna sortable
-$lxd-table-sort-icon-color: #6b6b6b; // Color del icono de sort inactivo
+$lxd-table-sort-icon-color: #4a4a4a; // Icono de ordenación en reposo — atenuado por la opacidad inactiva; el hover lo lleva al color activo
 $lxd-table-sort-icon-active-color: #111e30; // Color del icono de sort activo
 $lxd-table-sort-icon-inactive-opacity: 0.35; // Opacidad del icono de sort cuando sortable pero sin sort activo
 $lxd-table-cell-padding-block: 0.75rem; // Padding block de celda
 $lxd-table-cell-padding-inline: 0.75rem; // Padding inline de celda
 $lxd-table-row-border-color: #111e30; // Color del separador entre filas
-$lxd-table-row-hover-bg: #f2f2f2; // Fondo de fila interactiva en hover
-$lxd-table-footer-bg: #f2f2f2; // Fondo del tfoot
-$lxd-table-footer-border-width: 1px; // Borde superior del tfoot — mismo grosor que el del thead
+$lxd-table-row-hover-bg: #111e30; // Fondo de fila interactiva al hover: el mismo relleno de marca que los menús y el SidebarNav
+$lxd-table-row-hover-color: #ffffff; // Tinta de la fila interactiva al hover, sobre el relleno de marca
+$lxd-table-row-selected-color: #111e30; // Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris
+$lxd-table-row-selected-font-weight: 500; // Peso de la fila seleccionada
+$lxd-table-footer-bg: #f2f2f2; // Fondo del tfoot: superficie clara secundaria, no un fondo de estado
+$lxd-table-footer-border-width: 1px; // Borde superior del tfoot — 1px, como el del thead
 $lxd-table-footer-border-color: #111e30; // Color del borde superior del tfoot
 $lxd-table-footer-font-weight: 500; // Peso tipográfico de las celdas del footer
 $lxd-table-focus-ring-color: #111e30; // Color del focus ring

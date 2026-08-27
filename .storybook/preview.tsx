@@ -17,9 +17,18 @@ import studiolxdTheme from './studiolxdTheme'
  * a cualquier descendiente del `<html>`, portales incluidos. `body` ya pinta
  * su propio fondo/color desde esos tokens (`base.css`), así que el lienzo del
  * canvas queda coherente sin envolver en un div aparte.
+ *
+ * Excepción: en la **página de docs** conviven todas las stories del
+ * componente, así que teñir el `<html>` desde la story oscura oscurecería
+ * también a las demás (y las dejaría ilegibles). Ahí el lienzo se acota a un
+ * contenedor `.surface-dark`; el canvas de la story sigue usando el `<html>`,
+ * que es donde importa alcanzar a los portales.
  */
 const withSurface: Decorator = (Story, context) => {
-  const isDark = context.globals.backgrounds?.value === 'dark' || context.parameters.surface === 'dark';
+  const fromBackground = context.globals.backgrounds?.value === 'dark';
+  const fromParameter = context.parameters.surface === 'dark';
+  const scoped = fromParameter && context.viewMode === 'docs';
+  const isDark = (fromBackground || fromParameter) && !scoped;
 
   // eslint-disable-next-line react-hooks/rules-of-hooks -- decorator de Storybook, no un componente: se invoca como parte del render de cada story y puede usar hooks con seguridad.
   useEffect(() => {
@@ -29,6 +38,14 @@ const withSurface: Decorator = (Story, context) => {
       document.documentElement.removeAttribute('data-theme');
     };
   }, [isDark]);
+
+  if (scoped) {
+    return (
+      <div className="surface-dark">
+        <Story />
+      </div>
+    );
+  }
 
   return <Story />;
 };

@@ -12,7 +12,7 @@ componente al revisarlo — no con un gris de fondo por defecto. Hoy lo usan as�
 36 tokens; van cayendo con la revisión:
 
 - [ ] hover de ítem: ContextMenu, UserMenu, OrgSwitcher, SidebarNav,
-      ConversationList, Table (fila y cabecera), Calendar (día y
+      ConversationList, Calendar (día y
       nav), CalendarPlanner, CalendarRoster, Modal (cierre), DotsButton,
       NumberInput, Button (variante con hover gris)
 - [ ] activo: OrgSwitcher, ConversationList
@@ -39,8 +39,12 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
       texto → `color.text.muted-on-light` (grey-darkest), con par
       `muted-on-dark` nuevo (2026-08-27). (`icon-color` se queda: icono.)
 - [x] **Tabs** — `trigger-color` (grey-dark) era texto → `color.text.muted-on-light` (2026-08-27).
-- [ ] **Table** — `sort-icon-color` (grey-dark) sobre `header-hover-bg`
-      (grey-lightest). Icono: pasa a 3:1, pero rompe la regla.
+- [x] **Table** — hecho (2026-08-27): `sort-icon-color` pasa a
+      `text.muted-on-light` y `header-hover-bg` (huérfano, nunca usado) se
+      retira. El hover de una columna ordenable no pinta fondo: lleva el icono
+      de su opacidad en reposo al color activo. El hover de fila se invierte
+      como en Menu/SidebarNav y `footer-bg` pasa al rol
+      `surface.secondary-on-light`.
 - [ ] **Modal** — `close-color` (grey-dark) sobre `close-hover-bg`
       (grey-lightest). Ídem, icono.
 - [ ] **Calendar / CalendarPlanner / CalendarRoster** — `outside-color`
@@ -91,7 +95,8 @@ Regla: el mínimo de la escala es 4px; 2, 6 y 10px no existen en el sistema.
       `gap: 0.125rem` → `spacing-1`.
 - [ ] **FileUpload** — `--_gap: 10px` → `spacing-2` o `spacing-3`; y un
       `gap: 0.125rem` (2px) → `spacing-1`.
-- [ ] **Table** — `gap: 0.375rem` (6px) → `spacing-2`.
+- [x] **Table** — `gap: 0.375rem` (6px) → `spacing-2`, en el token propio
+      `table.header-content-gap` (2026-08-27).
 
 ## Tallas de componente (2026-08-25)
 
@@ -182,8 +187,9 @@ foco (`border-width.focus`). Toda esquina recta (`border-radius.default` = 0);
 solo píldoras y círculos usan `border-radius.round`. Los tokens ya apuntan a
 roles; lo que queda es comprobar visualmente cada componente al revisarlo.
 
-- [ ] **Table** — `header-border-width` y `footer-border-width` bajan de 2px a
-      1px. Comprobar que la cabecera sigue leyéndose como tal (peso/fondo).
+- [x] **Table** — `header-border-width` y `footer-border-width` ya estaban en
+      `border-width.default` (1px) en el JSON; comprobado en Storybook que la
+      cabecera se sigue leyendo por peso (2026-08-27).
 - [x] **Tabs** — `trigger-indicator-width` ya estaba en `border-width.default`
       (1px) en el JSON; comprobado visualmente en Storybook (2026-08-27).
 - [x] **Spinner** — el grosor (2/2/3px) es ahora el `stroke-width` del cuadrado

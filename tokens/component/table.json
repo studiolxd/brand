@@ -8,16 +8,15 @@
     "bg":                  { "$value": "transparent",                 "$type": "color",     "$description": "Fondo de la tabla" },
 
     "border-width":        { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor de separadores de fila" },
-    "border-color":        { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de separadores de fila" },
 
     "header-padding-block":   { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding block del encabezado" },
     "header-padding-inline":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding inline del encabezado" },
     "header-font-weight":     { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso tipográfico del encabezado" },
-    "header-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde inferior del thead — más grueso que los separadores" },
+    "header-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde inferior del thead — 1px, como todo borde del sistema; la cabecera se lee por peso, no por grosor" },
+    "header-content-gap":     { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Separación entre el rótulo de la columna y el icono de ordenación" },
     "header-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde inferior del thead" },
-    "header-hover-bg":        { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo en hover de columna sortable" },
 
-    "sort-icon-color":         { "$value": "{color.grey-dark}",       "$type": "color",     "$description": "Color del icono de sort inactivo" },
+    "sort-icon-color":         { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Icono de ordenación en reposo — atenuado por la opacidad inactiva; el hover lo lleva al color activo" },
     "sort-icon-active-color":  { "$value": "{color.primary}",         "$type": "color",     "$description": "Color del icono de sort activo" },
     "sort-icon-inactive-opacity": { "$value": "0.35",                 "$type": "number",    "$description": "Opacidad del icono de sort cuando sortable pero sin sort activo" },
 
@@ -25,10 +24,13 @@
     "cell-padding-inline":    { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding inline de celda" },
 
     "row-border-color":       { "$value": "{color.primary}",       "$type": "color",     "$description": "Color del separador entre filas" },
-    "row-hover-bg":           { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo de fila interactiva en hover" },
+    "row-hover-bg":           { "$value": "{color.primary}",          "$type": "color",     "$description": "Fondo de fila interactiva al hover: el mismo relleno de marca que los menús y el SidebarNav" },
+    "row-hover-color":        { "$value": "{color.text.on-dark}",     "$type": "color",     "$description": "Tinta de la fila interactiva al hover, sobre el relleno de marca" },
+    "row-selected-color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris" },
+    "row-selected-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de la fila seleccionada" },
 
-    "footer-bg":              { "$value": "{color.grey-lightest}",    "$type": "color",     "$description": "Fondo del tfoot" },
-    "footer-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde superior del tfoot — mismo grosor que el del thead" },
+    "footer-bg":              { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo del tfoot: superficie clara secundaria, no un fondo de estado" },
+    "footer-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde superior del tfoot — 1px, como el del thead" },
     "footer-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde superior del tfoot" },
     "footer-font-weight":     { "$value": "{font-weight.emphasis}",     "$type": "number",    "$description": "Peso tipográfico de las celdas del footer" },
 
@@ -45,14 +47,14 @@
     "sm-cell-padding-block":    { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Padding block de celda — variante sm" },
     "sm-cell-padding-inline":   { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Padding inline de celda — variante sm" },
     "surface-dark-color":              { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de texto base — surface-dark" },
-    "surface-dark-border-color":       { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Separadores de fila — surface-dark" },
     "surface-dark-header-border-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde inferior del thead — surface-dark" },
-    "surface-dark-header-hover-bg":    { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo hover de columna sortable — surface-dark" },
     "surface-dark-sort-icon-color":       { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Icono de sort inactivo — surface-dark" },
     "surface-dark-sort-icon-active-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Icono de sort activo — surface-dark" },
     "surface-dark-row-border-color":   { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Separador entre filas — surface-dark" },
-    "surface-dark-row-hover-bg":       { "$value": "rgba(255, 255, 255, 0.08)",  "$type": "color", "$description": "Fondo de fila en hover — surface-dark" },
-    "surface-dark-footer-bg":          { "$value": "rgba(255, 255, 255, 0.04)",  "$type": "color", "$description": "Fondo del tfoot — surface-dark" },
+    "surface-dark-row-hover-bg":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo de fila al hover — surface-dark: invertido, como los menús" },
+    "surface-dark-row-hover-color":    { "$value": "{color.primary}",           "$type": "color", "$description": "Tinta de la fila al hover — surface-dark" },
+    "surface-dark-row-selected-color": { "$value": "{color.accent-1}",          "$type": "color", "$description": "Tinta de la fila seleccionada — surface-dark: lavanda, como en el SidebarNav" },
+    "surface-dark-footer-bg":          { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del tfoot — surface-dark" },
     "surface-dark-footer-border-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde superior del tfoot — surface-dark" },
     "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" }
   }

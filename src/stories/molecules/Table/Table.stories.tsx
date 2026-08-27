@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
+import { Button } from '../../atoms/Button/Button';
 import { Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell } from './Table';
 
 const meta: Meta<typeof Table> = {
-  title: 'Por revisar/Molecules/Table',
+  title: 'Molecules/Table',
   component: Table,
   parameters: {
     layout: 'padded',
@@ -57,8 +58,8 @@ export const PropPassthrough: Story = {
   name: 'Test — rest-spread + caption opcional',
   tags: ['!dev'],
   render: () => (
-    <Table aria-label="Proyectos" data-slot="table" className="extra">
-      <Table.Body data-slot="tbody">
+    <Table aria-label="Proyectos" data-origen="table" className="extra">
+      <Table.Body data-origen="tbody">
         <Table.Row>
           <Table.Cell>Uno</Table.Cell>
         </Table.Row>
@@ -69,12 +70,12 @@ export const PropPassthrough: Story = {
     const table = canvasElement.querySelector('table')!;
     await expect(table).toHaveClass('table', 'extra');
     await expect(table.className.trim().endsWith('extra')).toBe(true);
-    await expect(table).toHaveAttribute('data-slot', 'table');
+    await expect(table).toHaveAttribute('data-origen', 'table');
     await expect(table).toHaveAttribute('aria-label', 'Proyectos');
     // sin caption → no se renderiza <caption>
     await expect(canvasElement.querySelector('caption')).toBeNull();
     // rest en la sección Body
-    await expect(canvasElement.querySelector('tbody')).toHaveAttribute('data-slot', 'tbody');
+    await expect(canvasElement.querySelector('tbody')).toHaveAttribute('data-origen', 'tbody');
     // sanity: el contenido sigue ahí
     await expect(within(canvasElement).getByText('Uno')).toBeInTheDocument();
   },
@@ -186,7 +187,11 @@ export const ConFilasInteractivas: Story = {
           </Table.Head>
           <Table.Body>
             {PROYECTOS.map((p) => (
-              <Table.Row key={p.nombre} onClick={() => setSeleccionado(p.nombre)}>
+              <Table.Row
+                key={p.nombre}
+                selected={seleccionado === p.nombre}
+                onClick={() => setSeleccionado(p.nombre)}
+              >
                 <Table.Cell>{p.nombre}</Table.Cell>
                 <Table.Cell>{p.cliente}</Table.Cell>
                 <Table.Cell>{p.fecha}</Table.Cell>
@@ -303,5 +308,108 @@ export const EtiquetasOrdenacion: Story = {
     await expect(en.getByText('Activate sorting')).toBeInTheDocument();
     await expect(en.getByText('Sorted ascending')).toBeInTheDocument();
     await expect(en.queryByText('Activar ordenación')).toBeNull();
+  },
+};
+
+export const ConColumnaDeAcciones: Story = {
+  name: 'Con columna de acciones',
+  render: () => (
+    <Table caption="Listado de proyectos con acciones">
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>Nombre</Table.Header>
+          <Table.Header>Cliente</Table.Header>
+          <Table.Header actions />
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {PROYECTOS.map((p) => (
+          <Table.Row key={p.nombre}>
+            <Table.Cell>{p.nombre}</Table.Cell>
+            <Table.Cell>{p.cliente}</Table.Cell>
+            <Table.Cell>
+              <Button variant="ghost" size="sm">Editar</Button>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  ),
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: () => (
+    <Table caption="Listado de proyectos sobre superficie oscura">
+      <Table.Head>
+        <Table.Row>
+          <Table.Header sortable sorted="asc" onSort={() => {}}>Nombre</Table.Header>
+          <Table.Header sortable onSort={() => {}}>Cliente</Table.Header>
+          <Table.Header>Estado</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {PROYECTOS.map((p, i) => (
+          <Table.Row key={p.nombre} interactive selected={i === 1}>
+            <Table.Cell>{p.nombre}</Table.Cell>
+            <Table.Cell>{p.cliente}</Table.Cell>
+            <Table.Cell>{p.estado}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+      <Table.Footer>
+        <Table.Row>
+          <Table.Cell colSpan={2}>Total proyectos</Table.Cell>
+          <Table.Cell>{PROYECTOS.length}</Table.Cell>
+        </Table.Row>
+      </Table.Footer>
+    </Table>
+  ),
+};
+
+/**
+ * Test: la cabecera ordenable es un `<button>` dentro del `<th>` — el estado
+ * vive en el `aria-sort` de la celda y el nombre accesible del botón es solo el
+ * rótulo de la columna. Enter y Espacio activan la ordenación.
+ */
+export const CabeceraOrdenableEsBoton: Story = {
+  name: 'Test — cabecera ordenable es un botón',
+  tags: ['!dev'],
+  render: () => {
+    const [veces, setVeces] = useState(0);
+    return (
+      <>
+        <p data-testid="veces">{veces}</p>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader sortable sorted="asc" onSort={() => setVeces((n) => n + 1)}>
+                Nombre
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow><TableCell>a</TableCell></TableRow>
+          </TableBody>
+        </Table>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // el estado se anuncia por el th, no por el nombre del botón
+    const th = canvasElement.querySelector('th')!;
+    await expect(th).toHaveAttribute('aria-sort', 'ascending');
+    await expect(th).not.toHaveAttribute('tabindex');
+
+    const boton = canvas.getByRole('button', { name: 'Nombre' });
+    await expect(boton).toHaveClass('table__header-content');
+
+    // activación nativa con teclado: Enter y Espacio
+    boton.focus();
+    await userEvent.keyboard('{Enter}');
+    await userEvent.keyboard(' ');
+    await expect(canvas.getByTestId('veces')).toHaveTextContent('2');
   },
 };
