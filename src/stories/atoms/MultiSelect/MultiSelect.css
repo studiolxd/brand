@@ -3,7 +3,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--multi-select-icon-size);
+  gap: var(--multi-select-content-gap);
 
   min-block-size: var(--multi-select-height);
   padding-block: 0;
@@ -33,7 +33,7 @@
 
 .multi-select:focus-visible {
   outline: var(--multi-select-focus-ring-width) solid var(--multi-select-focus-ring-color);
-  outline-offset: var(--multi-select-focus-ring-offset);
+  outline-offset: calc(-1 * (var(--multi-select-focus-ring-width) + var(--multi-select-border-width)));
 }
 
 .multi-select.multi-select--disabled {
@@ -92,7 +92,6 @@
 
 /* ─── Icon ────────────────────────────────────────────────── */
 .multi-select__icon {
-  width: var(--multi-select-icon-size);
   flex-shrink: 0;
   transform: rotate(90deg);
   transition: transform var(--multi-select-icon-transition) var(--motion-easing-default);
@@ -229,4 +228,9 @@
 /* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
 .multi-select__positioner {
   z-index: var(--multi-select-content-z-index);
+}
+
+/* Doble clase para ganar sobre el selector base */
+.multi-select.multi-select--error {
+  border-color: var(--multi-select-error-border-color);
 }

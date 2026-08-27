@@ -12,7 +12,7 @@ const options = [
 ];
 
 const meta: Meta<typeof MultiSelect> = {
-  title: 'Por revisar/Atoms/MultiSelect',
+  title: 'Atoms/MultiSelect',
   component: MultiSelect,
   parameters: {
     layout: 'padded',

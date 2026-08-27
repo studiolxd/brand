@@ -53,7 +53,6 @@ export const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>(function
         'radio-field',
         size !== 'md' ? `radio-field--${size}` : '',
         disabled ? 'radio-field--disabled' : '',
-        hasError ? 'radio-field--error' : '',
         className,
       ].filter(Boolean).join(' ')}
     >

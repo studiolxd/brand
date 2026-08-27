@@ -2,7 +2,7 @@
 .async-multi-select {
   display: inline-flex;
   align-items: center;
-  gap: var(--multi-select-icon-size);
+  gap: var(--multi-select-content-gap);
 
   min-block-size: var(--multi-select-height);
   padding-block: 0;
@@ -25,7 +25,7 @@
 
   &:focus-within {
     outline: var(--multi-select-focus-ring-width) solid var(--multi-select-focus-ring-color);
-    outline-offset: var(--multi-select-focus-ring-offset);
+    outline-offset: calc(-1 * (var(--multi-select-focus-ring-width) + var(--multi-select-border-width)));
   }
 }
 
@@ -247,4 +247,9 @@
 /* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
 .async-multi-select__positioner {
   z-index: var(--multi-select-content-z-index);
+}
+
+/* Doble clase para ganar sobre el selector base */
+.async-multi-select.async-multi-select--error {
+  border-color: var(--multi-select-error-border-color);
 }

@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as MultiSelectFieldStories from "./MultiSelectField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { multiSelectFieldBaseTokens, multiSelectFieldErrorTokens, multiSelectFieldHelperTokens } from "../../../tokens/molecules/multi-select-field";
+
+<Meta of={MultiSelectFieldStories} />
+
+# MultiSelectField
+
+El `MultiSelect` como campo de formulario: etiqueta, disparador con las opciones elegidas en píldoras, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+Cuando la lista de opciones no cabe en memoria y hay que buscarla en el servidor, el campo es `AsyncMultiSelectField`.
+
+<Canvas of={MultiSelectFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`) y **por defecto se ve**. El disparador es un `div` con `role="combobox"` —lleva píldoras dentro, no puede ser un `<button>`—, así que `htmlFor` no bastaría para nombrarlo: el campo lo enlaza además por `aria-labelledby`. Sin `id`, genera uno con `useId`.
+
+<Canvas of={MultiSelectFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`. El borde en error lo pone el propio control.
+
+<Canvas of={MultiSelectFieldStories.ConAyuda} />
+<Canvas of={MultiSelectFieldStories.ConError} />
+
+## Valor
+
+Sin `value`, el campo se gobierna solo (`defaultValue` fija el arranque). Con `value` + `onValueChange`, manda el consumidor.
+
+<Canvas of={MultiSelectFieldStories.ConValor} />
+<Canvas of={MultiSelectFieldStories.Controlado} />
+
+## Tallas
+
+`size` viaja al control: mide 32, 40 o 48 con una línea de píldoras y crece solo si envuelven.
+
+<Canvas of={MultiSelectFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={MultiSelectFieldStories.Deshabilitado} />
+<Canvas of={MultiSelectFieldStories.SoloLectura} />
+
+## Con react-hook-form
+
+El control es de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onValueChange` + `name` + `ref` al disparador. El `name` monta además un input oculto por valor elegido, que es lo que se envía con el formulario.
+
+```tsx
+<FormField
+  control={form.control}
+  name="servicios"
+  render={({ field, fieldState }) => (
+    <MultiSelectField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onValueChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Servicios"
+      options={options}
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={MultiSelectFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta nombra el disparador por `aria-labelledby` (y apunta a su `id` por `htmlFor`).
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- El texto del botón que quita una píldora es traducible con `removeLabel`.
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `MultiSelect`.
+
+### Base
+
+<TokenTable tokens={multiSelectFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={multiSelectFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={multiSelectFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={MultiSelectFieldStories} />

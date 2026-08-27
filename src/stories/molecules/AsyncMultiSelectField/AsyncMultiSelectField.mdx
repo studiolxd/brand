@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AsyncMultiSelectFieldStories from "./AsyncMultiSelectField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { asyncMultiSelectFieldBaseTokens, asyncMultiSelectFieldErrorTokens, asyncMultiSelectFieldHelperTokens } from "../../../tokens/molecules/async-multi-select-field";
+
+<Meta of={AsyncMultiSelectFieldStories} />
+
+# AsyncMultiSelectField
+
+El `AsyncMultiSelect` como campo de formulario: etiqueta, buscador con píldoras de lo ya elegido, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+Es el `MultiSelectField` cuando la lista no cabe en memoria: en vez de `options`, recibe `onSearch`.
+
+<Canvas of={AsyncMultiSelectFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`), enlazada por `id` al `<input>` de búsqueda, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={AsyncMultiSelectFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`.
+
+<Canvas of={AsyncMultiSelectFieldStories.ConAyuda} />
+<Canvas of={AsyncMultiSelectFieldStories.ConError} />
+
+## Valores y sus etiquetas
+
+El campo guarda **identificadores**, no etiquetas. Para poder pintar las píldoras hay que pasarle también `selectedOptions`: es el consumidor quien sabe a qué corresponde cada id que vino del servidor.
+
+<Canvas of={AsyncMultiSelectFieldStories.ConValores} />
+<Canvas of={AsyncMultiSelectFieldStories.Controlado} />
+
+## Tallas
+
+`size` viaja al control: mide 32, 40 o 48 con una línea de píldoras y crece solo si envuelven.
+
+<Canvas of={AsyncMultiSelectFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={AsyncMultiSelectFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+El contrato es `value` / `onValueChange` + `name` + `ref` al input de búsqueda:
+
+```tsx
+<FormField
+  control={form.control}
+  name="empleados"
+  render={({ field, fieldState }) => (
+    <AsyncMultiSelectField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onValueChange={(next) => { field.onChange(next); setOpciones(resolver(next)); }}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      selectedOptions={opciones}
+      label="Empleados"
+      onSearch={buscarEmpleados}
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={AsyncMultiSelectFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al input de búsqueda (`role="combobox"`).
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- Retroceso con la caja vacía quita la última píldora; el texto del botón × es traducible con `removeLabel`.
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `AsyncMultiSelect`, que comparte los tokens visuales del `MultiSelect`.
+
+### Base
+
+<TokenTable tokens={asyncMultiSelectFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={asyncMultiSelectFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={asyncMultiSelectFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={AsyncMultiSelectFieldStories} />

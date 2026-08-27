@@ -8,9 +8,7 @@
       "font-weight":  { "$value": "{form.error.font-weight}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
       "line-height":  { "$value": "{form.error.line-height}",  "$type": "number",    "$description": "Line height del mensaje de error" },
       "color":        { "$value": "{form.error.color}",        "$type": "color",     "$description": "Color del mensaje de error" },
-      "border-color": { "$value": "{color.error-text-on-light}", "$type": "color",   "$description": "Borde del select en error (texto/borde, nunca fondo)" },
-      "surface-dark-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Mensaje de error — surface-dark" },
-      "surface-dark-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" }
+      "surface-dark-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Mensaje de error — surface-dark" }
     },
 
     "helper": {

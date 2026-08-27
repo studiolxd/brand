@@ -13,13 +13,13 @@ El `Select` como campo de formulario: etiqueta, control, texto de ayuda y mensaj
 
 ## Etiqueta
 
-Siempre hay etiqueta (`label`), enlazada por `id`. `labelHidden` la deja solo para los lectores de pantalla cuando el contexto ya dice qué es el campo.
+Siempre hay etiqueta (`label`), enlazada por `id`; sin `id`, el campo genera uno con `useId`. `labelHidden` la deja solo para los lectores de pantalla cuando el contexto ya dice qué es el campo.
 
 <Canvas of={SelectFieldStories.EtiquetaOculta} />
 
 ## Ayuda y error
 
-`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error. Los dos quedan enlazados al control por `aria-describedby`, y el error también por `aria-invalid`. El borde en error usa el color de texto de error (`error-text-on-light`), nunca un fondo.
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados al control por `aria-describedby`, y el error también por `aria-invalid`. El borde en error lo pone el propio `Select` a partir de ese `aria-invalid`, en el color de texto de error, nunca un fondo.
 
 <Canvas of={SelectFieldStories.ConAyuda} />
 <Canvas of={SelectFieldStories.ConError} />
@@ -30,6 +30,45 @@ Una opción con `value: ""` sirve de «sin elegir» (el primer ítem de la lista
 
 <Canvas of={SelectFieldStories.ConValor} />
 <Canvas of={SelectFieldStories.Deshabilitado} />
+
+## Tallas
+
+`size` viaja al `Select`: el control mide 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={SelectFieldStories.Tallas} />
+
+## Con react-hook-form
+
+El control es de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onValueChange` + `name` + `ref` al disparador (para que react-hook-form pueda enfocarlo al fallar la validación). El `name` monta además el input oculto que se envía con el formulario.
+
+```tsx
+<FormField
+  control={form.control}
+  name="contrato"
+  render={({ field, fieldState }) => (
+    <SelectField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onValueChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Tipo de contrato"
+      options={options}
+      placeholder="Selecciona un tipo"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={SelectFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al disparador.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 
 ## Tokens
 

@@ -23,7 +23,7 @@ function mockSearch(query: string): Promise<AsyncSelectOption[]> {
 }
 
 const meta: Meta<typeof AsyncSelect> = {
-  title: 'Por revisar/Atoms/AsyncSelect',
+  title: 'Atoms/AsyncSelect',
   component: AsyncSelect,
   parameters: { layout: 'padded' },
   args: {

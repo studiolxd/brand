@@ -40,6 +40,11 @@ export interface SelectProps {
   size?: 'sm' | 'md' | 'lg';
   onValueChange?: (value: string) => void;
   id?: string;
+  /** Nombre del campo en el formulario: Base UI monta un input oculto con el valor. */
+  name?: string;
+  required?: boolean;
+  /** Se llama al salir del disparador (react-hook-form lo usa para validar). */
+  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
   /** Nombre accesible cuando el Select va suelto. En un campo lo nombra la etiqueta (`htmlFor`), que este atributo pisaría: no lo pongas ahí. */
   'aria-label'?: string;
   /** Ids de ayuda/error que describen el control (lo pone el campo). */
@@ -240,7 +245,7 @@ export const SelectSeparator: React.ForwardRefExoticComponent<
  * estilos/estructura. La API pública es idéntica a la anterior.
  * ───────────────────────────────────────────────────────────────────────────── */
 
-function SelectClosed({
+const SelectClosed = forwardRef<HTMLButtonElement, SelectProps>(function SelectClosed({
   options,
   value,
   defaultValue,
@@ -250,20 +255,25 @@ function SelectClosed({
   size = 'md',
   onValueChange,
   id,
+  name,
+  required,
+  onBlur,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedBy,
   'aria-invalid': ariaInvalid,
   container,
-}: SelectProps) {
+}: SelectProps, ref) {
   return (
     <SelectRoot
       value={value}
       defaultValue={defaultValue}
       disabled={disabled}
       readOnly={readOnly}
+      name={name}
+      required={required}
       onValueChange={onValueChange}
     >
-      <SelectTrigger size={size} id={id} aria-label={ariaLabel} aria-describedby={ariaDescribedBy} aria-invalid={ariaInvalid || undefined}>
+      <SelectTrigger ref={ref} size={size} id={id} onBlur={onBlur} aria-label={ariaLabel} aria-describedby={ariaDescribedBy} aria-invalid={ariaInvalid || undefined}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent size={size} container={container}>
@@ -275,7 +285,7 @@ function SelectClosed({
       </SelectContent>
     </SelectRoot>
   );
-}
+});
 
 /**
  * Select. Dos formas de uso:

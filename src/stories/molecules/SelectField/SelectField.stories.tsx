@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
+import { useForm, type ResolverResult } from 'react-hook-form';
+import { Button } from '../../atoms/Button/Button';
+import { FormProvider, FormField } from '../FormField/FormField';
 import { SelectField } from './SelectField';
 
 const options = [
@@ -50,5 +53,104 @@ export const Contrato: Story = {
     await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
     await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'tipo-contrato-helper');
     await expect(Math.round(control.getBoundingClientRect().height)).toBe(40);
+  },
+};
+
+/** Las tres tallas del sistema: el control mide 32, 40 y 48. */
+export const Tallas: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '20rem' }}>
+      <SelectField {...args} id="sf-sm" size="sm" label="Pequeño" />
+      <SelectField {...args} id="sf-md" size="md" label="Mediano" />
+      <SelectField {...args} id="sf-lg" size="lg" label="Grande" />
+    </div>
+  ),
+};
+
+export const ContratoTallas: Story = {
+  name: 'Test — el control mide la talla del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ inlineSize: '20rem' }}>
+      <SelectField id="ct-sm" size="sm" label="Pequeño" options={options} />
+      <SelectField id="ct-md" size="md" label="Mediano" options={options} />
+      <SelectField id="ct-lg" size="lg" label="Grande" options={options} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const alto = (name: string) =>
+      Math.round(canvas.getByRole('combobox', { name }).getBoundingClientRect().height);
+    await expect(alto('Pequeño')).toBe(32);
+    await expect(alto('Mediano')).toBe(40);
+    await expect(alto('Grande')).toBe(48);
+  },
+};
+
+export const ContratoIdGenerado: Story = {
+  name: 'Test — sin `id`, el campo genera uno',
+  tags: ['!dev'],
+  render: () => <SelectField label="Sin id" options={options} helperText="Ayuda" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const control = canvas.getByRole('combobox', { name: 'Sin id' });
+    const id = control.getAttribute('id');
+    await expect(id).toBeTruthy();
+    await expect(control).toHaveAttribute('aria-describedby', `${id}-helper`);
+  },
+};
+
+type Valores = { contrato: string };
+
+function resolver(values: Valores): ResolverResult<Valores> {
+  if (values.contrato) return { values, errors: {} };
+  return { values: {}, errors: { contrato: { type: 'required', message: 'Elige un tipo de contrato.' } } };
+}
+
+function FormularioRhf() {
+  const form = useForm<Valores>({ defaultValues: { contrato: '' }, resolver });
+
+  return (
+    <FormProvider {...form}>
+      <form
+        onSubmit={form.handleSubmit(() => {})}
+        style={{ display: 'grid', gap: '1rem', maxWidth: '20rem' }}
+      >
+        <FormField
+          control={form.control}
+          name="contrato"
+          render={({ field, fieldState }) => (
+            <SelectField
+              ref={field.ref}
+              name={field.name}
+              value={field.value}
+              onValueChange={field.onChange}
+              onBlur={field.onBlur}
+              disabled={field.disabled}
+              label="Tipo de contrato"
+              options={options.slice(1)}
+              placeholder="Selecciona un tipo"
+              errorMessage={fieldState.error?.message}
+            />
+          )}
+        />
+        <Button type="submit">Guardar</Button>
+      </form>
+    </FormProvider>
+  );
+}
+
+/**
+ * El control es de Base UI: el contrato es `value`/`onValueChange` + `name`
+ * + `ref` al disparador, no el spread del `field`.
+ */
+export const ConReactHookForm: Story = {
+  name: 'Con react-hook-form',
+  render: () => <FormularioRhf />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Guardar' }));
+    await expect(await canvas.findByRole('alert')).toHaveTextContent('Elige un tipo de contrato.');
+    await expect(canvas.getByRole('combobox', { name: 'Tipo de contrato' })).toHaveAttribute('aria-invalid', 'true');
   },
 };

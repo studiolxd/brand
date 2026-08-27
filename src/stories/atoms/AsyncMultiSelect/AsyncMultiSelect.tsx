@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useId, useCallback } from 'react';
+import { forwardRef, useState, useRef, useId, useCallback, type Ref } from 'react';
 import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
@@ -23,8 +23,22 @@ export interface AsyncMultiSelectProps {
   readOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
   id?: string;
+  /** Nombre del campo en el formulario: se monta un input oculto por valor elegido. */
+  name?: string;
+  /** Marca el estado de error: aplica la clase `async-multi-select--error` y `aria-invalid`. */
+  error?: boolean;
+  /** Se llama al salir del control (react-hook-form lo usa para validar). */
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  /** Se añade DESPUÉS de las clases propias del componente. */
+  className?: string;
+  /**
+   * Nombre accesible cuando el control va suelto. En un campo lo nombra la
+   * etiqueta (`htmlFor`), que este atributo pisaría: no lo pongas ahí.
+   */
   'aria-label'?: string;
   'aria-describedby'?: string;
+  /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
+  removeLabel?: (label: string) => string;
   /**
    * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
    * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
@@ -47,7 +61,16 @@ export interface AsyncMultiSelectProps {
   container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 
-export function AsyncMultiSelect({
+function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
+  if (typeof target === 'function') target(node);
+  else if (target) (target as React.RefObject<T | null>).current = node;
+}
+
+/**
+ * Búsqueda con resultados asíncronos y varios valores. El `ref` va al
+ * `<input>` de búsqueda, que es lo que se enfoca.
+ */
+export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectProps>(function AsyncMultiSelect({
   onSearch,
   value,
   defaultValue = [],
@@ -58,12 +81,17 @@ export function AsyncMultiSelect({
   readOnly,
   size = 'md',
   id,
+  name,
+  error = false,
+  onBlur,
+  className,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedby,
+  removeLabel = (label) => `Quitar ${label}`,
   emptyMessage = 'Sin resultados',
   loadingLabel = 'Buscando…',
   container,
-}: AsyncMultiSelectProps) {
+}: AsyncMultiSelectProps, ref) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -176,6 +204,8 @@ export function AsyncMultiSelect({
     size !== 'md' ? `async-multi-select--${size}` : '',
     disabled ? 'async-multi-select--disabled' : '',
     open ? 'async-multi-select--open' : '',
+    error ? 'async-multi-select--error' : '',
+    className ?? '',
   ].filter(Boolean).join(' ');
 
   const contentClass = [
@@ -194,7 +224,7 @@ export function AsyncMultiSelect({
                 <button
                   type="button"
                   className="async-multi-select__pill-remove"
-                  aria-label={`Quitar ${opt.label}`}
+                  aria-label={removeLabel(opt.label)}
                   tabIndex={-1}
                   onMouseDown={e => { e.preventDefault(); toggleValue(opt.value); }}
                 >
@@ -204,7 +234,7 @@ export function AsyncMultiSelect({
             </span>
           ))}
           <input
-            ref={inputRef}
+            ref={(node) => { inputRef.current = node; assignRef(ref, node); }}
             id={id}
             type="text"
             className="async-multi-select__input"
@@ -215,15 +245,21 @@ export function AsyncMultiSelect({
             placeholder={currentValues.length === 0 ? placeholder : undefined}
             disabled={disabled}
             readOnly={readOnly}
-            aria-label={ariaLabel ?? placeholder}
+            aria-label={ariaLabel}
             aria-describedby={ariaDescribedby}
+            aria-invalid={error || undefined}
             aria-expanded={open}
             aria-haspopup="listbox"
             aria-controls={listboxId}
             aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
             autoComplete="off"
             role="combobox"
+            onBlur={onBlur}
           />
+          {/* Lo que se envía con el formulario: un input oculto por valor. */}
+          {name && currentValues.map((v) => (
+            <input key={v} type="hidden" name={name} value={v} />
+          ))}
         </div>
         {loading && <Spinner size="sm" aria-hidden />}
       </div>
@@ -280,4 +316,4 @@ export function AsyncMultiSelect({
       </BasePopover.Portal>
     </BasePopover.Root>
   );
-}
+});

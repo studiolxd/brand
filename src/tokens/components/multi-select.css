@@ -3,13 +3,12 @@
  */
 
 :root {
-  --multi-select-icon-size: 0.625rem; /** Tamaño del chevron */
-  --multi-select-focus-ring-offset: -3px; /** Offset del anillo de foco (negativo = inset) */
   --multi-select-content-max-height: var(--available-height); /** Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI) */
   --multi-select-border-style: var(--select-border-style); /** Estilo del borde */
   --multi-select-height: var(--size-component-md); /** Altura mínima del trigger: la talla md del sistema. Crece solo si las pills ocupan más de una línea */
   --multi-select-sm-height: var(--size-component-sm); /** Altura mínima del trigger — sm */
   --multi-select-lg-height: var(--size-component-lg); /** Altura mínima del trigger — lg */
+  --multi-select-content-gap: var(--spacing-2); /** Aire entre el contenido del disparador y el chevron */
   --multi-select-pill-color: var(--color-white); /** Texto de la pill */
   --multi-select-pill-padding-block: var(--spacing-1); /** Padding block de la pill */
   --multi-select-pill-padding-inline: var(--spacing-2); /** Padding inline de la pill */

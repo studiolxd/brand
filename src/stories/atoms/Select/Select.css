@@ -38,6 +38,11 @@
 }
 
 /* ─── Icon ────────────────────────────────────────────────── */
+/* El error lo marca el propio control, desde el `aria-invalid` que le pone el campo. */
+.select[aria-invalid='true'] {
+  border-color: var(--select-error-border-color);
+}
+
 .select__icon {
   flex-shrink: 0;
   transform: rotate(90deg);

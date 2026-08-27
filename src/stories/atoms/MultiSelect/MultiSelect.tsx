@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useId } from 'react';
+import { forwardRef, useState, useRef, useEffect, useId } from 'react';
 import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import { Icon } from '../Icon/Icon';
 import './MultiSelect.css';
@@ -21,7 +21,25 @@ export interface MultiSelectProps {
   size?: 'sm' | 'md' | 'lg';
   onValueChange?: (value: string[]) => void;
   id?: string;
+  /** Nombre del campo en el formulario: se monta un input oculto por valor elegido. */
+  name?: string;
+  /** Marca el estado de error: aplica la clase `multi-select--error` y `aria-invalid`. */
+  error?: boolean;
+  /** Se llama al salir del disparador (react-hook-form lo usa para validar). */
+  onBlur?: React.FocusEventHandler<HTMLDivElement>;
+  /** Se añade DESPUÉS de las clases propias del componente. */
+  className?: string;
+  /**
+   * Nombre accesible cuando el control va suelto. En un campo lo nombra la
+   * etiqueta por `aria-labelledby`: no lo pongas ahí.
+   */
   'aria-label'?: string;
+  /** Id de la etiqueta que nombra el control (lo pone el campo). */
+  'aria-labelledby'?: string;
+  /** Ids de ayuda/error que describen el control (lo pone el campo). */
+  'aria-describedby'?: string;
+  /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
+  removeLabel?: (label: string) => string;
   /**
    * Nodo DOM donde montar el portal del dropdown (reenviado a Base UI
    * `Portal.container`). Por defecto se monta en `document.body`, que
@@ -33,7 +51,12 @@ export interface MultiSelectProps {
   container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 
-export function MultiSelect({
+/**
+ * Selección múltiple. El `ref` va al **disparador** (el `div` con
+ * `role="combobox"`), para que react-hook-form pueda enfocarlo al fallar la
+ * validación.
+ */
+export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function MultiSelect({
   options,
   value,
   defaultValue = [],
@@ -43,9 +66,16 @@ export function MultiSelect({
   size = 'md',
   onValueChange,
   id,
+  name,
+  error = false,
+  onBlur,
+  className,
   'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
+  removeLabel = (label) => `Quitar ${label}`,
   container,
-}: MultiSelectProps) {
+}: MultiSelectProps, ref) {
   const [open, setOpen] = useState(false);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
   const [focusedIndex, setFocusedIndex] = useState(0);
@@ -93,6 +123,8 @@ export function MultiSelect({
     'multi-select',
     size !== 'md' ? `multi-select--${size}` : '',
     disabled ? 'multi-select--disabled' : '',
+    error ? 'multi-select--error' : '',
+    className ?? '',
   ].filter(Boolean).join(' ');
 
   const contentClass = [
@@ -106,16 +138,21 @@ export function MultiSelect({
         nativeButton={false}
         render={
         <div
+          ref={ref}
           className={triggerClass}
           tabIndex={disabled ? -1 : 0}
           role="combobox"
           aria-expanded={open}
           aria-haspopup="listbox"
           aria-controls={listboxId}
-          aria-label={ariaLabel ?? placeholder}
+          aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? placeholder)}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          aria-invalid={error || undefined}
           aria-disabled={disabled || undefined}
           aria-readonly={readOnly || undefined}
           id={id}
+          onBlur={onBlur}
         >
           <div className="multi-select__values">
             {currentValues.length === 0 ? (
@@ -131,7 +168,7 @@ export function MultiSelect({
                       <button
                         type="button"
                         className="multi-select__pill-remove"
-                        aria-label={`Quitar ${option.label}`}
+                        aria-label={removeLabel(option.label)}
                         tabIndex={-1}
                         onClick={e => { e.stopPropagation(); toggleValue(v); }}
                       >
@@ -148,6 +185,10 @@ export function MultiSelect({
             className="multi-select__icon"
             size={size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm'}
           />
+          {/* Lo que se envía con el formulario: un input oculto por valor. */}
+          {name && currentValues.map((v) => (
+            <input key={v} type="hidden" name={name} value={v} />
+          ))}
         </div>
         }
       />
@@ -190,4 +231,4 @@ export function MultiSelect({
       </BasePopover.Portal>
     </BasePopover.Root>
   );
-}
+});

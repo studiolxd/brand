@@ -66,7 +66,6 @@ export const SwitcherField = forwardRef<HTMLElement, SwitcherFieldProps>(functio
         'switcher-field',
         size !== 'md' ? `switcher-field--${size}` : '',
         disabled ? 'switcher-field--disabled' : '',
-        hasError ? 'switcher-field--error' : '',
         className,
       ].filter(Boolean).join(' ')}
     >

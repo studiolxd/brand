@@ -1,0 +1,99 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AsyncSelectFieldStories from "./AsyncSelectField.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { asyncSelectFieldBaseTokens, asyncSelectFieldErrorTokens, asyncSelectFieldHelperTokens } from "../../../tokens/molecules/async-select-field";
+
+<Meta of={AsyncSelectFieldStories} />
+
+# AsyncSelectField
+
+El `AsyncSelect` como campo de formulario: etiqueta, buscador con resultados que llegan del servidor, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+
+Es el `SelectField` cuando la lista no cabe en memoria: en vez de `options`, recibe `onSearch`.
+
+<Canvas of={AsyncSelectFieldStories.PorDefecto} />
+
+## Etiqueta
+
+Siempre hay etiqueta (`label`), enlazada por `id` al `<input>` de búsqueda, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`.
+
+<Canvas of={AsyncSelectFieldStories.EtiquetaOculta} />
+
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`.
+
+<Canvas of={AsyncSelectFieldStories.ConAyuda} />
+<Canvas of={AsyncSelectFieldStories.ConError} />
+
+## Valor y etiqueta del valor
+
+El campo guarda el **identificador**, no la etiqueta. Para poder mostrar el nombre de lo elegido hay que pasarle también `selectedOption`: es el consumidor quien sabe a qué corresponde un id que vino del servidor.
+
+<Canvas of={AsyncSelectFieldStories.ConValor} />
+<Canvas of={AsyncSelectFieldStories.Controlado} />
+
+## Tallas
+
+`size` viaja al control: mide 32, 40 o 48, las tallas del sistema.
+
+<Canvas of={AsyncSelectFieldStories.Tallas} />
+
+## Estados
+
+<Canvas of={AsyncSelectFieldStories.Deshabilitado} />
+
+## Con react-hook-form
+
+El contrato es `value` / `onValueChange` + `name` + `ref` al input de búsqueda. `onValueChange` entrega el identificador y la opción entera: el identificador va a react-hook-form y la opción se guarda aparte para poder pintarla.
+
+```tsx
+<FormField
+  control={form.control}
+  name="empleado"
+  render={({ field, fieldState }) => (
+    <AsyncSelectField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onValueChange={(v, opt) => { field.onChange(v); setOpcion(opt); }}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      selectedOption={opcion}
+      label="Empleado"
+      onSearch={buscarEmpleados}
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={AsyncSelectFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al input de búsqueda (`role="combobox"`).
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- La opción activa se sigue con `aria-activedescendant`: el foco no se mueve de la caja de texto.
+- Los textos del control son props traducibles (`emptyMessage`, `loadingLabel`, `clearLabel`).
+
+## Tokens
+
+El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `AsyncSelect`, que comparte los tokens visuales del `MultiSelect`.
+
+### Base
+
+<TokenTable tokens={asyncSelectFieldBaseTokens} />
+
+### Error
+
+<TokenTable tokens={asyncSelectFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={asyncSelectFieldHelperTokens} />
+
+## Props
+
+<ArgTypes of={AsyncSelectFieldStories} />

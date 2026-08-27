@@ -4,10 +4,6 @@
   gap: var(--select-field-gap);
 }
 
-.select-field--error .select {
-  --select-border-color: var(--select-field-error-border-color);
-}
-
 .select-field__error {
   font-family: var(--select-field-error-font-family);
   font-size: var(--select-field-error-font-size);
@@ -22,9 +18,4 @@
   font-weight: var(--select-field-helper-font-weight);
   line-height: var(--select-field-helper-line-height);
   color: var(--select-field-helper-color);
-}
-
-/* En error, el control lleva el borde en el color de error. */
-.select-field--error .select {
-  border-color: var(--select-error-border-color);
 }

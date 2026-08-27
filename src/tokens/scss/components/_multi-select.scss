@@ -17,10 +17,9 @@ $lxd-multi-select-font-weight: 300; // Peso tipográfico
 $lxd-multi-select-color: #111e30; // Color del texto
 $lxd-multi-select-placeholder-color: #4a4a4a; // Color del placeholder
 $lxd-multi-select-bg: #ffffff; // Fondo del trigger
-$lxd-multi-select-icon-size: 0.625rem; // Tamaño del chevron
+$lxd-multi-select-content-gap: 0.5rem; // Aire entre el contenido del disparador y el chevron
 $lxd-multi-select-icon-transition: 150ms; // Duración de la transición del icono
 $lxd-multi-select-focus-ring-width: 2px; // Grosor del anillo de foco
-$lxd-multi-select-focus-ring-offset: -3px; // Offset del anillo de foco (negativo = inset)
 $lxd-multi-select-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-multi-select-content-bg: #ffffff; // Fondo del dropdown
 $lxd-multi-select-content-border-color: #111e30; // Borde del dropdown

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useId, useCallback } from 'react';
+import { forwardRef, useState, useRef, useId, useCallback, type Ref } from 'react';
 import { Popover as BasePopover } from '@base-ui-components/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
@@ -22,6 +22,18 @@ export interface AsyncSelectProps {
   readOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
   id?: string;
+  /** Nombre del campo en el formulario: se monta un input oculto con el valor. */
+  name?: string;
+  /** Marca el estado de error: aplica la clase `async-select--error` y `aria-invalid`. */
+  error?: boolean;
+  /** Se llama al salir del control (react-hook-form lo usa para validar). */
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  /** Se añade DESPUÉS de las clases propias del componente. */
+  className?: string;
+  /**
+   * Nombre accesible cuando el control va suelto. En un campo lo nombra la
+   * etiqueta (`htmlFor`), que este atributo pisaría: no lo pongas ahí.
+   */
   'aria-label'?: string;
   'aria-describedby'?: string;
   /**
@@ -50,7 +62,16 @@ export interface AsyncSelectProps {
   container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 
-export function AsyncSelect({
+function assignRef<T>(target: Ref<T> | undefined, node: T | null): void {
+  if (typeof target === 'function') target(node);
+  else if (target) (target as React.RefObject<T | null>).current = node;
+}
+
+/**
+ * Búsqueda con resultados asíncronos y un solo valor. El `ref` va al `<input>`
+ * de búsqueda, que es lo que se enfoca.
+ */
+export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(function AsyncSelect({
   onSearch,
   value,
   onValueChange,
@@ -60,13 +81,17 @@ export function AsyncSelect({
   readOnly,
   size = 'md',
   id,
+  name,
+  error = false,
+  onBlur,
+  className,
   'aria-label': ariaLabel,
   'aria-describedby': ariaDescribedby,
   emptyMessage = 'Sin resultados',
   loadingLabel = 'Buscando…',
   clearLabel = 'Limpiar selección',
   container,
-}: AsyncSelectProps) {
+}: AsyncSelectProps, ref) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -201,6 +226,8 @@ export function AsyncSelect({
     'async-select',
     size !== 'md' ? `async-select--${size}` : '',
     disabled ? 'async-select--disabled' : '',
+    error ? 'async-select--error' : '',
+    className ?? '',
   ].filter(Boolean).join(' ');
 
   const contentClass = [
@@ -212,7 +239,7 @@ export function AsyncSelect({
     <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
       <div ref={anchorRef} className={triggerClass} data-popup-open={open || undefined}>
         <input
-          ref={inputRef}
+          ref={(node) => { inputRef.current = node; assignRef(ref, node); }}
           id={id}
           type="text"
           className="async-select__input"
@@ -223,15 +250,19 @@ export function AsyncSelect({
           placeholder={placeholder}
           disabled={disabled}
           readOnly={readOnly}
-          aria-label={ariaLabel ?? placeholder}
+          aria-label={ariaLabel}
           aria-describedby={ariaDescribedby}
+          aria-invalid={error || undefined}
           aria-expanded={open}
           aria-haspopup="listbox"
           aria-controls={listboxId}
           aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
           autoComplete="off"
           role="combobox"
+          onBlur={onBlur}
         />
+        {/* Lo que se envía con el formulario. */}
+        {name && <input type="hidden" name={name} value={currentValue ?? ''} />}
         {loading && <Spinner size="sm" aria-hidden />}
         {!loading && currentValue && !disabled && !readOnly && (
           <button
@@ -294,4 +325,4 @@ export function AsyncSelect({
       </BasePopover.Portal>
     </BasePopover.Root>
   );
-}
+});
