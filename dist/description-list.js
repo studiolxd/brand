@@ -1,11 +1,14 @@
 import './description-list.css';
 import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/DescriptionList/DescriptionList.tsx
-function t({ children: t, className: n }) {
+var n = t(function({ className: t, children: n, ...r }, i) {
 	return /* @__PURE__ */ e("dl", {
-		className: ["description-list", n].filter(Boolean).join(" "),
-		children: t
+		ref: i,
+		className: ["description-list", t].filter(Boolean).join(" "),
+		...r,
+		children: n
 	});
-}
+});
 //#endregion
-export { t as DescriptionList };
+export { n as DescriptionList };

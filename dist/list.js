@@ -1,11 +1,18 @@
 import './list.css';
 import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/List/List.tsx
-function t({ type: t = "unordered", className: n, children: r }) {
+var n = t(function({ type: t = "unordered", className: n, children: r, ...i }, a) {
 	return /* @__PURE__ */ e(t === "ordered" ? "ol" : "ul", {
-		className: `list list--${t}${n ? ` ${n}` : ""}`,
+		ref: a,
+		className: [
+			"list",
+			`list--${t}`,
+			n ?? ""
+		].filter(Boolean).join(" "),
+		...i,
 		children: r
 	});
-}
+});
 //#endregion
-export { t as List };
+export { n as List };

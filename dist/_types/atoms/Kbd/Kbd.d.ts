@@ -1,13 +1,16 @@
 import './Kbd.css';
-export interface KbdProps {
-    /** Tamaño de la tecla. */
+export interface KbdProps extends React.ComponentPropsWithoutRef<'kbd'> {
+    /** Talla de la tecla. */
     size?: 'sm' | 'md' | 'lg';
     /** Símbolo o etiqueta de la tecla (p. ej. `⌘`, `Ctrl`, `K`). */
     children: React.ReactNode;
 }
 /**
- * Representa una tecla del teclado mediante el elemento semántico `<kbd>`.
- * Para combinaciones (p. ej. `Ctrl + K`), componer varios `Kbd` con el
- * separador deseado entre ellos.
+ * Una tecla del teclado, con el elemento semántico `<kbd>`. Para una
+ * combinación (`Ctrl + K`) se componen varias con el separador que toque: el
+ * átomo representa siempre una sola tecla.
+ *
+ * Reenvía el resto de props del elemento (`data-*`, `aria-*`, `id`…) y
+ * concatena `className` tras las clases propias.
  */
-export declare function Kbd({ size, children }: KbdProps): import("react/jsx-runtime").JSX.Element;
+export declare const Kbd: import("react").ForwardRefExoticComponent<KbdProps & import("react").RefAttributes<HTMLElement>>;

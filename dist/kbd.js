@@ -1,11 +1,18 @@
 import './kbd.css';
 import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Kbd/Kbd.tsx
-function t({ size: t = "md", children: n }) {
+var n = t(function({ size: t = "md", className: n, children: r, ...i }, a) {
 	return /* @__PURE__ */ e("kbd", {
-		className: ["kbd", t === "md" ? "" : `kbd--${t}`].filter(Boolean).join(" "),
-		children: n
+		ref: a,
+		className: [
+			"kbd",
+			t === "md" ? "" : `kbd--${t}`,
+			n ?? ""
+		].filter(Boolean).join(" "),
+		...i,
+		children: r
 	});
-}
+});
 //#endregion
-export { t as Kbd };
+export { n as Kbd };

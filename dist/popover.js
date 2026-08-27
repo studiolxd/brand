@@ -3,22 +3,31 @@ import './popover.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 import { Popover as n } from "@base-ui-components/react/popover";
 //#region src/stories/atoms/Popover/Popover.tsx
-function r({ trigger: r, children: i, open: a, defaultOpen: o, onOpenChange: s, side: c = "bottom", align: l = "start", sideOffset: u = 8, className: d }) {
+function r(e) {
+	let t = parseFloat(e);
+	return Number.isNaN(t) ? 0 : e.endsWith("rem") ? t * parseFloat(getComputedStyle(document.documentElement).fontSize) : t;
+}
+function i() {
+	let e = document.documentElement;
+	return r(getComputedStyle(e).getPropertyValue("--popover-offset").trim());
+}
+function a({ trigger: r, children: a, label: o, open: s, defaultOpen: c, onOpenChange: l, side: u = "bottom", align: d = "start", sideOffset: f, className: p }) {
 	return /* @__PURE__ */ t(n.Root, {
-		open: a,
-		defaultOpen: o,
-		onOpenChange: (e) => s?.(e),
+		open: s,
+		defaultOpen: c,
+		onOpenChange: (e) => l?.(e),
 		children: [/* @__PURE__ */ e(n.Trigger, { render: r }), /* @__PURE__ */ e(n.Portal, { children: /* @__PURE__ */ e(n.Positioner, {
 			className: "popover__positioner",
-			side: c,
-			align: l,
-			sideOffset: u,
+			side: u,
+			align: d,
+			sideOffset: f ?? i,
 			children: /* @__PURE__ */ e(n.Popup, {
-				className: ["popover", d].filter(Boolean).join(" "),
-				children: i
+				"aria-label": o,
+				className: ["popover", p].filter(Boolean).join(" "),
+				children: a
 			})
 		}) })]
 	});
 }
 //#endregion
-export { r as Popover };
+export { a as Popover };
