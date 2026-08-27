@@ -52,6 +52,7 @@ export const DatePickerField = forwardRef<HTMLButtonElement, DatePickerFieldProp
     <div className={['date-picker-field', className].filter(Boolean).join(' ')}>
       <Label htmlFor={id} hidden={labelHidden} size={size}>{label}</Label>
       <DatePicker
+        calendarLabel={label}
         {...pickerProps}
         ref={ref}
         id={id}
