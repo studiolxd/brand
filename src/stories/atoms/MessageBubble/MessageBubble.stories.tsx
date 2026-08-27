@@ -130,9 +130,14 @@ export const ContratoCola: Story = {
     await expect(fueraA.borderRightColor).toBe(borde);
     await expect(dentroA.borderRightColor).not.toBe(borde);
 
-    // Y sale por el lado contrario en cada emisor.
+    // Y sale por el lado del emisor: el asistente por el de inicio, el usuario
+    // por el de fin. Es el borde con grosor el que dibuja el triángulo.
+    await expect(fueraA.borderLeftWidth).toBe('0px');
+    await expect(parseFloat(fueraA.borderRightWidth)).toBeGreaterThan(0);
+
     const fueraU = getComputedStyle(usuario, '::before');
+    await expect(fueraU.borderRightWidth).toBe('0px');
+    await expect(parseFloat(fueraU.borderLeftWidth)).toBeGreaterThan(0);
     await expect(fueraU.borderLeftColor).toBe(borde);
-    await expect(fueraU.borderRightColor).not.toBe(borde);
   },
 };

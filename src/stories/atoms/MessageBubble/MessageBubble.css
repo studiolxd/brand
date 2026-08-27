@@ -4,8 +4,10 @@
   --_tail: var(--message-bubble-tail-size);
   --_border: var(--message-bubble-border-width);
   /* Un borde de 1px medido en perpendicular a una diagonal de 45° se desplaza
-     √2 × 1px sobre los ejes. De ahí sale el tamaño y la posición del triángulo
-     interior, el que vacía la cola. */
+     √2 × 1px sobre los ejes. De ahí salen el tamaño y la posición del
+     triángulo interior, el que vacía la cola: es más pequeño que el exterior
+     justo esa cantidad, y va corrido hacia dentro del globo lo suficiente para
+     tapar su borde. */
   --_diagonal: calc(var(--_border) * 1.41421356);
 
   position: relative;
@@ -51,10 +53,10 @@
 }
 
 .message-bubble--assistant::after {
-  inset-inline-start: calc(-1 * (var(--_tail) + var(--_diagonal)));
+  inset-inline-start: calc(var(--_diagonal) - var(--_tail));
   inset-block-end: 0;
-  border-block-start: calc(var(--_tail) + var(--_diagonal)) solid transparent;
-  border-inline-end: calc(var(--_tail) + var(--_diagonal)) solid var(--message-bubble-tail-fill);
+  border-block-start: calc(var(--_tail) - var(--_diagonal)) solid transparent;
+  border-inline-end: calc(var(--_tail) - var(--_diagonal)) solid var(--message-bubble-tail-fill);
 }
 
 /* ─── Usuario: la cola nace abajo, en el lado de fin ────────────── */
@@ -70,8 +72,8 @@
 }
 
 .message-bubble--user::after {
-  inset-inline-end: calc(-1 * (var(--_tail) + var(--_diagonal)));
+  inset-inline-end: calc(var(--_diagonal) - var(--_tail));
   inset-block-end: 0;
-  border-block-start: calc(var(--_tail) + var(--_diagonal)) solid transparent;
-  border-inline-start: calc(var(--_tail) + var(--_diagonal)) solid var(--message-bubble-tail-fill);
+  border-block-start: calc(var(--_tail) - var(--_diagonal)) solid transparent;
+  border-inline-start: calc(var(--_tail) - var(--_diagonal)) solid var(--message-bubble-tail-fill);
 }

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, waitFor, within } from 'storybook/test';
 import { ConversationThread } from './ConversationThread';
 import type { ConversationMessage } from './ConversationThread';
 import { MessageBubble } from '../../atoms/MessageBubble/MessageBubble';
@@ -148,7 +148,7 @@ export const ContratoAutoscroll: Story = {
     await expect(centinela.getAttribute('aria-hidden')).toBe('true');
     await expect(centinela.getBoundingClientRect().height).toBe(0);
 
-    // Y el hilo ha bajado del todo.
-    await expect(hilo.scrollTop).toBeGreaterThan(0);
+    // Y el hilo ha bajado del todo (el deslizamiento es asíncrono).
+    await waitFor(() => expect(hilo.scrollTop).toBeGreaterThan(0));
   },
 };

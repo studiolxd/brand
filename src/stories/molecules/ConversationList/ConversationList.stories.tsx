@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { ConversationList } from './ConversationList';
 import type { ConversationItem } from './ConversationList';
 
@@ -102,8 +102,9 @@ export const ContratoTeclado: Story = {
 
     const aspa = canvas.getByRole('button', { name: 'Eliminar conversación "Autenticación JWT"' });
     await expect(aspa).toHaveFocus();
-    // Y se ve: sin esto el foco caía en un botón invisible.
-    await expect(getComputedStyle(aspa).opacity).toBe('1');
+    // Y se ve: sin esto el foco caía en un botón invisible (la opacidad
+    // entra con transición, de ahí la espera).
+    await waitFor(() => expect(getComputedStyle(aspa).opacity).toBe('1'));
   },
 };
 
