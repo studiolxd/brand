@@ -5,13 +5,20 @@
   border-style: solid;
   border-color: var(--popover-border-color);
   border-radius: var(--popover-border-radius);
-  box-shadow: var(--popover-shadow);
   padding-block: var(--popover-padding-block);
   padding-inline: var(--popover-padding-inline);
   outline: none;
   transform-origin: var(--transform-origin);
-  animation-duration: calc(var(--popover-transition-duration) * 1ms);
+  /* Duraciones y curvas por token: con prefers-reduced-motion valen 0ms y el
+     panel aparece y desaparece sin animación. */
+  animation-duration: var(--popover-transition-duration);
   animation-timing-function: var(--popover-transition-easing);
+}
+
+/* El panel recibe el foco al abrirse: cuando llega por teclado se ve. */
+.popover:focus-visible {
+  outline: var(--popover-focus-ring-width) solid var(--popover-focus-ring-color);
+  outline-offset: var(--popover-focus-ring-offset);
 }
 
 .popover[data-open] {
@@ -44,7 +51,7 @@
   }
 }
 
-/* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
+/* El z-index va en el Positioner de Base UI (el popup hereda su apilado). */
 .popover__positioner {
   z-index: var(--popover-z-index);
 }

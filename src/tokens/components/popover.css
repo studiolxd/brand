@@ -3,14 +3,23 @@
  */
 
 :root {
-  --popover-padding-block: var(--spacing-4); /** Padding vertical del panel */
-  --popover-padding-inline: var(--spacing-4); /** Padding horizontal del panel */
-  --popover-z-index: var(--floating-panel-z-index); /** z-index del panel flotante */
-  --popover-transition-duration: var(--floating-panel-transition-duration); /** Duración de la animación de entrada/salida */
-  --popover-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
-  --popover-bg: var(--floating-panel-bg); /** Fondo del panel. Solo superficie — sin tokens de ítem (--popover-item-*): Popover recibe children libres. Para contenido tipo menú (filas con hover/separador), pareja con context-menu-* (ya trae ese contrato + overrides surface-dark). Ver Popover.mdx. */
-  --popover-border-width: var(--floating-panel-border-width); /** Grosor del borde */
+  --popover-padding-block: var(--spacing-4); /** Aire vertical del panel */
+  --popover-padding-inline: var(--spacing-4); /** Aire horizontal del panel */
+  --popover-offset: var(--spacing-2); /** Separación entre el disparador y el panel (8px). De aquí sale el `sideOffset` por defecto */
+  --popover-z-index: var(--floating-panel-z-index); /** Capa del panel flotante */
+  --popover-transition-duration: var(--floating-panel-transition-duration); /** Duración de la entrada y la salida */
+  --popover-transition-easing: var(--floating-panel-transition-easing); /** Curva de la entrada y la salida */
+  --popover-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco del panel (recibe el foco al abrirse) */
+  --popover-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco */
+  --popover-focus-ring-color: var(--color-primary); /** Color del anillo de foco: la tinta de la superficie */
+  --popover-bg: var(--floating-panel-bg); /** Fondo del panel */
+  --popover-border-width: var(--floating-panel-border-width); /** Grosor del borde: es lo que separa el panel de lo que tiene debajo (el sistema no proyecta sombras) */
   --popover-border-color: var(--floating-panel-border-color); /** Color del borde */
-  --popover-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
-  --popover-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --popover-border-radius: var(--floating-panel-border-radius); /** Radio del panel: esquina recta */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --popover-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

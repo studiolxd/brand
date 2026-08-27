@@ -1,14 +1,18 @@
 {
   "popover": {
-    "bg":                  { "$value": "{floating-panel.bg}",                "$type": "color",     "$description": "Fondo del panel. Solo superficie — sin tokens de ítem (--popover-item-*): Popover recibe children libres. Para contenido tipo menú (filas con hover/separador), pareja con context-menu-* (ya trae ese contrato + overrides surface-dark). Ver Popover.mdx." },
-    "border-width":        { "$value": "{floating-panel.border-width}",       "$type": "dimension", "$description": "Grosor del borde" },
-    "border-color":        { "$value": "{floating-panel.border-color}",       "$type": "color",     "$description": "Color del borde" },
-    "border-radius":       { "$value": "{floating-panel.border-radius}",      "$type": "dimension", "$description": "Radio del panel" },
-    "shadow":              { "$value": "{floating-panel.shadow}",             "$type": "shadow",    "$description": "Sombra del panel" },
-    "padding-block":       { "$value": "{spacing.4}",                         "$type": "dimension", "$description": "Padding vertical del panel" },
-    "padding-inline":      { "$value": "{spacing.4}",                         "$type": "dimension", "$description": "Padding horizontal del panel" },
-    "z-index":             { "$value": "{floating-panel.z-index}",            "$type": "number",    "$description": "z-index del panel flotante" },
-    "transition-duration": { "$value": "{floating-panel.transition-duration}", "$type": "number",    "$description": "Duración de la animación de entrada/salida" },
-    "transition-easing":   { "$value": "{floating-panel.transition-easing}",  "$type": "string",    "$description": "Easing de la animación" }
+    "bg":                  { "$value": "{floating-panel.bg}",                  "$type": "color",     "$description": "Fondo del panel" },
+    "border-width":        { "$value": "{floating-panel.border-width}",        "$type": "dimension", "$description": "Grosor del borde: es lo que separa el panel de lo que tiene debajo (el sistema no proyecta sombras)" },
+    "border-color":        { "$value": "{floating-panel.border-color}",        "$type": "color",     "$description": "Color del borde" },
+    "border-radius":       { "$value": "{floating-panel.border-radius}",       "$type": "dimension", "$description": "Radio del panel: esquina recta" },
+    "padding-block":       { "$value": "{spacing.4}",                          "$type": "dimension", "$description": "Aire vertical del panel" },
+    "padding-inline":      { "$value": "{spacing.4}",                          "$type": "dimension", "$description": "Aire horizontal del panel" },
+    "offset":              { "$value": "{spacing.2}",                          "$type": "dimension", "$description": "Separación entre el disparador y el panel (8px). De aquí sale el `sideOffset` por defecto" },
+    "z-index":             { "$value": "{floating-panel.z-index}",             "$type": "number",    "$description": "Capa del panel flotante" },
+    "transition-duration": { "$value": "{floating-panel.transition-duration}", "$type": "number",    "$description": "Duración de la entrada y la salida" },
+    "transition-easing":   { "$value": "{floating-panel.transition-easing}",   "$type": "string",    "$description": "Curva de la entrada y la salida" },
+    "focus-ring-width":    { "$value": "{border-width.focus}",                 "$type": "dimension", "$description": "Grosor del anillo de foco del panel (recibe el foco al abrirse)" },
+    "focus-ring-offset":   { "$value": "{border-width.focus}",                 "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "focus-ring-color":    { "$value": "{color.primary}",                      "$type": "color",     "$description": "Color del anillo de foco: la tinta de la superficie" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }
 }

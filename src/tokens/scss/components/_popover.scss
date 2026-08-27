@@ -1,13 +1,16 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-popover-bg: #ffffff; // Fondo del panel. Solo superficie — sin tokens de ítem (--popover-item-*): Popover recibe children libres. Para contenido tipo menú (filas con hover/separador), pareja con context-menu-* (ya trae ese contrato + overrides surface-dark). Ver Popover.mdx.
-$lxd-popover-border-width: 1px; // Grosor del borde
+$lxd-popover-bg: #ffffff; // Fondo del panel
+$lxd-popover-border-width: 1px; // Grosor del borde: es lo que separa el panel de lo que tiene debajo (el sistema no proyecta sombras)
 $lxd-popover-border-color: #111e30; // Color del borde
-$lxd-popover-border-radius: 0px; // Radio del panel
-$lxd-popover-shadow: none; // Sombra del panel
-$lxd-popover-padding-block: 1rem; // Padding vertical del panel
-$lxd-popover-padding-inline: 1rem; // Padding horizontal del panel
-$lxd-popover-z-index: 400; // z-index del panel flotante
-$lxd-popover-transition-duration: 150ms; // Duración de la animación de entrada/salida
-$lxd-popover-transition-easing: ease; // Easing de la animación
+$lxd-popover-border-radius: 0px; // Radio del panel: esquina recta
+$lxd-popover-padding-block: 1rem; // Aire vertical del panel
+$lxd-popover-padding-inline: 1rem; // Aire horizontal del panel
+$lxd-popover-offset: 0.5rem; // Separación entre el disparador y el panel (8px). De aquí sale el `sideOffset` por defecto
+$lxd-popover-z-index: 400; // Capa del panel flotante
+$lxd-popover-transition-duration: 150ms; // Duración de la entrada y la salida
+$lxd-popover-transition-easing: ease; // Curva de la entrada y la salida
+$lxd-popover-focus-ring-width: 2px; // Grosor del anillo de foco del panel (recibe el foco al abrirse)
+$lxd-popover-focus-ring-offset: 2px; // Separación del anillo de foco
+$lxd-popover-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie

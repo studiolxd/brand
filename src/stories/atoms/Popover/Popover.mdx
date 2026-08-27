@@ -1,67 +1,89 @@
-import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
-import * as PopoverStories from './Popover.stories';
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as PopoverStories from "./Popover.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { popoverTokens, popoverDarkTokens } from "../../../tokens/components/popover";
 
 <Meta of={PopoverStories} />
 
 # Popover
 
-Contenedor flotante genérico que puede alojar cualquier contenido: texto informativo, filtros, formularios compactos, date pickers, etc. Para menús de acciones con semántica ARIA correcta (`role="menu"`), usa el componente `ContextMenu`.
+Panel flotante anclado a un disparador, con contenido libre: una nota, un
+filtro, un formulario corto, un calendario. Se abre al pulsar y se cierra con
+`Escape` o pulsando fuera.
 
-El panel se posiciona automáticamente respecto al trigger usando `@base-ui-components/react` (popover). Se abre y cierra con animación de fade + scale.
+Para una lista de acciones —duplicar, renombrar, eliminar— lo que toca es `Menu`
+o `ContextMenu`: tienen la semántica de menú y la navegación con flechas que un
+diálogo no da. `Tooltip` es otra cosa: una etiqueta que aparece al pasar por
+encima, sin foco ni interacción dentro.
 
-## Uso básico
+<Canvas of={PopoverStories.PorDefecto} />
 
-<Canvas of={PopoverStories.Default} />
-<Controls of={PopoverStories.Default} />
+## Anatomía
 
-## Con DotsButton
-
-El Popover acepta cualquier nodo como trigger. Combinado con `DotsButton` ofrece una alternativa al `ContextMenu` cuando el contenido no requiere semántica de menú.
+Se construye sobre [Base UI Popover](https://base-ui.com/react/components/popover):
+`Trigger` → `Portal` → `Positioner` → `Popup`. El disparador es el nodo que se
+pasa por `trigger`, sea cual sea: Base UI le inyecta sus props con `render`.
 
 <Canvas of={PopoverStories.ConDotsButton} />
 
-## Posición del panel
+La superficie del panel sale de la familia `floating-panel` —el mismo fondo,
+borde y capa que el resto de paneles flotantes del sistema—, y su aire y su
+separación con el disparador son tokens propios.
 
-La prop `side` controla en qué lado del trigger aparece el panel. La prop `align` controla la alineación dentro de ese eje.
+## Posición
+
+`side` elige el lado y `align` la alineación dentro de ese lado. La separación
+por defecto es el token `--popover-offset` (8px), que el componente lee en
+tiempo de ejecución; `sideOffset` lo sobrescribe caso a caso.
 
 <Canvas of={PopoverStories.Posiciones} />
 
-## Modo controlado
+## Estado
 
-Cuando se pasan `open` y `onOpenChange`, el estado queda en manos del componente padre.
+Sin props de estado el panel se gobierna solo. Con `open` y `onOpenChange` el
+estado lo lleva quien lo usa: es lo que necesita, por ejemplo, un panel que debe
+cerrarse al elegir una fecha.
 
 <Canvas of={PopoverStories.Controlado} />
 
-## Tema oscuro
+## Superficie oscura
 
-Añadir `.surface-dark` a cualquier contenedor ancestro aplica el tema oscuro automáticamente.
+<Canvas of={PopoverStories.SuperficieOscura} />
 
-## Tokens disponibles
+## Contenido
 
-| Token | Descripción |
-|---|---|
-| `--popover-bg` | Fondo del panel |
-| `--popover-border-color` | Color del borde |
-| `--popover-border-width` | Grosor del borde |
-| `--popover-border-radius` | Radio de las esquinas |
-| `--popover-shadow` | Sombra |
-| `--popover-padding-block` | Padding vertical |
-| `--popover-padding-inline` | Padding horizontal |
-| `--popover-z-index` | Capa z del panel |
-| `--popover-transition-duration` | Duración de la animación (ms) |
-| `--popover-transition-easing` | Easing de la animación |
+`--popover-*` cubre **solo la superficie** del panel: fondo, borde, aire, capa.
+No hay tokens de ítem, y es deliberado — el panel recibe `children` libres y no
+tiene contrato de filas. Si lo que va dentro es una lista de filas con hover y
+separadores, usa la familia `--context-menu-*`, que ya trae ese contrato
+completo (ítems, estados y superficie oscura) y comparte base con el panel a
+través de `--floating-panel-*`. Y si además esas filas son acciones, casi
+siempre lo correcto es usar `ContextMenu` directamente en vez de rehacerlo
+dentro de un `Popover`.
 
-`--popover-*` cubre **solo la superficie del panel** (fondo, borde, sombra,
-espaciado) — deliberado, porque `Popover` recibe `children: ReactNode`
-libre, sin contrato de ítems. No hay `--popover-item-*` ni
-`--popover-separator-color`, y no van a añadirse: si el contenido que metes
-dentro es una lista de filas/ítems seleccionables (con hover, separadores,
-texto reactivo a `.surface-dark`/tema oscuro), no inventes esos tokens a
-mano — usa la familia **`--context-menu-*`** (`--context-menu-item-color`,
-`--context-menu-item-hover-bg`, `--context-menu-item-hover-color`,
-`--context-menu-separator-color`…), que ya trae ese contrato completo
-(superficie + ítems + estados, con overrides oscuros incluidos) y comparte
-fondo/base con `Popover` vía `--floating-panel-*`. Es el pareado esperado
-para "panel de `Popover` + contenido tipo menú", aunque tu contenido no use
-semántica ARIA `role="menu"` (para eso, considera usar `ContextMenu`
-directamente en vez de recrearlo a mano dentro de un `Popover`).
+---
+
+## Tokens
+
+<TokenTable tokens={popoverTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={popoverDarkTokens} />
+
+## Accesibilidad
+
+- El disparador anuncia el panel con `aria-haspopup="dialog"` y `aria-expanded`;
+  el panel es `role="dialog"`.
+- Un diálogo necesita **nombre**: pásalo en `label`, salvo que el contenido
+  empiece por un título visible que ya lo nombre.
+- Al abrirse, el foco entra en el panel; al cerrarse vuelve al disparador.
+  `Escape` cierra, y `Tab` recorre lo que hay dentro.
+- El panel se ve enfocado con el anillo del sistema (2px), en la tinta de la
+  superficie.
+- La entrada y la salida usan las duraciones del sistema: con
+  `prefers-reduced-motion: reduce` valen 0ms y el panel aparece sin animación.
+
+## Props
+
+<ArgTypes of={PopoverStories} />
