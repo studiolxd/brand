@@ -32,6 +32,29 @@ export function TooltipProvider({
   );
 }
 
+/**
+ * Convierte una longitud CSS (`4px`, `0.25rem`, `0.5em`) a píxeles. Sin unidad
+ * reconocible devuelve 0: el token está siempre cargado con el CSS del componente.
+ */
+function cssLengthToPx(raw: string, el: Element): number {
+  const value = parseFloat(raw);
+  if (Number.isNaN(value)) return 0;
+  if (raw.endsWith('rem')) return value * parseFloat(getComputedStyle(document.documentElement).fontSize);
+  if (raw.endsWith('em')) return value * parseFloat(getComputedStyle(el).fontSize);
+  return value;
+}
+
+/**
+ * `sideOffset` por defecto: el Positioner de Base UI necesita un número (su
+ * función de offset solo recibe medidas, no el elemento), así que el token
+ * `--tooltip-offset` se lee en runtime sobre `<html>` en cada cálculo de
+ * posición. Un consumidor lo cambia sobrescribiendo el token a nivel de raíz.
+ */
+function tokenSideOffset(): number {
+  const root = document.documentElement;
+  return cssLengthToPx(getComputedStyle(root).getPropertyValue('--tooltip-offset').trim(), root);
+}
+
 export interface TooltipProps {
   /** Contenido del bocadillo. */
   label: ReactNode;
@@ -39,6 +62,7 @@ export interface TooltipProps {
   children: ReactNode;
   side?: 'top' | 'right' | 'bottom' | 'left';
   align?: 'start' | 'center' | 'end';
+  /** Separación en px entre disparador y bocadillo. Sin él se lee el token `--tooltip-offset` (`:root`) en runtime. */
   sideOffset?: number;
   open?: boolean;
   defaultOpen?: boolean;
@@ -62,7 +86,7 @@ export function Tooltip({
   children,
   side = 'top',
   align = 'center',
-  sideOffset = 4,
+  sideOffset,
   open,
   defaultOpen,
   onOpenChange,
@@ -89,7 +113,7 @@ export function Tooltip({
       />
 
       <BaseTooltip.Portal>
-        <BaseTooltip.Positioner className="tooltip__positioner" side={side} align={align} sideOffset={sideOffset}>
+        <BaseTooltip.Positioner className="tooltip__positioner" side={side} align={align} sideOffset={sideOffset ?? tokenSideOffset}>
           <BaseTooltip.Popup
             id={popupId}
             role="tooltip"

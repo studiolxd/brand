@@ -1,0 +1,43 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TooltipStories from "./Tooltip.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { tooltipTokens } from "../../../tokens/components/tooltip";
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+Bocadillo de ayuda sobre un elemento. Base UI gestiona el retardo, el posicionamiento y el cierre con Escape; el DS pone la superficie (fondo invertido, flecha) y el enlace `aria-describedby` entre disparador y bocadillo. Requiere un `TooltipProvider` por encima, normalmente en el shell, que fija el retardo compartido.
+
+<Canvas of={TooltipStories.Default} />
+
+## Lados
+
+`side` (`top` por defecto, `bottom`, `left`, `right`) y `align` (`start`, `center`, `end`). La flecha apunta siempre al disparador y su base queda pegada al bocadillo, sea cual sea el lado. Esta story es el contrato visual de los cuatro lados.
+
+<Canvas of={TooltipStories.CuatroLados} />
+
+## Separación
+
+La distancia entre disparador y bocadillo sale del token `tooltip.offset` (`spacing.1`, 4px). El Positioner de Base UI necesita un número, así que el componente lee `--tooltip-offset` en runtime sobre `<html>` en cada cálculo de posición: un consumidor la cambia sobrescribiendo el token a nivel de raíz (`:root`). La prop `sideOffset` (px) sigue disponible como override puntual.
+
+## Contenido
+
+`label` admite cualquier `ReactNode`; el ancho máximo (`tooltip.max-width`) parte los textos largos en varias líneas.
+
+<Canvas of={TooltipStories.TextoLargo} />
+<Canvas of={TooltipStories.ContenidoRico} />
+
+## Accesibilidad
+
+El bocadillo es `role="tooltip"` y, mientras está abierto, el disparador lo referencia con `aria-describedby` (Base UI no lo cablea por su cuenta). Se abre con hover y con foco de teclado; Escape lo cierra.
+
+---
+
+## Tokens
+
+<TokenTable tokens={tooltipTokens} />
+
+## Props
+
+<ArgTypes of={TooltipStories} />

@@ -8,6 +8,7 @@
     "font-family":         { "$value": "{font-family.sans}",                  "$type": "string",    "$description": "Tipografía del bocadillo" },
     "font-size":           { "$value": "{font-size.1}",                       "$type": "dimension", "$description": "Tamaño de texto del bocadillo" },
     "line-height":         { "$value": "{line-height.snug}",                  "$type": "number",    "$description": "Interlineado del bocadillo" },
+    "offset":              { "$value": "{spacing.1}",                         "$type": "dimension", "$description": "Separación entre disparador y bocadillo (4px). Fuente del sideOffset por defecto" },
     "max-width":           { "$value": "20rem",                               "$type": "dimension", "$description": "Ancho máximo antes de romper línea" },
     "z-index":             { "$value": "{floating-panel.z-index}",            "$type": "number",    "$description": "Capa z — la misma que el resto de paneles flotantes" },
     "transition-duration": { "$value": "{floating-panel.transition-duration}", "$type": "number",   "$description": "Duración de la animación de entrada/salida" },

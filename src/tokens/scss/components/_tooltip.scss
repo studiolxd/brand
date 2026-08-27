@@ -9,6 +9,7 @@ $lxd-tooltip-padding-inline: 0.5rem; // Padding horizontal del bocadillo
 $lxd-tooltip-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del bocadillo
 $lxd-tooltip-font-size: 0.875rem; // Tamaño de texto del bocadillo
 $lxd-tooltip-line-height: 1.3; // Interlineado del bocadillo
+$lxd-tooltip-offset: 0.25rem; // Separación entre disparador y bocadillo (4px). Fuente del sideOffset por defecto
 $lxd-tooltip-max-width: 20rem; // Ancho máximo antes de romper línea
 $lxd-tooltip-z-index: 400; // Capa z — la misma que el resto de paneles flotantes
 $lxd-tooltip-transition-duration: 150ms; // Duración de la animación de entrada/salida

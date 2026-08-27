@@ -9,6 +9,7 @@
   --tooltip-font-family: var(--font-family-sans); /** Tipografía del bocadillo */
   --tooltip-font-size: var(--font-size-1); /** Tamaño de texto del bocadillo */
   --tooltip-line-height: var(--line-height-snug); /** Interlineado del bocadillo */
+  --tooltip-offset: var(--spacing-1); /** Separación entre disparador y bocadillo (4px). Fuente del sideOffset por defecto */
   --tooltip-bg: var(--color-background-dark); /** Fondo del bocadillo — superficie invertida para máximo contraste */
   --tooltip-color: var(--color-text-on-dark); /** Color del texto del bocadillo */
   --tooltip-border-radius: var(--border-radius-default); /** Radio de esquinas del bocadillo */

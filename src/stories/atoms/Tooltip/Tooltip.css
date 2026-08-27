@@ -22,10 +22,15 @@
   animation-name: tooltip-out;
 }
 
-/* El SVG lleva la geometría del triángulo; aquí solo el color y el giro que
-   lo hace apuntar al disparador según el lado que resuelva el positioner.
-   Los desplazamientos van en porcentaje (relativos al propio triángulo) para
-   no cablear ninguna medida. */
+/* El SVG lleva la geometría del triángulo (10×5, punta abajo); aquí solo el
+   color y el giro que lo hace apuntar al disparador según el lado que resuelva
+   el positioner. Los desplazamientos van en porcentaje (relativos al propio
+   triángulo) para no cablear ninguna medida.
+
+   En left/right el giro de 90° es sobre el centro de la caja 10×5: la forma
+   girada (5×10) queda centrada en esa caja, es decir, separada 2,5px del borde
+   del bocadillo y metida otro tanto en el disparador. El `translate` de ±25%
+   (2,5px de 10) devuelve la base del triángulo al borde del bocadillo. */
 .tooltip__arrow {
   fill: var(--tooltip-bg);
   line-height: 0;
@@ -43,11 +48,13 @@
 .tooltip__arrow[data-side='left'] {
   left: 100%;
   rotate: -90deg;
+  translate: -25% 0;
 }
 
 .tooltip__arrow[data-side='right'] {
   right: 100%;
   rotate: 90deg;
+  translate: 25% 0;
 }
 
 @keyframes tooltip-in {
