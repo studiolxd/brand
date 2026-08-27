@@ -20,6 +20,8 @@ export interface DatePickerProps {
     'aria-describedby'?: string;
     /** Nombre accesible cuando el control va suelto. En un campo lo nombra la etiqueta. */
     'aria-label'?: string;
+    /** Nombre accesible del panel del calendario (`role="dialog"`). */
+    calendarLabel?: string;
     /** Nombre del campo en el formulario: se monta un input oculto con la fecha en ISO. */
     name?: string;
     /** Se llama al salir del disparador (react-hook-form lo usa para validar). */

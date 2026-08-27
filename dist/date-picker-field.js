@@ -18,6 +18,7 @@ var s = a(function({ id: a, label: s, labelHidden: c = !1, errorMessage: l, help
 				children: s
 			}),
 			/* @__PURE__ */ r(n, {
+				calendarLabel: s,
 				...m,
 				ref: h,
 				id: v,
