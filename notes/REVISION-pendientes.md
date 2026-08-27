@@ -12,10 +12,10 @@ componente al revisarlo — no con un gris de fondo por defecto. Hoy lo usan as�
 36 tokens; van cayendo con la revisión:
 
 - [ ] hover de ítem: ContextMenu, UserMenu, OrgSwitcher, SidebarNav,
-      ConversationList, AppLauncher, Table (fila y cabecera), Calendar (día y
+      ConversationList, Table (fila y cabecera), Calendar (día y
       nav), CalendarPlanner, CalendarRoster, Modal (cierre), DotsButton,
       NumberInput, Button (variante con hover gris)
-- [ ] activo: OrgSwitcher, AppLauncher, ConversationList
+- [ ] activo: OrgSwitcher, ConversationList
 - [ ] deshabilitado: Button, Input, Textarea
 - [ ] celdas de calendario: fin de semana, no laborable, fuera de mes
 
@@ -129,7 +129,8 @@ de 32px como control.
 - [x] **UserMenu** avatar, **OrgSwitcher** logo y **SidebarNav** icono → `sm`
       (2026-08-25; Avatar entero a tallas 32/40/48, sin `xl`).
 - [x] **DotsButton** → Button ghost iconOnly a talla (32/40/48), sin tokens propios (2026-08-26).
-- [ ] Pasan a token sin cambiar de tamaño: **AppLauncher** trigger 2.5rem, **FileUpload** miniatura
+- [x] **AppLauncher** trigger y tile-icon 2.5rem → `size-component.md` (2026-08-27, mismo valor).
+- [ ] Pasan a token sin cambiar de tamaño: **FileUpload** miniatura
       2.5rem, **DotsButton** lg 2.5rem → `md`.
 - [x] **EmptyState** icono 3rem → `icon.size-lg` (2026-08-27, mismo valor 48px). `icon-size-sm` (2rem)
       queda crudo: no hay un `icon.size-*` que valga 32px (16/24/48); anotado para decisión de diseño.
@@ -227,12 +228,18 @@ token). Curvas `in` y `linear` declaradas sin uso.
       contorno, 2026-08-27). Sigue siendo token propio crudo: un bucle no es una
       transición; decidir si merece un token de motion.
 - [ ] Transiciones con ms a mano en CSS: **CardSplit, PrevNextNav, Table,
-      AppLauncher, Modal, Skeleton** → `--motion-duration-*`.
+      Modal** → `--motion-duration-*`.
       Ojo, el patrón real que hay en esos CSS —y en `Tooltip`— es
       `calc(var(--…-transition-duration) * 1ms)`, de cuando las duraciones eran
       números sin unidad: hoy el token ya trae `ms`, así que el `calc` es
       inválido y **la animación no ocurre**. En `Popover` está arreglado
-      (2026-08-27): la propiedad toma el token tal cual.
+      (2026-08-27): la propiedad toma el token tal cual. **AppLauncher**
+      comprobado (2026-08-27): ya toma `floating-panel.transition-duration`
+      directo, sin `calc` — no tenía el bug. **Skeleton** resuelto de otra
+      forma (2026-08-27): `skeleton.duration` pasa a `"1400ms"` directo (como
+      `spinner.animation-duration`) en vez de sumarse a `--motion-duration-*`
+      — un bucle infinito no es una transición de propiedad, es el mismo caso
+      ya documentado para Spinner.
 
 ## Capas (2026-08-25)
 
@@ -466,7 +473,10 @@ Accordion, Tag, Kbd, List, Popover, DescriptionList y ProgressBar salen de
       tenía el patrón). Skeleton se queda como está: su `--skeleton-duration`
       es un número sin unidad por diseño (`$type: number`), así que
       `calc(1400 * 1ms)` es válido y la animación sí ocurre. CardSplit no
-      existe en el repo actual.
+      existe en el repo actual. **Actualizado (2026-08-27, tanda 2):** al
+      pasar `Skeleton` a definitivo se prefirió `"1400ms"` directo (sin
+      `calc`), igual que `spinner.animation-duration` — más consistente con
+      el resto del sistema aunque el `calc` de entonces no fuera un bug.
 - [x] **`grey-lightest` sin rol semántico** (2026-08-27) — resuelto con dos
       roles nuevos en `tokens/color`: `surface.secondary-on-light|dark` e
       `surface.inverse-on-light|dark`. `kbd.bg`, `progress-bar.track-bg` y el
@@ -592,3 +602,44 @@ Lo hecho va en el CHANGELOG de v25.0.0. Lo que queda anotado:
 - [ ] **La marca de tiempo que no se puede interpretar no se pinta.** Es mejor
       que «Invalid Date», pero desaparece en silencio. Si el sistema añade
       algún canal de avisos en desarrollo, avisar ahí.
+
+## Tanda 2 — Card, AppLauncher, Pagination, Skeleton a definitivos (2026-08-27)
+
+Los cuatro salen de `Por revisar/`. MDX (nuevo en AppLauncher y Skeleton, ampliado en Card y
+Pagination), story `EnSuperficieOscura` y story `Test — …` (`!dev`, con `play`) nuevos en los
+cuatro salvo Pagination, que ya tenía tests de contrato de una revisión anterior.
+
+- [x] **Card** — los cuatro fondos `accent-*`/`support-*`, primitivo directo en CSS, pasan a
+      tokens de componente (`card.accent-1-bg`, …). La variante `primary` deja de usar
+      `color.primary` como fondo (colisionaba con `.surface-dark`, invisible) y pasa al patrón
+      autocontenido de `button.primary`: fondo `color.accent-1` (lavanda), texto `color.primary`
+      (prussian), igual en los dos temas. `accent-*`/`support-*` son colores saturados que ya
+      contrastan en cualquier superficie (mismo criterio que las variantes semánticas de
+      Alert/Tag): sin par `surface-dark-*`. Token huérfano `card.shadow` (ya en `none`) retirado
+      junto con su `box-shadow` en CSS, patrón Kbd.
+- [x] **AppLauncher** — borradas 50 líneas de CSS bajo `.surface-dark`/`[data-theme]`/`html.dark`:
+      el popup va en `Portal`, ese selector descendiente nunca casaba, y los tokens oscuros ya
+      funcionan por el mecanismo estándar (activación root-level, que sí cascada a través del
+      portal). `trigger-size`/`tile-icon-size` (2.5rem crudos) → `size-component.md` (mismo
+      valor). `trigger-hover-bg`/`tile-hover-bg`/`tile-active-bg` salían de `grey-lightest`: pasan
+      al relleno de marca (`color.primary`) del patrón Menu/Button ghost, con inversión en
+      superficie oscura. El color de dato del icono de cada app (`style backgroundColor`) queda
+      documentado en la prop y en el MDX. Comprobado que no tenía el bug
+      `calc(var(*) * 1ms)` (ver nota en «Siete átomos a definitivos»).
+- [x] **Pagination** — el subrayado del botón en hover tomaba `link.underline-width` prestado de
+      `Link`; pasa a `pagination.btn-hover-underline-width`, token propio (mismo valor). MDX
+      anota `btn-disabled-color` (`grey-dark`) como exención deliberada (control deshabilitado).
+      Story de superficie oscura nueva — tenía la pareja de tokens completa sin ninguna story que
+      la enseñara.
+- [x] **Skeleton** — `skeleton.duration` pasa de número crudo (`1400`, consumido con
+      `calc(var(*)*1ms)`) a `"1400ms"` directo, como `spinner.animation-duration`: un bucle no es
+      una transición del sistema, así que se queda como token propio en vez de sumarse a
+      `--motion-duration-*`. Añadido el apagado en `prefers-reduced-motion` (no lo cubría el
+      `--motion-duration-*` global — mismo caso que Spinner antes de su fix).
+      `skeleton--circle` usa `border-radius.round` en vez de `50%` a mano. `bg` pasa al rol
+      `surface.secondary-on-light` (mismo valor, ya con nombre); `surface-dark-bg`/`-highlight`
+      dejan los `rgba` cableados por `surface.secondary-on-dark` y `grey-dark`.
+
+Sin decisiones pendientes nuevas de esta tanda: los cuatro componentes cierran sin cabos sueltos
+propios (las líneas que compartían con otros componentes en las listas de arriba —hover/activo de
+`grey-lightest`, tallas, movimiento— se han actualizado quitando `AppLauncher`).
