@@ -72,6 +72,20 @@ export const SuperficieOscura: Story = {
   ),
 };
 
+/** Por debajo de `md` término y descripción se apilan en una columna: con
+ * términos largos, dos columnas apretaba el valor contra el borde. */
+export const Estrecha: Story = {
+  globals: { viewport: { value: 'mobile1' } },
+  args: { children: null },
+  render: () => (
+    <DescriptionList>
+      <dt>Cliente</dt><dd>Studio LXD</dd>
+      <dt>Servicio</dt><dd>Diseño de producto y marca</dd>
+      <dt>Año</dt><dd>2024</dd>
+    </DescriptionList>
+  ),
+};
+
 /** Test: el elemento es un `<dl>`, las props se reenvían y `className` va al final. */
 export const Contrato: Story = {
   name: 'Test — elemento y paso de props',
