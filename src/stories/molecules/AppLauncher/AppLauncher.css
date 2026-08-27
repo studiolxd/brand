@@ -36,7 +36,7 @@
   min-width: var(--app-launcher-content-min-width);
   outline: none;
   transform-origin: var(--transform-origin);
-  animation-duration: calc(var(--app-launcher-transition-duration) * 1ms);
+  animation-duration: var(--app-launcher-transition-duration);
   animation-timing-function: var(--app-launcher-transition-easing);
 }
 

@@ -55,9 +55,9 @@
   opacity: var(--table-sort-icon-inactive-opacity);
   transform: rotate(90deg); /* Chevron apunta ↓ en estado neutro */
   transition:
-    transform calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing),
-    opacity calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing),
-    color calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing);
+    transform var(--table-transition-duration) var(--table-transition-easing),
+    opacity var(--table-transition-duration) var(--table-transition-easing),
+    color var(--table-transition-duration) var(--table-transition-easing);
   flex-shrink: 0;
 }
 
@@ -76,7 +76,7 @@
 /* ── Rows ────────────────────────────────────────────── */
 
 .table__row {
-  transition: background-color calc(var(--table-transition-duration) * 1ms) var(--table-transition-easing);
+  transition: background-color var(--table-transition-duration) var(--table-transition-easing);
 }
 
 .table tbody .table__row:last-child .table__cell {
