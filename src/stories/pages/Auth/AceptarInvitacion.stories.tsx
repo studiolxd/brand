@@ -5,11 +5,10 @@ import { InputField } from '../../molecules/InputField/InputField';
 import { PasswordField } from '../../molecules/PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
-import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 interface Args { state: 'sin-sesion' | 'con-sesion' | 'invalida' | 'registro-cerrado'; socialProviders: string[]; surface: 'light' | 'dark' }
 
-const ROL = <Paragraph>Te unirás como miembro.</Paragraph>;
+const DESCRIPCION = 'ana@studiolxd.com te ha invitado a unirte a Studio LXD. Te unirás como miembro.';
 
 function Invitacion({ state, socialProviders, surface }: Args) {
   if (state === 'invalida') {
@@ -28,13 +27,13 @@ function Invitacion({ state, socialProviders, surface }: Args) {
   }
   if (state === 'con-sesion') {
     return (
-      <AuthPage title="Tienes una invitación" description="ana@studiolxd.com te ha invitado a unirte a Studio LXD." intro={ROL} surface={surface}>
+      <AuthPage title="Tienes una invitación" description={DESCRIPCION} surface={surface}>
         <Form size="lg" blockActions onSubmit={(e) => e.preventDefault()} actions={<><Button variant="outline">Rechazar</Button><Button variant="primary">Aceptar invitación</Button></>} />
       </AuthPage>
     );
   }
   return (
-    <AuthPage title="Tienes una invitación" description="ana@studiolxd.com te ha invitado a unirte a Studio LXD." intro={ROL} surface={surface}>
+    <AuthPage title="Tienes una invitación" description={DESCRIPCION} surface={surface}>
       <Form
         size="lg"
         blockActions
