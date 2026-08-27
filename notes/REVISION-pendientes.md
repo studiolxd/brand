@@ -57,6 +57,11 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
 - [ ] **`grey-lightest` no tiene rol semántico.** Sus 36 usos referencian el
       primitivo directamente. Al revisar neutrales, darle un rol
       (`background.subtle` / fondo de estado) y que los componentes apunten a él.
+      Parcial (2026-08-27): `surface.secondary-on-light|dark` ya cubre los
+      cuatro usos como superficie clara secundaria (`kbd.bg`,
+      `progress-bar.track-bg`, `code-block`, `tag.neutral-bg` con
+      `surface.inverse-*`); quedan los usos como fondo de estado (hover/activo/
+      deshabilitado), que es una decisión de diseño distinta (ver más abajo).
 - [ ] **16 `var(--color-grey-*)` directos en CSS de componentes** (Table,
       Sidebar, campos…), saltándose el token de componente. Criterio de
       revisión: todo color en CSS pasa por un token propio del componente.
@@ -449,15 +454,19 @@ Decisiones pendientes que salen de esta revisión:
 Accordion, Tag, Kbd, List, Popover, DescriptionList y ProgressBar salen de
 `Por revisar/`. Lo hecho va en el CHANGELOG de v24.7.0; lo que queda anotado:
 
-- [ ] **`calc(var(--…-transition-duration) * 1ms)`** — el patrón sigue vivo en
-      Tooltip, Table, AppLauncher, PrevNextNav, CardSplit, Modal y Skeleton, y
-      **anula la animación** (el token ya trae `ms`). Popover ya está.
-- [ ] **`grey-lightest` sin rol semántico** — lo usan como superficie (no como
-      estado) `kbd.bg` y `progress-bar.track-bg`. Cuando el neutral tenga rol
-      (`background.subtle` o similar), esos dos apuntan a él.
-- [ ] **`tag.neutral-bg`** sigue nombrando el primitivo `color.grey-darkest`: no
-      hay rol semántico para «relleno neutral oscuro». Mismo caso que el
-      anterior.
+- [x] **`calc(var(--…-transition-duration) * 1ms)`** (2026-08-27) — corregido en
+      Tooltip, Table, AppLauncher y PrevNextNav: la propiedad toma el token
+      directamente, como ya hacía Popover. Modal ya usaba el token tal cual (no
+      tenía el patrón). Skeleton se queda como está: su `--skeleton-duration`
+      es un número sin unidad por diseño (`$type: number`), así que
+      `calc(1400 * 1ms)` es válido y la animación sí ocurre. CardSplit no
+      existe en el repo actual.
+- [x] **`grey-lightest` sin rol semántico** (2026-08-27) — resuelto con dos
+      roles nuevos en `tokens/color`: `surface.secondary-on-light|dark` e
+      `surface.inverse-on-light|dark`. `kbd.bg`, `progress-bar.track-bg` y el
+      fondo de `CodeBlock` apuntan ahora a `surface.secondary-*`.
+- [x] **`tag.neutral-bg`** (2026-08-27) — apunta a `surface.inverse-on-light|dark`
+      en vez de nombrar `color.grey-darkest` directamente; sin cambio visual.
 - [ ] **Alturas de `ProgressBar`** (8 / 24 / 32px) se expresan con la escala de
       espaciado (`spacing.2/5/6`). No son aire: son alturas de carril. Si el
       sistema añade una escala de medidas que no sean tallas de componente,
@@ -465,13 +474,12 @@ Accordion, Tag, Kbd, List, Popover, DescriptionList y ProgressBar salen de
 - [ ] **Umbral de la cifra de `ProgressBar`** (15%) vive en el TSX. No se hizo
       token para no dejar uno huérfano: el CSS no puede leerlo y el JS tendría
       que leer la custom property en runtime. Decidir si merece la pena.
-- [ ] **`DescriptionList` en pantalla estrecha**: la rejilla es
-      `max-content 1fr`; con términos largos en móvil aprieta la columna del
-      valor. Falta decidir si por debajo de un punto de ruptura pasa a una
-      columna.
-- [ ] **`DatePicker`** abre su `Popover` sin `label`: el panel es
-      `role="dialog"` sin nombre accesible. La prop ya existe; falta pasarla al
-      revisar la molécula.
+- [x] **`DescriptionList` en pantalla estrecha** (2026-08-27) — por debajo de
+      `--breakpoint-md` pasa a una columna (término apilado sobre su
+      descripción); story «Estrecha» con viewport móvil.
+- [x] **`DatePicker`** (2026-08-27) — nueva prop `calendarLabel` (default
+      «Calendario») pasada al `label` del `Popover`; `DatePickerField` usa el
+      `label` del campo como nombre del panel por defecto. Test de contrato.
 
 ## Toast definitivo (2026-08-27)
 

@@ -43,4 +43,8 @@
   --color-text-muted-on-dark: var(--color-grey-light); /** Muted text on dark backgrounds */
   --color-background-light: var(--color-white); /** Light surface background */
   --color-background-dark: var(--color-prussian); /** Dark surface background */
+  --color-surface-secondary-on-light: var(--color-grey-lightest); /** Superficie clara secundaria sobre fondo claro: bloque de código, kbd, carril de progreso, pie de tabla */
+  --color-surface-secondary-on-dark: var(--color-grey-darkest); /** Superficie clara secundaria — variante para superficie oscura */
+  --color-surface-inverse-on-light: var(--color-grey-darkest); /** Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag) */
+  --color-surface-inverse-on-dark: var(--color-grey-lightest); /** Superficie invertida — variante para superficie oscura */
 }

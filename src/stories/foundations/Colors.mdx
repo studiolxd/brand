@@ -86,7 +86,10 @@ No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es 
 
 ### Texto y fondo
 
-Los roles que consumen los componentes para lo básico: qué color tiene el texto y el lienzo en cada superficie.
+Los roles que consumen los componentes para lo básico: qué color tiene el texto y el lienzo en cada superficie. Incluye también los dos roles de **superficie** que dan nombre a `grey-lightest` y `grey-darkest` cuando se usan como fondo (no como estado):
+
+- **Superficie secundaria** (`surface.secondary-on-light|dark`) — una superficie clara secundaria dentro de la página: bloque de código, keycap, carril de progreso, pie de tabla. En superficie oscura pasa al gris oscuro (`grey-darkest`); no es un fondo de estado (hover/activo/deshabilitado), que sigue sin rol propio.
+- **Superficie invertida** (`surface.inverse-on-light|dark`) — un relleno que invierte la tinta ambiente: el neutral oscuro de `Tag` variante `neutral`.
 
 <ColorPalette>
   {semanticSwatches.map((s) => <ColorItem key={s.title} {...s} />)}

@@ -11,6 +11,12 @@
     "background": {
       "light": { "$value": "{color.white}",    "$type": "color", "$description": "Light surface background" },
       "dark":  { "$value": "{color.prussian}", "$type": "color", "$description": "Dark surface background" }
+    },
+    "surface": {
+      "secondary-on-light": { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Superficie clara secundaria sobre fondo claro: bloque de código, kbd, carril de progreso, pie de tabla" },
+      "secondary-on-dark":  { "$value": "{color.grey-darkest}",  "$type": "color", "$description": "Superficie clara secundaria — variante para superficie oscura" },
+      "inverse-on-light":   { "$value": "{color.grey-darkest}",  "$type": "color", "$description": "Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag)" },
+      "inverse-on-dark":    { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Superficie invertida — variante para superficie oscura" }
     }
   }
 }

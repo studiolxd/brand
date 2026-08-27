@@ -27,6 +27,7 @@ const refMap: Record<string, string> = {
   ...entries(brand.color as Group, 'color'),
   ...entries(semantic.color.text as Group, 'color.text'),
   ...entries(semantic.color.background as Group, 'color.background'),
+  ...entries(semantic.color.surface as Group, 'color.surface'),
 };
 
 const hex = (value: string) => resolveRef(value, refMap);
@@ -53,6 +54,7 @@ const sys = system.color as Group;
 const fb = feedback.color as Group;
 const txt = semantic.color.text as Group;
 const bg = semantic.color.background as Group;
+const surf = semantic.color.surface as Group;
 
 const swatch = (title: string, subtitle: string, tokens: string[], group: Group, prefix = '--color-'): Swatch => ({
   title,
@@ -107,6 +109,8 @@ export const semanticSwatches: Swatch[] = [
   swatch('Texto atenuado', 'muted-on-light · muted-on-dark', ['muted-on-light', 'muted-on-dark'], txt, '--color-text-'),
   swatch('Placeholder', 'placeholder-on-light · placeholder-on-dark', ['placeholder-on-light', 'placeholder-on-dark'], txt, '--color-text-'),
   swatch('Fondo', 'light · dark', ['light', 'dark'], bg, '--color-background-'),
+  swatch('Superficie secundaria', 'secondary-on-light · secondary-on-dark', ['secondary-on-light', 'secondary-on-dark'], surf, '--color-surface-'),
+  swatch('Superficie invertida', 'inverse-on-light · inverse-on-dark', ['inverse-on-light', 'inverse-on-dark'], surf, '--color-surface-'),
 ];
 
 /* ---- Contraste ------------------------------------------------------------ */

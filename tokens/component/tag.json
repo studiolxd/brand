@@ -21,7 +21,7 @@
     "support-2-bg":    { "$value": "{color.support-2}",      "$type": "color", "$description": "Soporte 2 (cayena) — relleno" },
     "support-2-color": { "$value": "{color.text.on-light}",  "$type": "color", "$description": "Soporte 2 — texto sobre el relleno" },
 
-    "neutral-bg":    { "$value": "{color.grey-darkest}",     "$type": "color", "$description": "Neutral — relleno gris oscuro (AAA con texto blanco)" },
+    "neutral-bg":    { "$value": "{color.surface.inverse-on-light}", "$type": "color", "$description": "Neutral — relleno gris oscuro (AAA con texto blanco)" },
     "neutral-color": { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Neutral — texto sobre el relleno" },
     "info-bg":       { "$value": "{color.primary}",          "$type": "color", "$description": "Información — relleno prusia (AAA con texto blanco)" },
     "info-color":    { "$value": "{color.text.on-dark}",     "$type": "color", "$description": "Información — texto sobre el relleno" },
