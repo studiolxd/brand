@@ -3,6 +3,7 @@
  */
 
 :root {
+  --link-hover-underline-width: 0px; /** Grosor de la línea en hover (en claro desaparece) */
   --link-cursor: pointer; /** Cursor */
   --link-underline-offset: var(--spacing-1); /** Separación entre el texto y la línea */
   --link-icon-gap: var(--spacing-2); /** Aire entre el icono y el texto del enlace */
@@ -17,7 +18,9 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --link-color: var(--color-text-on-dark); /** Color — surface-dark */
-  --link-hover-color: var(--color-text-on-dark); /** Hover — surface-dark */
+  --link-underline-width: 0px; /** Sin línea en reposo — surface-dark */
+  --link-color: var(--color-accent-2); /** Color — surface-dark: amarillo (accent-2), y sin línea en reposo */
+  --link-hover-color: var(--color-accent-2); /** Hover — surface-dark: amarillo, con línea */
+  --link-hover-underline-width: var(--border-width-default); /** Línea en hover — surface-dark */
   --link-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

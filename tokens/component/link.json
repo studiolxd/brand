@@ -3,14 +3,17 @@
     "color":                 { "$value": "{color.text.on-light}",   "$type": "color",     "$description": "El enlace no tiene color propio: es texto, y lo distingue el subrayado" },
     "hover-color":           { "$value": "{color.text.on-light}",   "$type": "color",     "$description": "Color en hover" },
     "underline-width":       { "$value": "{border-width.default}",  "$type": "dimension", "$description": "El subrayado es una línea bajo el enlace (borde, no text-decoration): cubre texto e icono y se separa del texto. Su grosor" },
+    "hover-underline-width": { "$value": "0px",                    "$type": "dimension", "$description": "Grosor de la línea en hover (en claro desaparece)" },
     "underline-offset":      { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Separación entre el texto y la línea" },
     "icon-gap":              { "$value": "{spacing.2}",               "$type": "dimension", "$description": "Aire entre el icono y el texto del enlace" },
     "cursor":                { "$value": "pointer",                 "$type": "string",    "$description": "Cursor" },
     "focus-ring-width":      { "$value": "{border-width.focus}",    "$type": "dimension", "$description": "Grosor del anillo de foco" },
     "focus-ring-offset":     { "$value": "{border-width.default}",  "$type": "dimension", "$description": "Separación entre el enlace y el anillo" },
     "focus-ring-color":      { "$value": "{color.primary}",         "$type": "color",     "$description": "Anillo de foco" },
-    "surface-dark-color":            { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color — surface-dark" },
-    "surface-dark-hover-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Hover — surface-dark" },
+    "surface-dark-color":            { "$value": "{color.accent-2}",     "$type": "color", "$description": "Color — surface-dark: amarillo (accent-2), y sin línea en reposo" },
+    "surface-dark-hover-color":      { "$value": "{color.accent-2}",     "$type": "color", "$description": "Hover — surface-dark: amarillo, con línea" },
+    "surface-dark-underline-width":  { "$value": "0px",                  "$type": "dimension", "$description": "Sin línea en reposo — surface-dark" },
+    "surface-dark-hover-underline-width": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Línea en hover — surface-dark" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }
 }

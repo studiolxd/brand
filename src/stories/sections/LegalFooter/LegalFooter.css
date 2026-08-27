@@ -23,4 +23,13 @@
   }
 }
 
-/* Los enlaces son enlaces del sistema (los viste la base): sin estilo propio */
+/* Enlaces del sistema, con una excepción documentada: en oscuro siguen en
+   tinta (blanco) y conservan la línea en reposo / ninguna en hover. */
+.legal-footer__link {
+  color: var(--legal-footer-link-color);
+  box-shadow: inset 0 calc(-1 * var(--legal-footer-link-underline-width)) 0 0 currentColor;
+}
+.legal-footer__link:hover {
+  color: var(--legal-footer-link-color);
+  box-shadow: inset 0 calc(-1 * var(--legal-footer-link-hover-underline-width)) 0 0 currentColor;
+}

@@ -4,7 +4,7 @@
 
 :root {
   --site-nav-group-gap: var(--spacing-6); /** Separación entre grupos: entre columnas en escritorio, entre bloques en móvil */
-  --site-nav-label-margin-block-end: var(--spacing-3); /** Aire entre la cabecera y sus enlaces */
+  --site-nav-label-margin-block-end: var(--spacing-4); /** Aire entre la cabecera y sus enlaces: un paso más que entre enlaces, que la cabecera no se pegue al primero */
   --site-nav-item-gap: var(--spacing-3); /** Separación entre enlaces de un grupo */
   --site-nav-item-font-size: var(--font-size-4); /** Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5) */
   --site-nav-item-line-height: var(--line-height-snug); /** Enlaces */
@@ -24,6 +24,6 @@
 html.dark {
   --site-nav-item-hover-line-width: 0px; /** Enlaces en hover — surface-dark: sin línea, cambia el color */
   --site-nav-item-color: var(--color-text-on-dark); /** Enlaces — surface-dark */
-  --site-nav-item-hover-color: var(--color-accent-1); /** Enlaces en hover — surface-dark: color de acento en vez de subrayado */
+  --site-nav-item-hover-color: var(--color-accent-2); /** Enlaces en hover — surface-dark: amarillo (accent-2) en vez de línea */
   --site-nav-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

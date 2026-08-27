@@ -1,7 +1,9 @@
 /* Viste a TODOS los enlaces (`a`) desde la base: un enlace crudo en contenido
    de CMS o markdown se ve igual que <Link>. El componente solo añade API. */
 /* El subrayado es una línea bajo el enlace, no text-decoration: cubre texto e
-   icono por igual, se separa del texto (offset) y desaparece en hover. Va como
+   icono por igual y se separa del texto (offset). En claro: línea en reposo
+   que desaparece en hover. En oscuro: amarillo sin línea, y línea en hover
+   (tokens link.*underline-width). Va como
    sombra interior para no tocar bordes ni maquetación. Especificidad mínima
    (:where): los componentes que visten sus propios enlaces la anulan con
    `box-shadow: none; padding-block-end: 0`, igual que anulaban el subrayado.
@@ -16,7 +18,7 @@ a:where(:not(.button)) {
 
 a:where(:not(.button)):hover {
   color: var(--link-hover-color);
-  box-shadow: none;
+  box-shadow: inset 0 calc(-1 * var(--link-hover-underline-width)) 0 0 currentColor;
 }
 
 a:focus-visible {

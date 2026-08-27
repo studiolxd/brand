@@ -3,8 +3,17 @@
  */
 
 :root {
+  --legal-footer-link-hover-underline-width: 0px; /** …y ninguna en hover */
   --legal-footer-padding-block: var(--spacing-5); /** Aire arriba y abajo del pie */
   --legal-footer-gap: var(--spacing-3); /** Entre el título y la lista de enlaces */
   --legal-footer-links-gap: var(--spacing-4); /** Entre enlaces */
   --legal-footer-links-gap-stacked: var(--spacing-3); /** Separación entre enlaces apilados (móvil, por debajo de md) */
+  --legal-footer-link-underline-width: var(--border-width-default); /** Los enlaces legales llevan línea en reposo (en las dos superficies) */
+  --legal-footer-link-color: var(--color-text-on-light); /** Enlaces legales: tinta */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --legal-footer-link-color: var(--color-text-on-dark); /** Enlaces legales — surface-dark: blanco (tinta), no amarillo */
 }

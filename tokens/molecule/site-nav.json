@@ -1,7 +1,7 @@
 {
   "site-nav": {
     "group-gap":            { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Separación entre grupos: entre columnas en escritorio, entre bloques en móvil" },
-    "label-margin-block-end": { "$value": "{spacing.3}",            "$type": "dimension", "$description": "Aire entre la cabecera y sus enlaces" },
+    "label-margin-block-end": { "$value": "{spacing.4}",            "$type": "dimension", "$description": "Aire entre la cabecera y sus enlaces: un paso más que entre enlaces, que la cabecera no se pegue al primero" },
     "item-gap":             { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Separación entre enlaces de un grupo" },
     "item-font-size":       { "$value": "{font-size.4}",            "$type": "dimension", "$description": "Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5)" },
     "item-font-weight":     { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Enlaces" },
@@ -16,7 +16,7 @@
     "focus-ring-color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Anillo de foco" },
 
     "surface-dark-item-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Enlaces — surface-dark" },
-    "surface-dark-item-hover-color": { "$value": "{color.accent-1}",        "$type": "color", "$description": "Enlaces en hover — surface-dark: color de acento en vez de subrayado" },
+    "surface-dark-item-hover-color": { "$value": "{color.accent-2}",        "$type": "color", "$description": "Enlaces en hover — surface-dark: amarillo (accent-2) en vez de línea" },
     "surface-dark-item-hover-line-width": { "$value": "0px",              "$type": "dimension", "$description": "Enlaces en hover — surface-dark: sin línea, cambia el color" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }

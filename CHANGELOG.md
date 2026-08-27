@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.1.0
+
+### Cambiado
+
+- Enlaces en superficie oscura: amarillo (`accent-2`), sin línea en reposo y
+  con línea en hover (`link.hover-underline-width`, `surface-dark-underline-width`,
+  `surface-dark-hover-underline-width`). En claro, como antes.
+- `LegalFooter`: excepción explícita — enlaces en tinta (blanco en oscuro),
+  línea en reposo y ninguna en hover (`link-color`, `link-underline-width`,
+  `link-hover-underline-width`).
+- `SiteNav`: hover en oscuro a `accent-2`; más aire entre la cabecera del grupo
+  y sus enlaces (`label-margin-block-end` = `spacing.4`).
+
 ## v22.0.2
 
 ### Corregido
