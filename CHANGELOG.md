@@ -7,6 +7,42 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.11.0
+
+### Cambiado
+
+- `CommandPalette` deja de envolver **cmdk**, que arrastraba
+  `@radix-ui/react-dialog`, `react-primitive` y `react-id` al bundle publicado
+  pese a que CLAUDE.md prohíbe Radix en el DS. Se reescribe sobre el `Modal`
+  del sistema (Base UI Dialog) + `Autocomplete` de Base UI en modo `inline`.
+  **La API pública no cambia**: `open`, `onOpenChange`, `groups`, `title`,
+  `placeholder`, `emptyLabel`, `listLabel`, `closeLabel`, `shortcut` y
+  `className` siguen igual, y los ítems mantienen `id`, `label`, `icon`,
+  `onSelect`, `keywords` y `disabled` — los 8 consumidores de la suite suben
+  de versión sin tocar nada. Lo que sí cambia es el DOM interno y los tokens,
+  que son detalle de implementación (el CSS de componente no se expone):
+  - `[cmdk-group-heading]` → `.command-palette__heading`.
+  - `.command-palette__item[data-selected="true"]` →
+    `[data-highlighted]`; `[data-disabled="true"]` → `[data-disabled]`.
+  - Fuera `.command-palette__separator` y sus tokens
+    (`command-palette.separator-height|-color|-margin-block` y
+    `surface-dark-separator-color`): la regla existía pero el componente nunca
+    renderizó un separador.
+  - `command-palette.list-padding` se desdobla en `list-padding-block` /
+    `list-padding-inline` (regla de ejes inline/block).
+- `cmdk` sale de `dependencies`.
+- `CommandPalette` sale de «Por revisar»: su título pasa a
+  `Molecules/CommandPalette`.
+
+### Añadido
+
+- `CommandPalette`: prop `locale` (default: el del entorno) para fijar el
+  idioma con el que `Intl.Collator` compara al filtrar.
+- `CommandPalette`: MDX con anatomía, teclado, tokens, accesibilidad y
+  «Migración desde cmdk»; stories «Con grupos» y «En superficie oscura»; dos
+  stories de test (`!dev`) y `CommandPalette.test.tsx` con 13 casos
+  (filtrado con y sin acentos, keywords, grupos vacíos, región viva, ↑↓,
+  Home/End, Enter, ratón, deshabilitados, Escape y el atajo ⌘K).
 ## v24.10.0
 
 ### Cambiado

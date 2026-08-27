@@ -275,9 +275,10 @@ ContextMenu (tenía 50 crudo en CSS), SkipLink (9999 crudo) y el Header viejo.
 Todo el DS corre sobre `@base-ui-components/react`; `@radix-ui/*` ya no está en
 `src/` ni en `package.json`.
 
-- [ ] **cmdk (CommandPalette)** arrastra Radix transitivamente (`react-dialog`,
-      `react-primitive`, `react-id` en `dist/command-palette.js`). Quitarlo exige
-      reescribir CommandPalette sobre Dialog + lista propia de Base UI.
+- [x] **cmdk (CommandPalette)** — resuelto en v24.11.0: la paleta se reescribió
+      sobre `Modal` (Base UI Dialog) + `Autocomplete` de Base UI en modo
+      `inline`; `cmdk` fuera de `dependencies` y cero Radix en
+      `dist/command-palette.js`.
 - [x] **Modal / Sheet** con título oculto: `VisuallyHidden` ya reenvía `ref` y
       props (2026-08-25), el `aria-labelledby` enlaza.
 - [x] z-index de los popups en el `Positioner` (`<bloque>__positioner`), no en

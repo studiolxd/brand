@@ -24,7 +24,9 @@
 
 .command-palette__list {
   overflow-y: auto;
-  padding: var(--command-palette-list-padding);
+  padding-block: var(--command-palette-list-padding-block);
+  padding-inline: var(--command-palette-list-padding-inline);
+  outline: none;
 }
 
 .command-palette__empty {
@@ -35,8 +37,12 @@
   color: var(--command-palette-empty-color);
 }
 
-/* cmdk renderiza el título del grupo en un nodo propio, no en el del Group. */
-.command-palette__group [cmdk-group-heading] {
+/* La región viva se monta siempre: sin texto no debe ocupar sitio. */
+.command-palette__empty:empty {
+  display: none;
+}
+
+.command-palette__heading {
   padding-block: var(--command-palette-heading-padding-block);
   padding-inline: var(--command-palette-heading-padding-inline);
   font-size: var(--command-palette-heading-font-size);
@@ -57,12 +63,14 @@
   outline: none;
 }
 
-.command-palette__item[data-selected='true'] {
+/* El foco es virtual (`aria-activedescendant`): el ítem resaltado lo marca
+   Base UI con `data-highlighted`, tanto por teclado como por puntero. */
+.command-palette__item[data-highlighted] {
   background-color: var(--command-palette-item-selected-bg);
   color: var(--command-palette-item-selected-color);
 }
 
-.command-palette__item[data-disabled='true'] {
+.command-palette__item[data-disabled] {
   opacity: var(--opacity-disabled);
   cursor: not-allowed;
 }
@@ -75,10 +83,4 @@
 .command-palette__item-icon svg {
   width: var(--command-palette-item-icon-size);
   height: var(--command-palette-item-icon-size);
-}
-
-.command-palette__separator {
-  height: var(--command-palette-separator-height);
-  margin-block: var(--command-palette-separator-margin-block);
-  background-color: var(--command-palette-separator-color);
 }

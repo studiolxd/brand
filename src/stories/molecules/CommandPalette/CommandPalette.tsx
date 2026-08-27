@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, type ReactNode } from 'react';
-import { Command } from 'cmdk';
+import { useCallback, useEffect, type ReactNode } from 'react';
+import { Autocomplete } from '@base-ui-components/react/autocomplete';
 import { Modal } from '../Modal/Modal';
 import './CommandPalette.css';
 
@@ -27,8 +27,8 @@ export interface CommandPaletteProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   /**
-   * Grupos de comandos, en orden. Los grupos sin ítems no se renderizan —
-   * el call-site no necesita condicionarlos.
+   * Grupos de comandos, en orden. Los grupos que se quedan sin ítems al
+   * filtrar no se renderizan — el call-site no necesita condicionarlos.
    */
   groups: CommandPaletteGroup[];
   /** Título accesible y visible del diálogo. */
@@ -37,8 +37,8 @@ export interface CommandPaletteProps {
   /** Texto del estado "sin resultados". */
   emptyLabel: string;
   /**
-   * Etiqueta accesible de la lista. cmdk rotula el listbox "Suggestions" en
-   * inglés si no se pasa, así que en apps multiidioma es obligatoria de facto.
+   * Etiqueta accesible de la lista de resultados (`role="listbox"`). Sin ella
+   * el listbox se queda sin nombre: pásala siempre en apps multiidioma.
    */
   listLabel?: string;
   /** Etiqueta del botón de cierre del diálogo. */
@@ -48,16 +48,22 @@ export interface CommandPaletteProps {
    * `false` desactiva el atajo — la apertura queda en manos del call-site.
    */
   shortcut?: string | false;
+  /**
+   * Idioma con el que se comparan las cadenas al filtrar (`Intl.Collator`).
+   * Por defecto, el del entorno.
+   */
+  locale?: Intl.LocalesArgument;
   className?: string;
 }
 
 /**
- * Paleta de comandos ⌘K: diálogo con buscador difuso, resultados agrupados y
- * estado vacío. Se monta una sola vez en el shell de la aplicación y se
- * alimenta de forma declarativa con `groups`.
+ * Paleta de comandos ⌘K: diálogo con buscador, resultados agrupados y estado
+ * vacío. Se monta una sola vez en el shell de la aplicación y se alimenta de
+ * forma declarativa con `groups`.
  *
- * `cmdk` aporta el comportamiento (filtrado, navegación con ↑↓, Enter) igual
- * que Base UI en el resto del DS; la superficie es la del `Modal`.
+ * El comportamiento (filtrado, navegación con ↑↓, Enter) es el `Autocomplete`
+ * de Base UI en modo `inline` — sin popup propio, porque la superficie ya la
+ * pone el `Modal`, que también se queda con Escape y el foco atrapado.
  */
 export function CommandPalette({
   open,
@@ -69,6 +75,7 @@ export function CommandPalette({
   listLabel,
   closeLabel,
   shortcut = 'k',
+  locale,
   className,
 }: CommandPaletteProps) {
   useEffect(() => {
@@ -83,7 +90,16 @@ export function CommandPalette({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [shortcut, open, onOpenChange]);
 
-  const visibleGroups = groups.filter((group) => group.items.length > 0);
+  // `sensitivity: 'base'` iguala mayúsculas y acentos: "sesion" encuentra
+  // "Cerrar sesión" y "перевод" no depende de cómo se teclee la diéresis.
+  const filter = Autocomplete.useFilter({ sensitivity: 'base', locale });
+
+  const matches = useCallback(
+    (item: CommandPaletteItem, query: string) =>
+      filter.contains(item.label, query) ||
+      (item.keywords ?? []).some((keyword) => filter.contains(keyword, query)),
+    [filter],
+  );
 
   return (
     <Modal
@@ -92,51 +108,65 @@ export function CommandPalette({
       title={title}
       {...(closeLabel ? { closeLabel } : {})}
     >
-      <Command className={['command-palette', className].filter(Boolean).join(' ')}>
-        {/* Modal neutraliza su auto-focus de apertura (correcto para diálogos
-            genéricos); una paleta sí quiere el buscador enfocado al abrir. */}
-        <Command.Input
-          className="command-palette__input"
-          placeholder={placeholder}
-          autoFocus
-        />
-        <Command.List className="command-palette__list" label={listLabel}>
-          {/* cmdk fuerza role="presentation" en Empty: sin la región viva, el
-              "sin resultados" nunca se anuncia. */}
-          <Command.Empty className="command-palette__empty">
-            <span role="status">{emptyLabel}</span>
-          </Command.Empty>
-
-          {visibleGroups.map((group) => (
-            <Command.Group
-              key={group.id}
-              className="command-palette__group"
-              heading={group.heading}
-            >
-              {group.items.map((item) => (
-                <Command.Item
-                  key={item.id}
-                  className="command-palette__item"
-                  value={item.label}
-                  keywords={item.keywords}
-                  disabled={item.disabled}
-                  onSelect={() => {
-                    onOpenChange(false);
-                    item.onSelect();
-                  }}
-                >
-                  {item.icon && (
-                    <span className="command-palette__item-icon" aria-hidden="true">
-                      {item.icon}
-                    </span>
+      <Autocomplete.Root
+        inline
+        // En modo `inline` el motor no abre nada por su cuenta (el popup es el
+        // propio Modal), pero la lista sí necesita estar «abierta» para que
+        // Enter active el ítem resaltado.
+        open
+        items={groups}
+        filter={matches}
+        autoHighlight="always"
+      >
+        <div className={['command-palette', className].filter(Boolean).join(' ')}>
+          {/* Modal neutraliza su auto-focus de apertura (correcto para diálogos
+              genéricos); una paleta sí quiere el buscador enfocado al abrir. */}
+          <Autocomplete.Input
+            className="command-palette__input"
+            placeholder={placeholder}
+            autoFocus
+          />
+          <Autocomplete.List className="command-palette__list" aria-label={listLabel}>
+            {(group: CommandPaletteGroup) => (
+              <Autocomplete.Group
+                key={group.id}
+                items={group.items}
+                className="command-palette__group"
+              >
+                <Autocomplete.GroupLabel className="command-palette__heading">
+                  {group.heading}
+                </Autocomplete.GroupLabel>
+                <Autocomplete.Collection>
+                  {(item: CommandPaletteItem) => (
+                    <Autocomplete.Item
+                      key={item.id}
+                      value={item}
+                      disabled={item.disabled}
+                      className="command-palette__item"
+                      onClick={() => {
+                        onOpenChange(false);
+                        item.onSelect();
+                      }}
+                    >
+                      {item.icon && (
+                        <span className="command-palette__item-icon" aria-hidden="true">
+                          {item.icon}
+                        </span>
+                      )}
+                      {item.label}
+                    </Autocomplete.Item>
                   )}
-                  {item.label}
-                </Command.Item>
-              ))}
-            </Command.Group>
-          ))}
-        </Command.List>
-      </Command>
+                </Autocomplete.Collection>
+              </Autocomplete.Group>
+            )}
+          </Autocomplete.List>
+          {/* Base UI monta el nodo siempre y solo le mete texto cuando la
+              lista queda vacía: es su propia región viva (`role="status"`). */}
+          <Autocomplete.Empty className="command-palette__empty">
+            {emptyLabel}
+          </Autocomplete.Empty>
+        </div>
+      </Autocomplete.Root>
     </Modal>
   );
 }

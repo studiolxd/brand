@@ -7,7 +7,8 @@
   --command-palette-input-padding-block: var(--spacing-3); /** Padding vertical del buscador */
   --command-palette-input-padding-inline: var(--spacing-2); /** Padding horizontal del buscador */
   --command-palette-input-font-size: var(--font-size-3); /** Tamaño de texto del buscador */
-  --command-palette-list-padding: var(--spacing-1); /** Padding de la lista de resultados */
+  --command-palette-list-padding-block: var(--spacing-1); /** Padding vertical de la lista de resultados */
+  --command-palette-list-padding-inline: var(--spacing-1); /** Padding horizontal de la lista de resultados */
   --command-palette-empty-padding-block: var(--spacing-6); /** Padding vertical del estado vacío */
   --command-palette-empty-padding-inline: var(--spacing-4); /** Padding horizontal del estado vacío */
   --command-palette-empty-font-size: var(--font-size-2); /** Tamaño de texto del estado vacío */
@@ -19,19 +20,16 @@
   --command-palette-item-gap: var(--spacing-2); /** Gap entre icono y texto del ítem */
   --command-palette-item-font-size: var(--font-size-2); /** Tamaño de texto de los ítems */
   --command-palette-item-icon-size: var(--font-size-4); /** Talla del icono de los ítems */
-  --command-palette-separator-margin-block: var(--spacing-1); /** Margen vertical del separador */
   --command-palette-input-border-width: var(--border-width-default); /** Grosor de la línea bajo el buscador */
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-light); /** Color del placeholder del buscador */
   --command-palette-empty-color: var(--color-text-muted-on-light); /** Color del estado vacío */
   --command-palette-heading-font-weight: var(--font-weight-emphasis); /** Peso del título de grupo */
   --command-palette-heading-color: var(--color-text-muted-on-light); /** Color del título de grupo */
   --command-palette-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
-  --command-palette-separator-height: var(--border-width-default); /** Alto del separador */
   --command-palette-input-border-color: var(--floating-panel-border-color); /** Color de la línea bajo el buscador */
   --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — comparte lenguaje con ContextMenu */
   --command-palette-item-selected-bg: var(--menu-item-hover-bg); /** Fondo del ítem seleccionado */
   --command-palette-item-selected-color: var(--menu-item-hover-color); /** Color de texto del ítem seleccionado */
-  --command-palette-separator-color: var(--menu-separator-color); /** Color del separador */
 }
 
 .surface-dark,
@@ -42,5 +40,4 @@ html.dark {
   --command-palette-item-color: var(--menu-surface-dark-item-color); /** Color de texto de los ítems — surface-dark */
   --command-palette-item-selected-bg: var(--menu-surface-dark-item-hover-bg); /** Fondo del ítem seleccionado — surface-dark */
   --command-palette-item-selected-color: var(--menu-surface-dark-item-hover-color); /** Texto del ítem seleccionado — surface-dark */
-  --command-palette-separator-color: var(--menu-surface-dark-separator-color); /** Color del separador — surface-dark */
 }

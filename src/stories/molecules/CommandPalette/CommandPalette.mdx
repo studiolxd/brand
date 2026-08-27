@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CommandPaletteStories from "./CommandPalette.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import {
+  commandPaletteBaseTokens,
+  commandPaletteDarkTokens,
+} from "../../../tokens/molecules/command-palette";
+
+<Meta of={CommandPaletteStories} />
+
+# CommandPalette
+
+La paleta ⌘K: un diálogo con buscador, resultados agrupados y estado vacío. Se monta **una sola vez** en el shell de la aplicación y se alimenta de forma declarativa con `groups`; el atajo global y la apertura los lleva el propio componente.
+
+<Canvas of={CommandPaletteStories.PorDefecto} />
+
+## Anatomía
+
+La superficie es el `Modal` del sistema: mismo panel, mismo velo, misma aspa de cierre y mismo foco atrapado. Dentro va un `Autocomplete` de Base UI en modo `inline` —sin popup propio, porque la superficie ya la pone el diálogo— con tres partes:
+
+- **Buscador** (`role="combobox"`): enfocado al abrir. `Modal` neutraliza su auto-foco de apertura, que es lo correcto para un diálogo genérico; una paleta sí lo quiere.
+- **Lista** (`role="listbox"`, `aria-label` = `listLabel`): contiene un `role="group"` por grupo, con su cabecera asociada, y un `role="option"` por comando.
+- **Estado vacío** (`role="status"`): región viva que solo tiene texto cuando el filtro no deja resultados.
+
+## Grupos y comandos
+
+`groups` es una lista ordenada de `{ id, heading, items }`. Cada ítem es `{ id, label, onSelect }` con `icon`, `keywords` y `disabled` opcionales. Los grupos que se quedan **sin ítems** —vacíos de origen o vaciados por el filtro— no se renderizan: el call-site no necesita condicionarlos.
+
+<Canvas of={CommandPaletteStories.ConGrupos} />
+
+El filtro compara con `Intl.Collator` en sensibilidad `base`, así que ignora mayúsculas y acentos («sesion» encuentra «Cerrar sesión»). Busca sobre `label` y sobre `keywords`, que es donde se ponen los sinónimos con los que el usuario buscaría el comando sin conocer su nombre exacto. `locale` fija el idioma de esa comparación; por defecto, el del entorno.
+
+<Canvas of={CommandPaletteStories.SinResultados} />
+
+## Teclado
+
+| Tecla | Acción |
+| --- | --- |
+| `⌘K` / `Ctrl+K` | Abre y cierra la paleta. La tecla se cambia con `shortcut`; `shortcut={false}` desactiva el atajo y deja la apertura al call-site |
+| `↑` `↓` | Mueve el resaltado entre resultados, saltando las cabeceras de grupo. Al llegar al extremo, da la vuelta |
+| `Home` `End` | Primer y último resultado |
+| `Enter` | Activa el resultado resaltado: cierra la paleta y llama a su `onSelect` |
+| `Esc` | Cierra la paleta (lo lleva el `Modal`) |
+
+El foco **nunca sale del buscador**: la lista se recorre con foco virtual (`aria-activedescendant`), así que se puede seguir escribiendo mientras se navega. El primer resultado va resaltado desde el principio, de modo que escribir y pulsar `Enter` es un camino completo sin tocar las flechas.
+
+<Canvas of={CommandPaletteStories.ConAtajo} />
+
+## Superficie oscura
+
+Los tokens `surface-dark-*` cubren cabeceras, ítems, resaltado y estado vacío. No hace falta ninguna prop: la paleta reacciona a `.surface-dark` y a `html.dark` / `[data-theme="dark"]`.
+
+<Canvas of={CommandPaletteStories.EnSuperficieOscura} />
+
+## Textos
+
+Todo texto que emite la paleta es prop: `title`, `placeholder`, `emptyLabel`, `listLabel` y `closeLabel`. `listLabel` es el nombre accesible del `listbox`: sin ella la lista se queda sin nombre, así que pásala siempre.
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={commandPaletteBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={commandPaletteDarkTokens} />
+
+El panel, el velo y el aspa no son tokens de la paleta: son los del `Modal`.
+
+## Accesibilidad
+
+- Patrón **combobox con lista** de WAI-ARIA: el buscador es `role="combobox"`, la lista `role="listbox"` con `aria-label`, y cada comando `role="option"`. El resaltado viaja en `aria-activedescendant` sin mover el foco real.
+- Las cabeceras de grupo se asocian a su `role="group"`, de modo que el lector de pantalla anuncia «Navegación, Inicio, 1 de 2».
+- El «sin resultados» vive en una región viva `role="status"` (`aria-live="polite"`), así que se anuncia al aparecer en vez de quedarse mudo.
+- Los ítems `disabled` llevan `aria-disabled` y no se activan ni con ratón ni con teclado.
+- El diálogo atrapa el foco y devuelve al elemento que lo abrió al cerrarse: eso lo pone el `Modal`.
+
+## Migración desde cmdk
+
+Hasta la v24 la paleta envolvía **cmdk**, que arrastraba `@radix-ui/react-dialog` al bundle publicado; el sistema tiene un solo motor de conducta, Base UI, así que se reescribió sobre `Autocomplete`. **La API pública no cambia**: `open`, `onOpenChange`, `groups`, `title`, `placeholder`, `emptyLabel`, `listLabel`, `closeLabel`, `shortcut` y `className` siguen igual, y los ítems mantienen `id`, `label`, `icon`, `onSelect`, `keywords` y `disabled`. Actualizar es subir de versión.
+
+Lo que sí cambia es el DOM interno, por si algo lo tocaba:
+
+| Antes (cmdk) | Ahora (Base UI) |
+| --- | --- |
+| `[cmdk-group-heading]` | `.command-palette__heading` |
+| `.command-palette__item[data-selected="true"]` | `.command-palette__item[data-highlighted]` |
+| `.command-palette__item[data-disabled="true"]` | `.command-palette__item[data-disabled]` |
+| `.command-palette__separator` | Retirado: nunca se renderizó |
+
+Los tokens `command-palette.separator-*` desaparecen con él, y `command-palette.list-padding` se desdobla en `list-padding-block` / `list-padding-inline`. Se añade la prop `locale`.
+
+## Props
+
+<ArgTypes of={CommandPaletteStories} />
