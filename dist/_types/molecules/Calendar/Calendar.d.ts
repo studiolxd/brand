@@ -30,8 +30,15 @@ export interface CalendarProps {
      * Una app multiidioma debe pasarla traducida.
      */
     nextMonthLabel?: string;
+    /**
+     * aria-label de la rejilla de días. Sin ella, la rejilla toma como nombre el
+     * título del mes visible. Cuando el calendario vive dentro de un panel con
+     * nombre propio (el `Popover` de `DatePicker`), conviene pasarlo aquí.
+     * Es texto visible para lectores: una app multiidioma debe pasarlo traducido.
+     */
+    gridLabel?: string;
     /** Tamaño del componente. Default: 'md' */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, previousMonthLabel, nextMonthLabel, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, previousMonthLabel, nextMonthLabel, gridLabel, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;

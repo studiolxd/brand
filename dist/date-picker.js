@@ -55,6 +55,7 @@ var l = a(function({ value: a, onChange: l, placeholder: u = "Seleccionar fechaâ
 		children: /* @__PURE__ */ r(t, {
 			value: a ?? null,
 			onChange: j,
+			gridLabel: w,
 			minDate: d,
 			maxDate: f,
 			disabledDates: p,

@@ -2,38 +2,39 @@ import './prev-next-nav.css';
 import { Icon as e } from "./icon.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/stories/molecules/PrevNextNav/PrevNextNav.tsx
-function r({ href: n, onClick: r, label: i, disabled: a, direction: o, chevronSize: s }) {
-	let c = [
+function r({ href: n, onClick: r, label: i, disabled: a, direction: o, chevronSize: s, linkComponent: c }) {
+	let l = [
 		"prev-next-nav__btn",
 		`prev-next-nav__btn--${o}`,
 		a ? "prev-next-nav__btn--disabled" : ""
-	].filter(Boolean).join(" "), l = /* @__PURE__ */ t(e, {
+	].filter(Boolean).join(" "), u = /* @__PURE__ */ t(e, {
 		name: "chevron",
 		size: s
 	});
 	return a ? /* @__PURE__ */ t("button", {
 		type: "button",
-		className: c,
+		className: l,
 		"aria-label": i,
 		disabled: !0,
-		children: l
-	}) : n ? /* @__PURE__ */ t("a", {
+		children: u
+	}) : n ? /* @__PURE__ */ t(c ?? "a", {
 		href: n,
-		className: c,
-		"aria-label": i,
-		children: l
-	}) : /* @__PURE__ */ t("button", {
-		type: "button",
-		className: c,
+		className: l,
 		"aria-label": i,
 		onClick: r,
-		children: l
+		children: u
+	}) : /* @__PURE__ */ t("button", {
+		type: "button",
+		className: l,
+		"aria-label": i,
+		onClick: r,
+		children: u
 	});
 }
-function i({ prevHref: e, nextHref: i, prevOnClick: a, nextOnClick: o, prevLabel: s = "Anterior", nextLabel: c = "Siguiente", label: l, size: u = "md" }) {
-	let d = u === "sm" ? "sm" : "md";
+function i({ prevHref: e, nextHref: i, prevOnClick: a, nextOnClick: o, prevLabel: s = "Anterior", nextLabel: c = "Siguiente", label: l, labelId: u, linkComponent: d, size: f = "md" }) {
+	let p = f === "sm" ? "sm" : "md";
 	return /* @__PURE__ */ n("div", {
-		className: ["prev-next-nav", u === "sm" ? "prev-next-nav--sm" : ""].filter(Boolean).join(" "),
+		className: ["prev-next-nav", f === "sm" ? "prev-next-nav--sm" : ""].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ t(r, {
 				href: e,
@@ -41,9 +42,11 @@ function i({ prevHref: e, nextHref: i, prevOnClick: a, nextOnClick: o, prevLabel
 				label: s,
 				disabled: !e && !a,
 				direction: "prev",
-				chevronSize: d
+				chevronSize: p,
+				linkComponent: d
 			}),
 			/* @__PURE__ */ t("strong", {
+				id: u,
 				className: "prev-next-nav__label",
 				children: l
 			}),
@@ -53,7 +56,8 @@ function i({ prevHref: e, nextHref: i, prevOnClick: a, nextOnClick: o, prevLabel
 				label: c,
 				disabled: !i && !o,
 				direction: "next",
-				chevronSize: d
+				chevronSize: p,
+				linkComponent: d
 			})
 		]
 	});

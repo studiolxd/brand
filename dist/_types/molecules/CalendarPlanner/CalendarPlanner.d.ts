@@ -45,8 +45,14 @@ export interface CalendarPlannerProps {
      * Una app multiidioma debe pasarla traducida.
      */
     nextMonthLabel?: string;
+    /**
+     * aria-label de la rejilla de días. Sin ella, la rejilla toma como nombre el
+     * título del mes visible. Es texto para lectores: una app multiidioma debe
+     * pasarlo traducido.
+     */
+    gridLabel?: string;
     /** Tamaño del componente. Default: 'md' */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, previousMonthLabel, nextMonthLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, previousMonthLabel, nextMonthLabel, gridLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
