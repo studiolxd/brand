@@ -1,0 +1,63 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as EmptyStateStories from "./EmptyState.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { emptyStateTokens, emptyStateDarkTokens } from "../../../tokens/components/empty-state";
+
+<Meta of={EmptyStateStories} />
+
+# EmptyState
+
+Qué mostrar cuando no hay nada que mostrar: una lista sin elementos, una
+búsqueda sin resultados, una carpeta vacía. Lo consume `DataTable` cuando la
+tabla no tiene filas.
+
+<Canvas of={EmptyStateStories.PorDefecto} />
+
+## Anatomía
+
+Un icono opcional, un cuerpo (título + descripción opcional) y una acción
+opcional, en columna y centrados. El `title` es obligatorio: siempre hay que
+decir qué está vacío.
+
+<Canvas of={EmptyStateStories.WithDescription} />
+<Canvas of={EmptyStateStories.WithIcon} />
+<Canvas of={EmptyStateStories.WithAction} />
+<Canvas of={EmptyStateStories.SearchResult} />
+
+## Tallas
+
+`md` (por defecto) y `sm`, para cuando el estado vacío vive dentro de un
+espacio más ajustado (una celda, un panel lateral).
+
+<Canvas of={EmptyStateStories.Small} />
+
+## Superficie oscura
+
+<Canvas of={EmptyStateStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={emptyStateTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={emptyStateDarkTokens} />
+
+## Accesibilidad
+
+- `title` y `description` son texto corriente: van en `color.text.muted-on-light`
+  / `muted-on-dark`, nunca en `grey-dark` (regla del sistema: `grey-dark` es
+  solo para iconos de acción secundarios y controles deshabilitados).
+- El icono es puramente decorativo (no lleva información que no esté ya en el
+  título): si se necesita anunciar el cambio de estado (por ejemplo, tras
+  filtrar una lista), el consumidor envuelve `EmptyState` en un contenedor
+  `role="status"`/`aria-live` — el componente reenvía `...rest` a su
+  contenedor raíz para admitir ese caso sin necesitar una prop dedicada.
+- `empty-state.icon-size` está unificado con `icon.size-lg` (48px), el icono
+  destacado del sistema para cabeceras de estado vacío y avisos.
+
+## Props
+
+<ArgTypes of={EmptyStateStories} />

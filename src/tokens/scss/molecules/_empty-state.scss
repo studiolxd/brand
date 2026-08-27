@@ -5,7 +5,7 @@ $lxd-empty-state-gap: 1rem; // Gap entre icono, cuerpo y acción
 $lxd-empty-state-body-gap: 0.5rem; // Gap entre título y descripción
 $lxd-empty-state-padding-block: 3rem; // Padding vertical del contenedor
 $lxd-empty-state-padding-inline: 1.5rem; // Padding horizontal del contenedor
-$lxd-empty-state-icon-size: 3rem; // Tamaño del icono — variante md
+$lxd-empty-state-icon-size: 48px; // Tamaño del icono — variante md (unificado con el icono destacado del sistema)
 $lxd-empty-state-icon-size-sm: 2rem; // Tamaño del icono — variante sm
 $lxd-empty-state-title-font-size-sm: 1.25rem; // Tamaño tipográfico del título — variante sm
 $lxd-empty-state-description-font-size-sm: 0.875rem; // Tamaño tipográfico de la descripción — variante sm
@@ -13,7 +13,7 @@ $lxd-empty-state-icon-color: #6b6b6b; // Color del icono
 $lxd-empty-state-title-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del título
 $lxd-empty-state-title-font-size: 1.5rem; // Tamaño tipográfico del título
 $lxd-empty-state-title-font-weight: 500; // Peso del título
-$lxd-empty-state-title-color: #6b6b6b; // Color del título
+$lxd-empty-state-title-color: #4a4a4a; // Color del título — es texto, nunca grey-dark
 $lxd-empty-state-description-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la descripción
 $lxd-empty-state-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (la variante sm tiene talla propia)
-$lxd-empty-state-description-color: #6b6b6b; // Color de la descripción
+$lxd-empty-state-description-color: #4a4a4a; // Color de la descripción — es texto, nunca grey-dark
