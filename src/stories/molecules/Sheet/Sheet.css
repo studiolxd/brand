@@ -99,24 +99,12 @@
   color: var(--sheet-description-color);
 }
 
+/* Color, hover y anillo de foco los pone `Button` ghost (mismo patrón que
+   `Modal`/`Alert`/`Toast`); aquí solo la posición sobre la esquina del panel. */
 .sheet__close {
   position: absolute;
   inset-block-start: var(--sheet-close-inset);
   inset-inline-end: var(--sheet-close-inset);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-1);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--modal-close-color);
-  border-radius: var(--border-radius-default);
-}
-
-.sheet__close:hover {
-  color: var(--modal-close-hover-color);
-  background-color: var(--modal-close-hover-bg);
 }
 
 .sheet__body {
