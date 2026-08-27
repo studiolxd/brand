@@ -7,6 +7,35 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.4.0
+
+### Cambiado
+
+- `Spinner`: deja de ser un círculo que gira. Ahora es un cuadrado de solo
+  contorno (SVG `<rect>` sin radio, `pathLength="100"`) que se dibuja desde la
+  esquina superior izquierda hasta cerrarse y vuelve a empezar; sin rotación.
+  Misma API (`size`, `label`, `aria-hidden`) y mismos tokens: `spinner.size-*`
+  y `spinner.border-width-*` (ahora grosor del `stroke`);
+  `spinner.animation-duration` pasa de 600ms a 1000ms (un ciclo de dibujo).
+  Con `prefers-reduced-motion: reduce` no anima: se muestra el contorno
+  completo. Elemento interno `.spinner__circle` → `.spinner__square` +
+  `.spinner__stroke` (CSS interno, no expuesto). Doc MDX nueva.
+- `TypingIndicator`: los tres puntos son cuadrados (sin `border-radius`).
+  Tamaño, tokens, ritmo, reduced-motion y API sin cambios; el token
+  `typing-indicator.dot-size` conserva su nombre (es el lado del cuadrado).
+  Doc MDX nueva.
+- `Tooltip`: la separación con el disparador sale del token nuevo
+  `tooltip.offset` (`spacing.1`, 4px), leído en runtime sobre `<html>`; la prop
+  `sideOffset` sigue como override. Doc MDX nueva y story «Cuatro lados» como
+  contrato visual.
+
+### Corregido
+
+- `Tooltip` con `side="left"`/`"right"`: la flecha giraba 90° sobre el centro
+  de su caja 10×5 y quedaba flotando 2,5px separada del bocadillo (y metida en
+  el disparador). Un `translate` de ±25% la devuelve al borde. Test de
+  geometría para los cuatro lados.
+
 ## v24.3.0
 
 ### Añadido

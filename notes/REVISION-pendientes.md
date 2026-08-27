@@ -167,8 +167,8 @@ roles; lo que queda es comprobar visualmente cada componente al revisarlo.
 - [ ] **Tabs** — `trigger-indicator-width` baja de 2px a 1px. Si el indicador
       de pestaña activa necesita más presencia, resolverlo con color, no con
       grosor.
-- [ ] **Spinner** — anillos a 2px / 2px / 3px crudos. No son bordes de diseño
-      pero tampoco están en ningún token: decidir grosor al revisar.
+- [x] **Spinner** — el grosor (2/2/3px) es ahora el `stroke-width` del cuadrado
+      de contorno, en `spinner.border-width-*` (2026-08-27). Sigue crudo en el JSON.
 - [x] **RadioField** — el `offset` de 3px se retiró (2026-08-27): la marca se
       alinea con la primera línea derivando `(altura de línea × cuerpo − lado
       del radio) / 2`, sin número suelto.
@@ -203,8 +203,9 @@ comprobar que sigue separándose de lo que tiene debajo:
 Regla: ninguna duración va escrita a mano (reduced-motion las anula todas vía
 token). Curvas `in` y `linear` declaradas sin uso.
 
-- [ ] **Spinner** — `animation-duration: 600ms` crudo. Es un bucle, no una
-      transición: decidir si va a `slow` o si un bucle merece su propio token.
+- [ ] **Spinner** — `animation-duration` ahora 1000ms (un ciclo de dibujo del
+      contorno, 2026-08-27). Sigue siendo token propio crudo: un bucle no es una
+      transición; decidir si merece un token de motion.
 - [ ] Transiciones con ms a mano en CSS: **CardSplit, PrevNextNav, Table,
       AppLauncher, Modal, Tooltip, Skeleton, Popover** → `--motion-duration-*`.
 
