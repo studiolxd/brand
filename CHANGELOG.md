@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.8.1
+
+### Corregido
+
+- `Input` y `Textarea`: el autorrelleno del navegador ya no pinta el campo de
+  blanco (también en superficie oscura): sombra interior del color del campo y
+  color de texto forzado; el anillo de foco en error se conserva.
+
 ## v19.8.0
 
 ### Añadido

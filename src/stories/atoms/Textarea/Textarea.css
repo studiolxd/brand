@@ -73,3 +73,31 @@
   --textarea-font-size: var(--textarea-lg-font-size);
 }
 
+
+/* Autorrelleno del navegador: Chrome pinta su propio fondo (blanco/amarillo)
+   sobre el campo, también en superficie oscura. Se tapa con una sombra
+   interior del color del campo y se fuerza el color del texto. */
+.textarea:autofill,
+.textarea:autofill:hover,
+.textarea:autofill:focus,
+.textarea:-webkit-autofill,
+.textarea:-webkit-autofill:hover,
+.textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--textarea-color);
+  caret-color: var(--textarea-color);
+  box-shadow: inset 0 0 0 1000px var(--textarea-bg);
+  transition: background-color 9999s ease-out 0s;
+}
+.textarea.textarea--error:-webkit-autofill,
+.textarea.textarea--error:autofill {
+  -webkit-text-fill-color: var(--textarea-error-color);
+  box-shadow: inset 0 0 0 1000px var(--textarea-error-bg);
+}
+/* En foco con error, el anillo va por delante del relleno. */
+.textarea.textarea--error:-webkit-autofill:focus-visible,
+.textarea.textarea--error:autofill:focus-visible {
+  box-shadow:
+    inset 0 0 0 calc(var(--textarea-focus-ring-width) + var(--textarea-focus-ring-inset-offset)) var(--textarea-error-focus-ring-color),
+    inset 0 0 0 var(--textarea-focus-ring-inset-offset) var(--textarea-error-bg),
+    inset 0 0 0 1000px var(--textarea-error-bg);
+}
