@@ -26,6 +26,10 @@ La cara la pone `brand.css` sobre cualquier `<a>`, sin clases: el HTML de un CMS
 
 <TokenTable tokens={linkTokens} />
 
+## Con el router del producto (`render`)
+
+`render={<NextLink href="…" />}` monta el enlace sobre el `Link` del router. En Next.js con Server Components, ese elemento debe **crearse en un componente cliente**: creado en una página servidor y pasado como prop a un componente cliente, React no puede resolverlo («Element type is invalid»). Pasa el `href` y construye el `Link` dentro del cliente.
+
 ## Props
 
 <ArgTypes of={LinkStories} />
