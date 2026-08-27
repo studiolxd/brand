@@ -3,7 +3,6 @@
  */
 
 :root {
-  --kbd-bg: var(--color-grey-lightest); /** Fondo del keycap: la superficie clara secundaria del sistema */
   --kbd-font-family: var(--font-family-mono); /** Monoespaciada (Google Sans Code) — alineada con el contenido técnico */
   --kbd-font-size: var(--font-size-2); /** 16px — talla md (por defecto) */
   --kbd-line-height: var(--line-height-none); /** Sin interlineado extra — el contenido se centra con flexbox */
@@ -18,6 +17,7 @@
   --kbd-border-radius: var(--border-radius-default); /** Esquina recta, como todo el sistema */
   --kbd-border-width: var(--border-width-default); /** Grosor del borde: es lo que da relieve a la tecla (el sistema no proyecta sombras) */
   --kbd-border-color: var(--color-primary); /** Borde del keycap: tinta de la superficie */
+  --kbd-bg: var(--color-surface-secondary-on-light); /** Fondo del keycap: la superficie clara secundaria del sistema */
   --kbd-color: var(--color-text-on-light); /** Color del símbolo de la tecla */
   --kbd-font-weight: var(--font-weight-emphasis); /** Peso de énfasis: legibilidad en tamaño compacto */
   --kbd-min-size: calc(var(--kbd-font-size) * var(--kbd-line-height) + 2 * var(--kbd-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo: exactamente la altura de la tecla, de modo que una tecla de un carácter sale cuadrada. No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md) */

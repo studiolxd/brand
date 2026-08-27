@@ -4,7 +4,7 @@
     "height-md":            { "$value": "{spacing.5}",           "$type": "dimension", "$description": "24px — barra por defecto: la etiqueta cabe dentro" },
     "height-lg":            { "$value": "{spacing.6}",           "$type": "dimension", "$description": "32px — barra destacada" },
     "border-radius":        { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Esquina recta, como todo el sistema" },
-    "track-bg":             { "$value": "{color.grey-lightest}", "$type": "color",     "$description": "Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie)" },
+    "track-bg":             { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie)" },
     "transition-duration":  { "$value": "{motion.duration.base}","$type": "number",    "$description": "Duración del avance del relleno (cambio de estado)" },
     "transition-easing":    { "$value": "{motion.easing.in-out}","$type": "string",    "$description": "Curva del avance del relleno" },
     "font-family":          { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Tipografía de la cifra" },
@@ -26,7 +26,7 @@
     "support-2-label-inside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Cifra sobre el relleno cayena" },
 
     "label-outside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color de la cifra cuando va fuera, sobre el carril" },
-    "surface-dark-track-bg":            { "$value": "{color.grey-darkest}", "$type": "color", "$description": "Fondo del carril — surface-dark" },
+    "surface-dark-track-bg":            { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del carril — surface-dark" },
     "surface-dark-label-outside-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Cifra fuera del relleno — surface-dark" }
   }
 }

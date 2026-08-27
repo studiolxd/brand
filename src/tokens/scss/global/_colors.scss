@@ -37,6 +37,10 @@ $lxd-color-text-muted-on-light: #4a4a4a; // Texto secundario: ayudas, etiquetas,
 $lxd-color-text-muted-on-dark: #d0d0d0; // Muted text on dark backgrounds
 $lxd-color-background-light: #ffffff; // Light surface background
 $lxd-color-background-dark: #111e30; // Dark surface background
+$lxd-color-surface-secondary-on-light: #f2f2f2; // Superficie clara secundaria sobre fondo claro: bloque de código, kbd, carril de progreso, pie de tabla
+$lxd-color-surface-secondary-on-dark: #4a4a4a; // Superficie clara secundaria — variante para superficie oscura
+$lxd-color-surface-inverse-on-light: #4a4a4a; // Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag)
+$lxd-color-surface-inverse-on-dark: #f2f2f2; // Superficie invertida — variante para superficie oscura
 $lxd-color-red: #b30000; // System red — base (AAA sobre blanco; fill universal de error/destructive)
 $lxd-color-red-light: #ff8585; // System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo
 $lxd-color-green: #006616; // System green — base (AAA sobre blanco; fill universal de success)

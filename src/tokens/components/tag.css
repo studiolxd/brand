@@ -8,7 +8,6 @@
   --tag-line-height: var(--line-height-none); /** Una línea */
   --tag-padding-block: var(--spacing-1); /** Aire vertical */
   --tag-padding-inline: var(--spacing-3); /** Aire horizontal */
-  --tag-neutral-bg: var(--color-grey-darkest); /** Neutral — relleno gris oscuro (AAA con texto blanco) */
   --tag-border-radius: var(--border-radius-round); /** Píldora: el tag es una de las formas redondas del sistema */
   --tag-font-weight: var(--font-weight-emphasis); /** Peso de énfasis */
   --tag-primary-bg: var(--color-primary); /** Marca primaria (prusia) — relleno */
@@ -21,6 +20,7 @@
   --tag-support-1-color: var(--color-text-on-light); /** Soporte 1 — texto sobre el relleno */
   --tag-support-2-bg: var(--color-support-2); /** Soporte 2 (cayena) — relleno */
   --tag-support-2-color: var(--color-text-on-light); /** Soporte 2 — texto sobre el relleno */
+  --tag-neutral-bg: var(--color-surface-inverse-on-light); /** Neutral — relleno gris oscuro (AAA con texto blanco) */
   --tag-neutral-color: var(--color-text-on-dark); /** Neutral — texto sobre el relleno */
   --tag-info-bg: var(--color-primary); /** Información — relleno prusia (AAA con texto blanco) */
   --tag-info-color: var(--color-text-on-dark); /** Información — texto sobre el relleno */

@@ -6,7 +6,6 @@
   --progress-bar-height-sm: var(--spacing-2); /** 8px — barra compacta, sin etiqueta */
   --progress-bar-height-md: var(--spacing-5); /** 24px — barra por defecto: la etiqueta cabe dentro */
   --progress-bar-height-lg: var(--spacing-6); /** 32px — barra destacada */
-  --progress-bar-track-bg: var(--color-grey-lightest); /** Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie) */
   --progress-bar-transition-duration: var(--motion-duration-base); /** Duración del avance del relleno (cambio de estado) */
   --progress-bar-transition-easing: var(--motion-easing-in-out); /** Curva del avance del relleno */
   --progress-bar-font-family: var(--font-family-sans); /** Tipografía de la cifra */
@@ -15,6 +14,7 @@
   --progress-bar-label-gap: var(--spacing-2); /** Hueco entre el borde del relleno y la cifra cuando va fuera */
   --progress-bar-label-padding-inline: var(--spacing-2); /** Aire de la cifra dentro del relleno */
   --progress-bar-border-radius: var(--border-radius-default); /** Esquina recta, como todo el sistema */
+  --progress-bar-track-bg: var(--color-surface-secondary-on-light); /** Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie) */
   --progress-bar-font-weight: var(--font-weight-emphasis); /** Peso de énfasis de la cifra */
   --progress-bar-primary-fill: var(--color-primary); /** Marca primaria (prusia) — relleno */
   --progress-bar-primary-label-inside-color: var(--color-text-on-dark); /** Cifra sobre el relleno prusia */
@@ -32,6 +32,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --progress-bar-track-bg: var(--color-grey-darkest); /** Fondo del carril — surface-dark */
+  --progress-bar-track-bg: var(--color-surface-secondary-on-dark); /** Fondo del carril — surface-dark */
   --progress-bar-label-outside-color: var(--color-text-on-dark); /** Cifra fuera del relleno — surface-dark */
 }

@@ -3,7 +3,7 @@
     "border-radius":  { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Esquina recta, como todo el sistema" },
     "border-width":   { "$value": "{border-width.default}",  "$type": "dimension", "$description": "Grosor del borde: es lo que da relieve a la tecla (el sistema no proyecta sombras)" },
     "border-color":   { "$value": "{color.primary}",         "$type": "color",     "$description": "Borde del keycap: tinta de la superficie" },
-    "bg":             { "$value": "{color.grey-lightest}",   "$type": "color",     "$description": "Fondo del keycap: la superficie clara secundaria del sistema" },
+    "bg":             { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo del keycap: la superficie clara secundaria del sistema" },
     "color":          { "$value": "{color.text.on-light}",   "$type": "color",     "$description": "Color del símbolo de la tecla" },
     "font-family":    { "$value": "{font-family.mono}",      "$type": "string",    "$description": "Monoespaciada (Google Sans Code) — alineada con el contenido técnico" },
     "font-size":      { "$value": "{font-size.2}",           "$type": "dimension", "$description": "16px — talla md (por defecto)" },
