@@ -1,0 +1,7 @@
+{
+  "inline": {
+    "gap-sm": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre piezas en fila — compacto (8px): etiquetas, chips" },
+    "gap-md": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre piezas en fila — base (16px): botones y enlaces de una fila de acciones" },
+    "gap-lg": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre piezas en fila — amplio (24px): entre componentes" }
+  }
+}

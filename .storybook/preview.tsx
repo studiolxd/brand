@@ -3,18 +3,27 @@ import '../src/index.css'
 import './preview.css'
 import studiolxdTheme from './studiolxdTheme'
 
-const withDarkBackground: Decorator = (Story, context) => {
-  const isDark = context.globals.backgrounds?.value === 'dark';
+/**
+ * Superficie oscura para una story. Se activa de dos formas:
+ * - desde el switcher de fondos de Storybook (globals.backgrounds = 'dark'),
+ *   para explorar cualquier story en oscuro sin duplicarla;
+ * - desde la propia story, con `parameters: { surface: 'dark' }`, para una
+ *   story que ENSEÑA ese uso en el catálogo («En superficie oscura»).
+ * En ambos casos envuelve en `.surface-dark`: el lienzo del sistema (fondo y
+ * color emparejados en base.css), el mismo que pinta `Container surface="dark"`.
+ */
+const withSurface: Decorator = (Story, context) => {
+  const isDark = context.globals.backgrounds?.value === 'dark' || context.parameters.surface === 'dark';
   if (!isDark) return <Story />;
   return (
-    <div className="surface-dark" style={{ background: 'var(--color-background-dark)', minHeight: '100%' }}>
+    <div className="surface-dark" style={{ minHeight: '100%' }}>
       <Story />
     </div>
   );
 };
 
 const preview: Preview = {
-  decorators: [withDarkBackground],
+  decorators: [withSurface],
   initialGlobals: {
     backgrounds: { value: '#ffffff' },
   },

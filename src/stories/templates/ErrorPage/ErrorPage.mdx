@@ -1,13 +1,11 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as ErrorPageStories from "./ErrorPage.stories";
-import { TokenTable } from "../../foundations/TokenTable";
-import { errorPageTokens } from "../../../tokens/components/error-page";
 
 <Meta of={ErrorPageStories} />
 
 # ErrorPage
 
-La plantilla de «algo ha salido mal»: la misma maqueta que `NotFoundPage` —`SiteShell` con cabecera y pie opcionales, y un `main` con `PageIntro`— pero en lugar del enlace de vuelta lleva una **fila de acciones**: el `Button` «Reintentar» y el enlace «Ir al inicio», que pone el producto.
+La plantilla de «algo ha salido mal»: la misma maqueta que `NotFoundPage` —`SiteShell` con cabecera y pie opcionales, y un `main` con `PageIntro`— pero en lugar del enlace de vuelta lleva una **fila de acciones** (`Inline`): el `Button` «Reintentar» y el enlace «Ir al inicio», que pone el producto.
 
 <Canvas of={ErrorPageStories.SinCabeceraNiPie} />
 <Canvas of={ErrorPageStories.ConCabeceraYPie} />
@@ -41,9 +39,11 @@ Aun así, `header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallbac
 
 <Canvas of={ErrorPageStories.CabeceraQueFalla} />
 
-## Tokens
+## Dentro de una app
 
-<TokenTable tokens={errorPageTokens} />
+Una app con `AppShell` ya tiene su `main`; una página de error dentro no puede montar otro marco ni otro `main`. Con `shell={false}` la plantilla devuelve **solo el contenido** —el `Stack` con `PageIntro` y las acciones— y lo pinta la app donde le toca. Sin marco, `header`, `footer` e `id` no aplican. No tiene tokens propios: el aire entre acciones es el de `Inline`.
+
+<Canvas of={ErrorPageStories.DentroDeUnaApp} />
 
 ## Props
 

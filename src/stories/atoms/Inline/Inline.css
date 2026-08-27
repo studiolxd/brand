@@ -1,0 +1,19 @@
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  /* Piezas de distinta altura (un botón, un enlace) comparten eje. */
+  align-items: center;
+  gap: var(--inline-gap-md);
+}
+.inline.inline--gap-sm {
+  gap: var(--inline-gap-sm);
+}
+.inline.inline--gap-lg {
+  gap: var(--inline-gap-lg);
+}
+.inline.inline--align-start {
+  align-items: flex-start;
+}
+.inline.inline--align-end {
+  align-items: flex-end;
+}

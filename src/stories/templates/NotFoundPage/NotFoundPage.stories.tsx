@@ -38,6 +38,18 @@ export const ConCabeceraYPie: Story = {
   },
 };
 
+/** `shell={false}`: solo el contenido, dentro de una app que ya tiene su `main`. */
+export const DentroDeUnaApp: Story = {
+  name: 'Dentro de una app',
+  parameters: { layout: 'padded' },
+  args: { shell: false },
+  render: (args) => (
+    <main id="app-main">
+      <NotFoundPage {...args} />
+    </main>
+  ),
+};
+
 export const Contrato: Story = {
   name: 'Test — main con título, frase y enlace de vuelta',
   tags: ['!dev'],
@@ -52,5 +64,18 @@ export const Contrato: Story = {
     await expect(within(main).getByRole('link', { name: 'Ir al inicio' })).toHaveAttribute('href', '#inicio');
     await expect(canvasElement.querySelector('.site-header')).toBeInTheDocument();
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
+  },
+};
+
+export const ContratoSinShell: Story = {
+  name: 'Test — sin shell no hay SiteShell ni main propio',
+  tags: ['!dev'],
+  args: { ...ConCabeceraYPie.args, shell: false },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('.site-shell')).not.toBeInTheDocument();
+    await expect(canvasElement.querySelector('main')).not.toBeInTheDocument();
+    await expect(canvasElement.querySelector('.site-header')).not.toBeInTheDocument();
+    await expect(canvasElement.firstElementChild).toHaveClass('stack');
+    await expect(within(canvasElement).getByRole('heading', { level: 1 })).toBeInTheDocument();
   },
 };

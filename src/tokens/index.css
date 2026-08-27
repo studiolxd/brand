@@ -21,6 +21,7 @@
 @import "./components/columns.css";
 @import "./components/site-shell.css";
 @import "./components/stack.css";
+@import "./components/inline.css";
 @import "./components/skip-link.css";
 @import "./components/site-header.css";
 @import "./components/code-block.css";
@@ -42,7 +43,6 @@
 @import "./molecules/dropdown-field.css";
 @import "./components/legal-footer.css";
 @import "./components/hero.css";
-@import "./components/error-page.css";
 @import "./molecules/notification-button.css";
 @import "./molecules/textarea-field.css";
 @import "./molecules/select-field.css";

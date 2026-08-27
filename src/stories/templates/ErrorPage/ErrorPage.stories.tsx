@@ -57,6 +57,18 @@ export const CabeceraQueFalla: Story = {
   },
 };
 
+/** `shell={false}`: solo el contenido, dentro de una app que ya tiene su `main`. */
+export const DentroDeUnaApp: Story = {
+  name: 'Dentro de una app',
+  parameters: { layout: 'padded' },
+  args: { shell: false },
+  render: (args) => (
+    <main id="app-main">
+      <ErrorPage {...args} />
+    </main>
+  ),
+};
+
 export const Contrato: Story = {
   name: 'Test — main con título, frase y acciones',
   tags: ['!dev'],
@@ -69,6 +81,7 @@ export const Contrato: Story = {
     await expect(within(main).getByRole('heading', { level: 1 })).toHaveTextContent('Algo ha salido mal');
     await expect(within(main).getByText(/No hemos podido cargar/)).toHaveClass('paragraph--large');
     const acciones = main.querySelector('.error-page__actions')!;
+    await expect(acciones).toHaveClass('inline');
     await expect(within(acciones as HTMLElement).getByRole('button', { name: 'Reintentar' })).toBeInTheDocument();
     await expect(within(acciones as HTMLElement).getByRole('link', { name: 'Ir al inicio' })).toBeInTheDocument();
     await expect(canvasElement.querySelector('.site-header')).toBeInTheDocument();
@@ -86,5 +99,18 @@ export const ContratoCabeceraRota: Story = {
     await expect(canvas.getByRole('heading', { level: 1 })).toHaveTextContent('Algo ha salido mal');
     await expect(canvas.getByRole('button', { name: 'Reintentar' })).toBeInTheDocument();
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
+  },
+};
+
+export const ContratoSinShell: Story = {
+  name: 'Test — sin shell no hay SiteShell ni main propio',
+  tags: ['!dev'],
+  args: { ...ConCabeceraYPie.args, shell: false },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('.site-shell')).not.toBeInTheDocument();
+    await expect(canvasElement.querySelector('main')).not.toBeInTheDocument();
+    await expect(canvasElement.querySelector('.site-header')).not.toBeInTheDocument();
+    await expect(canvasElement.firstElementChild).toHaveClass('stack');
+    await expect(within(canvasElement).getByRole('heading', { level: 1 })).toBeInTheDocument();
   },
 };

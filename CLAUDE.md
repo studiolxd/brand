@@ -204,8 +204,19 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Meta, StoryObj } from '@storybook/react';
 ```
 
-### Stories de dark mode
-No crear stories dedicadas para dark mode. El decorator global `withDarkBackground` en `preview.tsx` aplica `.surface-dark` automáticamente al cambiar el fondo a oscuro desde el switcher de Storybook. Cualquier story se puede explorar en dark mode sin necesidad de duplicarla.
+### Stories de dark mode y superficie oscura
+No crear stories dedicadas para dark mode. El decorator global `withSurface` en `preview.tsx` aplica `.surface-dark` automáticamente al cambiar el fondo a oscuro desde el switcher de Storybook. Cualquier story se puede explorar en dark mode sin necesidad de duplicarla.
+
+Distinto es **enseñar** en el catálogo que un componente vive sobre superficie oscura (un `Hero` en una banda oscura, un `SiteNav` en la cabecera). Para eso el mismo decorator lee `parameters.surface`:
+
+```ts
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+};
+```
+
+Envuelve la story en `.surface-dark` —el lienzo del sistema (fondo y color emparejados en `base.css`), el mismo que pinta `Container surface="dark"`— sin estilos inline ni `background` a mano. Es el patrón para toda story oscura: no usar `<div className="surface-dark" style={{ background: … }}>` ni la utilidad `.bg-dark` en stories nuevas. Si lo que se enseña es la banda en sí (no el componente sobre ella), `Container surface="dark"` dentro del `render` sigue siendo válido.
 
 ## TypeScript
 

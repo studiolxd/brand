@@ -10,11 +10,8 @@
   margin: 0;
 }
 
-/* Botones en fila, con envoltura, separados del texto. */
+/* La fila de botones es un `Inline` (fila, envoltura y aire entre piezas son
+   suyos); la sección solo pone el aire que la separa del texto. */
 .hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--hero-actions-gap);
   margin-block-start: var(--hero-actions-space-before);
 }

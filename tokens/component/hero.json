@@ -1,6 +1,5 @@
 {
   "hero": {
-    "actions-gap":          { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre los botones de la fila de acciones (16px): entre elementos de un componente" },
     "actions-space-before": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre el texto y la fila de acciones (32px): entre componentes" }
   }
 }

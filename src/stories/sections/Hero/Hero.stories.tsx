@@ -35,6 +35,13 @@ export const VariasAcciones: Story = {
   },
 };
 
+/** Sobre superficie oscura (`parameters.surface = 'dark'`): la sección no pinta fondo; el lienzo y el color los pone la superficie. */
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: VariasAcciones.args,
+};
+
 export const Contrato: Story = {
   name: 'Test — section con h1, frase y acciones',
   tags: ['!dev'],
@@ -44,6 +51,6 @@ export const Contrato: Story = {
     await expect(section).toBeInTheDocument();
     await expect(canvas.getByRole('heading', { level: 1 })).toHaveTextContent('Aprender es lo primero');
     await expect(canvas.getByText(/La suite de Studio LXD/)).toHaveClass('paragraph--large');
-    await expect(canvas.getByRole('link', { name: 'Empezar' }).closest('.hero__actions')).toBeInTheDocument();
+    await expect(canvas.getByRole('link', { name: 'Empezar' }).closest('.hero__actions')).toHaveClass('inline');
   },
 };

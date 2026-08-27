@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "24.4.0",
+  "version": "24.5.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -188,6 +188,10 @@
     "./stack": {
       "types": "./dist/_types/atoms/Stack/Stack.d.ts",
       "import": "./dist/stack.js"
+    },
+    "./inline": {
+      "types": "./dist/_types/atoms/Inline/Inline.d.ts",
+      "import": "./dist/inline.js"
     },
     "./container": {
       "types": "./dist/_types/atoms/Container/Container.d.ts",

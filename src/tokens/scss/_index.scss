@@ -33,6 +33,7 @@
 @forward 'components/columns';
 @forward 'components/site-shell';
 @forward 'components/stack';
+@forward 'components/inline';
 @forward 'components/skip-link';
 @forward 'components/site-header';
 @forward 'components/code-block';
@@ -51,7 +52,6 @@
 @forward 'molecules/dropdown-field';
 @forward 'components/legal-footer';
 @forward 'components/hero';
-@forward 'components/error-page';
 @forward 'molecules/notification-button';
 @forward 'molecules/textarea-field';
 @forward 'molecules/select-field';

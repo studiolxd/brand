@@ -20,25 +20,37 @@ export interface NotFoundPageProps {
   footer?: ReactNode;
   /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
   id?: string;
+  /**
+   * Con `false` no monta `SiteShell` ni el `main`: solo el contenido (título,
+   * frase y enlace de vuelta), para pintarlo dentro de un `AppShell` que ya
+   * tiene su `main`. Por defecto `true`. Sin marco, `header`, `footer` e `id`
+   * no aplican.
+   */
+  shell?: boolean;
 }
 
 /**
  * Plantilla de 404: el marco público (`SiteShell`) con cabecera y pie
  * opcionales, y dentro un `main` con la cabecera de página y el enlace de
  * vuelta. Cabecera y pie van cada uno en su `ErrorBoundary`, así que un chrome
- * roto no se lleva por delante el mensaje.
+ * roto no se lleva por delante el mensaje. Con `shell={false}` devuelve solo
+ * el contenido, para una app que ya tiene su `main`.
  */
-export function NotFoundPage({ title, description, homeLink, header, footer, id = 'main-content' }: NotFoundPageProps) {
+export function NotFoundPage({ title, description, homeLink, header, footer, id = 'main-content', shell = true }: NotFoundPageProps) {
+  const content = (
+    <Stack>
+      <PageIntro title={title} description={description} />
+      {homeLink}
+    </Stack>
+  );
+  if (!shell) return content;
   return (
     <SiteShell
       header={header && <ErrorBoundary>{header}</ErrorBoundary>}
       footer={footer && <ErrorBoundary>{footer}</ErrorBoundary>}
     >
       <Container as="main" id={id} tabIndex={-1} space="xl">
-        <Stack>
-          <PageIntro title={title} description={description} />
-          {homeLink}
-        </Stack>
+        {content}
       </Container>
     </SiteShell>
   );

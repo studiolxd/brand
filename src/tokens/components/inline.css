@@ -1,0 +1,9 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --inline-gap-sm: var(--spacing-2); /** Aire entre piezas en fila — compacto (8px): etiquetas, chips */
+  --inline-gap-md: var(--spacing-4); /** Aire entre piezas en fila — base (16px): botones y enlaces de una fila de acciones */
+  --inline-gap-lg: var(--spacing-5); /** Aire entre piezas en fila — amplio (24px): entre componentes */
+}

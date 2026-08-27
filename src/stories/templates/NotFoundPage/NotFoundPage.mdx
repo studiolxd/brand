@@ -29,6 +29,12 @@ La plantilla del 404 de un sitio público: el marco (`SiteShell`) con cabecera y
 
 `header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si el chrome del sitio lanza al renderizar, desaparece él y no la página. El 404 sigue mostrando el mensaje y la salida.
 
+## Dentro de una app
+
+Una app con `AppShell` ya tiene su `main`; el 404 dentro de ella no puede montar otro marco ni otro `main`. Con `shell={false}` la plantilla devuelve **solo el contenido** —el `Stack` con `PageIntro` y el enlace de vuelta— y lo pinta la app donde le toca. Sin marco, `header`, `footer` e `id` no aplican.
+
+<Canvas of={NotFoundPageStories.DentroDeUnaApp} />
+
 ## Props
 
 <ArgTypes of={NotFoundPageStories} />

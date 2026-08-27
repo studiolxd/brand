@@ -18,9 +18,15 @@ Título y frase se limitan a `--content-measure` (70ch): la medida de lectura de
 
 ## Aire del título
 
-Entre el título y la frase no hay `gap`: el aire lo pone el propio título por debajo (`--text-heading-space-after`, en em, así que crece con la talla). La fila de acciones sí lleva aire propio por encima (`actions-space-before`) y entre botones (`actions-gap`); envuelve cuando no caben en una línea.
+Entre el título y la frase no hay `gap`: el aire lo pone el propio título por debajo (`--text-heading-space-after`, en em, así que crece con la talla). La fila de acciones es un `Inline` (fila con envoltura y aire `md` entre botones); la sección solo pone el aire que la separa del texto (`actions-space-before`).
 
 <Canvas of={HeroStories.VariasAcciones} />
+
+## Sobre superficie oscura
+
+`Hero` no tiene tokens de color: dentro de una banda `.surface-dark` (un `Container surface="dark"`, un `SiteShell` oscuro) el título, la frase y los botones voltean solos con la superficie. La story usa `parameters.surface = 'dark'`, el patrón del Storybook del sistema para enseñar una story sobre lienzo oscuro.
+
+<Canvas of={HeroStories.EnSuperficieOscura} />
 
 ## Tokens
 

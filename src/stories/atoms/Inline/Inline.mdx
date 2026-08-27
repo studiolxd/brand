@@ -1,0 +1,32 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as InlineStories from "./Inline.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { inlineTokens } from "../../../tokens/components/inline";
+
+<Meta of={InlineStories} />
+
+# Inline
+
+Pone piezas **en fila** con aire por token y envoltura: cuando no caben en una línea, pasan a la siguiente. Es el hermano horizontal de `Stack` —los botones de un `Hero`, el botón y el enlace de una `ErrorPage`, una tira de etiquetas—, sin fondo ni semántica (`div.inline`). `Stack` apila; `Inline` alinea.
+
+<Canvas of={InlineStories.PorDefecto} />
+
+## Aire
+
+Tres pasos, `gap`: `sm` (8px) para piezas pequeñas y muchas —etiquetas, chips—; `md` (16px, por defecto) para una fila de acciones —botones, enlaces—; `lg` (24px) para separar componentes. Es aire en ambos ejes: entre piezas y entre líneas cuando envuelve.
+
+<Canvas of={InlineStories.Compacto} />
+
+## Alineación
+
+`align` fija el eje vertical: `center` por defecto, para que un botón y un enlace de distinta altura compartan línea; `start` o `end` cuando las piezas deben colgar de un borde.
+
+<Canvas of={InlineStories.AlineadoArriba} />
+
+## Tokens
+
+<TokenTable tokens={inlineTokens} />
+
+## Props
+
+<ArgTypes of={InlineStories} />

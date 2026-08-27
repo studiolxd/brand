@@ -7,6 +7,41 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.5.0
+
+### Añadido
+
+- `Inline` (átomo): fila de piezas con envoltura, hermano horizontal de `Stack`.
+  `gap` `sm|md|lg` (tokens nuevos `inline.gap-sm|md|lg` → `spacing.2|4|5`) y
+  `align` `start|center|end` (centro por defecto). `div.inline`, sin fondo ni
+  semántica. Export `./inline`.
+- `NotFoundPage` y `ErrorPage`: prop `shell?: boolean` (por defecto `true`).
+  Con `shell={false}` no montan `SiteShell` ni el `main`, solo el contenido
+  (`Stack` → `PageIntro` + enlace/acciones), para una app con `AppShell` que ya
+  tiene su `main`. Story «Dentro de una app».
+- `Hero`: story «En superficie oscura».
+- Storybook: el decorator global pasa a llamarse `withSurface` y, además del
+  switcher de fondos, lee `parameters.surface = 'dark'` para envolver una story
+  en `.surface-dark` (el lienzo del sistema). Patrón documentado en
+  `CLAUDE.md` § Storybook.
+- Barrel `src/index.ts`: `Container`, `Columns` y `Stack` (antes solo por
+  subpath), junto a `Inline`.
+
+### Cambiado
+
+- `Hero` y `ErrorPage` componen su fila de acciones con `Inline` en lugar de un
+  flex propio. `.hero__actions` y `.error-page__actions` siguen existiendo como
+  clase sobre el `Inline`; `.hero__actions` conserva `hero.actions-space-before`.
+
+### Retirado
+
+- Tokens `hero.actions-gap` y `error-page.actions-gap` (y con él
+  `tokens/component/error-page.json`, `ErrorPage.css` y el SCSS
+  `components/_error-page.scss`): el aire entre acciones lo pone
+  `inline.gap-md`, que resuelve al mismo `spacing.4` (16px), así que la maqueta
+  no cambia. Nacieron en v24.2.0/v24.3.0 y no tienen consumidor; por eso va
+  como minor y no como major.
+
 ## v24.4.0
 
 ### Cambiado
