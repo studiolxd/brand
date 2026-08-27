@@ -37,6 +37,8 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
     onClick?: () => void;
     /** Alternativa explícita a onClick para control manual */
     interactive?: boolean;
+    /** Marca la fila como seleccionada: se dice con tinta y peso, sin fondo. */
+    selected?: boolean;
     children: ReactNode;
 }
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
@@ -46,7 +48,7 @@ export declare function TableHead({ children, ...rest }: React.HTMLAttributes<HT
 export declare function TableFooter({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, sortedAscLabel, sortedDescLabel, sortableLabel, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
-export declare function TableRow({ onClick, interactive, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
+export declare function TableRow({ onClick, interactive, selected, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
 export declare function TableCell({ children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
 export declare function Table({ caption, children, size, className, ...rest }: TableProps): import("react/jsx-runtime").JSX.Element;
 export declare namespace Table {

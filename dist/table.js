@@ -31,28 +31,21 @@ function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actio
 		s ? "table__header--actions" : "",
 		p
 	].filter(Boolean).join(" ");
-	return i ? /* @__PURE__ */ n("th", {
+	return i ? /* @__PURE__ */ r("th", {
 		...h,
 		scope: m,
 		className: g,
-		onClick: o,
-		onKeyDown: (e) => {
-			(e.key === "Enter" || e.key === " ") && (e.preventDefault(), o?.());
-		},
-		tabIndex: 0,
 		"aria-sort": a === "asc" ? "ascending" : a === "desc" ? "descending" : "none",
-		children: /* @__PURE__ */ r("span", {
+		children: [/* @__PURE__ */ r("button", {
+			type: "button",
 			className: "table__header-content",
-			children: [
-				f,
-				/* @__PURE__ */ n(e, {
-					name: "chevron",
-					size: "xs",
-					className: "table__sort-icon"
-				}),
-				/* @__PURE__ */ n(t, { children: a === "asc" ? l : a === "desc" ? u : d })
-			]
-		})
+			onClick: o,
+			children: [f, /* @__PURE__ */ n(e, {
+				name: "chevron",
+				size: "xs",
+				className: "table__sort-icon"
+			})]
+		}), /* @__PURE__ */ n(t, { children: a === "asc" ? l : a === "desc" ? u : d })]
 	}) : s ? /* @__PURE__ */ n("th", {
 		...h,
 		scope: m,
@@ -65,25 +58,26 @@ function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actio
 		children: f
 	});
 }
-function c({ onClick: e, interactive: t = !1, children: r, className: i, ...a }) {
-	let o = t || !!e, s = [
+function c({ onClick: e, interactive: t = !1, selected: r = !1, children: i, className: a, ...o }) {
+	let s = t || !!e, c = [
 		"table__row",
-		o ? "table__row--interactive" : "",
-		i
+		s ? "table__row--interactive" : "",
+		r ? "table__row--selected" : "",
+		a
 	].filter(Boolean).join(" ");
-	return o ? /* @__PURE__ */ n("tr", {
-		...a,
-		className: s,
+	return s ? /* @__PURE__ */ n("tr", {
+		...o,
+		className: c,
 		onClick: e,
 		onKeyDown: (t) => {
 			(t.key === "Enter" || t.key === " ") && (t.preventDefault(), e?.());
 		},
 		tabIndex: 0,
-		children: r
+		children: i
 	}) : /* @__PURE__ */ n("tr", {
-		...a,
-		className: s,
-		children: r
+		...o,
+		className: c,
+		children: i
 	});
 }
 function l({ children: e, className: t, ...r }) {

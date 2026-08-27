@@ -1622,7 +1622,7 @@ function Ue({ columns: f, data: m, searchColumnId: h, search: g, searchPlacehold
 						title: b
 					})
 				}) }) : O.getRowModel().rows.map((e) => /* @__PURE__ */ u(c, {
-					"data-state": e.getIsSelected() ? "selected" : void 0,
+					selected: e.getIsSelected(),
 					children: e.getVisibleCells().map((e) => /* @__PURE__ */ u(a, { children: Re(e.column.columnDef.cell, e.getContext()) }, e.id))
 				}, e.id)) })] })
 			}),
