@@ -51,6 +51,10 @@ Sin `onDismiss`, el alert se oculta solo al pulsar el aspa. Con `onDismiss`, no 
 
 El relleno es autocontenido: no hay tokens `surface-dark-*`, el alert se ve igual sobre una página clara y sobre una oscura. El borde blanco del `default` existe precisamente para eso — cuando la página ya es prusia, es lo que dibuja el contorno.
 
+**La decisión, explícita:** en superficie oscura el relleno del aviso neutro sigue siendo prusia —el mismo color que el fondo de la página— y **el borde es el único separador**. No se añade un neutro oscuro a la paleta para darle cuerpo propio: la paleta tiene un solo azul de fondo, y meter un segundo gris oscuro solo para este caso crearía un color sin rol en el resto del sistema. Un aviso que necesite destacarse sobre una página oscura no es el neutro: es una de las tres intenciones con relleno saturado (`success`, `error`, `warning`).
+
+Lo mismo vale para el `Toast`, que comparte este juego de tokens.
+
 ---
 
 ## Tokens
