@@ -1,0 +1,91 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ImageCropDialogStories from "./ImageCropDialog.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { imageCropDialogTokens, imageCropDialogDarkTokens } from "../../../tokens/components/image-crop-dialog";
+
+<Meta of={ImageCropDialogStories} />
+
+# ImageCropDialog
+
+Diálogo de recorte de imagen para subidas de avatar y logo: elige una región
+sobre la imagen y devuelve el recorte ya reescalado como `Blob`. Compone
+`Modal` — hereda su portal, su velo, su trampa de foco y (con este cambio)
+su borde en superficie oscura. `react-image-crop` aporta el gesto de
+selección; el DS pone el diálogo, las acciones y el volcado a lienzo
+(`cropImageToBlob`).
+
+<Canvas of={ImageCropDialogStories.Default} />
+
+## Anatomía
+
+- **Área de recorte**: la imagen dentro de `ReactCrop`, con un fondo propio
+  (`area-bg`) que se ve alrededor mientras la imagen no llena el ancho
+  disponible.
+- **Acciones**: `cancelLabel` (outline) y `confirmLabel` (primary), alineadas
+  a la derecha. `confirmLabel` está deshabilitado hasta que hay una selección
+  completa.
+
+## Selección circular
+
+<Canvas of={ImageCropDialogStories.Circular} />
+
+## Otras proporciones
+
+<Canvas of={ImageCropDialogStories.Panoramico} />
+
+## Ocupado
+
+<Canvas of={ImageCropDialogStories.Ocupado} />
+
+Con `busy`, las dos acciones quedan deshabilitadas y `Modal` no se cierra
+con Escape ni con clic en el velo (el consumidor decide `onClose` solo
+cuando `!busy`).
+
+## Superficie oscura
+
+<Canvas of={ImageCropDialogStories.SuperficieOscura} />
+
+`area-bg` apunta al rol `surface.secondary-on-light|dark` — la misma
+superficie clara secundaria que usan `Kbd`, `CodeBlock` o el carril de
+`ProgressBar` — en vez de nombrar `color.grey-lightest` directamente.
+
+**CSS de terceros dentro del bundle**: el marco de selección y los tiradores
+de `react-image-crop` (`ReactCrop.css`) no pasan por el sistema de tokens del
+DS — son css-vars propias de la librería (`--rc-border-color`,
+`--rc-focus-color`…) con valores fijos (blanco 70% de opacidad, azul). No se
+sobrescriben: dibujan **sobre la imagen**, no sobre `area-bg`, así que su
+contraste depende de la foto que se esté recortando, igual en superficie
+clara que en oscura — no del tema del DS. No hace falta ni conviene
+tokenizarlos.
+
+## Desde un botón
+
+<Canvas of={ImageCropDialogStories.DesdeUnBoton} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={imageCropDialogTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={imageCropDialogDarkTokens} />
+
+Los tokens de `Modal` (fondo del panel, título, aspa, borde en superficie
+oscura…) los hereda por composición — no se repiten aquí.
+
+## Accesibilidad
+
+- El nombre y la descripción accesibles del diálogo los pone `Modal`
+  (`title`, `description`).
+- El cierre programático respeta `busy`: mientras se sube el recorte, ni
+  Escape ni el velo cierran el diálogo — solo lo hace el consumidor al
+  terminar.
+- La imagen dentro del área de recorte lleva `alt=""`: es puramente
+  interactiva (el usuario la ve y la arrastra), no aporta información que no
+  esté ya en el `title` del diálogo.
+
+## Props
+
+<ArgTypes of={ImageCropDialogStories} />

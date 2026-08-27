@@ -4,7 +4,7 @@ import { Button } from '../../atoms/Button/Button';
 import { ImageCropDialog } from './ImageCropDialog';
 
 const meta = {
-  title: 'Por revisar/Molecules/ImageCropDialog',
+  title: 'Molecules/ImageCropDialog',
   component: ImageCropDialog,
 } satisfies Meta<typeof ImageCropDialog>;
 
@@ -54,6 +54,20 @@ export const Panoramico: Story = {
 export const Ocupado: Story = {
   name: 'Subiendo (busy)',
   args: { ...base, busy: true },
+};
+
+/**
+ * El decorator `withSurface` activa `data-theme="dark"` en `document.documentElement`;
+ * el diálogo se monta en el portal de `Modal` (`document.body`), así que la
+ * superficie oscura llega hasta ahí sin configuración adicional. El área de
+ * recorte pasa a `surface.secondary-on-dark` (gris oscuro) y el marco de
+ * `react-image-crop` (blanco/gris a rayas) sigue leyéndose igual: sus marcas
+ * dibujan sobre la imagen, no sobre el fondo del área.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: base,
 };
 
 export const DesdeUnBoton: Story = {
