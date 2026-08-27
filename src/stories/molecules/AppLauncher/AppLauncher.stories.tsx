@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within, screen } from 'storybook/test';
 import { AppLauncher } from './AppLauncher';
 import type { LauncherApp } from './AppLauncher';
 
 const meta: Meta<typeof AppLauncher> = {
-  title: 'Por revisar/Molecules/AppLauncher',
+  title: 'Molecules/AppLauncher',
   component: AppLauncher,
   parameters: {
     layout: 'padded',
@@ -55,5 +56,38 @@ export const Cerrado: Story = {
   args: {
     apps: demoApps,
     labels,
+  },
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    apps: demoApps.slice(0, 4),
+    labels,
+    currentAppId: 'tender',
+    defaultOpen: true,
+  },
+};
+
+export const TestContrato: Story = {
+  name: 'Test — rol, apertura y app actual',
+  tags: ['!dev'],
+  args: {
+    apps: demoApps.slice(0, 3),
+    labels,
+    currentAppId: 'bricks',
+  },
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole('button', { name: labels.open });
+    await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
+
+    await userEvent.click(trigger);
+    const list = await screen.findByRole('list');
+    const links = within(list).getAllByRole('link');
+    await expect(links).toHaveLength(3);
+
+    const current = within(list).getByRole('link', { name: /Bricks/ });
+    await expect(current).toHaveAttribute('aria-current', 'page');
   },
 };

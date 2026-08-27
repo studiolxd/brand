@@ -15,6 +15,7 @@
 
 .app-launcher__trigger:hover {
   background-color: var(--app-launcher-trigger-hover-bg);
+  color: var(--app-launcher-trigger-hover-color);
 }
 
 .app-launcher__trigger:focus-visible {
@@ -96,11 +97,17 @@
   outline-offset: var(--app-launcher-focus-ring-offset);
 }
 
+.app-launcher__tile:hover .app-launcher__tile-name,
+.app-launcher__tile:focus-visible .app-launcher__tile-name {
+  color: var(--app-launcher-tile-name-hover-color);
+}
+
 .app-launcher__tile--active {
   background-color: var(--app-launcher-tile-active-bg);
 }
 
 .app-launcher__tile--active .app-launcher__tile-name {
+  color: var(--app-launcher-tile-name-active-color);
   font-weight: var(--app-launcher-tile-name-active-font-weight);
 }
 
@@ -128,56 +135,6 @@
 /* ─── Badge «nuevo» ──────────────────────────────────────── */
 .app-launcher__tile-badge {
   pointer-events: none;
-}
-
-/* ─── Surface dark ───────────────────────────────────────── */
-.surface-dark .app-launcher__trigger,
-[data-theme='dark'] .app-launcher__trigger,
-html.dark .app-launcher__trigger {
-  color: var(--app-launcher-surface-dark-trigger-color);
-}
-
-.surface-dark .app-launcher__trigger:hover,
-[data-theme='dark'] .app-launcher__trigger:hover,
-html.dark .app-launcher__trigger:hover {
-  background-color: var(--app-launcher-surface-dark-trigger-hover-bg);
-}
-
-.surface-dark .app-launcher__trigger:focus-visible,
-[data-theme='dark'] .app-launcher__trigger:focus-visible,
-html.dark .app-launcher__trigger:focus-visible,
-.surface-dark .app-launcher__tile:focus-visible,
-[data-theme='dark'] .app-launcher__tile:focus-visible,
-html.dark .app-launcher__tile:focus-visible {
-  outline-color: var(--app-launcher-surface-dark-focus-ring-color);
-}
-
-.surface-dark .app-launcher__content,
-[data-theme='dark'] .app-launcher__content,
-html.dark .app-launcher__content {
-  background-color: var(--app-launcher-surface-dark-content-bg);
-  border-color: var(--app-launcher-surface-dark-content-border-color);
-}
-
-.surface-dark .app-launcher__tile:hover,
-[data-theme='dark'] .app-launcher__tile:hover,
-html.dark .app-launcher__tile:hover,
-.surface-dark .app-launcher__tile:focus-visible,
-[data-theme='dark'] .app-launcher__tile:focus-visible,
-html.dark .app-launcher__tile:focus-visible {
-  background-color: var(--app-launcher-surface-dark-tile-hover-bg);
-}
-
-.surface-dark .app-launcher__tile--active,
-[data-theme='dark'] .app-launcher__tile--active,
-html.dark .app-launcher__tile--active {
-  background-color: var(--app-launcher-surface-dark-tile-active-bg);
-}
-
-.surface-dark .app-launcher__tile-name,
-[data-theme='dark'] .app-launcher__tile-name,
-html.dark .app-launcher__tile-name {
-  color: var(--app-launcher-surface-dark-tile-name-color);
 }
 
 /* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */

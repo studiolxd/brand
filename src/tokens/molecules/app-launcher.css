@@ -3,24 +3,23 @@
  */
 
 :root {
-  --app-launcher-trigger-size: 2.5rem; /** Tamaño (cuadrado) del botón de rejilla */
   --app-launcher-content-min-width: 20rem; /** Ancho mínimo del popover */
   --app-launcher-content-columns: 3; /** Número de columnas de la rejilla de apps */
-  --app-launcher-tile-icon-size: 2.5rem; /** Tamaño del cuadrado de icono/inicial */
-  --app-launcher-trigger-hover-bg: var(--color-grey-lightest); /** Fondo del trigger al hover */
+  --app-launcher-trigger-size: var(--size-component-md); /** Tamaño (cuadrado) del botón de rejilla */
   --app-launcher-content-gap: var(--spacing-1); /** Espacio entre tiles */
   --app-launcher-content-padding-block: var(--spacing-3); /** Padding vertical del panel */
   --app-launcher-content-padding-inline: var(--spacing-3); /** Padding horizontal del panel */
   --app-launcher-tile-padding-block: var(--spacing-2); /** Padding vertical de cada tile */
   --app-launcher-tile-padding-inline: var(--spacing-1); /** Padding horizontal de cada tile */
   --app-launcher-tile-gap: var(--spacing-1); /** Espacio entre icono y nombre dentro del tile */
-  --app-launcher-tile-hover-bg: var(--color-grey-lightest); /** Fondo del tile al hover/focus */
-  --app-launcher-tile-active-bg: var(--color-grey-lightest); /** Fondo del tile de la app actual */
+  --app-launcher-tile-icon-size: var(--size-component-md); /** Tamaño del cuadrado de icono/inicial */
   --app-launcher-tile-icon-font-size: var(--font-size-3); /** Tamaño de la inicial cuando no hay icono */
   --app-launcher-tile-icon-color: var(--color-white); /** Color de la inicial sobre el fondo accent */
   --app-launcher-tile-name-font-size: var(--font-size-1); /** Tamaño de texto del nombre de app */
   --app-launcher-trigger-border-radius: var(--border-radius-default); /** Radio del trigger */
   --app-launcher-trigger-color: var(--color-text-on-light); /** Color del icono de rejilla */
+  --app-launcher-trigger-hover-bg: var(--color-primary); /** Fondo del trigger al hover — relleno de marca, patrón Menu/Button ghost */
+  --app-launcher-trigger-hover-color: var(--color-text-on-dark); /** Color del icono al hover, sobre el relleno de marca */
   --app-launcher-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --app-launcher-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
   --app-launcher-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
@@ -28,10 +27,14 @@
   --app-launcher-transition-duration: var(--floating-panel-transition-duration); /** Duración de la animación de entrada/salida */
   --app-launcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
   --app-launcher-tile-border-radius: var(--border-radius-default); /** Radio de cada tile */
+  --app-launcher-tile-hover-bg: var(--color-primary); /** Fondo del tile al hover/focus — relleno de marca, patrón Menu/Button ghost */
+  --app-launcher-tile-active-bg: var(--color-primary); /** Fondo del tile de la app actual — mismo relleno de marca que el hover */
   --app-launcher-tile-icon-border-radius: var(--border-radius-default); /** Radio del cuadrado de icono/inicial */
   --app-launcher-tile-icon-font-weight: var(--font-weight-emphasis); /** Peso de la inicial */
   --app-launcher-tile-name-font-weight: var(--font-weight-default); /** Peso del nombre de app */
   --app-launcher-tile-name-color: var(--color-text-on-light); /** Color del nombre de app */
+  --app-launcher-tile-name-hover-color: var(--color-text-on-dark); /** Color del nombre al hover/focus, sobre el relleno de marca */
+  --app-launcher-tile-name-active-color: var(--color-text-on-dark); /** Color del nombre de la app actual, sobre el relleno de marca */
   --app-launcher-tile-name-active-font-weight: var(--font-weight-emphasis); /** Peso del nombre — app actual */
   --app-launcher-content-bg: var(--floating-panel-bg); /** Fondo del panel */
   --app-launcher-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
@@ -43,12 +46,15 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --app-launcher-trigger-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo del trigger al hover — surface-dark */
-  --app-launcher-tile-hover-bg: rgba(255, 255, 255, 0.08); /** Fondo de tile al hover — surface-dark */
-  --app-launcher-tile-active-bg: rgba(255, 255, 255, 0.08); /** Fondo de tile de app actual — surface-dark */
   --app-launcher-trigger-color: var(--color-text-on-dark); /** Icono de rejilla — surface-dark */
+  --app-launcher-trigger-hover-bg: var(--color-text-on-dark); /** Fondo del trigger al hover — surface-dark. `color.primary` (prussian) coincidiría con el fondo de `.surface-dark`: se invierte, como `menu.item-hover-bg` */
+  --app-launcher-trigger-hover-color: var(--color-primary); /** Color del icono al hover — surface-dark */
   --app-launcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
+  --app-launcher-tile-hover-bg: var(--color-text-on-dark); /** Fondo de tile al hover — surface-dark. Mismo motivo que el trigger: se invierte */
+  --app-launcher-tile-active-bg: var(--color-text-on-dark); /** Fondo de tile de app actual — surface-dark */
   --app-launcher-tile-name-color: var(--color-text-on-dark); /** Nombre de app — surface-dark */
+  --app-launcher-tile-name-hover-color: var(--color-primary); /** Nombre al hover/focus — surface-dark, sobre el relleno invertido */
+  --app-launcher-tile-name-active-color: var(--color-primary); /** Nombre de la app actual — surface-dark, sobre el relleno invertido */
   --app-launcher-content-bg: var(--floating-panel-surface-dark-bg); /** Fondo del panel — surface-dark */
   --app-launcher-content-border-color: var(--floating-panel-surface-dark-border-color); /** Borde del panel — surface-dark */
 }

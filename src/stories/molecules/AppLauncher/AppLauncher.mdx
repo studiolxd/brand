@@ -1,0 +1,64 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AppLauncherStories from "./AppLauncher.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { appLauncherTokens, appLauncherDarkTokens } from "../../../tokens/components/app-launcher";
+
+<Meta of={AppLauncherStories} />
+
+# AppLauncher
+
+Rejilla de acceso a las apps de la suite, en un panel flotante (`Popover` de
+`@base-ui-components/react`) que se abre desde un botón de cuadrícula. Cada app es un enlace real
+(`<a href>`), no un `onClick`: funciona con cmd+click y SEO.
+
+<Canvas of={AppLauncherStories.Default} />
+
+## App actual
+
+`currentAppId` marca la app activa (`aria-current="page"`) con relleno de marca y nombre en énfasis.
+
+<Canvas of={AppLauncherStories.ConAppActual} />
+
+## Pocas apps
+
+<Canvas of={AppLauncherStories.PocasApps} />
+
+## Superficie oscura
+
+El hover y la app actual usan `color.primary` (prusia) como relleno en superficie clara. Sobre
+`.surface-dark`/`html.dark` ese mismo color coincidiría con el fondo ambiente, así que se invierte
+—relleno blanco, texto prusia—, el mismo patrón que `menu.item-hover-bg`.
+
+<Canvas of={AppLauncherStories.EnSuperficieOscura} />
+
+---
+
+## Color de dato
+
+El cuadrado de icono de cada tile usa `style={{ backgroundColor: app.accent }}`: el color de marca
+de cada app externa llega por datos (`LauncherApp.accent`), no del sistema de tokens del DS. Es la
+única propiedad de color de este componente que no pasa por un token — deliberado, documentado en
+la prop.
+
+## Accesibilidad
+
+- El disparador anuncia `aria-haspopup="dialog"` (lo pone `Popover.Trigger` de Base UI).
+- El panel va en un `Portal`: vive fuera del árbol de la página, así que ningún selector CSS
+  descendiente (`.surface-dark .app-launcher__…`) lo alcanza. El tema oscuro le llega por la
+  activación root-level (`html.dark`/`[data-theme="dark"]`), que sí cascada a cualquier
+  descendiente de `<html>` — incluido el portal.
+- El z-index vive en el `Positioner`, no en el `Popup` (el popup hereda su stacking context).
+
+## Props
+
+<ArgTypes of={AppLauncherStories} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={appLauncherTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={appLauncherDarkTokens} />

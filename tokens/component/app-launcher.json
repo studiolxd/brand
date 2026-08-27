@@ -1,9 +1,10 @@
 {
   "app-launcher": {
-    "trigger-size":           { "$value": "2.5rem",                       "$type": "dimension", "$description": "Tamaño (cuadrado) del botón de rejilla" },
+    "trigger-size":           { "$value": "{size-component.md}",          "$type": "dimension", "$description": "Tamaño (cuadrado) del botón de rejilla" },
     "trigger-border-radius":  { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del trigger" },
     "trigger-color":          { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del icono de rejilla" },
-    "trigger-hover-bg":       { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del trigger al hover" },
+    "trigger-hover-bg":       { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo del trigger al hover — relleno de marca, patrón Menu/Button ghost" },
+    "trigger-hover-color":    { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del icono al hover, sobre el relleno de marca" },
     "focus-ring-color":       { "$value": "{color.primary}",              "$type": "color",     "$description": "Color del focus ring" },
     "focus-ring-width":       { "$value": "{border-width.focus}",            "$type": "dimension", "$description": "Grosor del focus ring" },
     "focus-ring-offset":      { "$value": "{border-width.default}",            "$type": "dimension", "$description": "Separación del focus ring" },
@@ -26,10 +27,10 @@
     "tile-padding-inline":    { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Padding horizontal de cada tile" },
     "tile-gap":               { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre icono y nombre dentro del tile" },
     "tile-border-radius":     { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio de cada tile" },
-    "tile-hover-bg":          { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del tile al hover/focus" },
-    "tile-active-bg":         { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del tile de la app actual" },
+    "tile-hover-bg":          { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo del tile al hover/focus — relleno de marca, patrón Menu/Button ghost" },
+    "tile-active-bg":         { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo del tile de la app actual — mismo relleno de marca que el hover" },
 
-    "tile-icon-size":         { "$value": "2.5rem",                       "$type": "dimension", "$description": "Tamaño del cuadrado de icono/inicial" },
+    "tile-icon-size":         { "$value": "{size-component.md}",          "$type": "dimension", "$description": "Tamaño del cuadrado de icono/inicial" },
     "tile-icon-border-radius":{ "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del cuadrado de icono/inicial" },
     "tile-icon-font-size":    { "$value": "{font-size.3}",                "$type": "dimension", "$description": "Tamaño de la inicial cuando no hay icono" },
     "tile-icon-font-weight":  { "$value": "{font-weight.emphasis}",         "$type": "number",    "$description": "Peso de la inicial" },
@@ -38,15 +39,20 @@
     "tile-name-font-size":    { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño de texto del nombre de app" },
     "tile-name-font-weight":  { "$value": "{font-weight.default}",        "$type": "number",    "$description": "Peso del nombre de app" },
     "tile-name-color":        { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del nombre de app" },
+    "tile-name-hover-color":  { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del nombre al hover/focus, sobre el relleno de marca" },
+    "tile-name-active-color": { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del nombre de la app actual, sobre el relleno de marca" },
     "tile-name-active-font-weight": { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso del nombre — app actual" },
 
-    "surface-dark-trigger-color":     { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Icono de rejilla — surface-dark" },
-    "surface-dark-trigger-hover-bg":  { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo del trigger al hover — surface-dark" },
+    "surface-dark-trigger-color":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Icono de rejilla — surface-dark" },
+    "surface-dark-trigger-hover-bg":    { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Fondo del trigger al hover — surface-dark. `color.primary` (prussian) coincidiría con el fondo de `.surface-dark`: se invierte, como `menu.item-hover-bg`" },
+    "surface-dark-trigger-hover-color": { "$value": "{color.primary}",           "$type": "color", "$description": "Color del icono al hover — surface-dark" },
     "surface-dark-focus-ring-color":  { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro." },
     "surface-dark-content-bg":            { "$value": "{floating-panel.surface-dark-bg}",           "$type": "color", "$description": "Fondo del panel — surface-dark" },
     "surface-dark-content-border-color":  { "$value": "{floating-panel.surface-dark-border-color}", "$type": "color", "$description": "Borde del panel — surface-dark" },
-    "surface-dark-tile-hover-bg":     { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo de tile al hover — surface-dark" },
-    "surface-dark-tile-active-bg":    { "$value": "rgba(255, 255, 255, 0.08)", "$type": "color", "$description": "Fondo de tile de app actual — surface-dark" },
-    "surface-dark-tile-name-color":   { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Nombre de app — surface-dark" }
+    "surface-dark-tile-hover-bg":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Fondo de tile al hover — surface-dark. Mismo motivo que el trigger: se invierte" },
+    "surface-dark-tile-active-bg":      { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Fondo de tile de app actual — surface-dark" },
+    "surface-dark-tile-name-color":        { "$value": "{color.text.on-dark}",   "$type": "color", "$description": "Nombre de app — surface-dark" },
+    "surface-dark-tile-name-hover-color":  { "$value": "{color.primary}",        "$type": "color", "$description": "Nombre al hover/focus — surface-dark, sobre el relleno invertido" },
+    "surface-dark-tile-name-active-color": { "$value": "{color.primary}",        "$type": "color", "$description": "Nombre de la app actual — surface-dark, sobre el relleno invertido" }
   }
 }
