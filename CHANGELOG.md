@@ -7,6 +7,31 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v20.0.0
+
+### Rompe
+
+- **Dos superficies de lectura**, documentadas en Foundations → Tipografía:
+  aplicación (base) cuerpo 16 / controles `md`; pública (`SiteShell`) cuerpo 20 /
+  controles `lg`. En público los títulos suben un peldaño (H1 56 … H6 20) y los
+  peldaños del párrafo también.
+- `Paragraph size="large"` pasa a ser un peldaño sobre el cuerpo (20 en base,
+  24 en público; antes 24 fijo); `small` un peldaño por debajo (14 / 16).
+- Los componentes de texto **heredan** el cuerpo de la superficie en vez de fijar
+  16px: alert, toast, modal, empty-state, description-list, table, prev-next-nav,
+  file-upload, message-bubble, form (`success`; `error`/`helper` = párrafo
+  pequeño). `LegalFooter` pierde su token de tamaño y hereda. Los componentes de
+  interfaz (campos, botones, menús, kbd, tabs, calendarios…) conservan su talla.
+- Mecanismo: `src/tokens/surface-public.css` (generado en `build:tokens`)
+  redeclara bajo `.site-shell` todo token que dependa del cuerpo o la escala —
+  un `var()` dentro de una custom property se resuelve en `:root`, así que
+  remapear `--text-font-size` no bastaba. Documentado en `CLAUDE.md` del repo.
+- `text.json`: descripciones corregidas (el cuerpo es 16px, no 18).
+
+### Corregido
+
+- Foundations → Tipografía: el bloque «Estilos de texto» estaba roto.
+
 ## v19.12.0
 
 ### Añadido
