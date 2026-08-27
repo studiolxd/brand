@@ -21,6 +21,8 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
   size?: FormSize;
   /** Acciones en bloque: los botones a todo el ancho, apilados, también en escritorio (acceso, registro…). */
   blockActions?: boolean;
+  /** Mensaje de éxito que sustituye al formulario («Gracias — tu mensaje se ha enviado.»): texto anunciado (`role="status"`), sin caja. Con `success`, no se pintan campos ni acciones; `links` sí. */
+  success?: ReactNode;
 }
 
 /**
@@ -32,25 +34,26 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
  * producto (`FormField` para react-hook-form).
  */
 export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
-  { errors, actions, links, alternatives, alternativesLabel, captcha, size, blockActions = false, className, children, ...rest },
+  { errors, actions, links, alternatives, alternativesLabel, captcha, size, blockActions = false, success, className, children, ...rest },
   ref,
 ) {
   const classes = ['form', size && size !== 'md' ? `form--${size}` : '', blockActions ? 'form--block-actions' : '', className].filter(Boolean).join(' ');
   return (
     <FormSizeContext.Provider value={size}>
       <form ref={ref} className={classes} noValidate {...rest}>
-        {children && <div className="form__fields">{children}</div>}
-        {captcha && <div className="form__captcha">{captcha}</div>}
-        {errors && errors.length > 0 && (
+        {success && <p className="form__success" role="status">{success}</p>}
+        {!success && children && <div className="form__fields">{children}</div>}
+        {!success && captcha && <div className="form__captcha">{captcha}</div>}
+        {!success && errors && errors.length > 0 && (
           <ul role="alert" className="form__errors">
             {errors.map((error) => (
               <li key={error} className="form__error">{error}</li>
             ))}
           </ul>
         )}
-        {actions && <div className={['form__actions', blockActions ? 'form__actions--block' : ''].filter(Boolean).join(' ')}>{actions}</div>}
+        {!success && actions && <div className={['form__actions', blockActions ? 'form__actions--block' : ''].filter(Boolean).join(' ')}>{actions}</div>}
         {links && <div className="form__links">{links}</div>}
-        {alternatives && (
+        {!success && alternatives && (
           <div className="form__alternatives">
             {alternativesLabel && <p className="form__alternatives-label">{alternativesLabel}</p>}
             {alternatives}

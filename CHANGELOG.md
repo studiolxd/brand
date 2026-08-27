@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v21.1.0
+
+### Añadido
+
+- `Form` `success`: el mensaje que sustituye al formulario al enviarlo, como
+  texto anunciado (`role="status"`, tokens `form.success`), sin caja; mantiene
+  `links`. Las páginas de contacto y verificación lo usan en vez de un `Alert`.
+
 ## v21.0.0
 
 ### Rompe

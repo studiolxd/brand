@@ -4,7 +4,6 @@ import { Form } from '../../molecules/Form/Form';
 import { InputField } from '../../molecules/InputField/InputField';
 import { TextareaField } from '../../molecules/TextareaField/TextareaField';
 import { Button } from '../../atoms/Button/Button';
-import { Alert, AlertDescription } from '../../molecules/Alert/Alert';
 
 interface Args { captcha: boolean; sent: boolean; fieldError: boolean; surface: 'light' | 'dark' }
 
@@ -12,9 +11,7 @@ function Contacto({ captcha, sent, fieldError, surface }: Args) {
   return (
     <AuthPage title="Contacto" description="¿Tienes alguna pregunta? Envíanos un mensaje." surface={surface}>
       {sent ? (
-        <Form size="lg" onSubmit={(e) => e.preventDefault()}>
-          <Alert role="status"><AlertDescription>Gracias — tu mensaje se ha enviado.</AlertDescription></Alert>
-        </Form>
+        <Form size="lg" success="Gracias — tu mensaje se ha enviado." />
       ) : (
         <Form
           size="lg"

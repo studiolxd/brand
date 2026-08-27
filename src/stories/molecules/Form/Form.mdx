@@ -18,6 +18,7 @@ El formulario del sistema: **solo estructura y aire**. Apila los campos, pone de
 - `actions`: la acción principal y, si hay, la secundaria. En móvil a todo el ancho; en escritorio a la derecha — o a todo el ancho y apilados también en escritorio con `blockActions` (acceso, registro), que alcanza también a los botones de `alternatives`.
 - `links`: enlaces secundarios. Solo la acción es enlace; si lleva texto delante, va en un `Paragraph`: `<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`.
 - `captcha`: el captcha (Turnstile, reCAPTCHA…), entre los campos y las acciones.
+- `success`: el mensaje que sustituye al formulario al enviarlo — texto anunciado (`role="status"`), sin caja: el aviso es el propio texto. Oculta campos, captcha, errores, acciones y alternativas; `links` se mantiene.
 - `alternatives` (+ `alternativesLabel`): otras formas de hacer lo mismo — acceso con Google, enlace mágico — separadas del bloque principal.
 
 <Canvas of={FormStories.Completo} />
@@ -34,6 +35,7 @@ El `Form` no pinta nada: sobre `surface-dark` cada pieza voltea con sus propios 
 
 <Canvas of={FormStories.AccionesEnBloque} />
 <Canvas of={FormStories.SoloAcciones} />
+<Canvas of={FormStories.Enviado} />
 <Canvas of={FormStories.ConCasillaYDosAcciones} />
 
 ## Lo que ya no es

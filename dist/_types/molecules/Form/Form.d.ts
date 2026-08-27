@@ -20,6 +20,8 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
     size?: FormSize;
     /** Acciones en bloque: los botones a todo el ancho, apilados, también en escritorio (acceso, registro…). */
     blockActions?: boolean;
+    /** Mensaje de éxito que sustituye al formulario («Gracias — tu mensaje se ha enviado.»): texto anunciado (`role="status"`), sin caja. Con `success`, no se pintan campos ni acciones; `links` sí. */
+    success?: ReactNode;
 }
 /**
  * El formulario del sistema: solo estructura y aire. Campos apilados, los
