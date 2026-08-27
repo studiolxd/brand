@@ -5,13 +5,13 @@
 :root {
   --image-crop-dialog-area-max-height: 60vh; /** Alto máximo del área de recorte — la imagen se ajusta dentro */
   --image-crop-dialog-gap: var(--spacing-4); /** Separación entre el área de recorte y las acciones */
-  --image-crop-dialog-area-bg: var(--color-grey-lightest); /** Fondo tras la imagen mientras se recorta */
   --image-crop-dialog-actions-gap: var(--spacing-2); /** Separación entre los botones de acción */
+  --image-crop-dialog-area-bg: var(--color-surface-secondary-on-light); /** Fondo tras la imagen mientras se recorta: la superficie clara secundaria del sistema */
   --image-crop-dialog-area-border-radius: var(--border-radius-default); /** Radio del área de recorte */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --image-crop-dialog-area-bg: rgba(255, 255, 255, 0.08); /** Fondo del área de recorte — surface-dark */
+  --image-crop-dialog-area-bg: var(--color-surface-secondary-on-dark); /** Fondo del área de recorte — surface-dark */
 }
