@@ -9,15 +9,20 @@ $lxd-tabs-trigger-padding-inline: 1rem; // Padding horizontal del trigger
 $lxd-tabs-trigger-font-size: 1rem; // Tamaño de fuente del trigger
 $lxd-tabs-trigger-font-weight: 300; // Peso de fuente por defecto
 $lxd-tabs-trigger-active-weight: 500; // Peso de fuente del tab activo
-$lxd-tabs-trigger-color: #6b6b6b; // Color del trigger inactivo
+$lxd-tabs-trigger-color: #4a4a4a; // Color del trigger inactivo — es texto, nunca grey-dark
 $lxd-tabs-trigger-hover-color: #111e30; // Color del trigger en hover
 $lxd-tabs-trigger-active-color: #111e30; // Color del trigger activo
 $lxd-tabs-trigger-indicator-width: 1px; // Grosor del indicador activo (underline)
 $lxd-tabs-trigger-indicator-color: #111e30; // Color del indicador activo
 $lxd-tabs-trigger-pill-bg-active: #111e30; // Fondo del trigger activo en variante pill
 $lxd-tabs-trigger-pill-color-active: #ffffff; // Texto del trigger activo en variante pill
+$lxd-tabs-trigger-pill-hover-bg: #111e30; // Fondo del trigger en hover, variante pill (no activo) — mismo patrón de relleno de marca que Menu/Button ghost
+$lxd-tabs-trigger-pill-hover-color: #ffffff; // Texto del trigger en hover, variante pill
 $lxd-tabs-trigger-border-radius: 0px; // Radio de borde del trigger (pill + focus ring)
+$lxd-tabs-trigger-disabled-opacity: 0.4; // Opacidad del trigger deshabilitado
 $lxd-tabs-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-tabs-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-tabs-focus-ring-offset: 1px; // Separación del anillo de foco
 $lxd-tabs-content-padding-block: 1rem; // Padding vertical del panel de contenido
 $lxd-tabs-transition-duration: 150ms; // Duración de la transición de color
 $lxd-tabs-transition-easing: ease-in-out; // Easing de la transición

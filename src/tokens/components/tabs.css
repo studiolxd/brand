@@ -7,8 +7,8 @@
   --tabs-trigger-padding-block: var(--spacing-3); /** Padding vertical del trigger */
   --tabs-trigger-padding-inline: var(--spacing-4); /** Padding horizontal del trigger */
   --tabs-trigger-font-size: var(--font-size-2); /** Tamaño de fuente del trigger */
-  --tabs-trigger-color: var(--color-grey-dark); /** Color del trigger inactivo */
   --tabs-trigger-pill-color-active: var(--color-white); /** Texto del trigger activo en variante pill */
+  --tabs-trigger-disabled-opacity: var(--opacity-disabled); /** Opacidad del trigger deshabilitado */
   --tabs-content-padding-block: var(--spacing-4); /** Padding vertical del panel de contenido */
   --tabs-transition-duration: var(--motion-duration-fast); /** Duración de la transición de color */
   --tabs-transition-easing: var(--motion-easing-in-out); /** Easing de la transición */
@@ -16,13 +16,18 @@
   --tabs-list-border-color: var(--color-primary); /** Color del borde inferior de la lista */
   --tabs-trigger-font-weight: var(--font-weight-default); /** Peso de fuente por defecto */
   --tabs-trigger-active-weight: var(--font-weight-emphasis); /** Peso de fuente del tab activo */
+  --tabs-trigger-color: var(--color-text-muted-on-light); /** Color del trigger inactivo — es texto, nunca grey-dark */
   --tabs-trigger-hover-color: var(--color-text-on-light); /** Color del trigger en hover */
   --tabs-trigger-active-color: var(--color-text-on-light); /** Color del trigger activo */
   --tabs-trigger-indicator-width: var(--border-width-default); /** Grosor del indicador activo (underline) */
   --tabs-trigger-indicator-color: var(--color-primary); /** Color del indicador activo */
   --tabs-trigger-pill-bg-active: var(--color-primary); /** Fondo del trigger activo en variante pill */
+  --tabs-trigger-pill-hover-bg: var(--color-primary); /** Fondo del trigger en hover, variante pill (no activo) — mismo patrón de relleno de marca que Menu/Button ghost */
+  --tabs-trigger-pill-hover-color: var(--color-text-on-dark); /** Texto del trigger en hover, variante pill */
   --tabs-trigger-border-radius: var(--border-radius-default); /** Radio de borde del trigger (pill + focus ring) */
   --tabs-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --tabs-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --tabs-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
 }
 
 .surface-dark,
@@ -32,5 +37,10 @@ html.dark {
   --tabs-trigger-color: var(--color-text-muted-on-dark); /** Color del trigger inactivo — surface-dark */
   --tabs-trigger-hover-color: var(--color-text-on-dark); /** Color hover del trigger — surface-dark */
   --tabs-trigger-active-color: var(--color-text-on-dark); /** Color del trigger activo — surface-dark */
+  --tabs-trigger-pill-hover-bg: var(--color-text-on-dark); /** Fondo hover del trigger, variante pill — surface-dark */
+  --tabs-trigger-pill-hover-color: var(--color-primary); /** Texto hover del trigger, variante pill — surface-dark */
+  --tabs-trigger-pill-bg-active: var(--color-text-on-dark); /** Fondo del trigger activo, variante pill — surface-dark: color.primary colisiona con el fondo (los dos son prusia), se invierte a blanco */
+  --tabs-trigger-pill-color-active: var(--color-primary); /** Texto del trigger activo, variante pill — surface-dark */
+  --tabs-trigger-indicator-color: var(--color-text-on-dark); /** Indicador de pestaña activa (underline) — surface-dark: color.primary colisiona con el fondo */
   --tabs-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
 }

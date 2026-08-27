@@ -1,0 +1,77 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TabsStories from "./Tabs.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { tabsTokens, tabsDarkTokens } from "../../../tokens/components/tabs";
+
+<Meta of={TabsStories} />
+
+# Tabs
+
+Alterna entre paneles de contenido relacionado sin cambiar de página. Construido
+sobre `Tabs` de `@base-ui-components/react`: el motor pone el rol, el
+`aria-selected` y la navegación con flechas; el DS pone la maqueta.
+
+<Canvas of={TabsStories.PorDefecto} />
+
+## Anatomía
+
+`Tabs` (raíz con estado) → `TabsList` (los triggers) → `TabsTrigger` (cada
+pestaña) + `TabsContent` (el panel asociado, por `value`). El foco entra en la
+lista una vez y se mueve con las flechas entre triggers; `activateOnFocus`
+mantiene la activación automática al navegar con teclado (el DS no exige
+Enter/Espacio de más).
+
+## Variante pill
+
+Los triggers viven en una cápsula con fondo propio; el activo se marca con
+relleno de marca en vez de una línea inferior. En hover, un trigger inactivo
+toma el mismo relleno de marca (el patrón ya establecido en `Menu`/`Button
+ghost`), no un gris de estado.
+
+<Canvas of={TabsStories.Pill} />
+
+## Orientación vertical
+
+<Canvas of={TabsStories.Vertical} />
+
+## Controlado
+
+<Canvas of={TabsStories.Controlled} />
+
+## Deshabilitado
+
+Un trigger deshabilitado se atenúa con `opacity.disabled` (0.4) y sale del
+orden de tabulación real vía `pointer-events: none` + el propio `disabled` del
+motor.
+
+<Canvas of={TabsStories.WithDisabled} />
+
+## Superficie oscura
+
+<Canvas of={TabsStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={tabsTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={tabsDarkTokens} />
+
+## Accesibilidad
+
+- El motor (Base UI) pone `role="tablist"`/`role="tab"`/`role="tabpanel"`,
+  `aria-selected` y `aria-controls`/`aria-labelledby`: no hay que replicarlos
+  a mano.
+- El indicador de pestaña activa es 1px (`border-width.default`): si necesita
+  más presencia se resuelve con color, no engordando el trazo.
+- El foco usa el anillo del sistema (`focus-ring-width` + `focus-ring-color` +
+  `focus-ring-offset`), no un `outline` con cifras sueltas.
+- `trigger-color` (el trigger inactivo) es texto: va en
+  `color.text.muted-on-light`, nunca en `grey-dark`.
+
+## Props
+
+<ArgTypes of={TabsStories} />

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import { Button } from '../Button/Button';
 import { Paragraph } from '../Paragraph/Paragraph';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
 
 const meta: Meta<typeof Tabs> = {
-  title: 'Por revisar/Atoms/Tabs',
+  title: 'Atoms/Tabs',
   component: Tabs,
   parameters: {
     layout: 'padded',
@@ -15,7 +16,7 @@ const meta: Meta<typeof Tabs> = {
 export default meta;
 type Story = StoryObj<typeof Tabs>;
 
-export const Default: Story = {
+export const PorDefecto: Story = {
   name: 'Por defecto',
   render: () => (
     <Tabs defaultValue="general">
@@ -143,4 +144,59 @@ export const WithDisabled: Story = {
       </TabsContent>
     </Tabs>
   ),
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <Tabs defaultValue="mes">
+        <TabsList variant="pill">
+          <TabsTrigger value="semana">Semana</TabsTrigger>
+          <TabsTrigger value="mes">Mes</TabsTrigger>
+          <TabsTrigger value="año">Año</TabsTrigger>
+        </TabsList>
+      </Tabs>
+      <Tabs defaultValue="general">
+        <TabsList>
+          <TabsTrigger value="general">General</TabsTrigger>
+          <TabsTrigger value="seguridad">Seguridad</TabsTrigger>
+          <TabsTrigger value="notificaciones">Notificaciones</TabsTrigger>
+        </TabsList>
+      </Tabs>
+    </div>
+  ),
+};
+
+export const TestContrato: Story = {
+  name: 'Test — rol, activación y teclado',
+  tags: ['!dev'],
+  render: () => (
+    <Tabs defaultValue="general">
+      <TabsList>
+        <TabsTrigger value="general">General</TabsTrigger>
+        <TabsTrigger value="seguridad">Seguridad</TabsTrigger>
+      </TabsList>
+      <TabsContent value="general">
+        <Paragraph>Contenido general.</Paragraph>
+      </TabsContent>
+      <TabsContent value="seguridad">
+        <Paragraph>Contenido de seguridad.</Paragraph>
+      </TabsContent>
+    </Tabs>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const general = canvas.getByRole('tab', { name: 'General' });
+    const seguridad = canvas.getByRole('tab', { name: 'Seguridad' });
+
+    await expect(general).toHaveAttribute('aria-selected', 'true');
+    await expect(seguridad).toHaveAttribute('aria-selected', 'false');
+
+    general.focus();
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(seguridad).toHaveAttribute('aria-selected', 'true');
+    await expect(canvas.getByText('Contenido de seguridad.')).toBeVisible();
+  },
 };
