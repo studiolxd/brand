@@ -7,6 +7,38 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.6.0
+
+### Cambiado
+
+- **`Alert`**: el rol ARIA sale de la intención — `alert` (live assertive) en
+  `error` y `warning`, `status` (live polite) en `default` y `success`; la prop
+  `role` lo sigue forzando. El botón de cierre es un `Button` ghost `sm`
+  iconOnly: objetivo táctil de 32px, anillo de foco del sistema y hover que
+  voltea con la superficie del relleno, en vez del `rgba(255, 255, 255, 0.15)`
+  y el `color-mix(… 8%)` que llevaba cableados. Su etiqueta accesible es ahora
+  la prop `closeLabel` (default «Cerrar»). Tokens nuevos: `alert.gap`,
+  `alert.content-gap`, `alert.close-inset`, `alert.title-line-height`,
+  `alert.description-line-height`; `alert.close-size` pasa a ser el lado del
+  botón (`size-component.sm`). Retirados `alert.close-color`,
+  `alert.close-hover-color`, `alert.warning-close-color`,
+  `alert.warning-close-hover-color`, `alert.surface-dark-bg` y
+  `alert.surface-dark-border-color` (la raíz ya se declara `.surface-dark`, así
+  que los valores claros de `bg`/`border-color` nunca se aplicaban);
+  `alert.border-color` es blanco. MDX y test de componente nuevos.
+- **`CodeBlock`**: el área de código (`<pre>`) es una región focalizable
+  (`role="region"`, `tabindex="0"`) con nombre accesible por la prop nueva
+  `codeLabel` —función, porque interpola el lenguaje— y anillo de foco propio
+  (tokens nuevos `code-block.focus-ring-width|style|offset|color`). El botón de
+  copiar ya no se renombra bajo el foco: conserva `copyLabel` y el resultado se
+  anuncia en una región `role="status"` con `copiedLabel`. Un portapapeles no
+  disponible se captura en vez de dejar la promesa rechazada. Retirado el token
+  `code-block.shadow` (heredaba `card.shadow`, que es `none`). El raíz reenvía
+  `{...rest}`. MDX corregido: la superficie del bloque es autocontenida y su
+  borde **no** hereda el remapeo oscuro de `Card`.
+- Ambos salen del grupo «Por revisar» del catálogo: `Molecules/Alert` y
+  `Molecules/CodeBlock`.
+
 ## v24.5.0
 
 ### Añadido

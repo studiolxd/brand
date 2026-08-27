@@ -391,3 +391,41 @@ Quedan con dudas, anotadas al cerrarlo:
       UTC. Con husos al este del meridiano y horas tempranas puede desplazar un
       día en un envío nativo. Sin impacto en react-hook-form, que guarda el
       `Date`.
+
+## Alert y CodeBlock definitivos (2026-08-27)
+
+Salen de `Por revisar/`: `Molecules/Alert` y `Molecules/CodeBlock`.
+
+- [x] **Alert** — rol ARIA por intención (`alert` en error/warning, `status` en
+      default/success, forzable con la prop `role`); el aspa pasa a `Button`
+      ghost `sm` iconOnly (fuera el `rgba(255,255,255,.15)` y el
+      `color-mix(… 8%)` cableados, más los tokens `close-color`,
+      `close-hover-color` y `warning-close-*`); `closeLabel` como prop;
+      interlineados 1.4 sueltos a `title-line-height` / `description-line-height`;
+      `--spacing-*` sueltos del CSS a `alert.gap` / `content-gap` / `close-inset`;
+      `border-color` a blanco y fuera `surface-dark-bg` / `surface-dark-border-color`
+      (la raíz ya lleva `.surface-dark`, así que los valores claros nunca se
+      aplicaban). Radio ya recto. Test de componente y stories de contrato.
+- [x] **CodeBlock** — el `<pre>` con scroll es `role="region"` focalizable con
+      nombre (`codeLabel`) y anillo de foco propio (`focus-ring-*`); el copiado
+      se anuncia por `role="status"` en vez de renombrar el botón bajo el foco;
+      portapapeles que falla capturado; fuera el token `shadow`. El `grey-lightest`
+      del fondo se queda: es la excepción documentada (superficie clara
+      secundaria), no un fondo de estado.
+
+Decisiones pendientes que salen de esta revisión:
+
+- [ ] **`Alert` y `Toast` son el mismo objeto con distinta vida.** Toast repite
+      literalmente la maqueta, las variantes y los tokens de Alert (incluido el
+      aspa a mano con el `rgba(255,255,255,.15)` que Alert ya no tiene). Al
+      revisar `Toast` toca decidir si comparte la cara de Alert (un solo juego
+      de tokens de relleno) o si su elevación flotante justifica los suyos.
+- [ ] **El relleno `default` de Alert es prusia.** Sobre una página oscura se
+      distingue solo por el borde blanco. Si el aviso neutro debe tener cuerpo
+      propio en oscuro, hay que decidir un color de relleno nuevo (no existe en
+      la paleta un neutro oscuro distinto de prusia): es decisión de diseño, no
+      se ha inventado.
+- [ ] **`parameters: { surface: 'dark' }`** todavía no está en `main` (lo trae
+      la rama `ds-huecos`). Las stories de superficie oscura de Alert y
+      CodeBlock usan `globals: { backgrounds: { value: 'dark' } }`; al integrar
+      esa rama, cambiarlas al parámetro.
