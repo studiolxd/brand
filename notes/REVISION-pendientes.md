@@ -31,8 +31,10 @@ Regla cerrada (Foundations/Colores → "Los grises de texto"):
 Con el gris claro fuera de los estados, el problema "gris sobre gris" deja de
 existir por diseño; lo que queda es corregir los textos que aún usan grey-dark.
 
-- [ ] **ConversationList** — `item-color` (grey-dark) es texto → 
-      `text-muted-on-light`. Además recibe `item-active-bg` gris encima.
+- [x] **ConversationList** — hecho (2026-08-27): `item-color` pasa a
+      `text-muted-on-light` y `item-active-bg` (gris, y además huérfano) se
+      retira. El estado bajo el puntero se resuelve invirtiendo, como en el
+      `SidebarNav`; la conversación abierta, con tinta y peso.
 - [x] **EmptyState** — `title-color` y `description-color` eran grey-dark: es
       texto → `color.text.muted-on-light` (grey-darkest), con par
       `muted-on-dark` nuevo (2026-08-27). (`icon-color` se queda: icono.)
@@ -553,3 +555,40 @@ Los cuatro salen de `Por revisar/`. MDX, story `EnSuperficieOscura` y story
 - [ ] **`empty-state.title-font-size`** (`{font-size.4}`, 24px fijo) el plan lo
       señala como candidato a un token `{text.*}` (es texto corriente, no
       control) pero no resuelve a cuál — no se ha tocado.
+
+## Familia chat definitiva (2026-08-27)
+
+Salen de `Por revisar/` los seis de la familia —`MessageBubble`, `UserMessage`,
+`AssistantMessage`, `ConversationThread`, `MessageComposer`,
+`ConversationList`— y la plantilla `Chat` pasa a ser el componente `ChatShell`.
+Lo hecho va en el CHANGELOG de v25.0.0. Lo que queda anotado:
+
+- [ ] **`message-bubble.tail-fill` no es un color del globo, es el de la
+      superficie que hay detrás.** Es lo que vacía el triángulo de la cola. Si
+      un hilo vive sobre una superficie que no es el fondo del sistema (una
+      tarjeta, una banda), hay que repuntarlo ahí o la cola se ve rellena. El
+      sistema no tiene forma de que un componente lea el fondo de su
+      contenedor; cuando los neutrales tengan rol semántico
+      (`background.subtle` y compañía), revisar si eso da una salida mejor.
+- [ ] **`message-bubble.max-width` son 75% sueltos.** La anchura de un globo no
+      está en ninguna escala. Mismo caso que `toast.max-width` y las alturas de
+      carril de `ProgressBar`.
+- [ ] **`chat-shell.list-narrow-max-height`** son 12rem sueltos: la altura de
+      la tira de conversaciones cuando la maqueta cae a una columna. Ídem.
+- [ ] **`ChatShell` no monta cajón lateral.** Por debajo de `--breakpoint-lg`
+      la lista es una tira acotada sobre el hilo, y para un chat de móvil de
+      verdad hay que montarlo dentro de un `AppShell` y usar el cajón del
+      `Sidebar`. Es deliberado (no duplicar el cajón), pero deja el chat suelto
+      en móvil con una lista corta.
+- [ ] **El aspa de `ConversationList` no es un `Button`.** Es un `<button>` con
+      tokens propios porque tiene que aparecer y desaparecer con el hover de su
+      fila y voltear la tinta con el relleno de la fila, y `Button` ghost no
+      expone eso. Si algún día el ghost admite «hereda del contenedor», pasarlo.
+- [ ] **`UserMessage` no dice en texto que el mensaje es del usuario.** El
+      `AssistantMessage` sí lo dice (el nombre del modelo); el del usuario se
+      distingue por alineación y cola, que es información visual. En un hilo
+      real el contexto lo resuelve, pero si un producto necesita atribución
+      explícita hoy tiene que meterla como contenido del globo.
+- [ ] **La marca de tiempo que no se puede interpretar no se pinta.** Es mejor
+      que «Invalid Date», pero desaparece en silencio. Si el sistema añade
+      algún canal de avisos en desarrollo, avisar ahí.

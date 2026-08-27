@@ -7,6 +7,100 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.1.0
+
+Revisión de la familia de chat entera: los seis componentes salen de
+`Por revisar/` y la plantilla `Chat` se convierte en un componente de verdad.
+
+### Roto
+
+- **`MessageBubble` pierde los cuatro tokens de relleno** (`user-bg`,
+  `user-color`, `assistant-bg`, `assistant-color`). Ningún globo lleva relleno:
+  quien personalizara el fondo del globo del usuario ahora repunta
+  `message-bubble.border-color` y `message-bubble.color`.
+- **`MessageBubble` deja de aceptar el atributo `role` de ARIA.** Su prop `role`
+  dice quién habla, no qué es el elemento, así que el atributo nativo queda
+  excluido de las props reenviadas.
+- **`UserMessage` / `AssistantMessage` / `ConversationThread`: `timestamp` pasa
+  a ser el instante** (`Date` o cadena ISO 8601), no una hora ya formateada.
+  Quien pase `"14:32"` deja de ver la marca de tiempo (no se pinta nada, en vez
+  de «Invalid Date»). Afecta a **lrs › StoreChat**, que hoy pasa la hora ya
+  formateada con `format.dateTime`: hay que pasarle el `Date`.
+- **`MessageComposer` pierde `sendAriaLabel`.** El botón tenía texto «Enviar» y
+  `aria-label="Enviar mensaje"` a la vez, y el `aria-label` sustituye al nombre
+  visible: quien dictaba «Enviar» no activaba el control (WCAG *label in name*).
+  Ahora el nombre accesible es el texto visible; se traduce `sendLabel`.
+- **`MessageComposer` cambia de estructura BEM.** `.message-composer` es ahora
+  la pila (marco + línea de ayuda) y el marco es `.message-composer__box`.
+  Quien estilara `.message-composer` como caja tiene que apuntar al box.
+- **`ConversationList` pierde `item-active-bg`** (era gris claro, y estaba
+  huérfano) y **`.conversation-list__new` deja de ser un `<button>` propio**:
+  es un `Button variant="outline" block`, así que su CSS ya no existe.
+- **La plantilla `Chat` desaparece.** Era solo una story, sin componente ni
+  export, así que ningún producto podía consumirla; en su sitio está `ChatShell`.
+
+### Añadido
+
+- **`ChatShell`** (`Templates/ChatShell`, export `./chat-shell`): el armazón de
+  una pantalla de chat en tres zonas por slots —`list`, `header`, el hilo como
+  `children` y `composer`—, sin estado, con el scroll solo en el hilo y una
+  maqueta que cae a una columna por debajo de `--breakpoint-lg`. Tokens propios
+  con par oscuro.
+- **`Textarea` gana la variante `bare`**: el campo renuncia a borde, fondo,
+  aire, altura mínima, asa de redimensionado y anillo de foco para que los
+  dibuje el contenedor que lo enmarca. Nueve tokens `textarea.bare-*`.
+- **La cola del globo.** `MessageBubble` estrena una cola triangular que nace en
+  la esquina inferior del lado del emisor. Como el globo no tiene relleno, la
+  cola tampoco: dos triángulos superpuestos, el exterior del color del borde y
+  el interior del color de la superficie (`tail-fill`), que la vacía e
+  interrumpe el borde del globo donde nace. Tamaño por `tail-size`.
+- **Tokens propios para `UserMessage` y `AssistantMessage`** (JSON nuevos, con
+  par oscuro): antes tiraban del `message-bubble.font-family` del vecino y de
+  `--font-size-1`, `--color-grey-dark` y `--spacing-1` globales.
+- **Props nuevas**: `locale` y `timestampFormat` en `UserMessage`,
+  `AssistantMessage` y `ConversationThread`; `helperText` y `rows` en
+  `MessageComposer`; `listLabel` en `ChatShell`. `className`, `...rest` y
+  `forwardRef` en los seis componentes de la familia.
+
+### Cambiado
+
+- **El globo es contorno, no relleno.** Rectángulo de 1px con las cuatro
+  esquinas rectas y una sola tinta, con par claro/oscuro. Al emisor lo
+  distinguen la alineación y la cola. El prusia del globo del usuario
+  desaparecía sobre superficie oscura y llenaba el hilo de color.
+- **`ConversationThread` respeta `prefers-reduced-motion`** en el autoscroll:
+  consulta la media query en JS —a un `scrollIntoView` no le llega ningún token
+  CSS— y baja de golpe para quien ha pedido menos movimiento.
+- **`MessageComposer` deja de pisar el `Textarea` desde fuera.** Fuera las cinco
+  reglas `.message-composer .textarea { border: none; box-shadow: none;
+  min-height: unset }`; el campo va en variante `bare` y el marco, el fondo y el
+  anillo de foco (`:focus-within`) los dibuja el composer. El `1px` cableado del
+  borde sale de `border-width`.
+- **`MessageComposer` enseña su atajo**: `Enter` envía y `Mayús + Enter` salta
+  de línea, escrito bajo el marco con `Kbd` y enlazado al campo por
+  `aria-describedby`.
+- **`ConversationList` tenía cinco custom properties que no existen en el
+  sistema** (`--font-size-body`, `--font-family-ui`, `--color-focus`,
+  `--motion-ease-default`, `--color-grey`): la tipografía caía en la del
+  navegador y **los tres anillos de foco no se pintaban**. Todas salen ya de
+  tokens propios con par oscuro.
+- **El aspa de `ConversationList` es alcanzable por teclado.** Llevaba
+  `tabIndex={-1}` y una regla `:focus-visible` que no podía dispararse: borrar
+  una conversación era imposible sin ratón. Ahora está en el orden de
+  tabulación, mide la talla mínima (32px) y se ve siempre con puntero grueso.
+- **Los estados de `ConversationList` dejan de ser grises.** Bajo el puntero la
+  fila se rellena de marca y voltea la tinta, como en el `SidebarNav`; la
+  conversación abierta se dice con tinta plena y peso, sin fondo. `item-color`
+  pasa de `grey-dark` —que no es un color de texto— a `text.muted-on-light`.
+- **El nombre del modelo sube a tinta plena** en `AssistantMessage`: firma la
+  respuesta, no es un dato de segunda fila.
+- Doc: MDX nuevas en `MessageBubble`, `UserMessage`, `AssistantMessage`,
+  `ConversationThread`, `MessageComposer`, `ConversationList` y `ChatShell`;
+  sección `bare` en `Textarea.mdx`; tabla de internacionalización al día.
+  Stories en castellano con story «En superficie oscura» en los siete y tests de
+  contrato `!dev`. `MessageComposer.test.tsx` y `ConversationList.test.tsx`
+  nuevos.
+
 ## v25.0.0
 
 ### Eliminado (breaking)
