@@ -12,8 +12,19 @@ export interface FileUploadProps {
     error?: boolean;
     id?: string;
     name?: string;
+    /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
+    /** @deprecated Usa el atributo nativo `aria-label`. */
     ariaLabel?: string;
+    /** Ids de ayuda/error que describen el control (lo pone el campo). */
+    'aria-describedby'?: string;
+    /** Nombre accesible cuando el control va suelto. */
+    'aria-label'?: string;
+    required?: boolean;
+    /** Se llama al salir del `<input type="file">` (react-hook-form lo usa para validar). */
+    onBlur?: React.FocusEventHandler<HTMLInputElement>;
+    /** Se añade DESPUÉS de las clases propias del componente. */
+    className?: string;
     /**
      * Texto visible de la zona de arrastre. Default: "Arrastra archivos aquí" (castellano).
      * Una app multiidioma debe pasarlo traducido — igual que el resto de props de texto.
@@ -38,4 +49,9 @@ export interface FileUploadProps {
     /** Error de tipo no admitido. Default: "Tipo de archivo no permitido" */
     invalidTypeError?: string;
 }
-export declare function FileUpload({ multiple, accept, maxSize, maxFiles, value, defaultValue, onChange, progress, disabled, error, id, name, describedBy, ariaLabel, dropzoneLabel, dropzoneActiveLabel, dropzoneHintLabel, maxSizeHint, maxFilesHint, filesLabel, progressLabel, removeFileLabel, tooLargeError, invalidTypeError, }: FileUploadProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Zona de subida de archivos. El `ref` va al `<input type="file">` real, para
+ * que react-hook-form pueda registrarlo y enfocarlo; `className` se concatena
+ * a las clases del contenedor.
+ */
+export declare const FileUpload: import("react").ForwardRefExoticComponent<FileUploadProps & import("react").RefAttributes<HTMLInputElement>>;

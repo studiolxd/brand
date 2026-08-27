@@ -19,6 +19,10 @@
   --dropdown-field-font-size: var(--select-font-size); /** Cuerpo: el del Select */
   --dropdown-field-bg: var(--select-bg); /** Fondo del control */
   --dropdown-field-icon-transition: var(--select-icon-transition); /** Giro del chevron al abrir */
+  --dropdown-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
+  --dropdown-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
+  --dropdown-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
+  --dropdown-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
   --dropdown-field-padding-inline: var(--select-padding-inline); /** Padding inline del control: el del Select */
   --dropdown-field-font-weight: var(--select-font-weight); /** Peso: el del Select */
   --dropdown-field-color: var(--select-color); /** Texto del control */
@@ -27,13 +31,23 @@
   --dropdown-field-border-radius: var(--select-border-radius); /** Radio: el del Select (rectangular) */
   --dropdown-field-focus-ring-width: var(--select-focus-ring-width); /** Anillo de foco */
   --dropdown-field-focus-ring-color: var(--select-focus-ring-color); /** Anillo de foco */
+  --dropdown-field-error-border-color: var(--select-error-border-color); /** Borde en error: el mismo que el del Select */
+  --dropdown-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
+  --dropdown-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
+  --dropdown-field-error-color: var(--form-error-color); /** Color del mensaje de error */
+  --dropdown-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
+  --dropdown-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
+  --dropdown-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --dropdown-field-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --dropdown-field-color: var(--color-text-on-dark); /** Texto — surface-dark */
   --dropdown-field-bg: var(--color-background-dark); /** Fondo — surface-dark */
   --dropdown-field-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
   --dropdown-field-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+  --dropdown-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --dropdown-field-helper-color: var(--color-text-muted-on-dark); /** Color del texto de ayuda — surface-dark */
 }

@@ -1,5 +1,6 @@
+import { type ComponentPropsWithoutRef } from 'react';
 import './NumberInput.css';
-export interface NumberInputProps {
+export interface NumberInputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
     value?: number;
     defaultValue?: number;
     min?: number;
@@ -12,8 +13,12 @@ export interface NumberInputProps {
     error?: boolean;
     id?: string;
     name?: string;
+    /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
+    /** @deprecated Usa el atributo nativo `aria-label`. */
     ariaLabel?: string;
+    /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
+    className?: string;
     /**
      * aria-label del botón de decremento. Default: "Decrementar" (castellano).
      * Una app multiidioma debe pasarla traducida.
@@ -28,4 +33,10 @@ export interface NumberInputProps {
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
 }
-export declare function NumberInput({ value, defaultValue, min, max, step, decimal, disabled, readOnly, size, error, id, name, describedBy, ariaLabel, decrementLabel, incrementLabel, onChange, onBlur, onFocus, }: NumberInputProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Campo numérico con incremento y decremento. El `ref` y el resto de props
+ * nativas de `<input>` van al input real (react-hook-form, `aria-*`, `data-*`,
+ * `autoComplete`, `required`…); `className` se concatena a las clases del
+ * contenedor.
+ */
+export declare const NumberInput: import("react").ForwardRefExoticComponent<NumberInputProps & import("react").RefAttributes<HTMLInputElement>>;

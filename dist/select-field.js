@@ -4,53 +4,58 @@ import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
 import { Select as n } from "./select.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/SelectField/SelectField.tsx
-var a = "__empty__";
-function o(e) {
-	return e === "" ? a : e;
+var s = "__empty__";
+function c(e) {
+	return e === "" ? s : e;
 }
-function s(e) {
-	return e === a ? "" : e;
+function l(e) {
+	return e === s ? "" : e;
 }
-function c({ id: c, label: l, labelHidden: u = !1, options: d, value: f, defaultValue: p, placeholder: m, disabled: h, size: g, error: _ = !1, errorMessage: v, helperText: y, onValueChange: b }) {
-	let x = e(g), S = v ? `${c}-error` : void 0, C = y ? `${c}-helper` : void 0, w = d.map((e) => e.value === "" ? {
+var u = a(function({ id: a, label: u, labelHidden: d = !1, options: f, value: p, defaultValue: m, placeholder: h, name: g, disabled: _, required: v, size: y, error: b = !1, errorMessage: x, helperText: S, className: C, onValueChange: w, onBlur: T }, E) {
+	let D = e(y), O = o(), k = a ?? O, A = x ? `${k}-error` : void 0, j = S ? `${k}-helper` : void 0, M = [A, j].filter(Boolean).join(" ") || void 0, N = b || !!x, P = f.map((e) => e.value === "" ? {
 		...e,
-		value: a
+		value: s
 	} : e);
 	return /* @__PURE__ */ i("div", {
-		className: ["select-field", _ || v ? "select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["select-field", C].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ r(t, {
-				htmlFor: c,
-				hidden: u,
-				size: x,
-				children: l
+				htmlFor: k,
+				hidden: d,
+				size: D,
+				children: u
 			}),
 			/* @__PURE__ */ r(n, {
-				id: c,
-				options: w,
-				value: o(f),
-				defaultValue: o(p),
-				placeholder: m,
-				disabled: h,
-				size: x,
-				"aria-describedby": [S, C].filter(Boolean).join(" ") || void 0,
-				"aria-invalid": _ || !!v,
-				onValueChange: b ? (e) => b(s(e)) : void 0
+				ref: E,
+				id: k,
+				name: g,
+				required: v,
+				options: P,
+				value: c(p),
+				defaultValue: c(m),
+				placeholder: h,
+				disabled: _,
+				size: D,
+				"aria-describedby": M,
+				"aria-invalid": N,
+				onValueChange: w ? (e) => w(l(e)) : void 0,
+				onBlur: T
 			}),
-			v && /* @__PURE__ */ r("span", {
-				id: S,
+			x && /* @__PURE__ */ r("span", {
+				id: A,
 				className: "select-field__error",
 				role: "alert",
-				children: v
+				children: x
 			}),
-			y && /* @__PURE__ */ r("span", {
-				id: C,
+			S && /* @__PURE__ */ r("span", {
+				id: j,
 				className: "select-field__helper",
-				children: y
+				children: S
 			})
 		]
 	});
-}
+});
 //#endregion
-export { c as SelectField };
+export { u as SelectField };

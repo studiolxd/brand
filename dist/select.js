@@ -99,24 +99,27 @@ var p = a(function({ placeholder: e, children: n, ...r }, i) {
 		className: i,
 		...n
 	});
-});
-function b({ options: e, value: r, defaultValue: i, placeholder: a = "Seleccionar…", disabled: o, readOnly: s, size: c = "md", onValueChange: l, id: u, "aria-label": d, "aria-describedby": m, "aria-invalid": v, container: y }) {
+}), b = a(function({ options: e, value: r, defaultValue: i, placeholder: a = "Seleccionar…", disabled: o, readOnly: s, size: c = "md", onValueChange: l, id: u, name: d, required: m, onBlur: v, "aria-label": y, "aria-describedby": b, "aria-invalid": x, container: S }, C) {
 	return /* @__PURE__ */ n(f, {
 		value: r,
 		defaultValue: i,
 		disabled: o,
 		readOnly: s,
+		name: d,
+		required: m,
 		onValueChange: l,
 		children: [/* @__PURE__ */ t(h, {
+			ref: C,
 			size: c,
 			id: u,
-			"aria-label": d,
-			"aria-describedby": m,
-			"aria-invalid": v || void 0,
+			onBlur: v,
+			"aria-label": y,
+			"aria-describedby": b,
+			"aria-invalid": x || void 0,
 			children: /* @__PURE__ */ t(p, { placeholder: a })
 		}), /* @__PURE__ */ t(g, {
 			size: c,
-			container: y,
+			container: S,
 			children: e.map(({ value: e, label: n, "aria-label": r }) => /* @__PURE__ */ t(_, {
 				value: e,
 				"aria-label": r,
@@ -124,8 +127,7 @@ function b({ options: e, value: r, defaultValue: i, placeholder: a = "Selecciona
 			}, e))
 		})]
 	});
-}
-var x = Object.assign(b, {
+}), x = Object.assign(b, {
 	Root: f,
 	Trigger: h,
 	Value: p,

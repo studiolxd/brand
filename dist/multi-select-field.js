@@ -4,42 +4,51 @@ import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
 import { MultiSelect as n } from "./multi-select.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/MultiSelectField/MultiSelectField.tsx
-function a({ id: a, label: o, labelHidden: s = !1, options: c, value: l, defaultValue: u, placeholder: d, disabled: f, readOnly: p, size: m, error: h = !1, errorMessage: g, helperText: _, onValueChange: v }) {
-	let y = e(m), b = g ? `${a}-error` : void 0, x = _ ? `${a}-helper` : void 0;
+var s = a(function({ id: a, label: s, labelHidden: c = !1, options: l, value: u, defaultValue: d, placeholder: f, name: p, disabled: m, readOnly: h, size: g, error: _ = !1, errorMessage: v, helperText: y, className: b, removeLabel: x, onValueChange: S, onBlur: C }, w) {
+	let T = e(g), E = o(), D = a ?? E, O = v ? `${D}-error` : void 0, k = y ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = _ || !!v;
 	return /* @__PURE__ */ i("div", {
-		className: ["multi-select-field", h || g ? "multi-select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["multi-select-field", b].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ r(t, {
-				htmlFor: a,
-				hidden: s,
-				size: y,
-				children: o
+				id: `${D}-label`,
+				htmlFor: D,
+				hidden: c,
+				size: T,
+				children: s
 			}),
 			/* @__PURE__ */ r(n, {
-				id: a,
-				options: c,
-				value: l,
-				defaultValue: u,
-				placeholder: d,
-				disabled: f,
-				readOnly: p,
-				size: y,
-				onValueChange: v
+				ref: w,
+				id: D,
+				"aria-labelledby": `${D}-label`,
+				name: p,
+				options: l,
+				value: u,
+				defaultValue: d,
+				placeholder: f,
+				disabled: m,
+				readOnly: h,
+				size: T,
+				error: j,
+				removeLabel: x,
+				"aria-describedby": A,
+				onValueChange: S,
+				onBlur: C
 			}),
-			g && /* @__PURE__ */ r("span", {
-				id: b,
+			v && /* @__PURE__ */ r("span", {
+				id: O,
 				className: "multi-select-field__error",
 				role: "alert",
-				children: g
+				children: v
 			}),
-			_ && /* @__PURE__ */ r("span", {
-				id: x,
+			y && /* @__PURE__ */ r("span", {
+				id: k,
 				className: "multi-select-field__helper",
-				children: _
+				children: y
 			})
 		]
 	});
-}
+});
 //#endregion
-export { a as MultiSelectField };
+export { s as MultiSelectField };

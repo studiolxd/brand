@@ -14,7 +14,21 @@ export interface DatePickerProps {
     locale?: string;
     /** id aplicado al botón trigger */
     id?: string;
-    /** aria-describedby para el trigger */
+    /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
+    /** Ids de ayuda/error que describen el control (lo pone el campo). */
+    'aria-describedby'?: string;
+    /** Nombre accesible cuando el control va suelto. En un campo lo nombra la etiqueta. */
+    'aria-label'?: string;
+    /** Nombre del campo en el formulario: se monta un input oculto con la fecha en ISO. */
+    name?: string;
+    /** Se llama al salir del disparador (react-hook-form lo usa para validar). */
+    onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+    /** Se añade DESPUÉS de las clases propias del componente. */
+    className?: string;
 }
-export declare function DatePicker({ value, onChange, placeholder, minDate, maxDate, disabledDates, size, disabled, readOnly, error, locale, id, describedBy, }: DatePickerProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Selector de fecha. El `ref` va al **disparador**, para que react-hook-form
+ * pueda enfocarlo al fallar la validación.
+ */
+export declare const DatePicker: import("react").ForwardRefExoticComponent<DatePickerProps & import("react").RefAttributes<HTMLButtonElement>>;

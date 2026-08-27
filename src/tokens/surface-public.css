@@ -55,6 +55,8 @@
   --date-picker-field-helper-font-size: var(--form-helper-font-size);
   --date-time-field-error-font-size: var(--form-error-font-size);
   --date-time-field-helper-font-size: var(--form-helper-font-size);
+  --dropdown-field-error-font-size: var(--form-error-font-size);
+  --dropdown-field-helper-font-size: var(--form-helper-font-size);
   --file-upload-field-error-font-size: var(--form-error-font-size);
   --file-upload-field-helper-font-size: var(--form-helper-font-size);
   --input-field-error-font-size: var(--form-error-font-size);

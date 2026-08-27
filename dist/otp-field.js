@@ -4,45 +4,51 @@ import { n as e } from "./_shared/form-size.js";
 import { OtpInput as t } from "./otp-input.js";
 import { Label as n } from "./label.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/OtpField/OtpField.tsx
-function a({ id: a, label: o, labelHidden: s = !1, length: c, value: l, defaultValue: u, onChange: d, onComplete: f, disabled: p, readOnly: m, error: h = !1, errorMessage: g, helperText: _, size: v }) {
-	let y = e(v), b = g ? `${a}-error` : void 0, x = _ ? `${a}-helper` : void 0, S = [b, x].filter(Boolean).join(" ") || void 0;
+var s = a(function({ id: a, label: s, labelHidden: c = !1, length: l, value: u, defaultValue: d, name: f, disabled: p, readOnly: m, error: h = !1, errorMessage: g, helperText: _, size: v, className: y, digitLabel: b, onChange: x, onComplete: S, onBlur: C }, w) {
+	let T = e(v), E = o(), D = a ?? E, O = g ? `${D}-error` : void 0, k = _ ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = h || !!g;
 	return /* @__PURE__ */ i("div", {
-		className: "otp-field",
-		"data-size": y,
+		className: ["otp-field", y].filter(Boolean).join(" "),
+		"data-size": T,
 		children: [
 			/* @__PURE__ */ r(n, {
-				htmlFor: `${a}-0`,
-				hidden: s,
-				size: y,
-				children: o
+				htmlFor: `${D}-0`,
+				hidden: c,
+				size: T,
+				children: s
 			}),
 			/* @__PURE__ */ r(t, {
-				id: a,
-				length: c,
-				value: l,
-				defaultValue: u,
-				onChange: d,
-				onComplete: f,
+				ref: w,
+				id: D,
+				name: f,
+				length: l,
+				value: u,
+				defaultValue: d,
 				disabled: p,
 				readOnly: m,
-				error: h || !!g,
-				size: y,
-				describedBy: S
+				error: j,
+				size: T,
+				digitLabel: b,
+				"aria-label": s,
+				"aria-describedby": A,
+				onChange: x,
+				onComplete: S,
+				onBlur: C
 			}),
 			g && /* @__PURE__ */ r("span", {
-				id: b,
+				id: O,
 				className: "otp-field__error",
 				role: "alert",
 				children: g
 			}),
 			_ && /* @__PURE__ */ r("span", {
-				id: x,
+				id: k,
 				className: "otp-field__helper",
 				children: _
 			})
 		]
 	});
-}
+});
 //#endregion
-export { a as OtpField };
+export { s as OtpField };

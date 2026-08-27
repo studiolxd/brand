@@ -7,6 +7,13 @@
 .dropdown-field--inline {
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+/* En línea, la ayuda y el error siguen debajo: ocupan la fila entera. */
+.dropdown-field--inline .dropdown-field__error,
+.dropdown-field--inline .dropdown-field__helper {
+  flex-basis: 100%;
 }
 
 /* La misma cara que el trigger del Select: rectangular, a la altura del sistema. */
@@ -26,6 +33,11 @@
   border: var(--dropdown-field-border-width) solid var(--dropdown-field-border-color);
   border-radius: var(--dropdown-field-border-radius);
   cursor: pointer;
+}
+
+/* El error lo marca el propio control, desde el `aria-invalid` del campo. */
+.dropdown-field__control[aria-invalid='true'] {
+  border-color: var(--dropdown-field-error-border-color);
 }
 
 .dropdown-field__control:disabled {
@@ -84,4 +96,20 @@
 }
 .dropdown-field__control[data-popup-open] .dropdown-field__icon {
   transform: rotate(-90deg);
+}
+
+.dropdown-field__error {
+  font-family: var(--dropdown-field-error-font-family);
+  font-size: var(--dropdown-field-error-font-size);
+  font-weight: var(--dropdown-field-error-font-weight);
+  line-height: var(--dropdown-field-error-line-height);
+  color: var(--dropdown-field-error-color);
+}
+
+.dropdown-field__helper {
+  font-family: var(--dropdown-field-helper-font-family);
+  font-size: var(--dropdown-field-helper-font-size);
+  font-weight: var(--dropdown-field-helper-font-weight);
+  line-height: var(--dropdown-field-helper-line-height);
+  color: var(--dropdown-field-helper-color);
 }

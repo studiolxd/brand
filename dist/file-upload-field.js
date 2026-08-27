@@ -1,38 +1,42 @@
 'use client';
 import './file-upload-field.css';
-import { Label as e } from "./label.js";
-import { FileUpload as t } from "./file-upload.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { n as e } from "./_shared/form-size.js";
+import { Label as t } from "./label.js";
+import { FileUpload as n } from "./file-upload.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/FileUploadField/FileUploadField.tsx
-function i({ id: i, label: a, labelHidden: o = !1, errorMessage: s, helperText: c, error: l, ...u }) {
-	let d = s ? `${i}-error` : void 0, f = c ? `${i}-helper` : void 0, p = [d, f].filter(Boolean).join(" ") || void 0;
-	return /* @__PURE__ */ r("div", {
-		className: "file-upload-field",
+var s = a(function({ id: a, label: s, labelHidden: c = !1, errorMessage: l, helperText: u, error: d = !1, size: f, className: p, ...m }, h) {
+	let g = e(f), _ = o(), v = a ?? _, y = l ? `${v}-error` : void 0, b = u ? `${v}-helper` : void 0, x = [y, b].filter(Boolean).join(" ") || void 0, S = d || !!l;
+	return /* @__PURE__ */ i("div", {
+		className: ["file-upload-field", p].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ n(e, {
-				htmlFor: i,
-				hidden: o,
-				children: a
-			}),
-			/* @__PURE__ */ n(t, {
-				id: i,
-				error: l || !!s,
-				describedBy: p,
-				...u
-			}),
-			s && /* @__PURE__ */ n("span", {
-				id: d,
-				className: "file-upload-field__error",
-				role: "alert",
+			/* @__PURE__ */ r(t, {
+				htmlFor: v,
+				hidden: c,
+				size: g,
 				children: s
 			}),
-			c && /* @__PURE__ */ n("span", {
-				id: f,
+			/* @__PURE__ */ r(n, {
+				ref: h,
+				...m,
+				id: v,
+				error: S,
+				"aria-describedby": x
+			}),
+			l && /* @__PURE__ */ r("span", {
+				id: y,
+				className: "file-upload-field__error",
+				role: "alert",
+				children: l
+			}),
+			u && /* @__PURE__ */ r("span", {
+				id: b,
 				className: "file-upload-field__helper",
-				children: c
+				children: u
 			})
 		]
 	});
-}
+});
 //#endregion
-export { i as FileUploadField };
+export { s as FileUploadField };

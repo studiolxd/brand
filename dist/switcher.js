@@ -4,25 +4,27 @@ import { jsx as e } from "react/jsx-runtime";
 import { forwardRef as t, useCallback as n } from "react";
 import { Switch as r } from "@base-ui-components/react/switch";
 //#region src/stories/atoms/Switcher/Switcher.tsx
-var i = t(function({ size: t = "md", className: i, value: a, onCheckedChange: o, id: s, ...c }, l) {
-	let u = [
+var i = t(function({ size: t = "md", error: i = !1, className: a, value: o, onCheckedChange: s, id: c, ...l }, u) {
+	let d = [
 		"switcher",
 		t === "md" ? "" : `switcher--${t}`,
-		i ?? ""
-	].filter(Boolean).join(" "), d = n((e) => {
-		e && a !== void 0 && (e.value = a);
-	}, [a]);
+		i ? "switcher--error" : "",
+		a ?? ""
+	].filter(Boolean).join(" "), f = n((e) => {
+		e && o !== void 0 && (e.value = o);
+	}, [o]);
 	return /* @__PURE__ */ e(r.Root, {
-		ref: l,
-		className: u,
-		inputRef: d,
+		ref: u,
+		className: d,
+		inputRef: f,
 		render: /* @__PURE__ */ e("button", {
 			type: "button",
-			id: s
+			id: c
 		}),
 		nativeButton: !0,
-		onCheckedChange: o ? (e) => o(e) : void 0,
-		...c,
+		"aria-invalid": i || void 0,
+		onCheckedChange: s ? (e) => s(e) : void 0,
+		...l,
 		children: /* @__PURE__ */ e(r.Thumb, { className: "switcher__thumb" })
 	});
 });

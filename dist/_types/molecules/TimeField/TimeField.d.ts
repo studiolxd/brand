@@ -1,17 +1,40 @@
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import './TimeField.css';
 export interface TimeFieldProps {
-    id: string;
+    /** `id` del control. Si no se pasa, se genera con `useId`. */
+    id?: string;
     label: string;
+    /**
+     * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
+     * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+     */
     labelHidden?: boolean;
     value?: TimeValue | null;
-    onChange?: (value: TimeValue) => void;
+    /** Paso en minutos. Default: 5. */
     step?: number;
+    /** Nombre del campo en el formulario: se monta un input oculto con `HH:MM`. */
+    name?: string;
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     readOnly?: boolean;
+    /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
     error?: boolean;
+    /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
     errorMessage?: string;
+    /** Texto de ayuda, enlazado por `aria-describedby`. */
     helperText?: string;
+    /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
+    className?: string;
+    /** aria-label del desplegable de horas. Default: "Horas" (castellano). */
+    hoursLabel?: string;
+    /** aria-label del desplegable de minutos. Default: "Minutos" (castellano). */
+    minutesLabel?: string;
+    onChange?: (value: TimeValue) => void;
+    onBlur?: React.FocusEventHandler<HTMLButtonElement>;
 }
-export declare function TimeField({ id, label, labelHidden, value, onChange, step, size, disabled, readOnly, error, errorMessage, helperText, }: TimeFieldProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * El `TimeSelect` como campo de formulario. El control son dos desplegables de
+ * Base UI: el `ref` va al de horas para que react-hook-form pueda enfocarlo al
+ * fallar la validación; el `className`, al contenedor.
+ */
+export declare const TimeField: import("react").ForwardRefExoticComponent<TimeFieldProps & import("react").RefAttributes<HTMLButtonElement>>;

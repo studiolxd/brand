@@ -15,6 +15,18 @@ export interface AsyncSelectProps {
     readOnly?: boolean;
     size?: 'sm' | 'md' | 'lg';
     id?: string;
+    /** Nombre del campo en el formulario: se monta un input oculto con el valor. */
+    name?: string;
+    /** Marca el estado de error: aplica la clase `async-select--error` y `aria-invalid`. */
+    error?: boolean;
+    /** Se llama al salir del control (react-hook-form lo usa para validar). */
+    onBlur?: React.FocusEventHandler<HTMLInputElement>;
+    /** Se añade DESPUÉS de las clases propias del componente. */
+    className?: string;
+    /**
+     * Nombre accesible cuando el control va suelto. En un campo lo nombra la
+     * etiqueta (`htmlFor`), que este atributo pisaría: no lo pongas ahí.
+     */
     'aria-label'?: string;
     'aria-describedby'?: string;
     /**
@@ -42,4 +54,8 @@ export interface AsyncSelectProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
-export declare function AsyncSelect({ onSearch, value, onValueChange, selectedOption, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, emptyMessage, loadingLabel, clearLabel, container, }: AsyncSelectProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Búsqueda con resultados asíncronos y un solo valor. El `ref` va al `<input>`
+ * de búsqueda, que es lo que se enfoca.
+ */
+export declare const AsyncSelect: import("react").ForwardRefExoticComponent<AsyncSelectProps & import("react").RefAttributes<HTMLInputElement>>;

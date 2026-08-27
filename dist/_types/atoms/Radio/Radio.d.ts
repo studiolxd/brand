@@ -2,6 +2,8 @@ import './Radio.css';
 export interface RadioProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
     /** Tamaño del radio. Redeclara el `size` nativo (que es numérico). */
     size?: 'sm' | 'md' | 'lg';
+    /** Marca el estado de error: aplica la clase `radio--error` y `aria-invalid`. */
+    error?: boolean;
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye). */
     className?: string;
 }

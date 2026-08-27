@@ -21,6 +21,11 @@ export interface SelectProps {
     size?: 'sm' | 'md' | 'lg';
     onValueChange?: (value: string) => void;
     id?: string;
+    /** Nombre del campo en el formulario: Base UI monta un input oculto con el valor. */
+    name?: string;
+    required?: boolean;
+    /** Se llama al salir del disparador (react-hook-form lo usa para validar). */
+    onBlur?: React.FocusEventHandler<HTMLButtonElement>;
     /** Nombre accesible cuando el Select va suelto. En un campo lo nombra la etiqueta (`htmlFor`), que este atributo pisaría: no lo pongas ahí. */
     'aria-label'?: string;
     /** Ids de ayuda/error que describen el control (lo pone el campo). */
@@ -81,7 +86,6 @@ export type SelectSeparatorProps = Omit<BaseSeparatorProps, 'className'> & {
 };
 /** Separador entre grupos (`.select__separator`). */
 export declare const SelectSeparator: React.ForwardRefExoticComponent<SelectSeparatorProps & React.RefAttributes<HTMLDivElement>>;
-declare function SelectClosed({ options, value, defaultValue, placeholder, disabled, readOnly, size, onValueChange, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedBy, 'aria-invalid': ariaInvalid, container, }: SelectProps): import("react/jsx-runtime").JSX.Element;
 /**
  * Select. Dos formas de uso:
  * - **Cerrada (data-driven)**: `<Select options={[…]} value onValueChange … />`.
@@ -96,7 +100,7 @@ declare function SelectClosed({ options, value, defaultValue, placeholder, disab
  * `SelectContent`, `SelectItem`…): en **Server Components (RSC)** usa los named
  * exports — el namespace (`Select.Trigger`) requiere contexto cliente.
  */
-export declare const Select: typeof SelectClosed & {
+export declare const Select: import("react").ForwardRefExoticComponent<SelectProps & import("react").RefAttributes<HTMLButtonElement>> & {
     Root: typeof SelectRoot;
     Trigger: import("react").ForwardRefExoticComponent<SelectTriggerProps & import("react").RefAttributes<HTMLButtonElement>>;
     Value: import("react").ForwardRefExoticComponent<SelectValueProps & import("react").RefAttributes<HTMLSpanElement>>;

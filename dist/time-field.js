@@ -1,43 +1,53 @@
 'use client';
 import './time-field.css';
-import { Label as e } from "./label.js";
-import { TimeSelect as t } from "./time-select.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { n as e } from "./_shared/form-size.js";
+import { Label as t } from "./label.js";
+import { TimeSelect as n } from "./time-select.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/TimeField/TimeField.tsx
-function i({ id: i, label: a, labelHidden: o = !0, value: s, onChange: c, step: l, size: u, disabled: d, readOnly: f, error: p = !1, errorMessage: m, helperText: h }) {
-	let g = m ? `${i}-error` : void 0, _ = h ? `${i}-helper` : void 0;
-	return /* @__PURE__ */ r("div", {
-		className: ["time-field", p ? "time-field--error" : ""].filter(Boolean).join(" "),
+var s = a(function({ id: a, label: s, labelHidden: c = !1, value: l, step: u, name: d, size: f, disabled: p, readOnly: m, error: h = !1, errorMessage: g, helperText: _, className: v, hoursLabel: y, minutesLabel: b, onChange: x, onBlur: S }, C) {
+	let w = e(f), T = o(), E = a ?? T, D = g ? `${E}-error` : void 0, O = _ ? `${E}-helper` : void 0, k = [D, O].filter(Boolean).join(" ") || void 0, A = h || !!g;
+	return /* @__PURE__ */ i("div", {
+		className: ["time-field", v].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ n(e, {
-				htmlFor: i,
-				hidden: o,
-				size: u,
-				children: a
+			/* @__PURE__ */ r(t, {
+				id: `${E}-label`,
+				htmlFor: E,
+				hidden: c,
+				size: w,
+				children: s
 			}),
-			/* @__PURE__ */ n(t, {
-				id: i,
-				value: s,
-				onChange: c,
-				step: l,
-				size: u,
-				disabled: d,
-				readOnly: f,
-				error: p || !!m
+			/* @__PURE__ */ r(n, {
+				ref: C,
+				id: E,
+				name: d,
+				value: l,
+				step: u,
+				size: w,
+				disabled: p,
+				readOnly: m,
+				error: A,
+				hoursLabel: y,
+				minutesLabel: b,
+				"aria-labelledby": `${E}-label`,
+				"aria-describedby": k,
+				onChange: x,
+				onBlur: S
 			}),
-			m && /* @__PURE__ */ n("span", {
-				id: g,
+			g && /* @__PURE__ */ r("span", {
+				id: D,
 				className: "time-field__error",
 				role: "alert",
-				children: m
+				children: g
 			}),
-			h && /* @__PURE__ */ n("span", {
-				id: _,
+			_ && /* @__PURE__ */ r("span", {
+				id: O,
 				className: "time-field__helper",
-				children: h
+				children: _
 			})
 		]
 	});
-}
+});
 //#endregion
-export { i as TimeField };
+export { s as TimeField };

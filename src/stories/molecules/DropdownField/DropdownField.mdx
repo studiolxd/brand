@@ -36,6 +36,47 @@ Encima por defecto, como el resto de campos. `inline` la pone delante, para barr
 
 <Canvas of={DropdownFieldStories.Deshabilitado} />
 
+## Ayuda y error
+
+Como el resto de campos: `helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`, que es lo que le pinta el borde. En línea, ayuda y error siguen debajo, ocupando la fila entera.
+
+<Canvas of={DropdownFieldStories.ConAyuda} />
+<Canvas of={DropdownFieldStories.ConError} />
+
+## Con react-hook-form
+
+El control abre un `Menu` de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onValueChange` + `name` + `ref` al disparador. El `name` monta además el input oculto que se envía con el formulario.
+
+```tsx
+<FormField
+  control={form.control}
+  name="orden"
+  render={({ field, fieldState }) => (
+    <DropdownField
+      ref={field.ref}
+      name={field.name}
+      value={field.value}
+      onValueChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Ordenar por"
+      items={items}
+      errorMessage={fieldState.error?.message}
+    >
+      {etiquetaActual}
+    </DropdownField>
+  )}
+/>
+```
+
+<Canvas of={DropdownFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- La etiqueta va enlazada por `htmlFor`/`id` al disparador; sin `id`, el campo genera uno con `useId`. Sin etiqueta visible, `aria-label` es obligatorio.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+
 ## Cuándo no
 
 - Si las opciones son texto plano y solo hay que elegir una: `SelectField`, que es un `<select>` de verdad.

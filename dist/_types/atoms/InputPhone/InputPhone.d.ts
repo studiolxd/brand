@@ -1,7 +1,7 @@
 import { Select as BaseSelect } from '@base-ui-components/react/select';
 import type { Country } from 'react-phone-number-input';
 import './InputPhone.css';
-interface InputPhoneProps {
+export interface InputPhoneProps {
     value?: string;
     defaultCountry?: Country;
     placeholder?: string;
@@ -10,9 +10,19 @@ interface InputPhoneProps {
     size?: 'sm' | 'md' | 'lg';
     id?: string;
     name?: string;
+    /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
+    /** Ids de ayuda/error que describen el control (lo pone el campo). */
+    'aria-describedby'?: string;
+    /** Nombre accesible cuando el control va suelto. */
+    'aria-label'?: string;
+    /** Autocompletado del navegador (`tel`, `off`…). */
+    autoComplete?: string;
+    required?: boolean;
+    readOnly?: boolean;
     onChange?: (value: string | undefined) => void;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
+    onFocus?: React.FocusEventHandler<HTMLInputElement>;
     /**
      * aria-label del selector de país. Default: "País" (castellano).
      * Una app multiidioma debe pasarla traducida.
@@ -28,5 +38,8 @@ interface InputPhoneProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
-export declare function InputPhone({ value, defaultCountry, placeholder, disabled, error, size, id, name, describedBy, onChange, onBlur, countryLabel, container, }: InputPhoneProps): import("react/jsx-runtime").JSX.Element;
-export {};
+/**
+ * Campo de teléfono con selector de país. El `ref` va al `<input>` real del
+ * número, para que react-hook-form pueda registrarlo y enfocarlo.
+ */
+export declare const InputPhone: import("react").ForwardRefExoticComponent<InputPhoneProps & import("react").RefAttributes<HTMLInputElement>>;

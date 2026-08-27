@@ -4,43 +4,49 @@ import { AsyncSelect as e } from "./async-select.js";
 import { n as t } from "./_shared/form-size.js";
 import { Label as n } from "./label.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx
-function a({ id: a, label: o, labelHidden: s = !1, onSearch: c, value: l, onValueChange: u, selectedOption: d, placeholder: f, disabled: p, readOnly: m, size: h, error: g = !1, errorMessage: _, helperText: v }) {
-	let y = t(h), b = _ ? `${a}-error` : void 0, x = v ? `${a}-helper` : void 0;
+var s = a(function({ id: a, label: s, labelHidden: c = !1, onSearch: l, value: u, onValueChange: d, selectedOption: f, placeholder: p, name: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, className: x, emptyMessage: S, onBlur: C }, w) {
+	let T = t(_), E = o(), D = a ?? E, O = y ? `${D}-error` : void 0, k = b ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = v || !!y;
 	return /* @__PURE__ */ i("div", {
-		className: ["async-select-field", g || _ ? "async-select-field--error" : ""].filter(Boolean).join(" "),
+		className: ["async-select-field", x].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ r(n, {
-				htmlFor: a,
-				hidden: s,
-				size: y,
-				children: o
+				htmlFor: D,
+				hidden: c,
+				size: T,
+				children: s
 			}),
 			/* @__PURE__ */ r(e, {
-				id: a,
-				onSearch: c,
-				value: l,
-				onValueChange: u,
-				selectedOption: d,
-				placeholder: f,
-				disabled: p,
-				readOnly: m,
-				size: y,
-				"aria-describedby": [b, x].filter(Boolean).join(" ") || void 0
+				ref: w,
+				id: D,
+				name: m,
+				onSearch: l,
+				value: u,
+				onValueChange: d,
+				selectedOption: f,
+				placeholder: p,
+				disabled: h,
+				readOnly: g,
+				size: T,
+				error: j,
+				emptyMessage: S,
+				"aria-describedby": A,
+				onBlur: C
 			}),
-			_ && /* @__PURE__ */ r("span", {
-				id: b,
+			y && /* @__PURE__ */ r("span", {
+				id: O,
 				className: "async-select-field__error",
 				role: "alert",
-				children: _
+				children: y
 			}),
-			v && /* @__PURE__ */ r("span", {
-				id: x,
+			b && /* @__PURE__ */ r("span", {
+				id: k,
 				className: "async-select-field__helper",
-				children: v
+				children: b
 			})
 		]
 	});
-}
+});
 //#endregion
-export { a as AsyncSelectField };
+export { s as AsyncSelectField };

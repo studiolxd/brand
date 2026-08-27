@@ -4,21 +4,23 @@ import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
 import { NumberInput as n } from "./number-input.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/NumberInputField/NumberInputField.tsx
-function a({ id: a, label: o, labelHidden: s = !0, name: c, value: l, defaultValue: u, min: d, max: f, step: p = 1, decimal: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, onChange: x, onBlur: S, onFocus: C }) {
-	let w = e(_), T = y ? `${a}-error` : void 0, E = b ? `${a}-helper` : void 0, D = [T, E].filter(Boolean).join(" ") || void 0;
+var s = a(function({ id: a, label: s, labelHidden: c = !1, value: l, defaultValue: u, min: d, max: f, step: p = 1, decimal: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, className: x, onChange: S, ...C }, w) {
+	let T = e(_), E = o(), D = a ?? E, O = y ? `${D}-error` : void 0, k = b ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = v || !!y;
 	return /* @__PURE__ */ i("div", {
-		className: "number-input-field",
+		className: ["number-input-field", x].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ r(t, {
-				htmlFor: a,
-				hidden: s,
-				size: w,
-				children: o
+				htmlFor: D,
+				hidden: c,
+				size: T,
+				children: s
 			}),
 			/* @__PURE__ */ r(n, {
-				id: a,
-				name: c,
+				ref: w,
+				...C,
+				id: D,
 				value: l,
 				defaultValue: u,
 				min: d,
@@ -27,27 +29,24 @@ function a({ id: a, label: o, labelHidden: s = !0, name: c, value: l, defaultVal
 				decimal: m,
 				disabled: h,
 				readOnly: g,
-				size: w,
-				error: v || !!y,
-				describedBy: D,
-				ariaLabel: s ? o : void 0,
-				onChange: x,
-				onBlur: S,
-				onFocus: C
+				size: T,
+				error: j,
+				"aria-describedby": A,
+				onChange: S
 			}),
 			y && /* @__PURE__ */ r("span", {
-				id: T,
+				id: O,
 				className: "number-input-field__error",
 				role: "alert",
 				children: y
 			}),
 			b && /* @__PURE__ */ r("span", {
-				id: E,
+				id: k,
 				className: "number-input-field__helper",
 				children: b
 			})
 		]
 	});
-}
+});
 //#endregion
-export { a as NumberInputField };
+export { s as NumberInputField };

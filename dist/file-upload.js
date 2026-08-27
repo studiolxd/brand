@@ -2,109 +2,120 @@
 import './file-upload.css';
 import { VisuallyHidden as e } from "./visually-hidden.js";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { useCallback as r, useEffect as i, useId as a, useRef as o, useState as s } from "react";
+import { forwardRef as r, useCallback as i, useEffect as a, useId as o, useRef as s, useState as c } from "react";
 //#region src/stories/atoms/FileUpload/FileUpload.tsx
-function c(e) {
+function l(e) {
 	return e < 1024 ? `${e} B` : e < 1024 * 1024 ? `${(e / 1024).toFixed(1)} KB` : `${(e / (1024 * 1024)).toFixed(1)} MB`;
 }
-function l(e, t, n, r, i) {
-	return n !== void 0 && e.size > n ? r(c(n)) : t && !t.split(",").map((e) => e.trim()).some((t) => t.startsWith(".") ? e.name.toLowerCase().endsWith(t.toLowerCase()) : t.endsWith("/*") ? e.type.startsWith(t.slice(0, -2)) : e.type === t) ? i : null;
+function u(e, t, n, r, i) {
+	return n !== void 0 && e.size > n ? r(l(n)) : t && !t.split(",").map((e) => e.trim()).some((t) => t.startsWith(".") ? e.name.toLowerCase().endsWith(t.toLowerCase()) : t.endsWith("/*") ? e.type.startsWith(t.slice(0, -2)) : e.type === t) ? i : null;
 }
-var u = /* @__PURE__ */ new WeakMap();
-function d(e) {
-	if (!e.type.startsWith("image/")) return;
-	let t = u.get(e);
-	return t || (t = URL.createObjectURL(e), u.set(e, t)), t;
-}
+var d = /* @__PURE__ */ new WeakMap();
 function f(e) {
-	let t = u.get(e);
-	t && (URL.revokeObjectURL(t), u.delete(e));
+	if (!e.type.startsWith("image/")) return;
+	let t = d.get(e);
+	return t || (t = URL.createObjectURL(e), d.set(e, t)), t;
 }
-function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, defaultValue: _ = [], onChange: v, progress: y, disabled: b = !1, error: x = !1, id: S, name: C, describedBy: w, ariaLabel: T, dropzoneLabel: E = "Arrastra archivos aquí", dropzoneActiveLabel: D = "Suelta los archivos aquí", dropzoneHintLabel: O = "o haz clic para seleccionar", maxSizeHint: k = (e) => `máx. ${e}`, maxFilesHint: A = (e) => `hasta ${e} archivos`, filesLabel: j = "Archivos seleccionados", progressLabel: ee = "Progreso de subida", removeFileLabel: M = (e) => `Eliminar ${e}`, tooLargeError: N = (e) => `Archivo demasiado grande (máx. ${e})`, invalidTypeError: P = "Tipo de archivo no permitido" }) {
-	let F = g !== void 0, [I, L] = s(_), [R, z] = s(/* @__PURE__ */ new Map()), [B, V] = s(!1), H = o(/* @__PURE__ */ new Set()), U = o(null), W = a(), G = S ?? `file-upload-${W}`, K = F ? g : I;
-	i(() => {
-		K.forEach((e) => H.current.add(e));
-	}, [K]), i(() => {
-		let e = H.current;
+function p(e) {
+	let t = d.get(e);
+	t && (URL.revokeObjectURL(t), d.delete(e));
+}
+function m(e, t) {
+	typeof e == "function" ? e(t) : e && (e.current = t);
+}
+var h = r(function({ multiple: r = !1, accept: d, maxSize: h, maxFiles: g, value: _, defaultValue: v = [], onChange: y, progress: b, disabled: x = !1, error: S = !1, id: C, name: w, describedBy: T, ariaLabel: E, "aria-describedby": D, "aria-label": O, required: k, onBlur: A, className: ee, dropzoneLabel: te = "Arrastra archivos aquí", dropzoneActiveLabel: ne = "Suelta los archivos aquí", dropzoneHintLabel: re = "o haz clic para seleccionar", maxSizeHint: j = (e) => `máx. ${e}`, maxFilesHint: M = (e) => `hasta ${e} archivos`, filesLabel: N = "Archivos seleccionados", progressLabel: P = "Progreso de subida", removeFileLabel: F = (e) => `Eliminar ${e}`, tooLargeError: I = (e) => `Archivo demasiado grande (máx. ${e})`, invalidTypeError: L = "Tipo de archivo no permitido" }, R) {
+	let z = _ !== void 0, [B, V] = c(v), [H, U] = c(/* @__PURE__ */ new Map()), [W, G] = c(!1), K = s(/* @__PURE__ */ new Set()), q = s(null), J = o(), Y = C ?? `file-upload-${J}`, X = z ? _ : B;
+	a(() => {
+		X.forEach((e) => K.current.add(e));
+	}, [X]), a(() => {
+		let e = K.current;
 		return () => {
-			e.forEach(f);
+			e.forEach(p);
 		};
 	}, []);
-	let q = r((e) => {
-		if (b) return;
-		let t = Array.from(e), n = F ? g ?? [] : I, r = new Map(R), i = [...n];
+	let Z = i((e) => {
+		if (x) return;
+		let t = Array.from(e), n = z ? _ ?? [] : B, r = new Map(H), i = [...n];
 		for (let e of t) {
-			if (h !== void 0 && i.filter((e) => !r.has(e)).length >= h) break;
-			let t = l(e, p, m, N, P);
+			if (g !== void 0 && i.filter((e) => !r.has(e)).length >= g) break;
+			let t = u(e, d, h, I, L);
 			t && r.set(e, t), i.push(e);
 		}
-		z(r), F || L(i), v?.(i.filter((e) => !r.has(e)));
+		U(r), z || V(i), y?.(i.filter((e) => !r.has(e)));
 	}, [
-		b,
-		p,
-		m,
+		x,
+		d,
 		h,
-		F,
 		g,
+		z,
+		_,
+		B,
+		H,
+		y,
 		I,
-		R,
-		v,
-		N,
-		P
-	]), J = r((e) => {
-		let t = (F ? g ?? [] : I).filter((t) => t !== e), n = new Map(R);
-		n.delete(e), f(e), z(n), F || L(t), v?.(t.filter((e) => !n.has(e))), U.current && (U.current.value = "");
+		L
+	]), ie = i((e) => {
+		let t = (z ? _ ?? [] : B).filter((t) => t !== e), n = new Map(H);
+		n.delete(e), p(e), U(n), z || V(t), y?.(t.filter((e) => !n.has(e))), q.current && (q.current.value = "");
 	}, [
-		F,
-		g,
-		I,
-		R,
-		v
-	]), Y = (e) => {
-		e.target.files && q(e.target.files);
-	}, X = (e) => {
-		e.preventDefault(), b || V(!0);
-	}, Z = (e) => {
-		e.preventDefault(), V(!1);
+		z,
+		_,
+		B,
+		H,
+		y
+	]), ae = (e) => {
+		e.target.files && Z(e.target.files);
+	}, oe = (e) => {
+		e.preventDefault(), x || G(!0);
+	}, se = (e) => {
+		e.preventDefault(), G(!1);
 	}, Q = (e) => {
-		e.preventDefault(), V(!1), !b && e.dataTransfer.files && q(e.dataTransfer.files);
-	}, te = () => {
-		b || U.current?.click();
-	}, ne = (e) => {
-		!b && (e.key === "Enter" || e.key === " ") && (e.preventDefault(), U.current?.click());
-	}, re = [
+		e.preventDefault(), G(!1), !x && e.dataTransfer.files && Z(e.dataTransfer.files);
+	}, ce = () => {
+		x || q.current?.click();
+	}, le = (e) => {
+		!x && (e.key === "Enter" || e.key === " ") && (e.preventDefault(), q.current?.click());
+	}, ue = [
 		"file-upload",
-		B ? "file-upload--dragging" : "",
-		x ? "file-upload--error" : "",
-		b ? "file-upload--disabled" : "",
-		K.length > 0 ? "file-upload--has-files" : ""
+		W ? "file-upload--dragging" : "",
+		S ? "file-upload--error" : "",
+		x ? "file-upload--disabled" : "",
+		X.length > 0 ? "file-upload--has-files" : "",
+		ee ?? ""
 	].filter(Boolean).join(" "), $ = [];
-	return p && $.push(p), m && $.push(k(c(m))), u && h && $.push(A(h)), /* @__PURE__ */ n("div", {
-		className: re,
+	return d && $.push(d), h && $.push(j(l(h))), r && g && $.push(M(g)), /* @__PURE__ */ n("div", {
+		className: ue,
 		children: [
 			/* @__PURE__ */ t(e, { children: /* @__PURE__ */ t("input", {
-				ref: U,
+				ref: (e) => {
+					q.current = e, m(R, e);
+				},
 				type: "file",
-				id: G,
-				name: C,
-				multiple: u,
-				accept: p,
-				disabled: b,
-				"aria-label": T,
-				"aria-describedby": w,
-				onChange: Y,
+				id: Y,
+				name: w,
+				multiple: r,
+				accept: d,
+				disabled: x,
+				required: k,
+				"aria-label": E ?? O,
+				"aria-describedby": T ?? D,
+				"aria-invalid": S || void 0,
+				onChange: ae,
+				onBlur: A,
 				tabIndex: -1
 			}) }),
 			/* @__PURE__ */ n("div", {
 				className: "file-upload__dropzone",
-				onClick: te,
-				onKeyDown: ne,
-				onDragOver: X,
-				onDragLeave: Z,
+				onClick: ce,
+				onKeyDown: le,
+				onDragOver: oe,
+				onDragLeave: se,
 				onDrop: Q,
 				role: "button",
-				tabIndex: b ? -1 : 0,
-				"aria-disabled": b || void 0,
+				tabIndex: x ? -1 : 0,
+				"aria-disabled": x || void 0,
+				"aria-describedby": T ?? D,
+				"aria-invalid": S || void 0,
 				children: [
 					/* @__PURE__ */ n("svg", {
 						className: "file-upload__icon",
@@ -131,11 +142,11 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 					}),
 					/* @__PURE__ */ t("span", {
 						className: "file-upload__text",
-						children: B ? D : E
+						children: W ? ne : te
 					}),
 					/* @__PURE__ */ t("span", {
 						className: "file-upload__text file-upload__text--secondary",
-						children: O
+						children: re
 					}),
 					$.length > 0 && /* @__PURE__ */ t("span", {
 						className: "file-upload__subtext",
@@ -143,11 +154,11 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 					})
 				]
 			}),
-			K.length > 0 && /* @__PURE__ */ t("ul", {
+			X.length > 0 && /* @__PURE__ */ t("ul", {
 				className: "file-upload__list",
-				"aria-label": j,
-				children: K.map((e, r) => {
-					let i = R.get(e), a = d(e);
+				"aria-label": N,
+				children: X.map((e, r) => {
+					let i = H.get(e), a = f(e);
 					return /* @__PURE__ */ n("li", {
 						className: `file-upload__item${i ? " file-upload__item--error" : ""}`,
 						children: [
@@ -179,7 +190,7 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 									}),
 									/* @__PURE__ */ t("span", {
 										className: "file-upload__item-size",
-										children: c(e.size)
+										children: l(e.size)
 									}),
 									i && /* @__PURE__ */ t("span", {
 										className: "file-upload__item-error-msg",
@@ -191,8 +202,8 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 							/* @__PURE__ */ t("button", {
 								className: "file-upload__item-remove",
 								type: "button",
-								onClick: () => J(e),
-								"aria-label": M(e.name),
+								onClick: () => ie(e),
+								"aria-label": F(e.name),
 								children: /* @__PURE__ */ n("svg", {
 									xmlns: "http://www.w3.org/2000/svg",
 									width: "16",
@@ -221,20 +232,20 @@ function p({ multiple: u = !1, accept: p, maxSize: m, maxFiles: h, value: g, def
 					}, `${e.name}-${e.size}-${r}`);
 				})
 			}),
-			y !== void 0 && /* @__PURE__ */ t("div", {
+			b !== void 0 && /* @__PURE__ */ t("div", {
 				className: "file-upload__progress",
 				role: "progressbar",
-				"aria-valuenow": y,
+				"aria-valuenow": b,
 				"aria-valuemin": 0,
 				"aria-valuemax": 100,
-				"aria-label": ee,
+				"aria-label": P,
 				children: /* @__PURE__ */ t("div", {
 					className: "file-upload__progress-bar",
-					style: { "--file-upload-progress": `${y}%` }
+					style: { "--file-upload-progress": `${b}%` }
 				})
 			})
 		]
 	});
-}
+});
 //#endregion
-export { p as FileUpload };
+export { h as FileUpload };

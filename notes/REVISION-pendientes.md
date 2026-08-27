@@ -49,7 +49,8 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
       remapeaban a mano. Queda por ver en cada componente si el placeholder
       debe ocultarse en deshabilitado.
 - [ ] **FileUpload** — `thumb-icon-color` (grey-dark) sobre `thumb-bg`
-      (grey-lightest). Icono.
+      (grey-lightest). Icono. (Sigue pendiente: al hacer definitivo el campo
+      solo se tocó el contrato, no la paleta de la miniatura.)
 
 ## Deudas de capa detectadas en neutrales (Colores, 2026-08-25)
 
@@ -168,8 +169,11 @@ roles; lo que queda es comprobar visualmente cada componente al revisarlo.
       grosor.
 - [ ] **Spinner** — anillos a 2px / 2px / 3px crudos. No son bordes de diseño
       pero tampoco están en ningún token: decidir grosor al revisar.
-- [ ] **RadioField / CheckboxField** — `offset` 3px y **CalendarRoster**
-      `chip-padding-block` 2px: son espaciado fuera de escala (mínimo 4px).
+- [x] **RadioField** — el `offset` de 3px se retiró (2026-08-27): la marca se
+      alinea con la primera línea derivando `(altura de línea × cuerpo − lado
+      del radio) / 2`, sin número suelto.
+- [ ] **CheckboxField** — sigue con `checkbox-offset: 3px`, y **CalendarRoster**
+      con `chip-padding-block` 2px: espaciado fuera de escala (mínimo 4px).
 - [ ] Componentes que pasan de 4px a esquina recta (29 usos, ya repuntados):
       AppLauncher, Avatar (variante cuadrada), Calendar, CalendarPlanner,
       CalendarRoster, CommandPalette, ContextMenu, ConversationList,
@@ -271,12 +275,11 @@ DropdownField (nuevo). Derivados pendientes:
 
 ## Select / SelectField definitivos (2026-08-26) — derivados
 
-- [ ] **MultiSelect / AsyncSelect / AsyncMultiSelect**: sus tokens referenciaban
-      `select.padding-block`, `select.icon-size` y `select.focus-ring-offset`
-      (retirados); ahora llevan los valores que resolvían (raw `0.625rem`,
-      `-3px`). Al revisarlos: chevron por talla de icono y offset de foco por
-      calc como el Select. La altura ya está resuelta (ver «Tallas de
-      componente»).
+- [x] **MultiSelect / AsyncSelect / AsyncMultiSelect** — hecho (2026-08-27):
+      fuera `multi-select.icon-size` (0.625rem crudo) y `focus-ring-offset`
+      (-3px crudo). El chevron toma su talla del `Icon` como en el Select, el
+      offset del foco sale de un `calc` y el aire hasta el chevron es
+      `content-gap`.
 
 ## Input / InputField / Textarea / TextareaField definitivos (2026-08-26)
 
@@ -338,3 +341,50 @@ site-header), v16.0.5 (Base UI externo del build).
 - [ ] Web: sin tema oscuro todavía; cuando lo haya, `ThemeSwitcher` en `settings`.
 - [ ] Apps: el `NotificationButton` no se usa aún (el hub lleva la campana en
       el menú de usuario); cablearlo en `notifications` del shell.
+
+## Los 14 campos a definitivos (2026-08-27)
+
+Salen de `Por revisar/` los doce campos que quedaban —RadioField,
+SwitcherField, NumberInputField, InputPhoneField, OtpField, FileUploadField,
+MultiSelectField, AsyncSelectField, AsyncMultiSelectField, DatePickerField,
+DateTimeField, TimeField— más la revisión de contrato de SelectField y
+DropdownField, y los átomos que llevan: Radio, Switcher, Select, NumberInput,
+InputPhone, OtpInput, FileUpload, MultiSelect, AsyncSelect, AsyncMultiSelect,
+TimeSelect y DatePicker.
+
+- [x] Contrato común: `id` (con `useId` si falta), `label` + `labelHidden`,
+      `helperText`, `error` + `errorMessage` (un mensaje ya implica error),
+      `aria-describedby` / `aria-invalid`, `className` al contenedor,
+      `forwardRef` y `name`.
+- [x] Cada campo con story `Contrato` (`!dev`, con `play`), story de tallas y
+      story `ConReactHookForm` visible, montada con `FormProvider` + `FormField`
+      reales y un resolver que falla.
+- [x] MDX al día en los catorce (nuevos: SwitcherField, NumberInputField,
+      OtpField, FileUploadField, MultiSelectField, AsyncSelectField,
+      AsyncMultiSelectField, DatePickerField, DateTimeField, TimeField).
+- [x] El error lo marca el **control**, no el campo: `.select[aria-invalid]`,
+      `radio--error`, `switcher--error`, `multi-select--error` y hermanos.
+      Fuera los tokens que lo duplicaban (`select-field.error.border-color`,
+      `time-select.error-border-color`).
+- [x] Tokens propios para InputPhoneField, OtpField, AsyncSelectField y
+      AsyncMultiSelectField: dejan de tomar prestados los de `input-field` y
+      `multi-select-field`.
+
+Quedan con dudas, anotadas al cerrarlo:
+
+- [ ] **CheckboxField** no entró en la tanda (no estaba en la lista) y ahora es
+      el único campo de casilla sin `helperText` / `error` / `errorMessage` /
+      `className` / `forwardRef`, y el único cuyo texto sigue en `font-size.2`
+      en vez de `{text.font-size}`: en la superficie pública se lee un peldaño
+      por debajo del `RadioField`. Decidir si se le aplica el mismo contrato.
+- [ ] **AsyncSelect / AsyncMultiSelect** siguen sin tokens visuales propios:
+      consumen los de `multi-select.*`. Es deliberado (misma cara) pero rompe
+      la regla de «todo color pasa por un token del componente».
+- [ ] **FileUpload** no tiene tallas: `size` en `FileUploadField` solo mueve la
+      etiqueta. Si la zona de arrastre debe responder a la talla del formulario,
+      hay que decidir su medida.
+- [ ] **DatePicker / DateTimeField**: el input oculto que monta `name` lleva la
+      fecha en ISO local (`yyyy-mm-dd`) recortada de `toISOString()`, que es
+      UTC. Con husos al este del meridiano y horas tempranas puede desplazar un
+      día en un envío nativo. Sin impacto en react-hook-form, que guarda el
+      `Date`.

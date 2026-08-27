@@ -16,8 +16,22 @@ export interface AsyncMultiSelectProps {
     readOnly?: boolean;
     size?: 'sm' | 'md' | 'lg';
     id?: string;
+    /** Nombre del campo en el formulario: se monta un input oculto por valor elegido. */
+    name?: string;
+    /** Marca el estado de error: aplica la clase `async-multi-select--error` y `aria-invalid`. */
+    error?: boolean;
+    /** Se llama al salir del control (react-hook-form lo usa para validar). */
+    onBlur?: React.FocusEventHandler<HTMLInputElement>;
+    /** Se añade DESPUÉS de las clases propias del componente. */
+    className?: string;
+    /**
+     * Nombre accesible cuando el control va suelto. En un campo lo nombra la
+     * etiqueta (`htmlFor`), que este atributo pisaría: no lo pongas ahí.
+     */
     'aria-label'?: string;
     'aria-describedby'?: string;
+    /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
+    removeLabel?: (label: string) => string;
     /**
      * Texto mostrado cuando la búsqueda no devuelve opciones. Default: "Sin resultados"
      * (castellano). Es texto **visible**: una app multiidioma debe pasarlo traducido.
@@ -39,4 +53,8 @@ export interface AsyncMultiSelectProps {
      */
     container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
-export declare function AsyncMultiSelect({ onSearch, value, defaultValue, onValueChange, selectedOptions, placeholder, disabled, readOnly, size, id, 'aria-label': ariaLabel, 'aria-describedby': ariaDescribedby, emptyMessage, loadingLabel, container, }: AsyncMultiSelectProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Búsqueda con resultados asíncronos y varios valores. El `ref` va al
+ * `<input>` de búsqueda, que es lo que se enfoca.
+ */
+export declare const AsyncMultiSelect: import("react").ForwardRefExoticComponent<AsyncMultiSelectProps & import("react").RefAttributes<HTMLInputElement>>;

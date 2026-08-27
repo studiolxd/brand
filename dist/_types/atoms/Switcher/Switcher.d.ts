@@ -5,6 +5,8 @@ export interface SwitcherProps extends Omit<BaseSwitchRootProps, 'onCheckedChang
     /** Cambio de estado. Solo el estado: el DS no expone los detalles del evento. */
     onCheckedChange?: (checked: boolean) => void;
     size?: 'sm' | 'md' | 'lg';
+    /** Marca el estado de error: aplica la clase `switcher--error` y `aria-invalid`. */
+    error?: boolean;
     /** Valor enviado con el formulario cuando está activo. Default del navegador: `"on"`. */
     value?: string;
     className?: string;
