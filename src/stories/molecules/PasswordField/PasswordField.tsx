@@ -22,7 +22,7 @@ export interface PasswordFieldProps
   errorMessage?: string;
   /** Texto de ayuda propio del componente. */
   helperText?: string;
-  /** Una acción bajo el campo, a la derecha: «¿Olvidaste tu contraseña?» (un `Link` del router). */
+  /** Una acción bajo el campo: «¿Olvidaste tu contraseña?» (un `Link` del router). No es ayuda: enlace normal, a la izquierda, con su aire. */
   action?: React.ReactNode;
   /** Tamaño del campo. */
   size?: 'sm' | 'md' | 'lg';

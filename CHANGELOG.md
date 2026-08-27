@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.3.1
+
+### Corregido
+
+- `PasswordField.action` no es ayuda: enlace en cuerpo normal, a la izquierda,
+  con aire propio (`action-margin-block-start`); fuera `action-font-size`.
+
 ## v19.3.0
 
 ### Añadido

@@ -64,7 +64,7 @@ export const WithError: Story = {
   },
 };
 
-/** Con una acción bajo el campo: el enlace de recuperación, a la derecha. */
+/** Con una acción bajo el campo: el enlace de recuperación, como enlace normal y con su aire. */
 export const ConAccion: Story = {
   args: { label: 'Contraseña', labelHidden: false, action: <a href="#recuperar">¿Olvidaste tu contraseña?</a> },
 };
