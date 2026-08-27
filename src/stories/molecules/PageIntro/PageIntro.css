@@ -1,11 +1,15 @@
-/* Título y frase apilados con su aire; el Paragraph no aporta margen propio. */
+/* Título y frase apilados. El aire bajo el título lo pone el propio título
+   (`--text-heading-space-after`, en em: escala con su tamaño); aquí solo el
+   aire entre la frase y lo que venga detrás (children), que ya es cuerpo. */
 .page-intro {
   display: flex;
   flex-direction: column;
-  gap: var(--page-intro-gap);
 }
 
 .page-intro .paragraph {
   margin: 0;
 }
 
+.page-intro > :not(.heading) + * {
+  margin-block-start: var(--spacing-3);
+}

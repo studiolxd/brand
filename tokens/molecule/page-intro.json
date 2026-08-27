@@ -1,9 +1,0 @@
-{
-  "page-intro": {
-    "gap": {
-      "$value": "{spacing.3}",
-      "$type": "dimension",
-      "$description": "Aire entre el título y la frase de la cabecera de página"
-    }
-  }
-}

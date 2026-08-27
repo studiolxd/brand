@@ -22,6 +22,7 @@ $lxd-text-heading-font-family: "Google Sans Flex", system-ui, sans-serif; // Hea
 $lxd-text-heading-font-weight: 500; // Heading font weight
 $lxd-text-heading-color: #111e30; // Heading color
 $lxd-text-heading-letter-spacing: -0.02em; // Heading letter spacing
+$lxd-text-heading-space-after: 0.5em; // Aire bajo un título, en em: escala con su tamaño (nivel, size o superficie). Se anula si el título es el último hijo
 $lxd-text-h1-font-family: "Google Sans Flex", system-ui, sans-serif; // H1 font family
 $lxd-text-h1-font-size: 2.5rem; // H1 font size — paso 8 de la escala (40px en base, un peldaño más en la superficie pública)
 $lxd-text-h1-font-weight: 500; // H1 font weight

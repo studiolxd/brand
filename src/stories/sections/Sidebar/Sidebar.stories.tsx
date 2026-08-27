@@ -12,7 +12,7 @@ const meta: Meta<typeof Sidebar> = {
   component: Sidebar,
   parameters: { layout: 'fullscreen' },
   args: {
-    logo: <Logo size="sm" />,
+    logo: <a href="#" aria-label="Studio LXD"><Logo size="sm" /></a>,
     children: (
       <>
         <OrgSwitcher block current={orgs[0]} organizations={orgs} onOrgChange={() => {}} />

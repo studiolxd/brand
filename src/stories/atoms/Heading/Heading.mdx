@@ -7,7 +7,7 @@ import { headingBaseTokens, headingLevelTokens, headingDarkTokens } from "../../
 
 # Heading
 
-Encabezado semántico de `h1` a `h6`. El nivel dice qué es en el esquema del documento; el tamaño, por defecto, sale del nivel. Sin márgenes: el espacio entre bloques lo pone la maqueta, no el título.
+Encabezado semántico de `h1` a `h6`. El nivel dice qué es en el esquema del documento; el tamaño, por defecto, sale del nivel. Lleva su aire por debajo (`--text-heading-space-after`, en `em`: escala con el tamaño, sea por nivel, por `size` o por superficie) y ninguno por encima: el espacio *antes* de un título lo pone la maqueta. Si el título es el último hijo de su contenedor, no deja hueco.
 
 Un `<h2>` crudo se ve exactamente igual que `<Heading level={2}>`: el estilo de cada nivel lo da la base (`h1`…`h6` en `brand.css`, tokens `--text-h*`), y llega al HTML que no pasa por componentes. El componente solo añade lo que el elemento no puede hacer solo: desacoplar el tamaño del nivel.
 

@@ -43,9 +43,16 @@ body {
   color: var(--text-color);
 }
 
+/* El aire bajo un título es del título y escala con su tamaño (em): un h1
+   grande deja más aire que un h4 pequeño sin que el contenedor lo sepa.
+   El aire *antes* lo pone la maqueta. Un título solo (último hijo) no deja hueco. */
 h1, h2, h3, h4, h5, h6 {
-  margin-block: 0;
+  margin-block: 0 var(--text-heading-space-after);
   margin-inline: 0;
+}
+
+:is(h1, h2, h3, h4, h5, h6):last-child {
+  margin-block-end: 0;
 }
 
 h1 {

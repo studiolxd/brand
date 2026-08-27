@@ -27,7 +27,8 @@
       "font-family":    { "$value": "{font-family.sans}",         "$type": "string",    "$description": "Heading font family" },
       "font-weight":    { "$value": "{font-weight.emphasis}",       "$type": "number",    "$description": "Heading font weight" },
       "color":          { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Heading color" },
-      "letter-spacing": { "$value": "{letter-spacing.tight}",     "$type": "dimension", "$description": "Heading letter spacing" }
+      "letter-spacing": { "$value": "{letter-spacing.tight}",     "$type": "dimension", "$description": "Heading letter spacing" },
+      "space-after":    { "$value": "0.5em",                       "$type": "dimension", "$description": "Aire bajo un título, en em: escala con su tamaño (nivel, size o superficie). Se anula si el título es el último hijo" }
     },
 
     "h1": {

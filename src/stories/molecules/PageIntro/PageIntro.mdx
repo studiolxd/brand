@@ -1,21 +1,15 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as PageIntroStories from "./PageIntro.stories";
-import { TokenTable } from "../../foundations/TokenTable";
-import { pageIntroTokens } from "../../../tokens/molecules/page-intro";
 
 <Meta of={PageIntroStories} />
 
 # PageIntro
 
-La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace falta, una **entradilla** debajo —un `Paragraph size="large"`, un peldaño por encima del cuerpo— con el aire justo entre los dos (`gap`). Lo que va en `children` (más texto) ya es cuerpo normal. Si algo sigue a la cabecera en la misma columna (un enlace de vuelta), van juntos en un `Stack`, que pone el aire y decide el orden en móvil. Es un `header`. Abre acceso, registro, recuperación de contraseña… y cualquier página que empiece por su nombre; va como celda de `Columns` (título a la izquierda, contenido a la derecha) o directamente en el `Container`.
+La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace falta, una **entradilla** debajo —un `Paragraph size="large"`, un peldaño por encima del cuerpo—. El aire entre los dos lo pone el título (`--text-heading-space-after`, en em: crece con el tamaño del título), no la cabecera. Lo que va en `children` (más texto) ya es cuerpo normal. Si algo sigue a la cabecera en la misma columna (un enlace de vuelta), van juntos en un `Stack`, que pone el aire y decide el orden en móvil. Es un `header`. Abre acceso, registro, recuperación de contraseña… y cualquier página que empiece por su nombre; va como celda de `Columns` (título a la izquierda, contenido a la derecha) o directamente en el `Container`.
 
 <Canvas of={PageIntroStories.ConFrase} />
 <Canvas of={PageIntroStories.SoloTitulo} />
 <Canvas of={PageIntroStories.ConMasTexto} />
-
-## Tokens
-
-<TokenTable tokens={pageIntroTokens} />
 
 ## Props
 

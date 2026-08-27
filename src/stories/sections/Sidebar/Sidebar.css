@@ -40,6 +40,14 @@
   min-inline-size: 0;
 }
 .sidebar__header { padding-block-start: var(--sidebar-padding-block); }
+/* El logo suele ir enlazado a la home del producto: sin la línea que brand
+   pone a todo <a> (mismo criterio que `.site-header__logo`). */
+.sidebar__header a {
+  text-decoration: none;
+  padding-block-end: 0;
+  box-shadow: none;
+  color: inherit;
+}
 .sidebar__footer { padding-block-end: var(--sidebar-padding-block); }
 
 .sidebar__panel {

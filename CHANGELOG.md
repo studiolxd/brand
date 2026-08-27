@@ -7,6 +7,26 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.6.0
+
+### Cambiado
+
+- Títulos con su propio aire por debajo: `h1`…`h6` (y `Heading`) llevan
+  `margin-block-end: var(--text-heading-space-after)` (`0.5em`, escala con el
+  tamaño del título); se anula cuando el título es el último hijo. Antes iban
+  sin margen y cada contenedor ponía un `gap` fijo.
+- `PageIntro` deja el `gap`: el aire título→frase lo pone el título; entre la
+  frase y `children`, `--spacing-3`.
+
+### Corregido
+
+- `Sidebar`: el logo enlazado (`<a>` en el slot `logo`) ya no lleva la línea
+  de enlace, como en `SiteHeader`.
+
+### Eliminado
+
+- Token `--page-intro-gap` (y su export `tokens/molecules/page-intro`).
+
 ## v22.5.1
 
 ### Corregido
