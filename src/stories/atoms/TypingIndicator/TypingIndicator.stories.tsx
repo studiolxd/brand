@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { TypingIndicator } from './TypingIndicator';
 
 const meta = {
-  title: 'Por revisar/Atoms/TypingIndicator',
+  title: 'Atoms/TypingIndicator',
   component: TypingIndicator,
   parameters: { layout: 'centered' },
   args: {

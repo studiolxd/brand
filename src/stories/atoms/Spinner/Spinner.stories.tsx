@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { Spinner } from './Spinner';
 
 const meta: Meta<typeof Spinner> = {
-  title: 'Por revisar/Atoms/Spinner',
+  title: 'Atoms/Spinner',
   component: Spinner,
   parameters: { layout: 'centered' },
   argTypes: {

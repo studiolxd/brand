@@ -19,6 +19,7 @@ export interface TooltipProps {
     children: ReactNode;
     side?: 'top' | 'right' | 'bottom' | 'left';
     align?: 'start' | 'center' | 'end';
+    /** Separación en px entre disparador y bocadillo. Sin él se lee el token `--tooltip-offset` (`:root`) en runtime. */
     sideOffset?: number;
     open?: boolean;
     defaultOpen?: boolean;

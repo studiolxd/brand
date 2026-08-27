@@ -28,6 +28,8 @@ para breaking changes.
   `tooltip.offset` (`spacing.1`, 4px), leído en runtime sobre `<html>`; la prop
   `sideOffset` sigue como override. Doc MDX nueva y story «Cuatro lados» como
   contrato visual.
+- `Spinner`, `TypingIndicator` y `Tooltip` pasan a definitivos: salen de
+  «Por revisar» en Storybook (`Atoms/…`).
 
 ### Corregido
 

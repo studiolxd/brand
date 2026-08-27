@@ -4,7 +4,7 @@ import { Button } from '../Button/Button';
 import { Tooltip, TooltipProvider } from './Tooltip';
 
 const meta = {
-  title: 'Por revisar/Atoms/Tooltip',
+  title: 'Atoms/Tooltip',
   component: Tooltip,
   decorators: [
     (Story) => (

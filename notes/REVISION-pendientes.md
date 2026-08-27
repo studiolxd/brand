@@ -207,7 +207,9 @@ token). Curvas `in` y `linear` declaradas sin uso.
       contorno, 2026-08-27). Sigue siendo token propio crudo: un bucle no es una
       transición; decidir si merece un token de motion.
 - [ ] Transiciones con ms a mano en CSS: **CardSplit, PrevNextNav, Table,
-      AppLauncher, Modal, Tooltip, Skeleton, Popover** → `--motion-duration-*`.
+      AppLauncher, Modal, Skeleton, Popover** → `--motion-duration-*`.
+      (Tooltip ya bebe de `floating-panel.transition-*` → `motion.duration.fast`;
+      comprobado al pasarlo a definitivo, 2026-08-27.)
 
 ## Capas (2026-08-25)
 
