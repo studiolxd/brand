@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.11.1
+
+### Corregido
+
+- `Form`: el rótulo de las alternativas («O continúa con») no fija talla ni
+  color: es texto corriente y hereda los de la superficie (fuera los tokens
+  `alternatives-label-*`).
+
 ## v19.11.0
 
 ### Añadido

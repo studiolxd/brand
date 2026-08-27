@@ -66,10 +66,10 @@
   margin-block-start: var(--form-alternatives-margin-block-start);
 }
 
+/* El rótulo de las alternativas es texto corriente: hereda cuerpo y color de
+   la superficie, como un párrafo. */
 .form__alternatives-label {
   margin: 0;
-  font-size: var(--form-alternatives-label-font-size);
-  color: var(--form-alternatives-label-color);
 }
 
 /* Mensaje de éxito que sustituye al formulario (contacto, newsletter). */
