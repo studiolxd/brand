@@ -19,7 +19,7 @@ $lxd-input-transition-easing: ease; // Transition easing
 $lxd-input-bg: #ffffff; // Background
 $lxd-input-color: #111e30; // Text color
 $lxd-input-border-color: #111e30; // Border color
-$lxd-input-placeholder-color: #4a4a4a; // Placeholder text color
+$lxd-input-placeholder-color: #111e30; // Placeholder: tinta (prusia), no gris — es una pista que se lee
 $lxd-input-focus-border-color: #111e30; // Border color on focus
 $lxd-input-focus-ring-width: 2px; // Focus ring width
 $lxd-input-focus-ring-inset-offset: 1px; // Gap between border and focus ring
@@ -31,7 +31,7 @@ $lxd-input-disabled-border-color: #d0d0d0; // Border color when disabled
 $lxd-input-error-bg: #ffffff; // Error background
 $lxd-input-error-color: #111e30; // Error text color
 $lxd-input-error-border-color: #b30000; // Borde en error: el color de error (excepción a «bordes en prusia»)
-$lxd-input-error-placeholder-color: #4a4a4a; // Error placeholder color
+$lxd-input-error-placeholder-color: #111e30; // Placeholder en error: tinta
 $lxd-input-error-focus-border-color: #b30000; // Borde en foco+error
 $lxd-input-error-focus-ring-color: #b30000; // Error focus ring color
 $lxd-input-sm-padding-inline: 0.75rem; // Inline padding — sm

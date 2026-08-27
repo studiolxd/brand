@@ -20,7 +20,8 @@
   cursor: pointer;
 }
 .language-switcher__option:hover {
-  text-decoration: underline;
+  padding-block-end: var(--link-underline-offset);
+  box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
 }
 .language-switcher__option.language-switcher__option--current {
   font-weight: var(--language-switcher-list-current-font-weight);

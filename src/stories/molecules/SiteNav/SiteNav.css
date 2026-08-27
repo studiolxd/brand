@@ -49,7 +49,8 @@
 .site-nav__link:hover,
 .site-nav__label-link:hover {
   color: var(--site-nav-item-hover-color);
-  text-decoration: var(--site-nav-item-hover-text-decoration);
+  padding-block-end: var(--link-underline-offset);
+  box-shadow: inset 0 calc(-1 * var(--site-nav-item-hover-line-width)) 0 0 currentColor;
 }
 .site-nav__link.site-nav__link--current {
   font-weight: var(--site-nav-item-current-font-weight);

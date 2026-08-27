@@ -6,7 +6,7 @@
   --pagination-padding-inline: 0; /** Sin padding lateral */
   --pagination-btn-bg: rgba(0, 0, 0, 0); /** Fondo de los botones */
   --pagination-btn-hover-bg: rgba(0, 0, 0, 0); /** Fondo en hover — ghost style, sin cambio de fondo */
-  --pagination-btn-hover-text-decoration: underline; /** Decoración de texto en hover — estilo ghost */
+  --pagination-btn-hover-text-decoration: none; /** Decoración de texto en hover — estilo ghost */
   --pagination-btn-current-bg: rgba(0, 0, 0, 0); /** Fondo de la página activa — sin fondo */
   --pagination-btn-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
   --pagination-font-family: var(--font-family-sans); /** Font family */

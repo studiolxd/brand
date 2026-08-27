@@ -35,13 +35,13 @@
   --textarea-font-weight: var(--font-weight-default); /** Font weight */
   --textarea-color: var(--color-text-on-light); /** Text color */
   --textarea-border-color: var(--color-primary); /** Border color */
-  --textarea-placeholder-color: var(--color-text-placeholder-on-light); /** Placeholder text color */
+  --textarea-placeholder-color: var(--color-text-on-light); /** Placeholder: tinta (prusia), no gris — es una pista que se lee */
   --textarea-focus-border-color: var(--color-primary); /** Border color on focus */
   --textarea-focus-ring-inset-offset: var(--border-width-default); /** Gap between border and focus ring */
   --textarea-focus-ring-color: var(--color-primary); /** Focus ring color */
   --textarea-error-color: var(--color-text-on-light); /** Error text color */
   --textarea-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (excepción a «bordes en prusia») */
-  --textarea-error-placeholder-color: var(--color-text-placeholder-on-light); /** Error placeholder color */
+  --textarea-error-placeholder-color: var(--color-text-on-light); /** Placeholder en error: tinta */
   --textarea-error-focus-border-color: var(--color-error-text-on-light); /** Borde en foco+error */
   --textarea-error-focus-ring-color: var(--color-error-text-on-light); /** Error focus ring color */
   --textarea-focus-ring-width: var(--control-focus-ring-width); /** Focus ring width */
@@ -53,7 +53,7 @@ html.dark {
   --textarea-bg: var(--color-background-dark); /** Background — surface-dark */
   --textarea-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --textarea-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
-  --textarea-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder text color — surface-dark */
+  --textarea-placeholder-color: var(--color-text-on-dark); /** Placeholder — surface-dark: blanco */
   --textarea-focus-border-color: var(--color-text-on-dark); /** Border color on focus — surface-dark */
   --textarea-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --textarea-error-focus-ring-color: var(--color-error-text-on-dark); /** Error focus ring color — surface-dark */

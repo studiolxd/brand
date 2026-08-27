@@ -21,6 +21,7 @@ function Acceso({ socialProviders, magicLink, captcha, signupOpen, serverError, 
     <AuthPage title="Inicia sesión" description={signupOpen ? <>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link></> : undefined} surface={surface}>
       <Form
         size="lg"
+        blockActions
         onSubmit={(e) => e.preventDefault()}
         errors={serverError ? ['No hemos podido iniciar sesión. Comprueba el correo y la contraseña.'] : undefined}
         captcha={captcha ? <Captcha /> : undefined}

@@ -12,6 +12,7 @@ function Verificar({ sent, surface }: Args) {
     <AuthPage title="Revisa tu correo" description="Enviamos un enlace de verificación a ana@studiolxd.com" surface={surface}>
       <Form
         size="lg"
+        blockActions
         onSubmit={(e) => e.preventDefault()}
         actions={sent ? undefined : <Button variant="outline">Reenviar correo</Button>}
         links={<Link href="#acceso" icon="arrow-left">Iniciar sesión con otra cuenta</Link>}

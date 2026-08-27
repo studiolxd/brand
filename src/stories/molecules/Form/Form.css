@@ -41,11 +41,22 @@
   gap: var(--form-actions-gap);
   margin-block-start: var(--form-actions-margin-block-start);
 }
+.form__actions > * {
+  inline-size: 100%;
+}
 @media (min-width: 768px) /* --breakpoint-md */ {
-  .form__actions {
+  .form__actions:not(.form__actions--block) {
     flex-direction: row;
     justify-content: flex-end;
   }
+  .form__actions:not(.form__actions--block) > * {
+    inline-size: auto;
+  }
+}
+/* En bloque: apilados y a todo el ancho también en escritorio; las
+   alternativas (sociales) hacen lo mismo. */
+.form--block-actions .form__alternatives > .button {
+  inline-size: 100%;
 }
 
 .form__links {

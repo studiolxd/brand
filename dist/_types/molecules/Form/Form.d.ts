@@ -18,6 +18,8 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
     alternativesLabel?: string;
     /** Talla de todos los campos y botones (32/40/48): `lg` en superficies públicas, `md` dentro de las aplicaciones. */
     size?: FormSize;
+    /** Acciones en bloque: los botones a todo el ancho, apilados, también en escritorio (acceso, registro…). */
+    blockActions?: boolean;
 }
 /**
  * El formulario del sistema: solo estructura y aire. Campos apilados, los

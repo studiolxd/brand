@@ -13,7 +13,7 @@ function Recuperar({ step, surface }: Args) {
   if (step === 'restablecer') {
     return (
       <AuthPage title="Nueva contraseña" description="Elige una contraseña nueva para tu cuenta." surface={surface}>
-        <Form size="lg" onSubmit={(e) => e.preventDefault()} actions={<Button variant="primary" type="submit">Guardar contraseña</Button>}>
+        <Form size="lg" blockActions onSubmit={(e) => e.preventDefault()} actions={<Button variant="primary" type="submit">Guardar contraseña</Button>}>
           <PasswordField id="reset-password" label="Nueva contraseña" labelHidden={false} autoComplete="new-password" helperText="Al menos 8 caracteres, con una letra minúscula, una letra mayúscula, un número y un símbolo." />
           <PasswordField id="reset-confirm" label="Repite la contraseña" labelHidden={false} autoComplete="new-password" />
         </Form>
@@ -24,6 +24,7 @@ function Recuperar({ step, surface }: Args) {
     <AuthPage title="¿Olvidaste tu contraseña?" description="Ingresa tu correo y te enviaremos un enlace para restablecerla." surface={surface}>
       <Form
         size="lg"
+        blockActions
         onSubmit={(e) => e.preventDefault()}
         actions={step === 'pedir' ? <Button variant="primary" type="submit">Enviar enlace</Button> : undefined}
         links={<Link href="#acceso" icon="arrow-left">Volver a iniciar sesión</Link>}

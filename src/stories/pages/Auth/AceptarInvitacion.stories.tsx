@@ -15,21 +15,21 @@ function Invitacion({ state, socialProviders, surface }: Args) {
   if (state === 'invalida') {
     return (
       <AuthPage title="Invitación no disponible" description="Esta invitación no es válida, ha caducado o se envió a otra dirección de correo." surface={surface}>
-        <Form size="lg" links={<><Link href="#acceso">Iniciar sesión</Link><Link href="#registro">Crear cuenta</Link></>} />
+        <Form size="lg" blockActions links={<><Link href="#acceso">Iniciar sesión</Link><Link href="#registro">Crear cuenta</Link></>} />
       </AuthPage>
     );
   }
   if (state === 'registro-cerrado') {
     return (
       <AuthPage title="Tienes una invitación" description="El registro está deshabilitado actualmente. Si ya tienes una cuenta, inicia sesión para aceptar esta invitación." surface={surface}>
-        <Form size="lg" links={<Link href="#acceso">Iniciar sesión</Link>} />
+        <Form size="lg" blockActions links={<Link href="#acceso">Iniciar sesión</Link>} />
       </AuthPage>
     );
   }
   if (state === 'con-sesion') {
     return (
       <AuthPage title="Tienes una invitación" description="ana@studiolxd.com te ha invitado a unirte a Studio LXD." intro={ROL} surface={surface}>
-        <Form size="lg" onSubmit={(e) => e.preventDefault()} actions={<><Button variant="outline">Rechazar</Button><Button variant="primary">Aceptar invitación</Button></>} />
+        <Form size="lg" blockActions onSubmit={(e) => e.preventDefault()} actions={<><Button variant="outline">Rechazar</Button><Button variant="primary">Aceptar invitación</Button></>} />
       </AuthPage>
     );
   }
@@ -37,6 +37,7 @@ function Invitacion({ state, socialProviders, surface }: Args) {
     <AuthPage title="Tienes una invitación" description="ana@studiolxd.com te ha invitado a unirte a Studio LXD." intro={ROL} surface={surface}>
       <Form
         size="lg"
+        blockActions
         onSubmit={(e) => e.preventDefault()}
         actions={<Button variant="primary" type="submit">Crear cuenta y unirme</Button>}
         alternativesLabel={socialProviders.length ? 'O continúa con' : undefined}

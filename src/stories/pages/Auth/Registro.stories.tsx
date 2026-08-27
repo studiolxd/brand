@@ -16,6 +16,7 @@ function Registro({ socialProviders, captcha, terms, passwordError, surface }: A
     <AuthPage title="Crea una cuenta" description={<>¿Ya tienes una cuenta? <Link href="#acceso">Inicia sesión</Link></>} surface={surface}>
       <Form
         size="lg"
+        blockActions
         onSubmit={(e) => e.preventDefault()}
         captcha={captcha ? <Captcha /> : undefined}
         actions={<Button variant="primary" type="submit">Crear cuenta</Button>}

@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v19.12.0
+
+### Añadido
+
+- `Form` `blockActions`: acciones (y botones de `alternatives`) a todo el ancho y
+  apilados también en escritorio.
+
+### Cambiado
+
+- Sin `text-decoration: underline` en ningún enlace del sistema: el hover de
+  `SiteNav` (claro), `LanguageSwitcher` y `ThemeSwitcher` en lista y
+  `Pagination` usan la línea de los enlaces (`link.underline-*`);
+  `site-nav.item-hover-line-width` (0 en oscuro, donde cambia el color).
+- Placeholders en tinta: prusia sobre claro, blanco sobre oscuro (`input`,
+  `textarea`), también en error. Foundations → Colores actualizado.
+
 ## v19.11.1
 
 ### Corregido

@@ -19,6 +19,8 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
   alternativesLabel?: string;
   /** Talla de todos los campos y botones (32/40/48): `lg` en superficies públicas, `md` dentro de las aplicaciones. */
   size?: FormSize;
+  /** Acciones en bloque: los botones a todo el ancho, apilados, también en escritorio (acceso, registro…). */
+  blockActions?: boolean;
 }
 
 /**
@@ -30,10 +32,10 @@ export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
  * producto (`FormField` para react-hook-form).
  */
 export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
-  { errors, actions, links, alternatives, alternativesLabel, captcha, size, className, children, ...rest },
+  { errors, actions, links, alternatives, alternativesLabel, captcha, size, blockActions = false, className, children, ...rest },
   ref,
 ) {
-  const classes = ['form', size && size !== 'md' ? `form--${size}` : '', className].filter(Boolean).join(' ');
+  const classes = ['form', size && size !== 'md' ? `form--${size}` : '', blockActions ? 'form--block-actions' : '', className].filter(Boolean).join(' ');
   return (
     <FormSizeContext.Provider value={size}>
       <form ref={ref} className={classes} noValidate {...rest}>
@@ -46,7 +48,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
             ))}
           </ul>
         )}
-        {actions && <div className="form__actions">{actions}</div>}
+        {actions && <div className={['form__actions', blockActions ? 'form__actions--block' : ''].filter(Boolean).join(' ')}>{actions}</div>}
         {links && <div className="form__links">{links}</div>}
         {alternatives && (
           <div className="form__alternatives">

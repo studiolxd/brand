@@ -20,7 +20,7 @@ $lxd-textarea-transition-easing: ease; // Transition easing
 $lxd-textarea-bg: #ffffff; // Background
 $lxd-textarea-color: #111e30; // Text color
 $lxd-textarea-border-color: #111e30; // Border color
-$lxd-textarea-placeholder-color: #4a4a4a; // Placeholder text color
+$lxd-textarea-placeholder-color: #111e30; // Placeholder: tinta (prusia), no gris — es una pista que se lee
 $lxd-textarea-focus-border-color: #111e30; // Border color on focus
 $lxd-textarea-focus-ring-width: 2px; // Focus ring width
 $lxd-textarea-focus-ring-inset-offset: 1px; // Gap between border and focus ring
@@ -32,7 +32,7 @@ $lxd-textarea-disabled-border-color: #d0d0d0; // Border color when disabled
 $lxd-textarea-error-bg: #ffffff; // Error background
 $lxd-textarea-error-color: #111e30; // Error text color
 $lxd-textarea-error-border-color: #b30000; // Borde en error: el color de error (excepción a «bordes en prusia»)
-$lxd-textarea-error-placeholder-color: #4a4a4a; // Error placeholder color
+$lxd-textarea-error-placeholder-color: #111e30; // Placeholder en error: tinta
 $lxd-textarea-error-focus-border-color: #b30000; // Borde en foco+error
 $lxd-textarea-error-focus-ring-color: #b30000; // Error focus ring color
 $lxd-textarea-sm-padding-block: 0.5rem; // Block padding — variante sm

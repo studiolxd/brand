@@ -82,6 +82,11 @@ export const ConCasillaYDosAcciones: Story = {
   },
 };
 
+/** `blockActions`: botones y alternativas a todo el ancho, también en escritorio — el formulario de acceso. */
+export const AccionesEnBloque: Story = {
+  args: { ...Completo.args, size: 'lg', blockActions: true },
+};
+
 /** Sin campos: solo acciones y un enlace (reenviar un correo, aceptar o rechazar una invitación). */
 export const SoloAcciones: Story = {
   args: {

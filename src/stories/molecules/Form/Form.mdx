@@ -15,7 +15,7 @@ El formulario del sistema: **solo estructura y aire**. Apila los campos, pone de
 
 - `children`: los campos, apilados con `gap`. Opcional: un formulario puede ser solo acciones (reenviar un correo, aceptar o rechazar) — ver «Solo acciones».
 - `errors`: los errores que no cuelgan de un campo (el fallo del servidor). Se anuncian (`role="alert"`).
-- `actions`: la acción principal y, si hay, la secundaria. En móvil a todo el ancho; en escritorio a la derecha.
+- `actions`: la acción principal y, si hay, la secundaria. En móvil a todo el ancho; en escritorio a la derecha — o a todo el ancho y apilados también en escritorio con `blockActions` (acceso, registro), que alcanza también a los botones de `alternatives`.
 - `links`: enlaces secundarios. Solo la acción es enlace; si lleva texto delante, va en un `Paragraph`: `<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`.
 - `captcha`: el captcha (Turnstile, reCAPTCHA…), entre los campos y las acciones.
 - `alternatives` (+ `alternativesLabel`): otras formas de hacer lo mismo — acceso con Google, enlace mágico — separadas del bloque principal.
@@ -32,6 +32,7 @@ El formulario del sistema: **solo estructura y aire**. Apila los campos, pone de
 
 El `Form` no pinta nada: sobre `surface-dark` cada pieza voltea con sus propios tokens.
 
+<Canvas of={FormStories.AccionesEnBloque} />
 <Canvas of={FormStories.SoloAcciones} />
 <Canvas of={FormStories.ConCasillaYDosAcciones} />
 
