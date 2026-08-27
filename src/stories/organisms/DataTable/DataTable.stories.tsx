@@ -48,7 +48,7 @@ const data: Member[] = NAMES.map((name, index) => ({
 const MemberTable = DataTable<Member, unknown>;
 
 const meta = {
-  title: 'Por revisar/Organisms/DataTable',
+  title: 'Organisms/DataTable',
   component: MemberTable,
 } satisfies Meta<typeof MemberTable>;
 
@@ -112,4 +112,22 @@ export const PaginadaEnServidor: Story = {
       />
     );
   },
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    columns,
+    data,
+    searchColumnId: 'name',
+    searchPlaceholder: 'Buscar por nombre…',
+    pageSize: 5,
+  },
+};
+
+export const CargandoEnSuperficieOscura: Story = {
+  name: 'Cargando en superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { columns, data: [], isLoading: true, pageSize: 5 },
 };

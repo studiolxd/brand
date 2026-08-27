@@ -59,12 +59,27 @@ describe('DataTable', () => {
   it('ordena al activar una cabecera ordenable', async () => {
     const user = userEvent.setup();
     render(<DataTable columns={columns} data={data} pageSize={20} />);
-    await user.click(screen.getByRole('columnheader', { name: /Nombre/ }));
+    // La cabecera ordenable es un <button> dentro del <th>: el estado vive en
+    // el aria-sort de la celda y el nombre del botón es solo el rótulo.
+    const boton = screen.getByRole('button', { name: 'Nombre' });
+    expect(screen.getByRole('columnheader', { name: /Nombre/ })).toHaveAttribute(
+      'aria-sort',
+      'none',
+    );
+    await user.click(boton);
     const rows = screen.getAllByRole('row').slice(1);
     expect(within(rows[0]!).getByText('Persona 00')).toBeInTheDocument();
-    await user.click(screen.getByRole('columnheader', { name: /Nombre/ }));
+    expect(screen.getByRole('columnheader', { name: /Nombre/ })).toHaveAttribute(
+      'aria-sort',
+      'ascending',
+    );
+    await user.click(boton);
     const reversed = screen.getAllByRole('row').slice(1);
     expect(within(reversed[0]!).getByText('Persona 11')).toBeInTheDocument();
+    expect(screen.getByRole('columnheader', { name: /Nombre/ })).toHaveAttribute(
+      'aria-sort',
+      'descending',
+    );
   });
 
   it('muestra el estado vacío con su mensaje', () => {

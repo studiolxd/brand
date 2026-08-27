@@ -1,0 +1,93 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DataTableStories from "./DataTable.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { dataTableTokens } from "../../../tokens/molecules/data-table";
+
+<Meta of={DataTableStories} />
+
+# DataTable
+
+Tabla de datos ya montada: buscador, ordenación, estado de carga, estado vacío y
+paginación sobre el `Table`, el `Pagination`, el `EmptyState` y el `Skeleton` del DS. El
+comportamiento (ordenar, filtrar, paginar) lo aporta **TanStack Table**; el DS solo pone
+las piezas y la conducta accesible.
+
+Es la opción por defecto para un listado de administración. Si necesitas control total
+sobre el marcado —celdas agrupadas, cabeceras a medida, virtualización—, compón
+directamente con `Table`.
+
+## Con buscador y paginación en cliente
+
+La tabla recibe todas las filas y las pagina y filtra ella misma. `searchColumnId` dice
+sobre qué columna busca el buscador.
+
+<Canvas of={DataTableStories.Default} />
+
+## Con acciones en la barra
+
+`toolbar` se renderiza a la derecha del buscador.
+
+<Canvas of={DataTableStories.ConAcciones} />
+
+## Cargando
+
+`isLoading` sustituye las filas por `Skeleton`, tantas como diga `pageSize`. Las filas de
+esqueleto van `aria-hidden`: para un lector de pantalla la tabla está vacía mientras carga,
+no llena de ruido.
+
+<Canvas of={DataTableStories.Cargando} />
+
+## Sin resultados
+
+<Canvas of={DataTableStories.Vacia} />
+
+## Paginada en servidor
+
+Con `pagination`, `data` es **una página ya recortada** y los totales los pone el servidor;
+la tabla deja de paginar por su cuenta. En ese modo el buscador también debe ser
+controlado (`search`): `searchColumnId` solo filtraría la página actual.
+
+<Canvas of={DataTableStories.PaginadaEnServidor} />
+
+## Superficie oscura
+
+<Canvas of={DataTableStories.EnSuperficieOscura} />
+
+<Canvas of={DataTableStories.CargandoEnSuperficieOscura} />
+
+---
+
+## Selección de filas
+
+Cuando TanStack marca una fila como seleccionada, la tabla se lo pasa a `Table.Row` con la
+prop `selected`, que emite `.table__row--selected`. La selección se dice con **tinta y
+peso**, no con un fondo. El detalle está en la doc de `Table`.
+
+## Internacionalización
+
+`DataTable` no cablea ningún texto propio salvo el `"Buscar"` del buscador
+(`searchPlaceholder`) y el `"Sin resultados"` del estado vacío (`emptyMessage`). El resto
+se reenvía a sus piezas:
+
+| Prop | Va a | Contiene |
+| --- | --- | --- |
+| `headerLabels` | `Table.Header` | `sortableLabel`, `sortedAscLabel`, `sortedDescLabel`, `actionsLabel` |
+| `paginationLabels` | `Pagination` | `ariaLabel`, `pageLabel`, `previousLabel`, `nextLabel`, `pagesGroupLabel`, `pageSizeLabel`, `totalLabel`, `pageSizeOptions` |
+
+Sin ellas, cada pieza cae a sus castellanos por defecto. La convención completa está en
+**Foundations › Internacionalización**.
+
+---
+
+## Props
+
+<ArgTypes of={DataTableStories} />
+
+---
+
+## Tokens
+
+Solo dos medidas propias: el resto lo ponen `Table`, `Pagination`, `EmptyState` y
+`Skeleton` con sus tokens.
+
+<TokenTable tokens={dataTableTokens} />
