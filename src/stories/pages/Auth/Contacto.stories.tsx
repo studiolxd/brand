@@ -11,7 +11,7 @@ function Contacto({ captcha, sent, fieldError, surface }: Args) {
   return (
     <AuthPage title="Contacto" description="¿Tienes alguna pregunta? Envíanos un mensaje." surface={surface}>
       {sent ? (
-        <Form size="lg" success="Gracias — tu mensaje se ha enviado." />
+        <Form size="lg" success="¡Gracias por tu mensaje! Te responderemos lo más pronto posible." />
       ) : (
         <Form
           size="lg"

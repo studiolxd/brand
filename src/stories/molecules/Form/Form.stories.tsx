@@ -89,7 +89,7 @@ export const AccionesEnBloque: Story = {
 
 /** `success`: el mensaje que sustituye al formulario, como texto anunciado, sin caja. */
 export const Enviado: Story = {
-  args: { children: undefined, actions: undefined, success: 'Gracias — tu mensaje se ha enviado.', links: <Link href="#inicio">Volver al inicio</Link> },
+  args: { children: undefined, actions: undefined, success: '¡Gracias por tu mensaje! Te responderemos lo más pronto posible.', links: <Link href="#inicio">Volver al inicio</Link> },
 };
 
 /** Sin campos: solo acciones y un enlace (reenviar un correo, aceptar o rechazar una invitación). */
