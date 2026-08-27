@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as TagStories from "./Tag.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { tagTokens } from "../../../tokens/components/tag";
+import { tagBaseTokens, tagBrandTokens, tagSemanticTokens, tagDarkTokens } from "../../../tokens/components/tag";
 import { ContrastMatrix } from "../../foundations/ContrastMatrix";
 import { tagPairs } from "../../../tokens/colors";
 
@@ -9,26 +9,80 @@ import { tagPairs } from "../../../tokens/colors";
 
 # Tag
 
-Etiqueta en forma de píldora para clasificar o categorizar contenido. Tiene cinco variantes de color de marca (`primary`, `accent-1`, `accent-2`, `support-1`, `support-2`) y cinco variantes semánticas de estado (`neutral`, `info`, `warning`, `success`, `danger`). Se usa en tarjetas, listados de proyectos, filtros y estados. `neutral` es el único tag con fondo gris — no hay una variante "default" separada.
+Píldora que clasifica o etiqueta un contenido: la categoría de un proyecto, el
+estado de una tarea, el lenguaje de un bloque de código. Es una marca de lectura,
+no un control: no se pulsa, no se enfoca y no navega. Si hace falta pulsar,
+lo que quieres es un `Button`; si hace falta quitarlo de una lista, un control
+con su botón de cierre.
+
+<Canvas of={TagStories.PorDefecto} />
+
+## Anatomía
+
+Un `<span>` con relleno sólido, texto encima y esquinas de píldora
+(`border-radius.round`) — una de las dos formas redondas que admite el sistema,
+junto a los círculos. Todo lo demás en el sistema es recto.
+
+El texto es el que se le pasa por `children`; el componente reenvía el resto de
+props del `<span>` (`data-*`, `aria-*`, `id`…) y concatena `className` al final,
+de modo que un consumidor pueda posicionarlo sin pelearse con la especificidad.
 
 ## Variantes
 
-<Canvas of={TagStories.AllVariants} />
+Diez, en dos familias. Las de **marca** clasifican (a qué pertenece algo); las
+**semánticas** informan de un estado (en qué punto está).
+
+<Canvas of={TagStories.Marca} />
+
+<Canvas of={TagStories.Semanticas} />
+
+Sin `variant`, el tag es `neutral`. No hay una variante «default» aparte:
+`neutral` es el tag sin color de significado.
+
+<Canvas of={TagStories.EnUso} />
+
+## Superficie oscura
+
+`primary` e `info` se pintan en prusia, que es el fondo de la superficie oscura:
+ahí invierten relleno y texto por token (`surface-dark-*`). Las otras ocho usan
+colores que ya contrastan sobre cualquier fondo y no cambian.
+
+<Canvas of={TagStories.SuperficieOscura} />
 
 ---
 
 ## Tokens
 
-<TokenTable tokens={tagTokens} />
+### Caja y letra
 
-## Props
+<TokenTable tokens={tagBaseTokens} />
 
-<ArgTypes of={TagStories} />
+### Variantes de marca
+
+<TokenTable tokens={tagBrandTokens} />
+
+### Variantes semánticas
+
+<TokenTable tokens={tagSemanticTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={tagDarkTokens} />
 
 ## Accesibilidad
 
-Contraste de cada variante semántica, texto sobre su fondo. Mínimo AA (4,5:1); objetivo AAA (7:1).
+- **El color no puede ser el único portador del significado**: el texto del tag
+  dice el estado («En pausa»), y la variante solo lo refuerza.
+- Un tag no es interactivo: no lleva `role`, `tabIndex` ni manejadores. Si el
+  estado que muestra cambia en vivo, quien debe anunciarlo es la región viva que
+  lo contiene, no el tag.
+- Contraste de cada variante semántica, texto sobre su relleno. Mínimo AA
+  (4,5:1); objetivo AAA (7:1).
 
 {tagPairs.map((p) => (
   <ContrastMatrix key={p.label} foregroundLabel={p.label} foreground={p.ink} colors={[p.bg]} />
 ))}
+
+## Props
+
+<ArgTypes of={TagStories} />

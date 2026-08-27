@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Tag } from './Tag';
+import { Paragraph } from '../Paragraph/Paragraph';
+import { Stack } from '../Stack/Stack';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Por revisar/Atoms/Tag',
+  title: 'Atoms/Tag',
   component: Tag,
   parameters: {
     layout: 'padded',
@@ -28,47 +30,47 @@ const meta: Meta<typeof Tag> = {
 export default meta;
 type Story = StoryObj<typeof Tag>;
 
-/** Test: `className` del consumidor al final + `data-*`/`aria-*` passthrough. */
-export const PropPassthrough: Story = {
-  name: 'Test — className + data-* passthrough',
-  tags: ['!dev'],
+const fila: React.CSSProperties = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: 'var(--spacing-2)',
+  alignItems: 'center',
+};
+
+export const PorDefecto: Story = {};
+
+/** Las cinco variantes de marca: clasifican, no informan de un estado. */
+export const Marca: Story = {
   render: () => (
-    <Tag variant="primary" className="extra" data-slot="badge" aria-label="estado">
-      Activo
-    </Tag>
+    <div style={fila}>
+      <Tag variant="primary">Diseño instruccional</Tag>
+      <Tag variant="accent-1">Formación presencial</Tag>
+      <Tag variant="accent-2">Plataformas LMS</Tag>
+      <Tag variant="support-1">Consultoría</Tag>
+      <Tag variant="support-2">E-learning</Tag>
+    </div>
   ),
-  play: async ({ canvasElement }) => {
-    const tag = within(canvasElement).getByText('Activo');
-    await expect(tag).toHaveClass('tag', 'tag--primary', 'extra');
-    await expect(tag.className.trim().endsWith('extra')).toBe(true);
-    await expect(tag).toHaveAttribute('data-slot', 'badge');
-    await expect(tag).toHaveAttribute('aria-label', 'estado');
-  },
 };
 
-export const Primary: Story = {
-  args: { variant: 'primary', children: 'Diseño instruccional' },
-};
-
-export const Accent1: Story = {
-  args: { variant: 'accent-1', children: 'Formación presencial' },
-};
-
-export const Accent2: Story = {
-  args: { variant: 'accent-2', children: 'Plataformas LMS' },
-};
-
-export const Support1: Story = {
-  args: { variant: 'support-1', children: 'Consultoría' },
-};
-
-export const Support2: Story = {
-  args: { variant: 'support-2', children: 'E-learning' },
-};
-
-export const AllVariants: Story = {
+/** Las cinco variantes semánticas: dicen en qué estado está algo. */
+export const Semanticas: Story = {
+  name: 'Semánticas',
   render: () => (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+    <div style={fila}>
+      <Tag variant="neutral">Por hacer</Tag>
+      <Tag variant="info">En progreso</Tag>
+      <Tag variant="warning">En pausa</Tag>
+      <Tag variant="success">Completado</Tag>
+      <Tag variant="danger">Cancelado</Tag>
+    </div>
+  ),
+};
+
+/** Las diez variantes juntas. */
+export const TodasLasVariantes: Story = {
+  name: 'Todas las variantes',
+  render: () => (
+    <div style={fila}>
       <Tag variant="primary">Diseño instruccional</Tag>
       <Tag variant="accent-1">Formación presencial</Tag>
       <Tag variant="accent-2">Plataformas LMS</Tag>
@@ -83,48 +85,90 @@ export const AllVariants: Story = {
   ),
 };
 
-export const Neutral: Story = {
-  args: { variant: 'neutral', children: 'Por hacer' },
-};
-
-export const Info: Story = {
-  args: { variant: 'info', children: 'En progreso' },
-};
-
-export const Warning: Story = {
-  args: { variant: 'warning', children: 'En pausa' },
-};
-
-export const Success: Story = {
-  args: { variant: 'success', children: 'Completado' },
-};
-
-export const Danger: Story = {
-  args: { variant: 'danger', children: 'Cancelado' },
-};
-
-export const SemanticVariants: Story = {
+/** En uso: el mismo juego de variantes describiendo estados y prioridades. */
+export const EnUso: Story = {
+  name: 'En uso',
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div>
-        <p style={{ marginBottom: '8px', fontSize: '12px', color: '#767676' }}>Estados de proyecto</p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+    <Stack gap="lg">
+      <Stack>
+        <Paragraph size="small">Estados de proyecto</Paragraph>
+        <div style={fila}>
           <Tag variant="neutral">Planificación</Tag>
           <Tag variant="info">Activo</Tag>
           <Tag variant="warning">En pausa</Tag>
           <Tag variant="success">Completado</Tag>
           <Tag variant="danger">Cancelado</Tag>
         </div>
-      </div>
-      <div>
-        <p style={{ marginBottom: '8px', fontSize: '12px', color: '#767676' }}>Prioridades de tarea</p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+      </Stack>
+      <Stack>
+        <Paragraph size="small">Prioridades de tarea</Paragraph>
+        <div style={fila}>
           <Tag variant="neutral">Baja</Tag>
           <Tag variant="info">Media</Tag>
-          <Tag variant="danger">Alta</Tag>
+          <Tag variant="warning">Alta</Tag>
           <Tag variant="danger">Urgente</Tag>
         </div>
+      </Stack>
+    </Stack>
+  ),
+};
+
+/**
+ * Sobre superficie oscura, `primary` e `info` invierten relleno y texto: su
+ * prusia es el fondo de la superficie y el tag desaparecería. El resto de
+ * variantes no cambian.
+ */
+export const SuperficieOscura: Story = {
+  name: 'Superficie oscura',
+  parameters: { surface: 'dark' },
+  decorators: [
+    (Story) => (
+      <div className="surface-dark" style={{ padding: '2rem', background: 'var(--color-background-dark)' }}>
+        <Story />
       </div>
+    ),
+  ],
+  render: () => (
+    <div style={fila}>
+      <Tag variant="primary">Primaria</Tag>
+      <Tag variant="accent-1">Acento 1</Tag>
+      <Tag variant="accent-2">Acento 2</Tag>
+      <Tag variant="support-1">Soporte 1</Tag>
+      <Tag variant="support-2">Soporte 2</Tag>
+      <Tag variant="neutral">Neutral</Tag>
+      <Tag variant="info">Información</Tag>
+      <Tag variant="warning">Aviso</Tag>
+      <Tag variant="success">Éxito</Tag>
+      <Tag variant="danger">Peligro</Tag>
     </div>
   ),
+};
+
+/** Test: `className` del consumidor al final + `data-*`/`aria-*` reenviados. */
+export const Contrato: Story = {
+  name: 'Test — className + paso de props',
+  tags: ['!dev'],
+  render: () => (
+    <Tag variant="primary" className="extra" data-tono="marca" aria-label="estado">
+      Activo
+    </Tag>
+  ),
+  play: async ({ canvasElement }) => {
+    const tag = within(canvasElement).getByText('Activo');
+    await expect(tag.tagName).toBe('SPAN');
+    await expect(tag).toHaveClass('tag', 'tag--primary', 'extra');
+    await expect(tag.className.trim().endsWith('extra')).toBe(true);
+    await expect(tag).toHaveAttribute('data-tono', 'marca');
+    await expect(tag).toHaveAttribute('aria-label', 'estado');
+  },
+};
+
+/** Test: sin `variant` el tag es `neutral`. */
+export const ContratoPorDefecto: Story = {
+  name: 'Test — variante por defecto',
+  tags: ['!dev'],
+  render: () => <Tag>Por hacer</Tag>,
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByText('Por hacer')).toHaveClass('tag--neutral');
+  },
 };

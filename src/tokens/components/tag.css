@@ -3,40 +3,40 @@
  */
 
 :root {
-  --tag-font-family: var(--font-family-sans); /** Font family */
-  --tag-font-size: var(--font-size-1); /** 14px — UI label */
-  --tag-line-height: var(--line-height-none); /** Single-line */
-  --tag-padding-block: var(--spacing-1); /** Block (vertical) padding */
-  --tag-padding-inline: var(--spacing-3); /** Inline (horizontal) padding */
-  --tag-neutral-bg: var(--color-grey-darkest); /** Neutral semantic — background (AAA ~8.9:1 with white text) */
-  --tag-neutral-color: var(--color-white); /** Neutral semantic — white text on dark grey */
-  --tag-info-bg: var(--color-prussian); /** Info semantic — prussian background (AAA ~16.9:1 with white text) */
-  --tag-info-color: var(--color-white); /** Info semantic — white text on prussian */
-  --tag-warning-bg: var(--color-yellow); /** Warning semantic — brand yellow background (AAA ~10.3:1 with prussian text) */
-  --tag-warning-color: var(--color-prussian); /** Warning semantic — prussian text on yellow */
-  --tag-border-radius: var(--border-radius-round); /** Pill shape */
-  --tag-font-weight: var(--font-weight-emphasis); /** Medium weight */
-  --tag-primary-bg: var(--color-primary); /** Primary (prussian) background */
-  --tag-primary-color: var(--color-text-on-dark); /** Primary text — white on dark bg */
-  --tag-accent-1-bg: var(--color-accent-1); /** Accent 1 (lavender) background */
-  --tag-accent-1-color: var(--color-text-on-light); /** Accent 1 text — dark on light bg */
-  --tag-accent-2-bg: var(--color-accent-2); /** Accent 2 (yellow) background */
-  --tag-accent-2-color: var(--color-text-on-light); /** Accent 2 text — dark on light bg */
-  --tag-support-1-bg: var(--color-support-1); /** Support 1 (emerald) background */
-  --tag-support-1-color: var(--color-text-on-light); /** Support 1 text — dark on light bg */
-  --tag-support-2-bg: var(--color-support-2); /** Support 2 (cayenne) background */
-  --tag-support-2-color: var(--color-text-on-light); /** Support 2 text — dark on orange bg */
-  --tag-success-bg: var(--color-success-fill); /** Success semantic — dark green background (AAA ~8.9:1 with white text) */
-  --tag-success-color: var(--color-success-fill-text); /** Success semantic — white text on dark green */
-  --tag-danger-bg: var(--color-error-fill); /** Danger semantic — brand red background (AAA ~7.2:1 with white text) */
-  --tag-danger-color: var(--color-error-fill-text); /** Danger semantic — white text on red */
+  --tag-font-family: var(--font-family-sans); /** Tipografía */
+  --tag-font-size: var(--font-size-1); /** 14px — cuerpo de interfaz, no de prosa */
+  --tag-line-height: var(--line-height-none); /** Una línea */
+  --tag-padding-block: var(--spacing-1); /** Aire vertical */
+  --tag-padding-inline: var(--spacing-3); /** Aire horizontal */
+  --tag-neutral-bg: var(--color-grey-darkest); /** Neutral — relleno gris oscuro (AAA con texto blanco) */
+  --tag-border-radius: var(--border-radius-round); /** Píldora: el tag es una de las formas redondas del sistema */
+  --tag-font-weight: var(--font-weight-emphasis); /** Peso de énfasis */
+  --tag-primary-bg: var(--color-primary); /** Marca primaria (prusia) — relleno */
+  --tag-primary-color: var(--color-text-on-dark); /** Marca primaria — texto sobre el relleno */
+  --tag-accent-1-bg: var(--color-accent-1); /** Acento 1 (lavanda) — relleno */
+  --tag-accent-1-color: var(--color-text-on-light); /** Acento 1 — texto sobre el relleno */
+  --tag-accent-2-bg: var(--color-accent-2); /** Acento 2 (amarillo) — relleno */
+  --tag-accent-2-color: var(--color-text-on-light); /** Acento 2 — texto sobre el relleno */
+  --tag-support-1-bg: var(--color-support-1); /** Soporte 1 (esmeralda) — relleno */
+  --tag-support-1-color: var(--color-text-on-light); /** Soporte 1 — texto sobre el relleno */
+  --tag-support-2-bg: var(--color-support-2); /** Soporte 2 (cayena) — relleno */
+  --tag-support-2-color: var(--color-text-on-light); /** Soporte 2 — texto sobre el relleno */
+  --tag-neutral-color: var(--color-text-on-dark); /** Neutral — texto sobre el relleno */
+  --tag-info-bg: var(--color-primary); /** Información — relleno prusia (AAA con texto blanco) */
+  --tag-info-color: var(--color-text-on-dark); /** Información — texto sobre el relleno */
+  --tag-warning-bg: var(--color-accent-2); /** Aviso — relleno amarillo de marca (AAA con texto prusia) */
+  --tag-warning-color: var(--color-text-on-light); /** Aviso — texto sobre el relleno */
+  --tag-success-bg: var(--color-success-fill); /** Éxito — relleno universal del sistema */
+  --tag-success-color: var(--color-success-fill-text); /** Éxito — contenido sobre el relleno */
+  --tag-danger-bg: var(--color-error-fill); /** Peligro — relleno universal del sistema */
+  --tag-danger-color: var(--color-error-fill-text); /** Peligro — contenido sobre el relleno */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --tag-info-bg: var(--color-white); /** Info background — surface-dark (invertido: `info-bg` es prussian, igual que el fondo de la superficie, quedaría invisible) */
-  --tag-info-color: var(--color-prussian); /** Info text — surface-dark (invertido) */
-  --tag-primary-bg: var(--color-text-on-dark); /** Primary background — surface-dark (invertido: `primary-bg` es prussian, igual que el fondo de la superficie, quedaría invisible) */
-  --tag-primary-color: var(--color-background-dark); /** Primary text — surface-dark (invertido) */
+  --tag-primary-bg: var(--color-text-on-dark); /** Marca primaria, relleno — surface-dark (invertido: el prusia es el fondo de la superficie y el tag desaparecería) */
+  --tag-primary-color: var(--color-background-dark); /** Marca primaria, texto — surface-dark (invertido) */
+  --tag-info-bg: var(--color-text-on-dark); /** Información, relleno — surface-dark (invertido, misma razón que primary) */
+  --tag-info-color: var(--color-background-dark); /** Información, texto — surface-dark (invertido) */
 }
