@@ -2,21 +2,22 @@
   "alert": {
     "padding-block":        { "$value": "{spacing.4}",                  "$type": "dimension", "$description": "Padding vertical del alert (16px)" },
     "padding-inline":       { "$value": "{spacing.5}",                  "$type": "dimension", "$description": "Padding horizontal del alert (24px)" },
-    "border-radius":        { "$value": "{border-radius.default}",         "$type": "dimension", "$description": "Sin radio de esquinas" },
-    "border-width":         { "$value": "{border-width.default}",            "$type": "dimension", "$description": "Grosor del borde" },
+    "border-radius":        { "$value": "{border-radius.default}",      "$type": "dimension", "$description": "Sin radio de esquinas" },
+    "border-width":         { "$value": "{border-width.default}",       "$type": "dimension", "$description": "Grosor del borde" },
+    "gap":                  { "$value": "{spacing.3}",                  "$type": "dimension", "$description": "Aire entre el contenido y el botón de cierre (12px)" },
+    "content-gap":          { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Aire entre el título y la descripción, y entre los bloques de la descripción (8px)" },
 
-    "bg":                   { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo por defecto — prussian" },
-    "border-color":         { "$value": "{color.primary}",              "$type": "color",     "$description": "Borde igual al fondo — invisible" },
-    "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo por defecto — surface-dark. `bg` (prussian) coincide con el fondo de la superficie oscura y quedaría invisible sin este override; con borde blanco queda como contorno, igual que Button primary en dark." },
-    "surface-dark-border-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Borde por defecto — surface-dark" },
+    "bg":                   { "$value": "{color.primary}",              "$type": "color",     "$description": "Fondo por defecto — prussian. Es el mismo en las dos superficies: el relleno del alert es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`)" },
+    "border-color":         { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Borde por defecto — blanco. Dibuja el contorno también cuando la página ya es oscura y el relleno prusia coincide con el fondo" },
     "title-font-size":      { "$value": "{text.font-size}",             "$type": "dimension", "$description": "El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },
-    "title-font-weight":    { "$value": "{font-weight.emphasis}",         "$type": "number",    "$description": "Peso del título" },
+    "title-font-weight":    { "$value": "{font-weight.emphasis}",       "$type": "number",    "$description": "Peso del título" },
+    "title-line-height":    { "$value": "{line-height.snug}",           "$type": "number",    "$description": "Interlineado del título — el de un rótulo corto" },
     "title-color":          { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Texto blanco sobre fondo oscuro" },
     "description-font-size":{ "$value": "{text.font-size}",             "$type": "dimension", "$description": "La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },
+    "description-line-height": { "$value": "{text.line-height}",        "$type": "number",    "$description": "Interlineado de la descripción — el del cuerpo" },
     "description-color":    { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Descripción blanca sobre fondo oscuro — igual que el título" },
-    "close-color":          { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre — blanco" },
-    "close-hover-color":    { "$value": "{color.text.on-dark}",         "$type": "color",     "$description": "Color del botón de cierre en hover" },
-    "close-size":           { "$value": "{icon.size-sm}",               "$type": "dimension", "$description": "Tamaño del icono de cierre (16px)" },
+    "close-size":           { "$value": "{size-component.sm}",          "$type": "dimension", "$description": "Lado del botón de cierre — talla sm (32px), la mínima del sistema. El color del aspa y su hover los pone el Button ghost, que voltea con la superficie del relleno" },
+    "close-inset":          { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Distancia del botón de cierre a la esquina superior derecha (8px)" },
 
     "success-bg":                    { "$value": "{color.success-fill}", "$type": "color", "$description": "Fondo success — verde semántico" },
     "success-border-color":          { "$value": "{color.success-fill}", "$type": "color", "$description": "Borde igual al fondo success" },
@@ -31,8 +32,6 @@
     "warning-bg":                    { "$value": "{color.accent-2}",         "$type": "color", "$description": "Fondo warning — amarillo brand" },
     "warning-border-color":          { "$value": "{color.accent-2}",         "$type": "color", "$description": "Borde igual al fondo warning" },
     "warning-title-color":           { "$value": "{color.primary}",          "$type": "color", "$description": "Título prussian sobre fondo amarillo (contraste AAA)" },
-    "warning-description-color":     { "$value": "{color.primary}",          "$type": "color", "$description": "Descripción prussian sobre fondo amarillo" },
-    "warning-close-color":           { "$value": "{color.primary}",          "$type": "color", "$description": "Aspa de cierre oscura sobre fondo amarillo" },
-    "warning-close-hover-color":     { "$value": "{color.primary}",          "$type": "color", "$description": "Aspa de cierre oscura en hover" }
+    "warning-description-color":     { "$value": "{color.primary}",          "$type": "color", "$description": "Descripción prussian sobre fondo amarillo" }
   }
 }

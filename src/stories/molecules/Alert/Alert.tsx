@@ -6,21 +6,40 @@
    patrón es intencional (DX cliente + RSC-safe) y fast-refresh no aplica a source
    de librería. */
 import { forwardRef, useState } from 'react';
+import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
-import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Alert.css';
 
+export type AlertVariant = 'default' | 'success' | 'error' | 'warning';
+
 export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
-  variant?: 'default' | 'success' | 'error' | 'warning';
+  variant?: AlertVariant;
   /** Título del alert. **Opcional**: en modo composición usa `children` (p. ej. `<Alert.Title>`). */
   title?: string;
   description?: React.ReactNode;
   dismissible?: boolean;
   onDismiss?: () => void;
+  /**
+   * Etiqueta accesible del botón de cierre. Default: «Cerrar» (castellano).
+   * Una app multiidioma debe pasarla traducida.
+   */
+  closeLabel?: string;
 }
 
 export type AlertTitleProps = React.ComponentPropsWithoutRef<'p'>;
 export type AlertDescriptionProps = React.ComponentPropsWithoutRef<'div'>;
+
+/**
+ * Rol ARIA por variante. `error` y `warning` interrumpen (`alert`, live
+ * assertive); `default` y `success` informan sin interrumpir (`status`, live
+ * polite). El consumidor puede forzarlo con la prop `role`.
+ */
+const ROLE_BY_VARIANT: Record<AlertVariant, 'alert' | 'status'> = {
+  default: 'status',
+  success: 'status',
+  error: 'alert',
+  warning: 'alert',
+};
 
 /** Subparte de composición: título del alert. */
 export const AlertTitle = forwardRef<HTMLParagraphElement, AlertTitleProps>(function AlertTitle(
@@ -48,8 +67,9 @@ export const AlertDescription = forwardRef<HTMLDivElement, AlertDescriptionProps
  * - **Composición**: `children` (p. ej. `<Alert.Title>` / `<Alert.Description>` o nodos
  *   arbitrarios) cuando el consumidor gestiona el contenido.
  *
- * Extiende los atributos nativos de `<div>` y reenvía `{...rest}` al raíz (para
- * `role="status"`/`role="alert"`, `data-*`…). `role` por defecto `"alert"`.
+ * Extiende los atributos nativos de `<div>` y reenvía `{...rest}` al raíz. El
+ * `role` sale de la variante (`alert` en error/warning, `status` en el resto) y
+ * se puede forzar con la prop `role`.
  */
 const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   variant = 'default',
@@ -57,9 +77,10 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   description,
   dismissible = false,
   onDismiss,
+  closeLabel = 'Cerrar',
   className,
   children,
-  role = 'alert',
+  role,
   ...rest
 }, ref) {
   const [dismissed, setDismissed] = useState(false);
@@ -69,6 +90,9 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   const classes = [
     'alert',
     variant !== 'default' ? `alert--${variant}` : '',
+    // El relleno del alert es oscuro salvo en `warning` (amarillo): la raíz se
+    // declara superficie oscura para que lo que se componga dentro (enlaces,
+    // botones, el propio cierre) tome su cara clara.
     variant !== 'warning' ? 'surface-dark' : '',
     dismissible ? 'alert--dismissible' : '',
     className ?? '',
@@ -85,17 +109,23 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   }
 
   return (
-    <div ref={ref} role={role} className={classes} {...rest}>
+    <div ref={ref} role={role ?? ROLE_BY_VARIANT[variant]} className={classes} {...rest}>
       <div className="alert__content">
         {title && <p className="alert__title">{title}</p>}
         {description && <div className="alert__description">{description}</div>}
         {children}
       </div>
       {dismissible && (
-        <button type="button" className="alert__close" onClick={handleDismiss}>
+        <Button
+          variant="ghost"
+          size="sm"
+          iconOnly
+          className="alert__close"
+          aria-label={closeLabel}
+          onClick={handleDismiss}
+        >
           <Icon name="close" size="sm" />
-          <VisuallyHidden>Cerrar</VisuallyHidden>
-        </button>
+        </Button>
       )}
     </div>
   );

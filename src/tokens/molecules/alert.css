@@ -5,18 +5,21 @@
 :root {
   --alert-padding-block: var(--spacing-4); /** Padding vertical del alert (16px) */
   --alert-padding-inline: var(--spacing-5); /** Padding horizontal del alert (24px) */
-  --alert-close-size: var(--icon-size-sm); /** Tamaño del icono de cierre (16px) */
+  --alert-gap: var(--spacing-3); /** Aire entre el contenido y el botón de cierre (12px) */
+  --alert-content-gap: var(--spacing-2); /** Aire entre el título y la descripción, y entre los bloques de la descripción (8px) */
+  --alert-title-line-height: var(--line-height-snug); /** Interlineado del título — el de un rótulo corto */
+  --alert-close-size: var(--size-component-sm); /** Lado del botón de cierre — talla sm (32px), la mínima del sistema. El color del aspa y su hover los pone el Button ghost, que voltea con la superficie del relleno */
+  --alert-close-inset: var(--spacing-2); /** Distancia del botón de cierre a la esquina superior derecha (8px) */
   --alert-border-radius: var(--border-radius-default); /** Sin radio de esquinas */
   --alert-border-width: var(--border-width-default); /** Grosor del borde */
-  --alert-bg: var(--color-primary); /** Fondo por defecto — prussian */
-  --alert-border-color: var(--color-primary); /** Borde igual al fondo — invisible */
+  --alert-bg: var(--color-primary); /** Fondo por defecto — prussian. Es el mismo en las dos superficies: el relleno del alert es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`) */
+  --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — blanco. Dibuja el contorno también cuando la página ya es oscura y el relleno prusia coincide con el fondo */
   --alert-title-font-size: var(--text-font-size); /** El título hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --alert-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
   --alert-title-color: var(--color-text-on-dark); /** Texto blanco sobre fondo oscuro */
   --alert-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
+  --alert-description-line-height: var(--text-line-height); /** Interlineado de la descripción — el del cuerpo */
   --alert-description-color: var(--color-text-on-dark); /** Descripción blanca sobre fondo oscuro — igual que el título */
-  --alert-close-color: var(--color-text-on-dark); /** Color del botón de cierre — blanco */
-  --alert-close-hover-color: var(--color-text-on-dark); /** Color del botón de cierre en hover */
   --alert-success-bg: var(--color-success-fill); /** Fondo success — verde semántico */
   --alert-success-border-color: var(--color-success-fill); /** Borde igual al fondo success */
   --alert-success-title-color: var(--color-success-fill-text); /** Título blanco sobre fondo success */
@@ -29,13 +32,4 @@
   --alert-warning-border-color: var(--color-accent-2); /** Borde igual al fondo warning */
   --alert-warning-title-color: var(--color-primary); /** Título prussian sobre fondo amarillo (contraste AAA) */
   --alert-warning-description-color: var(--color-primary); /** Descripción prussian sobre fondo amarillo */
-  --alert-warning-close-color: var(--color-primary); /** Aspa de cierre oscura sobre fondo amarillo */
-  --alert-warning-close-hover-color: var(--color-primary); /** Aspa de cierre oscura en hover */
-}
-
-.surface-dark,
-[data-theme="dark"],
-html.dark {
-  --alert-bg: var(--color-background-dark); /** Fondo por defecto — surface-dark. `bg` (prussian) coincide con el fondo de la superficie oscura y quedaría invisible sin este override; con borde blanco queda como contorno, igual que Button primary en dark. */
-  --alert-border-color: var(--color-text-on-dark); /** Borde por defecto — surface-dark */
 }

@@ -24,6 +24,7 @@
   --text-size-10: var(--site-shell-heading-size-10);
   --alert-title-font-size: var(--text-font-size);
   --alert-description-font-size: var(--text-font-size);
+  --alert-description-line-height: var(--text-line-height);
   --code-block-font-size: var(--text-paragraph-small-font-size);
   --description-list-value-font-size: var(--text-font-size);
   --description-list-value-line-height: var(--text-line-height);

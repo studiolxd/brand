@@ -1,0 +1,82 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AlertStories from "./Alert.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { alertBaseTokens, alertVariantTokens } from "../../../tokens/components/alert";
+
+<Meta of={AlertStories} />
+
+# Alert
+
+Un aviso **dentro del flujo de la página**: acompaña a lo que el usuario está mirando y se queda ahí hasta que la situación cambia. No interrumpe ni se va solo.
+
+- Para un mensaje **efímero**, que aparece tras una acción y desaparece, usa `Toast`.
+- Para algo que **exige una decisión** antes de seguir, `Modal`.
+- Para el error de un campo, el `errorMessage` del propio campo.
+
+<Canvas of={AlertStories.PorDefecto} />
+
+## Anatomía
+
+Un rectángulo de relleno sólido con borde de 1px y esquina recta, y dentro:
+
+- **Título** (`title` o `<Alert.Title>`): el rótulo del aviso, en peso de énfasis.
+- **Descripción** (`description` o `<Alert.Description>`): el detalle, opcional. Apila sus hijos, así que admite un enlace o un botón de acción.
+- **Cierre** (`dismissible`): un `Button` ghost a talla `sm` en la esquina superior derecha.
+
+Los dos modos se combinan: `title`/`description` para el caso simple, `children` cuando el consumidor arma el contenido.
+
+## Intenciones
+
+<Canvas of={AlertStories.Variantes} />
+
+`default` es prusia con borde blanco; `success` y `error` toman el relleno sólido de feedback (`*-fill`) con su texto (`*-fill-text`); `warning` es el amarillo de marca con tinta prusia. Solo `warning` lee en claro: en las otras tres la raíz se declara `.surface-dark`, así que lo que se componga dentro —enlaces, botones, el propio cierre— toma su cara clara sin que el consumidor haga nada.
+
+<Canvas of={AlertStories.ConDescripcion} />
+
+<Canvas of={AlertStories.SoloDescripcion} />
+
+## Cerrable
+
+<Canvas of={AlertStories.Cerrable} />
+
+Sin `onDismiss`, el alert se oculta solo al pulsar el aspa. Con `onDismiss`, no se oculta nada: manda el consumidor (para animar la salida, quitar el aviso de una lista o registrar el descarte).
+
+## Composición
+
+<Canvas of={AlertStories.Composicion} />
+
+## Superficie oscura
+
+<Canvas of={AlertStories.SuperficieOscura} />
+
+El relleno es autocontenido: no hay tokens `surface-dark-*`, el alert se ve igual sobre una página clara y sobre una oscura. El borde blanco del `default` existe precisamente para eso — cuando la página ya es prusia, es lo que dibuja el contorno.
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={alertBaseTokens} />
+
+### Intenciones
+
+<TokenTable tokens={alertVariantTokens} />
+
+El color del aspa y su hover no son tokens del alert: los pone `Button` ghost, que voltea con la superficie del relleno.
+
+## Accesibilidad
+
+- **Rol por intención**: `error` y `warning` son `role="alert"` (live assertive, interrumpe al lector de pantalla); `default` y `success`, `role="status"` (live polite, espera turno). La prop `role` lo fuerza cuando el consumidor sabe más que el componente.
+- Un alert que ya está en la página al cargarla **no se anuncia**: las regiones live solo anuncian cambios. Si el aviso aparece como respuesta a una acción, móntalo en ese momento.
+- El **cierre** es un `<button>` con nombre accesible (`closeLabel`, «Cerrar» por defecto), de 32px de lado —la talla mínima del sistema— y con el anillo de foco del `Button`.
+- **Contraste**: texto blanco sobre los rellenos prusia, verde y rojo; tinta prusia sobre el amarillo. Los cuatro pares pasan AA holgado; el amarillo con prusia, AAA.
+- El alert **no es un `Modal`**: no atrapa el foco ni bloquea la página.
+
+## Props
+
+<ArgTypes of={AlertStories} />
+
+## Internacionalización
+
+`closeLabel` traduce el nombre accesible del cierre. El resto del texto lo pone el consumidor. Ver **Foundations › Internacionalización**.
