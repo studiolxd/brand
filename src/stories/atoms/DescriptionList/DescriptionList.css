@@ -1,10 +1,19 @@
 .description-list {
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 1fr;
   border-width: var(--description-list-border-width);
   border-style: var(--description-list-border-style);
   border-color: var(--description-list-border-color);
   margin: 0;
+}
+
+/* Por debajo de `md` el término va apilado sobre su descripción: en una sola
+   columna, un `max-content 1fr` aprieta la columna del valor con términos
+   largos. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .description-list {
+    grid-template-columns: max-content 1fr;
+  }
 }
 
 .description-list > dt,
@@ -12,12 +21,14 @@
   padding-block: var(--description-list-cell-padding-block);
   padding-inline: var(--description-list-cell-padding-inline);
   margin: 0;
+}
+
+.description-list > dd {
   border-block-end-width: var(--description-list-border-width);
   border-block-end-style: var(--description-list-border-style);
   border-block-end-color: var(--description-list-border-color);
 }
 
-.description-list > dt:last-of-type,
 .description-list > dd:last-of-type {
   border-block-end: none;
 }
@@ -25,15 +36,30 @@
 .description-list > dt {
   display: flex;
   align-items: center;
-  border-inline-end-width: var(--description-list-border-width);
-  border-inline-end-style: var(--description-list-border-style);
-  border-inline-end-color: var(--description-list-border-color);
   font-family: var(--description-list-term-font-family);
   font-size: var(--description-list-term-font-size);
   font-weight: var(--description-list-term-font-weight);
   line-height: var(--description-list-term-line-height);
   letter-spacing: var(--description-list-term-letter-spacing);
   color: var(--description-list-term-color);
+}
+
+/* En dos columnas, término y descripción comparten fila: el separador de fila
+   lo pinta también el término (no solo la descripción), y el término gana
+   además el borde vertical que lo separa de su valor. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .description-list > dt {
+    border-block-end-width: var(--description-list-border-width);
+    border-block-end-style: var(--description-list-border-style);
+    border-block-end-color: var(--description-list-border-color);
+    border-inline-end-width: var(--description-list-border-width);
+    border-inline-end-style: var(--description-list-border-style);
+    border-inline-end-color: var(--description-list-border-color);
+  }
+
+  .description-list > dt:last-of-type {
+    border-block-end: none;
+  }
 }
 
 .description-list > dd {
