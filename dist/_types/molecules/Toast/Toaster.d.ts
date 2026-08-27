@@ -1,9 +1,9 @@
+import { type ToastIntent } from './toast';
 import './Toast.css';
+export type ToastPosition = 'bottom-right' | 'bottom-left' | 'bottom-center' | 'top-right' | 'top-left' | 'top-center';
 export interface ToasterProps {
     /** Esquina de la ventana donde se monta la pila. Default: `bottom-right`. */
-    position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'top-center' | 'bottom-center';
-    /** Tema del toaster, para sincronizar con el tema de la app (p. ej. next-themes). */
-    theme?: 'light' | 'dark' | 'system';
+    position?: ToastPosition;
     /**
      * Nombre accesible de la región de notificaciones. Default: «Notificaciones»
      * (castellano). Una app multiidioma debe pasarlo traducido.
@@ -22,7 +22,7 @@ export interface ToasterProps {
      * `Infinity` (o `duration: Infinity` en la llamada) lo deja fijo.
      */
     duration?: number;
-    /** Aire entre avisos apilados, en píxeles. Default: 8 (`spacing.2`). */
+    /** Aire entre avisos desplegados, en píxeles. Default: 8 (`toast.gap`). */
     gap?: number;
     /** Número de avisos visibles a la vez; el resto espera turno. Default: 3. */
     visibleToasts?: number;
@@ -38,4 +38,5 @@ export interface ToasterProps {
  * `alert.*`—; lo propio del toast es la capa, la posición, el apilado y el
  * auto-cierre (`toast.*`).
  */
-export declare function Toaster({ position, theme, containerAriaLabel, closeLabel, closeButton, duration, gap, visibleToasts, expand, }: ToasterProps): import("react/jsx-runtime").JSX.Element;
+export declare function Toaster({ position, containerAriaLabel, closeLabel, closeButton, duration, gap, visibleToasts, expand, }: ToasterProps): import("react/jsx-runtime").JSX.Element;
+export type { ToastIntent };
