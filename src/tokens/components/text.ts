@@ -21,6 +21,4 @@ export const paragraphSizeTokens = all.filter(t =>
 
 export const listBaseTokens = all.filter(t => t.name.startsWith('--text-list-'));
 
-export const listDarkTokens: Token[] = [
-  { name: '--text-list-dark-color', value: 'var(--color-text-on-dark)', description: 'Color del texto sobre fondo oscuro' },
-];
+export const listDarkTokens = all.filter(t => t.name.startsWith('--text-list-surface-dark-'));

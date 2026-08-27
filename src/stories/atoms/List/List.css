@@ -8,9 +8,13 @@
   color: var(--text-list-color);
   letter-spacing: var(--text-list-letter-spacing);
   padding-inline-start: var(--text-list-padding-inline-start);
-  display: flex;
-  flex-direction: column;
-  gap: var(--text-list-gap);
+}
+
+/* El aire entre ítems es propiedad del ítem, no del contenedor: así una lista
+   anidada no hereda un `gap` de flex y las viñetas siguen siendo marcas de
+   lista en todos los navegadores. */
+.list > li + li {
+  margin-block-start: var(--text-list-gap);
 }
 
 .list.list--unordered {
@@ -25,4 +29,3 @@
   list-style-type: none;
   padding-inline-start: 0;
 }
-

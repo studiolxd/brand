@@ -3,6 +3,7 @@ import './index.css';
 
 // ─── Atoms ───────────────────────────────────────────────────
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './stories/atoms/Accordion/Accordion';
+export type { AccordionProps, AccordionItemProps, AccordionTriggerProps, AccordionContentProps } from './stories/atoms/Accordion/Accordion';
 export { AsyncMultiSelect } from './stories/atoms/AsyncMultiSelect/AsyncMultiSelect';
 export type { AsyncMultiSelectOption, AsyncMultiSelectProps } from './stories/atoms/AsyncMultiSelect/AsyncMultiSelect';
 export { AsyncSelect } from './stories/atoms/AsyncSelect/AsyncSelect';
@@ -46,6 +47,7 @@ export type { LabelProps } from './stories/atoms/Label/Label';
 export { Link } from './stories/atoms/Link/Link';
 export type { LinkProps } from './stories/atoms/Link/Link';
 export { List } from './stories/atoms/List/List';
+export type { ListProps, ListType } from './stories/atoms/List/List';
 export { Logo } from './stories/atoms/Logo/Logo';
 export type { LogoProps, LogoSize } from './stories/atoms/Logo/Logo';
 export { Paragraph } from './stories/atoms/Paragraph/Paragraph';

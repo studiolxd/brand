@@ -22,7 +22,7 @@ interface AccordionMultipleProps {
   collapsible?: never;
 }
 
-type AccordionRootProps = (AccordionSingleProps | AccordionMultipleProps) & {
+export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & {
   id?: string;
   disabled?: boolean;
   className?: string;
@@ -36,7 +36,7 @@ function toArray(value: string | string[] | undefined): string[] | undefined {
   return value === '' ? [] : [value];
 }
 
-export function Accordion({ className, children, id, disabled, ...props }: AccordionRootProps) {
+export function Accordion({ className, children, id, disabled, ...props }: AccordionProps) {
   const multiple = props.type === 'multiple';
   const collapsible = props.type === 'single' ? props.collapsible ?? true : true;
   const openValue = props.value;
@@ -69,7 +69,7 @@ export function Accordion({ className, children, id, disabled, ...props }: Accor
 }
 
 /* ─── Item ───────────────────────────────────────────────── */
-interface AccordionItemProps {
+export interface AccordionItemProps {
   value: string;
   disabled?: boolean;
   className?: string;
@@ -88,7 +88,7 @@ export function AccordionItem({ className, children, ...props }: AccordionItemPr
 }
 
 /* ─── Trigger ────────────────────────────────────────────── */
-interface AccordionTriggerProps {
+export interface AccordionTriggerProps {
   className?: string;
   /** Tamaño del chevron indicador. */
   chevronSize?: 'sm' | 'md' | 'lg';
@@ -109,7 +109,7 @@ export function AccordionTrigger({ className, chevronSize = 'sm', children }: Ac
 }
 
 /* ─── Content ────────────────────────────────────────────── */
-interface AccordionContentProps {
+export interface AccordionContentProps {
   className?: string;
   children: ReactNode;
 }

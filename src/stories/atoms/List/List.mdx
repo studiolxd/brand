@@ -7,33 +7,74 @@ import { listBaseTokens, listDarkTokens } from "../../../tokens/components/text"
 
 # List
 
-Lista con viñetas (`ul`), numerada (`ol`) o sin decoración (`plain`). Hereda los estilos tipográficos del párrafo. El espacio entre ítems y la sangría izquierda están controlados por tokens. Sin márgenes por defecto.
+Una lista de prosa: enumeraciones dentro de un texto, pasos de un proceso,
+enlaces de un pie. Viste el elemento con la tipografía del cuerpo y deja los
+`<li>` a quien la usa.
 
-La variante `plain` elimina viñetas y sangría, ideal para listas de navegación, enlaces sociales u otros contextos donde la semántica de lista es necesaria pero la decoración visual no.
+No es un componente de interfaz: los listados con filas seleccionables, iconos o
+acciones son otra cosa (`Menu`, `SidebarNav`, `ConversationList`, `Table`).
 
-## Unordered
+<Canvas of={ListStories.PorDefecto} />
 
-<Canvas of={ListStories.Unordered} />
+## Anatomía
 
-## Ordered
+Un `<ul>` o un `<ol>` con la tipografía del párrafo, la sangría y el aire entre
+ítems por token. El aire lo lleva **el ítem** (`li + li`), no un `gap` del
+contenedor: así una lista anidada conserva su propio ritmo y las viñetas siguen
+siendo marcas de lista en todos los navegadores.
 
-<Canvas of={ListStories.Ordered} />
+## Tipos
 
-## Plain
+| Tipo | Elemento | Cuándo |
+|---|---|---|
+| `unordered` (por defecto) | `<ul>` con viñetas | El orden no significa nada |
+| `ordered` | `<ol>` numerada | Los pasos van en ese orden |
+| `plain` | `<ul>` sin marcas ni sangría | Sigue siendo una lista al escucharla, pero la decoración sobra |
 
-<Canvas of={ListStories.Plain} />
+<Canvas of={ListStories.Numerada} />
+
+<Canvas of={ListStories.SinDecoracion} />
+
+`plain` es la que se usa para listas de navegación, enlaces sociales o cualquier
+sitio donde la semántica de lista importa y las viñetas estorban.
+
+## Anidada
+
+Una lista dentro de un `<li>` mantiene su sangría y su aire.
+
+<Canvas of={ListStories.Anidada} />
+
+## Superficie oscura
+
+El color del texto sale de `text.list.color`, que tiene par oscuro: basta con que
+un ancestro lleve `.surface-dark` (o la raíz `[data-theme="dark"]` / `html.dark`).
+
+<Canvas of={ListStories.SuperficieOscura} />
 
 ---
 
 ## Tokens
 
-### Base
+Los tokens de la lista viven en el grupo de texto (`text.list.*`), porque la
+lista es prosa: hereda cuerpo, interlineado y color del párrafo y solo añade su
+sangría y su aire.
 
 <TokenTable tokens={listBaseTokens} />
 
-### Oscuro
+### Superficie oscura
 
 <TokenTable tokens={listDarkTokens} />
+
+## Accesibilidad
+
+- El elemento correcto por tipo: `<ol>` cuando el orden importa, `<ul>` cuando
+  no. Un lector de pantalla anuncia el número de elementos y la posición dentro
+  de la lista, y eso solo funciona si `<li>` cuelga directamente de la lista.
+- `plain` **no** quita la semántica: solo la decoración. Sigue siendo una lista
+  al escucharla, que es justo la razón de usarla para navegación o pies.
+- Una lista de enlaces no necesita `role="list"` a mano; sí necesita un
+  `aria-label` cuando hay varias listas de navegación en la misma página y hay
+  que distinguirlas.
 
 ## Props
 
