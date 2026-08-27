@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.5.1
+
+### Corregido
+
+- `Stack`: las piezas miden lo suyo (`align-items: flex-start`); un enlace de
+  vuelta no se estiraba a todo el ancho de la columna.
+
 ## v22.5.0
 
 ### Añadido

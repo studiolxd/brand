@@ -42,6 +42,9 @@ export const Contrato: Story = {
     await expect(stack).toHaveClass('stack--mobile-reverse');
     // el DOM no cambia: la cabecera sigue siendo la primera
     await expect(stack.firstElementChild?.tagName).toBe('HEADER');
+    // cada pieza mide lo suyo: el enlace no ocupa todo el ancho
+    const link = stack.querySelector('a') as HTMLElement;
+    await expect(link.getBoundingClientRect().width).toBeLessThan(stack.getBoundingClientRect().width);
     const dir = getComputedStyle(stack).flexDirection;
     await expect(dir).toBe(window.innerWidth < 768 ? 'column-reverse' : 'column');
   },

@@ -1,7 +1,13 @@
 .stack {
   display: flex;
   flex-direction: column;
+  /* Cada pieza mide lo suyo: un enlace no se estira a todo el ancho (su
+     línea se vería de lado a lado); los bloques siguen envolviendo texto. */
+  align-items: flex-start;
   gap: var(--stack-gap-md);
+}
+.stack > * {
+  max-inline-size: 100%;
 }
 .stack.stack--gap-lg {
   gap: var(--stack-gap-lg);
