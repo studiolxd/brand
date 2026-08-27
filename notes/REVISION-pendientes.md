@@ -439,3 +439,32 @@ Decisiones pendientes que salen de esta revisión:
 - [x] **`parameters: { surface: 'dark' }`** ya está en `main` (v24.5.0, decorator
       `withSurface`): las stories «En superficie oscura» de Alert y CodeBlock
       usan el parámetro, no `globals.backgrounds`.
+
+## Siete átomos a definitivos (2026-08-27)
+
+Accordion, Tag, Kbd, List, Popover, DescriptionList y ProgressBar salen de
+`Por revisar/`. Lo hecho va en el CHANGELOG de v24.7.0; lo que queda anotado:
+
+- [ ] **`calc(var(--…-transition-duration) * 1ms)`** — el patrón sigue vivo en
+      Tooltip, Table, AppLauncher, PrevNextNav, CardSplit, Modal y Skeleton, y
+      **anula la animación** (el token ya trae `ms`). Popover ya está.
+- [ ] **`grey-lightest` sin rol semántico** — lo usan como superficie (no como
+      estado) `kbd.bg` y `progress-bar.track-bg`. Cuando el neutral tenga rol
+      (`background.subtle` o similar), esos dos apuntan a él.
+- [ ] **`tag.neutral-bg`** sigue nombrando el primitivo `color.grey-darkest`: no
+      hay rol semántico para «relleno neutral oscuro». Mismo caso que el
+      anterior.
+- [ ] **Alturas de `ProgressBar`** (8 / 24 / 32px) se expresan con la escala de
+      espaciado (`spacing.2/5/6`). No son aire: son alturas de carril. Si el
+      sistema añade una escala de medidas que no sean tallas de componente,
+      repuntar ahí.
+- [ ] **Umbral de la cifra de `ProgressBar`** (15%) vive en el TSX. No se hizo
+      token para no dejar uno huérfano: el CSS no puede leerlo y el JS tendría
+      que leer la custom property en runtime. Decidir si merece la pena.
+- [ ] **`DescriptionList` en pantalla estrecha**: la rejilla es
+      `max-content 1fr`; con términos largos en móvil aprieta la columna del
+      valor. Falta decidir si por debajo de un punto de ruptura pasa a una
+      columna.
+- [ ] **`DatePicker`** abre su `Popover` sin `label`: el panel es
+      `role="dialog"` sin nombre accesible. La prop ya existe; falta pasarla al
+      revisar la molécula.

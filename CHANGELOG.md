@@ -7,6 +7,48 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v24.7.0
+
+### Cambiado
+
+- `Accordion`: el separador entre ítems deja de ser `currentColor` y pasa a
+  `accordion.border-color` (`color.primary`), con par oscuro; el anillo de foco
+  usa el rol `focus` también para su separación y estrena
+  `surface-dark-focus-ring-color`. Tipos (`AccordionProps`, `AccordionItemProps`,
+  `AccordionTriggerProps`, `AccordionContentProps`) exportados. Doc MDX nueva y
+  `Accordion.test.tsx`.
+- `Tag`: los tokens de variante dejan de nombrar primitivos —`info-bg` y
+  `warning-bg` pasan a `color.primary` y `color.accent-2`, los textos a
+  `color.text.on-dark|on-light`—. Mismos valores resueltos: un componente nombra
+  un rol, no un color. Doc MDX con anatomía, oscuro y matriz de contraste.
+- `Kbd`: `min-size` (y sus `sm-`/`lg-`) dejan de ser números sueltos y salen de
+  `cuerpo × interlineado + 2 × aire + 2 × borde`, así una tecla de un carácter
+  es cuadrada en las tres tallas (24 / 26 / 38px); `lg-font-size` sube de 16 a
+  20px. Fuera el token huérfano `kbd.shadow` (el relieve lo da el borde). El
+  átomo reenvía props del `<kbd>` y `className`, con `forwardRef`.
+- `List`: el aire entre ítems lo pone el ítem (`li + li`) en vez de un `gap` de
+  flex sobre la lista. Reenvía props del elemento y `className`, con
+  `forwardRef`; `ListProps` y `ListType` exportados. La tabla de tokens oscuros
+  del MDX sale del JSON (antes era un token escrito a mano inexistente).
+- `Popover`: la animación no ocurría —`animation-duration` tomaba
+  `calc(var(--popover-transition-duration) * 1ms)` y el token ya trae `ms`—;
+  ahora usa el token tal cual. Prop `label` para dar nombre al panel
+  (`role="dialog"`), `sideOffset` por defecto desde el token nuevo
+  `popover.offset`, anillo de foco propio con par oscuro y fuera el token
+  huérfano `popover.shadow`. `'use client'`. `Popover.test.tsx` nuevo.
+- `DescriptionList`: el término (`<dt>`) estrena tokens propios `term-*` —antes
+  se vestía con `--label-*` directamente— y su par oscuro; CSS con ejes lógicos
+  (`border-block-end` / `border-inline-end`). Reenvía props del `<dl>` y
+  `className`, con `forwardRef`. Doc MDX nueva.
+- `ProgressBar`: `label` es el nombre accesible y trae texto castellano por
+  defecto («Progreso») —antes, sin él, la barra no tenía nombre—; añadido
+  `aria-valuetext`, `className` al contenedor y token
+  `progress-bar.line-height` (el CSS lo llevaba cableado). Doc MDX nueva y
+  `ProgressBar.test.tsx`.
+- Los siete salen del grupo «Por revisar» del catálogo: `Atoms/Accordion`,
+  `Atoms/Tag`, `Atoms/Kbd`, `Atoms/List`, `Atoms/Popover`,
+  `Atoms/DescriptionList` y `Atoms/ProgressBar`.
+
 ## v24.6.0
 
 ### Cambiado
