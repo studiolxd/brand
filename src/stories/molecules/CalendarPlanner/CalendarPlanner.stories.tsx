@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { Tag } from '../../atoms/Tag/Tag';
 import { CalendarPlanner, type PlannerEvent } from './CalendarPlanner';
 
 const meta: Meta<typeof CalendarPlanner> = {
-  title: 'Por revisar/Molecules/CalendarPlanner',
+  title: 'Molecules/CalendarPlanner',
   component: CalendarPlanner,
   parameters: {
     layout: 'padded',
@@ -17,6 +17,8 @@ const meta: Meta<typeof CalendarPlanner> = {
     defaultMonth:  { control: false },
     onMonthChange: { control: false },
     onMoreClick:   { control: false },
+    onDayClick:    { control: false },
+    gridLabel:     { control: { type: 'text' } },
     navigable:     { control: { type: 'boolean' } },
     maxItemsPerDay:{ control: { type: 'number' } },
     locale:        { control: { type: 'text' } },
@@ -204,5 +206,41 @@ export const Etiquetas: Story = {
     await expect(en.getByLabelText('Previous month')).toBeInTheDocument();
     await expect(en.getByLabelText('Next month')).toBeInTheDocument();
     await expect(en.queryByLabelText('Mes anterior')).toBeNull();
+  },
+};
+
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: (args) => <CalendarPlanner {...args} events={makeEvents()} />,
+};
+
+/**
+ * Test: con `onDayClick` la parrilla es una rejilla operable con teclado —
+ * una sola parada de tabulador y flechas para moverse entre días.
+ */
+export const TecladoDeCeldas: Story = {
+  name: 'Test — teclado de las celdas',
+  tags: ['!dev'],
+  render: () => (
+    <CalendarPlanner
+      defaultMonth={new Date(2025, 0, 1)}
+      events={[]}
+      onDayClick={() => {}}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const grid = within(canvasElement).getByRole('grid');
+    const tabbable = within(grid)
+      .getAllByRole('gridcell')
+      .filter((cell) => cell.getAttribute('tabindex') === '0');
+
+    await expect(tabbable).toHaveLength(1);
+
+    tabbable[0].focus();
+    const inicial = document.activeElement?.textContent;
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(document.activeElement?.textContent).not.toBe(inicial);
+    await expect(document.activeElement).toHaveAttribute('role', 'gridcell');
   },
 };

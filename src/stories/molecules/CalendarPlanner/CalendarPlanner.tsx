@@ -1,8 +1,17 @@
 import { useState, useCallback, type ReactNode } from 'react';
-import { Icon } from '../../atoms/Icon/Icon';
 import { Tag } from '../../atoms/Tag/Tag';
 import type { TagVariant } from '../../atoms/Tag/Tag';
 import { Modal } from '../Modal/Modal';
+import {
+  chunkWeeks,
+  getCalendarDays,
+  getWeekdayNames,
+  isSameDay,
+  renderCalendarMonthNav,
+  renderCalendarWeekdayRow,
+  shiftMonth,
+  useCalendarGridNavigation,
+} from '../_shared/calendarGrid';
 import './CalendarPlanner.css';
 
 export interface PlannerEvent {
@@ -50,63 +59,15 @@ export interface CalendarPlannerProps {
    * Una app multiidioma debe pasarla traducida.
    */
   nextMonthLabel?: string;
+  /**
+   * aria-label de la rejilla de días. Sin ella, la rejilla toma como nombre el
+   * título del mes visible. Es texto para lectores: una app multiidioma debe
+   * pasarlo traducido.
+   */
+  gridLabel?: string;
   /** Tamaño del componente. Default: 'md' */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
-}
-
-interface CalendarDay {
-  date: Date;
-  outside: boolean;
-}
-
-function isSameDay(a: Date, b: Date): boolean {
-  return (
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate()
-  );
-}
-
-function getCalendarDays(month: Date): CalendarDay[] {
-  const first = new Date(month.getFullYear(), month.getMonth(), 1);
-
-  let startOffset = first.getDay() - 1;
-  if (startOffset < 0) startOffset = 6;
-
-  const daysInMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
-  // Mínimo de celdas necesarias: solo las semanas que realmente ocupa el mes
-  const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
-
-  const days: CalendarDay[] = [];
-
-  for (let i = startOffset; i > 0; i--) {
-    const d = new Date(first);
-    d.setDate(d.getDate() - i);
-    days.push({ date: d, outside: true });
-  }
-
-  for (let i = 1; i <= daysInMonth; i++) {
-    days.push({ date: new Date(month.getFullYear(), month.getMonth(), i), outside: false });
-  }
-
-  const remaining = totalCells - days.length;
-  const lastDay = days[days.length - 1].date;
-  for (let i = 1; i <= remaining; i++) {
-    const d = new Date(lastDay);
-    d.setDate(d.getDate() + i);
-    days.push({ date: d, outside: true });
-  }
-
-  return days;
-}
-
-function chunkWeeks(days: CalendarDay[]): CalendarDay[][] {
-  const weeks: CalendarDay[][] = [];
-  for (let i = 0; i < days.length; i += 7) {
-    weeks.push(days.slice(i, i + 7));
-  }
-  return weeks;
 }
 
 export function CalendarPlanner({
@@ -122,6 +83,7 @@ export function CalendarPlanner({
   locale = 'es-ES',
   previousMonthLabel = 'Mes anterior',
   nextMonthLabel = 'Mes siguiente',
+  gridLabel,
   size = 'md',
   className,
 }: CalendarPlannerProps) {
@@ -150,21 +112,22 @@ export function CalendarPlanner({
 
   const modalTitleFormatter = new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
-  const weekdayFormatter = new Intl.DateTimeFormat(locale, { weekday: 'short' });
-  const weekdays = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(2025, 0, 6 + i);
-    return weekdayFormatter.format(d);
-  });
-
+  const weekdays = getWeekdayNames(locale, 'short');
   const dayNumberFormatter = new Intl.DateTimeFormat(locale, { day: 'numeric' });
 
   const weeks = chunkWeeks(getCalendarDays(currentMonth));
 
-  const prevMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
-  const nextMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+  const prevMonth = shiftMonth(currentMonth, -1);
+  const nextMonth = shiftMonth(currentMonth, 1);
 
   const getEventsForDay = (date: Date) =>
     events.filter((e) => isSameDay(e.date, date));
+
+  const grid = useCalendarGridNavigation({
+    month: currentMonth,
+    onMonthChange: handleMonthChange,
+    onActivate: onDayClick ? (date) => onDayClick(date, getEventsForDay(date)) : undefined,
+  });
 
   const titleId = `planner-title-${currentMonth.getFullYear()}-${currentMonth.getMonth()}`;
   const rootClass = ['calendar-planner', `calendar-planner--${size}`, className]
@@ -173,41 +136,30 @@ export function CalendarPlanner({
 
   return (
     <div className={rootClass}>
-      <div className="calendar-planner__header">
-        {navigable && (
-          <button
-            type="button"
-            className="calendar-planner__nav"
-            aria-label={previousMonthLabel}
-            onClick={() => handleMonthChange(prevMonth)}
-          >
-            <Icon name="chevron" size={chevronSize} className="calendar-planner__chevron--prev" />
-          </button>
-        )}
-        <h2 id={titleId} className="calendar-planner__title" aria-live="polite">
-          {title}
-        </h2>
-        {navigable && (
-          <button
-            type="button"
-            className="calendar-planner__nav"
-            aria-label={nextMonthLabel}
-            onClick={() => handleMonthChange(nextMonth)}
-          >
-            <Icon name="chevron" size={chevronSize} />
-          </button>
-        )}
-      </div>
+      {renderCalendarMonthNav({
+        block: 'calendar-planner',
+        title,
+        titleId,
+        navigable,
+        previousMonthLabel,
+        nextMonthLabel,
+        onPrev: () => handleMonthChange(prevMonth),
+        onNext: () => handleMonthChange(nextMonth),
+        chevronSize,
+      })}
 
-      <div className="calendar-planner__grid" role="grid" aria-labelledby={titleId}>
-        {/* Cabeceras de día de semana */}
-        <div role="row" className="calendar-planner__row calendar-planner__row--header">
-          {weekdays.map((wd) => (
-            <div key={wd} role="columnheader" className="calendar-planner__weekday">
-              {wd}
-            </div>
-          ))}
-        </div>
+      <div
+        className="calendar-planner__grid"
+        role="grid"
+        aria-label={gridLabel}
+        aria-labelledby={gridLabel ? undefined : titleId}
+        onKeyDown={onDayClick ? grid.onKeyDown : undefined}
+      >
+        {renderCalendarWeekdayRow({
+          block: 'calendar-planner',
+          rowModifier: 'header',
+          weekdays,
+        })}
 
         {/* Semanas */}
         {weeks.map((week, wi) => (
@@ -237,9 +189,12 @@ export function CalendarPlanner({
               return (
                 <div
                   key={date.toISOString()}
+                  ref={onDayClick ? grid.cellRef(date) : undefined}
                   role="gridcell"
                   className={[cellClass, onDayClick ? 'calendar-planner__cell--clickable' : ''].filter(Boolean).join(' ')}
                   aria-current={isToday ? 'date' : undefined}
+                  tabIndex={onDayClick ? (grid.isTabbable(date) ? 0 : -1) : undefined}
+                  onFocus={onDayClick ? () => grid.onCellFocus(date) : undefined}
                   onClick={onDayClick ? () => onDayClick(date, dayEvents) : undefined}
                 >
                   <span className={numberClass} aria-label={dayNumberFormatter.format(date)}>

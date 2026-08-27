@@ -45,6 +45,7 @@
 
 .calendar-planner__nav:hover {
   background-color: var(--calendar-planner-nav-hover-bg);
+  color: var(--calendar-planner-nav-hover-color);
 }
 
 .calendar-planner__nav:focus-visible {
@@ -71,6 +72,11 @@
 }
 
 /* ─── Weekday headers ─────────────────────────────────────────────────────── */
+
+.calendar-planner__weekday abbr {
+  text-decoration: none;
+  cursor: inherit;
+}
 
 .calendar-planner__weekday {
   padding-block: var(--calendar-planner-weekday-padding-block);
@@ -109,7 +115,13 @@
 }
 
 .calendar-planner__cell.calendar-planner__cell--clickable:hover {
-  background-color: var(--calendar-planner-day-hover-bg);
+  background-color: var(--calendar-planner-cell-hover-bg);
+  color: var(--calendar-planner-cell-hover-color);
+}
+
+.calendar-planner__cell.calendar-planner__cell--clickable:focus-visible {
+  outline: var(--calendar-planner-cell-focus-ring-width) solid var(--calendar-planner-cell-focus-ring-color);
+  outline-offset: var(--calendar-planner-cell-focus-ring-offset);
 }
 
 /* ─── Day number ──────────────────────────────────────────────────────────── */

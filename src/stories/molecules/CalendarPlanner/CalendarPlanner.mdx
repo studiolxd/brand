@@ -1,0 +1,90 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CalendarPlannerStories from "./CalendarPlanner.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { calendarPlannerTokens, calendarPlannerDarkTokens } from "../../../tokens/molecules/calendar-planner";
+
+<Meta of={CalendarPlannerStories} />
+
+# CalendarPlanner
+
+La parrilla de mes: la misma rejilla de `Calendar`, pero con celdas grandes que
+enseñan lo que pasa cada día. `Calendar` sirve para **elegir** un día;
+`CalendarPlanner`, para **leer** un mes entero.
+
+<Canvas of={CalendarPlannerStories.Default} />
+
+## La rejilla es la de Calendar
+
+Los días del mes, el reparto en semanas, los nombres de día y la navegación de
+mes salen de `_shared/calendarGrid`, el mismo módulo que monta `Calendar`: no
+hay dos calendarios distintos en el sistema, hay uno con dos caras. Sus tokens
+siguen la misma cascada — `nav-*`, `title-*`, `weekday-*`, el hover de celda y
+el color del número heredan de los de `Calendar`, y aquí solo viven los que son
+de verdad suyos: los bordes de la parrilla, la altura de celda, el badge del
+número y el enlace «+N más».
+
+## Eventos y truncado
+
+`events` es una lista plana de `{ id, date, label, variant }`. Cada celda
+enseña hasta `maxItemsPerDay` (3 por defecto) y resuelve el resto con un
+«+N más» que abre un `Modal` con el día completo.
+
+<Canvas of={CalendarPlannerStories.ConOverflow} />
+
+## Celda a medida
+
+`renderDay(date, events)` sustituye el contenido de la celda —la parrilla, el
+número del día y los estados siguen siendo del componente.
+
+<Canvas of={CalendarPlannerStories.ConRenderDay} />
+
+## Días pulsables
+
+Con `onDayClick` la celda entera se vuelve pulsable. Al hacerlo, la parrilla
+pasa a comportarse como una rejilla de verdad: **una sola parada de tabulador**
+y flechas para recorrer los días, igual que en `Calendar`.
+
+| Tecla | Qué hace |
+|---|---|
+| <kbd>←</kbd> / <kbd>→</kbd> | Día anterior / siguiente |
+| <kbd>↑</kbd> / <kbd>↓</kbd> | Misma columna, semana anterior / siguiente |
+| <kbd>Inicio</kbd> / <kbd>Fin</kbd> | Lunes / domingo de la semana |
+| <kbd>RePág</kbd> / <kbd>AvPág</kbd> | Mes anterior / siguiente |
+| <kbd>Mayús</kbd> + <kbd>RePág</kbd> / <kbd>AvPág</kbd> | Año anterior / siguiente |
+| <kbd>Enter</kbd> / <kbd>Espacio</kbd> | Dispara `onDayClick` en el día enfocado |
+
+El «+N más» es un control propio y mantiene su propia parada de tabulador: es
+una acción distinta de abrir el día.
+
+## Tamaños
+
+<Canvas of={CalendarPlannerStories.Tamanos} />
+
+## Superficie oscura
+
+<Canvas of={CalendarPlannerStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={calendarPlannerTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={calendarPlannerDarkTokens} />
+
+## Accesibilidad
+
+- Rejilla `role="grid"` con filas, cabeceras de columna y celdas; su nombre es
+  el del mes visible, o el que se pase en `gridLabel`.
+- El nombre del mes es una región `aria-live="polite"`.
+- Las cabeceras de día llevan el nombre completo en un `<abbr>`.
+- Hoy lleva `aria-current="date"`.
+- Las celdas fuera del mes usan la superficie secundaria del sistema, no un
+  gris de estado; el hover de una celda pulsable es relleno de marca, el mismo
+  patrón que `Menu`/`Button ghost`.
+
+## Props
+
+<ArgTypes of={CalendarPlannerStories} />
