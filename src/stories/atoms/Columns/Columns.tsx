@@ -46,13 +46,11 @@ export function Columns({
     className,
   ].filter(Boolean).join(' ');
 
-  // Un Fragment (`<>…</>`) es UN hijo para React: se desenvuelve para que
-  // cada celda sea una columna, que es lo que el consumidor espera.
-  const cells = Children.toArray(children).flatMap((child) =>
-    isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment
-      ? Children.toArray(child.props.children)
-      : [child],
-  );
+  // Si TODO el contenido es un Fragment (`<>…</>`), se desenvuelve: cada hijo
+  // es una celda. Un Fragment entre otros hijos es UNA celda: sirve para
+  // agrupar (una cabecera y un enlace de vuelta en la misma columna).
+  const only = isValidElement<{ children?: ReactNode }>(children) && children.type === Fragment ? children.props.children : children;
+  const cells = Children.toArray(only);
   return (
     <div className={classes}>
       {cells.map((cell, i) => (

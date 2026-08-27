@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v22.4.0
+
+### Cambiado
+
+- `Columns`: solo se desenvuelve el Fragment cuando es TODO el contenido; un
+  Fragment entre otras hijas es una celda (agrupa varias piezas, apiladas con
+  `cell-gap`). Antes cada hija del Fragment anidado pasaba a ser una columna.
+
 ## v22.3.0
 
 ### Cambiado

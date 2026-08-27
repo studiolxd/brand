@@ -18,6 +18,10 @@
 .columns__col {
   min-inline-size: 0;
 }
+/* Varias piezas en una celda (cabecera + enlace de vuelta) se apilan con aire. */
+.columns__col > * + * {
+  margin-block-start: var(--columns-cell-gap);
+}
 
 /* Tableta: 3 y 4 columnas pasan a dos; 2 columnas ya reparte. */
 @media (min-width: 768px) /* --breakpoint-md */ {

@@ -51,6 +51,21 @@ export const TituloYContenido: Story = {
   },
 };
 
+/** Dos piezas en la misma celda: un Fragment entre otras hijas agrupa (cabecera + enlace de vuelta). */
+export const CeldaAgrupada: Story = {
+  args: {
+    children: (
+      <>
+        <>
+          <Heading level={1}>¿Olvidaste tu contraseña?</Heading>
+          <a href="#acceso">Volver al inicio de sesión</a>
+        </>
+        <Celda>Formulario</Celda>
+      </>
+    ),
+  },
+};
+
 export const Reparto12: Story = { name: 'Reparto 1:2', args: { ratio: '1:2' } };
 
 export const TresColumnas: Story = {
@@ -70,7 +85,7 @@ export const ApiladoInverso: Story = {
 export const Contrato: Story = {
   name: 'Test — cada hija es una celda, sin semántica del molde, ratio solo con dos',
   tags: ['!dev'],
-  args: { ratio: '1:2', children: <><Celda>A</Celda>{null}<Celda>B</Celda></> },
+  args: { ratio: '1:2', children: <><><Celda>A</Celda><Celda>A2</Celda></>{null}<Celda>B</Celda></> },
   play: async ({ canvasElement }) => {
     const root = canvasElement.querySelector('.columns')!;
     await expect(root.tagName).toBe('DIV');

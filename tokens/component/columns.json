@@ -1,11 +1,44 @@
 {
   "columns": {
-    "gap-md":       { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre columnas — base" },
-    "gap-lg":       { "$value": "{spacing.8}", "$type": "dimension", "$description": "Aire entre columnas — amplio" },
-    "stack-gap-md": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre celdas apiladas (móvil) — base" },
-    "stack-gap-lg": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Aire entre celdas apiladas (móvil) — amplio" },
-    "ratio-1-1":    { "$value": "1fr 1fr",     "$type": "string",    "$description": "Reparto a dos columnas: mitad y mitad" },
-    "ratio-1-2":    { "$value": "1fr 2fr",     "$type": "string",    "$description": "Reparto a dos columnas: un tercio y dos tercios" },
-    "ratio-2-1":    { "$value": "2fr 1fr",     "$type": "string",    "$description": "Reparto a dos columnas: dos tercios y un tercio" }
+    "gap-md": {
+      "$value": "{spacing.6}",
+      "$type": "dimension",
+      "$description": "Aire entre columnas — base"
+    },
+    "gap-lg": {
+      "$value": "{spacing.8}",
+      "$type": "dimension",
+      "$description": "Aire entre columnas — amplio"
+    },
+    "stack-gap-md": {
+      "$value": "{spacing.6}",
+      "$type": "dimension",
+      "$description": "Aire entre celdas apiladas (móvil) — base"
+    },
+    "stack-gap-lg": {
+      "$value": "{spacing.7}",
+      "$type": "dimension",
+      "$description": "Aire entre celdas apiladas (móvil) — amplio"
+    },
+    "ratio-1-1": {
+      "$value": "1fr 1fr",
+      "$type": "string",
+      "$description": "Reparto a dos columnas: mitad y mitad"
+    },
+    "ratio-1-2": {
+      "$value": "1fr 2fr",
+      "$type": "string",
+      "$description": "Reparto a dos columnas: un tercio y dos tercios"
+    },
+    "ratio-2-1": {
+      "$value": "2fr 1fr",
+      "$type": "string",
+      "$description": "Reparto a dos columnas: dos tercios y un tercio"
+    },
+    "cell-gap": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Aire entre piezas apiladas dentro de una misma celda (una cabecera y un enlace de vuelta)"
+    }
   }
 }
