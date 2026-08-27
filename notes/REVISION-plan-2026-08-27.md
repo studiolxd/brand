@@ -331,3 +331,14 @@ La rama `toast-definitivo` decide si Toast comparte la cara de Alert. Sea cual s
 - `/Users/suvi/Dev/studiolxd/brand/src/stories/molecules/Table/Table.css` — cuatro `calc(*1ms)` que anulan las transiciones, más el `gap: 0.375rem`.
 - `/Users/suvi/Dev/studiolxd/brand/src/stories/molecules/Modal/Modal.css` — `150ms` cableado y tokens de foco prestados de Button; es la base de Sheet, CommandPalette, ImageCropDialog y CalendarPlanner.
 - `/Users/suvi/Dev/studiolxd/brand/scripts/entry-points.mjs` y `/Users/suvi/Dev/studiolxd/brand/package.json` — los tres sitios de registro, si se retiran Planner/Roster/PrevNextNav.
+
+## Decisiones del usuario (2026-08-27, tras el análisis)
+1. Table: (a) `<button>` dentro del `th`, `aria-sort` en el `th`.
+2. Calendar: (a) rejilla accesible completa ahora (`role="grid"`, roving tabindex, flechas, PageUp/Down, Home/End).
+3. MessageBubble: (a) cuatro esquinas rectas; el emisor se distingue por alineación y color.
+4. Globo del usuario: (c) ningún globo lleva relleno; se separan por alineación y borde 1px (par claro/oscuro por token).
+5. MessageComposer: (a) variante `bare` en `Textarea`; fuera el override desde fuera.
+6. CommandPalette: (a) reescribir sobre `Modal` + lista propia de Base UI; fuera cmdk/Radix del dist.
+7. CalendarPlanner: (a) rejilla de mes compartida en `_shared/calendarGrid`; Planner = Calendar + `renderDay`.
+8. CalendarPlanner, CalendarRoster y PrevNextNav: SE CONSERVAN (los usan otros repos de Studio LXD fuera de la suite) → entran en la cola de revisión, no se retiran.
+9. Plantilla Chat: (b) convertir en `ChatShell` real (lista · hilo · composer) exportado.
