@@ -18,6 +18,9 @@ para breaking changes.
 - **`Hero`**: los botones de `actions` reciben la talla `lg` por contexto (el mismo mecanismo
   de reparto que usa `Form`, `FormSizeContext`), sin que el consumidor tenga que pasar `size`
   en cada `Button`. Si un `Button` dentro de `actions` ya trae `size` explícito, gana el suyo.
+  Como renderiza un `Context.Provider`, `Hero` pasa a ser componente de cliente (mismo caso que
+  `Form`): sin este marcado, un Server Component que lo monta (p. ej. la portada de una app Next)
+  rompe en runtime (`createContext is not a function` en el bundle RSC).
 
 ## v25.24.0
 
