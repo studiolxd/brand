@@ -11,7 +11,9 @@ import {
 } from './Card';
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
+import { Inline } from '../../atoms/Inline/Inline';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { Tag } from '../../atoms/Tag/Tag';
 
 const foto = {
   src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=960&q=80',
@@ -179,6 +181,80 @@ export const ContainerMode: Story = {
     await expect(card).toHaveAttribute('aria-labelledby', 'card-t');
     // el contenido interactivo funciona dentro
     await expect(canvas.getByRole('button', { name: 'Guardar' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * La descripción admite marcado: aquí, dos párrafos del sistema y una etiqueta.
+ * Con una cadena la tarjeta pone su `<p>`; con un nodo, el marcado lo trae quien
+ * lo pasa.
+ */
+export const DescripcionRica: Story = {
+  name: 'Descripción con marcado',
+  args: {
+    href: '#',
+    color: 'outline',
+    title: 'Contenidos elearning',
+    description: (
+      <>
+        <Paragraph size="small">SCORM, xAPI y cmi5, con el player que haga falta.</Paragraph>
+        <Paragraph size="small">Auditoría de accesibilidad incluida.</Paragraph>
+      </>
+    ),
+    ctaLabel: 'Ver más sobre contenidos elearning',
+  },
+};
+
+/**
+ * En modo enlace, `children` va debajo de la descripción y encima de la flecha:
+ * es el hueco para lo que no cabe en `title`/`description`. Nada interactivo —
+ * todo el bloque ya es un enlace.
+ */
+export const EnlaceConHijos: Story = {
+  name: 'Enlace con hijos',
+  render: () => (
+    <Card href="#" color="accent-1" title="Curso de Moodle" ctaLabel="Ver el curso de Moodle">
+      <Inline gap="sm">
+        <Tag variant="neutral">12 h</Tag>
+        <Tag variant="neutral">Nivel medio</Tag>
+      </Inline>
+    </Card>
+  ),
+};
+
+/**
+ * Test: en modo enlace la descripción-nodo se pinta sin `<p>` extra y los
+ * `children` entran en el enlace, antes de la flecha.
+ */
+export const ContratoHijosEnEnlace: Story = {
+  name: 'Test — hijos y descripción rica en modo enlace',
+  tags: ['!dev'],
+  render: () => (
+    <Card
+      href="#"
+      title="Curso de Moodle"
+      description={<Paragraph size="small">Dos párrafos y una etiqueta.</Paragraph>}
+      ctaLabel="Ver el curso"
+    >
+      <Tag variant="neutral">12 h</Tag>
+    </Card>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const enlace = canvasElement.querySelector('a.card')!;
+    // La descripción-nodo se pinta tal cual: un solo párrafo, el del consumidor.
+    const parrafos = enlace.querySelectorAll('p');
+    await expect(parrafos).toHaveLength(1);
+    await expect(parrafos[0]).toHaveClass('paragraph');
+    // Los hijos viven dentro del enlace…
+    const etiqueta = canvas.getByText('12 h');
+    await expect(enlace.contains(etiqueta)).toBe(true);
+    // …antes de la flecha, que sigue cerrando la tarjeta.
+    const flecha = enlace.querySelector('.arrow')!;
+    await expect(etiqueta.compareDocumentPosition(flecha) & Node.DOCUMENT_POSITION_FOLLOWING)
+      .toBeTruthy();
+    // Y el CTA accesible sigue nombrando el enlace.
+    await expect(enlace).toHaveAccessibleName(/Ver el curso/);
   },
 };
 

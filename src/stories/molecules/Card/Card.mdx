@@ -8,7 +8,7 @@ import { cardTokens, cardDarkTokens } from "../../../tokens/components/card";
 # Card
 
 Dos modos. **Enlace** (`href` o `render`): *link-card* — todo el bloque es un enlace (título +
-descripción + flecha), pensado para navegación. **Contenedor** (sin ninguno de los dos): un `<div>`
+descripción + `children` + flecha), pensado para navegación. **Contenedor** (sin ninguno de los dos): un `<div>`
 con `children` arbitrarios (formularios, botones), para superficies de aplicación.
 
 ## Modo link — colores
@@ -61,6 +61,24 @@ import Link from 'next/link';
 un Server Component, `href`.
 
 <Canvas of={CardStories.ComoEnlaceDelRouter} />
+
+## Modo enlace: descripción con marcado e hijos
+
+`description` acepta un nodo, no solo una cadena. Con una cadena la tarjeta pone su propio `<p>`
+—la descripción de marketing de siempre—; con un nodo lo pinta tal cual, así que el marcado
+(varios párrafos, texto con formato, una etiqueta) lo trae quien lo pasa y no hay que aplanarlo.
+
+<Canvas of={CardStories.DescripcionRica} />
+
+Y en modo enlace la tarjeta admite `children`: van debajo de la descripción y encima de la flecha.
+Es el hueco para lo que no cabe en `title`/`description` sin tener que envolver la tarjeta en el
+`Link` del router por fuera.
+
+<Canvas of={CardStories.EnlaceConHijos} />
+
+Los hijos de una link-card **no pueden ser interactivos**: el bloque entero ya es un enlace, y un
+botón o un enlace anidado dentro de un `<a>` no es marcado válido. Si la tarjeta necesita acciones,
+es una tarjeta contenedora con su `CardFooter`.
 
 ## Enlace externo
 
@@ -118,8 +136,9 @@ párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un
 
 - El título de la tarjeta es un encabezado real (`CardTitle` → `Heading`): elige el `level` según
   de qué encabezado cuelgue la tarjeta, no según el tamaño que quieras.
-- En modo enlace todo el bloque es un solo enlace: no metas dentro botones ni otros enlaces. Si la
-  tarjeta necesita acciones, es una tarjeta contenedora con su `CardFooter`.
+- En modo enlace todo el bloque es un solo enlace: no metas dentro botones ni otros enlaces, ni en
+  `description` ni en `children`. Si la tarjeta necesita acciones, es una tarjeta contenedora con
+  su `CardFooter`.
 - Con `external`, avisa en el `ctaLabel` de que el enlace abre una pestaña nueva: el `target` por
   sí solo no se anuncia.
 - `ctaLabel` da al enlace un nombre accesible completo («Ver más sobre plataformas LMS») cuando la

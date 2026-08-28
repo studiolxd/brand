@@ -27,8 +27,9 @@ export interface CardMedia {
 export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   /**
    * URL de destino. **Con `href`** el Card es una *link-card*: todo el bloque es un
-   * `<a>` (título + descripción + flecha). **Sin `href`** es una *superficie
-   * contenedora*: un `<div>` con `children` arbitrarios (interactivos permitidos).
+   * `<a>` (título + descripción + `children` + flecha). **Sin `href`** es una
+   * *superficie contenedora*: un `<div>` con `children` arbitrarios
+   * (interactivos permitidos).
    */
   href?: string;
   /**
@@ -45,8 +46,12 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
   external?: boolean;
   /** Título (modo link — se espera junto a `href` o `render`). */
   title?: string;
-  /** Descripción (modo link). */
-  description?: string;
+  /**
+   * Descripción (modo link). Con una cadena, la tarjeta la envuelve en su
+   * propio `<p>`. Con un nodo, lo pinta tal cual: el marcado lo trae el
+   * consumidor (varios párrafos, `<Tag>`, texto con formato…).
+   */
+  description?: React.ReactNode;
   /** Texto accesible del CTA, visually-hidden (modo link — se espera junto a `href` o `render`). */
   ctaLabel?: string;
   /** Color de fondo. Default: `'outline'`. */
@@ -65,7 +70,8 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
  * Card con dos modos:
  * - **link-card** (`href` o `render`): navegación — el bloque entero es un
  *   enlace. Con `href` lo pinta un `<a>`; con `render`, el elemento que se le
- *   pase (el `Link` del router de turno).
+ *   pase (el `Link` del router de turno). Admite `children` para el contenido
+ *   que no cabe en `title`/`description`, siempre que no sea interactivo.
  * - **contenedor** (sin ninguno de los dos): superficie de app con contenido
  *   interactivo dentro (formularios, botones), que no puede vivir dentro de un
  *   `<a>`. Se compone con las subpartes de más abajo.
@@ -94,12 +100,15 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
     className ?? '',
   ].filter(Boolean).join(' ');
 
-  // El contenido de la link-card: título, descripción, CTA accesible y flecha.
+  // El contenido de la link-card: título, descripción, los hijos que traiga el
+  // consumidor, el CTA accesible y la flecha. La descripción en cadena la
+  // envuelve la tarjeta; si ya es un nodo, el marcado lo pone quien lo pasa.
   const text = (
     <>
-      <Heading level={2} size={8}>{title}</Heading>
-      {description && <p>{description}</p>}
-      <VisuallyHidden>{ctaLabel}</VisuallyHidden>
+      {title !== undefined && <Heading level={2} size={8}>{title}</Heading>}
+      {description && (typeof description === 'string' ? <p>{description}</p> : description)}
+      {children}
+      {ctaLabel !== undefined && <VisuallyHidden>{ctaLabel}</VisuallyHidden>}
       <Arrow size="lg" />
     </>
   );
