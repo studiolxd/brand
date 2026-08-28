@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.28.1
+
+### Corregido
+
+- **Fuera el hook `prepack`** que ejecutaba `release:check`: pnpm lo dispara al instalar el paquete
+  como dependencia git en cada consumidor, y ahí corre lint, tests y story-tests de Storybook —
+  fallaba la instalación de toda la suite. `release:check` sigue existiendo como puerta **manual**
+  antes de taggear (documentada en CLAUDE.md); ningún hook de ciclo de vida de npm/pnpm lo invoca.
+
 ## v25.28.0
 
 ### Cambiado

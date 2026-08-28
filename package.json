@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "25.28.0",
+  "version": "25.28.1",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -603,8 +603,7 @@
     "test": "vitest run --project unit --project components",
     "test:stories": "vitest run --project storybook",
     "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css",
-    "release:check": "pnpm lint && tsc -b && pnpm test && pnpm test:stories && pnpm build:all",
-    "prepack": "pnpm release:check"
+    "release:check": "pnpm lint && tsc -b && pnpm test && pnpm test:stories && pnpm build:all"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
