@@ -175,6 +175,35 @@ export const Comportamiento: Story = {
   },
 };
 
+/**
+ * Test: el contenido del panel cae en la misma columna que la barra —mismo
+ * Container, mismo ancho y mismo aire lateral—. El panel es `position: fixed`
+ * y sale del flujo de la banda, así que el aire hay que devolvérselo.
+ */
+export const PanelEnLaColumna: Story = {
+  name: 'Test — el panel monta su contenido en el mismo Container que la barra',
+  tags: ['!dev'],
+  args: { open: true, children: <SiteNav groups={indice} />, settings: <ThemeSwitcher value="system" /> },
+  play: async ({ canvasElement }) => {
+    const panel = canvasElement.querySelector('.site-header__panel')!;
+    const banda = panel.querySelector(':scope > .container')!;
+    const interior = banda.querySelector('.site-header__panel-inner')!;
+    const barra = canvasElement.querySelector('.site-header__bar')!;
+
+    // El índice y los ajustes viven dentro del Container, no sueltos en el panel
+    await expect(interior).toContainElement(canvasElement.querySelector('nav'));
+    await expect(interior).toContainElement(panel.querySelector('.site-header__settings'));
+
+    // Misma medida de contenido y mismo arranque que la barra: la columna es una
+    await expect(getComputedStyle(interior).maxInlineSize).toBe(getComputedStyle(barra).maxInlineSize);
+    await expect(
+      Math.abs(interior.getBoundingClientRect().left - barra.getBoundingClientRect().left),
+    ).toBeLessThanOrEqual(1);
+    // Y ese arranque no es el borde de la pantalla
+    await expect(interior.getBoundingClientRect().left).toBeGreaterThan(0);
+  },
+};
+
 /** Test: el fondo sangra aunque el contenido esté acotado. */
 export const Sangrado: Story = {
   name: 'Test — fondo a sangre, contenido acotado',

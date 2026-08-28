@@ -22,6 +22,7 @@
   --site-header-height-compact: calc(var(--site-header-content-height-compact) + 2 * var(--app-header-padding-block)); /** Alto de la barra en móvil (64px) */
   --site-header-height: calc(var(--site-header-content-height) + 2 * var(--app-header-padding-block)); /** Alto de la barra: el logotipo más el aire del sistema arriba y abajo (80px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan */
   --site-header-logo-margin-inline-start: calc(-1 * var(--container-padding-inline)); /** La marca sale del aire lateral del Container: el logotipo trae su propio espacio de seguridad en el trazado, y con el padding encima se veía descolgado del borde del contenido */
+  --site-header-panel-padding-inline: var(--container-padding-inline); /** Aire lateral del panel: el mismo del Container, para que su contenido caiga en la misma columna que la barra. El panel es `position: fixed`, así que sale del flujo de la banda y no hereda el aire que esta ya puso */
 }
 
 .surface-dark,
