@@ -75,6 +75,30 @@ export const Rail: Story = {
   render: (args) => <SidebarNav {...args} />,
 };
 
+/**
+ * Una sección que existe pero todavía no tiene contenido: se enseña marcada
+ * («sin docs») en vez de esconderla, para que el mapa del producto siga siendo
+ * el mismo. Es el caso del selector de producto de la web.
+ */
+export const ConEntradasVacias: Story = {
+  args: {
+    entries: [
+      { kind: 'link', id: 'home', label: 'Inicio', href: '#home', active: true, icon: <Icon name="dashboard" size="sm" /> },
+      { kind: 'link', id: 'lrs', label: 'LRS', href: '#lrs', empty: true, icon: <Icon name="chart-bar" size="sm" /> },
+      {
+        kind: 'group',
+        id: 'productos',
+        label: 'Productos',
+        items: [
+          { id: 'bricks', label: 'Bricks', href: '#bricks' },
+          { id: 'localizia', label: 'Localizia', href: '#localizia', empty: true },
+        ],
+      },
+    ],
+    defaultValue: ['productos'],
+  },
+};
+
 export const TodoPlegado: Story = {
   args: { defaultValue: [] },
 };
@@ -90,5 +114,34 @@ export const Contrato: Story = {
     const botones = within(nav).getAllByRole('button');
     await userEvent.click(botones[2]);
     await expect(await within(nav).findByRole('link', { name: 'Equipo' })).toBeVisible();
+  },
+};
+
+export const ContratoVacias: Story = {
+  name: 'Test — una entrada vacía no es un enlace y dice por qué',
+  tags: ['!dev'],
+  args: {
+    entries: [
+      { kind: 'link', id: 'lrs', label: 'LRS', href: '#lrs', empty: true },
+      {
+        kind: 'group',
+        id: 'productos',
+        label: 'Productos',
+        items: [
+          { id: 'bricks', label: 'Bricks', href: '#bricks' },
+          { id: 'localizia', label: 'Localizia', href: '#localizia', empty: true },
+        ],
+      },
+    ],
+    defaultValue: ['productos'],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nav = canvas.getByRole('navigation', { name: 'Navegación principal' });
+
+    await expect(within(nav).queryByRole('link', { name: /LRS/ })).toBeNull();
+    await expect(within(nav).queryByRole('link', { name: /Localizia/ })).toBeNull();
+    await expect(within(nav).getByRole('link', { name: 'Bricks' })).toBeVisible();
+    await expect(within(nav).getAllByText('sin docs')).toHaveLength(2);
   },
 };

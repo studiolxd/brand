@@ -3,6 +3,7 @@
  */
 
 :root {
+  --sidebar-nav-item-empty-cursor: not-allowed; /** Cursor de una entrada vacía */
   --sidebar-nav-gap: var(--spacing-1); /** Gap entre grupos */
   --sidebar-nav-group-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger de grupo */
   --sidebar-nav-group-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger de grupo */
@@ -20,6 +21,7 @@
   --sidebar-nav-transition-easing: var(--motion-easing-in-out); /** Easing de transición de ítems */
   --sidebar-nav-group-transition-duration: var(--motion-duration-fast); /** Duración de la animación de apertura/cierre de grupo */
   --sidebar-nav-group-transition-easing: var(--motion-easing-in-out); /** Easing de la animación de apertura/cierre de grupo */
+  --sidebar-nav-item-empty-mark-font-size: var(--font-size-1); /** Tamaño de la marca «sin docs» */
   --sidebar-nav-group-label-font-weight: var(--font-weight-emphasis); /** Peso del texto de etiqueta de grupo */
   --sidebar-nav-group-label-color: var(--color-primary); /** Color de la etiqueta de grupo */
   --sidebar-nav-item-padding-inline-start: calc(var(--sidebar-nav-group-trigger-padding-inline) + var(--sidebar-nav-item-icon-size) + var(--sidebar-nav-item-icon-gap)); /** Sangría de los ítems: alineados con el texto de la cabecera de su grupo (aire + icono + gap) */
@@ -31,6 +33,8 @@
   --sidebar-nav-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --sidebar-nav-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --sidebar-nav-rail-active-bar-width: var(--border-width-focus); /** Barra al borde que marca la sección activa en rail */
+  --sidebar-nav-item-empty-color: var(--color-text-muted-on-light); /** Tinta de una entrada vacía: sigue leyéndose, pero no invita a pulsarla */
+  --sidebar-nav-item-empty-mark-color: var(--color-text-muted-on-light); /** Tinta de la marca «sin docs» */
   --sidebar-nav-item-hover-line-width: var(--border-width-default); /** Grosor de la línea que marca el ítem bajo el puntero. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el ítem, el mismo grafismo del subrayado de `Link` */
   --sidebar-nav-item-hover-line-color: var(--color-primary); /** Color de la línea de hover — tinta de la superficie */
 }
@@ -42,5 +46,7 @@ html.dark {
   --sidebar-nav-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
   --sidebar-nav-item-active-color: var(--color-accent-1); /** Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher. */
   --sidebar-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento. */
+  --sidebar-nav-item-empty-color: var(--color-text-muted-on-dark); /** Tinta de una entrada vacía — surface-dark */
+  --sidebar-nav-item-empty-mark-color: var(--color-text-muted-on-dark); /** Tinta de la marca «sin docs» — surface-dark */
   --sidebar-nav-item-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover — surface-dark */
 }

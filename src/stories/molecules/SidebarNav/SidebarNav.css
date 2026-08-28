@@ -233,3 +233,34 @@ a.sidebar-nav__group-label:focus-visible {
   font-weight: var(--sidebar-nav-item-active-font-weight);
   text-transform: uppercase;
 }
+
+/* ─── Entrada vacía ──────────────────────────────────────────
+   La sección existe pero todavía no lleva a ninguna parte. Se enseña, no se
+   esconde: baja de tinta, no responde al puntero y dice por qué con una marca
+   de texto (no solo con el color). */
+.sidebar-nav__item.sidebar-nav__item--empty,
+.sidebar-nav__top-link.sidebar-nav__top-link--empty {
+  color: var(--sidebar-nav-item-empty-color);
+  cursor: var(--sidebar-nav-item-empty-cursor);
+}
+
+.sidebar-nav__item.sidebar-nav__item--empty:hover,
+.sidebar-nav__top-link.sidebar-nav__top-link--empty:hover {
+  box-shadow: none;
+}
+
+.sidebar-nav__rail-item.sidebar-nav__rail-item--empty {
+  color: var(--sidebar-nav-item-empty-color);
+  cursor: var(--sidebar-nav-item-empty-cursor);
+}
+
+.sidebar-nav__rail-item.sidebar-nav__rail-item--empty:hover {
+  box-shadow: none;
+}
+
+.sidebar-nav__empty-mark {
+  margin-inline-start: auto;
+  font-size: var(--sidebar-nav-item-empty-mark-font-size);
+  color: var(--sidebar-nav-item-empty-mark-color);
+  white-space: nowrap;
+}

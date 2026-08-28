@@ -12,6 +12,11 @@ export interface SidebarNavItem {
   href: string;
   active?: boolean;
   icon?: ReactNode;
+  /**
+   * La entrada existe pero no lleva a ninguna parte todavía: se enseña con su
+   * marca («sin docs») y sin enlace, en vez de esconderla.
+   */
+  empty?: boolean;
 }
 
 export interface SidebarNavLinkEntry {
@@ -21,6 +26,8 @@ export interface SidebarNavLinkEntry {
   href: string;
   active?: boolean;
   icon?: ReactNode;
+  /** Igual que en `SidebarNavItem`: se enseña marcada y sin enlace. */
+  empty?: boolean;
 }
 
 export interface SidebarNavGroupEntry {
@@ -47,6 +54,11 @@ export type SidebarNavRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorEle
 export interface SidebarNavProps {
   /** Nombre accesible del `nav`. */
   label?: string;
+  /**
+   * Marca de las entradas vacías (`empty`). Por defecto, en castellano:
+   * «sin docs».
+   */
+  emptyLabel?: string;
   /** Solo iconos: los enlaces con tooltip, los grupos como menú. Sin él, lo decide la `Sidebar` (rail). */
   rail?: boolean;
   entries: SidebarNavEntry[];
@@ -63,6 +75,7 @@ function defaultRenderLink({ children, ...props }: SidebarNavRenderLinkProps) {
 
 export function SidebarNav({
   label = 'Navegación principal',
+  emptyLabel = 'sin docs',
   rail,
   entries,
   defaultValue,
@@ -92,6 +105,22 @@ export function SidebarNav({
               </span>
             );
             if (entry.kind === 'link') {
+              // Vacía: se enseña igual, pero sin enlace y diciendo por qué.
+              if (entry.empty) {
+                return (
+                  <li key={entry.id}>
+                    <Tooltip label={`${entry.label} — ${emptyLabel}`} side="right">
+                      <span
+                        className="sidebar-nav__rail-item sidebar-nav__rail-item--empty"
+                        aria-disabled="true"
+                        aria-label={`${entry.label} — ${emptyLabel}`}
+                      >
+                        {glyph}
+                      </span>
+                    </Tooltip>
+                  </li>
+                );
+              }
               return (
                 <li key={entry.id}>
                   <Tooltip label={entry.label} side="right">
@@ -113,7 +142,12 @@ export function SidebarNav({
                 ? { type: 'link' as const, label: entry.label, href: entry.href }
                 : { type: 'label' as const, label: entry.label },
               ...(entry.href ? [{ type: 'separator' as const }] : []),
-              ...entry.items.map((item) => ({ type: 'link' as const, label: item.label, href: item.href })),
+              // Una entrada vacía no es un enlace: en el menú queda como rótulo.
+              ...entry.items.map((item) => (
+                item.empty
+                  ? { type: 'label' as const, label: `${item.label} · ${emptyLabel}` }
+                  : { type: 'link' as const, label: item.label, href: item.href }
+              )),
             ];
             return (
               <li key={entry.id}>
@@ -150,6 +184,20 @@ export function SidebarNav({
               'sidebar-nav__top-link',
               entry.active ? 'sidebar-nav__top-link--active' : '',
             ].filter(Boolean).join(' ');
+
+            if (entry.empty) {
+              return (
+                <div key={entry.id}>
+                  <span className={`${cls} sidebar-nav__top-link--empty`} aria-disabled="true" title={entry.label}>
+                    {entry.icon && (
+                      <span className="sidebar-nav__item-icon" aria-hidden="true">{entry.icon}</span>
+                    )}
+                    <span className="sidebar-nav__item-label">{entry.label}</span>
+                    <span className="sidebar-nav__empty-mark">{emptyLabel}</span>
+                  </span>
+                </div>
+              );
+            }
 
             return (
               <div key={entry.id}>
@@ -207,6 +255,20 @@ export function SidebarNav({
                         'sidebar-nav__item',
                         item.active ? 'sidebar-nav__item--active' : '',
                       ].filter(Boolean).join(' ');
+
+                      if (item.empty) {
+                        return (
+                          <li key={item.id}>
+                            <span className={`${cls} sidebar-nav__item--empty`} aria-disabled="true">
+                              {item.icon && (
+                                <span className="sidebar-nav__item-icon" aria-hidden="true">{item.icon}</span>
+                              )}
+                              <span className="sidebar-nav__item-label">{item.label}</span>
+                              <span className="sidebar-nav__empty-mark">{emptyLabel}</span>
+                            </span>
+                          </li>
+                        );
+                      }
 
                       return (
                         <li key={item.id}>

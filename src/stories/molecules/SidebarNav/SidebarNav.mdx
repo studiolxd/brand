@@ -24,6 +24,19 @@ Con `rail` (o dentro de una `Sidebar` en rail, que lo pone por contexto) cada en
 
 <Canvas of={SidebarNavStories.Rail} />
 
+## Entradas vacías
+
+`empty: true` marca una entrada que **existe pero todavía no lleva a ninguna
+parte**: un producto sin documentación, una sección aún sin publicar. Se enseña
+en su sitio con la marca «sin docs» en vez de esconderla, para que el mapa del
+producto no cambie según lo que haya escrito.
+
+<Canvas of={SidebarNavStories.ConEntradasVacias} />
+
+No se pinta como enlace: es un `<span>` con `aria-disabled`, sin `href`, y la
+razón va en **texto** (`emptyLabel`), no solo en el color. En rail la marca viaja
+en el tooltip, y dentro del menú de un grupo la entrada vacía queda como rótulo.
+
 ## Estados
 
 Nada se rellena (Foundations → Colores, «Estados: nada se rellena»): el hover deja una línea de tinta bajo el ítem (`item-hover-line-*`); el activo, peso `emphasis` y —en rail— la barra de tinta al borde de inicio. Una sección activa bajo el puntero conserva su barra y suma la línea. Los iconos opcionales van a talla `sm`.

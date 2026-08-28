@@ -29,5 +29,9 @@ $lxd-sidebar-nav-transition-duration: 150ms; // Duración de transición de íte
 $lxd-sidebar-nav-transition-easing: ease-in-out; // Easing de transición de ítems
 $lxd-sidebar-nav-group-transition-duration: 150ms; // Duración de la animación de apertura/cierre de grupo
 $lxd-sidebar-nav-group-transition-easing: ease-in-out; // Easing de la animación de apertura/cierre de grupo
+$lxd-sidebar-nav-item-empty-color: #4a4a4a; // Tinta de una entrada vacía: sigue leyéndose, pero no invita a pulsarla
+$lxd-sidebar-nav-item-empty-cursor: not-allowed; // Cursor de una entrada vacía
+$lxd-sidebar-nav-item-empty-mark-font-size: 0.875rem; // Tamaño de la marca «sin docs»
+$lxd-sidebar-nav-item-empty-mark-color: #4a4a4a; // Tinta de la marca «sin docs»
 $lxd-sidebar-nav-item-hover-line-width: 1px; // Grosor de la línea que marca el ítem bajo el puntero. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el ítem, el mismo grafismo del subrayado de `Link`
 $lxd-sidebar-nav-item-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie
