@@ -21,6 +21,7 @@ pnpm build-storybook  # Build estático de Storybook
 pnpm lint             # Run ESLint (flat config format)
 pnpm test             # Vitest: proyectos unit (node) + components (jsdom + Testing Library)
 pnpm test:stories     # Vitest: stories en navegador (Playwright/Chromium) — pesado
+pnpm release:check    # Puerta de calidad: lint + tsc + test + test:stories + build:all
 
 # Docker — Storybook image → ghcr.io
 docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:latest --push .
@@ -29,6 +30,8 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 > **IMPORTANTE:** Cada vez que se modifique un archivo JSON de tokens, ejecutar `pnpm build:tokens` antes de commitear. Los CSS bajo `src/tokens/` son auto-generados y se sobreescriben en el siguiente build.
 >
 > **IMPORTANTE:** `pnpm build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css`, `dist/tokens.css` ni `dist/fonts.css`. Después de `build:lib` ejecutar siempre `pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css`, o usar `pnpm build:all` para el build completo.
+>
+> **IMPORTANTE:** No se taggea (`git tag vX.Y.Z`) sin `pnpm release:check` en verde. El script encadena `lint` + `tsc -b` + `test` + `test:stories` + `build:all`; también corre solo como hook `prepack` (npm pack/publish), pero el flujo real de release de este repo es el tag de git, así que el guardián real es correr `release:check` a mano antes del `git tag`.
 
 Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `pnpm test` corre los dos primeros; `pnpm test:stories` el tercero.
 
