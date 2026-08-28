@@ -1,0 +1,32 @@
+{
+  "slider": {
+    "control-block-size":   { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no" },
+    "track-size":           { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Grosor del carril" },
+    "track-bg":             { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Carril sin recorrer" },
+    "track-border-radius":  { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio del carril (recto, como el resto del sistema)" },
+    "indicator-bg":         { "$value": "{color.primary}",          "$type": "color",     "$description": "Tramo recorrido" },
+    "thumb-size":           { "$value": "{icon.size-sm}",           "$type": "dimension", "$description": "Lado del pulgar (cuadrado, como el resto de formas del sistema)" },
+    "thumb-bg":             { "$value": "{color.primary}",          "$type": "color",     "$description": "Relleno del pulgar" },
+    "thumb-border-width":   { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor del borde del pulgar" },
+    "thumb-border-color":   { "$value": "{color.primary}",          "$type": "color",     "$description": "Borde del pulgar" },
+    "thumb-border-radius":  { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio del pulgar" },
+    "value-font-family":    { "$value": "{control.font-family}",    "$type": "string",    "$description": "Familia del valor cuando se muestra" },
+    "value-font-size":      { "$value": "{control.font-size}",      "$type": "dimension", "$description": "Tamaño del valor cuando se muestra" },
+    "value-color":          { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Tinta del valor cuando se muestra" },
+    "value-gap":            { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Separación entre la banda y el valor" },
+    "cursor":               { "$value": "pointer",                  "$type": "string",    "$description": "Cursor sobre la banda" },
+    "disabled-cursor":      { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
+    "disabled-opacity":     { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },
+    "transition-duration":  { "$value": "{motion.duration.fast}",   "$type": "duration",  "$description": "Duración de la transición del pulgar" },
+    "transition-easing":    { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Easing de la transición del pulgar" },
+    "focus-ring-width":     { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":    { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "focus-ring-color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco" },
+    "surface-dark-track-bg":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Carril sin recorrer — surface-dark" },
+    "surface-dark-indicator-bg":     { "$value": "{color.accent-1}",     "$type": "color", "$description": "Tramo recorrido — surface-dark. El prusia coincide con el fondo de la superficie; el par es el de `Button primary`" },
+    "surface-dark-thumb-bg":         { "$value": "{color.accent-1}",     "$type": "color", "$description": "Relleno del pulgar — surface-dark" },
+    "surface-dark-thumb-border-color": { "$value": "{color.accent-1}",   "$type": "color", "$description": "Borde del pulgar — surface-dark" },
+    "surface-dark-value-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Tinta del valor — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

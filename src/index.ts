@@ -125,6 +125,8 @@ export type { TimeSelectProps, TimeValue } from './stories/atoms/TimeSelect/Time
 export { SkipLink } from './stories/atoms/SkipLink/SkipLink';
 export { Sparkline } from './stories/atoms/Sparkline/Sparkline';
 export type { SparklineProps } from './stories/atoms/Sparkline/Sparkline';
+export { Slider } from './stories/atoms/Slider/Slider';
+export type { SliderProps } from './stories/atoms/Slider/Slider';
 export { Spinner } from './stories/atoms/Spinner/Spinner';
 export type { SpinnerProps, SpinnerSize } from './stories/atoms/Spinner/Spinner';
 export { Switcher } from './stories/atoms/Switcher/Switcher';

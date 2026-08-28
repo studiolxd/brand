@@ -1,0 +1,99 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SliderStories from "./Slider.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { sliderTokens, sliderDarkTokens } from "../../../tokens/components/slider";
+
+<Meta of={SliderStories} />
+
+# Slider
+
+Un deslizador para elegir un valor dentro de un rango continuo: el espaciado de
+un editor de tema, la opacidad de una capa, el precio máximo de un filtro.
+
+<Canvas of={SliderStories.PorDefecto} />
+
+Se construye sobre [Base UI Slider](https://base-ui.com/react/components/slider),
+que aporta el `role="slider"` con sus valores, el arrastre, el teclado y el
+formateo del número.
+
+## Devuelve la forma que recibe
+
+Un número si se le dio un número; una lista si se le dio una lista, con un pulgar
+por entrada. Así un deslizador de un solo valor no obliga a escribir `value[0]`
+en cada sitio.
+
+<Canvas of={SliderStories.Rango} />
+
+## Mientras se mueve y al soltar
+
+`onValueChange` avisa en cada paso del arrastre —es el sitio de la vista previa—
+y `onValueCommitted` solo al soltar, que es donde va el guardado. Separarlos
+evita mandar una petición por píxel.
+
+<Canvas of={SliderStories.Controlado} />
+
+## Valor a la vista
+
+`showValue` pinta el valor formateado junto a la banda. El formato sale de
+`format` y `locale`, que Base UI pasa a `Intl.NumberFormat`: porcentajes, moneda
+o unidades sin escribir el formateo a mano.
+
+<Canvas of={SliderStories.ConValor} />
+
+## Pasos
+
+`step` hace el deslizador discreto; `largeStep` (10 por defecto) es el salto de
+`AvPág`/`RePág` y `Mayús`+flecha.
+
+<Canvas of={SliderStories.Pasos} />
+
+## Orientación
+
+<Canvas of={SliderStories.Vertical} />
+
+En vertical el alto lo pone el contenedor, igual que en horizontal lo pone el
+ancho.
+
+## Deshabilitado
+
+<Canvas of={SliderStories.Deshabilitado} />
+
+## Superficie oscura
+
+El carril pasa a la tinta clara, y el tramo recorrido y el pulgar al par de
+`Button primary` (lavanda), porque el prusia coincidiría con el fondo. Todo por
+token `surface-dark-*`.
+
+<Canvas of={SliderStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={sliderTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={sliderDarkTokens} />
+
+## Accesibilidad
+
+- Cada pulgar es un `role="slider"` con `aria-valuenow`, `aria-valuemin` y
+  `aria-valuemax`, sobre un `<input type="range">` real: teclado y envío de
+  formulario (`name`) vienen del navegador.
+- Teclado: flechas para un paso, `Mayús`+flecha y `AvPág`/`RePág` para el salto
+  grande, `Inicio` y `Fin` para los extremos.
+- **Cada pulgar tiene nombre**: con uno solo es `label`; con dos, «Mínimo» y
+  «Máximo»; con más, «Valor 1», «Valor 2»… `thumbLabel` los traduce.
+- La banda es fina pero la zona sensible tiene alto propio
+  (`slider.control-block-size`), para que el objetivo de pulsación no sea una
+  línea de 4px.
+
+## Internacionalización
+
+`label` y `thumbLabel` son props con default castellano. El número se formatea
+con `format` y `locale` de Base UI, delegando en `Intl`.
+
+## Props
+
+<ArgTypes of={SliderStories} />

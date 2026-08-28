@@ -1,0 +1,39 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --slider-cursor: pointer; /** Cursor sobre la banda */
+  --slider-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --slider-control-block-size: var(--spacing-5); /** Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no */
+  --slider-track-size: var(--spacing-1); /** Grosor del carril */
+  --slider-track-bg: var(--color-grey-light); /** Carril sin recorrer */
+  --slider-thumb-size: var(--icon-size-sm); /** Lado del pulgar (cuadrado, como el resto de formas del sistema) */
+  --slider-value-gap: var(--spacing-3); /** Separación entre la banda y el valor */
+  --slider-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
+  --slider-transition-duration: var(--motion-duration-fast); /** Duración de la transición del pulgar */
+  --slider-transition-easing: var(--motion-easing-default); /** Easing de la transición del pulgar */
+  --slider-focus-ring-offset: var(--spacing-1); /** Separación del anillo de foco */
+  --slider-track-border-radius: var(--border-radius-default); /** Radio del carril (recto, como el resto del sistema) */
+  --slider-indicator-bg: var(--color-primary); /** Tramo recorrido */
+  --slider-thumb-bg: var(--color-primary); /** Relleno del pulgar */
+  --slider-thumb-border-width: var(--border-width-default); /** Grosor del borde del pulgar */
+  --slider-thumb-border-color: var(--color-primary); /** Borde del pulgar */
+  --slider-thumb-border-radius: var(--border-radius-default); /** Radio del pulgar */
+  --slider-value-font-family: var(--control-font-family); /** Familia del valor cuando se muestra */
+  --slider-value-font-size: var(--control-font-size); /** Tamaño del valor cuando se muestra */
+  --slider-value-color: var(--color-text-on-light); /** Tinta del valor cuando se muestra */
+  --slider-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --slider-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --slider-track-bg: var(--color-text-on-dark); /** Carril sin recorrer — surface-dark */
+  --slider-indicator-bg: var(--color-accent-1); /** Tramo recorrido — surface-dark. El prusia coincide con el fondo de la superficie; el par es el de `Button primary` */
+  --slider-thumb-bg: var(--color-accent-1); /** Relleno del pulgar — surface-dark */
+  --slider-thumb-border-color: var(--color-accent-1); /** Borde del pulgar — surface-dark */
+  --slider-value-color: var(--color-text-on-dark); /** Tinta del valor — surface-dark */
+  --slider-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

@@ -43,6 +43,7 @@ export const entryPoints = {
   'toggle-group':        'src/stories/atoms/ToggleGroup/ToggleGroup.tsx',
   'collapsible':         'src/stories/atoms/Collapsible/Collapsible.tsx',
   'scroll-area':         'src/stories/atoms/ScrollArea/ScrollArea.tsx',
+  'slider':              'src/stories/atoms/Slider/Slider.tsx',
   'kbd':                 'src/stories/atoms/Kbd/Kbd.tsx',
   'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
@@ -199,4 +200,5 @@ export const clientComponents = new Set([
   'toggle-group',
   'collapsible',
   'scroll-area',
+  'slider',
 ]);

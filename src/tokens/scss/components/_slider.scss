@@ -1,0 +1,25 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-slider-control-block-size: 1.5rem; // Alto de la zona sensible: la banda es fina, pero el objetivo de pulsación no
+$lxd-slider-track-size: 0.25rem; // Grosor del carril
+$lxd-slider-track-bg: #d0d0d0; // Carril sin recorrer
+$lxd-slider-track-border-radius: 0px; // Radio del carril (recto, como el resto del sistema)
+$lxd-slider-indicator-bg: #111e30; // Tramo recorrido
+$lxd-slider-thumb-size: 16px; // Lado del pulgar (cuadrado, como el resto de formas del sistema)
+$lxd-slider-thumb-bg: #111e30; // Relleno del pulgar
+$lxd-slider-thumb-border-width: 1px; // Grosor del borde del pulgar
+$lxd-slider-thumb-border-color: #111e30; // Borde del pulgar
+$lxd-slider-thumb-border-radius: 0px; // Radio del pulgar
+$lxd-slider-value-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia del valor cuando se muestra
+$lxd-slider-value-font-size: 1rem; // Tamaño del valor cuando se muestra
+$lxd-slider-value-color: #111e30; // Tinta del valor cuando se muestra
+$lxd-slider-value-gap: 0.75rem; // Separación entre la banda y el valor
+$lxd-slider-cursor: pointer; // Cursor sobre la banda
+$lxd-slider-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
+$lxd-slider-disabled-opacity: 0.4; // Opacidad cuando está deshabilitado
+$lxd-slider-transition-duration: 150ms; // Duración de la transición del pulgar
+$lxd-slider-transition-easing: ease; // Easing de la transición del pulgar
+$lxd-slider-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-slider-focus-ring-offset: 0.25rem; // Separación del anillo de foco
+$lxd-slider-focus-ring-color: #111e30; // Color del anillo de foco
