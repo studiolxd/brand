@@ -247,19 +247,16 @@ token). Curvas `in` y `linear` declaradas sin uso.
 - [ ] **Spinner** — `animation-duration` ahora 1000ms (un ciclo de dibujo del
       contorno, 2026-08-27). Sigue siendo token propio crudo: un bucle no es una
       transición; decidir si merece un token de motion.
-- [ ] Transiciones con ms a mano en CSS: **CardSplit, Table,
-      Modal** → `--motion-duration-*`.
-      Ojo, el patrón real que hay en esos CSS —y en `Tooltip`— es
-      `calc(var(--…-transition-duration) * 1ms)`, de cuando las duraciones eran
-      números sin unidad: hoy el token ya trae `ms`, así que el `calc` es
-      inválido y **la animación no ocurre**. En `Popover` está arreglado
-      (2026-08-27): la propiedad toma el token tal cual. **AppLauncher**
-      comprobado (2026-08-27): ya toma `floating-panel.transition-duration`
-      directo, sin `calc` — no tenía el bug. **Skeleton** resuelto de otra
-      forma (2026-08-27): `skeleton.duration` pasa a `"1400ms"` directo (como
-      `spinner.animation-duration`) en vez de sumarse a `--motion-duration-*`
-      — un bucle infinito no es una transición de propiedad, es el mismo caso
-      ya documentado para Spinner.
+- [x] Transiciones con ms a mano en CSS (2026-08-28) — barrido completo con
+      `grep -rnE '[0-9]+ms' src/stories/**/*.css`: cero ms crudos fuera de
+      comentarios, y cero `calc(var(--…) * 1ms)` en todo `src/`. **CardSplit**
+      ya no existe (fusionado en `Card`, sin transiciones). **Table** y
+      **Modal** toman `var(--table-transition-duration)` /
+      `var(--modal-transition-duration)` directos, sin `calc`, resueltos a
+      `{motion.duration.fast|base}`. **Tooltip** ya arreglado (resuelve a
+      `{floating-panel.transition-duration}` directo). Sin código pendiente;
+      **Popover**/**AppLauncher**/**Skeleton** ya cerrados (2026-08-27, ver
+      arriba).
 
 ## Capas (2026-08-25)
 
