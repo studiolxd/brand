@@ -4,9 +4,9 @@
 
 :root {
   --message-bubble-border-style: solid; /** Estilo del contorno */
-  --message-bubble-max-width: 75%; /** Anchura máxima del globo dentro del hilo */
   --message-bubble-padding-block: var(--spacing-3); /** Aire vertical del globo */
   --message-bubble-padding-inline: var(--spacing-4); /** Aire horizontal del globo */
+  --message-bubble-max-width: var(--chat-bubble-max-width); /** Anchura máxima del globo dentro del hilo — cascada desde `chat`, la medida es del hilo, no del globo */
   --message-bubble-font-family: var(--font-family-sans); /** Familia tipográfica */
   --message-bubble-line-height: var(--line-height-relaxed); /** Interlineado */
   --message-bubble-tail-size: var(--spacing-3); /** Lado de la cola triangular que nace en la esquina inferior del lado del emisor y apunta hacia él */

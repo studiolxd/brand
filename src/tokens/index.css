@@ -112,6 +112,7 @@
 @import "./molecules/file-upload-field.css";
 @import "./components/description-list.css";
 @import "./components/number-badge.css";
+@import "./components/chat.css";
 @import "./components/message-bubble.css";
 @import "./components/typing-indicator.css";
 @import "./molecules/message-composer.css";

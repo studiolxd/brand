@@ -2,7 +2,7 @@
   "chat-shell": {
     "list-width":            { "$value": "{sidebar.width}",         "$type": "dimension", "$description": "Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación" },
     "list-padding-block":    { "$value": "{spacing.4}",             "$type": "dimension", "$description": "Aire vertical de la columna de conversaciones" },
-    "list-narrow-max-height":{ "$value": "12rem",                   "$type": "dimension", "$description": "Altura máxima de la columna de conversaciones cuando la maqueta cae a una sola columna: pasa a ser una tira con scroll propio sobre el hilo, no media pantalla" },
+    "list-narrow-max-height":{ "$value": "{chat.list-narrow-max-height}", "$type": "dimension", "$description": "Altura máxima de la columna de conversaciones cuando la maqueta cae a una sola columna: pasa a ser una tira con scroll propio sobre el hilo, no media pantalla — cascada desde `chat`, compartida con el resto de la familia" },
 
     "header-padding-block":  { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Aire vertical de la cabecera del hilo" },
     "header-padding-inline": { "$value": "{spacing.6}",             "$type": "dimension", "$description": "Aire horizontal de la cabecera del hilo" },

@@ -5,7 +5,7 @@
     "border-radius":  { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Radio del globo: recto en las cuatro esquinas, como todo el sistema. Quien distingue al emisor es la alineación y la cola, no una esquina redondeada" },
     "border-width":   { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor del contorno del globo y de su cola" },
     "border-style":   { "$value": "solid",                 "$type": "string",    "$description": "Estilo del contorno" },
-    "max-width":      { "$value": "75%",                   "$type": "dimension", "$description": "Anchura máxima del globo dentro del hilo" },
+    "max-width":      { "$value": "{chat.bubble-max-width}", "$type": "dimension", "$description": "Anchura máxima del globo dentro del hilo — cascada desde `chat`, la medida es del hilo, no del globo" },
 
     "font-family":    { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Familia tipográfica" },
     "font-size":      { "$value": "{text.font-size}",      "$type": "dimension", "$description": "El mensaje hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },

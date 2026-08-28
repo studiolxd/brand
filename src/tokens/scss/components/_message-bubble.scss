@@ -6,7 +6,7 @@ $lxd-message-bubble-padding-inline: 1rem; // Aire horizontal del globo
 $lxd-message-bubble-border-radius: 0px; // Radio del globo: recto en las cuatro esquinas, como todo el sistema. Quien distingue al emisor es la alineación y la cola, no una esquina redondeada
 $lxd-message-bubble-border-width: 1px; // Grosor del contorno del globo y de su cola
 $lxd-message-bubble-border-style: solid; // Estilo del contorno
-$lxd-message-bubble-max-width: 75%; // Anchura máxima del globo dentro del hilo
+$lxd-message-bubble-max-width: 75%; // Anchura máxima del globo dentro del hilo — cascada desde `chat`, la medida es del hilo, no del globo
 $lxd-message-bubble-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
 $lxd-message-bubble-font-size: 1rem; // El mensaje hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-message-bubble-font-weight: 300; // Peso tipográfico
