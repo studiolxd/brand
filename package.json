@@ -592,7 +592,7 @@
     "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && node scripts/post-build.mjs",
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
-    "build:fonts-css": "postcss src/stylesheets/fonts.css --use postcss-import -o dist/fonts.css",
+    "build:fonts-css": "node scripts/build-fonts-css.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
