@@ -1,3 +1,4 @@
+'use client';
 import './hero.css';
 import { t as e } from "./_shared/form-size.js";
 import { Container as t } from "./container.js";
