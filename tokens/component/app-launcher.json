@@ -42,11 +42,13 @@
     "surface-dark-content-bg":            { "$value": "{floating-panel.surface-dark-bg}",           "$type": "color", "$description": "Fondo del panel — surface-dark" },
     "surface-dark-content-border-color":  { "$value": "{floating-panel.surface-dark-border-color}", "$type": "color", "$description": "Borde del panel — surface-dark" },
     "surface-dark-tile-name-color":        { "$value": "{color.text.on-dark}",   "$type": "color", "$description": "Nombre de app — surface-dark" },
-    "hover-line-width":        { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea de hover del trigger y de los tiles. Ni el disparador ni el tile se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo" },
-    "hover-line-color":        { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover — tinta de la superficie" },
+    "hover-line-width":        { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea de hover del disparador. El botón de rejilla no se rellena bajo el puntero (regla de Colores): deja una línea de tinta debajo. Los tiles sí se rellenan: son la lista de opciones del panel" },
+    "hover-line-color":        { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover del disparador — tinta de la superficie" },
+    "tile-highlighted-bg":     { "$value": "{menu.item-highlighted-bg}", "$type": "color",  "$description": "Relleno del tile bajo el puntero o el teclado — el del Menu: la rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores)" },
     "tile-active-marker-width":{ "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor de la barra que marca la app actual, en el borde de inicio del tile" },
     "tile-active-marker-color":{ "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la barra de la app actual" },
-    "surface-dark-hover-line-color":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea de hover — surface-dark" },
+    "surface-dark-hover-line-color":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea de hover del disparador — surface-dark" },
+    "surface-dark-tile-highlighted-bg":      { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno del tile resaltado — surface-dark" },
     "surface-dark-tile-active-marker-color": { "$value": "{color.accent-1}",     "$type": "color", "$description": "Color de la barra de la app actual — surface-dark: lavanda, el acento de estado activo del sistema (como SidebarNav y Table)" }
   }
 }

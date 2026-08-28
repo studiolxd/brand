@@ -84,13 +84,16 @@
   text-align: center;
   cursor: pointer;
   outline: none;
-  transition: box-shadow var(--app-launcher-transition-duration) var(--app-launcher-transition-easing);
+  transition:
+    background-color var(--app-launcher-transition-duration) var(--app-launcher-transition-easing),
+    box-shadow var(--app-launcher-transition-duration) var(--app-launcher-transition-easing);
 }
 
-/* Ídem el tile: línea de tinta, nunca relleno. */
+/* El tile bajo el puntero o el teclado se rellena: la rejilla de apps es la
+   lista de opciones del panel (Foundations → Colores, la excepción declarada). */
 .app-launcher__tile:hover,
 .app-launcher__tile:focus-visible {
-  box-shadow: inset 0 calc(-1 * var(--app-launcher-hover-line-width)) 0 0 var(--app-launcher-hover-line-color);
+  background-color: var(--app-launcher-tile-highlighted-bg);
 }
 
 .app-launcher__tile:focus-visible {
@@ -101,13 +104,6 @@
 /* La app actual: barra de tinta en el borde de inicio y nombre en énfasis. */
 .app-launcher__tile.app-launcher__tile--active {
   box-shadow: inset var(--app-launcher-tile-active-marker-width) 0 0 var(--app-launcher-tile-active-marker-color);
-}
-
-.app-launcher__tile.app-launcher__tile--active:hover,
-.app-launcher__tile.app-launcher__tile--active:focus-visible {
-  box-shadow:
-    inset var(--app-launcher-tile-active-marker-width) 0 0 var(--app-launcher-tile-active-marker-color),
-    inset 0 calc(-1 * var(--app-launcher-hover-line-width)) 0 0 var(--app-launcher-hover-line-color);
 }
 
 .app-launcher__tile--active .app-launcher__tile-name {
