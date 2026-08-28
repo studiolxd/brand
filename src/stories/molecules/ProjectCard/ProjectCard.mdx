@@ -1,0 +1,49 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ProjectCardStories from "./ProjectCard.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { projectCardTokens, projectCardDarkTokens } from "../../../tokens/molecules/project-card";
+
+<Meta of={ProjectCardStories} />
+
+# ProjectCard
+
+La tarjeta de un proyecto en una portada de marketing: imagen, etiquetas de categoría (`Tag`), título y una descripción breve.
+
+<Canvas of={ProjectCardStories.PorDefecto} />
+
+## Por qué no es una `Card`
+
+`Card` con `href` es una *link-card*: **todo** el bloque es un `<a>`, y por eso dentro no puede haber nada interactivo ni una lista de etiquetas que el lector de pantalla tenga que anunciar aparte. Aquí hay etiquetas y texto alrededor del enlace, así que la tarjeta es un `<article>` y el enlace es **el título**.
+
+Para que se pueda pulsar en cualquier punto de la tarjeta, el enlace estira su área con un pseudoelemento que cubre el `article`. El resultado: se pulsa donde sea, el teclado se para **una sola vez**, y el nombre que anuncia el lector de pantalla es el del proyecto —no el de la tarjeta entera con sus etiquetas y su descripción de corrido.
+
+<Canvas of={ProjectCardStories.SinImagen} />
+<Canvas of={ProjectCardStories.SinEnlace} />
+
+## Con el router de la aplicación
+
+Como en `Card` y en `Button`, `render` recibe el elemento de enlace del router y le presta las clases y el contenido del título. Manda sobre `href`.
+
+<Canvas of={ProjectCardStories.ComoEnlaceDelRouter} />
+
+## Estados
+
+Bajo el puntero, el título gana una línea de tinta; con el foco, el anillo del sistema. No hay relleno de hover: los estados del sistema no se pintan de fondo (Foundations → Colores).
+
+## Sobre superficie oscura
+
+La tarjeta no tiene color propio —fondo, texto y etiquetas los resuelve la superficie—; solo el anillo de foco tiene par oscuro.
+
+<Canvas of={ProjectCardStories.EnSuperficieOscura} />
+
+## Tokens
+
+<TokenTable tokens={projectCardTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={projectCardDarkTokens} />
+
+## Props
+
+<ArgTypes of={ProjectCardStories} />

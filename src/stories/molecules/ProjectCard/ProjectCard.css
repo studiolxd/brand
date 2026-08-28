@@ -1,0 +1,60 @@
+/* Tarjeta de proyecto: imagen, etiquetas, título y descripción. Sin fondo ni
+   borde propios —el color lo pone la superficie— y sin padding: la tarjeta es
+   la pieza de contenido, la banda de alrededor es de quien la coloca. */
+.project-card {
+  position: relative;
+  display: grid;
+  gap: var(--project-card-gap);
+  align-content: start;
+}
+
+.project-card__media {
+  aspect-ratio: var(--project-card-media-aspect-ratio);
+}
+
+.project-card__media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--project-card-tags-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-card .project-card__title,
+.project-card .project-card__description {
+  margin: 0;
+}
+
+.project-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* El área pulsable del título se estira sobre toda la tarjeta: se pulsa donde
+   sea, pero el teclado se para una sola vez y el nombre accesible sigue siendo
+   el del proyecto. */
+.project-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+/* Bajo el puntero, una línea de tinta: un estado no se rellena. */
+.project-card__link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: var(--project-card-title-hover-line-width);
+  text-underline-offset: var(--project-card-title-hover-line-offset);
+}
+
+.project-card__link:focus-visible {
+  outline: var(--project-card-focus-ring-width) solid var(--project-card-focus-ring-color);
+  outline-offset: var(--project-card-focus-ring-offset);
+}

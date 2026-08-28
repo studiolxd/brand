@@ -1,0 +1,16 @@
+{
+  "project-card": {
+    "gap":              { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre las piezas de la tarjeta" },
+    "media-aspect-ratio": { "$value": "3 / 2",     "$type": "string",    "$description": "Proporción de la imagen del proyecto" },
+    "tags-gap":         { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre etiquetas" },
+
+    "title-hover-line-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea bajo el título con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno" },
+    "title-hover-line-offset": { "$value": "{spacing.1}",            "$type": "dimension", "$description": "Separación entre el título y su línea de hover" },
+
+    "focus-ring-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del anillo de foco del enlace" },
+    "focus-ring-width":  { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Separación del anillo de foco" },
+
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

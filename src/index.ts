@@ -239,6 +239,8 @@ export { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator, useSideba
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 
 // ─── Organisms ──────────────────────────────────────────────
+export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
+export type { ProjectCardProps, ProjectCardTag } from './stories/molecules/ProjectCard/ProjectCard';
 export { Steps } from './stories/organisms/Steps/Steps';
 export type { StepsProps, StepItem } from './stories/organisms/Steps/Steps';
 export { ConversationThread } from './stories/organisms/ConversationThread/ConversationThread';
