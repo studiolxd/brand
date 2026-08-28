@@ -3,7 +3,7 @@ import './button.css';
 import { n as e } from "./_shared/form-size.js";
 import { forwardRef as t } from "react";
 import { jsx as n } from "react/jsx-runtime";
-import { useRender as r } from "@base-ui-components/react/use-render";
+import { useRender as r } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
 var i = t(function({ variant: t = "primary", destructive: i = !1, size: a, block: o = !1, iconOnly: s = !1, children: c, type: l = "button", disabled: u, onClick: d, href: f, external: p = !1, render: m, className: h, ...g }, _) {
 	let v = e(a), y = [

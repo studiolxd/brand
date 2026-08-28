@@ -1,7 +1,7 @@
 'use client';
 import './popover.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
-import { Popover as n } from "@base-ui-components/react/popover";
+import { Popover as n } from "@base-ui/react/popover";
 //#region src/stories/atoms/Popover/Popover.tsx
 function r(e) {
 	let t = parseFloat(e);

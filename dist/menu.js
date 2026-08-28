@@ -2,7 +2,7 @@
 import './menu.css';
 import { n as e, t } from "./_shared/dropdownItems.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { Menu as i } from "@base-ui-components/react/menu";
+import { Menu as i } from "@base-ui/react/menu";
 //#region src/stories/molecules/Menu/Menu.tsx
 function a(e) {
 	return ["menu__item", e ? "menu__item--destructive" : ""].filter(Boolean).join(" ");

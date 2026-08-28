@@ -1,5 +1,5 @@
 'use client';
-import { Toast as e } from "@base-ui-components/react/toast";
+import { Toast as e } from "@base-ui/react/toast";
 //#region src/stories/molecules/Toast/toast.ts
 var t = e.createToastManager(), n = 5e3, r = /* @__PURE__ */ new Set(), i = /* @__PURE__ */ new Map(), a = n;
 function o(e) {

@@ -2,7 +2,7 @@
 import './switcher.css';
 import { forwardRef as e, useCallback as t } from "react";
 import { jsx as n } from "react/jsx-runtime";
-import { Switch as r } from "@base-ui-components/react/switch";
+import { Switch as r } from "@base-ui/react/switch";
 //#region src/stories/atoms/Switcher/Switcher.tsx
 var i = e(function({ size: e = "md", error: i = !1, className: a, value: o, onCheckedChange: s, id: c, ...l }, u) {
 	let d = [

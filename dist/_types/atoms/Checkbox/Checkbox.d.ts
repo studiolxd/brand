@@ -1,4 +1,4 @@
-import { Checkbox as BaseCheckbox } from '@base-ui-components/react/checkbox';
+import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox';
 import './Checkbox.css';
 type BaseCheckboxRootProps = Omit<React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root>, 'checked' | 'onCheckedChange' | 'className'>;
 export interface CheckboxProps extends BaseCheckboxRootProps {

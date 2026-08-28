@@ -167,7 +167,8 @@ export const ContratoDeshabilitado: Story = {
   ),
   play: async ({ canvasElement }) => {
     const trigger = within(canvasElement).getByRole('button', { name: 'No disponible' });
-    await expect(trigger).toBeDisabled();
+    await expect(trigger).toHaveAttribute('aria-disabled', 'true');
+    await userEvent.click(trigger);
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   },
 };

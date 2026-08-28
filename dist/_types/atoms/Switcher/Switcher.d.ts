@@ -1,4 +1,4 @@
-import { Switch as BaseSwitch } from '@base-ui-components/react/switch';
+import { Switch as BaseSwitch } from '@base-ui/react/switch';
 import './Switcher.css';
 type BaseSwitchRootProps = Omit<React.ComponentPropsWithoutRef<typeof BaseSwitch.Root>, 'className'>;
 export interface SwitcherProps extends Omit<BaseSwitchRootProps, 'onCheckedChange'> {

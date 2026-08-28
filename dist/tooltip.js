@@ -2,7 +2,7 @@
 import './tooltip.css';
 import { forwardRef as e, useId as t, useState as n } from "react";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { Tooltip as a } from "@base-ui-components/react/tooltip";
+import { Tooltip as a } from "@base-ui/react/tooltip";
 //#region src/stories/atoms/Tooltip/Tooltip.tsx
 function o({ children: e, delayDuration: t = 0, skipDelayDuration: n }) {
 	return /* @__PURE__ */ r(a.Provider, {

@@ -1,7 +1,7 @@
 import './figure.css';
 import { forwardRef as e } from "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { useRender as r } from "@base-ui-components/react/use-render";
+import { useRender as r } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Figure/Figure.tsx
 var i = {
 	"1:1": "figure__media--ratio-1-1",

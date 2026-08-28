@@ -1,7 +1,7 @@
 'use client';
 import './tabs.css';
 import { jsx as e } from "react/jsx-runtime";
-import { Tabs as t } from "@base-ui-components/react/tabs";
+import { Tabs as t } from "@base-ui/react/tabs";
 //#region src/stories/atoms/Tabs/Tabs.tsx
 function n({ orientation: n = "horizontal", className: r, children: i, onValueChange: a, ...o }) {
 	return /* @__PURE__ */ e(t.Root, {

@@ -3,7 +3,7 @@ import './toggle-group.css';
 import { t as e } from "./_shared/ToggleGroupContext.js";
 import { forwardRef as t, useMemo as n } from "react";
 import { jsx as r } from "react/jsx-runtime";
-import { ToggleGroup as i } from "@base-ui-components/react/toggle-group";
+import { ToggleGroup as i } from "@base-ui/react/toggle-group";
 //#region src/stories/atoms/ToggleGroup/ToggleGroup.tsx
 var a = t(function({ value: t, defaultValue: a, onValueChange: o, multiple: s = !1, size: c, orientation: l = "horizontal", children: u, className: d, ...f }, p) {
 	let m = [

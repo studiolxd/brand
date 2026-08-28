@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { ScrollArea as BaseScrollArea } from '@base-ui-components/react/scroll-area';
+import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area';
 import './ScrollArea.css';
 export interface ScrollAreaProps extends Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Root>, 'className'> {
     /**

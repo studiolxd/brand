@@ -4,7 +4,7 @@ import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Button as n } from "./button.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { Dialog as a } from "@base-ui-components/react/dialog";
+import { Dialog as a } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Sheet/Sheet.tsx
 function o({ className: e, ...t }) {
 	return /* @__PURE__ */ r("div", {

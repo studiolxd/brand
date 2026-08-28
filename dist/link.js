@@ -3,7 +3,7 @@ import './link.css';
 import { Icon as e } from "./icon.js";
 import { forwardRef as t } from "react";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
-import { useRender as a } from "@base-ui-components/react/use-render";
+import { useRender as a } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Link/Link.tsx
 var o = t(function({ href: t, children: o, external: s = !1, tone: c = "accent", icon: l, iconPosition: u = "start", render: d, className: f, ...p }, m) {
 	let h = [

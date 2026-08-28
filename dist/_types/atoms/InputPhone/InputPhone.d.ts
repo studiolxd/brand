@@ -1,4 +1,4 @@
-import { Select as BaseSelect } from '@base-ui-components/react/select';
+import { Select as BaseSelect } from '@base-ui/react/select';
 import type { Country } from 'react-phone-number-input';
 import './InputPhone.css';
 export interface InputPhoneProps {

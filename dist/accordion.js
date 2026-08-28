@@ -1,7 +1,7 @@
 'use client';
 import './accordion.css';
 import { Icon as e } from "./icon.js";
-import { Accordion as t } from "@base-ui-components/react/accordion";
+import { Accordion as t } from "@base-ui/react/accordion";
 import { Children as n, createContext as r, useContext as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/atoms/Accordion/AccordionContext.ts

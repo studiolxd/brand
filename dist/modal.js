@@ -4,7 +4,7 @@ import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Button as n } from "./button.js";
 import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
-import { Dialog as o } from "@base-ui-components/react/dialog";
+import { Dialog as o } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Modal/Modal.tsx
 function s({ open: s, onClose: c, title: l, children: u, closeLabel: d = "Cerrar", fallbackTitle: f = "Diálogo", container: p, description: m, "aria-describedby": h, ...g }) {
 	let _ = h === void 0 ? {} : { "aria-describedby": h };

@@ -2,7 +2,7 @@
 import './checkbox.css';
 import { forwardRef as e } from "react";
 import { jsx as t } from "react/jsx-runtime";
-import { Checkbox as n } from "@base-ui-components/react/checkbox";
+import { Checkbox as n } from "@base-ui/react/checkbox";
 //#region src/stories/atoms/Checkbox/Checkbox.tsx
 var r = e(function({ size: e = "md", className: r, checked: i, indeterminate: a, onCheckedChange: o, id: s, error: c = !1, ...l }, u) {
 	let d = [

@@ -3,7 +3,7 @@ import './app-launcher.css';
 import { Icon as e } from "./icon.js";
 import { Tag as t } from "./tag.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { Popover as i } from "@base-ui-components/react/popover";
+import { Popover as i } from "@base-ui/react/popover";
 //#region src/stories/molecules/AppLauncher/AppLauncher.tsx
 function a(e) {
 	return e.trim().slice(0, 1).toUpperCase();

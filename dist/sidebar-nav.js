@@ -4,7 +4,7 @@ import { Icon as e } from "./icon.js";
 import { Tooltip as t } from "./tooltip.js";
 import { Menu as n } from "./menu.js";
 import { n as r } from "./_shared/SidebarContext.js";
-import { Accordion as i } from "@base-ui-components/react/accordion";
+import { Accordion as i } from "@base-ui/react/accordion";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/SidebarNav/SidebarNav.tsx
 function c({ children: e, ...t }) {

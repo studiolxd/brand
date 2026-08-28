@@ -4,7 +4,7 @@ import { Heading as e } from "./heading.js";
 import { Paragraph as t } from "./paragraph.js";
 import { Tag as n } from "./tag.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { useRender as a } from "@base-ui-components/react/use-render";
+import { useRender as a } from "@base-ui/react/use-render";
 //#region src/stories/molecules/ProjectCard/ProjectCard.tsx
 function o({ title: o, description: s, media: c, tags: l, href: u, render: d, headingLevel: f = 3, headingSize: p = 5, tagsLabel: m = "Categorías", className: h, id: g }) {
 	let _ = a({

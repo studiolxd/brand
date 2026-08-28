@@ -5,7 +5,7 @@ import { Button as t } from "./button.js";
 import { TOAST_DURATION as n, setToastDefaultDuration as r, syncLiveToasts as i, toastManager as a } from "./toast.js";
 import { useEffect as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
-import { Toast as l } from "@base-ui-components/react/toast";
+import { Toast as l } from "@base-ui/react/toast";
 //#region src/stories/molecules/Toast/Toaster.tsx
 var u = 8, d = {
 	success: "alert--success",

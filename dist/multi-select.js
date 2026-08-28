@@ -3,7 +3,7 @@ import './multi-select.css';
 import { Icon as e } from "./icon.js";
 import { forwardRef as t, useEffect as n, useId as r, useRef as i, useState as a } from "react";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
-import { Popover as c } from "@base-ui-components/react/popover";
+import { Popover as c } from "@base-ui/react/popover";
 //#region src/stories/atoms/MultiSelect/MultiSelect.tsx
 var l = t(function({ options: t, value: l, defaultValue: u = [], placeholder: d = "Seleccionar…", disabled: f, readOnly: p, size: m = "md", onValueChange: h, id: g, name: _, error: v = !1, onBlur: y, className: b, "aria-label": x, "aria-labelledby": S, "aria-describedby": C, removeLabel: w = (e) => `Quitar ${e}`, container: T }, E) {
 	let [D, O] = a(!1), [k, A] = a(u), [j, M] = a(0), N = i(null), P = r(), F = l === void 0 ? k : l;

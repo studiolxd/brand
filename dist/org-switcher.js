@@ -5,7 +5,7 @@ import { Avatar as t } from "./avatar.js";
 import { n, t as r } from "./_shared/dropdownItems.js";
 import { n as i } from "./_shared/SidebarContext.js";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
-import { Menu as c } from "@base-ui-components/react/menu";
+import { Menu as c } from "@base-ui/react/menu";
 //#region src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx
 function l({ label: l, block: u = !1, compact: d, current: f, organizations: p, onOrgChange: m, defaultOpen: h, items: g, renderLink: _ = r }) {
 	let v = p.filter((e) => e.id !== f.id), y = i(), b = d ?? y.rail;

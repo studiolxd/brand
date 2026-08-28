@@ -1,4 +1,4 @@
-import { Slider as BaseSlider } from '@base-ui-components/react/slider';
+import { Slider as BaseSlider } from '@base-ui/react/slider';
 import './Slider.css';
 type BaseSliderRootProps = Omit<React.ComponentPropsWithoutRef<typeof BaseSlider.Root>, 'className' | 'value' | 'defaultValue' | 'onValueChange' | 'onValueCommitted'>;
 export interface SliderProps extends BaseSliderRootProps {

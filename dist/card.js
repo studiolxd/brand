@@ -6,7 +6,7 @@ import { Heading as n } from "./heading.js";
 import { Paragraph as r } from "./paragraph.js";
 import { forwardRef as i } from "react";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
-import { useRender as c } from "@base-ui-components/react/use-render";
+import { useRender as c } from "@base-ui/react/use-render";
 //#region src/stories/molecules/Card/Card.tsx
 var l = i(function({ href: r, render: i, external: l = !1, title: u, description: d, ctaLabel: f, color: p = "outline", variant: m = "default", media: h, className: g, children: _, ...v }, y) {
 	let b = [

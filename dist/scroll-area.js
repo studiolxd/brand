@@ -2,7 +2,7 @@
 import './scroll-area.css';
 import { forwardRef as e } from "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { ScrollArea as r } from "@base-ui-components/react/scroll-area";
+import { ScrollArea as r } from "@base-ui/react/scroll-area";
 //#region src/stories/atoms/ScrollArea/ScrollArea.tsx
 var i = e(function({ orientation: e = "vertical", label: i, children: a, className: o, ...s }, c) {
 	let l = e === "vertical" || e === "both", u = e === "horizontal" || e === "both";
@@ -18,11 +18,13 @@ var i = e(function({ orientation: e = "vertical", label: i, children: a, classNa
 				children: a
 			}),
 			l && /* @__PURE__ */ t(r.Scrollbar, {
+				keepMounted: !0,
 				orientation: "vertical",
 				className: "scroll-area__scrollbar",
 				children: /* @__PURE__ */ t(r.Thumb, { className: "scroll-area__thumb" })
 			}),
 			u && /* @__PURE__ */ t(r.Scrollbar, {
+				keepMounted: !0,
 				orientation: "horizontal",
 				className: "scroll-area__scrollbar",
 				children: /* @__PURE__ */ t(r.Thumb, { className: "scroll-area__thumb" })

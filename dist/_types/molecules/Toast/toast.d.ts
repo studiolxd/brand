@@ -44,7 +44,7 @@ export interface ToastPromiseMessages<Value> {
  * desde un manejador, un `catch` o un módulo sin componente— y el `Toaster` la
  * conecta con el árbol pasándosela a su `Toast.Provider`.
  */
-export declare const toastManager: import("@base-ui-components/react/toast").ToastManager;
+export declare const toastManager: import("@base-ui/react").ToastManager<any>;
 /**
  * Vida por defecto de un aviso, en milisegundos. No es un token: la mide el
  * motor de la cola en JS y un token CSS no movería nada. Cinco segundos son los

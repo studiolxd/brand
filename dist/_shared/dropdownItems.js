@@ -1,5 +1,5 @@
 import { Fragment as e, jsx as t, jsxs as n } from "react/jsx-runtime";
-import { Menu as r } from "@base-ui-components/react/menu";
+import { Menu as r } from "@base-ui/react/menu";
 //#region src/stories/molecules/_shared/dropdownItems.tsx
 function i({ children: e, ...n }) {
 	return /* @__PURE__ */ t("a", {

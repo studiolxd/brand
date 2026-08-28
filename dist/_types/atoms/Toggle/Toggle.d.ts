@@ -1,4 +1,4 @@
-import { Toggle as BaseToggle } from '@base-ui-components/react/toggle';
+import { Toggle as BaseToggle } from '@base-ui/react/toggle';
 import './Toggle.css';
 type BaseToggleProps = Omit<React.ComponentPropsWithoutRef<typeof BaseToggle>, 'className'>;
 export interface ToggleProps extends Omit<BaseToggleProps, 'onPressedChange'> {

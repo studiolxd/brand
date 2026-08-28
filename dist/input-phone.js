@@ -3,7 +3,7 @@ import './input-phone.css';
 import { Icon as e } from "./icon.js";
 import { forwardRef as t, useMemo as n } from "react";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { Select as a } from "@base-ui-components/react/select";
+import { Select as a } from "@base-ui/react/select";
 import { getCountryCallingCode as o } from "libphonenumber-js";
 import s from "react-phone-number-input";
 //#region src/stories/atoms/InputPhone/InputPhone.tsx

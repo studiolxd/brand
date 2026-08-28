@@ -1,4 +1,4 @@
-import { Dialog } from '@base-ui-components/react/dialog';
+import { Dialog } from '@base-ui/react/dialog';
 import './Modal.css';
 export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title' | 'className'> {
     open: boolean;

@@ -3,7 +3,7 @@ import './form-field.css';
 import { Label as e } from "./label.js";
 import { createContext as t, useContext as n, useId as r } from "react";
 import { jsx as i } from "react/jsx-runtime";
-import { useRender as a } from "@base-ui-components/react/use-render";
+import { useRender as a } from "@base-ui/react/use-render";
 import { Controller as o, FormProvider as s, useFormContext as c } from "react-hook-form";
 //#region src/stories/molecules/FormField/FormField.tsx
 var l = t(void 0);

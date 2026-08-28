@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { Collapsible as BaseCollapsible } from '@base-ui-components/react/collapsible';
+import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible';
 import './Collapsible.css';
 export interface CollapsibleProps extends Omit<React.ComponentPropsWithoutRef<typeof BaseCollapsible.Root>, 'onOpenChange' | 'className'> {
     /** Se llama al abrir o cerrar. Solo el estado: sin los detalles del evento. */

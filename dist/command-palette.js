@@ -3,7 +3,7 @@ import './command-palette.css';
 import { Modal as e } from "./modal.js";
 import { useCallback as t, useEffect as n } from "react";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { Autocomplete as a } from "@base-ui-components/react/autocomplete";
+import { Autocomplete as a } from "@base-ui/react/autocomplete";
 //#region src/stories/molecules/CommandPalette/CommandPalette.tsx
 function o({ open: o, onOpenChange: s, groups: c, title: l, placeholder: u, emptyLabel: d, listLabel: f, closeLabel: p, shortcut: m = "k", locale: h, className: g }) {
 	n(() => {

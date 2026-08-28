@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import { Select as BaseSelect } from '@base-ui-components/react/select';
-import type { SeparatorProps as BaseSeparatorProps } from '@base-ui-components/react/separator';
+import { Select as BaseSelect } from '@base-ui/react/select';
+import type { SeparatorProps as BaseSeparatorProps } from '@base-ui/react/separator';
 import './Select.css';
 export interface SelectOption {
     value: string;
@@ -57,7 +57,7 @@ export interface SelectValueProps extends Omit<React.ComponentPropsWithoutRef<ty
 /** Valor/placeholder del trigger. */
 export declare const SelectValue: import("react").ForwardRefExoticComponent<SelectValueProps & import("react").RefAttributes<HTMLSpanElement>>;
 /** Agrupa opciones (Base UI Group, no visual). */
-export declare const SelectGroup: import("react").ForwardRefExoticComponent<import("@base-ui-components/react/select").SelectGroupProps & import("react").RefAttributes<HTMLDivElement>>;
+export declare const SelectGroup: import("react").ForwardRefExoticComponent<Omit<import("@base-ui/react").SelectGroupProps, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 export interface SelectTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> {
     size?: 'sm' | 'md' | 'lg';
 }
@@ -77,10 +77,10 @@ export interface SelectContentProps extends React.ComponentPropsWithoutRef<typeo
 export declare const SelectContent: import("react").ForwardRefExoticComponent<SelectContentProps & import("react").RefAttributes<HTMLDivElement>>;
 export type SelectItemProps = React.ComponentPropsWithoutRef<typeof BaseSelect.Item>;
 /** Opción del Select (`.select__item`). Los children (texto o JSX) van en `ItemText`. */
-export declare const SelectItem: import("react").ForwardRefExoticComponent<Omit<import("@base-ui-components/react/select").SelectItemProps & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+export declare const SelectItem: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectItemProps, "ref"> & import("react").RefAttributes<HTMLElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 export type SelectLabelProps = React.ComponentPropsWithoutRef<typeof BaseSelect.GroupLabel>;
 /** Etiqueta de grupo (`.select__label`, tipografía del label del DS). */
-export declare const SelectLabel: import("react").ForwardRefExoticComponent<Omit<import("@base-ui-components/react/select").SelectGroupLabelProps & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+export declare const SelectLabel: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectGroupLabelProps, "ref"> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 export type SelectSeparatorProps = Omit<BaseSeparatorProps, 'className'> & {
     className?: string;
 };
@@ -105,9 +105,9 @@ export declare const Select: import("react").ForwardRefExoticComponent<SelectPro
     Trigger: import("react").ForwardRefExoticComponent<SelectTriggerProps & import("react").RefAttributes<HTMLButtonElement>>;
     Value: import("react").ForwardRefExoticComponent<SelectValueProps & import("react").RefAttributes<HTMLSpanElement>>;
     Content: import("react").ForwardRefExoticComponent<SelectContentProps & import("react").RefAttributes<HTMLDivElement>>;
-    Group: import("react").ForwardRefExoticComponent<import("@base-ui-components/react/select").SelectGroupProps & import("react").RefAttributes<HTMLDivElement>>;
-    Label: import("react").ForwardRefExoticComponent<Omit<import("@base-ui-components/react/select").SelectGroupLabelProps & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
-    Item: import("react").ForwardRefExoticComponent<Omit<import("@base-ui-components/react/select").SelectItemProps & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+    Group: import("react").ForwardRefExoticComponent<Omit<import("@base-ui/react").SelectGroupProps, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+    Label: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectGroupLabelProps, "ref"> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+    Item: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectItemProps, "ref"> & import("react").RefAttributes<HTMLElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Separator: import("react").ForwardRefExoticComponent<Omit<BaseSeparatorProps, "className"> & {
         className?: string;
     } & import("react").RefAttributes<HTMLDivElement>>;

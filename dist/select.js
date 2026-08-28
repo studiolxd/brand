@@ -3,7 +3,7 @@ import './select.css';
 import { Icon as e } from "./icon.js";
 import { Children as t, createContext as n, forwardRef as r, isValidElement as i, useContext as a, useMemo as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
-import { Select as l } from "@base-ui-components/react/select";
+import { Select as l } from "@base-ui/react/select";
 //#region src/stories/atoms/Select/Select.tsx
 var u = n(null);
 function d(e, n) {

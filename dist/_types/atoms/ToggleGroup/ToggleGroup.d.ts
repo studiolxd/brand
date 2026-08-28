@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { ToggleGroup as BaseToggleGroup } from '@base-ui-components/react/toggle-group';
+import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group';
 import './ToggleGroup.css';
 type BaseToggleGroupProps = Omit<React.ComponentPropsWithoutRef<typeof BaseToggleGroup>, 'className' | 'value' | 'defaultValue' | 'onValueChange'>;
 export interface ToggleGroupProps extends BaseToggleGroupProps {

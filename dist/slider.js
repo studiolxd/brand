@@ -1,7 +1,7 @@
 'use client';
 import './slider.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
-import { Slider as n } from "@base-ui-components/react/slider";
+import { Slider as n } from "@base-ui/react/slider";
 //#region src/stories/atoms/Slider/Slider.tsx
 function r({ value: r, defaultValue: i, onValueChange: a, onValueCommitted: o, label: s, thumbLabel: c, showValue: l = !1, orientation: u = "horizontal", className: d, ...f }) {
 	let p = r ?? i ?? 0, m = Array.isArray(p) ? p.length : 1, h = c ?? ((e, t) => t === 1 ? s ?? "Valor" : t === 2 ? e === 0 ? "Mínimo" : "Máximo" : `Valor ${e + 1}`), g = [

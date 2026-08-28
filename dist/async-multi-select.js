@@ -4,7 +4,7 @@ import { Icon as e } from "./icon.js";
 import { Spinner as t } from "./spinner.js";
 import { forwardRef as n, useCallback as r, useId as i, useRef as a, useState as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
-import { Popover as l } from "@base-ui-components/react/popover";
+import { Popover as l } from "@base-ui/react/popover";
 //#region src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx
 function u(e, t) {
 	typeof e == "function" ? e(t) : e && (e.current = t);
