@@ -30,7 +30,15 @@ export function formatMessageTimestamp(
   if (timestamp === undefined || timestamp === null) return null;
 
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
-  if (Number.isNaN(date.getTime())) return null;
+  if (Number.isNaN(date.getTime())) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        `[UserMessage/AssistantMessage] \`timestamp\` no es interpretable: ${JSON.stringify(timestamp)}. ` +
+          'Se espera un `Date` o una cadena ISO 8601 (ej. "2026-08-27T14:32:00Z"), no una hora ya formateada. No se pinta ninguna marca de tiempo.',
+      );
+    }
+    return null;
+  }
 
   return {
     dateTime: date.toISOString(),
