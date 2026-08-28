@@ -59,6 +59,35 @@ sitio, es decir, el selector de tema.
 
 <Canvas of={SiteHeaderStories.MenuAbierto} />
 
+### La columna es una
+
+El contenido del panel va en **el mismo `Container` que la barra**: mismo
+`width`, mismo aire lateral y mismo arranque, en todas las tallas y en las dos
+superficies. Abrir el menú no mueve la columna de lado —el índice empieza justo
+debajo de donde empieza la marca—, y en un móvil con muesca el aire nunca baja
+de la zona segura del sistema.
+
+Hay que ponérselo aparte porque el panel es `position: fixed`: sale del flujo de
+la banda, arranca en el borde de la pantalla y no hereda el aire que la banda ya
+puso (`panel-padding-inline`, el mismo valor que `container.padding-inline`).
+
+### El ritmo vertical
+
+Las secciones del panel —índice, buscador, ajustes— las separa **un solo
+token**, `panel-gap`. No hay un margen por sección: quien quiera otro ritmo
+cambia ese token y se mueve todo a la vez. Los ajustes van además pegados al
+borde inferior, y si el índice es más alto que la pantalla el panel hace scroll
+y quedan al final del contenido.
+
+### El buscador
+
+Cuando el menú lleva buscador, es un `SearchForm` a talla **`lg`**: en el panel
+no es un campo más de un formulario, es una de las dos formas de recorrer el
+sitio, a la par del índice, y se ve como tal —el campo más alto, la letra y la
+flecha mayores—. Va en `children`, con el índice.
+
+<Canvas of={SiteHeaderStories.EnElMenuDelSitio} />
+
 Abierto, la página de debajo no hace scroll; `Escape` lo cierra y devuelve
 el foco al botón; un clic fuera de la cabecera también lo cierra. Cerrado,
 el panel sigue en el DOM pero inerte e invisible: así la entrada y la salida

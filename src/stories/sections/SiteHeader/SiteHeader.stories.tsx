@@ -4,6 +4,7 @@ import { SiteHeader } from './SiteHeader';
 import { Button } from '../../atoms/Button/Button';
 import { Container } from '../../atoms/Container/Container';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { SearchForm } from '../../molecules/SearchForm/SearchForm';
 import { SiteNav, type SiteNavGroup } from '../../molecules/SiteNav/SiteNav';
 import { LanguageSwitcher } from '../../molecules/LanguageSwitcher/LanguageSwitcher';
 import { ThemeSwitcher } from '../../molecules/ThemeSwitcher/ThemeSwitcher';
@@ -91,6 +92,31 @@ export const Completa: Story = {
       />
     ),
     children: <SiteNav groups={indice} />,
+  },
+};
+
+/**
+ * El buscador del sitio dentro del panel, a talla `lg`: en el menú es una
+ * pieza destacada, no un campo más. Va con el índice y los ajustes en el
+ * mismo Container, y el ritmo que los separa es el del panel.
+ */
+export const EnElMenuDelSitio: Story = {
+  name: 'En el menú del sitio',
+  args: {
+    open: true,
+    children: (
+      <>
+        <SiteNav groups={indice} />
+        <SearchForm size="lg" action="/buscar" />
+      </>
+    ),
+    settings: <ThemeSwitcher value="system" />,
+    language: (
+      <LanguageSwitcher
+        value="es"
+        languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }, { code: 'fr', label: 'Français' }]}
+      />
+    ),
   },
 };
 

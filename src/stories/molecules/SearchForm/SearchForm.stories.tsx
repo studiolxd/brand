@@ -17,13 +17,13 @@ export const PorDefecto: Story = {
   args: { onSubmit: fn() },
 };
 
-/** Con la etiqueta a la vista, el botón se queda a la altura del campo. */
+/** Con la etiqueta a la vista, la flecha se queda a la altura del campo. */
 export const ConEtiquetaVisible: Story = {
   name: 'Con etiqueta visible',
   args: { label: 'Buscar en el sitio', labelHidden: false, onSubmit: fn() },
 };
 
-/** El campo con texto: no hay aspa de borrado, ni la del navegador ni propia. */
+/** El campo con texto: no hay aspa de borrado, ni la del navegador ni propia. La flecha sigue al final, dentro del borde. */
 export const ConValor: Story = {
   name: 'Con valor',
   args: { defaultValue: 'diseño de sistemas', onSubmit: fn() },
@@ -93,6 +93,62 @@ export const Controlado: Story = {
         <p>{enviado === null ? 'Sin enviar todavía.' : `Buscando: «${enviado}»`}</p>
       </Stack>
     );
+  },
+};
+
+export const TestFlechaDentroDelCampo: Story = {
+  name: 'Test — la flecha vive dentro del campo, sin caja propia',
+  tags: ['!dev'],
+  args: { onSubmit: fn() },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const campo = canvas.getByRole('textbox', { name: 'Buscar' }).getBoundingClientRect();
+    const boton = canvas.getByRole('button', { name: 'Buscar' });
+    const flecha = boton.getBoundingClientRect();
+
+    // Encajada al final del campo, por dentro de su borde y no a continuación
+    await expect(flecha.right).toBeLessThanOrEqual(campo.right + 1);
+    await expect(flecha.left).toBeGreaterThan(campo.left);
+    await expect(flecha.top).toBeGreaterThanOrEqual(campo.top - 1);
+    await expect(flecha.bottom).toBeLessThanOrEqual(campo.bottom + 1);
+
+    // Sin caja: ni fondo ni borde, en reposo ni en hover
+    const estilo = getComputedStyle(boton);
+    await expect(estilo.backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    await expect(estilo.borderTopWidth).toBe('0px');
+    await userEvent.hover(boton);
+    await expect(getComputedStyle(boton).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+  },
+};
+
+export const TestTallaLg: Story = {
+  name: 'Test — la talla lg escala el campo, la letra y la flecha',
+  tags: ['!dev'],
+  args: { onSubmit: fn() },
+  render: (args) => (
+    <Stack gap="md">
+      <SearchForm {...args} id="talla-md" size="md" label="Buscar md" />
+      <SearchForm {...args} id="talla-lg" size="lg" label="Buscar lg" />
+    </Stack>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const medida = (id: string) => {
+      const input = canvas.getByRole('textbox', { name: `Buscar ${id}` });
+      const glifo = canvasElement.querySelector(`#talla-${id}`)!
+        .closest('.search-form')!.querySelector('.search-form__submit-glyph')!;
+      return {
+        alto: input.getBoundingClientRect().height,
+        letra: parseFloat(getComputedStyle(input).fontSize),
+        glifo: glifo.getBoundingClientRect().height,
+      };
+    };
+    const md = medida('md');
+    const lg = medida('lg');
+
+    await expect(lg.alto).toBeGreaterThan(md.alto);
+    await expect(lg.letra).toBeGreaterThan(md.letra);
+    await expect(lg.glifo).toBeGreaterThan(md.glifo);
   },
 };
 

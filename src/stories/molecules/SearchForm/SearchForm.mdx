@@ -7,7 +7,7 @@ import { searchFormBaseTokens, searchFormDarkTokens } from "../../../tokens/mole
 
 # SearchForm
 
-El buscador del sitio: un campo, un botón y una página de resultados al otro lado.
+El buscador del sitio: un campo con su flecha, y una página de resultados al otro lado.
 
 <Canvas of={SearchFormStories.PorDefecto} />
 
@@ -25,10 +25,14 @@ El buscador de la web pública es `SearchForm`: se escribe, se envía y se llega
 
 ## Anatomía
 
-- **Campo** (`InputField`): la etiqueta va oculta por defecto —el botón con la flecha ya dice qué es— y la pista visible es el `placeholder`.
-- **Botón de envío** (`Button` con el icono `arrow`): siempre a la vista, nunca aparece al escribir. Es un botón-icono de la misma talla que el campo.
+- **Campo** (`InputField`): la etiqueta va oculta por defecto —la flecha ya dice qué es— y la pista visible es el `placeholder`.
+- **Flecha de envío** (`Icon name="arrow"`): siempre a la vista, nunca aparece al escribir.
 
-Los dos van en una línea y **solapan un borde**, así que las dos líneas se funden en una: el conjunto se lee como un solo control. Con la etiqueta a la vista, el botón se queda a la altura del campo, no de la etiqueta.
+La flecha **va dentro del campo**, alineada al final y por dentro de su borde: es un adorno del propio control, no un botón con caja aparte pegado a él. No hay dos rectángulos ni costura entre ellos —hay un campo, y al final un icono de acción—, que es como este sistema pinta los iconos de un campo: la lupa y el aspa de `InputField` viven igual.
+
+Sigue siendo un **botón de verdad**: se tabula, se pulsa, se nombra con `submitLabel` y envía el formulario. Lo que no tiene es cuerpo propio —ni fondo ni borde, tampoco al pasar el puntero—; el hueco cuadrado que ocupa lo reserva el `padding` del campo, así que el texto escrito nunca pasa por debajo.
+
+Con la etiqueta a la vista, la flecha se queda a la altura del campo, no de la etiqueta.
 
 <Canvas of={SearchFormStories.ConEtiquetaVisible} />
 
@@ -36,7 +40,7 @@ Los dos van en una línea y **solapan un borde**, así que las dos líneas se fu
 
 `SearchForm`, el buscador de filas de `DataTable` y el autocompletar de `DocsSearch` son el mismo campo: los tres montan sobre `Input`, así que el alto, el borde, el foco y el aire salen de los tokens `input.*`, y los de este formulario (`search-form.*`) los referencian en lugar de repetirlos. Lo que cambia es el icono de acción, y solo eso.
 
-Los otros dos usan `InputField kind="search"`, con la **lupa fija** al inicio: son campos que filtran mientras se escribe, y la lupa lo dice sin gastar texto. Aquí no hay lupa: el icono de este campo es la **flecha de envío** al final, porque lo que hace no es filtrar sino ir a una página de resultados. Un solo icono de acción por campo.
+Los otros dos usan `InputField kind="search"`, con la **lupa fija** al inicio: son campos que filtran mientras se escribe, y la lupa lo dice sin gastar texto. Aquí no hay lupa: el icono de este campo es la **flecha de envío** al final, porque lo que hace no es filtrar sino ir a una página de resultados. Un solo icono de acción por campo, y siempre dentro del campo.
 
 ## Sin aspa de borrado
 
@@ -64,13 +68,15 @@ El componente **no guarda la consulta**. Con `value` y `onChange` lo controla qu
 
 ## Anchura
 
-Ocupa el ancho de su contenedor: dentro del panel del menú se estira con él, y en una caja acotada se queda en su medida. El campo encoge y el botón no, así que una pista larga nunca empuja la flecha fuera del panel.
+Ocupa el ancho de su contenedor: dentro del panel del menú se estira con él, y en una caja acotada se queda en su medida. El campo encoge y el hueco de la flecha no, así que una pista larga nunca empuja la flecha fuera del panel.
 
 <Canvas of={SearchFormStories.AnchuraAcotada} />
 
 ## Talla
 
-La talla es del conjunto: campo y botón la comparten, y por eso miden lo mismo de alto. Dentro de un `Form` la hereda; en la superficie pública, `lg`.
+La talla es del conjunto: el campo y el hueco de la flecha la comparten. Cambia tres cosas a la vez —el **alto** del campo, el **cuerpo de letra** y el **glifo** de la flecha—, así que `lg` no es el mismo buscador estirado sino uno mayor de verdad. Dentro de un `Form` la hereda; en la superficie pública, `lg`.
+
+En el panel del menú de `SiteHeader` el buscador va siempre a **`lg`**: ahí no es un campo más de un formulario, es una de las dos formas de recorrer el sitio, a la par del índice.
 
 <Canvas of={SearchFormStories.Tallas} />
 
@@ -79,10 +85,12 @@ La talla es del conjunto: campo y botón la comparten, y por eso miden lo mismo 
 - El formulario es un punto de referencia `search`, y lo nombra `label`: con dos buscadores en la misma página —cabecera y pie— el lector de pantalla los distingue.
 - La etiqueta oculta la sigue leyendo el lector; `labelHidden={false}` la saca a la vista.
 - El botón se nombra con `submitLabel`, porque su contenido es un icono.
+- Estar dentro del campo no lo saca del orden de tabulación: se llega a él con el tabulador desde el campo, y `Enter` desde el campo también envía.
+- Como no tiene fondo, el foco lo marca un **anillo recto** por dentro del borde del campo; el hover solo cambiaría la tinta, y aquí ni eso —la regla del sistema es que un adorno no pinta fondo al pasar el puntero—.
 
 <Canvas of={SearchFormStories.EnElPanelDelMenu} />
 
-En superficie oscura no hay nada propio que cambiar: el campo y el botón traen su par oscuro, y la costura sigue sin verse porque los dos bordes comparten color también ahí.
+En superficie oscura la flecha vuelca a blanco con el resto del campo, por su par `surface-dark-*`; el campo trae el suyo. No hay nada más que cambiar, porque no hay caja que voltear.
 
 ## Textos
 
@@ -94,7 +102,7 @@ Todos los textos que emite el componente son props con default castellano: `labe
 
 ## Tokens
 
-Solo lo estructural y el fondo del botón. La tipografía, la altura, el borde y el foco salen de `Input` y de `Button`: aquí no se redefine ninguno, para que personalizar el campo o el botón alcance también al buscador.
+Lo estructural, y el hueco, el glifo y la tinta de la flecha. La tipografía, la altura y el borde del campo salen de `Input`, y los tokens de aquí los referencian en lugar de repetirlos: personalizar el campo alcanza también al buscador.
 
 <TokenTable tokens={searchFormBaseTokens} />
 
