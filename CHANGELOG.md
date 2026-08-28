@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.25.0
+
+### Cambiado
+
+- **`ConsentBanner`/`ConsentPreferences`**: «Rechazar todo» pasa de `outline` a la variante
+  primaria por defecto (igual peso visual que «Aceptar todo», sin dar prioridad implícita a
+  aceptar); «Preferencias» (banda) y «Aceptar todo» (panel de preferencias) pasan de `text` a
+  `outline`. Sin cambios de API — solo el `variant` interno de los botones.
+- **`Hero`**: los botones de `actions` reciben la talla `lg` por contexto (el mismo mecanismo
+  de reparto que usa `Form`, `FormSizeContext`), sin que el consumidor tenga que pasar `size`
+  en cada `Button`. Si un `Button` dentro de `actions` ya trae `size` explícito, gana el suyo.
+
 ## v25.24.0
 
 ### Cambiado

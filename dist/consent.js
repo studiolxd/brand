@@ -43,12 +43,11 @@ function p({ open: i = !0, onAcceptAll: a, onRejectAll: o, onOpenPreferences: s,
 						children: g
 					}),
 					/* @__PURE__ */ d(e, {
-						variant: "outline",
 						onClick: o,
 						children: _
 					}),
 					s && /* @__PURE__ */ d(e, {
-						variant: "text",
+						variant: "outline",
 						onClick: s,
 						children: v
 					})
@@ -101,12 +100,11 @@ function h({ open: t, onOpenChange: n, categories: r, value: p, onChange: h, onS
 			children: C
 		}),
 		v && /* @__PURE__ */ d(e, {
-			variant: "outline",
 			onClick: v,
 			children: T
 		}),
 		_ && /* @__PURE__ */ d(e, {
-			variant: "text",
+			variant: "outline",
 			onClick: _,
 			children: w
 		})

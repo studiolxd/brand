@@ -6,7 +6,7 @@ export interface HeroProps {
     title: ReactNode;
     /** La frase bajo el título, opcional: `Paragraph size="large"`. */
     description?: ReactNode;
-    /** Uno o varios botones (`Button`), en fila con envoltura (`Inline`), bajo el texto. */
+    /** Uno o varios botones (`Button`), en fila con envoltura (`Inline`), bajo el texto. Van a talla `lg`: la escala del Hero lo pide, y el consumidor no tiene que acordarse de pasarla. */
     actions?: ReactNode;
     /** Ancho del contenido; la banda siempre llega de lado a lado. El mismo de la barra del `SiteHeader`. */
     width?: ContainerWidth;
