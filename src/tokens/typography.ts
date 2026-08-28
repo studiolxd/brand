@@ -82,7 +82,7 @@ const style = (name: string, path: string, node: Record<string, TokenEntry>): Te
 // El párrafo no tiene nodo propio: es el cuerpo del lienzo (`text.*`), y las
 // variantes solo le pisan tamaño e interlineado.
 const base = t as unknown as Record<string, TokenEntry>;
-const para = t.paragraph as Record<string, Record<string, TokenEntry>>;
+const para = t.paragraph as unknown as Record<string, Record<string, TokenEntry>>;
 export const textStyles: TextStyle[] = [
   ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const).map((h) => style(h.toUpperCase(), h, t[h] as Record<string, TokenEntry>)),
   style('Párrafo', '', base),
