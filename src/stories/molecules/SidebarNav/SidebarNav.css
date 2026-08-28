@@ -124,13 +124,14 @@ a.sidebar-nav__group-label:focus-visible {
   text-decoration: none;
   box-shadow: none;
   transition:
-    background-color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
+    box-shadow var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
     color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }
 
+/* El hover no pinta relleno (regla de Colores): línea de tinta bajo el ítem,
+   el mismo grafismo del subrayado de `Link`. */
 .sidebar-nav__item:hover {
-  background-color: var(--sidebar-nav-item-hover-bg);
-  color: var(--sidebar-nav-item-hover-color);
+  box-shadow: inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
 }
 
 .sidebar-nav__item:focus-visible {
@@ -200,13 +201,12 @@ a.sidebar-nav__group-label:focus-visible {
   color: var(--sidebar-nav-item-color);
   cursor: pointer;
   transition:
-    background-color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
+    box-shadow var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
     color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }
 .sidebar-nav__rail-item:hover,
 .sidebar-nav__rail-item[data-popup-open] {
-  background-color: var(--sidebar-nav-item-hover-bg);
-  color: var(--sidebar-nav-item-hover-color);
+  box-shadow: inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
 }
 .sidebar-nav__rail-item:focus-visible {
   outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
@@ -216,6 +216,13 @@ a.sidebar-nav__group-label:focus-visible {
 .sidebar-nav__rail-item.sidebar-nav__rail-item--active {
   color: var(--sidebar-nav-item-active-color);
   box-shadow: inset var(--sidebar-nav-rail-active-bar-width) 0 0 var(--sidebar-nav-item-active-color);
+}
+/* La sección activa bajo el puntero conserva su barra y suma la línea de hover. */
+.sidebar-nav__rail-item.sidebar-nav__rail-item--active:hover,
+.sidebar-nav__rail-item.sidebar-nav__rail-item--active[data-popup-open] {
+  box-shadow:
+    inset var(--sidebar-nav-rail-active-bar-width) 0 0 var(--sidebar-nav-item-active-color),
+    inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
 }
 .sidebar-nav__rail-icon {
   display: inline-flex;

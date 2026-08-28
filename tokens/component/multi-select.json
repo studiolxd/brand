@@ -26,8 +26,6 @@
     "content-z-index":        { "$value": "{select.content-z-index}",        "$type": "number",    "$description": "Z-index del dropdown" },
     "content-max-height":     { "$value": "var(--available-height)", "$type": "string", "$description": "Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)" },
     "item-padding-block":     { "$value": "{select.item-padding-block}",     "$type": "dimension", "$description": "Padding block de cada opción" },
-    "item-highlighted-bg":    { "$value": "{select.item-highlighted-bg}",    "$type": "color",     "$description": "Fondo de opción en foco/hover" },
-    "item-highlighted-color": { "$value": "{select.item-highlighted-color}", "$type": "color",     "$description": "Texto de opción en foco/hover" },
     "pill-bg":                { "$value": "{color.primary}",                 "$type": "color",     "$description": "Fondo de la pill de valor seleccionado" },
     "pill-color":             { "$value": "{color.white}",                   "$type": "color",     "$description": "Texto de la pill" },
     "pill-border-radius":     { "$value": "{border-radius.round}",            "$type": "dimension", "$description": "Radio de la pill" },
@@ -49,7 +47,9 @@
     "surface-dark-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}", "$type": "color", "$description": "Placeholder color — surface-dark" },
     "surface-dark-content-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Dropdown background — surface-dark" },
     "surface-dark-content-border-color":   { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Dropdown border color — surface-dark" },
-    "surface-dark-item-highlighted-bg":    { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Highlighted item background — surface-dark" },
-    "surface-dark-item-highlighted-color": { "$value": "{color.background.dark}","$type": "color", "$description": "Highlighted item text — surface-dark" }
+    "item-focus-ring-width":  { "$value": "{select.item-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo de la opción resaltada — el del Select" },
+    "item-focus-ring-offset": { "$value": "{select.item-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo de la opción — la del Select" },
+    "item-focus-ring-color":  { "$value": "{select.item-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo de la opción — el del Select" },
+    "surface-dark-item-focus-ring-color": { "$value": "{select.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo de la opción — surface-dark" }
   }
 }

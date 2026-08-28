@@ -4,8 +4,6 @@
     "font-family":             { "$value": "{calendar.font-family}",      "$type": "string",    "$description": "Familia tipográfica base — hereda de Calendar" },
 
     "nav-color":               { "$value": "{calendar.nav-color}",        "$type": "color",     "$description": "Color de los botones prev/next — hereda de Calendar" },
-    "nav-hover-bg":            { "$value": "{calendar.nav-hover-bg}",     "$type": "color",     "$description": "Fondo hover de los botones de navegación — hereda de Calendar" },
-    "nav-hover-color":         { "$value": "{calendar.nav-hover-color}",  "$type": "color",     "$description": "Color del icono de navegación en hover — hereda de Calendar" },
     "nav-focus-ring-color":    { "$value": "{calendar.nav-focus-ring-color}",  "$type": "color",     "$description": "Color del focus ring de los botones de navegación — hereda de Calendar" },
     "nav-focus-ring-width":    { "$value": "{calendar.nav-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del focus ring — hereda de Calendar" },
     "nav-focus-ring-offset":   { "$value": "{calendar.nav-focus-ring-offset}", "$type": "dimension", "$description": "Separación del focus ring — hereda de Calendar" },
@@ -27,8 +25,6 @@
     "cell-padding-block":      { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding vertical de la celda" },
     "cell-padding-inline":     { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding horizontal de la celda" },
     "cell-bg":                 { "$value": "transparent",                 "$type": "color",     "$description": "Fondo base de las celdas" },
-    "cell-hover-bg":           { "$value": "{calendar.day-hover-bg}",     "$type": "color",     "$description": "Fondo de la celda en hover, cuando es pulsable — hereda de Calendar" },
-    "cell-hover-color":        { "$value": "{calendar.day-hover-color}",  "$type": "color",     "$description": "Color del contenido de la celda en hover — hereda de Calendar" },
 
     "cell-today-number-bg":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo del número del día de hoy" },
     "cell-today-number-color": { "$value": "{color.text.on-dark}",        "$type": "color",     "$description": "Color del número del día de hoy" },
@@ -59,15 +55,11 @@
     "lg-cell-min-height":      { "$value": "9rem",                        "$type": "dimension", "$description": "Altura mínima de celda — lg" },
 
     "surface-dark-nav-color":                  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de navegación — surface-dark" },
-    "surface-dark-nav-hover-bg":               { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo hover de navegación — surface-dark" },
-    "surface-dark-nav-hover-color":            { "$value": "{color.primary}",            "$type": "color", "$description": "Icono de navegación en hover — surface-dark" },
     "surface-dark-nav-focus-ring-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de navegación — surface-dark" },
     "surface-dark-title-color":                { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del título — surface-dark" },
     "surface-dark-weekday-color":              { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de cabeceras de día — surface-dark" },
     "surface-dark-grid-border-color":          { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde del grid — surface-dark" },
     "surface-dark-cell-outside-bg":            { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de celdas fuera de mes — surface-dark" },
-    "surface-dark-cell-hover-bg":              { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo de celda pulsable en hover — surface-dark" },
-    "surface-dark-cell-hover-color":           { "$value": "{color.primary}",            "$type": "color", "$description": "Contenido de la celda en hover — surface-dark" },
     "surface-dark-cell-focus-ring-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de la celda — surface-dark" },
     "surface-dark-cell-today-number-bg":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo del número de hoy — surface-dark" },
     "surface-dark-cell-today-number-color":    { "$value": "{color.background.dark}",    "$type": "color", "$description": "Texto del número de hoy — surface-dark" },
@@ -75,6 +67,9 @@
     "surface-dark-day-number-outside-color":   { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Número fuera de mes — surface-dark" },
     "surface-dark-more-color":                 { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Texto '+N más' — surface-dark" },
     "surface-dark-more-hover-color":           { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Hover de '+N más' — surface-dark" },
-    "surface-dark-more-focus-ring-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de '+N más' — surface-dark" }
+    "surface-dark-more-focus-ring-color":      { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de '+N más' — surface-dark" },
+    "hover-line-width":       { "$value": "{calendar.hover-line-width}", "$type": "dimension", "$description": "Grosor de la línea de hover — hereda de Calendar" },
+    "hover-line-color":       { "$value": "{calendar.hover-line-color}", "$type": "color",     "$description": "Color de la línea de hover — hereda de Calendar" },
+    "surface-dark-hover-line-color": { "$value": "{calendar.surface-dark-hover-line-color}", "$type": "color", "$description": "Color de la línea de hover — surface-dark" }
   }
 }

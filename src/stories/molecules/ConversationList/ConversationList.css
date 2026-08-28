@@ -23,16 +23,12 @@
   align-items: center;
   border-radius: var(--conversation-list-item-border-radius);
   color: var(--conversation-list-item-color);
-  transition:
-    background-color var(--conversation-list-transition-duration) var(--conversation-list-transition-easing),
-    color var(--conversation-list-transition-duration) var(--conversation-list-transition-easing);
+  transition: color var(--conversation-list-transition-duration) var(--conversation-list-transition-easing);
 }
 
-/* Bajo el puntero, la fila se rellena de marca y voltea la tinta. El gris
-   claro dejó de ser el fondo de estado del sistema: aquí se resuelve como en
-   el `SidebarNav`, invirtiendo. */
+/* Bajo el puntero la fila no se rellena (regla de Colores): sube de tinta,
+   del gris de texto secundario a tinta plena. */
 .conversation-list__item:hover {
-  background-color: var(--conversation-list-item-hover-bg);
   color: var(--conversation-list-item-hover-color);
 }
 
@@ -60,9 +56,6 @@
   font-weight: var(--conversation-list-item-active-font-weight);
 }
 
-.conversation-list__item:hover .conversation-list__label--active {
-  color: inherit;
-}
 
 .conversation-list__label:focus-visible {
   outline: var(--conversation-list-focus-ring-width) solid var(--conversation-list-focus-ring-color);
@@ -97,11 +90,6 @@
 
 .conversation-list__item:hover .conversation-list__delete {
   opacity: 1;
-  color: var(--conversation-list-item-hover-delete-color);
-}
-
-.conversation-list__item:hover .conversation-list__delete:hover {
-  color: var(--conversation-list-item-hover-delete-hover-color);
 }
 
 .conversation-list__delete:focus-visible {

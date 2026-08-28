@@ -87,10 +87,10 @@
   font-family: var(--select-font-family);
   cursor: pointer;
 
+  /* La opción resaltada no se rellena (regla de Colores): anillo del sistema. */
   &[data-highlighted] {
-    outline: none;
-    background-color: var(--select-item-highlighted-bg);
-    color: var(--select-item-highlighted-color);
+    outline: var(--select-item-focus-ring-width) solid var(--select-item-focus-ring-color);
+    outline-offset: var(--select-item-focus-ring-offset);
   }
 
   &[data-selected] {

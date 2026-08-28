@@ -25,6 +25,7 @@ $lxd-command-palette-item-gap: 0.5rem; // Gap entre icono y texto del ítem
 $lxd-command-palette-item-border-radius: 0px; // Radio de cada ítem
 $lxd-command-palette-item-font-size: 1rem; // Tamaño de texto de los ítems
 $lxd-command-palette-item-color: #111e30; // Color de texto de los ítems — comparte lenguaje con ContextMenu
-$lxd-command-palette-item-selected-bg: #111e30; // Fondo del ítem seleccionado
-$lxd-command-palette-item-selected-color: #ffffff; // Color de texto del ítem seleccionado
+$lxd-command-palette-item-focus-ring-width: 2px; // Grosor del anillo del ítem resaltado — el del Menu
+$lxd-command-palette-item-focus-ring-offset: 1px; // Separación del anillo del ítem — la del Menu
+$lxd-command-palette-item-focus-ring-color: #111e30; // Color del anillo del ítem — el del Menu
 $lxd-command-palette-item-icon-size: 1.5rem; // Talla del icono de los ítems

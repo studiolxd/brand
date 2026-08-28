@@ -24,13 +24,12 @@
     "item-font-weight":    { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso de texto de ítems" },
     "item-line-height":    { "$value": "{line-height.snug}",    "$type": "number",    "$description": "Interlineado de ítems" },
     "item-color":          { "$value": "{color.text.on-light}",          "$type": "color",     "$description": "Color de texto de ítems" },
-    "item-hover-bg":       { "$value": "{color.primary}",       "$type": "color",     "$description": "Fondo de ítem al hover" },
-    "item-hover-color":    { "$value": "{color.text.on-dark}",    "$type": "color",     "$description": "Color de texto de ítem al hover" },
+    "item-focus-ring-width":  { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del anillo del ítem resaltado (`[data-highlighted]`): el resalte no pinta relleno, lo marca el anillo del sistema" },
+    "item-focus-ring-offset": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Separación del anillo del ítem" },
+    "item-focus-ring-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del anillo del ítem — la tinta de la superficie" },
     "item-selected-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number", "$description": "La opción elegida de un grupo de radio, en énfasis: sin glifo" },
     "item-cursor":         { "$value": "pointer",         "$type": "string",    "$description": "Cursor de ítems" },
     "item-destructive-color":       { "$value": "{color.destructive-text-on-light}",       "$type": "color", "$description": "Color de texto de ítem destructivo" },
-    "item-destructive-hover-bg":    { "$value": "{color.destructive-fill}",    "$type": "color", "$description": "Fondo de ítem destructivo al hover" },
-    "item-destructive-hover-color": { "$value": "{color.destructive-fill-text}", "$type": "color", "$description": "Color de texto de ítem destructivo al hover" },
     "label-padding-block":  { "$value": "{spacing.2}",                       "$type": "dimension", "$description": "Padding vertical del rótulo de sección" },
     "label-padding-inline": { "$value": "{spacing.4}",                       "$type": "dimension", "$description": "Padding horizontal del rótulo de sección" },
     "label-font-size":      { "$value": "{font-size.1}",                     "$type": "dimension", "$description": "Tamaño de texto del rótulo de sección" },
@@ -43,12 +42,9 @@
     "transition-duration": { "$value": "{floating-panel.transition-duration}", "$type": "number",    "$description": "Duración de transición" },
     "transition-easing":   { "$value": "{floating-panel.transition-easing}",   "$type": "string",    "$description": "Easing de transición" },
     "surface-dark-item-color":                  { "$value": "{color.text.on-dark}",                  "$type": "color", "$description": "Color de texto de ítems — surface-dark" },
-    "surface-dark-item-hover-bg":               { "$value": "{color.text.on-dark}",               "$type": "color", "$description": "Fondo hover de ítem — surface-dark" },
-    "surface-dark-item-hover-color":            { "$value": "{color.primary}",            "$type": "color", "$description": "Texto hover de ítem — surface-dark" },
+    "surface-dark-item-focus-ring-color":       { "$value": "{color.text.on-dark}",                  "$type": "color", "$description": "Color del anillo del ítem — surface-dark" },
     "surface-dark-separator-color":             { "$value": "{color.text.on-dark}",             "$type": "color", "$description": "Color del separador — surface-dark" },
     "surface-dark-label-color":                 { "$value": "{color.text.muted-on-dark}",                              "$type": "color", "$description": "Color del rótulo de sección — surface-dark" },
-    "surface-dark-item-destructive-color":       { "$value": "{color.destructive-text-on-dark}",      "$type": "color", "$description": "Color de ítem destructivo — surface-dark" },
-    "surface-dark-item-destructive-hover-bg":    { "$value": "{color.destructive-fill}",   "$type": "color", "$description": "Fondo hover de ítem destructivo — surface-dark" },
-    "surface-dark-item-destructive-hover-color": { "$value": "{color.destructive-fill-text}","$type": "color", "$description": "Texto hover de ítem destructivo — surface-dark" }
+    "surface-dark-item-destructive-color":       { "$value": "{color.destructive-text-on-dark}",      "$type": "color", "$description": "Color de ítem destructivo — surface-dark" }
   }
 }

@@ -6,7 +6,6 @@ $lxd-user-menu-trigger-padding-inline: 0.75rem; // Padding horizontal del trigge
 $lxd-user-menu-trigger-compact-padding-inline: 0.25rem; // Padding horizontal del botón compacto (solo avatar)
 $lxd-user-menu-trigger-gap: 0.75rem; // Espacio entre avatar y nombre
 $lxd-user-menu-trigger-border-radius: 0px; // Radio del trigger
-$lxd-user-menu-trigger-hover-bg: rgba(0, 0, 0, 0); // Fondo del trigger al hover — sin fondo, estilo ghost
 $lxd-user-menu-focus-ring-color: #111e30; // Color del focus ring
 $lxd-user-menu-focus-ring-width: 2px; // Grosor del focus ring
 $lxd-user-menu-focus-ring-offset: 1px; // Separación del focus ring
@@ -39,11 +38,10 @@ $lxd-user-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // T
 $lxd-user-menu-item-font-size: 1rem; // Tamaño de texto de ítems
 $lxd-user-menu-item-font-weight: 300; // Peso de ítems
 $lxd-user-menu-item-color: #111e30; // Color de ítems
-$lxd-user-menu-item-hover-bg: #111e30; // Fondo de ítem al hover
-$lxd-user-menu-item-hover-color: #ffffff; // Color de ítem al hover
+$lxd-user-menu-item-focus-ring-width: 2px; // Grosor del anillo del ítem resaltado — el del Menu
+$lxd-user-menu-item-focus-ring-offset: 1px; // Separación del anillo del ítem — la del Menu
+$lxd-user-menu-item-focus-ring-color: #111e30; // Color del anillo del ítem — el del Menu
 $lxd-user-menu-item-destructive-color: #b30000; // Color de ítem destructivo
-$lxd-user-menu-item-destructive-hover-bg: #b30000; // Fondo de ítem destructivo al hover
-$lxd-user-menu-item-destructive-hover-color: #ffffff; // Color de ítem destructivo al hover
 $lxd-user-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
 $lxd-user-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
 $lxd-user-menu-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema

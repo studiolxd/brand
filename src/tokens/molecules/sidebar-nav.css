@@ -26,13 +26,13 @@
   --sidebar-nav-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
   --sidebar-nav-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --sidebar-nav-item-color: var(--color-text-on-light); /** Color de ítems */
-  --sidebar-nav-item-hover-bg: var(--color-primary); /** Resalte al hover: el mismo relleno de marca que los menús */
-  --sidebar-nav-item-hover-color: var(--color-text-on-dark); /** Color de ítem al hover */
   --sidebar-nav-item-active-color: var(--color-primary); /** Color de ítem activo */
   --sidebar-nav-item-active-font-weight: var(--font-weight-emphasis); /** Peso de ítem activo */
   --sidebar-nav-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --sidebar-nav-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --sidebar-nav-rail-active-bar-width: var(--border-width-focus); /** Barra al borde que marca la sección activa en rail */
+  --sidebar-nav-item-hover-line-width: var(--border-width-default); /** Grosor de la línea que marca el ítem bajo el puntero. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el ítem, el mismo grafismo del subrayado de `Link` */
+  --sidebar-nav-item-hover-line-color: var(--color-primary); /** Color de la línea de hover — tinta de la superficie */
 }
 
 .surface-dark,
@@ -40,8 +40,7 @@
 html.dark {
   --sidebar-nav-group-label-color: var(--color-text-muted-on-dark); /** Color de la etiqueta de grupo — surface-dark. `group-label-color` (prussian) sería invisible sobre fondo oscuro. */
   --sidebar-nav-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
-  --sidebar-nav-item-hover-bg: var(--color-text-on-dark); /** Resalte al hover — surface-dark: invertido, como los menús */
-  --sidebar-nav-item-hover-color: var(--color-primary); /** Color de ítem al hover — surface-dark */
   --sidebar-nav-item-active-color: var(--color-accent-1); /** Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher. */
   --sidebar-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento. */
+  --sidebar-nav-item-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover — surface-dark */
 }

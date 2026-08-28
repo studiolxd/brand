@@ -22,8 +22,6 @@
   --tabs-trigger-indicator-width: var(--border-width-default); /** Grosor del indicador activo (underline) */
   --tabs-trigger-indicator-color: var(--color-primary); /** Color del indicador activo */
   --tabs-trigger-pill-bg-active: var(--color-primary); /** Fondo del trigger activo en variante pill */
-  --tabs-trigger-pill-hover-bg: var(--color-primary); /** Fondo del trigger en hover, variante pill (no activo) — mismo patrón de relleno de marca que Menu/Button ghost */
-  --tabs-trigger-pill-hover-color: var(--color-text-on-dark); /** Texto del trigger en hover, variante pill */
   --tabs-trigger-border-radius: var(--border-radius-default); /** Radio de borde del trigger (pill + focus ring) */
   --tabs-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --tabs-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
@@ -37,8 +35,6 @@ html.dark {
   --tabs-trigger-color: var(--color-text-muted-on-dark); /** Color del trigger inactivo — surface-dark */
   --tabs-trigger-hover-color: var(--color-text-on-dark); /** Color hover del trigger — surface-dark */
   --tabs-trigger-active-color: var(--color-text-on-dark); /** Color del trigger activo — surface-dark */
-  --tabs-trigger-pill-hover-bg: var(--color-text-on-dark); /** Fondo hover del trigger, variante pill — surface-dark */
-  --tabs-trigger-pill-hover-color: var(--color-primary); /** Texto hover del trigger, variante pill — surface-dark */
   --tabs-trigger-pill-bg-active: var(--color-text-on-dark); /** Fondo del trigger activo, variante pill — surface-dark: color.primary colisiona con el fondo (los dos son prusia), se invierte a blanco */
   --tabs-trigger-pill-color-active: var(--color-primary); /** Texto del trigger activo, variante pill — surface-dark */
   --tabs-trigger-indicator-color: var(--color-text-on-dark); /** Indicador de pestaña activa (underline) — surface-dark: color.primary colisiona con el fondo */

@@ -32,8 +32,6 @@
   --calendar-planner-transition-duration: var(--calendar-transition-duration); /** Duración de las transiciones — hereda de Calendar */
   --calendar-planner-transition-easing: var(--calendar-transition-easing); /** Easing de las transiciones — hereda de Calendar */
   --calendar-planner-nav-color: var(--calendar-nav-color); /** Color de los botones prev/next — hereda de Calendar */
-  --calendar-planner-nav-hover-bg: var(--calendar-nav-hover-bg); /** Fondo hover de los botones de navegación — hereda de Calendar */
-  --calendar-planner-nav-hover-color: var(--calendar-nav-hover-color); /** Color del icono de navegación en hover — hereda de Calendar */
   --calendar-planner-nav-focus-ring-color: var(--calendar-nav-focus-ring-color); /** Color del focus ring de los botones de navegación — hereda de Calendar */
   --calendar-planner-nav-focus-ring-width: var(--calendar-nav-focus-ring-width); /** Grosor del focus ring — hereda de Calendar */
   --calendar-planner-nav-focus-ring-offset: var(--calendar-nav-focus-ring-offset); /** Separación del focus ring — hereda de Calendar */
@@ -41,28 +39,24 @@
   --calendar-planner-title-font-weight: var(--calendar-title-font-weight); /** Peso del título del mes — hereda de Calendar */
   --calendar-planner-title-color: var(--calendar-title-color); /** Color del título del mes — hereda de Calendar */
   --calendar-planner-weekday-color: var(--calendar-weekday-color); /** Color de las cabeceras de día de semana — hereda de Calendar */
-  --calendar-planner-cell-hover-bg: var(--calendar-day-hover-bg); /** Fondo de la celda en hover, cuando es pulsable — hereda de Calendar */
-  --calendar-planner-cell-hover-color: var(--calendar-day-hover-color); /** Color del contenido de la celda en hover — hereda de Calendar */
   --calendar-planner-cell-focus-ring-color: var(--calendar-day-focus-ring-color); /** Color del focus ring de la celda — hereda de Calendar */
   --calendar-planner-cell-focus-ring-width: var(--calendar-day-focus-ring-width); /** Grosor del focus ring de la celda — hereda de Calendar */
   --calendar-planner-cell-focus-ring-offset: var(--calendar-day-focus-ring-offset); /** Separación del focus ring de la celda — hereda de Calendar */
   --calendar-planner-day-number-color: var(--calendar-day-color); /** Color del número del día — hereda de Calendar */
   --calendar-planner-day-number-outside-color: var(--calendar-outside-color); /** Color del número en días fuera del mes — hereda de Calendar */
+  --calendar-planner-hover-line-width: var(--calendar-hover-line-width); /** Grosor de la línea de hover — hereda de Calendar */
+  --calendar-planner-hover-line-color: var(--calendar-hover-line-color); /** Color de la línea de hover — hereda de Calendar */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
   --calendar-planner-nav-color: var(--color-text-on-dark); /** Color de navegación — surface-dark */
-  --calendar-planner-nav-hover-bg: var(--color-text-on-dark); /** Fondo hover de navegación — surface-dark */
-  --calendar-planner-nav-hover-color: var(--color-primary); /** Icono de navegación en hover — surface-dark */
   --calendar-planner-nav-focus-ring-color: var(--color-text-on-dark); /** Focus ring de navegación — surface-dark */
   --calendar-planner-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
   --calendar-planner-weekday-color: var(--color-text-muted-on-dark); /** Color de cabeceras de día — surface-dark */
   --calendar-planner-grid-border-color: var(--color-text-on-dark); /** Borde del grid — surface-dark */
   --calendar-planner-cell-outside-bg: var(--color-surface-secondary-on-dark); /** Fondo de celdas fuera de mes — surface-dark */
-  --calendar-planner-cell-hover-bg: var(--color-text-on-dark); /** Fondo de celda pulsable en hover — surface-dark */
-  --calendar-planner-cell-hover-color: var(--color-primary); /** Contenido de la celda en hover — surface-dark */
   --calendar-planner-cell-focus-ring-color: var(--color-text-on-dark); /** Focus ring de la celda — surface-dark */
   --calendar-planner-cell-today-number-bg: var(--color-text-on-dark); /** Fondo del número de hoy — surface-dark */
   --calendar-planner-cell-today-number-color: var(--color-background-dark); /** Texto del número de hoy — surface-dark */
@@ -71,4 +65,5 @@ html.dark {
   --calendar-planner-more-color: var(--color-text-muted-on-dark); /** Texto '+N más' — surface-dark */
   --calendar-planner-more-hover-color: var(--color-text-on-dark); /** Hover de '+N más' — surface-dark */
   --calendar-planner-more-focus-ring-color: var(--color-text-on-dark); /** Focus ring de '+N más' — surface-dark */
+  --calendar-planner-hover-line-color: var(--calendar-hover-line-color); /** Color de la línea de hover — surface-dark */
 }

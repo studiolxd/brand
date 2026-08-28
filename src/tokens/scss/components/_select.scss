@@ -28,11 +28,12 @@ $lxd-select-content-z-index: 400; // Capa del desplegable: flotante
 $lxd-select-content-max-height: var(--available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)
 $lxd-select-item-padding-block: 0.5rem; // Padding block de cada opción
 $lxd-select-item-selected-font-weight: 500; // La opción elegida, en énfasis
-$lxd-select-item-highlighted-bg: #111e30; // Fondo de opción resaltada
-$lxd-select-item-highlighted-color: #ffffff; // Texto de opción resaltada
 $lxd-select-sm-font-size: 0.875rem; // Cuerpo — sm
 $lxd-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
 $lxd-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
 $lxd-select-lg-font-size: 1.25rem; // Cuerpo — lg
 $lxd-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
 $lxd-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg
+$lxd-select-item-focus-ring-width: 2px; // Grosor del anillo de la opción resaltada. La opción bajo el puntero o el teclado no se rellena (regla de Colores): la marca el anillo del sistema
+$lxd-select-item-focus-ring-offset: calc(-1 * 2px); // Separación del anillo de la opción: hacia dentro, para no salirse del panel
+$lxd-select-item-focus-ring-color: #111e30; // Color del anillo de la opción — tinta de la superficie

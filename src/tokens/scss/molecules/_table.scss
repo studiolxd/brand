@@ -20,9 +20,9 @@ $lxd-table-sort-icon-inactive-opacity: 0.35; // Opacidad del icono de sort cuand
 $lxd-table-cell-padding-block: 0.75rem; // Padding block de celda
 $lxd-table-cell-padding-inline: 0.75rem; // Padding inline de celda
 $lxd-table-row-border-color: #111e30; // Color del separador entre filas
-$lxd-table-row-hover-bg: #111e30; // Fondo de fila interactiva al hover: el mismo relleno de marca que los menús y el SidebarNav
-$lxd-table-row-hover-color: #ffffff; // Tinta de la fila interactiva al hover, sobre el relleno de marca
 $lxd-table-row-selected-color: #111e30; // Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris
+$lxd-table-row-hover-marker-width: 2px; // Grosor de la barra que marca la fila bajo el puntero. El hover no pinta relleno (regla de Colores): la fila se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la sección activa del SidebarNav en rail
+$lxd-table-row-hover-marker-color: #111e30; // Color de la barra de hover — tinta de la superficie
 $lxd-table-row-selected-font-weight: 500; // Peso de la fila seleccionada
 $lxd-table-footer-bg: #f2f2f2; // Fondo del tfoot: superficie clara secundaria, no un fondo de estado
 $lxd-table-footer-border-width: 1px; // Borde superior del tfoot — 1px, como el del thead

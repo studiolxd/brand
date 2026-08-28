@@ -24,9 +24,9 @@
     "cell-padding-inline":    { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding inline de celda" },
 
     "row-border-color":       { "$value": "{color.primary}",       "$type": "color",     "$description": "Color del separador entre filas" },
-    "row-hover-bg":           { "$value": "{color.primary}",          "$type": "color",     "$description": "Fondo de fila interactiva al hover: el mismo relleno de marca que los menús y el SidebarNav" },
-    "row-hover-color":        { "$value": "{color.text.on-dark}",     "$type": "color",     "$description": "Tinta de la fila interactiva al hover, sobre el relleno de marca" },
     "row-selected-color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris" },
+    "row-hover-marker-width": { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Grosor de la barra que marca la fila bajo el puntero. El hover no pinta relleno (regla de Colores): la fila se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la sección activa del SidebarNav en rail" },
+    "row-hover-marker-color": { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de la barra de hover — tinta de la superficie" },
     "row-selected-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de la fila seleccionada" },
 
     "footer-bg":              { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo del tfoot: superficie clara secundaria, no un fondo de estado" },
@@ -51,11 +51,10 @@
     "surface-dark-sort-icon-color":       { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Icono de sort inactivo — surface-dark" },
     "surface-dark-sort-icon-active-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Icono de sort activo — surface-dark" },
     "surface-dark-row-border-color":   { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Separador entre filas — surface-dark" },
-    "surface-dark-row-hover-bg":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo de fila al hover — surface-dark: invertido, como los menús" },
-    "surface-dark-row-hover-color":    { "$value": "{color.primary}",           "$type": "color", "$description": "Tinta de la fila al hover — surface-dark" },
     "surface-dark-row-selected-color": { "$value": "{color.accent-1}",          "$type": "color", "$description": "Tinta de la fila seleccionada — surface-dark: lavanda, como en el SidebarNav" },
     "surface-dark-footer-bg":          { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del tfoot — surface-dark" },
     "surface-dark-footer-border-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde superior del tfoot — surface-dark" },
-    "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" }
+    "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" },
+    "surface-dark-row-hover-marker-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la barra de hover — surface-dark" }
   }
 }

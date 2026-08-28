@@ -36,6 +36,18 @@ function lightNameFromDarkToken(token) {
   return [...path.slice(0, -1), stripped].join('-');
 }
 
+// Un token oscuro puede referenciar el par oscuro de OTRO componente
+// (`{menu.surface-dark-item-color}`). Style Dictionary lo emitiría como
+// `var(--menu-surface-dark-item-color)`, una variable que no existe: el par
+// oscuro se publica con el nombre de su par claro. Dentro del bloque oscuro,
+// donde `--menu-item-color` YA vale el valor oscuro sobre el mismo elemento,
+// la referencia correcta es la del nombre claro — que es a lo que se reescribe
+// aquí. Sin esto, la propiedad queda inválida y el componente pierde su color
+// en superficie oscura.
+function remapDarkReferences(css) {
+  return css.replace(/var\(--([a-z0-9-]+?)-surface-dark-([a-z0-9-]+)\)/g, 'var(--$1-$2)');
+}
+
 /**
  * Registra el formato `css/variables-with-dark-mode`: igual que el
  * `css/variables` built-in de Style Dictionary, pero además emite un
@@ -76,7 +88,7 @@ export function registerDarkModeFormat(StyleDictionary) {
           formatting,
           usesDtcg,
         });
-        output += `\n${darkSelectors.join(',\n')} {\n${darkVars}\n}\n`;
+        output += `\n${darkSelectors.join(',\n')} {\n${remapDarkReferences(darkVars)}\n}\n`;
       }
 
       return output;

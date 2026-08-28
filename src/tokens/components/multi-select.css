@@ -42,8 +42,9 @@
   --multi-select-focus-ring-width: var(--select-focus-ring-width); /** Grosor del anillo de foco */
   --multi-select-focus-ring-color: var(--select-focus-ring-color); /** Color del anillo de foco */
   --multi-select-content-border-color: var(--select-content-border-color); /** Borde del dropdown */
-  --multi-select-item-highlighted-bg: var(--select-item-highlighted-bg); /** Fondo de opción en foco/hover */
-  --multi-select-item-highlighted-color: var(--select-item-highlighted-color); /** Texto de opción en foco/hover */
+  --multi-select-item-focus-ring-width: var(--select-item-focus-ring-width); /** Grosor del anillo de la opción resaltada — el del Select */
+  --multi-select-item-focus-ring-offset: var(--select-item-focus-ring-offset); /** Separación del anillo de la opción — la del Select */
+  --multi-select-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo de la opción — el del Select */
 }
 
 .surface-dark,
@@ -57,6 +58,5 @@ html.dark {
   --multi-select-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder color — surface-dark */
   --multi-select-content-bg: var(--color-background-dark); /** Dropdown background — surface-dark */
   --multi-select-content-border-color: var(--color-text-on-dark); /** Dropdown border color — surface-dark */
-  --multi-select-item-highlighted-bg: var(--color-text-on-dark); /** Highlighted item background — surface-dark */
-  --multi-select-item-highlighted-color: var(--color-background-dark); /** Highlighted item text — surface-dark */
+  --multi-select-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo de la opción — surface-dark */
 }

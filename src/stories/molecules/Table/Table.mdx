@@ -66,11 +66,12 @@ marca la fila elegida.
 
 ## Cómo se dicen los estados
 
-- **Hover de fila interactiva**: inversión —relleno de marca y tinta clara—, el mismo
-  patrón que `Menu` y `SidebarNav`. No hay fondo gris de estado en el sistema.
+- **Hover de fila interactiva**: una barra de tinta en el borde de inicio de la fila
+  (`row-hover-marker-*`), sin relleno — la regla de estados del sistema
+  (Foundations → Colores). Ni fondo gris ni inversión.
 - **Fila seleccionada**: tinta y peso (`row-selected-color`, `row-selected-font-weight`),
-  sin fondo, igual que la conversación abierta del `ConversationList`. Bajo el puntero la
-  fila seleccionada adopta la tinta del hover para seguir leyéndose sobre el relleno.
+  sin fondo, igual que la conversación abierta del `ConversationList`. Bajo el puntero
+  conserva su tinta y suma la barra de hover.
 - **Hover de una columna ordenable**: no pinta fondo; lleva el icono de ordenación de su
   opacidad en reposo (`sort-icon-inactive-opacity`) al color activo. La afordancia es el
   icono, no un rectángulo gris.

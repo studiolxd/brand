@@ -28,8 +28,9 @@
   --command-palette-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
   --command-palette-input-border-color: var(--floating-panel-border-color); /** Color de la línea bajo el buscador */
   --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — comparte lenguaje con ContextMenu */
-  --command-palette-item-selected-bg: var(--menu-item-hover-bg); /** Fondo del ítem seleccionado */
-  --command-palette-item-selected-color: var(--menu-item-hover-color); /** Color de texto del ítem seleccionado */
+  --command-palette-item-focus-ring-width: var(--menu-item-focus-ring-width); /** Grosor del anillo del ítem resaltado — el del Menu */
+  --command-palette-item-focus-ring-offset: var(--menu-item-focus-ring-offset); /** Separación del anillo del ítem — la del Menu */
+  --command-palette-item-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del ítem — el del Menu */
 }
 
 .surface-dark,
@@ -37,7 +38,6 @@
 html.dark {
   --command-palette-empty-color: var(--color-text-muted-on-dark); /** Color del estado vacío — surface-dark */
   --command-palette-heading-color: var(--color-text-muted-on-dark); /** Color del título de grupo — surface-dark */
-  --command-palette-item-color: var(--menu-surface-dark-item-color); /** Color de texto de los ítems — surface-dark */
-  --command-palette-item-selected-bg: var(--menu-surface-dark-item-hover-bg); /** Fondo del ítem seleccionado — surface-dark */
-  --command-palette-item-selected-color: var(--menu-surface-dark-item-hover-color); /** Texto del ítem seleccionado — surface-dark */
+  --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — surface-dark */
+  --command-palette-item-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del ítem — surface-dark */
 }

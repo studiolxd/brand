@@ -3,7 +3,6 @@
  */
 
 :root {
-  --org-switcher-trigger-hover-bg: rgba(0, 0, 0, 0); /** Fondo del trigger al hover — sin fondo, estilo ghost */
   --org-switcher-content-min-width: 14rem; /** Ancho mínimo del panel: nombres de organización (no es una talla de componente) */
   --org-switcher-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger */
   --org-switcher-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger */
@@ -32,8 +31,10 @@
   --org-switcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --org-switcher-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --org-switcher-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
-  --org-switcher-item-hover-bg: var(--menu-item-hover-bg); /** Fondo de ítem al hover: el resalte de los menús */
-  --org-switcher-item-hover-color: var(--menu-item-hover-color); /** Texto de ítem al hover */
+  --org-switcher-item-focus-ring-width: var(--menu-item-focus-ring-width); /** Grosor del anillo del ítem resaltado — el del Menu */
+  --org-switcher-item-focus-ring-offset: var(--menu-item-focus-ring-offset); /** Separación del anillo del ítem — la del Menu */
+  --org-switcher-item-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del ítem — el del Menu */
+  --org-switcher-item-destructive-color: var(--menu-item-destructive-color); /** Color de ítem destructivo — el del Menu */
   --org-switcher-separator-color: var(--separator-color); /** Color del separador — el de la línea del sistema */
   --org-switcher-separator-height: var(--separator-thickness); /** Alto del separador — el grosor de la línea del sistema */
 }
@@ -41,11 +42,10 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --org-switcher-trigger-hover-bg: rgba(0, 0, 0, 0); /** Fondo del trigger al hover — surface-dark, sin fondo (igual que en claro) */
   --org-switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --org-switcher-name-color: var(--color-text-on-dark); /** Color del nombre de la org — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
   --org-switcher-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
-  --org-switcher-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark. El valor va directo al rol: un token surface-dark-* no puede referenciar otro surface-dark-*, porque ese no llega a declararse como custom property */
-  --org-switcher-item-hover-color: var(--menu-surface-dark-item-hover-color); /** Texto de ítem al hover — surface-dark */
-  --org-switcher-item-hover-bg: var(--menu-surface-dark-item-hover-bg); /** Fondo de ítem al hover — surface-dark */
+  --org-switcher-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
+  --org-switcher-item-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del ítem — surface-dark */
+  --org-switcher-item-destructive-color: var(--menu-item-destructive-color); /** Color de ítem destructivo — surface-dark */
 }

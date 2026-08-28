@@ -4,8 +4,6 @@
 $lxd-app-launcher-trigger-size: 2.5rem; // Tamaño (cuadrado) del botón de rejilla
 $lxd-app-launcher-trigger-border-radius: 0px; // Radio del trigger
 $lxd-app-launcher-trigger-color: #111e30; // Color del icono de rejilla
-$lxd-app-launcher-trigger-hover-bg: #111e30; // Fondo del trigger al hover — relleno de marca, patrón Menu/Button ghost
-$lxd-app-launcher-trigger-hover-color: #ffffff; // Color del icono al hover, sobre el relleno de marca
 $lxd-app-launcher-focus-ring-color: #111e30; // Color del focus ring
 $lxd-app-launcher-focus-ring-width: 2px; // Grosor del focus ring
 $lxd-app-launcher-focus-ring-offset: 1px; // Separación del focus ring
@@ -26,8 +24,6 @@ $lxd-app-launcher-tile-padding-block: 0.5rem; // Padding vertical de cada tile
 $lxd-app-launcher-tile-padding-inline: 0.25rem; // Padding horizontal de cada tile
 $lxd-app-launcher-tile-gap: 0.25rem; // Espacio entre icono y nombre dentro del tile
 $lxd-app-launcher-tile-border-radius: 0px; // Radio de cada tile
-$lxd-app-launcher-tile-hover-bg: #111e30; // Fondo del tile al hover/focus — relleno de marca, patrón Menu/Button ghost
-$lxd-app-launcher-tile-active-bg: #111e30; // Fondo del tile de la app actual — mismo relleno de marca que el hover
 $lxd-app-launcher-tile-icon-size: 2.5rem; // Tamaño del cuadrado de icono/inicial
 $lxd-app-launcher-tile-icon-border-radius: 0px; // Radio del cuadrado de icono/inicial
 $lxd-app-launcher-tile-icon-font-size: 1.25rem; // Tamaño de la inicial cuando no hay icono
@@ -36,6 +32,8 @@ $lxd-app-launcher-tile-icon-color: #ffffff; // Color de la inicial sobre el fond
 $lxd-app-launcher-tile-name-font-size: 0.875rem; // Tamaño de texto del nombre de app
 $lxd-app-launcher-tile-name-font-weight: 300; // Peso del nombre de app
 $lxd-app-launcher-tile-name-color: #111e30; // Color del nombre de app
-$lxd-app-launcher-tile-name-hover-color: #ffffff; // Color del nombre al hover/focus, sobre el relleno de marca
-$lxd-app-launcher-tile-name-active-color: #ffffff; // Color del nombre de la app actual, sobre el relleno de marca
 $lxd-app-launcher-tile-name-active-font-weight: 500; // Peso del nombre — app actual
+$lxd-app-launcher-hover-line-width: 1px; // Grosor de la línea de hover del trigger y de los tiles. Ni el disparador ni el tile se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo
+$lxd-app-launcher-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie
+$lxd-app-launcher-tile-active-marker-width: 2px; // Grosor de la barra que marca la app actual, en el borde de inicio del tile
+$lxd-app-launcher-tile-active-marker-color: #111e30; // Color de la barra de la app actual

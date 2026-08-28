@@ -149,11 +149,11 @@
   color: var(--multi-select-color);
   cursor: pointer;
 
+  /* La opción resaltada no se rellena (regla de Colores): anillo del sistema. */
   &:focus-visible,
   &:hover {
-    outline: none;
-    background-color: var(--multi-select-item-highlighted-bg);
-    color: var(--multi-select-item-highlighted-color);
+    outline: var(--multi-select-item-focus-ring-width) solid var(--multi-select-item-focus-ring-color);
+    outline-offset: var(--multi-select-item-focus-ring-offset);
   }
 
   &.async-multi-select__item--selected {
@@ -161,9 +161,8 @@
   }
 
   &.async-multi-select__item--active {
-    outline: none;
-    background-color: var(--multi-select-item-highlighted-bg);
-    color: var(--multi-select-item-highlighted-color);
+    outline: var(--multi-select-item-focus-ring-width) solid var(--multi-select-item-focus-ring-color);
+    outline-offset: var(--multi-select-item-focus-ring-offset);
   }
 }
 
@@ -196,15 +195,6 @@
     background-color: currentColor;
   }
 
-  .async-multi-select__item:focus-visible &,
-  .async-multi-select__item:hover & {
-    border-color: var(--multi-select-item-highlighted-color);
-  }
-
-  .async-multi-select__item--selected:focus-visible &,
-  .async-multi-select__item--selected:hover & {
-    background-color: var(--multi-select-item-highlighted-color);
-  }
 }
 
 .async-multi-select__item-check-mark {

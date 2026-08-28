@@ -4,8 +4,6 @@
 $lxd-calendar-planner-gap: 0.5rem; // Gap entre cabecera y cuadrícula — hereda de Calendar
 $lxd-calendar-planner-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base — hereda de Calendar
 $lxd-calendar-planner-nav-color: #111e30; // Color de los botones prev/next — hereda de Calendar
-$lxd-calendar-planner-nav-hover-bg: #111e30; // Fondo hover de los botones de navegación — hereda de Calendar
-$lxd-calendar-planner-nav-hover-color: #ffffff; // Color del icono de navegación en hover — hereda de Calendar
 $lxd-calendar-planner-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación — hereda de Calendar
 $lxd-calendar-planner-nav-focus-ring-width: 2px; // Grosor del focus ring — hereda de Calendar
 $lxd-calendar-planner-nav-focus-ring-offset: 1px; // Separación del focus ring — hereda de Calendar
@@ -23,8 +21,6 @@ $lxd-calendar-planner-cell-min-height: 6rem; // Altura mínima de cada celda de 
 $lxd-calendar-planner-cell-padding-block: 0.5rem; // Padding vertical de la celda
 $lxd-calendar-planner-cell-padding-inline: 0.5rem; // Padding horizontal de la celda
 $lxd-calendar-planner-cell-bg: rgba(0, 0, 0, 0); // Fondo base de las celdas
-$lxd-calendar-planner-cell-hover-bg: #111e30; // Fondo de la celda en hover, cuando es pulsable — hereda de Calendar
-$lxd-calendar-planner-cell-hover-color: #ffffff; // Color del contenido de la celda en hover — hereda de Calendar
 $lxd-calendar-planner-cell-today-number-bg: #111e30; // Fondo del número del día de hoy
 $lxd-calendar-planner-cell-today-number-color: #ffffff; // Color del número del día de hoy
 $lxd-calendar-planner-cell-outside-bg: #f2f2f2; // Fondo de las celdas fuera del mes — superficie secundaria, no un gris de estado
@@ -46,3 +42,5 @@ $lxd-calendar-planner-transition-duration: 150ms; // Duración de las transicion
 $lxd-calendar-planner-transition-easing: ease; // Easing de las transiciones — hereda de Calendar
 $lxd-calendar-planner-sm-cell-min-height: 4rem; // Altura mínima de celda — sm
 $lxd-calendar-planner-lg-cell-min-height: 9rem; // Altura mínima de celda — lg
+$lxd-calendar-planner-hover-line-width: 1px; // Grosor de la línea de hover — hereda de Calendar
+$lxd-calendar-planner-hover-line-color: #111e30; // Color de la línea de hover — hereda de Calendar

@@ -7,8 +7,6 @@ $lxd-calendar-padding-block: 0.75rem; // Padding vertical del componente
 $lxd-calendar-padding-inline: 0.75rem; // Padding horizontal del componente
 $lxd-calendar-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica base
 $lxd-calendar-nav-color: #111e30; // Color de los botones prev/next
-$lxd-calendar-nav-hover-bg: #111e30; // Fondo hover de los botones de navegación — relleno de marca, el patrón de Menu/Button ghost (no un gris de estado)
-$lxd-calendar-nav-hover-color: #ffffff; // Color del icono de navegación en hover
 $lxd-calendar-nav-disabled-color: #6b6b6b; // Color deshabilitado de los botones de navegación
 $lxd-calendar-nav-disabled-cursor: not-allowed; // Cursor deshabilitado
 $lxd-calendar-nav-focus-ring-color: #111e30; // Color del focus ring de los botones de navegación
@@ -25,8 +23,6 @@ $lxd-calendar-day-font-weight: 300; // Peso de fuente de los días
 $lxd-calendar-day-radius: 0px; // Radio de borde de los botones de día
 $lxd-calendar-day-color: #111e30; // Color de texto de los días
 $lxd-calendar-day-bg: rgba(0, 0, 0, 0); // Fondo base de los días
-$lxd-calendar-day-hover-bg: #111e30; // Fondo hover de los días — relleno de marca, el patrón de Menu/Button ghost (no un gris de estado)
-$lxd-calendar-day-hover-color: #ffffff; // Color del texto del día en hover
 $lxd-calendar-day-focus-ring-color: #111e30; // Color del focus ring de los días
 $lxd-calendar-day-focus-ring-width: 2px; // Grosor del focus ring de los días
 $lxd-calendar-day-focus-ring-offset: 1px; // Separación del focus ring de los días
@@ -48,3 +44,5 @@ $lxd-calendar-sm-title-font-size: 0.875rem; // Tamaño del título — sm
 $lxd-calendar-lg-day-size: 3rem; // Tamaño de los botones de día — lg
 $lxd-calendar-lg-title-font-size: 1rem; // Tamaño del título — lg
 $lxd-calendar-lg-day-font-size: 1rem; // Tamaño de fuente de los días — lg
+$lxd-calendar-hover-line-width: 1px; // Grosor de la línea de hover de los botones de navegación y de los días. Ni el día ni la flecha se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo
+$lxd-calendar-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie

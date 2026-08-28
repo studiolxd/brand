@@ -10,8 +10,7 @@ $lxd-conversation-list-item-border-radius: 0px; // Radio de cada conversación: 
 $lxd-conversation-list-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del título de la conversación
 $lxd-conversation-list-item-font-size: 1rem; // El título es texto corriente: hereda el cuerpo de la superficie
 $lxd-conversation-list-item-color: #4a4a4a; // Tinta de una conversación en reposo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)
-$lxd-conversation-list-item-hover-bg: #111e30; // Fondo de la conversación bajo el puntero: relleno de marca, no gris. El gris claro dejó de ser el fondo de estado del sistema
-$lxd-conversation-list-item-hover-color: #ffffff; // Tinta de la conversación bajo el puntero, sobre el relleno de marca
+$lxd-conversation-list-item-hover-color: #111e30; // Tinta de la conversación bajo el puntero: el hover no pinta relleno (regla de Colores), sube del gris de texto secundario a tinta plena
 $lxd-conversation-list-item-active-color: #111e30; // Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo
 $lxd-conversation-list-item-active-font-weight: 500; // Peso de la conversación abierta
 $lxd-conversation-list-delete-size: 2rem; // Lado del botón de borrar: la talla mínima del sistema, para que sea un blanco alcanzable
@@ -19,8 +18,6 @@ $lxd-conversation-list-delete-margin-inline-end: 0.25rem; // Aire entre el botó
 $lxd-conversation-list-delete-border-radius: 0px; // Radio del botón de borrar
 $lxd-conversation-list-delete-color: #6b6b6b; // Tinta del aspa en reposo. Es un icono de acción secundaria, el único sitio donde `grey-dark` sigue valiendo
 $lxd-conversation-list-delete-hover-color: #b30000; // Tinta del aspa bajo el puntero
-$lxd-conversation-list-item-hover-delete-color: #ffffff; // Tinta del aspa cuando su fila está bajo el puntero y por tanto rellena de marca
-$lxd-conversation-list-item-hover-delete-hover-color: #ff8585; // Tinta del aspa bajo el puntero, sobre la fila rellena de marca
 $lxd-conversation-list-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-conversation-list-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-conversation-list-transition-duration: 150ms; // Duración de la transición de color

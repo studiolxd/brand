@@ -11,11 +11,22 @@ pie de tabla). Cómo se representa cada estado se decide componente a
 componente al revisarlo — no con un gris de fondo por defecto. Hoy lo usan así
 36 tokens; van cayendo con la revisión:
 
-- [ ] hover de ítem: ContextMenu, UserMenu, OrgSwitcher, SidebarNav,
-      ConversationList, DotsButton,
-      NumberInput, Button (variante con hover gris)
-- [ ] activo: OrgSwitcher, ConversationList
-- [ ] deshabilitado: Button, Input, Textarea
+- [x] **Cerrado (2026-08-28, fase 0).** Ya no se decide componente a
+      componente: la regla general está en Foundations → Colores, «Estados:
+      nada se rellena». Ningún componente pinta relleno en hover ni en activo
+      —ni gris ni de marca—; el foco lleva el anillo del sistema, el hover una
+      línea de tinta y el activo una barra de tinta con peso `emphasis`. La
+      única excepción es `Button` (el relleno es el lenguaje de sus variantes,
+      y `ghost` conserva su tinta suave) y el **valor elegido** (día del
+      `Calendar`, pestaña activa de `Tabs` pill), que no es un estado.
+- [x] hover de ítem: ContextMenu, UserMenu, OrgSwitcher, SidebarNav,
+      ConversationList, DotsButton, NumberInput, Menu, Table, Tabs,
+      AppLauncher, Calendar, CalendarPlanner, CommandPalette, Select,
+      MultiSelect, InputPhone
+- [x] activo: OrgSwitcher, ConversationList, AppLauncher, SidebarNav
+- [x] deshabilitado: Button, Input, Textarea — se quedan en `grey-lightest`, y
+      es deliberado: un control apagado no reacciona a nada, es una superficie
+      muerta. Documentado en Foundations → Colores.
 - [x] celdas de calendario: fin de semana, no laborable, fuera de mes
       (2026-08-27, tanda 6) — `calendar-planner.cell-outside-bg` y las tres de
       `calendar-roster` (`cell-weekend-bg`, `cell-holiday-bg`,

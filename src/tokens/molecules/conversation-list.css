@@ -17,14 +17,11 @@
   --conversation-list-item-border-radius: var(--border-radius-default); /** Radio de cada conversación: recto, como todo el sistema */
   --conversation-list-item-font-size: var(--text-font-size); /** El título es texto corriente: hereda el cuerpo de la superficie */
   --conversation-list-item-color: var(--color-text-muted-on-light); /** Tinta de una conversación en reposo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto) */
-  --conversation-list-item-hover-bg: var(--color-primary); /** Fondo de la conversación bajo el puntero: relleno de marca, no gris. El gris claro dejó de ser el fondo de estado del sistema */
-  --conversation-list-item-hover-color: var(--color-text-on-dark); /** Tinta de la conversación bajo el puntero, sobre el relleno de marca */
+  --conversation-list-item-hover-color: var(--color-text-on-light); /** Tinta de la conversación bajo el puntero: el hover no pinta relleno (regla de Colores), sube del gris de texto secundario a tinta plena */
   --conversation-list-item-active-color: var(--color-text-on-light); /** Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo */
   --conversation-list-item-active-font-weight: var(--font-weight-emphasis); /** Peso de la conversación abierta */
   --conversation-list-delete-border-radius: var(--border-radius-default); /** Radio del botón de borrar */
   --conversation-list-delete-hover-color: var(--color-destructive-text-on-light); /** Tinta del aspa bajo el puntero */
-  --conversation-list-item-hover-delete-color: var(--color-text-on-dark); /** Tinta del aspa cuando su fila está bajo el puntero y por tanto rellena de marca */
-  --conversation-list-item-hover-delete-hover-color: var(--color-destructive-text-on-dark); /** Tinta del aspa bajo el puntero, sobre la fila rellena de marca */
   --conversation-list-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --conversation-list-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
 }
@@ -34,11 +31,8 @@
 html.dark {
   --conversation-list-delete-color: var(--color-grey-light); /** Tinta del aspa en reposo — superficie oscura */
   --conversation-list-item-color: var(--color-text-muted-on-dark); /** Tinta de una conversación en reposo — superficie oscura */
-  --conversation-list-item-hover-bg: var(--color-text-on-dark); /** Fondo de la conversación bajo el puntero — superficie oscura */
-  --conversation-list-item-hover-color: var(--color-primary); /** Tinta de la conversación bajo el puntero — superficie oscura */
+  --conversation-list-item-hover-color: var(--color-text-on-dark); /** Tinta de la conversación bajo el puntero — superficie oscura: tinta plena */
   --conversation-list-item-active-color: var(--color-accent-1); /** Tinta de la conversación abierta — superficie oscura: lavanda, como en el SidebarNav */
   --conversation-list-delete-hover-color: var(--color-destructive-text-on-dark); /** Tinta del aspa bajo el puntero — superficie oscura */
-  --conversation-list-item-hover-delete-color: var(--color-text-on-light); /** Tinta del aspa sobre fila rellena — superficie oscura (la fila se rellena de blanco) */
-  --conversation-list-item-hover-delete-hover-color: var(--color-destructive-text-on-light); /** Tinta del aspa bajo el puntero sobre fila rellena — superficie oscura */
   --conversation-list-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */
 }

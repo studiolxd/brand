@@ -97,10 +97,10 @@
   cursor: pointer;
 }
 
+/* El país resaltado no se rellena (regla de Colores): anillo del sistema. */
 .input-phone__country-item[data-highlighted] {
-  outline: none;
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  outline: var(--input-phone-country-item-focus-ring-width) solid var(--input-phone-country-item-focus-ring-color);
+  outline-offset: var(--input-phone-country-item-focus-ring-offset);
 }
 
 /* ── Wrapper de país (react-phone-number-input) ─────────────── */

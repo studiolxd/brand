@@ -121,11 +121,11 @@
   color: var(--multi-select-color);
   cursor: pointer;
 
+  /* La opción resaltada no se rellena (regla de Colores): anillo del sistema. */
   &:focus-visible,
   &:hover {
-    outline: none;
-    background-color: var(--multi-select-item-highlighted-bg);
-    color: var(--multi-select-item-highlighted-color);
+    outline: var(--multi-select-item-focus-ring-width) solid var(--multi-select-item-focus-ring-color);
+    outline-offset: var(--multi-select-item-focus-ring-offset);
   }
 
   &.async-select__item--selected {
@@ -133,9 +133,8 @@
   }
 
   &.async-select__item--active {
-    outline: none;
-    background-color: var(--multi-select-item-highlighted-bg);
-    color: var(--multi-select-item-highlighted-color);
+    outline: var(--multi-select-item-focus-ring-width) solid var(--multi-select-item-focus-ring-color);
+    outline-offset: var(--multi-select-item-focus-ring-offset);
   }
 }
 

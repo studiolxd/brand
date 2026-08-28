@@ -66,8 +66,8 @@
 /* El foco es virtual (`aria-activedescendant`): el ítem resaltado lo marca
    Base UI con `data-highlighted`, tanto por teclado como por puntero. */
 .command-palette__item[data-highlighted] {
-  background-color: var(--command-palette-item-selected-bg);
-  color: var(--command-palette-item-selected-color);
+  outline: var(--command-palette-item-focus-ring-width) solid var(--command-palette-item-focus-ring-color);
+  outline-offset: var(--command-palette-item-focus-ring-offset);
 }
 
 .command-palette__item[data-disabled] {

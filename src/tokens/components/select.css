@@ -34,8 +34,9 @@
   --select-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --select-content-border-color: var(--color-primary); /** Borde del dropdown */
   --select-item-selected-font-weight: var(--font-weight-emphasis); /** La opción elegida, en énfasis */
-  --select-item-highlighted-bg: var(--color-primary); /** Fondo de opción resaltada */
-  --select-item-highlighted-color: var(--color-text-on-dark); /** Texto de opción resaltada */
+  --select-item-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de la opción resaltada. La opción bajo el puntero o el teclado no se rellena (regla de Colores): la marca el anillo del sistema */
+  --select-item-focus-ring-offset: calc(-1 * var(--border-width-focus)); /** Separación del anillo de la opción: hacia dentro, para no salirse del panel */
+  --select-item-focus-ring-color: var(--color-primary); /** Color del anillo de la opción — tinta de la superficie */
   --select-separator-color: var(--separator-color); /** Color del separador entre grupos — el de la línea del sistema */
   --select-separator-height: var(--separator-thickness); /** Grosor del separador entre grupos — el de la línea del sistema */
 }
@@ -51,6 +52,5 @@ html.dark {
   --select-content-bg: var(--color-background-dark); /** Fondo del dropdown — surface-dark */
   --select-content-border-color: var(--color-text-on-dark); /** Borde del dropdown — surface-dark */
   --select-separator-color: var(--color-text-on-dark); /** Color del separador entre grupos — surface-dark */
-  --select-item-highlighted-bg: var(--color-text-on-dark); /** Fondo de opción resaltada — surface-dark */
-  --select-item-highlighted-color: var(--color-primary); /** Texto de opción resaltada — surface-dark */
+  --select-item-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de la opción — surface-dark */
 }

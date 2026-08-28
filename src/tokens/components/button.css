@@ -215,8 +215,8 @@ html.dark {
   --button-ghost-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --button-ghost-hover-bg: var(--color-text-on-dark); /** Hover background — surface-dark */
   --button-ghost-active-bg: var(--color-text-on-dark); /** Active background — surface-dark */
-  --button-text-color: var(--link-surface-dark-color); /** Text color — surface-dark */
-  --button-text-hover-color: var(--link-surface-dark-hover-color); /** Hover text color — surface-dark */
-  --button-text-active-color: var(--link-surface-dark-hover-color); /** Active text color — surface-dark */
-  --button-text-focus-ring-color: var(--link-surface-dark-focus-ring-color); /** Focus ring color — surface-dark */
+  --button-text-color: var(--link-color); /** Text color — surface-dark */
+  --button-text-hover-color: var(--link-hover-color); /** Hover text color — surface-dark */
+  --button-text-active-color: var(--link-hover-color); /** Active text color — surface-dark */
+  --button-text-focus-ring-color: var(--link-focus-ring-color); /** Focus ring color — surface-dark */
 }

@@ -16,8 +16,6 @@ $lxd-sidebar-nav-item-font-size: 1rem; // Tamaño de texto de ítems
 $lxd-sidebar-nav-item-font-weight: 300; // Peso de ítems
 $lxd-sidebar-nav-item-line-height: 1.3; // Interlineado de ítems
 $lxd-sidebar-nav-item-color: #111e30; // Color de ítems
-$lxd-sidebar-nav-item-hover-bg: #111e30; // Resalte al hover: el mismo relleno de marca que los menús
-$lxd-sidebar-nav-item-hover-color: #ffffff; // Color de ítem al hover
 $lxd-sidebar-nav-item-active-color: #111e30; // Color de ítem activo
 $lxd-sidebar-nav-item-active-font-weight: 500; // Peso de ítem activo
 $lxd-sidebar-nav-focus-ring-color: #111e30; // Color del focus ring
@@ -31,3 +29,5 @@ $lxd-sidebar-nav-transition-duration: 150ms; // Duración de transición de íte
 $lxd-sidebar-nav-transition-easing: ease-in-out; // Easing de transición de ítems
 $lxd-sidebar-nav-group-transition-duration: 150ms; // Duración de la animación de apertura/cierre de grupo
 $lxd-sidebar-nav-group-transition-easing: ease-in-out; // Easing de la animación de apertura/cierre de grupo
+$lxd-sidebar-nav-item-hover-line-width: 1px; // Grosor de la línea que marca el ítem bajo el puntero. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el ítem, el mismo grafismo del subrayado de `Link`
+$lxd-sidebar-nav-item-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie

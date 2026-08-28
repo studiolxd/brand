@@ -27,12 +27,11 @@
   --menu-lg-item-padding-block: var(--select-lg-item-padding-block); /** Padding vertical de cada ítem — talla lg */
   --menu-item-font-weight: var(--font-weight-default); /** Peso de texto de ítems */
   --menu-item-color: var(--color-text-on-light); /** Color de texto de ítems */
-  --menu-item-hover-bg: var(--color-primary); /** Fondo de ítem al hover */
-  --menu-item-hover-color: var(--color-text-on-dark); /** Color de texto de ítem al hover */
+  --menu-item-focus-ring-width: var(--border-width-focus); /** Grosor del anillo del ítem resaltado (`[data-highlighted]`): el resalte no pinta relleno, lo marca el anillo del sistema */
+  --menu-item-focus-ring-offset: var(--border-width-default); /** Separación del anillo del ítem */
+  --menu-item-focus-ring-color: var(--color-primary); /** Color del anillo del ítem — la tinta de la superficie */
   --menu-item-selected-font-weight: var(--font-weight-emphasis); /** La opción elegida de un grupo de radio, en énfasis: sin glifo */
   --menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de texto de ítem destructivo */
-  --menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo de ítem destructivo al hover */
-  --menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Color de texto de ítem destructivo al hover */
   --menu-label-font-weight: var(--font-weight-emphasis); /** Peso del rótulo de sección */
   --menu-label-color: var(--color-text-muted-on-light); /** Color del rótulo de sección */
   --menu-separator-margin-block: var(--separator-spacing-md); /** Margen vertical del separador — el aire md de la línea del sistema */
@@ -51,11 +50,8 @@
 [data-theme="dark"],
 html.dark {
   --menu-item-color: var(--color-text-on-dark); /** Color de texto de ítems — surface-dark */
-  --menu-item-hover-bg: var(--color-text-on-dark); /** Fondo hover de ítem — surface-dark */
-  --menu-item-hover-color: var(--color-primary); /** Texto hover de ítem — surface-dark */
+  --menu-item-focus-ring-color: var(--color-text-on-dark); /** Color del anillo del ítem — surface-dark */
   --menu-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
   --menu-label-color: var(--color-text-muted-on-dark); /** Color del rótulo de sección — surface-dark */
   --menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
-  --menu-item-destructive-hover-bg: var(--color-destructive-fill); /** Fondo hover de ítem destructivo — surface-dark */
-  --menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Texto hover de ítem destructivo — surface-dark */
 }

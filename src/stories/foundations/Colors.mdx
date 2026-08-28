@@ -97,6 +97,53 @@ Los roles que consumen los componentes para lo básico: qué color tiene el text
 
 ---
 
+## Estados: nada se rellena
+
+**Ningún componente pinta un relleno para decir que algo está bajo el puntero o que está activo.** Un fondo que aparece y desaparece es la señal más cara del sistema: obliga a voltear la tinta que va encima, duplica tokens (uno de fondo y uno de texto, por estado y por superficie) y confunde el estado con la identidad — el relleno dice lo que una cosa *es*, no cómo *está*.
+
+En su lugar, tres grafismos, siempre en tinta: prusia sobre claro, blanco sobre oscuro.
+
+| Estado | Grafismo | Cómo se dibuja |
+|---|---|---|
+| **Foco** — teclado, y el foco virtual (`[data-highlighted]`) de menús, selects y paletas | El anillo del sistema | `outline: var(--border-width-focus) solid <tinta>` con su `outline-offset` |
+| **Hover** — puntero | Línea de tinta bajo el elemento (el mismo grafismo que el subrayado de `Link`); o, si la tinta en reposo está apagada, subirla a tinta plena | `box-shadow: inset 0 calc(-1 * <línea>) 0 0 <tinta>` |
+| **Activo / actual** — persistente: la sección abierta, la app en la que estás, la fila elegida | Barra de tinta en el borde de inicio, y peso `emphasis` | `box-shadow: inset <barra> 0 0 <tinta>` |
+
+Los tres se apilan sin pelearse: una sección activa bajo el puntero conserva su barra y suma su línea.
+
+```css
+/* Ítem de menú resaltado: anillo, no fondo */
+.menu__item[data-highlighted] {
+  outline: var(--menu-item-focus-ring-width) solid var(--menu-item-focus-ring-color);
+  outline-offset: var(--menu-item-focus-ring-offset);
+}
+
+/* Ítem de navegación bajo el puntero: línea, no fondo */
+.sidebar-nav__item:hover {
+  box-shadow: inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
+}
+
+/* Fila actual: barra al borde de inicio, no fondo */
+.app-launcher__tile--active {
+  box-shadow: inset var(--app-launcher-tile-active-marker-width) 0 0 var(--app-launcher-tile-active-marker-color);
+}
+```
+
+Consecuencia en los tokens: **no existen `*-hover-bg` ni `*-active-bg` fuera de `Button`.** Un componente que necesite señalar un estado declara `*-hover-line-*`, `*-active-marker-*` o `*-focus-ring-*`, y ninguno de ellos necesita un token de texto que lo acompañe: la tinta no cambia de bando.
+
+### Lo que sí lleva relleno
+
+- **`Button`**, y solo él: el relleno *es* el lenguaje de sus variantes, y su hover mueve un relleno que ya existe en reposo. La variante **`ghost`** es la única excepción declarada a la regla general: parte sin relleno y gana su tinta suave bajo el puntero, porque es el botón que se usa dentro de cabeceras y barras densas, donde una línea no basta para marcar el blanco de un icono.
+- **Un valor elegido**, que no es un estado de interacción: el día seleccionado del `Calendar` y la pestaña activa de `Tabs` variante *pill* se rellenan de marca. Lo que el usuario ha elegido se queda pintado aunque suelte el ratón; lo que solo está bajo el puntero, no.
+
+### Lo que ya no vale
+
+El gris claro (`grey-lightest`) **no es el fondo de hover ni de activo**. Fuera de los estados es una superficie clara secundaria —bloque de código, keycap, carril de progreso, pie de tabla— con su propio rol (`surface.secondary-on-light|dark`).
+
+Se queda como fondo de un **control deshabilitado** (`input`, `textarea`, `button`): un control apagado no está reaccionando a nada, es una superficie muerta, y ahí el gris dice justo eso. Los ítems, filas y celdas que no son controles usan la opacidad (`--opacity-disabled`).
+
+---
+
 ## Tema claro y oscuro
 
 No hay dos paletas: hay **una**, y cada token que necesita cambiar en oscuro lleva un par `surface-dark-*` en su JSON. Al generar el CSS, ese par remapea la **misma** custom property bajo tres selectores:

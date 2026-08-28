@@ -29,9 +29,9 @@
   --table-sort-icon-color: var(--color-text-muted-on-light); /** Icono de ordenación en reposo — atenuado por la opacidad inactiva; el hover lo lleva al color activo */
   --table-sort-icon-active-color: var(--color-primary); /** Color del icono de sort activo */
   --table-row-border-color: var(--color-primary); /** Color del separador entre filas */
-  --table-row-hover-bg: var(--color-primary); /** Fondo de fila interactiva al hover: el mismo relleno de marca que los menús y el SidebarNav */
-  --table-row-hover-color: var(--color-text-on-dark); /** Tinta de la fila interactiva al hover, sobre el relleno de marca */
   --table-row-selected-color: var(--color-primary); /** Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris */
+  --table-row-hover-marker-width: var(--border-width-focus); /** Grosor de la barra que marca la fila bajo el puntero. El hover no pinta relleno (regla de Colores): la fila se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la sección activa del SidebarNav en rail */
+  --table-row-hover-marker-color: var(--color-primary); /** Color de la barra de hover — tinta de la superficie */
   --table-row-selected-font-weight: var(--font-weight-emphasis); /** Peso de la fila seleccionada */
   --table-footer-bg: var(--color-surface-secondary-on-light); /** Fondo del tfoot: superficie clara secundaria, no un fondo de estado */
   --table-footer-border-width: var(--border-width-default); /** Borde superior del tfoot — 1px, como el del thead */
@@ -50,10 +50,9 @@ html.dark {
   --table-sort-icon-color: var(--color-text-muted-on-dark); /** Icono de sort inactivo — surface-dark */
   --table-sort-icon-active-color: var(--color-text-on-dark); /** Icono de sort activo — surface-dark */
   --table-row-border-color: var(--color-text-on-dark); /** Separador entre filas — surface-dark */
-  --table-row-hover-bg: var(--color-text-on-dark); /** Fondo de fila al hover — surface-dark: invertido, como los menús */
-  --table-row-hover-color: var(--color-primary); /** Tinta de la fila al hover — surface-dark */
   --table-row-selected-color: var(--color-accent-1); /** Tinta de la fila seleccionada — surface-dark: lavanda, como en el SidebarNav */
   --table-footer-bg: var(--color-surface-secondary-on-dark); /** Fondo del tfoot — surface-dark */
   --table-footer-border-color: var(--color-text-on-dark); /** Borde superior del tfoot — surface-dark */
   --table-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --table-row-hover-marker-color: var(--color-text-on-dark); /** Color de la barra de hover — surface-dark */
 }

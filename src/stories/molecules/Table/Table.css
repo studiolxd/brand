@@ -84,7 +84,7 @@
 
 .table__row {
   transition:
-    background-color var(--table-transition-duration) var(--table-transition-easing),
+    box-shadow var(--table-transition-duration) var(--table-transition-easing),
     color var(--table-transition-duration) var(--table-transition-easing);
 }
 
@@ -103,14 +103,11 @@
   cursor: pointer;
 }
 
-/* Hover de fila: inversión, el mismo relleno de marca que Menu y SidebarNav. */
+/* Hover de fila: sin relleno (regla de Colores). La fila bajo el puntero lleva
+   una barra de tinta en su borde de inicio, el grafismo de la sección activa
+   del SidebarNav en rail. La fila seleccionada conserva su tinta y su peso. */
 .table__row.table__row--interactive:hover {
-  background-color: var(--table-row-hover-bg);
-  color: var(--table-row-hover-color);
-}
-
-.table__row.table__row--interactive.table__row--selected:hover {
-  color: var(--table-row-hover-color);
+  box-shadow: inset var(--table-row-hover-marker-width) 0 0 var(--table-row-hover-marker-color);
 }
 
 .table__row.table__row--interactive:focus-visible {

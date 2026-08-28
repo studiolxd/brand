@@ -113,10 +113,8 @@
   font-weight: var(--tabs-trigger-active-weight);
 }
 
-.tabs__list--pill .tabs__trigger:hover:not([data-active]) {
-  background-color: var(--tabs-trigger-pill-hover-bg);
-  color: var(--tabs-trigger-pill-hover-color);
-}
+/* La pestaña inactiva bajo el puntero no se rellena (regla de Colores): sube
+   de tinta con la regla general del trigger, igual que en la variante línea. */
 
 /* ─── Content ────────────────────────────────────────────── */
 .tabs__content {

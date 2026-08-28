@@ -15,8 +15,6 @@
     "item-font-weight":          { "$value": "{font-weight.default}",     "$type": "number",    "$description": "Peso de ítems" },
     "item-line-height":          { "$value": "{line-height.snug}",        "$type": "number",    "$description": "Interlineado de ítems" },
     "item-color":                { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color de ítems" },
-    "item-hover-bg":             { "$value": "{color.primary}",     "$type": "color",     "$description": "Resalte al hover: el mismo relleno de marca que los menús" },
-    "item-hover-color":          { "$value": "{color.text.on-dark}",     "$type": "color",     "$description": "Color de ítem al hover" },
     "item-active-color":         { "$value": "{color.primary}",           "$type": "color",     "$description": "Color de ítem activo" },
     "item-active-font-weight":   { "$value": "{font-weight.emphasis}",      "$type": "number",    "$description": "Peso de ítem activo" },
     "focus-ring-color":          { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del focus ring" },
@@ -32,9 +30,10 @@
     "group-transition-easing":        { "$value": "{motion.easing.in-out}",    "$type": "string",    "$description": "Easing de la animación de apertura/cierre de grupo" },
     "surface-dark-group-label-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la etiqueta de grupo — surface-dark. `group-label-color` (prussian) sería invisible sobre fondo oscuro." },
     "surface-dark-item-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de ítems — surface-dark" },
-    "surface-dark-item-hover-bg":     { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Resalte al hover — surface-dark: invertido, como los menús" },
-    "surface-dark-item-hover-color":  { "$value": "{color.primary}",       "$type": "color", "$description": "Color de ítem al hover — surface-dark" },
     "surface-dark-item-active-color": { "$value": "{color.accent-1}",           "$type": "color", "$description": "Color de ítem activo — surface-dark. `item-active-color` (prussian) sería invisible; se usa accent-1 como acento de estado activo, igual que Switcher." },
-    "surface-dark-focus-ring-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento." }
+    "surface-dark-focus-ring-color":  { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark. Deliberadamente blanco, no accent-1: el ring debe seguir el patrón estándar del sistema aunque el ítem activo use lavanda como acento." },
+    "item-hover-line-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea que marca el ítem bajo el puntero. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el ítem, el mismo grafismo del subrayado de `Link`" },
+    "item-hover-line-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover — tinta de la superficie" },
+    "surface-dark-item-hover-line-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea de hover — surface-dark" }
   }
 }

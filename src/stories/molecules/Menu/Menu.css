@@ -48,7 +48,7 @@
   box-shadow: none;
   outline: none;
   transition:
-    background-color var(--menu-transition-duration) var(--menu-transition-easing),
+    outline-color var(--menu-transition-duration) var(--menu-transition-easing),
     color var(--menu-transition-duration) var(--menu-transition-easing);
 }
 
@@ -56,9 +56,10 @@
   outline: none;
 }
 
+/* El ítem resaltado (puntero o teclado) no pinta relleno: lo marca el anillo del sistema. */
 .menu__item[data-highlighted] {
-  background-color: var(--menu-item-hover-bg);
-  color: var(--menu-item-hover-color);
+  outline: var(--menu-item-focus-ring-width) solid var(--menu-item-focus-ring-color);
+  outline-offset: var(--menu-item-focus-ring-offset);
 }
 
 .menu__item[data-disabled] {
@@ -72,8 +73,7 @@
 }
 
 .menu__item.menu__item--destructive[data-highlighted] {
-  background-color: var(--menu-item-destructive-hover-bg);
-  color: var(--menu-item-destructive-hover-color);
+  outline-color: var(--menu-item-destructive-color);
 }
 
 .menu__item svg {

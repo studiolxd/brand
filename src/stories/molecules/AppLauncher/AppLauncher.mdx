@@ -15,7 +15,7 @@ Rejilla de acceso a las apps de la suite, en un panel flotante (`Popover` de
 
 ## App actual
 
-`currentAppId` marca la app activa (`aria-current="page"`) con relleno de marca y nombre en énfasis.
+`currentAppId` marca la app activa (`aria-current="page"`) con la barra de tinta al borde de inicio del tile (`tile-active-marker-*`) y el nombre en énfasis — sin relleno, como manda la regla de estados del sistema.
 
 <Canvas of={AppLauncherStories.ConAppActual} />
 
@@ -25,9 +25,11 @@ Rejilla de acceso a las apps de la suite, en un panel flotante (`Popover` de
 
 ## Superficie oscura
 
-El hover y la app actual usan `color.primary` (prusia) como relleno en superficie clara. Sobre
-`.surface-dark`/`html.dark` ese mismo color coincidiría con el fondo ambiente, así que se invierte
-—relleno blanco, texto prusia—, el mismo patrón que `menu.item-hover-bg`.
+Ni el hover ni la app actual se rellenan: son una línea y una barra de tinta. En superficie clara
+esa tinta es prusia (`color.primary`); sobre `.surface-dark`/`html.dark` coincidiría con el fondo
+ambiente, así que la línea pasa a blanco (`color.text.on-dark`) y la barra de la app actual, a
+lavanda (`color.accent-1`) — el acento de estado activo del sistema, el mismo que usan `SidebarNav`
+y `Table`.
 
 <Canvas of={AppLauncherStories.EnSuperficieOscura} />
 

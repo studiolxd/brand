@@ -18,7 +18,8 @@
     "btn-width":           { "$value": "{spacing.6}",                 "$type": "dimension", "$description": "Ancho de los botones +/−" },
     "btn-color":           { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del icono de los botones" },
     "btn-bg":              { "$value": "transparent",                 "$type": "string",    "$description": "Fondo de los botones" },
-    "btn-hover-bg":        { "$value": "{color.grey-lightest}",       "$type": "color",     "$description": "Fondo de los botones en hover" },
+    "btn-hover-line-width":{ "$value": "{border-width.default}",       "$type": "dimension", "$description": "Grosor de la línea de hover de los botones +/−. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el botón" },
+    "btn-hover-line-color":{ "$value": "{color.primary}",             "$type": "color",     "$description": "Color de la línea de hover de los botones +/−" },
     "btn-separator-color": { "$value": "{input.border-color}",        "$type": "color",     "$description": "Color del separador entre botón y campo" },
     "btn-font-size":       { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Tamaño del símbolo +/−" },
 
