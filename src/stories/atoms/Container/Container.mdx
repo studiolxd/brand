@@ -66,6 +66,17 @@ cuando es mayor, para que el contenido no quede bajo el bisel en horizontal.
 Con `flush` se elimina, para contenido que debe tocar el borde —un carrusel que
 sangra, una imagen a pantalla completa.
 
+## Bandas anidadas
+
+Una banda dentro de otra **no repite el aire lateral**: el de fuera ya lo puso, y sumarlos
+estrecharía el contenido el doble. Sale a cero por CSS, sin prop y sin que el consumidor tenga que
+acordarse.
+
+<Canvas of={ContainerStories.Anidado} />
+
+La excepción es la que se necesita: dentro de una banda `flush` —una que llega al borde a
+propósito— la banda anidada **sí** conserva su aire, que es justo para lo que se anida ahí.
+
 ## Elemento
 
 `as` elige la etiqueta: usa `header`, `footer`, `main`, `section` o `nav` según

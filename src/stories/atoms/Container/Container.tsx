@@ -18,7 +18,12 @@ export interface ContainerProps extends React.ComponentPropsWithoutRef<'div'> {
   width?: ContainerWidth;
   /** Aire vertical de la banda. Por defecto `'none'`: lo pone quien la usa. */
   space?: ContainerSpace;
-  /** Sin aire lateral — para contenido que debe tocar el borde de la pantalla. */
+  /**
+   * Sin aire lateral — para contenido que debe tocar el borde de la pantalla.
+   * Una banda **anidada** dentro de otra con aire ya sale sin aire lateral por
+   * sí sola (no hay que ponerlo): el de fuera ya lo puso. Dentro de una banda
+   * `flush`, en cambio, la de dentro conserva el suyo.
+   */
   flush?: boolean;
   /**
    * Banda sobre superficie oscura: pinta el lienzo oscuro y voltea los tokens
@@ -40,6 +45,9 @@ export interface ContainerProps extends React.ComponentPropsWithoutRef<'div'> {
  * contenido. Es la pieza de las partes públicas — la web, el hub sin sesión —
  * donde una sección de color debe sangrar mientras el texto se queda en su
  * columna.
+ *
+ * Anidar bandas no duplica el aire lateral: una banda dentro de otra que ya
+ * tiene aire sale a cero por CSS, sin prop.
  */
 export const Container = forwardRef<HTMLElement, ContainerProps>(function Container({
   width = 'xl',

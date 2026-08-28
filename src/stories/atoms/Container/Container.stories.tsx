@@ -116,3 +116,55 @@ export const SuperficieEmparejada: Story = {
     await expect(cs.color).toBe(toRgb(claro));
   },
 };
+
+/**
+ * Anidar bandas no duplica el aire lateral. La de fuera pone el aire; la de
+ * dentro —que suele estar ahí para acotar el contenido o pintar su propia
+ * superficie— sale a cero sola, sin `flush`.
+ */
+export const Anidado: Story = {
+  name: 'Banda dentro de banda',
+  render: () => (
+    <Container space="lg" data-testid="fuera">
+      <Heading level={2}>Sección</Heading>
+      <Paragraph>El aire lateral lo pone esta banda.</Paragraph>
+      <Container surface="dark" space="md" width="lg" data-testid="dentro">
+        <Heading level={3}>Banda oscura anidada</Heading>
+        <Paragraph>No repite el aire lateral: el texto no se estrecha el doble.</Paragraph>
+      </Container>
+    </Container>
+  ),
+};
+
+/** Test: la banda anidada pierde el aire lateral; dentro de una `flush`, lo conserva. */
+export const ContratoAnidado: Story = {
+  name: 'Test — el aire lateral no se duplica al anidar',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Container space="md" data-testid="fuera">
+        <Container data-testid="dentro">
+          <p>anidada</p>
+        </Container>
+      </Container>
+      <Container flush data-testid="fuera-flush">
+        <Container data-testid="dentro-de-flush">
+          <p>anidada en una banda a sangre</p>
+        </Container>
+      </Container>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const aire = (testid: string) =>
+      getComputedStyle(canvasElement.querySelector(`[data-testid="${testid}"]`)!).paddingInlineStart;
+
+    // La de fuera pone el aire del sistema…
+    await expect(parseFloat(aire('fuera'))).toBeGreaterThan(0);
+    // …y la de dentro no lo repite.
+    await expect(aire('dentro')).toBe('0px');
+    // Dentro de una banda a sangre, en cambio, la de dentro sí lleva el suyo:
+    // es justo para lo que se anida ahí.
+    await expect(aire('fuera-flush')).toBe('0px');
+    await expect(parseFloat(aire('dentro-de-flush'))).toBeGreaterThan(0);
+  },
+};

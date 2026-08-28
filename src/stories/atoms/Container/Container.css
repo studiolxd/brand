@@ -47,3 +47,11 @@
 .container.container--flush {
   padding-inline: 0;
 }
+
+/* Anidamiento: una banda dentro de otra no repite el aire lateral —el de fuera
+   ya lo puso—, así que el contenido no se estrecha el doble. La regla mira si
+   la banda de fuera tiene aire: dentro de una banda `flush`, la de dentro
+   conserva el suyo, que es justo para lo que se anida ahí. */
+.container:not(.container--flush) .container {
+  padding-inline: 0;
+}
