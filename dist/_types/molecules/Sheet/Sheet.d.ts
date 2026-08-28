@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import './Sheet.css';
-export interface SheetProps {
+export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     /** Borde por el que entra el panel. */
@@ -36,5 +36,10 @@ export declare function SheetFooter({ className, ...props }: React.HTMLAttribute
  *
  * Base UI Dialog aporta el portal, el velo, la trampa de foco y el cierre con
  * Escape; el DS pone la superficie y la dirección de entrada.
+ *
+ * `{...rest}` (`id`, `data-*`, `aria-*` y los **handlers de evento**) se
+ * reenvía al popup, y `className` se concatena tras las clases propias. Los
+ * handlers son lo que permite montar la barrera de eventos cuando el panel se
+ * abre desde dentro de una tarjeta clicable, sin `div`s de producto alrededor.
  */
-export declare function Sheet({ open, onOpenChange, side, title, titleHidden, description, footer, children, closeLabel, trigger, onAnimationEndCapture, className, }: SheetProps): import("react/jsx-runtime").JSX.Element;
+export declare function Sheet({ open, onOpenChange, side, title, titleHidden, description, footer, children, closeLabel, trigger, onAnimationEndCapture, className, ...rest }: SheetProps): import("react/jsx-runtime").JSX.Element;

@@ -12,7 +12,7 @@ function o({ className: e, ...t }) {
 		...t
 	});
 }
-function s({ open: s, onOpenChange: c, side: l = "right", title: u, titleHidden: d = !1, description: f, footer: p, children: m, closeLabel: h = "Cerrar", trigger: g, onAnimationEndCapture: _, className: v }) {
+function s({ open: s, onOpenChange: c, side: l = "right", title: u, titleHidden: d = !1, description: f, footer: p, children: m, closeLabel: h = "Cerrar", trigger: g, onAnimationEndCapture: _, className: v, ...y }) {
 	return /* @__PURE__ */ i(a.Root, {
 		open: s,
 		onOpenChange: (e) => c(e),
@@ -20,6 +20,7 @@ function s({ open: s, onOpenChange: c, side: l = "right", title: u, titleHidden:
 			className: ["sheet", v].filter(Boolean).join(" "),
 			"data-side": l,
 			onAnimationEndCapture: _,
+			...y,
 			children: [
 				/* @__PURE__ */ i("header", {
 					className: "sheet__header",

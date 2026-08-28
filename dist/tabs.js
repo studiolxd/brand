@@ -12,7 +12,7 @@ function n({ orientation: n = "horizontal", className: r, children: i, onValueCh
 		children: i
 	});
 }
-function r({ variant: n = "underline", className: r, children: i }) {
+function r({ variant: n = "underline", className: r, children: i, ...a }) {
 	return /* @__PURE__ */ e(t.List, {
 		activateOnFocus: !0,
 		className: [
@@ -20,6 +20,7 @@ function r({ variant: n = "underline", className: r, children: i }) {
 			n === "pill" && "tabs__list--pill",
 			r
 		].filter(Boolean).join(" "),
+		...a,
 		children: i
 	});
 }

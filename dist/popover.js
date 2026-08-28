@@ -11,19 +11,21 @@ function i() {
 	let e = document.documentElement;
 	return r(getComputedStyle(e).getPropertyValue("--popover-offset").trim());
 }
-function a({ trigger: r, children: a, label: o, open: s, defaultOpen: c, onOpenChange: l, side: u = "bottom", align: d = "start", sideOffset: f, className: p }) {
+function a({ trigger: r, children: a, label: o, open: s, defaultOpen: c, onOpenChange: l, onPointerDownOutside: u, onFocusOutside: d, onEscapeKeyDown: f, side: p = "bottom", align: m = "start", sideOffset: h, className: g }) {
 	return /* @__PURE__ */ t(n.Root, {
 		open: s,
 		defaultOpen: c,
-		onOpenChange: (e) => l?.(e),
+		onOpenChange: (e, t) => {
+			e || (t.reason === "outside-press" ? u?.(t) : t.reason === "focus-out" ? d?.(t) : t.reason === "escape-key" && f?.(t)), l?.(e, t);
+		},
 		children: [/* @__PURE__ */ e(n.Trigger, { render: r }), /* @__PURE__ */ e(n.Portal, { children: /* @__PURE__ */ e(n.Positioner, {
 			className: "popover__positioner",
-			side: u,
-			align: d,
-			sideOffset: f ?? i,
+			side: p,
+			align: m,
+			sideOffset: h ?? i,
 			children: /* @__PURE__ */ e(n.Popup, {
 				"aria-label": o,
-				className: ["popover", p].filter(Boolean).join(" "),
+				className: ["popover", g].filter(Boolean).join(" "),
 				children: a
 			})
 		}) })]

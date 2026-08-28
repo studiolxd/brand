@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import './Accordion.css';
 interface AccordionSingleProps {
     type: 'single';
@@ -18,10 +18,22 @@ interface AccordionMultipleProps {
 export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & {
     id?: string;
     disabled?: boolean;
+    /**
+     * Numera los ítems: cada disparador enseña su posición delante del texto
+     * (`01`, `02`…). El número lo pone el acordeón por el orden de sus hijos
+     * directos, no el consumidor. Es la maqueta de un acordeón legal, donde cada
+     * apartado tiene número de cláusula.
+     */
+    numbered?: boolean;
+    /**
+     * Cómo se escribe el número. Por defecto, dos cifras con cero delante
+     * (`01`). Recibe la posición empezando en 1.
+     */
+    formatIndex?: (index: number) => string;
     className?: string;
     children: ReactNode;
 };
-export declare function Accordion({ className, children, id, disabled, ...props }: AccordionProps): import("react/jsx-runtime").JSX.Element;
+export declare function Accordion({ className, children, id, disabled, numbered, formatIndex, ...props }: AccordionProps): import("react/jsx-runtime").JSX.Element;
 export interface AccordionItemProps {
     value: string;
     disabled?: boolean;

@@ -1,20 +1,20 @@
 'use client';
 import './link.css';
 import { Icon as e } from "./icon.js";
-import { Fragment as t, jsx as n, jsxs as r } from "react/jsx-runtime";
-import { forwardRef as i } from "react";
+import { forwardRef as t } from "react";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import { useRender as a } from "@base-ui-components/react/use-render";
 //#region src/stories/atoms/Link/Link.tsx
-var o = i(function({ href: i, children: o, external: s = !1, tone: c = "accent", icon: l, iconPosition: u = "start", render: d, className: f, ...p }, m) {
+var o = t(function({ href: t, children: o, external: s = !1, tone: c = "accent", icon: l, iconPosition: u = "start", render: d, className: f, ...p }, m) {
 	let h = [
 		c === "ink" ? "link--ink" : "",
 		l ? "link--with-icon" : "",
 		f
-	].filter(Boolean).join(" ") || void 0, g = l ? /* @__PURE__ */ n(e, {
+	].filter(Boolean).join(" ") || void 0, g = l ? /* @__PURE__ */ r(e, {
 		name: l,
 		size: "sm",
 		className: "link__icon"
-	}) : null, _ = /* @__PURE__ */ r(t, { children: [
+	}) : null, _ = /* @__PURE__ */ i(n, { children: [
 		u === "start" && g,
 		o,
 		u === "end" && g
@@ -28,9 +28,9 @@ var o = i(function({ href: i, children: o, external: s = !1, tone: c = "accent",
 			...p,
 			children: _
 		}
-	}) || /* @__PURE__ */ n("a", {
+	}) || /* @__PURE__ */ r("a", {
 		ref: m,
-		href: i,
+		href: t,
 		className: h,
 		...s ? {
 			target: "_blank",

@@ -3,8 +3,8 @@ import './toaster.css';
 import { Icon as e } from "./icon.js";
 import { Button as t } from "./button.js";
 import { TOAST_DURATION as n, setToastDefaultDuration as r, syncLiveToasts as i, toastManager as a } from "./toast.js";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
-import { useEffect as c } from "react";
+import { useEffect as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
 import { Toast as l } from "@base-ui-components/react/toast";
 //#region src/stories/molecules/Toast/Toaster.tsx
 var u = 8, d = {
@@ -23,7 +23,7 @@ function f(e, t) {
 }
 function p({ position: n, containerAriaLabel: r, closeLabel: a, closeButton: u, gap: d, expand: p }) {
 	let { toasts: m } = l.useToastManager(), [h, g] = n.split("-"), _ = m.map((e) => e.id).join(",");
-	c(() => {
+	o(() => {
 		i(_ ? _.split(",") : []);
 	}, [_]);
 	let v = [
@@ -32,35 +32,35 @@ function p({ position: n, containerAriaLabel: r, closeLabel: a, closeButton: u, 
 		g === "right" ? "" : `toaster--${g}`,
 		p ? "toaster--expanded" : ""
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ o(l.Portal, { children: /* @__PURE__ */ o(l.Viewport, {
+	return /* @__PURE__ */ s(l.Portal, { children: /* @__PURE__ */ s(l.Viewport, {
 		className: v,
 		"aria-label": r,
 		style: { "--toast-gap": `${d}px` },
-		children: m.map((n) => /* @__PURE__ */ s(l.Root, {
+		children: m.map((n) => /* @__PURE__ */ c(l.Root, {
 			toast: n,
 			className: f(n.type, u),
-			children: [/* @__PURE__ */ s("div", {
+			children: [/* @__PURE__ */ c("div", {
 				className: "alert__content",
 				children: [
-					/* @__PURE__ */ o(l.Title, { className: "alert__title" }),
-					/* @__PURE__ */ o(l.Description, { className: "alert__description" }),
-					/* @__PURE__ */ o(l.Action, {
+					/* @__PURE__ */ s(l.Title, { className: "alert__title" }),
+					/* @__PURE__ */ s(l.Description, { className: "alert__description" }),
+					/* @__PURE__ */ s(l.Action, {
 						className: "toast__action",
-						render: /* @__PURE__ */ o(t, {
+						render: /* @__PURE__ */ s(t, {
 							variant: "ghost",
 							size: "sm"
 						})
 					})
 				]
-			}), u && /* @__PURE__ */ o(l.Close, {
+			}), u && /* @__PURE__ */ s(l.Close, {
 				className: "alert__close",
 				"aria-label": a,
-				render: /* @__PURE__ */ o(t, {
+				render: /* @__PURE__ */ s(t, {
 					variant: "ghost",
 					size: "sm",
 					iconOnly: !0
 				}),
-				children: /* @__PURE__ */ o(e, {
+				children: /* @__PURE__ */ s(e, {
 					name: "close",
 					size: "sm"
 				})
@@ -68,17 +68,17 @@ function p({ position: n, containerAriaLabel: r, closeLabel: a, closeButton: u, 
 		}, n.id))
 	}) });
 }
-function m({ position: e = "bottom-right", containerAriaLabel: t = "Notificaciones", closeLabel: i = "Cerrar", closeButton: s = !0, duration: d = n, gap: f = u, visibleToasts: m = 3, expand: h = !1 }) {
+function m({ position: e = "bottom-right", containerAriaLabel: t = "Notificaciones", closeLabel: i = "Cerrar", closeButton: c = !0, duration: d = n, gap: f = u, visibleToasts: m = 3, expand: h = !1 }) {
 	let g = Number.isFinite(d) ? d : 0;
-	return c(() => r(g), [g]), /* @__PURE__ */ o(l.Provider, {
+	return o(() => r(g), [g]), /* @__PURE__ */ s(l.Provider, {
 		toastManager: a,
 		timeout: g,
 		limit: m,
-		children: /* @__PURE__ */ o(p, {
+		children: /* @__PURE__ */ s(p, {
 			position: e,
 			containerAriaLabel: t,
 			closeLabel: i,
-			closeButton: s,
+			closeButton: c,
 			gap: f,
 			expand: h
 		})

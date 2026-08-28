@@ -3,6 +3,14 @@ import './CheckboxField.css';
 export interface CheckboxFieldProps {
     /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
     label: ReactNode;
+    /**
+     * Oculta el texto de la opción **visualmente**, sin quitarlo del árbol de
+     * accesibilidad: la marca conserva su nombre. Para una casilla dentro de una
+     * tabla o de una barra de acciones, donde el rótulo lo da la columna. Misma
+     * prop que en `InputField`, `TextareaField`, `SelectField` y `FileUploadField`.
+     * Default: `false`.
+     */
+    labelHidden?: boolean;
     checked?: boolean;
     defaultChecked?: boolean;
     disabled?: boolean;

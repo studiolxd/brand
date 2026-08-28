@@ -1,17 +1,17 @@
 'use client';
 import './time-select.css';
 import { Select as e } from "./select.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { forwardRef as r, useMemo as i } from "react";
+import { forwardRef as t, useMemo as n } from "react";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/atoms/TimeSelect/TimeSelect.tsx
 function a(e) {
 	return String(e).padStart(2, "0");
 }
-var o = r(function({ value: r, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f, name: p, "aria-labelledby": m, "aria-describedby": h, onBlur: g, className: _, hoursLabel: v = "Horas", minutesLabel: y = "Minutos", hoursPlaceholder: b = "HH", minutesPlaceholder: x = "MM" }, S) {
-	let C = i(() => Array.from({ length: 24 }, (e, t) => ({
+var o = t(function({ value: t, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f, name: p, "aria-labelledby": m, "aria-describedby": h, onBlur: g, className: _, hoursLabel: v = "Horas", minutesLabel: y = "Minutos", hoursPlaceholder: b = "HH", minutesPlaceholder: x = "MM" }, S) {
+	let C = n(() => Array.from({ length: 24 }, (e, t) => ({
 		value: String(t),
 		label: a(t)
-	})), []), w = i(() => {
+	})), []), w = n(() => {
 		let e = [];
 		for (let t = 0; t < 60; t += s) e.push({
 			value: String(t),
@@ -19,26 +19,26 @@ var o = r(function({ value: r, onChange: o, step: s = 5, size: c = "md", disable
 		});
 		return e;
 	}, [s]), T = (e) => {
-		let t = parseInt(e, 10), n = r?.m ?? 0;
+		let n = parseInt(e, 10), r = t?.m ?? 0;
 		o?.({
-			h: t,
-			m: n
+			h: n,
+			m: r
 		});
 	}, E = (e) => {
-		let t = r?.h ?? 0;
+		let n = t?.h ?? 0;
 		o?.({
-			h: t,
+			h: n,
 			m: parseInt(e, 10)
 		});
-	}, D = ["time-select", _ ?? ""].filter(Boolean).join(" "), O = r == null ? "" : String(r.h), k = r == null ? "" : String(r.m);
-	return /* @__PURE__ */ n("div", {
+	}, D = ["time-select", _ ?? ""].filter(Boolean).join(" "), O = t == null ? "" : String(t.h), k = t == null ? "" : String(t.m);
+	return /* @__PURE__ */ i("div", {
 		className: D,
 		role: "group",
 		"aria-labelledby": m,
 		"aria-describedby": h,
 		"aria-invalid": d || void 0,
 		children: [
-			/* @__PURE__ */ t(e, {
+			/* @__PURE__ */ r(e, {
 				ref: S,
 				id: f,
 				options: C,
@@ -52,12 +52,12 @@ var o = r(function({ value: r, onChange: o, step: s = 5, size: c = "md", disable
 				onValueChange: T,
 				onBlur: g
 			}),
-			/* @__PURE__ */ t("span", {
+			/* @__PURE__ */ r("span", {
 				className: "time-select__sep",
 				"aria-hidden": "true",
 				children: ":"
 			}),
-			/* @__PURE__ */ t(e, {
+			/* @__PURE__ */ r(e, {
 				options: w,
 				value: k,
 				placeholder: x,
@@ -69,10 +69,10 @@ var o = r(function({ value: r, onChange: o, step: s = 5, size: c = "md", disable
 				onValueChange: E,
 				onBlur: g
 			}),
-			p && /* @__PURE__ */ t("input", {
+			p && /* @__PURE__ */ r("input", {
 				type: "hidden",
 				name: p,
-				value: r == null ? "" : `${a(r.h)}:${a(r.m)}`
+				value: t == null ? "" : `${a(t.h)}:${a(t.m)}`
 			})
 		]
 	});

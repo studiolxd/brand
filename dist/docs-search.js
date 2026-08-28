@@ -2,8 +2,8 @@
 import './docs-search.css';
 import { Spinner as e } from "./spinner.js";
 import { InputField as t } from "./input-field.js";
-import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import "react";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import { Autocomplete as a } from "@base-ui-components/react/autocomplete";
 //#region src/stories/molecules/DocsSearch/DocsSearch.tsx
 function o(e) {

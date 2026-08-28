@@ -21,5 +21,9 @@ export interface RadioFieldProps extends Omit<ComponentPropsWithoutRef<'input'>,
  * el resto de props nativas de `<input type="radio">` van al input real
  * (react-hook-form, `name`, `onBlur`, `aria-*`, `data-*`…); el `className`, al
  * contenedor.
+ *
+ * Dentro de un `RadioGroup` toma de él la talla, el error y el estado
+ * deshabilitado (el `name` y el marcado los toma el propio `Radio`). Lo que se
+ * pase a mano manda sobre lo que dice el grupo.
  */
 export declare const RadioField: import("react").ForwardRefExoticComponent<RadioFieldProps & import("react").RefAttributes<HTMLInputElement>>;

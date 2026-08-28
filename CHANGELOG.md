@@ -7,6 +7,91 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.14.0
+
+Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y de
+`studiolxd/web` (`notes/HUECOS-brand-2026-08-28.md`, bloque A).
+
+### Añadido
+
+- **`Figure`** (átomo) — imagen con pie: el `<figure>`/`<figcaption>` del sistema, con
+  la proporción de la caja (`ratio`: `auto`, `1:1`, `4:3`, `3:2`, `16:9`, `21:9`), el
+  encaje (`fit`) y el cuerpo del pie por tokens. `src`/`alt` pintan un `<img>` normal;
+  `render` pone la imagen de la aplicación (el `next/image` de una web Next.js) y la
+  figura le presta su clase. Tokens `figure.*` con par oscuro para el pie y el fondo
+  de la caja.
+- **`Code`** (átomo) — fragmento de código **en línea**, el hermano de `CodeBlock`. Sus
+  tokens `code.*` cuelgan de los de `CodeBlock`, y el aire vertical es cero para no
+  romper el interlineado del párrafo. Los tokens `prose.code-*` cuelgan ahora de este
+  átomo en vez de directamente de `CodeBlock`.
+- **`RadioGroup`** (átomo) — la raíz de un grupo de opciones excluyentes:
+  `value`/`defaultValue`/`onValueChange`, `name` compartido (generado si no se pasa),
+  `disabled`, `size`, `error` y `orientation`. `Radio` y `RadioField` lo leen, así que
+  dentro del grupo no hay que repetir `name`, `checked`, `size` ni `disabled`; lo que se
+  pasa a mano manda sobre el grupo. El rótulo lo sigue poniendo un `Fieldset` o un
+  `aria-label`. Tokens `radio-group.*`.
+- **`Card` › `external`** — misma prop y mismo contrato que en `Button` y `Link`: con
+  `href`, `target="_blank"` y `rel="noopener noreferrer"`.
+- **`Card` › `children` en modo enlace** y **`description` como `ReactNode`** — la
+  descripción admite marcado (varios párrafos, una etiqueta) sin aplanarla a texto, y la
+  link-card acepta hijos entre la descripción y la flecha. Nada interactivo: el bloque
+  entero sigue siendo un enlace.
+- **Passthrough de `role`/`aria-*`/`id`/`data-*`** en `Stack`, `Inline`, `Columns`,
+  `TabsList` y `TableOfContents`. Una pila puede ser el grupo con nombre accesible y una
+  fila, una barra de herramientas, sin envolverlas en un elemento nativo aparte; `TabsList`
+  gana el `aria-label` que necesita cuando hay más de un juego de pestañas en la página.
+  `className` sigue siendo prop propia y se concatena tras las clases del sistema.
+- **`PrevNextNav` › `prevTitle`/`nextTitle`** — los controles enseñan el título del
+  destino y `prevLabel`/`nextLabel` pasan a ser el rótulo visible que lo encabeza
+  («Anterior · Instalación»). `label` (el rótulo central de periodo) es ahora opcional.
+  Tokens `prev-next-nav.eyebrow-*`, `title-*` y `text-gap`, con par oscuro.
+- **`Steps` compuesto por `children`** — un `Step` por paso, con el cuerpo que haga falta
+  dentro (varios párrafos, una lista, un bloque de código): la forma para MDX. El número
+  lo sigue poniendo la lista. `items` es ahora opcional.
+- **`ConversationList` › `isLoading`, `loadingCount`, `error`, `errorTitle`,
+  `emptyMessage`** — los tres estados los pinta la lista con las piezas del sistema
+  (`Skeleton`, `Alert`, `EmptyState`), con prioridad error → carga → vacía → lista, y
+  `aria-busy` en el `<nav>` mientras carga. `isLoading` y `emptyMessage` se llaman igual
+  que en `DataTable`.
+- **`CheckboxField` › `labelHidden`** — como en `InputField`, `TextareaField`,
+  `SelectField` y `FileUploadField`.
+- **`Modal` y `Sheet` reenvían `{...rest}` al popup** (`id`, `data-*`, `aria-*` y los
+  handlers de evento): es lo que permite montar la barrera de eventos cuando el diálogo
+  se abre desde dentro de una tarjeta clicable, sin `div`s de producto alrededor. En
+  `Modal`, `className` **no** se reenvía a propósito.
+- **`Popover` › `onPointerDownOutside`, `onFocusOutside`, `onEscapeKeyDown`** — los tres
+  motivos de cierre automático, cada uno con el detalle de Base UI (evento nativo, motivo
+  y `cancel()`). Es el escape para el clic que cae en un portal del producto que el motor
+  no reconoce como parte del panel.
+- **`Accordion` › `numbered` y `formatIndex`** — ranura de índice (`01`, `02`…) delante
+  del rótulo de cada apartado, numerada por orden de los hijos. Tokens
+  `accordion.index-*` con par oscuro.
+- **`Container` anidado** — una banda dentro de otra ya no duplica el aire lateral: sale a
+  cero por CSS, sin prop. Dentro de una banda `flush` la anidada conserva el suyo.
+
+### Cambiado
+
+- **`Tooltip` reenvía `ref` y `{...rest}` a su disparador**, no al bocadillo. Es lo que le
+  permite ser a su vez el `trigger` de un `Popover` sobre el mismo botón: las props que
+  inyecta el motor de fuera (`aria-expanded`, el `onClick` que abre el panel) llegan al
+  elemento real. `className` sigue siendo del bocadillo.
+- **`Popover` › `onOpenChange` recibe un segundo argumento**, el detalle de Base UI.
+  Compatible: quien solo lea el primero no nota nada.
+
+### Cambios para consumidores
+
+- **`MessageComposer` › `helperText` ya no trae texto por defecto.** Antes pintaba el
+  atajo de teclado en castellano (`Enter para enviar, Mayús + Enter para salto de línea`);
+  ahora, sin `helperText`, **no se pinta la línea ni el `aria-describedby`**. Es la única
+  prop de texto del sistema sin default en ningún idioma: lo que hay que contar bajo un
+  composer depende del producto, no de la traducción de una cadena. Quien quiera el atajo
+  lo pasa (la doc del componente trae el fragmento con `Kbd` listo para copiar).
+- **`Card` en modo enlace ya no pinta un `<h2>` vacío sin `title`** ni un
+  `VisuallyHidden` vacío sin `ctaLabel`. Si algún consumidor dependía de que el encabezado
+  existiera siempre, ahora tiene que pasar `title`.
+- **`Radio` y `RadioField` leen el `RadioGroup` que los envuelva.** Fuera de un grupo se
+  comportan exactamente igual que antes.
+
 ## v25.13.0
 
 ### Añadido

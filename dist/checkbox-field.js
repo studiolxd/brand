@@ -1,54 +1,55 @@
 'use client';
 import './checkbox-field.css';
-import { n as e } from "./_shared/form-size.js";
-import { Checkbox as t } from "./checkbox.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { forwardRef as i, useId as a } from "react";
+import { VisuallyHidden as e } from "./visually-hidden.js";
+import { n as t } from "./_shared/form-size.js";
+import { Checkbox as n } from "./checkbox.js";
+import { forwardRef as r, useId as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/molecules/CheckboxField/CheckboxField.tsx
-var o = i(function({ label: i, checked: o, defaultChecked: s, disabled: c, size: l, id: u, name: d, value: f, error: p = !1, errorMessage: m, helperText: h, className: g, onCheckedChange: _, onBlur: v }, y) {
-	let b = e(l), x = a(), S = u ?? x, C = m ? `${S}-error` : void 0, w = h ? `${S}-helper` : void 0, T = [C, w].filter(Boolean).join(" ") || void 0, E = p || !!m;
-	return /* @__PURE__ */ r("div", {
+var s = r(function({ label: r, labelHidden: s = !1, checked: c, defaultChecked: l, disabled: u, size: d, id: f, name: p, value: m, error: h = !1, errorMessage: g, helperText: _, className: v, onCheckedChange: y, onBlur: b }, x) {
+	let S = t(d), C = i(), w = f ?? C, T = g ? `${w}-error` : void 0, E = _ ? `${w}-helper` : void 0, D = [T, E].filter(Boolean).join(" ") || void 0, O = h || !!g;
+	return /* @__PURE__ */ o("div", {
 		className: [
 			"checkbox-field",
-			b === "md" ? "" : `checkbox-field--${b}`,
-			c ? "checkbox-field--disabled" : "",
-			g
+			S === "md" ? "" : `checkbox-field--${S}`,
+			u ? "checkbox-field--disabled" : "",
+			v
 		].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r("label", {
+			/* @__PURE__ */ o("label", {
 				className: "checkbox-field__control",
-				htmlFor: S,
-				children: [/* @__PURE__ */ n(t, {
-					ref: y,
-					id: S,
-					checked: o,
-					defaultChecked: s,
-					disabled: c,
-					size: b,
-					name: d,
-					value: f,
-					error: E,
-					"aria-describedby": T,
-					onCheckedChange: _,
-					onBlur: v
-				}), /* @__PURE__ */ n("span", {
+				htmlFor: w,
+				children: [/* @__PURE__ */ a(n, {
+					ref: x,
+					id: w,
+					checked: c,
+					defaultChecked: l,
+					disabled: u,
+					size: S,
+					name: p,
+					value: m,
+					error: O,
+					"aria-describedby": D,
+					onCheckedChange: y,
+					onBlur: b
+				}), a(s ? e : "span", {
 					className: "checkbox-field__label",
-					children: i
+					children: r
 				})]
 			}),
-			m && /* @__PURE__ */ n("span", {
-				id: C,
+			g && /* @__PURE__ */ a("span", {
+				id: T,
 				className: "checkbox-field__error",
 				role: "alert",
-				children: m
+				children: g
 			}),
-			h && /* @__PURE__ */ n("span", {
-				id: w,
+			_ && /* @__PURE__ */ a("span", {
+				id: E,
 				className: "checkbox-field__helper",
-				children: h
+				children: _
 			})
 		]
 	});
 });
 //#endregion
-export { o as CheckboxField };
+export { s as CheckboxField };

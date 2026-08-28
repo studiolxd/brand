@@ -2,8 +2,8 @@
 import './date-picker.css';
 import { Popover as e } from "./popover.js";
 import { Calendar as t } from "./calendar.js";
-import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
-import { forwardRef as a, useCallback as o, useState as s } from "react";
+import { forwardRef as n, useCallback as r, useState as i } from "react";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/DatePicker/DatePicker.tsx
 function c(e, t) {
 	return new Intl.DateTimeFormat(t, {
@@ -16,12 +16,12 @@ function c(e, t) {
 function l(e) {
 	return `${String(e.getFullYear()).padStart(4, "0")}-${String(e.getMonth() + 1).padStart(2, "0")}-${String(e.getDate()).padStart(2, "0")}`;
 }
-var u = a(function({ value: a, onChange: u, placeholder: d = "Seleccionar fechaâ€¦", minDate: f, maxDate: p, disabledDates: m, size: h = "md", disabled: g, readOnly: _, error: v = !1, locale: y = "es-ES", id: b, name: x, describedBy: S, "aria-describedby": C, "aria-label": w, calendarLabel: T = "Calendario", onBlur: E, className: D }, O) {
-	let [k, A] = s(!1), j = o((e) => {
+var u = n(function({ value: n, onChange: u, placeholder: d = "Seleccionar fechaâ€¦", minDate: f, maxDate: p, disabledDates: m, size: h = "md", disabled: g, readOnly: _, error: v = !1, locale: y = "es-ES", id: b, name: x, describedBy: S, "aria-describedby": C, "aria-label": w, calendarLabel: T = "Calendario", onBlur: E, className: D }, O) {
+	let [k, A] = i(!1), j = r((e) => {
 		_ && e || A(e);
-	}, [_]), M = o((e) => {
+	}, [_]), M = r((e) => {
 		u?.(e), A(!1);
-	}, [u]), N = a instanceof Date ? c(a, y) : null, P = /* @__PURE__ */ r("button", {
+	}, [u]), N = n instanceof Date ? c(n, y) : null, P = /* @__PURE__ */ o("button", {
 		ref: O,
 		id: b,
 		type: "button",
@@ -42,11 +42,11 @@ var u = a(function({ value: a, onChange: u, placeholder: d = "Seleccionar fechaâ
 		onBlur: E,
 		children: N ?? d
 	});
-	return /* @__PURE__ */ i(n, { children: [x && /* @__PURE__ */ r("input", {
+	return /* @__PURE__ */ s(a, { children: [x && /* @__PURE__ */ o("input", {
 		type: "hidden",
 		name: x,
-		value: a instanceof Date ? l(a) : ""
-	}), /* @__PURE__ */ r(e, {
+		value: n instanceof Date ? l(n) : ""
+	}), /* @__PURE__ */ o(e, {
 		trigger: P,
 		label: T,
 		open: k,
@@ -55,8 +55,8 @@ var u = a(function({ value: a, onChange: u, placeholder: d = "Seleccionar fechaâ
 		align: "start",
 		sideOffset: -1,
 		className: "date-picker__popover",
-		children: /* @__PURE__ */ r(t, {
-			value: a ?? null,
+		children: /* @__PURE__ */ o(t, {
+			value: n ?? null,
 			onChange: M,
 			gridLabel: T,
 			minDate: f,

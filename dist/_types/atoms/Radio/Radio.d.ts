@@ -11,5 +11,9 @@ export interface RadioProps extends Omit<React.ComponentPropsWithoutRef<'input'>
  * Radio (input nativo `type="radio"`). Extiende los atributos nativos de `<input>`
  * y reenvía `{...rest}` al elemento (incluye `ref` para react-hook-form; `data-*`,
  * `aria-*`, `required`, `checked`, `value`, handlers, etc.).
+ *
+ * Dentro de un `RadioGroup` toma de él el `name`, si está marcado, la talla, el
+ * error y el estado deshabilitado, y le avisa al elegirse. Lo que se pase a
+ * mano manda sobre lo que dice el grupo.
  */
 export declare const Radio: import("react").ForwardRefExoticComponent<RadioProps & import("react").RefAttributes<HTMLInputElement>>;

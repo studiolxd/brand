@@ -19,8 +19,9 @@ export interface CardMedia {
 export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
     /**
      * URL de destino. **Con `href`** el Card es una *link-card*: todo el bloque es un
-     * `<a>` (título + descripción + flecha). **Sin `href`** es una *superficie
-     * contenedora*: un `<div>` con `children` arbitrarios (interactivos permitidos).
+     * `<a>` (título + descripción + `children` + flecha). **Sin `href`** es una
+     * *superficie contenedora*: un `<div>` con `children` arbitrarios
+     * (interactivos permitidos).
      */
     href?: string;
     /**
@@ -30,10 +31,19 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
      * patrón `asChild`. Manda sobre `href`.
      */
     render?: React.ReactElement<Record<string, unknown>>;
+    /**
+     * Abre en nueva pestaña con `rel="noopener noreferrer"` (solo con `href`).
+     * Misma prop y mismo contrato que en `Button` y `Link`.
+     */
+    external?: boolean;
     /** Título (modo link — se espera junto a `href` o `render`). */
     title?: string;
-    /** Descripción (modo link). */
-    description?: string;
+    /**
+     * Descripción (modo link). Con una cadena, la tarjeta la envuelve en su
+     * propio `<p>`. Con un nodo, lo pinta tal cual: el marcado lo trae el
+     * consumidor (varios párrafos, `<Tag>`, texto con formato…).
+     */
+    description?: React.ReactNode;
     /** Texto accesible del CTA, visually-hidden (modo link — se espera junto a `href` o `render`). */
     ctaLabel?: string;
     /** Color de fondo. Default: `'outline'`. */
@@ -51,7 +61,8 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
  * Card con dos modos:
  * - **link-card** (`href` o `render`): navegación — el bloque entero es un
  *   enlace. Con `href` lo pinta un `<a>`; con `render`, el elemento que se le
- *   pase (el `Link` del router de turno).
+ *   pase (el `Link` del router de turno). Admite `children` para el contenido
+ *   que no cabe en `title`/`description`, siempre que no sea interactivo.
  * - **contenedor** (sin ninguno de los dos): superficie de app con contenido
  *   interactivo dentro (formularios, botones), que no puede vivir dentro de un
  *   `<a>`. Se compone con las subpartes de más abajo.

@@ -3,16 +3,16 @@ import './confirm-dialog.css';
 import { Button as e } from "./button.js";
 import { Inline as t } from "./inline.js";
 import { Modal as n } from "./modal.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { useEffect as a, useRef as o, useState as s } from "react";
+import { useEffect as r, useRef as i, useState as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
 //#region src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx
 function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCancel: p, onConfirmError: m, destructive: h = !1, confirmLabel: g = "Confirmar", cancelLabel: _ = "Cancelar", pendingLabel: v = "Confirmando…", closeLabel: y = "Cerrar", container: b, className: x }) {
-	let S = o(null), [C, w] = s(!1);
-	a(() => {
+	let S = i(null), [C, w] = a(!1);
+	r(() => {
 		if (!c) return;
 		let e = requestAnimationFrame(() => S.current?.focus());
 		return () => cancelAnimationFrame(e);
-	}, [c]), a(() => {
+	}, [c]), r(() => {
 		c || w(!1);
 	}, [c]);
 	let T = () => {
@@ -31,24 +31,24 @@ function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCan
 			}
 		}
 	};
-	return /* @__PURE__ */ i(n, {
+	return /* @__PURE__ */ s(n, {
 		open: c,
 		onClose: T,
 		title: l,
 		closeLabel: y,
 		container: b,
 		...u == null ? {} : { description: u },
-		children: [d, /* @__PURE__ */ i(t, {
+		children: [d, /* @__PURE__ */ s(t, {
 			gap: "sm",
 			justify: "end",
 			className: ["confirm-dialog__actions", x].filter(Boolean).join(" "),
-			children: [/* @__PURE__ */ r(e, {
+			children: [/* @__PURE__ */ o(e, {
 				ref: S,
 				variant: "ghost",
 				onClick: T,
 				disabled: C,
 				children: _
-			}), /* @__PURE__ */ r(e, {
+			}), /* @__PURE__ */ o(e, {
 				variant: h ? "outline" : "primary",
 				destructive: h,
 				onClick: E,

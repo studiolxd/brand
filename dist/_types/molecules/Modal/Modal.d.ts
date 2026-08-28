@@ -1,6 +1,6 @@
 import { Dialog } from '@base-ui-components/react/dialog';
 import './Modal.css';
-export interface ModalProps {
+export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title' | 'className'> {
     open: boolean;
     onClose: () => void;
     title?: string;
@@ -29,4 +29,17 @@ export interface ModalProps {
      */
     'aria-describedby'?: string;
 }
-export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, }: ModalProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Diálogo centrado sobre un velo. El motor (portal, velo, trampa de foco,
+ * cierre con Escape) es Base UI Dialog; el DS pone la superficie.
+ *
+ * `{...rest}` (`id`, `data-*`, `aria-*` y los **handlers de evento**) se
+ * reenvía al popup. Los handlers son lo que permite montar la barrera de
+ * eventos cuando el modal se abre desde dentro de una tarjeta clicable —
+ * `onClick`/`onPointerDown` con `stopPropagation` en el propio popup— sin
+ * envolverlo en `div`s de producto.
+ *
+ * `className` **no** se reenvía a propósito: la cara del diálogo la pone el
+ * sistema, y se personaliza por tokens.
+ */
+export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;

@@ -8,7 +8,7 @@ export interface TableOfContentsItem {
     /** Nivel del encabezado (`2` para un `h2`, `3` para un `h3`…). La sangría es relativa al nivel más alto de la lista. */
     level: number;
 }
-export interface TableOfContentsProps {
+export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRef<'nav'>, 'title'> {
     /** Entradas, en el orden en que aparecen en el documento. */
     items: TableOfContentsItem[];
     /**
@@ -42,5 +42,8 @@ export interface TableOfContentsProps {
  * `IntersectionObserver` o con el hash de la URL) y el índice lo pinta. Así el
  * mismo componente sirve para un índice con scroll-spy, para uno que solo
  * sigue al hash y para uno estático.
+ *
+ * `{...rest}` (`id`, `data-*`, `role`…) se reenvía al `<nav>`. El nombre
+ * accesible sigue siendo `ariaLabel`.
  */
 export declare const TableOfContents: import("react").ForwardRefExoticComponent<TableOfContentsProps & import("react").RefAttributes<HTMLElement>>;

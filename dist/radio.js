@@ -1,21 +1,30 @@
 'use client';
 import './radio.css';
-import { jsx as e } from "react/jsx-runtime";
+import { n as e } from "./_shared/RadioGroupContext.js";
 import { forwardRef as t } from "react";
+import { jsx as n } from "react/jsx-runtime";
 //#region src/stories/atoms/Radio/Radio.tsx
-var n = t(function({ size: t = "md", error: n = !1, className: r, ...i }, a) {
-	return /* @__PURE__ */ e("input", {
-		ref: a,
-		className: [
-			"radio",
-			t === "md" ? "" : `radio--${t}`,
-			n ? "radio--error" : "",
-			r ?? ""
-		].filter(Boolean).join(" "),
-		"aria-invalid": n || void 0,
-		...i,
+var r = t(function({ size: t, error: r, className: i, ...a }, o) {
+	let s = e(), c = t ?? s?.size ?? "md", l = r ?? s?.error ?? !1, u = a.name ?? s?.name, d = a.disabled ?? s?.disabled, f = a.checked ?? (s && a.value !== void 0 ? s.value === a.value : void 0), p = [
+		"radio",
+		c === "md" ? "" : `radio--${c}`,
+		l ? "radio--error" : "",
+		i ?? ""
+	].filter(Boolean).join(" ");
+	function m(e) {
+		a.onChange?.(e), s && e.target.checked && s.select(e.target.value);
+	}
+	return /* @__PURE__ */ n("input", {
+		ref: o,
+		className: p,
+		"aria-invalid": l || void 0,
+		...a,
+		name: u,
+		disabled: d,
+		checked: f,
+		onChange: s ? m : a.onChange,
 		type: "radio"
 	});
 });
 //#endregion
-export { n as Radio };
+export { r as Radio };

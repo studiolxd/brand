@@ -13,12 +13,27 @@ export interface PrevNextNavProps {
     prevOnClick?: (event: MouseEvent<HTMLElement>) => void;
     /** Handler del control siguiente. Mismo contrato que `prevOnClick`. */
     nextOnClick?: (event: MouseEvent<HTMLElement>) => void;
-    /** aria-label del control anterior. Default: "Anterior" */
+    /**
+     * Rótulo del control anterior. Sin `prevTitle` es el `aria-label` del
+     * chevron; con `prevTitle` es el rótulo **visible** que lo encabeza.
+     * Default: "Anterior"
+     */
     prevLabel?: string;
-    /** aria-label del control siguiente. Default: "Siguiente" */
+    /** Rótulo del control siguiente. Mismo contrato que `prevLabel`. Default: "Siguiente" */
     nextLabel?: string;
-    /** Contenido central: texto de periodo, semana, mes, etc. */
-    label: ReactNode;
+    /**
+     * Título visible del destino anterior (el de la página, el capítulo…). Con
+     * él el control deja de ser un chevron pelado: se lee «Anterior ·
+     * Instalación», y ese texto visible es ya su nombre accesible.
+     */
+    prevTitle?: string;
+    /** Título visible del destino siguiente. Mismo contrato que `prevTitle`. */
+    nextTitle?: string;
+    /**
+     * Contenido central: texto de periodo, semana, mes, etc. Opcional — el
+     * paginador de documentación no tiene centro, solo los dos destinos.
+     */
+    label?: ReactNode;
     /**
      * id del label central, para que otro elemento pueda tomarlo como nombre
      * accesible (`aria-labelledby`).
@@ -32,4 +47,4 @@ export interface PrevNextNavProps {
     /** Variante de densidad. Default: "md" */
     size?: 'sm' | 'md';
 }
-export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, label, labelId, linkComponent, size, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function PrevNextNav({ prevHref, nextHref, prevOnClick, nextOnClick, prevLabel, nextLabel, prevTitle, nextTitle, label, labelId, linkComponent, size, }: PrevNextNavProps): import("react/jsx-runtime").JSX.Element;

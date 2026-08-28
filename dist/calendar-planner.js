@@ -3,11 +3,11 @@ import './calendar-planner.css';
 import { Tag as e } from "./tag.js";
 import { Modal as t } from "./modal.js";
 import { c as n, i as r, l as i, n as a, o, r as s, s as c, t as l } from "./_shared/calendarGrid.js";
-import { Fragment as u, jsx as d, jsxs as f } from "react/jsx-runtime";
-import { useCallback as p, useState as m } from "react";
+import { useCallback as u, useState as d } from "react";
+import { Fragment as f, jsx as p, jsxs as m } from "react/jsx-runtime";
 //#region src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx
 function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v, onDayClick: y, month: b, defaultMonth: x, onMonthChange: S, navigable: C = !0, locale: w = "es-ES", previousMonthLabel: T = "Mes anterior", nextMonthLabel: E = "Mes siguiente", gridLabel: D, size: O = "md", className: k }) {
-	let [A, j] = m(() => b ?? x ?? /* @__PURE__ */ new Date()), [M, N] = m(null), P = p(() => N(null), []), F = b ?? A, I = p((e) => {
+	let [A, j] = d(() => b ?? x ?? /* @__PURE__ */ new Date()), [M, N] = d(null), P = u(() => N(null), []), F = b ?? A, I = u((e) => {
 		j(e), S?.(e);
 	}, [S]), L = /* @__PURE__ */ new Date(), R = O === "sm" ? "xs" : O === "lg" ? "md" : "sm", z = new Intl.DateTimeFormat(w, {
 		month: "long",
@@ -22,7 +22,7 @@ function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v
 		onMonthChange: I,
 		onActivate: y ? (e) => y(e, K(e)) : void 0
 	}), J = `planner-title-${F.getFullYear()}-${F.getMonth()}`;
-	return /* @__PURE__ */ f("div", {
+	return /* @__PURE__ */ m("div", {
 		className: [
 			"calendar-planner",
 			`calendar-planner--${O}`,
@@ -40,7 +40,7 @@ function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v
 				onNext: () => I(G),
 				chevronSize: R
 			}),
-			/* @__PURE__ */ f("div", {
+			/* @__PURE__ */ m("div", {
 				className: "calendar-planner__grid",
 				role: "grid",
 				"aria-label": D,
@@ -50,7 +50,7 @@ function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v
 					block: "calendar-planner",
 					rowModifier: "header",
 					weekdays: V
-				}), U.map((t, n) => /* @__PURE__ */ d("div", {
+				}), U.map((t, n) => /* @__PURE__ */ p("div", {
 					role: "row",
 					className: "calendar-planner__row",
 					children: t.map(({ date: t, outside: n }) => {
@@ -63,7 +63,7 @@ function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v
 							i && "calendar-planner__day-number--today",
 							n && "calendar-planner__day-number--outside"
 						].filter(Boolean).join(" ");
-						return /* @__PURE__ */ f("div", {
+						return /* @__PURE__ */ m("div", {
 							ref: y ? q.cellRef(t) : void 0,
 							role: "gridcell",
 							className: [c, y ? "calendar-planner__cell--clickable" : ""].filter(Boolean).join(" "),
@@ -71,16 +71,16 @@ function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v
 							tabIndex: y ? q.isTabbable(t) ? 0 : -1 : void 0,
 							onFocus: y ? () => q.onCellFocus(t) : void 0,
 							onClick: y ? () => y(t, a) : void 0,
-							children: [/* @__PURE__ */ d("span", {
+							children: [/* @__PURE__ */ p("span", {
 								className: l,
 								"aria-label": H.format(t),
 								children: t.getDate()
-							}), /* @__PURE__ */ d("div", {
+							}), /* @__PURE__ */ p("div", {
 								className: "calendar-planner__cell-body",
-								children: g ? g(t, a) : /* @__PURE__ */ f(u, { children: [o.map((t) => /* @__PURE__ */ d(e, {
+								children: g ? g(t, a) : /* @__PURE__ */ m(f, { children: [o.map((t) => /* @__PURE__ */ p(e, {
 									variant: t.variant ?? "neutral",
 									children: t.label
-								}, t.id)), s > 0 && /* @__PURE__ */ f("button", {
+								}, t.id)), s > 0 && /* @__PURE__ */ m("button", {
 									type: "button",
 									className: "calendar-planner__more",
 									onClick: (e) => {
@@ -100,13 +100,13 @@ function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v
 					})
 				}, n))]
 			}),
-			/* @__PURE__ */ d(t, {
+			/* @__PURE__ */ p(t, {
 				open: M !== null,
 				onClose: P,
 				title: M ? B.format(M.date) : void 0,
-				children: /* @__PURE__ */ d("div", {
+				children: /* @__PURE__ */ p("div", {
 					className: "calendar-planner__modal-events",
-					children: M?.events.map((t) => /* @__PURE__ */ d(e, {
+					children: M?.events.map((t) => /* @__PURE__ */ p(e, {
 						variant: t.variant ?? "neutral",
 						children: t.label
 					}, t.id))

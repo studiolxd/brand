@@ -6,8 +6,8 @@ import { Button as n } from "./button.js";
 import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
 import { Dialog as o } from "@base-ui-components/react/dialog";
 //#region src/stories/molecules/Modal/Modal.tsx
-function s({ open: s, onClose: c, title: l, children: u, closeLabel: d = "Cerrar", fallbackTitle: f = "Diálogo", container: p, description: m, "aria-describedby": h }) {
-	let g = h === void 0 ? {} : { "aria-describedby": h };
+function s({ open: s, onClose: c, title: l, children: u, closeLabel: d = "Cerrar", fallbackTitle: f = "Diálogo", container: p, description: m, "aria-describedby": h, ...g }) {
+	let _ = h === void 0 ? {} : { "aria-describedby": h };
 	return /* @__PURE__ */ i(o.Root, {
 		open: s,
 		onOpenChange: (e) => {
@@ -17,6 +17,7 @@ function s({ open: s, onClose: c, title: l, children: u, closeLabel: d = "Cerrar
 			container: p,
 			children: [/* @__PURE__ */ i(o.Backdrop, { className: "modal__overlay" }), /* @__PURE__ */ a(o.Popup, {
 				className: "modal__content",
+				..._,
 				...g,
 				initialFocus: !1,
 				children: [

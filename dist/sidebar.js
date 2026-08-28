@@ -2,8 +2,8 @@
 import './sidebar.css';
 import { n as e, t } from "./_shared/SidebarContext.js";
 import { t as n } from "./_shared/AppShellContext.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { useCallback as a, useContext as o, useEffect as s, useRef as c } from "react";
+import { useCallback as r, useContext as i, useEffect as a, useRef as o } from "react";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
 //#region src/stories/sections/Sidebar/Sidebar.tsx
 function l(e, t) {
 	let n = document.createElement("div");
@@ -12,9 +12,9 @@ function l(e, t) {
 	return n.remove(), r;
 }
 function u({ logo: e, children: u, footer: d, id: f, label: p = "Barra lateral", resizerLabel: m = "Ancho de la barra lateral", mode: h }) {
-	let g = o(n), _ = g ? g.sidebar : h ?? "open", v = g ? g.isDesktop : !0, y = v && _ === "rail", b = !v, x = c(null), S = (e) => {
+	let g = i(n), _ = g ? g.sidebar : h ?? "open", v = g ? g.isDesktop : !0, y = v && _ === "rail", b = !v, x = o(null), S = (e) => {
 		!b || !g || e.target.closest("a[href]") && g.closeSidebar();
-	}, C = a((e) => {
+	}, C = r((e) => {
 		let t = x.current;
 		if (!t || !g) return;
 		let n = l(t, "--sidebar-min-width"), r = l(t, "--sidebar-max-width");
@@ -33,13 +33,13 @@ function u({ logo: e, children: u, footer: d, id: f, label: p = "Barra lateral",
 		let t = l(x.current, "--sidebar-resize-step-px"), n = x.current.getBoundingClientRect().width;
 		e.key === "ArrowLeft" && (e.preventDefault(), C(n - t)), e.key === "ArrowRight" && (e.preventDefault(), _ === "open" ? C(n + t) : g.setSidebar("open")), e.key === "Home" && (e.preventDefault(), g.setSidebar("rail")), e.key === "End" && (e.preventDefault(), C(l(x.current, "--sidebar-max-width")));
 	};
-	s(() => {
+	a(() => {
 		b && _ === "open" && x.current?.focus();
 	}, [b, _]);
 	let E = ["sidebar", b ? "sidebar--drawer" : `sidebar--${_}`].join(" ");
-	return /* @__PURE__ */ r(t.Provider, {
+	return /* @__PURE__ */ s(t.Provider, {
 		value: { rail: y },
-		children: /* @__PURE__ */ i("aside", {
+		children: /* @__PURE__ */ c("aside", {
 			ref: x,
 			id: f,
 			className: E,
@@ -49,19 +49,19 @@ function u({ logo: e, children: u, footer: d, id: f, label: p = "Barra lateral",
 			inert: b && _ === "closed" ? !0 : void 0,
 			onClick: S,
 			children: [
-				e && /* @__PURE__ */ r("div", {
+				e && /* @__PURE__ */ s("div", {
 					className: "sidebar__header",
 					children: e
 				}),
-				/* @__PURE__ */ r("div", {
+				/* @__PURE__ */ s("div", {
 					className: "sidebar__panel",
 					children: u
 				}),
-				d && /* @__PURE__ */ r("div", {
+				d && /* @__PURE__ */ s("div", {
 					className: "sidebar__footer",
 					children: d
 				}),
-				v && g && _ !== "closed" && /* @__PURE__ */ r("div", {
+				v && g && _ !== "closed" && /* @__PURE__ */ s("div", {
 					className: "sidebar__resizer",
 					role: "separator",
 					"aria-orientation": "vertical",
@@ -76,19 +76,19 @@ function u({ logo: e, children: u, footer: d, id: f, label: p = "Barra lateral",
 	});
 }
 function d({ className: e, ...t }) {
-	return /* @__PURE__ */ r("div", {
+	return /* @__PURE__ */ s("div", {
 		className: ["sidebar__group", e].filter(Boolean).join(" "),
 		...t
 	});
 }
 function f({ className: e, ...t }) {
-	return /* @__PURE__ */ r("div", {
+	return /* @__PURE__ */ s("div", {
 		className: ["sidebar__group-content", e].filter(Boolean).join(" "),
 		...t
 	});
 }
 function p({ className: e, ...t }) {
-	return /* @__PURE__ */ r("hr", {
+	return /* @__PURE__ */ s("hr", {
 		className: ["sidebar__separator", e].filter(Boolean).join(" "),
 		...t
 	});

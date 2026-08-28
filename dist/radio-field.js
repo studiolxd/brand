@@ -1,49 +1,50 @@
 'use client';
 import './radio-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { Radio as t } from "./radio.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { forwardRef as i, useId as a } from "react";
+import { n as t } from "./_shared/RadioGroupContext.js";
+import { Radio as n } from "./radio.js";
+import { forwardRef as r, useId as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/molecules/RadioField/RadioField.tsx
-var o = i(function({ label: i, id: o, size: s, disabled: c, error: l = !1, errorMessage: u, helperText: d, className: f, ...p }, m) {
-	let h = e(s), g = a(), _ = o ?? g, v = u ? `${_}-error` : void 0, y = d ? `${_}-helper` : void 0, b = [v, y].filter(Boolean).join(" ") || void 0, x = l || !!u;
-	return /* @__PURE__ */ r("div", {
+var s = r(function({ label: r, id: s, size: c, disabled: l, error: u = !1, errorMessage: d, helperText: f, className: p, ...m }, h) {
+	let g = t(), _ = e(c ?? g?.size), v = i(), y = s ?? v, b = d ? `${y}-error` : void 0, x = f ? `${y}-helper` : void 0, S = [b, x].filter(Boolean).join(" ") || void 0, C = u || !!d || (g?.error ?? !1), w = l ?? g?.disabled;
+	return /* @__PURE__ */ o("div", {
 		className: [
 			"radio-field",
-			h === "md" ? "" : `radio-field--${h}`,
-			c ? "radio-field--disabled" : "",
-			f
+			_ === "md" ? "" : `radio-field--${_}`,
+			w ? "radio-field--disabled" : "",
+			p
 		].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r("label", {
+			/* @__PURE__ */ o("label", {
 				className: "radio-field__control",
-				htmlFor: _,
-				children: [/* @__PURE__ */ n(t, {
-					ref: m,
-					...p,
-					id: _,
-					size: h,
-					disabled: c,
-					error: x,
-					"aria-describedby": b
-				}), /* @__PURE__ */ n("span", {
+				htmlFor: y,
+				children: [/* @__PURE__ */ a(n, {
+					ref: h,
+					...m,
+					id: y,
+					size: _,
+					disabled: w,
+					error: C,
+					"aria-describedby": S
+				}), /* @__PURE__ */ a("span", {
 					className: "radio-field__label",
-					children: i
+					children: r
 				})]
 			}),
-			u && /* @__PURE__ */ n("span", {
-				id: v,
+			d && /* @__PURE__ */ a("span", {
+				id: b,
 				className: "radio-field__error",
 				role: "alert",
-				children: u
-			}),
-			d && /* @__PURE__ */ n("span", {
-				id: y,
-				className: "radio-field__helper",
 				children: d
+			}),
+			f && /* @__PURE__ */ a("span", {
+				id: x,
+				className: "radio-field__helper",
+				children: f
 			})
 		]
 	});
 });
 //#endregion
-export { o as RadioField };
+export { s as RadioField };

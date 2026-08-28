@@ -1,66 +1,82 @@
 import './prev-next-nav.css';
 import { Icon as e } from "./icon.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { Fragment as t, jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/stories/molecules/PrevNextNav/PrevNextNav.tsx
-function r({ href: n, onClick: r, label: i, disabled: a, direction: o, chevronSize: s, linkComponent: c }) {
-	let l = [
+function i({ href: i, onClick: a, label: o, title: s, disabled: c, direction: l, chevronSize: u, linkComponent: d }) {
+	let f = [
 		"prev-next-nav__btn",
-		`prev-next-nav__btn--${o}`,
-		a ? "prev-next-nav__btn--disabled" : ""
-	].filter(Boolean).join(" "), u = /* @__PURE__ */ t(e, {
+		`prev-next-nav__btn--${l}`,
+		s ? "prev-next-nav__btn--titled" : "",
+		c ? "prev-next-nav__btn--disabled" : ""
+	].filter(Boolean).join(" "), p = /* @__PURE__ */ n(e, {
 		name: "chevron",
-		size: s
-	});
-	return a ? /* @__PURE__ */ t("button", {
+		size: u
+	}), m = s ? /* @__PURE__ */ r(t, { children: [p, /* @__PURE__ */ r("span", {
+		className: "prev-next-nav__text",
+		children: [/* @__PURE__ */ n("span", {
+			className: "prev-next-nav__eyebrow",
+			children: o
+		}), /* @__PURE__ */ n("span", {
+			className: "prev-next-nav__title",
+			children: s
+		})]
+	})] }) : p, h = s ? void 0 : o;
+	return c ? /* @__PURE__ */ n("button", {
 		type: "button",
-		className: l,
-		"aria-label": i,
+		className: f,
+		"aria-label": h,
 		disabled: !0,
-		children: u
-	}) : n ? /* @__PURE__ */ t(c ?? "a", {
-		href: n,
-		className: l,
-		"aria-label": i,
-		onClick: r,
-		children: u
-	}) : /* @__PURE__ */ t("button", {
+		children: m
+	}) : i ? /* @__PURE__ */ n(d ?? "a", {
+		href: i,
+		className: f,
+		"aria-label": h,
+		onClick: a,
+		children: m
+	}) : /* @__PURE__ */ n("button", {
 		type: "button",
-		className: l,
-		"aria-label": i,
-		onClick: r,
-		children: u
+		className: f,
+		"aria-label": h,
+		onClick: a,
+		children: m
 	});
 }
-function i({ prevHref: e, nextHref: i, prevOnClick: a, nextOnClick: o, prevLabel: s = "Anterior", nextLabel: c = "Siguiente", label: l, labelId: u, linkComponent: d, size: f = "md" }) {
-	let p = f === "sm" ? "sm" : "md";
-	return /* @__PURE__ */ n("div", {
-		className: ["prev-next-nav", f === "sm" ? "prev-next-nav--sm" : ""].filter(Boolean).join(" "),
+function a({ prevHref: e, nextHref: t, prevOnClick: a, nextOnClick: o, prevLabel: s = "Anterior", nextLabel: c = "Siguiente", prevTitle: l, nextTitle: u, label: d, labelId: f, linkComponent: p, size: m = "md" }) {
+	let h = m === "sm" ? "sm" : "md";
+	return /* @__PURE__ */ r("div", {
+		className: [
+			"prev-next-nav",
+			m === "sm" ? "prev-next-nav--sm" : "",
+			l !== void 0 || u !== void 0 ? "prev-next-nav--titled" : ""
+		].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ t(r, {
+			/* @__PURE__ */ n(i, {
 				href: e,
 				onClick: a,
 				label: s,
 				disabled: !e && !a,
 				direction: "prev",
-				chevronSize: p,
-				linkComponent: d
+				title: l,
+				chevronSize: h,
+				linkComponent: p
 			}),
-			/* @__PURE__ */ t("strong", {
-				id: u,
+			d !== void 0 && /* @__PURE__ */ n("strong", {
+				id: f,
 				className: "prev-next-nav__label",
-				children: l
+				children: d
 			}),
-			/* @__PURE__ */ t(r, {
-				href: i,
+			/* @__PURE__ */ n(i, {
+				href: t,
 				onClick: o,
 				label: c,
-				disabled: !i && !o,
+				disabled: !t && !o,
 				direction: "next",
-				chevronSize: p,
-				linkComponent: d
+				title: u,
+				chevronSize: h,
+				linkComponent: p
 			})
 		]
 	});
 }
 //#endregion
-export { i as PrevNextNav };
+export { a as PrevNextNav };
