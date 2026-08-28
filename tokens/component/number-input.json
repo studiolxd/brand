@@ -45,6 +45,8 @@
     "sm-padding-inline":{ "$value": "{input.sm-padding-inline}","$type": "dimension", "$description": "Padding horizontal — sm" },
     "lg-font-size":   { "$value": "{input.lg-font-size}",   "$type": "dimension", "$description": "Font size — lg" },
     "lg-height":      { "$value": "{input.lg-height}",      "$type": "dimension", "$description": "Altura — lg" },
-    "lg-padding-inline":{ "$value": "{input.lg-padding-inline}","$type": "dimension", "$description": "Padding horizontal — lg" }
+    "lg-padding-inline":{ "$value": "{input.lg-padding-inline}","$type": "dimension", "$description": "Padding horizontal — lg" },
+    "surface-dark-btn-color":                    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Icono de los botones +/− — surface-dark" },
+    "surface-dark-btn-hover-line-color":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea de hover de los botones +/− — surface-dark" }
   }
 }

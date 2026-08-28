@@ -35,7 +35,7 @@ html.dark {
   --tabs-trigger-color: var(--color-text-muted-on-dark); /** Color del trigger inactivo — surface-dark */
   --tabs-trigger-hover-color: var(--color-text-on-dark); /** Color hover del trigger — surface-dark */
   --tabs-trigger-active-color: var(--color-text-on-dark); /** Color del trigger activo — surface-dark */
-  --tabs-trigger-pill-bg-active: var(--color-text-on-dark); /** Fondo del trigger activo, variante pill — surface-dark: color.primary colisiona con el fondo (los dos son prusia), se invierte a blanco */
+  --tabs-trigger-pill-bg-active: var(--color-accent-1); /** Fondo del trigger activo, variante pill — surface-dark. `color.primary` coincide con el lienzo oscuro; toma el par de `Button primary` (lavanda con tinta prusia), la regla de derivación del sistema. Antes se invertía a blanco, que es el par de los componentes en los que `accent-1` ya es otra variante — no es el caso de Tabs */
   --tabs-trigger-pill-color-active: var(--color-primary); /** Texto del trigger activo, variante pill — surface-dark */
   --tabs-trigger-indicator-color: var(--color-text-on-dark); /** Indicador de pestaña activa (underline) — surface-dark: color.primary colisiona con el fondo */
   --tabs-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */

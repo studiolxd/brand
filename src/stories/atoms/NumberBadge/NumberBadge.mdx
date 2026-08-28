@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as NumberBadgeStories from "./NumberBadge.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { numberBadgeTokens } from "../../../tokens/components/number-badge";
+import { numberBadgeTokens, numberBadgeDarkTokens } from "../../../tokens/components/number-badge";
 
 <Meta of={NumberBadgeStories} />
 
@@ -21,6 +21,12 @@ Los colores de marca (`primary`, `accent-1`, `accent-2`, `support-1`, `support-2
 
 <Canvas of={NumberBadgeStories.DosDigitosYTope} />
 
+## Superficie oscura
+
+`primary` y `neutral` se invierten (prusia sería el lienzo, y el gris oscuro no contrasta con él): relleno blanco o gris claro con tinta prusia. No pasan a lavanda porque `accent-1` ya es otra variante del mismo componente. El resto son colores saturados o rellenos universales de feedback, que se leen igual en las dos superficies y no llevan par.
+
+<Canvas of={NumberBadgeStories.SuperficieOscura} />
+
 ## Accesibilidad
 
 - El texto visible ya es su nombre; con `aria-label` se le da el contexto completo («3 notificaciones sin leer»), que es lo que conviene cuando el badge va pegado a un icono o un avatar.
@@ -31,6 +37,10 @@ Los colores de marca (`primary`, `accent-1`, `accent-2`, `support-1`, `support-2
 El tamaño mínimo (16px) es el de una marca, no el de un control: no pertenece a la escala de tallas. Peso normal: es una cifra, no un título.
 
 <TokenTable tokens={numberBadgeTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={numberBadgeDarkTokens} />
 
 ## Props
 

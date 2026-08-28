@@ -31,6 +31,7 @@
     "surface-dark-empty-color":   { "$value": "{color.text.muted-on-dark}", "$type": "color",     "$description": "Color del estado vacío — surface-dark" },
     "surface-dark-heading-color": { "$value": "{color.text.muted-on-dark}", "$type": "color",     "$description": "Color del título de grupo — surface-dark" },
     "surface-dark-item-color":         { "$value": "{menu.surface-dark-item-color}",       "$type": "color", "$description": "Color de texto de los ítems — surface-dark" },
-    "surface-dark-item-focus-ring-color": { "$value": "{menu.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo del ítem — surface-dark" }
+    "surface-dark-item-focus-ring-color": { "$value": "{menu.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo del ítem — surface-dark" },
+    "surface-dark-input-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}", "$type": "color", "$description": "Pista del buscador — surface-dark" }
   }
 }

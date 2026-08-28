@@ -26,6 +26,7 @@
     "separator-margin-block": { "$value": "{separator.spacing-md}", "$type": "dimension", "$description": "Aire de la línea — el aire md de la línea del sistema" },
     "surface-dark-bg":           { "$value": "{color.background.dark}",   "$type": "color", "$description": "Fondo — surface-dark" },
     "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde — surface-dark" },
-    "surface-dark-separator-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea — surface-dark" }
+    "surface-dark-separator-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea — surface-dark" },
+    "surface-dark-resizer-hover-color":          { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Asa de redimensionado bajo el puntero — surface-dark" }
   }
 }

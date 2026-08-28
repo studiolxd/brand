@@ -60,3 +60,17 @@ export const Contrato: Story = {
     await expect(canvas.getByLabelText('999+').textContent).toBe('999+');
   },
 };
+
+/**
+ * `primary` y `neutral` se invierten en oscuro (el prusia es el lienzo y el gris oscuro no
+ * contrasta); el resto son colores saturados que ya se leen sobre cualquier superficie.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+      {VARIANTS.map((v) => <NumberBadge key={v} {...args} variant={v} />)}
+    </div>
+  ),
+};

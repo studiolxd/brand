@@ -27,3 +27,12 @@
   --number-badge-success-color: var(--color-success-fill-text); /** Texto sobre success */
   --number-badge-neutral-color: var(--color-text-on-dark); /** Texto sobre neutral */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --number-badge-primary-bg: var(--color-text-on-dark); /** Relleno primary — surface-dark. El prusia es el lienzo y el contador desaparecería; se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente (mismo caso que `Tag`) */
+  --number-badge-primary-color: var(--color-background-dark); /** Texto sobre primary — surface-dark */
+  --number-badge-neutral-bg: var(--color-surface-inverse-on-dark); /** Relleno neutral — surface-dark: la superficie invertida, como en `Tag` */
+  --number-badge-neutral-color: var(--color-text-on-light); /** Texto sobre neutral — surface-dark */
+}

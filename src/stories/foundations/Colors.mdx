@@ -167,6 +167,32 @@ Las custom properties se heredan por cascada, así que basta con que el selector
 
 **El lienzo va emparejado.** `body` fija a la vez `background-color` y `color` con `--text-background` y `--text-color`, ambos con par oscuro. Fijar un fondo sin su color —o al revés— es el error clásico: los componentes de superficie oscura se vuelven ilegibles sobre un fondo que no volteó con ellos.
 
+### La regla de derivación
+
+El valor oscuro de un token **no se decide, se deriva**. Se mira a qué rol apunta el token claro y se toma su gemelo:
+
+| Lo que es el token | Claro | Oscuro |
+|---|---|---|
+| **Texto** | `text.on-light`, `text.muted-on-light`, `text.placeholder-on-light` | El mismo rol en `-on-dark` |
+| **Superficie** | `background.light`, `surface.secondary-on-light`, `surface.inverse-on-light` | El mismo rol en `-on-dark` |
+| **Borde, separador, anillo de foco, línea o barra de estado** | `color.primary` (tinta) | `color.text.on-dark` (tinta blanca) |
+| **Marca: un relleno prusia** | `color.primary` | El par de `Button primary`: relleno `color.accent-1` con tinta `color.primary` |
+| **Feedback** | `*-text-on-light` / `*-fill` | `*-text-on-dark` / el mismo `*-fill` (es universal) |
+| **Deshabilitado** | `grey-light` / `grey-lightest` | Sin par: el estado apagado se dice con `--opacity-disabled`, y un control apagado está exento de contraste |
+
+Dos matices de la fila de marca, los únicos que hacen falta recordar:
+
+- **Si el componente ya usa lavanda para otra cosa**, el par no puede ser lavanda: se invierte, relleno `color.text.on-dark` (blanco) con tinta prusia. Es el caso de `Tag` (`primary` e `info`, con `accent-1` ocupada por otra variante), `NumberBadge` y `ProgressBar`.
+- **Un relleno autocontenido no deriva**: si el par fondo/texto no depende de la superficie que lo rodea —`Button` variante `primary` (lavanda con tinta prusia), `Card primary`, los rellenos saturados de `Alert`, `Tag` y `Card` (`accent-*`, `support-*`) y los `*-fill` de feedback— se queda igual en las dos superficies y **no lleva par oscuro**. Añadírselo es el error contrario.
+
+`Alert` y `Toast` en su variante `default` son la excepción declarada: su relleno es prusia en las dos superficies. Sobre página oscura el aviso no se distingue por el fondo sino por su borde blanco de 1px. No se ha añadido un neutro oscuro a la paleta para este caso porque sería un color sin rol en el resto del sistema.
+
+### Un token que hereda de otro no hereda su modo oscuro
+
+Un `var()` dentro de una custom property **se sustituye en el elemento que la declara**. `--sheet-title-color: var(--modal-title-color)` vive en `:root`, así que llega al `Sheet` ya resuelto al valor claro: remapear `--modal-title-color` bajo `.surface-dark` no lo arrastra.
+
+Por eso el build genera `src/tokens/surface-dark-derived.css`: parte de los tokens que sí tienen par oscuro y, por punto fijo, vuelve a declarar bajo los selectores oscuros todo token que los referencie. Es el mismo mecanismo que la superficie pública (`.site-shell`). No hay nada que hacer a mano: apuntar a `{modal.title-color}` en el JSON basta, y el remapeo sale del build.
+
 ---
 
 ## Accesibilidad

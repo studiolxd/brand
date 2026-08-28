@@ -154,3 +154,19 @@ export const Etiquetas: Story = {
     await expect(en.queryByLabelText('Horas')).toBeNull();
   },
 };
+
+/** Los dos `Select` traen su modo oscuro; el separador «:» estrena par propio. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: (args) => {
+    const [value, setValue] = useState<TimeValue | null>({ h: 9, m: 0 });
+    return (
+      <TimeSelect
+        {...args}
+        value={value}
+        onChange={(v) => { setValue(v); args.onChange?.(v); }}
+      />
+    );
+  },
+};

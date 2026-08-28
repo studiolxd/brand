@@ -56,3 +56,30 @@
   --file-upload-progress-fill: var(--color-primary); /** Color del relleno de progreso */
   --file-upload-progress-border-radius: var(--border-radius-round); /** Radio de la barra de progreso */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --file-upload-border-color: var(--color-text-on-dark); /** Borde del dropzone — surface-dark: la tinta de la superficie */
+  --file-upload-bg: var(--color-surface-secondary-on-dark); /** Fondo del dropzone — surface-dark: la superficie secundaria oscura */
+  --file-upload-text-color: var(--color-text-on-dark); /** Texto principal — surface-dark */
+  --file-upload-subtext-color: var(--color-text-muted-on-dark); /** Texto secundario — surface-dark */
+  --file-upload-icon-color: var(--color-text-on-dark); /** Icono de subida — surface-dark */
+  --file-upload-drag-border-color: var(--color-text-on-dark); /** Borde con arrastre activo — surface-dark */
+  --file-upload-drag-bg: var(--color-background-dark); /** Fondo con arrastre activo — surface-dark: el lienzo, para que el dropzone se vacíe igual que en claro */
+  --file-upload-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
+  --file-upload-error-bg: var(--color-surface-secondary-on-dark); /** Fondo en error — surface-dark */
+  --file-upload-item-bg: var(--color-background-dark); /** Fondo de cada archivo — surface-dark */
+  --file-upload-item-border-color: var(--color-text-on-dark); /** Borde de cada archivo — surface-dark */
+  --file-upload-item-name-color: var(--color-text-on-dark); /** Nombre del archivo — surface-dark */
+  --file-upload-item-size-color: var(--color-text-muted-on-dark); /** Peso del archivo — surface-dark */
+  --file-upload-item-error-color: var(--color-error-text-on-dark); /** Mensaje de error por archivo — surface-dark */
+  --file-upload-item-error-border-color: var(--color-error-text-on-dark); /** Borde del archivo con error — surface-dark */
+  --file-upload-item-error-bg: var(--color-background-dark); /** Fondo del archivo con error — surface-dark */
+  --file-upload-thumb-bg: var(--color-surface-secondary-on-dark); /** Fondo de la miniatura — surface-dark */
+  --file-upload-thumb-icon-color: var(--color-text-muted-on-dark); /** Icono de archivo genérico — surface-dark: `grey-dark` no llega a 3:1 sobre prusia */
+  --file-upload-remove-color: var(--color-text-muted-on-dark); /** Aspa de quitar — surface-dark */
+  --file-upload-remove-color-hover: var(--color-error-text-on-dark); /** Aspa de quitar, bajo el puntero — surface-dark */
+  --file-upload-progress-bg: var(--color-surface-secondary-on-dark); /** Carril de progreso — surface-dark */
+  --file-upload-progress-fill: var(--color-text-on-dark); /** Relleno de progreso — surface-dark: el prusia coincidiría con el lienzo */
+}

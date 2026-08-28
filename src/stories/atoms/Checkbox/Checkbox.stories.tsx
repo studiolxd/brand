@@ -105,3 +105,10 @@ export const FocusVisible: Story = {
   name: 'Focus visible',
   parameters: { pseudo: { focusVisible: true } },
 };
+
+/** La casilla hereda del `Input` los colores de borde y foco, ya con par oscuro. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { defaultChecked: true },
+};

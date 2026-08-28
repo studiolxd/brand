@@ -69,3 +69,9 @@ export const Contrato: Story = {
     await expect(Math.round(lg.getBoundingClientRect().width)).toBe(48);
   },
 };
+
+/** Sin tokens de color propios: el retrato y las iniciales viven sobre su propio relleno. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+};

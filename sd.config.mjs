@@ -451,6 +451,66 @@ const allTokens = [];
   for (const file of files) walk(JSON.parse(readFileSync(file, 'utf-8')), []);
 }
 
+/* ---------------------------------------------------------------------------
+ * Superficie oscura derivada: `.surface-dark`
+ *
+ * Mismo problema que la superficie pública, y misma solución. Un token de
+ * componente que referencia a otro (`sheet.title-color` → `{modal.title-color}`)
+ * se resuelve en `:root`: cuando `.surface-dark` remapea `--modal-title-color`,
+ * `--sheet-title-color` ya trae el valor claro y no se entera. Los componentes
+ * que no declaran pares `surface-dark-*` propios porque «heredan del que
+ * componen» no heredaban nada.
+ *
+ * Este bloque lo arregla por la regla de derivación: se parte de los tokens que
+ * SÍ tienen par oscuro y, por punto fijo, se vuelve a declarar todo token que
+ * los referencie, con el nombre claro de su referencia — que dentro de este
+ * mismo selector ya vale el valor oscuro. Un token con par `surface-dark-*`
+ * propio no se toca: su valor explícito manda.
+ * ------------------------------------------------------------------------- */
+const DARK_PREFIX = 'surface-dark-';
+const darkPairs = new Set();
+for (const { path } of allTokens) {
+  const last = path[path.length - 1];
+  if (typeof last === 'string' && last.startsWith(DARK_PREFIX)) {
+    darkPairs.add([...path.slice(0, -1), last.slice(DARK_PREFIX.length)].join('.'));
+  }
+}
+
+const derivedDark = new Map();
+const darkKnown = new Set(darkPairs);
+for (let changed = true; changed; ) {
+  changed = false;
+  for (const { path, value } of allTokens) {
+    const dotted = path.join('.');
+    if (darkKnown.has(dotted)) continue;
+    if (path.some((segment) => segment.startsWith(DARK_PREFIX))) continue;
+    const ref = typeof value === 'string' && value.match(/^\{(.+)\}$/)?.[1];
+    if (!ref || !darkKnown.has(ref)) continue;
+    derivedDark.set(dotted, `var(${cssName(ref.split('.'))})`);
+    darkKnown.add(dotted);
+    changed = true;
+  }
+}
+
+const darkLines = [
+  '/**',
+  ' * Do not edit directly, this file was auto-generated.',
+  ' *',
+  ' * Modo oscuro derivado: los tokens que heredan de otro token que sí tiene par',
+  ' * oscuro. Se vuelven a declarar aquí porque un var() dentro de una custom',
+  ' * property se resuelve en el elemento que la declara, no en el que la usa.',
+  ' */',
+  '',
+  '.surface-dark,',
+  '[data-theme="dark"],',
+  'html.dark {',
+  ...[...derivedDark].map(([path, value]) => `  ${cssName(path.split('.'))}: ${value};`),
+  '}',
+  '',
+];
+writeFileSync('src/tokens/surface-dark-derived.css', darkLines.join('\n'));
+console.log('✔︎ src/tokens/surface-dark-derived.css');
+
 const surfaceMap = new Map(
   Object.entries(surfaceSeeds).map(([path, target]) => [path, `var(${target})`]),
 );

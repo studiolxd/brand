@@ -1,0 +1,40 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ *
+ * Modo oscuro derivado: los tokens que heredan de otro token que sí tiene par
+ * oscuro. Se vuelven a declarar aquí porque un var() dentro de una custom
+ * property se resuelve en el elemento que la declara, no en el que la usa.
+ */
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --code-block-border-color: var(--card-outline-border-color);
+  --menu-bg: var(--floating-panel-bg);
+  --menu-border-color: var(--floating-panel-border-color);
+  --number-input-border-color: var(--input-border-color);
+  --number-input-bg: var(--input-bg);
+  --number-input-color: var(--input-color);
+  --number-input-btn-separator-color: var(--input-border-color);
+  --number-input-focus-ring-color: var(--input-focus-ring-color);
+  --number-input-focus-border-color: var(--input-focus-border-color);
+  --number-input-disabled-bg: var(--input-disabled-bg);
+  --number-input-disabled-color: var(--input-disabled-color);
+  --number-input-disabled-border-color: var(--input-disabled-border-color);
+  --number-input-disabled-btn-color: var(--input-disabled-color);
+  --number-input-error-border-color: var(--input-error-border-color);
+  --number-input-error-bg: var(--input-error-bg);
+  --number-input-error-color: var(--input-error-color);
+  --number-input-error-focus-border-color: var(--input-error-focus-border-color);
+  --number-input-error-focus-ring-color: var(--input-error-focus-ring-color);
+  --org-switcher-content-bg: var(--floating-panel-bg);
+  --org-switcher-content-border-color: var(--floating-panel-border-color);
+  --popover-bg: var(--floating-panel-bg);
+  --popover-border-color: var(--floating-panel-border-color);
+  --user-menu-content-bg: var(--floating-panel-bg);
+  --user-menu-content-border-color: var(--floating-panel-border-color);
+  --command-palette-input-border-color: var(--floating-panel-border-color);
+  --sheet-bg: var(--modal-bg);
+  --sheet-title-color: var(--modal-title-color);
+  --sheet-description-color: var(--modal-description-color);
+}

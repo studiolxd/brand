@@ -38,6 +38,7 @@
 html.dark {
   --command-palette-empty-color: var(--color-text-muted-on-dark); /** Color del estado vacío — surface-dark */
   --command-palette-heading-color: var(--color-text-muted-on-dark); /** Color del título de grupo — surface-dark */
+  --command-palette-input-placeholder-color: var(--color-text-placeholder-on-dark); /** Pista del buscador — surface-dark */
   --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — surface-dark */
   --command-palette-item-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del ítem — surface-dark */
 }

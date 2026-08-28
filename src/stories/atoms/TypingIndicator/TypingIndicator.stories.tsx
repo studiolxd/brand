@@ -16,18 +16,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const EnContextoOscuro: Story = {
-  name: 'En contexto oscuro',
-  decorators: [
-    (Story) => (
-      <div
-        className="surface-dark"
-        style={{ padding: '2rem', background: 'var(--color-background-dark)', borderRadius: '8px' }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
+/** Los puntos toman su tinta del par oscuro (`surface-dark-dot-color`): blancos sobre prusia. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
 };
 
 /** Test: rol, anuncio y tres puntos cuadrados (sin border-radius). */

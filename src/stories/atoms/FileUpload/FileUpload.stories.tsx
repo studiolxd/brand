@@ -184,3 +184,14 @@ export const Etiquetas: Story = {
     await expect(en.queryByText('Arrastra archivos aquí')).toBeNull();
   },
 };
+
+/** Todos los colores del dropzone tienen par oscuro: superficie secundaria, tinta y borde. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    multiple: true,
+    accept: 'image/*,.pdf',
+    ariaLabel: 'Subir archivos',
+  },
+};

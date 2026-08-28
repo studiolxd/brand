@@ -142,3 +142,17 @@ export const GeometriaFlecha: Story = {
     }
   },
 };
+
+/**
+ * En claro el bocadillo se invierte (prusia sobre página blanca). Sobre página oscura ese
+ * prusia sería el propio lienzo, así que toma el par de `Button primary`: lavanda con tinta prusia.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    label: 'Guardar los cambios',
+    children: <Button variant="outline">Guardar</Button>,
+    defaultOpen: true,
+  },
+};

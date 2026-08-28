@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as RadioStories from "./Radio.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { radioBaseTokens, radioFocusTokens, radioDisabledTokens } from "../../../tokens/components/radio";
+import { radioBaseTokens, radioFocusTokens, radioDisabledTokens, radioDarkTokens } from "../../../tokens/components/radio";
 
 <Meta of={RadioStories} />
 
@@ -31,6 +31,12 @@ Control de selección exclusiva dentro de un grupo. Al compartir el mismo `name`
 
 ---
 
+## Superficie oscura
+
+La marca es tinta: borde y punto pasan de prusia a blanco (`surface-dark-border-color`, `surface-dark-dot-color`), y el anillo de foco con ellos. El deshabilitado se queda en `grey-light` en las dos superficies: un control apagado está exento de contraste.
+
+<Canvas of={RadioStories.SuperficieOscura} />
+
 ## Uso
 
 ```tsx
@@ -58,6 +64,10 @@ Todos los radios del mismo grupo deben compartir el atributo `name`. El `value` 
 ### Deshabilitado
 
 <TokenTable tokens={radioDisabledTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={radioDarkTokens} />
 
 ## Props
 

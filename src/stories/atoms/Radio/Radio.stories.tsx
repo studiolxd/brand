@@ -122,3 +122,16 @@ export const ContratoError: Story = {
     await expect(control).toHaveAttribute('aria-invalid', 'true');
   },
 };
+
+/** La marca es tinta: prusia sobre claro, blanca sobre oscuro (`surface-dark-border-color`, `-dot-color`). */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem' }}>
+      <Radio name="oscuro" value="a" aria-label="Opción A" defaultChecked />
+      <Radio name="oscuro" value="b" aria-label="Opción B" />
+      <Radio name="oscuro" value="c" aria-label="Opción C" disabled />
+    </div>
+  ),
+};

@@ -21,5 +21,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --input-phone-country-border-color: var(--color-text-on-dark); /** Separador del selector de país — surface-dark */
   --input-phone-country-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo del país resaltado — surface-dark */
 }

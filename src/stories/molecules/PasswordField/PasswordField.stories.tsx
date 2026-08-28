@@ -207,3 +207,9 @@ export const ContratoError: Story = {
     await expect(canvasElement.querySelector('[role="alert"]')).toHaveTextContent('Incluye al menos un número.');
   },
 };
+
+/** Campo, etiqueta y ayuda heredan el modo oscuro del `InputField`; el ojo es un `Button ghost`. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+};

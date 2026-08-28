@@ -35,4 +35,5 @@ html.dark {
   --sidebar-bg: var(--color-background-dark); /** Fondo — surface-dark */
   --sidebar-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
   --sidebar-separator-color: var(--color-text-on-dark); /** Línea — surface-dark */
+  --sidebar-resizer-hover-color: var(--color-text-on-dark); /** Asa de redimensionado bajo el puntero — surface-dark */
 }

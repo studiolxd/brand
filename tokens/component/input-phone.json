@@ -13,6 +13,7 @@
     "country-item-focus-ring-width":  { "$value": "{select.item-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo del país resaltado en la lista — el del Select" },
     "country-item-focus-ring-offset": { "$value": "{select.item-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo del país resaltado — la del Select" },
     "country-item-focus-ring-color":  { "$value": "{select.item-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo del país resaltado — el del Select" },
-    "surface-dark-country-item-focus-ring-color": { "$value": "{select.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo del país resaltado — surface-dark" }
+    "surface-dark-country-item-focus-ring-color": { "$value": "{select.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo del país resaltado — surface-dark" },
+    "surface-dark-country-border-color":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Separador del selector de país — surface-dark" }
   }
 }

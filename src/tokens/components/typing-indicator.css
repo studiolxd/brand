@@ -9,3 +9,9 @@
   --typing-indicator-animation-duration: var(--motion-duration-slow); /** Duración del ciclo de animación */
   --typing-indicator-dot-color: var(--color-text-on-light); /** Color de los puntos */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --typing-indicator-dot-color: var(--color-text-on-dark); /** Color de los puntos — surface-dark */
+}

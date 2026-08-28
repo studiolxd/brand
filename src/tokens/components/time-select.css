@@ -6,3 +6,9 @@
   --time-select-gap: var(--spacing-1); /** Espacio entre selector de horas, separador y selector de minutos */
   --time-select-sep-color: var(--color-text-on-light); /** Color del separador : */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --time-select-sep-color: var(--color-text-on-dark); /** Color del separador «:» — surface-dark */
+}

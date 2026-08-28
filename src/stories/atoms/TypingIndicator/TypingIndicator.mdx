@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as TypingIndicatorStories from "./TypingIndicator.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { typingIndicatorTokens } from "../../../tokens/components/typing-indicator";
+import { typingIndicatorTokens, typingIndicatorDarkTokens } from "../../../tokens/components/typing-indicator";
 
 <Meta of={TypingIndicatorStories} />
 
@@ -15,9 +15,11 @@ import { typingIndicatorTokens } from "../../../tokens/components/typing-indicat
 
 Un ciclo dura `--typing-indicator-animation-duration` (`motion.duration.slow`), con curva `--motion-easing-in-out`; el segundo y el tercer punto arrancan a 1/5 y 2/5 del ciclo. En reposo los puntos están a `dot-opacity-inactive` y suben a opacidad plena en el pico.
 
-## Sobre fondo oscuro
+## Superficie oscura
 
-<Canvas of={TypingIndicatorStories.EnContextoOscuro} />
+Los puntos son tinta, así que derivan: `dot-color` es la tinta clara y `surface-dark-dot-color`, la blanca.
+
+<Canvas of={TypingIndicatorStories.SuperficieOscura} />
 
 ## Accesibilidad
 
@@ -34,6 +36,10 @@ La duración bebe de `motion.duration.slow`, que pasa a 0ms con `prefers-reduced
 `dot-size` conserva su nombre aunque ya no describe un punto redondo: es el lado del cuadrado. Renombrarlo rompería a los consumidores que lo sobrescriben.
 
 <TokenTable tokens={typingIndicatorTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={typingIndicatorDarkTokens} />
 
 ## Props
 

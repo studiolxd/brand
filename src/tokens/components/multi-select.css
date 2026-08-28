@@ -58,5 +58,7 @@ html.dark {
   --multi-select-placeholder-color: var(--color-text-placeholder-on-dark); /** Placeholder color — surface-dark */
   --multi-select-content-bg: var(--color-background-dark); /** Dropdown background — surface-dark */
   --multi-select-content-border-color: var(--color-text-on-dark); /** Dropdown border color — surface-dark */
+  --multi-select-pill-bg: var(--color-accent-1); /** Relleno de las pills — surface-dark: el prusia coincidiría con el lienzo; par de `Button primary` (lavanda con tinta prusia) */
+  --multi-select-pill-color: var(--color-primary); /** Texto de las pills — surface-dark */
   --multi-select-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo de la opción — surface-dark */
 }

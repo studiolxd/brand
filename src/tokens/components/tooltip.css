@@ -17,3 +17,10 @@
   --tooltip-transition-duration: var(--floating-panel-transition-duration); /** Duración de la animación de entrada/salida */
   --tooltip-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --tooltip-bg: var(--color-accent-1); /** Fondo del bocadillo — surface-dark. En claro el bocadillo se invierte (prusia sobre página blanca); sobre página oscura ese prusia es el lienzo, así que toma el par de `Button primary`: relleno lavanda con tinta prusia */
+  --tooltip-color: var(--color-primary); /** Texto del bocadillo — surface-dark */
+}

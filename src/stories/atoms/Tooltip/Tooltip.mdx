@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as TooltipStories from "./Tooltip.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { tooltipTokens } from "../../../tokens/components/tooltip";
+import { tooltipTokens, tooltipDarkTokens } from "../../../tokens/components/tooltip";
 
 <Meta of={TooltipStories} />
 
@@ -28,6 +28,12 @@ La distancia entre disparador y bocadillo sale del token `tooltip.offset` (`spac
 <Canvas of={TooltipStories.TextoLargo} />
 <Canvas of={TooltipStories.ContenidoRico} />
 
+## Superficie oscura
+
+En claro el bocadillo ya va invertido: relleno prusia sobre página blanca. Sobre página oscura ese prusia es el propio lienzo, así que toma el par de `Button primary` —relleno lavanda con tinta prusia—, que es lo que manda la regla de derivación para un relleno de marca.
+
+<Canvas of={TooltipStories.SuperficieOscura} />
+
 ## Accesibilidad
 
 El bocadillo es `role="tooltip"` y, mientras está abierto, el disparador lo referencia con `aria-describedby` (Base UI no lo cablea por su cuenta). Se abre con hover y con foco de teclado; Escape lo cierra.
@@ -37,6 +43,10 @@ El bocadillo es `role="tooltip"` y, mientras está abierto, el disparador lo ref
 ## Tokens
 
 <TokenTable tokens={tooltipTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={tooltipDarkTokens} />
 
 ## Props
 

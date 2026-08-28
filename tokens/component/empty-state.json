@@ -17,6 +17,7 @@
     "description-font-size":   { "$value": "{text.font-size}",          "$type": "dimension", "$description": "La descripción hereda el cuerpo de la superficie (la variante sm tiene talla propia)" },
     "description-color":       { "$value": "{color.text.muted-on-light}", "$type": "color",   "$description": "Color de la descripción — es texto, nunca grey-dark" },
     "surface-dark-title-color":       { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Título — superficie oscura" },
-    "surface-dark-description-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Descripción — superficie oscura" }
+    "surface-dark-description-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Descripción — superficie oscura" },
+    "surface-dark-icon-color":                   { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Icono — surface-dark: `grey-dark` no llega a 3:1 sobre prusia" }
   }
 }

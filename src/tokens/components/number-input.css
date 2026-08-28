@@ -45,3 +45,10 @@
   --number-input-error-focus-ring-color: var(--input-error-focus-ring-color); /** Focus ring en error */
   --number-input-focus-ring-width: var(--input-focus-ring-width); /** Grosor del focus ring */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --number-input-btn-color: var(--color-text-on-dark); /** Icono de los botones +/− — surface-dark */
+  --number-input-btn-hover-line-color: var(--color-text-on-dark); /** Línea de hover de los botones +/− — surface-dark */
+}

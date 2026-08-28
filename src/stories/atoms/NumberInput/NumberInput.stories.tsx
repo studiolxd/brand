@@ -123,3 +123,10 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="lg"] .number-input')).toBe(48);
   },
 };
+
+/** El campo hereda el modo oscuro del `Input`; los botones +/− llevan par propio. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { defaultValue: 5, min: 0, max: 10 },
+};

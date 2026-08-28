@@ -50,6 +50,8 @@
     "item-focus-ring-width":  { "$value": "{select.item-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo de la opción resaltada — el del Select" },
     "item-focus-ring-offset": { "$value": "{select.item-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo de la opción — la del Select" },
     "item-focus-ring-color":  { "$value": "{select.item-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo de la opción — el del Select" },
-    "surface-dark-item-focus-ring-color": { "$value": "{select.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo de la opción — surface-dark" }
+    "surface-dark-item-focus-ring-color": { "$value": "{select.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo de la opción — surface-dark" },
+    "surface-dark-pill-bg":                      { "$value": "{color.accent-1}", "$type": "color", "$description": "Relleno de las pills — surface-dark: el prusia coincidiría con el lienzo; par de `Button primary` (lavanda con tinta prusia)" },
+    "surface-dark-pill-color":                   { "$value": "{color.primary}", "$type": "color", "$description": "Texto de las pills — surface-dark" }
   }
 }

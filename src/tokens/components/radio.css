@@ -31,4 +31,7 @@
 [data-theme="dark"],
 html.dark {
   --radio-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
+  --radio-border-color: var(--color-text-on-dark); /** Borde de la marca — surface-dark: la tinta de la superficie */
+  --radio-dot-color: var(--color-text-on-dark); /** Punto de la marca — surface-dark */
+  --radio-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

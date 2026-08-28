@@ -134,3 +134,10 @@ export const ContratoError: Story = {
     await expect(control).toHaveAttribute('aria-invalid', 'true');
   },
 };
+
+/** El track encendido pasa a lavanda en oscuro: el prusia sería el propio lienzo. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { defaultChecked: true },
+};

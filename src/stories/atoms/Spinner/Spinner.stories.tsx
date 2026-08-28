@@ -28,24 +28,16 @@ export const Sizes: Story = {
   ),
 };
 
-export const EnContextoOscuro: Story = {
-  name: 'En contexto oscuro',
-  decorators: [
-    (Story) => (
-      <div
-        className="surface-dark"
-        style={{ padding: '2rem', background: 'var(--color-background-dark)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '2rem' }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
+/** El contorno se dibuja con `currentColor`: sigue la tinta de la superficie sin tokens propios. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
   render: () => (
-    <>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
       <Spinner size="sm" />
       <Spinner size="md" />
       <Spinner size="lg" />
-    </>
+    </div>
   ),
 };
 
