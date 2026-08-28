@@ -28,7 +28,8 @@
   --command-palette-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
   --command-palette-input-border-color: var(--floating-panel-border-color); /** Color de la línea bajo el buscador */
   --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — comparte lenguaje con ContextMenu */
-  --command-palette-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu */
+  --command-palette-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu: la inversión de marca */
+  --command-palette-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — el del Menu: icono y atajo lo heredan por `currentColor` */
 }
 
 .surface-dark,
@@ -39,4 +40,5 @@ html.dark {
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-dark); /** Pista del buscador — surface-dark */
   --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — surface-dark */
   --command-palette-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — surface-dark */
+  --command-palette-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — surface-dark */
 }

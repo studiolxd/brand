@@ -65,9 +65,12 @@
 
 /* El foco es virtual (`aria-activedescendant`): el ítem resaltado lo marca
    Base UI con `data-highlighted`, tanto por teclado como por puntero, y se
-   rellena — excepción declarada de las listas de opciones (Foundations → Colores). */
+   rellena con la inversión de marca — excepción declarada de las listas de
+   opciones (Foundations → Colores). El texto invierte con el relleno; el icono
+   y el atajo lo heredan por `currentColor`. */
 .command-palette__item[data-highlighted] {
   background-color: var(--command-palette-item-highlighted-bg);
+  color: var(--command-palette-item-highlighted-color);
 }
 
 .command-palette__item[data-disabled] {
