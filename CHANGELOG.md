@@ -116,6 +116,42 @@ divergente—, derivada de los tonos de marca y validada, no elegida a ojo.
 - **`VisuallyHidden`** acepta `as="div"` para envolver contenido de flujo que no
   cabe dentro de un `span` —la tabla equivalente de `Chart`—. El default sigue
   siendo `span`: no hay cambio para quien ya lo usa.
+
+## v25.10.1
+
+### Corregido
+
+- **`AsyncSelect`/`AsyncSelectField`** — las variantes `sm`/`lg` sobreescribían
+  `--multi-select-height` (residuo de copiar el CSS de `MultiSelect`) en vez
+  de `--async-select-height`: la talla del control nunca cambiaba y siempre
+  medía 40px (`md`). Corregido a la custom property propia del componente.
+- **`AsyncMultiSelect`/`AsyncMultiSelectField`** — mismo copy-paste
+  (`--multi-select-height` en vez de `--async-multi-select-height`) en las
+  variantes `sm`/`lg`. Corregido.
+- **`CheckboxField`** (con `react-hook-form`) — `Checkbox` pisaba el
+  `aria-checked` que pone Base UI en el botón nativo con un
+  `aria-checked={isIndeterminate ? 'mixed' : undefined}` explícito: pasar la
+  prop con valor `undefined` sigue anulando el atributo interno de Base UI
+  (a diferencia de no pasarla), así que fuera del estado mixto el control
+  quedaba sin `aria-checked` en absoluto y `.toBeChecked()` no podía leer su
+  estado. Ahora solo se añade `aria-checked="mixed"` cuando el estado es
+  indeterminado; en los demás casos Base UI pone el suyo.
+- **`Sheet`** — el test de cierre comprobaba `not.toBeInTheDocument()` justo
+  después del clic en el aspa, sin esperar a que terminase la animación de
+  salida (Base UI mantiene el panel montado durante `data-closed` +
+  `data-ending-style` y lo desmonta al terminar). Test corregido con
+  `waitFor`; el componente no tenía ningún bug.
+- **`Kbd`** — el test «una tecla de un carácter es cuadrada» comprobaba
+  igualdad exacta de ancho y alto. El diseño real nunca fue cuadrado exacto:
+  el ancho mínimo (`kbd.min-size`) es solo un suelo, y el aire horizontal
+  (deliberadamente mayor que el vertical) ensancha el control por encima de
+  ese suelo en las tres tallas (S: 26,4×24, M: 35,6×26, L: 46×38). La
+  documentación pre-existente a la revisión que introdujo el test ya lo decía
+  bien: «casi cuadrada», no cuadrada. Revertido el texto de MDX y del token
+  a esa descripción, y el test ahora comprueba que el ancho nunca es menor
+  que el alto ni se estira más de 1,5× — el contrato real, no uno que el
+  propio CSS nunca pudo cumplir.
+
 ## v25.9.0
 
 Fase 0.4: las piezas de marketing que le faltaban al sistema para levantar

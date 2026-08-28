@@ -48,7 +48,7 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox
       nativeButton
       checked={checked === 'indeterminate' ? false : checked}
       indeterminate={isIndeterminate}
-      aria-checked={isIndeterminate ? 'mixed' : undefined}
+      {...(isIndeterminate ? { 'aria-checked': 'mixed' as const } : {})}
       aria-invalid={error || undefined}
       // Contrato del DS: solo el estado (Base UI añade los detalles del evento).
       onCheckedChange={onCheckedChange ? (next) => onCheckedChange(next) : undefined}

@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "25.11.0",
+  "version": "25.10.1",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -38,10 +38,6 @@
     "./conversation-thread": {
       "types": "./dist/_types/organisms/ConversationThread/ConversationThread.d.ts",
       "import": "./dist/conversation-thread.js"
-    },
-    "./copy-button": {
-      "types": "./dist/_types/molecules/CopyButton/CopyButton.d.ts",
-      "import": "./dist/copy-button.js"
     },
     "./data-table": {
       "types": "./dist/_types/organisms/DataTable/DataTable.d.ts",
@@ -144,10 +140,6 @@
     "./date-time-field": {
       "types": "./dist/_types/molecules/DateTimeField/DateTimeField.d.ts",
       "import": "./dist/date-time-field.js"
-    },
-    "./docs-search": {
-      "types": "./dist/_types/molecules/DocsSearch/DocsSearch.d.ts",
-      "import": "./dist/docs-search.js"
     },
     "./dots-button": {
       "types": "./dist/_types/atoms/DotsButton/DotsButton.d.ts",
@@ -349,10 +341,6 @@
       "types": "./dist/_types/atoms/Popover/Popover.d.ts",
       "import": "./dist/popover.js"
     },
-    "./confirm-dialog": {
-      "types": "./dist/_types/molecules/ConfirmDialog/ConfirmDialog.d.ts",
-      "import": "./dist/confirm-dialog.js"
-    },
     "./consent": {
       "types": "./dist/_types/molecules/Consent/Consent.d.ts",
       "import": "./dist/consent.js"
@@ -360,10 +348,6 @@
     "./prev-next-nav": {
       "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
       "import": "./dist/prev-next-nav.js"
-    },
-    "./prose": {
-      "types": "./dist/_types/molecules/Prose/Prose.d.ts",
-      "import": "./dist/prose.js"
     },
     "./progress-bar": {
       "types": "./dist/_types/atoms/ProgressBar/ProgressBar.d.ts",
@@ -422,10 +406,6 @@
       "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",
       "import": "./dist/spinner.js"
     },
-    "./stat-tile": {
-      "types": "./dist/_types/molecules/StatTile/StatTile.d.ts",
-      "import": "./dist/stat-tile.js"
-    },
     "./switcher": {
       "types": "./dist/_types/atoms/Switcher/Switcher.d.ts",
       "import": "./dist/switcher.js"
@@ -437,10 +417,6 @@
     "./table": {
       "types": "./dist/_types/molecules/Table/Table.d.ts",
       "import": "./dist/table.js"
-    },
-    "./table-of-contents": {
-      "types": "./dist/_types/molecules/TableOfContents/TableOfContents.d.ts",
-      "import": "./dist/table-of-contents.js"
     },
     "./tabs": {
       "types": "./dist/_types/atoms/Tabs/Tabs.d.ts",

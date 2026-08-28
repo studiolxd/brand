@@ -11,7 +11,7 @@
     "line-height":    { "$value": "{line-height.none}",      "$type": "number",    "$description": "Sin interlineado extra — el contenido se centra con flexbox" },
     "padding-block":  { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Aire vertical (4px)" },
     "padding-inline": { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Aire horizontal (12px)" },
-    "min-size":       { "$value": "calc({kbd.font-size} * {kbd.line-height} + 2 * {kbd.padding-block} + 2 * {kbd.border-width})", "$type": "dimension", "$description": "Ancho mínimo: exactamente la altura de la tecla, de modo que una tecla de un carácter sale cuadrada. No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md)" },
+    "min-size":       { "$value": "calc({kbd.font-size} * {kbd.line-height} + 2 * {kbd.padding-block} + 2 * {kbd.border-width})", "$type": "dimension", "$description": "Ancho mínimo: exactamente la altura de la tecla, así una tecla de un carácter sale casi cuadrada (el ancho real crece por el aire horizontal y el propio carácter, siempre mayor que este mínimo). No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md)" },
 
     "sm-font-size":      { "$value": "{font-size.1}",  "$type": "dimension", "$description": "14px — talla sm" },
     "sm-padding-block":  { "$value": "{spacing.1}",    "$type": "dimension", "$description": "Aire vertical sm (4px)" },

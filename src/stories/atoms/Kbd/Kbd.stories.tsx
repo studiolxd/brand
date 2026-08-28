@@ -38,7 +38,7 @@ const fila: React.CSSProperties = {
 
 export const PorDefecto: Story = {};
 
-/** Tres tallas. Cambian cuerpo y aire; la tecla de un carácter sigue cuadrada. */
+/** Tres tallas. Cambian cuerpo y aire; la tecla de un carácter sigue casi cuadrada. */
 export const Tallas: Story = {
   render: () => (
     <div style={{ ...fila, gap: 'var(--spacing-4)' }}>
@@ -149,9 +149,14 @@ export const Contrato: Story = {
   },
 };
 
-/** Test: una tecla de un carácter es cuadrada — el ancho mínimo es su altura. */
+/**
+ * Test: una tecla de un carácter sale casi cuadrada — el ancho mínimo (suelo)
+ * es su altura, pero el aire horizontal (mayor que el vertical, a propósito)
+ * la ensancha por encima de ese suelo. No es un cuadrado exacto: nunca queda
+ * más estrecha que alta, ni se alarga hasta parecer una píldora.
+ */
 export const ContratoCuadrado: Story = {
-  name: 'Test — la tecla de un carácter es cuadrada',
+  name: 'Test — la tecla de un carácter es casi cuadrada',
   tags: ['!dev'],
   render: () => (
     <>
@@ -163,7 +168,8 @@ export const ContratoCuadrado: Story = {
   play: async ({ canvasElement }) => {
     for (const texto of ['S', 'M', 'L']) {
       const tecla = within(canvasElement).getByText(texto).getBoundingClientRect();
-      await expect(Math.round(tecla.width)).toBe(Math.round(tecla.height));
+      await expect(tecla.width).toBeGreaterThanOrEqual(tecla.height);
+      await expect(tecla.width).toBeLessThanOrEqual(tecla.height * 1.5);
     }
   },
 };
