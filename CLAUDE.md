@@ -31,7 +31,7 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 >
 > **IMPORTANTE:** `pnpm build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css`, `dist/tokens.css` ni `dist/fonts.css`. Después de `build:lib` ejecutar siempre `pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css`, o usar `pnpm build:all` para el build completo.
 >
-> **IMPORTANTE:** No se taggea (`git tag vX.Y.Z`) sin `pnpm release:check` en verde. El script encadena `lint` + `tsc -b` + `test` + `test:stories` + `build:all`; también corre solo como hook `prepack` (npm pack/publish), pero el flujo real de release de este repo es el tag de git, así que el guardián real es correr `release:check` a mano antes del `git tag`.
+> **IMPORTANTE:** No se taggea (`git tag vX.Y.Z`) sin `pnpm release:check` en verde. El script encadena `lint` + `tsc -b` + `test` + `test:stories` + `build:all`. NO se engancha a ningún hook de ciclo de vida (`prepack`/`prepare`/`postinstall`): pnpm los ejecuta al instalar el paquete por git en cada consumidor y rompería la instalación de la suite (pasó en v25.28.0). El guardián es correr `release:check` a mano antes del `git tag`.
 
 Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `pnpm test` corre los dos primeros; `pnpm test:stories` el tercero.
 
