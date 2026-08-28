@@ -1,0 +1,44 @@
+{
+  "stat-tile": {
+    "padding-inline":      { "$value": "{card.padding-inline}",      "$type": "dimension", "$description": "Padding horizontal — el de las superficies del sistema" },
+    "padding-block-start": { "$value": "{card.padding-block-start}", "$type": "dimension", "$description": "Padding superior — el de las superficies del sistema" },
+    "padding-block-end":   { "$value": "{card.padding-block-end}",   "$type": "dimension", "$description": "Padding inferior — el de las superficies del sistema" },
+    "border-radius":       { "$value": "{card.border-radius}",       "$type": "dimension", "$description": "Radio de esquinas — el de las superficies del sistema" },
+    "border-width":        { "$value": "{card.outline-border-width}","$type": "dimension", "$description": "Grosor del borde — el de Card outline" },
+    "border-color":        { "$value": "{card.outline-border-color}","$type": "color",     "$description": "Color del borde — el de Card outline: tinta, no gris" },
+    "bg":                  { "$value": "transparent",                "$type": "color",     "$description": "Fondo: ninguno. La cifra se lee sobre el lienzo de la página, así que la baldosa funciona igual en las dos superficies sin un fondo propio que mantener" },
+    "gap":                 { "$value": "{spacing.2}",                "$type": "dimension", "$description": "Aire entre las piezas de la baldosa: etiqueta, cifra, delta y descripción" },
+
+    "label-font-size":   { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo de la etiqueta: un peldaño por debajo, porque la protagonista es la cifra" },
+    "label-font-weight": { "$value": "{font-weight.default}",            "$type": "number",    "$description": "Peso de la etiqueta" },
+    "label-color":       { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color de la etiqueta — atenuado" },
+    "label-gap":         { "$value": "{spacing.2}",                      "$type": "dimension", "$description": "Aire entre el icono y la etiqueta" },
+
+    "icon-size":  { "$value": "{icon.size-md}",                "$type": "dimension", "$description": "Talla del icono de la baldosa" },
+    "icon-color": { "$value": "{color.text.muted-on-light}",   "$type": "color",     "$description": "Color del icono — atenuado, como la etiqueta a la que acompaña" },
+
+    "value-font-size":      { "$value": "{text.size.7}",              "$type": "dimension", "$description": "Cuerpo de la cifra: paso 7 de la escala de títulos, el mismo que un h2. Sube un peldaño en la superficie pública" },
+    "value-font-weight":    { "$value": "{font-weight.emphasis}",     "$type": "number",    "$description": "Peso de la cifra" },
+    "value-line-height":    { "$value": "{line-height.tight}",        "$type": "number",    "$description": "Interlineado de la cifra" },
+    "value-letter-spacing": { "$value": "{letter-spacing.tight}",     "$type": "dimension", "$description": "Espaciado de la cifra — el de los títulos" },
+    "value-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color de la cifra — tinta de la superficie" },
+
+    "sm-value-font-size":  { "$value": "{text.size.5}",                      "$type": "dimension", "$description": "Cuerpo de la cifra — talla sm: paso 5 de la escala, el de un h4" },
+    "sm-padding-inline":   { "$value": "{spacing.3}",                        "$type": "dimension", "$description": "Padding horizontal — talla sm" },
+    "sm-padding-block":    { "$value": "{spacing.3}",                        "$type": "dimension", "$description": "Padding vertical — talla sm" },
+    "sm-label-font-size":  { "$value": "{font-size.1}",                      "$type": "dimension", "$description": "Cuerpo de la etiqueta — talla sm" },
+    "sm-gap":              { "$value": "{spacing.1}",                        "$type": "dimension", "$description": "Aire entre piezas — talla sm" },
+
+    "delta-gap":       { "$value": "{spacing.1}",  "$type": "dimension", "$description": "Aire entre la flecha de tendencia y su cifra dentro del delta" },
+    "delta-icon-size": { "$value": "{icon.size-sm}","$type": "dimension", "$description": "Talla de la flecha de tendencia" },
+
+    "description-font-size":   { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo de la descripción" },
+    "description-line-height": { "$value": "{line-height.normal}",             "$type": "number",    "$description": "Interlineado de la descripción" },
+    "description-color":       { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color de la descripción — atenuado" },
+
+    "surface-dark-label-color":       { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la etiqueta — surface-dark" },
+    "surface-dark-icon-color":        { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del icono — surface-dark" },
+    "surface-dark-value-color":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de la cifra — surface-dark" },
+    "surface-dark-description-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de la descripción — surface-dark" }
+  }
+}

@@ -1,0 +1,32 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-stat-tile-padding-inline: 1rem; // Padding horizontal — el de las superficies del sistema
+$lxd-stat-tile-padding-block-start: 1rem; // Padding superior — el de las superficies del sistema
+$lxd-stat-tile-padding-block-end: 0.75rem; // Padding inferior — el de las superficies del sistema
+$lxd-stat-tile-border-radius: 0px; // Radio de esquinas — el de las superficies del sistema
+$lxd-stat-tile-border-width: 1px; // Grosor del borde — el de Card outline
+$lxd-stat-tile-border-color: #111e30; // Color del borde — el de Card outline: tinta, no gris
+$lxd-stat-tile-bg: rgba(0, 0, 0, 0); // Fondo: ninguno. La cifra se lee sobre el lienzo de la página, así que la baldosa funciona igual en las dos superficies sin un fondo propio que mantener
+$lxd-stat-tile-gap: 0.5rem; // Aire entre las piezas de la baldosa: etiqueta, cifra, delta y descripción
+$lxd-stat-tile-label-font-size: 0.875rem; // Cuerpo de la etiqueta: un peldaño por debajo, porque la protagonista es la cifra
+$lxd-stat-tile-label-font-weight: 300; // Peso de la etiqueta
+$lxd-stat-tile-label-color: #4a4a4a; // Color de la etiqueta — atenuado
+$lxd-stat-tile-label-gap: 0.5rem; // Aire entre el icono y la etiqueta
+$lxd-stat-tile-icon-size: 24px; // Talla del icono de la baldosa
+$lxd-stat-tile-icon-color: #4a4a4a; // Color del icono — atenuado, como la etiqueta a la que acompaña
+$lxd-stat-tile-value-font-size: 2rem; // Cuerpo de la cifra: paso 7 de la escala de títulos, el mismo que un h2. Sube un peldaño en la superficie pública
+$lxd-stat-tile-value-font-weight: 500; // Peso de la cifra
+$lxd-stat-tile-value-line-height: 1.1; // Interlineado de la cifra
+$lxd-stat-tile-value-letter-spacing: -0.02em; // Espaciado de la cifra — el de los títulos
+$lxd-stat-tile-value-color: #111e30; // Color de la cifra — tinta de la superficie
+$lxd-stat-tile-sm-value-font-size: 1.5rem; // Cuerpo de la cifra — talla sm: paso 5 de la escala, el de un h4
+$lxd-stat-tile-sm-padding-inline: 0.75rem; // Padding horizontal — talla sm
+$lxd-stat-tile-sm-padding-block: 0.75rem; // Padding vertical — talla sm
+$lxd-stat-tile-sm-label-font-size: 0.875rem; // Cuerpo de la etiqueta — talla sm
+$lxd-stat-tile-sm-gap: 0.25rem; // Aire entre piezas — talla sm
+$lxd-stat-tile-delta-gap: 0.25rem; // Aire entre la flecha de tendencia y su cifra dentro del delta
+$lxd-stat-tile-delta-icon-size: 16px; // Talla de la flecha de tendencia
+$lxd-stat-tile-description-font-size: 0.875rem; // Cuerpo de la descripción
+$lxd-stat-tile-description-line-height: 1.5; // Interlineado de la descripción
+$lxd-stat-tile-description-color: #4a4a4a; // Color de la descripción — atenuado

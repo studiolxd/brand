@@ -187,6 +187,8 @@ export { AppLauncher } from './stories/molecules/AppLauncher/AppLauncher';
 export type { AppLauncherProps, LauncherApp, AppLauncherLabels } from './stories/molecules/AppLauncher/AppLauncher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
 export type { RadioFieldProps } from './stories/molecules/RadioField/RadioField';
+export { StatTile } from './stories/molecules/StatTile/StatTile';
+export type { StatTileProps, StatTileDelta, StatTileDirection, StatTileTone } from './stories/molecules/StatTile/StatTile';
 export { SwitcherField } from './stories/molecules/SwitcherField/SwitcherField';
 export type { SwitcherFieldProps } from './stories/molecules/SwitcherField/SwitcherField';
 export { MultiSelectField } from './stories/molecules/MultiSelectField/MultiSelectField';

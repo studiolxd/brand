@@ -1,0 +1,83 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as StatTileStories from "./StatTile.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { statTileBaseTokens, statTileDarkTokens } from "../../../tokens/molecules/stat-tile";
+
+<Meta of={StatTileStories} />
+
+# StatTile
+
+La baldosa de una cifra: qué se mide, cuánto vale, cómo se ha movido y qué matiza esa lectura. Es la pieza de los cuadros de mando y de las portadas con datos.
+
+<Canvas of={StatTileStories.PorDefecto} />
+
+## No calcula ni formatea
+
+La baldosa recibe `value` y `delta.value` **ya escritos**. Un número no se formatea igual en euros que en porcentaje, ni en castellano que en inglés, ni cuando hay que redondear a miles; eso lo sabe el producto —con `Intl.NumberFormat`—, no el sistema. Aquí solo se decide cómo se ven.
+
+## Anatomía
+
+Cuatro piezas, todas opcionales menos las dos primeras:
+
+- **Etiqueta** (`label`) — qué se mide. Va **antes** de la cifra en el DOM: un lector de pantalla anuncia primero qué es y después cuánto vale, que es el orden en el que se entiende.
+- **Cifra** (`value`) — el dato, al tamaño de un `h2`. Sube un peldaño en la superficie pública, como toda la escala de títulos.
+- **Delta** (`delta`) — la variación, en un `Tag` con su flecha.
+- **Descripción** (`description`) — la línea de contexto: el periodo, la fuente, la salvedad.
+
+Un `icon` opcional acompaña a la etiqueta. Es decorativo: la etiqueta ya dice qué es.
+
+<Canvas of={StatTileStories.Completa} />
+
+## Tendencia
+
+`direction` (`up` | `down` | `flat`) gira la flecha del sistema y, por defecto, decide el tono: **subir es bueno**. En una métrica donde subir es malo —errores, latencia, bajas—, `tone` lo invierte sin tocar la flecha: la flecha dice hacia dónde se ha movido el número, el color dice si eso es una buena noticia.
+
+<Canvas of={StatTileStories.Tendencias} />
+<Canvas of={StatTileStories.SinCambio} />
+
+El relleno del `Tag` no contradice la regla de estados: es identidad —qué **es** esta variación—, no un estado de interacción. Sigue pintado cuando el ratón se va.
+
+## Rejilla
+
+La baldosa no sabe nada de rejillas: se reparten con `Columns`, que es el molde del sistema para eso.
+
+<Canvas of={StatTileStories.EnRejilla} />
+
+## Tallas
+
+`md` (por defecto) y `sm`, para cuadros de mando densos: menos aire y la cifra al tamaño de un `h4`.
+
+<Canvas of={StatTileStories.TallaPequena} />
+
+## Superficie oscura
+
+La baldosa **no lleva fondo propio**: la cifra se lee sobre el lienzo de la página, así que funciona igual en las dos superficies sin un fondo que mantener en dos versiones. Etiqueta, icono, cifra y descripción tienen su par; el borde lo hereda de `Card` outline, que ya lo tenía. Los rellenos del `Tag` son saturados y contrastan en cualquier fondo.
+
+<Canvas of={StatTileStories.EnSuperficieOscura} />
+
+## Textos
+
+`delta.label` es el texto que explica la dirección a quien no ve la flecha. Su default es castellano según `direction` («Sube», «Baja», «Sin cambio»); en una métrica invertida conviene escribirlo («Empeora»).
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={statTileBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={statTileDarkTokens} />
+
+## Accesibilidad
+
+- El orden del DOM es etiqueta → cifra → variación → contexto: es el orden en el que la baldosa se entiende leída en voz alta.
+- La flecha de tendencia es decorativa (`aria-hidden`); la dirección viaja en texto oculto (`VisuallyHidden`), así que no depende ni de la forma ni del color.
+- El tono tampoco es la única señal: el signo va en el propio `delta.value` («+12,4 %», «−4»), que es texto.
+- La cifra es un párrafo, no un encabezado: no aporta nada al esquema del documento y no debe salir en el índice de la página.
+
+## Props
+
+<ArgTypes of={StatTileStories} />

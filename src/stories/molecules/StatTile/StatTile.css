@@ -1,0 +1,90 @@
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stat-tile-gap);
+  padding-block: var(--stat-tile-padding-block-start) var(--stat-tile-padding-block-end);
+  padding-inline: var(--stat-tile-padding-inline);
+  border: var(--stat-tile-border-width) solid var(--stat-tile-border-color);
+  border-radius: var(--stat-tile-border-radius);
+  background-color: var(--stat-tile-bg);
+}
+
+.stat-tile.stat-tile--sm {
+  gap: var(--stat-tile-sm-gap);
+  padding-block: var(--stat-tile-sm-padding-block);
+  padding-inline: var(--stat-tile-sm-padding-inline);
+}
+
+/* ─── Etiqueta ───────────────────────────────────────────────
+   Va delante de la cifra en el DOM: un lector de pantalla anuncia primero qué
+   se mide y después cuánto vale, que es el orden en el que se entiende. */
+
+.stat-tile__label {
+  display: flex;
+  align-items: center;
+  gap: var(--stat-tile-label-gap);
+  margin-block: 0;
+  margin-inline: 0;
+  font-size: var(--stat-tile-label-font-size);
+  font-weight: var(--stat-tile-label-font-weight);
+  color: var(--stat-tile-label-color);
+}
+
+.stat-tile.stat-tile--sm .stat-tile__label {
+  font-size: var(--stat-tile-sm-label-font-size);
+}
+
+.stat-tile__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--stat-tile-icon-color);
+}
+
+.stat-tile .stat-tile__icon svg {
+  --icon-size: var(--stat-tile-icon-size);
+}
+
+/* ─── Cifra ──────────────────────────────────────────────────── */
+
+.stat-tile__value {
+  margin-block: 0;
+  margin-inline: 0;
+  font-size: var(--stat-tile-value-font-size);
+  font-weight: var(--stat-tile-value-font-weight);
+  line-height: var(--stat-tile-value-line-height);
+  letter-spacing: var(--stat-tile-value-letter-spacing);
+  color: var(--stat-tile-value-color);
+}
+
+.stat-tile.stat-tile--sm .stat-tile__value {
+  font-size: var(--stat-tile-sm-value-font-size);
+}
+
+/* ─── Delta ──────────────────────────────────────────────────
+   El relleno del Tag es identidad (qué es esta variación), no estado: sigue
+   pintado cuando el ratón se va. */
+
+.stat-tile__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stat-tile-delta-gap);
+}
+
+.stat-tile .stat-tile__delta-icon {
+  --icon-size: var(--stat-tile-delta-icon-size);
+}
+
+/* La flecha del sistema apunta a la derecha: girarla es toda la tendencia. */
+.stat-tile__delta-icon--up   { transform: rotate(-90deg); }
+.stat-tile__delta-icon--down { transform: rotate(90deg); }
+
+/* ─── Descripción ────────────────────────────────────────────── */
+
+.stat-tile__description {
+  margin-block: 0;
+  margin-inline: 0;
+  font-size: var(--stat-tile-description-font-size);
+  line-height: var(--stat-tile-description-line-height);
+  color: var(--stat-tile-description-color);
+}

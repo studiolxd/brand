@@ -63,6 +63,7 @@ html.dark {
   --sheet-bg: var(--modal-bg);
   --sheet-title-color: var(--modal-title-color);
   --sheet-description-color: var(--modal-description-color);
+  --stat-tile-border-color: var(--card-outline-border-color);
   --chart-tooltip-bg: var(--tooltip-bg);
   --chart-tooltip-color: var(--tooltip-color);
 }

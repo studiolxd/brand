@@ -414,6 +414,10 @@
       "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",
       "import": "./dist/spinner.js"
     },
+    "./stat-tile": {
+      "types": "./dist/_types/molecules/StatTile/StatTile.d.ts",
+      "import": "./dist/stat-tile.js"
+    },
     "./switcher": {
       "types": "./dist/_types/atoms/Switcher/Switcher.d.ts",
       "import": "./dist/switcher.js"

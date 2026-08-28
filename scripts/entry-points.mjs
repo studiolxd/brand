@@ -109,6 +109,7 @@ export const entryPoints = {
   'prose':               'src/stories/molecules/Prose/Prose.tsx',
   'table-of-contents':   'src/stories/molecules/TableOfContents/TableOfContents.tsx',
   'docs-search':         'src/stories/molecules/DocsSearch/DocsSearch.tsx',
+  'stat-tile':           'src/stories/molecules/StatTile/StatTile.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',

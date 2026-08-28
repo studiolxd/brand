@@ -1,0 +1,44 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --stat-tile-bg: rgba(0, 0, 0, 0); /** Fondo: ninguno. La cifra se lee sobre el lienzo de la página, así que la baldosa funciona igual en las dos superficies sin un fondo propio que mantener */
+  --stat-tile-gap: var(--spacing-2); /** Aire entre las piezas de la baldosa: etiqueta, cifra, delta y descripción */
+  --stat-tile-label-gap: var(--spacing-2); /** Aire entre el icono y la etiqueta */
+  --stat-tile-icon-size: var(--icon-size-md); /** Talla del icono de la baldosa */
+  --stat-tile-value-line-height: var(--line-height-tight); /** Interlineado de la cifra */
+  --stat-tile-value-letter-spacing: var(--letter-spacing-tight); /** Espaciado de la cifra — el de los títulos */
+  --stat-tile-sm-padding-inline: var(--spacing-3); /** Padding horizontal — talla sm */
+  --stat-tile-sm-padding-block: var(--spacing-3); /** Padding vertical — talla sm */
+  --stat-tile-sm-label-font-size: var(--font-size-1); /** Cuerpo de la etiqueta — talla sm */
+  --stat-tile-sm-gap: var(--spacing-1); /** Aire entre piezas — talla sm */
+  --stat-tile-delta-gap: var(--spacing-1); /** Aire entre la flecha de tendencia y su cifra dentro del delta */
+  --stat-tile-delta-icon-size: var(--icon-size-sm); /** Talla de la flecha de tendencia */
+  --stat-tile-description-line-height: var(--line-height-normal); /** Interlineado de la descripción */
+  --stat-tile-padding-inline: var(--card-padding-inline); /** Padding horizontal — el de las superficies del sistema */
+  --stat-tile-padding-block-start: var(--card-padding-block-start); /** Padding superior — el de las superficies del sistema */
+  --stat-tile-padding-block-end: var(--card-padding-block-end); /** Padding inferior — el de las superficies del sistema */
+  --stat-tile-label-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la etiqueta: un peldaño por debajo, porque la protagonista es la cifra */
+  --stat-tile-label-font-weight: var(--font-weight-default); /** Peso de la etiqueta */
+  --stat-tile-label-color: var(--color-text-muted-on-light); /** Color de la etiqueta — atenuado */
+  --stat-tile-icon-color: var(--color-text-muted-on-light); /** Color del icono — atenuado, como la etiqueta a la que acompaña */
+  --stat-tile-value-font-size: var(--text-size-7); /** Cuerpo de la cifra: paso 7 de la escala de títulos, el mismo que un h2. Sube un peldaño en la superficie pública */
+  --stat-tile-value-font-weight: var(--font-weight-emphasis); /** Peso de la cifra */
+  --stat-tile-value-color: var(--color-text-on-light); /** Color de la cifra — tinta de la superficie */
+  --stat-tile-sm-value-font-size: var(--text-size-5); /** Cuerpo de la cifra — talla sm: paso 5 de la escala, el de un h4 */
+  --stat-tile-description-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la descripción */
+  --stat-tile-description-color: var(--color-text-muted-on-light); /** Color de la descripción — atenuado */
+  --stat-tile-border-radius: var(--card-border-radius); /** Radio de esquinas — el de las superficies del sistema */
+  --stat-tile-border-width: var(--card-outline-border-width); /** Grosor del borde — el de Card outline */
+  --stat-tile-border-color: var(--card-outline-border-color); /** Color del borde — el de Card outline: tinta, no gris */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --stat-tile-label-color: var(--color-text-muted-on-dark); /** Color de la etiqueta — surface-dark */
+  --stat-tile-icon-color: var(--color-text-muted-on-dark); /** Color del icono — surface-dark */
+  --stat-tile-value-color: var(--color-text-on-dark); /** Color de la cifra — surface-dark */
+  --stat-tile-description-color: var(--color-text-muted-on-dark); /** Color de la descripción — surface-dark */
+}

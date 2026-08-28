@@ -106,6 +106,10 @@
   --select-field-error-font-size: var(--form-error-font-size);
   --select-field-helper-font-size: var(--form-helper-font-size);
   --sheet-description-font-size: var(--modal-description-font-size);
+  --stat-tile-label-font-size: var(--text-paragraph-small-font-size);
+  --stat-tile-value-font-size: var(--text-size-7);
+  --stat-tile-sm-value-font-size: var(--text-size-5);
+  --stat-tile-description-font-size: var(--text-paragraph-small-font-size);
   --switcher-field-sm-label-font-size: var(--text-paragraph-small-font-size);
   --switcher-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --switcher-field-label-font-size: var(--text-font-size);
