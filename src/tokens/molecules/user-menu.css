@@ -45,9 +45,7 @@
   --user-menu-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --user-menu-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --user-menu-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
-  --user-menu-item-focus-ring-width: var(--menu-item-focus-ring-width); /** Grosor del anillo del ítem resaltado — el del Menu */
-  --user-menu-item-focus-ring-offset: var(--menu-item-focus-ring-offset); /** Separación del anillo del ítem — la del Menu */
-  --user-menu-item-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del ítem — el del Menu */
+  --user-menu-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu */
   --user-menu-separator-color: var(--separator-color); /** Color del separador — el de la línea del sistema */
   --user-menu-separator-height: var(--separator-thickness); /** Alto del separador — el grosor de la línea del sistema */
 }
@@ -62,5 +60,5 @@ html.dark {
   --user-menu-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
   --user-menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
   --user-menu-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
-  --user-menu-item-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del ítem — surface-dark */
+  --user-menu-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — surface-dark */
 }

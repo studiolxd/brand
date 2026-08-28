@@ -44,9 +44,7 @@
   --async-multi-select-focus-ring-color: var(--multi-select-focus-ring-color); /** Hereda de `multi-select.focus-ring-color`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-focus-ring-width: var(--multi-select-focus-ring-width); /** Hereda de `multi-select.focus-ring-width`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-font-weight: var(--multi-select-font-weight); /** Hereda de `multi-select.font-weight`: el buscador múltiple tiene la misma cara que el control síncrono */
-  --async-multi-select-item-focus-ring-color: var(--multi-select-item-focus-ring-color); /** Hereda de `multi-select.item-focus-ring-color`: el buscador múltiple tiene la misma cara que el control síncrono */
-  --async-multi-select-item-focus-ring-offset: var(--multi-select-item-focus-ring-offset); /** Hereda de `multi-select.item-focus-ring-offset`: el buscador múltiple tiene la misma cara que el control síncrono */
-  --async-multi-select-item-focus-ring-width: var(--multi-select-item-focus-ring-width); /** Hereda de `multi-select.item-focus-ring-width`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-item-highlighted-bg: var(--multi-select-item-highlighted-bg); /** Hereda de `multi-select.item-highlighted-bg`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-line-height: var(--multi-select-line-height); /** Hereda de `multi-select.line-height`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-padding-inline: var(--multi-select-padding-inline); /** Hereda de `multi-select.padding-inline`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-loading-padding-inline: var(--multi-select-padding-inline); /** Aire horizontal de la fila de carga */
@@ -57,4 +55,5 @@
 [data-theme="dark"],
 html.dark {
   --async-multi-select-empty-color: var(--color-text-muted-on-dark); /** Tinta del mensaje de lista vacía — surface-dark */
+  --async-multi-select-item-highlighted-bg: var(--multi-select-item-highlighted-bg); /** Relleno de la opción resaltada — surface-dark */
 }

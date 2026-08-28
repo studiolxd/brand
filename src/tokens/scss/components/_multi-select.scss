@@ -40,6 +40,4 @@ $lxd-multi-select-sm-item-padding-block: 0.25rem; // Padding block de cada opci�
 $lxd-multi-select-lg-font-size: 1.25rem; // Tamaño de fuente — variante lg
 $lxd-multi-select-lg-padding-inline: 1.5rem; // Padding inline del trigger — variante lg
 $lxd-multi-select-lg-item-padding-block: 0.75rem; // Padding block de cada opción — variante lg
-$lxd-multi-select-item-focus-ring-width: 2px; // Grosor del anillo de la opción resaltada — el del Select
-$lxd-multi-select-item-focus-ring-offset: calc(-1 * 2px); // Separación del anillo de la opción — la del Select
-$lxd-multi-select-item-focus-ring-color: #111e30; // Color del anillo de la opción — el del Select
+$lxd-multi-select-item-highlighted-bg: #f2f2f2; // Relleno de la opción resaltada — el del Select

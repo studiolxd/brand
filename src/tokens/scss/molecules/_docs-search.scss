@@ -18,11 +18,7 @@ $lxd-docs-search-result-product-font-size: 0.875rem; // Cuerpo del rótulo de pr
 $lxd-docs-search-result-product-color: #4a4a4a; // Color del rótulo de producto — atenuado
 $lxd-docs-search-result-mark-bg: #ffcd00; // Fondo del resaltado de coincidencias (`<mark>`) dentro del extracto: amarillo de marca. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura
 $lxd-docs-search-result-mark-color: #111e30; // Tinta del resaltado de coincidencias sobre el amarillo
-$lxd-docs-search-result-hover-line-width: 1px; // Grosor de la línea que marca el resultado bajo el puntero. El hover no pinta relleno (regla de Colores)
-$lxd-docs-search-result-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie
-$lxd-docs-search-result-focus-ring-width: 2px; // Grosor del anillo del resultado resaltado — el del Menu: el foco es virtual, lo mueve el teclado
-$lxd-docs-search-result-focus-ring-offset: 1px; // Separación del anillo del resultado — la del Menu
-$lxd-docs-search-result-focus-ring-color: #111e30; // Color del anillo del resultado — el del Menu
+$lxd-docs-search-result-highlighted-bg: #f2f2f2; // Relleno del resultado resaltado — el del Menu: el foco es virtual, así que puntero y teclado marcan el mismo relleno
 $lxd-docs-search-status-padding-block: 0.75rem; // Padding vertical del aviso de estado (buscando / sin resultados)
 $lxd-docs-search-status-padding-inline: 0.75rem; // Padding horizontal del aviso de estado
 $lxd-docs-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto

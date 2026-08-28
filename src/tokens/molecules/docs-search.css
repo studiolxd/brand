@@ -23,13 +23,9 @@
   --docs-search-result-product-color: var(--color-text-muted-on-light); /** Color del rótulo de producto — atenuado */
   --docs-search-result-mark-bg: var(--color-accent-2); /** Fondo del resaltado de coincidencias (`<mark>`) dentro del extracto: amarillo de marca. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura */
   --docs-search-result-mark-color: var(--color-text-on-light); /** Tinta del resaltado de coincidencias sobre el amarillo */
-  --docs-search-result-hover-line-width: var(--border-width-default); /** Grosor de la línea que marca el resultado bajo el puntero. El hover no pinta relleno (regla de Colores) */
-  --docs-search-result-hover-line-color: var(--color-primary); /** Color de la línea de hover — tinta de la superficie */
   --docs-search-status-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del aviso de estado */
   --docs-search-status-color: var(--color-text-muted-on-light); /** Color del aviso de estado — atenuado */
-  --docs-search-result-focus-ring-width: var(--menu-item-focus-ring-width); /** Grosor del anillo del resultado resaltado — el del Menu: el foco es virtual, lo mueve el teclado */
-  --docs-search-result-focus-ring-offset: var(--menu-item-focus-ring-offset); /** Separación del anillo del resultado — la del Menu */
-  --docs-search-result-focus-ring-color: var(--menu-item-focus-ring-color); /** Color del anillo del resultado — el del Menu */
+  --docs-search-result-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del resultado resaltado — el del Menu: el foco es virtual, así que puntero y teclado marcan el mismo relleno */
 }
 
 .surface-dark,
@@ -38,7 +34,6 @@ html.dark {
   --docs-search-result-color: var(--color-text-on-dark); /** Color del resultado — surface-dark */
   --docs-search-result-excerpt-color: var(--color-text-muted-on-dark); /** Color del extracto — surface-dark */
   --docs-search-result-product-color: var(--color-text-muted-on-dark); /** Rótulo de producto — surface-dark */
-  --docs-search-result-hover-line-color: var(--color-text-on-dark); /** Línea de hover — surface-dark */
   --docs-search-status-color: var(--color-text-muted-on-dark); /** Aviso de estado — surface-dark */
-  --docs-search-result-focus-ring-color: var(--menu-item-focus-ring-color); /** Anillo del resultado resaltado — surface-dark */
+  --docs-search-result-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del resultado resaltado — surface-dark */
 }

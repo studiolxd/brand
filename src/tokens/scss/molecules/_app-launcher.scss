@@ -33,7 +33,8 @@ $lxd-app-launcher-tile-name-font-size: 0.875rem; // Tamaño de texto del nombre 
 $lxd-app-launcher-tile-name-font-weight: 300; // Peso del nombre de app
 $lxd-app-launcher-tile-name-color: #111e30; // Color del nombre de app
 $lxd-app-launcher-tile-name-active-font-weight: 500; // Peso del nombre — app actual
-$lxd-app-launcher-hover-line-width: 1px; // Grosor de la línea de hover del trigger y de los tiles. Ni el disparador ni el tile se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo
-$lxd-app-launcher-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie
+$lxd-app-launcher-hover-line-width: 1px; // Grosor de la línea de hover del disparador. El botón de rejilla no se rellena bajo el puntero (regla de Colores): deja una línea de tinta debajo. Los tiles sí se rellenan: son la lista de opciones del panel
+$lxd-app-launcher-hover-line-color: #111e30; // Color de la línea de hover del disparador — tinta de la superficie
+$lxd-app-launcher-tile-highlighted-bg: #f2f2f2; // Relleno del tile bajo el puntero o el teclado — el del Menu: la rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores)
 $lxd-app-launcher-tile-active-marker-width: 2px; // Grosor de la barra que marca la app actual, en el borde de inicio del tile
 $lxd-app-launcher-tile-active-marker-color: #111e30; // Color de la barra de la app actual

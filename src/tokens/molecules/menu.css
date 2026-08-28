@@ -27,9 +27,7 @@
   --menu-lg-item-padding-block: var(--select-lg-item-padding-block); /** Padding vertical de cada ítem — talla lg */
   --menu-item-font-weight: var(--font-weight-default); /** Peso de texto de ítems */
   --menu-item-color: var(--color-text-on-light); /** Color de texto de ítems */
-  --menu-item-focus-ring-width: var(--border-width-focus); /** Grosor del anillo del ítem resaltado (`[data-highlighted]`): el resalte no pinta relleno, lo marca el anillo del sistema */
-  --menu-item-focus-ring-offset: var(--border-width-default); /** Separación del anillo del ítem */
-  --menu-item-focus-ring-color: var(--color-primary); /** Color del anillo del ítem — la tinta de la superficie */
+  --menu-item-highlighted-bg: var(--color-surface-secondary-on-light); /** Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`). Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre */
   --menu-item-selected-font-weight: var(--font-weight-emphasis); /** La opción elegida de un grupo de radio, en énfasis: sin glifo */
   --menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de texto de ítem destructivo */
   --menu-label-font-weight: var(--font-weight-emphasis); /** Peso del rótulo de sección */
@@ -50,7 +48,7 @@
 [data-theme="dark"],
 html.dark {
   --menu-item-color: var(--color-text-on-dark); /** Color de texto de ítems — surface-dark */
-  --menu-item-focus-ring-color: var(--color-text-on-dark); /** Color del anillo del ítem — surface-dark */
+  --menu-item-highlighted-bg: var(--color-surface-secondary-on-dark); /** Relleno del ítem resaltado — surface-dark */
   --menu-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
   --menu-label-color: var(--color-text-muted-on-dark); /** Color del rótulo de sección — surface-dark */
   --menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */

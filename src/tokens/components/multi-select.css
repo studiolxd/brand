@@ -42,9 +42,7 @@
   --multi-select-focus-ring-width: var(--select-focus-ring-width); /** Grosor del anillo de foco */
   --multi-select-focus-ring-color: var(--select-focus-ring-color); /** Color del anillo de foco */
   --multi-select-content-border-color: var(--select-content-border-color); /** Borde del dropdown */
-  --multi-select-item-focus-ring-width: var(--select-item-focus-ring-width); /** Grosor del anillo de la opción resaltada — el del Select */
-  --multi-select-item-focus-ring-offset: var(--select-item-focus-ring-offset); /** Separación del anillo de la opción — la del Select */
-  --multi-select-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo de la opción — el del Select */
+  --multi-select-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno de la opción resaltada — el del Select */
 }
 
 .surface-dark,
@@ -60,5 +58,5 @@ html.dark {
   --multi-select-content-border-color: var(--color-text-on-dark); /** Dropdown border color — surface-dark */
   --multi-select-pill-bg: var(--color-accent-1); /** Relleno de las pills — surface-dark: el prusia coincidiría con el lienzo; par de `Button primary` (lavanda con tinta prusia) */
   --multi-select-pill-color: var(--color-primary); /** Texto de las pills — surface-dark */
-  --multi-select-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo de la opción — surface-dark */
+  --multi-select-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno de la opción resaltada — surface-dark */
 }

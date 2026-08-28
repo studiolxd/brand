@@ -30,8 +30,8 @@
   --app-launcher-tile-name-font-weight: var(--font-weight-default); /** Peso del nombre de app */
   --app-launcher-tile-name-color: var(--color-text-on-light); /** Color del nombre de app */
   --app-launcher-tile-name-active-font-weight: var(--font-weight-emphasis); /** Peso del nombre — app actual */
-  --app-launcher-hover-line-width: var(--border-width-default); /** Grosor de la línea de hover del trigger y de los tiles. Ni el disparador ni el tile se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo */
-  --app-launcher-hover-line-color: var(--color-primary); /** Color de la línea de hover — tinta de la superficie */
+  --app-launcher-hover-line-width: var(--border-width-default); /** Grosor de la línea de hover del disparador. El botón de rejilla no se rellena bajo el puntero (regla de Colores): deja una línea de tinta debajo. Los tiles sí se rellenan: son la lista de opciones del panel */
+  --app-launcher-hover-line-color: var(--color-primary); /** Color de la línea de hover del disparador — tinta de la superficie */
   --app-launcher-tile-active-marker-width: var(--border-width-focus); /** Grosor de la barra que marca la app actual, en el borde de inicio del tile */
   --app-launcher-tile-active-marker-color: var(--color-primary); /** Color de la barra de la app actual */
   --app-launcher-content-bg: var(--floating-panel-bg); /** Fondo del panel */
@@ -39,6 +39,7 @@
   --app-launcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --app-launcher-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --app-launcher-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --app-launcher-tile-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del tile bajo el puntero o el teclado — el del Menu: la rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores) */
 }
 
 .surface-dark,
@@ -47,8 +48,9 @@ html.dark {
   --app-launcher-trigger-color: var(--color-text-on-dark); /** Icono de rejilla — surface-dark */
   --app-launcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --app-launcher-tile-name-color: var(--color-text-on-dark); /** Nombre de app — surface-dark */
-  --app-launcher-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover — surface-dark */
+  --app-launcher-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover del disparador — surface-dark */
   --app-launcher-tile-active-marker-color: var(--color-accent-1); /** Color de la barra de la app actual — surface-dark: lavanda, el acento de estado activo del sistema (como SidebarNav y Table) */
   --app-launcher-content-bg: var(--floating-panel-bg); /** Fondo del panel — surface-dark */
   --app-launcher-content-border-color: var(--floating-panel-border-color); /** Borde del panel — surface-dark */
+  --app-launcher-tile-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del tile resaltado — surface-dark */
 }

@@ -25,9 +25,7 @@ $lxd-menu-lg-item-padding-block: 0.75rem; // Padding vertical de cada ítem — 
 $lxd-menu-item-font-weight: 300; // Peso de texto de ítems
 $lxd-menu-item-line-height: 1.3; // Interlineado de ítems
 $lxd-menu-item-color: #111e30; // Color de texto de ítems
-$lxd-menu-item-focus-ring-width: 2px; // Grosor del anillo del ítem resaltado (`[data-highlighted]`): el resalte no pinta relleno, lo marca el anillo del sistema
-$lxd-menu-item-focus-ring-offset: 1px; // Separación del anillo del ítem
-$lxd-menu-item-focus-ring-color: #111e30; // Color del anillo del ítem — la tinta de la superficie
+$lxd-menu-item-highlighted-bg: #f2f2f2; // Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`). Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre
 $lxd-menu-item-selected-font-weight: 500; // La opción elegida de un grupo de radio, en énfasis: sin glifo
 $lxd-menu-item-cursor: pointer; // Cursor de ítems
 $lxd-menu-item-destructive-color: #b30000; // Color de texto de ítem destructivo

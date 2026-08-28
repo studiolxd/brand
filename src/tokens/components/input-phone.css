@@ -13,14 +13,12 @@
   --input-phone-country-gap: var(--spacing-1); /** Separación entre bandera/código y chevron en el selector de país */
   --input-phone-country-border-width: var(--border-width-default); /** Grosor del separador entre país y número */
   --input-phone-country-border-color: var(--color-primary); /** Color del separador */
-  --input-phone-country-item-focus-ring-width: var(--select-item-focus-ring-width); /** Grosor del anillo del país resaltado en la lista — el del Select */
-  --input-phone-country-item-focus-ring-offset: var(--select-item-focus-ring-offset); /** Separación del anillo del país resaltado — la del Select */
-  --input-phone-country-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo del país resaltado — el del Select */
+  --input-phone-country-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno del país resaltado en la lista — el del Select */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
   --input-phone-country-border-color: var(--color-text-on-dark); /** Separador del selector de país — surface-dark */
-  --input-phone-country-item-focus-ring-color: var(--select-item-focus-ring-color); /** Color del anillo del país resaltado — surface-dark */
+  --input-phone-country-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno del país resaltado — surface-dark */
 }

@@ -38,9 +38,7 @@ $lxd-user-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // T
 $lxd-user-menu-item-font-size: 1rem; // Tamaño de texto de ítems
 $lxd-user-menu-item-font-weight: 300; // Peso de ítems
 $lxd-user-menu-item-color: #111e30; // Color de ítems
-$lxd-user-menu-item-focus-ring-width: 2px; // Grosor del anillo del ítem resaltado — el del Menu
-$lxd-user-menu-item-focus-ring-offset: 1px; // Separación del anillo del ítem — la del Menu
-$lxd-user-menu-item-focus-ring-color: #111e30; // Color del anillo del ítem — el del Menu
+$lxd-user-menu-item-highlighted-bg: #f2f2f2; // Relleno del ítem resaltado — el del Menu
 $lxd-user-menu-item-destructive-color: #b30000; // Color de ítem destructivo
 $lxd-user-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
 $lxd-user-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
