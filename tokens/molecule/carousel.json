@@ -1,0 +1,22 @@
+{
+  "carousel": {
+    "gap":            { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre diapositivas" },
+    "slide-size":     { "$value": "100%",        "$type": "dimension", "$description": "Ancho de una diapositiva (`flex-basis`). Por defecto la pista entera: una diapositiva a la vista. Se sobreescribe con la prop `slideSize`" },
+    "controls-gap":   { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre los botones de la barra de control" },
+    "controls-space-before": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre la pista y la barra de control" },
+
+    "indicator-inline-size": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Largo de la barra indicadora (32px)" },
+    "indicator-block-size":  { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Grosor de la barra indicadora — el mismo peso que la barra de activo del sistema" },
+    "indicator-hit-block-size": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Alto del área pulsable del indicador: la barra es fina, el objetivo táctil no" },
+    "indicator-color":         { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Barra de una diapositiva que no está a la vista" },
+    "indicator-current-color": { "$value": "{color.text.on-light}",       "$type": "color", "$description": "Barra de la diapositiva a la vista. Es una barra de tinta, no un relleno: la posición no es un estado que se pinte de marca" },
+
+    "focus-ring-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del anillo de foco de los indicadores" },
+    "focus-ring-width":  { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Separación del anillo de foco" },
+
+    "surface-dark-indicator-color":         { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Barra de diapositiva no visible — surface-dark" },
+    "surface-dark-indicator-current-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Barra de la diapositiva a la vista — surface-dark" },
+    "surface-dark-focus-ring-color":        { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

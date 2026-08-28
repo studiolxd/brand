@@ -1,0 +1,26 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --carousel-slide-size: 100%; /** Ancho de una diapositiva (`flex-basis`). Por defecto la pista entera: una diapositiva a la vista. Se sobreescribe con la prop `slideSize` */
+  --carousel-gap: var(--spacing-4); /** Aire entre diapositivas */
+  --carousel-controls-gap: var(--spacing-2); /** Aire entre los botones de la barra de control */
+  --carousel-controls-space-before: var(--spacing-4); /** Aire entre la pista y la barra de control */
+  --carousel-indicator-inline-size: var(--spacing-6); /** Largo de la barra indicadora (32px) */
+  --carousel-indicator-hit-block-size: var(--spacing-4); /** Alto del área pulsable del indicador: la barra es fina, el objetivo táctil no */
+  --carousel-indicator-block-size: var(--border-width-focus); /** Grosor de la barra indicadora — el mismo peso que la barra de activo del sistema */
+  --carousel-indicator-color: var(--color-text-muted-on-light); /** Barra de una diapositiva que no está a la vista */
+  --carousel-indicator-current-color: var(--color-text-on-light); /** Barra de la diapositiva a la vista. Es una barra de tinta, no un relleno: la posición no es un estado que se pinte de marca */
+  --carousel-focus-ring-color: var(--color-primary); /** Color del anillo de foco de los indicadores */
+  --carousel-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --carousel-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --carousel-indicator-color: var(--color-text-muted-on-dark); /** Barra de diapositiva no visible — surface-dark */
+  --carousel-indicator-current-color: var(--color-text-on-dark); /** Barra de la diapositiva a la vista — surface-dark */
+  --carousel-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

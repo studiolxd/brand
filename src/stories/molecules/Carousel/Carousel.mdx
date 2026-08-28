@@ -1,0 +1,63 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CarouselStories from "./Carousel.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { carouselTokens, carouselDarkTokens } from "../../../tokens/molecules/carousel";
+
+<Meta of={CarouselStories} />
+
+# Carousel
+
+Una pista horizontal de diapositivas con **desplazamiento nativo**: la pista es un contenedor con `overflow-x` y `scroll-snap`, así que arrastrar con el ratón, deslizar con el dedo y las teclas de flecha ya funcionan sin que el componente haga nada. Lo que añade el componente es lo que el navegador no da: los botones anterior/siguiente, los indicadores de posición y un avance automático opcional.
+
+No trae ninguna librería de carruseles. El `Carousel` de la primera web sí llevaba una (Embla); esta reconstrucción la retira: el mismo comportamiento sale de dos propiedades CSS y un puñado de líneas de JavaScript, y el resultado responde al gesto del navegador en lugar de emularlo.
+
+<Canvas of={CarouselStories.PorDefecto} />
+
+## Qué va dentro
+
+`Carousel` no sabe qué son sus diapositivas ni las viste: cada una es un `CarouselSlide` con lo que haga falta —una `Card`, un `Logo`, un párrafo—. El componente no pinta fondo, borde ni padding.
+
+El ancho de cada diapositiva es la única medida que decide quien lo usa, con `slideSize` (cualquier medida CSS). Por defecto vale `100%`: la pista entera, una diapositiva a la vista.
+
+<Canvas of={CarouselStories.Proyectos} />
+
+## Avance automático
+
+`autoplay` es el número de milisegundos entre saltos. Se detiene mientras el puntero está encima o el foco está dentro, y **no arranca** si el sistema pide movimiento reducido (`prefers-reduced-motion: reduce`) — no se atenúa: no se pone en marcha.
+
+Es el caso de la banda de logotipos de clientes: diapositivas estrechas, sin botones, moviéndose solas.
+
+<Canvas of={CarouselStories.LogotiposEnMarcha} />
+
+## Accesibilidad
+
+- La región lleva `role="region"`, `aria-roledescription` (por defecto «carrusel») y el nombre que se le pase en `label`.
+- La **pista** es la que recibe el foco (`tabindex="0"`), porque es la que se desplaza: con el foco puesto, las flechas ← → pasan de diapositiva, y la rueda y el gesto táctil siguen siendo los del navegador.
+- Cada diapositiva es un `group` con `aria-roledescription` (por defecto «diapositiva»).
+- Los indicadores son botones con nombre accesible; el de la diapositiva a la vista lleva `aria-current`.
+
+Todos esos textos son props con **default en castellano** (`label`, `roleDescription`, `trackLabel`, `prevLabel`, `nextLabel`, `indicatorLabel`, y `roleDescription` en `CarouselSlide`), como pide la regla de internacionalización del sistema.
+
+### El indicador es una barra, no un punto relleno
+
+La diapositiva a la vista se marca con una **barra de tinta** al peso de activo del sistema, y las demás con la misma barra en tinta apagada. No hay círculo relleno de marca: la posición dentro de una pista es un estado, y los estados del sistema no se rellenan (Foundations → Colores, «Estados: nada se rellena»).
+
+<Canvas of={CarouselStories.SoloPista} />
+
+## Sobre superficie oscura
+
+Indicadores y anillo de foco tienen su par `surface-dark`; los botones y el texto voltean solos con la superficie.
+
+<Canvas of={CarouselStories.EnSuperficieOscura} />
+
+## Tokens
+
+<TokenTable tokens={carouselTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={carouselDarkTokens} />
+
+## Props
+
+<ArgTypes of={CarouselStories} />

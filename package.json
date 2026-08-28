@@ -88,6 +88,10 @@
       "types": "./dist/_types/molecules/Card/Card.d.ts",
       "import": "./dist/card.js"
     },
+    "./carousel": {
+      "types": "./dist/_types/molecules/Carousel/Carousel.d.ts",
+      "import": "./dist/carousel.js"
+    },
     "./code-block": {
       "types": "./dist/_types/molecules/CodeBlock/CodeBlock.d.ts",
       "import": "./dist/code-block.js"

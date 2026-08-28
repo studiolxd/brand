@@ -1,0 +1,15 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-carousel-gap: 1rem; // Aire entre diapositivas
+$lxd-carousel-slide-size: 100%; // Ancho de una diapositiva (`flex-basis`). Por defecto la pista entera: una diapositiva a la vista. Se sobreescribe con la prop `slideSize`
+$lxd-carousel-controls-gap: 0.5rem; // Aire entre los botones de la barra de control
+$lxd-carousel-controls-space-before: 1rem; // Aire entre la pista y la barra de control
+$lxd-carousel-indicator-inline-size: 2rem; // Largo de la barra indicadora (32px)
+$lxd-carousel-indicator-block-size: 2px; // Grosor de la barra indicadora — el mismo peso que la barra de activo del sistema
+$lxd-carousel-indicator-hit-block-size: 1rem; // Alto del área pulsable del indicador: la barra es fina, el objetivo táctil no
+$lxd-carousel-indicator-color: #4a4a4a; // Barra de una diapositiva que no está a la vista
+$lxd-carousel-indicator-current-color: #111e30; // Barra de la diapositiva a la vista. Es una barra de tinta, no un relleno: la posición no es un estado que se pinte de marca
+$lxd-carousel-focus-ring-color: #111e30; // Color del anillo de foco de los indicadores
+$lxd-carousel-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-carousel-focus-ring-offset: 1px; // Separación del anillo de foco
