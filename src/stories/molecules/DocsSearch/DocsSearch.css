@@ -1,0 +1,86 @@
+.docs-search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--docs-search-gap);
+}
+
+/* ─── Resultados ─────────────────────────────────────────────
+   La lista va en el flujo de la página, no en un popup: no lleva panel, velo
+   ni sombra. Si crece más que su tope, scrollea dentro. */
+
+.docs-search__results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--docs-search-results-gap);
+  max-block-size: var(--docs-search-results-max-block-size);
+  overflow-y: auto;
+  outline: none;
+}
+
+/* Sin resultados, la lista no ocupa sitio: el aviso de estado ya lo dice. */
+.docs-search__results:empty {
+  display: none;
+}
+
+.docs-search__result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--docs-search-result-gap);
+  padding-block: var(--docs-search-result-padding-block);
+  padding-inline: var(--docs-search-result-padding-inline);
+  border-radius: var(--docs-search-result-border-radius);
+  color: var(--docs-search-result-color);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+/* El foco es virtual (`aria-activedescendant`): el resultado resaltado lo
+   marca Base UI con `data-highlighted`, por teclado y por puntero. */
+.docs-search__result[data-highlighted] {
+  outline: var(--docs-search-result-focus-ring-width) solid var(--docs-search-result-focus-ring-color);
+  outline-offset: var(--docs-search-result-focus-ring-offset);
+}
+
+/* Hover con el puntero: línea de tinta, nunca relleno (Foundations → Colores). */
+.docs-search__result:hover {
+  color: var(--docs-search-result-color);
+  box-shadow: inset 0 calc(-1 * var(--docs-search-result-hover-line-width)) 0 0 var(--docs-search-result-hover-line-color);
+}
+
+.docs-search__result-product {
+  font-size: var(--docs-search-result-product-font-size);
+  color: var(--docs-search-result-product-color);
+}
+
+.docs-search__result-title {
+  font-size: var(--docs-search-result-title-font-size);
+  font-weight: var(--docs-search-result-title-font-weight);
+}
+
+.docs-search__result-excerpt {
+  font-size: var(--docs-search-result-excerpt-font-size);
+  line-height: var(--docs-search-result-excerpt-line-height);
+  color: var(--docs-search-result-excerpt-color);
+}
+
+/* El resaltado de coincidencias llega como `<mark>` dentro del extracto: lo
+   produce el buscador, no React, así que no hay dónde poner una clase — la
+   misma razón por la que `Prose` viste la semántica cruda de un documento. */
+.docs-search__result-excerpt mark {
+  background-color: var(--docs-search-result-mark-bg);
+  color: var(--docs-search-result-mark-color);
+}
+
+/* ─── Aviso de estado ───────────────────────────────────────── */
+
+.docs-search__status {
+  display: flex;
+  align-items: center;
+  gap: var(--docs-search-status-gap);
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: var(--docs-search-status-padding-block);
+  padding-inline: var(--docs-search-status-padding-inline);
+  font-size: var(--docs-search-status-font-size);
+  color: var(--docs-search-status-color);
+}

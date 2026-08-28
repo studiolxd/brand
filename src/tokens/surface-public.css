@@ -72,6 +72,9 @@
   --date-picker-field-helper-font-size: var(--form-helper-font-size);
   --date-time-field-error-font-size: var(--form-error-font-size);
   --date-time-field-helper-font-size: var(--form-helper-font-size);
+  --docs-search-result-title-font-size: var(--text-font-size);
+  --docs-search-result-excerpt-font-size: var(--text-paragraph-small-font-size);
+  --docs-search-status-font-size: var(--text-paragraph-small-font-size);
   --dropdown-field-error-font-size: var(--form-error-font-size);
   --dropdown-field-helper-font-size: var(--form-helper-font-size);
   --file-upload-field-error-font-size: var(--form-error-font-size);

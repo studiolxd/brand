@@ -1,0 +1,101 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DocsSearchStories from "./DocsSearch.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { docsSearchBaseTokens, docsSearchDarkTokens } from "../../../tokens/molecules/docs-search";
+
+<Meta of={DocsSearchStories} />
+
+# DocsSearch
+
+El buscador de la documentación: un campo y sus resultados, con navegación por teclado y avisos de estado.
+
+<Canvas of={DocsSearchStories.PorDefecto} />
+
+## No busca nada
+
+El componente **no hace `fetch`, no filtra y no guarda estado**. Recibe `query`, `results` y `loading`, y los pinta.
+
+El índice es del producto —Pagefind en `apps/web`, otra cosa en la siguiente app— y con él el rebote de las pulsaciones, la cancelación de las respuestas que llegan tarde y el número de resultados que se piden. Meter eso dentro obligaría a elegir un motor de búsqueda por todos, que es justo lo que un design system no debe decidir.
+
+<Canvas of={DocsSearchStories.Interactivo} />
+
+## Anatomía
+
+- **Campo** (`InputField` de tipo `search`): etiqueta, pista y talla del sistema. El motor lo convierte en `role="combobox"`.
+- **Lista** (`role="listbox"`, con `aria-label`): un `role="option"` por resultado. Cada opción es un **enlace de verdad**, así que se abre en otra pestaña y se copia como cualquier otro.
+- **Aviso de estado** (`role="status"`): una región viva que dice «buscando» o «sin resultados», y que solo existe cuando hay algo que decir.
+
+La conducta es el `Autocomplete` de Base UI —el mismo motor que la `CommandPalette`— con dos diferencias: el filtrado va desactivado (`filter={null}`, porque ya lo hizo el consumidor) y la lista va **en línea**, sin popup: los resultados de una búsqueda de documentación no son un menú flotante, son la página.
+
+## Resultados
+
+`results` es `{ href, title, excerpt?, product? }[]`. `href` es también la clave. `excerpt` es `ReactNode`, no texto: los buscadores devuelven el fragmento con las coincidencias resaltadas, y ese resaltado se pinta con `<mark>`.
+
+<Canvas of={DocsSearchStories.ConResaltado} />
+
+El `<mark>` del extracto es el **único elemento nativo** que viste este componente, por la misma razón que `Prose` viste la semántica de un documento: el fragmento lo produce el buscador, no React, y no hay dónde poner una clase. Lleva el amarillo de marca con su tinta emparejada, un relleno autocontenido que no cambia en superficie oscura.
+
+## Estados
+
+<Canvas of={DocsSearchStories.Buscando} />
+<Canvas of={DocsSearchStories.SinResultados} />
+
+El aviso aparece solo cuando hay algo que decir: sin consulta no se avisa de nada, y con resultados a la vista el «buscando» sería ruido. Mientras se refresca una búsqueda que ya tenía resultados, los anteriores siguen en pantalla en vez de parpadear.
+
+## Teclado
+
+| Tecla | Acción |
+| --- | --- |
+| `↑` `↓` | Mueven el resaltado entre resultados |
+| `Home` `End` | Primer y último resultado |
+| `Enter` | Abre el resultado resaltado |
+
+El foco **nunca sale del campo**: la lista se recorre con foco virtual (`aria-activedescendant`), así que se puede seguir escribiendo mientras se navega.
+
+## Enlaces del router
+
+`renderLink` sustituye la etiqueta `<a>` por el enlace del router del producto. Debe **propagar todas** las props que recibe: el motor inyecta el rol, el `id` con el que viaja el foco virtual y los handlers de teclado.
+
+```tsx
+<DocsSearch
+  renderLink={({ href, ...props }) => <Link {...props} href={href} />}
+  /* … */
+/>
+```
+
+## Superficie oscura
+
+Resultado, extracto, rótulo de producto, línea de hover y anillo de resaltado tienen su par. El resaltado de coincidencias no: su amarillo con tinta oscura es autocontenido.
+
+<Canvas of={DocsSearchStories.EnSuperficieOscura} />
+
+## Textos
+
+Todo texto que emite el componente es prop con default castellano: `label`, `placeholder`, `resultsLabel`, `emptyLabel` y `loadingLabel`. `labelHidden` oculta la etiqueta a la vista sin quitársela al lector de pantalla; el campo usa entonces su texto como pista.
+
+<Canvas of={DocsSearchStories.EtiquetaOculta} />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={docsSearchBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={docsSearchDarkTokens} />
+
+Los tokens del campo son los de `InputField`; los de aquí visten la lista y el aviso.
+
+## Accesibilidad
+
+- Patrón **combobox con lista** de WAI-ARIA: campo `role="combobox"`, lista `role="listbox"` con nombre, resultados `role="option"`. El resaltado viaja en `aria-activedescendant` sin mover el foco real.
+- El aviso de estado es `role="status"` (`aria-live="polite"`): al aparecer se anuncia, en vez de dejar al lector de pantalla sin saber si la búsqueda encontró algo.
+- Cada resultado es un enlace: llega con `Tab`, se abre con `Enter` y responde al clic central y al menú contextual como cualquier enlace.
+- El hover no pinta relleno, marca una línea de tinta; el resaltado del teclado es el anillo del sistema. Los dos se distinguen a simple vista.
+
+## Props
+
+<ArgTypes of={DocsSearchStories} />

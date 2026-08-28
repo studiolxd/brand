@@ -141,6 +141,10 @@
       "types": "./dist/_types/molecules/DateTimeField/DateTimeField.d.ts",
       "import": "./dist/date-time-field.js"
     },
+    "./docs-search": {
+      "types": "./dist/_types/molecules/DocsSearch/DocsSearch.d.ts",
+      "import": "./dist/docs-search.js"
+    },
     "./dots-button": {
       "types": "./dist/_types/atoms/DotsButton/DotsButton.d.ts",
       "import": "./dist/dots-button.js"

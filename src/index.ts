@@ -135,6 +135,8 @@ export { Breadcrumb } from './stories/molecules/Breadcrumb/Breadcrumb';
 export type { BreadcrumbItem, BreadcrumbProps, BreadcrumbRenderLinkProps } from './stories/molecules/Breadcrumb/Breadcrumb';
 export { EmptyState } from './stories/molecules/EmptyState/EmptyState';
 export type { EmptyStateProps, EmptyStateAction } from './stories/molecules/EmptyState/EmptyState';
+export { DocsSearch } from './stories/molecules/DocsSearch/DocsSearch';
+export type { DocsSearchProps, DocsSearchResult, DocsSearchRenderLinkProps } from './stories/molecules/DocsSearch/DocsSearch';
 export { DatePicker } from './stories/molecules/DatePicker/DatePicker';
 export type { DatePickerProps } from './stories/molecules/DatePicker/DatePicker';
 export { DatePickerField } from './stories/molecules/DatePickerField/DatePickerField';

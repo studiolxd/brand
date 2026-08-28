@@ -27,10 +27,11 @@ export interface ProseProps extends ComponentPropsWithoutRef<'div'> {
  * `table`, `hr`, `img`) con la escala del sistema, y limita el ancho a la
  * medida de lectura.
  *
- * Es la **única excepción documentada** en la que el sistema estila etiquetas
- * nativas dentro de un contenedor: el contenido no viene de React, viene de
- * un `.mdx` o de una cadena de HTML, así que no hay dónde poner una clase.
- * Fuera de `Prose`, la maquetación sigue siendo de componentes.
+ * Es la **excepción documentada** del sistema al estilado de etiquetas nativas:
+ * el contenido no viene de React, viene de un `.mdx` o de una cadena de HTML,
+ * así que no hay dónde poner una clase. Fuera de `Prose`, la maquetación sigue
+ * siendo de componentes (el único otro caso, mucho menor, es el `<mark>` del
+ * extracto de `DocsSearch`).
  *
  * Reenvía el resto de props del elemento (`data-*`, `aria-*`, `id`…) y
  * concatena `className` tras las clases propias.

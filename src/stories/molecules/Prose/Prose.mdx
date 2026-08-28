@@ -13,9 +13,9 @@ El contenedor del contenido largo: documentación en MDX, textos legales, entrad
 
 ## La excepción
 
-`Prose` es el **único sitio del sistema donde el CSS estila etiquetas nativas dentro de un contenedor**. La regla general sigue en pie: la maquetación se hace con componentes, y una etiqueta suelta en una página no la viste nadie.
+`Prose` es el **contenedor del sistema que viste la semántica nativa de un documento entero**. La regla general sigue en pie: la maquetación se hace con componentes, y una etiqueta suelta en una página no la viste nadie.
 
-La excepción está justificada porque aquí el contenido **no viene de React**: sale de un `.mdx`, de un `dangerouslySetInnerHTML` o de un renderizador de markdown, y no hay dónde poner una clase. Todo lo que declara este componente vive bajo `.prose`, así que no se escapa al resto de la página.
+La excepción está justificada porque aquí el contenido **no viene de React**: sale de un `.mdx`, de un `dangerouslySetInnerHTML` o de un renderizador de markdown, y no hay dónde poner una clase. Todo lo que declara este componente vive bajo `.prose`, así que no se escapa al resto de la página. El único otro sitio del sistema con la misma excusa —y mucho más pequeño— es el `<mark>` del extracto de `DocsSearch`, que produce el buscador.
 
 Fuera de un documento, no uses `Prose` para ahorrarte componentes: un párrafo es `Paragraph`, una lista es `List`, un bloque de código es `CodeBlock`.
 
