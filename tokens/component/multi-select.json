@@ -47,8 +47,10 @@
     "surface-dark-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}", "$type": "color", "$description": "Placeholder color — surface-dark" },
     "surface-dark-content-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Dropdown background — surface-dark" },
     "surface-dark-content-border-color":   { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Dropdown border color — surface-dark" },
-    "item-highlighted-bg":    { "$value": "{select.item-highlighted-bg}",    "$type": "color",     "$description": "Relleno de la opción resaltada — el del Select" },
+    "item-highlighted-bg":    { "$value": "{select.item-highlighted-bg}",    "$type": "color",     "$description": "Relleno de la opción resaltada — el del Select: la inversión de marca" },
+    "item-highlighted-color": { "$value": "{select.item-highlighted-color}", "$type": "color",     "$description": "Texto de la opción resaltada — el del Select" },
     "surface-dark-item-highlighted-bg":   { "$value": "{select.surface-dark-item-highlighted-bg}",   "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" },
+    "surface-dark-item-highlighted-color": { "$value": "{select.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Texto de la opción resaltada — surface-dark" },
     "surface-dark-pill-bg":                      { "$value": "{color.accent-1}", "$type": "color", "$description": "Relleno de las pills — surface-dark: el prusia coincidiría con el lienzo; par de `Button primary` (lavanda con tinta prusia)" },
     "surface-dark-pill-color":                   { "$value": "{color.primary}", "$type": "color", "$description": "Texto de las pills — surface-dark" }
   }

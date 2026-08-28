@@ -135,11 +135,14 @@
   color: var(--multi-select-color);
   cursor: pointer;
 
-  /* La opción bajo el puntero o el teclado se rellena: excepción declarada de
-     las listas de opciones desplegables (Foundations → Colores). */
+  /* La opción bajo el puntero o el teclado se rellena con la inversión de
+     marca: excepción declarada de las listas de opciones desplegables
+     (Foundations → Colores). El texto invierte con el relleno, y la casilla
+     lo sigue por `currentColor`. */
   &:focus-visible,
   &:hover {
     background-color: var(--multi-select-item-highlighted-bg);
+    color: var(--multi-select-item-highlighted-color);
   }
 
   &.multi-select__item--selected {
@@ -178,6 +181,8 @@
 
 }
 
+/* El glifo es un hueco recortado sobre la casilla llena: se pinta del color
+   del fondo que tenga debajo — el del panel, o el del relleno del resaltado. */
 .multi-select__item-check-mark {
   width: var(--checkbox-check-size);
   height: var(--checkbox-check-size);
@@ -188,6 +193,11 @@
 
   .multi-select__item--selected & {
     transform: scale(1);
+  }
+
+  .multi-select__item:focus-visible &,
+  .multi-select__item:hover & {
+    background-color: var(--multi-select-item-highlighted-bg);
   }
 }
 
