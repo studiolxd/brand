@@ -47,8 +47,12 @@ export interface SearchFormProps {
      * @default 'Buscar'
      */
     submitLabel?: string;
-    /** Talla del conjunto: la comparten campo y botón. */
-    size?: 'sm' | 'md' | 'lg';
+    /**
+     * Talla del conjunto: la comparten campo y botón. `xl` es propia de este
+     * componente —el buscador del menú del sitio—; el resto son las tallas de
+     * formulario del sistema, y solo esas se heredan de un `Form`.
+     */
+    size?: 'sm' | 'md' | 'lg' | 'xl';
     /** Deshabilita el campo y el botón. */
     disabled?: boolean;
 }

@@ -7,8 +7,8 @@ import { forwardRef as r, useId as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/molecules/SearchForm/SearchForm.tsx
 var s = r(function({ id: r, name: s = "q", value: c, defaultValue: l, onChange: u, onSubmit: d, action: f, method: p = "get", label: m = "Buscar", labelHidden: h = !0, placeholder: g = "Buscar…", submitLabel: _ = "Buscar", size: v, disabled: y }, b) {
-	let x = t(v), S = i(), C = r ?? S;
-	function w(e) {
+	let x = t(v === "xl" ? void 0 : v), S = v === "xl" ? "xl" : x, C = S === "xl" ? "lg" : S, w = i(), T = r ?? w;
+	function E(e) {
 		let t = String(new FormData(e.currentTarget).get(s) ?? "").trim();
 		if (d) {
 			e.preventDefault(), t && d(t);
@@ -17,16 +17,16 @@ var s = r(function({ id: r, name: s = "q", value: c, defaultValue: l, onChange: 
 		t || e.preventDefault();
 	}
 	return /* @__PURE__ */ o("form", {
-		className: ["search-form", x === "md" ? "" : `search-form--${x}`].filter(Boolean).join(" "),
+		className: ["search-form", S === "md" ? "" : `search-form--${S}`].filter(Boolean).join(" "),
 		role: "search",
 		"aria-label": m,
 		action: f,
 		method: p,
-		onSubmit: w,
+		onSubmit: E,
 		children: [/* @__PURE__ */ a(n, {
 			ref: b,
 			className: "search-form__field",
-			id: C,
+			id: T,
 			name: s,
 			label: m,
 			labelHidden: h,
@@ -37,7 +37,7 @@ var s = r(function({ id: r, name: s = "q", value: c, defaultValue: l, onChange: 
 			value: c,
 			defaultValue: l,
 			disabled: y,
-			size: x,
+			size: C,
 			onChange: u
 		}), /* @__PURE__ */ a("button", {
 			className: "search-form__submit",

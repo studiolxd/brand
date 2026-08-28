@@ -7,6 +7,36 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.19.0
+
+El buscador del menú del sitio tiene su propia talla, `xl`.
+
+### Añadido
+
+- **`SearchForm` acepta `size="xl"`.** Una talla propia de este componente —`InputField` y
+  `Button` conservan `sm|md|lg`— para el buscador del panel del menú de `SiteHeader`, que
+  ahí no es un campo más de un formulario sino una de las dos formas de recorrer el sitio.
+  Sube a la vez el alto del campo (64px), el cuerpo de letra (28px, la escala de **títulos
+  pequeños**, no la del cuerpo de texto), el aire horizontal y el glifo de la flecha (32px).
+- **Tokens `search-form.xl.*`**: `height`, `padding-inline`, `font-size`, `slot-size` e
+  `icon-size`, derivados de las escalas de espaciado (`spacing.6`, `spacing.8`) y tipografía
+  (`font-size.5`, `font-size.6`) del sistema, sin un solo valor duro.
+
+### Cambiado
+
+- **El buscador del panel del menú de `SiteHeader` pasa de `lg` a `xl`** en la story «En el
+  menú del sitio» y en la documentación.
+
+### Notas
+
+- `xl` **no viaja por el contexto de `Form`**: `useFormSize` sigue conociendo solo las tres
+  tallas de formulario, así que un `Form size="lg"` no vuelve `xl` a un buscador que tenga
+  dentro. Se pide a mano.
+- La composición no duplica el campo: `SearchForm` monta `InputField` en `lg` y, bajo
+  `.search-form--xl`, remapea las tres custom properties de talla que `Input` ya expone
+  (`--input-height`, `--input-padding-inline`, `--input-font-size`). Borde, foco, estado
+  deshabilitado y autorrelleno siguen siendo los del campo del sistema.
+
 ## v25.17.0
 
 Las listas de opciones desplegables recuperan el fondo en el resaltado.
