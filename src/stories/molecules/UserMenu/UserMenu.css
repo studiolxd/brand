@@ -141,10 +141,12 @@
     color var(--user-menu-transition-duration) var(--user-menu-transition-easing);
 }
 
-/* El ítem resaltado se rellena: excepción declarada de las listas de opciones
-   desplegables (Foundations → Colores). */
+/* El ítem resaltado se rellena con la inversión de marca: excepción declarada
+   de las listas de opciones desplegables (Foundations → Colores). El texto
+   invierte con el relleno; los iconos lo heredan por `currentColor`. */
 .user-menu__item[data-highlighted] {
   background-color: var(--user-menu-item-highlighted-bg);
+  color: var(--user-menu-item-highlighted-color);
 }
 
 .user-menu__item[data-disabled] {
@@ -155,6 +157,11 @@
 
 .user-menu__item.user-menu__item--destructive {
   color: var(--user-menu-item-destructive-color);
+}
+
+.user-menu__item.user-menu__item--destructive[data-highlighted] {
+  background-color: var(--user-menu-item-destructive-highlighted-bg);
+  color: var(--user-menu-item-destructive-highlighted-color);
 }
 
 /* ─── Separador ──────────────────────────────────────────── */

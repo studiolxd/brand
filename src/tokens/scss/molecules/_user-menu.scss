@@ -38,8 +38,11 @@ $lxd-user-menu-item-font-family: "Google Sans Flex", system-ui, sans-serif; // T
 $lxd-user-menu-item-font-size: 1rem; // Tamaño de texto de ítems
 $lxd-user-menu-item-font-weight: 300; // Peso de ítems
 $lxd-user-menu-item-color: #111e30; // Color de ítems
-$lxd-user-menu-item-highlighted-bg: #f2f2f2; // Relleno del ítem resaltado — el del Menu
+$lxd-user-menu-item-highlighted-bg: #111e30; // Relleno del ítem resaltado — el del Menu: la inversión de marca
+$lxd-user-menu-item-highlighted-color: #ffffff; // Texto del ítem resaltado — el del Menu
 $lxd-user-menu-item-destructive-color: #b30000; // Color de ítem destructivo
+$lxd-user-menu-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado — el del Menu
+$lxd-user-menu-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado — el del Menu
 $lxd-user-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
 $lxd-user-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
 $lxd-user-menu-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema

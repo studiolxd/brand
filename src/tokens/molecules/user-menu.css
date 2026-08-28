@@ -45,7 +45,10 @@
   --user-menu-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --user-menu-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --user-menu-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
-  --user-menu-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu */
+  --user-menu-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu: la inversión de marca */
+  --user-menu-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — el del Menu */
+  --user-menu-item-destructive-highlighted-bg: var(--menu-item-destructive-highlighted-bg); /** Relleno del ítem destructivo resaltado — el del Menu */
+  --user-menu-item-destructive-highlighted-color: var(--menu-item-destructive-highlighted-color); /** Texto del ítem destructivo resaltado — el del Menu */
   --user-menu-separator-color: var(--separator-color); /** Color del separador — el de la línea del sistema */
   --user-menu-separator-height: var(--separator-thickness); /** Alto del separador — el grosor de la línea del sistema */
 }
@@ -61,4 +64,7 @@ html.dark {
   --user-menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
   --user-menu-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
   --user-menu-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — surface-dark */
+  --user-menu-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — surface-dark */
+  --user-menu-item-destructive-highlighted-bg: var(--menu-item-destructive-highlighted-bg); /** Relleno del ítem destructivo resaltado — surface-dark */
+  --user-menu-item-destructive-highlighted-color: var(--menu-item-destructive-highlighted-color); /** Texto del ítem destructivo resaltado — surface-dark */
 }
