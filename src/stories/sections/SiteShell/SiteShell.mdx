@@ -37,6 +37,12 @@ No es una prop ni un tema: el marco vuelve a declarar los tokens de texto en su 
 
 Los componentes con talla propia (cabecera, pie, campos, botones, menús, calendarios) siguen sus tokens y no cambian aquí. Qué hereda y qué no, en Foundations → Tipografía.
 
+## Portada de referencia
+
+La página **solo apila secciones**: cabecera, portada, bandas y pie, uno detrás de otro, sin envolverlos en nada. Cada sección trae su aire —el vertical por sus tokens `space-block-*`, el lateral por su `Container` interior—, así que todas caen en la misma columna y miden lo mismo en cualquier web. Es la maqueta que se copia; la regla, en [Container → Las secciones traen su aire](?path=/docs/atoms-container--docs).
+
+<Canvas of={SiteShellStories.PortadaDeReferencia} />
+
 ## Cuándo no
 
 Las aplicaciones con barra y sidebar usan `AppShell`, que fija la altura a la pantalla y hace scroll dentro del contenido. `SiteShell` es lo contrario: el scroll es el del documento, como corresponde a una web.

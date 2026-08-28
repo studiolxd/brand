@@ -77,6 +77,18 @@ acordarse.
 La excepción es la que se necesita: dentro de una banda `flush` —una que llega al borde a
 propósito— la banda anidada **sí** conserva su aire, que es justo para lo que se anida ahí.
 
+## Las secciones traen su aire
+
+Es la regla de maqueta del sistema, y decide quién pone qué:
+
+1. **Las secciones traen su aire.** Una sección del sistema (`SiteHeader`, `Hero`, `Highlight`, `SiteFooter`, `LegalFooter`) se monta **a sangre**: su aire vertical es suyo, por tokens propios (`--hero-space-block-start`, `--site-footer-space-block-end`…, un peldaño menor en móvil), y el lateral lo pone su `Container` interior, siempre al mismo ancho. Así la misma sección se ve igual en cualquier web, sin depender de dónde se cuelgue.
+2. **La página solo las apila.** Cabecera, portada, bandas y pie, uno detrás de otro, sin envolverlos en nada. La maqueta de referencia es [SiteShell → Portada de referencia](?path=/docs/sections-siteshell--docs).
+3. **`Container space` es para contenido de artículo.** El `space` de la banda es para lo que escribe el producto —el cuerpo de una página legal, un formulario, un `main` con prosa—, no para envolver secciones que ya traen el suyo.
+
+Envolver una sección en un `Container space="…"` le **suma** el aire de la banda al propio y la deja más alta que la misma sección en otra web: es justo el descuadre que la regla evita. Si la sección ya vive dentro de una banda a sangre (`Container width="full" flush space="none"`), la geometría no cambia: es el mismo caso que estar suelta.
+
+<Canvas of={ContainerStories.SeccionASangre} />
+
 ## Elemento
 
 `as` elige la etiqueta: usa `header`, `footer`, `main`, `section` o `nav` según

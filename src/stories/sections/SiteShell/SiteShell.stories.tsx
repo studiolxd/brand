@@ -8,6 +8,10 @@ import { Container } from '../../atoms/Container/Container';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Alert } from '../../molecules/Alert/Alert';
+import { Hero } from '../Hero/Hero';
+import { Highlight } from '../Highlight/Highlight';
+import { SiteFooter } from '../SiteFooter/SiteFooter';
+import { Button } from '../../atoms/Button/Button';
 
 const indice = [{ id: 'sitio', label: 'Sitio', href: '#sitio', items: [{ id: 'inicio', label: 'Inicio', href: '#inicio' }, { id: 'precios', label: 'Precios', href: '#precios' }] }];
 const legal = [
@@ -106,5 +110,72 @@ export const ContratoTipografia: Story = {
     // El texto corriente de los componentes hereda el cuerpo de la superficie.
     await expect(px(canvas.getByText('Un aviso'))).toBe(20);
     await expect(px(canvas.getByText('Con su descripción.'))).toBe(20);
+  },
+};
+
+const columnasDelPie = [
+  { title: 'Producto', links: [{ label: 'Qué hacemos', href: '#producto' }, { label: 'Precios', href: '#precios' }] },
+  { title: 'Estudio', links: [{ label: 'Quiénes somos', href: '#estudio' }, { label: 'Contacto', href: '#contacto' }] },
+];
+
+/**
+ * La portada de referencia: cabecera, portada, dos bandas y pie, **apilados
+ * sin envoltorio**. Cada sección trae su propio aire —vertical y lateral—, así
+ * que la página solo las pone una detrás de otra. Es la maqueta que copian las
+ * webs del estudio; meter las secciones en un `Container space="…"` les suma
+ * un aire que no es suyo y las descuadra respecto a las de otra web.
+ */
+export const PortadaDeReferencia: Story = {
+  name: 'Portada de referencia',
+  args: {
+    footer: <SiteFooter tagline="Formación que se termina." columns={columnasDelPie} legal={<LegalFooter links={legal} width="full" />} />,
+    children: (
+      <main id="main-content" tabIndex={-1}>
+        <Hero
+          title="Aprender es lo primero"
+          description="La suite de Studio LXD para diseñar, impartir y gestionar formación: un solo acceso, una sola marca."
+          actions={<Button size="lg" href="#empezar">Empezar</Button>}
+        />
+        <Highlight
+          title="La formación que no se abandona a la semana"
+          description="Diseñamos itinerarios que la gente termina, con contenidos propios y una plataforma que no estorba."
+          actions={<Button size="lg" href="#contacto">Hablemos</Button>}
+        />
+        <Highlight
+          surface="light"
+          title="Y una suite que la sostiene"
+          description="Campus, catálogo, analítica y gestión: las mismas piezas, la misma marca, un solo acceso."
+        />
+      </main>
+    ),
+  },
+};
+
+export const ContratoPortada: Story = {
+  name: 'Test — las secciones apiladas caen en la misma columna',
+  tags: ['!dev'],
+  args: PortadaDeReferencia.args,
+  play: async ({ canvasElement }) => {
+    const columna = (selector: string) =>
+      canvasElement.querySelector(selector)!.getBoundingClientRect();
+
+    const barra = columna('.site-header__bar');
+    const portada = columna('.hero .container__inner');
+    const banda = columna('.highlight .container__inner');
+    const pie = columna('.site-footer__inner');
+
+    // Todas las secciones acotan su contenido en la misma columna, sin que la
+    // página ponga ningún envoltorio.
+    for (const caja of [portada, banda, pie]) {
+      await expect(Math.round(caja.left)).toBe(Math.round(barra.left));
+      await expect(Math.round(caja.width)).toBe(Math.round(barra.width));
+    }
+
+    // Y cada una trae su propio aire vertical.
+    for (const seccion of ['.hero', '.highlight', '.site-footer']) {
+      const aire = getComputedStyle(canvasElement.querySelector(seccion)!);
+      await expect(parseFloat(aire.paddingBlockStart)).toBeGreaterThan(0);
+      await expect(parseFloat(aire.paddingBlockEnd)).toBeGreaterThan(0);
+    }
   },
 };

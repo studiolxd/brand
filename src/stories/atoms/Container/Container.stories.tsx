@@ -168,3 +168,51 @@ export const ContratoAnidado: Story = {
     await expect(parseFloat(aire('dentro-de-flush'))).toBeGreaterThan(0);
   },
 };
+
+/**
+ * Una sección del sistema se monta a sangre: su aire vertical es suyo y el
+ * lateral lo pone su `Container` interior. Un `Container` anidado dentro de
+ * ella —para acotar un bloque o pintar una superficie— no repite ese aire.
+ */
+export const SeccionASangre: Story = {
+  name: 'Sección a sangre',
+  render: () => (
+    <section style={{ paddingBlock: 'var(--section-padding-block-2xl)' }} data-testid="seccion">
+      <Container data-testid="aire-de-la-seccion">
+        <Heading level={2}>Una sección con su propio aire</Heading>
+        <Paragraph>El vertical es de la sección; el lateral, de este Container.</Paragraph>
+        <Container surface="dark" space="md" width="lg" data-testid="anidado">
+          <Paragraph>Un bloque anidado: no repite el aire lateral.</Paragraph>
+        </Container>
+      </Container>
+    </section>
+  ),
+};
+
+/**
+ * Test: dentro de una sección a sangre, el `Container` interior pone el aire
+ * lateral una sola vez; el que se anide dentro de él sale a cero. Es el mismo
+ * contrato de anidamiento, con la sección de por medio.
+ */
+export const ContratoSeccionASangre: Story = {
+  name: 'Test — dentro de una sección a sangre el aire lateral no se duplica',
+  tags: ['!dev'],
+  render: SeccionASangre.render,
+  play: async ({ canvasElement }) => {
+    const aire = (testid: string) =>
+      getComputedStyle(canvasElement.querySelector(`[data-testid="${testid}"]`)!).paddingInlineStart;
+
+    // La sección no pone aire lateral: lo pone su Container interior…
+    await expect(aire('seccion')).toBe('0px');
+    await expect(parseFloat(aire('aire-de-la-seccion'))).toBeGreaterThan(0);
+    // …y una banda anidada dentro de él no lo repite.
+    await expect(aire('anidado')).toBe('0px');
+
+    // El contenido de la banda anidada cae en la misma columna que el resto.
+    const interior = (testid: string) =>
+      canvasElement.querySelector(`[data-testid="${testid}"] > .container__inner`)!.getBoundingClientRect();
+    await expect(Math.round(interior('anidado').left)).toBeGreaterThanOrEqual(
+      Math.round(interior('aire-de-la-seccion').left),
+    );
+  },
+};
