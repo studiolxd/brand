@@ -149,20 +149,20 @@
   color: var(--async-multi-select-color);
   cursor: pointer;
 
-  /* La opción resaltada no se rellena (regla de Colores): anillo del sistema. */
+  /* La opción bajo el puntero o el teclado se rellena: excepción declarada de
+     las listas de opciones desplegables (Foundations → Colores). */
   &:focus-visible,
   &:hover {
-    outline: var(--async-multi-select-item-focus-ring-width) solid var(--async-multi-select-item-focus-ring-color);
-    outline-offset: var(--async-multi-select-item-focus-ring-offset);
+    background-color: var(--async-multi-select-item-highlighted-bg);
   }
 
   &.async-multi-select__item--selected {
     font-weight: var(--async-multi-select-item-selected-font-weight);
   }
 
+  /* La opción que recorre el teclado (foco virtual): el mismo relleno. */
   &.async-multi-select__item--active {
-    outline: var(--async-multi-select-item-focus-ring-width) solid var(--async-multi-select-item-focus-ring-color);
-    outline-offset: var(--async-multi-select-item-focus-ring-offset);
+    background-color: var(--async-multi-select-item-highlighted-bg);
   }
 }
 

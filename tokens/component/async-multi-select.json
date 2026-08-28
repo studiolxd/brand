@@ -17,9 +17,7 @@
     "font-size":                   { "$value": "{multi-select.font-size}", "$type": "dimension", "$description": "Hereda de `multi-select.font-size`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "font-weight":                 { "$value": "{multi-select.font-weight}", "$type": "number", "$description": "Hereda de `multi-select.font-weight`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "height":                      { "$value": "{multi-select.height}", "$type": "dimension", "$description": "Hereda de `multi-select.height`: el buscador múltiple tiene la misma cara que el control síncrono" },
-    "item-focus-ring-color":       { "$value": "{multi-select.item-focus-ring-color}", "$type": "color", "$description": "Hereda de `multi-select.item-focus-ring-color`: el buscador múltiple tiene la misma cara que el control síncrono" },
-    "item-focus-ring-offset":      { "$value": "{multi-select.item-focus-ring-offset}", "$type": "dimension", "$description": "Hereda de `multi-select.item-focus-ring-offset`: el buscador múltiple tiene la misma cara que el control síncrono" },
-    "item-focus-ring-width":       { "$value": "{multi-select.item-focus-ring-width}", "$type": "dimension", "$description": "Hereda de `multi-select.item-focus-ring-width`: el buscador múltiple tiene la misma cara que el control síncrono" },
+    "item-highlighted-bg":         { "$value": "{multi-select.item-highlighted-bg}", "$type": "color", "$description": "Hereda de `multi-select.item-highlighted-bg`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "item-padding-block":          { "$value": "{multi-select.item-padding-block}", "$type": "dimension", "$description": "Hereda de `multi-select.item-padding-block`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "lg-font-size":                { "$value": "{multi-select.lg-font-size}", "$type": "dimension", "$description": "Hereda de `multi-select.lg-font-size`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "lg-height":                   { "$value": "{multi-select.lg-height}", "$type": "dimension", "$description": "Hereda de `multi-select.lg-height`: el buscador múltiple tiene la misma cara que el control síncrono" },
@@ -48,6 +46,7 @@
     "empty-font-family":           { "$value": "{multi-select.font-family}", "$type": "string", "$description": "Tipografía del mensaje de lista vacía" },
     "empty-font-size":             { "$value": "{multi-select.font-size}", "$type": "dimension", "$description": "Tamaño del mensaje de lista vacía" },
     "empty-color":                 { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Tinta del mensaje de lista vacía: es texto secundario, no un valor" },
-    "surface-dark-empty-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta del mensaje de lista vacía — surface-dark" }
+    "surface-dark-empty-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta del mensaje de lista vacía — surface-dark" },
+    "surface-dark-item-highlighted-bg": { "$value": "{multi-select.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" }
   }
 }
