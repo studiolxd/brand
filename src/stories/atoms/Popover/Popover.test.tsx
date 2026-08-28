@@ -28,10 +28,17 @@ describe('Popover', () => {
       </Popover>,
     );
     await user.click(screen.getByRole('button', { name: 'Abrir' }));
-    expect(onOpenChange).toHaveBeenLastCalledWith(true);
+    // El segundo argumento es el detalle de Base UI: por qué pasa y cómo cancelarlo.
+    expect(onOpenChange).toHaveBeenLastCalledWith(
+      true,
+      expect.objectContaining({ reason: 'trigger-press' }),
+    );
 
     await user.keyboard('{Escape}');
-    expect(onOpenChange).toHaveBeenLastCalledWith(false);
+    expect(onOpenChange).toHaveBeenLastCalledWith(
+      false,
+      expect.objectContaining({ reason: 'escape-key' }),
+    );
   });
 
   it('en modo controlado el panel obedece a `open`, no a la pulsación', async () => {
@@ -44,6 +51,9 @@ describe('Popover', () => {
     );
     await user.click(screen.getByRole('button', { name: 'Abrir' }));
     expect(screen.queryByRole('dialog')).toBeNull();
-    expect(onOpenChange).toHaveBeenCalledWith(true);
+    expect(onOpenChange).toHaveBeenCalledWith(
+      true,
+      expect.objectContaining({ reason: 'trigger-press' }),
+    );
   });
 });
