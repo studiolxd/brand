@@ -38,6 +38,10 @@ Por debajo de `--breakpoint-lg` —el mismo punto en el que el chrome de aplicac
 
 Es una decisión de maqueta, sin JavaScript ni estado: `ChatShell` no monta un cajón lateral porque el sistema ya tiene uno, el del `Sidebar`. Un chat de móvil que necesite la lista a pantalla completa se monta dentro de un `AppShell` y usa ese cajón.
 
+## El hilo vive siempre aquí
+
+Un hilo de chat se monta **siempre** dentro de `ChatShell` —directamente sobre el fondo del sistema—, nunca sobre `Card` ni otra superficie propia: es una regla del producto, no una preferencia. `MessageBubble` vacía la cola de su globo con `tail-fill`, que apunta al fondo del sistema porque el sistema no tiene forma de leer en tiempo de ejecución el fondo real del contenedor; montar un hilo sobre una superficie distinta deja la cola con un triángulo relleno de blanco en vez de contorno. Ver **Atoms › MessageBubble → «El globo es contorno, no relleno»**.
+
 ## Superficie oscura
 
 <Canvas of={ChatShellStories.SuperficieOscura} />

@@ -35,11 +35,15 @@ Como el globo no tiene relleno, la cola tampoco puede tenerlo: es **puro contorn
 
 El tamaño sale de `tail-size` (una referencia a la escala de espaciado), y el desplazamiento del triángulo interior de `√2 × border-width`, que es lo que mide un borde de 1px medido en perpendicular a una diagonal de 45°.
 
-`tail-fill` es **el color de la superficie de detrás, no un color del globo**. Si el hilo vive sobre una superficie que no es el fondo del sistema, hay que repuntarlo ahí; si no, la cola se ve rellena de blanco sobre esa superficie.
+`tail-fill` es **el color de la superficie de detrás, no un color del globo**. Es lo que interrumpe el contorno donde nace la cola y la deja en puro contorno: si el hilo vive sobre una superficie que no es el fondo del sistema, hay que repuntarlo ahí, o la cola se ve rellena de blanco sobre esa superficie.
+
+<Canvas of={MessageBubbleStories.EnElShell} />
+
+Por eso **un hilo vive siempre en el shell —el fondo del sistema, `ChatShell`— y nunca sobre `Card` ni otra superficie propia**: es una regla del producto, no una limitación técnica que se pueda esquivar con un token. El sistema no tiene forma de que un componente lea el fondo real de su contenedor en tiempo de ejecución, así que `tail-fill` siempre apunta al fondo del sistema (`color.background.light|dark`) y da por hecho que ahí es donde vive el globo.
 
 <Canvas of={MessageBubbleStories.MensajeLargo} />
 
-El globo no crece más de `max-width` (75% del hilo), así que un mensaje largo rompe línea en vez de comerse el ancho completo y perder la alineación que distingue al emisor.
+El globo no crece más de `max-width` (75% del hilo), así que un mensaje largo rompe línea en vez de comerse el ancho completo y perder la alineación que distingue al emisor. El valor cascada desde `chat.bubble-max-width`: es una medida del hilo, compartida por toda la familia de chat, no del globo en solitario.
 
 ## Superficie oscura
 

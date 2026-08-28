@@ -79,6 +79,24 @@ export const SuperficieOscura: Story = {
   ),
 };
 
+/**
+ * `tail-fill` es el color de la superficie que hay detrás del globo, no un
+ * color del globo — vacía el triángulo de la cola. Un hilo vive **siempre**
+ * sobre el fondo del sistema (el shell de la aplicación, `ChatShell`), nunca
+ * sobre `Card` ni otra superficie propia: si lo hiciera, `tail-fill` seguiría
+ * apuntando al fondo del sistema y la cola se vería rellena. Esta story es la
+ * referencia de la única superficie válida.
+ */
+export const EnElShell: Story = {
+  name: 'En el shell',
+  render: () => (
+    <>
+      <MessageBubble role="assistant">Hola, ¿en qué puedo ayudarte hoy?</MessageBubble>
+      <MessageBubble role="user">Necesito ayuda con mi proyecto.</MessageBubble>
+    </>
+  ),
+};
+
 /** Test: el globo no pinta relleno y sí contorno en las dos superficies. */
 export const ContratoSinRelleno: Story = {
   name: 'Test — el globo es contorno, no relleno',
