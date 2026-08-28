@@ -69,6 +69,33 @@ export const WithLink: Story = {
   },
 };
 
+/**
+ * `labelHidden` esconde el texto de la opción **a la vista**, no al lector de
+ * pantalla: la marca conserva su nombre. Para una casilla de fila de tabla,
+ * donde el rótulo lo da la columna.
+ */
+export const EtiquetaOculta: Story = {
+  name: 'Etiqueta oculta',
+  args: { label: 'Seleccionar la fila «Factura 2026-014»', labelHidden: true },
+};
+
+/** Test: con `labelHidden` la marca sigue teniendo nombre y el texto no ocupa sitio. */
+export const ContratoEtiquetaOculta: Story = {
+  name: 'Test — labelHidden esconde el texto, no el nombre',
+  tags: ['!dev'],
+  args: { label: 'Seleccionar la fila', labelHidden: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const control = canvas.getByRole('checkbox', { name: 'Seleccionar la fila' });
+    await expect(control).toBeInTheDocument();
+
+    const texto = canvas.getByText('Seleccionar la fila');
+    await expect(texto).toHaveClass('visually-hidden', 'checkbox-field__label');
+    // Oculto de verdad: no ocupa sitio en la fila.
+    await expect(texto.getBoundingClientRect().width).toBeLessThanOrEqual(1);
+  },
+};
+
 export const ConAyuda: Story = {
   args: { helperText: 'Puedes retirar tu consentimiento cuando quieras.' },
 };

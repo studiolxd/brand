@@ -2,10 +2,19 @@ import { forwardRef, useId, type ReactNode } from 'react';
 import './CheckboxField.css';
 import { useFormSize } from '../../constants/form-size';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 
 export interface CheckboxFieldProps {
   /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
   label: ReactNode;
+  /**
+   * Oculta el texto de la opción **visualmente**, sin quitarlo del árbol de
+   * accesibilidad: la marca conserva su nombre. Para una casilla dentro de una
+   * tabla o de una barra de acciones, donde el rótulo lo da la columna. Misma
+   * prop que en `InputField`, `TextareaField`, `SelectField` y `FileUploadField`.
+   * Default: `false`.
+   */
+  labelHidden?: boolean;
   checked?: boolean;
   defaultChecked?: boolean;
   disabled?: boolean;
@@ -34,6 +43,7 @@ export interface CheckboxFieldProps {
  */
 export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(function CheckboxField({
   label,
+  labelHidden = false,
   checked,
   defaultChecked,
   disabled,
@@ -81,7 +91,9 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
           onCheckedChange={onCheckedChange}
           onBlur={onBlur}
         />
-        <span className="checkbox-field__label">{label}</span>
+        {labelHidden
+          ? <VisuallyHidden className="checkbox-field__label">{label}</VisuallyHidden>
+          : <span className="checkbox-field__label">{label}</span>}
       </label>
       {errorMessage && (
         <span id={errorId} className="checkbox-field__error" role="alert">{errorMessage}</span>

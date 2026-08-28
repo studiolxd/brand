@@ -33,6 +33,19 @@ El prop `label` acepta `React.ReactNode`, por lo que puede incluir un `<Link>` p
 
 <Canvas of={CheckboxFieldStories.WithLink} />
 
+## Etiqueta oculta
+
+`labelHidden` esconde el texto de la opción **a la vista**, no al árbol de accesibilidad: la marca
+conserva su nombre accesible. Es para la casilla que vive dentro de una tabla o de una barra de
+acciones, donde el rótulo ya lo da la columna y repetirlo al lado ensuciaría la fila.
+
+Es la misma prop que ya tenían `InputField`, `TextareaField`, `SelectField` y `FileUploadField`.
+
+<Canvas of={CheckboxFieldStories.EtiquetaOculta} />
+
+Ocultar la etiqueta no es lo mismo que no ponerla: sin `label` la casilla se queda sin nombre y un
+lector de pantalla solo puede anunciar «casilla».
+
 ## Ayuda y error
 
 `helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`. El error se marca en el borde de la casilla, en el color de texto de error.
