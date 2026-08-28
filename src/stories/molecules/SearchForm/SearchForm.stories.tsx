@@ -40,6 +40,7 @@ export const Tallas: Story = {
       <SearchForm {...args} id="search-sm" size="sm" />
       <SearchForm {...args} id="search-md" size="md" />
       <SearchForm {...args} id="search-lg" size="lg" />
+      <SearchForm {...args} id="search-xl" size="xl" />
     </Stack>
   ),
 };
@@ -58,11 +59,11 @@ export const AnchuraAcotada: Story = {
   ),
 };
 
-/** Su sitio real: el panel del menú del sitio, sobre superficie oscura. */
+/** Su sitio real: el panel del menú del sitio, a talla `xl` y sobre superficie oscura. */
 export const EnElPanelDelMenu: Story = {
   name: 'En el panel del menú',
   parameters: { surface: 'dark' },
-  args: { onSubmit: fn() },
+  args: { size: 'xl', onSubmit: fn() },
 };
 
 /**
@@ -149,6 +150,37 @@ export const TestTallaLg: Story = {
     await expect(lg.alto).toBeGreaterThan(md.alto);
     await expect(lg.letra).toBeGreaterThan(md.letra);
     await expect(lg.glifo).toBeGreaterThan(md.glifo);
+  },
+};
+
+export const TestTallaXl: Story = {
+  name: 'Test — la talla xl es mayor que lg en alto y en letra',
+  tags: ['!dev'],
+  args: { onSubmit: fn() },
+  render: (args) => (
+    <Stack gap="md">
+      <SearchForm {...args} id="talla-lg" size="lg" label="Buscar lg" />
+      <SearchForm {...args} id="talla-xl" size="xl" label="Buscar xl" />
+    </Stack>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const medida = (id: string) => {
+      const input = canvas.getByRole('textbox', { name: `Buscar ${id}` });
+      const glifo = canvasElement.querySelector(`#talla-${id}`)!
+        .closest('.search-form')!.querySelector('.search-form__submit-glyph')!;
+      return {
+        alto: input.getBoundingClientRect().height,
+        letra: parseFloat(getComputedStyle(input).fontSize),
+        glifo: glifo.getBoundingClientRect().height,
+      };
+    };
+    const lg = medida('lg');
+    const xl = medida('xl');
+
+    await expect(xl.alto).toBeGreaterThan(lg.alto);
+    await expect(xl.letra).toBeGreaterThan(lg.letra);
+    await expect(xl.glifo).toBeGreaterThan(lg.glifo);
   },
 };
 
