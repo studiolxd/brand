@@ -88,7 +88,7 @@ No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es 
 
 Los roles que consumen los componentes para lo básico: qué color tiene el texto y el lienzo en cada superficie. Incluye también los dos roles de **superficie** que dan nombre a `grey-lightest` y `grey-darkest` cuando se usan como fondo (no como estado):
 
-- **Superficie secundaria** (`surface.secondary-on-light|dark`) — una superficie clara secundaria dentro de la página: bloque de código, keycap, carril de progreso, pie de tabla. En superficie oscura pasa al gris oscuro (`grey-darkest`); no es un fondo de estado (hover/activo/deshabilitado), que sigue sin rol propio.
+- **Superficie secundaria** (`surface.secondary-on-light|dark`) — una superficie clara secundaria dentro de la página: bloque de código, keycap, carril de progreso, pie de tabla. En superficie oscura pasa al gris oscuro (`grey-darkest`). Es también el relleno del resaltado en las listas de opciones desplegables, la única excepción de estado que se rellena fuera de `Button` (más abajo); el resto de los estados (hover, activo, deshabilitado) sigue sin fondo.
 - **Superficie invertida** (`surface.inverse-on-light|dark`) — un relleno que invierte la tinta ambiente: el neutral oscuro de `Tag` variante `neutral`.
 
 <ColorPalette>
@@ -105,17 +105,17 @@ En su lugar, tres grafismos, siempre en tinta: prusia sobre claro, blanco sobre 
 
 | Estado | Grafismo | Cómo se dibuja |
 |---|---|---|
-| **Foco** — teclado, y el foco virtual (`[data-highlighted]`) de menús, selects y paletas | El anillo del sistema | `outline: var(--border-width-focus) solid <tinta>` con su `outline-offset` |
+| **Foco** — teclado, sobre un control (campo, botón, disparador) | El anillo del sistema | `outline: var(--border-width-focus) solid <tinta>` con su `outline-offset` |
 | **Hover** — puntero | Línea de tinta bajo el elemento (el mismo grafismo que el subrayado de `Link`); o, si la tinta en reposo está apagada, subirla a tinta plena | `box-shadow: inset 0 calc(-1 * <línea>) 0 0 <tinta>` |
 | **Activo / actual** — persistente: la sección abierta, la app en la que estás, la fila elegida | Barra de tinta en el borde de inicio, y peso `emphasis` | `box-shadow: inset <barra> 0 0 <tinta>` |
 
 Los tres se apilan sin pelearse: una sección activa bajo el puntero conserva su barra y suma su línea.
 
 ```css
-/* Ítem de menú resaltado: anillo, no fondo */
-.menu__item[data-highlighted] {
-  outline: var(--menu-item-focus-ring-width) solid var(--menu-item-focus-ring-color);
-  outline-offset: var(--menu-item-focus-ring-offset);
+/* Control enfocado por teclado: anillo, no fondo */
+.select:focus-visible {
+  outline: var(--select-focus-ring-width) solid var(--select-focus-ring-color);
+  outline-offset: calc(-1 * (var(--select-focus-ring-width) + var(--select-border-width)));
 }
 
 /* Ítem de navegación bajo el puntero: línea, no fondo */
@@ -129,9 +129,9 @@ Los tres se apilan sin pelearse: una sección activa bajo el puntero conserva su
 }
 ```
 
-Consecuencia en los tokens: **no existen `*-hover-bg` ni `*-active-bg` fuera de `Button`.** Un componente que necesite señalar un estado declara `*-hover-line-*`, `*-active-marker-*` o `*-focus-ring-*`, y ninguno de ellos necesita un token de texto que lo acompañe: la tinta no cambia de bando.
+Consecuencia en los tokens: **no existen `*-hover-bg` ni `*-active-bg`, y `*-highlighted-bg` solo en las listas de opciones desplegables** (más abajo). Un componente que necesite señalar un estado declara `*-hover-line-*`, `*-active-marker-*` o `*-focus-ring-*`, y ninguno de ellos necesita un token de texto que lo acompañe: la tinta no cambia de bando.
 
-### Las dos excepciones, y no hay más
+### Las tres excepciones, y no hay más
 
 **1. `Button`.** El relleno es el lenguaje de sus variantes: `primary`, `outline` y `destructive` ya tienen fondo (o borde de color) en reposo, y su hover **mueve** ese relleno, no lo estrena. Eso no es pintar un estado, es cambiar de tono dentro de una identidad que ya estaba ahí, y se queda como está. `ghost` es el caso aparte dentro del caso aparte: parte transparente y **sí** gana una tinta suave bajo el puntero, porque vive en cabeceras y barras densas donde una línea no basta para marcar el blanco de un icono.
 
@@ -141,9 +141,22 @@ Ningún otro componente puede invocar esta excepción. Si algo que no es un `But
 
 La pregunta que separa los dos casos: *si el usuario cierra los ojos y los abre, ¿esto sigue pintado?* Si la respuesta depende de dónde tenga el ratón, es un estado.
 
+**3. Las listas de opciones desplegables se rellenan.** En un menú, un select o una paleta, la opción bajo el puntero o resaltada por el teclado (`[data-highlighted]`) **sí** pinta un fondo suave: la superficie secundaria del sistema (`surface.secondary-on-light`, y su par `-on-dark` por la regla de derivación), declarada por componente como `*-highlighted-bg`. Sin línea de hover: el relleno la sustituye, no la acompaña.
+
+El porqué son dos razones que solo se juntan aquí:
+
+- **Densidad.** Las filas de un desplegable se tocan, sin aire entre ellas y dentro de un panel pequeño. Un anillo del grosor del sistema pegado a la fila de arriba y a la de abajo se lee como un borde de la lista, no como una marca de posición; y una línea inferior se confunde con el separador entre opciones.
+- **Lectura por teclado.** En estas listas el foco es **virtual** (`aria-activedescendant`): el foco real no se mueve, así que lo que recorre la lista con las flechas no es «el elemento enfocado» sino «el elemento resaltado», y va rápido. El relleno es la única señal que se sigue de un vistazo a esa velocidad, sin tener que fijar la vista en un contorno de un píxel.
+
+El ámbito es cerrado — los popups de opciones sobre Base UI: `Menu` (y con él `ContextMenu`, `DropdownField`, `LanguageSwitcher` y `ThemeSwitcher` cuando despliegan), `UserMenu`, `OrgSwitcher`, `AppLauncher`, `CommandPalette`, `Select` (y `TimeSelect`), `MultiSelect`, `AsyncSelect`, `AsyncMultiSelect`, la lista de países de `InputPhone` y la de resultados de `DocsSearch`.
+
+Fuera de él no vale, y estos siguen con línea o barra aunque se les parezcan: `Table`, `Tabs`, `Pagination`, `SidebarNav`, `Calendar`, `CalendarPlanner`, `ConversationList`, `NumberInput` y `Link`. No son listas de opciones desplegables: viven en la página, con su propio aire, y su foco es real.
+
+El valor ya elegido no cambia: sigue marcándose con su peso o su marca (la excepción 2), y se distingue del resaltado porque no depende de dónde esté el ratón.
+
 ### Lo que ya no vale
 
-El gris claro (`grey-lightest`) **no es el fondo de hover ni de activo**. Fuera de los estados es una superficie clara secundaria —bloque de código, keycap, carril de progreso, pie de tabla— con su propio rol (`surface.secondary-on-light|dark`).
+El gris claro (`grey-lightest`) **no es el fondo de hover ni de activo**. Es una superficie clara secundaria —bloque de código, keycap, carril de progreso, pie de tabla— con su propio rol (`surface.secondary-on-light|dark`), y es ese rol, nunca el gris cableado, el que rellena el resaltado de las listas de opciones desplegables. Fuera de esa excepción no marca estados.
 
 Se queda como fondo de un **control deshabilitado** (`input`, `textarea`, `button`): un control apagado no está reaccionando a nada, es una superficie muerta, y ahí el gris dice justo eso. Los ítems, filas y celdas que no son controles usan la opacidad (`--opacity-disabled`).
 
