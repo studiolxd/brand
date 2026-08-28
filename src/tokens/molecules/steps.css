@@ -1,0 +1,19 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --steps-column-min-size: 12rem; /** Ancho mínimo de una columna en horizontal: por debajo, los pasos se apilan */
+  --steps-gap: var(--spacing-5); /** Aire entre pasos */
+  --steps-marker-gap: var(--spacing-4); /** Aire entre el número y el texto del paso */
+  --steps-body-gap: var(--spacing-2); /** Aire entre el título del paso y su descripción */
+  --steps-title-gap: var(--spacing-2); /** Aire entre el icono y el título del paso */
+  --steps-connector-color: var(--color-primary); /** Línea que une un paso con el siguiente. Es una línea de separación, con el mismo prusia que `Separator` */
+  --steps-connector-thickness: var(--border-width-default); /** Grosor de la línea que une los pasos. Todo borde del sistema mide lo mismo */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --steps-connector-color: var(--color-text-on-dark); /** Línea entre pasos — surface-dark */
+}

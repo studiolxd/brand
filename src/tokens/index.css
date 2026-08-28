@@ -74,6 +74,7 @@
 @import "./molecules/carousel.css";
 @import "./molecules/table.css";
 @import "./molecules/data-table.css";
+@import "./molecules/steps.css";
 @import "./components/sidebar.css";
 @import "./molecules/org-switcher.css";
 @import "./molecules/app-launcher.css";

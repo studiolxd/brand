@@ -1,0 +1,15 @@
+{
+  "steps": {
+    "gap":              { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre pasos" },
+    "marker-gap":       { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre el número y el texto del paso" },
+    "body-gap":         { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre el título del paso y su descripción" },
+    "title-gap":        { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre el icono y el título del paso" },
+
+    "connector-color":     { "$value": "{color.primary}",        "$type": "color",     "$description": "Línea que une un paso con el siguiente. Es una línea de separación, con el mismo prusia que `Separator`" },
+    "connector-thickness": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea que une los pasos. Todo borde del sistema mide lo mismo" },
+
+    "column-min-size":  { "$value": "12rem", "$type": "dimension", "$description": "Ancho mínimo de una columna en horizontal: por debajo, los pasos se apilan" },
+
+    "surface-dark-connector-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea entre pasos — surface-dark" }
+  }
+}

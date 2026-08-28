@@ -1,0 +1,44 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as StepsStories from "./Steps.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { stepsTokens, stepsDarkTokens } from "../../../tokens/molecules/steps";
+
+<Meta of={StepsStories} />
+
+# Steps
+
+Un proceso numerado: los pasos de una metodología, de un alta, de una matrícula. Cada paso tiene título, y si hace falta una descripción y un icono del catálogo del sistema.
+
+<Canvas of={StepsStories.PorDefecto} />
+
+## Es una lista ordenada
+
+`Steps` pinta un `<ol>` de verdad, no una rejilla de tarjetas: el lector de pantalla anuncia cuántos pasos hay y en qué orden va cada uno sin que nadie lo escriba. Por eso el número que se ve —un `NumberBadge`— va marcado como **decorativo** (`aria-hidden`): repetir «1» en voz alta después de «elemento 1 de 4» sobra.
+
+El título de cada paso es un `Heading` de verdad, con el nivel y la talla por separado: `titleLevel` dice de dónde cuelga el paso en el esquema del documento (por defecto `3`, colgando del `h2` de la sección), y `titleSize` cómo se ve (por defecto `4`, 20px).
+
+## Vertical y horizontal
+
+En vertical, el número va a la izquierda y la línea baja hasta el siguiente. En horizontal, el número va encima del texto y la línea cruza entre columnas; las columnas se reparten con `auto-fit` a partir de `--steps-column-min-size`, así que en una pantalla estrecha los pasos se apilan solos.
+
+<Canvas of={StepsStories.Horizontal} />
+<Canvas of={StepsStories.SoloTitulos} />
+<Canvas of={StepsStories.SinIconos} />
+
+## Sobre superficie oscura
+
+Solo la línea que une los pasos tiene par oscuro propio; el número lo resuelve `NumberBadge` y el texto, la superficie.
+
+<Canvas of={StepsStories.EnSuperficieOscura} />
+
+## Tokens
+
+<TokenTable tokens={stepsTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={stepsDarkTokens} />
+
+## Props
+
+<ArgTypes of={StepsStories} />

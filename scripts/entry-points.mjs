@@ -60,6 +60,7 @@ export const entryPoints = {
   'context-menu':        'src/stories/molecules/ContextMenu/ContextMenu.tsx',
   'card':                'src/stories/molecules/Card/Card.tsx',
   'carousel':            'src/stories/molecules/Carousel/Carousel.tsx',
+  'steps':               'src/stories/organisms/Steps/Steps.tsx',
   'code-block':          'src/stories/molecules/CodeBlock/CodeBlock.tsx',
   'checkbox-field':      'src/stories/molecules/CheckboxField/CheckboxField.tsx',
   'radio-field':         'src/stories/molecules/RadioField/RadioField.tsx',

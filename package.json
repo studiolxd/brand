@@ -92,6 +92,10 @@
       "types": "./dist/_types/molecules/Carousel/Carousel.d.ts",
       "import": "./dist/carousel.js"
     },
+    "./steps": {
+      "types": "./dist/_types/organisms/Steps/Steps.d.ts",
+      "import": "./dist/steps.js"
+    },
     "./code-block": {
       "types": "./dist/_types/molecules/CodeBlock/CodeBlock.d.ts",
       "import": "./dist/code-block.js"

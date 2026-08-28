@@ -1,0 +1,75 @@
+/* Proceso numerado. La lista es un `ol` sin marcas propias: el número lo pinta
+   el `NumberBadge`, y la numeración semántica la sigue poniendo el elemento. */
+.steps {
+  display: grid;
+  gap: var(--steps-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps--horizontal {
+  grid-template-columns: repeat(auto-fit, minmax(var(--steps-column-min-size), 1fr));
+}
+
+.steps__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--steps-marker-gap);
+  align-items: stretch;
+}
+
+/* En fila, el número va encima del texto: la columna es estrecha y el paso se
+   lee de arriba abajo. */
+.steps--horizontal .steps__item {
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.steps__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.steps--horizontal .steps__marker {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* La línea que une un paso con el siguiente crece con el espacio que le queda
+   al marcador —que se estira a la altura del paso— y se mete en el hueco de la
+   lista con un margen negativo, para llegar al número siguiente. El último
+   paso no la lleva. */
+.steps__item:not(:last-child) .steps__marker::after {
+  content: '';
+  flex: 1 1 auto;
+  background-color: var(--steps-connector-color);
+}
+
+.steps--vertical .steps__item:not(:last-child) .steps__marker::after {
+  inline-size: var(--steps-connector-thickness);
+  margin-block: var(--steps-body-gap) calc(-1 * var(--steps-gap));
+}
+
+.steps--horizontal .steps__item:not(:last-child) .steps__marker::after {
+  block-size: var(--steps-connector-thickness);
+  margin-inline: var(--steps-body-gap) calc(-1 * var(--steps-gap));
+}
+
+.steps__body {
+  display: grid;
+  gap: var(--steps-body-gap);
+  align-content: start;
+}
+
+.steps .steps__title {
+  display: flex;
+  align-items: center;
+  gap: var(--steps-title-gap);
+  margin: 0;
+}
+
+.steps .steps__description {
+  margin: 0;
+}
