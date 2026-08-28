@@ -118,7 +118,15 @@ export const TestClic: Story = {
     const [ultimo, setUltimo] = useState('');
     return (
       <>
-        <TableOfContents {...args} onItemClick={(item) => setUltimo(item.id)} />
+        <TableOfContents
+          {...args}
+          onItemClick={(item, event) => {
+            // El consumidor típico se queda el clic para desplazar suave; aquí
+            // además evita que el navegador siga el ancla dentro del test.
+            event.preventDefault();
+            setUltimo(item.id);
+          }}
+        />
         <p data-testid="ultimo">{ultimo}</p>
       </>
     );
@@ -127,5 +135,22 @@ export const TestClic: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('link', { name: 'Versionado' }));
     await expect(canvas.getByTestId('ultimo')).toHaveTextContent('versionado');
+  },
+};
+
+export const ContratoPassthrough: Story = {
+  name: 'Test — el nav reenvía id, data-* y aria-*',
+  tags: ['!dev'],
+  args: { items },
+  render: (args) => (
+    <TableOfContents {...args} id="indice" data-zona="lateral" aria-describedby="pista" />
+  ),
+  play: async ({ canvasElement }) => {
+    const nav = canvasElement.querySelector('nav.table-of-contents')!;
+    await expect(nav).toHaveAttribute('id', 'indice');
+    await expect(nav).toHaveAttribute('data-zona', 'lateral');
+    await expect(nav).toHaveAttribute('aria-describedby', 'pista');
+    // el nombre accesible sigue saliendo de `ariaLabel`
+    await expect(nav).toHaveAttribute('aria-label', 'En esta página');
   },
 };
