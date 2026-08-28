@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "25.11.1",
+  "version": "25.11.2",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -111,6 +111,30 @@
     "./steps": {
       "types": "./dist/_types/organisms/Steps/Steps.d.ts",
       "import": "./dist/steps.js"
+    },
+    "./prose": {
+      "types": "./dist/_types/molecules/Prose/Prose.d.ts",
+      "import": "./dist/prose.js"
+    },
+    "./table-of-contents": {
+      "types": "./dist/_types/molecules/TableOfContents/TableOfContents.d.ts",
+      "import": "./dist/table-of-contents.js"
+    },
+    "./docs-search": {
+      "types": "./dist/_types/molecules/DocsSearch/DocsSearch.d.ts",
+      "import": "./dist/docs-search.js"
+    },
+    "./stat-tile": {
+      "types": "./dist/_types/molecules/StatTile/StatTile.d.ts",
+      "import": "./dist/stat-tile.js"
+    },
+    "./copy-button": {
+      "types": "./dist/_types/molecules/CopyButton/CopyButton.d.ts",
+      "import": "./dist/copy-button.js"
+    },
+    "./confirm-dialog": {
+      "types": "./dist/_types/molecules/ConfirmDialog/ConfirmDialog.d.ts",
+      "import": "./dist/confirm-dialog.js"
     },
     "./code-block": {
       "types": "./dist/_types/molecules/CodeBlock/CodeBlock.d.ts",

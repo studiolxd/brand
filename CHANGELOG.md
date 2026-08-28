@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.11.2
+
+### Corregido
+
+- **Empaquetado** — seis componentes construidos en `dist/` desde v25.11.0 no
+  tenían su subruta en `exports` de `package.json`, así que eran inalcanzables
+  para los consumidores aunque el CHANGELOG los anunciara como públicos:
+  `./prose`, `./table-of-contents`, `./docs-search`, `./stat-tile`,
+  `./copy-button` y `./confirm-dialog`. `scripts/entry-points.mjs` sí los
+  construía y sus `dist/_types` existían. Añadidas las seis subrutas; el
+  `exports` vuelve a cubrir todos los puntos de entrada.
+
 ## v25.11.1
 
 ### Corregido
