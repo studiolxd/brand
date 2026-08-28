@@ -6,6 +6,12 @@ $lxd-prev-next-nav-font-size: 1rem; // La variante md hereda el cuerpo de la sup
 $lxd-prev-next-nav-sm-font-size: 0.875rem; // 14px — UI label (variante sm)
 $lxd-prev-next-nav-gap: 0.75rem; // Gap entre botones y label — variante md
 $lxd-prev-next-nav-sm-gap: 0.5rem; // Gap entre botones y label — variante sm
+$lxd-prev-next-nav-eyebrow-font-size: 0.875rem; // Rótulo «Anterior»/«Siguiente» sobre el título del destino
+$lxd-prev-next-nav-eyebrow-color: #4a4a4a; // Color del rótulo de dirección
+$lxd-prev-next-nav-title-font-weight: 500; // Peso del título del destino
+$lxd-prev-next-nav-title-color: #111e30; // Color del título del destino
+$lxd-prev-next-nav-title-hover-color: #111e30; // Color del título del destino en hover
+$lxd-prev-next-nav-text-gap: 0.25rem; // Aire entre el rótulo de dirección y el título
 $lxd-prev-next-nav-label-font-weight: 500; // Peso tipográfico del label central
 $lxd-prev-next-nav-label-color: #111e30; // Color del label central
 $lxd-prev-next-nav-btn-color: #111e30; // Color de los botones de navegación

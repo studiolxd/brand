@@ -32,6 +32,19 @@ y el final de la serie, sin quitar el control de sitio.
 
 <Canvas of={PrevNextNavStories.SinSiguiente} />
 
+## Títulos de destino
+
+Un chevron solo no dice a dónde lleva. Con `prevTitle`/`nextTitle` el control enseña el título del
+destino, y `prevLabel`/`nextLabel` —que sin título eran el `aria-label`— pasan a ser el **rótulo
+visible** que lo encabeza: «Anterior · Instalación». Es el pie de una página de documentación.
+
+<Canvas of={PrevNextNavStories.ConTitulos} />
+
+Con títulos, `label` (el rótulo central de periodo) sobra y se puede omitir: el paginador se
+estira a los extremos. Los extremos de la serie siguen deshabilitándose igual.
+
+<Canvas of={PrevNextNavStories.ConTitulosSinSiguiente} />
+
 ## Tamaños
 
 `md` toma el cuerpo de la superficie (16px en aplicación, 20px dentro de
@@ -58,8 +71,11 @@ que pasa a amarillo (`color.accent-2`), el mismo criterio que `SiteNav`.
 
 ## Accesibilidad
 
-- Los dos controles llevan `aria-label` (`prevLabel`/`nextLabel`, castellano
-  por defecto): el chevron solo no dice a dónde lleva.
+- Sin título, los dos controles llevan `aria-label` (`prevLabel`/`nextLabel`,
+  castellano por defecto): el chevron solo no dice a dónde lleva.
+- Con `prevTitle`/`nextTitle` el `aria-label` desaparece a propósito: el texto
+  visible («Anterior Instalación») ya es el nombre accesible, y un `aria-label`
+  encima lo taparía para quien lo lee con lector de pantalla.
 - El extremo sin destino es un `<button disabled>`, no un enlace muerto.
 - `labelId` pone un `id` en el rótulo central para que la tabla o la región que
   navega pueda tomarlo como nombre (`aria-labelledby`).

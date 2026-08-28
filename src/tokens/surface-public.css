@@ -91,6 +91,7 @@
   --otp-field-error-font-size: var(--form-error-font-size);
   --otp-field-helper-font-size: var(--form-helper-font-size);
   --prev-next-nav-font-size: var(--text-font-size);
+  --prev-next-nav-eyebrow-font-size: var(--text-paragraph-small-font-size);
   --prose-font-size: var(--text-font-size);
   --prose-sm-font-size: var(--text-paragraph-small-font-size);
   --prose-code-font-size: var(--code-block-font-size);

@@ -46,6 +46,55 @@
   cursor: not-allowed;
 }
 
+/* ── Controles con título de destino ─────────────────────
+   Con `prevTitle`/`nextTitle` el control deja de ser un chevron pelado: el
+   rótulo de dirección y el título del destino se leen a la vez. El paginador
+   entero se estira a los extremos, que es la maqueta del pie de una página de
+   documentación. */
+
+.prev-next-nav.prev-next-nav--titled {
+  justify-content: space-between;
+}
+
+.prev-next-nav__btn--titled {
+  align-items: center;
+  gap: var(--prev-next-nav-gap);
+  text-align: start;
+}
+
+.prev-next-nav__btn--titled.prev-next-nav__btn--next {
+  flex-direction: row-reverse;
+  text-align: end;
+}
+
+.prev-next-nav__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--prev-next-nav-text-gap);
+}
+
+.prev-next-nav__eyebrow {
+  font-family: var(--prev-next-nav-font-family);
+  font-size: var(--prev-next-nav-eyebrow-font-size);
+  color: var(--prev-next-nav-eyebrow-color);
+}
+
+.prev-next-nav__title {
+  font-family: var(--prev-next-nav-font-family);
+  font-size: var(--prev-next-nav-font-size);
+  font-weight: var(--prev-next-nav-title-font-weight);
+  color: var(--prev-next-nav-title-color);
+  transition: color var(--prev-next-nav-transition-duration) var(--prev-next-nav-transition-easing);
+}
+
+.prev-next-nav__btn--titled:hover .prev-next-nav__title {
+  color: var(--prev-next-nav-title-hover-color);
+}
+
+.prev-next-nav.prev-next-nav--sm .prev-next-nav__title {
+  font-size: var(--prev-next-nav-sm-font-size);
+}
+
 /* ── Label central ───────────────────────────────────── */
 
 .prev-next-nav__label {
