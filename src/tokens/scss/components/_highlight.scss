@@ -2,3 +2,7 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-highlight-actions-space-before: 2rem; // Aire entre el texto y la fila de acciones (32px): entre componentes, el mismo que en `Hero`
+$lxd-highlight-space-block-start: 4rem; // Aire sobre la banda destacada (64px): el mismo ritmo que `Hero`. Es de la sección, no del envoltorio
+$lxd-highlight-space-block-end: 4rem; // Aire bajo la banda destacada (64px)
+$lxd-highlight-space-block-start-compact: 3rem; // Aire sobre la banda en móvil (48px, por debajo de md)
+$lxd-highlight-space-block-end-compact: 3rem; // Aire bajo la banda en móvil (48px, por debajo de md)

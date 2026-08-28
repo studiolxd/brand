@@ -1,5 +1,10 @@
 {
   "hero": {
-    "actions-space-before": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre el texto y la fila de acciones (32px): entre componentes" }
+    "actions-space-before": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre el texto y la fila de acciones (32px): entre componentes" },
+
+    "space-block-start": { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire sobre la portada (64px): el ritmo de una banda destacada. Es de la sección, no del envoltorio" },
+    "space-block-end":   { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire bajo la portada (64px)" },
+    "space-block-start-compact": { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire sobre la portada en móvil (48px, por debajo de md): la pantalla es más corta y el aire baja un peldaño" },
+    "space-block-end-compact":   { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire bajo la portada en móvil (48px, por debajo de md)" }
   }
 }

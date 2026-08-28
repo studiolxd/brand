@@ -10,6 +10,10 @@
   --site-footer-column-gap: var(--spacing-3); /** Aire entre el título de una columna y sus enlaces */
   --site-footer-links-gap: var(--spacing-2); /** Aire entre enlaces de una columna */
   --site-footer-legal-space-before: var(--spacing-6); /** Aire entre el cuerpo del pie y el bloque legal */
+  --site-footer-space-block-start: var(--section-padding-block-2xl); /** Aire sobre el pie (64px): el ritmo de una banda destacada. Es del pie, no del envoltorio */
+  --site-footer-space-block-end: var(--section-padding-block-2xl); /** Aire bajo el pie (64px) */
+  --site-footer-space-block-start-compact: var(--section-padding-block-xl); /** Aire sobre el pie en móvil (48px, por debajo de md) */
+  --site-footer-space-block-end-compact: var(--section-padding-block-xl); /** Aire bajo el pie en móvil (48px, por debajo de md) */
   --site-footer-legal-separator-color: var(--separator-color); /** Línea sobre el bloque legal. Es la línea de separación del sistema */
   --site-footer-legal-separator-thickness: var(--separator-thickness); /** Grosor de la línea sobre el bloque legal */
 }

@@ -4,4 +4,8 @@
 
 :root {
   --highlight-actions-space-before: var(--spacing-6); /** Aire entre el texto y la fila de acciones (32px): entre componentes, el mismo que en `Hero` */
+  --highlight-space-block-start: var(--section-padding-block-2xl); /** Aire sobre la banda destacada (64px): el mismo ritmo que `Hero`. Es de la sección, no del envoltorio */
+  --highlight-space-block-end: var(--section-padding-block-2xl); /** Aire bajo la banda destacada (64px) */
+  --highlight-space-block-start-compact: var(--section-padding-block-xl); /** Aire sobre la banda en móvil (48px, por debajo de md) */
+  --highlight-space-block-end-compact: var(--section-padding-block-xl); /** Aire bajo la banda en móvil (48px, por debajo de md) */
 }

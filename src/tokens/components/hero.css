@@ -4,4 +4,8 @@
 
 :root {
   --hero-actions-space-before: var(--spacing-6); /** Aire entre el texto y la fila de acciones (32px): entre componentes */
+  --hero-space-block-start: var(--section-padding-block-2xl); /** Aire sobre la portada (64px): el ritmo de una banda destacada. Es de la sección, no del envoltorio */
+  --hero-space-block-end: var(--section-padding-block-2xl); /** Aire bajo la portada (64px) */
+  --hero-space-block-start-compact: var(--section-padding-block-xl); /** Aire sobre la portada en móvil (48px, por debajo de md): la pantalla es más corta y el aire baja un peldaño */
+  --hero-space-block-end-compact: var(--section-padding-block-xl); /** Aire bajo la portada en móvil (48px, por debajo de md) */
 }

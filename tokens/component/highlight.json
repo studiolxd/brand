@@ -1,5 +1,10 @@
 {
   "highlight": {
-    "actions-space-before": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre el texto y la fila de acciones (32px): entre componentes, el mismo que en `Hero`" }
+    "actions-space-before": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre el texto y la fila de acciones (32px): entre componentes, el mismo que en `Hero`" },
+
+    "space-block-start": { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire sobre la banda destacada (64px): el mismo ritmo que `Hero`. Es de la sección, no del envoltorio" },
+    "space-block-end":   { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire bajo la banda destacada (64px)" },
+    "space-block-start-compact": { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire sobre la banda en móvil (48px, por debajo de md)" },
+    "space-block-end-compact":   { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire bajo la banda en móvil (48px, por debajo de md)" }
   }
 }

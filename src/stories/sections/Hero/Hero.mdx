@@ -7,10 +7,18 @@ import { heroTokens } from "../../../tokens/components/hero";
 
 # Hero
 
-La cabecera de portada de un sitio público (la home del hub SLXD): el **título** a talla display (`Heading` de nivel 1, `size={10}`), una **frase** debajo (`Paragraph size="large"`) y, si hace falta, sus **botones**. Todo alineado a la izquierda, dentro de una banda amplia: un `Container` `section` a ancho `xl` con el aire vertical de banda destacada (`space="2xl"`). El fondo no es suyo: lo pone la superficie donde vive —el `SiteShell`, o una banda `.surface-dark`—, así que no tiene tokens de color.
+La cabecera de portada de un sitio público (la home del hub SLXD): el **título** a talla display (`Heading` de nivel 1, `size={10}`), una **frase** debajo (`Paragraph size="large"`) y, si hace falta, sus **botones**. Todo alineado a la izquierda. El fondo no es suyo: lo pone la superficie donde vive —el `SiteShell`, o una banda `.surface-dark`—, así que no tiene tokens de color.
 
 <Canvas of={HeroStories.PorDefecto} />
 <Canvas of={HeroStories.SoloTitulo} />
+
+## Se monta a sangre
+
+La portada **no se envuelve en nada**: se cuelga directamente de la página, al lado de la cabecera y del resto de secciones. El aire vertical es suyo (`--hero-space-block-start` y `--hero-space-block-end`, un peldaño menor por debajo de `md`) y el lateral lo pone su `Container` interior, con el mismo ancho que la barra del `SiteHeader` (`width`, `xl` por defecto). Así la portada se ve igual en cualquier página, sin depender de dónde se cuelgue.
+
+Meterla en un `Container space="…"` **suma el aire de la banda al suyo** y la deja más alta que en otra web. Si la portada ya vive dentro de una banda a sangre (`Container width="full" flush space="none"`), la geometría no cambia: es el mismo caso que estar suelta.
+
+<Canvas of={HeroStories.ASangre} />
 
 ## Medida de lectura
 

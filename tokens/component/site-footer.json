@@ -1,5 +1,10 @@
 {
   "site-footer": {
+    "space-block-start": { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire sobre el pie (64px): el ritmo de una banda destacada. Es del pie, no del envoltorio" },
+    "space-block-end":   { "$value": "{section.padding-block.2xl}", "$type": "dimension", "$description": "Aire bajo el pie (64px)" },
+    "space-block-start-compact": { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire sobre el pie en móvil (48px, por debajo de md)" },
+    "space-block-end-compact":   { "$value": "{section.padding-block.xl}", "$type": "dimension", "$description": "Aire bajo el pie en móvil (48px, por debajo de md)" },
+
     "gap":               { "$value": "{spacing.7}", "$type": "dimension", "$description": "Aire entre los bloques del pie (marca, columnas, contacto)" },
     "brand-gap":         { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre el logotipo y la frase de marca" },
     "columns-gap":       { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre columnas de enlaces" },

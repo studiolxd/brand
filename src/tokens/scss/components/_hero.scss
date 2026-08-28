@@ -2,3 +2,7 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-hero-actions-space-before: 2rem; // Aire entre el texto y la fila de acciones (32px): entre componentes
+$lxd-hero-space-block-start: 4rem; // Aire sobre la portada (64px): el ritmo de una banda destacada. Es de la sección, no del envoltorio
+$lxd-hero-space-block-end: 4rem; // Aire bajo la portada (64px)
+$lxd-hero-space-block-start-compact: 3rem; // Aire sobre la portada en móvil (48px, por debajo de md): la pantalla es más corta y el aire baja un peldaño
+$lxd-hero-space-block-end-compact: 3rem; // Aire bajo la portada en móvil (48px, por debajo de md)
