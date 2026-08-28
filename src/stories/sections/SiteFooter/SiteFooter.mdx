@@ -1,0 +1,48 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SiteFooterStories from "./SiteFooter.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { siteFooterTokens, siteFooterDarkTokens } from "../../../tokens/components/site-footer";
+
+<Meta of={SiteFooterStories} />
+
+# SiteFooter
+
+El pie de una página pública: la marca con su frase, las columnas de enlaces, un bloque libre para el contacto o la newsletter y, debajo, el pie legal. Fondo a sangre y contenido acotado, como el resto de bandas del sistema (`Container` a ancho `xl`).
+
+<Canvas of={SiteFooterStories.PorDefecto} />
+
+## Es el hermano mayor de `LegalFooter`
+
+`LegalFooter` es el pie de las **aplicaciones** de la suite: los enlaces legales y nada más. `SiteFooter` es el pie de la **web**, y lo lleva dentro: se le pasa por `legal`, y queda debajo del cuerpo separado por la línea del sistema. Al ir anidado deja de ser un segundo `contentinfo` —un `footer` dentro de otro `footer` no es un punto de referencia—, que es exactamente lo que se quiere: un solo pie de página.
+
+Pásale `width="full"` al `LegalFooter` anidado para que sus enlaces se alineen con las columnas de arriba en vez de acotarse otra vez.
+
+<Canvas of={SiteFooterStories.ConPieLegal} />
+
+## Superficie
+
+Va sobre superficie oscura **por defecto**: es el cierre de una página pública. No pinta ni un color por su cuenta —el lienzo lo pone el `Container`—, así que `surface="light"` basta para voltearlo entero, línea legal incluida.
+
+<Canvas of={SiteFooterStories.SuperficieClara} />
+
+## Columnas y bloque libre
+
+Cada columna es un `nav` con **nombre accesible** (su propio título), así que un lector de pantalla puede saltar directamente a «Servicios». Los enlaces salen de `columns` y los pinta `renderLink`, que por defecto es un `<a>` y se sustituye por el `Link` del router de la aplicación; el `renderLink` debe reenviar todas las props que recibe (incluidos `target` y `rel` de los enlaces externos).
+
+El bloque `aside` es un slot: los datos de contacto, el formulario de newsletter, lo que haga falta, compuesto con los componentes del sistema. El pie solo le reserva el sitio —dos columnas de la rejilla en cuanto hay ancho— y no decide qué va dentro.
+
+Columnas y bloque se reparten con `auto-fit`: en una pantalla estrecha se apilan solos.
+
+<Canvas of={SiteFooterStories.SoloEnlaces} />
+
+## Tokens
+
+<TokenTable tokens={siteFooterTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={siteFooterDarkTokens} />
+
+## Props
+
+<ArgTypes of={SiteFooterStories} />

@@ -115,6 +115,7 @@ export const entryPoints = {
   'site-shell':          'src/stories/sections/SiteShell/SiteShell.tsx',
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
   'hero':                'src/stories/sections/Hero/Hero.tsx',
+  'site-footer':         'src/stories/sections/SiteFooter/SiteFooter.tsx',
   // Templates
   'not-found-page':      'src/stories/templates/NotFoundPage/NotFoundPage.tsx',
   'error-page':          'src/stories/templates/ErrorPage/ErrorPage.tsx',

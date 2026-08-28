@@ -1,0 +1,16 @@
+{
+  "site-footer": {
+    "gap":               { "$value": "{spacing.7}", "$type": "dimension", "$description": "Aire entre los bloques del pie (marca, columnas, contacto)" },
+    "brand-gap":         { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre el logotipo y la frase de marca" },
+    "columns-gap":       { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre columnas de enlaces" },
+    "column-min-size":   { "$value": "10rem",       "$type": "dimension", "$description": "Ancho mínimo de una columna de enlaces: por debajo, las columnas se apilan" },
+    "column-gap":        { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre el título de una columna y sus enlaces" },
+    "links-gap":         { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre enlaces de una columna" },
+
+    "legal-space-before":    { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre el cuerpo del pie y el bloque legal" },
+    "legal-separator-color": { "$value": "{separator.color}",     "$type": "color",     "$description": "Línea sobre el bloque legal. Es la línea de separación del sistema" },
+    "legal-separator-thickness": { "$value": "{separator.thickness}", "$type": "dimension", "$description": "Grosor de la línea sobre el bloque legal" },
+
+    "surface-dark-legal-separator-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea sobre el bloque legal — surface-dark" }
+  }
+}

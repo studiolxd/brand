@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --site-footer-column-min-size: 10rem; /** Ancho mínimo de una columna de enlaces: por debajo, las columnas se apilan */
+  --site-footer-gap: var(--spacing-7); /** Aire entre los bloques del pie (marca, columnas, contacto) */
+  --site-footer-brand-gap: var(--spacing-4); /** Aire entre el logotipo y la frase de marca */
+  --site-footer-columns-gap: var(--spacing-6); /** Aire entre columnas de enlaces */
+  --site-footer-column-gap: var(--spacing-3); /** Aire entre el título de una columna y sus enlaces */
+  --site-footer-links-gap: var(--spacing-2); /** Aire entre enlaces de una columna */
+  --site-footer-legal-space-before: var(--spacing-6); /** Aire entre el cuerpo del pie y el bloque legal */
+  --site-footer-legal-separator-color: var(--separator-color); /** Línea sobre el bloque legal. Es la línea de separación del sistema */
+  --site-footer-legal-separator-thickness: var(--separator-thickness); /** Grosor de la línea sobre el bloque legal */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --site-footer-legal-separator-color: var(--color-text-on-dark); /** Línea sobre el bloque legal — surface-dark */
+}

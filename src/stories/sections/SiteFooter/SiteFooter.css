@@ -1,0 +1,55 @@
+/* Pie corporativo: marca, columnas de enlaces, bloque libre y, debajo, el pie
+   legal. No pinta color: el lienzo lo pone la superficie del `Container`. */
+.site-footer__inner {
+  display: grid;
+  gap: var(--site-footer-gap);
+}
+
+.site-footer__brand {
+  display: grid;
+  gap: var(--site-footer-brand-gap);
+  justify-items: start;
+}
+
+.site-footer .site-footer__tagline {
+  margin: 0;
+  max-inline-size: var(--content-measure);
+}
+
+/* Las columnas y el bloque libre se reparten con `auto-fit`: en una pantalla
+   estrecha se apilan solos, sin punto de ruptura escrito a mano. */
+.site-footer__body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--site-footer-column-min-size), 1fr));
+  gap: var(--site-footer-columns-gap);
+  align-items: start;
+}
+
+.site-footer__column {
+  display: grid;
+  gap: var(--site-footer-column-gap);
+  align-content: start;
+}
+
+.site-footer .site-footer__column-title {
+  margin: 0;
+}
+
+.site-footer .site-footer__links {
+  display: grid;
+  gap: var(--site-footer-links-gap);
+}
+
+/* El bloque de contacto o newsletter ocupa dos columnas en cuanto hay sitio:
+   lleva un formulario dentro, no una lista de enlaces. Solo a partir del tramo
+   medio, donde la rejilla ya tiene columnas de sobra: apilado ocupa la suya. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .site-footer__aside {
+    grid-column: span 2;
+  }
+}
+
+.site-footer__legal {
+  padding-block-start: var(--site-footer-legal-space-before);
+  border-block-start: var(--site-footer-legal-separator-thickness) solid var(--site-footer-legal-separator-color);
+}

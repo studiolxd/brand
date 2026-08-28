@@ -43,6 +43,7 @@
 @import "./molecules/theme-switcher.css";
 @import "./molecules/dropdown-field.css";
 @import "./components/legal-footer.css";
+@import "./components/site-footer.css";
 @import "./components/hero.css";
 @import "./molecules/notification-button.css";
 @import "./molecules/textarea-field.css";
