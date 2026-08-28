@@ -1,0 +1,19 @@
+@import '../../../tokens/components/code.css';
+
+.code {
+  padding-block: var(--code-padding-block);
+  padding-inline: var(--code-padding-inline);
+  border-radius: var(--code-border-radius);
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  font-family: var(--code-font-family);
+  font-size: var(--code-font-size);
+}
+
+/* Dentro de un bloque de código, el fragmento no repite fondo ni caja. */
+pre .code {
+  padding-block: 0;
+  padding-inline: 0;
+  background-color: transparent;
+  font-size: inherit;
+}

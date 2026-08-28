@@ -16,13 +16,13 @@ $lxd-prose-quote-border-width: 1px; // Grosor de la línea que marca una cita �
 $lxd-prose-quote-border-color: #111e30; // Color de la línea de la cita — tinta de la superficie
 $lxd-prose-quote-padding-inline: 1rem; // Sangría del texto de la cita respecto a su línea
 $lxd-prose-quote-color: #4a4a4a; // Color del texto citado — atenuado: es voz de otro
-$lxd-prose-code-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada del código en línea — la de CodeBlock
-$lxd-prose-code-font-size: 0.875rem; // Tamaño del código en línea — el de CodeBlock
-$lxd-prose-code-bg: #f2f2f2; // Fondo del código en línea — el de CodeBlock: par autocontenido, idéntico en ambos temas
-$lxd-prose-code-color: #111e30; // Tinta del código en línea — la de CodeBlock
-$lxd-prose-code-border-radius: 0px; // Radio del código en línea — el de CodeBlock
-$lxd-prose-code-padding-block: 0px; // Padding vertical del código en línea: cero, para no romper el interlineado del párrafo que lo contiene
-$lxd-prose-code-padding-inline: 0.25rem; // Padding horizontal del código en línea
+$lxd-prose-code-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada del código en línea — la del átomo Code
+$lxd-prose-code-font-size: 0.875rem; // Tamaño del código en línea — el del átomo Code
+$lxd-prose-code-bg: #f2f2f2; // Fondo del código en línea — el del átomo Code: par autocontenido, idéntico en ambos temas
+$lxd-prose-code-color: #111e30; // Tinta del código en línea — la del átomo Code
+$lxd-prose-code-border-radius: 0px; // Radio del código en línea — el del átomo Code
+$lxd-prose-code-padding-block: 0px; // Padding vertical del código en línea — el del átomo Code: cero, para no romper el interlineado del párrafo
+$lxd-prose-code-padding-inline: 0.25rem; // Padding horizontal del código en línea — el del átomo Code
 $lxd-prose-pre-bg: #f2f2f2; // Fondo del bloque de código — el de CodeBlock
 $lxd-prose-pre-color: #111e30; // Tinta del bloque de código — la de CodeBlock
 $lxd-prose-pre-padding-block: 1rem; // Padding vertical del bloque de código — el de CodeBlock

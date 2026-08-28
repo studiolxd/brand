@@ -181,6 +181,10 @@
       "types": "./dist/_types/atoms/Fieldset/Fieldset.d.ts",
       "import": "./dist/fieldset.js"
     },
+    "./code": {
+      "types": "./dist/_types/atoms/Code/Code.d.ts",
+      "import": "./dist/code.js"
+    },
     "./figure": {
       "types": "./dist/_types/atoms/Figure/Figure.d.ts",
       "import": "./dist/figure.js"

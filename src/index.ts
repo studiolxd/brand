@@ -16,6 +16,8 @@ export { Avatar } from './stories/atoms/Avatar/Avatar';
 export { Button } from './stories/atoms/Button/Button';
 export type { ButtonProps } from './stories/atoms/Button/Button';
 export { Checkbox } from './stories/atoms/Checkbox/Checkbox';
+export { Code } from './stories/atoms/Code/Code';
+export type { CodeProps } from './stories/atoms/Code/Code';
 export { Columns } from './stories/atoms/Columns/Columns';
 export type { ColumnsProps } from './stories/atoms/Columns/Columns';
 export { Container } from './stories/atoms/Container/Container';

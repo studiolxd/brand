@@ -15,6 +15,7 @@ export const entryPoints = {
   'radio':               'src/stories/atoms/Radio/Radio.tsx',
   'icon':                'src/stories/atoms/Icon/Icon.tsx',
   'menu-button':         'src/stories/atoms/MenuButton/MenuButton.tsx',
+  'code':                'src/stories/atoms/Code/Code.tsx',
   'fieldset':            'src/stories/atoms/Fieldset/Fieldset.tsx',
   'figure':              'src/stories/atoms/Figure/Figure.tsx',
   'heading':             'src/stories/atoms/Heading/Heading.tsx',

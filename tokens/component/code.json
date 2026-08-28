@@ -1,0 +1,11 @@
+{
+  "code": {
+    "font-family":    { "$value": "{code-block.font-family}",   "$type": "string",    "$description": "Monoespaciada (Google Sans Code) — la de CodeBlock: un fragmento en línea y un bloque suelto se ven igual" },
+    "font-size":      { "$value": "{code-block.font-size}",     "$type": "dimension", "$description": "Tamaño del fragmento — el de CodeBlock (un peldaño por debajo del cuerpo)" },
+    "bg":             { "$value": "{code-block.bg}",            "$type": "color",     "$description": "Fondo del fragmento — el de CodeBlock: par autocontenido, idéntico en las dos superficies" },
+    "color":          { "$value": "{code-block.color}",         "$type": "color",     "$description": "Tinta del fragmento — la de CodeBlock" },
+    "border-radius":  { "$value": "{code-block.border-radius}", "$type": "dimension", "$description": "Esquina recta, como todo el sistema" },
+    "padding-block":  { "$value": "0px",                        "$type": "dimension", "$description": "Cero: un fragmento en línea no puede romper el interlineado del párrafo que lo contiene" },
+    "padding-inline": { "$value": "{spacing.1}",                "$type": "dimension", "$description": "Aire horizontal, el único que se puede dar sin desalinear la línea" }
+  }
+}

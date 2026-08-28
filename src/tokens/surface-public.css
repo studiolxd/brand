@@ -27,6 +27,7 @@
   --alert-description-line-height: var(--text-line-height);
   --breadcrumb-font-size: var(--text-paragraph-small-font-size);
   --code-block-font-size: var(--text-paragraph-small-font-size);
+  --code-font-size: var(--code-block-font-size);
   --description-list-value-font-size: var(--text-font-size);
   --description-list-value-line-height: var(--text-line-height);
   --empty-state-description-font-size: var(--text-font-size);
@@ -96,7 +97,7 @@
   --prev-next-nav-eyebrow-font-size: var(--text-paragraph-small-font-size);
   --prose-font-size: var(--text-font-size);
   --prose-sm-font-size: var(--text-paragraph-small-font-size);
-  --prose-code-font-size: var(--code-block-font-size);
+  --prose-code-font-size: var(--code-font-size);
   --prose-pre-font-size: var(--code-block-font-size);
   --prose-table-font-size: var(--table-font-size);
   --prose-caption-font-size: var(--text-paragraph-small-font-size);

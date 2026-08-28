@@ -1,0 +1,55 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CodeStories from "./Code.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { codeTokens } from "../../../tokens/components/code";
+
+<Meta of={CodeStories} />
+
+# Code
+
+Un fragmento de código **dentro de una línea de texto**: el nombre de una prop, una ruta, un
+comando corto. El hermano de bloque es `CodeBlock`, que es una caja con cabecera y botón de copiar;
+esto es una marca en el párrafo.
+
+<Canvas of={CodeStories.PorDefecto} />
+
+## En un párrafo
+
+El aire vertical es **cero** a propósito: un fondo alto rompería el interlineado del párrafo que lo
+contiene. El único aire que se puede dar sin desalinear la línea es el horizontal.
+
+<Canvas of={CodeStories.EnUnParrafo} />
+
+## Por qué lleva clase y no estila `code` a secas
+
+`Link` estila el elemento `<a>` directamente, sin clase. Aquí no: `code` también vive dentro del
+`<pre>` de `CodeBlock` y de los bloques que pinta `Prose`, donde no debe repetir fondo ni caja. Por
+eso `Code` lleva su clase BEM (`.code`) y, además, la anula dentro de un `<pre>`.
+
+`Prose` sigue estilando los `code` sueltos que trae el markdown —no puede renderizar componentes—,
+pero sus tokens `prose.code-*` cuelgan ahora de los de este átomo: la misma cara por un solo sitio.
+
+## Superficie oscura
+
+El par fondo/tinta es autocontenido —gris claro con texto oscuro, el mismo criterio que
+`CodeBlock`—, así que se ve igual en las dos superficies y no lleva tokens `surface-dark-*`.
+
+<Canvas of={CodeStories.EnSuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+- `code` es semántico: un lector de pantalla puede anunciar que lo que sigue es código. No uses un
+  `<span>` con pinta de código.
+- Para una **tecla** (`Ctrl`, `Esc`) el átomo es `Kbd`, no este.
+
+## Props
+
+<ArgTypes of={CodeStories} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={codeTokens} />
