@@ -47,10 +47,8 @@
     "surface-dark-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}", "$type": "color", "$description": "Placeholder color — surface-dark" },
     "surface-dark-content-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Dropdown background — surface-dark" },
     "surface-dark-content-border-color":   { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Dropdown border color — surface-dark" },
-    "item-focus-ring-width":  { "$value": "{select.item-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo de la opción resaltada — el del Select" },
-    "item-focus-ring-offset": { "$value": "{select.item-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo de la opción — la del Select" },
-    "item-focus-ring-color":  { "$value": "{select.item-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo de la opción — el del Select" },
-    "surface-dark-item-focus-ring-color": { "$value": "{select.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo de la opción — surface-dark" },
+    "item-highlighted-bg":    { "$value": "{select.item-highlighted-bg}",    "$type": "color",     "$description": "Relleno de la opción resaltada — el del Select" },
+    "surface-dark-item-highlighted-bg":   { "$value": "{select.surface-dark-item-highlighted-bg}",   "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" },
     "surface-dark-pill-bg":                      { "$value": "{color.accent-1}", "$type": "color", "$description": "Relleno de las pills — surface-dark: el prusia coincidiría con el lienzo; par de `Button primary` (lavanda con tinta prusia)" },
     "surface-dark-pill-color":                   { "$value": "{color.primary}", "$type": "color", "$description": "Texto de las pills — surface-dark" }
   }

@@ -135,11 +135,11 @@
   color: var(--multi-select-color);
   cursor: pointer;
 
-  /* La opción resaltada no se rellena (regla de Colores): anillo del sistema. */
+  /* La opción bajo el puntero o el teclado se rellena: excepción declarada de
+     las listas de opciones desplegables (Foundations → Colores). */
   &:focus-visible,
   &:hover {
-    outline: var(--multi-select-item-focus-ring-width) solid var(--multi-select-item-focus-ring-color);
-    outline-offset: var(--multi-select-item-focus-ring-offset);
+    background-color: var(--multi-select-item-highlighted-bg);
   }
 
   &.multi-select__item--selected {
