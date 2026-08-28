@@ -7,6 +7,10 @@ $lxd-accordion-trigger-padding-block: 1.5rem; // Aire vertical del disparador
 $lxd-accordion-trigger-padding-inline: 2rem; // Aire horizontal del disparador
 $lxd-accordion-trigger-gap: 1rem; // Hueco entre el texto y el chevron
 $lxd-accordion-trigger-cursor: pointer; // Cursor del disparador
+$lxd-accordion-index-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada: los números del acordeón numerado se alinean en columna
+$lxd-accordion-index-font-size: 0.875rem; // Un peldaño por debajo del rótulo del apartado
+$lxd-accordion-index-color: #4a4a4a; // Color del número: texto secundario, para que no compita con el rótulo
+$lxd-accordion-index-min-inline-size: 1.5rem; // Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras
 $lxd-accordion-content-padding-block: 2rem; // Aire inferior del contenido
 $lxd-accordion-content-padding-inline: 2rem; // Aire horizontal del contenido
 $lxd-accordion-transition-duration: 400ms; // Duración de abrir/cerrar (cambio de contexto: el panel entra)

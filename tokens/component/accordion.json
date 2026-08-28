@@ -6,6 +6,10 @@
     "trigger-padding-inline": { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Aire horizontal del disparador" },
     "trigger-gap":            { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Hueco entre el texto y el chevron" },
     "trigger-cursor":         { "$value": "pointer",                  "$type": "string",    "$description": "Cursor del disparador" },
+    "index-font-family":      { "$value": "{font-family.mono}",     "$type": "string",    "$description": "Monoespaciada: los números del acordeón numerado se alinean en columna" },
+    "index-font-size":        { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Un peldaño por debajo del rótulo del apartado" },
+    "index-color":            { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Color del número: texto secundario, para que no compita con el rótulo" },
+    "index-min-inline-size":  { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras" },
     "content-padding-block":  { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Aire inferior del contenido" },
     "content-padding-inline": { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Aire horizontal del contenido" },
     "transition-duration":    { "$value": "{motion.duration.slow}",   "$type": "number",    "$description": "Duración de abrir/cerrar (cambio de contexto: el panel entra)" },
@@ -13,6 +17,7 @@
     "focus-ring-width":       { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Grosor del anillo de foco" },
     "focus-ring-offset":      { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Separación del anillo de foco (el rol focus gobierna ancho y separación)" },
     "focus-ring-color":       { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco: la tinta de la superficie" },
+    "surface-dark-index-color":       { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Número — surface-dark" },
     "surface-dark-border-color":     { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Separador — surface-dark" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }

@@ -171,3 +171,94 @@ export const ContratoDeshabilitado: Story = {
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   },
 };
+
+/**
+ * Numerado: cada apartado enseña su posición delante del rótulo. El número lo
+ * pone el acordeón por el orden de los ítems — es la maqueta del acordeón
+ * legal, donde cada apartado es una cláusula.
+ */
+export const Numerado: Story = {
+  render: () => (
+    <Accordion type="single" numbered defaultValue="objeto">
+      <AccordionItem value="objeto">
+        <AccordionTrigger>Objeto del contrato</AccordionTrigger>
+        <AccordionContent>
+          El presente contrato regula la prestación de los servicios descritos en el anexo I.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="duracion">
+        <AccordionTrigger>Duración y prórroga</AccordionTrigger>
+        <AccordionContent>
+          La duración inicial es de doce meses, prorrogables por periodos iguales.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="precio">
+        <AccordionTrigger>Precio y forma de pago</AccordionTrigger>
+        <AccordionContent>
+          El precio se abonará mensualmente, dentro de los treinta días siguientes a la factura.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+};
+
+/** `formatIndex` cambia cómo se escribe el número: aquí, cláusulas romanas. */
+export const NumeracionPropia: Story = {
+  name: 'Numeración propia',
+  render: () => (
+    <Accordion type="single" numbered formatIndex={(i) => `${i}.`}>
+      <AccordionItem value="uno">
+        <AccordionTrigger>Objeto del contrato</AccordionTrigger>
+        <AccordionContent>Contenido.</AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="dos">
+        <AccordionTrigger>Duración y prórroga</AccordionTrigger>
+        <AccordionContent>Contenido.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+};
+
+/** Test: el número sale del orden, entra en el nombre del disparador y se puede formatear. */
+export const ContratoNumeracion: Story = {
+  name: 'Test — la ranura de índice numera por orden',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Accordion type="single" numbered>
+        <AccordionItem value="a">
+          <AccordionTrigger>Objeto del contrato</AccordionTrigger>
+          <AccordionContent>Contenido A.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="b">
+          <AccordionTrigger>Duración</AccordionTrigger>
+          <AccordionContent>Contenido B.</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      <div data-testid="sin-numerar">
+        <Accordion type="single">
+          <AccordionItem value="a">
+            <AccordionTrigger>Sin número</AccordionTrigger>
+            <AccordionContent>Contenido.</AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Dos cifras con cero delante, por orden de los ítems.
+    const indices = [...canvasElement.querySelectorAll('.accordion__index')].map((n) => n.textContent);
+    await expect(indices).toEqual(['01', '02']);
+
+    // El número es parte del rótulo, igual que se lee en pantalla.
+    await expect(
+      canvas.getByRole('button', { name: '01 Objeto del contrato' }),
+    ).toBeInTheDocument();
+
+    // Sin `numbered` no hay ranura de índice.
+    const sinNumerar = canvasElement.querySelector('[data-testid="sin-numerar"]')!;
+    await expect(sinNumerar.querySelector('.accordion__index')).toBeNull();
+    await expect(sinNumerar.querySelector('.accordion')).not.toHaveClass('accordion--numbered');
+  },
+};

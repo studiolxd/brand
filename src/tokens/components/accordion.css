@@ -7,12 +7,16 @@
   --accordion-trigger-padding-block: var(--spacing-5); /** Aire vertical del disparador */
   --accordion-trigger-padding-inline: var(--spacing-6); /** Aire horizontal del disparador */
   --accordion-trigger-gap: var(--spacing-4); /** Hueco entre el texto y el chevron */
+  --accordion-index-font-family: var(--font-family-mono); /** Monoespaciada: los números del acordeón numerado se alinean en columna */
+  --accordion-index-min-inline-size: var(--spacing-5); /** Ancho mínimo de la ranura del número (24px): mantiene la columna aunque pase de una a dos cifras */
   --accordion-content-padding-block: var(--spacing-6); /** Aire inferior del contenido */
   --accordion-content-padding-inline: var(--spacing-6); /** Aire horizontal del contenido */
   --accordion-transition-duration: var(--motion-duration-slow); /** Duración de abrir/cerrar (cambio de contexto: el panel entra) */
   --accordion-transition-easing: var(--motion-easing-in-out); /** Curva de abrir/cerrar */
   --accordion-border-width: var(--border-width-default); /** Grosor del separador entre ítems */
   --accordion-border-color: var(--color-primary); /** Color del separador: tinta de la superficie (prusia en claro) */
+  --accordion-index-font-size: var(--text-paragraph-small-font-size); /** Un peldaño por debajo del rótulo del apartado */
+  --accordion-index-color: var(--color-text-muted-on-light); /** Color del número: texto secundario, para que no compita con el rótulo */
   --accordion-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --accordion-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco (el rol focus gobierna ancho y separación) */
   --accordion-focus-ring-color: var(--color-primary); /** Color del anillo de foco: la tinta de la superficie */
@@ -21,6 +25,7 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --accordion-index-color: var(--color-text-muted-on-dark); /** Número — surface-dark */
   --accordion-border-color: var(--color-text-on-dark); /** Separador — surface-dark */
   --accordion-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
 }

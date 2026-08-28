@@ -40,6 +40,24 @@ abiertas varias.
 El `value` sigue el modo: un `string` en `single`, un `string[]` en `multiple`.
 Igual el `defaultValue` y el argumento de `onValueChange`.
 
+## Numerado
+
+`numbered` añade una **ranura de índice** delante del rótulo de cada apartado: `01`, `02`… El
+número lo pone el acordeón por el orden de sus hijos directos, no el consumidor, así que insertar
+un apartado en medio no obliga a renumerar a mano. Es la maqueta del acordeón legal, donde cada
+apartado es una cláusula.
+
+<Canvas of={AccordionStories.Numerado} />
+
+La ranura tiene ancho mínimo propio (`accordion.index-min-inline-size`) para que la columna no
+baile al pasar de una a dos cifras, y el contenido del apartado se sangra hasta la misma línea que
+el rótulo.
+
+`formatIndex` decide cómo se escribe el número — por defecto, dos cifras con cero delante. Recibe
+la posición empezando en 1.
+
+<Canvas of={AccordionStories.NumeracionPropia} />
+
 ## Deshabilitado
 
 `disabled` en la raíz apaga todas las secciones; en un `AccordionItem`, solo la

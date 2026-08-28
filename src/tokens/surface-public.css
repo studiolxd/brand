@@ -22,6 +22,7 @@
   --text-size-8: var(--site-shell-heading-size-8);
   --text-size-9: var(--site-shell-heading-size-9);
   --text-size-10: var(--site-shell-heading-size-10);
+  --accordion-index-font-size: var(--text-paragraph-small-font-size);
   --alert-title-font-size: var(--text-font-size);
   --alert-description-font-size: var(--text-font-size);
   --alert-description-line-height: var(--text-line-height);

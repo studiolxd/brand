@@ -46,6 +46,24 @@
   min-width: 0;
 }
 
+/* ─── Numeración: la ranura de índice ─────────────────────
+   El número va delante del rótulo, en columna propia de ancho mínimo para que
+   no baile al pasar de una a dos cifras, y el contenido del apartado se sangra
+   hasta la misma línea que el rótulo. */
+.accordion__index {
+  flex-shrink: 0;
+  min-inline-size: var(--accordion-index-min-inline-size);
+  font-family: var(--accordion-index-font-family);
+  font-size: var(--accordion-index-font-size);
+  color: var(--accordion-index-color);
+}
+
+.accordion--numbered .accordion__content-inner {
+  padding-inline-start: calc(
+    var(--accordion-index-min-inline-size) + var(--accordion-trigger-gap)
+  );
+}
+
 /* ─── Chevron: apunta abajo cerrado, arriba abierto ──────── */
 .accordion__chevron {
   flex-shrink: 0;
