@@ -77,7 +77,7 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `ConversationList` | `newLabel`, `navLabel`, `deleteLabel` |
 | `UserMessage` | `locale`, `timestampFormat` |
 | `AssistantMessage` | `streamingLabel` — más `locale` y `timestampFormat` |
-| `MessageComposer` | `placeholder`, `sendLabel`, `helperText` |
+| `MessageComposer` | `placeholder`, `sendLabel` — más `helperText`, **sin default en ningún idioma** |
 | `ChatShell` | `listLabel` |
 | `LoginForm` | `title`, `emailLabel`, `passwordLabel`, `submitLabel`, `loadingLabel` |
 | `PasswordField` | `showPasswordLabel`, `hidePasswordLabel` |
@@ -93,6 +93,7 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `Sparkline` | `ariaLabel` |
 | `ConsentPreferences` | `title`, `description`, `saveLabel`, `acceptAllLabel`, `rejectAllLabel`, `closeLabel`, `alwaysOnLabel` — y `categories` para los nombres y las explicaciones de cada categoría |
 | `TableOfContents` | `ariaLabel`, `title` |
+| `PrevNextNav` | `prevLabel`, `nextLabel` — el `aria-label` de cada control; con `prevTitle`/`nextTitle` pasan a ser el rótulo visible |
 | `InputField` | `clearLabel` — el aspa de la variante `kind="search"` con `clearable` |
 | `DocsSearch` | `label`, `placeholder`, `resultsLabel`, `emptyLabel`, `loadingLabel`, `clearLabel` |
 | `SearchForm` | `label`, `placeholder`, `submitLabel` |

@@ -35,15 +35,33 @@ El botón **se llama como lo que pone**. Antes tenía texto «Enviar» y `aria-l
 
 `actions` cuelga más controles a la derecha del botón: un «Detener» mientras el modelo responde, un selector de modelo, un adjuntar.
 
-## El atajo, escrito
+## La línea de ayuda
 
-<Canvas of={MessageComposerStories.OtraAyuda} />
+`helperText` pinta una línea bajo el marco, enlazada al campo con `aria-describedby`: quien usa
+lector de pantalla la oye al entrar en el campo.
 
-`Enter` envía y `Mayús + Enter` salta de línea. Eso **no se adivina**, así que va escrito bajo el marco con las teclas de verdad (`Kbd`), y la línea está enlazada al campo con `aria-describedby`: quien usa lector de pantalla la oye al entrar en el campo.
-
-`helperText` sustituye esa línea —para un aviso propio del producto, por ejemplo— y `null` la quita del todo, con lo que también desaparece el `aria-describedby`.
+**No trae texto por defecto en ningún idioma.** Es la única prop de texto del sistema que no lo
+tiene, y es a propósito: lo que hay que contar bajo un composer depende del producto —el atajo de
+teclado, un aviso de que el modelo se equivoca, nada— y no de la traducción de una cadena. Sin
+`helperText` no se pinta la línea ni el `aria-describedby`.
 
 <Canvas of={MessageComposerStories.SinAyuda} />
+
+`Enter` envía y `Mayús + Enter` salta de línea. Eso **no se adivina**, así que conviene escribirlo
+—con las teclas de verdad, que es el átomo `Kbd`—, pero el texto lo pone el producto:
+
+```tsx
+<MessageComposer
+  …
+  helperText={<><Kbd size="sm">Enter</Kbd> para enviar, <Kbd size="sm">Mayús</Kbd> + <Kbd size="sm">Enter</Kbd> para salto de línea</>}
+/>
+```
+
+<Canvas of={MessageComposerStories.ConAtajo} />
+
+O cualquier otro aviso propio del producto.
+
+<Canvas of={MessageComposerStories.OtraAyuda} />
 
 ## Deshabilitado
 
@@ -89,4 +107,6 @@ Marco, fondo, anillo de foco y línea de ayuda tienen par oscuro.
 
 ## Internacionalización
 
-`placeholder`, `sendLabel` y `helperText` traen default castellano y se traducen pasándolos. Ver **Foundations › Internacionalización**.
+`placeholder` y `sendLabel` traen default castellano y se traducen pasándolos. `helperText` **no
+tiene default en ningún idioma**: el texto lo escribe el producto. Ver
+**Foundations › Internacionalización**.

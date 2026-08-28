@@ -55,27 +55,27 @@ describe('MessageComposer', () => {
     expect(onSend).toHaveBeenCalledTimes(1);
   });
 
-  it('la línea del atajo describe al campo y lleva teclas de verdad', () => {
+  it('sin helperText no hay línea de ayuda ni aria-describedby', () => {
     render(<Controlado onSend={vi.fn()} />);
+    const campo = screen.getByRole('textbox', { name: 'Mensaje' });
+    expect(campo).not.toHaveAttribute('aria-describedby');
+    expect(document.querySelector('.message-composer__helper')).toBeNull();
+  });
+
+  it('helperText pinta la ayuda del producto y la enlaza al campo', () => {
+    render(
+      <MessageComposer
+        value=""
+        onChange={vi.fn()}
+        onSend={vi.fn()}
+        inputLabel="Mensaje"
+        helperText="Otra cosa"
+      />,
+    );
     const campo = screen.getByRole('textbox', { name: 'Mensaje' });
     const id = campo.getAttribute('aria-describedby');
     expect(id).toBeTruthy();
-
-    const ayuda = document.getElementById(id as string);
-    expect(ayuda).toHaveTextContent('Enter');
-    expect(ayuda?.querySelectorAll('kbd')).toHaveLength(3);
-  });
-
-  it('helperText sustituye la ayuda y null la quita', () => {
-    const { rerender } = render(
-      <MessageComposer value="" onChange={vi.fn()} onSend={vi.fn()} inputLabel="Mensaje" helperText="Otra cosa" />,
-    );
-    expect(screen.getByText('Otra cosa')).toBeInTheDocument();
-
-    rerender(
-      <MessageComposer value="" onChange={vi.fn()} onSend={vi.fn()} inputLabel="Mensaje" helperText={null} />,
-    );
-    expect(screen.getByRole('textbox', { name: 'Mensaje' })).not.toHaveAttribute('aria-describedby');
+    expect(document.getElementById(id as string)).toHaveTextContent('Otra cosa');
   });
 
   it('deshabilitado, ni el campo ni el botón aceptan nada', async () => {

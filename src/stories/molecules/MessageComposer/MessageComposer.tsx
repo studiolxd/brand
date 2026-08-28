@@ -2,7 +2,6 @@
 
 import { forwardRef, useId, type ComponentProps, type KeyboardEvent, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
-import { Kbd } from '../../atoms/Kbd/Kbd';
 import { Textarea } from '../../atoms/Textarea/Textarea';
 import './MessageComposer.css';
 
@@ -15,8 +14,11 @@ export interface MessageComposerProps extends Omit<ComponentProps<'div'>, 'onCha
   /** Texto del botón de enviar. Es también su nombre accesible: no hay `aria-label` que lo contradiga. */
   sendLabel?: string;
   /**
-   * Línea de ayuda bajo el marco, enlazada al campo con `aria-describedby`.
-   * Por defecto, el atajo de teclado en castellano. `null` la quita.
+   * Línea de ayuda bajo el marco, enlazada al campo con `aria-describedby`
+   * (el atajo de teclado, un aviso de privacidad…). **Sin valor por defecto en
+   * ningún idioma**: es la única prop de texto del sistema que no lo tiene,
+   * porque su contenido depende del producto y no de la traducción de una
+   * cadena. Sin ella no se pinta la línea.
    */
   helperText?: ReactNode;
   /** Contenido extra a la derecha del botón de enviar (p. ej. un botón de detener envío, o un selector de modelo). */
@@ -33,17 +35,12 @@ export interface MessageComposerProps extends Omit<ComponentProps<'div'>, 'onCha
   className?: string;
 }
 
-/** El atajo, dicho con las teclas de verdad. Es el default de `helperText`. */
-const ATAJO = (
-  <>
-    <Kbd size="sm">Enter</Kbd> para enviar, <Kbd size="sm">Mayús</Kbd> +{' '}
-    <Kbd size="sm">Enter</Kbd> para salto de línea
-  </>
-);
-
 /**
  * La caja de escribir de un chat: el campo, el botón de enviar y la línea que
  * cuenta el atajo de teclado, todo dentro de un solo marco.
+ *
+ * La línea de ayuda (`helperText`) no trae texto por defecto: lo pone el
+ * producto, en su idioma.
  *
  * El campo es un `Textarea` en variante `bare` —sin caja propia—, así que el
  * marco, el fondo y el anillo de foco los dibuja el composer: el átomo no se
@@ -58,7 +55,7 @@ export const MessageComposer = forwardRef<HTMLDivElement, MessageComposerProps>(
   placeholder = 'Escribe un mensaje…',
   disabled,
   sendLabel = 'Enviar',
-  helperText = ATAJO,
+  helperText,
   actions,
   inputId,
   inputLabel,
