@@ -52,6 +52,12 @@
   --async-multi-select-field-helper-font-size: var(--form-helper-font-size);
   --async-select-field-error-font-size: var(--form-error-font-size);
   --async-select-field-helper-font-size: var(--form-helper-font-size);
+  --checkbox-field-sm-label-font-size: var(--text-paragraph-small-font-size);
+  --checkbox-field-lg-label-font-size: var(--text-paragraph-large-font-size);
+  --checkbox-field-label-font-size: var(--text-font-size);
+  --checkbox-field-label-line-height: var(--text-line-height);
+  --checkbox-field-error-font-size: var(--form-error-font-size);
+  --checkbox-field-helper-font-size: var(--form-helper-font-size);
   --conversation-list-item-font-size: var(--text-font-size);
   --date-picker-field-error-font-size: var(--form-error-font-size);
   --date-picker-field-helper-font-size: var(--form-helper-font-size);

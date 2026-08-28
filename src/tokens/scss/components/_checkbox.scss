@@ -16,6 +16,7 @@ $lxd-checkbox-transition-easing: ease; // Easing de transiciones
 $lxd-checkbox-focus-ring-width: 2px; // Ancho del anillo de foco
 $lxd-checkbox-focus-ring-offset: 1px; // Separación del anillo de foco respecto al borde
 $lxd-checkbox-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-checkbox-error-border-color: #b30000; // Borde en error: el color de error (texto/borde, nunca fondo)
 $lxd-checkbox-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
 $lxd-checkbox-disabled-border-color: #d0d0d0; // Color del borde cuando está deshabilitado
 $lxd-checkbox-disabled-bg-checked: #d0d0d0; // Fondo marcado/indeterminado cuando está deshabilitado

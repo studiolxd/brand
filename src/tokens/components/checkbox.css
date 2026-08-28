@@ -26,6 +26,7 @@
   --checkbox-focus-ring-width: var(--border-width-focus); /** Ancho del anillo de foco */
   --checkbox-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco respecto al borde */
   --checkbox-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --checkbox-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (texto/borde, nunca fondo) */
 }
 
 .surface-dark,
@@ -33,6 +34,7 @@
 html.dark {
   --checkbox-disabled-border-color: var(--color-grey-light); /** Borde deshabilitado — surface-dark */
   --checkbox-disabled-bg-checked: var(--color-grey-light); /** Fondo marcado deshabilitado — surface-dark */
+  --checkbox-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --checkbox-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --checkbox-bg-checked: var(--color-text-on-dark); /** Background when checked — surface-dark */
   --checkbox-check-color: var(--color-background-dark); /** Checkmark color — surface-dark */

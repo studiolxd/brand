@@ -15,6 +15,8 @@
     "focus-ring-width":      { "$value": "{border-width.focus}",           "$type": "dimension", "$description": "Ancho del anillo de foco" },
     "focus-ring-offset":     { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Separación del anillo de foco respecto al borde" },
     "focus-ring-color":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
+    "error-border-color":    { "$value": "{color.error-text-on-light}",  "$type": "color",     "$description": "Borde en error: el color de error (texto/borde, nunca fondo)" },
+    "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "disabled-cursor":          { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
     "disabled-border-color":    { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
     "disabled-bg-checked":      { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Fondo marcado/indeterminado cuando está deshabilitado" },

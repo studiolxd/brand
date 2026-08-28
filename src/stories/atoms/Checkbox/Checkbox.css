@@ -59,6 +59,10 @@
   pointer-events: none;
 }
 
+.checkbox.checkbox--error {
+  border-color: var(--checkbox-error-border-color);
+}
+
 .checkbox[data-disabled][data-checked],
 .checkbox[data-disabled][data-indeterminate] {
   background-color: var(--checkbox-disabled-bg-checked);

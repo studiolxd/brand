@@ -1,5 +1,6 @@
 {
   "checkbox-field": {
+    "stack-gap":        { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Espacio entre el checkbox, la ayuda y el error — el ritmo del resto de campos" },
     "gap":              { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Separación entre el checkbox y el texto" },
     "padding-inline":   { "$value": "{control.padding-inline}", "$type": "dimension", "$description": "Padding inline — hereda de control" },
     "padding-block":    { "$value": "{control.padding-block}",  "$type": "dimension", "$description": "Padding block — hereda de control" },
@@ -12,16 +13,34 @@
     "lg-gap":           { "$value": "{spacing.4}",             "$type": "dimension", "$description": "Gap — variante lg" },
     "lg-padding-inline":{ "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding inline — variante lg" },
     "lg-padding-block": { "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding block — variante lg" },
-    "sm-label-font-size": { "$value": "{font-size.1}", "$type": "dimension", "$description": "Tamaño de fuente del label — variante sm (14px)" },
-    "lg-label-font-size": { "$value": "{font-size.3}", "$type": "dimension", "$description": "Tamaño de fuente del label — variante lg (20px)" },
+    "sm-label-font-size": { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie" },
+    "lg-label-font-size": { "$value": "{text.paragraph.large.font-size}", "$type": "dimension", "$description": "Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie" },
     "label": {
-      "font-family":    { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Familia tipográfica — igual al texto por defecto" },
-      "font-size":      { "$value": "{font-size.2}",            "$type": "dimension", "$description": "Tamaño de fuente — igual al texto por defecto (16px)" },
-      "font-weight":    { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso tipográfico" },
-      "line-height":    { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado" },
-      "color":          { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Color del texto" },
-      "letter-spacing": { "$value": "{letter-spacing.normal}",  "$type": "dimension", "$description": "Interletraje — anula la herencia del label base" },
-      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del texto — surface-dark" }
+      "font-family":    { "$value": "{text.font-family}",      "$type": "string",    "$description": "Familia tipográfica" },
+      "font-size":      { "$value": "{text.font-size}",        "$type": "dimension", "$description": "Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },
+      "font-weight":    { "$value": "{text.font-weight}",      "$type": "number",    "$description": "Peso tipográfico" },
+      "line-height":    { "$value": "{text.line-height}",      "$type": "number",    "$description": "Interlineado" },
+      "color":          { "$value": "{text.color}",            "$type": "color",     "$description": "Color del texto" },
+      "letter-spacing": { "$value": "{text.letter-spacing}",   "$type": "dimension", "$description": "Interletraje" },
+      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color",    "$description": "Color del texto — surface-dark" }
+    },
+
+    "error": {
+      "font-family":  { "$value": "{form.error.font-family}",  "$type": "string",    "$description": "Font family del mensaje de error" },
+      "font-size":    { "$value": "{form.error.font-size}",    "$type": "dimension", "$description": "Font size del mensaje de error" },
+      "font-weight":  { "$value": "{form.error.font-weight}",  "$type": "number",    "$description": "Font weight del mensaje de error" },
+      "line-height":  { "$value": "{form.error.line-height}",  "$type": "number",    "$description": "Line height del mensaje de error" },
+      "color":        { "$value": "{form.error.color}",        "$type": "color",     "$description": "Color del mensaje de error" },
+      "surface-dark-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Color del mensaje de error — surface-dark" }
+    },
+
+    "helper": {
+      "font-family":  { "$value": "{form.helper.font-family}",  "$type": "string",    "$description": "Font family del texto de ayuda" },
+      "font-size":    { "$value": "{form.helper.font-size}",    "$type": "dimension", "$description": "Font size del texto de ayuda" },
+      "font-weight":  { "$value": "{form.helper.font-weight}",  "$type": "number",    "$description": "Font weight del texto de ayuda" },
+      "line-height":  { "$value": "{form.helper.line-height}",  "$type": "number",    "$description": "Line height del texto de ayuda" },
+      "color":        { "$value": "{form.helper.color}",        "$type": "color",     "$description": "Color del texto de ayuda" },
+      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del texto de ayuda — surface-dark" }
     }
   }
 }

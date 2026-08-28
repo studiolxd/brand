@@ -13,6 +13,8 @@ export interface CheckboxProps extends BaseCheckboxRootProps {
   checked?: boolean | 'indeterminate';
   /** Callback al cambiar el estado. */
   onCheckedChange?: (checked: boolean) => void;
+  /** Marca el estado de error: aplica la clase `checkbox--error` y `aria-invalid`. */
+  error?: boolean;
   className?: string;
 }
 
@@ -24,8 +26,13 @@ export interface CheckboxProps extends BaseCheckboxRootProps {
  * propias. Para componer con otro elemento, usa la prop `render` de Base UI.
  */
 export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox(
-  { size = 'md', className, checked, indeterminate, onCheckedChange, id, ...rest }, ref) {
-  const classes = ['checkbox', size !== 'md' ? `checkbox--${size}` : '', className ?? '']
+  { size = 'md', className, checked, indeterminate, onCheckedChange, id, error = false, ...rest }, ref) {
+  const classes = [
+    'checkbox',
+    size !== 'md' ? `checkbox--${size}` : '',
+    error ? 'checkbox--error' : '',
+    className ?? '',
+  ]
     .filter(Boolean)
     .join(' ');
 
@@ -42,6 +49,7 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox
       checked={checked === 'indeterminate' ? false : checked}
       indeterminate={isIndeterminate}
       aria-checked={isIndeterminate ? 'mixed' : undefined}
+      aria-invalid={error || undefined}
       // Contrato del DS: solo el estado (Base UI añade los detalles del evento).
       onCheckedChange={onCheckedChange ? (next) => onCheckedChange(next) : undefined}
       {...rest}

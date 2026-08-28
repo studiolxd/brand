@@ -427,11 +427,13 @@ TimeSelect y DatePicker.
 
 Quedan con dudas, anotadas al cerrarlo:
 
-- [ ] **CheckboxField** no entró en la tanda (no estaba en la lista) y ahora es
-      el único campo de casilla sin `helperText` / `error` / `errorMessage` /
-      `className` / `forwardRef`, y el único cuyo texto sigue en `font-size.2`
-      en vez de `{text.font-size}`: en la superficie pública se lee un peldaño
-      por debajo del `RadioField`. Decidir si se le aplica el mismo contrato.
+- [x] **CheckboxField** (2026-08-28) — al contrato de campo de los otros 14
+      fields: `forwardRef` (al disparador de Base UI), `helperText`,
+      `error`/`errorMessage` (con `aria-describedby`/`aria-invalid`, borde
+      `checkbox--error` nuevo en el átomo), `className` en el contenedor y
+      tipografía `{text.*}` (antes `font-size.2` crudo, un peldaño por debajo
+      del `RadioField` en la superficie pública). Mismo patrón que
+      `SwitcherField`.
 - [ ] **AsyncSelect / AsyncMultiSelect** siguen sin tokens visuales propios:
       consumen los de `multi-select.*`. Es deliberado (misma cara) pero rompe
       la regla de «todo color pasa por un token del componente».

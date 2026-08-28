@@ -6,6 +6,7 @@
   --checkbox-field-checkbox-offset: 3px; /** Desplazamiento vertical del checkbox para alinearlo con la primera línea de texto */
   --checkbox-field-cursor: pointer; /** Cursor */
   --checkbox-field-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --checkbox-field-stack-gap: var(--spacing-2); /** Espacio entre el checkbox, la ayuda y el error — el ritmo del resto de campos */
   --checkbox-field-gap: var(--spacing-3); /** Separación entre el checkbox y el texto */
   --checkbox-field-sm-gap: var(--spacing-2); /** Gap — variante sm */
   --checkbox-field-sm-padding-inline: var(--spacing-3); /** Padding inline — variante sm */
@@ -13,20 +14,32 @@
   --checkbox-field-lg-gap: var(--spacing-4); /** Gap — variante lg */
   --checkbox-field-lg-padding-inline: var(--spacing-5); /** Padding inline — variante lg */
   --checkbox-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
-  --checkbox-field-sm-label-font-size: var(--font-size-1); /** Tamaño de fuente del label — variante sm (14px) */
-  --checkbox-field-lg-label-font-size: var(--font-size-3); /** Tamaño de fuente del label — variante lg (20px) */
-  --checkbox-field-label-font-family: var(--font-family-sans); /** Familia tipográfica — igual al texto por defecto */
-  --checkbox-field-label-font-size: var(--font-size-2); /** Tamaño de fuente — igual al texto por defecto (16px) */
-  --checkbox-field-label-line-height: var(--line-height-normal); /** Interlineado */
-  --checkbox-field-label-letter-spacing: var(--letter-spacing-normal); /** Interletraje — anula la herencia del label base */
   --checkbox-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
   --checkbox-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
-  --checkbox-field-label-font-weight: var(--font-weight-default); /** Peso tipográfico */
-  --checkbox-field-label-color: var(--color-text-on-light); /** Color del texto */
+  --checkbox-field-sm-label-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
+  --checkbox-field-lg-label-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie */
+  --checkbox-field-label-font-family: var(--text-font-family); /** Familia tipográfica */
+  --checkbox-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
+  --checkbox-field-label-line-height: var(--text-line-height); /** Interlineado */
+  --checkbox-field-label-letter-spacing: var(--text-letter-spacing); /** Interletraje */
+  --checkbox-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
+  --checkbox-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
+  --checkbox-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
+  --checkbox-field-helper-line-height: var(--form-helper-line-height); /** Line height del texto de ayuda */
+  --checkbox-field-label-font-weight: var(--text-font-weight); /** Peso tipográfico */
+  --checkbox-field-label-color: var(--text-color); /** Color del texto */
+  --checkbox-field-error-font-size: var(--form-error-font-size); /** Font size del mensaje de error */
+  --checkbox-field-error-font-weight: var(--form-error-font-weight); /** Font weight del mensaje de error */
+  --checkbox-field-error-color: var(--form-error-color); /** Color del mensaje de error */
+  --checkbox-field-helper-font-size: var(--form-helper-font-size); /** Font size del texto de ayuda */
+  --checkbox-field-helper-font-weight: var(--form-helper-font-weight); /** Font weight del texto de ayuda */
+  --checkbox-field-helper-color: var(--form-helper-color); /** Color del texto de ayuda */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
   --checkbox-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */
+  --checkbox-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --checkbox-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

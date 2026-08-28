@@ -1,13 +1,15 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as CheckboxFieldStories from "./CheckboxField.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { checkboxFieldBaseTokens } from "../../../tokens/molecules/checkbox-field";
+import { checkboxFieldBaseTokens, checkboxFieldLabelTokens, checkboxFieldErrorTokens, checkboxFieldHelperTokens } from "../../../tokens/molecules/checkbox-field";
 
 <Meta of={CheckboxFieldStories} />
 
 # CheckboxField
 
-Molécula que combina un checkbox con su texto asociado. El label no lleva mayúsculas ni el tamaño reducido del Label de formulario — usa la tipografía de texto por defecto para integrarse en flujos de lectura (términos, privacidad, opciones de contacto).
+El `Checkbox` como campo de formulario: marca, texto de la opción, ayuda y error. El label no lleva mayúsculas ni el tamaño reducido del `Label` de formulario — usa la tipografía de texto por defecto para integrarse en flujos de lectura (términos, privacidad, opciones de contacto).
+
+El disparador de Base UI es un `<button role="checkbox">` de verdad y lleva el `id`, así que la etiqueta lo nombra por `htmlFor`; sin `id`, el campo genera uno con `useId`.
 
 ## Sin marcar
 
@@ -31,6 +33,48 @@ El prop `label` acepta `React.ReactNode`, por lo que puede incluir un `<Link>` p
 
 <Canvas of={CheckboxFieldStories.WithLink} />
 
+## Ayuda y error
+
+`helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`. El error se marca en el borde de la casilla, en el color de texto de error.
+
+<Canvas of={CheckboxFieldStories.ConAyuda} />
+<Canvas of={CheckboxFieldStories.ConError} />
+
+## Tallas
+
+<Canvas of={CheckboxFieldStories.Tallas} />
+
+## Con react-hook-form
+
+El control es de Base UI, así que el contrato **no** es el spread del `field`: es `checked` / `onCheckedChange` + `name` + `ref` al disparador (para que react-hook-form pueda enfocarlo al fallar la validación).
+
+```tsx
+<FormField
+  control={form.control}
+  name="terminos"
+  render={({ field, fieldState }) => (
+    <CheckboxField
+      ref={field.ref}
+      name={field.name}
+      checked={field.value}
+      onCheckedChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      label="Acepto los términos y condiciones"
+      errorMessage={fieldState.error?.message}
+    />
+  )}
+/>
+```
+
+<Canvas of={CheckboxFieldStories.ConReactHookForm} />
+
+## Accesibilidad
+
+- El texto está enlazado por `htmlFor`/`id`.
+- Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
+- El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+
 ---
 
 ## Theming oscuro
@@ -42,6 +86,18 @@ En modo oscuro, el color del label se reasigna automáticamente vía los tokens 
 ### Base
 
 <TokenTable tokens={checkboxFieldBaseTokens} />
+
+### Texto
+
+<TokenTable tokens={checkboxFieldLabelTokens} />
+
+### Error
+
+<TokenTable tokens={checkboxFieldErrorTokens} />
+
+### Texto de ayuda
+
+<TokenTable tokens={checkboxFieldHelperTokens} />
 
 ## Props
 
