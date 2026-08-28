@@ -76,9 +76,17 @@ Ocupa el ancho de su contenedor: dentro del panel del menú se estira con él, y
 
 La talla es del conjunto: el campo y el hueco de la flecha la comparten. Cambia tres cosas a la vez —el **alto** del campo, el **cuerpo de letra** y el **glifo** de la flecha—, así que `lg` no es el mismo buscador estirado sino uno mayor de verdad. Dentro de un `Form` la hereda; en la superficie pública, `lg`.
 
-En el panel del menú de `SiteHeader` el buscador va siempre a **`lg`**: ahí no es un campo más de un formulario, es una de las dos formas de recorrer el sitio, a la par del índice.
-
 <Canvas of={SearchFormStories.Tallas} />
+
+### `xl`, la talla del buscador del sitio
+
+`sm`, `md` y `lg` son las tallas de control del sistema, las que comparten `InputField` y `Button`. **`xl` es de este componente y de ningún otro**: el buscador del panel del menú de `SiteHeader` no es un campo más de un formulario, es una de las dos formas de recorrer el sitio —a la par del índice— y se lee como un titular. El campo mide 64px, la letra sube a la escala de **títulos pequeños** (28px, no el cuerpo de texto) y el aire y el glifo de la flecha acompañan; todo sale de tokens `search-form.xl.*` derivados de las escalas de espaciado y tipografía del sistema.
+
+Por eso `xl` **no viaja por el contexto de `Form`**: un `Form size="lg"` no puede volver `xl` a un buscador que tenga dentro, y `useFormSize` sigue conociendo solo las tres tallas de formulario. Se pide a mano, donde toca.
+
+La composición interna resuelve esa asimetría sin duplicar nada: el campo se monta con **`InputField` en `lg`** —la mayor talla que la molécula entiende— y el propio buscador lo estira remapeando, bajo `.search-form--xl`, las tres custom properties de talla que `Input` ya expone (`--input-height`, `--input-padding-inline`, `--input-font-size`). No hay `className` que pasar desde fuera ni una copia del CSS del campo: el borde, el foco, el estado deshabilitado y el autorrelleno siguen siendo exactamente los del campo del sistema, y solo cambian las tres medidas que la talla tiene que cambiar. La alternativa —un `<input>` propio dentro de `SearchForm`— habría duplicado el campo entero para ganar tres valores.
+
+En el panel del menú de `SiteHeader` el buscador va siempre a **`xl`**.
 
 ## Accesibilidad
 

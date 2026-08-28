@@ -96,7 +96,7 @@ export const Completa: Story = {
 };
 
 /**
- * El buscador del sitio dentro del panel, a talla `lg`: en el menú es una
+ * El buscador del sitio dentro del panel, a talla `xl`: en el menú es una
  * pieza destacada, no un campo más. Va con el índice y los ajustes en el
  * mismo Container, y el ritmo que los separa es el del panel.
  */
@@ -107,7 +107,7 @@ export const EnElMenuDelSitio: Story = {
     children: (
       <>
         <SiteNav groups={indice} />
-        <SearchForm size="lg" action="/buscar" />
+        <SearchForm size="xl" action="/buscar" />
       </>
     ),
     settings: <ThemeSwitcher value="system" />,
