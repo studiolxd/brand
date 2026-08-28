@@ -13,56 +13,59 @@ function c(e, t) {
 		year: "numeric"
 	}).format(e);
 }
-var l = a(function({ value: a, onChange: l, placeholder: u = "Seleccionar fecha…", minDate: d, maxDate: f, disabledDates: p, size: m = "md", disabled: h, readOnly: g, error: _ = !1, locale: v = "es-ES", id: y, name: b, describedBy: x, "aria-describedby": S, "aria-label": C, calendarLabel: w = "Calendario", onBlur: T, className: E }, D) {
-	let [O, k] = s(!1), A = o((e) => {
-		g && e || k(e);
-	}, [g]), j = o((e) => {
-		l?.(e), k(!1);
-	}, [l]), M = a instanceof Date ? c(a, v) : null, N = /* @__PURE__ */ r("button", {
-		ref: D,
-		id: y,
+function l(e) {
+	return `${String(e.getFullYear()).padStart(4, "0")}-${String(e.getMonth() + 1).padStart(2, "0")}-${String(e.getDate()).padStart(2, "0")}`;
+}
+var u = a(function({ value: a, onChange: u, placeholder: d = "Seleccionar fecha…", minDate: f, maxDate: p, disabledDates: m, size: h = "md", disabled: g, readOnly: _, error: v = !1, locale: y = "es-ES", id: b, name: x, describedBy: S, "aria-describedby": C, "aria-label": w, calendarLabel: T = "Calendario", onBlur: E, className: D }, O) {
+	let [k, A] = s(!1), j = o((e) => {
+		_ && e || A(e);
+	}, [_]), M = o((e) => {
+		u?.(e), A(!1);
+	}, [u]), N = a instanceof Date ? c(a, y) : null, P = /* @__PURE__ */ r("button", {
+		ref: O,
+		id: b,
 		type: "button",
 		className: [
 			"date-picker__trigger",
-			m === "md" ? "" : `date-picker__trigger--${m}`,
-			_ ? "date-picker__trigger--error" : "",
-			M ? "" : "date-picker__trigger--placeholder",
-			E ?? ""
+			h === "md" ? "" : `date-picker__trigger--${h}`,
+			v ? "date-picker__trigger--error" : "",
+			N ? "" : "date-picker__trigger--placeholder",
+			D ?? ""
 		].filter(Boolean).join(" "),
-		disabled: h,
+		disabled: g,
 		"aria-haspopup": "dialog",
-		"aria-expanded": O,
-		"aria-readonly": g || void 0,
-		"aria-invalid": _ || void 0,
-		"aria-label": C,
-		"aria-describedby": x ?? S,
-		onBlur: T,
-		children: M ?? u
+		"aria-expanded": k,
+		"aria-readonly": _ || void 0,
+		"aria-invalid": v || void 0,
+		"aria-label": w,
+		"aria-describedby": S ?? C,
+		onBlur: E,
+		children: N ?? d
 	});
-	return /* @__PURE__ */ i(n, { children: [b && /* @__PURE__ */ r("input", {
+	return /* @__PURE__ */ i(n, { children: [x && /* @__PURE__ */ r("input", {
 		type: "hidden",
-		name: b,
-		value: a instanceof Date ? a.toISOString().slice(0, 10) : ""
+		name: x,
+		value: a instanceof Date ? l(a) : ""
 	}), /* @__PURE__ */ r(e, {
-		trigger: N,
-		label: w,
-		open: O,
-		onOpenChange: A,
+		trigger: P,
+		label: T,
+		open: k,
+		onOpenChange: j,
 		side: "bottom",
 		align: "start",
 		sideOffset: -1,
 		className: "date-picker__popover",
 		children: /* @__PURE__ */ r(t, {
 			value: a ?? null,
-			onChange: j,
-			gridLabel: w,
-			minDate: d,
-			maxDate: f,
-			disabledDates: p,
-			locale: v,
-			size: m
+			onChange: M,
+			gridLabel: T,
+			minDate: f,
+			maxDate: p,
+			disabledDates: m,
+			locale: y,
+			size: h
 		})
 	})] });
 });
 //#endregion
-export { l as DatePicker };
+export { u as DatePicker };

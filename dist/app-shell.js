@@ -1,78 +1,82 @@
 'use client';
 import './app-shell.css';
-import { TooltipProvider as e } from "./tooltip.js";
-import { n as t, t as n } from "./_shared/AppShellContext.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { useCallback as a, useEffect as o, useMemo as s, useState as c } from "react";
+import { SkipLink as e } from "./skip-link.js";
+import { TooltipProvider as t } from "./tooltip.js";
+import { n, t as r } from "./_shared/AppShellContext.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { useCallback as o, useEffect as s, useMemo as c, useState as l } from "react";
 //#region src/stories/sections/AppShell/AppShell.tsx
-var l = "(min-width: 1024px)";
-function u() {
-	let [e, t] = c(() => typeof window > "u" ? !0 : window.matchMedia(l).matches);
-	return o(() => {
-		let e = window.matchMedia(l), n = () => t(e.matches);
+var u = "(min-width: 1024px)";
+function d() {
+	let [e, t] = l(() => typeof window > "u" ? !0 : window.matchMedia(u).matches);
+	return s(() => {
+		let e = window.matchMedia(u), n = () => t(e.matches);
 		return n(), e.addEventListener("change", n), () => e.removeEventListener("change", n);
 	}, []), e;
 }
-function d({ header: t, sidebar: l, children: d, defaultSidebar: f = "open", sidebarState: p, onSidebarChange: m, defaultSidebarWidth: h, onSidebarWidthChange: g }) {
-	let _ = u(), [v, y] = c(f), [b, x] = c(!1), [S, C] = c(h), w = _ ? p ?? v : b ? "open" : "closed", T = a((e) => {
-		_ ? (y(e), m?.(e)) : x(e === "open");
-	}, [_, m]), E = a(() => T(w === "open" ? "closed" : "open"), [T, w]), D = a(() => T("closed"), [T]), O = a((e) => {
-		C(e), g?.(e);
-	}, [g]);
-	o(() => {
-		if (_ || !b) return;
+function f({ header: n, sidebar: u, children: f, defaultSidebar: p = "open", sidebarState: m, onSidebarChange: h, defaultSidebarWidth: g, onSidebarWidthChange: _, skipLabel: v = "Saltar al contenido principal" }) {
+	let y = d(), [b, x] = l(p), [S, C] = l(!1), [w, T] = l(g), E = y ? m ?? b : S ? "open" : "closed", D = o((e) => {
+		y ? (x(e), h?.(e)) : C(e === "open");
+	}, [y, h]), O = o(() => D(E === "open" ? "closed" : "open"), [D, E]), k = o(() => D("closed"), [D]), A = o((e) => {
+		T(e), _?.(e);
+	}, [_]);
+	s(() => {
+		if (y || !S) return;
 		let e = (e) => {
-			e.key === "Escape" && x(!1);
+			e.key === "Escape" && C(!1);
 		};
 		document.addEventListener("keydown", e);
 		let t = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
-	}, [_, b]);
-	let k = s(() => ({
-		sidebar: w,
-		setSidebar: T,
-		sidebarWidth: S ?? 0,
-		setSidebarWidth: O,
-		toggleSidebar: E,
-		closeSidebar: D,
-		isDesktop: _
+	}, [y, S]);
+	let j = c(() => ({
+		sidebar: E,
+		setSidebar: D,
+		sidebarWidth: w ?? 0,
+		setSidebarWidth: A,
+		toggleSidebar: O,
+		closeSidebar: k,
+		isDesktop: y
 	}), [
-		w,
-		T,
-		S,
-		O,
 		E,
 		D,
-		_
-	]), A = !_ && b;
-	return /* @__PURE__ */ r(n.Provider, {
-		value: k,
-		children: /* @__PURE__ */ r(e, { children: /* @__PURE__ */ i("div", {
+		w,
+		A,
+		O,
+		k,
+		y
+	]), M = !y && S;
+	return /* @__PURE__ */ i(r.Provider, {
+		value: j,
+		children: /* @__PURE__ */ a(t, { children: [/* @__PURE__ */ i(e, {
+			href: "#main-content",
+			children: v
+		}), /* @__PURE__ */ a("div", {
 			className: "app-shell",
-			"data-sidebar": w,
-			style: S ? { "--app-shell-sidebar-width": `${S}px` } : void 0,
-			children: [t, /* @__PURE__ */ i("div", {
+			"data-sidebar": E,
+			style: w ? { "--app-shell-sidebar-width": `${w}px` } : void 0,
+			children: [n, /* @__PURE__ */ a("div", {
 				className: "app-shell__body",
 				children: [
-					l,
-					A && /* @__PURE__ */ r("div", {
+					u,
+					M && /* @__PURE__ */ i("div", {
 						className: "app-shell__backdrop",
-						onClick: D,
+						onClick: k,
 						"aria-hidden": "true"
 					}),
-					/* @__PURE__ */ r("main", {
+					/* @__PURE__ */ i("main", {
 						id: "main-content",
 						tabIndex: -1,
 						className: "app-shell__content",
-						inert: A || void 0,
-						children: d
+						inert: M || void 0,
+						children: f
 					})
 				]
 			})]
-		}) })
+		})] })
 	});
 }
 //#endregion
-export { d as AppShell, t as useAppShell };
+export { f as AppShell, n as useAppShell };

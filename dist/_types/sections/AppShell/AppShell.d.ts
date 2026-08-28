@@ -17,6 +17,8 @@ export interface AppShellProps {
     /** Ancho inicial de la sidebar desplegada (px). Sin él, el token `sidebar.width`. */
     defaultSidebarWidth?: number;
     onSidebarWidthChange?: (width: number) => void;
+    /** Texto del enlace de salto al contenido (`SkipLink`). Default: castellano. */
+    skipLabel?: string;
 }
 /**
  * El armazón de una aplicación: barra superior, barra lateral y contenido.
@@ -25,4 +27,4 @@ export interface AppShellProps {
  * modo y su asa) y `SidebarNav` (rail). Persistir el estado es del producto:
  * `onSidebarChange` / `onSidebarWidthChange` avisan de cada cambio.
  */
-export declare function AppShell({ header, sidebar, children, defaultSidebar, sidebarState, onSidebarChange, defaultSidebarWidth, onSidebarWidthChange, }: AppShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function AppShell({ header, sidebar, children, defaultSidebar, sidebarState, onSidebarChange, defaultSidebarWidth, onSidebarWidthChange, skipLabel, }: AppShellProps): import("react/jsx-runtime").JSX.Element;

@@ -7,6 +7,8 @@ export interface CheckboxProps extends BaseCheckboxRootProps {
     checked?: boolean | 'indeterminate';
     /** Callback al cambiar el estado. */
     onCheckedChange?: (checked: boolean) => void;
+    /** Marca el estado de error: aplica la clase `checkbox--error` y `aria-invalid`. */
+    error?: boolean;
     className?: string;
 }
 /**
