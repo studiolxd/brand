@@ -21,6 +21,11 @@ directamente con `Table`.
 La tabla recibe todas las filas y las pagina y filtra ella misma. `searchColumnId` dice
 sobre qué columna busca el buscador.
 
+El buscador es `InputField kind="search" clearable`, la misma variante que usa `DocsSearch`:
+campo `type="text"` con la lupa fija al inicio —nunca `type="search"`, cuya X la pinta el
+navegador— y un aspa del sistema al final que vacía el filtro y devuelve el foco. Su
+etiqueta es `searchPlaceholder`, oculta a la vista; el nombre del aspa, `searchClearLabel`.
+
 <Canvas of={DataTableStories.Default} />
 
 ## Con acciones en la barra
@@ -66,7 +71,8 @@ peso**, no con un fondo. El detalle está en la doc de `Table`.
 ## Internacionalización
 
 `DataTable` no cablea ningún texto propio salvo el `"Buscar"` del buscador
-(`searchPlaceholder`) y el `"Sin resultados"` del estado vacío (`emptyMessage`). El resto
+(`searchPlaceholder`), el `"Borrar"` de su aspa (`searchClearLabel`) y el `"Sin resultados"`
+del estado vacío (`emptyMessage`). El resto
 se reenvía a sus piezas:
 
 | Prop | Va a | Contiene |

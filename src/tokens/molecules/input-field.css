@@ -4,6 +4,17 @@
 
 :root {
   --input-field-gap: var(--spacing-2); /** Espacio entre label, input, helper y error */
+  --input-field-search-slot-size: var(--size-component-md); /** Lado del hueco que ocupa un icono de la variante de búsqueda: la talla md, la misma que el campo — así lupa y aspa quedan cuadradas sobre el control */
+  --input-field-search-sm-slot-size: var(--size-component-sm); /** Lado del hueco del icono — sm */
+  --input-field-search-lg-slot-size: var(--size-component-lg); /** Lado del hueco del icono — lg */
+  --input-field-search-icon-size: var(--font-size-3); /** Tamaño del glifo (lupa y aspa) — md (20px, acorde al campo de 40). El mismo peldaño que el toggle de PasswordField */
+  --input-field-search-sm-icon-size: var(--icon-size-sm); /** Tamaño del glifo — sm (16px) */
+  --input-field-search-lg-icon-size: var(--icon-size-md); /** Tamaño del glifo — lg (24px) */
+  --input-field-search-icon-color: var(--color-primary); /** Color de la lupa: tinta, prusia sobre claro. La lupa no es un control — no cambia con el puntero */
+  --input-field-search-clear-color: var(--color-primary); /** Color del aspa de borrado: la misma tinta que la lupa */
+  --input-field-search-clear-hover-color: var(--color-primary); /** Color del aspa en hover y en foco (sin cambio: la tinta no se atenúa, y el hover no pinta fondo) */
+  --input-field-search-input-padding-inline-start: var(--input-field-search-slot-size); /** Padding izquierdo del campo — el texto empieza donde acaba la lupa */
+  --input-field-search-input-padding-inline-end: var(--input-field-search-slot-size); /** Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa */
   --input-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
   --input-field-error-line-height: var(--form-error-line-height); /** Line height del mensaje de error */
   --input-field-helper-font-family: var(--form-helper-font-family); /** Font family del texto de ayuda */
@@ -19,6 +30,9 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --input-field-search-icon-color: var(--color-text-on-dark); /** Color de la lupa — surface-dark (blanco) */
+  --input-field-search-clear-color: var(--color-text-on-dark); /** Color del aspa — surface-dark */
+  --input-field-search-clear-hover-color: var(--color-text-on-dark); /** Color del aspa en hover — surface-dark */
   --input-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --input-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

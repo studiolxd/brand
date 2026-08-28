@@ -4,7 +4,89 @@
   gap: var(--input-field-gap);
 }
 
+/* ─── Variante de búsqueda ───────────────────────────────────
+   La lupa va siempre a la vista al inicio: dice, sin texto, que lo que se
+   escribe filtra. El aspa de borrado solo aparece cuando hay algo que borrar,
+   y es nuestra —`Icon name="close"`, el mismo trazo del set—, nunca el control
+   del navegador: por eso el campo es `type="text"`. */
 
+.input-field__search {
+  position: relative;
+  display: block;
+}
+
+/* Tallas — el hueco del icono es cuadrado a la talla del campo, y el glifo
+   acompaña. El padding se remapea aparte: los tokens de padding referencian el
+   hueco desde `:root`, donde ya quedaron resueltos a la talla md — un `var()`
+   dentro de una custom property se sustituye en el elemento que la declara. */
+.input-field__search--sm {
+  --input-field-search-slot-size: var(--input-field-search-sm-slot-size);
+  --input-field-search-icon-size: var(--input-field-search-sm-icon-size);
+  --input-field-search-input-padding-inline-start: var(--input-field-search-sm-slot-size);
+  --input-field-search-input-padding-inline-end: var(--input-field-search-sm-slot-size);
+}
+
+.input-field__search--lg {
+  --input-field-search-slot-size: var(--input-field-search-lg-slot-size);
+  --input-field-search-icon-size: var(--input-field-search-lg-icon-size);
+  --input-field-search-input-padding-inline-start: var(--input-field-search-lg-slot-size);
+  --input-field-search-input-padding-inline-end: var(--input-field-search-lg-slot-size);
+}
+
+.input-field__search .input {
+  padding-inline-start: var(--input-field-search-input-padding-inline-start);
+}
+
+/* El aire de la derecha lo reserva la variante, no la presencia del aspa: si
+   dependiera del aspa, el texto saltaría al escribir la primera letra. */
+.input-field__search--clearable .input {
+  padding-inline-end: var(--input-field-search-input-padding-inline-end);
+}
+
+.input-field__search-icon,
+.input-field__clear {
+  position: absolute;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--input-field-search-slot-size);
+  block-size: var(--input-field-search-slot-size);
+}
+
+.input-field__search-icon {
+  inset-inline-start: 0;
+  color: var(--input-field-search-icon-color);
+  /* La lupa es un rótulo, no un control: el clic lo recibe el campo. */
+  pointer-events: none;
+}
+
+.input-field__clear {
+  inset-inline-end: 0;
+  border: none;
+  background: transparent;
+  padding-block: 0;
+  padding-inline: 0;
+  cursor: pointer;
+  color: var(--input-field-search-clear-color);
+  transition: color var(--input-transition-duration) var(--input-transition-easing);
+}
+
+/* Sin fondo en hover: la regla del sistema. La tinta tampoco se atenúa. */
+.input-field__clear:hover {
+  color: var(--input-field-search-clear-hover-color);
+}
+
+.input-field__clear:focus-visible {
+  outline: none;
+  color: var(--input-field-search-clear-hover-color);
+}
+
+.input-field__search-glyph {
+  inline-size: var(--input-field-search-icon-size);
+  block-size: var(--input-field-search-icon-size);
+}
 
 
 .input-field__error {

@@ -36,7 +36,7 @@ describe('DataTable', () => {
         pageSize={20}
       />,
     );
-    await user.type(screen.getByRole('searchbox', { name: 'Buscar' }), 'Persona 07');
+    await user.type(screen.getByRole('textbox', { name: 'Buscar' }), 'Persona 07');
     expect(screen.getByText('Persona 07')).toBeInTheDocument();
     expect(screen.queryByText('Persona 00')).not.toBeInTheDocument();
   });
@@ -52,8 +52,28 @@ describe('DataTable', () => {
         searchPlaceholder="Buscar"
       />,
     );
-    await user.type(screen.getByRole('searchbox', { name: 'Buscar' }), 'a');
+    await user.type(screen.getByRole('textbox', { name: 'Buscar' }), 'a');
     expect(onChange).toHaveBeenCalledWith('a');
+  });
+
+  it('el aspa del buscador vacía el filtro y devuelve el foco', async () => {
+    const user = userEvent.setup();
+    render(
+      <DataTable
+        columns={columns}
+        data={data}
+        searchColumnId="name"
+        searchPlaceholder="Buscar"
+        pageSize={20}
+      />,
+    );
+    const campo = screen.getByRole('textbox', { name: 'Buscar' });
+    await user.type(campo, 'Persona 07');
+    expect(screen.queryByText('Persona 00')).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Borrar' }));
+    expect(campo).toHaveValue('');
+    expect(campo).toHaveFocus();
+    expect(screen.getByText('Persona 00')).toBeInTheDocument();
   });
 
   it('ordena al activar una cabecera ordenable', async () => {

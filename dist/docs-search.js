@@ -9,8 +9,8 @@ import { Autocomplete as a } from "@base-ui-components/react/autocomplete";
 function o(e) {
 	return /* @__PURE__ */ r("a", { ...e });
 }
-function s({ id: s = "docs-search", query: c, onQueryChange: l, results: u, loading: d = !1, label: f = "Buscar en la documentación", labelHidden: p = !1, placeholder: m = "Buscar…", resultsLabel: h = "Resultados", emptyLabel: g = "Sin resultados.", loadingLabel: _ = "Buscando…", size: v, renderLink: y = o, onSelect: b, className: x }) {
-	let S = c.trim() !== "" && u.length === 0 ? d ? _ : g : null;
+function s({ id: s = "docs-search", query: c, onQueryChange: l, results: u, loading: d = !1, label: f = "Buscar en la documentación", labelHidden: p = !1, placeholder: m = "Buscar…", clearable: h = !0, clearLabel: g = "Borrar", resultsLabel: _ = "Resultados", emptyLabel: v = "Sin resultados.", loadingLabel: y = "Buscando…", size: b, renderLink: x = o, onSelect: S, className: C }) {
+	let w = c.trim() !== "" && u.length === 0 ? d ? y : v : null;
 	return /* @__PURE__ */ r(a.Root, {
 		inline: !0,
 		open: !0,
@@ -19,7 +19,7 @@ function s({ id: s = "docs-search", query: c, onQueryChange: l, results: u, load
 		value: c,
 		onValueChange: l,
 		children: /* @__PURE__ */ i("div", {
-			className: ["docs-search", x].filter(Boolean).join(" "),
+			className: ["docs-search", C].filter(Boolean).join(" "),
 			children: [
 				/* @__PURE__ */ r(a.Input, {
 					id: s,
@@ -27,19 +27,21 @@ function s({ id: s = "docs-search", query: c, onQueryChange: l, results: u, load
 						id: s,
 						label: f,
 						labelHidden: p,
-						type: "search",
+						kind: "search",
+						clearable: h,
+						clearLabel: g,
 						placeholder: m,
-						...v ? { size: v } : {}
+						...b ? { size: b } : {}
 					})
 				}),
 				/* @__PURE__ */ r(a.List, {
 					className: "docs-search__results",
-					"aria-label": h,
+					"aria-label": _,
 					children: (e) => /* @__PURE__ */ r(a.Item, {
 						value: e,
 						className: "docs-search__result",
-						onClick: () => b?.(e),
-						render: (t) => y({
+						onClick: () => S?.(e),
+						render: (t) => x({
 							...t,
 							href: e.href,
 							className: t.className ?? "docs-search__result",
@@ -60,13 +62,13 @@ function s({ id: s = "docs-search", query: c, onQueryChange: l, results: u, load
 						})
 					}, e.href)
 				}),
-				S && /* @__PURE__ */ i("p", {
+				w && /* @__PURE__ */ i("p", {
 					className: "docs-search__status",
 					role: "status",
 					children: [d && /* @__PURE__ */ r(e, {
 						size: "sm",
 						"aria-hidden": !0
-					}), S]
+					}), w]
 				})
 			]
 		})

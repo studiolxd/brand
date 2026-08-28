@@ -35,6 +35,8 @@ export interface DataTableProps<TData, TValue> {
     };
     /** Placeholder y nombre accesible del buscador. */
     searchPlaceholder?: string;
+    /** Nombre accesible del botón que vacía el buscador. Default castellano. */
+    searchClearLabel?: string;
     /** Se renderiza a la derecha del buscador. */
     toolbar?: ReactNode;
     /** Filas por página cuando la tabla pagina en cliente. */
@@ -55,4 +57,4 @@ export interface DataTableProps<TData, TValue> {
  * Los textos accesibles llegan por props (el DS no habla de i18n): sin ellos
  * caen a los castellanos por defecto de `Table` y `Pagination`.
  */
-export declare function DataTable<TData, TValue>({ columns, data, searchColumnId, search, searchPlaceholder, toolbar, pageSize, emptyMessage, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;
+export declare function DataTable<TData, TValue>({ columns, data, searchColumnId, search, searchPlaceholder, searchClearLabel, toolbar, pageSize, emptyMessage, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;

@@ -7,6 +7,50 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.13.0
+
+### Añadido
+
+- **`InputField` › `kind="search"`** — la variante de búsqueda del sistema. El
+  campo es `type="text"` con `autoComplete="off"` y `enterKeyHint="search"`, y
+  lleva una **lupa fija** al inicio (`Icon name="search"`), a la vista esté el
+  campo vacío o escrito: dice, sin gastar texto, que lo que se escriba filtra.
+  La lupa no es un control — no responde al puntero y el clic lo recibe el
+  campo.
+  - `clearable` añade al final un botón con el **aspa del sistema**
+    (`Icon name="close"`, el mismo trazo del set), que solo aparece cuando hay
+    texto: vacía el campo y devuelve el foco al control. Sirve igual con el
+    campo controlado y sin controlar — el valor se escribe con el setter nativo
+    y se anuncia con un evento `input`, así que se entera tanto React como
+    quien escuche el DOM (Base UI en `DocsSearch`).
+  - `clearLabel` nombra el aspa («Borrar» por defecto, castellano); `onClear`
+    avisa tras vaciar, ya con el foco devuelto.
+  - Tokens propios `input-field.search.*`: hueco y glifo por talla (32/40/48),
+    tinta de lupa y aspa con su par oscuro, y el padding que aparta el texto de
+    cada icono. Sin fondo en hover, sin bordes redondeados.
+- **`DocsSearch`** — props `clearable` (por defecto `true`: el gesto de un
+  autocompletar es borrar para volver a preguntar) y `clearLabel`.
+- **`DataTable`** — prop `searchClearLabel` para el nombre accesible del aspa
+  del buscador.
+
+### Cambiado
+
+- **Fuera `type="search"` de todo el sistema.** El tipo nativo pinta la X de
+  borrado del navegador, distinta en cada uno, imposible de vestir y fuera de
+  los tokens. Cuando un campo del sistema ofrece borrado, el aspa es la nuestra.
+  - `DataTable` — el buscador pasa de `Input type="search"` a
+    `InputField kind="search" clearable`, con la etiqueta oculta. **El rol del
+    control cambia de `searchbox` a `textbox`**: los tests que lo busquen por
+    rol hay que actualizarlos.
+  - `DocsSearch` — el campo pasa de `InputField type="search"` a
+    `InputField kind="search"`, con borrado por defecto.
+  - `InputField` — el valor `'search'` sale de la unión de `type`. Es el único
+    cambio de tipos: quien lo pasara, ahora pasa `kind="search"`.
+- **`SearchForm`** — sin cambios de API. Documenta la familia: comparte con la
+  variante el `Input` y, con él, alto, borde, foco y aire (`input.*`); lo que
+  cambia es el icono de acción — aquí la flecha de envío al final, no la lupa,
+  y sin borrado. Un solo icono de acción por campo.
+
 ## v25.12.0
 
 ### Añadido

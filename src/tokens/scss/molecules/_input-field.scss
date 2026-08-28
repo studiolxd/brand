@@ -2,6 +2,17 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-input-field-gap: 0.5rem; // Espacio entre label, input, helper y error
+$lxd-input-field-search-slot-size: 2.5rem; // Lado del hueco que ocupa un icono de la variante de búsqueda: la talla md, la misma que el campo — así lupa y aspa quedan cuadradas sobre el control
+$lxd-input-field-search-sm-slot-size: 2rem; // Lado del hueco del icono — sm
+$lxd-input-field-search-lg-slot-size: 3rem; // Lado del hueco del icono — lg
+$lxd-input-field-search-icon-size: 1.25rem; // Tamaño del glifo (lupa y aspa) — md (20px, acorde al campo de 40). El mismo peldaño que el toggle de PasswordField
+$lxd-input-field-search-sm-icon-size: 16px; // Tamaño del glifo — sm (16px)
+$lxd-input-field-search-lg-icon-size: 24px; // Tamaño del glifo — lg (24px)
+$lxd-input-field-search-icon-color: #111e30; // Color de la lupa: tinta, prusia sobre claro. La lupa no es un control — no cambia con el puntero
+$lxd-input-field-search-clear-color: #111e30; // Color del aspa de borrado: la misma tinta que la lupa
+$lxd-input-field-search-clear-hover-color: #111e30; // Color del aspa en hover y en foco (sin cambio: la tinta no se atenúa, y el hover no pinta fondo)
+$lxd-input-field-search-input-padding-inline-start: 2.5rem; // Padding izquierdo del campo — el texto empieza donde acaba la lupa
+$lxd-input-field-search-input-padding-inline-end: 2.5rem; // Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa
 $lxd-input-field-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de error
 $lxd-input-field-error-font-size: 0.875rem; // Font size del mensaje de error
 $lxd-input-field-error-font-weight: 300; // Font weight del mensaje de error

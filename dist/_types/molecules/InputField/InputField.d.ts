@@ -11,7 +11,32 @@ export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>,
      */
     labelHidden?: boolean;
     name?: string;
-    type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+    /**
+     * Tipo del `<input>`. **`search` no está**: el tipo nativo pinta el aspa de
+     * borrado del navegador, distinta en cada uno y fuera del sistema. Para un
+     * campo de búsqueda, `kind="search"`.
+     */
+    type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+    /**
+     * Naturaleza del campo. `search` lo convierte en campo de búsqueda: `type="text"`
+     * (nunca `type="search"`), sin autocompletado, con la tecla de intro rotulada
+     * «buscar» y una **lupa fija** al inicio que dice que lo escrito filtra.
+     * @default 'text'
+     */
+    kind?: 'text' | 'search';
+    /**
+     * Solo con `kind="search"`: pinta un botón-aspa al final del campo cuando hay
+     * texto. Vacía el campo y devuelve el foco al control.
+     * @default false
+     */
+    clearable?: boolean;
+    /**
+     * Nombre accesible del botón de borrado. Default castellano.
+     * @default 'Borrar'
+     */
+    clearLabel?: string;
+    /** Se llama tras vaciar el campo desde el aspa, ya con el foco devuelto. */
+    onClear?: () => void;
     placeholder?: string;
     value?: string;
     defaultValue?: string;

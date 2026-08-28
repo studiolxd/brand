@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 import {
   flexRender,
   getCoreRowModel,
@@ -13,7 +13,7 @@ import {
   type SortingState,
 } from '@tanstack/react-table';
 import { EmptyState } from '../../molecules/EmptyState/EmptyState';
-import { Input } from '../../atoms/Input/Input';
+import { InputField } from '../../molecules/InputField/InputField';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
 import { Pagination, type PaginationProps } from '../../molecules/Pagination/Pagination';
 import {
@@ -72,6 +72,8 @@ export interface DataTableProps<TData, TValue> {
   search?: { value: string; onChange: (value: string) => void };
   /** Placeholder y nombre accesible del buscador. */
   searchPlaceholder?: string;
+  /** Nombre accesible del botón que vacía el buscador. Default castellano. */
+  searchClearLabel?: string;
   /** Se renderiza a la derecha del buscador. */
   toolbar?: ReactNode;
   /** Filas por página cuando la tabla pagina en cliente. */
@@ -99,6 +101,7 @@ export function DataTable<TData, TValue>({
   searchColumnId,
   search,
   searchPlaceholder,
+  searchClearLabel,
   toolbar,
   pageSize = 10,
   emptyMessage = 'Sin resultados',
@@ -136,25 +139,34 @@ export function DataTable<TData, TValue>({
 
   const skeletonRows = pagination?.pageSize ?? pageSize;
   const searchLabel = searchPlaceholder ?? 'Buscar';
+  const searchId = `${useId()}-search`;
 
   return (
     <div className={['data-table', className].filter(Boolean).join(' ')}>
       {(searchColumnId || search || toolbar) && (
         <div className="data-table__toolbar">
           {search ? (
-            <Input
-              type="search"
-              aria-label={searchLabel}
-              placeholder={searchLabel}
+            <InputField
+              className="data-table__search"
+              id={searchId}
+              kind="search"
+              clearable
+              label={searchLabel}
+              labelHidden
+              {...(searchClearLabel ? { clearLabel: searchClearLabel } : {})}
               value={search.value}
               onChange={(e) => search.onChange(e.target.value)}
             />
           ) : (
             searchColumnId && (
-              <Input
-                type="search"
-                aria-label={searchLabel}
-                placeholder={searchLabel}
+              <InputField
+                className="data-table__search"
+                id={searchId}
+                kind="search"
+                clearable
+                label={searchLabel}
+                labelHidden
+                {...(searchClearLabel ? { clearLabel: searchClearLabel } : {})}
                 value={(table.getColumn(searchColumnId)?.getFilterValue() as string) ?? ''}
                 onChange={(e) => table.getColumn(searchColumnId)?.setFilterValue(e.target.value)}
               />

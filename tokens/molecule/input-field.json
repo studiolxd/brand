@@ -2,6 +2,27 @@
   "input-field": {
     "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Espacio entre label, input, helper y error" },
 
+    "search": {
+      "slot-size":    { "$value": "{size-component.md}", "$type": "dimension", "$description": "Lado del hueco que ocupa un icono de la variante de búsqueda: la talla md, la misma que el campo — así lupa y aspa quedan cuadradas sobre el control" },
+      "sm-slot-size": { "$value": "{size-component.sm}", "$type": "dimension", "$description": "Lado del hueco del icono — sm" },
+      "lg-slot-size": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Lado del hueco del icono — lg" },
+
+      "icon-size":    { "$value": "{font-size.3}",  "$type": "dimension", "$description": "Tamaño del glifo (lupa y aspa) — md (20px, acorde al campo de 40). El mismo peldaño que el toggle de PasswordField" },
+      "sm-icon-size": { "$value": "{icon.size-sm}", "$type": "dimension", "$description": "Tamaño del glifo — sm (16px)" },
+      "lg-icon-size": { "$value": "{icon.size-md}", "$type": "dimension", "$description": "Tamaño del glifo — lg (24px)" },
+
+      "icon-color":       { "$value": "{color.primary}", "$type": "color", "$description": "Color de la lupa: tinta, prusia sobre claro. La lupa no es un control — no cambia con el puntero" },
+      "clear-color":       { "$value": "{color.primary}", "$type": "color", "$description": "Color del aspa de borrado: la misma tinta que la lupa" },
+      "clear-hover-color": { "$value": "{color.primary}", "$type": "color", "$description": "Color del aspa en hover y en foco (sin cambio: la tinta no se atenúa, y el hover no pinta fondo)" },
+
+      "input-padding-inline-start": { "$value": "{input-field.search.slot-size}", "$type": "dimension", "$description": "Padding izquierdo del campo — el texto empieza donde acaba la lupa" },
+      "input-padding-inline-end":   { "$value": "{input-field.search.slot-size}", "$type": "dimension", "$description": "Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa" },
+
+      "surface-dark-icon-color":        { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la lupa — surface-dark (blanco)" },
+      "surface-dark-clear-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del aspa — surface-dark" },
+      "surface-dark-clear-hover-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del aspa en hover — surface-dark" }
+    },
+
     "error": {
       "font-family":  { "$value": "{form.error.font-family}",  "$type": "string",    "$description": "Font family del mensaje de error" },
       "font-size":    { "$value": "{form.error.font-size}",    "$type": "dimension", "$description": "Font size del mensaje de error" },

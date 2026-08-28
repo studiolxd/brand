@@ -8,3 +8,5 @@ export const inputFieldBaseTokens = all.filter(t => t.name === '--input-field-ga
 export const inputFieldErrorTokens = all.filter(t => t.name.startsWith('--input-field-error-'));
 
 export const inputFieldHelperTokens = all.filter(t => t.name.startsWith('--input-field-helper-'));
+
+export const inputFieldSearchTokens = all.filter(t => t.name.startsWith('--input-field-search-'));

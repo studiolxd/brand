@@ -49,6 +49,17 @@ export interface DocsSearchProps {
    */
   placeholder?: string;
   /**
+   * Ofrece un botón-aspa que vacía el campo y devuelve el foco. Es el gesto de
+   * un autocompletar: se borra para volver a preguntar.
+   * @default true
+   */
+  clearable?: boolean;
+  /**
+   * Nombre accesible del botón de borrado. Default castellano.
+   * @default 'Borrar'
+   */
+  clearLabel?: string;
+  /**
    * Nombre accesible de la lista de resultados. Default castellano.
    * @default 'Resultados'
    */
@@ -104,6 +115,8 @@ export function DocsSearch({
   label = 'Buscar en la documentación',
   labelHidden = false,
   placeholder = 'Buscar…',
+  clearable = true,
+  clearLabel = 'Borrar',
   resultsLabel = 'Resultados',
   emptyLabel = 'Sin resultados.',
   loadingLabel = 'Buscando…',
@@ -138,7 +151,9 @@ export function DocsSearch({
               id={id}
               label={label}
               labelHidden={labelHidden}
-              type="search"
+              kind="search"
+              clearable={clearable}
+              clearLabel={clearLabel}
               placeholder={placeholder}
               {...(size ? { size } : {})}
             />

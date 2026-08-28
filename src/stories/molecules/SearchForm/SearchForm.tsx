@@ -119,7 +119,9 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
         label={label}
         labelHidden={labelHidden}
         // `type="search"` pintaría el aspa de borrado del navegador, que no
-        // es del sistema y no se puede vestir: el campo es de texto.
+        // es del sistema y no se puede vestir: el campo es de texto. Tampoco
+        // `kind="search"`, que traería la lupa fija: el icono de acción de
+        // este campo es la flecha de envío, y solo hay uno por campo.
         type="text"
         autoComplete="off"
         enterKeyHint="search"

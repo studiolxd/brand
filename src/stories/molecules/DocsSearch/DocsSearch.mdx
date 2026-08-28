@@ -21,11 +21,15 @@ El índice es del producto —Pagefind en `apps/web`, otra cosa en la siguiente 
 
 ## Anatomía
 
-- **Campo** (`InputField` de tipo `search`): etiqueta, pista y talla del sistema. El motor lo convierte en `role="combobox"`.
+- **Campo** (`InputField kind="search"`): etiqueta, pista y talla del sistema, con la lupa fija al inicio y el aspa de borrado al final. El motor lo convierte en `role="combobox"`.
 - **Lista** (`role="listbox"`, con `aria-label`): un `role="option"` por resultado. Cada opción es un **enlace de verdad**, así que se abre en otra pestaña y se copia como cualquier otro.
 - **Aviso de estado** (`role="status"`): una región viva que dice «buscando» o «sin resultados», y que solo existe cuando hay algo que decir.
 
 La conducta es el `Autocomplete` de Base UI —el mismo motor que la `CommandPalette`— con dos diferencias: el filtrado va desactivado (`filter={null}`, porque ya lo hizo el consumidor) y la lista va **en línea**, sin popup: los resultados de una búsqueda de documentación no son un menú flotante, son la página.
+
+## El campo
+
+Es la variante de búsqueda de `InputField`, la misma que usa `DataTable`: `type="text"` con lupa fija —nunca `type="search"`, cuya X la pinta el navegador y no se puede vestir—. `clearable` está **activo por defecto** aquí, porque el gesto propio de un autocompletar es borrar para volver a preguntar: el aspa vacía el campo, devuelve el foco y, al vaciarse la consulta, la lista de resultados se va con ella. `clearLabel` da su nombre accesible («Borrar» por defecto).
 
 ## Resultados
 

@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as InputFieldStories from "./InputField.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { inputFieldBaseTokens, inputFieldErrorTokens, inputFieldHelperTokens } from "../../../tokens/molecules/input-field";
+import { inputFieldBaseTokens, inputFieldErrorTokens, inputFieldHelperTokens, inputFieldSearchTokens } from "../../../tokens/molecules/input-field";
 
 <Meta of={InputFieldStories} />
 
@@ -32,6 +32,22 @@ Con la etiqueta oculta y sin `placeholder` propio, el campo usa el texto de la e
 
 <Canvas of={InputFieldStories.Tallas} />
 
+## Búsqueda
+
+`kind="search"` convierte el campo en buscador. Lo hace **sin `type="search"`**: el tipo nativo pinta la X de borrado del navegador, que es distinta en cada uno, no se puede vestir y no sale de ningún token del sistema. El campo es `type="text"`, sin autocompletado (`autoComplete="off"`) y con la tecla de intro rotulada «buscar» (`enterKeyHint="search"`) en el teclado táctil.
+
+La **lupa va siempre a la vista** al inicio del campo, esté vacío o escrito: es lo que dice, sin gastar texto, que lo que se escriba filtra. No es un control —no responde al puntero y el clic lo recibe el campo—.
+
+<Canvas of={InputFieldStories.Busqueda} />
+
+`clearable` añade al final un botón con el aspa **del sistema** (`Icon name="close"`, el mismo trazo del resto del set), que aparece solo cuando hay algo que borrar: vacía el campo y devuelve el foco al control, para seguir escribiendo sin volver a apuntar. Su nombre accesible es `clearLabel` («Borrar» por defecto). El hueco de la derecha lo reserva la variante entera, no la presencia del aspa: si dependiera del aspa, el texto saltaría al escribir la primera letra.
+
+<Canvas of={InputFieldStories.BusquedaConBorrado} />
+
+<Canvas of={InputFieldStories.BusquedaTallas} />
+
+La variante es el campo de búsqueda de todo el sistema: la usan `DataTable` para filtrar filas y `DocsSearch` para autocompletar. `SearchForm` es de la misma familia —comparte el `Input`, así que el alto, el borde y el anillo de foco salen de los mismos tokens `input.*`—, pero no lleva lupa: su icono es la flecha de envío al final, y un buscador que envía no ofrece borrado.
+
 ## Estados
 
 <Canvas of={InputFieldStories.ConValor} />
@@ -42,6 +58,7 @@ Con la etiqueta oculta y sin `placeholder` propio, el campo usa el texto de la e
 - La etiqueta va enlazada por `htmlFor`/`id`: `id` es obligatorio.
 - Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- El aspa de borrado es un `<button type="button">` real: entra en el orden de tabulación, se nombra con `clearLabel` y apunta al campo con `aria-controls`. Tras vaciar devuelve el foco al control, así que quien navega con teclado no pierde el sitio.
 
 ## Tokens
 
@@ -58,6 +75,12 @@ El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referen
 ### Texto de ayuda
 
 <TokenTable tokens={inputFieldHelperTokens} />
+
+### Búsqueda
+
+El hueco del icono es cuadrado a la talla del campo (32, 40 o 48) y el glifo acompaña; el padding del texto se aparta exactamente ese hueco. Lupa y aspa comparten tinta, y su par oscuro es el blanco de la superficie.
+
+<TokenTable tokens={inputFieldSearchTokens} />
 
 ## Props
 

@@ -16,3 +16,12 @@
 .data-table__scroll {
   overflow-x: auto;
 }
+
+/* El buscador se queda con el espacio libre de la barra; `min-inline-size: 0`
+   es lo que permite que un ítem flex encoja por debajo del ancho de su
+   contenido, para que las acciones de la derecha no se vayan de la línea.
+   Mismo patrón que `SearchForm`: los dos son el mismo campo. */
+.data-table__search {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}

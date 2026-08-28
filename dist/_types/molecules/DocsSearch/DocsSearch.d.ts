@@ -41,6 +41,17 @@ export interface DocsSearchProps {
      */
     placeholder?: string;
     /**
+     * Ofrece un botón-aspa que vacía el campo y devuelve el foco. Es el gesto de
+     * un autocompletar: se borra para volver a preguntar.
+     * @default true
+     */
+    clearable?: boolean;
+    /**
+     * Nombre accesible del botón de borrado. Default castellano.
+     * @default 'Borrar'
+     */
+    clearLabel?: string;
+    /**
      * Nombre accesible de la lista de resultados. Default castellano.
      * @default 'Resultados'
      */
@@ -81,4 +92,4 @@ export interface DocsSearchProps {
  * (`filter={null}`) y la lista en línea, sin popup: los resultados de una
  * búsqueda de documentación no son un menú flotante, son la página.
  */
-export declare function DocsSearch({ id, query, onQueryChange, results, loading, label, labelHidden, placeholder, resultsLabel, emptyLabel, loadingLabel, size, renderLink, onSelect, className, }: DocsSearchProps): import("react/jsx-runtime").JSX.Element;
+export declare function DocsSearch({ id, query, onQueryChange, results, loading, label, labelHidden, placeholder, clearable, clearLabel, resultsLabel, emptyLabel, loadingLabel, size, renderLink, onSelect, className, }: DocsSearchProps): import("react/jsx-runtime").JSX.Element;

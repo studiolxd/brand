@@ -1,53 +1,96 @@
 'use client';
 import './input-field.css';
-import { n as e } from "./_shared/form-size.js";
-import { Input as t } from "./input.js";
-import { Label as n } from "./label.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { forwardRef as a } from "react";
+import { Icon as e } from "./icon.js";
+import { n as t } from "./_shared/form-size.js";
+import { Input as n } from "./input.js";
+import { Label as r } from "./label.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { forwardRef as o, useImperativeHandle as s, useRef as c, useState as l } from "react";
 //#region src/stories/molecules/InputField/InputField.tsx
-var o = a(function({ id: a, label: o, labelHidden: s = !1, name: c, type: l, placeholder: u, value: d, defaultValue: f, disabled: p, readOnly: m, size: h, error: g = !1, errorMessage: _, helperText: v, onChange: y, onBlur: b, onFocus: x, className: S, ...C }, w) {
-	let T = e(h), E = _ ? `${a}-error` : void 0, D = v ? `${a}-helper` : void 0, O = [E, D].filter(Boolean).join(" ") || void 0, k = g || !!_;
-	return /* @__PURE__ */ i("div", {
-		className: ["input-field", S].filter(Boolean).join(" "),
+var u = o(function({ id: o, label: u, labelHidden: d = !1, name: f, type: p, kind: m = "text", clearable: h = !1, clearLabel: g = "Borrar", onClear: _, placeholder: v, value: y, defaultValue: b, disabled: x, readOnly: S, size: C, error: w = !1, errorMessage: T, helperText: E, onChange: D, onBlur: O, onFocus: k, className: A, ...j }, M) {
+	let N = t(C), P = T ? `${o}-error` : void 0, F = E ? `${o}-helper` : void 0, I = [P, F].filter(Boolean).join(" ") || void 0, L = w || !!T, R = m === "search", z = c(null);
+	s(M, () => z.current);
+	let [B, V] = l(() => (b ?? "") !== ""), H = R && h && (y === void 0 ? B : y !== "") && !x && !S;
+	function U(e) {
+		y === void 0 && V(e.target.value !== ""), D?.(e);
+	}
+	function W() {
+		let e = z.current;
+		e && ((Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set)?.call(e, ""), e.dispatchEvent(new Event("input", { bubbles: !0 })), V(!1), e.focus(), _?.());
+	}
+	let G = /* @__PURE__ */ i(n, {
+		ref: z,
+		...R ? {
+			type: "text",
+			autoComplete: "off",
+			enterKeyHint: "search"
+		} : { type: p },
+		...j,
+		id: o,
+		name: f,
+		placeholder: v ?? (d ? u : void 0),
+		value: y,
+		defaultValue: b,
+		disabled: x,
+		readOnly: S,
+		size: N,
+		error: L,
+		"aria-describedby": I,
+		onChange: U,
+		onBlur: O,
+		onFocus: k
+	});
+	return /* @__PURE__ */ a("div", {
+		className: ["input-field", A].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r(n, {
-				htmlFor: a,
-				hidden: s,
-				size: T,
-				children: o
+			/* @__PURE__ */ i(r, {
+				htmlFor: o,
+				hidden: d,
+				size: N,
+				children: u
 			}),
-			/* @__PURE__ */ r(t, {
-				ref: w,
-				...C,
-				id: a,
-				name: c,
-				type: l,
-				placeholder: u ?? (s ? o : void 0),
-				value: d,
-				defaultValue: f,
-				disabled: p,
-				readOnly: m,
-				size: T,
-				error: k,
-				"aria-describedby": O,
-				onChange: y,
-				onBlur: b,
-				onFocus: x
-			}),
-			_ && /* @__PURE__ */ r("span", {
-				id: E,
+			R ? /* @__PURE__ */ a("div", {
+				className: [
+					"input-field__search",
+					N === "md" ? "" : `input-field__search--${N}`,
+					h ? "input-field__search--clearable" : ""
+				].filter(Boolean).join(" "),
+				children: [
+					/* @__PURE__ */ i("span", {
+						className: "input-field__search-icon",
+						"aria-hidden": "true",
+						children: /* @__PURE__ */ i(e, {
+							name: "search",
+							className: "input-field__search-glyph"
+						})
+					}),
+					G,
+					H && /* @__PURE__ */ i("button", {
+						type: "button",
+						className: "input-field__clear",
+						"aria-label": g,
+						"aria-controls": o,
+						onClick: W,
+						children: /* @__PURE__ */ i(e, {
+							name: "close",
+							className: "input-field__search-glyph"
+						})
+					})
+				]
+			}) : G,
+			T && /* @__PURE__ */ i("span", {
+				id: P,
 				className: "input-field__error",
 				role: "alert",
-				children: _
+				children: T
 			}),
-			v && /* @__PURE__ */ r("span", {
-				id: D,
+			E && /* @__PURE__ */ i("span", {
+				id: F,
 				className: "input-field__helper",
-				children: v
+				children: E
 			})
 		]
 	});
 });
 //#endregion
-export { o as InputField };
+export { u as InputField };

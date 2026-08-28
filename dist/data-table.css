@@ -1,1 +1,1 @@
-.data-table>*+*{margin-block-start:var(--data-table-block-gap)}.data-table__toolbar,.data-table__toolbar-actions{align-items:center;gap:var(--data-table-toolbar-gap);flex-wrap:wrap;display:flex}.data-table__scroll{overflow-x:auto}
+.data-table>*+*{margin-block-start:var(--data-table-block-gap)}.data-table__toolbar,.data-table__toolbar-actions{align-items:center;gap:var(--data-table-toolbar-gap);flex-wrap:wrap;display:flex}.data-table__scroll{overflow-x:auto}.data-table__search{flex:auto;min-inline-size:0}

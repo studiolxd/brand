@@ -32,9 +32,15 @@ Los dos van en una línea y **solapan un borde**, así que las dos líneas se fu
 
 <Canvas of={SearchFormStories.ConEtiquetaVisible} />
 
+## La familia de campos de búsqueda
+
+`SearchForm`, el buscador de filas de `DataTable` y el autocompletar de `DocsSearch` son el mismo campo: los tres montan sobre `Input`, así que el alto, el borde, el foco y el aire salen de los tokens `input.*`, y los de este formulario (`search-form.*`) los referencian en lugar de repetirlos. Lo que cambia es el icono de acción, y solo eso.
+
+Los otros dos usan `InputField kind="search"`, con la **lupa fija** al inicio: son campos que filtran mientras se escribe, y la lupa lo dice sin gastar texto. Aquí no hay lupa: el icono de este campo es la **flecha de envío** al final, porque lo que hace no es filtrar sino ir a una página de resultados. Un solo icono de acción por campo.
+
 ## Sin aspa de borrado
 
-El campo es `type="text"`, no `type="search"`. El tipo nativo pinta la **X de borrado del navegador**, que es distinta en cada uno, no se puede vestir y no sale de ningún token del sistema. Tampoco hay un botón de borrado propio: para vaciar el campo está la tecla, y el gesto que importa aquí es enviar, no deshacer.
+El campo es `type="text"`, no `type="search"` —prohibido en todo el sistema—. El tipo nativo pinta la **X de borrado del navegador**, que es distinta en cada uno, no se puede vestir y no sale de ningún token. Cuando un campo del sistema ofrece borrado, el aspa es la nuestra (`Icon name="close"`), como en `InputField kind="search" clearable`. Aquí no hay ninguna de las dos: para vaciar el campo está la tecla, y el gesto que importa es enviar, no deshacer.
 
 Lleva además `autoComplete="off"` —el historial del navegador no es el índice del sitio— y `enterKeyHint="search"`, que pone «buscar» en la tecla de envío del teclado táctil.
 
