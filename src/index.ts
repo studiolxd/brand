@@ -100,6 +100,8 @@ export type {
 export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';
 export type { TimeSelectProps, TimeValue } from './stories/atoms/TimeSelect/TimeSelect';
 export { SkipLink } from './stories/atoms/SkipLink/SkipLink';
+export { Sparkline } from './stories/atoms/Sparkline/Sparkline';
+export type { SparklineProps } from './stories/atoms/Sparkline/Sparkline';
 export { Spinner } from './stories/atoms/Spinner/Spinner';
 export type { SpinnerProps, SpinnerSize } from './stories/atoms/Spinner/Spinner';
 export { Switcher } from './stories/atoms/Switcher/Switcher';
@@ -239,6 +241,8 @@ export { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator, useSideba
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 
 // ─── Organisms ──────────────────────────────────────────────
+export { Chart } from './stories/organisms/Chart/Chart';
+export type { ChartProps, ChartSeries, ChartDatum, ChartType, ChartValueLabels } from './stories/organisms/Chart/Chart';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export type { ProjectCardProps, ProjectCardTag } from './stories/molecules/ProjectCard/ProjectCard';
 export { Steps } from './stories/organisms/Steps/Steps';

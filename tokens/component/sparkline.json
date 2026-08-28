@@ -1,0 +1,15 @@
+{
+  "sparkline": {
+    "width":       { "$value": "5rem",              "$type": "dimension", "$description": "80px — ancho por defecto de la chispa dentro de un StatTile" },
+    "height":      { "$value": "{spacing.5}",       "$type": "dimension", "$description": "24px — alto por defecto: la chispa acompaña a una cifra, no la compite" },
+    "line-width":  { "$value": "{chart.line-width}","$type": "dimension", "$description": "Grosor de la línea. Es la misma marca que en Chart" },
+    "color":       { "$value": "{chart.muted-color}", "$type": "color",   "$description": "Trazo de la serie: gris de atenuación, porque el dato que se lee es la cifra que va al lado" },
+    "accent-color":{ "$value": "{chart.series-1}",  "$type": "color",     "$description": "Periodo actual y punto final: la ranura de apertura del sistema" },
+    "fill-opacity":{ "$value": "{chart.area-fill-opacity}", "$type": "number", "$description": "Velo bajo la línea cuando la chispa se pinta como área" },
+    "marker-size": { "$value": "{chart.marker-size}", "$type": "dimension", "$description": "Diámetro del punto final" },
+    "baseline-color": { "$value": "{chart.grid-color}", "$type": "color", "$description": "Línea del cero cuando la serie cruza el cero" },
+    "surface-dark-color":       { "$value": "{color.text.muted-on-dark}",   "$type": "color", "$description": "Trazo — surface-dark" },
+    "surface-dark-accent-color":{ "$value": "{color.chart.series-1-on-dark}","$type": "color", "$description": "Acento — surface-dark" },
+    "surface-dark-baseline-color": { "$value": "{color.grey-darkest}",      "$type": "color", "$description": "Línea del cero — surface-dark" }
+  }
+}

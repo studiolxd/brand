@@ -1,0 +1,42 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SparklineStories from "./Sparkline.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { sparklineTokens } from "../../../tokens/components/sparkline";
+
+<Meta of={SparklineStories} />
+
+# Sparkline
+
+La **chispa**: una serie diminuta, sin ejes ni rótulos, para acompañar a una cifra. No es un gráfico —en ella no se leen valores—, es la forma de la tendencia. Su sitio natural es el `StatTile`, al lado de la cifra y su variación.
+
+<Canvas of={SparklineStories.PorDefecto} />
+
+Va en el **gris de atenuación** y el punto final en el acento: lo que se lee es la cifra que tiene al lado, no la chispa. Doce puntos es la longitud de referencia.
+
+<Canvas of={SparklineStories.Area} />
+
+Con `color` toma una ranura de serie —**solo una referencia a token**— para emparejarla con un gráfico que esté al lado.
+
+<Canvas of={SparklineStories.ConColorDeSerie} />
+
+Si la serie cruza el cero, aparece la línea del cero: sin ella una caída a negativo se lee como una subida pequeña.
+
+<Canvas of={SparklineStories.CruzandoElCero} />
+
+## Accesibilidad
+
+Sin `ariaLabel` la chispa se marca **decorativa** (`aria-hidden`), que es lo correcto dentro de un `StatTile`: la cifra y su variación ya dicen lo que la chispa enseña, y anunciarla otra vez es ruido. Con `ariaLabel` pasa a ser una imagen con nombre.
+
+<Canvas of={SparklineStories.Descriptiva} />
+
+## Superficie oscura
+
+<Canvas of={SparklineStories.EnSuperficieOscura} />
+
+## API
+
+<ArgTypes of={SparklineStories} />
+
+## Tokens
+
+<TokenTable tokens={sparklineTokens} />

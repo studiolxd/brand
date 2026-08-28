@@ -1,0 +1,102 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --chart-bar-thickness-max: 1.5rem; /** 24px — la barra nunca llena su banda; el sobrante es aire */
+  --chart-bar-radius: 0.25rem; /** 4px — extremo de dato redondeado; el extremo de la línea base queda recto */
+  --chart-area-fill-opacity: 0.1; /** El área es un velo del tono de la serie, nunca un bloque saturado */
+  --chart-donut-thickness: 0.55; /** Fracción del radio que ocupa el anillo del donut */
+  --chart-height: 16rem; /** 256px — alto por defecto del área de dibujo. La banda del eje X va aparte: el contenedor crece con ella y nunca aparece un scroll anidado */
+  --chart-hover-opacity: 0.75; /** Atenuación de las marcas que no son la activa mientras el puntero está encima */
+  --chart-series-1: var(--color-chart-series-1); /** Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan */
+  --chart-series-2: var(--color-chart-series-2); /** Ranura categórica 2 */
+  --chart-series-3: var(--color-chart-series-3); /** Ranura categórica 3 */
+  --chart-series-4: var(--color-chart-series-4); /** Ranura categórica 4 */
+  --chart-series-5: var(--color-chart-series-5); /** Ranura categórica 5 */
+  --chart-series-6: var(--color-chart-series-6); /** Ranura categórica 6 */
+  --chart-series-7: var(--color-chart-series-7); /** Ranura categórica 7 */
+  --chart-series-8: var(--color-chart-series-8); /** Ranura categórica 8 — techo. Una novena serie se pliega en «Otros» o se factoriza en múltiplos pequeños */
+  --chart-sequential-100: var(--color-chart-sequential-100); /** Rampa secuencial (magnitud) — mínimo */
+  --chart-sequential-200: var(--color-chart-sequential-200); /** Rampa secuencial — paso 200 */
+  --chart-sequential-300: var(--color-chart-sequential-300); /** Rampa secuencial — paso 300; extremo claro de una rampa ordinal */
+  --chart-sequential-400: var(--color-chart-sequential-400); /** Rampa secuencial — paso 400 */
+  --chart-sequential-500: var(--color-chart-sequential-500); /** Rampa secuencial — paso 500 */
+  --chart-sequential-600: var(--color-chart-sequential-600); /** Rampa secuencial — paso 600 */
+  --chart-sequential-700: var(--color-chart-sequential-700); /** Rampa secuencial — máximo */
+  --chart-diverging-warm-1: var(--color-chart-diverging-warm-1); /** Divergente, brazo cálido junto al neutro */
+  --chart-diverging-warm-2: var(--color-chart-diverging-warm-2); /** Divergente, brazo cálido intermedio */
+  --chart-diverging-warm-3: var(--color-chart-diverging-warm-3); /** Divergente, brazo cálido extremo */
+  --chart-diverging-cool-1: var(--color-chart-diverging-cool-1); /** Divergente, brazo frío junto al neutro */
+  --chart-diverging-cool-2: var(--color-chart-diverging-cool-2); /** Divergente, brazo frío intermedio */
+  --chart-diverging-cool-3: var(--color-chart-diverging-cool-3); /** Divergente, brazo frío extremo */
+  --chart-grid-color: var(--color-grey-light); /** Rejilla: filete de 1px a un paso de la superficie. Cromo recesivo */
+  --chart-axis-color: var(--color-grey-dark); /** Línea base y eje: un paso más firme que la rejilla, porque es el ancla del cero */
+  --chart-label-font-family: var(--font-family-sans); /** Tipografía de los rótulos */
+  --chart-label-font-size: var(--font-size-1); /** 14px — rótulo de interfaz */
+  --chart-label-font-weight: var(--font-weight-regular); /** Peso de los rótulos de eje */
+  --chart-muted-color: var(--color-grey-dark); /** Serie apagada del patrón de énfasis (una serie en color, el resto en gris) y ranura «Otros» */
+  --chart-marker-size: var(--spacing-2); /** 8px de diámetro — punto de serie y marcador de extremo */
+  --chart-padding-block: var(--spacing-2); /** Aire vertical del área de dibujo */
+  --chart-padding-inline: var(--spacing-2); /** Aire horizontal del área de dibujo */
+  --chart-axis-gap: var(--spacing-2); /** Separación entre el eje y sus rótulos */
+  --chart-block-gap: var(--spacing-3); /** Separación entre título, lienzo y leyenda */
+  --chart-legend-gap: var(--spacing-2); /** Aire entre las piezas de la leyenda */
+  --chart-legend-swatch-size: var(--spacing-2); /** 8px — lado de la muestra de color de la leyenda */
+  --chart-legend-swatch-line-width: var(--spacing-3); /** 12px — largo de la muestra cuando la marca es una línea: la leyenda imita la marca */
+  --chart-tooltip-row-gap: var(--spacing-1); /** Aire entre las filas del bocadillo */
+  --chart-tooltip-max-width: var(--tooltip-max-width); /** Ancho máximo del bocadillo */
+  --chart-crosshair-color: var(--color-grey-dark); /** Filete vertical que sigue al puntero y se engancha a la posición de dato más cercana */
+  --chart-transition-duration: var(--motion-duration-fast); /** Respuesta de la marca al puntero. Con `prefers-reduced-motion` no hay transición */
+  --chart-transition-easing: var(--motion-easing-out); /** Curva de la respuesta al puntero */
+  --chart-diverging-neutral: var(--color-surface-secondary-on-light); /** Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada» */
+  --chart-surface: var(--color-background-light); /** Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato */
+  --chart-grid-width: var(--border-width-default); /** Grosor de la rejilla. Sólida siempre: una rejilla discontinua se lee como umbral */
+  --chart-axis-width: var(--border-width-default); /** Grosor del eje */
+  --chart-label-color: var(--color-text-muted-on-light); /** Rótulos de eje y de valor. El texto nunca lleva el color de la serie: la identidad la trae la marca de color que va al lado */
+  --chart-value-font-weight: var(--font-weight-emphasis); /** Peso de la etiqueta directa de valor: la cifra es lo que se lee */
+  --chart-line-width: var(--border-width-focus); /** 2px — grosor de la línea de serie */
+  --chart-marker-ring-width: var(--border-width-focus); /** 2px — anillo del color de la superficie alrededor del punto, para que siga legible al cruzarse con una línea */
+  --chart-mark-gap: var(--border-width-focus); /** 2px — hueco de superficie entre marcas que se tocan: segmentos de una barra apilada y barras contiguas */
+  --chart-tooltip-padding-block: var(--tooltip-padding-block); /** Padding vertical del bocadillo */
+  --chart-tooltip-padding-inline: var(--tooltip-padding-inline); /** Padding horizontal del bocadillo */
+  --chart-tooltip-font-size: var(--tooltip-font-size); /** Tamaño de texto del bocadillo */
+  --chart-tooltip-line-height: var(--tooltip-line-height); /** Interlineado del bocadillo */
+  --chart-tooltip-offset: var(--tooltip-offset); /** Separación entre el punto activo y el bocadillo */
+  --chart-tooltip-bg: var(--tooltip-bg); /** Bocadillo del gráfico: los mismos tokens que Tooltip, para que no haya dos bocadillos distintos en el sistema */
+  --chart-tooltip-color: var(--tooltip-color); /** Texto del bocadillo */
+  --chart-tooltip-border-radius: var(--tooltip-border-radius); /** Radio del bocadillo */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --chart-grid-color: var(--color-grey-darkest); /** Rejilla — surface-dark. Excepción declarada a la regla de derivación (borde → `text.on-dark`): la rejilla es cromo recesivo, no un borde; en blanco sobre prusia sería tinta con peso de dato. `grey-darkest` la deja al mismo paso de la superficie que `grey-light` en claro */
+  --chart-axis-color: var(--color-grey-dark); /** Eje — surface-dark: un paso por encima de la rejilla, igual que en claro */
+  --chart-series-1: var(--color-chart-series-1-on-dark); /** Ranura 1 — surface-dark */
+  --chart-series-2: var(--color-chart-series-2-on-dark); /** Ranura 2 — surface-dark */
+  --chart-series-3: var(--color-chart-series-3-on-dark); /** Ranura 3 — surface-dark */
+  --chart-series-4: var(--color-chart-series-4-on-dark); /** Ranura 4 — surface-dark */
+  --chart-series-5: var(--color-chart-series-5-on-dark); /** Ranura 5 — surface-dark */
+  --chart-series-6: var(--color-chart-series-6-on-dark); /** Ranura 6 — surface-dark */
+  --chart-series-7: var(--color-chart-series-7-on-dark); /** Ranura 7 — surface-dark */
+  --chart-series-8: var(--color-chart-series-8-on-dark); /** Ranura 8 — surface-dark */
+  --chart-sequential-100: var(--color-chart-sequential-100-on-dark); /** Rampa secuencial mínimo — surface-dark. El ancla se invierte: el paso que se retira hacia la superficie es el oscuro */
+  --chart-sequential-200: var(--color-chart-sequential-200-on-dark); /** Rampa secuencial 200 — surface-dark */
+  --chart-sequential-300: var(--color-chart-sequential-300-on-dark); /** Rampa secuencial 300 — surface-dark */
+  --chart-sequential-400: var(--color-chart-sequential-400-on-dark); /** Rampa secuencial 400 — surface-dark */
+  --chart-sequential-500: var(--color-chart-sequential-500-on-dark); /** Rampa secuencial 500 — surface-dark */
+  --chart-sequential-600: var(--color-chart-sequential-600-on-dark); /** Rampa secuencial 600 — surface-dark */
+  --chart-sequential-700: var(--color-chart-sequential-700-on-dark); /** Rampa secuencial máximo — surface-dark */
+  --chart-diverging-warm-1: var(--color-chart-diverging-warm-1-on-dark); /** Divergente cálido 1 — surface-dark */
+  --chart-diverging-warm-2: var(--color-chart-diverging-warm-2-on-dark); /** Divergente cálido 2 — surface-dark */
+  --chart-diverging-warm-3: var(--color-chart-diverging-warm-3-on-dark); /** Divergente cálido 3 — surface-dark */
+  --chart-diverging-cool-1: var(--color-chart-diverging-cool-1-on-dark); /** Divergente frío 1 — surface-dark */
+  --chart-diverging-cool-2: var(--color-chart-diverging-cool-2-on-dark); /** Divergente frío 2 — surface-dark */
+  --chart-diverging-cool-3: var(--color-chart-diverging-cool-3-on-dark); /** Divergente frío 3 — surface-dark */
+  --chart-surface: var(--color-background-dark); /** Hueco y anillo — surface-dark */
+  --chart-label-color: var(--color-text-muted-on-dark); /** Rótulos — surface-dark */
+  --chart-muted-color: var(--color-text-muted-on-dark); /** Serie apagada — surface-dark */
+  --chart-crosshair-color: var(--color-text-muted-on-dark); /** Filete del puntero — surface-dark */
+  --chart-diverging-neutral: var(--color-surface-secondary-on-dark); /** Punto medio divergente — surface-dark */
+}

@@ -1,0 +1,145 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
+import { TokenTable } from "./TokenTable";
+import { chartPaletteTokens } from "../../tokens/chart-palette";
+
+<Meta title="Foundations/Gráficos de datos" />
+
+# Gráficos de datos
+
+Un gráfico lo **lee una persona** y lo **ejecuta una máquina**. Por eso aquí no hay gusto: hay un procedimiento, y el color va al final. Esta página explica el sistema —la paleta, los oficios del color, la forma, las marcas—; la API de `Chart` y la de `Sparkline` van en su propia documentación.
+
+## El procedimiento
+
+1. **Elegir la forma.** ¿Qué oficio tiene el dato: magnitud, identidad, polaridad, una cifra sola, un cambio en el tiempo? A veces la respuesta no es un gráfico, sino una cifra.
+2. **Asignar el color por su oficio.** Categórico, ordinal, secuencial, divergente o de estado: cada uno tiene una regla.
+3. **Validar la paleta.** No se mira a ojo: se mide.
+4. **Aplicar las marcas y los dos huecos.** Marca fina, extremo de dato redondeado, hueco de 2px de superficie entre marcas que se tocan.
+5. **Poner la capa de puntero.** Un gráfico HTML es interactivo; el bocadillo forma parte del entregable.
+6. **Cerrar con accesibilidad.** Leyenda desde dos series, tabla equivalente siempre, superficie oscura elegida (no un volteo automático).
+
+## Los cinco oficios del color
+
+| Oficio | Qué codifica | Estructura |
+| --- | --- | --- |
+| **Categórico** | identidad (qué serie) | 8 tonos, orden fijo, asignados por orden, nunca ciclados |
+| **Ordinal** | posición en una secuencia (etapas, tramos, tallas) | un tono, pasos monótonos de claridad |
+| **Secuencial** | magnitud (cuánto) | un tono, de claro a oscuro |
+| **Divergente** | polaridad (a qué lado de una base) | dos tonos opuestos y un gris neutro en el medio |
+| **Estado** | estado (bien → crítico) | los tokens de feedback del sistema, con icono y etiqueta |
+
+**¿Categórico u ordinal?** Si cambiar el orden de las categorías cambiaría el significado —etapas de un embudo, tramos de edad—, es **ordinal** y toma una rampa de un solo tono. Si no —nombres de producto, equipos, regiones—, es **categórico**: una sola serie va toda en la ranura 1, y varias series toman las ranuras 1…N.
+
+## La paleta categórica
+
+Las ocho ranuras salen de los tonos de marca. Cinco son los de la paleta (`prussian`, `cayenne`, `yellow`, `emerald`, `lavender`), llevados al **paso de claridad** que un gráfico necesita: los valores de marca están fuera de la banda legible (el amarillo `#FFCD00` tiene 1.3:1 sobre blanco). Las otras tres son **tonos derivados**, interpolando el ángulo de tono en OKLCH entre pares de marca contiguos: aqua entre esmeralda y prusia, magenta entre lavanda y cayena, lima entre amarillo y esmeralda.
+
+<ColorPalette>
+  <ColorItem
+    title="Ranuras categóricas — superficie clara"
+    subtitle="chart.series-1 … chart.series-8"
+    colors={{
+      "1 prusia": "#1E7FF6", "2 cayena": "#F16123", "3 aqua": "#27A0AF", "4 amarillo": "#B29124",
+      "5 magenta": "#C62C90", "6 lima": "#7D9D22", "7 lavanda": "#6332C4", "8 esmeralda": "#28A86B",
+    }}
+  />
+  <ColorItem
+    title="Ranuras categóricas — superficie oscura"
+    subtitle="El mismo tono, el paso elegido para prusia"
+    colors={{
+      "1 prusia": "#1D7CF0", "2 cayena": "#ED5F22", "3 aqua": "#28A4B2", "4 amarillo": "#93771C",
+      "5 magenta": "#D840A0", "6 lima": "#7FA123", "7 lavanda": "#875EF0", "8 esmeralda": "#29AC6D",
+    }}
+  />
+</ColorPalette>
+
+**El orden es el mecanismo de seguridad, no un adorno.** Se enumeraron órdenes candidatos y pasos por tono, y se quedó el que maximiza la separación mínima entre ranuras contiguas pasando todas las puertas en los dos modos. El resultado, medido con el validador de la disciplina (ΔE euclídea en OKLab ×100, protanopía y deuteranopía simuladas con Machado-Oliveira-Fernandes 2009 a severidad 1.0):
+
+| Comprobación | Puerta | Claro | Oscuro |
+| --- | --- | --- | --- |
+| Banda de claridad OKLCH | 0.43–0.77 / 0.48–0.67 | pasa | pasa |
+| Croma mínimo | ≥ 0.10 | pasa | pasa |
+| Separación bajo daltonismo, pares contiguos | ≥ 8 | **17.0** | **14.7** |
+| Separación con visión plena, pares contiguos | ≥ 15 | **19.6** | **19.8** |
+| Contraste contra la superficie | ≥ 3:1 | pasa las ocho | pasa las ocho |
+
+Que las ocho ranuras pasen 3:1 en los dos modos es una decisión: se prefirió un paso más oscuro del amarillo y del aqua antes que una ranura por debajo del umbral necesitando muleta.
+
+### Cuántas series caben
+
+| Series | Tratamiento |
+| --- | --- |
+| 1–3 | el color solo se lee cómodo; rotula directamente |
+| 4 | sigue pasando las puertas en formas contiguas (barras, líneas, apilados y también tarta y donut, donde solo se tocan las porciones vecinas); en **dispersión, burbujas, mapas y múltiplos pequeños el techo son tres**, porque ahí cualquier par puede quedar lado a lado |
+| 5–6 | tope blando: leyenda obligatoria |
+| 7–8 | techo del sistema |
+| 9+ | **no se genera un tono nuevo.** La cola se pliega en «Otros» —`Chart` la pinta con el gris de atenuación— o se factoriza en múltiplos pequeños |
+
+Comprobado: con las **tres primeras ranuras** el gráfico pasa la prueba de *todos* los pares en los dos modos (peor par 15.7 claro, 16.2 oscuro). Con cuatro, amarillo y cayena caen juntos en pantalla y esa prueba falla, igual que en la paleta de referencia de la disciplina. De ahí el techo de tres en las formas donde cualquier marca puede acabar pegada a cualquier otra.
+
+En **tarta y donut** solo se tocan las porciones vecinas, más el par que cierra el anillo. Con ese par incluido, hasta seis porciones pasan las dos puertas en los dos modos (el peor par es 13.2 en oscuro con cinco porciones, muy por encima del 8). El tope de seis es de legibilidad, no de color.
+
+## Rampa secuencial y par divergente
+
+La rampa secuencial es **un solo tono, el prusia de marca**, de claro a oscuro. En superficie oscura el ancla se invierte: el paso que se retira hacia la superficie es el oscuro, no el claro.
+
+<ColorPalette>
+  <ColorItem
+    title="Secuencial (prusia) — superficie clara"
+    subtitle="chart.sequential-100 … 700"
+    colors={{ 100: "#DCE9FC", 200: "#B6D2F8", 300: "#8FBAF5", 400: "#67A1F1", 500: "#3B88EE", 600: "#236AC5", 700: "#164B90" }}
+  />
+  <ColorItem
+    title="Secuencial (prusia) — superficie oscura"
+    subtitle="El mínimo es el paso que se funde con prusia"
+    colors={{ 100: "#0E376B", 200: "#164B90", 300: "#1F61B6", 400: "#2978DE", 500: "#4E92EF", 600: "#80B0F3", 700: "#B8D3F8" }}
+  />
+  <ColorItem
+    title="Divergente — cayena ↔ gris ↔ prusia"
+    subtitle="chart.diverging-warm-* · diverging-neutral · diverging-cool-*"
+    colors={{ "cálido 3": "#9F431F", "cálido 2": "#D45C2C", "cálido 1": "#F37F54", neutro: "#F2F2F2", "frío 1": "#70A6F2", "frío 2": "#3484EE", "frío 3": "#1F61B6" }}
+  />
+</ColorPalette>
+
+Para una rampa **ordinal** (marcas discretas ordenadas) el extremo claro no baja del paso **300**: es el último que mantiene 2:1 contra la superficie en los dos modos.
+
+El par divergente es **cálido contra frío**: cayena y prusia leen como opuestos y el gris del medio lee como «nada». Un par de dos tonos fríos —prusia y aqua— no sirve, y en el punto medio nunca va un tono.
+
+## Estado no es identidad
+
+Los colores de estado son los de feedback del sistema (`error-*`, `success-*`) y están **reservados**: nunca hacen de «serie 4», y siempre van con icono y etiqueta, nunca con el color solo. Al revés también: cuando una serie *significa* bien o mal —tasa de error, aprobados y suspensos—, viste los tokens de estado, no los categóricos. Nunca las dos cosas en un mismo gráfico.
+
+Ojo con el vecindario: el rojo de sistema y la ranura magenta, o el verde de sistema y la ranura esmeralda, comparten familia. La distinción la lleva la pareja icono + etiqueta y la colocación, nunca el tono a solas.
+
+## Marcas y cromo
+
+| Marca | Especificación | Token |
+| --- | --- | --- |
+| Barra | como mucho 24px de grosor, extremo de dato redondeado 4px y extremo de línea base recto | `--chart-bar-thickness-max`, `--chart-bar-radius` |
+| Línea | 2px, unión y remate redondos | `--chart-line-width` |
+| Punto | 8px de diámetro, con anillo de 2px del color de la superficie | `--chart-marker-size`, `--chart-marker-ring-width` |
+| Área | el tono de la serie al 10% | `--chart-area-fill-opacity` |
+| Rejilla y ejes | filete de 1px, sólido, a un paso de la superficie | `--chart-grid-color`, `--chart-axis-color` |
+
+**Los dos huecos.** Entre marcas que se tocan —segmentos de una apilada, barras contiguas, porciones de una tarta— va un **hueco de 2px del color de la superficie**, no un borde. Los puntos llevan un **anillo de 2px** del mismo color para seguir legibles al cruzarse. Dibujar un borde alrededor de una marca añade tinta con peso de dato que no es dato.
+
+**El texto nunca lleva el color de la serie.** Cifras, rótulos y leyendas van en tinta (`--chart-label-color`); la identidad la trae la marca de color que va al lado. Un tono claro es ilegible como texto.
+
+**Etiquetas con criterio.** Una cifra en cada punto es ruido y no se lee: se rotula el extremo, el máximo o la serie de la que va la historia, y el eje, la leyenda y el bocadillo llevan el resto.
+
+## Errores que no se cometen
+
+- **Dos ejes de valores en un mismo dibujo.** La alineación entre las dos escalas es arbitraria y el gráfico inventa una correlación. Dos gráficos, o las dos series indexadas a una base común.
+- **Repintar al filtrar.** El color sigue a la entidad, no a su posición: quitar una serie no cambia el color de las que quedan.
+- **Una rampa de valor sobre categorías sin orden.** Pintar cada barra más oscura cuanto más alta gasta el canal de identidad en repetir lo que ya dice el largo de la barra.
+- **Una tarta de dos porciones, o una barra sola.** Eso es una cifra, no un gráfico.
+- **Un arcoíris para magnitud** o un tono en el medio de una divergente.
+- **El bocadillo como única vía.** Todo valor está también en la tabla equivalente.
+- **Rejilla discontinua.** Se lee como umbral. Filete sólido y recesivo.
+
+## Superficie oscura
+
+El modo oscuro está **elegido, no volteado**: cada ranura tiene su paso propio para prusia, validado contra esa superficie. La rejilla es la única excepción declarada a la regla de derivación del sistema (borde → `color.text.on-dark`): una rejilla blanca sobre prusia sería tinta con peso de dato, así que toma `grey-darkest`, que la deja a un paso de la superficie igual que `grey-light` en claro.
+
+## Todos los tokens de la paleta
+
+<TokenTable tokens={chartPaletteTokens} />

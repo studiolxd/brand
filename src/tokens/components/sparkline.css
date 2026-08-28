@@ -1,0 +1,22 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --sparkline-width: 5rem; /** 80px — ancho por defecto de la chispa dentro de un StatTile */
+  --sparkline-height: var(--spacing-5); /** 24px — alto por defecto: la chispa acompaña a una cifra, no la compite */
+  --sparkline-fill-opacity: var(--chart-area-fill-opacity); /** Velo bajo la línea cuando la chispa se pinta como área */
+  --sparkline-color: var(--chart-muted-color); /** Trazo de la serie: gris de atenuación, porque el dato que se lee es la cifra que va al lado */
+  --sparkline-accent-color: var(--chart-series-1); /** Periodo actual y punto final: la ranura de apertura del sistema */
+  --sparkline-marker-size: var(--chart-marker-size); /** Diámetro del punto final */
+  --sparkline-baseline-color: var(--chart-grid-color); /** Línea del cero cuando la serie cruza el cero */
+  --sparkline-line-width: var(--chart-line-width); /** Grosor de la línea. Es la misma marca que en Chart */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --sparkline-accent-color: var(--color-chart-series-1-on-dark); /** Acento — surface-dark */
+  --sparkline-baseline-color: var(--color-grey-darkest); /** Línea del cero — surface-dark */
+  --sparkline-color: var(--color-text-muted-on-dark); /** Trazo — surface-dark */
+}

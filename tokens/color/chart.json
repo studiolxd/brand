@@ -1,0 +1,53 @@
+{
+  "color": {
+    "chart": {
+      "series-1": { "$value": "#1E7FF6", "$type": "color", "$description": "Serie 1 — tono prusia de marca (OKLCH H 257) llevado al paso legible de gráfico. Ranura de apertura: una serie sola siempre es esta" },
+      "series-2": { "$value": "#F16123", "$type": "color", "$description": "Serie 2 — tono cayena de marca (H 41)" },
+      "series-3": { "$value": "#27A0AF", "$type": "color", "$description": "Serie 3 — aqua, tono derivado entre esmeralda y prusia (H 207)" },
+      "series-4": { "$value": "#B29124", "$type": "color", "$description": "Serie 4 — tono amarillo de marca (H 91) oscurecido hasta la banda de gráfico" },
+      "series-5": { "$value": "#C62C90", "$type": "color", "$description": "Serie 5 — magenta, tono derivado entre lavanda y cayena (H 346)" },
+      "series-6": { "$value": "#7D9D22", "$type": "color", "$description": "Serie 6 — lima, tono derivado entre amarillo y esmeralda (H 124)" },
+      "series-7": { "$value": "#6332C4", "$type": "color", "$description": "Serie 7 — tono lavanda de marca (H 292)" },
+      "series-8": { "$value": "#28A86B", "$type": "color", "$description": "Serie 8 — tono esmeralda de marca (H 157)" },
+
+      "series-1-on-dark": { "$value": "#1D7CF0", "$type": "color", "$description": "Serie 1 — paso elegido para la superficie prusia" },
+      "series-2-on-dark": { "$value": "#ED5F22", "$type": "color", "$description": "Serie 2 — paso para superficie oscura" },
+      "series-3-on-dark": { "$value": "#28A4B2", "$type": "color", "$description": "Serie 3 — paso para superficie oscura" },
+      "series-4-on-dark": { "$value": "#93771C", "$type": "color", "$description": "Serie 4 — paso para superficie oscura" },
+      "series-5-on-dark": { "$value": "#D840A0", "$type": "color", "$description": "Serie 5 — paso para superficie oscura" },
+      "series-6-on-dark": { "$value": "#7FA123", "$type": "color", "$description": "Serie 6 — paso para superficie oscura" },
+      "series-7-on-dark": { "$value": "#875EF0", "$type": "color", "$description": "Serie 7 — paso para superficie oscura" },
+      "series-8-on-dark": { "$value": "#29AC6D", "$type": "color", "$description": "Serie 8 — paso para superficie oscura" },
+
+      "sequential-100": { "$value": "#DCE9FC", "$type": "color", "$description": "Rampa secuencial (tono prusia) — magnitud mínima" },
+      "sequential-200": { "$value": "#B6D2F8", "$type": "color", "$description": "Rampa secuencial — paso 200" },
+      "sequential-300": { "$value": "#8FBAF5", "$type": "color", "$description": "Rampa secuencial — paso 300. Extremo claro admisible para una rampa ordinal (2.00:1 sobre blanco)" },
+      "sequential-400": { "$value": "#67A1F1", "$type": "color", "$description": "Rampa secuencial — paso 400" },
+      "sequential-500": { "$value": "#3B88EE", "$type": "color", "$description": "Rampa secuencial — paso 500" },
+      "sequential-600": { "$value": "#236AC5", "$type": "color", "$description": "Rampa secuencial — paso 600" },
+      "sequential-700": { "$value": "#164B90", "$type": "color", "$description": "Rampa secuencial — magnitud máxima" },
+
+      "sequential-100-on-dark": { "$value": "#0E376B", "$type": "color", "$description": "Rampa secuencial sobre prusia — magnitud mínima (el paso que se retira hacia la superficie)" },
+      "sequential-200-on-dark": { "$value": "#164B90", "$type": "color", "$description": "Rampa secuencial sobre prusia — paso 200" },
+      "sequential-300-on-dark": { "$value": "#1F61B6", "$type": "color", "$description": "Rampa secuencial sobre prusia — paso 300. Extremo admisible para ordinal (2.75:1 sobre prusia)" },
+      "sequential-400-on-dark": { "$value": "#2978DE", "$type": "color", "$description": "Rampa secuencial sobre prusia — paso 400" },
+      "sequential-500-on-dark": { "$value": "#4E92EF", "$type": "color", "$description": "Rampa secuencial sobre prusia — paso 500" },
+      "sequential-600-on-dark": { "$value": "#80B0F3", "$type": "color", "$description": "Rampa secuencial sobre prusia — paso 600" },
+      "sequential-700-on-dark": { "$value": "#B8D3F8", "$type": "color", "$description": "Rampa secuencial sobre prusia — magnitud máxima" },
+
+      "diverging-warm-1": { "$value": "#F37F54", "$type": "color", "$description": "Divergente, brazo cálido (cayena) — paso junto al neutro" },
+      "diverging-warm-2": { "$value": "#D45C2C", "$type": "color", "$description": "Divergente, brazo cálido — paso intermedio" },
+      "diverging-warm-3": { "$value": "#9F431F", "$type": "color", "$description": "Divergente, brazo cálido — extremo" },
+      "diverging-cool-1": { "$value": "#70A6F2", "$type": "color", "$description": "Divergente, brazo frío (prusia) — paso junto al neutro" },
+      "diverging-cool-2": { "$value": "#3484EE", "$type": "color", "$description": "Divergente, brazo frío — paso intermedio" },
+      "diverging-cool-3": { "$value": "#1F61B6", "$type": "color", "$description": "Divergente, brazo frío — extremo" },
+
+      "diverging-warm-1-on-dark": { "$value": "#B54E24", "$type": "color", "$description": "Divergente cálido sobre prusia — paso junto al neutro" },
+      "diverging-warm-2-on-dark": { "$value": "#E26330", "$type": "color", "$description": "Divergente cálido sobre prusia — paso intermedio" },
+      "diverging-warm-3-on-dark": { "$value": "#F48F6A", "$type": "color", "$description": "Divergente cálido sobre prusia — extremo" },
+      "diverging-cool-1-on-dark": { "$value": "#256FCF", "$type": "color", "$description": "Divergente frío sobre prusia — paso junto al neutro" },
+      "diverging-cool-2-on-dark": { "$value": "#488FEF", "$type": "color", "$description": "Divergente frío sobre prusia — paso intermedio" },
+      "diverging-cool-3-on-dark": { "$value": "#80B0F3", "$type": "color", "$description": "Divergente frío sobre prusia — extremo" }
+    }
+  }
+}

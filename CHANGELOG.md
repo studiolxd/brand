@@ -7,6 +7,55 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.10.0
+
+Fase 0.5: el sistema aprende a dibujar datos. Un organismo `Chart`, un átomo
+`Sparkline` y la paleta de datos completa —categórica, secuencial y
+divergente—, derivada de los tonos de marca y validada, no elegida a ojo.
+
+### Añadido
+
+- **`Chart`** (organismo, export `./chart`): línea, área, barras —verticales u
+  horizontales, agrupadas o apiladas—, tarta y donut. **Sin librería de
+  gráficos**: dibuja SVG a pelo, así que todo el color y toda la tipografía
+  salen de tokens, el marcado es BEM y el primer render vale en servidor.
+
+  API: `data` + `series: {key, label, color?}[]` + `xKey`; `type`,
+  `orientation`, `stacked`, `emphasis`, `height`, `yTicks`, `legend`, `grid`,
+  `tooltip`, `valueLabels`; formateadores `formatValue` y `formatX` sobre
+  `locale`. `color` en una serie acepta solo una referencia a token.
+
+  Cada gráfico trae su **tabla equivalente oculta** (`VisuallyHidden`) con
+  todas las filas y todas las series: el bocadillo enriquece, no franquea. El
+  lienzo SVG va `aria-hidden` y quien lleva el nombre accesible y el foco es la
+  capa de exploración, que se recorre con las flechas del teclado. La leyenda
+  aparece desde dos series y se monta con `Inline` de `Tag`; el bocadillo usa
+  los tokens de `Tooltip`.
+
+- **`Sparkline`** (átomo, export `./sparkline`): la chispa que acompaña a una
+  cifra dentro de un `StatTile`. Gris de atenuación, punto final en el acento,
+  línea del cero cuando la serie lo cruza. Sin `ariaLabel` es decorativa.
+
+- **Paleta de datos** (`color.chart.*`, roles `chart.*`): ocho ranuras
+  categóricas con par oscuro propio, rampa secuencial de siete pasos y par
+  divergente cálido/frío con neutro gris. Los tonos salen de la marca —cinco de
+  la paleta llevados al paso legible de gráfico y tres derivados interpolando el
+  ángulo de tono en OKLCH entre pares de marca contiguos—, y el **orden de las
+  ranuras** se obtuvo enumerando órdenes y pasos y quedándose con el que
+  maximiza la separación mínima entre ranuras contiguas. Medido: separación bajo
+  daltonismo 17.0 en claro y 14.7 en oscuro (puerta ≥ 8), con visión plena 19.6 y
+  19.8 (puerta ≥ 15), y las ocho ranuras por encima de 3:1 en las dos
+  superficies.
+
+- **Foundations → Gráficos de datos**: el sistema entero —los cinco oficios del
+  color, la paleta con sus medidas, cuántas series caben, las marcas y los dos
+  huecos, y los errores que no se cometen.
+
+### Cambiado
+
+- **`VisuallyHidden`** acepta `as="div"` para envolver contenido de flujo que no
+  cabe dentro de un `span` —la tabla equivalente de `Chart`—. El default sigue
+  siendo `span`: no hay cambio para quien ya lo usa.
 ## v25.9.0
 
 Fase 0.4: las piezas de marketing que le faltaban al sistema para levantar

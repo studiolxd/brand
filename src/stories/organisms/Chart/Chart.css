@@ -1,0 +1,220 @@
+/* Chart — todo el color, la tipografía y el trazo salen de tokens `--chart-*`.
+   La geometría (posiciones, paths) la calcula el TSX; aquí no hay ni un valor
+   literal de color ni de tamaño. */
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--chart-block-gap);
+  margin: 0;
+  font-family: var(--chart-label-font-family);
+}
+
+.chart__title {
+  color: var(--chart-label-color);
+  font-family: var(--chart-label-font-family);
+  font-size: var(--chart-label-font-size);
+  font-weight: var(--chart-value-font-weight);
+}
+
+.chart__caption,
+.chart__empty {
+  margin: 0;
+  color: var(--chart-label-color);
+  font-family: var(--chart-label-font-family);
+  font-size: var(--chart-label-font-size);
+}
+
+/* El área de dibujo: el lienzo crece con su contenido y la banda del eje X va
+   incluida, así que nunca aparece un scroll vertical anidado. */
+.chart__plot {
+  position: relative;
+}
+
+.chart__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ─── Cromo: rejilla, ejes y rótulos ─────────────────────────── */
+
+.chart__grid-line {
+  stroke: var(--chart-grid-color);
+  stroke-width: var(--chart-grid-width);
+}
+
+.chart__axis {
+  stroke: var(--chart-axis-color);
+  stroke-width: var(--chart-axis-width);
+}
+
+.chart__axis-label {
+  fill: var(--chart-label-color);
+  font-family: var(--chart-label-font-family);
+  font-size: var(--chart-label-font-size);
+  font-weight: var(--chart-label-font-weight);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart__value-label {
+  fill: var(--chart-label-color);
+  font-family: var(--chart-label-font-family);
+  font-size: var(--chart-label-font-size);
+  font-weight: var(--chart-value-font-weight);
+}
+
+.chart__center-value {
+  fill: var(--chart-label-color);
+  font-family: var(--chart-label-font-family);
+  font-size: var(--chart-label-font-size);
+  font-weight: var(--chart-value-font-weight);
+}
+
+.chart__crosshair {
+  stroke: var(--chart-crosshair-color);
+  stroke-width: var(--chart-grid-width);
+}
+
+/* ─── Marcas ─────────────────────────────────────────────────── */
+
+.chart__line {
+  fill: none;
+  stroke: var(--chart-mark-color);
+  stroke-width: var(--chart-line-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart__area {
+  fill: var(--chart-mark-color);
+  fill-opacity: var(--chart-area-fill-opacity);
+  stroke: none;
+}
+
+/* El punto lleva un anillo del color de la superficie: así sigue legible cuando
+   cruza una línea u otro punto. Nunca un borde de color, que sería tinta con
+   peso de dato. */
+.chart__marker {
+  fill: var(--chart-mark-color);
+  stroke: var(--chart-surface);
+  stroke-width: var(--chart-marker-ring-width);
+}
+
+.chart__bar,
+.chart__slice {
+  fill: var(--chart-mark-color);
+  transition: fill-opacity var(--chart-transition-duration) var(--chart-transition-easing);
+}
+
+/* El hueco entre porciones lo hace el trazo del color de la superficie. */
+.chart__slice {
+  stroke: var(--chart-surface);
+  stroke-width: var(--chart-mark-gap);
+}
+
+.chart__line--muted,
+.chart__area--muted,
+.chart__marker--muted,
+.chart__bar--muted,
+.chart__slice--muted {
+  --chart-mark-color: var(--chart-muted-color);
+}
+
+/* Mientras el puntero está sobre una marca, las demás ceden. */
+.chart__marks:has([data-active]) .chart__bar:not([data-active]),
+.chart__marks:has([data-active]) .chart__slice:not([data-active]) {
+  fill-opacity: var(--chart-hover-opacity);
+}
+
+/* ─── Capa de exploración ────────────────────────────────────── */
+
+.chart__hit-layer {
+  position: absolute;
+  background: none;
+}
+
+.chart__hit-layer:focus-visible {
+  outline: var(--control-focus-ring-width) solid var(--chart-axis-color);
+  outline-offset: var(--control-focus-ring-inset-offset);
+}
+
+/* ─── Bocadillo ──────────────────────────────────────────────── */
+
+.chart__tooltip {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - var(--chart-tooltip-offset)));
+  max-width: var(--chart-tooltip-max-width);
+  padding-block: var(--chart-tooltip-padding-block);
+  padding-inline: var(--chart-tooltip-padding-inline);
+  border-radius: var(--chart-tooltip-border-radius);
+  background: var(--chart-tooltip-bg);
+  color: var(--chart-tooltip-color);
+  font-family: var(--chart-label-font-family);
+  font-size: var(--chart-tooltip-font-size);
+  line-height: var(--chart-tooltip-line-height);
+  pointer-events: none;
+}
+
+.chart__tooltip-header {
+  margin: 0;
+  font-weight: var(--chart-value-font-weight);
+}
+
+.chart__tooltip-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--chart-tooltip-row-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chart__tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: var(--chart-tooltip-row-gap);
+}
+
+/* En el bocadillo la serie se identifica con un trazo corto, no con un cuadro:
+   a esta densidad un bloque relleno es tinta de dato haciendo de etiqueta. */
+.chart__tooltip-key {
+  display: inline-block;
+  flex: none;
+  inline-size: var(--chart-legend-swatch-line-width);
+  block-size: var(--chart-line-width);
+  background: var(--chart-mark-color);
+}
+
+.chart__tooltip-value {
+  font-weight: var(--chart-value-font-weight);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Leyenda ────────────────────────────────────────────────── */
+
+.chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chart-legend-gap);
+}
+
+.chart__legend-item.chart__legend-item--muted {
+  --chart-mark-color: var(--chart-muted-color);
+}
+
+/* La muestra imita la marca: cuadro para barras, áreas y porciones; trazo para
+   líneas. El texto de la leyenda nunca lleva el color de la serie. */
+.chart__legend-swatch {
+  display: inline-block;
+  flex: none;
+  inline-size: var(--chart-legend-swatch-size);
+  block-size: var(--chart-legend-swatch-size);
+  background: var(--chart-mark-color);
+}
+
+.chart__legend-swatch.chart__legend-swatch--line {
+  inline-size: var(--chart-legend-swatch-line-width);
+  block-size: var(--chart-line-width);
+}

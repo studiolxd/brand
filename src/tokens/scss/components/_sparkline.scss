@@ -1,0 +1,11 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-sparkline-width: 5rem; // 80px — ancho por defecto de la chispa dentro de un StatTile
+$lxd-sparkline-height: 1.5rem; // 24px — alto por defecto: la chispa acompaña a una cifra, no la compite
+$lxd-sparkline-line-width: 2px; // Grosor de la línea. Es la misma marca que en Chart
+$lxd-sparkline-color: #6b6b6b; // Trazo de la serie: gris de atenuación, porque el dato que se lee es la cifra que va al lado
+$lxd-sparkline-accent-color: #1e7ff6; // Periodo actual y punto final: la ranura de apertura del sistema
+$lxd-sparkline-fill-opacity: 0.1; // Velo bajo la línea cuando la chispa se pinta como área
+$lxd-sparkline-marker-size: 0.5rem; // Diámetro del punto final
+$lxd-sparkline-baseline-color: #d0d0d0; // Línea del cero cuando la serie cruza el cero

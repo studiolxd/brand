@@ -1,0 +1,107 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ChartStories from "./Chart.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { chartTokens } from "../../../tokens/molecules/chart";
+
+<Meta of={ChartStories} />
+
+# Chart
+
+El **gráfico de datos** del sistema: línea, área, barras —verticales u horizontales, agrupadas o apiladas—, tarta y donut. Dibuja SVG a pelo, sin librería de gráficos, para que todo el color y toda la tipografía salgan de tokens, el marcado sea BEM y el primer render valga en servidor.
+
+Las reglas del sistema —la paleta, los oficios del color, la forma que corresponde a cada dato, las marcas— están en **Foundations → Gráficos de datos**. Aquí va la API.
+
+<Canvas of={ChartStories.Linea} />
+
+## Los datos
+
+`data` son filas y `series` dice qué columna es cada serie. `xKey` nombra la columna de la posición X:
+
+```tsx
+<Chart
+  type="line"
+  data={[{ mes: 'Ene', opus: 15, sonnet: 3 }, { mes: 'Feb', opus: 15, sonnet: 3 }]}
+  series={[{ key: 'opus', label: 'Opus' }, { key: 'sonnet', label: 'Sonnet' }]}
+  xKey="mes"
+  ariaLabel="Precio por millón de tokens, por modelo"
+/>
+```
+
+El **orden de `series` asigna el color**: la primera toma `--chart-series-1`, la segunda `--chart-series-2`… Como la identidad sigue a la entidad, filtrar una serie no repinta a las que quedan. Pasada la octava, la serie se pinta con el gris de «Otros»: el sistema no genera un noveno tono.
+
+`color` en una serie acepta **solo una referencia a token** (`'var(--chart-series-5)'`, o una custom property del producto). Nunca un color literal.
+
+## Las formas
+
+<Canvas of={ChartStories.Area} />
+
+Un área es para **una serie**: el velo al 10% dice «esto es una magnitud a lo largo del tiempo». Con `stacked` las áreas se apilan y cada una se rellena hasta la cima de la anterior, no hasta el cero.
+
+<Canvas of={ChartStories.AreaApilada} />
+
+<Canvas of={ChartStories.Barras} />
+
+Con `orientation="horizontal"` las categorías pasan al eje vertical. Es lo que hay que hacer cuando los nombres son largos o hay muchos.
+
+<Canvas of={ChartStories.BarrasHorizontales} />
+
+`stacked` apila las series dentro de cada barra —parte y todo—; sin `stacked` las agrupa para compararlas una contra otra.
+
+<Canvas of={ChartStories.BarrasApiladas} />
+
+<Canvas of={ChartStories.BarrasAgrupadas} />
+
+En **tarta** y **donut** el gráfico usa `xKey` como categoría y la **primera serie** como valor: cada fila es una porción. Solo para parte-de-un-todo de un vistazo, con seis porciones como mucho; para comparar valores parecidos, barras. El donut escribe el total en el centro.
+
+<Canvas of={ChartStories.Tarta} />
+
+<Canvas of={ChartStories.Donut} />
+
+## Énfasis: la forma más desaprovechada
+
+Cuando la historia es **una serie**, ocho colores la entierran. `emphasis` deja esa serie en color y manda el resto al gris de atenuación.
+
+<Canvas of={ChartStories.Enfasis} />
+
+## La capa de puntero
+
+El bocadillo y el filete vertical vienen de serie. El filete **se engancha a la posición de dato más cercana** —nadie apunta a una línea de 2px— y el bocadillo lista **todas las series de esa X**, con el valor delante y el nombre detrás: quien mira ya sabe qué serie busca, lo que quiere es la cifra. La serie se identifica con un trazo corto, no con un cuadro.
+
+En barras y porciones no hay filete: la marca es su propia zona sensible y las demás ceden opacidad mientras el puntero está encima.
+
+La misma información llega **con el teclado**: el área de dibujo se enfoca con `Tab` y las flechas recorren las posiciones (`Inicio`, `Fin` y `Esc` también). El movimiento va por `--chart-transition-duration`, que vale `0ms` con `prefers-reduced-motion`.
+
+`tooltip={false}` quita la capa; entonces conviene rotular los extremos.
+
+<Canvas of={ChartStories.SinBocadillo} />
+
+## Accesibilidad
+
+- El lienzo SVG va **`aria-hidden`**: quien lo lee es la capa de exploración, que es la que lleva `role="img"`, el `ariaLabel` y el foco.
+- **`ariaLabel` es obligatoria** y describe lo que se ve, no el tipo de gráfico.
+- Cada gráfico trae su **tabla equivalente oculta** (`VisuallyHidden`) con todas las filas y todas las series. El bocadillo enriquece, no franquea: ningún valor depende de pasar el puntero.
+- La **leyenda aparece desde dos series** —es el canal de identidad fiable— y se monta con `Inline` de `Tag`. Con una sola serie no hay leyenda: el título ya la nombra.
+
+## Textos
+
+Todo texto que el gráfico emite por su cuenta es una prop con default castellano: `tableCaption`, `tableHint`, `categoryLabel`, `valueLabel`, `shareLabel`, `emptyMessage`. Los números y los porcentajes salen de `Intl` con `locale` (default `es-ES`), y `formatValue` / `formatX` mandan sobre él.
+
+<Canvas of={ChartStories.Vacio} />
+
+## Superficie oscura
+
+<Canvas of={ChartStories.EnSuperficieOscura} />
+
+Cada ranura tiene su paso propio para prusia; no hay volteo automático. El hueco entre marcas y el anillo de los puntos toman `--chart-surface`, que también cambia de par, así que la separación sigue siendo la superficie y no un borde.
+
+## Medida y servidor
+
+El componente mide su contenedor con `ResizeObserver`. En servidor y en el primer render dibuja a 640px de ancho y se reajusta al montar, así que el HTML del servidor es válido y no hay salto de hidratación.
+
+## API
+
+<ArgTypes of={ChartStories} />
+
+## Tokens
+
+<TokenTable tokens={chartTokens} />

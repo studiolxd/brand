@@ -33,6 +33,7 @@ export const entryPoints = {
   'separator':           'src/stories/atoms/Separator/Separator.tsx',
   'time-select':         'src/stories/atoms/TimeSelect/TimeSelect.tsx',
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
+  'sparkline':           'src/stories/atoms/Sparkline/Sparkline.tsx',
   'kbd':                 'src/stories/atoms/Kbd/Kbd.tsx',
   'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
@@ -124,6 +125,7 @@ export const entryPoints = {
   // Organisms
   'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
+  'chart':               'src/stories/organisms/Chart/Chart.tsx',
 };
 
 export const clientComponents = new Set([
@@ -165,6 +167,7 @@ export const clientComponents = new Set([
   'app-launcher',
   'data-table',
   'conversation-thread',
+  'chart',
   'site-header',
   'language-switcher',
   'theme-switcher',

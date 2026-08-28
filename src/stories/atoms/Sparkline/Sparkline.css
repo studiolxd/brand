@@ -1,0 +1,34 @@
+/* Sparkline — la marca de tendencia que acompaña a una cifra. Todo el color y
+   el trazo salen de tokens `--sparkline-*`. */
+
+.sparkline {
+  display: block;
+  overflow: visible;
+  --sparkline-mark-color: var(--sparkline-color);
+}
+
+.sparkline__line {
+  fill: none;
+  stroke: var(--sparkline-mark-color);
+  stroke-width: var(--sparkline-line-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sparkline__area {
+  fill: var(--sparkline-mark-color);
+  fill-opacity: var(--sparkline-fill-opacity);
+  stroke: none;
+}
+
+/* El punto final es el periodo actual: va en el acento, no en el gris. */
+.sparkline__marker {
+  fill: var(--sparkline-accent-color);
+  stroke: var(--chart-surface);
+  stroke-width: var(--chart-marker-ring-width);
+}
+
+.sparkline__baseline {
+  stroke: var(--sparkline-baseline-color);
+  stroke-width: var(--chart-grid-width);
+}

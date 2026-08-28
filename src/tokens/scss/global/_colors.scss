@@ -6,6 +6,48 @@ $lxd-color-accent-1: #baabff; // Accent 1 brand color — used ~20% of the time
 $lxd-color-accent-2: #ffcd00; // Accent 2 brand color — used ~20% of the time
 $lxd-color-support-1: #20e38e; // Support 1 brand color — used ~5% of the time
 $lxd-color-support-2: #f05e1c; // Support 2 brand color — used ~5% of the time
+$lxd-color-chart-series-1: #1e7ff6; // Serie 1 — tono prusia de marca (OKLCH H 257) llevado al paso legible de gráfico. Ranura de apertura: una serie sola siempre es esta
+$lxd-color-chart-series-2: #f16123; // Serie 2 — tono cayena de marca (H 41)
+$lxd-color-chart-series-3: #27a0af; // Serie 3 — aqua, tono derivado entre esmeralda y prusia (H 207)
+$lxd-color-chart-series-4: #b29124; // Serie 4 — tono amarillo de marca (H 91) oscurecido hasta la banda de gráfico
+$lxd-color-chart-series-5: #c62c90; // Serie 5 — magenta, tono derivado entre lavanda y cayena (H 346)
+$lxd-color-chart-series-6: #7d9d22; // Serie 6 — lima, tono derivado entre amarillo y esmeralda (H 124)
+$lxd-color-chart-series-7: #6332c4; // Serie 7 — tono lavanda de marca (H 292)
+$lxd-color-chart-series-8: #28a86b; // Serie 8 — tono esmeralda de marca (H 157)
+$lxd-color-chart-series-1-on-dark: #1d7cf0; // Serie 1 — paso elegido para la superficie prusia
+$lxd-color-chart-series-2-on-dark: #ed5f22; // Serie 2 — paso para superficie oscura
+$lxd-color-chart-series-3-on-dark: #28a4b2; // Serie 3 — paso para superficie oscura
+$lxd-color-chart-series-4-on-dark: #93771c; // Serie 4 — paso para superficie oscura
+$lxd-color-chart-series-5-on-dark: #d840a0; // Serie 5 — paso para superficie oscura
+$lxd-color-chart-series-6-on-dark: #7fa123; // Serie 6 — paso para superficie oscura
+$lxd-color-chart-series-7-on-dark: #875ef0; // Serie 7 — paso para superficie oscura
+$lxd-color-chart-series-8-on-dark: #29ac6d; // Serie 8 — paso para superficie oscura
+$lxd-color-chart-sequential-100: #dce9fc; // Rampa secuencial (tono prusia) — magnitud mínima
+$lxd-color-chart-sequential-200: #b6d2f8; // Rampa secuencial — paso 200
+$lxd-color-chart-sequential-300: #8fbaf5; // Rampa secuencial — paso 300. Extremo claro admisible para una rampa ordinal (2.00:1 sobre blanco)
+$lxd-color-chart-sequential-400: #67a1f1; // Rampa secuencial — paso 400
+$lxd-color-chart-sequential-500: #3b88ee; // Rampa secuencial — paso 500
+$lxd-color-chart-sequential-600: #236ac5; // Rampa secuencial — paso 600
+$lxd-color-chart-sequential-700: #164b90; // Rampa secuencial — magnitud máxima
+$lxd-color-chart-sequential-100-on-dark: #0e376b; // Rampa secuencial sobre prusia — magnitud mínima (el paso que se retira hacia la superficie)
+$lxd-color-chart-sequential-200-on-dark: #164b90; // Rampa secuencial sobre prusia — paso 200
+$lxd-color-chart-sequential-300-on-dark: #1f61b6; // Rampa secuencial sobre prusia — paso 300. Extremo admisible para ordinal (2.75:1 sobre prusia)
+$lxd-color-chart-sequential-400-on-dark: #2978de; // Rampa secuencial sobre prusia — paso 400
+$lxd-color-chart-sequential-500-on-dark: #4e92ef; // Rampa secuencial sobre prusia — paso 500
+$lxd-color-chart-sequential-600-on-dark: #80b0f3; // Rampa secuencial sobre prusia — paso 600
+$lxd-color-chart-sequential-700-on-dark: #b8d3f8; // Rampa secuencial sobre prusia — magnitud máxima
+$lxd-color-chart-diverging-warm-1: #f37f54; // Divergente, brazo cálido (cayena) — paso junto al neutro
+$lxd-color-chart-diverging-warm-2: #d45c2c; // Divergente, brazo cálido — paso intermedio
+$lxd-color-chart-diverging-warm-3: #9f431f; // Divergente, brazo cálido — extremo
+$lxd-color-chart-diverging-cool-1: #70a6f2; // Divergente, brazo frío (prusia) — paso junto al neutro
+$lxd-color-chart-diverging-cool-2: #3484ee; // Divergente, brazo frío — paso intermedio
+$lxd-color-chart-diverging-cool-3: #1f61b6; // Divergente, brazo frío — extremo
+$lxd-color-chart-diverging-warm-1-on-dark: #b54e24; // Divergente cálido sobre prusia — paso junto al neutro
+$lxd-color-chart-diverging-warm-2-on-dark: #e26330; // Divergente cálido sobre prusia — paso intermedio
+$lxd-color-chart-diverging-warm-3-on-dark: #f48f6a; // Divergente cálido sobre prusia — extremo
+$lxd-color-chart-diverging-cool-1-on-dark: #256fcf; // Divergente frío sobre prusia — paso junto al neutro
+$lxd-color-chart-diverging-cool-2-on-dark: #488fef; // Divergente frío sobre prusia — paso intermedio
+$lxd-color-chart-diverging-cool-3-on-dark: #80b0f3; // Divergente frío sobre prusia — extremo
 $lxd-color-error-text-on-light: #b30000; // Error — texto/icono/borde sobre superficie clara. Nunca como background
 $lxd-color-error-text-on-dark: #ff8585; // Error — texto/icono/borde sobre superficie oscura (prussian). Nunca como background
 $lxd-color-error-fill: #b30000; // Error — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto

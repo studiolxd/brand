@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "25.9.0",
+  "version": "25.10.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -30,6 +30,10 @@
     "./command-palette": {
       "types": "./dist/_types/molecules/CommandPalette/CommandPalette.d.ts",
       "import": "./dist/command-palette.js"
+    },
+    "./chart": {
+      "types": "./dist/_types/organisms/Chart/Chart.d.ts",
+      "import": "./dist/chart.js"
     },
     "./conversation-thread": {
       "types": "./dist/_types/organisms/ConversationThread/ConversationThread.d.ts",
@@ -393,6 +397,10 @@
     "./skip-link": {
       "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
       "import": "./dist/skip-link.js"
+    },
+    "./sparkline": {
+      "types": "./dist/_types/atoms/Sparkline/Sparkline.d.ts",
+      "import": "./dist/sparkline.js"
     },
     "./spinner": {
       "types": "./dist/_types/atoms/Spinner/Spinner.d.ts",
