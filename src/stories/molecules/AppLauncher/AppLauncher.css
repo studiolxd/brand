@@ -89,11 +89,20 @@
     box-shadow var(--app-launcher-transition-duration) var(--app-launcher-transition-easing);
 }
 
-/* El tile bajo el puntero o el teclado se rellena: la rejilla de apps es la
-   lista de opciones del panel (Foundations → Colores, la excepción declarada). */
+/* El tile bajo el puntero o el teclado se rellena con la inversión de marca:
+   la rejilla de apps es la lista de opciones del panel (Foundations → Colores,
+   la excepción declarada). Nombre e inicial invierten con el relleno. */
 .app-launcher__tile:hover,
 .app-launcher__tile:focus-visible {
   background-color: var(--app-launcher-tile-highlighted-bg);
+  color: var(--app-launcher-tile-highlighted-color);
+}
+
+.app-launcher__tile:hover .app-launcher__tile-icon,
+.app-launcher__tile:focus-visible .app-launcher__tile-icon,
+.app-launcher__tile:hover .app-launcher__tile-name,
+.app-launcher__tile:focus-visible .app-launcher__tile-name {
+  color: inherit;
 }
 
 .app-launcher__tile:focus-visible {

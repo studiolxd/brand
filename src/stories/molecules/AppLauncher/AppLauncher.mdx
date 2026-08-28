@@ -15,7 +15,7 @@ Rejilla de acceso a las apps de la suite, en un panel flotante (`Popover` de
 
 ## App actual
 
-`currentAppId` marca la app activa (`aria-current="page"`) con la barra de tinta al borde de inicio del tile (`tile-active-marker-*`) y el nombre en énfasis. La barra se distingue del tile bajo el puntero, que se rellena (`tile-highlighted-bg`): una dice dónde estás, el otro dónde está el ratón, y se apilan sin pelearse.
+`currentAppId` marca la app activa (`aria-current="page"`) con la barra de tinta al borde de inicio del tile (`tile-active-marker-*`) y el nombre en énfasis. La barra se distingue del tile bajo el puntero, que se rellena invirtiendo la marca (`tile-highlighted-bg` / `tile-highlighted-color`): una dice dónde estás, el otro dónde está el ratón, y se apilan sin pelearse.
 
 <Canvas of={AppLauncherStories.ConAppActual} />
 
@@ -25,8 +25,9 @@ Rejilla de acceso a las apps de la suite, en un panel flotante (`Popover` de
 
 ## Superficie oscura
 
-El tile bajo el puntero se rellena con la superficie secundaria (`tile-highlighted-bg`), que sobre
-`.surface-dark`/`html.dark` pasa al gris oscuro por la regla de derivación. La app actual no se
+El tile bajo el puntero se rellena con la inversión de marca (`tile-highlighted-bg` /
+`tile-highlighted-color`): prusia con tinta clara en claro y, sobre `.surface-dark`/`html.dark`,
+blanco con tinta prusia por la regla de derivación. Nombre e inicial siguen esa tinta. La app actual no se
 rellena: es una barra de tinta, prusia en claro (`color.primary`); sobre superficie oscura
 coincidiría con el fondo ambiente, así que pasa a lavanda (`color.accent-1`) — el acento de estado
 activo del sistema, el mismo que usan `SidebarNav` y `Table`. El disparador de la barra, que no es

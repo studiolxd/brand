@@ -39,7 +39,8 @@
   --app-launcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --app-launcher-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --app-launcher-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
-  --app-launcher-tile-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del tile bajo el puntero o el teclado — el del Menu: la rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores) */
+  --app-launcher-tile-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del tile bajo el puntero o el teclado — el del Menu: la inversión de marca. La rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores) */
+  --app-launcher-tile-highlighted-color: var(--menu-item-highlighted-color); /** Texto del tile resaltado — el del Menu: nombre e inicial invierten con el relleno */
 }
 
 .surface-dark,
@@ -53,4 +54,5 @@ html.dark {
   --app-launcher-content-bg: var(--floating-panel-bg); /** Fondo del panel — surface-dark */
   --app-launcher-content-border-color: var(--floating-panel-border-color); /** Borde del panel — surface-dark */
   --app-launcher-tile-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del tile resaltado — surface-dark */
+  --app-launcher-tile-highlighted-color: var(--menu-item-highlighted-color); /** Texto del tile resaltado — surface-dark */
 }
