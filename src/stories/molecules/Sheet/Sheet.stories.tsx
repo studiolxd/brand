@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Sheet } from './Sheet';
@@ -120,7 +120,9 @@ export const Contrato: Story = {
     await expect(closeButton).toHaveFocus();
 
     await userEvent.click(closeButton);
-    await expect(dialog).not.toBeInTheDocument();
+    // Base UI mantiene el panel montado durante la animación de salida
+    // (`data-closed` + `data-ending-style`) y lo desmonta al terminar.
+    await waitFor(() => expect(dialog).not.toBeInTheDocument());
     await expect(trigger).toHaveFocus();
   },
 };

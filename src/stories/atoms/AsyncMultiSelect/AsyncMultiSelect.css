@@ -213,7 +213,7 @@
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
 .async-multi-select.async-multi-select--sm {
   font-size: var(--async-multi-select-sm-font-size);
-  --multi-select-height: var(--async-multi-select-sm-height);
+  --async-multi-select-height: var(--async-multi-select-sm-height);
   padding-inline: var(--async-multi-select-sm-padding-inline);
 }
 
@@ -225,7 +225,7 @@
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
 .async-multi-select.async-multi-select--lg {
   font-size: var(--async-multi-select-lg-font-size);
-  --multi-select-height: var(--async-multi-select-lg-height);
+  --async-multi-select-height: var(--async-multi-select-lg-height);
   padding-inline: var(--async-multi-select-lg-padding-inline);
 }
 

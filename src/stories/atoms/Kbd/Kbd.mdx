@@ -29,7 +29,8 @@ separador entre ellas; no hay una variante de combo.
 
 Tres tallas, que cambian cuerpo y aire. El **ancho mínimo no es una talla de
 componente**: es exactamente la altura de la propia tecla —cuerpo + aire +
-bordes—, de modo que una tecla de un carácter sale cuadrada en las tres. Un
+bordes—, de modo que una tecla de un carácter sale casi cuadrada en las tres
+(el aire horizontal, más generoso que el vertical, la ensancha un poco). Un
 keycap es una marca dentro del texto, no un control de una fila de formulario,
 así que no se alinea con la escala de 32/40/48.
 
@@ -52,8 +53,9 @@ min-size = cuerpo × interlineado + 2 × aire vertical + 2 × borde
 ```
 
 Es la misma receta que `textarea.min-height`, y da 24 / 26 / 38px en `sm` / `md`
-/ `lg`. El ancho mínimo usa esa misma cifra, así que una tecla de un carácter
-sale cuadrada en las tres tallas.
+/ `lg`. El ancho mínimo usa esa misma cifra como suelo, así que una tecla de un
+carácter sale casi cuadrada en las tres tallas — el aire horizontal (mayor que
+el vertical, a propósito) la ensancha unos pocos píxeles sobre ese mínimo.
 
 **Por qué no se alinea a los 32px de los controles.** La regla de tallas
 (32/40/48) es para lo que se pulsa y se coloca en una fila de formulario: un
