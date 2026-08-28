@@ -109,6 +109,7 @@
   --switcher-field-label-line-height: var(--text-line-height);
   --switcher-field-error-font-size: var(--form-error-font-size);
   --switcher-field-helper-font-size: var(--form-helper-font-size);
+  --table-of-contents-item-font-size: var(--text-paragraph-small-font-size);
   --textarea-field-error-font-size: var(--form-error-font-size);
   --textarea-field-helper-font-size: var(--form-helper-font-size);
   --time-field-error-font-size: var(--form-error-font-size);

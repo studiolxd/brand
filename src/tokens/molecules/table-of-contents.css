@@ -1,0 +1,41 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --table-of-contents-gap: var(--spacing-1); /** Aire entre dos entradas del índice */
+  --table-of-contents-title-font-size: var(--font-size-1); /** Tamaño del rótulo del índice («En esta página») */
+  --table-of-contents-title-space-after: var(--spacing-3); /** Aire entre el rótulo y la primera entrada */
+  --table-of-contents-item-line-height: var(--line-height-snug); /** Interlineado de una entrada, para los títulos que ocupan dos líneas */
+  --table-of-contents-item-padding-block: var(--spacing-1); /** Padding vertical de una entrada: agranda el área de pulsación sin separar la lista */
+  --table-of-contents-item-padding-inline-start: var(--spacing-3); /** Sangría base de una entrada, que deja sitio a la barra de la entrada actual */
+  --table-of-contents-item-indent: var(--spacing-3); /** Sangría que suma cada nivel de profundidad respecto al título más alto del índice */
+  --table-of-contents-sticky-offset: var(--spacing-5); /** Distancia al borde superior cuando el índice queda fijo (`sticky`). El consumidor la sube si tiene una cabecera fija más alta */
+  --table-of-contents-sticky-max-block-size: calc(100vh - (2 * var(--spacing-5))); /** Alto máximo del índice fijo: el alto de la ventana menos su aire arriba y abajo. Un índice largo scrollea dentro */
+  --table-of-contents-transition-duration: var(--motion-duration-fast); /** Duración de la transición de hover */
+  --table-of-contents-transition-easing: var(--motion-easing-default); /** Easing de la transición de hover */
+  --table-of-contents-title-font-weight: var(--font-weight-emphasis); /** Peso del rótulo del índice */
+  --table-of-contents-title-color: var(--color-text-muted-on-light); /** Color del rótulo del índice — atenuado: rotula, no compite con las entradas */
+  --table-of-contents-item-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de una entrada: un peldaño por debajo del texto que indexa */
+  --table-of-contents-item-color: var(--color-text-on-light); /** Color de una entrada — tinta de la superficie */
+  --table-of-contents-item-hover-line-width: var(--border-width-default); /** Grosor de la línea que marca la entrada bajo el puntero. El hover no pinta relleno (regla de Colores): línea de tinta bajo la entrada, como en SidebarNav */
+  --table-of-contents-item-hover-line-color: var(--color-primary); /** Color de la línea de hover — tinta de la superficie */
+  --table-of-contents-item-active-color: var(--color-primary); /** Color de la entrada actual */
+  --table-of-contents-item-active-font-weight: var(--font-weight-emphasis); /** Peso de la entrada actual: lo actual persiste, así que se dice con peso y barra, nunca con relleno */
+  --table-of-contents-item-active-marker-width: var(--border-width-focus); /** Grosor de la barra al borde de inicio que marca la sección en la que estás */
+  --table-of-contents-item-active-marker-color: var(--color-primary); /** Color de la barra de la entrada actual — tinta de la superficie */
+  --table-of-contents-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco de una entrada */
+  --table-of-contents-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
+  --table-of-contents-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --table-of-contents-title-color: var(--color-text-muted-on-dark); /** Color del rótulo — surface-dark */
+  --table-of-contents-item-color: var(--color-text-on-dark); /** Color de una entrada — surface-dark */
+  --table-of-contents-item-hover-line-color: var(--color-text-on-dark); /** Línea de hover — surface-dark */
+  --table-of-contents-item-active-color: var(--color-accent-1); /** Entrada actual — surface-dark: lavanda. El prusia de `item-active-color` sería invisible sobre el fondo oscuro, igual que en SidebarNav */
+  --table-of-contents-item-active-marker-color: var(--color-accent-1); /** Barra de la entrada actual — surface-dark: lavanda, emparejada con su tinta */
+  --table-of-contents-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

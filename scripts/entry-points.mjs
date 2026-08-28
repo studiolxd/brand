@@ -107,6 +107,7 @@ export const entryPoints = {
   'dropdown-field':      'src/stories/molecules/DropdownField/DropdownField.tsx',
   'notification-button': 'src/stories/molecules/NotificationButton/NotificationButton.tsx',
   'prose':               'src/stories/molecules/Prose/Prose.tsx',
+  'table-of-contents':   'src/stories/molecules/TableOfContents/TableOfContents.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',

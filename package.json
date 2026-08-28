@@ -422,6 +422,10 @@
       "types": "./dist/_types/molecules/Table/Table.d.ts",
       "import": "./dist/table.js"
     },
+    "./table-of-contents": {
+      "types": "./dist/_types/molecules/TableOfContents/TableOfContents.d.ts",
+      "import": "./dist/table-of-contents.js"
+    },
     "./tabs": {
       "types": "./dist/_types/atoms/Tabs/Tabs.d.ts",
       "import": "./dist/tabs.js"

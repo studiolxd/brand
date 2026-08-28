@@ -1,0 +1,90 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TableOfContentsStories from "./TableOfContents.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import {
+  tableOfContentsBaseTokens,
+  tableOfContentsDarkTokens,
+} from "../../../tokens/molecules/table-of-contents";
+
+<Meta of={TableOfContentsStories} />
+
+# TableOfContents
+
+El índice de anclas de la página: los encabezados del documento, con sangría por nivel y una marca en la sección en la que está el lector. Acompaña a `Prose` en la documentación, en los textos legales y en cualquier página larga.
+
+<Canvas of={TableOfContentsStories.PorDefecto} />
+
+## Controlado, y sin scroll propio
+
+El índice **no observa la página**: no monta un `IntersectionObserver`, no lee el hash ni decide qué está a la vista. Recibe `activeId` y lo pinta.
+
+Esa decisión es deliberada. Quien renderiza el documento ya sabe cómo quiere resolver el «dónde estoy» —un observador de intersección, el hash de la URL, el scroll de un contenedor propio— y esas tres respuestas no caben en un componente. Dejar el cálculo fuera hace que el mismo índice sirva para las tres, y que se pueda renderizar en el servidor cuando no hay ninguna.
+
+Sin `activeId`, el índice es una lista de anclas y ya.
+
+<Canvas of={TableOfContentsStories.SinSeccionActiva} />
+
+## Anatomía
+
+- Un `nav` con nombre accesible (`ariaLabel`, «En esta página» por defecto).
+- Un rótulo visible opcional (`title`). Sin él no se pinta ninguno, pero el `nav` conserva su nombre.
+- Una `List` de tipo `plain` con un `Link` por entrada, apuntando a `#id`.
+
+<Canvas of={TableOfContentsStories.SinRotulo} />
+
+## Entradas y niveles
+
+`items` es `{ id, label, level }[]` en el orden en que los encabezados aparecen en el documento. `id` es el del encabezado —el mismo que pone `rehype-slug`— y `level` su nivel (`2` para un `h2`).
+
+La sangría es **relativa al nivel más alto de la lista**: un índice que empieza en `h3` sangra igual que uno que empieza en `h2`, sin que el consumidor tenga que normalizar nada. Hay seis peldaños de sangría; más allá, se aplica el último.
+
+## Estados
+
+Los dos grafismos son los del sistema (Foundations → Colores § «Estados: nada se rellena»), y se apilan sin pelearse:
+
+| Estado | Grafismo |
+| --- | --- |
+| **Hover** | Línea de tinta bajo la entrada |
+| **Actual** (`activeId`) | Barra de tinta en el borde de inicio y peso de énfasis |
+| **Foco** | El anillo del sistema |
+
+Ninguno pinta relleno. La entrada actual es la única que persiste cuando el ratón se va, que es justo la prueba que separa un estado de un valor.
+
+## Fijo al hacer scroll
+
+`sticky` fija el índice mientras la página se desplaza. La distancia al borde (`--table-of-contents-sticky-offset`) y el alto máximo (`--table-of-contents-sticky-max-block-size`) son tokens: un producto con cabecera fija alta sube el primero sin tocar CSS. Un índice más largo que la ventana scrollea dentro de sí mismo en vez de empujar la página.
+
+<Canvas of={TableOfContentsStories.Fijo} />
+
+## Superficie oscura
+
+La entrada actual pasa a lavanda (`color.accent-1`), tinta y barra emparejadas: el prusia de la superficie clara sería invisible sobre el fondo oscuro, igual que en `SidebarNav`. El resto sale de la regla de derivación.
+
+<Canvas of={TableOfContentsStories.EnSuperficieOscura} />
+
+## Textos
+
+`ariaLabel` y `title` son props con default castellano. Los `label` de las entradas son datos: llegan con el documento.
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={tableOfContentsBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={tableOfContentsDarkTokens} />
+
+## Accesibilidad
+
+- Es un `nav` con nombre accesible: un lector de pantalla lo lista junto a la navegación principal y las migas, y los tres se distinguen por su nombre.
+- La sección actual lleva `aria-current="location"` —el valor para «la parte de esta página en la que estás»—, no `page`, que significa otra cosa: la página actual dentro de un menú.
+- La sangría es visual. El orden y el nivel de los encabezados los dice el documento, no el índice: si el esquema está mal, se arregla en el documento.
+- Cada entrada es un enlace de verdad: se abre en otra pestaña, se copia y se recorre con `Tab` como cualquier otro.
+
+## Props
+
+<ArgTypes of={TableOfContentsStories} />

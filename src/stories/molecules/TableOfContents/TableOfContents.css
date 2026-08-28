@@ -1,0 +1,88 @@
+.table-of-contents {
+  font-size: var(--table-of-contents-item-font-size);
+}
+
+/* Fijo al hacer scroll. El alto máximo deja el índice largo scrolleando
+   dentro de sí mismo en vez de empujar la página. */
+.table-of-contents.table-of-contents--sticky {
+  position: sticky;
+  inset-block-start: var(--table-of-contents-sticky-offset);
+  max-block-size: var(--table-of-contents-sticky-max-block-size);
+  overflow-y: auto;
+}
+
+.table-of-contents__title {
+  margin-block: 0 var(--table-of-contents-title-space-after);
+  margin-inline: 0;
+  font-size: var(--table-of-contents-title-font-size);
+  font-weight: var(--table-of-contents-title-font-weight);
+  color: var(--table-of-contents-title-color);
+}
+
+.table-of-contents__list.list {
+  font-size: inherit;
+}
+
+.table-of-contents__item + .table-of-contents__item {
+  margin-block-start: var(--table-of-contents-gap);
+}
+
+/* ─── Entrada ────────────────────────────────────────────────
+   La sangría la lleva el `li`, no el enlace: así la barra de la entrada
+   actual y su anillo de foco quedan pegados al texto y no al margen. */
+
+.table-of-contents__item {
+  padding-inline-start: calc(
+    var(--table-of-contents-item-padding-inline-start) +
+    var(--table-of-contents-item-level, 0) * var(--table-of-contents-item-indent)
+  );
+}
+
+.table-of-contents__item--level-0 { --table-of-contents-item-level: 0; }
+.table-of-contents__item--level-1 { --table-of-contents-item-level: 1; }
+.table-of-contents__item--level-2 { --table-of-contents-item-level: 2; }
+.table-of-contents__item--level-3 { --table-of-contents-item-level: 3; }
+.table-of-contents__item--level-4 { --table-of-contents-item-level: 4; }
+.table-of-contents__item--level-5 { --table-of-contents-item-level: 5; }
+
+/* El índice viste sus propios enlaces: fuera el subrayado de reposo que la
+   base pone a cualquier `<a>` (patrón documentado en Link.css). */
+.table-of-contents__link {
+  display: block;
+  padding-block: var(--table-of-contents-item-padding-block);
+  box-shadow: none;
+  font-size: var(--table-of-contents-item-font-size);
+  line-height: var(--table-of-contents-item-line-height);
+  color: var(--table-of-contents-item-color);
+  transition:
+    box-shadow var(--table-of-contents-transition-duration) var(--table-of-contents-transition-easing),
+    color var(--table-of-contents-transition-duration) var(--table-of-contents-transition-easing);
+}
+
+/* Hover: línea de tinta bajo la entrada, nunca relleno (Foundations → Colores). */
+.table-of-contents__link:hover {
+  color: var(--table-of-contents-item-color);
+  box-shadow: inset 0 calc(-1 * var(--table-of-contents-item-hover-line-width)) 0 0 var(--table-of-contents-item-hover-line-color);
+}
+
+.table-of-contents__link:focus-visible {
+  outline: var(--table-of-contents-focus-ring-width) solid var(--table-of-contents-focus-ring-color);
+  outline-offset: var(--table-of-contents-focus-ring-offset);
+}
+
+/* Actual: barra de tinta al borde de inicio y peso de énfasis — la sección en
+   la que estás sigue pintada aunque el ratón se vaya. */
+.table-of-contents__link.table-of-contents__link--active {
+  box-shadow: inset var(--table-of-contents-item-active-marker-width) 0 0 var(--table-of-contents-item-active-marker-color);
+  color: var(--table-of-contents-item-active-color);
+  font-weight: var(--table-of-contents-item-active-font-weight);
+}
+
+/* Los dos grafismos se apilan: la entrada actual bajo el puntero conserva su
+   barra y suma su línea. */
+.table-of-contents__link.table-of-contents__link--active:hover {
+  box-shadow:
+    inset var(--table-of-contents-item-active-marker-width) 0 0 var(--table-of-contents-item-active-marker-color),
+    inset 0 calc(-1 * var(--table-of-contents-item-hover-line-width)) 0 0 var(--table-of-contents-item-hover-line-color);
+  color: var(--table-of-contents-item-active-color);
+}

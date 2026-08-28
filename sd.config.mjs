@@ -130,6 +130,7 @@ const filters = {
   chart:                (t) => t.path[0] === 'chart',
   sparkline:            (t) => t.path[0] === 'sparkline',
   prose:                (t) => t.path[0] === 'prose',
+  'table-of-contents':  (t) => t.path[0] === 'table-of-contents',
 };
 
 function cssFile(destination, filterKey) {
@@ -267,6 +268,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/assistant-message.css', 'assistant-message'),
         cssFile('molecules/chat-shell.css',        'chat-shell'),
         cssFile('molecules/prose.css',             'prose'),
+        cssFile('molecules/table-of-contents.css', 'table-of-contents'),
         cssFile('molecules/input-phone-field.css',  'input-phone-field'),
         cssFile('molecules/otp-field.css',          'otp-field'),
         cssFile('molecules/async-select-field.css', 'async-select-field'),
@@ -395,6 +397,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_assistant-message.scss', 'assistant-message'),
         scssFile('molecules/_chat-shell.scss',        'chat-shell'),
         scssFile('molecules/_prose.scss',             'prose'),
+        scssFile('molecules/_table-of-contents.scss', 'table-of-contents'),
         scssFile('molecules/_input-phone-field.scss',  'input-phone-field'),
         scssFile('molecules/_otp-field.scss',          'otp-field'),
         scssFile('molecules/_async-select-field.scss', 'async-select-field'),
