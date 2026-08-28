@@ -2,10 +2,18 @@ import { forwardRef, useId, type ReactNode } from 'react';
 import './SwitcherField.css';
 import { useFormSize } from '../../constants/form-size';
 import { Switcher } from '../../atoms/Switcher/Switcher';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 
 export interface SwitcherFieldProps {
   /** Texto del interruptor, a su derecha. Acepta JSX. */
   label: ReactNode;
+  /**
+   * Oculta la etiqueta visualmente sin sacarla del árbol de accesibilidad: el
+   * interruptor sigue nombrándose con ella. Para filas de una tabla de
+   * preferencias, donde el nombre del ajuste ya está en su columna.
+   * Default: `false`.
+   */
+  labelHidden?: boolean;
   /** `id` del control. Si no se pasa, se genera con `useId`. */
   id?: string;
   checked?: boolean;
@@ -36,6 +44,7 @@ export interface SwitcherFieldProps {
  */
 export const SwitcherField = forwardRef<HTMLElement, SwitcherFieldProps>(function SwitcherField({
   label,
+  labelHidden = false,
   id: idProp,
   checked,
   defaultChecked,
@@ -86,9 +95,13 @@ export const SwitcherField = forwardRef<HTMLElement, SwitcherFieldProps>(functio
           onCheckedChange={onCheckedChange}
           onBlur={onBlur}
         />
-        <span id={`${id}-label`} className="switcher-field__label">
-          {label}
-        </span>
+        {labelHidden ? (
+          <VisuallyHidden id={`${id}-label`}>{label}</VisuallyHidden>
+        ) : (
+          <span id={`${id}-label`} className="switcher-field__label">
+            {label}
+          </span>
+        )}
       </label>
       {errorMessage && (
         <span id={errorId} className="switcher-field__error" role="alert">{errorMessage}</span>

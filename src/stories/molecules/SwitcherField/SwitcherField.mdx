@@ -19,6 +19,10 @@ El texto va **a la derecha del interruptor**, con la tipografía de texto corrie
 
 El disparador de Base UI es un `<button role="switch">` de verdad y lleva el `id`, así que la etiqueta lo nombra por `htmlFor`; sin `id`, el campo genera uno con `useId`.
 
+`labelHidden` la **oculta visualmente sin quitarla**: sigue en el DOM y en el árbol de accesibilidad, así que el interruptor conserva su nombre. Es lo que hace falta en una tabla de preferencias, donde el nombre del ajuste ya está en su columna y repetirlo al lado del interruptor sería ruido. La etiqueta sigue siendo obligatoria: ocultarla no es lo mismo que no tenerla.
+
+<Canvas of={SwitcherFieldStories.EtiquetaOculta} />
+
 ## Ayuda y error
 
 `helperText` describe; `errorMessage` avisa (`role="alert"`) y pone el control en error por sí solo —`error` sirve para marcarlo sin mensaje—. Los dos quedan enlazados por `aria-describedby`, y el error también por `aria-invalid`. El track no tiene borde: el error se marca con un anillo de 1px en el color de texto de error.

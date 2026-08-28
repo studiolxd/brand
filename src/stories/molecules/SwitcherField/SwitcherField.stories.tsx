@@ -45,6 +45,51 @@ export const Tallas: Story = {
   ),
 };
 
+/**
+ * `labelHidden` deja la etiqueta en el árbol de accesibilidad —el interruptor
+ * se sigue llamando igual— pero no la pinta. Es lo que necesita una tabla de
+ * preferencias, donde el nombre del ajuste ya está en su propia columna.
+ */
+export const EtiquetaOculta: Story = {
+  name: 'Etiqueta oculta',
+  render: () => (
+    <table style={{ borderCollapse: 'collapse' }}>
+      <thead>
+        <tr>
+          <th style={{ textAlign: 'start', paddingInlineEnd: '2rem' }}>Aviso</th>
+          <th style={{ textAlign: 'start' }}>Correo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Menciones</td>
+          <td><SwitcherField labelHidden label="Menciones por correo" defaultChecked /></td>
+        </tr>
+        <tr>
+          <td>Resumen semanal</td>
+          <td><SwitcherField labelHidden label="Resumen semanal por correo" /></td>
+        </tr>
+      </tbody>
+    </table>
+  ),
+};
+
+export const ContratoEtiquetaOculta: Story = {
+  name: 'Test — con labelHidden el interruptor conserva su nombre',
+  tags: ['!dev'],
+  args: { id: 'menciones', labelHidden: true, label: 'Menciones por correo' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Sigue nombrando al control...
+    const control = canvas.getByRole('switch', { name: 'Menciones por correo' });
+    await expect(control).toHaveAttribute('aria-labelledby', 'menciones-label');
+    // ...y sigue en el DOM, solo que oculta visualmente
+    const etiqueta = canvasElement.querySelector('#menciones-label');
+    await expect(etiqueta).toHaveClass('visually-hidden');
+    await expect(canvasElement.querySelector('.switcher-field__label')).toBeNull();
+  },
+};
+
 export const Contrato: Story = {
   name: 'Test — etiqueta, ayuda y error enlazados al control',
   tags: ['!dev'],
