@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.27.1
+
+### Corregido
+
+- **`@studiolxd/brand/fonts.css`**: alias con extensión de la subruta `./fonts` (como ya tenían
+  `brand.css` y `tokens.css`). Sin él, TypeScript 6 con resolución estricta marca TS2882 en el
+  `import "@studiolxd/brand/fonts"` de efecto secundario y obligaba a una declaración de módulo
+  por app. Consumidores: importar `@studiolxd/brand/fonts.css`.
+
 ## v25.27.0
 
 ### Cambiado
