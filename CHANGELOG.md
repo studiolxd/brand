@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.29.1
+
+### Cambiado
+
+- **`ConsentPreferences` se abre en `Modal` por defecto** (`surface` pasa de `'sheet'` a
+  `'modal'`); decisión del sistema del 2026-08-29. El `Sheet` lateral sigue disponible con
+  `surface="sheet"` para otros usos. Consumidores que ya pasaban `surface="modal"` pueden
+  retirar la prop.
+
 ## v25.29.0
 
 ### Añadido

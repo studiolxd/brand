@@ -47,8 +47,9 @@ las necesarias y una.
 ## El panel de categorías
 
 `ConsentPreferences` sí es un diálogo —foco atrapado, Escape cierra—, porque es
-una decisión enfocada con principio y final. Se abre sobre `Sheet` (default) o
-sobre `Modal` con `surface="modal"`.
+una decisión enfocada con principio y final. Se abre sobre `Modal` (default) o,
+con `surface="sheet"`, sobre el `Sheet` lateral, que el sistema conserva para
+otros usos.
 
 Cada categoría es un `SwitcherField` con su nombre y su explicación; la línea
 entre ellas es el átomo `Separator`. Las categorías `required` salen marcadas,
@@ -146,7 +147,7 @@ Definidos en `tokens/molecule/consent.json`.
 | `onChange` | `(value) => void` | — | Si se pasa, el panel es controlado |
 | `onSave` | `(value) => void` | — | Guardar. Recibe la decisión completa |
 | `onAcceptAll` / `onRejectAll` | `() => void` | — | Botones opcionales del pie |
-| `surface` | `'sheet' \| 'modal'` | `'sheet'` | Sobre qué se abre |
+| `surface` | `'sheet' \| 'modal'` | `'modal'` | Sobre qué se abre: modal (decisión del sistema, 2026-08-29) o sheet lateral, que se conserva para usos futuros |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
 | `title` | `ReactNode` | `'Preferencias de cookies'` | Título del panel |
 | `description` | `ReactNode` | castellano | Texto bajo el título |

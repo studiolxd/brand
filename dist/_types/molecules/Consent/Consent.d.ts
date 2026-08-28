@@ -83,7 +83,7 @@ export interface ConsentPreferencesProps {
     onRejectAll?: () => void;
     /** Superficie sobre la que se abre el panel. Default: `'sheet'`. */
     surface?: 'sheet' | 'modal';
-    /** Borde por el que entra el panel (solo con `surface="sheet"`). Default: `'right'`. */
+    /** Borde por el que entra el panel (solo con `surface="sheet"`, la alternativa lateral que el sistema conserva para otros usos). Default: `'right'`. */
     side?: 'top' | 'right' | 'bottom' | 'left';
     /** Título del panel. Default castellano: `'Preferencias de cookies'`. */
     title?: ReactNode;
@@ -104,7 +104,7 @@ export interface ConsentPreferencesProps {
 }
 /**
  * El panel de preferencias por categorías: un interruptor por categoría
- * opcional y una fila fija para las necesarias. Se abre sobre `Sheet` (default)
+ * opcional y una fila fija para las necesarias. Se abre sobre `Modal` (default)
  * o sobre `Modal`; el foco, el cierre con Escape y el velo los pone Base UI.
  *
  * Sin `onChange` el panel lleva un **borrador**: los interruptores se mueven

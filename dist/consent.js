@@ -60,7 +60,7 @@ function m(e, t) {
 	for (let e of t) e.required && (n[e.id] = !0);
 	return n;
 }
-function h({ open: t, onOpenChange: n, categories: r, value: p, onChange: h, onSave: g, onAcceptAll: _, onRejectAll: v, surface: y = "sheet", side: b = "right", title: x = "Preferencias de cookies", description: S = "Las cookies necesarias no se pueden desactivar: sin ellas el sitio no funciona. El resto son cosa tuya.", saveLabel: C = "Guardar preferencias", acceptAllLabel: w = "Aceptar todas", rejectAllLabel: T = "Rechazar todas", closeLabel: E = "Cerrar", alwaysOnLabel: D = "Siempre activa", className: O }) {
+function h({ open: t, onOpenChange: n, categories: r, value: p, onChange: h, onSave: g, onAcceptAll: _, onRejectAll: v, surface: y = "modal", side: b = "right", title: x = "Preferencias de cookies", description: S = "Las cookies necesarias no se pueden desactivar: sin ellas el sitio no funciona. El resto son cosa tuya.", saveLabel: C = "Guardar preferencias", acceptAllLabel: w = "Aceptar todas", rejectAllLabel: T = "Rechazar todas", closeLabel: E = "Cerrar", alwaysOnLabel: D = "Siempre activa", className: O }) {
 	let k = h !== void 0, [A, j] = l(() => m(p, r));
 	c(() => {
 		t && !k && j(m(p, r));
