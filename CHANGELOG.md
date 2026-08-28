@@ -7,6 +7,74 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.7.0
+
+### Añadido
+
+- **`Separator`** (átomo, `@studiolxd/brand/separator`) — la línea de
+  separación del sistema, que hasta ahora cada menú, cada panel y cada
+  aplicación pintaban por su cuenta. Es un `<hr>` (el elemento que ya significa
+  «separación» en HTML), con el grosor pintado por el fondo para que el mismo
+  token sirva de alto en horizontal y de ancho en vertical. Props:
+  `orientation` (`horizontal` | `vertical`), `decorative` (default `true`: sale
+  del árbol de accesibilidad; con `false` conserva su rol `separator` y declara
+  `aria-orientation` en vertical) y `spacing` (`sm` | `md` | `lg`, el aire va en
+  la propia línea). Tokens nuevos `separator.color`, `separator.thickness`,
+  `separator.spacing-sm|md|lg` y `separator.surface-dark-color`.
+- **`ConsentBanner` + `ConsentPreferences`** (molécula,
+  `@studiolxd/brand/consent`) — el par de piezas del consentimiento de cookies
+  que las ocho aplicaciones de la suite tenían copiado. La banda es una
+  `role="region"` con nombre, fija al borde inferior: **no atrapa el foco, no
+  lleva velo y no bloquea la página**, y rechazar cuesta exactamente lo mismo
+  que aceptar (un clic, la misma fila). El panel es un diálogo sobre `Sheet`
+  (default) o `Modal` (`surface="modal"`), con un `SwitcherField` por categoría,
+  `Separator` entre ellas y las categorías `required` marcadas, deshabilitadas y
+  con la marca «Siempre activa». **El DS no guarda nada**: ni cookies, ni
+  `localStorage`, ni caducidad — props controladas y callbacks; la decisión y su
+  persistencia siguen siendo del consumidor. Sin `onChange` el panel lleva
+  borrador y solo devuelve la decisión al guardar; con `onChange` es controlado.
+  Todos los textos son props con default castellano. Tokens nuevos
+  `consent.banner.*` y `consent.preferences.*`.
+- `Card`: prop **`render`** — el modo enlace sobre el elemento de navegación de
+  la aplicación (el `Link` del router), con `useRender` de Base UI, igual que
+  `Button` y `SiteNav`. Manda sobre `href`, que sigue funcionando igual.
+- `Heading` y `Paragraph` reenvían el resto de props de su elemento (`data-*`,
+  `aria-*`, `id`…) y aceptan `ref`.
+
+### Cambiado
+
+- `CardTitle` renderiza el átomo `Heading` en vez de un `<div>`: el título de
+  una tarjeta es un encabezado de verdad, cuenta para el esquema del documento y
+  un lector de pantalla puede saltar de tarjeta en tarjeta. Props nuevas `level`
+  (default `3`) y `size` (default `4`) — el nivel dice de qué encabezado cuelga
+  la tarjeta, el tamaño cómo se ve. `CardDescription` renderiza `Paragraph` en
+  talla `small`, así que su cuerpo sigue el peldaño de párrafo de la superficie
+  de lectura. **Breaking de facto para quien ya compusiera un encabezado propio
+  dentro de `CardTitle`**: ahora el título ya es el encabezado.
+- `CardHeader` pasa de fila flex a rejilla de dos columnas: el texto a la
+  izquierda (título y descripción, uno debajo de otro) y la acción anclada
+  arriba a la derecha. Las cuatro subpartes son hermanas — se escriben en el
+  orden en que se leen, sin envoltorio para el bloque de texto. Token nuevo
+  `card.header-row-gap`.
+- La regla `.card p` de la link-card pasa a `.card p:not(.paragraph)`: deja
+  fuera al átomo `Paragraph` —y con él a `CardDescription`—, que trae su propio
+  cuerpo de la superficie y no quiere el aire de la maqueta de marketing.
+- Los separadores de `Menu`, `UserMenu`, `OrgSwitcher`, `Sidebar` y `Select`
+  hacen cascada sobre los tokens del átomo nuevo: `--menu-separator-color` y
+  compañía apuntan a `separator.color` / `thickness` / `spacing-md`, así que
+  cambiar la línea del sistema los cambia a todos a la vez. Siguen renderizando
+  su propio elemento, que se lo pide su motor de Base UI. `Select` estrena
+  `separator-color` / `separator-height` propios (antes reutilizaba los del
+  borde del desplegable) con su par oscuro.
+
+### Corregido
+
+- El separador de `UserMenu` y de `OrgSwitcher` no tenía color en superficie
+  oscura: su token apuntaba a `{menu.surface-dark-separator-color}`, que nunca
+  llega a declararse como custom property (el formato de modo oscuro remapea la
+  propiedad original, no crea una `--*-surface-dark-*`). Ahora apuntan al rol
+  directo `color.text.on-dark`.
+
 ## v25.6.0
 
 Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-pendientes.md`).

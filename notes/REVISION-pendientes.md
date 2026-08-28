@@ -751,3 +751,35 @@ Los cuatro salen de `Por revisar/`. MDX, story `EnSuperficieOscura` y story
       flechas en vez de en el de tabulador.
 - [ ] **`CalendarPlanner` no tiene `minDate`/`maxDate`**: su rejilla no acota
       meses. No se ha inventado la prop porque no hay caso que la pida.
+
+## Fase 0.1/0.2 — piezas que faltaban en el DS (2026-08-28)
+
+Encargo de los componentes que las apps de la suite rehacen a mano
+(`slxd/notes/AUDITORIA-DS-2026-08-28.md` § «componentes que faltan»): subpartes
+y modo `render` de `Card`, átomo `Separator`, y el par
+`ConsentBanner`/`ConsentPreferences`.
+
+- [x] **`Separator`** (átomo nuevo) — la línea del sistema, con `orientation`,
+      `decorative` y `spacing`. Los separadores de `Menu`, `UserMenu`,
+      `OrgSwitcher`, `Sidebar` y `Select` hacen cascada sobre sus tokens sin
+      cambiar de elemento (el suyo se lo pide Base UI).
+- [x] **Separador oscuro de `UserMenu`/`OrgSwitcher`** — apuntaban a
+      `{menu.surface-dark-separator-color}`, que nunca llega a declararse como
+      custom property. Corregido al rol directo. **Regla que conviene recordar:
+      un token `surface-dark-*` no puede referenciar otro `surface-dark-*`.**
+- [x] **`CardTitle` es un `Heading` y `CardDescription` un `Paragraph`** — con
+      `level`/`size` desacoplados. `CardHeader` pasa a rejilla de dos columnas.
+- [x] **`Card render`** — modo enlace sobre el `Link` del router, como `Button`.
+- [x] **`ConsentBanner` + `ConsentPreferences`** — sin cookies dentro del DS.
+- [ ] **`CopyButton` y `ConfirmDialog`** siguen pendientes de la fase 0.1: no
+      entraban en este encargo, pero las ocho apps los rehacen igual.
+- [ ] **No hay rol de color `border.*` en el sistema.** El encargo lo daba por
+      existente; hoy toda línea (bordes de campo, separadores, cabeceras de
+      tabla) apunta a `color.primary` en claro y a `color.text.on-dark` en
+      oscuro, componente a componente. `separator.color` sigue esa convención.
+      Si algún día se crea el rol, `separator.color` es el sitio por el que
+      empezar a repuntar.
+- [ ] **La banda de consentimiento no tiene animación de entrada.** El sistema
+      tiene tokens de movimiento; se ha dejado sin transición a propósito
+      (aparece en la primera pintura, no como respuesta a un gesto), pero es una
+      decisión a revisar si el patrón se generaliza.
