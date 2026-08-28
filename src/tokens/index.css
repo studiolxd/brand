@@ -45,6 +45,7 @@
 @import "./components/legal-footer.css";
 @import "./components/site-footer.css";
 @import "./components/hero.css";
+@import "./components/highlight.css";
 @import "./molecules/notification-button.css";
 @import "./molecules/textarea-field.css";
 @import "./molecules/select-field.css";

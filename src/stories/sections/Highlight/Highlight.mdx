@@ -1,0 +1,41 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as HighlightStories from "./Highlight.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { highlightTokens } from "../../../tokens/components/highlight";
+
+<Meta of={HighlightStories} />
+
+# Highlight
+
+La banda destacada de una página pública: un titular, un texto, sus botones y, si hace falta, algo al lado —una imagen, un vídeo, una tarjeta—. Es lo que corta una portada en dos y dice «esto es lo importante».
+
+<Canvas of={HighlightStories.PorDefecto} />
+
+## Qué la distingue del `Hero`
+
+`Hero` es la **cabecera** de la página: un `h1` a talla display, y solo hay uno. `Highlight` es una banda **dentro** de la página: su titular es un `h2` a talla 8, puede repetirse, y va sobre superficie oscura por defecto para separarse de lo que tiene encima y debajo.
+
+Ninguna de las dos pinta color propio: el lienzo lo pone el `Container`, así que `surface="light"` voltea la banda entera sin tocar nada más.
+
+<Canvas of={HighlightStories.SuperficieClara} />
+
+## El slot de media
+
+`media` es un slot libre: lo que se le pase va al lado del texto. El reparto lo hace el `Columns` del sistema (dos celdas al mismo ancho, alineadas al centro), así que en móvil se apila sin ningún punto de ruptura escrito aquí. `mediaPosition` decide de qué lado va en escritorio.
+
+<Canvas of={HighlightStories.ConMedia} />
+<Canvas of={HighlightStories.MediaALaIzquierda} />
+
+## Acciones
+
+Los botones van en un `Inline`: fila con envoltura y aire por token. La banda solo pone el aire que los separa del texto; entre el titular y el párrafo no hay `gap`, porque el aire ya lo pone el propio título (`--text-heading-space-after`, en em, así que crece con la talla).
+
+<Canvas of={HighlightStories.VariasAcciones} />
+
+## Tokens
+
+<TokenTable tokens={highlightTokens} />
+
+## Props
+
+<ArgTypes of={HighlightStories} />

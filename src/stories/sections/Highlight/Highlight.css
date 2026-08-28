@@ -1,0 +1,21 @@
+/* Banda destacada. El fondo es de la superficie, no de la sección; el aire
+   bajo el título lo pone el propio título (`--text-heading-space-after`). */
+.highlight__title,
+.highlight__description {
+  max-inline-size: var(--content-measure);
+}
+
+.highlight .highlight__description {
+  margin: 0;
+}
+
+.highlight__actions {
+  margin-block-start: var(--highlight-actions-space-before);
+}
+
+.highlight__media > img,
+.highlight__media > video {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}

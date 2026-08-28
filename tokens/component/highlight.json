@@ -1,0 +1,5 @@
+{
+  "highlight": {
+    "actions-space-before": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire entre el texto y la fila de acciones (32px): entre componentes, el mismo que en `Hero`" }
+  }
+}

@@ -116,6 +116,7 @@ export const entryPoints = {
   'legal-footer':        'src/stories/sections/LegalFooter/LegalFooter.tsx',
   'hero':                'src/stories/sections/Hero/Hero.tsx',
   'site-footer':         'src/stories/sections/SiteFooter/SiteFooter.tsx',
+  'highlight':           'src/stories/sections/Highlight/Highlight.tsx',
   // Templates
   'not-found-page':      'src/stories/templates/NotFoundPage/NotFoundPage.tsx',
   'error-page':          'src/stories/templates/ErrorPage/ErrorPage.tsx',

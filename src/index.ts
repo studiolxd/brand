@@ -251,6 +251,8 @@ export type { AppRootProps } from './stories/sections/AppRoot/AppRoot';
 export { LegalFooter } from './stories/sections/LegalFooter/LegalFooter';
 export type { LegalFooterProps, LegalFooterLink, LegalFooterRenderLinkProps } from './stories/sections/LegalFooter/LegalFooter';
 export { Hero } from './stories/sections/Hero/Hero';
+export { Highlight } from './stories/sections/Highlight/Highlight';
+export type { HighlightProps } from './stories/sections/Highlight/Highlight';
 export { SiteFooter } from './stories/sections/SiteFooter/SiteFooter';
 export type { SiteFooterProps, SiteFooterColumn, SiteFooterLink, SiteFooterRenderLinkProps } from './stories/sections/SiteFooter/SiteFooter';
 export type { HeroProps } from './stories/sections/Hero/Hero';

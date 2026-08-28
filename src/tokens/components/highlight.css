@@ -1,0 +1,7 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --highlight-actions-space-before: var(--spacing-6); /** Aire entre el texto y la fila de acciones (32px): entre componentes, el mismo que en `Hero` */
+}
