@@ -1,0 +1,10 @@
+{
+  "logomark": {
+    "size-sm": { "$value": "{size-component.sm}", "$type": "dimension", "$description": "Lado del isotipo en barras compactas. Es cuadrado: alto y ancho coinciden" },
+    "size-md": { "$value": "{size-component.md}", "$type": "dimension", "$description": "Lado por defecto: cabeceras y avatares de aplicación" },
+    "size-lg": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Lado destacado: pie de página y tarjetas" },
+    "size-xl": { "$value": "{icon.size-xl}", "$type": "dimension", "$description": "Lado de marca (64px): la talla ilustrativa de la escala de iconos, no una talla de control" },
+    "color":   { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color del trazado sobre superficie clara" },
+    "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del trazado — surface-dark" }
+  }
+}

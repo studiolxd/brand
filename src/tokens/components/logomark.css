@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --logomark-size-sm: var(--size-component-sm); /** Lado del isotipo en barras compactas. Es cuadrado: alto y ancho coinciden */
+  --logomark-size-md: var(--size-component-md); /** Lado por defecto: cabeceras y avatares de aplicación */
+  --logomark-size-lg: var(--size-component-lg); /** Lado destacado: pie de página y tarjetas */
+  --logomark-size-xl: var(--icon-size-xl); /** Lado de marca (64px): la talla ilustrativa de la escala de iconos, no una talla de control */
+  --logomark-color: var(--color-text-on-light); /** Color del trazado sobre superficie clara */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --logomark-color: var(--color-text-on-dark); /** Color del trazado — surface-dark */
+}
