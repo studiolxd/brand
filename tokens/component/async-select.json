@@ -18,6 +18,7 @@
     "font-weight":                 { "$value": "{select.font-weight}", "$type": "number", "$description": "Hereda de `select.font-weight`: el buscador tiene la misma cara que el control síncrono" },
     "height":                      { "$value": "{select.height}", "$type": "dimension", "$description": "Hereda de `select.height`: el buscador tiene la misma cara que el control síncrono" },
     "item-highlighted-bg":         { "$value": "{select.item-highlighted-bg}", "$type": "color", "$description": "Hereda de `select.item-highlighted-bg`: el buscador tiene la misma cara que el control síncrono" },
+    "item-highlighted-color":      { "$value": "{select.item-highlighted-color}", "$type": "color", "$description": "Texto de la opción resaltada — el del Select" },
     "item-padding-block":          { "$value": "{select.item-padding-block}", "$type": "dimension", "$description": "Hereda de `select.item-padding-block`: el buscador tiene la misma cara que el control síncrono" },
     "lg-font-size":                { "$value": "{select.lg-font-size}", "$type": "dimension", "$description": "Hereda de `select.lg-font-size`: el buscador tiene la misma cara que el control síncrono" },
     "lg-height":                   { "$value": "{select.lg-height}", "$type": "dimension", "$description": "Hereda de `select.lg-height`: el buscador tiene la misma cara que el control síncrono" },
@@ -39,6 +40,7 @@
     "empty-font-size":             { "$value": "{select.font-size}", "$type": "dimension", "$description": "Tamaño del mensaje de lista vacía" },
     "empty-color":                 { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Tinta del mensaje de lista vacía: es texto secundario, no un valor" },
     "surface-dark-empty-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta del mensaje de lista vacía — surface-dark" },
-    "surface-dark-item-highlighted-bg": { "$value": "{select.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" }
+    "surface-dark-item-highlighted-bg": { "$value": "{select.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" },
+    "surface-dark-item-highlighted-color": { "$value": "{select.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Texto de la opción resaltada — surface-dark" }
   }
 }

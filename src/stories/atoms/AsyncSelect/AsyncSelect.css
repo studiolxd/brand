@@ -121,11 +121,13 @@
   color: var(--async-select-color);
   cursor: pointer;
 
-  /* La opción bajo el puntero o el teclado se rellena: excepción declarada de
-     las listas de opciones desplegables (Foundations → Colores). */
+  /* La opción bajo el puntero o el teclado se rellena con la inversión de
+     marca: excepción declarada de las listas de opciones desplegables
+     (Foundations → Colores). El texto invierte con el relleno. */
   &:focus-visible,
   &:hover {
     background-color: var(--async-select-item-highlighted-bg);
+    color: var(--async-select-item-highlighted-color);
   }
 
   &.async-select__item--selected {
@@ -135,6 +137,7 @@
   /* La opción que recorre el teclado (foco virtual): el mismo relleno. */
   &.async-select__item--active {
     background-color: var(--async-select-item-highlighted-bg);
+    color: var(--async-select-item-highlighted-color);
   }
 }
 

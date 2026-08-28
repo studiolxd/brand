@@ -36,6 +36,7 @@
   --async-select-focus-ring-width: var(--select-focus-ring-width); /** Hereda de `select.focus-ring-width`: el buscador tiene la misma cara que el control síncrono */
   --async-select-font-weight: var(--select-font-weight); /** Hereda de `select.font-weight`: el buscador tiene la misma cara que el control síncrono */
   --async-select-item-highlighted-bg: var(--select-item-highlighted-bg); /** Hereda de `select.item-highlighted-bg`: el buscador tiene la misma cara que el control síncrono */
+  --async-select-item-highlighted-color: var(--select-item-highlighted-color); /** Texto de la opción resaltada — el del Select */
   --async-select-line-height: var(--select-line-height); /** Hereda de `select.line-height`: el buscador tiene la misma cara que el control síncrono */
   --async-select-padding-inline: var(--select-padding-inline); /** Hereda de `select.padding-inline`: el buscador tiene la misma cara que el control síncrono */
   --async-select-placeholder-color: var(--multi-select-placeholder-color); /** Hereda de `multi-select.placeholder-color`: el buscador tiene la misma cara que el control síncrono */
@@ -48,4 +49,5 @@
 html.dark {
   --async-select-empty-color: var(--color-text-muted-on-dark); /** Tinta del mensaje de lista vacía — surface-dark */
   --async-select-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno de la opción resaltada — surface-dark */
+  --async-select-item-highlighted-color: var(--select-item-highlighted-color); /** Texto de la opción resaltada — surface-dark */
 }
