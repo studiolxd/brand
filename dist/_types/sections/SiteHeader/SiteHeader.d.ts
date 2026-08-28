@@ -19,7 +19,7 @@ export interface SiteHeaderProps {
     menuCloseLabel?: string;
     /** La marca. Por defecto el `Logo` de Studio LXD a `logoSize`; un producto de la suite pone la suya. */
     logo?: ReactNode;
-    /** Talla del logotipo por defecto. `xl` (64px): la cabecera es el sitio de la marca. */
+    /** Talla del logotipo por defecto. `xxl` (85px): la cabecera es el sitio de la marca. */
     logoSize?: LogoSize;
     /** Talla del botón de menú. `lg` (48px) acompaña al logotipo grande. */
     menuButtonSize?: 'sm' | 'md' | 'lg';

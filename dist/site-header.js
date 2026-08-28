@@ -12,7 +12,7 @@ function c({ children: e, ...t }) {
 		children: e
 	});
 }
-function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", menuCloseLabel: f, logoSize: p = "xl", logo: m = /* @__PURE__ */ o(n, { size: p }), menuButtonSize: h = "lg", renderLogoLink: g = c, width: _ = "xl", open: v, onOpenChange: y, children: b, settings: x, panelId: S = "site-header-panel", actions: C, language: w }) {
+function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", menuLabel: d = "Menú de navegación", menuCloseLabel: f, logoSize: p = "xxl", logo: m = /* @__PURE__ */ o(n, { size: p }), menuButtonSize: h = "lg", renderLogoLink: g = c, width: _ = "xl", open: v, onOpenChange: y, children: b, settings: x, panelId: S = "site-header-panel", actions: C, language: w }) {
 	let [T, E] = a(!1), D = v !== void 0, O = D ? v : T, k = !!(b || x || w), A = i(null), j = i(null), M = (e) => {
 		D || E(e), y?.(e);
 	};

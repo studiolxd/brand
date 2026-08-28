@@ -7,6 +7,27 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.21.0
+
+La marca manda más en la cabecera pública: el logotipo estrena una talla mayor y la
+cabecera del sitio la usa por defecto.
+
+### Añadido
+
+- **`Logo` › talla `xxl`.** Un peldaño por encima de `xl`: 85px, la talla `xl` con el mismo
+  salto que lleva de `lg` a `xl` (4/3), de modo que la escala de marca es regular. Sale del
+  token nuevo `logo.height-xxl`, derivado de `logo.height-xl`, con su clase `.logo--xxl`.
+  La story de tallas las enseña las cinco.
+
+### Cambiado
+
+- **`SiteHeader` › la marca va a `xxl` por defecto** (antes `xl`): **cambio visual** en las
+  páginas públicas. La barra crece con ella —101px en vez de 80— porque su alto se deriva
+  del token del logotipo (`site-header.content-height` → `logo.height-xxl`), sin ninguna
+  cifra propia. Los peldaños de móvil no cambian: por debajo de `md` la barra sigue bajando
+  a 64px (marca a 48) y por debajo de `sm` a 56px (marca a 40), así que la marca sigue
+  cabiendo junto al botón de menú. Quien quiera la cabecera de antes pasa `logoSize="xl"`.
+
 ## v25.20.0
 
 Ocho huecos del bloque B, cerrados: siete componentes nuevos y tres ampliaciones.
