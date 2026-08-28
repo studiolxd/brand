@@ -97,10 +97,12 @@
   cursor: pointer;
 }
 
-/* El país resaltado se rellena: excepción declarada de las listas de opciones
-   desplegables (Foundations → Colores). */
+/* El país resaltado se rellena con la inversión de marca: excepción declarada
+   de las listas de opciones desplegables (Foundations → Colores). El texto
+   invierte con el relleno; el prefijo lo hereda por `currentColor`. */
 .input-phone__country-item[data-highlighted] {
   background-color: var(--input-phone-country-item-highlighted-bg);
+  color: var(--input-phone-country-item-highlighted-color);
 }
 
 /* ── Wrapper de país (react-phone-number-input) ─────────────── */

@@ -13,7 +13,8 @@
   --input-phone-country-gap: var(--spacing-1); /** Separación entre bandera/código y chevron en el selector de país */
   --input-phone-country-border-width: var(--border-width-default); /** Grosor del separador entre país y número */
   --input-phone-country-border-color: var(--color-primary); /** Color del separador */
-  --input-phone-country-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno del país resaltado en la lista — el del Select */
+  --input-phone-country-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno del país resaltado en la lista — el del Select: la inversión de marca */
+  --input-phone-country-item-highlighted-color: var(--select-item-highlighted-color); /** Texto del país resaltado — el del Select: el prefijo lo hereda por `currentColor` */
 }
 
 .surface-dark,
@@ -21,4 +22,5 @@
 html.dark {
   --input-phone-country-border-color: var(--color-text-on-dark); /** Separador del selector de país — surface-dark */
   --input-phone-country-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno del país resaltado — surface-dark */
+  --input-phone-country-item-highlighted-color: var(--select-item-highlighted-color); /** Texto del país resaltado — surface-dark */
 }

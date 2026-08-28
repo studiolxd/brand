@@ -11,4 +11,5 @@ $lxd-input-phone-content-max-height: 17.5rem; // Altura máxima del dropdown de 
 $lxd-input-phone-country-icon-size: 0.625rem; // Ancho del icono chevron en el selector de país
 $lxd-input-phone-sm-country-width: 3.5rem; // Ancho del selector de país — variante sm
 $lxd-input-phone-lg-country-width: 5.5rem; // Ancho del selector de país — variante lg
-$lxd-input-phone-country-item-highlighted-bg: #f2f2f2; // Relleno del país resaltado en la lista — el del Select
+$lxd-input-phone-country-item-highlighted-bg: #111e30; // Relleno del país resaltado en la lista — el del Select: la inversión de marca
+$lxd-input-phone-country-item-highlighted-color: #ffffff; // Texto del país resaltado — el del Select: el prefijo lo hereda por `currentColor`
