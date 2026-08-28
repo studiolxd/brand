@@ -48,6 +48,23 @@ Escape o clic fuera; el DS pone la superficie, el título y el aspa.
 
 <Canvas of={ModalStories.WithAsyncSelect} />
 
+## Atributos y handlers al popup
+
+Lo que no sea prop propia (`id`, `data-*`, `aria-*` y los **handlers de evento**) viaja al popup del
+diálogo. Los handlers son lo que resuelve la **barrera de eventos**: cuando el modal se abre desde
+dentro de una tarjeta clicable, el clic de dentro del diálogo llega a la tarjeta —React propaga los
+eventos por su árbol, aunque el portal esté en `document.body`—, y la barrera se pone en el propio
+`Modal`:
+
+```tsx
+<Modal open={open} onClose={cerrar} title="Detalle" onClick={(e) => e.stopPropagation()}>
+```
+
+<Canvas of={ModalStories.BarreraDeEventos} />
+
+`className` **no** se reenvía a propósito: la cara del diálogo la pone el sistema y se personaliza
+por tokens, no por clases de producto.
+
 ## Superficie oscura
 
 <Canvas of={ModalStories.SuperficieOscura} />
@@ -76,7 +93,24 @@ blanco ya separan el panel sin necesidad de contorno.
 `container.max-width-*` — no de la escala de espaciado ni de tallas de
 componente: por eso van sueltas y no a un token de espaciado.
 
-### Superficie oscura
+### Atributos y handlers al popup
+
+Lo que no sea prop propia (`id`, `data-*`, `aria-*` y los **handlers de evento**) viaja al popup del
+diálogo. Los handlers son lo que resuelve la **barrera de eventos**: cuando el modal se abre desde
+dentro de una tarjeta clicable, el clic de dentro del diálogo llega a la tarjeta —React propaga los
+eventos por su árbol, aunque el portal esté en `document.body`—, y la barrera se pone en el propio
+`Modal`:
+
+```tsx
+<Modal open={open} onClose={cerrar} title="Detalle" onClick={(e) => e.stopPropagation()}>
+```
+
+<Canvas of={ModalStories.BarreraDeEventos} />
+
+`className` **no** se reenvía a propósito: la cara del diálogo la pone el sistema y se personaliza
+por tokens, no por clases de producto.
+
+## Superficie oscura
 
 <TokenTable tokens={modalDarkTokens} />
 

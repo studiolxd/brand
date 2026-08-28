@@ -39,6 +39,18 @@ entrada.
 
 <Canvas of={SheetStories.TituloOculto} />
 
+## Atributos y handlers al popup
+
+Lo que no sea prop propia (`id`, `data-*`, `aria-*` y los **handlers de evento**) viaja al popup del
+panel, y `className` se concatena tras las clases propias. Los handlers son lo que resuelve la
+**barrera de eventos**: cuando el panel se abre desde dentro de una tarjeta clicable, el clic de
+dentro llega a la tarjeta —React propaga los eventos por su árbol, aunque el portal esté en
+`document.body`—, y la barrera se pone en el propio `Sheet`:
+
+```tsx
+<Sheet open={open} onOpenChange={setOpen} title="Detalle" onClick={(e) => e.stopPropagation()}>
+```
+
 ## Superficie oscura
 
 <Canvas of={SheetStories.SuperficieOscura} />

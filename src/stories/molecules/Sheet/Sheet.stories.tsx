@@ -126,3 +126,41 @@ export const Contrato: Story = {
     await expect(trigger).toHaveFocus();
   },
 };
+
+/** Test: `id`, `data-*` y los handlers llegan al popup del panel. */
+export const ContratoPassthrough: Story = {
+  name: 'Test — el popup recibe id, data-* y handlers',
+  tags: ['!dev'],
+  args: { open: true, onOpenChange: () => {}, title: 'Detalle', children: null },
+  render: () => {
+    const [clics, setClics] = useState(0);
+    return (
+      <div onClick={() => setClics((n) => n + 1)}>
+        <p data-testid="clics">{clics}</p>
+        <Sheet
+          open
+          onOpenChange={() => {}}
+          title="Detalle"
+          id="panel"
+          data-zona="tarjeta"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <p>Contenido</p>
+        </Sheet>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const popup = document.querySelector('.sheet') as HTMLElement;
+    await expect(popup).toHaveAttribute('id', 'panel');
+    await expect(popup).toHaveAttribute('data-zona', 'tarjeta');
+    // La clase propia sigue en su sitio y el lado no se pierde.
+    await expect(popup).toHaveClass('sheet');
+    await expect(popup).toHaveAttribute('data-side', 'right');
+
+    // El clic dentro del panel no llega a la tarjeta que lo envuelve.
+    await userEvent.click(within(popup).getByText('Contenido'));
+    await expect(canvas.getByTestId('clics')).toHaveTextContent('0');
+  },
+};

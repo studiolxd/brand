@@ -7,7 +7,7 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Sheet.css';
 
-export interface SheetProps {
+export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   /** Borde por el que entra el panel. */
@@ -47,6 +47,11 @@ export function SheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDi
  *
  * Base UI Dialog aporta el portal, el velo, la trampa de foco y el cierre con
  * Escape; el DS pone la superficie y la dirección de entrada.
+ *
+ * `{...rest}` (`id`, `data-*`, `aria-*` y los **handlers de evento**) se
+ * reenvía al popup, y `className` se concatena tras las clases propias. Los
+ * handlers son lo que permite montar la barrera de eventos cuando el panel se
+ * abre desde dentro de una tarjeta clicable, sin `div`s de producto alrededor.
  */
 export function Sheet({
   open,
@@ -61,6 +66,7 @@ export function Sheet({
   trigger,
   onAnimationEndCapture,
   className,
+  ...rest
 }: SheetProps) {
   return (
     <Dialog.Root open={open} onOpenChange={(next) => onOpenChange(next)}>
@@ -74,6 +80,7 @@ export function Sheet({
           className={['sheet', className].filter(Boolean).join(' ')}
           data-side={side}
           onAnimationEndCapture={onAnimationEndCapture}
+          {...rest}
         >
           <header className="sheet__header">
             {titleHidden ? (

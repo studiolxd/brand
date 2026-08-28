@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { Modal } from './Modal';
 import { Button } from '../../atoms/Button/Button';
 import { InputField } from '../InputField/InputField';
@@ -273,5 +273,70 @@ export const CustomLabels: Story = {
     const canvas = within(canvasElement.ownerDocument.body);
     await expect(canvas.getByRole('button', { name: 'Close' })).toBeInTheDocument();
     await expect(canvas.getByText('Dialog')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Barrera de eventos: el modal se abre desde una tarjeta clicable, y el clic
+ * dentro del diálogo no debe llegar a la tarjeta. Los handlers viajan al popup
+ * con `{...rest}`, así que la barrera se pone en el propio `Modal` — sin
+ * envolverlo en `div`s de producto.
+ */
+export const BarreraDeEventos: Story = {
+  name: 'Barrera de eventos',
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const [clicsEnLaTarjeta, setClics] = useState(0);
+    return (
+      <div
+        onClick={() => setClics((n) => n + 1)}
+        style={{ padding: 'var(--spacing-5)', border: '1px solid currentColor', cursor: 'pointer' }}
+      >
+        <p>Clics en la tarjeta: {clicsEnLaTarjeta}</p>
+        <Button onClick={() => setOpen(true)}>Abrir</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Detalle"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <p>El clic aquí dentro no sale del diálogo.</p>
+        </Modal>
+      </div>
+    );
+  },
+};
+
+/** Test: `id`, `data-*` y los handlers llegan al popup del diálogo. */
+export const ContratoPassthrough: Story = {
+  name: 'Test — el popup recibe id, data-* y handlers',
+  tags: ['!dev'],
+  render: () => {
+    const [clics, setClics] = useState(0);
+    return (
+      <div onClick={() => setClics((n) => n + 1)}>
+        <p data-testid="clics">{clics}</p>
+        <Modal
+          open
+          onClose={fn()}
+          title="Detalle"
+          id="dialogo"
+          data-zona="tarjeta"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <p>Contenido</p>
+        </Modal>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const popup = document.querySelector('.modal__content') as HTMLElement;
+    await expect(popup).toHaveAttribute('id', 'dialogo');
+    await expect(popup).toHaveAttribute('data-zona', 'tarjeta');
+
+    // El clic dentro del diálogo no llega a la tarjeta que lo envuelve.
+    await userEvent.click(within(popup).getByText('Contenido'));
+    await expect(canvas.getByTestId('clics')).toHaveTextContent('0');
   },
 };
