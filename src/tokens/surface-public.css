@@ -127,4 +127,9 @@
   --time-field-error-font-size: var(--form-error-font-size);
   --time-field-helper-font-size: var(--form-helper-font-size);
   --user-message-timestamp-font-size: var(--text-paragraph-small-font-size);
+  --annotation-thread-author-font-size: var(--text-paragraph-small-font-size);
+  --annotation-thread-meta-font-size: var(--text-paragraph-small-font-size);
+  --annotation-thread-body-font-size: var(--text-font-size);
+  --annotation-thread-body-line-height: var(--text-line-height);
+  --annotation-thread-replies-label-font-size: var(--text-paragraph-small-font-size);
 }

@@ -89,6 +89,7 @@ export const entryPoints = {
   'modal':               'src/stories/molecules/Modal/Modal.tsx',
   'sidebar-nav':         'src/stories/molecules/SidebarNav/SidebarNav.tsx',
   'tree-view':           'src/stories/molecules/TreeView/TreeView.tsx',
+  'annotation-thread':   'src/stories/organisms/AnnotationThread/AnnotationThread.tsx',
   'date-picker':         'src/stories/molecules/DatePicker/DatePicker.tsx',
   'date-picker-field':   'src/stories/molecules/DatePickerField/DatePickerField.tsx',
   'date-time-field':     'src/stories/molecules/DateTimeField/DateTimeField.tsx',

@@ -290,6 +290,8 @@ export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export type { ProjectCardProps, ProjectCardTag } from './stories/molecules/ProjectCard/ProjectCard';
 export { Steps, Step } from './stories/organisms/Steps/Steps';
 export type { StepsProps, StepProps, StepItem } from './stories/organisms/Steps/Steps';
+export { AnnotationThread } from './stories/organisms/AnnotationThread/AnnotationThread';
+export type { AnnotationThreadProps, AnnotationEntry } from './stories/organisms/AnnotationThread/AnnotationThread';
 export { ConversationThread } from './stories/organisms/ConversationThread/ConversationThread';
 export type { ConversationThreadProps, ConversationMessage } from './stories/organisms/ConversationThread/ConversationThread';
 

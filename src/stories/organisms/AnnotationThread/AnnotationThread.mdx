@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AnnotationThreadStories from "./AnnotationThread.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { annotationThreadTokens, annotationThreadDarkTokens } from "../../../tokens/molecules/annotation-thread";
+
+<Meta of={AnnotationThreadStories} />
+
+# AnnotationThread
+
+Un hilo de anotaciones sobre algo: el comentario de revisión de una lección, la
+nota sobre un segmento de traducción. Cada anotación lleva **autor, fecha y sus
+propias acciones**; el hilo tiene **estado** —abierta o resuelta— y se responde
+al pie.
+
+<Canvas of={AnnotationThreadStories.PorDefecto} />
+
+## No es ConversationThread
+
+| Componente | De qué va |
+|---|---|
+| `ConversationThread` | Una conversación de usuario y asistente: burbujas, orden de emisor, desplazamiento automático al último mensaje. |
+| `AnnotationThread` | Un asunto anotado: todas las anotaciones son iguales, importa quién dijo qué y cuándo, y si sigue abierto. |
+
+Hasta ahora los productos lo montaban con `Card` + `Tag` cada uno por su cuenta
+(localizia en los comentarios de segmento, bricks en la revisión). Esto es ese
+patrón, ya resuelto.
+
+## Estado
+
+`status` marca el hilo. Un hilo **resuelto** sigue ahí, pero se retira: baja de
+intensidad en vez de desaparecer, porque el historial de una revisión es parte
+de lo revisado.
+
+<Canvas of={AnnotationThreadStories.Resuelto} />
+
+El componente **no decide** qué se puede hacer con el hilo: `actions` recibe los
+controles (resolver, reabrir, seguir) y el producto pone ahí sus permisos.
+
+## Respuestas
+
+`replies` son las respuestas en orden, sangradas bajo la anotación que abre el
+hilo, encabezadas por su recuento.
+
+<Canvas of={AnnotationThreadStories.SinRespuestas} />
+
+Para responder, `reply` recibe lo que haga falta —un `MessageComposer`, un
+`TextareaField`, un `Button` que abre el formulario—: el hilo no impone un
+formulario propio.
+
+## Acciones por anotación
+
+Además de las del hilo, cada anotación puede llevar las suyas (editar, borrar,
+citar).
+
+<Canvas of={AnnotationThreadStories.ConAccionesPorAnotacion} />
+
+## En un panel
+
+<Canvas of={AnnotationThreadStories.PanelDeRevision} />
+
+## Superficie oscura
+
+Borde, guía de respuestas y las tres tintas (autor, fecha, cuerpo) salen de
+tokens `surface-dark-*`. El `Tag` de estado usa variantes semánticas saturadas,
+que ya contrastan en las dos superficies.
+
+<Canvas of={AnnotationThreadStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={annotationThreadTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={annotationThreadDarkTokens} />
+
+## Accesibilidad
+
+- El hilo es un `<article>` con nombre (`label`), y cada anotación otro
+  `<article>` dentro: un lector de pantalla puede saltar de hilo en hilo.
+- La fecha es un `<time>` con `datetime` **en ISO**: la que se ve está
+  formateada para leer; la de máquina, no.
+- El estado se lee en texto («Abierta» / «Resuelta»), no solo en el color del
+  `Tag`.
+- El recuento de respuestas es texto real, no un número suelto sin contexto.
+
+## Internacionalización
+
+Todos los textos que emite el componente son props con default castellano:
+`label`, `openLabel`, `resolvedLabel`, `editedLabel` y `repliesLabel` —que es
+una función porque interpola el número—. La fecha va por `locale` (por defecto
+`es-ES`) y `dateFormat`, delegando en `Intl`.
+
+## Props
+
+<ArgTypes of={AnnotationThreadStories} />

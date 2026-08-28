@@ -1,4 +1,4 @@
-import treeView from '../../../tokens/component/tree-view.json';
+import treeView from '../../../tokens/molecule/tree-view.json';
 import { flattenTokens } from '../utils';
 
 const all = flattenTokens(treeView as never);

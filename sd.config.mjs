@@ -147,6 +147,7 @@ const filters = {
   'scroll-area':        (t) => t.path[0] === 'scroll-area',
   slider:               (t) => t.path[0] === 'slider',
   'tree-view':          (t) => t.path[0] === 'tree-view',
+  'annotation-thread':  (t) => t.path[0] === 'annotation-thread',
 };
 
 function cssFile(destination, filterKey) {
@@ -307,6 +308,7 @@ const sd = new StyleDictionary({
         cssFile('components/scroll-area.css',       'scroll-area'),
         cssFile('components/slider.css',            'slider'),
         cssFile('molecules/tree-view.css',          'tree-view'),
+        cssFile('molecules/annotation-thread.css',  'annotation-thread'),
       ],
     },
     scss: {
@@ -452,6 +454,7 @@ const sd = new StyleDictionary({
         scssFile('components/_scroll-area.scss',     'scroll-area'),
         scssFile('components/_slider.scss',          'slider'),
         scssFile('molecules/_tree-view.scss',        'tree-view'),
+        scssFile('molecules/_annotation-thread.scss','annotation-thread'),
       ],
     },
   },

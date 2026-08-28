@@ -1,0 +1,40 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --annotation-thread-gap: var(--spacing-4); /** Separación entre las piezas del hilo */
+  --annotation-thread-border-color: var(--color-grey-light); /** Borde del hilo */
+  --annotation-thread-padding-block: var(--spacing-4); /** Aire vertical del hilo */
+  --annotation-thread-padding-inline: var(--spacing-4); /** Aire horizontal del hilo */
+  --annotation-thread-reply-indent: var(--spacing-5); /** Sangría de las respuestas respecto a la anotación que abre el hilo */
+  --annotation-thread-reply-guide-color: var(--color-grey-light); /** Color de la guía de respuestas */
+  --annotation-thread-item-gap: var(--spacing-2); /** Separación entre la cabecera, el cuerpo y las acciones de una anotación */
+  --annotation-thread-items-gap: var(--spacing-4); /** Separación entre anotaciones */
+  --annotation-thread-header-gap: var(--spacing-2); /** Separación entre autor, fecha y marca de editada */
+  --annotation-thread-resolved-opacity: var(--opacity-disabled); /** Un hilo resuelto se retira: baja de intensidad sin desaparecer */
+  --annotation-thread-border-width: var(--border-width-default); /** Grosor del borde del hilo */
+  --annotation-thread-reply-guide-width: var(--border-width-default); /** Grosor de la guía que acompaña a las respuestas */
+  --annotation-thread-author-font-family: var(--control-font-family); /** Familia del autor */
+  --annotation-thread-author-font-size: var(--text-paragraph-small-font-size); /** Tamaño del autor: la letra menor del texto corriente */
+  --annotation-thread-author-font-weight: var(--font-weight-emphasis); /** Peso del autor */
+  --annotation-thread-author-color: var(--color-text-on-light); /** Tinta del autor */
+  --annotation-thread-meta-font-size: var(--text-paragraph-small-font-size); /** Tamaño de la fecha y de la marca de editada */
+  --annotation-thread-meta-color: var(--color-text-muted-on-light); /** Tinta de la fecha y de la marca de editada */
+  --annotation-thread-body-font-size: var(--text-font-size); /** Tamaño del cuerpo: es texto corriente */
+  --annotation-thread-body-line-height: var(--text-line-height); /** Interlineado del cuerpo */
+  --annotation-thread-body-color: var(--color-text-on-light); /** Tinta del cuerpo */
+  --annotation-thread-replies-label-font-size: var(--text-paragraph-small-font-size); /** Tamaño del rótulo que cuenta las respuestas */
+  --annotation-thread-replies-label-color: var(--color-text-muted-on-light); /** Tinta del rótulo que cuenta las respuestas */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --annotation-thread-border-color: var(--color-text-on-dark); /** Borde del hilo — surface-dark */
+  --annotation-thread-reply-guide-color: var(--color-text-on-dark); /** Guía de respuestas — surface-dark */
+  --annotation-thread-author-color: var(--color-text-on-dark); /** Tinta del autor — surface-dark */
+  --annotation-thread-meta-color: var(--color-text-muted-on-dark); /** Tinta de la fecha — surface-dark */
+  --annotation-thread-body-color: var(--color-text-on-dark); /** Tinta del cuerpo — surface-dark */
+  --annotation-thread-replies-label-color: var(--color-text-muted-on-dark); /** Tinta del rótulo de respuestas — surface-dark */
+}

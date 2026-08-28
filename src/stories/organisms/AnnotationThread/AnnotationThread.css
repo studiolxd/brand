@@ -1,0 +1,82 @@
+.annotation-thread {
+  display: flex;
+  flex-direction: column;
+  gap: var(--annotation-thread-gap);
+  padding-block: var(--annotation-thread-padding-block);
+  padding-inline: var(--annotation-thread-padding-inline);
+  border: var(--annotation-thread-border-width) solid var(--annotation-thread-border-color);
+}
+
+/* Un hilo resuelto se retira: sigue ahí, pero deja de pedir atención. */
+.annotation-thread.annotation-thread--resolved {
+  opacity: var(--annotation-thread-resolved-opacity);
+}
+
+.annotation-thread__status {
+  display: flex;
+}
+
+/* ─── Una anotación ──────────────────────────────────────── */
+.annotation-thread__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--annotation-thread-item-gap);
+}
+
+.annotation-thread__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--annotation-thread-header-gap);
+}
+
+.annotation-thread__avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.annotation-thread__author {
+  font-family: var(--annotation-thread-author-font-family);
+  font-size: var(--annotation-thread-author-font-size);
+  font-weight: var(--annotation-thread-author-font-weight);
+  color: var(--annotation-thread-author-color);
+}
+
+.annotation-thread__date,
+.annotation-thread__edited {
+  font-size: var(--annotation-thread-meta-font-size);
+  color: var(--annotation-thread-meta-color);
+}
+
+.annotation-thread__body {
+  font-size: var(--annotation-thread-body-font-size);
+  line-height: var(--annotation-thread-body-line-height);
+  color: var(--annotation-thread-body-color);
+}
+
+.annotation-thread__item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--annotation-thread-header-gap);
+}
+
+/* ─── Respuestas ─────────────────────────────────────────── */
+.annotation-thread__replies {
+  display: flex;
+  flex-direction: column;
+  gap: var(--annotation-thread-items-gap);
+  padding-inline-start: var(--annotation-thread-reply-indent);
+  border-inline-start: var(--annotation-thread-reply-guide-width) solid var(--annotation-thread-reply-guide-color);
+}
+
+.annotation-thread__replies-label {
+  margin-block: 0;
+  font-size: var(--annotation-thread-replies-label-font-size);
+  color: var(--annotation-thread-replies-label-color);
+}
+
+.annotation-thread__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--annotation-thread-header-gap);
+}
