@@ -117,7 +117,10 @@ export const TestEstructura: Story = {
     const hilo = canvas.getByRole('article', { name: 'Hilo de anotaciones' });
 
     await expect(within(hilo).getByText('Abierta')).toBeInTheDocument();
-    await expect(within(hilo).getByText('Marta Ruiz')).toBeInTheDocument();
+    // Marta escribe la raíz y también la última respuesta: se comprueba la
+    // anotación que abre el hilo, no «alguna con ese nombre».
+    const raizPintada = within(hilo).getAllByRole('article')[0] as HTMLElement;
+    await expect(within(raizPintada).getByText('Marta Ruiz')).toBeInTheDocument();
     await expect(within(hilo).getByText('2 respuestas')).toBeInTheDocument();
     await expect(hilo.querySelector('time')).toHaveAttribute('datetime', '2026-08-24T10:12:00.000Z');
   },
