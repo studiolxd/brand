@@ -54,8 +54,12 @@ export interface SearchFormProps {
    * @default 'Buscar'
    */
   submitLabel?: string;
-  /** Talla del conjunto: la comparten campo y botón. */
-  size?: 'sm' | 'md' | 'lg';
+  /**
+   * Talla del conjunto: la comparten campo y botón. `xl` es propia de este
+   * componente —el buscador del menú del sitio—; el resto son las tallas de
+   * formulario del sistema, y solo esas se heredan de un `Form`.
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   /** Deshabilita el campo y el botón. */
   disabled?: boolean;
 }
@@ -83,7 +87,13 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
   size: sizeProp,
   disabled,
 }: SearchFormProps, ref) {
-  const size = useFormSize(sizeProp);
+  // `xl` no es una talla de formulario: no viaja por el contexto de `Form` ni
+  // se le pregunta a `useFormSize`, que solo conoce `sm|md|lg`. Cuando se pide
+  // manda tal cual; el campo interior va a `lg` y el propio buscador lo estira
+  // con sus tokens `search-form.xl.*`.
+  const inheritedSize = useFormSize(sizeProp === 'xl' ? undefined : sizeProp);
+  const size = sizeProp === 'xl' ? 'xl' : inheritedSize;
+  const fieldSize = size === 'xl' ? 'lg' : size;
   const generatedId = useId();
   const fieldId = id ?? generatedId;
 
@@ -129,7 +139,7 @@ export const SearchForm = forwardRef<HTMLInputElement, SearchFormProps>(function
         value={value}
         defaultValue={defaultValue}
         disabled={disabled}
-        size={size}
+        size={fieldSize}
         onChange={onChange}
       />
       {/* La flecha va dentro del campo, no en una caja aparte: un adorno

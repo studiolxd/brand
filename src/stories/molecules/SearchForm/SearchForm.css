@@ -24,6 +24,24 @@
   --search-form-submit-input-padding-inline-end: var(--search-form-submit-lg-slot-size);
 }
 
+/* `xl` es la talla del buscador del menú del sitio, y solo existe aquí: no es
+   una talla de control del sistema, así que el campo interior va montado en
+   `lg` y es el propio buscador quien lo estira. Lo hace remapeando las tres
+   custom properties de talla que `Input` ya expone —alto, aire horizontal y
+   cuerpo de letra—, no repitiendo su CSS: el borde, el foco, el error y el
+   autorrelleno siguen siendo los del campo del sistema. */
+.search-form.search-form--xl {
+  --search-form-submit-slot-size: var(--search-form-xl-slot-size);
+  --search-form-submit-icon-size: var(--search-form-xl-icon-size);
+  --search-form-submit-input-padding-inline-end: var(--search-form-xl-slot-size);
+}
+
+.search-form.search-form--xl .search-form__field .input {
+  --input-height: var(--search-form-xl-height);
+  --input-padding-inline: var(--search-form-xl-padding-inline);
+  --input-font-size: var(--search-form-xl-font-size);
+}
+
 /* El campo se queda con el espacio libre. `min-inline-size: 0` es lo que
    permite que un ítem flex encoja por debajo del ancho de su contenido: sin
    él, un placeholder largo empujaría la flecha fuera del panel. */
