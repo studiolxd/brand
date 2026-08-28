@@ -19,5 +19,6 @@ $lxd-site-header-panel-padding-block-end: 1.5rem; // Aire inferior del panel, ba
 $lxd-site-header-panel-z-index: 300; // El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante
 $lxd-site-header-panel-transition-duration: 400ms; // Entrada y salida del panel: cambio de contexto
 $lxd-site-header-panel-transition-easing: ease-in-out; // Curva del panel: movimiento
-$lxd-site-header-settings-margin-block-start: 3rem; // Aire mínimo entre el índice y los ajustes del sitio (idioma, tema), que van pegados al borde inferior del panel
+$lxd-site-header-panel-gap: 3rem; // Ritmo vertical entre las secciones del panel: el índice, el buscador y los ajustes del sitio. Es un solo aire para todas, no uno por sección
+$lxd-site-header-settings-margin-block-start: 3rem; // Aire mínimo entre el índice y los ajustes del sitio (idioma, tema), que van pegados al borde inferior del panel: el ritmo del panel. Se mantiene por compatibilidad; quien quiera cambiarlo toca `panel-gap`
 $lxd-site-header-settings-gap: 1.5rem; // Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil

@@ -119,13 +119,18 @@
   inline-size: 100%;
   display: flex;
   flex-direction: column;
+  /* El ritmo vertical del panel, de un solo token: separa el índice del
+     buscador y de los ajustes por igual, sin que cada sección traiga su
+     propio margen. */
+  gap: var(--site-header-panel-gap);
 }
 
 /* Los ajustes del sitio (idioma, tema) cierran el panel, alineados abajo del
    todo: en escritorio en fila, en móvil apilados. Solo aire, sin línea. */
 .site-header__settings {
+  /* Empuja los ajustes al borde inferior; el aire que los separa de lo de
+     arriba ya lo pone el `gap` del panel, no un margen propio. */
   margin-block-start: auto;
-  padding-block-start: var(--site-header-settings-margin-block-start);
   display: flex;
   flex-direction: column;
   align-items: flex-start;

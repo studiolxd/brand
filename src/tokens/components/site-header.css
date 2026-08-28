@@ -9,7 +9,7 @@
   --site-header-panel-z-index: var(--z-index-modal); /** El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante */
   --site-header-panel-transition-duration: var(--motion-duration-slow); /** Entrada y salida del panel: cambio de contexto */
   --site-header-panel-transition-easing: var(--motion-easing-in-out); /** Curva del panel: movimiento */
-  --site-header-settings-margin-block-start: var(--spacing-7); /** Aire mínimo entre el índice y los ajustes del sitio (idioma, tema), que van pegados al borde inferior del panel */
+  --site-header-panel-gap: var(--spacing-7); /** Ritmo vertical entre las secciones del panel: el índice, el buscador y los ajustes del sitio. Es un solo aire para todas, no uno por sección */
   --site-header-settings-gap: var(--spacing-5); /** Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil */
   --site-header-content-height: var(--logo-height-xl); /** Lo más alto que lleva la barra: el logotipo a talla xl (64px) */
   --site-header-content-height-compact: var(--logo-height-lg); /** Lo más alto que lleva la barra en móvil (por debajo de md): el logotipo a talla lg (48px), para que quepa con los controles */
@@ -18,6 +18,7 @@
   --site-header-z-index: var(--app-header-z-index); /** Capa z — sobre el contenido, bajo los paneles flotantes */
   --site-header-panel-bg: var(--color-background-light); /** Fondo del panel de navegación */
   --site-header-panel-padding-block: var(--section-padding-block-xl); /** Aire superior del panel, entre la barra y el índice */
+  --site-header-settings-margin-block-start: var(--site-header-panel-gap); /** Aire mínimo entre el índice y los ajustes del sitio (idioma, tema), que van pegados al borde inferior del panel: el ritmo del panel. Se mantiene por compatibilidad; quien quiera cambiarlo toca `panel-gap` */
   --site-header-height-narrow: calc(var(--site-header-content-height-narrow) + 2 * var(--app-header-padding-block)); /** Alto de la barra en teléfono (56px, la misma que la barra de aplicación) */
   --site-header-height-compact: calc(var(--site-header-content-height-compact) + 2 * var(--app-header-padding-block)); /** Alto de la barra en móvil (64px) */
   --site-header-height: calc(var(--site-header-content-height) + 2 * var(--app-header-padding-block)); /** Alto de la barra: el logotipo más el aire del sistema arriba y abajo (80px). La barra de aplicación mide 56: en la web manda la marcacación, para que ambas superficies coincidan */

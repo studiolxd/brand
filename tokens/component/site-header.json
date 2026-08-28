@@ -19,7 +19,8 @@
     "panel-z-index":             { "$value": "{z-index.modal}",          "$type": "number",    "$description": "El panel a pantalla completa es una capa modal: sobre el contenido, bajo lo flotante" },
     "panel-transition-duration": { "$value": "{motion.duration.slow}",   "$type": "number",    "$description": "Entrada y salida del panel: cambio de contexto" },
     "panel-transition-easing":   { "$value": "{motion.easing.in-out}",   "$type": "string",    "$description": "Curva del panel: movimiento" },
-    "settings-margin-block-start": { "$value": "{spacing.7}",           "$type": "dimension", "$description": "Aire mínimo entre el índice y los ajustes del sitio (idioma, tema), que van pegados al borde inferior del panel" },
+    "panel-gap":                 { "$value": "{spacing.7}",              "$type": "dimension", "$description": "Ritmo vertical entre las secciones del panel: el índice, el buscador y los ajustes del sitio. Es un solo aire para todas, no uno por sección" },
+    "settings-margin-block-start": { "$value": "{site-header.panel-gap}", "$type": "dimension", "$description": "Aire mínimo entre el índice y los ajustes del sitio (idioma, tema), que van pegados al borde inferior del panel: el ritmo del panel. Se mantiene por compatibilidad; quien quiera cambiarlo toca `panel-gap`" },
     "settings-gap":               { "$value": "{spacing.5}",           "$type": "dimension", "$description": "Separación entre los ajustes del sitio: en fila en escritorio, apilados en móvil" },
 
     "surface-dark-bg":       { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la barra — surface-dark" },
