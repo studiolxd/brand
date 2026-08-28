@@ -1,9 +1,7 @@
 import './Paragraph.css';
-export interface ParagraphProps {
+export interface ParagraphProps extends Omit<React.ComponentPropsWithoutRef<'p'>, 'children'> {
     /** Tamaño: `small` para notas y metadatos, `large` para entradillas. */
     size?: 'small' | 'default' | 'large';
-    /** Clases adicionales. */
-    className?: string;
     children: React.ReactNode;
 }
-export declare function Paragraph({ size, className, children }: ParagraphProps): import("react/jsx-runtime").JSX.Element;
+export declare const Paragraph: import("react").ForwardRefExoticComponent<ParagraphProps & import("react").RefAttributes<HTMLParagraphElement>>;
