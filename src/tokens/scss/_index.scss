@@ -28,6 +28,7 @@
 @forward 'components/link';
 @forward 'components/tag';
 @forward 'components/kbd';
+@forward 'components/separator';
 @forward 'components/card';
 @forward 'components/container';
 @forward 'components/columns';
@@ -66,6 +67,7 @@
 @forward 'components/tooltip';
 @forward 'molecules/pagination';
 @forward 'molecules/prev-next-nav';
+@forward 'molecules/consent';
 @forward 'components/sidebar';
 @forward 'molecules/table';
 @forward 'molecules/data-table';

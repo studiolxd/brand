@@ -1,0 +1,34 @@
+{
+  "consent": {
+    "banner": {
+      "bg":           { "$value": "{color.background.light}", "$type": "color",     "$description": "Fondo de la banda" },
+      "color":        { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Texto de la banda" },
+      "border-color": { "$value": "{color.primary}",          "$type": "color",     "$description": "Línea superior que separa la banda de la página" },
+      "border-width": { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la línea superior" },
+
+      "padding-block":    { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire vertical de la banda" },
+      "padding-inline":   { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire horizontal de la banda" },
+      "gap":              { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre el texto y la fila de botones" },
+      "text-gap":         { "$value": "{spacing.1}", "$type": "dimension", "$description": "Separación entre el título y el texto" },
+      "actions-gap":      { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre botones" },
+      "max-inline-size":  { "$value": "{container.max-width-xl}", "$type": "dimension", "$description": "Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública" },
+      "z-index":          { "$value": "{z-index.bar}", "$type": "number", "$description": "Capa: la de las barras fijas de la aplicación. Por debajo del velo de un modal — el banner no bloquea nada" },
+
+      "title-font-size":       { "$value": "{text.size.3}",                       "$type": "dimension", "$description": "Cuerpo del título de la banda" },
+      "description-font-size": { "$value": "{text.paragraph.small.font-size}",    "$type": "dimension", "$description": "Cuerpo del texto de la banda: el peldaño pequeño de párrafo de la superficie" },
+
+      "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la banda — surface-dark" },
+      "surface-dark-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Texto de la banda — surface-dark" },
+      "surface-dark-border-color": { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Línea superior — surface-dark" }
+    },
+
+    "preferences": {
+      "gap":               { "$value": "{spacing.4}", "$type": "dimension", "$description": "Separación entre los bloques del panel" },
+      "category-gap":      { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire alrededor de cada categoría" },
+      "always-font-size":  { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo de la marca «siempre activa»" },
+      "always-color":      { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color de la marca «siempre activa»" },
+
+      "surface-dark-always-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Marca «siempre activa» — surface-dark" }
+    }
+  }
+}

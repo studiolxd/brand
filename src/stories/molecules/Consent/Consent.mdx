@@ -1,0 +1,157 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ConsentStories from "./Consent.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { consentBannerTokens, consentPreferencesTokens, consentDarkTokens } from "../../../tokens/molecules/consent";
+
+<Meta of={ConsentStories} />
+
+# Consent
+
+Las dos piezas del consentimiento de cookies: la **banda** que lo pide y el
+**panel** que lo afina por categorías. Ocho aplicaciones de la suite tenían
+copiado el mismo par de ficheros; esto es ese par, una sola vez.
+
+<Canvas of={ConsentStories.Banner} />
+
+## El DS no guarda nada
+
+Aquí no hay cookies, ni `localStorage`, ni caducidad, ni una lista de
+categorías cerrada. La decisión —dónde se guarda, cuánto dura, qué categorías
+existen en ese producto y qué scripts se cargan con cada una— es del consumidor,
+que ya tiene su `ConsentProvider`. Estas dos piezas son **la superficie y las
+llamadas**: props controladas y callbacks.
+
+Es deliberado. El almacenamiento del consentimiento es una decisión legal y de
+producto (nombre de la cookie, dominio, caducidad, registro de la prueba), y un
+DS que la tomara por su cuenta obligaría a las ocho aplicaciones a llevar la
+misma. Lo que sí unifica el DS es lo que se ve y cómo se maneja.
+
+## La banda no es un diálogo
+
+`ConsentBanner` es una `role="region"` con nombre, fija al borde inferior. **No
+atrapa el foco, no lleva velo y no bloquea la página**: se puede leer, tabular y
+navegar con la banda en pantalla. Un muro que impide usar el sitio hasta
+aceptar no es consentimiento libre.
+
+**Rechazar cuesta lo mismo que aceptar**: un clic, la misma fila, el mismo
+tamaño. Lo único que los distingue es la variante del botón —relleno y contorno,
+que es la jerarquía normal del sistema—, no un rechazo escondido detrás de dos
+pantallas. Es lo que pide la ePrivacy y lo que evita el patrón oscuro clásico.
+
+`onOpenPreferences` es opcional: sin ella la banda ofrece solo las dos salidas
+completas, que es lo correcto cuando el producto no tiene más categorías que
+las necesarias y una.
+
+<Canvas of={ConsentStories.BannerSinPreferencias} />
+
+## El panel de categorías
+
+`ConsentPreferences` sí es un diálogo —foco atrapado, Escape cierra—, porque es
+una decisión enfocada con principio y final. Se abre sobre `Sheet` (default) o
+sobre `Modal` con `surface="modal"`.
+
+Cada categoría es un `SwitcherField` con su nombre y su explicación; la línea
+entre ellas es el átomo `Separator`. Las categorías `required` salen marcadas,
+deshabilitadas y con la marca «Siempre activa»: se enseñan porque hay que
+declararlas, no porque haya nada que decidir.
+
+<Canvas of={ConsentStories.Preferencias} />
+<Canvas of={ConsentStories.PreferenciasEnModal} />
+
+### Borrador o control total
+
+Por defecto el panel lleva un **borrador**: los interruptores se mueven dentro
+del panel y la decisión no sale hasta pulsar guardar. El borrador se siembra de
+`value` cada vez que el panel se abre, así que cerrar sin guardar descarta los
+cambios — que es lo que espera quien cierra sin guardar.
+
+Con `onChange` el panel pasa a ser **controlado**: `value` manda en todo momento
+y cada golpe de interruptor sube al consumidor. Es para productos que guardan al
+vuelo o que validan combinaciones.
+
+En los dos casos, lo que llega a `onSave` incluye las categorías necesarias
+puestas a `true`: no hay forma de guardar una decisión que las apague.
+
+## El flujo completo
+
+La banda pide, el panel afina y, una vez decidido, la banda desaparece. Queda un
+botón —en el pie, normalmente— para volver a abrir el panel: **retirar el
+consentimiento tiene que ser tan fácil como darlo**. Ese botón no es una pieza
+propia; es un `Button variant="text"` que llama a lo mismo que
+`onOpenPreferences`.
+
+<Canvas of={ConsentStories.FlujoCompleto} />
+
+## Textos
+
+Todos los textos son props con default castellano, incluidos los nombres y las
+descripciones de las categorías, que viajan en la propia lista `categories` (la
+lista entera se traduce, no una prop de texto por categoría). Ver Foundations →
+Internacionalización.
+
+## Superficie oscura
+
+La banda remapea fondo, texto y línea por tokens `surface-dark-*`. El panel
+hereda de `Sheet` o de `Modal`.
+
+<Canvas of={ConsentStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+### Banda
+
+<TokenTable tokens={consentBannerTokens} />
+
+### Panel
+
+<TokenTable tokens={consentPreferencesTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={consentDarkTokens} />
+
+Definidos en `tokens/molecule/consent.json`.
+
+## Accesibilidad
+
+- La banda es `role="region"` con `aria-label` (`regionLabel`): aparece en la
+  lista de regiones del lector de pantalla y se puede saltar a ella.
+- La banda **no** atrapa el foco ni pone `aria-modal`. El orden de tabulación
+  sigue siendo el de la página, y la banda va al final del documento.
+- Aceptar y rechazar son dos botones hermanos, alcanzables con una sola
+  tabulación cada uno.
+- El panel es un diálogo de Base UI: foco atrapado mientras está abierto,
+  Escape lo cierra y el foco vuelve al disparador.
+- La categoría necesaria se anuncia como interruptor marcado y deshabilitado, y
+  la marca «Siempre activa» forma parte de su etiqueta: no depende del color.
+- La explicación de cada categoría va en `helperText` del `SwitcherField`, o
+  sea enlazada por `aria-describedby`, no como texto suelto al lado.
+
+## Props
+
+### ConsentBanner
+
+<ArgTypes of={ConsentStories} />
+
+### ConsentPreferences
+
+| Prop | Tipo | Default | Qué hace |
+|---|---|---|---|
+| `open` | `boolean` | — | Abre el panel |
+| `onOpenChange` | `(open: boolean) => void` | — | Cierre por Escape, velo o botón de cerrar |
+| `categories` | `ConsentCategory[]` | — | Las categorías, en orden. `required` las fija |
+| `value` | `ConsentValue` | — | La decisión vigente, por `id` de categoría |
+| `onChange` | `(value) => void` | — | Si se pasa, el panel es controlado |
+| `onSave` | `(value) => void` | — | Guardar. Recibe la decisión completa |
+| `onAcceptAll` / `onRejectAll` | `() => void` | — | Botones opcionales del pie |
+| `surface` | `'sheet' \| 'modal'` | `'sheet'` | Sobre qué se abre |
+| `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
+| `title` | `ReactNode` | `'Preferencias de cookies'` | Título del panel |
+| `description` | `ReactNode` | castellano | Texto bajo el título |
+| `saveLabel` | `string` | `'Guardar preferencias'` | |
+| `acceptAllLabel` | `string` | `'Aceptar todas'` | |
+| `rejectAllLabel` | `string` | `'Rechazar todas'` | |
+| `closeLabel` | `string` | `'Cerrar'` | |
+| `alwaysOnLabel` | `string` | `'Siempre activa'` | Marca de una categoría necesaria |

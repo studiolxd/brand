@@ -169,6 +169,8 @@ export { InputPhoneField } from './stories/molecules/InputPhoneField/InputPhoneF
 export type { InputPhoneFieldProps } from './stories/molecules/InputPhoneField/InputPhoneField';
 export { Pagination } from './stories/molecules/Pagination/Pagination';
 export type { PaginationProps } from './stories/molecules/Pagination/Pagination';
+export { ConsentBanner, ConsentPreferences } from './stories/molecules/Consent/Consent';
+export type { ConsentBannerProps, ConsentPreferencesProps, ConsentCategory, ConsentValue } from './stories/molecules/Consent/Consent';
 export { PrevNextNav } from './stories/molecules/PrevNextNav/PrevNextNav';
 export type { PrevNextNavProps } from './stories/molecules/PrevNextNav/PrevNextNav';
 export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';

@@ -317,6 +317,10 @@
       "types": "./dist/_types/atoms/Popover/Popover.d.ts",
       "import": "./dist/popover.js"
     },
+    "./consent": {
+      "types": "./dist/_types/molecules/Consent/Consent.d.ts",
+      "import": "./dist/consent.js"
+    },
     "./prev-next-nav": {
       "types": "./dist/_types/molecules/PrevNextNav/PrevNextNav.d.ts",
       "import": "./dist/prev-next-nav.js"

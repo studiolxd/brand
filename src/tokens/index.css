@@ -68,6 +68,7 @@
 @import "./components/tooltip.css";
 @import "./molecules/pagination.css";
 @import "./molecules/prev-next-nav.css";
+@import "./molecules/consent.css";
 @import "./molecules/table.css";
 @import "./molecules/data-table.css";
 @import "./components/sidebar.css";

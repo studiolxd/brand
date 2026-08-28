@@ -1,0 +1,100 @@
+/* --------------------------------------------------------------------------
+   Banda de consentimiento. Fija al borde inferior, ancho completo, con una
+   línea arriba que la separa de la página. No lleva velo ni sombra: no es un
+   diálogo — la página sigue viva y navegable detrás.
+   -------------------------------------------------------------------------- */
+.consent-banner {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: 0;
+  z-index: var(--consent-banner-z-index);
+  background-color: var(--consent-banner-bg);
+  color: var(--consent-banner-color);
+  border-block-start: var(--consent-banner-border-width) solid var(--consent-banner-border-color);
+  padding-block: var(--consent-banner-padding-block);
+  padding-inline: var(--consent-banner-padding-inline);
+}
+
+/* El contenido se centra en la misma medida que el de una página pública. */
+.consent-banner__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--consent-banner-gap);
+  max-inline-size: var(--consent-banner-max-inline-size);
+  margin-inline: auto;
+}
+
+.consent-banner__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--consent-banner-text-gap);
+  /* Encoge antes que la fila de botones: los tres botones nunca se parten. */
+  flex: 1 1 20rem;
+  min-inline-size: 0;
+}
+
+.consent-banner__title {
+  margin-block: 0;
+  font-size: var(--consent-banner-title-font-size);
+  color: inherit;
+}
+
+.consent-banner__description {
+  margin-block: 0;
+  font-size: var(--consent-banner-description-font-size);
+  color: inherit;
+}
+
+/* Las tres salidas, en fila y con el mismo peso: aceptar no está destacado
+   sobre rechazar más que por su variante de botón. */
+.consent-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--consent-banner-actions-gap);
+}
+
+/* --------------------------------------------------------------------------
+   Panel de preferencias. Vive dentro de un Sheet o de un Modal: aquí solo la
+   lista de categorías.
+   -------------------------------------------------------------------------- */
+.consent-preferences {
+  display: flex;
+  flex-direction: column;
+  gap: var(--consent-preferences-gap);
+}
+
+.consent-preferences__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.consent-preferences__category {
+  padding-block: var(--consent-preferences-category-gap);
+}
+
+.consent-preferences__category:first-child { padding-block-start: 0; }
+.consent-preferences__category:last-child  { padding-block-end: 0; }
+
+/* La línea entre categorías la pinta el propio átomo Separator, que la primera
+   categoría no lleva: por eso el padding va en la fila y no en la línea. */
+.consent-preferences__category .separator {
+  margin-block-start: 0;
+  margin-block-end: var(--consent-preferences-category-gap);
+}
+
+.consent-preferences__always {
+  font-size: var(--consent-preferences-always-font-size);
+  color: var(--consent-preferences-always-color);
+}
+
+/* El Modal no tiene prop `footer`: cuando el panel se abre sobre él, la fila de
+   acciones va dentro del contenido. */
+.consent-preferences__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--consent-banner-actions-gap);
+}
