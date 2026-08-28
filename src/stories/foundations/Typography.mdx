@@ -20,14 +20,22 @@ Una familia para todo lo que se lee y otra para el código. Una tercera, serif, 
   <FontSpecimen key={key} name={name} fontFamily={fontFamily} intro={intro} link={link} />
 ))}
 
-### Las fuentes las carga el producto
+### Las fuentes las trae el DS
 
-El paquete **no incluye los ficheros de fuente**: los tokens solo nombran la familia (`--font-family-sans`, `--font-family-mono`). Cada producto las carga como le convenga —`next/font/google` en las apps Next, un `<link>` a Google Fonts en el resto— con estos requisitos:
+El paquete **incluye los ficheros de fuente**: `@studiolxd/brand/fonts` es una hoja `@font-face` (Google Sans Flex, Google Sans Code y Libre Bodoni; subconjuntos latin + latin-ext, licencia OFL) que resuelve exactamente los nombres de familia de los tokens (`--font-family-sans`, `--font-family-mono`, `--font-family-serif`). El producto la importa **una vez**, en el layout raíz:
 
-- **Google Sans Flex** con los ejes `wght` (peso) y `opsz` (tamaño óptico). Es una fuente variable; el sistema usa dos pesos, pero la fuente los interpola sin ficheros extra.
-- **Google Sans Code** en 300–800, normal e itálica.
-- **Libre Bodoni** solo si el producto la usa.
-- `font-display: swap` y los fallbacks del token (`system-ui`, `ui-monospace`, `Georgia`).
+```ts
+// app/layout.tsx (o app/[locale]/layout.tsx en apps con i18n)
+import '@studiolxd/brand/fonts';
+```
+
+- **No hace falta `next/font/google`** ni ningún `<link>` a Google Fonts: cargar la fuente por otra vía además de `@studiolxd/brand/fonts` la duplica (dos descargas, dos `@font-face` con el mismo nombre).
+- **Google Sans Flex** es variable (`wght` 1–1000); el sistema usa dos pesos y el tamaño óptico (`opsz`) lo ajusta el navegador solo.
+- **Google Sans Code** en 300–800, normal e itálica. **Libre Bodoni** en 400–700, normal e itálica — se sirve siempre, aunque el producto no la use (excepción de producto).
+- `font-display: swap` y los fallbacks del token (`system-ui`, `ui-monospace`, `Georgia`) ya están resueltos: no hace falta declararlos aparte.
+- Opcional, para adelantar la descarga del peso principal: `<link rel="preload" as="font" type="font/woff2" href=".../google-sans-flex-normal-latin.woff2" crossOrigin="anonymous">` apuntando al fichero servido desde `node_modules/@studiolxd/brand/dist/assets/fonts/google-sans-flex/` (o donde el bundler lo copie).
+
+**Migración desde una carga propia:** si el producto ya cargaba estas fuentes con `next/font/google` o un `<link>`, basta con retirar esa carga y añadir el `import '@studiolxd/brand/fonts'` — los nombres de familia y los fallbacks no cambian, así que no hay que tocar ningún CSS que los consuma.
 
 ---
 

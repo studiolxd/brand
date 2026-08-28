@@ -7,6 +7,39 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.26.0
+
+### Añadido
+
+- **`@studiolxd/brand/fonts`**: subruta nueva con los ficheros de fuente del sistema
+  (Google Sans Flex variable 1–1000, Google Sans Code 300–800 normal/itálica, Libre Bodoni
+  400–700 normal/itálica; subconjuntos latin + latin-ext, licencia OFL junto a cada familia en
+  `dist/assets/fonts/<familia>/LICENSE.txt`). Es una hoja `@font-face` (`font-display: swap`,
+  `unicode-range` por subconjunto) que resuelve exactamente los nombres de familia de
+  `--font-family-sans/-mono/-serif`. **412 KB en total** (bajo el límite de ~600 KB que se
+  había fijado para esta pieza). No se incluye en `brand.css`: el consumidor la importa una
+  vez, en el layout raíz (`import '@studiolxd/brand/fonts'`).
+
+### Cambiado
+
+- **Las fuentes las trae el DS, no el producto** (`Typography.mdx` § «Las fuentes las trae el
+  DS»). Antes cada consumidor cargaba Google Sans Flex/Code/Libre Bodoni por su cuenta
+  (`next/font/google`, un `<link>` a Google Fonts, o nada — y entonces el sistema caía a
+  `system-ui`, visiblemente más fino). Ahora es una única fuente de verdad.
+
+  **Migración:**
+  - Si el producto usaba `next/font/google`: retirar esa carga (el objeto de fuente y su
+    `className`/variable CSS) y añadir `import '@studiolxd/brand/fonts'` en el layout raíz
+    (`app/layout.tsx`, o `app/[locale]/layout.tsx` en apps con i18n). `next/font` ya no hace
+    falta y, si se deja, duplica la descarga con un segundo `@font-face` del mismo nombre.
+  - Si el producto usaba un `<link>` a `fonts.googleapis.com`: retirar el `<link>` (y los
+    `<link rel="preconnect">` a `fonts.googleapis.com`/`fonts.gstatic.com` si no sirven a
+    ningún otro fin) y añadir el mismo `import '@studiolxd/brand/fonts'`.
+  - Los nombres de familia y los fallbacks de los tokens no cambian: ningún CSS que consuma
+    `--font-family-sans/-mono/-serif` necesita tocarse.
+  - Storybook sigue el mismo cambio: ya no enlaza a Google Fonts, importa `fonts.css` como
+    cualquier consumidor.
+
 ## v25.25.0
 
 ### Cambiado
