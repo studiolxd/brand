@@ -7,6 +7,36 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.22.0
+
+El resaltado de las listas de opciones desplegables vuelve a la inversión de marca que tenía
+antes de v25.8.0: el gris de superficie secundaria que estrenó v25.17.0 no era la señal
+correcta.
+
+### Cambiado
+
+- **El ítem resaltado de los desplegables invierte la marca** (**cambio visual**). La opción
+  bajo el puntero o resaltada por el teclado (`[data-highlighted]`) pasa de rellenarse con la
+  superficie secundaria gris a invertir la marca: sobre superficie clara, prusia
+  (`color.primary`) con tinta clara (`color.text.on-dark`); sobre superficie oscura, al revés
+  —blanco con tinta prusia— por la regla de derivación. El **ítem destructivo** resaltado
+  invierte a su propio rojo sólido (`color.destructive-fill` con `color.destructive-fill-text`),
+  igual en las dos superficies. Alcanza a `Menu` (y con él `ContextMenu`, `DropdownField`,
+  `LanguageSwitcher`, `ThemeSwitcher` y `TimeSelect`), `UserMenu`, `OrgSwitcher`, los tiles de
+  `AppLauncher`, `CommandPalette`, `Select`, `MultiSelect`, `AsyncSelect`, `AsyncMultiSelect`,
+  la lista de países de `InputPhone` y los resultados de `DocsSearch`.
+- **Los nombres de token no cambian**: siguen siendo `*-highlighted-bg` (y `tile-`/`result-`/
+  `country-item-` donde corresponde), solo cambia su valor. Se añade en todos el par
+  `*-highlighted-color` —y sus `surface-dark-*`— para que la tinta invierta con el relleno;
+  iconos, glifos y atajos dentro del ítem la heredan por `currentColor`, sin tokens propios.
+  `Menu`, `UserMenu` y `OrgSwitcher` estrenan además `item-destructive-highlighted-bg` /
+  `-color`. Quien hubiera sobreescrito un `*-highlighted-bg` para volver al gris lo sigue
+  pudiendo hacer, pero debe fijar también el `*-highlighted-color`.
+- **Foundations → Colores** reescribe la tercera excepción («las listas de opciones
+  desplegables se rellenan») para decir que el relleno es la inversión de marca, y deja de
+  atribuir ese papel a `surface.secondary-*`, que vuelve a ser solo una superficie y no marca
+  ningún estado.
+
 ## v25.21.0
 
 La marca manda más en la cabecera pública: el logotipo estrena una talla mayor y la
