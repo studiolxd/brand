@@ -10,10 +10,8 @@
     "country-icon-size":    { "$value": "0.625rem",                  "$type": "dimension", "$description": "Ancho del icono chevron en el selector de país" },
     "sm-country-width":     { "$value": "3.5rem",                    "$type": "dimension", "$description": "Ancho del selector de país — variante sm" },
     "lg-country-width":     { "$value": "5.5rem",                    "$type": "dimension", "$description": "Ancho del selector de país — variante lg" },
-    "country-item-focus-ring-width":  { "$value": "{select.item-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo del país resaltado en la lista — el del Select" },
-    "country-item-focus-ring-offset": { "$value": "{select.item-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo del país resaltado — la del Select" },
-    "country-item-focus-ring-color":  { "$value": "{select.item-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo del país resaltado — el del Select" },
-    "surface-dark-country-item-focus-ring-color": { "$value": "{select.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Color del anillo del país resaltado — surface-dark" },
+    "country-item-highlighted-bg":    { "$value": "{select.item-highlighted-bg}",    "$type": "color",     "$description": "Relleno del país resaltado en la lista — el del Select" },
+    "surface-dark-country-item-highlighted-bg":  { "$value": "{select.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno del país resaltado — surface-dark" },
     "surface-dark-country-border-color":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Separador del selector de país — surface-dark" }
   }
 }

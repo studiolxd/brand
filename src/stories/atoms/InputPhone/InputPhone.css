@@ -97,10 +97,10 @@
   cursor: pointer;
 }
 
-/* El país resaltado no se rellena (regla de Colores): anillo del sistema. */
+/* El país resaltado se rellena: excepción declarada de las listas de opciones
+   desplegables (Foundations → Colores). */
 .input-phone__country-item[data-highlighted] {
-  outline: var(--input-phone-country-item-focus-ring-width) solid var(--input-phone-country-item-focus-ring-color);
-  outline-offset: var(--input-phone-country-item-focus-ring-offset);
+  background-color: var(--input-phone-country-item-highlighted-bg);
 }
 
 /* ── Wrapper de país (react-phone-number-input) ─────────────── */
