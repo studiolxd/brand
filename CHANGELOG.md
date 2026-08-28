@@ -7,6 +7,29 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.24.0
+
+### Cambiado
+
+- **Motor de conducta: `@base-ui-components/react` (rc.0, deprecado) → `@base-ui/react`
+  1.7.0**, el paquete estable al que sus propios autores renombraron el proyecto. Barrido de
+  todos los imports (componentes, stories, tests, `entry-points.mjs`, `vite.lib.config.ts`) y
+  de `package.json`. Sin cambios en la API pública de brand ni en los `data-*` que engancha el
+  CSS BEM (`[data-highlighted]`, `[data-open]`, `[data-popup-open]`…): se comprobaron uno a uno
+  contra el CHANGELOG oficial del paquete (rc.1 → 1.7.0) y no hay renombres que afecten a los
+  componentes que usa este DS. Al instalar el paquete en un consumidor (`pnpm install`), deja
+  de emitir el aviso de dependencia deprecada.
+- **`Accordion`**: el trigger de un ítem deshabilitado se queda enfocable con teclado (antes
+  perdía el foco, como cualquier `<button disabled>`) — comportamiento que trae la propia
+  librería al alinear sus atajos de teclado con el patrón APG. Sigue anunciándose como
+  deshabilitado (`aria-disabled`, `[data-disabled]` en CSS) y sin abrirse al activarlo; solo
+  cambia que ya no desaparece del recorrido por tabulador.
+
+### Corregido
+
+- Los dos errores preexistentes de `tsc --noEmit` (`Menu.stories.tsx` sin `args` en una story,
+  cast incorrecto en `src/tokens/typography.ts`): el build de tipos pasa limpio por primera vez.
+
 ## v25.23.0
 
 Las secciones de página poseen su propio ritmo vertical: se montan **a sangre**, con su aire
