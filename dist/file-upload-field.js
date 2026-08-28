@@ -21,6 +21,7 @@ var s = a(function({ id: a, label: s, labelHidden: c = !1, errorMessage: l, help
 				ref: h,
 				...m,
 				id: v,
+				size: g,
 				error: S,
 				"aria-describedby": x
 			}),

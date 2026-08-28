@@ -1,57 +1,61 @@
 'use client';
 import './switcher-field.css';
-import { n as e } from "./_shared/form-size.js";
-import { Switcher as t } from "./switcher.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { forwardRef as i, useId as a } from "react";
+import { VisuallyHidden as e } from "./visually-hidden.js";
+import { n as t } from "./_shared/form-size.js";
+import { Switcher as n } from "./switcher.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/SwitcherField/SwitcherField.tsx
-var o = i(function({ label: i, id: o, checked: s, defaultChecked: c, disabled: l, required: u, name: d, value: f, size: p, error: m = !1, errorMessage: h, helperText: g, className: _, onCheckedChange: v, onBlur: y }, b) {
-	let x = e(p), S = a(), C = o ?? S, w = h ? `${C}-error` : void 0, T = g ? `${C}-helper` : void 0, E = [w, T].filter(Boolean).join(" ") || void 0, D = m || !!h;
-	return /* @__PURE__ */ r("div", {
+var s = a(function({ label: a, labelHidden: s = !1, id: c, checked: l, defaultChecked: u, disabled: d, required: f, name: p, value: m, size: h, error: g = !1, errorMessage: _, helperText: v, className: y, onCheckedChange: b, onBlur: x }, S) {
+	let C = t(h), w = o(), T = c ?? w, E = _ ? `${T}-error` : void 0, D = v ? `${T}-helper` : void 0, O = [E, D].filter(Boolean).join(" ") || void 0, k = g || !!_;
+	return /* @__PURE__ */ i("div", {
 		className: [
 			"switcher-field",
-			x === "md" ? "" : `switcher-field--${x}`,
-			l ? "switcher-field--disabled" : "",
-			_
+			C === "md" ? "" : `switcher-field--${C}`,
+			d ? "switcher-field--disabled" : "",
+			y
 		].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r("label", {
+			/* @__PURE__ */ i("label", {
 				className: "switcher-field__control",
-				htmlFor: C,
-				children: [/* @__PURE__ */ n(t, {
-					ref: b,
-					id: C,
-					checked: s,
-					defaultChecked: c,
-					disabled: l,
-					size: x,
-					name: d,
-					value: f,
-					required: u,
-					error: D,
-					"aria-labelledby": `${C}-label`,
-					"aria-describedby": E,
-					onCheckedChange: v,
-					onBlur: y
-				}), /* @__PURE__ */ n("span", {
-					id: `${C}-label`,
+				htmlFor: T,
+				children: [/* @__PURE__ */ r(n, {
+					ref: S,
+					id: T,
+					checked: l,
+					defaultChecked: u,
+					disabled: d,
+					size: C,
+					name: p,
+					value: m,
+					required: f,
+					error: k,
+					"aria-labelledby": `${T}-label`,
+					"aria-describedby": O,
+					onCheckedChange: b,
+					onBlur: x
+				}), s ? /* @__PURE__ */ r(e, {
+					id: `${T}-label`,
+					children: a
+				}) : /* @__PURE__ */ r("span", {
+					id: `${T}-label`,
 					className: "switcher-field__label",
-					children: i
+					children: a
 				})]
 			}),
-			h && /* @__PURE__ */ n("span", {
-				id: w,
+			_ && /* @__PURE__ */ r("span", {
+				id: E,
 				className: "switcher-field__error",
 				role: "alert",
-				children: h
+				children: _
 			}),
-			g && /* @__PURE__ */ n("span", {
-				id: T,
+			v && /* @__PURE__ */ r("span", {
+				id: D,
 				className: "switcher-field__helper",
-				children: g
+				children: v
 			})
 		]
 	});
 });
 //#endregion
-export { o as SwitcherField };
+export { s as SwitcherField };

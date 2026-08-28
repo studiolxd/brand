@@ -1,3 +1,4 @@
+import { type FormSize } from '../../constants/form-size';
 import './FileUpload.css';
 export interface FileUploadProps {
     multiple?: boolean;
@@ -12,6 +13,14 @@ export interface FileUploadProps {
     error?: boolean;
     id?: string;
     name?: string;
+    /**
+     * Talla del sistema. La zona de arrastre no es un control de una línea, así
+     * que no toma la altura 32/40/48: lo que sigue a la talla es su aire, el
+     * cuerpo de su texto, el icono y la miniatura de cada archivo (32/40/48, esa
+     * sí, porque la fila de un archivo es una fila de control).
+     * Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`.
+     */
+    size?: FormSize;
     /** @deprecated Usa el atributo nativo `aria-describedby`. */
     describedBy?: string;
     /** @deprecated Usa el atributo nativo `aria-label`. */

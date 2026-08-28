@@ -13,7 +13,11 @@ export interface FileUploadFieldProps extends Omit<FileUploadProps, 'describedBy
     errorMessage?: string;
     /** Texto de ayuda, enlazado por `aria-describedby`. */
     helperText?: string;
-    /** Talla del sistema. Solo afecta a la etiqueta: la zona de arrastre no tiene tallas. */
+    /**
+     * Talla del sistema: mueve la etiqueta y la zona de arrastre a la vez (aire,
+     * cuerpo del texto, icono y miniatura de cada archivo).
+     * Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`.
+     */
     size?: 'sm' | 'md' | 'lg';
 }
 /**
