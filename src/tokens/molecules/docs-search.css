@@ -25,7 +25,8 @@
   --docs-search-result-mark-color: var(--color-text-on-light); /** Tinta del resaltado de coincidencias sobre el amarillo */
   --docs-search-status-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del aviso de estado */
   --docs-search-status-color: var(--color-text-muted-on-light); /** Color del aviso de estado — atenuado */
-  --docs-search-result-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del resultado resaltado — el del Menu: el foco es virtual, así que puntero y teclado marcan el mismo relleno */
+  --docs-search-result-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del resultado resaltado — el del Menu: la inversión de marca. El foco es virtual, así que puntero y teclado marcan el mismo relleno */
+  --docs-search-result-highlighted-color: var(--menu-item-highlighted-color); /** Texto del resultado resaltado — el del Menu: producto y extracto lo heredan por `currentColor` */
 }
 
 .surface-dark,
@@ -36,4 +37,5 @@ html.dark {
   --docs-search-result-product-color: var(--color-text-muted-on-dark); /** Rótulo de producto — surface-dark */
   --docs-search-status-color: var(--color-text-muted-on-dark); /** Aviso de estado — surface-dark */
   --docs-search-result-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del resultado resaltado — surface-dark */
+  --docs-search-result-highlighted-color: var(--menu-item-highlighted-color); /** Texto del resultado resaltado — surface-dark */
 }

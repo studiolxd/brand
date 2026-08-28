@@ -23,7 +23,8 @@
     "result-mark-bg":    { "$value": "{color.accent-2}",     "$type": "color", "$description": "Fondo del resaltado de coincidencias (`<mark>`) dentro del extracto: amarillo de marca. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura" },
     "result-mark-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Tinta del resaltado de coincidencias sobre el amarillo" },
 
-    "result-highlighted-bg": { "$value": "{menu.item-highlighted-bg}", "$type": "color", "$description": "Relleno del resultado resaltado — el del Menu: el foco es virtual, así que puntero y teclado marcan el mismo relleno" },
+    "result-highlighted-bg": { "$value": "{menu.item-highlighted-bg}", "$type": "color", "$description": "Relleno del resultado resaltado — el del Menu: la inversión de marca. El foco es virtual, así que puntero y teclado marcan el mismo relleno" },
+    "result-highlighted-color": { "$value": "{menu.item-highlighted-color}", "$type": "color", "$description": "Texto del resultado resaltado — el del Menu: producto y extracto lo heredan por `currentColor`" },
 
     "status-padding-block":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical del aviso de estado (buscando / sin resultados)" },
     "status-padding-inline": { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding horizontal del aviso de estado" },
@@ -35,6 +36,7 @@
     "surface-dark-result-excerpt-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del extracto — surface-dark" },
     "surface-dark-result-product-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Rótulo de producto — surface-dark" },
     "surface-dark-result-highlighted-bg":   { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno del resultado resaltado — surface-dark" },
+    "surface-dark-result-highlighted-color": { "$value": "{menu.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Texto del resultado resaltado — surface-dark" },
     "surface-dark-status-color":            { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Aviso de estado — surface-dark" }
   }
 }

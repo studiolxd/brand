@@ -18,7 +18,8 @@ $lxd-docs-search-result-product-font-size: 0.875rem; // Cuerpo del rótulo de pr
 $lxd-docs-search-result-product-color: #4a4a4a; // Color del rótulo de producto — atenuado
 $lxd-docs-search-result-mark-bg: #ffcd00; // Fondo del resaltado de coincidencias (`<mark>`) dentro del extracto: amarillo de marca. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura
 $lxd-docs-search-result-mark-color: #111e30; // Tinta del resaltado de coincidencias sobre el amarillo
-$lxd-docs-search-result-highlighted-bg: #f2f2f2; // Relleno del resultado resaltado — el del Menu: el foco es virtual, así que puntero y teclado marcan el mismo relleno
+$lxd-docs-search-result-highlighted-bg: #111e30; // Relleno del resultado resaltado — el del Menu: la inversión de marca. El foco es virtual, así que puntero y teclado marcan el mismo relleno
+$lxd-docs-search-result-highlighted-color: #ffffff; // Texto del resultado resaltado — el del Menu: producto y extracto lo heredan por `currentColor`
 $lxd-docs-search-status-padding-block: 0.75rem; // Padding vertical del aviso de estado (buscando / sin resultados)
 $lxd-docs-search-status-padding-inline: 0.75rem; // Padding horizontal del aviso de estado
 $lxd-docs-search-status-gap: 0.5rem; // Aire entre el indicador de carga y su texto

@@ -35,10 +35,26 @@
 }
 
 /* El foco es virtual (`aria-activedescendant`): el resultado resaltado lo marca
-   Base UI con `data-highlighted`, por teclado y por puntero, y se rellena —
-   excepción declarada de las listas de opciones (Foundations → Colores). */
+   Base UI con `data-highlighted`, por teclado y por puntero, y se rellena con
+   la inversión de marca — excepción declarada de las listas de opciones
+   (Foundations → Colores). */
 .docs-search__result[data-highlighted] {
   background-color: var(--docs-search-result-highlighted-bg);
+  color: var(--docs-search-result-highlighted-color);
+}
+
+/* Producto y extracto llevan tinta apagada propia: sobre el relleno invertido
+   la heredan del resultado para no quedar ilegibles. */
+.docs-search__result[data-highlighted] .docs-search__result-product,
+.docs-search__result[data-highlighted] .docs-search__result-excerpt {
+  color: inherit;
+}
+
+/* El realce de coincidencias invierte a su vez: tinta del relleno sobre el
+   color del texto resaltado. */
+.docs-search__result[data-highlighted] .docs-search__result-excerpt mark {
+  background-color: var(--docs-search-result-highlighted-color);
+  color: var(--docs-search-result-highlighted-bg);
 }
 
 .docs-search__result-product {
