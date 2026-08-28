@@ -1,0 +1,28 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --collapsible-trigger-cursor: pointer; /** Cursor del disparador */
+  --collapsible-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --collapsible-trigger-gap: var(--spacing-2); /** Separación entre el rótulo del disparador y su chevron */
+  --collapsible-trigger-padding-block: var(--spacing-2); /** Aire vertical del disparador */
+  --collapsible-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
+  --collapsible-content-padding-block: var(--spacing-2); /** Aire bajo el contenido plegable */
+  --collapsible-transition-duration: var(--motion-duration-fast); /** Duración de abrir y cerrar */
+  --collapsible-transition-easing: var(--motion-easing-default); /** Easing de abrir y cerrar */
+  --collapsible-trigger-font-family: var(--control-font-family); /** Familia tipográfica del disparador */
+  --collapsible-trigger-font-size: var(--control-font-size); /** Tamaño de fuente del disparador */
+  --collapsible-trigger-color: var(--color-text-on-light); /** Tinta del disparador */
+  --collapsible-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --collapsible-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
+  --collapsible-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --collapsible-trigger-font-weight: var(--control-font-weight); /** Peso tipográfico del disparador */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --collapsible-trigger-color: var(--color-text-on-dark); /** Tinta del disparador — surface-dark */
+  --collapsible-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

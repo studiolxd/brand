@@ -1,0 +1,89 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CollapsibleStories from "./Collapsible.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { collapsibleTokens, collapsibleDarkTokens } from "../../../tokens/components/collapsible";
+
+<Meta of={CollapsibleStories} />
+
+# Collapsible
+
+Un bloque que se pliega y se despliega: los detalles de un panel de ajustes, una
+sección larga de un editor, el «ver más» de una ficha.
+
+<Canvas of={CollapsibleStories.PorDefecto} />
+
+Se construye sobre [Base UI Collapsible](https://base-ui.com/react/components/collapsible),
+que aporta `aria-expanded`/`aria-controls`, la medida del panel para la
+animación y el estado controlado o no controlado.
+
+## Cuándo no es este componente
+
+`Collapsible` es **una sola sección**. Para varias que se coordinan entre sí
+—una abierta a la vez, recorrido con flechas, cada rótulo dentro de un
+encabezado— el componente es [`Accordion`](?path=/docs/atoms-accordion--docs),
+que es el patrón WAI-ARIA completo.
+
+## Anatomía
+
+| Pieza | Qué es |
+|---|---|
+| `Collapsible` | Raíz. Guarda el estado (`open` / `defaultOpen`). |
+| `CollapsibleTrigger` | El botón que abre y cierra, con su chevron. |
+| `CollapsibleContent` | El contenido que se pliega. |
+
+## Abierto y controlado
+
+<Canvas of={CollapsibleStories.Abierto} />
+
+Funciona controlado (`open` + `onOpenChange`) o no controlado (`defaultOpen`).
+`onOpenChange` recibe **solo el estado**: el DS no expone los detalles del evento
+de Base UI.
+
+<Canvas of={CollapsibleStories.Controlado} />
+
+## Disparador
+
+El chevron viene puesto y apunta abajo cerrado, arriba abierto. `chevron={false}`
+lo quita para cuando el disparador ya se lee como tal.
+
+<Canvas of={CollapsibleStories.SinChevron} />
+
+Con la prop `render` de Base UI, el disparador puede ser otro elemento —una fila
+entera, un `Button` del sistema— sin perder el contrato ARIA. Como toda `render`
+de Base UI, solo desde un componente cliente.
+
+## Deshabilitado
+
+<Canvas of={CollapsibleStories.Deshabilitado} />
+
+## Superficie oscura
+
+La tinta del disparador y el anillo de foco pasan a blanco por token
+`surface-dark-*`, sin CSS propio.
+
+<Canvas of={CollapsibleStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={collapsibleTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={collapsibleDarkTokens} />
+
+## Accesibilidad
+
+- El disparador es un `<button>` con `aria-expanded` y `aria-controls`
+  apuntando al panel. `Espacio` e `Intro` abren y cierran.
+- El texto del disparador es el nombre accesible de la sección: escribe ahí lo
+  que la identifica, no «Ver más».
+- El movimiento usa las duraciones del sistema; con
+  `prefers-reduced-motion: reduce` valen 0ms y el panel cambia sin animación.
+- `hiddenUntilFound` (de Base UI) deja que el buscador del navegador encuentre
+  el contenido plegado y lo abra.
+
+## Props
+
+<ArgTypes of={CollapsibleStories} />

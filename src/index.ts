@@ -16,6 +16,8 @@ export { Avatar } from './stories/atoms/Avatar/Avatar';
 export { Button } from './stories/atoms/Button/Button';
 export type { ButtonProps } from './stories/atoms/Button/Button';
 export { Checkbox } from './stories/atoms/Checkbox/Checkbox';
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from './stories/atoms/Collapsible/Collapsible';
+export type { CollapsibleProps, CollapsibleTriggerProps, CollapsibleContentProps } from './stories/atoms/Collapsible/Collapsible';
 export { Code } from './stories/atoms/Code/Code';
 export type { CodeProps } from './stories/atoms/Code/Code';
 export { Columns } from './stories/atoms/Columns/Columns';

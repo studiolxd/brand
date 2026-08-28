@@ -143,6 +143,7 @@ const filters = {
   'star-rating':        (t) => t.path[0] === 'star-rating',
   toggle:               (t) => t.path[0] === 'toggle',
   'toggle-group':       (t) => t.path[0] === 'toggle-group',
+  collapsible:          (t) => t.path[0] === 'collapsible',
 };
 
 function cssFile(destination, filterKey) {
@@ -299,6 +300,7 @@ const sd = new StyleDictionary({
         cssFile('components/star-rating.css',       'star-rating'),
         cssFile('components/toggle.css',            'toggle'),
         cssFile('components/toggle-group.css',      'toggle-group'),
+        cssFile('components/collapsible.css',       'collapsible'),
       ],
     },
     scss: {
@@ -440,6 +442,7 @@ const sd = new StyleDictionary({
         scssFile('components/_star-rating.scss',     'star-rating'),
         scssFile('components/_toggle.scss',          'toggle'),
         scssFile('components/_toggle-group.scss',    'toggle-group'),
+        scssFile('components/_collapsible.scss',     'collapsible'),
       ],
     },
   },

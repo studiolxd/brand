@@ -1,0 +1,76 @@
+.collapsible {
+  inline-size: 100%;
+}
+
+/* ─── Disparador ─────────────────────────────────────────── */
+.collapsible__trigger {
+  all: unset;
+  box-sizing: border-box;
+  inline-size: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--collapsible-trigger-gap);
+  padding-block: var(--collapsible-trigger-padding-block);
+  padding-inline: 0;
+  font-family: var(--collapsible-trigger-font-family);
+  font-size: var(--collapsible-trigger-font-size);
+  font-weight: var(--collapsible-trigger-font-weight);
+  color: var(--collapsible-trigger-color);
+  cursor: var(--collapsible-trigger-cursor);
+  text-align: start;
+}
+
+.collapsible__trigger:focus-visible {
+  outline: var(--collapsible-focus-ring-width) solid var(--collapsible-focus-ring-color);
+  outline-offset: var(--collapsible-focus-ring-offset);
+}
+
+.collapsible__trigger[data-disabled] {
+  opacity: var(--collapsible-disabled-opacity);
+  cursor: var(--collapsible-disabled-cursor);
+}
+
+.collapsible__trigger-text {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+/* ─── Chevron: apunta abajo cerrado, arriba abierto ──────── */
+.collapsible__chevron {
+  flex-shrink: 0;
+  transform: rotate(90deg);
+  transition: transform var(--collapsible-transition-duration) var(--collapsible-transition-easing);
+}
+
+.collapsible__trigger[data-panel-open] .collapsible__chevron {
+  transform: rotate(-90deg);
+}
+
+/* ─── Panel: la altura la mide Base UI (--collapsible-panel-height).
+   Las duraciones son tokens: con prefers-reduced-motion valen 0ms y el panel
+   abre y cierra sin animar. ─────────────────────────────────────── */
+.collapsible__content {
+  overflow: hidden;
+}
+
+.collapsible__content[data-open] {
+  animation: collapsible-open var(--collapsible-transition-duration) var(--collapsible-transition-easing);
+}
+
+.collapsible__content[data-closed] {
+  animation: collapsible-close var(--collapsible-transition-duration) var(--collapsible-transition-easing);
+}
+
+@keyframes collapsible-open {
+  from { block-size: 0; }
+  to   { block-size: var(--collapsible-panel-height); }
+}
+
+@keyframes collapsible-close {
+  from { block-size: var(--collapsible-panel-height); }
+  to   { block-size: 0; }
+}
+
+.collapsible__content-inner {
+  padding-block-end: var(--collapsible-content-padding-block);
+}
