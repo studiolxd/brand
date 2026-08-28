@@ -7,6 +7,66 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.11.0
+
+Fase 0.3: las piezas de documentación y datos que faltaban para desmontar los
+componentes caseros de `apps/web` y de `aipricing`, más tres huecos pequeños que
+las apps piden al retirar su capa `components/ui/`.
+
+### Añadido
+
+- **`Prose`** (molécula, `./prose`) — el contenedor de contenido largo: MDX,
+  textos legales, artículos, cualquier HTML que llegue de un CMS. Viste la
+  semántica cruda (`h1`–`h6`, `p`, `ul`/`ol`, `blockquote`, `pre`/`code`,
+  `table`, `hr`, `img`, `figcaption`) con la escala del sistema y la acota a la
+  medida de lectura. Es la **excepción documentada** al estilado de etiquetas
+  nativas: el contenido no viene de React y no hay dónde poner una clase. El
+  ritmo lo pone el flujo —los bloques no traen margen propio— y los tokens son
+  prestados: el código los de `CodeBlock`, la tabla los de `Table`, la cita y el
+  corte los de `Separator`, la sangría de las listas la de `List`. Los enlaces
+  no llevan nada: `base.css` ya viste cualquier `<a>`. Props `as`, `size`
+  (`sm`|`md`) y `measure`.
+- **`TableOfContents`** (molécula, `./table-of-contents`) — el índice de anclas
+  de la página. Controlado y sin scroll propio: recibe `activeId` y lo pinta,
+  porque el «dónde estoy» se resuelve de tres maneras distintas
+  (`IntersectionObserver`, hash, scroll de un contenedor) y ninguna cabe dentro.
+  `nav` con nombre, rótulo opcional, `List` + `Link`, sangría relativa al nivel
+  más alto de la lista y `aria-current="location"` en la sección actual. Estados
+  del sistema: línea en hover, barra al borde de inicio y peso `emphasis` en la
+  actual, anillo en el foco. `sticky` opcional.
+- **`DocsSearch`** (molécula, `./docs-search`) — el buscador de la
+  documentación. No busca nada: recibe `query`, `results` y `loading`. El motor
+  es el `Autocomplete` de Base UI con `filter={null}` y la lista en línea, sin
+  popup; el campo es el `InputField` del sistema, montado por `render`. Campo
+  `combobox`, `listbox` con nombre, un `option`-enlace por resultado y una
+  región viva que solo existe cuando hay algo que decir. `renderLink` para el
+  enlace del router.
+- **`StatTile`** (molécula, `./stat-tile`) — la baldosa de una cifra: etiqueta,
+  cifra, delta y contexto. No calcula ni formatea. `direction` gira la flecha y
+  fija el tono por defecto (subir es bueno); `tone` lo invierte donde subir es
+  malo, sin tocar la flecha. La dirección viaja además en texto oculto. Sin
+  fondo propio: se lee sobre el lienzo y funciona igual en las dos superficies.
+  La rejilla la pone `Columns`.
+- **`CopyButton`** (molécula, `./copy-button`) — copiar al portapapeles con
+  acuse doble: el icono pasa a un tic y una región viva lo anuncia. `value`
+  acepta una función, evaluada en el clic. Si el portapapeles no está
+  disponible lo dice en vez de fingir que ha copiado.
+- **`ConfirmDialog`** (molécula, `./confirm-dialog`) — la pregunta antes de lo
+  irreversible, sobre `Modal`. **El foco arranca en «Cancelar»**: confirmar
+  cuesta un `Tab`. `onConfirm` acepta una promesa y el diálogo se queda abierto
+  y ocupado mientras dura; si rechaza, sigue abierto y avisa por
+  `onConfirmError`.
+- **`Inline`** gana `justify` (`start` | `center` | `end` | `between`). Era el
+  hueco por el que se colaba un `className` de producto en cada pie de
+  formulario: una fila de acciones a la derecha no tenía forma de pedirse.
+  `start` es el defecto y no añade clase.
+
+### Tokens
+
+Nuevos grupos `prose.*`, `table-of-contents.*`, `docs-search.*`, `stat-tile.*`,
+`copy-button.*` y `confirm-dialog.*`, con sus pares `surface-dark-*` donde el
+color no llega ya por derivación.
+
 ## v25.10.0
 
 Fase 0.5: el sistema aprende a dibujar datos. Un organismo `Chart`, un átomo
