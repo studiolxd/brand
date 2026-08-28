@@ -30,6 +30,7 @@ La misma sidebar entra como cajón sobre un velo; el contenido queda `inert` y s
 - La sidebar es un `aside` con nombre; el contenido es el `main`.
 - El asa es un `separator` vertical con `aria-valuenow`: ← → cambian el ancho a pasos de `sidebar.resize-step`, `Home` va a rail, `End` al máximo.
 - Los tooltips del rail salen de un único `TooltipProvider` que pone el shell.
+- El shell monta el `SkipLink` (enlace de salto al contenido) como primer elemento enfocable, apuntando al `<main id="main-content" tabIndex={-1}>` que ya renderiza: la app con sesión tiene salto al contenido sin que el producto lo monte aparte. `skipLabel` cambia su texto (default «Saltar al contenido principal»).
 
 ## Props
 

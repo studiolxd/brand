@@ -293,9 +293,10 @@ ContextMenu (tenía 50 crudo en CSS), SkipLink (9999 crudo) y el Header viejo.
 
 - [x] Tokens propios (bg, color, aire, foco, capa) con par oscuro; compone
       `visually-hidden` en vez de duplicar la receta; `href` con `#`.
-- [ ] **AppShell** no lleva SkipLink ni `<main id="main-content" tabIndex={-1}>`:
-      la app con sesión no tiene salto al contenido. Al revisarlo, que el shell
-      renderice ambos (es quien sabe dónde está el contenido).
+- [x] **AppShell** (2026-08-28) — ya tenía `<main id="main-content" tabIndex={-1}>`;
+      ahora también monta `SkipLink` (prop `skipLabel`, default «Saltar al
+      contenido principal») como primer elemento del árbol, mismo patrón que
+      `AppRoot`. La app con sesión ya tiene salto al contenido.
 - [ ] **hub** (`app/[locale]/layout.tsx`) lleva su propio `<a class="slot-skip-link">`
       → desaparece al migrar a `SiteHeader` (público) y `AppShell` (app).
 

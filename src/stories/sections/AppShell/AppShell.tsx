@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { AppShellContext, type SidebarState } from './AppShellContext';
 import { TooltipProvider } from '../../atoms/Tooltip/Tooltip';
+import { SkipLink } from '../../atoms/SkipLink/SkipLink';
 import './AppShell.css';
 
 // Re-export de API pública del subpath ./app-shell; solo penaliza el HMR de
@@ -28,6 +29,8 @@ export interface AppShellProps {
   /** Ancho inicial de la sidebar desplegada (px). Sin él, el token `sidebar.width`. */
   defaultSidebarWidth?: number;
   onSidebarWidthChange?: (width: number) => void;
+  /** Texto del enlace de salto al contenido (`SkipLink`). Default: castellano. */
+  skipLabel?: string;
 }
 
 function useIsDesktop() {
@@ -60,6 +63,7 @@ export function AppShell({
   onSidebarChange,
   defaultSidebarWidth,
   onSidebarWidthChange,
+  skipLabel = 'Saltar al contenido principal',
 }: AppShellProps) {
   const isDesktop = useIsDesktop();
   const [desktopState, setDesktopState] = useState<SidebarState>(defaultSidebar);
@@ -127,6 +131,7 @@ export function AppShell({
   return (
     <AppShellContext.Provider value={value}>
       <TooltipProvider>
+        <SkipLink href="#main-content">{skipLabel}</SkipLink>
         <div
           className="app-shell"
           data-sidebar={sidebarValue}

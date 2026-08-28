@@ -83,3 +83,19 @@ export const Contrato: Story = {
     await expect(canvas.getByTestId('estado')).toHaveTextContent('open');
   },
 };
+
+export const ContratoSkipLink: Story = {
+  name: 'Test — el shell monta el salto al contenido',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.tab();
+    const skip = canvas.getByRole('link', { name: 'Saltar al contenido principal' });
+    await expect(document.activeElement).toBe(skip);
+    await expect(skip).toHaveAttribute('href', '#main-content');
+    const main = canvasElement.querySelector('#main-content') as HTMLElement;
+    await expect(main.tabIndex).toBe(-1);
+    main.focus();
+    await expect(document.activeElement).toBe(main);
+  },
+};
