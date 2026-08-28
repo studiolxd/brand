@@ -15,7 +15,7 @@
       "z-index":          { "$value": "{z-index.bar}", "$type": "number", "$description": "Capa: la de las barras fijas de la aplicación. Por debajo del velo de un modal — el banner no bloquea nada" },
 
       "title-font-size":       { "$value": "{text.size.3}",                       "$type": "dimension", "$description": "Cuerpo del título de la banda" },
-      "description-font-size": { "$value": "{text.paragraph.small.font-size}",    "$type": "dimension", "$description": "Cuerpo del texto de la banda: el peldaño pequeño de párrafo de la superficie" },
+      "description-font-size": { "$value": "{text.font-size}",                    "$type": "dimension", "$description": "Cuerpo del texto de la banda: el cuerpo de texto de la superficie, sin reducir (decisión del 2026-08-28)" },
 
       "surface-dark-bg":           { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la banda — surface-dark" },
       "surface-dark-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Texto de la banda — surface-dark" },

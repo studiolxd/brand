@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.27.0
+
+### Cambiado
+
+- **`ConsentBanner`**: el texto de la banda va al cuerpo de texto de la superficie
+  (`consent.banner.description-font-size` → `{text.font-size}`), no al peldaño pequeño; el
+  `Paragraph` interno deja de ir a `size="small"`. Decisión del usuario (2026-08-28). La marca
+  «siempre activa» del panel de preferencias sigue en pequeño.
+
 ## v25.26.0
 
 ### Añadido

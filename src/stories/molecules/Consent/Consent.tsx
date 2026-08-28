@@ -103,7 +103,7 @@ export function ConsentBanner({
       <div className="consent-banner__inner">
         <div className="consent-banner__text">
           <Heading level={2} size={3} className="consent-banner__title">{title}</Heading>
-          <Paragraph size="small" className="consent-banner__description">
+          <Paragraph className="consent-banner__description">
             {description}
             {policyHref !== undefined && (
               <>

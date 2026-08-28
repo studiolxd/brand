@@ -27,7 +27,6 @@ function p({ open: i = !0, onAcceptAll: a, onRejectAll: o, onOpenPreferences: s,
 					className: "consent-banner__title",
 					children: c
 				}), /* @__PURE__ */ f(r, {
-					size: "small",
 					className: "consent-banner__description",
 					children: [l, p !== void 0 && /* @__PURE__ */ f(u, { children: [" ", /* @__PURE__ */ d(n, {
 						href: p,

@@ -17,7 +17,7 @@
   --consent-banner-border-width: var(--border-width-default); /** Grosor de la línea superior */
   --consent-banner-max-inline-size: var(--container-max-width-xl); /** Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública */
   --consent-banner-title-font-size: var(--text-size-3); /** Cuerpo del título de la banda */
-  --consent-banner-description-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto de la banda: el peldaño pequeño de párrafo de la superficie */
+  --consent-banner-description-font-size: var(--text-font-size); /** Cuerpo del texto de la banda: el cuerpo de texto de la superficie, sin reducir (decisión del 2026-08-28) */
   --consent-preferences-always-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la marca «siempre activa» */
   --consent-preferences-always-color: var(--color-text-muted-on-light); /** Color de la marca «siempre activa» */
 }

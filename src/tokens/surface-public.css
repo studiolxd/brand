@@ -69,7 +69,7 @@
   --checkbox-field-error-font-size: var(--form-error-font-size);
   --checkbox-field-helper-font-size: var(--form-helper-font-size);
   --consent-banner-title-font-size: var(--text-size-3);
-  --consent-banner-description-font-size: var(--text-paragraph-small-font-size);
+  --consent-banner-description-font-size: var(--text-font-size);
   --consent-preferences-always-font-size: var(--text-paragraph-small-font-size);
   --conversation-list-item-font-size: var(--text-font-size);
   --date-picker-field-error-font-size: var(--form-error-font-size);
