@@ -17,3 +17,15 @@
 .inline.inline--align-end {
   align-items: flex-end;
 }
+
+/* Reparto horizontal. `start` es el de por defecto y no lleva clase: una fila
+   de acciones a la derecha se pide con `justify="end"`, no con CSS de app. */
+.inline.inline--justify-center {
+  justify-content: center;
+}
+.inline.inline--justify-end {
+  justify-content: flex-end;
+}
+.inline.inline--justify-between {
+  justify-content: space-between;
+}

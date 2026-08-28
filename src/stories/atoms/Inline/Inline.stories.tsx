@@ -20,6 +20,7 @@ const meta: Meta<typeof Inline> = {
   argTypes: {
     gap: { control: { type: 'radio' }, options: ['sm', 'md', 'lg'] },
     align: { control: { type: 'radio' }, options: ['start', 'center', 'end'] },
+    justify: { control: { type: 'radio' }, options: ['start', 'center', 'end', 'between'] },
     children: { table: { disable: true } },
     className: { table: { disable: true } },
   },
@@ -59,13 +60,43 @@ export const AlineadoArriba: Story = {
   },
 };
 
+/**
+ * `justify="end"`: la fila de acciones se alinea a la derecha. Es lo que
+ * evita el `className` de producto al pie de un formulario o de una tarjeta.
+ */
+export const AlineadoALaDerecha: Story = {
+  args: {
+    justify: 'end',
+    children: (
+      <>
+        <Button type="button" variant="ghost" onClick={() => {}}>Cancelar</Button>
+        <Button type="button" onClick={() => {}}>Guardar</Button>
+      </>
+    ),
+  },
+};
+
+/** `justify="between"`: las piezas se van a los extremos de la fila. */
+export const SeparadoALosExtremos: Story = {
+  args: {
+    justify: 'between',
+    children: (
+      <>
+        <Link icon="arrow-left" href="#atras">Atrás</Link>
+        <Button type="button" onClick={() => {}}>Continuar</Button>
+      </>
+    ),
+  },
+};
+
 export const Contrato: Story = {
-  name: 'Test — fila con envoltura, centrada por defecto y modificadores de aire y alineación',
+  name: 'Test — fila con envoltura, centrada por defecto y modificadores de aire, alineación y reparto',
   tags: ['!dev'],
   render: () => (
     <>
       <Inline className="base"><span>a</span><span>b</span></Inline>
-      <Inline gap="lg" align="end" className="mod"><span>a</span><span>b</span></Inline>
+      <Inline gap="lg" align="end" justify="end" className="mod"><span>a</span><span>b</span></Inline>
+      <Inline justify="between" className="between"><span>a</span><span>b</span></Inline>
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -79,6 +110,12 @@ export const Contrato: Story = {
     await expect(mod).toHaveClass('inline--gap-lg');
     await expect(mod).toHaveClass('inline--align-end');
     await expect(getComputedStyle(mod).alignItems).toBe('flex-end');
+    await expect(mod).toHaveClass('inline--justify-end');
+    await expect(getComputedStyle(mod).justifyContent).toBe('flex-end');
     await expect(parseFloat(getComputedStyle(mod).columnGap)).toBeGreaterThan(parseFloat(cs.columnGap));
+    const between = canvasElement.querySelector('.inline.between') as HTMLElement;
+    await expect(getComputedStyle(between).justifyContent).toBe('space-between');
+    // `justify="start"` es el defecto y no añade clase: la base sigue limpia.
+    await expect(getComputedStyle(base).justifyContent).toBe('normal');
   },
 };

@@ -9,6 +9,12 @@ export interface InlineProps {
    * centro: un botón y un enlace de distinta altura comparten eje.
    */
   align?: 'start' | 'center' | 'end';
+  /**
+   * Reparto horizontal de las piezas: al principio de la fila (por defecto),
+   * centradas, al final —una fila de acciones alineada a la derecha— o
+   * separadas a los extremos.
+   */
+  justify?: 'start' | 'center' | 'end' | 'between';
   children: ReactNode;
   className?: string;
 }
@@ -18,8 +24,11 @@ export interface InlineProps {
  * línea pasan a la siguiente. Es el hermano horizontal de `Stack` —los
  * botones de un `Hero`, el botón y el enlace de una `ErrorPage`—, sin fondo
  * ni semántica: `div.inline`.
+ *
+ * `justify` reparte las piezas a lo ancho: es lo que evita que una fila de
+ * acciones alineada a la derecha necesite un `className` de producto.
  */
-export function Inline({ gap = 'md', align = 'center', children, className }: InlineProps) {
-  const classes = ['inline', gap !== 'md' ? `inline--gap-${gap}` : '', align !== 'center' ? `inline--align-${align}` : '', className].filter(Boolean).join(' ');
+export function Inline({ gap = 'md', align = 'center', justify = 'start', children, className }: InlineProps) {
+  const classes = ['inline', gap !== 'md' ? `inline--gap-${gap}` : '', align !== 'center' ? `inline--align-${align}` : '', justify !== 'start' ? `inline--justify-${justify}` : '', className].filter(Boolean).join(' ');
   return <div className={classes}>{children}</div>;
 }
