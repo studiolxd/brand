@@ -42,10 +42,6 @@
     "surface-dark-content-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del dropdown — surface-dark" },
     "surface-dark-content-border-color":   { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Borde del dropdown — surface-dark" },
     "surface-dark-separator-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Color del separador entre grupos — surface-dark" },
-    "surface-dark-item-highlighted-bg":    { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" },
-    "item-focus-ring-width":  { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del anillo de la opción resaltada. La opción bajo el puntero o el teclado no se rellena (regla de Colores): la marca el anillo del sistema" },
-    "item-focus-ring-offset": { "$value": "calc(-1 * {border-width.focus})", "$type": "dimension", "$description": "Separación del anillo de la opción: hacia dentro, para no salirse del panel" },
-    "item-focus-ring-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del anillo de la opción — tinta de la superficie" },
-    "surface-dark-item-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del anillo de la opción — surface-dark" }
+    "surface-dark-item-highlighted-bg":    { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" }
   }
 }
