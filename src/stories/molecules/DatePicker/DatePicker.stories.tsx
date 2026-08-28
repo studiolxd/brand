@@ -153,6 +153,21 @@ export const ContratoNombreAccesible: Story = {
   },
 };
 
+/**
+ * Test: el input oculto que manda el `name` lleva la fecha en el huso LOCAL,
+ * no en UTC (`toISOString()` desplazaría un día en husos al este del
+ * meridiano a horas tempranas — ver REVISION-pendientes.md).
+ */
+export const ContratoInputOcultoFechaLocal: Story = {
+  name: 'Test — input oculto en fecha local, no UTC',
+  tags: ['!dev'],
+  render: () => <DatePicker name="fecha" value={new Date(2026, 0, 1, 0, 30)} />,
+  play: async ({ canvasElement }) => {
+    const hidden = canvasElement.querySelector<HTMLInputElement>('input[name="fecha"]')!;
+    await expect(hidden.value).toBe('2026-01-01');
+  },
+};
+
 /** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
 export const ContratoTalla: Story = {
   name: 'Test — talla del sistema',

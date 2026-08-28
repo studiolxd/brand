@@ -47,7 +47,7 @@ El campo es **controlado**: `value` + `onChange`. El formato de la fecha mostrad
 
 ## Con react-hook-form
 
-El control es de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onChange` + `name` + `ref` al disparador. `onChange` entrega un `Date`, que es lo que guarda react-hook-form; el `name` monta además un input oculto con la fecha en ISO (`yyyy-mm-dd`) para el envío nativo.
+El control es de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onChange` + `name` + `ref` al disparador. `onChange` entrega un `Date`, que es lo que guarda react-hook-form; el `name` monta además un input oculto con la fecha en `yyyy-mm-dd` **en el huso local** (no `toISOString()`, que es UTC y desplazaría un día) para el envío nativo.
 
 ```tsx
 <FormField

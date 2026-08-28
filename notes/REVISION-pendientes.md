@@ -440,11 +440,13 @@ Quedan con dudas, anotadas al cerrarlo:
 - [ ] **FileUpload** no tiene tallas: `size` en `FileUploadField` solo mueve la
       etiqueta. Si la zona de arrastre debe responder a la talla del formulario,
       hay que decidir su medida.
-- [ ] **DatePicker / DateTimeField**: el input oculto que monta `name` lleva la
-      fecha en ISO local (`yyyy-mm-dd`) recortada de `toISOString()`, que es
-      UTC. Con husos al este del meridiano y horas tempranas puede desplazar un
-      día en un envío nativo. Sin impacto en react-hook-form, que guarda el
-      `Date`.
+- [x] **DatePicker / DateTimeField** (2026-08-28) — el input oculto que monta
+      `name` construía `yyyy-mm-dd` con `toISOString().slice(0, 10)` (UTC):
+      desplazaba un día en husos al este del meridiano a horas tempranas.
+      Nuevo helper `toLocalDateInputValue` en `DatePicker.tsx` usa
+      `getFullYear`/`getMonth`/`getDate` (huso local); `DateTimeField` hereda
+      el arreglo al reenviar `name` al `DatePicker`. Test —
+      `DatePicker.stories.tsx` › «Test — input oculto en fecha local, no UTC».
 
 ## Alert y CodeBlock definitivos (2026-08-27)
 

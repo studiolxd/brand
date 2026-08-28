@@ -44,6 +44,17 @@ function formatDate(date: Date, locale: string): string {
 }
 
 /**
+ * `yyyy-mm-dd` en el huso local, no en UTC: `toISOString()` recorta al huso
+ * UTC y desplaza un día en husos al este del meridiano a horas tempranas.
+ */
+function toLocalDateInputValue(date: Date): string {
+  const year = String(date.getFullYear()).padStart(4, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
  * Selector de fecha. El `ref` va al **disparador**, para que react-hook-form
  * pueda enfocarlo al fallar la validación.
  */
@@ -123,7 +134,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
         <input
           type="hidden"
           name={name}
-          value={value instanceof Date ? value.toISOString().slice(0, 10) : ''}
+          value={value instanceof Date ? toLocalDateInputValue(value) : ''}
         />
       )}
     <Popover

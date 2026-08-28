@@ -47,7 +47,7 @@ El valor es un único `Date`: la fecha manda y la hora se aplica sobre ella. Mie
 
 ## Con react-hook-form
 
-El contrato es `value` / `onChange` + `name` + `ref` al disparador de la fecha. `onChange` entrega el `Date` completo (fecha y hora ya fusionadas); el `name` monta además un input oculto con la fecha en ISO para el envío nativo.
+El contrato es `value` / `onChange` + `name` + `ref` al disparador de la fecha. `onChange` entrega el `Date` completo (fecha y hora ya fusionadas); el `name` monta además un input oculto con la fecha en `yyyy-mm-dd` **en el huso local** (no `toISOString()`, que es UTC y desplazaría un día) para el envío nativo.
 
 ```tsx
 <FormField
