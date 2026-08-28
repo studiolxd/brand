@@ -7,6 +7,42 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.17.0
+
+Las listas de opciones desplegables recuperan el fondo en el resaltado.
+
+### Cambiado
+
+- **El resaltado de las listas de opciones desplegables se rellena.** El ítem bajo el
+  puntero o resaltado por el teclado (`[data-highlighted]`) vuelve a pintar un fondo suave
+  —la superficie secundaria del sistema (`color.surface.secondary-on-light`, y su par
+  `-on-dark` por la regla de derivación)— en vez del anillo, y sin línea de hover. Es una
+  excepción **declarada y cerrada** a «Estados: nada se rellena», por dos razones que solo
+  se juntan aquí: la densidad de un desplegable (las filas se tocan, un anillo se lee como
+  borde de la lista y una línea como separador) y el foco virtual
+  (`aria-activedescendant`), que recorre la lista deprisa sin mover el foco real. El valor
+  ya elegido conserva su marca (peso o casilla).
+  - Alcance: `Menu` —y con él `ContextMenu`, `DropdownField`, `LanguageSwitcher` y
+    `ThemeSwitcher` cuando despliegan—, `UserMenu`, `OrgSwitcher`, `AppLauncher`,
+    `CommandPalette`, `Select` (y `TimeSelect`), `MultiSelect`, `AsyncSelect`,
+    `AsyncMultiSelect`, la lista de países de `InputPhone` y la de resultados de
+    `DocsSearch`.
+  - Fuera de él nada cambia: `Table`, `Tabs`, `Pagination`, `SidebarNav`, `Calendar`,
+    `CalendarPlanner`, `ConversationList`, `NumberInput` y `Link` siguen con línea o barra.
+- **Tokens nuevos `*-highlighted-bg`** (con su par `surface-dark-*`): `menu.item-*`,
+  `select.item-*`, `multi-select.item-*`, `async-select.item-*`,
+  `async-multi-select.item-*`, `user-menu.item-*`, `org-switcher.item-*`,
+  `command-palette.item-*`, `docs-search.result-*`, `input-phone.country-item-*` y
+  `app-launcher.tile-*`. Los de cada componente cuelgan del `Menu` o del `Select`, así que
+  el sistema se retoca desde un único sitio.
+- **Retirados los tokens que dibujaban el resaltado con anillo o línea** en esos
+  componentes: `*-item-focus-ring-*` (y `country-item-`/`result-focus-ring-*`) y
+  `docs-search.result-hover-line-*`. El anillo de foco de los **controles** (`focus-ring-*`
+  del disparador, del campo) no se toca, ni la línea de hover del disparador del
+  `AppLauncher`, que no es una opción de la lista.
+- **Foundations › Colores** documenta la excepción como la tercera del sistema, con su
+  porqué, su ámbito exacto y lo que se queda fuera.
+
 ## v25.15.0
 
 El panel del menú de `SiteHeader` respira por los lados, y el buscador del sitio
