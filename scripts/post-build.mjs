@@ -34,11 +34,12 @@ for (const name of Object.keys(entryPoints)) {
 }
 
 // Activos de marca: los SVG del isotipo viajan tal cual a dist/assets, para
-// servirlos o copiarlos (favicon, iconos PWA) sin pasar por el bundler.
+// servirlos o copiarlos (favicon, iconos PWA) sin pasar por el bundler. Solo el
+// isotipo: en src/assets también viven activos de desarrollo que no se publican.
 const assetsSrc = 'src/assets';
 const assetsOut = `${dist}/assets`;
 mkdirSync(assetsOut, { recursive: true });
-for (const file of readdirSync(assetsSrc).filter((f) => f.endsWith('.svg'))) {
+for (const file of readdirSync(assetsSrc).filter((f) => f.startsWith('logomark') && f.endsWith('.svg'))) {
   copyFileSync(`${assetsSrc}/${file}`, `${assetsOut}/${file}`);
   console.log(`✔︎ dist/assets/${file}`);
 }

@@ -1,0 +1,26 @@
+import './logomark.css';
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+//#region src/stories/atoms/Logomark/logomarkAssets.ts
+var n = "547.6 -22.35 315.8 315.8", r = "508.125 -61.825 394.75 394.75", i = [
+	"M547.6,201.4V69.7h20.2v113.1h60.4v18.7H547.6z",
+	"M631.6,201.4l49.3-74.3l2.2-0.1l35.6-57.3h22.4l-45.4,69.9h-1.8l-39.7,61.8H631.6z M722.6,201.4l-40.8-62.2 l-1.4-0.1l-46.1-69.5h23.3l37.4,57.3h1.8l49.6,74.4H722.6z",
+	"M751.6,201.4V69.7h45.1c20.2,0,36.3,6,48.5,18c12.1,12,18.2,27.9,18.2,47.8c0,19.8-6.1,35.8-18.4,47.8 c-12.2,12.1-28.4,18.1-48.3,18.1H751.6z M771.9,183.3h24.4c14.2,0,25.4-4.3,33.8-12.8c8.4-8.5,12.6-20.1,12.6-34.6v-0.1 c0-14.7-4.1-26.3-12.4-34.9c-8.2-8.6-19.6-12.9-34-12.9h-24.4V183.3z"
+], a = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"547.6 -22.35 315.8 315.8\" fill=\"currentColor\" role=\"img\" aria-label=\"Studio LXD\">\n  <title>Studio LXD</title>\n  <path d=\"M547.6,201.4V69.7h20.2v113.1h60.4v18.7H547.6z\" />\n  <path d=\"M631.6,201.4l49.3-74.3l2.2-0.1l35.6-57.3h22.4l-45.4,69.9h-1.8l-39.7,61.8H631.6z M722.6,201.4l-40.8-62.2 l-1.4-0.1l-46.1-69.5h23.3l37.4,57.3h1.8l49.6,74.4H722.6z\" />\n  <path d=\"M751.6,201.4V69.7h45.1c20.2,0,36.3,6,48.5,18c12.1,12,18.2,27.9,18.2,47.8c0,19.8-6.1,35.8-18.4,47.8 c-12.2,12.1-28.4,18.1-48.3,18.1H751.6z M771.9,183.3h24.4c14.2,0,25.4-4.3,33.8-12.8c8.4-8.5,12.6-20.1,12.6-34.6v-0.1 c0-14.7-4.1-26.3-12.4-34.9c-8.2-8.6-19.6-12.9-34-12.9h-24.4V183.3z\" />\n</svg>", o = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"508.125 -61.825 394.75 394.75\" fill=\"currentColor\" role=\"img\" aria-label=\"Studio LXD\">\n  <title>Studio LXD</title>\n  <!-- Área de seguridad del 10 % por lado: el isotipo ocupa el 80 % central y entra completo en una máscara circular. -->\n  <path d=\"M547.6,201.4V69.7h20.2v113.1h60.4v18.7H547.6z\" />\n  <path d=\"M631.6,201.4l49.3-74.3l2.2-0.1l35.6-57.3h22.4l-45.4,69.9h-1.8l-39.7,61.8H631.6z M722.6,201.4l-40.8-62.2 l-1.4-0.1l-46.1-69.5h23.3l37.4,57.3h1.8l49.6,74.4H722.6z\" />\n  <path d=\"M751.6,201.4V69.7h45.1c20.2,0,36.3,6,48.5,18c12.1,12,18.2,27.9,18.2,47.8c0,19.8-6.1,35.8-18.4,47.8 c-12.2,12.1-28.4,18.1-48.3,18.1H751.6z M771.9,183.3h24.4c14.2,0,25.4-4.3,33.8-12.8c8.4-8.5,12.6-20.1,12.6-34.6v-0.1 c0-14.7-4.1-26.3-12.4-34.9c-8.2-8.6-19.6-12.9-34-12.9h-24.4V183.3z\" />\n</svg>";
+//#endregion
+//#region src/stories/atoms/Logomark/Logomark.tsx
+function s({ size: r = "md", title: a, className: o }) {
+	return /* @__PURE__ */ t("svg", {
+		xmlns: "http://www.w3.org/2000/svg",
+		viewBox: n,
+		className: [
+			"logomark",
+			`logomark--${r}`,
+			o
+		].filter(Boolean).join(" "),
+		role: a ? "img" : void 0,
+		"aria-hidden": a ? void 0 : !0,
+		children: [a ? /* @__PURE__ */ e("title", { children: a }) : null, i.map((t) => /* @__PURE__ */ e("path", { d: t }, t))]
+	});
+}
+//#endregion
+export { s as Logomark, i as logomarkPaths, o as logomarkSafeSvg, r as logomarkSafeViewBox, a as logomarkSvg, n as logomarkViewBox };

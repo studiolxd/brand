@@ -7,6 +7,36 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.18.0
+
+El isotipo de la marca sale del logotipo y se publica como activo: las apps ya pueden
+generar su favicon, sus iconos y sus imágenes OG sin redibujar nada.
+
+### Añadido
+
+- **`Logomark` › el isotipo como átomo.** Las tres letras del logotipo —la parte gráfica,
+  sin la firma— en un `viewBox` cuadrado, con las mismas tallas de componente que `Logo`
+  (`sm`, `md`, `lg`) más `xl` (64px, la talla de marca). Es decorativo por defecto
+  (`aria-hidden`) y con `title` pasa a `role="img"` con ese nombre. El trazado sale tal
+  cual de `Logo`, no es un dibujo nuevo: un test lo comprueba contra el logotipo.
+- **Subruta `@studiolxd/brand/logomark`.** Publica además el isotipo como datos:
+  `logomarkSvg` y `logomarkSafeSvg` (documentos SVG completos), `logomarkPaths` y
+  `logomarkViewBox`/`logomarkSafeViewBox` para pintarlo en `next/og` o Satori sin montar
+  el componente. La tinta es `currentColor` y todo son trazados: ni `<image>` ni base64.
+- **`src/assets/logomark.svg` y `logomark-safe.svg`, servidos desde `@studiolxd/brand/assets/*`.**
+  El primero, el isotipo a sangre; el segundo con **área de seguridad del 10 %** por lado
+  —el isotipo ocupa el 80 % central— para máscaras circulares: `apple-touch-icon`, iconos
+  `maskable`, avatares redondos. El build los copia a `dist/assets/`.
+- **Tokens `logomark.*`.** Las cuatro tallas (cuadradas, heredadas de las tallas de control
+  y de la escala de iconos) y el color del trazado, con su par oscuro por derivación.
+
+### Documentación
+
+- **`Logo` › cuándo cada uno.** El MDX del logotipo abre con la regla: si cabe el logotipo,
+  va el logotipo; el isotipo entra cuando el hueco es cuadrado o tan pequeño que la firma
+  no se leería. El MDX de `Logomark` documenta el uso fuera de React (favicon, PWA,
+  `next/og`) con ejemplo.
+
 ## v25.19.0
 
 El buscador del menú del sitio tiene su propia talla, `xl`.
