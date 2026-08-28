@@ -666,35 +666,46 @@ Salen de `Por revisar/` los seis de la familia —`MessageBubble`, `UserMessage`
 `ConversationList`— y la plantilla `Chat` pasa a ser el componente `ChatShell`.
 Lo hecho va en el CHANGELOG de v25.0.0. Lo que queda anotado:
 
-- [ ] **`message-bubble.tail-fill` no es un color del globo, es el de la
-      superficie que hay detrás.** Es lo que vacía el triángulo de la cola. Si
-      un hilo vive sobre una superficie que no es el fondo del sistema (una
-      tarjeta, una banda), hay que repuntarlo ahí o la cola se ve rellena. El
-      sistema no tiene forma de que un componente lea el fondo de su
-      contenedor; cuando los neutrales tengan rol semántico
-      (`background.subtle` y compañía), revisar si eso da una salida mejor.
-- [ ] **`message-bubble.max-width` son 75% sueltos.** La anchura de un globo no
-      está en ninguna escala. Mismo caso que `toast.max-width` y las alturas de
-      carril de `ProgressBar`.
-- [ ] **`chat-shell.list-narrow-max-height`** son 12rem sueltos: la altura de
-      la tira de conversaciones cuando la maqueta cae a una columna. Ídem.
-- [ ] **`ChatShell` no monta cajón lateral.** Por debajo de `--breakpoint-lg`
-      la lista es una tira acotada sobre el hilo, y para un chat de móvil de
-      verdad hay que montarlo dentro de un `AppShell` y usar el cajón del
-      `Sidebar`. Es deliberado (no duplicar el cajón), pero deja el chat suelto
-      en móvil con una lista corta.
-- [ ] **El aspa de `ConversationList` no es un `Button`.** Es un `<button>` con
-      tokens propios porque tiene que aparecer y desaparecer con el hover de su
-      fila y voltear la tinta con el relleno de la fila, y `Button` ghost no
-      expone eso. Si algún día el ghost admite «hereda del contenedor», pasarlo.
-- [ ] **`UserMessage` no dice en texto que el mensaje es del usuario.** El
-      `AssistantMessage` sí lo dice (el nombre del modelo); el del usuario se
-      distingue por alineación y cola, que es información visual. En un hilo
-      real el contexto lo resuelve, pero si un producto necesita atribución
-      explícita hoy tiene que meterla como contenido del globo.
-- [ ] **La marca de tiempo que no se puede interpretar no se pinta.** Es mejor
-      que «Invalid Date», pero desaparece en silencio. Si el sistema añade
-      algún canal de avisos en desarrollo, avisar ahí.
+- [x] **`message-bubble.tail-fill` no es un color del globo, es el de la
+      superficie que hay detrás.** **Cerrado (2026-08-29):** decisión del
+      producto documentada en MDX (`MessageBubble` → «El globo es contorno, no
+      relleno», `ChatShell` → «El hilo vive siempre aquí»): un hilo se monta
+      **siempre** sobre el fondo del sistema, nunca sobre `Card` ni otra
+      superficie propia. No es una limitación que se resuelva con un token —
+      es una regla de uso. Story `EnElShell` en `MessageBubble` como
+      referencia; no había ninguna story que lo mostrara sobre tarjeta.
+- [x] **`message-bubble.max-width` son 75% sueltos.** **Cerrado (2026-08-29):**
+      el valor sale ahora de `chat.bubble-max-width`
+      (`tokens/component/chat.json`), un token compartido de la familia en vez
+      de un literal enterrado en el JSON del globo. Sigue siendo un ratio
+      deliberado (no una longitud de la escala — una fracción del ancho del
+      hilo no tiene equivalente en `container`/`spacing`/`size`), pero ya no es
+      un número sin nombre. Sin cambio de valor.
+- [x] **`chat-shell.list-narrow-max-height`** son 12rem sueltos. **Cerrado
+      (2026-08-29):** `chat.list-narrow-max-height` deriva por fórmula de
+      `size-component.lg` (`calc(4 * {size-component.lg})` = 12rem exacto),
+      mismo patrón que `sidebar.rail-width` o `kbd.min-size`. Sin cambio de
+      valor.
+- [x] **`ChatShell` no monta cajón lateral.** **Decisión cerrada (2026-08-29):**
+      se queda así. Por debajo de `--breakpoint-lg` la lista es una tira
+      acotada sobre el hilo; un chat de móvil de verdad se monta dentro de un
+      `AppShell` y usa el cajón del `Sidebar`. Deliberado, para no duplicar el
+      cajón del sistema.
+- [x] **El aspa de `ConversationList` no es un `Button`.** **Decisión cerrada
+      (2026-08-29):** se queda como `<button>` con tokens propios. Tiene que
+      aparecer y desaparecer con el hover de su fila y voltear la tinta con el
+      relleno de la fila, y `Button` ghost no expone eso hoy. Si el ghost
+      admite algún día «hereda del contenedor», revisar entonces.
+- [x] **`UserMessage` no dice en texto que el mensaje es del usuario.**
+      **Cerrado (2026-08-29):** prop `author?: string` opcional — un nombre
+      visible y discreto sobre el globo, coherente con el nombre del modelo de
+      `AssistantMessage` pero sin su énfasis (el emisor ya lo dicen la
+      alineación y la cola; `author` es un dato de apoyo, no un requisito).
+- [x] **La marca de tiempo que no se puede interpretar no se pinta.**
+      **Cerrado (2026-08-29):** sigue sin pintarse (mejor que «Invalid Date»),
+      pero ahora avisa por `console.warn` en desarrollo
+      (`NODE_ENV !== 'production'`), con el valor recibido; en producción
+      sigue mudo. Test en `messageTimestamp.test.ts`.
 
 ## Tanda 2 — Card, AppLauncher, Pagination, Skeleton a definitivos (2026-08-27)
 
