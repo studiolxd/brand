@@ -8,8 +8,31 @@
 .file-upload__dropzone {
   --_drop-color: var(--file-upload-border-color);
   --_drop-bg:    var(--file-upload-bg);
-  --_dash:       16px;
-  --_gap:        10px;
+  --_dash:       var(--file-upload-border-dash-length);
+  --_gap:        var(--file-upload-border-dash-gap);
+}
+
+/* ── Tallas ───────────────────────────────────────────── */
+/* La zona de arrastre no es un control de una línea: lo que sigue a la talla
+   es su aire, el cuerpo de su texto, el icono y la miniatura de cada archivo. */
+.file-upload.file-upload--sm {
+  --file-upload-padding-block: var(--file-upload-sm-padding-block);
+  --file-upload-padding-inline: var(--file-upload-sm-padding-inline);
+  --file-upload-text-font-size: var(--file-upload-sm-text-font-size);
+  --file-upload-subtext-font-size: var(--file-upload-sm-subtext-font-size);
+  --file-upload-icon-size: var(--file-upload-sm-icon-size);
+  --file-upload-thumb-size: var(--file-upload-sm-thumb-size);
+  --file-upload-item-name-font-size: var(--file-upload-sm-item-name-font-size);
+}
+
+.file-upload.file-upload--lg {
+  --file-upload-padding-block: var(--file-upload-lg-padding-block);
+  --file-upload-padding-inline: var(--file-upload-lg-padding-inline);
+  --file-upload-text-font-size: var(--file-upload-lg-text-font-size);
+  --file-upload-subtext-font-size: var(--file-upload-lg-subtext-font-size);
+  --file-upload-icon-size: var(--file-upload-lg-icon-size);
+  --file-upload-thumb-size: var(--file-upload-lg-thumb-size);
+  --file-upload-item-name-font-size: var(--file-upload-lg-item-name-font-size);
 }
 
 .file-upload__dropzone {
@@ -47,7 +70,7 @@
 
 .file-upload__dropzone:focus-visible {
   outline: var(--input-focus-ring-width) solid var(--input-focus-ring-color);
-  outline-offset: 2px;
+  outline-offset: var(--file-upload-remove-focus-ring-offset);
 }
 
 /* ── Drag activo ──────────────────────────────────────── */
@@ -76,14 +99,16 @@
 
 .file-upload__icon {
   color: var(--file-upload-icon-color);
+  inline-size: var(--file-upload-icon-size);
+  block-size: var(--file-upload-icon-size);
   flex-shrink: 0;
   margin-block-end: var(--file-upload-gap);
 }
 
 .file-upload__text {
-  font-family: var(--file-upload-item-name-font-family);
-  font-size: var(--file-upload-item-name-font-size);
-  font-weight: var(--file-upload-item-name-font-weight);
+  font-family: var(--file-upload-text-font-family);
+  font-size: var(--file-upload-text-font-size);
+  font-weight: var(--file-upload-text-font-weight);
   color: var(--file-upload-text-color);
 }
 
@@ -93,8 +118,8 @@
 }
 
 .file-upload__subtext {
-  font-family: var(--file-upload-item-name-font-family);
-  font-size: var(--file-upload-item-size-font-size);
+  font-family: var(--file-upload-text-font-family);
+  font-size: var(--file-upload-subtext-font-size);
   color: var(--file-upload-subtext-color);
   margin-block-start: var(--file-upload-gap);
 }
@@ -159,7 +184,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: var(--file-upload-item-info-gap);
 }
 
 .file-upload__item-name {
@@ -206,8 +231,8 @@
 
 .file-upload__item-remove:focus-visible {
   outline: var(--input-focus-ring-width) solid var(--input-focus-ring-color);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline-offset: var(--file-upload-remove-focus-ring-offset);
+  border-radius: var(--file-upload-remove-border-radius);
 }
 
 /* ── Progreso ─────────────────────────────────────────── */

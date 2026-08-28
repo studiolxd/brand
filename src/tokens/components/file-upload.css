@@ -7,10 +7,8 @@
   --file-upload-drag-border-style: solid; /** Estilo de borde en drag activo */
   --file-upload-error-border-style: solid; /** Estilo de borde en error */
   --file-upload-disabled-opacity: 0.5; /** Opacidad cuando está deshabilitado */
-  --file-upload-thumb-size: 2.5rem; /** Tamaño del thumbnail */
   --file-upload-progress-height: 0.375rem; /** Altura de la barra de progreso */
   --file-upload-bg: var(--color-grey-lightest); /** Fondo del dropzone */
-  --file-upload-padding-block: var(--spacing-7); /** Padding vertical del dropzone */
   --file-upload-padding-inline: var(--spacing-5); /** Padding horizontal del dropzone */
   --file-upload-gap: var(--spacing-1); /** Espacio entre elementos dentro del dropzone */
   --file-upload-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de estado */
@@ -27,12 +25,29 @@
   --file-upload-item-size-font-size: var(--font-size-1); /** Tamaño del peso del archivo */
   --file-upload-item-error-font-size: var(--font-size-1); /** Tamaño del mensaje de error por archivo */
   --file-upload-item-error-bg: var(--color-white); /** Fondo del item con error */
+  --file-upload-thumb-size: var(--size-component-md); /** Lado de la miniatura: la talla md del sistema (el mismo 2.5rem de antes, ahora con nombre) */
   --file-upload-thumb-bg: var(--color-grey-lightest); /** Fondo del thumb para iconos (no imagen) */
   --file-upload-thumb-icon-color: var(--color-grey-dark); /** Color del icono de archivo genérico */
   --file-upload-progress-margin-block-start: var(--spacing-3); /** Margen superior de la barra de progreso */
   --file-upload-progress-bg: var(--color-grey-light); /** Fondo del track de progreso */
   --file-upload-progress-transition-duration: var(--motion-duration-base); /** Duración de la transición del progreso */
   --file-upload-progress-transition-easing: var(--motion-easing-in-out); /** Easing de la transición del progreso */
+  --file-upload-padding-block: var(--spacing-7); /** Aire vertical del dropzone — talla md */
+  --file-upload-sm-padding-block: var(--spacing-6); /** Aire vertical del dropzone — talla sm */
+  --file-upload-lg-padding-block: var(--spacing-8); /** Aire vertical del dropzone — talla lg */
+  --file-upload-sm-padding-inline: var(--spacing-4); /** Aire horizontal del dropzone — talla sm */
+  --file-upload-lg-padding-inline: var(--spacing-6); /** Aire horizontal del dropzone — talla lg */
+  --file-upload-text-font-family: var(--font-family-sans); /** Tipografía del texto del dropzone */
+  --file-upload-subtext-font-size: var(--font-size-1); /** Tamaño de las restricciones (peso máximo, número de archivos) — talla md */
+  --file-upload-sm-subtext-font-size: var(--font-size-1); /** Restricciones — talla sm: ya está en el peldaño menor de la escala de interfaz */
+  --file-upload-icon-size: var(--icon-size-md); /** Lado del icono del dropzone — talla md */
+  --file-upload-sm-icon-size: var(--icon-size-sm); /** Icono del dropzone — talla sm */
+  --file-upload-lg-icon-size: var(--icon-size-lg); /** Icono del dropzone — talla lg */
+  --file-upload-sm-thumb-size: var(--size-component-sm); /** Lado de la miniatura — talla sm */
+  --file-upload-lg-thumb-size: var(--size-component-lg); /** Lado de la miniatura — talla lg */
+  --file-upload-item-info-gap: var(--spacing-1); /** Aire entre el nombre del archivo y su peso (antes 2px, fuera de la escala) */
+  --file-upload-border-dash-length: var(--spacing-4); /** Largo de cada trazo del borde discontinuo del dropzone */
+  --file-upload-border-dash-gap: var(--spacing-2); /** Hueco entre trazos del borde discontinuo (antes 10px, fuera de la escala) */
   --file-upload-border-color: var(--color-primary); /** Borde del dropzone por defecto */
   --file-upload-border-width: var(--border-width-default); /** Grosor del borde */
   --file-upload-border-radius: var(--border-radius-default); /** Radio de esquinas del dropzone */
@@ -55,6 +70,15 @@
   --file-upload-remove-color-hover: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
   --file-upload-progress-fill: var(--color-primary); /** Color del relleno de progreso */
   --file-upload-progress-border-radius: var(--border-radius-round); /** Radio de la barra de progreso */
+  --file-upload-text-font-size: var(--text-font-size); /** El texto del dropzone es texto corriente: hereda el cuerpo de la superficie — talla md */
+  --file-upload-sm-text-font-size: var(--text-paragraph-small-font-size); /** Texto del dropzone — talla sm: un peldaño por debajo del cuerpo */
+  --file-upload-lg-text-font-size: var(--text-paragraph-large-font-size); /** Texto del dropzone — talla lg: un peldaño por encima */
+  --file-upload-text-font-weight: var(--font-weight-default); /** Peso del texto del dropzone */
+  --file-upload-lg-subtext-font-size: var(--text-font-size); /** Restricciones — talla lg: sube al cuerpo */
+  --file-upload-sm-item-name-font-size: var(--text-paragraph-small-font-size); /** Nombre del archivo — talla sm */
+  --file-upload-lg-item-name-font-size: var(--text-paragraph-large-font-size); /** Nombre del archivo — talla lg */
+  --file-upload-remove-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco del aspa */
+  --file-upload-remove-border-radius: var(--border-radius-default); /** Radio del aspa — recto, como toda esquina del sistema */
 }
 
 .surface-dark,

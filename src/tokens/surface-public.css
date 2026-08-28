@@ -31,6 +31,12 @@
   --description-list-value-line-height: var(--text-line-height);
   --empty-state-description-font-size: var(--text-font-size);
   --file-upload-item-name-font-size: var(--text-font-size);
+  --file-upload-text-font-size: var(--text-font-size);
+  --file-upload-sm-text-font-size: var(--text-paragraph-small-font-size);
+  --file-upload-lg-text-font-size: var(--text-paragraph-large-font-size);
+  --file-upload-lg-subtext-font-size: var(--text-font-size);
+  --file-upload-sm-item-name-font-size: var(--text-paragraph-small-font-size);
+  --file-upload-lg-item-name-font-size: var(--text-paragraph-large-font-size);
   --form-error-font-size: var(--text-paragraph-small-font-size);
   --form-helper-font-size: var(--text-paragraph-small-font-size);
   --form-success-font-size: var(--text-font-size);

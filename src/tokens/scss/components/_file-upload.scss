@@ -6,7 +6,6 @@ $lxd-file-upload-border-style: dashed; // Estilo de borde del dropzone
 $lxd-file-upload-border-width: 1px; // Grosor del borde
 $lxd-file-upload-border-radius: 0px; // Radio de esquinas del dropzone
 $lxd-file-upload-bg: #f2f2f2; // Fondo del dropzone
-$lxd-file-upload-padding-block: 3rem; // Padding vertical del dropzone
 $lxd-file-upload-padding-inline: 1.5rem; // Padding horizontal del dropzone
 $lxd-file-upload-gap: 0.25rem; // Espacio entre elementos dentro del dropzone
 $lxd-file-upload-text-color: #111e30; // Color del texto principal
@@ -40,7 +39,7 @@ $lxd-file-upload-item-error-color: #b30000; // Color del mensaje de error por ar
 $lxd-file-upload-item-error-font-size: 0.875rem; // Tamaño del mensaje de error por archivo
 $lxd-file-upload-item-error-border-color: #b30000; // Borde del item con error
 $lxd-file-upload-item-error-bg: #ffffff; // Fondo del item con error
-$lxd-file-upload-thumb-size: 2.5rem; // Tamaño del thumbnail
+$lxd-file-upload-thumb-size: 2.5rem; // Lado de la miniatura: la talla md del sistema (el mismo 2.5rem de antes, ahora con nombre)
 $lxd-file-upload-thumb-border-radius: 0px; // Radio del thumbnail
 $lxd-file-upload-thumb-bg: #f2f2f2; // Fondo del thumb para iconos (no imagen)
 $lxd-file-upload-thumb-icon-color: #6b6b6b; // Color del icono de archivo genérico
@@ -53,3 +52,28 @@ $lxd-file-upload-progress-fill: #111e30; // Color del relleno de progreso
 $lxd-file-upload-progress-border-radius: 9999px; // Radio de la barra de progreso
 $lxd-file-upload-progress-transition-duration: 250ms; // Duración de la transición del progreso
 $lxd-file-upload-progress-transition-easing: ease-in-out; // Easing de la transición del progreso
+$lxd-file-upload-padding-block: 3rem; // Aire vertical del dropzone — talla md
+$lxd-file-upload-sm-padding-block: 2rem; // Aire vertical del dropzone — talla sm
+$lxd-file-upload-lg-padding-block: 4rem; // Aire vertical del dropzone — talla lg
+$lxd-file-upload-sm-padding-inline: 1rem; // Aire horizontal del dropzone — talla sm
+$lxd-file-upload-lg-padding-inline: 2rem; // Aire horizontal del dropzone — talla lg
+$lxd-file-upload-text-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del texto del dropzone
+$lxd-file-upload-text-font-size: 1rem; // El texto del dropzone es texto corriente: hereda el cuerpo de la superficie — talla md
+$lxd-file-upload-sm-text-font-size: 0.875rem; // Texto del dropzone — talla sm: un peldaño por debajo del cuerpo
+$lxd-file-upload-lg-text-font-size: 1.25rem; // Texto del dropzone — talla lg: un peldaño por encima
+$lxd-file-upload-text-font-weight: 300; // Peso del texto del dropzone
+$lxd-file-upload-subtext-font-size: 0.875rem; // Tamaño de las restricciones (peso máximo, número de archivos) — talla md
+$lxd-file-upload-sm-subtext-font-size: 0.875rem; // Restricciones — talla sm: ya está en el peldaño menor de la escala de interfaz
+$lxd-file-upload-lg-subtext-font-size: 1rem; // Restricciones — talla lg: sube al cuerpo
+$lxd-file-upload-icon-size: 24px; // Lado del icono del dropzone — talla md
+$lxd-file-upload-sm-icon-size: 16px; // Icono del dropzone — talla sm
+$lxd-file-upload-lg-icon-size: 48px; // Icono del dropzone — talla lg
+$lxd-file-upload-sm-thumb-size: 2rem; // Lado de la miniatura — talla sm
+$lxd-file-upload-lg-thumb-size: 3rem; // Lado de la miniatura — talla lg
+$lxd-file-upload-sm-item-name-font-size: 0.875rem; // Nombre del archivo — talla sm
+$lxd-file-upload-lg-item-name-font-size: 1.25rem; // Nombre del archivo — talla lg
+$lxd-file-upload-item-info-gap: 0.25rem; // Aire entre el nombre del archivo y su peso (antes 2px, fuera de la escala)
+$lxd-file-upload-border-dash-length: 1rem; // Largo de cada trazo del borde discontinuo del dropzone
+$lxd-file-upload-border-dash-gap: 0.5rem; // Hueco entre trazos del borde discontinuo (antes 10px, fuera de la escala)
+$lxd-file-upload-remove-focus-ring-offset: 1px; // Separación del anillo de foco del aspa
+$lxd-file-upload-remove-border-radius: 0px; // Radio del aspa — recto, como toda esquina del sistema

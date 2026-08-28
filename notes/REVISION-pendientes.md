@@ -76,9 +76,10 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
       grey-light), y fuera los `surface-dark-placeholder-color` que lo
       remapeaban a mano. Queda por ver en cada componente si el placeholder
       debe ocultarse en deshabilitado.
-- [ ] **FileUpload** — `thumb-icon-color` (grey-dark) sobre `thumb-bg`
-      (grey-lightest). Icono. (Sigue pendiente: al hacer definitivo el campo
-      solo se tocó el contrato, no la paleta de la miniatura.)
+- [x] **FileUpload** (2026-08-28) — la miniatura se queda en `grey-dark` sobre
+      `grey-lightest` en superficie clara (es un icono, le basta 3:1), pero
+      estrena par oscuro: sobre prusia ese gris no llega, así que
+      `surface-dark-thumb-icon-color` es el gris de texto secundario.
 
 ## Deudas de capa detectadas en neutrales (Colores, 2026-08-25)
 
@@ -114,8 +115,11 @@ Regla: el mínimo de la escala es 4px; 2, 6 y 10px no existen en el sistema.
       `--section-padding-block-md`.
 - [ ] **UserMenu** — `--number-badge-padding-inline: 0.125rem` (2px) y un
       `gap: 0.125rem` → `spacing-1`.
-- [ ] **FileUpload** — `--_gap: 10px` → `spacing-2` o `spacing-3`; y un
-      `gap: 0.125rem` (2px) → `spacing-1`.
+- [x] **FileUpload** (2026-08-28) — el borde discontinuo saca sus dos medidas
+      a tokens (`border-dash-length` = `spacing.4`, `border-dash-gap` =
+      `spacing.2`, antes 16px/10px) y el `gap: 0.125rem` entre nombre y peso
+      pasa a `item-info-gap` (`spacing.1`). También salen de crudo el
+      `outline-offset: 2px` y el `border-radius: 2px` del aspa.
 - [x] **Table** — `gap: 0.375rem` (6px) → `spacing-2`, en el token propio
       `table.header-content-gap` (2026-08-27).
 
@@ -156,8 +160,9 @@ de 32px como control.
       (2026-08-25; Avatar entero a tallas 32/40/48, sin `xl`).
 - [x] **DotsButton** → Button ghost iconOnly a talla (32/40/48), sin tokens propios (2026-08-26).
 - [x] **AppLauncher** trigger y tile-icon 2.5rem → `size-component.md` (2026-08-27, mismo valor).
-- [ ] Pasan a token sin cambiar de tamaño: **FileUpload** miniatura
-      2.5rem, **DotsButton** lg 2.5rem → `md`.
+- [x] Pasan a token sin cambiar de tamaño: **FileUpload** miniatura 2.5rem →
+      `{size-component.md}` (2026-08-28). **DotsButton** ya no tiene tokens
+      propios desde que es `Button ghost iconOnly`.
 - [x] **EmptyState** icono 3rem → `icon.size-lg` (2026-08-27, mismo valor 48px). `icon-size-sm` (2rem)
       queda crudo: no hay un `icon.size-*` que valga 32px (16/24/48); anotado para decisión de diseño.
 - [x] **PasswordField** toggle 2.5rem → `size-component.md`, con
@@ -459,9 +464,14 @@ Quedan con dudas, anotadas al cerrarlo:
       además lo que solo tiene un buscador —`loading-*`, `empty-*` y
       `item-selected-font-weight` (antes `--font-weight-bold` crudo)— y MDX
       propio con las tres TokenTable.
-- [ ] **FileUpload** no tiene tallas: `size` en `FileUploadField` solo mueve la
-      etiqueta. Si la zona de arrastre debe responder a la talla del formulario,
-      hay que decidir su medida.
+- [x] **FileUpload** (2026-08-28, fase 0) — tiene las tres tallas, por
+      `useFormSize` como el resto de controles. La zona de arrastre no es un
+      control de una línea, así que **no** toma 32/40/48: lo que sigue a la
+      talla es su aire (32/48/64), el cuerpo de su texto (peldaño de párrafo
+      pequeño / cuerpo / grande) y el icono. La miniatura de cada archivo sí
+      toma la talla exacta —32/40/48—, porque la fila de un archivo es una fila
+      de control; de paso, `thumb-size` deja el `2.5rem` suelto por
+      `{size-component.md}` (mismo valor). MDX nuevo en el átomo.
 - [x] **DatePicker / DateTimeField** (2026-08-28) — el input oculto que monta
       `name` construía `yyyy-mm-dd` con `toISOString().slice(0, 10)` (UTC):
       desplazaba un día en husos al este del meridiano a horas tempranas.

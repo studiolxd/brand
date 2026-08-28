@@ -35,6 +35,14 @@ Los errores por archivo (demasiado grande, tipo no admitido) los pone el propio 
 
 <Canvas of={FileUploadFieldStories.DentroDeForm} />
 
+## Tallas
+
+Las tres del sistema. La zona de arrastre no es un control de una línea, así que **no** toma la altura 32/40/48: lo que sigue a la talla es su aire, el cuerpo de su texto, el icono y —esa sí, porque la fila de un archivo es una fila de control— la miniatura de cada archivo, a 32/40/48.
+
+Sin `size`, la del `Form` que lo envuelva; sin `Form`, `md`.
+
+<Canvas of={FileUploadFieldStories.Tallas} />
+
 ## Estados
 
 <Canvas of={FileUploadFieldStories.Deshabilitado} />

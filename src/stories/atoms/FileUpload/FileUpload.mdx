@@ -1,0 +1,79 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FileUploadStories from "./FileUpload.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { fileUploadDropzoneTokens, fileUploadSizeTokens, fileUploadItemTokens, fileUploadProgressTokens, fileUploadDarkTokens } from "../../../tokens/components/file-upload";
+
+<Meta of={FileUploadStories} />
+
+# FileUpload
+
+Elegir archivos, arrastrándolos o con el diálogo del sistema. Dentro de un formulario el componente es `FileUploadField`, que le pone etiqueta, ayuda y error; este átomo se usa suelto.
+
+<Canvas of={FileUploadStories.Default} />
+
+## Restricciones
+
+`accept`, `maxSize` y `maxFiles` acotan lo que se admite, y el control las resume debajo de la zona. Lo que no pasa la validación entra igualmente en la lista, con su mensaje: el usuario ve qué archivo ha fallado y por qué, en vez de un rechazo silencioso.
+
+<Canvas of={FileUploadStories.WithAcceptAndSize} />
+<Canvas of={FileUploadStories.Multiple} />
+
+## Tallas
+
+Las tres del sistema. La zona de arrastre **no** es un control de una línea, así que no toma la altura 32/40/48: lo que sigue a la talla es su aire, el cuerpo de su texto y el icono. La miniatura de cada archivo sí toma la talla exacta (32/40/48), porque la fila de un archivo es una fila de control.
+
+Sin `size`, la del `Form` que lo envuelva; sin `Form`, `md`.
+
+<Canvas of={FileUploadStories.Tallas} />
+
+## Lista y progreso
+
+<Canvas of={FileUploadStories.WithFiles} />
+<Canvas of={FileUploadStories.WithProgress} />
+
+## Estados
+
+<Canvas of={FileUploadStories.Error} />
+<Canvas of={FileUploadStories.Disabled} />
+
+## Superficie oscura
+
+Todos los colores tienen par oscuro por la regla de derivación (Foundations → Colores): la zona pasa a la superficie secundaria oscura, la tinta y el borde a blanco, y el icono de archivo genérico deja `grey-dark` —que no llega a 3:1 sobre prusia— por el gris de texto secundario.
+
+<Canvas of={FileUploadStories.SuperficieOscura} />
+
+## Textos
+
+Todo lo que el componente escribe por su cuenta es una prop con default en castellano: `dropzoneLabel`, `dropzoneActiveLabel`, `dropzoneHintLabel`, `maxSizeHint`, `maxFilesHint`, `filesLabel`, `progressLabel`, `removeFileLabel`, `tooLargeError` e `invalidTypeError`.
+
+<Canvas of={FileUploadStories.Etiquetas} />
+
+## Accesibilidad
+
+El `<input type="file">` real está en el DOM dentro de un `VisuallyHidden`: es lo que recibe el foco y lo que registra react-hook-form. La zona de arrastre lo activa con clic, Enter y Espacio. Cada error de archivo se anuncia con `role="alert"`.
+
+## Tokens
+
+### Zona de arrastre
+
+<TokenTable tokens={fileUploadDropzoneTokens} />
+
+### Por talla
+
+<TokenTable tokens={fileUploadSizeTokens} />
+
+### Fila de archivo
+
+<TokenTable tokens={fileUploadItemTokens} />
+
+### Progreso
+
+<TokenTable tokens={fileUploadProgressTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={fileUploadDarkTokens} />
+
+## Props
+
+<ArgTypes of={FileUploadStories.Default} />

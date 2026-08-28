@@ -1,5 +1,6 @@
 import { forwardRef, useState, useCallback, useRef, useEffect, useId, type Ref } from 'react';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
+import { useFormSize, type FormSize } from '../../constants/form-size';
 import './FileUpload.css';
 
 export interface FileUploadProps {
@@ -15,6 +16,14 @@ export interface FileUploadProps {
   error?: boolean;
   id?: string;
   name?: string;
+  /**
+   * Talla del sistema. La zona de arrastre no es un control de una línea, así
+   * que no toma la altura 32/40/48: lo que sigue a la talla es su aire, el
+   * cuerpo de su texto, el icono y la miniatura de cada archivo (32/40/48, esa
+   * sí, porque la fila de un archivo es una fila de control).
+   * Sin ella, la del `Form` que lo envuelva; sin `Form`, `md`.
+   */
+  size?: FormSize;
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
   /** @deprecated Usa el atributo nativo `aria-label`. */
@@ -148,7 +157,9 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   removeFileLabel = (fileName) => `Eliminar ${fileName}`,
   tooLargeError = (size) => `Archivo demasiado grande (máx. ${size})`,
   invalidTypeError = 'Tipo de archivo no permitido',
+  size: sizeProp,
 }: FileUploadProps, ref) {
+  const size = useFormSize(sizeProp);
   const isControlled = value !== undefined;
   const [internalFiles, setInternalFiles] = useState<File[]>(defaultValue);
   const [fileErrors, setFileErrors] = useState<Map<File, string>>(new Map());
@@ -238,6 +249,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
 
   const wrapperClasses = [
     'file-upload',
+    size !== 'md' ? `file-upload--${size}` : '',
     isDragging ? 'file-upload--dragging' : '',
     error ? 'file-upload--error' : '',
     disabled ? 'file-upload--disabled' : '',
@@ -288,8 +300,6 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
         <svg
           className="file-upload__icon"
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

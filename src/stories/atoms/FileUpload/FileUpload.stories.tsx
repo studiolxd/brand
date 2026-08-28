@@ -195,3 +195,15 @@ export const SuperficieOscura: Story = {
     ariaLabel: 'Subir archivos',
   },
 };
+
+/** Las tres tallas: cambian el aire, el cuerpo del texto, el icono y la miniatura. */
+export const Tallas: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <FileUpload size="sm" aria-label="Subir archivo (sm)" />
+      <FileUpload size="md" aria-label="Subir archivo (md)" />
+      <FileUpload size="lg" aria-label="Subir archivo (lg)" />
+    </div>
+  ),
+};
+

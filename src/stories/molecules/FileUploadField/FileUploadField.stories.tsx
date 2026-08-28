@@ -62,6 +62,48 @@ export const DentroDeForm: Story = {
   ),
 };
 
+/**
+ * Las tres tallas del sistema. La zona de arrastre no es un control de una
+ * línea, así que no toma la altura 32/40/48: lo que sigue a la talla es su
+ * aire, el cuerpo del texto, el icono y la miniatura de cada archivo.
+ */
+export const Tallas: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <FileUploadField size="sm" id="talla-sm" label="Pequeño" />
+      <FileUploadField size="md" id="talla-md" label="Mediano" />
+      <FileUploadField size="lg" id="talla-lg" label="Grande" />
+    </div>
+  ),
+};
+
+export const ContratoTallas: Story = {
+  name: 'Test — la talla llega a la zona de arrastre',
+  tags: ['!dev'],
+  render: () => (
+    <div>
+      <FileUploadField size="sm" id="t-sm" label="Pequeño" />
+      <FileUploadField size="md" id="t-md" label="Mediano" />
+      <FileUploadField size="lg" id="t-lg" label="Grande" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const aire = (id: string) => {
+      const zona = canvasElement.querySelector(`#${id}`)!
+        .closest('.file-upload')!.querySelector('.file-upload__dropzone')!;
+      return Math.round(parseFloat(getComputedStyle(zona).paddingBlockStart));
+    };
+    // El aire crece con la talla: 32 / 48 / 64
+    await expect(aire('t-sm')).toBe(32);
+    await expect(aire('t-md')).toBe(48);
+    await expect(aire('t-lg')).toBe(64);
+    // Y la talla llega como clase solo cuando no es la de por defecto
+    await expect(canvasElement.querySelector('.file-upload--sm')).not.toBeNull();
+    await expect(canvasElement.querySelector('.file-upload--md')).toBeNull();
+    await expect(canvasElement.querySelector('.file-upload--lg')).not.toBeNull();
+  },
+};
+
 export const Deshabilitado: Story = {
   args: { disabled: true, helperText: 'La subida de archivos no está disponible.' },
 };
