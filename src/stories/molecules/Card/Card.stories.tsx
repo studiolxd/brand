@@ -13,6 +13,11 @@ import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
+const foto = {
+  src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=960&q=80',
+  alt: 'Un aula con un grupo trabajando alrededor de una mesa',
+};
+
 const meta: Meta<typeof Card> = {
   title: 'Molecules/Card',
   component: Card,
@@ -24,6 +29,11 @@ const meta: Meta<typeof Card> = {
       control: { type: 'select' },
       options: ['primary', 'outline', 'accent-1', 'accent-2', 'support-1', 'support-2'],
       description: 'Color de fondo.',
+    },
+    variant: {
+      control: { type: 'inline-radio' },
+      options: ['default', 'square', 'split'],
+      description: 'Maqueta de la tarjeta.',
     },
   },
   args: {
@@ -93,6 +103,42 @@ export const Support2: Story = {
  * Modo contenedor (sin `href`): superficie de app con contenido interactivo dentro
  * (no es un enlace, así que se permiten botones/formularios). Sin flecha ni heading impuesto.
  */
+/** Cuadrada: la imagen arriba, en cuadrado, y el texto debajo. */
+export const Cuadrada: Story = {
+  args: {
+    variant: 'square',
+    color: 'accent-1',
+    media: foto,
+    title: 'Formación presencial',
+    description: 'Talleres y sesiones en aula, con materiales propios.',
+    ctaLabel: 'Ver más sobre formación presencial',
+  },
+};
+
+/** Partida: el panel de color y la foto al mismo ancho. En móvil se apila. */
+export const Partida: Story = {
+  args: {
+    variant: 'split',
+    color: 'support-1',
+    media: foto,
+    title: 'Consultoría de aprendizaje',
+    description: 'Acompañamos el diseño del plan de formación de punta a punta.',
+    ctaLabel: 'Ver más sobre consultoría',
+  },
+};
+
+/** La maqueta por defecto también acepta imagen: va sobre el texto. */
+export const ConImagen: Story = {
+  name: 'Con imagen',
+  args: {
+    color: 'outline',
+    media: foto,
+    title: 'Contenidos a medida',
+    description: 'Producción de contenidos multimedia accesibles.',
+    ctaLabel: 'Ver más sobre contenidos a medida',
+  },
+};
+
 export const Container: Story = {
   name: 'Contenedor (sin href)',
   render: () => (
@@ -300,5 +346,21 @@ export const ContratoRender: Story = {
     // Y trae el contenido de link-card: encabezado, CTA accesible y flecha.
     await expect(within(canvasElement).getByRole('heading', { name: 'Servicio' })).toBeInTheDocument();
     await expect(canvasElement.querySelector('.arrow')).not.toBeNull();
+  },
+};
+
+export const ContratoMaquetas: Story = {
+  name: 'Test — square y split ponen imagen y caja de texto',
+  tags: ['!dev'],
+  args: Partida.args,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const card = canvasElement.querySelector('a.card')!;
+    await expect(card).toHaveClass('card--split');
+    await expect(card).toHaveClass('card--support-1');
+
+    const imagen = canvas.getByRole('img', { name: /Un aula/ });
+    await expect(imagen.parentElement).toHaveClass('card__media');
+    await expect(canvas.getByRole('heading', { level: 2 }).parentElement).toHaveClass('card__body');
   },
 };

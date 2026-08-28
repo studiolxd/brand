@@ -23,6 +23,22 @@ Seis variantes de fondo: `primary`, `outline` y cuatro colores de identidad
 <Canvas of={CardStories.Support1} />
 <Canvas of={CardStories.Support2} />
 
+## Maquetas: `default`, `square`, `split`
+
+La tarjeta de marketing tenía dos primos que eran componentes aparte, `CardSquare` y `CardSplit`. Su contrato era el mismo que el de la link-card —enlace, título, descripción, CTA accesible, color— y lo único distinto era **dónde va la imagen**, así que aquí son una prop, no dos componentes:
+
+- **`default`** — la columna de texto de siempre. Con `media`, la imagen va encima del texto.
+- **`square`** — la imagen arriba, recortada en cuadrado (`aspect-ratio: 1`), y el texto debajo.
+- **`split`** — el panel de color y la foto al mismo ancho, a la misma altura. En móvil se apila: la foto arriba, el texto debajo.
+
+La imagen se pasa en `media` (`{ src, alt }`). En cuanto hay imagen o maqueta propia, el texto se envuelve en `.card__body`, que es quien lleva el aire: así la imagen llega al borde de la tarjeta sin márgenes negativos.
+
+<Canvas of={CardStories.Cuadrada} />
+<Canvas of={CardStories.Partida} />
+<Canvas of={CardStories.ConImagen} />
+
+Ninguna de las dos maquetas esconde la descripción hasta el *hover*, como hacían las originales: el texto que explica la tarjeta se lee siempre, también con el dedo.
+
 ## Modo enlace con el router de la aplicación
 
 `href` pinta un `<a>` nativo, que es lo que quiere una web estática. Cuando la navegación la lleva

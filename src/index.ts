@@ -148,7 +148,7 @@ export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType, Legend
 export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
 export type { ContextMenuItem, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
 export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from './stories/molecules/Card/Card';
-export type { CardProps, CardColor, CardPartProps, CardTitleProps, CardDescriptionProps } from './stories/molecules/Card/Card';
+export type { CardProps, CardColor, CardVariant, CardMedia, CardPartProps, CardTitleProps, CardDescriptionProps } from './stories/molecules/Card/Card';
 export { Carousel, CarouselSlide } from './stories/molecules/Carousel/Carousel';
 export type { CarouselProps, CarouselSlideProps } from './stories/molecules/Carousel/Carousel';
 export { CodeBlock } from './stories/molecules/CodeBlock/CodeBlock';

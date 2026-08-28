@@ -8,6 +8,22 @@ import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 
 export type CardColor = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
 
+/**
+ * Maqueta de la tarjeta. `default` es la de siempre: una columna de texto.
+ * `square` y `split` son las dos tarjetas de marketing —la cuadrada con la
+ * imagen arriba y la partida con el panel de color al lado de la foto—, que
+ * antes eran dos componentes aparte y ahora son una variante de la misma
+ * pieza: el contrato (enlace, título, descripción, CTA accesible, color) ya
+ * era idéntico; lo único que cambiaba era dónde va la imagen.
+ */
+export type CardVariant = 'default' | 'square' | 'split';
+
+export interface CardMedia {
+  src: string;
+  /** Texto alternativo. Vacío si la imagen no aporta nada al título. */
+  alt: string;
+}
+
 export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   /**
    * URL de destino. **Con `href`** el Card es una *link-card*: todo el bloque es un
@@ -30,6 +46,14 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
   ctaLabel?: string;
   /** Color de fondo. Default: `'outline'`. */
   color?: CardColor;
+  /** Maqueta de la tarjeta. Default: `'default'`. */
+  variant?: CardVariant;
+  /**
+   * Imagen de la tarjeta: arriba en `square`, al lado del panel de color en
+   * `split`, y sobre el texto en `default`. Sin ella la tarjeta es solo texto,
+   * como hasta ahora.
+   */
+  media?: CardMedia;
 }
 
 /**
@@ -51,19 +75,42 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   description,
   ctaLabel,
   color = 'outline',
+  variant = 'default',
+  media,
   className,
   children,
   ...rest
 }, ref) {
-  const classes = ['card', `card--${color}`, className ?? ''].filter(Boolean).join(' ');
+  const classes = [
+    'card',
+    `card--${color}`,
+    variant !== 'default' ? `card--${variant}` : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
 
   // El contenido de la link-card: título, descripción, CTA accesible y flecha.
-  const linkContent = (
+  const text = (
     <>
       <Heading level={2} size={8}>{title}</Heading>
       {description && <p>{description}</p>}
       <VisuallyHidden>{ctaLabel}</VisuallyHidden>
       <Arrow size="lg" />
+    </>
+  );
+
+  const picture = media && (
+    <div className="card__media">
+      <img src={media.src} alt={media.alt} />
+    </div>
+  );
+
+  // Sin imagen y sin maqueta propia, la tarjeta es la de siempre: el texto
+  // cuelga directamente del enlace, sin envoltorio. En cuanto hay imagen o
+  // variante, el texto necesita su caja para que la imagen llegue al borde.
+  const linkContent = variant === 'default' && !media ? text : (
+    <>
+      {picture}
+      <div className="card__body">{text}</div>
     </>
   );
 

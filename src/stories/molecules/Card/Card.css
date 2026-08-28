@@ -46,6 +46,68 @@
 .card.card--support-2 { background-color: var(--card-support-2-bg); color: var(--card-support-2-color); }
 
 /* --------------------------------------------------------------------------
+   Maquetas de marketing: `square` (imagen arriba, en cuadrado) y `split` (el
+   panel de color al lado de la foto). El aire deja de estar en la tarjeta y
+   pasa a la caja de texto, para que la imagen llegue al borde.
+   -------------------------------------------------------------------------- */
+
+.card.card--square,
+.card.card--split {
+  padding-inline: 0;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  gap: 0;
+}
+
+.card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--card-gap);
+  inline-size: 100%;
+  padding-inline: var(--card-padding-inline);
+  padding-block-start: var(--card-padding-block-start);
+  padding-block-end: var(--card-padding-block-end);
+}
+
+.card__media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.card--square .card__media {
+  inline-size: 100%;
+  aspect-ratio: 1;
+}
+
+/* Partida: en móvil se apila —la foto arriba, el texto debajo—; a partir del
+   tramo medio, los dos paneles a la misma altura y al mismo ancho. */
+.card--split .card__media {
+  inline-size: 100%;
+  aspect-ratio: 1;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .card.card--split {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .card--split .card__media,
+  .card--split .card__body {
+    flex: 1 1 50%;
+    inline-size: 50%;
+  }
+
+  .card--split .card__media {
+    aspect-ratio: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Subpartes componibles (modo contenedor). Antes eran divs sin estilar y cada
    producto los maquetaba por su cuenta: cinco apps de la suite repetían estas
    mismas reglas en su CSS.
