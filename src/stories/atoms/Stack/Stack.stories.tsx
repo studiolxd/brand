@@ -49,3 +49,26 @@ export const Contrato: Story = {
     await expect(dir).toBe(window.innerWidth < 768 ? 'column-reverse' : 'column');
   },
 };
+
+/**
+ * La pila puede ser el grupo con nombre accesible: `role` y `aria-label` viajan
+ * al `<div>`, sin necesidad de un `Fieldset` ni de un `<section>` alrededor.
+ */
+export const ContratoPassthrough: Story = {
+  name: 'Test — passthrough de role, aria-*, id y data-*',
+  tags: ['!dev'],
+  render: () => (
+    <Stack role="group" aria-label="Datos de contacto" id="pila" data-zona="contacto">
+      <span>a</span>
+      <span>b</span>
+    </Stack>
+  ),
+  play: async ({ canvasElement }) => {
+    const stack = canvasElement.querySelector('.stack')!;
+    await expect(stack).toHaveAttribute('role', 'group');
+    await expect(stack).toHaveAttribute('aria-label', 'Datos de contacto');
+    await expect(stack).toHaveAttribute('id', 'pila');
+    await expect(stack).toHaveAttribute('data-zona', 'contacto');
+    await expect(stack).toHaveClass('stack');
+  },
+};

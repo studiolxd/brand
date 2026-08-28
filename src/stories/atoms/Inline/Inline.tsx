@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import './Inline.css';
 
-export interface InlineProps {
+export interface InlineProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Aire entre piezas: compacto, base o amplio. */
   gap?: 'sm' | 'md' | 'lg';
   /**
@@ -16,6 +16,7 @@ export interface InlineProps {
    */
   justify?: 'start' | 'center' | 'end' | 'between';
   children: ReactNode;
+  /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
 
@@ -27,8 +28,12 @@ export interface InlineProps {
  *
  * `justify` reparte las piezas a lo ancho: es lo que evita que una fila de
  * acciones alineada a la derecha necesite un `className` de producto.
+ *
+ * `{...rest}` (`role`, `aria-*`, `id`, `data-*`…) se reenvía al `<div>`: una
+ * fila puede ser un grupo o una barra de herramientas con nombre accesible sin
+ * envolverla en otro elemento.
  */
-export function Inline({ gap = 'md', align = 'center', justify = 'start', children, className }: InlineProps) {
+export function Inline({ gap = 'md', align = 'center', justify = 'start', children, className, ...rest }: InlineProps) {
   const classes = ['inline', gap !== 'md' ? `inline--gap-${gap}` : '', align !== 'center' ? `inline--align-${align}` : '', justify !== 'start' ? `inline--justify-${justify}` : '', className].filter(Boolean).join(' ');
-  return <div className={classes}>{children}</div>;
+  return <div className={classes} {...rest}>{children}</div>;
 }

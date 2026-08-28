@@ -200,3 +200,46 @@ export const TestContrato: Story = {
     await expect(canvas.getByText('Contenido de seguridad.')).toBeVisible();
   },
 };
+
+/**
+ * Con más de un juego de pestañas en la página, cada barra necesita nombre:
+ * `aria-label` (o `aria-labelledby`) va directo al `role="tablist"`.
+ */
+export const ListaConNombre: Story = {
+  name: 'Lista con nombre accesible',
+  render: () => (
+    <Tabs defaultValue="general">
+      <TabsList aria-label="Ajustes de la cuenta">
+        <TabsTrigger value="general">General</TabsTrigger>
+        <TabsTrigger value="seguridad">Seguridad</TabsTrigger>
+      </TabsList>
+      <TabsContent value="general">
+        <Paragraph>Contenido general.</Paragraph>
+      </TabsContent>
+      <TabsContent value="seguridad">
+        <Paragraph>Contenido de seguridad.</Paragraph>
+      </TabsContent>
+    </Tabs>
+  ),
+};
+
+export const ContratoListaPassthrough: Story = {
+  name: 'Test — TabsList reenvía aria-*, id y data-*',
+  tags: ['!dev'],
+  render: () => (
+    <Tabs defaultValue="general">
+      <TabsList aria-label="Ajustes de la cuenta" id="barra" data-zona="ajustes">
+        <TabsTrigger value="general">General</TabsTrigger>
+      </TabsList>
+      <TabsContent value="general">
+        <Paragraph>Contenido general.</Paragraph>
+      </TabsContent>
+    </Tabs>
+  ),
+  play: async ({ canvasElement }) => {
+    const lista = within(canvasElement).getByRole('tablist', { name: 'Ajustes de la cuenta' });
+    await expect(lista).toHaveClass('tabs__list');
+    await expect(lista).toHaveAttribute('id', 'barra');
+    await expect(lista).toHaveAttribute('data-zona', 'ajustes');
+  },
+};

@@ -30,6 +30,18 @@ Tres pasos, `gap`: `sm` (8px) para piezas pequeñas y muchas —etiquetas, chips
 <Canvas of={InlineStories.AlineadoALaDerecha} />
 <Canvas of={InlineStories.SeparadoALosExtremos} />
 
+## Atributos al `<div>`
+
+Lo que no sea prop propia (`role`, `aria-*`, `id`, `data-*`, `style`…) viaja al `<div>` de la
+fila. Una fila de acciones puede declararse barra de herramientas con su nombre sin envolverla en
+otro elemento:
+
+```tsx
+<Inline justify="end" role="toolbar" aria-label="Acciones del documento">…</Inline>
+```
+
+`className` se añade **después** de las clases propias.
+
 ## Tokens
 
 <TokenTable tokens={inlineTokens} />

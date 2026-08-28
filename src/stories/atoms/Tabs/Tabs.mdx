@@ -52,6 +52,17 @@ motor.
 
 ---
 
+## Nombre accesible de la barra
+
+`TabsList` reenvía al `role="tablist"` lo que no sea prop propia (`aria-label`, `aria-labelledby`,
+`id`, `data-*`…). Con más de un juego de pestañas en la misma página, cada barra necesita el suyo:
+
+```tsx
+<TabsList aria-label="Ajustes de la cuenta">…</TabsList>
+```
+
+<Canvas of={TabsStories.ListaConNombre} />
+
 ## Tokens
 
 <TokenTable tokens={tabsTokens} />

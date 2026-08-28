@@ -17,6 +17,18 @@ Apila piezas con aire por token. Es el envoltorio **explícito** de «estas piez
 
 <Canvas of={StackStories.VueltaArribaEnMovil} />
 
+## Atributos al `<div>`
+
+Lo que no sea prop propia (`role`, `aria-*`, `id`, `data-*`, `style`…) viaja al `<div>` de la
+pila. Es lo que evita tener que envolverla en un `Fieldset` o en un `<section>` nativo solo para
+darle un rol o un nombre accesible:
+
+```tsx
+<Stack role="group" aria-label="Datos de contacto">…</Stack>
+```
+
+`className` se añade **después** de las clases propias: el consumidor suma, no sustituye.
+
 ## Tokens
 
 <TokenTable tokens={stackTokens} />

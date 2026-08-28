@@ -35,6 +35,15 @@ El caso de las páginas de acceso: a la izquierda el título (y una frase), a la
 
 Ni fondo, ni borde, ni padding: eso es del `Container` de fuera o de las tarjetas de dentro. Ni semántica: no pinta `aside`, `main` ni `section`.
 
+## Atributos al `<div>`
+
+Lo que no sea prop propia (`role`, `aria-*`, `id`, `data-*`, `style`…) viaja al `<div>` de la
+rejilla — nunca a las celdas, que son envoltorios internos (`.columns__col`).
+
+```tsx
+<Columns columns={3} role="group" aria-label="Comparativa de planes">…</Columns>
+```
+
 ## Tokens
 
 <TokenTable tokens={columnsTokens} />

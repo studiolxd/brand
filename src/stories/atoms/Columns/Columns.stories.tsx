@@ -96,3 +96,24 @@ export const Contrato: Story = {
     await expect(getComputedStyle(root).display).toBe('grid');
   },
 };
+
+/** Los atributos van a la rejilla, no a las celdas. */
+export const ContratoPassthrough: Story = {
+  name: 'Test — passthrough de role, aria-*, id y data-*',
+  tags: ['!dev'],
+  render: () => (
+    <Columns role="group" aria-label="Comparativa de planes" id="rejilla" data-zona="planes">
+      <Celda>Primera celda</Celda>
+      <Celda>Segunda celda</Celda>
+    </Columns>
+  ),
+  play: async ({ canvasElement }) => {
+    const rejilla = canvasElement.querySelector('.columns')!;
+    await expect(rejilla).toHaveAttribute('role', 'group');
+    await expect(rejilla).toHaveAttribute('aria-label', 'Comparativa de planes');
+    await expect(rejilla).toHaveAttribute('id', 'rejilla');
+    await expect(rejilla).toHaveAttribute('data-zona', 'planes');
+    // y no se filtran a las celdas
+    await expect(canvasElement.querySelector('.columns__col')).not.toHaveAttribute('data-zona');
+  },
+};

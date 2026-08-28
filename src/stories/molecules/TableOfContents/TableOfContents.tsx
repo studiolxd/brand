@@ -12,7 +12,7 @@ export interface TableOfContentsItem {
   level: number;
 }
 
-export interface TableOfContentsProps {
+export interface TableOfContentsProps extends Omit<React.ComponentPropsWithoutRef<'nav'>, 'title'> {
   /** Entradas, en el orden en que aparecen en el documento. */
   items: TableOfContentsItem[];
   /**
@@ -52,6 +52,9 @@ function depthOf(level: number, minLevel: number): number {
  * `IntersectionObserver` o con el hash de la URL) y el índice lo pinta. Así el
  * mismo componente sirve para un índice con scroll-spy, para uno que solo
  * sigue al hash y para uno estático.
+ *
+ * `{...rest}` (`id`, `data-*`, `role`…) se reenvía al `<nav>`. El nombre
+ * accesible sigue siendo `ariaLabel`.
  */
 export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(function TableOfContents({
   items,
@@ -61,6 +64,7 @@ export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(fun
   sticky = false,
   onItemClick,
   className,
+  ...rest
 }, ref): ReactNode {
   if (items.length === 0) return null;
 
@@ -73,7 +77,7 @@ export const TableOfContents = forwardRef<HTMLElement, TableOfContentsProps>(fun
   ].filter(Boolean).join(' ');
 
   return (
-    <nav ref={ref} className={classes} aria-label={ariaLabel}>
+    <nav ref={ref} className={classes} aria-label={ariaLabel} {...rest}>
       {title && <p className="table-of-contents__title">{title}</p>}
       <List type="plain" className="table-of-contents__list">
         {items.map((item) => {

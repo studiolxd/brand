@@ -32,13 +32,18 @@ export function Tabs({
 }
 
 /* ─── List ───────────────────────────────────────────────── */
-export interface TabsListProps {
+export interface TabsListProps extends React.ComponentPropsWithoutRef<'div'> {
   variant?: 'underline' | 'pill';
   className?: string;
   children: ReactNode;
 }
 
-export function TabsList({ variant = 'underline', className, children }: TabsListProps) {
+/**
+ * La barra de pestañas. `{...rest}` (`aria-label`, `aria-labelledby`, `id`,
+ * `data-*`…) se reenvía al `role="tablist"`: es la forma de darle nombre
+ * accesible cuando hay más de un juego de pestañas en la página.
+ */
+export function TabsList({ variant = 'underline', className, children, ...rest }: TabsListProps) {
   return (
     <BaseTabs.List
       // Base UI activa el tab solo con Enter/Espacio por defecto; el DS mantiene
@@ -51,6 +56,7 @@ export function TabsList({ variant = 'underline', className, children }: TabsLis
       ]
         .filter(Boolean)
         .join(' ')}
+      {...rest}
     >
       {children}
     </BaseTabs.List>

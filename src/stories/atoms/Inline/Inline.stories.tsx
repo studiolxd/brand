@@ -119,3 +119,22 @@ export const Contrato: Story = {
     await expect(getComputedStyle(base).justifyContent).toBe('normal');
   },
 };
+
+/** Una fila de acciones puede declararse barra de herramientas con su nombre. */
+export const ContratoPassthrough: Story = {
+  name: 'Test — passthrough de role, aria-*, id y data-*',
+  tags: ['!dev'],
+  render: () => (
+    <Inline role="toolbar" aria-label="Acciones del documento" id="barra" data-zona="acciones">
+      <span>a</span>
+      <span>b</span>
+    </Inline>
+  ),
+  play: async ({ canvasElement }) => {
+    const fila = canvasElement.querySelector('.inline')!;
+    await expect(fila).toHaveAttribute('role', 'toolbar');
+    await expect(fila).toHaveAttribute('aria-label', 'Acciones del documento');
+    await expect(fila).toHaveAttribute('id', 'barra');
+    await expect(fila).toHaveAttribute('data-zona', 'acciones');
+  },
+};
