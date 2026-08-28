@@ -131,10 +131,15 @@ Los tres se apilan sin pelearse: una sección activa bajo el puntero conserva su
 
 Consecuencia en los tokens: **no existen `*-hover-bg` ni `*-active-bg` fuera de `Button`.** Un componente que necesite señalar un estado declara `*-hover-line-*`, `*-active-marker-*` o `*-focus-ring-*`, y ninguno de ellos necesita un token de texto que lo acompañe: la tinta no cambia de bando.
 
-### Lo que sí lleva relleno
+### Las dos excepciones, y no hay más
 
-- **`Button`**, y solo él: el relleno *es* el lenguaje de sus variantes, y su hover mueve un relleno que ya existe en reposo. La variante **`ghost`** es la única excepción declarada a la regla general: parte sin relleno y gana su tinta suave bajo el puntero, porque es el botón que se usa dentro de cabeceras y barras densas, donde una línea no basta para marcar el blanco de un icono.
-- **Un valor elegido**, que no es un estado de interacción: el día seleccionado del `Calendar` y la pestaña activa de `Tabs` variante *pill* se rellenan de marca. Lo que el usuario ha elegido se queda pintado aunque suelte el ratón; lo que solo está bajo el puntero, no.
+**1. `Button`.** El relleno es el lenguaje de sus variantes: `primary`, `outline` y `destructive` ya tienen fondo (o borde de color) en reposo, y su hover **mueve** ese relleno, no lo estrena. Eso no es pintar un estado, es cambiar de tono dentro de una identidad que ya estaba ahí, y se queda como está. `ghost` es el caso aparte dentro del caso aparte: parte transparente y **sí** gana una tinta suave bajo el puntero, porque vive en cabeceras y barras densas donde una línea no basta para marcar el blanco de un icono.
+
+Ningún otro componente puede invocar esta excepción. Si algo que no es un `Button` necesita señalar un estado, usa uno de los tres grafismos de arriba.
+
+**2. Un valor elegido no es un estado.** El día seleccionado del `Calendar` y la pestaña activa de `Tabs` variante *pill* se rellenan de marca, y eso es correcto: lo que el usuario **ha elegido** se queda pintado aunque suelte el ratón y aunque el foco se vaya a otra parte. Lo que solo está bajo el puntero, o solo tiene el foco, o solo es «la sección en la que estás», no se rellena — eso son estados, y van con anillo, línea o barra.
+
+La pregunta que separa los dos casos: *si el usuario cierra los ojos y los abre, ¿esto sigue pintado?* Si la respuesta depende de dónde tenga el ratón, es un estado.
 
 ### Lo que ya no vale
 
