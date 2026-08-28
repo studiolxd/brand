@@ -70,6 +70,10 @@ export const Contrato: Story = {
     await expect(canvas.getByText(/Diseñamos itinerarios/)).toHaveClass('paragraph--large');
     await expect(canvas.getByRole('link', { name: 'Hablemos' }).closest('.highlight__actions')).toHaveClass('inline');
 
+    // La banda trae su propio aire vertical y su Container interior: se monta a sangre.
+    await expect(parseFloat(getComputedStyle(banda).paddingBlockStart)).toBeGreaterThan(0);
+    await expect(banda.querySelector(':scope > .container')).toBeInTheDocument();
+
     // Con media, el reparto lo hace el `Columns` del sistema.
     await expect(banda.querySelector('.columns')).toBeInTheDocument();
     await expect(canvas.getByRole('img', { name: /Un aula/ }).parentElement).toHaveClass('highlight__media');

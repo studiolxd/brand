@@ -15,7 +15,11 @@ La banda destacada de una página pública: un titular, un texto, sus botones y,
 
 `Hero` es la **cabecera** de la página: un `h1` a talla display, y solo hay uno. `Highlight` es una banda **dentro** de la página: su titular es un `h2` a talla 8, puede repetirse, y va sobre superficie oscura por defecto para separarse de lo que tiene encima y debajo.
 
-Ninguna de las dos pinta color propio: el lienzo lo pone el `Container`, así que `surface="light"` voltea la banda entera sin tocar nada más.
+Ninguna de las dos pinta color propio: el lienzo es el del sistema (`.surface-dark`), así que `surface="light"` voltea la banda entera sin tocar nada más.
+
+## Se monta a sangre
+
+Como el resto de secciones, la banda **no se envuelve en nada**: se cuelga directamente de la página. El aire vertical es suyo (`--highlight-space-block-start` y `--highlight-space-block-end`, un peldaño menor por debajo de `md`) y el lateral lo pone su `Container` interior, con el ancho de `width` (`xl` por defecto, el de la barra del `SiteHeader`). Meterla en un `Container space="…"` suma el aire de la banda al suyo y la deja más alta que en otra web.
 
 <Canvas of={HighlightStories.SuperficieClara} />
 

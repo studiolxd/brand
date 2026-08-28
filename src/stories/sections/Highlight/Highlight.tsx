@@ -23,7 +23,7 @@ export interface HighlightProps {
   titleLevel?: HeadingLevel;
   /** Talla del titular. Por defecto `8` (40px), un peldaño por debajo del `Hero`. */
   titleSize?: HeadingSize;
-  /** Ancho del contenido, como en el resto de bandas. */
+  /** Ancho del contenido; la banda siempre llega de lado a lado. Como en el resto de secciones. */
   width?: ContainerWidth;
   className?: string;
   id?: string;
@@ -35,9 +35,14 @@ export interface HighlightProps {
  * que corta una portada en dos y dice «esto es lo importante».
  *
  * Va sobre superficie oscura por defecto y no pinta ningún color propio: el
- * lienzo lo pone el `Container`, y con `surface="light"` la banda entera
- * voltea. El reparto en dos columnas es el `Columns` del sistema, así que en
- * móvil se apila sin punto de ruptura escrito aquí.
+ * lienzo es el del sistema (`.surface-dark`), y con `surface="light"` la banda
+ * entera voltea. El reparto en dos columnas es el `Columns` del sistema, así
+ * que en móvil se apila sin punto de ruptura escrito aquí.
+ *
+ * Se monta **a sangre**, sin envoltorio: trae su propio aire vertical
+ * (`--highlight-space-block-start/-end`, un peldaño menor en móvil) y su
+ * `Container` interior para el aire lateral, así que se ve igual en cualquier
+ * página.
  */
 export function Highlight({
   title,
@@ -61,31 +66,29 @@ export function Highlight({
   );
 
   return (
-    <Container
-      as="section"
+    <section
       id={id}
-      width={width}
-      space="2xl"
-      surface={surface === 'dark' ? 'dark' : undefined}
-      className={['highlight', className].filter(Boolean).join(' ')}
+      className={['highlight', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}
     >
-      {media ? (
-        <Columns align="center" gap="lg">
-          {mediaPosition === 'start' ? (
-            <>
-              <div className="highlight__media">{media}</div>
-              {text}
-            </>
-          ) : (
-            <>
-              {text}
-              <div className="highlight__media">{media}</div>
-            </>
-          )}
-        </Columns>
-      ) : (
-        text
-      )}
-    </Container>
+      <Container width={width}>
+        {media ? (
+          <Columns align="center" gap="lg">
+            {mediaPosition === 'start' ? (
+              <>
+                <div className="highlight__media">{media}</div>
+                {text}
+              </>
+            ) : (
+              <>
+                {text}
+                <div className="highlight__media">{media}</div>
+              </>
+            )}
+          </Columns>
+        ) : (
+          text
+        )}
+      </Container>
+    </section>
   );
 }

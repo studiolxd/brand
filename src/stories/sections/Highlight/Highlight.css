@@ -1,5 +1,21 @@
-/* Banda destacada. El fondo es de la superficie, no de la sección; el aire
-   bajo el título lo pone el propio título (`--text-heading-space-after`). */
+/* Banda destacada. El color lo pone el lienzo del sistema (`.surface-dark`),
+   no la sección; el aire bajo el título lo pone el propio título
+   (`--text-heading-space-after`).
+
+   El ritmo vertical es de la sección: se monta a sangre y no lo hereda de
+   ningún envoltorio, así que la banda mide lo mismo en cualquier página. */
+.highlight {
+  padding-block: var(--highlight-space-block-start) var(--highlight-space-block-end);
+}
+
+/* Móvil: la pantalla es más corta y el aire baja un peldaño. */
+@media (max-width: 767.98px) /* < --breakpoint-md */ {
+  .highlight {
+    --highlight-space-block-start: var(--highlight-space-block-start-compact);
+    --highlight-space-block-end: var(--highlight-space-block-end-compact);
+  }
+}
+
 .highlight__title,
 .highlight__description {
   max-inline-size: var(--content-measure);
