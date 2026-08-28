@@ -118,6 +118,7 @@
 @import "./molecules/chat-shell.css";
 @import "./molecules/chart.css";
 @import "./components/sparkline.css";
+@import "./molecules/prose.css";
 
 /* Modo oscuro derivado: los tokens que heredan de otro que sí tiene par oscuro.
    Va al final por lo mismo que el bloque de abajo: misma especificidad que los

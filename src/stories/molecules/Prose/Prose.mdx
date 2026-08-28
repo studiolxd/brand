@@ -1,0 +1,75 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ProseStories from "./Prose.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { proseBaseTokens, proseDarkTokens } from "../../../tokens/molecules/prose";
+
+<Meta of={ProseStories} />
+
+# Prose
+
+El contenedor del contenido largo: documentación en MDX, textos legales, entradas de blog, cualquier HTML que llegue de un CMS. Viste la semántica cruda —títulos, párrafos, listas, citas, código, tablas, cortes y figuras— con la escala del sistema y la acota a la medida de lectura.
+
+<Canvas of={ProseStories.PorDefecto} />
+
+## La excepción
+
+`Prose` es el **único sitio del sistema donde el CSS estila etiquetas nativas dentro de un contenedor**. La regla general sigue en pie: la maquetación se hace con componentes, y una etiqueta suelta en una página no la viste nadie.
+
+La excepción está justificada porque aquí el contenido **no viene de React**: sale de un `.mdx`, de un `dangerouslySetInnerHTML` o de un renderizador de markdown, y no hay dónde poner una clase. Todo lo que declara este componente vive bajo `.prose`, así que no se escapa al resto de la página.
+
+Fuera de un documento, no uses `Prose` para ahorrarte componentes: un párrafo es `Paragraph`, una lista es `List`, un bloque de código es `CodeBlock`.
+
+## Anatomía
+
+Un solo elemento —`div` por defecto, `article` cuando el bloque es el documento en sí— con tres reglas:
+
+- **Medida de lectura**: `max-inline-size: var(--prose-measure)`, la medida del sistema (70 caracteres). Se resuelve contra la fuente del propio texto, así que se adapta sola al tamaño y a la superficie.
+- **Ritmo por flujo**: los bloques no traen margen propio; el hueco lo abre el hermano siguiente (`--prose-flow-space`). Un título abre sección, así que respira más por delante (`--prose-heading-space-before`).
+- **Tokens prestados**: el código toma los de `CodeBlock`, la tabla los de `Table`, la cita y el corte los de `Separator`, la sangría de las listas la de `List`. Un fragmento de markdown se ve como el componente equivalente.
+
+Los enlaces no llevan nada propio: `base.css` ya viste cualquier `<a>` con los tokens de `Link` —subrayado, foco y superficie oscura incluidos—, y un enlace de markdown es exactamente eso.
+
+## Tallas
+
+`md` (por defecto) usa el cuerpo de la superficie: 16 px en aplicación, 20 px dentro de `SiteShell`. `sm` baja un peldaño y aprieta el ritmo, para textos largos en una columna estrecha.
+
+<Canvas of={ProseStories.TallaPequena} />
+
+## Ancho
+
+Por defecto el documento se acota a la medida de lectura. `measure={false}` la suelta y deja que ocupe todo su contenedor: para páginas con tablas anchas o figuras a sangre.
+
+<Canvas of={ProseStories.SinMedida} />
+
+Una tabla más ancha que la columna no rompe la maqueta: hace scroll horizontal dentro de sí misma.
+
+## Superficie oscura
+
+Los colores salen de tokens que ya tienen par oscuro (cuerpo, líneas, bordes de tabla), así que el documento reacciona solo a `.surface-dark` y a `html.dark` / `[data-theme="dark"]`. Los dos tonos atenuados propios —cita y pie de figura— tienen su par declarado.
+
+El código es la excepción deliberada que ya trae `CodeBlock`: su par fondo/tinta es autocontenido y se mantiene idéntico en ambos temas.
+
+<Canvas of={ProseStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={proseBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={proseDarkTokens} />
+
+## Accesibilidad
+
+- `Prose` no añade semántica: la que hay es la del contenido. Usa `as="article"` cuando el bloque sea el documento completo, y deja `div` cuando sea un fragmento dentro de otra cosa.
+- El componente **no reordena ni renumera los títulos**: el esquema del documento es responsabilidad de quien escribe el markdown. Si el `h1` de la página está fuera, el documento debe empezar en `h2`.
+- La medida de lectura (70 caracteres) cumple el criterio 1.4.8 de WCAG, que pide como máximo 80.
+- El interlineado de lectura larga es 1,65: por encima del 1,5 que pide el criterio 1.4.12.
+
+## Props
+
+<ArgTypes of={ProseStories} />

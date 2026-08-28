@@ -1,0 +1,60 @@
+{
+  "prose": {
+    "measure":      { "$value": "{content.measure}",   "$type": "dimension", "$description": "Ancho máximo de la columna de lectura — la medida del sistema (70ch), que se resuelve contra la fuente del propio texto" },
+    "font-size":    { "$value": "{text.font-size}",    "$type": "dimension", "$description": "Cuerpo del texto largo: el de la superficie (16px en aplicación, 20px en la pública)" },
+    "line-height":  { "$value": "{line-height.relaxed}", "$type": "number",  "$description": "Interlineado de lectura larga (1,65), un punto por encima del cuerpo de interfaz" },
+    "color":        { "$value": "{text.color}",        "$type": "color",     "$description": "Color del texto largo — el del cuerpo de la superficie" },
+
+    "flow-space":           { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre dos bloques consecutivos del documento (párrafo, lista, cita, tabla…)" },
+    "heading-space-before": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Aire antes de un título: un título abre sección, así que respira más que un párrafo. El aire de después lo pone el flujo" },
+
+    "sm-font-size":            { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del texto largo — talla sm (un peldaño por debajo del cuerpo)" },
+    "sm-flow-space":           { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre bloques — talla sm" },
+    "sm-heading-space-before": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire antes de un título — talla sm" },
+
+    "list-padding-inline-start": { "$value": "{text.list.padding-inline-start}", "$type": "dimension", "$description": "Sangría de las listas — la del átomo List" },
+    "list-gap":                  { "$value": "{text.list.gap}",                  "$type": "dimension", "$description": "Aire entre elementos de lista — el del átomo List" },
+
+    "quote-border-width":   { "$value": "{separator.thickness}", "$type": "dimension", "$description": "Grosor de la línea que marca una cita — la línea del sistema" },
+    "quote-border-color":   { "$value": "{separator.color}",     "$type": "color",     "$description": "Color de la línea de la cita — tinta de la superficie" },
+    "quote-padding-inline": { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Sangría del texto de la cita respecto a su línea" },
+    "quote-color":          { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Color del texto citado — atenuado: es voz de otro" },
+
+    "code-font-family":    { "$value": "{code-block.font-family}",   "$type": "string",    "$description": "Monoespaciada del código en línea — la de CodeBlock" },
+    "code-font-size":      { "$value": "{code-block.font-size}",     "$type": "dimension", "$description": "Tamaño del código en línea — el de CodeBlock" },
+    "code-bg":             { "$value": "{code-block.bg}",            "$type": "color",     "$description": "Fondo del código en línea — el de CodeBlock: par autocontenido, idéntico en ambos temas" },
+    "code-color":          { "$value": "{code-block.color}",         "$type": "color",     "$description": "Tinta del código en línea — la de CodeBlock" },
+    "code-border-radius":  { "$value": "{code-block.border-radius}", "$type": "dimension", "$description": "Radio del código en línea — el de CodeBlock" },
+    "code-padding-block":  { "$value": "0px",                        "$type": "dimension", "$description": "Padding vertical del código en línea: cero, para no romper el interlineado del párrafo que lo contiene" },
+    "code-padding-inline": { "$value": "{spacing.1}",                "$type": "dimension", "$description": "Padding horizontal del código en línea" },
+
+    "pre-bg":            { "$value": "{code-block.bg}",              "$type": "color",     "$description": "Fondo del bloque de código — el de CodeBlock" },
+    "pre-color":         { "$value": "{code-block.color}",           "$type": "color",     "$description": "Tinta del bloque de código — la de CodeBlock" },
+    "pre-padding-block": { "$value": "{code-block.padding-block-start}", "$type": "dimension", "$description": "Padding vertical del bloque de código — el de CodeBlock" },
+    "pre-padding-inline":{ "$value": "{code-block.padding-inline}",  "$type": "dimension", "$description": "Padding horizontal del bloque de código — el de CodeBlock" },
+    "pre-border-width":  { "$value": "{code-block.border-width}",    "$type": "dimension", "$description": "Grosor del borde del bloque de código — el de CodeBlock" },
+    "pre-border-color":  { "$value": "{code-block.border-color}",    "$type": "color",     "$description": "Color del borde del bloque de código — el de CodeBlock" },
+    "pre-border-radius": { "$value": "{code-block.border-radius}",   "$type": "dimension", "$description": "Radio del bloque de código — el de CodeBlock" },
+    "pre-font-size":     { "$value": "{code-block.font-size}",       "$type": "dimension", "$description": "Tamaño del bloque de código — el de CodeBlock" },
+    "pre-line-height":   { "$value": "{code-block.line-height}",     "$type": "number",    "$description": "Interlineado del bloque de código — el de CodeBlock" },
+
+    "table-font-size":            { "$value": "{table.font-size}",            "$type": "dimension", "$description": "Cuerpo de las celdas — el de Table" },
+    "table-cell-padding-block":   { "$value": "{table.cell-padding-block}",   "$type": "dimension", "$description": "Padding vertical de celda — el de Table" },
+    "table-cell-padding-inline":  { "$value": "{table.cell-padding-inline}",  "$type": "dimension", "$description": "Padding horizontal de celda — el de Table" },
+    "table-border-width":         { "$value": "{table.border-width}",         "$type": "dimension", "$description": "Grosor del separador de fila — el de Table" },
+    "table-border-color":         { "$value": "{table.row-border-color}",     "$type": "color",     "$description": "Color del separador de fila — el de Table" },
+    "table-header-font-weight":   { "$value": "{table.header-font-weight}",   "$type": "number",    "$description": "Peso de la cabecera — el de Table" },
+    "table-header-border-color":  { "$value": "{table.header-border-color}",  "$type": "color",     "$description": "Color del borde bajo la cabecera — el de Table" },
+
+    "rule-thickness": { "$value": "{separator.thickness}", "$type": "dimension", "$description": "Grosor del corte temático (`hr`) — la línea del sistema" },
+    "rule-color":     { "$value": "{separator.color}",     "$type": "color",     "$description": "Color del corte temático — tinta de la superficie" },
+    "rule-space":     { "$value": "{spacing.6}",           "$type": "dimension", "$description": "Aire a ambos lados del corte temático: separa bloques, no párrafos" },
+
+    "image-border-radius": { "$value": "{card.border-radius}", "$type": "dimension", "$description": "Radio de las imágenes — el de las superficies del sistema" },
+    "caption-font-size":   { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del pie de figura: un peldaño por debajo" },
+    "caption-color":       { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color del pie de figura — atenuado" },
+
+    "surface-dark-quote-color":   { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del texto citado — surface-dark" },
+    "surface-dark-caption-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del pie de figura — surface-dark" }
+  }
+}

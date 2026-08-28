@@ -1,0 +1,172 @@
+/* Prose es la única excepción del sistema: estila etiquetas nativas dentro de
+   un contenedor, porque su contenido no viene de React (sale de un `.mdx` o de
+   una cadena de HTML) y no hay dónde poner una clase. Todo va acotado bajo
+   `.prose`, así que nada de esto se escapa al resto de la página. */
+
+.prose {
+  max-inline-size: var(--prose-measure);
+  font-size: var(--prose-font-size);
+  line-height: var(--prose-line-height);
+  color: var(--prose-color);
+}
+
+.prose.prose--full {
+  max-inline-size: none;
+}
+
+.prose.prose--sm {
+  font-size: var(--prose-sm-font-size);
+}
+
+/* ─── Ritmo vertical ─────────────────────────────────────────
+   El aire lo pone el flujo, no cada bloque: los márgenes propios se ponen a
+   cero y el hueco lo abre el hermano siguiente. Así un `.mdx` cualquiera cae
+   con el mismo ritmo sin que su autor sepa nada del sistema. */
+
+.prose > * {
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+.prose > * + * {
+  margin-block-start: var(--prose-flow-space);
+}
+
+/* Un título abre sección: respira más por delante que un párrafo. */
+.prose > * + :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-start: var(--prose-heading-space-before);
+}
+
+.prose.prose--sm > * + * {
+  margin-block-start: var(--prose-sm-flow-space);
+}
+
+.prose.prose--sm > * + :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-start: var(--prose-sm-heading-space-before);
+}
+
+/* ─── Listas ─────────────────────────────────────────────────
+   `base.css` deja `ul`/`ol` sin sangría ni marcas (el átomo List decide);
+   dentro de Prose el markdown sí espera la lista de toda la vida. */
+
+.prose :is(ul, ol) {
+  padding-inline-start: var(--prose-list-padding-inline-start);
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li,
+.prose li > :is(ul, ol) {
+  margin-block-start: var(--prose-list-gap);
+}
+
+/* ─── Cita ───────────────────────────────────────────────────
+   Línea de tinta al borde de inicio, sin relleno: la voz de otro se marca con
+   un grafismo, no con un fondo (Foundations → Colores). */
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-inline-start: var(--prose-quote-padding-inline);
+  border-inline-start: var(--prose-quote-border-width) solid var(--prose-quote-border-color);
+  color: var(--prose-quote-color);
+}
+
+/* ─── Código ─────────────────────────────────────────────────
+   Los tokens son los de `CodeBlock`: un fragmento en línea y un bloque
+   suelto del markdown se ven como el componente. */
+
+.prose code {
+  padding-block: var(--prose-code-padding-block);
+  padding-inline: var(--prose-code-padding-inline);
+  border-radius: var(--prose-code-border-radius);
+  background-color: var(--prose-code-bg);
+  color: var(--prose-code-color);
+  font-family: var(--prose-code-font-family);
+  font-size: var(--prose-code-font-size);
+}
+
+.prose pre {
+  overflow-x: auto;
+  padding-block: var(--prose-pre-padding-block);
+  padding-inline: var(--prose-pre-padding-inline);
+  border: var(--prose-pre-border-width) solid var(--prose-pre-border-color);
+  border-radius: var(--prose-pre-border-radius);
+  background-color: var(--prose-pre-bg);
+  color: var(--prose-pre-color);
+  font-family: var(--prose-code-font-family);
+  font-size: var(--prose-pre-font-size);
+  line-height: var(--prose-pre-line-height);
+}
+
+/* Dentro de un bloque, el `code` no repite fondo ni caja. */
+.prose pre code {
+  padding-block: 0;
+  padding-inline: 0;
+  border-radius: 0;
+  background-color: transparent;
+  font-size: inherit;
+}
+
+/* ─── Tabla ──────────────────────────────────────────────────
+   Los tokens son los de `Table`. Una tabla ancha desborda su columna de
+   lectura: el scroll horizontal vive en la propia tabla. */
+
+.prose table {
+  display: block;
+  inline-size: max-content;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--prose-table-font-size);
+}
+
+.prose :is(th, td) {
+  padding-block: var(--prose-table-cell-padding-block);
+  padding-inline: var(--prose-table-cell-padding-inline);
+  border-block-end: var(--prose-table-border-width) solid var(--prose-table-border-color);
+  text-align: start;
+}
+
+.prose th {
+  border-block-end-color: var(--prose-table-header-border-color);
+  font-weight: var(--prose-table-header-font-weight);
+}
+
+/* ─── Corte temático ─────────────────────────────────────────
+   Es la línea del `Separator`, con más aire: separa bloques, no párrafos. */
+
+.prose hr {
+  block-size: 0;
+  margin-block: var(--prose-rule-space);
+  border-block-start: var(--prose-rule-thickness) solid var(--prose-rule-color);
+  border-inline: 0;
+  border-block-end: 0;
+}
+
+/* ─── Figuras ────────────────────────────────────────────────── */
+
+.prose img {
+  max-inline-size: 100%;
+  block-size: auto;
+  border-radius: var(--prose-image-border-radius);
+}
+
+.prose figure {
+  margin-inline: 0;
+}
+
+.prose figcaption {
+  margin-block-start: var(--prose-flow-space);
+  font-size: var(--prose-caption-font-size);
+  color: var(--prose-caption-color);
+}
+
+/* Los enlaces no se tocan: `base.css` ya viste cualquier `<a>` con los tokens
+   de `Link` (subrayado, foco, superficie oscura), y un `<a>` de markdown es
+   exactamente eso. */

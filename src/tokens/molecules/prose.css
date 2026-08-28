@@ -1,0 +1,57 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --prose-code-padding-block: 0px; /** Padding vertical del código en línea: cero, para no romper el interlineado del párrafo que lo contiene */
+  --prose-measure: var(--content-measure); /** Ancho máximo de la columna de lectura — la medida del sistema (70ch), que se resuelve contra la fuente del propio texto */
+  --prose-line-height: var(--line-height-relaxed); /** Interlineado de lectura larga (1,65), un punto por encima del cuerpo de interfaz */
+  --prose-flow-space: var(--spacing-4); /** Aire entre dos bloques consecutivos del documento (párrafo, lista, cita, tabla…) */
+  --prose-heading-space-before: var(--spacing-6); /** Aire antes de un título: un título abre sección, así que respira más que un párrafo. El aire de después lo pone el flujo */
+  --prose-sm-flow-space: var(--spacing-3); /** Aire entre bloques — talla sm */
+  --prose-sm-heading-space-before: var(--spacing-5); /** Aire antes de un título — talla sm */
+  --prose-quote-padding-inline: var(--spacing-4); /** Sangría del texto de la cita respecto a su línea */
+  --prose-code-padding-inline: var(--spacing-1); /** Padding horizontal del código en línea */
+  --prose-rule-space: var(--spacing-6); /** Aire a ambos lados del corte temático: separa bloques, no párrafos */
+  --prose-font-size: var(--text-font-size); /** Cuerpo del texto largo: el de la superficie (16px en aplicación, 20px en la pública) */
+  --prose-sm-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto largo — talla sm (un peldaño por debajo del cuerpo) */
+  --prose-list-padding-inline-start: var(--text-list-padding-inline-start); /** Sangría de las listas — la del átomo List */
+  --prose-list-gap: var(--text-list-gap); /** Aire entre elementos de lista — el del átomo List */
+  --prose-quote-color: var(--color-text-muted-on-light); /** Color del texto citado — atenuado: es voz de otro */
+  --prose-code-font-family: var(--code-block-font-family); /** Monoespaciada del código en línea — la de CodeBlock */
+  --prose-table-cell-padding-block: var(--table-cell-padding-block); /** Padding vertical de celda — el de Table */
+  --prose-table-cell-padding-inline: var(--table-cell-padding-inline); /** Padding horizontal de celda — el de Table */
+  --prose-caption-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del pie de figura: un peldaño por debajo */
+  --prose-caption-color: var(--color-text-muted-on-light); /** Color del pie de figura — atenuado */
+  --prose-color: var(--text-color); /** Color del texto largo — el del cuerpo de la superficie */
+  --prose-quote-border-width: var(--separator-thickness); /** Grosor de la línea que marca una cita — la línea del sistema */
+  --prose-quote-border-color: var(--separator-color); /** Color de la línea de la cita — tinta de la superficie */
+  --prose-code-font-size: var(--code-block-font-size); /** Tamaño del código en línea — el de CodeBlock */
+  --prose-code-bg: var(--code-block-bg); /** Fondo del código en línea — el de CodeBlock: par autocontenido, idéntico en ambos temas */
+  --prose-code-color: var(--code-block-color); /** Tinta del código en línea — la de CodeBlock */
+  --prose-pre-bg: var(--code-block-bg); /** Fondo del bloque de código — el de CodeBlock */
+  --prose-pre-color: var(--code-block-color); /** Tinta del bloque de código — la de CodeBlock */
+  --prose-pre-padding-block: var(--code-block-padding-block-start); /** Padding vertical del bloque de código — el de CodeBlock */
+  --prose-pre-padding-inline: var(--code-block-padding-inline); /** Padding horizontal del bloque de código — el de CodeBlock */
+  --prose-pre-font-size: var(--code-block-font-size); /** Tamaño del bloque de código — el de CodeBlock */
+  --prose-pre-line-height: var(--code-block-line-height); /** Interlineado del bloque de código — el de CodeBlock */
+  --prose-table-font-size: var(--table-font-size); /** Cuerpo de las celdas — el de Table */
+  --prose-table-border-width: var(--table-border-width); /** Grosor del separador de fila — el de Table */
+  --prose-table-border-color: var(--table-row-border-color); /** Color del separador de fila — el de Table */
+  --prose-table-header-font-weight: var(--table-header-font-weight); /** Peso de la cabecera — el de Table */
+  --prose-table-header-border-color: var(--table-header-border-color); /** Color del borde bajo la cabecera — el de Table */
+  --prose-rule-thickness: var(--separator-thickness); /** Grosor del corte temático (`hr`) — la línea del sistema */
+  --prose-rule-color: var(--separator-color); /** Color del corte temático — tinta de la superficie */
+  --prose-image-border-radius: var(--card-border-radius); /** Radio de las imágenes — el de las superficies del sistema */
+  --prose-code-border-radius: var(--code-block-border-radius); /** Radio del código en línea — el de CodeBlock */
+  --prose-pre-border-width: var(--code-block-border-width); /** Grosor del borde del bloque de código — el de CodeBlock */
+  --prose-pre-border-color: var(--code-block-border-color); /** Color del borde del bloque de código — el de CodeBlock */
+  --prose-pre-border-radius: var(--code-block-border-radius); /** Radio del bloque de código — el de CodeBlock */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --prose-quote-color: var(--color-text-muted-on-dark); /** Color del texto citado — surface-dark */
+  --prose-caption-color: var(--color-text-muted-on-dark); /** Color del pie de figura — surface-dark */
+}

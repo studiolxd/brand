@@ -175,6 +175,8 @@ export { Pagination } from './stories/molecules/Pagination/Pagination';
 export type { PaginationProps } from './stories/molecules/Pagination/Pagination';
 export { ConsentBanner, ConsentPreferences } from './stories/molecules/Consent/Consent';
 export type { ConsentBannerProps, ConsentPreferencesProps, ConsentCategory, ConsentValue } from './stories/molecules/Consent/Consent';
+export { Prose } from './stories/molecules/Prose/Prose';
+export type { ProseProps, ProseElement } from './stories/molecules/Prose/Prose';
 export { PrevNextNav } from './stories/molecules/PrevNextNav/PrevNextNav';
 export type { PrevNextNavProps } from './stories/molecules/PrevNextNav/PrevNextNav';
 export { OrgSwitcher } from './stories/molecules/OrgSwitcher/OrgSwitcher';

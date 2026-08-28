@@ -1,0 +1,47 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-prose-measure: 70ch; // Ancho máximo de la columna de lectura — la medida del sistema (70ch), que se resuelve contra la fuente del propio texto
+$lxd-prose-font-size: 1rem; // Cuerpo del texto largo: el de la superficie (16px en aplicación, 20px en la pública)
+$lxd-prose-line-height: 1.65; // Interlineado de lectura larga (1,65), un punto por encima del cuerpo de interfaz
+$lxd-prose-color: #111e30; // Color del texto largo — el del cuerpo de la superficie
+$lxd-prose-flow-space: 1rem; // Aire entre dos bloques consecutivos del documento (párrafo, lista, cita, tabla…)
+$lxd-prose-heading-space-before: 2rem; // Aire antes de un título: un título abre sección, así que respira más que un párrafo. El aire de después lo pone el flujo
+$lxd-prose-sm-font-size: 0.875rem; // Cuerpo del texto largo — talla sm (un peldaño por debajo del cuerpo)
+$lxd-prose-sm-flow-space: 0.75rem; // Aire entre bloques — talla sm
+$lxd-prose-sm-heading-space-before: 1.5rem; // Aire antes de un título — talla sm
+$lxd-prose-list-padding-inline-start: 2rem; // Sangría de las listas — la del átomo List
+$lxd-prose-list-gap: 0.5rem; // Aire entre elementos de lista — el del átomo List
+$lxd-prose-quote-border-width: 1px; // Grosor de la línea que marca una cita — la línea del sistema
+$lxd-prose-quote-border-color: #111e30; // Color de la línea de la cita — tinta de la superficie
+$lxd-prose-quote-padding-inline: 1rem; // Sangría del texto de la cita respecto a su línea
+$lxd-prose-quote-color: #4a4a4a; // Color del texto citado — atenuado: es voz de otro
+$lxd-prose-code-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada del código en línea — la de CodeBlock
+$lxd-prose-code-font-size: 0.875rem; // Tamaño del código en línea — el de CodeBlock
+$lxd-prose-code-bg: #f2f2f2; // Fondo del código en línea — el de CodeBlock: par autocontenido, idéntico en ambos temas
+$lxd-prose-code-color: #111e30; // Tinta del código en línea — la de CodeBlock
+$lxd-prose-code-border-radius: 0px; // Radio del código en línea — el de CodeBlock
+$lxd-prose-code-padding-block: 0px; // Padding vertical del código en línea: cero, para no romper el interlineado del párrafo que lo contiene
+$lxd-prose-code-padding-inline: 0.25rem; // Padding horizontal del código en línea
+$lxd-prose-pre-bg: #f2f2f2; // Fondo del bloque de código — el de CodeBlock
+$lxd-prose-pre-color: #111e30; // Tinta del bloque de código — la de CodeBlock
+$lxd-prose-pre-padding-block: 1rem; // Padding vertical del bloque de código — el de CodeBlock
+$lxd-prose-pre-padding-inline: 1rem; // Padding horizontal del bloque de código — el de CodeBlock
+$lxd-prose-pre-border-width: 1px; // Grosor del borde del bloque de código — el de CodeBlock
+$lxd-prose-pre-border-color: #111e30; // Color del borde del bloque de código — el de CodeBlock
+$lxd-prose-pre-border-radius: 0px; // Radio del bloque de código — el de CodeBlock
+$lxd-prose-pre-font-size: 0.875rem; // Tamaño del bloque de código — el de CodeBlock
+$lxd-prose-pre-line-height: 1.65; // Interlineado del bloque de código — el de CodeBlock
+$lxd-prose-table-font-size: 1rem; // Cuerpo de las celdas — el de Table
+$lxd-prose-table-cell-padding-block: 0.75rem; // Padding vertical de celda — el de Table
+$lxd-prose-table-cell-padding-inline: 0.75rem; // Padding horizontal de celda — el de Table
+$lxd-prose-table-border-width: 1px; // Grosor del separador de fila — el de Table
+$lxd-prose-table-border-color: #111e30; // Color del separador de fila — el de Table
+$lxd-prose-table-header-font-weight: 500; // Peso de la cabecera — el de Table
+$lxd-prose-table-header-border-color: #111e30; // Color del borde bajo la cabecera — el de Table
+$lxd-prose-rule-thickness: 1px; // Grosor del corte temático (`hr`) — la línea del sistema
+$lxd-prose-rule-color: #111e30; // Color del corte temático — tinta de la superficie
+$lxd-prose-rule-space: 2rem; // Aire a ambos lados del corte temático: separa bloques, no párrafos
+$lxd-prose-image-border-radius: 0px; // Radio de las imágenes — el de las superficies del sistema
+$lxd-prose-caption-font-size: 0.875rem; // Cuerpo del pie de figura: un peldaño por debajo
+$lxd-prose-caption-color: #4a4a4a; // Color del pie de figura — atenuado

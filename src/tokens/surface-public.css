@@ -88,6 +88,12 @@
   --otp-field-error-font-size: var(--form-error-font-size);
   --otp-field-helper-font-size: var(--form-helper-font-size);
   --prev-next-nav-font-size: var(--text-font-size);
+  --prose-font-size: var(--text-font-size);
+  --prose-sm-font-size: var(--text-paragraph-small-font-size);
+  --prose-code-font-size: var(--code-block-font-size);
+  --prose-pre-font-size: var(--code-block-font-size);
+  --prose-table-font-size: var(--table-font-size);
+  --prose-caption-font-size: var(--text-paragraph-small-font-size);
   --radio-field-sm-label-font-size: var(--text-paragraph-small-font-size);
   --radio-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --radio-field-label-font-size: var(--text-font-size);
