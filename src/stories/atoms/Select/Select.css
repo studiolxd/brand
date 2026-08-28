@@ -87,10 +87,12 @@
   font-family: var(--select-font-family);
   cursor: pointer;
 
-  /* La opción bajo el puntero o el teclado se rellena: excepción declarada de
-     las listas de opciones desplegables (Foundations → Colores). */
+  /* La opción bajo el puntero o el teclado se rellena con la inversión de
+     marca: excepción declarada de las listas de opciones desplegables
+     (Foundations → Colores). El texto invierte con el relleno. */
   &[data-highlighted] {
     background-color: var(--select-item-highlighted-bg);
+    color: var(--select-item-highlighted-color);
   }
 
   &[data-selected] {

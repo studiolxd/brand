@@ -28,7 +28,8 @@ $lxd-select-content-z-index: 400; // Capa del desplegable: flotante
 $lxd-select-content-max-height: var(--available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)
 $lxd-select-item-padding-block: 0.5rem; // Padding block de cada opción
 $lxd-select-item-selected-font-weight: 500; // La opción elegida, en énfasis
-$lxd-select-item-highlighted-bg: #f2f2f2; // Relleno de la opción bajo el puntero o el teclado (`[data-highlighted]`). Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado recorre la lista
+$lxd-select-item-highlighted-bg: #111e30; // Relleno de la opción bajo el puntero o el teclado (`[data-highlighted]`): la inversión de marca. Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado recorre la lista
+$lxd-select-item-highlighted-color: #ffffff; // Texto de la opción resaltada: invierte con el relleno — el glifo de marcado lo hereda por `currentColor`
 $lxd-select-sm-font-size: 0.875rem; // Cuerpo — sm
 $lxd-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
 $lxd-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm

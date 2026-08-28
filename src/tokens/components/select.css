@@ -34,7 +34,8 @@
   --select-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --select-content-border-color: var(--color-primary); /** Borde del dropdown */
   --select-item-selected-font-weight: var(--font-weight-emphasis); /** La opción elegida, en énfasis */
-  --select-item-highlighted-bg: var(--color-surface-secondary-on-light); /** Relleno de la opción bajo el puntero o el teclado (`[data-highlighted]`). Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado recorre la lista */
+  --select-item-highlighted-bg: var(--color-primary); /** Relleno de la opción bajo el puntero o el teclado (`[data-highlighted]`): la inversión de marca. Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado recorre la lista */
+  --select-item-highlighted-color: var(--color-text-on-dark); /** Texto de la opción resaltada: invierte con el relleno — el glifo de marcado lo hereda por `currentColor` */
   --select-separator-color: var(--separator-color); /** Color del separador entre grupos — el de la línea del sistema */
   --select-separator-height: var(--separator-thickness); /** Grosor del separador entre grupos — el de la línea del sistema */
 }
@@ -50,5 +51,6 @@ html.dark {
   --select-content-bg: var(--color-background-dark); /** Fondo del dropdown — surface-dark */
   --select-content-border-color: var(--color-text-on-dark); /** Borde del dropdown — surface-dark */
   --select-separator-color: var(--color-text-on-dark); /** Color del separador entre grupos — surface-dark */
-  --select-item-highlighted-bg: var(--color-surface-secondary-on-dark); /** Relleno de la opción resaltada — surface-dark */
+  --select-item-highlighted-bg: var(--color-text-on-dark); /** Relleno de la opción resaltada — surface-dark: la misma inversión de marca, al revés */
+  --select-item-highlighted-color: var(--color-primary); /** Texto de la opción resaltada — surface-dark */
 }

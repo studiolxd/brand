@@ -28,7 +28,8 @@
     "content-max-height":     { "$value": "var(--available-height)", "$type": "string", "$description": "Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)" },
     "item-padding-block":     { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding block de cada opción" },
     "item-selected-font-weight": { "$value": "{font-weight.emphasis}",  "$type": "number",    "$description": "La opción elegida, en énfasis" },
-    "item-highlighted-bg":    { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Relleno de la opción bajo el puntero o el teclado (`[data-highlighted]`). Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado recorre la lista" },
+    "item-highlighted-bg":    { "$value": "{color.primary}", "$type": "color", "$description": "Relleno de la opción bajo el puntero o el teclado (`[data-highlighted]`): la inversión de marca. Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado recorre la lista" },
+    "item-highlighted-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Texto de la opción resaltada: invierte con el relleno — el glifo de marcado lo hereda por `currentColor`" },
     "sm-font-size":           { "$value": "{font-size.1}",               "$type": "dimension", "$description": "Cuerpo — sm" },
     "sm-padding-inline":      { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding inline del trigger — variante sm" },
     "sm-item-padding-block":  { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Padding block de cada opción — variante sm" },
@@ -42,6 +43,7 @@
     "surface-dark-content-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del dropdown — surface-dark" },
     "surface-dark-content-border-color":   { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Borde del dropdown — surface-dark" },
     "surface-dark-separator-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Color del separador entre grupos — surface-dark" },
-    "surface-dark-item-highlighted-bg":    { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark" }
+    "surface-dark-item-highlighted-bg":    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Relleno de la opción resaltada — surface-dark: la misma inversión de marca, al revés" },
+    "surface-dark-item-highlighted-color": { "$value": "{color.primary}",        "$type": "color", "$description": "Texto de la opción resaltada — surface-dark" }
   }
 }
