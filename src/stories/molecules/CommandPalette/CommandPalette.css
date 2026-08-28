@@ -64,10 +64,10 @@
 }
 
 /* El foco es virtual (`aria-activedescendant`): el ítem resaltado lo marca
-   Base UI con `data-highlighted`, tanto por teclado como por puntero. */
+   Base UI con `data-highlighted`, tanto por teclado como por puntero, y se
+   rellena — excepción declarada de las listas de opciones (Foundations → Colores). */
 .command-palette__item[data-highlighted] {
-  outline: var(--command-palette-item-focus-ring-width) solid var(--command-palette-item-focus-ring-color);
-  outline-offset: var(--command-palette-item-focus-ring-offset);
+  background-color: var(--command-palette-item-highlighted-bg);
 }
 
 .command-palette__item[data-disabled] {

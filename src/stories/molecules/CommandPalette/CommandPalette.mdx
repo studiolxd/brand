@@ -42,7 +42,7 @@ El filtro compara con `Intl.Collator` en sensibilidad `base`, así que ignora ma
 | `Enter` | Activa el resultado resaltado: cierra la paleta y llama a su `onSelect` |
 | `Esc` | Cierra la paleta (lo lleva el `Modal`) |
 
-El foco **nunca sale del buscador**: la lista se recorre con foco virtual (`aria-activedescendant`), así que se puede seguir escribiendo mientras se navega. El primer resultado va resaltado desde el principio, de modo que escribir y pulsar `Enter` es un camino completo sin tocar las flechas.
+El foco **nunca sale del buscador**: la lista se recorre con foco virtual (`aria-activedescendant`), así que se puede seguir escribiendo mientras se navega. El primer resultado va resaltado desde el principio, de modo que escribir y pulsar `Enter` es un camino completo sin tocar las flechas. El resultado resaltado se marca con un **relleno suave** (`item-highlighted-bg`, el del `Menu`): las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores), porque a esta densidad el relleno es lo único que se sigue de un vistazo mientras el teclado recorre la lista.
 
 <Canvas of={CommandPaletteStories.ConAtajo} />
 
