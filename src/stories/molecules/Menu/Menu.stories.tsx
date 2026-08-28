@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu } from './Menu';
@@ -114,5 +115,43 @@ export const Mixto: Story = {
      
     const [value, setValue] = useState('grid');
     return <Menu {...args} value={value} onValueChange={setValue} />;
+  },
+};
+
+/** Test: el ítem bajo el puntero se rellena — la excepción de las listas de opciones. */
+export const ContratoResaltado: Story = {
+  name: 'Test — el ítem resaltado se rellena',
+  tags: ['!dev'],
+  args: {
+    trigger: <Button variant="outline">Opciones</Button>,
+    items: [
+      { type: 'button', label: 'Duplicar', onClick: () => {} },
+      { type: 'button', label: 'Publicar', onClick: () => {} },
+    ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Opciones' }));
+
+    // El panel va en un portal, fuera del canvas de la story.
+    const body = within(document.body);
+    const duplicar = await body.findByRole('menuitem', { name: 'Duplicar' });
+    const publicar = await body.findByRole('menuitem', { name: 'Publicar' });
+
+    // En reposo no hay relleno.
+    await expect(getComputedStyle(duplicar).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+
+    await userEvent.hover(duplicar);
+    await expect(duplicar).toHaveAttribute('data-highlighted');
+
+    // Bajo el puntero sí: el relleno, y solo en ese ítem.
+    await waitFor(async () => {
+      const resaltado = getComputedStyle(duplicar);
+      await expect(resaltado.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
+      await expect(resaltado.backgroundColor)
+        .not.toBe(getComputedStyle(publicar).backgroundColor);
+      // Y el relleno sustituye al anillo, no lo acompaña.
+      await expect(resaltado.outlineStyle).toBe('none');
+    });
   },
 };
