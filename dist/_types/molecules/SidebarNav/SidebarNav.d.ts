@@ -6,6 +6,11 @@ export interface SidebarNavItem {
     href: string;
     active?: boolean;
     icon?: ReactNode;
+    /**
+     * La entrada existe pero no lleva a ninguna parte todavía: se enseña con su
+     * marca («sin docs») y sin enlace, en vez de esconderla.
+     */
+    empty?: boolean;
 }
 export interface SidebarNavLinkEntry {
     kind: 'link';
@@ -14,6 +19,8 @@ export interface SidebarNavLinkEntry {
     href: string;
     active?: boolean;
     icon?: ReactNode;
+    /** Igual que en `SidebarNavItem`: se enseña marcada y sin enlace. */
+    empty?: boolean;
 }
 export interface SidebarNavGroupEntry {
     kind: 'group';
@@ -36,6 +43,11 @@ export type SidebarNavRenderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorEle
 export interface SidebarNavProps {
     /** Nombre accesible del `nav`. */
     label?: string;
+    /**
+     * Marca de las entradas vacías (`empty`). Por defecto, en castellano:
+     * «sin docs».
+     */
+    emptyLabel?: string;
     /** Solo iconos: los enlaces con tooltip, los grupos como menú. Sin él, lo decide la `Sidebar` (rail). */
     rail?: boolean;
     entries: SidebarNavEntry[];
@@ -44,4 +56,4 @@ export interface SidebarNavProps {
     onValueChange?: (value: string[]) => void;
     renderLink?: (props: SidebarNavRenderLinkProps) => ReactNode;
 }
-export declare function SidebarNav({ label, rail, entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;
+export declare function SidebarNav({ label, emptyLabel, rail, entries, defaultValue, value, onValueChange, renderLink, }: SidebarNavProps): import("react/jsx-runtime").JSX.Element;

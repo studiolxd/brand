@@ -13,18 +13,18 @@ function c({ children: e, ...t }) {
 		children: e
 	});
 }
-function l({ label: l = "Navegación principal", rail: u, entries: d, defaultValue: f, value: p, onValueChange: m, renderLink: h = c }) {
-	let g = p === void 0 ? { defaultValue: f } : {
-		value: p,
-		onValueChange: (e) => m?.(e ?? [])
-	}, _ = r();
-	return u ?? _.rail ? /* @__PURE__ */ o("nav", {
+function l({ label: l = "Navegación principal", emptyLabel: u = "sin docs", rail: d, entries: f, defaultValue: p, value: m, onValueChange: h, renderLink: g = c }) {
+	let _ = m === void 0 ? { defaultValue: p } : {
+		value: m,
+		onValueChange: (e) => h?.(e ?? [])
+	}, v = r();
+	return d ?? v.rail ? /* @__PURE__ */ o("nav", {
 		className: "sidebar-nav sidebar-nav--rail",
 		"aria-label": l,
 		children: /* @__PURE__ */ o("ul", {
 			className: "sidebar-nav__rail",
 			role: "list",
-			children: d.map((e) => {
+			children: f.map((e) => {
 				let r = /* @__PURE__ */ o("span", {
 					className: "sidebar-nav__rail-icon",
 					"aria-hidden": "true",
@@ -33,10 +33,19 @@ function l({ label: l = "Navegación principal", rail: u, entries: d, defaultVal
 						children: e.label.charAt(0)
 					})
 				});
-				if (e.kind === "link") return /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(t, {
+				if (e.kind === "link") return e.empty ? /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(t, {
+					label: `${e.label} — ${u}`,
+					side: "right",
+					children: /* @__PURE__ */ o("span", {
+						className: "sidebar-nav__rail-item sidebar-nav__rail-item--empty",
+						"aria-disabled": "true",
+						"aria-label": `${e.label} — ${u}`,
+						children: r
+					})
+				}) }, e.id) : /* @__PURE__ */ o("li", { children: /* @__PURE__ */ o(t, {
 					label: e.label,
 					side: "right",
-					children: h({
+					children: g({
 						href: e.href,
 						className: ["sidebar-nav__rail-item", e.active ? "sidebar-nav__rail-item--active" : ""].filter(Boolean).join(" "),
 						"aria-current": e.active ? "page" : void 0,
@@ -56,16 +65,19 @@ function l({ label: l = "Navegación principal", rail: u, entries: d, defaultVal
 							label: e.label
 						},
 						...e.href ? [{ type: "separator" }] : [],
-						...e.items.map((e) => ({
+						...e.items.map((e) => e.empty ? {
+							type: "label",
+							label: `${e.label} · ${u}`
+						} : {
 							type: "link",
 							label: e.label,
 							href: e.href
-						}))
+						})
 					],
 					side: "right",
 					align: "start",
 					openOnHover: !0,
-					renderLink: (e) => h({
+					renderLink: (e) => g({
 						...e,
 						href: e.href,
 						className: e.className,
@@ -86,11 +98,30 @@ function l({ label: l = "Navegación principal", rail: u, entries: d, defaultVal
 		children: /* @__PURE__ */ o(i.Root, {
 			className: "sidebar-nav__accordion",
 			multiple: !0,
-			...g,
-			children: d.map((t) => {
+			..._,
+			children: f.map((t) => {
 				if (t.kind === "link") {
 					let e = ["sidebar-nav__top-link", t.active ? "sidebar-nav__top-link--active" : ""].filter(Boolean).join(" ");
-					return /* @__PURE__ */ o("div", { children: h({
+					return t.empty ? /* @__PURE__ */ o("div", { children: /* @__PURE__ */ s("span", {
+						className: `${e} sidebar-nav__top-link--empty`,
+						"aria-disabled": "true",
+						title: t.label,
+						children: [
+							t.icon && /* @__PURE__ */ o("span", {
+								className: "sidebar-nav__item-icon",
+								"aria-hidden": "true",
+								children: t.icon
+							}),
+							/* @__PURE__ */ o("span", {
+								className: "sidebar-nav__item-label",
+								children: t.label
+							}),
+							/* @__PURE__ */ o("span", {
+								className: "sidebar-nav__empty-mark",
+								children: u
+							})
+						]
+					}) }, t.id) : /* @__PURE__ */ o("div", { children: g({
 						href: t.href,
 						className: e,
 						title: t.label,
@@ -110,7 +141,7 @@ function l({ label: l = "Navegación principal", rail: u, entries: d, defaultVal
 					className: "sidebar-nav__group",
 					children: [/* @__PURE__ */ s(i.Header, {
 						className: "sidebar-nav__group-header",
-						children: [t.href ? h({
+						children: [t.href ? g({
 							href: t.href,
 							className: "sidebar-nav__group-label",
 							title: t.label,
@@ -150,7 +181,25 @@ function l({ label: l = "Navegación principal", rail: u, entries: d, defaultVal
 								role: "list",
 								children: t.items.map((e) => {
 									let t = ["sidebar-nav__item", e.active ? "sidebar-nav__item--active" : ""].filter(Boolean).join(" ");
-									return /* @__PURE__ */ o("li", { children: h({
+									return e.empty ? /* @__PURE__ */ o("li", { children: /* @__PURE__ */ s("span", {
+										className: `${t} sidebar-nav__item--empty`,
+										"aria-disabled": "true",
+										children: [
+											e.icon && /* @__PURE__ */ o("span", {
+												className: "sidebar-nav__item-icon",
+												"aria-hidden": "true",
+												children: e.icon
+											}),
+											/* @__PURE__ */ o("span", {
+												className: "sidebar-nav__item-label",
+												children: e.label
+											}),
+											/* @__PURE__ */ o("span", {
+												className: "sidebar-nav__empty-mark",
+												children: u
+											})
+										]
+									}) }, e.id) : /* @__PURE__ */ o("li", { children: g({
 										href: e.href,
 										className: t,
 										"aria-current": e.active ? "page" : void 0,

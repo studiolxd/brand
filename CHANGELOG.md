@@ -7,6 +7,74 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.20.0
+
+Ocho huecos del bloque B, cerrados: siete componentes nuevos y tres ampliaciones.
+
+### Añadido
+
+- **`StarRating`** (átomo, `./star-rating`) — valoración en estrellas, de lectura y de
+  entrada. En lectura es **una sola imagen** cuyo nombre accesible lleva el valor exacto
+  («4,5 de 5 estrellas»), no cinco iconos que contar, y admite **media estrella**. En
+  entrada (`readOnly={false}`) es un grupo de radios nativos, en pasos enteros: la media
+  describe una media calculada, no algo que se elija. Con él llega el **glifo `star`** al
+  catálogo de `Icon`, con la geometría del set (retícula de 24, contorno de trazo 1).
+- **`Toggle`** (átomo, `./toggle`) sobre Base UI Toggle — botón de dos estados. Es un
+  valor que se conmuta, no una acción: queda relleno mientras está pulsado, y el hover
+  marca el borde sin rellenar, para que «señalado» y «elegido» no se lean igual.
+- **`ToggleGroup`** (átomo, `./toggle-group`) sobre Base UI Toggle Group — conmutación
+  **exclusiva** por defecto o `multiple`, una sola parada de tabulación y recorrido con
+  flechas. Reparte la talla a sus botones. El valor viaja siempre como lista, también en
+  exclusivo. Sustituye al apaño de `Fieldset` + botones con `aria-pressed` a mano.
+- **`Collapsible`** (átomo, `./collapsible`) sobre Base UI Collapsible — una sección que
+  se pliega, con `Collapsible` / `CollapsibleTrigger` / `CollapsibleContent`. Para varias
+  coordinadas sigue estando `Accordion`.
+- **`ScrollArea`** (átomo, `./scroll-area`) sobre Base UI Scroll Area — recuadro con
+  desplazamiento propio y barra del sistema. `label` da nombre a la región, que es lo que
+  evita el fallo de «región desplazable sin nombre»; el alto lo pone quien lo usa.
+- **`Slider`** (átomo, `./slider`) sobre Base UI Slider — un valor o un rango. Devuelve
+  **la misma forma que recibe** (número o lista), separa `onValueChange` (mientras se
+  arrastra) de `onValueCommitted` (al soltar) y nombra cada pulgar.
+- **`TreeView`** (molécula, `./tree-view`) — árbol con sangría, ramas que se abren, nodo
+  elegido y el patrón WAI-ARIA de *tree view* completo: `role="tree"` con niveles, una
+  sola parada de tabulación y recorrido con flechas, `Inicio`/`Fin` e `Intro`. Base UI no
+  trae árbol: es la excepción declarada al motor único. Selección por tinta y peso, hover
+  por línea; ninguna fila se rellena.
+- **`AnnotationThread`** (organismo, `./annotation-thread`) — hilo de anotaciones con
+  **estado** (abierta/resuelta), autor, fecha en `<time datetime>` legible por máquina,
+  acciones por anotación y por hilo, y ranura de respuesta. No es `ConversationThread`
+  (usuario ↔ asistente): recoge el patrón que localizia y bricks montaban a mano con
+  `Card` + `Tag`.
+- **`Text`** (átomo, `./text`) — fragmento **en línea** con `lang` (y `dir`) para texto en
+  otro idioma, y `tone` para énfasis con intención (`destructive`, `success`, `muted`).
+  El tono es tinta de feedback sobre la superficie, **nunca un relleno**; `as` elige
+  significado (`span` / `em` / `strong`), no pinta.
+- **`Chart` › cinco formas nuevas**: `funnel`, `treemap`, `radial-bar`, `scatter` y
+  `radar`. Las tres primeras comparten el contrato de porción de `pie`/`donut` —categoría
+  por fila, primera serie como valor— y su tabla equivalente con valor y porcentaje;
+  `scatter` estrena **eje X numérico** y `radar` su telaraña. Todo sigue siendo SVG a
+  pelo, sin librería.
+- **`Chart` › color por dato** (`colors`): paleta por posición en colores literales, para
+  cuando el color **es dato** —el que eligió el autor de un contenido desde la paleta de
+  su tema— y no diseño. Prioridad: `series[i].color` › `colors[i]` › ranura de token. La
+  interfaz del sistema sigue usando las ranuras.
+- **`SidebarNav` › entradas vacías** (`empty` en una entrada, `emptyLabel` en el
+  componente): la sección que existe pero aún no lleva a ninguna parte se enseña con su
+  marca «sin docs» en vez de esconderse. No se pinta como enlace —`<span>` con
+  `aria-disabled`, sin `href`— y la razón va en texto, no solo en el color.
+
+### Notas
+
+- Tokens nuevos por Style Dictionary para cada componente, con sus pares `surface-dark-*`
+  por la regla de derivación. `Chart` suma `funnel-gap`, `treemap-gap`, `radial-bar-gap`,
+  `radial-track-color`, `dot-size`, `radar-fill-opacity` y `tile-label-color`.
+- La tabla de props de texto de **Foundations → Internacionalización** recoge los
+  componentes nuevos.
+- **Decisión pendiente, fuera de alcance**: los editores de tema de bricks-editor (muestra
+  y editor de color, degradado y tipografía, editor de espaciado, previsualización por
+  opción en `Select`, zona de subida en línea del canvas) siguen sin decidirse como DS o
+  producto. No entran aquí.
+
 ## v25.18.0
 
 El isotipo de la marca sale del logotipo y se publica como activo: las apps ya pueden

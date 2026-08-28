@@ -1,16 +1,22 @@
 import { type ReactNode } from 'react';
 import './Chart.css';
-export type ChartType = 'line' | 'area' | 'bar' | 'pie' | 'donut';
+export type ChartType = 'line' | 'area' | 'bar' | 'scatter' | 'pie' | 'donut' | 'funnel' | 'treemap' | 'radial-bar' | 'radar';
 export interface ChartSeries {
     /** Clave del valor dentro de cada fila de `data`. */
     key: string;
     /** Nombre que se lee en la leyenda, el bocadillo y la tabla. */
     label: string;
     /**
-     * Color de la serie. **Solo una referencia a token**: `'var(--chart-series-3)'`
-     * o una custom property del producto. Nunca un color literal — el sistema no
-     * tiene colores cableados. Sin este dato, la serie toma la ranura que le
-     * corresponde por orden (`--chart-series-1`…`8`).
+     * Color de la serie. Lo normal es una **referencia a token**
+     * (`'var(--chart-series-3)'` o una custom property del producto): la interfaz
+     * del sistema no tiene colores cableados.
+     *
+     * Admite además un **color literal** cuando el color es *dato*, no diseño: lo
+     * que el autor de un contenido eligió desde la paleta de su tema. Ver
+     * `colors` y la sección «Color por dato» de la documentación.
+     *
+     * Sin este dato, la serie toma la ranura que le corresponde por orden
+     * (`--chart-series-1`…`8`).
      */
     color?: string;
 }
@@ -28,8 +34,19 @@ export interface ChartProps extends Omit<React.ComponentPropsWithoutRef<'figure'
      * que quedan. A partir de la novena, la serie se pinta con el gris de «Otros».
      */
     series: ChartSeries[];
-    /** Clave de la posición X (o de la categoría, en `pie`/`donut`). */
+    /** Clave de la posición X (o de la categoría, en los gráficos de porción). */
     xKey: string;
+    /**
+     * **Color por dato**: paleta por posición, en colores literales. La entrada
+     * `colors[i]` pinta la serie `i` —o, en los gráficos de porción, la categoría
+     * `i`—, por encima de la ranura de token que le tocaría por orden y por
+     * debajo del `color` propio de la serie.
+     *
+     * Es la vía para el caso en que el color **es dato**: el que eligió el autor
+     * de un contenido desde la paleta de su tema. Para la interfaz del sistema,
+     * las ranuras de token siguen siendo lo correcto.
+     */
+    colors?: string[];
     /** Barras verticales (columnas) u horizontales. Horizontal para categorías con nombre largo. */
     orientation?: 'vertical' | 'horizontal';
     /** Apila las series en vez de agruparlas. Solo `bar` y `area`. */
