@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactElement, type ReactNode } from 'react';
-import { Autocomplete } from '@base-ui-components/react/autocomplete';
+import { Autocomplete } from '@base-ui/react/autocomplete';
 import { InputField } from '../InputField/InputField';
 import { Spinner } from '../../atoms/Spinner/Spinner';
 import './DocsSearch.css';

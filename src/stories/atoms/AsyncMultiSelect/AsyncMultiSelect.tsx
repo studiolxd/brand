@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, useState, useRef, useId, useCallback, type Ref } from 'react';
-import { Popover as BasePopover } from '@base-ui-components/react/popover';
+import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
 import './AsyncMultiSelect.css';

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { useRender } from '@base-ui-components/react/use-render';
+import { useRender } from '@base-ui/react/use-render';
 import { Icon, type IconName } from '../Icon/Icon';
 import './Link.css';
 

@@ -1,4 +1,4 @@
-import { Dialog } from '@base-ui-components/react/dialog';
+import { Dialog } from '@base-ui/react/dialog';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';

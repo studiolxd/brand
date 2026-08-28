@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { useRender } from '@base-ui-components/react/use-render';
+import { useRender } from '@base-ui/react/use-render';
 import './Card.css';
 import { Arrow } from '../../atoms/Arrow/Arrow';
 import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';

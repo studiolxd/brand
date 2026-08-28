@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactNode } from 'react';
-import { Collapsible as BaseCollapsible } from '@base-ui-components/react/collapsible';
+import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible';
 import { Icon } from '../Icon/Icon';
 import './Collapsible.css';
 

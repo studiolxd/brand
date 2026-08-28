@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, useMemo, type ReactNode } from 'react';
-import { ToggleGroup as BaseToggleGroup } from '@base-ui-components/react/toggle-group';
+import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group';
 import { ToggleGroupContext } from './ToggleGroupContext';
 import './ToggleGroup.css';
 

@@ -12,8 +12,8 @@ import {
   useMemo,
 } from 'react';
 import type { ReactNode } from 'react';
-import { Select as BaseSelect } from '@base-ui-components/react/select';
-import type { SeparatorProps as BaseSeparatorProps } from '@base-ui-components/react/separator';
+import { Select as BaseSelect } from '@base-ui/react/select';
+import type { SeparatorProps as BaseSeparatorProps } from '@base-ui/react/separator';
 import { Icon } from '../Icon/Icon';
 import './Select.css';
 

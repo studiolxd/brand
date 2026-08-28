@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useRender } from '@base-ui-components/react/use-render';
+import { useRender } from '@base-ui/react/use-render';
 import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag, type TagVariant } from '../../atoms/Tag/Tag';

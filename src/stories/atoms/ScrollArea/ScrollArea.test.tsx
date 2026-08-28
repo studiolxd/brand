@@ -19,11 +19,13 @@ describe('ScrollArea', () => {
     expect(container.querySelectorAll('.scroll-area__scrollbar')).toHaveLength(1);
   });
 
-  it('both monta las dos barras y la esquina', () => {
+  it('both monta las dos barras', () => {
     const { container } = render(<ScrollArea orientation="both">contenido</ScrollArea>);
     expect(container.querySelectorAll('.scroll-area__scrollbar')).toHaveLength(2);
-    expect(container.querySelector('.scroll-area__corner')).not.toBeNull();
   });
+
+  // La esquina de Base UI solo se monta con overlape real medido (ResizeObserver
+  // de verdad), que jsdom no ofrece — no verificable aquí, sí en Storybook/navegador.
 
   it('className se añade a las clases propias', () => {
     const { container } = render(<ScrollArea className="panel">contenido</ScrollArea>);

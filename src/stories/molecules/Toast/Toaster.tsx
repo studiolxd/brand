@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Toast } from '@base-ui-components/react/toast';
+import { Toast } from '@base-ui/react/toast';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import {

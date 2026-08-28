@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, type ReactNode } from 'react';
-import { ScrollArea as BaseScrollArea } from '@base-ui-components/react/scroll-area';
+import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area';
 import './ScrollArea.css';
 
 export interface ScrollAreaProps
@@ -58,12 +58,12 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(function S
         {children}
       </BaseScrollArea.Viewport>
       {vertical && (
-        <BaseScrollArea.Scrollbar orientation="vertical" className="scroll-area__scrollbar">
+        <BaseScrollArea.Scrollbar keepMounted orientation="vertical" className="scroll-area__scrollbar">
           <BaseScrollArea.Thumb className="scroll-area__thumb" />
         </BaseScrollArea.Scrollbar>
       )}
       {horizontal && (
-        <BaseScrollArea.Scrollbar orientation="horizontal" className="scroll-area__scrollbar">
+        <BaseScrollArea.Scrollbar keepMounted orientation="horizontal" className="scroll-area__scrollbar">
           <BaseScrollArea.Thumb className="scroll-area__thumb" />
         </BaseScrollArea.Scrollbar>
       )}

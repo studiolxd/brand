@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { Toast } from '@base-ui-components/react/toast';
+import { Toast } from '@base-ui/react/toast';
 
 /**
  * Intención del aviso. Es la misma escala que la variante del `Alert`, más los

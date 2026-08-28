@@ -1,7 +1,7 @@
 import type React from 'react';
 import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useRender } from '@base-ui-components/react/use-render';
+import { useRender } from '@base-ui/react/use-render';
 import { expect, userEvent, within } from 'storybook/test';
 import { Input } from './Input';
 import { Container } from '../Container/Container';

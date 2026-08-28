@@ -2,7 +2,7 @@
 
 import { forwardRef, useId, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Tooltip as BaseTooltip } from '@base-ui-components/react/tooltip';
+import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip';
 import './Tooltip.css';
 
 export interface TooltipProviderProps {

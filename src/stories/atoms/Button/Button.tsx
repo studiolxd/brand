@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { useFormSize } from '../../constants/form-size';
-import { useRender } from '@base-ui-components/react/use-render';
+import { useRender } from '@base-ui/react/use-render';
 import './Button.css';
 
 export interface ButtonProps

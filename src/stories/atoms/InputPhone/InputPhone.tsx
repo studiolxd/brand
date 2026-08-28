@@ -1,5 +1,5 @@
 import { forwardRef, useMemo, type Ref } from 'react';
-import { Select as BaseSelect } from '@base-ui-components/react/select';
+import { Select as BaseSelect } from '@base-ui/react/select';
 import { getCountryCallingCode } from 'libphonenumber-js';
 import PhoneInputLib from 'react-phone-number-input';
 import type { Country } from 'react-phone-number-input';

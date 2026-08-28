@@ -27,8 +27,8 @@ export default defineConfig({
         'sonner',
         // El motor de conducta: externo. Empaquetado arrastra un shim CJS de
         // `require` (Turbopack lo rechaza en dev) y duplicaría su contexto.
-        '@base-ui-components/react',
-        /^@base-ui-components\/react\//,
+        '@base-ui/react',
+        /^@base-ui\/react\//,
       ],
       output: {
         entryFileNames: '[name].js',

@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, type ReactNode } from 'react';
-import { Autocomplete } from '@base-ui-components/react/autocomplete';
+import { Autocomplete } from '@base-ui/react/autocomplete';
 import { Modal } from '../Modal/Modal';
 import './CommandPalette.css';
 

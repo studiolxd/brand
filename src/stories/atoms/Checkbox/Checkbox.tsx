@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Checkbox as BaseCheckbox } from '@base-ui-components/react/checkbox';
+import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox';
 import './Checkbox.css';
 
 type BaseCheckboxRootProps = Omit<

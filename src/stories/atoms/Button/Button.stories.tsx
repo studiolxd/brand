@@ -1,6 +1,6 @@
 import type React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useRender } from '@base-ui-components/react/use-render';
+import { useRender } from '@base-ui/react/use-render';
 import { expect, userEvent, within, fn } from 'storybook/test';
 import { Button } from './Button';
 import { Icon } from '../Icon/Icon';

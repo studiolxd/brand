@@ -100,7 +100,7 @@ describe('Accordion', () => {
       </Accordion>,
     );
     const trigger = screen.getByRole('button', { name: 'Primero' });
-    expect(trigger).toBeDisabled();
+    expect(trigger).toHaveAttribute('aria-disabled', 'true');
     await user.click(trigger);
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });

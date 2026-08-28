@@ -1,4 +1,4 @@
-import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion';
+import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
 import { Children, type ReactNode } from 'react';
 import { AccordionNumberingContext, useAccordionNumbering } from './AccordionContext';
 import { Icon } from '../Icon/Icon';
