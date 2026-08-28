@@ -7,6 +7,54 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.9.0
+
+Fase 0.4: las piezas de marketing que le faltaban al sistema para levantar
+studiolxd.com y la web de la suite sin CSS de proyecto. Todas reconstruidas
+sobre las reglas de hoy —formas rectas, tokens, estados sin relleno— y ninguna
+restaurada tal cual estaba en `v22.5.1`.
+
+### Añadido
+
+- **`Carousel`** (molécula, con `CarouselSlide`) — pista de scroll nativo con
+  `scroll-snap`: arrastrar, deslizar y las flechas del teclado son del
+  navegador. Añade botones prev/next (`Button ghost` + `Icon`), indicadores de
+  posición y `autoplay` opcional, que se para con el puntero o el foco dentro y
+  no arranca con `prefers-reduced-motion`. **Sin `embla-carousel`**: la versión
+  anterior traía esa librería y aquí no hay ninguna. Cubre los tres casos de la
+  web: logotipos de clientes en marcha, proyectos en tarjetas y reseñas.
+- **`Steps`** (organismo) — proceso numerado a partir de
+  `items: {title, description?, icon?}[]`, en vertical u horizontal. Es un `ol`
+  de verdad: el orden lo anuncia el elemento, y el `NumberBadge` que se ve va
+  marcado como decorativo para no repetir la posición en voz alta.
+- **`SiteFooter`** (sección) — pie corporativo multicolumna: marca con su
+  frase, columnas de enlaces por `renderLink`, slot libre para el contacto o la
+  newsletter y `LegalFooter` anidado debajo, separado por la línea del sistema.
+  Superficie oscura por defecto.
+- **`ProjectCard`** (molécula) — tarjeta de proyecto con imagen, etiquetas
+  (`Tag`), título y descripción. Es un `<article>` con **un solo** enlace, el
+  título, cuya área pulsable se estira sobre la tarjeta: se pulsa donde sea,
+  el teclado se para una vez y el lector de pantalla anuncia el nombre del
+  proyecto. Acepta `render` para el enlace del router, como `Card` y `Button`.
+- **`Highlight`** (sección) — banda destacada con titular, texto, acciones
+  (`Inline`) y slot de media, repartido con `Columns`. Superficie oscura por
+  defecto.
+- **`Card`: props `variant` (`default` | `square` | `split`) y `media`** — las
+  dos tarjetas de marketing que antes eran `CardSquare` y `CardSplit` son ahora
+  una maqueta de `Card`. Su contrato ya era idéntico al de la link-card
+  (enlace, título, descripción, CTA accesible, color); lo único distinto era
+  dónde va la imagen. Ninguna de las dos esconde ya la descripción hasta el
+  *hover*: el texto que explica la tarjeta se lee siempre, también con el dedo.
+
+### Notas
+
+- Los indicadores del `Carousel` son barras de tinta, no puntos rellenos de
+  marca: la posición dentro de una pista es un estado, y los estados no se
+  rellenan (Foundations → Colores).
+- Ninguna de las piezas nuevas define color de fondo propio: `SiteFooter`,
+  `Highlight` y `ProjectCard` lo dejan en manos de la superficie, así que
+  cambiar `surface` los voltea enteros.
+
 ## v25.8.0
 
 Fase 0 de la revisión: las dos reglas transversales que faltaban —cómo se dicen
