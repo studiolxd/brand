@@ -1,33 +1,82 @@
-/* El campo y el botón van en una sola línea. Con la etiqueta a la vista, el
-   campo crece hacia arriba: `flex-end` mantiene el botón a la altura del
-   input, nunca a la de la etiqueta. */
+/* El campo y la flecha son un solo control: el botón de envío no es una caja
+   aparte pegada al campo, sino un adorno clicable dentro de su borde, al
+   final. Con la etiqueta a la vista el campo crece hacia arriba: `flex-end`
+   mantiene la flecha a la altura del input, nunca a la de la etiqueta. */
 .search-form {
   display: flex;
   align-items: flex-end;
   inline-size: var(--search-form-inline-size);
 }
 
+/* Tallas — el hueco de la flecha es cuadrado a la talla del campo, y el glifo
+   acompaña. El padding se remapea aparte: el token referencia el hueco desde
+   `:root`, donde ya quedó resuelto a la talla md — un `var()` dentro de una
+   custom property se sustituye en el elemento que la declara. */
+.search-form.search-form--sm {
+  --search-form-submit-slot-size: var(--search-form-submit-sm-slot-size);
+  --search-form-submit-icon-size: var(--search-form-submit-sm-icon-size);
+  --search-form-submit-input-padding-inline-end: var(--search-form-submit-sm-slot-size);
+}
+
+.search-form.search-form--lg {
+  --search-form-submit-slot-size: var(--search-form-submit-lg-slot-size);
+  --search-form-submit-icon-size: var(--search-form-submit-lg-icon-size);
+  --search-form-submit-input-padding-inline-end: var(--search-form-submit-lg-slot-size);
+}
+
 /* El campo se queda con el espacio libre. `min-inline-size: 0` es lo que
    permite que un ítem flex encoja por debajo del ancho de su contenido: sin
-   él, un placeholder largo empujaría el botón fuera del panel. */
+   él, un placeholder largo empujaría la flecha fuera del panel. */
 .search-form__field {
   flex: 1 1 auto;
   min-inline-size: 0;
 }
 
-/* El botón se pega al campo solapando un borde: las dos líneas se funden en
-   una. El píxel común lo pinta el botón, posterior en el DOM, y los dos
-   bordes son del mismo color —`color.text.on-light`, y su par blanco en
-   superficie oscura—, así que la costura no se ve en ninguna de las dos. */
+/* El aire de la derecha lo reserva siempre el campo, haya texto o no: el
+   texto termina donde empieza la flecha y nunca pasa por debajo. */
+.search-form__field .input {
+  padding-inline-end: var(--search-form-submit-input-padding-inline-end);
+}
+
+/* La flecha, dentro del borde del campo: el margen negativo la mete en el
+   hueco que el padding acaba de reservar. Sin caja, sin borde y sin fondo —ni
+   en reposo ni en hover, que es la regla del sistema—: solo el glifo. */
 .search-form__submit {
   flex: 0 0 auto;
-  margin-inline-start: calc(-1 * var(--search-form-seam-width));
-  /* El botón outline es transparente por defecto; aquí toma el fondo del
-     campo para que los dos se lean como una sola pieza sobre cualquier
-     superficie, no solo sobre el lienzo. */
-  --button-outline-bg: var(--search-form-submit-bg);
+  margin-inline-start: calc(-1 * var(--search-form-submit-slot-size));
+  inline-size: var(--search-form-submit-slot-size);
+  block-size: var(--search-form-submit-slot-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding-block: 0;
+  padding-inline: 0;
+  cursor: pointer;
+  color: var(--search-form-submit-color);
+  transition: color var(--input-transition-duration) var(--input-transition-easing);
+}
+
+/* Hover: sin fondo y sin atenuar la tinta. */
+.search-form__submit:hover {
+  color: var(--search-form-submit-hover-color);
+}
+
+/* El foco sí se ve: un anillo recto dentro del campo. Es lo único que lo
+   marca, porque el adorno no tiene fondo que oscurecer. El offset de un borde
+   lo deja justo por dentro de la línea del campo, sin pisarla. */
+.search-form__submit:focus-visible {
+  outline: var(--search-form-submit-focus-ring-width) solid var(--search-form-submit-focus-ring-color);
+  outline-offset: calc(-1 * var(--input-border-width));
 }
 
 .search-form__submit:disabled {
-  --button-outline-bg: var(--search-form-submit-disabled-bg);
+  color: var(--search-form-submit-disabled-color);
+  cursor: var(--input-disabled-cursor);
+}
+
+.search-form__submit-glyph {
+  inline-size: var(--search-form-submit-icon-size);
+  block-size: var(--search-form-submit-icon-size);
 }

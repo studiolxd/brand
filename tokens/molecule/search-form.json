@@ -1,12 +1,29 @@
 {
   "search-form": {
-    "inline-size": { "$value": "{input.width}",        "$type": "string",    "$description": "Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él" },
-    "seam-width":  { "$value": "{input.border-width}", "$type": "dimension", "$description": "Solape entre el campo y el botón de envío: exactamente un borde, para que las dos líneas se fundan en una sola y el conjunto se lea como un solo control" },
+    "inline-size": { "$value": "{input.width}", "$type": "string", "$description": "Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él" },
 
-    "submit-bg":          { "$value": "{input.bg}",          "$type": "color", "$description": "Fondo del botón de envío: el del campo, no el transparente del botón outline. Así el conjunto se lee como un solo control también sobre una superficie que no sea el lienzo" },
-    "submit-disabled-bg": { "$value": "{input.disabled-bg}", "$type": "color", "$description": "Fondo del botón de envío deshabilitado — el del campo deshabilitado" },
+    "submit": {
+      "slot-size":    { "$value": "{size-component.md}", "$type": "dimension", "$description": "Lado del hueco que ocupa la flecha dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control" },
+      "sm-slot-size": { "$value": "{size-component.sm}", "$type": "dimension", "$description": "Lado del hueco de la flecha — sm" },
+      "lg-slot-size": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Lado del hueco de la flecha — lg" },
 
-    "surface-dark-submit-bg":          { "$value": "{input.surface-dark-bg}",          "$type": "color", "$description": "Fondo del botón de envío — surface-dark" },
-    "surface-dark-submit-disabled-bg": { "$value": "{input.surface-dark-disabled-bg}", "$type": "color", "$description": "Fondo del botón de envío deshabilitado — surface-dark" }
+      "icon-size":    { "$value": "{font-size.3}",  "$type": "dimension", "$description": "Tamaño del glifo de la flecha — md (20px, acorde al campo de 40). El mismo peldaño que la lupa y el aspa de InputField" },
+      "sm-icon-size": { "$value": "{icon.size-sm}", "$type": "dimension", "$description": "Tamaño del glifo — sm (16px)" },
+      "lg-icon-size": { "$value": "{icon.size-md}", "$type": "dimension", "$description": "Tamaño del glifo — lg (24px)" },
+
+      "color":          { "$value": "{color.primary}",       "$type": "color", "$description": "Color de la flecha: la tinta del campo, prusia sobre claro" },
+      "hover-color":    { "$value": "{color.primary}",       "$type": "color", "$description": "Color de la flecha en hover: la misma tinta. El adorno no pinta fondo al pasar el puntero —la regla del sistema— y la tinta no se atenúa" },
+      "disabled-color": { "$value": "{input.disabled-color}", "$type": "color", "$description": "Color de la flecha con el campo deshabilitado: el del texto del campo deshabilitado" },
+
+      "focus-ring-width": { "$value": "{control.focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo" },
+      "focus-ring-color": { "$value": "{input.focus-border-color}",  "$type": "color",     "$description": "Color del anillo de foco de la flecha: el del borde del campo en foco" },
+
+      "input-padding-inline-end": { "$value": "{search-form.submit.slot-size}", "$type": "dimension", "$description": "Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde" },
+
+      "surface-dark-color":            { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la flecha — surface-dark (blanco)" },
+      "surface-dark-hover-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la flecha en hover — surface-dark" },
+      "surface-dark-disabled-color":   { "$value": "{input.surface-dark-disabled-color}", "$type": "color", "$description": "Color de la flecha deshabilitada — surface-dark" },
+      "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco de la flecha — surface-dark" }
+    }
   }
 }

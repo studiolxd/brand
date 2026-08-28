@@ -2,6 +2,15 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-search-form-inline-size: 100%; // Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él
-$lxd-search-form-seam-width: 1px; // Solape entre el campo y el botón de envío: exactamente un borde, para que las dos líneas se fundan en una sola y el conjunto se lea como un solo control
-$lxd-search-form-submit-bg: #ffffff; // Fondo del botón de envío: el del campo, no el transparente del botón outline. Así el conjunto se lee como un solo control también sobre una superficie que no sea el lienzo
-$lxd-search-form-submit-disabled-bg: #f2f2f2; // Fondo del botón de envío deshabilitado — el del campo deshabilitado
+$lxd-search-form-submit-slot-size: 2.5rem; // Lado del hueco que ocupa la flecha dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control
+$lxd-search-form-submit-sm-slot-size: 2rem; // Lado del hueco de la flecha — sm
+$lxd-search-form-submit-lg-slot-size: 3rem; // Lado del hueco de la flecha — lg
+$lxd-search-form-submit-icon-size: 1.25rem; // Tamaño del glifo de la flecha — md (20px, acorde al campo de 40). El mismo peldaño que la lupa y el aspa de InputField
+$lxd-search-form-submit-sm-icon-size: 16px; // Tamaño del glifo — sm (16px)
+$lxd-search-form-submit-lg-icon-size: 24px; // Tamaño del glifo — lg (24px)
+$lxd-search-form-submit-color: #111e30; // Color de la flecha: la tinta del campo, prusia sobre claro
+$lxd-search-form-submit-hover-color: #111e30; // Color de la flecha en hover: la misma tinta. El adorno no pinta fondo al pasar el puntero —la regla del sistema— y la tinta no se atenúa
+$lxd-search-form-submit-disabled-color: #4a4a4a; // Color de la flecha con el campo deshabilitado: el del texto del campo deshabilitado
+$lxd-search-form-submit-focus-ring-width: 2px; // Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo
+$lxd-search-form-submit-focus-ring-color: #111e30; // Color del anillo de foco de la flecha: el del borde del campo en foco
+$lxd-search-form-submit-input-padding-inline-end: 2.5rem; // Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde

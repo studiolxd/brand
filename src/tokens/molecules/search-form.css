@@ -4,14 +4,25 @@
 
 :root {
   --search-form-inline-size: var(--input-width); /** Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él */
-  --search-form-submit-bg: var(--input-bg); /** Fondo del botón de envío: el del campo, no el transparente del botón outline. Así el conjunto se lee como un solo control también sobre una superficie que no sea el lienzo */
-  --search-form-submit-disabled-bg: var(--input-disabled-bg); /** Fondo del botón de envío deshabilitado — el del campo deshabilitado */
-  --search-form-seam-width: var(--input-border-width); /** Solape entre el campo y el botón de envío: exactamente un borde, para que las dos líneas se fundan en una sola y el conjunto se lea como un solo control */
+  --search-form-submit-slot-size: var(--size-component-md); /** Lado del hueco que ocupa la flecha dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control */
+  --search-form-submit-sm-slot-size: var(--size-component-sm); /** Lado del hueco de la flecha — sm */
+  --search-form-submit-lg-slot-size: var(--size-component-lg); /** Lado del hueco de la flecha — lg */
+  --search-form-submit-icon-size: var(--font-size-3); /** Tamaño del glifo de la flecha — md (20px, acorde al campo de 40). El mismo peldaño que la lupa y el aspa de InputField */
+  --search-form-submit-sm-icon-size: var(--icon-size-sm); /** Tamaño del glifo — sm (16px) */
+  --search-form-submit-lg-icon-size: var(--icon-size-md); /** Tamaño del glifo — lg (24px) */
+  --search-form-submit-color: var(--color-primary); /** Color de la flecha: la tinta del campo, prusia sobre claro */
+  --search-form-submit-hover-color: var(--color-primary); /** Color de la flecha en hover: la misma tinta. El adorno no pinta fondo al pasar el puntero —la regla del sistema— y la tinta no se atenúa */
+  --search-form-submit-disabled-color: var(--input-disabled-color); /** Color de la flecha con el campo deshabilitado: el del texto del campo deshabilitado */
+  --search-form-submit-input-padding-inline-end: var(--search-form-submit-slot-size); /** Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde */
+  --search-form-submit-focus-ring-width: var(--control-focus-ring-width); /** Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo */
+  --search-form-submit-focus-ring-color: var(--input-focus-border-color); /** Color del anillo de foco de la flecha: el del borde del campo en foco */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --search-form-submit-disabled-bg: var(--input-disabled-bg); /** Fondo del botón de envío deshabilitado — surface-dark */
-  --search-form-submit-bg: var(--input-bg); /** Fondo del botón de envío — surface-dark */
+  --search-form-submit-color: var(--color-text-on-dark); /** Color de la flecha — surface-dark (blanco) */
+  --search-form-submit-hover-color: var(--color-text-on-dark); /** Color de la flecha en hover — surface-dark */
+  --search-form-submit-disabled-color: var(--input-disabled-color); /** Color de la flecha deshabilitada — surface-dark */
+  --search-form-submit-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco de la flecha — surface-dark */
 }
