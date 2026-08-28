@@ -111,10 +111,12 @@
   outline: none;
 }
 
-/* El ítem resaltado se rellena: excepción declarada de las listas de opciones
-   desplegables (Foundations → Colores). */
+/* El ítem resaltado se rellena con la inversión de marca: excepción declarada
+   de las listas de opciones desplegables (Foundations → Colores). El texto
+   invierte con el relleno; los iconos lo heredan por `currentColor`. */
 .org-switcher__item[data-highlighted] {
   background-color: var(--org-switcher-item-highlighted-bg);
+  color: var(--org-switcher-item-highlighted-color);
 }
 
 .org-switcher__item--active,
@@ -133,6 +135,11 @@
 /* ─── Ítem destructivo ───────────────────────────────────── */
 .org-switcher__item.org-switcher__item--destructive {
   color: var(--org-switcher-item-destructive-color);
+}
+
+.org-switcher__item.org-switcher__item--destructive[data-highlighted] {
+  background-color: var(--org-switcher-item-destructive-highlighted-bg);
+  color: var(--org-switcher-item-destructive-highlighted-color);
 }
 
 /* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */

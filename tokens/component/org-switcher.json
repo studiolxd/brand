@@ -25,8 +25,11 @@
     "item-font-size":         { "$value": "{font-size.2}",                 "$type": "dimension", "$description": "Tamaño de texto de ítems" },
     "item-font-weight":       { "$value": "{font-weight.default}",         "$type": "number",    "$description": "Peso de ítems" },
     "item-color":             { "$value": "{color.text.on-light}",         "$type": "color",     "$description": "Color de ítems" },
-    "item-highlighted-bg":    { "$value": "{menu.item-highlighted-bg}",    "$type": "color",     "$description": "Relleno del ítem resaltado — el del Menu" },
+    "item-highlighted-bg":    { "$value": "{menu.item-highlighted-bg}",    "$type": "color",     "$description": "Relleno del ítem resaltado — el del Menu: la inversión de marca" },
+    "item-highlighted-color": { "$value": "{menu.item-highlighted-color}", "$type": "color",     "$description": "Texto del ítem resaltado — el del Menu" },
     "item-destructive-color": { "$value": "{menu.item-destructive-color}", "$type": "color",     "$description": "Color de ítem destructivo — el del Menu" },
+    "item-destructive-highlighted-bg":    { "$value": "{menu.item-destructive-highlighted-bg}",    "$type": "color", "$description": "Relleno del ítem destructivo resaltado — el del Menu" },
+    "item-destructive-highlighted-color": { "$value": "{menu.item-destructive-highlighted-color}", "$type": "color", "$description": "Texto del ítem destructivo resaltado — el del Menu" },
     "separator-color":        { "$value": "{separator.color}",            "$type": "color",     "$description": "Color del separador — el de la línea del sistema" },
     "separator-height":       { "$value": "{separator.thickness}",             "$type": "dimension", "$description": "Alto del separador — el grosor de la línea del sistema" },
     "separator-margin-block": { "$value": "{separator.spacing-md}",                   "$type": "dimension", "$description": "Margen vertical del separador — el aire md de la línea del sistema" },
@@ -36,7 +39,10 @@
     "surface-dark-name-color":        { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del nombre de la org — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro." },
     "surface-dark-item-color":        { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color de ítems — surface-dark" },
     "surface-dark-item-highlighted-bg":    { "$value": "{menu.surface-dark-item-highlighted-bg}",    "$type": "color", "$description": "Relleno del ítem resaltado — surface-dark" },
+    "surface-dark-item-highlighted-color": { "$value": "{menu.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Texto del ítem resaltado — surface-dark" },
     "surface-dark-item-destructive-color": { "$value": "{menu.surface-dark-item-destructive-color}", "$type": "color", "$description": "Color de ítem destructivo — surface-dark" },
+    "surface-dark-item-destructive-highlighted-bg":    { "$value": "{menu.surface-dark-item-destructive-highlighted-bg}",    "$type": "color", "$description": "Relleno del ítem destructivo resaltado — surface-dark" },
+    "surface-dark-item-destructive-highlighted-color": { "$value": "{menu.surface-dark-item-destructive-highlighted-color}", "$type": "color", "$description": "Texto del ítem destructivo resaltado — surface-dark" },
     "surface-dark-separator-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del separador — surface-dark" }
   }
 }

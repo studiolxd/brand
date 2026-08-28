@@ -31,8 +31,11 @@
   --org-switcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --org-switcher-content-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --org-switcher-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
-  --org-switcher-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu */
+  --org-switcher-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu: la inversión de marca */
+  --org-switcher-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — el del Menu */
   --org-switcher-item-destructive-color: var(--menu-item-destructive-color); /** Color de ítem destructivo — el del Menu */
+  --org-switcher-item-destructive-highlighted-bg: var(--menu-item-destructive-highlighted-bg); /** Relleno del ítem destructivo resaltado — el del Menu */
+  --org-switcher-item-destructive-highlighted-color: var(--menu-item-destructive-highlighted-color); /** Texto del ítem destructivo resaltado — el del Menu */
   --org-switcher-separator-color: var(--separator-color); /** Color del separador — el de la línea del sistema */
   --org-switcher-separator-height: var(--separator-thickness); /** Alto del separador — el grosor de la línea del sistema */
 }
@@ -45,5 +48,8 @@ html.dark {
   --org-switcher-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
   --org-switcher-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
   --org-switcher-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — surface-dark */
+  --org-switcher-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — surface-dark */
   --org-switcher-item-destructive-color: var(--menu-item-destructive-color); /** Color de ítem destructivo — surface-dark */
+  --org-switcher-item-destructive-highlighted-bg: var(--menu-item-destructive-highlighted-bg); /** Relleno del ítem destructivo resaltado — surface-dark */
+  --org-switcher-item-destructive-highlighted-color: var(--menu-item-destructive-highlighted-color); /** Texto del ítem destructivo resaltado — surface-dark */
 }
