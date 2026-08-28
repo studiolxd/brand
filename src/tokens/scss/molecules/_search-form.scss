@@ -2,6 +2,11 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-search-form-inline-size: 100%; // Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él
+$lxd-search-form-xl-height: 4rem; // Altura del campo — xl (64px, el peldaño de espaciado que sigue a los 48 de lg). No es una talla de control del sistema: solo existe aquí, para el buscador del menú del sitio
+$lxd-search-form-xl-padding-inline: 2rem; // Aire horizontal del campo — xl: el peldaño de espaciado siguiente al de lg
+$lxd-search-form-xl-font-size: 1.75rem; // Cuerpo de letra del campo — xl (28px): la escala de títulos pequeños, no la del cuerpo de texto. A esta talla el buscador se lee como un titular
+$lxd-search-form-xl-slot-size: 4rem; // Lado del hueco de la flecha — xl: cuadrado a la altura del campo, como en el resto de tallas
+$lxd-search-form-xl-icon-size: 2rem; // Tamaño del glifo de la flecha — xl (32px): la mitad del hueco, la misma proporción que guardan md y lg
 $lxd-search-form-submit-slot-size: 2.5rem; // Lado del hueco que ocupa la flecha dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control
 $lxd-search-form-submit-sm-slot-size: 2rem; // Lado del hueco de la flecha — sm
 $lxd-search-form-submit-lg-slot-size: 3rem; // Lado del hueco de la flecha — lg
