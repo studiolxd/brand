@@ -8,7 +8,6 @@
   --number-badge-font-family: var(--font-family-sans); /** Familia tipográfica */
   --number-badge-font-size: var(--font-size-0); /** La cifra: el cuerpo de marca (12px) */
   --number-badge-line-height: var(--line-height-none); /** Sin interlineado extra — centrado por flexbox */
-  --number-badge-neutral-bg: var(--color-grey-darkest); /** Fondo neutral (dark grey) */
   --number-badge-border-radius: var(--border-radius-round); /** Forma circular */
   --number-badge-font-weight: var(--font-weight-default); /** Peso normal: una cifra, no un título */
   --number-badge-primary-bg: var(--color-primary); /** Fondo primary (prussian) */
@@ -25,6 +24,7 @@
   --number-badge-danger-color: var(--color-error-fill-text); /** Texto sobre danger */
   --number-badge-success-bg: var(--color-success-fill); /** Fondo success (green) */
   --number-badge-success-color: var(--color-success-fill-text); /** Texto sobre success */
+  --number-badge-neutral-bg: var(--color-surface-inverse-on-light); /** Fondo neutral (dark grey) */
   --number-badge-neutral-color: var(--color-text-on-dark); /** Texto sobre neutral */
 }
 

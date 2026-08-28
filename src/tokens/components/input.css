@@ -16,9 +16,6 @@
   --input-transition-duration: var(--motion-duration-fast); /** Transition duration */
   --input-transition-easing: var(--motion-easing-default); /** Transition easing */
   --input-bg: var(--color-white); /** Background */
-  --input-disabled-bg: var(--color-grey-lightest); /** Background when disabled */
-  --input-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
-  --input-disabled-border-color: var(--color-grey-light); /** Border color when disabled */
   --input-error-bg: var(--color-white); /** Error background */
   --input-sm-padding-inline: var(--spacing-3); /** Inline padding — sm */
   --input-sm-font-size: var(--font-size-1); /** Font size — sm */
@@ -34,6 +31,9 @@
   --input-focus-border-color: var(--color-primary); /** Border color on focus */
   --input-focus-ring-inset-offset: var(--border-width-default); /** Gap between border and focus ring */
   --input-focus-ring-color: var(--color-primary); /** Focus ring color */
+  --input-disabled-bg: var(--color-disabled-bg-on-light); /** Background when disabled */
+  --input-disabled-color: var(--color-disabled-text-on-light); /** Text color when disabled */
+  --input-disabled-border-color: var(--color-disabled-border-on-light); /** Border color when disabled */
   --input-error-color: var(--color-text-on-light); /** Error text color */
   --input-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (excepción a «bordes en prusia») */
   --input-error-placeholder-color: var(--color-text-on-light); /** Placeholder en error: tinta */
@@ -45,9 +45,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --input-disabled-bg: var(--color-grey-darkest); /** Fondo deshabilitado — surface-dark */
-  --input-disabled-color: var(--color-grey-light); /** Texto deshabilitado — surface-dark */
-  --input-disabled-border-color: var(--color-grey-dark); /** Borde deshabilitado — surface-dark */
   --input-bg: var(--color-background-dark); /** Background — surface-dark */
   --input-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --input-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
@@ -56,6 +53,9 @@ html.dark {
   --input-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --input-error-focus-ring-color: var(--color-error-text-on-dark); /** Error focus ring color — surface-dark */
   --input-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
+  --input-disabled-bg: var(--color-disabled-bg-on-dark); /** Fondo deshabilitado — surface-dark */
+  --input-disabled-color: var(--color-disabled-text-on-dark); /** Texto deshabilitado — surface-dark */
+  --input-disabled-border-color: var(--color-disabled-border-on-dark); /** Borde deshabilitado — surface-dark */
   --input-error-bg: var(--color-background-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
   --input-error-color: var(--color-text-on-dark); /** Texto en error — surface-dark */
   --input-error-placeholder-color: var(--color-text-on-dark); /** Placeholder en error — surface-dark */

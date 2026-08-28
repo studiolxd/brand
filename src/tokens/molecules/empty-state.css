@@ -11,10 +11,10 @@
   --empty-state-icon-size: var(--icon-size-lg); /** Tamaño del icono — variante md (unificado con el icono destacado del sistema) */
   --empty-state-title-font-size-sm: var(--font-size-3); /** Tamaño tipográfico del título — variante sm */
   --empty-state-description-font-size-sm: var(--font-size-1); /** Tamaño tipográfico de la descripción — variante sm */
-  --empty-state-icon-color: var(--color-grey-dark); /** Color del icono */
   --empty-state-title-font-family: var(--font-family-sans); /** Familia tipográfica del título */
   --empty-state-title-font-size: var(--font-size-4); /** Tamaño tipográfico del título */
   --empty-state-description-font-family: var(--font-family-sans); /** Familia tipográfica de la descripción */
+  --empty-state-icon-color: var(--color-icon-secondary-on-light); /** Color del icono */
   --empty-state-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
   --empty-state-title-color: var(--color-text-muted-on-light); /** Color del título — es texto, nunca grey-dark */
   --empty-state-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (la variante sm tiene talla propia) */

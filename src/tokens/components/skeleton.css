@@ -14,6 +14,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --skeleton-highlight: var(--color-grey-dark); /** Brillo — surface-dark, un paso más claro que el fondo */
   --skeleton-bg: var(--color-surface-secondary-on-dark); /** Fondo base — surface-dark */
+  --skeleton-highlight: var(--color-surface-highlight-on-dark); /** Brillo — surface-dark, un paso más claro que el fondo */
 }

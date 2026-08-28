@@ -8,7 +8,6 @@
   --prev-next-nav-gap: var(--spacing-3); /** Gap entre botones y label — variante md */
   --prev-next-nav-sm-gap: var(--spacing-2); /** Gap entre botones y label — variante sm */
   --prev-next-nav-text-gap: var(--spacing-1); /** Aire entre el rótulo de dirección y el título */
-  --prev-next-nav-btn-disabled-color: var(--color-grey-dark); /** Color cuando el botón está deshabilitado */
   --prev-next-nav-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
   --prev-next-nav-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
   --prev-next-nav-font-size: var(--text-font-size); /** La variante md hereda el cuerpo de la superficie; la sm tiene talla propia */
@@ -21,6 +20,7 @@
   --prev-next-nav-label-color: var(--color-text-on-light); /** Color del label central */
   --prev-next-nav-btn-color: var(--color-text-on-light); /** Color de los botones de navegación */
   --prev-next-nav-btn-hover-color: var(--color-primary); /** Color en hover */
+  --prev-next-nav-btn-disabled-color: var(--color-icon-secondary-on-light); /** Color cuando el botón está deshabilitado */
   --prev-next-nav-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --prev-next-nav-focus-ring-radius: var(--border-radius-default); /** Radio del anillo de foco — recto, como toda esquina del sistema */
   --prev-next-nav-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
@@ -30,12 +30,12 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --prev-next-nav-btn-disabled-color: var(--color-grey-light); /** Color del botón deshabilitado — surface-dark */
   --prev-next-nav-eyebrow-color: var(--color-text-muted-on-dark); /** Color del rótulo de dirección — surface-dark */
   --prev-next-nav-title-color: var(--color-text-on-dark); /** Color del título del destino — surface-dark */
   --prev-next-nav-title-hover-color: var(--color-accent-2); /** Color del título en hover — surface-dark: amarillo, porque el prusia de marca es aquí el fondo */
   --prev-next-nav-label-color: var(--color-text-on-dark); /** Color del label central — surface-dark */
   --prev-next-nav-btn-color: var(--color-text-on-dark); /** Color de los botones de navegación — surface-dark */
   --prev-next-nav-btn-hover-color: var(--color-accent-2); /** Color en hover — surface-dark: amarillo, porque el prusia de marca es aquí el fondo */
+  --prev-next-nav-btn-disabled-color: var(--color-text-muted-on-dark); /** Color del botón deshabilitado — surface-dark */
   --prev-next-nav-focus-ring-color: var(--color-text-on-dark); /** Color del focus ring — surface-dark */
 }

@@ -5,10 +5,10 @@
 :root {
   --scroll-area-scrollbar-bg: rgba(0, 0, 0, 0); /** Carril de la barra: sin relleno, la barra es el pulgar */
   --scroll-area-scrollbar-size: var(--spacing-2); /** Grosor de la barra de desplazamiento */
-  --scroll-area-thumb-bg: var(--color-grey-light); /** Pulgar de la barra */
-  --scroll-area-thumb-hover-bg: var(--color-grey-dark); /** Pulgar al pasar el ratón o arrastrarlo */
   --scroll-area-transition-duration: var(--motion-duration-fast); /** Duración de la aparición de la barra */
   --scroll-area-transition-easing: var(--motion-easing-default); /** Easing de la aparición de la barra */
+  --scroll-area-thumb-bg: var(--color-border-default-on-light); /** Pulgar de la barra */
+  --scroll-area-thumb-hover-bg: var(--color-icon-secondary-on-light); /** Pulgar al pasar el ratón o arrastrarlo */
   --scroll-area-thumb-border-radius: var(--border-radius-default); /** Radio del pulgar (recto, como el resto del sistema) */
   --scroll-area-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco del área desplazable */
   --scroll-area-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */

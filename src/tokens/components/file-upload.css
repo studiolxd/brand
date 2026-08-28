@@ -8,13 +8,11 @@
   --file-upload-error-border-style: solid; /** Estilo de borde en error */
   --file-upload-disabled-opacity: 0.5; /** Opacidad cuando está deshabilitado */
   --file-upload-progress-height: 0.375rem; /** Altura de la barra de progreso */
-  --file-upload-bg: var(--color-grey-lightest); /** Fondo del dropzone */
   --file-upload-padding-inline: var(--spacing-5); /** Padding horizontal del dropzone */
   --file-upload-gap: var(--spacing-1); /** Espacio entre elementos dentro del dropzone */
   --file-upload-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de estado */
   --file-upload-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
   --file-upload-drag-bg: var(--color-white); /** Fondo en drag activo */
-  --file-upload-error-bg: var(--color-grey-lightest); /** Fondo en estado de error */
   --file-upload-list-gap: var(--spacing-2); /** Espacio entre items de la lista */
   --file-upload-list-margin-block-start: var(--spacing-3); /** Margen superior de la lista de archivos */
   --file-upload-item-bg: var(--color-white); /** Fondo de cada item */
@@ -26,10 +24,7 @@
   --file-upload-item-error-font-size: var(--font-size-1); /** Tamaño del mensaje de error por archivo */
   --file-upload-item-error-bg: var(--color-white); /** Fondo del item con error */
   --file-upload-thumb-size: var(--size-component-md); /** Lado de la miniatura: la talla md del sistema (el mismo 2.5rem de antes, ahora con nombre) */
-  --file-upload-thumb-bg: var(--color-grey-lightest); /** Fondo del thumb para iconos (no imagen) */
-  --file-upload-thumb-icon-color: var(--color-grey-dark); /** Color del icono de archivo genérico */
   --file-upload-progress-margin-block-start: var(--spacing-3); /** Margen superior de la barra de progreso */
-  --file-upload-progress-bg: var(--color-grey-light); /** Fondo del track de progreso */
   --file-upload-progress-transition-duration: var(--motion-duration-base); /** Duración de la transición del progreso */
   --file-upload-progress-transition-easing: var(--motion-easing-in-out); /** Easing de la transición del progreso */
   --file-upload-padding-block: var(--spacing-7); /** Aire vertical del dropzone — talla md */
@@ -51,11 +46,13 @@
   --file-upload-border-color: var(--color-primary); /** Borde del dropzone por defecto */
   --file-upload-border-width: var(--border-width-default); /** Grosor del borde */
   --file-upload-border-radius: var(--border-radius-default); /** Radio de esquinas del dropzone */
+  --file-upload-bg: var(--color-surface-secondary-on-light); /** Fondo del dropzone */
   --file-upload-text-color: var(--color-text-on-light); /** Color del texto principal */
   --file-upload-subtext-color: var(--color-text-muted-on-light); /** Color del texto secundario y restricciones */
   --file-upload-icon-color: var(--color-text-on-light); /** Color del icono upload */
   --file-upload-drag-border-color: var(--color-primary); /** Borde cuando hay drag activo */
   --file-upload-error-border-color: var(--color-error-text-on-light); /** Borde en estado de error */
+  --file-upload-error-bg: var(--color-surface-secondary-on-light); /** Fondo en estado de error */
   --file-upload-item-border-color: var(--color-primary); /** Borde de cada item */
   --file-upload-item-border-width: var(--border-width-default); /** Grosor de borde del item */
   --file-upload-item-border-radius: var(--border-radius-default); /** Radio de esquinas del item */
@@ -66,8 +63,11 @@
   --file-upload-item-error-color: var(--color-error-text-on-light); /** Color del mensaje de error por archivo */
   --file-upload-item-error-border-color: var(--color-error-text-on-light); /** Borde del item con error */
   --file-upload-thumb-border-radius: var(--border-radius-default); /** Radio del thumbnail */
+  --file-upload-thumb-bg: var(--color-surface-secondary-on-light); /** Fondo del thumb para iconos (no imagen) */
+  --file-upload-thumb-icon-color: var(--color-icon-secondary-on-light); /** Color del icono de archivo genérico */
   --file-upload-remove-color: var(--color-text-muted-on-light); /** Color del botón eliminar */
   --file-upload-remove-color-hover: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
+  --file-upload-progress-bg: var(--color-border-default-on-light); /** Fondo del track de progreso */
   --file-upload-progress-fill: var(--color-primary); /** Color del relleno de progreso */
   --file-upload-progress-border-radius: var(--border-radius-round); /** Radio de la barra de progreso */
   --file-upload-text-font-size: var(--text-font-size); /** El texto del dropzone es texto corriente: hereda el cuerpo de la superficie — talla md */

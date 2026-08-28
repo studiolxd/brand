@@ -7,7 +7,7 @@
     "font-family":               { "$value": "{font-family.sans}",         "$type": "string",    "$description": "Familia tipográfica base" },
 
     "nav-color":                 { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color de los botones prev/next" },
-    "nav-disabled-color":        { "$value": "{color.grey-dark}",          "$type": "color",     "$description": "Color deshabilitado de los botones de navegación" },
+    "nav-disabled-color":        { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Color deshabilitado de los botones de navegación" },
     "nav-disabled-cursor":       { "$value": "not-allowed",                "$type": "string",    "$description": "Cursor deshabilitado" },
     "nav-focus-ring-color":      { "$value": "{color.primary}",            "$type": "color",     "$description": "Color del focus ring de los botones de navegación" },
     "nav-focus-ring-width":      { "$value": "{border-width.focus}",          "$type": "dimension", "$description": "Grosor del focus ring" },
@@ -42,7 +42,7 @@
 
     "outside-color":             { "$value": "{color.text.muted-on-light}","$type": "color",     "$description": "Color de los días fuera del mes actual — se leen, así que son texto secundario, no gris de icono" },
 
-    "disabled-color":            { "$value": "{color.grey-dark}",          "$type": "color",     "$description": "Color de los días deshabilitados" },
+    "disabled-color":            { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Color de los días deshabilitados" },
     "disabled-cursor":           { "$value": "not-allowed",                "$type": "string",    "$description": "Cursor de los días deshabilitados" },
 
     "transition-duration":       { "$value": "{motion.duration.fast}",     "$type": "number",    "$description": "Duración de las transiciones" },
@@ -55,7 +55,7 @@
     "lg-title-font-size":        { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño del título — lg" },
     "lg-day-font-size":          { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño de fuente de los días — lg" },
     "surface-dark-nav-color":               { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de navegación — surface-dark" },
-    "surface-dark-nav-disabled-color":      { "$value": "{color.grey-light}",         "$type": "color", "$description": "Color deshabilitado de navegación — surface-dark" },
+    "surface-dark-nav-disabled-color":      { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color deshabilitado de navegación — surface-dark" },
     "surface-dark-nav-focus-ring-color":    { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de navegación — surface-dark" },
     "surface-dark-title-color":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del título — surface-dark" },
     "surface-dark-weekday-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color de cabeceras de día — surface-dark" },
@@ -66,7 +66,7 @@
     "surface-dark-selected-bg":             { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Fondo del día seleccionado — surface-dark" },
     "surface-dark-selected-color":          { "$value": "{color.background.dark}",    "$type": "color", "$description": "Texto del día seleccionado — surface-dark" },
     "surface-dark-outside-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Días fuera de mes — surface-dark" },
-    "surface-dark-disabled-color":          { "$value": "{color.grey-light}",         "$type": "color", "$description": "Días deshabilitados — surface-dark" },
+    "surface-dark-disabled-color":          { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Días deshabilitados — surface-dark" },
     "hover-line-width":              { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea de hover de los botones de navegación y de los días. Ni el día ni la flecha se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo" },
     "hover-line-color":              { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover — tinta de la superficie" },
     "surface-dark-hover-line-color": { "$value": "{color.text.on-dark}",   "$type": "color",     "$description": "Color de la línea de hover — surface-dark" }

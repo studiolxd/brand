@@ -7,6 +7,6 @@
     "height":           { "$value": "1lh",                            "$type": "dimension", "$description": "Alto por defecto — una línea de texto" },
     "duration":         { "$value": "1400ms",                         "$type": "number",    "$description": "Duración del barrido — igual que Spinner, token propio: un bucle no es una transición del sistema" },
     "surface-dark-bg":        { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo base — surface-dark" },
-    "surface-dark-highlight": { "$value": "{color.grey-dark}",         "$type": "color",    "$description": "Brillo — surface-dark, un paso más claro que el fondo" }
+    "surface-dark-highlight": { "$value": "{color.surface.highlight-on-dark}", "$type": "color",    "$description": "Brillo — surface-dark, un paso más claro que el fondo" }
   }
 }

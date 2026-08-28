@@ -17,7 +17,7 @@
     "delete-size":               { "$value": "{size-component.sm}",             "$type": "dimension", "$description": "Lado del botón de borrar: la talla mínima del sistema, para que sea un blanco alcanzable" },
     "delete-margin-inline-end":  { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Aire entre el botón de borrar y el canto de la fila" },
     "delete-border-radius":      { "$value": "{border-radius.default}",         "$type": "dimension", "$description": "Radio del botón de borrar" },
-    "delete-color":              { "$value": "{color.grey-dark}",               "$type": "color",     "$description": "Tinta del aspa en reposo. Es un icono de acción secundaria, el único sitio donde `grey-dark` sigue valiendo" },
+    "delete-color":              { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Tinta del aspa en reposo. Es un icono de acción secundaria" },
     "delete-hover-color":        { "$value": "{color.destructive-text-on-light}", "$type": "color",   "$description": "Tinta del aspa bajo el puntero" },
 
     "focus-ring-width":      { "$value": "{border-width.focus}",        "$type": "dimension", "$description": "Grosor del anillo de foco" },
@@ -29,7 +29,7 @@
     "surface-dark-item-color":                  { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Tinta de una conversación en reposo — superficie oscura" },
     "surface-dark-item-hover-color":            { "$value": "{color.text.on-dark}",             "$type": "color", "$description": "Tinta de la conversación bajo el puntero — superficie oscura: tinta plena" },
     "surface-dark-item-active-color":           { "$value": "{color.accent-1}",                  "$type": "color", "$description": "Tinta de la conversación abierta — superficie oscura: lavanda, como en el SidebarNav" },
-    "surface-dark-delete-color":                { "$value": "{color.grey-light}",                "$type": "color", "$description": "Tinta del aspa en reposo — superficie oscura" },
+    "surface-dark-delete-color":                { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Tinta del aspa en reposo — superficie oscura" },
     "surface-dark-delete-hover-color":          { "$value": "{color.destructive-text-on-dark}",  "$type": "color", "$description": "Tinta del aspa bajo el puntero — superficie oscura" },
     "surface-dark-focus-ring-color":            { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Color del anillo de foco — superficie oscura" }
   }

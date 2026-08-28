@@ -27,7 +27,7 @@
     "surface-dark-focus-border-color":    { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del marco con el foco dentro — superficie oscura" },
     "surface-dark-focus-ring-color":      { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del anillo de foco — superficie oscura" },
     "surface-dark-helper-color":          { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta de la línea de ayuda — superficie oscura" },
-    "surface-dark-disabled-bg":           { "$value": "{color.grey-darkest}",      "$type": "color", "$description": "Fondo del marco deshabilitado — superficie oscura" },
-    "surface-dark-disabled-border-color": { "$value": "{color.grey-dark}",         "$type": "color", "$description": "Color del marco deshabilitado — superficie oscura" }
+    "surface-dark-disabled-bg":           { "$value": "{color.disabled.bg-on-dark}",     "$type": "color", "$description": "Fondo del marco deshabilitado — superficie oscura" },
+    "surface-dark-disabled-border-color": { "$value": "{color.disabled.border-on-dark}", "$type": "color", "$description": "Color del marco deshabilitado — superficie oscura" }
   }
 }

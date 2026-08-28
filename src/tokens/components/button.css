@@ -33,9 +33,6 @@
   --button-line-height: var(--line-height-none); /** Line height */
   --button-transition-duration: var(--motion-duration-fast); /** Transition duration */
   --button-transition-easing: var(--motion-easing-default); /** Transition easing */
-  --button-disabled-bg: var(--color-grey-lightest); /** Background when disabled — only form button changes bg */
-  --button-disabled-color: var(--color-grey-darkest); /** Text color when disabled — light surface */
-  --button-disabled-border: var(--color-grey-darkest); /** Border color when disabled — light surface, matches text for contrast */
   --button-height: var(--size-component-md); /** Altura fija del botón (talla md): el contenido se centra, no se hace por padding */
   --button-sm-height: var(--size-component-sm); /** Altura — sm */
   --button-lg-height: var(--size-component-lg); /** Altura — lg */
@@ -67,8 +64,6 @@
   --button-outline-white-space: var(--button-white-space); /** White space */
   --button-outline-text-decoration: var(--button-text-decoration); /** Text decoration */
   --button-outline-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
-  --button-outline-disabled-color: var(--color-grey-light); /** Text color when disabled */
-  --button-outline-disabled-border: var(--color-grey-light); /** Border color when disabled */
   --button-outline-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-text-border-style: var(--button-border-style); /** Border style */
   --button-text-justify-content: var(--button-justify-content); /** Justify content */
@@ -86,14 +81,15 @@
   --button-border-radius: var(--border-radius-default); /** Rectangular: el radio del sistema (0), como los campos */
   --button-border-width: var(--border-width-default); /** Border width */
   --button-font-weight: var(--font-weight-default); /** Font weight */
+  --button-disabled-bg: var(--color-disabled-bg-on-light); /** Background when disabled — only form button changes bg */
+  --button-disabled-color: var(--color-disabled-text-on-light); /** Text color when disabled — light surface */
+  --button-disabled-border: var(--color-disabled-text-on-light); /** Border color when disabled — light surface, matches text for contrast */
   --button-focus-ring-width: var(--border-width-focus); /** Focus ring width */
   --button-primary-font-family: var(--button-font-family); /** Font family */
   --button-primary-font-size: var(--button-font-size); /** Font size */
   --button-primary-line-height: var(--button-line-height); /** Line height */
   --button-primary-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-primary-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-primary-disabled-bg: var(--button-disabled-border); /** Background when disabled — filled with the disabled border color */
-  --button-primary-disabled-border: var(--button-disabled-border); /** Border color when disabled */
   --button-primary-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
   --button-primary-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
   --button-primary-focus-ring-color: var(--color-primary); /** Anillo de foco: la tinta de la superficie (prusia), no el lavanda del botón — así se ve como foco, no como borde */
@@ -111,8 +107,6 @@
   --button-destructive-line-height: var(--button-line-height); /** Line height */
   --button-destructive-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-destructive-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-destructive-disabled-color: var(--button-disabled-color); /** Text color when disabled */
-  --button-destructive-disabled-border: var(--button-disabled-border); /** Border color when disabled */
   --button-destructive-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
   --button-destructive-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
   --button-destructive-focus-ring-color: var(--color-destructive-text-on-light); /** Focus ring color */
@@ -129,6 +123,8 @@
   --button-outline-line-height: var(--button-line-height); /** Line height */
   --button-outline-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-outline-transition-easing: var(--button-transition-easing); /** Transition easing */
+  --button-outline-disabled-color: var(--color-disabled-border-on-light); /** Text color when disabled */
+  --button-outline-disabled-border: var(--color-disabled-border-on-light); /** Border color when disabled */
   --button-outline-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
   --button-outline-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
   --button-outline-focus-ring-color: var(--color-text-on-light); /** Focus ring color — dark on light backgrounds */
@@ -145,13 +141,11 @@
   --button-text-line-height: var(--button-line-height); /** Line height */
   --button-text-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-text-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-text-disabled-color: var(--button-disabled-color); /** Text color when disabled — light surface */
   --button-ghost-font-family: var(--button-font-family); /** Font family */
   --button-ghost-font-size: var(--button-font-size); /** Font size */
   --button-ghost-line-height: var(--button-line-height); /** Line height */
   --button-ghost-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-ghost-transition-easing: var(--button-transition-easing); /** Transition easing */
-  --button-ghost-disabled-color: var(--button-disabled-color); /** Text color when disabled */
   --button-ghost-padding-inline: var(--button-padding-inline); /** Inline (horizontal) padding */
   --button-ghost-focus-ring-offset: var(--button-focus-ring-offset); /** Focus ring offset */
   --button-ghost-focus-ring-color: var(--color-primary); /** Focus ring color */
@@ -163,10 +157,14 @@
   --button-primary-border-radius: var(--button-border-radius); /** Border radius */
   --button-primary-border-width: var(--button-border-width); /** Border width */
   --button-primary-font-weight: var(--button-font-weight); /** Font weight */
+  --button-primary-disabled-bg: var(--button-disabled-border); /** Background when disabled — filled with the disabled border color */
+  --button-primary-disabled-border: var(--button-disabled-border); /** Border color when disabled */
   --button-primary-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-destructive-border-radius: var(--button-border-radius); /** Border radius */
   --button-destructive-border-width: var(--button-border-width); /** Border width */
   --button-destructive-font-weight: var(--button-font-weight); /** Font weight */
+  --button-destructive-disabled-color: var(--button-disabled-color); /** Text color when disabled */
+  --button-destructive-disabled-border: var(--button-disabled-border); /** Border color when disabled */
   --button-destructive-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-outline-border-radius: var(--button-border-radius); /** Border radius */
   --button-outline-border-width: var(--button-border-width); /** Border width */
@@ -174,6 +172,7 @@
   --button-outline-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-text-border-radius: var(--button-border-radius); /** Border radius */
   --button-text-font-weight: var(--button-font-weight); /** Font weight */
+  --button-text-disabled-color: var(--button-disabled-color); /** Text color when disabled — light surface */
   --button-text-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-text-focus-ring-offset: var(--link-focus-ring-offset); /** Focus ring offset */
   --button-text-focus-ring-color: var(--link-focus-ring-color); /** Focus ring color — light surface */
@@ -182,6 +181,7 @@
   --button-text-active-color: var(--link-hover-color); /** Active text color — unchanged */
   --button-ghost-border-radius: var(--button-border-radius); /** Border radius */
   --button-ghost-font-weight: var(--button-font-weight); /** Font weight */
+  --button-ghost-disabled-color: var(--button-disabled-color); /** Text color when disabled */
   --button-ghost-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
 }
 
@@ -193,8 +193,6 @@ html.dark {
   --button-outline-active-bg: var(--color-white); /** Active background — surface-dark */
   --button-outline-active-border: var(--color-white); /** Active border color — surface-dark */
   --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — surface-dark */
-  --button-text-disabled-color: var(--color-grey-light); /** Text color when disabled — surface-dark */
-  --button-ghost-disabled-color: var(--color-grey-light); /** Text color when disabled — surface-dark */
   --button-primary-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark (blanco) */
   --button-destructive-color: var(--color-destructive-text-on-dark); /** Text color — surface-dark */
   --button-destructive-border: var(--color-destructive-text-on-dark); /** Border color — surface-dark */
@@ -209,12 +207,14 @@ html.dark {
   --button-outline-border: var(--color-text-on-dark); /** Border color — surface-dark */
   --button-outline-hover-color: var(--color-text-on-light); /** Hover text color — surface-dark */
   --button-outline-active-color: var(--color-text-on-light); /** Active text color — surface-dark */
+  --button-text-disabled-color: var(--color-text-muted-on-dark); /** Text color when disabled — surface-dark */
   --button-ghost-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --button-ghost-hover-color: var(--color-primary); /** Hover text color — surface-dark */
   --button-ghost-active-color: var(--color-primary); /** Active text color — surface-dark */
   --button-ghost-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --button-ghost-hover-bg: var(--color-text-on-dark); /** Hover background — surface-dark */
   --button-ghost-active-bg: var(--color-text-on-dark); /** Active background — surface-dark */
+  --button-ghost-disabled-color: var(--color-text-muted-on-dark); /** Text color when disabled — surface-dark */
   --button-text-color: var(--link-color); /** Text color — surface-dark */
   --button-text-hover-color: var(--link-hover-color); /** Hover text color — surface-dark */
   --button-text-active-color: var(--link-hover-color); /** Active text color — surface-dark */

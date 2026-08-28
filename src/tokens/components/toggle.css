@@ -16,7 +16,6 @@
   --toggle-sm-font-size: var(--font-size-1); /** Tamaño de fuente — talla sm */
   --toggle-lg-font-size: var(--font-size-3); /** Tamaño de fuente — talla lg */
   --toggle-border-style: var(--control-border-style); /** Estilo del borde */
-  --toggle-border-color: var(--color-grey-light); /** Borde sin pulsar */
   --toggle-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
   --toggle-transition-duration: var(--motion-duration-fast); /** Duración de la transición */
   --toggle-transition-easing: var(--motion-easing-default); /** Easing de la transición */
@@ -24,6 +23,7 @@
   --toggle-font-family: var(--control-font-family); /** Familia tipográfica */
   --toggle-font-size: var(--control-font-size); /** Tamaño de fuente */
   --toggle-line-height: var(--control-line-height); /** Interlineado */
+  --toggle-border-color: var(--color-border-default-on-light); /** Borde sin pulsar */
   --toggle-color: var(--color-text-on-light); /** Texto sin pulsar */
   --toggle-hover-border-color: var(--color-primary); /** Borde al pasar el ratón — el hover no pone fondo, solo marca el borde */
   --toggle-pressed-bg: var(--color-primary); /** Fondo pulsado: el valor elegido */

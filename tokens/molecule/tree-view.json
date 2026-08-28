@@ -15,7 +15,7 @@
     "hover-line-color":      { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de la línea de hover" },
     "chevron-size":          { "$value": "{icon.size-sm}",           "$type": "dimension", "$description": "Tamaño del chevron que abre y cierra una rama" },
     "guide-width":           { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la guía vertical que acompaña a una rama abierta" },
-    "guide-color":           { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color de la guía vertical" },
+    "guide-color":           { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Color de la guía vertical" },
     "cursor":                { "$value": "pointer",                  "$type": "string",    "$description": "Cursor sobre una fila" },
     "disabled-cursor":       { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor de una fila deshabilitada" },
     "disabled-opacity":      { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Opacidad de una fila deshabilitada" },

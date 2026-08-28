@@ -89,4 +89,14 @@
   --color-surface-secondary-on-dark: var(--color-grey-darkest); /** Superficie clara secundaria — variante para superficie oscura */
   --color-surface-inverse-on-light: var(--color-grey-darkest); /** Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag) */
   --color-surface-inverse-on-dark: var(--color-grey-lightest); /** Superficie invertida — variante para superficie oscura */
+  --color-surface-highlight-on-dark: var(--color-grey-dark); /** Brillo que recorre una superficie secundaria en carga (Skeleton) sobre superficie oscura — un paso más claro que el fondo secundario oscuro */
+  --color-border-default-on-light: var(--color-grey-light); /** Borde general sobre superficie clara: divisores, separadores, carriles y guías sin recorrer. Por la regla de derivación el par en superficie oscura no es un primitivo gris, es `color.text.on-dark` (cada componente lo referencia directamente) */
+  --color-disabled-bg-on-light: var(--color-grey-lightest); /** Fondo de un control deshabilitado sobre superficie clara */
+  --color-disabled-bg-on-dark: var(--color-grey-darkest); /** Fondo de un control deshabilitado — superficie oscura */
+  --color-disabled-text-on-light: var(--color-grey-darkest); /** Texto o borde de un control de texto (Button, Input, Textarea) deshabilitado sobre superficie clara */
+  --color-disabled-text-on-dark: var(--color-grey-light); /** Texto de un control de texto deshabilitado — superficie oscura */
+  --color-disabled-border-on-light: var(--color-grey-light); /** Borde o relleno de un control deshabilitado (checkbox, radio, campo) sobre superficie clara */
+  --color-disabled-border-on-dark: var(--color-grey-dark); /** Borde de un control deshabilitado — superficie oscura */
+  --color-icon-secondary-on-light: var(--color-grey-dark); /** Icono de acción secundaria o control compacto deshabilitado (nav de calendario/paginación, aspa de borrar) sobre superficie clara */
+  --color-icon-secondary-on-dark: var(--color-text-muted-on-dark); /** Icono de acción secundaria — superficie oscura */
 }

@@ -22,17 +22,13 @@
   --textarea-font-size: var(--font-size-2); /** Font size */
   --textarea-line-height: var(--line-height-normal); /** Line height */
   --textarea-bg: var(--color-white); /** Background */
-  --textarea-disabled-bg: var(--color-grey-lightest); /** Background when disabled */
-  --textarea-disabled-color: var(--color-grey-darkest); /** Text color when disabled */
-  --textarea-disabled-border-color: var(--color-grey-light); /** Border color when disabled */
-  --textarea-error-bg: var(--color-white); /** Error background */
   --textarea-border-radius: var(--border-radius-default); /** Border radius */
   --textarea-border-width: var(--border-width-default); /** Border width */
-  --textarea-lg-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-lg-font-size) + 2 * var(--textarea-lg-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima — lg: la misma fórmula con el cuerpo y el aire de la talla (170px) */
   --textarea-padding-block: var(--control-padding-block); /** Block (vertical) padding */
   --textarea-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-font-size) + 2 * var(--textarea-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima: `rows` líneas de texto (rows × interlineado × cuerpo) más el aire de arriba y abajo y los dos bordes. Con la talla md, 130px */
   --textarea-transition-duration: var(--motion-duration-fast); /** Transition duration */
   --textarea-transition-easing: var(--motion-easing-default); /** Transition easing */
+  --textarea-error-bg: var(--color-white); /** Error background */
   --textarea-sm-padding-block: var(--spacing-2); /** Block padding — variante sm */
   --textarea-sm-padding-inline: var(--spacing-3); /** Inline padding — variante sm */
   --textarea-sm-font-size: var(--font-size-1); /** Font size — variante sm (14px) */
@@ -40,6 +36,7 @@
   --textarea-lg-padding-block: var(--spacing-5); /** Block padding — variante lg */
   --textarea-lg-padding-inline: var(--spacing-5); /** Inline padding — variante lg */
   --textarea-lg-font-size: var(--font-size-3); /** Font size — variante lg (20px) */
+  --textarea-lg-min-height: calc(var(--textarea-rows) * var(--textarea-line-height) * var(--textarea-lg-font-size) + 2 * var(--textarea-lg-padding-block) + 2 * var(--textarea-border-width)); /** Altura mínima — lg: la misma fórmula con el cuerpo y el aire de la talla (170px) */
   --textarea-padding-inline: var(--control-padding-inline); /** Inline (horizontal) padding */
   --textarea-font-weight: var(--font-weight-default); /** Font weight */
   --textarea-color: var(--color-text-on-light); /** Text color */
@@ -48,6 +45,9 @@
   --textarea-focus-border-color: var(--color-primary); /** Border color on focus */
   --textarea-focus-ring-inset-offset: var(--border-width-default); /** Gap between border and focus ring */
   --textarea-focus-ring-color: var(--color-primary); /** Focus ring color */
+  --textarea-disabled-bg: var(--color-disabled-bg-on-light); /** Background when disabled */
+  --textarea-disabled-color: var(--color-disabled-text-on-light); /** Text color when disabled */
+  --textarea-disabled-border-color: var(--color-disabled-border-on-light); /** Border color when disabled */
   --textarea-error-color: var(--color-text-on-light); /** Error text color */
   --textarea-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (excepción a «bordes en prusia») */
   --textarea-error-placeholder-color: var(--color-text-on-light); /** Placeholder en error: tinta */
@@ -59,9 +59,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --textarea-disabled-bg: var(--color-grey-darkest); /** Fondo deshabilitado — surface-dark */
-  --textarea-disabled-color: var(--color-grey-light); /** Texto deshabilitado — surface-dark */
-  --textarea-disabled-border-color: var(--color-grey-dark); /** Borde deshabilitado — surface-dark */
   --textarea-bg: var(--color-background-dark); /** Background — surface-dark */
   --textarea-color: var(--color-text-on-dark); /** Text color — surface-dark */
   --textarea-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
@@ -70,6 +67,9 @@ html.dark {
   --textarea-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
   --textarea-error-focus-ring-color: var(--color-error-text-on-dark); /** Error focus ring color — surface-dark */
   --textarea-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
+  --textarea-disabled-bg: var(--color-disabled-bg-on-dark); /** Fondo deshabilitado — surface-dark */
+  --textarea-disabled-color: var(--color-disabled-text-on-dark); /** Texto deshabilitado — surface-dark */
+  --textarea-disabled-border-color: var(--color-disabled-border-on-dark); /** Borde deshabilitado — surface-dark */
   --textarea-error-bg: var(--color-background-dark); /** Fondo en error — surface-dark (el del lienzo, no blanco) */
   --textarea-error-color: var(--color-text-on-dark); /** Texto en error — surface-dark */
   --textarea-error-placeholder-color: var(--color-text-on-dark); /** Placeholder en error — surface-dark */

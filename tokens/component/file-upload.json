@@ -4,7 +4,7 @@
     "border-style":                { "$value": "dashed",                      "$type": "string",    "$description": "Estilo de borde del dropzone" },
     "border-width":                { "$value": "{border-width.default}",           "$type": "dimension", "$description": "Grosor del borde" },
     "border-radius":               { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio de esquinas del dropzone" },
-    "bg":                          { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del dropzone" },
+    "bg":                          { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo del dropzone" },
     "padding-inline":              { "$value": "{spacing.5}",                 "$type": "dimension", "$description": "Padding horizontal del dropzone" },
     "gap":                         { "$value": "{spacing.1}",                 "$type": "dimension", "$description": "Espacio entre elementos dentro del dropzone" },
     "text-color":                  { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Color del texto principal" },
@@ -19,7 +19,7 @@
 
     "error-border-color":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Borde en estado de error" },
     "error-border-style":          { "$value": "solid",                       "$type": "string",    "$description": "Estilo de borde en error" },
-    "error-bg":                    { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo en estado de error" },
+    "error-bg":                    { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo en estado de error" },
 
     "disabled-opacity":            { "$value": "0.5",                         "$type": "number",    "$description": "Opacidad cuando está deshabilitado" },
 
@@ -47,15 +47,15 @@
 
     "thumb-size":                  { "$value": "{size-component.md}",         "$type": "dimension", "$description": "Lado de la miniatura: la talla md del sistema (el mismo 2.5rem de antes, ahora con nombre)" },
     "thumb-border-radius":         { "$value": "{border-radius.default}",          "$type": "dimension", "$description": "Radio del thumbnail" },
-    "thumb-bg":                    { "$value": "{color.grey-lightest}",        "$type": "color",     "$description": "Fondo del thumb para iconos (no imagen)" },
-    "thumb-icon-color":            { "$value": "{color.grey-dark}",           "$type": "color",     "$description": "Color del icono de archivo genérico" },
+    "thumb-bg":                    { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo del thumb para iconos (no imagen)" },
+    "thumb-icon-color":            { "$value": "{color.icon.secondary-on-light}",   "$type": "color",     "$description": "Color del icono de archivo genérico" },
 
     "remove-color":                { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del botón eliminar" },
     "remove-color-hover":          { "$value": "{color.error-text-on-light}",      "$type": "color",     "$description": "Color del botón eliminar al hacer hover" },
 
     "progress-margin-block-start": { "$value": "{spacing.3}",                 "$type": "dimension", "$description": "Margen superior de la barra de progreso" },
     "progress-height":             { "$value": "0.375rem",                    "$type": "dimension", "$description": "Altura de la barra de progreso" },
-    "progress-bg":                 { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Fondo del track de progreso" },
+    "progress-bg":                 { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Fondo del track de progreso" },
     "progress-fill":               { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del relleno de progreso" },
     "progress-border-radius":      { "$value": "{border-radius.round}",        "$type": "dimension", "$description": "Radio de la barra de progreso" },
     "progress-transition-duration":{ "$value": "{motion.duration.base}",      "$type": "number",    "$description": "Duración de la transición del progreso" },

@@ -8,7 +8,7 @@
     "icon-size-sm":            { "$value": "2rem",                      "$type": "dimension", "$description": "Tamaño del icono — variante sm" },
     "title-font-size-sm":      { "$value": "{font-size.3}",             "$type": "dimension", "$description": "Tamaño tipográfico del título — variante sm" },
     "description-font-size-sm":{ "$value": "{font-size.1}",             "$type": "dimension", "$description": "Tamaño tipográfico de la descripción — variante sm" },
-    "icon-color":              { "$value": "{color.grey-dark}",         "$type": "color",     "$description": "Color del icono" },
+    "icon-color":              { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Color del icono" },
     "title-font-family":       { "$value": "{font-family.sans}",        "$type": "string",    "$description": "Familia tipográfica del título" },
     "title-font-size":         { "$value": "{font-size.4}",             "$type": "dimension", "$description": "Tamaño tipográfico del título" },
     "title-font-weight":       { "$value": "{font-weight.emphasis}",      "$type": "number",    "$description": "Peso del título" },

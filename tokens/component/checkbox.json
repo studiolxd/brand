@@ -18,8 +18,8 @@
     "error-border-color":    { "$value": "{color.error-text-on-light}",  "$type": "color",     "$description": "Borde en error: el color de error (texto/borde, nunca fondo)" },
     "surface-dark-error-border-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Borde en error — surface-dark" },
     "disabled-cursor":          { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
-    "disabled-border-color":    { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
-    "disabled-bg-checked":      { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Fondo marcado/indeterminado cuando está deshabilitado" },
+    "disabled-border-color":    { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Color del borde cuando está deshabilitado" },
+    "disabled-bg-checked":      { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Fondo marcado/indeterminado cuando está deshabilitado" },
     "check-rotate":           { "$value": "15deg",                        "$type": "string",    "$description": "Rotación del checkmark en animación de entrada/salida" },
     "sm-size":                { "$value": "1rem",                         "$type": "dimension", "$description": "Tamaño del checkbox — variante sm (16px)" },
     "sm-check-size":          { "$value": "0.55rem",                      "$type": "dimension", "$description": "Tamaño del checkmark interior — variante sm" },
@@ -29,7 +29,7 @@
     "surface-dark-bg-checked":       { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Background when checked — surface-dark" },
     "surface-dark-check-color":      { "$value": "{color.background.dark}",    "$type": "color", "$description": "Checkmark color — surface-dark" },
     "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" },
-    "surface-dark-disabled-border-color": { "$value": "{color.grey-light}", "$type": "color", "$description": "Borde deshabilitado — surface-dark" },
-    "surface-dark-disabled-bg-checked": { "$value": "{color.grey-light}", "$type": "color", "$description": "Fondo marcado deshabilitado — surface-dark" }
+    "surface-dark-disabled-border-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Borde deshabilitado — surface-dark" },
+    "surface-dark-disabled-bg-checked": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Fondo marcado deshabilitado — surface-dark" }
   }
 }

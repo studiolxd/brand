@@ -2,7 +2,7 @@
   "switcher": {
     "track-width":         { "$value": "2.75em",                      "$type": "dimension", "$description": "Ancho del track" },
     "track-height":        { "$value": "1.5em",                       "$type": "dimension", "$description": "Alto del track" },
-    "track-bg":            { "$value": "{color.grey-light}",          "$type": "color",     "$description": "Fondo del track — estado off" },
+    "track-bg":            { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Fondo del track — estado off" },
     "track-bg-checked":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Fondo del track — estado on" },
     "track-border-radius": { "$value": "{border-radius.round}",        "$type": "dimension", "$description": "Radio del track (pill)" },
     "track-padding":       { "$value": "0.1875em",                    "$type": "dimension", "$description": "Padding interior del track — separa el thumb de los bordes" },

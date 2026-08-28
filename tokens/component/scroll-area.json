@@ -2,8 +2,8 @@
   "scroll-area": {
     "scrollbar-size":       { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Grosor de la barra de desplazamiento" },
     "scrollbar-bg":         { "$value": "transparent",              "$type": "color",     "$description": "Carril de la barra: sin relleno, la barra es el pulgar" },
-    "thumb-bg":             { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Pulgar de la barra" },
-    "thumb-hover-bg":       { "$value": "{color.grey-dark}",        "$type": "color",     "$description": "Pulgar al pasar el ratón o arrastrarlo" },
+    "thumb-bg":             { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Pulgar de la barra" },
+    "thumb-hover-bg":       { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Pulgar al pasar el ratón o arrastrarlo" },
     "thumb-border-radius":  { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio del pulgar (recto, como el resto del sistema)" },
     "transition-duration":  { "$value": "{motion.duration.fast}",   "$type": "duration",  "$description": "Duración de la aparición de la barra" },
     "transition-easing":    { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Easing de la aparición de la barra" },

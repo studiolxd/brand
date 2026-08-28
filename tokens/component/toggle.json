@@ -16,7 +16,7 @@
     "border-width":        { "$value": "{control.border-width}",    "$type": "dimension", "$description": "Grosor del borde" },
     "border-style":        { "$value": "{control.border-style}",    "$type": "string",    "$description": "Estilo del borde" },
     "border-radius":       { "$value": "{control.border-radius}",   "$type": "dimension", "$description": "Radio del borde (recto, como el resto de controles)" },
-    "border-color":        { "$value": "{color.grey-light}",        "$type": "color",     "$description": "Borde sin pulsar" },
+    "border-color":        { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Borde sin pulsar" },
     "bg":                  { "$value": "transparent",               "$type": "color",     "$description": "Fondo sin pulsar: ninguno. El relleno es lo que dice que el valor está elegido" },
     "color":               { "$value": "{color.text.on-light}",     "$type": "color",     "$description": "Texto sin pulsar" },
     "hover-border-color":  { "$value": "{color.primary}",           "$type": "color",     "$description": "Borde al pasar el ratón — el hover no pone fondo, solo marca el borde" },

@@ -17,8 +17,8 @@
   --search-form-xl-slot-size: var(--search-form-xl-height); /** Lado del hueco de la flecha — xl: cuadrado a la altura del campo, como en el resto de tallas */
   --search-form-submit-color: var(--color-primary); /** Color de la flecha: la tinta del campo, prusia sobre claro */
   --search-form-submit-hover-color: var(--color-primary); /** Color de la flecha en hover: la misma tinta. El adorno no pinta fondo al pasar el puntero —la regla del sistema— y la tinta no se atenúa */
-  --search-form-submit-disabled-color: var(--input-disabled-color); /** Color de la flecha con el campo deshabilitado: el del texto del campo deshabilitado */
   --search-form-submit-input-padding-inline-end: var(--search-form-submit-slot-size); /** Padding derecho del campo — el texto termina donde empieza la flecha, que va dentro del borde */
+  --search-form-submit-disabled-color: var(--input-disabled-color); /** Color de la flecha con el campo deshabilitado: el del texto del campo deshabilitado */
   --search-form-submit-focus-ring-width: var(--control-focus-ring-width); /** Grosor del anillo de foco de la flecha: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo */
   --search-form-submit-focus-ring-color: var(--input-focus-border-color); /** Color del anillo de foco de la flecha: el del borde del campo en foco */
 }
@@ -28,6 +28,6 @@
 html.dark {
   --search-form-submit-color: var(--color-text-on-dark); /** Color de la flecha — surface-dark (blanco) */
   --search-form-submit-hover-color: var(--color-text-on-dark); /** Color de la flecha en hover — surface-dark */
-  --search-form-submit-disabled-color: var(--input-disabled-color); /** Color de la flecha deshabilitada — surface-dark */
   --search-form-submit-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco de la flecha — surface-dark */
+  --search-form-submit-disabled-color: var(--input-disabled-color); /** Color de la flecha deshabilitada — surface-dark */
 }

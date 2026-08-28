@@ -15,9 +15,9 @@
     "transition-duration": { "$value": "{motion.duration.fast}", "$type": "number",    "$description": "Transition duration" },
     "transition-easing":   { "$value": "{motion.easing.default}","$type": "string",    "$description": "Transition easing" },
     "disabled-cursor":     { "$value": "not-allowed",            "$type": "string",    "$description": "Cursor when disabled" },
-    "disabled-bg":         { "$value": "{color.grey-lightest}",  "$type": "color",     "$description": "Background when disabled — only form button changes bg" },
-    "disabled-color":      { "$value": "{color.grey-darkest}",   "$type": "color",     "$description": "Text color when disabled — light surface" },
-    "disabled-border":     { "$value": "{color.grey-darkest}",   "$type": "color",     "$description": "Border color when disabled — light surface, matches text for contrast" },
+    "disabled-bg":         { "$value": "{color.disabled.bg-on-light}",   "$type": "color",     "$description": "Background when disabled — only form button changes bg" },
+    "disabled-color":      { "$value": "{color.disabled.text-on-light}", "$type": "color",     "$description": "Text color when disabled — light surface" },
+    "disabled-border":     { "$value": "{color.disabled.text-on-light}", "$type": "color",     "$description": "Border color when disabled — light surface, matches text for contrast" },
     "height":              { "$value": "{size-component.md}",   "$type": "dimension", "$description": "Altura fija del botón (talla md): el contenido se centra, no se hace por padding" },
     "sm-height":           { "$value": "{size-component.sm}",   "$type": "dimension", "$description": "Altura — sm" },
     "lg-height":           { "$value": "{size-component.lg}",   "$type": "dimension", "$description": "Altura — lg" },
@@ -120,8 +120,8 @@
       "transition-duration":{ "$value": "{button.transition-duration}","$type": "number",    "$description": "Transition duration" },
       "transition-easing":  { "$value": "{button.transition-easing}",  "$type": "string",    "$description": "Transition easing" },
       "disabled-cursor":    { "$value": "{button.disabled-cursor}",    "$type": "string",    "$description": "Cursor when disabled" },
-      "disabled-color":     { "$value": "{color.grey-light}",           "$type": "color",     "$description": "Text color when disabled" },
-      "disabled-border":    { "$value": "{color.grey-light}",           "$type": "color",     "$description": "Border color when disabled" },
+      "disabled-color":     { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Text color when disabled" },
+      "disabled-border":    { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Border color when disabled" },
       "padding-inline":     { "$value": "{button.padding-inline}",     "$type": "dimension", "$description": "Inline (horizontal) padding" },
       "focus-ring-width":   { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
       "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
@@ -181,7 +181,7 @@
       "surface-dark-hover-color":        { "$value": "{link.surface-dark-hover-color}", "$type": "color", "$description": "Hover text color — surface-dark" },
       "surface-dark-active-color":       { "$value": "{link.surface-dark-hover-color}", "$type": "color", "$description": "Active text color — surface-dark" },
       "surface-dark-focus-ring-color":   { "$value": "{link.surface-dark-focus-ring-color}", "$type": "color", "$description": "Focus ring color — surface-dark" },
-      "surface-dark-disabled-color":     { "$value": "{color.grey-light}",   "$type": "color", "$description": "Text color when disabled — surface-dark" }
+      "surface-dark-disabled-color":     { "$value": "{color.text.muted-on-dark}",   "$type": "color", "$description": "Text color when disabled — surface-dark" }
     },
     "ghost": {
       "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
@@ -219,7 +219,7 @@
       "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",             "$type": "color", "$description": "Focus ring color — surface-dark" },
       "surface-dark-hover-bg":           { "$value": "{color.text.on-dark}",         "$type": "color", "$description": "Hover background — surface-dark" },
       "surface-dark-active-bg":          { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Active background — surface-dark" },
-      "surface-dark-disabled-color":     { "$value": "{color.grey-light}",               "$type": "color", "$description": "Text color when disabled — surface-dark" }
+      "surface-dark-disabled-color":     { "$value": "{color.text.muted-on-dark}",               "$type": "color", "$description": "Text color when disabled — surface-dark" }
     }
   }
 }

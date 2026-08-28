@@ -22,7 +22,7 @@
     "danger-color":   { "$value": "{color.error-fill-text}",            "$type": "color", "$description": "Texto sobre danger" },
     "success-bg":     { "$value": "{color.success-fill}", "$type": "color", "$description": "Fondo success (green)" },
     "success-color":  { "$value": "{color.success-fill-text}",            "$type": "color", "$description": "Texto sobre success" },
-    "neutral-bg":     { "$value": "{color.grey-darkest}",     "$type": "color", "$description": "Fondo neutral (dark grey)" },
+    "neutral-bg":     { "$value": "{color.surface.inverse-on-light}", "$type": "color", "$description": "Fondo neutral (dark grey)" },
     "neutral-color":  { "$value": "{color.text.on-dark}",            "$type": "color", "$description": "Texto sobre neutral" },
     "surface-dark-primary-bg":                   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Relleno primary — surface-dark. El prusia es el lienzo y el contador desaparecería; se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente (mismo caso que `Tag`)" },
     "surface-dark-primary-color":                { "$value": "{color.background.dark}", "$type": "color", "$description": "Texto sobre primary — surface-dark" },

@@ -15,7 +15,6 @@
   --pagination-btn-min-width: var(--spacing-6); /** Ancho mínimo de los botones de página */
   --pagination-btn-padding-block: var(--spacing-2); /** Padding vertical de los botones */
   --pagination-btn-padding-inline: var(--spacing-2); /** Padding horizontal de los botones */
-  --pagination-btn-disabled-color: var(--color-grey-dark); /** Texto cuando está deshabilitado */
   --pagination-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
   --pagination-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
   --pagination-sm-btn-padding-block: var(--spacing-1); /** Padding block de botones — variante sm */
@@ -34,6 +33,7 @@
   --pagination-btn-hover-underline-width: var(--border-width-default); /** Grosor del subrayado en hover — token propio, no el de Link */
   --pagination-btn-current-color: var(--color-text-on-light); /** Texto de la página activa */
   --pagination-btn-current-font-weight: var(--font-weight-emphasis); /** Peso tipográfico de la página activa */
+  --pagination-btn-disabled-color: var(--color-icon-secondary-on-light); /** Texto cuando está deshabilitado */
   --pagination-ellipsis-color: var(--color-text-muted-on-light); /** Color del ellipsis */
   --pagination-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --pagination-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
@@ -43,11 +43,11 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --pagination-btn-disabled-color: var(--color-grey-light); /** Texto deshabilitado — surface-dark */
-  --pagination-ellipsis-color: var(--color-grey-light); /** Color del ellipsis — surface-dark */
   --pagination-summary-color: var(--color-text-on-dark); /** Color del resumen — surface-dark */
   --pagination-btn-color: var(--color-text-on-dark); /** Color de botones — surface-dark */
   --pagination-btn-hover-color: var(--color-text-on-dark); /** Texto hover — surface-dark */
   --pagination-btn-current-color: var(--color-text-on-dark); /** Texto de la página activa — surface-dark */
+  --pagination-btn-disabled-color: var(--color-text-muted-on-dark); /** Texto deshabilitado — surface-dark */
+  --pagination-ellipsis-color: var(--color-text-muted-on-dark); /** Color del ellipsis — surface-dark */
   --pagination-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
 }

@@ -10,6 +10,6 @@
     "baseline-color": { "$value": "{chart.grid-color}", "$type": "color", "$description": "Línea del cero cuando la serie cruza el cero" },
     "surface-dark-color":       { "$value": "{color.text.muted-on-dark}",   "$type": "color", "$description": "Trazo — surface-dark" },
     "surface-dark-accent-color":{ "$value": "{color.chart.series-1-on-dark}","$type": "color", "$description": "Acento — surface-dark" },
-    "surface-dark-baseline-color": { "$value": "{color.grey-darkest}",      "$type": "color", "$description": "Línea del cero — surface-dark" }
+    "surface-dark-baseline-color": { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Línea del cero — surface-dark" }
   }
 }

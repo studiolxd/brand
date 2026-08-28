@@ -19,7 +19,7 @@
     "btn-hover-underline-width": { "$value": "{border-width.default}",     "$type": "dimension", "$description": "Grosor del subrayado en hover — token propio, no el de Link" },
     "btn-current-color":     { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Texto de la página activa" },
     "btn-current-font-weight": { "$value": "{font-weight.emphasis}",        "$type": "number",    "$description": "Peso tipográfico de la página activa" },
-    "btn-disabled-color":  { "$value": "{color.grey-dark}",           "$type": "color",     "$description": "Texto cuando está deshabilitado" },
+    "btn-disabled-color":  { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Texto cuando está deshabilitado" },
     "btn-disabled-cursor": { "$value": "not-allowed",                 "$type": "string",    "$description": "Cursor cuando está deshabilitado" },
     "ellipsis-color":      { "$value": "{color.text.muted-on-light}", "$type": "color",     "$description": "Color del ellipsis" },
     "focus-ring-color":    { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del focus ring" },
@@ -39,8 +39,8 @@
     "surface-dark-btn-color":          { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color de botones — surface-dark" },
     "surface-dark-btn-hover-color":    { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Texto hover — surface-dark" },
     "surface-dark-btn-current-color":  { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Texto de la página activa — surface-dark" },
-    "surface-dark-btn-disabled-color": { "$value": "{color.grey-light}",        "$type": "color", "$description": "Texto deshabilitado — surface-dark" },
-    "surface-dark-ellipsis-color":     { "$value": "{color.grey-light}",        "$type": "color", "$description": "Color del ellipsis — surface-dark" },
+    "surface-dark-btn-disabled-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Texto deshabilitado — surface-dark" },
+    "surface-dark-ellipsis-color":     { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del ellipsis — surface-dark" },
     "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring color — surface-dark" }
   }
 }

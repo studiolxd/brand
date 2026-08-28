@@ -10,8 +10,6 @@
   --message-composer-helper-gap: var(--spacing-2); /** Separación entre el marco y la línea de ayuda */
   --message-composer-helper-line-height: var(--line-height-relaxed); /** Interlineado de la línea de ayuda: holgado, porque lleva teclas dentro y en pantalla estrecha rompe en dos renglones */
   --message-composer-bg: var(--textarea-bg); /** Fondo del marco — cascada desde textarea */
-  --message-composer-disabled-bg: var(--textarea-disabled-bg); /** Fondo del marco deshabilitado — cascada desde textarea */
-  --message-composer-disabled-border-color: var(--textarea-disabled-border-color); /** Color del marco deshabilitado — cascada desde textarea */
   --message-composer-helper-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la línea de ayuda: un peldaño por debajo del texto de la superficie */
   --message-composer-helper-color: var(--color-text-muted-on-light); /** Tinta de la línea de ayuda */
   --message-composer-border-radius: var(--textarea-border-radius); /** Radio del marco — cascada desde textarea */
@@ -20,17 +18,19 @@
   --message-composer-focus-border-color: var(--textarea-focus-border-color); /** Color del marco con el foco dentro — cascada desde textarea */
   --message-composer-focus-ring-inset-offset: var(--textarea-focus-ring-inset-offset); /** Separación entre el marco y el anillo de foco */
   --message-composer-focus-ring-color: var(--textarea-focus-ring-color); /** Color del anillo de foco */
+  --message-composer-disabled-bg: var(--textarea-disabled-bg); /** Fondo del marco deshabilitado — cascada desde textarea */
+  --message-composer-disabled-border-color: var(--textarea-disabled-border-color); /** Color del marco deshabilitado — cascada desde textarea */
   --message-composer-focus-ring-width: var(--textarea-focus-ring-width); /** Grosor del anillo de foco. Lo dibuja el marco, no el campo: el campo va en variante `bare` */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --message-composer-disabled-bg: var(--color-grey-darkest); /** Fondo del marco deshabilitado — superficie oscura */
-  --message-composer-disabled-border-color: var(--color-grey-dark); /** Color del marco deshabilitado — superficie oscura */
   --message-composer-bg: var(--color-background-dark); /** Fondo del marco — superficie oscura */
   --message-composer-border-color: var(--color-text-on-dark); /** Color del marco — superficie oscura */
   --message-composer-focus-border-color: var(--color-text-on-dark); /** Color del marco con el foco dentro — superficie oscura */
   --message-composer-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */
   --message-composer-helper-color: var(--color-text-muted-on-dark); /** Tinta de la línea de ayuda — superficie oscura */
+  --message-composer-disabled-bg: var(--color-disabled-bg-on-dark); /** Fondo del marco deshabilitado — superficie oscura */
+  --message-composer-disabled-border-color: var(--color-disabled-border-on-dark); /** Color del marco deshabilitado — superficie oscura */
 }

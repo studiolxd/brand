@@ -16,7 +16,23 @@
       "secondary-on-light": { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Superficie clara secundaria sobre fondo claro: bloque de código, kbd, carril de progreso, pie de tabla" },
       "secondary-on-dark":  { "$value": "{color.grey-darkest}",  "$type": "color", "$description": "Superficie clara secundaria — variante para superficie oscura" },
       "inverse-on-light":   { "$value": "{color.grey-darkest}",  "$type": "color", "$description": "Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag)" },
-      "inverse-on-dark":    { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Superficie invertida — variante para superficie oscura" }
+      "inverse-on-dark":    { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Superficie invertida — variante para superficie oscura" },
+      "highlight-on-dark":  { "$value": "{color.grey-dark}",     "$type": "color", "$description": "Brillo que recorre una superficie secundaria en carga (Skeleton) sobre superficie oscura — un paso más claro que el fondo secundario oscuro" }
+    },
+    "border": {
+      "default-on-light": { "$value": "{color.grey-light}", "$type": "color", "$description": "Borde general sobre superficie clara: divisores, separadores, carriles y guías sin recorrer. Por la regla de derivación el par en superficie oscura no es un primitivo gris, es `color.text.on-dark` (cada componente lo referencia directamente)" }
+    },
+    "disabled": {
+      "bg-on-light":     { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Fondo de un control deshabilitado sobre superficie clara" },
+      "bg-on-dark":      { "$value": "{color.grey-darkest}",  "$type": "color", "$description": "Fondo de un control deshabilitado — superficie oscura" },
+      "text-on-light":   { "$value": "{color.grey-darkest}",  "$type": "color", "$description": "Texto o borde de un control de texto (Button, Input, Textarea) deshabilitado sobre superficie clara" },
+      "text-on-dark":    { "$value": "{color.grey-light}",    "$type": "color", "$description": "Texto de un control de texto deshabilitado — superficie oscura" },
+      "border-on-light": { "$value": "{color.grey-light}",    "$type": "color", "$description": "Borde o relleno de un control deshabilitado (checkbox, radio, campo) sobre superficie clara" },
+      "border-on-dark":  { "$value": "{color.grey-dark}",     "$type": "color", "$description": "Borde de un control deshabilitado — superficie oscura" }
+    },
+    "icon": {
+      "secondary-on-light": { "$value": "{color.grey-dark}",              "$type": "color", "$description": "Icono de acción secundaria o control compacto deshabilitado (nav de calendario/paginación, aspa de borrar) sobre superficie clara" },
+      "secondary-on-dark":  { "$value": "{color.text.muted-on-dark}",     "$type": "color", "$description": "Icono de acción secundaria — superficie oscura" }
     }
   }
 }

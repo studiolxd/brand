@@ -17,6 +17,6 @@
 [data-theme="dark"],
 html.dark {
   --sparkline-accent-color: var(--color-chart-series-1-on-dark); /** Acento — surface-dark */
-  --sparkline-baseline-color: var(--color-grey-darkest); /** Línea del cero — surface-dark */
   --sparkline-color: var(--color-text-muted-on-dark); /** Trazo — surface-dark */
+  --sparkline-baseline-color: var(--color-surface-secondary-on-dark); /** Línea del cero — surface-dark */
 }

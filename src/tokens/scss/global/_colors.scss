@@ -83,6 +83,16 @@ $lxd-color-surface-secondary-on-light: #f2f2f2; // Superficie clara secundaria s
 $lxd-color-surface-secondary-on-dark: #4a4a4a; // Superficie clara secundaria — variante para superficie oscura
 $lxd-color-surface-inverse-on-light: #4a4a4a; // Superficie invertida sobre fondo claro: relleno neutral oscuro (Tag)
 $lxd-color-surface-inverse-on-dark: #f2f2f2; // Superficie invertida — variante para superficie oscura
+$lxd-color-surface-highlight-on-dark: #6b6b6b; // Brillo que recorre una superficie secundaria en carga (Skeleton) sobre superficie oscura — un paso más claro que el fondo secundario oscuro
+$lxd-color-border-default-on-light: #d0d0d0; // Borde general sobre superficie clara: divisores, separadores, carriles y guías sin recorrer. Por la regla de derivación el par en superficie oscura no es un primitivo gris, es `color.text.on-dark` (cada componente lo referencia directamente)
+$lxd-color-disabled-bg-on-light: #f2f2f2; // Fondo de un control deshabilitado sobre superficie clara
+$lxd-color-disabled-bg-on-dark: #4a4a4a; // Fondo de un control deshabilitado — superficie oscura
+$lxd-color-disabled-text-on-light: #4a4a4a; // Texto o borde de un control de texto (Button, Input, Textarea) deshabilitado sobre superficie clara
+$lxd-color-disabled-text-on-dark: #d0d0d0; // Texto de un control de texto deshabilitado — superficie oscura
+$lxd-color-disabled-border-on-light: #d0d0d0; // Borde o relleno de un control deshabilitado (checkbox, radio, campo) sobre superficie clara
+$lxd-color-disabled-border-on-dark: #6b6b6b; // Borde de un control deshabilitado — superficie oscura
+$lxd-color-icon-secondary-on-light: #6b6b6b; // Icono de acción secundaria o control compacto deshabilitado (nav de calendario/paginación, aspa de borrar) sobre superficie clara
+$lxd-color-icon-secondary-on-dark: #d0d0d0; // Icono de acción secundaria — superficie oscura
 $lxd-color-red: #b30000; // System red — base (AAA sobre blanco; fill universal de error/destructive)
 $lxd-color-red-light: #ff8585; // System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo
 $lxd-color-green: #006616; // System green — base (AAA sobre blanco; fill universal de success)

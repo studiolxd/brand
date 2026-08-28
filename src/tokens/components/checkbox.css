@@ -17,8 +17,6 @@
   --checkbox-check-color: var(--color-white); /** Color del checkmark */
   --checkbox-transition-duration: var(--motion-duration-fast); /** Duración de transiciones */
   --checkbox-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
-  --checkbox-disabled-border-color: var(--color-grey-light); /** Color del borde cuando está deshabilitado */
-  --checkbox-disabled-bg-checked: var(--color-grey-light); /** Fondo marcado/indeterminado cuando está deshabilitado */
   --checkbox-border-radius: var(--border-radius-default); /** Border radius */
   --checkbox-border-width: var(--border-width-default); /** Border width */
   --checkbox-border-color: var(--color-primary); /** Color del borde */
@@ -27,16 +25,18 @@
   --checkbox-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco respecto al borde */
   --checkbox-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --checkbox-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error (texto/borde, nunca fondo) */
+  --checkbox-disabled-border-color: var(--color-disabled-border-on-light); /** Color del borde cuando está deshabilitado */
+  --checkbox-disabled-bg-checked: var(--color-disabled-border-on-light); /** Fondo marcado/indeterminado cuando está deshabilitado */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --checkbox-disabled-border-color: var(--color-grey-light); /** Borde deshabilitado — surface-dark */
-  --checkbox-disabled-bg-checked: var(--color-grey-light); /** Fondo marcado deshabilitado — surface-dark */
   --checkbox-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */
   --checkbox-border-color: var(--color-text-on-dark); /** Border color — surface-dark */
   --checkbox-bg-checked: var(--color-text-on-dark); /** Background when checked — surface-dark */
   --checkbox-check-color: var(--color-background-dark); /** Checkmark color — surface-dark */
   --checkbox-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
+  --checkbox-disabled-border-color: var(--color-text-muted-on-dark); /** Borde deshabilitado — surface-dark */
+  --checkbox-disabled-bg-checked: var(--color-text-muted-on-dark); /** Fondo marcado deshabilitado — surface-dark */
 }

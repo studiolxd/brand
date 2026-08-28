@@ -18,10 +18,6 @@
   --number-input-btn-color: var(--color-primary); /** Color del icono de los botones */
   --number-input-btn-hover-line-width: var(--border-width-default); /** Grosor de la línea de hover de los botones +/−. El hover no pinta relleno (regla de Colores): deja una línea de tinta bajo el botón */
   --number-input-btn-hover-line-color: var(--color-primary); /** Color de la línea de hover de los botones +/− */
-  --number-input-disabled-bg: var(--input-disabled-bg); /** Fondo cuando deshabilitado */
-  --number-input-disabled-color: var(--input-disabled-color); /** Texto cuando deshabilitado */
-  --number-input-disabled-border-color: var(--input-disabled-border-color); /** Borde cuando deshabilitado */
-  --number-input-disabled-btn-color: var(--input-disabled-color); /** Color del icono de botones cuando deshabilitado */
   --number-input-error-bg: var(--input-error-bg); /** Fondo en error */
   --number-input-sm-font-size: var(--input-sm-font-size); /** Font size — sm */
   --number-input-sm-height: var(--input-sm-height); /** Altura — sm */
@@ -39,6 +35,10 @@
   --number-input-focus-ring-inset-offset: var(--input-focus-ring-inset-offset); /** Gap entre borde y focus ring */
   --number-input-focus-ring-color: var(--input-focus-ring-color); /** Color del focus ring */
   --number-input-focus-border-color: var(--input-focus-border-color); /** Color del borde en foco */
+  --number-input-disabled-bg: var(--input-disabled-bg); /** Fondo cuando deshabilitado */
+  --number-input-disabled-color: var(--input-disabled-color); /** Texto cuando deshabilitado */
+  --number-input-disabled-border-color: var(--input-disabled-border-color); /** Borde cuando deshabilitado */
+  --number-input-disabled-btn-color: var(--input-disabled-color); /** Color del icono de botones cuando deshabilitado */
   --number-input-error-border-color: var(--input-error-border-color); /** Color del borde en error */
   --number-input-error-color: var(--input-error-color); /** Texto en error */
   --number-input-error-focus-border-color: var(--input-error-focus-border-color); /** Borde en foco+error */
