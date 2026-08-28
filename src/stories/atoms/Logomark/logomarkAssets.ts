@@ -1,0 +1,33 @@
+/** `viewBox` cuadrado del isotipo: el trazado centrado, sin margen. */
+export const logomarkViewBox = '547.6 -22.35 315.8 315.8';
+
+/** `viewBox` de la variante con área de seguridad: el trazado ocupa el 80 % central. */
+export const logomarkSafeViewBox = '508.125 -61.825 394.75 394.75';
+
+/**
+ * Los trazados del isotipo, en el sistema de coordenadas de `logomarkViewBox`.
+ * Para pintarlo fuera de React —`next/og`, Satori, un SVG a mano— sin arrastrar
+ * el componente ni su CSS.
+ */
+export const logomarkPaths: readonly string[] = [
+  'M547.6,201.4V69.7h20.2v113.1h60.4v18.7H547.6z',
+  'M631.6,201.4l49.3-74.3l2.2-0.1l35.6-57.3h22.4l-45.4,69.9h-1.8l-39.7,61.8H631.6z M722.6,201.4l-40.8-62.2 l-1.4-0.1l-46.1-69.5h23.3l37.4,57.3h1.8l49.6,74.4H722.6z',
+  'M751.6,201.4V69.7h45.1c20.2,0,36.3,6,48.5,18c12.1,12,18.2,27.9,18.2,47.8c0,19.8-6.1,35.8-18.4,47.8 c-12.2,12.1-28.4,18.1-48.3,18.1H751.6z M771.9,183.3h24.4c14.2,0,25.4-4.3,33.8-12.8c8.4-8.5,12.6-20.1,12.6-34.6v-0.1 c0-14.7-4.1-26.3-12.4-34.9c-8.2-8.6-19.6-12.9-34-12.9h-24.4V183.3z',
+];
+
+/** El isotipo como documento SVG completo, idéntico a `dist/assets/logomark.svg`. */
+export const logomarkSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="547.6 -22.35 315.8 315.8" fill="currentColor" role="img" aria-label="Studio LXD">
+  <title>Studio LXD</title>
+  <path d="M547.6,201.4V69.7h20.2v113.1h60.4v18.7H547.6z" />
+  <path d="M631.6,201.4l49.3-74.3l2.2-0.1l35.6-57.3h22.4l-45.4,69.9h-1.8l-39.7,61.8H631.6z M722.6,201.4l-40.8-62.2 l-1.4-0.1l-46.1-69.5h23.3l37.4,57.3h1.8l49.6,74.4H722.6z" />
+  <path d="M751.6,201.4V69.7h45.1c20.2,0,36.3,6,48.5,18c12.1,12,18.2,27.9,18.2,47.8c0,19.8-6.1,35.8-18.4,47.8 c-12.2,12.1-28.4,18.1-48.3,18.1H751.6z M771.9,183.3h24.4c14.2,0,25.4-4.3,33.8-12.8c8.4-8.5,12.6-20.1,12.6-34.6v-0.1 c0-14.7-4.1-26.3-12.4-34.9c-8.2-8.6-19.6-12.9-34-12.9h-24.4V183.3z" />
+</svg>`;
+
+/** El isotipo con área de seguridad del 10 % por lado, para máscaras circulares. Idéntico a `dist/assets/logomark-safe.svg`. */
+export const logomarkSafeSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="508.125 -61.825 394.75 394.75" fill="currentColor" role="img" aria-label="Studio LXD">
+  <title>Studio LXD</title>
+  <!-- Área de seguridad del 10 % por lado: el isotipo ocupa el 80 % central y entra completo en una máscara circular. -->
+  <path d="M547.6,201.4V69.7h20.2v113.1h60.4v18.7H547.6z" />
+  <path d="M631.6,201.4l49.3-74.3l2.2-0.1l35.6-57.3h22.4l-45.4,69.9h-1.8l-39.7,61.8H631.6z M722.6,201.4l-40.8-62.2 l-1.4-0.1l-46.1-69.5h23.3l37.4,57.3h1.8l49.6,74.4H722.6z" />
+  <path d="M751.6,201.4V69.7h45.1c20.2,0,36.3,6,48.5,18c12.1,12,18.2,27.9,18.2,47.8c0,19.8-6.1,35.8-18.4,47.8 c-12.2,12.1-28.4,18.1-48.3,18.1H751.6z M771.9,183.3h24.4c14.2,0,25.4-4.3,33.8-12.8c8.4-8.5,12.6-20.1,12.6-34.6v-0.1 c0-14.7-4.1-26.3-12.4-34.9c-8.2-8.6-19.6-12.9-34-12.9h-24.4V183.3z" />
+</svg>`;

@@ -1,0 +1,73 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as LogomarkStories from "./Logomark.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { logomarkTokens } from "../../../tokens/components/logomark";
+
+<Meta of={LogomarkStories} />
+
+# Logomark
+
+El **isotipo** de Studio LXD: la parte gráfica del logotipo —las tres letras—, sin la firma. Es cuadrado, así que cabe donde el logotipo completo no entra: un favicon, el icono de una aplicación, el avatar de una organización, la marca de una barra estrecha.
+
+<Canvas of={LogomarkStories.PorDefecto} />
+
+## Cuándo usar cada uno
+
+`Logo` es el logotipo completo y es el que firma una interfaz: cabecera, formulario de acceso, pie. `Logomark` entra cuando el espacio es cuadrado o el tamaño es tan pequeño que la firma no se leería. Si cabe el logotipo, va el logotipo.
+
+## Tallas
+
+Las mismas tallas de componente que `Logo` —`sm`, `md`, `lg`— más `xl` (64px), la talla de marca. Al ser cuadrado, la talla es el lado.
+
+<Canvas of={LogomarkStories.Tallas} />
+
+## Superficie
+
+El trazado toma su color de un token con par oscuro. Dentro de `surface-dark` pasa a claro solo, sin ninguna prop.
+
+<Canvas of={LogomarkStories.EnSuperficieOscura} />
+
+## Fuera de React: favicon, iconos y OG
+
+La subruta `@studiolxd/brand/logomark` publica el isotipo también como datos, para generar activos donde no hay componente:
+
+```ts
+import { logomarkSvg, logomarkSafeSvg, logomarkPaths, logomarkViewBox } from '@studiolxd/brand/logomark';
+```
+
+- **`logomarkSvg`** — el documento SVG completo. Sirve tal cual como `favicon.svg` o como icono PWA; la tinta es `currentColor`, así que hereda el color de donde se pinte.
+- **`logomarkSafeSvg`** — el mismo trazado con un **área de seguridad del 10 %** por lado: el isotipo ocupa el 80 % central y entra completo en una máscara circular (`apple-touch-icon`, iconos `maskable`, avatares redondos).
+- **`logomarkPaths`** y **`logomarkViewBox`** — los trazados sueltos, para pintarlos en `next/og` o Satori sin montar el componente.
+
+Los dos ficheros viajan además en el paquete: `@studiolxd/brand/assets/logomark.svg` y `@studiolxd/brand/assets/logomark-safe.svg`, para servirlos o copiarlos en un script de build.
+
+```tsx
+// app/icon.tsx — next/og
+import { ImageResponse } from 'next/og';
+import { logomarkPaths, logomarkViewBox } from '@studiolxd/brand/logomark';
+
+export default function Icon() {
+  return new ImageResponse(
+    (
+      <svg viewBox={logomarkViewBox} width={512} height={512} fill="#111E30">
+        {logomarkPaths.map((d) => <path key={d} d={d} />)}
+      </svg>
+    ),
+    { width: 512, height: 512 },
+  );
+}
+```
+
+## Accesibilidad
+
+Por defecto es decorativo (`aria-hidden`): el nombre lo pone el enlace que lo envuelve. Con `title` pasa a `role="img"` y se anuncia con ese texto — para cuando el isotipo es lo único que identifica a la marca en ese punto.
+
+<Canvas of={LogomarkStories.ConNombre} />
+
+## Tokens
+
+<TokenTable tokens={logomarkTokens} />
+
+## Props
+
+<ArgTypes of={LogomarkStories} />
