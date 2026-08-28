@@ -20,7 +20,7 @@
   --kbd-bg: var(--color-surface-secondary-on-light); /** Fondo del keycap: la superficie clara secundaria del sistema */
   --kbd-color: var(--color-text-on-light); /** Color del símbolo de la tecla */
   --kbd-font-weight: var(--font-weight-emphasis); /** Peso de énfasis: legibilidad en tamaño compacto */
-  --kbd-min-size: calc(var(--kbd-font-size) * var(--kbd-line-height) + 2 * var(--kbd-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo: exactamente la altura de la tecla, de modo que una tecla de un carácter sale cuadrada. No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md) */
+  --kbd-min-size: calc(var(--kbd-font-size) * var(--kbd-line-height) + 2 * var(--kbd-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo: exactamente la altura de la tecla, así una tecla de un carácter sale casi cuadrada (el ancho real crece por el aire horizontal y el propio carácter, siempre mayor que este mínimo). No es una talla de componente —un keycap es una marca dentro del texto, no un control— sino la medida que sale de su propio cuerpo, su aire y sus bordes (26px en md) */
   --kbd-sm-min-size: calc(var(--kbd-sm-font-size) * var(--kbd-line-height) + 2 * var(--kbd-sm-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo sm: la misma fórmula con el cuerpo y el aire de la talla (24px) */
   --kbd-lg-min-size: calc(var(--kbd-lg-font-size) * var(--kbd-line-height) + 2 * var(--kbd-lg-padding-block) + 2 * var(--kbd-border-width)); /** Ancho mínimo lg: la misma fórmula con el cuerpo y el aire de la talla (38px) */
 }
