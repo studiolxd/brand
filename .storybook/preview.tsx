@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import type { Preview, Decorator } from '@storybook/react-vite'
 import '../src/index.css'
+import '../src/stylesheets/fonts.css'
 import './preview.css'
 import studiolxdTheme from './studiolxdTheme'
 
