@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { forwardRef, useId, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Tooltip as BaseTooltip } from '@base-ui-components/react/tooltip';
 import './Tooltip.css';
@@ -55,7 +55,8 @@ function tokenSideOffset(): number {
   return cssLengthToPx(getComputedStyle(root).getPropertyValue('--tooltip-offset').trim(), root);
 }
 
-export interface TooltipProps {
+export interface TooltipProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'children' | 'className'> {
   /** Contenido del bocadillo. */
   label: ReactNode;
   /** Elemento que dispara el bocadillo. Recibe los props del trigger vía `render`. */
@@ -69,7 +70,7 @@ export interface TooltipProps {
   onOpenChange?: (open: boolean) => void;
   /** Retardo propio en ms. Sin él hereda el del `TooltipProvider`. */
   delayDuration?: number;
-  /** Clase adicional para el bocadillo. */
+  /** Clase adicional para el **bocadillo** (no para el disparador). */
   className?: string;
 }
 
@@ -80,8 +81,14 @@ export interface TooltipProps {
  * diferencia de otros motores, no lo cablea por su cuenta).
  *
  * Requiere un `TooltipProvider` por encima (normalmente en el shell).
+ *
+ * Reenvía `ref` y `{...rest}` (handlers, `aria-*`, `id`, `data-*`) a su
+ * **disparador**, no al bocadillo: eso es lo que le permite ser a su vez el
+ * `render`/`trigger` de otro componente —un `Popover` sobre el mismo botón—,
+ * porque las props que le inyecta el motor de fuera llegan al elemento real.
+ * `className`, en cambio, es del bocadillo.
  */
-export function Tooltip({
+export const Tooltip = forwardRef<HTMLElement, TooltipProps>(function Tooltip({
   label,
   children,
   side = 'top',
@@ -92,7 +99,8 @@ export function Tooltip({
   onOpenChange,
   delayDuration,
   className,
-}: TooltipProps) {
+  ...rest
+}, ref) {
   const popupId = useId();
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false);
   const isOpen = open ?? uncontrolledOpen;
@@ -107,9 +115,11 @@ export function Tooltip({
       }}
     >
       <BaseTooltip.Trigger
+        ref={ref as React.Ref<HTMLButtonElement>}
         render={children as React.ReactElement<Record<string, unknown>>}
         aria-describedby={isOpen ? popupId : undefined}
         {...(delayDuration !== undefined ? { delay: delayDuration } : {})}
+        {...rest}
       />
 
       <BaseTooltip.Portal>
@@ -132,4 +142,4 @@ export function Tooltip({
       </BaseTooltip.Portal>
     </BaseTooltip.Root>
   );
-}
+});

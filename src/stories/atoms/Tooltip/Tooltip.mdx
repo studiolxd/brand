@@ -34,6 +34,19 @@ En claro el bocadillo ya va invertido: relleno prusia sobre página blanca. Sobr
 
 <Canvas of={TooltipStories.SuperficieOscura} />
 
+## Como disparador de otro componente
+
+`Tooltip` reenvía `ref` y el resto de props que reciba a **su disparador**, no al bocadillo. Eso es
+lo que le permite ser a su vez el disparador de otro componente sobre el mismo botón: un `Popover`,
+un `Menu`. Sin ese reenvío, las props que inyecta el motor de fuera (`aria-expanded`, el `onClick`
+que abre el panel) se perdían.
+
+```tsx
+<Popover trigger={<Tooltip label="Ver los detalles"><Button>Detalles</Button></Tooltip>}>
+```
+
+`className`, en cambio, sigue siendo del bocadillo.
+
 ## Accesibilidad
 
 El bocadillo es `role="tooltip"` y, mientras está abierto, el disparador lo referencia con `aria-describedby` (Base UI no lo cablea por su cuenta). Se abre con hover y con foco de teclado; Escape lo cierra.

@@ -46,6 +46,52 @@ cerrarse al elegir una fecha.
 
 <Canvas of={PopoverStories.Controlado} />
 
+## Escapes de cierre
+
+El panel se cierra solo por tres motivos, y cada uno tiene su handler. Todos reciben el **detalle**
+de Base UI —el evento nativo, el motivo y `cancel()`—, así que el consumidor puede dejar el panel
+abierto:
+
+| Prop | Cuándo |
+|---|---|
+| `onPointerDownOutside` | Se pulsa fuera del panel |
+| `onFocusOutside` | El foco se va fuera del panel |
+| `onEscapeKeyDown` | Se pulsa Escape |
+
+```tsx
+<Popover
+  trigger={…}
+  onPointerDownOutside={(details) => {
+    if (elClicCaeEnMiPortal(details.event)) details.cancel();
+  }}
+>
+```
+
+Es el escape para el clic que cae en un portal del producto —un selector de terceros, un
+datepicker ajeno— que el motor no reconoce como parte del panel y que, sin esto, cerraba el panel a
+mitad de una interacción.
+
+<Canvas of={PopoverStories.EscapesDeCierre} />
+
+`onOpenChange` sigue recibiendo primero el `open` y ahora, además, ese mismo detalle como segundo
+argumento.
+
+## Bocadillo y panel en el mismo disparador
+
+Un botón puede llevar `Tooltip` y `Popover` a la vez: se pasa el `Tooltip` como `trigger` del
+`Popover`. Funciona porque `Tooltip` reenvía a su propio disparador las props que le inyecta el
+motor de fuera, así que `aria-expanded`, `aria-haspopup` y el `onClick` del panel acaban en el
+botón de verdad —no en un envoltorio.
+
+```tsx
+<Popover
+  trigger={<Tooltip label="Ver los detalles"><Button>Detalles</Button></Tooltip>}
+  label="Detalles"
+>
+```
+
+<Canvas of={PopoverStories.ConTooltipEnElDisparador} />
+
 ## Superficie oscura
 
 El panel viaja en un **portal**, colgado del `body`: un `.surface-dark` puesto en
@@ -72,7 +118,53 @@ dentro de un `Popover`.
 
 <TokenTable tokens={popoverTokens} />
 
-### Superficie oscura
+### Escapes de cierre
+
+El panel se cierra solo por tres motivos, y cada uno tiene su handler. Todos reciben el **detalle**
+de Base UI —el evento nativo, el motivo y `cancel()`—, así que el consumidor puede dejar el panel
+abierto:
+
+| Prop | Cuándo |
+|---|---|
+| `onPointerDownOutside` | Se pulsa fuera del panel |
+| `onFocusOutside` | El foco se va fuera del panel |
+| `onEscapeKeyDown` | Se pulsa Escape |
+
+```tsx
+<Popover
+  trigger={…}
+  onPointerDownOutside={(details) => {
+    if (elClicCaeEnMiPortal(details.event)) details.cancel();
+  }}
+>
+```
+
+Es el escape para el clic que cae en un portal del producto —un selector de terceros, un
+datepicker ajeno— que el motor no reconoce como parte del panel y que, sin esto, cerraba el panel a
+mitad de una interacción.
+
+<Canvas of={PopoverStories.EscapesDeCierre} />
+
+`onOpenChange` sigue recibiendo primero el `open` y ahora, además, ese mismo detalle como segundo
+argumento.
+
+## Bocadillo y panel en el mismo disparador
+
+Un botón puede llevar `Tooltip` y `Popover` a la vez: se pasa el `Tooltip` como `trigger` del
+`Popover`. Funciona porque `Tooltip` reenvía a su propio disparador las props que le inyecta el
+motor de fuera, así que `aria-expanded`, `aria-haspopup` y el `onClick` del panel acaban en el
+botón de verdad —no en un envoltorio.
+
+```tsx
+<Popover
+  trigger={<Tooltip label="Ver los detalles"><Button>Detalles</Button></Tooltip>}
+  label="Detalles"
+>
+```
+
+<Canvas of={PopoverStories.ConTooltipEnElDisparador} />
+
+## Superficie oscura
 
 <TokenTable tokens={popoverDarkTokens} />
 

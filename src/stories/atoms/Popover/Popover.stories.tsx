@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { expect, userEvent, within, screen } from 'storybook/test';
+import { expect, userEvent, waitFor, within, screen } from 'storybook/test';
 import { Popover } from './Popover';
 import { DotsButton } from '../DotsButton/DotsButton';
+import { Tooltip, TooltipProvider } from '../Tooltip/Tooltip';
 import { Button } from '../Button/Button';
 import { Paragraph } from '../Paragraph/Paragraph';
 
@@ -117,5 +118,118 @@ export const Contrato: Story = {
 
     await userEvent.keyboard('{Escape}');
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  },
+};
+
+/**
+ * Los tres motivos de cierre automático tienen su propio handler y cada uno
+ * puede cancelarse. Aquí el panel **no** se cierra al pulsar fuera —el
+ * consumidor cancela el cierre— y sí con Escape.
+ */
+export const EscapesDeCierre: Story = {
+  name: 'Escapes de cierre',
+  args: { trigger: <Button>Abrir</Button>, children: null },
+  render: () => {
+    const [intentos, setIntentos] = useState(0);
+    return (
+      <Popover
+        defaultOpen
+        trigger={<Button>Abrir</Button>}
+        onPointerDownOutside={(details) => {
+          details.cancel();
+          setIntentos((n) => n + 1);
+        }}
+      >
+        <Paragraph>El clic fuera no lo cierra: {intentos} intentos.</Paragraph>
+        <Paragraph>Escape sí.</Paragraph>
+      </Popover>
+    );
+  },
+};
+
+/**
+ * El mismo botón lleva bocadillo y panel: el `Tooltip` es el disparador del
+ * `Popover`, y reenvía a su botón las props que le inyecta el motor del panel.
+ */
+export const ConTooltipEnElDisparador: Story = {
+  name: 'Con tooltip en el disparador',
+  args: { trigger: <Button>Abrir</Button>, children: null },
+  render: () => (
+    <TooltipProvider>
+      <Popover
+        trigger={
+          <Tooltip label="Ver los detalles del proyecto">
+            <Button variant="outline">Detalles</Button>
+          </Tooltip>
+        }
+        label="Detalles del proyecto"
+      >
+        <Paragraph>Contenido del panel.</Paragraph>
+      </Popover>
+    </TooltipProvider>
+  ),
+};
+
+/** Test: el clic fuera se puede cancelar y Escape sigue cerrando. */
+export const ContratoEscapes: Story = {
+  name: 'Test — el cierre por clic fuera se puede cancelar',
+  tags: ['!dev'],
+  args: { trigger: <Button>Abrir</Button>, children: null },
+  render: () => (
+    <>
+      <Popover
+        defaultOpen
+        trigger={<Button>Abrir</Button>}
+        label="Panel"
+        onPointerDownOutside={(details) => details.cancel()}
+      >
+        <Paragraph>Contenido</Paragraph>
+      </Popover>
+      <Button>Fuera</Button>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(screen.getByRole('dialog', { name: 'Panel' })).toBeInTheDocument();
+
+    // El clic fuera lo cancela el consumidor: el panel sigue abierto.
+    await userEvent.click(canvas.getByRole('button', { name: 'Fuera' }));
+    await expect(screen.getByRole('dialog', { name: 'Panel' })).toBeInTheDocument();
+
+    // Escape no está cancelado y sí cierra (tras la animación de salida).
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Panel' })).toBeNull());
+  },
+};
+
+/** Test: el `Tooltip` puede ser el disparador del `Popover` sobre el mismo botón. */
+export const ContratoTooltipDisparador: Story = {
+  name: 'Test — tooltip y popover sobre el mismo disparador',
+  tags: ['!dev'],
+  args: { trigger: <Button>Abrir</Button>, children: null },
+  render: () => (
+    <TooltipProvider>
+      <Popover
+        trigger={
+          <Tooltip label="Ver los detalles">
+            <Button variant="outline">Detalles</Button>
+          </Tooltip>
+        }
+        label="Detalles"
+      >
+        <Paragraph>Contenido del panel.</Paragraph>
+      </Popover>
+    </TooltipProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Detalles' });
+    // Hay un solo botón: el bocadillo no ha metido un envoltorio extra.
+    await expect(canvas.getAllByRole('button')).toHaveLength(1);
+    // Y las props del panel han llegado al botón de verdad.
+    await expect(boton).toHaveAttribute('aria-haspopup', 'dialog');
+
+    await userEvent.click(boton);
+    await expect(await screen.findByRole('dialog', { name: 'Detalles' })).toBeInTheDocument();
   },
 };
