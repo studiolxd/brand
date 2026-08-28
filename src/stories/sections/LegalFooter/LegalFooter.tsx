@@ -36,8 +36,10 @@ function defaultRenderLink({ children, ...props }: LegalFooterRenderLinkProps) {
 
 /**
  * El pie legal: los enlaces a aviso legal, privacidad, cookies y condiciones,
- * y nada más. Contenido acotado por `Container`, fondo a sangre. Es el pie de
- * las aplicaciones de la suite; la web tiene su pie propio con más cosas.
+ * y nada más. Se monta a sangre, con su propio aire vertical
+ * (`--legal-footer-padding-block`) y el contenido acotado por su `Container`
+ * interior. Es el pie de las aplicaciones de la suite; la web tiene su pie
+ * propio con más cosas.
  */
 export function LegalFooter({
   label = 'Legal',
@@ -49,23 +51,19 @@ export function LegalFooter({
   className,
 }: LegalFooterProps) {
   return (
-    <Container
-      as="footer"
-      width={width}
-      surface={surface}
-      className={['legal-footer', className].filter(Boolean).join(' ')}
-      innerClassName="legal-footer__inner"
-    >
-      {title && <Heading level={2} size={6} className="legal-footer__title">{title}</Heading>}
-      <nav aria-label={label}>
-        <ul className="legal-footer__links">
-          {links.map((link) => (
-            <li key={link.id}>
-              {renderLink({ href: link.href, className: 'legal-footer__link link--ink', children: link.label })}
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </Container>
+    <footer className={['legal-footer', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}>
+      <Container width={width} innerClassName="legal-footer__inner">
+        {title && <Heading level={2} size={6} className="legal-footer__title">{title}</Heading>}
+        <nav aria-label={label}>
+          <ul className="legal-footer__links">
+            {links.map((link) => (
+              <li key={link.id}>
+                {renderLink({ href: link.href, className: 'legal-footer__link link--ink', children: link.label })}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </Container>
+    </footer>
   );
 }
