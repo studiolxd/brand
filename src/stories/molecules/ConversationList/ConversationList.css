@@ -18,6 +18,15 @@
   gap: var(--conversation-list-gap);
 }
 
+/* Los tres estados que sustituyen a la lista —carga, error y vacío— viven en
+   el mismo hueco y con el mismo aire que las filas. */
+.conversation-list__loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--conversation-list-gap);
+  padding-inline: var(--conversation-list-item-padding-inline);
+}
+
 .conversation-list__item {
   display: flex;
   align-items: center;

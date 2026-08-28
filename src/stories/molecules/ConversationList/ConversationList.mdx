@@ -26,9 +26,26 @@ Con eso resuelto, quedaba decidir cómo se ve cada estado, porque el gris claro 
 
 El botón de conversación nueva es un **`Button variant="outline"`**, no un `<button>` a mano con borde discontinuo: hereda talla, foco, tipografía y par oscuro del átomo.
 
-<Canvas of={ConversationListStories.SinConversaciones} />
+## Carga, error y lista vacía
 
-Sin conversaciones queda solo el botón. Qué enseñar en ese hueco —un `EmptyState`, nada— lo decide la pantalla que la monta.
+La lista ya no deja el hueco en blanco cuando no hay nada que enseñar: los tres estados los pinta
+ella, con las piezas del sistema, y el botón de conversación nueva sigue estando en los tres.
+
+| Estado | Prop | Qué pinta |
+|---|---|---|
+| Cargando | `isLoading` (y `loadingCount`, por defecto 4) | `Skeleton` en el hueco de las filas, y `aria-busy` en el `<nav>` |
+| Error | `error` (el mensaje) y `errorTitle` | `Alert variant="error"` |
+| Vacía | automático, con `emptyMessage` | `EmptyState size="sm"` |
+
+La prioridad es **error → carga → vacía → lista**: un error tapa todo lo demás, aunque ya hubiera
+conversaciones cargadas.
+
+`isLoading` y `emptyMessage` se llaman igual que en `DataTable`, que resuelve lo mismo para una
+tabla.
+
+<Canvas of={ConversationListStories.Cargando} />
+<Canvas of={ConversationListStories.ConError} />
+<Canvas of={ConversationListStories.SinConversaciones} />
 
 ## El aspa de borrar
 
@@ -49,6 +66,8 @@ Tinta, relleno de la fila, aspa y anillo de foco tienen par oscuro. La conversac
 - El **aspa está en el orden de tabulación** y tiene nombre accesible propio, construido con `deleteLabel` a partir del título de la conversación, para que no haya cinco botones llamados «Eliminar».
 - Borrar **no abre** la conversación: el aspa detiene la propagación.
 - Los títulos largos se recortan con puntos suspensivos; el nombre completo sigue en el nombre accesible del aspa.
+- Mientras carga, el `<nav>` lleva **`aria-busy`**: los `Skeleton` son decorativos (`aria-hidden`) y por sí solos no anunciarían nada.
+- El `Alert` de error trae su `role="alert"` del propio átomo: quien usa lector de pantalla lo oye sin tener que volver al hueco.
 
 ## Tokens
 
@@ -74,4 +93,4 @@ Tinta, relleno de la fila, aspa y anillo de foco tienen par oscuro. La conversac
 
 ## Internacionalización
 
-`newLabel`, `navLabel` y `deleteLabel` —esta última es una función, porque interpola el título— traen default castellano. Ver **Foundations › Internacionalización**.
+`newLabel`, `navLabel`, `emptyMessage`, `errorTitle` y `deleteLabel` —esta última es una función, porque interpola el título— traen default castellano. El **mensaje** de `error` lo escribe el producto. Ver **Foundations › Internacionalización**.

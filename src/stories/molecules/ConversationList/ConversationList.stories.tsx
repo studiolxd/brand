@@ -44,6 +44,20 @@ export const SinConversaciones: Story = {
   args: { conversations: [], activeId: undefined },
 };
 
+/** Cargando: en el hueco de la lista van marcadores y el `<nav>` se anuncia ocupado. */
+export const Cargando: Story = {
+  args: { conversations: [], isLoading: true },
+};
+
+/** Error: en el hueco de la lista va un `Alert` de error con el mensaje del producto. */
+export const ConError: Story = {
+  name: 'Con error',
+  args: {
+    conversations: [],
+    error: 'Vuelve a intentarlo en unos segundos.',
+  },
+};
+
 export const Internacionalizado: Story = {
   args: {
     newLabel: 'New conversation',
@@ -90,6 +104,52 @@ export const Interactivo: Story = {
 };
 
 /** Test: el aspa de borrar está en el orden de tabulación y se ve al recibir el foco. */
+/**
+ * Test: los tres estados se turnan en el mismo hueco, con la prioridad
+ * error → carga → vacío → lista.
+ */
+export const ContratoEstados: Story = {
+  name: 'Test — carga, error y lista vacía',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <div data-testid="cargando">
+        <ConversationList conversations={[]} isLoading onNew={fn()} onSelect={fn()} onDelete={fn()} navLabel="Cargando" />
+      </div>
+      <div data-testid="error">
+        <ConversationList conversations={SAMPLE} error="No hay red." onNew={fn()} onSelect={fn()} onDelete={fn()} navLabel="Con error" />
+      </div>
+      <div data-testid="vacia">
+        <ConversationList conversations={[]} onNew={fn()} onSelect={fn()} onDelete={fn()} navLabel="Vacía" />
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const zona = (testid: string) => canvasElement.querySelector(`[data-testid="${testid}"]`) as HTMLElement;
+
+    // Carga: marcadores decorativos y el nav ocupado.
+    const cargando = zona('cargando');
+    await expect(cargando.querySelectorAll('.skeleton')).toHaveLength(4);
+    await expect(canvas.getByRole('navigation', { name: 'Cargando' })).toHaveAttribute('aria-busy', 'true');
+    await expect(cargando.querySelector('.conversation-list__items')).toBeNull();
+
+    // Error: manda sobre la lista, aunque haya conversaciones.
+    const error = zona('error');
+    await expect(error.querySelector('.alert')).not.toBeNull();
+    await expect(error).toHaveTextContent('No hay red.');
+    await expect(error.querySelector('.conversation-list__items')).toBeNull();
+
+    // Vacía: el estado vacío del sistema, no un hueco en blanco.
+    const vacia = zona('vacia');
+    await expect(vacia.querySelector('.empty-state')).not.toBeNull();
+    await expect(vacia).toHaveTextContent('Todavía no hay conversaciones');
+
+    // Y el botón de conversación nueva sigue estando en los tres.
+    await expect(canvas.getAllByRole('button', { name: 'Nueva conversación' })).toHaveLength(3);
+  },
+};
+
 export const ContratoTeclado: Story = {
   name: 'Test — el aspa se alcanza con el tabulador',
   tags: ['!dev'],
