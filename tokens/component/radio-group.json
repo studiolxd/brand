@@ -1,0 +1,6 @@
+{
+  "radio-group": {
+    "gap":            { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre opciones apiladas" },
+    "gap-horizontal": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre opciones en fila: mayor, para que cada marca se lea con su texto" }
+  }
+}

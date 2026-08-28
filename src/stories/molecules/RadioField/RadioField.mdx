@@ -62,6 +62,12 @@ El campo reenvía el `ref` y las props nativas al `<input type="radio">`, así q
 
 <Canvas of={RadioFieldStories.ConReactHookForm} />
 
+## Dentro de un grupo
+
+`RadioField` lee de `RadioGroup` la talla, el error y el estado deshabilitado; el `name` y el
+marcado los toma el `Radio` de dentro. Es la forma normal de montar un grupo de opciones: un
+`Fieldset` con su `legend`, un `RadioGroup` dentro y un `RadioField` por opción.
+
 ## Accesibilidad
 
 - El texto está enlazado por `htmlFor`/`id`; sin `id`, el campo genera uno con `useId`.

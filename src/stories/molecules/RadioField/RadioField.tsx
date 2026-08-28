@@ -2,6 +2,7 @@ import { forwardRef, useId, type ComponentPropsWithoutRef, type ReactNode } from
 import './RadioField.css';
 import { useFormSize } from '../../constants/form-size';
 import { Radio } from '../../atoms/Radio/Radio';
+import { useRadioGroup } from '../../atoms/RadioGroup/RadioGroupContext';
 
 export interface RadioFieldProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'id'> {
@@ -26,6 +27,10 @@ export interface RadioFieldProps
  * el resto de props nativas de `<input type="radio">` van al input real
  * (react-hook-form, `name`, `onBlur`, `aria-*`, `data-*`…); el `className`, al
  * contenedor.
+ *
+ * Dentro de un `RadioGroup` toma de él la talla, el error y el estado
+ * deshabilitado (el `name` y el marcado los toma el propio `Radio`). Lo que se
+ * pase a mano manda sobre lo que dice el grupo.
  */
 export const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>(function RadioField({
   label,
@@ -38,21 +43,23 @@ export const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>(function
   className,
   ...rest
 }: RadioFieldProps, ref) {
-  const size = useFormSize(sizeProp);
+  const group = useRadioGroup();
+  const size = useFormSize(sizeProp ?? group?.size);
   const generatedId = useId();
   const id = idProp ?? generatedId;
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
   const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
   // Un mensaje de error implica estado de error, como en el resto de campos
-  const hasError = error || !!errorMessage;
+  const hasError = error || !!errorMessage || (group?.error ?? false);
+  const isDisabled = disabled ?? group?.disabled;
 
   return (
     <div
       className={[
         'radio-field',
         size !== 'md' ? `radio-field--${size}` : '',
-        disabled ? 'radio-field--disabled' : '',
+        isDisabled ? 'radio-field--disabled' : '',
         className,
       ].filter(Boolean).join(' ')}
     >
@@ -62,7 +69,7 @@ export const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>(function
           {...rest}
           id={id}
           size={size}
-          disabled={disabled}
+          disabled={isDisabled}
           error={hasError}
           aria-describedby={describedBy}
         />

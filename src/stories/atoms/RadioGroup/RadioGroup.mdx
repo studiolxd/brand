@@ -1,0 +1,81 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as RadioGroupStories from "./RadioGroup.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { radioGroupTokens } from "../../../tokens/components/radio-group";
+
+<Meta of={RadioGroupStories} />
+
+# RadioGroup
+
+La raíz de un grupo de opciones excluyentes: reparte el `name`, sabe cuál está marcada y avisa
+cuando cambia. Hasta ahora `Radio` era un input suelto y cada producto se montaba el estado y el
+`name` por su cuenta — que es justo lo que hace que dos grupos de la misma pantalla acaben
+pisándose.
+
+<Canvas of={RadioGroupStories.PorDefecto} />
+
+## Controlado y no controlado
+
+Como el resto de controles del sistema: con `defaultValue` el estado se lo queda el grupo; con
+`value` + `onValueChange` lo lleva el consumidor.
+
+<Canvas of={RadioGroupStories.Controlado} />
+
+## Qué presta el grupo a sus opciones
+
+Las opciones son `RadioField` —marca y texto— o `Radio` a pelo. Las dos leen del grupo, así que
+dentro no hay que repetir nada:
+
+| Del grupo | Qué hace |
+|---|---|
+| `name` | El mismo para todas: es lo que las hace excluyentes para el navegador y para el envío del formulario. Sin `name` se genera uno |
+| `value` | Marca la opción cuyo `value` coincide. El consumidor no escribe un `checked` por opción |
+| `size` | La talla de todas |
+| `disabled` | Deshabilita todas |
+| `error` | Pone todas en error |
+
+Lo que se pase **a mano** en una opción manda sobre lo que dice el grupo.
+
+<Canvas of={RadioGroupStories.EstadoDelGrupo} />
+
+## Orientación
+
+Apiladas por defecto; en fila para dos o tres opciones cortas.
+
+<Canvas of={RadioGroupStories.EnFila} />
+
+## El rótulo del grupo
+
+El nombre accesible **no es una prop**: lo pone un `Fieldset` alrededor —su `legend` es el rótulo
+del grupo— o un `aria-label`/`aria-labelledby`, que viajan al `role="radiogroup"` con el resto de
+atributos.
+
+<Canvas of={RadioGroupStories.ConFieldset} />
+
+## Superficie oscura
+
+El grupo no pinta nada propio más que el aire: la cara la ponen `Radio` y `RadioField`, que ya
+tienen su par oscuro.
+
+<Canvas of={RadioGroupStories.EnSuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+- El contenedor lleva `role="radiogroup"`, que es lo que ata las opciones para un lector de
+  pantalla incluso cuando no comparten un `<fieldset>`.
+- Las opciones siguen siendo **inputs nativos** `type="radio"`: el recorrido con flechas, el salto
+  al grupo con el tabulador y el envío del formulario los pone el navegador, no JavaScript.
+- Un grupo **sin ninguna opción marcada** es válido y suele ser lo correcto en un formulario: no
+  marques una por defecto salvo que sea de verdad la opción recomendada.
+
+## Props
+
+<ArgTypes of={RadioGroupStories} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={radioGroupTokens} />

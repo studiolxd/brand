@@ -32,6 +32,7 @@ export const entryPoints = {
   'popover':             'src/stories/atoms/Popover/Popover.tsx',
   'multi-select':        'src/stories/atoms/MultiSelect/MultiSelect.tsx',
   'select':              'src/stories/atoms/Select/Select.tsx',
+  'radio-group':         'src/stories/atoms/RadioGroup/RadioGroup.tsx',
   'separator':           'src/stories/atoms/Separator/Separator.tsx',
   'time-select':         'src/stories/atoms/TimeSelect/TimeSelect.tsx',
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
@@ -139,7 +140,7 @@ export const entryPoints = {
 
 export const clientComponents = new Set([
   'alert', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
-  'button', 'checkbox', 'radio', 'switcher', 'menu-button', 'input',
+  'button', 'checkbox', 'radio', 'radio-group', 'switcher', 'menu-button', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'steps',

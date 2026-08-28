@@ -37,6 +37,13 @@ La marca es tinta: borde y punto pasan de prusia a blanco (`surface-dark-border-
 
 <Canvas of={RadioStories.SuperficieOscura} />
 
+## Dentro de un grupo
+
+Un radio suelto no es excluyente de nada: lo que agrupa las opciones es compartir `name`. Esa
+parte —y saber cuál está marcada— la lleva `RadioGroup`, y `Radio` la lee de él: dentro de un grupo
+no hay que pasar `name`, `checked`, `size` ni `disabled`. Lo que se pase a mano manda sobre el
+grupo.
+
 ## Uso
 
 ```tsx

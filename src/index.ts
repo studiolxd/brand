@@ -93,6 +93,8 @@ export { MultiSelect } from './stories/atoms/MultiSelect/MultiSelect';
 export type { MultiSelectOption, MultiSelectProps } from './stories/atoms/MultiSelect/MultiSelect';
 export { Radio } from './stories/atoms/Radio/Radio';
 export type { RadioProps } from './stories/atoms/Radio/Radio';
+export { RadioGroup } from './stories/atoms/RadioGroup/RadioGroup';
+export type { RadioGroupProps } from './stories/atoms/RadioGroup/RadioGroup';
 export {
   Select, SelectRoot, SelectTrigger, SelectValue, SelectContent,
   SelectGroup, SelectLabel, SelectItem, SelectSeparator,

@@ -1,0 +1,14 @@
+@import '../../../tokens/components/radio-group.css';
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--radio-group-gap);
+}
+
+.radio-group.radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--radio-group-gap-horizontal);
+}

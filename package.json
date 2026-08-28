@@ -402,6 +402,10 @@
     "./scss/components/*": "./src/tokens/scss/components/_*.scss",
     "./scss/global/*": "./src/tokens/scss/global/_*.scss",
     "./scss/molecules/*": "./src/tokens/scss/molecules/_*.scss",
+    "./radio-group": {
+      "types": "./dist/_types/atoms/RadioGroup/RadioGroup.d.ts",
+      "import": "./dist/radio-group.js"
+    },
     "./separator": {
       "types": "./dist/_types/atoms/Separator/Separator.d.ts",
       "import": "./dist/separator.js"
