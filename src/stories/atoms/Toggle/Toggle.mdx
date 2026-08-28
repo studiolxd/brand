@@ -1,0 +1,85 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ToggleStories from "./Toggle.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { toggleTokens, toggleDarkTokens } from "../../../tokens/components/toggle";
+
+<Meta of={ToggleStories} />
+
+# Toggle
+
+Un botón de dos estados: pulsado o no. Es un **valor que se conmuta** —negrita en
+una barra de texto, «solo pendientes» en un filtro, la vista de cuadrícula de un
+listado—, no una acción que se dispara.
+
+<Canvas of={ToggleStories.PorDefecto} />
+
+Se construye sobre [Base UI Toggle](https://base-ui.com/react/components/toggle),
+que aporta `aria-pressed`, el teclado y el estado controlado o no controlado.
+
+## Qué lo distingue de Button y de Switcher
+
+| Componente | Qué significa |
+|---|---|
+| `Button` | Dispara una acción: guardar, enviar, abrir. |
+| `Toggle` | Conmuta un valor que se ve reflejado en el contenido de al lado. |
+| `Switcher` | Enciende o apaga un ajuste, con la forma de un interruptor y su rótulo. |
+
+## Pulsado
+
+El relleno es lo que dice que el valor está elegido.
+
+<Canvas of={ToggleStories.Pulsado} />
+
+**El hover no rellena**: marca el borde. Si el paso del ratón pintase fondo, un
+botón señalado y otro elegido se leerían igual, y el estado dejaría de decir
+nada. Es la misma regla que sigue el resto del sistema.
+
+## Solo icono
+
+`iconOnly` hace el botón cuadrado a la altura de su talla. Entonces no queda
+texto que nombre el control: hay que pasar `aria-label`.
+
+<Canvas of={ToggleStories.SoloIcono} />
+
+## Tallas
+
+<Canvas of={ToggleStories.Tallas} />
+
+Dentro de un `ToggleGroup`, la talla la reparte el grupo: no hay que repetirla
+botón a botón.
+
+## Deshabilitado
+
+<Canvas of={ToggleStories.Deshabilitado} />
+
+## Superficie oscura
+
+El relleno prusia coincidiría con el fondo de la superficie oscura, así que pasa
+al par de `Button primary` —lavanda con tinta prusia—, y el contorno a la tinta
+clara. Todo por token `surface-dark-*`.
+
+<Canvas of={ToggleStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={toggleTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={toggleDarkTokens} />
+
+## Accesibilidad
+
+- Es un `<button>` con `aria-pressed`, que es lo que un lector de pantalla
+  anuncia como «pulsado» / «no pulsado». No es un `checkbox` ni un `switch`.
+- El texto del botón es su nombre accesible; con `iconOnly` hay que darlo con
+  `aria-label`.
+- El foco se ve con el anillo del sistema.
+- `onPressedChange` recibe **solo el estado**: el DS no expone los detalles del
+  evento de Base UI.
+
+## Props
+
+<ArgTypes of={ToggleStories} />

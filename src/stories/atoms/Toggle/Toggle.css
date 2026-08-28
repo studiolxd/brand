@@ -1,0 +1,64 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--toggle-gap);
+  height: var(--toggle-height);
+  padding-block: 0;
+  padding-inline: var(--toggle-padding-inline);
+  border-width: var(--toggle-border-width);
+  border-style: var(--toggle-border-style);
+  border-radius: var(--toggle-border-radius);
+  border-color: var(--toggle-border-color);
+  background-color: var(--toggle-bg);
+  color: var(--toggle-color);
+  font-family: var(--toggle-font-family);
+  font-size: var(--toggle-font-size);
+  font-weight: var(--toggle-font-weight);
+  line-height: var(--toggle-line-height);
+  cursor: var(--toggle-cursor);
+  transition:
+    color var(--toggle-transition-duration) var(--toggle-transition-easing),
+    border-color var(--toggle-transition-duration) var(--toggle-transition-easing),
+    background-color var(--toggle-transition-duration) var(--toggle-transition-easing);
+}
+
+/* El hover marca el borde, no rellena: el relleno es del valor elegido. */
+.toggle:hover:not([data-pressed]):not([data-disabled]) {
+  border-color: var(--toggle-hover-border-color);
+}
+
+.toggle[data-pressed] {
+  background-color: var(--toggle-pressed-bg);
+  border-color: var(--toggle-pressed-border-color);
+  color: var(--toggle-pressed-color);
+}
+
+.toggle:focus-visible {
+  outline: var(--toggle-focus-ring-width) solid var(--toggle-focus-ring-color);
+  outline-offset: var(--toggle-focus-ring-offset);
+}
+
+.toggle[data-disabled] {
+  opacity: var(--toggle-disabled-opacity);
+  cursor: var(--toggle-disabled-cursor);
+}
+
+/* Solo icono: cuadrado a la altura de la talla. */
+.toggle.toggle--icon-only {
+  padding-inline: 0;
+  inline-size: var(--toggle-height);
+}
+
+/* ─── Tallas ─────────────────────────────────────────────────── */
+.toggle.toggle--sm {
+  --toggle-height: var(--toggle-sm-height);
+  --toggle-padding-inline: var(--toggle-sm-padding-inline);
+  --toggle-font-size: var(--toggle-sm-font-size);
+}
+
+.toggle.toggle--lg {
+  --toggle-height: var(--toggle-lg-height);
+  --toggle-padding-inline: var(--toggle-lg-padding-inline);
+  --toggle-font-size: var(--toggle-lg-font-size);
+}

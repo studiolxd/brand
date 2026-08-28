@@ -1,0 +1,34 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-toggle-height: 2.5rem; // Altura del botón (talla md)
+$lxd-toggle-sm-height: 2rem; // Altura — talla sm
+$lxd-toggle-lg-height: 3rem; // Altura — talla lg
+$lxd-toggle-padding-inline: 1.5rem; // Padding inline
+$lxd-toggle-sm-padding-inline: 1rem; // Padding inline — talla sm
+$lxd-toggle-lg-padding-inline: 2rem; // Padding inline — talla lg
+$lxd-toggle-gap: 0.5rem; // Separación entre el icono y el texto
+$lxd-toggle-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica
+$lxd-toggle-font-size: 1rem; // Tamaño de fuente
+$lxd-toggle-sm-font-size: 0.875rem; // Tamaño de fuente — talla sm
+$lxd-toggle-lg-font-size: 1.25rem; // Tamaño de fuente — talla lg
+$lxd-toggle-font-weight: 300; // Peso tipográfico
+$lxd-toggle-line-height: 1; // Interlineado
+$lxd-toggle-border-width: 1px; // Grosor del borde
+$lxd-toggle-border-style: solid; // Estilo del borde
+$lxd-toggle-border-radius: 0px; // Radio del borde (recto, como el resto de controles)
+$lxd-toggle-border-color: #d0d0d0; // Borde sin pulsar
+$lxd-toggle-bg: rgba(0, 0, 0, 0); // Fondo sin pulsar: ninguno. El relleno es lo que dice que el valor está elegido
+$lxd-toggle-color: #111e30; // Texto sin pulsar
+$lxd-toggle-hover-border-color: #111e30; // Borde al pasar el ratón — el hover no pone fondo, solo marca el borde
+$lxd-toggle-pressed-bg: #111e30; // Fondo pulsado: el valor elegido
+$lxd-toggle-pressed-color: #ffffff; // Texto pulsado
+$lxd-toggle-pressed-border-color: #111e30; // Borde pulsado
+$lxd-toggle-cursor: pointer; // Cursor
+$lxd-toggle-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
+$lxd-toggle-disabled-opacity: 0.4; // Opacidad cuando está deshabilitado
+$lxd-toggle-transition-duration: 150ms; // Duración de la transición
+$lxd-toggle-transition-easing: ease; // Easing de la transición
+$lxd-toggle-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-toggle-focus-ring-offset: 0.25rem; // Separación del anillo de foco
+$lxd-toggle-focus-ring-color: #111e30; // Color del anillo de foco

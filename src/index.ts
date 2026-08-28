@@ -75,6 +75,8 @@ export { Separator } from './stories/atoms/Separator/Separator';
 export type { SeparatorProps } from './stories/atoms/Separator/Separator';
 export { Skeleton } from './stories/atoms/Skeleton/Skeleton';
 export type { SkeletonProps } from './stories/atoms/Skeleton/Skeleton';
+export { Toggle } from './stories/atoms/Toggle/Toggle';
+export type { ToggleProps } from './stories/atoms/Toggle/Toggle';
 export { Tooltip, TooltipProvider } from './stories/atoms/Tooltip/Tooltip';
 export { ImageCropDialog } from './stories/molecules/ImageCropDialog/ImageCropDialog';
 export type { ImageCropDialogProps } from './stories/molecules/ImageCropDialog/ImageCropDialog';

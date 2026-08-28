@@ -39,6 +39,7 @@ export const entryPoints = {
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
   'sparkline':           'src/stories/atoms/Sparkline/Sparkline.tsx',
   'star-rating':         'src/stories/atoms/StarRating/StarRating.tsx',
+  'toggle':              'src/stories/atoms/Toggle/Toggle.tsx',
   'kbd':                 'src/stories/atoms/Kbd/Kbd.tsx',
   'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
@@ -191,4 +192,5 @@ export const clientComponents = new Set([
   'confirm-dialog',
   'search-form',
   'star-rating',
+  'toggle',
 ]);

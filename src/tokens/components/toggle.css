@@ -1,0 +1,49 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --toggle-bg: rgba(0, 0, 0, 0); /** Fondo sin pulsar: ninguno. El relleno es lo que dice que el valor está elegido */
+  --toggle-cursor: pointer; /** Cursor */
+  --toggle-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
+  --toggle-height: var(--size-component-md); /** Altura del botón (talla md) */
+  --toggle-sm-height: var(--size-component-sm); /** Altura — talla sm */
+  --toggle-lg-height: var(--size-component-lg); /** Altura — talla lg */
+  --toggle-padding-inline: var(--spacing-5); /** Padding inline */
+  --toggle-sm-padding-inline: var(--spacing-4); /** Padding inline — talla sm */
+  --toggle-lg-padding-inline: var(--spacing-6); /** Padding inline — talla lg */
+  --toggle-gap: var(--spacing-2); /** Separación entre el icono y el texto */
+  --toggle-sm-font-size: var(--font-size-1); /** Tamaño de fuente — talla sm */
+  --toggle-lg-font-size: var(--font-size-3); /** Tamaño de fuente — talla lg */
+  --toggle-border-style: var(--control-border-style); /** Estilo del borde */
+  --toggle-border-color: var(--color-grey-light); /** Borde sin pulsar */
+  --toggle-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
+  --toggle-transition-duration: var(--motion-duration-fast); /** Duración de la transición */
+  --toggle-transition-easing: var(--motion-easing-default); /** Easing de la transición */
+  --toggle-focus-ring-offset: var(--spacing-1); /** Separación del anillo de foco */
+  --toggle-font-family: var(--control-font-family); /** Familia tipográfica */
+  --toggle-font-size: var(--control-font-size); /** Tamaño de fuente */
+  --toggle-line-height: var(--control-line-height); /** Interlineado */
+  --toggle-color: var(--color-text-on-light); /** Texto sin pulsar */
+  --toggle-hover-border-color: var(--color-primary); /** Borde al pasar el ratón — el hover no pone fondo, solo marca el borde */
+  --toggle-pressed-bg: var(--color-primary); /** Fondo pulsado: el valor elegido */
+  --toggle-pressed-color: var(--color-text-on-dark); /** Texto pulsado */
+  --toggle-pressed-border-color: var(--color-primary); /** Borde pulsado */
+  --toggle-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --toggle-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --toggle-font-weight: var(--control-font-weight); /** Peso tipográfico */
+  --toggle-border-width: var(--control-border-width); /** Grosor del borde */
+  --toggle-border-radius: var(--control-border-radius); /** Radio del borde (recto, como el resto de controles) */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --toggle-border-color: var(--color-text-on-dark); /** Borde sin pulsar — surface-dark */
+  --toggle-color: var(--color-text-on-dark); /** Texto sin pulsar — surface-dark */
+  --toggle-hover-border-color: var(--color-accent-1); /** Borde al pasar el ratón — surface-dark */
+  --toggle-pressed-bg: var(--color-accent-1); /** Fondo pulsado — surface-dark. El prusia coincide con el fondo de la superficie; el par es el de `Button primary` */
+  --toggle-pressed-color: var(--color-primary); /** Texto pulsado — surface-dark */
+  --toggle-pressed-border-color: var(--color-accent-1); /** Borde pulsado — surface-dark */
+  --toggle-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

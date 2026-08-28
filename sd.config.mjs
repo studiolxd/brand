@@ -141,6 +141,7 @@ const filters = {
   'confirm-dialog':     (t) => t.path[0] === 'confirm-dialog',
   'search-form':        (t) => t.path[0] === 'search-form',
   'star-rating':        (t) => t.path[0] === 'star-rating',
+  toggle:               (t) => t.path[0] === 'toggle',
 };
 
 function cssFile(destination, filterKey) {
@@ -295,6 +296,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/chart.css',              'chart'),
         cssFile('components/sparkline.css',         'sparkline'),
         cssFile('components/star-rating.css',       'star-rating'),
+        cssFile('components/toggle.css',            'toggle'),
       ],
     },
     scss: {
@@ -434,6 +436,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_chart.scss',            'chart'),
         scssFile('components/_sparkline.scss',       'sparkline'),
         scssFile('components/_star-rating.scss',     'star-rating'),
+        scssFile('components/_toggle.scss',          'toggle'),
       ],
     },
   },
