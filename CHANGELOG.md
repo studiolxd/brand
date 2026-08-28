@@ -7,6 +7,24 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.28.0
+
+### Cambiado
+
+- **Tokens de gris a roles semánticos**: los 64 usos directos de `{color.grey-*}` en
+  `tokens/component/**`, `tokens/molecule/**` y `tokens/organism/**` pasan a roles semánticos
+  (`color.text.muted-*`, `color.surface.secondary-*`/`inverse-*` reutilizados; nuevos
+  `color.disabled.{bg,text,border}-on-light|on-dark`, `color.border.default-on-light`,
+  `color.icon.secondary-on-light|on-dark` y `color.surface.highlight-on-dark`). Sin cambio
+  visual: cada rol apunta al mismo primitivo que ya se usaba.
+- **`AppHeader`**: se verificó y documentó que su `box-shadow` (borde simulado) es deliberado,
+  no una sombra sin tokenizar — evita que el borde real sume altura al compuesto que consumen
+  `AppShell`/`Sidebar`. Sin cambio de código.
+- **Escala**: verificado que `icon.size-sm` (16px), las transiciones sin `ms` a mano y los
+  radios rectos (`border-radius.default` = 0) ya estaban cerrados en tandas anteriores.
+- **Puerta de calidad**: nuevo script `pnpm release:check` (lint + tsc + test + test:stories +
+  build:all) y hook `prepack`. No se taggea sin él en verde (documentado en `CLAUDE.md`).
+
 ## v25.27.1
 
 ### Corregido
