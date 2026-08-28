@@ -144,6 +144,7 @@ const filters = {
   toggle:               (t) => t.path[0] === 'toggle',
   'toggle-group':       (t) => t.path[0] === 'toggle-group',
   collapsible:          (t) => t.path[0] === 'collapsible',
+  'scroll-area':        (t) => t.path[0] === 'scroll-area',
 };
 
 function cssFile(destination, filterKey) {
@@ -301,6 +302,7 @@ const sd = new StyleDictionary({
         cssFile('components/toggle.css',            'toggle'),
         cssFile('components/toggle-group.css',      'toggle-group'),
         cssFile('components/collapsible.css',       'collapsible'),
+        cssFile('components/scroll-area.css',       'scroll-area'),
       ],
     },
     scss: {
@@ -443,6 +445,7 @@ const sd = new StyleDictionary({
         scssFile('components/_toggle.scss',          'toggle'),
         scssFile('components/_toggle-group.scss',    'toggle-group'),
         scssFile('components/_collapsible.scss',     'collapsible'),
+        scssFile('components/_scroll-area.scss',     'scroll-area'),
       ],
     },
   },

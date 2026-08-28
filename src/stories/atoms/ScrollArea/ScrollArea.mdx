@@ -1,0 +1,63 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ScrollAreaStories from "./ScrollArea.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { scrollAreaTokens, scrollAreaDarkTokens } from "../../../tokens/components/scroll-area";
+
+<Meta of={ScrollAreaStories} />
+
+# ScrollArea
+
+Un recuadro con desplazamiento propio y la barra del sistema: la lista de un
+panel lateral, el resultado largo de una consulta, el lienzo de un editor.
+
+<Canvas of={ScrollAreaStories.PorDefecto} />
+
+Se construye sobre [Base UI Scroll Area](https://base-ui.com/react/components/scroll-area),
+que sustituye la barra nativa por una propia sin perder el desplazamiento real
+del navegador (rueda, gesto, teclado).
+
+## El alto no lo pone el componente
+
+`ScrollArea` no decide cuánto mide el hueco, solo cómo se desplaza dentro: la
+medida la pone quien lo usa, con `className` o desde el contenedor. Sin una
+altura acotada no hay nada que desplazar.
+
+## Orientación
+
+`vertical` por defecto. `both` añade la barra horizontal y la esquina, para
+contenido que también se sale de ancho.
+
+<Canvas of={ScrollAreaStories.HorizontalYVertical} />
+
+## Superficie oscura
+
+El pulgar de la barra pasa a la tinta clara y su estado señalado a lavanda, por
+token `surface-dark-*`.
+
+<Canvas of={ScrollAreaStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={scrollAreaTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={scrollAreaDarkTokens} />
+
+## Accesibilidad
+
+- Base UI hace la zona alcanzable con el teclado **cuando de verdad hay
+  desplazamiento**, para que se pueda leer sin ratón.
+- Por eso `label` importa: da nombre a la región (`role="region"` +
+  `aria-label`) y evita el fallo de «región desplazable sin nombre». Sin él, el
+  área no se anuncia como región.
+- La barra aparece al usar el área y mientras se arrastra; el contenido nunca
+  depende de que se vea la barra para poder leerse.
+- `overscroll-behavior: contain`: el desplazamiento no se contagia a la página
+  al llegar al final.
+
+## Props
+
+<ArgTypes of={ScrollAreaStories} />

@@ -126,6 +126,7 @@
 @import "./components/toggle.css";
 @import "./components/toggle-group.css";
 @import "./components/collapsible.css";
+@import "./components/scroll-area.css";
 @import "./molecules/prose.css";
 @import "./molecules/table-of-contents.css";
 @import "./molecules/docs-search.css";

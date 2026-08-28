@@ -230,6 +230,8 @@ export { ThemeSwitcher } from './stories/molecules/ThemeSwitcher/ThemeSwitcher';
 export type { ThemeSwitcherProps, ThemeSwitcherLabels, Theme } from './stories/molecules/ThemeSwitcher/ThemeSwitcher';
 export { SearchForm } from './stories/molecules/SearchForm/SearchForm';
 export type { SearchFormProps } from './stories/molecules/SearchForm/SearchForm';
+export { ScrollArea } from './stories/atoms/ScrollArea/ScrollArea';
+export type { ScrollAreaProps } from './stories/atoms/ScrollArea/ScrollArea';
 export { SelectField } from './stories/molecules/SelectField/SelectField';
 export type { SelectFieldProps } from './stories/molecules/SelectField/SelectField';
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';
