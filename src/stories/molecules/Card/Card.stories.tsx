@@ -182,6 +182,42 @@ export const ContainerMode: Story = {
   },
 };
 
+/**
+ * Enlace externo: `external` añade `target="_blank"` y el `rel` seguro, igual
+ * que en `Button` y `Link`.
+ */
+export const Externa: Story = {
+  name: 'Enlace externo',
+  args: {
+    href: 'https://studiolxd.com',
+    external: true,
+    color: 'outline',
+    title: 'Studio LXD',
+    description: 'Se abre en una pestaña nueva.',
+    ctaLabel: 'Ir a studiolxd.com (se abre en una pestaña nueva)',
+  },
+};
+
+/** Test: `external` pone `target` y `rel` en el `<a>`; sin él no hay ninguno de los dos. */
+export const ContratoExterna: Story = {
+  name: 'Test — external pone target y rel',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Card href="https://studiolxd.com" external title="Externa" ctaLabel="Ver más" data-caso="externa" />
+      <Card href="/interna" title="Interna" ctaLabel="Ver más" data-caso="interna" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const externa = canvasElement.querySelector('a[data-caso="externa"]')!;
+    await expect(externa).toHaveAttribute('target', '_blank');
+    await expect(externa).toHaveAttribute('rel', 'noopener noreferrer');
+    const interna = canvasElement.querySelector('a[data-caso="interna"]')!;
+    await expect(interna).not.toHaveAttribute('target');
+    await expect(interna).not.toHaveAttribute('rel');
+  },
+};
+
 /** Test: modo link (con `href`) — sigue renderizando `<a class="card card--…">` + flecha (criterio 1). */
 export const LinkModeUnchanged: Story = {
   name: 'Test — link mode intacto',

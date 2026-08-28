@@ -38,6 +38,11 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
    * patrón `asChild`. Manda sobre `href`.
    */
   render?: React.ReactElement<Record<string, unknown>>;
+  /**
+   * Abre en nueva pestaña con `rel="noopener noreferrer"` (solo con `href`).
+   * Misma prop y mismo contrato que en `Button` y `Link`.
+   */
+  external?: boolean;
   /** Título (modo link — se espera junto a `href` o `render`). */
   title?: string;
   /** Descripción (modo link). */
@@ -71,6 +76,7 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
 export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   href,
   render,
+  external = false,
   title,
   description,
   ctaLabel,
@@ -134,6 +140,7 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
         ref={ref as React.Ref<HTMLAnchorElement>}
         href={href}
         className={classes}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
         {linkContent}

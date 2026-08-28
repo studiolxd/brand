@@ -62,6 +62,16 @@ un Server Component, `href`.
 
 <Canvas of={CardStories.ComoEnlaceDelRouter} />
 
+## Enlace externo
+
+`external` es la misma prop que en `Button` y `Link`: con `href`, la tarjeta se abre en una
+pestaña nueva (`target="_blank"`) con `rel="noopener noreferrer"`. Dilo también en el `ctaLabel`,
+que es el nombre accesible del enlace.
+
+<Canvas of={CardStories.Externa} />
+
+Con `render` no hace nada: ahí el destino y el comportamiento los pone el elemento del router.
+
 ## Modo contenedor
 
 Sin `href` ni `render`, `Card` es una superficie con `children` libres.
@@ -110,6 +120,8 @@ párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un
   de qué encabezado cuelgue la tarjeta, no según el tamaño que quieras.
 - En modo enlace todo el bloque es un solo enlace: no metas dentro botones ni otros enlaces. Si la
   tarjeta necesita acciones, es una tarjeta contenedora con su `CardFooter`.
+- Con `external`, avisa en el `ctaLabel` de que el enlace abre una pestaña nueva: el `target` por
+  sí solo no se anuncia.
 - `ctaLabel` da al enlace un nombre accesible completo («Ver más sobre plataformas LMS») cuando la
   llamada visible es solo una flecha.
 - `outline` es la única variante con par `surface-dark-*` propio (fondo y borde cambian sobre
