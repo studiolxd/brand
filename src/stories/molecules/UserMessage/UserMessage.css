@@ -5,6 +5,14 @@
   gap: var(--user-message-gap);
 }
 
+.user-message__author {
+  font-family: var(--user-message-author-font-family);
+  font-size: var(--user-message-author-font-size);
+  font-weight: var(--user-message-author-font-weight);
+  color: var(--user-message-author-color);
+  padding-inline: var(--user-message-author-padding-inline);
+}
+
 .user-message__timestamp {
   font-family: var(--user-message-timestamp-font-family);
   font-size: var(--user-message-timestamp-font-size);

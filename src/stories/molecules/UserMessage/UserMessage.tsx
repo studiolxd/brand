@@ -6,6 +6,14 @@ import './UserMessage.css';
 export interface UserMessageProps extends React.ComponentPropsWithoutRef<'div'> {
   children: React.ReactNode;
   /**
+   * Nombre visible del usuario que envía el mensaje (ej. "María"). Opcional:
+   * sin él, el emisor lo dicen la alineación y la cola, como hasta ahora. Se
+   * pinta discreto sobre el globo, coherente con el nombre del modelo de
+   * `AssistantMessage` pero sin su énfasis — aquí es un dato de apoyo, no la
+   * única pista de quién habla.
+   */
+  author?: string;
+  /**
    * Momento del mensaje: un `Date` o una cadena ISO 8601. Se pinta en un
    * `<time datetime>`, así que tiene que ser el instante, no una hora ya
    * formateada — de eso se encarga el componente con `Intl`.
@@ -30,6 +38,7 @@ export interface UserMessageProps extends React.ComponentPropsWithoutRef<'div'> 
  */
 export const UserMessage = forwardRef<HTMLDivElement, UserMessageProps>(function UserMessage({
   children,
+  author,
   timestamp,
   locale,
   timestampFormat,
@@ -40,6 +49,7 @@ export const UserMessage = forwardRef<HTMLDivElement, UserMessageProps>(function
 
   return (
     <div ref={ref} className={`user-message${className ? ` ${className}` : ''}`} {...rest}>
+      {author && <span className="user-message__author">{author}</span>}
       <MessageBubble role="user">{children}</MessageBubble>
       {time && (
         <time className="user-message__timestamp" dateTime={time.dateTime}>

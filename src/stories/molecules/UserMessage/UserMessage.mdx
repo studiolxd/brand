@@ -13,6 +13,12 @@ Es la molécula que envuelve al átomo `MessageBubble`. Su pareja es `AssistantM
 
 <Canvas of={UserMessageStories.PorDefecto} />
 
+## El autor
+
+<Canvas of={UserMessageStories.ConAutor} />
+
+`author` es opcional y discreto: un nombre pintado sobre el globo, con menos énfasis que el del modelo en `AssistantMessage` (que firma la respuesta). Sin `author`, el emisor lo siguen diciendo la alineación y la cola, como hasta ahora — la prop es un dato de apoyo para cuando el producto necesita atribución explícita (varios usuarios en el mismo hilo, por ejemplo), no un requisito.
+
 ## La marca de tiempo
 
 <Canvas of={UserMessageStories.ConMarcaDeTiempo} />
@@ -37,7 +43,7 @@ La tinta de la marca de tiempo tiene par oscuro. El globo trae el suyo desde `Me
 ## Accesibilidad
 
 - La marca de tiempo va en un `<time datetime>`: sin el atributo, «14:32» es una cadena cualquiera.
-- Que el mensaje sea del usuario **no puede quedar solo en la alineación**: eso es información visual. En un hilo real lo dice el contexto (el usuario escribe, el asistente responde con su nombre); si el producto necesita decirlo explícitamente, lo pasa como contenido del globo.
+- Que el mensaje sea del usuario **no puede quedar solo en la alineación**: eso es información visual. En un hilo real lo dice el contexto (el usuario escribe, el asistente responde con su nombre); si el producto necesita atribución explícita, `author` la pone en texto.
 - El color de la hora es el gris de texto secundario del sistema (`text.muted-on-light|dark`), que cumple contraste. No es `grey-dark`, que en este sistema **no es un color de texto**.
 
 ## Tokens

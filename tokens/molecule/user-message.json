@@ -1,12 +1,19 @@
 {
   "user-message": {
-    "gap":                  { "$value": "{spacing.1}",                        "$type": "dimension", "$description": "Separación entre el globo y su marca de tiempo" },
+    "gap":                  { "$value": "{spacing.1}",                        "$type": "dimension", "$description": "Separación entre el nombre del autor, el globo y su marca de tiempo" },
+
+    "author-font-family":   { "$value": "{font-family.sans}",                 "$type": "string",    "$description": "Familia tipográfica del nombre del autor" },
+    "author-font-size":     { "$value": "{text.paragraph.small.font-size}",   "$type": "dimension", "$description": "Cuerpo del nombre del autor: un peldaño por debajo del texto de la superficie" },
+    "author-font-weight":   { "$value": "{font-weight.default}",              "$type": "number",    "$description": "Peso del nombre del autor: discreto, a diferencia del nombre del modelo en `AssistantMessage` (que firma la respuesta con énfasis) — aquí el emisor ya lo dicen la alineación y la cola" },
+    "author-color":         { "$value": "{color.text.muted-on-light}",        "$type": "color",     "$description": "Tinta del nombre del autor: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)" },
+    "author-padding-inline":{ "$value": "{spacing.1}",                        "$type": "dimension", "$description": "Aire horizontal del nombre del autor" },
 
     "timestamp-font-family":{ "$value": "{font-family.sans}",                 "$type": "string",    "$description": "Familia tipográfica de la marca de tiempo" },
     "timestamp-font-size":  { "$value": "{text.paragraph.small.font-size}",   "$type": "dimension", "$description": "Cuerpo de la marca de tiempo: un peldaño por debajo del texto de la superficie" },
     "timestamp-color":      { "$value": "{color.text.muted-on-light}",        "$type": "color",     "$description": "Tinta de la marca de tiempo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)" },
     "timestamp-padding-inline": { "$value": "{spacing.1}",                    "$type": "dimension", "$description": "Aire horizontal de la marca de tiempo, para que no quede pegada al canto del globo" },
 
+    "surface-dark-author-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color",     "$description": "Tinta del nombre del autor — superficie oscura" },
     "surface-dark-timestamp-color": { "$value": "{color.text.muted-on-dark}", "$type": "color",     "$description": "Tinta de la marca de tiempo — superficie oscura" }
   }
 }

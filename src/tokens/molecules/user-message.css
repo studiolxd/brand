@@ -3,9 +3,14 @@
  */
 
 :root {
-  --user-message-gap: var(--spacing-1); /** Separación entre el globo y su marca de tiempo */
+  --user-message-gap: var(--spacing-1); /** Separación entre el nombre del autor, el globo y su marca de tiempo */
+  --user-message-author-font-family: var(--font-family-sans); /** Familia tipográfica del nombre del autor */
+  --user-message-author-padding-inline: var(--spacing-1); /** Aire horizontal del nombre del autor */
   --user-message-timestamp-font-family: var(--font-family-sans); /** Familia tipográfica de la marca de tiempo */
   --user-message-timestamp-padding-inline: var(--spacing-1); /** Aire horizontal de la marca de tiempo, para que no quede pegada al canto del globo */
+  --user-message-author-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del nombre del autor: un peldaño por debajo del texto de la superficie */
+  --user-message-author-font-weight: var(--font-weight-default); /** Peso del nombre del autor: discreto, a diferencia del nombre del modelo en `AssistantMessage` (que firma la respuesta con énfasis) — aquí el emisor ya lo dicen la alineación y la cola */
+  --user-message-author-color: var(--color-text-muted-on-light); /** Tinta del nombre del autor: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto) */
   --user-message-timestamp-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la marca de tiempo: un peldaño por debajo del texto de la superficie */
   --user-message-timestamp-color: var(--color-text-muted-on-light); /** Tinta de la marca de tiempo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto) */
 }
@@ -13,5 +18,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --user-message-author-color: var(--color-text-muted-on-dark); /** Tinta del nombre del autor — superficie oscura */
   --user-message-timestamp-color: var(--color-text-muted-on-dark); /** Tinta de la marca de tiempo — superficie oscura */
 }

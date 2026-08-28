@@ -27,6 +27,16 @@ type Story = StoryObj<typeof meta>;
 export const PorDefecto: Story = {};
 
 /**
+ * `author` es opcional y discreto: sin él, el emisor lo siguen diciendo la
+ * alineación y la cola. Con él, un nombre visible sobre el globo — con menos
+ * énfasis que el nombre del modelo en `AssistantMessage`.
+ */
+export const ConAutor: Story = {
+  name: 'Con autor',
+  args: { author: 'María' },
+};
+
+/**
  * La marca de tiempo se pasa como instante —un `Date` o una cadena ISO 8601—,
  * no como hora ya escrita: el componente la formatea con `Intl` y la escribe
  * además en el atributo `datetime`, que es lo que leen las máquinas.
@@ -71,6 +81,29 @@ export const ContratoTiempo: Story = {
     await expect(times[0]?.getAttribute('datetime')).toBe('2026-08-27T14:32:00.000Z');
     await expect(times[1]?.getAttribute('datetime')).toBe(times[0]?.getAttribute('datetime'));
     await expect(times[0]?.textContent).toBe(times[1]?.textContent);
+  },
+};
+
+/** Test: sin `author` no se pinta nada; con `author`, un texto visible. */
+export const ContratoAutor: Story = {
+  name: 'Test — author es opcional y visible',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <UserMessage data-testid="sin-autor">Sin autor</UserMessage>
+      <UserMessage author="María" data-testid="con-autor">Con autor</UserMessage>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const sinAutor = canvas.getByTestId('sin-autor');
+    const conAutor = canvas.getByTestId('con-autor');
+
+    await expect(sinAutor.querySelector('.user-message__author')).toBeNull();
+
+    const autor = conAutor.querySelector('.user-message__author');
+    await expect(autor).not.toBeNull();
+    await expect(autor?.textContent).toBe('María');
   },
 };
 

@@ -1,7 +1,12 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-user-message-gap: 0.25rem; // Separación entre el globo y su marca de tiempo
+$lxd-user-message-gap: 0.25rem; // Separación entre el nombre del autor, el globo y su marca de tiempo
+$lxd-user-message-author-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del nombre del autor
+$lxd-user-message-author-font-size: 0.875rem; // Cuerpo del nombre del autor: un peldaño por debajo del texto de la superficie
+$lxd-user-message-author-font-weight: 300; // Peso del nombre del autor: discreto, a diferencia del nombre del modelo en `AssistantMessage` (que firma la respuesta con énfasis) — aquí el emisor ya lo dicen la alineación y la cola
+$lxd-user-message-author-color: #4a4a4a; // Tinta del nombre del autor: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)
+$lxd-user-message-author-padding-inline: 0.25rem; // Aire horizontal del nombre del autor
 $lxd-user-message-timestamp-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la marca de tiempo
 $lxd-user-message-timestamp-font-size: 0.875rem; // Cuerpo de la marca de tiempo: un peldaño por debajo del texto de la superficie
 $lxd-user-message-timestamp-color: #4a4a4a; // Tinta de la marca de tiempo: el gris de texto secundario del sistema, no `grey-dark` (que no es un color de texto)
