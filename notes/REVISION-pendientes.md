@@ -227,13 +227,18 @@ roles; lo que queda es comprobar visualmente cada componente al revisarlo.
       escala (mínimo 4px). El `chip-padding-block` de 2px de **CalendarRoster**
       se cerró en la tanda 6: era el padding del botón de navegación a mano, y
       se fue con él al pasar la banda de mes a `PrevNextNav`.
-- [ ] Componentes que pasan de 4px a esquina recta (29 usos, ya repuntados):
+- [x] Componentes que pasan de 4px a esquina recta (29 usos, ya repuntados):
       AppLauncher, Avatar (variante cuadrada), Calendar, CalendarPlanner,
       CalendarRoster, CommandPalette, ContextMenu, ConversationList,
       FileUpload, ImageCropDialog, Kbd, MessageBubble, OrgSwitcher,
       Pagination, SidebarNav, Skeleton, Tabs, Tooltip, UserMenu, Alert,
       Toast, Modal, Sheet. Comprobar que ninguno dependía del radio para
-      leerse (chips, burbujas).
+      leerse (chips, burbujas). **Cerrado (2026-08-29):** verificado que
+      `border-radius.default` (el único rol al que apuntan todos estos
+      tokens) resuelve a `{border-radius.none}` = `0px` en todo el sistema —
+      no queda ningún `4px` crudo ni referencia a la escala en
+      `tokens/component/**`/`tokens/molecule/**`. Nada dependía del radio
+      para leerse.
 
 ## Sombras (2026-08-25)
 
@@ -248,12 +253,24 @@ comprobar que sigue separándose de lo que tiene debajo:
 - [x] **Toast** (tenía `lg`) — hecho (2026-08-27): fuera el token `toast.shadow`;
       el borde es el del `Alert` (1px, blanco en el neutro), que separa el aviso
       del contenido sobre el que flota en claro y en oscuro.
-- [ ] **Sidebar** y **AppHeader** (sombra cruda) — barra fija sobre
+- [x] **Sidebar** y **AppHeader** (sombra cruda) — barra fija sobre
       contenido que hace scroll: sustituir por borde inferior/derecho 1px.
+      **Cerrado (2026-08-29):** Sidebar ya usaba `border-inline-end` real
+      (el `box-shadow: none` que quedaba era el reset de subrayado del
+      logo-enlace, no la barra). AppHeader seguía dibujando la línea con
+      `box-shadow: 0 var(--app-header-border-width) 0 var(--app-header-border-color)`
+      (comentario: "así la altura sigue siendo la compuesta") — pasado a
+      `border-block-end: var(--app-header-border-width) solid var(--app-header-border-color)`
+      real, sin token nuevo.
 - [x] **Kbd** — el relieve lo daba el borde, no la sombra: el token
       `kbd.shadow` (huérfano, ya en `none`) se retira y el CSS deja de
       declarar `box-shadow` (2026-08-27).
-- [ ] **Header** (Por revisar) — misma sombra cruda que AppHeader.
+- [x] **Header** (Por revisar) — misma sombra cruda que AppHeader.
+      **Cerrado (2026-08-29):** no existe ya un componente `Header` separado
+      — el catálogo solo tiene `AppHeader` y `SiteHeader` (ninguno con
+      `title: 'Por revisar/...'`); referencia obsoleta de una fase anterior.
+      `SiteHeader` no dibuja ninguna sombra/borde inferior propio (los
+      `box-shadow: none` de su CSS son el mismo reset de subrayado del logo).
 
 ## Movimiento (2026-08-25)
 

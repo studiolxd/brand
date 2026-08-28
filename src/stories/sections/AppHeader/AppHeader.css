@@ -12,8 +12,7 @@
   padding-block-start: env(safe-area-inset-top);
   box-sizing: content-box; /* la altura no absorbe el safe-area superior */
   background-color: var(--app-header-bg);
-  /* El borde va fuera de la caja (sombra sin desenfoque): la altura sigue siendo la compuesta */
-  box-shadow: 0 var(--app-header-border-width) 0 var(--app-header-border-color);
+  border-block-end: var(--app-header-border-width) solid var(--app-header-border-color);
   z-index: var(--app-header-z-index);
 }
 
