@@ -275,8 +275,16 @@ ContextMenu (tenía 50 crudo en CSS), SkipLink (9999 crudo) y el Header viejo.
 
 ## Iconografía (2026-08-25)
 
-- [ ] `icon.size-sm` pasa de 18px a **16px** (a la retícula de 4). 21 usos
-      con `size="sm"`: comprobar en Button, Tag, Table, campos con icono.
+- [x] `icon.size-sm` (2026-08-28) — verificado: el token ya vale `16px` en
+      `tokens/component/icon.json` (a la retícula de 4) desde el rediseño
+      (commit `9e51db5`); no queda ningún `18px`/`1.125rem` crudo en `src/` ni
+      `tokens/`. Auditados los ~18 usos de `<Icon size="sm">` (AppShell nav,
+      CodeBlock, Alert, Toast, ThemeSwitcher, UserMenu, OrgSwitcher,
+      SidebarNav, DropdownField, Modal, Sheet, Link): todos toman el tamaño de
+      `.icon--sm { --icon-size: var(--icon-size-sm) }`, sin contenedor de
+      ancho/alto fijo que asumiera 18px — nada dependía del valor anterior.
+      Table usa `size="xs"` en su icono de orden, no `sm`; Button y Tag no
+      montan `<Icon>` con talla propia. Sin cambios de código; ítem cerrado.
 - [x] **EmptyState** — usaba `xl` (64) en stories y `lg` (48) en el token
       `icon-size` crudo (3rem): unificado, stories a `size="lg"` y token a
       `{icon.size-lg}` (2026-08-27).
