@@ -7,6 +7,46 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.6.0
+
+Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-pendientes.md`).
+
+### Añadido
+
+- `CheckboxField` al contrato de campo de los otros 14 fields: `forwardRef`
+  (al disparador de Base UI), `helperText`, `error`/`errorMessage` (con
+  `aria-describedby`/`aria-invalid`) y `className` en el contenedor. Nueva
+  prop `error` en el átomo `Checkbox` (`checkbox--error`, borde en el color
+  de error, token `checkbox.error-border-color` con par `surface-dark-*`). El
+  label deja `font-size.2` crudo por `{text.font-size}` (era un peldaño por
+  debajo del `RadioField`/`SwitcherField` en la superficie pública); tokens
+  de `checkbox-field` alineados al mismo patrón (`stack-gap`, grupos `error`/
+  `helper`). Mismo contrato, forma y tokens que `SwitcherField`.
+- `AppShell` monta `SkipLink` (nueva prop `skipLabel`, default «Saltar al
+  contenido principal») como primer elemento del árbol, apuntando al
+  `<main id="main-content" tabIndex={-1}>` que ya renderizaba: la app con
+  sesión tiene salto al contenido, mismo patrón que `AppRoot`.
+
+### Arreglado
+
+- `DatePicker` (y `DateTimeField`, que reenvía su `name`): el input oculto
+  que monta el `name` construía la fecha en `yyyy-mm-dd` con
+  `toISOString().slice(0, 10)` — UTC — y desplazaba un día en husos al este
+  del meridiano a horas tempranas en el envío nativo del formulario. Nuevo
+  helper `toLocalDateInputValue` usa los componentes locales de la fecha
+  (`getFullYear`/`getMonth`/`getDate`). Sin impacto en react-hook-form, que
+  guarda el `Date`.
+
+### Verificado sin cambios de código
+
+- `icon.size-sm` ya vale `16px` desde el rediseño (commit `9e51db5`); auditados
+  los ~18 usos de `<Icon size="sm">` del sistema, ninguno dependía del valor
+  anterior (18px).
+- Las transiciones de `Table`, `Modal` y `Tooltip` ya toman sus tokens de
+  motion directos, sin `ms` a mano ni el bug de `calc(var(--…) * 1ms)`;
+  `CardSplit` (el único caso pendiente anotado) ya no existe, fusionado en
+  `Card`.
+
 ## v25.5.0
 
 ### Cambiado
