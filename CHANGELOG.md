@@ -7,6 +7,31 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.29.0
+
+### Añadido
+
+- **`UserMessage`**: prop `author?: string` opcional — nombre visible y discreto sobre el globo,
+  coherente con el nombre del modelo de `AssistantMessage` pero sin su énfasis. Tokens propios
+  `user-message.author-*` (con par oscuro), story «Con autor» y test de contrato.
+
+### Cambiado
+
+- **`message-bubble.max-width`** y **`chat-shell.list-narrow-max-height`** dejan de ser valores
+  sueltos: pasan al token compartido `chat.*` nuevo (`tokens/component/chat.json`).
+  `list-narrow-max-height` se deriva por fórmula de `size-component.lg`
+  (`calc(4 * {size-component.lg})` = 12rem exacto); `bubble-max-width` documenta su ratio (75%)
+  como decisión de producto, no como longitud de la escala. Sin cambio visual.
+- **`MessageBubble`/`ChatShell`**: documentado en MDX que `tail-fill` es el fondo del sistema y
+  que un hilo se monta siempre sobre él, nunca sobre `Card` ni otra superficie propia — regla del
+  producto, no técnica. Story `EnElShell` en `MessageBubble` como referencia.
+
+### Corregido
+
+- **Marca de tiempo inválida** en `UserMessage`/`AssistantMessage`: seguía sin pintarse (mejor que
+  «Invalid Date»), pero ahora avisa por `console.warn` en desarrollo (`NODE_ENV !== 'production'`)
+  con el valor recibido; en producción sigue mudo.
+
 ## v25.28.1
 
 ### Corregido
