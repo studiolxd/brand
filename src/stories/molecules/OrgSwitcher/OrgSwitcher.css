@@ -103,7 +103,7 @@
   cursor: pointer;
   outline: none;
   transition:
-    outline-color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing),
+    background-color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing),
     color var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
 }
 
@@ -111,10 +111,10 @@
   outline: none;
 }
 
-/* El ítem resaltado no pinta relleno: lo marca el anillo del sistema (regla de Colores). */
+/* El ítem resaltado se rellena: excepción declarada de las listas de opciones
+   desplegables (Foundations → Colores). */
 .org-switcher__item[data-highlighted] {
-  outline: var(--org-switcher-item-focus-ring-width) solid var(--org-switcher-item-focus-ring-color);
-  outline-offset: var(--org-switcher-item-focus-ring-offset);
+  background-color: var(--org-switcher-item-highlighted-bg);
 }
 
 .org-switcher__item--active,
@@ -133,10 +133,6 @@
 /* ─── Ítem destructivo ───────────────────────────────────── */
 .org-switcher__item.org-switcher__item--destructive {
   color: var(--org-switcher-item-destructive-color);
-}
-
-.org-switcher__item.org-switcher__item--destructive[data-highlighted] {
-  outline-color: var(--org-switcher-item-destructive-color);
 }
 
 /* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */

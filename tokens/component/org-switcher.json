@@ -25,9 +25,7 @@
     "item-font-size":         { "$value": "{font-size.2}",                 "$type": "dimension", "$description": "Tamaño de texto de ítems" },
     "item-font-weight":       { "$value": "{font-weight.default}",         "$type": "number",    "$description": "Peso de ítems" },
     "item-color":             { "$value": "{color.text.on-light}",         "$type": "color",     "$description": "Color de ítems" },
-    "item-focus-ring-width":  { "$value": "{menu.item-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo del ítem resaltado — el del Menu" },
-    "item-focus-ring-offset": { "$value": "{menu.item-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo del ítem — la del Menu" },
-    "item-focus-ring-color":  { "$value": "{menu.item-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo del ítem — el del Menu" },
+    "item-highlighted-bg":    { "$value": "{menu.item-highlighted-bg}",    "$type": "color",     "$description": "Relleno del ítem resaltado — el del Menu" },
     "item-destructive-color": { "$value": "{menu.item-destructive-color}", "$type": "color",     "$description": "Color de ítem destructivo — el del Menu" },
     "separator-color":        { "$value": "{separator.color}",            "$type": "color",     "$description": "Color del separador — el de la línea del sistema" },
     "separator-height":       { "$value": "{separator.thickness}",             "$type": "dimension", "$description": "Alto del separador — el grosor de la línea del sistema" },
@@ -37,7 +35,7 @@
     "surface-dark-focus-ring-color":  { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro." },
     "surface-dark-name-color":        { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del nombre de la org — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro." },
     "surface-dark-item-color":        { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color de ítems — surface-dark" },
-    "surface-dark-item-focus-ring-color":  { "$value": "{menu.surface-dark-item-focus-ring-color}",  "$type": "color", "$description": "Color del anillo del ítem — surface-dark" },
+    "surface-dark-item-highlighted-bg":    { "$value": "{menu.surface-dark-item-highlighted-bg}",    "$type": "color", "$description": "Relleno del ítem resaltado — surface-dark" },
     "surface-dark-item-destructive-color": { "$value": "{menu.surface-dark-item-destructive-color}", "$type": "color", "$description": "Color de ítem destructivo — surface-dark" },
     "surface-dark-separator-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del separador — surface-dark" }
   }
