@@ -1,0 +1,60 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AsyncMultiSelectStories from "./AsyncMultiSelect.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { asyncMultiSelectFaceTokens, asyncMultiSelectStateTokens, asyncMultiSelectDarkTokens } from "../../../tokens/components/async-multi-select";
+
+<Meta of={AsyncMultiSelectStories} />
+
+# AsyncMultiSelect
+
+El `AsyncSelect` con **varios** valores: cada elección se queda como una pill dentro del disparador. Cuando las opciones son pocas y conocidas, el control es `MultiSelect`.
+
+<Canvas of={AsyncMultiSelectStories.Default} />
+
+## Búsqueda
+
+`onSearch` recibe lo escrito y devuelve una promesa de opciones. Mientras está en vuelo, la lista enseña un `Spinner` con `loadingLabel` como nombre accesible; si vuelve vacía, el `emptyMessage`. Los dos son texto visible y van como props: una app multiidioma los pasa traducidos.
+
+<Canvas of={AsyncMultiSelectStories.MensajeVacio} />
+
+## Valores
+
+Como en el `AsyncSelect`, el componente no guarda las etiquetas: con `value` hay que pasar también las opciones elegidas. El disparador mide la talla exacta con una línea de pills y crece solo cuando envuelven.
+
+<Canvas of={AsyncMultiSelectStories.WithInitialValues} />
+<Canvas of={AsyncMultiSelectStories.Controlled} />
+
+## Tallas
+
+Las tres del sistema: 32, 40 y 48 con una línea de pills. Sin `size`, la del `Form` que lo envuelva; sin `Form`, `md`.
+
+<Canvas of={AsyncMultiSelectStories.SmSize} />
+<Canvas of={AsyncMultiSelectStories.LgSize} />
+
+## Estados
+
+<Canvas of={AsyncMultiSelectStories.Disabled} />
+
+## Accesibilidad
+
+El `ref` va al `<input>` de búsqueda. La opción resaltada se marca con el anillo del sistema, no con un relleno (Foundations → Colores, «Estados: nada se rellena»).
+
+## Tokens
+
+### La cara: heredada del `MultiSelect`
+
+Cada token propio apunta al del `MultiSelect`, pills incluidas: el buscador se ve como el control síncrono porque así está cableado, no por casualidad. Darle valor propio a uno de estos tokens lo separa sin tocar CSS.
+
+<TokenTable tokens={asyncMultiSelectFaceTokens} />
+
+### Lo que solo tiene el buscador
+
+<TokenTable tokens={asyncMultiSelectStateTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={asyncMultiSelectDarkTokens} />
+
+## Props
+
+<ArgTypes of={AsyncMultiSelectStories.Default} />

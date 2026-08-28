@@ -9,6 +9,26 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --async-multi-select-bg: var(--multi-select-bg);
+  --async-multi-select-border-color: var(--multi-select-border-color);
+  --async-multi-select-color: var(--multi-select-color);
+  --async-multi-select-content-bg: var(--multi-select-content-bg);
+  --async-multi-select-content-border-color: var(--multi-select-content-border-color);
+  --async-multi-select-error-border-color: var(--multi-select-error-border-color);
+  --async-multi-select-focus-ring-color: var(--multi-select-focus-ring-color);
+  --async-multi-select-item-focus-ring-color: var(--multi-select-item-focus-ring-color);
+  --async-multi-select-placeholder-color: var(--multi-select-placeholder-color);
+  --async-multi-select-pill-bg: var(--multi-select-pill-bg);
+  --async-multi-select-pill-color: var(--multi-select-pill-color);
+  --async-select-bg: var(--select-bg);
+  --async-select-border-color: var(--select-border-color);
+  --async-select-color: var(--select-color);
+  --async-select-content-bg: var(--select-content-bg);
+  --async-select-content-border-color: var(--select-content-border-color);
+  --async-select-error-border-color: var(--select-error-border-color);
+  --async-select-focus-ring-color: var(--select-focus-ring-color);
+  --async-select-item-focus-ring-color: var(--select-item-focus-ring-color);
+  --async-select-placeholder-color: var(--multi-select-placeholder-color);
   --code-block-border-color: var(--card-outline-border-color);
   --menu-bg: var(--floating-panel-bg);
   --menu-border-color: var(--floating-panel-border-color);

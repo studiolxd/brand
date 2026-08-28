@@ -2,30 +2,30 @@
 .async-select {
   display: inline-flex;
   align-items: center;
-  gap: var(--multi-select-content-gap);
+  gap: var(--async-select-content-gap);
 
-  block-size: var(--multi-select-height);
+  block-size: var(--async-select-height);
   padding-block: 0;
-  padding-inline: var(--multi-select-padding-inline);
+  padding-inline: var(--async-select-padding-inline);
 
-  font-family: var(--multi-select-font-family);
-  font-size: var(--multi-select-font-size);
-  line-height: var(--multi-select-line-height);
-  font-weight: var(--multi-select-font-weight);
-  color: var(--multi-select-color);
-  background-color: var(--multi-select-bg);
+  font-family: var(--async-select-font-family);
+  font-size: var(--async-select-font-size);
+  line-height: var(--async-select-line-height);
+  font-weight: var(--async-select-font-weight);
+  color: var(--async-select-color);
+  background-color: var(--async-select-bg);
 
-  border-width: var(--multi-select-border-width);
-  border-style: var(--multi-select-border-style);
-  border-color: var(--multi-select-border-color);
-  border-radius: var(--multi-select-border-radius);
+  border-width: var(--async-select-border-width);
+  border-style: var(--async-select-border-style);
+  border-color: var(--async-select-border-color);
+  border-radius: var(--async-select-border-radius);
   box-sizing: border-box;
 
   width: 100%;
 
   &:focus-within {
-    outline: var(--multi-select-focus-ring-width) solid var(--multi-select-focus-ring-color);
-    outline-offset: calc(-1 * (var(--multi-select-focus-ring-width) + var(--multi-select-border-width)));
+    outline: var(--async-select-focus-ring-width) solid var(--async-select-focus-ring-color);
+    outline-offset: calc(-1 * (var(--async-select-focus-ring-width) + var(--async-select-border-width)));
   }
 }
 
@@ -48,7 +48,7 @@
   color: inherit;
 
   &::placeholder {
-    color: var(--multi-select-placeholder-color);
+    color: var(--async-select-placeholder-color);
   }
 
   &:disabled {
@@ -65,7 +65,7 @@
   flex-shrink: 0;
   cursor: pointer;
   line-height: 1;
-  font-size: var(--multi-select-font-size);
+  font-size: var(--async-select-font-size);
   opacity: 0.7;
 
   &:hover {
@@ -75,10 +75,10 @@
 
 /* ─── Dropdown ────────────────────────────────────────────── */
 .async-select__content {
-  background-color: var(--multi-select-content-bg);
-  border-width: var(--multi-select-border-width);
-  border-style: var(--multi-select-border-style);
-  border-color: var(--multi-select-content-border-color);
+  background-color: var(--async-select-content-bg);
+  border-width: var(--async-select-border-width);
+  border-style: var(--async-select-border-style);
+  border-color: var(--async-select-content-border-color);
   min-width: var(--anchor-width);
 
   &[data-side='bottom'] {
@@ -95,16 +95,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: var(--multi-select-item-padding-block);
-  padding-inline: var(--multi-select-padding-inline);
+  padding-block: var(--async-select-loading-padding-block);
+  padding-inline: var(--async-select-loading-padding-inline);
 }
 
 .async-select__empty {
-  padding-block: var(--multi-select-item-padding-block);
-  padding-inline: var(--multi-select-padding-inline);
-  font-size: var(--multi-select-font-size);
-  font-family: var(--multi-select-font-family);
-  color: var(--multi-select-placeholder-color);
+  padding-block: var(--async-select-empty-padding-block);
+  padding-inline: var(--async-select-empty-padding-inline);
+  font-size: var(--async-select-empty-font-size);
+  font-family: var(--async-select-empty-font-family);
+  color: var(--async-select-empty-color);
 }
 
 /* ─── Items ───────────────────────────────────────────────── */
@@ -114,72 +114,72 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding-block: var(--multi-select-item-padding-block);
-  padding-inline: var(--multi-select-padding-inline);
-  font-size: var(--multi-select-font-size);
-  font-family: var(--multi-select-font-family);
-  color: var(--multi-select-color);
+  padding-block: var(--async-select-item-padding-block);
+  padding-inline: var(--async-select-padding-inline);
+  font-size: var(--async-select-font-size);
+  font-family: var(--async-select-font-family);
+  color: var(--async-select-color);
   cursor: pointer;
 
   /* La opción resaltada no se rellena (regla de Colores): anillo del sistema. */
   &:focus-visible,
   &:hover {
-    outline: var(--multi-select-item-focus-ring-width) solid var(--multi-select-item-focus-ring-color);
-    outline-offset: var(--multi-select-item-focus-ring-offset);
+    outline: var(--async-select-item-focus-ring-width) solid var(--async-select-item-focus-ring-color);
+    outline-offset: var(--async-select-item-focus-ring-offset);
   }
 
   &.async-select__item--selected {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--async-select-item-selected-font-weight);
   }
 
   &.async-select__item--active {
-    outline: var(--multi-select-item-focus-ring-width) solid var(--multi-select-item-focus-ring-color);
-    outline-offset: var(--multi-select-item-focus-ring-offset);
+    outline: var(--async-select-item-focus-ring-width) solid var(--async-select-item-focus-ring-color);
+    outline-offset: var(--async-select-item-focus-ring-offset);
   }
 }
 
 .async-select__content .async-select__item + .async-select__item {
-  border-top: var(--multi-select-border-width) var(--multi-select-border-style) var(--multi-select-content-border-color);
+  border-top: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
 }
 
 .async-select__content[data-side='bottom'] .async-select__item:first-child {
-  border-top: var(--multi-select-border-width) var(--multi-select-border-style) var(--multi-select-content-border-color);
+  border-top: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
 }
 
 .async-select__content[data-side='top'] .async-select__item:last-child {
-  border-bottom: var(--multi-select-border-width) var(--multi-select-border-style) var(--multi-select-content-border-color);
+  border-bottom: var(--async-select-border-width) var(--async-select-border-style) var(--async-select-content-border-color);
 }
 
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
 .async-select.async-select--sm {
-  font-size: var(--multi-select-sm-font-size);
-  --multi-select-height: var(--multi-select-sm-height);
-  padding-inline: var(--multi-select-sm-padding-inline);
+  font-size: var(--async-select-sm-font-size);
+  --multi-select-height: var(--async-select-sm-height);
+  padding-inline: var(--async-select-sm-padding-inline);
 }
 
 .async-select__content--sm .async-select__item {
-  font-size: var(--multi-select-sm-font-size);
-  padding-block: var(--multi-select-sm-item-padding-block);
+  font-size: var(--async-select-sm-font-size);
+  padding-block: var(--async-select-sm-item-padding-block);
 }
 
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
 .async-select.async-select--lg {
-  font-size: var(--multi-select-lg-font-size);
-  --multi-select-height: var(--multi-select-lg-height);
-  padding-inline: var(--multi-select-lg-padding-inline);
+  font-size: var(--async-select-lg-font-size);
+  --multi-select-height: var(--async-select-lg-height);
+  padding-inline: var(--async-select-lg-padding-inline);
 }
 
 .async-select__content--lg .async-select__item {
-  font-size: var(--multi-select-lg-font-size);
-  padding-block: var(--multi-select-lg-item-padding-block);
+  font-size: var(--async-select-lg-font-size);
+  padding-block: var(--async-select-lg-item-padding-block);
 }
 
 /* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */
 .async-select__positioner {
-  z-index: var(--multi-select-content-z-index);
+  z-index: var(--async-select-content-z-index);
 }
 
 /* Doble clase para ganar sobre el selector base */
 .async-select.async-select--error {
-  border-color: var(--multi-select-error-border-color);
+  border-color: var(--async-select-error-border-color);
 }

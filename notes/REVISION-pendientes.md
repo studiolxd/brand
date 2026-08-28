@@ -451,9 +451,14 @@ Quedan con dudas, anotadas al cerrarlo:
       tipografía `{text.*}` (antes `font-size.2` crudo, un peldaño por debajo
       del `RadioField` en la superficie pública). Mismo patrón que
       `SwitcherField`.
-- [ ] **AsyncSelect / AsyncMultiSelect** siguen sin tokens visuales propios:
-      consumen los de `multi-select.*`. Es deliberado (misma cara) pero rompe
-      la regla de «todo color pasa por un token del componente».
+- [x] **AsyncSelect / AsyncMultiSelect** (2026-08-28, fase 0) — ya tienen
+      tokens propios: `tokens/component/async-select.json` y
+      `async-multi-select.json`. Cada token apunta por defecto al del `Select` /
+      `MultiSelect`, así que la cara sigue siendo la misma, pero ahora es una
+      referencia declarada y no un préstamo de variable en el CSS. Estrenan
+      además lo que solo tiene un buscador —`loading-*`, `empty-*` y
+      `item-selected-font-weight` (antes `--font-weight-bold` crudo)— y MDX
+      propio con las tres TokenTable.
 - [ ] **FileUpload** no tiene tallas: `size` en `FileUploadField` solo mueve la
       etiqueta. Si la zona de arrastre debe responder a la talla del formulario,
       hay que decidir su medida.

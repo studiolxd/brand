@@ -1,0 +1,60 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --async-multi-select-values-gap: {multi-select.values-gap}; /** Hereda de `multi-select.values-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-border-style: var(--multi-select-border-style); /** Hereda de `multi-select.border-style`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-content-gap: var(--multi-select-content-gap); /** Hereda de `multi-select.content-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-height: var(--multi-select-height); /** Hereda de `multi-select.height`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-lg-height: var(--multi-select-lg-height); /** Hereda de `multi-select.lg-height`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-sm-height: var(--multi-select-sm-height); /** Hereda de `multi-select.sm-height`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-pill-color: var(--multi-select-pill-color); /** Hereda de `multi-select.pill-color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-pill-font-size: var(--multi-select-pill-font-size); /** Hereda de `multi-select.pill-font-size`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-pill-gap: var(--multi-select-pill-gap); /** Hereda de `multi-select.pill-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-pill-padding-block: var(--multi-select-pill-padding-block); /** Hereda de `multi-select.pill-padding-block`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-pill-padding-inline: var(--multi-select-pill-padding-inline); /** Hereda de `multi-select.pill-padding-inline`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-item-selected-font-weight: var(--font-weight-emphasis); /** Peso de la opción ya elegida dentro de la lista de resultados */
+  --async-multi-select-empty-color: var(--color-text-muted-on-light); /** Tinta del mensaje de lista vacía: es texto secundario, no un valor */
+  --async-multi-select-bg: var(--multi-select-bg); /** Hereda de `multi-select.bg`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-content-bg: var(--multi-select-content-bg); /** Hereda de `multi-select.content-bg`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-content-z-index: var(--multi-select-content-z-index); /** Hereda de `multi-select.content-z-index`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-error-border-color: var(--multi-select-error-border-color); /** Hereda de `multi-select.error-border-color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-font-family: var(--multi-select-font-family); /** Hereda de `multi-select.font-family`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-font-size: var(--multi-select-font-size); /** Hereda de `multi-select.font-size`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-item-padding-block: var(--multi-select-item-padding-block); /** Hereda de `multi-select.item-padding-block`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-lg-font-size: var(--multi-select-lg-font-size); /** Hereda de `multi-select.lg-font-size`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-lg-item-padding-block: var(--multi-select-lg-item-padding-block); /** Hereda de `multi-select.lg-item-padding-block`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-lg-padding-inline: var(--multi-select-lg-padding-inline); /** Hereda de `multi-select.lg-padding-inline`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-placeholder-color: var(--multi-select-placeholder-color); /** Hereda de `multi-select.placeholder-color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-sm-font-size: var(--multi-select-sm-font-size); /** Hereda de `multi-select.sm-font-size`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-sm-item-padding-block: var(--multi-select-sm-item-padding-block); /** Hereda de `multi-select.sm-item-padding-block`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-sm-padding-inline: var(--multi-select-sm-padding-inline); /** Hereda de `multi-select.sm-padding-inline`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-pill-bg: var(--multi-select-pill-bg); /** Hereda de `multi-select.pill-bg`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-pill-border-radius: var(--multi-select-pill-border-radius); /** Hereda de `multi-select.pill-border-radius`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-loading-padding-block: var(--multi-select-item-padding-block); /** Aire vertical de la fila de carga: la misma caja que una opción, para que la lista no salte al llegar los resultados */
+  --async-multi-select-empty-padding-block: var(--multi-select-item-padding-block); /** Aire vertical del mensaje de lista vacía */
+  --async-multi-select-empty-font-family: var(--multi-select-font-family); /** Tipografía del mensaje de lista vacía */
+  --async-multi-select-empty-font-size: var(--multi-select-font-size); /** Tamaño del mensaje de lista vacía */
+  --async-multi-select-border-color: var(--multi-select-border-color); /** Hereda de `multi-select.border-color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-border-radius: var(--multi-select-border-radius); /** Hereda de `multi-select.border-radius`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-border-width: var(--multi-select-border-width); /** Hereda de `multi-select.border-width`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-color: var(--multi-select-color); /** Hereda de `multi-select.color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-content-border-color: var(--multi-select-content-border-color); /** Hereda de `multi-select.content-border-color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-focus-ring-color: var(--multi-select-focus-ring-color); /** Hereda de `multi-select.focus-ring-color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-focus-ring-width: var(--multi-select-focus-ring-width); /** Hereda de `multi-select.focus-ring-width`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-font-weight: var(--multi-select-font-weight); /** Hereda de `multi-select.font-weight`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-item-focus-ring-color: var(--multi-select-item-focus-ring-color); /** Hereda de `multi-select.item-focus-ring-color`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-item-focus-ring-offset: var(--multi-select-item-focus-ring-offset); /** Hereda de `multi-select.item-focus-ring-offset`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-item-focus-ring-width: var(--multi-select-item-focus-ring-width); /** Hereda de `multi-select.item-focus-ring-width`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-line-height: var(--multi-select-line-height); /** Hereda de `multi-select.line-height`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-padding-inline: var(--multi-select-padding-inline); /** Hereda de `multi-select.padding-inline`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-loading-padding-inline: var(--multi-select-padding-inline); /** Aire horizontal de la fila de carga */
+  --async-multi-select-empty-padding-inline: var(--multi-select-padding-inline); /** Aire horizontal del mensaje de lista vacía */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --async-multi-select-empty-color: var(--color-text-muted-on-dark); /** Tinta del mensaje de lista vacía — surface-dark */
+}
