@@ -1,0 +1,78 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CopyButtonStories from "./CopyButton.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { copyButtonTokens } from "../../../tokens/molecules/copy-button";
+
+<Meta of={CopyButtonStories} />
+
+# CopyButton
+
+Copiar al portapapeles con acuse: una clave de API, un identificador de organización, una URL de webhook, un fragmento de código. Es el gesto que las ocho aplicaciones de la suite rehacían por su cuenta.
+
+<Canvas of={CopyButtonStories.PorDefecto} />
+
+## Anatomía
+
+Es el `Button` del sistema con el icono de copiar: no aporta cara propia, así que hereda variantes, tallas, foco y superficie oscura del átomo. Lo único suyo es la conducta del acuse y el aire entre el icono y el rótulo.
+
+Sin `children` es un botón de solo icono y `label` es su nombre accesible. Con `children`, el rótulo se ve y el acuse lo sustituye mientras dura.
+
+<Canvas of={CopyButtonStories.ConRotulo} />
+
+## El acuse es doble
+
+El icono pasa a un tic para quien ve, y una región viva (`role="status"`) lo anuncia para quien escucha. **Un cambio de icono, solo, no es feedback accesible**: quien navega con lector de pantalla no se entera de que la copia ha ocurrido.
+
+La región se monta siempre, vacía, y se le mete el texto al copiar: si apareciera ya con el texto dentro, algunos lectores de pantalla no la leerían.
+
+`feedbackDuration` fija cuánto dura el acuse antes de volver al estado inicial.
+
+## Qué se copia
+
+`value` es el texto, o **una función que lo produce en el momento del clic**. La función es para lo que puede haber cambiado desde el render: el contenido de un campo, el texto de un bloque de código, el identificador de la fila en la que estás.
+
+<Canvas of={CopyButtonStories.JuntoAlDato} />
+
+## Cuando el portapapeles no está
+
+`navigator.clipboard` no existe en contextos no seguros y puede tener el permiso denegado. Ahí el botón **lo dice** (`errorLabel`) en vez de fingir que ha copiado, y llama a `onCopyError`. Un acuse falso es peor que ninguno: el usuario pega y no hay nada.
+
+## Variantes y tallas
+
+<Canvas of={CopyButtonStories.Variantes} />
+<Canvas of={CopyButtonStories.Tallas} />
+
+`ghost` por defecto —vive pegado al dato que copia, no compite con él—; `outline` cuando va suelto y necesita caja propia.
+
+`CodeBlock` con `copyable` ya monta este mismo gesto en su cabecera: ahí no hace falta ponerlo a mano.
+
+<Canvas of={CopyButtonStories.EnUnBloqueDeCodigo} />
+
+## Superficie oscura
+
+No tiene nada que remapear: la cara es la del `Button`, que ya reacciona a `.surface-dark` y a `html.dark` / `[data-theme="dark"]`.
+
+<Canvas of={CopyButtonStories.EnSuperficieOscura} />
+
+## Textos
+
+`label`, `copiedLabel` y `errorLabel` son props con default castellano.
+
+---
+
+## Tokens
+
+<TokenTable tokens={copyButtonTokens} />
+
+El resto —altura, relleno, radio, foco, colores— son los de `Button`, y se personalizan ahí.
+
+## Accesibilidad
+
+- Sin rótulo visible, el botón lleva `aria-label`: un botón de solo icono sin nombre no existe para un lector de pantalla.
+- El acuse viaja por dos canales, forma y texto, así que no depende de ver el icono ni de distinguir un color.
+- El fallo del portapapeles se anuncia por el mismo canal que el éxito.
+- El botón no se deshabilita durante el acuse: volver a pulsarlo copia otra vez, que es lo que espera quien no está seguro de haber acertado.
+
+## Props
+
+<ArgTypes of={CopyButtonStories} />

@@ -1,0 +1,7 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --copy-button-gap: var(--spacing-2); /** Aire entre el icono y el texto cuando el botón lleva rótulo visible. Es el mismo aire que el icono de un `Link` */
+}

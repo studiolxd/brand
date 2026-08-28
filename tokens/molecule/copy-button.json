@@ -1,0 +1,5 @@
+{
+  "copy-button": {
+    "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre el icono y el texto cuando el botón lleva rótulo visible. Es el mismo aire que el icono de un `Link`" }
+  }
+}

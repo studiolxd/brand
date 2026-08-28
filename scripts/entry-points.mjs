@@ -110,6 +110,7 @@ export const entryPoints = {
   'table-of-contents':   'src/stories/molecules/TableOfContents/TableOfContents.tsx',
   'docs-search':         'src/stories/molecules/DocsSearch/DocsSearch.tsx',
   'stat-tile':           'src/stories/molecules/StatTile/StatTile.tsx',
+  'copy-button':         'src/stories/molecules/CopyButton/CopyButton.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',
@@ -178,4 +179,5 @@ export const clientComponents = new Set([
   'dropdown-field',
   'notification-button',
   'docs-search',
+  'copy-button',
 ]);

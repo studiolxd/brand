@@ -1,0 +1,5 @@
+/* El botón lo viste `Button`: aquí solo el aire entre el icono y el rótulo,
+   que el átomo no pone porque la mayoría de sus usos no llevan icono. */
+.copy-button {
+  gap: var(--copy-button-gap);
+}

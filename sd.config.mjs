@@ -133,6 +133,7 @@ const filters = {
   'table-of-contents':  (t) => t.path[0] === 'table-of-contents',
   'docs-search':        (t) => t.path[0] === 'docs-search',
   'stat-tile':          (t) => t.path[0] === 'stat-tile',
+  'copy-button':        (t) => t.path[0] === 'copy-button',
 };
 
 function cssFile(destination, filterKey) {
@@ -273,6 +274,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/table-of-contents.css', 'table-of-contents'),
         cssFile('molecules/docs-search.css',       'docs-search'),
         cssFile('molecules/stat-tile.css',         'stat-tile'),
+        cssFile('molecules/copy-button.css',       'copy-button'),
         cssFile('molecules/input-phone-field.css',  'input-phone-field'),
         cssFile('molecules/otp-field.css',          'otp-field'),
         cssFile('molecules/async-select-field.css', 'async-select-field'),
@@ -404,6 +406,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_table-of-contents.scss', 'table-of-contents'),
         scssFile('molecules/_docs-search.scss',       'docs-search'),
         scssFile('molecules/_stat-tile.scss',         'stat-tile'),
+        scssFile('molecules/_copy-button.scss',       'copy-button'),
         scssFile('molecules/_input-phone-field.scss',  'input-phone-field'),
         scssFile('molecules/_otp-field.scss',          'otp-field'),
         scssFile('molecules/_async-select-field.scss', 'async-select-field'),

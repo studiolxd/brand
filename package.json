@@ -39,6 +39,10 @@
       "types": "./dist/_types/organisms/ConversationThread/ConversationThread.d.ts",
       "import": "./dist/conversation-thread.js"
     },
+    "./copy-button": {
+      "types": "./dist/_types/molecules/CopyButton/CopyButton.d.ts",
+      "import": "./dist/copy-button.js"
+    },
     "./data-table": {
       "types": "./dist/_types/organisms/DataTable/DataTable.d.ts",
       "import": "./dist/data-table.js"

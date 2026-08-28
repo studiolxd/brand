@@ -149,6 +149,8 @@ export { CalendarPlanner } from './stories/molecules/CalendarPlanner/CalendarPla
 export type { CalendarPlannerProps, PlannerEvent } from './stories/molecules/CalendarPlanner/CalendarPlanner';
 export { CalendarRoster } from './stories/molecules/CalendarRoster/CalendarRoster';
 export type { CalendarRosterProps, RosterRow, RosterCell, RosterCellType, LegendItem } from './stories/molecules/CalendarRoster/CalendarRoster';
+export { CopyButton } from './stories/molecules/CopyButton/CopyButton';
+export type { CopyButtonProps } from './stories/molecules/CopyButton/CopyButton';
 export { ContextMenu } from './stories/molecules/ContextMenu/ContextMenu';
 export type { ContextMenuItem, ContextMenuProps, ContextMenuRenderLinkProps } from './stories/molecules/ContextMenu/ContextMenu';
 export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from './stories/molecules/Card/Card';
