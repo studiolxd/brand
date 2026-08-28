@@ -1,0 +1,40 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --tree-view-cursor: pointer; /** Cursor sobre una fila */
+  --tree-view-disabled-cursor: not-allowed; /** Cursor de una fila deshabilitada */
+  --tree-view-indent: var(--spacing-5); /** Sangría que gana cada nivel del árbol */
+  --tree-view-row-gap: var(--spacing-2); /** Separación entre el chevron, el icono y el rótulo */
+  --tree-view-row-padding-block: var(--spacing-1); /** Aire vertical de cada fila */
+  --tree-view-row-padding-inline: var(--spacing-2); /** Aire horizontal de cada fila */
+  --tree-view-line-height: var(--line-height-snug); /** Interlineado de las filas */
+  --tree-view-chevron-size: var(--icon-size-sm); /** Tamaño del chevron que abre y cierra una rama */
+  --tree-view-guide-color: var(--color-grey-light); /** Color de la guía vertical */
+  --tree-view-disabled-opacity: var(--opacity-disabled); /** Opacidad de una fila deshabilitada */
+  --tree-view-transition-duration: var(--motion-duration-fast); /** Duración del giro del chevron */
+  --tree-view-transition-easing: var(--motion-easing-default); /** Easing del giro del chevron */
+  --tree-view-font-family: var(--control-font-family); /** Familia tipográfica de las filas */
+  --tree-view-font-size: var(--control-font-size); /** Tamaño de fuente de las filas */
+  --tree-view-font-weight: var(--font-weight-default); /** Peso de una fila cualquiera */
+  --tree-view-color: var(--color-text-on-light); /** Tinta de las filas */
+  --tree-view-selected-color: var(--color-primary); /** Tinta de la fila seleccionada */
+  --tree-view-selected-font-weight: var(--font-weight-emphasis); /** Peso de la fila seleccionada. La selección se marca con tinta y peso, no con relleno */
+  --tree-view-hover-line-width: var(--border-width-default); /** Grosor de la línea que marca la fila bajo el puntero. El hover no pinta relleno: deja una línea, el mismo grafismo del subrayado de `Link` */
+  --tree-view-hover-line-color: var(--color-primary); /** Color de la línea de hover */
+  --tree-view-guide-width: var(--border-width-default); /** Grosor de la guía vertical que acompaña a una rama abierta */
+  --tree-view-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --tree-view-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
+  --tree-view-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --tree-view-color: var(--color-text-on-dark); /** Tinta de las filas — surface-dark */
+  --tree-view-selected-color: var(--color-accent-1); /** Tinta de la fila seleccionada — surface-dark. El prusia coincide con el fondo; el acento de estado es lavanda, igual que en `SidebarNav` */
+  --tree-view-hover-line-color: var(--color-text-on-dark); /** Línea de hover — surface-dark */
+  --tree-view-guide-color: var(--color-text-on-dark); /** Guía vertical — surface-dark */
+  --tree-view-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

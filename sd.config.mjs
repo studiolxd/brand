@@ -146,6 +146,7 @@ const filters = {
   collapsible:          (t) => t.path[0] === 'collapsible',
   'scroll-area':        (t) => t.path[0] === 'scroll-area',
   slider:               (t) => t.path[0] === 'slider',
+  'tree-view':          (t) => t.path[0] === 'tree-view',
 };
 
 function cssFile(destination, filterKey) {
@@ -305,6 +306,7 @@ const sd = new StyleDictionary({
         cssFile('components/collapsible.css',       'collapsible'),
         cssFile('components/scroll-area.css',       'scroll-area'),
         cssFile('components/slider.css',            'slider'),
+        cssFile('molecules/tree-view.css',          'tree-view'),
       ],
     },
     scss: {
@@ -449,6 +451,7 @@ const sd = new StyleDictionary({
         scssFile('components/_collapsible.scss',     'collapsible'),
         scssFile('components/_scroll-area.scss',     'scroll-area'),
         scssFile('components/_slider.scss',          'slider'),
+        scssFile('molecules/_tree-view.scss',        'tree-view'),
       ],
     },
   },

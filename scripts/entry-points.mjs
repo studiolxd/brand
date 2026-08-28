@@ -88,6 +88,7 @@ export const entryPoints = {
   'user-menu':           'src/stories/molecules/UserMenu/UserMenu.tsx',
   'modal':               'src/stories/molecules/Modal/Modal.tsx',
   'sidebar-nav':         'src/stories/molecules/SidebarNav/SidebarNav.tsx',
+  'tree-view':           'src/stories/molecules/TreeView/TreeView.tsx',
   'date-picker':         'src/stories/molecules/DatePicker/DatePicker.tsx',
   'date-picker-field':   'src/stories/molecules/DatePickerField/DatePickerField.tsx',
   'date-time-field':     'src/stories/molecules/DateTimeField/DateTimeField.tsx',
@@ -201,4 +202,5 @@ export const clientComponents = new Set([
   'collapsible',
   'scroll-area',
   'slider',
+  'tree-view',
 ]);

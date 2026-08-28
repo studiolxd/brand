@@ -442,6 +442,10 @@
       "types": "./dist/_types/atoms/SkipLink/SkipLink.d.ts",
       "import": "./dist/skip-link.js"
     },
+    "./tree-view": {
+      "types": "./dist/_types/molecules/TreeView/TreeView.d.ts",
+      "import": "./dist/tree-view.js"
+    },
     "./slider": {
       "types": "./dist/_types/atoms/Slider/Slider.d.ts",
       "import": "./dist/slider.js"

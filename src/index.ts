@@ -238,6 +238,8 @@ export { SelectField } from './stories/molecules/SelectField/SelectField';
 export type { SelectFieldProps } from './stories/molecules/SelectField/SelectField';
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';
 export type { SidebarNavProps, SidebarNavEntry, SidebarNavLinkEntry, SidebarNavGroupEntry, SidebarNavItem, SidebarNavRenderLinkProps } from './stories/molecules/SidebarNav/SidebarNav';
+export { TreeView } from './stories/molecules/TreeView/TreeView';
+export type { TreeViewProps, TreeViewNode } from './stories/molecules/TreeView/TreeView';
 export {
   Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell,
 } from './stories/molecules/Table/Table';

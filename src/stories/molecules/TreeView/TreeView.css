@@ -1,0 +1,82 @@
+.tree-view,
+.tree-view__group {
+  list-style: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+}
+
+/* Cada nivel gana una sangría, con una guía que acompaña a la rama abierta. */
+.tree-view__group {
+  margin-inline-start: var(--tree-view-indent);
+  border-inline-start: var(--tree-view-guide-width) solid var(--tree-view-guide-color);
+}
+
+.tree-view__item {
+  color: var(--tree-view-color);
+}
+
+.tree-view__item:focus {
+  outline: none;
+}
+
+.tree-view__item:focus-visible > .tree-view__row {
+  outline: var(--tree-view-focus-ring-width) solid var(--tree-view-focus-ring-color);
+  outline-offset: var(--tree-view-focus-ring-offset);
+}
+
+.tree-view__row {
+  display: flex;
+  align-items: center;
+  gap: var(--tree-view-row-gap);
+  padding-block: var(--tree-view-row-padding-block);
+  padding-inline: var(--tree-view-row-padding-inline);
+  font-family: var(--tree-view-font-family);
+  font-size: var(--tree-view-font-size);
+  font-weight: var(--tree-view-font-weight);
+  line-height: var(--tree-view-line-height);
+  cursor: var(--tree-view-cursor);
+}
+
+/* El hover no rellena: deja una línea bajo el rótulo, como el subrayado de Link. */
+.tree-view__item:not(.tree-view__item--disabled) > .tree-view__row:hover .tree-view__label {
+  box-shadow: inset 0 calc(-1 * var(--tree-view-hover-line-width)) 0 0 var(--tree-view-hover-line-color);
+}
+
+/* La selección se marca con tinta y peso. */
+.tree-view__item.tree-view__item--selected > .tree-view__row {
+  color: var(--tree-view-selected-color);
+  font-weight: var(--tree-view-selected-font-weight);
+}
+
+.tree-view__item.tree-view__item--disabled > .tree-view__row {
+  opacity: var(--tree-view-disabled-opacity);
+  cursor: var(--tree-view-disabled-cursor);
+}
+
+/* Ranura fija para el chevron: las hojas alinean su rótulo con las ramas. */
+.tree-view__chevron-slot {
+  display: inline-flex;
+  flex-shrink: 0;
+  inline-size: var(--tree-view-chevron-size);
+  block-size: var(--tree-view-chevron-size);
+}
+
+.tree-view__chevron {
+  transform: rotate(0deg);
+  transition: transform var(--tree-view-transition-duration) var(--tree-view-transition-easing);
+}
+
+.tree-view__item[aria-expanded="true"] > .tree-view__row .tree-view__chevron {
+  transform: rotate(90deg);
+}
+
+.tree-view__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.tree-view__label {
+  min-inline-size: 0;
+}

@@ -1,0 +1,33 @@
+{
+  "tree-view": {
+    "indent":                { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Sangría que gana cada nivel del árbol" },
+    "row-gap":               { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Separación entre el chevron, el icono y el rótulo" },
+    "row-padding-block":     { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Aire vertical de cada fila" },
+    "row-padding-inline":    { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire horizontal de cada fila" },
+    "font-family":           { "$value": "{control.font-family}",    "$type": "string",    "$description": "Familia tipográfica de las filas" },
+    "font-size":             { "$value": "{control.font-size}",      "$type": "dimension", "$description": "Tamaño de fuente de las filas" },
+    "font-weight":           { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso de una fila cualquiera" },
+    "line-height":           { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Interlineado de las filas" },
+    "color":                 { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Tinta de las filas" },
+    "selected-color":        { "$value": "{color.primary}",          "$type": "color",     "$description": "Tinta de la fila seleccionada" },
+    "selected-font-weight":  { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso de la fila seleccionada. La selección se marca con tinta y peso, no con relleno" },
+    "hover-line-width":      { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la línea que marca la fila bajo el puntero. El hover no pinta relleno: deja una línea, el mismo grafismo del subrayado de `Link`" },
+    "hover-line-color":      { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de la línea de hover" },
+    "chevron-size":          { "$value": "{icon.size-sm}",           "$type": "dimension", "$description": "Tamaño del chevron que abre y cierra una rama" },
+    "guide-width":           { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la guía vertical que acompaña a una rama abierta" },
+    "guide-color":           { "$value": "{color.grey-light}",       "$type": "color",     "$description": "Color de la guía vertical" },
+    "cursor":                { "$value": "pointer",                  "$type": "string",    "$description": "Cursor sobre una fila" },
+    "disabled-cursor":       { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor de una fila deshabilitada" },
+    "disabled-opacity":      { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Opacidad de una fila deshabilitada" },
+    "transition-duration":   { "$value": "{motion.duration.fast}",   "$type": "duration",  "$description": "Duración del giro del chevron" },
+    "transition-easing":     { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Easing del giro del chevron" },
+    "focus-ring-width":      { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":     { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "focus-ring-color":      { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco" },
+    "surface-dark-color":            { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Tinta de las filas — surface-dark" },
+    "surface-dark-selected-color":   { "$value": "{color.accent-1}",     "$type": "color", "$description": "Tinta de la fila seleccionada — surface-dark. El prusia coincide con el fondo; el acento de estado es lavanda, igual que en `SidebarNav`" },
+    "surface-dark-hover-line-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea de hover — surface-dark" },
+    "surface-dark-guide-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Guía vertical — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

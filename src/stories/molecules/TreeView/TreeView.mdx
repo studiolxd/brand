@@ -1,0 +1,103 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TreeViewStories from "./TreeView.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { treeViewTokens, treeViewDarkTokens } from "../../../tokens/molecules/tree-view";
+
+<Meta of={TreeViewStories} />
+
+# TreeView
+
+Un árbol con sangría: la matriz de contenidos de un curso, la estructura de
+carpetas de un espacio de trabajo. Cada rama se abre y se cierra, y se elige un
+nodo.
+
+<Canvas of={TreeViewStories.PorDefecto} />
+
+## Por qué no lo trae el motor
+
+Todo el comportamiento accesible del sistema se construye sobre Base UI, pero
+Base UI **no tiene árbol**. `TreeView` implementa a mano el patrón WAI-ARIA de
+*tree view*: `role="tree"` con `treeitem` anidados, una sola parada de
+tabulación y el recorrido completo con el teclado. Es la excepción declarada, no
+una vía libre: cualquier otra conducta compleja sigue viniendo del motor.
+
+## El árbol se pasa por datos
+
+`items` es una lista de nodos; un nodo con `children` es una rama, uno sin ellos
+una hoja.
+
+```tsx
+const matriz: TreeViewNode[] = [
+  { id: 'modulo-1', label: 'Módulo 1', children: [
+    { id: 'leccion-1-1', label: 'Qué es el diseño instruccional' },
+  ]},
+];
+```
+
+## Abrir y elegir
+
+Son dos estados distintos y cada uno tiene su par de props: `expanded` /
+`onExpandedChange` para las ramas abiertas, `selected` / `onSelectedChange` para
+el nodo elegido. Los dos funcionan controlados o no controlados
+(`defaultExpanded`, `defaultSelected`).
+
+<Canvas of={TreeViewStories.ConRamasAbiertas} />
+
+<Canvas of={TreeViewStories.Controlado} />
+
+Pulsar una rama la abre **y** la elige: en un árbol de contenidos, una rama es
+tan seleccionable como una hoja.
+
+## Marcas
+
+`icon` pone una marca delante del rótulo para distinguir tipos de nodo.
+
+<Canvas of={TreeViewStories.ConIconos} />
+
+## Cómo se marcan los estados
+
+La selección se lee con **tinta y peso**, y el paso del ratón deja una **línea**
+bajo el rótulo —el mismo grafismo del subrayado de `Link` y de `SidebarNav`—.
+Ninguna fila se rellena: el relleno está reservado a los controles que dicen
+«este es el valor elegido».
+
+## Superficie oscura
+
+La tinta, la guía de las ramas, la línea de hover y el acento de selección
+(lavanda) salen de tokens `surface-dark-*`.
+
+<Canvas of={TreeViewStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={treeViewTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={treeViewDarkTokens} />
+
+## Accesibilidad
+
+- `role="tree"` con nombre (`label`); cada nodo es un `treeitem` con
+  `aria-level`, `aria-selected` y, si es rama, `aria-expanded`. Los hijos van en
+  un `role="group"` dentro de su rama.
+- El nombre de cada nodo sale de su rótulo por `aria-labelledby`, no del
+  subárbol entero.
+- **Una sola parada de tabulación**: `Tab` entra al árbol y sale de él; dentro
+  se recorre con el teclado.
+- Teclado: arriba/abajo entre los nodos visibles; derecha abre una rama cerrada
+  y baja al primer hijo si ya está abierta; izquierda cierra la rama abierta y
+  sube al padre si está cerrada; `Inicio` y `Fin` van al primero y al último;
+  `Intro` y `Espacio` eligen.
+- Un nodo `disabled` queda fuera del recorrido de teclado y no se elige.
+
+## Internacionalización
+
+`label` es una prop con default castellano («Árbol»). Los rótulos de los nodos
+vienen en los datos.
+
+## Props
+
+<ArgTypes of={TreeViewStories} />

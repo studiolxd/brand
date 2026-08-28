@@ -1,0 +1,27 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-tree-view-indent: 1.5rem; // Sangría que gana cada nivel del árbol
+$lxd-tree-view-row-gap: 0.5rem; // Separación entre el chevron, el icono y el rótulo
+$lxd-tree-view-row-padding-block: 0.25rem; // Aire vertical de cada fila
+$lxd-tree-view-row-padding-inline: 0.5rem; // Aire horizontal de cada fila
+$lxd-tree-view-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de las filas
+$lxd-tree-view-font-size: 1rem; // Tamaño de fuente de las filas
+$lxd-tree-view-font-weight: 300; // Peso de una fila cualquiera
+$lxd-tree-view-line-height: 1.3; // Interlineado de las filas
+$lxd-tree-view-color: #111e30; // Tinta de las filas
+$lxd-tree-view-selected-color: #111e30; // Tinta de la fila seleccionada
+$lxd-tree-view-selected-font-weight: 500; // Peso de la fila seleccionada. La selección se marca con tinta y peso, no con relleno
+$lxd-tree-view-hover-line-width: 1px; // Grosor de la línea que marca la fila bajo el puntero. El hover no pinta relleno: deja una línea, el mismo grafismo del subrayado de `Link`
+$lxd-tree-view-hover-line-color: #111e30; // Color de la línea de hover
+$lxd-tree-view-chevron-size: 16px; // Tamaño del chevron que abre y cierra una rama
+$lxd-tree-view-guide-width: 1px; // Grosor de la guía vertical que acompaña a una rama abierta
+$lxd-tree-view-guide-color: #d0d0d0; // Color de la guía vertical
+$lxd-tree-view-cursor: pointer; // Cursor sobre una fila
+$lxd-tree-view-disabled-cursor: not-allowed; // Cursor de una fila deshabilitada
+$lxd-tree-view-disabled-opacity: 0.4; // Opacidad de una fila deshabilitada
+$lxd-tree-view-transition-duration: 150ms; // Duración del giro del chevron
+$lxd-tree-view-transition-easing: ease; // Easing del giro del chevron
+$lxd-tree-view-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-tree-view-focus-ring-offset: 1px; // Separación del anillo de foco
+$lxd-tree-view-focus-ring-color: #111e30; // Color del anillo de foco
