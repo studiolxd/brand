@@ -83,7 +83,7 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
 
 ## Deudas de capa detectadas en neutrales (Colores, 2026-08-25)
 
-- [ ] **`grey-lightest` no tiene rol semántico.** Sus 36 usos referencian el
+- [x] **`grey-lightest` no tiene rol semántico.** Sus 36 usos referencian el
       primitivo directamente. Al revisar neutrales, darle un rol
       (`background.subtle` / fondo de estado) y que los componentes apunten a él.
       Parcial (2026-08-27): `surface.secondary-on-light|dark` ya cubre los
@@ -91,9 +91,23 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
       `progress-bar.track-bg`, `code-block`, `tag.neutral-bg` con
       `surface.inverse-*`); quedan los usos como fondo de estado (hover/activo/
       deshabilitado), que es una decisión de diseño distinta (ver más abajo).
-- [ ] **16 `var(--color-grey-*)` directos en CSS de componentes** (Table,
+      **Cerrado (2026-08-29):** barrido completo de los cuatro primitivos
+      (no solo `grey-lightest`) en `tokens/component/**`/`tokens/molecule/**`
+      — 54 usos de `{color.grey-*}`. Reutilizados `color.text.muted-*` y
+      `color.surface.secondary-*`/`inverse-*` donde el valor ya coincidía;
+      creados `color.disabled.{bg,text,border}-on-light|on-dark`,
+      `color.border.default-on-light`, `color.icon.secondary-on-light|on-dark`
+      y `color.surface.highlight-on-dark` donde no había rol. Cero
+      `{color.grey-*}` en `tokens/component/**`/`tokens/molecule/**`; cambio
+      visual 0 (mismos valores resueltos, verificado con diff de
+      `dist/tokens.css`).
+- [x] **16 `var(--color-grey-*)` directos en CSS de componentes** (Table,
       Sidebar, campos…), saltándose el token de componente. Criterio de
       revisión: todo color en CSS pasa por un token propio del componente.
+      **Cerrado (2026-08-29):** verificado con
+      `grep -rln 'var(--color-grey-' src/stories/**/*.css` — el único que
+      queda es el swatch de `Foundations/SizeScale.css` (borde decorativo de
+      la propia página que enseña la escala de grises), no un componente.
 
 ## Tipografía (2026-08-25)
 
