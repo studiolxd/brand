@@ -220,13 +220,16 @@ export const PanelEnLaColumna: Story = {
     await expect(interior).toContainElement(canvasElement.querySelector('nav'));
     await expect(interior).toContainElement(panel.querySelector('.site-header__settings'));
 
-    // Misma medida de contenido y mismo arranque que la barra: la columna es una
+    // Misma medida de contenido que la barra: la columna es una
     await expect(getComputedStyle(interior).maxInlineSize).toBe(getComputedStyle(barra).maxInlineSize);
-    await expect(
-      Math.abs(interior.getBoundingClientRect().left - barra.getBoundingClientRect().left),
-    ).toBeLessThanOrEqual(1);
-    // Y ese arranque no es el borde de la pantalla
-    await expect(interior.getBoundingClientRect().left).toBeGreaterThan(0);
+
+    // Y el mismo aire lateral, que es lo que la regla de anidamiento de
+    // Container le quitaba: el contenido del panel llegaba pegado al borde
+    const aireBarra = getComputedStyle(canvasElement.querySelector('.site-header')!);
+    const airePanel = getComputedStyle(banda);
+    await expect(airePanel.paddingInlineStart).toBe(aireBarra.paddingInlineStart);
+    await expect(airePanel.paddingInlineEnd).toBe(aireBarra.paddingInlineEnd);
+    await expect(parseFloat(airePanel.paddingInlineStart)).toBeGreaterThan(0);
   },
 };
 

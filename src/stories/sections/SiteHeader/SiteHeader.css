@@ -98,19 +98,25 @@
 /* El Container del panel y su interior estiran para que los ajustes puedan
    irse al borde inferior; si el índice es más alto que la pantalla, el panel
    hace scroll y los ajustes quedan al final del contenido. */
+/* Container anula el aire lateral de una banda anidada, porque la de fuera ya
+   lo puso. Aquí no: el panel es `position: fixed`, sale del flujo de la barra
+   y arranca en el borde de la pantalla, así que su contenido llegaba pegado a
+   los bordes. Recupera el aire —el mismo token, con la zona segura del
+   sistema— para caer en la columna de la barra.
+   La regla que hay que ganar es `.container:not(.container--flush) .container`,
+   que puntúa 0-3-0 porque el argumento de `:not()` cuenta como una clase: de
+   ahí la clase de la cabecera delante y la del Container repetida. */
+.site-header .site-header__panel > .container.container {
+  padding-inline:
+    max(var(--site-header-panel-padding-inline), env(safe-area-inset-left))
+    max(var(--site-header-panel-padding-inline), env(safe-area-inset-right));
+}
+
 .site-header__panel > .container {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-block-size: 0;
-  /* Container anula el aire lateral de una banda anidada, porque la de fuera
-     ya lo puso. Aquí no: el panel es `position: fixed`, sale del flujo de la
-     barra y arranca en el borde de la pantalla, así que su contenido llegaba
-     pegado a los bordes. Recupera el aire —el mismo token, con la zona segura
-     del sistema— para caer en la columna de la barra. */
-  padding-inline:
-    max(var(--site-header-panel-padding-inline), env(safe-area-inset-left))
-    max(var(--site-header-panel-padding-inline), env(safe-area-inset-right));
 }
 .site-header__panel-inner {
   flex: 1;
