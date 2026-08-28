@@ -40,6 +40,7 @@ export const entryPoints = {
   'sparkline':           'src/stories/atoms/Sparkline/Sparkline.tsx',
   'star-rating':         'src/stories/atoms/StarRating/StarRating.tsx',
   'toggle':              'src/stories/atoms/Toggle/Toggle.tsx',
+  'toggle-group':        'src/stories/atoms/ToggleGroup/ToggleGroup.tsx',
   'kbd':                 'src/stories/atoms/Kbd/Kbd.tsx',
   'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
@@ -193,4 +194,5 @@ export const clientComponents = new Set([
   'search-form',
   'star-rating',
   'toggle',
+  'toggle-group',
 ]);

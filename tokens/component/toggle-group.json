@@ -1,0 +1,5 @@
+{
+  "toggle-group": {
+    "gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre los botones del grupo" }
+  }
+}

@@ -142,6 +142,7 @@ const filters = {
   'search-form':        (t) => t.path[0] === 'search-form',
   'star-rating':        (t) => t.path[0] === 'star-rating',
   toggle:               (t) => t.path[0] === 'toggle',
+  'toggle-group':       (t) => t.path[0] === 'toggle-group',
 };
 
 function cssFile(destination, filterKey) {
@@ -297,6 +298,7 @@ const sd = new StyleDictionary({
         cssFile('components/sparkline.css',         'sparkline'),
         cssFile('components/star-rating.css',       'star-rating'),
         cssFile('components/toggle.css',            'toggle'),
+        cssFile('components/toggle-group.css',      'toggle-group'),
       ],
     },
     scss: {
@@ -437,6 +439,7 @@ const sd = new StyleDictionary({
         scssFile('components/_sparkline.scss',       'sparkline'),
         scssFile('components/_star-rating.scss',     'star-rating'),
         scssFile('components/_toggle.scss',          'toggle'),
+        scssFile('components/_toggle-group.scss',    'toggle-group'),
       ],
     },
   },

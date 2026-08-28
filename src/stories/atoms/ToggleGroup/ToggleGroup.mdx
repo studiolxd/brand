@@ -1,0 +1,79 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ToggleGroupStories from "./ToggleGroup.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { toggleGroupTokens } from "../../../tokens/components/toggle-group";
+
+<Meta of={ToggleGroupStories} />
+
+# ToggleGroup
+
+Una serie de `Toggle` que comparten estado: el periodo de facturación de una
+tabla de planes, la vista de un listado, un juego de filtros. Sustituye al apaño
+de montar `Fieldset` con botones y `aria-pressed` a mano.
+
+<Canvas of={ToggleGroupStories.PorDefecto} />
+
+Se construye sobre [Base UI Toggle Group](https://base-ui.com/react/components/toggle-group),
+que aporta la exclusividad, el recorrido con flechas y la parada única de
+tabulación.
+
+## Exclusivo o múltiple
+
+Por defecto la conmutación es **exclusiva**: elegir un botón suelta el anterior.
+`multiple` la abre a varios pulsados a la vez.
+
+<Canvas of={ToggleGroupStories.Multiple} />
+
+## El valor es siempre una lista
+
+`value`, `defaultValue` y el argumento de `onValueChange` son un `string[]`
+también en exclusivo, donde la lista tiene como mucho un elemento: `value[0]`. Es
+el contrato de Base UI, y mantenerlo evita que el mismo componente devuelva dos
+formas distintas según una prop.
+
+<Canvas of={ToggleGroupStories.Controlado} />
+
+## Tallas
+
+La talla se pide una vez en el grupo y la heredan todos sus botones.
+
+<Canvas of={ToggleGroupStories.Tallas} />
+
+## Orientación
+
+`orientation="vertical"` apila los botones y pasa el recorrido a las flechas
+arriba/abajo.
+
+<Canvas of={ToggleGroupStories.Vertical} />
+
+## Deshabilitado
+
+<Canvas of={ToggleGroupStories.Deshabilitado} />
+
+## Superficie oscura
+
+El grupo no tiene color propio: lo ponen sus botones, que traen sus pares
+`surface-dark-*` (ver [Toggle](?path=/docs/atoms-toggle--docs)).
+
+<Canvas of={ToggleGroupStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={toggleGroupTokens} />
+
+## Accesibilidad
+
+- El grupo es un `role="group"`. Su **nombre accesible** no es una prop: se le
+  da con `aria-label` / `aria-labelledby` —viajan con el resto de `{...rest}`—
+  o envolviéndolo en un `Fieldset`.
+- Es una sola parada de tabulación: `Tab` entra y sale, y dentro se recorre con
+  las flechas (arriba/abajo si es vertical).
+- Cada botón anuncia su estado con `aria-pressed`.
+- Ningún botón pinta fondo al pasar el ratón: el relleno significa «este es el
+  valor elegido».
+
+## Props
+
+<ArgTypes of={ToggleGroupStories} />
