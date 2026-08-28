@@ -7,6 +7,54 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.15.0
+
+El panel del menú de `SiteHeader` respira por los lados, y el buscador del sitio
+deja de ser un campo con un botón pegado.
+
+### Corregido
+
+- **`SiteHeader` › el panel del menú cae en la columna de la barra.** El contenido del
+  panel llegaba pegado a los bordes de la pantalla: el panel es `position: fixed`, sale
+  del flujo de la banda, y aun así le alcanzaba la regla de `Container` que anula el aire
+  lateral de una banda anidada (`.container:not(.container--flush) .container`). Ahora lo
+  recupera con el mismo token, zona segura del sistema incluida — mismo ancho, mismo aire
+  y mismo arranque que la barra, en todas las tallas y en las dos superficies. Story-test
+  nuevo: el panel monta su contenido en el mismo `Container` que la barra.
+
+### Cambiado
+
+- **`SearchForm` › la flecha va dentro del campo.** Era un `Button` `outline` en caja
+  aparte, pegado al campo y solapando un borde para simular una costura. Ahora es un
+  adorno clicable **dentro del borde del campo**, alineado al final, como la lupa y el
+  aspa de `InputField`: sin caja, sin borde y **sin fondo en hover** —solo la tinta—, con
+  el foco marcado por un anillo recto por dentro del campo. Sigue siendo un botón
+  accesible: se tabula, se nombra con `submitLabel` y `Enter` desde el campo envía.
+- **`SearchForm` › la talla escala también el glifo.** `sm`/`md`/`lg` mueven a la vez el
+  alto del campo, el cuerpo de letra y el tamaño de la flecha; `lg` es un buscador mayor
+  de verdad, no el mismo estirado. En el panel del menú de `SiteHeader` va siempre a `lg`.
+- **`SiteHeader` › el ritmo vertical del panel, de un solo token.** `panel-gap` separa por
+  igual el índice, el buscador y los ajustes; `settings-margin-block-start` pasa a colgar
+  de él (mismo valor, sin cambio visual).
+
+### Añadido
+
+- **Tokens `site-header.panel-padding-inline`** (el aire lateral del panel, `=
+  container.padding-inline`) y **`site-header.panel-gap`** (el ritmo vertical entre las
+  secciones del panel).
+- **Tokens `search-form.submit.*`** — hueco, glifo, tinta, tinta en hover, tinta
+  deshabilitada y anillo de foco de la flecha, por talla, con sus pares oscuros.
+- **Story `SiteHeader` › «En el menú del sitio»** — la cabecera con el panel abierto, el
+  índice, el buscador a `lg` y los ajustes.
+
+### Retirado
+
+- **Tokens `search-form.seam-width`, `search-form.submit-bg`,
+  `search-form.submit-disabled-bg`** y sus pares oscuros — describían la costura y el
+  fondo de la caja del botón, que ya no existe. La flecha no tiene fondo propio. Único
+  motivo por el que esta versión podría considerarse mayor: quien sobreescribiera esos
+  tokens deja de tener efecto, sin que nada más se rompa.
+
 ## v25.14.0
 
 Los quince bloqueantes de producto que destaparon las fases 2–4 de la suite y de
