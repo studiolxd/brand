@@ -4,17 +4,17 @@
 
 :root {
   --annotation-thread-gap: var(--spacing-4); /** Separación entre las piezas del hilo */
-  --annotation-thread-border-color: var(--color-grey-light); /** Borde del hilo */
   --annotation-thread-padding-block: var(--spacing-4); /** Aire vertical del hilo */
   --annotation-thread-padding-inline: var(--spacing-4); /** Aire horizontal del hilo */
   --annotation-thread-reply-indent: var(--spacing-5); /** Sangría de las respuestas respecto a la anotación que abre el hilo */
-  --annotation-thread-reply-guide-color: var(--color-grey-light); /** Color de la guía de respuestas */
   --annotation-thread-item-gap: var(--spacing-2); /** Separación entre la cabecera, el cuerpo y las acciones de una anotación */
   --annotation-thread-items-gap: var(--spacing-4); /** Separación entre anotaciones */
   --annotation-thread-header-gap: var(--spacing-2); /** Separación entre autor, fecha y marca de editada */
   --annotation-thread-resolved-opacity: var(--opacity-disabled); /** Un hilo resuelto se retira: baja de intensidad sin desaparecer */
   --annotation-thread-border-width: var(--border-width-default); /** Grosor del borde del hilo */
+  --annotation-thread-border-color: var(--color-border-default-on-light); /** Borde del hilo */
   --annotation-thread-reply-guide-width: var(--border-width-default); /** Grosor de la guía que acompaña a las respuestas */
+  --annotation-thread-reply-guide-color: var(--color-border-default-on-light); /** Color de la guía de respuestas */
   --annotation-thread-author-font-family: var(--control-font-family); /** Familia del autor */
   --annotation-thread-author-font-size: var(--text-paragraph-small-font-size); /** Tamaño del autor: la letra menor del texto corriente */
   --annotation-thread-author-font-weight: var(--font-weight-emphasis); /** Peso del autor */
