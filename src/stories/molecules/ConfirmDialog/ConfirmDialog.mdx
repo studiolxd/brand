@@ -1,0 +1,76 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ConfirmDialogStories from "./ConfirmDialog.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { confirmDialogTokens } from "../../../tokens/molecules/confirm-dialog";
+
+<Meta of={ConfirmDialogStories} />
+
+# ConfirmDialog
+
+La pregunta antes de una acción que no se puede deshacer: borrar una organización, revocar una clave, expulsar a alguien de un equipo. Es el diálogo que las ocho aplicaciones de la suite tenían clonado.
+
+<Canvas of={ConfirmDialogStories.PorDefecto} />
+
+## El foco arranca en «Cancelar»
+
+Es la decisión de diseño del componente. Un diálogo destructivo que abre con el foco en el botón que destruye convierte un `Enter` de más —el mismo que acaba de abrirlo— en una pérdida de datos. El foco entra por la **salida segura**; confirmar cuesta un `Tab`, que es exactamente el peso que debe tener.
+
+`Modal` no mueve el foco al abrir, que es lo correcto para un diálogo genérico; este sí lo hace, en el frame siguiente al montaje.
+
+## Anatomía
+
+Es el `Modal` del sistema con el cuerpo ya escrito:
+
+- **Título** (`title`) — la pregunta, no la palabra «Confirmar».
+- **Descripción** (`description`) — qué va a pasar y qué no se puede deshacer. Va como `Dialog.Description`, así que queda enlazada al diálogo con `aria-describedby`.
+- **Contenido extra** (`children`) — el detalle de lo que se pierde, cuando hace falta.
+- **Acciones** — cancelar y confirmar, en un `Inline justify="end"`.
+
+<Canvas of={ConfirmDialogStories.ConDetalle} />
+
+## Acción destructiva
+
+`destructive` pasa el botón de confirmar al lenguaje destructivo del sistema (`outline` con la tinta roja), que es donde vive esa intención: el rojo no es un relleno, es una tinta y un borde.
+
+<Canvas of={ConfirmDialogStories.Destructivo} />
+
+## Acción en curso
+
+`onConfirm` puede devolver una promesa. Mientras está en curso el diálogo **se queda abierto y ocupado**: el botón cambia a `pendingLabel`, los dos se deshabilitan y una segunda pulsación no hace nada. Se cierra cuando el consumidor lo cierra, al resolver.
+
+<Canvas of={ConfirmDialogStories.ConPromesa} />
+
+Si la promesa rechaza, el diálogo **sigue abierto** y llama a `onConfirmError`. No cuenta el fallo por su cuenta: quién ha fallado y cómo se arregla lo sabe el consumidor, que lo dirá con un `Toast` o con un `Alert` en `children`.
+
+## Controlado
+
+`open`, `onConfirm` y `onCancel` son obligatorios: el diálogo no se cierra solo. `onCancel` recoge las tres salidas —el botón, el aspa y `Esc`—, así que basta con un manejador.
+
+## Superficie oscura
+
+No tiene nada que remapear: la superficie es la del `Modal` y los botones son los del sistema, y los dos ya reaccionan a `.surface-dark` y a `html.dark` / `[data-theme="dark"]`.
+
+<Canvas of={ConfirmDialogStories.EnSuperficieOscura} />
+
+## Textos
+
+`confirmLabel`, `cancelLabel`, `pendingLabel` y `closeLabel` son props con default castellano. El `confirmLabel` gana mucho si dice **qué** se confirma («Borrar la organización») en vez de «Confirmar»: quien lea solo el botón sabrá qué está a punto de pasar.
+
+---
+
+## Tokens
+
+<TokenTable tokens={confirmDialogTokens} />
+
+El panel, el velo, el título y la descripción son los del `Modal`; el aire entre los dos botones, el de `Inline`.
+
+## Accesibilidad
+
+- El diálogo atrapa el foco, lo devuelve al elemento que lo abrió y responde a `Esc`: todo eso lo pone `Modal` sobre Base UI.
+- El foco inicial va a la acción segura, no a la destructiva.
+- La descripción está enlazada por `aria-describedby`, así que se anuncia con el título al abrir.
+- Mientras la acción está en curso los botones se deshabilitan y el rótulo cambia: el estado ocupado se ve y se lee, no solo se intuye porque no pasa nada.
+
+## Props
+
+<ArgTypes of={ConfirmDialogStories} />

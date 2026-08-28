@@ -349,6 +349,10 @@
       "types": "./dist/_types/atoms/Popover/Popover.d.ts",
       "import": "./dist/popover.js"
     },
+    "./confirm-dialog": {
+      "types": "./dist/_types/molecules/ConfirmDialog/ConfirmDialog.d.ts",
+      "import": "./dist/confirm-dialog.js"
+    },
     "./consent": {
       "types": "./dist/_types/molecules/Consent/Consent.d.ts",
       "import": "./dist/consent.js"

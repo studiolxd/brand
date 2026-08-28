@@ -1,0 +1,5 @@
+{
+  "confirm-dialog": {
+    "actions-space-before": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre el cuerpo del diálogo y su fila de acciones: separa la pregunta de la respuesta. El aire ENTRE los dos botones es el de `Inline` en su paso compacto" }
+  }
+}

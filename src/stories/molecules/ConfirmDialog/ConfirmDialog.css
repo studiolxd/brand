@@ -1,0 +1,6 @@
+/* El reparto y el aire entre botones los pone `Inline justify="end"`. Lo
+   propio de este diálogo es la separación entre el cuerpo y la fila de
+   acciones: la pregunta arriba, la respuesta abajo. */
+.confirm-dialog__actions {
+  margin-block-start: var(--confirm-dialog-actions-space-before);
+}
