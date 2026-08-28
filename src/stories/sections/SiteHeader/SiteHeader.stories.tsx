@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent, waitFor } from 'storybook/test';
 import { SiteHeader } from './SiteHeader';
+import { Logo } from '../../atoms/Logo/Logo';
 import { Button } from '../../atoms/Button/Button';
 import { Container } from '../../atoms/Container/Container';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
@@ -247,3 +248,37 @@ export const Sangrado: Story = {
   },
 };
 
+
+/**
+ * Test: la marca por defecto es el logotipo a `xxl`, y la barra mide lo que
+ * mide la marca —el alto sale del token del logotipo, no de una cifra propia—
+ * más el aire del sistema arriba y abajo. Las dos medidas se comparan contra
+ * el sistema, no contra cifras: un logotipo `xl` de referencia y una sonda con
+ * el aire de la barra.
+ */
+export const AltoDeLaMarca: Story = {
+  name: 'Test — la marca va a xxl y la barra crece con ella',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <SiteHeader />
+      <div data-testid="referencia"><Logo size="xl" /></div>
+      <div data-testid="aire" style={{ blockSize: 'var(--app-header-padding-block)' }} />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const logo = canvasElement.querySelector('.site-header .logo')!;
+    await expect(logo).toHaveClass('logo--xxl');
+
+    // La marca es la talla xl con el salto de la escala (4/3)
+    const referencia = canvasElement.querySelector('[data-testid="referencia"] .logo')!;
+    const alturaLogo = logo.getBoundingClientRect().height;
+    await expect(alturaLogo).toBeCloseTo((referencia.getBoundingClientRect().height * 4) / 3, 0);
+
+    // Y la barra mide la marca más el aire del sistema arriba y abajo
+    const aire = canvasElement.querySelector('[data-testid="aire"]')!.getBoundingClientRect().height;
+    const barra = canvasElement.querySelector('.site-header__bar')!;
+    await expect(aire).toBeGreaterThan(0);
+    await expect(barra.getBoundingClientRect().height).toBeCloseTo(alturaLogo + 2 * aire, 0);
+  },
+};

@@ -105,7 +105,7 @@ menús de idioma y tema, abiertos desde el panel, se despliegan por encima.
 
 ## Altura
 
-En la web manda la marca: el logotipo va a talla `xl` (64px, la talla ilustrativa de la escala de iconos) y la barra mide eso más `spacing-2` arriba y abajo, **80px**. El botón de menú lo acompaña a `lg` (48px con el glifo a 48); los demás controles de la barra siguen a `md`. `logoSize` y `menuButtonSize` los ajustan. La barra de aplicación (`AppHeader`) es más baja, 56px: allí manda el contenido.
+En la web manda la marca: el logotipo va a talla `xxl` (85px, la mayor de la escala del `Logo`) y la barra mide eso más `spacing-2` arriba y abajo, **101px**. La barra no lleva ninguna medida propia: su alto se deriva del token del logotipo (`content-height` → `logo.height-xxl`), así que crece y encoge con la marca. El botón de menú lo acompaña a `lg` (48px con el glifo a 48); los demás controles de la barra siguen a `md`. `logoSize` y `menuButtonSize` los ajustan. La barra de aplicación (`AppHeader`) es más baja, 56px: allí manda el contenido.
 
 ## Ancho
 
@@ -118,7 +118,7 @@ El trazado del logotipo trae su propio espacio de seguridad, así que con el air
 
 ## En móvil
 
-Por debajo de `md` (768px) la barra pasa a 64px y la marca a 48px (`content-height-compact`, `height-compact`); por debajo de `sm` (480px), a 56px y 40px (`content-height-narrow`, `height-narrow`): la marca apaisada y el botón de menú caben en 320px. Lo decide la cabecera, no el `Logo`: la marca que va en la ranura mide lo que la barra le da, y el panel arranca de esa misma altura.
+La marca a `xxl` cabe junto al botón de menú hasta bien entrado el móvil, pero la cabecera baja igualmente de peldaño para que la barra no se coma la pantalla: por debajo de `md` (768px) pasa a 64px de barra y 48px de marca (`content-height-compact`, `height-compact`); por debajo de `sm` (480px), a 56px y 40px (`content-height-narrow`, `height-narrow`): la marca apaisada y el botón de menú caben en 320px. Lo decide la cabecera, no el `Logo`: la marca que va en la ranura mide lo que la barra le da, y el panel arranca de esa misma altura.
 
 ## Accesibilidad
 
