@@ -21,9 +21,9 @@
     "backdrop-opacity": { "$value": "{modal.backdrop-opacity}", "$type": "number", "$description": "Opacidad del velo, la del sistema" },
     "group-padding-block":  { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire vertical de una sección del panel" },
     "group-gap":            { "$value": "{spacing.1}", "$type": "dimension", "$description": "Entre elementos de una sección" },
-    "separator-color":      { "$value": "{color.primary}", "$type": "color", "$description": "Línea entre secciones" },
-    "separator-height":     { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea" },
-    "separator-margin-block": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire de la línea" },
+    "separator-color":      { "$value": "{separator.color}", "$type": "color", "$description": "Línea entre secciones — el color de la línea del sistema" },
+    "separator-height":     { "$value": "{separator.thickness}", "$type": "dimension", "$description": "Grosor de la línea — el de la línea del sistema" },
+    "separator-margin-block": { "$value": "{separator.spacing-md}", "$type": "dimension", "$description": "Aire de la línea — el aire md de la línea del sistema" },
     "surface-dark-bg":           { "$value": "{color.background.dark}",   "$type": "color", "$description": "Fondo — surface-dark" },
     "surface-dark-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde — surface-dark" },
     "surface-dark-separator-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea — surface-dark" }

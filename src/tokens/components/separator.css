@@ -1,0 +1,17 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --separator-spacing-sm: var(--spacing-1); /** Aire a ambos lados, talla sm — dentro de un control */
+  --separator-spacing-md: var(--spacing-2); /** Aire a ambos lados, talla md — entre grupos de un menú o de una lista. Es el aire que ya usaban Menu, UserMenu, OrgSwitcher y Sidebar */
+  --separator-spacing-lg: var(--spacing-4); /** Aire a ambos lados, talla lg — entre bloques de una tarjeta o de un panel */
+  --separator-color: var(--color-primary); /** Color de la línea sobre superficie clara. Es el prusia del sistema: una línea de separación no es un gris de estado */
+  --separator-thickness: var(--border-width-default); /** Grosor de la línea. Todo borde del sistema mide lo mismo (Foundations → Bordes) */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --separator-color: var(--color-text-on-dark); /** Color de la línea — surface-dark */
+}

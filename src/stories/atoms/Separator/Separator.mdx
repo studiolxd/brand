@@ -1,0 +1,130 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SeparatorStories from "./Separator.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { separatorTokens, separatorSpacingTokens, separatorDarkTokens } from "../../../tokens/components/separator";
+
+<Meta of={SeparatorStories} />
+
+# Separator
+
+La línea de separación del sistema. Una sola línea, un solo grosor, un solo
+color: lo que antes cada menú, cada panel y cada aplicación pintaba por su
+cuenta.
+
+<Canvas of={SeparatorStories.PorDefecto} />
+
+## Anatomía
+
+Un `<hr>`. Es el elemento que ya significa «separación temática» en HTML, así
+que el átomo no inventa un `<div role="separator">` cuando el navegador ya trae
+el rol puesto.
+
+El grosor lo pinta el **fondo**, no un `border`: así el mismo token
+(`--separator-thickness`) sirve de alto en horizontal y de ancho en vertical, y
+no hay que elegir entre `border-block-start` y `border-inline-start` según el
+eje. El grosor es el único del sistema (Foundations → Bordes): 1px.
+
+El color es el prusia de la marca, no un gris. Una línea de separación **no es
+un estado**, y el gris claro dejó de ser fondo de estado del sistema
+(Foundations → Colores).
+
+## Aire
+
+El aire va en la propia línea, no en lo que la rodea: quien la coloca no tiene
+que acordarse de darle margen.
+
+<Canvas of={SeparatorStories.Aire} />
+
+| Talla | Aire | Cuándo |
+|---|---|---|
+| `sm` | 4px | Dentro de un control |
+| `md` | 8px | Entre grupos de un menú o de una lista — el valor por defecto |
+| `lg` | 16px | Entre bloques de una tarjeta o de un panel |
+
+El `md` no es una cifra elegida hoy: es exactamente el aire que ya tenían los
+separadores de `Menu`, `UserMenu`, `OrgSwitcher` y `Sidebar`.
+
+## Vertical
+
+En vertical la línea se estira a la altura de la fila (`align-self: stretch`),
+así que vive dentro de un contenedor flex o grid. Suelta, sin nada que le dé
+altura, no se ve: es responsabilidad de quien la coloca.
+
+<Canvas of={SeparatorStories.Vertical} />
+
+## Decorativa o semántica
+
+Por defecto la línea es **decorativa** (`role="none"`): separa visualmente y no
+dice nada a un lector de pantalla. Es lo correcto en la inmensa mayoría de los
+casos —el orden de lectura y los encabezados ya cuentan la estructura— y evita
+que una pantalla llena de líneas se convierta en una retahíla de «separador».
+
+Con `decorative={false}` la línea conserva su rol `separator` y, en vertical,
+declara `aria-orientation="vertical"`.
+
+<Canvas of={SeparatorStories.Semantica} />
+
+## Quién más pinta esta línea
+
+Varios componentes renderizan su propio separador porque se lo pide su motor de
+Base UI (`Menu.Separator`, `Select.Separator`) o su propia estructura
+(`Sidebar`). Esos siguen con su elemento y su clase BEM —cambiarlos por el
+átomo rompería el contrato del motor—, pero **sus tokens cuelgan ahora de
+`separator.*`**:
+
+| Componente | Token | Hereda de |
+|---|---|---|
+| `Menu` | `--menu-separator-color` / `-height` / `-margin-block` | `separator.color` / `thickness` / `spacing-md` |
+| `UserMenu` | `--user-menu-separator-*` | ídem |
+| `OrgSwitcher` | `--org-switcher-separator-*` | ídem |
+| `Sidebar` | `--sidebar-separator-*` | ídem |
+| `Select` | `--select-separator-color` / `-height` | `separator.color` / `thickness` |
+
+Cambiar `--separator-color` cambia la línea en todos ellos a la vez. El
+`ContextMenu` no aparece en la tabla porque usa los tokens del `Menu`, y el
+`Breadcrumb` tampoco: su separador es un signo tipográfico, no una regla.
+
+## Superficie oscura
+
+La línea remapea su color a blanco por token `surface-dark-*`, sin CSS propio.
+
+<Canvas of={SeparatorStories.SuperficieOscura} />
+
+Ojo al replicar el patrón: los tokens de los componentes de la tabla anterior
+heredan el color claro, pero **su par oscuro va al rol directo**
+(`color.text.on-dark`), no a `separator.surface-dark-color`. Un `var()` dentro
+de una custom property se resuelve en el elemento que la declara, y
+`--menu-separator-color` se declara en `:root`: apuntar al par oscuro del átomo
+dejaría una referencia que nunca llega a existir.
+
+---
+
+## Tokens
+
+<TokenTable tokens={separatorTokens} />
+
+### Aire
+
+<TokenTable tokens={separatorSpacingTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={separatorDarkTokens} />
+
+Definidos en `tokens/component/separator.json`.
+
+## Accesibilidad
+
+- El elemento es `<hr>`, con rol `separator` implícito: no hace falta
+  declararlo.
+- Por defecto la línea es decorativa y sale del árbol de accesibilidad. Márcala
+  con `decorative={false}` solo cuando la separación sea información —dos
+  grupos de contenido distintos que el orden de lectura no distingue.
+- La línea no es enfocable ni interactiva: no lleva `tabIndex` ni handlers.
+- El color cumple contraste sobre las dos superficies del sistema, pero una
+  línea no debería ser el único indicio de que dos bloques son distintos:
+  acompáñala de un encabezado o de una etiqueta.
+
+## Props
+
+<ArgTypes of={SeparatorStories} />

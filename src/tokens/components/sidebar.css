@@ -18,15 +18,15 @@
   --sidebar-backdrop-z-index: var(--z-index-backdrop); /** Velo bajo el cajón */
   --sidebar-group-padding-block: var(--spacing-2); /** Aire vertical de una sección del panel */
   --sidebar-group-gap: var(--spacing-1); /** Entre elementos de una sección */
-  --sidebar-separator-margin-block: var(--spacing-2); /** Aire de la línea */
   --sidebar-bg: var(--color-background-light); /** Fondo */
   --sidebar-border-width: var(--border-width-default); /** Borde que separa la sidebar del contenido */
   --sidebar-border-color: var(--color-primary); /** Color del borde */
   --sidebar-resizer-hover-color: var(--color-primary); /** El borde se marca al pasar por el asa o al arrastrar */
   --sidebar-backdrop-bg: var(--modal-backdrop-bg); /** El velo del sistema */
   --sidebar-backdrop-opacity: var(--modal-backdrop-opacity); /** Opacidad del velo, la del sistema */
-  --sidebar-separator-color: var(--color-primary); /** Línea entre secciones */
-  --sidebar-separator-height: var(--border-width-default); /** Grosor de la línea */
+  --sidebar-separator-margin-block: var(--separator-spacing-md); /** Aire de la línea — el aire md de la línea del sistema */
+  --sidebar-separator-color: var(--separator-color); /** Línea entre secciones — el color de la línea del sistema */
+  --sidebar-separator-height: var(--separator-thickness); /** Grosor de la línea — el de la línea del sistema */
 }
 
 .surface-dark,

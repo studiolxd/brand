@@ -30,6 +30,7 @@ export const entryPoints = {
   'popover':             'src/stories/atoms/Popover/Popover.tsx',
   'multi-select':        'src/stories/atoms/MultiSelect/MultiSelect.tsx',
   'select':              'src/stories/atoms/Select/Select.tsx',
+  'separator':           'src/stories/atoms/Separator/Separator.tsx',
   'time-select':         'src/stories/atoms/TimeSelect/TimeSelect.tsx',
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
   'kbd':                 'src/stories/atoms/Kbd/Kbd.tsx',

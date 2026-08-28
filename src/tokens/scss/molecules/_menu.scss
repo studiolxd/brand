@@ -37,9 +37,9 @@ $lxd-menu-label-padding-inline: 1rem; // Padding horizontal del rótulo de secci
 $lxd-menu-label-font-size: 0.875rem; // Tamaño de texto del rótulo de sección
 $lxd-menu-label-font-weight: 500; // Peso del rótulo de sección
 $lxd-menu-label-color: #4a4a4a; // Color del rótulo de sección
-$lxd-menu-separator-color: #111e30; // Color del separador
-$lxd-menu-separator-height: 1px; // Alto del separador
-$lxd-menu-separator-margin-block: 0.5rem; // Margen vertical del separador
+$lxd-menu-separator-color: #111e30; // Color del separador — el de la línea del sistema
+$lxd-menu-separator-height: 1px; // Alto del separador — el grosor de la línea del sistema
+$lxd-menu-separator-margin-block: 0.5rem; // Margen vertical del separador — el aire md de la línea del sistema
 $lxd-menu-disabled-opacity: 0.4; // Opacidad de ítems deshabilitados
 $lxd-menu-transition-duration: 150ms; // Duración de transición
 $lxd-menu-transition-easing: ease; // Easing de transición

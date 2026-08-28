@@ -147,8 +147,8 @@
 }
 
 .select__separator {
-  height: var(--select-border-width);
-  background-color: var(--select-content-border-color);
+  height: var(--select-separator-height);
+  background-color: var(--select-separator-color);
   margin-block: var(--select-item-padding-block);
 }
 

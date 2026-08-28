@@ -14,7 +14,6 @@
   --org-switcher-item-padding-block: var(--spacing-2); /** Padding vertical de cada ítem */
   --org-switcher-item-padding-inline: var(--spacing-3); /** Padding horizontal de cada ítem */
   --org-switcher-item-font-size: var(--font-size-2); /** Tamaño de texto de ítems */
-  --org-switcher-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --org-switcher-trigger-border-radius: var(--border-radius-default); /** Radio del trigger */
   --org-switcher-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --org-switcher-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
@@ -25,8 +24,7 @@
   --org-switcher-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
   --org-switcher-item-font-weight: var(--font-weight-default); /** Peso de ítems */
   --org-switcher-item-color: var(--color-text-on-light); /** Color de ítems */
-  --org-switcher-separator-color: var(--color-primary); /** Color del separador */
-  --org-switcher-separator-height: var(--border-width-default); /** Alto del separador */
+  --org-switcher-separator-margin-block: var(--separator-spacing-md); /** Margen vertical del separador — el aire md de la línea del sistema */
   --org-switcher-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --org-switcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
   --org-switcher-content-bg: var(--floating-panel-bg); /** Fondo del panel */
@@ -36,6 +34,8 @@
   --org-switcher-content-shadow: var(--floating-panel-shadow); /** Sombra del panel */
   --org-switcher-item-hover-bg: var(--menu-item-hover-bg); /** Fondo de ítem al hover: el resalte de los menús */
   --org-switcher-item-hover-color: var(--menu-item-hover-color); /** Texto de ítem al hover */
+  --org-switcher-separator-color: var(--separator-color); /** Color del separador — el de la línea del sistema */
+  --org-switcher-separator-height: var(--separator-thickness); /** Alto del separador — el grosor de la línea del sistema */
 }
 
 .surface-dark,
@@ -45,7 +45,7 @@ html.dark {
   --org-switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
   --org-switcher-name-color: var(--color-text-on-dark); /** Color del nombre de la org — surface-dark. `name-color` (on-light/prussian) sería ilegible sobre fondo oscuro. */
   --org-switcher-item-color: var(--color-text-on-dark); /** Color de ítems — surface-dark */
+  --org-switcher-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark. El valor va directo al rol: un token surface-dark-* no puede referenciar otro surface-dark-*, porque ese no llega a declararse como custom property */
   --org-switcher-item-hover-color: var(--menu-surface-dark-item-hover-color); /** Texto de ítem al hover — surface-dark */
   --org-switcher-item-hover-bg: var(--menu-surface-dark-item-hover-bg); /** Fondo de ítem al hover — surface-dark */
-  --org-switcher-separator-color: var(--menu-surface-dark-separator-color); /** Color del separador — surface-dark */
 }

@@ -1,0 +1,12 @@
+{
+  "separator": {
+    "color":     { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de la línea sobre superficie clara. Es el prusia del sistema: una línea de separación no es un gris de estado" },
+    "thickness": { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la línea. Todo borde del sistema mide lo mismo (Foundations → Bordes)" },
+
+    "spacing-sm": { "$value": "{spacing.1}", "$type": "dimension", "$description": "Aire a ambos lados, talla sm — dentro de un control" },
+    "spacing-md": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire a ambos lados, talla md — entre grupos de un menú o de una lista. Es el aire que ya usaban Menu, UserMenu, OrgSwitcher y Sidebar" },
+    "spacing-lg": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire a ambos lados, talla lg — entre bloques de una tarjeta o de un panel" },
+
+    "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea — surface-dark" }
+  }
+}

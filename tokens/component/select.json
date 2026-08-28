@@ -22,6 +22,8 @@
     "focus-ring-color":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },
     "content-bg":             { "$value": "{color.white}",               "$type": "color",     "$description": "Fondo del dropdown" },
     "content-border-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Borde del dropdown" },
+    "separator-color":        { "$value": "{separator.color}",           "$type": "color",     "$description": "Color del separador entre grupos — el de la línea del sistema" },
+    "separator-height":       { "$value": "{separator.thickness}",       "$type": "dimension", "$description": "Grosor del separador entre grupos — el de la línea del sistema" },
     "content-z-index":        { "$value": "{z-index.floating}",                        "$type": "number",    "$description": "Capa del desplegable: flotante" },
     "content-max-height":     { "$value": "var(--available-height)", "$type": "string", "$description": "Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)" },
     "item-padding-block":     { "$value": "{spacing.2}",                 "$type": "dimension", "$description": "Padding block de cada opción" },
@@ -40,6 +42,7 @@
     "surface-dark-focus-ring-color":       { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Color del anillo de foco — surface-dark" },
     "surface-dark-content-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo del dropdown — surface-dark" },
     "surface-dark-content-border-color":   { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Borde del dropdown — surface-dark" },
+    "surface-dark-separator-color":        { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Color del separador entre grupos — surface-dark" },
     "surface-dark-item-highlighted-bg":    { "$value": "{color.text.on-dark}",    "$type": "color", "$description": "Fondo de opción resaltada — surface-dark" },
     "surface-dark-item-highlighted-color": { "$value": "{color.primary}","$type": "color", "$description": "Texto de opción resaltada — surface-dark" }
   }

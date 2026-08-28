@@ -1,0 +1,28 @@
+/* La línea es un `<hr>`: el elemento que ya significa «separación» en HTML.
+   El grosor lo pinta el fondo, no un `border`, para que el mismo token sirva
+   en horizontal (alto) y en vertical (ancho). */
+.separator {
+  border: none;
+  margin: 0;
+  flex-shrink: 0;
+  background-color: var(--separator-color);
+  block-size: var(--separator-thickness);
+  inline-size: 100%;
+  margin-block: var(--separator-spacing-md);
+}
+
+.separator.separator--sm { margin-block: var(--separator-spacing-sm); }
+.separator.separator--lg { margin-block: var(--separator-spacing-lg); }
+
+/* Vertical: se estira a la altura de la fila que la contiene (flex o grid).
+   Fuera de un contenedor que le dé altura, el consumidor pone la suya. */
+.separator.separator--vertical {
+  inline-size: var(--separator-thickness);
+  block-size: auto;
+  align-self: stretch;
+  margin-block: 0;
+  margin-inline: var(--separator-spacing-md);
+}
+
+.separator.separator--vertical.separator--sm { margin-inline: var(--separator-spacing-sm); }
+.separator.separator--vertical.separator--lg { margin-inline: var(--separator-spacing-lg); }

@@ -18,7 +18,6 @@
   --menu-label-padding-block: var(--spacing-2); /** Padding vertical del rótulo de sección */
   --menu-label-padding-inline: var(--spacing-4); /** Padding horizontal del rótulo de sección */
   --menu-label-font-size: var(--font-size-1); /** Tamaño de texto del rótulo de sección */
-  --menu-separator-margin-block: var(--spacing-2); /** Margen vertical del separador */
   --menu-disabled-opacity: var(--opacity-disabled); /** Opacidad de ítems deshabilitados */
   --menu-z-index: var(--floating-panel-z-index); /** Capa z del panel flotante */
   --menu-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
@@ -36,8 +35,7 @@
   --menu-item-destructive-hover-color: var(--color-destructive-fill-text); /** Color de texto de ítem destructivo al hover */
   --menu-label-font-weight: var(--font-weight-emphasis); /** Peso del rótulo de sección */
   --menu-label-color: var(--color-text-muted-on-light); /** Color del rótulo de sección */
-  --menu-separator-color: var(--color-primary); /** Color del separador */
-  --menu-separator-height: var(--border-width-default); /** Alto del separador */
+  --menu-separator-margin-block: var(--separator-spacing-md); /** Margen vertical del separador — el aire md de la línea del sistema */
   --menu-transition-duration: var(--floating-panel-transition-duration); /** Duración de transición */
   --menu-transition-easing: var(--floating-panel-transition-easing); /** Easing de transición */
   --menu-bg: var(--floating-panel-bg); /** Fondo del panel — mismo lenguaje que ContextMenu */
@@ -45,6 +43,8 @@
   --menu-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
   --menu-border-radius: var(--floating-panel-border-radius); /** Radio del panel */
   --menu-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --menu-separator-color: var(--separator-color); /** Color del separador — el de la línea del sistema */
+  --menu-separator-height: var(--separator-thickness); /** Alto del separador — el grosor de la línea del sistema */
 }
 
 .surface-dark,

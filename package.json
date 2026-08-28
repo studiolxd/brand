@@ -338,6 +338,10 @@
     "./scss/components/*": "./src/tokens/scss/components/_*.scss",
     "./scss/global/*": "./src/tokens/scss/global/_*.scss",
     "./scss/molecules/*": "./src/tokens/scss/molecules/_*.scss",
+    "./separator": {
+      "types": "./dist/_types/atoms/Separator/Separator.d.ts",
+      "import": "./dist/separator.js"
+    },
     "./select": {
       "types": "./dist/_types/atoms/Select/Select.d.ts",
       "import": "./dist/select.js"

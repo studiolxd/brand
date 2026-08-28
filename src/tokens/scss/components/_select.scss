@@ -22,6 +22,8 @@ $lxd-select-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-select-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-select-content-bg: #ffffff; // Fondo del dropdown
 $lxd-select-content-border-color: #111e30; // Borde del dropdown
+$lxd-select-separator-color: #111e30; // Color del separador entre grupos — el de la línea del sistema
+$lxd-select-separator-height: 1px; // Grosor del separador entre grupos — el de la línea del sistema
 $lxd-select-content-z-index: 400; // Capa del desplegable: flotante
 $lxd-select-content-max-height: var(--available-height); // Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI)
 $lxd-select-item-padding-block: 0.5rem; // Padding block de cada opción

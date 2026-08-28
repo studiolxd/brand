@@ -56,6 +56,8 @@ export { ProgressBar } from './stories/atoms/ProgressBar/ProgressBar';
 export type { ProgressBarProps, ProgressBarVariant, ProgressBarSize } from './stories/atoms/ProgressBar/ProgressBar';
 export { Popover } from './stories/atoms/Popover/Popover';
 export type { PopoverProps } from './stories/atoms/Popover/Popover';
+export { Separator } from './stories/atoms/Separator/Separator';
+export type { SeparatorProps } from './stories/atoms/Separator/Separator';
 export { Skeleton } from './stories/atoms/Skeleton/Skeleton';
 export type { SkeletonProps } from './stories/atoms/Skeleton/Skeleton';
 export { Tooltip, TooltipProvider } from './stories/atoms/Tooltip/Tooltip';
