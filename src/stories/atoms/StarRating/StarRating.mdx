@@ -1,0 +1,98 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as StarRatingStories from "./StarRating.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { starRatingTokens, starRatingDarkTokens } from "../../../tokens/components/star-rating";
+
+<Meta of={StarRatingStories} />
+
+# StarRating
+
+Una valoración en estrellas: la media de un curso en un catálogo, la puntuación
+que deja quien lo ha hecho. Cubre los dos usos —**mostrar** y **capturar**— con
+el mismo dibujo.
+
+<Canvas of={StarRatingStories.PorDefecto} />
+
+## Lectura y entrada
+
+Por defecto es **de lectura** (`readOnly`, que vale `true`): el componente nace
+para mostrar una media, y así un listado de cien tarjetas no monta quinientos
+radios sin querer. Para capturar una valoración hay que pedirlo:
+`readOnly={false}`.
+
+<Canvas of={StarRatingStories.Entrada} />
+
+Funciona **controlado** (`value` + `onValueChange`) o **no controlado**
+(`defaultValue`), como el resto de controles del sistema. Con `name`, los radios
+envían la valoración con el formulario.
+
+## Media estrella
+
+La lectura redondea a la media estrella más cercana, que es como se lee una
+media: `3,7` se dibuja como `3,5`.
+
+<Canvas of={StarRatingStories.Medias} />
+
+**La entrada va en pasos enteros.** La media estrella describe una media
+calculada; nadie elige «tres y media» al valorar, y ofrecer dos mitades por
+estrella duplica los destinos de clic sin que nadie los pida.
+
+## Escala
+
+`max` fija cuántas estrellas tiene la escala; cinco por defecto. El nombre
+accesible siempre dice contra qué máximo se mide.
+
+<Canvas of={StarRatingStories.EscalaDeDiez} />
+
+## Tallas
+
+La estrella se mide en `em`, contra el texto que la rodea: dentro de un pie de
+tarjeta encoge con él sin tener que ajustarla.
+
+<Canvas of={StarRatingStories.Tallas} />
+
+## Deshabilitada
+
+<Canvas of={StarRatingStories.Deshabilitada} />
+
+## Superficie oscura
+
+El relleno prusia coincidiría con el fondo de la superficie oscura, así que pasa
+a lavanda —el par de `Button primary`—, y el contorno de la estrella sin ganar a
+la tinta clara. Todo por token `surface-dark-*`, sin CSS propio.
+
+<Canvas of={StarRatingStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={starRatingTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={starRatingDarkTokens} />
+
+## Accesibilidad
+
+- En lectura es **una sola imagen** (`role="img"`) cuyo nombre accesible lleva
+  el valor exacto: «4,5 de 5 estrellas». Quien usa un lector de pantalla oye la
+  valoración, no cuenta cinco iconos sueltos.
+- En entrada es un `role="radiogroup"` con radios nativos: el teclado (flechas
+  para recorrer y elegir, `Tab` para entrar y salir del grupo) y el envío del
+  formulario vienen del navegador.
+- Cada estrella elegible tiene su propio nombre («3 de 5 estrellas»), no solo su
+  posición.
+- El foco se ve con el anillo del sistema alrededor de la estrella señalada.
+- Al pasar el ratón las estrellas se rellenan hasta donde señala el puntero: es
+  previsualización, no cambia el valor hasta que se hace clic.
+
+## Internacionalización
+
+Todos los textos que emite el componente son props con default castellano:
+`valueLabel`, `optionLabel` y `groupLabel`. El número se escribe con `locale`
+(por defecto `es-ES`), delegando en `Intl`.
+
+## Props
+
+<ArgTypes of={StarRatingStories} />

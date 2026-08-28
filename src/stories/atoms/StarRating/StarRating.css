@@ -1,0 +1,63 @@
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--star-rating-gap);
+  color: var(--star-rating-track-color);
+}
+
+.star-rating__star {
+  position: relative;
+  display: inline-flex;
+}
+
+.star-rating__glyph {
+  /* `Icon` dimensiona por `--icon-size`; la estrella va a su propia medida. */
+  --icon-size: var(--star-rating-star-size);
+}
+
+.star-rating__glyph--fill {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  color: var(--star-rating-fill-color);
+  fill: var(--star-rating-fill-color);
+  transition: color var(--star-rating-transition-duration) var(--star-rating-transition-easing);
+}
+
+/* Media estrella: se recorta por el eje mayor a la mitad exacta de la figura.
+   El 50% es la geometría de «media», no una medida de diseño. */
+.star-rating__glyph--half {
+  clip-path: inset(0 50% 0 0);
+}
+
+[dir="rtl"] .star-rating__glyph--half {
+  clip-path: inset(0 0 0 50%);
+}
+
+/* ─── Entrada ────────────────────────────────────────────────── */
+.star-rating__option {
+  display: inline-flex;
+  cursor: var(--star-rating-cursor);
+}
+
+.star-rating__input:focus-visible + .star-rating__star {
+  outline: var(--star-rating-focus-ring-width) solid var(--star-rating-focus-ring-color);
+  outline-offset: var(--star-rating-focus-ring-offset);
+}
+
+.star-rating__input:disabled + .star-rating__star {
+  opacity: var(--star-rating-disabled-opacity);
+}
+
+.star-rating__option:has(.star-rating__input:disabled) {
+  cursor: var(--star-rating-disabled-cursor);
+}
+
+/* ─── Tallas ─────────────────────────────────────────────────── */
+.star-rating.star-rating--sm {
+  --star-rating-star-size: var(--star-rating-sm-star-size);
+}
+
+.star-rating.star-rating--lg {
+  --star-rating-star-size: var(--star-rating-lg-star-size);
+}

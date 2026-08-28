@@ -1,0 +1,28 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --star-rating-star-size: 1.25em; /** Tamaño de la estrella — relativo al texto que la rodea, como el resto de marcas en línea */
+  --star-rating-sm-star-size: 1em; /** Tamaño de la estrella — talla sm */
+  --star-rating-lg-star-size: 1.5em; /** Tamaño de la estrella — talla lg */
+  --star-rating-cursor: pointer; /** Cursor sobre una estrella elegible */
+  --star-rating-disabled-cursor: not-allowed; /** Cursor cuando la entrada está deshabilitada */
+  --star-rating-gap: var(--spacing-1); /** Separación entre estrellas */
+  --star-rating-track-color: var(--color-grey-dark); /** Contorno de la estrella sin ganar */
+  --star-rating-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando la entrada está deshabilitada */
+  --star-rating-transition-duration: var(--motion-duration-fast); /** Duración del cambio de relleno */
+  --star-rating-transition-easing: var(--motion-easing-default); /** Easing del cambio de relleno */
+  --star-rating-fill-color: var(--color-primary); /** Relleno y contorno de la estrella ganada */
+  --star-rating-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --star-rating-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
+  --star-rating-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --star-rating-track-color: var(--color-text-on-dark); /** Contorno de la estrella sin ganar — surface-dark */
+  --star-rating-fill-color: var(--color-accent-1); /** Relleno de la estrella ganada — surface-dark. `fill-color` (prussian) coincide con el fondo de la superficie y quedaría invisible. */
+  --star-rating-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

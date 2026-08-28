@@ -140,6 +140,7 @@ const filters = {
   'copy-button':        (t) => t.path[0] === 'copy-button',
   'confirm-dialog':     (t) => t.path[0] === 'confirm-dialog',
   'search-form':        (t) => t.path[0] === 'search-form',
+  'star-rating':        (t) => t.path[0] === 'star-rating',
 };
 
 function cssFile(destination, filterKey) {
@@ -293,6 +294,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/async-multi-select-field.css', 'async-multi-select-field'),
         cssFile('molecules/chart.css',              'chart'),
         cssFile('components/sparkline.css',         'sparkline'),
+        cssFile('components/star-rating.css',       'star-rating'),
       ],
     },
     scss: {
@@ -431,6 +433,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_async-multi-select-field.scss', 'async-multi-select-field'),
         scssFile('molecules/_chart.scss',            'chart'),
         scssFile('components/_sparkline.scss',       'sparkline'),
+        scssFile('components/_star-rating.scss',     'star-rating'),
       ],
     },
   },

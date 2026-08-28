@@ -503,6 +503,16 @@ const ICONS = {
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
     ),
   },
+  // Estrella de cinco puntas en la retícula de 24: radio exterior 9.2 desde el
+  // centro y radio interior 3.6 (la proporción del pentagrama), primer vértice
+  // arriba. Contorno como el resto del set; el relleno lo pone quien la usa
+  // (`StarRating` pinta una segunda capa con `fill`).
+  star: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 2.8 L14.12 9.09 L20.75 9.16 L15.42 13.11 L17.41 19.44 L12 15.6 L6.59 19.44 L8.58 13.11 L3.25 9.16 L9.88 9.09 Z" />
+    ),
+  },
   user: {
     viewBox: '0 0 24 24',
     render: () => (

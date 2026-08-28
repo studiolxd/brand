@@ -122,6 +122,7 @@
 @import "./molecules/chat-shell.css";
 @import "./molecules/chart.css";
 @import "./components/sparkline.css";
+@import "./components/star-rating.css";
 @import "./molecules/prose.css";
 @import "./molecules/table-of-contents.css";
 @import "./molecules/docs-search.css";

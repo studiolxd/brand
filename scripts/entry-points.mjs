@@ -38,6 +38,7 @@ export const entryPoints = {
   'time-select':         'src/stories/atoms/TimeSelect/TimeSelect.tsx',
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
   'sparkline':           'src/stories/atoms/Sparkline/Sparkline.tsx',
+  'star-rating':         'src/stories/atoms/StarRating/StarRating.tsx',
   'kbd':                 'src/stories/atoms/Kbd/Kbd.tsx',
   'textarea':            'src/stories/atoms/Textarea/Textarea.tsx',
   'skip-link':           'src/stories/atoms/SkipLink/SkipLink.tsx',
@@ -189,4 +190,5 @@ export const clientComponents = new Set([
   'copy-button',
   'confirm-dialog',
   'search-form',
+  'star-rating',
 ]);

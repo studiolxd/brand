@@ -1,0 +1,21 @@
+{
+  "star-rating": {
+    "gap":                 { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Separación entre estrellas" },
+    "star-size":           { "$value": "1.25em",                   "$type": "dimension", "$description": "Tamaño de la estrella — relativo al texto que la rodea, como el resto de marcas en línea" },
+    "sm-star-size":        { "$value": "1em",                      "$type": "dimension", "$description": "Tamaño de la estrella — talla sm" },
+    "lg-star-size":        { "$value": "1.5em",                    "$type": "dimension", "$description": "Tamaño de la estrella — talla lg" },
+    "track-color":         { "$value": "{color.grey-dark}",        "$type": "color",     "$description": "Contorno de la estrella sin ganar" },
+    "fill-color":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Relleno y contorno de la estrella ganada" },
+    "cursor":              { "$value": "pointer",                  "$type": "string",    "$description": "Cursor sobre una estrella elegible" },
+    "disabled-cursor":     { "$value": "not-allowed",              "$type": "string",    "$description": "Cursor cuando la entrada está deshabilitada" },
+    "disabled-opacity":    { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Opacidad cuando la entrada está deshabilitada" },
+    "transition-duration": { "$value": "{motion.duration.fast}",   "$type": "duration",  "$description": "Duración del cambio de relleno" },
+    "transition-easing":   { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Easing del cambio de relleno" },
+    "focus-ring-width":    { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":   { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "focus-ring-color":    { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco" },
+    "surface-dark-track-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Contorno de la estrella sin ganar — surface-dark" },
+    "surface-dark-fill-color":       { "$value": "{color.accent-1}",     "$type": "color", "$description": "Relleno de la estrella ganada — surface-dark. `fill-color` (prussian) coincide con el fondo de la superficie y quedaría invisible." },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}
