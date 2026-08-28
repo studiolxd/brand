@@ -137,14 +137,14 @@
   box-shadow: none;
   outline: none;
   transition:
-    outline-color var(--user-menu-transition-duration) var(--user-menu-transition-easing),
+    background-color var(--user-menu-transition-duration) var(--user-menu-transition-easing),
     color var(--user-menu-transition-duration) var(--user-menu-transition-easing);
 }
 
-/* El ítem resaltado no pinta relleno: lo marca el anillo del sistema (regla de Colores). */
+/* El ítem resaltado se rellena: excepción declarada de las listas de opciones
+   desplegables (Foundations → Colores). */
 .user-menu__item[data-highlighted] {
-  outline: var(--user-menu-item-focus-ring-width) solid var(--user-menu-item-focus-ring-color);
-  outline-offset: var(--user-menu-item-focus-ring-offset);
+  background-color: var(--user-menu-item-highlighted-bg);
 }
 
 .user-menu__item[data-disabled] {
@@ -155,10 +155,6 @@
 
 .user-menu__item.user-menu__item--destructive {
   color: var(--user-menu-item-destructive-color);
-}
-
-.user-menu__item.user-menu__item--destructive[data-highlighted] {
-  outline-color: var(--user-menu-item-destructive-color);
 }
 
 /* ─── Separador ──────────────────────────────────────────── */
