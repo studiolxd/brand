@@ -6,7 +6,10 @@ import { Tag } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Chart.css';
 
-export type ChartType = 'line' | 'area' | 'bar' | 'pie' | 'donut';
+export type ChartType =
+  | 'line' | 'area' | 'bar' | 'scatter'
+  | 'pie' | 'donut' | 'funnel' | 'treemap' | 'radial-bar'
+  | 'radar';
 
 export interface ChartSeries {
   /** Clave del valor dentro de cada fila de `data`. */
@@ -14,10 +17,16 @@ export interface ChartSeries {
   /** Nombre que se lee en la leyenda, el bocadillo y la tabla. */
   label: string;
   /**
-   * Color de la serie. **Solo una referencia a token**: `'var(--chart-series-3)'`
-   * o una custom property del producto. Nunca un color literal — el sistema no
-   * tiene colores cableados. Sin este dato, la serie toma la ranura que le
-   * corresponde por orden (`--chart-series-1`…`8`).
+   * Color de la serie. Lo normal es una **referencia a token**
+   * (`'var(--chart-series-3)'` o una custom property del producto): la interfaz
+   * del sistema no tiene colores cableados.
+   *
+   * Admite además un **color literal** cuando el color es *dato*, no diseño: lo
+   * que el autor de un contenido eligió desde la paleta de su tema. Ver
+   * `colors` y la sección «Color por dato» de la documentación.
+   *
+   * Sin este dato, la serie toma la ranura que le corresponde por orden
+   * (`--chart-series-1`…`8`).
    */
   color?: string;
 }
@@ -38,8 +47,19 @@ export interface ChartProps extends Omit<React.ComponentPropsWithoutRef<'figure'
    * que quedan. A partir de la novena, la serie se pinta con el gris de «Otros».
    */
   series: ChartSeries[];
-  /** Clave de la posición X (o de la categoría, en `pie`/`donut`). */
+  /** Clave de la posición X (o de la categoría, en los gráficos de porción). */
   xKey: string;
+  /**
+   * **Color por dato**: paleta por posición, en colores literales. La entrada
+   * `colors[i]` pinta la serie `i` —o, en los gráficos de porción, la categoría
+   * `i`—, por encima de la ranura de token que le tocaría por orden y por
+   * debajo del `color` propio de la serie.
+   *
+   * Es la vía para el caso en que el color **es dato**: el que eligió el autor
+   * de un contenido desde la paleta de su tema. Para la interfaz del sistema,
+   * las ranuras de token siguen siendo lo correcto.
+   */
+  colors?: string[];
   /** Barras verticales (columnas) u horizontales. Horizontal para categorías con nombre largo. */
   orientation?: 'vertical' | 'horizontal';
   /** Apila las series en vez de agruparlas. Solo `bar` y `area`. */
@@ -111,6 +131,10 @@ const GEOMETRY = {
   /** `--chart-padding-block` / `--chart-padding-inline` */ padding: 8,
   /** `--chart-axis-gap` */ axisGap: 8,
   /** `--chart-donut-thickness` */ donutThickness: 0.55,
+  /** `--chart-funnel-gap` */ funnelGap: 4,
+  /** `--chart-treemap-gap` */ treemapGap: 2,
+  /** `--chart-radial-bar-gap` */ radialBarGap: 4,
+  /** `--chart-dot-size` */ dotSize: 10,
 } as const;
 
 /** Ancho aproximado de un carácter del rótulo: basta para reservar la calle del eje. */
@@ -127,10 +151,80 @@ function xValue(row: ChartDatum, xKey: string): string | number {
   return typeof raw === 'number' ? raw : String(raw ?? '');
 }
 
-/** Ranura de color de una serie. Pasada la octava, la serie es «Otros»: gris. */
-function markStyle(index: number, color?: string): CSSProperties {
-  const slot = color ?? (index < SLOTS ? `var(--chart-series-${index + 1})` : 'var(--chart-muted-color)');
+/**
+ * Color de una marca, por prioridad: el `color` propio de la serie, la paleta de
+ * dato (`colors`) y, si no hay ninguno, la ranura de token que toca por orden.
+ * Pasada la octava, la marca es «Otros»: gris.
+ */
+function markStyle(index: number, color?: string, palette?: string[]): CSSProperties {
+  const slot = color
+    ?? palette?.[index]
+    ?? (index < SLOTS ? `var(--chart-series-${index + 1})` : 'var(--chart-muted-color)');
   return { '--chart-mark-color': slot } as CSSProperties;
+}
+
+/** Trapecio de un tramo de embudo: ancho superior e inferior distintos, centrados. */
+function funnelPath(cx: number, y: number, h: number, wTop: number, wBottom: number): string {
+  return `M ${cx - wTop / 2} ${y} L ${cx + wTop / 2} ${y} L ${cx + wBottom / 2} ${y + h} L ${cx - wBottom / 2} ${y + h} Z`;
+}
+
+interface TreemapRect { x: number; y: number; w: number; h: number; index: number }
+
+/**
+ * Treemap por el algoritmo *squarified*: reparte el área en filas eligiendo, en
+ * cada paso, la que deja los rectángulos más cerca del cuadrado. Sin librería:
+ * es la única forma del catálogo que necesita un reparto de área, y son treinta
+ * líneas.
+ */
+function squarify(values: { value: number; index: number }[], x: number, y: number, w: number, h: number): TreemapRect[] {
+  const total = values.reduce((a, v) => a + v.value, 0);
+  if (total <= 0 || w <= 0 || h <= 0) return [];
+  const area = w * h;
+  const escalados = values.map((v) => ({ ...v, area: (v.value / total) * area }));
+  const salida: TreemapRect[] = [];
+
+  let cx = x, cy = y, cw = w, ch = h;
+  let fila: typeof escalados = [];
+  let restantes = [...escalados];
+
+  /** Peor proporción de la fila si se coloca en el lado corto. */
+  const peor = (candidata: typeof escalados, lado: number) => {
+    const suma = candidata.reduce((a, v) => a + v.area, 0);
+    if (suma <= 0) return Infinity;
+    const max = Math.max(...candidata.map((v) => v.area));
+    const min = Math.min(...candidata.map((v) => v.area));
+    return Math.max((lado * lado * max) / (suma * suma), (suma * suma) / (lado * lado * min));
+  };
+
+  const colocar = () => {
+    const suma = fila.reduce((a, v) => a + v.area, 0);
+    const horizontal = cw >= ch;
+    const grosor = horizontal ? suma / ch : suma / cw;
+    let avance = 0;
+    fila.forEach((v) => {
+      const largo = (horizontal ? ch : cw) * (v.area / suma);
+      salida.push(horizontal
+        ? { x: cx, y: cy + avance, w: grosor, h: largo, index: v.index }
+        : { x: cx + avance, y: cy, w: largo, h: grosor, index: v.index });
+      avance += largo;
+    });
+    if (horizontal) { cx += grosor; cw -= grosor; } else { cy += grosor; ch -= grosor; }
+    fila = [];
+  };
+
+  while (restantes.length > 0) {
+    const lado = Math.min(cw, ch);
+    const siguiente = restantes[0];
+    if (!siguiente) break;
+    if (fila.length === 0 || peor([...fila, siguiente], lado) <= peor(fila, lado)) {
+      fila.push(siguiente);
+      restantes = restantes.slice(1);
+    } else {
+      colocar();
+    }
+  }
+  if (fila.length > 0) colocar();
+  return salida;
 }
 
 /** Marcas de eje en cifras redondas, incluyendo siempre el cero. */
@@ -207,6 +301,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   data,
   series,
   xKey,
+  colors,
   orientation = 'vertical',
   stacked = false,
   emphasis,
@@ -240,8 +335,14 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   const fmtValue = (value: number, s?: ChartSeries) => (formatValue ? formatValue(value, s) : numberFormat.format(value));
   const fmtX = (value: string | number) => (formatX ? formatX(value) : String(value));
 
-  const isRadial = type === 'pie' || type === 'donut';
-  const showLegend = legend ?? (isRadial ? data.length > 1 : series.length > 1);
+  // Familias: qué comparte cada forma en escalas, ejes, leyenda y tabla.
+  const isArc = type === 'pie' || type === 'donut';
+  const isSlice = isArc || type === 'funnel' || type === 'treemap' || type === 'radial-bar';
+  const isScatter = type === 'scatter';
+  const isRadar = type === 'radar';
+  /** Las formas de porción y el radar no llevan ejes cartesianos. */
+  const isRadial = isSlice || isRadar;
+  const showLegend = legend ?? (isSlice ? data.length > 1 : series.length > 1);
   const labels = valueLabels ?? (type === 'line' || type === 'area' ? 'last' : 'none');
   const rows = data;
   const empty = rows.length === 0 || series.length === 0;
@@ -262,7 +363,15 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   const span = scaleMax - scaleMin || 1;
 
   const tickTexts = ticks.map((t) => fmtValue(t));
-  const categoryTexts = rows.map((row) => fmtX(xValue(row, xKey)));
+  // En dispersión el eje X es numérico: no hay categorías, hay una escala.
+  const xNumbers = rows.map((row) => (typeof row[xKey] === 'number' ? (row[xKey] as number) : 0));
+  const xTicks = isScatter ? niceTicks(Math.min(...xNumbers, 0), Math.max(...xNumbers, 1), yTicks) : [];
+  const xScaleMin = xTicks[0] ?? 0;
+  const xScaleMax = xTicks[xTicks.length - 1] ?? 1;
+  const xSpan = xScaleMax - xScaleMin || 1;
+  const categoryTexts = isScatter
+    ? xTicks.map((t) => fmtValue(t))
+    : rows.map((row) => fmtX(xValue(row, xKey)));
   const horizontal = type === 'bar' && orientation === 'horizontal';
   const gutterTexts = horizontal ? categoryTexts : tickTexts;
   const gutter = isRadial ? GEOMETRY.padding : GEOMETRY.padding + Math.max(...gutterTexts.map((t) => t.length), 1) * CHAR_WIDTH + GEOMETRY.axisGap;
@@ -283,6 +392,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   const bandSize = rows.length ? (horizontal ? plotHeight : plotWidth) / rows.length : 0;
   const pointX = (i: number) => (rows.length > 1 ? x0 + (i * plotWidth) / (rows.length - 1) : x0 + plotWidth / 2);
   const bandCenter = (i: number) => (horizontal ? y0 : x0) + bandSize * (i + 0.5);
+  const scatterX = (v: number) => x0 + ((v - xScaleMin) / xSpan) * plotWidth;
 
   // ─── Radiales ───────────────────────────────────────────────
   const sliceKey = series[0]?.key ?? '';
@@ -299,6 +409,14 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
     return { from, to: from + sweep, share: sliceTotal > 0 ? v / sliceTotal : 0 };
   });
 
+  // Radar: un eje por fila, repartidos en la circunferencia desde arriba.
+  const radarAxes = rows.map((_, i) => -Math.PI / 2 + (rows.length ? (i * Math.PI * 2) / rows.length : 0));
+  const radarPoint = (value: number, i: number) => {
+    const r = radius * Math.max(0, Math.min(1, scaleMax > 0 ? value / scaleMax : 0));
+    const a = radarAxes[i] ?? 0;
+    return { x: centerX + r * Math.cos(a), y: centerY + r * Math.sin(a) };
+  };
+
   const isMuted = (key: string) => Boolean(emphasis) && emphasis !== key;
 
   // ─── Interacción ────────────────────────────────────────────
@@ -310,6 +428,17 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       const local = event.clientX - box.left;
       const step = rows.length > 1 ? plotWidth / (rows.length - 1) : plotWidth;
       return Math.max(0, Math.min(rows.length - 1, Math.round(local / step)));
+    }
+    if (isScatter) {
+      // No hay bandas: gana el punto cuya X cae más cerca del puntero.
+      const local = event.clientX - box.left + x0;
+      let mejor = 0;
+      let distancia = Infinity;
+      xNumbers.forEach((v, i) => {
+        const d = Math.abs(scatterX(v) - local);
+        if (d < distancia) { distancia = d; mejor = i; }
+      });
+      return mejor;
     }
     const local = horizontal ? event.clientY - box.top : event.clientX - box.left;
     return Math.max(0, Math.min(rows.length - 1, Math.floor(local / (bandSize || 1))));
@@ -349,7 +478,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       });
       const line = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
       const muted = isMuted(s.key);
-      const style = markStyle(si, s.color);
+      const style = markStyle(si, s.color, colors);
       const first = points[0];
       const last = points[points.length - 1];
       if (type === 'area' && first && last) {
@@ -409,7 +538,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       series.forEach((s, si) => {
         const raw = toNumber(row[s.key]);
         const muted = isMuted(s.key);
-        const style = markStyle(si, s.color);
+        const style = markStyle(si, s.color, colors);
         const offset = stacked ? 0 : (si - (series.length - 1) / 2) * (thickness + GEOMETRY.markGap);
         const start = center + offset - thickness / 2;
         const base = stacked ? (raw >= 0 ? positive : negative) : 0;
@@ -446,13 +575,13 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
     });
   }
 
-  if (!empty && isRadial) {
+  if (!empty && isArc) {
     const inner = type === 'donut' ? radius * (1 - GEOMETRY.donutThickness) : 0;
     slices.forEach((slice, i) => {
       if (slice.to - slice.from <= 0) return;
       const category = String(xValue(rows[i] as ChartDatum, xKey));
       marks.push(
-        <path key={`slice-${i}`} className={`chart__slice${isMuted(category) ? ' chart__slice--muted' : ''}`} style={markStyle(i)}
+        <path key={`slice-${i}`} className={`chart__slice${isMuted(category) ? ' chart__slice--muted' : ''}`} style={markStyle(i, undefined, colors)}
           d={arcPath(centerX, centerY, radius, inner, slice.from, slice.to)} data-active={active === i || undefined} />,
       );
       if (slice.share >= 0.05) {
@@ -469,14 +598,127 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
     });
   }
 
+  if (!empty && type === 'funnel') {
+    // Los tramos van en el orden dado: un embudo cuenta una secuencia, no un
+    // ranking, así que no se reordena por valor.
+    const maxSlice = Math.max(...sliceValues, 1);
+    const trackHeight = plotHeight / Math.max(1, rows.length);
+    const anchoDe = (v: number) => (Math.max(0, v) / maxSlice) * plotWidth;
+    sliceValues.forEach((v, i) => {
+      const y = y0 + trackHeight * i;
+      const h = Math.max(0, trackHeight - GEOMETRY.funnelGap);
+      const siguiente = sliceValues[i + 1];
+      const category = String(xValue(rows[i] as ChartDatum, xKey));
+      marks.push(
+        <path key={`funnel-${i}`} className={`chart__funnel-step${isMuted(category) ? ' chart__funnel-step--muted' : ''}`}
+          style={markStyle(i, undefined, colors)} data-active={active === i || undefined}
+          d={funnelPath(centerX, y, h, anchoDe(v), anchoDe(siguiente ?? v))} />,
+      );
+      marks.push(
+        <text key={`funnel-label-${i}`} className="chart__value-label" x={centerX} y={y + h / 2}
+          textAnchor="middle" dominantBaseline="middle">
+          {`${fmtX(xValue(rows[i] as ChartDatum, xKey))} · ${fmtValue(v)}`}
+        </text>,
+      );
+    });
+  }
+
+  if (!empty && type === 'treemap') {
+    const rects = squarify(
+      sliceValues.map((value, index) => ({ value: Math.max(0, value), index })).filter((v) => v.value > 0),
+      x0, y0, plotWidth, plotHeight,
+    );
+    rects.forEach((rect) => {
+      const category = String(xValue(rows[rect.index] as ChartDatum, xKey));
+      const w = Math.max(0, rect.w - GEOMETRY.treemapGap);
+      const h = Math.max(0, rect.h - GEOMETRY.treemapGap);
+      marks.push(
+        <rect key={`tile-${rect.index}`} className={`chart__tile${isMuted(category) ? ' chart__tile--muted' : ''}`}
+          style={markStyle(rect.index, undefined, colors)} data-active={active === rect.index || undefined}
+          x={rect.x} y={rect.y} width={w} height={h} />,
+      );
+      // El rótulo solo cabe si la baldosa lo aguanta: si no, está en la tabla.
+      if (w > CHAR_WIDTH * 4 && h > GEOMETRY.labelFontSize * 2) {
+        marks.push(
+          <text key={`tile-label-${rect.index}`} className="chart__tile-label"
+            x={rect.x + GEOMETRY.axisGap} y={rect.y + GEOMETRY.axisGap + GEOMETRY.labelFontSize}>
+            {fmtX(xValue(rows[rect.index] as ChartDatum, xKey))}
+          </text>,
+        );
+      }
+    });
+  }
+
+  if (!empty && type === 'radial-bar') {
+    // Un anillo por categoría, del exterior al interior; el barrido es la parte
+    // del máximo, no del total: son magnitudes comparadas, no un reparto.
+    const maxSlice = Math.max(...sliceValues, 1);
+    const anillo = radius / Math.max(1, rows.length);
+    const grosor = Math.max(1, anillo - GEOMETRY.radialBarGap);
+    sliceValues.forEach((v, i) => {
+      const outer = radius - anillo * i;
+      const inner = outer - grosor;
+      const category = String(xValue(rows[i] as ChartDatum, xKey));
+      const sweep = (Math.max(0, v) / maxSlice) * Math.PI * 1.999;
+      marks.push(
+        <path key={`radial-track-${i}`} className="chart__radial-track"
+          d={arcPath(centerX, centerY, outer, inner, -Math.PI / 2, -Math.PI / 2 + Math.PI * 1.999)} />,
+      );
+      if (sweep <= 0) return;
+      marks.push(
+        <path key={`radial-bar-${i}`} className={`chart__radial-bar${isMuted(category) ? ' chart__radial-bar--muted' : ''}`}
+          style={markStyle(i, undefined, colors)} data-active={active === i || undefined}
+          d={arcPath(centerX, centerY, outer, inner, -Math.PI / 2, -Math.PI / 2 + sweep)} />,
+      );
+    });
+  }
+
+  if (!empty && isScatter) {
+    series.forEach((s, si) => {
+      const muted = isMuted(s.key);
+      const style = markStyle(si, s.color, colors);
+      rows.forEach((row, i) => {
+        const value = row[s.key];
+        if (typeof value !== 'number' || !Number.isFinite(value)) return;
+        marks.push(
+          <circle key={`point-${s.key}-${i}`} className={`chart__point${muted ? ' chart__point--muted' : ''}`} style={style}
+            cx={scatterX(xNumbers[i] ?? 0)} cy={valueToY(value)} r={GEOMETRY.dotSize / 2}
+            data-active={active === i || undefined} />,
+        );
+      });
+    });
+  }
+
+  if (!empty && isRadar) {
+    series.forEach((s, si) => {
+      const muted = isMuted(s.key);
+      const style = markStyle(si, s.color, colors);
+      const puntos = rows.map((row, i) => radarPoint(toNumber(row[s.key]), i));
+      if (puntos.length === 0) return;
+      const d = `${puntos.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ')} Z`;
+      marks.push(<path key={`radar-${s.key}`} className={`chart__radar-shape${muted ? ' chart__radar-shape--muted' : ''}`} style={style} d={d} />);
+      puntos.forEach((p, i) => {
+        marks.push(
+          <circle key={`radar-dot-${s.key}-${i}`} className={`chart__marker${muted ? ' chart__marker--muted' : ''}`} style={style}
+            cx={p.x} cy={p.y} r={GEOMETRY.markerSize / 2} data-active={active === i || undefined} />,
+        );
+      });
+    });
+  }
+
   // ─── Bocadillo ──────────────────────────────────────────────
   const activeRow = active !== null ? rows[active] : undefined;
   const tooltipRows = activeRow
-    ? isRadial
+    ? isSlice
       ? [{ key: sliceKey, label: String(xValue(activeRow, xKey)), value: fmtValue(toNumber(activeRow[sliceKey])), index: active ?? 0 }]
       : series.map((s, si) => ({ key: s.key, label: s.label, value: fmtValue(toNumber(activeRow[s.key]), s), index: si }))
     : [];
-  const tooltipX = active === null ? 0 : isRadial ? centerX : type === 'bar' && horizontal ? valueToX(scaleMax) : type === 'bar' ? bandCenter(active) : pointX(active);
+  const tooltipX = active === null ? 0
+    : isRadial ? centerX
+    : isScatter ? scatterX(xNumbers[active] ?? 0)
+    : type === 'bar' && horizontal ? valueToX(scaleMax)
+    : type === 'bar' ? bandCenter(active)
+    : pointX(active);
   const tooltipY = active === null ? 0 : isRadial ? centerY - radius : type === 'bar' && horizontal ? bandCenter(active) : y0;
 
   return (
@@ -520,10 +762,45 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
                     ))
                   : categoryTexts.map((text, i) => (
                       <text key={`cat-${i}`} className="chart__axis-label"
-                        x={type === 'bar' ? bandCenter(i) : pointX(i)}
+                        x={isScatter ? scatterX(xTicks[i] ?? 0) : type === 'bar' ? bandCenter(i) : pointX(i)}
                         y={y1 + GEOMETRY.axisGap + GEOMETRY.labelFontSize}
-                        textAnchor={i === 0 && type !== 'bar' ? 'start' : i === rows.length - 1 && type !== 'bar' ? 'end' : 'middle'}>{text}</text>
+                        textAnchor={isScatter ? 'middle' : i === 0 && type !== 'bar' ? 'start' : i === rows.length - 1 && type !== 'bar' ? 'end' : 'middle'}>{text}</text>
                     ))}
+              </g>
+            ) : null}
+
+            {grid && isScatter ? (
+              <g className="chart__grid" aria-hidden="true">
+                {xTicks.map((t) => (
+                  <line key={`xgrid-${t}`} className="chart__grid-line" x1={scatterX(t)} y1={y0} x2={scatterX(t)} y2={y1} />
+                ))}
+              </g>
+            ) : null}
+
+            {isRadar && rows.length > 0 ? (
+              <g className="chart__radar-grid" aria-hidden="true">
+                {/* Telaraña: un anillo por marca de la escala y un radio por categoría. */}
+                {ticks.filter((t) => t > 0).map((t) => (
+                  <path key={`web-${t}`} className="chart__grid-line"
+                    d={`${radarAxes.map((a, i) => {
+                      const r = radius * (scaleMax > 0 ? t / scaleMax : 0);
+                      return `${i === 0 ? 'M' : 'L'} ${centerX + r * Math.cos(a)} ${centerY + r * Math.sin(a)}`;
+                    }).join(' ')} Z`} />
+                ))}
+                {radarAxes.map((a, i) => (
+                  <line key={`spoke-${i}`} className="chart__grid-line"
+                    x1={centerX} y1={centerY}
+                    x2={centerX + radius * Math.cos(a)} y2={centerY + radius * Math.sin(a)} />
+                ))}
+                {radarAxes.map((a, i) => (
+                  <text key={`radar-cat-${i}`} className="chart__axis-label"
+                    x={centerX + (radius + GEOMETRY.axisGap) * Math.cos(a)}
+                    y={centerY + (radius + GEOMETRY.axisGap) * Math.sin(a)}
+                    textAnchor={Math.cos(a) < -0.1 ? 'end' : Math.cos(a) > 0.1 ? 'start' : 'middle'}
+                    dominantBaseline="middle">
+                    {categoryTexts[i]}
+                  </text>
+                ))}
               </g>
             ) : null}
 
@@ -559,11 +836,11 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
 
           {tooltip && active !== null && activeRow ? (
             <div className="chart__tooltip" aria-hidden="true" style={{ left: `${tooltipX}px`, top: `${tooltipY}px` } as CSSProperties}>
-              <p className="chart__tooltip-header">{isRadial ? fmtValue(sliceTotal) : fmtX(xValue(activeRow, xKey))}</p>
+              <p className="chart__tooltip-header">{isSlice ? fmtValue(sliceTotal) : fmtX(xValue(activeRow, xKey))}</p>
               <ul className="chart__tooltip-list">
                 {tooltipRows.map((row) => (
                   <li key={row.key + row.label} className="chart__tooltip-row">
-                    <span className="chart__tooltip-key" style={markStyle(row.index, series[row.index]?.color)} aria-hidden="true" />
+                    <span className="chart__tooltip-key" style={markStyle(row.index, isSlice ? undefined : series[row.index]?.color, colors)} aria-hidden="true" />
                     <span className="chart__tooltip-value">{row.value}</span>
                     <span className="chart__tooltip-label">{row.label}</span>
                   </li>
@@ -577,13 +854,13 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       {showLegend && !empty ? (
         <div className="chart__legend">
           <Inline gap="sm">
-            {(isRadial ? rows.map((row, i) => ({ key: String(xValue(row, xKey)), label: fmtX(xValue(row, xKey)), index: i, color: undefined as string | undefined }))
+            {(isSlice ? rows.map((row, i) => ({ key: String(xValue(row, xKey)), label: fmtX(xValue(row, xKey)), index: i, color: undefined as string | undefined }))
               : series.map((s, i) => ({ key: s.key, label: s.label, index: i, color: s.color }))
             ).map((item) => (
               <Tag key={item.key} variant="neutral" className={`chart__legend-item${isMuted(item.key) ? ' chart__legend-item--muted' : ''}`}>
                 <span
                   className={`chart__legend-swatch${type === 'line' ? ' chart__legend-swatch--line' : ''}`}
-                  style={markStyle(item.index, item.color)}
+                  style={markStyle(item.index, item.color, colors)}
                   aria-hidden="true"
                 />
                 {item.label}
@@ -603,7 +880,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
           <thead>
             <tr>
               <th scope="col">{categoryLabel}</th>
-              {isRadial ? (
+              {isSlice ? (
                 <>
                   <th scope="col">{valueLabel}</th>
                   <th scope="col">{shareLabel}</th>
@@ -617,7 +894,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
             {rows.map((row, i) => (
               <tr key={`row-${i}`}>
                 <th scope="row">{fmtX(xValue(row, xKey))}</th>
-                {isRadial ? (
+                {isSlice ? (
                   <>
                     <td>{fmtValue(toNumber(row[sliceKey]))}</td>
                     <td>{percentFormat.format(slices[i]?.share ?? 0)}</td>

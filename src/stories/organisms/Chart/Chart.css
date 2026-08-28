@@ -43,6 +43,7 @@
 .chart__grid-line {
   stroke: var(--chart-grid-color);
   stroke-width: var(--chart-grid-width);
+  fill: none;
 }
 
 .chart__axis {
@@ -103,9 +104,53 @@
 }
 
 .chart__bar,
-.chart__slice {
+.chart__slice,
+.chart__funnel-step,
+.chart__tile,
+.chart__radial-bar {
   fill: var(--chart-mark-color);
   transition: fill-opacity var(--chart-transition-duration) var(--chart-transition-easing);
+}
+
+/* El hueco entre tramos y baldosas lo hace el trazo del color de la superficie,
+   igual que entre porciones. */
+.chart__funnel-step,
+.chart__tile,
+.chart__radial-bar {
+  stroke: var(--chart-surface);
+  stroke-width: var(--chart-mark-gap);
+}
+
+/* Carril del anillo sin recorrer: dice hasta dónde llegaría el máximo. */
+.chart__radial-track {
+  fill: var(--chart-radial-track-color);
+  stroke: none;
+}
+
+/* El punto de la nube es la marca, no un remate: lleva el mismo anillo de
+   superficie que el marcador de línea para no fundirse con sus vecinos. */
+.chart__point {
+  fill: var(--chart-mark-color);
+  stroke: var(--chart-surface);
+  stroke-width: var(--chart-marker-ring-width);
+  transition: fill-opacity var(--chart-transition-duration) var(--chart-transition-easing);
+}
+
+/* El polígono del radar es un velo con su contorno, como el área. */
+.chart__radar-shape {
+  fill: var(--chart-mark-color);
+  fill-opacity: var(--chart-radar-fill-opacity);
+  stroke: var(--chart-mark-color);
+  stroke-width: var(--chart-line-width);
+  stroke-linejoin: round;
+}
+
+/* El rótulo de una baldosa va sobre el relleno de la serie, no sobre la
+   superficie: por eso no usa la tinta de los ejes. */
+.chart__tile-label {
+  fill: var(--chart-tile-label-color);
+  font-family: var(--chart-label-font-family);
+  font-size: var(--chart-label-font-size);
 }
 
 /* El hueco entre porciones lo hace el trazo del color de la superficie. */
@@ -118,13 +163,22 @@
 .chart__area--muted,
 .chart__marker--muted,
 .chart__bar--muted,
-.chart__slice--muted {
+.chart__slice--muted,
+.chart__funnel-step--muted,
+.chart__tile--muted,
+.chart__radial-bar--muted,
+.chart__point--muted,
+.chart__radar-shape--muted {
   --chart-mark-color: var(--chart-muted-color);
 }
 
 /* Mientras el puntero está sobre una marca, las demás ceden. */
 .chart__marks:has([data-active]) .chart__bar:not([data-active]),
-.chart__marks:has([data-active]) .chart__slice:not([data-active]) {
+.chart__marks:has([data-active]) .chart__slice:not([data-active]),
+.chart__marks:has([data-active]) .chart__funnel-step:not([data-active]),
+.chart__marks:has([data-active]) .chart__tile:not([data-active]),
+.chart__marks:has([data-active]) .chart__radial-bar:not([data-active]),
+.chart__marks:has([data-active]) .chart__point:not([data-active]) {
   fill-opacity: var(--chart-hover-opacity);
 }
 

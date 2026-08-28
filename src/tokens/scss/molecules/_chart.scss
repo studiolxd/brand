@@ -42,6 +42,13 @@ $lxd-chart-bar-thickness-max: 1.5rem; // 24px — la barra nunca llena su banda;
 $lxd-chart-bar-radius: 0.25rem; // 4px — extremo de dato redondeado; el extremo de la línea base queda recto
 $lxd-chart-area-fill-opacity: 0.1; // El área es un velo del tono de la serie, nunca un bloque saturado
 $lxd-chart-donut-thickness: 0.55; // Fracción del radio que ocupa el anillo del donut
+$lxd-chart-funnel-gap: 0.25rem; // 4px — hueco de superficie entre tramos del embudo
+$lxd-chart-treemap-gap: 2px; // 2px — hueco entre baldosas del treemap
+$lxd-chart-radial-bar-gap: 0.25rem; // 4px — hueco entre anillos de la barra radial
+$lxd-chart-radial-track-color: #f2f2f2; // Carril del anillo sin recorrer en la barra radial
+$lxd-chart-dot-size: 0.75rem; // 10px de diámetro nominal — punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate
+$lxd-chart-radar-fill-opacity: 0.15; // El polígono del radar es un velo del tono de la serie, como el área
+$lxd-chart-tile-label-color: #ffffff; // Rótulo sobre una baldosa del treemap: va encima del relleno de la serie, no de la superficie
 $lxd-chart-padding-block: 0.5rem; // Aire vertical del área de dibujo
 $lxd-chart-padding-inline: 0.5rem; // Aire horizontal del área de dibujo
 $lxd-chart-axis-gap: 0.5rem; // Separación entre el eje y sus rótulos

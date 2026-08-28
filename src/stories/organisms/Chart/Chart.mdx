@@ -7,7 +7,7 @@ import { chartTokens } from "../../../tokens/molecules/chart";
 
 # Chart
 
-El **gráfico de datos** del sistema: línea, área, barras —verticales u horizontales, agrupadas o apiladas—, tarta y donut. Dibuja SVG a pelo, sin librería de gráficos, para que todo el color y toda la tipografía salgan de tokens, el marcado sea BEM y el primer render valga en servidor.
+El **gráfico de datos** del sistema: línea, área, barras —verticales u horizontales, agrupadas o apiladas—, dispersión, tarta, donut, embudo, treemap, barra radial y radar. Dibuja SVG a pelo, sin librería de gráficos, para que todo el color y toda la tipografía salgan de tokens, el marcado sea BEM y el primer render valga en servidor.
 
 Las reglas del sistema —la paleta, los oficios del color, la forma que corresponde a cada dato, las marcas— están en **Foundations → Gráficos de datos**. Aquí va la API.
 
@@ -29,7 +29,19 @@ Las reglas del sistema —la paleta, los oficios del color, la forma que corresp
 
 El **orden de `series` asigna el color**: la primera toma `--chart-series-1`, la segunda `--chart-series-2`… Como la identidad sigue a la entidad, filtrar una serie no repinta a las que quedan. Pasada la octava, la serie se pinta con el gris de «Otros»: el sistema no genera un noveno tono.
 
-`color` en una serie acepta **solo una referencia a token** (`'var(--chart-series-5)'`, o una custom property del producto). Nunca un color literal.
+### Color por dato
+
+Lo normal es que el color lo ponga el sistema: `color` en una serie es una **referencia a token** (`'var(--chart-series-5)'`, o una custom property del producto), y la interfaz no tiene colores cableados.
+
+Hay un caso en que el color **es dato y no diseño**: el que eligió el autor de un contenido desde la paleta de su tema —el brick `chart` de Bricks—. Para eso está `colors`, una paleta por posición en colores literales:
+
+```tsx
+<Chart type="bar" colors={['#1E7FF6', '#F16123', '#27A0AF']} … />
+```
+
+`colors[i]` pinta la serie `i` —o, en los gráficos de porción, la categoría `i`—. La prioridad es: `series[i].color` › `colors[i]` › la ranura de token que toca por orden. Para la interfaz del sistema, las ranuras siguen siendo lo correcto: `colors` es para cuando el color viene del documento.
+
+<Canvas of={ChartStories.ColorPorDato} />
 
 ## Las formas
 
@@ -56,6 +68,34 @@ En **tarta** y **donut** el gráfico usa `xKey` como categoría y la **primera s
 <Canvas of={ChartStories.Tarta} />
 
 <Canvas of={ChartStories.Donut} />
+
+### Dispersión
+
+En **dispersión** los dos ejes son numéricos: `xKey` deja de ser una categoría y pasa a ser una magnitud, y cada fila es un punto. Es la forma de una **relación entre dos variables**, no de una evolución: por eso los puntos no se unen.
+
+<Canvas of={ChartStories.Dispersion} />
+
+### Formas de porción
+
+Cuatro formas más comparten el contrato de tarta y donut —`xKey` es la categoría, la **primera serie** es el valor, cada fila una porción— y su tabla equivalente, con columna de valor y de porcentaje.
+
+Un **embudo** cuenta una secuencia que se estrecha: los tramos van en el orden dado, no reordenados por valor, porque el orden *es* el recorrido.
+
+<Canvas of={ChartStories.Embudo} />
+
+Un **treemap** reparte el área: la superficie de cada baldosa es su parte del total. Sirve cuando hay más categorías de las que aguanta una tarta y las magnitudes son muy distintas entre sí. El reparto es *squarified*, para que las baldosas tiendan al cuadrado y se puedan comparar.
+
+<Canvas of={ChartStories.Treemap} />
+
+Una **barra radial** compara magnitudes en anillos concéntricos. Ojo: cada anillo se mide contra **el mayor**, no contra el total —no es un reparto—, y el carril gris dice hasta dónde llegaría el máximo.
+
+<Canvas of={ChartStories.BarraRadial} />
+
+### Radar
+
+El **radar** compara varias series sobre las mismas categorías, con un eje por categoría. Funciona con pocas series y pocos ejes: un antes y un después sobre cinco competencias se lee de un vistazo; ocho series sobre doce ejes, no.
+
+<Canvas of={ChartStories.Radar} />
 
 ## Énfasis: la forma más desaprovechada
 

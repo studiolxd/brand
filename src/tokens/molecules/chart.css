@@ -7,6 +7,7 @@
   --chart-bar-radius: 0.25rem; /** 4px — extremo de dato redondeado; el extremo de la línea base queda recto */
   --chart-area-fill-opacity: 0.1; /** El área es un velo del tono de la serie, nunca un bloque saturado */
   --chart-donut-thickness: 0.55; /** Fracción del radio que ocupa el anillo del donut */
+  --chart-radar-fill-opacity: 0.15; /** El polígono del radar es un velo del tono de la serie, como el área */
   --chart-height: 16rem; /** 256px — alto por defecto del área de dibujo. La banda del eje X va aparte: el contenedor crece con ella y nunca aparece un scroll anidado */
   --chart-hover-opacity: 0.75; /** Atenuación de las marcas que no son la activa mientras el puntero está encima */
   --chart-series-1: var(--color-chart-series-1); /** Ranura categórica 1. El orden de las ranuras es el mecanismo de seguridad para daltonismo: se asignan en orden, nunca se ciclan */
@@ -37,6 +38,10 @@
   --chart-label-font-weight: var(--font-weight-regular); /** Peso de los rótulos de eje */
   --chart-muted-color: var(--color-grey-dark); /** Serie apagada del patrón de énfasis (una serie en color, el resto en gris) y ranura «Otros» */
   --chart-marker-size: var(--spacing-2); /** 8px de diámetro — punto de serie y marcador de extremo */
+  --chart-funnel-gap: var(--spacing-1); /** 4px — hueco de superficie entre tramos del embudo */
+  --chart-radial-bar-gap: var(--spacing-1); /** 4px — hueco entre anillos de la barra radial */
+  --chart-radial-track-color: var(--color-grey-lightest); /** Carril del anillo sin recorrer en la barra radial */
+  --chart-dot-size: var(--spacing-3); /** 10px de diámetro nominal — punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate */
   --chart-padding-block: var(--spacing-2); /** Aire vertical del área de dibujo */
   --chart-padding-inline: var(--spacing-2); /** Aire horizontal del área de dibujo */
   --chart-axis-gap: var(--spacing-2); /** Separación entre el eje y sus rótulos */
@@ -58,6 +63,8 @@
   --chart-line-width: var(--border-width-focus); /** 2px — grosor de la línea de serie */
   --chart-marker-ring-width: var(--border-width-focus); /** 2px — anillo del color de la superficie alrededor del punto, para que siga legible al cruzarse con una línea */
   --chart-mark-gap: var(--border-width-focus); /** 2px — hueco de superficie entre marcas que se tocan: segmentos de una barra apilada y barras contiguas */
+  --chart-treemap-gap: var(--border-width-focus); /** 2px — hueco entre baldosas del treemap */
+  --chart-tile-label-color: var(--color-text-on-dark); /** Rótulo sobre una baldosa del treemap: va encima del relleno de la serie, no de la superficie */
   --chart-tooltip-padding-block: var(--tooltip-padding-block); /** Padding vertical del bocadillo */
   --chart-tooltip-padding-inline: var(--tooltip-padding-inline); /** Padding horizontal del bocadillo */
   --chart-tooltip-font-size: var(--tooltip-font-size); /** Tamaño de texto del bocadillo */
@@ -94,6 +101,7 @@ html.dark {
   --chart-diverging-cool-1: var(--color-chart-diverging-cool-1-on-dark); /** Divergente frío 1 — surface-dark */
   --chart-diverging-cool-2: var(--color-chart-diverging-cool-2-on-dark); /** Divergente frío 2 — surface-dark */
   --chart-diverging-cool-3: var(--color-chart-diverging-cool-3-on-dark); /** Divergente frío 3 — surface-dark */
+  --chart-radial-track-color: var(--color-surface-secondary-on-dark); /** Carril del anillo — surface-dark */
   --chart-surface: var(--color-background-dark); /** Hueco y anillo — surface-dark */
   --chart-label-color: var(--color-text-muted-on-dark); /** Rótulos — surface-dark */
   --chart-muted-color: var(--color-text-muted-on-dark); /** Serie apagada — surface-dark */

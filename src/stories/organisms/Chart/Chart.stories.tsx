@@ -47,6 +47,51 @@ const BRICKS: ChartDatum[] = [
 
 const SERIE_BRICKS: ChartSeries[] = [{ key: 'bricks', label: 'Bricks' }];
 
+/** Recorrido de una matriculación, del primer contacto a la finalización. */
+const EMBUDO: ChartDatum[] = [
+  { paso: 'Visitas', personas: 4200 },
+  { paso: 'Registros', personas: 1480 },
+  { paso: 'Matrículas', personas: 640 },
+  { paso: 'Empezaron', personas: 512 },
+  { paso: 'Finalizaron', personas: 318 },
+];
+
+const SERIE_EMBUDO: ChartSeries[] = [{ key: 'personas', label: 'Personas' }];
+
+/** Horas de dedicación por área en un trimestre. */
+const DEDICACION: ChartDatum[] = [
+  { area: 'Diseño instruccional', horas: 420 },
+  { area: 'Producción', horas: 310 },
+  { area: 'Desarrollo', horas: 260 },
+  { area: 'Gestión', horas: 150 },
+  { area: 'Soporte', horas: 90 },
+];
+
+const SERIE_DEDICACION: ChartSeries[] = [{ key: 'horas', label: 'Horas' }];
+
+/** Tiempo dedicado frente a nota obtenida, alumno a alumno. */
+const RENDIMIENTO: ChartDatum[] = [
+  { minutos: 25, nota: 4.1 }, { minutos: 40, nota: 5.2 }, { minutos: 55, nota: 5.8 },
+  { minutos: 70, nota: 6.9 }, { minutos: 85, nota: 6.4 }, { minutos: 100, nota: 7.8 },
+  { minutos: 115, nota: 8.1 }, { minutos: 130, nota: 7.5 }, { minutos: 150, nota: 9.2 },
+];
+
+const SERIE_RENDIMIENTO: ChartSeries[] = [{ key: 'nota', label: 'Nota' }];
+
+/** Competencias evaluadas al empezar y al terminar el itinerario. */
+const COMPETENCIAS: ChartDatum[] = [
+  { competencia: 'Análisis', antes: 3, despues: 7 },
+  { competencia: 'Diseño', antes: 4, despues: 8 },
+  { competencia: 'Producción', antes: 2, despues: 6 },
+  { competencia: 'Evaluación', antes: 3, despues: 7 },
+  { competencia: 'Accesibilidad', antes: 2, despues: 8 },
+];
+
+const SERIES_COMPETENCIAS: ChartSeries[] = [
+  { key: 'antes', label: 'Al empezar' },
+  { key: 'despues', label: 'Al terminar' },
+];
+
 const euros = (value: number) => `${value.toLocaleString('es-ES', { minimumFractionDigits: 1 })} €`;
 
 const meta = {
@@ -173,6 +218,91 @@ export const Donut: Story = {
   },
 };
 
+export const Embudo: Story = {
+  args: {
+    type: 'funnel',
+    data: EMBUDO,
+    series: SERIE_EMBUDO,
+    xKey: 'paso',
+    title: 'Del primer contacto a la finalización',
+    ariaLabel: 'Embudo de matriculación: visitas, registros, matrículas, empezaron y finalizaron',
+    formatValue: undefined,
+  },
+};
+
+export const Treemap: Story = {
+  args: {
+    type: 'treemap',
+    data: DEDICACION,
+    series: SERIE_DEDICACION,
+    xKey: 'area',
+    title: 'Dedicación por área',
+    caption: 'El área de cada baldosa es su parte del total.',
+    ariaLabel: 'Reparto de horas de dedicación por área, por superficie',
+    formatValue: undefined,
+  },
+};
+
+export const BarraRadial: Story = {
+  name: 'Barra radial',
+  args: {
+    type: 'radial-bar',
+    data: DEDICACION,
+    series: SERIE_DEDICACION,
+    xKey: 'area',
+    title: 'Dedicación por área',
+    caption: 'Cada anillo se compara con el mayor, no con el total.',
+    ariaLabel: 'Horas de dedicación por área, en anillos concéntricos',
+    formatValue: undefined,
+  },
+};
+
+export const Dispersion: Story = {
+  name: 'Dispersión',
+  args: {
+    type: 'scatter',
+    data: RENDIMIENTO,
+    series: SERIE_RENDIMIENTO,
+    xKey: 'minutos',
+    title: 'Tiempo dedicado y nota obtenida',
+    caption: 'Los dos ejes son numéricos: cada punto es un alumno.',
+    ariaLabel: 'Relación entre minutos dedicados y nota obtenida, alumno a alumno',
+    formatValue: undefined,
+  },
+};
+
+export const Radar: Story = {
+  args: {
+    type: 'radar',
+    data: COMPETENCIAS,
+    series: SERIES_COMPETENCIAS,
+    xKey: 'competencia',
+    title: 'Competencias antes y después',
+    ariaLabel: 'Competencias evaluadas al empezar y al terminar el itinerario',
+    formatValue: undefined,
+  },
+};
+
+/**
+ * Cuando el color **es dato** —el que eligió el autor de un contenido desde la
+ * paleta de su tema— se pasa en `colors`, en literales. La interfaz del sistema
+ * sigue usando las ranuras de token.
+ */
+export const ColorPorDato: Story = {
+  name: 'Color por dato',
+  args: {
+    type: 'bar',
+    data: DEDICACION,
+    series: SERIE_DEDICACION,
+    xKey: 'area',
+    colors: ['#1E7FF6', '#F16123', '#27A0AF', '#B29124', '#C62C90'],
+    title: 'Dedicación por área',
+    caption: 'La paleta la eligió quien escribió el contenido, no el sistema.',
+    ariaLabel: 'Horas de dedicación por área, con la paleta del contenido',
+    formatValue: undefined,
+  },
+};
+
 export const Enfasis: Story = {
   name: 'Énfasis',
   args: {
@@ -242,5 +372,44 @@ export const TestVacio: Story = {
     const canvas = within(canvasElement);
     expect(canvas.getByText('Sin datos que mostrar')).toBeInTheDocument();
     expect(canvas.queryByRole('img')).not.toBeInTheDocument();
+  },
+};
+
+export const TestFormasNuevas: Story = {
+  name: 'Test — las formas de porción comparten tabla equivalente',
+  tags: ['!dev'],
+  args: {
+    type: 'funnel',
+    data: EMBUDO,
+    series: SERIE_EMBUDO,
+    xKey: 'paso',
+    title: 'Embudo',
+    ariaLabel: 'Embudo de matriculación',
+    formatValue: undefined,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const tabla = canvas.getByRole('table', { name: 'Datos del gráfico' });
+    await expect(within(tabla).getByRole('columnheader', { name: 'Porcentaje' })).toBeInTheDocument();
+    await expect(within(tabla).getByRole('rowheader', { name: 'Visitas' })).toBeInTheDocument();
+  },
+};
+
+export const TestColorPorDato: Story = {
+  name: 'Test — la paleta de dato gana a la ranura de token',
+  tags: ['!dev'],
+  args: {
+    type: 'bar',
+    data: DEDICACION,
+    series: SERIE_DEDICACION,
+    xKey: 'area',
+    colors: ['#1E7FF6'],
+    title: 'Dedicación',
+    ariaLabel: 'Dedicación por área',
+    formatValue: undefined,
+  },
+  play: async ({ canvasElement }) => {
+    const barra = canvasElement.querySelector('.chart__bar');
+    await expect(barra).toHaveStyle({ '--chart-mark-color': '#1E7FF6' });
   },
 };
