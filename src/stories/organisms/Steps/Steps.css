@@ -73,3 +73,14 @@
 .steps .steps__description {
   margin: 0;
 }
+
+/* En la forma compuesta el cuerpo lo trae el consumidor (párrafos, listas,
+   bloques de código): el aire entre piezas lo pone la rejilla del cuerpo, así
+   que los márgenes de los extremos sobran. */
+.steps__body > :first-child {
+  margin-block-start: 0;
+}
+
+.steps__body > :last-child {
+  margin-block-end: 0;
+}

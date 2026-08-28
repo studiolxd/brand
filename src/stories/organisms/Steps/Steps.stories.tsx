@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { Steps } from './Steps';
+import { Steps, Step } from './Steps';
+import { Code } from '../../atoms/Code/Code';
+import { List } from '../../atoms/List/List';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 
 const metodologia = [
   { id: 'escuchar', title: 'Escuchamos', description: 'Entendemos el problema de formación antes de proponer nada: a quién, para qué y con qué medios.', icon: 'headset' as const },
@@ -40,6 +43,87 @@ export const SinIconos: Story = {
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },
+};
+
+/**
+ * Forma compuesta: un `Step` por paso, con el cuerpo que haga falta dentro
+ * (varios párrafos, una lista, un fragmento de código). Es la forma para MDX,
+ * donde un paso no cabe en una cadena. El número lo sigue poniendo la lista.
+ */
+export const Compuesto: Story = {
+  name: 'Compuesto por children',
+  args: { items: undefined },
+  render: () => (
+    <Steps>
+      <Step title="Instala el paquete" icon="briefcase">
+        <Paragraph>
+          El paquete se distribuye por git, así que se pinea a un tag concreto:
+        </Paragraph>
+        <Paragraph>
+          <Code>pnpm add github:studiolxd/brand#v25.14.0</Code>
+        </Paragraph>
+      </Step>
+      <Step title="Importa los estilos">
+        <Paragraph>Una sola vez, en el punto de entrada de la aplicación.</Paragraph>
+        <List>
+          <li><Code>@studiolxd/brand/tokens.css</Code> — solo los tokens.</li>
+          <li><Code>@studiolxd/brand/brand.css</Code> — tokens y componentes.</li>
+        </List>
+      </Step>
+      <Step title="Usa los componentes">
+        <Paragraph>Cada componente tiene su subruta, para que el bundle no cargue de más.</Paragraph>
+      </Step>
+    </Steps>
+  ),
+};
+
+/**
+ * Test: la forma compuesta pinta la misma lista ordenada, numera sola y deja
+ * pasar el cuerpo rico del consumidor.
+ */
+export const ContratoCompuesto: Story = {
+  name: 'Test — forma compuesta',
+  tags: ['!dev'],
+  args: { items: undefined },
+  render: () => (
+    <Steps label="Instalación">
+      <Step title="Instala el paquete" data-paso="uno">
+        <Paragraph>Primero.</Paragraph>
+        <List>
+          <li>Un detalle</li>
+        </List>
+      </Step>
+      <Step title="Importa los estilos">
+        <Paragraph>Después.</Paragraph>
+      </Step>
+    </Steps>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const lista = canvas.getByRole('list', { name: 'Instalación' });
+    await expect(lista.tagName).toBe('OL');
+
+    // Solo los hijos directos: la lista de dentro del primer paso también
+    // tiene `li`, y no son pasos.
+    const pasos = lista.querySelectorAll(':scope > li');
+    await expect(pasos).toHaveLength(2);
+    await expect(pasos[0]).toHaveClass('steps__item');
+    await expect(pasos[0]).toHaveAttribute('data-paso', 'uno');
+
+    // El número lo pone la lista, no el consumidor, y sigue siendo decorativo.
+    const marcadores = lista.querySelectorAll('.steps__marker');
+    await expect(marcadores[0].querySelector('.number-badge')).toHaveTextContent('1');
+    await expect(marcadores[1].querySelector('.number-badge')).toHaveTextContent('2');
+    await expect(marcadores[0]).toHaveAttribute('aria-hidden', 'true');
+
+    // El cuerpo rico entra tal cual: párrafo y lista dentro del mismo paso.
+    const cuerpo = pasos[0].querySelector('.steps__body')!;
+    await expect(cuerpo.querySelector('p')).toHaveTextContent('Primero.');
+    await expect(cuerpo.querySelector('ul')).not.toBeNull();
+
+    // Y el título sigue siendo un encabezado de verdad.
+    await expect(canvas.getByRole('heading', { level: 3, name: 'Instala el paquete' })).toBeInTheDocument();
+  },
 };
 
 export const Contrato: Story = {

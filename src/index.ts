@@ -263,8 +263,8 @@ export { Chart } from './stories/organisms/Chart/Chart';
 export type { ChartProps, ChartSeries, ChartDatum, ChartType, ChartValueLabels } from './stories/organisms/Chart/Chart';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export type { ProjectCardProps, ProjectCardTag } from './stories/molecules/ProjectCard/ProjectCard';
-export { Steps } from './stories/organisms/Steps/Steps';
-export type { StepsProps, StepItem } from './stories/organisms/Steps/Steps';
+export { Steps, Step } from './stories/organisms/Steps/Steps';
+export type { StepsProps, StepProps, StepItem } from './stories/organisms/Steps/Steps';
 export { ConversationThread } from './stories/organisms/ConversationThread/ConversationThread';
 export type { ConversationThreadProps, ConversationMessage } from './stories/organisms/ConversationThread/ConversationThread';
 

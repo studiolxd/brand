@@ -142,6 +142,7 @@ export const clientComponents = new Set([
   'button', 'checkbox', 'radio', 'switcher', 'menu-button', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',
+  'steps',
   'app-shell', 'error-boundary', 'not-found-page', 'error-page',
   'avatar',
   'card',

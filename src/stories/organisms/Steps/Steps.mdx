@@ -17,6 +17,31 @@ Un proceso numerado: los pasos de una metodología, de un alta, de una matrícul
 
 El título de cada paso es un `Heading` de verdad, con el nivel y la talla por separado: `titleLevel` dice de dónde cuelga el paso en el esquema del documento (por defecto `3`, colgando del `h2` de la sección), y `titleSize` cómo se ve (por defecto `4`, 20px).
 
+## Dos formas: datos o composición
+
+Con `items` el proceso es una lista de datos: título, descripción de una línea e icono. Es la forma
+de una página de marketing, donde los pasos son cortos y todos iguales.
+
+Con `children` cada paso es un `Step` y su cuerpo lo trae el consumidor: varios párrafos, una
+lista, un fragmento de código. Es la forma para MDX, donde un paso no cabe en una cadena. `children`
+manda sobre `items`.
+
+```tsx
+<Steps>
+  <Step title="Instala el paquete">
+    <Paragraph>…</Paragraph>
+    <Paragraph><Code>pnpm add …</Code></Paragraph>
+  </Step>
+  <Step title="Importa los estilos">…</Step>
+</Steps>
+```
+
+<Canvas of={StepsStories.Compuesto} />
+
+El número lo sigue poniendo la lista en las dos formas: el consumidor nunca lo escribe. `Step` solo
+funciona dentro de `Steps` —de ahí saca su número y la cara de la lista— y avisa con un error si se
+usa suelto.
+
 ## Vertical y horizontal
 
 En vertical, el número va a la izquierda y la línea baja hasta el siguiente. En horizontal, el número va encima del texto y la línea cruza entre columnas; las columnas se reparten con `auto-fit` a partir de `--steps-column-min-size`, así que en una pantalla estrecha los pasos se apilan solos.
