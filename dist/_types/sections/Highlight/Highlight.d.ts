@@ -19,7 +19,7 @@ export interface HighlightProps {
     titleLevel?: HeadingLevel;
     /** Talla del titular. Por defecto `8` (40px), un peldaño por debajo del `Hero`. */
     titleSize?: HeadingSize;
-    /** Ancho del contenido, como en el resto de bandas. */
+    /** Ancho del contenido; la banda siempre llega de lado a lado. Como en el resto de secciones. */
     width?: ContainerWidth;
     className?: string;
     id?: string;
@@ -30,8 +30,13 @@ export interface HighlightProps {
  * que corta una portada en dos y dice «esto es lo importante».
  *
  * Va sobre superficie oscura por defecto y no pinta ningún color propio: el
- * lienzo lo pone el `Container`, y con `surface="light"` la banda entera
- * voltea. El reparto en dos columnas es el `Columns` del sistema, así que en
- * móvil se apila sin punto de ruptura escrito aquí.
+ * lienzo es el del sistema (`.surface-dark`), y con `surface="light"` la banda
+ * entera voltea. El reparto en dos columnas es el `Columns` del sistema, así
+ * que en móvil se apila sin punto de ruptura escrito aquí.
+ *
+ * Se monta **a sangre**, sin envoltorio: trae su propio aire vertical
+ * (`--highlight-space-block-start/-end`, un peldaño menor en móvil) y su
+ * `Container` interior para el aire lateral, así que se ve igual en cualquier
+ * página.
  */
 export declare function Highlight({ title, description, actions, media, mediaPosition, surface, titleLevel, titleSize, width, className, id, }: HighlightProps): import("react/jsx-runtime").JSX.Element;

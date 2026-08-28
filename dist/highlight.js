@@ -27,24 +27,27 @@ function c({ title: c, description: l, actions: u, media: d, mediaPosition: f = 
 			})
 		]
 	});
-	return /* @__PURE__ */ o(e, {
-		as: "section",
+	return /* @__PURE__ */ o("section", {
 		id: v,
-		width: g,
-		space: "2xl",
-		surface: p === "dark" ? "dark" : void 0,
-		className: ["highlight", _].filter(Boolean).join(" "),
-		children: d ? /* @__PURE__ */ o(t, {
-			align: "center",
-			gap: "lg",
-			children: f === "start" ? /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o("div", {
-				className: "highlight__media",
-				children: d
-			}), y] }) : /* @__PURE__ */ s(a, { children: [y, /* @__PURE__ */ o("div", {
-				className: "highlight__media",
-				children: d
-			})] })
-		}) : y
+		className: [
+			"highlight",
+			p === "dark" && "surface-dark",
+			_
+		].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ o(e, {
+			width: g,
+			children: d ? /* @__PURE__ */ o(t, {
+				align: "center",
+				gap: "lg",
+				children: f === "start" ? /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o("div", {
+					className: "highlight__media",
+					children: d
+				}), y] }) : /* @__PURE__ */ s(a, { children: [y, /* @__PURE__ */ o("div", {
+					className: "highlight__media",
+					children: d
+				})] })
+			}) : y
+		})
 	});
 }
 //#endregion

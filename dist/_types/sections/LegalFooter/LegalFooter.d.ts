@@ -27,7 +27,9 @@ export interface LegalFooterProps {
 }
 /**
  * El pie legal: los enlaces a aviso legal, privacidad, cookies y condiciones,
- * y nada más. Contenido acotado por `Container`, fondo a sangre. Es el pie de
- * las aplicaciones de la suite; la web tiene su pie propio con más cosas.
+ * y nada más. Se monta a sangre, con su propio aire vertical
+ * (`--legal-footer-padding-block`) y el contenido acotado por su `Container`
+ * interior. Es el pie de las aplicaciones de la suite; la web tiene su pie
+ * propio con más cosas.
  */
 export declare function LegalFooter({ label, title, links, renderLink, width, surface, className, }: LegalFooterProps): import("react/jsx-runtime").JSX.Element;

@@ -7,6 +7,66 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.23.0
+
+Las secciones de página poseen su propio ritmo vertical: se montan **a sangre**, con su aire
+arriba y abajo por tokens propios y un `Container` interior para el aire lateral. La misma
+sección se ve igual en cualquier web, sin depender del envoltorio en el que se cuelgue.
+
+### Añadido
+
+- **Tokens de aire vertical por sección**: `hero.space-block-start` / `-end`,
+  `highlight.space-block-start` / `-end` y `site-footer.space-block-start` / `-end`
+  (`section.padding-block.2xl`, 64px), con su peldaño de móvil `-compact`
+  (`section.padding-block.xl`, 48px, por debajo de `md`). Salen de la escala de espaciado del
+  sistema, así que el ritmo de una sección se cambia por token, sin tocar CSS.
+- **`Hero` acepta `width`** (`ContainerWidth`, por defecto `xl`): el ancho de su `Container`
+  interior, el mismo de la barra del `SiteHeader`.
+- **Stories nuevas**: `Sections/Hero → A sangre` (la misma portada suelta y dentro de una banda
+  a sangre, con la misma geometría), `Sections/SiteShell → Portada de referencia` (cabecera,
+  portada, dos bandas y pie apilados sin envoltorio) y `Atoms/Container → Sección a sangre`.
+  Con sus story-tests: la geometría del `Hero` no depende del envoltorio, las secciones apiladas
+  caen en la misma columna y anidar un `Container` dentro de una sección a sangre no duplica el
+  aire lateral.
+- **Foundations → `Container`** escribe la regla de maqueta: las secciones traen su aire, la
+  página solo las apila y `Container space` es para contenido de artículo.
+
+### Cambiado
+
+- **Las secciones ya no son un `Container`: lo llevan dentro** (**cambio visual en las
+  portadas**). `Hero`, `Highlight`, `SiteFooter`, `LegalFooter` y `SiteHeader` renderizaban un
+  `Container` como raíz y tomaban su aire vertical de la prop `space`; ahora la raíz es el
+  elemento semántico (`section`, `footer`, `header`) a sangre, con su `padding-block` por
+  tokens propios, y el `Container` —con su ancho y su aire lateral— va dentro. El aire vertical
+  en escritorio es el mismo de antes; en móvil baja un peldaño.
+- **Receta de migración** para las portadas: **quitar el `Container` envolvente**. Donde hoy hay
+
+  ```tsx
+  <Container space="xl">
+    <Hero … />
+  </Container>
+  ```
+
+  va la sección suelta, colgada del `main`:
+
+  ```tsx
+  <main id="main-content">
+    <Hero … />
+    <Highlight … />
+  </main>
+  ```
+
+  Envolverlas suma el aire de la banda al de la sección y las deja más altas que las de otra
+  web. Un `Container width="full" flush space="none"` alrededor no cambia nada (es el caso de
+  studiolxd.com), pero sobra. Para el contenido de artículo —una página legal, un formulario,
+  prosa del producto— `Container space` sigue siendo lo correcto.
+- **El fondo oscuro de `Highlight`, `SiteFooter` y `LegalFooter`** lo pinta ahora la clase de
+  lienzo del sistema (`.surface-dark`) sobre la propia sección, en vez de `Container
+  surface="dark"`. Mismo par fondo/color; quien seleccionara `.site-footer.container` en CSS
+  propio debe apuntar a `.site-footer`.
+- **`LegalFooter`** pasa su `--legal-footer-padding-block` del interior a la raíz de la sección:
+  mismo aire, ahora a sangre. El token no cambia de nombre.
+
 ## v25.22.0
 
 El resaltado de las listas de opciones desplegables vuelve a la inversión de marca que tenía

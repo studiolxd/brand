@@ -29,47 +29,48 @@ function l({ logoHref: l = "/", logoLabel: u = "Studio LXD — ir al inicio", me
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.removeEventListener("pointerdown", t), document.body.style.overflow = n;
 		};
-	}, [O]), /* @__PURE__ */ s(e, {
+	}, [O]), /* @__PURE__ */ o("header", {
 		ref: A,
-		as: "header",
-		width: _,
 		className: "site-header",
-		innerClassName: "site-header__bar",
-		children: [
-			g({
-				href: l,
-				className: "site-header__logo",
-				"aria-label": u,
-				children: m
-			}),
-			/* @__PURE__ */ s("div", {
-				className: "site-header__controls",
-				children: [C, k && /* @__PURE__ */ o(t, {
-					ref: j,
-					isOpen: O,
-					onClick: () => M(!O),
-					label: d,
-					closeLabel: f,
-					size: h,
-					"aria-controls": S
-				})]
-			}),
-			k && /* @__PURE__ */ o("div", {
-				className: ["site-header__panel", O ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
-				id: S,
-				inert: !O,
-				"aria-hidden": !O,
-				children: /* @__PURE__ */ s(e, {
-					width: _,
-					space: "none",
-					innerClassName: "site-header__panel-inner",
-					children: [b, (w || x) && /* @__PURE__ */ s("div", {
-						className: "site-header__settings",
-						children: [w, x]
+		children: /* @__PURE__ */ s(e, {
+			width: _,
+			innerClassName: "site-header__bar",
+			children: [
+				g({
+					href: l,
+					className: "site-header__logo",
+					"aria-label": u,
+					children: m
+				}),
+				/* @__PURE__ */ s("div", {
+					className: "site-header__controls",
+					children: [C, k && /* @__PURE__ */ o(t, {
+						ref: j,
+						isOpen: O,
+						onClick: () => M(!O),
+						label: d,
+						closeLabel: f,
+						size: h,
+						"aria-controls": S
 					})]
+				}),
+				k && /* @__PURE__ */ o("div", {
+					className: ["site-header__panel", O ? "site-header__panel--open" : ""].filter(Boolean).join(" "),
+					id: S,
+					inert: !O,
+					"aria-hidden": !O,
+					children: /* @__PURE__ */ s(e, {
+						width: _,
+						space: "none",
+						innerClassName: "site-header__panel-inner",
+						children: [b, (w || x) && /* @__PURE__ */ s("div", {
+							className: "site-header__settings",
+							children: [w, x]
+						})]
+					})
 				})
-			})
-		]
+			]
+		})
 	});
 }
 //#endregion

@@ -47,7 +47,9 @@ export interface SiteHeaderProps {
 }
 /**
  * Cabecera de las páginas públicas: logotipo, controles del producto y botón
- * de menú, con el contenido acotado por `Container` y el fondo a sangre. El
+ * de menú: la barra se monta a sangre —el fondo llega de lado a lado y el
+ * alto es suyo (`--site-header-height`, más compacto en móvil)— con el
+ * contenido acotado por su `Container` interior. El
  * menú es siempre un panel a pantalla completa bajo la barra —no hay
  * navegación en línea— con el índice del sitio y, al final, sus ajustes.
  * El enlace de salto al contenido no va aquí: lo pone `AppRoot`, una vez por

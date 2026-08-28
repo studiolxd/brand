@@ -53,8 +53,10 @@ export interface SiteFooterProps {
 /**
  * El pie de una página pública: la marca con su frase, las columnas de
  * enlaces, un bloque libre para el contacto o la newsletter y, debajo, el pie
- * legal. Fondo a sangre y contenido acotado, como el resto de bandas
- * (`Container`).
+ * legal. Fondo a sangre y contenido acotado por su `Container` interior, como
+ * el resto de secciones, con su propio aire vertical
+ * (`--site-footer-space-block-start/-end`, un peldaño menor en móvil): no se
+ * envuelve en nada.
  *
  * Va sobre superficie oscura por defecto —es el cierre de la página— y no
  * pinta ningún color por su cuenta: el lienzo lo pone la superficie, así que

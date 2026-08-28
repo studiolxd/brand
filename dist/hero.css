@@ -1,1 +1,1 @@
-.hero__title,.hero__description{max-inline-size:var(--content-measure)}.hero .hero__description{margin:0}.hero__actions{margin-block-start:var(--hero-actions-space-before)}
+.hero{padding-block:var(--hero-space-block-start) var(--hero-space-block-end)}@media (width<=767.98px){.hero{--hero-space-block-start:var(--hero-space-block-start-compact);--hero-space-block-end:var(--hero-space-block-end-compact)}}.hero__title,.hero__description{max-inline-size:var(--content-measure)}.hero .hero__description{margin:0}.hero__actions{margin-block-start:var(--hero-actions-space-before)}
