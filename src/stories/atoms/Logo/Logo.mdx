@@ -7,7 +7,7 @@ import { logoTokens } from "../../../tokens/components/logo";
 
 # Logo
 
-El logotipo de Studio LXD como SVG en línea. Su alto es **una talla de componente** —32, 40 o 48px— y el ancho sale de la proporción del trazado: en una barra de 40px mide 40px sin que nadie lo ajuste, y queda alineado con los controles que tenga al lado.
+El logotipo de Studio LXD como SVG en línea. Su alto sale siempre de un token —las tres tallas de componente (32, 40 y 48px) y dos tallas de marca por encima— y el ancho lo pone la proporción del trazado: en una barra de 40px mide 40px sin que nadie lo ajuste, y queda alineado con los controles que tenga al lado.
 
 <Canvas of={LogoStories.PorDefecto} />
 
@@ -17,7 +17,9 @@ El logotipo de Studio LXD como SVG en línea. Su alto es **una talla de componen
 
 ## Tallas
 
-`sm` para barras compactas (la barra lateral), `md` para cabeceras y formularios de acceso, `lg` para el pie de página. No hay más tamaños: si el logo tiene que ser mayor, es una pieza de marca, no un componente.
+`sm` para barras compactas (la barra lateral), `md` para cabeceras y formularios de acceso, `lg` para el pie de página. Por encima empieza la marca: `xl` (64px, la talla ilustrativa de la escala de iconos) y `xxl` (85px), la de la cabecera del sitio.
+
+La escala se cierra ahí. `xxl` no es un valor suelto: es la talla `xl` con el mismo salto que lleva de `lg` a `xl` (4/3), así que el peldaño de marca es regular. Si hace falta un logotipo mayor que `xxl`, ya no es un componente sino una pieza gráfica de la página.
 
 <Canvas of={LogoStories.Tallas} />
 

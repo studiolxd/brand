@@ -10,7 +10,7 @@ const meta: Meta<typeof Logo> = {
   argTypes: {
     size: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg', 'xl'],
+      options: ['sm', 'md', 'lg', 'xl', 'xxl'],
       description: 'Alto del logotipo: una talla de componente.',
     },
     className: { table: { disable: true } },
@@ -23,13 +23,15 @@ type Story = StoryObj<typeof Logo>;
 /** Talla `md`, la de una cabecera. */
 export const PorDefecto: Story = {};
 
-/** Las tres tallas, alineadas por la base. */
+/** Las cinco tallas, alineadas por la base. */
 export const Tallas: Story = {
   render: () => (
-    <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'var(--spacing-6)' }}>
+    <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'var(--spacing-6)', flexWrap: 'wrap' }}>
       <Logo size="sm" />
       <Logo size="md" />
       <Logo size="lg" />
+      <Logo size="xl" />
+      <Logo size="xxl" />
     </div>
   ),
 };

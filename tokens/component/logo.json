@@ -4,6 +4,7 @@
     "height-md": { "$value": "{size-component.md}", "$type": "dimension", "$description": "Alto por defecto: cabeceras y formularios de acceso" },
     "height-lg": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Alto destacado: pie de página" },
     "height-xl": { "$value": "{icon.size-xl}", "$type": "dimension", "$description": "Alto de marca: la cabecera del sitio. Es la talla ilustrativa de la escala de iconos (64px), no una talla de control" },
+    "height-xxl": { "$value": "calc({logo.height-xl} * 4 / 3)", "$type": "dimension", "$description": "Alto de marca mayor: la cabecera del sitio por defecto. Sigue la progresión de la escala —el mismo salto que hay de lg a xl (4/3)— sobre la talla xl: 85,33px" },
     "color":     { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color del trazado sobre superficie clara" },
     "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del trazado — surface-dark" }
   }

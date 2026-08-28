@@ -7,6 +7,7 @@
   --logo-height-md: var(--size-component-md); /** Alto por defecto: cabeceras y formularios de acceso */
   --logo-height-lg: var(--size-component-lg); /** Alto destacado: pie de página */
   --logo-height-xl: var(--icon-size-xl); /** Alto de marca: la cabecera del sitio. Es la talla ilustrativa de la escala de iconos (64px), no una talla de control */
+  --logo-height-xxl: calc(var(--logo-height-xl) * 4 / 3); /** Alto de marca mayor: la cabecera del sitio por defecto. Sigue la progresión de la escala —el mismo salto que hay de lg a xl (4/3)— sobre la talla xl: 85,33px */
   --logo-color: var(--color-text-on-light); /** Color del trazado sobre superficie clara */
 }
 

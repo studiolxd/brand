@@ -10,3 +10,4 @@
 .logo.logo--md { block-size: var(--logo-height-md); }
 .logo.logo--lg { block-size: var(--logo-height-lg); }
 .logo.logo--xl { block-size: var(--logo-height-xl); }
+.logo.logo--xxl { block-size: var(--logo-height-xxl); }
