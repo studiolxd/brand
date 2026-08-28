@@ -88,7 +88,7 @@ No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es 
 
 Los roles que consumen los componentes para lo básico: qué color tiene el texto y el lienzo en cada superficie. Incluye también los dos roles de **superficie** que dan nombre a `grey-lightest` y `grey-darkest` cuando se usan como fondo (no como estado):
 
-- **Superficie secundaria** (`surface.secondary-on-light|dark`) — una superficie clara secundaria dentro de la página: bloque de código, keycap, carril de progreso, pie de tabla. En superficie oscura pasa al gris oscuro (`grey-darkest`). Es también el relleno del resaltado en las listas de opciones desplegables, la única excepción de estado que se rellena fuera de `Button` (más abajo); el resto de los estados (hover, activo, deshabilitado) sigue sin fondo.
+- **Superficie secundaria** (`surface.secondary-on-light|dark`) — una superficie clara secundaria dentro de la página: bloque de código, keycap, carril de progreso, pie de tabla. En superficie oscura pasa al gris oscuro (`grey-darkest`). No marca estados: el resaltado de las listas de opciones desplegables —la única excepción de estado que se rellena fuera de `Button` (más abajo)— se pinta con la inversión de marca, no con este gris.
 - **Superficie invertida** (`surface.inverse-on-light|dark`) — un relleno que invierte la tinta ambiente: el neutral oscuro de `Tag` variante `neutral`.
 
 <ColorPalette>
@@ -141,7 +141,9 @@ Ningún otro componente puede invocar esta excepción. Si algo que no es un `But
 
 La pregunta que separa los dos casos: *si el usuario cierra los ojos y los abre, ¿esto sigue pintado?* Si la respuesta depende de dónde tenga el ratón, es un estado.
 
-**3. Las listas de opciones desplegables se rellenan.** En un menú, un select o una paleta, la opción bajo el puntero o resaltada por el teclado (`[data-highlighted]`) **sí** pinta un fondo suave: la superficie secundaria del sistema (`surface.secondary-on-light`, y su par `-on-dark` por la regla de derivación), declarada por componente como `*-highlighted-bg`. Sin línea de hover: el relleno la sustituye, no la acompaña.
+**3. Las listas de opciones desplegables se rellenan.** En un menú, un select o una paleta, la opción bajo el puntero o resaltada por el teclado (`[data-highlighted]`) **sí** pinta un fondo, y ese fondo es **la inversión de marca**: sobre superficie clara, prusia (`color.primary`) con la tinta clara encima (`text.on-dark`); sobre superficie oscura, al revés —blanco con tinta prusia— por la regla de derivación. Se declara por componente como la pareja `*-highlighted-bg` / `*-highlighted-color`, y el texto invierte con el relleno: iconos, glifos y atajos dentro del ítem lo siguen por `currentColor`, sin tokens propios. Sin línea de hover: el relleno la sustituye, no la acompaña.
+
+El **ítem destructivo** resaltado no invierte a marca sino a su propio rojo sólido: `destructive-fill` con `destructive-fill-text`, igual en las dos superficies (los `*-fill` son universales).
 
 El porqué son dos razones que solo se juntan aquí:
 
@@ -156,7 +158,7 @@ El valor ya elegido no cambia: sigue marcándose con su peso o su marca (la exce
 
 ### Lo que ya no vale
 
-El gris claro (`grey-lightest`) **no es el fondo de hover ni de activo**. Es una superficie clara secundaria —bloque de código, keycap, carril de progreso, pie de tabla— con su propio rol (`surface.secondary-on-light|dark`), y es ese rol, nunca el gris cableado, el que rellena el resaltado de las listas de opciones desplegables. Fuera de esa excepción no marca estados.
+El gris claro (`grey-lightest`) **no es el fondo de hover ni de activo**. Es una superficie clara secundaria —bloque de código, keycap, carril de progreso, pie de tabla— con su propio rol (`surface.secondary-on-light|dark`), y no marca ningún estado: tampoco el resaltado de las listas de opciones desplegables, que se rellena con la inversión de marca.
 
 Se queda como fondo de un **control deshabilitado** (`input`, `textarea`, `button`): un control apagado no está reaccionando a nada, es una superficie muerta, y ahí el gris dice justo eso. Los ítems, filas y celdas que no son controles usan la opacidad (`--opacity-disabled`).
 
