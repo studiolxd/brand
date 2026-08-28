@@ -148,6 +148,7 @@ const filters = {
   slider:               (t) => t.path[0] === 'slider',
   'tree-view':          (t) => t.path[0] === 'tree-view',
   'annotation-thread':  (t) => t.path[0] === 'annotation-thread',
+  'text-inline':        (t) => t.path[0] === 'text-inline',
 };
 
 function cssFile(destination, filterKey) {
@@ -309,6 +310,7 @@ const sd = new StyleDictionary({
         cssFile('components/slider.css',            'slider'),
         cssFile('molecules/tree-view.css',          'tree-view'),
         cssFile('molecules/annotation-thread.css',  'annotation-thread'),
+        cssFile('components/text-inline.css',       'text-inline'),
       ],
     },
     scss: {
@@ -455,6 +457,7 @@ const sd = new StyleDictionary({
         scssFile('components/_slider.scss',          'slider'),
         scssFile('molecules/_tree-view.scss',        'tree-view'),
         scssFile('molecules/_annotation-thread.scss','annotation-thread'),
+        scssFile('components/_text-inline.scss',     'text-inline'),
       ],
     },
   },

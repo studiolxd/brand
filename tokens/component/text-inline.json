@@ -1,0 +1,11 @@
+{
+  "text-inline": {
+    "emphasis-font-weight":  { "$value": "{font-weight.emphasis}",       "$type": "number", "$description": "Peso del énfasis fuerte en línea" },
+    "muted-color":           { "$value": "{color.text.muted-on-light}",  "$type": "color",  "$description": "Texto secundario en línea: una aclaración, un metadato" },
+    "destructive-color":     { "$value": "{color.destructive-text-on-light}", "$type": "color", "$description": "Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno" },
+    "success-color":         { "$value": "{color.success-text-on-light}", "$type": "color",  "$description": "Énfasis en línea con intención de logro" },
+    "surface-dark-muted-color":       { "$value": "{color.text.muted-on-dark}",       "$type": "color", "$description": "Texto secundario en línea — surface-dark" },
+    "surface-dark-destructive-color": { "$value": "{color.destructive-text-on-dark}", "$type": "color", "$description": "Énfasis destructivo — surface-dark" },
+    "surface-dark-success-color":     { "$value": "{color.success-text-on-dark}",     "$type": "color", "$description": "Énfasis de logro — surface-dark" }
+  }
+}

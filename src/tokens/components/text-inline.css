@@ -1,0 +1,18 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --text-inline-emphasis-font-weight: var(--font-weight-emphasis); /** Peso del énfasis fuerte en línea */
+  --text-inline-muted-color: var(--color-text-muted-on-light); /** Texto secundario en línea: una aclaración, un metadato */
+  --text-inline-destructive-color: var(--color-destructive-text-on-light); /** Énfasis en línea con intención destructiva: la palabra que dice que algo se pierde. Es tinta sobre la superficie, nunca un relleno */
+  --text-inline-success-color: var(--color-success-text-on-light); /** Énfasis en línea con intención de logro */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --text-inline-muted-color: var(--color-text-muted-on-dark); /** Texto secundario en línea — surface-dark */
+  --text-inline-destructive-color: var(--color-destructive-text-on-dark); /** Énfasis destructivo — surface-dark */
+  --text-inline-success-color: var(--color-success-text-on-dark); /** Énfasis de logro — surface-dark */
+}

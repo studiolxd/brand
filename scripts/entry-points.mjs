@@ -37,6 +37,7 @@ export const entryPoints = {
   'separator':           'src/stories/atoms/Separator/Separator.tsx',
   'time-select':         'src/stories/atoms/TimeSelect/TimeSelect.tsx',
   'tag':                 'src/stories/atoms/Tag/Tag.tsx',
+  'text':                'src/stories/atoms/Text/Text.tsx',
   'sparkline':           'src/stories/atoms/Sparkline/Sparkline.tsx',
   'star-rating':         'src/stories/atoms/StarRating/StarRating.tsx',
   'toggle':              'src/stories/atoms/Toggle/Toggle.tsx',

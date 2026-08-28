@@ -1,0 +1,84 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TextStories from "./Text.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { textInlineTokens, textInlineDarkTokens } from "../../../tokens/components/text-inline";
+
+<Meta of={TextStories} />
+
+# Text
+
+Texto **en línea**: un trozo de una frase que hay que marcar sin salirse de ella.
+
+<Canvas of={TextStories.PorDefecto} />
+
+Cubre dos usos, y ningún otro: decir en **qué idioma** está un fragmento y darle
+una **intención**. Para poner cosas en fila está `Inline`, que es maquetación;
+para un párrafo, `Paragraph`.
+
+## Otro idioma
+
+`lang` marca el idioma de **este fragmento** cuando no es el de la página: una
+cita, un término sin traducir, el segmento original de una traducción. No es
+decorativo: el lector de pantalla cambia de voz y el navegador aplica las reglas
+de corte de ese idioma.
+
+<Canvas of={TextStories.OtroIdioma} />
+
+Con un idioma de derecha a izquierda dentro de texto LTR hay que pasar también
+`dir="rtl"`: el idioma y la dirección son cosas distintas.
+
+## Intención
+
+`tone` da carga al fragmento: `destructive` es la palabra que dice que algo se
+pierde, `success` la que dice que salió bien, `muted` una aclaración secundaria.
+
+<Canvas of={TextStories.IntencionDestructiva} />
+
+El color sale de los tokens de feedback `*-text-on-light` / `*-text-on-dark`:
+**tinta sobre la superficie, nunca un relleno**. Una palabra resaltada dentro de
+un párrafo no lleva fondo — para eso está `Alert`, que es un bloque.
+
+Y el color no va solo: la intención destructiva se escribe además con
+`as="strong"` y con las palabras («se borran», no «se procesan»), porque el color
+no es información para quien no lo distingue.
+
+## Significado, no estilo
+
+`as` no elige una pinta: elige **qué significa** el fragmento.
+
+<Canvas of={TextStories.Significado} />
+
+| `as` | Qué dice |
+|---|---|
+| `span` | Nada. Solo agrupa para poder marcar idioma o intención. |
+| `em` | Énfasis de lectura: cambia cómo se dice la frase. |
+| `strong` | Importancia: esto es lo que no puede pasarse por alto. |
+
+## Superficie oscura
+
+Las tres tintas pasan a su par `*-on-dark` por token `surface-dark-*`.
+
+<Canvas of={TextStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={textInlineTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={textInlineDarkTokens} />
+
+## Accesibilidad
+
+- `lang` en el fragmento es lo que hace que un lector de pantalla lo pronuncie
+  con la voz de ese idioma en vez de deletrearlo con la de la página.
+- `em` y `strong` son elementos con significado: un lector puede anunciarlos.
+  Un `span` con color no dice nada a quien no ve el color.
+- Por eso la intención nunca viaja solo en el tono: va también en el elemento y
+  en las palabras.
+
+## Props
+
+<ArgTypes of={TextStories} />

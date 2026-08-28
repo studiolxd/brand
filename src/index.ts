@@ -143,6 +143,8 @@ export type { MessageBubbleProps } from './stories/atoms/MessageBubble/MessageBu
 export { TypingIndicator } from './stories/atoms/TypingIndicator/TypingIndicator';
 export type { TypingIndicatorProps } from './stories/atoms/TypingIndicator/TypingIndicator';
 export type { TabsProps, TabsListProps, TabsTriggerProps, TabsContentProps } from './stories/atoms/Tabs/Tabs';
+export { Text } from './stories/atoms/Text/Text';
+export type { TextProps } from './stories/atoms/Text/Text';
 export { Textarea } from './stories/atoms/Textarea/Textarea';
 export type { TextareaProps } from './stories/atoms/Textarea/Textarea';
 export { ErrorBoundary } from './stories/atoms/ErrorBoundary/ErrorBoundary';

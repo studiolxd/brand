@@ -1,0 +1,26 @@
+/* El texto en línea hereda todo del párrafo que lo contiene: solo cambia lo que
+   la intención pide. Un fragmento marcado no rompe el ritmo de la línea. */
+.text {
+  color: inherit;
+  font: inherit;
+}
+
+/* `em` y `strong` conservan su cursiva y su peso; el peso del énfasis fuerte es
+   el del sistema, no el del navegador. */
+strong.text {
+  font-weight: var(--text-inline-emphasis-font-weight);
+}
+
+.text.text--muted {
+  color: var(--text-inline-muted-color);
+}
+
+/* Tinta sobre la superficie, nunca un relleno: una palabra dentro de un párrafo
+   no lleva fondo. */
+.text.text--destructive {
+  color: var(--text-inline-destructive-color);
+}
+
+.text.text--success {
+  color: var(--text-inline-success-color);
+}

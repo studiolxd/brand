@@ -130,6 +130,7 @@
 @import "./components/slider.css";
 @import "./molecules/tree-view.css";
 @import "./molecules/annotation-thread.css";
+@import "./components/text-inline.css";
 @import "./molecules/prose.css";
 @import "./molecules/table-of-contents.css";
 @import "./molecules/docs-search.css";
