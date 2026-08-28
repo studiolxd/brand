@@ -7,6 +7,92 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.8.0
+
+Fase 0 de la revisión: las dos reglas transversales que faltaban —cómo se dicen
+los estados y cómo se deriva el modo oscuro— escritas en Foundations y
+aplicadas a todo el sistema.
+
+### Cambiado
+
+- **Los estados no pintan relleno** (Foundations → Colores, «Estados: nada se
+  rellena»). Ningún componente pinta un fondo para decir que está bajo el
+  puntero o activo: el foco lleva el anillo del sistema, el hover una línea de
+  tinta bajo el elemento —el grafismo del subrayado de `Link`— y el activo
+  persistente una barra de tinta en el borde de inicio con peso `emphasis`. Los
+  tres se apilan. Excepciones documentadas: `Button` (el relleno es el lenguaje
+  de sus variantes, y `ghost` conserva su tinta suave) y el valor elegido (día
+  del `Calendar`, pestaña activa de `Tabs` pill).
+
+  Retirados los `*-hover-bg` / `*-active-bg` / `*-highlighted-bg` y sus pares
+  oscuros, con los tokens de texto que los acompañaban, en **Menu, UserMenu,
+  OrgSwitcher, CommandPalette, Select, MultiSelect, AsyncSelect,
+  AsyncMultiSelect, InputPhone, SidebarNav, Table, Tabs, AppLauncher, Calendar,
+  CalendarPlanner, ConversationList, NumberInput y Pagination**; en su lugar,
+  tokens `*-focus-ring-*`, `*-hover-line-*` y `*-active-marker-*`. Cambio
+  visual en esos componentes, sin cambio de API.
+- **El modo oscuro se deriva del rol** (Foundations → Colores, «La regla de
+  derivación»): texto → el mismo rol `-on-dark`; superficie → ídem; borde,
+  separador, anillo y líneas de estado → `color.text.on-dark`; marca (relleno
+  prusia) → el par de `Button primary` (lavanda con tinta prusia), invertido a
+  blanco/prusia solo donde `accent-1` ya es otra variante del componente
+  (`Tag`, `NumberBadge`, `ProgressBar`); feedback → `*-text-on-dark`, con los
+  `*-fill` sin cambiar por universales; deshabilitado → opacidad, sin par. Un
+  relleno autocontenido no deriva y no lleva par.
+- El pill activo de `Tabs` pasa de invertirse a blanco a la lavanda de
+  `Button primary`: en Tabs `accent-1` no está ocupada, y la inversión era el
+  patrón de los componentes que sí la tienen ocupada.
+
+### Añadido
+
+- `SwitcherField` acepta `labelHidden` (mismo nombre y default que
+  `InputField`/`SelectField`): la etiqueta sigue nombrando al interruptor —queda
+  en el DOM dentro de un `VisuallyHidden`— pero no se pinta. Para las tablas de
+  preferencias, donde el nombre del ajuste ya está en su columna.
+- `FileUpload` y `FileUploadField` tienen las tres tallas del sistema, por
+  `useFormSize`. La zona de arrastre no es un control de una línea, así que no
+  toma la altura 32/40/48: lo que sigue a la talla es su aire (32/48/64), el
+  cuerpo de su texto y el icono. La miniatura de cada archivo sí toma la talla
+  exacta 32/40/48. Antes `size` solo movía la etiqueta del campo.
+- `AsyncSelect` y `AsyncMultiSelect` tienen tokens propios
+  (`tokens/component/async-select.json`, `async-multi-select.json`), con cada
+  token apuntando por defecto al del `Select`/`MultiSelect` — misma cara, ahora
+  declarada. Estrenan lo que solo tiene un buscador: la fila de carga
+  (`loading-*`), el mensaje de lista vacía (`empty-*`, con par oscuro) y el peso
+  de la opción ya elegida (antes `--font-weight-bold` crudo).
+- Pares oscuros nuevos, por la regla de derivación, con story «En superficie
+  oscura»: **FileUpload** (los 22 colores), **NumberInput** (botones +/−),
+  **NumberBadge** (`primary` y `neutral`), **Tooltip**, **TypingIndicator**,
+  **TimeSelect**, **Radio**, **EmptyState** (icono), **InputPhone** (separador
+  de país), **Sidebar** (asa), **CommandPalette** (pista), **MultiSelect**
+  (pills) y **ProgressBar** (relleno primary). Stories oscuras también en
+  Switcher, Checkbox, Avatar, Spinner y PasswordField, que ya heredaban pero no
+  lo enseñaban.
+- MDX nuevo en tres átomos que no lo tenían: `FileUpload`, `AsyncSelect` y
+  `AsyncMultiSelect`, con sus tablas de tokens.
+
+### Arreglado
+
+- **Un token que hereda de otro no heredaba su modo oscuro.** Un `var()` dentro
+  de una custom property se sustituye en el elemento que la declara, así que
+  `--sheet-title-color: var(--modal-title-color)`, declarado en `:root`, llegaba
+  al `Sheet` ya resuelto en claro. El build genera ahora
+  `src/tokens/surface-dark-derived.css`, que vuelve a declarar bajo los
+  selectores oscuros todo token que referencie a otro con par oscuro, por punto
+  fijo — el mismo mecanismo que `surface-public.css`. Recuperan su tema oscuro
+  **Sheet, Popover, Menu, UserMenu y OrgSwitcher** (paneles), **NumberInput**
+  (campo entero) y **CommandPalette**.
+- `sd.formats.mjs` reescribe las referencias a un `surface-dark-*` de otro
+  componente al nombre claro de esa variable: el par oscuro se publica con el
+  nombre del claro, así que `var(--menu-surface-dark-separator-color)` apuntaba
+  a una variable inexistente y la declaración quedaba inválida. Afectaba a
+  UserMenu, OrgSwitcher, CommandPalette, AppLauncher y `Button` variante `text`.
+- `OrgSwitcher` consumía `--context-menu-item-destructive-*`, variables
+  huérfanas desde que `context-menu.json` se eliminó; pasa a tokens propios.
+- `FileUpload`: fuera los números sueltos del borde discontinuo (16px/10px), el
+  `gap` de 2px entre nombre y peso, el `2.5rem` de la miniatura y el
+  `outline-offset`/`border-radius` de 2px del aspa.
+
 ## v25.7.0
 
 ### Añadido
@@ -74,6 +160,7 @@ para breaking changes.
   llega a declararse como custom property (el formato de modo oscuro remapea la
   propiedad original, no crea una `--*-surface-dark-*`). Ahora apuntan al rol
   directo `color.text.on-dark`.
+||||||| parent of 782d64d (chore: v25.7.0 — changelog y versión)
 
 ## v25.6.0
 
