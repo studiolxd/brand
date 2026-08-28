@@ -8,12 +8,13 @@ import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
 import { forwardRef as s } from "react";
 import { useRender as c } from "@base-ui-components/react/use-render";
 //#region src/stories/molecules/Card/Card.tsx
-var l = s(function({ href: r, render: s, title: l, description: u, ctaLabel: d, color: f = "outline", className: p, children: m, ...h }, g) {
-	let _ = [
+var l = s(function({ href: r, render: s, title: l, description: u, ctaLabel: d, color: f = "outline", variant: p = "default", media: m, className: h, children: g, ..._ }, v) {
+	let y = [
 		"card",
 		`card--${f}`,
-		p ?? ""
-	].filter(Boolean).join(" "), v = /* @__PURE__ */ o(i, { children: [
+		p === "default" ? "" : `card--${p}`,
+		h ?? ""
+	].filter(Boolean).join(" "), b = /* @__PURE__ */ o(i, { children: [
 		/* @__PURE__ */ a(n, {
 			level: 2,
 			size: 8,
@@ -22,27 +23,36 @@ var l = s(function({ href: r, render: s, title: l, description: u, ctaLabel: d, 
 		u && /* @__PURE__ */ a("p", { children: u }),
 		/* @__PURE__ */ a(e, { children: d }),
 		/* @__PURE__ */ a(t, { size: "lg" })
-	] });
+	] }), x = m && /* @__PURE__ */ a("div", {
+		className: "card__media",
+		children: /* @__PURE__ */ a("img", {
+			src: m.src,
+			alt: m.alt
+		})
+	}), S = p === "default" && !m ? b : /* @__PURE__ */ o(i, { children: [x, /* @__PURE__ */ a("div", {
+		className: "card__body",
+		children: b
+	})] });
 	return c({
 		render: s,
-		ref: g,
+		ref: v,
 		enabled: s !== void 0,
 		props: {
-			className: _,
-			...h,
-			children: v
+			className: y,
+			..._,
+			children: S
 		}
 	}) || (r === void 0 ? /* @__PURE__ */ a("div", {
-		ref: g,
-		className: _,
-		...h,
-		children: m
+		ref: v,
+		className: y,
+		..._,
+		children: g
 	}) : /* @__PURE__ */ a("a", {
-		ref: g,
+		ref: v,
 		href: r,
-		className: _,
-		...h,
-		children: v
+		className: y,
+		..._,
+		children: S
 	}));
 }), u = s(function({ className: e, ...t }, n) {
 	return /* @__PURE__ */ a("div", {

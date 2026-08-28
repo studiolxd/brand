@@ -2,6 +2,20 @@ import './Card.css';
 import { type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { type ParagraphProps } from '../../atoms/Paragraph/Paragraph';
 export type CardColor = 'primary' | 'outline' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
+/**
+ * Maqueta de la tarjeta. `default` es la de siempre: una columna de texto.
+ * `square` y `split` son las dos tarjetas de marketing —la cuadrada con la
+ * imagen arriba y la partida con el panel de color al lado de la foto—, que
+ * antes eran dos componentes aparte y ahora son una variante de la misma
+ * pieza: el contrato (enlace, título, descripción, CTA accesible, color) ya
+ * era idéntico; lo único que cambiaba era dónde va la imagen.
+ */
+export type CardVariant = 'default' | 'square' | 'split';
+export interface CardMedia {
+    src: string;
+    /** Texto alternativo. Vacío si la imagen no aporta nada al título. */
+    alt: string;
+}
 export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
     /**
      * URL de destino. **Con `href`** el Card es una *link-card*: todo el bloque es un
@@ -24,6 +38,14 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
     ctaLabel?: string;
     /** Color de fondo. Default: `'outline'`. */
     color?: CardColor;
+    /** Maqueta de la tarjeta. Default: `'default'`. */
+    variant?: CardVariant;
+    /**
+     * Imagen de la tarjeta: arriba en `square`, al lado del panel de color en
+     * `split`, y sobre el texto en `default`. Sin ella la tarjeta es solo texto,
+     * como hasta ahora.
+     */
+    media?: CardMedia;
 }
 /**
  * Card con dos modos:
