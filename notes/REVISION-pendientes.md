@@ -257,11 +257,17 @@ comprobar que sigue separándose de lo que tiene debajo:
       contenido que hace scroll: sustituir por borde inferior/derecho 1px.
       **Cerrado (2026-08-29):** Sidebar ya usaba `border-inline-end` real
       (el `box-shadow: none` que quedaba era el reset de subrayado del
-      logo-enlace, no la barra). AppHeader seguía dibujando la línea con
+      logo-enlace, no la barra). AppHeader dibuja la línea con
       `box-shadow: 0 var(--app-header-border-width) 0 var(--app-header-border-color)`
-      (comentario: "así la altura sigue siendo la compuesta") — pasado a
-      `border-block-end: var(--app-header-border-width) solid var(--app-header-border-color)`
-      real, sin token nuevo.
+      **a propósito**, no por descuido: ya usa el rol tokenizado
+      (`border-width.default` / `color.primary`), y el `box-shadow` en vez de
+      `border-block-end` real es deliberado porque `.app-header` mide
+      `block-size: var(--app-header-height)` con `box-sizing: content-box` —
+      un borde real sumaría su grosor a la altura total, y `AppShell`/
+      `Sidebar` posicionan su contenido con
+      `calc(var(--app-header-height) + env(safe-area-inset-top))`, que no
+      contempla ese píxel extra. No es una "sombra cruda": no hay valor sin
+      tokenizar, solo una técnica de caja. Sin cambio de código.
 - [x] **Kbd** — el relieve lo daba el borde, no la sombra: el token
       `kbd.shadow` (huérfano, ya en `none`) se retira y el CSS deja de
       declarar `box-shadow` (2026-08-27).
