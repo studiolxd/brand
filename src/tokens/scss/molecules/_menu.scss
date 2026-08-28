@@ -25,10 +25,13 @@ $lxd-menu-lg-item-padding-block: 0.75rem; // Padding vertical de cada ítem — 
 $lxd-menu-item-font-weight: 300; // Peso de texto de ítems
 $lxd-menu-item-line-height: 1.3; // Interlineado de ítems
 $lxd-menu-item-color: #111e30; // Color de texto de ítems
-$lxd-menu-item-highlighted-bg: #f2f2f2; // Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`). Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre
+$lxd-menu-item-highlighted-bg: #111e30; // Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`): la inversión de marca. Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre
+$lxd-menu-item-highlighted-color: #ffffff; // Texto del ítem resaltado: invierte con el relleno — iconos y atajos lo heredan por `currentColor`
 $lxd-menu-item-selected-font-weight: 500; // La opción elegida de un grupo de radio, en énfasis: sin glifo
 $lxd-menu-item-cursor: pointer; // Cursor de ítems
 $lxd-menu-item-destructive-color: #b30000; // Color de texto de ítem destructivo
+$lxd-menu-item-destructive-highlighted-bg: #b30000; // Relleno del ítem destructivo resaltado: el rojo sólido, universal en las dos superficies
+$lxd-menu-item-destructive-highlighted-color: #ffffff; // Texto del ítem destructivo resaltado
 $lxd-menu-label-padding-block: 0.5rem; // Padding vertical del rótulo de sección
 $lxd-menu-label-padding-inline: 1rem; // Padding horizontal del rótulo de sección
 $lxd-menu-label-font-size: 0.875rem; // Tamaño de texto del rótulo de sección

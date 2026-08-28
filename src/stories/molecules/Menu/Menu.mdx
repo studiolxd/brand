@@ -49,7 +49,7 @@ El desplegable de acciones del sistema, con el disparador que haga falta. Define
 
 ## Resaltado
 
-El ítem bajo el ratón o el teclado (`[data-highlighted]`, que en un menú es el foco) se marca con un **relleno suave** (`item-highlighted-bg`, la superficie secundaria del sistema; su par oscuro lo pone la derivación). Las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores): a esta densidad y recorriendo con el teclado, el relleno es lo único que se lee de un vistazo. El destructivo conserva su tinta roja sobre ese mismo relleno; el valor elegido de un grupo de radio sigue marcándose con el peso.
+El ítem bajo el ratón o el teclado (`[data-highlighted]`, que en un menú es el foco) se marca **invirtiendo la marca**: relleno prusia con tinta clara sobre superficie clara (`item-highlighted-bg` / `item-highlighted-color`), y al revés —blanco con tinta prusia— sobre oscura, por la regla de derivación. Las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores): a esta densidad y recorriendo con el teclado, el relleno es lo único que se lee de un vistazo. Los iconos del ítem siguen la tinta por `currentColor`. El ítem destructivo resaltado invierte a su propio rojo (`item-destructive-highlighted-bg` / `-color`, el `destructive-fill` universal); el valor elegido de un grupo de radio sigue marcándose con el peso.
 
 ## Accesibilidad
 

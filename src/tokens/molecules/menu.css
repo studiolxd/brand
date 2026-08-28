@@ -27,9 +27,12 @@
   --menu-lg-item-padding-block: var(--select-lg-item-padding-block); /** Padding vertical de cada ítem — talla lg */
   --menu-item-font-weight: var(--font-weight-default); /** Peso de texto de ítems */
   --menu-item-color: var(--color-text-on-light); /** Color de texto de ítems */
-  --menu-item-highlighted-bg: var(--color-surface-secondary-on-light); /** Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`). Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre */
+  --menu-item-highlighted-bg: var(--color-primary); /** Relleno del ítem bajo el puntero o el teclado (`[data-highlighted]`): la inversión de marca. Excepción declarada a «los estados no se rellenan» (Foundations → Colores): en una lista de opciones densa el relleno es lo único que se lee de un vistazo mientras el teclado la recorre */
+  --menu-item-highlighted-color: var(--color-text-on-dark); /** Texto del ítem resaltado: invierte con el relleno — iconos y atajos lo heredan por `currentColor` */
   --menu-item-selected-font-weight: var(--font-weight-emphasis); /** La opción elegida de un grupo de radio, en énfasis: sin glifo */
   --menu-item-destructive-color: var(--color-destructive-text-on-light); /** Color de texto de ítem destructivo */
+  --menu-item-destructive-highlighted-bg: var(--color-destructive-fill); /** Relleno del ítem destructivo resaltado: el rojo sólido, universal en las dos superficies */
+  --menu-item-destructive-highlighted-color: var(--color-destructive-fill-text); /** Texto del ítem destructivo resaltado */
   --menu-label-font-weight: var(--font-weight-emphasis); /** Peso del rótulo de sección */
   --menu-label-color: var(--color-text-muted-on-light); /** Color del rótulo de sección */
   --menu-separator-margin-block: var(--separator-spacing-md); /** Margen vertical del separador — el aire md de la línea del sistema */
@@ -48,8 +51,11 @@
 [data-theme="dark"],
 html.dark {
   --menu-item-color: var(--color-text-on-dark); /** Color de texto de ítems — surface-dark */
-  --menu-item-highlighted-bg: var(--color-surface-secondary-on-dark); /** Relleno del ítem resaltado — surface-dark */
+  --menu-item-highlighted-bg: var(--color-text-on-dark); /** Relleno del ítem resaltado — surface-dark: la misma inversión de marca, al revés */
+  --menu-item-highlighted-color: var(--color-primary); /** Texto del ítem resaltado — surface-dark */
   --menu-separator-color: var(--color-text-on-dark); /** Color del separador — surface-dark */
   --menu-label-color: var(--color-text-muted-on-dark); /** Color del rótulo de sección — surface-dark */
   --menu-item-destructive-color: var(--color-destructive-text-on-dark); /** Color de ítem destructivo — surface-dark */
+  --menu-item-destructive-highlighted-bg: var(--color-destructive-fill); /** Relleno del ítem destructivo resaltado — surface-dark (el fill no cambia: es universal) */
+  --menu-item-destructive-highlighted-color: var(--color-destructive-fill-text); /** Texto del ítem destructivo resaltado — surface-dark */
 }

@@ -56,10 +56,13 @@
   outline: none;
 }
 
-/* El ítem resaltado (puntero o teclado) se rellena: excepción declarada de las
-   listas de opciones desplegables (Foundations → Colores). */
+/* El ítem resaltado (puntero o teclado) se rellena con la inversión de marca:
+   excepción declarada de las listas de opciones desplegables (Foundations →
+   Colores). El texto invierte con él; iconos y glifos lo heredan por
+   `currentColor`. */
 .menu__item[data-highlighted] {
   background-color: var(--menu-item-highlighted-bg);
+  color: var(--menu-item-highlighted-color);
 }
 
 .menu__item[data-disabled] {
@@ -70,6 +73,11 @@
 
 .menu__item.menu__item--destructive {
   color: var(--menu-item-destructive-color);
+}
+
+.menu__item.menu__item--destructive[data-highlighted] {
+  background-color: var(--menu-item-destructive-highlighted-bg);
+  color: var(--menu-item-destructive-highlighted-color);
 }
 
 .menu__item svg {

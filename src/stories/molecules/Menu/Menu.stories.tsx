@@ -118,9 +118,9 @@ export const Mixto: Story = {
   },
 };
 
-/** Test: el ítem bajo el puntero se rellena — la excepción de las listas de opciones. */
+/** Test: el ítem bajo el puntero invierte la marca — la excepción de las listas de opciones. */
 export const ContratoResaltado: Story = {
-  name: 'Test — el ítem resaltado se rellena',
+  name: 'Test — el ítem resaltado invierte la marca',
   tags: ['!dev'],
   args: {
     trigger: <Button variant="outline">Opciones</Button>,
@@ -139,6 +139,7 @@ export const ContratoResaltado: Story = {
     const publicar = await body.findByRole('menuitem', { name: 'Publicar' });
 
     // En reposo no hay relleno.
+    const reposo = getComputedStyle(duplicar).color;
     await expect(getComputedStyle(duplicar).backgroundColor).toBe('rgba(0, 0, 0, 0)');
 
     await userEvent.hover(duplicar);
@@ -150,6 +151,8 @@ export const ContratoResaltado: Story = {
       await expect(resaltado.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
       await expect(resaltado.backgroundColor)
         .not.toBe(getComputedStyle(publicar).backgroundColor);
+      // Es una inversión: la tinta cambia de bando con el relleno.
+      await expect(resaltado.color).not.toBe(reposo);
       // Y el relleno sustituye al anillo, no lo acompaña.
       await expect(resaltado.outlineStyle).toBe('none');
     });
