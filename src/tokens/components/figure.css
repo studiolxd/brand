@@ -1,0 +1,23 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --figure-ratio-1-1: 1 / 1; /** Proporción cuadrada */
+  --figure-ratio-4-3: 4 / 3; /** Proporción clásica */
+  --figure-ratio-3-2: 3 / 2; /** Proporción de foto */
+  --figure-ratio-16-9: 16 / 9; /** Proporción panorámica */
+  --figure-ratio-21-9: 21 / 9; /** Proporción de banda */
+  --figure-caption-gap: var(--spacing-2); /** Aire entre la imagen y su pie */
+  --figure-media-bg: var(--color-surface-secondary-on-light); /** Fondo de la caja de imagen: se ve cuando la proporción no coincide con la de la foto (fit contain) */
+  --figure-caption-font-size: var(--text-paragraph-small-font-size); /** El pie es texto corriente, un peldaño por debajo del cuerpo de la superficie */
+  --figure-caption-line-height: var(--text-line-height); /** Interlineado del pie */
+  --figure-caption-color: var(--color-text-muted-on-light); /** Color del pie: texto secundario */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --figure-media-bg: var(--color-surface-secondary-on-dark); /** Fondo de la caja de imagen — surface-dark */
+  --figure-caption-color: var(--color-text-muted-on-dark); /** Color del pie — surface-dark */
+}

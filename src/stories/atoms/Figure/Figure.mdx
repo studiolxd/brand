@@ -1,0 +1,87 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FigureStories from "./Figure.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { figureTokens, figureDarkTokens } from "../../../tokens/components/figure";
+
+<Meta of={FigureStories} />
+
+# Figure
+
+Una imagen con su pie: el `<figure>`/`<figcaption>` del sistema. La proporción de la caja y el
+cuerpo del pie salen de tokens, así que una rejilla de fotos queda alineada sin que cada producto
+se invente sus medidas.
+
+<Canvas of={FigureStories.PorDefecto} />
+
+Sin `caption` no se pinta pie y la figura es solo la imagen — sigue siendo un `<figure>`, que es lo
+que la separa del texto que la rodea.
+
+<Canvas of={FigureStories.SinPie} />
+
+## Proporciones
+
+`ratio="auto"` (por defecto) deja mandar a la propia foto: es lo que quiere una captura de
+pantalla, que no se puede recortar. Con una proporción fija manda la caja y la imagen la llena
+recortándose (`fit="cover"`), que es lo que alinea una rejilla.
+
+<Canvas of={FigureStories.Proporciones} />
+
+`fit="contain"` mete la imagen entera y deja ver el fondo de la caja (`figure.media-bg`): para un
+logotipo o un diagrama, que no se pueden recortar pero sí deben ocupar un hueco de medida fija.
+
+<Canvas of={FigureStories.Contain} />
+
+## La imagen de la aplicación
+
+`src`/`alt` pintan un `<img>` normal, que es lo que quiere una web estática. Cuando la aplicación
+tiene su propio componente de imagen —el `next/image` de una web Next.js, que redimensiona y sirve
+formatos modernos— se pasa ese elemento por `render` y la figura le presta su clase: el encaje y la
+proporción los sigue poniendo el sistema. Es la misma prop que exponen `Button` y `Card`, y manda
+sobre `src`.
+
+```tsx
+import Image from 'next/image';
+
+<Figure
+  ratio="16:9"
+  render={<Image src={foto} alt="…" fill sizes="(max-width: 48rem) 100vw, 40rem" />}
+  caption="…"
+/>
+```
+
+`render` recibe un elemento de React, así que solo funciona desde un componente **cliente**; desde
+un Server Component, `src`.
+
+<Canvas of={FigureStories.ConImagenDelConsumidor} />
+
+## Superficie oscura
+
+El pie pasa al gris de texto secundario sobre oscuro y el fondo de la caja, a la superficie
+secundaria oscura. La imagen no cambia.
+
+<Canvas of={FigureStories.EnSuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+- El `alt` describe **la imagen**; el pie, **lo que hay que saber de ella**. No repitas uno en el
+  otro: un lector de pantalla lee los dos seguidos.
+- Si el pie ya lo dice todo y la imagen no aporta nada por su cuenta, `alt=""` (el valor por
+  defecto) es la respuesta correcta, no un `alt` que repita el pie.
+- El pie cuelga del `<figure>`, así que la asociación imagen–pie es nativa: no hace falta
+  `aria-describedby`.
+
+## Props
+
+<ArgTypes of={FigureStories} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={figureTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={figureDarkTokens} />

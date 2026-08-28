@@ -1,0 +1,17 @@
+{
+  "figure": {
+    "media-bg":            { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo de la caja de imagen: se ve cuando la proporción no coincide con la de la foto (fit contain)" },
+    "caption-font-size":   { "$value": "{text.paragraph.small.font-size}",   "$type": "dimension", "$description": "El pie es texto corriente, un peldaño por debajo del cuerpo de la superficie" },
+    "caption-line-height": { "$value": "{text.line-height}",                "$type": "number",    "$description": "Interlineado del pie" },
+    "caption-color":       { "$value": "{color.text.muted-on-light}",       "$type": "color",     "$description": "Color del pie: texto secundario" },
+    "caption-gap":         { "$value": "{spacing.2}",                       "$type": "dimension", "$description": "Aire entre la imagen y su pie" },
+    "ratio-1-1":           { "$value": "1 / 1",                             "$type": "string",    "$description": "Proporción cuadrada" },
+    "ratio-4-3":           { "$value": "4 / 3",                             "$type": "string",    "$description": "Proporción clásica" },
+    "ratio-3-2":           { "$value": "3 / 2",                             "$type": "string",    "$description": "Proporción de foto" },
+    "ratio-16-9":          { "$value": "16 / 9",                            "$type": "string",    "$description": "Proporción panorámica" },
+    "ratio-21-9":          { "$value": "21 / 9",                            "$type": "string",    "$description": "Proporción de banda" },
+
+    "surface-dark-media-bg":      { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo de la caja de imagen — surface-dark" },
+    "surface-dark-caption-color": { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Color del pie — surface-dark" }
+  }
+}

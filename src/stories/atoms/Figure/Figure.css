@@ -1,0 +1,57 @@
+@import '../../../tokens/components/figure.css';
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--figure-caption-gap);
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+.figure__media {
+  display: block;
+  background-color: var(--figure-media-bg);
+}
+
+.figure__img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+/* Con proporción fija la caja manda: la imagen la llena y se recorta. */
+.figure__media--ratio-1-1,
+.figure__media--ratio-4-3,
+.figure__media--ratio-3-2,
+.figure__media--ratio-16-9,
+.figure__media--ratio-21-9 {
+  position: relative;
+  overflow: hidden;
+}
+
+.figure__media--ratio-1-1   { aspect-ratio: var(--figure-ratio-1-1); }
+.figure__media--ratio-4-3   { aspect-ratio: var(--figure-ratio-4-3); }
+.figure__media--ratio-3-2   { aspect-ratio: var(--figure-ratio-3-2); }
+.figure__media--ratio-16-9  { aspect-ratio: var(--figure-ratio-16-9); }
+.figure__media--ratio-21-9  { aspect-ratio: var(--figure-ratio-21-9); }
+
+.figure__media--ratio-1-1 .figure__img,
+.figure__media--ratio-4-3 .figure__img,
+.figure__media--ratio-3-2 .figure__img,
+.figure__media--ratio-16-9 .figure__img,
+.figure__media--ratio-21-9 .figure__img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* `contain` mete la imagen entera y deja ver el fondo de la caja. */
+.figure__media--contain .figure__img {
+  object-fit: contain;
+}
+
+.figure__caption {
+  font-size: var(--figure-caption-font-size);
+  line-height: var(--figure-caption-line-height);
+  color: var(--figure-caption-color);
+}

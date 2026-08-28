@@ -29,6 +29,8 @@ export { MenuButton } from './stories/atoms/MenuButton/MenuButton';
 export type { MenuButtonProps } from './stories/atoms/MenuButton/MenuButton';
 export { Fieldset } from './stories/atoms/Fieldset/Fieldset';
 export type { FieldsetProps } from './stories/atoms/Fieldset/Fieldset';
+export { Figure } from './stories/atoms/Figure/Figure';
+export type { FigureProps, FigureRatio } from './stories/atoms/Figure/Figure';
 export { Heading } from './stories/atoms/Heading/Heading';
 export { Inline } from './stories/atoms/Inline/Inline';
 export type { InlineProps } from './stories/atoms/Inline/Inline';

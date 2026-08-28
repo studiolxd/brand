@@ -30,6 +30,8 @@
   --description-list-value-font-size: var(--text-font-size);
   --description-list-value-line-height: var(--text-line-height);
   --empty-state-description-font-size: var(--text-font-size);
+  --figure-caption-font-size: var(--text-paragraph-small-font-size);
+  --figure-caption-line-height: var(--text-line-height);
   --file-upload-item-name-font-size: var(--text-font-size);
   --file-upload-text-font-size: var(--text-font-size);
   --file-upload-sm-text-font-size: var(--text-paragraph-small-font-size);
