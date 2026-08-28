@@ -13,7 +13,8 @@ pnpm build:tokens     # Regenerar tokens CSS+SCSS desde Style Dictionary (sd.con
 pnpm build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
 pnpm build:css        # Bundle CSS standalone → dist/brand.css
 pnpm build:tokens-css # Bundle de tokens CSS → dist/tokens.css
-pnpm build:all        # Los cuatro builds anteriores, en el orden obligatorio (ya no hay prepare: dist/ va committeado)
+pnpm build:fonts-css  # Bundle de @font-face → dist/fonts.css (@studiolxd/brand/fonts)
+pnpm build:all        # Los cinco builds anteriores, en el orden obligatorio (ya no hay prepare: dist/ va committeado)
 pnpm build-storybook  # Build estático de Storybook
 
 # Quality
@@ -27,7 +28,7 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 
 > **IMPORTANTE:** Cada vez que se modifique un archivo JSON de tokens, ejecutar `pnpm build:tokens` antes de commitear. Los CSS bajo `src/tokens/` son auto-generados y se sobreescriben en el siguiente build.
 >
-> **IMPORTANTE:** `pnpm build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css` ni `dist/tokens.css`. Después de `build:lib` ejecutar siempre `pnpm build:css && pnpm build:tokens-css`, o usar `pnpm build:all` para el build completo.
+> **IMPORTANTE:** `pnpm build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css`, `dist/tokens.css` ni `dist/fonts.css`. Después de `build:lib` ejecutar siempre `pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css`, o usar `pnpm build:all` para el build completo.
 
 Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `pnpm test` corre los dos primeros; `pnpm test:stories` el tercero.
 

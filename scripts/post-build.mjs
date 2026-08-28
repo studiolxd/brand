@@ -43,3 +43,18 @@ for (const file of readdirSync(assetsSrc).filter((f) => f.startsWith('logomark')
   copyFileSync(`${assetsSrc}/${file}`, `${assetsOut}/${file}`);
   console.log(`✔︎ dist/assets/${file}`);
 }
+
+// Fuentes: cada familia en su subcarpeta (woff2 + LICENSE.txt de OFL), tal
+// cual las sirve fonts.css vía @studiolxd/brand/fonts.
+const fontsSrc = `${assetsSrc}/fonts`;
+const fontsOut = `${assetsOut}/fonts`;
+if (existsSync(fontsSrc)) {
+  for (const family of readdirSync(fontsSrc)) {
+    const familyOut = `${fontsOut}/${family}`;
+    mkdirSync(familyOut, { recursive: true });
+    for (const file of readdirSync(`${fontsSrc}/${family}`)) {
+      copyFileSync(`${fontsSrc}/${family}/${file}`, `${familyOut}/${file}`);
+    }
+    console.log(`✔︎ dist/assets/fonts/${family}`);
+  }
+}

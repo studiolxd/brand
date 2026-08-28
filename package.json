@@ -68,6 +68,7 @@
       "import": "./dist/avatar.js"
     },
     "./brand.css": "./dist/brand.css",
+    "./fonts": "./dist/fonts.css",
     "./breadcrumb": {
       "types": "./dist/_types/molecules/Breadcrumb/Breadcrumb.d.ts",
       "import": "./dist/breadcrumb.js"
@@ -591,6 +592,7 @@
     "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && node scripts/post-build.mjs",
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
+    "build:fonts-css": "postcss src/stylesheets/fonts.css --use postcss-import -o dist/fonts.css",
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
@@ -599,7 +601,7 @@
     "chromatic": "npx chromatic",
     "test": "vitest run --project unit --project components",
     "test:stories": "vitest run --project storybook",
-    "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css"
+    "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
