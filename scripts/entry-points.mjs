@@ -26,6 +26,7 @@ export const entryPoints = {
   'link':                'src/stories/atoms/Link/Link.tsx',
   'list':                'src/stories/atoms/List/List.tsx',
   'logo':                'src/stories/atoms/Logo/Logo.tsx',
+  'logomark':            'src/stories/atoms/Logomark/index.ts',
   'dots-button':         'src/stories/atoms/DotsButton/DotsButton.tsx',
   'paragraph':           'src/stories/atoms/Paragraph/Paragraph.tsx',
   'progress-bar':        'src/stories/atoms/ProgressBar/ProgressBar.tsx',

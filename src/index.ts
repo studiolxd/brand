@@ -55,6 +55,15 @@ export { List } from './stories/atoms/List/List';
 export type { ListProps, ListType } from './stories/atoms/List/List';
 export { Logo } from './stories/atoms/Logo/Logo';
 export type { LogoProps, LogoSize } from './stories/atoms/Logo/Logo';
+export { Logomark } from './stories/atoms/Logomark/Logomark';
+export type { LogomarkProps, LogomarkSize } from './stories/atoms/Logomark/Logomark';
+export {
+  logomarkPaths,
+  logomarkSafeSvg,
+  logomarkSafeViewBox,
+  logomarkSvg,
+  logomarkViewBox,
+} from './stories/atoms/Logomark/logomarkAssets';
 export { Paragraph } from './stories/atoms/Paragraph/Paragraph';
 export { ProgressBar } from './stories/atoms/ProgressBar/ProgressBar';
 export type { ProgressBarProps, ProgressBarVariant, ProgressBarSize } from './stories/atoms/ProgressBar/ProgressBar';

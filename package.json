@@ -321,6 +321,10 @@
       "types": "./dist/_types/atoms/Logo/Logo.d.ts",
       "import": "./dist/logo.js"
     },
+    "./logomark": {
+      "types": "./dist/_types/atoms/Logomark/index.d.ts",
+      "import": "./dist/logomark.js"
+    },
     "./menu-button": {
       "types": "./dist/_types/atoms/MenuButton/MenuButton.d.ts",
       "import": "./dist/menu-button.js"
@@ -538,7 +542,8 @@
     "./visually-hidden": {
       "types": "./dist/_types/atoms/VisuallyHidden/VisuallyHidden.d.ts",
       "import": "./dist/visually-hidden.js"
-    }
+    },
+    "./assets/*": "./dist/assets/*"
   },
   "files": [
     "dist",

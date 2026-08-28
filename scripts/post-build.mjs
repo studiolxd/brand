@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, readdirSync } from 'node:fs';
 import { entryPoints, clientComponents } from './entry-points.mjs';
 
 const dist = 'dist';
@@ -31,4 +31,14 @@ for (const name of Object.keys(entryPoints)) {
 
   writeFileSync(jsFile, content);
   console.log(`✔︎ dist/${name}.js${isClient ? ' [use client]' : ''}`);
+}
+
+// Activos de marca: los SVG del isotipo viajan tal cual a dist/assets, para
+// servirlos o copiarlos (favicon, iconos PWA) sin pasar por el bundler.
+const assetsSrc = 'src/assets';
+const assetsOut = `${dist}/assets`;
+mkdirSync(assetsOut, { recursive: true });
+for (const file of readdirSync(assetsSrc).filter((f) => f.endsWith('.svg'))) {
+  copyFileSync(`${assetsSrc}/${file}`, `${assetsOut}/${file}`);
+  console.log(`✔︎ dist/assets/${file}`);
 }
