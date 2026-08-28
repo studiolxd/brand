@@ -1,4 +1,5 @@
-/* Cabecera pública: banda a sangre (Container) con el contenido acotado. */
+/* Cabecera pública: banda a sangre con el contenido acotado por su Container
+   interior. El alto de la barra es suyo, no del envoltorio. */
 .site-header {
   background-color: var(--site-header-bg);
   position: relative;

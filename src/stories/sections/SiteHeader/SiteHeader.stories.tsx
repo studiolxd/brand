@@ -226,7 +226,7 @@ export const PanelEnLaColumna: Story = {
 
     // Y el mismo aire lateral, que es lo que la regla de anidamiento de
     // Container le quitaba: el contenido del panel llegaba pegado al borde
-    const aireBarra = getComputedStyle(canvasElement.querySelector('.site-header')!);
+    const aireBarra = getComputedStyle(canvasElement.querySelector('.site-header > .container')!);
     const airePanel = getComputedStyle(banda);
     await expect(airePanel.paddingInlineStart).toBe(aireBarra.paddingInlineStart);
     await expect(airePanel.paddingInlineEnd).toBe(aireBarra.paddingInlineEnd);

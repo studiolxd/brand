@@ -57,7 +57,9 @@ export interface SiteHeaderProps {
 
 /**
  * Cabecera de las páginas públicas: logotipo, controles del producto y botón
- * de menú, con el contenido acotado por `Container` y el fondo a sangre. El
+ * de menú: la barra se monta a sangre —el fondo llega de lado a lado y el
+ * alto es suyo (`--site-header-height`, más compacto en móvil)— con el
+ * contenido acotado por su `Container` interior. El
  * menú es siempre un panel a pantalla completa bajo la barra —no hay
  * navegación en línea— con el índice del sitio y, al final, sus ajustes.
  * El enlace de salto al contenido no va aquí: lo pone `AppRoot`, una vez por
@@ -124,43 +126,45 @@ export function SiteHeader({
   }, [isOpen]);
 
   return (
-    <Container ref={headerRef} as="header" width={width} className="site-header" innerClassName="site-header__bar">
-      {renderLogoLink({ href: logoHref, className: 'site-header__logo', 'aria-label': logoLabel, children: logo })}
+    <header ref={headerRef} className="site-header">
+      <Container width={width} innerClassName="site-header__bar">
+        {renderLogoLink({ href: logoHref, className: 'site-header__logo', 'aria-label': logoLabel, children: logo })}
 
-      <div className="site-header__controls">
-        {actions}
-        {/* Sin panel no hay menú: un botón que no abre nada es un control muerto */}
-        {hasPanel && (
-          <MenuButton
-            ref={menuButtonRef}
-            isOpen={isOpen}
-            onClick={() => setOpen(!isOpen)}
-            label={menuLabel}
-            closeLabel={menuCloseLabel}
-            size={menuButtonSize}
-            aria-controls={panelId}
-          />
-        )}
-      </div>
-
-      {hasPanel && (
-        <div
-          className={['site-header__panel', isOpen ? 'site-header__panel--open' : ''].filter(Boolean).join(' ')}
-          id={panelId}
-          inert={!isOpen}
-          aria-hidden={!isOpen}
-        >
-          <Container width={width} space="none" innerClassName="site-header__panel-inner">
-            {children}
-            {(language || settings) && (
-              <div className="site-header__settings">
-                {language}
-                {settings}
-              </div>
-            )}
-          </Container>
+        <div className="site-header__controls">
+          {actions}
+          {/* Sin panel no hay menú: un botón que no abre nada es un control muerto */}
+          {hasPanel && (
+            <MenuButton
+              ref={menuButtonRef}
+              isOpen={isOpen}
+              onClick={() => setOpen(!isOpen)}
+              label={menuLabel}
+              closeLabel={menuCloseLabel}
+              size={menuButtonSize}
+              aria-controls={panelId}
+            />
+          )}
         </div>
-      )}
-    </Container>
+
+        {hasPanel && (
+          <div
+            className={['site-header__panel', isOpen ? 'site-header__panel--open' : ''].filter(Boolean).join(' ')}
+            id={panelId}
+            inert={!isOpen}
+            aria-hidden={!isOpen}
+          >
+            <Container width={width} space="none" innerClassName="site-header__panel-inner">
+              {children}
+              {(language || settings) && (
+                <div className="site-header__settings">
+                  {language}
+                  {settings}
+                </div>
+              )}
+            </Container>
+          </div>
+        )}
+      </Container>
+    </header>
   );
 }

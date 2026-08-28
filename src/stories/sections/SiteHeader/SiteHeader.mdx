@@ -8,8 +8,9 @@ import { siteHeaderTokens } from "../../../tokens/components/site-header";
 # SiteHeader
 
 Cabecera de las páginas públicas: logotipo a la izquierda, botón de menú a la
-derecha. Compone sobre `Container`, así que el fondo llega de lado a lado de la
-pantalla mientras el contenido se queda dentro del ancho de la maqueta.
+derecha. Se monta a sangre —el fondo llega de lado a lado de la pantalla y el
+alto de la barra es suyo— con un `Container` interior que deja el contenido
+dentro del ancho de la maqueta: la misma columna que el resto de secciones.
 
 Es la contraparte de `AppHeader`. Se separan porque resuelven cosas distintas:
 
@@ -109,8 +110,9 @@ En la web manda la marca: el logotipo va a talla `xxl` (85px, la mayor de la esc
 
 ## Ancho
 
-`width` se pasa tal cual al `Container`: por defecto `xl` (1280px). El fondo no
-depende de esta prop, siempre cubre la ventana entera.
+`width` se pasa tal cual al `Container` interior: por defecto `xl` (1280px), el
+mismo ancho con el que el `Hero` y las demás secciones acotan su contenido. El
+fondo no depende de esta prop, siempre cubre la ventana entera.
 
 ## La marca y el borde
 
