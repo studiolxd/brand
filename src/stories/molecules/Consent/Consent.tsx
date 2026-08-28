@@ -116,9 +116,9 @@ export function ConsentBanner({
 
         <div className="consent-banner__actions">
           <Button onClick={onAcceptAll}>{acceptAllLabel}</Button>
-          <Button variant="outline" onClick={onRejectAll}>{rejectAllLabel}</Button>
+          <Button onClick={onRejectAll}>{rejectAllLabel}</Button>
           {onOpenPreferences && (
-            <Button variant="text" onClick={onOpenPreferences}>{preferencesLabel}</Button>
+            <Button variant="outline" onClick={onOpenPreferences}>{preferencesLabel}</Button>
           )}
         </div>
       </div>
@@ -257,10 +257,10 @@ export function ConsentPreferences({
     <>
       <Button onClick={() => onSave(current)}>{saveLabel}</Button>
       {onRejectAll && (
-        <Button variant="outline" onClick={onRejectAll}>{rejectAllLabel}</Button>
+        <Button onClick={onRejectAll}>{rejectAllLabel}</Button>
       )}
       {onAcceptAll && (
-        <Button variant="text" onClick={onAcceptAll}>{acceptAllLabel}</Button>
+        <Button variant="outline" onClick={onAcceptAll}>{acceptAllLabel}</Button>
       )}
     </>
   );
