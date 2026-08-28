@@ -112,6 +112,7 @@ export const entryPoints = {
   'stat-tile':           'src/stories/molecules/StatTile/StatTile.tsx',
   'copy-button':         'src/stories/molecules/CopyButton/CopyButton.tsx',
   'confirm-dialog':      'src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx',
+  'search-form':         'src/stories/molecules/SearchForm/SearchForm.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',
@@ -182,4 +183,5 @@ export const clientComponents = new Set([
   'docs-search',
   'copy-button',
   'confirm-dialog',
+  'search-form',
 ]);

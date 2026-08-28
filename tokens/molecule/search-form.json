@@ -1,0 +1,12 @@
+{
+  "search-form": {
+    "inline-size": { "$value": "{input.width}",        "$type": "string",    "$description": "Anchura del formulario: la del campo, que siempre ocupa su contenedor. El buscador vive dentro del panel del menú y se estira con él" },
+    "seam-width":  { "$value": "{input.border-width}", "$type": "dimension", "$description": "Solape entre el campo y el botón de envío: exactamente un borde, para que las dos líneas se fundan en una sola y el conjunto se lea como un solo control" },
+
+    "submit-bg":          { "$value": "{input.bg}",          "$type": "color", "$description": "Fondo del botón de envío: el del campo, no el transparente del botón outline. Así el conjunto se lee como un solo control también sobre una superficie que no sea el lienzo" },
+    "submit-disabled-bg": { "$value": "{input.disabled-bg}", "$type": "color", "$description": "Fondo del botón de envío deshabilitado — el del campo deshabilitado" },
+
+    "surface-dark-submit-bg":          { "$value": "{input.surface-dark-bg}",          "$type": "color", "$description": "Fondo del botón de envío — surface-dark" },
+    "surface-dark-submit-disabled-bg": { "$value": "{input.surface-dark-disabled-bg}", "$type": "color", "$description": "Fondo del botón de envío deshabilitado — surface-dark" }
+  }
+}

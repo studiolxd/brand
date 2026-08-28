@@ -1,0 +1,1 @@
+.search-form{inline-size:var(--search-form-inline-size);align-items:flex-end;display:flex}.search-form__field{flex:auto;min-inline-size:0}.search-form__submit{--button-outline-bg:var(--search-form-submit-bg);flex:none;margin-inline-start:calc(-1 * var(--search-form-seam-width))}.search-form__submit:disabled{--button-outline-bg:var(--search-form-submit-disabled-bg)}

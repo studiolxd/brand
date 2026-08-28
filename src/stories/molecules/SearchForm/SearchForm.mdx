@@ -1,0 +1,97 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SearchFormStories from "./SearchForm.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { searchFormBaseTokens, searchFormDarkTokens } from "../../../tokens/molecules/search-form";
+
+<Meta of={SearchFormStories} />
+
+# SearchForm
+
+El buscador del sitio: un campo, un botón y una página de resultados al otro lado.
+
+<Canvas of={SearchFormStories.PorDefecto} />
+
+## Cuándo usarlo, y cuándo no
+
+| | `SearchForm` | `DocsSearch` |
+| --- | --- | --- |
+| Qué hace | Envía una consulta | Sugiere mientras escribes |
+| Dónde vive | En el menú del sitio, en una cabecera | En la página de documentación |
+| Resultado | Una **página de resultados** | Una **lista en línea**, bajo el campo |
+| Estado | Ninguno propio | `query`, `results`, `loading` |
+| Sin JavaScript | Funciona (`action` + `method`) | No funciona |
+
+El buscador de la web pública es `SearchForm`: se escribe, se envía y se llega a `/buscar?q=…`. `DocsSearch` es el autocompletar de la documentación, donde el resultado se abre sin salir de la página. No son dos tallas del mismo componente: son dos conductas distintas y no se sustituyen.
+
+## Anatomía
+
+- **Campo** (`InputField`): la etiqueta va oculta por defecto —el botón con la flecha ya dice qué es— y la pista visible es el `placeholder`.
+- **Botón de envío** (`Button` con el icono `arrow`): siempre a la vista, nunca aparece al escribir. Es un botón-icono de la misma talla que el campo.
+
+Los dos van en una línea y **solapan un borde**, así que las dos líneas se funden en una: el conjunto se lee como un solo control. Con la etiqueta a la vista, el botón se queda a la altura del campo, no de la etiqueta.
+
+<Canvas of={SearchFormStories.ConEtiquetaVisible} />
+
+## Sin aspa de borrado
+
+El campo es `type="text"`, no `type="search"`. El tipo nativo pinta la **X de borrado del navegador**, que es distinta en cada uno, no se puede vestir y no sale de ningún token del sistema. Tampoco hay un botón de borrado propio: para vaciar el campo está la tecla, y el gesto que importa aquí es enviar, no deshacer.
+
+Lleva además `autoComplete="off"` —el historial del navegador no es el índice del sitio— y `enterKeyHint="search"`, que pone «buscar» en la tecla de envío del teclado táctil.
+
+<Canvas of={SearchFormStories.ConValor} />
+
+## Envío
+
+`onSubmit` recibe la consulta **ya recortada**. Previene el envío nativo, así que sustituye a `action`. Con el campo vacío —o solo con espacios— no se llama: un buscador sin consulta no tiene a dónde ir.
+
+```tsx
+<SearchForm onSubmit={(query) => router.push(`/buscar?q=${encodeURIComponent(query)}`)} />
+```
+
+Sin `onSubmit`, el formulario envía como cualquier otro: `GET` a `action` con la consulta en `q` (`name` cambia el parámetro). Es lo que mantiene el buscador en pie en una página servida sin JavaScript; el campo vacío sigue sin enviar.
+
+<Canvas of={SearchFormStories.EnvioSinJS} />
+
+El componente **no guarda la consulta**. Con `value` y `onChange` lo controla quien lo usa; sin ellos, el campo se gobierna solo y la consulta se lee del formulario al enviar.
+
+<Canvas of={SearchFormStories.Controlado} />
+
+## Anchura
+
+Ocupa el ancho de su contenedor: dentro del panel del menú se estira con él, y en una caja acotada se queda en su medida. El campo encoge y el botón no, así que una pista larga nunca empuja la flecha fuera del panel.
+
+<Canvas of={SearchFormStories.AnchuraAcotada} />
+
+## Talla
+
+La talla es del conjunto: campo y botón la comparten, y por eso miden lo mismo de alto. Dentro de un `Form` la hereda; en la superficie pública, `lg`.
+
+<Canvas of={SearchFormStories.Tallas} />
+
+## Accesibilidad
+
+- El formulario es un punto de referencia `search`, y lo nombra `label`: con dos buscadores en la misma página —cabecera y pie— el lector de pantalla los distingue.
+- La etiqueta oculta la sigue leyendo el lector; `labelHidden={false}` la saca a la vista.
+- El botón se nombra con `submitLabel`, porque su contenido es un icono.
+
+<Canvas of={SearchFormStories.EnElPanelDelMenu} />
+
+En superficie oscura no hay nada propio que cambiar: el campo y el botón traen su par oscuro, y la costura sigue sin verse porque los dos bordes comparten color también ahí.
+
+## Textos
+
+Todos los textos que emite el componente son props con default castellano: `label`, `placeholder` y `submitLabel`.
+
+## API
+
+<ArgTypes of={SearchFormStories.PorDefecto} />
+
+## Tokens
+
+Solo lo estructural y el fondo del botón. La tipografía, la altura, el borde y el foco salen de `Input` y de `Button`: aquí no se redefine ninguno, para que personalizar el campo o el botón alcance también al buscador.
+
+<TokenTable tokens={searchFormBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={searchFormDarkTokens} />

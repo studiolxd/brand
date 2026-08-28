@@ -7,6 +7,34 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.12.0
+
+### Añadido
+
+- **`SearchForm`** (molécula, `@studiolxd/brand/search-form`) — el buscador del
+  sitio: `<form role="search">` con `InputField` y un botón-icono de envío con
+  la flecha, pegados en una sola línea (solapan un borde, así que el conjunto
+  se lee como un solo control). Envía a una página de resultados; no sugiere ni
+  autocompleta — para eso sigue estando `DocsSearch`, y el MDX explica cuándo
+  va cada uno.
+  - `onSubmit(query)` previene el envío nativo y entrega la consulta recortada;
+    con el campo vacío (o solo con espacios) no se llama.
+  - Sin `onSubmit`, `action`/`method` hacen el envío nativo (`GET` con `q` por
+    defecto, `name` configurable): el buscador funciona sin JavaScript.
+  - Sin aspa de borrado: el campo es `type="text"`, no `type="search"` —el tipo
+    nativo pinta la X del navegador, que no sale de ningún token— con
+    `autoComplete="off"` y `enterKeyHint="search"`.
+  - Props: `id`, `name`, `value`/`defaultValue`, `onChange`, `onSubmit`,
+    `action`, `method`, `label`, `labelHidden` (por defecto `true`),
+    `placeholder`, `submitLabel`, `size` y `disabled`. El `ref` va al `<input>`.
+    Sin `className`.
+  - Tokens `search-form.*` (`tokens/molecule/search-form.json`), derivados de
+    los de `input`: anchura, solape de la costura y el fondo del botón, con su
+    par `surface-dark-*`. La tipografía, la altura, el borde y el foco siguen
+    saliendo de `Input` y de `Button`.
+  - Story-tests del envío: consulta recortada, campo vacío que no envía y
+    `Enter` desde el campo.
+
 ## v25.11.2
 
 ### Corregido

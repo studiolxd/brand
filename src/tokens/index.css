@@ -121,6 +121,7 @@
 @import "./molecules/prose.css";
 @import "./molecules/table-of-contents.css";
 @import "./molecules/docs-search.css";
+@import "./molecules/search-form.css";
 @import "./molecules/stat-tile.css";
 @import "./molecules/copy-button.css";
 @import "./molecules/confirm-dialog.css";

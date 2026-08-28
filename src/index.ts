@@ -205,6 +205,8 @@ export { LanguageSwitcher } from './stories/molecules/LanguageSwitcher/LanguageS
 export type { LanguageSwitcherProps, Language, LanguageSwitcherRenderLinkProps } from './stories/molecules/LanguageSwitcher/LanguageSwitcher';
 export { ThemeSwitcher } from './stories/molecules/ThemeSwitcher/ThemeSwitcher';
 export type { ThemeSwitcherProps, ThemeSwitcherLabels, Theme } from './stories/molecules/ThemeSwitcher/ThemeSwitcher';
+export { SearchForm } from './stories/molecules/SearchForm/SearchForm';
+export type { SearchFormProps } from './stories/molecules/SearchForm/SearchForm';
 export { SelectField } from './stories/molecules/SelectField/SelectField';
 export type { SelectFieldProps } from './stories/molecules/SelectField/SelectField';
 export { SidebarNav } from './stories/molecules/SidebarNav/SidebarNav';

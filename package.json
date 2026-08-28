@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "25.11.2",
+  "version": "25.12.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -131,6 +131,10 @@
     "./copy-button": {
       "types": "./dist/_types/molecules/CopyButton/CopyButton.d.ts",
       "import": "./dist/copy-button.js"
+    },
+    "./search-form": {
+      "types": "./dist/_types/molecules/SearchForm/SearchForm.d.ts",
+      "import": "./dist/search-form.js"
     },
     "./confirm-dialog": {
       "types": "./dist/_types/molecules/ConfirmDialog/ConfirmDialog.d.ts",
