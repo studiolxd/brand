@@ -3,6 +3,7 @@ import { Container, type ContainerWidth } from '../../atoms/Container/Container'
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Inline } from '../../atoms/Inline/Inline';
+import { FormSizeContext } from '../../constants/form-size';
 import './Hero.css';
 
 export interface HeroProps {
@@ -10,7 +11,7 @@ export interface HeroProps {
   title: ReactNode;
   /** La frase bajo el título, opcional: `Paragraph size="large"`. */
   description?: ReactNode;
-  /** Uno o varios botones (`Button`), en fila con envoltura (`Inline`), bajo el texto. */
+  /** Uno o varios botones (`Button`), en fila con envoltura (`Inline`), bajo el texto. Van a talla `lg`: la escala del Hero lo pide, y el consumidor no tiene que acordarse de pasarla. */
   actions?: ReactNode;
   /** Ancho del contenido; la banda siempre llega de lado a lado. El mismo de la barra del `SiteHeader`. */
   width?: ContainerWidth;
@@ -36,7 +37,11 @@ export function Hero({ title, description, actions, width = 'xl', className, id 
       <Container width={width} innerClassName="hero__inner">
         <Heading level={1} size={10} className="hero__title">{title}</Heading>
         {description && <Paragraph size="large" className="hero__description">{description}</Paragraph>}
-        {actions && <Inline className="hero__actions">{actions}</Inline>}
+        {actions && (
+          <Inline className="hero__actions">
+            <FormSizeContext.Provider value="lg">{actions}</FormSizeContext.Provider>
+          </Inline>
+        )}
       </Container>
     </section>
   );
