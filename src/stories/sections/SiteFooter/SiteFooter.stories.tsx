@@ -105,6 +105,9 @@ export const Contrato: Story = {
     const canvas = within(canvasElement);
     const pie = canvasElement.querySelector('footer.site-footer')!;
     await expect(pie).toHaveClass('surface-dark');
+    // El pie trae su propio aire vertical y su Container interior: se monta a sangre.
+    await expect(parseFloat(getComputedStyle(pie).paddingBlockStart)).toBeGreaterThan(0);
+    await expect(pie.querySelector(':scope > .container')).toBeInTheDocument();
 
     // Cada columna es un `nav` con nombre: se puede saltar a «Servicios».
     const servicios = canvas.getByRole('navigation', { name: 'Servicios' });

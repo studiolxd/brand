@@ -7,7 +7,7 @@ import { siteFooterTokens, siteFooterDarkTokens } from "../../../tokens/componen
 
 # SiteFooter
 
-El pie de una página pública: la marca con su frase, las columnas de enlaces, un bloque libre para el contacto o la newsletter y, debajo, el pie legal. Fondo a sangre y contenido acotado, como el resto de bandas del sistema (`Container` a ancho `xl`).
+El pie de una página pública: la marca con su frase, las columnas de enlaces, un bloque libre para el contacto o la newsletter y, debajo, el pie legal. Fondo a sangre y contenido acotado por su `Container` interior a ancho `xl`, como el resto de secciones. Trae su propio aire vertical (`--site-footer-space-block-start` y `--site-footer-space-block-end`, un peldaño menor por debajo de `md`): se cuelga de la página sin envolverlo en nada.
 
 <Canvas of={SiteFooterStories.PorDefecto} />
 
@@ -21,7 +21,7 @@ Pásale `width="full"` al `LegalFooter` anidado para que sus enlaces se alineen 
 
 ## Superficie
 
-Va sobre superficie oscura **por defecto**: es el cierre de una página pública. No pinta ni un color por su cuenta —el lienzo lo pone el `Container`—, así que `surface="light"` basta para voltearlo entero, línea legal incluida.
+Va sobre superficie oscura **por defecto**: es el cierre de una página pública. No pinta ni un color por su cuenta —el lienzo es el del sistema (`.surface-dark`)—, así que `surface="light"` basta para voltearlo entero, línea legal incluida.
 
 <Canvas of={SiteFooterStories.SuperficieClara} />
 

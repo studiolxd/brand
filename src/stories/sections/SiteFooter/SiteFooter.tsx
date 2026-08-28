@@ -65,8 +65,10 @@ function defaultRenderLink({ children, ...props }: SiteFooterRenderLinkProps) {
 /**
  * El pie de una página pública: la marca con su frase, las columnas de
  * enlaces, un bloque libre para el contacto o la newsletter y, debajo, el pie
- * legal. Fondo a sangre y contenido acotado, como el resto de bandas
- * (`Container`).
+ * legal. Fondo a sangre y contenido acotado por su `Container` interior, como
+ * el resto de secciones, con su propio aire vertical
+ * (`--site-footer-space-block-start/-end`, un peldaño menor en móvil): no se
+ * envuelve en nada.
  *
  * Va sobre superficie oscura por defecto —es el cierre de la página— y no
  * pinta ningún color por su cuenta: el lienzo lo pone la superficie, así que
@@ -89,46 +91,43 @@ export function SiteFooter({
   id,
 }: SiteFooterProps) {
   return (
-    <Container
-      as="footer"
+    <footer
       id={id}
-      width={width}
-      space="2xl"
-      surface={surface === 'dark' ? 'dark' : undefined}
-      className={['site-footer', className].filter(Boolean).join(' ')}
-      innerClassName="site-footer__inner"
+      className={['site-footer', surface === 'dark' && 'surface-dark', className].filter(Boolean).join(' ')}
     >
-      <div className="site-footer__brand">
-        {logo}
-        {tagline && <Paragraph size="large" className="site-footer__tagline">{tagline}</Paragraph>}
-      </div>
-
-      {(columns?.length || aside) && (
-        <div className="site-footer__body">
-          {columns?.map((column) => (
-            <nav key={column.id ?? column.title} className="site-footer__column" aria-label={column.title}>
-              <Heading level={columnTitleLevel} size={3} className="site-footer__column-title">
-                {column.title}
-              </Heading>
-              <List type="plain" className="site-footer__links">
-                {column.links.map((link) => (
-                  <li key={link.id ?? link.href}>
-                    {renderLink({
-                      href: link.href,
-                      className: 'site-footer__link link--ink',
-                      children: link.label,
-                      ...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
-                    })}
-                  </li>
-                ))}
-              </List>
-            </nav>
-          ))}
-          {aside && <div className="site-footer__aside">{aside}</div>}
+      <Container width={width} innerClassName="site-footer__inner">
+        <div className="site-footer__brand">
+          {logo}
+          {tagline && <Paragraph size="large" className="site-footer__tagline">{tagline}</Paragraph>}
         </div>
-      )}
 
-      {legal && <div className="site-footer__legal">{legal}</div>}
-    </Container>
+        {(columns?.length || aside) && (
+          <div className="site-footer__body">
+            {columns?.map((column) => (
+              <nav key={column.id ?? column.title} className="site-footer__column" aria-label={column.title}>
+                <Heading level={columnTitleLevel} size={3} className="site-footer__column-title">
+                  {column.title}
+                </Heading>
+                <List type="plain" className="site-footer__links">
+                  {column.links.map((link) => (
+                    <li key={link.id ?? link.href}>
+                      {renderLink({
+                        href: link.href,
+                        className: 'site-footer__link link--ink',
+                        children: link.label,
+                        ...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+                      })}
+                    </li>
+                  ))}
+                </List>
+              </nav>
+            ))}
+            {aside && <div className="site-footer__aside">{aside}</div>}
+          </div>
+        )}
+
+        {legal && <div className="site-footer__legal">{legal}</div>}
+      </Container>
+    </footer>
   );
 }

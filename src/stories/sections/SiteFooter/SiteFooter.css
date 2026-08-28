@@ -1,5 +1,20 @@
 /* Pie corporativo: marca, columnas de enlaces, bloque libre y, debajo, el pie
-   legal. No pinta color: el lienzo lo pone la superficie del `Container`. */
+   legal. No pinta color: el lienzo es el del sistema (`.surface-dark`).
+
+   El ritmo vertical es del pie: se monta a sangre y no lo hereda de ningún
+   envoltorio, así que mide lo mismo en cualquier página. */
+.site-footer {
+  padding-block: var(--site-footer-space-block-start) var(--site-footer-space-block-end);
+}
+
+/* Móvil: la pantalla es más corta y el aire baja un peldaño. */
+@media (max-width: 767.98px) /* < --breakpoint-md */ {
+  .site-footer {
+    --site-footer-space-block-start: var(--site-footer-space-block-start-compact);
+    --site-footer-space-block-end: var(--site-footer-space-block-end-compact);
+  }
+}
+
 .site-footer__inner {
   display: grid;
   gap: var(--site-footer-gap);
