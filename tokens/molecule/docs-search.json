@@ -23,12 +23,7 @@
     "result-mark-bg":    { "$value": "{color.accent-2}",     "$type": "color", "$description": "Fondo del resaltado de coincidencias (`<mark>`) dentro del extracto: amarillo de marca. Es un relleno autocontenido —fondo y tinta emparejados—, así que no cambia en superficie oscura" },
     "result-mark-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Tinta del resaltado de coincidencias sobre el amarillo" },
 
-    "result-hover-line-width": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea que marca el resultado bajo el puntero. El hover no pinta relleno (regla de Colores)" },
-    "result-hover-line-color": { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover — tinta de la superficie" },
-
-    "result-focus-ring-width":  { "$value": "{menu.item-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo del resultado resaltado — el del Menu: el foco es virtual, lo mueve el teclado" },
-    "result-focus-ring-offset": { "$value": "{menu.item-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo del resultado — la del Menu" },
-    "result-focus-ring-color":  { "$value": "{menu.item-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo del resultado — el del Menu" },
+    "result-highlighted-bg": { "$value": "{menu.item-highlighted-bg}", "$type": "color", "$description": "Relleno del resultado resaltado — el del Menu: el foco es virtual, así que puntero y teclado marcan el mismo relleno" },
 
     "status-padding-block":  { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding vertical del aviso de estado (buscando / sin resultados)" },
     "status-padding-inline": { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding horizontal del aviso de estado" },
@@ -39,8 +34,7 @@
     "surface-dark-result-color":            { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del resultado — surface-dark" },
     "surface-dark-result-excerpt-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del extracto — surface-dark" },
     "surface-dark-result-product-color":    { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Rótulo de producto — surface-dark" },
-    "surface-dark-result-hover-line-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Línea de hover — surface-dark" },
-    "surface-dark-result-focus-ring-color": { "$value": "{menu.surface-dark-item-focus-ring-color}", "$type": "color", "$description": "Anillo del resultado resaltado — surface-dark" },
+    "surface-dark-result-highlighted-bg":   { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno del resultado resaltado — surface-dark" },
     "surface-dark-status-color":            { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Aviso de estado — surface-dark" }
   }
 }

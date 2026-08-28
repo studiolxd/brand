@@ -34,17 +34,11 @@
   cursor: pointer;
 }
 
-/* El foco es virtual (`aria-activedescendant`): el resultado resaltado lo
-   marca Base UI con `data-highlighted`, por teclado y por puntero. */
+/* El foco es virtual (`aria-activedescendant`): el resultado resaltado lo marca
+   Base UI con `data-highlighted`, por teclado y por puntero, y se rellena —
+   excepción declarada de las listas de opciones (Foundations → Colores). */
 .docs-search__result[data-highlighted] {
-  outline: var(--docs-search-result-focus-ring-width) solid var(--docs-search-result-focus-ring-color);
-  outline-offset: var(--docs-search-result-focus-ring-offset);
-}
-
-/* Hover con el puntero: línea de tinta, nunca relleno (Foundations → Colores). */
-.docs-search__result:hover {
-  color: var(--docs-search-result-color);
-  box-shadow: inset 0 calc(-1 * var(--docs-search-result-hover-line-width)) 0 0 var(--docs-search-result-hover-line-color);
+  background-color: var(--docs-search-result-highlighted-bg);
 }
 
 .docs-search__result-product {

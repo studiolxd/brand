@@ -69,7 +69,7 @@ El foco **nunca sale del campo**: la lista se recorre con foco virtual (`aria-ac
 
 ## Superficie oscura
 
-Resultado, extracto, rótulo de producto, línea de hover y anillo de resaltado tienen su par. El resaltado de coincidencias no: su amarillo con tinta oscura es autocontenido.
+Resultado, extracto, rótulo de producto y relleno de resaltado tienen su par. El resaltado de coincidencias no: su amarillo con tinta oscura es autocontenido.
 
 <Canvas of={DocsSearchStories.EnSuperficieOscura} />
 
@@ -98,7 +98,7 @@ Los tokens del campo son los de `InputField`; los de aquí visten la lista y el 
 - Patrón **combobox con lista** de WAI-ARIA: campo `role="combobox"`, lista `role="listbox"` con nombre, resultados `role="option"`. El resaltado viaja en `aria-activedescendant` sin mover el foco real.
 - El aviso de estado es `role="status"` (`aria-live="polite"`): al aparecer se anuncia, en vez de dejar al lector de pantalla sin saber si la búsqueda encontró algo.
 - Cada resultado es un enlace: llega con `Tab`, se abre con `Enter` y responde al clic central y al menú contextual como cualquier enlace.
-- El hover no pinta relleno, marca una línea de tinta; el resaltado del teclado es el anillo del sistema. Los dos se distinguen a simple vista.
+- Puntero y teclado marcan el mismo resultado con el mismo **relleno suave** (`result-highlighted-bg`): el foco es virtual, así que no hay dos señales que distinguir. Las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores).
 
 ## Props
 
