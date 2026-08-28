@@ -11,7 +11,10 @@
   border-radius: var(--card-border-radius);
 }
 
-.card p {
+/* La descripción de la link-card. `:not(.paragraph)` deja fuera al átomo
+   `Paragraph` —y con él a `CardDescription`—, que trae su propio cuerpo de la
+   superficie de lectura y no quiere el aire de la maqueta de marketing. */
+.card p:not(.paragraph) {
   font-size: var(--card-description-font-size);
   margin-block-end: var(--card-description-margin-block-end);
 }
@@ -56,31 +59,45 @@
   inline-size: 100%;
 }
 
+/* Rejilla de dos columnas: el texto a la izquierda (título y descripción, uno
+   debajo de otro) y la acción anclada arriba a la derecha. Con flex haría falta
+   un envoltorio para el bloque de texto; así las cuatro subpartes son hermanas
+   y el consumidor las escribe en el orden en que se leen. */
 .card__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--card-header-gap);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: var(--card-header-gap);
+  row-gap: var(--card-header-row-gap);
 }
 
+.card__header > * {
+  grid-column: 1;
+}
+
+.card__header > .card__action {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+}
+
+/* `CardTitle` ya ES el encabezado (`Heading`): el tamaño lo pone su prop `size`
+   —que sigue la escala de títulos y sube un peldaño en la superficie pública—,
+   y aquí solo se retira el aire que el encabezado trae del documento: dentro de
+   la tarjeta lo reparte el `gap` de la cabecera. El peso va por token propio
+   para poder afinarlo sin tocar la escala. */
 .card__title {
-  font-weight: var(--card-title-font-weight);
-}
-
-/* El título suele contener un encabezado real (cuenta para el esquema del
-   documento): toma la escala tipográfica de la tarjeta, no la del documento.
-   El átomo Heading se estila con doble clase (`.heading.heading--3`, 0-2-0)
-   por la regla BEM del DS, así que aquí hace falta 0-2-1 para ganarle sin
-   depender del orden en que se carguen los CSS de ambos componentes. */
-.card__title :is(h1, h2, h3, h4, h5, h6),
-.card__title :is(h1, h2, h3, h4, h5, h6).heading {
   margin-block: 0;
-  font: inherit;
+  font-weight: var(--card-title-font-weight);
   color: inherit;
 }
 
+/* `CardDescription` ya ES un párrafo del sistema (`Paragraph`): su cuerpo sale
+   del peldaño de párrafo de la superficie, no de un tamaño fijo de la tarjeta.
+   Aquí solo se retira el margen del documento. */
 .card__description {
-  font-size: var(--card-description-font-size);
+  margin-block: 0;
+  color: inherit;
 }
 
 .card__footer {

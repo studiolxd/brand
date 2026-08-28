@@ -9,7 +9,8 @@
   --card-gap: var(--spacing-3); /** Separación entre elementos internos */
   --card-description-font-size: var(--font-size-3); /** Tamaño de fuente de la descripción */
   --card-description-margin-block-end: var(--spacing-7); /** Margen inferior de la descripción */
-  --card-header-gap: var(--spacing-3); /** Separación entre título y acción en la cabecera */
+  --card-header-gap: var(--spacing-3); /** Separación entre el bloque de texto y la acción en la cabecera */
+  --card-header-row-gap: var(--spacing-1); /** Separación entre el título y la descripción en la cabecera */
   --card-footer-gap: var(--spacing-2); /** Separación entre acciones del pie */
   --card-border-radius: var(--border-radius-default); /** Radio de esquinas — sin redondeado */
   --card-title-font-weight: var(--font-weight-emphasis); /** Peso del título de la tarjeta */

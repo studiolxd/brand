@@ -1,9 +1,10 @@
+import { forwardRef } from 'react';
 import './Heading.css';
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 export type HeadingSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
-export interface HeadingProps {
+export interface HeadingProps extends Omit<React.ComponentPropsWithoutRef<'h2'>, 'children'> {
   /** Nivel semántico del encabezado (`h1`–`h6`). Fija también el tamaño, salvo que `size` lo desacople. */
   level?: HeadingLevel;
   /**
@@ -12,8 +13,6 @@ export interface HeadingProps {
    * `h5` (el título de una tarjeta, por ejemplo).
    */
   size?: HeadingSize;
-  className?: string;
-  id?: string;
   children: React.ReactNode;
 }
 
@@ -22,10 +21,16 @@ export interface HeadingProps {
  * tamaño, por defecto, sale del nivel. El peso es siempre el de énfasis del
  * sistema: un título no elige su peso.
  */
-export function Heading({ level = 2, size, className, id, children }: HeadingProps) {
+export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Heading({
+  level = 2,
+  size,
+  className,
+  children,
+  ...rest
+}, ref) {
   const Tag = `h${level}` as `h${HeadingLevel}`;
   const classes = ['heading', `heading--${level}`, size && `heading--size-${size}`, className]
     .filter(Boolean)
     .join(' ');
-  return <Tag className={classes} id={id}>{children}</Tag>;
-}
+  return <Tag ref={ref} className={classes} {...rest}>{children}</Tag>;
+});

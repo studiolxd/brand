@@ -7,9 +7,9 @@ import { cardTokens, cardDarkTokens } from "../../../tokens/components/card";
 
 # Card
 
-Dos modos según `href`. **Con `href`**: *link-card* — todo el bloque es un `<a>` (título +
-descripción + flecha), pensado para navegación. **Sin `href`**: *contenedor* — un `<div>` con
-`children` arbitrarios (formularios, botones), para superficies de aplicación.
+Dos modos. **Enlace** (`href` o `render`): *link-card* — todo el bloque es un enlace (título +
+descripción + flecha), pensado para navegación. **Contenedor** (sin ninguno de los dos): un `<div>`
+con `children` arbitrarios (formularios, botones), para superficies de aplicación.
 
 ## Modo link — colores
 
@@ -23,14 +23,64 @@ Seis variantes de fondo: `primary`, `outline` y cuatro colores de identidad
 <Canvas of={CardStories.Support1} />
 <Canvas of={CardStories.Support2} />
 
+## Modo enlace con el router de la aplicación
+
+`href` pinta un `<a>` nativo, que es lo que quiere una web estática. Cuando la navegación la lleva
+un router (el `Link` de Next.js, por ejemplo), se pasa ese elemento por `render` y la tarjeta le
+presta sus clases y su contenido. Es la misma prop que expone `Button`, y sustituye al patrón
+`asChild`. `render` manda sobre `href`.
+
+```tsx
+import Link from 'next/link';
+
+<Card
+  render={<Link href="/servicios/lms" />}
+  title="Plataformas LMS"
+  description="…"
+  ctaLabel="Ver más sobre plataformas LMS"
+/>
+```
+
+`render` recibe un elemento de React, así que solo funciona desde un componente **cliente**; desde
+un Server Component, `href`.
+
+<Canvas of={CardStories.ComoEnlaceDelRouter} />
+
 ## Modo contenedor
 
-Sin `href`, `Card` es una superficie con `children` libres. Las subpartes (`CardHeader`,
-`CardTitle`, `CardDescription`, `CardAction`, `CardContent`, `CardFooter`) evitan que cada
-producto maquete a mano la cabecera, el pie o el título.
+Sin `href` ni `render`, `Card` es una superficie con `children` libres.
 
 <Canvas of={CardStories.Container} />
+
+## Subpartes
+
+Seis piezas para no volver a maquetar a mano la cabecera, el pie ni el título. Son hermanas: se
+escriben en el orden en que se leen, sin envoltorios.
+
+| Subparte | Elemento | Para qué |
+|---|---|---|
+| `CardHeader` | `<div class="card__header">` | Rejilla de dos columnas: el texto a la izquierda, la acción anclada arriba a la derecha |
+| `CardTitle` | `Heading` | El título. Encabezado de verdad: cuenta para el esquema del documento |
+| `CardDescription` | `Paragraph` | El texto secundario bajo el título |
+| `CardAction` | `<div class="card__action">` | La acción de la cabecera: un menú, un botón |
+| `CardContent` | `<div class="card__content">` | El cuerpo |
+| `CardFooter` | `<div class="card__footer">` | El pie, con sus acciones en fila |
+
 <Canvas of={CardStories.ConSubpartes} />
+
+### El título es un encabezado
+
+`CardTitle` renderiza el átomo `Heading`, no un `<div>` con pinta de título: una rejilla de
+tarjetas es una lista de secciones, y un lector de pantalla debe poder saltar de una a otra.
+
+**Nivel y tamaño se eligen por separado.** El `level` (default `3`) dice de qué encabezado cuelga
+la tarjeta en el esquema del documento; el `size` (default `4`, 20px) dice cómo se ve. Cambiar el nivel
+para conseguir un tamaño rompe el esquema; para eso está `size`.
+
+<Canvas of={CardStories.NivelDelTitulo} />
+
+`CardDescription` renderiza `Paragraph` en talla `small`, así que su cuerpo sale del peldaño de
+párrafo de la superficie de lectura (Foundations → Tipografía): dentro de un `SiteShell` sube solo.
 
 ## Superficie oscura
 
@@ -40,6 +90,12 @@ producto maquete a mano la cabecera, el pie o el título.
 
 ## Accesibilidad
 
+- El título de la tarjeta es un encabezado real (`CardTitle` → `Heading`): elige el `level` según
+  de qué encabezado cuelgue la tarjeta, no según el tamaño que quieras.
+- En modo enlace todo el bloque es un solo enlace: no metas dentro botones ni otros enlaces. Si la
+  tarjeta necesita acciones, es una tarjeta contenedora con su `CardFooter`.
+- `ctaLabel` da al enlace un nombre accesible completo («Ver más sobre plataformas LMS») cuando la
+  llamada visible es solo una flecha.
 - `outline` es la única variante con par `surface-dark-*` propio (fondo y borde cambian sobre
   `.surface-dark`/`html.dark`).
 - `primary` usa el mismo patrón que `button.primary`: fondo lavanda (`color.accent-1`) con texto

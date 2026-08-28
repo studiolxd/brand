@@ -8,7 +8,8 @@ $lxd-card-gap: 0.75rem; // Separación entre elementos internos
 $lxd-card-border-radius: 0px; // Radio de esquinas — sin redondeado
 $lxd-card-description-font-size: 1.25rem; // Tamaño de fuente de la descripción
 $lxd-card-description-margin-block-end: 3rem; // Margen inferior de la descripción
-$lxd-card-header-gap: 0.75rem; // Separación entre título y acción en la cabecera
+$lxd-card-header-gap: 0.75rem; // Separación entre el bloque de texto y la acción en la cabecera
+$lxd-card-header-row-gap: 0.25rem; // Separación entre el título y la descripción en la cabecera
 $lxd-card-title-font-weight: 500; // Peso del título de la tarjeta
 $lxd-card-footer-gap: 0.5rem; // Separación entre acciones del pie
 $lxd-card-primary-bg: #baabff; // Variante primary — fondo lavanda. No es `color.primary` (prussian): coincidiría con `color.background.dark` y desaparecería sobre `.surface-dark`. Mismo patrón autocontenido que `button.primary` — un par que no depende de la superficie ambiente, igual en claro y oscuro
