@@ -48,7 +48,7 @@
   box-shadow: none;
   outline: none;
   transition:
-    outline-color var(--menu-transition-duration) var(--menu-transition-easing),
+    background-color var(--menu-transition-duration) var(--menu-transition-easing),
     color var(--menu-transition-duration) var(--menu-transition-easing);
 }
 
@@ -56,10 +56,10 @@
   outline: none;
 }
 
-/* El ítem resaltado (puntero o teclado) no pinta relleno: lo marca el anillo del sistema. */
+/* El ítem resaltado (puntero o teclado) se rellena: excepción declarada de las
+   listas de opciones desplegables (Foundations → Colores). */
 .menu__item[data-highlighted] {
-  outline: var(--menu-item-focus-ring-width) solid var(--menu-item-focus-ring-color);
-  outline-offset: var(--menu-item-focus-ring-offset);
+  background-color: var(--menu-item-highlighted-bg);
 }
 
 .menu__item[data-disabled] {
@@ -70,10 +70,6 @@
 
 .menu__item.menu__item--destructive {
   color: var(--menu-item-destructive-color);
-}
-
-.menu__item.menu__item--destructive[data-highlighted] {
-  outline-color: var(--menu-item-destructive-color);
 }
 
 .menu__item svg {
