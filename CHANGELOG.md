@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v26.1.1
+
+### Arreglado
+
+- **`Sidebar`: el asa de redimensión perdía `aria-valuenow` con ancho 0**
+  (axe: `aria-required-attr`, crítico — detectado en la pasada real de e2e en
+  7 apps). El asa es focusable (`tabIndex`), así que WAI-ARIA exige
+  `aria-valuenow` siempre; `Math.round(shell.sidebarWidth || 0) || undefined`
+  colapsaba un ancho de 0 legítimo (el valor antes de que el `AppShell` lo
+  mida, en el primer pintado de servidor) a `undefined`, quitando el
+  atributo. Cambiado a `Math.round(shell.sidebarWidth ?? 0)`. Test de
+  contrato nuevo en `Sidebar.stories.tsx` que fuerza `sidebarWidth: 0`.
+
 ## v26.1.0
 
 ### Cambiado

@@ -142,7 +142,12 @@ export function Sidebar({
             role="separator"
             aria-orientation="vertical"
             aria-label={resizerLabel}
-            aria-valuenow={state === 'open' ? Math.round(shell.sidebarWidth || 0) || undefined : 0}
+            // `?? 0`, no `|| 0`: el asa es focusable (tabIndex, arrastre y
+            // teclado), así que WAI-ARIA exige `aria-valuenow` siempre — con
+            // `||` un ancho de 0 legítimo (antes de que el shell lo mida, el
+            // primer pintado en SSR) colapsaba a `undefined` y quitaba el
+            // atributo, lo que axe marca como aria-required-attr crítico.
+            aria-valuenow={state === 'open' ? Math.round(shell.sidebarWidth ?? 0) : 0}
             tabIndex={0}
             onPointerDown={onPointerDown}
             onKeyDown={onKeyDown}

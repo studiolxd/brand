@@ -66,7 +66,7 @@ function u({ logo: e, children: u, footer: d, id: f, label: p = "Barra lateral",
 					role: "separator",
 					"aria-orientation": "vertical",
 					"aria-label": m,
-					"aria-valuenow": _ === "open" ? Math.round(g.sidebarWidth || 0) || void 0 : 0,
+					"aria-valuenow": _ === "open" ? Math.round(g.sidebarWidth ?? 0) : 0,
 					tabIndex: 0,
 					onPointerDown: w,
 					onKeyDown: T

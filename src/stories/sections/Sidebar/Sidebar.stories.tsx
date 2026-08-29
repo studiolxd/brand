@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within, userEvent } from 'storybook/test';
 import { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator } from './Sidebar';
+import { AppShellContext } from '../AppShell/AppShellContext';
 import { Logo } from '../../atoms/Logo/Logo';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
@@ -66,5 +67,39 @@ export const Contrato: Story = {
     await expect(enlaces[0]).toHaveAttribute('href', '#espacio');
     await expect(enlaces).toHaveLength(4);
     await userEvent.keyboard('{Escape}');
+  },
+};
+
+/**
+ * Reproduce el pintado inicial en servidor: el shell existe pero aún no ha
+ * medido el ancho real (`sidebarWidth: 0`, el valor antes de que el `AppShell`
+ * lo calcule). El asa de redimensión es focusable, así que WAI-ARIA exige
+ * `aria-valuenow` en todo momento — con `0 || undefined` este caso lo perdía
+ * (axe: `aria-required-attr`, crítico, visto en 7 apps en e2e real).
+ */
+export const Contrato2: Story = {
+  name: 'Test — el asa de redimensión siempre expone aria-valuenow',
+  tags: ['!dev'],
+  decorators: [
+    (Story) => (
+      <AppShellContext.Provider
+        value={{
+          sidebar: 'open',
+          setSidebar: () => {},
+          sidebarWidth: 0,
+          setSidebarWidth: () => {},
+          toggleSidebar: () => {},
+          closeSidebar: () => {},
+          isDesktop: true,
+        }}
+      >
+        <Story />
+      </AppShellContext.Provider>
+    ),
+  ],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const resizer = canvas.getByRole('separator', { name: 'Ancho de la barra lateral' });
+    await expect(resizer).toHaveAttribute('aria-valuenow', '0');
   },
 };
