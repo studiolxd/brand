@@ -78,7 +78,7 @@ function h({ open: n, onOpenChange: r, categories: i, value: p, onChange: h, onS
 			children: i.map((t) => /* @__PURE__ */ d("li", {
 				className: "consent-preferences__category",
 				children: /* @__PURE__ */ d(a, {
-					label: t.required ? /* @__PURE__ */ f(u, { children: [t.name, /* @__PURE__ */ f(e, { children: [" ", E] })] }) : t.name,
+					label: t.required ? /* @__PURE__ */ f(u, { children: [t.name, /* @__PURE__ */ d(e, { children: `, ${E}` })] }) : t.name,
 					helperText: t.description,
 					checked: t.required ? !0 : M[t.id] === !0,
 					disabled: t.required,

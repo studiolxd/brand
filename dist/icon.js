@@ -1249,6 +1249,367 @@ var r = (() => {
 				d: "M15.7 8.2 L17 14"
 			})
 		] })
+	},
+	"chevron-right": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			d: "M6 0 L18 12 L6 24"
+		})
+	},
+	"chevron-down": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			d: "M24 6 L12 18 L0 6"
+		})
+	},
+	"chevron-up": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			d: "M0 18 L12 6 L24 18"
+		})
+	},
+	info: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "12",
+				cy: "12",
+				r: "9"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M12 7.5l0 .01"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M12 11l0 5"
+			})
+		] })
+	},
+	"alert-triangle": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M12 3 L21 20 H3 Z"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M12 9l0 5"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M12 17l0 .01"
+			})
+		] })
+	},
+	"alert-error": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M8 3h8l5 5v8l-5 5h-8l-5 -5v-8z"
+		}), /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			d: "M9 9l6 6M15 9l-6 6"
+		})] })
+	},
+	connection: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M9 3l0 4M15 3l0 4"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M7 7h10v3a5 5 0 0 1 -5 5a5 5 0 0 1 -5 -5z"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M12 15l0 3l-2 3h4l-2 3"
+			})
+		] })
+	},
+	package: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9z"
+		}), /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M12 12l8 -4.5M12 12l0 9M12 12l-8 -4.5"
+		})] })
+	},
+	archive: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M4 4a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M5 9l0 9a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2l0 -9"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M10 13l4 0"
+			})
+		] })
+	},
+	database: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M3 6a9 3 0 1 0 18 0a9 3 0 1 0 -18 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M3 6l0 6a9 3 0 0 0 18 0l0 -6"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M3 12l0 6a9 3 0 0 0 18 0l0 -6"
+			})
+		] })
+	},
+	building: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M5 21l0 -17a1 1 0 0 1 1 -1l12 0a1 1 0 0 1 1 1l0 17"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M3 21l18 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M9 8l.01 0M15 8l.01 0M9 12l.01 0M15 12l.01 0M9 16l.01 0M15 16l.01 0"
+			})
+		] })
+	},
+	send: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M4 20l16 -8l-16 -8l0 6.5l10 1.5l-10 1.5z"
+		})
+	},
+	"external-link": {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M19 13l0 6a2 2 0 0 1 -2 2l-10 0a2 2 0 0 1 -2 -2l0 -10a2 2 0 0 1 2 -2l6 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M15 3l6 0l0 6"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M9 15l12 -12"
+			})
+		] })
+	},
+	gavel: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M19 8l-3 -3l-8 8l3 3z"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M11 13l-5 5"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M3 21l8 0"
+			})
+		] })
+	},
+	inbox: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [/* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M3 5l4 0l2 4l6 0l2 -4l4 0"
+		}), /* @__PURE__ */ t("path", {
+			vectorEffect: "non-scaling-stroke",
+			strokeWidth: "1",
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+			d: "M3 5l0 11a2 2 0 0 0 2 2l14 0a2 2 0 0 0 2 -2l0 -11"
+		})] })
+	},
+	library: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M4 21l0 -15a1 1 0 0 1 1 -1l2 0a1 1 0 0 1 1 1l0 15"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M10 21l0 -17a1 1 0 0 1 1 -1l2 0a1 1 0 0 1 1 1l0 17"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M16 21l0 -13a1 1 0 0 1 1 -1l2 0a1 1 0 0 1 1 1l0 13"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M3 21l18 0"
+			})
+		] })
+	},
+	target: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "12",
+				cy: "12",
+				r: "9"
+			}),
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "12",
+				cy: "12",
+				r: "5"
+			}),
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "12",
+				cy: "12",
+				r: "1"
+			})
+		] })
+	},
+	languages: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("circle", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				cx: "12",
+				cy: "12",
+				r: "9"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M3 12l18 0"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				strokeLinejoin: "round",
+				d: "M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0 -18"
+			})
+		] })
 	}
 }, a = Object.keys(i);
 function o({ name: e, size: n = "md", className: r }) {
