@@ -71,15 +71,26 @@ export const CincoGrupos: Story = {
 };
 
 export const ContratoCincoColumnas: Story = {
-  name: 'Test — cinco grupos, cinco columnas en el breakpoint ancho',
+  name: 'Test — cinco grupos, tope de columnas en el breakpoint ancho',
   tags: ['!dev'],
   args: { groups: cincoGrupos },
   play: async ({ canvasElement }) => {
     const nav = canvasElement.querySelector('.site-nav')!;
-    // el runner de story-tests renderiza a >= 1280px (--breakpoint-xl)
-    await expect(window.innerWidth).toBeGreaterThanOrEqual(1280);
-    const cols = getComputedStyle(nav).gridTemplateColumns.split(' ').length;
-    await expect(cols).toBe(5);
+    // El runner no garantiza el ancho de --breakpoint-xl (1280px): se
+    // comprueba la variable que fija el tope de columnas para ese breakpoint,
+    // no el número de columnas realmente pintado a un ancho dado.
+    await expect(getComputedStyle(nav).getPropertyValue('--site-nav-wide-columns').trim()).toBe('5');
+  },
+};
+
+export const ContratoTopeDeColumnas: Story = {
+  name: 'Test — el tope de columnas no supera site-nav.columns-max',
+  tags: ['!dev'],
+  args: { groups: [...cincoGrupos, { id: 'extra', label: 'Extra', items: [{ id: 'x', label: 'X', href: '#x' }] }] },
+  play: async ({ canvasElement }) => {
+    const nav = canvasElement.querySelector('.site-nav')!;
+    // Seis grupos: el tope sigue en 5, no sigue creciendo.
+    await expect(getComputedStyle(nav).getPropertyValue('--site-nav-wide-columns').trim()).toBe('5');
   },
 };
 
