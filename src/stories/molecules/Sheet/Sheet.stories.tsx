@@ -219,7 +219,7 @@ export const ContratoTallaPorSuperficie: Story = {
     const close = document.querySelector('.sheet__close') as HTMLElement;
     await expect(close).toBeInTheDocument();
     await expect(getComputedStyle(close).inlineSize).toBe('48px');
-    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('24px');
+    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('48px');
   },
 };
 

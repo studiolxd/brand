@@ -94,10 +94,10 @@ export const SuperficieOscura: Story = {
 };
 
 /**
- * Dentro de `SiteShell` el aspa de cerrar remapea de `sm` (32px, el resto de
- * la aplicación) a `lg` (48px): el `container` apunta al nodo de `SiteShell`
- * para que el portal —que por defecto monta en `document.body`, fuera de
- * `.site-shell`— herede sus tokens.
+ * Dentro de `SiteShell` el aspa de cerrar remapea de `md` (caja 40px, glifo
+ * 24px: el resto de la aplicación) a `lg` (caja y glifo 48px): el `container`
+ * apunta al nodo de `SiteShell` para que el portal —que por defecto monta en
+ * `document.body`, fuera de `.site-shell`— herede sus tokens.
  */
 export const SuperficiePublica: Story = {
   name: 'En la superficie pública',
@@ -125,7 +125,7 @@ export const SuperficiePublica: Story = {
   },
 };
 
-/** Test: sin `SiteShell` el aspa mide `sm` (32px); dentro, `lg` (48px). */
+/** Test: sin `SiteShell` el aspa es `md` (40/24px); dentro, `lg` (48/48px). */
 export const ContratoTallaPorSuperficie: Story = {
   name: 'Test — talla del aspa por superficie',
   tags: ['!dev'],
@@ -145,7 +145,7 @@ export const ContratoTallaPorSuperficie: Story = {
     const close = document.querySelector('.modal__close') as HTMLElement;
     await expect(close).toBeInTheDocument();
     await expect(getComputedStyle(close).inlineSize).toBe('48px');
-    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('24px');
+    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('48px');
   },
 };
 

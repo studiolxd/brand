@@ -18,6 +18,6 @@
     "heading-size-10": { "$value": "{font-size.10}", "$type": "dimension", "$description": "Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más" },
 
     "close-size":      { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Caja del botón de cerrar de Modal/Sheet en la superficie pública: objetivo táctil lg" },
-    "close-icon-size": { "$value": "{icon.size-md}",       "$type": "dimension", "$description": "Glifo del botón de cerrar de Modal/Sheet en la superficie pública" }
+    "close-icon-size": { "$value": "{icon.size-lg}",       "$type": "dimension", "$description": "Glifo del botón de cerrar de Modal/Sheet en la superficie pública: lg, a juego con la caja lg — el aspa pesa lo mismo que el resto de la superficie pública, más grande que en aplicación" }
   }
 }

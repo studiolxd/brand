@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v26.1.0
+
+### Cambiado
+
+- **En la superficie pública el glifo del aspa también es `lg`**: `site-shell.close-icon-size`
+  pasa de `icon.size-md` (24px) a `icon.size-lg` (48px), a juego con la caja `lg` que ya tenía.
+  Dentro de `SiteShell` el aspa de `Modal`/`Sheet` queda, pues, en 48px de caja y 48px de glifo;
+  fuera sigue en `md` (40 / 24px).
+
 ## v26.0.0
 
 ### Breaking

@@ -18,5 +18,5 @@
   --site-shell-heading-size-9: var(--font-size-9); /** Paso 9 de la escala de títulos en la superficie pública (72px) — display pequeño */
   --site-shell-heading-size-10: var(--font-size-10); /** Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más */
   --site-shell-close-size: var(--size-component-lg); /** Caja del botón de cerrar de Modal/Sheet en la superficie pública: objetivo táctil lg */
-  --site-shell-close-icon-size: var(--icon-size-md); /** Glifo del botón de cerrar de Modal/Sheet en la superficie pública */
+  --site-shell-close-icon-size: var(--icon-size-lg); /** Glifo del botón de cerrar de Modal/Sheet en la superficie pública: lg, a juego con la caja lg — el aspa pesa lo mismo que el resto de la superficie pública, más grande que en aplicación */
 }
