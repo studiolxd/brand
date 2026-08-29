@@ -95,6 +95,14 @@ export const TestAcuse: Story = {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: 'Copiar clave' });
 
+    // El navegador del test no concede permiso de portapapeles real: sin este
+    // mock, `navigator.clipboard.writeText` rechaza y el botón cae en el
+    // estado `error`, no `copied` (mismo patrón que `CodeBlock.stories.tsx`).
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async () => {} },
+    });
+
     await userEvent.click(button);
 
     await waitFor(async () => {

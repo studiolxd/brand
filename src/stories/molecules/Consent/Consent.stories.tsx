@@ -77,7 +77,10 @@ export const BannerSinPreferencias: Story = {
   ),
 };
 
-/** Estado 2: el panel de categorías, abierto sobre un `Sheet`. */
+/**
+ * Estado 2: el panel de categorías, abierto sobre un `Sheet`. Sin botón
+ * «Guardar»: cada interruptor persiste al instante vía `onChange`.
+ */
 export const Preferencias: Story = {
   render: () => {
     function Demo() {
@@ -91,9 +94,7 @@ export const Preferencias: Story = {
             onOpenChange={setAbierto}
             categories={categorias}
             value={decision}
-            onSave={(next) => { setDecision(next); setAbierto(false); }}
-            onRejectAll={() => { setDecision(decisionInicial); setAbierto(false); }}
-            onAcceptAll={() => { setDecision({ necessary: true, analytics: true, marketing: true }); setAbierto(false); }}
+            onChange={setDecision}
           />
         </>
       );
@@ -118,7 +119,7 @@ export const PreferenciasEnModal: Story = {
             onOpenChange={setAbierto}
             categories={categorias}
             value={decision}
-            onSave={(next) => { setDecision(next); setAbierto(false); }}
+            onChange={setDecision}
           />
         </>
       );
@@ -150,7 +151,7 @@ export const PreferenciasEnSiteShell: Story = {
             onOpenChange={setAbierto}
             categories={categorias}
             value={decision}
-            onSave={(next) => { setDecision(next); setAbierto(false); }}
+            onChange={setDecision}
             container={shellNode}
           />
         </SiteShell>
@@ -202,11 +203,10 @@ export const FlujoCompleto: Story = {
 
           <ConsentPreferences
             open={abierto}
-            onOpenChange={setAbierto}
+            onOpenChange={(next) => { setAbierto(next); if (!next) setDecidido(true); }}
             categories={categorias}
             value={decision}
-            onSave={(next) => { setDecision(next); setDecidido(true); setAbierto(false); }}
-            onRejectAll={() => { setDecision(decisionInicial); setDecidido(true); setAbierto(false); }}
+            onChange={setDecision}
           />
         </>
       );
@@ -304,24 +304,25 @@ export const ContratoTeclado: Story = {
 };
 
 /**
- * Test: el panel lleva borrador — mover un interruptor no decide nada hasta
- * guardar, y la categoría necesaria no se puede tocar.
+ * Test: sin botón «Guardar» — mover un interruptor decide al instante (llama
+ * a `onChange` con la decisión completa), y la categoría necesaria no se
+ * puede tocar.
  */
 export const ContratoPreferencias: Story = {
-  name: 'Test — borrador, categoría necesaria y guardado',
+  name: 'Test — autoguardado y categoría necesaria',
   tags: ['!dev'],
   render: () => {
     function Demo() {
-      const [guardado, setGuardado] = useState<ConsentValue | null>(null);
+      const [decision, setDecision] = useState<ConsentValue>(decisionInicial);
       return (
         <>
-          <p data-testid="guardado">{guardado === null ? 'sin guardar' : JSON.stringify(guardado)}</p>
+          <p data-testid="decision">{JSON.stringify(decision)}</p>
           <ConsentPreferences
             open
             onOpenChange={() => {}}
             categories={categorias}
-            value={decisionInicial}
-            onSave={setGuardado}
+            value={decision}
+            onChange={setDecision}
           />
         </>
       );
@@ -335,20 +336,100 @@ export const ContratoPreferencias: Story = {
     await expect(necesarias).toBeDisabled();
     await expect(necesarias).toBeChecked();
 
+    // No hay botón «Guardar»: solo las dos acciones del pie.
+    await expect(panel.queryByRole('button', { name: /Guardar/ })).toBeNull();
+
     const analitica = panel.getByRole('switch', { name: /Analítica/ });
     await expect(analitica).not.toBeChecked();
     await userEvent.click(analitica);
     await expect(analitica).toBeChecked();
-    // Nada se ha decidido todavía: el borrador vive dentro del panel.
-    await expect(within(canvasElement).getByTestId('guardado')).toHaveTextContent('sin guardar');
+    // El cambio se persiste al instante, sin paso de guardado intermedio.
+    await expect(within(canvasElement).getByTestId('decision')).toHaveTextContent(
+      JSON.stringify({ necessary: true, analytics: true, marketing: false }),
+    );
+  },
+};
 
-    await userEvent.click(panel.getByRole('button', { name: 'Guardar preferencias' }));
-    const guardado = within(canvasElement).getByTestId('guardado').textContent ?? '';
-    await expect(JSON.parse(guardado)).toEqual({
-      necessary: true,
-      analytics: true,
-      marketing: false,
-    });
+/**
+ * Test: `onSave` es el alias deprecado de `onChange` — sigue disparándose en
+ * cada conmutación, no solo al cerrar, para no romper a quien ya lo pasaba.
+ */
+export const ContratoOnSaveAlias: Story = {
+  name: 'Test — onSave, alias deprecado, dispara en cada cambio',
+  tags: ['!dev'],
+  render: () => {
+    function Demo() {
+      const [llamadas, setLlamadas] = useState<ConsentValue[]>([]);
+      return (
+        <>
+          <p data-testid="llamadas">{llamadas.length}</p>
+          <ConsentPreferences
+            open
+            onOpenChange={() => {}}
+            categories={categorias}
+            value={decisionInicial}
+            onSave={(next) => setLlamadas((prev) => [...prev, next])}
+          />
+        </>
+      );
+    }
+    return <Demo />;
+  },
+  play: async ({ canvasElement }) => {
+    const panel = within(document.body);
+    const analitica = await panel.findByRole('switch', { name: /Analítica/ });
+    await userEvent.click(analitica);
+    await expect(within(canvasElement).getByTestId('llamadas')).toHaveTextContent('1');
+    const marketing = panel.getByRole('switch', { name: /Marketing/ });
+    await userEvent.click(marketing);
+    await expect(within(canvasElement).getByTestId('llamadas')).toHaveTextContent('2');
+  },
+};
+
+/**
+ * Test: el pie solo lleva «Aceptar todas»/«Rechazar todas», los dos `Button`
+ * primary (sin `outline` ni `text`), y al pulsarlos se aplica la decisión
+ * completa y se cierra el panel.
+ */
+export const ContratoPieAceptarRechazar: Story = {
+  name: 'Test — pie con dos primary, aplican y cierran',
+  tags: ['!dev'],
+  render: () => {
+    function Demo() {
+      const [decision, setDecision] = useState<ConsentValue>(decisionInicial);
+      const [abierto, setAbierto] = useState(true);
+      return (
+        <>
+          <p data-testid="decision">{JSON.stringify(decision)}</p>
+          <p data-testid="estado">{abierto ? 'abierto' : 'cerrado'}</p>
+          <ConsentPreferences
+            open={abierto}
+            onOpenChange={setAbierto}
+            categories={categorias}
+            value={decision}
+            onChange={setDecision}
+          />
+        </>
+      );
+    }
+    return <Demo />;
+  },
+  play: async ({ canvasElement }) => {
+    const panel = within(document.body);
+    const dialog = await panel.findByRole('dialog');
+    const botones = within(dialog).getAllByRole('button').filter((b) => b.textContent?.includes('todas'));
+    await expect(botones).toHaveLength(2);
+    for (const boton of botones) {
+      await expect(boton).toHaveClass('button--primary');
+      await expect(boton).not.toHaveClass('button--outline');
+      await expect(boton).not.toHaveClass('button--text');
+    }
+
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Aceptar todas' }));
+    await expect(within(canvasElement).getByTestId('decision')).toHaveTextContent(
+      JSON.stringify({ necessary: true, analytics: true, marketing: true }),
+    );
+    await expect(within(canvasElement).getByTestId('estado')).toHaveTextContent('cerrado');
   },
 };
 
@@ -366,7 +447,7 @@ export const ContratoSinDescripcionNiSeparadores: Story = {
       onOpenChange={() => {}}
       categories={categorias}
       value={decisionInicial}
-      onSave={() => {}}
+      onChange={() => {}}
     />
   ),
   play: async () => {
@@ -402,7 +483,7 @@ export const ContratoPanelTeclado: Story = {
             onOpenChange={setAbierto}
             categories={categorias}
             value={decisionInicial}
-            onSave={() => {}}
+            onChange={() => {}}
           />
         </>
       );
@@ -414,5 +495,34 @@ export const ContratoPanelTeclado: Story = {
     await expect(await panel.findByRole('dialog')).toBeInTheDocument();
     await userEvent.keyboard('{Escape}');
     await expect(within(canvasElement).getByTestId('estado')).toHaveTextContent('cerrado');
+  },
+};
+
+/**
+ * Test: dentro de `Modal` (default), el pie que el panel monta en su propio
+ * contenido queda separado de la lista de categorías, no pegado a ella.
+ */
+export const ContratoSeparacionPie: Story = {
+  name: 'Test — el pie no queda pegado a la lista, en Modal',
+  tags: ['!dev'],
+  render: () => (
+    <ConsentPreferences
+      surface="modal"
+      open
+      onOpenChange={() => {}}
+      categories={categorias}
+      value={decisionInicial}
+      onChange={() => {}}
+    />
+  ),
+  play: async () => {
+    const panel = within(document.body);
+    const dialog = await panel.findByRole('dialog');
+    const lista = dialog.querySelector('.consent-preferences__list');
+    const pie = dialog.querySelector('.consent-preferences__footer');
+    if (!lista || !pie) throw new Error('Falta la lista o el pie del panel');
+    const gap = getComputedStyle(pie).marginBlockStart;
+    await expect(gap).not.toBe('0px');
+    await expect(pie.getBoundingClientRect().top).toBeGreaterThan(lista.getBoundingClientRect().bottom);
   },
 };

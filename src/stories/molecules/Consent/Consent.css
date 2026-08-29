@@ -77,9 +77,12 @@
 }
 
 /* El Modal no tiene prop `footer`: cuando el panel se abre sobre él, la fila de
-   acciones va dentro del contenido. */
+   acciones va dentro del contenido, separada de la lista por el mismo token
+   de separación cuerpo/pie del diálogo (Sheet lo resuelve solo, por el gap de
+   su columna flex). */
 .consent-preferences__footer {
   display: flex;
   flex-wrap: wrap;
   gap: var(--consent-banner-actions-gap);
+  margin-block-start: var(--modal-footer-gap);
 }

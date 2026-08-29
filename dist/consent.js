@@ -60,66 +60,63 @@ function m(e, t) {
 	for (let e of t) e.required && (n[e.id] = !0);
 	return n;
 }
-function h({ open: n, onOpenChange: r, categories: i, value: p, onChange: h, onSave: g, onAcceptAll: _, onRejectAll: v, surface: y = "modal", side: b = "right", title: x = "Preferencias de cookies", saveLabel: S = "Guardar preferencias", acceptAllLabel: C = "Aceptar todas", rejectAllLabel: w = "Rechazar todas", closeLabel: T = "Cerrar", alwaysOnLabel: E = "Siempre activa", container: D, className: O }) {
-	let k = h !== void 0, [A, j] = l(() => m(p, i));
+function h({ open: n, onOpenChange: r, categories: i, value: p, onChange: h, onSave: g, onAcceptAll: _, onRejectAll: v, surface: y = "modal", side: b = "right", title: x = "Preferencias de cookies", acceptAllLabel: S = "Aceptar todas", rejectAllLabel: C = "Rechazar todas", closeLabel: w = "Cerrar", alwaysOnLabel: T = "Siempre activa", container: E, className: D }) {
+	let O = h !== void 0, [k, A] = l(() => m(p, i));
 	c(() => {
-		n && !k && j(m(p, i));
-	}, [n, k]);
-	let M = k ? m(p, i) : A, N = (e, t) => {
-		let n = {
-			...M,
+		n && !O && A(m(p, i));
+	}, [n, O]);
+	let j = O ? m(p, i) : k, M = (e) => {
+		O ? h(e) : A(e), g?.(e);
+	}, N = (e, t) => {
+		M({
+			...j,
 			[e]: t
-		};
-		k ? h(n) : j(n);
-	}, P = /* @__PURE__ */ d("div", {
-		className: ["consent-preferences", O].filter(Boolean).join(" "),
+		});
+	}, P = (e, t) => {
+		let n = {};
+		for (let t of i) n[t.id] = t.required ? !0 : e;
+		M(n), t?.(), r(!1);
+	}, F = /* @__PURE__ */ d("div", {
+		className: ["consent-preferences", D].filter(Boolean).join(" "),
 		children: /* @__PURE__ */ d("ul", {
 			className: "consent-preferences__list",
 			children: i.map((t) => /* @__PURE__ */ d("li", {
 				className: "consent-preferences__category",
 				children: /* @__PURE__ */ d(a, {
-					label: t.required ? /* @__PURE__ */ f(u, { children: [t.name, /* @__PURE__ */ d(e, { children: `, ${E}` })] }) : t.name,
+					label: t.required ? /* @__PURE__ */ f(u, { children: [t.name, /* @__PURE__ */ d(e, { children: `, ${T}` })] }) : t.name,
 					helperText: t.description,
-					checked: t.required ? !0 : M[t.id] === !0,
+					checked: t.required ? !0 : j[t.id] === !0,
 					disabled: t.required,
 					onCheckedChange: (e) => N(t.id, e)
 				})
 			}, t.id))
 		})
-	}), F = /* @__PURE__ */ f(u, { children: [
-		/* @__PURE__ */ d(t, {
-			onClick: () => g(M),
-			children: S
-		}),
-		v && /* @__PURE__ */ d(t, {
-			onClick: v,
-			children: w
-		}),
-		_ && /* @__PURE__ */ d(t, {
-			variant: "outline",
-			onClick: _,
-			children: C
-		})
-	] });
+	}), I = /* @__PURE__ */ f(u, { children: [/* @__PURE__ */ d(t, {
+		onClick: () => P(!0, _),
+		children: S
+	}), /* @__PURE__ */ d(t, {
+		onClick: () => P(!1, v),
+		children: C
+	})] });
 	return y === "modal" ? /* @__PURE__ */ f(s, {
 		open: n,
 		onClose: () => r(!1),
 		title: typeof x == "string" ? x : void 0,
-		closeLabel: T,
-		container: D,
-		children: [P, /* @__PURE__ */ d("div", {
+		closeLabel: w,
+		container: E,
+		children: [F, /* @__PURE__ */ d("div", {
 			className: "consent-preferences__footer",
-			children: F
+			children: I
 		})]
 	}) : /* @__PURE__ */ d(o, {
 		open: n,
 		onOpenChange: r,
 		side: b,
 		title: x,
-		closeLabel: T,
-		footer: F,
-		container: D,
-		children: P
+		closeLabel: w,
+		footer: I,
+		container: E,
+		children: F
 	});
 }
 //#endregion

@@ -68,19 +68,33 @@ cuerpo de la aplicación en vez de los de la superficie pública.
 
 <Canvas of={ConsentStories.PreferenciasEnSiteShell} />
 
-### Borrador o control total
+### Sin botón «Guardar»: cada interruptor persiste al instante
 
-Por defecto el panel lleva un **borrador**: los interruptores se mueven dentro
-del panel y la decisión no sale hasta pulsar guardar. El borrador se siembra de
-`value` cada vez que el panel se abre, así que cerrar sin guardar descarta los
-cambios — que es lo que espera quien cierra sin guardar.
+El panel **no lleva borrador**: conmutar un interruptor de categoría llama a
+`onChange` en el momento, con la decisión completa (categorías necesarias
+incluidas, siempre a `true`). No hay paso de guardado intermedio que pulsar ni
+que olvidar.
 
-Con `onChange` el panel pasa a ser **controlado**: `value` manda en todo momento
-y cada golpe de interruptor sube al consumidor. Es para productos que guardan al
-vuelo o que validan combinaciones.
+Con `onChange` el panel es **controlado**: `value` manda en todo momento y cada
+golpe de interruptor sube al consumidor, que decide qué hacer con él (lo normal
+es persistirlo). Sin `onChange` el panel lleva su propio estado interno,
+sembrado de `value` cada vez que se abre — sigue siendo instantáneo, solo que
+sin que el consumidor lo escuche.
 
-En los dos casos, lo que llega a `onSave` incluye las categorías necesarias
-puestas a `true`: no hay forma de guardar una decisión que las apague.
+`onSave` es el **alias deprecado** de `onChange`: quien ya lo pasaba sigue
+funcionando igual, pero ahora se llama en cada conmutación (y en «Aceptar
+todas»/«Rechazar todas»), no solo al pulsar un guardado explícito que ya no
+existe. Los consumidores nuevos deben usar `onChange`.
+
+## El pie: aceptar o rechazar todo
+
+El pie del panel lleva **solo dos acciones**, «Aceptar todas» y «Rechazar
+todas», ambas `Button` primary (sin variante `outline` ni `text`: el mismo
+peso, la misma jerarquía que en la banda). Pulsarlas aplica la decisión
+completa —todas las categorías, o solo las necesarias— y cierra el panel; no
+hace falta pasarle `onAcceptAll`/`onRejectAll` para que funcionen, son
+opcionales y solo sirven para lógica extra del consumidor (por ejemplo, marcar
+que ya hay una decisión tomada).
 
 ## El flujo completo
 
@@ -136,7 +150,10 @@ Definidos en `tokens/molecule/consent.json`.
   Escape lo cierra y el foco vuelve al disparador.
 - La categoría necesaria se anuncia como interruptor marcado y deshabilitado;
   la marca «Siempre activa» no se ve, pero sigue en el nombre accesible
-  (`VisuallyHidden` dentro de la propia etiqueta).
+  (`VisuallyHidden` dentro de la propia etiqueta), separada del nombre por una
+  coma explícita —no un espacio— para que no se colapse en el límite entre
+  los dos elementos (v25.31.0: antes se leía «NecesariasSiempre activa»
+  pegado).
 - La explicación de cada categoría va en `helperText` del `SwitcherField`, o
   sea enlazada por `aria-describedby`, no como texto suelto al lado.
 
@@ -154,13 +171,12 @@ Definidos en `tokens/molecule/consent.json`.
 | `onOpenChange` | `(open: boolean) => void` | — | Cierre por Escape, velo o botón de cerrar |
 | `categories` | `ConsentCategory[]` | — | Las categorías, en orden. `required` las fija |
 | `value` | `ConsentValue` | — | La decisión vigente, por `id` de categoría |
-| `onChange` | `(value) => void` | — | Si se pasa, el panel es controlado |
-| `onSave` | `(value) => void` | — | Guardar. Recibe la decisión completa |
-| `onAcceptAll` / `onRejectAll` | `() => void` | — | Botones opcionales del pie |
+| `onChange` | `(value) => void` | — | Se llama con la decisión completa en cada conmutación (sin botón «Guardar»). Si se pasa, el panel es controlado |
+| `onSave` | `(value) => void` | — | **Deprecado**, alias de `onChange`: se llama en el mismo momento y con la misma decisión |
+| `onAcceptAll` / `onRejectAll` | `() => void` | — | Extra, además de `onChange`/`onSave`, tras «Aceptar todas»/«Rechazar todas» (que aplican y cierran solas) |
 | `surface` | `'sheet' \| 'modal'` | `'modal'` | Sobre qué se abre: modal (decisión del sistema, 2026-08-29) o sheet lateral, que se conserva para usos futuros |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
 | `title` | `ReactNode` | `'Preferencias de cookies'` | Título del panel |
-| `saveLabel` | `string` | `'Guardar preferencias'` | |
 | `acceptAllLabel` | `string` | `'Aceptar todas'` | |
 | `rejectAllLabel` | `string` | `'Rechazar todas'` | |
 | `closeLabel` | `string` | `'Cerrar'` | |

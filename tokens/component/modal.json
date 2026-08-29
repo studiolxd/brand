@@ -12,6 +12,7 @@
     "padding-block":        { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Padding vertical del panel" },
     "padding-inline":       { "$value": "{spacing.6}",                "$type": "dimension", "$description": "Padding horizontal del panel" },
     "header-gap":           { "$value": "{spacing.4}",                "$type": "dimension", "$description": "Gap entre título y botón ✕" },
+    "footer-gap":           { "$value": "{spacing.4}",                "$type": "dimension", "$description": "Separación entre el cuerpo y el pie, para el consumidor que monta su propio pie dentro del contenido (Modal no tiene prop `footer`, a diferencia de Sheet)" },
     "title-font-size":      { "$value": "{font-size.6}",              "$type": "dimension", "$description": "Tamaño del título (2rem)" },
     "title-font-weight":    { "$value": "{font-weight.emphasis}",     "$type": "number",    "$description": "Peso del título" },
     "title-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título" },

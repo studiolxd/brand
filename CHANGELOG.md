@@ -7,6 +7,44 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.32.0
+
+### Corregido
+
+- **Test de contrato de `CopyButton` (`Test — acuse doble`)**, roto de origen (no relacionado con
+  este cambio): faltaba el mock de `navigator.clipboard` que `CodeBlock.stories.tsx` ya usaba para
+  el mismo escenario — sin él, el navegador de test deniega el permiso real de portapapeles,
+  `writeText` rechaza y el botón cae en estado `error` en vez de `copied`. Bloqueaba
+  `release:check` en verde para este tag; se corrige de paso.
+
+### Cambiado
+
+- **`ConsentPreferences` sin botón «Guardar»: autoguardado por categoría.** Cada
+  `Switcher` de categoría persiste al instante — se conmuta y `onChange` se llama
+  en el momento con la decisión completa (categorías necesarias incluidas,
+  siempre a `true`), sin paso de guardado intermedio. `onSave` pasa a ser un
+  **alias deprecado** de `onChange`: sigue funcionando para quien ya lo pasaba,
+  pero ahora se llama en cada conmutación (y en «Aceptar todas»/«Rechazar
+  todas»), no solo al pulsar un guardado explícito que ya no existe. Se retira
+  la prop `saveLabel` (sin botón que rotular).
+
+  Receta para el `public-shell` y cualquier otro consumidor: deja de pasar
+  `saveLabel`, y cambia `onSave` por `onChange` (si seguías pasando `onSave`,
+  el panel te seguirá llamando igual — pero en cada cambio, no solo al
+  guardar).
+
+- **Pie del panel: solo «Aceptar todas»/«Rechazar todas», los dos `Button`
+  primary** (sin `outline` ni `text` — el mismo peso, la misma jerarquía que en
+  la banda). Pulsarlos aplica la decisión completa y cierra el panel por su
+  cuenta; `onAcceptAll`/`onRejectAll` pasan a ser opcionales de verdad —ya no
+  hace falta pasarlos para que los botones funcionen—, solo para lógica extra
+  del consumidor.
+- **`Modal` gana el token `modal.footer-gap`**: separación entre el cuerpo y un
+  pie que un consumidor monta dentro de su propio contenido (`Modal` no tiene
+  prop `footer`, a diferencia de `Sheet`, que ya lo resolvía solo por el gap de
+  su columna flex). `ConsentPreferences` lo usa para separar la lista de
+  categorías del pie cuando se abre sobre `Modal` — antes quedaba pegado.
+
 ## v25.31.0
 
 ### Añadido
