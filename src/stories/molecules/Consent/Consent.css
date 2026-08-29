@@ -66,29 +66,14 @@
   gap: var(--consent-preferences-gap);
 }
 
+/* Sin separadores entre categorías: el ritmo lo pone el gap, no una línea. */
 .consent-preferences__list {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.consent-preferences__category {
-  padding-block: var(--consent-preferences-category-gap);
-}
-
-.consent-preferences__category:first-child { padding-block-start: 0; }
-.consent-preferences__category:last-child  { padding-block-end: 0; }
-
-/* La línea entre categorías la pinta el propio átomo Separator, que la primera
-   categoría no lleva: por eso el padding va en la fila y no en la línea. */
-.consent-preferences__category .separator {
-  margin-block-start: 0;
-  margin-block-end: var(--consent-preferences-category-gap);
-}
-
-.consent-preferences__always {
-  font-size: var(--consent-preferences-always-font-size);
-  color: var(--consent-preferences-always-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--consent-preferences-category-gap);
 }
 
 /* El Modal no tiene prop `footer`: cuando el panel se abre sobre él, la fila de

@@ -51,13 +51,22 @@ una decisión enfocada con principio y final. Se abre sobre `Modal` (default) o,
 con `surface="sheet"`, sobre el `Sheet` lateral, que el sistema conserva para
 otros usos.
 
-Cada categoría es un `SwitcherField` con su nombre y su explicación; la línea
-entre ellas es el átomo `Separator`. Las categorías `required` salen marcadas,
-deshabilitadas y con la marca «Siempre activa»: se enseñan porque hay que
-declararlas, no porque haya nada que decidir.
+Cada categoría es un `SwitcherField` con su nombre y su explicación; sin línea
+entre ellas — el ritmo lo pone el gap, no un separador. Las categorías
+`required` salen marcadas y deshabilitadas: se enseñan porque hay que
+declararlas, no porque haya nada que decidir. La marca «Siempre activa» no se
+ve —el interruptor marcado y deshabilitado ya lo dice—, pero sigue en el
+nombre accesible vía `VisuallyHidden`.
 
 <Canvas of={ConsentStories.Preferencias} />
 <Canvas of={ConsentStories.PreferenciasEnModal} />
+
+Dentro de `SiteShell`, pásale `container` (el `ref` de `SiteShell`): el portal
+del `Modal`/`Sheet` monta por defecto en `document.body`, fuera de
+`.site-shell`, así que sin `container` el panel se queda con la talla y el
+cuerpo de la aplicación en vez de los de la superficie pública.
+
+<Canvas of={ConsentStories.PreferenciasEnSiteShell} />
 
 ### Borrador o control total
 
@@ -125,8 +134,9 @@ Definidos en `tokens/molecule/consent.json`.
   tabulación cada uno.
 - El panel es un diálogo de Base UI: foco atrapado mientras está abierto,
   Escape lo cierra y el foco vuelve al disparador.
-- La categoría necesaria se anuncia como interruptor marcado y deshabilitado, y
-  la marca «Siempre activa» forma parte de su etiqueta: no depende del color.
+- La categoría necesaria se anuncia como interruptor marcado y deshabilitado;
+  la marca «Siempre activa» no se ve, pero sigue en el nombre accesible
+  (`VisuallyHidden` dentro de la propia etiqueta).
 - La explicación de cada categoría va en `helperText` del `SwitcherField`, o
   sea enlazada por `aria-describedby`, no como texto suelto al lado.
 
@@ -150,9 +160,9 @@ Definidos en `tokens/molecule/consent.json`.
 | `surface` | `'sheet' \| 'modal'` | `'modal'` | Sobre qué se abre: modal (decisión del sistema, 2026-08-29) o sheet lateral, que se conserva para usos futuros |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
 | `title` | `ReactNode` | `'Preferencias de cookies'` | Título del panel |
-| `description` | `ReactNode` | castellano | Texto bajo el título |
 | `saveLabel` | `string` | `'Guardar preferencias'` | |
 | `acceptAllLabel` | `string` | `'Aceptar todas'` | |
 | `rejectAllLabel` | `string` | `'Rechazar todas'` | |
 | `closeLabel` | `string` | `'Cerrar'` | |
-| `alwaysOnLabel` | `string` | `'Siempre activa'` | Marca de una categoría necesaria |
+| `alwaysOnLabel` | `string` | `'Siempre activa'` | Marca de una categoría necesaria (accesible, no visible) |
+| `container` | `React.ComponentPropsWithoutRef<typeof Modal>['container']` | — | Nodo del portal; el `ref` de `SiteShell` cuando el panel vive en la web pública |

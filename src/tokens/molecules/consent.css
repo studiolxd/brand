@@ -10,7 +10,7 @@
   --consent-banner-actions-gap: var(--spacing-2); /** Separación entre botones */
   --consent-banner-z-index: var(--z-index-bar); /** Capa: la de las barras fijas de la aplicación. Por debajo del velo de un modal — el banner no bloquea nada */
   --consent-preferences-gap: var(--spacing-4); /** Separación entre los bloques del panel */
-  --consent-preferences-category-gap: var(--spacing-3); /** Aire alrededor de cada categoría */
+  --consent-preferences-category-gap: var(--spacing-3); /** Separación entre categorías de la lista */
   --consent-banner-bg: var(--color-background-light); /** Fondo de la banda */
   --consent-banner-color: var(--color-text-on-light); /** Texto de la banda */
   --consent-banner-border-color: var(--color-primary); /** Línea superior que separa la banda de la página */
@@ -18,8 +18,6 @@
   --consent-banner-max-inline-size: var(--container-max-width-xl); /** Ancho máximo del contenido dentro de la banda: el mismo del contenido de una página pública */
   --consent-banner-title-font-size: var(--text-size-3); /** Cuerpo del título de la banda */
   --consent-banner-description-font-size: var(--text-font-size); /** Cuerpo del texto de la banda: el cuerpo de texto de la superficie, sin reducir (decisión del 2026-08-28) */
-  --consent-preferences-always-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la marca «siempre activa» */
-  --consent-preferences-always-color: var(--color-text-muted-on-light); /** Color de la marca «siempre activa» */
 }
 
 .surface-dark,
@@ -28,5 +26,4 @@ html.dark {
   --consent-banner-bg: var(--color-background-dark); /** Fondo de la banda — surface-dark */
   --consent-banner-color: var(--color-text-on-dark); /** Texto de la banda — surface-dark */
   --consent-banner-border-color: var(--color-text-on-dark); /** Línea superior — surface-dark */
-  --consent-preferences-always-color: var(--color-text-muted-on-dark); /** Marca «siempre activa» — surface-dark */
 }

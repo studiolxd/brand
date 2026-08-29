@@ -23,12 +23,8 @@
     },
 
     "preferences": {
-      "gap":               { "$value": "{spacing.4}", "$type": "dimension", "$description": "Separación entre los bloques del panel" },
-      "category-gap":      { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire alrededor de cada categoría" },
-      "always-font-size":  { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo de la marca «siempre activa»" },
-      "always-color":      { "$value": "{color.text.muted-on-light}",      "$type": "color",     "$description": "Color de la marca «siempre activa»" },
-
-      "surface-dark-always-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Marca «siempre activa» — surface-dark" }
+      "gap":          { "$value": "{spacing.4}", "$type": "dimension", "$description": "Separación entre los bloques del panel" },
+      "category-gap": { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre categorías de la lista" }
     }
   }
 }

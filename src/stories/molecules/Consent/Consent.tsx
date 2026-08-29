@@ -4,7 +4,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Link } from '../../atoms/Link/Link';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
-import { Separator } from '../../atoms/Separator/Separator';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { SwitcherField } from '../SwitcherField/SwitcherField';
 import { Sheet } from '../Sheet/Sheet';
 import { Modal } from '../Modal/Modal';
@@ -151,8 +151,6 @@ export interface ConsentPreferencesProps {
   side?: 'top' | 'right' | 'bottom' | 'left';
   /** Título del panel. Default castellano: `'Preferencias de cookies'`. */
   title?: ReactNode;
-  /** Texto bajo el título. Default castellano. */
-  description?: ReactNode;
   /** Etiqueta del botón de guardar. Default castellano: `'Guardar preferencias'`. */
   saveLabel?: string;
   /** Etiqueta del botón de aceptar todas. Default castellano: `'Aceptar todas'`. */
@@ -163,6 +161,14 @@ export interface ConsentPreferencesProps {
   closeLabel?: string;
   /** Marca de una categoría necesaria. Default castellano: `'Siempre activa'`. */
   alwaysOnLabel?: string;
+  /**
+   * Nodo DOM donde montar el portal del panel, reenviado a `Modal`/`Sheet`.
+   * Necesario cuando el panel se abre dentro de `SiteShell`: por defecto el
+   * portal monta en `document.body`, que no hereda los tokens de la
+   * superficie pública (a diferencia del tema oscuro, que se activa en
+   * `<html>`) — pásale el nodo de `SiteShell` (su `ref`).
+   */
+  container?: React.ComponentPropsWithoutRef<typeof Modal>['container'];
   /** Se añade DESPUÉS de las clases propias. */
   className?: string;
 }
@@ -177,9 +183,11 @@ function withRequired(value: ConsentValue, categories: ConsentCategory[]): Conse
 }
 
 /**
- * El panel de preferencias por categorías: un interruptor por categoría
- * opcional y una fila fija para las necesarias. Se abre sobre `Modal` (default)
- * o sobre `Modal`; el foco, el cierre con Escape y el velo los pone Base UI.
+ * El panel de preferencias por categorías: título, la lista de categorías —un
+ * interruptor por categoría opcional y una fila fija para las necesarias— y
+ * el pie con las acciones. Sin párrafo de descripción bajo el título: la
+ * propia lista explica qué se decide. Se abre sobre `Modal` (default) o sobre
+ * `Sheet`; el foco, el cierre con Escape y el velo los pone Base UI.
  *
  * Sin `onChange` el panel lleva un **borrador**: los interruptores se mueven
  * dentro del panel y la decisión no sale hasta pulsar guardar. El borrador se
@@ -198,12 +206,12 @@ export function ConsentPreferences({
   surface = 'modal',
   side = 'right',
   title = 'Preferencias de cookies',
-  description = 'Las cookies necesarias no se pueden desactivar: sin ellas el sitio no funciona. El resto son cosa tuya.',
   saveLabel = 'Guardar preferencias',
   acceptAllLabel = 'Aceptar todas',
   rejectAllLabel = 'Rechazar todas',
   closeLabel = 'Cerrar',
   alwaysOnLabel = 'Siempre activa',
+  container,
   className,
 }: ConsentPreferencesProps) {
   const controlled = onChange !== undefined;
@@ -228,15 +236,14 @@ export function ConsentPreferences({
   const body = (
     <div className={['consent-preferences', className].filter(Boolean).join(' ')}>
       <ul className="consent-preferences__list">
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <li key={category.id} className="consent-preferences__category">
-            {index > 0 && <Separator spacing="sm" />}
             <SwitcherField
               label={
                 category.required ? (
                   <>
-                    {category.name}{' '}
-                    <span className="consent-preferences__always">{alwaysOnLabel}</span>
+                    {category.name}
+                    <VisuallyHidden> {alwaysOnLabel}</VisuallyHidden>
                   </>
                 ) : (
                   category.name
@@ -272,7 +279,7 @@ export function ConsentPreferences({
         onClose={() => onOpenChange(false)}
         title={typeof title === 'string' ? title : undefined}
         closeLabel={closeLabel}
-        description={description}
+        container={container}
       >
         {body}
         <div className="consent-preferences__footer">{footer}</div>
@@ -286,9 +293,9 @@ export function ConsentPreferences({
       onOpenChange={onOpenChange}
       side={side}
       title={title}
-      description={description}
       closeLabel={closeLabel}
       footer={footer}
+      container={container}
     >
       {body}
     </Sheet>

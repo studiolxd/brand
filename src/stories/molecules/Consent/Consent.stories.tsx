@@ -5,6 +5,7 @@ import { ConsentBanner, ConsentPreferences, type ConsentCategory, type ConsentVa
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { SiteShell } from '../../sections/SiteShell/SiteShell';
 
 const categorias: ConsentCategory[] = [
   {
@@ -120,6 +121,39 @@ export const PreferenciasEnModal: Story = {
             onSave={(next) => { setDecision(next); setAbierto(false); }}
           />
         </>
+      );
+    }
+    return <Demo />;
+  },
+};
+
+/**
+ * El panel de preferencias, en `Modal`, abierto dentro de `SiteShell` — la
+ * web pública. El `container` apunta al nodo de `SiteShell` para que el
+ * portal (que por defecto monta en `document.body`, fuera de `.site-shell`)
+ * herede sus tokens: el aspa pasa a `lg` y el cuerpo lee a 20px.
+ */
+export const PreferenciasEnSiteShell: Story = {
+  name: 'Preferencias en SiteShell',
+  parameters: { layout: 'fullscreen' },
+  render: () => {
+    function Demo() {
+      const [decision, setDecision] = useState(decisionInicial);
+      const [abierto, setAbierto] = useState(true);
+      const [shellNode, setShellNode] = useState<HTMLDivElement | null>(null);
+      return (
+        <SiteShell ref={setShellNode}>
+          <Pagina />
+          <ConsentPreferences
+            surface="modal"
+            open={abierto}
+            onOpenChange={setAbierto}
+            categories={categorias}
+            value={decision}
+            onSave={(next) => { setDecision(next); setAbierto(false); }}
+            container={shellNode}
+          />
+        </SiteShell>
       );
     }
     return <Demo />;
@@ -315,6 +349,40 @@ export const ContratoPreferencias: Story = {
       analytics: true,
       marketing: false,
     });
+  },
+};
+
+/**
+ * Test: el panel no lleva párrafo de descripción, ni línea entre categorías,
+ * y la marca «Siempre activa» de la categoría necesaria es accesible pero no
+ * se ve.
+ */
+export const ContratoSinDescripcionNiSeparadores: Story = {
+  name: 'Test — sin descripción, sin separadores, marca no visible',
+  tags: ['!dev'],
+  render: () => (
+    <ConsentPreferences
+      open
+      onOpenChange={() => {}}
+      categories={categorias}
+      value={decisionInicial}
+      onSave={() => {}}
+    />
+  ),
+  play: async () => {
+    const panel = within(document.body);
+    const dialog = await panel.findByRole('dialog');
+
+    await expect(within(dialog).queryByText(/no se pueden desactivar/)).toBeNull();
+    await expect(dialog.querySelector('.separator')).toBeNull();
+
+    const marca = within(dialog).getByText('Siempre activa');
+    await expect(marca).toHaveClass('visually-hidden');
+    await expect(getComputedStyle(marca).width).toBe('1px');
+
+    // El nombre accesible del interruptor la sigue incluyendo.
+    await expect(within(dialog).getByRole('switch', { name: /Necesarias.*Siempre activa/ }))
+      .toBeInTheDocument();
   },
 };
 
