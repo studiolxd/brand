@@ -23,6 +23,18 @@ const groups: SiteNavGroup[] = [
   ] },
 ];
 
+const cincoGrupos: SiteNavGroup[] = [
+  ...groups,
+  { id: 'recursos', label: 'Recursos', items: [
+    { id: 'blog', label: 'Blog', href: '#blog' },
+    { id: 'guias', label: 'Guías', href: '#guias' },
+  ] },
+  { id: 'cuenta', label: 'Cuenta', items: [
+    { id: 'entrar', label: 'Entrar', href: '#entrar' },
+    { id: 'soporte', label: 'Soporte', href: '#soporte' },
+  ] },
+];
+
 const meta: Meta<typeof SiteNav> = {
   title: 'Molecules/SiteNav',
   component: SiteNav,
@@ -47,6 +59,28 @@ export const SuperficieOscura: Story = {
       <SiteNav {...args} />
     </Container>
   ),
+};
+
+/**
+ * Cinco grupos: en el breakpoint ancho ganan su propia columna cada uno, en
+ * vez de que el quinto («Cuenta») caiga solo a una segunda fila.
+ */
+export const CincoGrupos: Story = {
+  name: 'Cinco grupos',
+  args: { groups: cincoGrupos },
+};
+
+export const ContratoCincoColumnas: Story = {
+  name: 'Test — cinco grupos, cinco columnas en el breakpoint ancho',
+  tags: ['!dev'],
+  args: { groups: cincoGrupos },
+  play: async ({ canvasElement }) => {
+    const nav = canvasElement.querySelector('.site-nav')!;
+    // el runner de story-tests renderiza a >= 1280px (--breakpoint-xl)
+    await expect(window.innerWidth).toBeGreaterThanOrEqual(1280);
+    const cols = getComputedStyle(nav).gridTemplateColumns.split(' ').length;
+    await expect(cols).toBe(5);
+  },
 };
 
 export const Contrato: Story = {

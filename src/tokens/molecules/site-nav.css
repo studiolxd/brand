@@ -3,6 +3,7 @@
  */
 
 :root {
+  --site-nav-columns-max: 5; /** Tope de columnas en el breakpoint ancho: a partir de ahí el panel no sigue ensanchando columnas por grupo */
   --site-nav-group-gap: var(--spacing-6); /** Separación entre grupos: entre columnas en escritorio, entre bloques en móvil */
   --site-nav-label-margin-block-end: var(--spacing-4); /** Aire entre la cabecera y sus enlaces: un paso más que entre enlaces, que la cabecera no se pegue al primero */
   --site-nav-item-gap: var(--spacing-3); /** Separación entre enlaces de un grupo */

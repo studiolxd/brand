@@ -64,10 +64,17 @@ function linkRel(target?: string, rel?: string) {
   return target === '_blank' ? 'noopener noreferrer' : undefined;
 }
 
+/** Tope de columnas en el breakpoint ancho — {site-nav.columns-max}. */
+const COLUMNS_MAX = 5;
+
 /**
  * El índice del sitio: grupos con cabecera y enlaces. Una columna en móvil,
  * una columna por grupo en escritorio. Es lo que llena el panel del
  * `SiteHeader` y, con la misma forma, el pie de página.
+ *
+ * En el breakpoint ancho el número de columnas sigue al número de grupos
+ * (hasta `COLUMNS_MAX`), para que un quinto grupo no caiga solo en una
+ * segunda fila; en `md` y `lg` el número de columnas es fijo.
  */
 export function SiteNav({
   groups,
@@ -76,8 +83,10 @@ export function SiteNav({
   className,
 }: SiteNavProps) {
   const classes = ['site-nav', className].filter(Boolean).join(' ');
+  const wideColumns = Math.min(groups.length, COLUMNS_MAX) || 1;
+  const style = { '--site-nav-wide-columns': wideColumns } as React.CSSProperties;
   return (
-    <nav className={classes} aria-label={label}>
+    <nav className={classes} aria-label={label} style={style}>
       {groups.map((group) => (
         <div key={group.id} className="site-nav__group">
           <Heading level={2} size={6} className="site-nav__label">

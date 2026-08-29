@@ -1,6 +1,7 @@
 {
   "site-nav": {
     "group-gap":            { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Separación entre grupos: entre columnas en escritorio, entre bloques en móvil" },
+    "columns-max":          { "$value": 5, "$type": "number", "$description": "Tope de columnas en el breakpoint ancho: a partir de ahí el panel no sigue ensanchando columnas por grupo" },
     "label-margin-block-end": { "$value": "{spacing.4}",            "$type": "dimension", "$description": "Aire entre la cabecera y sus enlaces: un paso más que entre enlaces, que la cabecera no se pegue al primero" },
     "item-gap":             { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Separación entre enlaces de un grupo" },
     "item-font-size":       { "$value": "{font-size.4}",            "$type": "dimension", "$description": "Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5)" },

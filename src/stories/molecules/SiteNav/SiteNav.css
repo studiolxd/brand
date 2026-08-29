@@ -1,6 +1,8 @@
-/* Una columna en móvil; a partir de md, una columna por grupo (hasta cuatro
-   por fila), sin ancho mínimo inventado: el número de columnas sale de los
-   puntos de ruptura del sistema. */
+/* Una columna en móvil; a partir de md, una columna por grupo, sin ancho
+   mínimo inventado. En el breakpoint ancho el número de columnas sigue al
+   número de grupos (`--site-nav-wide-columns`, calculado en el componente,
+   tope `site-nav.columns-max`): un quinto grupo gana su propia columna en vez
+   de caer solo a una segunda fila. */
 .site-nav {
   display: grid;
   grid-template-columns: 1fr;
@@ -13,7 +15,7 @@
   .site-nav { grid-template-columns: repeat(3, 1fr); }
 }
 @media (min-width: 1280px) /* --breakpoint-xl */ {
-  .site-nav { grid-template-columns: repeat(4, 1fr); }
+  .site-nav { grid-template-columns: repeat(var(--site-nav-wide-columns, 4), 1fr); }
 }
 
 /* Cabecera de grupo: un Heading normal (h2 con talla 6); solo se le quita el

@@ -7,9 +7,17 @@ import { siteNavTokens } from "../../../tokens/molecules/site-nav";
 
 # SiteNav
 
-El índice del sitio: grupos con una cabecera y sus enlaces. Es lo que llena el panel del `SiteHeader` y, con la misma forma, el pie de página. Una columna en móvil; a partir de `md`, una columna por grupo —dos, tres o cuatro por fila según el ancho— sin que el producto tenga que maquetar nada.
+El índice del sitio: grupos con una cabecera y sus enlaces. Es lo que llena el panel del `SiteHeader` y, con la misma forma, el pie de página. Una columna en móvil; a partir de `md`, una columna por grupo —dos en `md`, tres en `lg`— sin que el producto tenga que maquetar nada.
 
 <Canvas of={SiteNavStories.PorDefecto} />
+
+## Columnas en el breakpoint ancho
+
+A partir de `xl` el número de columnas sigue al número de grupos —hasta
+`site-nav.columns-max` (5)—, no una cifra fija: con cinco grupos, el quinto
+gana su propia columna en vez de caer solo a una segunda fila.
+
+<Canvas of={SiteNavStories.CincoGrupos} />
 
 ## Grupos
 

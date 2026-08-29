@@ -2,6 +2,7 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-site-nav-group-gap: 2rem; // Separación entre grupos: entre columnas en escritorio, entre bloques en móvil
+$lxd-site-nav-columns-max: 5; // Tope de columnas en el breakpoint ancho: a partir de ahí el panel no sigue ensanchando columnas por grupo
 $lxd-site-nav-label-margin-block-end: 1rem; // Aire entre la cabecera y sus enlaces: un paso más que entre enlaces, que la cabecera no se pegue al primero
 $lxd-site-nav-item-gap: 0.75rem; // Separación entre enlaces de un grupo
 $lxd-site-nav-item-font-size: 1.5rem; // Enlaces: un punto por debajo de la cabecera del grupo (Heading talla 6 = font-size.5)
