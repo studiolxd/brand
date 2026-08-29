@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.32.1
+
+### Corregido
+
+- **`CHANGELOG.md` viaja en el paquete** (`files`): los consumidores por tag git pueden leer el
+  contrato de cada release desde `node_modules/@studiolxd/brand/CHANGELOG.md`.
+
 ## v25.32.0
 
 ### Corregido

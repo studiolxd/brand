@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "25.32.0",
+  "version": "25.32.1",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -585,7 +585,8 @@
   },
   "files": [
     "dist",
-    "src/tokens"
+    "src/tokens",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "dev": "vite",
