@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v26.1.2
+
+### Arreglado
+
+- **`SelectField`: `value=""` sin ninguna opción de valor `""` mostraba el
+  centinela interno (`__empty__`) en crudo** en vez del placeholder —
+  detectado en lmsmarketplace, filtro «Visibility» (F1 2026-08-30). El
+  centinela solo hace falta cuando la propia lista de opciones usa `""`
+  como valor real de un ítem (patrón "Selecciona un tipo" en cabeza de
+  lista); si ninguna opción lo usa, ahora se pasa `undefined` a `Select`,
+  que ya sabe enseñar el placeholder para ese caso. Test de contrato nuevo
+  en `SelectField.stories.tsx`.
+
 ## v26.1.1
 
 ### Arreglado

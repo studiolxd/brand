@@ -37,8 +37,20 @@ export interface SelectFieldProps {
 
 const EMPTY_SENTINEL = '__empty__';
 
-function encode(v: string | undefined): string | undefined {
-  return v === '' ? EMPTY_SENTINEL : v;
+/**
+ * Base UI no admite `""` como valor controlado de "nada seleccionado". El
+ * centinela solo hace falta cuando la propia lista de opciones ya usa `""`
+ * como el valor de un ítem real (el patrón "Selecciona un tipo" en cabeza de
+ * lista, ver historia `PorDefecto`): ahí sí hay que distinguir "seleccionado
+ * ese ítem" de "nada seleccionado", y el centinela cumple ambos papeles a la
+ * vez porque el ítem también se remapea a él más abajo. Si ninguna opción usa
+ * `""`, forzar el centinela solo consigue un valor sin ítem que lo nombre en
+ * la lista: el trigger termina enseñando el centinela en crudo (visto en
+ * lmsmarketplace, filtro «Visibility», F1 2026-08-30). Sin esa colisión que
+ * resolver, `undefined` ya hace que el trigger enseñe el placeholder.
+ */
+function encode(v: string | undefined, hasEmptyOption: boolean): string | undefined {
+  return v === '' ? (hasEmptyOption ? EMPTY_SENTINEL : undefined) : v;
 }
 
 function decode(v: string): string {
@@ -78,9 +90,10 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
   // Un mensaje de error implica estado de error
   const hasError = error || !!errorMessage;
 
-  const encodedOptions = options.map((o) =>
-    o.value === '' ? { ...o, value: EMPTY_SENTINEL } : o,
-  );
+  const hasEmptyOption = options.some((o) => o.value === '');
+  const encodedOptions = hasEmptyOption
+    ? options.map((o) => (o.value === '' ? { ...o, value: EMPTY_SENTINEL } : o))
+    : options;
 
   const containerClass = ['select-field', className].filter(Boolean).join(' ');
 
@@ -93,8 +106,8 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
         name={name}
         required={required}
         options={encodedOptions}
-        value={encode(value)}
-        defaultValue={encode(defaultValue)}
+        value={encode(value, hasEmptyOption)}
+        defaultValue={encode(defaultValue, hasEmptyOption)}
         placeholder={placeholder}
         disabled={disabled}
         size={size}

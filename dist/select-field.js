@@ -7,17 +7,17 @@ import { forwardRef as r, useId as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/molecules/SelectField/SelectField.tsx
 var s = "__empty__";
-function c(e) {
-	return e === "" ? s : e;
+function c(e, t) {
+	return e === "" ? t ? s : void 0 : e;
 }
 function l(e) {
 	return e === s ? "" : e;
 }
 var u = r(function({ id: r, label: u, labelHidden: d = !1, options: f, value: p, defaultValue: m, placeholder: h, name: g, disabled: _, required: v, size: y, error: b = !1, errorMessage: x, helperText: S, className: C, onValueChange: w, onBlur: T }, E) {
-	let D = e(y), O = i(), k = r ?? O, A = x ? `${k}-error` : void 0, j = S ? `${k}-helper` : void 0, M = [A, j].filter(Boolean).join(" ") || void 0, N = b || !!x, P = f.map((e) => e.value === "" ? {
+	let D = e(y), O = i(), k = r ?? O, A = x ? `${k}-error` : void 0, j = S ? `${k}-helper` : void 0, M = [A, j].filter(Boolean).join(" ") || void 0, N = b || !!x, P = f.some((e) => e.value === ""), F = P ? f.map((e) => e.value === "" ? {
 		...e,
 		value: s
-	} : e);
+	} : e) : f;
 	return /* @__PURE__ */ o("div", {
 		className: ["select-field", C].filter(Boolean).join(" "),
 		children: [
@@ -32,9 +32,9 @@ var u = r(function({ id: r, label: u, labelHidden: d = !1, options: f, value: p,
 				id: k,
 				name: g,
 				required: v,
-				options: P,
-				value: c(p),
-				defaultValue: c(m),
+				options: F,
+				value: c(p, P),
+				defaultValue: c(m, P),
 				placeholder: h,
 				disabled: _,
 				size: D,

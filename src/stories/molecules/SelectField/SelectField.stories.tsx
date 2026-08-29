@@ -141,6 +141,28 @@ function FormularioRhf() {
 }
 
 /**
+ * `value=""` sin ninguna opción de valor `""` en la lista: no hay ítem que
+ * reclame el centinela interno, así que el trigger tiene que enseñar el
+ * placeholder — nunca el centinela en crudo (bug real visto en
+ * lmsmarketplace, filtro «Visibility», F1 2026-08-30).
+ */
+export const ContratoValorVacioSinOpcion: Story = {
+  name: 'Test — value="" sin opción vacía enseña el placeholder, no el centinela',
+  tags: ['!dev'],
+  args: {
+    value: '',
+    options: options.slice(1),
+    placeholder: 'Todas',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const control = canvas.getByRole('combobox', { name: 'Tipo de contrato' });
+    await expect(control).toHaveTextContent('Todas');
+    await expect(control).not.toHaveTextContent('__empty__');
+  },
+};
+
+/**
  * El control es de Base UI: el contrato es `value`/`onValueChange` + `name`
  * + `ref` al disparador, no el spread del `field`.
  */
