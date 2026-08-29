@@ -7,6 +7,28 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.31.0
+
+### Añadido
+
+- **`Icon`: 17 glifos nuevos** (fase 2 de la unificación de iconos en slxd) — `chevron-right`,
+  `chevron-down`, `chevron-up` (derivados de `chevron` por rotación de 90°, misma lógica que
+  `close`/`menu`), `info`, `alert-triangle`, `alert-error`, `connection`, `package`, `archive`,
+  `database`, `building`, `send`, `external-link`, `gavel`, `inbox`, `library`, `target` y
+  `languages` (globo propio — círculo, ecuador y meridiano —, no el par de caracteres de
+  lucide/heroicons). Ninguno copiado de una librería ajena: mismo trazo 1px no escalable, retícula
+  de 24, esquinas rectas. `spinner` queda fuera a propósito: ya existe como componente `Spinner`.
+  Story-test de catálogo (cada `IconName` renderiza un `<svg stroke="currentColor">`) y criterio de
+  trazo documentado en Foundations → Iconografía.
+
+### Corregido
+
+- **`ConsentPreferences`: nombre accesible pegado de la categoría necesaria.** «Necesarias» y la
+  marca «Siempre activa» (en `VisuallyHidden`) se separaban con un simple espacio inicial, que un
+  motor de accesibilidad puede colapsar en el límite entre dos elementos en línea y dejar
+  «NecesariasSiempre activa» pegado (detectado en producción por public-shell). Pasa a una coma
+  explícita, que no se colapsa nunca.
+
 ## v25.30.0
 
 ### Cambiado
