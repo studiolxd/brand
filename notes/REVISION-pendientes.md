@@ -857,3 +857,5 @@ y modo `render` de `Card`, átomo `Separator`, y el par
       tiene tokens de movimiento; se ha dejado sin transición a propósito
       (aparece en la primera pintura, no como respuesta a un gesto), pero es una
       decisión a revisar si el patrón se generaliza.
+
+- [ ] **ConsentPreferences — nombre accesible pegado** (2026-08-29, detectado por public-shell): la categoría necesaria compone `[nombre] [<VisuallyHidden>marca]` como hermanos y el nombre accesible se lee «NecesariasSiempre activas» sin separación. Añadir un espacio/coma dentro del `VisuallyHidden` o un `aria-label` compuesto. Los consumidores comprueban por prefijo mientras tanto.
