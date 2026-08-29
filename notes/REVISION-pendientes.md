@@ -858,4 +858,4 @@ y modo `render` de `Card`, átomo `Separator`, y el par
       (aparece en la primera pintura, no como respuesta a un gesto), pero es una
       decisión a revisar si el patrón se generaliza.
 
-- [ ] **ConsentPreferences — nombre accesible pegado** (2026-08-29, detectado por public-shell): la categoría necesaria compone `[nombre] [<VisuallyHidden>marca]` como hermanos y el nombre accesible se lee «NecesariasSiempre activas» sin separación. Añadir un espacio/coma dentro del `VisuallyHidden` o un `aria-label` compuesto. Los consumidores comprueban por prefijo mientras tanto.
+- [x] **ConsentPreferences — nombre accesible pegado** (2026-08-29, detectado por public-shell). **Resuelto (2026-08-29):** coma explícita dentro del `VisuallyHidden` (`, Siempre activa`) en vez de un espacio inicial — un espacio en el límite entre dos elementos en línea puede colapsarse al calcular el nombre accesible; una coma no. Test de contrato existente ajustado (el regex anterior no habría detectado el pegado).
