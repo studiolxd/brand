@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import './Consent.css';
+import { Modal } from '../Modal/Modal';
 /** Una categoría de tecnologías sobre la que se pide (o no) consentimiento. */
 export interface ConsentCategory {
     /** Identificador de la categoría. Es la clave dentro de `value`. */
@@ -87,8 +88,6 @@ export interface ConsentPreferencesProps {
     side?: 'top' | 'right' | 'bottom' | 'left';
     /** Título del panel. Default castellano: `'Preferencias de cookies'`. */
     title?: ReactNode;
-    /** Texto bajo el título. Default castellano. */
-    description?: ReactNode;
     /** Etiqueta del botón de guardar. Default castellano: `'Guardar preferencias'`. */
     saveLabel?: string;
     /** Etiqueta del botón de aceptar todas. Default castellano: `'Aceptar todas'`. */
@@ -99,17 +98,27 @@ export interface ConsentPreferencesProps {
     closeLabel?: string;
     /** Marca de una categoría necesaria. Default castellano: `'Siempre activa'`. */
     alwaysOnLabel?: string;
+    /**
+     * Nodo DOM donde montar el portal del panel, reenviado a `Modal`/`Sheet`.
+     * Necesario cuando el panel se abre dentro de `SiteShell`: por defecto el
+     * portal monta en `document.body`, que no hereda los tokens de la
+     * superficie pública (a diferencia del tema oscuro, que se activa en
+     * `<html>`) — pásale el nodo de `SiteShell` (su `ref`).
+     */
+    container?: React.ComponentPropsWithoutRef<typeof Modal>['container'];
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }
 /**
- * El panel de preferencias por categorías: un interruptor por categoría
- * opcional y una fila fija para las necesarias. Se abre sobre `Modal` (default)
- * o sobre `Modal`; el foco, el cierre con Escape y el velo los pone Base UI.
+ * El panel de preferencias por categorías: título, la lista de categorías —un
+ * interruptor por categoría opcional y una fila fija para las necesarias— y
+ * el pie con las acciones. Sin párrafo de descripción bajo el título: la
+ * propia lista explica qué se decide. Se abre sobre `Modal` (default) o sobre
+ * `Sheet`; el foco, el cierre con Escape y el velo los pone Base UI.
  *
  * Sin `onChange` el panel lleva un **borrador**: los interruptores se mueven
  * dentro del panel y la decisión no sale hasta pulsar guardar. El borrador se
  * siembra de `value` cada vez que el panel se abre, así que cerrar sin guardar
  * descarta los cambios.
  */
-export declare function ConsentPreferences({ open, onOpenChange, categories, value, onChange, onSave, onAcceptAll, onRejectAll, surface, side, title, description, saveLabel, acceptAllLabel, rejectAllLabel, closeLabel, alwaysOnLabel, className, }: ConsentPreferencesProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConsentPreferences({ open, onOpenChange, categories, value, onChange, onSave, onAcceptAll, onRejectAll, surface, side, title, saveLabel, acceptAllLabel, rejectAllLabel, closeLabel, alwaysOnLabel, container, className, }: ConsentPreferencesProps): import("react/jsx-runtime").JSX.Element;

@@ -1,1 +1,1 @@
-.site-shell{min-block-size:100dvh;font-size:var(--site-shell-text-font-size);line-height:var(--site-shell-text-line-height);flex-direction:column;display:flex}.site-shell__main{flex-direction:column;flex:1;display:flex}.site-shell__main>*{flex:1}
+.site-shell{min-block-size:100dvh;font-size:var(--site-shell-text-font-size);line-height:var(--site-shell-text-line-height);flex-direction:column;display:flex}.site-shell__main{flex-direction:column;flex:1;display:flex}.site-shell__main>*{flex:1}.site-shell__main [id]{scroll-margin-top:var(--site-header-height)}

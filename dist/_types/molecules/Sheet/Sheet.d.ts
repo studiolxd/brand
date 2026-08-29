@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Dialog } from '@base-ui/react/dialog';
 import './Sheet.css';
 export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
     open: boolean;
@@ -16,6 +17,16 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
     closeLabel?: string;
     /** Elemento que abre el panel. Sin él, la apertura la controla el consumidor. */
     trigger?: ReactNode;
+    /**
+     * Nodo DOM donde montar el portal del panel (reenviado a Base UI
+     * `Portal.container`). Por defecto se monta en `document.body`, que
+     * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
+     * sin configuración adicional. Solo hace falta pasarlo cuando el Sheet
+     * vive dentro de una superficie **anidada** (un `.surface-dark` que no está
+     * en la raíz, o dentro de `SiteShell`/`.site-shell`), ya que ese contexto
+     * no llega a `document.body` por la cascada.
+     */
+    container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
     /**
      * Se dispara cuando termina la animación de entrada o de salida del panel.
      * Sirve para desmontar el panel solo después de que haya salido de pantalla.
@@ -42,4 +53,4 @@ export declare function SheetFooter({ className, ...props }: React.HTMLAttribute
  * handlers son lo que permite montar la barrera de eventos cuando el panel se
  * abre desde dentro de una tarjeta clicable, sin `div`s de producto alrededor.
  */
-export declare function Sheet({ open, onOpenChange, side, title, titleHidden, description, footer, children, closeLabel, trigger, onAnimationEndCapture, className, ...rest }: SheetProps): import("react/jsx-runtime").JSX.Element;
+export declare function Sheet({ open, onOpenChange, side, title, titleHidden, description, footer, children, closeLabel, trigger, container, onAnimationEndCapture, className, ...rest }: SheetProps): import("react/jsx-runtime").JSX.Element;

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import './SiteShell.css';
 export interface SiteShellProps {
     /** La cabecera del sitio (`SiteHeader` o la del producto). */
@@ -16,4 +16,11 @@ export interface SiteShellProps {
  * norma del sistema: ningún producto necesita CSS propio para sujetar el pie.
  * Para las aplicaciones con barra y sidebar está `AppShell`.
  */
-export declare function SiteShell({ header, footer, children, className }: SiteShellProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * Reenvía el `ref` al nodo raíz (`.site-shell`): un `Modal`/`Sheet` abierto
+ * desde dentro necesita apuntar su `container` aquí para heredar los tokens
+ * de la superficie pública — el portal por defecto monta en `document.body`,
+ * que no es descendiente de `.site-shell` (a diferencia del tema oscuro, que
+ * se activa en `<html>` y sí llega a cualquier portal sin configuración).
+ */
+export declare const SiteShell: import("react").ForwardRefExoticComponent<SiteShellProps & import("react").RefAttributes<HTMLDivElement>>;
