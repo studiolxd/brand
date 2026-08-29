@@ -26,6 +26,16 @@
     "surface-dark-bg":                { "$value": "{color.background.dark}",   "$type": "color", "$description": "Fondo del panel — surface-dark" },
     "surface-dark-title-color":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Color del título — surface-dark" },
     "surface-dark-border-color":      { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Borde 1px — surface-dark: separa el panel del velo, que también es oscuro" },
-    "surface-dark-description-color": { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Color de la descripción — surface-dark" }
+    "surface-dark-description-color": { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Color de la descripción — surface-dark" },
+    "close-size":               { "$value": "{size-component.sm}",              "$type": "dimension", "$description": "Caja del botón de cerrar (32px). En la superficie pública (SiteShell) remapea a size-component.lg" },
+    "close-icon-size":          { "$value": "{icon.size-sm}",                   "$type": "dimension", "$description": "Glifo del botón de cerrar (16px). En la superficie pública remapea a icon.size-md" },
+    "close-color":              { "$value": "{color.icon.secondary-on-light}",  "$type": "color",     "$description": "Color del glifo en reposo — mismo rol que el aspa de borrar de otros controles compactos" },
+    "close-hover-color":        { "$value": "{color.primary}",                  "$type": "color",     "$description": "Color del glifo al pasar el puntero o al recibir foco. Sin cambio de fondo ni de borde: es la única excepción a la regla de hover" },
+    "close-focus-ring-width":   { "$value": "{border-width.focus}",             "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "close-focus-ring-offset":  { "$value": "{border-width.focus}",             "$type": "dimension", "$description": "Separación del anillo de foco (el rol focus gobierna ancho y separación)" },
+    "close-focus-ring-color":   { "$value": "{color.primary}",                  "$type": "color",     "$description": "Color del anillo de foco: la tinta de la superficie" },
+    "surface-dark-close-color":            { "$value": "{color.icon.secondary-on-dark}", "$type": "color", "$description": "Color del glifo en reposo — surface-dark" },
+    "surface-dark-close-hover-color":      { "$value": "{color.text.on-dark}",           "$type": "color", "$description": "Color del glifo al pasar el puntero o al recibir foco — surface-dark" },
+    "surface-dark-close-focus-ring-color": { "$value": "{color.text.on-dark}",           "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }
 }

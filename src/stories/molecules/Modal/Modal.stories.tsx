@@ -8,6 +8,7 @@ import { AsyncSelectField } from '../AsyncSelectField/AsyncSelectField';
 import type { AsyncSelectOption } from '../AsyncSelectField/AsyncSelectField';
 import { AsyncMultiSelectField } from '../AsyncMultiSelectField/AsyncMultiSelectField';
 import type { AsyncMultiSelectOption } from '../AsyncMultiSelectField/AsyncMultiSelectField';
+import { SiteShell } from '../../sections/SiteShell/SiteShell';
 
 const meta: Meta<typeof Modal> = {
   title: 'Molecules/Modal',
@@ -89,6 +90,136 @@ export const SuperficieOscura: Story = {
         </Modal>
       </>
     );
+  },
+};
+
+/**
+ * Dentro de `SiteShell` el aspa de cerrar remapea de `sm` (32px, el resto de
+ * la aplicación) a `lg` (48px): el `container` apunta al nodo de `SiteShell`
+ * para que el portal —que por defecto monta en `document.body`, fuera de
+ * `.site-shell`— herede sus tokens.
+ */
+export const SuperficiePublica: Story = {
+  name: 'En la superficie pública',
+  parameters: { layout: 'fullscreen' },
+  render: () => {
+    const [open, setOpen] = useState(true);
+    const [shellNode, setShellNode] = useState<HTMLDivElement | null>(null);
+    return (
+      <SiteShell ref={setShellNode}>
+        <div style={{ padding: 'var(--spacing-6)' }}>
+          <Button onClick={() => setOpen(true)}>Abrir modal</Button>
+        </div>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Preferencias de cookies"
+          container={shellNode}
+        >
+          <p style={{ margin: 0, color: 'var(--color-text-on-light)' }}>
+            El cuerpo también lee a 20px, la talla de la superficie pública.
+          </p>
+        </Modal>
+      </SiteShell>
+    );
+  },
+};
+
+/** Test: sin `SiteShell` el aspa mide `sm` (32px); dentro, `lg` (48px). */
+export const ContratoTallaPorSuperficie: Story = {
+  name: 'Test — talla del aspa por superficie',
+  tags: ['!dev'],
+  render: () => {
+    const [shellNode, setShellNode] = useState<HTMLDivElement | null>(null);
+    return (
+      <SiteShell ref={setShellNode}>
+        {shellNode && (
+          <Modal open onClose={fn()} title="En SiteShell" container={shellNode}>
+            <p>Contenido</p>
+          </Modal>
+        )}
+      </SiteShell>
+    );
+  },
+  play: async () => {
+    const close = document.querySelector('.modal__close') as HTMLElement;
+    await expect(close).toBeInTheDocument();
+    await expect(getComputedStyle(close).inlineSize).toBe('48px');
+    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('24px');
+  },
+};
+
+/** Test: fuera de `SiteShell` el aspa se queda en `sm` (32px), la talla de aplicación. */
+export const ContratoTallaAplicacion: Story = {
+  name: 'Test — talla del aspa fuera de SiteShell',
+  tags: ['!dev'],
+  render: () => (
+    <Modal open onClose={fn()} title="Fuera de SiteShell">
+      <p>Contenido</p>
+    </Modal>
+  ),
+  play: async () => {
+    const close = document.querySelector('.modal__close') as HTMLElement;
+    await expect(getComputedStyle(close).inlineSize).toBe('32px');
+    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('16px');
+  },
+};
+
+/** Test: el aspa no cambia de fondo ni de borde en hover — solo el color del glifo. */
+export const ContratoSinHoverEnCerrar: Story = {
+  name: 'Test — sin fondo en hover del aspa',
+  tags: ['!dev'],
+  render: () => (
+    <Modal open onClose={fn()} title="Detalle">
+      <p>Contenido</p>
+    </Modal>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body);
+    const close = canvas.getByRole('button', { name: 'Cerrar' });
+    const before = getComputedStyle(close).backgroundColor;
+    await userEvent.hover(close);
+    const during = getComputedStyle(close).backgroundColor;
+    await expect(during).toBe(before);
+    await expect(during).toBe('rgba(0, 0, 0, 0)');
+  },
+};
+
+/** Test: el panel del modal es completamente opaco en reposo, en claro y en oscuro. */
+export const ContratoPanelOpaco: Story = {
+  name: 'Test — panel opaco en reposo',
+  tags: ['!dev'],
+  render: () => (
+    <Modal open onClose={fn()} title="Detalle">
+      <p>Contenido</p>
+    </Modal>
+  ),
+  play: async () => {
+    const panel = document.querySelector('.modal__content') as HTMLElement;
+    // Espera a que termine la animación de entrada (motion.duration.base).
+    await new Promise((resolve) => panel.addEventListener('animationend', resolve, { once: true }));
+    const cs = getComputedStyle(panel);
+    await expect(cs.opacity).toBe('1');
+    await expect(cs.backgroundColor).toBe('rgb(255, 255, 255)');
+  },
+};
+
+/** Test: igual que `ContratoPanelOpaco`, en superficie oscura. */
+export const ContratoPanelOpacoOscuro: Story = {
+  name: 'Test — panel opaco en reposo (oscuro)',
+  tags: ['!dev'],
+  parameters: { surface: 'dark' },
+  render: () => (
+    <Modal open onClose={fn()} title="Detalle">
+      <p>Contenido</p>
+    </Modal>
+  ),
+  play: async () => {
+    const panel = document.querySelector('.modal__content') as HTMLElement;
+    await new Promise((resolve) => panel.addEventListener('animationend', resolve, { once: true }));
+    const cs = getComputedStyle(panel);
+    await expect(cs.opacity).toBe('1');
+    await expect(cs.backgroundColor).toBe('rgb(17, 30, 48)');
   },
 };
 

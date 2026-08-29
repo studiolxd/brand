@@ -99,12 +99,37 @@
   color: var(--sheet-description-color);
 }
 
-/* Color, hover y anillo de foco los pone `Button` ghost (mismo patrón que
-   `Modal`/`Alert`/`Toast`); aquí solo la posición sobre la esquina del panel. */
+/* Botón nativo, sin Button: el aspa no tiene la excepción de hover-con-relleno
+   de `ghost` — en reposo y en hover/foco solo cambia el color del glifo. */
 .sheet__close {
   position: absolute;
   inset-block-start: var(--sheet-close-inset);
   inset-inline-end: var(--sheet-close-inset);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--sheet-close-size);
+  block-size: var(--sheet-close-size);
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--sheet-close-color);
+  cursor: pointer;
+  transition: color var(--sheet-transition-duration) var(--sheet-transition-easing);
+}
+
+.sheet__close:hover,
+.sheet__close:focus-visible {
+  color: var(--sheet-close-hover-color);
+}
+
+.sheet__close:focus-visible {
+  outline: var(--sheet-close-focus-ring-width) solid var(--sheet-close-focus-ring-color);
+  outline-offset: var(--sheet-close-focus-ring-offset);
+}
+
+.sheet__close .icon {
+  --icon-size: var(--sheet-close-icon-size);
 }
 
 .sheet__body {

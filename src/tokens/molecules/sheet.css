@@ -16,6 +16,8 @@
   --sheet-backdrop-z-index: var(--modal-backdrop-z-index); /** Capa z del velo */
   --sheet-header-gap: var(--modal-header-gap); /** Separación dentro de la cabecera */
   --sheet-title-font-size: var(--modal-title-font-size); /** Tamaño del título */
+  --sheet-close-size: var(--modal-close-size); /** Caja del botón de cerrar — misma talla que Modal */
+  --sheet-close-icon-size: var(--modal-close-icon-size); /** Glifo del botón de cerrar — mismo que Modal */
   --sheet-transition-duration: var(--modal-transition-duration); /** Duración de la animación de entrada/salida */
   --sheet-transition-easing: var(--modal-transition-easing); /** Easing de la animación */
   --sheet-bg: var(--modal-bg); /** Fondo del panel */
@@ -24,4 +26,9 @@
   --sheet-title-font-weight: var(--modal-title-font-weight); /** Peso del título */
   --sheet-description-font-size: var(--modal-description-font-size); /** Tamaño del texto descriptivo — hereda el cuerpo de la superficie, como en Modal */
   --sheet-description-color: var(--modal-description-color); /** Color del texto descriptivo */
+  --sheet-close-color: var(--modal-close-color); /** Color del glifo en reposo */
+  --sheet-close-hover-color: var(--modal-close-hover-color); /** Color del glifo al pasar el puntero o al recibir foco */
+  --sheet-close-focus-ring-width: var(--modal-close-focus-ring-width); /** Grosor del anillo de foco */
+  --sheet-close-focus-ring-offset: var(--modal-close-focus-ring-offset); /** Separación del anillo de foco */
+  --sheet-close-focus-ring-color: var(--modal-close-focus-ring-color); /** Color del anillo de foco */
 }

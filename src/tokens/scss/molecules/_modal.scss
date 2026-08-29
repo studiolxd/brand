@@ -24,3 +24,10 @@ $lxd-modal-content-enter-offset: 0.5rem; // Desplazamiento vertical del panel al
 $lxd-modal-description-font-size: 1rem; // La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública)
 $lxd-modal-description-color: #4a4a4a; // Color de la descripción del modal
 $lxd-modal-description-margin-block-end: 1rem; // Separación entre la descripción y el cuerpo del modal
+$lxd-modal-close-size: 2rem; // Caja del botón de cerrar (32px). En la superficie pública (SiteShell) remapea a size-component.lg
+$lxd-modal-close-icon-size: 16px; // Glifo del botón de cerrar (16px). En la superficie pública remapea a icon.size-md
+$lxd-modal-close-color: #6b6b6b; // Color del glifo en reposo — mismo rol que el aspa de borrar de otros controles compactos
+$lxd-modal-close-hover-color: #111e30; // Color del glifo al pasar el puntero o al recibir foco. Sin cambio de fondo ni de borde: es la única excepción a la regla de hover
+$lxd-modal-close-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-modal-close-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
+$lxd-modal-close-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie

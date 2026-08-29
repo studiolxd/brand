@@ -15,6 +15,9 @@
     "heading-size-7":  { "$value": "{font-size.7}",  "$type": "dimension", "$description": "Paso 7 de la escala de títulos en la superficie pública (40px) — el de H2" },
     "heading-size-8":  { "$value": "{font-size.8}",  "$type": "dimension", "$description": "Paso 8 de la escala de títulos en la superficie pública (56px) — el de H1" },
     "heading-size-9":  { "$value": "{font-size.9}",  "$type": "dimension", "$description": "Paso 9 de la escala de títulos en la superficie pública (72px) — display pequeño" },
-    "heading-size-10": { "$value": "{font-size.10}", "$type": "dimension", "$description": "Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más" }
+    "heading-size-10": { "$value": "{font-size.10}", "$type": "dimension", "$description": "Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más" },
+
+    "close-size":      { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Caja del botón de cerrar de Modal/Sheet en la superficie pública: objetivo táctil lg" },
+    "close-icon-size": { "$value": "{icon.size-md}",       "$type": "dimension", "$description": "Glifo del botón de cerrar de Modal/Sheet en la superficie pública" }
   }
 }

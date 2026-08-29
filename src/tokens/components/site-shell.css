@@ -17,4 +17,6 @@
   --site-shell-heading-size-8: var(--font-size-8); /** Paso 8 de la escala de títulos en la superficie pública (56px) — el de H1 */
   --site-shell-heading-size-9: var(--font-size-9); /** Paso 9 de la escala de títulos en la superficie pública (72px) — display pequeño */
   --site-shell-heading-size-10: var(--font-size-10); /** Paso 10 de la escala de títulos en la superficie pública (96px): el techo de la escala, no sube más */
+  --site-shell-close-size: var(--size-component-lg); /** Caja del botón de cerrar de Modal/Sheet en la superficie pública: objetivo táctil lg */
+  --site-shell-close-icon-size: var(--icon-size-md); /** Glifo del botón de cerrar de Modal/Sheet en la superficie pública */
 }

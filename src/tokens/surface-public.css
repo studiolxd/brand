@@ -22,6 +22,8 @@
   --text-size-8: var(--site-shell-heading-size-8);
   --text-size-9: var(--site-shell-heading-size-9);
   --text-size-10: var(--site-shell-heading-size-10);
+  --modal-close-size: var(--site-shell-close-size);
+  --modal-close-icon-size: var(--site-shell-close-icon-size);
   --accordion-index-font-size: var(--text-paragraph-small-font-size);
   --alert-title-font-size: var(--text-font-size);
   --alert-description-font-size: var(--text-font-size);
@@ -111,6 +113,8 @@
   --select-field-error-font-size: var(--form-error-font-size);
   --select-field-helper-font-size: var(--form-helper-font-size);
   --sheet-description-font-size: var(--modal-description-font-size);
+  --sheet-close-size: var(--modal-close-size);
+  --sheet-close-icon-size: var(--modal-close-icon-size);
   --stat-tile-label-font-size: var(--text-paragraph-small-font-size);
   --stat-tile-value-font-size: var(--text-size-7);
   --stat-tile-sm-value-font-size: var(--text-size-5);

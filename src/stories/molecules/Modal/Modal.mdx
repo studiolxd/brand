@@ -25,9 +25,10 @@ Escape o clic fuera; el DS pone la superficie, el título y el aspa.
 - **Título** (`title`): opcional. Sin él, `fallbackTitle` (default «Diálogo»)
   se renderiza oculto solo para el nombre accesible — el modal siempre tiene
   uno, lo vea o no el usuario.
-- **Cierre**: `Dialog.Close` compuesto con `<Button variant="ghost" size="sm" iconOnly>`
-  vía `render` (mismo patrón que `Alert`/`Toast`) — color, hover y anillo de
-  foco los pone `Button`, no el modal.
+- **Cierre**: `Dialog.Close` con su propio botón nativo (sin `Button`, sin
+  variante `ghost`): en reposo, hover y foco solo cambia el color del glifo —
+  nunca el fondo ni el borde, la única excepción al hover del sistema. Tokens
+  propios `modal.close-*`.
 - **Descripción** (`description` o `aria-describedby`): opcional, bajo el
   título.
 - **Cuerpo** (`children`): con scroll propio si el contenido no cabe.
@@ -79,6 +80,30 @@ En superficie oscura el panel lleva **borde 1px** (`surface-dark-border-color`,
 blanco) — en superficie clara el token vale `transparent`: el velo y el fondo
 blanco ya separan el panel sin necesidad de contorno.
 
+## Superficie pública (SiteShell)
+
+<Canvas of={ModalStories.SuperficiePublica} />
+
+A diferencia del tema oscuro —que se activa en `<html>` y por eso cascadea a
+cualquier portal sin más—, `.site-shell` es un contenedor **anidado**: no
+llega a `document.body`. Para que el modal herede sus tokens (el aspa pasa de
+`sm` a `lg`, el cuerpo de 16 a 20px…) hay que pasarle `container` apuntando al
+nodo de `SiteShell`:
+
+```tsx
+const [shellNode, setShellNode] = useState<HTMLDivElement | null>(null);
+
+<SiteShell ref={setShellNode}>
+  <Modal open={open} onClose={cerrar} title="Preferencias" container={shellNode}>
+    …
+  </Modal>
+</SiteShell>
+```
+
+El tamaño del aspa no es una prop del consumidor: cambia solo por el token
+`modal.close-size` remapeado bajo `.site-shell` — el mismo `Modal`, montado en
+sitios distintos, se ve distinto.
+
 ## Textos personalizados (i18n)
 
 <Canvas of={ModalStories.CustomLabels} />
@@ -127,5 +152,6 @@ por tokens, no por clases de producto.
   que abrió el modal al cerrarlo. `initialFocus={false}` deja que el propio
   contenido decida qué recibe el foco inicial en vez de forzarlo al primer
   elemento focable.
-- **Cierre**: Escape, clic en el velo o el aspa. El aspa es un `Button` de
-  32px (`sm`) — la talla mínima del sistema — con su propio anillo de foco.
+- **Cierre**: Escape, clic en el velo o el aspa. El aspa mide 32px (`sm`) en
+  la aplicación y 48px (`lg`) en la superficie pública, con su propio anillo
+  de foco — nunca fondo en hover.

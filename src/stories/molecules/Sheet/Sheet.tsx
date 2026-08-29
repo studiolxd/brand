@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react';
 import { Dialog } from '@base-ui/react/dialog';
-import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Sheet.css';
@@ -23,6 +22,16 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
   closeLabel?: string;
   /** Elemento que abre el panel. Sin él, la apertura la controla el consumidor. */
   trigger?: ReactNode;
+  /**
+   * Nodo DOM donde montar el portal del panel (reenviado a Base UI
+   * `Portal.container`). Por defecto se monta en `document.body`, que
+   * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
+   * sin configuración adicional. Solo hace falta pasarlo cuando el Sheet
+   * vive dentro de una superficie **anidada** (un `.surface-dark` que no está
+   * en la raíz, o dentro de `SiteShell`/`.site-shell`), ya que ese contexto
+   * no llega a `document.body` por la cascada.
+   */
+  container?: React.ComponentPropsWithoutRef<typeof Dialog.Portal>['container'];
   /**
    * Se dispara cuando termina la animación de entrada o de salida del panel.
    * Sirve para desmontar el panel solo después de que haya salido de pantalla.
@@ -64,6 +73,7 @@ export function Sheet({
   children,
   closeLabel = 'Cerrar',
   trigger,
+  container,
   onAnimationEndCapture,
   className,
   ...rest
@@ -74,7 +84,7 @@ export function Sheet({
         <Dialog.Trigger render={trigger as React.ReactElement<Record<string, unknown>>} />
       )}
 
-      <Dialog.Portal>
+      <Dialog.Portal container={container}>
         <Dialog.Backdrop className="sheet__overlay" />
         <Dialog.Popup
           className={['sheet', className].filter(Boolean).join(' ')}
@@ -95,11 +105,7 @@ export function Sheet({
             )}
           </header>
 
-          <Dialog.Close
-            className="sheet__close"
-            aria-label={closeLabel}
-            render={<Button variant="ghost" size="sm" iconOnly />}
-          >
+          <Dialog.Close className="sheet__close" aria-label={closeLabel}>
             <Icon name="close" size="sm" />
           </Dialog.Close>
 

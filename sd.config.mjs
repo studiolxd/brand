@@ -518,6 +518,8 @@ const surfaceSeeds = {
   ...Object.fromEntries(
     Array.from({ length: 10 }, (_, i) => [`text.size.${i + 1}`, `--site-shell-heading-size-${i + 1}`]),
   ),
+  'modal.close-size':      '--site-shell-close-size',
+  'modal.close-icon-size': '--site-shell-close-icon-size',
 };
 
 const allTokens = [];
