@@ -38,7 +38,7 @@ function o({ open: o, onOpenChange: s, side: c = "right", title: l, titleHidden:
 						"aria-label": m,
 						children: /* @__PURE__ */ n(e, {
 							name: "close",
-							size: "sm"
+							size: "md"
 						})
 					}),
 					/* @__PURE__ */ n("div", {

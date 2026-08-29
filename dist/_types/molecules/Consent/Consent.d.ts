@@ -83,33 +83,16 @@ export interface ConsentPreferencesProps {
      * @deprecated Alias de `onChange`, por compatibilidad con quien ya lo
      * pasaba. Desde que el panel dejó de tener botón «Guardar» (v25.32.0),
      * `onSave` se llama en el mismo momento y con la misma decisión que
-     * `onChange` — en cada conmutación de interruptor y en «Aceptar
-     * todas»/«Rechazar todas», no solo al pulsar un guardado explícito que ya
-     * no existe. Pasa a `onChange`.
+     * `onChange` — en cada conmutación de interruptor, no al pulsar un guardado
+     * explícito que ya no existe. Pasa a `onChange`.
      */
     onSave?: (value: ConsentValue) => void;
-    /**
-     * Se llama, además de `onChange`/`onSave`, tras aplicar «Aceptar todas» y
-     * cerrar el panel. Opcional: para lógica extra del consumidor (p. ej.
-     * marcar que ya hay una decisión). El botón se muestra siempre, la tenga o
-     * no.
-     */
-    onAcceptAll?: () => void;
-    /**
-     * Se llama, además de `onChange`/`onSave`, tras aplicar «Rechazar todas» y
-     * cerrar el panel. Opcional, igual que `onAcceptAll`.
-     */
-    onRejectAll?: () => void;
     /** Superficie sobre la que se abre el panel. Default: `'sheet'`. */
     surface?: 'sheet' | 'modal';
     /** Borde por el que entra el panel (solo con `surface="sheet"`, la alternativa lateral que el sistema conserva para otros usos). Default: `'right'`. */
     side?: 'top' | 'right' | 'bottom' | 'left';
     /** Título del panel. Default castellano: `'Preferencias de cookies'`. */
     title?: ReactNode;
-    /** Etiqueta del botón de aceptar todas. Default castellano: `'Aceptar todas'`. */
-    acceptAllLabel?: string;
-    /** Etiqueta del botón de rechazar todas. Default castellano: `'Rechazar todas'`. */
-    rejectAllLabel?: string;
     /** Etiqueta del botón de cerrar. Default castellano: `'Cerrar'`. */
     closeLabel?: string;
     /** Marca de una categoría necesaria. Default castellano: `'Siempre activa'`. */
@@ -126,17 +109,19 @@ export interface ConsentPreferencesProps {
     className?: string;
 }
 /**
- * El panel de preferencias por categorías: título, la lista de categorías —un
- * interruptor por categoría opcional y una fila fija para las necesarias— y
- * el pie con las dos únicas acciones («Aceptar todas»/«Rechazar todas»). Sin
+ * El panel de preferencias por categorías: título y la lista de categorías —un
+ * interruptor por categoría opcional y una fila fija para las necesarias—. Sin
  * párrafo de descripción bajo el título: la propia lista explica qué se
  * decide. Se abre sobre `Modal` (default) o sobre `Sheet`; el foco, el cierre
  * con Escape y el velo los pone Base UI.
  *
- * **No hay botón «Guardar»**: cada interruptor persiste al instante — se
- * conmuta y `onChange` (u `onSave`, su alias) se llama en el momento con la
- * decisión completa. Sin `onChange` el panel lleva su propio estado interno,
+ * **No hay pie de acciones**: ni «Guardar» ni «Aceptar todas»/«Rechazar
+ * todas». Quien entra aquí viene a decidir categoría por categoría, así que
+ * cada interruptor persiste al instante — se conmuta y `onChange` (u `onSave`,
+ * su alias) se llama en el momento con la decisión completa. Las salidas de un
+ * clic («Aceptar todas»/«Rechazar») viven en `ConsentBanner`, que es donde la
+ * ePrivacy las pide. Sin `onChange` el panel lleva su propio estado interno,
  * sembrado de `value` cada vez que se abre, y sigue disparando `onSave` en
  * cada cambio.
  */
-export declare function ConsentPreferences({ open, onOpenChange, categories, value, onChange, onSave, onAcceptAll, onRejectAll, surface, side, title, acceptAllLabel, rejectAllLabel, closeLabel, alwaysOnLabel, container, className, }: ConsentPreferencesProps): import("react/jsx-runtime").JSX.Element;
+export declare function ConsentPreferences({ open, onOpenChange, categories, value, onChange, onSave, surface, side, title, closeLabel, alwaysOnLabel, container, className, }: ConsentPreferencesProps): import("react/jsx-runtime").JSX.Element;

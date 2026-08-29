@@ -26,8 +26,7 @@
   --sheet-title-font-weight: var(--modal-title-font-weight); /** Peso del título */
   --sheet-description-font-size: var(--modal-description-font-size); /** Tamaño del texto descriptivo — hereda el cuerpo de la superficie, como en Modal */
   --sheet-description-color: var(--modal-description-color); /** Color del texto descriptivo */
-  --sheet-close-color: var(--modal-close-color); /** Color del glifo en reposo */
-  --sheet-close-hover-color: var(--modal-close-hover-color); /** Color del glifo al pasar el puntero o al recibir foco */
+  --sheet-close-color: var(--modal-close-color); /** Color del glifo — la tinta, ya en reposo, igual que Modal */
   --sheet-close-focus-ring-width: var(--modal-close-focus-ring-width); /** Grosor del anillo de foco */
   --sheet-close-focus-ring-offset: var(--modal-close-focus-ring-offset); /** Separación del anillo de foco */
   --sheet-close-focus-ring-color: var(--modal-close-focus-ring-color); /** Color del anillo de foco */

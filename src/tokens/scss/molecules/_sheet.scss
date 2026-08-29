@@ -20,10 +20,9 @@ $lxd-sheet-description-font-size: 1rem; // Tamaño del texto descriptivo — her
 $lxd-sheet-description-color: #4a4a4a; // Color del texto descriptivo
 $lxd-sheet-footer-gap: 0.5rem; // Separación entre acciones del pie
 $lxd-sheet-close-inset: 0.75rem; // Distancia del botón de cierre a la esquina
-$lxd-sheet-close-size: 2rem; // Caja del botón de cerrar — misma talla que Modal
-$lxd-sheet-close-icon-size: 16px; // Glifo del botón de cerrar — mismo que Modal
-$lxd-sheet-close-color: #6b6b6b; // Color del glifo en reposo
-$lxd-sheet-close-hover-color: #111e30; // Color del glifo al pasar el puntero o al recibir foco
+$lxd-sheet-close-size: 2.5rem; // Caja del botón de cerrar — misma talla que Modal
+$lxd-sheet-close-icon-size: 24px; // Glifo del botón de cerrar — mismo que Modal
+$lxd-sheet-close-color: #111e30; // Color del glifo — la tinta, ya en reposo, igual que Modal
 $lxd-sheet-close-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-sheet-close-focus-ring-offset: 2px; // Separación del anillo de foco
 $lxd-sheet-close-focus-ring-color: #111e30; // Color del anillo de foco

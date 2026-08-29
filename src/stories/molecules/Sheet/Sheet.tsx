@@ -106,7 +106,7 @@ export function Sheet({
           </header>
 
           <Dialog.Close className="sheet__close" aria-label={closeLabel}>
-            <Icon name="close" size="sm" />
+            <Icon name="close" size="md" />
           </Dialog.Close>
 
           <div className="sheet__body">{children}</div>

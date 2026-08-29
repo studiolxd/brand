@@ -74,7 +74,7 @@ export function Modal({
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
               <Dialog.Close className="modal__close" aria-label={closeLabel}>
-                <Icon name="close" size="sm" />
+                <Icon name="close" size="md" />
               </Dialog.Close>
             </header>
           ) : (
@@ -82,7 +82,7 @@ export function Modal({
               <Dialog.Title render={<VisuallyHidden>{fallbackTitle}</VisuallyHidden>} />
               <header className="modal__header modal__header--no-title">
                 <Dialog.Close className="modal__close" aria-label={closeLabel}>
-                  <Icon name="close" size="sm" />
+                  <Icon name="close" size="md" />
                 </Dialog.Close>
               </header>
             </>

@@ -19,8 +19,8 @@
   --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
   --modal-content-enter-offset: var(--spacing-2); /** Desplazamiento vertical del panel al entrar/salir (8px) */
   --modal-description-margin-block-end: var(--spacing-4); /** Separación entre la descripción y el cuerpo del modal */
-  --modal-close-size: var(--size-component-sm); /** Caja del botón de cerrar (32px). En la superficie pública (SiteShell) remapea a size-component.lg */
-  --modal-close-icon-size: var(--icon-size-sm); /** Glifo del botón de cerrar (16px). En la superficie pública remapea a icon.size-md */
+  --modal-close-size: var(--size-component-md); /** Caja del botón de cerrar (40px). En la superficie pública (SiteShell) remapea a size-component.lg */
+  --modal-close-icon-size: var(--icon-size-md); /** Glifo del botón de cerrar (24px), la talla por defecto de icono-botón. En la superficie pública remapea igualmente a icon.size-md */
   --modal-bg: var(--color-background-light); /** Fondo del panel modal */
   --modal-border-width: var(--border-width-default); /** Grosor del borde del panel */
   --modal-border-radius: var(--border-radius-default); /** Radio del panel */
@@ -29,8 +29,7 @@
   --modal-title-color: var(--color-text-on-light); /** Color del título */
   --modal-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --modal-description-color: var(--color-text-muted-on-light); /** Color de la descripción del modal */
-  --modal-close-color: var(--color-icon-secondary-on-light); /** Color del glifo en reposo — mismo rol que el aspa de borrar de otros controles compactos */
-  --modal-close-hover-color: var(--color-primary); /** Color del glifo al pasar el puntero o al recibir foco. Sin cambio de fondo ni de borde: es la única excepción a la regla de hover */
+  --modal-close-color: var(--color-primary); /** Color del glifo: la tinta de la superficie, ya en reposo. El aspa no se atenúa ni cambia de color al pasar el puntero — el foco se marca con el anillo */
   --modal-close-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --modal-close-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco (el rol focus gobierna ancho y separación) */
   --modal-close-focus-ring-color: var(--color-primary); /** Color del anillo de foco: la tinta de la superficie */
@@ -43,7 +42,6 @@ html.dark {
   --modal-title-color: var(--color-text-on-dark); /** Color del título — surface-dark */
   --modal-border-color: var(--color-text-on-dark); /** Borde 1px — surface-dark: separa el panel del velo, que también es oscuro */
   --modal-description-color: var(--color-text-muted-on-dark); /** Color de la descripción — surface-dark */
-  --modal-close-hover-color: var(--color-text-on-dark); /** Color del glifo al pasar el puntero o al recibir foco — surface-dark */
+  --modal-close-color: var(--color-text-on-dark); /** Color del glifo — surface-dark */
   --modal-close-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
-  --modal-close-color: var(--color-icon-secondary-on-dark); /** Color del glifo en reposo — surface-dark */
 }

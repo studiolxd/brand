@@ -149,7 +149,7 @@ export const ContratoTallaPorSuperficie: Story = {
   },
 };
 
-/** Test: fuera de `SiteShell` el aspa se queda en `sm` (32px), la talla de aplicación. */
+/** Test: fuera de `SiteShell` el aspa es `md` (caja 40px, glifo 24px), la talla de aplicación. */
 export const ContratoTallaAplicacion: Story = {
   name: 'Test — talla del aspa fuera de SiteShell',
   tags: ['!dev'],
@@ -160,12 +160,12 @@ export const ContratoTallaAplicacion: Story = {
   ),
   play: async () => {
     const close = document.querySelector('.modal__close') as HTMLElement;
-    await expect(getComputedStyle(close).inlineSize).toBe('32px');
-    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('16px');
+    await expect(getComputedStyle(close).inlineSize).toBe('40px');
+    await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('24px');
   },
 };
 
-/** Test: el aspa no cambia de fondo ni de borde en hover — solo el color del glifo. */
+/** Test: el aspa va en tinta desde el reposo y no cambia ni de fondo ni de color en hover. */
 export const ContratoSinHoverEnCerrar: Story = {
   name: 'Test — sin fondo en hover del aspa',
   tags: ['!dev'],
@@ -178,10 +178,15 @@ export const ContratoSinHoverEnCerrar: Story = {
     const canvas = within(canvasElement.ownerDocument.body);
     const close = canvas.getByRole('button', { name: 'Cerrar' });
     const before = getComputedStyle(close).backgroundColor;
+    // La tinta ya está puesta en reposo: es la misma del título del diálogo.
+    const tinta = getComputedStyle(canvas.getByRole('heading')).color;
+    await expect(getComputedStyle(close).color).toBe(tinta);
     await userEvent.hover(close);
     const during = getComputedStyle(close).backgroundColor;
     await expect(during).toBe(before);
     await expect(during).toBe('rgba(0, 0, 0, 0)');
+    // Y el hover no la toca.
+    await expect(getComputedStyle(close).color).toBe(tinta);
   },
 };
 

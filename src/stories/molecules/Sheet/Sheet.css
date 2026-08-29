@@ -115,12 +115,6 @@
   background-color: transparent;
   color: var(--sheet-close-color);
   cursor: pointer;
-  transition: color var(--sheet-transition-duration) var(--sheet-transition-easing);
-}
-
-.sheet__close:hover,
-.sheet__close:focus-visible {
-  color: var(--sheet-close-hover-color);
 }
 
 .sheet__close:focus-visible {

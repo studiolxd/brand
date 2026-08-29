@@ -387,53 +387,6 @@ export const ContratoOnSaveAlias: Story = {
 };
 
 /**
- * Test: el pie solo lleva «Aceptar todas»/«Rechazar todas», los dos `Button`
- * primary (sin `outline` ni `text`), y al pulsarlos se aplica la decisión
- * completa y se cierra el panel.
- */
-export const ContratoPieAceptarRechazar: Story = {
-  name: 'Test — pie con dos primary, aplican y cierran',
-  tags: ['!dev'],
-  render: () => {
-    function Demo() {
-      const [decision, setDecision] = useState<ConsentValue>(decisionInicial);
-      const [abierto, setAbierto] = useState(true);
-      return (
-        <>
-          <p data-testid="decision">{JSON.stringify(decision)}</p>
-          <p data-testid="estado">{abierto ? 'abierto' : 'cerrado'}</p>
-          <ConsentPreferences
-            open={abierto}
-            onOpenChange={setAbierto}
-            categories={categorias}
-            value={decision}
-            onChange={setDecision}
-          />
-        </>
-      );
-    }
-    return <Demo />;
-  },
-  play: async ({ canvasElement }) => {
-    const panel = within(document.body);
-    const dialog = await panel.findByRole('dialog');
-    const botones = within(dialog).getAllByRole('button').filter((b) => b.textContent?.includes('todas'));
-    await expect(botones).toHaveLength(2);
-    for (const boton of botones) {
-      await expect(boton).toHaveClass('button--primary');
-      await expect(boton).not.toHaveClass('button--outline');
-      await expect(boton).not.toHaveClass('button--text');
-    }
-
-    await userEvent.click(within(dialog).getByRole('button', { name: 'Aceptar todas' }));
-    await expect(within(canvasElement).getByTestId('decision')).toHaveTextContent(
-      JSON.stringify({ necessary: true, analytics: true, marketing: true }),
-    );
-    await expect(within(canvasElement).getByTestId('estado')).toHaveTextContent('cerrado');
-  },
-};
-
-/**
  * Test: el panel no lleva párrafo de descripción, ni línea entre categorías,
  * y la marca «Siempre activa» de la categoría necesaria es accesible pero no
  * se ve.
@@ -499,11 +452,12 @@ export const ContratoPanelTeclado: Story = {
 };
 
 /**
- * Test: dentro de `Modal` (default), el pie que el panel monta en su propio
- * contenido queda separado de la lista de categorías, no pegado a ella.
+ * Test: el panel no tiene acciones globales — ni «Guardar» ni «Aceptar
+ * todas»/«Rechazar todas». Quien entra aquí decide categoría por categoría;
+ * las salidas de un clic son cosa de `ConsentBanner`.
  */
-export const ContratoSeparacionPie: Story = {
-  name: 'Test — el pie no queda pegado a la lista, en Modal',
+export const ContratoSinAccionesGlobales: Story = {
+  name: 'Test — el panel no lleva acciones globales',
   tags: ['!dev'],
   render: () => (
     <ConsentPreferences
@@ -518,11 +472,14 @@ export const ContratoSeparacionPie: Story = {
   play: async () => {
     const panel = within(document.body);
     const dialog = await panel.findByRole('dialog');
-    const lista = dialog.querySelector('.consent-preferences__list');
-    const pie = dialog.querySelector('.consent-preferences__footer');
-    if (!lista || !pie) throw new Error('Falta la lista o el pie del panel');
-    const gap = getComputedStyle(pie).marginBlockStart;
-    await expect(gap).not.toBe('0px');
-    await expect(pie.getBoundingClientRect().top).toBeGreaterThan(lista.getBoundingClientRect().bottom);
+    const dentro = within(dialog);
+    for (const nombre of ['Aceptar todas', 'Rechazar todas', 'Rechazar', 'Guardar']) {
+      await expect(dentro.queryByRole('button', { name: nombre })).toBeNull();
+    }
+    // El único botón del panel es el aspa de cerrar; lo demás son interruptores.
+    const botones = dentro.getAllByRole('button');
+    await expect(botones).toHaveLength(1);
+    await expect(botones[0]).toHaveAccessibleName('Cerrar');
+    await expect(dentro.getAllByRole('switch').length).toBeGreaterThan(0);
   },
 };

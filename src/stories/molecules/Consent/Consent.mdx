@@ -82,19 +82,20 @@ sembrado de `value` cada vez que se abre — sigue siendo instantáneo, solo que
 sin que el consumidor lo escuche.
 
 `onSave` es el **alias deprecado** de `onChange`: quien ya lo pasaba sigue
-funcionando igual, pero ahora se llama en cada conmutación (y en «Aceptar
-todas»/«Rechazar todas»), no solo al pulsar un guardado explícito que ya no
-existe. Los consumidores nuevos deben usar `onChange`.
+funcionando igual, pero ahora se llama en cada conmutación, no solo al pulsar
+un guardado explícito que ya no existe. Los consumidores nuevos deben usar
+`onChange`.
 
-## El pie: aceptar o rechazar todo
+## El panel no tiene pie
 
-El pie del panel lleva **solo dos acciones**, «Aceptar todas» y «Rechazar
-todas», ambas `Button` primary (sin variante `outline` ni `text`: el mismo
-peso, la misma jerarquía que en la banda). Pulsarlas aplica la decisión
-completa —todas las categorías, o solo las necesarias— y cierra el panel; no
-hace falta pasarle `onAcceptAll`/`onRejectAll` para que funcionen, son
-opcionales y solo sirven para lógica extra del consumidor (por ejemplo, marcar
-que ya hay una decisión tomada).
+El panel **no lleva ninguna acción global**: ni «Guardar» ni «Aceptar
+todas»/«Rechazar todas» (decisión del 2026-08-29). Quien abre las preferencias
+viene precisamente a decidir categoría por categoría, y cada interruptor
+persiste al conmutarlo. Las salidas de un clic siguen existiendo donde la
+ePrivacy las pide —en `ConsentBanner`, con «Aceptar todas» y «Rechazar» al
+mismo peso— y para volver atrás desde el panel se marcan o desmarcan los
+interruptores uno a uno. El único control fuera de la lista es el aspa de
+cerrar del diálogo.
 
 ## El flujo completo
 
@@ -173,12 +174,9 @@ Definidos en `tokens/molecule/consent.json`.
 | `value` | `ConsentValue` | — | La decisión vigente, por `id` de categoría |
 | `onChange` | `(value) => void` | — | Se llama con la decisión completa en cada conmutación (sin botón «Guardar»). Si se pasa, el panel es controlado |
 | `onSave` | `(value) => void` | — | **Deprecado**, alias de `onChange`: se llama en el mismo momento y con la misma decisión |
-| `onAcceptAll` / `onRejectAll` | `() => void` | — | Extra, además de `onChange`/`onSave`, tras «Aceptar todas»/«Rechazar todas» (que aplican y cierran solas) |
 | `surface` | `'sheet' \| 'modal'` | `'modal'` | Sobre qué se abre: modal (decisión del sistema, 2026-08-29) o sheet lateral, que se conserva para usos futuros |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Borde de entrada (solo `sheet`) |
 | `title` | `ReactNode` | `'Preferencias de cookies'` | Título del panel |
-| `acceptAllLabel` | `string` | `'Aceptar todas'` | |
-| `rejectAllLabel` | `string` | `'Rechazar todas'` | |
 | `closeLabel` | `string` | `'Cerrar'` | |
 | `alwaysOnLabel` | `string` | `'Siempre activa'` | Marca de una categoría necesaria (accesible, no visible) |
 | `container` | `React.ComponentPropsWithoutRef<typeof Modal>['container']` | — | Nodo del portal; el `ref` de `SiteShell` cuando el panel vive en la web pública |

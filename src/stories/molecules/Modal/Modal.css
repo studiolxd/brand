@@ -81,8 +81,8 @@
   flex: 1;
 }
 
-/* Botón nativo, sin Button: el aspa no tiene la excepción de hover-con-relleno
-   de `ghost` — en reposo y en hover/foco solo cambia el color del glifo. */
+/* Botón nativo, sin Button: el aspa va en tinta desde el reposo y no cambia de
+   color al pasar el puntero — el único estado que se marca es el foco. */
 .modal__close {
   flex-shrink: 0;
   display: inline-flex;
@@ -95,12 +95,6 @@
   background-color: transparent;
   color: var(--modal-close-color);
   cursor: pointer;
-  transition: color var(--modal-transition-duration) var(--modal-transition-easing);
-}
-
-.modal__close:hover,
-.modal__close:focus-visible {
-  color: var(--modal-close-hover-color);
 }
 
 .modal__close:focus-visible {

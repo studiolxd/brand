@@ -30,7 +30,7 @@ function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar
 							"aria-label": u,
 							children: /* @__PURE__ */ r(e, {
 								name: "close",
-								size: "sm"
+								size: "md"
 							})
 						})]
 					}) : /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(a.Title, { render: /* @__PURE__ */ r(t, { children: d }) }), /* @__PURE__ */ r("header", {
@@ -40,7 +40,7 @@ function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar
 							"aria-label": u,
 							children: /* @__PURE__ */ r(e, {
 								name: "close",
-								size: "sm"
+								size: "md"
 							})
 						})
 					})] }),

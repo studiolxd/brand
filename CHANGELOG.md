@@ -7,6 +7,32 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v26.0.0
+
+### Breaking
+
+- **`ConsentPreferences` se queda sin acciones globales.** Fuera «Aceptar todas» y «Rechazar
+  todas» del pie del panel —el pie entero desaparece—: quien abre las preferencias viene a
+  decidir categoría por categoría, y para volver atrás se marcan y desmarcan los interruptores
+  uno a uno. Las salidas de un clic siguen donde la ePrivacy las pide, en `ConsentBanner`
+  («Aceptar todas» y «Rechazar» al mismo peso), que no cambia. Se eliminan las props
+  `onAcceptAll`, `onRejectAll`, `acceptAllLabel` y `rejectAllLabel` de `ConsentPreferences`
+  (las del banner siguen), y la clase `.consent-preferences__footer`.
+- **Se elimina el token `modal.close-hover-color`** (y su derivado `sheet.close-hover-color`,
+  más sus pares de `surface-dark`): el aspa ya no cambia de color al pasar el puntero, así que
+  el token no tenía a qué apuntar. Quien lo remapeara debe remapear `modal.close-color`.
+
+### Cambiado
+
+- **El aspa de `Modal` y `Sheet` va en tinta desde el reposo.** `modal.close-color` pasa de
+  `color.icon.secondary-on-light` a `color.primary` (y de `icon.secondary-on-dark` a
+  `text.on-dark` en `surface-dark`). El único estado que se marca sigue siendo el foco, con su
+  anillo; el hover no toca ni el fondo ni el color.
+- **El aspa de `Modal` y `Sheet` es `md`, no `sm`**: `modal.close-size` pasa de
+  `size-component.sm` a `size-component.md` (32 → 40px) y `modal.close-icon-size` de
+  `icon.size-sm` a `icon.size-md` (16 → 24px), la talla por defecto de icono-botón. En la
+  superficie pública (`SiteShell`) el remapeo a `site-shell-close-*` manda, como hasta ahora.
+
 ## v25.32.1
 
 ### Corregido
