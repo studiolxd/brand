@@ -25,3 +25,10 @@
 .site-shell__main > * {
   flex: 1;
 }
+
+/* `SiteHeader` es `position: sticky`: sin esto, cualquier ancla del contenido
+   —el salto al contenido (`#main-content`), un anclaje de `TableOfContents`—
+   queda tapada bajo la barra al saltar. */
+.site-shell__main [id] {
+  scroll-margin-top: var(--site-header-height);
+}

@@ -25,6 +25,17 @@ Es la contraparte de `AppHeader`. Se separan porque resuelven cosas distintas:
 
 <Canvas of={SiteHeaderStories.PorDefecto} />
 
+## Fija al hacer scroll
+
+La barra es `position: sticky` (no `fixed`): se queda visible al bajar, sin
+que las páginas tengan que reservarle hueco ni compensar su alto. El panel del
+menú sigue colgando de ella (`inset-block-start: var(--site-header-height)`).
+`SiteShell` da `scroll-margin-top` a las anclas del contenido —el salto al
+contenido, un anclaje de `TableOfContents`— para que no queden tapadas al
+saltar bajo la barra.
+
+<Canvas of={SiteHeaderStories.FijaAlHacerScroll} />
+
 ## Con página debajo
 
 La cabecera pone el enlace de salto; **la página pone el destino**: un `main` con `id="main-content"` y `tabIndex={-1}`, para que el foco aterrice de verdad y no solo se desplace la vista. Las plantillas del sistema ya lo llevan; un producto que monte su propia página lo añade.

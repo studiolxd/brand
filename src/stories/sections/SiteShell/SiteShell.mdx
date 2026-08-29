@@ -43,6 +43,15 @@ La página **solo apila secciones**: cabecera, portada, bandas y pie, uno detrá
 
 <Canvas of={SiteShellStories.PortadaDeReferencia} />
 
+## Cabecera fija al hacer scroll
+
+`SiteHeader` es `position: sticky` — se queda en pantalla al bajar (`sticky`,
+no `fixed`: la barra sigue en el flujo del documento y las páginas no tienen
+que compensar su alto). Por eso `SiteShell` da `scroll-margin-top` (el alto de
+la barra, por token) a cualquier ancla dentro del contenido: el salto al
+contenido de `AppRoot` (`#main-content`) y los anclajes de un
+`TableOfContents` caerían tapados bajo la barra sin él.
+
 ## Cuándo no
 
 Las aplicaciones con barra y sidebar usan `AppShell`, que fija la altura a la pantalla y hace scroll dentro del contenido. `SiteShell` es lo contrario: el scroll es el del documento, como corresponde a una web.

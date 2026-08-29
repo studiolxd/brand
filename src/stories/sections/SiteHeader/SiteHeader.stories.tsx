@@ -135,6 +135,36 @@ export const ConPagina: Story = {
   ),
 };
 
+/** La barra se queda visible al hacer scroll: contenido largo debajo para probarlo. */
+export const FijaAlHacerScroll: Story = {
+  name: 'Fija al hacer scroll',
+  render: (args) => (
+    <>
+      <SiteHeader {...args} />
+      <Container as="main" id="main-content" tabIndex={-1} space="xl">
+        {Array.from({ length: 30 }, (_, i) => (
+          <Paragraph key={i}>Párrafo {i + 1}: contenido de sobra para hacer scroll.</Paragraph>
+        ))}
+      </Container>
+    </>
+  ),
+};
+
+/** Test: al hacer scroll la barra sigue en `top: 0` — `position: sticky`. */
+export const ContratoFijaAlHacerScroll: Story = {
+  name: 'Test — la barra se queda fija al hacer scroll',
+  tags: ['!dev'],
+  render: FijaAlHacerScroll.render,
+  play: async ({ canvasElement }) => {
+    const header = canvasElement.querySelector('.site-header')!;
+    await expect(getComputedStyle(header).position).toBe('sticky');
+
+    window.scrollTo(0, 800);
+    await waitFor(() => expect(window.scrollY).toBeGreaterThan(0));
+    await expect(header.getBoundingClientRect().top).toBe(0);
+  },
+};
+
 /** Test: el botón de menú abre y cierra el panel, y lo anuncia. */
 export const ContratoLogo: Story = {
   name: 'Test — marca y enlace del logotipo por el producto; sin panel no hay botón de menú',
