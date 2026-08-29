@@ -37,6 +37,17 @@ Cada glifo existe una sola vez. Cuando un componente necesita animar un icono �
 
 <IconCatalog />
 
+### Criterio de trazo para glifos nuevos
+
+Un glifo nuevo no se copia de una librería ajena (lucide, heroicons…): se dibuja en la retícula de 24 con el mismo trazo que el resto del catálogo — `vector-effect: non-scaling-stroke`, `stroke-width: 1`, esquinas rectas o con `stroke-linejoin="round"` donde el original ya lo usa (nunca curvas decorativas añadidas), y `fill="none"` salvo en los puntos (`dot`, `dots`, `grid`, y el centro de `target`, que es un anillo, no un relleno). Un punto suelto —el de `info`, el de `alert-triangle`— se dibuja como una línea de longitud cero con `stroke-linecap="round"`, igual que el punto de `briefcase`, no como un `<circle>` relleno.
+
+Dos ejemplos del criterio en esta fase:
+
+- **`chevron-down`/`chevron-up`** no son un dibujo nuevo: son los mismos tres puntos de `chevron` girados 90° sobre el centro de la retícula. Es la misma lógica que ya usa `close` (líneas de `menu` giradas 45°) — una forma derivada de otra no diverge con el tiempo.
+- **`languages`** no es el par de caracteres superpuestos de lucide/heroicons: es un globo —círculo, ecuador y meridiano—, construido con la misma lógica que `sun` (un círculo más unos trazos), para no depender de un alfabeto concreto.
+
+`spinner` no está en este catálogo a propósito: el spinner de carga es un componente propio, `Spinner` (con su propia animación), no un icono estático — ver `Atoms/Spinner`.
+
 ---
 
 ## Tokens

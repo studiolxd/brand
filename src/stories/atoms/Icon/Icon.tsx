@@ -535,6 +535,190 @@ const ICONS = {
       </>
     ),
   },
+  // Fase 2 de la unificación de iconos (huecos de `notes/ICONOS-2026-08-29.md`
+  // en slxd). `chevron-down`/`chevron-up` son `chevron` girado 90° sobre el
+  // centro de la retícula — mismos tres puntos, mismo trazo — para los sitios
+  // que necesitan una dirección fija (sin la rotación por CSS que ya usan
+  // Pagination/PrevNextNav sobre `chevron`). `chevron-right` es el propio
+  // `chevron` con nombre explícito para quien migra 1:1 desde
+  // `ChevronRightIcon`; no resuelve el caso del triángulo de expandir/colapsar
+  // del árbol de carpetas de bricks (necesita rotación y evento sobre el
+  // propio `<svg>`, que `Icon` no reenvía) — ese hueco sigue documentado y en
+  // lucide, ver ICONOS-2026-08-29.md.
+  'chevron-right': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M6 0 L18 12 L6 24" />
+    ),
+  },
+  'chevron-down': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M24 6 L12 18 L0 6" />
+    ),
+  },
+  'chevron-up': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M0 18 L12 6 L24 18" />
+    ),
+  },
+  info: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M12 7.5l0 .01" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M12 11l0 5" />
+      </>
+    ),
+  },
+  'alert-triangle': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3 L21 20 H3 Z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M12 9l0 5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M12 17l0 .01" />
+      </>
+    ),
+  },
+  // Octágono (misma señal que la señal de "stop" vial) para distinguirlo de
+  // `alert-triangle`: el error detiene, el aviso solo advierte.
+  'alert-error': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M8 3h8l5 5v8l-5 5h-8l-5 -5v-8z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 9l6 6M15 9l-6 6" />
+      </>
+    ),
+  },
+  connection: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 3l0 4M15 3l0 4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M7 7h10v3a5 5 0 0 1 -5 5a5 5 0 0 1 -5 -5z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 15l0 3l-2 3h4l-2 3" />
+      </>
+    ),
+  },
+  package: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 12l8 -4.5M12 12l0 9M12 12l-8 -4.5" />
+      </>
+    ),
+  },
+  archive: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 4a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 9l0 9a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2l0 -9" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M10 13l4 0" />
+      </>
+    ),
+  },
+  // Tres arcos apilados (patrón habitual del icono de base de datos): elipse
+  // superior completa y dos tramos de lados + arco inferior.
+  database: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 6a9 3 0 1 0 18 0a9 3 0 1 0 -18 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 6l0 6a9 3 0 0 0 18 0l0 -6" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 12l0 6a9 3 0 0 0 18 0l0 -6" />
+      </>
+    ),
+  },
+  building: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 21l0 -17a1 1 0 0 1 1 -1l12 0a1 1 0 0 1 1 1l0 17" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 21l18 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 8l.01 0M15 8l.01 0M9 12l.01 0M15 12l.01 0M9 16l.01 0M15 16l.01 0" />
+      </>
+    ),
+  },
+  send: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 20l16 -8l-16 -8l0 6.5l10 1.5l-10 1.5z" />
+    ),
+  },
+  'external-link': {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M19 13l0 6a2 2 0 0 1 -2 2l-10 0a2 2 0 0 1 -2 -2l0 -10a2 2 0 0 1 2 -2l6 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M15 3l6 0l0 6" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M9 15l12 -12" />
+      </>
+    ),
+  },
+  // Mazo: cabeza romboidal (la cara de impacto) + mango + base de sonido.
+  // Sin la curva decorativa de la empuñadura de lucide/heroicons: tres trazos
+  // rectos, como el resto del set.
+  gavel: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M19 8l-3 -3l-8 8l3 3z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M11 13l-5 5" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 21l8 0" />
+      </>
+    ),
+  },
+  inbox: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 5l4 0l2 4l6 0l2 -4l4 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M3 5l0 11a2 2 0 0 0 2 2l14 0a2 2 0 0 0 2 -2l0 -11" />
+      </>
+    ),
+  },
+  // Tres lomos de libro a distinta altura sobre una balda: la misma idea de
+  // "colección" que `book-open`, en vertical.
+  library: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 21l0 -15a1 1 0 0 1 1 -1l2 0a1 1 0 0 1 1 1l0 15" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M10 21l0 -17a1 1 0 0 1 1 -1l2 0a1 1 0 0 1 1 1l0 17" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M16 21l0 -13a1 1 0 0 1 1 -1l2 0a1 1 0 0 1 1 1l0 13" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 21l18 0" />
+      </>
+    ),
+  },
+  target: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="5" />
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="1" />
+      </>
+    ),
+  },
+  // Globo (círculo + ecuador + meridiano): construcción propia con la misma
+  // lógica que `sun` (círculo + trazos), no el par de caracteres superpuestos
+  // de lucide/heroicons.
+  languages: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <circle vectorEffect="non-scaling-stroke" strokeWidth="1" cx="12" cy="12" r="9" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M3 12l18 0" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0 -18" />
+      </>
+    ),
+  },
 } as const;
 
 export type IconName = keyof typeof ICONS;

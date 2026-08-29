@@ -42,3 +42,23 @@ export const Contrato: Story = {
     await expect(getComputedStyle(trazo).strokeWidth).toBe('1px');
   },
 };
+
+export const Catalogo: Story = {
+  name: 'Test — todo IconName renderiza un svg con currentColor',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      {ICON_NAMES.map((name) => (
+        <Icon key={name} name={name} />
+      ))}
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const svgs = canvasElement.querySelectorAll('svg.icon');
+    await expect(svgs.length).toBe(ICON_NAMES.length);
+    for (const svg of svgs) {
+      await expect(svg.tagName.toLowerCase()).toBe('svg');
+      await expect(svg).toHaveAttribute('stroke', 'currentColor');
+    }
+  },
+};
