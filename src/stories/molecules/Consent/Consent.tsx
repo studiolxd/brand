@@ -243,7 +243,11 @@ export function ConsentPreferences({
                 category.required ? (
                   <>
                     {category.name}
-                    <VisuallyHidden> {alwaysOnLabel}</VisuallyHidden>
+                    {/* Coma explícita, no un espacio: un espacio en el límite entre
+                    dos elementos en línea puede colapsarse al calcular el nombre
+                    accesible y dejar "NecesariasSiempre activa" pegado (detectado
+                    en producción por public-shell). La coma no se colapsa nunca. */}
+                    <VisuallyHidden>{`, ${alwaysOnLabel}`}</VisuallyHidden>
                   </>
                 ) : (
                   category.name

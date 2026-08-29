@@ -376,12 +376,13 @@ export const ContratoSinDescripcionNiSeparadores: Story = {
     await expect(within(dialog).queryByText(/no se pueden desactivar/)).toBeNull();
     await expect(dialog.querySelector('.separator')).toBeNull();
 
-    const marca = within(dialog).getByText('Siempre activa');
+    const marca = within(dialog).getByText(', Siempre activa');
     await expect(marca).toHaveClass('visually-hidden');
     await expect(getComputedStyle(marca).width).toBe('1px');
 
-    // El nombre accesible del interruptor la sigue incluyendo.
-    await expect(within(dialog).getByRole('switch', { name: /Necesarias.*Siempre activa/ }))
+    // El nombre accesible del interruptor la sigue incluyendo, separada del
+    // nombre de la categoría por una coma (nunca pegada: "NecesariasSiempre activa").
+    await expect(within(dialog).getByRole('switch', { name: /Necesarias\s*,\s*Siempre activa/ }))
       .toBeInTheDocument();
   },
 };
