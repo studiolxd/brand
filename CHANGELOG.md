@@ -7,6 +7,35 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v25.30.0
+
+### Cambiado
+
+- **Aspa de cerrar de `Modal`/`Sheet`: sin hover, talla por superficie.** El aspa deja de
+  componerse con `Button variant="ghost"` (pintaba relleno en hover, la excepción del sistema) y
+  pasa a un botón nativo con tokens propios `modal.close-*`/`sheet.close-*`: en reposo, hover y
+  foco solo cambia el color del glifo. La talla remapea de `sm` (32px) a `lg` (48px) bajo
+  `SiteShell`/`.site-shell`, por token (`modal.close-size`/`-icon-size`, con seeds en
+  `site-shell.json` y `sd.config.mjs`), no por prop del consumidor.
+- **`Sheet` gana la prop `container`** (paridad con `Modal`) y **`SiteShell` reenvía su `ref`**:
+  el portal de `Dialog` monta por defecto en `document.body`, que no es descendiente de
+  `.site-shell` (a diferencia del tema oscuro, que se activa en `<html>` y cascadea a cualquier
+  portal sin más). Sin `container` apuntando dentro de `SiteShell`, el remapeo de superficie
+  pública —tamaño del aspa incluido— no llegaba nunca al panel.
+- **`ConsentPreferences`**: quita el párrafo de descripción bajo el título (retira la prop
+  `description` y su texto por defecto) — el panel es título + lista de categorías + pie. Quita la
+  línea `Separator` entre categorías (el ritmo lo pone el gap) y la marca de texto visible
+  «Siempre activa» de la categoría necesaria, que sigue en el nombre accesible del interruptor vía
+  `VisuallyHidden`. Retira los tokens huérfanos `consent.preferences.always-*`. Gana la prop
+  `container`, reenviada a `Modal`/`Sheet`, para abrirse dentro de `SiteShell`.
+- **`SiteHeader` fija al hacer scroll** (`position: sticky`, no `fixed`): se queda visible al
+  bajar sin que las páginas reserven hueco. `SiteShell` da `scroll-margin-top` (el alto de la
+  barra, por token) a cualquier ancla del contenido, para que el salto al contenido de `AppRoot` y
+  los anclajes de un `TableOfContents` no queden tapados bajo la barra.
+- **`SiteNav`**: el panel del menú escala a tantas columnas como grupos en el breakpoint ancho
+  (hasta `site-nav.columns-max`, 5) en vez de un `repeat(4, 1fr)` fijo — un quinto grupo ya no cae
+  solo a una segunda fila. `md` (2) y `lg` (3) siguen fijos.
+
 ## v25.29.1
 
 ### Cambiado
