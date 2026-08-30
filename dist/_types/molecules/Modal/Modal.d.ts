@@ -28,6 +28,14 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
      * `children`. Tiene prioridad sobre `description` si se pasan ambas.
      */
     'aria-describedby'?: string;
+    /**
+     * Elemento que recibe el foco al abrir, reenviado a Base UI. Por defecto el
+     * foco entra en el panel por su primer elemento focable (el aspa de cerrar).
+     * Pásalo cuando el diálogo tenga un destino mejor —la salida segura de una
+     * confirmación, el buscador de una paleta— en vez de mover el foco a mano
+     * desde fuera: el gestor de foco de Base UI corre después y ganaría él.
+     */
+    initialFocus?: React.ComponentPropsWithoutRef<typeof Dialog.Popup>['initialFocus'];
 }
 /**
  * Diálogo centrado sobre un velo. El motor (portal, velo, trampa de foco,
@@ -42,4 +50,4 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
  * `className` **no** se reenvía a propósito: la cara del diálogo la pone el
  * sistema, y se personaliza por tokens.
  */
-export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;
+export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, initialFocus, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;

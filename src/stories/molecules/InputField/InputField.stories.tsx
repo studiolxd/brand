@@ -167,3 +167,34 @@ export const ContratoEtiqueta: Story = {
     await expect(canvas.getByRole('textbox', { name: 'Oculta con placeholder' })).toHaveAttribute('placeholder', 'Propio');
   },
 };
+
+/**
+ * Test (B4, auditoría 2026-08-30): el aspa de borrar tenía `outline: none` y un
+ * color de foco idéntico al de reposo — ningún indicador visible. Ahora el foco
+ * de teclado pinta el anillo del sistema.
+ */
+export const ContratoFocoDelAspa: Story = {
+  name: 'Test — anillo de foco del aspa',
+  tags: ['!dev'],
+  args: { kind: 'search', clearable: true, label: 'Buscar', labelHidden: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const control = canvas.getByRole('textbox', { name: 'Buscar' });
+    await userEvent.type(control, 'Ada');
+    const aspa = await canvas.findByRole('button', { name: 'Borrar' });
+    const enReposo = getComputedStyle(aspa).outlineStyle;
+    await expect(enReposo).toBe('none');
+
+    // El foco viene del teclado (venimos de escribir), que es lo que activa
+    // `:focus-visible`.
+    await userEvent.tab();
+    await expect(aspa).toHaveFocus();
+
+    const enFoco = getComputedStyle(aspa);
+    await expect(enFoco.outlineStyle).toBe('solid');
+    await expect(enFoco.outlineStyle).not.toBe(enReposo);
+    await expect(parseFloat(enFoco.outlineWidth)).toBeGreaterThan(0);
+    const fondo = getComputedStyle(control).backgroundColor;
+    await expect(enFoco.outlineColor).not.toBe(fondo);
+  },
+};

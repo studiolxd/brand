@@ -7,6 +7,54 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v26.2.0
+
+### Arreglado
+
+- **El foco no entraba en ningún diálogo del sistema** (B1 de la auditoría de
+  suite 2026-08-30, crítico). `Modal` pasaba `initialFocus={false}` a
+  `Dialog.Popup`, y en Base UI `false` significa «no muevas el foco al abrir»:
+  el foco se quedaba en el disparador, fuera del popup y detrás del velo, sin
+  que ningún consumidor pudiera corregirlo. Alcanzaba a `Modal`,
+  `ConfirmDialog`, `ImageCropDialog` y `CommandPalette`, es decir, a todo
+  diálogo de la suite. Se retira la prop: manda el comportamiento por defecto
+  de Base UI —el foco entra por el primer elemento focable (el aspa de cerrar),
+  vuelve al disparador al cerrar y queda atrapado dentro mientras está
+  abierto—, que además contempla la apertura táctil.
+- **`ProgressBar` primary en superficie oscura: la cifra de dentro quedaba
+  blanca sobre relleno blanco** (B2, contraste 1.00:1). `surface-dark`
+  invertía el relleno a `color.text.on-dark` pero no reasignaba el color de la
+  cifra interior.
+- **`PasswordField`: el botón de ver/ocultar no tenía indicador de foco**
+  (B3, 1.00:1): `outline: none` y un color de foco idéntico al de reposo.
+  Ahora pinta el anillo de foco del sistema, como el aspa del `Modal`.
+- **`InputField` (búsqueda): el aspa de borrar, el mismo caso** (B4, 1.00:1).
+  Mismo arreglo.
+
+### Añadido
+
+- **`Modal` acepta `initialFocus`** (se reenvía a `Dialog.Popup` de Base UI):
+  el destino del foco al abrir, para el diálogo que tiene uno mejor que el
+  primer elemento focable. Sin la prop, manda el comportamiento por defecto.
+  `ConfirmDialog` lo usa para abrir el foco en la salida segura («Cancelar»)
+  en lugar de moverlo a mano tras el montaje —el gestor de foco de Base UI
+  corre después y ganaba él—.
+- **Tokens nuevos**: `progress-bar.surface-dark-primary-label-inside-color`;
+  `password-field.toggle-focus-ring-{width,offset,color}` y su
+  `surface-dark-toggle-focus-ring-color`;
+  `input-field.search.clear-focus-ring-{width,offset,color}` y su
+  `surface-dark-clear-focus-ring-color`.
+
+### Tests
+
+- Contrato nuevo en `Modal.stories.tsx` (el foco entra al abrir y vuelve al
+  disparador al cerrar; `initialFocus` manda sobre el aspa),
+  `CommandPalette.stories.tsx` (el foco abre en el buscador),
+  `PasswordField.stories.tsx` e `InputField.stories.tsx` (anillo de foco
+  distinto del estado sin foco y del fondo del campo) y
+  `ProgressBar.stories.tsx` (la cifra de dentro no es del color del relleno en
+  superficie oscura).
+
 ## v26.1.2
 
 ### Arreglado

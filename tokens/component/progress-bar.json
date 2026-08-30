@@ -28,6 +28,7 @@
     "label-outside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color de la cifra cuando va fuera, sobre el carril" },
     "surface-dark-track-bg":            { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del carril — surface-dark" },
     "surface-dark-label-outside-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Cifra fuera del relleno — surface-dark" },
-    "surface-dark-primary-fill":                 { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Relleno de la variante primary — surface-dark. Se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente" }
+    "surface-dark-primary-fill":                 { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Relleno de la variante primary — surface-dark. Se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente" },
+    "surface-dark-primary-label-inside-color":   { "$value": "{color.text.on-light}", "$type": "color", "$description": "Cifra sobre el relleno primary — surface-dark. El relleno se invierte a blanco, así que la cifra pasa a la tinta clara: si no, quedaría blanco sobre blanco" }
   }
 }

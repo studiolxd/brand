@@ -12,7 +12,10 @@
   --input-field-search-lg-icon-size: var(--icon-size-md); /** Tamaño del glifo — lg (24px) */
   --input-field-search-icon-color: var(--color-primary); /** Color de la lupa: tinta, prusia sobre claro. La lupa no es un control — no cambia con el puntero */
   --input-field-search-clear-color: var(--color-primary); /** Color del aspa de borrado: la misma tinta que la lupa */
-  --input-field-search-clear-hover-color: var(--color-primary); /** Color del aspa en hover y en foco (sin cambio: la tinta no se atenúa, y el hover no pinta fondo) */
+  --input-field-search-clear-hover-color: var(--color-primary); /** Color del aspa en hover (sin cambio: la tinta no se atenúa, y el hover no pinta fondo; el foco se marca con el anillo) */
+  --input-field-search-clear-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco del aspa */
+  --input-field-search-clear-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco del aspa (se dibuja hacia dentro de la caja: el aspa va a ras del borde del campo) */
+  --input-field-search-clear-focus-ring-color: var(--color-primary); /** Color del anillo de foco del aspa: la tinta de la superficie */
   --input-field-search-input-padding-inline-start: var(--input-field-search-slot-size); /** Padding izquierdo del campo — el texto empieza donde acaba la lupa */
   --input-field-search-input-padding-inline-end: var(--input-field-search-slot-size); /** Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa */
   --input-field-error-font-family: var(--form-error-font-family); /** Font family del mensaje de error */
@@ -33,6 +36,7 @@ html.dark {
   --input-field-search-icon-color: var(--color-text-on-dark); /** Color de la lupa — surface-dark (blanco) */
   --input-field-search-clear-color: var(--color-text-on-dark); /** Color del aspa — surface-dark */
   --input-field-search-clear-hover-color: var(--color-text-on-dark); /** Color del aspa en hover — surface-dark */
+  --input-field-search-clear-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del aspa — surface-dark */
   --input-field-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
   --input-field-helper-color: var(--color-text-on-dark); /** Color del texto de ayuda — surface-dark */
 }

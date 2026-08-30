@@ -13,14 +13,19 @@
 
       "icon-color":       { "$value": "{color.primary}", "$type": "color", "$description": "Color de la lupa: tinta, prusia sobre claro. La lupa no es un control — no cambia con el puntero" },
       "clear-color":       { "$value": "{color.primary}", "$type": "color", "$description": "Color del aspa de borrado: la misma tinta que la lupa" },
-      "clear-hover-color": { "$value": "{color.primary}", "$type": "color", "$description": "Color del aspa en hover y en foco (sin cambio: la tinta no se atenúa, y el hover no pinta fondo)" },
+      "clear-hover-color": { "$value": "{color.primary}", "$type": "color", "$description": "Color del aspa en hover (sin cambio: la tinta no se atenúa, y el hover no pinta fondo; el foco se marca con el anillo)" },
+
+      "clear-focus-ring-width":  { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Grosor del anillo de foco del aspa" },
+      "clear-focus-ring-offset": { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Separación del anillo de foco del aspa (se dibuja hacia dentro de la caja: el aspa va a ras del borde del campo)" },
+      "clear-focus-ring-color":  { "$value": "{color.primary}",      "$type": "color",     "$description": "Color del anillo de foco del aspa: la tinta de la superficie" },
 
       "input-padding-inline-start": { "$value": "{input-field.search.slot-size}", "$type": "dimension", "$description": "Padding izquierdo del campo — el texto empieza donde acaba la lupa" },
       "input-padding-inline-end":   { "$value": "{input-field.search.slot-size}", "$type": "dimension", "$description": "Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa" },
 
       "surface-dark-icon-color":        { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la lupa — surface-dark (blanco)" },
       "surface-dark-clear-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del aspa — surface-dark" },
-      "surface-dark-clear-hover-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del aspa en hover — surface-dark" }
+      "surface-dark-clear-hover-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del aspa en hover — surface-dark" },
+      "surface-dark-clear-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco del aspa — surface-dark" }
     },
 
     "error": {

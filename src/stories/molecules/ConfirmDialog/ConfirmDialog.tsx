@@ -91,16 +91,6 @@ export function ConfirmDialog({
   const cancelRef = useRef<HTMLElement>(null);
   const [pending, setPending] = useState(false);
 
-  // `Modal` no mueve el foco al abrir (lo correcto para un diálogo genérico);
-  // este sí lo quiere, y lo quiere en la salida segura. Va en un frame
-  // posterior al montaje: el gestor de foco del diálogo coloca sus guardas en
-  // el mismo ciclo, y quien mueva el foco el último manda.
-  useEffect(() => {
-    if (!open) return;
-    const frame = requestAnimationFrame(() => cancelRef.current?.focus());
-    return () => cancelAnimationFrame(frame);
-  }, [open]);
-
   // Una acción que falla deja el diálogo abierto; al cerrarlo, el botón vuelve
   // a estar disponible para el siguiente intento.
   useEffect(() => {
@@ -135,6 +125,10 @@ export function ConfirmDialog({
       title={title}
       closeLabel={closeLabel}
       container={container}
+      // El foco entra en la salida segura, no en la acción que destruye. Se lo
+      // pide al gestor de foco de Base UI (por `Modal`) en vez de moverlo a
+      // mano tras el montaje: él corre el último y ganaría él.
+      initialFocus={cancelRef}
       {...(description != null ? { description } : {})}
     >
       {children}

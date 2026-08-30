@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, screen, fn } from 'storybook/test';
+import { expect, userEvent, screen, waitFor, fn } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { CommandPalette, type CommandPaletteGroup } from './CommandPalette';
@@ -159,5 +159,33 @@ export const TestTeclado: Story = {
     await userEvent.keyboard('{Enter}');
     await expect(args.groups[0].items[1].onSelect).toHaveBeenCalled();
     await expect(args.onOpenChange).toHaveBeenCalledWith(false);
+  },
+};
+
+/**
+ * Test (B1, auditoría 2026-08-30): el `Modal` ya lleva el foco al panel al
+ * abrir; la paleta lo quiere en el buscador, no en el aspa de cerrar. El
+ * `autoFocus` del input tiene que seguir mandando sobre el foco inicial de
+ * Base UI.
+ */
+export const TestFocoEnElBuscador: Story = {
+  name: 'Test — el foco abre en el buscador',
+  tags: ['!dev'],
+  args: { ...base, open: false, onOpenChange: fn() },
+  render: (args) => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Abrir la paleta</Button>
+        <CommandPalette {...args} open={open} onOpenChange={setOpen} />
+      </>
+    );
+  },
+  play: async () => {
+    await userEvent.click(await screen.findByRole('button', { name: 'Abrir la paleta' }));
+    const input = await screen.findByRole('combobox');
+    await waitFor(async () => {
+      await expect(input).toHaveFocus();
+    });
   },
 };

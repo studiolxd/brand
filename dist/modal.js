@@ -5,8 +5,8 @@ import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import { Dialog as a } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Modal/Modal.tsx
-function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar", fallbackTitle: d = "Diálogo", container: f, description: p, "aria-describedby": m, ...h }) {
-	let g = m === void 0 ? {} : { "aria-describedby": m };
+function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar", fallbackTitle: d = "Diálogo", container: f, description: p, "aria-describedby": m, initialFocus: h, ...g }) {
+	let _ = m === void 0 ? {} : { "aria-describedby": m }, v = h === void 0 ? {} : { initialFocus: h };
 	return /* @__PURE__ */ r(a.Root, {
 		open: o,
 		onOpenChange: (e) => {
@@ -16,9 +16,9 @@ function o({ open: o, onClose: s, title: c, children: l, closeLabel: u = "Cerrar
 			container: f,
 			children: [/* @__PURE__ */ r(a.Backdrop, { className: "modal__overlay" }), /* @__PURE__ */ i(a.Popup, {
 				className: "modal__content",
+				..._,
+				...v,
 				...g,
-				...h,
-				initialFocus: !1,
 				children: [
 					c ? /* @__PURE__ */ i("header", {
 						className: "modal__header",

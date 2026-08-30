@@ -119,8 +119,10 @@ export function CommandPalette({
         autoHighlight="always"
       >
         <div className={['command-palette', className].filter(Boolean).join(' ')}>
-          {/* Modal neutraliza su auto-focus de apertura (correcto para diálogos
-              genéricos); una paleta sí quiere el buscador enfocado al abrir. */}
+          {/* El Modal lleva el foco al primer elemento focable (el aspa de
+              cerrar); una paleta lo quiere en el buscador. React aplica este
+              `autoFocus` en el commit, antes de que Base UI resuelva su foco
+              inicial, y Base UI respeta el foco que ya está dentro del panel. */}
           <Autocomplete.Input
             className="command-palette__input"
             placeholder={placeholder}

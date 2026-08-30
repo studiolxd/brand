@@ -213,3 +213,32 @@ export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },
 };
+
+/**
+ * Test (B3, auditoría 2026-08-30): el botón de ver/ocultar tenía
+ * `outline: none` y un color de foco idéntico al de reposo — ningún indicador
+ * visible. Ahora el foco de teclado pinta el anillo del sistema.
+ */
+export const ContratoFocoDelToggle: Story = {
+  name: 'Test — anillo de foco del toggle',
+  tags: ['!dev'],
+  args: { label: 'Contraseña' },
+  play: async ({ canvasElement }) => {
+    const toggle = canvasElement.querySelector('.password-field__toggle') as HTMLElement;
+    const enReposo = getComputedStyle(toggle).outlineStyle;
+    await expect(enReposo).toBe('none');
+
+    // Tab hasta el toggle: el foco de teclado es el que activa `:focus-visible`.
+    await userEvent.tab();
+    await userEvent.tab();
+    await expect(toggle).toHaveFocus();
+
+    const enFoco = getComputedStyle(toggle);
+    await expect(enFoco.outlineStyle).toBe('solid');
+    await expect(enFoco.outlineStyle).not.toBe(enReposo);
+    await expect(parseFloat(enFoco.outlineWidth)).toBeGreaterThan(0);
+    // Y el anillo no es del color del fondo del campo: se ve.
+    const fondo = getComputedStyle(canvasElement.querySelector('.input')!).backgroundColor;
+    await expect(enFoco.outlineColor).not.toBe(fondo);
+  },
+};

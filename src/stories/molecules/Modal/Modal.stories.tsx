@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { Modal } from './Modal';
 import { Button } from '../../atoms/Button/Button';
 import { InputField } from '../InputField/InputField';
@@ -474,5 +474,62 @@ export const ContratoPassthrough: Story = {
     // El clic dentro del diálogo no llega a la tarjeta que lo envuelve.
     await userEvent.click(within(popup).getByText('Contenido'));
     await expect(canvas.getByTestId('clics')).toHaveTextContent('0');
+  },
+};
+
+/**
+ * Test (B1, auditoría 2026-08-30): al abrir, el foco entra en el panel — antes
+ * se quedaba en el disparador, detrás del velo — y al cerrar vuelve al
+ * disparador. El motor es Base UI; el Modal solo deja de estorbarle.
+ */
+export const ContratoFocoAlAbrir: Story = {
+  name: 'Test — el foco entra en el diálogo al abrir',
+  tags: ['!dev'],
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Abrir modal</Button>
+        <Modal open={open} onClose={() => setOpen(false)} title="Detalle">
+          <p>Contenido</p>
+        </Modal>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const disparador = canvas.getByRole('button', { name: 'Abrir modal' });
+    await userEvent.click(disparador);
+
+    const popup = await within(document.body).findByRole('dialog');
+    await waitFor(() => expect(popup.contains(document.activeElement)).toBe(true));
+    // El primer elemento focable del panel es el aspa de cerrar.
+    await expect(within(popup).getByRole('button', { name: 'Cerrar' })).toHaveFocus();
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(disparador).toHaveFocus());
+  },
+};
+
+/**
+ * Test (B1): un contenido que quiere otro destino inicial lo pide con
+ * `initialFocus` — así lo hace `ConfirmDialog` con su salida segura.
+ */
+export const ContratoFocoInicialPropio: Story = {
+  name: 'Test — initialFocus manda sobre el aspa',
+  tags: ['!dev'],
+  render: () => {
+    const destino = useRef<HTMLInputElement>(null);
+    return (
+      <Modal open onClose={fn()} title="Solicitar ausencia" initialFocus={destino}>
+        <InputField id="motivo" label="Motivo" ref={destino} />
+      </Modal>
+    );
+  },
+  play: async () => {
+    const popup = await within(document.body).findByRole('dialog');
+    await waitFor(async () => {
+      await expect(within(popup).getByRole('textbox', { name: 'Motivo' })).toHaveFocus();
+    });
   },
 };

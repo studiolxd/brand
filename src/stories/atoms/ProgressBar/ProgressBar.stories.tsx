@@ -142,3 +142,21 @@ export const ContratoValor: Story = {
     await expect(canvas.getByRole('progressbar', { name: 'Con decimales' })).toHaveAttribute('aria-valuenow', '66');
   },
 };
+
+/**
+ * Test (B2, auditoría 2026-08-30): en superficie oscura el relleno de la
+ * variante `primary` se invierte a blanco; la cifra de dentro se quedaba
+ * también en blanco (1.00:1). Ahora pasa a la tinta clara.
+ */
+export const ContratoCifraDentroEnOscuro: Story = {
+  name: 'Test — la cifra de dentro contrasta en oscuro',
+  tags: ['!dev'],
+  parameters: { surface: 'dark' },
+  args: { value: 65, variant: 'primary', label: 'Progreso' },
+  play: async ({ canvasElement }) => {
+    const relleno = canvasElement.querySelector('.progress-bar__fill') as HTMLElement;
+    const cifra = canvasElement.querySelector('.progress-bar__label--inside') as HTMLElement;
+    await expect(cifra).toBeInTheDocument();
+    await expect(getComputedStyle(cifra).color).not.toBe(getComputedStyle(relleno).backgroundColor);
+  },
+};

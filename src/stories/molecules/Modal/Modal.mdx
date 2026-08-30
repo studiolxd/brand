@@ -148,10 +148,12 @@ por tokens, no por clases de producto.
   renderiza su propio nodo de descripción dentro de `children` (como
   `ImageCropDialog`), pásale el id por la prop `aria-describedby` en su lugar
   — tiene prioridad sobre `description` si se pasan ambas.
-- **Foco**: Base UI atrapa el foco dentro del panel y lo devuelve al elemento
-  que abrió el modal al cerrarlo. `initialFocus={false}` deja que el propio
-  contenido decida qué recibe el foco inicial en vez de forzarlo al primer
-  elemento focable.
+- **Foco**: al abrir, Base UI mueve el foco **dentro del panel** (al primer
+  elemento focable — normalmente el aspa de cerrar) y lo devuelve al elemento
+  que abrió el modal al cerrarlo; mientras está abierto, lo atrapa dentro. El
+  Modal no toca `initialFocus`: si un contenido quiere otro destino inicial,
+  basta con que ese elemento lleve `autoFocus` (así lo hace `CommandPalette`
+  con su buscador) — Base UI respeta el foco que ya esté dentro del panel.
 - **Cierre**: Escape, clic en el velo o el aspa. El aspa mide 40px de caja y
   24px de glifo (`md`) en la aplicación, y 48px de caja y de glifo (`lg`) en
   la superficie pública. Va en la tinta de la superficie desde el reposo, con

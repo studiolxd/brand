@@ -35,4 +35,5 @@ html.dark {
   --progress-bar-track-bg: var(--color-surface-secondary-on-dark); /** Fondo del carril — surface-dark */
   --progress-bar-label-outside-color: var(--color-text-on-dark); /** Cifra fuera del relleno — surface-dark */
   --progress-bar-primary-fill: var(--color-text-on-dark); /** Relleno de la variante primary — surface-dark. Se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente */
+  --progress-bar-primary-label-inside-color: var(--color-text-on-light); /** Cifra sobre el relleno primary — surface-dark. El relleno se invierte a blanco, así que la cifra pasa a la tinta clara: si no, quedaría blanco sobre blanco */
 }

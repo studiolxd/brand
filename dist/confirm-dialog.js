@@ -9,10 +9,6 @@ import { jsx as o, jsxs as s } from "react/jsx-runtime";
 function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCancel: p, onConfirmError: m, destructive: h = !1, confirmLabel: g = "Confirmar", cancelLabel: _ = "Cancelar", pendingLabel: v = "Confirmando…", closeLabel: y = "Cerrar", container: b, className: x }) {
 	let S = i(null), [C, w] = a(!1);
 	r(() => {
-		if (!c) return;
-		let e = requestAnimationFrame(() => S.current?.focus());
-		return () => cancelAnimationFrame(e);
-	}, [c]), r(() => {
 		c || w(!1);
 	}, [c]);
 	let T = () => {
@@ -37,6 +33,7 @@ function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCan
 		title: l,
 		closeLabel: y,
 		container: b,
+		initialFocus: S,
 		...u == null ? {} : { description: u },
 		children: [d, /* @__PURE__ */ s(t, {
 			gap: "sm",

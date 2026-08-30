@@ -32,6 +32,14 @@ export interface ModalProps
    * `children`. Tiene prioridad sobre `description` si se pasan ambas.
    */
   'aria-describedby'?: string;
+  /**
+   * Elemento que recibe el foco al abrir, reenviado a Base UI. Por defecto el
+   * foco entra en el panel por su primer elemento focable (el aspa de cerrar).
+   * Pásalo cuando el diálogo tenga un destino mejor —la salida segura de una
+   * confirmación, el buscador de una paleta— en vez de mover el foco a mano
+   * desde fuera: el gestor de foco de Base UI corre después y ganaría él.
+   */
+  initialFocus?: React.ComponentPropsWithoutRef<typeof Dialog.Popup>['initialFocus'];
 }
 
 /**
@@ -58,6 +66,7 @@ export function Modal({
   container,
   description,
   'aria-describedby': ariaDescribedBy,
+  initialFocus,
   ...rest
 }: ModalProps) {
   // Base UI solo enlaza `aria-describedby` cuando hay un `Dialog.Description`
@@ -65,11 +74,16 @@ export function Modal({
   const describedByProps =
     ariaDescribedBy !== undefined ? { 'aria-describedby': ariaDescribedBy } : {};
 
+  // `undefined` no es lo mismo que ningún valor para Base UI: solo si la prop
+  // llega sin definir aplica su comportamiento por defecto (que además tiene en
+  // cuenta la apertura táctil), así que no se pasa cuando no la hay.
+  const initialFocusProps = initialFocus !== undefined ? { initialFocus } : {};
+
   return (
     <Dialog.Root open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <Dialog.Portal container={container}>
         <Dialog.Backdrop className="modal__overlay" />
-        <Dialog.Popup className="modal__content" {...describedByProps} {...rest} initialFocus={false}>
+        <Dialog.Popup className="modal__content" {...describedByProps} {...initialFocusProps} {...rest}>
           {title ? (
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>

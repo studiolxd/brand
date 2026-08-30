@@ -10,7 +10,10 @@ $lxd-input-field-search-sm-icon-size: 16px; // Tamaño del glifo — sm (16px)
 $lxd-input-field-search-lg-icon-size: 24px; // Tamaño del glifo — lg (24px)
 $lxd-input-field-search-icon-color: #111e30; // Color de la lupa: tinta, prusia sobre claro. La lupa no es un control — no cambia con el puntero
 $lxd-input-field-search-clear-color: #111e30; // Color del aspa de borrado: la misma tinta que la lupa
-$lxd-input-field-search-clear-hover-color: #111e30; // Color del aspa en hover y en foco (sin cambio: la tinta no se atenúa, y el hover no pinta fondo)
+$lxd-input-field-search-clear-hover-color: #111e30; // Color del aspa en hover (sin cambio: la tinta no se atenúa, y el hover no pinta fondo; el foco se marca con el anillo)
+$lxd-input-field-search-clear-focus-ring-width: 2px; // Grosor del anillo de foco del aspa
+$lxd-input-field-search-clear-focus-ring-offset: 2px; // Separación del anillo de foco del aspa (se dibuja hacia dentro de la caja: el aspa va a ras del borde del campo)
+$lxd-input-field-search-clear-focus-ring-color: #111e30; // Color del anillo de foco del aspa: la tinta de la superficie
 $lxd-input-field-search-input-padding-inline-start: 2.5rem; // Padding izquierdo del campo — el texto empieza donde acaba la lupa
 $lxd-input-field-search-input-padding-inline-end: 2.5rem; // Padding derecho del campo cuando ofrece borrado — el texto termina donde empieza el aspa
 $lxd-input-field-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Font family del mensaje de error
