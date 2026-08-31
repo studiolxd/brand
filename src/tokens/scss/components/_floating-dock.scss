@@ -1,0 +1,40 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-floating-dock-z-index: 100; // Capa del ancla: la del chrome de aplicación (100). Por debajo del velo y del modal, para que un diálogo del producto siga tapando al dock
+$lxd-floating-dock-offset-inline: 1.5rem; // Distancia al borde lateral de la ventana (24px). Se suma al `safe-area-inset` del dispositivo, nunca lo sustituye
+$lxd-floating-dock-offset-block: 1.5rem; // Distancia al borde superior o inferior de la ventana (24px). Se suma al `safe-area-inset`
+$lxd-floating-dock-gap: 0.75rem; // Separación entre el lanzador y el panel
+$lxd-floating-dock-trigger-size: 3rem; // Caja del lanzador (48px, la talla `lg` de icono-botón): objetivo táctil holgado. Es también lo que el panel reserva para no montarse encima
+$lxd-floating-dock-trigger-icon-size: 24px; // Glifo del lanzador (24px), la talla por defecto de icono-botón
+$lxd-floating-dock-badge-offset: 0.25rem; // Distancia del borde del lanzador a la esquina donde se centra el contador
+$lxd-floating-dock-badge-fill: #b30000; // El contador es rojo: el relleno de error del sistema, universal en claro y oscuro
+$lxd-floating-dock-badge-color: #ffffff; // Cifra sobre el relleno
+$lxd-floating-dock-panel-inline-size: 22rem; // Ancho del panel (352px). Medida de layout, como `modal.width-max`: no sale de la escala de espaciado
+$lxd-floating-dock-panel-block-size: 32rem; // Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible
+$lxd-floating-dock-panel-bg: #ffffff; // Fondo del panel
+$lxd-floating-dock-panel-border-width: 1px; // Grosor del borde: es lo que separa el panel del contenido que tiene debajo
+$lxd-floating-dock-panel-border-color: #111e30; // Color del borde
+$lxd-floating-dock-panel-border-radius: 0px; // Radio del panel: esquina recta
+$lxd-floating-dock-panel-shadow: none; // Sombra del panel
+$lxd-floating-dock-panel-padding-block: 1rem; // Aire vertical del panel
+$lxd-floating-dock-panel-padding-inline: 1rem; // Aire horizontal del panel
+$lxd-floating-dock-panel-gap: 0.75rem; // Separación entre la cabecera y el cuerpo
+$lxd-floating-dock-panel-enter-offset: 0.5rem; // Desplazamiento del panel al entrar y al salir (8px), en la dirección de la esquina en la que está anclado
+$lxd-floating-dock-header-gap: 0.25rem; // Separación entre el título y la descripción
+$lxd-floating-dock-title-color: #111e30; // Color del título
+$lxd-floating-dock-title-font-size: 1.25rem; // Tamaño del título: paso 4 de la escala de títulos (20px), el de un H5 — sube un peldaño en la superficie pública
+$lxd-floating-dock-title-font-weight: 500; // Peso del título
+$lxd-floating-dock-description-font-size: 0.875rem; // La descripción va un peldaño por debajo del cuerpo de la superficie
+$lxd-floating-dock-description-color: #4a4a4a; // Color de la descripción
+$lxd-floating-dock-close-size: 2rem; // Caja del botón de cerrar (32px): el panel es compacto y el aspa no compite con el título
+$lxd-floating-dock-close-icon-size: 24px; // Glifo del botón de cerrar (24px)
+$lxd-floating-dock-close-color: #111e30; // Color del glifo: la tinta de la superficie, ya en reposo
+$lxd-floating-dock-close-focus-ring-width: 2px; // Grosor del anillo de foco del aspa
+$lxd-floating-dock-close-focus-ring-offset: 2px; // Separación del anillo de foco del aspa
+$lxd-floating-dock-close-focus-ring-color: #111e30; // Color del anillo de foco del aspa
+$lxd-floating-dock-focus-ring-width: 2px; // Grosor del anillo de foco del panel (lo recibe al abrirse)
+$lxd-floating-dock-focus-ring-offset: 2px; // Separación del anillo de foco del panel
+$lxd-floating-dock-focus-ring-color: #111e30; // Color del anillo de foco del panel: la tinta de la superficie
+$lxd-floating-dock-transition-duration: 250ms; // Duración de la entrada y la salida del panel
+$lxd-floating-dock-transition-easing: ease-in-out; // Curva de la entrada y la salida del panel

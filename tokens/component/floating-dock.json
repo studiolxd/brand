@@ -1,0 +1,48 @@
+{
+  "floating-dock": {
+    "z-index":        { "$value": "{z-index.bar}",   "$type": "number",    "$description": "Capa del ancla: la del chrome de aplicación (100). Por debajo del velo y del modal, para que un diálogo del producto siga tapando al dock" },
+    "offset-inline":  { "$value": "{spacing.5}",     "$type": "dimension", "$description": "Distancia al borde lateral de la ventana (24px). Se suma al `safe-area-inset` del dispositivo, nunca lo sustituye" },
+    "offset-block":   { "$value": "{spacing.5}",     "$type": "dimension", "$description": "Distancia al borde superior o inferior de la ventana (24px). Se suma al `safe-area-inset`" },
+    "gap":            { "$value": "{spacing.3}",     "$type": "dimension", "$description": "Separación entre el lanzador y el panel" },
+    "trigger-size":   { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Caja del lanzador (48px, la talla `lg` de icono-botón): objetivo táctil holgado. Es también lo que el panel reserva para no montarse encima" },
+    "trigger-icon-size": { "$value": "{icon.size-md}", "$type": "dimension", "$description": "Glifo del lanzador (24px), la talla por defecto de icono-botón" },
+
+    "badge-offset":   { "$value": "{spacing.1}",     "$type": "dimension", "$description": "Distancia del borde del lanzador a la esquina donde se centra el contador" },
+    "badge-fill":     { "$value": "{color.error-fill}",      "$type": "color", "$description": "El contador es rojo: el relleno de error del sistema, universal en claro y oscuro" },
+    "badge-color":    { "$value": "{color.error-fill-text}", "$type": "color", "$description": "Cifra sobre el relleno" },
+
+    "panel-inline-size":    { "$value": "22rem",  "$type": "dimension", "$description": "Ancho del panel (352px). Medida de layout, como `modal.width-max`: no sale de la escala de espaciado" },
+    "panel-block-size":     { "$value": "32rem",  "$type": "dimension", "$description": "Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible" },
+    "panel-bg":             { "$value": "{floating-panel.bg}",            "$type": "color",     "$description": "Fondo del panel" },
+    "panel-border-width":   { "$value": "{floating-panel.border-width}",  "$type": "dimension", "$description": "Grosor del borde: es lo que separa el panel del contenido que tiene debajo" },
+    "panel-border-color":   { "$value": "{floating-panel.border-color}",  "$type": "color",     "$description": "Color del borde" },
+    "panel-border-radius":  { "$value": "{floating-panel.border-radius}", "$type": "dimension", "$description": "Radio del panel: esquina recta" },
+    "panel-shadow":         { "$value": "{floating-panel.shadow}",        "$type": "shadow",    "$description": "Sombra del panel" },
+    "panel-padding-block":  { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire vertical del panel" },
+    "panel-padding-inline": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire horizontal del panel" },
+    "panel-gap":            { "$value": "{spacing.3}", "$type": "dimension", "$description": "Separación entre la cabecera y el cuerpo" },
+    "panel-enter-offset":   { "$value": "{spacing.2}", "$type": "dimension", "$description": "Desplazamiento del panel al entrar y al salir (8px), en la dirección de la esquina en la que está anclado" },
+
+    "header-gap":        { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Separación entre el título y la descripción" },
+    "title-color":       { "$value": "{modal.title-color}",     "$type": "color",     "$description": "Color del título" },
+    "title-font-size":   { "$value": "{text.size.4}",           "$type": "dimension", "$description": "Tamaño del título: paso 4 de la escala de títulos (20px), el de un H5 — sube un peldaño en la superficie pública" },
+    "title-font-weight": { "$value": "{modal.title-font-weight}", "$type": "number",  "$description": "Peso del título" },
+    "description-font-size": { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "La descripción va un peldaño por debajo del cuerpo de la superficie" },
+    "description-color":     { "$value": "{modal.description-color}",        "$type": "color",     "$description": "Color de la descripción" },
+
+    "close-size":              { "$value": "{size-component.sm}",             "$type": "dimension", "$description": "Caja del botón de cerrar (32px): el panel es compacto y el aspa no compite con el título" },
+    "close-icon-size":         { "$value": "{icon.size-md}",                  "$type": "dimension", "$description": "Glifo del botón de cerrar (24px)" },
+    "close-color":             { "$value": "{modal.close-color}",             "$type": "color",     "$description": "Color del glifo: la tinta de la superficie, ya en reposo" },
+    "close-focus-ring-width":  { "$value": "{modal.close-focus-ring-width}",  "$type": "dimension", "$description": "Grosor del anillo de foco del aspa" },
+    "close-focus-ring-offset": { "$value": "{modal.close-focus-ring-offset}", "$type": "dimension", "$description": "Separación del anillo de foco del aspa" },
+    "close-focus-ring-color":  { "$value": "{modal.close-focus-ring-color}",  "$type": "color",     "$description": "Color del anillo de foco del aspa" },
+
+    "focus-ring-width":  { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Grosor del anillo de foco del panel (lo recibe al abrirse)" },
+    "focus-ring-offset": { "$value": "{border-width.focus}", "$type": "dimension", "$description": "Separación del anillo de foco del panel" },
+    "focus-ring-color":  { "$value": "{color.primary}",      "$type": "color",     "$description": "Color del anillo de foco del panel: la tinta de la superficie" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco del panel — surface-dark" },
+
+    "transition-duration": { "$value": "{motion.duration.base}",  "$type": "number", "$description": "Duración de la entrada y la salida del panel" },
+    "transition-easing":   { "$value": "{motion.easing.in-out}",  "$type": "string", "$description": "Curva de la entrada y la salida del panel" }
+  }
+}

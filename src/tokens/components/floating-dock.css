@@ -1,0 +1,49 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --floating-dock-panel-inline-size: 22rem; /** Ancho del panel (352px). Medida de layout, como `modal.width-max`: no sale de la escala de espaciado */
+  --floating-dock-panel-block-size: 32rem; /** Alto del panel (512px). Se recorta contra la ventana: nunca sobrepasa el alto disponible */
+  --floating-dock-z-index: var(--z-index-bar); /** Capa del ancla: la del chrome de aplicación (100). Por debajo del velo y del modal, para que un diálogo del producto siga tapando al dock */
+  --floating-dock-offset-inline: var(--spacing-5); /** Distancia al borde lateral de la ventana (24px). Se suma al `safe-area-inset` del dispositivo, nunca lo sustituye */
+  --floating-dock-offset-block: var(--spacing-5); /** Distancia al borde superior o inferior de la ventana (24px). Se suma al `safe-area-inset` */
+  --floating-dock-gap: var(--spacing-3); /** Separación entre el lanzador y el panel */
+  --floating-dock-trigger-size: var(--size-component-lg); /** Caja del lanzador (48px, la talla `lg` de icono-botón): objetivo táctil holgado. Es también lo que el panel reserva para no montarse encima */
+  --floating-dock-trigger-icon-size: var(--icon-size-md); /** Glifo del lanzador (24px), la talla por defecto de icono-botón */
+  --floating-dock-badge-offset: var(--spacing-1); /** Distancia del borde del lanzador a la esquina donde se centra el contador */
+  --floating-dock-panel-padding-block: var(--spacing-4); /** Aire vertical del panel */
+  --floating-dock-panel-padding-inline: var(--spacing-4); /** Aire horizontal del panel */
+  --floating-dock-panel-gap: var(--spacing-3); /** Separación entre la cabecera y el cuerpo */
+  --floating-dock-panel-enter-offset: var(--spacing-2); /** Desplazamiento del panel al entrar y al salir (8px), en la dirección de la esquina en la que está anclado */
+  --floating-dock-header-gap: var(--spacing-1); /** Separación entre el título y la descripción */
+  --floating-dock-close-size: var(--size-component-sm); /** Caja del botón de cerrar (32px): el panel es compacto y el aspa no compite con el título */
+  --floating-dock-close-icon-size: var(--icon-size-md); /** Glifo del botón de cerrar (24px) */
+  --floating-dock-transition-duration: var(--motion-duration-base); /** Duración de la entrada y la salida del panel */
+  --floating-dock-transition-easing: var(--motion-easing-in-out); /** Curva de la entrada y la salida del panel */
+  --floating-dock-badge-fill: var(--color-error-fill); /** El contador es rojo: el relleno de error del sistema, universal en claro y oscuro */
+  --floating-dock-badge-color: var(--color-error-fill-text); /** Cifra sobre el relleno */
+  --floating-dock-title-font-size: var(--text-size-4); /** Tamaño del título: paso 4 de la escala de títulos (20px), el de un H5 — sube un peldaño en la superficie pública */
+  --floating-dock-description-font-size: var(--text-paragraph-small-font-size); /** La descripción va un peldaño por debajo del cuerpo de la superficie */
+  --floating-dock-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco del panel (lo recibe al abrirse) */
+  --floating-dock-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco del panel */
+  --floating-dock-focus-ring-color: var(--color-primary); /** Color del anillo de foco del panel: la tinta de la superficie */
+  --floating-dock-panel-bg: var(--floating-panel-bg); /** Fondo del panel */
+  --floating-dock-panel-border-width: var(--floating-panel-border-width); /** Grosor del borde: es lo que separa el panel del contenido que tiene debajo */
+  --floating-dock-panel-border-color: var(--floating-panel-border-color); /** Color del borde */
+  --floating-dock-panel-border-radius: var(--floating-panel-border-radius); /** Radio del panel: esquina recta */
+  --floating-dock-panel-shadow: var(--floating-panel-shadow); /** Sombra del panel */
+  --floating-dock-title-color: var(--modal-title-color); /** Color del título */
+  --floating-dock-title-font-weight: var(--modal-title-font-weight); /** Peso del título */
+  --floating-dock-description-color: var(--modal-description-color); /** Color de la descripción */
+  --floating-dock-close-color: var(--modal-close-color); /** Color del glifo: la tinta de la superficie, ya en reposo */
+  --floating-dock-close-focus-ring-width: var(--modal-close-focus-ring-width); /** Grosor del anillo de foco del aspa */
+  --floating-dock-close-focus-ring-offset: var(--modal-close-focus-ring-offset); /** Separación del anillo de foco del aspa */
+  --floating-dock-close-focus-ring-color: var(--modal-close-focus-ring-color); /** Color del anillo de foco del aspa */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --floating-dock-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del panel — surface-dark */
+}

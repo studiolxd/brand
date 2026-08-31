@@ -27,6 +27,12 @@ html.dark {
   --async-select-error-border-color: var(--select-error-border-color);
   --async-select-focus-ring-color: var(--select-focus-ring-color);
   --async-select-placeholder-color: var(--multi-select-placeholder-color);
+  --floating-dock-panel-bg: var(--floating-panel-bg);
+  --floating-dock-panel-border-color: var(--floating-panel-border-color);
+  --floating-dock-title-color: var(--modal-title-color);
+  --floating-dock-description-color: var(--modal-description-color);
+  --floating-dock-close-color: var(--modal-close-color);
+  --floating-dock-close-focus-ring-color: var(--modal-close-focus-ring-color);
   --menu-bg: var(--floating-panel-bg);
   --menu-border-color: var(--floating-panel-border-color);
   --number-input-border-color: var(--input-border-color);
