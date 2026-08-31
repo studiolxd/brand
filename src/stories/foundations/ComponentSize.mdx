@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import { SizeScale } from "./SizeScale";
 import { TokenTable } from "./TokenTable";
-import { componentSizeTokens } from "../../tokens/size";
+import { componentSizeTokens, targetSizeTokens } from "../../tokens/size";
 
 <Meta title="Foundations/Tallas de componente" />
 
@@ -26,6 +26,16 @@ La altura no sale del padding porque cada control suma ingredientes distintos �
 Avatares, iconos-botón, logos de barra, triggers, miniaturas: el lado es una de las tres tallas. Es lo que permite que un avatar en una cabecera de 40px ocupe justo la altura del control que tiene al lado.
 
 Las marcas de checkbox y radio **no** son tallas de componente: son el tamaño de una marca dentro de una fila de control, y lo fija cada componente.
+
+## El objetivo de puntero no es la talla
+
+`sm` es la talla mínima **visible**, pero hay marcas que se dibujan por debajo: la de un checkbox `sm` mide 16px. Lo que WCAG 2.5.8 mide no es el dibujo, es el **área que responde al puntero**, y ahí el mínimo es 24×24 px.
+
+De ahí sale un token aparte, `--size-target-min`: los controles pequeños extienden su área sensible hasta esa cifra con una capa invisible centrada, sin mover la maqueta ni engordar el dibujo. Hoy lo usan `Checkbox` y `Radio` (`checkbox.target-size`, `radio.target-size`); cualquier control nuevo cuyo dibujo baje de 24px hace lo mismo.
+
+<TokenTable tokens={targetSizeTokens} />
+
+Definido en `tokens/size/target.json`.
 
 ---
 

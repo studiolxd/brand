@@ -1,6 +1,7 @@
 .checkbox {
   all: unset;
   box-sizing: border-box;
+  position: relative;
   width: var(--checkbox-size);
   height: var(--checkbox-size);
   flex-shrink: 0;
@@ -15,6 +16,19 @@
   transition:
     background-color var(--checkbox-transition-duration) var(--checkbox-transition-easing),
     border-color var(--checkbox-transition-duration) var(--checkbox-transition-easing);
+}
+
+/* El dibujo es de 16-24px según la talla; el área sensible al puntero llega
+   siempre a 24×24 (WCAG 2.5.8) por una capa invisible centrada que no ocupa
+   sitio en la maqueta. */
+.checkbox::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+  inline-size: max(100%, var(--checkbox-target-size));
+  block-size: max(100%, var(--checkbox-target-size));
 }
 
 .checkbox__indicator {
