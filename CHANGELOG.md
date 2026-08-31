@@ -7,6 +7,21 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v27.1.0
+
+### Añadido
+
+- **`FloatingDock`** (`@studiolxd/brand/floating-dock`): el ancla fija que
+  faltaba para un asistente tipo widget — lanzador de icono anclado a una
+  esquina (`position`), con `aria-label` obligatorio, `aria-expanded`/
+  `aria-controls`, contador (`badge`) anunciado por región viva, y panel
+  `Dialog` no modal con nombre, Escape, foco que entra al abrir y vuelve al
+  lanzador al cerrar; respeta `safe-area-inset` y `prefers-reduced-motion`.
+  Controlado o no controlado (`open`/`onOpenChange`). Tokens nuevos
+  `floating-dock.*` (offset, z-index, tamaño del panel). Nace para el
+  asistente de IA de tender, que hasta ahora usaba un `div` con `style` en
+  línea (hueco del DS anotado en el encargo C de la suite, 2026-08-31).
+
 ## v27.0.0
 
 Cierra los 22 hallazgos de accesibilidad del DS de la auditoría de suite
