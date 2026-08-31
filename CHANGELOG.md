@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v27.1.1
+
+### Arreglado
+
+- `v27.1.0` se publicó sin regenerar `dist/`: el export `./floating-dock`
+  existía en `package.json` pero no su fichero compilado. Solo cambia el
+  `dist` (y este aviso).
+
 ## v27.1.0
 
 ### Añadido
