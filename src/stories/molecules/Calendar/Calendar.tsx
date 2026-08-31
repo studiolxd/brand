@@ -116,6 +116,16 @@ export function Calendar({
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
   const title = titleFormatter.format(currentMonth);
 
+  // El número suelto («14») no dice de qué día se habla: el nombre accesible de
+  // cada celda lleva la fecha entera. Va por `locale` con `Intl`, no por prop de
+  // texto, como el resto de fechas del sistema.
+  const dayFormatter = new Intl.DateTimeFormat(locale, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
   const weekdays = getWeekdayNames(locale, 'narrow');
   const weeks = chunkWeeks(getCalendarDays(currentMonth));
 
@@ -178,6 +188,7 @@ export function Calendar({
                   type="button"
                   role="gridcell"
                   className={cls}
+                  aria-label={dayFormatter.format(date)}
                   aria-selected={isSelected}
                   aria-disabled={disabled ? 'true' : undefined}
                   aria-current={isToday ? 'date' : undefined}

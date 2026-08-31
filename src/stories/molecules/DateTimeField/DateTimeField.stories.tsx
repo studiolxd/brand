@@ -77,7 +77,8 @@ export const ElegirFechaYHora: Story = {
     const canvas = within(canvasElement);
     const body = within(canvasElement.ownerDocument.body);
     await userEvent.click(canvasElement.querySelector('#cita-date')!);
-    await userEvent.click(await body.findByRole('gridcell', { name: '18' }));
+    // El nombre accesible de la celda es la fecha entera, no el número suelto
+    await userEvent.click(await body.findByRole('gridcell', { name: /\b18 de \w+ de \d{4}$/ }));
     await expect(args.onChange).toHaveBeenCalled();
     await userEvent.click(canvas.getByRole('combobox', { name: 'Horas' }));
     await userEvent.click(await body.findByRole('option', { name: '14' }));
