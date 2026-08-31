@@ -117,7 +117,7 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
               <Toast.Close
                 className="alert__close"
                 aria-label={closeLabel}
-                render={<Button variant="ghost" size="sm" iconOnly />}
+                render={<Button variant="ghost" size="sm" iconOnly aria-label={closeLabel} />}
               >
                 <Icon name="close" size="sm" />
               </Toast.Close>
