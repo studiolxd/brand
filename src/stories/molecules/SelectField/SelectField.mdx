@@ -24,6 +24,22 @@ Siempre hay etiqueta (`label`), enlazada por `id`; sin `id`, el campo genera uno
 <Canvas of={SelectFieldStories.ConAyuda} />
 <Canvas of={SelectFieldStories.ConError} />
 
+## Opciones agrupadas
+
+`options` acepta, además de opciones sueltas (`{ value, label }`), grupos con cabecera (`{ label, options }`), y las dos formas se mezclan en la misma lista. La cabecera es una **etiqueta**, no una opción: no se elige ni la enfoca el teclado, y nombra a su grupo (`role="group"` + `aria-labelledby`).
+
+```tsx
+<SelectField
+  label="Tipografía"
+  options={[
+    { label: 'Fuentes del tema', options: [{ value: 'heading', label: 'Titulares' }] },
+    { label: 'Fuentes del sistema', options: [{ value: 'sans', label: 'Sans-serif' }] },
+  ]}
+/>
+```
+
+<Canvas of={SelectFieldStories.ConGrupos} />
+
 ## Valor vacío
 
 Una opción con `value: ""` sirve de «sin elegir» (el primer ítem de la lista). El campo la traduce internamente para que el `Select` la acepte y devuelve `""` en `onValueChange`.
@@ -69,6 +85,7 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 - La etiqueta va enlazada por `htmlFor`/`id` al disparador.
 - Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
+- Las cabeceras de grupo son etiquetas, no opciones: no son parada del teclado y nombran a su grupo por `role="group"` + `aria-labelledby`.
 
 ## Tokens
 

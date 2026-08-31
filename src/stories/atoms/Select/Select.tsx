@@ -24,13 +24,38 @@ export interface SelectOption {
   'aria-label'?: string;
 }
 
+/**
+ * Grupo de opciones con cabecera. La cabecera es una etiqueta, no una opción:
+ * no es elegible ni la enfoca el teclado, y nombra al grupo por
+ * `role="group"` + `aria-labelledby` (lo resuelve Base UI).
+ */
+export interface SelectOptionGroup {
+  /** Cabecera del grupo. */
+  label: ReactNode;
+  /** Opciones del grupo. */
+  options: SelectOption[];
+}
+
+/** Una entrada de `options`: opción suelta o grupo con cabecera. */
+export type SelectOptionOrGroup = SelectOption | SelectOptionGroup;
+
+/** Distingue un grupo de una opción suelta: el grupo trae su propia lista. */
+export function isSelectOptionGroup(entry: SelectOptionOrGroup): entry is SelectOptionGroup {
+  return Array.isArray((entry as SelectOptionGroup).options);
+}
+
 /** Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal`). */
 export type SelectPortalContainer = React.ComponentPropsWithoutRef<
   typeof BaseSelect.Portal
 >['container'];
 
 export interface SelectProps {
-  options: SelectOption[];
+  /**
+   * Opciones de la lista. Cada entrada es una opción (`{ value, label }`) o un
+   * grupo con cabecera (`{ label, options }`); las dos formas se pueden
+   * mezclar. Una lista plana sigue funcionando igual que siempre.
+   */
+  options: SelectOptionOrGroup[];
   value?: string;
   defaultValue?: string;
   /** Placeholder del trigger. Default: "Seleccionar…" (en la API compuesta lo pone cada consumidor vía `Select.Value`). */
@@ -141,8 +166,21 @@ export const SelectValue = forwardRef<HTMLSpanElement, SelectValueProps>(functio
   );
 });
 
-/** Agrupa opciones (Base UI Group, no visual). */
-export const SelectGroup = BaseSelect.Group;
+export type SelectGroupProps = React.ComponentPropsWithoutRef<typeof BaseSelect.Group>;
+
+/**
+ * Agrupa opciones (`.select__group`). Base UI le pone `role="group"` y lo
+ * enlaza con su `Select.Label` por `aria-labelledby`.
+ */
+export const SelectGroup = forwardRef<HTMLDivElement, SelectGroupProps>(function SelectGroup(
+  { className, children, ...rest }, ref) {
+  const classes = ['select__group', className ?? ''].filter(Boolean).join(' ');
+  return (
+    <BaseSelect.Group ref={ref} className={classes} {...rest}>
+      {children}
+    </BaseSelect.Group>
+  );
+});
 
 export interface SelectTriggerProps
   extends React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> {
@@ -245,6 +283,14 @@ export const SelectSeparator: React.ForwardRefExoticComponent<
  * estilos/estructura. La API pública es idéntica a la anterior.
  * ───────────────────────────────────────────────────────────────────────────── */
 
+function renderOption({ value, label, 'aria-label': optionAriaLabel }: SelectOption) {
+  return (
+    <SelectItem key={value} value={value} aria-label={optionAriaLabel}>
+      {label}
+    </SelectItem>
+  );
+}
+
 const SelectClosed = forwardRef<HTMLButtonElement, SelectProps>(function SelectClosed({
   options,
   value,
@@ -277,11 +323,16 @@ const SelectClosed = forwardRef<HTMLButtonElement, SelectProps>(function SelectC
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent size={size} container={container}>
-        {options.map(({ value: v, label, 'aria-label': optionAriaLabel }) => (
-          <SelectItem key={v} value={v} aria-label={optionAriaLabel}>
-            {label}
-          </SelectItem>
-        ))}
+        {options.map((entry, index) =>
+          isSelectOptionGroup(entry) ? (
+            <SelectGroup key={`group-${index}`}>
+              <SelectLabel>{entry.label}</SelectLabel>
+              {entry.options.map(renderOption)}
+            </SelectGroup>
+          ) : (
+            renderOption(entry)
+          ),
+        )}
       </SelectContent>
     </SelectRoot>
   );

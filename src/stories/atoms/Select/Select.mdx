@@ -13,10 +13,11 @@ Elegir una opción de una lista. Un `combobox` de Base UI: foco, ARIA y teclado 
 
 ## Dos formas de uso
 
-**Cerrada**: `options` (valor + etiqueta), `value`/`defaultValue`, `onValueChange`. Es la del `SelectField` y la del 90 % de los casos.
+**Cerrada**: `options` (valor + etiqueta), `value`/`defaultValue`, `onValueChange`. Es la del `SelectField` y la del 90 % de los casos. Una entrada de `options` puede ser también un **grupo con cabecera** (`{ label, options }`), mezclable con las opciones sueltas.
 
 **Compuesta**: `Select.Root › Trigger › Value` y `Content › Group › Label › Item › Separator`, para grupos, etiquetas de grupo, opciones con JSX o para inyectar props en el trigger. Las partes existen también como *named exports* (`SelectTrigger`…): en Server Components úsalos en vez del namespace. Las dos formas comparten motor y clases.
 
+<Canvas of={SelectStories.ConGrupos} />
 <Canvas of={SelectStories.Compuesto} />
 
 ## Tallas
@@ -40,6 +41,7 @@ El control hereda los tokens de `.surface-dark` por cascada. El desplegable va e
 - El control necesita nombre: en un formulario lo pone la etiqueta del `SelectField`; suelto, `aria-label`.
 - `aria-describedby` y `aria-invalid` llegan al trigger (los pone el campo con su ayuda y su error).
 - El trigger muestra la **etiqueta** de la opción elegida, no su valor.
+- La cabecera de un grupo es una etiqueta, no una opción: no se elige ni es parada del teclado, y nombra a su grupo (`role="group"` + `aria-labelledby`, los pone Base UI).
 
 ## Tokens
 

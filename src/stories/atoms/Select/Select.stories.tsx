@@ -54,6 +54,34 @@ export const Controlado: Story = {
 
 export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'es' } };
 
+/**
+ * Grupos con cabecera desde `options`: una entrada `{ label, options }` en vez
+ * de `{ value, label }`. Las dos formas se mezclan en la misma lista.
+ */
+export const ConGrupos: Story = {
+  args: {
+    'aria-label': 'Tipografía',
+    placeholder: 'Elige una fuente',
+    options: [
+      {
+        label: 'Fuentes del tema',
+        options: [
+          { value: 'heading', label: 'Titulares' },
+          { value: 'body', label: 'Texto' },
+        ],
+      },
+      {
+        label: 'Fuentes del sistema',
+        options: [
+          { value: 'sans', label: 'Sans-serif' },
+          { value: 'serif', label: 'Serif' },
+          { value: 'mono', label: 'Monoespaciada' },
+        ],
+      },
+    ],
+  },
+};
+
 /** Compuesto: grupos, etiquetas de grupo, separadores y opciones con JSX. */
 export const Compuesto: Story = {
   render: () => (

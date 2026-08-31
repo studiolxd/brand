@@ -2,8 +2,8 @@ import { forwardRef, useId } from 'react';
 import './SelectField.css';
 import { useFormSize } from '../../constants/form-size';
 import { Label } from '../../atoms/Label/Label';
-import { Select } from '../../atoms/Select/Select';
-import type { SelectOption } from '../../atoms/Select/Select';
+import { Select, isSelectOptionGroup } from '../../atoms/Select/Select';
+import type { SelectOption, SelectOptionOrGroup } from '../../atoms/Select/Select';
 
 export interface SelectFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -14,7 +14,12 @@ export interface SelectFieldProps {
    * Por defecto `false`: la etiqueta se ve.
    */
   labelHidden?: boolean;
-  options: SelectOption[];
+  /**
+   * Opciones del campo. Cada entrada es una opción (`{ value, label }`) o un
+   * grupo con cabecera (`{ label, options }`); las dos formas se pueden
+   * mezclar. La cabecera es una etiqueta, no una opción elegible.
+   */
+  options: SelectOptionOrGroup[];
   value?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -57,6 +62,10 @@ function decode(v: string): string {
   return v === EMPTY_SENTINEL ? '' : v;
 }
 
+function encodeOption(option: SelectOption): SelectOption {
+  return option.value === '' ? { ...option, value: EMPTY_SENTINEL } : option;
+}
+
 /**
  * El `Select` como campo de formulario. El control es de Base UI: el `ref` va
  * al **disparador** para que react-hook-form pueda enfocarlo al fallar la
@@ -90,9 +99,17 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
   // Un mensaje de error implica estado de error
   const hasError = error || !!errorMessage;
 
-  const hasEmptyOption = options.some((o) => o.value === '');
+  const hasEmptyOption = options.some((entry) =>
+    isSelectOptionGroup(entry)
+      ? entry.options.some((o) => o.value === '')
+      : entry.value === '',
+  );
   const encodedOptions = hasEmptyOption
-    ? options.map((o) => (o.value === '' ? { ...o, value: EMPTY_SENTINEL } : o))
+    ? options.map((entry) =>
+        isSelectOptionGroup(entry)
+          ? { ...entry, options: entry.options.map(encodeOption) }
+          : encodeOption(entry),
+      )
     : options;
 
   const containerClass = ['select-field', className].filter(Boolean).join(' ');
