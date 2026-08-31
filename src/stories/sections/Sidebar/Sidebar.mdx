@@ -27,6 +27,12 @@ En rail mide `sidebar.rail-width` (un botón de icono md con su aire) y el aire 
 
 El asa vive sobre el borde derecho (`sidebar.resizer-width` de zona de agarre). Arrastrar cambia el ancho entre mínimo y máximo; por debajo del mínimo salta a rail; por debajo del rail, se cierra. Con teclado, ← → por pasos, `Home` rail, `End` máximo.
 
+Es un `role="separator"` focusable, así que anuncia el recorrido entero: `aria-valuenow` con el ancho actual, `aria-valuemin` en el ancho del rail (el extremo inferior real del recorrido) y `aria-valuemax` en el máximo. El valor se habla con `aria-valuetext` **en píxeles** —sin él un lector lee el número como porcentaje—, y ese texto es una prop (`resizerValueText`).
+
+## El cajón en móvil
+
+Por debajo del punto de ruptura la barra es un cajón que entra por la izquierda. Mientras está abierto es **un diálogo modal**: `role="dialog"` con `aria-modal="true"`, el contenido de la página en `inert` bajo el velo, el foco entrando en el panel al abrirse y **volviendo al botón que lo abrió** al cerrarse. Sin esa vuelta el foco se quedaría dentro de un panel ya oculto y caería al `<body>`, que es como perder el sitio.
+
 ## Tokens
 
 Los anchos son medidas de maqueta, como la de lectura; el rail se compone de la talla md.
