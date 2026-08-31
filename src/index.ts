@@ -117,7 +117,8 @@ export {
   SelectGroup, SelectLabel, SelectItem, SelectSeparator,
 } from './stories/atoms/Select/Select';
 export type {
-  SelectProps, SelectOption, SelectTriggerProps, SelectContentProps,
+  SelectProps, SelectOption, SelectOptionGroup, SelectOptionOrGroup,
+  SelectTriggerProps, SelectContentProps, SelectGroupProps,
   SelectItemProps, SelectLabelProps, SelectSeparatorProps,
 } from './stories/atoms/Select/Select';
 export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';

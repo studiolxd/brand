@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { useForm, type ResolverResult } from 'react-hook-form';
 import { Button } from '../../atoms/Button/Button';
 import { FormProvider, FormField } from '../FormField/FormField';
@@ -10,6 +10,25 @@ const options = [
   { value: 'full-time', label: 'Jornada completa' },
   { value: 'part-time', label: 'Media jornada' },
   { value: 'freelance', label: 'Autónomo' },
+];
+
+// Lista agrupada: el caso de los selectores de tipografía.
+const grupos = [
+  {
+    label: 'Fuentes del tema',
+    options: [
+      { value: 'heading', label: 'Titulares' },
+      { value: 'body', label: 'Texto' },
+    ],
+  },
+  {
+    label: 'Fuentes del sistema',
+    options: [
+      { value: 'sans', label: 'Sans-serif' },
+      { value: 'serif', label: 'Serif' },
+      { value: 'mono', label: 'Monoespaciada' },
+    ],
+  },
 ];
 
 const meta: Meta<typeof SelectField> = {
@@ -40,6 +59,52 @@ export const Deshabilitado: Story = { args: { disabled: true, value: 'part-time'
 
 /** Etiqueta oculta a la vista, presente para el lector de pantalla. */
 export const EtiquetaOculta: Story = { args: { labelHidden: true } };
+
+/**
+ * Las opciones pueden venir agrupadas bajo una cabecera: cada grupo es un
+ * `{ label, options }` dentro de `options`, y las dos formas se mezclan en la
+ * misma lista. La cabecera es una etiqueta, no una opción elegible.
+ */
+export const ConGrupos: Story = {
+  args: {
+    id: 'tipografia',
+    label: 'Tipografía',
+    placeholder: 'Elige una fuente',
+    options: grupos,
+    helperText: 'Las del tema vienen del diseño; las del sistema, del navegador.',
+  },
+};
+
+export const ContratoGrupos: Story = {
+  name: 'Test — teclado: las cabeceras de grupo no son opciones',
+  tags: ['!dev'],
+  args: { id: 'tipografia', label: 'Tipografía', options: grupos, placeholder: 'Elige una fuente' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const control = canvas.getByRole('combobox', { name: 'Tipografía' });
+    await userEvent.click(control);
+    const listbox = await within(document.body).findByRole('listbox');
+
+    // Cinco opciones, dos grupos: la cabecera no cuenta como opción.
+    await expect(within(listbox).getAllByRole('option')).toHaveLength(5);
+    const [tema, sistema] = within(listbox).getAllByRole('group');
+    await expect(tema).toHaveAccessibleName('Fuentes del tema');
+    await expect(sistema).toHaveAccessibleName('Fuentes del sistema');
+
+    // Cada flecha cae en una opción: las cabeceras no son parada del teclado.
+    for (let i = 0; i < 6; i += 1) {
+      await userEvent.keyboard('{ArrowDown}');
+      const resaltada = listbox.querySelector('[data-highlighted]');
+      await expect(resaltada).not.toBeNull();
+      await expect(resaltada).toHaveAttribute('role', 'option');
+    }
+
+    // Seis flechas topan con la última opción del segundo grupo.
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() => expect(within(document.body).queryByRole('listbox')).toBeNull());
+    await expect(control).toHaveTextContent('Monoespaciada');
+  },
+};
 
 export const Contrato: Story = {
   name: 'Test — etiqueta, ayuda y error enlazados al control',

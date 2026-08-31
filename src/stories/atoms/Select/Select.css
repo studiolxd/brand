@@ -136,7 +136,22 @@
   padding-block: var(--select-lg-item-padding-block);
 }
 
-/* ─── Group label + separator (API compuesta) ────────────────────────────── */
+/* ─── Grupos, cabecera y separador ───────────────────────────────────────── */
+/* Agrupar no rompe el rayado del desplegable: la línea de la retícula pasa por
+   encima de cada cabecera de grupo (salvo la primera, que solo la lleva cuando
+   la lista cuelga del control y tiene que continuar su borde) y por encima de
+   la opción suelta que siga a un grupo. Entre la cabecera y su primera opción
+   no hay línea: es lo que las lee como un bloque. */
+.select__content .select__group:not(:first-child) > .select__label,
+.select__content[data-side='bottom'] .select__group:first-child > .select__label,
+.select__content .select__group + .select__item {
+  border-top: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+}
+
+.select__content[data-side='top'] .select__group:last-child > .select__item:last-child {
+  border-bottom: var(--select-border-width) var(--select-border-style) var(--select-content-border-color);
+}
+
 .select__label {
   padding-block: var(--select-item-padding-block);
   padding-inline: var(--select-padding-inline);
