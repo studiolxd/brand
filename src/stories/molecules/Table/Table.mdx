@@ -39,7 +39,13 @@ componente no ordena nada: pinta la cabecera, anuncia el estado y avisa del clic
 ## Con filas interactivas
 
 Una `Table.Row` con `onClick` (o `interactive`) se vuelve pulsable y enfocable. `selected`
-marca la fila elegida.
+marca la fila elegida: además de la tinta y el peso, emite `aria-selected` —en una fila
+interactiva se anuncian los dos estados; en una de solo lectura, solo la que está marcada,
+porque «no seleccionada» solo dice algo de lo que se puede seleccionar.
+
+El rol `row` toma su nombre accesible del contenido de sus celdas, así que normalmente no
+hay que escribirlo. `label` está para cuando ese texto no identifica la fila —celdas de
+solo iconos, códigos crípticos—: entonces se pasa el nombre a mano.
 
 <Canvas of={TableStories.ConFilasInteractivas} />
 

@@ -250,7 +250,9 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
             aria-invalid={error || undefined}
             aria-expanded={open}
             aria-haspopup="listbox"
-            aria-controls={listboxId}
+            // El listbox vive en un portal que solo existe abierto: cerrado, un
+            // `aria-controls` a un id inexistente es una referencia rota.
+            aria-controls={open ? listboxId : undefined}
             aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
             autoComplete="off"
             role="combobox"

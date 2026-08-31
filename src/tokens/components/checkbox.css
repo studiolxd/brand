@@ -14,6 +14,7 @@
   --checkbox-sm-check-size: 0.55rem; /** Tamaño del checkmark interior — variante sm */
   --checkbox-lg-size: 1.5rem; /** Tamaño del checkbox — variante lg (24px) */
   --checkbox-lg-check-size: 0.85rem; /** Tamaño del checkmark interior — variante lg */
+  --checkbox-target-size: var(--size-target-min); /** Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el dibujo sea menor. Se extiende de forma invisible y centrada, sin mover la maqueta */
   --checkbox-check-color: var(--color-white); /** Color del checkmark */
   --checkbox-transition-duration: var(--motion-duration-fast); /** Duración de transiciones */
   --checkbox-transition-easing: var(--motion-easing-default); /** Easing de transiciones */

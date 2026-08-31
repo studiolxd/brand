@@ -45,10 +45,19 @@ $lxd-chart-donut-thickness: 0.55; // Fracción del radio que ocupa el anillo del
 $lxd-chart-funnel-gap: 0.25rem; // 4px — hueco de superficie entre tramos del embudo
 $lxd-chart-treemap-gap: 2px; // 2px — hueco entre baldosas del treemap
 $lxd-chart-radial-bar-gap: 0.25rem; // 4px — hueco entre anillos de la barra radial
-$lxd-chart-radial-track-color: #f2f2f2; // Carril del anillo sin recorrer en la barra radial
+$lxd-chart-radial-track-color: #6b6b6b; // Carril del anillo sin recorrer en la barra radial: es la geometría de referencia del dato, como el eje, así que lleva su misma tinta (≥3:1 contra la superficie, WCAG 1.4.11)
 $lxd-chart-dot-size: 0.75rem; // 10px de diámetro nominal — punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate
 $lxd-chart-radar-fill-opacity: 0.15; // El polígono del radar es un velo del tono de la serie, como el área
-$lxd-chart-tile-label-color: #ffffff; // Rótulo sobre una baldosa del treemap: va encima del relleno de la serie, no de la superficie
+$lxd-chart-tile-label-color: #ffffff; // Rótulo sobre una baldosa del treemap cuando el relleno lo elige el producto (`color`/`colors`): va encima del relleno de la serie, no de la superficie, y con un color desconocido el sistema no puede elegir la tinta
+$lxd-chart-tile-label-color-1: #000000; // Rótulo sobre la baldosa de la ranura 1. La tinta se elige por ranura: ninguna de las dos (blanco o negro) llega a 4.5:1 sobre las ocho series, así que cada una lleva la que cumple. Negro, no prusia: el prusia es un casi-negro entintado y se queda corto sobre el azul de la ranura 1
+$lxd-chart-tile-label-color-2: #000000; // Rótulo sobre la baldosa de la ranura 2
+$lxd-chart-tile-label-color-3: #000000; // Rótulo sobre la baldosa de la ranura 3
+$lxd-chart-tile-label-color-4: #000000; // Rótulo sobre la baldosa de la ranura 4
+$lxd-chart-tile-label-color-5: #ffffff; // Rótulo sobre la baldosa de la ranura 5 — el magenta es lo bastante oscuro para llevar tinta clara
+$lxd-chart-tile-label-color-6: #000000; // Rótulo sobre la baldosa de la ranura 6
+$lxd-chart-tile-label-color-7: #ffffff; // Rótulo sobre la baldosa de la ranura 7 — la lavanda de gráfico es la más oscura de las ocho
+$lxd-chart-tile-label-color-8: #000000; // Rótulo sobre la baldosa de la ranura 8
+$lxd-chart-tile-label-color-muted: #ffffff; // Rótulo sobre la baldosa gris de «Otros» (pasada la octava ranura)
 $lxd-chart-padding-block: 0.5rem; // Aire vertical del área de dibujo
 $lxd-chart-padding-inline: 0.5rem; // Aire horizontal del área de dibujo
 $lxd-chart-axis-gap: 0.5rem; // Separación entre el eje y sus rótulos

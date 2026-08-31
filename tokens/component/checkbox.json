@@ -1,5 +1,6 @@
 {
   "checkbox": {
+    "target-size":           { "$value": "{size-target.min}",             "$type": "dimension", "$description": "Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el dibujo sea menor. Se extiende de forma invisible y centrada, sin mover la maqueta" },
     "size":                  { "$value": "1.25em",                      "$type": "string",    "$description": "Tamaño del checkbox (ancho y alto)" },
     "check-size":            { "$value": "0.65em",                      "$type": "string",    "$description": "Tamaño del checkmark interior" },
     "border-radius":         { "$value": "{border-radius.default}",        "$type": "dimension", "$description": "Border radius" },

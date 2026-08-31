@@ -107,18 +107,33 @@ export function CopyButton({
 
   return (
     <>
-      <Button
-        {...rest}
-        variant={variant}
-        {...(size ? { size } : {})}
-        iconOnly={children == null}
-        aria-label={children == null ? label : undefined}
-        onClick={handleClick}
-        className={['copy-button', className].filter(Boolean).join(' ')}
-      >
-        <Icon name={status === 'copied' ? 'check' : 'copy'} size="sm" />
-        {visible}
-      </Button>
+      {/* Dos formas del mismo botón: sin texto es cuadrado y se nombra con
+          `aria-label`; con texto, el texto ya lo nombra. La distinción está en
+          el tipo de `Button`, así que no puede ser un booleano calculado. */}
+      {children == null ? (
+        <Button
+          {...rest}
+          variant={variant}
+          {...(size ? { size } : {})}
+          iconOnly
+          aria-label={label}
+          onClick={handleClick}
+          className={['copy-button', className].filter(Boolean).join(' ')}
+        >
+          <Icon name={status === 'copied' ? 'check' : 'copy'} size="sm" />
+        </Button>
+      ) : (
+        <Button
+          {...rest}
+          variant={variant}
+          {...(size ? { size } : {})}
+          onClick={handleClick}
+          className={['copy-button', className].filter(Boolean).join(' ')}
+        >
+          <Icon name={status === 'copied' ? 'check' : 'copy'} size="sm" />
+          {visible}
+        </Button>
+      )}
       {/* El icono cambia para quien ve; para quien escucha, este anuncio. La
           región se monta siempre: si apareciera con el texto, algunos lectores
           de pantalla no la leerían. */}

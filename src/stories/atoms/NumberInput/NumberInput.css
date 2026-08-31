@@ -1,7 +1,9 @@
 .number-input {
   display: inline-flex;
   align-items: stretch;
-  block-size: var(--number-input-height);
+  /* Alto mínimo, no fijo: con el texto ampliado (WCAG 1.4.4) la cifra y los
+     botones crecen y el control tiene que crecer con ellos, no recortarlos. */
+  min-block-size: var(--number-input-height);
   border-radius: var(--number-input-border-radius);
   border-width: var(--number-input-border-width);
   border-style: var(--number-input-border-style);

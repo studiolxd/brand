@@ -7,4 +7,5 @@
   --size-component-md: 2.5rem; /** 40px — talla por defecto de todo control de una línea: campos, selects, botones */
   --size-component-lg: 3rem; /** 48px — controles destacados y objetivo táctil holgado */
   --content-measure: 70ch; /** Medida de lectura: 70 caracteres por línea del texto que la usa. Se resuelve contra la fuente del propio párrafo, así que se adapta sola al tamaño y a la familia. Rango cómodo 45-75; WCAG pide como máximo 80 */
+  --size-target-min: 1.5rem; /** 24px — objetivo de puntero mínimo (WCAG 2.5.8, nivel AA). No es una talla de maqueta: es el área sensible que un control pequeño (checkbox, radio) extiende de forma invisible más allá de su dibujo */
 }

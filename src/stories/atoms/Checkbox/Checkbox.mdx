@@ -27,6 +27,13 @@ Control de selección binaria para formularios. Su apariencia está completament
 
 ---
 
+## Objetivo de puntero
+
+El dibujo mide 20px (16px en `sm`), pero el **área que responde al puntero** llega siempre
+a 24×24, el mínimo de WCAG 2.5.8: la extiende una capa invisible centrada
+(`checkbox.target-size`, que apunta a `--size-target-min`) que no ocupa sitio en la maqueta
+ni engorda la marca.
+
 ## Tokens
 
 ### Base

@@ -16,6 +16,10 @@ export interface BreadcrumbProps {
   items: BreadcrumbItem[];
   renderLink?: (props: BreadcrumbRenderLinkProps) => ReactNode;
   separator?: ReactNode;
+  /**
+   * `aria-label` del `<nav>`. Default: «Migas de pan» (castellano).
+   * Una app multiidioma debe pasarlo traducido.
+   */
   ariaLabel?: string;
   className?: string;
 }

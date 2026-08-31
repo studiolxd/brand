@@ -25,10 +25,15 @@ export const PorDefecto: Story = {
   ),
 };
 
-/** Nombre accesible de un botón de solo icono, sin recurrir a `aria-label`. */
+/**
+ * Nombre accesible de un botón que solo enseña un icono, sin recurrir a
+ * `aria-label`. Ojo: la prop `iconOnly` de `Button` (la que lo hace cuadrado)
+ * exige `aria-label` o `aria-labelledby` por tipo — ahí el nombre no puede
+ * venir de aquí.
+ */
 export const NombreDeBoton: Story = {
   render: () => (
-    <Button variant="ghost" iconOnly>
+    <Button variant="ghost">
       <Icon name="close" size="sm" />
       <VisuallyHidden>Cerrar</VisuallyHidden>
     </Button>

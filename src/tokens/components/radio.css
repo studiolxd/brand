@@ -14,6 +14,7 @@
   --radio-sm-dot-size: 0.4rem; /** Tamaño del punto interior — variante sm */
   --radio-lg-size: 1.5rem; /** Tamaño del radio — variante lg (24px) */
   --radio-lg-dot-size: 0.65rem; /** Tamaño del punto interior — variante lg */
+  --radio-target-size: var(--size-target-min); /** Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el dibujo sea menor. Se extiende de forma invisible y centrada, sin mover la maqueta */
   --radio-transition-duration: var(--motion-duration-fast); /** Duración de transiciones */
   --radio-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
   --radio-border-width: var(--border-width-default); /** Border width */

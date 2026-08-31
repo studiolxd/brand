@@ -8,6 +8,9 @@ $lxd-command-palette-input-font-size: 1.25rem; // Tamaño de texto del buscador
 $lxd-command-palette-input-border-width: 1px; // Grosor de la línea bajo el buscador
 $lxd-command-palette-input-border-color: #111e30; // Color de la línea bajo el buscador
 $lxd-command-palette-input-placeholder-color: #4a4a4a; // Color del placeholder del buscador
+$lxd-command-palette-input-focus-ring-width: 2px; // Grosor del anillo de foco del buscador — el del sistema
+$lxd-command-palette-input-focus-ring-color: #111e30; // Color del anillo de foco del buscador
+$lxd-command-palette-input-focus-border-color: #111e30; // Color de la línea bajo el buscador con el foco puesto
 $lxd-command-palette-list-padding-block: 0.25rem; // Padding vertical de la lista de resultados
 $lxd-command-palette-list-padding-inline: 0.25rem; // Padding horizontal de la lista de resultados
 $lxd-command-palette-empty-padding-block: 2rem; // Padding vertical del estado vacío

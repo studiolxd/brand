@@ -15,7 +15,7 @@ const filters = {
   spacing:     (t) => t.path[0] === 'spacing',
   border:      (t) => t.path[0] === 'border-radius' || t.path[0] === 'border-width',
   shadow:      (t) => t.path[0] === 'shadow',
-  size:        (t) => t.path[0] === 'size-component' || t.path[0] === 'content',
+  size:        (t) => t.path[0] === 'size-component' || t.path[0] === 'content' || t.path[0] === 'size-target',
   motion:      (t) => t.path[0] === 'motion',
   opacity:     (t) => t.path[0] === 'opacity',
   'z-index':   (t) => t.path[0] === 'z-index',

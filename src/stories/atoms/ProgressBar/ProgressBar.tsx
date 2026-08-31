@@ -10,7 +10,10 @@ export interface ProgressBarProps {
   variant?: ProgressBarVariant;
   /** Talla de la barra. En `sm` no se muestra la cifra. */
   size?: ProgressBarSize;
-  /** Nombre accesible de la barra: qué está avanzando. Por defecto, «Progreso». */
+  /**
+   * Nombre accesible de la barra: qué está avanzando. Default: «Progreso»
+   * (castellano). Una app multiidioma debe pasarlo traducido.
+   */
   label?: string;
   /** Clases adicionales para el contenedor. */
   className?: string;

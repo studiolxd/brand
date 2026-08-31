@@ -28,6 +28,16 @@ etiqueta es `searchPlaceholder`, oculta a la vista; el nombre del aspa, `searchC
 
 <Canvas of={DataTableStories.Default} />
 
+## El nombre de la tabla
+
+`ariaLabel` (o `ariaLabelledBy`, si un título de la página ya la nombra) es el nombre
+accesible del `<table>`. **No tiene valor por defecto**: solo el producto sabe qué lista
+es, y una tabla sin nombre llega al lector de pantalla como «tabla» a secas.
+
+```tsx
+<DataTable ariaLabel="Empleados" columns={columns} data={data} />
+```
+
 ## Con acciones en la barra
 
 `toolbar` se renderiza a la derecha del buscador.
@@ -38,7 +48,8 @@ etiqueta es `searchPlaceholder`, oculta a la vista; el nombre del aspa, `searchC
 
 `isLoading` sustituye las filas por `Skeleton`, tantas como diga `pageSize`. Las filas de
 esqueleto van `aria-hidden`: para un lector de pantalla la tabla está vacía mientras carga,
-no llena de ruido.
+no llena de ruido. Mientras tanto el `<table>` va `aria-busy="true"`, que es lo que dice
+que la tabla está trabajando y su contenido va a cambiar.
 
 <Canvas of={DataTableStories.Cargando} />
 

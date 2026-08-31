@@ -1,5 +1,6 @@
 {
   "radio": {
+    "target-size":           { "$value": "{size-target.min}",             "$type": "dimension", "$description": "Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el dibujo sea menor. Se extiende de forma invisible y centrada, sin mover la maqueta" },
     "size":                  { "$value": "1.25em",                      "$type": "string",    "$description": "Tamaño del radio (ancho y alto)" },
     "dot-size":              { "$value": "0.5em",                       "$type": "string",    "$description": "Tamaño del punto interior" },
     "border-radius":         { "$value": "50%",                         "$type": "string",    "$description": "Border radius (círculo)" },

@@ -17,7 +17,7 @@ $lxd-toggle-line-height: 1; // Interlineado
 $lxd-toggle-border-width: 1px; // Grosor del borde
 $lxd-toggle-border-style: solid; // Estilo del borde
 $lxd-toggle-border-radius: 0px; // Radio del borde (recto, como el resto de controles)
-$lxd-toggle-border-color: #d0d0d0; // Borde sin pulsar
+$lxd-toggle-border-color: #6b6b6b; // Borde sin pulsar. Es el contorno de un control, no un divisor: el gris de bordes se queda en 1.54:1 sobre blanco y WCAG 1.4.11 pide 3:1. El gris de acción secundaria cumple y deja sitio al paso de hover, que sí es prusia
 $lxd-toggle-bg: rgba(0, 0, 0, 0); // Fondo sin pulsar: ninguno. El relleno es lo que dice que el valor está elegido
 $lxd-toggle-color: #111e30; // Texto sin pulsar
 $lxd-toggle-hover-border-color: #111e30; // Borde al pasar el ratón — el hover no pone fondo, solo marca el borde

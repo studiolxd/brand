@@ -22,6 +22,20 @@
   animation-delay: calc(var(--typing-indicator-animation-duration) / 5 * 2);
 }
 
+/* Con movimiento reducido los puntos no saltan ni parpadean: quedan quietos.
+   Quien informa de que hay respuesta en camino es el texto accesible del
+   componente, no la animación. */
+@media (prefers-reduced-motion: reduce) {
+  .typing-indicator__dot {
+    animation: none;
+    opacity: var(--typing-indicator-dot-opacity-inactive);
+  }
+  .typing-indicator__dot:nth-child(2),
+  .typing-indicator__dot:nth-child(3) {
+    animation-delay: 0s;
+  }
+}
+
 @keyframes typing-bounce {
   0%, 60%, 100% { opacity: var(--typing-indicator-dot-opacity-inactive); transform: translateY(0); }
   30%            { opacity: 1; transform: translateY(-0.25rem); }

@@ -20,3 +20,9 @@
   --code-block-border-width: var(--card-outline-border-width); /** Grosor de borde — heredado de card (variante outline) */
   --code-block-border-color: var(--card-outline-border-color); /** Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro */
 }
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --code-block-border-color: var(--color-primary); /** Color de borde — surface-dark. No remapea, igual que `bg` y `color`: la superficie del bloque es gris claro en los dos temas, así que heredar el borde blanco de card lo dejaba en 1.12:1 sobre el gris */
+}

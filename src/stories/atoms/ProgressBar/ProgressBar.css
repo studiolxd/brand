@@ -18,6 +18,9 @@
   inset-inline-start: 0;
   border-radius: inherit;
   overflow: hidden;
+  /* El contorno es quien identifica el relleno cuando su color de marca es
+     claro y saturado: contra un carril claro no llega a 3:1 (WCAG 1.4.11). */
+  box-shadow: inset 0 0 0 var(--progress-bar-fill-border-width) var(--progress-bar-fill-border-color);
   transition: width var(--progress-bar-transition-duration) var(--progress-bar-transition-easing);
 }
 

@@ -22,11 +22,14 @@
   --command-palette-item-icon-size: var(--font-size-4); /** Talla del icono de los ítems */
   --command-palette-input-border-width: var(--border-width-default); /** Grosor de la línea bajo el buscador */
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-light); /** Color del placeholder del buscador */
+  --command-palette-input-focus-ring-color: var(--color-primary); /** Color del anillo de foco del buscador */
+  --command-palette-input-focus-border-color: var(--color-primary); /** Color de la línea bajo el buscador con el foco puesto */
   --command-palette-empty-color: var(--color-text-muted-on-light); /** Color del estado vacío */
   --command-palette-heading-font-weight: var(--font-weight-emphasis); /** Peso del título de grupo */
   --command-palette-heading-color: var(--color-text-muted-on-light); /** Color del título de grupo */
   --command-palette-item-border-radius: var(--border-radius-default); /** Radio de cada ítem */
   --command-palette-input-border-color: var(--floating-panel-border-color); /** Color de la línea bajo el buscador */
+  --command-palette-input-focus-ring-width: var(--control-focus-ring-width); /** Grosor del anillo de foco del buscador — el del sistema */
   --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — comparte lenguaje con ContextMenu */
   --command-palette-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — el del Menu: la inversión de marca */
   --command-palette-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — el del Menu: icono y atajo lo heredan por `currentColor` */
@@ -38,6 +41,8 @@ html.dark {
   --command-palette-empty-color: var(--color-text-muted-on-dark); /** Color del estado vacío — surface-dark */
   --command-palette-heading-color: var(--color-text-muted-on-dark); /** Color del título de grupo — surface-dark */
   --command-palette-input-placeholder-color: var(--color-text-placeholder-on-dark); /** Pista del buscador — surface-dark */
+  --command-palette-input-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del buscador — surface-dark */
+  --command-palette-input-focus-border-color: var(--color-text-on-dark); /** Línea bajo el buscador con el foco puesto — surface-dark */
   --command-palette-item-color: var(--menu-item-color); /** Color de texto de los ítems — surface-dark */
   --command-palette-item-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del ítem resaltado — surface-dark */
   --command-palette-item-highlighted-color: var(--menu-item-highlighted-color); /** Texto del ítem resaltado — surface-dark */

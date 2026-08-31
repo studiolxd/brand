@@ -87,6 +87,12 @@ Un **treemap** reparte el área: la superficie de cada baldosa es su parte del t
 
 <Canvas of={ChartStories.Treemap} />
 
+El rótulo de cada baldosa va **encima del relleno**, no sobre la superficie, así que su
+tinta la elige la ranura (`tile-label-color-1`…`8`): ni el blanco ni el negro llegan a
+4.5:1 sobre las ocho series, y cada una lleva el que cumple. Cuando el relleno lo pone el
+producto (`color` de la serie o `colors`) el sistema no puede decidir y se queda con
+`tile-label-color`; ahí el contraste es cosa de quien elige el color.
+
 Una **barra radial** compara magnitudes en anillos concéntricos. Ojo: cada anillo se mide contra **el mayor**, no contra el total —no es un reparto—, y el carril gris dice hasta dónde llegaría el máximo.
 
 <Canvas of={ChartStories.BarraRadial} />
@@ -120,6 +126,7 @@ La misma información llega **con el teclado**: el área de dibujo se enfoca con
 - El lienzo SVG va **`aria-hidden`**: quien lo lee es la capa de exploración, que es la que lleva `role="img"`, el `ariaLabel` y el foco.
 - **`ariaLabel` es obligatoria** y describe lo que se ve, no el tipo de gráfico.
 - Cada gráfico trae su **tabla equivalente oculta** (`VisuallyHidden`) con todas las filas y todas las series. El bocadillo enriquece, no franquea: ningún valor depende de pasar el puntero.
+- Explorar con el **teclado** no es mudo: mientras se recorren los puntos con las flechas, una región viva anuncia el que está enfocado (el mismo dato que enseña el bocadillo, que va `aria-hidden` por ser la versión que se ve). Con el puntero no se anuncia nada: ahí el bocadillo ya está a la vista y una región viva persiguiendo al ratón sería ruido.
 - La **leyenda aparece desde dos series** —es el canal de identidad fiable— y se monta con `Inline` de `Tag`. Con una sola serie no hay leyenda: el título ya la nombra.
 
 ## Textos

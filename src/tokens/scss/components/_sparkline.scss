@@ -8,4 +8,4 @@ $lxd-sparkline-color: #6b6b6b; // Trazo de la serie: gris de atenuación, porque
 $lxd-sparkline-accent-color: #1e7ff6; // Periodo actual y punto final: la ranura de apertura del sistema
 $lxd-sparkline-fill-opacity: 0.1; // Velo bajo la línea cuando la chispa se pinta como área
 $lxd-sparkline-marker-size: 0.5rem; // Diámetro del punto final
-$lxd-sparkline-baseline-color: #d0d0d0; // Línea del cero cuando la serie cruza el cero
+$lxd-sparkline-baseline-color: #6b6b6b; // Línea del cero cuando la serie cruza el cero: es el ancla del dato, no rejilla, así que lleva la tinta del eje (≥3:1 contra la superficie, WCAG 1.4.11)

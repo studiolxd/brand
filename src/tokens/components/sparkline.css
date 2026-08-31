@@ -10,7 +10,7 @@
   --sparkline-marker-size: var(--chart-marker-size); /** Diámetro del punto final */
   --sparkline-line-width: var(--chart-line-width); /** Grosor de la línea. Es la misma marca que en Chart */
   --sparkline-color: var(--chart-muted-color); /** Trazo de la serie: gris de atenuación, porque el dato que se lee es la cifra que va al lado */
-  --sparkline-baseline-color: var(--chart-grid-color); /** Línea del cero cuando la serie cruza el cero */
+  --sparkline-baseline-color: var(--chart-axis-color); /** Línea del cero cuando la serie cruza el cero: es el ancla del dato, no rejilla, así que lleva la tinta del eje (≥3:1 contra la superficie, WCAG 1.4.11) */
 }
 
 .surface-dark,
@@ -18,5 +18,5 @@
 html.dark {
   --sparkline-accent-color: var(--color-chart-series-1-on-dark); /** Acento — surface-dark */
   --sparkline-color: var(--color-text-muted-on-dark); /** Trazo — surface-dark */
-  --sparkline-baseline-color: var(--color-surface-secondary-on-dark); /** Línea del cero — surface-dark */
+  --sparkline-baseline-color: var(--color-disabled-border-on-dark); /** Línea del cero — surface-dark: la tinta del eje en oscuro */
 }

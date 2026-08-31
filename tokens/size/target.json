@@ -1,0 +1,5 @@
+{
+  "size-target": {
+    "min": { "$value": "1.5rem", "$type": "dimension", "$description": "24px — objetivo de puntero mínimo (WCAG 2.5.8, nivel AA). No es una talla de maqueta: es el área sensible que un control pequeño (checkbox, radio) extiende de forma invisible más allá de su dibujo" }
+  }
+}
