@@ -60,6 +60,7 @@ function o({ mode: o = "pages", total: s = 0, pageCount: c, page: l = 1, pageSiz
 				"aria-label": s,
 				children: c
 			}) : /* @__PURE__ */ n("button", {
+				type: "button",
 				className: "pagination__btn pagination__btn--nav",
 				disabled: o,
 				"aria-label": s,
@@ -91,16 +92,16 @@ function o({ mode: o = "pages", total: s = 0, pageCount: c, page: l = 1, pageSiz
 			children: "…"
 		}, `ellipsis-${t}`);
 		let r = e === l, i = ["pagination__btn", r ? "pagination__btn--current" : ""].filter(Boolean).join(" ");
-		return j ? /* @__PURE__ */ n(M, {
-			href: r ? void 0 : j(e),
+		return j && !r ? /* @__PURE__ */ n(M, {
+			href: j(e),
 			className: i,
-			"aria-current": r ? "page" : void 0,
 			"aria-label": w(e),
-			onClick: !r && g ? (t) => {
+			onClick: g ? (t) => {
 				t.preventDefault(), g(e);
 			} : void 0,
 			children: e
 		}, e) : /* @__PURE__ */ n("button", {
+			type: "button",
 			className: i,
 			"aria-current": r ? "page" : void 0,
 			"aria-label": w(e),
@@ -114,16 +115,16 @@ function o({ mode: o = "pages", total: s = 0, pageCount: c, page: l = 1, pageSiz
 			size: S === "sm" ? "xs" : S === "lg" ? "md" : "sm",
 			className: r === "prev" ? "pagination__chevron--prev" : void 0
 		});
-		return j ? /* @__PURE__ */ n(M, {
-			href: i ? void 0 : j(t),
+		return j && !i ? /* @__PURE__ */ n(M, {
+			href: j(t),
 			className: "pagination__btn pagination__btn--nav",
 			"aria-label": a,
-			"aria-disabled": i ? "true" : void 0,
-			onClick: !i && g ? (e) => {
+			onClick: g ? (e) => {
 				e.preventDefault(), g(t);
 			} : void 0,
 			children: o
 		}) : /* @__PURE__ */ n("button", {
+			type: "button",
 			className: "pagination__btn pagination__btn--nav",
 			disabled: i,
 			"aria-label": a,

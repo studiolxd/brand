@@ -23,17 +23,18 @@ export interface StarRatingProps extends Omit<React.ComponentPropsWithoutRef<'di
     locale?: string;
     /**
      * Nombre accesible en lectura: recibe el valor ya redondeado a media estrella
-     * y el máximo. Por defecto, en castellano: «4,5 de 5 estrellas».
+     * y el máximo. Default: «4,5 de 5 estrellas» (castellano). Una app
+     * multiidioma debe pasarlo traducido.
      */
     valueLabel?: (value: number, max: number) => string;
     /**
-     * Nombre accesible de cada estrella elegible. Por defecto, en castellano:
-     * «3 de 5 estrellas».
+     * Nombre accesible de cada estrella elegible. Default: «3 de 5 estrellas»
+     * (castellano). Una app multiidioma debe pasarlo traducido.
      */
     optionLabel?: (value: number, max: number) => string;
     /**
-     * Nombre accesible del grupo en modo entrada. Por defecto, en castellano:
-     * «Valoración».
+     * Nombre accesible del grupo en modo entrada. Default: «Valoración»
+     * (castellano). Una app multiidioma debe pasarlo traducido.
      */
     groupLabel?: string;
     /** Se añade DESPUÉS de las clases propias. */

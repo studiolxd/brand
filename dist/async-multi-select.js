@@ -107,7 +107,7 @@ var d = n(function({ onSearch: n, value: d, defaultValue: f = [], onValueChange:
 						"aria-invalid": b || void 0,
 						"aria-expanded": A,
 						"aria-haspopup": "listbox",
-						"aria-controls": q,
+						"aria-controls": A ? q : void 0,
 						"aria-activedescendant": B >= 0 ? X(B) : void 0,
 						autoComplete: "off",
 						role: "combobox",

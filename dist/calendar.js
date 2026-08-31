@@ -20,7 +20,12 @@ function p({ value: p, onChange: m, defaultMonth: h, month: g, onMonthChange: _,
 	}), F = E === "sm" ? "xs" : E === "lg" ? "md" : "sm", I = new Intl.DateTimeFormat(S, {
 		month: "long",
 		year: "numeric"
-	}).format(A), L = o(S, "narrow"), R = c(i(A)), z = t(A, -1), B = t(A, 1), V = b ? !e(z, b) && z < b : !1, H = x ? !e(B, x) && B > x : !1, U = `calendar-title-${A.getFullYear()}-${A.getMonth()}`;
+	}).format(A), L = new Intl.DateTimeFormat(S, {
+		weekday: "long",
+		day: "numeric",
+		month: "long",
+		year: "numeric"
+	}), R = o(S, "narrow"), z = c(i(A)), B = t(A, -1), V = t(A, 1), H = b ? !e(B, b) && B < b : !1, U = x ? !e(V, x) && V > x : !1, W = `calendar-title-${A.getFullYear()}-${A.getMonth()}`;
 	return /* @__PURE__ */ f("div", {
 		className: [
 			"calendar",
@@ -30,25 +35,25 @@ function p({ value: p, onChange: m, defaultMonth: h, month: g, onMonthChange: _,
 		children: [a({
 			block: "calendar",
 			title: I,
-			titleId: U,
+			titleId: W,
 			navigable: v,
 			previousMonthLabel: C,
 			nextMonthLabel: w,
-			prevDisabled: V,
-			nextDisabled: H,
-			onPrev: () => j(z),
-			onNext: () => j(B),
+			prevDisabled: H,
+			nextDisabled: U,
+			onPrev: () => j(B),
+			onNext: () => j(V),
 			chevronSize: F
 		}), /* @__PURE__ */ f("div", {
 			className: "calendar__grid",
 			role: "grid",
 			"aria-label": T,
-			"aria-labelledby": T ? void 0 : U,
+			"aria-labelledby": T ? void 0 : W,
 			onKeyDown: P.onKeyDown,
 			children: [s({
 				block: "calendar",
-				weekdays: L
-			}), R.map((e, t) => /* @__PURE__ */ d("div", {
+				weekdays: R
+			}), z.map((e, t) => /* @__PURE__ */ d("div", {
 				role: "row",
 				className: "calendar__row",
 				children: e.map(({ date: e, outside: t }) => {
@@ -64,6 +69,7 @@ function p({ value: p, onChange: m, defaultMonth: h, month: g, onMonthChange: _,
 						type: "button",
 						role: "gridcell",
 						className: o,
+						"aria-label": L.format(e),
 						"aria-selected": a,
 						"aria-disabled": r ? "true" : void 0,
 						"aria-current": i ? "date" : void 0,

@@ -7,6 +7,69 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v27.0.0
+
+Cierra los 22 hallazgos de accesibilidad del DS de la auditoría de suite
+2026-08-30/31 (B5-B26). Major: cuatro componentes cambian de DOM/rol de forma
+que un consumidor que consulte por rol (tests incluidos) puede notarlo.
+
+### Cambios que rompen (major)
+
+- **`FileUpload`**: la zona de arrastre deja de llevar `role="button"` — el
+  `<input type="file">` real recupera el foco, el nombre y el selector nativo
+  por teclado; la zona pasa a `aria-hidden` (B12).
+- **`MultiSelect`**: el `role="combobox"` se mueve del disparador entero a un
+  elemento interno dedicado; las píldoras y sus aspas de quitar salen fuera
+  del elemento con ese rol (un combobox no admite controles dentro). Teclado
+  completo del patrón combobox: Escape, Inicio/Fin, salto por letra,
+  `aria-activedescendant` en vez de mover el foco del DOM (B9).
+- **`Pagination`**: los enlaces sin destino pasan a `<button>` (B22).
+- **`ThemeSwitcher`**: la opción vigente deja de ser un `<span>` — ahora es un
+  control real con `aria-pressed` (B23).
+- **`iconOnly` de `Button`/`Toggle`**: pasa de exigir `aria-label` solo por
+  JSDoc a exigirlo por tipos (unión discriminada) — un `iconOnly` sin
+  `aria-label`/`aria-labelledby` deja de compilar (B26, cierra A15 de raíz en
+  las apps consumidoras).
+
+### Arreglado
+
+- Cajón de `Sidebar` en móvil: ahora es `role="dialog"`/`aria-modal` y
+  devuelve el foco al cerrar; el asa de redimensión anuncia sus límites
+  (`aria-valuemin`/`aria-valuemax`) en vez de un «280 %» sin sentido (B5, B6).
+- Fila de `Table`/`DataTable`: `aria-selected` real, nombre accesible y
+  `aria-busy` durante la carga (B7, B15).
+- `aria-controls` ya no cuelga hacia un listbox cerrado en `MultiSelect`,
+  `AsyncSelect`, `AsyncMultiSelect` (B8).
+- `Calendar`: cada día se anuncia por su fecha completa, no solo el número
+  (B10).
+- `Carousel`: el autoplay se puede pausar (botón visible) y anuncia el slide
+  activo sin ser intrusivo (B11).
+- `Alert` descartable ya no pierde el foco al `<body>` al cerrarse (B13).
+- `Button` con `href`+`disabled` deja de navegar/disparar `onClick` (B14).
+- `CommandPalette` gana anillo de foco visible — era el único componente del
+  sistema sin uno (B16).
+- Contraste: rótulos del treemap (B17), relleno del `ProgressBar` (B18),
+  borde de `Toggle` en reposo (B19), carril del anillo radial y línea base
+  del sparkline (B20), borde de `CodeBlock` en oscuro (B26) — todos a ≥4.5:1
+  (texto) o ≥3:1 (gráfico) según corresponda.
+- `FormField`/`InputField`: `aria-describedby` solo apunta a una descripción
+  que existe de verdad, y ya no pisa el que pase el consumidor (B21).
+- `Chart`: la exploración por teclado anuncia el punto de datos enfocado
+  mediante región viva (B24).
+- Objetivo táctil de `Checkbox`/`Radio` sube a 24×24px mínimo vía
+  `--size-target-min`, sin tocar la maqueta visual (B25).
+- `TypingIndicator` respeta `prefers-reduced-motion`; la región viva del
+  vacío de `CommandPalette` deja de usar `display:none` (nunca se habría
+  anunciado); `NumberInput` pasa a `min-block-size` para no recortar con
+  zoom de texto grande (B26).
+- Los ~10 sitios con texto accesible por defecto en castellano
+  (`ProgressBar`, `Toaster`, `Modal`, `Table`, `Pagination`, `Carousel`,
+  `Breadcrumb`, `Sidebar`, `TreeView`, `StarRating`) documentan ahora
+  explícitamente en su JSDoc que es un placeholder de desarrollo y que una
+  app multiidioma debe pasar su propio texto traducido — el default se
+  mantiene en castellano a propósito, es la convención ya establecida del
+  repo (B26).
+
 ## v26.2.0
 
 ### Arreglado

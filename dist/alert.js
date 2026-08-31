@@ -24,24 +24,34 @@ var o = {
 		...n,
 		children: t
 	});
-}), l = n(function({ variant: n = "default", title: s, description: c, dismissible: l = !1, onDismiss: u, closeLabel: d = "Cerrar", className: f, children: p, role: m, ...h }, g) {
-	let [_, v] = r(!1);
-	if (_) return null;
-	let y = [
+}), l = n(function({ variant: n = "default", title: s, description: c, dismissible: l = !1, onDismiss: u, finalFocus: d, closeLabel: f = "Cerrar", className: p, children: m, role: h, ...g }, _) {
+	let [v, y] = r(!1);
+	if (v) return null;
+	let b = [
 		"alert",
 		n === "default" ? "" : `alert--${n}`,
 		n === "warning" ? "" : "surface-dark",
 		l ? "alert--dismissible" : "",
-		f ?? ""
+		p ?? ""
 	].filter(Boolean).join(" ");
-	function b() {
-		u ? u() : v(!0);
+	function x() {
+		if (typeof document > "u") return;
+		let e = d?.current;
+		if (e) {
+			e.focus();
+			return;
+		}
+		let t = document.body, n = t.hasAttribute("tabindex");
+		n || t.setAttribute("tabindex", "-1"), t.focus(), n || t.removeAttribute("tabindex");
+	}
+	function S() {
+		x(), u ? u() : y(!0);
 	}
 	return /* @__PURE__ */ a("div", {
-		ref: g,
-		role: m ?? o[n],
-		className: y,
-		...h,
+		ref: _,
+		role: h ?? o[n],
+		className: b,
+		...g,
 		children: [/* @__PURE__ */ a("div", {
 			className: "alert__content",
 			children: [
@@ -53,15 +63,15 @@ var o = {
 					className: "alert__description",
 					children: c
 				}),
-				p
+				m
 			]
 		}), l && /* @__PURE__ */ i(t, {
 			variant: "ghost",
 			size: "sm",
 			iconOnly: !0,
 			className: "alert__close",
-			"aria-label": d,
-			onClick: b,
+			"aria-label": f,
+			onClick: S,
 			children: /* @__PURE__ */ i(e, {
 				name: "close",
 				size: "sm"

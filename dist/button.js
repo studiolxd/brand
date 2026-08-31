@@ -14,14 +14,21 @@ var i = t(function({ variant: t = "primary", destructive: i = !1, size: a, block
 		o ? "button--block" : "",
 		s ? "button--icon-only" : "",
 		h ?? ""
-	].filter(Boolean).join(" ");
+	].filter(Boolean).join(" "), b = (e) => {
+		if (u) {
+			e.preventDefault(), e.stopPropagation();
+			return;
+		}
+		d?.(e);
+	};
 	return r({
 		render: m,
 		ref: _,
 		enabled: m !== void 0,
 		props: {
 			className: y,
-			onClick: d,
+			"aria-disabled": u ? !0 : void 0,
+			onClick: b,
 			...g,
 			children: c
 		}
@@ -38,7 +45,8 @@ var i = t(function({ variant: t = "primary", destructive: i = !1, size: a, block
 		className: y,
 		href: u ? void 0 : f,
 		"aria-disabled": u ? !0 : void 0,
-		onClick: d,
+		role: u ? "link" : void 0,
+		onClick: b,
 		...p ? {
 			target: "_blank",
 			rel: "noopener noreferrer"

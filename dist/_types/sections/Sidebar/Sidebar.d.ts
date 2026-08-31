@@ -9,10 +9,12 @@ export interface SidebarProps {
     /** Pie fijo, fuera del scroll del panel. */
     footer?: ReactNode;
     id?: string;
-    /** Nombre accesible del `aside`. */
+    /** Nombre accesible del `aside`. Default: «Barra lateral» (castellano). Una app multiidioma debe pasarlo traducido. */
     label?: string;
-    /** Texto accesible del asa de redimensión. */
+    /** Texto accesible del asa de redimensión. Default: «Ancho de la barra lateral» (castellano). Una app multiidioma debe pasarlo traducido. */
     resizerLabel?: string;
+    /** Valor hablado del asa: el ancho con su unidad. Default: «N píxeles» (castellano). Una app multiidioma debe pasarlo traducido. */
+    resizerValueText?: (width: number) => string;
     /** Fuerza el modo sin `AppShell` (Storybook, pruebas). Con shell, lo decide el shell. */
     mode?: 'open' | 'rail';
 }
@@ -23,7 +25,7 @@ export interface SidebarProps {
  * grupos de navegación se abren como menú) y cerrada. En móvil es un cajón
  * que entra por la izquierda y se cierra al navegar.
  */
-export declare function Sidebar({ logo, children, footer, id, label, resizerLabel, mode, }: SidebarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Sidebar({ logo, children, footer, id, label, resizerLabel, resizerValueText, mode, }: SidebarProps): import("react/jsx-runtime").JSX.Element;
 export interface SidebarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
     children: ReactNode;
 }

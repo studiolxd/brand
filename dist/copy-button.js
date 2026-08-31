@@ -22,12 +22,22 @@ function l({ value: l, children: u, label: d = "Copiar", copiedLabel: f = "Copia
 			S("error"), v?.(e);
 		}
 	}, w = x === "copied" ? f : x === "error" ? p : "", T = u == null ? null : x === "copied" ? f : x === "error" ? p : u;
-	return /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ s(n, {
+	return /* @__PURE__ */ s(a, { children: [u == null ? /* @__PURE__ */ o(n, {
 		...b,
 		variant: m,
 		...h ? { size: h } : {},
-		iconOnly: u == null,
-		"aria-label": u == null ? d : void 0,
+		iconOnly: !0,
+		"aria-label": d,
+		onClick: C,
+		className: ["copy-button", y].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ o(e, {
+			name: x === "copied" ? "check" : "copy",
+			size: "sm"
+		})
+	}) : /* @__PURE__ */ s(n, {
+		...b,
+		variant: m,
+		...h ? { size: h } : {},
 		onClick: C,
 		className: ["copy-button", y].filter(Boolean).join(" "),
 		children: [/* @__PURE__ */ o(e, {

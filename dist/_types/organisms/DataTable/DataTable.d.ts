@@ -23,6 +23,14 @@ export interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     /**
+     * Nombre accesible de la tabla (`aria-label` del `<table>`). Sin él —o sin
+     * `ariaLabelledBy`— la tabla llega al lector de pantalla sin nombre. No hay
+     * valor por defecto: solo el consumidor sabe qué lista es.
+     */
+    ariaLabel?: string;
+    /** Alternativa a `ariaLabel`: id del elemento que ya titula la tabla. */
+    ariaLabelledBy?: string;
+    /**
      * Id de columna al que engancha el buscador por defecto — filtra en cliente
      * sobre las filas que recibió la tabla. Con `pagination` (paginado en
      * servidor) eso solo buscaría en la página actual: pasa `search`.
@@ -57,4 +65,4 @@ export interface DataTableProps<TData, TValue> {
  * Los textos accesibles llegan por props (el DS no habla de i18n): sin ellos
  * caen a los castellanos por defecto de `Table` y `Pagination`.
  */
-export declare function DataTable<TData, TValue>({ columns, data, searchColumnId, search, searchPlaceholder, searchClearLabel, toolbar, pageSize, emptyMessage, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;
+export declare function DataTable<TData, TValue>({ columns, data, ariaLabel, ariaLabelledBy, searchColumnId, search, searchPlaceholder, searchClearLabel, toolbar, pageSize, emptyMessage, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;

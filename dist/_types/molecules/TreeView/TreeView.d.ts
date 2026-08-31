@@ -28,7 +28,8 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>
     /** Se llama con el id del nodo elegido. */
     onSelectedChange?: (id: string) => void;
     /**
-     * Nombre accesible del árbol. Por defecto, en castellano: «Árbol».
+     * Nombre accesible del árbol. Default: «Árbol» (castellano). Una app
+     * multiidioma debe pasarlo traducido.
      */
     label?: string;
     /** Se añade DESPUÉS de las clases propias. */

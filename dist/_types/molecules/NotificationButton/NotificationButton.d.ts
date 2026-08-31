@@ -1,6 +1,6 @@
-import { type ButtonProps } from '../../atoms/Button/Button';
+import { type ButtonBaseProps } from '../../atoms/Button/Button';
 import './NotificationButton.css';
-export interface NotificationButtonProps extends Omit<ButtonProps, 'variant' | 'iconOnly' | 'children' | 'href' | 'size'> {
+export interface NotificationButtonProps extends Omit<ButtonBaseProps, 'variant' | 'iconOnly' | 'children' | 'href' | 'size'> {
     /** Notificaciones sin leer. Con 0 (o sin él) no hay contador. */
     count?: number;
     /** Tope del contador («99+»). */

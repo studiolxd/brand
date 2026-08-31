@@ -39,18 +39,12 @@ function s({ value: s, onChange: c, labels: l, id: u = "theme-switcher", variant
 		children: /* @__PURE__ */ i("ul", {
 			className: "theme-switcher__list",
 			children: o.map(({ value: t, icon: n }) => {
-				let r = t === s, o = ["theme-switcher__option", r ? "theme-switcher__option--current" : ""].filter(Boolean).join(" ");
-				return /* @__PURE__ */ i("li", { children: r ? /* @__PURE__ */ a("span", {
-					className: o,
-					"aria-current": "true",
-					children: [/* @__PURE__ */ i(e, {
-						name: n,
-						size: "sm"
-					}), /* @__PURE__ */ i("span", { children: m[t] })]
-				}) : /* @__PURE__ */ a("button", {
+				let r = t === s;
+				return /* @__PURE__ */ i("li", { children: /* @__PURE__ */ a("button", {
 					type: "button",
-					className: o,
-					onClick: () => c?.(t),
+					className: ["theme-switcher__option", r ? "theme-switcher__option--current" : ""].filter(Boolean).join(" "),
+					"aria-pressed": r,
+					onClick: r ? void 0 : () => c?.(t),
 					children: [/* @__PURE__ */ i(e, {
 						name: n,
 						size: "sm"

@@ -48,7 +48,7 @@ export interface PaginationProps {
     linkComponent?: ComponentType<any>;
     /** Tamaño del componente. Default: "md" */
     size?: 'sm' | 'md' | 'lg';
-    /** aria-label del <nav>. Default: "Paginación" */
+    /** aria-label del <nav>. Default: «Paginación» (castellano). Una app multiidioma debe pasarlo traducido. */
     ariaLabel?: string;
     /**
      * aria-label de cada botón/enlace de página. Default: `Página ${page}` (castellano).

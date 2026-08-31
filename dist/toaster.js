@@ -58,7 +58,8 @@ function p({ position: n, containerAriaLabel: r, closeLabel: a, closeButton: u, 
 				render: /* @__PURE__ */ s(t, {
 					variant: "ghost",
 					size: "sm",
-					iconOnly: !0
+					iconOnly: !0,
+					"aria-label": a
 				}),
 				children: /* @__PURE__ */ s(e, {
 					name: "close",

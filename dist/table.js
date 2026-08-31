@@ -58,26 +58,30 @@ function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actio
 		children: f
 	});
 }
-function c({ onClick: e, interactive: t = !1, selected: r = !1, children: i, className: a, ...o }) {
-	let s = t || !!e, c = [
+function c({ onClick: e, interactive: t = !1, selected: r = !1, label: i, children: a, className: o, ...s }) {
+	let c = t || !!e, l = c ? r : r || void 0, u = [
 		"table__row",
-		s ? "table__row--interactive" : "",
+		c ? "table__row--interactive" : "",
 		r ? "table__row--selected" : "",
-		a
+		o
 	].filter(Boolean).join(" ");
-	return s ? /* @__PURE__ */ n("tr", {
-		...o,
-		className: c,
+	return c ? /* @__PURE__ */ n("tr", {
+		...s,
+		className: u,
+		"aria-label": i,
+		"aria-selected": l,
 		onClick: e,
 		onKeyDown: (t) => {
 			(t.key === "Enter" || t.key === " ") && (t.preventDefault(), e?.());
 		},
 		tabIndex: 0,
-		children: i
+		children: a
 	}) : /* @__PURE__ */ n("tr", {
-		...o,
-		className: c,
-		children: i
+		...s,
+		className: u,
+		"aria-label": i,
+		"aria-selected": l,
+		children: a
 	});
 }
 function l({ children: e, className: t, ...r }) {

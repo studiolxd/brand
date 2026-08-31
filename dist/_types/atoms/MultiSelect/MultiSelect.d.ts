@@ -45,8 +45,13 @@ export interface MultiSelectProps {
     container?: React.ComponentPropsWithoutRef<typeof BasePopover.Portal>['container'];
 }
 /**
- * Selección múltiple. El `ref` va al **disparador** (el `div` con
- * `role="combobox"`), para que react-hook-form pueda enfocarlo al fallar la
- * validación.
+ * Selección múltiple. El `ref` va al elemento con `role="combobox"`, que es lo
+ * enfocable, para que react-hook-form pueda enfocarlo al fallar la validación.
+ *
+ * Teclado del patrón combobox (el mismo que `AsyncSelect`): flechas abren y
+ * recorren, Inicio/Fin saltan a los extremos, Intro/Espacio marcan y desmarcan,
+ * Escape cierra y escribir una letra salta a la opción que empieza por ella. El
+ * foco del DOM no se mueve nunca de la caja: la opción activa se señala con
+ * `aria-activedescendant`.
  */
 export declare const MultiSelect: import("react").ForwardRefExoticComponent<MultiSelectProps & import("react").RefAttributes<HTMLDivElement>>;

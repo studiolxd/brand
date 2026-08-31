@@ -1,6 +1,6 @@
-import { type ButtonProps } from '../Button/Button';
+import { type ButtonBaseProps } from '../Button/Button';
 import './DotsButton.css';
-export interface DotsButtonProps extends Omit<ButtonProps, 'variant' | 'iconOnly' | 'children' | 'href'> {
+export interface DotsButtonProps extends Omit<ButtonBaseProps, 'variant' | 'iconOnly' | 'children' | 'href'> {
     /** Talla del sistema (32/40/48). */
     size?: 'sm' | 'md' | 'lg';
     /** Puntos en fila (por defecto) o en columna. */

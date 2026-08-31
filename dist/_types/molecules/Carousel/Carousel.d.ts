@@ -2,14 +2,14 @@ import './Carousel.css';
 export interface CarouselProps {
     /** Las diapositivas: uno o varios `CarouselSlide`. */
     children: React.ReactNode;
-    /** Nombre accesible de la región. Por defecto «Carrusel», en castellano. */
+    /** Nombre accesible de la región. Default: «Carrusel» (castellano). Una app multiidioma debe pasarlo traducido. */
     label?: string;
     /**
      * Texto de `aria-roledescription` de la región. Por defecto «carrusel», en
      * castellano: es el lector de pantalla quien lo lee, así que se traduce.
      */
     roleDescription?: string;
-    /** Nombre accesible de la pista, que es la que recibe el foco para desplazarse con el teclado. Por defecto «Diapositivas». */
+    /** Nombre accesible de la pista, la que recibe el foco para desplazarse con el teclado. Default: «Diapositivas» (castellano). Una app multiidioma debe pasarlo traducido. */
     trackLabel?: string;
     /**
      * Ancho de cada diapositiva — cualquier medida CSS (`'50%'`, `'18rem'`,
@@ -24,15 +24,26 @@ export interface CarouselProps {
     /**
      * Avance automático, en milisegundos entre saltos. Sin la prop no hay
      * autoplay. Se detiene mientras el puntero o el foco están dentro, y no
-     * arranca si el sistema pide movimiento reducido.
+     * arranca si el sistema pide movimiento reducido. Con la prop aparece
+     * además el botón de pausa/reproducción, que exige WCAG 2.2.2 para todo
+     * movimiento automático: pararlo así es definitivo, no se reanuda solo.
      */
     autoplay?: number;
-    /** Texto accesible del botón «anterior». Por defecto «Anterior». */
+    /** Texto accesible del botón «anterior». Default: «Anterior» (castellano). Una app multiidioma debe pasarlo traducido. */
     prevLabel?: string;
-    /** Texto accesible del botón «siguiente». Por defecto «Siguiente». */
+    /** Texto accesible del botón «siguiente». Default: «Siguiente» (castellano). Una app multiidioma debe pasarlo traducido. */
     nextLabel?: string;
-    /** Texto accesible del indicador n. Por defecto «Ir a la diapositiva N». */
+    /** Texto accesible del indicador n. Default: «Ir a la diapositiva N» (castellano). Una app multiidioma debe pasarlo traducido. */
     indicatorLabel?: (index: number) => string;
+    /** Texto accesible del botón que detiene el avance automático. Por defecto «Pausar». */
+    pauseLabel?: string;
+    /** Texto accesible del botón que reanuda el avance automático. Por defecto «Reproducir». */
+    playLabel?: string;
+    /**
+     * Texto que se anuncia al cambiar de diapositiva. Por defecto «Diapositiva N
+     * de M». Lo lee el lector de pantalla: se traduce.
+     */
+    slideStatusLabel?: (index: number, count: number) => string;
     className?: string;
     id?: string;
 }
@@ -47,7 +58,7 @@ export interface CarouselProps {
  * lo usa (`slideSize`), y lo que va dentro son componentes del sistema
  * —tarjetas, logotipos, citas—, no maquetación propia.
  */
-export declare function Carousel({ children, label, roleDescription, trackLabel, slideSize, controls, indicators, autoplay, prevLabel, nextLabel, indicatorLabel, className, id, }: CarouselProps): import("react/jsx-runtime").JSX.Element;
+export declare function Carousel({ children, label, roleDescription, trackLabel, slideSize, controls, indicators, autoplay, prevLabel, nextLabel, indicatorLabel, pauseLabel, playLabel, slideStatusLabel, className, id, }: CarouselProps): import("react/jsx-runtime").JSX.Element;
 export interface CarouselSlideProps extends React.ComponentPropsWithoutRef<'div'> {
     /**
      * Texto de `aria-roledescription` de la diapositiva. Por defecto

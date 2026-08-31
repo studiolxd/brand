@@ -1,5 +1,20 @@
 import './Button.css';
-export interface ButtonProps extends Omit<React.ComponentPropsWithoutRef<'button'>, 'onClick'> {
+/**
+ * Nombre accesible obligatorio en un botón de solo icono: sin texto visible,
+ * el nombre tiene que venir de `aria-label` o de `aria-labelledby`. Va en el
+ * tipo, no solo en el JSDoc, para que el compilador lo exija.
+ */
+export type ButtonIconOnlyProps = {
+    iconOnly: true;
+    'aria-label': string;
+} | {
+    iconOnly: true;
+    'aria-labelledby': string;
+} | {
+    iconOnly?: false | undefined;
+};
+/** Todo lo que no es la disyuntiva de `iconOnly`. Para componentes que envuelven `Button` y lo fijan. */
+export interface ButtonBaseProps extends Omit<React.ComponentPropsWithoutRef<'button'>, 'onClick'> {
     /** Visual variant of the button */
     variant?: 'primary' | 'outline' | 'ghost' | 'text';
     /** Applies destructive (red) color intent — composable with outline and text */
@@ -10,7 +25,8 @@ export interface ButtonProps extends Omit<React.ComponentPropsWithoutRef<'button
     block?: boolean;
     /**
      * Renders a square, icon-only button (aspect-ratio 1). Composable with `variant`
-     * and `size`. Requiere `aria-label` (o texto visually-hidden) para accesibilidad.
+     * and `size`. Con `iconOnly` el tipo exige `aria-label` o `aria-labelledby`:
+     * sin texto visible no hay otra forma de nombrar el control.
      */
     iconOnly?: boolean;
     /**
@@ -33,4 +49,5 @@ export interface ButtonProps extends Omit<React.ComponentPropsWithoutRef<'button
     /** Se añade DESPUÉS de las clases propias del componente (el consumidor añade, no sustituye) */
     className?: string;
 }
+export type ButtonProps = ButtonBaseProps & ButtonIconOnlyProps;
 export declare const Button: import("react").ForwardRefExoticComponent<ButtonProps & import("react").RefAttributes<HTMLElement>>;

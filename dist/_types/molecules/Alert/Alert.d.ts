@@ -8,6 +8,15 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
     dismissible?: boolean;
     onDismiss?: () => void;
     /**
+     * Dónde dejar el foco al descartar. El botón de cierre desaparece con el
+     * alert, así que el foco se movería al `<body>` y se perdería el sitio en la
+     * página. Pásale la referencia del elemento que provocó el aviso (el botón
+     * que lanzó la acción, el campo que falló). Sin ella, el componente enfoca
+     * el `<body>` con `tabindex="-1"` temporal: el lector vuelve al principio
+     * del documento, que es el último recurso, no lo deseable.
+     */
+    finalFocus?: React.RefObject<HTMLElement | null>;
+    /**
      * Etiqueta accesible del botón de cierre. Default: «Cerrar» (castellano).
      * Una app multiidioma debe pasarla traducida.
      */

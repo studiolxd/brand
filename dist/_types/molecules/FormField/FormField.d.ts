@@ -35,6 +35,11 @@ export declare function useFormField(): {
     formItemId: string;
     formDescriptionId: string;
     formMessageId: string;
+    described: {
+        description: boolean;
+        message: boolean;
+    };
+    register: (part: "description" | "message", present: boolean) => void;
 };
 /** Contenedor de un campo: reserva los ids que enlazan sus partes. */
 export declare function FormItem({ className, ...props }: ComponentProps<'div'>): import("react/jsx-runtime").JSX.Element;

@@ -19,16 +19,16 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
     onSort?: () => void;
     /** Marca esta columna como columna de acciones: ancho mínimo y cabecera oculta visualmente */
     actions?: boolean;
-    /** Texto accesible de la cabecera de acciones. Default: "Acciones" */
+    /** Texto accesible de la cabecera de acciones. Default: «Acciones» (castellano). Una app multiidioma debe pasarlo traducido. */
     actionsLabel?: string;
     /**
      * Texto accesible del estado de ordenación ascendente. Default: "Ordenado ascendente"
      * (castellano). Una app multiidioma debe pasarlo traducido.
      */
     sortedAscLabel?: string;
-    /** Texto accesible del estado descendente. Default: "Ordenado descendente" */
+    /** Texto accesible del estado descendente. Default: «Ordenado descendente» (castellano). Una app multiidioma debe pasarlo traducido. */
     sortedDescLabel?: string;
-    /** Texto accesible de la columna ordenable sin ordenar. Default: "Activar ordenación" */
+    /** Texto accesible de la columna ordenable sin ordenar. Default: «Activar ordenación» (castellano). Una app multiidioma debe pasarlo traducido. */
     sortableLabel?: string;
     children?: ReactNode;
 }
@@ -39,6 +39,13 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
     interactive?: boolean;
     /** Marca la fila como seleccionada: se dice con tinta y peso, sin fondo. */
     selected?: boolean;
+    /**
+     * Nombre accesible de la fila. Por defecto el rol `row` toma su nombre del
+     * contenido de sus celdas; pásalo solo cuando ese texto no identifique la
+     * fila (celdas de solo iconos, datos crípticos). Default: castellano — no
+     * hay texto por defecto, es el consumidor quien lo escribe.
+     */
+    label?: string;
     children: ReactNode;
 }
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
@@ -48,7 +55,7 @@ export declare function TableHead({ children, ...rest }: React.HTMLAttributes<HT
 export declare function TableFooter({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, sortedAscLabel, sortedDescLabel, sortableLabel, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
-export declare function TableRow({ onClick, interactive, selected, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
+export declare function TableRow({ onClick, interactive, selected, label, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
 export declare function TableCell({ children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
 export declare function Table({ caption, children, size, className, ...rest }: TableProps): import("react/jsx-runtime").JSX.Element;
 export declare namespace Table {

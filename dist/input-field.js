@@ -8,7 +8,11 @@ import { forwardRef as i, useImperativeHandle as a, useRef as o, useState as s }
 import { jsx as c, jsxs as l } from "react/jsx-runtime";
 //#region src/stories/molecules/InputField/InputField.tsx
 var u = i(function({ id: i, label: u, labelHidden: d = !1, name: f, type: p, kind: m = "text", clearable: h = !1, clearLabel: g = "Borrar", onClear: _, placeholder: v, value: y, defaultValue: b, disabled: x, readOnly: S, size: C, error: w = !1, errorMessage: T, helperText: E, onChange: D, onBlur: O, onFocus: k, className: A, ...j }, M) {
-	let N = t(C), P = T ? `${i}-error` : void 0, F = E ? `${i}-helper` : void 0, I = [P, F].filter(Boolean).join(" ") || void 0, L = w || !!T, R = m === "search", z = o(null);
+	let N = t(C), P = T ? `${i}-error` : void 0, F = E ? `${i}-helper` : void 0, I = [
+		P,
+		F,
+		j["aria-describedby"]
+	].filter(Boolean).join(" ") || void 0, L = w || !!T, R = m === "search", z = o(null);
 	a(M, () => z.current);
 	let [B, V] = s(() => (b ?? "") !== ""), H = R && h && (y === void 0 ? B : y !== "") && !x && !S;
 	function U(e) {
