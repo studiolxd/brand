@@ -58,11 +58,14 @@ export const ContratoLista: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const grupo = canvas.getByRole('group', { name: 'Tema' });
-    // la actual no es un botón: es un dato marcado con aria-current
-    await expect(within(grupo).queryByRole('button', { name: 'Sistema' })).toBeNull();
-    await expect(within(grupo).getByText('Sistema').closest('[aria-current]')).not.toBeNull();
+    // Las tres son botones enfocables; la vigente se marca con aria-pressed
+    const vigente = within(grupo).getByRole('button', { name: 'Sistema' });
+    await expect(vigente).toHaveAttribute('aria-pressed', 'true');
+    await expect(within(grupo).getByRole('button', { name: 'Claro' })).toHaveAttribute('aria-pressed', 'false');
+    vigente.focus();
+    await expect(vigente).toHaveFocus();
     await userEvent.click(within(grupo).getByRole('button', { name: 'Claro' }));
-    await expect(within(grupo).queryByRole('button', { name: 'Claro' })).toBeNull();
-    await expect(within(grupo).getByRole('button', { name: 'Sistema' })).toBeInTheDocument();
+    await expect(within(grupo).getByRole('button', { name: 'Claro' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(within(grupo).getByRole('button', { name: 'Sistema' })).toHaveAttribute('aria-pressed', 'false');
   },
 };

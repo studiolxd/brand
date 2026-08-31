@@ -61,18 +61,18 @@ export function ThemeSwitcher({ value, onChange, labels, id = 'theme-switcher', 
             const cls = ['theme-switcher__option', isCurrent ? 'theme-switcher__option--current' : ''].filter(Boolean).join(' ');
             return (
               <li key={option}>
-                {isCurrent ? (
-                  // La actual no se pulsa: es un dato, no una acción
-                  <span className={cls} aria-current="true">
-                    <Icon name={icon} size="sm" />
-                    <span>{text[option]}</span>
-                  </span>
-                ) : (
-                  <button type="button" className={cls} onClick={() => onChange?.(option)}>
-                    <Icon name={icon} size="sm" />
-                    <span>{text[option]}</span>
-                  </button>
-                )}
+                {/* Las tres son botones: la vigente se marca con `aria-pressed`
+                    (grupo de conmutadores), no se saca del tabulador — una
+                    opción que no se puede enfocar no se puede leer ni descubrir. */}
+                <button
+                  type="button"
+                  className={cls}
+                  aria-pressed={isCurrent}
+                  onClick={isCurrent ? undefined : () => onChange?.(option)}
+                >
+                  <Icon name={icon} size="sm" />
+                  <span>{text[option]}</span>
+                </button>
               </li>
             );
           })}
