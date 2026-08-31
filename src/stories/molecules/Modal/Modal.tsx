@@ -9,7 +9,15 @@ export interface ModalProps
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
+  /**
+   * Nombre accesible del aspa de cierre. Default: «Cerrar» (castellano).
+   * Una app multiidioma debe pasarlo traducido.
+   */
   closeLabel?: string;
+  /**
+   * Nombre accesible del diálogo cuando no hay `title`. Default: «Diálogo»
+   * (castellano). Una app multiidioma debe pasarlo traducido.
+   */
   fallbackTitle?: string;
   /**
    * Nodo DOM donde montar el portal del modal (reenviado a Base UI

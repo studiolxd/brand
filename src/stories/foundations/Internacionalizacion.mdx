@@ -70,6 +70,7 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `Calendar`, `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel` — más `locale` |
 | `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel` — más `locale` |
 | `Table` (`TableHeader`) | `actionsLabel`, `sortedAscLabel`, `sortedDescLabel`, `sortableLabel` |
+| `Table` (`TableRow`) | `label` — el nombre accesible de la fila, sin default: solo lo escribe el consumidor |
 | `CodeBlock` | `copyLabel`, `copiedLabel`, `codeLabel` |
 | `Alert` | `closeLabel` |
 | `Toaster` | `containerAriaLabel`, `closeLabel` |
@@ -82,7 +83,7 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `LoginForm` | `title`, `emailLabel`, `passwordLabel`, `submitLabel`, `loadingLabel` |
 | `PasswordField` | `showPasswordLabel`, `hidePasswordLabel` |
 | `ContextMenu`, `DotsButton` | `label` / `aria-label` |
-| `Modal` | `fallbackTitle` |
+| `Modal` | `fallbackTitle`, `closeLabel` |
 | `Select`, `MultiSelect`, `DatePicker` | `placeholder` |
 | `DatePicker` | `calendarLabel` |
 | `Spinner`, `TypingIndicator` | `label` |
@@ -97,7 +98,7 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `InputField` | `clearLabel` — el aspa de la variante `kind="search"` con `clearable` |
 | `DocsSearch` | `label`, `placeholder`, `resultsLabel`, `emptyLabel`, `loadingLabel`, `clearLabel` |
 | `SearchForm` | `label`, `placeholder`, `submitLabel` |
-| `DataTable` | `searchPlaceholder`, `searchClearLabel`, `emptyMessage` — más `headerLabels` y `paginationLabels` para sus piezas |
+| `DataTable` | `searchPlaceholder`, `searchClearLabel`, `emptyMessage`, `ariaLabel`/`ariaLabelledBy` (el nombre de la tabla, sin default) — más `headerLabels` y `paginationLabels` para sus piezas |
 | `StatTile` | `delta.label` para leer la dirección de la tendencia |
 | `CopyButton` | `label`, `copiedLabel`, `errorLabel` |
 | `ConfirmDialog` | `confirmLabel`, `cancelLabel`, `pendingLabel`, `closeLabel` |
@@ -107,6 +108,10 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `SidebarNav` | `label`, `emptyLabel` — la marca de las entradas sin contenido |
 | `AnnotationThread` | `label`, `openLabel`, `resolvedLabel`, `editedLabel`, `repliesLabel` — más `locale` y `dateFormat` |
 | `ScrollArea` | `label` — el nombre accesible de la región desplazable |
+| `ProgressBar` | `label` — qué está avanzando |
+| `Breadcrumb` | `ariaLabel` |
+| `Sidebar` | `label`, `resizerLabel`, `resizerValueText` — el ancho hablado del asa, con su unidad |
+| `AppShell` | `skipLabel` — el enlace de salto al contenido |
 
 ## Al añadir un componente nuevo
 

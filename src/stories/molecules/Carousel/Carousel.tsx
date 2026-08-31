@@ -6,14 +6,14 @@ import './Carousel.css';
 export interface CarouselProps {
   /** Las diapositivas: uno o varios `CarouselSlide`. */
   children: React.ReactNode;
-  /** Nombre accesible de la región. Por defecto «Carrusel», en castellano. */
+  /** Nombre accesible de la región. Default: «Carrusel» (castellano). Una app multiidioma debe pasarlo traducido. */
   label?: string;
   /**
    * Texto de `aria-roledescription` de la región. Por defecto «carrusel», en
    * castellano: es el lector de pantalla quien lo lee, así que se traduce.
    */
   roleDescription?: string;
-  /** Nombre accesible de la pista, que es la que recibe el foco para desplazarse con el teclado. Por defecto «Diapositivas». */
+  /** Nombre accesible de la pista, la que recibe el foco para desplazarse con el teclado. Default: «Diapositivas» (castellano). Una app multiidioma debe pasarlo traducido. */
   trackLabel?: string;
   /**
    * Ancho de cada diapositiva — cualquier medida CSS (`'50%'`, `'18rem'`,
@@ -31,11 +31,11 @@ export interface CarouselProps {
    * arranca si el sistema pide movimiento reducido.
    */
   autoplay?: number;
-  /** Texto accesible del botón «anterior». Por defecto «Anterior». */
+  /** Texto accesible del botón «anterior». Default: «Anterior» (castellano). Una app multiidioma debe pasarlo traducido. */
   prevLabel?: string;
-  /** Texto accesible del botón «siguiente». Por defecto «Siguiente». */
+  /** Texto accesible del botón «siguiente». Default: «Siguiente» (castellano). Una app multiidioma debe pasarlo traducido. */
   nextLabel?: string;
-  /** Texto accesible del indicador n. Por defecto «Ir a la diapositiva N». */
+  /** Texto accesible del indicador n. Default: «Ir a la diapositiva N» (castellano). Una app multiidioma debe pasarlo traducido. */
   indicatorLabel?: (index: number) => string;
   className?: string;
   id?: string;
