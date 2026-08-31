@@ -25,6 +25,8 @@ El ancho de cada diapositiva es la única medida que decide quien lo usa, con `s
 
 `autoplay` es el número de milisegundos entre saltos. Se detiene mientras el puntero está encima o el foco está dentro, y **no arranca** si el sistema pide movimiento reducido (`prefers-reduced-motion: reduce`) — no se atenúa: no se pone en marcha.
 
+Con `autoplay` aparece además un **botón de pausa** junto a los de anterior/siguiente, que exige WCAG 2.2.2 («Pausa, detener, ocultar») para todo movimiento que arranque solo y dure más de cinco segundos. La pausa del puntero es cortesía y se deshace al salir; la del botón es una decisión y no se levanta sola. Sus textos son `pauseLabel` y `playLabel`.
+
 Es el caso de la banda de logotipos de clientes: diapositivas estrechas, sin botones, moviéndose solas.
 
 <Canvas of={CarouselStories.LogotiposEnMarcha} />
@@ -35,8 +37,10 @@ Es el caso de la banda de logotipos de clientes: diapositivas estrechas, sin bot
 - La **pista** es la que recibe el foco (`tabindex="0"`), porque es la que se desplaza: con el foco puesto, las flechas ← → pasan de diapositiva, y la rueda y el gesto táctil siguen siendo los del navegador.
 - Cada diapositiva es un `group` con `aria-roledescription` (por defecto «diapositiva»).
 - Los indicadores son botones con nombre accesible; el de la diapositiva a la vista lleva `aria-current`.
+- Con `autoplay`, el botón de pausa cumple WCAG 2.2.2 y su nombre dice lo que hará al pulsarlo («Pausar» mientras avanza, «Reproducir» cuando está parado).
+- Una **región viva** invisible anuncia la diapositiva vigente (`slideStatusLabel`, «Diapositiva N de M»). Mientras el carrusel avanza solo va en `aria-live="off"` —anunciar cada salto automático sería justo el ruido que evita la norma— y pasa a `polite` en cuanto se detiene o si nunca hubo avance automático.
 
-Todos esos textos son props con **default en castellano** (`label`, `roleDescription`, `trackLabel`, `prevLabel`, `nextLabel`, `indicatorLabel`, y `roleDescription` en `CarouselSlide`), como pide la regla de internacionalización del sistema.
+Todos esos textos son props con **default en castellano** (`label`, `roleDescription`, `trackLabel`, `prevLabel`, `nextLabel`, `indicatorLabel`, `pauseLabel`, `playLabel`, `slideStatusLabel`, y `roleDescription` en `CarouselSlide`), como pide la regla de internacionalización del sistema.
 
 ### El indicador es una barra, no un punto relleno
 
