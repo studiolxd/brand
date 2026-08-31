@@ -7,9 +7,9 @@
     "accent-color":{ "$value": "{chart.series-1}",  "$type": "color",     "$description": "Periodo actual y punto final: la ranura de apertura del sistema" },
     "fill-opacity":{ "$value": "{chart.area-fill-opacity}", "$type": "number", "$description": "Velo bajo la línea cuando la chispa se pinta como área" },
     "marker-size": { "$value": "{chart.marker-size}", "$type": "dimension", "$description": "Diámetro del punto final" },
-    "baseline-color": { "$value": "{chart.grid-color}", "$type": "color", "$description": "Línea del cero cuando la serie cruza el cero" },
+    "baseline-color": { "$value": "{chart.axis-color}", "$type": "color", "$description": "Línea del cero cuando la serie cruza el cero: es el ancla del dato, no rejilla, así que lleva la tinta del eje (≥3:1 contra la superficie, WCAG 1.4.11)" },
     "surface-dark-color":       { "$value": "{color.text.muted-on-dark}",   "$type": "color", "$description": "Trazo — surface-dark" },
     "surface-dark-accent-color":{ "$value": "{color.chart.series-1-on-dark}","$type": "color", "$description": "Acento — surface-dark" },
-    "surface-dark-baseline-color": { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Línea del cero — surface-dark" }
+    "surface-dark-baseline-color": { "$value": "{color.disabled.border-on-dark}", "$type": "color", "$description": "Línea del cero — surface-dark: la tinta del eje en oscuro" }
   }
 }

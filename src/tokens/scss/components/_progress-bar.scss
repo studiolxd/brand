@@ -14,6 +14,8 @@ $lxd-progress-bar-font-weight: 500; // Peso de énfasis de la cifra
 $lxd-progress-bar-line-height: 1; // Una línea: la cifra se centra con la altura del carril
 $lxd-progress-bar-label-gap: 0.5rem; // Hueco entre el borde del relleno y la cifra cuando va fuera
 $lxd-progress-bar-label-padding-inline: 0.5rem; // Aire de la cifra dentro del relleno
+$lxd-progress-bar-fill-border-width: 1px; // Filete de contorno del relleno. Los rellenos de marca (lavanda, amarillo, esmeralda, cayena) son claros y saturados: contra un carril claro no llegan a 3:1, y WCAG 1.4.11 admite que el contorno sea quien identifique el elemento
+$lxd-progress-bar-fill-border-color: #111e30; // Color del filete del relleno: la tinta del sistema, que contrasta a la vez con el carril y con los rellenos claros
 $lxd-progress-bar-primary-fill: #111e30; // Marca primaria (prusia) — relleno
 $lxd-progress-bar-primary-label-inside-color: #ffffff; // Cifra sobre el relleno prusia
 $lxd-progress-bar-accent-1-fill: #baabff; // Acento 1 (lavanda) — relleno

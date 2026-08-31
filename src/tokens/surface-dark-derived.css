@@ -27,7 +27,6 @@ html.dark {
   --async-select-error-border-color: var(--select-error-border-color);
   --async-select-focus-ring-color: var(--select-focus-ring-color);
   --async-select-placeholder-color: var(--multi-select-placeholder-color);
-  --code-block-border-color: var(--card-outline-border-color);
   --menu-bg: var(--floating-panel-bg);
   --menu-border-color: var(--floating-panel-border-color);
   --number-input-border-color: var(--input-border-color);

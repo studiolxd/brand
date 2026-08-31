@@ -163,6 +163,19 @@ function markStyle(index: number, color?: string, palette?: string[]): CSSProper
   return { '--chart-mark-color': slot } as CSSProperties;
 }
 
+/**
+ * Tinta del rótulo de una baldosa del treemap. Va encima del relleno, así que
+ * la elige la ranura: ni el blanco ni el negro llegan a 4.5:1 sobre las ocho
+ * series, y cada una lleva el que cumple. Con un color que pone el producto
+ * (`color` de la serie o `colors`) el sistema no puede saberlo y se queda con
+ * la tinta por defecto.
+ */
+function tileLabelStyle(index: number, color?: string, palette?: string[]): CSSProperties | undefined {
+  if (color || palette?.[index]) return undefined;
+  const slot = index < SLOTS ? `${index + 1}` : 'muted';
+  return { '--chart-tile-label-color': `var(--chart-tile-label-color-${slot})` } as CSSProperties;
+}
+
 /** Trapecio de un tramo de embudo: ancho superior e inferior distintos, centrados. */
 function funnelPath(cx: number, y: number, h: number, wTop: number, wBottom: number): string {
   return `M ${cx - wTop / 2} ${y} L ${cx + wTop / 2} ${y} L ${cx + wBottom / 2} ${y + h} L ${cx - wBottom / 2} ${y + h} Z`;
@@ -328,6 +341,9 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
 }, ref) {
   const [plotRef, width] = useMeasuredWidth(FALLBACK_WIDTH);
   const [active, setActive] = useState<number | null>(null);
+  // Solo se anuncia lo que se explora con el teclado: con el puntero el dato
+  // ya se ve en el bocadillo y una región viva que persiga al ratón es ruido.
+  const [announcing, setAnnouncing] = useState(false);
   const hintId = useId();
 
   const numberFormat = useMemo(() => new Intl.NumberFormat(locale), [locale]);
@@ -452,6 +468,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   };
 
   const onKeyDown = (event: React.KeyboardEvent) => {
+    setAnnouncing(true);
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') { event.preventDefault(); move(1); }
     else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') { event.preventDefault(); move(-1); }
     else if (event.key === 'Home') { event.preventDefault(); setActive(0); }
@@ -641,6 +658,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       if (w > CHAR_WIDTH * 4 && h > GEOMETRY.labelFontSize * 2) {
         marks.push(
           <text key={`tile-label-${rect.index}`} className="chart__tile-label"
+            style={tileLabelStyle(rect.index, undefined, colors)}
             x={rect.x + GEOMETRY.axisGap} y={rect.y + GEOMETRY.axisGap + GEOMETRY.labelFontSize}>
             {fmtX(xValue(rows[rect.index] as ChartDatum, xKey))}
           </text>,
@@ -720,6 +738,16 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
     : type === 'bar' ? bandCenter(active)
     : pointX(active);
   const tooltipY = active === null ? 0 : isRadial ? centerY - radius : type === 'bar' && horizontal ? bandCenter(active) : y0;
+  // El bocadillo es `aria-hidden` (es la versión que se ve): quien explora con
+  // el teclado oye el mismo dato por esta región viva. Se arma con los textos
+  // ya formateados, sin palabras propias, así que no necesita traducción.
+  const liveMessage =
+    announcing && activeRow
+      ? [
+          isSlice ? fmtValue(sliceTotal) : fmtX(xValue(activeRow, xKey)),
+          ...tooltipRows.map((row) => `${row.label}: ${row.value}`),
+        ].join(' · ')
+      : '';
 
   return (
     <figure ref={ref} className={classes} {...rest}>
@@ -828,10 +856,10 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
             aria-describedby={hintId}
             tabIndex={tooltip ? 0 : undefined}
             style={{ insetInlineStart: `${x0}px`, insetBlockStart: `${y0}px`, width: `${plotWidth}px`, height: `${plotHeight}px` } as CSSProperties}
-            onPointerMove={tooltip ? (event) => setActive(indexFromPointer(event)) : undefined}
+            onPointerMove={tooltip ? (event) => { setAnnouncing(false); setActive(indexFromPointer(event)); } : undefined}
             onPointerLeave={tooltip ? () => setActive(null) : undefined}
             onKeyDown={tooltip ? onKeyDown : undefined}
-            onBlur={tooltip ? () => setActive(null) : undefined}
+            onBlur={tooltip ? () => { setAnnouncing(false); setActive(null); } : undefined}
           />
 
           {tooltip && active !== null && activeRow ? (
@@ -872,6 +900,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
 
       {caption ? <p className="chart__caption">{caption}</p> : null}
 
+      <VisuallyHidden role="status">{liveMessage}</VisuallyHidden>
       <VisuallyHidden id={hintId}>{tableHint}</VisuallyHidden>
 
       <VisuallyHidden as="div">

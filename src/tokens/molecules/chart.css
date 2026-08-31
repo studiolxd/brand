@@ -38,6 +38,12 @@
   --chart-funnel-gap: var(--spacing-1); /** 4px — hueco de superficie entre tramos del embudo */
   --chart-radial-bar-gap: var(--spacing-1); /** 4px — hueco entre anillos de la barra radial */
   --chart-dot-size: var(--spacing-3); /** 10px de diámetro nominal — punto de la nube de dispersión, mayor que el marcador de línea porque aquí el punto es la marca, no un remate */
+  --chart-tile-label-color-1: var(--color-black); /** Rótulo sobre la baldosa de la ranura 1. La tinta se elige por ranura: ninguna de las dos (blanco o negro) llega a 4.5:1 sobre las ocho series, así que cada una lleva la que cumple. Negro, no prusia: el prusia es un casi-negro entintado y se queda corto sobre el azul de la ranura 1 */
+  --chart-tile-label-color-2: var(--color-black); /** Rótulo sobre la baldosa de la ranura 2 */
+  --chart-tile-label-color-3: var(--color-black); /** Rótulo sobre la baldosa de la ranura 3 */
+  --chart-tile-label-color-4: var(--color-black); /** Rótulo sobre la baldosa de la ranura 4 */
+  --chart-tile-label-color-6: var(--color-black); /** Rótulo sobre la baldosa de la ranura 6 */
+  --chart-tile-label-color-8: var(--color-black); /** Rótulo sobre la baldosa de la ranura 8 */
   --chart-padding-block: var(--spacing-2); /** Aire vertical del área de dibujo */
   --chart-padding-inline: var(--spacing-2); /** Aire horizontal del área de dibujo */
   --chart-axis-gap: var(--spacing-2); /** Separación entre el eje y sus rótulos */
@@ -62,8 +68,11 @@
   --chart-marker-ring-width: var(--border-width-focus); /** 2px — anillo del color de la superficie alrededor del punto, para que siga legible al cruzarse con una línea */
   --chart-mark-gap: var(--border-width-focus); /** 2px — hueco de superficie entre marcas que se tocan: segmentos de una barra apilada y barras contiguas */
   --chart-treemap-gap: var(--border-width-focus); /** 2px — hueco entre baldosas del treemap */
-  --chart-radial-track-color: var(--color-surface-secondary-on-light); /** Carril del anillo sin recorrer en la barra radial */
-  --chart-tile-label-color: var(--color-text-on-dark); /** Rótulo sobre una baldosa del treemap: va encima del relleno de la serie, no de la superficie */
+  --chart-radial-track-color: var(--color-icon-secondary-on-light); /** Carril del anillo sin recorrer en la barra radial: es la geometría de referencia del dato, como el eje, así que lleva su misma tinta (≥3:1 contra la superficie, WCAG 1.4.11) */
+  --chart-tile-label-color: var(--color-text-on-dark); /** Rótulo sobre una baldosa del treemap cuando el relleno lo elige el producto (`color`/`colors`): va encima del relleno de la serie, no de la superficie, y con un color desconocido el sistema no puede elegir la tinta */
+  --chart-tile-label-color-5: var(--color-text-on-dark); /** Rótulo sobre la baldosa de la ranura 5 — el magenta es lo bastante oscuro para llevar tinta clara */
+  --chart-tile-label-color-7: var(--color-text-on-dark); /** Rótulo sobre la baldosa de la ranura 7 — la lavanda de gráfico es la más oscura de las ocho */
+  --chart-tile-label-color-muted: var(--color-text-on-dark); /** Rótulo sobre la baldosa gris de «Otros» (pasada la octava ranura) */
   --chart-tooltip-padding-block: var(--tooltip-padding-block); /** Padding vertical del bocadillo */
   --chart-tooltip-padding-inline: var(--tooltip-padding-inline); /** Padding horizontal del bocadillo */
   --chart-tooltip-font-size: var(--tooltip-font-size); /** Tamaño de texto del bocadillo */
@@ -78,6 +87,9 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --chart-tile-label-color-muted: var(--color-black); /** Rótulo de «Otros» — surface-dark: el gris de atenuación en oscuro es claro */
+  --chart-tile-label-color-5: var(--color-black); /** Rótulo de la ranura 5 — surface-dark: el paso de serie para superficie oscura es más claro y ya no aguanta tinta blanca */
+  --chart-tile-label-color-7: var(--color-black); /** Rótulo de la ranura 7 — surface-dark */
   --chart-series-1: var(--color-chart-series-1-on-dark); /** Ranura 1 — surface-dark */
   --chart-series-2: var(--color-chart-series-2-on-dark); /** Ranura 2 — surface-dark */
   --chart-series-3: var(--color-chart-series-3-on-dark); /** Ranura 3 — surface-dark */
@@ -99,7 +111,7 @@ html.dark {
   --chart-diverging-cool-1: var(--color-chart-diverging-cool-1-on-dark); /** Divergente frío 1 — surface-dark */
   --chart-diverging-cool-2: var(--color-chart-diverging-cool-2-on-dark); /** Divergente frío 2 — surface-dark */
   --chart-diverging-cool-3: var(--color-chart-diverging-cool-3-on-dark); /** Divergente frío 3 — surface-dark */
-  --chart-radial-track-color: var(--color-surface-secondary-on-dark); /** Carril del anillo — surface-dark */
+  --chart-radial-track-color: var(--color-disabled-border-on-dark); /** Carril del anillo — surface-dark. La misma tinta que el eje en oscuro, por el mismo motivo */
   --chart-surface: var(--color-background-dark); /** Hueco y anillo — surface-dark */
   --chart-grid-color: var(--color-surface-secondary-on-dark); /** Rejilla — surface-dark. Excepción declarada a la regla de derivación (borde → `text.on-dark`): la rejilla es cromo recesivo, no un borde; en blanco sobre prusia sería tinta con peso de dato. `grey-darkest` la deja al mismo paso de la superficie que `grey-light` en claro */
   --chart-axis-color: var(--color-disabled-border-on-dark); /** Eje — surface-dark: un paso por encima de la rejilla, igual que en claro. Excepción declarada como `grid-color`: mismo `grey-dark` que en claro, no el `text.muted-on-dark` de `axis-color` */

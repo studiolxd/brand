@@ -14,6 +14,8 @@
     "label-gap":            { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Hueco entre el borde del relleno y la cifra cuando va fuera" },
     "label-padding-inline": { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Aire de la cifra dentro del relleno" },
 
+    "fill-border-width": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Filete de contorno del relleno. Los rellenos de marca (lavanda, amarillo, esmeralda, cayena) son claros y saturados: contra un carril claro no llegan a 3:1, y WCAG 1.4.11 admite que el contorno sea quien identifique el elemento" },
+    "fill-border-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color del filete del relleno: la tinta del sistema, que contrasta a la vez con el carril y con los rellenos claros" },
     "primary-fill":                 { "$value": "{color.primary}",       "$type": "color", "$description": "Marca primaria (prusia) — relleno" },
     "primary-label-inside-color":   { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Cifra sobre el relleno prusia" },
     "accent-1-fill":                { "$value": "{color.accent-1}",      "$type": "color", "$description": "Acento 1 (lavanda) — relleno" },
@@ -26,6 +28,7 @@
     "support-2-label-inside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Cifra sobre el relleno cayena" },
 
     "label-outside-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color de la cifra cuando va fuera, sobre el carril" },
+    "surface-dark-fill-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Filete del relleno — surface-dark" },
     "surface-dark-track-bg":            { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del carril — surface-dark" },
     "surface-dark-label-outside-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Cifra fuera del relleno — surface-dark" },
     "surface-dark-primary-fill":                 { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Relleno de la variante primary — surface-dark. Se invierte en vez de pasar a lavanda porque `accent-1` ya es otra variante del mismo componente" },

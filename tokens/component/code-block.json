@@ -6,6 +6,7 @@
     "border-radius":       { "$value": "{card.border-radius}",       "$type": "dimension", "$description": "Radio de esquinas — heredado de card" },
       "border-width":        { "$value": "{card.outline-border-width}","$type": "dimension", "$description": "Grosor de borde — heredado de card (variante outline)" },
     "border-color":        { "$value": "{card.outline-border-color}","$type": "color",     "$description": "Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro" },
+    "surface-dark-border-color": { "$value": "{color.primary}", "$type": "color", "$description": "Color de borde — surface-dark. No remapea, igual que `bg` y `color`: la superficie del bloque es gris claro en los dos temas, así que heredar el borde blanco de card lo dejaba en 1.12:1 sobre el gris" },
     "color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color de texto — fijo, no remapea en surface-dark (ver nota en bg)" },
 
     "bg": { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo gris claro — propio del componente (card no tiene variante gris). Excepción deliberada tipo button.primary: NO tiene surface-dark-bg — el par bg/color es autocontenido (gris claro + texto oscuro) y se mantiene idéntico en ambos temas en vez de remapear a un overlay translúcido inventado sin equivalente en la paleta" },
