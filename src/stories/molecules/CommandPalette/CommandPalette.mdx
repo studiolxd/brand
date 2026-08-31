@@ -74,7 +74,8 @@ El panel, el velo y el aspa no son tokens de la paleta: son los del `Modal`.
 
 - Patrón **combobox con lista** de WAI-ARIA: el buscador es `role="combobox"`, la lista `role="listbox"` con `aria-label`, y cada comando `role="option"`. El resaltado viaja en `aria-activedescendant` sin mover el foco real.
 - Las cabeceras de grupo se asocian a su `role="group"`, de modo que el lector de pantalla anuncia «Navegación, Inicio, 1 de 2».
-- El «sin resultados» vive en una región viva `role="status"` (`aria-live="polite"`), así que se anuncia al aparecer en vez de quedarse mudo.
+- El «sin resultados» vive en una región viva `role="status"` (`aria-live="polite"`), así que se anuncia al aparecer en vez de quedarse mudo. Mientras no hay nada que decir se oculta con la receta de `.visually-hidden` (recorte), no con `display: none`: eso la sacaría del árbol de accesibilidad y el mensaje nunca llegaría a leerse.
+- El buscador lleva el anillo de foco del sistema, por dentro (no tiene caja propia, solo la línea de abajo). Es el mismo indicador que el resto de controles: ningún componente del DS se queda sin foco visible.
 - Los ítems `disabled` llevan `aria-disabled` y no se activan ni con ratón ni con teclado.
 - El diálogo atrapa el foco y devuelve al elemento que lo abrió al cerrarse: eso lo pone el `Modal`.
 

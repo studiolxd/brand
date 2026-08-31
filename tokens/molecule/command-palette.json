@@ -7,6 +7,9 @@
     "input-border-width":  { "$value": "{border-width.default}",                 "$type": "dimension", "$description": "Grosor de la línea bajo el buscador" },
     "input-border-color":  { "$value": "{floating-panel.border-color}",     "$type": "color",     "$description": "Color de la línea bajo el buscador" },
     "input-placeholder-color": { "$value": "{color.text.placeholder-on-light}",      "$type": "color",     "$description": "Color del placeholder del buscador" },
+    "input-focus-ring-width":  { "$value": "{control.focus-ring-width}",     "$type": "dimension", "$description": "Grosor del anillo de foco del buscador — el del sistema" },
+    "input-focus-ring-color":  { "$value": "{color.primary}",               "$type": "color",     "$description": "Color del anillo de foco del buscador" },
+    "input-focus-border-color":{ "$value": "{color.primary}",               "$type": "color",     "$description": "Color de la línea bajo el buscador con el foco puesto" },
     "list-padding-block":  { "$value": "{spacing.1}",                       "$type": "dimension", "$description": "Padding vertical de la lista de resultados" },
     "list-padding-inline": { "$value": "{spacing.1}",                       "$type": "dimension", "$description": "Padding horizontal de la lista de resultados" },
     "empty-padding-block": { "$value": "{spacing.6}",                       "$type": "dimension", "$description": "Padding vertical del estado vacío" },
@@ -32,6 +35,8 @@
     "surface-dark-item-color":         { "$value": "{menu.surface-dark-item-color}",       "$type": "color", "$description": "Color de texto de los ítems — surface-dark" },
     "surface-dark-item-highlighted-bg":   { "$value": "{menu.surface-dark-item-highlighted-bg}",   "$type": "color", "$description": "Relleno del ítem resaltado — surface-dark" },
     "surface-dark-item-highlighted-color": { "$value": "{menu.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Texto del ítem resaltado — surface-dark" },
-    "surface-dark-input-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}", "$type": "color", "$description": "Pista del buscador — surface-dark" }
+    "surface-dark-input-placeholder-color":      { "$value": "{color.text.placeholder-on-dark}", "$type": "color", "$description": "Pista del buscador — surface-dark" },
+    "surface-dark-input-focus-ring-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco del buscador — surface-dark" },
+    "surface-dark-input-focus-border-color":     { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea bajo el buscador con el foco puesto — surface-dark" }
   }
 }

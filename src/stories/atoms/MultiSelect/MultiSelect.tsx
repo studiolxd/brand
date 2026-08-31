@@ -144,7 +144,9 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(function
           role="combobox"
           aria-expanded={open}
           aria-haspopup="listbox"
-          aria-controls={listboxId}
+          // El listbox vive en un portal que solo existe abierto: cerrado, un
+          // `aria-controls` a un id inexistente es una referencia rota.
+          aria-controls={open ? listboxId : undefined}
           aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? placeholder)}
           aria-labelledby={ariaLabelledBy}
           aria-describedby={ariaDescribedBy}
