@@ -20,6 +20,15 @@ export interface AlertProps extends React.ComponentPropsWithoutRef<'div'> {
   dismissible?: boolean;
   onDismiss?: () => void;
   /**
+   * Dónde dejar el foco al descartar. El botón de cierre desaparece con el
+   * alert, así que el foco se movería al `<body>` y se perdería el sitio en la
+   * página. Pásale la referencia del elemento que provocó el aviso (el botón
+   * que lanzó la acción, el campo que falló). Sin ella, el componente enfoca
+   * el `<body>` con `tabindex="-1"` temporal: el lector vuelve al principio
+   * del documento, que es el último recurso, no lo deseable.
+   */
+  finalFocus?: React.RefObject<HTMLElement | null>;
+  /**
    * Etiqueta accesible del botón de cierre. Default: «Cerrar» (castellano).
    * Una app multiidioma debe pasarla traducida.
    */
@@ -77,6 +86,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   description,
   dismissible = false,
   onDismiss,
+  finalFocus,
   closeLabel = 'Cerrar',
   className,
   children,
@@ -100,7 +110,29 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
     .filter(Boolean)
     .join(' ');
 
+  /**
+   * Saca el foco del botón de cierre antes de que desaparezca. Con
+   * `finalFocus`, al elemento que se indique; sin ella, al `<body>`, al que
+   * hay que darle `tabindex` para poder enfocarlo — se quita acto seguido,
+   * que el foco ya está puesto y el atributo no debe quedarse en el
+   * documento del consumidor.
+   */
+  function moveFocusAway() {
+    if (typeof document === 'undefined') return;
+    const target = finalFocus?.current;
+    if (target) {
+      target.focus();
+      return;
+    }
+    const body = document.body;
+    const hadTabIndex = body.hasAttribute('tabindex');
+    if (!hadTabIndex) body.setAttribute('tabindex', '-1');
+    body.focus();
+    if (!hadTabIndex) body.removeAttribute('tabindex');
+  }
+
   function handleDismiss() {
+    moveFocusAway();
     if (onDismiss) {
       onDismiss();
     } else {
