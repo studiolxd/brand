@@ -1,5 +1,5 @@
 import './SelectField.css';
-import type { SelectOption } from '../../atoms/Select/Select';
+import type { SelectOptionOrGroup } from '../../atoms/Select/Select';
 export interface SelectFieldProps {
     /** `id` del control. Si no se pasa, se genera con `useId`. */
     id?: string;
@@ -9,7 +9,12 @@ export interface SelectFieldProps {
      * Por defecto `false`: la etiqueta se ve.
      */
     labelHidden?: boolean;
-    options: SelectOption[];
+    /**
+     * Opciones del campo. Cada entrada es una opción (`{ value, label }`) o un
+     * grupo con cabecera (`{ label, options }`); las dos formas se pueden
+     * mezclar. La cabecera es una etiqueta, no una opción elegible.
+     */
+    options: SelectOptionOrGroup[];
     value?: string;
     defaultValue?: string;
     placeholder?: string;

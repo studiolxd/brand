@@ -5,24 +5,27 @@ import { Children as t, createContext as n, forwardRef as r, isValidElement as i
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 import { Select as l } from "@base-ui/react/select";
 //#region src/stories/atoms/Select/Select.tsx
-var u = n(null);
-function d(e, n) {
+function u(e) {
+	return Array.isArray(e.options);
+}
+var d = n(null);
+function f(e, n) {
 	t.forEach(e, (e) => {
 		if (!i(e)) return;
 		let t = e.props ?? {};
-		if (e.type === _ || typeof t.value == "string" && e.type !== f) {
+		if (e.type === v || typeof t.value == "string" && e.type !== p) {
 			typeof t.value == "string" && n.set(t.value, t.children);
 			return;
 		}
-		t.children != null && d(t.children, n);
+		t.children != null && f(t.children, n);
 	});
 }
-function f({ children: e, onValueChange: t, ...n }) {
+function p({ children: e, onValueChange: t, ...n }) {
 	let r = o(() => {
 		let t = /* @__PURE__ */ new Map();
-		return d(e, t), t;
+		return f(e, t), t;
 	}, [e]);
-	return /* @__PURE__ */ s(u.Provider, {
+	return /* @__PURE__ */ s(d.Provider, {
 		value: r,
 		children: /* @__PURE__ */ s(l.Root, {
 			onValueChange: t ? (e) => t(e) : void 0,
@@ -31,14 +34,22 @@ function f({ children: e, onValueChange: t, ...n }) {
 		})
 	});
 }
-var p = r(function({ placeholder: e, children: t, ...n }, r) {
-	let i = a(u);
+var m = r(function({ placeholder: e, children: t, ...n }, r) {
+	let i = a(d);
 	return /* @__PURE__ */ s(l.Value, {
 		ref: r,
 		...n,
 		children: (n) => typeof t == "function" ? t(n) : t ?? (n == null || n === "" ? e ?? null : i?.get(n) ?? n)
 	});
-}), m = l.Group, h = r(function({ size: t = "md", className: n, children: r, ...i }, a) {
+}), h = r(function({ className: e, children: t, ...n }, r) {
+	let i = ["select__group", e ?? ""].filter(Boolean).join(" ");
+	return /* @__PURE__ */ s(l.Group, {
+		ref: r,
+		className: i,
+		...n,
+		children: t
+	});
+}), g = r(function({ size: t = "md", className: n, children: r, ...i }, a) {
 	let o = [
 		"select",
 		t === "md" ? "" : `select--${t}`,
@@ -54,7 +65,7 @@ var p = r(function({ placeholder: e, children: t, ...n }, r) {
 			size: t === "sm" ? "xs" : t === "lg" ? "md" : "sm"
 		})]
 	});
-}), g = r(function({ size: e = "md", container: t, className: n, children: r, side: i = "bottom", align: a = "start", sideOffset: o = -1, ...c }, u) {
+}), _ = r(function({ size: e = "md", container: t, className: n, children: r, side: i = "bottom", align: a = "start", sideOffset: o = -1, ...c }, u) {
 	let d = [
 		"select__content",
 		e === "md" ? "" : `select__content--${e}`,
@@ -76,7 +87,7 @@ var p = r(function({ placeholder: e, children: t, ...n }, r) {
 			})
 		})
 	});
-}), _ = r(function({ className: e, children: t, ...n }, r) {
+}), v = r(function({ className: e, children: t, ...n }, r) {
 	let i = ["select__item", e ?? ""].filter(Boolean).join(" ");
 	return /* @__PURE__ */ s(l.Item, {
 		ref: r,
@@ -84,7 +95,7 @@ var p = r(function({ placeholder: e, children: t, ...n }, r) {
 		...n,
 		children: /* @__PURE__ */ s(l.ItemText, { children: t })
 	});
-}), v = r(function({ className: e, children: t, ...n }, r) {
+}), y = r(function({ className: e, children: t, ...n }, r) {
 	let i = ["select__label", e ?? ""].filter(Boolean).join(" ");
 	return /* @__PURE__ */ s(l.GroupLabel, {
 		ref: r,
@@ -92,50 +103,54 @@ var p = r(function({ placeholder: e, children: t, ...n }, r) {
 		...n,
 		children: t
 	});
-}), y = r(function({ className: e, ...t }, n) {
+}), b = r(function({ className: e, ...t }, n) {
 	let r = ["select__separator", e ?? ""].filter(Boolean).join(" ");
 	return /* @__PURE__ */ s(l.Separator, {
 		ref: n,
 		className: r,
 		...t
 	});
-}), b = r(function({ options: e, value: t, defaultValue: n, placeholder: r = "Seleccionar…", disabled: i, readOnly: a, size: o = "md", onValueChange: l, id: u, name: d, required: m, onBlur: v, "aria-label": y, "aria-describedby": b, "aria-invalid": x, container: S }, C) {
-	return /* @__PURE__ */ c(f, {
+});
+function x({ value: e, label: t, "aria-label": n }) {
+	return /* @__PURE__ */ s(v, {
+		value: e,
+		"aria-label": n,
+		children: t
+	}, e);
+}
+var S = r(function({ options: e, value: t, defaultValue: n, placeholder: r = "Seleccionar…", disabled: i, readOnly: a, size: o = "md", onValueChange: l, id: d, name: f, required: v, onBlur: b, "aria-label": S, "aria-describedby": C, "aria-invalid": w, container: T }, E) {
+	return /* @__PURE__ */ c(p, {
 		value: t,
 		defaultValue: n,
 		disabled: i,
 		readOnly: a,
-		name: d,
-		required: m,
+		name: f,
+		required: v,
 		onValueChange: l,
-		children: [/* @__PURE__ */ s(h, {
-			ref: C,
+		children: [/* @__PURE__ */ s(g, {
+			ref: E,
 			size: o,
-			id: u,
-			onBlur: v,
-			"aria-label": y,
-			"aria-describedby": b,
-			"aria-invalid": x || void 0,
-			children: /* @__PURE__ */ s(p, { placeholder: r })
-		}), /* @__PURE__ */ s(g, {
+			id: d,
+			onBlur: b,
+			"aria-label": S,
+			"aria-describedby": C,
+			"aria-invalid": w || void 0,
+			children: /* @__PURE__ */ s(m, { placeholder: r })
+		}), /* @__PURE__ */ s(_, {
 			size: o,
-			container: S,
-			children: e.map(({ value: e, label: t, "aria-label": n }) => /* @__PURE__ */ s(_, {
-				value: e,
-				"aria-label": n,
-				children: t
-			}, e))
+			container: T,
+			children: e.map((e, t) => u(e) ? /* @__PURE__ */ c(h, { children: [/* @__PURE__ */ s(y, { children: e.label }), e.options.map(x)] }, `group-${t}`) : x(e))
 		})]
 	});
-}), x = Object.assign(b, {
-	Root: f,
-	Trigger: h,
-	Value: p,
-	Content: g,
-	Group: m,
-	Label: v,
-	Item: _,
-	Separator: y
+}), C = Object.assign(S, {
+	Root: p,
+	Trigger: g,
+	Value: m,
+	Content: _,
+	Group: h,
+	Label: y,
+	Item: v,
+	Separator: b
 });
 //#endregion
-export { x as Select, g as SelectContent, m as SelectGroup, _ as SelectItem, v as SelectLabel, f as SelectRoot, y as SelectSeparator, h as SelectTrigger, p as SelectValue };
+export { C as Select, _ as SelectContent, h as SelectGroup, v as SelectItem, y as SelectLabel, p as SelectRoot, b as SelectSeparator, g as SelectTrigger, m as SelectValue, u as isSelectOptionGroup };

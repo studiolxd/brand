@@ -8,10 +8,30 @@ export interface SelectOption {
     /** Etiqueta accesible de la opción. Si no se pasa, usa label. */
     'aria-label'?: string;
 }
+/**
+ * Grupo de opciones con cabecera. La cabecera es una etiqueta, no una opción:
+ * no es elegible ni la enfoca el teclado, y nombra al grupo por
+ * `role="group"` + `aria-labelledby` (lo resuelve Base UI).
+ */
+export interface SelectOptionGroup {
+    /** Cabecera del grupo. */
+    label: ReactNode;
+    /** Opciones del grupo. */
+    options: SelectOption[];
+}
+/** Una entrada de `options`: opción suelta o grupo con cabecera. */
+export type SelectOptionOrGroup = SelectOption | SelectOptionGroup;
+/** Distingue un grupo de una opción suelta: el grupo trae su propia lista. */
+export declare function isSelectOptionGroup(entry: SelectOptionOrGroup): entry is SelectOptionGroup;
 /** Nodo DOM donde montar el portal del dropdown (reenviado a `Select.Portal`). */
 export type SelectPortalContainer = React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 export interface SelectProps {
-    options: SelectOption[];
+    /**
+     * Opciones de la lista. Cada entrada es una opción (`{ value, label }`) o un
+     * grupo con cabecera (`{ label, options }`); las dos formas se pueden
+     * mezclar. Una lista plana sigue funcionando igual que siempre.
+     */
+    options: SelectOptionOrGroup[];
     value?: string;
     defaultValue?: string;
     /** Placeholder del trigger. Default: "Seleccionar…" (en la API compuesta lo pone cada consumidor vía `Select.Value`). */
@@ -56,8 +76,12 @@ export interface SelectValueProps extends Omit<React.ComponentPropsWithoutRef<ty
 }
 /** Valor/placeholder del trigger. */
 export declare const SelectValue: import("react").ForwardRefExoticComponent<SelectValueProps & import("react").RefAttributes<HTMLSpanElement>>;
-/** Agrupa opciones (Base UI Group, no visual). */
-export declare const SelectGroup: import("react").ForwardRefExoticComponent<Omit<import("@base-ui/react").SelectGroupProps, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+export type SelectGroupProps = React.ComponentPropsWithoutRef<typeof BaseSelect.Group>;
+/**
+ * Agrupa opciones (`.select__group`). Base UI le pone `role="group"` y lo
+ * enlaza con su `Select.Label` por `aria-labelledby`.
+ */
+export declare const SelectGroup: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectGroupProps, "ref"> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 export interface SelectTriggerProps extends React.ComponentPropsWithoutRef<typeof BaseSelect.Trigger> {
     size?: 'sm' | 'md' | 'lg';
 }
@@ -105,7 +129,7 @@ export declare const Select: import("react").ForwardRefExoticComponent<SelectPro
     Trigger: import("react").ForwardRefExoticComponent<SelectTriggerProps & import("react").RefAttributes<HTMLButtonElement>>;
     Value: import("react").ForwardRefExoticComponent<SelectValueProps & import("react").RefAttributes<HTMLSpanElement>>;
     Content: import("react").ForwardRefExoticComponent<SelectContentProps & import("react").RefAttributes<HTMLDivElement>>;
-    Group: import("react").ForwardRefExoticComponent<Omit<import("@base-ui/react").SelectGroupProps, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+    Group: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectGroupProps, "ref"> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Label: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectGroupLabelProps, "ref"> & import("react").RefAttributes<HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Item: import("react").ForwardRefExoticComponent<Omit<Omit<import("@base-ui/react").SelectItemProps, "ref"> & import("react").RefAttributes<HTMLElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
     Separator: import("react").ForwardRefExoticComponent<Omit<BaseSeparatorProps, "className"> & {

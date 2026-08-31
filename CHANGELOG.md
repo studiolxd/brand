@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v27.2.0
+
+### Añadido
+
+- **`SelectField` acepta grupos de opciones**: `options` admite, además de
+  `{ value, label }`, entradas `{ label, options }` que se pintan como
+  cabeceras de grupo con la semántica del listbox (`SelectGroup`/
+  `SelectLabel` del motor, `role="group"` + `aria-labelledby`; las cabeceras
+  no son enfocables). La lista plana sigue funcionando igual. Nace para los
+  cinco selectores de bricks que perdieron sus cabeceras al migrar a `*Field`
+  (tipografías «Theme / System / Custom Fonts» y la voz del TTS).
+
 ## v27.1.1
 
 ### Arreglado
