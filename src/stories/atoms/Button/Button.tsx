@@ -66,13 +66,28 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
     className ?? '',
   ].filter(Boolean).join(' ');
 
+  /**
+   * `disabled` no existe en `<a>` ni en el elemento que llegue por `render`:
+   * ahí el estado se comunica con `aria-disabled` y se corta la interacción a
+   * mano — el navegador seguiría el enlace y dispararía el `onClick` igual.
+   */
+  const handleClick: React.MouseEventHandler<HTMLElement> = (event) => {
+    if (disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+    (onClick as React.MouseEventHandler<HTMLElement> | undefined)?.(event);
+  };
+
   const rendered = useRender({
     render,
     ref,
     enabled: render !== undefined,
     props: {
       className: classes,
-      onClick: onClick as React.MouseEventHandler<HTMLElement>,
+      'aria-disabled': disabled ? true : undefined,
+      onClick: handleClick,
       ...(rest as Record<string, unknown>),
       children,
     },
@@ -86,7 +101,8 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button({
         className={classes}
         href={disabled ? undefined : href}
         aria-disabled={disabled ? true : undefined}
-        onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+        role={disabled ? 'link' : undefined}
+        onClick={handleClick as React.MouseEventHandler<HTMLAnchorElement>}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
