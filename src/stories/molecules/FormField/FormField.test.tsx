@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useForm, type FieldErrors } from 'react-hook-form';
 import { Input } from '../../atoms/Input/Input';
@@ -16,6 +16,28 @@ import {
 } from './FormField';
 
 type Values = { email: string };
+
+/** Campo pelado: sin ayuda ni mensaje, para comprobar que no quedan ids fantasma. */
+function BareHarness({ describedBy }: { describedBy?: string }) {
+  const form = useForm<Values>({ defaultValues: { email: '' } });
+  return (
+    <FormProvider {...form}>
+      <FormField
+        control={form.control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Correo</FormLabel>
+            <FormControl>
+              <Input {...field} aria-describedby={describedBy} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      {describedBy && <p id={describedBy}>Pista del consumidor</p>}
+    </FormProvider>
+  );
+}
 
 function Harness({
   fieldError,
@@ -106,6 +128,24 @@ describe('FormField', () => {
     render(<Harness fieldError="errors.email" rootError="errors.root" translate={(k) => diccionario[k] ?? k} />);
     const alerts = screen.getAllByRole('alert').map((el) => el.textContent);
     expect(alerts).toEqual(['Ese correo no vale', 'No hemos podido guardar']);
+  });
+
+  it('sin ayuda ni mensaje no emite `aria-describedby`: no apunta a nada', () => {
+    render(<BareHarness />);
+    expect(screen.getByLabelText('Correo')).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('conserva el `aria-describedby` que trae el consumidor, y lo combina con el suyo', () => {
+    render(<Harness />);
+    // El campo completo ya tiene su ayuda; aquí basta con que exista y apunte a algo real.
+    const conAyuda = screen.getByLabelText('Correo');
+    expect(document.getElementById(conAyuda.getAttribute('aria-describedby')!)).toBeInTheDocument();
+
+    cleanup();
+    render(<BareHarness describedBy="pista-propia" />);
+    const input = screen.getByLabelText('Correo');
+    expect(input.getAttribute('aria-describedby')).toBe('pista-propia');
+    expect(document.getElementById('pista-propia')).toHaveTextContent('Pista del consumidor');
   });
 
   it('el control escribe en el formulario', async () => {

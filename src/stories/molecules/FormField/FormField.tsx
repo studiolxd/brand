@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useId, type ComponentProps } from 'react';
+import { createContext, useCallback, useContext, useEffect, useId, useMemo, useState, type ComponentProps } from 'react';
 import { useRender } from '@base-ui/react/use-render';
 import {
   Controller,
@@ -69,7 +69,12 @@ export const FormField = <
   );
 };
 
-type FormItemContextValue = { id: string };
+type FormItemContextValue = {
+  id: string;
+  /** Qué partes descriptivas hay montadas de verdad: el control solo apunta a las que existen. */
+  described: { description: boolean; message: boolean };
+  register: (part: 'description' | 'message', present: boolean) => void;
+};
 
 const FormItemContext = createContext<FormItemContextValue>(
   {} as FormItemContextValue,
@@ -86,7 +91,7 @@ export function useFormField() {
   const { getFieldState, formState } = useFormContext();
 
   const fieldState = getFieldState(fieldContext.name, formState);
-  const { id } = itemContext;
+  const { id, described, register } = itemContext;
 
   return {
     id,
@@ -94,6 +99,8 @@ export function useFormField() {
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
+    described,
+    register,
     ...fieldState,
   };
 }
@@ -101,9 +108,16 @@ export function useFormField() {
 /** Contenedor de un campo: reserva los ids que enlazan sus partes. */
 export function FormItem({ className, ...props }: ComponentProps<'div'>) {
   const id = useId();
+  // `aria-describedby` solo puede nombrar elementos que existen: la ayuda y el
+  // mensaje se dan de alta al montarse y de baja al desmontarse.
+  const [described, setDescribed] = useState({ description: false, message: false });
+  const register = useCallback((part: 'description' | 'message', present: boolean) => {
+    setDescribed((prev) => (prev[part] === present ? prev : { ...prev, [part]: present }));
+  }, []);
+  const value = useMemo(() => ({ id, described, register }), [id, described, register]);
 
   return (
-    <FormItemContext.Provider value={{ id }}>
+    <FormItemContext.Provider value={value}>
       <div className={['form-field', className].filter(Boolean).join(' ')} {...props} />
     </FormItemContext.Provider>
   );
@@ -122,22 +136,38 @@ export function FormLabel({ ...props }: ComponentProps<typeof Label>) {
  * `aria-invalid` que corresponden al campo.
  */
 export function FormControl({ children, ...props }: { children: React.ReactElement<Record<string, unknown>> } & Record<string, unknown>) {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
+  const { error, formItemId, formDescriptionId, formMessageId, described } = useFormField();
+
+  // Se combinan (no se pisan) los ids que el consumidor haya puesto por su
+  // cuenta, y solo se nombra lo que está montado: un id fantasma deja mudo
+  // todo el `aria-describedby` en algunos lectores.
+  const own = [
+    described.description ? formDescriptionId : null,
+    described.message ? formMessageId : null,
+  ];
+  const describedBy = [...own, props['aria-describedby']]
+    .filter((part): part is string => typeof part === 'string' && part.length > 0)
+    .join(' ');
 
   return useRender({
     render: children,
     props: {
       id: formItemId,
-      'aria-describedby': error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId,
       'aria-invalid': !!error,
       ...props,
+      'aria-describedby': describedBy || undefined,
     },
   });
 }
 
 /** Texto de ayuda del campo, enlazado al control por `aria-describedby`. */
 export function FormDescription({ className, ...props }: ComponentProps<'p'>) {
-  const { formDescriptionId } = useFormField();
+  const { formDescriptionId, register } = useFormField();
+
+  useEffect(() => {
+    register('description', true);
+    return () => register('description', false);
+  }, [register]);
 
   return (
     <p
@@ -153,10 +183,16 @@ export function FormDescription({ className, ...props }: ComponentProps<'p'>) {
  * hay, o sus children si no; sin ninguno de los dos no renderiza nada.
  */
 export function FormMessage({ className, children, ...props }: ComponentProps<'p'>) {
-  const { error, formMessageId } = useFormField();
+  const { error, formMessageId, register } = useFormField();
   const translate = useContext(FormTranslateContext);
   const message = error ? String(error?.message ?? '') : '';
   const body = error ? (translate && message ? translate(message) : message) : children;
+  const present = !!body;
+
+  useEffect(() => {
+    register('message', present);
+    return () => register('message', false);
+  }, [register, present]);
 
   if (!body) return null;
 

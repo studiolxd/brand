@@ -91,7 +91,10 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;
-  const describedBy = [errorId, helperId].filter(Boolean).join(' ') || undefined;
+  // Se combina con el `aria-describedby` que traiga el consumidor por `rest`
+  // (una pista suya, un contador de caracteres…): pisarlo lo dejaría mudo.
+  const describedBy =
+    [errorId, helperId, rest['aria-describedby']].filter(Boolean).join(' ') || undefined;
   // Un mensaje de error implica estado de error, como en SelectField
   const hasError = error || !!errorMessage;
 
