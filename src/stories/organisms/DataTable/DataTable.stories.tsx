@@ -50,6 +50,8 @@ const MemberTable = DataTable<Member, unknown>;
 const meta = {
   title: 'Organisms/DataTable',
   component: MemberTable,
+  // El nombre de la tabla no tiene default: lo pone el producto.
+  args: { ariaLabel: 'Miembros del equipo' },
 } satisfies Meta<typeof MemberTable>;
 
 export default meta;

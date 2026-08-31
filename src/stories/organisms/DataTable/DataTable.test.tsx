@@ -25,6 +25,15 @@ describe('DataTable', () => {
     expect(screen.queryByText('Persona 05')).not.toBeInTheDocument();
   });
 
+  it('nombra la tabla con `ariaLabel` y la marca ocupada mientras carga', () => {
+    const { rerender } = render(<DataTable columns={columns} data={data} ariaLabel="Miembros" />);
+    const tabla = screen.getByRole('table', { name: 'Miembros' });
+    expect(tabla).not.toHaveAttribute('aria-busy');
+
+    rerender(<DataTable columns={columns} data={[]} ariaLabel="Miembros" isLoading />);
+    expect(screen.getByRole('table', { name: 'Miembros' })).toHaveAttribute('aria-busy', 'true');
+  });
+
   it('filtra por la columna del buscador por defecto', async () => {
     const user = userEvent.setup();
     render(
