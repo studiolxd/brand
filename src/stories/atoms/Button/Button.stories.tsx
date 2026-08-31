@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useRender } from '@base-ui/react/use-render';
-import { expect, userEvent, within, fn } from 'storybook/test';
+import { expect, fireEvent, userEvent, within, fn } from 'storybook/test';
 import { Button } from './Button';
 import { Icon } from '../Icon/Icon';
 
@@ -352,5 +352,24 @@ export const ContratoFoco: Story = {
     const cs = getComputedStyle(boton);
     await expect(parseFloat(cs.outlineOffset)).toBeGreaterThanOrEqual(4);
     await expect(cs.outlineColor).not.toBe(cs.backgroundColor);
+  },
+};
+
+
+/** Test: un enlace deshabilitado no navega ni dispara `onClick`. */
+export const ContratoEnlaceDeshabilitado: Story = {
+  name: 'Test — enlace deshabilitado sin navegación ni onClick',
+  tags: ['!dev'],
+  args: { href: '#destino', disabled: true, children: 'No disponible', onClick: fn() },
+  play: async ({ canvasElement, args }) => {
+    const enlace = within(canvasElement).getByText('No disponible');
+    // `disabled` no existe en <a>: el estado se comunica con aria-disabled y
+    // el destino se retira, así que el navegador no tiene a dónde ir
+    await expect(enlace).toHaveAttribute('aria-disabled', 'true');
+    await expect(enlace).not.toHaveAttribute('href');
+    // El puntero ni siquiera llega (`pointer-events: none`), pero el clic
+    // programático —el que llegaría por teclado o desde código— tampoco pasa
+    fireEvent.click(enlace);
+    await expect(args.onClick).not.toHaveBeenCalled();
   },
 };

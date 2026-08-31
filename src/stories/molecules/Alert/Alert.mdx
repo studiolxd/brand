@@ -41,6 +41,8 @@ Los dos modos se combinan: `title`/`description` para el caso simple, `children`
 
 Sin `onDismiss`, el alert se oculta solo al pulsar el aspa. Con `onDismiss`, no se oculta nada: manda el consumidor (para animar la salida, quitar el aviso de una lista o registrar el descarte).
 
+El aspa desaparece con el alert, así que el foco se quedaría sin sitio. Pasa en `finalFocus` la referencia del elemento que provocó el aviso —el botón que lanzó la acción, el campo que falló— y el foco vuelve ahí al descartar. Sin ella, el componente lo lleva al `<body>` (con un `tabindex="-1"` que retira acto seguido): es el último recurso, no lo deseable.
+
 ## Composición
 
 <Canvas of={AlertStories.Composicion} />
@@ -75,6 +77,7 @@ El color del aspa y su hover no son tokens del alert: los pone `Button` ghost, q
 - Un alert que ya está en la página al cargarla **no se anuncia**: las regiones live solo anuncian cambios. Si el aviso aparece como respuesta a una acción, móntalo en ese momento.
 - El **cierre** es un `<button>` con nombre accesible (`closeLabel`, «Cerrar» por defecto), de 32px de lado —la talla mínima del sistema— y con el anillo de foco del `Button`.
 - **Contraste**: texto blanco sobre los rellenos prusia, verde y rojo; tinta prusia sobre el amarillo. Los cuatro pares pasan AA holgado; el amarillo con prusia, AAA.
+- Al **descartar**, el foco no se pierde: va a `finalFocus` si se ha pasado y, si no, al `<body>`. Un foco huérfano manda al lector de pantalla al principio del documento.
 - El alert **no es un `Modal`**: no atrapa el foco ni bloquea la página.
 
 ## Props

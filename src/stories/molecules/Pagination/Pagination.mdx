@@ -119,6 +119,12 @@ fechas) está en **Foundations › Internacionalización**.
 
 ## Accesibilidad
 
+- Todos los botones llevan `type="button"`: dentro de un `<form>`, el default nativo
+  (`submit`) enviaría el formulario al cambiar de página.
+- Lo que no lleva a ningún sitio no es un enlace: la **página vigente** y las flechas sin
+  página a la que ir se pintan como `<button>` (con `aria-current="page"` la primera,
+  deshabilitado las segundas), nunca como un `<a>` sin `href` — que no es enfocable por
+  teclado ni se anuncia como enlace. Con `hrefBuilder`, el resto sí son enlaces de verdad.
 - El subrayado del botón en hover usa `pagination.btn-hover-underline-width`, un token propio —
   no `link.underline-width` — porque el botón de página no es un `Link`, aunque comparta la misma
   técnica visual (borde inferior, no `text-decoration`).

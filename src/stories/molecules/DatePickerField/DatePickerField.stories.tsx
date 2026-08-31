@@ -81,7 +81,8 @@ export const ElegirFecha: Story = {
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     // El calendario se monta en un portal de Base UI, fuera del canvas
     const body = within(canvasElement.ownerDocument.body);
-    await userEvent.click(body.getByRole('gridcell', { name: '18' }));
+    // El nombre accesible de la celda es la fecha entera, no el número suelto
+    await userEvent.click(body.getByRole('gridcell', { name: /\b18 de \w+ de \d{4}$/ }));
     await expect(args.onChange).toHaveBeenCalled();
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   },

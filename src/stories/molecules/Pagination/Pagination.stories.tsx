@@ -249,7 +249,29 @@ export const ContratoCursorYHrefs: Story = {
     await expect(cursor.getByRole('link', { name: 'Página siguiente' })).toHaveAttribute('href', '?cursor=abc');
     const pages = within(canvas.getByRole('navigation', { name: 'Páginas' }));
     await expect(pages.getByRole('link', { name: 'Página 3' })).toHaveAttribute('href', '?p=3');
-    // la actual no es un enlace (sin href): es un dato marcado con aria-current
-    await expect(pages.getByText('2').closest('[aria-current="page"]')).not.toBeNull();
+    // la actual no lleva a ningún sitio: es un botón con aria-current, nunca un
+    // <a> sin href — que no sería enfocable ni se anunciaría como enlace
+    const actual = pages.getByRole('button', { name: 'Página 2' });
+    await expect(actual).toHaveAttribute('aria-current', 'page');
+    await expect(pages.queryByRole('link', { name: 'Página 2' })).toBeNull();
+  },
+};
+
+/** Test: ningún botón envía el formulario que envuelva la paginación. */
+export const ContratoTypeButton: Story = {
+  name: 'Test — los botones no envían el formulario',
+  tags: ['!dev'],
+  render: () => (
+    <form onSubmit={(e) => e.preventDefault()}>
+      <Pagination total={100} page={2} pageSize={10} ariaLabel="Páginas" />
+      <Pagination mode="cursor" onNext={() => {}} ariaLabel="Cursor" />
+    </form>
+  ),
+  play: async ({ canvasElement }) => {
+    const botones = canvasElement.querySelectorAll('.pagination__btn');
+    await expect(botones.length).toBeGreaterThan(0);
+    botones.forEach((b) => {
+      if (b.tagName === 'BUTTON') expect(b).toHaveAttribute('type', 'button');
+    });
   },
 };

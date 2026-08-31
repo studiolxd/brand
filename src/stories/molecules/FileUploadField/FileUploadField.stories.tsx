@@ -120,11 +120,13 @@ export const Contrato: Story = {
     await expect(canvasElement.querySelector('label[for="archivo"]')).toHaveTextContent('Adjuntar archivo');
     const input = canvasElement.querySelector('#archivo')!;
     await expect(input).toHaveAttribute('aria-invalid', 'true');
-    await expect(input).toHaveAttribute('aria-describedby', 'archivo-error archivo-helper');
-    // La zona de arrastre es lo que se enfoca: lleva la misma ayuda y el mismo estado
-    const zona = canvas.getByRole('button');
-    await expect(zona).toHaveAttribute('aria-describedby', 'archivo-error archivo-helper');
-    await expect(zona).toHaveAttribute('aria-invalid', 'true');
+    // El control es el input real: lleva la ayuda, el error y, al final, la
+    // instrucción de la zona de arrastre
+    await expect(input).toHaveAttribute('aria-describedby', 'archivo-error archivo-helper archivo-hint');
+    // La zona de arrastre es la cara visible, no un control: ni rol ni foco
+    const zona = canvasElement.querySelector('.file-upload__dropzone')!;
+    await expect(zona).toHaveAttribute('aria-hidden', 'true');
+    await expect(canvas.queryByRole('button')).toBeNull();
     await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
     await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'archivo-helper');
     await expect(canvasElement.querySelector('.file-upload')).toHaveClass('file-upload--error');

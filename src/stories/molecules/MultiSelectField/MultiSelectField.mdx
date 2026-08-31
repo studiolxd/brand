@@ -75,7 +75,8 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 - La etiqueta nombra el disparador por `aria-labelledby` (y apunta a su `id` por `htmlFor`).
 - Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
-- El texto del botón que quita una píldora es traducible con `removeLabel`.
+- El texto del botón que quita una píldora es traducible con `removeLabel`. Ese botón vive **fuera** del elemento con `role="combobox"`: un combobox no admite controles dentro.
+- Teclado del patrón combobox: ↓/↑ abren y recorren, Inicio/Fin saltan a los extremos, Intro y Espacio marcan y desmarcan, Escape cierra y escribir una letra salta a la opción que empieza por ella. El foco del DOM no se mueve de la caja — la opción activa se señala con `aria-activedescendant`.
 
 ## Tokens
 

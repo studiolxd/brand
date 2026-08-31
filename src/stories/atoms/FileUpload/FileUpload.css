@@ -68,7 +68,9 @@
   outline: none;
 }
 
-.file-upload__dropzone:focus-visible {
+/* El foco vive en el `<input type="file">` real, que está oculto a la vista: el
+   anillo se pinta sobre la zona de arrastre, que es lo que sí se ve. */
+.file-upload:has(input[type='file']:focus-visible) .file-upload__dropzone {
   outline: var(--input-focus-ring-width) solid var(--input-focus-ring-color);
   outline-offset: var(--file-upload-remove-focus-ring-offset);
 }

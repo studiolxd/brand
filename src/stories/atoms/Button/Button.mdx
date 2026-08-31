@@ -87,7 +87,7 @@ Cuando se pasa la prop `href`, el botón renderiza un `<a>` nativo. Apropiado pa
 
 <Canvas of={ButtonStories.AsLink} />
 
-El estado `disabled` en este caso añade `aria-disabled="true"` y elimina el `href`, ya que el atributo `disabled` nativo no existe en `<a>`.
+El estado `disabled` en este caso añade `aria-disabled="true"` y `role="link"`, elimina el `href` y **corta el `onClick`**, ya que el atributo `disabled` nativo no existe en `<a>`: sin esas tres cosas el navegador seguiría el enlace y el manejador se dispararía igual. Lo mismo vale para el elemento que llegue por `render`, donde `disabled` tampoco significa nada por sí solo.
 
 <Canvas of={ButtonStories.AsLinkDisabled} />
 

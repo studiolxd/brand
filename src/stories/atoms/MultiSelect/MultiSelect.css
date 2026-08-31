@@ -31,9 +31,22 @@
   outline: none;
 }
 
-.multi-select:focus-visible {
+/* El foco vive en el elemento con `role="combobox"`, que es una parte de la
+   caja: el anillo se pinta sobre la caja entera, que es lo que se lee como
+   control. */
+.multi-select:has(.multi-select__combobox:focus-visible) {
   outline: var(--multi-select-focus-ring-width) solid var(--multi-select-focus-ring-color);
   outline-offset: calc(-1 * (var(--multi-select-focus-ring-width) + var(--multi-select-border-width)));
+}
+
+/* La caja enfocable: ocupa el hueco que dejan las píldoras, para que el clic
+   en el aire de la caja también sea clic en el control. */
+.multi-select__combobox {
+  display: inline-flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  outline: none;
 }
 
 .multi-select.multi-select--disabled {
@@ -139,7 +152,7 @@
      marca: excepción declarada de las listas de opciones desplegables
      (Foundations → Colores). El texto invierte con el relleno, y la casilla
      lo sigue por `currentColor`. */
-  &:focus-visible,
+  &.multi-select__item--active,
   &:hover {
     background-color: var(--multi-select-item-highlighted-bg);
     color: var(--multi-select-item-highlighted-color);
@@ -195,7 +208,7 @@
     transform: scale(1);
   }
 
-  .multi-select__item:focus-visible &,
+  .multi-select__item--active &,
   .multi-select__item:hover & {
     background-color: var(--multi-select-item-highlighted-bg);
   }

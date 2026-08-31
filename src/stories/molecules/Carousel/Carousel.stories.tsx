@@ -75,6 +75,29 @@ export const LogotiposEnMarcha: Story = {
   },
 };
 
+/** Test: WCAG 2.2.2 — el avance automático se puede parar, y al pararse la
+ *  región viva empieza a anunciar la diapositiva vigente. */
+export const ContratoPausa: Story = {
+  name: 'Test — pausa del avance automático y región viva',
+  tags: ['!dev'],
+  args: { ...LogotiposEnMarcha.args, controls: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const estado = canvas.getByRole('status');
+    // Mientras avanza solo, la región calla: anunciar cada salto sería ruido
+    await expect(estado).toHaveAttribute('aria-live', 'off');
+    await expect(estado).toHaveTextContent('Diapositiva 1 de 6');
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Pausar' }));
+    await expect(canvas.getByRole('button', { name: 'Reproducir' })).toBeInTheDocument();
+    await expect(estado).toHaveAttribute('aria-live', 'polite');
+
+    // Y se reanuda desde el mismo botón
+    await userEvent.click(canvas.getByRole('button', { name: 'Reproducir' }));
+    await expect(canvas.getByRole('button', { name: 'Pausar' })).toBeInTheDocument();
+  },
+};
+
 /** Sobre superficie oscura: indicadores, botones y texto voltean con la superficie. */
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',

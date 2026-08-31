@@ -130,7 +130,8 @@ export const SelectAndDisplay: Story = {
     // El popover del calendario se monta en un portal de Base UI (document.body),
     // fuera del canvasElement de la story.
     const body = within(canvasElement.ownerDocument.body);
-    const day18 = body.getByRole('gridcell', { name: '18' });
+    // El nombre accesible de la celda es la fecha entera, no el número suelto
+    const day18 = body.getByRole('gridcell', { name: /\b18 de \w+ de \d{4}$/ });
     await userEvent.click(day18);
 
     await expect(args.onChange).toHaveBeenCalled();

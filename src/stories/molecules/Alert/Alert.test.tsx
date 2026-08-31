@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
+import { useRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Alert } from './Alert';
@@ -27,6 +28,29 @@ describe('Alert', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
     expect(onDismiss).toHaveBeenCalledTimes(1);
     expect(screen.getByText('Aviso')).toBeInTheDocument();
+  });
+
+  it('al descartar, el foco va a donde diga finalFocus', async () => {
+    function Caso() {
+      const origen = useRef<HTMLButtonElement>(null);
+      return (
+        <>
+          <button ref={origen}>Guardar</button>
+          <Alert dismissible finalFocus={origen} title="Aviso" />
+        </>
+      );
+    }
+    render(<Caso />);
+    await userEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
+    expect(screen.getByRole('button', { name: 'Guardar' })).toHaveFocus();
+  });
+
+  it('sin finalFocus, el foco no se queda en el botón que desaparece', async () => {
+    render(<Alert dismissible title="Aviso" />);
+    await userEvent.click(screen.getByRole('button', { name: 'Cerrar' }));
+    // El último recurso documentado: el <body>, con su tabindex ya retirado
+    expect(document.activeElement).toBe(document.body);
+    expect(document.body).not.toHaveAttribute('tabindex');
   });
 
   it('closeLabel traduce el nombre accesible del cierre', () => {

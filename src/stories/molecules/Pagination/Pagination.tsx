@@ -152,7 +152,7 @@ export function Pagination({
         );
       }
       return (
-        <button className="pagination__btn pagination__btn--nav" disabled={disabled} aria-label={label} onClick={handler}>{icon}</button>
+        <button type="button" className="pagination__btn pagination__btn--nav" disabled={disabled} aria-label={label} onClick={handler}>{icon}</button>
       );
     };
     return (
@@ -184,16 +184,17 @@ export function Pagination({
       .filter(Boolean)
       .join(' ');
 
-    if (hrefBuilder) {
+    // La página vigente no lleva a ningún sitio: un `<a>` sin `href` no es
+    // enfocable ni anunciable como enlace, así que se pinta como botón.
+    if (hrefBuilder && !isCurrent) {
       return (
         <A
           key={item}
-          href={isCurrent ? undefined : hrefBuilder(item)}
+          href={hrefBuilder(item)}
           className={btnClass}
-          aria-current={isCurrent ? 'page' : undefined}
           aria-label={pageLabel(item)}
           onClick={
-            !isCurrent && onPageChange
+            onPageChange
               ? (e) => { e.preventDefault(); onPageChange(item as number); }
               : undefined
           }
@@ -206,6 +207,7 @@ export function Pagination({
     return (
       <button
         key={item}
+        type="button"
         className={btnClass}
         aria-current={isCurrent ? 'page' : undefined}
         aria-label={pageLabel(item)}
@@ -222,15 +224,16 @@ export function Pagination({
     const chevronSize = size === 'sm' ? 'xs' : size === 'lg' ? 'md' : 'sm';
     const icon = <Icon name="chevron" size={chevronSize} className={chevronClass} />;
 
-    if (hrefBuilder) {
+    // Sin página a la que ir no hay destino: igual que arriba, el enlace sin
+    // `href` se cambia por un botón deshabilitado, que sí es un control real.
+    if (hrefBuilder && !isDisabled) {
       return (
         <A
-          href={isDisabled ? undefined : hrefBuilder(targetPage)}
+          href={hrefBuilder(targetPage)}
           className="pagination__btn pagination__btn--nav"
           aria-label={ariaLabelText}
-          aria-disabled={isDisabled ? 'true' : undefined}
           onClick={
-            !isDisabled && onPageChange
+            onPageChange
               ? (e) => { e.preventDefault(); onPageChange(targetPage); }
               : undefined
           }
@@ -242,6 +245,7 @@ export function Pagination({
 
     return (
       <button
+        type="button"
         className="pagination__btn pagination__btn--nav"
         disabled={isDisabled}
         aria-label={ariaLabelText}

@@ -1,6 +1,7 @@
 import { Children, useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Carousel.css';
 
 export interface CarouselProps {
@@ -28,7 +29,9 @@ export interface CarouselProps {
   /**
    * Avance automático, en milisegundos entre saltos. Sin la prop no hay
    * autoplay. Se detiene mientras el puntero o el foco están dentro, y no
-   * arranca si el sistema pide movimiento reducido.
+   * arranca si el sistema pide movimiento reducido. Con la prop aparece
+   * además el botón de pausa/reproducción, que exige WCAG 2.2.2 para todo
+   * movimiento automático: pararlo así es definitivo, no se reanuda solo.
    */
   autoplay?: number;
   /** Texto accesible del botón «anterior». Por defecto «Anterior». */
@@ -37,6 +40,15 @@ export interface CarouselProps {
   nextLabel?: string;
   /** Texto accesible del indicador n. Por defecto «Ir a la diapositiva N». */
   indicatorLabel?: (index: number) => string;
+  /** Texto accesible del botón que detiene el avance automático. Por defecto «Pausar». */
+  pauseLabel?: string;
+  /** Texto accesible del botón que reanuda el avance automático. Por defecto «Reproducir». */
+  playLabel?: string;
+  /**
+   * Texto que se anuncia al cambiar de diapositiva. Por defecto «Diapositiva N
+   * de M». Lo lee el lector de pantalla: se traduce.
+   */
+  slideStatusLabel?: (index: number, count: number) => string;
   className?: string;
   id?: string;
 }
@@ -64,6 +76,9 @@ export function Carousel({
   prevLabel = 'Anterior',
   nextLabel = 'Siguiente',
   indicatorLabel = (index) => `Ir a la diapositiva ${index + 1}`,
+  pauseLabel = 'Pausar',
+  playLabel = 'Reproducir',
+  slideStatusLabel = (index, total) => `Diapositiva ${index + 1} de ${total}`,
   className,
   id,
 }: CarouselProps) {
@@ -72,8 +87,13 @@ export function Carousel({
   // El autoplay necesita la posición sin volver a montar su temporizador en
   // cada scroll: la lee de la ref, no del estado.
   const currentRef = useRef(0);
-  const [paused, setPaused] = useState(false);
+  // Dos pausas distintas: la de cortesía (puntero o foco dentro), que se
+  // deshace sola al salir, y la que pide quien usa el carrusel con el botón,
+  // que manda sobre la anterior y no se levanta hasta que la levanten.
+  const [hovered, setHovered] = useState(false);
+  const [stopped, setStopped] = useState(false);
   const count = Children.count(children);
+  const playing = autoplay !== undefined && !stopped;
 
   const slidesOf = (track: HTMLDivElement) => Array.from(track.children) as HTMLElement[];
 
@@ -115,11 +135,11 @@ export function Carousel({
   }, [children]);
 
   useEffect(() => {
-    if (!autoplay || paused || count < 2) return;
+    if (!autoplay || stopped || hovered || count < 2) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const timer = window.setInterval(() => goTo(currentRef.current + 1), autoplay);
     return () => window.clearInterval(timer);
-  }, [autoplay, paused, count, goTo]);
+  }, [autoplay, stopped, hovered, count, goTo]);
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'ArrowRight') {
@@ -141,10 +161,10 @@ export function Carousel({
       role="region"
       aria-roledescription={roleDescription}
       aria-label={label}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
     >
       <div
         ref={trackRef}
@@ -157,7 +177,14 @@ export function Carousel({
         {children}
       </div>
 
-      {(controls || indicators) && (
+      {/* Mientras el carrusel avanza solo, la región calla: anunciar cada salto
+          automático sería justo el ruido que evita WCAG. En cuanto se detiene
+          —a mano o porque nunca hubo autoplay—, cada cambio se anuncia. */}
+      <VisuallyHidden as="div" role="status" aria-live={playing ? 'off' : 'polite'} aria-atomic="true">
+        {slideStatusLabel(current, count)}
+      </VisuallyHidden>
+
+      {(controls || indicators || autoplay !== undefined) && (
         <div className="carousel__controls">
           {indicators && (
             <div className="carousel__indicators">
@@ -173,14 +200,29 @@ export function Carousel({
               ))}
             </div>
           )}
-          {controls && (
+          {(controls || autoplay !== undefined) && (
             <div className="carousel__buttons">
-              <Button variant="ghost" iconOnly aria-label={prevLabel} onClick={() => goTo(current - 1)}>
-                <Icon name="arrow-left" />
-              </Button>
-              <Button variant="ghost" iconOnly aria-label={nextLabel} onClick={() => goTo(current + 1)}>
-                <Icon name="arrow" />
-              </Button>
+              {/* WCAG 2.2.2: todo movimiento automático necesita una parada. */}
+              {autoplay !== undefined && (
+                <Button
+                  variant="ghost"
+                  iconOnly
+                  aria-label={playing ? pauseLabel : playLabel}
+                  onClick={() => setStopped((s) => !s)}
+                >
+                  <Icon name={playing ? 'pause' : 'play'} />
+                </Button>
+              )}
+              {controls && (
+                <>
+                  <Button variant="ghost" iconOnly aria-label={prevLabel} onClick={() => goTo(current - 1)}>
+                    <Icon name="arrow-left" />
+                  </Button>
+                  <Button variant="ghost" iconOnly aria-label={nextLabel} onClick={() => goTo(current + 1)}>
+                    <Icon name="arrow" />
+                  </Button>
+                </>
+              )}
             </div>
           )}
         </div>

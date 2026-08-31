@@ -91,6 +91,9 @@ foco cae en el día de destino.
   propio (el `Popover` de `DatePicker`) se pasa por `gridLabel`.
 - El nombre del mes es una región `aria-live="polite"`: al cambiar de mes el
   lector lo anuncia sin que el foco se mueva de sitio.
+- El nombre accesible de cada día es la **fecha entera** («lunes, 18 de mayo de
+  2026»), formateada con `Intl` según `locale`: el número suelto no dice de qué
+  día se habla cuando el foco llega a la celda.
 - Hoy lleva `aria-current="date"`; el día elegido, `aria-selected`; los no
   seleccionables, `aria-disabled` (nunca el `disabled` nativo, que los sacaría
   del recorrido).

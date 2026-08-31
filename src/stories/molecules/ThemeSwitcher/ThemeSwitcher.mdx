@@ -33,7 +33,7 @@ El componente muestra y elige. **Aplicar el tema y recordarlo es del producto**:
 
 ## Accesibilidad
 
-- En compacto, la etiqueta (`labels.group`, "Tema") nombra el control por `id`, y este abre un menú de `menuitemradio` que se recorre con las flechas; en lista, un `group` con nombre, un botón por tema y la actual como texto con `aria-current` (no se pulsa: es un dato, no una acción).
+- En compacto, la etiqueta (`labels.group`, "Tema") nombra el control por `id`, y este abre un menú de `menuitemradio` que se recorre con las flechas; en lista, un `group` con nombre y **un botón por tema**, con `aria-pressed` en el vigente — un grupo de conmutadores. La opción vigente sigue siendo enfocable: sacada del tabulador (como texto plano) no se podía descubrir con el teclado ni leer su estado.
 - Los textos entran por `labels`, con castellano por defecto: el producto multiidioma pasa los suyos.
 - Los iconos son decorativos; el texto siempre está.
 

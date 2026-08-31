@@ -86,11 +86,14 @@ export const Contrato: Story = {
     const control = canvas.getByRole('combobox', { name: 'Servicios' });
     await expect(control).toHaveAttribute('aria-labelledby', 'servicios-label');
     await expect(control).toHaveAttribute('aria-invalid', 'true');
-    await expect(control).toHaveClass('multi-select--error');
     await expect(control).toHaveAttribute('aria-describedby', 'servicios-error servicios-helper');
     await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
     await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'servicios-helper');
-    await expect(Math.round(control.getBoundingClientRect().height)).toBe(40);
+    // La caja es la que se ve y la que mide: el `role="combobox"` es la parte
+    // enfocable de dentro, para que las píldoras queden fuera del rol
+    const caja = control.closest('.multi-select')!;
+    await expect(caja).toHaveClass('multi-select--error');
+    await expect(Math.round(caja.getBoundingClientRect().height)).toBe(40);
   },
 };
 
@@ -107,7 +110,9 @@ export const ContratoTallas: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const alto = (name: string) =>
-      Math.round(canvas.getByRole('combobox', { name }).getBoundingClientRect().height);
+      Math.round(
+        canvas.getByRole('combobox', { name }).closest('.multi-select')!.getBoundingClientRect().height,
+      );
     await expect(alto('Pequeño')).toBe(32);
     await expect(alto('Mediano')).toBe(40);
     await expect(alto('Grande')).toBe(48);

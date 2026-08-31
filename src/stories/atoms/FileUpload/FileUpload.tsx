@@ -236,15 +236,11 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
     if (!disabled && e.dataTransfer.files) addFiles(e.dataTransfer.files);
   };
 
+  // El input real es el control: la zona solo traduce el clic sobre ella al
+  // clic del input. El teclado no necesita nada — el input está en el
+  // tabulador y Enter/Espacio abren el selector de forma nativa.
   const handleDropzoneClick = () => {
     if (!disabled) inputRef.current?.click();
-  };
-
-  const handleDropzoneKeyDown: React.KeyboardEventHandler = (e) => {
-    if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
-      e.preventDefault();
-      inputRef.current?.click();
-    }
   };
 
   const wrapperClasses = [
@@ -256,6 +252,12 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
     files.length > 0 ? 'file-upload--has-files' : '',
     className ?? '',
   ].filter(Boolean).join(' ');
+
+  // El texto de la zona (qué se puede soltar, qué formatos, cuánto pesa) es la
+  // instrucción del control: se le cuelga al input como descripción, porque
+  // visualmente lo acompaña pero no es su nombre.
+  const hintId = `${inputId}-hint`;
+  const describedByIds = [describedBy ?? ariaDescribedBy, hintId].filter(Boolean).join(' ');
 
   const subtextParts: string[] = [];
   if (accept) subtextParts.push(accept);
@@ -275,27 +277,24 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
           disabled={disabled}
           required={required}
           aria-label={ariaLabel ?? ariaLabelNative}
-          aria-describedby={describedBy ?? ariaDescribedBy}
+          aria-describedby={describedByIds}
           aria-invalid={error || undefined}
           onChange={handleInputChange}
           onBlur={onBlur}
-          tabIndex={-1}
         />
       </VisuallyHidden>
+      {/* El `<input type="file">` real es el control: está en el tabulador (solo
+          oculto a la vista), conserva su rol, su nombre, `required` y el
+          selector nativo por teclado. La zona de arrastre es la cara visible —
+          recoge el clic y el `drop`, no el foco — así que no lleva rol ni
+          `tabindex`: duplicarlos daría dos paradas para un mismo control. */}
       <div
         className="file-upload__dropzone"
         onClick={handleDropzoneClick}
-        onKeyDown={handleDropzoneKeyDown}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        role="button"
-        tabIndex={disabled ? -1 : 0}
-        aria-disabled={disabled || undefined}
-        /* El input real está oculto y fuera del tabulador: la zona de arrastre
-           es lo que se enfoca, así que es la que lleva ayuda, error y estado. */
-        aria-describedby={describedBy ?? ariaDescribedBy}
-        aria-invalid={error || undefined}
+        aria-hidden="true"
       >
         <svg
           className="file-upload__icon"
@@ -322,6 +321,11 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
           <span className="file-upload__subtext">{subtextParts.join(' · ')}</span>
         )}
       </div>
+      {/* La misma instrucción, ya sin duplicar en el árbol visible: la zona va
+          `aria-hidden`, así que el texto para el lector se sirve desde aquí. */}
+      <VisuallyHidden id={hintId}>
+        {[dropzoneLabel, dropzoneHintLabel, ...subtextParts].join('. ')}
+      </VisuallyHidden>
 
       {files.length > 0 && (
         <ul className="file-upload__list" aria-label={filesLabel}>
