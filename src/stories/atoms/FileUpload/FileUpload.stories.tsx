@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { useState } from 'react';
 import { FileUpload } from './FileUpload';
 
@@ -207,3 +207,30 @@ export const Tallas: Story = {
   ),
 };
 
+/** Test: el control es el `<input type="file">` real — está en el tabulador y
+ *  conserva su semántica; la zona de arrastre es solo su cara visible. */
+export const ContratoSemanticaNativa: Story = {
+  name: 'Test — el input de archivo conserva su semántica',
+  tags: ['!dev'],
+  render: () => <FileUpload aria-label="Adjuntos" accept=".pdf" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText('Adjuntos');
+    await expect(input.tagName).toBe('INPUT');
+    await expect(input).toHaveAttribute('type', 'file');
+    // Sin `tabindex="-1"`: el tabulador llega al control, no a un div impostor
+    await expect(input).not.toHaveAttribute('tabindex');
+    await userEvent.tab();
+    await expect(input).toHaveFocus();
+
+    // La zona de arrastre no duplica el control: ni rol de botón ni foco
+    const zona = canvasElement.querySelector('.file-upload__dropzone')!;
+    await expect(zona).toHaveAttribute('aria-hidden', 'true');
+    await expect(canvas.queryByRole('button')).toBeNull();
+
+    // La instrucción visible llega al lector como descripción del input
+    // El id viene de `useId` y lleva dos puntos: no vale como selector CSS
+    const descrito = input.getAttribute('aria-describedby')!;
+    await expect(canvasElement.ownerDocument.getElementById(descrito)).toHaveTextContent('Arrastra archivos aquí');
+  },
+};

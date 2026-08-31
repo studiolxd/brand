@@ -50,7 +50,11 @@ Todo lo que el componente escribe por su cuenta es una prop con default en caste
 
 ## Accesibilidad
 
-El `<input type="file">` real está en el DOM dentro de un `VisuallyHidden`: es lo que recibe el foco y lo que registra react-hook-form. La zona de arrastre lo activa con clic, Enter y Espacio. Cada error de archivo se anuncia con `role="alert"`.
+El `<input type="file">` real está en el DOM dentro de un `VisuallyHidden`: **es el control**, con su rol, su nombre, su `required` y su sitio en el tabulador — solo está oculto a la vista. Enter y Espacio abren el selector de archivos de forma nativa, sin que el componente añada teclado propio.
+
+La zona de arrastre es su **cara visible**, no un control aparte: recoge el clic y el `drop`, va `aria-hidden` y no lleva rol ni `tabindex`. Duplicarlos daría dos paradas de tabulador para un mismo control y dejaría al lector de pantalla un botón impostor en vez del input de archivo. El anillo de foco se pinta sobre la zona cuando el input lo tiene.
+
+El texto visible de la zona (la instrucción, los formatos, el peso máximo) llega al lector como `aria-describedby` del input, detrás de la ayuda y el error que ponga el campo. Cada error de archivo se anuncia con `role="alert"`.
 
 ## Tokens
 
