@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { MultiSelect } from './MultiSelect';
 
 const options = [
@@ -96,5 +96,68 @@ export const ContratoTalla: Story = {
     await expect(alto('[data-t="sm"] .multi-select')).toBe(32);
     await expect(alto('[data-t="md"] .multi-select')).toBe(40);
     await expect(alto('[data-t="lg"] .multi-select')).toBe(48);
+  },
+};
+
+/** Test: el teclado completo del patrón combobox, sin mover el foco del DOM. */
+export const ContratoTeclado: Story = {
+  name: 'Test — teclado del combobox',
+  tags: ['!dev'],
+  render: () => <MultiSelect options={options} aria-label="Servicios" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = canvas.getByRole('combobox', { name: 'Servicios' });
+    // El panel se monta en un portal de Base UI, fuera del canvas de la story
+    const body = within(canvasElement.ownerDocument.body);
+
+    combobox.focus();
+    await expect(combobox).toHaveAttribute('aria-expanded', 'false');
+
+    // La flecha abajo abre y activa la primera opción
+    await userEvent.keyboard('{ArrowDown}');
+    await expect(combobox).toHaveAttribute('aria-expanded', 'true');
+    const opciones = body.getAllByRole('option');
+    await expect(opciones).toHaveLength(options.length);
+    // El foco no se mueve del combobox: la opción activa va por activedescendant
+    await expect(combobox).toHaveFocus();
+    await expect(combobox).toHaveAttribute('aria-activedescendant', opciones[0].id);
+
+    // Fin e Inicio saltan a los extremos
+    await userEvent.keyboard('{End}');
+    await expect(combobox).toHaveAttribute('aria-activedescendant', opciones.at(-1)!.id);
+    await userEvent.keyboard('{Home}');
+    await expect(combobox).toHaveAttribute('aria-activedescendant', opciones[0].id);
+
+    // Escribir una letra salta a la opción que empieza por ella
+    await userEvent.keyboard('b');
+    await expect(combobox).toHaveAttribute(
+      'aria-activedescendant',
+      opciones[options.findIndex((o) => o.label === 'Branding')].id,
+    );
+
+    // Intro marca la activa
+    await userEvent.keyboard('{Enter}');
+    await expect(canvas.getByText('Branding')).toBeInTheDocument();
+
+    // Escape cierra sin perder el foco
+    await userEvent.keyboard('{Escape}');
+    await expect(combobox).toHaveAttribute('aria-expanded', 'false');
+    await expect(combobox).toHaveFocus();
+  },
+};
+
+/** Test: el aspa de una píldora es un control y vive fuera del `role="combobox"`. */
+export const ContratoPildorasFuera: Story = {
+  name: 'Test — el aspa de la píldora queda fuera del combobox',
+  tags: ['!dev'],
+  render: () => <MultiSelect options={options} defaultValue={['design']} aria-label="Servicios" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const combobox = canvas.getByRole('combobox', { name: 'Servicios' });
+    const aspa = canvas.getByRole('button', { name: 'Quitar Diseño' });
+    // Un combobox no admite controles dentro: el aspa es hermana, no hija
+    await expect(combobox.contains(aspa)).toBe(false);
+    await userEvent.click(aspa);
+    await expect(canvas.queryByText('Diseño')).toBeNull();
   },
 };
