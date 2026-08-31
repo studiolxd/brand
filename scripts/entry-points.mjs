@@ -128,6 +128,7 @@ export const entryPoints = {
   'search-form':         'src/stories/molecules/SearchForm/SearchForm.tsx',
   // Sections
   'app-shell':           'src/stories/sections/AppShell/AppShell.tsx',
+  'floating-dock':       'src/stories/sections/FloatingDock/FloatingDock.tsx',
   'app-header':          'src/stories/sections/AppHeader/AppHeader.tsx',
   'sidebar':             'src/stories/sections/Sidebar/Sidebar.tsx',
   'site-header':         'src/stories/sections/SiteHeader/SiteHeader.tsx',
@@ -198,6 +199,7 @@ export const clientComponents = new Set([
   'copy-button',
   'confirm-dialog',
   'search-form',
+  'floating-dock',
   'star-rating',
   'toggle',
   'toggle-group',

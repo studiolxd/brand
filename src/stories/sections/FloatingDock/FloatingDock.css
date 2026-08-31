@@ -1,0 +1,161 @@
+/* El ancla: fija a una esquina de la ventana, fuera del flujo de la página.
+   El aire al borde se SUMA al `safe-area-inset` del dispositivo (muesca, barra
+   de gestos), nunca lo sustituye: en un móvil con muesca el dock se separa de
+   ella, no se mete debajo. */
+.floating-dock {
+  position: fixed;
+  z-index: var(--floating-dock-z-index);
+  display: flex;
+  flex-direction: column;
+  gap: var(--floating-dock-gap);
+}
+
+.floating-dock[data-position^='bottom'] {
+  inset-block-end: calc(var(--floating-dock-offset-block) + env(safe-area-inset-bottom));
+  /* El panel sale POR ENCIMA del lanzador, que se queda pegado al borde. */
+  flex-direction: column-reverse;
+  --floating-dock-enter-direction: 1;
+}
+
+.floating-dock[data-position^='top'] {
+  inset-block-start: calc(var(--floating-dock-offset-block) + env(safe-area-inset-top));
+  flex-direction: column;
+  --floating-dock-enter-direction: -1;
+}
+
+.floating-dock[data-position$='end'] {
+  inset-inline-end: calc(var(--floating-dock-offset-inline) + env(safe-area-inset-right));
+  align-items: flex-end;
+}
+
+.floating-dock[data-position$='start'] {
+  inset-inline-start: calc(var(--floating-dock-offset-inline) + env(safe-area-inset-left));
+  align-items: flex-start;
+}
+
+/* ── Lanzador ────────────────────────────────────────────────── */
+.floating-dock__trigger {
+  position: relative;
+  inline-size: var(--floating-dock-trigger-size);
+  block-size: var(--floating-dock-trigger-size);
+}
+
+.floating-dock__trigger .icon {
+  --icon-size: var(--floating-dock-trigger-icon-size);
+}
+
+/* El contador se centra en la esquina superior del lanzador, como la campana. */
+.floating-dock__badge {
+  position: absolute;
+  inset-block-start: var(--floating-dock-badge-offset);
+  inset-inline-end: var(--floating-dock-badge-offset);
+  translate: 50% -50%;
+  --number-badge-danger-bg: var(--floating-dock-badge-fill);
+  --number-badge-danger-color: var(--floating-dock-badge-color);
+}
+
+/* ── Panel ───────────────────────────────────────────────────── */
+.floating-dock__panel {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--floating-dock-panel-gap);
+  inline-size: var(--floating-dock-panel-inline-size);
+  /* Nunca más ancho que la ventana menos su propio aire: en un teléfono el
+     panel llega de un margen al otro y no provoca desbordamiento lateral. */
+  max-inline-size: calc(100vw - 2 * var(--floating-dock-offset-inline));
+  block-size: var(--floating-dock-panel-block-size);
+  /* Y nunca más alto que lo que queda libre descontando el lanzador: con el
+     teclado del móvil levantado, `dvh` encoge y el panel encoge con él, así
+     que el campo enfocado sigue a la vista. */
+  max-block-size: calc(
+    100dvh - 2 * var(--floating-dock-offset-block)
+      - var(--floating-dock-trigger-size) - var(--floating-dock-gap)
+  );
+  min-block-size: 0;
+  padding-block: var(--floating-dock-panel-padding-block);
+  padding-inline: var(--floating-dock-panel-padding-inline);
+  background-color: var(--floating-dock-panel-bg);
+  border-width: var(--floating-dock-panel-border-width);
+  border-style: solid;
+  border-color: var(--floating-dock-panel-border-color);
+  border-radius: var(--floating-dock-panel-border-radius);
+  box-shadow: var(--floating-dock-panel-shadow);
+  outline: none;
+  /* Duraciones y curvas por token: con `prefers-reduced-motion` valen 0ms y el
+     panel aparece y desaparece sin desplazarse. */
+  transition-property: opacity, translate;
+  transition-duration: var(--floating-dock-transition-duration);
+  transition-timing-function: var(--floating-dock-transition-easing);
+}
+
+/* Entra y sale hacia su propia esquina: desde abajo si está anclado abajo,
+   desde arriba si está anclado arriba. */
+.floating-dock__panel[data-starting-style],
+.floating-dock__panel[data-ending-style] {
+  opacity: 0;
+  translate: 0 calc(var(--floating-dock-enter-direction) * var(--floating-dock-panel-enter-offset));
+}
+
+/* El panel recibe el foco al abrirse: cuando llega por teclado se ve. */
+.floating-dock__panel:focus-visible {
+  outline: var(--floating-dock-focus-ring-width) solid var(--floating-dock-focus-ring-color);
+  outline-offset: var(--floating-dock-focus-ring-offset);
+}
+
+.floating-dock__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--floating-dock-header-gap);
+  /* Deja sitio al aspa, que va posicionada sobre la esquina. */
+  padding-inline-end: var(--floating-dock-close-size);
+}
+
+.floating-dock__title {
+  margin: 0;
+  color: var(--floating-dock-title-color);
+  font-size: var(--floating-dock-title-font-size);
+  font-weight: var(--floating-dock-title-font-weight);
+}
+
+.floating-dock__description {
+  margin: 0;
+  font-size: var(--floating-dock-description-font-size);
+  color: var(--floating-dock-description-color);
+}
+
+/* Botón nativo, sin Button: el aspa va en la tinta desde el reposo y en
+   hover/foco no cambia ni de fondo ni de color — el foco se marca con el
+   anillo. Mismo trato que en Modal y Sheet. */
+.floating-dock__close {
+  position: absolute;
+  inset-block-start: var(--floating-dock-panel-padding-block);
+  inset-inline-end: var(--floating-dock-panel-padding-inline);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--floating-dock-close-size);
+  block-size: var(--floating-dock-close-size);
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--floating-dock-close-color);
+  cursor: pointer;
+}
+
+.floating-dock__close:focus-visible {
+  outline: var(--floating-dock-close-focus-ring-width) solid var(--floating-dock-close-focus-ring-color);
+  outline-offset: var(--floating-dock-close-focus-ring-offset);
+}
+
+.floating-dock__close .icon {
+  --icon-size: var(--floating-dock-close-icon-size);
+}
+
+/* El cuerpo es lo único que se desplaza: la cabecera y el aspa se quedan. */
+.floating-dock__body {
+  flex: 1;
+  min-block-size: 0;
+  overflow-y: auto;
+}

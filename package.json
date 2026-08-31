@@ -199,6 +199,10 @@
       "types": "./dist/_types/molecules/FileUploadField/FileUploadField.d.ts",
       "import": "./dist/file-upload-field.js"
     },
+    "./floating-dock": {
+      "types": "./dist/_types/sections/FloatingDock/FloatingDock.d.ts",
+      "import": "./dist/floating-dock.js"
+    },
     "./form": {
       "types": "./dist/_types/molecules/Form/Form.d.ts",
       "import": "./dist/form.js"

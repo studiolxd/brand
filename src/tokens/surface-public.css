@@ -43,6 +43,8 @@
   --file-upload-lg-subtext-font-size: var(--text-font-size);
   --file-upload-sm-item-name-font-size: var(--text-paragraph-small-font-size);
   --file-upload-lg-item-name-font-size: var(--text-paragraph-large-font-size);
+  --floating-dock-title-font-size: var(--text-size-4);
+  --floating-dock-description-font-size: var(--text-paragraph-small-font-size);
   --form-error-font-size: var(--text-paragraph-small-font-size);
   --form-helper-font-size: var(--text-paragraph-small-font-size);
   --form-success-font-size: var(--text-font-size);

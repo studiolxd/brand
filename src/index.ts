@@ -282,6 +282,8 @@ export { useAppShell } from './stories/sections/AppShell/AppShellContext';
 export type { AppShellContextValue } from './stories/sections/AppShell/AppShellContext';
 export { AppHeader } from './stories/sections/AppHeader/AppHeader';
 export type { AppHeaderProps } from './stories/sections/AppHeader/AppHeader';
+export { FloatingDock } from './stories/sections/FloatingDock/FloatingDock';
+export type { FloatingDockProps, FloatingDockPosition } from './stories/sections/FloatingDock/FloatingDock';
 export { Sidebar, SidebarGroup, SidebarGroupContent, SidebarSeparator, useSidebar } from './stories/sections/Sidebar/Sidebar';
 export type { SidebarProps } from './stories/sections/Sidebar/Sidebar';
 

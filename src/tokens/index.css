@@ -69,6 +69,7 @@
 @import "./components/arrow.css";
 @import "./components/icon.css";
 @import "./components/floating-panel.css";
+@import "./components/floating-dock.css";
 @import "./molecules/menu.css";
 @import "./molecules/command-palette.css";
 @import "./molecules/image-crop-dialog.css";

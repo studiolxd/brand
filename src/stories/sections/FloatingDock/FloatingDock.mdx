@@ -1,0 +1,150 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FloatingDockStories from "./FloatingDock.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { floatingDockTokens } from "../../../tokens/components/floating-dock";
+
+<Meta of={FloatingDockStories} />
+
+# FloatingDock
+
+El ancla fija de la aplicación: un lanzador siempre visible en una esquina de
+la ventana que abre un panel **sobre** la página, sin sacar a nadie de donde
+está. Es donde vive un asistente —el caso que lo trajo—, y también cualquier
+ayudante que deba estar a mano en todas las pantallas.
+
+Antes de existir, la única forma de montarlo era un `div` con `position:
+fixed` en línea alrededor de un `Button`. Eso es lo que este componente
+sustituye: la esquina, la capa, el aire al borde y la conducta del panel salen
+de tokens y del motor, no de un `style`.
+
+<Canvas of={FloatingDockStories.Default} />
+
+## Anatomía
+
+- **Lanzador**: un `Button` `primary` de solo icono y talla `lg` (48px, objetivo
+  táctil holgado). Su nombre accesible es `label`, **obligatorio por tipos**:
+  sin texto visible no hay otra forma de nombrarlo.
+- **Contador** (`badge`): el número de novedades sin ver, volando sobre la
+  esquina del lanzador, en el rojo del sistema. Es decorativo para el lector de
+  pantalla (`aria-hidden`); quien lo lee es la región `aria-live`.
+- **Panel**: la cabecera (`title`, `description`), el aspa y el cuerpo
+  (`children`) —lo único que se desplaza.
+
+## Un diálogo no modal
+
+El panel es un `role="dialog"` **sin velo y sin trampa de foco**: la página de
+detrás sigue viva, se puede leer, desplazar y escribir en ella con el panel
+abierto. Es la diferencia con `Sheet` y con `Modal`, que interrumpen. Lo que
+Base UI `Dialog` sí aporta —y es lo que un diálogo debe— es el nombre, el foco
+que entra al abrirlo, el que vuelve al lanzador al cerrarlo y el cierre con
+Escape.
+
+Por lo mismo, **un clic fuera no cierra el panel**: un ayudante que desaparece
+al primer clic en el contenido no acompaña a nadie. Quien quiera el
+comportamiento contrario lo pide con `dismissOnOutsidePress`.
+
+Como no es modal, tampoco se apodera de la capa: el dock vive en la capa del
+chrome de aplicación (`z-index.bar`), por debajo del velo y del modal. Un
+diálogo del producto sigue tapándolo, que es lo correcto.
+
+## Dónde se ancla
+
+<Canvas of={FloatingDockStories.AbajoIzquierda} />
+<Canvas of={FloatingDockStories.Arriba} />
+
+`position` acepta las cuatro esquinas en ejes lógicos (`bottom-end`,
+`bottom-start`, `top-end`, `top-start`). El panel siempre sale hacia el centro
+de la ventana: por encima del lanzador si está anclado abajo, por debajo si
+está arriba.
+
+El aire al borde (`offset-inline`, `offset-block`) **se suma** al
+`safe-area-inset` del dispositivo, no lo sustituye: en un móvil con muesca o
+barra de gestos el dock se separa de ella en vez de meterse debajo.
+
+## Contador y novedades
+
+<Canvas of={FloatingDockStories.ConContador} />
+
+Con `badge` mayor que cero aparece el contador y se anuncia una vez por
+`aria-live="polite"` con `badgeLabel` («3 mensajes nuevos» por defecto). Para
+un contador que no son novedades —tareas pendientes, elementos de una lista—,
+`badgeLive={false}`: anunciarlo interrumpiría sin aportar.
+
+## Otro glifo
+
+<Canvas of={FloatingDockStories.OtroGlifo} />
+
+## Controlado y no controlado
+
+Sin `open` el dock se gobierna solo (con `defaultOpen` para arrancar abierto) y
+avisa por `onOpenChange`. Con `open` manda el consumidor — es lo que necesita
+quien abre el asistente desde otro sitio de la aplicación:
+
+<Canvas of={FloatingDockStories.Controlado} />
+
+## Qué va dentro
+
+`children` es del producto. El caso de origen mete un `ChatShell` con su hilo y
+su caja de escribir, que es lo que se ve en las stories de esta página:
+
+```tsx
+<FloatingDock label="Abrir el asistente" title="Asistente">
+  <ChatShell composer={<MessageComposer … />}>
+    <ConversationThread messages={mensajes} />
+  </ChatShell>
+</FloatingDock>
+```
+
+El dock no sabe nada de mensajes: pone el sitio, la capa y la conducta.
+
+## En el móvil
+
+El panel nunca desborda la ventana: el ancho se recorta contra `100vw` menos su
+propio aire, y el alto contra `100dvh` menos el aire y el lanzador. Cuando el
+teclado del sistema se levanta, `dvh` encoge y el panel encoge con él, de modo
+que el campo enfocado sigue a la vista en vez de quedar tapado. El cuerpo
+(`children`) es lo único que se desplaza; la cabecera y el aspa se quedan.
+
+## Superficie oscura
+
+<Canvas of={FloatingDockStories.SuperficieOscura} />
+
+El panel se monta **dentro del propio ancla** (`Dialog.Portal container`), no
+en `document.body`: así hereda por cascada la superficie donde el consumidor
+haya puesto el dock, sin prop de `container` y sin duplicar valores. Sus
+tokens de superficie referencian los de `floating-panel` y `modal`, que ya
+tienen par `surface-dark-*`; el único par propio es el del anillo de foco del
+panel.
+
+## Movimiento
+
+La entrada y la salida son opacidad y un desplazamiento de 8px hacia la esquina
+en la que está anclado, con duración y curva por token. Con
+`prefers-reduced-motion: reduce` las duraciones del sistema valen 0ms y el
+panel aparece y desaparece sin moverse.
+
+---
+
+## Tokens
+
+<TokenTable tokens={floatingDockTokens} />
+
+## Accesibilidad
+
+- **Lanzador**: `label` es obligatorio por tipos. El motor añade
+  `aria-haspopup="dialog"`, `aria-expanded` y `aria-controls` apuntando al
+  panel.
+- **Panel**: `role="dialog"` nombrado por `title` (visible u oculto con
+  `titleHidden`, que lo deja montado como `VisuallyHidden` — nunca desaparece
+  del DOM). Sin `aria-modal`: no lo es.
+- **Foco**: entra al panel al abrirlo y vuelve al lanzador al cerrarlo, se
+  cierre con Escape o con el aspa. No queda atrapado: se puede tabular fuera y
+  seguir trabajando en la página.
+- **Aspa**: 32px de caja y 24px de glifo, en la tinta desde el reposo, con su
+  propio anillo de `:focus-visible` — nunca fondo ni cambio de color en hover.
+- **Contador**: `aria-hidden` en el número; el anuncio va por la región
+  `aria-live="polite"`, que no roba el foco.
+
+## Props
+
+<ArgTypes of={FloatingDockStories} />
