@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Unreleased
+
+### Cambiado
+
+- **Cero primitivos `var(--color-grey-*)` en CSS de componente.** Último uso
+  vivo migrado: el borde del control de muestra en `Foundations/SizeScale`
+  pasa de `--color-grey-light` a `--color-border-default-on-light` (mismo
+  valor resuelto, `#d0d0d0`, y sin par oscuro, así que el computado no cambia
+  en ninguna de las dos superficies). Los cuatro primitivos grises siguen
+  existiendo y siguen teniendo consumidores: los roles semánticos de
+  `tokens/color/semantic.json`, que son ya el único sitio del sistema que los
+  referencia.
+
 ## v27.2.0
 
 ### Añadido
