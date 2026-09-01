@@ -7,6 +7,58 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v28.0.0
+
+Saneamiento de la **familia chat** (`MessageBubble`, `UserMessage`,
+`AssistantMessage`, `ConversationThread`, `MessageComposer`,
+`ConversationList` y `ChatShell`) con un criterio común, documentado en
+**Templates › ChatShell → «El criterio de la familia»**: lo que es del hilo se
+mide en la familia y no en la pieza; el hilo se lee siempre sobre el fondo del
+sistema; y **nada del chat se dice solo con la forma** (el emisor lleva nombre,
+una acción es un `Button` del sistema, y lo que existe no se vuelve
+inalcanzable al estrechar la pantalla).
+
+### Cambios incompatibles
+
+- **`ChatShell` pliega la lista a un cajón por debajo de `--breakpoint-lg`.**
+  Antes la columna de conversaciones se convertía en una tira acotada de 12rem
+  sobre el hilo; ahora sale del flujo y vive en un `Sheet` que abre un botón en
+  la cabecera. Cambia el DOM en pantalla estrecha (el `<aside class="chat-shell__list">`
+  ya no se monta; la lista es el contenido de un diálogo) y aparece un envoltorio
+  `.chat-shell__header-content` alrededor de lo que el producto pone en la
+  cabecera. Quien tenía CSS propio colgando de esas clases tiene que revisarlo.
+  El componente pasa a ser **cliente** (`'use client'`): el punto de ruptura se
+  decide con `matchMedia`, porque la lista cambia de sitio en el árbol.
+- **Tokens retirados**: `chat.list-narrow-max-height` y
+  `chat-shell.list-narrow-max-height` (ya no hay tira que acotar);
+  `conversation-list.delete-size` y `conversation-list.delete-border-radius`
+  (el cuadrado y el radio del aspa los pone ahora el `Button` que la dibuja).
+- **El aspa de `ConversationList` es un `Button`** (`ghost`, `sm`, `iconOnly`)
+  en vez de un `<button>` con estilos propios. Su nombre accesible viaja ahora
+  en `aria-label` y no en un `VisuallyHidden` dentro del botón: el texto sigue
+  saliendo de `deleteLabel` y el nombre no cambia, pero deja de existir como
+  nodo de texto en el DOM (los tests que lo buscaban por contenido, y no por
+  rol y nombre, dejan de encontrarlo).
+
+### Añadido
+
+- **`ChatShell`**: props `listOpen` / `onListOpenChange` para controlar el
+  cajón de conversaciones desde el producto (cerrarlo al abrir una
+  conversación, que es navegación y el armazón no puede saberlo), y
+  `listTriggerLabel` (default castellano) para el nombre accesible del botón
+  que lo abre. `listLabel` pasa a nombrar también el cajón. El botón lleva
+  `aria-haspopup="dialog"` y `aria-expanded`; el foco, la trampa de foco y el
+  cierre con Escape los pone `Sheet`.
+- **`conversation-list.delete-hover-bg`** (transparente) y
+  **`conversation-list.delete-focus-ring-offset`**: la fila del chat no se
+  rellena bajo el puntero, así que el aspa apaga el relleno de marca del ghost
+  remapeando los tokens del propio `Button` en su ámbito, sin tocar el CSS de
+  `Button`.
+- Story **«Cajón en pantalla estrecha»** en `ChatShell` y pruebas de contrato
+  del cajón (`ChatShell.test.tsx`): columna en escritorio, cajón accesible por
+  debajo del punto de ruptura, control desde el producto y traducción de los
+  dos textos.
+
 ## v27.2.0
 
 ### Añadido
