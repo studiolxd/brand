@@ -1,6 +1,5 @@
 {
   "chat": {
-    "bubble-max-width": { "$value": "75%", "$type": "dimension", "$description": "Anchura máxima de un globo dentro del hilo — 3/4 del ancho, para que quede aire de sobra al otro lado y un mensaje nunca ocupe la columna entera. Compartido por toda la familia de chat (hoy solo lo consume `MessageBubble`); vive aquí y no en su JSON porque es una medida del hilo, no del globo" },
-    "list-narrow-max-height": { "$value": "calc(4 * {size-component.lg})", "$type": "dimension", "$description": "Altura de la columna de conversaciones cuando `ChatShell` cae a una sola columna: cuatro filas a la talla más generosa del sistema (12rem), la altura de una tira con scroll propio sobre el hilo, no de media pantalla" }
+    "bubble-max-width": { "$value": "75%", "$type": "dimension", "$description": "Anchura máxima de un globo dentro del hilo — 3/4 del ancho, para que quede aire de sobra al otro lado y un mensaje nunca ocupe la columna entera. Compartido por toda la familia de chat (hoy solo lo consume `MessageBubble`); vive aquí y no en su JSON porque es una medida del hilo, no del globo" }
   }
 }

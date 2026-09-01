@@ -115,6 +115,17 @@ export const Minimo: Story = {
   },
 };
 
+/**
+ * Por debajo de `--breakpoint-lg` la lista no se encoge ni se convierte en una
+ * tira: se pliega a un cajón (`Sheet`) que abre el botón de la cabecera. Es el
+ * mismo control, con el mismo nombre accesible, esté donde esté.
+ */
+export const CajonDeConversaciones: Story = {
+  name: 'Cajón en pantalla estrecha',
+  globals: { viewport: { value: 'mobile1' } },
+  args: PorDefecto.args,
+};
+
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },
@@ -136,6 +147,7 @@ export const Integracion: Story = {
     const [borrador, setBorrador] = useState('');
     const [generando, setGenerando] = useState(false);
     const [modelo, setModelo] = useState('opus');
+    const [listaAbierta, setListaAbierta] = useState(false);
 
     const modeloLabel = MODELOS.find((m) => m.value === modelo)?.label;
     const titulo = conversaciones.find((c) => c.id === activeId)?.label ?? 'Nueva conversación';
@@ -145,11 +157,16 @@ export const Integracion: Story = {
       setConversaciones((prev) => [{ id, label: 'Nueva conversación' }, ...prev]);
       setActiveId(id);
       setMensajes([]);
+      setListaAbierta(false);
     }
 
     function abrir(id: string) {
       setActiveId(id);
       setMensajes(id === 'c1' ? MENSAJES : []);
+      // En pantalla estrecha la lista es un cajón: abrir una conversación lo
+      // cierra. El armazón avisa por `onListOpenChange`; cerrarlo es del
+      // producto, que es quien sabe que la navegación ha terminado.
+      setListaAbierta(false);
     }
 
     function borrar(id: string) {
@@ -195,6 +212,8 @@ export const Integracion: Story = {
 
     return (
       <ChatShell
+        listOpen={listaAbierta}
+        onListOpenChange={setListaAbierta}
         list={
           <ConversationList
             conversations={conversaciones}

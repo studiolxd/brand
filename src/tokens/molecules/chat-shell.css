@@ -12,7 +12,6 @@
   --chat-shell-composer-padding-block: var(--spacing-4); /** Aire vertical de la zona de escribir */
   --chat-shell-composer-padding-inline: var(--spacing-6); /** Aire horizontal de la zona de escribir */
   --chat-shell-breakpoint: var(--breakpoint-lg); /** Donde el armazón pasa de dos columnas a una. El mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral */
-  --chat-shell-list-narrow-max-height: var(--chat-list-narrow-max-height); /** Altura máxima de la columna de conversaciones cuando la maqueta cae a una sola columna: pasa a ser una tira con scroll propio sobre el hilo, no media pantalla — cascada desde `chat`, compartida con el resto de la familia */
   --chat-shell-border-width: var(--border-width-default); /** Grosor de las líneas que separan las tres zonas */
   --chat-shell-border-color: var(--color-primary); /** Color de las líneas que separan las tres zonas. Es el único separador: el sistema no proyecta sombra */
   --chat-shell-bg: var(--color-background-light); /** Fondo del armazón */

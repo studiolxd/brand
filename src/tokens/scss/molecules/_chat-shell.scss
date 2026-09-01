@@ -3,7 +3,6 @@
 
 $lxd-chat-shell-list-width: 15rem; // Ancho de la columna de conversaciones — cascada desde `sidebar`, que es donde suele vivir esa columna dentro de una aplicación
 $lxd-chat-shell-list-padding-block: 1rem; // Aire vertical de la columna de conversaciones
-$lxd-chat-shell-list-narrow-max-height: calc(4 * 3rem); // Altura máxima de la columna de conversaciones cuando la maqueta cae a una sola columna: pasa a ser una tira con scroll propio sobre el hilo, no media pantalla — cascada desde `chat`, compartida con el resto de la familia
 $lxd-chat-shell-header-padding-block: 0.75rem; // Aire vertical de la cabecera del hilo
 $lxd-chat-shell-header-padding-inline: 2rem; // Aire horizontal de la cabecera del hilo
 $lxd-chat-shell-header-gap: 0.75rem; // Separación entre lo que va en la cabecera del hilo
