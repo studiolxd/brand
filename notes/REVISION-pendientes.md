@@ -681,21 +681,35 @@ Lo hecho va en el CHANGELOG de v25.0.0. Lo que queda anotado:
       deliberado (no una longitud de la escala — una fracción del ancho del
       hilo no tiene equivalente en `container`/`spacing`/`size`), pero ya no es
       un número sin nombre. Sin cambio de valor.
-- [x] **`chat-shell.list-narrow-max-height`** son 12rem sueltos. **Cerrado
-      (2026-08-29):** `chat.list-narrow-max-height` deriva por fórmula de
-      `size-component.lg` (`calc(4 * {size-component.lg})` = 12rem exacto),
-      mismo patrón que `sidebar.rail-width` o `kbd.min-size`. Sin cambio de
-      valor.
-- [x] **`ChatShell` no monta cajón lateral.** **Decisión cerrada (2026-08-29):**
-      se queda así. Por debajo de `--breakpoint-lg` la lista es una tira
-      acotada sobre el hilo; un chat de móvil de verdad se monta dentro de un
-      `AppShell` y usa el cajón del `Sidebar`. Deliberado, para no duplicar el
-      cajón del sistema.
-- [x] **El aspa de `ConversationList` no es un `Button`.** **Decisión cerrada
-      (2026-08-29):** se queda como `<button>` con tokens propios. Tiene que
-      aparecer y desaparecer con el hover de su fila y voltear la tinta con el
-      relleno de la fila, y `Button` ghost no expone eso hoy. Si el ghost
-      admite algún día «hereda del contenedor», revisar entonces.
+- [x] **`chat-shell.list-narrow-max-height`** son 12rem sueltos. Se cerró el
+      2026-08-29 derivándolo por fórmula de `size-component.lg`
+      (`calc(4 * {size-component.lg})`). **Cerrado del todo (2026-09-01):** el
+      token se retira, junto con `chat.list-narrow-max-height`. Al plegar la
+      lista a cajón (ver más abajo) ya no hay tira que acotar, y un token sin
+      consumidor no se queda — patrón Kbd.
+- [x] **`ChatShell` no monta cajón lateral.** **Reabierto y resuelto al revés
+      (2026-09-01):** la decisión del 2026-08-29 («se queda como tira, que ya
+      está el cajón del `Sidebar`») dejaba fuera el caso que justifica el slot
+      `list` —el chat que se monta **sin `AppShell`**, en una página pública o
+      un panel embebido—: ahí no hay cajón al que remitir y la lista quedaba
+      en cuatro filas encima del hilo. Ahora, por debajo de `--breakpoint-lg`,
+      la lista se pliega a un `Sheet` que abre un botón de la cabecera
+      (`aria-haspopup="dialog"` + `aria-expanded`), controlable desde el
+      producto con `listOpen`/`onListOpenChange`. El punto de ruptura se decide
+      con `matchMedia` (la lista cambia de sitio en el árbol, no solo de
+      forma), así que `ChatShell` pasa a ser componente cliente. Sigue siendo
+      válido montarlo **sin `list`** dentro de un `AppShell`: son dos usos.
+      Los tokens de la tira (`chat.list-narrow-max-height` y
+      `chat-shell.list-narrow-max-height`) se retiran.
+- [x] **El aspa de `ConversationList` no es un `Button`.** **Reabierto y
+      resuelto al revés (2026-09-01):** es `Button` ghost `sm` `iconOnly`. Lo
+      que faltaba no era «hereda del contenedor» en el ghost, sino darse cuenta
+      de que eso se resuelve **remapeando los tokens del propio `Button` en el
+      ámbito de la fila** (`--button-ghost-*`), que es el camino de
+      personalización que el DS ya documenta — sin tocar el CSS de `Button` ni
+      inventar variante. Aparecer/desaparecer con el hover de la fila sigue
+      siendo del contenedor (`opacity`). De paso se retiran `delete-size` y
+      `delete-border-radius`, que duplicaban lo que ya pone `Button`.
 - [x] **`UserMessage` no dice en texto que el mensaje es del usuario.**
       **Cerrado (2026-08-29):** prop `author?: string` opcional — un nombre
       visible y discreto sobre el globo, coherente con el nombre del modelo de
