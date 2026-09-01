@@ -21,7 +21,7 @@ pnpm build-storybook  # Build estático de Storybook
 pnpm lint             # Run ESLint (flat config format)
 pnpm test             # Vitest: proyectos unit (node) + components (jsdom + Testing Library)
 pnpm test:stories     # Vitest: stories en navegador (Playwright/Chromium) — pesado
-pnpm release:check    # Puerta de calidad: lint + tsc + test + test:stories + build:all
+pnpm release:check    # Puerta de calidad: lint + tsc + test + build:all + sync de dist/ (añade --with-stories para incluir test:stories)
 
 # Docker — Storybook image → ghcr.io
 docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:latest --push .
@@ -31,7 +31,7 @@ docker buildx build --platform linux/amd64 -t ghcr.io/studiolxd/studiolxd-brand:
 >
 > **IMPORTANTE:** `pnpm build:lib` borra y regenera `dist/` pero **no** regenera `dist/brand.css`, `dist/tokens.css` ni `dist/fonts.css`. Después de `build:lib` ejecutar siempre `pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css`, o usar `pnpm build:all` para el build completo.
 >
-> **IMPORTANTE:** No se taggea (`git tag vX.Y.Z`) sin `pnpm release:check` en verde. El script encadena `lint` + `tsc -b` + `test` + `test:stories` + `build:all`. NO se engancha a ningún hook de ciclo de vida (`prepack`/`prepare`/`postinstall`): pnpm los ejecuta al instalar el paquete por git en cada consumidor y rompería la instalación de la suite (pasó en v25.28.0). El guardián es correr `release:check` a mano antes del `git tag`.
+> **IMPORTANTE:** No se taggea (`git tag vX.Y.Z`) sin `pnpm release:check` en verde. El script (`scripts/release-check.mjs`) encadena `lint` → `tsc -b` → `test` → `build:all` y termina comprobando que `dist/` quedó realmente regenerado y en sync: (1) que existe un artefacto en `dist/` para cada entrada de `package.json#exports`, y (2) que `git status --porcelain -- dist` queda limpio tras el build — si el build cambia algo en `dist/`, es que el `dist/` committeado no correspondía al `src/` actual, exactamente el fallo que dejó pasar v27.1.0 sin `dist`. `test:stories` es un paso opcional (`pnpm release:check -- --with-stories`) porque depende de Chromium/Playwright y no siempre está disponible (p. ej. en redes restringidas). NO se engancha a ningún hook de ciclo de vida (`prepack`/`prepare`/`postinstall`): pnpm los ejecuta al instalar el paquete por git en cada consumidor y rompería la instalación de la suite (pasó en v25.28.0). El guardián es correr `release:check` a mano antes del `git tag`. Ver también § «Flujo al publicar cambios».
 
 Testing: tres proyectos Vitest — `unit` (node, `src/**/*.test.ts`), `components` (jsdom + Testing Library, `src/**/*.test.tsx`, setup en `test/setup.ts`) y `storybook` (stories en Chromium vía Playwright). `pnpm test` corre los dos primeros; `pnpm test:stories` el tercero.
 
@@ -248,12 +248,15 @@ El paquete sigue **semver** y se distribuye vía git tags. Los consumidores pine
 
 ### Flujo al publicar cambios
 
-1. Actualizar `"version"` en `package.json` según el tipo de cambio.
-2. Commit con mensaje que refleje el cambio (ej. `feat: add plain type to List atom`).
-3. Crear tag y push:
+1. Actualizar `"version"` en `package.json` según el tipo de cambio y añadir la entrada correspondiente en `CHANGELOG.md`.
+2. `pnpm release:check` en verde (añadir `-- --with-stories` cuando haya Chromium disponible). El script regenera `dist/` (`build:all`) y falla si `dist/` no queda en sync — commitear el `dist/` regenerado forma parte de este paso, no del siguiente.
+3. Commit con mensaje que refleje el cambio (ej. `feat: add plain type to List atom`), incluyendo `dist/` si `release:check` lo regeneró.
+4. Crear tag anotado y push:
    ```bash
-   git tag v<version>
+   git tag -a v<version> -m "v<version>"
    git push origin main --tags
    ```
 
 > **IMPORTANTE:** Cada push a `main` debe ir acompañado de un tag si incluye cambios funcionales. Los commits puramente internos (docs, refactors sin impacto en consumidores) pueden agruparse bajo un solo tag.
+
+> **Propuesta pendiente (no instalada):** un hook `pre-push` que rechace el push de un tag `vX.Y.Z` si `git status --porcelain -- dist` no está limpio en ese commit, como red de seguridad adicional a correr `release:check` a mano. No se instala aquí — requiere decidir dónde vive (`.husky/`, `simple-git-hooks`, script propio) y si se quiere obligatorio para todo el equipo.
