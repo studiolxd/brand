@@ -46,6 +46,18 @@ export const OrganizacionUnica: Story = {
   args: { organizations: [orgs[0]] },
 };
 
+/**
+ * En superficie oscura el disparador y el panel voltean por tokens: el nombre y
+ * el separador pasan a la tinta de la superficie, el panel toma el fondo del
+ * panel flotante con borde blanco, y el ítem resaltado invierte (fondo blanco,
+ * texto prusia). El panel va en `Portal`, así que la superficie se activa en el
+ * `<html>` y le llega por herencia.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+};
+
 export const Contrato: Story = {
   name: 'Test — la actual marcada, cambiar avisa con el id',
   tags: ['!dev'],

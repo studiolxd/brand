@@ -69,6 +69,15 @@ inalcanzable al estrechar la pantalla).
   del cajón (`ChatShell.test.tsx`): columna en escritorio, cajón accesible por
   debajo del punto de ruptura, control desde el producto y traducción de los
   dos textos.
+- Stories **«En superficie oscura»** en `OrgSwitcher`, `UserMenu`,
+  `DatePicker`, `DatePickerField`, `TimeField` y `DateTimeField`: los seis
+  tenían el juego de tokens oscuros completo (propio o heredado) y ninguna
+  story que lo enseñara. Cierra la revisión de cobertura oscura del sistema —
+  auditados los 79 ficheros de token y todo el CSS de componente, no queda
+  ningún color de superficie clara sin su par (lo que se queda igual en las dos
+  superficies lo está por la regla de Foundations → Colores § «La regla de
+  derivación»: rellenos autocontenidos, `*-fill` de feedback y estado
+  deshabilitado).
 
 ## v27.2.0
 

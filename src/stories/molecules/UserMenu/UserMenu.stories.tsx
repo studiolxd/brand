@@ -42,6 +42,18 @@ export const NombreLargo: Story = {
   render: (args) => <div style={{ inlineSize: '14rem' }}><UserMenu {...args} /></div>,
 };
 
+/**
+ * En superficie oscura vuelcan por token el nombre, la identidad del panel (el
+ * correo en el gris de texto secundario oscuro), el separador y los ítems; la
+ * acción destructiva pasa al rojo de superficie oscura. El panel va en
+ * `Portal`: la superficie se activa en el `<html>` y le llega por herencia.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { notificationCount: 3 },
+};
+
 export const ContratoCompacto: Story = {
   name: 'Test — compacto: sin nombre visible, con chevron y nombre accesible',
   tags: ['!dev'],

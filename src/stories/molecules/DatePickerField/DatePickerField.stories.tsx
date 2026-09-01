@@ -88,6 +88,17 @@ export const ElegirFecha: Story = {
   },
 };
 
+/**
+ * En superficie oscura la etiqueta y el control los vuelca el `DatePicker`; el
+ * campo solo pone su ayuda (tinta de la superficie) y su error (rojo de
+ * superficie oscura), como el resto de la familia de campos.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { value: new Date(2026, 4, 18), helperText: 'La fecha en la que empieza el contrato.' },
+};
+
 export const Contrato: Story = {
   name: 'Test — etiqueta, ayuda y error enlazados al control',
   tags: ['!dev'],

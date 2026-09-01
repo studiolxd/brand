@@ -880,3 +880,40 @@ y modo `render` de `Card`, átomo `Separator`, y el par
       decisión a revisar si el patrón se generaliza.
 
 - [x] **ConsentPreferences — nombre accesible pegado** (2026-08-29, detectado por public-shell). **Resuelto (2026-08-29):** coma explícita dentro del `VisuallyHidden` (`, Siempre activa`) en vez de un espacio inicial — un espacio en el límite entre dos elementos en línea puede colapsarse al calcular el nombre accesible; una coma no. Test de contrato existente ajustado (el regex anterior no habría detectado el pegado).
+
+## Cobertura de superficie oscura — cierre de la revisión (2026-09-01)
+
+Encargo: dar valores oscuros a los ~14 componentes «sin ningún estilo oscuro»
+(Toast, Radio, Avatar, Accordion, Popover, Spinner, EmptyState, PasswordField,
+NumberInput, FileUpload, NumberBadge, OrgSwitcher, UserMenu y los campos de
+fecha). La lista venía de antes de la fase 0 (2026-08-28) y de la tanda
+«el modo oscuro se deriva del rol»: **los catorce ya tenían su par oscuro** al
+empezar. Lo verificado, con tres barridos independientes sobre `main`:
+
+- [x] **Uso**: todo `var(--…)` de cada CSS de componente, resuelto contra el
+      mapa claro y contra los remapeos oscuros (`src/tokens/**.css` +
+      `surface-dark-derived.css`). Ningún token de color de superficie clara se
+      queda sin voltear salvo los que no deben voltear.
+- [x] **Simetría entre hermanos**: todo token que apunta a un rol `-on-light`
+      (o a un primitivo claro) y no tiene hermano `surface-dark-*`. Los que
+      salen son, uno a uno, excepciones ya declaradas: rellenos autocontenidos
+      (`Button primary`, `Card`/`Tag`/`NumberBadge`/`ProgressBar` saturados,
+      `Alert`/`Toast` `default`), `*-fill` de feedback (universales), el par
+      gris claro + tinta oscura de `Code`/`CodeBlock`/`Prose` y el estado
+      deshabilitado (Foundations: sin par, se dice con opacidad).
+- [x] **Contraste**: valor oscuro efectivo de cada token de tinta, borde,
+      icono, anillo y relleno contra prusia. Todo lo que baja de 2:1 es o un
+      fondo, o tinta sobre un relleno saturado. Ninguna tinta queda invisible.
+- [x] **Tokens huérfanos detectados** (no son fallo visible, pero conviene
+      saberlo): `button.destructive.bg` y `button.{,destructive.}disabled-*` no
+      los consume ningún CSS — la intención destructiva se pinta sobre las
+      variantes `outline`/`text`, que sí tienen su par. Si algún día se usan,
+      necesitan par oscuro antes.
+- [x] **Stories «En superficie oscura»** nuevas en los seis que tenían los
+      tokens pero no la prueba visual: `OrgSwitcher`, `UserMenu`, `DatePicker`,
+      `DatePickerField`, `TimeField` y `DateTimeField`. Los otros ocho ya la
+      tenían.
+
+El criterio no se ha reescrito porque ya está donde tiene que estar:
+Foundations → Colores § «La regla de derivación». No hacía falta ningún token
+nuevo.

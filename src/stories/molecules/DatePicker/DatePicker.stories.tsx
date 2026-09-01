@@ -140,6 +140,26 @@ export const SelectAndDisplay: Story = {
 };
 
 /** Test: el panel del calendario es un diálogo con nombre accesible (`calendarLabel`). */
+/**
+ * En superficie oscura el disparador es el `Input` del sistema (fondo del
+ * lienzo, borde y tinta blancos) y el calendario del panel flotante voltea con
+ * sus propios tokens. No hay valores propios del DatePicker: hereda.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  render: (args) => {
+    const [value, setValue] = useState<Date | null>(new Date(2026, 4, 18));
+    return (
+      <DatePicker
+        {...args}
+        value={value}
+        onChange={(d) => { setValue(d); args.onChange?.(d); }}
+      />
+    );
+  },
+};
+
 export const ContratoNombreAccesible: Story = {
   name: 'Test — nombre accesible del panel',
   tags: ['!dev'],
