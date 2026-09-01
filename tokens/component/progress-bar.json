@@ -4,6 +4,7 @@
     "height-md":            { "$value": "{spacing.5}",           "$type": "dimension", "$description": "24px — barra por defecto: la etiqueta cabe dentro" },
     "height-lg":            { "$value": "{spacing.6}",           "$type": "dimension", "$description": "32px — barra destacada" },
     "border-radius":        { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Esquina recta, como todo el sistema" },
+    "inside-label-threshold": { "$value": "15", "$type": "number", "$description": "Porcentaje mínimo de relleno para que la cifra se escriba dentro; por debajo, fuera. Se consume también en JS (no solo CSS) para decidir la posición de la etiqueta" },
     "track-bg":             { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo del carril: la superficie clara secundaria del sistema (no es un estado, es una superficie)" },
     "transition-duration":  { "$value": "{motion.duration.base}","$type": "number",    "$description": "Duración del avance del relleno (cambio de estado)" },
     "transition-easing":    { "$value": "{motion.easing.in-out}","$type": "string",    "$description": "Curva del avance del relleno" },
