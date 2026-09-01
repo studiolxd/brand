@@ -9,15 +9,25 @@ import { chatShellTokens, chatShellDarkTokens } from "../../../tokens/components
 
 El **armazón de una pantalla de chat**: tres zonas —la columna de conversaciones, el hilo y la caja de escribir— colocadas, separadas por línea y con el scroll en el sitio correcto.
 
-Es **solo maqueta**. No lleva estado, no sabe qué es un mensaje y no habla con ningún modelo: quién está abierto, qué se manda y qué llega lo lleva el producto y entra por los slots. Antes esto era una story que montaba a mano `AppShell` + `Sidebar` + los tres componentes de chat, sin componente detrás y sin poder usarse fuera de Storybook.
+Es **solo maqueta**. No lleva estado de producto, no sabe qué es un mensaje y no habla con ningún modelo: quién está abierto, qué se manda y qué llega lo lleva el producto y entra por los slots. Lo único que sí lleva es el cajón de conversaciones de las pantallas estrechas, que es maqueta también. Antes esto era una story que montaba a mano `AppShell` + `Sidebar` + los tres componentes de chat, sin componente detrás y sin poder usarse fuera de Storybook.
 
 <Canvas of={ChatShellStories.PorDefecto} />
+
+## El criterio de la familia
+
+`ChatShell` es la pieza que cierra la familia de chat —`MessageBubble`, `UserMessage`, `AssistantMessage`, `ConversationThread`, `MessageComposer`, `ConversationList`— y aquí vive el criterio que las seis comparten. Son tres reglas:
+
+1. **Lo que es del hilo se mide en la familia, no en la pieza.** Una medida que solo tiene sentido dentro de una conversación —cuánto ocupa un globo— no es un número enterrado en el JSON del globo: vive en `tokens/component/chat.json` (`chat.bubble-max-width`) y las piezas la heredan por cascada. Si es una medida del sistema (una talla de control, un paso de espaciado), sale de la escala; si no tiene equivalente en la escala, se nombra en la familia en vez de dejarse suelta.
+2. **El hilo se lee siempre sobre el fondo del sistema.** No hay chat sobre `Card` ni sobre ninguna otra superficie propia. Es lo que permite que la cola del globo se dibuje como contorno y no como relleno, y es una regla de uso, no una limitación que se resuelva con un token. Ver más abajo, «El hilo vive siempre aquí».
+3. **Nada del chat se dice solo con la forma.** Quién habla no lo dice únicamente la alineación: lleva nombre en texto (`author` en `UserMessage`, `model` en `AssistantMessage`). Una acción no es una cosa con pinta de botón: es un `Button` del sistema, con su foco, su talla y su nombre accesible obligatorio (el aspa de `ConversationList`). Y algo que existe no puede volverse inalcanzable al estrechar la pantalla: la lista de conversaciones se pliega a un cajón, no se encoge ni desaparece.
+
+Las tres se resumen en una: **el chat no se explica con la forma**. La forma acompaña; el sistema pone la medida, la superficie y el control.
 
 ## Las tres zonas
 
 | Slot | Qué va | Qué hace el armazón |
 | --- | --- | --- |
-| `list` | Un `ConversationList` | Columna lateral con scroll propio |
+| `list` | Un `ConversationList` | Columna lateral con scroll propio; cajón por debajo del punto de ruptura |
 | `header` | El título de la conversación y sus controles | Fila fija arriba, con línea debajo |
 | `children` | Un `ConversationThread` | La zona que crece, **la única con scroll** |
 | `composer` | Un `MessageComposer` | Fila fija abajo, con línea encima |
@@ -30,13 +40,23 @@ Todos menos `children` son opcionales. Lo que hace que un chat se comporte es qu
 
 <Canvas of={ChatShellStories.SinColumna} />
 
-Dentro de una aplicación, la columna de conversaciones suele vivir en el `Sidebar` del `AppShell` —que ya sabe recogerse a rail, abrirse como cajón en móvil y cerrarse al navegar—, y entonces `ChatShell` se monta **sin `list`**. El slot está para el chat que va suelto: una página pública, un panel embebido, una demo.
+Dentro de una aplicación, la columna de conversaciones suele vivir en el `Sidebar` del `AppShell` —que ya sabe recogerse a rail y cerrarse al navegar—, y entonces `ChatShell` se monta **sin `list`**. El slot está para el chat que va suelto: una página pública, un panel embebido, una demo. Ahí el armazón se hace cargo también de las pantallas estrechas.
 
-## Responsive
+## Responsive: la lista se pliega a un cajón
 
-Por debajo de `--breakpoint-lg` —el mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral— el armazón cae a **una sola columna**: la lista se coloca arriba como una tira con su propio scroll y altura acotada, y el hilo se lleva el alto que sobra.
+<Canvas of={ChatShellStories.CajonDeConversaciones} />
 
-Es una decisión de maqueta, sin JavaScript ni estado: `ChatShell` no monta un cajón lateral porque el sistema ya tiene uno, el del `Sidebar`. Un chat de móvil que necesite la lista a pantalla completa se monta dentro de un `AppShell` y usa ese cajón.
+Por debajo de `--breakpoint-lg` —el mismo punto en el que el chrome de aplicación pasa de barra superior a barra lateral— la columna de conversaciones **se pliega a un cajón**: un `Sheet` que entra por el canto de inicio y que abre un botón en la cabecera del hilo. Por encima del punto de ruptura vuelve a ser columna fija, siempre a la vista, y el botón no existe.
+
+Antes esa lista se convertía en una **tira acotada sobre el hilo** (12rem de alto con scroll propio) y el armazón remitía al cajón del `Sidebar` para el caso de móvil de verdad. Se ha cambiado porque dejaba fuera al chat que se monta **sin `AppShell`** —una página pública, un panel embebido—: ahí no había cajón al que remitir, y la lista quedaba reducida a cuatro filas encima de la conversación. La tercera regla de la familia es que nada se vuelva inalcanzable al estrechar; el sistema ya tenía la pieza para resolverlo (`Sheet`), así que el armazón la usa en vez de inventar una maqueta a medida. El token `chat-shell.list-narrow-max-height` —y con él `chat.list-narrow-max-height`— se retira: ya no hay tira que acotar.
+
+Sigue siendo válido montar `ChatShell` **sin `list`** dentro de un `AppShell` y dejar la lista en el `Sidebar`: son dos usos distintos, y el que elige es el producto según dónde viva la navegación.
+
+El punto de ruptura se decide en **JavaScript** (`window.matchMedia`, mismo mecanismo que `AppShell`) y no en una media query, porque la lista **cambia de sitio en el árbol** —de `<aside>` a diálogo—, no solo de forma. Por eso `ChatShell` es un componente cliente.
+
+### Quién cierra el cajón
+
+El armazón abre el cajón y lo cierra con Escape, con el velo y con su aspa —eso lo pone `Sheet`—. Lo que **no** puede saber es que abrir una conversación es navegar: eso es del producto. Para ese caso el cajón se puede controlar desde fuera con `listOpen` / `onListOpenChange`, y el producto lo cierra en su `onSelect`. Sin esas props, el armazón lo lleva por dentro. La story **Integración** lo monta así.
 
 ## El hilo vive siempre aquí
 
@@ -57,9 +77,10 @@ Aquí está funcionando de verdad: abrir conversaciones, borrarlas, escribir, ve
 ## Accesibilidad
 
 - La columna de conversaciones es un **`<aside>` con nombre accesible** (`listLabel`), y dentro va el `<nav>` del propio `ConversationList`: dos capas con nombre, porque la columna puede llevar más cosas que la lista.
+- En pantalla estrecha esa misma lista es el **contenido de un diálogo** cuyo nombre accesible es también `listLabel`. El botón que lo abre es un `Button` del sistema con `aria-haspopup="dialog"` y `aria-expanded`; el foco, la trampa de foco y el cierre con Escape los pone `Sheet`.
 - La cabecera es un **`<header>`**; el título que se le pase debería ser un encabezado real (`Heading`), para que el chat aparezca en el índice de encabezados.
 - El **hilo es la única zona con scroll**, así que es la única que hay que poder recorrer con teclado. Su `role="log"` lo pone `ConversationThread`.
-- El armazón **no captura el foco** ni reordena nada: el orden de tabulación es el del DOM —lista, cabecera, hilo, composer—.
+- El armazón **no captura el foco** ni reordena nada: el orden de tabulación es el del DOM —lista, cabecera, hilo, composer—. Con el cajón abierto, la trampa de foco es la del diálogo, y al cerrarlo el foco vuelve al botón que lo abrió.
 
 ## Tokens
 
@@ -75,4 +96,4 @@ Aquí está funcionando de verdad: abrir conversaciones, borrarlas, escribir, ve
 
 ## Internacionalización
 
-`listLabel` es el único texto que emite el armazón. Ver **Foundations › Internacionalización**.
+`listLabel` (nombre de la columna y título del cajón) y `listTriggerLabel` (nombre del botón que abre el cajón) son los dos únicos textos que emite el armazón, los dos con default castellano. Ver **Foundations › Internacionalización**.

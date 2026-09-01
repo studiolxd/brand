@@ -4,7 +4,6 @@ import { Button } from '../../atoms/Button/Button';
 import { EmptyState } from '../EmptyState/EmptyState';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
-import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './ConversationList.css';
 
 export interface ConversationItem {
@@ -112,14 +111,16 @@ export const ConversationList = forwardRef<HTMLDivElement, ConversationListProps
                 >
                   {conv.label}
                 </button>
-                <button
-                  type="button"
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  iconOnly
+                  aria-label={deleteLabel(conv.label)}
                   className="conversation-list__delete"
                   onClick={(e) => { e.stopPropagation(); onDelete(conv.id); }}
                 >
                   <Icon name="close" size="xs" />
-                  <VisuallyHidden>{deleteLabel(conv.label)}</VisuallyHidden>
-                </button>
+                </Button>
               </li>
             );
           })}

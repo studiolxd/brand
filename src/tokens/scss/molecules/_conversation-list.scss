@@ -13,11 +13,11 @@ $lxd-conversation-list-item-color: #4a4a4a; // Tinta de una conversación en rep
 $lxd-conversation-list-item-hover-color: #111e30; // Tinta de la conversación bajo el puntero: el hover no pinta relleno (regla de Colores), sube del gris de texto secundario a tinta plena
 $lxd-conversation-list-item-active-color: #111e30; // Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo
 $lxd-conversation-list-item-active-font-weight: 500; // Peso de la conversación abierta
-$lxd-conversation-list-delete-size: 2rem; // Lado del botón de borrar: la talla mínima del sistema, para que sea un blanco alcanzable
-$lxd-conversation-list-delete-margin-inline-end: 0.25rem; // Aire entre el botón de borrar y el canto de la fila
-$lxd-conversation-list-delete-border-radius: 0px; // Radio del botón de borrar
-$lxd-conversation-list-delete-color: #6b6b6b; // Tinta del aspa en reposo. Es un icono de acción secundaria
+$lxd-conversation-list-delete-margin-inline-end: 0.25rem; // Aire entre el aspa y el canto de la fila. El cuadrado, el radio y la altura del aspa ya no son tokens propios: los pone el `Button` ghost `sm` que la dibuja
+$lxd-conversation-list-delete-color: #6b6b6b; // Tinta del aspa en reposo. Es un icono de acción secundaria — remapea `button.ghost.color` en el ámbito de la fila
+$lxd-conversation-list-delete-hover-bg: rgba(0, 0, 0, 0); // Fondo del aspa bajo el puntero: ninguno. La fila del chat no se rellena en hover (regla de Colores), así que el aspa apaga el relleno de marca del `Button` ghost y se queda solo con el cambio de tinta
 $lxd-conversation-list-delete-hover-color: #b30000; // Tinta del aspa bajo el puntero
+$lxd-conversation-list-delete-focus-ring-offset: calc(-1 * 2px); // El anillo de foco del aspa va por dentro, como el del título de la fila: el aspa toca el canto de la fila y un anillo por fuera se saldría
 $lxd-conversation-list-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-conversation-list-focus-ring-color: #111e30; // Color del anillo de foco
 $lxd-conversation-list-transition-duration: 150ms; // Duración de la transición de color

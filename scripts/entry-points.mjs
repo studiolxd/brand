@@ -189,6 +189,7 @@ export const clientComponents = new Set([
   'app-launcher',
   'data-table',
   'conversation-thread',
+  'chat-shell',
   'chart',
   'site-header',
   'language-switcher',

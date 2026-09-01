@@ -3,14 +3,14 @@
  */
 
 :root {
+  --conversation-list-delete-hover-bg: rgba(0, 0, 0, 0); /** Fondo del aspa bajo el puntero: ninguno. La fila del chat no se rellena en hover (regla de Colores), así que el aspa apaga el relleno de marca del `Button` ghost y se queda solo con el cambio de tinta */
   --conversation-list-header-gap: var(--spacing-2); /** Separación entre el botón de conversación nueva y la lista */
   --conversation-list-gap: var(--spacing-1); /** Separación entre conversaciones */
   --conversation-list-padding-inline: var(--spacing-2); /** Aire horizontal de la lista dentro de la columna que la contiene */
   --conversation-list-item-padding-block: var(--spacing-2); /** Aire vertical de cada conversación */
   --conversation-list-item-padding-inline: var(--spacing-3); /** Aire horizontal de cada conversación */
   --conversation-list-item-font-family: var(--font-family-sans); /** Familia tipográfica del título de la conversación */
-  --conversation-list-delete-size: var(--size-component-sm); /** Lado del botón de borrar: la talla mínima del sistema, para que sea un blanco alcanzable */
-  --conversation-list-delete-margin-inline-end: var(--spacing-1); /** Aire entre el botón de borrar y el canto de la fila */
+  --conversation-list-delete-margin-inline-end: var(--spacing-1); /** Aire entre el aspa y el canto de la fila. El cuadrado, el radio y la altura del aspa ya no son tokens propios: los pone el `Button` ghost `sm` que la dibuja */
   --conversation-list-transition-duration: var(--motion-duration-fast); /** Duración de la transición de color */
   --conversation-list-transition-easing: var(--motion-easing-default); /** Curva de la transición de color */
   --conversation-list-item-border-radius: var(--border-radius-default); /** Radio de cada conversación: recto, como todo el sistema */
@@ -19,9 +19,9 @@
   --conversation-list-item-hover-color: var(--color-text-on-light); /** Tinta de la conversación bajo el puntero: el hover no pinta relleno (regla de Colores), sube del gris de texto secundario a tinta plena */
   --conversation-list-item-active-color: var(--color-text-on-light); /** Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo */
   --conversation-list-item-active-font-weight: var(--font-weight-emphasis); /** Peso de la conversación abierta */
-  --conversation-list-delete-border-radius: var(--border-radius-default); /** Radio del botón de borrar */
-  --conversation-list-delete-color: var(--color-icon-secondary-on-light); /** Tinta del aspa en reposo. Es un icono de acción secundaria */
+  --conversation-list-delete-color: var(--color-icon-secondary-on-light); /** Tinta del aspa en reposo. Es un icono de acción secundaria — remapea `button.ghost.color` en el ámbito de la fila */
   --conversation-list-delete-hover-color: var(--color-destructive-text-on-light); /** Tinta del aspa bajo el puntero */
+  --conversation-list-delete-focus-ring-offset: calc(-1 * var(--border-width-focus)); /** El anillo de foco del aspa va por dentro, como el del título de la fila: el aspa toca el canto de la fila y un anillo por fuera se saldría */
   --conversation-list-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --conversation-list-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
 }

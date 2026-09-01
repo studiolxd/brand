@@ -1,6 +1,8 @@
-/* Una sola columna de partida: la columna de conversaciones queda arriba,
-   como una tira con scroll propio, y el hilo se lleva el alto que sobra.
-   A partir del punto de ruptura se abre en dos columnas. */
+/* Una sola columna de partida: solo el hilo, la cabecera y el composer. La
+   columna de conversaciones aparece al lado a partir del punto de ruptura; por
+   debajo no está en el árbol —vive en el cajón (`Sheet`)—, así que la maqueta
+   no tiene que preverle sitio. Quién decide es JS, no una media query: la
+   lista cambia de sitio, no solo de forma. */
 .chat-shell {
   display: flex;
   flex-direction: column;
@@ -9,14 +11,21 @@
   background-color: var(--chat-shell-bg);
 }
 
+/* La columna de conversaciones: solo se monta a partir del punto de ruptura,
+   con su propio scroll y separada del hilo por línea. */
 .chat-shell__list {
   flex-shrink: 0;
-  max-block-size: var(--chat-shell-list-narrow-max-height);
+  inline-size: var(--chat-shell-list-width);
+  block-size: 100%;
   overflow-y: auto;
   padding-block: var(--chat-shell-list-padding-block);
-  border-block-end-width: var(--chat-shell-border-width);
-  border-block-end-style: var(--chat-shell-border-style);
-  border-block-end-color: var(--chat-shell-border-color);
+  border-inline-end-width: var(--chat-shell-border-width);
+  border-inline-end-style: var(--chat-shell-border-style);
+  border-inline-end-color: var(--chat-shell-border-color);
+}
+
+.chat-shell.chat-shell--with-list {
+  flex-direction: row;
 }
 
 /* El hilo, la cabecera y el composer comparten columna: el que crece es el
@@ -41,6 +50,23 @@
   border-block-end-color: var(--chat-shell-border-color);
 }
 
+/* El botón que abre el cajón de conversaciones: solo existe por debajo del
+   punto de ruptura, pegado al canto de inicio de la cabecera. */
+.chat-shell__list-trigger {
+  flex-shrink: 0;
+}
+
+/* Lo que el producto pone en la cabecera sigue repartiéndose a los extremos,
+   con o sin botón de cajón delante. */
+.chat-shell__header-content {
+  flex: 1;
+  min-inline-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--chat-shell-header-gap);
+}
+
 .chat-shell__thread {
   flex: 1;
   min-block-size: 0;
@@ -56,23 +82,4 @@
   border-block-start-width: var(--chat-shell-border-width);
   border-block-start-style: var(--chat-shell-border-style);
   border-block-start-color: var(--chat-shell-border-color);
-}
-
-/* Dos columnas: la de conversaciones a un lado, con su propio scroll, y el
-   resto del armazón al lado. El punto de ruptura es el mismo en el que el
-   chrome de aplicación pasa de barra superior a barra lateral. */
-@media (min-width: 1024px) /* --breakpoint-lg */ {
-  .chat-shell.chat-shell--with-list {
-    flex-direction: row;
-  }
-
-  .chat-shell.chat-shell--with-list .chat-shell__list {
-    inline-size: var(--chat-shell-list-width);
-    max-block-size: none;
-    block-size: 100%;
-    border-block-end: none;
-    border-inline-end-width: var(--chat-shell-border-width);
-    border-inline-end-style: var(--chat-shell-border-style);
-    border-inline-end-color: var(--chat-shell-border-color);
-  }
 }
