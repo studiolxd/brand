@@ -1370,7 +1370,6 @@ aplicadas a todo el sistema.
   llega a declararse como custom property (el formato de modo oscuro remapea la
   propiedad original, no crea una `--*-surface-dark-*`). Ahora apuntan al rol
   directo `color.text.on-dark`.
-||||||| parent of 782d64d (chore: v25.7.0 — changelog y versión)
 
 ## v25.6.0
 
@@ -1545,7 +1544,6 @@ Lote de deudas mecánicas del DS sin decisión de diseño (ver `notes/REVISION-p
   página de **docs**. Antes teñía el `<html>` entero y dejaba ilegibles todas
   las demás stories de esa página. En el canvas de la story sigue usando el
   `<html>`, que es donde hace falta alcanzar a los portales.
-||||||| parent of 4e729bf (chore: v25.5.0 — changelog, versión y pendientes de la tanda de calendarios)
 ## v25.2.0
 
 ### Cambiado
