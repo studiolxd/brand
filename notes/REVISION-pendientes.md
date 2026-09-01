@@ -106,8 +106,15 @@ existir por diseño; lo que queda es corregir los textos que aún usan grey-dark
       revisión: todo color en CSS pasa por un token propio del componente.
       **Cerrado (2026-08-29):** verificado con
       `grep -rln 'var(--color-grey-' src/stories/**/*.css` — el único que
-      queda es el swatch de `Foundations/SizeScale.css` (borde decorativo de
-      la propia página que enseña la escala de grises), no un componente.
+      quedaba era el swatch de `Foundations/SizeScale.css` (borde decorativo
+      de la propia página que enseña la escala de grises), no un componente.
+      **Cerrado del todo (2026-09-01, rama `q1-primitivos`):** ese último uso
+      pasa a `--color-border-default-on-light` (mismo `#d0d0d0`, sin par
+      oscuro: computado idéntico en ambas superficies). El recuento
+      `grep -rn 'var(--color-grey-' src/stories` es **0**. Los cuatro
+      primitivos grises se quedan: sus consumidores son ahora solo los roles
+      de `tokens/color/semantic.json` (ninguno queda huérfano), y su retirada
+      no procede.
 
 ## Tipografía (2026-08-25)
 
