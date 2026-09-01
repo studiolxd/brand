@@ -64,6 +64,17 @@ export const Tallas: Story = {
   ),
 };
 
+/**
+ * En superficie oscura los dos desplegables los vuelca el `TimeSelect`; el
+ * campo solo pone su ayuda (tinta de la superficie) y su error (rojo de
+ * superficie oscura), como el resto de la familia de campos.
+ */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { value: { h: 9, m: 30 }, helperText: 'Horario de oficina: de 9:00 a 18:00.' },
+};
+
 export const Contrato: Story = {
   name: 'Test — etiqueta, ayuda y error enlazados al control',
   tags: ['!dev'],
