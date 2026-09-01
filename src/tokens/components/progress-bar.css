@@ -3,6 +3,7 @@
  */
 
 :root {
+  --progress-bar-inside-label-threshold: 15; /** Porcentaje mínimo de relleno para que la cifra se escriba dentro; por debajo, fuera. Se consume también en JS (no solo CSS) para decidir la posición de la etiqueta */
   --progress-bar-height-sm: var(--spacing-2); /** 8px — barra compacta, sin etiqueta */
   --progress-bar-height-md: var(--spacing-5); /** 24px — barra por defecto: la etiqueta cabe dentro */
   --progress-bar-height-lg: var(--spacing-6); /** 32px — barra destacada */

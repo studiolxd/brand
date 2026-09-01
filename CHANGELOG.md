@@ -78,6 +78,22 @@ inalcanzable al estrechar la pantalla).
   superficies lo está por la regla de Foundations → Colores § «La regla de
   derivación»: rellenos autocontenidos, `*-fill` de feedback y estado
   deshabilitado).
+- **`progress-bar.inside-label-threshold`**: el 15% que decide si la cifra se
+  escribe dentro o fuera del relleno vivía como número suelto en el TSX; ahora
+  es un token (`$type: number`) que el componente importa directamente del
+  JSON — el CSS no puede leer una custom property desde JS en tiempo de
+  render, así que el token se consume por import en vez de por `var()`, pero
+  deja de haber un número mágico sin origen declarado.
+
+### Barrido de escala — verificación (2026-09-01)
+
+Revisión de la nota `notes/REVISION-pendientes.md` (icono 18→16, esquina recta,
+sombras de `Sidebar`/`AppHeader`, transiciones y tallas de `FileUpload`):
+comprobado por lectura y `grep` que los cinco puntos ya estaban resueltos en
+tandas anteriores (`icon.size-sm` ya es 16px, sin `4px` de radio ni sombra
+cruda sueltos, sin `ms` a mano en transiciones, `FileUpload` ya tiene
+`sm`/`md`/`lg` con story «Tallas»); sin cambio de código en esos cinco. Solo el
+umbral de `ProgressBar` (arriba) seguía pendiente.
 
 ## v27.2.0
 

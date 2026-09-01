@@ -1,3 +1,4 @@
+import progressBarTokens from '../../../../tokens/component/progress-bar.json';
 import './ProgressBar.css';
 
 export type ProgressBarVariant = 'primary' | 'accent-1' | 'accent-2' | 'support-1' | 'support-2';
@@ -26,7 +27,7 @@ export interface ProgressBarProps {
  * La cifra se escribe dentro del relleno cuando cabe y fuera cuando no; siempre
  * es decorativa (`aria-hidden`), porque el valor lo anuncia `aria-valuenow`.
  */
-const INSIDE_THRESHOLD = 15;
+const INSIDE_THRESHOLD = Number(progressBarTokens['progress-bar']['inside-label-threshold'].$value);
 
 export function ProgressBar({
   value,

@@ -583,13 +583,16 @@ Accordion, Tag, Kbd, List, Popover, DescriptionList y ProgressBar salen de
       fondo de `CodeBlock` apuntan ahora a `surface.secondary-*`.
 - [x] **`tag.neutral-bg`** (2026-08-27) — apunta a `surface.inverse-on-light|dark`
       en vez de nombrar `color.grey-darkest` directamente; sin cambio visual.
-- [ ] **Alturas de `ProgressBar`** (8 / 24 / 32px) se expresan con la escala de
-      espaciado (`spacing.2/5/6`). No son aire: son alturas de carril. Si el
-      sistema añade una escala de medidas que no sean tallas de componente,
-      repuntar ahí.
-- [ ] **Umbral de la cifra de `ProgressBar`** (15%) vive en el TSX. No se hizo
-      token para no dejar uno huérfano: el CSS no puede leerlo y el JS tendría
-      que leer la custom property en runtime. Decidir si merece la pena.
+- [x] **Alturas de `ProgressBar`** (8 / 24 / 32px) — comprobado (2026-09-01):
+      ya son tokens (`progress-bar.height-sm/md/lg` → `spacing.2/5/6`), sin
+      píxel crudo. Quedan en la escala de espaciado porque el sistema no tiene
+      otra escala de medidas de carril; repuntar si algún día la hay, pero no
+      es deuda de tokenización.
+- [x] **Umbral de la cifra de `ProgressBar`** (2026-09-01) — token
+      `progress-bar.inside-label-threshold` (número, `15`) en el JSON; el TSX
+      lo importa directamente (`tokens/component/progress-bar.json`) en vez de
+      leer la custom property en runtime, así que no queda huérfano en CSS ni
+      duplicado en JS.
 - [x] **`DescriptionList` en pantalla estrecha** (2026-08-27) — por debajo de
       `--breakpoint-md` pasa a una columna (término apilado sobre su
       descripción); story «Estrecha» con viewport móvil.
@@ -618,7 +621,9 @@ anotado:
       `toast.enter-scale`. `gap` es prop **y** token (la prop viaja como custom
       property). Siguen siendo solo props `duration` y `visibleToasts`: la vida
       del aviso y el límite de la cola se cuentan en JS y un token CSS no movería
-      nada. Mismo caso que el umbral del 15% de `ProgressBar`.
+      nada — a diferencia del umbral del 15% de `ProgressBar`, que sí se
+      tokenizó (2026-09-01) importando el JSON directamente en el TSX en vez
+      de leer la custom property.
 - [ ] **Un aviso actualizado por `id`** (el patrón `loading` → `success`) cuenta
       su vida con un reloj propio, fuera de la cola: el motor solo programa el
       suyo al dar de alta el aviso. Consecuencia: ese reloj **no se pausa** al
