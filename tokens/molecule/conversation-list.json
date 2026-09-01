@@ -14,11 +14,11 @@
     "item-active-color":     { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Tinta de la conversación abierta: tinta plena. La conversación abierta se dice con tinta y peso, no con un fondo" },
     "item-active-font-weight": { "$value": "{font-weight.emphasis}",    "$type": "number",    "$description": "Peso de la conversación abierta" },
 
-    "delete-size":               { "$value": "{size-component.sm}",             "$type": "dimension", "$description": "Lado del botón de borrar: la talla mínima del sistema, para que sea un blanco alcanzable" },
-    "delete-margin-inline-end":  { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Aire entre el botón de borrar y el canto de la fila" },
-    "delete-border-radius":      { "$value": "{border-radius.default}",         "$type": "dimension", "$description": "Radio del botón de borrar" },
-    "delete-color":              { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Tinta del aspa en reposo. Es un icono de acción secundaria" },
+    "delete-margin-inline-end":  { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Aire entre el aspa y el canto de la fila. El cuadrado, el radio y la altura del aspa ya no son tokens propios: los pone el `Button` ghost `sm` que la dibuja" },
+    "delete-color":              { "$value": "{color.icon.secondary-on-light}", "$type": "color",     "$description": "Tinta del aspa en reposo. Es un icono de acción secundaria — remapea `button.ghost.color` en el ámbito de la fila" },
+    "delete-hover-bg":           { "$value": "transparent",                     "$type": "color",     "$description": "Fondo del aspa bajo el puntero: ninguno. La fila del chat no se rellena en hover (regla de Colores), así que el aspa apaga el relleno de marca del `Button` ghost y se queda solo con el cambio de tinta" },
     "delete-hover-color":        { "$value": "{color.destructive-text-on-light}", "$type": "color",   "$description": "Tinta del aspa bajo el puntero" },
+    "delete-focus-ring-offset":  { "$value": "calc(-1 * {border-width.focus})", "$type": "dimension", "$description": "El anillo de foco del aspa va por dentro, como el del título de la fila: el aspa toca el canto de la fila y un anillo por fuera se saldría" },
 
     "focus-ring-width":      { "$value": "{border-width.focus}",        "$type": "dimension", "$description": "Grosor del anillo de foco" },
     "focus-ring-color":      { "$value": "{color.primary}",             "$type": "color",     "$description": "Color del anillo de foco" },

@@ -71,40 +71,33 @@
   outline-offset: calc(-1 * var(--conversation-list-focus-ring-width));
 }
 
-/* El aspa está en el orden de tabulación: se ve al pasar el puntero, al
-   recibir el foco y en cuanto se toca. Sin eso, borrar una conversación era
-   imposible sin ratón. */
+/* El aspa es un `Button` ghost del sistema (talla `sm`, solo icono): de ahí
+   salen el cuadrado, el radio, el foco y la semántica. Lo que la familia
+   cambia son los colores, y los cambia por el único camino permitido —
+   remapear los tokens del propio Button en el ámbito de la pieza—, porque la
+   fila no se rellena bajo el puntero: sube de tinta. */
 .conversation-list__delete {
+  --button-ghost-color: var(--conversation-list-delete-color);
+  --button-ghost-hover-bg: var(--conversation-list-delete-hover-bg);
+  --button-ghost-hover-color: var(--conversation-list-delete-hover-color);
+  --button-ghost-active-bg: var(--conversation-list-delete-hover-bg);
+  --button-ghost-active-color: var(--conversation-list-delete-hover-color);
+  --button-ghost-focus-ring-color: var(--conversation-list-focus-ring-color);
+  --button-ghost-focus-ring-offset: var(--conversation-list-delete-focus-ring-offset);
+
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--conversation-list-delete-size);
-  block-size: var(--conversation-list-delete-size);
   margin-inline-end: var(--conversation-list-delete-margin-inline-end);
-  border: none;
-  background: transparent;
-  color: var(--conversation-list-delete-color);
-  cursor: pointer;
-  border-radius: var(--conversation-list-delete-border-radius);
   opacity: 0;
   transition:
     opacity var(--conversation-list-transition-duration) var(--conversation-list-transition-easing),
     color var(--conversation-list-transition-duration) var(--conversation-list-transition-easing);
 }
 
-.conversation-list__delete:hover {
-  color: var(--conversation-list-delete-hover-color);
-}
-
-.conversation-list__item:hover .conversation-list__delete {
-  opacity: 1;
-}
-
+/* El aspa aparece al pasar el puntero por la fila, al recibir el foco y en
+   cuanto se toca. Sin eso, borrar una conversación era imposible sin ratón. */
+.conversation-list__item:hover .conversation-list__delete,
 .conversation-list__delete:focus-visible {
   opacity: 1;
-  outline: var(--conversation-list-focus-ring-width) solid var(--conversation-list-focus-ring-color);
-  outline-offset: calc(-1 * var(--conversation-list-focus-ring-width));
 }
 
 /* Con puntero grueso (táctil) no hay hover que valga: el aspa se ve siempre. */
