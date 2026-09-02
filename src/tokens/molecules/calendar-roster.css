@@ -35,6 +35,7 @@
   --calendar-roster-th-day-today-bg: var(--color-primary); /** Fondo del encabezado del día de hoy */
   --calendar-roster-th-day-today-radius: var(--border-radius-default); /** Radio del badge del día de hoy */
   --calendar-roster-td-name-color: var(--color-text-on-light); /** Color del nombre del empleado */
+  --calendar-roster-td-name-font-weight: var(--font-weight-default); /** Peso del nombre del empleado (la celda es th: el agente de usuario la pondría en negrita) */
   --calendar-roster-td-name-bg: var(--color-background-light); /** Fondo sticky de la celda de nombre */
   --calendar-roster-cell-bg: var(--color-background-light); /** Fondo de celdas de día laborable */
   --calendar-roster-cell-weekend-bg: var(--color-surface-secondary-on-light); /** Fondo de celdas de fin de semana — superficie secundaria, la misma para todo día no laborable: lo que los distingue es el chip, no el gris */

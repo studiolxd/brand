@@ -101,7 +101,7 @@
 
 /* ─── Name cells (sticky) ─────────────────────────────────────────────────── */
 
-.calendar-roster__td-name {
+.calendar-roster__th-name-row {
   position: sticky;
   left: 0;
   z-index: 2;
@@ -111,6 +111,9 @@
   padding-inline: var(--calendar-roster-td-name-padding-inline);
   background-color: var(--calendar-roster-td-name-bg);
   font-size: var(--calendar-roster-td-name-font-size);
+  /* un `th` llega en negrita y centrado desde el agente de usuario */
+  font-weight: var(--calendar-roster-td-name-font-weight);
+  text-align: start;
   color: var(--calendar-roster-td-name-color);
   border-block-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);
   border-inline-end: var(--calendar-roster-border-width) solid var(--calendar-roster-border-color);

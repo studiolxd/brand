@@ -58,8 +58,10 @@ sin JavaScript); con `linkComponent` los rinde el `Link` del router; y con
 
 ## Accesibilidad
 
-- Es una `<table>` con `<th scope="col">`: la relación fila/columna la da el
-  marcado, no la maqueta.
+- Es una `<table>` con `<th scope="col">` por día y `<th scope="row">` en la
+  columna de nombres: la relación fila/columna la da el marcado, no la maqueta.
+  Sin cabecera de fila, en 31 columnas el lector anuncia el turno con su día
+  pero sin decir de quién es.
 - La tabla toma como nombre el rótulo del mes (`aria-labelledby` sobre el
   `labelId` de `PrevNextNav`).
 - La inicial del día de la semana lleva el nombre completo en un `<abbr>`.

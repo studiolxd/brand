@@ -119,6 +119,8 @@ La tabla declara bien sus cabeceras de columna (`<th scope="col">` por día), pe
 
 **Propuesta:** `<th scope="row" class="calendar-roster__th-name-row">`, revisando de paso el CSS (un `th` trae peso y centrado propios del agente de usuario). No es un cambio de un atributo: toca marcado y estilos, y por eso no se hace aquí.
 
+**~~Resuelto~~** (`s1-fichas-a`): tal cual, con `text-align: start` y un token nuevo `calendar-roster.td-name-font-weight` para deshacer la negrita del agente de usuario. Los tokens siguen llamándose `td-name-*`: renombrarlos sería breaking para quien los pise, y la clase BEM (interna, no expuesta) sí pasa a `__th-name-row`. Test en `CalendarRoster.test.tsx`.
+
 ### A10 · `CalendarRoster`: el emoji del cumpleaños va cableado — **baja**
 
 `{cell.type === 'birthday' ? \`🎂 ${cell.label}\` : cell.label}` inyecta contenido visible que el consumidor no pidió ni puede quitar, y que además se lee en voz alta («tarta de cumpleaños»). Es el único adorno de este tipo en el lote.

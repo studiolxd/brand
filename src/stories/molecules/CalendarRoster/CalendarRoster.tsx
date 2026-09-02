@@ -210,9 +210,11 @@ export function CalendarRoster({
           <tbody>
             {rows.map((row) => (
               <tr key={row.id}>
-                <td className="calendar-roster__td-name" title={row.name}>
+                {/* Cabecera de fila: en una tabla de 31 columnas es lo que
+                    ata cada turno a su persona al leerla con lector. */}
+                <th scope="row" className="calendar-roster__th-name-row" title={row.name}>
                   {row.name}
-                </td>
+                </th>
                 {days.map((day) => {
                   const d = day.getDate();
                   const cell = row.cells[d] ?? null;
