@@ -4,6 +4,9 @@
 
 :root {
   --multi-select-content-max-height: var(--available-height); /** Altura máxima del dropdown (por defecto, el espacio disponible en viewport que expone Base UI) */
+  --multi-select-disabled-cursor: not-allowed; /** Cursor sobre el control deshabilitado */
+  --multi-select-pill-remove-opacity: 0.7; /** Opacidad del aspa en reposo: presente pero en segundo plano. Literal a falta de un escalón intermedio en `opacity` global (ver notas de revisión) */
+  --multi-select-pill-remove-hover-opacity: 1; /** Opacidad del aspa bajo el puntero. Literal a falta de un `opacity.full` global (ver notas de revisión) */
   --multi-select-border-style: var(--select-border-style); /** Estilo del borde */
   --multi-select-height: var(--size-component-md); /** Altura mínima del trigger: la talla md del sistema. Crece solo si las pills ocupan más de una línea */
   --multi-select-sm-height: var(--size-component-sm); /** Altura mínima del trigger — sm */
@@ -14,6 +17,10 @@
   --multi-select-pill-padding-inline: var(--spacing-2); /** Padding inline de la pill */
   --multi-select-pill-gap: var(--spacing-1); /** Separación entre texto y botón × en la pill */
   --multi-select-pill-font-size: var(--font-size-1); /** Tamaño de fuente de la pill */
+  --multi-select-disabled-opacity: var(--opacity-disabled); /** Opacidad del control deshabilitado: el mismo velo que el resto de controles del sistema */
+  --multi-select-pill-line-height: var(--line-height-none); /** Interlineado de la píldora: sin holgura, la píldora la mide su propio aire */
+  --multi-select-item-selected-font-weight: var(--font-weight-bold); /** Peso de la opción ya elegida en la lista: lo elegido se dice con peso, no con relleno */
+  --multi-select-icon-transition-easing: var(--motion-easing-default); /** Curva del giro del chevron al abrir */
   --multi-select-values-gap: var(--spacing-1); /** Separación entre pills */
   --multi-select-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error */
   --multi-select-font-family: var(--select-font-family); /** Familia tipográfica */
