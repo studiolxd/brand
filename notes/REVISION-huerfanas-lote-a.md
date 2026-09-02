@@ -63,6 +63,8 @@ El componente interno se llama `Anotacion` y sus variables son `esRaiz`, `resuel
 
 **Propuesta:** renombrar el helper a `Annotation` con props en inglés, añadir `annotation-thread.border-style`, y decidir si `data-status` es contrato público (documentarlo) o sobra (quitarlo). Nada de esto cambia la cara del componente.
 
+**~~Resuelto~~** (`s1-fichas-a`): helper `Annotation` con `date`/`formatted`/`isRoot` fuera (la variable de estado pasa a `isResolved`); tokens `border-style` y `reply-guide-style` —el segundo cableaba `solid` igual que el primero—; `data-status` **retirado**, no era contrato: lo dice el modificador `--resolved`, y el test que lo leía comprueba ahora la clase. Con él se va también `annotation-thread__item--root`, que no tenía ninguna regla detrás ni más uso que emitirse. `annotation-thread__reply` se queda: es el bloque que coloca la respuesta en la columna del hilo.
+
 ### A2 · `AsyncSelect` / `AsyncMultiSelect`: el rebote es un número mágico y no se limpia al desmontar — **media**
 
 Los 300 ms del `setTimeout` están cableados en el cuerpo del componente, sin prop ni constante nombrada, y el `debounceRef` no se cancela en un efecto de limpieza: si el control se desmonta con una búsqueda en vuelo, el `setState` del `finally` cae sobre un componente muerto. Con `onSearch` haciendo `fetch` real —que es para lo que existe el componente— tampoco hay cancelación de la respuesta tardía: dos búsquedas seguidas pueden resolverse fuera de orden y pintar los resultados de la primera.
@@ -141,6 +143,8 @@ Es la única molécula del lote que no es `forwardRef`. Como devuelve un fragmen
 
 **Propuesta:** `forwardRef<HTMLButtonElement>` al botón, como `DotsButton`.
 
+**~~Resuelto~~** (`s1-fichas-a`): tal cual, en las dos formas del componente (con texto y solo icono); probado con `createRef`. La región viva no es enfocable, así que el `<button>` es el único destino razonable.
+
 ### A12 · `DatePicker`: sin tokens propios — **media**
 
 El disparador viste enteramente con `--input-*` (altura, aire, familia, borde, foco, deshabilitado, error). Es coherente de cara —un campo de fecha y uno de texto deben parecer el mismo— pero deja al consumidor sin ningún punto de personalización: retocar el disparador de fecha obliga a mover todos los campos de texto de la aplicación. El resto del lote sí tiene su familia (`async-select.*` hereda de `select.*`, `dropdown-field.*` hereda de `select.*`).
@@ -154,6 +158,8 @@ El disparador viste enteramente con `--input-*` (altura, aire, familia, borde, f
 Solo cuatro componentes del lote tienen `.test.tsx` (`AnnotationThread`, `Calendar`, `CopyButton`, `DocsSearch`). El resto se prueba con stories `Test — …`, que es el patrón declarado del repo y cuentan como test… pero `pnpm test:stories` necesita Chromium y no siempre está disponible (en esta red, no). En la práctica, `pnpm test` no ejecuta nada de 14 de los 18 componentes.
 
 **Propuesta:** ninguna acción inmediata —el patrón es deliberado—, pero conviene tenerlo presente al leer el verde de `pnpm test`: para estos componentes no dice nada.
+
+**Estado** (`s1-fichas-a`): sigue sin acción de diseño, pero el hueco se ha estrechado por el camino. Esta rama añade `.test.tsx` a `AsyncSelect`, `AsyncMultiSelect`, `CalendarPlanner`, `CalendarRoster` y `FileUpload`, todos ejecutados por `pnpm test` (sin Chromium). De los 18, ahora nueve tienen prueba en jsdom.
 
 ### A14 · `DateTimeField`: alcanza el CSS de otro componente — **baja**
 

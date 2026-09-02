@@ -4,7 +4,7 @@
   gap: var(--annotation-thread-gap);
   padding-block: var(--annotation-thread-padding-block);
   padding-inline: var(--annotation-thread-padding-inline);
-  border: var(--annotation-thread-border-width) solid var(--annotation-thread-border-color);
+  border: var(--annotation-thread-border-width) var(--annotation-thread-border-style) var(--annotation-thread-border-color);
 }
 
 /* Un hilo resuelto se retira: sigue ahí, pero deja de pedir atención. */
@@ -66,7 +66,7 @@
   flex-direction: column;
   gap: var(--annotation-thread-items-gap);
   padding-inline-start: var(--annotation-thread-reply-indent);
-  border-inline-start: var(--annotation-thread-reply-guide-width) solid var(--annotation-thread-reply-guide-color);
+  border-inline-start: var(--annotation-thread-reply-guide-width) var(--annotation-thread-reply-guide-style) var(--annotation-thread-reply-guide-color);
 }
 
 .annotation-thread__replies-label {

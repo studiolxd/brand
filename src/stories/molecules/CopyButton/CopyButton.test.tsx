@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createRef } from 'react';
 import { CopyButton } from './CopyButton';
 
 function mockClipboard(writeText = vi.fn().mockResolvedValue(undefined)) {
@@ -96,5 +97,21 @@ describe('CopyButton', () => {
     mockClipboard();
     render(<CopyButton value="x">Copiar</CopyButton>);
     expect(screen.getByRole('button')).not.toHaveClass('button--icon-only');
+  });
+
+  it('reenvía el ref al botón, con y sin texto', () => {
+    const soloIcono = createRef<HTMLButtonElement>();
+    const conTexto = createRef<HTMLButtonElement>();
+    mockClipboard();
+
+    render(
+      <>
+        <CopyButton ref={soloIcono} value="a" />
+        <CopyButton ref={conTexto} value="b">Copiar clave</CopyButton>
+      </>,
+    );
+
+    expect(soloIcono.current?.tagName).toBe('BUTTON');
+    expect(conTexto.current).toHaveTextContent('Copiar clave');
   });
 });

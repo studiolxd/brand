@@ -55,25 +55,24 @@ const DEFAULT_DATE_FORMAT: Intl.DateTimeFormatOptions = {
   day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
 };
 
-function Anotacion({
-  entry, locale, dateFormat, editedLabel, esRaiz,
+function Annotation({
+  entry, locale, dateFormat, editedLabel,
 }: {
   entry: AnnotationEntry;
   locale: string;
   dateFormat: Intl.DateTimeFormatOptions;
   editedLabel: string;
-  esRaiz: boolean;
 }) {
-  const fecha = entry.date instanceof Date ? entry.date : new Date(entry.date);
-  const legible = new Intl.DateTimeFormat(locale, dateFormat).format(fecha);
+  const date = entry.date instanceof Date ? entry.date : new Date(entry.date);
+  const formatted = new Intl.DateTimeFormat(locale, dateFormat).format(date);
 
   return (
-    <article className={['annotation-thread__item', esRaiz ? 'annotation-thread__item--root' : ''].filter(Boolean).join(' ')}>
+    <article className="annotation-thread__item">
       <header className="annotation-thread__header">
         {entry.avatar && <span className="annotation-thread__avatar">{entry.avatar}</span>}
         <span className="annotation-thread__author">{entry.author}</span>
         {/* `datetime` en ISO: la fecha visible está formateada, la de máquina no. */}
-        <time className="annotation-thread__date" dateTime={fecha.toISOString()}>{legible}</time>
+        <time className="annotation-thread__date" dateTime={date.toISOString()}>{formatted}</time>
         {entry.edited && <span className="annotation-thread__edited">{editedLabel}</span>}
       </header>
       <div className="annotation-thread__body">{entry.body}</div>
@@ -109,39 +108,39 @@ export function AnnotationThread({
   className,
   ...rest
 }: AnnotationThreadProps) {
-  const resuelto = status === 'resolved';
+  const isResolved = status === 'resolved';
 
   const classes = [
     'annotation-thread',
-    resuelto ? 'annotation-thread--resolved' : '',
+    isResolved ? 'annotation-thread--resolved' : '',
     className ?? '',
   ].filter(Boolean).join(' ');
 
+  // El estado no se emite además como `data-status`: lo dice ya el modificador
+  // `--resolved`, y ningún CSS leía el atributo.
   return (
-    <article className={classes} aria-label={label} data-status={status} {...rest}>
+    <article className={classes} aria-label={label} {...rest}>
       <div className="annotation-thread__status">
-        <Tag variant={resuelto ? 'success' : 'warning'}>{resuelto ? resolvedLabel : openLabel}</Tag>
+        <Tag variant={isResolved ? 'success' : 'warning'}>{isResolved ? resolvedLabel : openLabel}</Tag>
       </div>
 
-      <Anotacion
+      <Annotation
         entry={annotation}
         locale={locale}
         dateFormat={dateFormat}
         editedLabel={editedLabel}
-        esRaiz
       />
 
       {replies.length > 0 && (
         <div className="annotation-thread__replies">
           <p className="annotation-thread__replies-label">{repliesLabel(replies.length)}</p>
           {replies.map((entry) => (
-            <Anotacion
+            <Annotation
               key={entry.id}
               entry={entry}
               locale={locale}
               dateFormat={dateFormat}
               editedLabel={editedLabel}
-              esRaiz={false}
             />
           ))}
         </div>

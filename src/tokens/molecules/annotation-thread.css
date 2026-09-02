@@ -3,6 +3,8 @@
  */
 
 :root {
+  --annotation-thread-border-style: solid; /** Estilo del borde del hilo */
+  --annotation-thread-reply-guide-style: solid; /** Estilo de la guía de respuestas */
   --annotation-thread-gap: var(--spacing-4); /** Separación entre las piezas del hilo */
   --annotation-thread-padding-block: var(--spacing-4); /** Aire vertical del hilo */
   --annotation-thread-padding-inline: var(--spacing-4); /** Aire horizontal del hilo */

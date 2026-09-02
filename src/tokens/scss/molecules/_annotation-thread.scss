@@ -3,11 +3,13 @@
 
 $lxd-annotation-thread-gap: 1rem; // Separación entre las piezas del hilo
 $lxd-annotation-thread-border-width: 1px; // Grosor del borde del hilo
+$lxd-annotation-thread-border-style: solid; // Estilo del borde del hilo
 $lxd-annotation-thread-border-color: #d0d0d0; // Borde del hilo
 $lxd-annotation-thread-padding-block: 1rem; // Aire vertical del hilo
 $lxd-annotation-thread-padding-inline: 1rem; // Aire horizontal del hilo
 $lxd-annotation-thread-reply-indent: 1.5rem; // Sangría de las respuestas respecto a la anotación que abre el hilo
 $lxd-annotation-thread-reply-guide-width: 1px; // Grosor de la guía que acompaña a las respuestas
+$lxd-annotation-thread-reply-guide-style: solid; // Estilo de la guía de respuestas
 $lxd-annotation-thread-reply-guide-color: #d0d0d0; // Color de la guía de respuestas
 $lxd-annotation-thread-item-gap: 0.5rem; // Separación entre la cabecera, el cuerpo y las acciones de una anotación
 $lxd-annotation-thread-items-gap: 1rem; // Separación entre anotaciones

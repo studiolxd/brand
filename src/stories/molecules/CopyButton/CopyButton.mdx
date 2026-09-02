@@ -68,6 +68,8 @@ El resto —altura, relleno, radio, foco, colores— son los de `Button`, y se p
 
 ## Accesibilidad
 
+El `ref` va al `<button>` —el componente devuelve además la región viva, que no es enfocable—, así que se puede enfocar desde fuera como cualquier otro botón del sistema.
+
 - Sin rótulo visible, el botón lleva `aria-label`: un botón de solo icono sin nombre no existe para un lector de pantalla.
 - El acuse viaja por dos canales, forma y texto, así que no depende de ver el icono ni de distinguir un color.
 - El fallo del portapapeles se anuncia por el mismo canal que el éxito.

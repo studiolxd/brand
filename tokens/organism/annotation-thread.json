@@ -2,11 +2,13 @@
   "annotation-thread": {
     "gap":                    { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Separación entre las piezas del hilo" },
     "border-width":           { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor del borde del hilo" },
+    "border-style":           { "$value": "solid",                    "$type": "string",    "$description": "Estilo del borde del hilo" },
     "border-color":           { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Borde del hilo" },
     "padding-block":          { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire vertical del hilo" },
     "padding-inline":         { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire horizontal del hilo" },
     "reply-indent":           { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Sangría de las respuestas respecto a la anotación que abre el hilo" },
     "reply-guide-width":      { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la guía que acompaña a las respuestas" },
+    "reply-guide-style":      { "$value": "solid",                    "$type": "string",    "$description": "Estilo de la guía de respuestas" },
     "reply-guide-color":      { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Color de la guía de respuestas" },
     "item-gap":               { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Separación entre la cabecera, el cuerpo y las acciones de una anotación" },
     "items-gap":              { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Separación entre anotaciones" },
