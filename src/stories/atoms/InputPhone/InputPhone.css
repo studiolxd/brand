@@ -65,7 +65,7 @@
   width: var(--input-phone-country-icon-size);
   flex-shrink: 0;
   transform: rotate(90deg);
-  transition: transform var(--input-transition-duration) var(--motion-easing-default);
+  transition: transform var(--input-transition-duration) var(--input-phone-country-icon-transition-easing);
 }
 
 .input-phone__country[data-popup-open] .input-phone__country-icon {
@@ -90,7 +90,7 @@
 .input-phone__country-item {
   display: flex;
   align-items: center;
-  padding-block: var(--spacing-2);
+  padding-block: var(--input-phone-country-item-padding-block);
   padding-inline: var(--input-padding-inline);
   font-family: var(--input-font-family);
   font-size: var(--input-font-size);

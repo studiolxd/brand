@@ -31,7 +31,7 @@
 
 .async-multi-select.async-multi-select--disabled {
   opacity: 0.5;
-  cursor: not-allowed;
+  cursor: var(--async-multi-select-disabled-cursor);
   pointer-events: none;
 }
 
@@ -96,7 +96,7 @@
   }
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: var(--async-multi-select-disabled-cursor);
   }
 }
 

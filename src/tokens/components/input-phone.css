@@ -13,6 +13,8 @@
   --input-phone-country-gap: var(--spacing-1); /** Separación entre bandera/código y chevron en el selector de país */
   --input-phone-country-border-width: var(--border-width-default); /** Grosor del separador entre país y número */
   --input-phone-country-border-color: var(--color-primary); /** Color del separador */
+  --input-phone-country-icon-transition-easing: var(--input-transition-easing); /** Curva del giro del chevron: la de los campos */
+  --input-phone-country-item-padding-block: var(--select-item-padding-block); /** Aire vertical de cada país en la lista: el de las opciones del Select */
   --input-phone-country-item-highlighted-bg: var(--select-item-highlighted-bg); /** Relleno del país resaltado en la lista — el del Select: la inversión de marca */
   --input-phone-country-item-highlighted-color: var(--select-item-highlighted-color); /** Texto del país resaltado — el del Select: el prefijo lo hereda por `currentColor` */
 }

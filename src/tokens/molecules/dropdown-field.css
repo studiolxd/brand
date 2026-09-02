@@ -7,6 +7,9 @@
   --dropdown-field-sm-height: var(--size-component-sm); /** Altura — sm */
   --dropdown-field-lg-height: var(--size-component-lg); /** Altura — lg */
   --dropdown-field-content-gap: var(--spacing-2); /** Entre el contenido del control y el chevron */
+  --dropdown-field-icon-transition-easing: var(--motion-easing-default); /** Curva del giro del chevron */
+  --dropdown-field-disabled-opacity: var(--opacity-disabled); /** Opacidad del control deshabilitado */
+  --dropdown-field-disabled-cursor: var(--input-disabled-cursor); /** Cursor del control deshabilitado: el de los campos */
   --dropdown-field-height: var(--control-height); /** El control mide la talla del sistema (md) */
   --dropdown-field-sm-font-size: var(--select-sm-font-size); /** Cuerpo — sm (el del Select) */
   --dropdown-field-value-icon-size: var(--menu-item-icon-size); /** Icono dentro del control: la misma talla que en las opciones del menú, para que plegado y desplegado casen */
