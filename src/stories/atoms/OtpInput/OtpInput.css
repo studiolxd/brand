@@ -1,10 +1,12 @@
-[data-otp-input] {
+/* Las celdas son `Input` del sistema: de ahí salen caja, borde, foco, error y
+   talla. Lo propio del OTP es la fila y el ancho de una celda de un dígito. */
+.otp-input {
   display: flex;
-  gap: var(--spacing-2);
+  gap: var(--otp-input-gap);
 }
 
-[data-otp-input] .input {
-  text-align: center;
-  width: 3.5ch;
+.otp-input__cell {
+  inline-size: var(--otp-input-cell-inline-size);
   padding-inline: 0;
+  text-align: center;
 }

@@ -1,0 +1,111 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as NumberInputStories from "./NumberInput.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import {
+  numberInputBaseTokens,
+  numberInputBtnTokens,
+  numberInputFocusTokens,
+  numberInputErrorTokens,
+  numberInputDisabledTokens,
+  numberInputSizeTokens,
+} from "../../../tokens/components/number-input";
+
+<Meta of={NumberInputStories} />
+
+# NumberInput
+
+Cantidad con incremento y decremento: los dos botones flanquean la cifra dentro de una sola
+caja. Es el control de una **cantidad pequeña y acotada** —plazas, unidades, un paso de
+minutos—, no el de un importe libre; para eso está `Input`.
+
+Es el **control suelto**. Con etiqueta, ayuda y mensaje de error, el componente es
+`NumberInputField`.
+
+## Por defecto
+
+<Canvas of={NumberInputStories.Default} />
+
+## Con mínimo y máximo
+
+Al llegar al extremo, el botón de ese lado se deshabilita; los valores escritos a mano también
+se recortan al rango.
+
+<Canvas of={NumberInputStories.WithMinMax} />
+
+## Tallas
+
+<Canvas of={NumberInputStories.Sizes} />
+
+## Error
+
+<Canvas of={NumberInputStories.Error} />
+
+## Deshabilitado y solo lectura
+
+<Canvas of={NumberInputStories.Disabled} />
+<Canvas of={NumberInputStories.ReadOnly} />
+
+## Controlado
+
+<Canvas of={NumberInputStories.Controlled} />
+
+---
+
+## Superficie oscura
+
+<Canvas of={NumberInputStories.SuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+El campo es un `<input type="text">` con `inputMode` numérico, no un `type="number"`: el
+número nativo se deja rodar con la rueda del ratón y acepta notación científica. El
+`inputMode` levanta el teclado numérico en el móvil y el `pattern` filtra lo que se escribe.
+
+Los dos botones quedan **fuera del recorrido de tabulación** (`tabIndex={-1}`): quien usa el
+teclado escribe la cifra directamente, y pararse en dos botones por cada cantidad sería ruido.
+Sus nombres accesibles son props traducibles (`decrementLabel`, `incrementLabel`).
+
+El alto es **mínimo, no fijo**: con el texto ampliado al 200 % (WCAG 1.4.4) la cifra y los
+botones crecen y la caja crece con ellos.
+
+## Uso
+
+```tsx
+import { NumberInput } from '@studiolxd/brand/number-input';
+
+<NumberInput min={1} max={20} defaultValue={4} aria-label="Plazas" onChange={setPlazas} />
+```
+
+Con `decimal` el campo acepta coma y punto como separador y los normaliza a punto.
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={numberInputBaseTokens} />
+
+### Botones
+
+<TokenTable tokens={numberInputBtnTokens} />
+
+### Foco
+
+<TokenTable tokens={numberInputFocusTokens} />
+
+### Error
+
+<TokenTable tokens={numberInputErrorTokens} />
+
+### Deshabilitado
+
+<TokenTable tokens={numberInputDisabledTokens} />
+
+### Tallas
+
+<TokenTable tokens={numberInputSizeTokens} />
+
+## Props
+
+<ArgTypes of={NumberInputStories} />

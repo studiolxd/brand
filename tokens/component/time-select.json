@@ -1,6 +1,8 @@
 {
   "time-select": {
     "gap": { "$value": "{spacing.1}", "$type": "dimension", "$description": "Espacio entre selector de horas, separador y selector de minutos" },
+    "sep-font-family": { "$value": "{font-family.sans}", "$type": "string", "$description": "Familia tipográfica del separador «:»" },
+    "sep-line-height": { "$value": "{line-height.none}", "$type": "number", "$description": "Interlineado del separador «:»: sin holgura, para que quede a la altura de los desplegables" },
     "sep-color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Color del separador :" },
     "surface-dark-sep-color":                    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del separador «:» — surface-dark" }
   }

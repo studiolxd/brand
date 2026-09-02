@@ -53,6 +53,13 @@ export const Controlled: Story = {
   },
 };
 
+/** Sobre banda oscura: caja, píldoras y desplegable con su par oscuro. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { defaultValue: ['design', 'dev'] },
+};
+
 /** Con valores preseleccionados — pills visibles en el trigger */
 export const WithDefaultValue: Story = {
   name: 'With default value',

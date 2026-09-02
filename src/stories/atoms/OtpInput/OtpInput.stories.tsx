@@ -140,6 +140,12 @@ export const PasteSupport: Story = {
   },
 };
 
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { value: '1234', length: 6, 'aria-label': 'Código de verificación' },
+};
+
 /** Test: el control mide la talla del sistema (32/40/48), como Button y Select. */
 export const ContratoTalla: Story = {
   name: 'Test — talla del sistema',

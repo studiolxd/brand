@@ -1,0 +1,84 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as OtpInputStories from "./OtpInput.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { otpInputTokens } from "../../../tokens/components/otp-input";
+
+<Meta of={OtpInputStories} />
+
+# OtpInput
+
+Código de un solo uso repartido en celdas de un dígito. Cada celda es un `Input` del
+sistema: de ahí salen la caja, el borde, el anillo de foco, el error y la talla. Lo propio
+del OTP es la fila, el ancho de una celda y el comportamiento del teclado.
+
+Es el **control suelto**. Con etiqueta, ayuda y mensaje de error, el componente es
+`OtpField`.
+
+## Por defecto
+
+<Canvas of={OtpInputStories.Default} />
+
+## Tallas
+
+Las celdas miden lo que mide cualquier control del sistema: 32, 40 y 48px.
+
+<Canvas of={OtpInputStories.Sizes} />
+
+## Error
+
+<Canvas of={OtpInputStories.ErrorState} />
+
+## Deshabilitado
+
+<Canvas of={OtpInputStories.Disabled} />
+
+## Con valor
+
+<Canvas of={OtpInputStories.Prefilled} />
+
+---
+
+## Superficie oscura
+
+El componente no tiene color propio: la tinta, el borde y el fondo de cada celda son los
+del `Input`, que ya trae su par oscuro. Sobre `.surface-dark` no hay nada que remapear.
+
+<Canvas of={OtpInputStories.SuperficieOscura} />
+
+---
+
+## Teclado
+
+| Tecla | Qué hace |
+| --- | --- |
+| Un dígito | Lo escribe y salta a la celda siguiente |
+| `Retroceso` | Borra la celda; si ya estaba vacía, borra la anterior y va a ella |
+| `←` / `→` | Mueve entre celdas sin cambiar el valor |
+| Pegar | Reparte los dígitos del portapapeles desde la celda donde se pega |
+
+La primera celda lleva `autocomplete="one-time-code"`: en iOS y macOS el código llega del SMS
+sin teclearlo.
+
+## Accesibilidad
+
+Las celdas viven en un `role="group"`: el lector anuncia el conjunto una vez y luego cada
+celda por su `aria-label` («Dígito 3 de 6», traducible con `digitLabel`). Suelto, el grupo se
+nombra con `aria-label`; dentro de `OtpField` lo nombra la etiqueta por `aria-labelledby`.
+
+## Uso
+
+```tsx
+import { OtpInput } from '@studiolxd/brand/otp-input';
+
+<OtpInput length={6} aria-label="Código de verificación" onComplete={verificar} />
+```
+
+El `ref` va a la **primera celda**: es la que enfoca react-hook-form al fallar la validación.
+
+## Tokens
+
+<TokenTable tokens={otpInputTokens} />
+
+## Props
+
+<ArgTypes of={OtpInputStories} />

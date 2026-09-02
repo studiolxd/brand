@@ -3,6 +3,7 @@
  */
 
 :root {
+  --menu-button-line-shift: 6px; /** Cuánto recorre cada barra al plegarse en aspa. Va en unidades del viewBox del icono (24), donde 6 es el paso entre las tres líneas del glifo `menu`: con ese recorrido la primera y la tercera aterrizan exactamente sobre el aspa de `close` */
   --menu-button-size-sm: var(--size-component-sm); /** Lado del botón en talla sm */
   --menu-button-size-md: var(--size-component-md); /** Lado del botón en talla md (por defecto) */
   --menu-button-size-lg: var(--size-component-lg); /** Lado del botón en talla lg: la cabecera del sitio, con el glifo a 48px */

@@ -1,0 +1,79 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as TimeSelectStories from "./TimeSelect.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { timeSelectTokens, timeSelectDarkTokens } from "../../../tokens/components/time-select";
+
+<Meta of={TimeSelectStories} />
+
+# TimeSelect
+
+Una hora repartida en **dos desplegables**, horas y minutos, separados por dos puntos. Son dos
+`Select` del sistema: de ahí salen la caja, el teclado, el foco y el error. Los minutos van a
+pasos (`step`, 5 por defecto), que es como se pide una hora en una agenda: nadie elige el
+minuto 37.
+
+Es el **control suelto**. Con etiqueta, ayuda y mensaje de error, el componente es `TimeField`.
+Para una fecha con hora, `DateTimeField`.
+
+## Por defecto
+
+<Canvas of={TimeSelectStories.Default} />
+
+## Con valor
+
+<Canvas of={TimeSelectStories.WithValue} />
+
+## Paso de 15 minutos
+
+<Canvas of={TimeSelectStories.Step15} />
+
+## Tallas
+
+<Canvas of={TimeSelectStories.SizeSm} />
+<Canvas of={TimeSelectStories.SizeLg} />
+
+## Deshabilitado
+
+<Canvas of={TimeSelectStories.Disabled} />
+
+---
+
+## Superficie oscura
+
+Los dos desplegables traen su propio par oscuro; lo único propio del componente es el
+separador «:», que sube a `color.text.on-dark`.
+
+<Canvas of={TimeSelectStories.SuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+Los dos desplegables viven en un `role="group"`: la etiqueta del campo nombra al grupo
+(`aria-labelledby`) y cada desplegable conserva el suyo, «Horas» y «Minutos» —props
+traducibles (`hoursLabel`, `minutesLabel`)—. Así el lector anuncia una sola vez de qué hora se
+trata y luego qué parte se está eligiendo. Los dos puntos son decoración: van `aria-hidden`.
+
+## Uso
+
+```tsx
+import { TimeSelect } from '@studiolxd/brand/time-select';
+
+<TimeSelect value={hora} step={15} aria-labelledby="lbl-inicio" onChange={setHora} />
+```
+
+El valor es `{ h, m }`, no una cadena: la hora se manipula como números y solo se formatea al
+enviarla. Con `name` se monta un input oculto con `HH:MM`. El `ref` va al desplegable de
+**horas**, que es el primero que se enfoca.
+
+## Tokens
+
+<TokenTable tokens={timeSelectTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={timeSelectDarkTokens} />
+
+## Props
+
+<ArgTypes of={TimeSelectStories} />

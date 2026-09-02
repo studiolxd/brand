@@ -2,4 +2,6 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-time-select-gap: 0.25rem; // Espacio entre selector de horas, separador y selector de minutos
+$lxd-time-select-sep-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica del separador «:»
+$lxd-time-select-sep-line-height: 1; // Interlineado del separador «:»: sin holgura, para que quede a la altura de los desplegables
 $lxd-time-select-sep-color: #111e30; // Color del separador :

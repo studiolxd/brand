@@ -19,6 +19,13 @@ export const SinContador: Story = { args: { count: 0 } };
 
 export const Tope: Story = { args: { count: 120 } };
 
+/** En la barra oscura de la aplicación: la campana sube a tinta blanca (par
+    oscuro del `Button` ghost) y el contador se queda rojo, que es universal. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+};
+
 export const Contrato: Story = {
   name: 'Test — nombre con el contador, badge volando, tope',
   tags: ['!dev'],

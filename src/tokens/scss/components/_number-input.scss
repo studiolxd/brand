@@ -22,6 +22,7 @@ $lxd-number-input-btn-hover-line-width: 1px; // Grosor de la línea de hover de 
 $lxd-number-input-btn-hover-line-color: #111e30; // Color de la línea de hover de los botones +/−
 $lxd-number-input-btn-separator-color: #111e30; // Color del separador entre botón y campo
 $lxd-number-input-btn-font-size: 1.25rem; // Tamaño del símbolo +/−
+$lxd-number-input-btn-line-height: 1; // Interlineado del símbolo +/−: sin holgura, para que el glifo quede centrado en el cuadrado del botón
 $lxd-number-input-focus-ring-width: 2px; // Grosor del focus ring
 $lxd-number-input-focus-ring-inset-offset: 1px; // Gap entre borde y focus ring
 $lxd-number-input-focus-ring-color: #111e30; // Color del focus ring

@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Textarea } from './Textarea';
-import { Container } from '../Container/Container';
 
 const meta: Meta<typeof Textarea> = {
   title: 'Atoms/Textarea',
@@ -90,14 +89,13 @@ export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'No 
 export const SoloLectura: Story = { args: { readOnly: true, defaultValue: 'Valor de solo lectura' } };
 
 export const SuperficieOscura: Story = {
-  tags: ['!dev'],
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
   render: (args) => (
-    <Container surface="dark" space="md">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '24rem' }}>
-        <Textarea {...args} rows={3} />
-        <Textarea {...args} rows={3} error />
-      </div>
-    </Container>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '24rem' }}>
+      <Textarea {...args} rows={3} />
+      <Textarea {...args} rows={3} error />
+    </div>
   ),
 };
 

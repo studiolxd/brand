@@ -4,6 +4,8 @@
 
 :root {
   --time-select-gap: var(--spacing-1); /** Espacio entre selector de horas, separador y selector de minutos */
+  --time-select-sep-font-family: var(--font-family-sans); /** Familia tipográfica del separador «:» */
+  --time-select-sep-line-height: var(--line-height-none); /** Interlineado del separador «:»: sin holgura, para que quede a la altura de los desplegables */
   --time-select-sep-color: var(--color-text-on-light); /** Color del separador : */
 }
 

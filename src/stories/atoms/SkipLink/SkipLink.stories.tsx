@@ -21,6 +21,13 @@ export const Revelado: Story = {
   parameters: { pseudo: { focusVisible: true } },
 };
 
+/** Con el foco sobre banda oscura: el enlace pinta su propio par de color
+    (`surface-dark-bg`, `surface-dark-color`), no el de la superficie. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark', pseudo: { focusVisible: true } },
+};
+
 export const Contrato: Story = {
   name: 'Test — oculto hasta el foco, y entonces sobre todo',
   tags: ['!dev'],

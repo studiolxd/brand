@@ -1,0 +1,102 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as SwitcherStories from "./Switcher.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import {
+  switcherBaseTokens,
+  switcherStateTokens,
+  switcherSizeTokens,
+  switcherDarkTokens,
+} from "../../../tokens/components/switcher";
+
+<Meta of={SwitcherStories} />
+
+# Switcher
+
+Interruptor de dos estados que **surte efecto al momento**: activar las notificaciones, poner
+un curso en visible. Es la diferencia con `Checkbox`, que marca una casilla y espera al envío
+del formulario.
+
+Está construido sobre el **Switch de Base UI**: `role="switch"`, teclado y estado marcado
+vienen del motor. Es el control suelto; con etiqueta y ayuda, el componente es `SwitcherField`.
+
+## Apagado y encendido
+
+<Canvas of={SwitcherStories.Default} />
+<Canvas of={SwitcherStories.On} />
+
+## Tallas
+
+El dibujo se mide en `em`: el interruptor crece con el texto que lo rodea.
+
+<Canvas of={SwitcherStories.Sizes} />
+
+## Deshabilitado
+
+<Canvas of={SwitcherStories.Disabled} />
+<Canvas of={SwitcherStories.DisabledOn} />
+
+## Error
+
+El track no tiene borde, así que el error se dice con un anillo alrededor.
+
+<Canvas of={SwitcherStories.ConError} />
+
+## Foco
+
+<Canvas of={SwitcherStories.FocusVisible} />
+
+---
+
+## Superficie oscura
+
+El track encendido no puede quedarse en prusia —sería el color del propio lienzo—: pasa a
+lavanda, el par de `Button primary`. El anillo de foco y el de error suben a sus versiones
+`-on-dark`.
+
+<Canvas of={SwitcherStories.SuperficieOscura} />
+
+---
+
+## Accesibilidad
+
+El **nombre accesible no es una prop**: lo pone un `<label htmlFor>` (o `SwitcherField`), un
+`aria-label` o un `aria-labelledby`. El `id` se fija sobre el `<button>` de verdad, no sobre el
+input oculto de Base UI, para que un `<label htmlFor>` nombre al interruptor y no al input.
+
+Un interruptor **no anuncia el resultado de la acción**, solo su estado: si activarlo dispara
+algo que tarda o puede fallar, el producto debe informarlo aparte.
+
+## Uso
+
+```tsx
+import { Switcher } from '@studiolxd/brand/switcher';
+
+<label htmlFor="avisos">Avisos por correo</label>
+<Switcher id="avisos" defaultChecked onCheckedChange={guardar} />
+```
+
+`onCheckedChange` recibe **solo el estado**: el segundo argumento de Base UI (los detalles del
+evento) no forma parte de la API del sistema. Para componer con otro elemento, la prop `render`
+de Base UI.
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={switcherBaseTokens} />
+
+### Foco, error y deshabilitado
+
+<TokenTable tokens={switcherStateTokens} />
+
+### Tallas
+
+<TokenTable tokens={switcherSizeTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={switcherDarkTokens} />
+
+## Props
+
+<ArgTypes of={SwitcherStories} />

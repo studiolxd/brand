@@ -7,6 +7,7 @@ $lxd-menu-button-size-lg: 3rem; // Lado del botón en talla lg: la cabecera del 
 $lxd-menu-button-color: #111e30; // Color del glifo
 $lxd-menu-button-transition-duration: 250ms; // Duración del paso de barras a aspa
 $lxd-menu-button-transition-easing: ease-in-out; // Curva del paso de barras a aspa: movimiento
+$lxd-menu-button-line-shift: 6px; // Cuánto recorre cada barra al plegarse en aspa. Va en unidades del viewBox del icono (24), donde 6 es el paso entre las tres líneas del glifo `menu`: con ese recorrido la primera y la tercera aterrizan exactamente sobre el aspa de `close`
 $lxd-menu-button-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-menu-button-focus-ring-offset: 2px; // Separación del anillo de foco
 $lxd-menu-button-focus-ring-color: #111e30; // Color del anillo de foco

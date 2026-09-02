@@ -1,0 +1,8 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --otp-input-cell-inline-size: 3.5ch; /** Anchura de una celda: medida en caracteres para que el dígito quepa centrado a cualquier talla de texto, sin recortarse con el texto ampliado (WCAG 1.4.4) */
+  --otp-input-gap: var(--spacing-2); /** Separación entre celdas del código */
+}

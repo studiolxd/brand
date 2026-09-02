@@ -26,9 +26,8 @@
 }
 
 /* Las tres líneas del icono animan por separado, cada una girando sobre su
-   propio centro (fill-box) y desplazándose después. Las longitudes van en
-   unidades del viewBox (24): 6 es el paso entre líneas del glifo, así que la
-   primera y la tercera aterrizan exactamente sobre el aspa de `close`. */
+   propio centro (fill-box) y desplazándose después. El recorrido sale de
+   `--menu-button-line-shift`, que va en unidades del viewBox del icono. */
 .menu-button__icon .icon__line {
   transform-box: fill-box;
   transform-origin: center;
@@ -38,12 +37,12 @@
 }
 
 .menu-button[aria-expanded="true"] .icon__line:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
+  transform: translateY(var(--menu-button-line-shift)) rotate(45deg);
 }
 .menu-button[aria-expanded="true"] .icon__line:nth-child(2) {
   opacity: 0;
   transform: scaleX(0);
 }
 .menu-button[aria-expanded="true"] .icon__line:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
+  transform: translateY(calc(-1 * var(--menu-button-line-shift))) rotate(-45deg);
 }

@@ -1,0 +1,6 @@
+{
+  "otp-input": {
+    "gap":               { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación entre celdas del código" },
+    "cell-inline-size":  { "$value": "3.5ch",       "$type": "dimension", "$description": "Anchura de una celda: medida en caracteres para que el dígito quepa centrado a cualquier talla de texto, sin recortarse con el texto ampliado (WCAG 1.4.4)" }
+  }
+}

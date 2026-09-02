@@ -42,6 +42,12 @@ export const FocoVisible: Story = {
   parameters: { pseudo: { focusVisible: true } },
 };
 
+/** Sobre banda oscura, que es donde vive en la cabecera del sitio. */
+export const SuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+};
+
 export const Comportamiento: Story = {
   name: 'Test — alterna y lo anuncia, y mide su talla',
   tags: ['!dev'],

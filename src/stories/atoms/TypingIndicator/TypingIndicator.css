@@ -11,7 +11,7 @@
   /* Cuadrados, no círculos: la geometría recta de la identidad. Sin border-radius. */
   background-color: var(--typing-indicator-dot-color);
   opacity: var(--typing-indicator-dot-opacity-inactive);
-  animation: typing-bounce var(--typing-indicator-animation-duration) var(--motion-easing-in-out) infinite;
+  animation: typing-bounce var(--typing-indicator-animation-duration) var(--typing-indicator-animation-easing) infinite;
 }
 
 .typing-indicator__dot:nth-child(2) {
@@ -38,5 +38,5 @@
 
 @keyframes typing-bounce {
   0%, 60%, 100% { opacity: var(--typing-indicator-dot-opacity-inactive); transform: translateY(0); }
-  30%            { opacity: 1; transform: translateY(-0.25rem); }
+  30%            { opacity: var(--typing-indicator-dot-opacity-active); transform: translateY(calc(-1 * var(--typing-indicator-dot-rise))); }
 }

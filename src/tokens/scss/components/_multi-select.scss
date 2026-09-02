@@ -33,6 +33,13 @@ $lxd-multi-select-pill-padding-block: 0.25rem; // Padding block de la pill
 $lxd-multi-select-pill-padding-inline: 0.5rem; // Padding inline de la pill
 $lxd-multi-select-pill-gap: 0.25rem; // Separación entre texto y botón × en la pill
 $lxd-multi-select-pill-font-size: 0.875rem; // Tamaño de fuente de la pill
+$lxd-multi-select-disabled-opacity: 0.4; // Opacidad del control deshabilitado: el mismo velo que el resto de controles del sistema
+$lxd-multi-select-disabled-cursor: not-allowed; // Cursor sobre el control deshabilitado
+$lxd-multi-select-pill-line-height: 1; // Interlineado de la píldora: sin holgura, la píldora la mide su propio aire
+$lxd-multi-select-pill-remove-opacity: 0.7; // Opacidad del aspa en reposo: presente pero en segundo plano. Literal a falta de un escalón intermedio en `opacity` global (ver notas de revisión)
+$lxd-multi-select-pill-remove-hover-opacity: 1; // Opacidad del aspa bajo el puntero. Literal a falta de un `opacity.full` global (ver notas de revisión)
+$lxd-multi-select-item-selected-font-weight: 700; // Peso de la opción ya elegida en la lista: lo elegido se dice con peso, no con relleno
+$lxd-multi-select-icon-transition-easing: ease; // Curva del giro del chevron al abrir
 $lxd-multi-select-values-gap: 0.25rem; // Separación entre pills
 $lxd-multi-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm
 $lxd-multi-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm

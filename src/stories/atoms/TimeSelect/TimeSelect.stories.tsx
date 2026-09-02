@@ -7,7 +7,6 @@ import type { TimeValue } from './TimeSelect';
 const meta: Meta<typeof TimeSelect> = {
   title: 'Atoms/TimeSelect',
   component: TimeSelect,
-  tags: ['autodocs'],
   args: {
     onChange: fn(),
   },
