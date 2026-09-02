@@ -180,7 +180,20 @@ Para texto que debe ser leído por lectores de pantalla pero invisible visualmen
 <span className="visually-hidden">...</span>
 ```
 
-Excepción: `Label` aplica `visually-hidden` directamente sobre el elemento `<label>` cuando `hidden={true}`, lo que es intencional (el label completo se oculta visualmente).
+Excepciones — **cuando la receta tiene que ir sobre un elemento que ya existe**, porque el
+`<span>` envolvente de `VisuallyHidden` rompería algo. Son estas tres, y no se amplían sin
+apuntarlas aquí:
+
+- `Label` aplica `visually-hidden` sobre el propio `<label>` cuando `hidden={true}`: lo que se
+  oculta es la etiqueta entera, no un texto dentro de ella.
+- `StarRating` la aplica sobre cada `<input type="radio">`: envolverlo en un `<span>` rompería
+  la relación `<label>`↔`<input>` de la que vive el control.
+- `Table` la aplica sobre el `<caption>`: el modelo de contenido de `<table>` no admite un
+  `<span>` ahí.
+
+El patrón común: si el nodo que hay que ocultar ya está fijado por el HTML (es el elemento del
+componente, o su sitio en la tabla no admite otro), la clase va sobre él; en cualquier otro
+caso, `<VisuallyHidden>`.
 
 ### Button como enlace
 

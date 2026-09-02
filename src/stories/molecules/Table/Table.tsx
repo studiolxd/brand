@@ -207,6 +207,9 @@ export function Table({ caption, children, size = 'md', className, ...rest }: Ta
   return (
     <div className="table__wrapper">
       <table className={classes} {...rest}>
+        {/* `visually-hidden` a pelo: el modelo de contenido de <table> no
+            admite el span de `<VisuallyHidden>` en el sitio del <caption>.
+            Excepción declarada en CLAUDE.md § «Accesibilidad — VisuallyHidden». */}
         {caption && <caption className="visually-hidden">{caption}</caption>}
         {children}
       </table>

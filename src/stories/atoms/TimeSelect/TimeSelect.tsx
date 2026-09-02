@@ -20,6 +20,8 @@ export interface TimeSelectProps {
   id?: string;
   /** Nombre del campo en el formulario: se monta un input oculto con `HH:MM`. */
   name?: string;
+  /** Campo obligatorio: se marca el grupo y los dos desplegables. */
+  required?: boolean;
   /** Id de la etiqueta que nombra el grupo (lo pone el campo). */
   'aria-labelledby'?: string;
   /** Ids de ayuda/error que describen el grupo (lo pone el campo). */
@@ -62,6 +64,7 @@ export const TimeSelect = forwardRef<HTMLButtonElement, TimeSelectProps>(functio
   error,
   id,
   name,
+  required,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
   onBlur,
@@ -111,6 +114,7 @@ export const TimeSelect = forwardRef<HTMLButtonElement, TimeSelectProps>(functio
       aria-labelledby={ariaLabelledBy}
       aria-describedby={ariaDescribedBy}
       aria-invalid={error || undefined}
+      aria-required={required || undefined}
     >
       <Select
         ref={ref}
@@ -121,6 +125,7 @@ export const TimeSelect = forwardRef<HTMLButtonElement, TimeSelectProps>(functio
         size={size}
         disabled={disabled}
         readOnly={readOnly}
+        required={required}
         aria-label={hoursLabel}
         aria-invalid={error}
         onValueChange={handleHourChange}
@@ -134,6 +139,7 @@ export const TimeSelect = forwardRef<HTMLButtonElement, TimeSelectProps>(functio
         size={size}
         disabled={disabled}
         readOnly={readOnly}
+        required={required}
         aria-label={minutesLabel}
         aria-invalid={error}
         onValueChange={handleMinuteChange}
