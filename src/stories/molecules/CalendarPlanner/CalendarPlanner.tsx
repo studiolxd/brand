@@ -120,7 +120,6 @@ export function CalendarPlanner({
   const modalTitleFormatter = new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   const weekdays = getWeekdayNames(locale, 'short');
-  const dayNumberFormatter = new Intl.DateTimeFormat(locale, { day: 'numeric' });
 
   const weeks = chunkWeeks(getCalendarDays(currentMonth));
 
@@ -204,9 +203,9 @@ export function CalendarPlanner({
                   onFocus={onDayClick ? () => grid.onCellFocus(date) : undefined}
                   onClick={onDayClick ? () => onDayClick(date, dayEvents) : undefined}
                 >
-                  <span className={numberClass} aria-label={dayNumberFormatter.format(date)}>
-                    {date.getDate()}
-                  </span>
+                  {/* Sin `aria-label`: en un `span` sin rol el atributo se
+                      ignora, y aquí solo repetía el número que ya se ve. */}
+                  <span className={numberClass}>{date.getDate()}</span>
 
                   <div className="calendar-planner__cell-body">
                     {renderDay ? (
