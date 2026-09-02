@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useState, useRef, useId, useCallback, type Ref } from 'react';
+import { forwardRef, useState, useRef, useId, useEffect, useCallback, type Ref } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
@@ -21,11 +21,24 @@ export interface AsyncSelectProps {
   disabled?: boolean;
   readOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * Milisegundos de rebote entre la última tecla y la llamada a `onSearch`.
+   * Default: 300. A 0 se busca en cada tecla.
+   */
+  debounceMs?: number;
   id?: string;
   /** Nombre del campo en el formulario: se monta un input oculto con el valor. */
   name?: string;
   /** Marca el estado de error: aplica la clase `async-select--error` y `aria-invalid`. */
   error?: boolean;
+  /**
+   * Marca el control como obligatorio: pone `aria-required` en el combobox.
+   * No se traslada a un `required` nativo porque lo que viaja en el formulario
+   * es un input oculto —un control no enfocable con `required` bloquea el envío
+   * sin poder enseñar el mensaje—: la validación la lleva el consumidor (o
+   * react-hook-form), como en el resto de campos compuestos del sistema.
+   */
+  required?: boolean;
   /** Se llama al salir del control (react-hook-form lo usa para validar). */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Se añade DESPUÉS de las clases propias del componente. */
@@ -80,9 +93,11 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   disabled,
   readOnly,
   size = 'md',
+  debounceMs = 300,
   id,
   name,
   error = false,
+  required,
   onBlur,
   className,
   'aria-label': ariaLabel,
@@ -101,6 +116,9 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   const [internalValue, setInternalValue] = useState<string | null>(null);
   const [internalSelectedOption, setInternalSelectedOption] = useState<AsyncSelectOption | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Cada búsqueda lleva número: solo la última manda. Sin esto, dos búsquedas
+  // seguidas pueden resolverse fuera de orden y pintar los resultados viejos.
+  const requestRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
@@ -112,26 +130,38 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
 
   const runSearch = useCallback(async (q: string) => {
+    const requestId = ++requestRef.current;
     setLoading(true);
     setHasSearched(false);
     try {
       const opts = await onSearch(q);
+      if (requestId !== requestRef.current) return;
       setResults(opts);
       setActiveIndex(-1); // reset active index when results change
     } catch {
+      if (requestId !== requestRef.current) return;
       setResults([]);
       setActiveIndex(-1);
     } finally {
-      setLoading(false);
-      setHasSearched(true);
+      if (requestId === requestRef.current) {
+        setLoading(false);
+        setHasSearched(true);
+      }
     }
   }, [onSearch]);
+
+  // Al desmontar: se cancela el rebote pendiente y se invalida la búsqueda en
+  // vuelo, para que su respuesta no intente pintar nada.
+  useEffect(() => () => {
+    requestRef.current += 1;
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+  }, []);
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const q = e.target.value;
     setQuery(q);
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => void runSearch(q), 300);
+    debounceRef.current = setTimeout(() => void runSearch(q), debounceMs);
   }
 
   function handleInputPointerDown(e: React.PointerEvent<HTMLInputElement>) {
@@ -158,8 +188,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
     setQuery('');
   }
 
-  function handleClear(e: React.MouseEvent) {
-    e.stopPropagation();
+  function clearSelection() {
     if (value === undefined) {
       setInternalValue(null);
       setInternalSelectedOption(null);
@@ -169,6 +198,11 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
     setResults([]);
     setHasSearched(false);
     inputRef.current?.focus();
+  }
+
+  function handleClear(e: React.MouseEvent) {
+    e.stopPropagation();
+    clearSelection();
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -193,6 +227,12 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
     } else if (e.key === 'Tab') {
       setOpen(false);
       setActiveIndex(-1);
+    } else if ((e.key === 'Backspace' || e.key === 'Delete') && query === '' && currentValue && !disabled && !readOnly) {
+      // El aspa es un atajo de ratón (fuera del tabulador, como en el resto de
+      // la familia): la salida con teclado es Retroceso sobre el hueco vacío,
+      // el mismo gesto que quita la última píldora en AsyncMultiSelect.
+      e.preventDefault();
+      clearSelection();
     } else if (!open && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault();
       setQuery(e.key);
@@ -200,7 +240,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
       setResults([]);
       setHasSearched(false);
       if (debounceRef.current) clearTimeout(debounceRef.current);
-      debounceRef.current = setTimeout(() => void runSearch(e.key), 300);
+      debounceRef.current = setTimeout(() => void runSearch(e.key), debounceMs);
     }
   }
 
@@ -253,6 +293,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
           aria-label={ariaLabel}
           aria-describedby={ariaDescribedby}
           aria-invalid={error || undefined}
+          aria-required={required || undefined}
           aria-expanded={open}
           aria-haspopup="listbox"
           // El listbox vive en un portal que solo existe abierto: cerrado, un
@@ -261,6 +302,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
           aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
           autoComplete="off"
           role="combobox"
+          aria-autocomplete="list"
           onBlur={onBlur}
         />
         {/* Lo que se envía con el formulario. */}

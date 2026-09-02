@@ -3,70 +3,70 @@
   display: flex;
   align-items: center;
   width: 100%;
-  block-size: var(--input-height);
+  block-size: var(--date-picker-height);
   text-align: start;
-  cursor: pointer;
+  cursor: var(--date-picker-cursor);
 
   padding-block: 0;
-  padding-inline: var(--input-padding-inline);
+  padding-inline: var(--date-picker-padding-inline);
 
-  font-family: var(--input-font-family);
-  font-size: var(--input-font-size);
-  line-height: var(--input-line-height);
-  font-weight: var(--input-font-weight);
-  color: var(--input-color);
-  background-color: var(--input-bg);
+  font-family: var(--date-picker-font-family);
+  font-size: var(--date-picker-font-size);
+  line-height: var(--date-picker-line-height);
+  font-weight: var(--date-picker-font-weight);
+  color: var(--date-picker-color);
+  background-color: var(--date-picker-bg);
 
-  border-width: var(--input-border-width);
-  border-style: var(--input-border-style);
-  border-color: var(--input-border-color);
-  border-radius: var(--input-border-radius);
+  border-width: var(--date-picker-border-width);
+  border-style: var(--date-picker-border-style);
+  border-color: var(--date-picker-border-color);
+  border-radius: var(--date-picker-border-radius);
 
   transition:
-    border-color var(--input-transition-duration) var(--input-transition-easing),
-    box-shadow   var(--input-transition-duration) var(--input-transition-easing);
+    border-color var(--date-picker-transition-duration) var(--date-picker-transition-easing),
+    box-shadow   var(--date-picker-transition-duration) var(--date-picker-transition-easing);
 }
 
 .date-picker__trigger--placeholder {
-  color: var(--input-placeholder-color);
+  color: var(--date-picker-placeholder-color);
 }
 
 .date-picker__trigger--error {
-  border-color: var(--input-error-border-color);
+  border-color: var(--date-picker-error-border-color);
 }
 
 .date-picker__trigger:focus-visible {
   outline: none;
-  border-color: var(--input-focus-border-color);
+  border-color: var(--date-picker-focus-border-color);
   box-shadow:
-    inset 0 0 0 var(--input-focus-ring-inset-offset) var(--input-bg),
-    inset 0 0 0 calc(var(--input-focus-ring-inset-offset) + var(--input-focus-ring-width)) var(--input-focus-ring-color);
+    inset 0 0 0 var(--date-picker-focus-ring-inset-offset) var(--date-picker-bg),
+    inset 0 0 0 calc(var(--date-picker-focus-ring-inset-offset) + var(--date-picker-focus-ring-width)) var(--date-picker-focus-ring-color);
 }
 
 .date-picker__trigger--error:focus-visible {
   box-shadow:
-    inset 0 0 0 var(--input-focus-ring-inset-offset) var(--input-error-bg),
-    inset 0 0 0 calc(var(--input-focus-ring-inset-offset) + var(--input-focus-ring-width)) var(--input-error-focus-ring-color);
+    inset 0 0 0 var(--date-picker-focus-ring-inset-offset) var(--date-picker-error-bg),
+    inset 0 0 0 calc(var(--date-picker-focus-ring-inset-offset) + var(--date-picker-focus-ring-width)) var(--date-picker-error-focus-ring-color);
 }
 
 .date-picker__trigger:disabled {
-  cursor: var(--input-disabled-cursor);
-  background-color: var(--input-disabled-bg);
-  color: var(--input-disabled-color);
-  border-color: var(--input-disabled-border-color);
+  cursor: var(--date-picker-disabled-cursor);
+  background-color: var(--date-picker-disabled-bg);
+  color: var(--date-picker-disabled-color);
+  border-color: var(--date-picker-disabled-border-color);
 }
 
 /* ─── Tallas — cambian la altura, no el padding vertical ─────────── */
 .date-picker__trigger--sm {
-  --input-height: var(--input-sm-height);
-  padding-inline: var(--input-sm-padding-inline);
-  font-size: var(--input-sm-font-size);
+  --date-picker-height: var(--date-picker-sm-height);
+  padding-inline: var(--date-picker-sm-padding-inline);
+  font-size: var(--date-picker-sm-font-size);
 }
 
 .date-picker__trigger--lg {
-  --input-height: var(--input-lg-height);
-  padding-inline: var(--input-lg-padding-inline);
-  font-size: var(--input-lg-font-size);
+  --date-picker-height: var(--date-picker-lg-height);
+  padding-inline: var(--date-picker-lg-padding-inline);
+  font-size: var(--date-picker-lg-font-size);
 }
 
 /* ─── Popover sin padding propio (el Calendar controla el suyo) ─── */

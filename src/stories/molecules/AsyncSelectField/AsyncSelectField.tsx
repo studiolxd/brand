@@ -26,6 +26,8 @@ export interface AsyncSelectFieldProps {
   name?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  /** Marca el control como obligatorio (`aria-required` en el combobox). */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -33,6 +35,8 @@ export interface AsyncSelectFieldProps {
   /** Texto de ayuda, enlazado por `aria-describedby`. */
   helperText?: string;
   size?: 'sm' | 'md' | 'lg';
+  /** Milisegundos de rebote antes de llamar a `onSearch`. Default: 300. */
+  debounceMs?: number;
   /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
   className?: string;
   /** Texto cuando la búsqueda no devuelve nada. Default: "Sin resultados". */
@@ -63,6 +67,8 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
   disabled,
   readOnly,
   size: sizeProp,
+  debounceMs,
+  required,
   error = false,
   errorMessage,
   helperText,
@@ -99,6 +105,8 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
         disabled={disabled}
         readOnly={readOnly}
         size={size}
+        debounceMs={debounceMs}
+        required={required}
         error={hasError}
         emptyMessage={emptyMessage}
         loadingLabel={loadingLabel}

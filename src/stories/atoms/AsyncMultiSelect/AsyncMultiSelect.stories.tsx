@@ -48,6 +48,14 @@ export const WithInitialValues: Story = {
   },
 };
 
+export const NoControlado: Story = {
+  name: 'No controlado',
+  args: {
+    defaultValue: ['1'],
+    selectedOptions: [{ value: '1', label: 'Ana García' }],
+  },
+};
+
 export const Disabled: Story = {
   args: {
     value: ['2'],

@@ -7,7 +7,6 @@
   --file-upload-drag-border-style: solid; /** Estilo de borde en drag activo */
   --file-upload-error-border-style: solid; /** Estilo de borde en error */
   --file-upload-disabled-opacity: 0.5; /** Opacidad cuando está deshabilitado */
-  --file-upload-progress-height: 0.375rem; /** Altura de la barra de progreso */
   --file-upload-padding-inline: var(--spacing-5); /** Padding horizontal del dropzone */
   --file-upload-gap: var(--spacing-1); /** Espacio entre elementos dentro del dropzone */
   --file-upload-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de estado */
@@ -26,8 +25,6 @@
   --file-upload-item-error-bg: var(--color-white); /** Fondo del item con error */
   --file-upload-thumb-size: var(--size-component-md); /** Lado de la miniatura: la talla md del sistema (el mismo 2.5rem de antes, ahora con nombre) */
   --file-upload-progress-margin-block-start: var(--spacing-3); /** Margen superior de la barra de progreso */
-  --file-upload-progress-transition-duration: var(--motion-duration-base); /** Duración de la transición del progreso */
-  --file-upload-progress-transition-easing: var(--motion-easing-in-out); /** Easing de la transición del progreso */
   --file-upload-padding-block: var(--spacing-7); /** Aire vertical del dropzone — talla md */
   --file-upload-sm-padding-block: var(--spacing-6); /** Aire vertical del dropzone — talla sm */
   --file-upload-lg-padding-block: var(--spacing-8); /** Aire vertical del dropzone — talla lg */
@@ -36,9 +33,6 @@
   --file-upload-text-font-family: var(--font-family-sans); /** Tipografía del texto del dropzone */
   --file-upload-subtext-font-size: var(--font-size-1); /** Tamaño de las restricciones (peso máximo, número de archivos) — talla md */
   --file-upload-sm-subtext-font-size: var(--font-size-1); /** Restricciones — talla sm: ya está en el peldaño menor de la escala de interfaz */
-  --file-upload-icon-size: var(--icon-size-md); /** Lado del icono del dropzone — talla md */
-  --file-upload-sm-icon-size: var(--icon-size-sm); /** Icono del dropzone — talla sm */
-  --file-upload-lg-icon-size: var(--icon-size-lg); /** Icono del dropzone — talla lg */
   --file-upload-sm-thumb-size: var(--size-component-sm); /** Lado de la miniatura — talla sm */
   --file-upload-lg-thumb-size: var(--size-component-lg); /** Lado de la miniatura — talla lg */
   --file-upload-item-info-gap: var(--spacing-1); /** Aire entre el nombre del archivo y su peso (antes 2px, fuera de la escala) */
@@ -68,9 +62,6 @@
   --file-upload-thumb-icon-color: var(--color-icon-secondary-on-light); /** Color del icono de archivo genérico */
   --file-upload-remove-color: var(--color-text-muted-on-light); /** Color del botón eliminar */
   --file-upload-remove-color-hover: var(--color-error-text-on-light); /** Color del botón eliminar al hacer hover */
-  --file-upload-progress-bg: var(--color-border-default-on-light); /** Fondo del track de progreso */
-  --file-upload-progress-fill: var(--color-primary); /** Color del relleno de progreso */
-  --file-upload-progress-border-radius: var(--border-radius-round); /** Radio de la barra de progreso */
   --file-upload-text-font-size: var(--text-font-size); /** El texto del dropzone es texto corriente: hereda el cuerpo de la superficie — talla md */
   --file-upload-sm-text-font-size: var(--text-paragraph-small-font-size); /** Texto del dropzone — talla sm: un peldaño por debajo del cuerpo */
   --file-upload-lg-text-font-size: var(--text-paragraph-large-font-size); /** Texto del dropzone — talla lg: un peldaño por encima */
@@ -106,6 +97,4 @@ html.dark {
   --file-upload-thumb-icon-color: var(--color-text-muted-on-dark); /** Icono de archivo genérico — surface-dark: `grey-dark` no llega a 3:1 sobre prusia */
   --file-upload-remove-color: var(--color-text-muted-on-dark); /** Aspa de quitar — surface-dark */
   --file-upload-remove-color-hover: var(--color-error-text-on-dark); /** Aspa de quitar, bajo el puntero — surface-dark */
-  --file-upload-progress-bg: var(--color-surface-secondary-on-dark); /** Carril de progreso — surface-dark */
-  --file-upload-progress-fill: var(--color-text-on-dark); /** Relleno de progreso — surface-dark: el prusia coincidiría con el lienzo */
 }

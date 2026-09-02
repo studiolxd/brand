@@ -1,4 +1,6 @@
 import { forwardRef, useState, useCallback, useRef, useEffect, useId, type Ref } from 'react';
+import { Icon } from '../Icon/Icon';
+import { ProgressBar } from '../ProgressBar/ProgressBar';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useFormSize, type FormSize } from '../../constants/form-size';
 import './FileUpload.css';
@@ -160,6 +162,9 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
   size: sizeProp,
 }: FileUploadProps, ref) {
   const size = useFormSize(sizeProp);
+  // El icono del dropzone mide con la escala del propio `Icon`, que es de donde
+  // salían los tokens de tamaño que tenía antes el componente.
+  const iconSize = size === 'sm' ? 'sm' : size === 'lg' ? 'lg' : 'md';
   const isControlled = value !== undefined;
   const [internalFiles, setInternalFiles] = useState<File[]>(defaultValue);
   const [fileErrors, setFileErrors] = useState<Map<File, string>>(new Map());
@@ -296,21 +301,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
         onDrop={handleDrop}
         aria-hidden="true"
       >
-        <svg
-          className="file-upload__icon"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="17 8 12 3 7 8" />
-          <line x1="12" y1="3" x2="12" y2="15" />
-        </svg>
+        <Icon name="upload" size={iconSize} className="file-upload__icon" />
         <span className="file-upload__text">
           {isDragging ? dropzoneActiveLabel : dropzoneLabel}
         </span>
@@ -338,24 +329,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
                 className={`file-upload__item${err ? ' file-upload__item--error' : ''}`}
               >
                 <div className="file-upload__item-thumb" aria-hidden="true">
-                  {thumb ? (
-                    <img src={thumb} alt="" />
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                      <polyline points="14 2 14 8 20 8" />
-                    </svg>
-                  )}
+                  {thumb ? <img src={thumb} alt="" /> : <Icon name="file-text" size="sm" />}
                 </div>
                 <div className="file-upload__item-info">
                   <span className="file-upload__item-name">{file.name}</span>
@@ -370,21 +344,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
                   onClick={() => removeFile(file)}
                   aria-label={removeFileLabel(file.name)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
+                  <Icon name="close" size="sm" />
                 </button>
               </li>
             );
@@ -393,19 +353,12 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function
       )}
 
       {progress !== undefined && (
-        <div
+        <ProgressBar
+          value={progress}
+          label={progressLabel}
+          size="sm"
           className="file-upload__progress"
-          role="progressbar"
-          aria-valuenow={progress}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label={progressLabel}
-        >
-          <div
-            className="file-upload__progress-bar"
-            style={{ '--file-upload-progress': `${progress}%` } as React.CSSProperties}
-          />
-        </div>
+        />
       )}
     </div>
   );

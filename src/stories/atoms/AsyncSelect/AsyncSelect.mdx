@@ -15,6 +15,8 @@ Elegir **un** valor de una lista que no cabe en el cliente: en vez de opciones, 
 
 `onSearch` recibe lo escrito y devuelve una promesa de opciones. Mientras está en vuelo, la lista enseña un `Spinner` con `loadingLabel` como nombre accesible; si vuelve vacía, el `emptyMessage`. Los dos son texto visible y van como props: una app multiidioma los pasa traducidos.
 
+Las teclas se rebotan: `onSearch` se llama una vez pasados `debounceMs` (300 por defecto) desde la última. La respuesta que llega fuera de orden se descarta —solo pinta la última búsqueda pedida— y al desmontar se cancela el rebote pendiente, así que un `fetch` en vuelo no intenta pintar nada.
+
 <Canvas of={AsyncSelectStories.MensajeVacio} />
 
 ## Valor
@@ -36,6 +38,10 @@ Las tres del sistema: 32, 40 y 48. Sin `size`, la del `Form` que lo envuelva; si
 <Canvas of={AsyncSelectStories.Disabled} />
 
 ## Accesibilidad
+
+El aspa de limpiar es un atajo de **ratón**: está fuera del tabulador, como en el resto de la familia (`MultiSelect`, `NumberInput`), pero conserva su nombre accesible porque un lector de pantalla sí llega a ella con el cursor virtual o el gesto táctil. La salida con teclado es <kbd>Retroceso</kbd> (o <kbd>Supr</kbd>) con el campo vacío, el mismo gesto que quita la última píldora en el `AsyncMultiSelect`.
+
+`required` pone `aria-required` en el combobox. No se traduce a un `required` nativo: lo que viaja en el formulario es un input oculto, y un control no enfocable con `required` bloquea el envío sin poder enseñar el mensaje.
 
 El `ref` va al `<input>` de búsqueda, que es lo que se enfoca. La opción resaltada se marca invirtiendo la marca (`item-highlighted-bg` / `item-highlighted-color`, los del `Select`): las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores). El botón de limpiar lleva su propio nombre (`clearLabel`).
 

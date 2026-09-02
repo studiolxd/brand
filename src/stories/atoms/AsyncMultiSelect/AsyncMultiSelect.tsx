@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useState, useRef, useId, useCallback, type Ref } from 'react';
+import { forwardRef, useState, useRef, useId, useEffect, useCallback, type Ref } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
@@ -14,19 +14,42 @@ export interface AsyncMultiSelectOption {
 export interface AsyncMultiSelectProps {
   onSearch: (query: string) => Promise<AsyncMultiSelectOption[]>;
   value?: string[];
+  /**
+   * Valores iniciales en modo no controlado. Sus etiquetas no se conocen hasta
+   * que se buscan: para enseñarlas desde el primer pintado hay que pasar
+   * también `selectedOptions`. Sin ellas la pill muestra el valor crudo.
+   */
   defaultValue?: string[];
   onValueChange?: (value: string[]) => void;
-  /** Labels for the currently selected values — the parent is responsible for providing these */
+  /**
+   * Etiquetas de los valores elegidos. En modo controlado es la vía normal de
+   * dárselas al componente. En modo no controlado no hace falta para lo que se
+   * elige con el ratón o el teclado —esas opciones vienen de `onSearch` y el
+   * componente las recuerda—, solo para los valores de `defaultValue`.
+   */
   selectedOptions?: AsyncMultiSelectOption[];
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * Milisegundos de rebote entre la última tecla y la llamada a `onSearch`.
+   * Default: 300. A 0 se busca en cada tecla.
+   */
+  debounceMs?: number;
   id?: string;
   /** Nombre del campo en el formulario: se monta un input oculto por valor elegido. */
   name?: string;
   /** Marca el estado de error: aplica la clase `async-multi-select--error` y `aria-invalid`. */
   error?: boolean;
+  /**
+   * Marca el control como obligatorio: pone `aria-required` en el combobox.
+   * No se traslada a un `required` nativo porque lo que viaja en el formulario
+   * es un input oculto —un control no enfocable con `required` bloquea el envío
+   * sin poder enseñar el mensaje—: la validación la lleva el consumidor (o
+   * react-hook-form), como en el resto de campos compuestos del sistema.
+   */
+  required?: boolean;
   /** Se llama al salir del control (react-hook-form lo usa para validar). */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Se añade DESPUÉS de las clases propias del componente. */
@@ -75,14 +98,16 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   value,
   defaultValue = [],
   onValueChange,
-  selectedOptions = [],
+  selectedOptions,
   placeholder = 'Buscar…',
   disabled,
   readOnly,
   size = 'md',
+  debounceMs = 300,
   id,
   name,
   error = false,
+  required,
   onBlur,
   className,
   'aria-label': ariaLabel,
@@ -99,7 +124,13 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   const [hasSearched, setHasSearched] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
+  // Etiquetas de las opciones que han pasado por el control: son el respaldo
+  // cuando el consumidor no lleva él mismo `selectedOptions`.
+  const [knownOptions, setKnownOptions] = useState<AsyncMultiSelectOption[]>([]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Cada búsqueda lleva número: solo la última manda. Sin esto, dos búsquedas
+  // seguidas pueden resolverse fuera de orden y pintar los resultados viejos.
+  const requestRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
@@ -107,30 +138,55 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
 
   const currentValues = value !== undefined ? value : internalValues;
 
+  /**
+   * Las pills se pintan desde los valores vigentes, no desde `selectedOptions`:
+   * así el modo no controlado enseña lo elegido sin que el consumidor tenga que
+   * llevar la lista de etiquetas. Para un valor del que nadie sabe la etiqueta
+   * —un `defaultValue` que nunca se ha buscado— se pinta el valor crudo, que es
+   * lo que el formulario va a enviar.
+   */
+  const pills: AsyncMultiSelectOption[] = currentValues.map(v =>
+    selectedOptions?.find(o => o.value === v)
+    ?? knownOptions.find(o => o.value === v)
+    ?? { value: v, label: v },
+  );
+
   const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
 
   const runSearch = useCallback(async (q: string) => {
+    const requestId = ++requestRef.current;
     setLoading(true);
     setHasSearched(false);
     try {
       const opts = await onSearch(q);
+      if (requestId !== requestRef.current) return;
       setResults(opts);
       setActiveIndex(-1); // reset active index when results change
     } catch {
+      if (requestId !== requestRef.current) return;
       setResults([]);
       setActiveIndex(-1);
     } finally {
-      setLoading(false);
-      setHasSearched(true);
+      if (requestId === requestRef.current) {
+        setLoading(false);
+        setHasSearched(true);
+      }
     }
   }, [onSearch]);
+
+  // Al desmontar: se cancela el rebote pendiente y se invalida la búsqueda en
+  // vuelo, para que su respuesta no intente pintar nada.
+  useEffect(() => () => {
+    requestRef.current += 1;
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+  }, []);
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const q = e.target.value;
     setQuery(q);
     if (!open) setOpen(true);
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => void runSearch(q), 300);
+    debounceRef.current = setTimeout(() => void runSearch(q), debounceMs);
   }
 
   function handleInputPointerDown(e: React.PointerEvent<HTMLInputElement>) {
@@ -146,10 +202,13 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
     void runSearch('');
   }
 
-  function toggleValue(v: string) {
+  function toggleValue(v: string, option?: AsyncMultiSelectOption) {
     const next = currentValues.includes(v)
       ? currentValues.filter(x => x !== v)
       : [...currentValues, v];
+    if (option) {
+      setKnownOptions(prev => (prev.some(o => o.value === option.value) ? prev : [...prev, option]));
+    }
     if (value === undefined) setInternalValues(next);
     onValueChange?.(next);
   }
@@ -168,7 +227,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
       setActiveIndex(i => Math.max(i - 1, -1));
     } else if (e.key === 'Enter' && activeIndex >= 0 && results[activeIndex]) {
       e.preventDefault();
-      toggleValue(results[activeIndex].value);
+      toggleValue(results[activeIndex].value, results[activeIndex]);
       inputRef.current?.focus();
     } else if (e.key === 'Escape') {
       setOpen(false);
@@ -217,7 +276,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
     <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
       <div ref={anchorRef} className={triggerClass} data-popup-open={open || undefined}>
         <div className="async-multi-select__input-area">
-          {selectedOptions.map(opt => (
+          {pills.map(opt => (
             <span key={opt.value} className="async-multi-select__pill">
               <span className="async-multi-select__pill-label">{opt.label}</span>
               {!disabled && !readOnly && (
@@ -248,6 +307,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
             aria-label={ariaLabel}
             aria-describedby={ariaDescribedby}
             aria-invalid={error || undefined}
+            aria-required={required || undefined}
             aria-expanded={open}
             aria-haspopup="listbox"
             // El listbox vive en un portal que solo existe abierto: cerrado, un
@@ -256,6 +316,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
             aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
             autoComplete="off"
             role="combobox"
+            aria-autocomplete="list"
             onBlur={onBlur}
           />
           {/* Lo que se envía con el formulario: un input oculto por valor. */}
@@ -303,7 +364,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
                       isActive ? 'async-multi-select__item--active' : '',
                     ].filter(Boolean).join(' ')}
                     onPointerDown={e => e.preventDefault()}
-                    onClick={() => { toggleValue(option.value); inputRef.current?.focus(); }}
+                    onClick={() => { toggleValue(option.value, option); inputRef.current?.focus(); }}
                   >
                     <span className="async-multi-select__item-check" aria-hidden="true">
                       <span className="async-multi-select__item-check-mark" />

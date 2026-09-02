@@ -15,13 +15,18 @@ El `AsyncSelect` con **varios** valores: cada elección se queda como una pill d
 
 `onSearch` recibe lo escrito y devuelve una promesa de opciones. Mientras está en vuelo, la lista enseña un `Spinner` con `loadingLabel` como nombre accesible; si vuelve vacía, el `emptyMessage`. Los dos son texto visible y van como props: una app multiidioma los pasa traducidos.
 
+Las teclas se rebotan: `onSearch` se llama una vez pasados `debounceMs` (300 por defecto) desde la última. La respuesta que llega fuera de orden se descarta —solo pinta la última búsqueda pedida— y al desmontar se cancela el rebote pendiente, así que un `fetch` en vuelo no intenta pintar nada.
+
 <Canvas of={AsyncMultiSelectStories.MensajeVacio} />
 
 ## Valores
 
-Como en el `AsyncSelect`, el componente no guarda las etiquetas: con `value` hay que pasar también las opciones elegidas. El disparador mide la talla exacta con una línea de pills y crece solo cuando envuelven.
+Las pills se pintan desde los valores vigentes. Lo que se elige en la lista lo recuerda el componente —la opción viene entera de `onSearch`—, así que en modo no controlado basta con `defaultValue`; `selectedOptions` solo hace falta para poner etiqueta a valores que nunca se han buscado. Sin ellas la pill enseña el valor crudo, que es lo que el formulario va a enviar: el control nunca se queda en blanco teniendo valor.
+
+En modo controlado (`value`) la lista de etiquetas la lleva el consumidor y se pasa por `selectedOptions`, como en el `AsyncSelect`. El disparador mide la talla exacta con una línea de pills y crece solo cuando envuelven.
 
 <Canvas of={AsyncMultiSelectStories.WithInitialValues} />
+<Canvas of={AsyncMultiSelectStories.NoControlado} />
 <Canvas of={AsyncMultiSelectStories.Controlled} />
 
 ## Tallas
@@ -36,6 +41,10 @@ Las tres del sistema: 32, 40 y 48 con una línea de pills. Sin `size`, la del `F
 <Canvas of={AsyncMultiSelectStories.Disabled} />
 
 ## Accesibilidad
+
+El aspa de cada píldora es un atajo de **ratón**: está fuera del tabulador, como en el `MultiSelect`, pero conserva su nombre accesible porque un lector de pantalla sí llega a ella. La salida con teclado es <kbd>Retroceso</kbd> con el campo de búsqueda vacío, que quita el último valor elegido.
+
+`required` pone `aria-required` en el combobox. No se traduce a un `required` nativo: lo que viaja en el formulario son inputs ocultos, y un control no enfocable con `required` bloquea el envío sin poder enseñar el mensaje.
 
 El `ref` va al `<input>` de búsqueda. La opción resaltada se marca invirtiendo la marca (`item-highlighted-bg` / `item-highlighted-color`, los del `MultiSelect`): las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores).
 

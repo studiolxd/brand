@@ -20,13 +20,18 @@ Elegir archivos, arrastrándolos o con el diálogo del sistema. Dentro de un for
 
 ## Tallas
 
-Las tres del sistema. La zona de arrastre **no** es un control de una línea, así que no toma la altura 32/40/48: lo que sigue a la talla es su aire, el cuerpo de su texto y el icono. La miniatura de cada archivo sí toma la talla exacta (32/40/48), porque la fila de un archivo es una fila de control.
+Las tres del sistema. La zona de arrastre **no** es un control de una línea, así que no toma la altura 32/40/48: lo que sigue a la talla es su aire, el cuerpo de su texto y el icono (que mide con la escala del `Icon`, no con un token propio). La miniatura de cada archivo sí toma la talla exacta (32/40/48), porque la fila de un archivo es una fila de control.
 
 Sin `size`, la del `Form` que lo envuelva; sin `Form`, `md`.
 
 <Canvas of={FileUploadStories.Tallas} />
 
 ## Lista y progreso
+
+Cada fila enseña la miniatura de la imagen o, si no la hay, el `Icon` de archivo
+genérico, y se quita con el aspa del sistema. La barra de `progress` es el átomo
+`ProgressBar` en talla `sm`: el paquete no lleva dos barras de progreso que
+envejezcan por separado.
 
 <Canvas of={FileUploadStories.WithFiles} />
 <Canvas of={FileUploadStories.WithProgress} />
@@ -71,6 +76,9 @@ El texto visible de la zona (la instrucción, los formatos, el peso máximo) lle
 <TokenTable tokens={fileUploadItemTokens} />
 
 ### Progreso
+
+Solo el aire que la separa de la lista: la barra es el `ProgressBar` y viste con
+sus tokens.
 
 <TokenTable tokens={fileUploadProgressTokens} />
 

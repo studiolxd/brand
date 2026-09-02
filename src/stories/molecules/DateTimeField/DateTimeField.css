@@ -10,8 +10,10 @@
   gap: var(--date-time-field-controls-gap);
 }
 
-/* La fecha se lleva el ancho sobrante; la hora ocupa lo suyo. */
-.date-time-field__controls .date-picker__trigger {
+/* La fecha se lleva el ancho sobrante; la hora ocupa lo suyo. La clase la pone
+   el campo sobre el `DatePicker` (prop `className`): estilar desde fuera la
+   clase BEM del otro componente lo ataba a un detalle que no es contrato. */
+.date-time-field__date {
   flex: 1;
 }
 

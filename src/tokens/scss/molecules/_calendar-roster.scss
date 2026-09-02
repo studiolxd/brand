@@ -24,6 +24,7 @@ $lxd-calendar-roster-th-day-today-radius: 0px; // Radio del badge del día de ho
 $lxd-calendar-roster-th-day-today-size: 1.5rem; // Lado del badge del día de hoy
 $lxd-calendar-roster-td-name-font-size: 0.875rem; // Tamaño del nombre del empleado
 $lxd-calendar-roster-td-name-color: #111e30; // Color del nombre del empleado
+$lxd-calendar-roster-td-name-font-weight: 300; // Peso del nombre del empleado (la celda es th: el agente de usuario la pondría en negrita)
 $lxd-calendar-roster-td-name-bg: #ffffff; // Fondo sticky de la celda de nombre
 $lxd-calendar-roster-td-name-padding-block: 0.5rem; // Padding vertical de la celda de nombre
 $lxd-calendar-roster-td-name-padding-inline: 0.75rem; // Padding horizontal de la celda de nombre

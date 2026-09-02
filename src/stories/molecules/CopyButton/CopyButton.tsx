@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { forwardRef, useEffect, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
@@ -66,7 +66,7 @@ const FEEDBACK_MS = 1500;
  * Si el portapapeles no está disponible —contexto no seguro, permiso
  * denegado— el botón lo dice en vez de fingir que ha copiado.
  */
-export function CopyButton({
+export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(function CopyButton({
   value,
   children,
   label = 'Copiar',
@@ -79,7 +79,7 @@ export function CopyButton({
   onCopyError,
   className,
   ...rest
-}: CopyButtonProps) {
+}: CopyButtonProps, ref) {
   const [status, setStatus] = useState<Status>('idle');
 
   useEffect(() => {
@@ -113,6 +113,7 @@ export function CopyButton({
       {children == null ? (
         <Button
           {...rest}
+          ref={ref}
           variant={variant}
           {...(size ? { size } : {})}
           iconOnly
@@ -125,6 +126,7 @@ export function CopyButton({
       ) : (
         <Button
           {...rest}
+          ref={ref}
           variant={variant}
           {...(size ? { size } : {})}
           onClick={handleClick}
@@ -140,4 +142,4 @@ export function CopyButton({
       <VisuallyHidden role="status">{announcement}</VisuallyHidden>
     </>
   );
-}
+});

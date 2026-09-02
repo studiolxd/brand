@@ -6,28 +6,30 @@ Vara de medir: `SelectField` (contrato de campo) y `ConversationList` / `ChatShe
 
 ## Veredicto por componente
 
-Leyenda: ✓ cumple · **arreglado** en esta rama · **hallazgo** anotado abajo, sin tocar.
+Leyenda: ✓ cumple · **arreglado** en esta rama (`r1-huerfanas-a`) · **resuelto (Ax)** — la ficha se anotó aquí y se cerró después en `s1-fichas-a`; el detalle de cada una, al pie de su ficha.
+
+**Estado del lote:** las 18 fichas están cerradas. `A13` no pedía acción (es una constatación sobre la cobertura), y de `A18` queda un rabo documentado en su ficha: sacar `libphonenumber-js` de `dependencies`, que exige mover el lockfile.
 
 | Componente | Composición | Oscuro | Alineación | Accesibilidad | Calidad |
 | --- | --- | --- | --- | --- | --- |
-| `AnnotationThread` | ✓ | ✓ | hallazgo (A1) | ✓ | ✓ |
-| `AsyncSelect` | ✓ | arreglado | arreglado | hallazgo (A2, A3) | ✓ |
-| `AsyncSelectField` | ✓ | arreglado | arreglado · hallazgo (A4) | ✓ | ✓ |
-| `AsyncMultiSelect` | ✓ | arreglado | arreglado · **hallazgo (A5)** | hallazgo (A3) | ✓ |
+| `AnnotationThread` | ✓ | ✓ | resuelto (A1) | ✓ | ✓ |
+| `AsyncSelect` | ✓ | arreglado | arreglado | resuelto (A2, A3) | ✓ |
+| `AsyncSelectField` | ✓ | arreglado | arreglado · resuelto (A4) | ✓ | ✓ |
+| `AsyncMultiSelect` | ✓ | arreglado | arreglado · resuelto (A5) | resuelto (A3) | ✓ |
 | `AsyncMultiSelectField` | ✓ | arreglado | arreglado | ✓ | ✓ |
-| `Calendar` | ✓ | ✓ | ✓ | ✓ | hallazgo (A6) |
-| `CalendarPlanner` | ✓ | ✓ | arreglado | arreglado · hallazgo (A7) | hallazgo (A8) |
-| `CalendarRoster` | ✓ | ✓ | ✓ | arreglado · hallazgo (A9) | hallazgo (A10) |
+| `Calendar` | ✓ | ✓ | ✓ | ✓ | resuelto (A6) |
+| `CalendarPlanner` | ✓ | ✓ | arreglado | arreglado · resuelto (A7) | resuelto (A8) |
+| `CalendarRoster` | ✓ | ✓ | ✓ | arreglado · resuelto (A9) | resuelto (A10) |
 | `Code` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `CopyButton` | ✓ | ✓ | hallazgo (A11) | ✓ | ✓ |
-| `DatePicker` | ✓ | ✓ | hallazgo (A12) | ✓ | arreglado · hallazgo (A13) |
-| `DateTimeField` | ✓ | ✓ | hallazgo (A14) | hallazgo (A15) | ✓ |
+| `CopyButton` | ✓ | ✓ | resuelto (A11) | ✓ | ✓ |
+| `DatePicker` | ✓ | ✓ | resuelto (A12) | ✓ | arreglado · resuelto (A13) |
+| `DateTimeField` | ✓ | ✓ | resuelto (A14) | resuelto (A15) | ✓ |
 | `DocsSearch` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `DotsButton` | ✓ | arreglado | ✓ | ✓ | ✓ |
 | `DropdownField` | ✓ | arreglado | arreglado | ✓ | ✓ |
 | `ErrorBoundary` | ✓ | n/a | ✓ | n/a | ✓ |
-| `FileUpload` | **hallazgo (A16, A17)** | ✓ | arreglado | ✓ | ✓ |
-| `InputPhone` | hallazgo (A18) | arreglado | arreglado | ✓ | arreglado |
+| `FileUpload` | resuelto (A16, A17) | ✓ | arreglado | ✓ | ✓ |
+| `InputPhone` | resuelto (A18) | arreglado | arreglado | ✓ | arreglado |
 
 `ErrorBoundary` no pinta nada por sí mismo (sin CSS, sin tokens, sin DOM propio): modo oscuro y accesibilidad no le aplican, y por eso tampoco se le añade story «En superficie oscura».
 
@@ -63,11 +65,15 @@ El componente interno se llama `Anotacion` y sus variables son `esRaiz`, `resuel
 
 **Propuesta:** renombrar el helper a `Annotation` con props en inglés, añadir `annotation-thread.border-style`, y decidir si `data-status` es contrato público (documentarlo) o sobra (quitarlo). Nada de esto cambia la cara del componente.
 
+**~~Resuelto~~** (`s1-fichas-a`): helper `Annotation` con `date`/`formatted`/`isRoot` fuera (la variable de estado pasa a `isResolved`); tokens `border-style` y `reply-guide-style` —el segundo cableaba `solid` igual que el primero—; `data-status` **retirado**, no era contrato: lo dice el modificador `--resolved`, y el test que lo leía comprueba ahora la clase. Con él se va también `annotation-thread__item--root`, que no tenía ninguna regla detrás ni más uso que emitirse. `annotation-thread__reply` se queda: es el bloque que coloca la respuesta en la columna del hilo.
+
 ### A2 · `AsyncSelect` / `AsyncMultiSelect`: el rebote es un número mágico y no se limpia al desmontar — **media**
 
 Los 300 ms del `setTimeout` están cableados en el cuerpo del componente, sin prop ni constante nombrada, y el `debounceRef` no se cancela en un efecto de limpieza: si el control se desmonta con una búsqueda en vuelo, el `setState` del `finally` cae sobre un componente muerto. Con `onSearch` haciendo `fetch` real —que es para lo que existe el componente— tampoco hay cancelación de la respuesta tardía: dos búsquedas seguidas pueden resolverse fuera de orden y pintar los resultados de la primera.
 
 **Propuesta:** `debounceMs?: number` (default 300) y un `useEffect` de limpieza; para el fuera de orden, un contador de petición que descarte toda respuesta que no sea la última. Es el mismo patrón que `DocsSearch` delega en el consumidor, pero aquí el componente sí posee la búsqueda, así que le toca a él.
+
+**~~Resuelto~~** (`s1-fichas-a`): implementada tal cual en los dos átomos —`debounceMs` (default 300), `requestRef` que descarta toda respuesta que no sea la última y limpieza al desmontar— y reenviada desde `AsyncSelectField` / `AsyncMultiSelectField`. `AsyncSelect.test.tsx` cubre los tres casos (fuera de orden, rebote, desmontaje).
 
 ### A3 · `AsyncSelect` / `AsyncMultiSelect`: botones de limpiar y de quitar fuera del tabulador — **baja**
 
@@ -75,11 +81,15 @@ El aspa de `AsyncSelect` y las de las píldoras de `AsyncMultiSelect` llevan `ta
 
 **Propuesta:** o se documenta el gesto de teclado equivalente y se marcan los botones `aria-hidden` (son atajos de ratón), o entran al tabulador. Lo que no puede quedarse es la mezcla: un botón con nombre accesible al que ningún lector puede llegar. Falta también `aria-autocomplete="list"` en el `role="combobox"` de los dos.
 
+**~~Resuelto~~** (`s1-fichas-a`), con una tercera salida: **ni `aria-hidden` ni tabulador**. La premisa de la ficha —«un botón al que ningún lector puede llegar»— no se sostiene: fuera del tabulador el aspa sigue siendo alcanzable con el cursor virtual y con el gesto táctil, así que `aria-hidden` le quitaría al lector de pantalla la única forma que tiene de accionarla. Meterla en el tabulador rompería con el resto de la familia (`MultiSelect`, `NumberInput`) y, en el multi, añadiría una parada por píldora. Lo que sí faltaba de verdad era la **salida con teclado del `AsyncSelect`**: <kbd>Retroceso</kbd> / <kbd>Supr</kbd> con el campo vacío limpia la selección, el mismo gesto que ya quitaba la última píldora en el multi. Documentado en los dos MDX y probado. Puesto además `aria-autocomplete="list"` en ambos.
+
 ### A4 · `AsyncSelectField`: no expone `required` — **baja**
 
 `SelectField` lo pasa al control, `AsyncSelectField` no. Como el átomo tampoco lo acepta, el campo asíncrono no puede marcarse obligatorio en el DOM.
 
 **Propuesta:** `required?: boolean` en el átomo (al `<input>` de búsqueda y al hidden) y reenviado desde el campo.
+
+**~~Resuelto~~** (`s1-fichas-a`) en los cuatro (átomos y campos), pero como `aria-required` en el combobox, **no** como `required` nativo: en el `<input>` de búsqueda obligaría a escribir texto para poder enviar (el valor no vive ahí), y en el input oculto el navegador bloquea el envío sin poder enseñar el mensaje porque el control no es enfocable. La validación la lleva el consumidor o react-hook-form, como en el resto de campos compuestos.
 
 ### A5 · `AsyncMultiSelect`: en modo no controlado el control se ve vacío — **alta**
 
@@ -87,11 +97,15 @@ Las píldoras se pintan **solo** desde la prop `selectedOptions`, que por defect
 
 **Propuesta:** guardar en estado interno las opciones elegidas (las que pasan por `toggleValue` vienen de `results`, así que se conocen enteras) y usarlas como respaldo cuando no hay `selectedOptions`. Para los valores de `defaultValue` que nunca se han buscado no hay etiqueta posible: ahí, o se documenta que `defaultValue` exige `selectedOptions`, o se quita `defaultValue` del API. Lo que hoy tiene es un modo no controlado que se ve roto.
 
+**~~Resuelto~~** (`s1-fichas-a`): las pills se pintan desde `currentValues`, no desde `selectedOptions`; el componente recuerda en `knownOptions` las opciones que pasan por `toggleValue` y las usa de respaldo. `defaultValue` **se queda** —es el patrón de la familia (`MultiSelect`, `FileUpload`, `OtpInput`)— y un valor sin etiqueta conocida pinta el valor crudo: se ve lo que el formulario va a enviar, en vez de nada. Story «No controlado», MDX § Valores reescrito y `AsyncMultiSelect.test.tsx` con cinco casos.
+
 ### A6 · `Calendar` / `CalendarPlanner`: el `id` del título no es único — **baja**
 
 `calendar-title-${año}-${mes}` y `planner-title-${año}-${mes}` se construyen a mano. Dos calendarios del mismo mes en una página —el caso normal de un rango «desde / hasta»— generan `id` duplicados, y el `aria-labelledby` de la segunda rejilla apunta al título de la primera.
 
 **Propuesta:** prefijar con `useId()`, como hacen los campos del sistema.
+
+**~~Resuelto~~** (`s1-fichas-a`): `useId()` por delante en los dos. Probado en `CalendarPlanner.test.tsx` con dos planificadores del mismo mes.
 
 ### A7 · `CalendarPlanner`: la celda no dice de qué fecha se habla — **media**
 
@@ -99,11 +113,15 @@ Las píldoras se pintan **solo** desde la prop `selectedOptions`, que por defect
 
 **Propuesta:** no se puede poner `aria-label` en el `gridcell` sin ocultar los eventos que contiene. Lo correcto es que el número lleve la fecha larga para el lector y el dígito para la vista: `<span class="…__day-number"><VisuallyHidden>{fechaLarga}</VisuallyHidden><span aria-hidden>{dia}</span></span>`. Es reordenar el contenido de la celda, no un atributo, y por eso queda anotado.
 
+**~~Resuelto~~** (`s1-fichas-a`): tal cual, con el `dayFormatter` del `Calendar` (`Intl`, por `locale`). Cubierto en `CalendarPlanner.test.tsx` y anotado en el MDX.
+
 ### A8 · `CalendarPlanner`: el modal de «+N más» no se puede suprimir — **media**
 
 El botón de desbordamiento abre **siempre** un `Modal` interno con la lista de eventos, y además llama a `onMoreClick`. Un consumidor que pasa `onMoreClick` para abrir su propio panel se encuentra con dos cosas abiertas a la vez, y no tiene forma de apagar la de dentro.
 
 **Propuesta:** que el modal interno sea el comportamiento por defecto **solo** cuando no hay `onMoreClick`, o una prop explícita (`showMoreDialog?: boolean`). Hay precedente en el propio componente: `renderDay` ya sustituye el renderizado por defecto en vez de sumarse a él.
+
+**~~Resuelto~~** (`s1-fichas-a`): las dos cosas, que no se estorban. El default es `showMoreDialog ?? !onMoreClick` —con `onMoreClick` el componente se aparta, como `renderDay`— y la prop explícita permite las dos (`true`) o ninguna (`false`). Tres casos en `CalendarPlanner.test.tsx`.
 
 ### A9 · `CalendarRoster`: la columna de nombres es `<td>`, no `<th scope="row">` — **media**
 
@@ -111,11 +129,15 @@ La tabla declara bien sus cabeceras de columna (`<th scope="col">` por día), pe
 
 **Propuesta:** `<th scope="row" class="calendar-roster__th-name-row">`, revisando de paso el CSS (un `th` trae peso y centrado propios del agente de usuario). No es un cambio de un atributo: toca marcado y estilos, y por eso no se hace aquí.
 
+**~~Resuelto~~** (`s1-fichas-a`): tal cual, con `text-align: start` y un token nuevo `calendar-roster.td-name-font-weight` para deshacer la negrita del agente de usuario. Los tokens siguen llamándose `td-name-*`: renombrarlos sería breaking para quien los pise, y la clase BEM (interna, no expuesta) sí pasa a `__th-name-row`. Test en `CalendarRoster.test.tsx`.
+
 ### A10 · `CalendarRoster`: el emoji del cumpleaños va cableado — **baja**
 
 `{cell.type === 'birthday' ? \`🎂 ${cell.label}\` : cell.label}` inyecta contenido visible que el consumidor no pidió ni puede quitar, y que además se lee en voz alta («tarta de cumpleaños»). Es el único adorno de este tipo en el lote.
 
 **Propuesta:** que el emoji viaje en la etiqueta del dato, o una prop `birthdayPrefix?: string` con default `'🎂 '` y la posibilidad de vaciarla.
+
+**~~Resuelto~~** (`s1-fichas-a`): `birthdayPrefix` con default `'🎂 '`, vaciable. En el MDX del componente y en la tabla de `Internacionalizacion.mdx`; probado en los dos sentidos.
 
 ### A11 · `CopyButton`: no reenvía `ref` — **baja**
 
@@ -123,11 +145,15 @@ Es la única molécula del lote que no es `forwardRef`. Como devuelve un fragmen
 
 **Propuesta:** `forwardRef<HTMLButtonElement>` al botón, como `DotsButton`.
 
+**~~Resuelto~~** (`s1-fichas-a`): tal cual, en las dos formas del componente (con texto y solo icono); probado con `createRef`. La región viva no es enfocable, así que el `<button>` es el único destino razonable.
+
 ### A12 · `DatePicker`: sin tokens propios — **media**
 
 El disparador viste enteramente con `--input-*` (altura, aire, familia, borde, foco, deshabilitado, error). Es coherente de cara —un campo de fecha y uno de texto deben parecer el mismo— pero deja al consumidor sin ningún punto de personalización: retocar el disparador de fecha obliga a mover todos los campos de texto de la aplicación. El resto del lote sí tiene su familia (`async-select.*` hereda de `select.*`, `dropdown-field.*` hereda de `select.*`).
 
 **Propuesta:** `tokens/molecule/date-picker.json` con la capa de indirección (`date-picker.height → {input.height}`, etc.) y el CSS apuntando a ella. Cambio mecánico pero ancho (14 tokens), y toca la cara de un componente que hoy está bien: mejor decidirlo aparte.
+
+**~~Resuelto~~** (`s1-fichas-a`): `tokens/molecule/date-picker.json` con 34 tokens, todos apuntando al `input.*` que ya usaban —el pintado no cambia—, registrados en `sd.config.mjs` (CSS + SCSS) y en `src/tokens/index.css`. El único que no hereda es `cursor` (`pointer`: el disparador abre un calendario). No hace falta ningún `surface-dark-*`: `surface-dark-derived.css` los vuelve a declarar solo. Tabla de tokens en el MDX.
 
 ### A13 · `DatePicker`, `CalendarPlanner`, `CalendarRoster`, `FileUpload`, `InputPhone`, `Code`, `DotsButton`…: la cobertura viva en stories, no en tests — **baja**
 
@@ -135,11 +161,15 @@ Solo cuatro componentes del lote tienen `.test.tsx` (`AnnotationThread`, `Calend
 
 **Propuesta:** ninguna acción inmediata —el patrón es deliberado—, pero conviene tenerlo presente al leer el verde de `pnpm test`: para estos componentes no dice nada.
 
+**Estado** (`s1-fichas-a`): sigue sin acción de diseño, pero el hueco se ha estrechado por el camino. Esta rama añade `.test.tsx` a `AsyncSelect`, `AsyncMultiSelect`, `CalendarPlanner`, `CalendarRoster` y `FileUpload`, todos ejecutados por `pnpm test` (sin Chromium). De los 18, ahora nueve tienen prueba en jsdom.
+
 ### A14 · `DateTimeField`: alcanza el CSS de otro componente — **baja**
 
 `.date-time-field__controls .date-picker__trigger { flex: 1 }` estila desde fuera una clase que pertenece a `DatePicker`. Funciona, pero es exactamente el acoplamiento que el DS evita al no exponer las clases BEM como contrato: cualquier renombrado dentro de `DatePicker` rompe el reparto de anchos aquí sin que nada avise.
 
 **Propuesta:** que `DatePicker` acepte el estiramiento por token o por clase propia (`--date-picker-flex`, o `className` desde el campo), en la misma línea que A12.
+
+**~~Resuelto~~** (`s1-fichas-a`): por `className` —que el `DatePicker` ya aceptaba—. El campo pone `date-time-field__date` sobre el disparador y estila su propia clase; ni un selector que alcance el BEM del otro componente.
 
 ### A15 · `DateTimeField`: `aria-invalid` sobre un `role="group"` — **baja**
 
@@ -147,11 +177,15 @@ El atributo se aplica al contenedor del grupo, donde no está definido: `aria-in
 
 **Propuesta:** quitarlo del `div` y dejarlo donde ya está, en los controles.
 
+**~~Resuelto~~** (`s1-fichas-a`): fuera del `role="group"`; el MDX explica ahora por qué no va ahí.
+
 ### A16 · `FileUpload`: tres SVG en línea en vez del átomo `Icon` — **media**
 
 El componente dibuja a mano el icono de subida de la zona de arrastre, el de archivo genérico de cada fila y el aspa de eliminar, con `stroke-width` y `viewBox` propios. El sistema tiene `Icon` con catálogo cerrado, y dos de los tres ya están en él (`file-text`, `close`); del tercero —una flecha de subida— no hay equivalente.
 
 **Propuesta:** sustituir los dos que existen por `<Icon name="file-text" />` y `<Icon name="close" />`, y **añadir `upload` al catálogo de `Icon`**. Lo segundo toca un componente global fuera de este lote, así que va entero como hallazgo en vez de arreglarse aquí.
+
+**~~Resuelto~~** (`s1-fichas-a`): los tres SVG fuera. `upload` ya estaba en el catálogo (transversal H10, en `main`). El icono de la zona mide con la talla del propio `Icon` (`sm`/`md`/`lg` según la del control), así que los tokens `icon-size` / `sm-icon-size` / `lg-icon-size` se retiran: apuntaban a `icon.size-*`, es decir, decían dos veces lo mismo. El de archivo genérico pasa de 20 px a los 16 del `Icon sm`; el aspa se queda en 16.
 
 ### A17 · `FileUpload`: barra de progreso propia, existiendo `ProgressBar` — **media**
 
@@ -159,11 +193,17 @@ El componente dibuja a mano el icono de subida de la zona de arrastre, el de arc
 
 **Propuesta:** `<ProgressBar value={progress} label={progressLabel} size="sm" />` y retirar los seis tokens `file-upload.progress-*`. Es la clase de duplicación que el criterio de familia (v28) buscaba: dos barras de progreso en el mismo paquete envejecen distinto.
 
+**~~Resuelto~~** (`s1-fichas-a`): tal cual. De los tokens propios solo sobrevive `progress-margin-block-start` (el aire que separa la barra de la lista); se van los seis de la barra y sus dos pares oscuros. `FileUpload.test.tsx` comprueba que la barra es la del átomo (`aria-valuetext`, que la propia no tenía) y que ya no queda ningún `svg` fuera de `Icon`.
+
 ### A18 · `InputPhone`: dos dependencias externas y un glifo cableado — **media**
 
 Es el único componente del lote que depende de terceros: `react-phone-number-input` (que impone su propio árbol DOM, obliga al `inputComponent` con doble `ref` y trae su CSS implícito) y `libphonenumber-js` (una tabla de metadatos de todos los países, de peso nada despreciable en el bundle del consumidor). Encima, el estado «internacional» del selector se dibuja con el carácter `'🌐'` cableado, que ni es un `Icon` ni es una prop de texto.
 
 **Propuesta:** no es urgente y funciona, pero conviene decidirlo antes de que más consumidores lo pineen: (a) medir qué añade `libphonenumber-js` al bundle y si conviene el build `min` de metadatos; (b) sacar el glifo a una prop o al catálogo de `Icon`. La sustitución de la librería sería un breaking y no se propone.
+
+**~~Resuelto~~** (`s1-fichas-a`): (a) medido — las dos librerías sirven **ya por defecto** el build `min` (metadata.min.json: 84 KB en crudo, ~20 KB con gzip; el `max` pesa el doble). No hay a qué bajarse, así que la dependencia se cierra como **excepción declarada** y el porqué queda escrito en el MDX (§ «La excepción de las dependencias»): la tabla de planes de numeración de todos los países no es «poco código propio», es mantenimiento perpetuo. Lo que sí se ha quitado es una de las dos importaciones: `getCountryCallingCode` se toma de `react-phone-number-input`, que lo reexporta atado a sus mismos metadatos — una sola tabla de países, no dos. (b) el glifo pasa a `internationalLabel` (default `'🌐'`), reenviada desde `InputPhoneField` y anotada en `Internacionalizacion.mdx`.
+
+Queda **fuera**, para un commit con `pnpm install` de por medio: `libphonenumber-js` ya no se importa en `src/`, así que podría salir de `dependencies` (`react-phone-number-input` lo arrastra igual). No se toca aquí para no mover el lockfile.
 
 ## Resumen de severidades
 

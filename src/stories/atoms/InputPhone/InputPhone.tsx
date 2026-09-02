@@ -1,7 +1,9 @@
 import { forwardRef, useMemo, type Ref } from 'react';
 import { Select as BaseSelect } from '@base-ui/react/select';
-import { getCountryCallingCode } from 'libphonenumber-js';
-import PhoneInputLib from 'react-phone-number-input';
+// `getCountryCallingCode` se toma de `react-phone-number-input`, que lo
+// reexporta ya atado a sus metadatos: una sola librería en el componente y
+// ninguna posibilidad de cargar dos tablas de países distintas.
+import PhoneInputLib, { getCountryCallingCode } from 'react-phone-number-input';
 import type { Country } from 'react-phone-number-input';
 import { Icon } from '../Icon/Icon';
 import './InputPhone.css';
@@ -14,11 +16,13 @@ interface CountrySelectProps {
   size?: 'sm' | 'md' | 'lg';
   /** Ver `InputPhoneProps.countryLabel`. */
   countryLabel?: string;
+  /** Ver `InputPhoneProps.internationalLabel`. */
+  internationalLabel?: string;
   /** Ver `InputPhoneProps.container`. */
   container?: React.ComponentPropsWithoutRef<typeof BaseSelect.Portal>['container'];
 }
 
-function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel = 'País', container }: CountrySelectProps) {
+function CountrySelect({ value, onChange, options, disabled, size = 'md', countryLabel = 'País', internationalLabel = '🌐', container }: CountrySelectProps) {
   const INTL = '__intl__';
   const toVal = (c: Country | undefined) => c ?? INTL;
   const fromVal = (v: string): Country => (v === INTL ? (undefined as unknown as Country) : (v as Country));
@@ -36,7 +40,7 @@ function CountrySelect({ value, onChange, options, disabled, size = 'md', countr
     >
       <BaseSelect.Trigger className="input-phone__country" aria-label={countryLabel}>
         <BaseSelect.Value>
-          {value ? `+${getCountryCallingCode(value)}` : '🌐'}
+          {value ? `+${getCountryCallingCode(value)}` : internationalLabel}
         </BaseSelect.Value>
         <Icon name="chevron" className="input-phone__country-icon" size={chevronSize} />
       </BaseSelect.Trigger>
@@ -93,6 +97,12 @@ export interface InputPhoneProps {
    */
   countryLabel?: string;
   /**
+   * Lo que enseña el selector cuando no hay país elegido (número en formato
+   * internacional). Default: "🌐". Es contenido visible: una app que no quiera
+   * el emoji pasa aquí su propio texto o glifo.
+   */
+  internationalLabel?: string;
+  /**
    * Nodo DOM donde montar el portal del dropdown de país (reenviado a
    * `Select.Portal` de Base UI). Por defecto se monta en `document.body`, que
    * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)
@@ -126,6 +136,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(function
   onBlur,
   onFocus,
   countryLabel,
+  internationalLabel,
   container,
 }: InputPhoneProps, ref) {
   const classes = [
@@ -167,7 +178,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(function
       name={name}
       inputComponent={numberInput}
       countrySelectComponent={CountrySelect}
-      countrySelectProps={{ size, countryLabel, container }}
+      countrySelectProps={{ size, countryLabel, internationalLabel, container }}
       onChange={(v) => onChange?.(v)}
       onBlur={onBlur}
       onFocus={onFocus}

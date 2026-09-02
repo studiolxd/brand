@@ -17,14 +17,14 @@ describe('AnnotationThread', () => {
   it('es un artículo con nombre accesible y estado abierto por defecto', () => {
     render(<AnnotationThread annotation={raiz} />);
     const hilo = screen.getByRole('article', { name: 'Hilo de anotaciones' });
-    expect(hilo).toHaveAttribute('data-status', 'open');
+    expect(hilo).not.toHaveClass('annotation-thread--resolved');
     expect(within(hilo).getByText('Abierta')).toBeInTheDocument();
   });
 
   it('resuelto cambia el estado y su rótulo', () => {
     render(<AnnotationThread annotation={raiz} status="resolved" />);
     const hilo = screen.getByRole('article', { name: 'Hilo de anotaciones' });
-    expect(hilo).toHaveAttribute('data-status', 'resolved');
+    expect(hilo).toHaveClass('annotation-thread--resolved');
     expect(within(hilo).getByText('Resuelta')).toBeInTheDocument();
   });
 

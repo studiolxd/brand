@@ -11,6 +11,25 @@ Campo de teléfono con selector de país integrado. Internamente combina [react-
 
 El valor se normaliza siempre al formato E.164 (p. ej. `+34612345678`).
 
+## La excepción de las dependencias
+
+Es el único componente del sistema que depende de terceros, y es una excepción
+declarada, no un descuido. Un teléfono correcto exige la tabla de planes de
+numeración de todos los países —prefijos, longitudes, formato mientras se
+escribe— que cambia sola y que nadie debería reescribir: sustituirla por código
+propio no es «poco código», es asumir el mantenimiento de esa tabla.
+
+Lo que sí se ha comprobado es el peso: `react-phone-number-input` y
+`libphonenumber-js` sirven **por defecto** su build `min` de metadatos (≈84 KB
+sin comprimir, ≈20 KB con gzip), el más pequeño que publican; el `max` pesaría
+el doble. No hay build menor al que bajarse. Además el componente importa
+`getCountryCallingCode` **de `react-phone-number-input`**, que lo reexporta atado
+a esos mismos metadatos: una sola tabla de países en el bundle del consumidor,
+no dos.
+
+Cambiar de librería sería breaking para quien ya tiene números guardados, así
+que no se propone.
+
 ## Por defecto
 
 País inicial España (`defaultCountry="ES"`).
@@ -59,7 +78,10 @@ El focus ring se aplica al contenedor completo (selector de país + campo numér
 
 ## Internacionalización
 
-El `aria-label` del selector de país se traduce con la prop `countryLabel`.
+El `aria-label` del selector de país se traduce con la prop `countryLabel`, y lo
+que enseña el selector cuando aún no hay país —el glifo `🌐`— es la prop
+`internationalLabel`: se sustituye por otro texto o glifo sin tocar el
+componente.
 
 Los textos por defecto están en castellano. Ver **Foundations › Internacionalización** para la
 convención completa.

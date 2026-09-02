@@ -1,5 +1,6 @@
-import { useState, useCallback, type ReactNode } from 'react';
+import { useState, useCallback, useId, type ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { TagVariant } from '../../atoms/Tag/Tag';
 import { Modal } from '../Modal/Modal';
 import {
@@ -33,6 +34,13 @@ export interface CalendarPlannerProps {
   maxItemsPerDay?: number;
   /** Callback al pulsar "+N más" en una celda */
   onMoreClick?: (date: Date, events: PlannerEvent[]) => void;
+  /**
+   * Abre el diálogo interno con los eventos ocultos al pulsar "+N más".
+   * Default: `true`, salvo que se pase `onMoreClick`, en cuyo caso el
+   * consumidor lleva ya el desbordamiento y el diálogo propio se apaga.
+   * Pásalo a `true` de forma explícita para tener las dos cosas.
+   */
+  showMoreDialog?: boolean;
   /**
    * Callback al hacer click en cualquier celda de día (incluso días vacíos y externos).
    * Recibe la fecha de la celda y el array de eventos de ese día (vacío si no hay ninguno).
@@ -81,6 +89,7 @@ export function CalendarPlanner({
   renderDay,
   maxItemsPerDay = 3,
   onMoreClick,
+  showMoreDialog,
   onDayClick,
   month: monthProp,
   defaultMonth,
@@ -98,6 +107,10 @@ export function CalendarPlanner({
     () => monthProp ?? defaultMonth ?? new Date()
   );
   const [modalDay, setModalDay] = useState<{ date: Date; events: PlannerEvent[] } | null>(null);
+
+  // El diálogo interno es el comportamiento por defecto solo mientras nadie se
+  // ocupa del desbordamiento: con `onMoreClick` se abrirían dos cosas a la vez.
+  const moreDialog = showMoreDialog ?? !onMoreClick;
 
   const closeModal = useCallback(() => setModalDay(null), []);
 
@@ -117,6 +130,17 @@ export function CalendarPlanner({
   const titleFormatter = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
   const title = titleFormatter.format(currentMonth);
 
+  // El número suelto («14») no dice de qué día se habla. Como la celda contiene
+  // los eventos, su nombre accesible no puede ser un `aria-label` —taparía lo de
+  // dentro—: la fecha entera va oculta dentro del propio número. Por `locale`
+  // con `Intl`, como el resto de fechas del sistema.
+  const dayFormatter = new Intl.DateTimeFormat(locale, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
   const modalTitleFormatter = new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   const weekdays = getWeekdayNames(locale, 'short');
@@ -135,7 +159,10 @@ export function CalendarPlanner({
     onActivate: onDayClick ? (date) => onDayClick(date, getEventsForDay(date)) : undefined,
   });
 
-  const titleId = `planner-title-${currentMonth.getFullYear()}-${currentMonth.getMonth()}`;
+  // Ver `Calendar`: el `useId` evita el id duplicado con dos planificadores del
+  // mismo mes en la misma página.
+  const instanceId = useId();
+  const titleId = `${instanceId}-planner-title-${currentMonth.getFullYear()}-${currentMonth.getMonth()}`;
   const rootClass = ['calendar-planner', `calendar-planner--${size}`, className]
     .filter(Boolean)
     .join(' ');
@@ -203,9 +230,13 @@ export function CalendarPlanner({
                   onFocus={onDayClick ? () => grid.onCellFocus(date) : undefined}
                   onClick={onDayClick ? () => onDayClick(date, dayEvents) : undefined}
                 >
-                  {/* Sin `aria-label`: en un `span` sin rol el atributo se
-                      ignora, y aquí solo repetía el número que ya se ve. */}
-                  <span className={numberClass}>{date.getDate()}</span>
+                  {/* La fecha larga para quien escucha, el dígito para quien
+                      mira: un `aria-label` en la celda taparía los eventos, y
+                      en el `span` sin rol se ignoraría. */}
+                  <span className={numberClass}>
+                    <VisuallyHidden>{dayFormatter.format(date)}</VisuallyHidden>
+                    <span aria-hidden="true">{date.getDate()}</span>
+                  </span>
 
                   <div className="calendar-planner__cell-body">
                     {renderDay ? (
@@ -223,7 +254,7 @@ export function CalendarPlanner({
                             className="calendar-planner__more"
                             onClick={(e) => {
                               e.stopPropagation();
-                              setModalDay({ date, events: dayEvents });
+                              if (moreDialog) setModalDay({ date, events: dayEvents });
                               onMoreClick?.(date, dayEvents);
                             }}
                           >

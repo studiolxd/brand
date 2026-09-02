@@ -20,7 +20,6 @@
   --file-upload-padding-inline: var(--file-upload-sm-padding-inline);
   --file-upload-text-font-size: var(--file-upload-sm-text-font-size);
   --file-upload-subtext-font-size: var(--file-upload-sm-subtext-font-size);
-  --file-upload-icon-size: var(--file-upload-sm-icon-size);
   --file-upload-thumb-size: var(--file-upload-sm-thumb-size);
   --file-upload-item-name-font-size: var(--file-upload-sm-item-name-font-size);
 }
@@ -30,7 +29,6 @@
   --file-upload-padding-inline: var(--file-upload-lg-padding-inline);
   --file-upload-text-font-size: var(--file-upload-lg-text-font-size);
   --file-upload-subtext-font-size: var(--file-upload-lg-subtext-font-size);
-  --file-upload-icon-size: var(--file-upload-lg-icon-size);
   --file-upload-thumb-size: var(--file-upload-lg-thumb-size);
   --file-upload-item-name-font-size: var(--file-upload-lg-item-name-font-size);
 }
@@ -99,10 +97,9 @@
 
 /* ── Contenido del dropzone ───────────────────────────── */
 
+/* El tamaño lo pone la talla del `Icon`; aquí solo el color y el aire. */
 .file-upload__icon {
   color: var(--file-upload-icon-color);
-  inline-size: var(--file-upload-icon-size);
-  block-size: var(--file-upload-icon-size);
   flex-shrink: 0;
   margin-block-end: var(--file-upload-gap);
 }
@@ -239,20 +236,7 @@
 
 /* ── Progreso ─────────────────────────────────────────── */
 
+/* La barra es el átomo `ProgressBar`: aquí solo se la separa de la lista. */
 .file-upload__progress {
   margin-block-start: var(--file-upload-progress-margin-block-start);
-  width: 100%;
-  height: var(--file-upload-progress-height);
-  background-color: var(--file-upload-progress-bg);
-  border-radius: var(--file-upload-progress-border-radius);
-  overflow: hidden;
-}
-
-.file-upload__progress-bar {
-  height: 100%;
-  width: var(--file-upload-progress, 0%);
-  background-color: var(--file-upload-progress-fill);
-  border-radius: var(--file-upload-progress-border-radius);
-  transition:
-    width var(--file-upload-progress-transition-duration) var(--file-upload-progress-transition-easing);
 }
