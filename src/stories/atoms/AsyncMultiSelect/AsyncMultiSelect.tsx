@@ -14,9 +14,19 @@ export interface AsyncMultiSelectOption {
 export interface AsyncMultiSelectProps {
   onSearch: (query: string) => Promise<AsyncMultiSelectOption[]>;
   value?: string[];
+  /**
+   * Valores iniciales en modo no controlado. Sus etiquetas no se conocen hasta
+   * que se buscan: para enseñarlas desde el primer pintado hay que pasar
+   * también `selectedOptions`. Sin ellas la pill muestra el valor crudo.
+   */
   defaultValue?: string[];
   onValueChange?: (value: string[]) => void;
-  /** Labels for the currently selected values — the parent is responsible for providing these */
+  /**
+   * Etiquetas de los valores elegidos. En modo controlado es la vía normal de
+   * dárselas al componente. En modo no controlado no hace falta para lo que se
+   * elige con el ratón o el teclado —esas opciones vienen de `onSearch` y el
+   * componente las recuerda—, solo para los valores de `defaultValue`.
+   */
   selectedOptions?: AsyncMultiSelectOption[];
   placeholder?: string;
   disabled?: boolean;
@@ -75,7 +85,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   value,
   defaultValue = [],
   onValueChange,
-  selectedOptions = [],
+  selectedOptions,
   placeholder = 'Buscar…',
   disabled,
   readOnly,
@@ -99,6 +109,9 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   const [hasSearched, setHasSearched] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
+  // Etiquetas de las opciones que han pasado por el control: son el respaldo
+  // cuando el consumidor no lleva él mismo `selectedOptions`.
+  const [knownOptions, setKnownOptions] = useState<AsyncMultiSelectOption[]>([]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
@@ -106,6 +119,19 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   const itemIdPrefix = useId();
 
   const currentValues = value !== undefined ? value : internalValues;
+
+  /**
+   * Las pills se pintan desde los valores vigentes, no desde `selectedOptions`:
+   * así el modo no controlado enseña lo elegido sin que el consumidor tenga que
+   * llevar la lista de etiquetas. Para un valor del que nadie sabe la etiqueta
+   * —un `defaultValue` que nunca se ha buscado— se pinta el valor crudo, que es
+   * lo que el formulario va a enviar.
+   */
+  const pills: AsyncMultiSelectOption[] = currentValues.map(v =>
+    selectedOptions?.find(o => o.value === v)
+    ?? knownOptions.find(o => o.value === v)
+    ?? { value: v, label: v },
+  );
 
   const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
 
@@ -146,10 +172,13 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
     void runSearch('');
   }
 
-  function toggleValue(v: string) {
+  function toggleValue(v: string, option?: AsyncMultiSelectOption) {
     const next = currentValues.includes(v)
       ? currentValues.filter(x => x !== v)
       : [...currentValues, v];
+    if (option) {
+      setKnownOptions(prev => (prev.some(o => o.value === option.value) ? prev : [...prev, option]));
+    }
     if (value === undefined) setInternalValues(next);
     onValueChange?.(next);
   }
@@ -168,7 +197,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
       setActiveIndex(i => Math.max(i - 1, -1));
     } else if (e.key === 'Enter' && activeIndex >= 0 && results[activeIndex]) {
       e.preventDefault();
-      toggleValue(results[activeIndex].value);
+      toggleValue(results[activeIndex].value, results[activeIndex]);
       inputRef.current?.focus();
     } else if (e.key === 'Escape') {
       setOpen(false);
@@ -217,7 +246,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
     <BasePopover.Root open={open} onOpenChange={handleOpenChange}>
       <div ref={anchorRef} className={triggerClass} data-popup-open={open || undefined}>
         <div className="async-multi-select__input-area">
-          {selectedOptions.map(opt => (
+          {pills.map(opt => (
             <span key={opt.value} className="async-multi-select__pill">
               <span className="async-multi-select__pill-label">{opt.label}</span>
               {!disabled && !readOnly && (
@@ -303,7 +332,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
                       isActive ? 'async-multi-select__item--active' : '',
                     ].filter(Boolean).join(' ')}
                     onPointerDown={e => e.preventDefault()}
-                    onClick={() => { toggleValue(option.value); inputRef.current?.focus(); }}
+                    onClick={() => { toggleValue(option.value, option); inputRef.current?.focus(); }}
                   >
                     <span className="async-multi-select__item-check" aria-hidden="true">
                       <span className="async-multi-select__item-check-mark" />

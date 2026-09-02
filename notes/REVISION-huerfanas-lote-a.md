@@ -87,6 +87,8 @@ Las píldoras se pintan **solo** desde la prop `selectedOptions`, que por defect
 
 **Propuesta:** guardar en estado interno las opciones elegidas (las que pasan por `toggleValue` vienen de `results`, así que se conocen enteras) y usarlas como respaldo cuando no hay `selectedOptions`. Para los valores de `defaultValue` que nunca se han buscado no hay etiqueta posible: ahí, o se documenta que `defaultValue` exige `selectedOptions`, o se quita `defaultValue` del API. Lo que hoy tiene es un modo no controlado que se ve roto.
 
+**~~Resuelto~~** (`s1-fichas-a`): las pills se pintan desde `currentValues`, no desde `selectedOptions`; el componente recuerda en `knownOptions` las opciones que pasan por `toggleValue` y las usa de respaldo. `defaultValue` **se queda** —es el patrón de la familia (`MultiSelect`, `FileUpload`, `OtpInput`)— y un valor sin etiqueta conocida pinta el valor crudo: se ve lo que el formulario va a enviar, en vez de nada. Story «No controlado», MDX § Valores reescrito y `AsyncMultiSelect.test.tsx` con cinco casos.
+
 ### A6 · `Calendar` / `CalendarPlanner`: el `id` del título no es único — **baja**
 
 `calendar-title-${año}-${mes}` y `planner-title-${año}-${mes}` se construyen a mano. Dos calendarios del mismo mes en una página —el caso normal de un rango «desde / hasta»— generan `id` duplicados, y el `aria-labelledby` de la segunda rejilla apunta al título de la primera.

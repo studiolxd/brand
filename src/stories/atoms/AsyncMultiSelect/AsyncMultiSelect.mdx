@@ -19,9 +19,12 @@ El `AsyncSelect` con **varios** valores: cada elección se queda como una pill d
 
 ## Valores
 
-Como en el `AsyncSelect`, el componente no guarda las etiquetas: con `value` hay que pasar también las opciones elegidas. El disparador mide la talla exacta con una línea de pills y crece solo cuando envuelven.
+Las pills se pintan desde los valores vigentes. Lo que se elige en la lista lo recuerda el componente —la opción viene entera de `onSearch`—, así que en modo no controlado basta con `defaultValue`; `selectedOptions` solo hace falta para poner etiqueta a valores que nunca se han buscado. Sin ellas la pill enseña el valor crudo, que es lo que el formulario va a enviar: el control nunca se queda en blanco teniendo valor.
+
+En modo controlado (`value`) la lista de etiquetas la lleva el consumidor y se pasa por `selectedOptions`, como en el `AsyncSelect`. El disparador mide la talla exacta con una línea de pills y crece solo cuando envuelven.
 
 <Canvas of={AsyncMultiSelectStories.WithInitialValues} />
+<Canvas of={AsyncMultiSelectStories.NoControlado} />
 <Canvas of={AsyncMultiSelectStories.Controlled} />
 
 ## Tallas
