@@ -81,6 +81,12 @@ export const ConAyuda: Story = {
   args: { helperText: 'El orden se guarda para la próxima visita.' },
 };
 
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: { helperText: 'El orden se guarda para la próxima visita.' },
+};
+
 /** El error se dice en texto y en el borde; nunca solo en color. */
 export const ConError: Story = {
   args: {
