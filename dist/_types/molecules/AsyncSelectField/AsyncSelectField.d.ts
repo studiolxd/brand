@@ -1,4 +1,5 @@
 import './AsyncSelectField.css';
+import { AsyncSelect } from '../../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncSelectOption } from '../../atoms/AsyncSelect/AsyncSelect';
 export type { AsyncSelectOption };
 export interface AsyncSelectFieldProps {
@@ -20,6 +21,8 @@ export interface AsyncSelectFieldProps {
     name?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    /** Marca el control como obligatorio (`aria-required` en el combobox). */
+    required?: boolean;
     /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
     error?: boolean;
     /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -27,10 +30,18 @@ export interface AsyncSelectFieldProps {
     /** Texto de ayuda, enlazado por `aria-describedby`. */
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
+    /** Milisegundos de rebote antes de llamar a `onSearch`. Default: 300. */
+    debounceMs?: number;
     /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
     className?: string;
     /** Texto cuando la búsqueda no devuelve nada. Default: "Sin resultados". */
     emptyMessage?: string;
+    /** Etiqueta accesible del spinner mientras se busca. Default: "Buscando…". */
+    loadingLabel?: string;
+    /** aria-label del botón de limpiar selección. Default: "Limpiar selección". */
+    clearLabel?: string;
+    /** Nodo DOM donde montar el portal del desplegable (ver `AsyncSelect`). */
+    container?: React.ComponentProps<typeof AsyncSelect>['container'];
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 /**

@@ -7,19 +7,42 @@ export interface AsyncMultiSelectOption {
 export interface AsyncMultiSelectProps {
     onSearch: (query: string) => Promise<AsyncMultiSelectOption[]>;
     value?: string[];
+    /**
+     * Valores iniciales en modo no controlado. Sus etiquetas no se conocen hasta
+     * que se buscan: para enseñarlas desde el primer pintado hay que pasar
+     * también `selectedOptions`. Sin ellas la pill muestra el valor crudo.
+     */
     defaultValue?: string[];
     onValueChange?: (value: string[]) => void;
-    /** Labels for the currently selected values — the parent is responsible for providing these */
+    /**
+     * Etiquetas de los valores elegidos. En modo controlado es la vía normal de
+     * dárselas al componente. En modo no controlado no hace falta para lo que se
+     * elige con el ratón o el teclado —esas opciones vienen de `onSearch` y el
+     * componente las recuerda—, solo para los valores de `defaultValue`.
+     */
     selectedOptions?: AsyncMultiSelectOption[];
     placeholder?: string;
     disabled?: boolean;
     readOnly?: boolean;
     size?: 'sm' | 'md' | 'lg';
+    /**
+     * Milisegundos de rebote entre la última tecla y la llamada a `onSearch`.
+     * Default: 300. A 0 se busca en cada tecla.
+     */
+    debounceMs?: number;
     id?: string;
     /** Nombre del campo en el formulario: se monta un input oculto por valor elegido. */
     name?: string;
     /** Marca el estado de error: aplica la clase `async-multi-select--error` y `aria-invalid`. */
     error?: boolean;
+    /**
+     * Marca el control como obligatorio: pone `aria-required` en el combobox.
+     * No se traslada a un `required` nativo porque lo que viaja en el formulario
+     * es un input oculto —un control no enfocable con `required` bloquea el envío
+     * sin poder enseñar el mensaje—: la validación la lleva el consumidor (o
+     * react-hook-form), como en el resto de campos compuestos del sistema.
+     */
+    required?: boolean;
     /** Se llama al salir del control (react-hook-form lo usa para validar). */
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     /** Se añade DESPUÉS de las clases propias del componente. */

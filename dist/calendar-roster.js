@@ -45,27 +45,27 @@ var l = {
 		label: "No laborable"
 	}
 ];
-function d({ rows: d, month: f, onMonthChange: p, hrefBuilder: m, linkComponent: h, renderCell: g, nameLabel: _ = "Empleado", showLegend: v = !0, locale: y = "es-ES", legendItems: b = u, legendLabel: x = "Leyenda", previousMonthLabel: S = "Mes anterior", nextMonthLabel: C = "Mes siguiente", className: w }) {
-	let T = /* @__PURE__ */ new Date(), E = c(f), D = n(f, -1), O = n(f, 1), k = new Intl.DateTimeFormat(y, {
+function d({ rows: d, month: f, onMonthChange: p, hrefBuilder: m, linkComponent: h, renderCell: g, nameLabel: _ = "Empleado", birthdayPrefix: v = "🎂 ", showLegend: y = !0, locale: b = "es-ES", legendItems: x = u, legendLabel: S = "Leyenda", previousMonthLabel: C = "Mes anterior", nextMonthLabel: w = "Mes siguiente", className: T }) {
+	let E = /* @__PURE__ */ new Date(), D = c(f), O = n(f, -1), k = n(f, 1), A = new Intl.DateTimeFormat(b, {
 		month: "long",
 		year: "numeric"
-	}).format(f), A = new Intl.DateTimeFormat(y, { weekday: "narrow" }), j = new Intl.DateTimeFormat(y, { weekday: "long" }), M = p ? (e) => (t) => {
+	}).format(f), j = new Intl.DateTimeFormat(b, { weekday: "narrow" }), M = new Intl.DateTimeFormat(b, { weekday: "long" }), N = p ? (e) => (t) => {
 		m && t.preventDefault(), p(e);
-	} : void 0, N = `roster-title-${f.getFullYear()}-${f.getMonth()}`;
+	} : void 0, P = `roster-title-${f.getFullYear()}-${f.getMonth()}`;
 	return /* @__PURE__ */ o("div", {
-		className: ["calendar-roster", w].filter(Boolean).join(" "),
+		className: ["calendar-roster", T].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ a("div", {
 				className: "calendar-roster__nav",
 				children: /* @__PURE__ */ a(t, {
-					label: k,
-					labelId: N,
-					prevHref: m?.(D),
-					nextHref: m?.(O),
-					prevOnClick: M?.(D),
-					nextOnClick: M?.(O),
-					prevLabel: S,
-					nextLabel: C,
+					label: A,
+					labelId: P,
+					prevHref: m?.(O),
+					nextHref: m?.(k),
+					prevOnClick: N?.(O),
+					nextOnClick: N?.(k),
+					prevLabel: C,
+					nextLabel: w,
 					linkComponent: h
 				})
 			}),
@@ -73,17 +73,17 @@ function d({ rows: d, month: f, onMonthChange: p, hrefBuilder: m, linkComponent:
 				className: "calendar-roster__wrap",
 				children: /* @__PURE__ */ o("table", {
 					className: "calendar-roster__table",
-					"aria-labelledby": N,
+					"aria-labelledby": P,
 					children: [/* @__PURE__ */ a("thead", { children: /* @__PURE__ */ o("tr", { children: [/* @__PURE__ */ a("th", {
 						className: "calendar-roster__th-name",
 						scope: "col",
 						children: _
-					}), E.map((e) => {
-						let t = r(e, T), n = [
+					}), D.map((e) => {
+						let t = r(e, E), n = [
 							"calendar-roster__th-day",
 							s(e) && "calendar-roster__th-day--weekend",
 							t && "calendar-roster__th-day--today"
-						].filter(Boolean).join(" "), i = String(e.getDate()).padStart(2, "0"), c = A.format(e), l = j.format(e);
+						].filter(Boolean).join(" "), i = String(e.getDate()).padStart(2, "0"), c = j.format(e), l = M.format(e);
 						return /* @__PURE__ */ o("th", {
 							className: n,
 							scope: "col",
@@ -98,12 +98,13 @@ function d({ rows: d, month: f, onMonthChange: p, hrefBuilder: m, linkComponent:
 								})
 							})]
 						}, e.getDate());
-					})] }) }), /* @__PURE__ */ a("tbody", { children: d.map((t) => /* @__PURE__ */ o("tr", { children: [/* @__PURE__ */ a("td", {
-						className: "calendar-roster__td-name",
+					})] }) }), /* @__PURE__ */ a("tbody", { children: d.map((t) => /* @__PURE__ */ o("tr", { children: [/* @__PURE__ */ a("th", {
+						scope: "row",
+						className: "calendar-roster__th-name-row",
 						title: t.name,
 						children: t.name
-					}), E.map((n) => {
-						let c = n.getDate(), u = t.cells[c] ?? null, d = s(n), f = r(n, T), p = u?.type === "holiday", m = u?.type === "non-working";
+					}), D.map((n) => {
+						let c = n.getDate(), u = t.cells[c] ?? null, d = s(n), f = r(n, E), p = u?.type === "holiday", m = u?.type === "non-working";
 						return /* @__PURE__ */ a("td", {
 							className: [
 								"calendar-roster__cell",
@@ -117,16 +118,17 @@ function d({ rows: d, month: f, onMonthChange: p, hrefBuilder: m, linkComponent:
 								children: u.label
 							}), u && u.type !== "schedule" && u.type !== "non-working" && /* @__PURE__ */ a(e, {
 								variant: l[u.type],
-								children: u.type === "birthday" ? `🎂 ${u.label}` : u.label
+								children: u.type === "birthday" ? `${v}${u.label}` : u.label
 							})] })
 						}, c);
 					})] }, t.id)) })]
 				})
 			}),
-			v && /* @__PURE__ */ a("div", {
+			y && /* @__PURE__ */ a("div", {
 				className: "calendar-roster__legend",
-				"aria-label": x,
-				children: b.map(({ type: t, label: n }) => /* @__PURE__ */ a("span", {
+				role: "group",
+				"aria-label": S,
+				children: x.map(({ type: t, label: n }) => /* @__PURE__ */ a("span", {
 					className: "calendar-roster__legend-item",
 					children: t === "non-working" ? /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a("span", { className: "calendar-roster__legend-swatch calendar-roster__legend-swatch--non-working" }), n] }) : /* @__PURE__ */ a(e, {
 						variant: l[t],

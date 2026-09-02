@@ -16,10 +16,16 @@ export interface OtpInputProps {
     describedBy?: string;
     /** Ids de ayuda/error que describen el grupo de celdas (lo pone el campo). */
     'aria-describedby'?: string;
-    /** Nombre accesible del grupo cuando va suelto. */
+    /** Nombre accesible explícito del grupo: prevalece sobre `groupLabel`. */
     'aria-label'?: string;
     /** Nombre accesible del grupo por referencia (la etiqueta visible del campo). */
     'aria-labelledby'?: string;
+    /**
+     * Nombre accesible del grupo cuando no se pasa `aria-label` ni
+     * `aria-labelledby` — el caso del control suelto. Default: "Código de
+     * verificación" (castellano). Una app multiidioma debe pasarla traducida.
+     */
+    groupLabel?: string;
     id?: string;
     name?: string;
     /** Se llama al salir de la última celda (react-hook-form lo usa para validar). */

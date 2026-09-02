@@ -6,20 +6,20 @@ import { Label as n } from "./label.js";
 import { forwardRef as r, useId as i } from "react";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx
-var s = r(function({ id: r, label: s, labelHidden: c = !1, onSearch: l, value: u, onValueChange: d, selectedOption: f, placeholder: p, name: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, className: x, emptyMessage: S, onBlur: C }, w) {
-	let T = t(_), E = i(), D = r ?? E, O = y ? `${D}-error` : void 0, k = b ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = v || !!y;
+var s = r(function({ id: r, label: s, labelHidden: c = !1, onSearch: l, value: u, onValueChange: d, selectedOption: f, placeholder: p, name: m, disabled: h, readOnly: g, size: _, debounceMs: v, required: y, error: b = !1, errorMessage: x, helperText: S, className: C, emptyMessage: w, loadingLabel: T, clearLabel: E, container: D, onBlur: O }, k) {
+	let A = t(_), j = i(), M = r ?? j, N = x ? `${M}-error` : void 0, P = S ? `${M}-helper` : void 0, F = [N, P].filter(Boolean).join(" ") || void 0, I = b || !!x;
 	return /* @__PURE__ */ o("div", {
-		className: ["async-select-field", x].filter(Boolean).join(" "),
+		className: ["async-select-field", C].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ a(n, {
-				htmlFor: D,
+				htmlFor: M,
 				hidden: c,
-				size: T,
+				size: A,
 				children: s
 			}),
 			/* @__PURE__ */ a(e, {
-				ref: w,
-				id: D,
+				ref: k,
+				id: M,
 				name: m,
 				onSearch: l,
 				value: u,
@@ -28,22 +28,27 @@ var s = r(function({ id: r, label: s, labelHidden: c = !1, onSearch: l, value: u
 				placeholder: p,
 				disabled: h,
 				readOnly: g,
-				size: T,
-				error: j,
-				emptyMessage: S,
-				"aria-describedby": A,
-				onBlur: C
+				size: A,
+				debounceMs: v,
+				required: y,
+				error: I,
+				emptyMessage: w,
+				loadingLabel: T,
+				clearLabel: E,
+				container: D,
+				"aria-describedby": F,
+				onBlur: O
 			}),
-			y && /* @__PURE__ */ a("span", {
-				id: O,
+			x && /* @__PURE__ */ a("span", {
+				id: N,
 				className: "async-select-field__error",
 				role: "alert",
-				children: y
+				children: x
 			}),
-			b && /* @__PURE__ */ a("span", {
-				id: k,
+			S && /* @__PURE__ */ a("span", {
+				id: P,
 				className: "async-select-field__helper",
-				children: b
+				children: S
 			})
 		]
 	});

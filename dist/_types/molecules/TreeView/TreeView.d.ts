@@ -9,7 +9,10 @@ export interface TreeViewNode {
     icon?: ReactNode;
     /** Ramas hijas. Un nodo sin `children` es una hoja. */
     children?: TreeViewNode[];
-    /** No se puede elegir ni recibe el foco. */
+    /**
+     * No se puede elegir. Sigue siendo alcanzable con el teclado y se anuncia
+     * como deshabilitado, como pide el patrón: no desaparece del árbol.
+     */
     disabled?: boolean;
 }
 export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>, 'onSelect'> {
@@ -41,7 +44,8 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'ul'>
  *
  * Implementa el patrón WAI-ARIA de **tree view** a mano —Base UI no trae árbol—:
  * `role="tree"` con `treeitem` anidados, un solo punto de tabulación y recorrido
- * completo con el teclado.
+ * completo con el teclado: flechas, Inicio/Fin, Intro/Espacio para elegir,
+ * salto por letra y `*` para abrir de una vez las ramas hermanas del nivel.
  *
  * La selección se marca con **tinta y peso**, y el paso del ratón con una línea:
  * ninguna fila se rellena, como en el resto del sistema.

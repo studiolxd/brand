@@ -1,119 +1,123 @@
 'use client';
 import './calendar-planner.css';
-import { Tag as e } from "./tag.js";
-import { Modal as t } from "./modal.js";
-import { c as n, i as r, l as i, n as a, o, r as s, s as c, t as l } from "./_shared/calendarGrid.js";
-import { useCallback as u, useState as d } from "react";
-import { Fragment as f, jsx as p, jsxs as m } from "react/jsx-runtime";
+import { VisuallyHidden as e } from "./visually-hidden.js";
+import { Tag as t } from "./tag.js";
+import { Modal as n } from "./modal.js";
+import { c as r, i, l as a, n as o, o as s, r as c, s as l, t as u } from "./_shared/calendarGrid.js";
+import { useCallback as d, useId as f, useState as p } from "react";
+import { Fragment as m, jsx as h, jsxs as g } from "react/jsx-runtime";
 //#region src/stories/molecules/CalendarPlanner/CalendarPlanner.tsx
-function h({ events: h = [], renderDay: g, maxItemsPerDay: _ = 3, onMoreClick: v, onDayClick: y, month: b, defaultMonth: x, onMonthChange: S, navigable: C = !0, locale: w = "es-ES", previousMonthLabel: T = "Mes anterior", nextMonthLabel: E = "Mes siguiente", gridLabel: D, size: O = "md", className: k }) {
-	let [A, j] = d(() => b ?? x ?? /* @__PURE__ */ new Date()), [M, N] = d(null), P = u(() => N(null), []), F = b ?? A, I = u((e) => {
-		j(e), S?.(e);
-	}, [S]), L = /* @__PURE__ */ new Date(), R = O === "sm" ? "xs" : O === "lg" ? "md" : "sm", z = new Intl.DateTimeFormat(w, {
+function _({ events: _ = [], renderDay: v, maxItemsPerDay: y = 3, onMoreClick: b, showMoreDialog: x, onDayClick: S, month: C, defaultMonth: w, onMonthChange: T, navigable: E = !0, locale: D = "es-ES", previousMonthLabel: O = "Mes anterior", nextMonthLabel: k = "Mes siguiente", gridLabel: A, moreLabel: j = (e) => `+${e} más`, size: M = "md", className: N }) {
+	let [P, F] = p(() => C ?? w ?? /* @__PURE__ */ new Date()), [I, L] = p(null), R = x ?? !b, z = d(() => L(null), []), B = C ?? P, V = d((e) => {
+		F(e), T?.(e);
+	}, [T]), H = /* @__PURE__ */ new Date(), U = M === "sm" ? "xs" : M === "lg" ? "md" : "sm", W = new Intl.DateTimeFormat(D, {
 		month: "long",
 		year: "numeric"
-	}).format(F), B = new Intl.DateTimeFormat(w, {
+	}).format(B), G = new Intl.DateTimeFormat(D, {
 		weekday: "long",
 		day: "numeric",
 		month: "long",
 		year: "numeric"
-	}), V = s(w, "short"), H = new Intl.DateTimeFormat(w, { day: "numeric" }), U = l(a(F)), W = n(F, -1), G = n(F, 1), K = (e) => h.filter((t) => r(t.date, e)), q = i({
-		month: F,
-		onMonthChange: I,
-		onActivate: y ? (e) => y(e, K(e)) : void 0
-	}), J = `planner-title-${F.getFullYear()}-${F.getMonth()}`;
-	return /* @__PURE__ */ m("div", {
+	}), K = new Intl.DateTimeFormat(D, {
+		weekday: "long",
+		day: "numeric",
+		month: "long",
+		year: "numeric"
+	}), q = c(D, "short"), J = u(o(B)), Y = r(B, -1), X = r(B, 1), Z = (e) => _.filter((t) => i(t.date, e)), Q = a({
+		month: B,
+		onMonthChange: V,
+		onActivate: S ? (e) => S(e, Z(e)) : void 0
+	}), $ = `${f()}-planner-title-${B.getFullYear()}-${B.getMonth()}`;
+	return /* @__PURE__ */ g("div", {
 		className: [
 			"calendar-planner",
-			`calendar-planner--${O}`,
-			k
+			`calendar-planner--${M}`,
+			N
 		].filter(Boolean).join(" "),
 		children: [
-			o({
+			s({
 				block: "calendar-planner",
-				title: z,
-				titleId: J,
-				navigable: C,
-				previousMonthLabel: T,
-				nextMonthLabel: E,
-				onPrev: () => I(W),
-				onNext: () => I(G),
-				chevronSize: R
+				title: W,
+				titleId: $,
+				navigable: E,
+				previousMonthLabel: O,
+				nextMonthLabel: k,
+				onPrev: () => V(Y),
+				onNext: () => V(X),
+				chevronSize: U
 			}),
-			/* @__PURE__ */ m("div", {
+			/* @__PURE__ */ g("div", {
 				className: "calendar-planner__grid",
 				role: "grid",
-				"aria-label": D,
-				"aria-labelledby": D ? void 0 : J,
-				onKeyDown: y ? q.onKeyDown : void 0,
-				children: [c({
+				"aria-label": A,
+				"aria-labelledby": A ? void 0 : $,
+				onKeyDown: S ? Q.onKeyDown : void 0,
+				children: [l({
 					block: "calendar-planner",
 					rowModifier: "header",
-					weekdays: V
-				}), U.map((t, n) => /* @__PURE__ */ p("div", {
+					weekdays: q
+				}), J.map((n, r) => /* @__PURE__ */ h("div", {
 					role: "row",
 					className: "calendar-planner__row",
-					children: t.map(({ date: t, outside: n }) => {
-						let i = r(t, L), a = K(t), o = a.slice(0, _), s = a.length - o.length, c = [
+					children: n.map(({ date: n, outside: r }) => {
+						let a = i(n, H), o = Z(n), s = o.slice(0, y), c = o.length - s.length, l = [
 							"calendar-planner__cell",
-							n && "calendar-planner__cell--outside",
-							i && "calendar-planner__cell--today"
-						].filter(Boolean).join(" "), l = [
+							r && "calendar-planner__cell--outside",
+							a && "calendar-planner__cell--today"
+						].filter(Boolean).join(" "), u = [
 							"calendar-planner__day-number",
-							i && "calendar-planner__day-number--today",
-							n && "calendar-planner__day-number--outside"
+							a && "calendar-planner__day-number--today",
+							r && "calendar-planner__day-number--outside"
 						].filter(Boolean).join(" ");
-						return /* @__PURE__ */ m("div", {
-							ref: y ? q.cellRef(t) : void 0,
+						return /* @__PURE__ */ g("div", {
+							ref: S ? Q.cellRef(n) : void 0,
 							role: "gridcell",
-							className: [c, y ? "calendar-planner__cell--clickable" : ""].filter(Boolean).join(" "),
-							"aria-current": i ? "date" : void 0,
-							tabIndex: y ? q.isTabbable(t) ? 0 : -1 : void 0,
-							onFocus: y ? () => q.onCellFocus(t) : void 0,
-							onClick: y ? () => y(t, a) : void 0,
-							children: [/* @__PURE__ */ p("span", {
-								className: l,
-								"aria-label": H.format(t),
-								children: t.getDate()
-							}), /* @__PURE__ */ p("div", {
+							className: [l, S ? "calendar-planner__cell--clickable" : ""].filter(Boolean).join(" "),
+							"aria-current": a ? "date" : void 0,
+							tabIndex: S ? Q.isTabbable(n) ? 0 : -1 : void 0,
+							onFocus: S ? () => Q.onCellFocus(n) : void 0,
+							onClick: S ? () => S(n, o) : void 0,
+							children: [/* @__PURE__ */ g("span", {
+								className: u,
+								children: [/* @__PURE__ */ h(e, { children: G.format(n) }), /* @__PURE__ */ h("span", {
+									"aria-hidden": "true",
+									children: n.getDate()
+								})]
+							}), /* @__PURE__ */ h("div", {
 								className: "calendar-planner__cell-body",
-								children: g ? g(t, a) : /* @__PURE__ */ m(f, { children: [o.map((t) => /* @__PURE__ */ p(e, {
-									variant: t.variant ?? "neutral",
-									children: t.label
-								}, t.id)), s > 0 && /* @__PURE__ */ m("button", {
+								children: v ? v(n, o) : /* @__PURE__ */ g(m, { children: [s.map((e) => /* @__PURE__ */ h(t, {
+									variant: e.variant ?? "neutral",
+									children: e.label
+								}, e.id)), c > 0 && /* @__PURE__ */ h("button", {
 									type: "button",
 									className: "calendar-planner__more",
 									onClick: (e) => {
-										e.stopPropagation(), N({
-											date: t,
-											events: a
-										}), v?.(t, a);
+										e.stopPropagation(), R && L({
+											date: n,
+											events: o
+										}), b?.(n, o);
 									},
-									children: [
-										"+",
-										s,
-										" más"
-									]
+									children: j(c)
 								})] })
 							})]
-						}, t.toISOString());
+						}, n.toISOString());
 					})
-				}, n))]
+				}, r))]
 			}),
-			/* @__PURE__ */ p(t, {
-				open: M !== null,
-				onClose: P,
-				title: M ? B.format(M.date) : void 0,
-				children: /* @__PURE__ */ p("div", {
+			/* @__PURE__ */ h(n, {
+				open: I !== null,
+				onClose: z,
+				title: I ? K.format(I.date) : void 0,
+				children: /* @__PURE__ */ h("div", {
 					className: "calendar-planner__modal-events",
-					children: M?.events.map((t) => /* @__PURE__ */ p(e, {
-						variant: t.variant ?? "neutral",
-						children: t.label
-					}, t.id))
+					children: I?.events.map((e) => /* @__PURE__ */ h(t, {
+						variant: e.variant ?? "neutral",
+						children: e.label
+					}, e.id))
 				})
 			})
 		]
 	});
 }
 //#endregion
-export { h as CalendarPlanner };
+export { _ as CalendarPlanner };

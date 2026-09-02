@@ -1,1 +1,1 @@
-[data-otp-input]{gap:var(--spacing-2);display:flex}[data-otp-input] .input{text-align:center;width:3.5ch;padding-inline:0}
+.otp-input{gap:var(--otp-input-gap);display:flex}.otp-input__cell{inline-size:var(--otp-input-cell-inline-size);text-align:center;padding-inline:0}

@@ -43,6 +43,12 @@ export interface CalendarRosterProps {
     renderCell?: (day: number, date: Date, cell: RosterCell | null) => ReactNode;
     /** Etiqueta de la columna de nombre. Default: 'Empleado' */
     nameLabel?: string;
+    /**
+     * Lo que precede a la etiqueta de un cumpleaños. Default: `'🎂 '`
+     * (castellano/universal). Es contenido **visible** y se lee en voz alta:
+     * pásalo vacío para quitarlo, u otro texto para sustituirlo.
+     */
+    birthdayPrefix?: string;
     /** Muestra la leyenda al final. Default: true */
     showLegend?: boolean;
     /**
@@ -69,4 +75,4 @@ export interface CalendarRosterProps {
     locale?: string;
     className?: string;
 }
-export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarRoster({ rows, month, onMonthChange, hrefBuilder, linkComponent, renderCell, nameLabel, birthdayPrefix, showLegend, locale, legendItems, legendLabel, previousMonthLabel, nextMonthLabel, className, }: CalendarRosterProps): import("react/jsx-runtime").JSX.Element;

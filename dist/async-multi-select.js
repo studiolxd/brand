@@ -2,74 +2,84 @@
 import './async-multi-select.css';
 import { Icon as e } from "./icon.js";
 import { Spinner as t } from "./spinner.js";
-import { forwardRef as n, useCallback as r, useId as i, useRef as a, useState as o } from "react";
+import { forwardRef as n, useCallback as r, useEffect as ee, useId as i, useRef as a, useState as o } from "react";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 import { Popover as l } from "@base-ui/react/popover";
 //#region src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx
-function u(e, t) {
+function te(e, t) {
 	typeof e == "function" ? e(t) : e && (e.current = t);
 }
-var d = n(function({ onSearch: n, value: d, defaultValue: f = [], onValueChange: ee, selectedOptions: p = [], placeholder: m = "Buscar…", disabled: h, readOnly: g, size: _ = "md", id: v, name: y, error: b = !1, onBlur: x, className: S, "aria-label": C, "aria-describedby": w, removeLabel: T = (e) => `Quitar ${e}`, emptyMessage: E = "Sin resultados", loadingLabel: D = "Buscando…", container: O }, k) {
-	let [A, j] = o(!1), [M, N] = o(""), [P, F] = o(!1), [I, L] = o([]), [R, z] = o(!1), [B, V] = o(-1), [H, U] = o(f), W = a(null), G = a(null), K = a(null), q = i(), J = i(), Y = d === void 0 ? H : d, X = (e) => `${J}-opt-${e}`, Z = r(async (e) => {
-		F(!0), z(!1);
+var u = n(function({ onSearch: n, value: u, defaultValue: d = [], onValueChange: f, selectedOptions: p, placeholder: m = "Buscar…", disabled: h, readOnly: g, size: _ = "md", debounceMs: v = 300, id: y, name: b, error: x = !1, required: S, onBlur: C, className: w, "aria-label": T, "aria-describedby": ne, removeLabel: re = (e) => `Quitar ${e}`, emptyMessage: ie = "Sin resultados", loadingLabel: E = "Buscando…", container: D }, O) {
+	let [k, A] = o(!1), [j, M] = o(""), [N, P] = o(!1), [F, I] = o([]), [L, R] = o(!1), [z, B] = o(-1), [V, H] = o(d), [U, W] = o([]), G = a(null), K = a(0), q = a(null), J = a(null), Y = i(), ae = i(), X = u === void 0 ? V : u, oe = X.map((e) => p?.find((t) => t.value === e) ?? U.find((t) => t.value === e) ?? {
+		value: e,
+		label: e
+	}), Z = (e) => `${ae}-opt-${e}`, Q = r(async (e) => {
+		let t = ++K.current;
+		P(!0), R(!1);
 		try {
-			L(await n(e)), V(-1);
+			let r = await n(e);
+			if (t !== K.current) return;
+			I(r), B(-1);
 		} catch {
-			L([]), V(-1);
+			if (t !== K.current) return;
+			I([]), B(-1);
 		} finally {
-			F(!1), z(!0);
+			t === K.current && (P(!1), R(!0));
 		}
 	}, [n]);
-	function Q(e) {
+	ee(() => () => {
+		K.current += 1, G.current && clearTimeout(G.current);
+	}, []);
+	function se(e) {
 		let t = e.target.value;
-		N(t), A || j(!0), W.current && clearTimeout(W.current), W.current = setTimeout(() => void Z(t), 300);
+		M(t), k || A(!0), G.current && clearTimeout(G.current), G.current = setTimeout(() => void Q(t), v);
 	}
-	function te(e) {
-		h || g || A || (e.preventDefault(), G.current?.focus(), V(-1), N(""), L([]), z(!1), j(!0), Z(""));
+	function ce(e) {
+		h || g || k || (e.preventDefault(), q.current?.focus(), B(-1), M(""), I([]), R(!1), A(!0), Q(""));
 	}
-	function $(e) {
-		let t = Y.includes(e) ? Y.filter((t) => t !== e) : [...Y, e];
-		d === void 0 && U(t), ee?.(t);
+	function $(e, t) {
+		let n = X.includes(e) ? X.filter((t) => t !== e) : [...X, e];
+		t && W((e) => e.some((e) => e.value === t.value) ? e : [...e, t]), u === void 0 && H(n), f?.(n);
 	}
-	function ne(e) {
-		if (e.key === "ArrowDown") e.preventDefault(), A ? V((e) => Math.min(e + 1, I.length - 1)) : (j(!0), Z(M));
-		else if (e.key === "ArrowUp") e.preventDefault(), V((e) => Math.max(e - 1, -1));
-		else if (e.key === "Enter" && B >= 0 && I[B]) e.preventDefault(), $(I[B].value), G.current?.focus();
-		else if (e.key === "Escape") j(!1), N(""), V(-1);
-		else if (e.key === "Tab") j(!1), V(-1);
-		else if (e.key === "Backspace" && M === "" && Y.length > 0) {
-			let e = Y[Y.length - 1];
+	function le(e) {
+		if (e.key === "ArrowDown") e.preventDefault(), k ? B((e) => Math.min(e + 1, F.length - 1)) : (A(!0), Q(j));
+		else if (e.key === "ArrowUp") e.preventDefault(), B((e) => Math.max(e - 1, -1));
+		else if (e.key === "Enter" && z >= 0 && F[z]) e.preventDefault(), $(F[z].value, F[z]), q.current?.focus();
+		else if (e.key === "Escape") A(!1), M(""), B(-1);
+		else if (e.key === "Tab") A(!1), B(-1);
+		else if (e.key === "Backspace" && j === "" && X.length > 0) {
+			let e = X[X.length - 1];
 			$(e);
 		}
 	}
-	function re(e, t) {
+	function ue(e, t) {
 		if (!e) {
 			if (t.reason === "outside-press") {
 				let e = t.event?.target;
-				if (e instanceof Node && K.current?.contains(e)) return;
+				if (e instanceof Node && J.current?.contains(e)) return;
 			}
-			j(!1), N(""), V(-1);
+			A(!1), M(""), B(-1);
 		}
 	}
-	let ie = [
+	let de = [
 		"async-multi-select",
 		_ === "md" ? "" : `async-multi-select--${_}`,
 		h ? "async-multi-select--disabled" : "",
-		A ? "async-multi-select--open" : "",
-		b ? "async-multi-select--error" : "",
-		S ?? ""
-	].filter(Boolean).join(" "), ae = ["async-multi-select__content", _ === "md" ? "" : `async-multi-select__content--${_}`].filter(Boolean).join(" ");
+		k ? "async-multi-select--open" : "",
+		x ? "async-multi-select--error" : "",
+		w ?? ""
+	].filter(Boolean).join(" "), fe = ["async-multi-select__content", _ === "md" ? "" : `async-multi-select__content--${_}`].filter(Boolean).join(" ");
 	return /* @__PURE__ */ c(l.Root, {
-		open: A,
-		onOpenChange: re,
+		open: k,
+		onOpenChange: ue,
 		children: [/* @__PURE__ */ c("div", {
-			ref: K,
-			className: ie,
-			"data-popup-open": A || void 0,
+			ref: J,
+			className: de,
+			"data-popup-open": k || void 0,
 			children: [/* @__PURE__ */ c("div", {
 				className: "async-multi-select__input-area",
 				children: [
-					p.map((t) => /* @__PURE__ */ c("span", {
+					oe.map((t) => /* @__PURE__ */ c("span", {
 						className: "async-multi-select__pill",
 						children: [/* @__PURE__ */ s("span", {
 							className: "async-multi-select__pill-label",
@@ -77,7 +87,7 @@ var d = n(function({ onSearch: n, value: d, defaultValue: f = [], onValueChange:
 						}), !h && !g && /* @__PURE__ */ s("button", {
 							type: "button",
 							className: "async-multi-select__pill-remove",
-							"aria-label": T(t.label),
+							"aria-label": re(t.label),
 							tabIndex: -1,
 							onMouseDown: (e) => {
 								e.preventDefault(), $(t.value);
@@ -90,71 +100,73 @@ var d = n(function({ onSearch: n, value: d, defaultValue: f = [], onValueChange:
 					}, t.value)),
 					/* @__PURE__ */ s("input", {
 						ref: (e) => {
-							G.current = e, u(k, e);
+							q.current = e, te(O, e);
 						},
-						id: v,
+						id: y,
 						type: "text",
 						className: "async-multi-select__input",
-						value: M,
-						onChange: Q,
-						onPointerDown: te,
-						onKeyDown: ne,
-						placeholder: Y.length === 0 ? m : void 0,
+						value: j,
+						onChange: se,
+						onPointerDown: ce,
+						onKeyDown: le,
+						placeholder: X.length === 0 ? m : void 0,
 						disabled: h,
 						readOnly: g,
-						"aria-label": C,
-						"aria-describedby": w,
-						"aria-invalid": b || void 0,
-						"aria-expanded": A,
+						"aria-label": T,
+						"aria-describedby": ne,
+						"aria-invalid": x || void 0,
+						"aria-required": S || void 0,
+						"aria-expanded": k,
 						"aria-haspopup": "listbox",
-						"aria-controls": A ? q : void 0,
-						"aria-activedescendant": B >= 0 ? X(B) : void 0,
+						"aria-controls": k ? Y : void 0,
+						"aria-activedescendant": z >= 0 ? Z(z) : void 0,
 						autoComplete: "off",
 						role: "combobox",
-						onBlur: x
+						"aria-autocomplete": "list",
+						onBlur: C
 					}),
-					y && Y.map((e) => /* @__PURE__ */ s("input", {
+					b && X.map((e) => /* @__PURE__ */ s("input", {
 						type: "hidden",
-						name: y,
+						name: b,
 						value: e
 					}, e))
 				]
-			}), P && /* @__PURE__ */ s(t, {
+			}), N && /* @__PURE__ */ s(t, {
 				size: "sm",
 				"aria-hidden": !0
 			})]
 		}), /* @__PURE__ */ s(l.Portal, {
-			container: O,
+			container: D,
 			children: /* @__PURE__ */ s(l.Positioner, {
 				className: "async-multi-select__positioner",
-				anchor: K,
+				anchor: J,
 				align: "start",
 				sideOffset: -1,
 				children: /* @__PURE__ */ s(l.Popup, {
-					className: ae,
+					className: fe,
 					initialFocus: !1,
 					finalFocus: !1,
 					children: /* @__PURE__ */ c("div", {
 						role: "listbox",
 						"aria-multiselectable": "true",
-						"aria-label": C ?? m,
-						id: q,
+						"aria-label": T ?? m,
+						id: Y,
 						children: [
-							P && /* @__PURE__ */ s("div", {
+							N && /* @__PURE__ */ s("div", {
 								className: "async-multi-select__loading",
 								children: /* @__PURE__ */ s(t, {
 									size: "sm",
-									label: D
+									label: E
 								})
 							}),
-							!P && R && I.length === 0 && /* @__PURE__ */ s("div", {
+							!N && L && F.length === 0 && /* @__PURE__ */ s("div", {
 								className: "async-multi-select__empty",
-								children: E
+								children: ie
 							}),
-							!P && I.map((e, t) => {
-								let n = Y.includes(e.value), r = B === t;
+							!N && F.map((e, t) => {
+								let n = X.includes(e.value), r = z === t;
 								return /* @__PURE__ */ c("div", {
-									id: X(t),
+									id: Z(t),
 									role: "option",
 									"aria-selected": n,
 									className: [
@@ -164,7 +176,7 @@ var d = n(function({ onSearch: n, value: d, defaultValue: f = [], onValueChange:
 									].filter(Boolean).join(" "),
 									onPointerDown: (e) => e.preventDefault(),
 									onClick: () => {
-										$(e.value), G.current?.focus();
+										$(e.value, e), q.current?.focus();
 									},
 									children: [/* @__PURE__ */ s("span", {
 										className: "async-multi-select__item-check",
@@ -181,4 +193,4 @@ var d = n(function({ onSearch: n, value: d, defaultValue: f = [], onValueChange:
 	});
 });
 //#endregion
-export { d as AsyncMultiSelect };
+export { u as AsyncMultiSelect };

@@ -6,16 +6,16 @@ import { NumberBadge as n } from "./number-badge.js";
 import { forwardRef as r } from "react";
 import { jsx as i, jsxs as a } from "react/jsx-runtime";
 //#region src/stories/molecules/NotificationButton/NotificationButton.tsx
-var o = r(function({ count: r = 0, max: o = 99, label: s, className: c, ...l }, u) {
-	let d = s ?? (r > 0 ? `Notificaciones: ${r} sin leer` : "Notificaciones");
+var o = r(function({ count: r = 0, max: o = 99, label: s = "Notificaciones", countLabel: c = (e) => `Notificaciones: ${e} sin leer`, className: l, ...u }, d) {
+	let f = r > 0 ? c(r) : s;
 	return /* @__PURE__ */ a(t, {
-		ref: u,
+		ref: d,
 		variant: "ghost",
 		iconOnly: !0,
 		size: "md",
-		"aria-label": d,
-		className: ["notification-button", c].filter(Boolean).join(" "),
-		...l,
+		"aria-label": f,
+		className: ["notification-button", l].filter(Boolean).join(" "),
+		...u,
 		children: [/* @__PURE__ */ i(e, {
 			name: "bell",
 			size: "md"

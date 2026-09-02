@@ -20,6 +20,13 @@ export interface CalendarPlannerProps {
     /** Callback al pulsar "+N más" en una celda */
     onMoreClick?: (date: Date, events: PlannerEvent[]) => void;
     /**
+     * Abre el diálogo interno con los eventos ocultos al pulsar "+N más".
+     * Default: `true`, salvo que se pase `onMoreClick`, en cuyo caso el
+     * consumidor lleva ya el desbordamiento y el diálogo propio se apaga.
+     * Pásalo a `true` de forma explícita para tener las dos cosas.
+     */
+    showMoreDialog?: boolean;
+    /**
      * Callback al hacer click en cualquier celda de día (incluso días vacíos y externos).
      * Recibe la fecha de la celda y el array de eventos de ese día (vacío si no hay ninguno).
      * Compatible con renderDay: el click se dispara en el contenedor de la celda.
@@ -51,8 +58,14 @@ export interface CalendarPlannerProps {
      * pasarlo traducido.
      */
     gridLabel?: string;
+    /**
+     * Rótulo visible del botón que abre los eventos ocultos de una celda.
+     * Default: `+N más` (castellano). Interpola el número, así que es una
+     * función: una app multiidioma debe pasarla traducida.
+     */
+    moreLabel?: (count: number) => string;
     /** Tamaño del componente. Default: 'md' */
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, previousMonthLabel, nextMonthLabel, gridLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;
+export declare function CalendarPlanner({ events, renderDay, maxItemsPerDay, onMoreClick, showMoreDialog, onDayClick, month: monthProp, defaultMonth, onMonthChange, navigable, locale, previousMonthLabel, nextMonthLabel, gridLabel, moreLabel, size, className, }: CalendarPlannerProps): import("react/jsx-runtime").JSX.Element;

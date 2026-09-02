@@ -42,9 +42,9 @@ var d = i(function({ id: i, label: d, labelHidden: f = !1, value: p, placeholder
 				role: "group",
 				"aria-labelledby": `${F}-label`,
 				"aria-describedby": z,
-				"aria-invalid": B || void 0,
 				children: [/* @__PURE__ */ s(r, {
 					ref: M,
+					className: "date-time-field__date",
 					id: I,
 					name: y,
 					value: p ?? null,

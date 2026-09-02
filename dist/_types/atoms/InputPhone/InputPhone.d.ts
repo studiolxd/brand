@@ -29,6 +29,12 @@ export interface InputPhoneProps {
      */
     countryLabel?: string;
     /**
+     * Lo que enseña el selector cuando no hay país elegido (número en formato
+     * internacional). Default: "🌐". Es contenido visible: una app que no quiera
+     * el emoji pasa aquí su propio texto o glifo.
+     */
+    internationalLabel?: string;
+    /**
      * Nodo DOM donde montar el portal del dropdown de país (reenviado a
      * `Select.Portal` de Base UI). Por defecto se monta en `document.body`, que
      * hereda el tema activado a nivel raíz (`html.dark`/`[data-theme="dark"]`)

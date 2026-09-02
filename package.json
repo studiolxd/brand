@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "28.0.0",
+  "version": "29.0.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -613,7 +613,6 @@
   "dependencies": {
     "@base-ui/react": "^1.7.0",
     "@tanstack/react-table": "^8.21.3",
-    "libphonenumber-js": "^1.12.41",
     "react-image-crop": "^11.1.2",
     "react-phone-number-input": "^3.4.16"
   },

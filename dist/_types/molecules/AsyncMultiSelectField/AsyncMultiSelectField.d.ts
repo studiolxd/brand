@@ -1,4 +1,5 @@
 import './AsyncMultiSelectField.css';
+import { AsyncMultiSelect } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 import type { AsyncMultiSelectOption } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 export type { AsyncMultiSelectOption };
 export interface AsyncMultiSelectFieldProps {
@@ -21,6 +22,8 @@ export interface AsyncMultiSelectFieldProps {
     name?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    /** Marca el control como obligatorio (`aria-required` en el combobox). */
+    required?: boolean;
     /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
     error?: boolean;
     /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -28,12 +31,18 @@ export interface AsyncMultiSelectFieldProps {
     /** Texto de ayuda, enlazado por `aria-describedby`. */
     helperText?: string;
     size?: 'sm' | 'md' | 'lg';
+    /** Milisegundos de rebote antes de llamar a `onSearch`. Default: 300. */
+    debounceMs?: number;
     /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
     className?: string;
     /** Texto cuando la búsqueda no devuelve nada. Default: "Sin resultados". */
     emptyMessage?: string;
     /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
     removeLabel?: (label: string) => string;
+    /** Etiqueta accesible del spinner mientras se busca. Default: "Buscando…". */
+    loadingLabel?: string;
+    /** Nodo DOM donde montar el portal del desplegable (ver `AsyncMultiSelect`). */
+    container?: React.ComponentProps<typeof AsyncMultiSelect>['container'];
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 /**

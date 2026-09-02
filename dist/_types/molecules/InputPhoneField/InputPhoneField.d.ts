@@ -28,6 +28,8 @@ export interface InputPhoneFieldProps {
     className?: string;
     /** aria-label del selector de país. Default: "País" (castellano). */
     countryLabel?: string;
+    /** Lo que enseña el selector sin país elegido. Default: "🌐". */
+    internationalLabel?: string;
     /** Recibe el número en formato E.164, no el evento. */
     onChange?: (value: string | undefined) => void;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;

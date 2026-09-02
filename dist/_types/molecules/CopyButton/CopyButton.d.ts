@@ -54,4 +54,4 @@ export interface CopyButtonProps extends Omit<ComponentPropsWithoutRef<'button'>
  * Si el portapapeles no está disponible —contexto no seguro, permiso
  * denegado— el botón lo dice en vez de fingir que ha copiado.
  */
-export declare function CopyButton({ value, children, label, copiedLabel, errorLabel, variant, size, feedbackDuration, onCopy, onCopyError, className, ...rest }: CopyButtonProps): import("react/jsx-runtime").JSX.Element;
+export declare const CopyButton: import("react").ForwardRefExoticComponent<CopyButtonProps & import("react").RefAttributes<HTMLButtonElement>>;

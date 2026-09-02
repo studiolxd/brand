@@ -16,6 +16,8 @@ export interface TimeSelectProps {
     id?: string;
     /** Nombre del campo en el formulario: se monta un input oculto con `HH:MM`. */
     name?: string;
+    /** Campo obligatorio: se marca el grupo y los dos desplegables. */
+    required?: boolean;
     /** Id de la etiqueta que nombra el grupo (lo pone el campo). */
     'aria-labelledby'?: string;
     /** Ids de ayuda/error que describen el grupo (lo pone el campo). */

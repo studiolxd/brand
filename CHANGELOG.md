@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Unreleased
+## v29.0.0
 
 Revisión de calidad de los 35 componentes sin consumidor directo en la suite
 (los usa la app interna de 360 — no se retira ninguno). Informes con fichas
@@ -19,6 +19,12 @@ estructurales en `notes/REVISION-huerfanas-lote-{a,b}.md`.
   de tokens registrado: desaparecen `[data-otp-input]` y los cuatro `data-*`
   que emitía (nadie los leía dentro del sistema, pero eran DOM público — quien
   estilase por esos selectores tiene que pasarse a las clases BEM).
+- **`NotificationButton`**: con contador visible, el nombre accesible sale de
+  `countLabel` (traducible, con el número dentro); `label` queda para el estado
+  sin notificaciones. Antes `label` ganaba siempre.
+- **Tokens retirados**: `number-input.btn-font-size` y
+  `number-input.btn-line-height` (los botones +/− son ahora `Icon`
+  `minus`/`plus` del catálogo, no glifos de texto).
 
 ### Arreglado
 
@@ -31,6 +37,16 @@ estructurales en `notes/REVISION-huerfanas-lote-{a,b}.md`.
   `loadingLabel`/`clearLabel`/`container` en los `Async*Field`.
 - `InputPhoneProps` exportado; MDX propio para DatePicker, MultiSelect,
   NumberInput, Switcher, TimeSelect y TimeSelect sin `autodocs`.
+- **Las 23 fichas estructurales de la revisión, resueltas** (ola S): el bug de
+  `AsyncMultiSelect` no controlado (las pills salen ahora también del estado
+  interno, con test); rebote de los `Async*` con limpieza al desmontar y
+  descarte de respuestas fuera de orden; `FileUpload` compone `Icon` y
+  `ProgressBar` de verdad; `DatePicker` con tokens propios; cabeceras y nombres
+  accesibles de los calendarios (`useId`, `<th scope="row">`, celda con fecha);
+  `required` en los fields que no lo aceptaban; teclado opcional de `TreeView`;
+  emoji de cumpleaños ahora es `birthdayPrefix` del consumidor; escalones
+  `opacity.full`/`opacity.muted` e iconos `minus`/`upload` nuevos en el
+  sistema. Cobertura jsdom del lote: de 4 a 9+ componentes (287 tests).
 
 ## v28.0.0
 

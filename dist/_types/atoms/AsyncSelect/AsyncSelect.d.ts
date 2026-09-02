@@ -14,11 +14,24 @@ export interface AsyncSelectProps {
     disabled?: boolean;
     readOnly?: boolean;
     size?: 'sm' | 'md' | 'lg';
+    /**
+     * Milisegundos de rebote entre la última tecla y la llamada a `onSearch`.
+     * Default: 300. A 0 se busca en cada tecla.
+     */
+    debounceMs?: number;
     id?: string;
     /** Nombre del campo en el formulario: se monta un input oculto con el valor. */
     name?: string;
     /** Marca el estado de error: aplica la clase `async-select--error` y `aria-invalid`. */
     error?: boolean;
+    /**
+     * Marca el control como obligatorio: pone `aria-required` en el combobox.
+     * No se traslada a un `required` nativo porque lo que viaja en el formulario
+     * es un input oculto —un control no enfocable con `required` bloquea el envío
+     * sin poder enseñar el mensaje—: la validación la lleva el consumidor (o
+     * react-hook-form), como en el resto de campos compuestos del sistema.
+     */
+    required?: boolean;
     /** Se llama al salir del control (react-hook-form lo usa para validar). */
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     /** Se añade DESPUÉS de las clases propias del componente. */

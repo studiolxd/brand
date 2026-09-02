@@ -7,50 +7,52 @@ import { jsx as r, jsxs as i } from "react/jsx-runtime";
 function a(e) {
 	return String(e).padStart(2, "0");
 }
-var o = t(function({ value: t, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f, name: p, "aria-labelledby": m, "aria-describedby": h, onBlur: g, className: _, hoursLabel: v = "Horas", minutesLabel: y = "Minutos", hoursPlaceholder: b = "HH", minutesPlaceholder: x = "MM" }, S) {
-	let C = n(() => Array.from({ length: 24 }, (e, t) => ({
+var o = t(function({ value: t, onChange: o, step: s = 5, size: c = "md", disabled: l, readOnly: u, error: d, id: f, name: p, required: m, "aria-labelledby": h, "aria-describedby": g, onBlur: _, className: v, hoursLabel: y = "Horas", minutesLabel: b = "Minutos", hoursPlaceholder: x = "HH", minutesPlaceholder: S = "MM" }, C) {
+	let w = n(() => Array.from({ length: 24 }, (e, t) => ({
 		value: String(t),
 		label: a(t)
-	})), []), w = n(() => {
+	})), []), T = n(() => {
 		let e = [];
 		for (let t = 0; t < 60; t += s) e.push({
 			value: String(t),
 			label: a(t)
 		});
 		return e;
-	}, [s]), T = (e) => {
+	}, [s]), E = (e) => {
 		let n = parseInt(e, 10), r = t?.m ?? 0;
 		o?.({
 			h: n,
 			m: r
 		});
-	}, E = (e) => {
+	}, D = (e) => {
 		let n = t?.h ?? 0;
 		o?.({
 			h: n,
 			m: parseInt(e, 10)
 		});
-	}, D = ["time-select", _ ?? ""].filter(Boolean).join(" "), O = t == null ? "" : String(t.h), k = t == null ? "" : String(t.m);
+	}, O = ["time-select", v ?? ""].filter(Boolean).join(" "), k = t == null ? "" : String(t.h), A = t == null ? "" : String(t.m);
 	return /* @__PURE__ */ i("div", {
-		className: D,
+		className: O,
 		role: "group",
-		"aria-labelledby": m,
-		"aria-describedby": h,
+		"aria-labelledby": h,
+		"aria-describedby": g,
 		"aria-invalid": d || void 0,
+		"aria-required": m || void 0,
 		children: [
 			/* @__PURE__ */ r(e, {
-				ref: S,
+				ref: C,
 				id: f,
-				options: C,
-				value: O,
-				placeholder: b,
+				options: w,
+				value: k,
+				placeholder: x,
 				size: c,
 				disabled: l,
 				readOnly: u,
-				"aria-label": v,
+				required: m,
+				"aria-label": y,
 				"aria-invalid": d,
-				onValueChange: T,
-				onBlur: g
+				onValueChange: E,
+				onBlur: _
 			}),
 			/* @__PURE__ */ r("span", {
 				className: "time-select__sep",
@@ -58,16 +60,17 @@ var o = t(function({ value: t, onChange: o, step: s = 5, size: c = "md", disable
 				children: ":"
 			}),
 			/* @__PURE__ */ r(e, {
-				options: w,
-				value: k,
-				placeholder: x,
+				options: T,
+				value: A,
+				placeholder: S,
 				size: c,
 				disabled: l,
 				readOnly: u,
-				"aria-label": y,
+				required: m,
+				"aria-label": b,
 				"aria-invalid": d,
-				onValueChange: E,
-				onBlur: g
+				onValueChange: D,
+				onBlur: _
 			}),
 			p && /* @__PURE__ */ r("input", {
 				type: "hidden",

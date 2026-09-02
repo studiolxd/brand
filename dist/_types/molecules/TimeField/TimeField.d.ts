@@ -17,6 +17,8 @@ export interface TimeFieldProps {
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     readOnly?: boolean;
+    /** Campo obligatorio: parte del contrato de campo del sistema. */
+    required?: boolean;
     /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
     error?: boolean;
     /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */

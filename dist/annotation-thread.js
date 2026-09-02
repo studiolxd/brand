@@ -9,10 +9,10 @@ var r = {
 	hour: "2-digit",
 	minute: "2-digit"
 };
-function i({ entry: e, locale: r, dateFormat: i, editedLabel: a, esRaiz: o }) {
-	let s = e.date instanceof Date ? e.date : new Date(e.date), c = new Intl.DateTimeFormat(r, i).format(s);
+function i({ entry: e, locale: r, dateFormat: i, editedLabel: a }) {
+	let o = e.date instanceof Date ? e.date : new Date(e.date), s = new Intl.DateTimeFormat(r, i).format(o);
 	return /* @__PURE__ */ n("article", {
-		className: ["annotation-thread__item", o ? "annotation-thread__item--root" : ""].filter(Boolean).join(" "),
+		className: "annotation-thread__item",
 		children: [
 			/* @__PURE__ */ n("header", {
 				className: "annotation-thread__header",
@@ -27,8 +27,8 @@ function i({ entry: e, locale: r, dateFormat: i, editedLabel: a, esRaiz: o }) {
 					}),
 					/* @__PURE__ */ t("time", {
 						className: "annotation-thread__date",
-						dateTime: s.toISOString(),
-						children: c
+						dateTime: o.toISOString(),
+						children: s
 					}),
 					e.edited && /* @__PURE__ */ t("span", {
 						className: "annotation-thread__edited",
@@ -56,7 +56,6 @@ function a({ annotation: a, replies: o = [], status: s = "open", actions: c, rep
 			_ ?? ""
 		].filter(Boolean).join(" "),
 		"aria-label": g,
-		"data-status": s,
 		...v,
 		children: [
 			/* @__PURE__ */ t("div", {
@@ -70,8 +69,7 @@ function a({ annotation: a, replies: o = [], status: s = "open", actions: c, rep
 				entry: a,
 				locale: u,
 				dateFormat: d,
-				editedLabel: m,
-				esRaiz: !0
+				editedLabel: m
 			}),
 			o.length > 0 && /* @__PURE__ */ n("div", {
 				className: "annotation-thread__replies",
@@ -82,8 +80,7 @@ function a({ annotation: a, replies: o = [], status: s = "open", actions: c, rep
 					entry: e,
 					locale: u,
 					dateFormat: d,
-					editedLabel: m,
-					esRaiz: !1
+					editedLabel: m
 				}, e.id))]
 			}),
 			l && /* @__PURE__ */ t("div", {

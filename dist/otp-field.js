@@ -10,7 +10,6 @@ var s = r(function({ id: r, label: s, labelHidden: c = !1, length: l, value: u, 
 	let T = e(v), E = i(), D = r ?? E, O = g ? `${D}-error` : void 0, k = _ ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = h || !!g;
 	return /* @__PURE__ */ o("div", {
 		className: ["otp-field", y].filter(Boolean).join(" "),
-		"data-size": T,
 		children: [
 			/* @__PURE__ */ a(n, {
 				id: `${D}-label`,
