@@ -22,6 +22,7 @@
     "btn-hover-line-color":{ "$value": "{color.primary}",             "$type": "color",     "$description": "Color de la línea de hover de los botones +/−" },
     "btn-separator-color": { "$value": "{input.border-color}",        "$type": "color",     "$description": "Color del separador entre botón y campo" },
     "btn-font-size":       { "$value": "{font-size.3}",               "$type": "dimension", "$description": "Tamaño del símbolo +/−" },
+    "btn-line-height":     { "$value": "{line-height.none}",          "$type": "number",    "$description": "Interlineado del símbolo +/−: sin holgura, para que el glifo quede centrado en el cuadrado del botón" },
 
     "focus-ring-width":        { "$value": "{input.focus-ring-width}",        "$type": "dimension", "$description": "Grosor del focus ring" },
     "focus-ring-inset-offset": { "$value": "{input.focus-ring-inset-offset}", "$type": "dimension", "$description": "Gap entre borde y focus ring" },

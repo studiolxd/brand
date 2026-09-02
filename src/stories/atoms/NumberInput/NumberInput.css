@@ -61,7 +61,7 @@
   border: none;
   cursor: pointer;
   transition: box-shadow var(--number-input-transition-duration) var(--number-input-transition-easing);
-  line-height: 1;
+  line-height: var(--number-input-btn-line-height);
   user-select: none;
 }
 
