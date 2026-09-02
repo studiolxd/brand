@@ -61,13 +61,14 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | Componente | Props |
 | --- | --- |
 | `Pagination` | `ariaLabel`, `pageLabel`, `previousLabel`, `nextLabel`, `pagesGroupLabel`, `pageSizeLabel`, `totalLabel` — y `pageSizeOptions` para las opciones del selector |
-| `AsyncSelect` | `emptyMessage`, `loadingLabel`, `clearLabel`, `placeholder` |
-| `AsyncMultiSelect` | `emptyMessage`, `loadingLabel`, `placeholder` |
+| `AsyncSelect`, `AsyncSelectField` | `emptyMessage`, `loadingLabel`, `clearLabel`, `placeholder` |
+| `AsyncMultiSelect`, `AsyncMultiSelectField` | `emptyMessage`, `loadingLabel`, `removeLabel`, `placeholder` |
 | `FileUpload` | `dropzoneLabel`, `dropzoneActiveLabel`, `dropzoneHintLabel`, `maxSizeHint`, `maxFilesHint`, `filesLabel`, `progressLabel`, `removeFileLabel`, `tooLargeError`, `invalidTypeError` |
 | `NumberInput` | `decrementLabel`, `incrementLabel` |
 | `TimeSelect` | `hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder` |
 | `InputPhone` | `countryLabel` |
-| `Calendar`, `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel` — más `locale` |
+| `Calendar` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel` — más `locale` |
+| `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel`, `moreLabel` — más `locale` |
 | `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel` — más `locale` |
 | `Table` (`TableHeader`) | `actionsLabel`, `sortedAscLabel`, `sortedDescLabel`, `sortableLabel` |
 | `Table` (`TableRow`) | `label` — el nombre accesible de la fila, sin default: solo lo escribe el consumidor |

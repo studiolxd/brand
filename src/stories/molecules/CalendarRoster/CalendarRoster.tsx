@@ -258,7 +258,7 @@ export function CalendarRoster({
 
       {/* Leyenda */}
       {showLegend && (
-        <div className="calendar-roster__legend" aria-label={legendLabel}>
+        <div className="calendar-roster__legend" role="group" aria-label={legendLabel}>
           {legendItems.map(({ type, label }) => (
             <span key={type} className="calendar-roster__legend-item">
               {type === 'non-working' ? (

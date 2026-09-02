@@ -65,6 +65,12 @@ export interface CalendarPlannerProps {
    * pasarlo traducido.
    */
   gridLabel?: string;
+  /**
+   * Rótulo visible del botón que abre los eventos ocultos de una celda.
+   * Default: `+N más` (castellano). Interpola el número, así que es una
+   * función: una app multiidioma debe pasarla traducida.
+   */
+  moreLabel?: (count: number) => string;
   /** Tamaño del componente. Default: 'md' */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -84,6 +90,7 @@ export function CalendarPlanner({
   previousMonthLabel = 'Mes anterior',
   nextMonthLabel = 'Mes siguiente',
   gridLabel,
+  moreLabel = (count) => `+${count} más`,
   size = 'md',
   className,
 }: CalendarPlannerProps) {
@@ -221,7 +228,7 @@ export function CalendarPlanner({
                               onMoreClick?.(date, dayEvents);
                             }}
                           >
-                            +{overflow} más
+                            {moreLabel(overflow)}
                           </button>
                         )}
                       </>
