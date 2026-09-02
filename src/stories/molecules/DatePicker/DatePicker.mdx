@@ -1,5 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as DatePickerStories from "./DatePicker.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { datePickerTokens } from "../../../tokens/molecules/date-picker";
 
 <Meta of={DatePickerStories} />
 
@@ -76,7 +78,13 @@ No tiene valores propios: el disparador es el `Input` del sistema y el calendari
 
 ## Tokens
 
-El disparador **no tiene tokens propios**: viste con los del `Input` (`--input-*`) para que un campo de fecha y uno de texto sean indistinguibles en un formulario, y el panel con los del `Popover` y los del `Calendar`. La consecuencia es que hoy no se puede retocar solo el disparador de fecha sin mover todos los campos de texto; está anotado en `notes/REVISION-huerfanas-lote-a.md`.
+Cada token del disparador apunta al del `Input`: un campo de fecha y uno de texto son indistinguibles en un formulario porque así está cableado, no por casualidad. La capa de indirección es lo que permite retocar solo el disparador de fecha —dando valor propio a uno de estos tokens— sin mover todos los campos de texto de la aplicación. El panel sigue vistiendo con los del `Popover` y los del `Calendar`.
+
+El único que no hereda es `cursor`: el disparador abre un calendario, no se escribe en él.
+
+<TokenTable tokens={datePickerTokens} />
+
+No hay tabla de superficie oscura: los tokens de los que cuelga (`--input-*`) ya tienen su par, y el fichero derivado los vuelve a declarar bajo los selectores oscuros.
 
 ## Props
 

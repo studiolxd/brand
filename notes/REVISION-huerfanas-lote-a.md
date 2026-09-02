@@ -139,6 +139,8 @@ El disparador viste enteramente con `--input-*` (altura, aire, familia, borde, f
 
 **Propuesta:** `tokens/molecule/date-picker.json` con la capa de indirección (`date-picker.height → {input.height}`, etc.) y el CSS apuntando a ella. Cambio mecánico pero ancho (14 tokens), y toca la cara de un componente que hoy está bien: mejor decidirlo aparte.
 
+**~~Resuelto~~** (`s1-fichas-a`): `tokens/molecule/date-picker.json` con 34 tokens, todos apuntando al `input.*` que ya usaban —el pintado no cambia—, registrados en `sd.config.mjs` (CSS + SCSS) y en `src/tokens/index.css`. El único que no hereda es `cursor` (`pointer`: el disparador abre un calendario). No hace falta ningún `surface-dark-*`: `surface-dark-derived.css` los vuelve a declarar solo. Tabla de tokens en el MDX.
+
 ### A13 · `DatePicker`, `CalendarPlanner`, `CalendarRoster`, `FileUpload`, `InputPhone`, `Code`, `DotsButton`…: la cobertura viva en stories, no en tests — **baja**
 
 Solo cuatro componentes del lote tienen `.test.tsx` (`AnnotationThread`, `Calendar`, `CopyButton`, `DocsSearch`). El resto se prueba con stories `Test — …`, que es el patrón declarado del repo y cuentan como test… pero `pnpm test:stories` necesita Chromium y no siempre está disponible (en esta red, no). En la práctica, `pnpm test` no ejecuta nada de 14 de los 18 componentes.

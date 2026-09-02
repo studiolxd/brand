@@ -1,0 +1,39 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --date-picker-cursor: pointer; /** Cursor: el disparador abre un calendario, no se escribe en él */
+  --date-picker-border-style: var(--input-border-style); /** Estilo del borde */
+  --date-picker-disabled-cursor: var(--input-disabled-cursor); /** Cursor deshabilitado */
+  --date-picker-height: var(--input-height); /** Altura del disparador: la del campo de texto */
+  --date-picker-sm-height: var(--input-sm-height); /** Altura — sm */
+  --date-picker-lg-height: var(--input-lg-height); /** Altura — lg */
+  --date-picker-sm-padding-inline: var(--input-sm-padding-inline); /** Aire horizontal — sm */
+  --date-picker-lg-padding-inline: var(--input-lg-padding-inline); /** Aire horizontal — lg */
+  --date-picker-font-family: var(--input-font-family); /** Familia tipográfica del disparador */
+  --date-picker-font-size: var(--input-font-size); /** Tamaño de la fecha escrita */
+  --date-picker-sm-font-size: var(--input-sm-font-size); /** Tamaño — sm */
+  --date-picker-lg-font-size: var(--input-lg-font-size); /** Tamaño — lg */
+  --date-picker-line-height: var(--input-line-height); /** Interlineado del disparador */
+  --date-picker-bg: var(--input-bg); /** Fondo del disparador */
+  --date-picker-transition-duration: var(--input-transition-duration); /** Duración de la transición de borde y anillo */
+  --date-picker-transition-easing: var(--input-transition-easing); /** Curva de la transición */
+  --date-picker-error-bg: var(--input-error-bg); /** Fondo en error */
+  --date-picker-padding-inline: var(--input-padding-inline); /** Aire horizontal del disparador */
+  --date-picker-font-weight: var(--input-font-weight); /** Peso de la fecha escrita */
+  --date-picker-color: var(--input-color); /** Color de la fecha escrita */
+  --date-picker-placeholder-color: var(--input-placeholder-color); /** Color de la pista cuando no hay fecha */
+  --date-picker-border-width: var(--input-border-width); /** Grosor del borde */
+  --date-picker-border-color: var(--input-border-color); /** Color del borde */
+  --date-picker-border-radius: var(--input-border-radius); /** Radio del borde */
+  --date-picker-focus-border-color: var(--input-focus-border-color); /** Borde en foco */
+  --date-picker-focus-ring-inset-offset: var(--input-focus-ring-inset-offset); /** Separación entre borde y anillo de foco */
+  --date-picker-focus-ring-color: var(--input-focus-ring-color); /** Color del anillo de foco */
+  --date-picker-error-border-color: var(--input-error-border-color); /** Borde en error */
+  --date-picker-error-focus-ring-color: var(--input-error-focus-ring-color); /** Anillo de foco en error */
+  --date-picker-disabled-bg: var(--input-disabled-bg); /** Fondo deshabilitado */
+  --date-picker-disabled-color: var(--input-disabled-color); /** Texto deshabilitado */
+  --date-picker-disabled-border-color: var(--input-disabled-border-color); /** Borde deshabilitado */
+  --date-picker-focus-ring-width: var(--input-focus-ring-width); /** Grosor del anillo de foco */
+}
