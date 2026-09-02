@@ -27,6 +27,8 @@ export interface AsyncMultiSelectFieldProps {
   name?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  /** Marca el control como obligatorio (`aria-required` en el combobox). */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -68,6 +70,7 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
   readOnly,
   size: sizeProp,
   debounceMs,
+  required,
   error = false,
   errorMessage,
   helperText,
@@ -106,6 +109,7 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
         readOnly={readOnly}
         size={size}
         debounceMs={debounceMs}
+        required={required}
         error={hasError}
         emptyMessage={emptyMessage}
         removeLabel={removeLabel}

@@ -39,6 +39,10 @@ Las tres del sistema: 32, 40 y 48. Sin `size`, la del `Form` que lo envuelva; si
 
 ## Accesibilidad
 
+El aspa de limpiar es un atajo de **ratón**: está fuera del tabulador, como en el resto de la familia (`MultiSelect`, `NumberInput`), pero conserva su nombre accesible porque un lector de pantalla sí llega a ella con el cursor virtual o el gesto táctil. La salida con teclado es <kbd>Retroceso</kbd> (o <kbd>Supr</kbd>) con el campo vacío, el mismo gesto que quita la última píldora en el `AsyncMultiSelect`.
+
+`required` pone `aria-required` en el combobox. No se traduce a un `required` nativo: lo que viaja en el formulario es un input oculto, y un control no enfocable con `required` bloquea el envío sin poder enseñar el mensaje.
+
 El `ref` va al `<input>` de búsqueda, que es lo que se enfoca. La opción resaltada se marca invirtiendo la marca (`item-highlighted-bg` / `item-highlighted-color`, los del `Select`): las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores). El botón de limpiar lleva su propio nombre (`clearLabel`).
 
 <Canvas of={AsyncSelectStories.EtiquetaLimpiar} />

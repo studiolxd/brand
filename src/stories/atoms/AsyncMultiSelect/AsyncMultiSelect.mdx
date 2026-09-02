@@ -42,6 +42,10 @@ Las tres del sistema: 32, 40 y 48 con una línea de pills. Sin `size`, la del `F
 
 ## Accesibilidad
 
+El aspa de cada píldora es un atajo de **ratón**: está fuera del tabulador, como en el `MultiSelect`, pero conserva su nombre accesible porque un lector de pantalla sí llega a ella. La salida con teclado es <kbd>Retroceso</kbd> con el campo de búsqueda vacío, que quita el último valor elegido.
+
+`required` pone `aria-required` en el combobox. No se traduce a un `required` nativo: lo que viaja en el formulario son inputs ocultos, y un control no enfocable con `required` bloquea el envío sin poder enseñar el mensaje.
+
 El `ref` va al `<input>` de búsqueda. La opción resaltada se marca invirtiendo la marca (`item-highlighted-bg` / `item-highlighted-color`, los del `MultiSelect`): las listas de opciones desplegables son la excepción declarada a «Estados: nada se rellena» (Foundations → Colores).
 
 ## Tokens

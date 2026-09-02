@@ -26,6 +26,8 @@ export interface AsyncSelectFieldProps {
   name?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  /** Marca el control como obligatorio (`aria-required` en el combobox). */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -66,6 +68,7 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
   readOnly,
   size: sizeProp,
   debounceMs,
+  required,
   error = false,
   errorMessage,
   helperText,
@@ -103,6 +106,7 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
         readOnly={readOnly}
         size={size}
         debounceMs={debounceMs}
+        required={required}
         error={hasError}
         emptyMessage={emptyMessage}
         loadingLabel={loadingLabel}

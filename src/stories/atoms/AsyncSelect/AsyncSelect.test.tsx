@@ -8,6 +8,41 @@ const espera = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 afterEach(() => vi.restoreAllMocks());
 
+describe('AsyncSelect — teclado y contrato', () => {
+  it('Retroceso con el campo vacío limpia la selección', async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    const onSearch = vi.fn(async (): Promise<AsyncSelectOption[]> => [{ value: 'a', label: 'Ana García' }]);
+
+    render(
+      <AsyncSelect
+        onSearch={onSearch}
+        debounceMs={0}
+        onValueChange={onValueChange}
+        placeholder="Buscar…"
+        aria-label="Buscar"
+      />,
+    );
+
+    const input = screen.getByRole('combobox');
+    await user.click(input);
+    await user.click(await screen.findByRole('option', { name: 'Ana García' }));
+    expect(input).toHaveValue('Ana García');
+
+    await user.keyboard('{Backspace}');
+    expect(onValueChange).toHaveBeenLastCalledWith(null, null);
+    expect(input).toHaveValue('');
+  });
+
+  it('anuncia el contrato de combobox: lista de sugerencias y obligatoriedad', () => {
+    render(<AsyncSelect onSearch={async () => []} required aria-label="Buscar" />);
+
+    const input = screen.getByRole('combobox');
+    expect(input).toHaveAttribute('aria-autocomplete', 'list');
+    expect(input).toHaveAttribute('aria-required', 'true');
+  });
+});
+
 describe('AsyncSelect — búsqueda', () => {
   it('descarta la respuesta que llega fuera de orden', async () => {
     const user = userEvent.setup();

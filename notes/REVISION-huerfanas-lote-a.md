@@ -77,11 +77,15 @@ El aspa de `AsyncSelect` y las de las píldoras de `AsyncMultiSelect` llevan `ta
 
 **Propuesta:** o se documenta el gesto de teclado equivalente y se marcan los botones `aria-hidden` (son atajos de ratón), o entran al tabulador. Lo que no puede quedarse es la mezcla: un botón con nombre accesible al que ningún lector puede llegar. Falta también `aria-autocomplete="list"` en el `role="combobox"` de los dos.
 
+**~~Resuelto~~** (`s1-fichas-a`), con una tercera salida: **ni `aria-hidden` ni tabulador**. La premisa de la ficha —«un botón al que ningún lector puede llegar»— no se sostiene: fuera del tabulador el aspa sigue siendo alcanzable con el cursor virtual y con el gesto táctil, así que `aria-hidden` le quitaría al lector de pantalla la única forma que tiene de accionarla. Meterla en el tabulador rompería con el resto de la familia (`MultiSelect`, `NumberInput`) y, en el multi, añadiría una parada por píldora. Lo que sí faltaba de verdad era la **salida con teclado del `AsyncSelect`**: <kbd>Retroceso</kbd> / <kbd>Supr</kbd> con el campo vacío limpia la selección, el mismo gesto que ya quitaba la última píldora en el multi. Documentado en los dos MDX y probado. Puesto además `aria-autocomplete="list"` en ambos.
+
 ### A4 · `AsyncSelectField`: no expone `required` — **baja**
 
 `SelectField` lo pasa al control, `AsyncSelectField` no. Como el átomo tampoco lo acepta, el campo asíncrono no puede marcarse obligatorio en el DOM.
 
 **Propuesta:** `required?: boolean` en el átomo (al `<input>` de búsqueda y al hidden) y reenviado desde el campo.
+
+**~~Resuelto~~** (`s1-fichas-a`) en los cuatro (átomos y campos), pero como `aria-required` en el combobox, **no** como `required` nativo: en el `<input>` de búsqueda obligaría a escribir texto para poder enviar (el valor no vive ahí), y en el input oculto el navegador bloquea el envío sin poder enseñar el mensaje porque el control no es enfocable. La validación la lleva el consumidor o react-hook-form, como en el resto de campos compuestos.
 
 ### A5 · `AsyncMultiSelect`: en modo no controlado el control se ve vacío — **alta**
 

@@ -42,6 +42,14 @@ export interface AsyncMultiSelectProps {
   name?: string;
   /** Marca el estado de error: aplica la clase `async-multi-select--error` y `aria-invalid`. */
   error?: boolean;
+  /**
+   * Marca el control como obligatorio: pone `aria-required` en el combobox.
+   * No se traslada a un `required` nativo porque lo que viaja en el formulario
+   * es un input oculto —un control no enfocable con `required` bloquea el envío
+   * sin poder enseñar el mensaje—: la validación la lleva el consumidor (o
+   * react-hook-form), como en el resto de campos compuestos del sistema.
+   */
+  required?: boolean;
   /** Se llama al salir del control (react-hook-form lo usa para validar). */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Se añade DESPUÉS de las clases propias del componente. */
@@ -99,6 +107,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   id,
   name,
   error = false,
+  required,
   onBlur,
   className,
   'aria-label': ariaLabel,
@@ -298,6 +307,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
             aria-label={ariaLabel}
             aria-describedby={ariaDescribedby}
             aria-invalid={error || undefined}
+            aria-required={required || undefined}
             aria-expanded={open}
             aria-haspopup="listbox"
             // El listbox vive en un portal que solo existe abierto: cerrado, un
@@ -306,6 +316,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
             aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
             autoComplete="off"
             role="combobox"
+            aria-autocomplete="list"
             onBlur={onBlur}
           />
           {/* Lo que se envía con el formulario: un input oculto por valor. */}

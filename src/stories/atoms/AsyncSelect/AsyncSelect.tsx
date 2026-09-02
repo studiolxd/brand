@@ -31,6 +31,14 @@ export interface AsyncSelectProps {
   name?: string;
   /** Marca el estado de error: aplica la clase `async-select--error` y `aria-invalid`. */
   error?: boolean;
+  /**
+   * Marca el control como obligatorio: pone `aria-required` en el combobox.
+   * No se traslada a un `required` nativo porque lo que viaja en el formulario
+   * es un input oculto —un control no enfocable con `required` bloquea el envío
+   * sin poder enseñar el mensaje—: la validación la lleva el consumidor (o
+   * react-hook-form), como en el resto de campos compuestos del sistema.
+   */
+  required?: boolean;
   /** Se llama al salir del control (react-hook-form lo usa para validar). */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Se añade DESPUÉS de las clases propias del componente. */
@@ -89,6 +97,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
   id,
   name,
   error = false,
+  required,
   onBlur,
   className,
   'aria-label': ariaLabel,
@@ -179,8 +188,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
     setQuery('');
   }
 
-  function handleClear(e: React.MouseEvent) {
-    e.stopPropagation();
+  function clearSelection() {
     if (value === undefined) {
       setInternalValue(null);
       setInternalSelectedOption(null);
@@ -190,6 +198,11 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
     setResults([]);
     setHasSearched(false);
     inputRef.current?.focus();
+  }
+
+  function handleClear(e: React.MouseEvent) {
+    e.stopPropagation();
+    clearSelection();
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -214,6 +227,12 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
     } else if (e.key === 'Tab') {
       setOpen(false);
       setActiveIndex(-1);
+    } else if ((e.key === 'Backspace' || e.key === 'Delete') && query === '' && currentValue && !disabled && !readOnly) {
+      // El aspa es un atajo de ratón (fuera del tabulador, como en el resto de
+      // la familia): la salida con teclado es Retroceso sobre el hueco vacío,
+      // el mismo gesto que quita la última píldora en AsyncMultiSelect.
+      e.preventDefault();
+      clearSelection();
     } else if (!open && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
       e.preventDefault();
       setQuery(e.key);
@@ -274,6 +293,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
           aria-label={ariaLabel}
           aria-describedby={ariaDescribedby}
           aria-invalid={error || undefined}
+          aria-required={required || undefined}
           aria-expanded={open}
           aria-haspopup="listbox"
           // El listbox vive en un portal que solo existe abierto: cerrado, un
@@ -282,6 +302,7 @@ export const AsyncSelect = forwardRef<HTMLInputElement, AsyncSelectProps>(functi
           aria-activedescendant={activeIndex >= 0 ? itemId(activeIndex) : undefined}
           autoComplete="off"
           role="combobox"
+          aria-autocomplete="list"
           onBlur={onBlur}
         />
         {/* Lo que se envía con el formulario. */}
