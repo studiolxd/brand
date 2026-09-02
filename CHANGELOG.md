@@ -7,6 +7,31 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Unreleased
+
+Revisión de calidad de los 35 componentes sin consumidor directo en la suite
+(los usa la app interna de 360 — no se retira ninguno). Informes con fichas
+estructurales en `notes/REVISION-huerfanas-lote-{a,b}.md`.
+
+### Cambios incompatibles
+
+- **`OtpInput` pasa a BEM propio** (`otp-input`, `otp-input__cell`) con fichero
+  de tokens registrado: desaparecen `[data-otp-input]` y los cuatro `data-*`
+  que emitía (nadie los leía dentro del sistema, pero eran DOM público — quien
+  estilase por esos selectores tiene que pasarse a las clases BEM).
+
+### Arreglado
+
+- Historias «En superficie oscura» que faltaban en 11 componentes.
+- Cero primitivos y literales sueltos en el CSS de los dos lotes (opacidad,
+  pesos, spacing, easing, cursor, keyframes de TypingIndicator y MenuButton →
+  tokens propios).
+- a11y/i18n: `moreLabel` traducible en CalendarPlanner, `role="group"` en la
+  leyenda de CalendarRoster, aria-label inerte retirado del planner, reenvío de
+  `loadingLabel`/`clearLabel`/`container` en los `Async*Field`.
+- `InputPhoneProps` exportado; MDX propio para DatePicker, MultiSelect,
+  NumberInput, Switcher, TimeSelect y TimeSelect sin `autodocs`.
+
 ## v28.0.0
 
 Saneamiento de la **familia chat** (`MessageBubble`, `UserMessage`,
