@@ -165,11 +165,15 @@ El componente dibuja a mano el icono de subida de la zona de arrastre, el de arc
 
 **Propuesta:** sustituir los dos que existen por `<Icon name="file-text" />` y `<Icon name="close" />`, y **añadir `upload` al catálogo de `Icon`**. Lo segundo toca un componente global fuera de este lote, así que va entero como hallazgo en vez de arreglarse aquí.
 
+**~~Resuelto~~** (`s1-fichas-a`): los tres SVG fuera. `upload` ya estaba en el catálogo (transversal H10, en `main`). El icono de la zona mide con la talla del propio `Icon` (`sm`/`md`/`lg` según la del control), así que los tokens `icon-size` / `sm-icon-size` / `lg-icon-size` se retiran: apuntaban a `icon.size-*`, es decir, decían dos veces lo mismo. El de archivo genérico pasa de 20 px a los 16 del `Icon sm`; el aspa se queda en 16.
+
 ### A17 · `FileUpload`: barra de progreso propia, existiendo `ProgressBar` — **media**
 
 `file-upload__progress` monta su propio `role="progressbar"` con `aria-valuenow/min/max`, su token de relleno y su transición, duplicando el átomo `ProgressBar`, que ya tiene variantes, tallas, `label` traducible y sus propios tests.
 
 **Propuesta:** `<ProgressBar value={progress} label={progressLabel} size="sm" />` y retirar los seis tokens `file-upload.progress-*`. Es la clase de duplicación que el criterio de familia (v28) buscaba: dos barras de progreso en el mismo paquete envejecen distinto.
+
+**~~Resuelto~~** (`s1-fichas-a`): tal cual. De los tokens propios solo sobrevive `progress-margin-block-start` (el aire que separa la barra de la lista); se van los seis de la barra y sus dos pares oscuros. `FileUpload.test.tsx` comprueba que la barra es la del átomo (`aria-valuetext`, que la propia no tenía) y que ya no queda ningún `svg` fuera de `Icon`.
 
 ### A18 · `InputPhone`: dos dependencias externas y un glifo cableado — **media**
 

@@ -47,12 +47,6 @@ $lxd-file-upload-thumb-icon-color: #6b6b6b; // Color del icono de archivo genér
 $lxd-file-upload-remove-color: #4a4a4a; // Color del botón eliminar
 $lxd-file-upload-remove-color-hover: #b30000; // Color del botón eliminar al hacer hover
 $lxd-file-upload-progress-margin-block-start: 0.75rem; // Margen superior de la barra de progreso
-$lxd-file-upload-progress-height: 0.375rem; // Altura de la barra de progreso
-$lxd-file-upload-progress-bg: #d0d0d0; // Fondo del track de progreso
-$lxd-file-upload-progress-fill: #111e30; // Color del relleno de progreso
-$lxd-file-upload-progress-border-radius: 9999px; // Radio de la barra de progreso
-$lxd-file-upload-progress-transition-duration: 250ms; // Duración de la transición del progreso
-$lxd-file-upload-progress-transition-easing: ease-in-out; // Easing de la transición del progreso
 $lxd-file-upload-padding-block: 3rem; // Aire vertical del dropzone — talla md
 $lxd-file-upload-sm-padding-block: 2rem; // Aire vertical del dropzone — talla sm
 $lxd-file-upload-lg-padding-block: 4rem; // Aire vertical del dropzone — talla lg
@@ -67,9 +61,6 @@ $lxd-file-upload-subtext-font-weight: 300; // Peso del texto secundario del drop
 $lxd-file-upload-subtext-font-size: 0.875rem; // Tamaño de las restricciones (peso máximo, número de archivos) — talla md
 $lxd-file-upload-sm-subtext-font-size: 0.875rem; // Restricciones — talla sm: ya está en el peldaño menor de la escala de interfaz
 $lxd-file-upload-lg-subtext-font-size: 1rem; // Restricciones — talla lg: sube al cuerpo
-$lxd-file-upload-icon-size: 24px; // Lado del icono del dropzone — talla md
-$lxd-file-upload-sm-icon-size: 16px; // Icono del dropzone — talla sm
-$lxd-file-upload-lg-icon-size: 48px; // Icono del dropzone — talla lg
 $lxd-file-upload-sm-thumb-size: 2rem; // Lado de la miniatura — talla sm
 $lxd-file-upload-lg-thumb-size: 3rem; // Lado de la miniatura — talla lg
 $lxd-file-upload-sm-item-name-font-size: 0.875rem; // Nombre del archivo — talla sm
