@@ -3,6 +3,8 @@
  */
 
 :root {
+  --opacity-full: 1; /** Extremo alto de una transición de opacidad: plenamente presente */
+  --opacity-muted: 0.7; /** Presente pero en segundo plano: un control secundario en reposo */
   --opacity-overlay: 0.6; /** Velo bajo un modal o una hoja: oscurece la página sin ocultarla */
   --opacity-disabled: 0.4; /** Controles deshabilitados: el elemento sigue ahí, atenuado */
 }

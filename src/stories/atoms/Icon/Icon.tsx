@@ -162,6 +162,12 @@ const ICONS = {
       </>
     ),
   },
+  minus: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M5 12l14 0" />
+    ),
+  },
   sparkles: {
     viewBox: '0 0 24 24',
     render: () => (
@@ -511,6 +517,16 @@ const ICONS = {
     viewBox: '0 0 24 24',
     render: () => (
       <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 2.8 L14.12 9.09 L20.75 9.16 L15.42 13.11 L17.41 19.44 L12 15.6 L6.59 19.44 L8.58 13.11 L3.25 9.16 L9.88 9.09 Z" />
+    ),
+  },
+  upload: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M12 16V4" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M6 10l6-6 6 6" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" d="M4 20h16" />
+      </>
     ),
   },
   user: {

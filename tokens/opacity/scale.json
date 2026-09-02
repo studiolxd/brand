@@ -1,5 +1,7 @@
 {
   "opacity": {
+    "full":     { "$value": "1",   "$type": "number", "$description": "Extremo alto de una transición de opacidad: plenamente presente" },
+    "muted":    { "$value": "0.7", "$type": "number", "$description": "Presente pero en segundo plano: un control secundario en reposo" },
     "overlay":  { "$value": "0.6", "$type": "number", "$description": "Velo bajo un modal o una hoja: oscurece la página sin ocultarla" },
     "disabled": { "$value": "0.4", "$type": "number", "$description": "Controles deshabilitados: el elemento sigue ahí, atenuado" }
   }
