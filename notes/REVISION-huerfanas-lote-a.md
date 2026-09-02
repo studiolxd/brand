@@ -181,6 +181,10 @@ Es el único componente del lote que depende de terceros: `react-phone-number-in
 
 **Propuesta:** no es urgente y funciona, pero conviene decidirlo antes de que más consumidores lo pineen: (a) medir qué añade `libphonenumber-js` al bundle y si conviene el build `min` de metadatos; (b) sacar el glifo a una prop o al catálogo de `Icon`. La sustitución de la librería sería un breaking y no se propone.
 
+**~~Resuelto~~** (`s1-fichas-a`): (a) medido — las dos librerías sirven **ya por defecto** el build `min` (metadata.min.json: 84 KB en crudo, ~20 KB con gzip; el `max` pesa el doble). No hay a qué bajarse, así que la dependencia se cierra como **excepción declarada** y el porqué queda escrito en el MDX (§ «La excepción de las dependencias»): la tabla de planes de numeración de todos los países no es «poco código propio», es mantenimiento perpetuo. Lo que sí se ha quitado es una de las dos importaciones: `getCountryCallingCode` se toma de `react-phone-number-input`, que lo reexporta atado a sus mismos metadatos — una sola tabla de países, no dos. (b) el glifo pasa a `internationalLabel` (default `'🌐'`), reenviada desde `InputPhoneField` y anotada en `Internacionalizacion.mdx`.
+
+Queda **fuera**, para un commit con `pnpm install` de por medio: `libphonenumber-js` ya no se importa en `src/`, así que podría salir de `dependencies` (`react-phone-number-input` lo arrastra igual). No se toca aquí para no mover el lockfile.
+
 ## Resumen de severidades
 
 | Severidad | Fichas |
