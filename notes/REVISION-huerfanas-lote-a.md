@@ -6,28 +6,30 @@ Vara de medir: `SelectField` (contrato de campo) y `ConversationList` / `ChatShe
 
 ## Veredicto por componente
 
-Leyenda: ✓ cumple · **arreglado** en esta rama · **hallazgo** anotado abajo, sin tocar.
+Leyenda: ✓ cumple · **arreglado** en esta rama (`r1-huerfanas-a`) · **resuelto (Ax)** — la ficha se anotó aquí y se cerró después en `s1-fichas-a`; el detalle de cada una, al pie de su ficha.
+
+**Estado del lote:** las 18 fichas están cerradas. `A13` no pedía acción (es una constatación sobre la cobertura), y de `A18` queda un rabo documentado en su ficha: sacar `libphonenumber-js` de `dependencies`, que exige mover el lockfile.
 
 | Componente | Composición | Oscuro | Alineación | Accesibilidad | Calidad |
 | --- | --- | --- | --- | --- | --- |
-| `AnnotationThread` | ✓ | ✓ | hallazgo (A1) | ✓ | ✓ |
-| `AsyncSelect` | ✓ | arreglado | arreglado | hallazgo (A2, A3) | ✓ |
-| `AsyncSelectField` | ✓ | arreglado | arreglado · hallazgo (A4) | ✓ | ✓ |
-| `AsyncMultiSelect` | ✓ | arreglado | arreglado · **hallazgo (A5)** | hallazgo (A3) | ✓ |
+| `AnnotationThread` | ✓ | ✓ | resuelto (A1) | ✓ | ✓ |
+| `AsyncSelect` | ✓ | arreglado | arreglado | resuelto (A2, A3) | ✓ |
+| `AsyncSelectField` | ✓ | arreglado | arreglado · resuelto (A4) | ✓ | ✓ |
+| `AsyncMultiSelect` | ✓ | arreglado | arreglado · resuelto (A5) | resuelto (A3) | ✓ |
 | `AsyncMultiSelectField` | ✓ | arreglado | arreglado | ✓ | ✓ |
-| `Calendar` | ✓ | ✓ | ✓ | ✓ | hallazgo (A6) |
-| `CalendarPlanner` | ✓ | ✓ | arreglado | arreglado · hallazgo (A7) | hallazgo (A8) |
-| `CalendarRoster` | ✓ | ✓ | ✓ | arreglado · hallazgo (A9) | hallazgo (A10) |
+| `Calendar` | ✓ | ✓ | ✓ | ✓ | resuelto (A6) |
+| `CalendarPlanner` | ✓ | ✓ | arreglado | arreglado · resuelto (A7) | resuelto (A8) |
+| `CalendarRoster` | ✓ | ✓ | ✓ | arreglado · resuelto (A9) | resuelto (A10) |
 | `Code` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `CopyButton` | ✓ | ✓ | hallazgo (A11) | ✓ | ✓ |
-| `DatePicker` | ✓ | ✓ | hallazgo (A12) | ✓ | arreglado · hallazgo (A13) |
-| `DateTimeField` | ✓ | ✓ | hallazgo (A14) | hallazgo (A15) | ✓ |
+| `CopyButton` | ✓ | ✓ | resuelto (A11) | ✓ | ✓ |
+| `DatePicker` | ✓ | ✓ | resuelto (A12) | ✓ | arreglado · resuelto (A13) |
+| `DateTimeField` | ✓ | ✓ | resuelto (A14) | resuelto (A15) | ✓ |
 | `DocsSearch` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `DotsButton` | ✓ | arreglado | ✓ | ✓ | ✓ |
 | `DropdownField` | ✓ | arreglado | arreglado | ✓ | ✓ |
 | `ErrorBoundary` | ✓ | n/a | ✓ | n/a | ✓ |
-| `FileUpload` | **hallazgo (A16, A17)** | ✓ | arreglado | ✓ | ✓ |
-| `InputPhone` | hallazgo (A18) | arreglado | arreglado | ✓ | arreglado |
+| `FileUpload` | resuelto (A16, A17) | ✓ | arreglado | ✓ | ✓ |
+| `InputPhone` | resuelto (A18) | arreglado | arreglado | ✓ | arreglado |
 
 `ErrorBoundary` no pinta nada por sí mismo (sin CSS, sin tokens, sin DOM propio): modo oscuro y accesibilidad no le aplican, y por eso tampoco se le añade story «En superficie oscura».
 
