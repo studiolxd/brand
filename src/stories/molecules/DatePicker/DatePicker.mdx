@@ -1,0 +1,83 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as DatePickerStories from "./DatePicker.stories";
+
+<Meta of={DatePickerStories} />
+
+# DatePicker
+
+Elegir **una fecha**: un disparador con la fecha escrita en largo y un `Popover` con el `Calendar` dentro. Es el control suelto; dentro de un formulario se usa `DatePickerField`, que le pone etiqueta, ayuda y error, y `DateTimeField` cuando además hace falta la hora.
+
+<Canvas of={DatePickerStories.Default} />
+<Canvas of={DatePickerStories.WithValue} />
+
+## Qué guarda y qué enseña
+
+El valor es un `Date`, no una cadena: el componente no parsea texto. Lo que se ve es ese `Date` escrito con `Intl` según `locale` (día de la semana, día, mes y año en corto). Con `name`, además, se monta un `<input type="hidden">` con la fecha en `yyyy-mm-dd` **del huso local** — `toISOString()` recortaría a UTC y adelantaría un día en husos al este del meridiano a primera hora.
+
+## Rango y días vetados
+
+`minDate` y `maxDate` acotan; `disabledDates` veta días sueltos (un array) o por regla (una función). Los tres viajan tal cual al `Calendar`, que además desactiva la navegación de mes cuando ya no queda nada seleccionable en esa dirección.
+
+<Canvas of={DatePickerStories.WithMinMax} />
+
+## Tallas
+
+`size` mide el disparador a la talla del sistema —32, 40 o 48— y viaja también al calendario del panel, que ajusta su rejilla. En las superficies públicas se usa `lg`; dentro de las aplicaciones, `md`.
+
+<Canvas of={DatePickerStories.SizeSm} />
+<Canvas of={DatePickerStories.SizeLg} />
+
+## Estados
+
+`error` marca el borde y pone `aria-invalid`; el mensaje lo escribe el campo que lo envuelve, no el control. `disabled` lo saca del tabulador; `readOnly` lo deja enfocable pero no abre el panel.
+
+<Canvas of={DatePickerStories.Error} />
+<Canvas of={DatePickerStories.Disabled} />
+
+## Con react-hook-form
+
+El `ref` va al **disparador**, para que la validación pueda enfocarlo al fallar; `onBlur` sale de él. El contrato es `value` / `onChange` + `name` + `ref`:
+
+```tsx
+<FormField
+  control={form.control}
+  name="fecha"
+  render={({ field, fieldState }) => (
+    <DatePicker
+      ref={field.ref}
+      name={field.name}
+      value={field.value ?? null}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      disabled={field.disabled}
+      error={!!fieldState.error}
+      aria-label="Fecha"
+    />
+  )}
+/>
+```
+
+## En superficie oscura
+
+No tiene valores propios: el disparador es el `Input` del sistema y el calendario voltea con los tokens de `Calendar`.
+
+<Canvas of={DatePickerStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- El disparador es un `<button>` con `aria-haspopup="dialog"` y `aria-expanded`; el panel es un `role="dialog"` cuyo nombre accesible es `calendarLabel` (por defecto «Calendario», en castellano).
+- Suelto, el nombre del control va en `aria-label`; dentro de un campo lo pone la etiqueta por `htmlFor`/`id`, y ahí **no** se pasa `aria-label`.
+- Los `id` de ayuda y error llegan por `aria-describedby`, que el campo compone.
+- La rejilla del calendario es una sola parada de tabulador y se recorre con las flechas, Inicio/Fin e RePág/AvPág: el detalle está en la doc de `Calendar`.
+
+## Textos
+
+`placeholder` y `calendarLabel` son los dos textos que emite por su cuenta, los dos con default en castellano. Los nombres de mes y día no son props: salen de `locale` con `Intl`.
+
+## Tokens
+
+El disparador **no tiene tokens propios**: viste con los del `Input` (`--input-*`) para que un campo de fecha y uno de texto sean indistinguibles en un formulario, y el panel con los del `Popover` y los del `Calendar`. La consecuencia es que hoy no se puede retocar solo el disparador de fecha sin mover todos los campos de texto; está anotado en `notes/REVISION-huerfanas-lote-a.md`.
+
+## Props
+
+<ArgTypes of={DatePickerStories} />
