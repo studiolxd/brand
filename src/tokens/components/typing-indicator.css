@@ -4,10 +4,10 @@
 
 :root {
   --typing-indicator-dot-size: 0.375rem; /** Lado de cada punto cuadrado (6px) */
-  --typing-indicator-dot-opacity-active: 1; /** Opacidad del punto en lo alto del salto. Literal a falta de un `opacity.full` global (ver notas de revisión) */
   --typing-indicator-dot-rise: 0.25rem; /** Cuánto sube el punto en lo alto del salto (4px): una fracción del propio punto, no un desplazamiento de maqueta */
   --typing-indicator-dot-gap: var(--spacing-1); /** Separación entre puntos */
   --typing-indicator-dot-opacity-inactive: var(--opacity-disabled); /** Opacidad del punto en reposo */
+  --typing-indicator-dot-opacity-active: var(--opacity-full); /** Opacidad del punto en lo alto del salto */
   --typing-indicator-animation-duration: var(--motion-duration-slow); /** Duración del ciclo de animación */
   --typing-indicator-animation-easing: var(--motion-easing-in-out); /** Curva del salto: movimiento */
   --typing-indicator-dot-color: var(--color-text-on-light); /** Color de los puntos */

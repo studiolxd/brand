@@ -4,7 +4,7 @@
     "dot-gap":              { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Separación entre puntos" },
     "dot-color":            { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color de los puntos" },
     "dot-opacity-inactive": { "$value": "{opacity.disabled}",       "$type": "number",    "$description": "Opacidad del punto en reposo" },
-    "dot-opacity-active":   { "$value": "1",                       "$type": "number",    "$description": "Opacidad del punto en lo alto del salto. Literal a falta de un `opacity.full` global (ver notas de revisión)" },
+    "dot-opacity-active":   { "$value": "{opacity.full}",           "$type": "number",    "$description": "Opacidad del punto en lo alto del salto" },
     "dot-rise":             { "$value": "0.25rem",                  "$type": "dimension", "$description": "Cuánto sube el punto en lo alto del salto (4px): una fracción del propio punto, no un desplazamiento de maqueta" },
     "animation-duration":   { "$value": "{motion.duration.slow}",   "$type": "string",    "$description": "Duración del ciclo de animación" },
     "animation-easing":     { "$value": "{motion.easing.in-out}",   "$type": "string",    "$description": "Curva del salto: movimiento" },
