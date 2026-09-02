@@ -35,3 +35,42 @@ export const Accesibilidad: Story = {
     await expect(getComputedStyle(dots[0]).borderRadius).toBe('0px');
   },
 };
+
+/**
+ * Test: con `prefers-reduced-motion: reduce` los puntos se quedan quietos y el
+ * texto accesible sigue anunciándose. La preferencia no se puede emular desde
+ * la story, así que se comprueba sobre la hoja de estilo real que sirve el
+ * navegador —la regla existe y para la animación— más el anuncio, que es quien
+ * informa cuando no hay movimiento.
+ */
+export const MovimientoReducido: Story = {
+  name: 'Test — con movimiento reducido',
+  tags: ['!dev'],
+  args: { label: 'Ana está escribiendo…' },
+  play: async ({ canvasElement }) => {
+    const status = within(canvasElement).getByRole('status');
+    await expect(status).toHaveTextContent('Ana está escribiendo…');
+
+    const reglas = Array.from(document.styleSheets).flatMap((hoja) => {
+      try {
+        return Array.from(hoja.cssRules);
+      } catch {
+        // Hoja de otro origen: no se puede leer y no es la nuestra.
+        return [];
+      }
+    });
+    const media = reglas.filter(
+      (r): r is CSSMediaRule =>
+        r instanceof CSSMediaRule && r.conditionText.includes('prefers-reduced-motion'),
+    );
+    const paraLaAnimacion = media.some((r) =>
+      Array.from(r.cssRules).some(
+        (dentro) =>
+          dentro instanceof CSSStyleRule &&
+          dentro.selectorText.includes('.typing-indicator__dot') &&
+          dentro.style.animationName === 'none',
+      ),
+    );
+    await expect(paraLaAnimacion).toBe(true);
+  },
+};
