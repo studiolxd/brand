@@ -139,15 +139,18 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
       aria-labelledby={ariaLabelledBy}
       aria-describedby={describedBy ?? ariaDescribedBy}
       aria-invalid={error || undefined}
-      className={className}
-      data-otp-input=""
-      data-size={size}
-      data-error={String(error)}
-      data-disabled={String(!!disabled)}
+      className={[
+        'otp-input',
+        size !== 'md' ? `otp-input--${size}` : '',
+        error ? 'otp-input--error' : '',
+        disabled ? 'otp-input--disabled' : '',
+        className ?? '',
+      ].filter(Boolean).join(' ')}
     >
       {Array.from({ length }, (_, i) => (
         <Input
           key={i}
+          className="otp-input__cell"
           ref={i === 0 ? ref : undefined}
           id={id ? `${id}-${i}` : undefined}
           name={name ? `${name}-${i}` : undefined}

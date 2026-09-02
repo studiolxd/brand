@@ -54,6 +54,7 @@
 @import "./molecules/async-select-field.css";
 @import "./molecules/async-multi-select-field.css";
 @import "./molecules/input-phone-field.css";
+@import "./components/otp-input.css";
 @import "./molecules/otp-field.css";
 @import "./molecules/checkbox-field.css";
 @import "./molecules/radio-field.css";
