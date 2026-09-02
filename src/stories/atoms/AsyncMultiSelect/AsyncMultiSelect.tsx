@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useState, useRef, useId, useCallback, type Ref } from 'react';
+import { forwardRef, useState, useRef, useId, useEffect, useCallback, type Ref } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../Icon/Icon';
 import { Spinner } from '../Spinner/Spinner';
@@ -32,6 +32,11 @@ export interface AsyncMultiSelectProps {
   disabled?: boolean;
   readOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * Milisegundos de rebote entre la última tecla y la llamada a `onSearch`.
+   * Default: 300. A 0 se busca en cada tecla.
+   */
+  debounceMs?: number;
   id?: string;
   /** Nombre del campo en el formulario: se monta un input oculto por valor elegido. */
   name?: string;
@@ -90,6 +95,7 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   disabled,
   readOnly,
   size = 'md',
+  debounceMs = 300,
   id,
   name,
   error = false,
@@ -113,6 +119,9 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   // cuando el consumidor no lleva él mismo `selectedOptions`.
   const [knownOptions, setKnownOptions] = useState<AsyncMultiSelectOption[]>([]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Cada búsqueda lleva número: solo la última manda. Sin esto, dos búsquedas
+  // seguidas pueden resolverse fuera de orden y pintar los resultados viejos.
+  const requestRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
@@ -136,27 +145,39 @@ export const AsyncMultiSelect = forwardRef<HTMLInputElement, AsyncMultiSelectPro
   const itemId = (i: number) => `${itemIdPrefix}-opt-${i}`;
 
   const runSearch = useCallback(async (q: string) => {
+    const requestId = ++requestRef.current;
     setLoading(true);
     setHasSearched(false);
     try {
       const opts = await onSearch(q);
+      if (requestId !== requestRef.current) return;
       setResults(opts);
       setActiveIndex(-1); // reset active index when results change
     } catch {
+      if (requestId !== requestRef.current) return;
       setResults([]);
       setActiveIndex(-1);
     } finally {
-      setLoading(false);
-      setHasSearched(true);
+      if (requestId === requestRef.current) {
+        setLoading(false);
+        setHasSearched(true);
+      }
     }
   }, [onSearch]);
+
+  // Al desmontar: se cancela el rebote pendiente y se invalida la búsqueda en
+  // vuelo, para que su respuesta no intente pintar nada.
+  useEffect(() => () => {
+    requestRef.current += 1;
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+  }, []);
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const q = e.target.value;
     setQuery(q);
     if (!open) setOpen(true);
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => void runSearch(q), 300);
+    debounceRef.current = setTimeout(() => void runSearch(q), debounceMs);
   }
 
   function handleInputPointerDown(e: React.PointerEvent<HTMLInputElement>) {

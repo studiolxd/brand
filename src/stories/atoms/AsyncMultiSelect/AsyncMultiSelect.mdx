@@ -15,6 +15,8 @@ El `AsyncSelect` con **varios** valores: cada elección se queda como una pill d
 
 `onSearch` recibe lo escrito y devuelve una promesa de opciones. Mientras está en vuelo, la lista enseña un `Spinner` con `loadingLabel` como nombre accesible; si vuelve vacía, el `emptyMessage`. Los dos son texto visible y van como props: una app multiidioma los pasa traducidos.
 
+Las teclas se rebotan: `onSearch` se llama una vez pasados `debounceMs` (300 por defecto) desde la última. La respuesta que llega fuera de orden se descarta —solo pinta la última búsqueda pedida— y al desmontar se cancela el rebote pendiente, así que un `fetch` en vuelo no intenta pintar nada.
+
 <Canvas of={AsyncMultiSelectStories.MensajeVacio} />
 
 ## Valores

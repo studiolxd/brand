@@ -69,6 +69,8 @@ Los 300 ms del `setTimeout` están cableados en el cuerpo del componente, sin pr
 
 **Propuesta:** `debounceMs?: number` (default 300) y un `useEffect` de limpieza; para el fuera de orden, un contador de petición que descarte toda respuesta que no sea la última. Es el mismo patrón que `DocsSearch` delega en el consumidor, pero aquí el componente sí posee la búsqueda, así que le toca a él.
 
+**~~Resuelto~~** (`s1-fichas-a`): implementada tal cual en los dos átomos —`debounceMs` (default 300), `requestRef` que descarta toda respuesta que no sea la última y limpieza al desmontar— y reenviada desde `AsyncSelectField` / `AsyncMultiSelectField`. `AsyncSelect.test.tsx` cubre los tres casos (fuera de orden, rebote, desmontaje).
+
 ### A3 · `AsyncSelect` / `AsyncMultiSelect`: botones de limpiar y de quitar fuera del tabulador — **baja**
 
 El aspa de `AsyncSelect` y las de las píldoras de `AsyncMultiSelect` llevan `tabIndex={-1}` y responden a `onMouseDown`: con teclado no se llega a ellas. En `AsyncMultiSelect` hay salida (Retroceso quita el último valor, que es el patrón de combobox con píldoras); en `AsyncSelect` no hay ninguna: quien navega con teclado no puede vaciar la selección. El `aria-label` de esos botones es, mientras tanto, peso muerto.

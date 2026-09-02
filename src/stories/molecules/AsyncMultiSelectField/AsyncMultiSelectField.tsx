@@ -34,6 +34,8 @@ export interface AsyncMultiSelectFieldProps {
   /** Texto de ayuda, enlazado por `aria-describedby`. */
   helperText?: string;
   size?: 'sm' | 'md' | 'lg';
+  /** Milisegundos de rebote antes de llamar a `onSearch`. Default: 300. */
+  debounceMs?: number;
   /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
   className?: string;
   /** Texto cuando la búsqueda no devuelve nada. Default: "Sin resultados". */
@@ -65,6 +67,7 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
   disabled,
   readOnly,
   size: sizeProp,
+  debounceMs,
   error = false,
   errorMessage,
   helperText,
@@ -102,6 +105,7 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
         disabled={disabled}
         readOnly={readOnly}
         size={size}
+        debounceMs={debounceMs}
         error={hasError}
         emptyMessage={emptyMessage}
         removeLabel={removeLabel}
