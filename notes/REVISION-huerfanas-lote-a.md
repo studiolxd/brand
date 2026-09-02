@@ -101,6 +101,8 @@ Las píldoras se pintan **solo** desde la prop `selectedOptions`, que por defect
 
 **Propuesta:** prefijar con `useId()`, como hacen los campos del sistema.
 
+**~~Resuelto~~** (`s1-fichas-a`): `useId()` por delante en los dos. Probado en `CalendarPlanner.test.tsx` con dos planificadores del mismo mes.
+
 ### A7 · `CalendarPlanner`: la celda no dice de qué fecha se habla — **media**
 
 `Calendar` da a cada día un nombre accesible con la fecha entera (`aria-label={dayFormatter.format(date)}`). En `CalendarPlanner`, cuando la celda es enfocable (`onDayClick`), lo único que se lee es el número suelto y los rótulos de los eventos. El `aria-label` que había sobre el `span` no lo resolvía —se ignoraba— y ya está retirado.
@@ -131,6 +133,8 @@ La tabla declara bien sus cabeceras de columna (`<th scope="col">` por día), pe
 
 **Propuesta:** que el emoji viaje en la etiqueta del dato, o una prop `birthdayPrefix?: string` con default `'🎂 '` y la posibilidad de vaciarla.
 
+**~~Resuelto~~** (`s1-fichas-a`): `birthdayPrefix` con default `'🎂 '`, vaciable. En el MDX del componente y en la tabla de `Internacionalizacion.mdx`; probado en los dos sentidos.
+
 ### A11 · `CopyButton`: no reenvía `ref` — **baja**
 
 Es la única molécula del lote que no es `forwardRef`. Como devuelve un fragmento (el botón más la región viva), reenviarlo pide decidir a qué elemento va; la respuesta obvia es el `<button>`.
@@ -157,11 +161,15 @@ Solo cuatro componentes del lote tienen `.test.tsx` (`AnnotationThread`, `Calend
 
 **Propuesta:** que `DatePicker` acepte el estiramiento por token o por clase propia (`--date-picker-flex`, o `className` desde el campo), en la misma línea que A12.
 
+**~~Resuelto~~** (`s1-fichas-a`): por `className` —que el `DatePicker` ya aceptaba—. El campo pone `date-time-field__date` sobre el disparador y estila su propia clase; ni un selector que alcance el BEM del otro componente.
+
 ### A15 · `DateTimeField`: `aria-invalid` sobre un `role="group"` — **baja**
 
 El atributo se aplica al contenedor del grupo, donde no está definido: `aria-invalid` es de widgets de entrada. El estado sí llega bien a los dos controles de dentro (`error={hasError}`), así que el atributo del grupo no aporta nada y puede confundir a una auditoría automática.
 
 **Propuesta:** quitarlo del `div` y dejarlo donde ya está, en los controles.
+
+**~~Resuelto~~** (`s1-fichas-a`): fuera del `role="group"`; el MDX explica ahora por qué no va ahí.
 
 ### A16 · `FileUpload`: tres SVG en línea en vez del átomo `Icon` — **media**
 

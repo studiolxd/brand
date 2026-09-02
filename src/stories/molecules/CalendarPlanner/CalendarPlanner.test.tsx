@@ -23,6 +23,20 @@ describe('CalendarPlanner', () => {
     expect(celda.querySelector('[aria-hidden="true"]')).toHaveTextContent('14');
   });
 
+  it('dos planificadores del mismo mes no comparten el id del título', () => {
+    render(
+      <>
+        <CalendarPlanner month={MES} gridLabel="" />
+        <CalendarPlanner month={MES} gridLabel="" />
+      </>,
+    );
+
+    const [a, b] = screen.getAllByRole('grid');
+    const idA = a.getAttribute('aria-labelledby');
+    expect(idA).toBeTruthy();
+    expect(idA).not.toBe(b.getAttribute('aria-labelledby'));
+  });
+
   it('abre el diálogo interno de «+N más» cuando nadie se ocupa del desbordamiento', async () => {
     const user = userEvent.setup();
     render(<CalendarPlanner month={MES} events={EVENTOS} />);

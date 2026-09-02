@@ -119,10 +119,10 @@ export const DateTimeField = forwardRef<HTMLButtonElement, DateTimeFieldProps>(f
         role="group"
         aria-labelledby={`${id}-label`}
         aria-describedby={describedBy}
-        aria-invalid={hasError || undefined}
       >
         <DatePicker
           ref={ref}
+          className="date-time-field__date"
           id={dateId}
           name={name}
           value={value ?? null}

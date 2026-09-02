@@ -61,6 +61,12 @@ export interface CalendarRosterProps {
   renderCell?: (day: number, date: Date, cell: RosterCell | null) => ReactNode;
   /** Etiqueta de la columna de nombre. Default: 'Empleado' */
   nameLabel?: string;
+  /**
+   * Lo que precede a la etiqueta de un cumpleaños. Default: `'🎂 '`
+   * (castellano/universal). Es contenido **visible** y se lee en voz alta:
+   * pásalo vacío para quitarlo, u otro texto para sustituirlo.
+   */
+  birthdayPrefix?: string;
   /** Muestra la leyenda al final. Default: true */
   showLegend?: boolean;
   /**
@@ -125,6 +131,7 @@ export function CalendarRoster({
   linkComponent,
   renderCell,
   nameLabel = 'Empleado',
+  birthdayPrefix = '🎂 ',
   showLegend = true,
   locale = 'es-ES',
   legendItems = LEGEND_ITEMS,
@@ -244,7 +251,7 @@ export function CalendarRoster({
                           )}
                           {cell && cell.type !== 'schedule' && cell.type !== 'non-working' && (
                             <Tag variant={CELL_TYPE_VARIANT[cell.type]}>
-                              {cell.type === 'birthday' ? `🎂 ${cell.label}` : cell.label}
+                              {cell.type === 'birthday' ? `${birthdayPrefix}${cell.label}` : cell.label}
                             </Tag>
                           )}
                         </>

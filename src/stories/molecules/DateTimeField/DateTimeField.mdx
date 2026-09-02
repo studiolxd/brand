@@ -73,7 +73,9 @@ El contrato es `value` / `onChange` + `name` + `ref` al disparador de la fecha. 
 ## Accesibilidad
 
 - La etiqueta nombra el grupo de los dos controles; cada uno conserva su propio nombre («Horas», «Minutos», traducibles con `hoursLabel` y `minutesLabel`).
-- Ayuda y error llegan al grupo por `aria-describedby`; el error marca `aria-invalid`.
+- Ayuda y error llegan al grupo por `aria-describedby`. El `aria-invalid` no va
+  en el grupo —es un atributo de los widgets de entrada, donde no está definido
+  no aporta nada—: lo llevan los dos controles de dentro, que reciben `error`.
 - El mensaje de error se anuncia (`role="alert"`).
 - Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
 

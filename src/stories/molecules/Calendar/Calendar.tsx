@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useId } from 'react';
 import {
   chunkWeeks,
   getCalendarDays,
@@ -135,7 +135,10 @@ export function Calendar({
   const prevDisabled = minDate ? !isSameMonth(prevMonth, minDate) && prevMonth < minDate : false;
   const nextDisabled = maxDate ? !isSameMonth(nextMonth, maxDate) && nextMonth > maxDate : false;
 
-  const titleId = `calendar-title-${currentMonth.getFullYear()}-${currentMonth.getMonth()}`;
+  // Con `useId` por delante, dos calendarios del mismo mes en la misma página
+  // —el caso normal de un rango «desde / hasta»— no comparten el id del título.
+  const instanceId = useId();
+  const titleId = `${instanceId}-calendar-title-${currentMonth.getFullYear()}-${currentMonth.getMonth()}`;
   const rootClass = ['calendar', `calendar--${size}`, className].filter(Boolean).join(' ');
 
   return (

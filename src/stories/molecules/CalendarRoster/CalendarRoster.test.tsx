@@ -5,6 +5,20 @@ import { CalendarRoster } from './CalendarRoster';
 const MES = new Date(2026, 0, 1);
 
 describe('CalendarRoster', () => {
+  it('el emoji del cumpleaños se puede sustituir y vaciar', () => {
+    const filas = [{ id: '1', name: 'Ana García', cells: { 5: { type: 'birthday' as const, label: 'Cumpleaños' } } }];
+
+    const { unmount } = render(<CalendarRoster month={MES} rows={filas} />);
+    expect(screen.getByText('🎂 Cumpleaños')).toBeInTheDocument();
+    unmount();
+
+    render(<CalendarRoster month={MES} rows={filas} birthdayPrefix="" />);
+    // «Cumpleaños» a secas también está en la leyenda: lo que se comprueba es
+    // que la celda ya no lleva el emoji delante
+    expect(screen.getAllByText('Cumpleaños').length).toBeGreaterThan(0);
+    expect(screen.queryByText('🎂 Cumpleaños')).toBeNull();
+  });
+
   it('la columna de nombres son cabeceras de fila', () => {
     render(
       <CalendarRoster

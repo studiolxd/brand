@@ -1,4 +1,4 @@
-import { useState, useCallback, type ReactNode } from 'react';
+import { useState, useCallback, useId, type ReactNode } from 'react';
 import { Tag } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import type { TagVariant } from '../../atoms/Tag/Tag';
@@ -159,7 +159,10 @@ export function CalendarPlanner({
     onActivate: onDayClick ? (date) => onDayClick(date, getEventsForDay(date)) : undefined,
   });
 
-  const titleId = `planner-title-${currentMonth.getFullYear()}-${currentMonth.getMonth()}`;
+  // Ver `Calendar`: el `useId` evita el id duplicado con dos planificadores del
+  // mismo mes en la misma página.
+  const instanceId = useId();
+  const titleId = `${instanceId}-planner-title-${currentMonth.getFullYear()}-${currentMonth.getMonth()}`;
   const rootClass = ['calendar-planner', `calendar-planner--${size}`, className]
     .filter(Boolean)
     .join(' ');
