@@ -63,14 +63,16 @@ sin teclearlo.
 
 Las celdas viven en un `role="group"`: el lector anuncia el conjunto una vez y luego cada
 celda por su `aria-label` («Dígito 3 de 6», traducible con `digitLabel`). Suelto, el grupo se
-nombra con `aria-label`; dentro de `OtpField` lo nombra la etiqueta por `aria-labelledby`.
+llama «Código de verificación» —el default castellano de `groupLabel`, para que nunca quede sin
+nombre—, y un `aria-label` explícito lo sustituye; dentro de `OtpField` lo nombra la etiqueta por
+`aria-labelledby`.
 
 ## Uso
 
 ```tsx
 import { OtpInput } from '@studiolxd/brand/otp-input';
 
-<OtpInput length={6} aria-label="Código de verificación" onComplete={verificar} />
+<OtpInput length={6} onComplete={verificar} />
 ```
 
 El `ref` va a la **primera celda**: es la que enfoca react-hook-form al fallar la validación.

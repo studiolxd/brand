@@ -22,6 +22,8 @@ export interface TimeFieldProps {
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   readOnly?: boolean;
+  /** Campo obligatorio: parte del contrato de campo del sistema. */
+  required?: boolean;
   /** Marca el control en error sin mensaje. Un `errorMessage` ya lo implica. */
   error?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -53,6 +55,7 @@ export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function 
   size: sizeProp,
   disabled,
   readOnly,
+  required,
   error = false,
   errorMessage,
   helperText,
@@ -85,6 +88,7 @@ export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function 
         size={size}
         disabled={disabled}
         readOnly={readOnly}
+        required={required}
         error={hasError}
         hoursLabel={hoursLabel}
         minutesLabel={minutesLabel}

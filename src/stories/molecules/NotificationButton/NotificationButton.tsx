@@ -11,8 +11,17 @@ export interface NotificationButtonProps extends Omit<ButtonBaseProps, 'variant'
   count?: number;
   /** Tope del contador («99+»). */
   max?: number;
-  /** Nombre accesible. Por defecto, «Notificaciones» o «Notificaciones: N sin leer». */
+  /**
+   * Nombre accesible cuando no hay contador. Default: «Notificaciones»
+   * (castellano). Una app multiidioma debe pasarla traducida.
+   */
   label?: string;
+  /**
+   * Nombre accesible cuando hay contador: recibe el número, para que la frase
+   * se pueda rehacer en cualquier idioma. Default: «Notificaciones: N sin
+   * leer» (castellano).
+   */
+  countLabel?: (count: number) => string;
 }
 
 /**
@@ -21,10 +30,17 @@ export interface NotificationButtonProps extends Omit<ButtonBaseProps, 'variant'
  * menú, una página) es del producto: es un botón y sirve de disparador.
  */
 export const NotificationButton = forwardRef<HTMLButtonElement, NotificationButtonProps>(function NotificationButton(
-  { count = 0, max = 99, label, className, ...rest },
+  {
+    count = 0,
+    max = 99,
+    label = 'Notificaciones',
+    countLabel = (n) => `Notificaciones: ${n} sin leer`,
+    className,
+    ...rest
+  },
   ref,
 ) {
-  const name = label ?? (count > 0 ? `Notificaciones: ${count} sin leer` : 'Notificaciones');
+  const name = count > 0 ? countLabel(count) : label;
   return (
     <Button
       ref={ref}

@@ -18,23 +18,28 @@ props) · **X** accesibilidad · **Q** calidad (tests, story, MDX).
 | MenuButton | ✓ | arreglado (story) | arreglado (`line-shift`) | ✓ | ✓ |
 | MessageBubble | ✓ | ✓ | ✓ | ✓ | ✓ |
 | MultiSelect | ✓ | arreglado (story) | arreglado (7 tokens) | ✓ | arreglado (MDX) |
-| NotificationButton | ✓ | arreglado (story) | ✓ | hallazgo · baja | ✓ |
-| NumberInput | hallazgo · media | ✓ | arreglado (`btn-line-height`) | ✓ | arreglado (MDX) |
-| OtpInput | ✓ | arreglado (story) | **arreglado (BEM + tokens)** | hallazgo · media | arreglado (MDX) |
+| NotificationButton | ✓ | arreglado (story) | ✓ | arreglado (`countLabel`) | ✓ |
+| NumberInput | arreglado (iconos) | ✓ | arreglado (`btn-line-height`) | ✓ | arreglado (MDX) |
+| OtpInput | ✓ | arreglado (story) | **arreglado (BEM + tokens)** | arreglado (`groupLabel`) | arreglado (MDX) |
 | Radio | ✓ | ✓ | ✓ | ✓ | ✓ |
 | SkipLink | ✓ | arreglado (story) | ✓ | ✓ | ✓ |
-| StarRating | ✓ | ✓ | hallazgo · baja | ✓ | ✓ |
-| Switcher | ✓ | hallazgo · baja | ✓ | ✓ | arreglado (MDX) |
+| StarRating | ✓ | ✓ | arreglado (excepción escrita) | ✓ | ✓ |
+| Switcher | ✓ | arreglado (track + thumb) | ✓ | ✓ | arreglado (MDX) |
 | Text | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Textarea | ✓ | arreglado (story) | ✓ | ✓ | ✓ |
-| TimeField | ✓ | ✓ | hallazgo · baja | ✓ | ✓ |
+| TimeField | ✓ | ✓ | arreglado (`required`) | ✓ | ✓ |
 | TimeSelect | ✓ | ✓ | arreglado (3 tokens + import) | ✓ | arreglado (MDX) |
 | ToggleGroup | ✓ | ✓ (sin color propio) | ✓ | ✓ | ✓ |
-| TreeView | ✓ | ✓ | ✓ | hallazgo · baja | ✓ |
-| TypingIndicator | ✓ | ✓ | arreglado (3 tokens) | ✓ | hallazgo · baja |
+| TreeView | ✓ | ✓ | ✓ | arreglado (teclado) | ✓ |
+| TypingIndicator | ✓ | ✓ | arreglado (3 tokens) | ✓ | arreglado (test + story) |
 
 Además, dos hallazgos transversales al final (tokens globales que faltan y un icono
 ausente del catálogo) y uno en un componente vecino (`OtpField`).
+
+> **Estado (2026-09-02, rama `s2-fichas-b`)**: los transversales H9/H10 se resolvieron en
+> `main`, y en esta rama se han cerrado **todas** las fichas restantes —H1 a H8 y H11—. Cada
+> una lleva abajo, bajo su enunciado, lo que se hizo. Sigue sin poder ejecutarse
+> `pnpm test:stories` (Chromium no disponible en esta red).
 
 ---
 
@@ -98,7 +103,7 @@ componente del sistema (los tokens ya entran por `src/tokens/index.css`).
 
 ---
 
-## Hallazgos (anotados, sin tocar)
+## Hallazgos (todos resueltos)
 
 ### H1 · NumberInput dibuja los símbolos +/− con texto, no con iconos — **media**
 
@@ -115,6 +120,11 @@ de este lote.
 `<Icon name="minus" size="sm" />` / `<Icon name="plus" size="sm" />`, retirando entonces
 `btn-font-size` y `btn-line-height`. Minor.
 
+**Hecho** — `NumberInput` dibuja los dos signos con `<Icon name="minus" size="sm" />` y
+`<Icon name="plus" size="sm" />`, del catálogo (el icono `minus` entró en `main` con H10). Se
+retiran `number-input.btn-font-size` y `btn-line-height`, que solo existían para cuadrar los
+glifos, y con ellos el `font-family` que el botón heredaba del campo.
+
 ### H2 · OtpInput suelto se queda sin nombre accesible — **media**
 
 El contenedor es `role="group"` y su nombre sale solo de `aria-label` / `aria-labelledby`. Si
@@ -126,6 +136,11 @@ Dentro de `OtpField` no pasa, porque la etiqueta lo nombra.
 como `TreeView.label` o `StarRating.groupLabel`, y que `OtpField` la anule con su
 `aria-labelledby`. Minor.
 
+**Hecho** — nueva prop `groupLabel` en `OtpInput`, con default castellano «Código de
+verificación». Un `aria-label` explícito prevalece sobre ella y, dentro de `OtpField`, manda el
+`aria-labelledby` de la etiqueta. Con `OtpInput.test.tsx` (los cuatro casos), la nota de
+accesibilidad del MDX rehecha y fila en `Internacionalizacion.mdx`.
+
 ### H3 · NotificationButton no puede traducir su nombre con el contador dentro — **baja**
 
 El default es `Notificaciones: ${count} sin leer`, pero la única prop es `label?: string`. Una
@@ -135,6 +150,12 @@ valor, la prop es una función**.
 
 *Propuesta*: `label?: string` para el caso sin contador y `countLabel?: (count: number) => string`
 para el caso con él, como `StarRating.valueLabel`. Minor.
+
+**Hecho** — `label` pasa a ser el nombre sin contador (default «Notificaciones») y se añade
+`countLabel(count)`, una función, para el nombre con contador. Con test y doc.
+
+> **Cambio de contrato menor**: hasta ahora `label` ganaba también cuando había contador; ahora,
+> con contador, manda `countLabel`. Tenerlo en cuenta al decidir el bump.
 
 ### H4 · Switcher: el track apagado no tiene par oscuro — **baja**
 
@@ -147,6 +168,13 @@ No lo he tocado porque cambia el aspecto del estado más frecuente del component
 decisión de diseño, no un arreglo mecánico. *Propuesta*: añadir `surface-dark-track-bg` en
 `tokens/component/switcher.json` y revisarlo en la story oscura, que ya existe. Patch.
 
+**Hecho** — `surface-dark-track-bg` = `color.text.on-dark`, que es lo que la regla de derivación
+da a un rol de borde y lo mismo que hace el carril sin recorrer del `Slider`. Eso obliga a mover
+también el thumb: en blanco desaparecería sobre el track claro del estado apagado, así que
+`surface-dark-thumb-bg` lo pasa a prusia, que contrasta con los dos tracks oscuros (blanco en
+off, lavanda en on) — el mismo recurso que el pulgar lavanda del `Slider` sobre su carril blanco.
+La ficha solo proponía el track; el thumb va con él o el control queda ilegible.
+
 ### H5 · StarRating usa `className="visually-hidden"` a pelo — **baja**
 
 En el radio de cada estrella: `className="star-rating__input visually-hidden"`. CLAUDE.md
@@ -156,6 +184,12 @@ rompería la relación `<label>`↔`<input>`), pero no está escrito en ninguna 
 
 *Propuesta*: o documentar la excepción en CLAUDE.md junto a la de `Label`, o dar a
 `VisuallyHidden` una prop `render` (Base UI) para aplicarla sobre un elemento existente. Patch.
+
+**Hecho** — se elige documentar, no dar a `VisuallyHidden` una prop `render`: la clase ya va
+sobre el elemento correcto y envolverla en la API de Base UI sería ceremonia para el mismo
+resultado. CLAUDE.md § «Accesibilidad — VisuallyHidden» lista ahora las **tres** excepciones
+(`Label`, `StarRating` y el `<caption>` de `Table`, que apareció al buscarlas) con la regla que
+las une, y el porqué queda anotado en los dos sitios del código.
 
 ### H6 · TreeView: le falta el teclado opcional del patrón — **baja**
 
@@ -173,6 +207,11 @@ deshabilitada, para que no desaparezca del árbol al navegar con teclado.
 (`TYPEAHEAD_RESET_MS`), y dejar las filas deshabilitadas dentro de `alcanzables` pero sin
 `elegir()`. Minor.
 
+**Hecho** — salto por letra y `*` implementados, el primero con el mismo mecanismo que
+`MultiSelect` (`TYPEAHEAD_RESET_MS`); el rótulo se lee del DOM porque `label` es un `ReactNode`.
+Las filas `disabled` vuelven al recorrido de teclado y se anuncian con `aria-disabled`, sin poder
+elegirse. Tres tests nuevos y dos actualizados, más la sección de teclado del MDX.
+
 ### H7 · TimeField no acepta `required` — **baja**
 
 El contrato de campo que fija `SelectField` incluye `required`. `TimeField` lo omite, así que
@@ -180,6 +219,9 @@ un campo de hora obligatorio no puede marcarse como tal (ni visualmente en la et
 `aria-required`). `TimeSelect` tampoco lo reenvía a sus dos `Select`.
 
 *Propuesta*: añadir `required?: boolean` a los dos y propagarlo. Minor.
+
+**Hecho** — `required` en `TimeField` y en `TimeSelect`, que lo reenvía a sus dos `Select` y
+marca el `role="group"` con `aria-required`. Con `TimeField.test.tsx`.
 
 ### H8 · TypingIndicator: la story y el test son mínimos — **baja**
 
@@ -189,6 +231,11 @@ sigue anunciándose. Es justo el caso que la regla de movimiento reducido proteg
 
 *Propuesta*: story `Test — con movimiento reducido` que compruebe `animation-name: none` y la
 presencia del texto de `label`. Patch.
+
+**Hecho** — story `Test — con movimiento reducido` con el anuncio y la comprobación de que la
+hoja de estilo real trae la regla que para la animación (la preferencia no se puede emular desde
+la story). Como `test:stories` no corre sin Chromium, va además `TypingIndicator.test.ts` sobre
+la fuente CSS, el mismo recurso que usa `Logomark`.
 
 ### H9 · Faltan dos escalones en la escala global de opacidad — **transversal**
 
@@ -205,13 +252,22 @@ No los he añadido porque son **tokens globales** y el protocolo de este encargo
 fuera. *Propuesta*: añadir `opacity.full: 1` y `opacity.secondary: 0.7` (o el nombre que la
 escala prefiera) y repuntar los tres tokens de componente. Patch.
 
+**Hecho en `main`** (`opacity.full` y `opacity.muted`) y cerrado aquí: los tres tokens de
+componente —`typing-indicator.dot-opacity-active`, `multi-select.pill-remove-opacity` y
+`pill-remove-hover-opacity`— ya referencian la escala en vez del literal. Mismos valores
+resueltos.
+
 ### H10 · Falta el icono `minus` en el catálogo — **transversal**
 
 Ver H1. El catálogo tiene `plus` sin su pareja. Además de NumberInput, cualquier control de
 cantidad futuro se topará con lo mismo.
+
+**Hecho en `main`**: el catálogo tiene ya `minus` (y `upload`). Consumido en H1.
 
 ### H11 · `OtpField` emite `data-size` sin CSS detrás — **vecino, no es de este lote**
 
 `src/stories/molecules/OtpField/OtpField.tsx` pone `data-size={size}` en su contenedor y
 `OtpField.css` no lo lee. Es el mismo resto que acabo de limpiar en `OtpInput`, un piso más
 arriba. Lo dejo anotado porque `otp-field` no está en el lote B.
+
+**Hecho** — `OtpField` ya no emite `data-size`.

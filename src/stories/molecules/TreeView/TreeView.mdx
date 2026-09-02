@@ -91,7 +91,16 @@ La tinta, la guía de las ramas, la línea de hover y el acento de selección
   y baja al primer hijo si ya está abierta; izquierda cierra la rama abierta y
   sube al padre si está cerrada; `Inicio` y `Fin` van al primero y al último;
   `Intro` y `Espacio` eligen.
-- Un nodo `disabled` queda fuera del recorrido de teclado y no se elige.
+- **Salto por letra**: escribir lleva al siguiente nodo cuyo rótulo empieza por
+  lo tecleado, dando la vuelta al llegar al final. Una sola letra recorre las
+  coincidencias una a una; varias seguidas (menos de medio segundo entre ellas)
+  buscan el prefijo entero. En un árbol grande —la matriz de un curso— es la
+  forma rápida de llegar.
+- **`*`** abre de una vez todas las ramas hermanas del nivel donde está el foco.
+- Un nodo `disabled` **sigue en el recorrido de teclado** y se anuncia como
+  deshabilitado (`aria-disabled`): el patrón prefiere que se pueda llegar a él a
+  que desaparezca del árbol al navegar. Lo que no puede es elegirse, ni con
+  `Intro`/`Espacio` ni con el ratón.
 
 ## Internacionalización
 

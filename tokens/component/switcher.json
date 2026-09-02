@@ -28,6 +28,8 @@
     "lg-track-height":     { "$value": "1.875em",                     "$type": "dimension", "$description": "Alto del track — variante lg" },
     "lg-thumb-size":       { "$value": "1.5em",                       "$type": "dimension", "$description": "Tamaño del thumb — variante lg" },
     "surface-dark-track-bg-checked": { "$value": "{color.accent-1}",  "$type": "color", "$description": "Fondo del track (on) — surface-dark. `track-bg-checked` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar." },
-    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro." }
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro." },
+    "surface-dark-track-bg":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Fondo del track (off) — surface-dark. `track-bg` es un rol de borde (`color.border.default-on-light`) y la regla de derivación le da `color.text.on-dark`, igual que el carril sin recorrer del Slider." },
+    "surface-dark-thumb-bg":   { "$value": "{color.primary}",     "$type": "color", "$description": "Color del thumb — surface-dark. El thumb blanco desaparecería sobre el track claro del estado off; en prusia contrasta con los dos tracks oscuros (blanco en off, lavanda en on), como el pulgar lavanda del Slider sobre su carril blanco." }
   }
 }

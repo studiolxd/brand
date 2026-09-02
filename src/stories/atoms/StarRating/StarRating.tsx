@@ -151,6 +151,9 @@ export function StarRating({
             onPointerEnter={() => { if (!disabled) setPrevisualizado(opcion); }}
           >
             <input
+              /* `visually-hidden` a pelo, no `<VisuallyHidden>`: el span
+                 envolvente rompería la relación <label>↔<input>. Excepción
+                 declarada en CLAUDE.md § «Accesibilidad — VisuallyHidden». */
               className="star-rating__input visually-hidden"
               type="radio"
               name={nameProp ?? nombreGenerado}

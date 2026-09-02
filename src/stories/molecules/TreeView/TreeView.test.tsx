@@ -68,14 +68,14 @@ describe('TreeView', () => {
     expect(modulo).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('Inicio y Fin van al primer y al último nodo alcanzable', async () => {
+  it('Inicio y Fin van al primer y al último nodo visible', async () => {
     const user = userEvent.setup();
     render(<TreeView items={items} />);
     const modulo = screen.getByRole('treeitem', { name: 'Módulo A' });
 
     modulo.focus();
     await user.keyboard('{End}');
-    expect(screen.getByRole('treeitem', { name: 'Módulo B' })).toHaveFocus();
+    expect(screen.getByRole('treeitem', { name: 'Anexos' })).toHaveFocus();
 
     await user.keyboard('{Home}');
     expect(modulo).toHaveFocus();
@@ -97,16 +97,61 @@ describe('TreeView', () => {
     expect(conFoco).toHaveLength(1);
   });
 
-  it('un nodo deshabilitado no recibe foco ni se elige', async () => {
+  it('un nodo deshabilitado sigue en el recorrido pero no se elige', async () => {
     const user = userEvent.setup();
     const onSelectedChange = vi.fn();
     render(<TreeView items={items} onSelectedChange={onSelectedChange} />);
     const anexos = screen.getByRole('treeitem', { name: 'Anexos' });
 
     expect(anexos).toHaveAttribute('aria-disabled', 'true');
-    expect(anexos).not.toHaveAttribute('tabindex');
+    // Alcanzable con el teclado: el patrón no lo saca del árbol, lo anuncia.
+    expect(anexos).toHaveAttribute('tabindex', '-1');
+
+    screen.getByRole('treeitem', { name: 'Módulo B' }).focus();
+    await user.keyboard('{ArrowDown}');
+    expect(anexos).toHaveFocus();
+
+    await user.keyboard('{Enter}');
+    expect(onSelectedChange).not.toHaveBeenCalled();
 
     await user.click(anexos);
     expect(onSelectedChange).not.toHaveBeenCalled();
+  });
+
+  it('escribir una letra salta a la siguiente fila que empieza por ella', async () => {
+    const user = userEvent.setup();
+    render(<TreeView items={items} defaultExpanded={['a']} />);
+
+    screen.getByRole('treeitem', { name: 'Módulo A' }).focus();
+    await user.keyboard('a');
+    expect(screen.getByRole('treeitem', { name: 'Anexos' })).toHaveFocus();
+  });
+
+  it('con varias letras se busca el prefijo entero', async () => {
+    const user = userEvent.setup();
+    render(<TreeView items={items} defaultExpanded={['a']} />);
+
+    screen.getByRole('treeitem', { name: 'Módulo A' }).focus();
+    // «l» sola llevaría a la primera lección; «le» busca el mismo prefijo largo
+    // y no salta a «Anexos» al teclear la segunda letra.
+    await user.keyboard('le');
+    expect(screen.getByRole('treeitem', { name: 'Lección A1' })).toHaveFocus();
+  });
+
+  it('`*` abre todas las ramas hermanas del nivel', async () => {
+    const user = userEvent.setup();
+    const conDosRamas: TreeViewNode[] = [
+      { id: 'a', label: 'Módulo A', children: [{ id: 'a1', label: 'Lección A1' }] },
+      { id: 'b', label: 'Módulo B', children: [{ id: 'b1', label: 'Lección B1' }] },
+    ];
+    const onExpandedChange = vi.fn();
+    render(<TreeView items={conDosRamas} onExpandedChange={onExpandedChange} />);
+
+    screen.getByRole('treeitem', { name: 'Módulo A' }).focus();
+    await user.keyboard('*');
+
+    expect(onExpandedChange).toHaveBeenCalledWith(['a', 'b']);
+    expect(screen.getByRole('treeitem', { name: 'Lección A1' })).toBeInTheDocument();
+    expect(screen.getByRole('treeitem', { name: 'Lección B1' })).toBeInTheDocument();
   });
 });

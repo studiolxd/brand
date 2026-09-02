@@ -37,4 +37,6 @@ html.dark {
   --switcher-error-ring-color: var(--color-error-text-on-dark); /** Anillo de error — surface-dark */
   --switcher-track-bg-checked: var(--color-accent-1); /** Fondo del track (on) — surface-dark. `track-bg-checked` (prussian) coincide con el fondo de la superficie y quedaría invisible; se usa accent-1 en su lugar. */
   --switcher-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */
+  --switcher-track-bg: var(--color-text-on-dark); /** Fondo del track (off) — surface-dark. `track-bg` es un rol de borde (`color.border.default-on-light`) y la regla de derivación le da `color.text.on-dark`, igual que el carril sin recorrer del Slider. */
+  --switcher-thumb-bg: var(--color-primary); /** Color del thumb — surface-dark. El thumb blanco desaparecería sobre el track claro del estado off; en prusia contrasta con los dos tracks oscuros (blanco en off, lavanda en on), como el pulgar lavanda del Slider sobre su carril blanco. */
 }

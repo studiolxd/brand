@@ -13,7 +13,10 @@ export interface TreeViewNode {
   icon?: ReactNode;
   /** Ramas hijas. Un nodo sin `children` es una hoja. */
   children?: TreeViewNode[];
-  /** No se puede elegir ni recibe el foco. */
+  /**
+   * No se puede elegir. Sigue siendo alcanzable con el teclado y se anuncia
+   * como deshabilitado, como pide el patrón: no desaparece del árbol.
+   */
   disabled?: boolean;
 }
 
@@ -47,6 +50,9 @@ interface FilaVisible {
   parentId?: string;
 }
 
+/** Milisegundos que se acumulan las teclas del salto por letra antes de reiniciar. */
+const TYPEAHEAD_RESET_MS = 500;
+
 /** Aplana el árbol a las filas que se ven, con su nivel y su padre. */
 function aplanar(items: TreeViewNode[], abiertos: Set<string>, level = 1, parentId?: string): FilaVisible[] {
   return items.flatMap((node) => {
@@ -64,7 +70,8 @@ function aplanar(items: TreeViewNode[], abiertos: Set<string>, level = 1, parent
  *
  * Implementa el patrón WAI-ARIA de **tree view** a mano —Base UI no trae árbol—:
  * `role="tree"` con `treeitem` anidados, un solo punto de tabulación y recorrido
- * completo con el teclado.
+ * completo con el teclado: flechas, Inicio/Fin, Intro/Espacio para elegir,
+ * salto por letra y `*` para abrir de una vez las ramas hermanas del nivel.
  *
  * La selección se marca con **tinta y peso**, y el paso del ratón con una línea:
  * ninguna fila se rellena, como en el resto del sistema.
@@ -93,14 +100,19 @@ export function TreeView({
   const elegido = selectedControlado ? selectedProp : elegidoSinControlar;
 
   const conjuntoAbiertos = useMemo(() => new Set(abiertos), [abiertos]);
-  const filas = useMemo(() => aplanar(items, conjuntoAbiertos), [items, conjuntoAbiertos]);
-  const alcanzables = useMemo(() => filas.filter((f) => !f.node.disabled), [filas]);
+  // Todas las filas visibles son alcanzables, deshabilitadas incluidas: el
+  // patrón prefiere que sigan en el recorrido y se anuncien como tales a que
+  // desaparezcan del árbol al navegar con teclado. Lo que no pueden es elegirse.
+  const alcanzables = useMemo(() => aplanar(items, conjuntoAbiertos), [items, conjuntoAbiertos]);
 
   // Roving tabindex: una sola parada de tabulación en todo el árbol.
   const [enfocado, setEnfocado] = useState<string | undefined>(undefined);
   const conFoco = enfocado && alcanzables.some((f) => f.node.id === enfocado)
     ? enfocado
     : (elegido && alcanzables.some((f) => f.node.id === elegido) ? elegido : alcanzables[0]?.node.id);
+
+  const tecleado = useRef('');
+  const tecleadoEn = useRef(0);
 
   const cambiarAbiertos = useCallback((siguiente: string[]) => {
     if (!expandedControlado) setAbiertosSinControlar(siguiente);
@@ -119,6 +131,16 @@ export function TreeView({
     onSelectedChange?.(id);
   }, [selectedControlado, onSelectedChange]);
 
+  /** Abre de golpe todas las ramas hermanas de una fila (la tecla `*`). */
+  const abrirHermanas = useCallback((fila: FilaVisible) => {
+    const hermanas = alcanzables
+      .filter((f) => f.parentId === fila.parentId && f.node.children?.length)
+      .map((f) => f.node.id)
+      .filter((id) => !conjuntoAbiertos.has(id));
+    if (hermanas.length === 0) return;
+    cambiarAbiertos([...abiertos, ...hermanas]);
+  }, [abiertos, alcanzables, conjuntoAbiertos, cambiarAbiertos]);
+
   const idFila = useCallback((id: string) => `${baseId}-${id}`, [baseId]);
 
   const moverFocoA = useCallback((id: string | undefined) => {
@@ -126,6 +148,33 @@ export function TreeView({
     setEnfocado(id);
     contenedor.current?.querySelector<HTMLElement>(`[data-tree-item="${CSS.escape(id)}"]`)?.focus();
   }, []);
+
+  /**
+   * Salta a la siguiente fila que empieza por lo tecleado, dando la vuelta.
+   * El rótulo se lee del DOM porque `label` es un `ReactNode`: puede llevar
+   * marcas dentro y no hay un texto plano que mirar en los datos.
+   */
+  const saltarPorLetra = useCallback((char: string, desde: number) => {
+    const ahora = Date.now();
+    const texto = ahora - tecleadoEn.current > TYPEAHEAD_RESET_MS ? char : tecleado.current + char;
+    tecleado.current = texto;
+    tecleadoEn.current = ahora;
+    // Con una sola letra se recorren las coincidencias una a una; con varias se
+    // busca desde la fila actual, que puede seguir valiendo para el prefijo largo.
+    const inicio = texto.length === 1 ? desde + 1 : Math.max(desde, 0);
+    const aguja = texto.toLowerCase();
+    for (let paso = 0; paso < alcanzables.length; paso++) {
+      const indice = (inicio + paso) % alcanzables.length;
+      const id = alcanzables[indice].node.id;
+      const rotulo = contenedor.current
+        ?.querySelector<HTMLElement>(`[data-tree-item="${CSS.escape(id)}"] > .tree-view__row .tree-view__label`)
+        ?.textContent ?? '';
+      if (rotulo.trim().toLowerCase().startsWith(aguja)) {
+        moverFocoA(id);
+        return;
+      }
+    }
+  }, [alcanzables, moverFocoA]);
 
   function alPulsarTecla(event: React.KeyboardEvent, fila: FilaVisible) {
     const { node, parentId } = fila;
@@ -165,9 +214,17 @@ export function TreeView({
       case 'Enter':
       case ' ':
         event.preventDefault();
-        elegir(node.id);
+        if (!node.disabled) elegir(node.id);
+        break;
+      case '*':
+        event.preventDefault();
+        abrirHermanas(fila);
         break;
       default:
+        if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+          event.preventDefault();
+          saltarPorLetra(event.key, indice);
+        }
         break;
     }
   }
@@ -188,13 +245,13 @@ export function TreeView({
           aria-selected={esElegido}
           aria-level={level}
           aria-disabled={node.disabled || undefined}
-          tabIndex={node.disabled ? undefined : (conFoco === node.id ? 0 : -1)}
+          tabIndex={conFoco === node.id ? 0 : -1}
           className={[
             'tree-view__item',
             esElegido ? 'tree-view__item--selected' : '',
             node.disabled ? 'tree-view__item--disabled' : '',
           ].filter(Boolean).join(' ')}
-          onKeyDown={node.disabled ? undefined : (event) => {
+          onKeyDown={(event) => {
             // Solo la fila enfocada atiende el teclado: los ancestros no repiten.
             if (event.target !== event.currentTarget) return;
             alPulsarTecla(event, { node, level, parentId });
