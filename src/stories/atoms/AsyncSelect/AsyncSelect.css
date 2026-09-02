@@ -31,7 +31,7 @@
 
 .async-select.async-select--disabled {
   opacity: 0.5;
-  cursor: not-allowed;
+  cursor: var(--async-select-disabled-cursor);
   pointer-events: none;
 }
 
@@ -52,7 +52,7 @@
   }
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: var(--async-select-disabled-cursor);
   }
 }
 

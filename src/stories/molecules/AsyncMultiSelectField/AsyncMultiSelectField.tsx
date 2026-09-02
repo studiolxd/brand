@@ -40,6 +40,10 @@ export interface AsyncMultiSelectFieldProps {
   emptyMessage?: string;
   /** aria-label del botón que quita un valor. Default: `Quitar ${etiqueta}` (castellano). */
   removeLabel?: (label: string) => string;
+  /** Etiqueta accesible del spinner mientras se busca. Default: "Buscando…". */
+  loadingLabel?: string;
+  /** Nodo DOM donde montar el portal del desplegable (ver `AsyncMultiSelect`). */
+  container?: React.ComponentProps<typeof AsyncMultiSelect>['container'];
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
@@ -67,6 +71,8 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
   className,
   emptyMessage,
   removeLabel,
+  loadingLabel,
+  container,
   onBlur,
 }: AsyncMultiSelectFieldProps, ref) {
   const size = useFormSize(sizeProp);
@@ -99,6 +105,8 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
         error={hasError}
         emptyMessage={emptyMessage}
         removeLabel={removeLabel}
+        loadingLabel={loadingLabel}
+        container={container}
         aria-describedby={describedBy}
         onBlur={onBlur}
       />

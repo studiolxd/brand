@@ -4,6 +4,7 @@
 
 :root {
   --async-multi-select-values-gap: {multi-select.values-gap}; /** Hereda de `multi-select.values-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando está deshabilitado: el de los campos */
   --async-multi-select-border-style: var(--multi-select-border-style); /** Hereda de `multi-select.border-style`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-content-gap: var(--multi-select-content-gap); /** Hereda de `multi-select.content-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-height: var(--multi-select-height); /** Hereda de `multi-select.height`: el buscador múltiple tiene la misma cara que el control síncrono */

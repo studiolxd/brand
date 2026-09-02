@@ -13,6 +13,7 @@
   --file-upload-transition-duration: var(--motion-duration-fast); /** Duración de transiciones de estado */
   --file-upload-transition-easing: var(--motion-easing-default); /** Easing de transiciones */
   --file-upload-drag-bg: var(--color-white); /** Fondo en drag activo */
+  --file-upload-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando está deshabilitado: el de los campos */
   --file-upload-list-gap: var(--spacing-2); /** Espacio entre items de la lista */
   --file-upload-list-margin-block-start: var(--spacing-3); /** Margen superior de la lista de archivos */
   --file-upload-item-bg: var(--color-white); /** Fondo de cada item */
@@ -74,6 +75,7 @@
   --file-upload-sm-text-font-size: var(--text-paragraph-small-font-size); /** Texto del dropzone — talla sm: un peldaño por debajo del cuerpo */
   --file-upload-lg-text-font-size: var(--text-paragraph-large-font-size); /** Texto del dropzone — talla lg: un peldaño por encima */
   --file-upload-text-font-weight: var(--font-weight-default); /** Peso del texto del dropzone */
+  --file-upload-subtext-font-weight: var(--font-weight-default); /** Peso del texto secundario del dropzone: el normal, para que no compita con la instrucción */
   --file-upload-lg-subtext-font-size: var(--text-font-size); /** Restricciones — talla lg: sube al cuerpo */
   --file-upload-sm-item-name-font-size: var(--text-paragraph-small-font-size); /** Nombre del archivo — talla sm */
   --file-upload-lg-item-name-font-size: var(--text-paragraph-large-font-size); /** Nombre del archivo — talla lg */

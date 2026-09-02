@@ -63,6 +63,15 @@ export const LgSize: Story = {
   args: { size: 'lg' },
 };
 
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    value: '1',
+    selectedOption: { value: '1', label: 'Ana García' },
+  },
+};
+
 export const Controlled: Story = {
   render: () => {
     const [value, setValue] = useState<string | null>(null);

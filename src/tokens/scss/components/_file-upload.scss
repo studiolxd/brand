@@ -20,6 +20,7 @@ $lxd-file-upload-error-border-color: #b30000; // Borde en estado de error
 $lxd-file-upload-error-border-style: solid; // Estilo de borde en error
 $lxd-file-upload-error-bg: #f2f2f2; // Fondo en estado de error
 $lxd-file-upload-disabled-opacity: 0.5; // Opacidad cuando está deshabilitado
+$lxd-file-upload-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado: el de los campos
 $lxd-file-upload-list-gap: 0.5rem; // Espacio entre items de la lista
 $lxd-file-upload-list-margin-block-start: 0.75rem; // Margen superior de la lista de archivos
 $lxd-file-upload-item-bg: #ffffff; // Fondo de cada item
@@ -62,6 +63,7 @@ $lxd-file-upload-text-font-size: 1rem; // El texto del dropzone es texto corrien
 $lxd-file-upload-sm-text-font-size: 0.875rem; // Texto del dropzone — talla sm: un peldaño por debajo del cuerpo
 $lxd-file-upload-lg-text-font-size: 1.25rem; // Texto del dropzone — talla lg: un peldaño por encima
 $lxd-file-upload-text-font-weight: 300; // Peso del texto del dropzone
+$lxd-file-upload-subtext-font-weight: 300; // Peso del texto secundario del dropzone: el normal, para que no compita con la instrucción
 $lxd-file-upload-subtext-font-size: 0.875rem; // Tamaño de las restricciones (peso máximo, número de archivos) — talla md
 $lxd-file-upload-sm-subtext-font-size: 0.875rem; // Restricciones — talla sm: ya está en el peldaño menor de la escala de interfaz
 $lxd-file-upload-lg-subtext-font-size: 1rem; // Restricciones — talla lg: sube al cuerpo

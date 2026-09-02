@@ -65,6 +65,12 @@ export interface CalendarPlannerProps {
    * pasarlo traducido.
    */
   gridLabel?: string;
+  /**
+   * Rótulo visible del botón que abre los eventos ocultos de una celda.
+   * Default: `+N más` (castellano). Interpola el número, así que es una
+   * función: una app multiidioma debe pasarla traducida.
+   */
+  moreLabel?: (count: number) => string;
   /** Tamaño del componente. Default: 'md' */
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -84,6 +90,7 @@ export function CalendarPlanner({
   previousMonthLabel = 'Mes anterior',
   nextMonthLabel = 'Mes siguiente',
   gridLabel,
+  moreLabel = (count) => `+${count} más`,
   size = 'md',
   className,
 }: CalendarPlannerProps) {
@@ -113,7 +120,6 @@ export function CalendarPlanner({
   const modalTitleFormatter = new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   const weekdays = getWeekdayNames(locale, 'short');
-  const dayNumberFormatter = new Intl.DateTimeFormat(locale, { day: 'numeric' });
 
   const weeks = chunkWeeks(getCalendarDays(currentMonth));
 
@@ -197,9 +203,9 @@ export function CalendarPlanner({
                   onFocus={onDayClick ? () => grid.onCellFocus(date) : undefined}
                   onClick={onDayClick ? () => onDayClick(date, dayEvents) : undefined}
                 >
-                  <span className={numberClass} aria-label={dayNumberFormatter.format(date)}>
-                    {date.getDate()}
-                  </span>
+                  {/* Sin `aria-label`: en un `span` sin rol el atributo se
+                      ignora, y aquí solo repetía el número que ya se ve. */}
+                  <span className={numberClass}>{date.getDate()}</span>
 
                   <div className="calendar-planner__cell-body">
                     {renderDay ? (
@@ -221,7 +227,7 @@ export function CalendarPlanner({
                               onMoreClick?.(date, dayEvents);
                             }}
                           >
-                            +{overflow} más
+                            {moreLabel(overflow)}
                           </button>
                         )}
                       </>

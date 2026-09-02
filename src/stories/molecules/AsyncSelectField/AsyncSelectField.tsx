@@ -37,6 +37,12 @@ export interface AsyncSelectFieldProps {
   className?: string;
   /** Texto cuando la búsqueda no devuelve nada. Default: "Sin resultados". */
   emptyMessage?: string;
+  /** Etiqueta accesible del spinner mientras se busca. Default: "Buscando…". */
+  loadingLabel?: string;
+  /** aria-label del botón de limpiar selección. Default: "Limpiar selección". */
+  clearLabel?: string;
+  /** Nodo DOM donde montar el portal del desplegable (ver `AsyncSelect`). */
+  container?: React.ComponentProps<typeof AsyncSelect>['container'];
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
@@ -62,6 +68,9 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
   helperText,
   className,
   emptyMessage,
+  loadingLabel,
+  clearLabel,
+  container,
   onBlur,
 }: AsyncSelectFieldProps, ref) {
   const size = useFormSize(sizeProp);
@@ -92,6 +101,9 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
         size={size}
         error={hasError}
         emptyMessage={emptyMessage}
+        loadingLabel={loadingLabel}
+        clearLabel={clearLabel}
+        container={container}
         aria-describedby={describedBy}
         onBlur={onBlur}
       />

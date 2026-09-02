@@ -6,7 +6,6 @@ import { DatePicker } from './DatePicker';
 const meta: Meta<typeof DatePicker> = {
   title: 'Molecules/DatePicker',
   component: DatePicker,
-  tags: ['autodocs'],
   args: {
     onChange: fn(),
   },

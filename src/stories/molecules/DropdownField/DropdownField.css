@@ -41,8 +41,8 @@
 }
 
 .dropdown-field__control:disabled {
-  cursor: not-allowed;
-  opacity: var(--opacity-disabled);
+  cursor: var(--dropdown-field-disabled-cursor);
+  opacity: var(--dropdown-field-disabled-opacity);
 }
 
 .dropdown-field__control:focus,
@@ -92,7 +92,7 @@
 .dropdown-field__icon {
   flex-shrink: 0;
   transform: rotate(90deg);
-  transition: transform var(--dropdown-field-icon-transition) var(--motion-easing-default);
+  transition: transform var(--dropdown-field-icon-transition) var(--dropdown-field-icon-transition-easing);
 }
 .dropdown-field__control[data-popup-open] .dropdown-field__icon {
   transform: rotate(-90deg);

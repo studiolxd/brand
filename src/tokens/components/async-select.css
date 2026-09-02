@@ -4,6 +4,7 @@
 
 :root {
   --async-select-border-style: var(--select-border-style); /** Hereda de `select.border-style`: el buscador tiene la misma cara que el control síncrono */
+  --async-select-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando está deshabilitado: el de los campos */
   --async-select-bg: var(--select-bg); /** Hereda de `select.bg`: el buscador tiene la misma cara que el control síncrono */
   --async-select-content-bg: var(--select-content-bg); /** Hereda de `select.content-bg`: el buscador tiene la misma cara que el control síncrono */
   --async-select-content-gap: var(--multi-select-content-gap); /** Hereda de `multi-select.content-gap`: el buscador tiene la misma cara que el control síncrono */

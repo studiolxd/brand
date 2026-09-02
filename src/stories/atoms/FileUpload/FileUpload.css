@@ -93,7 +93,7 @@
 
 .file-upload.file-upload--disabled .file-upload__dropzone {
   opacity: var(--file-upload-disabled-opacity);
-  cursor: not-allowed;
+  cursor: var(--file-upload-disabled-cursor);
   pointer-events: none;
 }
 
@@ -116,7 +116,7 @@
 
 .file-upload__text--secondary {
   color: var(--file-upload-subtext-color);
-  font-weight: var(--font-weight-default);
+  font-weight: var(--file-upload-subtext-font-weight);
 }
 
 .file-upload__subtext {

@@ -5,6 +5,7 @@
     "border-radius":               { "$value": "{select.border-radius}", "$type": "dimension", "$description": "Hereda de `select.border-radius`: el buscador tiene la misma cara que el control síncrono" },
     "border-style":                { "$value": "{select.border-style}", "$type": "string", "$description": "Hereda de `select.border-style`: el buscador tiene la misma cara que el control síncrono" },
     "border-width":                { "$value": "{select.border-width}", "$type": "dimension", "$description": "Hereda de `select.border-width`: el buscador tiene la misma cara que el control síncrono" },
+    "disabled-cursor":             { "$value": "{input.disabled-cursor}", "$type": "string", "$description": "Cursor cuando está deshabilitado: el de los campos" },
     "color":                       { "$value": "{select.color}", "$type": "color", "$description": "Hereda de `select.color`: el buscador tiene la misma cara que el control síncrono" },
     "content-bg":                  { "$value": "{select.content-bg}", "$type": "color", "$description": "Hereda de `select.content-bg`: el buscador tiene la misma cara que el control síncrono" },
     "content-border-color":        { "$value": "{select.content-border-color}", "$type": "color", "$description": "Hereda de `select.content-border-color`: el buscador tiene la misma cara que el control síncrono" },

@@ -33,6 +33,11 @@ export const Vertical: Story = { args: { orientation: 'vertical' } };
 
 export const Deshabilitado: Story = { args: { disabled: true } };
 
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+};
+
 export const Contrato: Story = {
   name: 'Test — botón con nombre, cuadrado a talla',
   tags: ['!dev'],

@@ -23,6 +23,9 @@ $lxd-dropdown-field-border-width: 1px; // Borde rectangular, como el Select
 $lxd-dropdown-field-border-color: #111e30; // Color del borde
 $lxd-dropdown-field-border-radius: 0px; // Radio: el del Select (rectangular)
 $lxd-dropdown-field-icon-transition: 150ms; // Giro del chevron al abrir
+$lxd-dropdown-field-icon-transition-easing: ease; // Curva del giro del chevron
+$lxd-dropdown-field-disabled-opacity: 0.4; // Opacidad del control deshabilitado
+$lxd-dropdown-field-disabled-cursor: not-allowed; // Cursor del control deshabilitado: el de los campos
 $lxd-dropdown-field-focus-ring-width: 2px; // Anillo de foco
 $lxd-dropdown-field-focus-ring-color: #111e30; // Anillo de foco
 $lxd-dropdown-field-error-border-color: #b30000; // Borde en error: el mismo que el del Select

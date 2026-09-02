@@ -49,6 +49,7 @@ export type { NumberInputProps } from './stories/atoms/NumberInput/NumberInput';
 export { FileUpload } from './stories/atoms/FileUpload/FileUpload';
 export type { FileUploadProps } from './stories/atoms/FileUpload/FileUpload';
 export { InputPhone } from './stories/atoms/InputPhone/InputPhone';
+export type { InputPhoneProps } from './stories/atoms/InputPhone/InputPhone';
 export { OtpInput } from './stories/atoms/OtpInput/OtpInput';
 export type { OtpInputProps } from './stories/atoms/OtpInput/OtpInput';
 export { Label } from './stories/atoms/Label/Label';

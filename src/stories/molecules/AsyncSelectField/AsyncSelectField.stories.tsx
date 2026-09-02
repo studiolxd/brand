@@ -73,6 +73,16 @@ export const EtiquetaOculta: Story = {
   args: { labelHidden: true },
 };
 
+export const EnSuperficieOscura: Story = {
+  name: 'En superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    value: '1',
+    selectedOption: { value: '1', label: 'Ana García' },
+    helperText: 'Escribe para buscar por nombre.',
+  },
+};
+
 export const Controlado: Story = {
   render: () => {
     const [value, setValue] = useState<string | null>(null);
