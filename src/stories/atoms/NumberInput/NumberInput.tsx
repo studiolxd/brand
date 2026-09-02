@@ -1,4 +1,5 @@
 import { forwardRef, useState, useCallback, type ComponentPropsWithoutRef } from 'react';
+import { Icon } from '../Icon/Icon';
 import './NumberInput.css';
 
 export interface NumberInputProps
@@ -139,7 +140,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
         aria-label={decrementLabel}
         tabIndex={-1}
       >
-        −
+        <Icon name="minus" size="sm" />
       </button>
       <input
         ref={ref}
@@ -168,7 +169,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
         aria-label={incrementLabel}
         tabIndex={-1}
       >
-        +
+        <Icon name="plus" size="sm" />
       </button>
     </div>
   );

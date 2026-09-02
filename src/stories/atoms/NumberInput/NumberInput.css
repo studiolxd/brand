@@ -47,7 +47,7 @@
   margin: 0;
 }
 
-/* Botones +/− */
+/* Botones +/− — el signo es un icono del catálogo (`minus`/`plus`), no texto */
 .number-input__btn {
   flex-shrink: 0;
   width: var(--number-input-btn-width);
@@ -56,13 +56,9 @@
   justify-content: center;
   background-color: var(--number-input-btn-bg);
   color: var(--number-input-btn-color);
-  font-size: var(--number-input-btn-font-size);
-  font-family: var(--number-input-font-family);
   border: none;
   cursor: pointer;
   transition: box-shadow var(--number-input-transition-duration) var(--number-input-transition-easing);
-  line-height: var(--number-input-btn-line-height);
-  user-select: none;
 }
 
 /* Sin relleno bajo el puntero (regla de Colores): línea de tinta bajo el botón. */

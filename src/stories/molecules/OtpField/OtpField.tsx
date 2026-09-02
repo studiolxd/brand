@@ -72,7 +72,7 @@ export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function Otp
   const hasError = error || !!errorMessage;
 
   return (
-    <div className={['otp-field', className].filter(Boolean).join(' ')} data-size={size}>
+    <div className={['otp-field', className].filter(Boolean).join(' ')}>
       {/* La etiqueta nombra la primera celda (donde entra el foco) y, por
           aria-labelledby, el grupo: un solo nombre, no dos. */}
       <Label id={`${id}-label`} htmlFor={`${id}-0`} hidden={labelHidden} size={size}>{label}</Label>
