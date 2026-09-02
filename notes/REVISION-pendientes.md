@@ -460,8 +460,10 @@ site-header), v16.0.5 (Base UI externo del build).
 - [ ] Web: `SiteNav` con un único grupo cuya cabecera repite «Navegación
       principal»; decidir estructura real del índice (secciones) con contenido.
 - [ ] Web: sin tema oscuro todavía; cuando lo haya, `ThemeSwitcher` en `settings`.
-- [ ] Apps: el `NotificationButton` no se usa aún (el hub lleva la campana en
-      el menú de usuario); cablearlo en `notifications` del shell.
+- [x] Apps: el `NotificationButton` no se usa aún (el hub lleva la campana en
+      el menú de usuario); cablearlo en `notifications` del shell. **Hecho
+      2026-09-02 (V1, monorepo)**: campana en la ranura del shell de las 8 apps
+      con contador real; la entrada del menú de usuario se retiró.
 
 ## Los 14 campos a definitivos (2026-08-27)
 
