@@ -103,11 +103,15 @@ Las píldoras se pintan **solo** desde la prop `selectedOptions`, que por defect
 
 **Propuesta:** no se puede poner `aria-label` en el `gridcell` sin ocultar los eventos que contiene. Lo correcto es que el número lleve la fecha larga para el lector y el dígito para la vista: `<span class="…__day-number"><VisuallyHidden>{fechaLarga}</VisuallyHidden><span aria-hidden>{dia}</span></span>`. Es reordenar el contenido de la celda, no un atributo, y por eso queda anotado.
 
+**~~Resuelto~~** (`s1-fichas-a`): tal cual, con el `dayFormatter` del `Calendar` (`Intl`, por `locale`). Cubierto en `CalendarPlanner.test.tsx` y anotado en el MDX.
+
 ### A8 · `CalendarPlanner`: el modal de «+N más» no se puede suprimir — **media**
 
 El botón de desbordamiento abre **siempre** un `Modal` interno con la lista de eventos, y además llama a `onMoreClick`. Un consumidor que pasa `onMoreClick` para abrir su propio panel se encuentra con dos cosas abiertas a la vez, y no tiene forma de apagar la de dentro.
 
 **Propuesta:** que el modal interno sea el comportamiento por defecto **solo** cuando no hay `onMoreClick`, o una prop explícita (`showMoreDialog?: boolean`). Hay precedente en el propio componente: `renderDay` ya sustituye el renderizado por defecto en vez de sumarse a él.
+
+**~~Resuelto~~** (`s1-fichas-a`): las dos cosas, que no se estorban. El default es `showMoreDialog ?? !onMoreClick` —con `onMoreClick` el componente se aparta, como `renderDay`— y la prop explícita permite las dos (`true`) o ninguna (`false`). Tres casos en `CalendarPlanner.test.tsx`.
 
 ### A9 · `CalendarRoster`: la columna de nombres es `<td>`, no `<th scope="row">` — **media**
 

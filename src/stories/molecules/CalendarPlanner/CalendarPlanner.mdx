@@ -29,6 +29,12 @@ número y el enlace «+N más».
 enseña hasta `maxItemsPerDay` (3 por defecto) y resuelve el resto con un
 «+N más» que abre un `Modal` con el día completo.
 
+Ese diálogo es el comportamiento por defecto **solo mientras nadie se ocupa del
+desbordamiento**: en cuanto se pasa `onMoreClick`, el componente se aparta y
+deja el día completo al panel del consumidor, como hace `renderDay` con la
+celda. `showMoreDialog` decide de forma explícita cuando se quieren las dos
+cosas (`true`) o ninguna (`false`).
+
 <Canvas of={CalendarPlannerStories.ConOverflow} />
 
 ## Celda a medida
@@ -81,6 +87,9 @@ una acción distinta de abrir el día.
 - El nombre del mes es una región `aria-live="polite"`.
 - Las cabeceras de día llevan el nombre completo en un `<abbr>`.
 - Hoy lleva `aria-current="date"`.
+- El número del día lleva la fecha entera para el lector de pantalla (oculta a
+  la vista) y el dígito para quien mira: un `aria-label` en la celda taparía los
+  eventos que contiene.
 - Las celdas fuera del mes usan la superficie secundaria del sistema, no un
   gris de estado; una celda pulsable bajo el puntero no se rellena: lleva la
   línea de tinta del sistema, heredada del `Calendar`.
