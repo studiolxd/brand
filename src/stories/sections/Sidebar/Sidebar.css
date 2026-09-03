@@ -3,17 +3,27 @@
 .sidebar {
   --sidebar-resize-step-px: calc(var(--sidebar-resize-step) * 1px);
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--sidebar-gap);
   flex-shrink: 0;
   block-size: 100%;
   inline-size: var(--app-shell-sidebar-width, var(--sidebar-width));
   padding-inline: var(--sidebar-padding-inline);
   background-color: var(--sidebar-bg);
   border-inline-end: var(--sidebar-border-width) solid var(--sidebar-border-color);
-  overflow: hidden;
   transition: inline-size var(--sidebar-transition-duration) var(--sidebar-transition-easing);
+}
+
+/* El recorte de contenido vive aquí, no en `.sidebar`: si estuviera en el
+   `<aside>`, el `overflow: hidden` recortaría también la mitad exterior de
+   `.sidebar__resizer` (que sobresale a propósito, ver más abajo), dejando
+   una zona de agarre real de la mitad del ancho visual — sobre todo grave
+   en rail (56px de columna, ya poco margen de por sí). */
+.sidebar__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sidebar-gap);
+  block-size: 100%;
+  min-inline-size: 0;
+  overflow: hidden;
 }
 
 .sidebar.sidebar--rail {

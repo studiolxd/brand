@@ -97,6 +97,13 @@ export function Sidebar({
       } else if (px < min) {
         shell.setSidebar('rail');
       } else {
+        // Sin este `setSidebar('open')`, arrastrar hacia afuera desde rail
+        // no desplegaba: el estado se quedaba en 'rail' y
+        // `.sidebar.sidebar--rail { inline-size: var(--sidebar-rail-width) }`
+        // gana por especificidad a `.sidebar { inline-size:
+        // var(--app-shell-sidebar-width) }`, así que el nuevo ancho no
+        // llegaba a pintarse por mucho que se arrastrara.
+        shell.setSidebar('open');
         shell.setSidebarWidth(Math.min(max, Math.round(px)));
       }
     },
@@ -180,9 +187,16 @@ export function Sidebar({
         inert={drawer && state === 'closed' ? true : undefined}
         onClick={onClick}
       >
-        {logo && <div className="sidebar__header">{logo}</div>}
-        <div className="sidebar__panel">{children}</div>
-        {footer && <div className="sidebar__footer">{footer}</div>}
+        {/* El recorte de contenido (`overflow: hidden`, para que nada del
+            panel asome durante la transición de ancho) vive en este
+            envoltorio, no en el `<aside>`: así el asa de redimensión (asa
+            fuera, más abajo) no pierde la mitad exterior de su zona de
+            agarre por el mismo recorte — ver `.sidebar__inner` en el CSS. */}
+        <div className="sidebar__inner">
+          {logo && <div className="sidebar__header">{logo}</div>}
+          <div className="sidebar__panel">{children}</div>
+          {footer && <div className="sidebar__footer">{footer}</div>}
+        </div>
         {isDesktop && shell && state !== 'closed' && (
           <div
             className="sidebar__resizer"
