@@ -4,12 +4,12 @@
 $lxd-sidebar-width: 15rem; // Ancho por defecto desplegada (240px). Medida de maqueta, como la de lectura: no pertenece a la escala de tallas
 $lxd-sidebar-min-width: 12rem; // Ancho mínimo desplegada (192px): por debajo, al redimensionar, salta a rail
 $lxd-sidebar-max-width: 24rem; // Ancho máximo desplegada (384px)
-$lxd-sidebar-rail-width: calc(1rem + 2.5rem + 0.5rem); // Ancho del rail (64px): inset izquierdo `1rem` (16px, alinea el centro del icono con el centro del `MenuButton` del header) + caja de icono `2.5rem` (40px) + `0.5rem` de aire a la derecha (8px). Ver `rail-padding-inline-start`
+$lxd-sidebar-rail-width: calc(2 * 1rem + 2.5rem); // Ancho del rail (72px): inset simétrico `1rem` (16px) a los dos lados — el izquierdo alinea el centro del icono con el centro del `MenuButton` del header — + caja de icono `2.5rem` (40px). Ver `rail-padding-inline-start`
 $lxd-sidebar-bg: #ffffff; // Fondo
 $lxd-sidebar-border-width: 1px; // Borde que separa la sidebar del contenido
 $lxd-sidebar-border-color: #111e30; // Color del borde
-$lxd-sidebar-padding-inline: 0.5rem; // Aire lateral de desplegada (8px), y el del lado derecho del rail — ver `rail-padding-inline-start` para el izquierdo, que es distinto a propósito
-$lxd-sidebar-rail-padding-inline-start: 1rem; // Inset izquierdo del rail (16px), igual a `--app-header-padding-inline`: alinea el centro del icono del rail con el centro del `MenuButton` del header (x=36px). Asimétrico a propósito respecto al lado derecho (`padding-inline`, 8px) — desacoplado del padding de desplegada para no romper su alineación, ya correcta por composición de otros tokens
+$lxd-sidebar-padding-inline: 0.5rem; // Aire lateral de desplegada (8px). El rail no usa este token — ver `rail-padding-inline-start`, simétrico a ambos lados
+$lxd-sidebar-rail-padding-inline-start: 1rem; // Inset del rail (16px), igual a `--app-header-padding-inline`, a AMBOS lados (simétrico): alinea el centro del icono del rail con el centro del `MenuButton` del header (x=36px) y evita el aire desigual de una columna estrecha. Desacoplado del padding de desplegada (`padding-inline`) para no romper su alineación, ya correcta por composición de otros tokens
 $lxd-sidebar-padding-block: 1rem; // Aire vertical de cabecera y pie
 $lxd-sidebar-panel-padding-block: 2rem; // Aire vertical del panel (arriba y abajo de la lista de navegación), incondicional — con o sin logo/footer, en rail y desplegada. El doble del aire de cabecera/pie: antes dependía de que hubiera logo, ahora no
 $lxd-sidebar-gap: 0.75rem; // Entre cabecera, panel y pie
