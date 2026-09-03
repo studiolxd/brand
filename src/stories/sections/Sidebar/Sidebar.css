@@ -57,6 +57,10 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
+  /* Incondicional: el panel es lo único que se renderiza siempre (con o sin
+     `logo`/`footer`), así que es él quien da el aire arriba/abajo de la
+     sidebar — no `.sidebar__header`, que puede no existir. */
+  padding-block: var(--sidebar-panel-padding-block);
 }
 .sidebar--rail .sidebar__panel { scrollbar-width: none; }
 /* En rail no cabe el logotipo: la marca ya está en la barra superior del producto */

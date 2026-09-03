@@ -9,7 +9,8 @@ $lxd-sidebar-bg: #ffffff; // Fondo
 $lxd-sidebar-border-width: 1px; // Borde que separa la sidebar del contenido
 $lxd-sidebar-border-color: #111e30; // Color del borde
 $lxd-sidebar-padding-inline: 0.5rem; // Aire lateral: el mismo a los dos lados en rail y desplegada, así los iconos no se mueven al cambiar de modo
-$lxd-sidebar-padding-block: 1rem; // Aire vertical de cabecera, panel y pie
+$lxd-sidebar-padding-block: 1rem; // Aire vertical de cabecera y pie
+$lxd-sidebar-panel-padding-block: 2rem; // Aire vertical del panel (arriba y abajo de la lista de navegación), incondicional — con o sin logo/footer, en rail y desplegada. El doble del aire de cabecera/pie: antes dependía de que hubiera logo, ahora no
 $lxd-sidebar-gap: 0.75rem; // Entre cabecera, panel y pie
 $lxd-sidebar-resizer-width: 0.5rem; // Zona de agarre del asa de redimensión (8px), centrada en el borde
 $lxd-sidebar-resizer-hover-color: #111e30; // El borde se marca al pasar por el asa o al arrastrar

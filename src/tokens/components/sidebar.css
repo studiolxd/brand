@@ -9,7 +9,8 @@
   --sidebar-resize-step: 16; /** Píxeles por pulsación de flecha en el asa (teclado) */
   --sidebar-rail-width: calc(var(--size-component-md) + 2 * var(--spacing-2)); /** Ancho del rail: un botón de icono md con su aire a cada lado (56px) */
   --sidebar-padding-inline: var(--spacing-2); /** Aire lateral: el mismo a los dos lados en rail y desplegada, así los iconos no se mueven al cambiar de modo */
-  --sidebar-padding-block: var(--spacing-4); /** Aire vertical de cabecera, panel y pie */
+  --sidebar-padding-block: var(--spacing-4); /** Aire vertical de cabecera y pie */
+  --sidebar-panel-padding-block: var(--spacing-6); /** Aire vertical del panel (arriba y abajo de la lista de navegación), incondicional — con o sin logo/footer, en rail y desplegada. El doble del aire de cabecera/pie: antes dependía de que hubiera logo, ahora no */
   --sidebar-gap: var(--spacing-3); /** Entre cabecera, panel y pie */
   --sidebar-resizer-width: var(--spacing-2); /** Zona de agarre del asa de redimensión (8px), centrada en el borde */
   --sidebar-transition-duration: var(--motion-duration-base); /** Apertura y cierre */
