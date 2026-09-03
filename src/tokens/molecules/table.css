@@ -4,7 +4,6 @@
 
 :root {
   --table-bg: rgba(0, 0, 0, 0); /** Fondo de la tabla */
-  --table-sort-icon-inactive-opacity: 0.35; /** Opacidad del icono de sort cuando sortable pero sin sort activo */
   --table-font-family: var(--font-family-sans); /** Font family */
   --table-header-padding-block: var(--spacing-3); /** Padding block del encabezado */
   --table-header-padding-inline: var(--spacing-3); /** Padding inline del encabezado */
@@ -26,7 +25,7 @@
   --table-header-font-weight: var(--font-weight-emphasis); /** Peso tipográfico del encabezado */
   --table-header-border-width: var(--border-width-default); /** Borde inferior del thead — 1px, como todo borde del sistema; la cabecera se lee por peso, no por grosor */
   --table-header-border-color: var(--color-text-on-light); /** Color del borde inferior del thead */
-  --table-sort-icon-color: var(--color-text-muted-on-light); /** Icono de ordenación en reposo — atenuado por la opacidad inactiva; el hover lo lleva al color activo */
+  --table-sort-icon-color: var(--color-text-muted-on-light); /** Icono de ordenación en reposo, tinta plana; el hover lo lleva al color activo */
   --table-sort-icon-active-color: var(--color-primary); /** Color del icono de sort activo */
   --table-row-border-color: var(--color-primary); /** Color del separador entre filas */
   --table-row-selected-color: var(--color-primary); /** Tinta de la fila seleccionada: la selección se dice con tinta y peso, no con un fondo gris */

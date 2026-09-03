@@ -53,11 +53,9 @@
 
 .table__sort-icon {
   color: var(--table-sort-icon-color);
-  opacity: var(--table-sort-icon-inactive-opacity);
   transform: rotate(90deg); /* Chevron apunta ↓ en estado neutro */
   transition:
     transform var(--table-transition-duration) var(--table-transition-easing),
-    opacity var(--table-transition-duration) var(--table-transition-easing),
     color var(--table-transition-duration) var(--table-transition-easing);
   flex-shrink: 0;
 }
@@ -65,18 +63,15 @@
 /* El hover de una columna ordenable no pinta fondo: revela el icono. */
 .table__header-content:hover .table__sort-icon {
   color: var(--table-sort-icon-active-color);
-  opacity: 1;
 }
 
 .table__header--sorted-asc .table__sort-icon {
   color: var(--table-sort-icon-active-color);
-  opacity: 1;
   transform: rotate(-90deg); /* Chevron apunta ↑ */
 }
 
 .table__header--sorted-desc .table__sort-icon {
   color: var(--table-sort-icon-active-color);
-  opacity: 1;
   transform: rotate(90deg); /* Chevron apunta ↓ */
 }
 

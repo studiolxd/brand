@@ -16,9 +16,8 @@
     "header-content-gap":     { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Separación entre el rótulo de la columna y el icono de ordenación" },
     "header-border-color":    { "$value": "{color.text.on-light}",    "$type": "color",     "$description": "Color del borde inferior del thead" },
 
-    "sort-icon-color":         { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Icono de ordenación en reposo — atenuado por la opacidad inactiva; el hover lo lleva al color activo" },
+    "sort-icon-color":         { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Icono de ordenación en reposo, tinta plana; el hover lo lleva al color activo" },
     "sort-icon-active-color":  { "$value": "{color.primary}",         "$type": "color",     "$description": "Color del icono de sort activo" },
-    "sort-icon-inactive-opacity": { "$value": "0.35",                 "$type": "number",    "$description": "Opacidad del icono de sort cuando sortable pero sin sort activo" },
 
     "cell-padding-block":     { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding block de celda" },
     "cell-padding-inline":    { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Padding inline de celda" },

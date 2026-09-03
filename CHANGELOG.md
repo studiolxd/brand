@@ -7,6 +7,17 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.1.1
+
+`Table`: el icono de ordenación en reposo pierde la opacidad reducida
+(`--table-sort-icon-inactive-opacity`, `0.35`) — ahora tinta plana con el
+color muted del token en los dos estados (reposo y activo), en vez de
+fundirse hacia el color de fondo de la superficie. El efecto anterior era
+asimétrico entre temas (aclaraba hacia blanco en claro, oscurecía hacia el
+navy en oscuro) y confundía visualmente. El token
+`sort-icon-inactive-opacity` se retira de `tokens/component/table.json` por
+quedar sin uso.
+
 ## v30.1.0
 
 `Stack`: nueva prop `align` (`'start'` | `'stretch'`, opt-in, por defecto
