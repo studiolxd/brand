@@ -235,16 +235,20 @@ a.sidebar-nav__group-label:focus-visible {
   outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
   outline-offset: var(--sidebar-nav-focus-ring-width);
 }
-/* La sección de la página actual: marcada con el color de activo y una barra al borde */
-.sidebar-nav__rail-item.sidebar-nav__rail-item--active {
-  color: var(--sidebar-nav-item-active-color);
-  box-shadow: inset var(--sidebar-nav-rail-active-bar-width) 0 0 var(--sidebar-nav-item-active-color);
+/* Guard contra la fuga del átomo `Link` (mismo patrón que
+   `.sidebar-nav__top-link:hover`, `.sidebar-nav__item:hover` y
+   `a.sidebar-nav__group-label:hover`): sin esto, en oscuro
+   `a:where(:not(.button)):hover` (0,1,1) gana el empate y cuela su línea +
+   amarillo de enlace de prosa. No es la línea de hover del rail (esa sigue
+   sin querer verse) — solo anula la fuga. */
+.sidebar-nav__rail-item:hover,
+.sidebar-nav__rail-item[data-popup-open] {
+  box-shadow: none;
+  color: var(--sidebar-nav-item-color);
 }
-/* La sección activa bajo el puntero conserva SOLO su barra: sin línea de
-   hover añadida (excepción de `SidebarNav` a la regla de Colores — ver
-   `.sidebar-nav__item:hover`). No hace falta regla `:hover`/`[data-popup-open]`
-   aparte: la barra de `.sidebar-nav__rail-item--active` ya no cambia con el
-   puntero, así que el estado base le basta. */
+/* La sección activa en rail no lleva marca visual permanente (ni color de
+   acento ni barra): en rail (solo iconos) se comunica por `aria-current` y
+   por el `Tooltip` al pasar el puntero, no por color — decisión de usuario. */
 .sidebar-nav__rail-icon {
   display: inline-flex;
   align-items: center;
