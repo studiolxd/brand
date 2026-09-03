@@ -20,16 +20,24 @@ import studiolxdTheme from './studiolxdTheme'
  * canvas queda coherente sin envolver en un div aparte.
  *
  * Excepción: en la **página de docs** conviven todas las stories del
- * componente, así que teñir el `<html>` desde la story oscura oscurecería
- * también a las demás (y las dejaría ilegibles). Ahí el lienzo se acota a un
- * contenedor `.surface-dark`; el canvas de la story sigue usando el `<html>`,
- * que es donde importa alcanzar a los portales.
+ * componente, así que teñir el `<html>` desde ahí oscurecería a todas (y
+ * dejaría ilegibles las que no piden oscuro). Ahí el lienzo se acota a un
+ * contenedor `.surface-dark` por story en vez de tocar el `<html>` —
+ * necesario además porque el bloque de cada story embebida en Docs vive
+ * dentro de `.sbdocs-preview`, un contenedor propio del addon de docs de
+ * Storybook con fondo blanco fijo (parte de su tema, no de nuestros tokens):
+ * aunque el `<html>` se tiña, ese fondo blanco intermedio lo tapa. `.surface-dark`
+ * sí lo resuelve porque pinta su propio fondo, con más especificidad que el
+ * contenedor blanco que lo envuelve. Aplica lo mismo venga el oscuro del
+ * switcher de fondos o de `parameters.surface` — ambos casos comparten
+ * `context.viewMode === 'docs'` como condición de acotado.
  */
 const withSurface: Decorator = (Story, context) => {
   const fromBackground = context.globals.backgrounds?.value === 'dark';
   const fromParameter = context.parameters.surface === 'dark';
-  const scoped = fromParameter && context.viewMode === 'docs';
-  const isDark = (fromBackground || fromParameter) && !scoped;
+  const wantsDark = fromBackground || fromParameter;
+  const scoped = wantsDark && context.viewMode === 'docs';
+  const isDark = wantsDark && !scoped;
 
   // eslint-disable-next-line react-hooks/rules-of-hooks -- decorator de Storybook, no un componente: se invoca como parte del render de cada story y puede usar hooks con seguridad.
   useEffect(() => {
