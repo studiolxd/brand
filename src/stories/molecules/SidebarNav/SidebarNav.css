@@ -240,16 +240,11 @@ a.sidebar-nav__group-label:focus-visible {
   color: var(--sidebar-nav-item-active-color);
   box-shadow: inset var(--sidebar-nav-rail-active-bar-width) 0 0 var(--sidebar-nav-item-active-color);
 }
-/* La sección activa bajo el puntero conserva su barra y suma la línea de hover
-   (única aplicación restante de `--sidebar-nav-item-hover-line-*` tras quitar
-   la línea de hover simple del rail y de los ítems agrupados — ver excepción
-   documentada en `.sidebar-nav__item:hover`). */
-.sidebar-nav__rail-item.sidebar-nav__rail-item--active:hover,
-.sidebar-nav__rail-item.sidebar-nav__rail-item--active[data-popup-open] {
-  box-shadow:
-    inset var(--sidebar-nav-rail-active-bar-width) 0 0 var(--sidebar-nav-item-active-color),
-    inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
-}
+/* La sección activa bajo el puntero conserva SOLO su barra: sin línea de
+   hover añadida (excepción de `SidebarNav` a la regla de Colores — ver
+   `.sidebar-nav__item:hover`). No hace falta regla `:hover`/`[data-popup-open]`
+   aparte: la barra de `.sidebar-nav__rail-item--active` ya no cambia con el
+   puntero, así que el estado base le basta. */
 .sidebar-nav__rail-icon {
   display: inline-flex;
   align-items: center;
