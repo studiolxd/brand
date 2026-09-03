@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.0.4
+
+`Sidebar`: el rail pasa a padding-inline simétrico (16px a ambos lados,
+antes 16px/8px) — visualmente descompensado en una columna tan estrecha.
+`--sidebar-rail-width` sube de 64 a 72px para mantener el mismo hueco de
+icono (40px) y la misma alineación con el `MenuButton` del header.
+
+`Sidebar`: el asa de redimensión ya no se ve como una línea más gruesa y
+borrosa en hover/foco/arrastre. La causa no era el grosor del degradado
+(ya iba a 1px desde v30.0.3), sino que ese degradado vivía en una capa
+propia superpuesta al borde real de `.sidebar`, y las dos líneas de 1px
+no coincidían exactamente en el mismo subpíxel. Ahora
+`.sidebar:has(.sidebar__resizer:hover/[data-dragging]/:focus-visible)`
+tiñe directamente el color del borde único — una sola línea, sin
+depender de que dos capas independientes redondeen igual.
+
 ## v30.0.3
 
 `Sidebar`: el asa de redimensión ya no engorda al pasar el ratón, enfocar
