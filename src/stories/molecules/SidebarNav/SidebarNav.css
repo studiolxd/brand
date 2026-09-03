@@ -39,6 +39,13 @@
   box-shadow: none;
 }
 
+/* Misma fuga que en `.sidebar-nav__top-link`: sin esto, el hover de `Link`
+   (0,1,1) gana el de aquí (0,1,0) y cuela su amarillo de oscuro. */
+a.sidebar-nav__group-label:hover {
+  box-shadow: none;
+  color: var(--sidebar-nav-group-label-color);
+}
+
 a.sidebar-nav__group-label:focus-visible {
   outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
   outline-offset: calc(-1 * var(--sidebar-nav-focus-ring-width));
@@ -129,9 +136,13 @@ a.sidebar-nav__group-label:focus-visible {
 }
 
 /* El hover no pinta relleno (regla de Colores): línea de tinta bajo el ítem,
-   el mismo grafismo del subrayado de `Link`. */
+   el mismo grafismo del subrayado de `Link`. `color` va explícito aunque no
+   cambie en hover: sin él, el hover del átomo `Link` (misma especificidad,
+   0,1,1) puede ganar el empate según el orden de carga y colar su amarillo
+   de oscuro (accent-2) en vez de la tinta del ítem. */
 .sidebar-nav__item:hover {
   box-shadow: inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
+  color: var(--sidebar-nav-item-color);
 }
 
 .sidebar-nav__item:focus-visible {
@@ -152,11 +163,23 @@ a.sidebar-nav__group-label:focus-visible {
   padding-block: var(--sidebar-nav-group-trigger-padding-block);
   padding-inline: var(--sidebar-nav-group-trigger-padding-inline);
   font-size: var(--sidebar-nav-group-label-font-size);
-  font-weight: var(--sidebar-nav-group-label-font-weight);
+  /* No negrita: un enlace de nivel principal es un ítem más, no una
+     cabecera de grupo — solo compartía la talla, no el peso. */
+  font-weight: var(--sidebar-nav-item-font-weight);
   color: var(--sidebar-nav-group-label-color);
   text-decoration: none;
   box-shadow: none;
   transition: color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
+}
+
+/* Sin esto, `a:where(:not(.button)):hover` del átomo `Link` (specificity
+   0,1,1) gana al estado base de aquí (0,1,0) en hover: en oscuro se colaba
+   su línea + amarillo (accent-2) de enlace de prosa. El enlace de sidebar
+   tiene su propio grafismo de hover (el de `.sidebar-nav__item`) — aquí,
+   ninguno. */
+.sidebar-nav__top-link:hover {
+  box-shadow: none;
+  color: var(--sidebar-nav-group-label-color);
 }
 
 .sidebar-nav__top-link:focus-visible {
@@ -164,8 +187,11 @@ a.sidebar-nav__group-label:focus-visible {
   outline-offset: calc(-1 * var(--sidebar-nav-focus-ring-width));
 }
 
+/* Bold, no color: mismo criterio que la opción marcada de `Select`
+   ([data-selected], solo font-weight) y que `.sidebar-nav__item--active` —
+   sin acento de marca (nada de lavanda/amarillo en oscuro). */
 .sidebar-nav__top-link.sidebar-nav__top-link--active {
-  color: var(--sidebar-nav-item-active-color);
+  font-weight: var(--sidebar-nav-item-active-font-weight);
 }
 
 /* ─── Icono ──────────────────────────────────────────────── */
