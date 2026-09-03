@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.0.1
+
+`SidebarNav`: los enlaces de nivel principal (`kind: 'link'`) ya no heredan
+el peso de una cabecera de grupo (bold en todos, activos o no) — el activo se
+marca solo con negrita, sin cambio de color, igual que `.sidebar-nav__item--active`
+y `[data-selected]` de `Select`. Quitado también el hover del átomo `Link`
+que se colaba (misma especificidad, distinto orden de carga) en los enlaces
+de nivel principal y en los ítems agrupados, con su línea + amarillo de
+oscuro (`accent-2`) de enlace de prosa. Excepción de diseño: los ítems
+agrupados y el rail ya no pintan ninguna línea al hover (antes sí, por la
+regla general de Colores) — decisión explícita para este componente.
+
+Storybook: el toggle de fondo oscuro ya tiñe los canvases embebidos en la
+página Docs (antes solo funcionaba en la vista de story aislada — el
+contenedor propio del addon de docs pintaba blanco por encima).
+
 ## v30.0.0
 
 Rediseño de `ErrorPage` a dos columnas (mismo molde que `AuthPage`): izquierda
