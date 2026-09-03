@@ -17,6 +17,27 @@ Apila piezas con aire por token. Es el envoltorio **explícito** de «estas piez
 
 <Canvas of={StackStories.VueltaArribaEnMovil} />
 
+## Alineación: `align`
+
+Por defecto (`align="start"`), cada pieza mide lo suyo, sin estirarse: es el
+comportamiento correcto para el caso de uso documentado arriba, agrupar
+piezas pequeñas que van juntas. Pero cuando `Stack` hace de **raíz de una
+página completa** —`<Stack gap="lg"><PageIntro .../><DataTable .../></Stack>`—
+ese mismo comportamiento encoge el contenido ancho (una tabla, un formulario,
+una tarjeta) al tamaño de su propio contenido en vez de ocupar el ancho
+disponible. `align="stretch"` resuelve ese caso: las piezas ocupan todo el
+ancho del `Stack`.
+
+```tsx
+<Stack gap="lg" align="stretch">
+  <PageIntro title="Usuarios" />
+  <DataTable columns={columns} data={data} />
+</Stack>
+```
+
+<Canvas of={StackStories.AlineacionPorDefecto} />
+<Canvas of={StackStories.AlineacionStretch} />
+
 ## Atributos al `<div>`
 
 Lo que no sea prop propia (`role`, `aria-*`, `id`, `data-*`, `style`…) viaja al `<div>` de la

@@ -12,6 +12,9 @@
 .stack.stack--gap-lg {
   gap: var(--stack-gap-lg);
 }
+.stack.stack--align-stretch {
+  align-items: stretch;
+}
 
 /* En móvil, la última pieza arriba; en escritorio, el orden del JSX. */
 .stack.stack--mobile-reverse {

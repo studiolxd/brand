@@ -7,6 +7,17 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.1.0
+
+`Stack`: nueva prop `align` (`'start'` | `'stretch'`, opt-in, por defecto
+`'start'` — no cambia el aspecto de ningún uso existente). Con
+`align="stretch"` las piezas ocupan todo el ancho disponible del `Stack`,
+en vez de medir solo su contenido. Resuelve el caso de `Stack` como raíz de
+una página completa (`<Stack gap="lg"><PageIntro .../><DataTable .../></Stack>`),
+donde `align-items: flex-start` encogía el contenido ancho (una tabla con
+`width: 100%` en su `<table>` interno) al tamaño de su propio contenido en
+vez de ocupar el ancho del `Stack`.
+
 ## v30.0.6
 
 `UserMenu` y `OrgSwitcher`: el chevron del trigger giraba a saltos al

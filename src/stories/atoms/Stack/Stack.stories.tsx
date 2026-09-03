@@ -3,6 +3,7 @@ import { expect } from 'storybook/test';
 import { Stack } from './Stack';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Link } from '../Link/Link';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../../molecules/Card/Card';
 
 const meta: Meta<typeof Stack> = {
   title: 'Atoms/Stack',
@@ -18,6 +19,7 @@ const meta: Meta<typeof Stack> = {
   },
   argTypes: {
     gap: { control: { type: 'radio' }, options: ['md', 'lg'] },
+    align: { control: { type: 'radio' }, options: ['start', 'stretch'] },
     mobileOrder: { control: { type: 'radio' }, options: ['normal', 'reverse'] },
     children: { table: { disable: true } },
     className: { table: { disable: true } },
@@ -31,6 +33,35 @@ export const PorDefecto: Story = {};
 
 /** `mobileOrder="reverse"`: en móvil el enlace de vuelta queda por encima de la cabecera; en escritorio, debajo. */
 export const VueltaArribaEnMovil: Story = { args: { mobileOrder: 'reverse' } };
+
+const tarjetaAncha = (
+  <Card>
+    <CardHeader>
+      <CardTitle>Usuarios activos</CardTitle>
+      <CardDescription>Últimos 30 días</CardDescription>
+    </CardHeader>
+    <CardContent>Aquí iría una tabla o un gráfico de ancho completo.</CardContent>
+  </Card>
+);
+
+/**
+ * Por defecto (`align="start"`), una pieza ancha —una tarjeta, una tabla— no
+ * se estira: mide su propio contenido y queda encogida dentro del `Stack`.
+ */
+export const AlineacionPorDefecto: Story = {
+  name: 'Alineación — por defecto (start)',
+  args: { children: tarjetaAncha },
+};
+
+/**
+ * `align="stretch"`: la pieza ocupa todo el ancho disponible del `Stack`.
+ * Es el caso de `Stack` como raíz de una página con contenido ancho (tablas,
+ * formularios, tarjetas) que debe llegar al borde del contenedor.
+ */
+export const AlineacionStretch: Story = {
+  name: 'Alineación — stretch',
+  args: { align: 'stretch', children: tarjetaAncha },
+};
 
 export const Contrato: Story = {
   name: 'Test — apila con aire; el orden invertido es solo visual y solo en móvil',
