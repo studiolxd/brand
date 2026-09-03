@@ -135,13 +135,14 @@ a.sidebar-nav__group-label:focus-visible {
     color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }
 
-/* El hover no pinta relleno (regla de Colores): línea de tinta bajo el ítem,
-   el mismo grafismo del subrayado de `Link`. `color` va explícito aunque no
-   cambie en hover: sin él, el hover del átomo `Link` (misma especificidad,
-   0,1,1) puede ganar el empate según el orden de carga y colar su amarillo
-   de oscuro (accent-2) en vez de la tinta del ítem. */
+/* Excepción a la regla general de Colores ("el hover no pinta relleno, deja
+   una línea"): en `SidebarNav` el hover de los ítems agrupados no pinta
+   ninguna línea (decisión de usuario, coherente con que `.sidebar-nav__top-link`
+   tampoco la tiene). `color` se mantiene explícito aunque no cambie en
+   hover: sin él, el hover del átomo `Link` (misma especificidad, 0,1,1)
+   puede ganar el empate según el orden de carga y colar su amarillo de
+   oscuro (accent-2) en vez de la tinta del ítem. */
 .sidebar-nav__item:hover {
-  box-shadow: inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
   color: var(--sidebar-nav-item-color);
 }
 
@@ -230,10 +231,6 @@ a.sidebar-nav__group-label:focus-visible {
     box-shadow var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing),
     color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
 }
-.sidebar-nav__rail-item:hover,
-.sidebar-nav__rail-item[data-popup-open] {
-  box-shadow: inset 0 calc(-1 * var(--sidebar-nav-item-hover-line-width)) 0 0 var(--sidebar-nav-item-hover-line-color);
-}
 .sidebar-nav__rail-item:focus-visible {
   outline: var(--sidebar-nav-focus-ring-width) solid var(--sidebar-nav-focus-ring-color);
   outline-offset: var(--sidebar-nav-focus-ring-width);
@@ -243,7 +240,10 @@ a.sidebar-nav__group-label:focus-visible {
   color: var(--sidebar-nav-item-active-color);
   box-shadow: inset var(--sidebar-nav-rail-active-bar-width) 0 0 var(--sidebar-nav-item-active-color);
 }
-/* La sección activa bajo el puntero conserva su barra y suma la línea de hover. */
+/* La sección activa bajo el puntero conserva su barra y suma la línea de hover
+   (única aplicación restante de `--sidebar-nav-item-hover-line-*` tras quitar
+   la línea de hover simple del rail y de los ítems agrupados — ver excepción
+   documentada en `.sidebar-nav__item:hover`). */
 .sidebar-nav__rail-item.sidebar-nav__rail-item--active:hover,
 .sidebar-nav__rail-item.sidebar-nav__rail-item--active[data-popup-open] {
   box-shadow:
