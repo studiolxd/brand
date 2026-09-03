@@ -48,6 +48,17 @@
   transition: none;
 }
 
+/* Hover/foco/arrastre del asa tiñen el borde único y ya existente de
+   `.sidebar`, en vez de superponer una segunda línea propia: dos líneas de
+   1px que no coinciden exactamente al superponerse (redondeo a subpíxel
+   distinto en cada una, por los `calc()` encadenados de los tokens de
+   ancho) se ven como una línea más gruesa y borrosa. */
+.sidebar:has(.sidebar__resizer:hover),
+.sidebar:has(.sidebar__resizer[data-dragging]),
+.sidebar:has(.sidebar__resizer:focus-visible) {
+  border-inline-end-color: var(--sidebar-resizer-hover-color);
+}
+
 .sidebar__header,
 .sidebar__footer {
   flex-shrink: 0;
@@ -94,11 +105,10 @@
 .sidebar__resizer:hover,
 .sidebar__resizer[data-dragging],
 .sidebar__resizer:focus-visible {
+  /* El color de la línea lo pone `.sidebar:has(...)` de más arriba, sobre
+     el borde único de `.sidebar` — este elemento solo amplía la zona de
+     agarre, no pinta nada propio. */
   outline: none;
-  /* Mismo grosor que el borde en reposo (`--sidebar-border-width`), no el
-     doble: el cursor ya cambia a `col-resize` sobre el asa, así que hover/
-     foco/arrastre solo cambian de color la línea existente, no su ancho. */
-  background: linear-gradient(to right, transparent calc(50% - var(--sidebar-border-width) / 2), var(--sidebar-resizer-hover-color) calc(50% - var(--sidebar-border-width) / 2), var(--sidebar-resizer-hover-color) calc(50% + var(--sidebar-border-width) / 2), transparent calc(50% + var(--sidebar-border-width) / 2));
 }
 
 /* ── Móvil: cajón desde la izquierda ── */
