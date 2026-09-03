@@ -7,6 +7,29 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.0.2
+
+`SidebarNav`: guard de hover contra la fuga del átomo `Link` de vuelta en
+`.sidebar-nav__rail-item` (se había perdido al quitar su línea de hover
+propia). El ítem activo del rail ya no lleva color de acento ni barra
+lateral — en rail (solo iconos) la sección activa se comunica por
+`aria-current` y por el `Tooltip`, sin marca visual permanente.
+
+`Sidebar`: `.sidebar__panel` lleva ahora `padding-block` incondicional
+(`spacing.6`, el doble del aire de cabecera/pie) — antes ese aire dependía
+de que hubiera `logo`, así que sin él (como en el hub) la sidebar quedaba
+pegada al borde superior, en rail y desplegada. Nuevo token
+`sidebar.panel-padding-block`.
+
+`Tooltip`: en oscuro pasa a fondo claro/texto oscuro (superficie invertida
+simétrica a la de claro) en vez del par de `Button primary` — sin acento de
+marca. Cambio global, afecta a todos los tooltips de la suite.
+
+`Sidebar`: arreglado el asa de redimensión — arrastrar hacia afuera desde
+rail no desplegaba (el estado se quedaba en `'rail'`, que gana por
+especificidad CSS al ancho arrastrado). De paso, la zona de agarre del asa
+ya no pierde su mitad exterior por el `overflow: hidden` del contenedor.
+
 ## v30.0.1
 
 `SidebarNav`: los enlaces de nivel principal (`kind: 'link'`) ya no heredan

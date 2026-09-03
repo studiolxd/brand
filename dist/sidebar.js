@@ -30,7 +30,7 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 		let t = C.current;
 		if (!t || !v) return;
 		let n = u(t, "--sidebar-min-width"), r = u(t, "--sidebar-max-width");
-		e < u(t, "--sidebar-rail-width") ? v.setSidebar("closed") : e < n ? v.setSidebar("rail") : v.setSidebarWidth(Math.min(r, Math.round(e)));
+		e < u(t, "--sidebar-rail-width") ? v.setSidebar("closed") : e < n ? v.setSidebar("rail") : (v.setSidebar("open"), v.setSidebarWidth(Math.min(r, Math.round(e))));
 	}, [v]), k = (e) => {
 		if (!C.current) return;
 		e.preventDefault();
@@ -68,33 +68,35 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 			tabIndex: S ? -1 : void 0,
 			inert: S && y === "closed" ? !0 : void 0,
 			onClick: D,
-			children: [
-				e && /* @__PURE__ */ c("div", {
-					className: "sidebar__header",
-					children: e
-				}),
-				/* @__PURE__ */ c("div", {
-					className: "sidebar__panel",
-					children: d
-				}),
-				f && /* @__PURE__ */ c("div", {
-					className: "sidebar__footer",
-					children: f
-				}),
-				b && v && y !== "closed" && /* @__PURE__ */ c("div", {
-					className: "sidebar__resizer",
-					role: "separator",
-					"aria-orientation": "vertical",
-					"aria-label": h,
-					"aria-valuenow": j,
-					"aria-valuemin": T ? Math.round(T.rail) : void 0,
-					"aria-valuemax": T ? Math.round(T.max) : void 0,
-					"aria-valuetext": g(j),
-					tabIndex: 0,
-					onPointerDown: k,
-					onKeyDown: A
-				})
-			]
+			children: [/* @__PURE__ */ l("div", {
+				className: "sidebar__inner",
+				children: [
+					e && /* @__PURE__ */ c("div", {
+						className: "sidebar__header",
+						children: e
+					}),
+					/* @__PURE__ */ c("div", {
+						className: "sidebar__panel",
+						children: d
+					}),
+					f && /* @__PURE__ */ c("div", {
+						className: "sidebar__footer",
+						children: f
+					})
+				]
+			}), b && v && y !== "closed" && /* @__PURE__ */ c("div", {
+				className: "sidebar__resizer",
+				role: "separator",
+				"aria-orientation": "vertical",
+				"aria-label": h,
+				"aria-valuenow": j,
+				"aria-valuemin": T ? Math.round(T.rail) : void 0,
+				"aria-valuemax": T ? Math.round(T.max) : void 0,
+				"aria-valuetext": g(j),
+				tabIndex: 0,
+				onPointerDown: k,
+				onKeyDown: A
+			})]
 		})
 	});
 }
