@@ -28,6 +28,12 @@
 
 .sidebar.sidebar--rail {
   inline-size: var(--sidebar-rail-width);
+  /* Asimétrico a propósito, y propio del rail (no toca `--sidebar-padding-inline`,
+     que sigue rigiendo desplegada): el hueco resultante (rail-width - start -
+     end) coincide con `--sidebar-nav-rail-item-size` (40px), así que el icono
+     llena el ancho disponible y su centro cae en el mismo x que el del
+     `MenuButton` del header. */
+  padding-inline: var(--sidebar-rail-padding-inline-start) var(--sidebar-padding-inline);
 }
 
 .sidebar.sidebar--closed {

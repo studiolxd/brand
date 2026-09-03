@@ -7,8 +7,7 @@
   --sidebar-min-width: 12rem; /** Ancho mínimo desplegada (192px): por debajo, al redimensionar, salta a rail */
   --sidebar-max-width: 24rem; /** Ancho máximo desplegada (384px) */
   --sidebar-resize-step: 16; /** Píxeles por pulsación de flecha en el asa (teclado) */
-  --sidebar-rail-width: calc(var(--size-component-md) + 2 * var(--spacing-2)); /** Ancho del rail: un botón de icono md con su aire a cada lado (56px) */
-  --sidebar-padding-inline: var(--spacing-2); /** Aire lateral: el mismo a los dos lados en rail y desplegada, así los iconos no se mueven al cambiar de modo */
+  --sidebar-padding-inline: var(--spacing-2); /** Aire lateral de desplegada (8px), y el del lado derecho del rail — ver `rail-padding-inline-start` para el izquierdo, que es distinto a propósito */
   --sidebar-padding-block: var(--spacing-4); /** Aire vertical de cabecera y pie */
   --sidebar-panel-padding-block: var(--spacing-6); /** Aire vertical del panel (arriba y abajo de la lista de navegación), incondicional — con o sin logo/footer, en rail y desplegada. El doble del aire de cabecera/pie: antes dependía de que hubiera logo, ahora no */
   --sidebar-gap: var(--spacing-3); /** Entre cabecera, panel y pie */
@@ -19,9 +18,11 @@
   --sidebar-backdrop-z-index: var(--z-index-backdrop); /** Velo bajo el cajón */
   --sidebar-group-padding-block: var(--spacing-2); /** Aire vertical de una sección del panel */
   --sidebar-group-gap: var(--spacing-1); /** Entre elementos de una sección */
+  --sidebar-rail-width: calc(var(--app-header-padding-inline) + var(--size-component-md) + var(--spacing-2)); /** Ancho del rail (64px): inset izquierdo `1rem` (16px, alinea el centro del icono con el centro del `MenuButton` del header) + caja de icono `2.5rem` (40px) + `0.5rem` de aire a la derecha (8px). Ver `rail-padding-inline-start` */
   --sidebar-bg: var(--color-background-light); /** Fondo */
   --sidebar-border-width: var(--border-width-default); /** Borde que separa la sidebar del contenido */
   --sidebar-border-color: var(--color-primary); /** Color del borde */
+  --sidebar-rail-padding-inline-start: var(--app-header-padding-inline); /** Inset izquierdo del rail (16px), igual a `--app-header-padding-inline`: alinea el centro del icono del rail con el centro del `MenuButton` del header (x=36px). Asimétrico a propósito respecto al lado derecho (`padding-inline`, 8px) — desacoplado del padding de desplegada para no romper su alineación, ya correcta por composición de otros tokens */
   --sidebar-resizer-hover-color: var(--color-primary); /** El borde se marca al pasar por el asa o al arrastrar */
   --sidebar-backdrop-bg: var(--modal-backdrop-bg); /** El velo del sistema */
   --sidebar-backdrop-opacity: var(--modal-backdrop-opacity); /** Opacidad del velo, la del sistema */
