@@ -89,7 +89,10 @@
 .sidebar__resizer[data-dragging],
 .sidebar__resizer:focus-visible {
   outline: none;
-  background: linear-gradient(to right, transparent calc(50% - var(--sidebar-border-width)), var(--sidebar-resizer-hover-color) calc(50% - var(--sidebar-border-width)), var(--sidebar-resizer-hover-color) calc(50% + var(--sidebar-border-width)), transparent calc(50% + var(--sidebar-border-width)));
+  /* Mismo grosor que el borde en reposo (`--sidebar-border-width`), no el
+     doble: el cursor ya cambia a `col-resize` sobre el asa, así que hover/
+     foco/arrastre solo cambian de color la línea existente, no su ancho. */
+  background: linear-gradient(to right, transparent calc(50% - var(--sidebar-border-width) / 2), var(--sidebar-resizer-hover-color) calc(50% - var(--sidebar-border-width) / 2), var(--sidebar-resizer-hover-color) calc(50% + var(--sidebar-border-width) / 2), transparent calc(50% + var(--sidebar-border-width) / 2));
 }
 
 /* ── Móvil: cajón desde la izquierda ── */
