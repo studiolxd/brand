@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.1.2
+
+`Pagination`: `.pagination__meta` (resumen + selector de tamaño) usaba
+`--pagination-controls-gap` (`{spacing.1}`, 4px) — un token pensado para
+el gap entre botones de página contiguos, no entre secciones distintas.
+Pasa a `--pagination-gap` (`{spacing.3}`, 12px), el mismo que usa
+`.pagination` entre sus grupos principales.
+
 ## v30.1.1
 
 `Table`: el icono de ordenación en reposo pierde la opacidad reducida
