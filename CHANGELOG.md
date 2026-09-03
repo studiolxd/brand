@@ -7,6 +7,20 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.0.3
+
+`Sidebar`: el asa de redimensión ya no engorda al pasar el ratón, enfocar
+con teclado o arrastrar — antes pintaba el doble de grosor
+(`2 * --sidebar-border-width`) que el borde en reposo; ahora pinta el
+mismo grosor, solo cambia de color.
+
+`Sidebar`/`SidebarNav`: los iconos del rail ya no quedan desplazados 8px
+respecto al `MenuButton` del header. `--sidebar-rail-width` pasa de 56 a
+64px (inset izquierdo de 16px, igual a `--app-header-padding-inline`, +
+caja de icono de 40px + 8px de aire a la derecha) con un padding-inline
+asimétrico propio del rail (`sidebar.rail-padding-inline-start`), que no
+toca el de desplegada (ya alineada por composición de otros tokens).
+
 ## v30.0.2
 
 `SidebarNav`: guard de hover contra la fuga del átomo `Link` de vuelta en
