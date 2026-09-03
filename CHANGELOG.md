@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.0.6
+
+`UserMenu` y `OrgSwitcher`: el chevron del trigger giraba a saltos al
+abrir/cerrar — le faltaba `transition` en la regla base (solo tenía
+`transform: rotate(...)`, sin la propiedad que anima el cambio de ángulo).
+Ahora reutiliza la transición general de cada componente
+(`--user-menu-transition-duration`/`--user-menu-transition-easing` y
+`--org-switcher-transition-duration`/`--org-switcher-transition-easing`),
+el mismo patrón que ya usan `Accordion`, `Collapsible` y `SidebarNav`.
+
 ## v30.0.5
 
 `AppShell`: `.app-shell__content` (el `<main>` donde cada app pinta sus

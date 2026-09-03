@@ -53,6 +53,7 @@
 .user-menu__chevron {
   flex-shrink: 0;
   transform: rotate(90deg);
+  transition: transform var(--user-menu-transition-duration) var(--user-menu-transition-easing);
 }
 
 .user-menu__trigger[data-popup-open] .user-menu__chevron {

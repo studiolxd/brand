@@ -46,6 +46,7 @@
 .org-switcher__chevron {
   flex-shrink: 0;
   transform: rotate(90deg);
+  transition: transform var(--org-switcher-transition-duration) var(--org-switcher-transition-easing);
 }
 
 .org-switcher__trigger[data-popup-open] .org-switcher__chevron {
