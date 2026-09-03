@@ -13,7 +13,7 @@
     "z-index":             { "$value": "{floating-panel.z-index}",            "$type": "number",    "$description": "Capa z — la misma que el resto de paneles flotantes" },
     "transition-duration": { "$value": "{floating-panel.transition-duration}", "$type": "number",   "$description": "Duración de la animación de entrada/salida" },
     "transition-easing":   { "$value": "{floating-panel.transition-easing}",  "$type": "string",    "$description": "Easing de la animación" },
-    "surface-dark-bg":                           { "$value": "{color.accent-1}", "$type": "color", "$description": "Fondo del bocadillo — surface-dark. En claro el bocadillo se invierte (prusia sobre página blanca); sobre página oscura ese prusia es el lienzo, así que toma el par de `Button primary`: relleno lavanda con tinta prusia" },
-    "surface-dark-color":                        { "$value": "{color.primary}", "$type": "color", "$description": "Texto del bocadillo — surface-dark" }
+    "surface-dark-bg":                           { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo del bocadillo — surface-dark. Mismo patrón de superficie invertida que en claro (ahí: fondo `background.dark`), pero simétrico para lienzo oscuro: fondo claro, texto oscuro. Sin acento de marca" },
+    "surface-dark-color":                        { "$value": "{color.text.on-light}", "$type": "color", "$description": "Texto del bocadillo — surface-dark, el par del fondo claro" }
   }
 }

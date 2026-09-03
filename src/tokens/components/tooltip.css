@@ -21,6 +21,6 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --tooltip-bg: var(--color-accent-1); /** Fondo del bocadillo — surface-dark. En claro el bocadillo se invierte (prusia sobre página blanca); sobre página oscura ese prusia es el lienzo, así que toma el par de `Button primary`: relleno lavanda con tinta prusia */
-  --tooltip-color: var(--color-primary); /** Texto del bocadillo — surface-dark */
+  --tooltip-bg: var(--color-background-light); /** Fondo del bocadillo — surface-dark. Mismo patrón de superficie invertida que en claro (ahí: fondo `background.dark`), pero simétrico para lienzo oscuro: fondo claro, texto oscuro. Sin acento de marca */
+  --tooltip-color: var(--color-text-on-light); /** Texto del bocadillo — surface-dark, el par del fondo claro */
 }
