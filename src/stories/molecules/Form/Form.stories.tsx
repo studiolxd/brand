@@ -44,7 +44,7 @@ export const Completo: Story = {
     errors: ['No hemos podido iniciar sesión. Comprueba el correo y la contraseña.'],
     links: (
       <>
-        <Paragraph>¿No tienes cuenta? <Link href="#registro">Regístrate</Link></Paragraph>
+        <Paragraph>¿No tienes cuenta? <Link href="#registro">Regístrate</Link>.</Paragraph>
         <Link href="#recuperar">¿Has olvidado la contraseña?</Link>
       </>
     ),

@@ -5,7 +5,7 @@ import * as ErrorPageStories from "./ErrorPage.stories";
 
 # ErrorPage
 
-La plantilla de «algo ha salido mal»: la misma maqueta que `NotFoundPage` —`SiteShell` con cabecera y pie opcionales, y un `main` con `PageIntro`— pero en lugar del enlace de vuelta lleva una **fila de acciones** (`Inline`): el `Button` «Reintentar» y el enlace «Ir al inicio», que pone el producto.
+La plantilla de «algo ha salido mal»: `SiteShell` con cabecera y pie opcionales, y un `main` con **dos columnas** (`Columns`), mismo molde que `AuthPage`. Izquierda: `PageIntro` (título y frase) y el enlace de vuelta «Volver al inicio». Derecha: la frase de reintento y el `Button` «Reintentar» en bloque — todo lo pone el producto.
 
 <Canvas of={ErrorPageStories.SinCabeceraNiPie} />
 <Canvas of={ErrorPageStories.ConCabeceraYPie} />
@@ -25,7 +25,9 @@ export default function Error({ reset }) {
     <ErrorPage
       title={t('title')}
       description={t('description')}
-      actions={<><Button type="button" onClick={reset}>{t('retry')}</Button><Link icon="arrow-left" render={<NextLink href="/" />}>{t('home')}</Link></>}
+      homeAction={<Link icon="arrow-left" render={<NextLink href="/" />}>{t('home')}</Link>}
+      retryDescription={t('retryDescription')}
+      retryAction={<Button type="button" block onClick={reset}>{t('retry')}</Button>}
       header={<PublicHeader auth={false} />}
       footer={<PublicFooter />}
     />
@@ -41,7 +43,7 @@ Aun así, `header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallbac
 
 ## Dentro de una app
 
-Una app con `AppShell` ya tiene su `main`; una página de error dentro no puede montar otro marco ni otro `main`. Con `shell={false}` la plantilla devuelve **solo el contenido** —el `Stack` con `PageIntro` y las acciones— y lo pinta la app donde le toca. Sin marco, `header`, `footer` e `id` no aplican. No tiene tokens propios: el aire entre acciones es el de `Inline`.
+Una app con `AppShell` ya tiene su `main`; una página de error dentro no puede montar otro marco ni otro `main`. Con `shell={false}` la plantilla devuelve **solo el contenido** —las dos columnas (`Columns`)— y lo pinta la app donde le toca. Sin marco, `header`, `footer` e `id` no aplican.
 
 <Canvas of={ErrorPageStories.DentroDeUnaApp} />
 

@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.0.0
+
+Rediseño de `ErrorPage` a dos columnas (mismo molde que `AuthPage`): izquierda
+título, frase y el enlace de vuelta; derecha la frase de reintento y el
+`Button` «Reintentar» en bloque. Pulido de textos en las plantillas de
+error/404/auth (frases que terminan en punto, incluso con un enlace dentro;
+«Volver al inicio» unificado entre `ErrorPage` y `NotFoundPage`).
+
+### Cambios incompatibles
+
+- **`ErrorPage` cambia su prop `actions` por tres props separadas**:
+  `homeAction` (columna izquierda, antes iba junto al `Button` en `actions`),
+  `retryDescription` (nueva, frase sobre el botón) y `retryAction` (columna
+  derecha). El `main` pasa de `Inline` a `Columns` — cualquier consumidor que
+  pasara `actions` tiene que migrar a las tres props nuevas.
+
 ## v29.0.0
 
 Revisión de calidad de los 35 componentes sin consumidor directo en la suite

@@ -13,7 +13,7 @@ interface Args { socialProviders: string[]; captcha: boolean; terms: boolean; pa
 
 function Registro({ socialProviders, captcha, terms, passwordError, surface }: Args) {
   return (
-    <AuthPage title="Crea una cuenta" description={<>¿Ya tienes una cuenta? <Link href="#acceso">Inicia sesión</Link></>} surface={surface}>
+    <AuthPage title="Crea una cuenta" description={<>¿Ya tienes una cuenta? <Link href="#acceso">Inicia sesión</Link>.</>} surface={surface}>
       <Form
         size="lg"
         blockActions

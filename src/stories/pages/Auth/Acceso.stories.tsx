@@ -18,7 +18,7 @@ interface Args {
 
 function Acceso({ socialProviders, magicLink, captcha, signupOpen, serverError, surface }: Args) {
   return (
-    <AuthPage title="Inicia sesión" description={signupOpen ? <>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link></> : undefined} surface={surface}>
+    <AuthPage title="Inicia sesión" description={signupOpen ? <>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link>.</> : undefined} surface={surface}>
       <Form
         size="lg"
         blockActions

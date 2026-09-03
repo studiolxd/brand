@@ -17,9 +17,9 @@ const meta: Meta<typeof NotFoundPage> = {
   component: NotFoundPage,
   parameters: { layout: 'fullscreen' },
   args: {
-    title: 'Página no encontrada',
-    description: 'Error 404',
-    homeLink: <Link icon="arrow-left" href="#inicio">Ir al inicio</Link>,
+    title: 'Error 404',
+    description: '¡Ups! No hemos podido encontrar la página que buscas.',
+    homeLink: <Link icon="arrow-left" href="#inicio">Volver al inicio</Link>,
   },
   argTypes: { homeLink: { table: { disable: true } }, header: { table: { disable: true } }, footer: { table: { disable: true } }, id: { table: { disable: true } } },
 };
@@ -59,9 +59,9 @@ export const Contrato: Story = {
     const main = canvas.getByRole('main');
     await expect(main).toHaveAttribute('id', 'main-content');
     await expect(main).toHaveAttribute('tabindex', '-1');
-    await expect(within(main).getByRole('heading', { level: 1 })).toHaveTextContent('Página no encontrada');
-    await expect(within(main).getByText('Error 404')).toHaveClass('paragraph--large');
-    await expect(within(main).getByRole('link', { name: 'Ir al inicio' })).toHaveAttribute('href', '#inicio');
+    await expect(within(main).getByRole('heading', { level: 1 })).toHaveTextContent('Error 404');
+    await expect(within(main).getByText('¡Ups! No hemos podido encontrar la página que buscas.')).toHaveClass('paragraph--large');
+    await expect(within(main).getByRole('link', { name: 'Volver al inicio' })).toHaveAttribute('href', '#inicio');
     await expect(canvasElement.querySelector('.site-header')).toBeInTheDocument();
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
   },

@@ -31,7 +31,7 @@ const LEGAL = [
 export interface AuthPageProps {
   /** Título de la página. */
   title: string;
-  /** Frase bajo el título (opcional): texto, o texto con un enlace («¿No tienes una cuenta? Regístrate»). */
+  /** Frase bajo el título (opcional): texto, o texto con un enlace y el punto fuera de él («¿No tienes una cuenta? Regístrate.»). */
   description?: ReactNode;
   /** Más texto bajo la frase. */
   intro?: ReactNode;

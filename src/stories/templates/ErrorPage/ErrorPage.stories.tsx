@@ -22,16 +22,19 @@ const meta: Meta<typeof ErrorPage> = {
   component: ErrorPage,
   parameters: { layout: 'fullscreen' },
   args: {
-    title: 'Algo ha salido mal',
-    description: 'No hemos podido cargar esta página. Puedes reintentarlo o volver al inicio.',
-    actions: (
-      <>
-        <Button type="button" size="lg" onClick={() => {}}>Reintentar</Button>
-        <Link icon="arrow-left" href="#inicio">Ir al inicio</Link>
-      </>
-    ),
+    title: 'Error',
+    description: '¡Ups! Algo ha salido mal.',
+    homeAction: <Link icon="arrow-left" href="#inicio">Volver al inicio</Link>,
+    retryDescription: 'Puedes reintentarlo o volver al inicio.',
+    retryAction: <Button type="button" size="lg" block onClick={() => {}}>Reintentar</Button>,
   },
-  argTypes: { actions: { table: { disable: true } }, header: { table: { disable: true } }, footer: { table: { disable: true } }, id: { table: { disable: true } } },
+  argTypes: {
+    homeAction: { table: { disable: true } },
+    retryAction: { table: { disable: true } },
+    header: { table: { disable: true } },
+    footer: { table: { disable: true } },
+    id: { table: { disable: true } },
+  },
 };
 export default meta;
 type Story = StoryObj<typeof ErrorPage>;
@@ -78,12 +81,15 @@ export const Contrato: Story = {
     const main = canvas.getByRole('main');
     await expect(main).toHaveAttribute('id', 'main-content');
     await expect(main).toHaveAttribute('tabindex', '-1');
-    await expect(within(main).getByRole('heading', { level: 1 })).toHaveTextContent('Algo ha salido mal');
-    await expect(within(main).getByText(/No hemos podido cargar/)).toHaveClass('paragraph--large');
-    const acciones = main.querySelector('.error-page__actions')!;
-    await expect(acciones).toHaveClass('inline');
-    await expect(within(acciones as HTMLElement).getByRole('button', { name: 'Reintentar' })).toBeInTheDocument();
-    await expect(within(acciones as HTMLElement).getByRole('link', { name: 'Ir al inicio' })).toBeInTheDocument();
+    await expect(within(main).getByRole('heading', { level: 1 })).toHaveTextContent('Error');
+    await expect(within(main).getByText('¡Ups! Algo ha salido mal.')).toHaveClass('paragraph--large');
+    const contenido = main.querySelector('.error-page__content')!;
+    await expect(contenido).toHaveClass('columns');
+    await expect(within(contenido as HTMLElement).getByRole('link', { name: 'Volver al inicio' })).toBeInTheDocument();
+    const boton = within(contenido as HTMLElement).getByRole('button', { name: 'Reintentar' });
+    await expect(boton).toBeInTheDocument();
+    await expect(boton).toHaveClass('button--block');
+    await expect(within(contenido as HTMLElement).getByText('Puedes reintentarlo o volver al inicio.')).toBeInTheDocument();
     await expect(canvasElement.querySelector('.site-header')).toBeInTheDocument();
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
   },
@@ -96,7 +102,7 @@ export const ContratoCabeceraRota: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvasElement.querySelector('.site-header')).not.toBeInTheDocument();
-    await expect(canvas.getByRole('heading', { level: 1 })).toHaveTextContent('Algo ha salido mal');
+    await expect(canvas.getByRole('heading', { level: 1 })).toHaveTextContent('Error');
     await expect(canvas.getByRole('button', { name: 'Reintentar' })).toBeInTheDocument();
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
   },
@@ -110,7 +116,7 @@ export const ContratoSinShell: Story = {
     await expect(canvasElement.querySelector('.site-shell')).not.toBeInTheDocument();
     await expect(canvasElement.querySelector('main')).not.toBeInTheDocument();
     await expect(canvasElement.querySelector('.site-header')).not.toBeInTheDocument();
-    await expect(canvasElement.firstElementChild).toHaveClass('stack');
+    await expect(canvasElement.querySelector('.error-page__content')).toHaveClass('columns');
     await expect(within(canvasElement).getByRole('heading', { level: 1 })).toBeInTheDocument();
   },
 };

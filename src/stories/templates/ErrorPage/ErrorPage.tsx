@@ -4,17 +4,22 @@ import type { ReactNode } from 'react';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
 import { Container } from '../../atoms/Container/Container';
 import { Stack } from '../../atoms/Stack/Stack';
+import { Columns } from '../../atoms/Columns/Columns';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
-import { Inline } from '../../atoms/Inline/Inline';
+import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { ErrorBoundary } from '../../atoms/ErrorBoundary/ErrorBoundary';
 
 export interface ErrorPageProps {
-  /** El título («Algo ha salido mal»): `Heading` de nivel 1 vía `PageIntro`. */
+  /** El título («Error»): `Heading` de nivel 1 vía `PageIntro`, columna izquierda. */
   title: ReactNode;
-  /** La frase bajo el título. */
+  /** La frase bajo el título («Algo ha salido mal»), columna izquierda. */
   description?: ReactNode;
-  /** Las salidas: el `Button` «Reintentar» y el enlace «Ir al inicio» del producto. Sin router dentro. */
-  actions: ReactNode;
+  /** El enlace de vuelta, bajo la frase, misma columna izquierda: `<Link icon="arrow-left" href="/">Volver al inicio</Link>`. Sin router dentro. */
+  homeAction: ReactNode;
+  /** La frase de la columna derecha, sobre el botón («Puedes volver a intentarlo»). */
+  retryDescription?: ReactNode;
+  /** El `Button` «Reintentar», columna derecha, debajo de `retryDescription` — pásalo con `block` (mismo patrón que las acciones de `AuthPage`/`Form`). */
+  retryAction: ReactNode;
   /** Cabecera del sitio, SIN auth. Va dentro de un `ErrorBoundary`. En `global-error.tsx` no se pasa. */
   header?: ReactNode;
   /** Pie del sitio. Ídem. */
@@ -22,26 +27,34 @@ export interface ErrorPageProps {
   /** `id` del `main` (`main-content` por defecto, destino del `SkipLink`). */
   id?: string;
   /**
-   * Con `false` no monta `SiteShell` ni el `main`: solo el contenido (título,
-   * frase y acciones), para pintarlo dentro de un `AppShell` que ya tiene su
-   * `main`. Por defecto `true`. Sin marco, `header`, `footer` e `id` no aplican.
+   * Con `false` no monta `SiteShell` ni el `main`: solo el contenido (las dos
+   * columnas), para pintarlo dentro de un `AppShell` que ya tiene su `main`.
+   * Por defecto `true`. Sin marco, `header`, `footer` e `id` no aplican.
    */
   shell?: boolean;
 }
 
 /**
- * Plantilla de «algo ha salido mal»: misma maqueta que `NotFoundPage` con las
- * acciones en lugar del enlace de vuelta. Cabecera y pie, si se pasan, van
- * cada uno en su `ErrorBoundary`: la página de error no puede depender del
- * layout que pudo fallar. Con `shell={false}` devuelve solo el contenido,
- * para una app que ya tiene su `main`.
+ * Plantilla de «algo ha salido mal»: dos columnas, mismo molde que `AuthPage`
+ * (`Columns` de dos celdas). Izquierda: título, frase y el enlace de vuelta.
+ * Derecha: la frase de reintento y el botón en bloque, como las acciones de un
+ * formulario de acceso. Cabecera y pie, si se pasan, van cada uno en su
+ * `ErrorBoundary`: la página de error no puede depender del layout que pudo
+ * fallar. Con `shell={false}` devuelve solo el contenido, para una app que ya
+ * tiene su `main`.
  */
-export function ErrorPage({ title, description, actions, header, footer, id = 'main-content', shell = true }: ErrorPageProps) {
+export function ErrorPage({ title, description, homeAction, retryDescription, retryAction, header, footer, id = 'main-content', shell = true }: ErrorPageProps) {
   const content = (
-    <Stack>
-      <PageIntro title={title} description={description} />
-      <Inline className="error-page__actions">{actions}</Inline>
-    </Stack>
+    <Columns className="error-page__content">
+      <Stack>
+        <PageIntro title={title} description={description} />
+        {homeAction}
+      </Stack>
+      <Stack>
+        {retryDescription && <Paragraph size="large">{retryDescription}</Paragraph>}
+        {retryAction}
+      </Stack>
+    </Columns>
   );
   if (!shell) return content;
   return (

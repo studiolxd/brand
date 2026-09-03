@@ -12,7 +12,7 @@ export interface NotFoundPageProps {
   title: ReactNode;
   /** La frase bajo el título (el código, una explicación corta). */
   description?: ReactNode;
-  /** El enlace de vuelta: el `Link` del producto con su icono (`<Link icon="arrow-left" href="/">Ir al inicio</Link>`). Sin router dentro. */
+  /** El enlace de vuelta: el `Link` del producto con su icono (`<Link icon="arrow-left" href="/">Volver al inicio</Link>`). Sin router dentro. */
   homeLink: ReactNode;
   /** Cabecera del sitio. Va dentro de un `ErrorBoundary`: si falla, la página sigue. */
   header?: ReactNode;

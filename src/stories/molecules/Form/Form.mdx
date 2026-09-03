@@ -16,7 +16,7 @@ El formulario del sistema: **solo estructura y aire**. Apila los campos, pone de
 - `children`: los campos, apilados con `gap`. Opcional: un formulario puede ser solo acciones (reenviar un correo, aceptar o rechazar) — ver «Solo acciones».
 - `errors`: los errores que no cuelgan de un campo (el fallo del servidor). Se anuncian (`role="alert"`).
 - `actions`: la acción principal y, si hay, la secundaria. En móvil a todo el ancho; en escritorio a la derecha — o a todo el ancho y apilados también en escritorio con `blockActions` (acceso, registro), que alcanza también a los botones de `alternatives`. El orden del JSX es siempre el de la fila (la acción principal, la última); en bloque la principal queda arriba. Un formulario que es solo acciones no lleva aire encima de ellas.
-- `links`: enlaces secundarios. Solo la acción es enlace; si lleva texto delante, va en un `Paragraph`: `<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link></Paragraph>`.
+- `links`: enlaces secundarios. Solo la acción es enlace; si lleva texto delante, va en un `Paragraph`, con el punto fuera del enlace: `<Paragraph>¿No tienes cuenta? <Link>Regístrate</Link>.</Paragraph>`.
 - `captcha`: el captcha (Turnstile, reCAPTCHA…), entre los campos y las acciones.
 - `success`: el mensaje que sustituye al formulario al enviarlo — texto anunciado (`role="status"`), sin caja: el aviso es el propio texto. Oculta campos, captcha, errores, acciones y alternativas; `links` se mantiene.
 - `alternatives` (+ `alternativesLabel`): otras formas de hacer lo mismo — acceso con Google, enlace mágico — separadas del bloque principal.
