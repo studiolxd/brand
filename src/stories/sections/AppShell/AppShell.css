@@ -19,8 +19,10 @@
   flex: 1;
   min-inline-size: 0;
   overflow: auto;
-  padding-block-end: env(safe-area-inset-bottom);
-  padding-inline-end: env(safe-area-inset-right);
+  padding-inline: var(--section-padding-inline);
+  padding-block: var(--section-padding-block-lg);
+  padding-block-end: max(var(--section-padding-block-lg), env(safe-area-inset-bottom));
+  padding-inline-end: max(var(--section-padding-inline), env(safe-area-inset-right));
 }
 
 /* En móvil, la sidebar es un cajón sobre un velo (ver Sidebar.css). */

@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.0.5
+
+`AppShell`: `.app-shell__content` (el `<main>` donde cada app pinta sus
+páginas) gana el aire que le faltaba — 16px lateral y 32px arriba/abajo,
+reutilizando `--section-padding-inline` y `--section-padding-block-lg`
+(los mismos tokens que ya usa `Container` en las páginas públicas). Antes
+el contenido arrancaba pegado al borde superior-izquierdo en las 8 apps de
+la suite. El safe-area en los lados "end" se conserva con `max()`.
+
 ## v30.0.4
 
 `Sidebar`: el rail pasa a padding-inline simétrico (16px a ambos lados,
