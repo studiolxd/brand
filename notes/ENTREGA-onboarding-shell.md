@@ -415,6 +415,33 @@ Comprobado en el navegador con un botón de texto con icono
 - En superficie oscura, el botón y un `<a>` crudo dan exactamente los mismos
   valores computados (amarillo, línea de 0px en reposo): quedan unificados.
 
+### El carril del `Stepper` era invisible en las dos superficies
+
+`connector-color` usaba `{color.surface.secondary-on-light}` (grey-lightest
+sobre blanco, **1,12:1**) y su par oscuro `{color.surface.secondary-on-dark}`
+(grey-darkest sobre prusia, **1,89:1**). No estaban invertidos: los dos estaban
+mal. La causa es haber pintado una **línea** con un token de **superficie**, por
+analogía de nombre con el carril de `ProgressBar` —que sí es una barra con área,
+donde armonizar con el lienzo es justamente la gracia—. Es mío el error: el
+comentario del token lo confesaba y aun así se quedó.
+
+El arreglo hace que **carril y marca digan lo mismo con el mismo color**, en las
+dos superficies:
+
+| | carril | marca |
+| --- | --- | --- |
+| sin recorrer, claro | `{color.border.default-on-light}` | filete de la marca pendiente: el mismo |
+| sin recorrer, oscuro | `{color.text.on-dark}` | el mismo |
+| recorrido, claro | `{color.primary}` | relleno de la marca hecha: el mismo |
+| recorrido, oscuro | `{color.accent-2}` | el mismo |
+
+El rol de borde no se eligió por descarte: su propia descripción lo define como
+el de «divisores, separadores, **carriles y guías sin recorrer**». Y en oscuro el
+tramo recorrido se aparta a propósito de la derivación por defecto de una línea
+de estado (`color.text.on-dark`): con la marca ya en `accent-2`, dejar el carril
+en blanco lo separaría de los pasos y, además, lo volvería indistinguible del
+tramo sin recorrer.
+
 ---
 
 ## Lo que cambia FUERA del alta
