@@ -1,21 +1,28 @@
-/* La columna del alta: una sola, acotada a la medida de un formulario y
-   centrada en la banda del `main`. El aire entre bloques —barra, progreso,
-   paso y acciones— lo pone la rejilla, no los márgenes de lo que va dentro. */
+/* Dos anchos, no uno. El chrome —la barra de la marca— ocupa el ancho normal
+   de una página pública, el que le da el `Container` del `main`: el usuario
+   llega desde una pantalla de acceso donde la marca vive pegada al borde del
+   contenido, y moverla al centro se lee como cambio de aplicación. Lo único
+   que se acota y se centra es la columna del paso. */
 .onboarding-shell {
   display: grid;
   gap: var(--onboarding-shell-gap);
-  max-inline-size: var(--onboarding-shell-max-width);
-  margin-inline: auto;
 }
 
-/* La barra: la marca a un lado y los conmutadores al otro. Sin cabecera
-   pública —en el alta ya hay sesión—, es todo el chrome de la pantalla. */
+/* La barra de la marca. Sin cabecera pública —en el alta ya hay sesión—, es
+   todo lo que hay arriba. */
 .onboarding-shell__top {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--onboarding-shell-top-gap);
+}
+
+/* La columna del paso: lo único acotado a la medida de lectura y centrado en
+   la banda. El aire entre progreso, cuerpo y acciones lo pone su rejilla. */
+.onboarding-shell__step {
+  display: grid;
+  gap: var(--onboarding-shell-gap);
+  inline-size: 100%;
+  max-inline-size: var(--onboarding-shell-max-width);
+  margin-inline: auto;
 }
 
 /* La marca mide lo que le da la plantilla, no lo que diga su prop `size`:
@@ -28,6 +35,9 @@
    clase, así que una regla de aquí empataría y decidiría el orden de carga. El
    `block-size` cubre una marca de producto que no sea el `Logo` del sistema. */
 .onboarding-shell__brand {
+  /* El trazado del logotipo trae su propio espacio de seguridad: se descuenta
+     para que la marca caiga en la misma vertical que en la cabecera pública. */
+  margin-inline-start: var(--onboarding-shell-brand-margin-inline-start);
   --logo-height-sm:  var(--onboarding-shell-brand-height);
   --logo-height-md:  var(--onboarding-shell-brand-height);
   --logo-height-lg:  var(--onboarding-shell-brand-height);

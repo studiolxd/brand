@@ -60,9 +60,11 @@ export interface OnboardingShellProps {
  * - **Cabecera pública.** En el alta el usuario ya tiene sesión; no hay sitio
  *   al que navegar y una barra de marketing solo invitaría a irse. Solo quedan
  *   las dos ranuras de conmutadores.
- * - **Ancho de página.** La columna se acota a la medida de lectura y se
- *   centra: un formulario de cinco campos pegado al borde izquierdo de una
- *   pantalla de 27 pulgadas no se lee.
+ * - **Una sola columna a lo ancho de la página.** El chrome ocupa el ancho
+ *   normal de una página pública —la marca cae donde el ojo ya la espera de la
+ *   pantalla de acceso—, y lo que se acota a la medida de lectura y se centra
+ *   es solo la columna del paso: un formulario de cinco campos pegado al borde
+ *   izquierdo de una pantalla de 27 pulgadas no se lee.
  *
  * El pie de acciones fija la jerarquía en un solo sitio, para que ninguna
  * pantalla del alta la reinvente: la principal a la derecha, «Atrás» a su
@@ -93,19 +95,21 @@ export function OnboardingShell({
           </header>
         )}
 
-        {stepper && <div className="onboarding-shell__progress">{stepper}</div>}
+        <div className="onboarding-shell__step">
+          {stepper && <div className="onboarding-shell__progress">{stepper}</div>}
 
-        <div className="onboarding-shell__body">{children}</div>
+          <div className="onboarding-shell__body">{children}</div>
 
-        {hayAcciones && (
-          <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
-            {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
-            <div className="onboarding-shell__decisions">
-              {backAction}
-              {primaryAction}
+          {hayAcciones && (
+            <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
+              {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
+              <div className="onboarding-shell__decisions">
+                {backAction}
+                {primaryAction}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </PublicPageShell>
   );

@@ -2,8 +2,8 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-onboarding-shell-max-width: 768px; // Ancho máximo de la columna del alta: la medida estrecha de contenido del sistema (768px). Apunta a la escala de anchos de contenido, no al breakpoint del mismo valor: un punto de corte responsive y una medida de columna son cosas distintas y tienen que poder moverse por separado
-$lxd-onboarding-shell-gap: 2rem; // Aire entre los bloques de la columna: barra, progreso, paso y acciones
-$lxd-onboarding-shell-top-gap: 1rem; // Aire entre la marca y los conmutadores cuando la barra se parte en dos líneas
+$lxd-onboarding-shell-gap: 2rem; // Aire entre bloques, tanto del chrome (barra de marca, pie de preferencias) como de la columna del paso (progreso, cuerpo y acciones)
+$lxd-onboarding-shell-brand-margin-inline-start: calc(-1 * 1rem); // Desplazamiento lateral de la marca. Es el mismo de la cabecera pública: el trazado del logotipo trae su propio espacio de seguridad, y sin descontarlo la marca se ve descolgada del borde del contenido. Apuntando al de la cabecera, en el alta cae exactamente en la misma vertical que en la pantalla anterior
 $lxd-onboarding-shell-brand-height: calc(64px * 4 / 3); // Alto de la marca. Apunta al de la cabecera pública, no a un valor propio: el alta y el chrome público enseñan la misma marca al mismo tamaño, y tocar el de la cabecera mueve los dos
 $lxd-onboarding-shell-brand-height-compact: 3rem; // Alto de la marca en móvil (por debajo de md) — el mismo peldaño que la cabecera pública
 $lxd-onboarding-shell-brand-height-narrow: 2.5rem; // Alto de la marca en teléfono (por debajo de sm) — el mismo peldaño que la cabecera pública
