@@ -3,9 +3,11 @@ import { Container as e } from "./container.js";
 import { ErrorBoundary as t } from "./error-boundary.js";
 import { SiteShell as n } from "./site-shell.js";
 import { Fragment as r, jsx as i } from "react/jsx-runtime";
+import { forwardRef as a } from "react";
 //#region src/stories/templates/PublicPageShell/PublicPageShell.tsx
-function a({ children: a, header: o, footer: s, id: c = "main-content", shell: l = !0 }) {
+var o = a(function({ children: a, header: o, footer: s, id: c = "main-content", shell: l = !0 }, u) {
 	return l ? /* @__PURE__ */ i(n, {
+		ref: u,
 		header: o && /* @__PURE__ */ i(t, { children: o }),
 		footer: s && /* @__PURE__ */ i(t, { children: s }),
 		children: /* @__PURE__ */ i(e, {
@@ -16,6 +18,6 @@ function a({ children: a, header: o, footer: s, id: c = "main-content", shell: l
 			children: a
 		})
 	}) : /* @__PURE__ */ i(r, { children: a });
-}
+});
 //#endregion
-export { a as PublicPageShell };
+export { o as PublicPageShell };

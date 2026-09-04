@@ -121,30 +121,42 @@ var _ = {
 }, T = "\n  a:hover { text-decoration: none !important; }\n";
 //#endregion
 //#region src/stories/email/EmailLayout.tsx
-function E({ unsubscribeUrl: e, preferencesUrl: t, manageLabel: n = "Para dejar de recibir estos avisos,", unsubscribeLabel: r = t ? "Darse de baja" : "date de baja", manageBeforeLabel: i = " o ", managePreferencesLabel: a = "gestiona tus preferencias", manageAfterLabel: o = "." }) {
-	let s = /* @__PURE__ */ p(c, {
-		href: e,
-		style: w.link,
-		children: r
-	});
-	return t ? /* @__PURE__ */ m(d, {
+function E(e) {
+	if (e.reasonLabel !== void 0) return /* @__PURE__ */ m(d, {
 		style: w.footnote,
 		children: [
-			s,
-			i,
+			e.reasonLabel,
+			" ",
 			/* @__PURE__ */ p(c, {
-				href: t,
+				href: e.unsubscribeUrl,
 				style: w.link,
-				children: a
+				children: e.unsubscribeLabel
+			})
+		]
+	});
+	let { unsubscribeUrl: t, preferencesUrl: n, manageLabel: r = "Para dejar de recibir estos avisos,", unsubscribeLabel: i = n ? "Darse de baja" : "date de baja", manageBeforeLabel: a = " o ", managePreferencesLabel: o = "gestiona tus preferencias", manageAfterLabel: s = "." } = e, l = /* @__PURE__ */ p(c, {
+		href: t,
+		style: w.link,
+		children: i
+	});
+	return n ? /* @__PURE__ */ m(d, {
+		style: w.footnote,
+		children: [
+			l,
+			a,
+			/* @__PURE__ */ p(c, {
+				href: n,
+				style: w.link,
+				children: o
 			}),
-			o
+			s
 		]
 	}) : /* @__PURE__ */ m(d, {
 		style: w.footnote,
 		children: [
-			n,
+			r,
 			" ",
-			s
+			l
 		]
 	});
 }

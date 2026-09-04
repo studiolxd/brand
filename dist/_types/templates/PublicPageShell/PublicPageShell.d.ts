@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 export interface PublicPageShellProps {
     /** El contenido de la página: lo que va dentro del `main`. */
     children: ReactNode;
@@ -11,7 +11,8 @@ export interface PublicPageShellProps {
     /**
      * Con `false` no monta `SiteShell` ni el `main`: devuelve solo los
      * `children`, para pintarlos dentro de un `AppShell` que ya tiene su `main`.
-     * Por defecto `true`. Sin marco, `header`, `footer` e `id` no aplican.
+     * Por defecto `true`. Sin marco, `header`, `footer` e `id` no aplican —y
+     * tampoco el `ref`, porque no hay marco al que engancharlo.
      */
     shell?: boolean;
 }
@@ -28,5 +29,16 @@ export interface PublicPageShellProps {
  *
  * Con `shell={false}` devuelve solo el contenido: es lo que necesita una
  * plantilla pintada dentro de una app que ya tiene su marco y su `main`.
+ *
+ * **Reenvía el `ref` al nodo raíz del `SiteShell`** (`.site-shell`), el mismo
+ * que reenvía `SiteShell` por su cuenta. Ese nodo es el `container` de un panel
+ * flotante abierto desde la página —`ConsentPreferences`, un `Modal`, un
+ * `Sheet`—: su portal monta por defecto en `document.body`, que no es
+ * descendiente de `.site-shell` y por tanto no hereda el remapeo de superficie
+ * pública. Apuntarlo al `main` no serviría: el `main` es un `Container`
+ * acotado y con su aire, así que el panel quedaría metido dentro de la columna
+ * de contenido en vez de flotar sobre la página. Con `shell={false}` no hay
+ * marco y el `ref` se queda sin asignar: ahí el contenedor es el `AppShell` de
+ * la app.
  */
-export declare function PublicPageShell({ children, header, footer, id, shell }: PublicPageShellProps): import("react/jsx-runtime").JSX.Element;
+export declare const PublicPageShell: import("react").ForwardRefExoticComponent<PublicPageShellProps & import("react").RefAttributes<HTMLDivElement>>;

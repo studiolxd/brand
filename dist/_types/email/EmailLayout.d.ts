@@ -1,7 +1,15 @@
 import type { ReactNode } from 'react';
-export interface EmailOptOut {
+interface EmailOptOutBase {
     /** Baja directa, de un clic, de la categoría de aviso de este correo. */
     unsubscribeUrl: string;
+    /** Texto del enlace de baja. */
+    unsubscribeLabel?: string;
+}
+/**
+ * El pie de quien **tiene cuenta** en la suite: puede darse de baja y, si el
+ * producto tiene la pantalla, elegir categoría a categoría.
+ */
+export interface EmailOptOutAccount extends EmailOptOutBase {
     /**
      * Pantalla donde elegir categoría a categoría, para quien quiera conservar
      * algunas.
@@ -14,15 +22,49 @@ export interface EmailOptOut {
     preferencesUrl?: string;
     /** Frase que precede al enlace en el pie de un solo enlace. Por defecto, en castellano. */
     manageLabel?: string;
-    /** Texto del enlace de baja. Por defecto, en castellano. */
-    unsubscribeLabel?: string;
     /** Texto entre los dos enlaces del pie completo. Por defecto, en castellano. */
     manageBeforeLabel?: string;
     /** Texto del enlace a preferencias. Por defecto, en castellano. */
     managePreferencesLabel?: string;
     /** Texto tras el enlace a preferencias. Por defecto, en castellano. */
     manageAfterLabel?: string;
+    reasonLabel?: never;
 }
+/**
+ * El pie de quien **no tiene cuenta**: el invitado a una revisión, el que
+ * recibe el correo por una dirección suelta. Solo la baja.
+ *
+ * No es el mismo pie con una URL de menos. Al destinatario sin cuenta hay que
+ * decirle **por qué** le llega el correo —no se registró en nada— y no se le
+ * puede ofrecer «gestionar preferencias»: esa pantalla vive tras la sesión del
+ * hub y no puede abrirla. Por eso el tipo prohíbe `preferencesUrl` en vez de
+ * confiar en que nadie la pase.
+ */
+export interface EmailOptOutGuest extends EmailOptOutBase {
+    /**
+     * La frase que explica por qué recibe este correo. **Obligatoria y sin
+     * default castellano**: el motivo lo sabe el producto que manda el correo,
+     * no el DS, y sin él la baja llega sin contexto a quien nunca se dio de alta.
+     */
+    reasonLabel: string;
+    /**
+     * Texto del enlace de baja. **Obligatorio aquí, y sin default**: en este pie
+     * el enlace es una frase entera que cierra la anterior, así que ningún
+     * default del DS podría encajar con el motivo que escribe el consumidor.
+     */
+    unsubscribeLabel: string;
+    preferencesUrl?: never;
+    manageLabel?: never;
+    manageBeforeLabel?: never;
+    managePreferencesLabel?: never;
+    manageAfterLabel?: never;
+}
+/**
+ * El pie de baja, en sus dos formas: la de quien tiene cuenta
+ * (`EmailOptOutAccount`) y la de quien no (`EmailOptOutGuest`). Se distinguen
+ * por `reasonLabel`, que solo lleva la segunda.
+ */
+export type EmailOptOut = EmailOptOutAccount | EmailOptOutGuest;
 export interface EmailLayoutProps {
     /** La línea que el cliente enseña junto al asunto en la bandeja. */
     preview: string;
@@ -51,3 +93,4 @@ export interface EmailLayoutProps {
     children: ReactNode;
 }
 export declare function EmailLayout({ preview, appName, locale, assetsBaseUrl, logoAlt, optOut, children, }: EmailLayoutProps): import("react/jsx-runtime").JSX.Element;
+export {};

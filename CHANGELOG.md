@@ -7,6 +7,27 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.3.0
+
+Dos aperturas de API que desbloquean las dos últimas páginas públicas de la
+suite fuera del modelo (`(auth)` del hub y las nueve `unsubscribe`).
+
+- **`PublicPageShell` reenvía el `ref`** al nodo raíz del `SiteShell`, para que
+  sirva de `container` de un panel montado en portal (`ConsentPreferences`, un
+  `Modal` o un `Sheet` abiertos desde la página). Sin él, el portal monta en
+  `document.body`, que no es descendiente de `.site-shell` y **no hereda el
+  remapeo de superficie pública**: el panel saldría a talla de aplicación en una
+  página que lee a 20px. Va al marco y no al `main` porque el `main` es un
+  `Container` acotado, donde un panel quedaría dentro de la columna de contenido
+  en vez de flotar. Con `shell={false}` no hay marco y el `ref` se queda sin
+  asignar. API existente intacta.
+- **El pie del correo admite al destinatario sin cuenta**: solo la baja, sin la
+  invitación a gestionar preferencias. Los correos que van a quien no tiene
+  cuenta en la suite —los de revisión de invitados— no pueden ofrecer una
+  pantalla que hay detrás de la sesión. `preferencesUrl` queda **prohibida por
+  el tipo** en ese caso: el fallo sería silencioso, así que la red es que no
+  compile. Sin copy en el DS, como el resto del correo.
+
 ## v30.2.0
 
 Dos frentes: **el alta de la suite** y **los correos**, más dos correcciones
