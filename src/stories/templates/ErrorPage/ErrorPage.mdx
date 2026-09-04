@@ -5,7 +5,7 @@ import * as ErrorPageStories from "./ErrorPage.stories";
 
 # ErrorPage
 
-La plantilla de «algo ha salido mal»: `SiteShell` con cabecera y pie opcionales, y un `main` con **dos columnas** (`Columns`), mismo molde que `AuthPage`. Izquierda: `PageIntro` (título y frase) y el enlace de vuelta «Volver al inicio». Derecha: la frase de reintento y el `Button` «Reintentar» en bloque — todo lo pone el producto.
+La plantilla de «algo ha salido mal». El marco lo pone `PublicPageShell` —cabecera y pie opcionales, y el `main` acotado—; lo propio de esta plantilla es el contenido: **dos columnas** (`Columns`), mismo molde que `AuthPage`. Izquierda: `PageIntro` (título y frase) y el enlace de vuelta «Volver al inicio». Derecha: la frase de reintento y el `Button` «Reintentar» en bloque — todo lo pone el producto.
 
 <Canvas of={ErrorPageStories.SinCabeceraNiPie} />
 <Canvas of={ErrorPageStories.ConCabeceraYPie} />
@@ -37,7 +37,7 @@ export default function Error({ reset }) {
 
 ## Cabecera y pie, a salvo
 
-Aun así, `header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si la cabecera lanza al renderizar, desaparece ella y la página sigue con su mensaje y sus salidas.
+Aun así, `header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`), puesto por `PublicPageShell`: si la cabecera lanza al renderizar, desaparece ella y la página sigue con su mensaje y sus salidas.
 
 <Canvas of={ErrorPageStories.CabeceraQueFalla} />
 

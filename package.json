@@ -287,6 +287,10 @@
       "types": "./dist/_types/atoms/ErrorBoundary/ErrorBoundary.d.ts",
       "import": "./dist/error-boundary.js"
     },
+    "./public-page-shell": {
+      "types": "./dist/_types/templates/PublicPageShell/PublicPageShell.d.ts",
+      "import": "./dist/public-page-shell.js"
+    },
     "./not-found-page": {
       "types": "./dist/_types/templates/NotFoundPage/NotFoundPage.d.ts",
       "import": "./dist/not-found-page.js"

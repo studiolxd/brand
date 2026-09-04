@@ -1,13 +1,11 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { SiteShell } from '../../sections/SiteShell/SiteShell';
-import { Container } from '../../atoms/Container/Container';
 import { Stack } from '../../atoms/Stack/Stack';
 import { Columns } from '../../atoms/Columns/Columns';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
-import { ErrorBoundary } from '../../atoms/ErrorBoundary/ErrorBoundary';
+import { PublicPageShell } from '../PublicPageShell/PublicPageShell';
 
 export interface ErrorPageProps {
   /** El título («Error»): `Heading` de nivel 1 vía `PageIntro`, columna izquierda. */
@@ -38,33 +36,24 @@ export interface ErrorPageProps {
  * Plantilla de «algo ha salido mal»: dos columnas, mismo molde que `AuthPage`
  * (`Columns` de dos celdas). Izquierda: título, frase y el enlace de vuelta.
  * Derecha: la frase de reintento y el botón en bloque, como las acciones de un
- * formulario de acceso. Cabecera y pie, si se pasan, van cada uno en su
- * `ErrorBoundary`: la página de error no puede depender del layout que pudo
- * fallar. Con `shell={false}` devuelve solo el contenido, para una app que ya
- * tiene su `main`.
+ * formulario de acceso. El marco lo pone `PublicPageShell`, así que cabecera y
+ * pie van cada uno en su `ErrorBoundary`: la página de error no puede depender
+ * del layout que pudo fallar. Con `shell={false}` devuelve solo el contenido,
+ * para una app que ya tiene su `main`.
  */
 export function ErrorPage({ title, description, homeAction, retryDescription, retryAction, header, footer, id = 'main-content', shell = true }: ErrorPageProps) {
-  const content = (
-    <Columns className="error-page__content">
-      <Stack>
-        <PageIntro title={title} description={description} />
-        {homeAction}
-      </Stack>
-      <Stack>
-        {retryDescription && <Paragraph size="large">{retryDescription}</Paragraph>}
-        {retryAction}
-      </Stack>
-    </Columns>
-  );
-  if (!shell) return content;
   return (
-    <SiteShell
-      header={header && <ErrorBoundary>{header}</ErrorBoundary>}
-      footer={footer && <ErrorBoundary>{footer}</ErrorBoundary>}
-    >
-      <Container as="main" id={id} tabIndex={-1} space="xl">
-        {content}
-      </Container>
-    </SiteShell>
+    <PublicPageShell header={header} footer={footer} id={id} shell={shell}>
+      <Columns className="error-page__content">
+        <Stack>
+          <PageIntro title={title} description={description} />
+          {homeAction}
+        </Stack>
+        <Stack>
+          {retryDescription && <Paragraph size="large">{retryDescription}</Paragraph>}
+          {retryAction}
+        </Stack>
+      </Columns>
+    </PublicPageShell>
   );
 }

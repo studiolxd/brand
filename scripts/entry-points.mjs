@@ -140,6 +140,7 @@ export const entryPoints = {
   'site-footer':         'src/stories/sections/SiteFooter/SiteFooter.tsx',
   'highlight':           'src/stories/sections/Highlight/Highlight.tsx',
   // Templates
+  'public-page-shell':   'src/stories/templates/PublicPageShell/PublicPageShell.tsx',
   'not-found-page':      'src/stories/templates/NotFoundPage/NotFoundPage.tsx',
   'error-page':          'src/stories/templates/ErrorPage/ErrorPage.tsx',
   'chat-shell':          'src/stories/templates/ChatShell/ChatShell.tsx',
@@ -155,7 +156,7 @@ export const clientComponents = new Set([
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form', 'hero',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'steps',
-  'app-shell', 'error-boundary', 'not-found-page', 'error-page',
+  'app-shell', 'error-boundary', 'public-page-shell', 'not-found-page', 'error-page',
   'avatar',
   'card',
   'carousel',
