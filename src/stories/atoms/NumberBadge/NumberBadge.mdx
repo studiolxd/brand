@@ -31,6 +31,7 @@ Los colores de marca (`primary`, `accent-1`, `accent-2`, `support-1`, `support-2
 
 - El texto visible ya es su nombre; con `aria-label` se le da el contexto completo («3 notificaciones sin leer»), que es lo que conviene cuando el badge va pegado a un icono o un avatar.
 - No es un control: no se enfoca ni se pulsa. Si el número abre algo, el control es lo que lo rodea.
+- Cuando el número ya está en el nombre accesible de quien lo lleva encima —la campana de `NotificationButton`, el disparador del `FloatingDock`—, el badge va con `aria-hidden`: sin él el lector de pantalla diría la cifra dos veces.
 
 ## Tokens
 
