@@ -36,6 +36,8 @@ La jerarquía se decide aquí una vez, para que ninguna pantalla del alta la rei
 
 El aire que separa el pie del cuerpo del paso es el del pie de un `Form` (`--form-actions-margin-block-start`), no el de los bloques del alta (`--onboarding-shell-gap`): los dos pies se separan igual y se mueven juntos. Encima va el aire extra propio del alta (`--onboarding-shell-actions-padding-block-start`), el que sustituye a la línea que aquí no hay.
 
+**La talla la impone el pie, no cada pantalla.** Las tres acciones salen a `lg` —la talla de control de la superficie pública— porque el pie las envuelve en el contexto de talla del sistema (`FormSizeContext`, el mismo con el que un `Form` reparte talla a sus campos y un `Hero` a sus acciones). Es el mecanismo del repo para esto: `surface-public.css` remapea tipografía, no tallas de control, así que sin él cada `call-site` tenía que acordarse de escribir `size="lg"` y el alta acababa con un formulario grande y un pie mediano en la misma pantalla. Pasarle `size` a un botón concreto sigue mandando, como en `Hero`: el contexto pone el valor por defecto, no un candado.
+
 Por debajo de `md` el pie pasa a columna: «Atrás» y la principal a todo el ancho, y la salida centrada debajo.
 
 El marcado va en el orden del renglón —«Atrás», la salida, la principal—, que es también el del foco: `Tab` recorre siempre «Atrás» → «Omitir por ahora» → «Continuar», en escritorio y en móvil. Lo único que cambia entre tamaños es la dirección de lectura del par de decisiones, resuelto con `column-reverse` sobre ese par —igual que `.form__actions--block` en el `Form`— y sin `order` ni `row-reverse` sobre la fila (WCAG 2.4.3, «orden de foco»).

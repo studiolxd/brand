@@ -59,9 +59,9 @@ const meta: Meta<typeof OnboardingShell> = {
     switchers: conmutadores,
     stepper: <Stepper steps={PASOS} current={1} />,
     children: cuerpo,
-    backAction: <Button variant="outline" size="lg">Atrás</Button>,
-    primaryAction: <Button variant="primary" size="lg">Continuar</Button>,
-    exitAction: <Button variant="text" size="lg">Omitir por ahora</Button>,
+    backAction: <Button variant="outline">Atrás</Button>,
+    primaryAction: <Button variant="primary">Continuar</Button>,
+    exitAction: <Button variant="text">Omitir por ahora</Button>,
   },
   argTypes: {
     brand: { table: { disable: true } },
@@ -91,7 +91,7 @@ export const UltimoPaso: Story = {
   name: 'Último paso',
   args: {
     stepper: <Stepper steps={PASOS} current={3} />,
-    primaryAction: <Button variant="primary" size="lg">Terminar</Button>,
+    primaryAction: <Button variant="primary">Terminar</Button>,
     exitAction: undefined,
   },
 };
@@ -128,7 +128,7 @@ export const FlujoDeUnPaso: Story = {
     stepper: <Stepper steps={[{ id: 'espera', label: 'Sala de espera' }]} current={0} />,
     backAction: undefined,
     primaryAction: undefined,
-    exitAction: <Button variant="text" size="lg">Cerrar sesión</Button>,
+    exitAction: <Button variant="text">Cerrar sesión</Button>,
   },
 };
 
@@ -172,6 +172,12 @@ export const Contrato: Story = {
     const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
     await expect(within(acciones).getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
     await expect(within(acciones).getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
+    // La talla la impone el pie, no el call-site: las tres acciones salen a la
+    // misma talla que los campos del paso aunque nadie les pase `size`.
+    for (const rotulo of ['Atrás', 'Continuar', 'Omitir por ahora']) {
+      await expect(within(acciones).getByRole('button', { name: rotulo })).toHaveClass('button--lg');
+    }
+    await expect(canvasElement.querySelector('.onboarding-shell__body .input')).toHaveClass('input--lg');
     // El marcado va en el orden del renglón de escritorio —«Atrás», la salida
     // y, cerrándolo, la principal—, que es también el del foco en las dos
     // disposiciones (WCAG 2.4.3): la columna de móvil se invierte sobre el par

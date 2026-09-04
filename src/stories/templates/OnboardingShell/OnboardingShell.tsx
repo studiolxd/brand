@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 import { PublicPageShell } from '../PublicPageShell/PublicPageShell';
 import { Container } from '../../atoms/Container/Container';
+import { FormSizeContext } from '../../constants/form-size';
 import './OnboardingShell.css';
 
 export interface OnboardingShellProps {
@@ -82,6 +83,12 @@ export interface OnboardingShellProps {
  * el mismo criterio que el pie de un `Form`: la principal, la última. En móvil
  * la principal sube a todo el ancho y la salida cae centrada debajo, como en
  * `Form` con acciones en bloque.
+ *
+ * **Y también la talla**: el pie reparte `lg` a lo que reciba por el contexto
+ * de talla del sistema (`FormSizeContext`, el mismo que usa `Form` con sus
+ * campos y `Hero` con sus acciones), así que las acciones del paso salen a la
+ * talla de la superficie pública sin que cada pantalla tenga que acordarse de
+ * pedirla — y a la misma que los campos del formulario que tienen encima.
  */
 export function OnboardingShell({
   children,
@@ -133,13 +140,15 @@ export function OnboardingShell({
 
           {hayAcciones && (
             <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
-              {backAction}
-              {(exitAction || primaryAction) && (
-                <div className="onboarding-shell__decisions">
-                  {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
-                  {primaryAction}
-                </div>
-              )}
+              <FormSizeContext.Provider value="lg">
+                {backAction}
+                {(exitAction || primaryAction) && (
+                  <div className="onboarding-shell__decisions">
+                    {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
+                    {primaryAction}
+                  </div>
+                )}
+              </FormSizeContext.Provider>
             </div>
           )}
         </div>
