@@ -41,18 +41,47 @@ Por debajo de `md` no caben cuatro etiquetas en fila, así que el progreso degra
 
 <Canvas of={StepperStories.UnSoloPaso} />
 
-## Volver atrás sí, saltar adelante no
+## Qué pasos se pueden alcanzar
 
-Con `onStepSelect` los pasos **ya completados** se vuelven botones: se puede volver a corregir el nombre que se puso dos pantallas atrás. El paso actual y los pendientes nunca son interactivos, tampoco con el callback puesto: un flujo no se salta hacia delante, porque los pasos que vienen dependen de lo que aún no se ha rellenado. Sin `onStepSelect`, el progreso solo informa.
+Con `onStepSelect` los pasos alcanzables se vuelven botones. Sin el callback, el progreso solo informa.
+
+**Por defecto son alcanzables los completados**: volver a corregir el nombre que se puso dos pantallas atrás siempre se puede.
 
 <Canvas of={StepperStories.VolverAtras} />
+
+Hacia delante ya no es blanco o negro, porque depende del flujo y no del componente: hay altas donde el orden no obliga y otras donde el paso 4 no existe hasta que el 2 ha creado la organización. Eso no lo puede adivinar el `Stepper` —abrirlos todos llevaría al usuario a un paso que no puede completarse—, así que **lo declara cada paso** con `reachable`:
+
+```tsx
+<Stepper
+  current={paso}
+  onStepSelect={(index) => setPaso(index)}
+  steps={[
+    { id: 'perfil', label: 'Perfil' },
+    { id: 'organizacion', label: 'Organización' },
+    { id: 'logotipo', label: 'Logotipo', reachable: true },        // se puede rellenar cuando sea
+    { id: 'invitaciones', label: 'Invitaciones', reachable: hayOrg }, // no existe sin la organización
+  ]}
+/>
+```
+
+- Sin declararlo, lo de siempre: alcanzables los completados.
+- `reachable: true` abre un pendiente; `reachable: false` cierra un completado (un paso hecho que ya no se puede tocar).
+- **El paso actual nunca es alcanzable**, se declare lo que se declare: ya se está en él, y un botón que no lleva a ningún sitio solo añade una parada al tabulador.
+- Alcanzable no es un estado. Un pendiente abierto sigue pintándose pendiente —marca hueca, etiqueta secundaria—: lo que cambia es que se puede pulsar, no dónde está el usuario.
+- Un paso al que aún no se puede llegar es **inerte**, no un botón deshabilitado: un `<span>` sin `role`, sin foco y sin cursor de mano. Un deshabilitado promete algo que no se puede hacer y ensucia el recorrido de teclado; un destino que todavía no existe simplemente no es un destino. Y no lleva señal nueva: el estado del paso ya se ve.
+
+La regla habitual del producto es «hacia delante solo con el paso actual completo»: mientras quede un campo obligatorio por rellenar, los siguientes van con `reachable: false`, y en cuanto el paso valida se abren. Esa decisión es del flujo, que es quien conoce sus campos y sus dependencias; el `Stepper` no valida nada, obedece.
+
+Va en el paso y no en una prop del componente porque es un hecho de ese paso, como su etiqueta: el flujo ya construye la lista con su propio estado, y una función aparte sería una segunda fuente de verdad viviendo lejos de los datos que la deciden.
+
+<Canvas of={StepperStories.HaciaDelante} />
 
 ## Accesibilidad
 
 - Es un `ol` de verdad: el orden y el total los anuncia el navegador, no una cadena escrita a mano.
 - El paso actual lleva `aria-current="step"`.
 - El estado de cada paso se anuncia con un texto oculto («Completado», «Paso actual», «Pendiente»), traducible por `labels`: sin él, el estado viviría solo en el color y en la forma.
-- Un paso alcanzable es un `<button>` nativo, con su anillo de foco.
+- Un paso alcanzable es un `<button>` nativo, con su anillo de foco. Uno inerte no es un botón ni recibe foco: es un `<span>`, así que el tabulador solo se para en lo que lleva a algún sitio.
 
 ## En superficie oscura
 
