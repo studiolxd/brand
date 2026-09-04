@@ -16,10 +16,12 @@
 }
 
 /* La columna del paso: lo único acotado a la medida de lectura y centrado en
-   la banda. El aire entre progreso, cuerpo y acciones lo pone su rejilla. */
+   la banda. Sin `gap`: sus tres tramos no miden lo mismo. El del progreso al
+   cuerpo es el aire entre bloques del alta y lo pone el propio progreso por
+   debajo —así, cuando el `Stepper` no se pinta, no queda hueco—; el del cuerpo
+   al pie de acciones es el del formulario y lo pone el pie por arriba. */
 .onboarding-shell__step {
   display: grid;
-  gap: var(--onboarding-shell-gap);
   inline-size: 100%;
   max-inline-size: var(--onboarding-shell-max-width);
   margin-inline: auto;
@@ -92,9 +94,15 @@
   gap: var(--onboarding-shell-switchers-gap);
 }
 
+/* El progreso trae su propio aire por debajo, el de cualquier bloque del alta. */
+.onboarding-shell__progress {
+  margin-block-end: var(--onboarding-shell-gap);
+}
+
 /* La ranura del progreso se monta siempre, pero el `Stepper` no se pinta en un
    flujo de un solo paso: sin contenido, la ranura sale de la rejilla y no deja
-   hueco ni gap. Así el producto pasa el progreso sin condicionales. */
+   hueco ni aire, porque se lo lleva con ella. Así el producto pasa el progreso
+   sin condicionales. */
 .onboarding-shell__progress:empty {
   display: none;
 }
@@ -105,12 +113,15 @@
    `.form__actions--block`. Ni `order` ni `row-reverse`: el recorrido del
    teclado es siempre «Atrás» → salida → principal, en los dos tamaños.
 
-   De partida, en columna y a todo el ancho. */
+   De partida, en columna y a todo el ancho. El aire que lo separa del cuerpo
+   del paso es el del pie de un `Form`, no el `gap` de la rejilla del alta: los
+   dos pies se mueven juntos. Encima, el aire extra propio. */
 .onboarding-shell__actions {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: var(--onboarding-shell-actions-gap);
+  margin-block-start: var(--onboarding-shell-actions-margin-block-start);
   padding-block-start: var(--onboarding-shell-actions-padding-block-start);
 }
 

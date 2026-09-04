@@ -23,6 +23,8 @@ La jerarquía se decide aquí una vez, para que ninguna pantalla del alta la rei
 - `exitAction` — la salida («Omitir por ahora», «Cerrar sesión»), en `text` y **pegada a la principal**, a su izquierda. Al no tener caja no compite con ella: el peso lo pone la forma, no la distancia.
 - `primaryAction` — la decisión del paso, **la última**, donde termina la lectura. Es el mismo criterio que el pie de un `Form`: en escritorio la acción de más peso cierra el renglón por la derecha.
 
+El aire que separa el pie del cuerpo del paso es el del pie de un `Form` (`--form-actions-margin-block-start`), no el de los bloques del alta (`--onboarding-shell-gap`): los dos pies se separan igual y se mueven juntos. Encima va el aire extra propio del alta (`--onboarding-shell-actions-padding-block-start`), el que sustituye a la línea que aquí no hay.
+
 Por debajo de `md` el pie pasa a columna: «Atrás» y la principal a todo el ancho, y la salida centrada debajo.
 
 El marcado va en el orden del renglón —«Atrás», la salida, la principal—, que es también el del foco: `Tab` recorre siempre «Atrás» → «Omitir por ahora» → «Continuar», en escritorio y en móvil. Lo único que cambia entre tamaños es la dirección de lectura del par de decisiones, resuelto con `column-reverse` sobre ese par —igual que `.form__actions--block` en el `Form`— y sin `order` ni `row-reverse` sobre la fila (WCAG 2.4.3, «orden de foco»).
