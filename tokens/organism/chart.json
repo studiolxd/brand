@@ -20,7 +20,7 @@
     "diverging-warm-1": { "$value": "{color.chart.diverging-warm-1}", "$type": "color", "$description": "Divergente, brazo cálido junto al neutro" },
     "diverging-warm-2": { "$value": "{color.chart.diverging-warm-2}", "$type": "color", "$description": "Divergente, brazo cálido intermedio" },
     "diverging-warm-3": { "$value": "{color.chart.diverging-warm-3}", "$type": "color", "$description": "Divergente, brazo cálido extremo" },
-    "diverging-neutral": { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada»" },
+    "diverging-neutral": { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada». Es el único dato que se viste con un rol de SUPERFICIE, y a propósito: el cero es el punto de MENOR saliencia de la rampa, así que su trabajo es retirarse hacia el lienzo, no contrastar con él. Sobre blanco queda en 1,12:1, por debajo de los seis pasos de los dos brazos (2,49:1 el más flojo)" },
     "diverging-cool-1": { "$value": "{color.chart.diverging-cool-1}", "$type": "color", "$description": "Divergente, brazo frío junto al neutro" },
     "diverging-cool-2": { "$value": "{color.chart.diverging-cool-2}", "$type": "color", "$description": "Divergente, brazo frío intermedio" },
     "diverging-cool-3": { "$value": "{color.chart.diverging-cool-3}", "$type": "color", "$description": "Divergente, brazo frío extremo" },
@@ -97,7 +97,7 @@
     "surface-dark-label-color":  { "$value": "{color.text.muted-on-dark}",  "$type": "color", "$description": "Rótulos — surface-dark" },
     "surface-dark-muted-color":  { "$value": "{color.text.muted-on-dark}",  "$type": "color", "$description": "Serie apagada — surface-dark" },
     "surface-dark-crosshair-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Filete del puntero — surface-dark" },
-    "surface-dark-diverging-neutral": { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Punto medio divergente — surface-dark" },
+    "surface-dark-diverging-neutral": { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Punto medio divergente — surface-dark. No basta con invertir el gris: sobre prusia, el gris claro de la superficie clara sería el color MÁS brillante de la escala y el cero gritaría más que los extremos. La superficie secundaria oscura mantiene el criterio: 1,89:1 sobre el lienzo, el mínimo de la rampa (el paso más flojo de los brazos es 3,26:1). Y sigue sin confundirse ni con el fondo (1,89:1 es una mancha visible; el neutro claro está más cerca de su lienzo, a 1,12:1) ni con la serie apagada de «Otros» (5,75:1 entre los dos)" },
 
     "surface-dark-series-1": { "$value": "{color.chart.series-1-on-dark}", "$type": "color", "$description": "Ranura 1 — surface-dark" },
     "surface-dark-series-2": { "$value": "{color.chart.series-2-on-dark}", "$type": "color", "$description": "Ranura 2 — surface-dark" },
