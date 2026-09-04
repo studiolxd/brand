@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tokens.tsbuildinfo",
+    "rootDir": "src/tokens",
+    "declarationDir": "./dist/_types/tokens"
+  },
+  "include": ["src/tokens/tokens.ts"]
+}

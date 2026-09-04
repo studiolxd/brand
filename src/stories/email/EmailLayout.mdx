@@ -1,0 +1,212 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as EmailLayoutStories from "./EmailLayout.stories";
+import { EmailLayout } from "./EmailLayout";
+
+<Meta of={EmailLayoutStories} />
+
+# EmailLayout
+
+El marco de todo correo de la suite: el documento, la fuente, la banda de marca, la caja del mensaje y el pie de baja. Lo que va dentro —lo que el correo *dice*— es de quien lo manda: las plantillas concretas (verificar el correo, restablecer la contraseña, exportación lista) son producto y viven en su repo, no aquí.
+
+Se importa desde su propio punto de entrada, no del barril:
+
+```tsx
+import { EmailLayout, EmailButton, EmailHeading, EmailNote, EmailText } from '@studiolxd/brand/email';
+```
+
+Va aparte porque se construye sobre [react-email](https://react.email), que es un **peer opcional**: si colgara del barril, una app que solo importa un `Button` tendría que instalarlo para poder resolver el import.
+
+<Canvas of={EmailLayoutStories.Transaccional} />
+
+## Un correo no es una página
+
+Casi todo lo que el sistema da por hecho en una página no existe en una bandeja de entrada, y de ahí salen las tres reglas que gobiernan este rincón:
+
+- **No hay hoja de estilos ni custom properties.** Outlook no resuelve `var()`, así que cada valor tiene que ir **inline y ya resuelto** en tiempo de render. Por eso los estilos del correo son objetos JS (`emailStyles`) y no un `.css`, y por eso existe el export [`@studiolxd/brand/tokens`](/docs/foundations-tokens-desde-javascript--docs): es lo que permite que el correo beba de los mismos tokens que el resto del sistema en vez de copiarlos a mano.
+- **No hay `rem`.** La escala del sistema está en `rem`, que fuera del navegador no significa nada: Outlook lo resuelve contra su propio contexto y el correo sale con otro tamaño. Los tokens del correo llegan en **píxeles absolutos**.
+- **No hay propiedades lógicas.** Outlook de escritorio renderiza con el motor de Word, que no conoce `margin-block` ni `padding-inline`. Es la única excepción del repo a la regla de ejes lógicos: los **tokens** siguen la convención (`padding-block`, `padding-inline`), pero la propiedad CSS de destino va en físicas.
+
+## El correo lee a la talla pública
+
+Un correo es parte **pública** de la suite, como la web y las páginas de acceso.
+En el DS eso es la superficie de `SiteShell`: cuerpo a 20px, escala de títulos un
+peldaño arriba y **controles en `lg`**. Todo lo que el correo escribe —cuerpo,
+título, letra menor y botón— sale de ahí, no de la escala de aplicación.
+
+Hay además una razón del propio medio: el correo se lee sobre todo en el móvil, y
+una nota de baja a 13px es incómoda de leer y de tocar.
+
+El remapeo de la superficie pública se genera como CSS a partir de los tokens
+`site-shell.*`, y un correo no consume CSS. Así que los tokens del correo apuntan
+a **esos mismos tokens fuente** (`{site-shell.text-font-size}`,
+`{site-shell.heading-size-4}`, `{site-shell.paragraph-small-font-size}`,
+`{button.lg-font-size}`, `{button.lg-padding-inline}`), nunca a los
+`--site-shell-*` ya remapeados ni a valores escritos a mano.
+
+La única medida que no puede copiarse de la talla `lg` es el **padding vertical
+del botón**: el botón web reserva su altura con `button.lg-height` y centra el
+contenido, y en un correo no hay altura de control que valga — hay que
+construirla con padding, y para eso se coge el peldaño de la escala de espaciado
+que deja el botón en 56px, por encima de los 48px del `lg` web.
+
+### El botón va a ancho completo
+
+`{button.block-width}`, **siempre y sin media query**. Outlook las ignora, así
+que una solución que solo se aplicara en el móvil no llegaría justo donde hace
+falta: una solución a medias es peor que ninguna.
+
+En los 600px del correo se lee bien, y en el móvil arregla dos cosas de golpe —
+la etiqueta cabe en una línea y el objetivo táctil es el botón entero, no una
+pastilla en medio de la columna.
+
+Va **sin padding horizontal**, y no es un descuido: siendo de ancho completo el
+botón ya no se mide a sí mismo —lo mide la columna—, así que el inset de la
+talla `lg` (64px por lado) no añadiría aire, solo estrecharía la caja del texto.
+Con él, «Descargar el archivo» partía en dos líneas a 375px. De paso el botón
+deja de depender de `box-sizing`, que el motor de Word de Outlook no entiende.
+
+Comprobado a 320, 375 y 600px: el botón ocupa exactamente el ancho de la
+columna y la etiqueta cabe en una línea en los tres.
+
+**El ancho no sube con la talla.** Los 600px del contenedor son el estándar del
+medio, no una medida de nuestra retícula, y se quedan como están.
+
+## La marca: un PNG, no el isotipo vectorial
+
+La cabecera es una imagen, y cada decisión detrás de ella es una cicatriz de un cliente concreto:
+
+| Decisión | Por qué |
+| --- | --- |
+| PNG, no SVG | Gmail y Outlook no renderizan SVG: el correo saldría sin marca en los dos clientes que más pesan |
+| Blanco horneado dentro, con su aire | Outlook Windows y Gmail Android invierten colores por su cuenta; un `background-color` blanco no sobrevive a esa inversión, una imagen sí — es lo que deja al logotipo a salvo aunque el correo no gestione tema |
+| Exportado a 2x, con `width`/`height` explícitos | Nítido en pantallas densas, y sin que el cliente tenga que adivinar el hueco mientras carga |
+| `alt` con el nombre de quien manda | Muchos clientes bloquean las imágenes de serie: sin `alt`, la cabecera sale en blanco |
+| Nombre versionado (`logo-v1.png`) | Gmail proxea y cachea las imágenes y no admite forzar un refresco: cada versión tiene que ser una URL nueva |
+
+El PNG lo genera `pnpm build:email-assets` a partir de `src/assets/logomark.svg`, con las medidas que dicen los tokens `--email-logo-mark-size` y `--email-logo-padding`.
+
+### Dónde se aloja
+
+La URL base es la prop `assetsBaseUrl`, y su valor por defecto es `https://slxd.app/brand/email` — el dominio de la marca, el más estable a largo plazo. **Es un valor por defecto, no una constante escondida**: un consumidor que sirva los assets en otro sitio lo cambia sin tocar el DS.
+
+De esa base cuelgan dos ficheros, el logotipo y la cara latina de la sans. Los dos los prepara `pnpm build:email-assets` en `public/email/`, que es lo que hay que publicar tal cual:
+
+```
+https://slxd.app/brand/email/logo-v1.png
+https://slxd.app/brand/email/google-sans-flex-normal-latin-v1.woff2
+```
+
+## Por qué no hay modo oscuro
+
+El correo es **solo claro**. No es que no se haya probado: el mecanismo se
+retiró — la paleta oscura, la media query `prefers-color-scheme`, las `meta` que
+la anunciaban y las clases (`.email-body`, `.email-surface`, `.email-text`…) que
+existían solo para que esas reglas pudieran engancharse.
+
+**Esto no impide que Outlook Windows o Gmail Android inviertan los colores por
+su cuenta.** Lo hacen igual, y no hay forma de pedirles que no. Lo que se deja de
+hacer es *gestionarlo*: con fondo blanco y tinta oscura, el resultado invertido
+sigue siendo legible, y el logotipo lleva su blanco horneado dentro, así que
+aguanta la inversión sin quedarse sin marca.
+
+Lo que se gana: un solo juego de valores, ninguna regla que dependa de que el
+cliente conserve el `<body>` —que es por donde se rompía— y una hoja de estilos
+que se queda en una línea, la única cosa que un correo no puede llevar inline:
+
+```css
+a:hover { text-decoration: none !important; }
+```
+
+## Pesos
+
+La prosa va en el peso normal del sistema (`--font-weight-default`, 300). **El
+único elemento con peso fuerte es el título** (`--font-weight-emphasis`, 500).
+El botón conserva el suyo de botón, el de `Button primary`.
+
+Merece un aviso porque aquí hubo un fallo silencioso: la sans es una fuente
+variable y `fonts.css` la declara con el **rango** del eje, `1 1000`. La
+`@font-face` del correo la declaraba con dos caras, una por peso, apuntando al
+mismo fichero — así el navegador se queda sin eje que variar, empareja la prosa
+con la cara del título y el correo sale entero en negrita. Una sola cara con el
+rango, como en `fonts.css`.
+
+## El botón lleva su enlace de respaldo
+
+Todo correo con acción lleva, debajo del botón, **la misma dirección en texto**
+para copiar y pegar. No es un adorno de redacción: hay clientes que destrozan
+los botones, y la gente reenvía correos y los abre en otro dispositivo. El
+enlace en texto es el plan B del correo.
+
+Las dos piezas son **un solo componente** a propósito — `EmailButton` pinta las
+dos — para que viajen juntas y ninguna plantilla pueda dejarse la segunda:
+
+```tsx
+<EmailButton
+  href={url}
+  fallbackLabel={t('verifyEmail.copyPaste')}
+>
+  {t('verifyEmail.button')}
+</EmailButton>
+```
+
+Y sale así:
+
+> **Verifica tu dirección de correo**
+>
+> ¡Gracias por registrarte! Pulsa en el botón para verificar tu dirección de correo y activar tu cuenta.
+>
+> **[ Verificar correo ]**
+>
+> O copia y pega esta dirección en el navegador: `https://…`
+>
+> Este enlace caduca en 24 horas. Si no creaste una cuenta, puedes ignorar este mensaje.
+
+Cuatro decisiones que la sostienen:
+
+- **`fallbackLabel` es obligatoria y no tiene default castellano**, la única
+  prop de texto del DS que no lo tiene. El correo vive en seis idiomas que
+  conoce `mailer` y no el DS; y siendo obligatoria, no hay forma de renderizar
+  un botón sin su respaldo.
+- **La dirección se enseña entera y como texto plano**, no dentro de un `<a>`
+  ni acortada: lo que se le pide es leerla y copiarla, así que no puede depender
+  de un enlace que un cliente pueda vaciar o quitar. Los clientes que autoenlazan
+  lo harán solos.
+- **Corte de palabra, no `overflow`.** Una URL con token no cabe en 600px.
+  `word-break: break-all` para los clientes modernos y `word-wrap: break-word`
+  —el nombre viejo— para el motor de Word de Outlook. Con `overflow` se
+  escondería justo lo que hay que copiar. Comprobado a 320, 375 y 600px: la
+  dirección parte dentro de la columna y no aparece barra horizontal.
+- **El aire lo reparte el bloque.** Son tres piezas seguidas —botón, respaldo y
+  nota— y el aire tiene que decir cuáles van juntas: 12px entre el botón y su
+  respaldo, que son la misma acción, y 24px antes de la nota. El margen inferior
+  lo lleva el respaldo, que es quien cierra el bloque.
+
+## La caja
+
+Tres superficies, tres tokens:
+
+| | Token | Valor |
+| --- | --- | --- |
+| Fondo general, fuera de la caja | `--email-canvas-bg` | Blanco |
+| Fondo de la caja | `--email-bg` | Blanco |
+| Borde de la caja | `--email-border-color` | La tinta del sistema sobre superficie clara |
+
+## El pie de baja
+
+`optOut` se omite en el correo **transaccional**, el que no pertenece a ninguna categoría de aviso (verificar el correo, restablecer la contraseña). Con `unsubscribeUrl` a secas sale el pie de un enlace; añadiendo `preferencesUrl`, el pie completo.
+
+<Canvas of={EmailLayoutStories.ConPreferencias} />
+
+La frase va partida en varias props en vez de una sola con un hueco `{enlace}`: los idiomas no coinciden en si hay texto después del enlace, y una prop de texto solo puede devolver una cadena.
+
+## Props
+
+<ArgTypes of={EmailLayout} />
+
+## Tokens
+
+Los del correo viven en `tokens/component/email.json` y **todos referencian a un token existente** menos uno: `--email-max-width`, los 600px que asumen el panel de lectura de Outlook y el resto de clientes, que no es una medida de nuestra retícula.
+
+A diferencia del resto de componentes, estos tokens **no salen a CSS ni a SCSS**: no hay CSS de correo que los consuma. Salen a `emailTokens.ts`, que genera `pnpm build:tokens` junto a los componentes, ya resueltos y en píxeles.
+
+Y no hay pares de tema: al ser solo claro, cada color es un valor único. El lienzo (`--email-canvas-bg`) y la caja (`--email-bg`) son tokens distintos aunque hoy valgan lo mismo, porque son dos superficies distintas; el borde (`--email-border-color`) es el rol de tinta sobre superficie clara.

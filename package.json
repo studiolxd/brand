@@ -588,6 +588,15 @@
       "types": "./dist/_types/molecules/UserMessage/UserMessage.d.ts",
       "import": "./dist/user-message.js"
     },
+    "./email": {
+      "types": "./dist/_types/email/Email.d.ts",
+      "import": "./dist/email.js"
+    },
+    "./tokens": {
+      "types": "./dist/_types/tokens/tokens.d.ts",
+      "import": "./dist/tokens.js"
+    },
+    "./tokens.json": "./src/tokens/tokens.json",
     "./tokens.css": "./dist/tokens.css",
     "./user-menu": {
       "types": "./dist/_types/molecules/UserMenu/UserMenu.d.ts",
@@ -607,13 +616,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && node scripts/post-build.mjs",
+    "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && tsc -p tsconfig.tokens.json && node scripts/post-build.mjs",
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
     "build:fonts-css": "node scripts/build-fonts-css.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
+    "build:email-assets": "node scripts/build-email-assets.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic",
@@ -631,7 +641,13 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
+    "react-email": ">=6",
     "react-hook-form": ">=7"
+  },
+  "peerDependenciesMeta": {
+    "react-email": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
@@ -663,6 +679,7 @@
     "postcss-import": "^16.1.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-email": "^6.9.3",
     "react-hook-form": "^7.85.0",
     "react-phone-number-input": "^3.4.16",
     "remark-gfm": "^4.0.1",

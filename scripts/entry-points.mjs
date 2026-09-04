@@ -1,4 +1,10 @@
 export const entryPoints = {
+  // Tokens
+  'tokens':              'src/tokens/tokens.ts',
+
+  // Email
+  'email':               'src/stories/email/Email.ts',
+
   // Atoms
   'accordion':           'src/stories/atoms/Accordion/Accordion.tsx',
   'async-multi-select':  'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',

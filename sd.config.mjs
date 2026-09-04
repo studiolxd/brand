@@ -1,9 +1,10 @@
 import StyleDictionary from 'style-dictionary';
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { registerDarkModeFormat, isDarkToken } from './sd.formats.mjs';
+import { registerDarkModeFormat, registerJsonVariablesFormat, isDarkToken } from './sd.formats.mjs';
 
 registerDarkModeFormat(StyleDictionary);
+registerJsonVariablesFormat(StyleDictionary);
 
 const cssOptions = { selector: ':root', outputReferences: true };
 const scssOptions = { outputReferences: false };
@@ -478,6 +479,26 @@ const sd = new StyleDictionary({
         scssFile('components/_text-inline.scss',     'text-inline'),
       ],
     },
+    /*
+     * Tokens legibles desde JS/TS: un único JSON plano con TODOS los tokens de
+     * `tokens/**`, con los valores ya resueltos. Comparte `transformGroup` con
+     * la plataforma css, así que cada valor es literalmente el mismo que emite
+     * el `:root` generado — el JSON no es una segunda fuente que pueda
+     * desincronizarse, es la misma pasada de transformación.
+     *
+     * Los `surface-dark-*` se filtran igual que en SCSS: se publican con el
+     * nombre de su par claro, así que meterlos aquí sobrescribiría el valor
+     * claro de esa misma clave. Un consumidor que necesite los dos temas
+     * (el correo) los deriva de los roles semánticos `*-on-dark`, que sí son
+     * tokens normales.
+     */
+    js: {
+      transformGroup: 'css',
+      buildPath: 'src/tokens/',
+      files: [
+        { destination: 'tokens.json', format: 'json/css-variables', filter: (t) => !isDarkToken(t) },
+      ],
+    },
   },
 });
 
@@ -627,6 +648,9 @@ for (let changed = true; changed; ) {
     const dotted = path.join('.');
     if (surfaceMap.has(dotted)) continue;
     if (path[0] === 'site-shell') continue;
+    // El correo no está dentro de un SiteShell ni de nada: sus tokens no salen
+    // a CSS, así que arrastrarlos aquí solo deja custom properties muertas.
+    if (path[0] === 'email') continue;
     if (path.some((segment) => segment.startsWith('surface-dark-'))) continue;
     const ref = typeof value === 'string' && value.match(/^\{(.+)\}$/)?.[1];
     if (!ref || !surfaceMap.has(ref)) continue;
@@ -652,3 +676,55 @@ const surfaceLines = [
 ];
 writeFileSync('src/tokens/surface-public.css', surfaceLines.join('\n'));
 console.log('✔︎ src/tokens/surface-public.css');
+
+/* ---------------------------------------------------------------------------
+ * Los tokens del correo, junto a sus componentes
+ *
+ * `src/stories/email/` no puede importar de `src/tokens/`: `tsconfig.lib.json`
+ * infiere el rootDir de las declaraciones del árbol de ficheros de entrada, y
+ * un import que salga de `src/stories/` lo sube a `src/`, desplazando TODAS las
+ * rutas de `dist/_types` y rompiendo los `types` de cada entrada de `exports`.
+ *
+ * Así que los tokens del correo se copian aquí, generados: son 30 y pico, no
+ * los 2.900 del sistema. De paso queda mejor de lo que quedaría el import — un
+ * correo necesita los valores en píxeles absolutos y sin `var()`, y eso es
+ * justo lo que sale de este fichero.
+ * ------------------------------------------------------------------------- */
+{
+  const tokens = JSON.parse(readFileSync('src/tokens/tokens.json', 'utf-8'));
+  // El sistema no toca el font-size del <html>, así que 1rem son 16px. Fuera
+  // del navegador `rem` no significa nada: Outlook lo resuelve contra su propio
+  // contexto y el correo sale con otro tamaño.
+  const ROOT_FONT_SIZE = 16;
+  const toPx = (value) => {
+    const rem = value.match(/^(-?[\d.]+)rem$/);
+    return rem ? `${Number(rem[1]) * ROOT_FONT_SIZE}px` : value;
+  };
+
+  // Comillas simples, como el resto del repo: hay valores que llevan comillas
+  // dobles dentro (la pila de la fuente).
+  const quote = (value) => `'${value.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+
+  const emailEntries = Object.entries(tokens)
+    .filter(([name]) => name.startsWith('--email-'))
+    .map(([name, value]) => `  ${quote(name)}: ${quote(toPx(value))},`);
+
+  const emailLines = [
+    '/*',
+    ' * Do not edit directly, this file was auto-generated.',
+    ' *',
+    ' * Los tokens de `tokens/component/email.json`, resueltos y en píxeles',
+    ' * absolutos. Un correo no puede leer una custom property (Outlook no',
+    ' * resuelve `var()`) ni entiende `rem`, así que sus valores tienen que',
+    ' * llegar así: como datos, listos para ir inline.',
+    ' */',
+    'export const emailTokens = {',
+    ...emailEntries,
+    '} as const;',
+    '',
+    'export type EmailTokenName = keyof typeof emailTokens;',
+    '',
+  ];
+  writeFileSync('src/stories/email/emailTokens.ts', emailLines.join('\n'));
+  console.log('✔︎ src/stories/email/emailTokens.ts');
+}

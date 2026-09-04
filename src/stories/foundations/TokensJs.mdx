@@ -1,0 +1,48 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Tokens desde JavaScript" />
+
+# Tokens desde JavaScript
+
+El sistema publica sus tokens en tres formas, una por cada clase de consumidor:
+
+| Export | Qué es | Para quién |
+| --- | --- | --- |
+| `@studiolxd/brand/tokens.css` | Custom properties bajo `:root` | Cualquier app que cargue CSS |
+| `@studiolxd/brand/scss` | Variables Sass con los valores resueltos | Apps no-React (PHP, Moodle, herramientas) |
+| `@studiolxd/brand/tokens` | Un objeto JS, `{ '--nombre': 'valor' }` | Quien necesita el valor **como dato**, no como CSS |
+
+Las tres salen de la **misma pasada** de Style Dictionary sobre los mismos JSON de `tokens/**`, así que no pueden desincronizarse entre sí.
+
+## Cuándo hace falta el de JavaScript
+
+Cuando el valor tiene que estar resuelto antes de que exista un navegador que resuelva `var()`. El caso que lo motivó es [el correo](/docs/email-emaillayout--docs): un correo es un documento HTML suelto, sin hoja de estilos, y Outlook no resuelve custom properties — todo estilo va inline y ya resuelto en tiempo de render. Vale igual para pintar en un `<canvas>`, generar un PDF o alimentar una herramienta de diseño.
+
+Si lo que se quiere es estilar una página, **la respuesta sigue siendo el CSS**: leer un token en JS para escribirlo en un `style` inline se salta la cascada, el tema oscuro y la superficie pública.
+
+## La API
+
+```ts
+import { tokens, token, tokenPx } from '@studiolxd/brand/tokens';
+
+tokens['--color-prussian']   // '#111e30'
+token('--color-prussian')    // '#111e30', y lanza si el token no existe
+tokenPx('--spacing-5')       // '24px'
+```
+
+- **`tokens`** — todos los tokens del sistema, con los valores **ya resueltos**: nunca un `var()`. La clave es el nombre de la custom property, el mismo identificador que se usa en CSS, para no tener que traducir entre los dos mundos.
+- **`token(nombre)`** — lanza si el token no existe, en vez de devolver `undefined`. Un estilo inline con un valor vacío no se ve roto, se ve «casi bien», y ese fallo viaja hasta donde se esté pintando.
+- **`tokenPx(nombre)`** — el mismo valor en píxeles absolutos. La escala del sistema está en `rem`, que fuera del navegador no significa nada. Lo que ya viene en `px` (radios, grosores) y lo que no tiene unidad (interlineados, pesos) pasa tal cual.
+
+También está disponible el JSON crudo, para quien no tenga un empaquetador delante:
+
+```json
+// @studiolxd/brand/tokens.json
+{ "--color-prussian": "#111e30", "--spacing-5": "1.5rem", … }
+```
+
+## Lo que no está
+
+**Los pares oscuros.** Un token `surface-dark-*` se publica con el nombre de su par claro —esa es toda su gracia: remapear la misma custom property bajo `.surface-dark`— así que no puede convivir con él en un mapa plano.
+
+Quien necesite los dos temas a la vez los deriva de los roles semánticos, que sí son tokens normales: `--color-text-on-dark`, `--color-background-dark`, `--color-text-muted-on-dark`. Es la misma regla de derivación que sigue el resto del sistema, y la que sigue el correo.

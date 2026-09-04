@@ -9,7 +9,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 pnpm storybook        # Launch Storybook on port 6006
 
 # Build
-pnpm build:tokens     # Regenerar tokens CSS+SCSS desde Style Dictionary (sd.config.mjs)
+pnpm build:tokens     # Regenerar tokens CSS+SCSS+JSON desde Style Dictionary (sd.config.mjs)
+pnpm build:email-assets # Regenerar public/email/ (logotipo PNG + fuente): lo que se publica en el host de assets del correo
 pnpm build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
 pnpm build:css        # Bundle CSS standalone → dist/brand.css
 pnpm build:tokens-css # Bundle de tokens CSS → dist/tokens.css
@@ -55,6 +56,7 @@ Librería de componentes React distribuida como paquete npm vía git (`@studiolx
 - `sections/` — bloques de página completos (AppHeader, SiteHeader, SiteShell…)
 - `pages/` — plantillas de página completas
 - `foundations/` — documentación de tokens (colores, tipografía, espaciado…)
+- `email/` — el correo: layout y primitivas sobre `react-email`. Categoría aparte porque el medio no es la web (ver § «El correo»)
 
 Cada componente tiene tres archivos co-localizados:
 - `ComponentName.tsx` — componente funcional tipado
@@ -72,6 +74,8 @@ Cada componente nuevo debe registrarse en **tres sitios** o no estará disponibl
 3. **`src/index.ts`** — añadir `export { Componente }` y `export type { ComponenteProps }` en la sección correspondiente (Atoms / Molecules / …), en orden alfabético.
 
 > **IMPORTANTE:** Olvidar `entry-points.mjs` o `package.json › exports` deja el componente con tipos pero sin `.js` compilado — el consumidor puede importar el tipo pero falla en runtime.
+>
+> **Excepción — `src/stories/email/`:** los componentes de correo NO van en `src/index.ts`. Se construyen sobre `react-email`, que es un peer **opcional**: si colgaran del barril, cualquier app que importe un `Button` tendría que instalarlo para resolver el import. Se publican solo por su subpath, `@studiolxd/brand/email`.
 
 ## CSS y tokens
 
@@ -81,7 +85,7 @@ Cada componente nuevo debe registrarse en **tres sitios** o no estará disponibl
 2. **Tokens en cascada.** Los tokens de componente heredan de tokens de control/base cuando aplica (ej. `--input-font-family: var(--control-font-family)`). Esto permite personalización solo con tokens, sin tocar CSS.
 3. **Los archivos de token tienen fuente JSON obligatoria.** Todo CSS bajo `src/tokens/` se genera con Style Dictionary. Flujo para un nuevo conjunto de tokens: (1) crear `tokens/component/<name>.json`, (2) añadir entradas CSS y SCSS en `sd.config.mjs`, (3) ejecutar `pnpm build:tokens`. La única excepción manual es `src/tokens/index.css` (manifiesto de imports).
 4. **Especificidad BEM.** Los modificadores usan doble clase (`.block.block--modifier`) para ganar sobre el selector base.
-5. **Ejes inline/block, nunca x/y.** Los tokens y propiedades CSS de padding y similares usan siempre `inline`/`block` (alineado con propiedades lógicas CSS). En CSS escribir siempre `padding-block` + `padding-inline` desdoblados, nunca la shorthand `padding: a b`.
+5. **Ejes inline/block, nunca x/y.** Los tokens y propiedades CSS de padding y similares usan siempre `inline`/`block` (alineado con propiedades lógicas CSS). En CSS escribir siempre `padding-block` + `padding-inline` desdoblados, nunca la shorthand `padding: a b`. **Única excepción: `src/stories/email/`** — Outlook de escritorio renderiza con el motor de Word, que no conoce `margin-block` ni `padding-inline`; ahí los *tokens* siguen la convención lógica, pero la propiedad CSS de destino va en físicas.
 6. **Documentación MDX en castellano.** Cualquier archivo `.mdx` nuevo o modificado debe estar íntegramente en castellano.
 7. **Tokens de feedback (error/success/destructive): el sufijo dice la propiedad CSS de destino.** `*-text-on-light|dark` SOLO `color`/borde/outline sobre la superficie ambiente, jamás `background`; `*-fill` SOLO fondos sólidos (universal: mismo color en superficie clara y oscura); `*-fill-text` para el contenido sobre un fill. NO existe par "tint" (contenedor suave): se retiró el 2026-08-24 por inventado — no reintroducir.
 
@@ -208,11 +212,35 @@ caso, `<VisuallyHidden>`.
 
 Las aplicaciones no-React reciben **solo los tokens SCSS** (`src/tokens/scss/`, vía los exports `./scss`, `./scss/legacy` y `./scss/{global,components,molecules}/*`), no los componentes ni el CSS de componentes. El CSS de componentes (clases BEM) es un detalle de implementación interno de React y no se expone. Los tokens SCSS tienen valores resueltos (`outputReferences: false`) para que puedan usarse sin dependencia de CSS custom properties.
 
+## Tokens desde JavaScript
+
+Los mismos JSON de `tokens/**` salen además a `src/tokens/tokens.json` (plataforma `js` de `sd.config.mjs`, formato `json/css-variables`): un mapa plano `{ '--nombre': 'valor' }` con los valores **ya resueltos**, con el mismo `transformGroup` que la plataforma css — así el JSON no puede desincronizarse del `:root` generado. Encima va `src/tokens/tokens.ts` (export `./tokens`) con `tokens`, `token()` y `tokenPx()`.
+
+Es para consumidores que necesitan el valor **como dato** y no como CSS: el correo, un canvas, un PDF. Para estilar una página la respuesta sigue siendo el CSS — leer un token en JS para escribirlo inline se salta la cascada, el tema oscuro y la superficie pública.
+
+Los `surface-dark-*` se filtran, igual que en SCSS: se publican con el nombre de su par claro y sobrescribirían la misma clave. Quien necesite los dos temas los deriva de los roles `*-on-dark`.
+
+## El correo
+
+`src/stories/email/` es el único rincón del repo cuyo medio no es un navegador, y de ahí salen todas sus rarezas. Las reglas propias, además de las dos ya citadas (fuera de `src/index.ts`; propiedades físicas):
+
+- **Todo estilo va inline y resuelto.** No hay hoja de estilos ni custom properties: Outlook no resuelve `var()`. De ahí que los estilos sean objetos JS (`emailTheme.ts`) y no un `.css`.
+- **El correo lee a la talla PÚBLICA, no a la de aplicación.** Un correo es parte pública de la suite, como la web y las páginas de acceso: cuerpo, título, letra menor y botón (talla `lg`) salen de la superficie de `SiteShell`. Como ese remapeo se genera en CSS y el correo no consume CSS, los tokens apuntan a los **tokens fuente** (`{site-shell.*}`, `{button.lg-*}`), nunca a los `--site-shell-*` ya remapeados. El ancho no sube con la talla: los 600px son del medio, no de la retícula.
+- **`EmailButton` pinta el botón Y, debajo, la misma dirección en texto.** Son un solo componente para que viajen juntos: hay clientes que destrozan los botones y la gente reenvía correos, así que el enlace en texto es el plan B. Su prop `fallbackLabel` es **obligatoria y sin default castellano** — la única así del repo, anotada como excepción en Foundations › Internacionalización: el correo vive en seis idiomas que conoce `mailer`, y hacerla obligatoria es lo que impide que una plantilla se deje el respaldo. La dirección va entera, en texto plano (no en un `<a>`), y con `word-break`/`word-wrap` — nunca `overflow`, que escondería justo lo que hay que copiar.
+- **El botón del correo va a ancho completo (`{button.block-width}`), siempre y sin media query**: Outlook las ignora. Y sin padding horizontal — siendo de ancho completo lo mide la columna, así que el inset de `lg` solo estrecharía el texto (partía la etiqueta en dos líneas a 375px) y además obligaría a un `box-sizing` que el motor de Word no entiende.
+- **`tokens/component/email.json` no sale a CSS ni a SCSS** —no hay CSS de correo que los consuma—; sale a `src/stories/email/emailTokens.ts`, generado por `pnpm build:tokens`, con los valores en píxeles absolutos. No editarlo a mano.
+- **El correo es solo claro: no gestiona modo oscuro.** Se retiró el mecanismo entero (paleta oscura, `prefers-color-scheme`, las `meta` de esquema y las clases `email-*` que solo servían para engancharlo). Esto NO impide que Outlook Windows o Gmail Android inviertan los colores por su cuenta — lo que se deja de hacer es gestionarlo; con fondo blanco, tinta oscura y el blanco horneado del logotipo, el resultado invertido aguanta. Hay un test que vigila que no vuelva (`EmailLayout.test.tsx`).
+- **La única hoja de estilos del correo es `a:hover`**, lo único que no cabe en un atributo `style`. Todo lo demás va inline.
+- **`react-email` es un peer opcional** y va en los externals de `vite.lib.config.ts`. Radix sigue prohibido; esta es la única otra dependencia de comportamiento del repo, y solo para el correo.
+
+Las **plantillas concretas** (verificar el correo, restablecer la contraseña…) son producto y viven en `@slxd/mailer`, no aquí.
+
 ## Storybook
 
 ### Nomenclatura
 - Nombres técnicos (títulos de categoría, exports, props) en inglés. Prosa MDX en castellano.
-- Categorías: `Atoms/`, `Molecules/`, `Organisms/`, `Sections/`, `Templates/`, `Pages/`.
+- Categorías: `Atoms/`, `Molecules/`, `Organisms/`, `Sections/`, `Templates/`, `Pages/`, `Email/`.
+- `Email/` es categoría propia y no un peldaño del Atomic Design: sus piezas no se combinan con las de la web ni se ven en un navegador. Sus stories se miran en un `<iframe>` (`EmailPreview`), que es lo más parecido a un cliente de correo.
 - Distinción `Templates/` vs `Pages/`: Templates son layouts reutilizables con contenido variable (Project, Legal). Pages son instancias únicas con contenido real no replicable (Home).
 
 ### Imports
