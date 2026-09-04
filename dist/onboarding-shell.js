@@ -42,12 +42,12 @@ function i({ children: i, brand: a, switchers: o, stepper: s, primaryAction: c, 
 							className: "onboarding-shell__actions",
 							role: "group",
 							"aria-label": d,
-							children: [/* @__PURE__ */ r("div", {
+							children: [l, (u || c) && /* @__PURE__ */ r("div", {
 								className: "onboarding-shell__decisions",
-								children: [l, c]
-							}), u && /* @__PURE__ */ n("div", {
-								className: "onboarding-shell__exit",
-								children: u
+								children: [u && /* @__PURE__ */ n("div", {
+									className: "onboarding-shell__exit",
+									children: u
+								}), c]
 							})]
 						})
 					]

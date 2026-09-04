@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.3.2
+
+`OnboardingShell`, el pie de acciones:
+
+- **La principal cierra el renglón**, como en el pie de un `Form`: en escritorio
+  la fila es «Atrás» · salida · principal, alineada al final. Antes la salida
+  quedaba detrás de la principal. El marcado va en ese mismo orden, así que en
+  escritorio el foco y el orden visual coinciden; en móvil se invierte solo el
+  par salida/principal —la principal arriba, donde el pulgar la espera—, con
+  `column-reverse` sobre ese sub-grupo, que es el compromiso que el sistema ya
+  tiene asumido en `.form__actions--block` y por la misma razón. «Atrás» sale
+  del sub-grupo para que la inversión no lo arrastre.
+- **El aire del cuerpo al pie sale del token del formulario**
+  (`{form.actions-margin-block-start}`) en vez de un valor propio: los dos pies
+  se mueven juntos. Antes coincidían por casualidad y el alta podía descolgarse
+  sin que nadie se enterara. El `gap` del alta pasa a gobernar solo el chrome y
+  el tramo del progreso al cuerpo, y las descripciones de ambos tokens dicen qué
+  gobierna cada uno. El render no cambia.
+
 ## v30.3.1
 
 `OnboardingShell`: el pie con los conmutadores de idioma y tema **cae al fondo

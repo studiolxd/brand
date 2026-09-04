@@ -2930,6 +2930,7 @@ var e = {
 	"--onboarding-shell-switchers-gap": "0.75rem",
 	"--onboarding-shell-settings-padding-block-end": "3rem",
 	"--onboarding-shell-actions-gap": "0.75rem",
+	"--onboarding-shell-actions-margin-block-start": "2rem",
 	"--onboarding-shell-actions-padding-block-start": "1.5rem",
 	"--steps-gap": "1.5rem",
 	"--steps-marker-gap": "1rem",
