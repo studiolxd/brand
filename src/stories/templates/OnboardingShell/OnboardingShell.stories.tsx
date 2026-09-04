@@ -27,7 +27,7 @@ const conmutadores = (
 
 const cuerpo = (
   <Stack align="stretch">
-    <PageIntro title="¿Cómo te llamas?" description="Así te verán tus compañeros de organización." />
+    <PageIntro title="¿Cómo te llamas?" />
     <Form size="lg" onSubmit={(e) => e.preventDefault()}>
       <InputField id="alta-nombre" label="Nombre y apellidos" autoComplete="name" />
     </Form>

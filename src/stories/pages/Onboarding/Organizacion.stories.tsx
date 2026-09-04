@@ -21,7 +21,7 @@ function Organizacion({ theme }: Args) {
       exitAction={<Button variant="text">Omitir por ahora</Button>}
     >
       <Stack align="stretch">
-        <PageIntro title="¿Cómo se llama tu organización?" description="Es el nombre que verán tus compañeros y el que aparecerá en los documentos que compartáis." />
+        <PageIntro title="¿Cómo se llama tu organización?" />
         <Form id="alta-organizacion" size="lg" onSubmit={(e) => e.preventDefault()}>
           <InputField id="alta-org-nombre" label="Nombre de la organización" defaultValue="Ayuntamiento de Sant Cugat" />
           <InputField id="alta-org-dominio" label="Dominio" helperText="Se usa para la dirección de tu espacio: santcugat.studiolxd.com" defaultValue="santcugat" />

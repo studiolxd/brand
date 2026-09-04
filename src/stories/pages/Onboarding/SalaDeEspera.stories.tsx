@@ -44,10 +44,12 @@ function SalaDeEspera({ theme }: Args) {
       exitAction={<Button variant="text">Cerrar sesión</Button>}
     >
       <Stack align="stretch" gap="lg">
-        <PageIntro
-          title="Tu perfil está listo"
-          description={`Ahora toca esperar. Aquí solo se entra en una organización por invitación, así que no hay nada más que puedas hacer desde esta pantalla — y preferimos decírtelo a que lo descubras probando.`}
-        />
+        <PageIntro title="Tu perfil está listo" />
+        <Paragraph>
+          Ahora toca esperar. Aquí solo se entra en una organización por invitación, así que no hay
+          nada más que puedas hacer desde esta pantalla — y preferimos decírtelo a que lo descubras
+          probando.
+        </Paragraph>
         <section>
           <Heading level={2} size={5}>Qué pasará</Heading>
           <Steps items={QUE_PASARA} />

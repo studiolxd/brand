@@ -20,7 +20,7 @@ function Perfil({ theme }: Args) {
       exitAction={<Button variant="text">Omitir por ahora</Button>}
     >
       <Stack align="stretch">
-        <PageIntro title="¿Cómo te llamas?" description="Es el nombre con el que te verán tus compañeros de organización. Puedes cambiarlo más adelante." />
+        <PageIntro title="¿Cómo te llamas?" />
         <Form id="alta-perfil" size="lg" onSubmit={(e) => e.preventDefault()}>
           <InputField id="alta-nombre" label="Nombre" autoComplete="given-name" defaultValue="" />
           <InputField id="alta-apellidos" label="Apellidos" autoComplete="family-name" />

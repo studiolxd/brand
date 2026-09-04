@@ -35,7 +35,7 @@ function Invitaciones({ theme }: Args) {
       exitAction={<Button variant="text">Omitir por ahora</Button>}
     >
       <Stack align="stretch">
-        <PageIntro title="Invita a tu equipo" description="Cada persona recibirá un correo con un enlace para entrar. Puedes cambiar su papel en cualquier momento desde los ajustes." />
+        <PageIntro title="Invita a tu equipo" />
         <Form
           id="alta-invitaciones"
           size="lg"
