@@ -207,3 +207,66 @@ por lectura del código, no en pantalla: este Storybook no tiene addon de
 viewport y la ventana del navegador no se dejó redimensionar en este entorno.
 Su CSS no lo toca ninguno de los dos arreglos —no tiene marcas ni carril—, pero
 conviene que le eches un vistazo en un móvil real.
+
+
+---
+
+## Segunda ronda de correcciones
+
+### El alto de la marca lo impone el sitio donde se pinta
+
+`OnboardingShell` no tenía regla para su ranura `brand`: el logotipo salía a su
+tamaño intrínseco y no coincidía con el del chrome público. Ahora el template lo
+impone con tokens propios que **referencian a los de la cabecera**
+(`site-header.content-height` y sus variantes compacta y estrecha), así que
+tocar el de la cabecera mueve los dos y no hay ningún valor copiado a ojo.
+
+**`SiteHeader` tampoco lo conseguía**, aunque su comentario dijera «manda la
+cabecera, no el logotipo». `Logo` estila sus tallas con doble clase
+(`.logo.logo--xxl`, dos puntos de especificidad) y `.site-header__logo > *` solo
+tiene uno: perdía siempre. En escritorio el resultado coincidía **de casualidad**,
+porque `site-header.content-height` vale exactamente la talla `xxl` que la
+cabecera le pasa por defecto; en móvil, en cambio, la marca seguía saliendo a
+85px en lugar de encoger a 48 como pedían sus propios tokens. Medido en el
+Storybook antes de tocar nada: `alto: 85.33` con `--site-header-content-height:
+3rem`.
+
+El mecanismo, en los dos sitios, es **remapear los tokens de talla del `Logo`**
+en el contenedor (`--logo-height-sm…xxl` → el alto del sitio) en vez de intentar
+ganarle por selector. La regla del `Logo` sigue mandando, pero lee el alto que le
+da el contenedor, así que la prop `size` del consumidor deja de decidir el
+tamaño final — que era el objetivo. Un `block-size` sobre el hijo cubre además
+una marca de producto que no sea el `Logo` del sistema.
+
+Ojo: esto **cambia el render de `SiteHeader` en móvil** para todos los
+consumidores. La marca pasa a 48px por debajo de `md` y a 40px por debajo de
+`sm`, que es lo que sus tokens pedían desde el principio («para que quepa con los
+controles», «para caber en 360px con idioma y menú»).
+
+Medido con las dos páginas abiertas: escritorio 85,33px en ambas; a 500px de
+ancho, 48px en ambas, con `logo--xxl` en la cabecera y `logo--md` en el alta —la
+talla que pasa el consumidor ya no cambia nada.
+
+### Idiomas reales en la maqueta
+
+`OnboardingPage` ofrecía catalán, que no es uno de los seis de la suite
+(`en es fr de nl pt`). Ahora español, inglés y francés. `AuthPage` ya usaba dos
+reales y no necesitaba cambio.
+
+### El conmutador de idioma enseña su etiqueta
+
+El alta lo montaba con `labelHidden`, así que «Idioma» no se veía y el control
+quedaba descompensado junto a «Tema». El chrome público no lo oculta, así que el
+alta tampoco. El de tema ya estaba alineado; solo se quitó de la story un
+`labels` que repetía a mano el default castellano.
+
+### De paso
+
+La **forma compacta del `Stepper`** —que en la ronda anterior no se pudo ver en
+pantalla— quedó comprobada aquí: a 500px de ancho la maqueta del alta enseña
+«Paso 1 de 4  Perfil», con la fila de pasos retirada.
+
+### Verificación
+
+`pnpm lint`, `npx tsc -b` y `pnpm test` (289 tests) en verde, y las medidas de
+arriba tomadas en el Storybook del worktree (6007).
