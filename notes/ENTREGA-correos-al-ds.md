@@ -1,7 +1,11 @@
 # Entrega — Los correos de la suite, al DS
 
-Rama `emails-ds`. Cinco commits, sin tocar la versión y sin tag: el release lo
+Rama `emails-ds`. Ocho commits, sin tocar la versión y sin tag: el release lo
 cierra quien decida el número.
+
+Incluye la ronda de ajustes del operador (revisión en el 6008): el logotipo se
+veía roto en el catálogo, se retiró el modo oscuro y la prosa salía en negrita.
+Todo está integrado más abajo, no en un apartado aparte.
 
 ## Qué hay nuevo
 
@@ -47,27 +51,63 @@ confesaba en sus propios comentarios:
 | Hex sueltos copiados a mano de `lmsmarketplace` (`#111e30`, `#baabff`, `#4a4a4a`) | `tokens/component/email.json`, que solo referencia a tokens existentes |
 | Espaciado a ojo en cada estilo (`0 0 12px`, `10px 18px`, `24px`) | La escala de espaciado |
 | La marca era el `appName` en texto plano | El isotipo, en PNG |
+| Modo oscuro con media query, paleta doble y clases para engancharla | Retirado: el correo es solo claro |
 
 Lo que **no** se ha movido: las 12 plantillas de `mailer` y las 8 de apps. Son
 producto y se quedan donde están.
 
-Se conservan intactas las cicatrices que el layout ya había aprendido a las
-malas —el lienzo `.email-surface` que existe porque react-email pone el fondo de
-`<Body>` en un `<td>` sin clase; las reglas oscuras como override sobre el
-inline claro; ningún selector colgado de `<body>`— y ahora además hay nueve
-tests que las vigilan (`EmailLayout.test.tsx`).
+Se conserva la cicatriz que sigue teniendo función —el lienzo a todo ancho que
+existe porque react-email pone el fondo de `<Body>` en un `<td>` envolvente, y
+hay clientes que descartan el `<body>`—. Las demás eran del modo oscuro y se
+fueron con él. Ocho tests vigilan el resultado (`EmailLayout.test.tsx`),
+incluido uno que comprueba que el modo oscuro no vuelve.
+
+### El correo es solo claro
+
+Decisión del operador. No es que no se haya probado: se retiró el mecanismo
+entero —paleta oscura, `@media (prefers-color-scheme: dark)`, las `meta` de
+esquema y las clases `email-*` que existían solo para que esas reglas pudieran
+engancharse—.
+
+**Esto no impide que Outlook Windows o Gmail Android inviertan los colores por
+su cuenta.** Lo hacen igual y no hay forma de pedirles que no. Lo que se deja de
+hacer es *gestionarlo*: con fondo blanco y tinta oscura el resultado invertido
+es legible, y el logotipo lleva su blanco horneado dentro, así que aguanta la
+inversión sin quedarse sin marca.
+
+Lo que simplifica: un solo juego de valores en vez de dos, ninguna clase que
+mantener, ninguna regla que dependa de que el cliente conserve el `<body>` —que
+es por donde se rompía— y una hoja de estilos que se queda en una línea,
+`a:hover`, lo único que un correo no puede llevar inline.
+
+### La caja y los pesos
+
+Tres superficies, tres tokens: lienzo (`--email-canvas-bg`) y caja
+(`--email-bg`) en blanco, borde de la caja (`--email-border-color`) en el rol de
+tinta sobre superficie clara.
+
+La prosa va en el peso normal del sistema y **el único elemento con peso fuerte
+es el título**; el botón conserva el suyo de `Button primary`. Esto último
+arregló un fallo silencioso: la `@font-face` del correo declaraba dos caras, una
+por peso, apuntando al mismo fichero, y como la sans es variable eso deja al
+navegador sin eje que variar — emparejaba la prosa con la cara del título y el
+correo salía entero en negrita. Ahora se declara con el **rango** del eje
+(`1 1000`), igual que `fonts.css`.
 
 ### 3. El catálogo
 
 Categoría `Email/` en Storybook, con `EmailLayout` (sus tres pies), las
-primitivas y **dos correos enteros de ejemplo** con datos falsos, cada uno en
-claro y en oscuro. Un correo es un documento HTML completo, así que no se monta
-dentro de la página: `EmailPreview` lo renderiza a texto y lo mete en un
-`<iframe>`, que es lo más parecido a lo que hace un cliente.
+primitivas y **dos correos enteros de ejemplo** con datos falsos. Un correo es
+un documento HTML completo, así que no se monta dentro de la página:
+`EmailPreview` lo renderiza a texto y lo mete en un `<iframe>`, que es lo más
+parecido a lo que hace un cliente.
 
-Para el oscuro el visor aplica las **mismas** reglas del correo sin la media
-query (dentro de un iframe no se puede pedir el ajuste del sistema): lo que se
-ve es el override que aplicaría Apple Mail, no una imitación.
+Ese iframe recibe el HTML por `srcDoc`, y un documento cargado así tiene URL
+base `about:srcdoc`: la ruta relativa con la que las stories sirven el logotipo
+y la fuente desde `public/` no resolvía contra nada y el correo salía sin marca.
+El visor le inyecta un `<base>` con la URL del catálogo. Es un apaño del visor y
+solo del visor — en un correo de verdad la URL es absoluta y el problema no
+existe.
 
 Hasta hoy los correos eran el único rincón de la suite que no se podía mirar sin
 enviarse uno a sí mismo.
@@ -78,8 +118,9 @@ enviarse uno a sí mismo.
 import {
   EmailLayout,
   EmailHeading, EmailText, EmailNote, EmailLink, EmailButton,
-  emailStyles, emailClasses, emailPalette, emailDarkModeCss,
-  emailLogo, emailFontFilename, emailAssetsBaseUrl, emailMaxWidth, emailFontFamily,
+  emailStyles, emailPalette, emailStyleSheet,
+  emailLogo, emailFontFilename, emailAssetsBaseUrl, emailMaxWidth,
+  emailFontFamily, emailFontWeightRange,
 } from '@studiolxd/brand/email';
 ```
 
@@ -104,9 +145,8 @@ props de texto con default castellano (`manageLabel`, `unsubscribeLabel`,
 
 `EmailHeading`, `EmailText`, `EmailNote` (`tone?: 'muted' | 'plain'`),
 `EmailLink` y `EmailButton`. Todas aceptan `style`, que se mezcla **encima** del
-estilo base. Cierran dentro del componente el par clase+estilo que hoy cada
-plantilla escribe a mano — y olvidar la clase significa que ese trozo del correo
-se queda en claro cuando el cliente pinta en oscuro.
+estilo base. Cierran dentro del componente, y con un nombre, el estilo que hoy
+cada plantilla escribe a mano.
 
 ### Dependencia
 
@@ -126,11 +166,11 @@ Nada de esto se ha tocado: `slxd` era solo lectura para este encargo.
    reexportando desde brand, para que las 20 plantillas no cambien su import:
 
    ```ts
-   export { EmailLayout, emailClasses, emailStyles } from '@studiolxd/brand/email';
+   export { EmailLayout, emailStyles } from '@studiolxd/brand/email';
    export type { EmailOptOut } from '@studiolxd/brand/email';
    ```
 
-3. **Dos ajustes de API** al hacerlo:
+3. **Tres ajustes de API** al hacerlo:
    - `EmailLayout` ya **no recibe `t`**. Los textos del pie de baja son props con
      default castellano, así que hay que traducirlos en la llamada:
      ```tsx
@@ -147,11 +187,18 @@ Nada de esto se ha tocado: `slxd` era solo lectura para este encargo.
      dentro. Las claves de mensaje se quedan donde están.
    - `EmailOptOutLinks` pasa a llamarse **`EmailOptOut`**. Alias en el reexport
      si se prefiere no tocar los tipos de golpe.
-4. **`emailStyles` y `emailClasses` conservan las mismas claves** (`heading`,
-   `text`, `muted`, `footnote`, `button`, `link`), así que las 12 plantillas de
-   `mailer` siguen compilando sin tocarlas. Migrarlas a las primitivas
-   (`<EmailHeading>` en vez de `<Heading className={…} style={…}>`) es una
-   limpieza posterior, no un requisito.
+   - **`emailClasses` ya no existe.** Esas clases solo servían para enganchar
+     las reglas de modo oscuro; sin modo oscuro, sobran. Las 12 plantillas de
+     `mailer` las pasan como `className`, así que hay que quitar ese atributo:
+     ```diff
+     -<Heading className={emailClasses.heading} style={emailStyles.heading}>
+     +<Heading style={emailStyles.heading}>
+     ```
+     O, mejor, migrar de una vez a las primitivas (`<EmailHeading>`), que es el
+     mismo número de líneas tocadas y deja el estilo dentro del componente.
+4. **`emailStyles` conserva las mismas claves** (`heading`, `text`, `muted`,
+   `footnote`, `button`, `link`): los estilos de las 12 plantillas no cambian,
+   solo se les cae el `className`.
 5. **`src/templates/preview.ts`** y el servidor de `react-email` siguen igual.
 
 ### Las 8 plantillas de apps
@@ -184,8 +231,12 @@ apps no dependan de brand directamente.)
 Mandarse los correos a Gmail, a Outlook Windows y a Apple Mail. Son los tres que
 generaron todas las cicatrices del layout: Gmail descarta `<html>`/`<body>` y
 cachea las imágenes, Outlook Windows renderiza con el motor de Word e invierte
-colores, Apple Mail es el único que honra de verdad la fuente web y el modo
-oscuro.
+colores, Apple Mail es el único que honra de verdad la fuente web.
+
+Merece la pena mirar en concreto **cómo queda la inversión de colores** de
+Outlook Windows y Gmail Android, ya que es lo que el correo deja de gestionar.
+Se espera que aguante —fondo blanco, tinta oscura, logotipo con su blanco
+dentro—, pero conviene verlo con los ojos.
 
 ## Lo que asume el logotipo
 
@@ -206,8 +257,8 @@ Decisiones que van con ellos:
 - **PNG y no SVG**: Gmail y Outlook no renderizan SVG.
 - **Fondo blanco dentro de la imagen**, con su aire: Outlook Windows y Gmail
   Android invierten colores por su cuenta y un `background-color` blanco no
-  sobrevive; una imagen sí. Por eso la banda de marca es blanca también en
-  oscuro — el logotipo cae siempre sobre blanco.
+  sobrevive a esa inversión; una imagen sí. Es lo que deja al logotipo a salvo
+  aunque el correo ya no gestione tema.
 - **Nombre versionado**: Gmail proxea y cachea las imágenes y no admite forzar
   un refresco. Si algún día cambia el logotipo se sube `logo-v2.png` y se cambia
   el nombre en `emailTheme.ts` (`emailLogo.filename`) y en
@@ -233,6 +284,9 @@ degrada, no se rompe — pero el despliegue es parte del día D.
   `./tokens`, `./tokens.json`), tokens nuevos, ningún breaking.
 - **`CHANGELOG.md`**: sin entrada, porque la entrada cuelga del número de
   versión. Va con el bump.
+- **Comprobado a ojo en el Storybook del operador (6008)**: las tres entradas de
+  `Email/` con el logotipo, la caja blanca de borde tinta y los pesos ya
+  correctos.
 - `pnpm lint`, `npx tsc -b` y `pnpm test` (300 tests) en verde.
   `pnpm test:stories` no se ha podido correr: falta el Chromium que pide
   Playwright en esta máquina (`pnpm exec playwright install`).
