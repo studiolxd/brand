@@ -110,6 +110,15 @@ export const Contrato: Story = {
     await expect(canvasElement.querySelector('.site-shell')).toBeInTheDocument();
     await expect(canvasElement.querySelector('.site-header')).not.toBeInTheDocument();
     await expect(canvas.getByRole('list', { name: 'Progreso' })).toBeInTheDocument();
+    // El chrome va al ancho de la página; solo la columna del paso se acota.
+    const paso = canvasElement.querySelector('.onboarding-shell__step')!;
+    await expect(paso).toContainElement(canvas.getByRole('list', { name: 'Progreso' }));
+    await expect(canvasElement.querySelector('.onboarding-shell__top')).not.toContainElement(canvasElement.querySelector('.onboarding-shell__switchers'));
+    // Las preferencias, en su propio pie y las últimas del documento: ni se
+    // mezclan con las acciones del paso ni se tabulan antes que ellas.
+    const ajustes = canvasElement.querySelector('.onboarding-shell__settings')!;
+    await expect(ajustes.querySelector('.onboarding-shell__switchers')).not.toBeNull();
+    await expect(paso.compareDocumentPosition(ajustes) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
     await expect(within(acciones).getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
     await expect(within(acciones).getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--ghost');

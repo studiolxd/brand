@@ -64,12 +64,21 @@
   }
 }
 
+/* El pie de chrome: idioma y tema, al final de la pantalla y por debajo del
+   pie de acciones del paso. Va aparte a propósito —una preferencia global no
+   puede leerse como una acción del flujo— y sigue el ancho del chrome, no el
+   de la columna, así que cierra la pantalla en la misma vertical que abre la
+   marca. */
+.onboarding-shell__settings {
+  display: flex;
+  align-items: center;
+}
+
 .onboarding-shell__switchers {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--onboarding-shell-switchers-gap);
-  margin-inline-start: auto;
 }
 
 /* La ranura del progreso se monta siempre, pero el `Stepper` no se pinta en un

@@ -15,9 +15,11 @@ export interface OnboardingShellProps {
    */
   brand?: ReactNode;
   /**
-   * Los conmutadores de la barra superior, a la derecha: idioma y tema. En el
-   * alta no hay cabecera pública —el usuario ya tiene sesión, no hay nada que
-   * navegar—, así que estos dos son todo el chrome.
+   * Las preferencias globales de la pantalla: idioma y tema. Se pintan en un
+   * **pie de chrome propio**, al final y separadas del pie de acciones del
+   * paso — una preferencia global no es una acción del flujo y no puede
+   * parecerlo. En el alta no hay cabecera pública —el usuario ya tiene sesión,
+   * no hay nada que navegar—, así que estos dos son todo el chrome que queda.
    */
   switchers?: ReactNode;
   /**
@@ -58,8 +60,9 @@ export interface OnboardingShellProps {
  * Lo que no lleva, a propósito:
  *
  * - **Cabecera pública.** En el alta el usuario ya tiene sesión; no hay sitio
- *   al que navegar y una barra de marketing solo invitaría a irse. Solo quedan
- *   las dos ranuras de conmutadores.
+ *   al que navegar y una barra de marketing solo invitaría a irse. Arriba queda
+ *   solo la marca; idioma y tema bajan a su propio pie de chrome, al final de
+ *   la pantalla y separados del pie de acciones del paso.
  * - **Una sola columna a lo ancho de la página.** El chrome ocupa el ancho
  *   normal de una página pública —la marca cae donde el ojo ya la espera de la
  *   pantalla de acceso—, y lo que se acota a la medida de lectura y se centra
@@ -88,10 +91,9 @@ export function OnboardingShell({
   return (
     <PublicPageShell id={id} shell={shell}>
       <div className={['onboarding-shell', className].filter(Boolean).join(' ')}>
-        {(brand || switchers) && (
+        {brand && (
           <header className="onboarding-shell__top">
-            {brand && <div className="onboarding-shell__brand">{brand}</div>}
-            {switchers && <div className="onboarding-shell__switchers">{switchers}</div>}
+            <div className="onboarding-shell__brand">{brand}</div>
           </header>
         )}
 
@@ -110,6 +112,12 @@ export function OnboardingShell({
             </div>
           )}
         </div>
+
+        {switchers && (
+          <footer className="onboarding-shell__settings">
+            <div className="onboarding-shell__switchers">{switchers}</div>
+          </footer>
+        )}
       </div>
     </PublicPageShell>
   );
