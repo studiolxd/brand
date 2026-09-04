@@ -10,7 +10,7 @@
     "marker-border-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Filete de la marca de un paso pendiente. Todo borde del sistema mide lo mismo" },
     "marker-font-family":   { "$value": "{font-family.sans}",     "$type": "string",    "$description": "Tipografía de la cifra de la marca" },
     "marker-font-size":     { "$value": "{font-size.1}",          "$type": "dimension", "$description": "14px — la cifra dentro de la marca" },
-    "marker-font-weight":   { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de énfasis de la cifra" },
+    "marker-font-weight":   { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Peso de la cifra de la marca: el del cuerpo, no el de énfasis. La cifra va dentro de una marca rellena de otro color, así que su peso no distingue nada — el estado ya lo dicen el relleno y el filete. El énfasis se reserva para la etiqueta del paso actual (`current-font-weight`), que sí es donde el peso hace de segunda señal junto al color" },
     "marker-icon-size":     { "$value": "{icon.size-sm}",         "$type": "dimension", "$description": "Tamaño del check de un paso completado: el icono dentro de un control" },
 
     "marker-done-bg":       { "$value": "{color.primary}",        "$type": "color",     "$description": "Relleno de la marca de un paso completado o actual: la marca del sistema" },
@@ -27,7 +27,7 @@
     "font-size":            { "$value": "{font-size.1}",          "$type": "dimension", "$description": "14px — etiqueta de interfaz, no texto corriente" },
     "font-weight":          { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Peso de la etiqueta de un paso" },
     "line-height":          { "$value": "{line-height.snug}",     "$type": "number",    "$description": "Interlineado de la etiqueta: cabe en dos líneas sin apelmazarse" },
-    "current-font-weight":  { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color" },
+    "current-font-weight":  { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color. Es la segunda señal del estado y por eso solo lo lleva la etiqueta — la cifra de la marca va en peso de cuerpo (`marker-font-weight`), porque dentro de un círculo relleno el peso no señala nada" },
     "label-color":          { "$value": "{color.text.on-light}",  "$type": "color",     "$description": "Etiqueta de un paso completado o actual" },
     "pending-color":        { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Etiqueta de un paso pendiente: texto secundario" },
     "description-font-size":{ "$value": "{font-size.0}",          "$type": "dimension", "$description": "12px — la línea de detalle bajo la etiqueta" },

@@ -22,7 +22,7 @@ Son dos piezas distintas y ninguna sustituye a la otra:
 
 ## Estados
 
-Los estados no se pasan: se deducen de `current`. Lo anterior está completado, lo posterior pendiente. Cada estado se distingue por **dos** señales, nunca solo por el color: la marca (rellena con un check, rellena con la cifra, hueca con la cifra) y el peso de la etiqueta.
+Los estados no se pasan: se deducen de `current`. Lo anterior está completado, lo posterior pendiente. Cada estado se distingue por **dos** señales, nunca solo por el color: la marca (rellena con un check, rellena con la cifra, hueca con la cifra) y el peso de la **etiqueta**, que es lo que dice dónde está el usuario sin depender del color. La **cifra** de la marca va en peso de cuerpo: dentro de un círculo relleno de otro color el peso no señala nada, y ponerlo en énfasis solo empastaba las cifras del paso actual y de los pendientes.
 
 El carril entre pasos dice lo mismo que las marcas y con su mismo color: el tramo recorrido lleva la marca del sistema —el relleno de un paso hecho—, y el que queda por recorrer, el rol de borde —el filete de una marca pendiente—. No es un fondo: un filete de 1px tiene que contrastar con el lienzo, no armonizar con él, así que no usa la escala de superficies.
 
