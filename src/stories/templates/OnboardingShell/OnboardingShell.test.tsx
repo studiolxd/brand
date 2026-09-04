@@ -68,6 +68,9 @@ describe('OnboardingShell — el chrome, fuera del `main`', () => {
     expect(marco.firstElementChild).toBe(barra);
     expect(marco.lastElementChild).toBe(ajustes);
     expect(barra).toHaveClass('onboarding-shell__top--band');
+    // La marca cuelga de la barra en los dos modos: es de ahí de donde hereda
+    // los peldaños de alto de móvil y teléfono.
+    expect(barra).toContainElement(container.querySelector('.onboarding-shell__brand'));
     expect(ajustes).toHaveClass('onboarding-shell__settings--band');
   });
 
@@ -82,6 +85,7 @@ describe('OnboardingShell — el chrome, fuera del `main`', () => {
     const barra = container.querySelector('.onboarding-shell__top')!;
     expect(alta).toContainElement(barra as HTMLElement);
     expect(barra).not.toHaveClass('onboarding-shell__top--band');
+    expect(barra).toContainElement(container.querySelector('.onboarding-shell__brand'));
     expect(container.querySelector('.onboarding-shell__settings')).not.toHaveClass(
       'onboarding-shell__settings--band',
     );
