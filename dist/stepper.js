@@ -28,7 +28,7 @@ function a({ steps: a, current: o, onStepSelect: s, label: c = "Progreso", compa
 			className: "stepper__list",
 			"aria-label": c,
 			children: a.map((a, o) => {
-				let c = o < h ? "completed" : o === h ? "current" : "pending", l = c === "completed" && s !== void 0, u = /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r("span", {
+				let c = o < h ? "completed" : o === h ? "current" : "pending", l = s !== void 0 && c !== "current" && (a.reachable ?? c === "completed"), u = /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r("span", {
 					className: "stepper__marker",
 					"aria-hidden": "true",
 					children: c === "completed" ? /* @__PURE__ */ r(e, {

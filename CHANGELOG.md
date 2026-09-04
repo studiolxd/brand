@@ -7,6 +7,32 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.4.0
+
+Cuatro cosas del alta, todas vistas en el hub.
+
+- **`Stepper`: el flujo declara qué pasos son alcanzables.** Antes solo se podía
+  volver a un paso completado; ahora el consumidor dice hasta dónde se puede
+  llegar y el componente hace clicables esos, dejando **inertes** —sin foco, sin
+  role de botón— los demás. Un paso al que todavía no se puede llegar no es un
+  destino, así que no se pinta como un botón deshabilitado. El componente no
+  sabe nada de validación: eso lo sabe el producto.
+- **`Stepper`: la cifra de la marca, en peso de cuerpo.** El énfasis se queda
+  donde hace falta: en la **etiqueta** del paso actual, que es la señal que lo
+  distingue sin depender del color. La cifra va dentro de una marca rellena de
+  otro color, así que su peso no señalaba nada.
+- **`OnboardingShell`: el aire del chrome sale del chrome público.** La marca
+  abría a 48px —el `space="xl"` del `Container`, que es aire de contenido—
+  cuando en el sitio abre a 8. Ahora `brand-padding-block` apunta a
+  `{app-header.padding-block}` y `settings-padding-block` a
+  `{legal-footer.padding-block}`: **atados**, no copiados, así que si el chrome
+  del sitio respira distinto el alta se mueve con él.
+- **`OnboardingShell`: el pie de acciones impone la talla `lg`** por
+  `FormSizeContext`, el mecanismo que ya usa `Hero`. La superficie pública
+  remapea tipografía pero no controles, así que la talla dependía de que cada
+  call-site la recordara: en la misma pantalla convivían un pie en talla base y
+  un formulario en `lg`.
+
 ## v30.3.2
 
 `OnboardingShell`, el pie de acciones:

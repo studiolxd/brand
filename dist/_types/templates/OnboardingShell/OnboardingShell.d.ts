@@ -5,9 +5,11 @@ export interface OnboardingShellProps {
     children: ReactNode;
     /**
      * La marca, arriba a la izquierda: un `Logo`, o el `Logo` dentro del enlace
-     * al inicio. El **alto lo impone la plantilla** —el mismo de la cabecera
-     * pública, y con sus mismos peldaños en móvil—, así que la prop `size` del
-     * `Logo` no decide el tamaño final: manda el sitio donde se pinta.
+     * al inicio. Se pinta en la **ranura de cabecera del marco**, fuera del
+     * `main`: es chrome, y respira como la barra pública, no como el contenido.
+     * El **alto lo impone la plantilla** —el mismo de la cabecera pública, y con
+     * sus mismos peldaños en móvil—, así que la prop `size` del `Logo` no decide
+     * el tamaño final: manda el sitio donde se pinta.
      */
     brand?: ReactNode;
     /**
@@ -57,8 +59,11 @@ export interface OnboardingShellProps {
  *
  * - **Cabecera pública.** En el alta el usuario ya tiene sesión; no hay sitio
  *   al que navegar y una barra de marketing solo invitaría a irse. Arriba queda
- *   solo la marca; idioma y tema bajan a la ranura de pie del marco, al borde
- *   inferior de la ventana y separados del pie de acciones del paso.
+ *   solo la marca, en la ranura de cabecera del marco —donde iría `SiteHeader`—
+ *   y con su mismo aire; idioma y tema bajan a la ranura de pie, al borde
+ *   inferior de la ventana y separados del pie de acciones del paso. Las dos
+ *   piezas son chrome y viven fuera del `main`: el aire del `Container` con
+ *   `space="xl"` gobierna solo el contenido del paso.
  * - **Una sola columna a lo ancho de la página.** El chrome ocupa el ancho
  *   normal de una página pública —la marca cae donde el ojo ya la espera de la
  *   pantalla de acceso—, y lo que se acota a la medida de lectura y se centra
@@ -71,5 +76,11 @@ export interface OnboardingShellProps {
  * el mismo criterio que el pie de un `Form`: la principal, la última. En móvil
  * la principal sube a todo el ancho y la salida cae centrada debajo, como en
  * `Form` con acciones en bloque.
+ *
+ * **Y también la talla**: el pie reparte `lg` a lo que reciba por el contexto
+ * de talla del sistema (`FormSizeContext`, el mismo que usa `Form` con sus
+ * campos y `Hero` con sus acciones), así que las acciones del paso salen a la
+ * talla de la superficie pública sin que cada pantalla tenga que acordarse de
+ * pedirla — y a la misma que los campos del formulario que tienen encima.
  */
 export declare function OnboardingShell({ children, brand, switchers, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;

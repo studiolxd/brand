@@ -1,64 +1,74 @@
 'use client';
 import './onboarding-shell.css';
-import { Container as e } from "./container.js";
-import { PublicPageShell as t } from "./public-page-shell.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { t as e } from "./_shared/form-size.js";
+import { Container as t } from "./container.js";
+import { PublicPageShell as n } from "./public-page-shell.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/templates/OnboardingShell/OnboardingShell.tsx
-function i({ children: i, brand: a, switchers: o, stepper: s, primaryAction: c, backAction: l, exitAction: u, actionsLabel: d = "Acciones del paso", id: f = "main-content", shell: p = !0, className: m }) {
-	let h = !!(c || l || u), g = o && /* @__PURE__ */ n("div", {
+function a({ children: a, brand: o, switchers: s, stepper: c, primaryAction: l, backAction: u, exitAction: d, actionsLabel: f = "Acciones del paso", id: p = "main-content", shell: m = !0, className: h }) {
+	let g = !!(l || u || d), _ = s && /* @__PURE__ */ r("div", {
 		className: "onboarding-shell__switchers",
+		children: s
+	}), v = o && /* @__PURE__ */ r("div", {
+		className: "onboarding-shell__brand",
 		children: o
 	});
-	return /* @__PURE__ */ n(t, {
-		id: f,
-		shell: p,
-		footer: g && /* @__PURE__ */ n(e, {
+	return /* @__PURE__ */ r(n, {
+		id: p,
+		shell: m,
+		header: v && /* @__PURE__ */ r(t, {
+			as: "header",
+			className: "onboarding-shell__top onboarding-shell__top--band",
+			innerClassName: "onboarding-shell__bar",
+			children: v
+		}),
+		footer: _ && /* @__PURE__ */ r(t, {
 			as: "footer",
 			className: "onboarding-shell__settings onboarding-shell__settings--band",
-			children: g
+			children: _
 		}),
-		children: /* @__PURE__ */ r("div", {
-			className: ["onboarding-shell", m].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ i("div", {
+			className: ["onboarding-shell", h].filter(Boolean).join(" "),
 			children: [
-				a && /* @__PURE__ */ n("header", {
-					className: "onboarding-shell__top",
-					children: /* @__PURE__ */ n("div", {
-						className: "onboarding-shell__brand",
-						children: a
-					})
+				!m && v && /* @__PURE__ */ r("header", {
+					className: "onboarding-shell__top onboarding-shell__bar",
+					children: v
 				}),
-				/* @__PURE__ */ r("div", {
+				/* @__PURE__ */ i("div", {
 					className: "onboarding-shell__step",
 					children: [
-						s && /* @__PURE__ */ n("div", {
+						c && /* @__PURE__ */ r("div", {
 							className: "onboarding-shell__progress",
-							children: s
+							children: c
 						}),
-						/* @__PURE__ */ n("div", {
+						/* @__PURE__ */ r("div", {
 							className: "onboarding-shell__body",
-							children: i
+							children: a
 						}),
-						h && /* @__PURE__ */ r("div", {
+						g && /* @__PURE__ */ r("div", {
 							className: "onboarding-shell__actions",
 							role: "group",
-							"aria-label": d,
-							children: [l, (u || c) && /* @__PURE__ */ r("div", {
-								className: "onboarding-shell__decisions",
-								children: [u && /* @__PURE__ */ n("div", {
-									className: "onboarding-shell__exit",
-									children: u
-								}), c]
-							})]
+							"aria-label": f,
+							children: /* @__PURE__ */ i(e.Provider, {
+								value: "lg",
+								children: [u, (d || l) && /* @__PURE__ */ i("div", {
+									className: "onboarding-shell__decisions",
+									children: [d && /* @__PURE__ */ r("div", {
+										className: "onboarding-shell__exit",
+										children: d
+									}), l]
+								})]
+							})
 						})
 					]
 				}),
-				!p && g && /* @__PURE__ */ n("footer", {
+				!m && _ && /* @__PURE__ */ r("footer", {
 					className: "onboarding-shell__settings",
-					children: g
+					children: _
 				})
 			]
 		})
 	});
 }
 //#endregion
-export { i as OnboardingShell };
+export { a as OnboardingShell };
