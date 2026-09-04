@@ -16,10 +16,12 @@
 }
 
 /* La columna del paso: lo único acotado a la medida de lectura y centrado en
-   la banda. El aire entre progreso, cuerpo y acciones lo pone su rejilla. */
+   la banda. Sin `gap`: sus tres tramos no miden lo mismo. El del progreso al
+   cuerpo es el aire entre bloques del alta y lo pone el propio progreso por
+   debajo —así, cuando el `Stepper` no se pinta, no queda hueco—; el del cuerpo
+   al pie de acciones es el del formulario y lo pone el pie por arriba. */
 .onboarding-shell__step {
   display: grid;
-  gap: var(--onboarding-shell-gap);
   inline-size: 100%;
   max-inline-size: var(--onboarding-shell-max-width);
   margin-inline: auto;
@@ -92,34 +94,43 @@
   gap: var(--onboarding-shell-switchers-gap);
 }
 
+/* El progreso trae su propio aire por debajo, el de cualquier bloque del alta. */
+.onboarding-shell__progress {
+  margin-block-end: var(--onboarding-shell-gap);
+}
+
 /* La ranura del progreso se monta siempre, pero el `Stepper` no se pinta en un
    flujo de un solo paso: sin contenido, la ranura sale de la rejilla y no deja
-   hueco ni gap. Así el producto pasa el progreso sin condicionales. */
+   hueco ni aire, porque se lo lleva con ella. Así el producto pasa el progreso
+   sin condicionales. */
 .onboarding-shell__progress:empty {
   display: none;
 }
 
-/* El pie de acciones. De partida, en columna y a todo el ancho: «Atrás», la
-   principal y, debajo, la salida centrada.
+/* El pie de acciones. Mismo criterio que el pie de un `Form`: el marcado va en
+   el orden del renglón de escritorio —«Atrás», la salida y, cerrándolo, la
+   principal—, y es la columna de móvil la que se invierte, exactamente como
+   `.form__actions--block`. Ni `order` ni `row-reverse`: el recorrido del
+   teclado es siempre «Atrás» → salida → principal, en los dos tamaños.
 
-   La columna es `column`, no `column-reverse`, y la salida va **después** de
-   las decisiones en el marcado: así el orden del DOM —que es el del foco— y el
-   orden visual coinciden en las dos disposiciones, sin `order` ni
-   `row-reverse` de por medio (WCAG 2.4.3). Es también lo que permite que la
-   salida quede pegada a la principal en escritorio sin moverla del sitio. */
+   De partida, en columna y a todo el ancho. El aire que lo separa del cuerpo
+   del paso es el del pie de un `Form`, no el `gap` de la rejilla del alta: los
+   dos pies se mueven juntos. Encima, el aire extra propio. */
 .onboarding-shell__actions {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: var(--onboarding-shell-actions-gap);
+  margin-block-start: var(--onboarding-shell-actions-margin-block-start);
   padding-block-start: var(--onboarding-shell-actions-padding-block-start);
 }
 
-/* En estrecho cada decisión ocupa su línea entera: la principal, la última de
-   las dos, queda justo encima de la salida. */
+/* Las dos decisiones del paso —la salida y la principal—, apiladas en estrecho
+   y cada una en su línea entera. Aquí se invierten: en columna la principal va
+   arriba, que es donde el pulgar la espera, y la salida cae debajo. */
 .onboarding-shell__decisions {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: stretch;
   gap: var(--onboarding-shell-actions-gap);
 }
@@ -132,8 +143,9 @@
 
 @media (min-width: 768px) /* --breakpoint-md */ {
   /* En cuanto hay sitio, la jerarquía se lee de un vistazo en una sola línea,
-     toda ella al final del renglón: «Atrás», la principal y, pegada a ella, la
-     salida. */
+     toda ella al final del renglón: «Atrás», la salida y, cerrándolo, la
+     principal — la acción de más peso, la última, como en el pie de un
+     `Form`. La fila sigue el orden del marcado, así que no se invierte nada. */
   .onboarding-shell__actions {
     flex-direction: row;
     align-items: center;

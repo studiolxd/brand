@@ -3,11 +3,12 @@
  */
 
 :root {
-  --onboarding-shell-gap: var(--spacing-6); /** Aire entre bloques, tanto del chrome (barra de marca, pie de preferencias) como de la columna del paso (progreso, cuerpo y acciones) */
+  --onboarding-shell-gap: var(--spacing-6); /** Aire entre bloques del alta: el chrome (barra de marca, pie de preferencias) y, dentro de la columna del paso, el tramo del progreso al cuerpo. NO gobierna el aire del cuerpo a su pie de acciones: ese es el del formulario y sale de `actions-margin-block-start` */
   --onboarding-shell-switchers-gap: var(--spacing-3); /** Aire entre los conmutadores de idioma y tema */
   --onboarding-shell-actions-gap: var(--spacing-3); /** Aire entre las acciones del pie */
-  --onboarding-shell-actions-padding-block-start: var(--spacing-5); /** Aire extra entre el cuerpo del paso y su pie de acciones, sobre el que ya pone la rejilla: la separación la hace el espacio, no una línea */
+  --onboarding-shell-actions-padding-block-start: var(--spacing-5); /** Aire extra del pie de acciones, sobre el que ya pone `actions-margin-block-start`: al no haber línea que separe el paso de sus acciones, la separación entera la hace el espacio */
   --onboarding-shell-max-width: var(--container-max-width-md); /** Ancho máximo de la columna del alta: la medida estrecha de contenido del sistema (768px). Apunta a la escala de anchos de contenido, no al breakpoint del mismo valor: un punto de corte responsive y una medida de columna son cosas distintas y tienen que poder moverse por separado */
+  --onboarding-shell-actions-margin-block-start: var(--form-actions-margin-block-start); /** Aire entre el cuerpo del paso y su pie de acciones. Sale del token del formulario, no del `gap` del alta: el pie del alta es el pie de un formulario —la principal cerrando el renglón— y tiene que separarse del cuerpo con la misma medida. Atado, si allí se mueve, aquí se mueve; con un valor propio coincidían por casualidad y se descolgaba sin que nadie se enterase */
   --onboarding-shell-brand-height-compact: var(--site-header-content-height-compact); /** Alto de la marca en móvil (por debajo de md) — el mismo peldaño que la cabecera pública */
   --onboarding-shell-brand-height-narrow: var(--site-header-content-height-narrow); /** Alto de la marca en teléfono (por debajo de sm) — el mismo peldaño que la cabecera pública */
   --onboarding-shell-settings-padding-block-end: var(--container-padding-block-xl); /** Aire bajo el pie de preferencias, que se pinta en la ranura de pie del marco y no en la rejilla del alta. Apunta al aire vertical del `main` (`space="xl"`), no a un valor propio: la pantalla cierra con el mismo aire con el que abre, tanto si el pie cae al borde inferior como si lo empuja un paso largo */
