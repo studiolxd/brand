@@ -119,6 +119,7 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `AppShell` | `skipLabel` — el enlace de salto al contenido |
 | `FloatingDock` | `label` (el nombre del lanzador, sin default), `closeLabel`, `badgeLabel` — cómo se lee el contador de novedades |
 | `EmailLayout` | `optOut.manageLabel`, `optOut.unsubscribeLabel`, `optOut.manageBeforeLabel`, `optOut.managePreferencesLabel`, `optOut.manageAfterLabel` — la frase de baja, partida porque los idiomas no coinciden en si hay texto tras el enlace |
+| `EmailLayout` (pie sin cuenta) | `optOut.reasonLabel` y `optOut.unsubscribeLabel` (**obligatorias, sin default**) — el motivo por el que le llega el correo a quien no tiene cuenta, y la frase de baja que lo cierra |
 | `EmailButton` | `fallbackLabel` (**obligatoria, sin default**) — la frase que presenta el enlace de respaldo |
 
 ## Al añadir un componente nuevo
@@ -127,9 +128,15 @@ Si el componente emite algún texto que no venga de sus `children` ni de sus dat
 en una prop con default castellano — no cableado en el JSX. Es la diferencia entre que un
 consumidor pueda traducirlo y que tenga que reimplementar el componente entero para hacerlo.
 
-### La excepción: `EmailButton.fallbackLabel`
+### Las excepciones: `EmailButton.fallbackLabel` y el pie de correo sin cuenta
 
-Es la única prop de texto de la librería **sin default castellano**, y es obligatoria. Dos
-razones, y las dos apuntan al mismo sitio: el correo de la suite vive en seis idiomas que conoce
-`mailer` y no el DS, y un botón de correo sin su enlace de respaldo debajo es un correo sin plan
-B. Hacerla obligatoria es lo que garantiza que ninguna plantilla se lo deje.
+`fallbackLabel` es obligatoria y **sin default castellano**. Dos razones, y las dos apuntan al
+mismo sitio: el correo de la suite vive en seis idiomas que conoce `mailer` y no el DS, y un botón
+de correo sin su enlace de respaldo debajo es un correo sin plan B. Hacerla obligatoria es lo que
+garantiza que ninguna plantilla se lo deje.
+
+Las otras dos son `optOut.reasonLabel` y `optOut.unsubscribeLabel` del **pie de correo sin
+cuenta** (`EmailOptOutGuest`), por la misma lógica: el motivo por el que a alguien sin cuenta le
+llega un correo lo sabe el producto que lo manda —no el DS—, y siendo el enlace una frase entera
+que cierra ese motivo, ningún default podría encajar. Obligatorias, para que ninguna plantilla
+mande una baja sin decir de qué.

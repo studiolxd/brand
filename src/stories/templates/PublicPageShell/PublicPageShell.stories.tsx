@@ -1,6 +1,8 @@
+import { useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { PublicPageShell } from './PublicPageShell';
+import { ConsentPreferences, type ConsentCategory, type ConsentValue } from '../../molecules/Consent/Consent';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Stack } from '../../atoms/Stack/Stack';
@@ -13,6 +15,13 @@ const legal = [
   { id: 'aviso', label: 'Aviso legal', href: '#aviso-legal' },
   { id: 'privacidad', label: 'Privacidad', href: '#privacidad' },
 ];
+
+const categorias: ConsentCategory[] = [
+  { id: 'necessary', name: 'Necesarias', description: 'Sesión, idioma y seguridad.', required: true },
+  { id: 'analytics', name: 'Analítica', description: 'Qué páginas se visitan, de forma agregada.' },
+];
+
+const decisionInicial: ConsentValue = { necessary: true, analytics: false };
 
 function CabeceraRota(): never {
   throw new Error('La cabecera lanza al renderizar');
@@ -70,6 +79,35 @@ export const DentroDeUnaApp: Story = {
   ),
 };
 
+/**
+ * El `ref` llega al nodo raíz del marco (`.site-shell`): es lo que un panel
+ * flotante abierto desde la página necesita como `container` para heredar la
+ * superficie pública, aquí el panel de preferencias de cookies.
+ */
+export const ConPanelAnclado: Story = {
+  name: 'Con un panel anclado al marco',
+  render: (args) => {
+    function Demo() {
+      const marco = useRef<HTMLDivElement>(null);
+      const [decision, setDecision] = useState<ConsentValue>(decisionInicial);
+      return (
+        <>
+          <PublicPageShell {...args} ref={marco} />
+          <ConsentPreferences
+            open
+            onOpenChange={() => {}}
+            categories={categorias}
+            value={decision}
+            onChange={setDecision}
+            container={marco}
+          />
+        </>
+      );
+    }
+    return <Demo />;
+  },
+};
+
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },
@@ -101,6 +139,27 @@ export const ContratoCabeceraRota: Story = {
     await expect(canvasElement.querySelector('.site-header')).not.toBeInTheDocument();
     await expect(canvas.getByRole('heading', { level: 1 })).toBeInTheDocument();
     await expect(canvas.getByRole('contentinfo')).toBeInTheDocument();
+  },
+};
+
+export const ContratoRef: Story = {
+  name: 'Test — el ref llega al nodo del marco',
+  tags: ['!dev'],
+  args: ConCabeceraYPie.args,
+  render: (args) => (
+    <PublicPageShell
+      {...args}
+      ref={(node) => {
+        node?.setAttribute('data-ref-recibido', 'sí');
+      }}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    // El nodo que recibe el ref tiene que ser el marco, no el `main`: un panel
+    // anclado al `main` quedaría dentro de la columna de contenido.
+    const marcado = canvasElement.querySelector('[data-ref-recibido]');
+    await expect(marcado).toHaveClass('site-shell');
+    await expect(marcado).not.toHaveClass('container');
   },
 };
 

@@ -199,6 +199,31 @@ Tres superficies, tres tokens:
 
 La frase va partida en varias props en vez de una sola con un hueco `{enlace}`: los idiomas no coinciden en si hay texto después del enlace, y una prop de texto solo puede devolver una cadena.
 
+### El pie de quien no tiene cuenta
+
+No todo el correo de la suite va a usuarios registrados: los avisos de revisión de bricks salen a **invitados**, una dirección de correo sin cuenta detrás (por eso la baja se guarda en su propio modelo y no colgando de un usuario). A ese destinatario faltan dos cosas del pie de arriba y le sobra una:
+
+- Le falta **saber por qué le llega**: no se dio de alta en nada.
+- Le sobra **«gestionar preferencias»**: esa pantalla vive tras la sesión del hub, así que ofrecérsela es prometerle una puerta que no puede abrir.
+
+Ese pie es la otra forma de `optOut` (`EmailOptOutGuest`): `reasonLabel` + `unsubscribeLabel`, las dos **obligatorias y sin default castellano** —el motivo lo escribe quien manda el correo, en sus seis idiomas—, y `preferencesUrl` **prohibida por el tipo**, para que no dependa de que nadie se despiste.
+
+<Canvas of={EmailLayoutStories.SinCuenta} />
+
+```tsx
+<EmailLayout
+  preview={t('review.preview')}
+  appName="Bricks"
+  optOut={{
+    unsubscribeUrl: url,
+    reasonLabel: t('review.optOut.reason'),
+    unsubscribeLabel: t('review.optOut.unsubscribe'),
+  }}
+>
+```
+
+Las dos formas se distinguen por `reasonLabel`, que solo lleva esta: pasarla obliga a omitir `preferencesUrl` y al revés, así que un correo no puede acabar con la mitad de cada pie.
+
 ## Props
 
 <ArgTypes of={EmailLayout} />

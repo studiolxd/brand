@@ -24,6 +24,27 @@ Una app con `AppShell` ya tiene su `main`; una página pública pintada dentro n
 
 <Canvas of={PublicPageShellStories.DentroDeUnaApp} />
 
+## Un panel flotante anclado al marco
+
+La plantilla **reenvía el `ref` al nodo raíz del `SiteShell`** (`.site-shell`), que es el mismo nodo que reenvía `SiteShell` por su cuenta. Sirve para una sola cosa, y conviene decirla para que el próximo no lo use para otra: **ser el `container` de un panel que monta en un portal** —`ConsentPreferences`, un `Modal`, un `Sheet` abiertos desde la página—.
+
+Sin ese nodo el portal monta en `document.body`, que no es descendiente de `.site-shell` y por tanto **no hereda el remapeo de superficie pública**: el panel saldría a la talla de aplicación (cuerpo 16px, controles `md`, aspa pequeña) en medio de una página que lee a 20px. El tema oscuro sí llega solo, porque se activa en `<html>`.
+
+**Por qué el marco y no el `main`.** El `main` es un `Container` acotado y con su aire: un panel montado ahí quedaría metido dentro de la columna de contenido —limitado por su ancho máximo y por su sangrado— en vez de flotar sobre la página entera. El marco es el ancestro más cercano que abarca cabecera, contenido y pie, y es el que declara los tokens de la superficie. Es también el nodo que espera el `containerRef` del `ConsentProvider` de la suite.
+
+Con `shell={false}` no hay marco que enganchar y el `ref` se queda sin asignar: en ese caso la página vive dentro del `AppShell` de la app, que es quien pone el contenedor.
+
+<Canvas of={PublicPageShellStories.ConPanelAnclado} />
+
+```tsx
+const marco = useRef<HTMLDivElement>(null);
+
+<PublicPageShell ref={marco} header={<PublicHeader />} footer={<PublicFooter />}>
+  {children}
+</PublicPageShell>
+<ConsentPreferences container={marco} … />
+```
+
 ## Superficie pública
 
 El marco es `SiteShell`, así que todo lo que va dentro lee en la **superficie pública**: cuerpo a 20px, controles `lg` y la escala de títulos un peldaño arriba. La regla completa está en Foundations › Tipografía § «Dos superficies de lectura».

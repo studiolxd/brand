@@ -7,7 +7,12 @@
  * instalar react-email para poder resolver el import.
  */
 export { EmailLayout } from './EmailLayout';
-export type { EmailLayoutProps, EmailOptOut } from './EmailLayout';
+export type {
+  EmailLayoutProps,
+  EmailOptOut,
+  EmailOptOutAccount,
+  EmailOptOutGuest,
+} from './EmailLayout';
 
 export { EmailButton, EmailHeading, EmailLink, EmailNote, EmailText } from './EmailPrimitives';
 export type {
