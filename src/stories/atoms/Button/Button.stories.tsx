@@ -110,6 +110,23 @@ export const TextOnLight: Story = {
   args: { variant: 'text' },
 };
 
+/**
+ * Con icono. El subrayado es una línea bajo el botón entero —la misma técnica
+ * que en `Link`: sombra interior y `padding-block-end`, no `text-decoration`—,
+ * así que cruza por debajo del icono igual que del texto. Con
+ * `text-decoration` la línea se cortaba en el SVG.
+ */
+export const TextConIcono: Story = {
+  name: 'Text — con icono',
+  args: { variant: 'text' },
+  render: (args) => (
+    <Button {...args}>
+      <Icon name="arrow-left" size="sm" />
+      Volver al paso anterior
+    </Button>
+  ),
+};
+
 export const TextDestructive: Story = {
   name: 'Text — destructive intent',
   args: { variant: 'text', destructive: true, children: 'Eliminar' },
@@ -125,6 +142,24 @@ export const TextDestructiveOnDark: Story = {
       </div>
     ),
   ],
+};
+
+export const ContratoSubrayadoText: Story = {
+  name: 'Test — el subrayado de text es una línea, no text-decoration',
+  tags: ['!dev'],
+  args: { variant: 'text' },
+  render: TextConIcono.render,
+  play: async ({ canvasElement }) => {
+    const boton = within(canvasElement).getByRole('button');
+    const estilo = getComputedStyle(boton);
+    // La línea la pone la sombra interior, separada del texto por el padding:
+    // así cubre también el SVG del icono.
+    await expect(estilo.boxShadow).not.toBe('none');
+    await expect(estilo.textDecorationLine).toBe('none');
+    await expect(parseFloat(estilo.paddingBottom)).toBeGreaterThan(0);
+    // El anillo de foco sigue siendo el outline, ajeno a la sombra.
+    await expect(boton).toHaveClass('button--text');
+  },
 };
 
 export const TextOnDark: Story = {
