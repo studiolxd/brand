@@ -46,8 +46,8 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --stepper-marker-done-bg: var(--color-accent-1); /** Relleno de la marca hecha — surface-dark: el prusia es el lienzo, así que la marca toma el par de `Button primary` (lavanda con tinta prusia) */
-  --stepper-marker-done-color: var(--color-primary); /** Cifra o check sobre el relleno lavanda — surface-dark */
+  --stepper-marker-done-bg: var(--color-accent-2); /** Relleno de la marca hecha o actual — surface-dark: el prusia es el lienzo y la marca necesita otro color. Decisión de diseño explícita: amarillo (`accent-2`) en lugar de la lavanda que daría la derivación por defecto (el par de `Button primary`), para que el progreso no se confunda con una acción */
+  --stepper-marker-done-color: var(--color-primary); /** Cifra o check sobre el relleno amarillo — surface-dark. La tinta prusia se mantiene: 11,2:1 sobre `accent-2`, muy por encima del 4,5:1 de AA */
   --stepper-marker-pending-bg: var(--color-background-dark); /** Fondo de la marca pendiente — surface-dark: el lienzo oscuro, por el mismo motivo que en claro */
   --stepper-marker-pending-border-color: var(--color-text-on-dark); /** Filete de la marca pendiente — surface-dark: todo borde pasa a la tinta clara */
   --stepper-marker-pending-color: var(--color-text-muted-on-dark); /** Cifra de un paso pendiente — surface-dark */

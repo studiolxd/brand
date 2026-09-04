@@ -45,8 +45,8 @@
     "transition-duration":  { "$value": "{motion.duration.fast}", "$type": "number",    "$description": "Duración del cambio de color al pasar por un paso alcanzable" },
     "transition-easing":    { "$value": "{motion.easing.default}","$type": "string",    "$description": "Curva del cambio de color" },
 
-    "surface-dark-marker-done-bg":            { "$value": "{color.accent-1}",              "$type": "color", "$description": "Relleno de la marca hecha — surface-dark: el prusia es el lienzo, así que la marca toma el par de `Button primary` (lavanda con tinta prusia)" },
-    "surface-dark-marker-done-color":         { "$value": "{color.primary}",               "$type": "color", "$description": "Cifra o check sobre el relleno lavanda — surface-dark" },
+    "surface-dark-marker-done-bg":            { "$value": "{color.accent-2}",              "$type": "color", "$description": "Relleno de la marca hecha o actual — surface-dark: el prusia es el lienzo y la marca necesita otro color. Decisión de diseño explícita: amarillo (`accent-2`) en lugar de la lavanda que daría la derivación por defecto (el par de `Button primary`), para que el progreso no se confunda con una acción" },
+    "surface-dark-marker-done-color":         { "$value": "{color.primary}",               "$type": "color", "$description": "Cifra o check sobre el relleno amarillo — surface-dark. La tinta prusia se mantiene: 11,2:1 sobre `accent-2`, muy por encima del 4,5:1 de AA" },
     "surface-dark-marker-pending-bg":         { "$value": "{color.background.dark}",       "$type": "color", "$description": "Fondo de la marca pendiente — surface-dark: el lienzo oscuro, por el mismo motivo que en claro" },
     "surface-dark-marker-pending-border-color": { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Filete de la marca pendiente — surface-dark: todo borde pasa a la tinta clara" },
     "surface-dark-marker-pending-color":      { "$value": "{color.text.muted-on-dark}",    "$type": "color", "$description": "Cifra de un paso pendiente — surface-dark" },
