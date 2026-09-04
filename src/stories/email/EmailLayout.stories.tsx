@@ -20,7 +20,12 @@ const meta: Meta<typeof EmailLayout> = {
         <EmailText>
           Hola, Ana. Confirma tu dirección para terminar de crear tu cuenta en Bricks.
         </EmailText>
-        <EmailButton href="#confirmar">Confirmar mi correo</EmailButton>
+        <EmailButton
+          href="https://bricks.slxd.app/verificar-correo?token=8f3a1c9e4b274d6a9f012c5e7a8b3d40&uid=41827&redirect=%2Fpanel"
+          fallbackLabel="O copia y pega esta dirección en el navegador:"
+        >
+          Confirmar mi correo
+        </EmailButton>
         <EmailNote>El enlace caduca en 24 horas. Si no has sido tú, ignora este correo.</EmailNote>
       </>
     ),

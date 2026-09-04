@@ -130,6 +130,57 @@ mismo fichero — así el navegador se queda sin eje que variar, empareja la pro
 con la cara del título y el correo sale entero en negrita. Una sola cara con el
 rango, como en `fonts.css`.
 
+## El botón lleva su enlace de respaldo
+
+Todo correo con acción lleva, debajo del botón, **la misma dirección en texto**
+para copiar y pegar. No es un adorno de redacción: hay clientes que destrozan
+los botones, y la gente reenvía correos y los abre en otro dispositivo. El
+enlace en texto es el plan B del correo.
+
+Las dos piezas son **un solo componente** a propósito — `EmailButton` pinta las
+dos — para que viajen juntas y ninguna plantilla pueda dejarse la segunda:
+
+```tsx
+<EmailButton
+  href={url}
+  fallbackLabel={t('verifyEmail.copyPaste')}
+>
+  {t('verifyEmail.button')}
+</EmailButton>
+```
+
+Y sale así:
+
+> **Verifica tu dirección de correo**
+>
+> ¡Gracias por registrarte! Pulsa en el botón para verificar tu dirección de correo y activar tu cuenta.
+>
+> **[ Verificar correo ]**
+>
+> O copia y pega esta dirección en el navegador: `https://…`
+>
+> Este enlace caduca en 24 horas. Si no creaste una cuenta, puedes ignorar este mensaje.
+
+Cuatro decisiones que la sostienen:
+
+- **`fallbackLabel` es obligatoria y no tiene default castellano**, la única
+  prop de texto del DS que no lo tiene. El correo vive en seis idiomas que
+  conoce `mailer` y no el DS; y siendo obligatoria, no hay forma de renderizar
+  un botón sin su respaldo.
+- **La dirección se enseña entera y como texto plano**, no dentro de un `<a>`
+  ni acortada: lo que se le pide es leerla y copiarla, así que no puede depender
+  de un enlace que un cliente pueda vaciar o quitar. Los clientes que autoenlazan
+  lo harán solos.
+- **Corte de palabra, no `overflow`.** Una URL con token no cabe en 600px.
+  `word-break: break-all` para los clientes modernos y `word-wrap: break-word`
+  —el nombre viejo— para el motor de Word de Outlook. Con `overflow` se
+  escondería justo lo que hay que copiar. Comprobado a 320, 375 y 600px: la
+  dirección parte dentro de la columna y no aparece barra horizontal.
+- **El aire lo reparte el bloque.** Son tres piezas seguidas —botón, respaldo y
+  nota— y el aire tiene que decir cuáles van juntas: 12px entre el botón y su
+  respaldo, que son la misma acción, y 24px antes de la nota. El margen inferior
+  lo lleva el respaldo, que es quien cierra el bloque.
+
 ## La caja
 
 Tres superficies, tres tokens:

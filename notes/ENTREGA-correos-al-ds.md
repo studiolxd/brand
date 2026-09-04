@@ -1,6 +1,6 @@
 # Entrega — Los correos de la suite, al DS
 
-Rama `emails-ds`. Diez commits, sin tocar la versión y sin tag: el release lo
+Rama `emails-ds`. Once commits, sin tocar la versión y sin tag: el release lo
 cierra quien decida el número.
 
 Incluye las dos rondas de revisión del operador: el logotipo se veía roto en el
@@ -166,9 +166,12 @@ props de texto con default castellano (`manageLabel`, `unsubscribeLabel`,
 ### Primitivas
 
 `EmailHeading`, `EmailText`, `EmailNote` (`tone?: 'muted' | 'plain'`),
-`EmailLink` y `EmailButton`. Todas aceptan `style`, que se mezcla **encima** del
-estilo base. Cierran dentro del componente, y con un nombre, el estilo que hoy
-cada plantilla escribe a mano.
+`EmailLink` y `EmailButton` (`href`, `fallbackLabel` **obligatoria**). Todas
+aceptan `style`, que se mezcla **encima** del estilo base. Cierran dentro del
+componente, y con un nombre, el estilo que hoy cada plantilla escribe a mano.
+
+`EmailButton` pinta dos cosas: el botón y, debajo, la misma dirección en texto —
+ver más abajo.
 
 ### Dependencia
 
@@ -223,12 +226,51 @@ Nada de esto se ha tocado: `slxd` era solo lectura para este encargo.
    solo se les cae el `className`.
 5. **`src/templates/preview.ts`** y el servidor de `react-email` siguen igual.
 
+### Los correos con acción: son 16, no 4
+
+`fallbackLabel` es obligatoria, así que **toda plantilla con botón tiene que
+pasarla** — sin ella no compila, que es exactamente la idea. Contadas una a una,
+son bastantes más de las cuatro de autenticación:
+
+| Dónde | Con botón | Cuáles |
+| --- | --- | --- |
+| `packages/mailer` | 9 de 12 | `VerifyEmail`, `PasswordReset`, `MagicLink`, `OrgInvitation`, `ChangeEmail`, `SecurityAlert`, `PaymentFailed`, `SubscriptionCanceled`, `TrialWillEnd` |
+| `apps/bricks` | 4 de 4 | `ContentCopyShared`, `ExportComplete`, `ReviewGuestComment`, `ReviewGuestStatus` |
+| `apps/localizia` | 3 de 3 | `ExportReady`, `JobCompleted`, `JobFailed` |
+| `apps/lmsmcp` | 0 de 1 | — |
+
+Sin botón, y por tanto sin cambio: `DisputeCreated`, `InvitationRevoked` y
+`MoodleCredentialsRotated`.
+
+Qué hace falta:
+
+1. Una **clave i18n nueva** en `packages/mailer/messages/*.json`, **en los seis
+   idiomas**. Sugerencia de nombre, para que sirva a las 16 en vez de repetirse
+   plantilla a plantilla: `footer.copyPaste`, con el texto «O copia y pega esta
+   dirección en el navegador:» y sus traducciones. La frase se escribe con su
+   puntuación final: la dirección se pinta a continuación, separada por un
+   espacio.
+2. En cada plantilla con botón, cambiar el `Button` por `EmailButton` y pasarla:
+   ```diff
+   -<Button href={url} style={emailStyles.button}>{t("verifyEmail.button")}</Button>
+   +<EmailButton href={url} fallbackLabel={t("footer.copyPaste")}>
+   +  {t("verifyEmail.button")}
+   +</EmailButton>
+   ```
+   Las siete de apps además ganan el estilo, que hoy no tienen (ver abajo).
+3. Si alguna plantilla ya traía a mano su propia frase de «copia y pega», se
+   retira: ahora la pone el componente.
+
+Ojo con el orden del texto: el respaldo va **entre el botón y el descargo**
+(«Este enlace caduca en 24 horas…»), que es donde lo coloca el componente.
+
 ### Las 8 plantillas de apps
 
 `apps/bricks/src/emails/` (4), `apps/localizia/src/emails/` (3),
 `apps/lmsmcp/src/emails/` (1).
 
-Hoy usan `Heading`, `Text` y `Button` **de `react-email` a pelo, sin estilo
+Siete de las ocho tienen botón, así que entran en la tabla de arriba. Aparte de
+eso, hoy usan `Heading`, `Text` y `Button` **de `react-email` a pelo, sin estilo
 ninguno**: dentro del recuadro se ven con los defaults del navegador, no con la
 tipografía de la marca. Adoptar las primitivas de brand las arregla, y es un
 cambio de una línea por elemento:
@@ -292,6 +334,43 @@ Decisiones que van con ellos:
 Mientras esa ruta no exista, los correos enviados saldrán **sin logotipo** (con
 el `alt`, que es el nombre de quien manda) y **con la fuente de sistema**. Se
 degrada, no se rompe — pero el despliegue es parte del día D.
+
+## El botón lleva su enlace de respaldo
+
+Todo correo con acción lleva, debajo del botón, **la misma dirección en texto**
+para copiar y pegar. Hay clientes que destrozan los botones, y la gente reenvía
+correos y los abre en otro dispositivo: el enlace en texto es el plan B del
+correo.
+
+Las dos piezas son **un solo componente** —`EmailButton` pinta las dos— para que
+viajen juntas y ninguna plantilla pueda dejarse la segunda.
+
+```tsx
+<EmailButton href={url} fallbackLabel={t('verifyEmail.copyPaste')}>
+  {t('verifyEmail.button')}
+</EmailButton>
+```
+
+Decisiones que la sostienen:
+
+- **`fallbackLabel` es obligatoria y no tiene default castellano.** Es la única
+  prop de texto de la librería sin default, y es a propósito: el correo vive en
+  seis idiomas que conoce `mailer` y no el DS, y siendo obligatoria no hay forma
+  de renderizar un botón sin su respaldo. Anotada como excepción en
+  Foundations › Internacionalización.
+- **La dirección se enseña entera y como texto plano**, no dentro de un `<a>` ni
+  acortada: lo que se le pide es leerla y copiarla, así que no puede depender de
+  un enlace que un cliente pueda vaciar o quitar. Los que autoenlazan lo hacen
+  solos.
+- **Corte de palabra, no `overflow`**: `word-break: break-all` para los clientes
+  modernos y `word-wrap: break-word` —el nombre viejo— para el motor de Word de
+  Outlook. Con `overflow` se escondería justo lo que hay que copiar.
+- **El aire lo reparte el bloque**: 12px entre el botón y su respaldo, que son
+  la misma acción, y 24px antes de la nota. El margen inferior lo lleva el
+  respaldo, que es quien cierra el bloque.
+
+Comprobado con una URL larga de verdad (con token) a 320, 375 y 600px: la
+dirección parte dentro de la columna, sin barra horizontal y sin desbordar.
 
 ## El botón, a ancho completo
 

@@ -171,6 +171,35 @@ export const emailStyles = {
      */
     marginBottom: emailToken('--email-button-margin-block-end'),
   },
+  /*
+   * El enlace de respaldo que va bajo el botón: la misma dirección en texto,
+   * para copiar y pegar. Letra menor y tinta secundaria, como la nota — el
+   * único elemento con peso fuerte del correo es el título.
+   */
+  buttonFallback: {
+    color: emailPalette.muted,
+    fontFamily: emailFontFamily,
+    fontSize: emailToken('--email-note-font-size'),
+    fontWeight: Number(emailToken('--email-font-weight')),
+    lineHeight: emailToken('--email-note-line-height'),
+    margin: `${emailToken('--email-button-fallback-margin-block-start')} 0 ${emailToken('--email-button-margin-block-end')}`,
+  },
+  /*
+   * La dirección en sí, dentro de esa frase. En la tinta normal y no en la
+   * secundaria: es lo que hay que leer y copiar, y en gris se leería como
+   * deshabilitada.
+   *
+   * Los dos cortes de palabra son el mismo remedio en dos dialectos: una URL
+   * con token no cabe en 600px y sacaría barra horizontal. `word-break` para
+   * los clientes modernos y `word-wrap`, el nombre viejo, para el motor de
+   * Word de Outlook. Se corta la palabra a propósito — la alternativa sería
+   * `overflow`, que esconde justo lo que hay que copiar.
+   */
+  buttonFallbackUrl: {
+    color: emailPalette.text,
+    wordBreak: 'break-all',
+    wordWrap: 'break-word',
+  },
   link: {
     color: emailPalette.text,
     fontFamily: emailFontFamily,

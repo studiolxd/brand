@@ -6,7 +6,10 @@ import { EmailButton, EmailHeading, EmailLink, EmailNote, EmailText } from './Em
 
 /*
  * Dos correos enteros, con datos falsos, del mismo corte que los que manda hoy
- * la suite: uno transaccional (sin categoría, sin baja) y uno de aviso (con
+ * la suite. Las direcciones son largas de verdad, con su token: es el caso que
+ * rompe el ancho, y el que tiene que verse en el catálogo.
+ *
+ * Los dos correos son: uno transaccional (sin categoría, sin baja) y uno de aviso (con
  * categoría, con baja y preferencias).
  *
  * Las plantillas de verdad NO viven aquí —son producto y se quedan en su
@@ -30,7 +33,12 @@ const verificar = (
     <EmailText>
       Hola, Ana. Ya casi está: confirma tu dirección y podrás entrar en Bricks con ella.
     </EmailText>
-    <EmailButton href="#confirmar">Confirmar mi correo</EmailButton>
+    <EmailButton
+      href="https://bricks.slxd.app/verificar-correo?token=8f3a1c9e4b274d6a9f012c5e7a8b3d40&uid=41827&redirect=%2Fpanel"
+      fallbackLabel="O copia y pega esta dirección en el navegador:"
+    >
+      Confirmar mi correo
+    </EmailButton>
     <EmailNote>
       El enlace caduca en 24 horas. Si no has sido tú quien ha pedido esta cuenta, ignora este
       correo y no pasará nada.
@@ -49,7 +57,12 @@ const exportacion = (
     <EmailText>
       Hola, Ana. La exportación de «Formación en prevención» ha terminado: 1.284 registros, 2,4 MB.
     </EmailText>
-    <EmailButton href="#descargar">Descargar el archivo</EmailButton>
+    <EmailButton
+      href="https://360.slxd.app/informes/exportaciones/descargar?id=7b21e0c5&token=c4d9a1f60e8b47239ac5d10f6e2b8471"
+      fallbackLabel="O copia y pega esta dirección en el navegador:"
+    >
+      Descargar el archivo
+    </EmailButton>
     <EmailNote>
       El enlace de descarga estará disponible siete días. Después habrá que volver a lanzar la
       exportación desde <EmailLink href="#informes">Informes</EmailLink>.

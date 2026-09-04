@@ -79,14 +79,45 @@ export function EmailLink({ href, children, style }: EmailLinkProps) {
 export interface EmailButtonProps {
   href: string;
   children: ReactNode;
+  /**
+   * La frase que presenta el enlace de respaldo, p. ej. «O copia y pega esta
+   * dirección en el navegador:». La dirección se pinta a continuación,
+   * separada por un espacio, así que la frase se escribe con su puntuación.
+   *
+   * **Obligatoria, y sin valor por defecto** — la única prop de texto del DS
+   * que no lo tiene. Es deliberado por partida doble: el correo vive en seis
+   * idiomas que conoce `mailer` y no el DS, y hacerla obligatoria es lo que
+   * garantiza que ninguna plantilla se deje el respaldo. Un botón sin él es
+   * un correo sin plan B.
+   */
+  fallbackLabel: string;
   style?: CSSProperties;
 }
 
-/** La acción del correo: el par lavanda/prusia de `Button primary`. */
-export function EmailButton({ href, children, style }: EmailButtonProps) {
+/**
+ * La acción del correo: el par lavanda/prusia de `Button primary`, a ancho
+ * completo, **con la misma dirección en texto justo debajo**.
+ *
+ * Las dos piezas son un solo componente a propósito. Hay clientes que
+ * destrozan los botones, y la gente reenvía correos y los abre en otro
+ * dispositivo: el enlace en texto es el plan B, y un plan B que cada plantilla
+ * tuviera que acordarse de añadir no lo sería.
+ *
+ * La dirección va como texto plano, no dentro de un `<a>`: lo que se pide de
+ * ella es leerla y copiarla, y así no hay enlace que un cliente pueda vaciar
+ * de estilo o quitar. Los que autoenlazan lo harán solos.
+ */
+export function EmailButton({ href, children, fallbackLabel, style }: EmailButtonProps) {
   return (
-    <Button href={href} style={{ ...emailStyles.button, ...style }}>
-      {children}
-    </Button>
+    <>
+      {/* El margen inferior lo lleva el respaldo, que es quien cierra el
+          bloque; si lo llevara también el botón, quedarían separados. */}
+      <Button href={href} style={{ ...emailStyles.button, marginBottom: 0, ...style }}>
+        {children}
+      </Button>
+      <Text style={emailStyles.buttonFallback}>
+        {fallbackLabel} <span style={emailStyles.buttonFallbackUrl}>{href}</span>
+      </Text>
+    </>
   );
 }

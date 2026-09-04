@@ -34,6 +34,7 @@ export const emailTokens = {
   '--email-button-font-weight': '300',
   '--email-button-padding-block': '16px',
   '--email-button-width': '100%',
+  '--email-button-fallback-margin-block-start': '12px',
   '--email-button-margin-block-end': '24px',
   '--email-logo-mark-size': '48px',
   '--email-logo-padding': '8px',

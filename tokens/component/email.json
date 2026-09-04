@@ -135,10 +135,15 @@
       "$type": "string",
       "$description": "El botón del correo va a ancho completo, siempre y sin media query: Outlook las ignora y una solución a medias es peor que ninguna. En una columna de 600px se lee bien, y en el móvil resuelve de una vez que el texto quepa en una línea y que el objetivo táctil sea el botón entero"
     },
+    "button-fallback-margin-block-start": {
+      "$value": "{spacing.3}",
+      "$type": "dimension",
+      "$description": "Separación entre el botón y su enlace de respaldo. Más corta que la que sigue: los dos son la misma acción, y el aire tiene que decirlo"
+    },
     "button-margin-block-end": {
       "$value": "{spacing.5}",
       "$type": "dimension",
-      "$description": "Separación bajo el botón: el descargo que lo sigue quedaría pegado. Va en el botón y no en un envoltorio para que viaje con él a todas las plantillas"
+      "$description": "Separación bajo el bloque del botón —botón y enlace de respaldo— para que el descargo que lo sigue no quede pegado. La lleva el propio bloque, no un envoltorio, para que viaje con él a todas las plantillas"
     },
     "logo-mark-size": {
       "$value": "{logomark.size-lg}",

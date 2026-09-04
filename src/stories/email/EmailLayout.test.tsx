@@ -12,11 +12,16 @@ import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitiv
 import { EmailLayout } from './EmailLayout';
 import { emailTokens } from './emailTokens';
 
+const URL =
+  'https://bricks.slxd.app/verificar-correo?token=8f3a1c9e4b274d6a9f012c5e7a8b3d40&uid=41827&redirect=%2Fpanel';
+
 const mensaje = (
   <EmailLayout preview="Confirma tu correo" appName="Bricks">
     <EmailHeading>Confirma tu correo</EmailHeading>
     <EmailText>Hola, Ana.</EmailText>
-    <EmailButton href="https://example.com/verificar">Confirmar</EmailButton>
+    <EmailButton href={URL} fallbackLabel="O copia y pega esta dirección:">
+      Confirmar
+    </EmailButton>
     <EmailNote>El enlace caduca en 24 horas.</EmailNote>
   </EmailLayout>
 );
@@ -99,6 +104,27 @@ describe('EmailLayout', () => {
     );
     expect(conBaja).toContain('https://example.com/baja');
     expect(conBaja).toContain('date de baja');
+  });
+
+  it('pone bajo el botón la misma dirección, entera y en texto', async () => {
+    // Hay clientes que destrozan los botones, y la gente reenvía correos y los
+    // abre en otro dispositivo: el enlace en texto es el plan B del correo.
+    const out = await html(mensaje);
+
+    // La dirección aparece dos veces: en el href del botón y como texto.
+    expect(out.split(URL.replace(/&/g, '&amp;')).length - 1).toBe(2);
+    expect(out).toContain('O copia y pega esta dirección:');
+    // Entera, sin acortar, y no dentro de un <a> con otro texto.
+    expect(out).not.toContain('…');
+    // Y con el corte de palabra que evita la barra horizontal, en sus dos
+    // dialectos: `word-break` para los clientes modernos, `word-wrap` para el
+    // motor de Word de Outlook.
+    const respaldo = out.match(/<span style="[^"]*word-break[^"]*"/)?.[0] ?? '';
+    expect(respaldo).toContain('word-break:break-all');
+    expect(respaldo).toContain('word-wrap:break-word');
+    // Con `overflow` la dirección se cortaría de la vista, que es justo lo
+    // contrario de lo que se pide de ella.
+    expect(respaldo).not.toContain('overflow');
   });
 
   it('deja traducir todo texto que emite por su cuenta', async () => {

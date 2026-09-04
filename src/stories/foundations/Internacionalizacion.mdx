@@ -116,9 +116,18 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `Sidebar` | `label`, `resizerLabel`, `resizerValueText` — el ancho hablado del asa, con su unidad |
 | `AppShell` | `skipLabel` — el enlace de salto al contenido |
 | `FloatingDock` | `label` (el nombre del lanzador, sin default), `closeLabel`, `badgeLabel` — cómo se lee el contador de novedades |
+| `EmailLayout` | `optOut.manageLabel`, `optOut.unsubscribeLabel`, `optOut.manageBeforeLabel`, `optOut.managePreferencesLabel`, `optOut.manageAfterLabel` — la frase de baja, partida porque los idiomas no coinciden en si hay texto tras el enlace |
+| `EmailButton` | `fallbackLabel` (**obligatoria, sin default**) — la frase que presenta el enlace de respaldo |
 
 ## Al añadir un componente nuevo
 
 Si el componente emite algún texto que no venga de sus `children` ni de sus datos, ese texto va
 en una prop con default castellano — no cableado en el JSX. Es la diferencia entre que un
 consumidor pueda traducirlo y que tenga que reimplementar el componente entero para hacerlo.
+
+### La excepción: `EmailButton.fallbackLabel`
+
+Es la única prop de texto de la librería **sin default castellano**, y es obligatoria. Dos
+razones, y las dos apuntan al mismo sitio: el correo de la suite vive en seis idiomas que conoce
+`mailer` y no el DS, y un botón de correo sin su enlace de respaldo debajo es un correo sin plan
+B. Hacerla obligatoria es lo que garantiza que ninguna plantilla se lo deje.

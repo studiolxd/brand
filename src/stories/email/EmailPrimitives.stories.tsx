@@ -24,10 +24,16 @@ const correo = (
       superficie pública, que es la del correo. Dentro admite un <EmailLink href="#enlace">EmailLink</EmailLink>,
       que va subrayado porque en un correo el color solo no basta para distinguirlo.
     </EmailText>
-    <EmailButton href="#accion">EmailButton</EmailButton>
+    <EmailButton
+      href="https://bricks.slxd.app/verificar-correo?token=8f3a1c9e4b274d6a9f012c5e7a8b3d40&uid=41827&redirect=%2Fpanel"
+      fallbackLabel="O copia y pega esta dirección en el navegador:"
+    >
+      EmailButton
+    </EmailButton>
     <EmailNote>
-      «EmailNote» en tinta secundaria: el descargo que sigue a todo botón. La
-      separación por encima la pone el propio botón.
+      «EmailNote» en tinta secundaria: el descargo que cierra el mensaje. Encima va
+      el enlace de respaldo que «EmailButton» trae consigo — la misma dirección en
+      texto, entera y cortable, para quien no pueda pulsar el botón.
     </EmailNote>
   </EmailLayout>
 );
