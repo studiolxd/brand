@@ -270,3 +270,60 @@ pantalla— quedó comprobada aquí: a 500px de ancho la maqueta del alta enseñ
 
 `pnpm lint`, `npx tsc -b` y `pnpm test` (289 tests) en verde, y las medidas de
 arriba tomadas en el Storybook del worktree (6007).
+
+
+---
+
+## Tercera ronda
+
+### El ancho sale de la escala de contenido
+
+`--onboarding-shell-max-width` apuntaba a `{breakpoint.md}`; ahora apunta a
+`{container.max-width-md}`, que vale lo mismo pero es lo que nombra la cosa: un
+punto de corte responsive y una medida de columna tienen que poder moverse por
+separado. El render no cambia ni un píxel.
+
+Ojo con el nombre: el token es **`container.max-width-md`** (plano, con guion),
+no `container.max-width.md` — con la forma anidada Style Dictionary aborta el
+build con «Reference Errors». Revisado el resto de tokens del shell: todos los
+demás ya apuntaban al rol correcto.
+
+### Dos anchos: el chrome a ancho de página, solo el paso acotado
+
+La plantilla era una sola columna de 768px con la marca dentro, así que el
+logotipo quedaba más al centro que en el resto de la suite. Ahora:
+
+- El **chrome** —barra de la marca y pie de preferencias— ocupa el ancho normal
+  de una página pública: el del `Container` del `main`, el mismo que
+  `SiteHeader` da a su barra.
+- Solo la **columna del paso** (`.onboarding-shell__step`: progreso, cuerpo y
+  acciones) se acota y se centra.
+- La marca toma el mismo desplazamiento lateral que la cabecera
+  (`brand-margin-inline-start` → `{site-header.logo-margin-inline-start}`), que
+  descuenta el espacio de seguridad del trazado.
+
+Medido a 1512px: el logotipo de `Pages/Acceso` y el del alta arrancan **los dos
+en x=100 y miden 85px**. La misma vertical y el mismo tamaño, que era el
+objetivo.
+
+### Idioma y tema, en un pie de chrome propio
+
+Salen de la barra superior —arriba queda solo la marca— y se pintan al final, en
+un `footer` propio **separado del pie de acciones del paso**: una preferencia
+global no es una acción del flujo. Sigue el ancho del chrome, así que cierra la
+pantalla en la misma vertical en que la abre la marca.
+
+La ranura **sigue llamándose `switchers`**, con la misma forma: nombra lo que
+contiene, no dónde se pinta, así que sigue siendo exacta y ningún consumidor
+cambia. Orden de tabulación comprobado en el navegador: progreso → campos →
+acciones del paso → idioma → tema; las preferencias, las últimas.
+
+La story `Test — main acotado, progreso y jerarquía de acciones` cubre ahora las
+tres cosas: que el progreso vive dentro de la columna acotada, que los
+conmutadores ya no están en la barra superior y que su pie va detrás del paso en
+el documento.
+
+### Verificación
+
+`pnpm lint`, `npx tsc -b` y `pnpm test` (289 tests) en verde. Las cinco páginas
+revisadas en el 6007 en claro y en oscuro; las medidas de arriba, tomadas ahí.
