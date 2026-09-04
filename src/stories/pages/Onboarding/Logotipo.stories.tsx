@@ -62,6 +62,6 @@ export const Contrato: Story = {
     const canvas = within(canvasElement);
     await expect(canvasElement).toHaveTextContent('Paso 3 de 4');
     await expect(canvas.getByLabelText('Logotipo de la organización')).toBeInTheDocument();
-    await expect(canvas.getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--ghost');
+    await expect(canvas.getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
   },
 };

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Stepper, type StepperStep } from './Stepper';
+import { InputField } from '../InputField/InputField';
+import { Stack } from '../../atoms/Stack/Stack';
 
 const ALTA: StepperStep[] = [
   { id: 'perfil', label: 'Perfil' },
@@ -61,6 +63,37 @@ export const VolverAtras: Story = {
   },
 };
 
+/**
+ * Hacia delante lo decide el flujo, no el componente. La regla habitual es
+ * «solo con el paso actual completo»: mientras el campo obligatorio esté vacío,
+ * el siguiente va con `reachable: false` y su cifra no se pulsa —inerte, no
+ * deshabilitada—; en cuanto se rellena, se abre. Los pasos ya hechos siempre
+ * son alcanzables. «Invitaciones» sigue cerrado porque necesita la organización
+ * creada: una dependencia real que solo conoce el producto.
+ */
+export const HaciaDelante: Story = {
+  name: 'Ir también hacia delante',
+  render: (args) => {
+    const [paso, setPaso] = useState(1);
+    const [organizacion, setOrganizacion] = useState('');
+    const completo = organizacion.trim() !== '';
+    const pasos: StepperStep[] = ALTA.map((step, index) =>
+      index > paso ? { ...step, reachable: completo && index === paso + 1 } : step,
+    );
+    return (
+      <Stack align="stretch">
+        <Stepper {...args} steps={pasos} current={paso} onStepSelect={(index) => setPaso(index)} />
+        <InputField
+          id="stepper-organizacion"
+          label="Nombre de la organización (obligatorio)"
+          value={organizacion}
+          onChange={(e) => setOrganizacion(e.target.value)}
+        />
+      </Stack>
+    );
+  },
+};
+
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },
@@ -93,8 +126,38 @@ export const ContratoUnSoloPaso: Story = {
   },
 };
 
+export const ContratoReachable: Story = {
+  name: 'Test — `reachable` abre pendientes y cierra completados',
+  tags: ['!dev'],
+  args: {
+    current: 2,
+    steps: [
+      { id: 'perfil', label: 'Perfil', reachable: false },
+      { id: 'organizacion', label: 'Organización' },
+      { id: 'logotipo', label: 'Logotipo' },
+      { id: 'invitaciones', label: 'Invitaciones', reachable: true },
+    ],
+    onStepSelect: () => {},
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const items = within(canvas.getByRole('list', { name: 'Progreso' })).getAllByRole('listitem');
+    // Un completado cerrado a mano deja de ser botón; un pendiente abierto lo es.
+    await expect(within(items[0]).queryByRole('button')).toBeNull();
+    await expect(within(items[1]).getByRole('button')).toBeInTheDocument();
+    await expect(within(items[3]).getByRole('button')).toBeInTheDocument();
+    // El paso actual nunca: ya se está en él, y sigue llevando el `aria-current`.
+    await expect(within(items[2]).queryByRole('button')).toBeNull();
+    await expect(items[2].querySelector('[aria-current="step"]')).not.toBeNull();
+    // Un paso inerte no es un botón ni recibe foco.
+    await expect(items[0].querySelector('[tabindex]')).toBeNull();
+    // Abrir un pendiente no le cambia el estado: sigue pendiente, hueco.
+    await expect(items[3]).toHaveClass('stepper__step--pending');
+  },
+};
+
 export const ContratoAlcanzables: Story = {
-  name: 'Test — solo los pasos hechos son alcanzables',
+  name: 'Test — por defecto, alcanzables solo los pasos hechos',
   tags: ['!dev'],
   args: { current: 2 },
   render: VolverAtras.render,

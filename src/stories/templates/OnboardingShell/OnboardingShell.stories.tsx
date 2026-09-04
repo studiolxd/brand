@@ -59,9 +59,9 @@ const meta: Meta<typeof OnboardingShell> = {
     switchers: conmutadores,
     stepper: <Stepper steps={PASOS} current={1} />,
     children: cuerpo,
-    backAction: <Button variant="outline" size="lg">Atrás</Button>,
-    primaryAction: <Button variant="primary" size="lg">Continuar</Button>,
-    exitAction: <Button variant="text" size="lg">Omitir por ahora</Button>,
+    backAction: <Button variant="outline">Atrás</Button>,
+    primaryAction: <Button variant="primary">Continuar</Button>,
+    exitAction: <Button variant="text">Omitir por ahora</Button>,
   },
   argTypes: {
     brand: { table: { disable: true } },
@@ -91,7 +91,7 @@ export const UltimoPaso: Story = {
   name: 'Último paso',
   args: {
     stepper: <Stepper steps={PASOS} current={3} />,
-    primaryAction: <Button variant="primary" size="lg">Terminar</Button>,
+    primaryAction: <Button variant="primary">Terminar</Button>,
     exitAction: undefined,
   },
 };
@@ -128,7 +128,7 @@ export const FlujoDeUnPaso: Story = {
     stepper: <Stepper steps={[{ id: 'espera', label: 'Sala de espera' }]} current={0} />,
     backAction: undefined,
     primaryAction: undefined,
-    exitAction: <Button variant="text" size="lg">Cerrar sesión</Button>,
+    exitAction: <Button variant="text">Cerrar sesión</Button>,
   },
 };
 
@@ -150,7 +150,14 @@ export const Contrato: Story = {
     // El chrome va al ancho de la página; solo la columna del paso se acota.
     const paso = canvasElement.querySelector('.onboarding-shell__step')!;
     await expect(paso).toContainElement(canvas.getByRole('list', { name: 'Progreso' }));
-    await expect(canvasElement.querySelector('.onboarding-shell__top')).not.toContainElement(canvasElement.querySelector('.onboarding-shell__switchers'));
+    const barra = canvasElement.querySelector('.onboarding-shell__top')!;
+    await expect(barra).not.toContainElement(canvasElement.querySelector('.onboarding-shell__switchers'));
+    // La marca es chrome: va en la ranura de cabecera del marco, no dentro del
+    // `main`. Es lo que la separa del aire del contenido (`space="xl"`) y le
+    // deja el del chrome público.
+    await expect(main).not.toContainElement(barra as HTMLElement);
+    await expect(barra.parentElement).toBe(canvasElement.querySelector('.site-shell'));
+    await expect(canvasElement.querySelector('.site-shell')!.firstElementChild).toBe(barra);
     // Las preferencias, en su propio pie y las últimas del documento: ni se
     // mezclan con las acciones del paso ni se tabulan antes que ellas.
     const ajustes = canvasElement.querySelector('.onboarding-shell__settings')!;
@@ -165,12 +172,58 @@ export const Contrato: Story = {
     const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
     await expect(within(acciones).getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
     await expect(within(acciones).getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
-    // La salida va DESPUÉS de la principal, para que el orden del foco sea el
-    // visual en las dos disposiciones (WCAG 2.4.3): sin `order` ni `reverse`.
-    await expect(within(acciones).getAllByRole('button').map((b) => b.textContent)).toEqual(['Atrás', 'Continuar', 'Omitir por ahora']);
+    // La talla la impone el pie, no el call-site: las tres acciones salen a la
+    // misma talla que los campos del paso aunque nadie les pase `size`.
+    for (const rotulo of ['Atrás', 'Continuar', 'Omitir por ahora']) {
+      await expect(within(acciones).getByRole('button', { name: rotulo })).toHaveClass('button--lg');
+    }
+    await expect(canvasElement.querySelector('.onboarding-shell__body .input')).toHaveClass('input--lg');
+    // El marcado va en el orden del renglón de escritorio —«Atrás», la salida
+    // y, cerrándolo, la principal—, que es también el del foco en las dos
+    // disposiciones (WCAG 2.4.3): la columna de móvil se invierte sobre el par
+    // de decisiones, sin `order` ni `row-reverse` sobre la fila.
+    await expect(within(acciones).getAllByRole('button').map((b) => b.textContent)).toEqual(['Atrás', 'Omitir por ahora', 'Continuar']);
     const decisiones = acciones.querySelector('.onboarding-shell__decisions')!;
-    await expect(within(decisiones as HTMLElement).getAllByRole('button').map((b) => b.textContent)).toEqual(['Atrás', 'Continuar']);
-    await expect(decisiones.compareDocumentPosition(acciones.querySelector('.onboarding-shell__exit')!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    await expect(within(decisiones as HTMLElement).getAllByRole('button').map((b) => b.textContent)).toEqual(['Omitir por ahora', 'Continuar']);
+    await expect(decisiones).toContainElement(acciones.querySelector('.onboarding-shell__exit'));
+  },
+};
+
+/**
+ * El aire del chrome tiene que salir del chrome público, no de un número que
+ * hoy coincida: se comprueba contra el valor resuelto de los propios tokens
+ * públicos, así que cambiar `app-header.padding-block` o
+ * `legal-footer.padding-block` mueve el alta con ellos y este test lo sigue.
+ */
+export const ContratoAireDelChrome: Story = {
+  name: 'Test — el aire del chrome sale del chrome público',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    const raiz = getComputedStyle(document.documentElement);
+    const resuelto = (nombre: string) => {
+      const sonda = document.createElement('div');
+      sonda.style.paddingBlock = raiz.getPropertyValue(nombre);
+      document.body.appendChild(sonda);
+      const valor = getComputedStyle(sonda).paddingTop;
+      sonda.remove();
+      return valor;
+    };
+
+    // Arriba: el aire de la barra pública, el que le da alto a `SiteHeader`.
+    const barra = getComputedStyle(canvasElement.querySelector('.onboarding-shell__top')!);
+    await expect(barra.paddingTop).toBe(resuelto('--app-header-padding-block'));
+    await expect(barra.paddingBottom).toBe(barra.paddingTop);
+
+    // Abajo: el aire del pie público, arriba y abajo, como el `LegalFooter`.
+    const ajustes = getComputedStyle(canvasElement.querySelector('.onboarding-shell__settings')!);
+    await expect(ajustes.paddingTop).toBe(resuelto('--legal-footer-padding-block'));
+    await expect(ajustes.paddingBottom).toBe(ajustes.paddingTop);
+
+    // Y el aire del contenido sigue siendo el del `Container` con `space="xl"`:
+    // gobierna el paso, que es para lo que está.
+    const main = getComputedStyle(canvasElement.querySelector('main#main-content')!);
+    await expect(main.paddingTop).toBe(resuelto('--container-padding-block-xl'));
+    await expect(main.paddingBottom).toBe(main.paddingTop);
   },
 };
 
@@ -182,6 +235,7 @@ export const ContratoUnPaso: Story = {
     await expect(canvasElement.querySelector('.stepper')).not.toBeInTheDocument();
     // La ranura se monta igual, pero queda vacía: el CSS la saca de la rejilla.
     await expect(canvasElement.querySelector('.onboarding-shell__progress')).toBeEmptyDOMElement();
-    await expect(canvasElement.querySelector('.onboarding-shell__decisions')?.textContent).toBe('');
+    // Sin principal, el par de decisiones queda con la salida sola.
+    await expect(canvasElement.querySelector('.onboarding-shell__decisions')?.textContent).toBe('Cerrar sesión');
   },
 };

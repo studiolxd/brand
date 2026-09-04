@@ -10,7 +10,7 @@ $lxd-stepper-marker-radius: 9999px; // Marca circular, como el resto de marcas d
 $lxd-stepper-marker-border-width: 1px; // Filete de la marca de un paso pendiente. Todo borde del sistema mide lo mismo
 $lxd-stepper-marker-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la cifra de la marca
 $lxd-stepper-marker-font-size: 0.875rem; // 14px — la cifra dentro de la marca
-$lxd-stepper-marker-font-weight: 500; // Peso de énfasis de la cifra
+$lxd-stepper-marker-font-weight: 300; // Peso de la cifra de la marca: el del cuerpo, no el de énfasis. La cifra va dentro de una marca rellena de otro color, así que su peso no distingue nada — el estado ya lo dicen el relleno y el filete. El énfasis se reserva para la etiqueta del paso actual (`current-font-weight`), que sí es donde el peso hace de segunda señal junto al color
 $lxd-stepper-marker-icon-size: 16px; // Tamaño del check de un paso completado: el icono dentro de un control
 $lxd-stepper-marker-done-bg: #111e30; // Relleno de la marca de un paso completado o actual: la marca del sistema
 $lxd-stepper-marker-done-color: #ffffff; // Cifra o check sobre el relleno de marca
@@ -24,7 +24,7 @@ $lxd-stepper-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipograf
 $lxd-stepper-font-size: 0.875rem; // 14px — etiqueta de interfaz, no texto corriente
 $lxd-stepper-font-weight: 300; // Peso de la etiqueta de un paso
 $lxd-stepper-line-height: 1.3; // Interlineado de la etiqueta: cabe en dos líneas sin apelmazarse
-$lxd-stepper-current-font-weight: 500; // Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color
+$lxd-stepper-current-font-weight: 500; // Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color. Es la segunda señal del estado y por eso solo lo lleva la etiqueta — la cifra de la marca va en peso de cuerpo (`marker-font-weight`), porque dentro de un círculo relleno el peso no señala nada
 $lxd-stepper-label-color: #111e30; // Etiqueta de un paso completado o actual
 $lxd-stepper-pending-color: #4a4a4a; // Etiqueta de un paso pendiente: texto secundario
 $lxd-stepper-description-font-size: 0.75rem; // 12px — la línea de detalle bajo la etiqueta

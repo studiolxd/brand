@@ -21,7 +21,7 @@
   --stepper-transition-easing: var(--motion-easing-default); /** Curva del cambio de color */
   --stepper-marker-radius: var(--border-radius-round); /** Marca circular, como el resto de marcas del sistema */
   --stepper-marker-border-width: var(--border-width-default); /** Filete de la marca de un paso pendiente. Todo borde del sistema mide lo mismo */
-  --stepper-marker-font-weight: var(--font-weight-emphasis); /** Peso de énfasis de la cifra */
+  --stepper-marker-font-weight: var(--font-weight-default); /** Peso de la cifra de la marca: el del cuerpo, no el de énfasis. La cifra va dentro de una marca rellena de otro color, así que su peso no distingue nada — el estado ya lo dicen el relleno y el filete. El énfasis se reserva para la etiqueta del paso actual (`current-font-weight`), que sí es donde el peso hace de segunda señal junto al color */
   --stepper-marker-done-bg: var(--color-primary); /** Relleno de la marca de un paso completado o actual: la marca del sistema */
   --stepper-marker-done-color: var(--color-text-on-dark); /** Cifra o check sobre el relleno de marca */
   --stepper-marker-pending-bg: var(--color-background-light); /** Fondo de la marca de un paso pendiente: el lienzo de la página. La marca hueca tiene que tapar el carril igual que la rellena — si fuese transparente, la línea cruzaría el círculo por la mitad */
@@ -31,7 +31,7 @@
   --stepper-connector-color: var(--color-border-default-on-light); /** Tramo aún no recorrido: el rol de borde del sistema, que es literalmente el de «carriles y guías sin recorrer» — y el mismo que el filete de la marca pendiente, para que carril y marca digan lo mismo con el mismo color. No es una superficie: un filete de 1px necesita contrastar con el lienzo, no armonizar con él */
   --stepper-connector-done-color: var(--color-primary); /** Tramo recorrido: la marca del sistema, el mismo relleno que la marca de un paso hecho. El camino andado y los pasos andados comparten color */
   --stepper-font-weight: var(--font-weight-default); /** Peso de la etiqueta de un paso */
-  --stepper-current-font-weight: var(--font-weight-emphasis); /** Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color */
+  --stepper-current-font-weight: var(--font-weight-emphasis); /** Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color. Es la segunda señal del estado y por eso solo lo lleva la etiqueta — la cifra de la marca va en peso de cuerpo (`marker-font-weight`), porque dentro de un círculo relleno el peso no señala nada */
   --stepper-label-color: var(--color-text-on-light); /** Etiqueta de un paso completado o actual */
   --stepper-pending-color: var(--color-text-muted-on-light); /** Etiqueta de un paso pendiente: texto secundario */
   --stepper-description-color: var(--color-text-muted-on-light); /** Línea de detalle: texto secundario */

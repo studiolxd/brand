@@ -12,8 +12,19 @@ La plantilla del alta: la pantalla en la que un usuario recién llegado completa
 ## Qué lleva y qué no
 
 - **Superficie pública.** El marco es `SiteShell`, así que el alta lee a 20px con controles `lg`. No es una pantalla de aplicación: es la puerta, y se lee como la portada.
-- **Con marca, sin cabecera.** Arriba va el logotipo, y **el alto lo impone la plantilla**: el mismo de la cabecera pública (`site-header.content-height`, con sus mismos peldaños en móvil y en teléfono), así que la prop `size` del `Logo` no decide el tamaño final y el alta no puede descuadrarse respecto al chrome público. Lo que no va es la cabecera pública: en el alta el usuario **ya tiene sesión**, no hay nada que navegar, y una barra de marketing en mitad de un flujo solo sirve para abandonarlo. Quedan las dos ranuras que sí hacen falta ahí: idioma y tema.
+- **Con marca, sin cabecera.** Arriba va el logotipo, **en la ranura de cabecera del marco**: el sitio donde en el resto de páginas públicas va `SiteHeader`. Y **el alto lo impone la plantilla**: el mismo de la cabecera pública (`site-header.content-height`, con sus mismos peldaños en móvil y en teléfono), así que la prop `size` del `Logo` no decide el tamaño final y el alta no puede descuadrarse respecto al chrome público. Lo que no va es la cabecera pública: en el alta el usuario **ya tiene sesión**, no hay nada que navegar, y una barra de marketing en mitad de un flujo solo sirve para abandonarlo. Quedan las dos ranuras que sí hacen falta ahí: idioma y tema.
 - **Columna única centrada**, acotada a la medida de un formulario. Un paso de cinco campos pegado al borde izquierdo de una pantalla ancha no se lee.
+
+## El aire del chrome sale del chrome
+
+La marca y el pie de preferencias son **chrome**, no contenido, y por eso viven fuera del `main`: en las ranuras de cabecera y pie del marco, que es donde el sitio pone `SiteHeader` y `LegalFooter`. El aire de cada una sale del token de la pieza pública equivalente, no de un valor propio que hoy coincida:
+
+| Pieza del alta | Token | Apunta a | Valor |
+| --- | --- | --- | --- |
+| Barra de la marca | `--onboarding-shell-brand-padding-block` | `app-header.padding-block` (el que da alto a `SiteHeader`) | 8px |
+| Pie de preferencias | `--onboarding-shell-settings-padding-block` | `legal-footer.padding-block` (el aire del pie público) | 24px |
+
+Es el mismo criterio de procedencia que el ancho de la columna, el alto del logotipo y el aire del pie de acciones: si mañana la barra pública respira distinto, el alta se mueve con ella. Dentro del `main` no podía ser así, porque ahí el aire vertical lo pone el `Container` con `space="xl"` (48px) —el ritmo del **contenido**— y abría la pantalla cuatro dedos por debajo de donde la abre la barra pública. Sacado el chrome, ese `space="xl"` gobierna solo lo que es contenido: la columna del paso.
 
 ## El pie de acciones
 
@@ -24,6 +35,8 @@ La jerarquía se decide aquí una vez, para que ninguna pantalla del alta la rei
 - `primaryAction` — la decisión del paso, **la última**, donde termina la lectura. Es el mismo criterio que el pie de un `Form`: en escritorio la acción de más peso cierra el renglón por la derecha.
 
 El aire que separa el pie del cuerpo del paso es el del pie de un `Form` (`--form-actions-margin-block-start`), no el de los bloques del alta (`--onboarding-shell-gap`): los dos pies se separan igual y se mueven juntos. Encima va el aire extra propio del alta (`--onboarding-shell-actions-padding-block-start`), el que sustituye a la línea que aquí no hay.
+
+**La talla la impone el pie, no cada pantalla.** Las tres acciones salen a `lg` —la talla de control de la superficie pública— porque el pie las envuelve en el contexto de talla del sistema (`FormSizeContext`, el mismo con el que un `Form` reparte talla a sus campos y un `Hero` a sus acciones). Es el mecanismo del repo para esto: `surface-public.css` remapea tipografía, no tallas de control, así que sin él cada `call-site` tenía que acordarse de escribir `size="lg"` y el alta acababa con un formulario grande y un pie mediano en la misma pantalla. Pasarle `size` a un botón concreto sigue mandando, como en `Hero`: el contexto pone el valor por defecto, no un candado.
 
 Por debajo de `md` el pie pasa a columna: «Atrás» y la principal a todo el ancho, y la salida centrada debajo.
 
@@ -36,9 +49,9 @@ El marcado va en el orden del renglón —«Atrás», la salida, la principal—
 
 Idioma y tema no van en la rejilla del alta: se pintan en la **ranura de pie del marco** (`SiteShell`), la misma que sujeta el pie en cualquier página pública. El marco es una columna de `100dvh` con el `main` a `flex: 1`, así que el pie cae al borde inferior de la ventana cuando el paso es corto —el del perfil, un campo y un botón— y lo empuja el contenido cuando es largo —el de las invitaciones, que crece con cada fila—. La plantilla no declara ningún alto mínimo propio: repetir `100dvh` dentro de un marco que ya lo pone suma el aire del `main` y saca una barra de scroll que no toca.
 
-El reparto horizontal no cambia: el pie es una banda `Container` al ancho de página, como la marca, así que cierra la pantalla en la misma vertical que la abre; lo único acotado y centrado sigue siendo la columna del paso.
+El reparto horizontal no cambia: el pie es una banda `Container` al ancho de página, como la marca, así que cierra la pantalla en la misma vertical que la abre; lo único acotado y centrado sigue siendo la columna del paso. Su aire vertical es el del pie público, arriba y abajo; el que lo separa del paso ya lo pone el `main` al cerrar, exactamente igual que en la web.
 
-Con `shell={false}` no hay marco —lo pone el `AppShell` de la app— y el pie vuelve al final de la columna: ahí quien sujeta el fondo de la pantalla es el marco de la aplicación.
+Con `shell={false}` no hay marco —lo pone el `AppShell` de la app— y marca y pie vuelven a la rejilla, sin el aire del chrome: arriba y abajo manda el marco de la aplicación.
 
 <Canvas of={OnboardingShellStories.PasoCorto} />
 <Canvas of={OnboardingShellStories.PasoLargo} />

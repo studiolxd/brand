@@ -12,6 +12,24 @@ export interface StepperStep {
   label: ReactNode;
   /** Línea corta bajo la etiqueta. Solo se pinta en la forma horizontal. */
   description?: ReactNode;
+  /**
+   * Si se puede **ir a este paso** haciendo clic en él. Es una propiedad del
+   * paso, no del componente: solo el flujo sabe si el suyo se puede completar
+   * ya (en un alta, los pasos que vienen después de crear la organización no
+   * existen sin ella).
+   *
+   * Sin declararlo vale lo de siempre: **alcanzables los completados**, porque
+   * volver sobre lo hecho siempre se puede. Ponerlo a `true` abre un pendiente;
+   * a `false`, cierra un completado. Nada de esto aplica sin `onStepSelect`:
+   * sin callback el progreso solo informa. El paso actual nunca es alcanzable
+   * —ya se está en él—, se declare lo que se declare.
+   *
+   * La regla típica —«hacia delante solo con el paso actual completo»— la pone
+   * el flujo: el componente no valida nada. Un paso no alcanzable queda
+   * **inerte**, no deshabilitado: sin `role` de botón, sin foco y sin cursor de
+   * mano, porque un destino al que aún no se puede llegar no es un destino.
+   */
+  reachable?: boolean;
 }
 
 /** Estado de un paso dentro del flujo. Lo deduce el componente de `current`. */
@@ -32,9 +50,9 @@ export interface StepperProps {
   /** Índice (base 0) del paso actual. Los anteriores quedan completados; los siguientes, pendientes. */
   current: number;
   /**
-   * Volver a un paso ya completado. Sin este callback ningún paso es
-   * interactivo: el progreso solo informa. Los pendientes **nunca** son
-   * alcanzables, tampoco con callback — un flujo no se salta hacia delante.
+   * Ir a otro paso. Sin este callback ningún paso es interactivo: el progreso
+   * solo informa. Qué pasos se pueden alcanzar lo dice cada paso con su
+   * `reachable`; por defecto, los completados.
    */
   onStepSelect?: (index: number, step: StepperStep) => void;
   /** Nombre accesible de la lista. Default: «Progreso» (castellano). */
@@ -70,8 +88,11 @@ export interface StepperProps {
  *   permite que una plantilla monte siempre el hueco del progreso y sea el
  *   flujo quien decida si hay algo que contar.
  *
- * Volver atrás sí, saltar adelante no: con `onStepSelect` los pasos ya
- * completados son botones; el actual y los pendientes nunca lo son.
+ * Con `onStepSelect` los pasos alcanzables son botones. Cuáles lo son no lo
+ * decide el componente: por defecto los completados —volver sobre lo hecho
+ * siempre se puede—, y el flujo abre o cierra los que quiera con el
+ * `reachable` de cada paso, porque solo él sabe cuáles se pueden completar ya.
+ * El paso actual nunca es un botón: ya se está en él.
  */
 export function Stepper({
   steps,
@@ -101,7 +122,11 @@ export function Stepper({
       <ol className="stepper__list" aria-label={label}>
         {steps.map((step, index) => {
           const status: StepperStatus = index < activo ? 'completed' : index === activo ? 'current' : 'pending';
-          const alcanzable = status === 'completed' && onStepSelect !== undefined;
+          // Alcanzable = lo que diga el paso; sin decir nada, los completados.
+          // El actual nunca lo es: ya se está en él, y un botón que no lleva a
+          // ningún sitio solo añade una parada al tabulador.
+          const alcanzable =
+            onStepSelect !== undefined && status !== 'current' && (step.reachable ?? status === 'completed');
           const contenido = (
             <>
               <span className="stepper__marker" aria-hidden="true">

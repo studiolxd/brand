@@ -98,6 +98,6 @@ export const Contrato: Story = {
     const botones = within(acciones).getAllByRole('button');
     await expect(botones).toHaveLength(1);
     await expect(botones[0]).toHaveAccessibleName('Cerrar sesión');
-    await expect(botones[0]).toHaveClass('button--ghost');
+    await expect(botones[0]).toHaveClass('button--text');
   },
 };
