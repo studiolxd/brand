@@ -1,0 +1,40 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-stepper-gap: 1rem; // Aire entre pasos en la forma horizontal
+$lxd-stepper-item-gap: 0.5rem; // Aire entre la marca del paso y su etiqueta
+$lxd-stepper-text-gap: 0.25rem; // Aire entre la etiqueta del paso y su línea de detalle
+$lxd-stepper-padding-block: 0.25rem; // Aire vertical de cada paso: deja sitio al anillo de foco del paso alcanzable
+$lxd-stepper-marker-size: 2rem; // Diámetro de la marca del paso (32px): una marca legible con la cifra dentro, no un control
+$lxd-stepper-marker-radius: 9999px; // Marca circular, como el resto de marcas del sistema
+$lxd-stepper-marker-border-width: 1px; // Filete de la marca de un paso pendiente. Todo borde del sistema mide lo mismo
+$lxd-stepper-marker-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la cifra de la marca
+$lxd-stepper-marker-font-size: 0.875rem; // 14px — la cifra dentro de la marca
+$lxd-stepper-marker-font-weight: 500; // Peso de énfasis de la cifra
+$lxd-stepper-marker-icon-size: 16px; // Tamaño del check de un paso completado: el icono dentro de un control
+$lxd-stepper-marker-done-bg: #111e30; // Relleno de la marca de un paso completado o actual: la marca del sistema
+$lxd-stepper-marker-done-color: #ffffff; // Cifra o check sobre el relleno de marca
+$lxd-stepper-marker-pending-border-color: #d0d0d0; // Filete de la marca de un paso pendiente: el borde general del sistema
+$lxd-stepper-marker-pending-color: #4a4a4a; // Cifra de un paso pendiente: texto secundario
+$lxd-stepper-connector-thickness: 1px; // Grosor de la línea entre pasos
+$lxd-stepper-connector-color: #f2f2f2; // Tramo aún no recorrido: es un carril, la misma superficie clara secundaria que el de `ProgressBar`
+$lxd-stepper-connector-done-color: #111e30; // Tramo recorrido: la tinta del sistema, como toda barra de estado
+$lxd-stepper-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de las etiquetas
+$lxd-stepper-font-size: 0.875rem; // 14px — etiqueta de interfaz, no texto corriente
+$lxd-stepper-font-weight: 300; // Peso de la etiqueta de un paso
+$lxd-stepper-line-height: 1.3; // Interlineado de la etiqueta: cabe en dos líneas sin apelmazarse
+$lxd-stepper-current-font-weight: 500; // Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color
+$lxd-stepper-label-color: #111e30; // Etiqueta de un paso completado o actual
+$lxd-stepper-pending-color: #4a4a4a; // Etiqueta de un paso pendiente: texto secundario
+$lxd-stepper-description-font-size: 0.75rem; // 12px — la línea de detalle bajo la etiqueta
+$lxd-stepper-description-color: #4a4a4a; // Línea de detalle: texto secundario
+$lxd-stepper-compact-gap: 0.5rem; // Aire entre el contador («Paso 2 de 4») y la etiqueta del paso actual en la forma compacta
+$lxd-stepper-compact-font-size: 0.875rem; // 14px — la forma compacta es una etiqueta de interfaz
+$lxd-stepper-compact-count-font-weight: 500; // Peso del contador de la forma compacta
+$lxd-stepper-compact-color: #111e30; // Color del contador de la forma compacta
+$lxd-stepper-compact-label-color: #4a4a4a; // Color de la etiqueta del paso actual en la forma compacta
+$lxd-stepper-focus-ring-color: #111e30; // Anillo de foco del paso alcanzable
+$lxd-stepper-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-stepper-focus-ring-offset: 2px; // Separación del anillo de foco
+$lxd-stepper-transition-duration: 150ms; // Duración del cambio de color al pasar por un paso alcanzable
+$lxd-stepper-transition-easing: ease; // Curva del cambio de color

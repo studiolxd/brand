@@ -1,0 +1,60 @@
+{
+  "stepper": {
+    "gap":                  { "$value": "{spacing.4}",            "$type": "dimension", "$description": "Aire entre pasos en la forma horizontal" },
+    "item-gap":             { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Aire entre la marca del paso y su etiqueta" },
+    "text-gap":             { "$value": "{spacing.1}",            "$type": "dimension", "$description": "Aire entre la etiqueta del paso y su línea de detalle" },
+    "padding-block":        { "$value": "{spacing.1}",            "$type": "dimension", "$description": "Aire vertical de cada paso: deja sitio al anillo de foco del paso alcanzable" },
+
+    "marker-size":          { "$value": "{spacing.6}",            "$type": "dimension", "$description": "Diámetro de la marca del paso (32px): una marca legible con la cifra dentro, no un control" },
+    "marker-radius":        { "$value": "{border-radius.round}",  "$type": "dimension", "$description": "Marca circular, como el resto de marcas del sistema" },
+    "marker-border-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Filete de la marca de un paso pendiente. Todo borde del sistema mide lo mismo" },
+    "marker-font-family":   { "$value": "{font-family.sans}",     "$type": "string",    "$description": "Tipografía de la cifra de la marca" },
+    "marker-font-size":     { "$value": "{font-size.1}",          "$type": "dimension", "$description": "14px — la cifra dentro de la marca" },
+    "marker-font-weight":   { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de énfasis de la cifra" },
+    "marker-icon-size":     { "$value": "{icon.size-sm}",         "$type": "dimension", "$description": "Tamaño del check de un paso completado: el icono dentro de un control" },
+
+    "marker-done-bg":       { "$value": "{color.primary}",        "$type": "color",     "$description": "Relleno de la marca de un paso completado o actual: la marca del sistema" },
+    "marker-done-color":    { "$value": "{color.text.on-dark}",   "$type": "color",     "$description": "Cifra o check sobre el relleno de marca" },
+    "marker-pending-border-color": { "$value": "{color.border.default-on-light}", "$type": "color", "$description": "Filete de la marca de un paso pendiente: el borde general del sistema" },
+    "marker-pending-color": { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Cifra de un paso pendiente: texto secundario" },
+
+    "connector-thickness":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea entre pasos" },
+    "connector-color":      { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Tramo aún no recorrido: es un carril, la misma superficie clara secundaria que el de `ProgressBar`" },
+    "connector-done-color": { "$value": "{color.text.on-light}",  "$type": "color",     "$description": "Tramo recorrido: la tinta del sistema, como toda barra de estado" },
+
+    "font-family":          { "$value": "{font-family.sans}",     "$type": "string",    "$description": "Tipografía de las etiquetas" },
+    "font-size":            { "$value": "{font-size.1}",          "$type": "dimension", "$description": "14px — etiqueta de interfaz, no texto corriente" },
+    "font-weight":          { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Peso de la etiqueta de un paso" },
+    "line-height":          { "$value": "{line-height.snug}",     "$type": "number",    "$description": "Interlineado de la etiqueta: cabe en dos líneas sin apelmazarse" },
+    "current-font-weight":  { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de la etiqueta del paso actual: el énfasis dice dónde está el usuario sin depender del color" },
+    "label-color":          { "$value": "{color.text.on-light}",  "$type": "color",     "$description": "Etiqueta de un paso completado o actual" },
+    "pending-color":        { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Etiqueta de un paso pendiente: texto secundario" },
+    "description-font-size":{ "$value": "{font-size.0}",          "$type": "dimension", "$description": "12px — la línea de detalle bajo la etiqueta" },
+    "description-color":    { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Línea de detalle: texto secundario" },
+
+    "compact-gap":          { "$value": "{spacing.2}",            "$type": "dimension", "$description": "Aire entre el contador («Paso 2 de 4») y la etiqueta del paso actual en la forma compacta" },
+    "compact-font-size":    { "$value": "{font-size.1}",          "$type": "dimension", "$description": "14px — la forma compacta es una etiqueta de interfaz" },
+    "compact-count-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number", "$description": "Peso del contador de la forma compacta" },
+    "compact-color":        { "$value": "{color.text.on-light}",  "$type": "color",     "$description": "Color del contador de la forma compacta" },
+    "compact-label-color":  { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Color de la etiqueta del paso actual en la forma compacta" },
+
+    "focus-ring-color":     { "$value": "{color.primary}",        "$type": "color",     "$description": "Anillo de foco del paso alcanzable" },
+    "focus-ring-width":     { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset":    { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Separación del anillo de foco" },
+    "transition-duration":  { "$value": "{motion.duration.fast}", "$type": "number",    "$description": "Duración del cambio de color al pasar por un paso alcanzable" },
+    "transition-easing":    { "$value": "{motion.easing.default}","$type": "string",    "$description": "Curva del cambio de color" },
+
+    "surface-dark-marker-done-bg":            { "$value": "{color.accent-1}",              "$type": "color", "$description": "Relleno de la marca hecha — surface-dark: el prusia es el lienzo, así que la marca toma el par de `Button primary` (lavanda con tinta prusia)" },
+    "surface-dark-marker-done-color":         { "$value": "{color.primary}",               "$type": "color", "$description": "Cifra o check sobre el relleno lavanda — surface-dark" },
+    "surface-dark-marker-pending-border-color": { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Filete de la marca pendiente — surface-dark: todo borde pasa a la tinta clara" },
+    "surface-dark-marker-pending-color":      { "$value": "{color.text.muted-on-dark}",    "$type": "color", "$description": "Cifra de un paso pendiente — surface-dark" },
+    "surface-dark-connector-color":           { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Tramo sin recorrer — surface-dark: el carril de la superficie oscura" },
+    "surface-dark-connector-done-color":      { "$value": "{color.text.on-dark}",          "$type": "color", "$description": "Tramo recorrido — surface-dark: la tinta clara" },
+    "surface-dark-label-color":               { "$value": "{color.text.on-dark}",          "$type": "color", "$description": "Etiqueta de un paso hecho o actual — surface-dark" },
+    "surface-dark-pending-color":             { "$value": "{color.text.muted-on-dark}",    "$type": "color", "$description": "Etiqueta de un paso pendiente — surface-dark" },
+    "surface-dark-description-color":         { "$value": "{color.text.muted-on-dark}",    "$type": "color", "$description": "Línea de detalle — surface-dark" },
+    "surface-dark-compact-color":             { "$value": "{color.text.on-dark}",          "$type": "color", "$description": "Contador de la forma compacta — surface-dark" },
+    "surface-dark-compact-label-color":       { "$value": "{color.text.muted-on-dark}",    "$type": "color", "$description": "Etiqueta de la forma compacta — surface-dark" },
+    "surface-dark-focus-ring-color":          { "$value": "{color.text.on-dark}",          "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

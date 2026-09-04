@@ -114,6 +114,10 @@
       "types": "./dist/_types/organisms/Steps/Steps.d.ts",
       "import": "./dist/steps.js"
     },
+    "./stepper": {
+      "types": "./dist/_types/molecules/Stepper/Stepper.d.ts",
+      "import": "./dist/stepper.js"
+    },
     "./prose": {
       "types": "./dist/_types/molecules/Prose/Prose.d.ts",
       "import": "./dist/prose.js"

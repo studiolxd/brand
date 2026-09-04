@@ -294,6 +294,8 @@ export { Chart } from './stories/organisms/Chart/Chart';
 export type { ChartProps, ChartSeries, ChartDatum, ChartType, ChartValueLabels } from './stories/organisms/Chart/Chart';
 export { ProjectCard } from './stories/molecules/ProjectCard/ProjectCard';
 export type { ProjectCardProps, ProjectCardTag } from './stories/molecules/ProjectCard/ProjectCard';
+export { Stepper } from './stories/molecules/Stepper/Stepper';
+export type { StepperProps, StepperStep, StepperStatus, StepperLabels } from './stories/molecules/Stepper/Stepper';
 export { Steps, Step } from './stories/organisms/Steps/Steps';
 export type { StepsProps, StepProps, StepItem } from './stories/organisms/Steps/Steps';
 export { AnnotationThread } from './stories/organisms/AnnotationThread/AnnotationThread';

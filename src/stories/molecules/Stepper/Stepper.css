@@ -1,0 +1,162 @@
+/* Progreso de un flujo. Dos formas de la misma información: la compacta
+   («Paso 2 de 4» y la etiqueta del paso actual), que es la de partida, y la
+   fila de pasos a partir de `md`. Solo una está en el árbol a la vez —la otra
+   sale con `display: none`, que también la retira del árbol de accesibilidad—,
+   así que el lector de pantalla nunca oye el progreso dos veces. */
+.stepper {
+  font-family: var(--stepper-font-family);
+}
+
+/* ── Forma compacta ─────────────────────────────────────────────────────── */
+
+.stepper__compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--stepper-compact-gap);
+  margin: 0;
+  font-size: var(--stepper-compact-font-size);
+  line-height: var(--stepper-line-height);
+}
+
+.stepper__compact-count {
+  font-weight: var(--stepper-compact-count-font-weight);
+  color: var(--stepper-compact-color);
+}
+
+.stepper__compact-label {
+  color: var(--stepper-compact-label-color);
+}
+
+/* ── Fila de pasos ──────────────────────────────────────────────────────── */
+
+.stepper__list {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .stepper__compact {
+    display: none;
+  }
+
+  .stepper__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: var(--stepper-gap);
+  }
+}
+
+/* Cada paso ocupa su columna y se lee de arriba abajo: la marca y, debajo, la
+   etiqueta. El tramo de línea que llega a un paso es su propio `::before`, así
+   que va del centro del paso anterior al suyo — el primero no lo lleva. */
+.stepper__step {
+  position: relative;
+  padding-block: var(--stepper-padding-block);
+}
+
+.stepper__step:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  inset-inline-end: 50%;
+  inline-size: calc(100% + var(--stepper-gap));
+  inset-block-start: calc(var(--stepper-padding-block) + var(--stepper-marker-size) / 2);
+  block-size: var(--stepper-connector-thickness);
+  translate: 0 calc(-1 * var(--stepper-connector-thickness) / 2);
+  background-color: var(--stepper-connector-color);
+}
+
+/* El tramo que llega a un paso hecho —o al actual, que viene de uno hecho— es
+   camino recorrido. */
+.stepper__step--completed::before,
+.stepper__step--current::before {
+  background-color: var(--stepper-connector-done-color);
+}
+
+/* El contenido va sobre la línea: los dos están posicionados, así que manda el
+   orden del documento y el `::before` queda debajo. */
+.stepper__item {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--stepper-item-gap);
+  text-align: center;
+  font-size: var(--stepper-font-size);
+  font-weight: var(--stepper-font-weight);
+  line-height: var(--stepper-line-height);
+  color: var(--stepper-label-color);
+}
+
+.stepper__step--pending .stepper__item {
+  color: var(--stepper-pending-color);
+}
+
+.stepper__step--current .stepper__item {
+  font-weight: var(--stepper-current-font-weight);
+}
+
+.stepper__marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--stepper-marker-size);
+  block-size: var(--stepper-marker-size);
+  border-radius: var(--stepper-marker-radius);
+  background-color: var(--stepper-marker-done-bg);
+  color: var(--stepper-marker-done-color);
+  font-family: var(--stepper-marker-font-family);
+  font-size: var(--stepper-marker-font-size);
+  font-weight: var(--stepper-marker-font-weight);
+  transition: background-color var(--stepper-transition-duration) var(--stepper-transition-easing);
+}
+
+/* Un paso pendiente es una marca hueca: filete y cifra secundaria. */
+.stepper__step--pending .stepper__marker {
+  background-color: transparent;
+  border-width: var(--stepper-marker-border-width);
+  border-style: solid;
+  border-color: var(--stepper-marker-pending-border-color);
+  color: var(--stepper-marker-pending-color);
+}
+
+.stepper__check {
+  inline-size: var(--stepper-marker-icon-size);
+  block-size: var(--stepper-marker-icon-size);
+}
+
+.stepper__text {
+  display: grid;
+  gap: var(--stepper-text-gap);
+}
+
+.stepper__description {
+  font-size: var(--stepper-description-font-size);
+  font-weight: var(--stepper-font-weight);
+  color: var(--stepper-description-color);
+}
+
+/* ── Volver a un paso hecho ─────────────────────────────────────────────── */
+
+.stepper__item--action {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  inline-size: 100%;
+}
+
+.stepper__item--action:hover .stepper__label {
+  text-decoration: underline;
+}
+
+.stepper__item--action:focus-visible {
+  outline-width: var(--stepper-focus-ring-width);
+  outline-style: solid;
+  outline-color: var(--stepper-focus-ring-color);
+  outline-offset: var(--stepper-focus-ring-offset);
+}
