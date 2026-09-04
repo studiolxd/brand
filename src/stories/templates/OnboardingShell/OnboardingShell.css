@@ -1,0 +1,137 @@
+/* Dos anchos, no uno. El chrome —la barra de la marca— ocupa el ancho normal
+   de una página pública, el que le da el `Container` del `main`: el usuario
+   llega desde una pantalla de acceso donde la marca vive pegada al borde del
+   contenido, y moverla al centro se lee como cambio de aplicación. Lo único
+   que se acota y se centra es la columna del paso. */
+.onboarding-shell {
+  display: grid;
+  gap: var(--onboarding-shell-gap);
+}
+
+/* La barra de la marca. Sin cabecera pública —en el alta ya hay sesión—, es
+   todo lo que hay arriba. */
+.onboarding-shell__top {
+  display: flex;
+  align-items: center;
+}
+
+/* La columna del paso: lo único acotado a la medida de lectura y centrado en
+   la banda. El aire entre progreso, cuerpo y acciones lo pone su rejilla. */
+.onboarding-shell__step {
+  display: grid;
+  gap: var(--onboarding-shell-gap);
+  inline-size: 100%;
+  max-inline-size: var(--onboarding-shell-max-width);
+  margin-inline: auto;
+}
+
+/* La marca mide lo que le da la plantilla, no lo que diga su prop `size`:
+   igual que en `SiteHeader`, manda el sitio donde se pinta. Así el alta y el
+   chrome público enseñan el logotipo al mismo tamaño y el consumidor no puede
+   descuadrarlo desde fuera.
+
+   Mismo mecanismo que la cabecera: se remapean los tokens de talla del `Logo`
+   en vez de intentar ganarle por selector — `Logo` estila sus tallas con doble
+   clase, así que una regla de aquí empataría y decidiría el orden de carga. El
+   `block-size` cubre una marca de producto que no sea el `Logo` del sistema. */
+.onboarding-shell__brand {
+  /* El trazado del logotipo trae su propio espacio de seguridad: se descuenta
+     para que la marca caiga en la misma vertical que en la cabecera pública. */
+  margin-inline-start: var(--onboarding-shell-brand-margin-inline-start);
+  --logo-height-sm:  var(--onboarding-shell-brand-height);
+  --logo-height-md:  var(--onboarding-shell-brand-height);
+  --logo-height-lg:  var(--onboarding-shell-brand-height);
+  --logo-height-xl:  var(--onboarding-shell-brand-height);
+  --logo-height-xxl: var(--onboarding-shell-brand-height);
+}
+
+.onboarding-shell__brand > * {
+  block-size: var(--onboarding-shell-brand-height);
+  inline-size: auto;
+}
+
+/* Los peldaños de móvil y teléfono son los de la cabecera pública, y con los
+   mismos puntos de ruptura: si allí la marca encoge, aquí también. */
+@media (max-width: 767.98px) /* < --breakpoint-md */ {
+  .onboarding-shell {
+    --onboarding-shell-brand-height: var(--onboarding-shell-brand-height-compact);
+  }
+}
+
+@media (max-width: 479.98px) /* < --breakpoint-sm */ {
+  .onboarding-shell {
+    --onboarding-shell-brand-height: var(--onboarding-shell-brand-height-narrow);
+  }
+}
+
+/* El pie de chrome: idioma y tema, al final de la pantalla y por debajo del
+   pie de acciones del paso. Va aparte a propósito —una preferencia global no
+   puede leerse como una acción del flujo— y sigue el ancho del chrome, no el
+   de la columna, así que cierra la pantalla en la misma vertical que abre la
+   marca. */
+.onboarding-shell__settings {
+  display: flex;
+  align-items: center;
+}
+
+.onboarding-shell__switchers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--onboarding-shell-switchers-gap);
+}
+
+/* La ranura del progreso se monta siempre, pero el `Stepper` no se pinta en un
+   flujo de un solo paso: sin contenido, la ranura sale de la rejilla y no deja
+   hueco ni gap. Así el producto pasa el progreso sin condicionales. */
+.onboarding-shell__progress:empty {
+  display: none;
+}
+
+/* El pie de acciones. De partida, en columna y a todo el ancho: «Atrás», la
+   principal y, debajo, la salida centrada.
+
+   La columna es `column`, no `column-reverse`, y la salida va **después** de
+   las decisiones en el marcado: así el orden del DOM —que es el del foco— y el
+   orden visual coinciden en las dos disposiciones, sin `order` ni
+   `row-reverse` de por medio (WCAG 2.4.3). Es también lo que permite que la
+   salida quede pegada a la principal en escritorio sin moverla del sitio. */
+.onboarding-shell__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--onboarding-shell-actions-gap);
+  padding-block-start: var(--onboarding-shell-actions-padding-block-start);
+}
+
+/* En estrecho cada decisión ocupa su línea entera: la principal, la última de
+   las dos, queda justo encima de la salida. */
+.onboarding-shell__decisions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--onboarding-shell-actions-gap);
+}
+
+/* La salida es texto, no un botón con caja: centrada, cierra el pie. */
+.onboarding-shell__exit {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  /* En cuanto hay sitio, la jerarquía se lee de un vistazo en una sola línea,
+     toda ella al final del renglón: «Atrás», la principal y, pegada a ella, la
+     salida. */
+  .onboarding-shell__actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .onboarding-shell__decisions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

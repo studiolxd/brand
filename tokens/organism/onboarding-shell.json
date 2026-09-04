@@ -1,0 +1,13 @@
+{
+  "onboarding-shell": {
+    "max-width":        { "$value": "{container.max-width-md}",  "$type": "dimension", "$description": "Ancho máximo de la columna del alta: la medida estrecha de contenido del sistema (768px). Apunta a la escala de anchos de contenido, no al breakpoint del mismo valor: un punto de corte responsive y una medida de columna son cosas distintas y tienen que poder moverse por separado" },
+    "gap":              { "$value": "{spacing.6}",      "$type": "dimension", "$description": "Aire entre bloques, tanto del chrome (barra de marca, pie de preferencias) como de la columna del paso (progreso, cuerpo y acciones)" },
+    "brand-margin-inline-start": { "$value": "{site-header.logo-margin-inline-start}", "$type": "dimension", "$description": "Desplazamiento lateral de la marca. Es el mismo de la cabecera pública: el trazado del logotipo trae su propio espacio de seguridad, y sin descontarlo la marca se ve descolgada del borde del contenido. Apuntando al de la cabecera, en el alta cae exactamente en la misma vertical que en la pantalla anterior" },
+    "brand-height":         { "$value": "{site-header.content-height}",         "$type": "dimension", "$description": "Alto de la marca. Apunta al de la cabecera pública, no a un valor propio: el alta y el chrome público enseñan la misma marca al mismo tamaño, y tocar el de la cabecera mueve los dos" },
+    "brand-height-compact": { "$value": "{site-header.content-height-compact}", "$type": "dimension", "$description": "Alto de la marca en móvil (por debajo de md) — el mismo peldaño que la cabecera pública" },
+    "brand-height-narrow":  { "$value": "{site-header.content-height-narrow}",  "$type": "dimension", "$description": "Alto de la marca en teléfono (por debajo de sm) — el mismo peldaño que la cabecera pública" },
+    "switchers-gap":    { "$value": "{spacing.3}",      "$type": "dimension", "$description": "Aire entre los conmutadores de idioma y tema" },
+    "actions-gap":      { "$value": "{spacing.3}",      "$type": "dimension", "$description": "Aire entre las acciones del pie" },
+    "actions-padding-block-start": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire extra entre el cuerpo del paso y su pie de acciones, sobre el que ya pone la rejilla: la separación la hace el espacio, no una línea" }
+  }
+}

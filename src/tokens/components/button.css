@@ -14,8 +14,6 @@
   --button-block-width: 100%; /** Width when block modifier is applied */
   --button-outline-bg: rgba(0, 0, 0, 0); /** Background */
   --button-text-border-width: 0; /** Border width — 0 para uso inline en texto */
-  --button-text-text-decoration: underline; /** Text decoration — base state (underline) */
-  --button-text-hover-text-decoration: none; /** Text decoration on hover */
   --button-text-padding-inline: 0; /** Inline (horizontal) padding — 0 para uso inline en texto */
   --button-text-bg: rgba(0, 0, 0, 0); /** Background — always transparent */
   --button-text-border: rgba(0, 0, 0, 0); /** Border color — transparent */
@@ -69,6 +67,7 @@
   --button-text-justify-content: var(--button-justify-content); /** Justify content */
   --button-text-cursor: var(--link-cursor); /** Cursor */
   --button-text-white-space: var(--button-white-space); /** White space */
+  --button-text-hover-underline-width: var(--link-hover-underline-width); /** Grosor de la línea en hover y en activo — el de `Link` */
   --button-text-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-text-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-ghost-border-style: var(--button-border-style); /** Border style */
@@ -139,6 +138,7 @@
   --button-text-font-family: var(--button-font-family); /** Font family */
   --button-text-font-size: var(--button-font-size); /** Font size */
   --button-text-line-height: var(--button-line-height); /** Line height */
+  --button-text-underline-offset: var(--link-underline-offset); /** Separación entre el texto y su línea — la de `Link`. Va como `padding-block-end`, así que la línea cae por debajo del icono igual que del texto */
   --button-text-transition-duration: var(--button-transition-duration); /** Transition duration */
   --button-text-transition-easing: var(--button-transition-easing); /** Transition easing */
   --button-ghost-font-family: var(--button-font-family); /** Font family */
@@ -172,6 +172,7 @@
   --button-outline-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-text-border-radius: var(--button-border-radius); /** Border radius */
   --button-text-font-weight: var(--button-font-weight); /** Font weight */
+  --button-text-underline-width: var(--link-underline-width); /** Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse */
   --button-text-disabled-color: var(--button-disabled-color); /** Text color when disabled — light surface */
   --button-text-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-text-focus-ring-offset: var(--link-focus-ring-offset); /** Focus ring offset */
@@ -193,6 +194,7 @@ html.dark {
   --button-outline-active-bg: var(--color-white); /** Active background — surface-dark */
   --button-outline-active-border: var(--color-white); /** Active border color — surface-dark */
   --button-outline-focus-ring-color: var(--color-white); /** Focus ring color — surface-dark */
+  --button-text-underline-width: var(--link-underline-width); /** Grosor de la línea en reposo — surface-dark: el de `Link`, que sobre fondo oscuro no lleva línea en reposo */
   --button-primary-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark (blanco) */
   --button-destructive-color: var(--color-destructive-text-on-dark); /** Text color — surface-dark */
   --button-destructive-border: var(--color-destructive-text-on-dark); /** Border color — surface-dark */
@@ -215,6 +217,7 @@ html.dark {
   --button-ghost-hover-bg: var(--color-text-on-dark); /** Hover background — surface-dark */
   --button-ghost-active-bg: var(--color-text-on-dark); /** Active background — surface-dark */
   --button-ghost-disabled-color: var(--color-text-muted-on-dark); /** Text color when disabled — surface-dark */
+  --button-text-hover-underline-width: var(--link-hover-underline-width); /** Grosor de la línea en hover y activo — surface-dark: el de `Link`, que sobre fondo oscuro pone la línea en el hover */
   --button-text-color: var(--link-color); /** Text color — surface-dark */
   --button-text-hover-color: var(--link-hover-color); /** Hover text color — surface-dark */
   --button-text-active-color: var(--link-hover-color); /** Active text color — surface-dark */

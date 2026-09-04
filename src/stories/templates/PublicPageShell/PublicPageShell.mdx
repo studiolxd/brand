@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as PublicPageShellStories from "./PublicPageShell.stories";
+
+<Meta of={PublicPageShellStories} />
+
+# PublicPageShell
+
+El marco de una página pública, en una sola pieza: `SiteShell` con cabecera y pie opcionales y, dentro, el `main` acotado (`Container as="main" space="xl"`) al que apunta el `SkipLink`. No pone contenido: solo el molde.
+
+Es el molde **único**. `ErrorPage`, `NotFoundPage`, `OnboardingShell` y la maqueta de acceso (`Pages/Acceso` y sus hermanas) cuelgan todas de aquí, así que ninguna puede divergir del marco real: el `id` del `main`, su `tabIndex`, el ancho y el aire vertical se deciden en un sitio.
+
+<Canvas of={PublicPageShellStories.SinCabeceraNiPie} />
+<Canvas of={PublicPageShellStories.ConCabeceraYPie} />
+
+## Cabecera y pie, a salvo
+
+`header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si la cabecera lanza al renderizar, desaparece ella y la página sigue. Nació de la página de error —que no puede depender del layout que pudo fallar—, y el resto de plantillas hereda la garantía sin pedirla.
+
+<Canvas of={PublicPageShellStories.CabeceraQueFalla} />
+
+## Dentro de una app
+
+Una app con `AppShell` ya tiene su `main`; una página pública pintada dentro no puede montar otro marco ni otro `main`. Con `shell={false}` la plantilla devuelve **solo los `children`**. Sin marco, `header`, `footer` e `id` no aplican.
+
+<Canvas of={PublicPageShellStories.DentroDeUnaApp} />
+
+## Superficie pública
+
+El marco es `SiteShell`, así que todo lo que va dentro lee en la **superficie pública**: cuerpo a 20px, controles `lg` y la escala de títulos un peldaño arriba. La regla completa está en Foundations › Tipografía § «Dos superficies de lectura».
+
+<Canvas of={PublicPageShellStories.EnSuperficieOscura} />
+
+## Cómo se usa
+
+```tsx
+<PublicPageShell
+  header={<PublicHeader auth={false} />}
+  footer={<PublicFooter />}
+>
+  <PageIntro title={t('title')} description={t('description')} />
+</PublicPageShell>
+```
+
+## Props
+
+<ArgTypes of={PublicPageShellStories} />

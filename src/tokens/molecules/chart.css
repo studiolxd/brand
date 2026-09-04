@@ -55,7 +55,7 @@
   --chart-tooltip-max-width: var(--tooltip-max-width); /** Ancho máximo del bocadillo */
   --chart-transition-duration: var(--motion-duration-fast); /** Respuesta de la marca al puntero. Con `prefers-reduced-motion` no hay transición */
   --chart-transition-easing: var(--motion-easing-out); /** Curva de la respuesta al puntero */
-  --chart-diverging-neutral: var(--color-surface-secondary-on-light); /** Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada» */
+  --chart-diverging-neutral: var(--color-surface-secondary-on-light); /** Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada». Es el único dato que se viste con un rol de SUPERFICIE, y a propósito: el cero es el punto de MENOR saliencia de la rampa, así que su trabajo es retirarse hacia el lienzo, no contrastar con él. Sobre blanco queda en 1,12:1, por debajo de los seis pasos de los dos brazos (2,49:1 el más flojo) */
   --chart-surface: var(--color-background-light); /** Color del hueco de 2px entre marcas contiguas y del anillo de 2px de los puntos. Es la superficie, no un borde: separar con trazo añadiría tinta que no es dato */
   --chart-grid-color: var(--color-border-default-on-light); /** Rejilla: filete de 1px a un paso de la superficie. Cromo recesivo */
   --chart-grid-width: var(--border-width-default); /** Grosor de la rejilla. Sólida siempre: una rejilla discontinua se lee como umbral */
@@ -118,5 +118,5 @@ html.dark {
   --chart-label-color: var(--color-text-muted-on-dark); /** Rótulos — surface-dark */
   --chart-muted-color: var(--color-text-muted-on-dark); /** Serie apagada — surface-dark */
   --chart-crosshair-color: var(--color-text-muted-on-dark); /** Filete del puntero — surface-dark */
-  --chart-diverging-neutral: var(--color-surface-secondary-on-dark); /** Punto medio divergente — surface-dark */
+  --chart-diverging-neutral: var(--color-surface-secondary-on-dark); /** Punto medio divergente — surface-dark. No basta con invertir el gris: sobre prusia, el gris claro de la superficie clara sería el color MÁS brillante de la escala y el cero gritaría más que los extremos. La superficie secundaria oscura mantiene el criterio: 1,89:1 sobre el lienzo, el mínimo de la rampa (el paso más flojo de los brazos es 3,26:1). Y sigue sin confundirse ni con el fondo (1,89:1 es una mancha visible; el neutro claro está más cerca de su lienzo, a 1,12:1) ni con la serie apagada de «Otros» (5,75:1 entre los dos) */
 }

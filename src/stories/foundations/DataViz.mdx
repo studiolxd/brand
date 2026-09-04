@@ -94,15 +94,22 @@ La rampa secuencial es **un solo tono, el prusia de marca**, de claro a oscuro. 
     colors={{ 100: "#0E376B", 200: "#164B90", 300: "#1F61B6", 400: "#2978DE", 500: "#4E92EF", 600: "#80B0F3", 700: "#B8D3F8" }}
   />
   <ColorItem
-    title="Divergente — cayena ↔ gris ↔ prusia"
+    title="Divergente — superficie clara"
     subtitle="chart.diverging-warm-* · diverging-neutral · diverging-cool-*"
     colors={{ "cálido 3": "#9F431F", "cálido 2": "#D45C2C", "cálido 1": "#F37F54", neutro: "#F2F2F2", "frío 1": "#70A6F2", "frío 2": "#3484EE", "frío 3": "#1F61B6" }}
+  />
+  <ColorItem
+    title="Divergente — superficie oscura"
+    subtitle="El neutro también aquí es el paso que se retira hacia el lienzo"
+    colors={{ "cálido 3": "#F48F6A", "cálido 2": "#E26330", "cálido 1": "#B54E24", neutro: "#4A4A4A", "frío 1": "#256FCF", "frío 2": "#488FEF", "frío 3": "#80B0F3" }}
   />
 </ColorPalette>
 
 Para una rampa **ordinal** (marcas discretas ordenadas) el extremo claro no baja del paso **300**: es el último que mantiene 2:1 contra la superficie en los dos modos.
 
 El par divergente es **cálido contra frío**: cayena y prusia leen como opuestos y el gris del medio lee como «nada». Un par de dos tonos fríos —prusia y aqua— no sirve, y en el punto medio nunca va un tono.
+
+El neutro es el **punto de menor saliencia** de la rampa, y eso manda por encima de cualquier otra consideración: el cero es «aquí no pasa nada», así que su trabajo es retirarse hacia el lienzo. Es el único dato que se viste con un rol de superficie, y por eso el par oscuro **no puede ser el gris claro invertido**: sobre prusia sería el color más brillante de la escala y el medio gritaría más que los extremos. Medido contra su lienzo, el neutro es el mínimo en las dos superficies —1,12:1 sobre blanco y 1,89:1 sobre prusia, frente a 2,49:1 y 3,26:1 del paso más flojo de los brazos— y la saliencia crece hacia los dos extremos sin saltos raros.
 
 ## Estado no es identidad
 

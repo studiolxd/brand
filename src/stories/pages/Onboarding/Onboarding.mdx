@@ -1,0 +1,25 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Pages/El alta" />
+
+# El alta
+
+Las cinco pantallas del alta de la suite —perfil, nombre de la organización, logotipo, invitaciones y la sala de espera— **montadas con las piezas del DS y datos falsos**: `AppRoot` + `OnboardingShell` (que a su vez cuelga de `PublicPageShell`) + `Stepper` + `PageIntro` + `Form`/`*Field`. Sin lógica: sin validación real, sin Better Auth, sin router.
+
+Son **la norma**, igual que las páginas públicas: si el hub las monta distinto, el hub está mal. No hay maqueta paralela — todo lo que se ve aquí sale de componentes publicados, así que una pantalla no puede quedarse atrás cuando el marco cambia.
+
+Sirven para ver el conjunto sin arrancar la aplicación: el ritmo vertical, la superficie pública (cuerpo a 20px, controles `lg`), el progreso en escritorio y en móvil, la jerarquía del pie de acciones y las dos superficies.
+
+## La sala de espera
+
+Es la única de las cinco que no existía. Es la pantalla del usuario que ya completó su perfil, **no pertenece a ninguna organización** y no puede crear una, porque aquí solo se entra por invitación: literalmente no puede hacer nada salvo esperar.
+
+Las decisiones de diseño, que son las que la hacen distinta:
+
+- **Se dice lo que pasa, no se disimula.** Nada de un estado vacío que insinúe que falta un clic. La entradilla dice que no hay nada más que hacer desde esa pantalla.
+- **Se dice quién le sacará de ahí y cómo.** Un `Steps` —el componente documental, aquí en su sitio— con las tres cosas que van a ocurrir: quién invita, a qué dirección llega el correo (escrita, para que se pueda comprobar que es la correcta) y qué pasa al aceptar.
+- **No hay acción principal.** Un botón primario sin nada que hacer detrás es una promesa falsa; el pie se queda solo con la salida. Es la excepción que justifica que `primaryAction` sea opcional en la plantilla.
+- **La salida es digna:** «Cerrar sesión» en `ghost`, con la frase que dice que no se pierde nada al hacerlo.
+- **Sin progreso.** Es un flujo de un solo paso, así que el `Stepper` no se pinta. Sirve de demostración de lo adaptativo: la plantilla monta la ranura igual que en los otros cuatro casos.
+
+Lo que **no** va aquí: los formularios reales del hub, con su validación e i18n. Eso es producto.

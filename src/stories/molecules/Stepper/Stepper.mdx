@@ -1,0 +1,81 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as StepperStories from "./Stepper.stories";
+
+<Meta of={StepperStories} />
+
+# Stepper
+
+El progreso de un flujo por pasos: dónde está el usuario, qué lleva hecho y qué le queda. Es la pieza que acompaña a un alta, a un asistente o a una compra en varias pantallas.
+
+<Canvas of={StepperStories.PorDefecto} />
+
+## No es `Steps`
+
+Son dos piezas distintas y ninguna sustituye a la otra:
+
+| | `Steps` | `Stepper` |
+| --- | --- | --- |
+| Qué hace | **Documenta** un proceso: los pasos de una metodología, de una matrícula | **Acompaña** a un flujo en marcha |
+| Estado | No tiene: ningún paso es «el actual» | Completado / actual / pendiente |
+| Contenido | Título, descripción, cuerpo rico | Una etiqueta corta y, si acaso, una línea |
+| Dónde vive | Una página de contenido, un MDX | La cabecera de una plantilla de flujo |
+
+## Estados
+
+Los estados no se pasan: se deducen de `current`. Lo anterior está completado, lo posterior pendiente. Cada estado se distingue por **dos** señales, nunca solo por el color: la marca (rellena con un check, rellena con la cifra, hueca con la cifra) y el peso de la etiqueta.
+
+El carril entre pasos dice lo mismo que las marcas y con su mismo color: el tramo recorrido lleva la marca del sistema —el relleno de un paso hecho—, y el que queda por recorrer, el rol de borde —el filete de una marca pendiente—. No es un fondo: un filete de 1px tiene que contrastar con el lienzo, no armonizar con él, así que no usa la escala de superficies.
+
+<Canvas of={StepperStories.PrimerPaso} />
+<Canvas of={StepperStories.UltimoPaso} />
+
+Cada paso admite una línea de detalle bajo la etiqueta, para flujos donde el nombre del paso no basta.
+
+<Canvas of={StepperStories.ConDetalle} />
+
+## Adaptativo
+
+Por debajo de `md` no caben cuatro etiquetas en fila, así que el progreso degrada a su forma compacta: el contador y la etiqueta del paso actual. Solo una de las dos formas está en el árbol a la vez, así que un lector de pantalla nunca oye el progreso dos veces. El texto del contador es una prop (`compactLabel`), no una cadena fija: recibe el número de paso y el total.
+
+**Con un solo paso no se pinta nada.** Un «paso 1 de 1» es ruido, y una plantilla no debería tener que preguntárselo: monta siempre el hueco del progreso y es el flujo quien decide si hay algo que contar. Es lo que permite que `OnboardingShell` sirva igual para el alta de cuatro pasos y para la sala de espera.
+
+<Canvas of={StepperStories.UnSoloPaso} />
+
+## Volver atrás sí, saltar adelante no
+
+Con `onStepSelect` los pasos **ya completados** se vuelven botones: se puede volver a corregir el nombre que se puso dos pantallas atrás. El paso actual y los pendientes nunca son interactivos, tampoco con el callback puesto: un flujo no se salta hacia delante, porque los pasos que vienen dependen de lo que aún no se ha rellenado. Sin `onStepSelect`, el progreso solo informa.
+
+<Canvas of={StepperStories.VolverAtras} />
+
+## Accesibilidad
+
+- Es un `ol` de verdad: el orden y el total los anuncia el navegador, no una cadena escrita a mano.
+- El paso actual lleva `aria-current="step"`.
+- El estado de cada paso se anuncia con un texto oculto («Completado», «Paso actual», «Pendiente»), traducible por `labels`: sin él, el estado viviría solo en el color y en la forma.
+- Un paso alcanzable es un `<button>` nativo, con su anillo de foco.
+
+## En superficie oscura
+
+<Canvas of={StepperStories.EnSuperficieOscura} />
+
+## Cómo se usa
+
+```tsx
+<Stepper
+  steps={[
+    { id: 'perfil', label: t('perfil') },
+    { id: 'organizacion', label: t('organizacion') },
+    { id: 'logotipo', label: t('logotipo') },
+    { id: 'invitaciones', label: t('invitaciones') },
+  ]}
+  current={paso}
+  onStepSelect={(index) => setPaso(index)}
+  label={t('progreso')}
+  compactLabel={(paso, total) => t('pasoDeTotal', { paso, total })}
+  labels={{ completed: t('completado'), current: t('actual'), pending: t('pendiente') }}
+/>
+```
+
+## Props
+
+<ArgTypes of={StepperStories} />

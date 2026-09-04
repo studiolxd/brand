@@ -83,6 +83,7 @@
 @forward 'molecules/table';
 @forward 'molecules/data-table';
 @forward 'molecules/steps';
+@forward 'molecules/stepper';
 @forward 'molecules/org-switcher';
 @forward 'molecules/app-launcher';
 @forward 'molecules/user-menu';
@@ -122,6 +123,7 @@
 @forward 'molecules/user-message';
 @forward 'molecules/assistant-message';
 @forward 'molecules/chat-shell';
+@forward 'molecules/onboarding-shell';
 @forward 'molecules/prose';
 @forward 'molecules/table-of-contents';
 @forward 'molecules/docs-search';

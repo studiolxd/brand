@@ -19,7 +19,7 @@ $lxd-chart-sequential-700: #164b90; // Rampa secuencial — máximo
 $lxd-chart-diverging-warm-1: #f37f54; // Divergente, brazo cálido junto al neutro
 $lxd-chart-diverging-warm-2: #d45c2c; // Divergente, brazo cálido intermedio
 $lxd-chart-diverging-warm-3: #9f431f; // Divergente, brazo cálido extremo
-$lxd-chart-diverging-neutral: #f2f2f2; // Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada»
+$lxd-chart-diverging-neutral: #f2f2f2; // Punto medio divergente: gris neutro. Nunca un tono — el medio tiene que leerse como «nada». Es el único dato que se viste con un rol de SUPERFICIE, y a propósito: el cero es el punto de MENOR saliencia de la rampa, así que su trabajo es retirarse hacia el lienzo, no contrastar con él. Sobre blanco queda en 1,12:1, por debajo de los seis pasos de los dos brazos (2,49:1 el más flojo)
 $lxd-chart-diverging-cool-1: #70a6f2; // Divergente, brazo frío junto al neutro
 $lxd-chart-diverging-cool-2: #3484ee; // Divergente, brazo frío intermedio
 $lxd-chart-diverging-cool-3: #1f61b6; // Divergente, brazo frío extremo

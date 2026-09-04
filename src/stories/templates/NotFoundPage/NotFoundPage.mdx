@@ -5,7 +5,7 @@ import * as NotFoundPageStories from "./NotFoundPage.stories";
 
 # NotFoundPage
 
-La plantilla del 404 de un sitio público: el marco (`SiteShell`) con cabecera y pie opcionales, y dentro un `main` (`Container` a aire `xl`, `id="main-content"`, enfocable por el `SkipLink`) con la cabecera de página (`PageIntro`: título y frase) y el **enlace de vuelta**, apilados con `Stack`.
+La plantilla del 404 de un sitio público. El marco lo pone `PublicPageShell` —cabecera y pie opcionales, y el `main` acotado (`id="main-content"`, enfocable por el `SkipLink`)—; lo propio de esta plantilla es el contenido: la cabecera de página (`PageIntro`: título y frase) y el **enlace de vuelta**, apilados con `Stack`.
 
 <Canvas of={NotFoundPageStories.SinCabeceraNiPie} />
 <Canvas of={NotFoundPageStories.ConCabeceraYPie} />

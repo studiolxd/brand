@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react';
 import { AppRoot } from '../../sections/AppRoot/AppRoot';
-import { SiteShell } from '../../sections/SiteShell/SiteShell';
 import { SiteHeader } from '../../sections/SiteHeader/SiteHeader';
 import { SiteNav } from '../../molecules/SiteNav/SiteNav';
 import { LanguageSwitcher } from '../../molecules/LanguageSwitcher/LanguageSwitcher';
 import { ThemeSwitcher } from '../../molecules/ThemeSwitcher/ThemeSwitcher';
 import { LegalFooter } from '../../sections/LegalFooter/LegalFooter';
-import { Container } from '../../atoms/Container/Container';
+import { PublicPageShell } from '../../templates/PublicPageShell/PublicPageShell';
 import { Columns } from '../../atoms/Columns/Columns';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Stack } from '../../atoms/Stack/Stack';
@@ -43,10 +42,10 @@ export interface AuthPageProps {
   surface?: 'light' | 'dark';
 }
 
-/** El chrome público de la suite con la página de acceso dentro: es el layout `(auth)` de hub, con piezas del DS y datos falsos. */
+/** El chrome público de la suite con la página de acceso dentro: es el layout `(auth)` de hub, montado sobre `PublicPageShell` —el mismo marco que `ErrorPage` y `NotFoundPage`— con piezas del DS y datos falsos. */
 export function AuthPage({ title, description, intro, aside, children, surface = 'light' }: AuthPageProps) {
   const page = (
-    <SiteShell
+    <PublicPageShell
       header={
         <SiteHeader
           language={<LanguageSwitcher size="lg" value="es" languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }]} />}
@@ -57,20 +56,18 @@ export function AuthPage({ title, description, intro, aside, children, surface =
       }
       footer={<LegalFooter links={LEGAL} surface={surface === 'dark' ? 'dark' : undefined} />}
     >
-      <Container as="main" id="main-content" tabIndex={-1} space="xl">
-        <Columns>
-          {aside ? (
-            <Stack mobileOrder="reverse">
-              <PageIntro title={title} description={description}>{intro}</PageIntro>
-              {aside}
-            </Stack>
-          ) : (
+      <Columns>
+        {aside ? (
+          <Stack mobileOrder="reverse">
             <PageIntro title={title} description={description}>{intro}</PageIntro>
-          )}
-          {children}
-        </Columns>
-      </Container>
-    </SiteShell>
+            {aside}
+          </Stack>
+        ) : (
+          <PageIntro title={title} description={description}>{intro}</PageIntro>
+        )}
+        {children}
+      </Columns>
+    </PublicPageShell>
   );
   return (
     <div className={surface === 'dark' ? 'surface-dark' : undefined}>

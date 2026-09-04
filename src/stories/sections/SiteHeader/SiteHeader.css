@@ -36,7 +36,23 @@
 
 /* La marca mide lo que la barra le da: así en móvil encoge con ella. Manda
    la cabecera, no el logotipo, porque el alto de la barra y el arranque del
-   panel salen del mismo token. */
+   panel salen del mismo token.
+
+   Se impone remapeando los tokens de talla del `Logo`, no con un selector que
+   le gane: `Logo` estila sus tallas con doble clase (`.logo.logo--xxl`), así
+   que cualquier selector de aquí empataría o perdería según el orden de carga
+   —y perdía: en móvil la marca seguía saliendo a `xxl`—. Reescribiendo los
+   tokens, la regla del `Logo` sigue mandando pero lee el alto de la barra, sea
+   cual sea la talla que le pasen. El `block-size` de debajo cubre una marca de
+   producto que no sea el `Logo` del sistema. */
+.site-header__logo {
+  --logo-height-sm:  var(--site-header-content-height);
+  --logo-height-md:  var(--site-header-content-height);
+  --logo-height-lg:  var(--site-header-content-height);
+  --logo-height-xl:  var(--site-header-content-height);
+  --logo-height-xxl: var(--site-header-content-height);
+}
+
 .site-header__logo > * {
   block-size: var(--site-header-content-height);
   inline-size: auto;
