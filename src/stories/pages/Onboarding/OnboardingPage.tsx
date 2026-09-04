@@ -17,7 +17,7 @@ const PASOS_ALTA: StepperStep[] = [
 const IDIOMAS = [
   { code: 'es', label: 'Español' },
   { code: 'en', label: 'English' },
-  { code: 'ca', label: 'Català' },
+  { code: 'fr', label: 'Français' },
 ];
 
 export interface OnboardingPageProps {
