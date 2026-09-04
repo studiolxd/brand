@@ -38,6 +38,18 @@ function reglasOscuras(css: string): string {
   return '';
 }
 
+/*
+ * Un documento que entra por `srcDoc` tiene URL base `about:srcdoc`, así que
+ * una ruta relativa —la que usan las stories para servir el logotipo y la
+ * fuente desde `public/`— no resuelve contra nada. Este `<base>` le devuelve la
+ * del catálogo.
+ *
+ * Es un apaño del visor y solo del visor: en un correo de verdad la URL del
+ * logotipo es absoluta y este problema no existe. Por eso NO se arregla metiendo
+ * una URL absoluta en el componente.
+ */
+const base = () => `<base href="${document.baseURI}">`;
+
 /** Marca el bloque que añade el visor, para distinguirlo del CSS del correo. */
 export const MARCA_OSCURA = 'vista previa: reglas oscuras sin media query';
 
@@ -61,7 +73,7 @@ export function EmailPreview({ children, theme = 'light' }: EmailPreviewProps) {
         theme === 'dark'
           ? `<style>/* ${MARCA_OSCURA} */${reglasOscuras(emailDarkModeCss)}</style>`
           : '';
-      setHtml(salida.replace('</head>', `${oscuro}</head>`));
+      setHtml(salida.replace('<head>', `<head>${base()}`).replace('</head>', `${oscuro}</head>`));
     });
     return () => {
       vigente = false;
