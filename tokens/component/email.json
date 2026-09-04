@@ -128,12 +128,12 @@
     "button-padding-block": {
       "$value": "{spacing.4}",
       "$type": "dimension",
-      "$description": "Padding vertical del botón. Es el único valor del botón que no puede copiarse de la talla lg: el botón web reserva su altura con `button.lg-height` y centra el contenido, y en un correo no hay altura de control que valga — hay que construirla con padding. Este peldaño de la escala deja el botón en 52px, por encima de los 48px del lg web y del objetivo táctil mínimo"
+      "$description": "Padding vertical del botón, y el único que lo dimensiona: siendo de ancho completo, el horizontal ya no mide nada —lo mide la columna— y solo estrecharía la caja del texto. Es además el único valor que no puede copiarse de la talla lg: el botón web reserva su altura con `button.lg-height` y centra el contenido, y en un correo hay que construirla con padding. Este peldaño de la escala deja el botón en 52px, por encima de los 48px del lg web y del objetivo táctil mínimo"
     },
-    "button-padding-inline": {
-      "$value": "{button.lg-padding-inline}",
-      "$type": "dimension",
-      "$description": "Padding horizontal del botón: el aire interior de la talla lg"
+    "button-width": {
+      "$value": "{button.block-width}",
+      "$type": "string",
+      "$description": "El botón del correo va a ancho completo, siempre y sin media query: Outlook las ignora y una solución a medias es peor que ninguna. En una columna de 600px se lee bien, y en el móvil resuelve de una vez que el texto quepa en una línea y que el objetivo táctil sea el botón entero"
     },
     "button-margin-block-end": {
       "$value": "{spacing.5}",

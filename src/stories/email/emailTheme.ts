@@ -142,11 +142,27 @@ export const emailStyles = {
      * superficie clara y oscura.
      */
     color: emailToken('--email-button-color'),
-    display: 'inline-block',
+    /*
+     * A ancho completo, SIEMPRE y sin media query: Outlook las ignora y una
+     * solución a medias es peor que ninguna. En los 600px del correo se lee
+     * bien, y en el móvil es lo que hace que la etiqueta quepa en una línea y
+     * que el objetivo táctil sea el botón entero.
+     */
+    display: 'block',
+    width: emailToken('--email-button-width'),
+    textAlign: 'center',
     fontFamily: emailFontFamily,
     fontSize: emailToken('--email-button-font-size'),
     fontWeight: Number(emailToken('--email-button-font-weight')),
-    padding: `${emailToken('--email-button-padding-block')} ${emailToken('--email-button-padding-inline')}`,
+    /*
+     * Sin padding horizontal, y no es un descuido: siendo de ancho completo, el
+     * botón ya no se mide a sí mismo —lo mide la columna—, así que el inset de
+     * la talla lg (64px por lado) no añadiría aire, solo estrecharía la caja
+     * del texto hasta partir en dos etiquetas de dos palabras en el móvil.
+     * De paso el botón deja de depender de `box-sizing`, que el motor de Word
+     * de Outlook no entiende.
+     */
+    padding: `${emailToken('--email-button-padding-block')} 0`,
     textDecoration: 'none',
     /*
      * El descargo que sigue a todo botón quedaría pegado a él. Va en el botón

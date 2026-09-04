@@ -47,7 +47,26 @@ La única medida que no puede copiarse de la talla `lg` es el **padding vertical
 del botón**: el botón web reserva su altura con `button.lg-height` y centra el
 contenido, y en un correo no hay altura de control que valga — hay que
 construirla con padding, y para eso se coge el peldaño de la escala de espaciado
-que deja el botón en 52px, por encima de los 48px del `lg` web.
+que deja el botón en 56px, por encima de los 48px del `lg` web.
+
+### El botón va a ancho completo
+
+`{button.block-width}`, **siempre y sin media query**. Outlook las ignora, así
+que una solución que solo se aplicara en el móvil no llegaría justo donde hace
+falta: una solución a medias es peor que ninguna.
+
+En los 600px del correo se lee bien, y en el móvil arregla dos cosas de golpe —
+la etiqueta cabe en una línea y el objetivo táctil es el botón entero, no una
+pastilla en medio de la columna.
+
+Va **sin padding horizontal**, y no es un descuido: siendo de ancho completo el
+botón ya no se mide a sí mismo —lo mide la columna—, así que el inset de la
+talla `lg` (64px por lado) no añadiría aire, solo estrecharía la caja del texto.
+Con él, «Descargar el archivo» partía en dos líneas a 375px. De paso el botón
+deja de depender de `box-sizing`, que el motor de Word de Outlook no entiende.
+
+Comprobado a 320, 375 y 600px: el botón ocupa exactamente el ancho de la
+columna y la etiqueta cabe en una línea en los tres.
 
 **El ancho no sube con la talla.** Los 600px del contenedor son el estándar del
 medio, no una medida de nuestra retícula, y se quedan como están.

@@ -1,6 +1,6 @@
 # Entrega — Los correos de la suite, al DS
 
-Rama `emails-ds`. Nueve commits, sin tocar la versión y sin tag: el release lo
+Rama `emails-ds`. Diez commits, sin tocar la versión y sin tag: el release lo
 cierra quien decida el número.
 
 Incluye las dos rondas de revisión del operador: el logotipo se veía roto en el
@@ -98,10 +98,9 @@ CSS, así que los tokens apuntan a los **tokens fuente** de esa superficie
 `{button.lg-padding-inline}`). Ningún valor escrito a mano.
 
 **El ancho no sube**: los 600px del contenedor son el estándar del medio.
-Comprobado a 600, 375 y 320px: nada desborda ni se corta. Con una salvedad, que
-va abajo en «Decisiones abiertas» — el aire interior del botón `lg` son 64px por
-lado, pensados para una página, y en móvil eso parte el texto del botón en dos
-líneas.
+Comprobado a 600, 375 y 320px: nada desborda ni se corta. El botón, que con el
+inset de `lg` partía en dos líneas en el móvil, va ahora a ancho completo — ver
+más abajo.
 
 ### La caja y los pesos
 
@@ -294,25 +293,37 @@ Mientras esa ruta no exista, los correos enviados saldrán **sin logotipo** (con
 el `alt`, que es el nombre de quien manda) y **con la fuente de sistema**. Se
 degrada, no se rompe — pero el despliegue es parte del día D.
 
-## Decisiones abiertas
+## El botón, a ancho completo
 
-**El botón `lg` en móvil.** Su aire interior es `{button.lg-padding-inline}`,
-64px por lado — la talla `lg` tal cual, que es lo que se pidió. En los 600px del
-correo va sobrado, pero a 375px el hueco útil dentro de la caja son ~301px y
-«Descargar el archivo» a 20px no cabe en una línea: el texto parte en dos. No
-desborda ni se corta, react-email le pone `max-width: 100%`, pero se ve peor de
-lo que debería.
+Quedó abierto en la ronda anterior y **está decidido**: el botón principal del
+correo va a `{button.block-width}` —el token de ancho completo que el DS ya
+tenía—, **siempre y sin media query**.
 
-Las dos salidas, si molesta:
+*Por qué sin media query*: Outlook las ignora, así que una regla que solo se
+aplicara en el móvil no llegaría justo donde hace falta. Una solución a medias
+es peor que ninguna.
 
-1. **Botón a ancho completo** en el correo (el DS ya tiene `button.block-width`).
-   En una columna de 600px se lee bien y en móvil resuelve el problema entero, y
-   además da un objetivo táctil mucho mayor.
-2. **Aire interior propio del correo**, un peldaño por debajo del `lg` web.
+*Por qué ancho completo y no un aire interior propio del correo*: esa segunda
+salida inventaría una talla intermedia que solo existiría aquí, y contradiría el
+criterio de controles en `lg` recién fijado.
 
-Las dos son decisión de diseño, no mía, así que se queda como se pidió.
+*Qué arregla*: con el inset de la talla `lg` (64px por lado) la caja del texto
+se quedaba en ~173px a 375px y «Descargar el archivo» partía en dos líneas. A
+ancho completo cabe en una, y el objetivo táctil pasa a ser el botón entero en
+vez de una pastilla en medio de la columna.
 
-## Pendiente en este repo, para quien cierre el release
+*Lo que arrastra*: el botón va **sin padding horizontal**. Siendo de ancho
+completo ya no se mide a sí mismo —lo mide la columna—, así que ese inset no
+añadiría aire, solo estrecharía el texto; el aire vertical (`spacing.4`) es el
+único que sigue dimensionándolo. Efecto lateral bueno: el botón deja de depender
+de `box-sizing`, que el motor de Word de Outlook no entiende. El token
+`email.button-padding-inline` desaparece por eso, sustituido por
+`email.button-width`.
+
+Comprobado a 320, 375 y 600px: el botón mide exactamente el ancho de la columna
+(246 / 301 / 546px), 56px de alto, etiqueta en una línea en los tres.
+
+## Pendiente en este repo, para quien cierre el release## Pendiente en este repo, para quien cierre el release
 
 - **`dist/` NO se ha regenerado**, a propósito: el brief pedía no publicar
   release y hay otro agente trabajando en paralelo. `pnpm release:check` lo
