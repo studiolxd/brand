@@ -99,14 +99,13 @@
   display: none;
 }
 
-/* El pie de acciones. De partida, en columna y a todo el ancho: «Atrás», la
-   principal y, debajo, la salida centrada.
+/* El pie de acciones. Mismo criterio que el pie de un `Form`: el marcado va en
+   el orden del renglón de escritorio —«Atrás», la salida y, cerrándolo, la
+   principal—, y es la columna de móvil la que se invierte, exactamente como
+   `.form__actions--block`. Ni `order` ni `row-reverse`: el recorrido del
+   teclado es siempre «Atrás» → salida → principal, en los dos tamaños.
 
-   La columna es `column`, no `column-reverse`, y la salida va **después** de
-   las decisiones en el marcado: así el orden del DOM —que es el del foco— y el
-   orden visual coinciden en las dos disposiciones, sin `order` ni
-   `row-reverse` de por medio (WCAG 2.4.3). Es también lo que permite que la
-   salida quede pegada a la principal en escritorio sin moverla del sitio. */
+   De partida, en columna y a todo el ancho. */
 .onboarding-shell__actions {
   display: flex;
   flex-direction: column;
@@ -115,11 +114,12 @@
   padding-block-start: var(--onboarding-shell-actions-padding-block-start);
 }
 
-/* En estrecho cada decisión ocupa su línea entera: la principal, la última de
-   las dos, queda justo encima de la salida. */
+/* Las dos decisiones del paso —la salida y la principal—, apiladas en estrecho
+   y cada una en su línea entera. Aquí se invierten: en columna la principal va
+   arriba, que es donde el pulgar la espera, y la salida cae debajo. */
 .onboarding-shell__decisions {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: stretch;
   gap: var(--onboarding-shell-actions-gap);
 }
@@ -132,8 +132,9 @@
 
 @media (min-width: 768px) /* --breakpoint-md */ {
   /* En cuanto hay sitio, la jerarquía se lee de un vistazo en una sola línea,
-     toda ella al final del renglón: «Atrás», la principal y, pegada a ella, la
-     salida. */
+     toda ella al final del renglón: «Atrás», la salida y, cerrándolo, la
+     principal — la acción de más peso, la última, como en el pie de un
+     `Form`. La fila sigue el orden del marcado, así que no se invierte nada. */
   .onboarding-shell__actions {
     flex-direction: row;
     align-items: center;

@@ -28,14 +28,14 @@ export interface OnboardingShellProps {
    * quien decide no pintarse cuando el flujo tiene un solo paso.
    */
   stepper?: ReactNode;
-  /** La acción principal del paso, la de la derecha: «Continuar», «Terminar». */
+  /** La acción principal del paso, la última del renglón: «Continuar», «Terminar». */
   primaryAction?: ReactNode;
-  /** «Atrás», a la izquierda de la principal. En el primer paso no se pasa. */
+  /** «Atrás», la primera del renglón. En el primer paso no se pasa. */
   backAction?: ReactNode;
   /**
    * La salida del paso: «Omitir por ahora», «Cerrar sesión». Va en `text` — es
    * la acción de menos peso de la pantalla y no debe competir con la
-   * principal. Se pinta **después** de la principal: pegada a ella en
+   * principal. Se pinta **antes** de la principal: a su izquierda en
    * escritorio, y debajo y centrada en móvil.
    */
   exitAction?: ReactNode;
@@ -72,11 +72,11 @@ export interface OnboardingShellProps {
  *   izquierdo de una pantalla de 27 pulgadas no se lee.
  *
  * El pie de acciones fija la jerarquía en un solo sitio, para que ninguna
- * pantalla del alta la reinvente: la principal a la derecha, «Atrás» a su
- * izquierda y la salida (`text`) pegada a la principal. En móvil, la misma
- * secuencia en columna: «Atrás», la principal a todo el ancho y la salida
- * centrada debajo. El orden del DOM es el visual en las dos, así que el foco
- * recorre lo mismo que lee el ojo.
+ * pantalla del alta la reinvente: la principal cierra el renglón por la
+ * derecha, con la salida (`text`) pegada a su izquierda y «Atrás» abriendo. Es
+ * el mismo criterio que el pie de un `Form`: la principal, la última. En móvil
+ * la principal sube a todo el ancho y la salida cae centrada debajo, como en
+ * `Form` con acciones en bloque.
  */
 export function OnboardingShell({
   children,
@@ -120,11 +120,13 @@ export function OnboardingShell({
 
           {hayAcciones && (
             <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
-              <div className="onboarding-shell__decisions">
-                {backAction}
-                {primaryAction}
-              </div>
-              {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
+              {backAction}
+              {(exitAction || primaryAction) && (
+                <div className="onboarding-shell__decisions">
+                  {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
+                  {primaryAction}
+                </div>
+              )}
             </div>
           )}
         </div>
