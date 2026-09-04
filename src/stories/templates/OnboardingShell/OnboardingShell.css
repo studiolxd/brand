@@ -97,9 +97,6 @@
   align-items: stretch;
   gap: var(--onboarding-shell-actions-gap);
   padding-block-start: var(--onboarding-shell-actions-padding-block-start);
-  border-block-start-width: var(--onboarding-shell-actions-border-width);
-  border-block-start-style: solid;
-  border-block-start-color: var(--onboarding-shell-actions-border-color);
 }
 
 .onboarding-shell__decisions {
