@@ -10,6 +10,7 @@ import { Form } from '../../molecules/Form/Form';
 import { InputField } from '../../molecules/InputField/InputField';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Stack } from '../../atoms/Stack/Stack';
+import { Columns } from '../../atoms/Columns/Columns';
 
 const PASOS = [
   { id: 'perfil', label: 'Perfil' },
@@ -30,6 +31,21 @@ const cuerpo = (
     <PageIntro title="¿Cómo te llamas?" />
     <Form size="lg" onSubmit={(e) => e.preventDefault()}>
       <InputField id="alta-nombre" label="Nombre y apellidos" autoComplete="name" />
+    </Form>
+  </Stack>
+);
+
+/** El otro extremo: un paso que crece y empuja el pie fuera de la ventana. */
+const cuerpoLargo = (
+  <Stack align="stretch">
+    <PageIntro title="Invita a tu equipo" />
+    <Form size="lg" onSubmit={(e) => e.preventDefault()} actions={<Button variant="outline" size="lg">Añadir otra persona</Button>}>
+      {['1', '2', '3', '4', '5'].map((fila, indice) => (
+        <Columns key={fila} ratio="2:1" align="start">
+          <InputField id={`alta-invitacion-${fila}`} label="Correo electrónico" labelHidden={indice > 0} type="email" placeholder="nombre@organizacion.cat" />
+          <InputField id={`alta-papel-${fila}`} label="Papel" labelHidden={indice > 0} defaultValue="Edición" />
+        </Columns>
+      ))}
     </Form>
   </Stack>
 );
@@ -81,6 +97,27 @@ export const UltimoPaso: Story = {
 };
 
 /**
+ * El paso corto —un campo y los botones— con la ventana entera por delante: el
+ * pie de preferencias cae al borde inferior en vez de quedarse pegado al
+ * contenido. Se ve abriendo la story a pantalla completa; en el marco de la
+ * documentación el lienzo mide lo que mide.
+ */
+export const PasoCorto: Story = {
+  name: 'Paso corto',
+  args: {
+    stepper: <Stepper steps={PASOS} current={0} />,
+    backAction: undefined,
+    exitAction: undefined,
+  },
+};
+
+/** El paso largo: la lista de invitaciones crece y es el contenido el que empuja el pie hacia abajo. */
+export const PasoLargo: Story = {
+  name: 'Paso largo',
+  args: { stepper: <Stepper steps={PASOS} current={3} />, children: cuerpoLargo },
+};
+
+/**
  * Un flujo de un solo paso: el `Stepper` no se pinta y la plantilla se cierra
  * sola sobre el hueco. La ranura se pasa igual — no hay condicional en el
  * producto.
@@ -119,6 +156,12 @@ export const Contrato: Story = {
     const ajustes = canvasElement.querySelector('.onboarding-shell__settings')!;
     await expect(ajustes.querySelector('.onboarding-shell__switchers')).not.toBeNull();
     await expect(paso.compareDocumentPosition(ajustes) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // …y en la ranura de pie del marco, no dentro del `main`: es esa ranura la
+    // que ya sujeta el pie al borde inferior cuando el paso es corto.
+    await expect(main).not.toContainElement(ajustes as HTMLElement);
+    const shell = canvasElement.querySelector('.site-shell')!;
+    await expect(ajustes.parentElement).toBe(shell);
+    await expect(shell.lastElementChild).toBe(ajustes);
     const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
     await expect(within(acciones).getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
     await expect(within(acciones).getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
