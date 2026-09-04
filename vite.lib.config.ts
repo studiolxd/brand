@@ -25,6 +25,10 @@ export default defineConfig({
         // duplica la librería y el contexto no cruza al consumidor.
         'react-hook-form',
         'sonner',
+        // El motor del correo: peer OPCIONAL, así que jamás bundleado. Solo lo
+        // resuelve quien importe `@studiolxd/brand/email`.
+        'react-email',
+        /^@react-email\//,
         // El motor de conducta: externo. Empaquetado arrastra un shim CJS de
         // `require` (Turbopack lo rechaza en dev) y duplicaría su contexto.
         '@base-ui/react',

@@ -1,0 +1,188 @@
+{
+  "email": {
+    "max-width": {
+      "$value": "600px",
+      "$type": "dimension",
+      "$description": "Ancho del correo. No sale de la escala del sistema porque no es una medida de nuestra retícula: 600px es el ancho que asumen el panel de lectura de Outlook y el resto de clientes, y salirse de ahí obliga a hacer scroll horizontal. Es el único valor del correo que no referencia a un token existente"
+    },
+    "font-family": {
+      "$value": "{font-family.sans}",
+      "$type": "string",
+      "$description": "La sans del sistema, con su fallback. El correo la usa en TODO — títulos, prosa y botones. (Antes usaba la mono, que es la de código)"
+    },
+    "font-size": {
+      "$value": "{text.font-size}",
+      "$type": "dimension",
+      "$description": "Cuerpo del correo: el mismo que la superficie de aplicación"
+    },
+    "line-height": {
+      "$value": "{text.line-height}",
+      "$type": "number",
+      "$description": "Interlineado del cuerpo"
+    },
+    "border-width": {
+      "$value": "{border-width.default}",
+      "$type": "dimension",
+      "$description": "Grosor del recuadro que enmarca el mensaje"
+    },
+    "canvas-padding-block": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Aire del lienzo por encima y por debajo del correo"
+    },
+    "canvas-padding-inline": {
+      "$value": "{spacing.3}",
+      "$type": "dimension",
+      "$description": "Aire del lienzo a los lados, para que el recuadro no toque el borde en móvil"
+    },
+    "padding-block": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Padding interior del recuadro del mensaje"
+    },
+    "padding-inline": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Padding interior del recuadro del mensaje"
+    },
+    "brand-padding-block": {
+      "$value": "{spacing.4}",
+      "$type": "dimension",
+      "$description": "Aire de la banda blanca de marca, por encima y por debajo del logotipo"
+    },
+    "brand-padding-inline": {
+      "$value": "{spacing.4}",
+      "$type": "dimension",
+      "$description": "Aire de la banda blanca de marca a los lados"
+    },
+    "opt-out-margin-block-start": {
+      "$value": "{spacing.4}",
+      "$type": "dimension",
+      "$description": "Separación entre el recuadro del mensaje y los enlaces de baja"
+    },
+    "heading-font-size": {
+      "$value": "{text.h5.font-size}",
+      "$type": "dimension",
+      "$description": "Título del correo: el peldaño h5 de la escala"
+    },
+    "heading-font-weight": {
+      "$value": "{text.h5.font-weight}",
+      "$type": "number",
+      "$description": "Peso del título"
+    },
+    "heading-line-height": {
+      "$value": "{text.h5.line-height}",
+      "$type": "number",
+      "$description": "Interlineado del título"
+    },
+    "heading-margin-block-end": {
+      "$value": "{spacing.3}",
+      "$type": "dimension",
+      "$description": "Separación entre el título y el texto que le sigue"
+    },
+    "text-margin-block-end": {
+      "$value": "{spacing.4}",
+      "$type": "dimension",
+      "$description": "Separación entre párrafos"
+    },
+    "note-font-size": {
+      "$value": "{text.paragraph.small.font-size}",
+      "$type": "dimension",
+      "$description": "Letra menor del correo: el peldaño de párrafo pequeño"
+    },
+    "note-line-height": {
+      "$value": "{text.paragraph.small.line-height}",
+      "$type": "number",
+      "$description": "Interlineado de la letra menor"
+    },
+    "button-bg": {
+      "$value": "{button.primary.bg}",
+      "$type": "color",
+      "$description": "Relleno del botón: el mismo par autocontenido que Button primary (lavanda con tinta prusia), que no cambia entre superficie clara y oscura"
+    },
+    "button-color": {
+      "$value": "{button.primary.color}",
+      "$type": "color",
+      "$description": "Tinta del botón, emparejada con su relleno"
+    },
+    "button-font-size": {
+      "$value": "{button.primary.font-size}",
+      "$type": "dimension",
+      "$description": "Tamaño del texto del botón"
+    },
+    "button-font-weight": {
+      "$value": "{button.primary.font-weight}",
+      "$type": "number",
+      "$description": "Peso del texto del botón"
+    },
+    "button-padding-block": {
+      "$value": "{spacing.3}",
+      "$type": "dimension",
+      "$description": "Padding vertical del botón. Propio del correo: el botón web reserva la altura con `control.height`, y en un correo no hay altura de control que valga"
+    },
+    "button-padding-inline": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Padding horizontal del botón"
+    },
+    "button-margin-block-end": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Separación bajo el botón: el descargo que lo sigue quedaría pegado. Va en el botón y no en un envoltorio para que viaje con él a todas las plantillas"
+    },
+    "logo-mark-size": {
+      "$value": "{logomark.size-lg}",
+      "$type": "dimension",
+      "$description": "Tamaño al que se ve el logotipo dentro del PNG"
+    },
+    "logo-padding": {
+      "$value": "{spacing.2}",
+      "$type": "dimension",
+      "$description": "Aire blanco horneado alrededor del logotipo dentro del PNG. El blanco va en la imagen, no en un `background-color`: Outlook Windows y Gmail Android invierten colores por su cuenta y un fondo CSS no sobrevive, una imagen sí"
+    },
+    "light": {
+      "bg": {
+        "$value": "{color.background.light}",
+        "$type": "color",
+        "$description": "Lienzo y recuadro del correo en claro"
+      },
+      "color": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Tinta del correo en claro"
+      },
+      "muted-color": {
+        "$value": "{color.text.muted-on-light}",
+        "$type": "color",
+        "$description": "Tinta secundaria en claro"
+      },
+      "border-color": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Borde del recuadro en claro"
+      }
+    },
+    "dark": {
+      "bg": {
+        "$value": "{color.background.dark}",
+        "$type": "color",
+        "$description": "Lienzo y recuadro del correo en oscuro, donde el cliente lo soporte"
+      },
+      "color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Tinta del correo en oscuro"
+      },
+      "muted-color": {
+        "$value": "{color.text.muted-on-dark}",
+        "$type": "color",
+        "$description": "Tinta secundaria en oscuro"
+      },
+      "border-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Borde del recuadro en oscuro — la regla de derivación: un borde en oscuro es `color.text.on-dark`"
+      }
+    }
+  }
+}
