@@ -1,0 +1,60 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as OnboardingShellStories from "./OnboardingShell.stories";
+
+<Meta of={OnboardingShellStories} />
+
+# OnboardingShell
+
+La plantilla del alta: la pantalla en la que un usuario recién llegado completa su perfil, nombra su organización y reparte invitaciones. Cuelga de `PublicPageShell` —el mismo marco que `ErrorPage` y `NotFoundPage`— y añade lo propio del flujo: la marca, el progreso, el paso y un pie de acciones con la jerarquía ya decidida.
+
+<Canvas of={OnboardingShellStories.PorDefecto} />
+
+## Qué lleva y qué no
+
+- **Superficie pública.** El marco es `SiteShell`, así que el alta lee a 20px con controles `lg`. No es una pantalla de aplicación: es la puerta, y se lee como la portada.
+- **Con marca, sin cabecera.** Arriba va el logotipo. Lo que no va es la cabecera pública: en el alta el usuario **ya tiene sesión**, no hay nada que navegar, y una barra de marketing en mitad de un flujo solo sirve para abandonarlo. Quedan las dos ranuras que sí hacen falta ahí: idioma y tema.
+- **Columna única centrada**, acotada a la medida de un formulario. Un paso de cinco campos pegado al borde izquierdo de una pantalla ancha no se lee.
+
+## El pie de acciones
+
+La jerarquía se decide aquí una vez, para que ninguna pantalla del alta la reinvente:
+
+- `primaryAction` — la decisión del paso, a la derecha, donde termina la lectura.
+- `backAction` — pegada a su izquierda: son las dos caras de la misma decisión.
+- `exitAction` — la salida («Omitir por ahora», «Cerrar sesión»), en `ghost` y **al otro extremo**. Separarla es lo que impide que se lea como parte de la decisión.
+
+Por debajo de `md` el pie pasa a columna invertida: la decisión arriba, la salida abajo del todo, lejos del pulgar que confirma.
+
+<Canvas of={OnboardingShellStories.PrimerPaso} />
+<Canvas of={OnboardingShellStories.UltimoPaso} />
+
+## Un flujo de un solo paso
+
+La ranura `stepper` se pasa siempre; es el `Stepper` quien decide no pintarse cuando el flujo tiene un solo paso, y la ranura vacía sale de la rejilla sin dejar hueco. El producto no escribe el condicional.
+
+<Canvas of={OnboardingShellStories.FlujoDeUnPaso} />
+
+## En superficie oscura
+
+<Canvas of={OnboardingShellStories.EnSuperficieOscura} />
+
+## Cómo se usa
+
+```tsx
+<OnboardingShell
+  brand={<Logo />}
+  switchers={<><LanguageSwitcher … /><ThemeSwitcher … /></>}
+  stepper={<Stepper steps={pasos} current={paso} onStepSelect={setPaso} />}
+  backAction={paso > 0 ? <Button variant="outline" onClick={atras}>{t('atras')}</Button> : undefined}
+  primaryAction={<Button type="submit" form="paso">{t('continuar')}</Button>}
+  exitAction={<Button variant="ghost" onClick={omitir}>{t('omitir')}</Button>}
+>
+  <PasoActual />
+</OnboardingShell>
+```
+
+Las pantallas completas del alta, montadas sobre esta plantilla y con datos falsos, están en **Pages › Onboarding**.
+
+## Props
+
+<ArgTypes of={OnboardingShellStories} />

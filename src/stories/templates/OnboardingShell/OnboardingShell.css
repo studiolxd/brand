@@ -1,0 +1,74 @@
+/* La columna del alta: una sola, acotada a la medida de un formulario y
+   centrada en la banda del `main`. El aire entre bloques —barra, progreso,
+   paso y acciones— lo pone la rejilla, no los márgenes de lo que va dentro. */
+.onboarding-shell {
+  display: grid;
+  gap: var(--onboarding-shell-gap);
+  max-inline-size: var(--onboarding-shell-max-width);
+  margin-inline: auto;
+}
+
+/* La barra: la marca a un lado y los conmutadores al otro. Sin cabecera
+   pública —en el alta ya hay sesión—, es todo el chrome de la pantalla. */
+.onboarding-shell__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--onboarding-shell-top-gap);
+}
+
+.onboarding-shell__switchers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--onboarding-shell-switchers-gap);
+  margin-inline-start: auto;
+}
+
+/* La ranura del progreso se monta siempre, pero el `Stepper` no se pinta en un
+   flujo de un solo paso: sin contenido, la ranura sale de la rejilla y no deja
+   hueco ni gap. Así el producto pasa el progreso sin condicionales. */
+.onboarding-shell__progress:empty {
+  display: none;
+}
+
+/* El pie de acciones. De partida, en columna invertida y a todo el ancho: en
+   una pantalla estrecha la decisión del paso va arriba del todo y la salida
+   queda al final, lejos del pulgar que confirma. */
+.onboarding-shell__actions {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: var(--onboarding-shell-actions-gap);
+  padding-block-start: var(--onboarding-shell-actions-padding-block-start);
+  border-block-start-width: var(--onboarding-shell-actions-border-width);
+  border-block-start-style: solid;
+  border-block-start-color: var(--onboarding-shell-actions-border-color);
+}
+
+.onboarding-shell__decisions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--onboarding-shell-actions-gap);
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  /* En cuanto hay sitio, la jerarquía se lee de un vistazo: la principal a la
+     derecha, «Atrás» pegada a su izquierda, y la salida al otro extremo —
+     separada, para que no se confunda con la decisión del paso. */
+  .onboarding-shell__actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .onboarding-shell__exit {
+    margin-inline-end: auto;
+  }
+
+  .onboarding-shell__decisions {
+    justify-content: flex-end;
+  }
+}

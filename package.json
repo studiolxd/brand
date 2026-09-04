@@ -295,6 +295,10 @@
       "types": "./dist/_types/templates/PublicPageShell/PublicPageShell.d.ts",
       "import": "./dist/public-page-shell.js"
     },
+    "./onboarding-shell": {
+      "types": "./dist/_types/templates/OnboardingShell/OnboardingShell.d.ts",
+      "import": "./dist/onboarding-shell.js"
+    },
     "./not-found-page": {
       "types": "./dist/_types/templates/NotFoundPage/NotFoundPage.d.ts",
       "import": "./dist/not-found-page.js"

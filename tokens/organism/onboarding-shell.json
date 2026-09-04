@@ -1,0 +1,14 @@
+{
+  "onboarding-shell": {
+    "max-width":        { "$value": "{breakpoint.md}",  "$type": "dimension", "$description": "Ancho máximo de la columna del alta (768px): un paso es un formulario corto, no una página de contenido" },
+    "gap":              { "$value": "{spacing.6}",      "$type": "dimension", "$description": "Aire entre los bloques de la columna: barra, progreso, paso y acciones" },
+    "top-gap":          { "$value": "{spacing.4}",      "$type": "dimension", "$description": "Aire entre la marca y los conmutadores cuando la barra se parte en dos líneas" },
+    "switchers-gap":    { "$value": "{spacing.3}",      "$type": "dimension", "$description": "Aire entre los conmutadores de idioma y tema" },
+    "actions-gap":      { "$value": "{spacing.3}",      "$type": "dimension", "$description": "Aire entre las acciones del pie" },
+    "actions-padding-block-start": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre el cuerpo del paso y la línea del pie de acciones" },
+    "actions-border-width": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Línea que separa el pie de acciones del paso. Todo borde del sistema mide lo mismo" },
+    "actions-border-color": { "$value": "{color.border.default-on-light}", "$type": "color", "$description": "Color de esa línea: el separador general del sistema" },
+
+    "surface-dark-actions-border-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Línea del pie de acciones — surface-dark: por la regla de derivación, todo separador pasa a la tinta clara" }
+  }
+}

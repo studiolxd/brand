@@ -145,6 +145,7 @@ export const entryPoints = {
   'not-found-page':      'src/stories/templates/NotFoundPage/NotFoundPage.tsx',
   'error-page':          'src/stories/templates/ErrorPage/ErrorPage.tsx',
   'chat-shell':          'src/stories/templates/ChatShell/ChatShell.tsx',
+  'onboarding-shell':    'src/stories/templates/OnboardingShell/OnboardingShell.tsx',
   // Organisms
   'data-table':          'src/stories/organisms/DataTable/DataTable.tsx',
   'conversation-thread': 'src/stories/organisms/ConversationThread/ConversationThread.tsx',
@@ -157,7 +158,7 @@ export const clientComponents = new Set([
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form', 'hero',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'steps', 'stepper',
-  'app-shell', 'error-boundary', 'public-page-shell', 'not-found-page', 'error-page',
+  'app-shell', 'error-boundary', 'public-page-shell', 'not-found-page', 'error-page', 'onboarding-shell',
   'avatar',
   'card',
   'carousel',
