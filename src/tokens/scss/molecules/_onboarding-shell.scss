@@ -1,7 +1,7 @@
 
 // Do not edit directly, this file was auto-generated.
 
-$lxd-onboarding-shell-max-width: 768px; // Ancho máximo de la columna del alta (768px): un paso es un formulario corto, no una página de contenido
+$lxd-onboarding-shell-max-width: 768px; // Ancho máximo de la columna del alta: la medida estrecha de contenido del sistema (768px). Apunta a la escala de anchos de contenido, no al breakpoint del mismo valor: un punto de corte responsive y una medida de columna son cosas distintas y tienen que poder moverse por separado
 $lxd-onboarding-shell-gap: 2rem; // Aire entre los bloques de la columna: barra, progreso, paso y acciones
 $lxd-onboarding-shell-top-gap: 1rem; // Aire entre la marca y los conmutadores cuando la barra se parte en dos líneas
 $lxd-onboarding-shell-brand-height: calc(64px * 4 / 3); // Alto de la marca. Apunta al de la cabecera pública, no a un valor propio: el alta y el chrome público enseñan la misma marca al mismo tamaño, y tocar el de la cabecera mueve los dos

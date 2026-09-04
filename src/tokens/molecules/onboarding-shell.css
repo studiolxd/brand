@@ -3,12 +3,12 @@
  */
 
 :root {
-  --onboarding-shell-max-width: var(--breakpoint-md); /** Ancho máximo de la columna del alta (768px): un paso es un formulario corto, no una página de contenido */
   --onboarding-shell-gap: var(--spacing-6); /** Aire entre los bloques de la columna: barra, progreso, paso y acciones */
   --onboarding-shell-top-gap: var(--spacing-4); /** Aire entre la marca y los conmutadores cuando la barra se parte en dos líneas */
   --onboarding-shell-switchers-gap: var(--spacing-3); /** Aire entre los conmutadores de idioma y tema */
   --onboarding-shell-actions-gap: var(--spacing-3); /** Aire entre las acciones del pie */
   --onboarding-shell-actions-padding-block-start: var(--spacing-5); /** Aire entre el cuerpo del paso y la línea del pie de acciones */
+  --onboarding-shell-max-width: var(--container-max-width-md); /** Ancho máximo de la columna del alta: la medida estrecha de contenido del sistema (768px). Apunta a la escala de anchos de contenido, no al breakpoint del mismo valor: un punto de corte responsive y una medida de columna son cosas distintas y tienen que poder moverse por separado */
   --onboarding-shell-actions-border-width: var(--border-width-default); /** Línea que separa el pie de acciones del paso. Todo borde del sistema mide lo mismo */
   --onboarding-shell-actions-border-color: var(--color-border-default-on-light); /** Color de esa línea: el separador general del sistema */
   --onboarding-shell-brand-height-compact: var(--site-header-content-height-compact); /** Alto de la marca en móvil (por debajo de md) — el mismo peldaño que la cabecera pública */

@@ -1,6 +1,6 @@
 {
   "onboarding-shell": {
-    "max-width":        { "$value": "{breakpoint.md}",  "$type": "dimension", "$description": "Ancho máximo de la columna del alta (768px): un paso es un formulario corto, no una página de contenido" },
+    "max-width":        { "$value": "{container.max-width-md}",  "$type": "dimension", "$description": "Ancho máximo de la columna del alta: la medida estrecha de contenido del sistema (768px). Apunta a la escala de anchos de contenido, no al breakpoint del mismo valor: un punto de corte responsive y una medida de columna son cosas distintas y tienen que poder moverse por separado" },
     "gap":              { "$value": "{spacing.6}",      "$type": "dimension", "$description": "Aire entre los bloques de la columna: barra, progreso, paso y acciones" },
     "top-gap":          { "$value": "{spacing.4}",      "$type": "dimension", "$description": "Aire entre la marca y los conmutadores cuando la barra se parte en dos líneas" },
     "brand-height":         { "$value": "{site-header.content-height}",         "$type": "dimension", "$description": "Alto de la marca. Apunta al de la cabecera pública, no a un valor propio: el alta y el chrome público enseñan la misma marca al mismo tamaño, y tocar el de la cabecera mueve los dos" },
