@@ -20,8 +20,8 @@ const PASOS = [
 
 const conmutadores = (
   <>
-    <LanguageSwitcher size="lg" labelHidden value="es" languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }]} />
-    <ThemeSwitcher size="lg" value="light" labels={{ group: 'Tema' }} />
+    <LanguageSwitcher size="lg" value="es" languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }]} />
+    <ThemeSwitcher size="lg" value="light" />
   </>
 );
 

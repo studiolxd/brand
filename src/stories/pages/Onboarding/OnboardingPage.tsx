@@ -50,7 +50,7 @@ export function OnboardingPage({ steps = PASOS_ALTA, current = 0, children, back
         brand={<Logo />}
         switchers={
           <>
-            <LanguageSwitcher size="lg" labelHidden value="es" languages={IDIOMAS} />
+            <LanguageSwitcher size="lg" value="es" languages={IDIOMAS} />
             <ThemeSwitcher size="lg" value={theme} />
           </>
         }
