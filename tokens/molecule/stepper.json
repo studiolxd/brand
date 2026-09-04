@@ -15,6 +15,7 @@
 
     "marker-done-bg":       { "$value": "{color.primary}",        "$type": "color",     "$description": "Relleno de la marca de un paso completado o actual: la marca del sistema" },
     "marker-done-color":    { "$value": "{color.text.on-dark}",   "$type": "color",     "$description": "Cifra o check sobre el relleno de marca" },
+    "marker-pending-bg":    { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo de la marca de un paso pendiente: el lienzo de la página. La marca hueca tiene que tapar el carril igual que la rellena — si fuese transparente, la línea cruzaría el círculo por la mitad" },
     "marker-pending-border-color": { "$value": "{color.border.default-on-light}", "$type": "color", "$description": "Filete de la marca de un paso pendiente: el borde general del sistema" },
     "marker-pending-color": { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Cifra de un paso pendiente: texto secundario" },
 
@@ -46,6 +47,7 @@
 
     "surface-dark-marker-done-bg":            { "$value": "{color.accent-1}",              "$type": "color", "$description": "Relleno de la marca hecha — surface-dark: el prusia es el lienzo, así que la marca toma el par de `Button primary` (lavanda con tinta prusia)" },
     "surface-dark-marker-done-color":         { "$value": "{color.primary}",               "$type": "color", "$description": "Cifra o check sobre el relleno lavanda — surface-dark" },
+    "surface-dark-marker-pending-bg":         { "$value": "{color.background.dark}",       "$type": "color", "$description": "Fondo de la marca pendiente — surface-dark: el lienzo oscuro, por el mismo motivo que en claro" },
     "surface-dark-marker-pending-border-color": { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Filete de la marca pendiente — surface-dark: todo borde pasa a la tinta clara" },
     "surface-dark-marker-pending-color":      { "$value": "{color.text.muted-on-dark}",    "$type": "color", "$description": "Cifra de un paso pendiente — surface-dark" },
     "surface-dark-connector-color":           { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Tramo sin recorrer — surface-dark: el carril de la superficie oscura" },

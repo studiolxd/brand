@@ -24,6 +24,7 @@
   --stepper-marker-font-weight: var(--font-weight-emphasis); /** Peso de énfasis de la cifra */
   --stepper-marker-done-bg: var(--color-primary); /** Relleno de la marca de un paso completado o actual: la marca del sistema */
   --stepper-marker-done-color: var(--color-text-on-dark); /** Cifra o check sobre el relleno de marca */
+  --stepper-marker-pending-bg: var(--color-background-light); /** Fondo de la marca de un paso pendiente: el lienzo de la página. La marca hueca tiene que tapar el carril igual que la rellena — si fuese transparente, la línea cruzaría el círculo por la mitad */
   --stepper-marker-pending-border-color: var(--color-border-default-on-light); /** Filete de la marca de un paso pendiente: el borde general del sistema */
   --stepper-marker-pending-color: var(--color-text-muted-on-light); /** Cifra de un paso pendiente: texto secundario */
   --stepper-connector-thickness: var(--border-width-default); /** Grosor de la línea entre pasos */
@@ -47,6 +48,7 @@
 html.dark {
   --stepper-marker-done-bg: var(--color-accent-1); /** Relleno de la marca hecha — surface-dark: el prusia es el lienzo, así que la marca toma el par de `Button primary` (lavanda con tinta prusia) */
   --stepper-marker-done-color: var(--color-primary); /** Cifra o check sobre el relleno lavanda — surface-dark */
+  --stepper-marker-pending-bg: var(--color-background-dark); /** Fondo de la marca pendiente — surface-dark: el lienzo oscuro, por el mismo motivo que en claro */
   --stepper-marker-pending-border-color: var(--color-text-on-dark); /** Filete de la marca pendiente — surface-dark: todo borde pasa a la tinta clara */
   --stepper-marker-pending-color: var(--color-text-muted-on-dark); /** Cifra de un paso pendiente — surface-dark */
   --stepper-connector-color: var(--color-surface-secondary-on-dark); /** Tramo sin recorrer — surface-dark: el carril de la superficie oscura */

@@ -14,6 +14,7 @@ $lxd-stepper-marker-font-weight: 500; // Peso de énfasis de la cifra
 $lxd-stepper-marker-icon-size: 16px; // Tamaño del check de un paso completado: el icono dentro de un control
 $lxd-stepper-marker-done-bg: #111e30; // Relleno de la marca de un paso completado o actual: la marca del sistema
 $lxd-stepper-marker-done-color: #ffffff; // Cifra o check sobre el relleno de marca
+$lxd-stepper-marker-pending-bg: #ffffff; // Fondo de la marca de un paso pendiente: el lienzo de la página. La marca hueca tiene que tapar el carril igual que la rellena — si fuese transparente, la línea cruzaría el círculo por la mitad
 $lxd-stepper-marker-pending-border-color: #d0d0d0; // Filete de la marca de un paso pendiente: el borde general del sistema
 $lxd-stepper-marker-pending-color: #4a4a4a; // Cifra de un paso pendiente: texto secundario
 $lxd-stepper-connector-thickness: 1px; // Grosor de la línea entre pasos

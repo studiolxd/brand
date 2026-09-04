@@ -52,7 +52,12 @@
 
 /* Cada paso ocupa su columna y se lee de arriba abajo: la marca y, debajo, la
    etiqueta. El tramo de línea que llega a un paso es su propio `::before`, así
-   que va del centro del paso anterior al suyo — el primero no lo lleva. */
+   que va del centro del paso anterior al suyo — el primero no lo lleva.
+
+   Ningún `.stepper__step` crea contexto de apilamiento (está posicionado, pero
+   con `z-index: auto`), así que los carriles y los contenidos de TODOS los
+   pasos se ordenan entre sí en el mismo contexto: por eso el orden se decide
+   con `z-index` y no con el orden del documento. */
 .stepper__step {
   position: relative;
   padding-block: var(--stepper-padding-block);
@@ -67,6 +72,7 @@
   block-size: var(--stepper-connector-thickness);
   translate: 0 calc(-1 * var(--stepper-connector-thickness) / 2);
   background-color: var(--stepper-connector-color);
+  z-index: 0;
 }
 
 /* El tramo que llega a un paso hecho —o al actual, que viene de uno hecho— es
@@ -76,10 +82,14 @@
   background-color: var(--stepper-connector-done-color);
 }
 
-/* El contenido va sobre la línea: los dos están posicionados, así que manda el
-   orden del documento y el `::before` queda debajo. */
+/* El contenido va SIEMPRE sobre el carril. No basta con el orden del documento:
+   el tramo de un paso se extiende hacia atrás hasta el centro del paso anterior,
+   y como el paso que lo pinta es hermano posterior, se dibujaría encima de la
+   marca del anterior y la partiría por la mitad. El `z-index` lo resuelve para
+   cualquier pareja de pasos, no solo dentro de uno. */
 .stepper__item {
   position: relative;
+  z-index: 1;
   display: grid;
   justify-items: center;
   gap: var(--stepper-item-gap);
@@ -113,9 +123,11 @@
   transition: background-color var(--stepper-transition-duration) var(--stepper-transition-easing);
 }
 
-/* Un paso pendiente es una marca hueca: filete y cifra secundaria. */
+/* Un paso pendiente es una marca hueca: filete y cifra secundaria. El fondo no
+   es transparente sino el lienzo, para que el carril no se vea cruzando el
+   círculo — la marca rellena ya lo tapa con su propio color. */
 .stepper__step--pending .stepper__marker {
-  background-color: transparent;
+  background-color: var(--stepper-marker-pending-bg);
   border-width: var(--stepper-marker-border-width);
   border-style: solid;
   border-color: var(--stepper-marker-pending-border-color);
