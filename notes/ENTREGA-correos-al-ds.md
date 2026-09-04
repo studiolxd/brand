@@ -1,11 +1,12 @@
 # Entrega — Los correos de la suite, al DS
 
-Rama `emails-ds`. Ocho commits, sin tocar la versión y sin tag: el release lo
+Rama `emails-ds`. Nueve commits, sin tocar la versión y sin tag: el release lo
 cierra quien decida el número.
 
-Incluye la ronda de ajustes del operador (revisión en el 6008): el logotipo se
-veía roto en el catálogo, se retiró el modo oscuro y la prosa salía en negrita.
-Todo está integrado más abajo, no en un apartado aparte.
+Incluye las dos rondas de revisión del operador: el logotipo se veía roto en el
+catálogo, se retiró el modo oscuro, la prosa salía en negrita y el correo leía a
+la escala de aplicación cuando le toca la pública. Todo está integrado más
+abajo, no en un apartado aparte.
 
 ## Qué hay nuevo
 
@@ -50,6 +51,7 @@ confesaba en sus propios comentarios:
 | `Google Sans Code` (la mono, la de **código**) en títulos, prosa y botones | `--font-family-sans`, con su fallback |
 | Hex sueltos copiados a mano de `lmsmarketplace` (`#111e30`, `#baabff`, `#4a4a4a`) | `tokens/component/email.json`, que solo referencia a tokens existentes |
 | Espaciado a ojo en cada estilo (`0 0 12px`, `10px 18px`, `24px`) | La escala de espaciado |
+| Cuerpo, título, letra menor y botón a la escala de **aplicación** | La escala **pública**: un correo es parte pública de la suite |
 | La marca era el `appName` en texto plano | El isotipo, en PNG |
 | Modo oscuro con media query, paleta doble y clases para engancharla | Retirado: el correo es solo claro |
 
@@ -79,6 +81,27 @@ Lo que simplifica: un solo juego de valores en vez de dos, ninguna clase que
 mantener, ninguna regla que dependa de que el cliente conserve el `<body>` —que
 es por donde se rompía— y una hoja de estilos que se queda en una línea,
 `a:hover`, lo único que un correo no puede llevar inline.
+
+### El correo lee a la talla pública
+
+Un correo es parte **pública** de la suite, como la web y las páginas de acceso.
+En el DS eso es la superficie de `SiteShell`: cuerpo a 20px, títulos un peldaño
+arriba y controles en `lg`. Sube con ella todo lo que el correo escribe: cuerpo,
+título, letra menor (la nota tras el botón y los enlaces de baja) y el botón.
+Hay además una razón del medio: el correo se lee sobre todo en el móvil, y una
+nota de baja a 13px es incómoda de leer y de tocar.
+
+El remapeo de la superficie pública se genera como CSS y el correo no consume
+CSS, así que los tokens apuntan a los **tokens fuente** de esa superficie
+(`{site-shell.text-font-size}`, `{site-shell.heading-size-4}`,
+`{site-shell.paragraph-small-font-size}`, `{button.lg-font-size}`,
+`{button.lg-padding-inline}`). Ningún valor escrito a mano.
+
+**El ancho no sube**: los 600px del contenedor son el estándar del medio.
+Comprobado a 600, 375 y 320px: nada desborda ni se corta. Con una salvedad, que
+va abajo en «Decisiones abiertas» — el aire interior del botón `lg` son 64px por
+lado, pensados para una página, y en móvil eso parte el texto del botón en dos
+líneas.
 
 ### La caja y los pesos
 
@@ -270,6 +293,24 @@ Decisiones que van con ellos:
 Mientras esa ruta no exista, los correos enviados saldrán **sin logotipo** (con
 el `alt`, que es el nombre de quien manda) y **con la fuente de sistema**. Se
 degrada, no se rompe — pero el despliegue es parte del día D.
+
+## Decisiones abiertas
+
+**El botón `lg` en móvil.** Su aire interior es `{button.lg-padding-inline}`,
+64px por lado — la talla `lg` tal cual, que es lo que se pidió. En los 600px del
+correo va sobrado, pero a 375px el hueco útil dentro de la caja son ~301px y
+«Descargar el archivo» a 20px no cabe en una línea: el texto parte en dos. No
+desborda ni se corta, react-email le pone `max-width: 100%`, pero se ve peor de
+lo que debería.
+
+Las dos salidas, si molesta:
+
+1. **Botón a ancho completo** en el correo (el DS ya tiene `button.block-width`).
+   En una columna de 600px se lee bien y en móvil resuelve el problema entero, y
+   además da un objetivo táctil mucho mayor.
+2. **Aire interior propio del correo**, un peldaño por debajo del `lg` web.
+
+Las dos son decisión de diseño, no mía, así que se queda como se pidió.
 
 ## Pendiente en este repo, para quien cierre el release
 

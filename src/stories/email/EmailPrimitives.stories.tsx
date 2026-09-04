@@ -21,7 +21,7 @@ const correo = (
     <EmailHeading>EmailHeading</EmailHeading>
     <EmailText>
       «EmailText» es el párrafo del cuerpo: la sans del sistema al tamaño de la
-      superficie de aplicación. Dentro admite un <EmailLink href="#enlace">EmailLink</EmailLink>,
+      superficie pública, que es la del correo. Dentro admite un <EmailLink href="#enlace">EmailLink</EmailLink>,
       que va subrayado porque en un correo el color solo no basta para distinguirlo.
     </EmailText>
     <EmailButton href="#accion">EmailButton</EmailButton>

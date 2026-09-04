@@ -26,6 +26,32 @@ Casi todo lo que el sistema da por hecho en una página no existe en una bandeja
 - **No hay `rem`.** La escala del sistema está en `rem`, que fuera del navegador no significa nada: Outlook lo resuelve contra su propio contexto y el correo sale con otro tamaño. Los tokens del correo llegan en **píxeles absolutos**.
 - **No hay propiedades lógicas.** Outlook de escritorio renderiza con el motor de Word, que no conoce `margin-block` ni `padding-inline`. Es la única excepción del repo a la regla de ejes lógicos: los **tokens** siguen la convención (`padding-block`, `padding-inline`), pero la propiedad CSS de destino va en físicas.
 
+## El correo lee a la talla pública
+
+Un correo es parte **pública** de la suite, como la web y las páginas de acceso.
+En el DS eso es la superficie de `SiteShell`: cuerpo a 20px, escala de títulos un
+peldaño arriba y **controles en `lg`**. Todo lo que el correo escribe —cuerpo,
+título, letra menor y botón— sale de ahí, no de la escala de aplicación.
+
+Hay además una razón del propio medio: el correo se lee sobre todo en el móvil, y
+una nota de baja a 13px es incómoda de leer y de tocar.
+
+El remapeo de la superficie pública se genera como CSS a partir de los tokens
+`site-shell.*`, y un correo no consume CSS. Así que los tokens del correo apuntan
+a **esos mismos tokens fuente** (`{site-shell.text-font-size}`,
+`{site-shell.heading-size-4}`, `{site-shell.paragraph-small-font-size}`,
+`{button.lg-font-size}`, `{button.lg-padding-inline}`), nunca a los
+`--site-shell-*` ya remapeados ni a valores escritos a mano.
+
+La única medida que no puede copiarse de la talla `lg` es el **padding vertical
+del botón**: el botón web reserva su altura con `button.lg-height` y centra el
+contenido, y en un correo no hay altura de control que valga — hay que
+construirla con padding, y para eso se coge el peldaño de la escala de espaciado
+que deja el botón en 52px, por encima de los 48px del `lg` web.
+
+**El ancho no sube con la talla.** Los 600px del contenedor son el estándar del
+medio, no una medida de nuestra retícula, y se quedan como están.
+
 ## La marca: un PNG, no el isotipo vectorial
 
 La cabecera es una imagen, y cada decisión detrás de ella es una cicatriz de un cliente concreto:

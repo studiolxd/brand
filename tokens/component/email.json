@@ -11,9 +11,9 @@
       "$description": "La sans del sistema, con su fallback. El correo la usa en TODO — títulos, prosa y botones. (Antes usaba la mono, que es la de código)"
     },
     "font-size": {
-      "$value": "{text.font-size}",
+      "$value": "{site-shell.text-font-size}",
       "$type": "dimension",
-      "$description": "Cuerpo del correo: el mismo que la superficie de aplicación"
+      "$description": "Cuerpo del correo (20px). Un correo es parte pública de la suite, como la web y las páginas de acceso, así que lee a la talla de la superficie pública. Apunta al token fuente que usa `SiteShell`, no al `--site-shell-*` remapeado: ese remapeo se genera como CSS y el correo no consume CSS"
     },
     "font-weight": {
       "$value": "{font-weight.default}",
@@ -26,9 +26,9 @@
       "$description": "El rango del eje de peso de la sans, tal cual lo declara `fonts.css`. La @font-face del correo tiene que declararlo igual: con un peso suelto el navegador no puede variar el eje y acaba pintando la prosa al peso del título"
     },
     "line-height": {
-      "$value": "{text.line-height}",
+      "$value": "{site-shell.text-line-height}",
       "$type": "number",
-      "$description": "Interlineado del cuerpo"
+      "$description": "Interlineado del cuerpo, el de la superficie pública"
     },
     "border-width": {
       "$value": "{border-width.default}",
@@ -71,9 +71,9 @@
       "$description": "Separación entre el recuadro del mensaje y los enlaces de baja"
     },
     "heading-font-size": {
-      "$value": "{text.h5.font-size}",
+      "$value": "{site-shell.heading-size-4}",
       "$type": "dimension",
-      "$description": "Título del correo: el peldaño h5 de la escala"
+      "$description": "Título del correo (24px): el peldaño 4 de la escala de títulos —el de H5— en la superficie pública, que es la del correo"
     },
     "heading-font-weight": {
       "$value": "{text.h5.font-weight}",
@@ -96,9 +96,9 @@
       "$description": "Separación entre párrafos"
     },
     "note-font-size": {
-      "$value": "{text.paragraph.small.font-size}",
+      "$value": "{site-shell.paragraph-small-font-size}",
       "$type": "dimension",
-      "$description": "Letra menor del correo: el peldaño de párrafo pequeño"
+      "$description": "Letra menor del correo (16px): el peldaño de párrafo pequeño de la superficie pública. Sube también porque el correo se lee sobre todo en el móvil, y una nota de baja a 13px es incómoda de leer y de tocar"
     },
     "note-line-height": {
       "$value": "{text.paragraph.small.line-height}",
@@ -116,9 +116,9 @@
       "$description": "Tinta del botón, emparejada con su relleno"
     },
     "button-font-size": {
-      "$value": "{button.primary.font-size}",
+      "$value": "{button.lg-font-size}",
       "$type": "dimension",
-      "$description": "Tamaño del texto del botón"
+      "$description": "Tamaño del texto del botón: la talla lg, la que le toca a un control en superficie pública"
     },
     "button-font-weight": {
       "$value": "{button.primary.font-weight}",
@@ -126,14 +126,14 @@
       "$description": "Peso del texto del botón"
     },
     "button-padding-block": {
-      "$value": "{spacing.3}",
+      "$value": "{spacing.4}",
       "$type": "dimension",
-      "$description": "Padding vertical del botón. Propio del correo: el botón web reserva la altura con `control.height`, y en un correo no hay altura de control que valga"
+      "$description": "Padding vertical del botón. Es el único valor del botón que no puede copiarse de la talla lg: el botón web reserva su altura con `button.lg-height` y centra el contenido, y en un correo no hay altura de control que valga — hay que construirla con padding. Este peldaño de la escala deja el botón en 52px, por encima de los 48px del lg web y del objetivo táctil mínimo"
     },
     "button-padding-inline": {
-      "$value": "{spacing.5}",
+      "$value": "{button.lg-padding-inline}",
       "$type": "dimension",
-      "$description": "Padding horizontal del botón"
+      "$description": "Padding horizontal del botón: el aire interior de la talla lg"
     },
     "button-margin-block-end": {
       "$value": "{spacing.5}",
