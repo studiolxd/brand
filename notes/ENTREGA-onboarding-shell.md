@@ -442,6 +442,37 @@ de estado (`color.text.on-dark`): con la marca ya en `accent-2`, dejar el carril
 en blanco lo separaría de los pasos y, además, lo volvería indistinguible del
 tramo sin recorrer.
 
+### El neutro de la rampa divergente (corrección de mi barrido)
+
+En el barrido reporté `chart.diverging-neutral` como «sin par oscuro». **Era un
+error mío**: sí lo tiene (`chart.surface-dark-diverging-neutral` → superficie
+secundaria oscura, #4A4A4A). El escenario que se temía —el gris claro sobre
+prusia, con el cero más brillante que los extremos— no llega a darse.
+
+Medida la rampa entera contra su lienzo, el par actual ya cumple el criterio de
+saliencia en las dos superficies:
+
+| paso | claro (sobre blanco) | oscuro (sobre prusia) |
+| --- | --- | --- |
+| cálido 3 | 6,37:1 | 7,17:1 |
+| cálido 2 | 3,91:1 | 4,84:1 |
+| cálido 1 | 2,63:1 | 3,26:1 |
+| **neutro** | **1,12:1** | **1,89:1** |
+| frío 1 | 2,49:1 | 3,40:1 |
+| frío 2 | 3,70:1 | 5,15:1 |
+| frío 3 | 6,10:1 | 7,52:1 |
+
+El neutro es el mínimo en las dos, la saliencia crece hacia los dos extremos sin
+saltos raros (1,46–1,80:1 entre pasos contiguos), y en oscuro no se confunde ni
+con el lienzo —1,89:1 es una mancha visible, y de hecho el neutro **claro** está
+más pegado a su fondo, a 1,12:1— ni con la serie apagada de «Otros» (5,75:1
+entre los dos). **No se cambió ningún valor**: cualquier cambio haría el neutro
+más saliente, justo lo contrario de lo que debe ser.
+
+Lo que sí faltaba y se ha hecho: dejar el criterio escrito en la descripción de
+los dos tokens, y añadir a Foundations › Gráficos de datos la fila «Divergente —
+superficie oscura», que no estaba (la secuencial ya tenía las dos).
+
 ---
 
 ## Lo que cambia FUERA del alta
