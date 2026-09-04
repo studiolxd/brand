@@ -145,9 +145,12 @@ organización y no puede crear una: solo puede esperar.
 - El brief pedía cada pantalla «en claro y oscuro». Se usa
   `parameters: { surface: 'dark' }` (lo que manda `CLAUDE.md`), no un `<div
   className="surface-dark">` como el que aún tiene `AuthPage` por herencia.
-- Par oscuro de la marca del `Stepper`: por la regla de derivación de
-  `CLAUDE.md`, relleno prusia → par de `Button primary` (lavanda con tinta
-  prusia), porque `Stepper` no usa lavanda en ninguna otra variante. El carril
+- Par oscuro de la marca del `Stepper`: la derivación de `CLAUDE.md` daba el par
+  de `Button primary` (lavanda con tinta prusia), pero el operador decidió
+  amarillo (`accent-2`) tras revisarlo en Storybook — ver «Correcciones» al
+  final. Es una salida deliberada de la regla, apuntada en la descripción del
+  propio token para que el próximo que lo lea sepa que no es un descuido.
+  El carril
   sin recorrer usa el rol de superficie secundaria (como el de `ProgressBar`) y
   el recorrido, la tinta del sistema: así los dos tramos siguen distinguiéndose
   en oscuro.
@@ -159,3 +162,48 @@ organización y no puede crear una: solo puede esperar.
 instalado en esta máquina (caso previsto en `CLAUDE.md`). Los tests de story
 nuevos (`Test — …`, con `tags: ['!dev']`) están escritos y quedan pendientes de
 esa pasada.
+
+
+---
+
+## Correcciones tras la revisión en Storybook
+
+### El carril cruzaba por delante de las marcas
+
+El tramo de línea de un paso se extiende hacia atrás hasta el centro del paso
+anterior. Como el paso que lo pinta es hermano **posterior**, se dibujaba encima
+de la marca del anterior y la partía por la mitad. El comentario del CSS daba
+por bueno el orden del documento, y eso solo resuelve el caso dentro de un mismo
+`.stepper__step`: ninguno de ellos crea contexto de apilamiento (están
+posicionados, pero con `z-index: auto`), así que carriles y contenidos de todos
+los pasos compiten en el mismo contexto. Ahora el contenido va sobre el carril
+con `z-index`, que vale para cualquier pareja de pasos; el comentario se
+reescribió con el razonamiento correcto.
+
+De paso, la marca de un paso **pendiente** pasa de fondo transparente al lienzo
+(`marker-pending-bg`, con su par oscuro): era hueca, así que el carril se veía
+cruzándola por dentro — el mismo defecto, en el estado que no se había mirado.
+
+### Superficie oscura: `accent-1` → `accent-2`
+
+Decisión de diseño del operador: en oscuro, el relleno de los pasos completado y
+actual pasa de lavanda a amarillo.
+
+- La tinta sobre ese relleno **no cambia**: prusia sobre `accent-2` da **11,2:1**,
+  muy por encima del 4,5:1 que pide AA (con lavanda eran 8,3:1).
+- Esas marcas **no llevan borde propio** en ninguna superficie —el único token de
+  borde es el de la marca pendiente, que sigue siendo la tinta clara—, así que no
+  hubo nada más que pasar a `accent-2`.
+- Las descripciones que hablaban de «lavanda» están reescritas, y la del token
+  del relleno deja constancia de que es una salida deliberada de la regla de
+  derivación.
+
+### Verificación
+
+`pnpm lint`, `npx tsc -b` y `pnpm test` (289 tests) en verde. Las dos superficies
+se comprobaron a ojo en el Storybook del worktree (6007), en `Molecules/Stepper`
+y en `Pages/Onboarding · Invitaciones`. La **forma compacta** quedó verificada
+por lectura del código, no en pantalla: este Storybook no tiene addon de
+viewport y la ventana del navegador no se dejó redimensionar en este entorno.
+Su CSS no lo toca ninguno de los dos arreglos —no tiene marcas ni carril—, pero
+conviene que le eches un vistazo en un móvil real.
