@@ -60,6 +60,6 @@ export const Contrato: Story = {
     await expect(canvasElement).toHaveTextContent('Paso 1 de 4');
     await expect(canvas.queryByRole('button', { name: 'Atrás' })).toBeNull();
     await expect(canvas.getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
-    await expect(canvas.getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--ghost');
+    await expect(canvas.getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
   },
 };
