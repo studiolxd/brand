@@ -33,7 +33,7 @@ export const Contrato: Story = {
     <>
       <NotificationButton count={3} />
       <NotificationButton count={0} />
-      <NotificationButton count={150} label="Avisos" />
+      <NotificationButton count={150} label="Avisos" countLabel={(n) => `Avisos: ${n} sin leer`} />
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -44,7 +44,13 @@ export const Contrato: Story = {
     const rb = badge.getBoundingClientRect(), rr = b.getBoundingClientRect();
     await expect(rb.top).toBeLessThan(rr.top + 1);
     await expect(rb.right).toBeGreaterThan(rr.right - 1);
+    // El contador va en el nombre del botón y el badge es decorativo: si no,
+    // el lector de pantalla diría el número dos veces
+    await expect(badge).toHaveAttribute('aria-hidden', 'true');
+    await expect(badge).not.toHaveAttribute('aria-label');
     await expect(canvas.getByRole('button', { name: 'Notificaciones' }).querySelector('.notification-button__badge')).toBeNull();
-    await expect(canvas.getByRole('button', { name: 'Avisos' }).textContent).toContain('99+');
+    // Con contador manda `countLabel`; `label` solo se ve cuando no lo hay
+    const tope = canvas.getByRole('button', { name: 'Avisos: 150 sin leer' });
+    await expect(tope.textContent).toContain('99+');
   },
 };

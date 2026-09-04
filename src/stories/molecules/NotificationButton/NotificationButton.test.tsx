@@ -21,3 +21,13 @@ describe('NotificationButton — nombre accesible', () => {
     expect(screen.getByRole('button', { name: 'Notifications: 7 unread' })).toBeInTheDocument();
   });
 });
+
+describe('NotificationButton — el contador no se lee dos veces', () => {
+  it('el badge es decorativo: la cifra solo está en el nombre del botón', () => {
+    render(<NotificationButton count={3} />);
+    const badge = screen.getByRole('button').querySelector('.notification-button__badge')!;
+    expect(badge).toHaveAttribute('aria-hidden', 'true');
+    expect(badge).not.toHaveAttribute('aria-label');
+    expect(screen.queryByLabelText('3')).not.toBeInTheDocument();
+  });
+});
