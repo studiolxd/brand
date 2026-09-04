@@ -64,14 +64,25 @@
   }
 }
 
-/* El pie de chrome: idioma y tema, al final de la pantalla y por debajo del
-   pie de acciones del paso. Va aparte a propósito —una preferencia global no
-   puede leerse como una acción del flujo— y sigue el ancho del chrome, no el
-   de la columna, así que cierra la pantalla en la misma vertical que abre la
-   marca. */
-.onboarding-shell__settings {
-  display: flex;
-  align-items: center;
+/* El pie de chrome: idioma y tema, por debajo del pie de acciones del paso.
+   Va aparte a propósito —una preferencia global no puede leerse como una
+   acción del flujo— y sigue el ancho del chrome, no el de la columna, así que
+   cierra la pantalla en la misma vertical que abre la marca.
+
+   No vive en esta rejilla: se pinta en la ranura de pie del `SiteShell`, la
+   que el marco ya sujeta abajo (columna de `100dvh` con el `main` a `flex: 1`).
+   Así el pie cae al borde inferior de la ventana cuando el paso es corto —el
+   del perfil, un campo— y lo empuja el contenido cuando es largo —el de las
+   invitaciones—, sin que la plantilla tenga que declarar alto mínimo: repetir
+   `100dvh` aquí dentro sumaría el aire del `main` y sacaría una barra de
+   scroll que no toca.
+
+   Como banda, `Container` le da el aire lateral y el ancho de página; lo único
+   propio es cerrar la pantalla con el mismo aire con el que la abre el `main`.
+   Con `shell={false}` no hay marco ni banda: el pie vuelve a la columna, sin
+   este aire, porque abajo manda el `AppShell` de la app. */
+.onboarding-shell__settings.onboarding-shell__settings--band {
+  padding-block-end: var(--onboarding-shell-settings-padding-block-end);
 }
 
 .onboarding-shell__switchers {

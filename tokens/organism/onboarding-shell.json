@@ -7,6 +7,7 @@
     "brand-height-compact": { "$value": "{site-header.content-height-compact}", "$type": "dimension", "$description": "Alto de la marca en móvil (por debajo de md) — el mismo peldaño que la cabecera pública" },
     "brand-height-narrow":  { "$value": "{site-header.content-height-narrow}",  "$type": "dimension", "$description": "Alto de la marca en teléfono (por debajo de sm) — el mismo peldaño que la cabecera pública" },
     "switchers-gap":    { "$value": "{spacing.3}",      "$type": "dimension", "$description": "Aire entre los conmutadores de idioma y tema" },
+    "settings-padding-block-end": { "$value": "{container.padding-block-xl}", "$type": "dimension", "$description": "Aire bajo el pie de preferencias, que se pinta en la ranura de pie del marco y no en la rejilla del alta. Apunta al aire vertical del `main` (`space=\"xl\"`), no a un valor propio: la pantalla cierra con el mismo aire con el que abre, tanto si el pie cae al borde inferior como si lo empuja un paso largo" },
     "actions-gap":      { "$value": "{spacing.3}",      "$type": "dimension", "$description": "Aire entre las acciones del pie" },
     "actions-padding-block-start": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire extra entre el cuerpo del paso y su pie de acciones, sobre el que ya pone la rejilla: la separación la hace el espacio, no una línea" }
   }

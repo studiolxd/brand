@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { PublicPageShell } from '../PublicPageShell/PublicPageShell';
+import { Container } from '../../atoms/Container/Container';
 import './OnboardingShell.css';
 
 export interface OnboardingShellProps {
@@ -62,8 +63,8 @@ export interface OnboardingShellProps {
  *
  * - **Cabecera pública.** En el alta el usuario ya tiene sesión; no hay sitio
  *   al que navegar y una barra de marketing solo invitaría a irse. Arriba queda
- *   solo la marca; idioma y tema bajan a su propio pie de chrome, al final de
- *   la pantalla y separados del pie de acciones del paso.
+ *   solo la marca; idioma y tema bajan a la ranura de pie del marco, al borde
+ *   inferior de la ventana y separados del pie de acciones del paso.
  * - **Una sola columna a lo ancho de la página.** El chrome ocupa el ancho
  *   normal de una página pública —la marca cae donde el ojo ya la espera de la
  *   pantalla de acceso—, y lo que se acota a la medida de lectura y se centra
@@ -91,9 +92,20 @@ export function OnboardingShell({
   className,
 }: OnboardingShellProps) {
   const hayAcciones = Boolean(primaryAction || backAction || exitAction);
+  const preferencias = switchers && <div className="onboarding-shell__switchers">{switchers}</div>;
 
   return (
-    <PublicPageShell id={id} shell={shell}>
+    <PublicPageShell
+      id={id}
+      shell={shell}
+      footer={
+        preferencias && (
+          <Container as="footer" className="onboarding-shell__settings onboarding-shell__settings--band">
+            {preferencias}
+          </Container>
+        )
+      }
+    >
       <div className={['onboarding-shell', className].filter(Boolean).join(' ')}>
         {brand && (
           <header className="onboarding-shell__top">
@@ -117,11 +129,7 @@ export function OnboardingShell({
           )}
         </div>
 
-        {switchers && (
-          <footer className="onboarding-shell__settings">
-            <div className="onboarding-shell__switchers">{switchers}</div>
-          </footer>
-        )}
+        {!shell && preferencias && <footer className="onboarding-shell__settings">{preferencias}</footer>}
       </div>
     </PublicPageShell>
   );

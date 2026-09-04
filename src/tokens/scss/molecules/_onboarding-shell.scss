@@ -8,5 +8,6 @@ $lxd-onboarding-shell-brand-height: calc(64px * 4 / 3); // Alto de la marca. Apu
 $lxd-onboarding-shell-brand-height-compact: 3rem; // Alto de la marca en móvil (por debajo de md) — el mismo peldaño que la cabecera pública
 $lxd-onboarding-shell-brand-height-narrow: 2.5rem; // Alto de la marca en teléfono (por debajo de sm) — el mismo peldaño que la cabecera pública
 $lxd-onboarding-shell-switchers-gap: 0.75rem; // Aire entre los conmutadores de idioma y tema
+$lxd-onboarding-shell-settings-padding-block-end: 3rem; // Aire bajo el pie de preferencias, que se pinta en la ranura de pie del marco y no en la rejilla del alta. Apunta al aire vertical del `main` (`space="xl"`), no a un valor propio: la pantalla cierra con el mismo aire con el que abre, tanto si el pie cae al borde inferior como si lo empuja un paso largo
 $lxd-onboarding-shell-actions-gap: 0.75rem; // Aire entre las acciones del pie
 $lxd-onboarding-shell-actions-padding-block-start: 1.5rem; // Aire extra entre el cuerpo del paso y su pie de acciones, sobre el que ya pone la rejilla: la separación la hace el espacio, no una línea
