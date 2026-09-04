@@ -10,7 +10,7 @@ pnpm storybook        # Launch Storybook on port 6006
 
 # Build
 pnpm build:tokens     # Regenerar tokens CSS+SCSS+JSON desde Style Dictionary (sd.config.mjs)
-pnpm build:email-logo # Regenerar public/email/logo-v1.png desde src/assets/logomark.svg
+pnpm build:email-assets # Regenerar public/email/ (logotipo PNG + fuente): lo que se publica en el host de assets del correo
 pnpm build:lib        # Build de librería React → dist/ (¡solo componentes JS/CSS!)
 pnpm build:css        # Bundle CSS standalone → dist/brand.css
 pnpm build:tokens-css # Bundle de tokens CSS → dist/tokens.css

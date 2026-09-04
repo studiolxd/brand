@@ -642,6 +642,9 @@ for (let changed = true; changed; ) {
     const dotted = path.join('.');
     if (surfaceMap.has(dotted)) continue;
     if (path[0] === 'site-shell') continue;
+    // El correo no está dentro de un SiteShell ni de nada: sus tokens no salen
+    // a CSS, así que arrastrarlos aquí solo deja custom properties muertas.
+    if (path[0] === 'email') continue;
     if (path.some((segment) => segment.startsWith('surface-dark-'))) continue;
     const ref = typeof value === 'string' && value.match(/^\{(.+)\}$/)?.[1];
     if (!ref || !surfaceMap.has(ref)) continue;

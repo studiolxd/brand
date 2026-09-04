@@ -611,7 +611,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
-    "build:email-logo": "node scripts/build-email-logo.mjs",
+    "build:email-assets": "node scripts/build-email-assets.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic",

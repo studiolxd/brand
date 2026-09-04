@@ -52,7 +52,7 @@ export const emailFontFamily = emailToken('--email-font-family');
 export const emailMaxWidth = emailToken('--email-max-width');
 
 /**
- * El logotipo, tal como lo sirve el PNG generado por `scripts/build-email-logo.mjs`:
+ * El logotipo, tal como lo sirve el PNG generado por `scripts/build-email-assets.mjs`:
  * el isotipo a `logo-mark-size` con `logo-padding` de blanco horneado alrededor.
  * `width`/`height` van explícitos en el `<img>` — el archivo es el doble.
  */

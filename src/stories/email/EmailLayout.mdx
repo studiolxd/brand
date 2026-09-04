@@ -38,13 +38,13 @@ La cabecera es una imagen, y cada decisión detrás de ella es una cicatriz de u
 | `alt` con el nombre de quien manda | Muchos clientes bloquean las imágenes de serie: sin `alt`, la cabecera sale en blanco |
 | Nombre versionado (`logo-v1.png`) | Gmail proxea y cachea las imágenes y no admite forzar un refresco: cada versión tiene que ser una URL nueva |
 
-El PNG lo genera `pnpm build:email-logo` a partir de `src/assets/logomark.svg`, con las medidas que dicen los tokens `--email-logo-mark-size` y `--email-logo-padding`.
+El PNG lo genera `pnpm build:email-assets` a partir de `src/assets/logomark.svg`, con las medidas que dicen los tokens `--email-logo-mark-size` y `--email-logo-padding`.
 
 ### Dónde se aloja
 
 La URL base es la prop `assetsBaseUrl`, y su valor por defecto es `https://slxd.app/brand/email` — el dominio de la marca, el más estable a largo plazo. **Es un valor por defecto, no una constante escondida**: un consumidor que sirva los assets en otro sitio lo cambia sin tocar el DS.
 
-De esa base cuelgan dos ficheros, el logotipo y la cara latina de la sans:
+De esa base cuelgan dos ficheros, el logotipo y la cara latina de la sans. Los dos los prepara `pnpm build:email-assets` en `public/email/`, que es lo que hay que publicar tal cual:
 
 ```
 https://slxd.app/brand/email/logo-v1.png

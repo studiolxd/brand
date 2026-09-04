@@ -1,5 +1,7 @@
 /*
- * Genera el logotipo del correo: `public/email/logo-v1.png`.
+ * Prepara `public/email/`, la carpeta que hay que publicar en el host de assets
+ * del correo (`https://slxd.app/brand/email` por defecto): el logotipo y la
+ * cara latina de la sans, las dos únicas cosas que un correo pide por URL.
  *
  * Por qué un PNG y no el SVG que usa la web:
  *
@@ -20,13 +22,16 @@
  * `EmailBrandHeader` no pueden separarse: los dos leen el mismo sitio.
  */
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
 import tokens from '../src/tokens/tokens.json' with { type: 'json' };
 
 const OUT = 'public/email/logo-v1.png';
 const SOURCE = 'src/assets/logomark.svg';
+/* La fuente va versionada por lo mismo que el logotipo: el cliente la cachea. */
+const FONT_SOURCE = 'src/assets/fonts/google-sans-flex/google-sans-flex-normal-latin.woff2';
+const FONT_OUT = 'public/email/google-sans-flex-normal-latin-v1.woff2';
 /** Factor de exportación: el PNG se genera al doble del tamaño al que se ve. */
 const SCALE = 2;
 
@@ -84,3 +89,8 @@ try {
 }
 
 console.log(`✔︎ ${OUT} — ${side}×${side} px (se ve a ${boxSize}×${boxSize})`);
+
+/* Solo la cara latina: es la que cubre el castellano y el resto de idiomas de
+   la suite, y un correo no es sitio para bajarse dos ficheros de fuente. */
+copyFileSync(FONT_SOURCE, FONT_OUT);
+console.log(`✔︎ ${FONT_OUT}`);
