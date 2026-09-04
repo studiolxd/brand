@@ -57,8 +57,8 @@ export interface OnboardingShellProps {
  *
  * - **Cabecera pública.** En el alta el usuario ya tiene sesión; no hay sitio
  *   al que navegar y una barra de marketing solo invitaría a irse. Arriba queda
- *   solo la marca; idioma y tema bajan a su propio pie de chrome, al final de
- *   la pantalla y separados del pie de acciones del paso.
+ *   solo la marca; idioma y tema bajan a la ranura de pie del marco, al borde
+ *   inferior de la ventana y separados del pie de acciones del paso.
  * - **Una sola columna a lo ancho de la página.** El chrome ocupa el ancho
  *   normal de una página pública —la marca cae donde el ojo ya la espera de la
  *   pantalla de acceso—, y lo que se acota a la medida de lectura y se centra

@@ -7,6 +7,17 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.3.1
+
+`OnboardingShell`: el pie con los conmutadores de idioma y tema **cae al fondo
+de la ventana** cuando el paso no llega a llenarla, y lo empuja el contenido
+cuando sí. Antes era un bloque más dentro del contenido, así que en el paso del
+perfil —un campo y un botón— quedaba media pantalla vacía debajo. Va por la
+ranura de pie del `SiteShell`, que ya ocupa `100dvh`, en vez de repetir el alto
+dentro (un `100dvh` anidado da alto de más y una barra de scroll de regalo). El
+reparto horizontal no cambia: chrome a ancho de página, columna del paso acotada
+y centrada.
+
 ## v30.3.0
 
 Dos aperturas de API que desbloquean las dos últimas páginas públicas de la
