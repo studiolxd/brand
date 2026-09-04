@@ -7,7 +7,12 @@ import './OnboardingShell.css';
 export interface OnboardingShellProps {
   /** El cuerpo del paso: el formulario, la explicación, lo que toque. */
   children: ReactNode;
-  /** La marca, arriba a la izquierda: un `Logo`, o el `Logo` dentro del enlace al inicio. */
+  /**
+   * La marca, arriba a la izquierda: un `Logo`, o el `Logo` dentro del enlace
+   * al inicio. El **alto lo impone la plantilla** —el mismo de la cabecera
+   * pública, y con sus mismos peldaños en móvil—, así que la prop `size` del
+   * `Logo` no decide el tamaño final: manda el sitio donde se pinta.
+   */
   brand?: ReactNode;
   /**
    * Los conmutadores de la barra superior, a la derecha: idioma y tema. En el

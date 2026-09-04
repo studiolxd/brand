@@ -11,6 +11,9 @@
   --onboarding-shell-actions-padding-block-start: var(--spacing-5); /** Aire entre el cuerpo del paso y la línea del pie de acciones */
   --onboarding-shell-actions-border-width: var(--border-width-default); /** Línea que separa el pie de acciones del paso. Todo borde del sistema mide lo mismo */
   --onboarding-shell-actions-border-color: var(--color-border-default-on-light); /** Color de esa línea: el separador general del sistema */
+  --onboarding-shell-brand-height-compact: var(--site-header-content-height-compact); /** Alto de la marca en móvil (por debajo de md) — el mismo peldaño que la cabecera pública */
+  --onboarding-shell-brand-height-narrow: var(--site-header-content-height-narrow); /** Alto de la marca en teléfono (por debajo de sm) — el mismo peldaño que la cabecera pública */
+  --onboarding-shell-brand-height: var(--site-header-content-height); /** Alto de la marca. Apunta al de la cabecera pública, no a un valor propio: el alta y el chrome público enseñan la misma marca al mismo tamaño, y tocar el de la cabecera mueve los dos */
 }
 
 .surface-dark,

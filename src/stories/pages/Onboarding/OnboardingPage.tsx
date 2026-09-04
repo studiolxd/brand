@@ -47,7 +47,7 @@ export function OnboardingPage({ steps = PASOS_ALTA, current = 0, children, back
   return (
     <AppRoot>
       <OnboardingShell
-        brand={<Logo size="md" />}
+        brand={<Logo />}
         switchers={
           <>
             <LanguageSwitcher size="lg" labelHidden value="es" languages={IDIOMAS} />

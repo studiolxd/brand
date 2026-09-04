@@ -12,7 +12,7 @@ La plantilla del alta: la pantalla en la que un usuario recién llegado completa
 ## Qué lleva y qué no
 
 - **Superficie pública.** El marco es `SiteShell`, así que el alta lee a 20px con controles `lg`. No es una pantalla de aplicación: es la puerta, y se lee como la portada.
-- **Con marca, sin cabecera.** Arriba va el logotipo. Lo que no va es la cabecera pública: en el alta el usuario **ya tiene sesión**, no hay nada que navegar, y una barra de marketing en mitad de un flujo solo sirve para abandonarlo. Quedan las dos ranuras que sí hacen falta ahí: idioma y tema.
+- **Con marca, sin cabecera.** Arriba va el logotipo, y **el alto lo impone la plantilla**: el mismo de la cabecera pública (`site-header.content-height`, con sus mismos peldaños en móvil y en teléfono), así que la prop `size` del `Logo` no decide el tamaño final y el alta no puede descuadrarse respecto al chrome público. Lo que no va es la cabecera pública: en el alta el usuario **ya tiene sesión**, no hay nada que navegar, y una barra de marketing en mitad de un flujo solo sirve para abandonarlo. Quedan las dos ranuras que sí hacen falta ahí: idioma y tema.
 - **Columna única centrada**, acotada a la medida de un formulario. Un paso de cinco campos pegado al borde izquierdo de una pantalla ancha no se lee.
 
 ## El pie de acciones

@@ -18,6 +18,42 @@
   gap: var(--onboarding-shell-top-gap);
 }
 
+/* La marca mide lo que le da la plantilla, no lo que diga su prop `size`:
+   igual que en `SiteHeader`, manda el sitio donde se pinta. Así el alta y el
+   chrome público enseñan el logotipo al mismo tamaño y el consumidor no puede
+   descuadrarlo desde fuera.
+
+   Mismo mecanismo que la cabecera: se remapean los tokens de talla del `Logo`
+   en vez de intentar ganarle por selector — `Logo` estila sus tallas con doble
+   clase, así que una regla de aquí empataría y decidiría el orden de carga. El
+   `block-size` cubre una marca de producto que no sea el `Logo` del sistema. */
+.onboarding-shell__brand {
+  --logo-height-sm:  var(--onboarding-shell-brand-height);
+  --logo-height-md:  var(--onboarding-shell-brand-height);
+  --logo-height-lg:  var(--onboarding-shell-brand-height);
+  --logo-height-xl:  var(--onboarding-shell-brand-height);
+  --logo-height-xxl: var(--onboarding-shell-brand-height);
+}
+
+.onboarding-shell__brand > * {
+  block-size: var(--onboarding-shell-brand-height);
+  inline-size: auto;
+}
+
+/* Los peldaños de móvil y teléfono son los de la cabecera pública, y con los
+   mismos puntos de ruptura: si allí la marca encoge, aquí también. */
+@media (max-width: 767.98px) /* < --breakpoint-md */ {
+  .onboarding-shell {
+    --onboarding-shell-brand-height: var(--onboarding-shell-brand-height-compact);
+  }
+}
+
+@media (max-width: 479.98px) /* < --breakpoint-sm */ {
+  .onboarding-shell {
+    --onboarding-shell-brand-height: var(--onboarding-shell-brand-height-narrow);
+  }
+}
+
 .onboarding-shell__switchers {
   display: flex;
   flex-wrap: wrap;
