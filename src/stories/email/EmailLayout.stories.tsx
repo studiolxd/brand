@@ -30,8 +30,8 @@ const meta: Meta<typeof EmailLayout> = {
   },
   /* El correo es un documento HTML completo: se renderiza a texto y se mira en
      un iframe, que es lo más parecido a lo que hace un cliente de correo. */
-  render: (args, { parameters }) => (
-    <EmailPreview theme={parameters.surface === 'dark' ? 'dark' : 'light'}>
+  render: (args) => (
+    <EmailPreview>
       <EmailLayout {...args} />
     </EmailPreview>
   ),
@@ -53,18 +53,6 @@ export const ConBaja: Story = {
 /** Con pantalla de preferencias: el pie completo, para quien quiera conservar algunos avisos. */
 export const ConPreferencias: Story = {
   name: 'Con preferencias',
-  args: {
-    optOut: { unsubscribeUrl: '#baja', preferencesUrl: '#preferencias' },
-  },
-};
-
-/**
- * La banda de marca se queda blanca también aquí: es lo que garantiza que el
- * logotipo caiga siempre sobre blanco. El recuadro del mensaje sí responde.
- */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
   args: {
     optOut: { unsubscribeUrl: '#baja', preferencesUrl: '#preferencias' },
   },

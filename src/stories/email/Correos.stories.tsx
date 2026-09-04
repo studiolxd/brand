@@ -63,20 +63,8 @@ export const VerificarCorreo: Story = {
   render: () => <EmailPreview>{verificar}</EmailPreview>,
 };
 
-export const VerificarCorreoOscuro: Story = {
-  name: 'Verificar el correo — en superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => <EmailPreview theme="dark">{verificar}</EmailPreview>,
-};
-
 /** Aviso de una categoría: lleva baja de un clic y enlace a preferencias. */
 export const ExportacionLista: Story = {
   name: 'Exportación lista',
   render: () => <EmailPreview>{exportacion}</EmailPreview>,
-};
-
-export const ExportacionListaOscuro: Story = {
-  name: 'Exportación lista — en superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => <EmailPreview theme="dark">{exportacion}</EmailPreview>,
 };

@@ -20,12 +20,11 @@ export type {
 
 export {
   emailAssetsBaseUrl,
-  emailClasses,
-  emailDarkModeCss,
   emailFontFamily,
   emailFontFilename,
   emailLogo,
   emailMaxWidth,
   emailPalette,
+  emailStyleSheet,
   emailStyles,
 } from './emailTheme';

@@ -6,7 +6,7 @@ import { EmailLayout } from "./EmailLayout";
 
 # EmailLayout
 
-El marco de todo correo de la suite: el documento, la fuente, las reglas de modo oscuro, la banda de marca, el recuadro del mensaje y el pie de baja. Lo que va dentro —lo que el correo *dice*— es de quien lo manda: las plantillas concretas (verificar el correo, restablecer la contraseña, exportación lista) son producto y viven en su repo, no aquí.
+El marco de todo correo de la suite: el documento, la fuente, la banda de marca, la caja del mensaje y el pie de baja. Lo que va dentro —lo que el correo *dice*— es de quien lo manda: las plantillas concretas (verificar el correo, restablecer la contraseña, exportación lista) son producto y viven en su repo, no aquí.
 
 Se importa desde su propio punto de entrada, no del barril:
 
@@ -33,7 +33,7 @@ La cabecera es una imagen, y cada decisión detrás de ella es una cicatriz de u
 | Decisión | Por qué |
 | --- | --- |
 | PNG, no SVG | Gmail y Outlook no renderizan SVG: el correo saldría sin marca en los dos clientes que más pesan |
-| Blanco horneado dentro, con su aire | Outlook Windows y Gmail Android invierten colores por su cuenta; un `background-color` blanco no sobrevive a esa inversión, una imagen sí |
+| Blanco horneado dentro, con su aire | Outlook Windows y Gmail Android invierten colores por su cuenta; un `background-color` blanco no sobrevive a esa inversión, una imagen sí — es lo que deja al logotipo a salvo aunque el correo no gestione tema |
 | Exportado a 2x, con `width`/`height` explícitos | Nítido en pantallas densas, y sin que el cliente tenga que adivinar el hueco mientras carga |
 | `alt` con el nombre de quien manda | Muchos clientes bloquean las imágenes de serie: sin `alt`, la cabecera sale en blanco |
 | Nombre versionado (`logo-v1.png`) | Gmail proxea y cachea las imágenes y no admite forzar un refresco: cada versión tiene que ser una URL nueva |
@@ -51,18 +51,36 @@ https://slxd.app/brand/email/logo-v1.png
 https://slxd.app/brand/email/google-sans-flex-normal-latin-v1.woff2
 ```
 
-## Tema claro y oscuro
+## Por qué no hay modo oscuro
 
-El oscuro solo llega donde el cliente lo soporta (Apple Mail, Mail de iOS, Outlook para macOS). Gmail y Outlook Windows ignoran tanto las meta como la media query, así que **los estilos claros inline son el estado real y cada regla oscura es un override encima** — nunca al revés.
+El correo es **solo claro**. No es que no se haya probado: el mecanismo se
+retiró — la paleta oscura, la media query `prefers-color-scheme`, las `meta` que
+la anunciaban y las clases (`.email-body`, `.email-surface`, `.email-text`…) que
+existían solo para que esas reglas pudieran engancharse.
 
-<Canvas of={EmailLayoutStories.EnSuperficieOscura} />
+**Esto no impide que Outlook Windows o Gmail Android inviertan los colores por
+su cuenta.** Lo hacen igual, y no hay forma de pedirles que no. Lo que se deja de
+hacer es *gestionarlo*: con fondo blanco y tinta oscura, el resultado invertido
+sigue siendo legible, y el logotipo lleva su blanco horneado dentro, así que
+aguanta la inversión sin quedarse sin marca.
 
-Dos cosas que no pueden perderse en un refactor, y que hay tests vigilando:
+Lo que se gana: un solo juego de valores, ninguna regla que dependa de que el
+cliente conserve el `<body>` —que es por donde se rompía— y una hoja de estilos
+que se queda en una línea, la única cosa que un correo no puede llevar inline:
 
-1. **Ninguna regla oscura cuelga de `<body>` ni de `html`.** Gmail —y la vista previa de Mailpit— descartan `<html>`/`<body>` e inyectan el contenido en su propio documento: un selector descendiente colgado de ahí deja de matchear. Toda regla arranca en una clase que el layout pone él mismo (`.email-body`, `.email-surface`, `.email-container`, `.email-text`, `.email-muted`).
-2. **La banda de marca se queda blanca**, también en oscuro: es lo que garantiza que el logotipo caiga siempre sobre blanco. Su clase, `.email-brand`, no aparece en el bloque oscuro a propósito.
+```css
+a:hover { text-decoration: none !important; }
+```
 
-El botón tampoco cambia: su relleno es el par autocontenido de `Button primary` (lavanda con tinta prusia), que contrasta igual sobre las dos superficies.
+## La caja
+
+Tres superficies, tres tokens:
+
+| | Token | Valor |
+| --- | --- | --- |
+| Fondo general, fuera de la caja | `--email-canvas-bg` | Blanco |
+| Fondo de la caja | `--email-bg` | Blanco |
+| Borde de la caja | `--email-border-color` | La tinta del sistema sobre superficie clara |
 
 ## El pie de baja
 
@@ -82,4 +100,4 @@ Los del correo viven en `tokens/component/email.json` y **todos referencian a un
 
 A diferencia del resto de componentes, estos tokens **no salen a CSS ni a SCSS**: no hay CSS de correo que los consuma. Salen a `emailTokens.ts`, que genera `pnpm build:tokens` junto a los componentes, ya resueltos y en píxeles.
 
-Y sus pares de tema se llaman `email.light.*` / `email.dark.*` en vez de usar el prefijo `surface-dark-` del sistema: ese mecanismo publica el par oscuro **con el nombre del claro** para remapear una custom property bajo un selector, y aquí no hay custom property que remapear — el correo necesita los dos valores a la vez, como datos, para escribir el inline claro y la regla oscura en la misma pasada.
+Y no hay pares de tema: al ser solo claro, cada color es un valor único. El lienzo (`--email-canvas-bg`) y la caja (`--email-bg`) son tokens distintos aunque hoy valgan lo mismo, porque son dos superficies distintas; el borde (`--email-border-color`) es el rol de tinta sobre superficie clara.

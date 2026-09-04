@@ -98,7 +98,7 @@
     "button-bg": {
       "$value": "{button.primary.bg}",
       "$type": "color",
-      "$description": "Relleno del botón: el mismo par autocontenido que Button primary (lavanda con tinta prusia), que no cambia entre superficie clara y oscura"
+      "$description": "Relleno del botón: el mismo par autocontenido que Button primary, lavanda con tinta prusia"
     },
     "button-color": {
       "$value": "{button.primary.color}",
@@ -140,49 +140,30 @@
       "$type": "dimension",
       "$description": "Aire blanco horneado alrededor del logotipo dentro del PNG. El blanco va en la imagen, no en un `background-color`: Outlook Windows y Gmail Android invierten colores por su cuenta y un fondo CSS no sobrevive, una imagen sí"
     },
-    "light": {
-      "bg": {
-        "$value": "{color.background.light}",
-        "$type": "color",
-        "$description": "Lienzo y recuadro del correo en claro"
-      },
-      "color": {
-        "$value": "{color.text.on-light}",
-        "$type": "color",
-        "$description": "Tinta del correo en claro"
-      },
-      "muted-color": {
-        "$value": "{color.text.muted-on-light}",
-        "$type": "color",
-        "$description": "Tinta secundaria en claro"
-      },
-      "border-color": {
-        "$value": "{color.text.on-light}",
-        "$type": "color",
-        "$description": "Borde del recuadro en claro"
-      }
+    "canvas-bg": {
+      "$value": "{color.background.light}",
+      "$type": "color",
+      "$description": "Fondo general del correo, fuera de la caja. Blanco"
     },
-    "dark": {
-      "bg": {
-        "$value": "{color.background.dark}",
-        "$type": "color",
-        "$description": "Lienzo y recuadro del correo en oscuro, donde el cliente lo soporte"
-      },
-      "color": {
-        "$value": "{color.text.on-dark}",
-        "$type": "color",
-        "$description": "Tinta del correo en oscuro"
-      },
-      "muted-color": {
-        "$value": "{color.text.muted-on-dark}",
-        "$type": "color",
-        "$description": "Tinta secundaria en oscuro"
-      },
-      "border-color": {
-        "$value": "{color.text.on-dark}",
-        "$type": "color",
-        "$description": "Borde del recuadro en oscuro — la regla de derivación: un borde en oscuro es `color.text.on-dark`"
-      }
+    "bg": {
+      "$value": "{color.background.light}",
+      "$type": "color",
+      "$description": "Fondo de la caja del mensaje. Blanco"
+    },
+    "color": {
+      "$value": "{color.text.on-light}",
+      "$type": "color",
+      "$description": "Tinta del correo"
+    },
+    "muted-color": {
+      "$value": "{color.text.muted-on-light}",
+      "$type": "color",
+      "$description": "Tinta secundaria"
+    },
+    "border-color": {
+      "$value": "{color.text.on-light}",
+      "$type": "color",
+      "$description": "Borde de la caja: el rol de tinta sobre superficie clara"
     }
   }
 }

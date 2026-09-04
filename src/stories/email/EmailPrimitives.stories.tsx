@@ -35,9 +35,3 @@ const correo = (
 export const Todas: Story = {
   render: () => <EmailPreview>{correo}</EmailPreview>,
 };
-
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => <EmailPreview theme="dark">{correo}</EmailPreview>,
-};

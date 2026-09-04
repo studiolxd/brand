@@ -226,9 +226,8 @@ Los `surface-dark-*` se filtran, igual que en SCSS: se publican con el nombre de
 
 - **Todo estilo va inline y resuelto.** No hay hoja de estilos ni custom properties: Outlook no resuelve `var()`. De ahí que los estilos sean objetos JS (`emailTheme.ts`) y no un `.css`.
 - **`tokens/component/email.json` no sale a CSS ni a SCSS** —no hay CSS de correo que los consuma—; sale a `src/stories/email/emailTokens.ts`, generado por `pnpm build:tokens`, con los valores en píxeles absolutos. No editarlo a mano.
-- **Sus pares de tema se llaman `email.light.*` / `email.dark.*`**, no `surface-dark-*`: ese mecanismo publica el par oscuro con el nombre del claro para remapear una custom property, y aquí no hay custom property que remapear — el correo necesita los dos valores a la vez, como datos.
-- **Las reglas oscuras son overrides sobre el inline claro**, y ningún selector cuelga de `<body>` ni de `html`: Gmail los descarta e inyecta el contenido en su propio documento. Hay tests que lo vigilan (`EmailLayout.test.tsx`); son cicatrices de fallos reales, no preferencias.
-- **La banda de marca es blanca siempre**, también en oscuro, para que el logotipo caiga siempre sobre blanco. `.email-brand` no aparece en el bloque oscuro a propósito.
+- **El correo es solo claro: no gestiona modo oscuro.** Se retiró el mecanismo entero (paleta oscura, `prefers-color-scheme`, las `meta` de esquema y las clases `email-*` que solo servían para engancharlo). Esto NO impide que Outlook Windows o Gmail Android inviertan los colores por su cuenta — lo que se deja de hacer es gestionarlo; con fondo blanco, tinta oscura y el blanco horneado del logotipo, el resultado invertido aguanta. Hay un test que vigila que no vuelva (`EmailLayout.test.tsx`).
+- **La única hoja de estilos del correo es `a:hover`**, lo único que no cabe en un atributo `style`. Todo lo demás va inline.
 - **`react-email` es un peer opcional** y va en los externals de `vite.lib.config.ts`. Radix sigue prohibido; esta es la única otra dependencia de comportamiento del repo, y solo para el correo.
 
 Las **plantillas concretas** (verificar el correo, restablecer la contraseña…) son producto y viven en `@slxd/mailer`, no aquí.

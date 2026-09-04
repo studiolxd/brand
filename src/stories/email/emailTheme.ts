@@ -29,20 +29,23 @@ export function emailToken(name: EmailTokenName): string {
   return emailTokens[name];
 }
 
-/** Los dos temas del correo. El oscuro solo llega donde el cliente lo soporta. */
+/**
+ * La paleta del correo. Un solo juego: el correo es solo claro.
+ *
+ * El modo oscuro se retiró a propósito, no por no haberlo probado. Eso NO
+ * impide que Outlook Windows o Gmail Android inviertan los colores por su
+ * cuenta: lo que se deja de hacer es gestionarlo. Con fondo blanco y tinta
+ * oscura el resultado invertido es legible, y el logotipo lleva su blanco
+ * horneado, así que aguanta.
+ */
 export const emailPalette = {
-  light: {
-    background: emailToken('--email-light-bg'),
-    text: emailToken('--email-light-color'),
-    muted: emailToken('--email-light-muted-color'),
-    border: emailToken('--email-light-border-color'),
-  },
-  dark: {
-    background: emailToken('--email-dark-bg'),
-    text: emailToken('--email-dark-color'),
-    muted: emailToken('--email-dark-muted-color'),
-    border: emailToken('--email-dark-border-color'),
-  },
+  /** Fondo general, fuera de la caja. */
+  canvas: emailToken('--email-canvas-bg'),
+  /** Fondo de la caja del mensaje. */
+  background: emailToken('--email-bg'),
+  text: emailToken('--email-color'),
+  muted: emailToken('--email-muted-color'),
+  border: emailToken('--email-border-color'),
 } as const;
 
 /** La sans del sistema con su pila de reserva, tal cual la define el token. */
@@ -84,7 +87,7 @@ export const emailFontFilename = 'google-sans-flex-normal-latin-v1.woff2';
  */
 export const emailStyles = {
   heading: {
-    color: emailPalette.light.text,
+    color: emailPalette.text,
     fontFamily: emailFontFamily,
     fontSize: emailToken('--email-heading-font-size'),
     fontWeight: Number(emailToken('--email-heading-font-weight')),
@@ -92,7 +95,7 @@ export const emailStyles = {
     margin: `0 0 ${emailToken('--email-heading-margin-block-end')}`,
   },
   text: {
-    color: emailPalette.light.text,
+    color: emailPalette.text,
     fontFamily: emailFontFamily,
     fontSize: emailToken('--email-font-size'),
     lineHeight: emailToken('--email-line-height'),
@@ -100,7 +103,7 @@ export const emailStyles = {
   },
   /** Letra menor y tinta secundaria, dentro del recuadro. */
   muted: {
-    color: emailPalette.light.muted,
+    color: emailPalette.muted,
     fontFamily: emailFontFamily,
     fontSize: emailToken('--email-note-font-size'),
     lineHeight: emailToken('--email-note-line-height'),
@@ -112,7 +115,7 @@ export const emailStyles = {
    * como secundario.
    */
   footnote: {
-    color: emailPalette.light.text,
+    color: emailPalette.text,
     fontFamily: emailFontFamily,
     fontSize: emailToken('--email-note-font-size'),
     lineHeight: emailToken('--email-note-line-height'),
@@ -140,57 +143,20 @@ export const emailStyles = {
     marginBottom: emailToken('--email-button-margin-block-end'),
   },
   link: {
-    color: emailPalette.light.text,
+    color: emailPalette.text,
     fontFamily: emailFontFamily,
     textDecoration: 'underline',
   },
 } as const satisfies Record<string, CSSProperties>;
 
 /**
- * Las clases que emparejan con las reglas oscuras. Van SIEMPRE junto al estilo
- * inline correspondiente: el inline es el estado real y la clase, el override.
- */
-export const emailClasses = {
-  body: 'email-body',
-  surface: 'email-surface',
-  container: 'email-container',
-  /** La banda de marca: blanca siempre, también en oscuro. No lleva override. */
-  brand: 'email-brand',
-  heading: 'email-text',
-  text: 'email-text',
-  muted: 'email-muted',
-  footnote: 'email-text',
-  link: 'email-text',
-} as const;
-
-/**
- * Modo oscuro, donde el cliente lo soporta (Apple Mail, Mail de iOS, Outlook
- * para macOS). Gmail y Outlook Windows ignoran tanto las meta como la media
- * query, así que los estilos claros inline son el estado real y CADA regla
- * oscura es un override encima — nunca al revés.
+ * Lo único que el correo no puede llevar inline: una pseudoclase.
  *
- * Tres cicatrices que este bloque no puede perder:
- *
- * 1. Todo selector es una clase que el propio layout pone en el elemento. Un
- *    selector descendiente colgado de la clase del `<body>` (o de `html` a
- *    secas) deja de matchear en cuanto el cliente descarta `<html>`/`<body>` e
- *    inyecta el contenido en su propio documento — Gmail, y la vista previa de
- *    Mailpit. Así se rompió el modo oscuro una vez.
- * 2. `!important` en todas: compiten con los estilos inline, que si no ganan
- *    por especificidad.
- * 3. `.email-brand` NO aparece aquí. La banda de marca lleva fondo blanco
- *    siempre, para que el logotipo caiga sobre blanco en los dos temas.
+ * Es toda la hoja de estilos del correo. Antes había un bloque mucho mayor con
+ * las reglas de modo oscuro y las clases (`.email-body`, `.email-surface`,
+ * `.email-text`…) que existían solo para que esas reglas pudieran engancharse;
+ * al retirarse el modo oscuro se fueron con él.
  */
-export const emailDarkModeCss = `
-  :root { color-scheme: light dark; supported-color-schemes: light dark; }
-  @media (prefers-color-scheme: dark) {
-    .${emailClasses.body}, .${emailClasses.surface} { background-color: ${emailPalette.dark.background} !important; }
-    .${emailClasses.container} {
-      background-color: ${emailPalette.dark.background} !important;
-      border-color: ${emailPalette.dark.border} !important;
-    }
-    .email-text { color: ${emailPalette.dark.text} !important; }
-    .email-muted { color: ${emailPalette.dark.muted} !important; }
-  }
+export const emailStyleSheet = `
   a:hover { text-decoration: none !important; }
 `;

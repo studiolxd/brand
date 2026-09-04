@@ -35,14 +35,11 @@ export const emailTokens = {
   '--email-button-margin-block-end': '24px',
   '--email-logo-mark-size': '48px',
   '--email-logo-padding': '8px',
-  '--email-light-bg': '#ffffff',
-  '--email-light-color': '#111e30',
-  '--email-light-muted-color': '#4a4a4a',
-  '--email-light-border-color': '#111e30',
-  '--email-dark-bg': '#111e30',
-  '--email-dark-color': '#ffffff',
-  '--email-dark-muted-color': '#d0d0d0',
-  '--email-dark-border-color': '#ffffff',
+  '--email-canvas-bg': '#ffffff',
+  '--email-bg': '#ffffff',
+  '--email-color': '#111e30',
+  '--email-muted-color': '#4a4a4a',
+  '--email-border-color': '#111e30',
 } as const;
 
 export type EmailTokenName = keyof typeof emailTokens;

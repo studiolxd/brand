@@ -1,6 +1,6 @@
 /*
- * El marco de todo correo de la suite: el documento, la fuente, las reglas de
- * modo oscuro, la banda de marca, el recuadro del mensaje y el pie de baja.
+ * El marco de todo correo de la suite: el documento, la fuente, la banda de
+ * marca, la caja del mensaje y el pie de baja.
  *
  * Lo que va dentro —lo que dice el correo— es de quien lo manda: las plantillas
  * concretas (verificar correo, restablecer contraseña, exportación lista) son
@@ -11,12 +11,11 @@ import { Body, Container, Font, Head, Html, Img, Link, Preview, Section, Text } 
 
 import {
   emailAssetsBaseUrl,
-  emailClasses,
-  emailDarkModeCss,
   emailFontFilename,
   emailLogo,
   emailMaxWidth,
   emailPalette,
+  emailStyleSheet,
   emailStyles,
   emailToken,
 } from './emailTheme';
@@ -61,24 +60,24 @@ function EmailOptOutBlock({
   manageAfterLabel = '.',
 }: EmailOptOut) {
   const link = (
-    <Link href={unsubscribeUrl} className={emailClasses.link} style={emailStyles.link}>
+    <Link href={unsubscribeUrl} style={emailStyles.link}>
       {unsubscribeLabel}
     </Link>
   );
 
   if (!preferencesUrl) {
     return (
-      <Text className={emailClasses.footnote} style={emailStyles.footnote}>
+      <Text style={emailStyles.footnote}>
         {manageLabel} {link}
       </Text>
     );
   }
 
   return (
-    <Text className={emailClasses.footnote} style={emailStyles.footnote}>
+    <Text style={emailStyles.footnote}>
       {link}
       {manageBeforeLabel}
-      <Link href={preferencesUrl} className={emailClasses.link} style={emailStyles.link}>
+      <Link href={preferencesUrl} style={emailStyles.link}>
         {managePreferencesLabel}
       </Link>
       {manageAfterLabel}
@@ -151,16 +150,13 @@ export function EmailLayout({
           fontWeight={500}
           fontStyle="normal"
         />
-        <meta name="color-scheme" content="light dark" />
-        <meta name="supported-color-schemes" content="light dark" />
-        <style dangerouslySetInnerHTML={{ __html: emailDarkModeCss }} />
+        <style dangerouslySetInnerHTML={{ __html: emailStyleSheet }} />
       </Head>
       <Preview>{preview}</Preview>
       <Body
-        className={emailClasses.body}
         style={{
-          backgroundColor: emailPalette.light.background,
-          color: emailPalette.light.text,
+          backgroundColor: emailPalette.canvas,
+          color: emailPalette.text,
           fontFamily: emailStyles.text.fontFamily,
           fontSize: emailStyles.text.fontSize,
           lineHeight: emailStyles.text.lineHeight,
@@ -168,31 +164,25 @@ export function EmailLayout({
           padding: 0,
         }}
       >
-        {/* El lienzo, y la razón de que exista: react-email pone el fondo de
-            <Body> inline en un <td> envolvente sin clase, al que no llega
-            ninguna regla oscura — se quedaba blanco como una banda alrededor
-            del mensaje. Esta es una superficie a todo ancho que ponemos
-            NOSOTROS, así que sobrevive a que el cliente descarte el <body> y
-            recibe el override oscuro como todo lo demás. Body conserva su
-            propio fondo para los clientes que sí lo respetan. */}
+        {/* El lienzo: el fondo general del correo, fuera de la caja. Existe
+            aparte de <Body> porque react-email pone el fondo de Body inline en
+            un <td> envolvente, y hay clientes que descartan el <body> y meten
+            el contenido en su propio documento — ahí el fondo se perdería.
+            Body conserva el suyo para los que sí lo respetan. */}
         <Section
-          className={emailClasses.surface}
           style={{
-            backgroundColor: emailPalette.light.background,
+            backgroundColor: emailPalette.canvas,
             padding: `${emailToken('--email-canvas-padding-block')} ${emailToken('--email-canvas-padding-inline')}`,
             width: '100%',
           }}
         >
-          {/* La banda de marca: blanca SIEMPRE, también en oscuro. Su clase no
-              aparece en las reglas oscuras a propósito. El logotipo es un PNG
-              con el blanco horneado dentro —Outlook Windows y Gmail Android
-              invierten colores por su cuenta y un `background-color` no
-              sobrevive—, y la banda repite ese blanco para que el recorte de
-              la imagen no se note contra un lienzo oscuro. */}
+          {/* La banda de marca. El logotipo es un PNG con el blanco horneado
+              dentro: Outlook Windows y Gmail Android invierten colores por su
+              cuenta y un `background-color` no sobrevive a esa inversión, una
+              imagen sí. */}
           <Container
-            className={emailClasses.brand}
             style={{
-              backgroundColor: emailPalette.light.background,
+              backgroundColor: emailPalette.background,
               margin: '0 auto',
               maxWidth: emailMaxWidth,
               padding: `${emailToken('--email-brand-padding-block')} ${emailToken('--email-brand-padding-inline')}`,
@@ -210,10 +200,9 @@ export function EmailLayout({
           {/* El recuadro guarda el mensaje. La marca va encima y los enlaces de
               baja debajo: ninguno de los dos es parte del mensaje. */}
           <Container
-            className={emailClasses.container}
             style={{
-              backgroundColor: emailPalette.light.background,
-              border: `${emailToken('--email-border-width')} solid ${emailPalette.light.border}`,
+              backgroundColor: emailPalette.background,
+              border: `${emailToken('--email-border-width')} solid ${emailPalette.border}`,
               borderRadius: 0,
               margin: '0 auto',
               maxWidth: emailMaxWidth,
@@ -225,9 +214,8 @@ export function EmailLayout({
 
           {optOut && (
             <Container
-              className={emailClasses.surface}
               style={{
-                backgroundColor: emailPalette.light.background,
+                backgroundColor: emailPalette.canvas,
                 margin: '0 auto',
                 maxWidth: emailMaxWidth,
                 // Sin padding lateral: este bloque alinea con el borde EXTERIOR

@@ -10,7 +10,6 @@ import { describe, expect, it } from 'vitest';
 
 import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitives';
 import { EmailLayout } from './EmailLayout';
-import { emailPalette } from './emailTheme';
 import { emailTokens } from './emailTokens';
 
 const mensaje = (
@@ -55,38 +54,25 @@ describe('EmailLayout', () => {
     expect(out).not.toContain('e//logo-v1.png');
   });
 
-  it('deja los estilos claros inline y el modo oscuro como override', async () => {
+  it('no gestiona modo oscuro', async () => {
+    // Decisión del operador: el correo es solo claro. Esto no impide que
+    // Outlook Windows o Gmail Android inviertan los colores por su cuenta; lo
+    // que se deja de hacer es gestionarlo.
     const out = await html(mensaje);
 
-    expect(out).toContain('@media (prefers-color-scheme: dark)');
-    expect(out).toContain(`${emailPalette.light.background};`);
-    expect(out).toContain('!important');
+    expect(out).not.toContain('prefers-color-scheme');
+    expect(out).not.toContain('color-scheme');
+    expect(out).not.toContain('supported-color-schemes');
   });
 
-  it('no cuelga ninguna regla oscura de <body> ni de <html>', async () => {
-    // Gmail y la vista previa de Mailpit descartan <html>/<body> e inyectan el
-    // contenido en su propio documento: un selector descendiente colgado de
-    // ahí deja de matchear, y así se rompió el modo oscuro una vez.
+  it('lleva la hoja mínima de lo que no puede ir inline', async () => {
+    // Una pseudoclase es lo único que no cabe en un atributo `style`.
     const out = await html(mensaje);
-    const bloque = out.match(/@media \(prefers-color-scheme: dark\)[\s\S]*?\n {2}\}/)?.[0] ?? '';
+    const hojas = [...out.matchAll(/<style>([\s\S]*?)<\/style>/g)].map((m) => m[1]);
 
-    expect(bloque).not.toBe('');
-    // Toda regla oscura arranca en una clase que el layout pone él mismo —
-    // nada de `body .algo` ni de `html`.
-    for (const selector of bloque.matchAll(/^\s*([^{@}]+)\{/gm)) {
-      for (const parte of selector[1].split(',')) {
-        expect(parte.trim()).toMatch(/^\.email-/);
-      }
-    }
-  });
-
-  it('mantiene la banda de marca fuera del modo oscuro', async () => {
-    // Decisión de diseño: el logotipo cae siempre sobre blanco.
-    const out = await html(mensaje);
-    const bloque = out.match(/@media \(prefers-color-scheme: dark\)[\s\S]*?\n {2}\}/)?.[0] ?? '';
-
-    expect(out).toContain('email-brand');
-    expect(bloque).not.toContain('email-brand');
+    expect(hojas.some((hoja) => hoja.includes('a:hover'))).toBe(true);
+    // Y ninguna clase `email-*`: existían solo para enganchar el modo oscuro.
+    expect(out).not.toContain('email-');
   });
 
   it('no escribe ningún valor a mano: todo sale de los tokens', async () => {

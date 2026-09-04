@@ -1,10 +1,8 @@
 /*
  * Las primitivas del correo: el título, la prosa, la nota, el enlace y el
- * botón. Es lo mismo que ya escribía cada plantilla a mano con
- * `className={emailClasses.x} style={emailStyles.x}`, pero con el par
- * clase+estilo cerrado dentro del componente, que es donde no se puede olvidar
- * la mitad — y olvidar la clase significa que ese trozo del correo se queda en
- * claro cuando el cliente pinta en oscuro.
+ * botón. Es lo mismo que escribe cada plantilla con `style={emailStyles.x}`,
+ * pero con el estilo cerrado dentro del componente y con un nombre, que es lo
+ * que evita que cada plantilla decida por su cuenta cómo se ve un párrafo.
  *
  * Todas aceptan `style` para casos que el sistema no cubre: se mezcla ENCIMA
  * del estilo base, nunca lo sustituye.
@@ -12,7 +10,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { Button, Heading, Link, Text } from 'react-email';
 
-import { emailClasses, emailStyles } from './emailTheme';
+import { emailStyles } from './emailTheme';
 
 export interface EmailHeadingProps {
   children: ReactNode;
@@ -22,7 +20,7 @@ export interface EmailHeadingProps {
 /** El título del mensaje. Un correo es un documento suelto: va como `<h1>`. */
 export function EmailHeading({ children, style }: EmailHeadingProps) {
   return (
-    <Heading className={emailClasses.heading} style={{ ...emailStyles.heading, ...style }}>
+    <Heading style={{ ...emailStyles.heading, ...style }}>
       {children}
     </Heading>
   );
@@ -36,7 +34,7 @@ export interface EmailTextProps {
 /** Un párrafo del cuerpo del correo. */
 export function EmailText({ children, style }: EmailTextProps) {
   return (
-    <Text className={emailClasses.text} style={{ ...emailStyles.text, ...style }}>
+    <Text style={{ ...emailStyles.text, ...style }}>
       {children}
     </Text>
   );
@@ -56,9 +54,8 @@ export interface EmailNoteProps {
 /** Letra menor: descargos, avisos de caducidad, pie del mensaje. */
 export function EmailNote({ children, tone = 'muted', style }: EmailNoteProps) {
   const base = tone === 'muted' ? emailStyles.muted : emailStyles.footnote;
-  const className = tone === 'muted' ? emailClasses.muted : emailClasses.footnote;
   return (
-    <Text className={className} style={{ ...base, ...style }}>
+    <Text style={{ ...base, ...style }}>
       {children}
     </Text>
   );
@@ -73,7 +70,7 @@ export interface EmailLinkProps {
 /** Un enlace dentro del texto. */
 export function EmailLink({ href, children, style }: EmailLinkProps) {
   return (
-    <Link href={href} className={emailClasses.link} style={{ ...emailStyles.link, ...style }}>
+    <Link href={href} style={{ ...emailStyles.link, ...style }}>
       {children}
     </Link>
   );
@@ -85,13 +82,7 @@ export interface EmailButtonProps {
   style?: CSSProperties;
 }
 
-/**
- * La acción del correo.
- *
- * Sin clase de tema a propósito: el relleno es el par autocontenido de
- * `Button primary` (lavanda con tinta prusia), que contrasta igual sobre
- * superficie clara y oscura, así que no tiene par oscuro que aplicar.
- */
+/** La acción del correo: el par lavanda/prusia de `Button primary`. */
 export function EmailButton({ href, children, style }: EmailButtonProps) {
   return (
     <Button href={href} style={{ ...emailStyles.button, ...style }}>

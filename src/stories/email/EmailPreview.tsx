@@ -12,31 +12,7 @@
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 import { render } from 'react-email';
 
-import { emailDarkModeCss, emailPalette } from './emailTheme';
-
-/**
- * Saca las declaraciones de dentro de `@media (prefers-color-scheme: dark)`.
- *
- * En un cliente de verdad las activa el sistema operativo; dentro de un iframe
- * del catálogo eso no se puede pedir, así que el visor las aplica sin la media
- * query. Son las MISMAS reglas —se leen del mismo sitio que el correo—, solo
- * que sin la condición: lo que se ve es exactamente el override que aplicaría
- * Apple Mail, no una imitación.
- */
-function reglasOscuras(css: string): string {
-  const inicio = css.indexOf('@media (prefers-color-scheme: dark)');
-  if (inicio === -1) return '';
-  const abre = css.indexOf('{', inicio);
-  let nivel = 0;
-  for (let i = abre; i < css.length; i += 1) {
-    if (css[i] === '{') nivel += 1;
-    else if (css[i] === '}') {
-      nivel -= 1;
-      if (nivel === 0) return css.slice(abre + 1, i);
-    }
-  }
-  return '';
-}
+import { emailPalette } from './emailTheme';
 
 /*
  * Un documento que entra por `srcDoc` tiene URL base `about:srcdoc`, así que
@@ -50,17 +26,12 @@ function reglasOscuras(css: string): string {
  */
 const base = () => `<base href="${document.baseURI}">`;
 
-/** Marca el bloque que añade el visor, para distinguirlo del CSS del correo. */
-export const MARCA_OSCURA = 'vista previa: reglas oscuras sin media query';
-
 export interface EmailPreviewProps {
   /** El correo: un `EmailLayout` con su contenido. */
   children: ReactElement;
-  /** `dark` aplica las reglas oscuras del propio correo, sin la media query. */
-  theme?: 'light' | 'dark';
 }
 
-export function EmailPreview({ children, theme = 'light' }: EmailPreviewProps) {
+export function EmailPreview({ children }: EmailPreviewProps) {
   const [html, setHtml] = useState('');
   const [height, setHeight] = useState(480);
   const iframe = useRef<HTMLIFrameElement>(null);
@@ -69,16 +40,12 @@ export function EmailPreview({ children, theme = 'light' }: EmailPreviewProps) {
     let vigente = true;
     void render(children).then((salida) => {
       if (!vigente) return;
-      const oscuro =
-        theme === 'dark'
-          ? `<style>/* ${MARCA_OSCURA} */${reglasOscuras(emailDarkModeCss)}</style>`
-          : '';
-      setHtml(salida.replace('<head>', `<head>${base()}`).replace('</head>', `${oscuro}</head>`));
+      setHtml(salida.replace('<head>', `<head>${base()}`));
     });
     return () => {
       vigente = false;
     };
-  }, [children, theme]);
+  }, [children]);
 
   /* El iframe no crece con su contenido: hay que medirlo y darle la altura. */
   const medir = () => {
@@ -93,7 +60,7 @@ export function EmailPreview({ children, theme = 'light' }: EmailPreviewProps) {
       srcDoc={html}
       onLoad={medir}
       style={{
-        backgroundColor: emailPalette[theme].background,
+        backgroundColor: emailPalette.canvas,
         border: 0,
         display: 'block',
         height,
