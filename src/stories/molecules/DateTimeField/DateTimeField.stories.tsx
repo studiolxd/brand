@@ -107,11 +107,15 @@ export const Contrato: Story = {
     // Fecha y hora forman un grupo: la etiqueta lo nombra
     const grupo = canvas.getByRole('group', { name: 'Fecha y hora de la cita' });
     await expect(grupo).toHaveAttribute('aria-describedby', 'cita-error cita-helper');
-    await expect(grupo).toHaveAttribute('aria-invalid', 'true');
+    // El `aria-invalid` no va en el grupo —no está definido en `role="group"`—:
+    // lo llevan los tres controles de dentro, que son los widgets de entrada
+    await expect(grupo).not.toHaveAttribute('aria-invalid');
     // La etiqueta apunta al disparador de la fecha, que es lo primero
     await expect(canvasElement.querySelector('label[for="cita-date"]')).toHaveTextContent('Fecha y hora de la cita');
     await expect(canvasElement.querySelector('#cita-date')).toHaveClass('date-picker__trigger--error');
+    await expect(canvasElement.querySelector('#cita-date')).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('combobox', { name: 'Horas' })).toHaveAttribute('aria-invalid', 'true');
+    await expect(canvas.getByRole('combobox', { name: 'Minutos' })).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
     await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'cita-helper');
   },
@@ -185,6 +189,11 @@ export const ConReactHookForm: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('button', { name: 'Guardar' }));
     await expect(await canvas.findByRole('alert')).toHaveTextContent('Elige fecha y hora.');
-    await expect(canvas.getByRole('group', { name: 'Fecha y hora de la cita' })).toHaveAttribute('aria-invalid', 'true');
+    // El error del formulario marca los controles, no el grupo que los envuelve
+    const grupo = canvas.getByRole('group', { name: 'Fecha y hora de la cita' });
+    await expect(grupo).not.toHaveAttribute('aria-invalid');
+    await expect(grupo.querySelector('.date-picker__trigger')).toHaveAttribute('aria-invalid', 'true');
+    await expect(canvas.getByRole('combobox', { name: 'Horas' })).toHaveAttribute('aria-invalid', 'true');
+    await expect(canvas.getByRole('combobox', { name: 'Minutos' })).toHaveAttribute('aria-invalid', 'true');
   },
 };
