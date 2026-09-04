@@ -62,3 +62,19 @@ export const ConPreferencias: Story = {
     optOut: { unsubscribeUrl: '#baja', preferencesUrl: '#preferencias' },
   },
 };
+
+/**
+ * Quien recibe el correo **sin tener cuenta** —el invitado a una revisión—: el
+ * motivo por el que le llega y la baja, sin preferencias, que es una pantalla
+ * que no puede abrir.
+ */
+export const SinCuenta: Story = {
+  name: 'Sin cuenta',
+  args: {
+    optOut: {
+      unsubscribeUrl: '#baja',
+      reasonLabel: 'Recibes este correo porque participas en una revisión de contenido.',
+      unsubscribeLabel: 'Dejar de recibir estos correos.',
+    },
+  },
+};

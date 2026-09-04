@@ -106,6 +106,33 @@ describe('EmailLayout', () => {
     expect(conBaja).toContain('date de baja');
   });
 
+  it('en el pie sin cuenta no ofrece preferencias, solo el motivo y la baja', async () => {
+    // Quien recibe el correo sin cuenta no puede abrir la pantalla de
+    // preferencias del hub: ofrecérsela es prometerle algo que no existe.
+    const out = await html(
+      <EmailLayout
+        preview="p"
+        appName="Bricks"
+        optOut={{
+          unsubscribeUrl: 'https://example.com/baja',
+          reasonLabel: 'Recibes este correo porque participas en una revisión de contenido.',
+          unsubscribeLabel: 'Dejar de recibir estos correos.',
+        }}
+      >
+        <EmailText>Hola</EmailText>
+      </EmailLayout>,
+    );
+
+    expect(out).toContain('Recibes este correo porque participas en una revisión de contenido.');
+    expect(out).toContain('Dejar de recibir estos correos.');
+    expect(out).toContain('https://example.com/baja');
+    // Ni el enlace a preferencias ni los textos del pie con cuenta.
+    expect(out).not.toContain('preferencias</a>');
+    expect(out).not.toContain('gestiona tus preferencias');
+    expect(out).not.toContain('date de baja');
+    expect(out).not.toContain('Para dejar de recibir estos avisos');
+  });
+
   it('pone bajo el botón la misma dirección, entera y en texto', async () => {
     // Hay clientes que destrozan los botones, y la gente reenvía correos y los
     // abre en otro dispositivo: el enlace en texto es el plan B del correo.
