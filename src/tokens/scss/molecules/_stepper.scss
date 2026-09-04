@@ -18,8 +18,8 @@ $lxd-stepper-marker-pending-bg: #ffffff; // Fondo de la marca de un paso pendien
 $lxd-stepper-marker-pending-border-color: #d0d0d0; // Filete de la marca de un paso pendiente: el borde general del sistema
 $lxd-stepper-marker-pending-color: #4a4a4a; // Cifra de un paso pendiente: texto secundario
 $lxd-stepper-connector-thickness: 1px; // Grosor de la línea entre pasos
-$lxd-stepper-connector-color: #f2f2f2; // Tramo aún no recorrido: es un carril, la misma superficie clara secundaria que el de `ProgressBar`
-$lxd-stepper-connector-done-color: #111e30; // Tramo recorrido: la tinta del sistema, como toda barra de estado
+$lxd-stepper-connector-color: #d0d0d0; // Tramo aún no recorrido: el rol de borde del sistema, que es literalmente el de «carriles y guías sin recorrer» — y el mismo que el filete de la marca pendiente, para que carril y marca digan lo mismo con el mismo color. No es una superficie: un filete de 1px necesita contrastar con el lienzo, no armonizar con él
+$lxd-stepper-connector-done-color: #111e30; // Tramo recorrido: la marca del sistema, el mismo relleno que la marca de un paso hecho. El camino andado y los pasos andados comparten color
 $lxd-stepper-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de las etiquetas
 $lxd-stepper-font-size: 0.875rem; // 14px — etiqueta de interfaz, no texto corriente
 $lxd-stepper-font-weight: 300; // Peso de la etiqueta de un paso

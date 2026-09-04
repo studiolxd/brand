@@ -24,6 +24,8 @@ Son dos piezas distintas y ninguna sustituye a la otra:
 
 Los estados no se pasan: se deducen de `current`. Lo anterior está completado, lo posterior pendiente. Cada estado se distingue por **dos** señales, nunca solo por el color: la marca (rellena con un check, rellena con la cifra, hueca con la cifra) y el peso de la etiqueta.
 
+El carril entre pasos dice lo mismo que las marcas y con su mismo color: el tramo recorrido lleva la marca del sistema —el relleno de un paso hecho—, y el que queda por recorrer, el rol de borde —el filete de una marca pendiente—. No es un fondo: un filete de 1px tiene que contrastar con el lienzo, no armonizar con él, así que no usa la escala de superficies.
+
 <Canvas of={StepperStories.PrimerPaso} />
 <Canvas of={StepperStories.UltimoPaso} />
 
