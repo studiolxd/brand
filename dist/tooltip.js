@@ -1,14 +1,14 @@
 'use client';
 import './tooltip.css';
-import { forwardRef as e, useId as t, useState as n } from "react";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { forwardRef as n, useId as r, useState as i } from "react";
 import { Tooltip as a } from "@base-ui/react/tooltip";
 //#region src/stories/atoms/Tooltip/Tooltip.tsx
-function o({ children: e, delayDuration: t = 0, skipDelayDuration: n }) {
-	return /* @__PURE__ */ r(a.Provider, {
-		delay: t,
-		...n === void 0 ? {} : { timeout: n },
-		children: e
+function o({ children: t, delayDuration: n = 0, skipDelayDuration: r }) {
+	return /* @__PURE__ */ e(a.Provider, {
+		delay: n,
+		...r === void 0 ? {} : { timeout: r },
+		children: t
 	});
 }
 function s(e, t) {
@@ -19,37 +19,37 @@ function c() {
 	let e = document.documentElement;
 	return s(getComputedStyle(e).getPropertyValue("--tooltip-offset").trim(), e);
 }
-var l = e(function({ label: e, children: o, side: s = "top", align: l = "center", sideOffset: u, open: d, defaultOpen: f, onOpenChange: p, delayDuration: m, className: h, ...g }, _) {
-	let v = t(), [y, b] = n(f ?? !1), x = d ?? y;
-	return /* @__PURE__ */ i(a.Root, {
+var l = n(function({ label: n, children: o, side: s = "top", align: l = "center", sideOffset: u, open: d, defaultOpen: f, onOpenChange: p, delayDuration: m, className: h, ...g }, _) {
+	let v = r(), [y, b] = i(f ?? !1), x = d ?? y;
+	return /* @__PURE__ */ t(a.Root, {
 		open: d,
 		defaultOpen: f,
 		onOpenChange: (e) => {
 			d === void 0 && b(e), p?.(e);
 		},
-		children: [/* @__PURE__ */ r(a.Trigger, {
+		children: [/* @__PURE__ */ e(a.Trigger, {
 			ref: _,
 			render: o,
 			"aria-describedby": x ? v : void 0,
 			...m === void 0 ? {} : { delay: m },
 			...g
-		}), /* @__PURE__ */ r(a.Portal, { children: /* @__PURE__ */ r(a.Positioner, {
+		}), /* @__PURE__ */ e(a.Portal, { children: /* @__PURE__ */ e(a.Positioner, {
 			className: "tooltip__positioner",
 			side: s,
 			align: l,
 			sideOffset: u ?? c,
-			children: /* @__PURE__ */ i(a.Popup, {
+			children: /* @__PURE__ */ t(a.Popup, {
 				id: v,
 				role: "tooltip",
 				className: ["tooltip", h].filter(Boolean).join(" "),
-				children: [e, /* @__PURE__ */ r(a.Arrow, {
+				children: [n, /* @__PURE__ */ e(a.Arrow, {
 					className: "tooltip__arrow",
-					children: /* @__PURE__ */ r("svg", {
+					children: /* @__PURE__ */ e("svg", {
 						width: "10",
 						height: "5",
 						viewBox: "0 0 30 10",
 						preserveAspectRatio: "none",
-						children: /* @__PURE__ */ r("polygon", { points: "0,0 30,0 15,10" })
+						children: /* @__PURE__ */ e("polygon", { points: "0,0 30,0 15,10" })
 					})
 				})]
 			})

@@ -1,23 +1,23 @@
 'use client';
 import './switcher.css';
-import { forwardRef as e, useCallback as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t, useCallback as n } from "react";
 import { Switch as r } from "@base-ui/react/switch";
 //#region src/stories/atoms/Switcher/Switcher.tsx
-var i = e(function({ size: e = "md", error: i = !1, className: a, value: o, onCheckedChange: s, id: c, ...l }, u) {
+var i = t(function({ size: t = "md", error: i = !1, className: a, value: o, onCheckedChange: s, id: c, ...l }, u) {
 	let d = [
 		"switcher",
-		e === "md" ? "" : `switcher--${e}`,
+		t === "md" ? "" : `switcher--${t}`,
 		i ? "switcher--error" : "",
 		a ?? ""
-	].filter(Boolean).join(" "), f = t((e) => {
+	].filter(Boolean).join(" "), f = n((e) => {
 		e && o !== void 0 && (e.value = o);
 	}, [o]);
-	return /* @__PURE__ */ n(r.Root, {
+	return /* @__PURE__ */ e(r.Root, {
 		ref: u,
 		className: d,
 		inputRef: f,
-		render: /* @__PURE__ */ n("button", {
+		render: /* @__PURE__ */ e("button", {
 			type: "button",
 			id: c
 		}),
@@ -25,7 +25,7 @@ var i = e(function({ size: e = "md", error: i = !1, className: a, value: o, onCh
 		"aria-invalid": i || void 0,
 		onCheckedChange: s ? (e) => s(e) : void 0,
 		...l,
-		children: /* @__PURE__ */ n(r.Thumb, { className: "switcher__thumb" })
+		children: /* @__PURE__ */ e(r.Thumb, { className: "switcher__thumb" })
 	});
 });
 //#endregion

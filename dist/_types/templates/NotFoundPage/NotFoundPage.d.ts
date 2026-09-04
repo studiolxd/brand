@@ -21,7 +21,7 @@ export interface NotFoundPageProps {
     shell?: boolean;
 }
 /**
- * Plantilla de 404: el marco público (`SiteShell`) con cabecera y pie
+ * Plantilla de 404: el marco público (`PublicPageShell`) con cabecera y pie
  * opcionales, y dentro un `main` con la cabecera de página y el enlace de
  * vuelta. Cabecera y pie van cada uno en su `ErrorBoundary`, así que un chrome
  * roto no se lleva por delante el mensaje. Con `shell={false}` devuelve solo

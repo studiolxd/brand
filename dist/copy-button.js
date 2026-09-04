@@ -3,25 +3,25 @@ import './copy-button.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Button as n } from "./button.js";
-import { forwardRef as r, useEffect as i, useState as a } from "react";
-import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
+import { forwardRef as o, useEffect as s, useState as c } from "react";
 //#region src/stories/molecules/CopyButton/CopyButton.tsx
-var l = 1500, u = r(function({ value: r, children: u, label: d = "Copiar", copiedLabel: f = "Copiado", errorLabel: p = "No se pudo copiar", variant: m = "ghost", size: h, feedbackDuration: g = l, onCopy: _, onCopyError: v, className: y, ...b }, x) {
-	let [S, C] = a("idle");
-	i(() => {
+var l = 1500, u = o(function({ value: o, children: u, label: d = "Copiar", copiedLabel: f = "Copiado", errorLabel: p = "No se pudo copiar", variant: m = "ghost", size: h, feedbackDuration: g = l, onCopy: _, onCopyError: v, className: y, ...b }, x) {
+	let [S, C] = c("idle");
+	s(() => {
 		if (S === "idle") return;
 		let e = setTimeout(() => C("idle"), g);
 		return () => clearTimeout(e);
 	}, [S, g]);
 	let w = async () => {
-		let e = typeof r == "function" ? r() : r;
+		let e = typeof o == "function" ? o() : o;
 		try {
 			await navigator.clipboard.writeText(e), C("copied"), _?.(e);
 		} catch (e) {
 			C("error"), v?.(e);
 		}
 	}, T = S === "copied" ? f : S === "error" ? p : "", E = u == null ? null : S === "copied" ? f : S === "error" ? p : u;
-	return /* @__PURE__ */ c(o, { children: [u == null ? /* @__PURE__ */ s(n, {
+	return /* @__PURE__ */ a(r, { children: [u == null ? /* @__PURE__ */ i(n, {
 		...b,
 		ref: x,
 		variant: m,
@@ -30,22 +30,22 @@ var l = 1500, u = r(function({ value: r, children: u, label: d = "Copiar", copie
 		"aria-label": d,
 		onClick: w,
 		className: ["copy-button", y].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ s(e, {
+		children: /* @__PURE__ */ i(e, {
 			name: S === "copied" ? "check" : "copy",
 			size: "sm"
 		})
-	}) : /* @__PURE__ */ c(n, {
+	}) : /* @__PURE__ */ a(n, {
 		...b,
 		ref: x,
 		variant: m,
 		...h ? { size: h } : {},
 		onClick: w,
 		className: ["copy-button", y].filter(Boolean).join(" "),
-		children: [/* @__PURE__ */ s(e, {
+		children: [/* @__PURE__ */ i(e, {
 			name: S === "copied" ? "check" : "copy",
 			size: "sm"
 		}), E]
-	}), /* @__PURE__ */ s(t, {
+	}), /* @__PURE__ */ i(t, {
 		role: "status",
 		children: T
 	})] });

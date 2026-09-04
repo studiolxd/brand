@@ -1,27 +1,20 @@
 'use client';
-import { Container as e } from "./container.js";
-import { Stack as t } from "./stack.js";
-import { ErrorBoundary as n } from "./error-boundary.js";
-import { PageIntro as r } from "./page-intro.js";
-import { SiteShell as i } from "./site-shell.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { Stack as e } from "./stack.js";
+import { PageIntro as t } from "./page-intro.js";
+import { PublicPageShell as n } from "./public-page-shell.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/templates/NotFoundPage/NotFoundPage.tsx
-function s({ title: s, description: c, homeLink: l, header: u, footer: d, id: f = "main-content", shell: p = !0 }) {
-	let m = /* @__PURE__ */ o(t, { children: [/* @__PURE__ */ a(r, {
-		title: s,
-		description: c
-	}), l] });
-	return p ? /* @__PURE__ */ a(i, {
-		header: u && /* @__PURE__ */ a(n, { children: u }),
-		footer: d && /* @__PURE__ */ a(n, { children: d }),
-		children: /* @__PURE__ */ a(e, {
-			as: "main",
-			id: f,
-			tabIndex: -1,
-			space: "xl",
-			children: m
-		})
-	}) : m;
+function a({ title: a, description: o, homeLink: s, header: c, footer: l, id: u = "main-content", shell: d = !0 }) {
+	return /* @__PURE__ */ r(n, {
+		header: c,
+		footer: l,
+		id: u,
+		shell: d,
+		children: /* @__PURE__ */ i(e, { children: [/* @__PURE__ */ r(t, {
+			title: a,
+			description: o
+		}), s] })
+	});
 }
 //#endregion
-export { s as NotFoundPage };
+export { a as NotFoundPage };

@@ -1,16 +1,16 @@
 import './table-of-contents.css';
 import { Link as e } from "./link.js";
 import { List as t } from "./list.js";
-import { forwardRef as n } from "react";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { forwardRef as i } from "react";
 //#region src/stories/molecules/TableOfContents/TableOfContents.tsx
 function a(e, t) {
 	return Math.min(Math.max(e - t, 0), 5);
 }
-var o = n(function({ items: n, activeId: o, ariaLabel: s = "En esta página", title: c, sticky: l = !1, onItemClick: u, className: d, ...f }, p) {
-	if (n.length === 0) return null;
-	let m = Math.min(...n.map((e) => e.level));
-	return /* @__PURE__ */ i("nav", {
+var o = i(function({ items: i, activeId: o, ariaLabel: s = "En esta página", title: c, sticky: l = !1, onItemClick: u, className: d, ...f }, p) {
+	if (i.length === 0) return null;
+	let m = Math.min(...i.map((e) => e.level));
+	return /* @__PURE__ */ r("nav", {
 		ref: p,
 		className: [
 			"table-of-contents",
@@ -19,20 +19,20 @@ var o = n(function({ items: n, activeId: o, ariaLabel: s = "En esta página", ti
 		].filter(Boolean).join(" "),
 		"aria-label": s,
 		...f,
-		children: [c && /* @__PURE__ */ r("p", {
+		children: [c && /* @__PURE__ */ n("p", {
 			className: "table-of-contents__title",
 			children: c
-		}), /* @__PURE__ */ r(t, {
+		}), /* @__PURE__ */ n(t, {
 			type: "plain",
 			className: "table-of-contents__list",
-			children: n.map((t) => {
-				let n = t.id === o;
-				return /* @__PURE__ */ r("li", {
+			children: i.map((t) => {
+				let r = t.id === o;
+				return /* @__PURE__ */ n("li", {
 					className: `table-of-contents__item table-of-contents__item--level-${a(t.level, m)}`,
-					children: /* @__PURE__ */ r(e, {
+					children: /* @__PURE__ */ n(e, {
 						href: `#${t.id}`,
-						className: ["table-of-contents__link", n ? "table-of-contents__link--active" : ""].filter(Boolean).join(" "),
-						"aria-current": n ? "location" : void 0,
+						className: ["table-of-contents__link", r ? "table-of-contents__link--active" : ""].filter(Boolean).join(" "),
+						"aria-current": r ? "location" : void 0,
 						onClick: u ? (e) => u(t, e) : void 0,
 						children: t.label
 					})

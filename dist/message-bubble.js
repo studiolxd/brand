@@ -1,13 +1,13 @@
 import './message-bubble.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/MessageBubble/MessageBubble.tsx
-var n = e(function({ role: e, children: n, className: r, ...i }, a) {
-	return /* @__PURE__ */ t("div", {
+var n = t(function({ role: t, children: n, className: r, ...i }, a) {
+	return /* @__PURE__ */ e("div", {
 		ref: a,
 		className: [
 			"message-bubble",
-			`message-bubble--${e}`,
+			`message-bubble--${t}`,
 			r ?? ""
 		].filter(Boolean).join(" "),
 		...i,

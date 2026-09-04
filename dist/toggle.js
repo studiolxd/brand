@@ -1,13 +1,13 @@
 'use client';
 import './toggle.css';
 import { n as e } from "./_shared/ToggleGroupContext.js";
-import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { jsx as t } from "react/jsx-runtime";
+import { forwardRef as n } from "react";
 import { Toggle as r } from "@base-ui/react/toggle";
 //#region src/stories/atoms/Toggle/Toggle.tsx
-var i = t(function({ size: t, iconOnly: i = !1, className: a, onPressedChange: o, ...s }, c) {
-	let l = e(), u = t ?? l?.size ?? "md";
-	return /* @__PURE__ */ n(r, {
+var i = n(function({ size: n, iconOnly: i = !1, className: a, onPressedChange: o, ...s }, c) {
+	let l = e(), u = n ?? l?.size ?? "md";
+	return /* @__PURE__ */ t(r, {
 		ref: c,
 		className: [
 			"toggle",

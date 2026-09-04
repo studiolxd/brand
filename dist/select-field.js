@@ -3,8 +3,8 @@ import './select-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
 import { Select as n, isSelectOptionGroup as r } from "./select.js";
-import { forwardRef as i, useId as a } from "react";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { forwardRef as o, useId as s } from "react";
 //#region src/stories/molecules/SelectField/SelectField.tsx
 var c = "__empty__";
 function l(e, t) {
@@ -19,21 +19,21 @@ function d(e) {
 		value: c
 	} : e;
 }
-var f = i(function({ id: i, label: c, labelHidden: f = !1, options: p, value: m, defaultValue: h, placeholder: g, name: _, disabled: v, required: y, size: b, error: x = !1, errorMessage: S, helperText: C, className: w, onValueChange: T, onBlur: E }, D) {
-	let O = e(b), k = a(), A = i ?? k, j = S ? `${A}-error` : void 0, M = C ? `${A}-helper` : void 0, N = [j, M].filter(Boolean).join(" ") || void 0, P = x || !!S, F = p.some((e) => r(e) ? e.options.some((e) => e.value === "") : e.value === ""), I = F ? p.map((e) => r(e) ? {
+var f = o(function({ id: o, label: c, labelHidden: f = !1, options: p, value: m, defaultValue: h, placeholder: g, name: _, disabled: v, required: y, size: b, error: x = !1, errorMessage: S, helperText: C, className: w, onValueChange: T, onBlur: E }, D) {
+	let O = e(b), k = s(), A = o ?? k, j = S ? `${A}-error` : void 0, M = C ? `${A}-helper` : void 0, N = [j, M].filter(Boolean).join(" ") || void 0, P = x || !!S, F = p.some((e) => r(e) ? e.options.some((e) => e.value === "") : e.value === ""), I = F ? p.map((e) => r(e) ? {
 		...e,
 		options: e.options.map(d)
 	} : d(e)) : p;
-	return /* @__PURE__ */ s("div", {
+	return /* @__PURE__ */ a("div", {
 		className: ["select-field", w].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ o(t, {
+			/* @__PURE__ */ i(t, {
 				htmlFor: A,
 				hidden: f,
 				size: O,
 				children: c
 			}),
-			/* @__PURE__ */ o(n, {
+			/* @__PURE__ */ i(n, {
 				ref: D,
 				id: A,
 				name: _,
@@ -49,13 +49,13 @@ var f = i(function({ id: i, label: c, labelHidden: f = !1, options: p, value: m,
 				onValueChange: T ? (e) => T(u(e)) : void 0,
 				onBlur: E
 			}),
-			S && /* @__PURE__ */ o("span", {
+			S && /* @__PURE__ */ i("span", {
 				id: j,
 				className: "select-field__error",
 				role: "alert",
 				children: S
 			}),
-			C && /* @__PURE__ */ o("span", {
+			C && /* @__PURE__ */ i("span", {
 				id: M,
 				className: "select-field__helper",
 				children: C

@@ -2,25 +2,25 @@ import './assistant-message.css';
 import { MessageBubble as e } from "./message-bubble.js";
 import { TypingIndicator as t } from "./typing-indicator.js";
 import { t as n } from "./_shared/messageTimestamp.js";
-import { forwardRef as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a } from "react";
 //#region src/stories/molecules/AssistantMessage/AssistantMessage.tsx
-var o = r(function({ children: r, model: o, timestamp: s, locale: c, timestampFormat: l, isStreaming: u = !1, streamingLabel: d, className: f, ...p }, m) {
+var o = a(function({ children: a, model: o, timestamp: s, locale: c, timestampFormat: l, isStreaming: u = !1, streamingLabel: d, className: f, ...p }, m) {
 	let h = n(s, c, l);
-	return /* @__PURE__ */ a("div", {
+	return /* @__PURE__ */ i("div", {
 		ref: m,
 		className: `assistant-message${f ? ` ${f}` : ""}`,
 		...p,
 		children: [
-			o && /* @__PURE__ */ i("span", {
+			o && /* @__PURE__ */ r("span", {
 				className: "assistant-message__model",
 				children: o
 			}),
-			/* @__PURE__ */ i(e, {
+			/* @__PURE__ */ r(e, {
 				role: "assistant",
-				children: u ? /* @__PURE__ */ i(t, { label: d }) : r
+				children: u ? /* @__PURE__ */ r(t, { label: d }) : a
 			}),
-			h && !u && /* @__PURE__ */ i("time", {
+			h && !u && /* @__PURE__ */ r("time", {
 				className: "assistant-message__timestamp",
 				dateTime: h.dateTime,
 				children: h.label

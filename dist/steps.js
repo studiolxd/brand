@@ -4,51 +4,51 @@ import { Icon as e } from "./icon.js";
 import { Heading as t } from "./heading.js";
 import { Paragraph as n } from "./paragraph.js";
 import { NumberBadge as r } from "./number-badge.js";
-import { Children as i, createContext as a, useContext as o } from "react";
-import { jsx as s, jsxs as c } from "react/jsx-runtime";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { Children as o, createContext as s, useContext as c } from "react";
 //#region src/stories/organisms/Steps/Steps.tsx
-var l = a(null);
-function u({ items: a, orientation: o = "vertical", badgeVariant: u = "primary", titleLevel: d = 3, titleSize: f = 4, label: p, children: m, className: h, id: g }) {
+var l = s(null);
+function u({ items: s, orientation: c = "vertical", badgeVariant: u = "primary", titleLevel: d = 3, titleSize: f = 4, label: p, children: m, className: h, id: g }) {
 	let _ = [
 		"steps",
-		`steps--${o}`,
+		`steps--${c}`,
 		h
 	].filter(Boolean).join(" ");
-	return m === void 0 ? /* @__PURE__ */ s("ol", {
+	return m === void 0 ? /* @__PURE__ */ i("ol", {
 		id: g,
 		className: _,
 		"aria-label": p,
-		children: (a ?? []).map((i, a) => /* @__PURE__ */ c("li", {
+		children: (s ?? []).map((o, s) => /* @__PURE__ */ a("li", {
 			className: "steps__item",
-			children: [/* @__PURE__ */ s("span", {
+			children: [/* @__PURE__ */ i("span", {
 				className: "steps__marker",
 				"aria-hidden": "true",
-				children: /* @__PURE__ */ s(r, {
-					count: a + 1,
+				children: /* @__PURE__ */ i(r, {
+					count: s + 1,
 					variant: u,
 					className: "steps__number"
 				})
-			}), /* @__PURE__ */ c("div", {
+			}), /* @__PURE__ */ a("div", {
 				className: "steps__body",
-				children: [/* @__PURE__ */ c(t, {
+				children: [/* @__PURE__ */ a(t, {
 					level: d,
 					size: f,
 					className: "steps__title",
-					children: [i.icon && /* @__PURE__ */ s(e, {
-						name: i.icon,
+					children: [o.icon && /* @__PURE__ */ i(e, {
+						name: o.icon,
 						className: "steps__icon"
-					}), i.title]
-				}), i.description && /* @__PURE__ */ s(n, {
+					}), o.title]
+				}), o.description && /* @__PURE__ */ i(n, {
 					className: "steps__description",
-					children: i.description
+					children: o.description
 				})]
 			})]
-		}, i.id ?? a))
-	}) : /* @__PURE__ */ s("ol", {
+		}, o.id ?? s))
+	}) : /* @__PURE__ */ i("ol", {
 		id: g,
 		className: _,
 		"aria-label": p,
-		children: i.map(m, (e, t) => /* @__PURE__ */ s(l.Provider, {
+		children: o.map(m, (e, t) => /* @__PURE__ */ i(l.Provider, {
 			value: {
 				index: t,
 				badgeVariant: u,
@@ -59,32 +59,32 @@ function u({ items: a, orientation: o = "vertical", badgeVariant: u = "primary",
 		}))
 	});
 }
-function d({ title: n, icon: i, children: a, className: u, ...d }) {
-	let f = o(l);
+function d({ title: n, icon: o, children: s, className: u, ...d }) {
+	let f = c(l);
 	if (f === null) throw Error("`Step` solo funciona dentro de `Steps`: de ahí saca su número.");
 	let { index: p, badgeVariant: m, titleLevel: h, titleSize: g } = f;
-	return /* @__PURE__ */ c("li", {
+	return /* @__PURE__ */ a("li", {
 		className: ["steps__item", u].filter(Boolean).join(" "),
 		...d,
-		children: [/* @__PURE__ */ s("span", {
+		children: [/* @__PURE__ */ i("span", {
 			className: "steps__marker",
 			"aria-hidden": "true",
-			children: /* @__PURE__ */ s(r, {
+			children: /* @__PURE__ */ i(r, {
 				count: p + 1,
 				variant: m,
 				className: "steps__number"
 			})
-		}), /* @__PURE__ */ c("div", {
+		}), /* @__PURE__ */ a("div", {
 			className: "steps__body",
-			children: [/* @__PURE__ */ c(t, {
+			children: [/* @__PURE__ */ a(t, {
 				level: h,
 				size: g,
 				className: "steps__title",
-				children: [i && /* @__PURE__ */ s(e, {
-					name: i,
+				children: [o && /* @__PURE__ */ i(e, {
+					name: o,
 					className: "steps__icon"
 				}), n]
-			}), a]
+			}), s]
 		})]
 	});
 }

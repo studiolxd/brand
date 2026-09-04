@@ -1,8 +1,8 @@
 'use client';
 import './tree-view.css';
 import { Icon as e } from "./icon.js";
-import { useCallback as t, useId as n, useMemo as r, useRef as i, useState as a } from "react";
-import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { useCallback as r, useId as i, useMemo as a, useRef as o, useState as s } from "react";
 //#region src/stories/molecules/TreeView/TreeView.tsx
 var c = 500;
 function l(e, t, n = 1, r) {
@@ -13,18 +13,18 @@ function l(e, t, n = 1, r) {
 	}, ...e.children && t.has(e.id) ? l(e.children, t, n + 1, e.id) : []]);
 }
 function u({ items: u, expanded: d, defaultExpanded: f, onExpandedChange: p, selected: m, defaultSelected: h, onSelectedChange: g, label: _ = "Árbol", className: v, ...y }) {
-	let b = n(), x = i(null), [S, C] = a(f ?? []), w = d !== void 0, T = w ? d : S, [E, D] = a(h), O = m !== void 0, k = O ? m : E, A = r(() => new Set(T), [T]), j = r(() => l(u, A), [u, A]), [M, N] = a(void 0), P = M && j.some((e) => e.node.id === M) ? M : k && j.some((e) => e.node.id === k) ? k : j[0]?.node.id, F = i(""), I = i(0), L = t((e) => {
+	let b = i(), x = o(null), [S, C] = s(f ?? []), w = d !== void 0, T = w ? d : S, [E, D] = s(h), O = m !== void 0, k = O ? m : E, A = a(() => new Set(T), [T]), j = a(() => l(u, A), [u, A]), [M, N] = s(void 0), P = M && j.some((e) => e.node.id === M) ? M : k && j.some((e) => e.node.id === k) ? k : j[0]?.node.id, F = o(""), I = o(0), L = r((e) => {
 		w || C(e), p?.(e);
-	}, [w, p]), R = t((e, t) => {
+	}, [w, p]), R = r((e, t) => {
 		let n = A.has(e), r = t ?? !n;
 		r !== n && L(r ? [...T, e] : T.filter((t) => t !== e));
 	}, [
 		T,
 		A,
 		L
-	]), z = t((e) => {
+	]), z = r((e) => {
 		O || D(e), g?.(e);
-	}, [O, g]), B = t((e) => {
+	}, [O, g]), B = r((e) => {
 		let t = j.filter((t) => t.parentId === e.parentId && t.node.children?.length).map((e) => e.node.id).filter((e) => !A.has(e));
 		t.length !== 0 && L([...T, ...t]);
 	}, [
@@ -32,9 +32,9 @@ function u({ items: u, expanded: d, defaultExpanded: f, onExpandedChange: p, sel
 		j,
 		A,
 		L
-	]), V = t((e) => `${b}-${e}`, [b]), H = t((e) => {
+	]), V = r((e) => `${b}-${e}`, [b]), H = r((e) => {
 		e && (N(e), x.current?.querySelector(`[data-tree-item="${CSS.escape(e)}"]`)?.focus());
-	}, []), U = t((e, t) => {
+	}, []), U = r((e, t) => {
 		let n = Date.now(), r = n - I.current > c ? e : F.current + e;
 		F.current = r, I.current = n;
 		let i = r.length === 1 ? t + 1 : Math.max(t, 0), a = r.toLowerCase();
@@ -79,68 +79,68 @@ function u({ items: u, expanded: d, defaultExpanded: f, onExpandedChange: p, sel
 				break;
 		}
 	}
-	function G(t, n, r) {
-		return t.map((t) => {
-			let i = !!t.children?.length, a = i && A.has(t.id), c = k === t.id;
-			return /* @__PURE__ */ s("li", {
+	function G(r, i, a) {
+		return r.map((r) => {
+			let o = !!r.children?.length, s = o && A.has(r.id), c = k === r.id;
+			return /* @__PURE__ */ n("li", {
 				role: "treeitem",
-				"data-tree-item": t.id,
-				"aria-labelledby": V(t.id),
-				"aria-expanded": i ? a : void 0,
+				"data-tree-item": r.id,
+				"aria-labelledby": V(r.id),
+				"aria-expanded": o ? s : void 0,
 				"aria-selected": c,
-				"aria-level": n,
-				"aria-disabled": t.disabled || void 0,
-				tabIndex: P === t.id ? 0 : -1,
+				"aria-level": i,
+				"aria-disabled": r.disabled || void 0,
+				tabIndex: P === r.id ? 0 : -1,
 				className: [
 					"tree-view__item",
 					c ? "tree-view__item--selected" : "",
-					t.disabled ? "tree-view__item--disabled" : ""
+					r.disabled ? "tree-view__item--disabled" : ""
 				].filter(Boolean).join(" "),
 				onKeyDown: (e) => {
 					e.target === e.currentTarget && W(e, {
-						node: t,
-						level: n,
-						parentId: r
+						node: r,
+						level: i,
+						parentId: a
 					});
 				},
 				onFocus: (e) => {
-					e.target === e.currentTarget && N(t.id);
+					e.target === e.currentTarget && N(r.id);
 				},
-				onClick: t.disabled ? void 0 : (e) => {
-					e.stopPropagation(), i && R(t.id), z(t.id), H(t.id);
+				onClick: r.disabled ? void 0 : (e) => {
+					e.stopPropagation(), o && R(r.id), z(r.id), H(r.id);
 				},
-				children: [/* @__PURE__ */ s("span", {
+				children: [/* @__PURE__ */ n("span", {
 					className: "tree-view__row",
 					children: [
-						/* @__PURE__ */ o("span", {
+						/* @__PURE__ */ t("span", {
 							className: "tree-view__chevron-slot",
 							"aria-hidden": "true",
-							children: i && /* @__PURE__ */ o(e, {
+							children: o && /* @__PURE__ */ t(e, {
 								name: "chevron",
 								className: "tree-view__chevron",
 								size: "sm"
 							})
 						}),
-						t.icon && /* @__PURE__ */ o("span", {
+						r.icon && /* @__PURE__ */ t("span", {
 							className: "tree-view__icon",
 							"aria-hidden": "true",
-							children: t.icon
+							children: r.icon
 						}),
-						/* @__PURE__ */ o("span", {
+						/* @__PURE__ */ t("span", {
 							className: "tree-view__label",
-							id: V(t.id),
-							children: t.label
+							id: V(r.id),
+							children: r.label
 						})
 					]
-				}), i && a && /* @__PURE__ */ o("ul", {
+				}), o && s && /* @__PURE__ */ t("ul", {
 					role: "group",
 					className: "tree-view__group",
-					children: G(t.children, n + 1, t.id)
+					children: G(r.children, i + 1, r.id)
 				})]
-			}, t.id);
+			}, r.id);
 		});
 	}
-	return /* @__PURE__ */ o("ul", {
+	return /* @__PURE__ */ t("ul", {
 		ref: x,
 		role: "tree",
 		"aria-label": _,

@@ -2,8 +2,8 @@
 import './sidebar.css';
 import { n as e, t } from "./_shared/SidebarContext.js";
 import { t as n } from "./_shared/AppShellContext.js";
-import { useCallback as r, useContext as i, useEffect as a, useRef as o, useState as s } from "react";
-import { jsx as c, jsxs as l } from "react/jsx-runtime";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { useCallback as a, useContext as o, useEffect as s, useRef as c, useState as l } from "react";
 //#region src/stories/sections/Sidebar/Sidebar.tsx
 function u(e, t) {
 	let n = document.createElement("div");
@@ -12,8 +12,8 @@ function u(e, t) {
 	return n.remove(), r;
 }
 function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral", resizerLabel: h = "Ancho de la barra lateral", resizerValueText: g = (e) => `${e} píxeles`, mode: _ }) {
-	let v = i(n), y = v ? v.sidebar : _ ?? "open", b = v ? v.isDesktop : !0, x = b && y === "rail", S = !b, C = o(null), w = o(null), [T, E] = s(null);
-	a(() => {
+	let v = o(n), y = v ? v.sidebar : _ ?? "open", b = v ? v.isDesktop : !0, x = b && y === "rail", S = !b, C = c(null), w = c(null), [T, E] = l(null);
+	s(() => {
 		let e = C.current;
 		if (!e) return;
 		let t = {
@@ -26,7 +26,7 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 	}, []);
 	let D = (e) => {
 		!S || !v || e.target.closest("a[href]") && v.closeSidebar();
-	}, O = r((e) => {
+	}, O = a((e) => {
 		let t = C.current;
 		if (!t || !v) return;
 		let n = u(t, "--sidebar-min-width"), r = u(t, "--sidebar-max-width");
@@ -45,7 +45,7 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 		let t = u(C.current, "--sidebar-resize-step-px"), n = C.current.getBoundingClientRect().width;
 		e.key === "ArrowLeft" && (e.preventDefault(), O(n - t)), e.key === "ArrowRight" && (e.preventDefault(), y === "open" ? O(n + t) : v.setSidebar("open")), e.key === "Home" && (e.preventDefault(), v.setSidebar("rail")), e.key === "End" && (e.preventDefault(), O(u(C.current, "--sidebar-max-width")));
 	};
-	a(() => {
+	s(() => {
 		if (!S) return;
 		if (y === "open") {
 			w.current = document.activeElement, C.current?.focus();
@@ -55,9 +55,9 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 		(e && t instanceof Node && e.contains(t) || t === document.body || t === null) && w.current?.focus?.(), w.current = null;
 	}, [S, y]);
 	let j = Math.round(y === "rail" ? T?.rail ?? 0 : (v?.sidebarWidth || T?.base) ?? 0), M = ["sidebar", S ? "sidebar--drawer" : `sidebar--${y}`].join(" ");
-	return /* @__PURE__ */ c(t.Provider, {
+	return /* @__PURE__ */ r(t.Provider, {
 		value: { rail: x },
-		children: /* @__PURE__ */ l("aside", {
+		children: /* @__PURE__ */ i("aside", {
 			ref: C,
 			id: p,
 			className: M,
@@ -68,23 +68,23 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 			tabIndex: S ? -1 : void 0,
 			inert: S && y === "closed" ? !0 : void 0,
 			onClick: D,
-			children: [/* @__PURE__ */ l("div", {
+			children: [/* @__PURE__ */ i("div", {
 				className: "sidebar__inner",
 				children: [
-					e && /* @__PURE__ */ c("div", {
+					e && /* @__PURE__ */ r("div", {
 						className: "sidebar__header",
 						children: e
 					}),
-					/* @__PURE__ */ c("div", {
+					/* @__PURE__ */ r("div", {
 						className: "sidebar__panel",
 						children: d
 					}),
-					f && /* @__PURE__ */ c("div", {
+					f && /* @__PURE__ */ r("div", {
 						className: "sidebar__footer",
 						children: f
 					})
 				]
-			}), b && v && y !== "closed" && /* @__PURE__ */ c("div", {
+			}), b && v && y !== "closed" && /* @__PURE__ */ r("div", {
 				className: "sidebar__resizer",
 				role: "separator",
 				"aria-orientation": "vertical",
@@ -101,19 +101,19 @@ function d({ logo: e, children: d, footer: f, id: p, label: m = "Barra lateral",
 	});
 }
 function f({ className: e, ...t }) {
-	return /* @__PURE__ */ c("div", {
+	return /* @__PURE__ */ r("div", {
 		className: ["sidebar__group", e].filter(Boolean).join(" "),
 		...t
 	});
 }
 function p({ className: e, ...t }) {
-	return /* @__PURE__ */ c("div", {
+	return /* @__PURE__ */ r("div", {
 		className: ["sidebar__group-content", e].filter(Boolean).join(" "),
 		...t
 	});
 }
 function m({ className: e, ...t }) {
-	return /* @__PURE__ */ c("hr", {
+	return /* @__PURE__ */ r("hr", {
 		className: ["sidebar__separator", e].filter(Boolean).join(" "),
 		...t
 	});

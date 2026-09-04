@@ -1,6 +1,6 @@
 import './columns.css';
-import { Children as e, Fragment as t, isValidElement as n } from "react";
-import { jsx as r } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { Children as t, Fragment as n, isValidElement as r } from "react";
 //#region src/stories/atoms/Columns/Columns.tsx
 function i({ columns: i = 2, ratio: a = "1:1", align: o = "start", gap: s = "md", stackOrder: c = "normal", children: l, className: u, ...d }) {
 	let f = [
@@ -11,14 +11,14 @@ function i({ columns: i = 2, ratio: a = "1:1", align: o = "start", gap: s = "md"
 		s === "md" ? "" : `columns--gap-${s}`,
 		c === "reverse" ? "columns--reverse" : "",
 		u
-	].filter(Boolean).join(" "), p = n(l) && l.type === t ? l.props.children : l, m = e.toArray(p);
-	return /* @__PURE__ */ r("div", {
+	].filter(Boolean).join(" "), p = r(l) && l.type === n ? l.props.children : l, m = t.toArray(p);
+	return /* @__PURE__ */ e("div", {
 		className: f,
 		...d,
-		children: m.map((e, t) => /* @__PURE__ */ r("div", {
+		children: m.map((t, n) => /* @__PURE__ */ e("div", {
 			className: "columns__col",
-			children: e
-		}, t))
+			children: t
+		}, n))
 	});
 }
 //#endregion

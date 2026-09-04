@@ -1,8 +1,8 @@
 'use client';
 import './collapsible.css';
 import { Icon as e } from "./icon.js";
-import "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import "react";
 import { Collapsible as r } from "@base-ui/react/collapsible";
 //#region src/stories/atoms/Collapsible/Collapsible.tsx
 function i({ onOpenChange: e, children: n, className: i, ...a }) {

@@ -13,7 +13,7 @@ export interface AuthPageProps {
     /** Superficie oscura. */
     surface?: 'light' | 'dark';
 }
-/** El chrome público de la suite con la página de acceso dentro: es el layout `(auth)` de hub, con piezas del DS y datos falsos. */
+/** El chrome público de la suite con la página de acceso dentro: es el layout `(auth)` de hub, montado sobre `PublicPageShell` —el mismo marco que `ErrorPage` y `NotFoundPage`— con piezas del DS y datos falsos. */
 export declare function AuthPage({ title, description, intro, aside, children, surface }: AuthPageProps): import("react/jsx-runtime").JSX.Element;
 /** Botones de acceso con terceros (Google, GitHub, un OIDC…). */
 export declare function SocialButtons({ providers }: {

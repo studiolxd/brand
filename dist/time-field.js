@@ -3,22 +3,22 @@ import './time-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
 import { TimeSelect as n } from "./time-select.js";
-import { forwardRef as r, useId as i } from "react";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { forwardRef as a, useId as o } from "react";
 //#region src/stories/molecules/TimeField/TimeField.tsx
-var s = r(function({ id: r, label: s, labelHidden: c = !1, value: l, step: u, name: d, size: f, disabled: p, readOnly: m, required: h, error: g = !1, errorMessage: _, helperText: v, className: y, hoursLabel: b, minutesLabel: x, onChange: S, onBlur: C }, w) {
-	let T = e(f), E = i(), D = r ?? E, O = _ ? `${D}-error` : void 0, k = v ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = g || !!_;
-	return /* @__PURE__ */ o("div", {
+var s = a(function({ id: a, label: s, labelHidden: c = !1, value: l, step: u, name: d, size: f, disabled: p, readOnly: m, required: h, error: g = !1, errorMessage: _, helperText: v, className: y, hoursLabel: b, minutesLabel: x, onChange: S, onBlur: C }, w) {
+	let T = e(f), E = o(), D = a ?? E, O = _ ? `${D}-error` : void 0, k = v ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = g || !!_;
+	return /* @__PURE__ */ i("div", {
 		className: ["time-field", y].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ a(t, {
+			/* @__PURE__ */ r(t, {
 				id: `${D}-label`,
 				htmlFor: D,
 				hidden: c,
 				size: T,
 				children: s
 			}),
-			/* @__PURE__ */ a(n, {
+			/* @__PURE__ */ r(n, {
 				ref: w,
 				id: D,
 				name: d,
@@ -36,13 +36,13 @@ var s = r(function({ id: r, label: s, labelHidden: c = !1, value: l, step: u, na
 				onChange: S,
 				onBlur: C
 			}),
-			_ && /* @__PURE__ */ a("span", {
+			_ && /* @__PURE__ */ r("span", {
 				id: O,
 				className: "time-field__error",
 				role: "alert",
 				children: _
 			}),
-			v && /* @__PURE__ */ a("span", {
+			v && /* @__PURE__ */ r("span", {
 				id: k,
 				className: "time-field__helper",
 				children: v

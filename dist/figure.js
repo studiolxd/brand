@@ -1,6 +1,6 @@
 import './figure.css';
-import { forwardRef as e } from "react";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+import { forwardRef as n } from "react";
 import { useRender as r } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Figure/Figure.tsx
 var i = {
@@ -9,7 +9,7 @@ var i = {
 	"3:2": "figure__media--ratio-3-2",
 	"16:9": "figure__media--ratio-16-9",
 	"21:9": "figure__media--ratio-21-9"
-}, a = e(function({ src: e, alt: a = "", caption: o, ratio: s = "auto", fit: c = "cover", render: l, className: u, children: d, ...f }, p) {
+}, a = n(function({ src: n, alt: a = "", caption: o, ratio: s = "auto", fit: c = "cover", render: l, className: u, children: d, ...f }, p) {
 	let m = ["figure", u ?? ""].filter(Boolean).join(" "), h = [
 		"figure__media",
 		s === "auto" ? "" : i[s],
@@ -19,18 +19,18 @@ var i = {
 		enabled: l !== void 0,
 		props: { className: "figure__img" }
 	});
-	return /* @__PURE__ */ n("figure", {
+	return /* @__PURE__ */ t("figure", {
 		ref: p,
 		className: m,
 		...f,
-		children: [/* @__PURE__ */ t("div", {
+		children: [/* @__PURE__ */ e("div", {
 			className: h,
-			children: g ?? (e === void 0 ? d : /* @__PURE__ */ t("img", {
+			children: g ?? (n === void 0 ? d : /* @__PURE__ */ e("img", {
 				className: "figure__img",
-				src: e,
+				src: n,
 				alt: a
 			}))
-		}), o !== void 0 && /* @__PURE__ */ t("figcaption", {
+		}), o !== void 0 && /* @__PURE__ */ e("figcaption", {
 			className: "figure__caption",
 			children: o
 		})]

@@ -2,18 +2,18 @@
 import './message-composer.css';
 import { Button as e } from "./button.js";
 import { Textarea as t } from "./textarea.js";
-import { forwardRef as n, useId as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { forwardRef as i, useId as a } from "react";
 //#region src/stories/molecules/MessageComposer/MessageComposer.tsx
-var o = n(function({ value: n, onChange: o, onSend: s, placeholder: c = "Escribe un mensaje…", disabled: l, sendLabel: u = "Enviar", helperText: d, actions: f, inputId: p, inputLabel: m, inputLabelledBy: h, rows: g = 2, className: _, ...v }, y) {
-	let b = `${r()}-helper`;
+var o = i(function({ value: i, onChange: o, onSend: s, placeholder: c = "Escribe un mensaje…", disabled: l, sendLabel: u = "Enviar", helperText: d, actions: f, inputId: p, inputLabel: m, inputLabelledBy: h, rows: g = 2, className: _, ...v }, y) {
+	let b = `${a()}-helper`;
 	function x() {
-		n.trim() && s();
+		i.trim() && s();
 	}
 	function S(e) {
 		e.key === "Enter" && !e.shiftKey && (e.preventDefault(), x());
 	}
-	return /* @__PURE__ */ a("div", {
+	return /* @__PURE__ */ r("div", {
 		ref: y,
 		className: [
 			"message-composer",
@@ -21,9 +21,9 @@ var o = n(function({ value: n, onChange: o, onSend: s, placeholder: c = "Escribe
 			_ ?? ""
 		].filter(Boolean).join(" "),
 		...v,
-		children: [/* @__PURE__ */ a("div", {
+		children: [/* @__PURE__ */ r("div", {
 			className: "message-composer__box",
-			children: [/* @__PURE__ */ i(t, {
+			children: [/* @__PURE__ */ n(t, {
 				bare: !0,
 				className: "message-composer__input",
 				id: p,
@@ -31,22 +31,22 @@ var o = n(function({ value: n, onChange: o, onSend: s, placeholder: c = "Escribe
 				"aria-labelledby": h,
 				"aria-describedby": d ? b : void 0,
 				placeholder: c,
-				value: n,
+				value: i,
 				disabled: l,
 				rows: g,
 				onChange: (e) => o(e.target.value),
 				onKeyDown: S
-			}), /* @__PURE__ */ a("div", {
+			}), /* @__PURE__ */ r("div", {
 				className: "message-composer__actions",
-				children: [/* @__PURE__ */ i(e, {
+				children: [/* @__PURE__ */ n(e, {
 					variant: "primary",
 					size: "md",
-					disabled: l || !n.trim(),
+					disabled: l || !i.trim(),
 					onClick: x,
 					children: u
 				}), f]
 			})]
-		}), d && /* @__PURE__ */ i("p", {
+		}), d && /* @__PURE__ */ n("p", {
 			className: "message-composer__helper",
 			id: b,
 			children: d

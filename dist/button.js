@@ -1,14 +1,14 @@
 'use client';
 import './button.css';
 import { n as e } from "./_shared/form-size.js";
-import { forwardRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { jsx as t } from "react/jsx-runtime";
+import { forwardRef as n } from "react";
 import { useRender as r } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
-var i = t(function({ variant: t = "primary", destructive: i = !1, size: a, block: o = !1, iconOnly: s = !1, children: c, type: l = "button", disabled: u, onClick: d, href: f, external: p = !1, render: m, className: h, ...g }, _) {
+var i = n(function({ variant: n = "primary", destructive: i = !1, size: a, block: o = !1, iconOnly: s = !1, children: c, type: l = "button", disabled: u, onClick: d, href: f, external: p = !1, render: m, className: h, ...g }, _) {
 	let v = e(a), y = [
 		"button",
-		`button--${t}`,
+		`button--${n}`,
 		i ? "button--destructive-intent" : "",
 		v === "md" ? "" : `button--${v}`,
 		o ? "button--block" : "",
@@ -32,7 +32,7 @@ var i = t(function({ variant: t = "primary", destructive: i = !1, size: a, block
 			...g,
 			children: c
 		}
-	}) || (f === void 0 ? /* @__PURE__ */ n("button", {
+	}) || (f === void 0 ? /* @__PURE__ */ t("button", {
 		ref: _,
 		className: y,
 		type: l,
@@ -40,7 +40,7 @@ var i = t(function({ variant: t = "primary", destructive: i = !1, size: a, block
 		onClick: d,
 		...g,
 		children: c
-	}) : /* @__PURE__ */ n("a", {
+	}) : /* @__PURE__ */ t("a", {
 		ref: _,
 		className: y,
 		href: u ? void 0 : f,

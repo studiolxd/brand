@@ -27,9 +27,9 @@ export interface ErrorPageProps {
  * Plantilla de «algo ha salido mal»: dos columnas, mismo molde que `AuthPage`
  * (`Columns` de dos celdas). Izquierda: título, frase y el enlace de vuelta.
  * Derecha: la frase de reintento y el botón en bloque, como las acciones de un
- * formulario de acceso. Cabecera y pie, si se pasan, van cada uno en su
- * `ErrorBoundary`: la página de error no puede depender del layout que pudo
- * fallar. Con `shell={false}` devuelve solo el contenido, para una app que ya
- * tiene su `main`.
+ * formulario de acceso. El marco lo pone `PublicPageShell`, así que cabecera y
+ * pie van cada uno en su `ErrorBoundary`: la página de error no puede depender
+ * del layout que pudo fallar. Con `shell={false}` devuelve solo el contenido,
+ * para una app que ya tiene su `main`.
  */
 export declare function ErrorPage({ title, description, homeAction, retryDescription, retryAction, header, footer, id, shell }: ErrorPageProps): import("react/jsx-runtime").JSX.Element;

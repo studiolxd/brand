@@ -1,13 +1,13 @@
 import './heading.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Heading/Heading.tsx
-var n = e(function({ level: e = 2, size: n, className: r, children: i, ...a }, o) {
-	return /* @__PURE__ */ t(`h${e}`, {
+var n = t(function({ level: t = 2, size: n, className: r, children: i, ...a }, o) {
+	return /* @__PURE__ */ e(`h${t}`, {
 		ref: o,
 		className: [
 			"heading",
-			`heading--${e}`,
+			`heading--${t}`,
 			n && `heading--size-${n}`,
 			r
 		].filter(Boolean).join(" "),

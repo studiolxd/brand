@@ -1,13 +1,13 @@
 import './list.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/List/List.tsx
-var n = e(function({ type: e = "unordered", className: n, children: r, ...i }, a) {
-	return /* @__PURE__ */ t(e === "ordered" ? "ol" : "ul", {
+var n = t(function({ type: t = "unordered", className: n, children: r, ...i }, a) {
+	return /* @__PURE__ */ e(t === "ordered" ? "ol" : "ul", {
 		ref: a,
 		className: [
 			"list",
-			`list--${e}`,
+			`list--${t}`,
 			n ?? ""
 		].filter(Boolean).join(" "),
 		...i,

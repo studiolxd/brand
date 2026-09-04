@@ -7,6 +7,63 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.2.0
+
+Dos frentes: **el alta de la suite** y **los correos**, más dos correcciones
+que afectan a componentes ya en uso (ver «Lo que cambia fuera de lo nuevo»).
+
+### El alta
+
+- **`PublicPageShell`** (nuevo, `./public-page-shell`): el marco de una página
+  pública en una sola pieza — `SiteShell` + `Container as="main"`, con `header`
+  y `footer` opcionales dentro de su `ErrorBoundary` y la prop `shell`. Extrae
+  el bloque que `ErrorPage` y `NotFoundPage` repetían carácter por carácter y
+  que `AuthPage` volvía a montar a mano. Las tres pasan a colgar de él: **su API
+  y su render no cambian**.
+- **`Stepper`** (nuevo, `./stepper`): progreso de un flujo con estado
+  (completado / actual / pendiente), `ol` real con `aria-current="step"`, estados
+  distinguidos por dos señales además del color, horizontal desde `md` y
+  compacto por debajo. Con menos de dos pasos no se pinta. `onStepSelect`
+  convierte en botón solo los pasos ya completados. No confundir con `Steps`,
+  que es documental y no se ha tocado.
+- **`OnboardingShell`** (nuevo, `./onboarding-shell`): la plantilla del alta
+  sobre superficie pública — chrome a ancho de página y solo la columna del paso
+  acotada y centrada, marca cuyo alto sale del mismo token que la cabecera
+  pública, conmutadores de idioma y tema en su propio pie, y pie de acciones con
+  `primaryAction` / `backAction` / `exitAction`.
+- **`Pages/Onboarding`**: las cinco pantallas del alta (perfil, organización,
+  logotipo, invitaciones y sala de espera) sobre los componentes reales.
+
+### Los correos
+
+- **`./email`** (nuevo): `EmailLayout` y las primitivas del correo de la suite,
+  con logotipo real, tipografía sans (antes usaba la monoespaciada de código en
+  toda la prosa), paleta y espaciado por token, y el botón principal a ancho
+  completo con su **enlace de respaldo** en texto. **El correo es solo claro**:
+  el modo oscuro se retiró a propósito. Las plantillas concretas siguen siendo
+  producto y viven en `@slxd/mailer`.
+- **`./tokens`** (nuevo): los tokens con los valores ya resueltos, legibles como
+  dato desde JS/TS, para consumidores cuyo medio no es un navegador — el correo,
+  un canvas, un PDF. Para estilar una página la respuesta sigue siendo el CSS.
+- `react-email` entra como **peer opcional**: los componentes de correo no
+  cuelgan del barril, solo de su subpath, para que una app que importe un
+  `Button` no tenga que instalarla.
+
+### Lo que cambia fuera de lo nuevo
+
+- **`SiteHeader`**: el alto del logotipo lo impone la barra, como su propio
+  comentario ya decía y no cumplía (perdía por especificidad contra
+  `.logo.logo--xxl`). En escritorio no cambia nada — los dos valores coinciden
+  en 85px —, pero **en móvil el logotipo pasa a encoger con la barra**.
+- **`Button variant="text"`**: el subrayado deja de ser `text-decoration` y pasa
+  a la técnica de `Link` (línea bajo el texto). `text-decoration` no cubre un
+  SVG, así que un botón de texto con icono tenía la línea cortada. **Afecta a
+  todos los botones de texto.**
+- **`Stepper`** no existía, pero el criterio que lo arregló sí toca al resto: su
+  carril usaba un token de superficie para pintar una línea de 1px y quedaba
+  invisible en las dos superficies. Queda anotado en `chart.grid-color`, que
+  arrastra el mismo defecto de procedencia con el valor correcto.
+
 ## v30.1.2
 
 `Pagination`: `.pagination__meta` (resumen + selector de tamaño) usaba

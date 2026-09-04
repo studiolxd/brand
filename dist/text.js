@@ -1,9 +1,9 @@
 import './text.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/Text/Text.tsx
-var n = e(function({ as: e = "span", tone: n = "default", className: r, children: i, ...a }, o) {
-	return /* @__PURE__ */ t(e, {
+var n = t(function({ as: t = "span", tone: n = "default", className: r, children: i, ...a }, o) {
+	return /* @__PURE__ */ e(t, {
 		ref: o,
 		className: [
 			"text",

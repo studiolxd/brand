@@ -1,13 +1,13 @@
 /* empty css                       */
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/atoms/VisuallyHidden/VisuallyHidden.tsx
-var n = e(function({ children: e, as: n = "span", className: r, ...i }, a) {
-	return /* @__PURE__ */ t(n, {
+var n = t(function({ children: t, as: n = "span", className: r, ...i }, a) {
+	return /* @__PURE__ */ e(n, {
 		ref: a,
 		className: ["visually-hidden", r].filter(Boolean).join(" "),
 		...i,
-		children: e
+		children: t
 	});
 });
 //#endregion

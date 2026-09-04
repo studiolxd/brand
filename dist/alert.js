@@ -2,35 +2,35 @@
 import './alert.css';
 import { Icon as e } from "./icon.js";
 import { Button as t } from "./button.js";
-import { forwardRef as n, useState as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { forwardRef as i, useState as a } from "react";
 //#region src/stories/molecules/Alert/Alert.tsx
 var o = {
 	default: "status",
 	success: "status",
 	error: "alert",
 	warning: "alert"
-}, s = n(function({ className: e, children: t, ...n }, r) {
-	return /* @__PURE__ */ i("p", {
-		ref: r,
+}, s = i(function({ className: e, children: t, ...r }, i) {
+	return /* @__PURE__ */ n("p", {
+		ref: i,
 		className: ["alert__title", e ?? ""].filter(Boolean).join(" "),
-		...n,
+		...r,
 		children: t
 	});
-}), c = n(function({ className: e, children: t, ...n }, r) {
-	return /* @__PURE__ */ i("div", {
-		ref: r,
+}), c = i(function({ className: e, children: t, ...r }, i) {
+	return /* @__PURE__ */ n("div", {
+		ref: i,
 		className: ["alert__description", e ?? ""].filter(Boolean).join(" "),
-		...n,
+		...r,
 		children: t
 	});
-}), l = n(function({ variant: n = "default", title: s, description: c, dismissible: l = !1, onDismiss: u, finalFocus: d, closeLabel: f = "Cerrar", className: p, children: m, role: h, ...g }, _) {
-	let [v, y] = r(!1);
+}), l = i(function({ variant: i = "default", title: s, description: c, dismissible: l = !1, onDismiss: u, finalFocus: d, closeLabel: f = "Cerrar", className: p, children: m, role: h, ...g }, _) {
+	let [v, y] = a(!1);
 	if (v) return null;
 	let b = [
 		"alert",
-		n === "default" ? "" : `alert--${n}`,
-		n === "warning" ? "" : "surface-dark",
+		i === "default" ? "" : `alert--${i}`,
+		i === "warning" ? "" : "surface-dark",
 		l ? "alert--dismissible" : "",
 		p ?? ""
 	].filter(Boolean).join(" ");
@@ -47,32 +47,32 @@ var o = {
 	function S() {
 		x(), u ? u() : y(!0);
 	}
-	return /* @__PURE__ */ a("div", {
+	return /* @__PURE__ */ r("div", {
 		ref: _,
-		role: h ?? o[n],
+		role: h ?? o[i],
 		className: b,
 		...g,
-		children: [/* @__PURE__ */ a("div", {
+		children: [/* @__PURE__ */ r("div", {
 			className: "alert__content",
 			children: [
-				s && /* @__PURE__ */ i("p", {
+				s && /* @__PURE__ */ n("p", {
 					className: "alert__title",
 					children: s
 				}),
-				c && /* @__PURE__ */ i("div", {
+				c && /* @__PURE__ */ n("div", {
 					className: "alert__description",
 					children: c
 				}),
 				m
 			]
-		}), l && /* @__PURE__ */ i(t, {
+		}), l && /* @__PURE__ */ n(t, {
 			variant: "ghost",
 			size: "sm",
 			iconOnly: !0,
 			className: "alert__close",
 			"aria-label": f,
 			onClick: S,
-			children: /* @__PURE__ */ i(e, {
+			children: /* @__PURE__ */ n(e, {
 				name: "close",
 				size: "sm"
 			})

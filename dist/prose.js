@@ -1,9 +1,9 @@
 import './prose.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 //#region src/stories/molecules/Prose/Prose.tsx
-var n = e(function({ as: e = "div", size: n = "md", measure: r = !0, className: i, children: a, ...o }, s) {
-	return /* @__PURE__ */ t(e, {
+var n = t(function({ as: t = "div", size: n = "md", measure: r = !0, className: i, children: a, ...o }, s) {
+	return /* @__PURE__ */ e(t, {
 		ref: s,
 		className: [
 			"prose",

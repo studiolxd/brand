@@ -1,27 +1,27 @@
 'use client';
 import './form-field.css';
 import { Label as e } from "./label.js";
-import { createContext as t, useCallback as n, useContext as r, useEffect as i, useId as a, useMemo as o, useState as s } from "react";
-import { jsx as c } from "react/jsx-runtime";
+import { jsx as t } from "react/jsx-runtime";
+import { createContext as n, useCallback as r, useContext as i, useEffect as a, useId as o, useMemo as s, useState as c } from "react";
 import { useRender as l } from "@base-ui/react/use-render";
 import { Controller as u, FormProvider as d, useFormContext as f } from "react-hook-form";
 //#region src/stories/molecules/FormField/FormField.tsx
-var p = t(void 0);
-function m({ translate: e, children: t, ...n }) {
-	return /* @__PURE__ */ c(p.Provider, {
+var p = n(void 0);
+function m({ translate: e, children: n, ...r }) {
+	return /* @__PURE__ */ t(p.Provider, {
 		value: e,
-		children: /* @__PURE__ */ c(d, {
-			...n,
-			children: t
+		children: /* @__PURE__ */ t(d, {
+			...r,
+			children: n
 		})
 	});
 }
-var h = t({}), g = ({ ...e }) => /* @__PURE__ */ c(h.Provider, {
+var h = n({}), g = ({ ...e }) => /* @__PURE__ */ t(h.Provider, {
 	value: { name: e.name },
-	children: /* @__PURE__ */ c(u, { ...e })
-}), _ = t({});
+	children: /* @__PURE__ */ t(u, { ...e })
+}), _ = n({});
 function v() {
-	let e = r(h), t = r(_), { getFieldState: n, formState: i } = f(), a = n(e.name, i), { id: o, described: s, register: c } = t;
+	let e = i(h), t = i(_), { getFieldState: n, formState: r } = f(), a = n(e.name, r), { id: o, described: s, register: c } = t;
 	return {
 		id: o,
 		name: e.name,
@@ -33,38 +33,38 @@ function v() {
 		...a
 	};
 }
-function y({ className: e, ...t }) {
-	let r = a(), [i, l] = s({
+function y({ className: e, ...n }) {
+	let i = o(), [a, l] = c({
 		description: !1,
 		message: !1
-	}), u = n((e, t) => {
+	}), u = r((e, t) => {
 		l((n) => n[e] === t ? n : {
 			...n,
 			[e]: t
 		});
-	}, []), d = o(() => ({
-		id: r,
-		described: i,
+	}, []), d = s(() => ({
+		id: i,
+		described: a,
 		register: u
 	}), [
-		r,
 		i,
+		a,
 		u
 	]);
-	return /* @__PURE__ */ c(_.Provider, {
+	return /* @__PURE__ */ t(_.Provider, {
 		value: d,
-		children: /* @__PURE__ */ c("div", {
+		children: /* @__PURE__ */ t("div", {
 			className: ["form-field", e].filter(Boolean).join(" "),
-			...t
+			...n
 		})
 	});
 }
-function b({ ...t }) {
-	let { error: n, formItemId: r } = v();
-	return /* @__PURE__ */ c(e, {
-		"data-error": !!n,
-		htmlFor: r,
-		...t
+function b({ ...n }) {
+	let { error: r, formItemId: i } = v();
+	return /* @__PURE__ */ t(e, {
+		"data-error": !!r,
+		htmlFor: i,
+		...n
 	});
 }
 function x({ children: e, ...t }) {
@@ -79,31 +79,31 @@ function x({ children: e, ...t }) {
 		}
 	});
 }
-function S({ className: e, ...t }) {
-	let { formDescriptionId: n, register: r } = v();
-	return i(() => (r("description", !0), () => r("description", !1)), [r]), /* @__PURE__ */ c("p", {
-		id: n,
+function S({ className: e, ...n }) {
+	let { formDescriptionId: r, register: i } = v();
+	return a(() => (i("description", !0), () => i("description", !1)), [i]), /* @__PURE__ */ t("p", {
+		id: r,
 		className: ["form-field__description", e].filter(Boolean).join(" "),
-		...t
+		...n
 	});
 }
-function C({ className: e, children: t, ...n }) {
-	let { error: a, formMessageId: o, register: s } = v(), l = r(p), u = a ? String(a?.message ?? "") : "", d = a ? l && u ? l(u) : u : t, f = !!d;
-	return i(() => (s("message", f), () => s("message", !1)), [s, f]), d ? /* @__PURE__ */ c("p", {
-		id: o,
+function C({ className: e, children: n, ...r }) {
+	let { error: o, formMessageId: s, register: c } = v(), l = i(p), u = o ? String(o?.message ?? "") : "", d = o ? l && u ? l(u) : u : n, f = !!d;
+	return a(() => (c("message", f), () => c("message", !1)), [c, f]), d ? /* @__PURE__ */ t("p", {
+		id: s,
 		role: "alert",
 		className: ["form-field__message", e].filter(Boolean).join(" "),
-		...n,
+		...r,
 		children: d
 	}) : null;
 }
-function w({ className: e, ...t }) {
-	let { formState: n } = f(), i = r(p), a = n.errors.root?.message, o = a && i ? i(String(a)) : a;
-	return o ? /* @__PURE__ */ c("p", {
+function w({ className: e, ...n }) {
+	let { formState: r } = f(), a = i(p), o = r.errors.root?.message, s = o && a ? a(String(o)) : o;
+	return s ? /* @__PURE__ */ t("p", {
 		role: "alert",
 		className: ["form-error", e].filter(Boolean).join(" "),
-		...t,
-		children: o
+		...n,
+		children: s
 	}) : null;
 }
 //#endregion

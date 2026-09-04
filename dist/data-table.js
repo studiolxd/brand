@@ -5,9 +5,9 @@ import { Pagination as t } from "./pagination.js";
 import { Table as n, TableBody as r, TableCell as i, TableHead as a, TableHeader as o, TableRow as s } from "./table.js";
 import { InputField as c } from "./input-field.js";
 import { EmptyState as l } from "./empty-state.js";
-import * as u from "react";
-import { useId as d, useState as f } from "react";
-import { jsx as p, jsxs as m } from "react/jsx-runtime";
+import { jsx as u, jsxs as d } from "react/jsx-runtime";
+import * as f from "react";
+import { useId as p, useState as m } from "react";
 //#region node_modules/.pnpm/@tanstack+table-core@8.21.3/node_modules/@tanstack/table-core/build/lib/index.mjs
 function h(e, t) {
 	return typeof e == "function" ? e(t) : e;
@@ -1525,7 +1525,7 @@ function Re() {
 //#endregion
 //#region node_modules/.pnpm/@tanstack+react-table@8.21.3_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@tanstack/react-table/build/lib/index.mjs
 function ze(e, t) {
-	return e ? Be(e) ? /* @__PURE__ */ u.createElement(e, t) : e : null;
+	return e ? Be(e) ? /* @__PURE__ */ f.createElement(e, t) : e : null;
 }
 function Be(e) {
 	return Ve(e) || typeof e == "function" || He(e);
@@ -1545,7 +1545,7 @@ function Ue(e) {
 		onStateChange: () => {},
 		renderFallbackValue: null,
 		...e
-	}, [n] = u.useState(() => ({ current: Ae(t) })), [r, i] = u.useState(() => n.current.initialState);
+	}, [n] = f.useState(() => ({ current: Ae(t) })), [r, i] = f.useState(() => n.current.initialState);
 	return n.current.setOptions((t) => ({
 		...t,
 		...e,
@@ -1560,11 +1560,11 @@ function Ue(e) {
 }
 //#endregion
 //#region src/stories/organisms/DataTable/DataTable.tsx
-function We({ columns: u, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumnId: v, search: y, searchPlaceholder: b, searchClearLabel: x, toolbar: S, pageSize: C = 10, emptyMessage: w = "Sin resultados", isLoading: T, pagination: E, headerLabels: D, paginationLabels: O, className: ee }) {
+function We({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumnId: v, search: y, searchPlaceholder: b, searchClearLabel: x, toolbar: S, pageSize: C = 10, emptyMessage: w = "Sin resultados", isLoading: T, pagination: E, headerLabels: D, paginationLabels: O, className: ee }) {
 	"use no memo";
-	let [te, ne] = f([]), [k, A] = f([]), j = Ue({
+	let [te, ne] = m([]), [k, A] = m([]), j = Ue({
 		data: h,
-		columns: u,
+		columns: f,
 		state: {
 			sorting: te,
 			columnFilters: k
@@ -1578,13 +1578,13 @@ function We({ columns: u, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 			getPaginationRowModel: Le(),
 			initialState: { pagination: { pageSize: C } }
 		}
-	}), M = E?.pageSize ?? C, N = b ?? "Buscar", P = `${d()}-search`;
-	return /* @__PURE__ */ m("div", {
+	}), M = E?.pageSize ?? C, N = b ?? "Buscar", P = `${p()}-search`;
+	return /* @__PURE__ */ d("div", {
 		className: ["data-table", ee].filter(Boolean).join(" "),
 		children: [
-			(v || y || S) && /* @__PURE__ */ m("div", {
+			(v || y || S) && /* @__PURE__ */ d("div", {
 				className: "data-table__toolbar",
-				children: [y ? /* @__PURE__ */ p(c, {
+				children: [y ? /* @__PURE__ */ u(c, {
 					className: "data-table__search",
 					id: P,
 					kind: "search",
@@ -1594,7 +1594,7 @@ function We({ columns: u, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 					...x ? { clearLabel: x } : {},
 					value: y.value,
 					onChange: (e) => y.onChange(e.target.value)
-				}) : v && /* @__PURE__ */ p(c, {
+				}) : v && /* @__PURE__ */ u(c, {
 					className: "data-table__search",
 					id: P,
 					kind: "search",
@@ -1604,44 +1604,44 @@ function We({ columns: u, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 					...x ? { clearLabel: x } : {},
 					value: j.getColumn(v)?.getFilterValue() ?? "",
 					onChange: (e) => j.getColumn(v)?.setFilterValue(e.target.value)
-				}), S && /* @__PURE__ */ p("div", {
+				}), S && /* @__PURE__ */ u("div", {
 					className: "data-table__toolbar-actions",
 					children: S
 				})]
 			}),
-			/* @__PURE__ */ p("div", {
+			/* @__PURE__ */ u("div", {
 				className: "data-table__scroll",
-				children: /* @__PURE__ */ m(n, {
+				children: /* @__PURE__ */ d(n, {
 					"aria-label": g,
 					"aria-labelledby": _,
 					"aria-busy": T || void 0,
-					children: [/* @__PURE__ */ p(a, { children: j.getHeaderGroups().map((e) => /* @__PURE__ */ p(s, { children: e.headers.map((e) => {
+					children: [/* @__PURE__ */ u(a, { children: j.getHeaderGroups().map((e) => /* @__PURE__ */ u(s, { children: e.headers.map((e) => {
 						let t = e.column.getIsSorted(), n = e.column.getCanSort();
-						return /* @__PURE__ */ p(o, {
+						return /* @__PURE__ */ u(o, {
 							sortable: n,
 							sorted: t === "asc" || t === "desc" ? t : !1,
 							onSort: n ? () => e.column.toggleSorting() : void 0,
 							...D,
 							children: e.isPlaceholder ? null : ze(e.column.columnDef.header, e.getContext())
 						}, e.id);
-					}) }, e.id)) }), /* @__PURE__ */ p(r, { children: T ? Array.from({ length: M }).map((t, n) => /* @__PURE__ */ p(s, {
+					}) }, e.id)) }), /* @__PURE__ */ u(r, { children: T ? Array.from({ length: M }).map((t, n) => /* @__PURE__ */ u(s, {
 						"aria-hidden": "true",
-						children: u.map((t, n) => /* @__PURE__ */ p(i, { children: /* @__PURE__ */ p(e, {}) }, n))
-					}, n)) : j.getRowModel().rows.length === 0 ? /* @__PURE__ */ p(s, { children: /* @__PURE__ */ p(i, {
-						colSpan: u.length,
-						children: /* @__PURE__ */ p(l, {
+						children: f.map((t, n) => /* @__PURE__ */ u(i, { children: /* @__PURE__ */ u(e, {}) }, n))
+					}, n)) : j.getRowModel().rows.length === 0 ? /* @__PURE__ */ u(s, { children: /* @__PURE__ */ u(i, {
+						colSpan: f.length,
+						children: /* @__PURE__ */ u(l, {
 							size: "sm",
 							title: w
 						})
-					}) }) : j.getRowModel().rows.map((e) => /* @__PURE__ */ p(s, {
+					}) }) : j.getRowModel().rows.map((e) => /* @__PURE__ */ u(s, {
 						selected: e.getIsSelected(),
-						children: e.getVisibleCells().map((e) => /* @__PURE__ */ p(i, { children: ze(e.column.columnDef.cell, e.getContext()) }, e.id))
+						children: e.getVisibleCells().map((e) => /* @__PURE__ */ u(i, { children: ze(e.column.columnDef.cell, e.getContext()) }, e.id))
 					}, e.id)) })]
 				})
 			}),
-			/* @__PURE__ */ p("div", {
+			/* @__PURE__ */ u("div", {
 				className: "data-table__footer",
-				children: E ? /* @__PURE__ */ p(t, {
+				children: E ? /* @__PURE__ */ u(t, {
 					total: E.total,
 					page: E.page,
 					pageSize: E.pageSize,
@@ -1649,7 +1649,7 @@ function We({ columns: u, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 					onPageSizeChange: E.onPageSizeChange,
 					showTotal: !0,
 					...O
-				}) : /* @__PURE__ */ p(t, {
+				}) : /* @__PURE__ */ u(t, {
 					total: j.getFilteredRowModel().rows.length,
 					page: j.getState().pagination.pageIndex + 1,
 					pageSize: j.getState().pagination.pageSize,

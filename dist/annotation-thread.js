@@ -1,7 +1,7 @@
 import './annotation-thread.css';
 import { Tag as e } from "./tag.js";
-import "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import "react";
 //#region src/stories/organisms/AnnotationThread/AnnotationThread.tsx
 var r = {
 	day: "numeric",

@@ -1,13 +1,13 @@
 'use client';
 import './accordion.css';
 import { Icon as e } from "./icon.js";
-import { Accordion as t } from "@base-ui/react/accordion";
-import { Children as n, createContext as r, useContext as i } from "react";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { Accordion as r } from "@base-ui/react/accordion";
+import { Children as i, createContext as a, useContext as o } from "react";
 //#region src/stories/atoms/Accordion/AccordionContext.ts
-var s = r(null);
+var s = a(null);
 function c() {
-	return i(s);
+	return o(s);
 }
 //#endregion
 //#region src/stories/atoms/Accordion/Accordion.tsx
@@ -15,10 +15,10 @@ var l = (e) => String(e).padStart(2, "0");
 function u(e) {
 	if (e !== void 0) return Array.isArray(e) ? e : e === "" ? [] : [e];
 }
-function d({ className: e, children: r, id: i, disabled: o, numbered: c = !1, formatIndex: d = l, ...f }) {
+function d({ className: e, children: n, id: a, disabled: o, numbered: c = !1, formatIndex: d = l, ...f }) {
 	let p = f.type === "multiple", m = f.type === "single" ? f.collapsible ?? !0 : !0, h = f.value;
-	return /* @__PURE__ */ a(t.Root, {
-		id: i,
+	return /* @__PURE__ */ t(r.Root, {
+		id: a,
 		disabled: o,
 		multiple: p,
 		value: u(h),
@@ -36,50 +36,50 @@ function d({ className: e, children: r, id: i, disabled: o, numbered: c = !1, fo
 			c ? "accordion--numbered" : "",
 			e
 		].filter(Boolean).join(" "),
-		children: c ? n.map(r, (e, t) => /* @__PURE__ */ a(s.Provider, {
+		children: c ? i.map(n, (e, n) => /* @__PURE__ */ t(s.Provider, {
 			value: {
-				index: t + 1,
+				index: n + 1,
 				formatIndex: d
 			},
 			children: e
-		})) : r
+		})) : n
 	});
 }
-function f({ className: e, children: n, ...r }) {
-	return /* @__PURE__ */ a(t.Item, {
+function f({ className: e, children: n, ...i }) {
+	return /* @__PURE__ */ t(r.Item, {
 		className: ["accordion__item", e].filter(Boolean).join(" "),
-		...r,
+		...i,
 		children: n
 	});
 }
-function p({ className: n, chevronSize: r = "sm", children: i }) {
+function p({ className: i, chevronSize: a = "sm", children: o }) {
 	let s = c();
-	return /* @__PURE__ */ a(t.Header, {
+	return /* @__PURE__ */ t(r.Header, {
 		className: "accordion__header",
-		children: /* @__PURE__ */ o(t.Trigger, {
-			className: ["accordion__trigger", n].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ n(r.Trigger, {
+			className: ["accordion__trigger", i].filter(Boolean).join(" "),
 			children: [
-				s && /* @__PURE__ */ a("span", {
+				s && /* @__PURE__ */ t("span", {
 					className: "accordion__index",
 					children: s.formatIndex(s.index)
 				}),
-				/* @__PURE__ */ a("span", {
+				/* @__PURE__ */ t("span", {
 					className: "accordion__trigger-text",
-					children: i
+					children: o
 				}),
-				/* @__PURE__ */ a(e, {
+				/* @__PURE__ */ t(e, {
 					name: "chevron",
 					className: "accordion__chevron",
-					size: r
+					size: a
 				})
 			]
 		})
 	});
 }
 function m({ className: e, children: n }) {
-	return /* @__PURE__ */ a(t.Panel, {
+	return /* @__PURE__ */ t(r.Panel, {
 		className: ["accordion__content", e].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ a("div", {
+		children: /* @__PURE__ */ t("div", {
 			className: "accordion__content-inner",
 			children: n
 		})

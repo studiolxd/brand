@@ -1,20 +1,20 @@
 'use client';
 import './checkbox.css';
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { jsx as e } from "react/jsx-runtime";
+import { forwardRef as t } from "react";
 import { Checkbox as n } from "@base-ui/react/checkbox";
 //#region src/stories/atoms/Checkbox/Checkbox.tsx
-var r = e(function({ size: e = "md", className: r, checked: i, indeterminate: a, onCheckedChange: o, id: s, error: c = !1, ...l }, u) {
+var r = t(function({ size: t = "md", className: r, checked: i, indeterminate: a, onCheckedChange: o, id: s, error: c = !1, ...l }, u) {
 	let d = [
 		"checkbox",
-		e === "md" ? "" : `checkbox--${e}`,
+		t === "md" ? "" : `checkbox--${t}`,
 		c ? "checkbox--error" : "",
 		r ?? ""
 	].filter(Boolean).join(" "), f = i === "indeterminate" || a;
-	return /* @__PURE__ */ t(n.Root, {
+	return /* @__PURE__ */ e(n.Root, {
 		ref: u,
 		className: d,
-		render: /* @__PURE__ */ t("button", {
+		render: /* @__PURE__ */ e("button", {
 			type: "button",
 			id: s
 		}),
@@ -25,7 +25,7 @@ var r = e(function({ size: e = "md", className: r, checked: i, indeterminate: a,
 		"aria-invalid": c || void 0,
 		onCheckedChange: o ? (e) => o(e) : void 0,
 		...l,
-		children: /* @__PURE__ */ t(n.Indicator, {
+		children: /* @__PURE__ */ e(n.Indicator, {
 			className: "checkbox__indicator",
 			keepMounted: !0
 		})
