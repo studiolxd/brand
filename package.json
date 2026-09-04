@@ -576,6 +576,11 @@
       "types": "./dist/_types/molecules/UserMessage/UserMessage.d.ts",
       "import": "./dist/user-message.js"
     },
+    "./tokens": {
+      "types": "./dist/_types/tokens/tokens.d.ts",
+      "import": "./dist/tokens.js"
+    },
+    "./tokens.json": "./src/tokens/tokens.json",
     "./tokens.css": "./dist/tokens.css",
     "./user-menu": {
       "types": "./dist/_types/molecules/UserMenu/UserMenu.d.ts",
@@ -595,7 +600,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && node scripts/post-build.mjs",
+    "build:lib": "rm -rf dist && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && tsc -p tsconfig.tokens.json && node scripts/post-build.mjs",
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
     "build:fonts-css": "node scripts/build-fonts-css.mjs",

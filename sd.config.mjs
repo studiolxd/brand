@@ -1,9 +1,10 @@
 import StyleDictionary from 'style-dictionary';
 import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { registerDarkModeFormat, isDarkToken } from './sd.formats.mjs';
+import { registerDarkModeFormat, registerJsonVariablesFormat, isDarkToken } from './sd.formats.mjs';
 
 registerDarkModeFormat(StyleDictionary);
+registerJsonVariablesFormat(StyleDictionary);
 
 const cssOptions = { selector: ':root', outputReferences: true };
 const scssOptions = { outputReferences: false };
@@ -470,6 +471,26 @@ const sd = new StyleDictionary({
         scssFile('molecules/_tree-view.scss',        'tree-view'),
         scssFile('molecules/_annotation-thread.scss','annotation-thread'),
         scssFile('components/_text-inline.scss',     'text-inline'),
+      ],
+    },
+    /*
+     * Tokens legibles desde JS/TS: un único JSON plano con TODOS los tokens de
+     * `tokens/**`, con los valores ya resueltos. Comparte `transformGroup` con
+     * la plataforma css, así que cada valor es literalmente el mismo que emite
+     * el `:root` generado — el JSON no es una segunda fuente que pueda
+     * desincronizarse, es la misma pasada de transformación.
+     *
+     * Los `surface-dark-*` se filtran igual que en SCSS: se publican con el
+     * nombre de su par claro, así que meterlos aquí sobrescribiría el valor
+     * claro de esa misma clave. Un consumidor que necesite los dos temas
+     * (el correo) los deriva de los roles semánticos `*-on-dark`, que sí son
+     * tokens normales.
+     */
+    js: {
+      transformGroup: 'css',
+      buildPath: 'src/tokens/',
+      files: [
+        { destination: 'tokens.json', format: 'json/css-variables', filter: (t) => !isDarkToken(t) },
       ],
     },
   },

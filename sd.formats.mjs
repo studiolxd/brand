@@ -95,3 +95,27 @@ export function registerDarkModeFormat(StyleDictionary) {
     },
   });
 }
+
+/**
+ * Registra el formato `json/css-variables`: el mismo diccionario que sale a
+ * CSS, pero como un objeto JSON plano `{ "--nombre": "valor" }` con los
+ * valores YA resueltos (sin `var()`), para consumidores que no pueden leer
+ * custom properties — un correo HTML, por ejemplo, donde todo estilo tiene
+ * que ir inline y resuelto en tiempo de render.
+ *
+ * La clave es el nombre de la custom property, no la ruta del token: así el
+ * mismo identificador sirve para buscar el valor en JS y para leer el CSS
+ * generado, sin traducción por medio.
+ */
+export function registerJsonVariablesFormat(StyleDictionary) {
+  StyleDictionary.registerFormat({
+    name: 'json/css-variables',
+    format: ({ dictionary }) => {
+      const entries = dictionary.allTokens.map((token) => [
+        `--${token.name}`,
+        String(token.$value ?? token.value),
+      ]);
+      return `${JSON.stringify(Object.fromEntries(entries), null, 2)}\n`;
+    },
+  });
+}
