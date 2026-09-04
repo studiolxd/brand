@@ -7,6 +7,13 @@ export interface NumberBadgeProps {
     max?: number;
     /** Texto accesible completo (ej. «12 notificaciones sin leer»). */
     'aria-label'?: string;
+    /**
+     * Marca el contador como decorativo. Es lo que hay que pasar cuando el
+     * número ya está en el nombre accesible de quien lo lleva encima (la campana
+     * de `NotificationButton`, el disparador del `FloatingDock`): sin esto el
+     * lector de pantalla lo diría dos veces.
+     */
+    'aria-hidden'?: boolean | 'true' | 'false';
     className?: string;
 }
-export declare function NumberBadge({ count, variant, max, 'aria-label': ariaLabel, className, }: NumberBadgeProps): import("react/jsx-runtime").JSX.Element;
+export declare function NumberBadge({ count, variant, max, 'aria-label': ariaLabel, 'aria-hidden': ariaHidden, className, }: NumberBadgeProps): import("react/jsx-runtime").JSX.Element;

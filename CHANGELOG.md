@@ -7,6 +7,24 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.4.1
+
+Los tres contratos que `test:stories` daba en rojo. La puerta llevaba tiempo sin
+poder correrse —el Chromium de Playwright no bajaba en esta red—, así que
+nadie los había mirado.
+
+- **`NumberBadge` / `NotificationButton`: el contador se leía dos veces.** Un
+  lector de pantalla anunciaba el número del badge y luego otra vez dentro del
+  nombre del botón. El MDX decía que el badge visible era decorativo desde el
+  primer día; en el DOM no lo era. Arreglado en el átomo. **Afecta a la campana
+  con contador de las ocho apps.**
+- **`DateTimeField`: el contrato miraba el `aria-invalid` donde ya no vive.**
+  Test desfasado, no componente.
+- El contrato de `NotificationButton` seguía pasando el contador dentro de
+  `label`, cuando `11a0d97` (2026-09-02) desdobló el nombre en `label` /
+  `countLabel`. Puesto al día, y con dos aserciones más que cazan el fallo de
+  arriba.
+
 ## v30.4.0
 
 Cuatro cosas del alta, todas vistas en el hub.
