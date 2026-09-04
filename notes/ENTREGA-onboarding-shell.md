@@ -327,3 +327,69 @@ el documento.
 
 `pnpm lint`, `npx tsc -b` y `pnpm test` (289 tests) en verde. Las cinco páginas
 revisadas en el 6007 en claro y en oscuro; las medidas de arriba, tomadas ahí.
+
+
+---
+
+## Cuarta ronda
+
+### Fuera la línea entre el paso y sus acciones
+
+El pie de acciones se separaba con un borde superior, recurso que el sistema no
+usa. La separación la hacen ahora el espacio de la rejilla y el aire propio del
+pie. Con la línea se fueron sus tres tokens (`actions-border-width`,
+`actions-border-color` y el par oscuro), que no usaba nadie más.
+
+### La salida: `text`, pegada a la principal, y el foco alineado con el ojo
+
+`exitAction` pasa de `ghost` a `variant="text"`, y deja de estar al otro extremo:
+va **pegada a la principal**, con el mismo hueco que hay entre «Atrás» y ella
+(medido: 12px). Al no tener caja ya no compite — el peso lo pone la forma, no la
+distancia. En móvil, «Atrás» y la principal a todo el ancho y la salida centrada
+debajo.
+
+**Cómo se resolvió el orden de tabulación.** La salida pasa a ir *después* de la
+principal en el marcado y el pie deja de usar `column-reverse`: escritorio es
+`row` y móvil `column`, las dos recorriendo el mismo orden que el DOM —«Atrás»,
+principal, salida—, sin `order` ni `row-reverse` en ninguna parte. Así el foco va
+por donde va el ojo en las dos disposiciones (WCAG 2.4.3).
+
+Esto además **arregla un desajuste que ya existía**: el `column-reverse` de móvil
+pintaba «Atrás, principal, Omitir» mientras el foco recorría «Omitir, Atrás,
+principal».
+
+El precio de no usar `order` es que en móvil «Atrás» queda por encima de la
+principal, en vez de la principal la primera. Es la única de las dos
+disposiciones posibles que mantiene DOM = visual = foco: poner la principal
+arriba en móvil y a la derecha en escritorio exige reordenar por CSS, que es
+justo lo que 2.4.3 no admite.
+
+**El color en oscuro: no hubo que tocar nada.** Antes de cambiarlo se comprobó de
+dónde sale: `button.text.color` → `{link.color}` y
+`button.text.surface-dark-color` → `{link.surface-dark-color}`, que **ya vale
+`{color.accent-2}`**. O sea que la variante `text` en superficie oscura ya se
+pinta en amarillo por el propio sistema. Verificado en el navegador:
+`--button-text-color: #ffcd00` y el botón amarillo en pantalla.
+
+Si en algún momento se quisiera un amarillo *distinto* del de `Link`, el camino
+acotado sería remapear `--button-text-color` (y sus pares de hover/active) sobre
+`.onboarding-shell__exit`, como ya se hace con `--logo-height-*` en la marca —
+nunca editar `button.text.surface-dark-color` en el JSON, que arrastraría a
+todos los `Button variant="text"` de la suite.
+
+### Los pasos van solo con título
+
+`PageIntro` sin `description` en las cinco páginas y en la story del template.
+
+Una excepción razonada: en la **sala de espera** ese texto no era una ayuda del
+paso, sino el sentido de la pantalla —decir que no se puede hacer nada ahí, que
+es la primera de sus decisiones de diseño—. En vez de perderlo, baja al cuerpo
+como `Paragraph`. El `PageIntro` queda solo con el título, como pedía la ronda.
+
+### Verificación
+
+`pnpm lint`, `npx tsc -b` y `pnpm test` (289 tests) en verde. Escritorio
+comprobado en el 6007 en claro y oscuro, con las posiciones de los tres botones
+medidas. La disposición de móvil no se pudo ver en pantalla —la ventana del
+navegador no se deja redimensionar en este entorno—: queda comprobada por
+lectura del CSS.
