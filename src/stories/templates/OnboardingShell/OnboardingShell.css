@@ -1,18 +1,42 @@
-/* Dos anchos, no uno. El chrome —la barra de la marca— ocupa el ancho normal
-   de una página pública, el que le da el `Container` del `main`: el usuario
-   llega desde una pantalla de acceso donde la marca vive pegada al borde del
-   contenido, y moverla al centro se lee como cambio de aplicación. Lo único
-   que se acota y se centra es la columna del paso. */
+/* Dos anchos, no uno. El chrome —la barra de la marca arriba, las preferencias
+   abajo— ocupa el ancho normal de una página pública, el de su propio
+   `Container`, el mismo que el del `main`: el usuario llega desde una pantalla
+   de acceso donde la marca vive pegada al borde del contenido, y moverla al
+   centro se lee como cambio de aplicación. Lo único que se acota y se centra
+   es la columna del paso.
+
+   Esta rejilla es la del contenido. Con marco solo lleva la columna del paso;
+   el chrome se pinta en las ranuras de cabecera y pie del `SiteShell`, que es
+   donde le corresponde el aire del chrome y no el del contenido. Sin marco
+   (`shell={false}`) marca y preferencias vuelven aquí, separadas por el
+   `gap`. */
 .onboarding-shell {
   display: grid;
   gap: var(--onboarding-shell-gap);
 }
 
 /* La barra de la marca. Sin cabecera pública —en el alta ya hay sesión—, es
-   todo lo que hay arriba. */
-.onboarding-shell__top {
+   todo lo que hay arriba, y se pinta en la ranura de cabecera del marco: el
+   sitio donde en el resto de páginas públicas va `SiteHeader`.
+
+   Ahí está la razón de su aire. La marca es chrome, no contenido: dentro del
+   `main` recibía el aire vertical del `Container` con `space="xl"` (48px) y
+   abría la pantalla cuatro dedos más abajo que la barra pública, que respira
+   los 8px del chrome. En su ranura, el aire lo pone ella con el token del
+   chrome —`--onboarding-shell-brand-padding-block`, atado a
+   `--app-header-padding-block`, el mismo que da alto a `SiteHeader`— y el
+   `space="xl"` del `main` vuelve a gobernar solo el contenido del paso.
+
+   El aire es de la banda, no del envoltorio, igual que en `SiteHeader` y en
+   `LegalFooter`. Con `shell={false}` no hay marco ni banda: la marca vuelve a
+   la rejilla, sin este aire, porque arriba manda el `AppShell` de la app. */
+.onboarding-shell__bar {
   display: flex;
   align-items: center;
+}
+
+.onboarding-shell__top.onboarding-shell__top--band {
+  padding-block: var(--onboarding-shell-brand-padding-block);
 }
 
 /* La columna del paso: lo único acotado a la medida de lectura y centrado en
@@ -55,13 +79,13 @@
 /* Los peldaños de móvil y teléfono son los de la cabecera pública, y con los
    mismos puntos de ruptura: si allí la marca encoge, aquí también. */
 @media (max-width: 767.98px) /* < --breakpoint-md */ {
-  .onboarding-shell {
+  .onboarding-shell__top {
     --onboarding-shell-brand-height: var(--onboarding-shell-brand-height-compact);
   }
 }
 
 @media (max-width: 479.98px) /* < --breakpoint-sm */ {
-  .onboarding-shell {
+  .onboarding-shell__top {
     --onboarding-shell-brand-height: var(--onboarding-shell-brand-height-narrow);
   }
 }
@@ -80,11 +104,16 @@
    scroll que no toca.
 
    Como banda, `Container` le da el aire lateral y el ancho de página; lo único
-   propio es cerrar la pantalla con el mismo aire con el que la abre el `main`.
-   Con `shell={false}` no hay marco ni banda: el pie vuelve a la columna, sin
-   este aire, porque abajo manda el `AppShell` de la app. */
+   propio es su aire vertical, y es el del pie público: el mismo token que el
+   `LegalFooter` del sitio (`--legal-footer-padding-block`), arriba y abajo. El
+   aire que lo separa del paso ya lo pone el `main` al cerrar, exactamente como
+   en la web; sumarle encima el aire del contenido —lo que hacía el
+   `padding-block-end` de `space="xl"`, 48px— cerraba la pantalla con el doble
+   de aire del que cierra una página pública. Con `shell={false}` no hay marco
+   ni banda: el pie vuelve a la columna, sin este aire, porque abajo manda el
+   `AppShell` de la app. */
 .onboarding-shell__settings.onboarding-shell__settings--band {
-  padding-block-end: var(--onboarding-shell-settings-padding-block-end);
+  padding-block: var(--onboarding-shell-settings-padding-block);
 }
 
 .onboarding-shell__switchers {
