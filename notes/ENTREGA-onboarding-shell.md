@@ -364,18 +364,13 @@ disposiciones posibles que mantiene DOM = visual = foco: poner la principal
 arriba en móvil y a la derecha en escritorio exige reordenar por CSS, que es
 justo lo que 2.4.3 no admite.
 
-**El color en oscuro: no hubo que tocar nada.** Antes de cambiarlo se comprobó de
-dónde sale: `button.text.color` → `{link.color}` y
-`button.text.surface-dark-color` → `{link.surface-dark-color}`, que **ya vale
-`{color.accent-2}`**. O sea que la variante `text` en superficie oscura ya se
+**El color en oscuro: no se tocó nada** (el operador anuló después ese punto).
+Antes de cambiarlo se comprobó de dónde sale: `button.text.color` →
+`{link.color}` y `button.text.surface-dark-color` → `{link.surface-dark-color}`,
+que **ya vale `{color.accent-2}`**. La variante `text` en superficie oscura ya se
 pinta en amarillo por el propio sistema. Verificado en el navegador:
-`--button-text-color: #ffcd00` y el botón amarillo en pantalla.
-
-Si en algún momento se quisiera un amarillo *distinto* del de `Link`, el camino
-acotado sería remapear `--button-text-color` (y sus pares de hover/active) sobre
-`.onboarding-shell__exit`, como ya se hace con `--logo-height-*` en la marca —
-nunca editar `button.text.surface-dark-color` en el JSON, que arrastraría a
-todos los `Button variant="text"` de la suite.
+`--button-text-color: #ffcd00`. No hay ninguna prop `tone` ni ningún remapeo
+local: el botón se usa tal cual.
 
 ### Los pasos van solo con título
 
@@ -393,3 +388,74 @@ comprobado en el 6007 en claro y oscuro, con las posiciones de los tres botones
 medidas. La disposición de móvil no se pudo ver en pantalla —la ventana del
 navegador no se deja redimensionar en este entorno—: queda comprobada por
 lectura del CSS.
+
+
+### El subrayado de `Button variant="text"`, al mecanismo de `Link`
+
+`text-decoration` no cubre un SVG, así que un botón de texto con icono quedaba
+con la línea cortada bajo el texto y ausente bajo el icono — el mismo problema
+que `Link` ya había resuelto y que explica en la cabecera de su CSS. La variante
+`text` pasa a la misma técnica: una línea bajo el botón entero, con
+`box-shadow: inset` y `padding-block-end`, en reposo, hover y activo.
+
+Grosor y separación salen de los tokens de `Link` (`button.text.underline-width`,
+`hover-underline-width`, `underline-offset` → `link.*`), como ya salían el color
+y el anillo de foco, para que las dos piezas no puedan separarse. Los dos tokens
+de `text-decoration` que quedaban sin uso se retiran.
+
+Comprobado en el navegador con un botón de texto con icono
+(`Atoms/Button` › «Text — con icono», story nueva):
+
+- La línea va de `x=16` a `x=195` y el icono ocupa de `16` a `32`: **cruza por
+  debajo del icono**, no solo del texto.
+- Foco intacto: el anillo sigue siendo el `outline` (2px, offset 1px), que se
+  pinta por fuera de la caja y no se estorba con la sombra interior.
+- Deshabilitado intacto: la línea es `currentColor`, así que se apaga con el
+  texto igual que hacía el `text-decoration`.
+- En superficie oscura, el botón y un `<a>` crudo dan exactamente los mismos
+  valores computados (amarillo, línea de 0px en reposo): quedan unificados.
+
+---
+
+## Lo que cambia FUERA del alta
+
+Dos cambios de esta entrega tocan componentes compartidos y **viajan en el mismo
+release que el alta** (decisión del operador; no van a rama aparte). Quien
+redacte el `CHANGELOG` y quien suba el pin en las nueve apps de la suite debería
+esperar esto:
+
+### 1. `SiteHeader` ahora sí impone el alto del logotipo
+
+- **Qué pasaba antes:** la regla `.site-header__logo > *` (un punto de
+  especificidad) perdía contra `.logo.logo--xxl` (dos), así que el alto lo
+  decidía la talla del `Logo`, no la barra. En escritorio coincidía de
+  casualidad, porque `site-header.content-height` vale exactamente la talla
+  `xxl` que la cabecera pasa por defecto.
+- **Qué cambia:** la cabecera remapea los tokens de talla del `Logo`, así que
+  manda ella. **En escritorio no cambia nada**: los dos valores son 85px. **En
+  móvil sí**: el logotipo pasa a encoger con la barra —48px por debajo de `md`,
+  40px por debajo de `sm`—, que es lo que sus tokens pedían desde el principio y
+  nunca llegó a ocurrir.
+- **A quién afecta:** a toda página con `SiteHeader`, en teléfono y tableta.
+  Merece una mirada a las capturas móviles de la web y del hub.
+- **Cómo revertirlo si molestara:** quitar el bloque de `--logo-height-*` de
+  `.site-header__logo` en `SiteHeader.css`; vuelve el comportamiento anterior.
+
+### 2. El subrayado de `Button variant="text"`
+
+- **Qué cambia:** deja de ser `text-decoration` y pasa a ser una línea bajo el
+  botón (sombra interior + `padding-block-end`), como en `Link`.
+- **Efecto visible:** (a) en un botón de texto **con icono**, la línea ya cruza
+  por debajo del icono en vez de cortarse; (b) el botón gana **4px de
+  `padding-block-end`** (la separación de la línea), así que en una fila con
+  botones con caja su texto queda unos 2px más arriba; (c) en **superficie
+  oscura** pasa a comportarse como `Link`: **sin línea en reposo y con línea en
+  hover**, donde antes llevaba línea siempre.
+- **A quién afecta:** a TODOS los `Button variant="text"` de la suite.
+- **Cómo revertirlo si molestara:** en `button.text`, apuntar
+  `surface-dark-underline-width` a `{border-width.default}` y
+  `surface-dark-hover-underline-width` a `0px` recupera el estado anterior en
+  oscuro sin renunciar a la técnica (que es lo que arregla el icono).
+
+Nada de esto toca la versión ni el `CHANGELOG`: sigue sin publicarse, y `dist/`
+sigue correspondiendo a v30.1.2 — el `release:check` previo al tag lo regenerará.
