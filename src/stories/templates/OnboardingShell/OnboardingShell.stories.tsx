@@ -45,7 +45,7 @@ const meta: Meta<typeof OnboardingShell> = {
     children: cuerpo,
     backAction: <Button variant="outline" size="lg">Atrás</Button>,
     primaryAction: <Button variant="primary" size="lg">Continuar</Button>,
-    exitAction: <Button variant="ghost" size="lg">Omitir por ahora</Button>,
+    exitAction: <Button variant="text" size="lg">Omitir por ahora</Button>,
   },
   argTypes: {
     brand: { table: { disable: true } },
@@ -91,7 +91,7 @@ export const FlujoDeUnPaso: Story = {
     stepper: <Stepper steps={[{ id: 'espera', label: 'Sala de espera' }]} current={0} />,
     backAction: undefined,
     primaryAction: undefined,
-    exitAction: <Button variant="ghost" size="lg">Cerrar sesión</Button>,
+    exitAction: <Button variant="text" size="lg">Cerrar sesión</Button>,
   },
 };
 
@@ -121,11 +121,13 @@ export const Contrato: Story = {
     await expect(paso.compareDocumentPosition(ajustes) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
     await expect(within(acciones).getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
-    await expect(within(acciones).getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--ghost');
-    // La salida vive fuera del par «Atrás»/principal: es la señal de que no compite con la decisión.
-    await expect(acciones.querySelector('.onboarding-shell__exit')).not.toBeNull();
+    await expect(within(acciones).getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
+    // La salida va DESPUÉS de la principal, para que el orden del foco sea el
+    // visual en las dos disposiciones (WCAG 2.4.3): sin `order` ni `reverse`.
+    await expect(within(acciones).getAllByRole('button').map((b) => b.textContent)).toEqual(['Atrás', 'Continuar', 'Omitir por ahora']);
     const decisiones = acciones.querySelector('.onboarding-shell__decisions')!;
     await expect(within(decisiones as HTMLElement).getAllByRole('button').map((b) => b.textContent)).toEqual(['Atrás', 'Continuar']);
+    await expect(decisiones.compareDocumentPosition(acciones.querySelector('.onboarding-shell__exit')!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   },
 };
 

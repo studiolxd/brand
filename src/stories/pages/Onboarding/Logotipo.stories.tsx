@@ -18,7 +18,7 @@ function Logotipo({ theme }: Args) {
       theme={theme}
       backAction={<Button variant="outline">Atrás</Button>}
       primaryAction={<Button variant="primary" type="submit" form="alta-logotipo">Continuar</Button>}
-      exitAction={<Button variant="ghost">Omitir por ahora</Button>}
+      exitAction={<Button variant="text">Omitir por ahora</Button>}
     >
       <Stack align="stretch">
         <PageIntro title="Sube el logotipo" description="Aparecerá en la cabecera de tu espacio y en los documentos que generéis. Si aún no lo tienes a mano, puedes omitirlo y subirlo después." />

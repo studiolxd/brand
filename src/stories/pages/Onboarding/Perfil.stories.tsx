@@ -17,7 +17,7 @@ function Perfil({ theme }: Args) {
       current={0}
       theme={theme}
       primaryAction={<Button variant="primary" type="submit" form="alta-perfil">Continuar</Button>}
-      exitAction={<Button variant="ghost">Omitir por ahora</Button>}
+      exitAction={<Button variant="text">Omitir por ahora</Button>}
     >
       <Stack align="stretch">
         <PageIntro title="¿Cómo te llamas?" description="Es el nombre con el que te verán tus compañeros de organización. Puedes cambiarlo más adelante." />

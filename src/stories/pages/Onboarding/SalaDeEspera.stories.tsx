@@ -41,7 +41,7 @@ function SalaDeEspera({ theme }: Args) {
       steps={[{ id: 'espera', label: 'Sala de espera' }]}
       current={0}
       theme={theme}
-      exitAction={<Button variant="ghost">Cerrar sesión</Button>}
+      exitAction={<Button variant="text">Cerrar sesión</Button>}
     >
       <Stack align="stretch" gap="lg">
         <PageIntro

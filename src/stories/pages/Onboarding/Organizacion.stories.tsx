@@ -18,7 +18,7 @@ function Organizacion({ theme }: Args) {
       theme={theme}
       backAction={<Button variant="outline">Atrás</Button>}
       primaryAction={<Button variant="primary" type="submit" form="alta-organizacion">Continuar</Button>}
-      exitAction={<Button variant="ghost">Omitir por ahora</Button>}
+      exitAction={<Button variant="text">Omitir por ahora</Button>}
     >
       <Stack align="stretch">
         <PageIntro title="¿Cómo se llama tu organización?" description="Es el nombre que verán tus compañeros y el que aparecerá en los documentos que compartáis." />

@@ -19,11 +19,13 @@ La plantilla del alta: la pantalla en la que un usuario recién llegado completa
 
 La jerarquía se decide aquí una vez, para que ninguna pantalla del alta la reinvente:
 
-- `primaryAction` — la decisión del paso, a la derecha, donde termina la lectura.
-- `backAction` — pegada a su izquierda: son las dos caras de la misma decisión.
-- `exitAction` — la salida («Omitir por ahora», «Cerrar sesión»), en `ghost` y **al otro extremo**. Separarla es lo que impide que se lea como parte de la decisión.
+- `backAction` — abre el renglón: la vuelta atrás.
+- `primaryAction` — la decisión del paso, después de «Atrás», donde termina la lectura.
+- `exitAction` — la salida («Omitir por ahora», «Cerrar sesión»), en `text` y **pegada a la principal**. Al no tener caja no compite con ella: el peso lo pone la forma, no la distancia.
 
-Por debajo de `md` el pie pasa a columna invertida: la decisión arriba, la salida abajo del todo, lejos del pulgar que confirma.
+Por debajo de `md` el pie pasa a columna: «Atrás» y la principal a todo el ancho, y la salida centrada debajo.
+
+El marcado va en ese mismo orden —«Atrás», la principal, la salida— y ninguna de las dos disposiciones usa `order` ni `row-reverse`. Así el recorrido del foco es el que se ve, en escritorio y en móvil (WCAG 2.4.3, «orden de foco»).
 
 <Canvas of={OnboardingShellStories.PrimerPaso} />
 <Canvas of={OnboardingShellStories.UltimoPaso} />
@@ -47,7 +49,7 @@ La ranura `stepper` se pasa siempre; es el `Stepper` quien decide no pintarse cu
   stepper={<Stepper steps={pasos} current={paso} onStepSelect={setPaso} />}
   backAction={paso > 0 ? <Button variant="outline" onClick={atras}>{t('atras')}</Button> : undefined}
   primaryAction={<Button type="submit" form="paso">{t('continuar')}</Button>}
-  exitAction={<Button variant="ghost" onClick={omitir}>{t('omitir')}</Button>}
+  exitAction={<Button variant="text" onClick={omitir}>{t('omitir')}</Button>}
 >
   <PasoActual />
 </OnboardingShell>

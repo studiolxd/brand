@@ -32,9 +32,10 @@ export interface OnboardingShellProps {
   /** «Atrás», a la izquierda de la principal. En el primer paso no se pasa. */
   backAction?: ReactNode;
   /**
-   * La salida del paso, separada del par «Atrás»/principal y al otro extremo:
-   * «Omitir por ahora», «Cerrar sesión». Va en `ghost` — es la acción de menos
-   * peso de la pantalla y no debe competir con la principal.
+   * La salida del paso: «Omitir por ahora», «Cerrar sesión». Va en `text` — es
+   * la acción de menos peso de la pantalla y no debe competir con la
+   * principal. Se pinta **después** de la principal: pegada a ella en
+   * escritorio, y debajo y centrada en móvil.
    */
   exitAction?: ReactNode;
   /** Nombre accesible del grupo de acciones del pie. Default: «Acciones del paso» (castellano). */
@@ -71,7 +72,10 @@ export interface OnboardingShellProps {
  *
  * El pie de acciones fija la jerarquía en un solo sitio, para que ninguna
  * pantalla del alta la reinvente: la principal a la derecha, «Atrás» a su
- * izquierda, y la salida (`ghost`) separada al otro extremo.
+ * izquierda y la salida (`text`) pegada a la principal. En móvil, la misma
+ * secuencia en columna: «Atrás», la principal a todo el ancho y la salida
+ * centrada debajo. El orden del DOM es el visual en las dos, así que el foco
+ * recorre lo mismo que lee el ojo.
  */
 export function OnboardingShell({
   children,
@@ -104,11 +108,11 @@ export function OnboardingShell({
 
           {hayAcciones && (
             <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
-              {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
               <div className="onboarding-shell__decisions">
                 {backAction}
                 {primaryAction}
               </div>
+              {exitAction && <div className="onboarding-shell__exit">{exitAction}</div>}
             </div>
           )}
         </div>

@@ -88,39 +88,50 @@
   display: none;
 }
 
-/* El pie de acciones. De partida, en columna invertida y a todo el ancho: en
-   una pantalla estrecha la decisión del paso va arriba del todo y la salida
-   queda al final, lejos del pulgar que confirma. */
+/* El pie de acciones. De partida, en columna y a todo el ancho: «Atrás», la
+   principal y, debajo, la salida centrada.
+
+   La columna es `column`, no `column-reverse`, y la salida va **después** de
+   las decisiones en el marcado: así el orden del DOM —que es el del foco— y el
+   orden visual coinciden en las dos disposiciones, sin `order` ni
+   `row-reverse` de por medio (WCAG 2.4.3). Es también lo que permite que la
+   salida quede pegada a la principal en escritorio sin moverla del sitio. */
 .onboarding-shell__actions {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: stretch;
   gap: var(--onboarding-shell-actions-gap);
   padding-block-start: var(--onboarding-shell-actions-padding-block-start);
 }
 
+/* En estrecho cada decisión ocupa su línea entera: la principal, la última de
+   las dos, queda justo encima de la salida. */
 .onboarding-shell__decisions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   gap: var(--onboarding-shell-actions-gap);
 }
 
+/* La salida es texto, no un botón con caja: centrada, cierra el pie. */
+.onboarding-shell__exit {
+  display: flex;
+  justify-content: center;
+}
+
 @media (min-width: 768px) /* --breakpoint-md */ {
-  /* En cuanto hay sitio, la jerarquía se lee de un vistazo: la principal a la
-     derecha, «Atrás» pegada a su izquierda, y la salida al otro extremo —
-     separada, para que no se confunda con la decisión del paso. */
+  /* En cuanto hay sitio, la jerarquía se lee de un vistazo en una sola línea,
+     toda ella al final del renglón: «Atrás», la principal y, pegada a ella, la
+     salida. */
   .onboarding-shell__actions {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
   }
 
-  .onboarding-shell__exit {
-    margin-inline-end: auto;
-  }
-
   .onboarding-shell__decisions {
+    flex-direction: row;
+    align-items: center;
     justify-content: flex-end;
   }
 }
