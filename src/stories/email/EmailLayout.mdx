@@ -72,6 +72,19 @@ que se queda en una línea, la única cosa que un correo no puede llevar inline:
 a:hover { text-decoration: none !important; }
 ```
 
+## Pesos
+
+La prosa va en el peso normal del sistema (`--font-weight-default`, 300). **El
+único elemento con peso fuerte es el título** (`--font-weight-emphasis`, 500).
+El botón conserva el suyo de botón, el de `Button primary`.
+
+Merece un aviso porque aquí hubo un fallo silencioso: la sans es una fuente
+variable y `fonts.css` la declara con el **rango** del eje, `1 1000`. La
+`@font-face` del correo la declaraba con dos caras, una por peso, apuntando al
+mismo fichero — así el navegador se queda sin eje que variar, empareja la prosa
+con la cara del título y el correo sale entero en negrita. Una sola cara con el
+rango, como en `fonts.css`.
+
 ## La caja
 
 Tres superficies, tres tokens:

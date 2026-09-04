@@ -51,6 +51,16 @@ export const emailPalette = {
 /** La sans del sistema con su pila de reserva, tal cual la define el token. */
 export const emailFontFamily = emailToken('--email-font-family');
 
+/**
+ * El rango del eje de peso de la sans, para la `@font-face` del correo.
+ *
+ * Es una fuente variable y `fonts.css` la declara así, `1 1000`. Declararla con
+ * un peso suelto —o con dos caras, una por peso, apuntando al mismo fichero—
+ * deja al navegador sin eje que variar: acaba emparejando la prosa con la cara
+ * del título y el correo sale entero en negrita.
+ */
+export const emailFontWeightRange = emailToken('--email-font-weight-range');
+
 /** Ancho del correo. Fuera de 600px, el panel de lectura obliga a scroll. */
 export const emailMaxWidth = emailToken('--email-max-width');
 
@@ -97,6 +107,7 @@ export const emailStyles = {
   text: {
     color: emailPalette.text,
     fontFamily: emailFontFamily,
+    fontWeight: Number(emailToken('--email-font-weight')),
     fontSize: emailToken('--email-font-size'),
     lineHeight: emailToken('--email-line-height'),
     margin: `0 0 ${emailToken('--email-text-margin-block-end')}`,
@@ -105,6 +116,7 @@ export const emailStyles = {
   muted: {
     color: emailPalette.muted,
     fontFamily: emailFontFamily,
+    fontWeight: Number(emailToken('--email-font-weight')),
     fontSize: emailToken('--email-note-font-size'),
     lineHeight: emailToken('--email-note-line-height'),
     margin: 0,
@@ -117,6 +129,7 @@ export const emailStyles = {
   footnote: {
     color: emailPalette.text,
     fontFamily: emailFontFamily,
+    fontWeight: Number(emailToken('--email-font-weight')),
     fontSize: emailToken('--email-note-font-size'),
     lineHeight: emailToken('--email-note-line-height'),
     margin: 0,
@@ -145,6 +158,7 @@ export const emailStyles = {
   link: {
     color: emailPalette.text,
     fontFamily: emailFontFamily,
+    fontWeight: Number(emailToken('--email-font-weight')),
     textDecoration: 'underline',
   },
 } as const satisfies Record<string, CSSProperties>;

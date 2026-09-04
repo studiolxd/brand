@@ -12,6 +12,7 @@ import { Body, Container, Font, Head, Html, Img, Link, Preview, Section, Text } 
 import {
   emailAssetsBaseUrl,
   emailFontFilename,
+  emailFontWeightRange,
   emailLogo,
   emailMaxWidth,
   emailPalette,
@@ -132,22 +133,16 @@ export function EmailLayout({
             —Gmail y Outlook Windows, o sea la mayoría— esto cae al fallback
             del propio token (`system-ui, sans-serif`), y se asume.
 
-            Dos caras del mismo fichero: la sans es una fuente variable, y el
-            correo usa dos pesos (el del cuerpo y el de los títulos). Con una
-            sola cara declarada, un renderizador que no sintetice el peso pinta
-            los títulos igual que la prosa. */}
+            Una sola cara, con el RANGO del eje de peso (`1 1000`), igual que la
+            declara `fonts.css`. La sans es una fuente variable: declararla con
+            un peso suelto —o con dos caras, una por peso, apuntando al mismo
+            fichero— deja al navegador sin eje que variar, y acaba emparejando
+            la prosa con la cara del título. El correo salía entero en negrita. */}
         <Font
           fontFamily="Google Sans Flex"
           fallbackFontFamily="sans-serif"
           webFont={{ url: fontUrl, format: 'woff2' }}
-          fontWeight={300}
-          fontStyle="normal"
-        />
-        <Font
-          fontFamily="Google Sans Flex"
-          fallbackFontFamily="sans-serif"
-          webFont={{ url: fontUrl, format: 'woff2' }}
-          fontWeight={500}
+          fontWeight={emailFontWeightRange}
           fontStyle="normal"
         />
         <style dangerouslySetInnerHTML={{ __html: emailStyleSheet }} />
@@ -159,6 +154,7 @@ export function EmailLayout({
           color: emailPalette.text,
           fontFamily: emailStyles.text.fontFamily,
           fontSize: emailStyles.text.fontSize,
+          fontWeight: emailStyles.text.fontWeight,
           lineHeight: emailStyles.text.lineHeight,
           margin: 0,
           padding: 0,

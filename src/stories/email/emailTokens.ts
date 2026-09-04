@@ -10,6 +10,8 @@ export const emailTokens = {
   '--email-max-width': '600px',
   '--email-font-family': '"Google Sans Flex", system-ui, sans-serif',
   '--email-font-size': '16px',
+  '--email-font-weight': '300',
+  '--email-font-weight-range': '1 1000',
   '--email-line-height': '1.5',
   '--email-border-width': '1px',
   '--email-canvas-padding-block': '24px',

@@ -15,6 +15,16 @@
       "$type": "dimension",
       "$description": "Cuerpo del correo: el mismo que la superficie de aplicación"
     },
+    "font-weight": {
+      "$value": "{font-weight.default}",
+      "$type": "number",
+      "$description": "Peso de la prosa del correo. El único elemento con peso fuerte es el título"
+    },
+    "font-weight-range": {
+      "$value": "1 1000",
+      "$type": "string",
+      "$description": "El rango del eje de peso de la sans, tal cual lo declara `fonts.css`. La @font-face del correo tiene que declararlo igual: con un peso suelto el navegador no puede variar el eje y acaba pintando la prosa al peso del título"
+    },
     "line-height": {
       "$value": "{text.line-height}",
       "$type": "number",
