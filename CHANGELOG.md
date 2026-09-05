@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## [31.3.0] — 2026-09-05
 
 - **`DataTable`: acciones en el pie.** Nueva prop `footerActions?: ReactNode`, para
   acciones sobre el conjunto (exportar, imprimir) — distintas de `toolbar`, que son
