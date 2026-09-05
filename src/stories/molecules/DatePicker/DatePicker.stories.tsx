@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn, expect, userEvent, within } from 'storybook/test';
+import { fn, expect, userEvent, waitFor, within } from 'storybook/test';
 import { DatePicker } from './DatePicker';
 
 const meta: Meta<typeof DatePicker> = {
@@ -230,8 +230,10 @@ export const ContratoTeclado: Story = {
     await userEvent.keyboard('{ArrowDown}');
     await expect(body.getByRole('dialog', { name: 'Calendario' })).toBeInTheDocument();
 
+    // El panel se va con su animación de salida: sigue en el DOM un instante
+    // (`data-closed`), así que se espera a que desaparezca, como en Popover.
     await userEvent.keyboard('{Escape}');
-    await expect(body.queryByRole('dialog')).toBeNull();
+    await waitFor(() => expect(body.queryByRole('dialog', { name: 'Calendario' })).toBeNull());
   },
 };
 
