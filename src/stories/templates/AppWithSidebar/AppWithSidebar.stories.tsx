@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppShell } from '../../sections/AppShell/AppShell';
 import { AppHeader } from '../../sections/AppHeader/AppHeader';
-import { Sidebar } from '../../sections/Sidebar/Sidebar';
-import { Logo } from '../../atoms/Logo/Logo';
-import { Heading } from '../../atoms/Heading/Heading';
-import { Paragraph } from '../../atoms/Paragraph/Paragraph';
+import { Sidebar, SidebarGroup } from '../../sections/Sidebar/Sidebar';
 import { Container } from '../../atoms/Container/Container';
+import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { SidebarNav } from '../../molecules/SidebarNav/SidebarNav';
 import { OrgSwitcher } from '../../molecules/OrgSwitcher/OrgSwitcher';
 import { UserMenu } from '../../molecules/UserMenu/UserMenu';
@@ -31,21 +29,25 @@ function Shell({ defaultSidebar, orgSwitcherOpen, userMenuOpen }: ShellProps) {
       header={
         <AppHeader
           sidebarId="sidebar"
-          start={<Heading level={1} size={6}>Proyectos</Heading>}
           notifications={<NotificationButton count={3} />}
           end={<UserMenu compact name="Ana García" email="ana.garcia@studiolxd.com" items={userMenuItems} defaultOpen={userMenuOpen} />}
         />
       }
       sidebar={
-        <Sidebar id="sidebar" logo={<Logo size="sm" />}>
-          <OrgSwitcher block current={orgs[0]} organizations={orgs} onOrgChange={() => {}} defaultOpen={orgSwitcherOpen} items={[{ type: 'link', label: 'Administrar organizaciones', href: '#orgs' }]} />
+        // Sin logotipo: el panel solo pinta su cabecera cuando se le pasa uno,
+        // y en las aplicaciones la marca ya está en la barra de arriba.
+        <Sidebar id="sidebar">
+          <SidebarGroup>
+            <OrgSwitcher block current={orgs[0]} organizations={orgs} onOrgChange={() => {}} defaultOpen={orgSwitcherOpen} items={[{ type: 'link', label: 'Administrar organizaciones', href: '#orgs' }]} />
+          </SidebarGroup>
           <SidebarNav entries={navEntries} defaultValue={['workspace']} />
         </Sidebar>
       }
     >
+      {/* El título de la página lo pone la página, no el marco: la barra de
+          arriba no lleva `start` y aquí no hay saludo — se retiró. */}
       <Container space="lg">
-        <Heading level={2} size={7}>Bienvenida a tu espacio de trabajo</Heading>
-        <Paragraph>Contenido de la página. La barra de arriba y la sidebar son las del sistema; el producto solo pone qué hay dentro.</Paragraph>
+        <PageIntro title="Panel" />
       </Container>
     </AppShell>
   );

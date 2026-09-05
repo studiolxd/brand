@@ -84,11 +84,12 @@ export interface OnboardingShellProps {
  * la principal sube a todo el ancho y la salida cae centrada debajo, como en
  * `Form` con acciones en bloque.
  *
- * **Y también la talla**: el pie reparte `lg` a lo que reciba por el contexto
- * de talla del sistema (`FormSizeContext`, el mismo que usa `Form` con sus
- * campos y `Hero` con sus acciones), así que las acciones del paso salen a la
- * talla de la superficie pública sin que cada pantalla tenga que acordarse de
- * pedirla — y a la misma que los campos del formulario que tienen encima.
+ * **Y también la talla**: la plantilla reparte `lg` al paso **entero**
+ * —progreso, cuerpo y acciones— por el contexto de talla del sistema
+ * (`FormSizeContext`, el mismo que usa `Form` con sus campos y `Hero` con sus
+ * acciones). El alta es superficie pública, así que todo lo que se ponga
+ * dentro —un `Form`, un campo suelto, un `AvatarUpload`— sale a la talla que
+ * le toca sin que la aplicación tenga que acordarse de pedirla.
  */
 export function OnboardingShell({
   children,
@@ -133,14 +134,19 @@ export function OnboardingShell({
       <div className={['onboarding-shell', className].filter(Boolean).join(' ')}>
         {!shell && marca && <header className="onboarding-shell__top onboarding-shell__bar">{marca}</header>}
 
-        <div className="onboarding-shell__step">
-          {stepper && <div className="onboarding-shell__progress">{stepper}</div>}
+        {/* La talla la reparte el paso entero, no solo su pie: el alta es
+            superficie pública, y ahí los controles van a `lg`. Envolviendo
+            únicamente las acciones, un `Form` o un `AvatarUpload` del cuerpo se
+            quedaban en `md` salvo que la aplicación se acordara de pasar la
+            talla a mano — que es exactamente lo que no debe hacer falta. */}
+        <FormSizeContext.Provider value="lg">
+          <div className="onboarding-shell__step">
+            {stepper && <div className="onboarding-shell__progress">{stepper}</div>}
 
-          <div className="onboarding-shell__body">{children}</div>
+            <div className="onboarding-shell__body">{children}</div>
 
-          {hayAcciones && (
-            <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
-              <FormSizeContext.Provider value="lg">
+            {hayAcciones && (
+              <div className="onboarding-shell__actions" role="group" aria-label={actionsLabel}>
                 {backAction}
                 {(exitAction || primaryAction) && (
                   <div className="onboarding-shell__decisions">
@@ -148,10 +154,10 @@ export function OnboardingShell({
                     {primaryAction}
                   </div>
                 )}
-              </FormSizeContext.Provider>
-            </div>
-          )}
-        </div>
+              </div>
+            )}
+          </div>
+        </FormSizeContext.Provider>
 
         {!shell && preferencias && <footer className="onboarding-shell__settings">{preferencias}</footer>}
       </div>

@@ -17,14 +17,11 @@ function Perfil({ theme }: Args) {
       current={0}
       theme={theme}
       primaryAction={<Button variant="primary" type="submit" form="alta-perfil">Continuar</Button>}
-      exitAction={<Button variant="text">Omitir por ahora</Button>}
     >
       <Stack align="stretch">
         <PageIntro title="¿Cómo te llamas?" />
         <Form id="alta-perfil" size="lg" onSubmit={(e) => e.preventDefault()}>
-          <InputField id="alta-nombre" label="Nombre" autoComplete="given-name" defaultValue="" />
-          <InputField id="alta-apellidos" label="Apellidos" autoComplete="family-name" />
-          <InputField id="alta-puesto" label="Puesto" helperText="Opcional. Ayuda a tus compañeros a saber a quién escribir." />
+          <InputField id="onboarding-name" label="Nombre completo" autoComplete="name" />
         </Form>
       </Stack>
     </OnboardingPage>
@@ -41,7 +38,11 @@ const meta: Meta<typeof Perfil> = {
 export default meta;
 type Story = StoryObj<typeof Perfil>;
 
-/** Paso 1 de 4: el nombre. Sin «Atrás», porque no hay a dónde volver. */
+/**
+ * Paso 1 de 4: el nombre con el que le verán sus compañeros. Es el único paso
+ * obligatorio de todos, así que no tiene salida — y tampoco «Atrás», porque no
+ * hay a dónde volver.
+ */
 export const PorDefecto: Story = {};
 
 export const EnSuperficieOscura: Story = {
@@ -51,7 +52,7 @@ export const EnSuperficieOscura: Story = {
 };
 
 export const Contrato: Story = {
-  name: 'Test — un h1, main-content, primer paso sin Atrás',
+  name: 'Test — un h1, main-content, un solo campo y sin salida',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -59,7 +60,9 @@ export const Contrato: Story = {
     await expect(canvasElement.querySelector('main#main-content')).not.toBeNull();
     await expect(canvasElement).toHaveTextContent('Paso 1 de 4');
     await expect(canvas.queryByRole('button', { name: 'Atrás' })).toBeNull();
+    await expect(canvas.getByLabelText('Nombre completo')).toBeInTheDocument();
     await expect(canvas.getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
-    await expect(canvas.getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
+    const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
+    await expect(within(acciones).getAllByRole('button')).toHaveLength(1);
   },
 };

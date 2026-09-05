@@ -18,21 +18,21 @@ interface Args {
 
 function Acceso({ socialProviders, magicLink, captcha, signupOpen, serverError, surface }: Args) {
   return (
-    <AuthPage title="Inicia sesión" description={signupOpen ? <>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link>.</> : undefined} surface={surface}>
+    <AuthPage title="Inicia sesión" description={signupOpen ? <>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link></> : undefined} surface={surface}>
       <Form
         size="lg"
         blockActions
         onSubmit={(e) => e.preventDefault()}
-        errors={serverError ? ['No hemos podido iniciar sesión. Comprueba el correo y la contraseña.'] : undefined}
+        errors={serverError ? ['Correo o contraseña incorrectos.'] : undefined}
         captcha={captcha ? <Captcha /> : undefined}
-        actions={<Button variant="primary" type="submit">{magicLink ? 'Enviar enlace' : 'Entrar'}</Button>}
+        actions={<Button variant="primary" type="submit">{magicLink ? 'Enviar enlace mágico' : 'Iniciar sesión'}</Button>}
         alternativesLabel={socialProviders.length ? 'O continúa con' : undefined}
         alternatives={socialProviders.length ? <SocialButtons providers={socialProviders} /> : undefined}
       >
-        <InputField id="acceso-email" label="Correo electrónico" type="email" autoComplete="email" />
+        <InputField id="sign-in-email" label="Correo electrónico" type="email" autoComplete="email" placeholder="Escribe tu correo electrónico" />
         {!magicLink && (
           <PasswordField
-            id="acceso-password"
+            id="sign-in-password"
             label="Contraseña"
             labelHidden={false}
             autoComplete="current-password"
@@ -77,6 +77,6 @@ export const Contrato: Story = {
     await expect(canvasElement.querySelector('main#main-content')).not.toBeNull();
     await expect(canvas.getByRole('button', { name: 'Google' })).toHaveClass('button--lg');
     await expect(canvas.getByRole('link', { name: '¿Olvidaste tu contraseña?' })).toBeInTheDocument();
-    await expect(canvas.getByRole('alert').textContent).toContain('No hemos podido');
+    await expect(canvas.getByRole('alert').textContent).toContain('Correo o contraseña incorrectos.');
   },
 };

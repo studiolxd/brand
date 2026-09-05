@@ -20,7 +20,7 @@ const QUE_PASARA = [
   {
     id: 'correo',
     title: `Te llega un correo a ${CORREO}`,
-    description: 'Llega en cuanto te invitan. Si no lo ves, comprueba la carpeta de no deseado.',
+    description: 'Llega en cuanto te invitan. Si no lo ves, comprueba la carpeta de correo no deseado.',
     icon: 'inbox' as const,
   },
   {
@@ -38,24 +38,23 @@ interface Args {
 function SalaDeEspera({ theme }: Args) {
   return (
     <OnboardingPage
-      steps={[{ id: 'espera', label: 'Sala de espera' }]}
-      current={0}
+      steps={null}
       theme={theme}
       exitAction={<Button variant="text">Cerrar sesión</Button>}
     >
       <Stack align="stretch" gap="lg">
-        <PageIntro title="Tu perfil está listo" />
+        <PageIntro title="Ya casi está" />
         <Paragraph>
-          Ahora toca esperar. Aquí solo se entra en una organización por invitación, así que no hay
-          nada más que puedas hacer desde esta pantalla — y preferimos decírtelo a que lo descubras
-          probando.
+          Esta aplicación funciona por invitación. Pide a un administrador de la organización que te
+          invite; el correo de invitación te traerá de vuelta aquí.
         </Paragraph>
         <section>
           <Heading level={2} size={5}>Qué pasará</Heading>
           <Steps items={QUE_PASARA} />
         </section>
         <Paragraph>
-          Puedes cerrar sesión sin perder nada: tu perfil queda guardado y te espera aquí cuando abras el enlace del correo.
+          Puedes cerrar sesión sin perder nada: tu perfil queda guardado y te espera aquí cuando
+          abras el enlace del correo.
         </Paragraph>
       </Stack>
     </OnboardingPage>
@@ -75,8 +74,8 @@ type Story = StoryObj<typeof SalaDeEspera>;
 /**
  * El usuario completó su perfil, no pertenece a ninguna organización y la
  * creación es solo por invitación: no puede hacer nada salvo esperar. Es un
- * flujo de un solo paso, así que el `Stepper` no se pinta — la misma plantilla
- * que las cuatro pantallas anteriores, sin condicionales.
+ * flujo sin pasos, así que el `Stepper` no se monta — la misma plantilla que
+ * las cuatro pantallas anteriores, sin condicionales.
  */
 export const PorDefecto: Story = {};
 

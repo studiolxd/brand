@@ -8,6 +8,8 @@ import ReactCrop, {
   type PixelCrop,
 } from 'react-image-crop';
 import { Button } from '../../atoms/Button/Button';
+import { Spinner } from '../../atoms/Spinner/Spinner';
+import { Alert } from '../Alert/Alert';
 import { Modal } from '../Modal/Modal';
 import { cropImageToBlob } from './crop';
 // El recortador es inservible sin su propia hoja (marco de selección y
@@ -33,6 +35,16 @@ export interface ImageCropDialogProps {
   confirmLabel: ReactNode;
   /** Etiqueta del botón de cierre del diálogo. */
   closeLabel?: string;
+  /**
+   * Lo que se dice mientras la imagen se descarga y descodifica. Se anuncia y
+   * se ve. Default castellano: «Cargando imagen…».
+   */
+  loadingLabel?: string;
+  /**
+   * Lo que se dice cuando la imagen no se puede cargar. Default castellano:
+   * «No hemos podido cargar la imagen. Prueba con otro archivo.».
+   */
+  errorMessage?: string;
   onConfirm: (blob: Blob) => void | Promise<void>;
   onClose: () => void;
   className?: string;
@@ -57,6 +69,8 @@ export function ImageCropDialog({
   cancelLabel,
   confirmLabel,
   closeLabel,
+  loadingLabel = 'Cargando imagen…',
+  errorMessage = 'No hemos podido cargar la imagen. Prueba con otro archivo.',
   onConfirm,
   onClose,
   className,
@@ -64,6 +78,19 @@ export function ImageCropDialog({
   const imgRef = useRef<HTMLImageElement>(null);
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
+  // Cómo va la imagen. Elegir un archivo abre el diálogo antes de que el
+  // navegador haya descodificado nada: sin este estado el título salía solo,
+  // sin hueco ni señal, y parecía roto.
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  // Otra imagen es otra carga: se reinicia durante el render, no con un efecto,
+  // para que el primer pintado del archivo nuevo ya salga cargando.
+  const [lastUrl, setLastUrl] = useState(sourceUrl);
+  if (sourceUrl !== lastUrl) {
+    setLastUrl(sourceUrl);
+    setStatus('loading');
+    setCrop(undefined);
+    setCompletedCrop(undefined);
+  }
 
   const close = () => {
     setCrop(undefined);
@@ -106,8 +133,15 @@ export function ImageCropDialog({
       }
     >
       <div className={['image-crop-dialog', className].filter(Boolean).join(' ')}>
-        {sourceUrl && (
-          <div className="image-crop-dialog__area">
+        {/* El hueco se reserva desde el primer render y no cambia de alto al
+            llegar la imagen: la señal de carga, el error y la propia imagen
+            comparten la misma celda. */}
+        <div className="image-crop-dialog__area">
+          {status === 'loading' && <Spinner size="lg" label={loadingLabel} />}
+          {status === 'error' && (
+            <Alert variant="error" description={errorMessage} className="image-crop-dialog__error" />
+          )}
+          {sourceUrl && status !== 'error' && (
             <ReactCrop
               crop={crop}
               onChange={(_, percentCrop) => setCrop(percentCrop)}
@@ -123,6 +157,7 @@ export function ImageCropDialog({
                 alt=""
                 onLoad={(e) => {
                   const { width, height } = e.currentTarget;
+                  setStatus('ready');
                   setCrop(
                     centerCrop(
                       makeAspectCrop({ unit: '%', width: 80 }, aspect, width, height),
@@ -131,11 +166,11 @@ export function ImageCropDialog({
                     ),
                   );
                 }}
+                onError={() => setStatus('error')}
               />
             </ReactCrop>
-          </div>
-        )}
-
+          )}
+        </div>
       </div>
     </Modal>
   );

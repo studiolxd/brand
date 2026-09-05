@@ -138,6 +138,26 @@ describe('AvatarUpload', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('No hemos podido guardar la imagen.');
   });
 
+  it('pinta la pista de arrastre bajo el botón, y su texto es una prop', () => {
+    const { rerender } = render(<AvatarUpload {...base} />);
+    expect(screen.getByText('…o arrastra la imagen hasta el avatar')).toBeInTheDocument();
+
+    rerender(<AvatarUpload {...base} dropHintLabel="…o arrastra la imagen hasta el logo" />);
+    expect(screen.getByText('…o arrastra la imagen hasta el logo')).toBeInTheDocument();
+  });
+
+  it('sin pista, no hay nodo que la pinte', () => {
+    const { container } = render(<AvatarUpload {...base} dropHintLabel="" />);
+    expect(container.querySelector('.avatar-upload__hint')).not.toBeInTheDocument();
+  });
+
+  it('la pista no se cuela en la descripción del botón: ahí van los formatos', () => {
+    render(<AvatarUpload {...base} maxSize={5 * 1024 * 1024} />);
+    expect(screen.getByRole('button', { name: 'Subir' })).toHaveAccessibleDescription(
+      'JPEG, PNG, WEBP · máx. 5.0 MB',
+    );
+  });
+
   it('acumula className sin perder la clase base', () => {
     const { container } = render(<AvatarUpload {...base} className="ajuste" />);
     expect(container.querySelector('.avatar-upload.ajuste')).toBeInTheDocument();

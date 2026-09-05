@@ -1,0 +1,30 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Pages/El panel de estado" />
+
+# El panel de estado
+
+`status.slxd.app` **montado con las piezas del DS y datos falsos**: `AppRoot` + `PublicPageShell` + `SiteHeader` + `PageIntro` + `Alert` + `Heading`/`Link`/`Tag` + `UptimeBars` + `LegalFooter`. Sin lógica: sin monitor, sin red, sin husos horarios.
+
+Es **la norma**, igual que el resto de páginas: si la aplicación lo monta distinto, la aplicación está mal.
+
+## Lo que lo hace distinto de las demás páginas públicas
+
+- **La cabecera no lleva índice.** El panel es un sitio de una sola página que debe seguir de pie cuando las aplicaciones no lo están, y un menú lleno de enlaces a servicios caídos sería una promesa que no puede cumplir. Al no recibir ni índice ni ajustes ni idioma, `SiteHeader` deja de montar el panel y su botón de menú desaparece solo. El logotipo sí enlaza —a la web—: es una invitación a volver, no una promesa de servicio.
+- **Las preferencias van al pie.** Idioma y tema son preferencias globales: no son navegación ni son una acción del contenido, así que viven al borde inferior, en una `section` con nombre, encima de las legales. Es el mismo criterio del alta.
+- **Las legales son las suyas.** El panel vive en otro servidor justo para seguir en pie cuando la suite se cae; unos enlaces que mueran con ella serían el único trozo roto de la página que la gente mira precisamente durante la caída.
+
+## Los cinco estados
+
+Todo operativo, parcialmente disponible, caído, sin datos y cargando. Los tres primeros son respuestas del monitor y solo cambian el resumen de arriba y los `Tag` de cada aplicación; los dos últimos **no son estados del servicio, sino de la consulta**:
+
+- **Sin datos** es que el monitor no ha contestado. Desde la página no se puede saber por qué —red, CORS, el propio monitor caído—, así que no se inventa un veredicto: se dice que no se puede comprobar y se recuerda que probablemente todo funcione.
+- **Cargando** enseña el aviso en texto y el hueco de lo que va a llegar (`Skeleton`), con `aria-busy`.
+
+## La tira
+
+`UptimeBars` no sabe de tiempo: recibe treinta puntos con su porcentaje y su etiqueta ya escrita. Los cortes se piensan **en minutos caídos al día** —hasta 5 el día está bien, hasta 60 está tocado, de ahí para abajo está caído—: el margen del verde es deliberado, porque un fallo aislado de comprobación no es un incidente. La media de 30 días va siempre en texto: es la alternativa a mirar treinta rectángulos.
+
+Los datos de ejemplo cuentan una historia creíble y no ruido: un par de días tocados en Bricks y sus servicios, una tarde entera caída en Localizia y su worker, y LMS MCP sin monitorizar su primera semana porque se dio de alta después.
+
+Lo que **no** va aquí: el cliente del monitor, el reparto de eventos en días de calendario ni el refresco cada minuto. Eso es producto.

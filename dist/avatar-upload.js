@@ -6,117 +6,117 @@ import { Avatar as n } from "./avatar.js";
 import { n as r } from "./_shared/form-size.js";
 import { Button as i } from "./button.js";
 import { n as ee, t as te } from "./_shared/validate.js";
-import { t as ne } from "./_shared/env.js";
-import { t as re } from "./_shared/ImageCropDialog.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-import { useCallback as ie, useEffect as s, useId as ae, useRef as c, useState as l } from "react";
+import { t as a } from "./_shared/env.js";
+import { t as o } from "./_shared/ImageCropDialog.js";
+import { jsx as s, jsxs as c } from "react/jsx-runtime";
+import { useCallback as l, useEffect as u, useId as d, useRef as f, useState as p } from "react";
 //#region src/stories/molecules/AvatarUpload/AvatarUpload.tsx
-var u = {
+var ne = {
 	sm: "2xl",
 	md: "3xl",
 	lg: "4xl"
-}, oe = {
+}, re = {
 	sm: "md",
 	md: "lg",
 	lg: "xl"
 };
-function d(e) {
+function ie(e) {
 	return e.split(",").map((e) => e.trim()).filter(Boolean).map((e) => e.startsWith(".") ? e.slice(1) : e.split("/")[1] ?? e).map((e) => e.toUpperCase()).join(", ");
 }
-function f({ src: f, name: p, alt: m, shape: h = "circle", size: se, accept: g = "image/jpeg,image/png,image/webp", maxSize: _, outputMimeType: v = "image/jpeg", outputSize: y, disabled: b = !1, busy: x = !1, errorMessage: S, onChange: C, onSelect: w, onError: T, buttonLabel: E = "Subir", buttonAccessibleLabel: ce, hintLabel: le, formatsLabel: ue, maxSizeHint: de = (e) => `máx. ${e}`, invalidTypeError: D = (e) => `Formato no admitido. Se aceptan ${e}.`, tooLargeError: O = (e) => `El archivo pesa demasiado. El máximo es ${e}.`, dropActiveMessage: fe = "Suelta la imagen sobre el avatar para subirla", cropTitle: k = "Recortar imagen", cropDescription: A, cropCancelLabel: j = "Cancelar", cropConfirmLabel: M = "Guardar", cropCloseLabel: N = "Cerrar", className: P }) {
-	let F = r(se), I = c(null), L = c(null), [R, z] = l(null), [B, V] = l(!1), [pe, H] = l(!1), [U, W] = l(null), G = ae(), K = `${G}-hint`, q = `${G}-error`, J = ue ?? d(g), Y = le ?? [J, _ === void 0 ? null : de(te(_))].filter(Boolean).join(" · "), X = U ?? S, Z = b || x, Q = ce ?? E;
-	ne() && !Q.toLowerCase().includes(E.toLowerCase()) && console.warn(`[AvatarUpload] El nombre accesible del botón ("${Q}") no contiene su texto visible ("${E}"). WCAG 2.5.3 (Label in Name) lo exige: quien navega por voz dice lo que ve, y con estos textos no encontraría el control.`), s(() => {
-		L.current = R;
-	}, [R]), s(() => () => {
-		L.current && URL.revokeObjectURL(L.current.url);
-	}, []), s(() => {
+function m({ src: m, name: ae, alt: h, shape: g = "circle", size: oe, accept: _ = "image/jpeg,image/png,image/webp", maxSize: v, outputMimeType: y = "image/jpeg", outputSize: b, disabled: se = !1, busy: x = !1, errorMessage: ce, onChange: le, onSelect: S, onError: C, buttonLabel: w = "Subir", buttonAccessibleLabel: T, hintLabel: ue, formatsLabel: de, maxSizeHint: fe = (e) => `máx. ${e}`, invalidTypeError: E = (e) => `Formato no admitido. Se aceptan ${e}.`, tooLargeError: D = (e) => `El archivo pesa demasiado. El máximo es ${e}.`, dropActiveMessage: pe = "Suelta la imagen sobre el avatar para subirla", dropHintLabel: O = "…o arrastra la imagen hasta el avatar", cropTitle: me = "Recortar imagen", cropDescription: k, cropCancelLabel: A = "Cancelar", cropConfirmLabel: j = "Guardar", cropCloseLabel: M = "Cerrar", cropLoadingLabel: N, cropErrorMessage: P, className: F }) {
+	let I = r(oe), L = f(null), R = f(null), [z, B] = p(null), [V, H] = p(!1), [he, U] = p(!1), [ge, W] = p(null), G = d(), K = `${G}-hint`, q = `${G}-error`, J = de ?? ie(_), Y = ue ?? [J, v === void 0 ? null : fe(te(v))].filter(Boolean).join(" · "), X = ge ?? ce, Z = se || x, Q = T ?? w;
+	a() && !Q.toLowerCase().includes(w.toLowerCase()) && console.warn(`[AvatarUpload] El nombre accesible del botón ("${Q}") no contiene su texto visible ("${w}"). WCAG 2.5.3 (Label in Name) lo exige: quien navega por voz dice lo que ve, y con estos textos no encontraría el control.`), u(() => {
+		R.current = z;
+	}, [z]), u(() => () => {
+		R.current && URL.revokeObjectURL(R.current.url);
+	}, []), u(() => {
 		if (Z) return;
 		let e = 0, t = (e) => Array.from(e.dataTransfer?.types ?? []).includes("Files"), n = (n) => {
-			t(n) && (e += 1, V(!0));
+			t(n) && (e += 1, H(!0));
 		}, r = () => {
-			e = Math.max(0, e - 1), e === 0 && V(!1);
+			e = Math.max(0, e - 1), e === 0 && H(!1);
 		}, i = () => {
-			e = 0, V(!1);
+			e = 0, H(!1);
 		};
 		return window.addEventListener("dragenter", n), window.addEventListener("dragleave", r), window.addEventListener("drop", i), window.addEventListener("dragend", i), () => {
-			window.removeEventListener("dragenter", n), window.removeEventListener("dragleave", r), window.removeEventListener("drop", i), window.removeEventListener("dragend", i), V(!1);
+			window.removeEventListener("dragenter", n), window.removeEventListener("dragleave", r), window.removeEventListener("drop", i), window.removeEventListener("dragend", i), H(!1);
 		};
 	}, [Z]);
-	let $ = ie((e) => {
-		let t = ee(e, g, _, O, D(J));
+	let $ = l((e) => {
+		let t = ee(e, _, v, D, E(J));
 		if (t) {
-			W(t), T?.(t);
+			W(t), C?.(t);
 			return;
 		}
-		W(null), w?.(e), z({
+		W(null), S?.(e), B({
 			url: URL.createObjectURL(e),
 			file: e
 		});
 	}, [
-		g,
 		_,
-		O,
+		v,
 		D,
+		E,
 		J,
-		T,
-		w
-	]), me = () => {
-		R && URL.revokeObjectURL(R.url), z(null);
-	}, he = async (e) => {
-		R && await C(e, R.file);
+		C,
+		S
+	]), _e = () => {
+		z && URL.revokeObjectURL(z.url), B(null);
+	}, ve = async (e) => {
+		z && await le(e, z.file);
 	};
-	return /* @__PURE__ */ o("div", {
+	return /* @__PURE__ */ c("div", {
 		className: [
 			"avatar-upload",
-			h === "square" ? "avatar-upload--square" : "",
-			B ? "avatar-upload--armed" : "",
-			pe ? "avatar-upload--over" : "",
+			g === "square" ? "avatar-upload--square" : "",
+			V ? "avatar-upload--armed" : "",
+			he ? "avatar-upload--over" : "",
 			Z ? "avatar-upload--inert" : "",
-			P ?? ""
+			F ?? ""
 		].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ o("div", {
+			/* @__PURE__ */ c("div", {
 				className: "avatar-upload__target",
 				onClick: () => {
-					Z || I.current?.click();
+					Z || L.current?.click();
 				},
 				onDragEnter: (e) => {
-					e.preventDefault(), Z || H(!0);
+					e.preventDefault(), Z || U(!0);
 				},
 				onDragOver: (e) => {
-					e.preventDefault(), !Z && (e.dataTransfer.dropEffect = "copy", H(!0));
+					e.preventDefault(), !Z && (e.dataTransfer.dropEffect = "copy", U(!0));
 				},
 				onDragLeave: (e) => {
-					e.currentTarget.contains(e.relatedTarget) || H(!1);
+					e.currentTarget.contains(e.relatedTarget) || U(!1);
 				},
 				onDrop: (e) => {
-					if (e.preventDefault(), H(!1), V(!1), Z) return;
+					if (e.preventDefault(), U(!1), H(!1), Z) return;
 					let t = e.dataTransfer.files?.[0];
 					t && $(t);
 				},
-				children: [/* @__PURE__ */ a(n, {
-					src: f ?? void 0,
-					name: p,
-					...m === void 0 ? {} : { alt: m },
-					shape: h,
-					size: u[F]
-				}), /* @__PURE__ */ a("span", {
+				children: [/* @__PURE__ */ s(n, {
+					src: m ?? void 0,
+					name: ae,
+					...h === void 0 ? {} : { alt: h },
+					shape: g,
+					size: ne[I]
+				}), /* @__PURE__ */ s("span", {
 					className: "avatar-upload__overlay",
 					"aria-hidden": "true",
-					children: /* @__PURE__ */ a(e, {
+					children: /* @__PURE__ */ s(e, {
 						name: "upload",
-						size: oe[F]
+						size: re[I]
 					})
 				})]
 			}),
-			/* @__PURE__ */ o("div", {
+			/* @__PURE__ */ c("div", {
 				className: "avatar-upload__body",
 				children: [
-					/* @__PURE__ */ a("input", {
-						ref: I,
+					/* @__PURE__ */ s("input", {
+						ref: L,
 						type: "file",
 						className: "avatar-upload__input",
-						accept: g,
+						accept: _,
 						tabIndex: -1,
 						"aria-hidden": "true",
 						disabled: Z,
@@ -125,20 +125,24 @@ function f({ src: f, name: p, alt: m, shape: h = "circle", size: se, accept: g =
 							t && $(t), e.target.value = "";
 						}
 					}),
-					/* @__PURE__ */ a(i, {
+					/* @__PURE__ */ s(i, {
 						variant: "outline",
-						size: F,
+						size: I,
 						disabled: Z,
-						onClick: () => I.current?.click(),
-						...Q === E ? {} : { "aria-label": Q },
+						onClick: () => L.current?.click(),
+						...Q === w ? {} : { "aria-label": Q },
 						"aria-describedby": [Y ? K : null, X ? q : null].filter(Boolean).join(" ") || void 0,
-						children: E
+						children: w
 					}),
-					Y && /* @__PURE__ */ a(t, {
+					Y && /* @__PURE__ */ s(t, {
 						id: K,
 						children: Y
 					}),
-					X && /* @__PURE__ */ a("span", {
+					O && /* @__PURE__ */ s("span", {
+						className: "avatar-upload__hint",
+						children: O
+					}),
+					X && /* @__PURE__ */ s("span", {
 						id: q,
 						className: "avatar-upload__error",
 						role: "alert",
@@ -146,26 +150,28 @@ function f({ src: f, name: p, alt: m, shape: h = "circle", size: se, accept: g =
 					})
 				]
 			}),
-			/* @__PURE__ */ a(t, {
+			/* @__PURE__ */ s(t, {
 				role: "status",
-				children: B ? fe : ""
+				children: V ? pe : ""
 			}),
-			/* @__PURE__ */ a(re, {
-				sourceUrl: R?.url ?? null,
-				title: k,
-				description: A,
-				circularCrop: h === "circle",
-				outputMimeType: v,
-				...y === void 0 ? {} : { outputSize: y },
+			/* @__PURE__ */ s(o, {
+				sourceUrl: z?.url ?? null,
+				title: me,
+				description: k,
+				circularCrop: g === "circle",
+				outputMimeType: y,
+				...b === void 0 ? {} : { outputSize: b },
 				busy: x,
-				cancelLabel: j,
-				confirmLabel: M,
-				closeLabel: N,
-				onConfirm: he,
-				onClose: me
+				cancelLabel: A,
+				confirmLabel: j,
+				closeLabel: M,
+				...N === void 0 ? {} : { loadingLabel: N },
+				...P === void 0 ? {} : { errorMessage: P },
+				onConfirm: ve,
+				onClose: _e
 			})
 		]
 	});
 }
 //#endregion
-export { f as AvatarUpload };
+export { m as AvatarUpload };

@@ -50,6 +50,31 @@ export const Panoramico: Story = {
   args: { ...base, title: 'Recortar portada', aspect: 16 / 9, outputSize: 1024 },
 };
 
+/**
+ * Mientras la imagen viaja. Elegir un archivo abre el diálogo antes de que el
+ * navegador haya descodificado nada, así que el hueco se reserva desde el
+ * primer render —mide lo mismo que medirá con la imagen— y enseña el `Spinner`
+ * del sistema con su texto. Cuando la imagen llega, aparece en su sitio sin
+ * mover nada.
+ *
+ * La fuente es una dirección que no lleva a ninguna parte (una IP privada sin
+ * ruta): la conexión se queda esperando, que es exactamente lo que hace una red
+ * lenta. Sin red, el navegador la descarta en el acto y la story enseña el
+ * error — el otro camino del mismo hueco.
+ */
+export const Cargando: Story = {
+  args: { ...base, sourceUrl: 'https://10.255.255.1/logotipo.png' },
+};
+
+/**
+ * La imagen no se puede cargar: el mensaje ocupa el mismo hueco que habría
+ * ocupado ella. La fuente es un archivo que dice ser PNG y no lo es.
+ */
+export const ConError: Story = {
+  name: 'La imagen no carga',
+  args: { ...base, sourceUrl: 'data:image/png;base64,' + btoa('esto no es una imagen') },
+};
+
 export const Ocupado: Story = {
   name: 'Subiendo (busy)',
   args: { ...base, busy: true },

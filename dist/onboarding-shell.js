@@ -34,23 +34,23 @@ function a({ children: a, brand: o, switchers: s, stepper: c, primaryAction: l, 
 					className: "onboarding-shell__top onboarding-shell__bar",
 					children: v
 				}),
-				/* @__PURE__ */ i("div", {
-					className: "onboarding-shell__step",
-					children: [
-						c && /* @__PURE__ */ r("div", {
-							className: "onboarding-shell__progress",
-							children: c
-						}),
-						/* @__PURE__ */ r("div", {
-							className: "onboarding-shell__body",
-							children: a
-						}),
-						g && /* @__PURE__ */ r("div", {
-							className: "onboarding-shell__actions",
-							role: "group",
-							"aria-label": f,
-							children: /* @__PURE__ */ i(e.Provider, {
-								value: "lg",
+				/* @__PURE__ */ r(e.Provider, {
+					value: "lg",
+					children: /* @__PURE__ */ i("div", {
+						className: "onboarding-shell__step",
+						children: [
+							c && /* @__PURE__ */ r("div", {
+								className: "onboarding-shell__progress",
+								children: c
+							}),
+							/* @__PURE__ */ r("div", {
+								className: "onboarding-shell__body",
+								children: a
+							}),
+							g && /* @__PURE__ */ i("div", {
+								className: "onboarding-shell__actions",
+								role: "group",
+								"aria-label": f,
 								children: [u, (d || l) && /* @__PURE__ */ i("div", {
 									className: "onboarding-shell__decisions",
 									children: [d && /* @__PURE__ */ r("div", {
@@ -59,8 +59,8 @@ function a({ children: a, brand: o, switchers: s, stepper: c, primaryAction: l, 
 									}), l]
 								})]
 							})
-						})
-					]
+						]
+					})
 				}),
 				!m && _ && /* @__PURE__ */ r("footer", {
 					className: "onboarding-shell__settings",

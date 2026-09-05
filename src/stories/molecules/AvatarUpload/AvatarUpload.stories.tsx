@@ -245,3 +245,24 @@ export const ContratoCabeEnMovil: Story = {
     await expect(boton.top).toBeGreaterThanOrEqual(avatar.bottom);
   },
 };
+
+/**
+ * El botón no flota a media altura del retrato: la columna se alinea con el
+ * borde inferior del avatar, y bajo el botón va la pista de que además se
+ * puede arrastrar —lo único de esta pieza que no se adivina mirándola—.
+ */
+export const ContratoAlPie: Story = {
+  name: 'Test — el botón y su pista cierran a la altura del avatar',
+  tags: ['!dev'],
+  args: { src: undefined },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const columna = canvasElement.querySelector('.avatar-upload__body')!.getBoundingClientRect();
+    const diana = canvasElement.querySelector('.avatar-upload__target')!.getBoundingClientRect();
+    await expect(Math.round(columna.bottom)).toBe(Math.round(diana.bottom));
+
+    const pista = canvas.getByText('…o arrastra la imagen hasta el avatar');
+    const boton = canvas.getByRole('button', { name: 'Subir avatar' }).getBoundingClientRect();
+    await expect(pista.getBoundingClientRect().top).toBeGreaterThanOrEqual(boton.bottom);
+  },
+};

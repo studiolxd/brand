@@ -8,23 +8,27 @@ import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Stack } from '../../atoms/Stack/Stack';
 
 interface Args {
+  opcional: boolean;
   theme: 'light' | 'dark';
 }
 
-function Organizacion({ theme }: Args) {
+function Organizacion({ opcional, theme }: Args) {
   return (
     <OnboardingPage
       current={1}
       theme={theme}
-      backAction={<Button variant="outline">Atrás</Button>}
       primaryAction={<Button variant="primary" type="submit" form="alta-organizacion">Continuar</Button>}
-      exitAction={<Button variant="text">Omitir por ahora</Button>}
+      exitAction={opcional ? <Button variant="text">Omitir</Button> : undefined}
     >
       <Stack align="stretch">
-        <PageIntro title="¿Cómo se llama tu organización?" />
+        <PageIntro title="Pon nombre a tu organización" />
         <Form id="alta-organizacion" size="lg" onSubmit={(e) => e.preventDefault()}>
-          <InputField id="alta-org-nombre" label="Nombre de la organización" defaultValue="Ayuntamiento de Sant Cugat" />
-          <InputField id="alta-org-dominio" label="Dominio" helperText="Se usa para la dirección de tu espacio: santcugat.studiolxd.com" defaultValue="santcugat" />
+          <InputField
+            id="create-org-name"
+            label="Nombre de la organización"
+            placeholder="Escribe el nombre de tu organización"
+            defaultValue="Ayuntamiento de Sant Cugat"
+          />
         </Form>
       </Stack>
     </OnboardingPage>
@@ -35,14 +39,24 @@ const meta: Meta<typeof Organizacion> = {
   title: 'Pages/Onboarding · Nombre de la organización',
   component: Organizacion,
   parameters: { layout: 'fullscreen' },
-  args: { theme: 'light' },
-  argTypes: { theme: { control: { type: 'radio' }, options: ['light', 'dark'], description: 'Tema que enseña el conmutador.' } },
+  args: { opcional: false, theme: 'light' },
+  argTypes: {
+    opcional: { description: 'Crear organización se ofrece pero no se exige: entonces, y solo entonces, hay salida.' },
+    theme: { control: { type: 'radio' }, options: ['light', 'dark'], description: 'Tema que enseña el conmutador.' },
+  },
 };
 export default meta;
 type Story = StoryObj<typeof Organizacion>;
 
-/** Paso 2 de 4: el nombre de la organización. */
+/**
+ * Paso 2 de 4: el nombre de la organización, y nada más — es el campo que la
+ * crea. Ningún paso es alcanzable todavía: el perfil no es un destino y el
+ * logotipo y las invitaciones no existen sin la organización.
+ */
 export const PorDefecto: Story = {};
+
+/** Cuando crear organización se ofrece pero no se exige, aparece la salida. */
+export const Opcional: Story = { args: { opcional: true } };
 
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
@@ -51,14 +65,16 @@ export const EnSuperficieOscura: Story = {
 };
 
 export const Contrato: Story = {
-  name: 'Test — segundo paso, con Atrás y el primero alcanzable',
+  name: 'Test — segundo paso, sin Atrás y sin ningún paso alcanzable',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvasElement).toHaveTextContent('Paso 2 de 4');
-    await expect(canvas.getByRole('button', { name: 'Atrás' })).toHaveClass('button--outline');
+    await expect(canvas.queryByRole('button', { name: 'Atrás' })).toBeNull();
+    await expect(canvas.getByLabelText('Nombre de la organización')).toBeInTheDocument();
     const progreso = canvas.getByRole('list', { name: 'Progreso' });
-    // Solo el paso ya hecho es alcanzable; los pendientes nunca.
-    await expect(within(progreso).getAllByRole('button')).toHaveLength(1);
+    // Nada que pulsar: el perfil no es un destino, y los dos pasos siguientes
+    // no existen hasta que esta pantalla cree la organización.
+    await expect(within(progreso).queryAllByRole('button')).toHaveLength(0);
   },
 };

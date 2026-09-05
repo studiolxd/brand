@@ -77,6 +77,12 @@ export interface AvatarUploadProps {
      */
     dropActiveMessage?: string;
     /**
+     * Pista **visible** bajo el botón: dice que además se puede arrastrar, que
+     * es lo único de esta pieza que no se adivina mirándola. Default castellano:
+     * "…o arrastra la imagen hasta el avatar". Con cadena vacía no se pinta.
+     */
+    dropHintLabel?: string;
+    /**
      * Título del diálogo de recorte. Default: "Recortar imagen" (castellano).
      * Es una acción, no una invitación: nombra lo que va a pasar, sin segunda
      * persona, como el resto de títulos de diálogo del sistema.
@@ -94,6 +100,10 @@ export interface AvatarUploadProps {
     cropConfirmLabel?: ReactNode;
     /** Etiqueta del aspa de cerrar. Default: "Cerrar". */
     cropCloseLabel?: string;
+    /** Lo que se dice mientras la imagen se carga en el diálogo. Default: "Cargando imagen…". */
+    cropLoadingLabel?: string;
+    /** Lo que se dice cuando la imagen no se puede cargar. Default: "No hemos podido cargar la imagen. Prueba con otro archivo.". */
+    cropErrorMessage?: string;
     /** Se añade DESPUÉS de las clases propias del componente. */
     className?: string;
 }
@@ -112,4 +122,4 @@ export interface AvatarUploadProps {
  * arrastrar no existe para el teclado, así que es la vía principal, no un
  * respaldo.
  */
-export declare function AvatarUpload({ src, name, alt, shape, size: sizeProp, accept, maxSize, outputMimeType, outputSize, disabled, busy, errorMessage, onChange, onSelect, onError, buttonLabel, buttonAccessibleLabel, hintLabel, formatsLabel, maxSizeHint, invalidTypeError, tooLargeError, dropActiveMessage, cropTitle, cropDescription, cropCancelLabel, cropConfirmLabel, cropCloseLabel, className, }: AvatarUploadProps): import("react/jsx-runtime").JSX.Element;
+export declare function AvatarUpload({ src, name, alt, shape, size: sizeProp, accept, maxSize, outputMimeType, outputSize, disabled, busy, errorMessage, onChange, onSelect, onError, buttonLabel, buttonAccessibleLabel, hintLabel, formatsLabel, maxSizeHint, invalidTypeError, tooLargeError, dropActiveMessage, dropHintLabel, cropTitle, cropDescription, cropCancelLabel, cropConfirmLabel, cropCloseLabel, cropLoadingLabel, cropErrorMessage, className, }: AvatarUploadProps): import("react/jsx-runtime").JSX.Element;

@@ -20,7 +20,9 @@ selección; el DS pone el diálogo, las acciones y el volcado a lienzo
 
 - **Área de recorte**: la imagen dentro de `ReactCrop`, con un fondo propio
   (`area-bg`) que se ve alrededor mientras la imagen no llena el ancho
-  disponible.
+  disponible. **El hueco se reserva desde el primer render** (`area-min-height`,
+  que vale lo mismo que `area-max-height`): la imagen aparece dentro de él sin
+  mover nada.
 - **Acciones**: `cancelLabel` (outline) y `confirmLabel` (primary). Van en el
   pie del `Modal`, así que se alinean a la derecha en una fila y se apilan a
   todo el ancho en móvil, con la principal arriba. `confirmLabel` está
@@ -39,6 +41,30 @@ el diálogo no sabe qué se está recortando. Dos criterios para escribirlas:
   nombre «la vista previa» está señalando justo lo que se está mirando, y
   «reposicionar» no es lo que nadie cree estar haciendo con las manos. Pásala
   solo si en tu caso hay algo que decir que no esté ya a la vista.
+
+## Mientras la imagen carga
+
+<Canvas of={ImageCropDialogStories.Cargando} />
+
+Elegir un archivo abre el diálogo **antes** de que el navegador haya
+descodificado nada. Sin decir nada, lo que se veía era el título flotando sobre
+el vacío: un diálogo roto. Así que el área existe desde el primer render, mide
+lo mismo que medirá con la imagen dentro y enseña el `Spinner` del sistema con
+su texto (`loadingLabel`, anunciado además por `role="status"`). Cuando la
+imagen dispara su `load`, ocupa el hueco que ya estaba reservado —**sin salto de
+maqueta**— y la señal desaparece.
+
+Elegir otra imagen vuelve a empezar por la carga: la selección anterior no se
+arrastra a la nueva.
+
+## Cuando la imagen no carga
+
+<Canvas of={ImageCropDialogStories.ConError} />
+
+Un archivo corrupto, un object URL ya revocado, un formato que el navegador dice
+aceptar y luego no descodifica: el `error` de la imagen se enseña como lo que es
+—un `Alert` del sistema con `errorMessage`—, en el mismo hueco, y la imagen rota
+no se pinta. Guardar sigue deshabilitado, porque no hay nada que recortar.
 
 ## Selección circular
 
@@ -97,6 +123,8 @@ oscura…) los hereda por composición — no se repiten aquí.
 - El cierre programático respeta `busy`: mientras se sube el recorte, ni
   Escape ni el velo cierran el diálogo — solo lo hace el consumidor al
   terminar.
+- Mientras la imagen carga, el `Spinner` va con `role="status"`: el estado se
+  oye, no solo se ve. El error va con `role="alert"`, que lo pone el `Alert`.
 - La imagen dentro del área de recorte lleva `alt=""`: es puramente
   interactiva (el usuario la ve y la arrastra), no aporta información que no
   esté ya en el `title` del diálogo.

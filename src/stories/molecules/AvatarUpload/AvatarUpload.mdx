@@ -35,6 +35,12 @@ Arrastrar no existe para el teclado. El botón es **la vía principal**, no un r
 
 El `<input type="file">` real vive oculto y fuera del tabulador; el botón lo dispara. Así hay **una** parada de teclado por control, con su nombre, su foco visible y su descripción.
 
+**El botón cierra a la altura del avatar, no a media altura.** La columna del botón se alinea con el borde inferior del retrato (`align-items: flex-end`), y no con su centro: bajo el botón va la pista de arrastre, que habla del avatar, así que la columna termina donde termina aquello de lo que habla. Flotando a media altura, el par botón + pista quedaba descolgado de un retrato de 192px sin línea de base común con nada.
+
+**Y bajo el botón, la pista de arrastre.** `dropHintLabel` —«…o arrastra la imagen hasta el avatar» por defecto— es la única cosa de esta pieza que no se adivina mirándola: la diana es el avatar, y eso no lo dice ni el botón ni el retrato. Va **visible**, con la tipografía y el color del texto de ayuda de los campos (`{form.helper.*}`), porque es exactamente eso. Con `dropHintLabel=""` no se pinta.
+
+No entra en la descripción accesible del botón: ahí siguen los formatos y el peso, que es lo que hace falta saber **antes** de elegir un archivo. Quien usa lector de pantalla oye la pista en su sitio, después del botón, y quien arrastra con el ratón tiene además el aviso en vivo de la región `role="status"`.
+
 ## Los dos textos del botón
 
 El texto **visible** es corto —"Subir"— y el nombre **accesible** dice de qué es —"Subir avatar", "Subir logo"—. Son dos props, `buttonLabel` y `buttonAccessibleLabel`, y el consumidor pone las dos.

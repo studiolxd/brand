@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ImageCropDialog } from './ImageCropDialog';
 
@@ -60,6 +60,43 @@ describe('ImageCropDialog', () => {
   it('mantiene confirmar deshabilitado hasta que hay selección', () => {
     render(<ImageCropDialog {...baseProps} sourceUrl="blob:fake" />);
     expect(screen.getByRole('button', { name: 'Guardar' })).toBeDisabled();
+  });
+
+  it('reserva el hueco y enseña la señal de carga mientras la imagen no ha cargado', () => {
+    const { baseElement } = render(
+      <ImageCropDialog {...baseProps} sourceUrl="blob:fake" loadingLabel="Cargando imagen…" />,
+    );
+    // jsdom no dispara el load del `<img>`: es el mismo estado que el primer
+    // render de verdad, con el hueco ya montado.
+    expect(baseElement.querySelector('.image-crop-dialog__area')).toBeInTheDocument();
+    expect(screen.getByRole('status', { name: 'Cargando imagen…' })).toBeInTheDocument();
+  });
+
+  it('cargada la imagen, la señal desaparece', () => {
+    const { baseElement } = render(<ImageCropDialog {...baseProps} sourceUrl="blob:fake" />);
+    const img = baseElement.querySelector('.image-crop-dialog__area img');
+    expect(img).not.toBeNull();
+    fireEvent.load(img!);
+    expect(screen.queryByRole('status', { name: 'Cargando imagen…' })).not.toBeInTheDocument();
+  });
+
+  it('si la imagen falla, el mensaje de error ocupa el mismo hueco', () => {
+    const { baseElement } = render(
+      <ImageCropDialog {...baseProps} sourceUrl="blob:rota" errorMessage="No hemos podido cargar la imagen." />,
+    );
+    fireEvent.error(baseElement.querySelector('.image-crop-dialog__area img')!);
+    expect(screen.getByRole('alert')).toHaveTextContent('No hemos podido cargar la imagen.');
+    expect(screen.queryByRole('status', { name: 'Cargando imagen…' })).not.toBeInTheDocument();
+    // Sin imagen no hay nada que recortar: la fotografía rota no se enseña.
+    expect(baseElement.querySelector('.image-crop-dialog__area img')).toBeNull();
+  });
+
+  it('otra imagen vuelve a empezar por la carga', () => {
+    const { baseElement, rerender } = render(<ImageCropDialog {...baseProps} sourceUrl="blob:una" />);
+    fireEvent.load(baseElement.querySelector('.image-crop-dialog__area img')!);
+    expect(screen.queryByRole('status', { name: 'Cargando imagen…' })).not.toBeInTheDocument();
+    rerender(<ImageCropDialog {...baseProps} sourceUrl="blob:otra" />);
+    expect(screen.getByRole('status', { name: 'Cargando imagen…' })).toBeInTheDocument();
   });
 
   it('deshabilita ambas acciones mientras está ocupado', () => {

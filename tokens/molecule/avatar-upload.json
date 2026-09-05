@@ -14,6 +14,15 @@
     "transition-duration": { "$value": "{motion.duration.fast}",  "$type": "number", "$description": "Duración de la aparición del anillo y del velo" },
     "transition-easing":   { "$value": "{motion.easing.default}", "$type": "string", "$description": "Easing de la aparición del anillo y del velo" },
 
+    "hint": {
+      "font-family": { "$value": "{form.helper.font-family}", "$type": "string",    "$description": "Tipografía de la pista de arrastre — la del texto de ayuda de los campos" },
+      "font-size":   { "$value": "{form.helper.font-size}",   "$type": "dimension", "$description": "Cuerpo de la pista de arrastre — el del texto de ayuda de los campos" },
+      "font-weight": { "$value": "{form.helper.font-weight}", "$type": "number",    "$description": "Peso de la pista de arrastre — el del texto de ayuda de los campos" },
+      "line-height": { "$value": "{form.helper.line-height}", "$type": "number",    "$description": "Interlineado de la pista de arrastre — el del texto de ayuda de los campos" },
+      "color":       { "$value": "{form.helper.color}",       "$type": "color",     "$description": "Color de la pista de arrastre — el del texto de ayuda de los campos" },
+      "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la pista de arrastre — surface-dark" }
+    },
+
     "error": {
       "font-family": { "$value": "{form.error.font-family}", "$type": "string",    "$description": "Tipografía del mensaje de error — la de los campos" },
       "font-size":   { "$value": "{form.error.font-size}",   "$type": "dimension", "$description": "Cuerpo del mensaje de error — el de los campos" },
