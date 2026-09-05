@@ -1,0 +1,18 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-avatar-upload-gap: 1rem; // Aire entre el avatar y la columna del botón
+$lxd-avatar-upload-body-gap: 0.5rem; // Aire entre el botón y el mensaje de error: el de un campo y su error
+$lxd-avatar-upload-ring-width: 2px; // Grosor del anillo que anuncia la diana. El del anillo de foco: sobre un cuadrado de 40-64px un borde de 1px no se ve desde el otro lado de la pantalla, que es donde empieza el arrastre
+$lxd-avatar-upload-ring-offset: 0.25rem; // Separación del anillo respecto al avatar. Se pinta por fuera con `outline`, que no ocupa maqueta ni recibe puntero: la zona que acepta el archivo sigue siendo exactamente el avatar
+$lxd-avatar-upload-ring-color: #111e30; // Color del anillo mientras hay un arrastre sobre la ventana
+$lxd-avatar-upload-overlay-bg: #000000; // Velo sobre el avatar cuando el archivo está justo encima: el mismo negro del scrim del sistema
+$lxd-avatar-upload-overlay-opacity: 0.6; // Opacidad del velo — la del scrim del sistema
+$lxd-avatar-upload-overlay-icon-color: #ffffff; // Icono de subida sobre el velo — tinta sobre oscuro
+$lxd-avatar-upload-transition-duration: 150ms; // Duración de la aparición del anillo y del velo
+$lxd-avatar-upload-transition-easing: ease; // Easing de la aparición del anillo y del velo
+$lxd-avatar-upload-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del mensaje de error — la de los campos
+$lxd-avatar-upload-error-font-size: 0.875rem; // Cuerpo del mensaje de error — el de los campos
+$lxd-avatar-upload-error-font-weight: 300; // Peso del mensaje de error — el de los campos
+$lxd-avatar-upload-error-line-height: 1.5; // Interlineado del mensaje de error — el de los campos
+$lxd-avatar-upload-error-color: #b30000; // Color del mensaje de error — el de los campos

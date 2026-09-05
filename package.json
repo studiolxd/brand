@@ -67,6 +67,10 @@
       "types": "./dist/_types/atoms/Avatar/Avatar.d.ts",
       "import": "./dist/avatar.js"
     },
+    "./avatar-upload": {
+      "types": "./dist/_types/molecules/AvatarUpload/AvatarUpload.d.ts",
+      "import": "./dist/avatar-upload.js"
+    },
     "./brand.css": "./dist/brand.css",
     "./fonts": "./dist/fonts.css",
     "./fonts.css": "./dist/fonts.css",

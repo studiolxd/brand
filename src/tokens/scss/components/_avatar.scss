@@ -4,6 +4,7 @@
 $lxd-avatar-size-sm: 2rem; // 32px — en barras y menús (UserMenu, OrgSwitcher)
 $lxd-avatar-size-md: 2.5rem; // 40px — por defecto: listas, tarjetas
 $lxd-avatar-size-lg: 3rem; // 48px — cabeceras de perfil
+$lxd-avatar-size-xl: 64px; // 64px — el avatar es el asunto de la pantalla (una cabecera de perfil, la subida de la foto). Es la talla ilustrativa de la escala de iconos, la misma que usan `logo.height-xl` y `logomark.size-xl`, no una talla de control: por encima de `lg` el sistema ya no mide con la escala de controles
 $lxd-avatar-border-radius: 9999px; // Personas: círculo
 $lxd-avatar-border-radius-square: 0px; // Organizaciones (logos): el radio del sistema
 $lxd-avatar-initials-bg: #111e30; // Fondo de las iniciales
@@ -12,3 +13,4 @@ $lxd-avatar-initials-font-weight: 500; // Iniciales: énfasis
 $lxd-avatar-initials-font-size-sm: 0.875rem; // Iniciales a talla sm
 $lxd-avatar-initials-font-size-md: 1rem; // Iniciales a talla md
 $lxd-avatar-initials-font-size-lg: 1.25rem; // Iniciales a talla lg
+$lxd-avatar-initials-font-size-xl: 1.5rem; // Iniciales a talla xl: un peldaño de la escala tipográfica por talla, como las tres anteriores

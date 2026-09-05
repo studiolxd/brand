@@ -66,6 +66,7 @@
   --async-multi-select-field-helper-font-size: var(--form-helper-font-size);
   --async-select-field-error-font-size: var(--form-error-font-size);
   --async-select-field-helper-font-size: var(--form-helper-font-size);
+  --avatar-upload-error-font-size: var(--form-error-font-size);
   --checkbox-field-sm-label-font-size: var(--text-paragraph-small-font-size);
   --checkbox-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --checkbox-field-label-font-size: var(--text-font-size);

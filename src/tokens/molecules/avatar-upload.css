@@ -1,0 +1,28 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --avatar-upload-gap: var(--spacing-4); /** Aire entre el avatar y la columna del botón */
+  --avatar-upload-body-gap: var(--spacing-2); /** Aire entre el botón y el mensaje de error: el de un campo y su error */
+  --avatar-upload-ring-offset: var(--spacing-1); /** Separación del anillo respecto al avatar. Se pinta por fuera con `outline`, que no ocupa maqueta ni recibe puntero: la zona que acepta el archivo sigue siendo exactamente el avatar */
+  --avatar-upload-overlay-bg: var(--color-black); /** Velo sobre el avatar cuando el archivo está justo encima: el mismo negro del scrim del sistema */
+  --avatar-upload-overlay-opacity: var(--opacity-overlay); /** Opacidad del velo — la del scrim del sistema */
+  --avatar-upload-transition-duration: var(--motion-duration-fast); /** Duración de la aparición del anillo y del velo */
+  --avatar-upload-transition-easing: var(--motion-easing-default); /** Easing de la aparición del anillo y del velo */
+  --avatar-upload-ring-width: var(--border-width-focus); /** Grosor del anillo que anuncia la diana. El del anillo de foco: sobre un cuadrado de 40-64px un borde de 1px no se ve desde el otro lado de la pantalla, que es donde empieza el arrastre */
+  --avatar-upload-ring-color: var(--color-primary); /** Color del anillo mientras hay un arrastre sobre la ventana */
+  --avatar-upload-overlay-icon-color: var(--color-text-on-dark); /** Icono de subida sobre el velo — tinta sobre oscuro */
+  --avatar-upload-error-font-family: var(--form-error-font-family); /** Tipografía del mensaje de error — la de los campos */
+  --avatar-upload-error-line-height: var(--form-error-line-height); /** Interlineado del mensaje de error — el de los campos */
+  --avatar-upload-error-font-size: var(--form-error-font-size); /** Cuerpo del mensaje de error — el de los campos */
+  --avatar-upload-error-font-weight: var(--form-error-font-weight); /** Peso del mensaje de error — el de los campos */
+  --avatar-upload-error-color: var(--form-error-color); /** Color del mensaje de error — el de los campos */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --avatar-upload-error-color: var(--color-error-text-on-dark); /** Color del mensaje de error — surface-dark */
+  --avatar-upload-ring-color: var(--color-text-on-dark); /** Anillo de la diana — surface-dark: la tinta de la superficie, como el borde del FileUpload */
+}

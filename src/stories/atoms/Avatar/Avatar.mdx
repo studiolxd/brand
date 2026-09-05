@@ -13,7 +13,9 @@ La imagen de una persona o de una organización. Con `src`, un `<img>` recortado
 
 ## Tallas
 
-Las tres tallas del sistema (Foundations → Tallas): `sm` 32px en barras y menús, `md` 40px por defecto, `lg` 48px en cabeceras de perfil. Un avatar es un elemento cuadrado y toma su lado de la talla, como un botón de icono. Retratos más grandes (una reseña destacada) no son avatares: los pone el componente que los necesita con su propio token.
+Las tres tallas del sistema (Foundations → Tallas): `sm` 32px en barras y menús, `md` 40px por defecto, `lg` 48px en cabeceras de perfil. Un avatar es un elemento cuadrado y toma su lado de la talla, como un botón de icono.
+
+Y una cuarta, `xl` (64px), para cuando el avatar **es** el asunto de la pantalla: una cabecera de perfil o la pantalla donde se sube la foto (`AvatarUpload`). No es una talla de control —48px es el control más alto que existe—: es el peldaño de marca que el sistema ya usa por encima de la escala, `icon.size-xl`, el mismo que `logo.height-xl` y `logomark.size-xl`. Retratos aún mayores (una reseña destacada) no son avatares: los pone el componente que los necesita con su propio token.
 
 <Canvas of={AvatarStories.Tallas} />
 

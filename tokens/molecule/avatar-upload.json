@@ -1,0 +1,28 @@
+{
+  "avatar-upload": {
+    "gap":      { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre el avatar y la columna del botón" },
+    "body-gap": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre el botón y el mensaje de error: el de un campo y su error" },
+
+    "ring-width":  { "$value": "{border-width.focus}",  "$type": "dimension", "$description": "Grosor del anillo que anuncia la diana. El del anillo de foco: sobre un cuadrado de 40-64px un borde de 1px no se ve desde el otro lado de la pantalla, que es donde empieza el arrastre" },
+    "ring-offset": { "$value": "{spacing.1}",           "$type": "dimension", "$description": "Separación del anillo respecto al avatar. Se pinta por fuera con `outline`, que no ocupa maqueta ni recibe puntero: la zona que acepta el archivo sigue siendo exactamente el avatar" },
+    "ring-color":  { "$value": "{color.primary}",       "$type": "color",     "$description": "Color del anillo mientras hay un arrastre sobre la ventana" },
+
+    "overlay-bg":         { "$value": "{color.black}",       "$type": "color",     "$description": "Velo sobre el avatar cuando el archivo está justo encima: el mismo negro del scrim del sistema" },
+    "overlay-opacity":    { "$value": "{opacity.overlay}",   "$type": "number",    "$description": "Opacidad del velo — la del scrim del sistema" },
+    "overlay-icon-color": { "$value": "{color.text.on-dark}","$type": "color",     "$description": "Icono de subida sobre el velo — tinta sobre oscuro" },
+
+    "transition-duration": { "$value": "{motion.duration.fast}",  "$type": "number", "$description": "Duración de la aparición del anillo y del velo" },
+    "transition-easing":   { "$value": "{motion.easing.default}", "$type": "string", "$description": "Easing de la aparición del anillo y del velo" },
+
+    "error": {
+      "font-family": { "$value": "{form.error.font-family}", "$type": "string",    "$description": "Tipografía del mensaje de error — la de los campos" },
+      "font-size":   { "$value": "{form.error.font-size}",   "$type": "dimension", "$description": "Cuerpo del mensaje de error — el de los campos" },
+      "font-weight": { "$value": "{form.error.font-weight}", "$type": "number",    "$description": "Peso del mensaje de error — el de los campos" },
+      "line-height": { "$value": "{form.error.line-height}", "$type": "number",    "$description": "Interlineado del mensaje de error — el de los campos" },
+      "color":       { "$value": "{form.error.color}",       "$type": "color",     "$description": "Color del mensaje de error — el de los campos" },
+      "surface-dark-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Color del mensaje de error — surface-dark" }
+    },
+
+    "surface-dark-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de la diana — surface-dark: la tinta de la superficie, como el borde del FileUpload" }
+  }
+}

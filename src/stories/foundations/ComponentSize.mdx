@@ -27,6 +27,8 @@ Avatares, iconos-botón, logos de barra, triggers, miniaturas: el lado es una de
 
 Las marcas de checkbox y radio **no** son tallas de componente: son el tamaño de una marca dentro de una fila de control, y lo fija cada componente.
 
+Por encima de `lg` el sistema deja de medir con esta escala: 48px es el control más alto que existe. Lo que sube más es **marca**, no control —el logotipo de la cabecera (`logo.height-xl`), el isotipo (`logomark.size-xl`) y el avatar cuando es el asunto de la pantalla (`avatar.size-xl`)—, y toma su lado del peldaño ilustrativo de la escala de iconos: 64px, en el mismo múltiplo de 8.
+
 ## El objetivo de puntero no es la talla
 
 `sm` es la talla mínima **visible**, pero hay marcas que se dibujan por debajo: la de un checkbox `sm` mide 16px. Lo que WCAG 2.5.8 mide no es el dibujo, es el **área que responde al puntero**, y ahí el mínimo es 24×24 px.
