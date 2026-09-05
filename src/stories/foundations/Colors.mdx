@@ -43,9 +43,9 @@ Blanco, negro y cuatro grises para texto, fondos, bordes y estados. No forman pa
 
 ### Sistema
 
-Rojo, verde y ámbar funcionales, independientes de la marca. Cada uno tiene una versión **base** (legible sobre blanco, y relleno universal) y una **light** (solo legible sobre prusia). No se usan con fines decorativos.
+Rojo y verde funcionales, independientes de la marca. Cada uno tiene una versión **base** (legible sobre blanco, y relleno universal) y una **light** (solo legible sobre prusia). No se usan con fines decorativos.
 
-El ámbar **no es el amarillo de marca**: el amarillo (`accent-2`) es identidad —el relleno de un `Tag`, el hover de un botón— y no llega a 3:1 sobre blanco, así que no puede ser tinta. El ámbar de sistema se eligió midiendo, para que el aviso tenga la misma forma que el error y el éxito: base 7,23:1 sobre blanco (AAA, y el mismo número para el blanco encima del relleno) y light 7,81:1 sobre prusia (AAA).
+Son dos, no tres: **el aviso no tiene color de sistema propio**. Se pinta con el amarillo de marca en forma de relleno, y por eso no necesita el par base/light que sí necesitan los colores que además son tinta. El porqué está en «Feedback», más abajo.
 
 <ColorPalette>
   {systemSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
@@ -78,13 +78,22 @@ Asignan un rol a los colores de sistema. **El sufijo dice a qué propiedad CSS v
 | `*-text-on-light` | `color`, `border-color`, `outline-color` sobre superficie clara | Base |
 | `*-text-on-dark` | Lo mismo sobre superficie oscura | Light |
 | `*-fill` | Solo `background-color` de rellenos sólidos. **Universal**: el mismo en claro y oscuro | Base |
-| `*-fill-text` | Contenido colocado sobre un `*-fill` | Blanco |
+| `*-fill-text` | Contenido colocado sobre un `*-fill` | Blanco, salvo en el aviso |
 
-No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es siempre el color base con blanco encima, en cualquier superficie. `destructive-*` es un alias completo de `error-*` para acciones destructivas.
+No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es siempre el color base, en cualquier superficie. `destructive-*` es un alias completo de `error-*` para acciones destructivas.
 
-Cuatro roles: `error-*`, `success-*`, `warning-*` y `destructive-*`. El **aviso** (`warning-*`) es el tramo intermedio —lo que ya no está bien pero todavía no está roto—, y se pinta con el ámbar de sistema, nunca con el amarillo de marca.
+Cuatro roles: `error-*`, `success-*`, `warning-*` y `destructive-*`. El **aviso** (`warning-*`) es el tramo intermedio: lo que ya no está bien pero todavía no está roto.
 
-**Por qué el aviso no es el amarillo de marca.** `Alert`, `Toast` y `Tag` lo pintaban con `accent-2` hasta que existió el rol. Dos motivos para separarlos: el amarillo es **identidad** —el relleno de un `Tag` de marca, el hover de un botón—, así que un aviso y un botón bajo el puntero acababan del mismo color y el usuario no podía distinguirlos; y el amarillo, al no llegar a 3:1 sobre blanco, obliga a tinta prusia encima, lo que dejaba al aviso como el único relleno del sistema que leía en claro mientras los otros tres leen en oscuro. El ámbar elegido no se confunde con el amarillo de marca: entre los dos hay 4,81:1, o sea que el de marca es casi cinco veces más claro.
+#### El aviso tiene dos tokens, no cuatro — y es a propósito
+
+`warning-*` es la única excepción a la tabla de arriba: existen `warning-fill` (el amarillo de marca, `#FFCD00`) y `warning-fill-text` (el prusia, 11,17:1 encima — AAA), y **no existen** `warning-text-on-light` ni `warning-text-on-dark`. **Un aviso siempre va como relleno, con la tinta prusia encima; nunca como tinta suelta sobre el fondo.** Las dos mitades del par que falta se cayeron cada una por su motivo, y las dos son medidas:
+
+- **Sobre claro no llega.** El amarillo da **1,50:1 sobre blanco**, muy por debajo del 3:1 que pide WCAG 1.4.11 para cualquier tinta, borde o icono. Como amarillo, el aviso solo puede ser fondo.
+- **Sobre oscuro se confundiría con la marca.** El amarillo sí lee sobre prusia (11,17:1), pero ahí ya es `accent-2` haciendo de identidad. Un aviso escrito en amarillo dentro de una banda oscura sería indistinguible de un titular de marca: legible, y sin embargo mudo como señal.
+
+No hay un ámbar funcional supliendo el hueco. Se probó —entró en v30.10.0 y salió en la siguiente— y la conclusión fue que ampliar la paleta con dos colores nuevos para tapar un rol es peor que dejar el rol con la forma que le corresponde. **Si alguien va a «completar» `warning-*` dentro de seis meses, esta sección es el motivo de que no lo haga:** el rol está entero; lo que le falta, le falta a propósito.
+
+**El amarillo del aviso y el hover del botón primario son el mismo color.** No es un descuido: es el mismo píxel de marca sirviendo a dos cosas. Se distinguen **por contexto y por forma** —un aviso es un bloque con su icono y su texto, o una etiqueta, o un tramo de una tira; el hover es una superficie transitoria bajo el puntero—, nunca por el color. Lo que cambia respecto de antes es **la procedencia**: `Alert`, `Tag`, `Toast` y `UptimeBars` ya no piden `accent-2`, piden `warning-fill`. Si mañana el aviso deja de ser amarillo, se cambia en un sitio y el hover del botón se queda donde está.
 
 <ColorPalette>
   {feedbackSwatches.map((s) => <ColorItem key={s.title} {...s} />)}

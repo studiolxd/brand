@@ -47,8 +47,11 @@
   background-color: var(--uptime-bars-ok-bg);
 }
 
+/* El aviso es el único relleno de feedback que no lee sobre blanco (1,50:1):
+   lleva filete propio también en claro, con la tinta del rol. */
 .uptime-bars__bar.uptime-bars__bar--degraded {
   background-color: var(--uptime-bars-degraded-bg);
+  border-color: var(--uptime-bars-degraded-border-color);
 }
 
 .uptime-bars__bar.uptime-bars__bar--down {

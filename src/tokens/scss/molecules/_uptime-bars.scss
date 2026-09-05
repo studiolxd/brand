@@ -5,9 +5,10 @@ $lxd-uptime-bars-gap: 0.25rem; // 4px — hueco entre barritas. El ancho de la b
 $lxd-uptime-bars-bar-height: 2rem; // 32px — alto de la barrita. Es la única medida fija: el ancho lo pone el contenedor
 $lxd-uptime-bars-bar-radius: 0px; // Esquina recta, como todo el sistema
 $lxd-uptime-bars-bar-border-width: 1px; // Filete de contorno de la barrita. Mismo recurso que el relleno de ProgressBar: en superficie oscura los rellenos de feedback no llegan a 3:1 contra el lienzo, y WCAG 1.4.11 admite que sea el contorno quien identifique el elemento
-$lxd-uptime-bars-bar-border-color: rgba(0, 0, 0, 0); // En superficie clara no hace falta filete —los rellenos de feedback dan 7,2:1 sobre blanco—, pero se declara transparente para que la barrita mida igual en las dos superficies
+$lxd-uptime-bars-bar-border-color: rgba(0, 0, 0, 0); // En superficie clara el rojo y el verde dan 7,2:1 sobre blanco y no necesitan filete, pero se declara transparente para que la barrita mida igual en las dos superficies. La excepción es el tramo intermedio: ver `degraded-border-color`
 $lxd-uptime-bars-ok-bg: #006616; // Tramo bueno — relleno sólido del rol success. Es un fondo, así que va el sufijo `-fill`
-$lxd-uptime-bars-degraded-bg: #7d4c00; // Tramo intermedio — relleno sólido del rol warning
+$lxd-uptime-bars-degraded-bg: #ffcd00; // Tramo intermedio — relleno sólido del rol warning
+$lxd-uptime-bars-degraded-border-color: #111e30; // Filete del tramo intermedio en superficie clara. El relleno de aviso es amarillo y da 1,50:1 sobre blanco, así que sin contorno la barrita no se distingue del lienzo (WCAG 1.4.11 pide 3:1). El filete es la tinta del propio rol —el prusia—, el mismo recurso que en oscuro usan las tres
 $lxd-uptime-bars-down-bg: #b30000; // Tramo malo — relleno sólido del rol error
 $lxd-uptime-bars-empty-bg: #f2f2f2; // Sin dato — superficie secundaria: no es un estado del servicio, es la ausencia de medida
 $lxd-uptime-bars-empty-pattern-color: #d0d0d0; // Rayas del «sin dato»: lo que distingue esa barrita de las demás sin depender del color

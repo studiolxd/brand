@@ -3,8 +3,6 @@
     "red":         { "$value": "#B30000", "$type": "color", "$description": "System red — base (AAA sobre blanco; fill universal de error/destructive)" },
     "red-light":   { "$value": "#FF8585", "$type": "color", "$description": "System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo" },
     "green":       { "$value": "#006616", "$type": "color", "$description": "System green — base (AAA sobre blanco; fill universal de success)" },
-    "green-light": { "$value": "#00CC2C", "$type": "color", "$description": "System green light — SOLO texto/icono/borde sobre prussian, nunca como fondo" },
-    "amber":       { "$value": "#7D4C00", "$type": "color", "$description": "System amber — base (7,23:1 sobre blanco, AAA; fill universal de warning con blanco encima, mismo 7,23:1). Ámbar funcional, no el amarillo de marca" },
-    "amber-light": { "$value": "#F59E0B", "$type": "color", "$description": "System amber light — SOLO texto/icono/borde sobre prussian (7,81:1, AAA), nunca como fondo (2,15:1 sobre blanco)" }
+    "green-light": { "$value": "#00CC2C", "$type": "color", "$description": "System green light — SOLO texto/icono/borde sobre prussian, nunca como fondo" }
   }
 }

@@ -29,9 +29,10 @@
     "error-title-color":             { "$value": "{color.error-fill-text}",     "$type": "color", "$description": "Título blanco sobre fondo error" },
     "error-description-color":       { "$value": "{color.error-fill-text}",     "$type": "color", "$description": "Descripción blanca sobre fondo error" },
 
-    "warning-bg":                    { "$value": "{color.warning-fill}",      "$type": "color", "$description": "Fondo warning — ámbar semántico. Era el amarillo de marca: el aviso es un estado, no identidad" },
+    "warning-bg":                    { "$value": "{color.warning-fill}",      "$type": "color", "$description": "Fondo warning — el relleno del rol de aviso. Es el amarillo de siempre, pero la procedencia es el rol de feedback, no la marca" },
     "warning-border-color":          { "$value": "{color.warning-fill}",      "$type": "color", "$description": "Borde igual al fondo warning" },
-    "warning-title-color":           { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Título blanco sobre fondo warning (7,23:1, AAA)" },
-    "warning-description-color":     { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Descripción blanca sobre fondo warning" }
+    "warning-title-color":           { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Título prusia sobre fondo warning (11,17:1, AAA)" },
+    "warning-description-color":     { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Descripción prusia sobre fondo warning" },
+    "warning-close-color":           { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Aspa y su anillo de foco sobre el relleno de aviso. Es el único relleno claro del componente, así que el aspa no puede tomar la tinta ambiente: con `[data-theme=\"dark\"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal" }
   }
 }

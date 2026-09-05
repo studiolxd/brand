@@ -99,12 +99,12 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
   const classes = [
     'alert',
     variant !== 'default' ? `alert--${variant}` : '',
-    // El relleno del alert es oscuro en las cuatro intenciones —también en
-    // `warning`, desde que el aviso se pinta con el ámbar de sistema y no con
-    // el amarillo de marca—: la raíz se declara superficie oscura para que lo
-    // que se componga dentro (enlaces, botones, el propio cierre) tome su cara
-    // clara.
-    'surface-dark',
+    // El relleno del alert es oscuro salvo en `warning`, que es el amarillo
+    // del rol de aviso con tinta prusia encima: la raíz se declara superficie
+    // oscura para que lo que se componga dentro (enlaces, botones, el propio
+    // cierre) tome su cara clara — y el aviso queda fuera, porque ahí la
+    // superficie es clara.
+    variant !== 'warning' ? 'surface-dark' : '',
     dismissible ? 'alert--dismissible' : '',
     className ?? '',
   ]
