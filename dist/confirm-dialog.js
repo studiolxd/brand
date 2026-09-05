@@ -37,7 +37,7 @@ function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCan
 		footerClassName: ["confirm-dialog__actions", x].filter(Boolean).join(" "),
 		footer: /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(e, {
 			ref: S,
-			variant: "ghost",
+			variant: "outline",
 			onClick: T,
 			disabled: C,
 			children: _

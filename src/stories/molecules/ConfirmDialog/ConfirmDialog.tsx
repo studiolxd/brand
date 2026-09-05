@@ -134,7 +134,7 @@ export function ConfirmDialog({
       footerClassName={['confirm-dialog__actions', className].filter(Boolean).join(' ')}
       footer={
         <>
-          <Button ref={cancelRef} variant="ghost" onClick={handleCancel} disabled={pending}>
+          <Button ref={cancelRef} variant="outline" onClick={handleCancel} disabled={pending}>
             {cancelLabel}
           </Button>
           <Button
