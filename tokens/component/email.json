@@ -71,9 +71,9 @@
       "$description": "Separación entre el recuadro del mensaje y los enlaces de baja"
     },
     "heading-font-size": {
-      "$value": "{site-shell.heading-size-4}",
+      "$value": "{site-shell.heading-size-6}",
       "$type": "dimension",
-      "$description": "Título del correo (24px): el peldaño 4 de la escala de títulos —el de H5— en la superficie pública, que es la del correo"
+      "$description": "Título del correo (32px): el peldaño 6 de la escala de títulos —el de H3— en la superficie pública, que es la del correo. Sale de la escala pública y no de `{font-size.6}`, que vale lo mismo hoy: el correo lee a la talla pública entera, y así el título se mueve con ella si esa escala cambia. Estaba en el peldaño 4 (24px) y se quedaba corto para lo único que el correo destaca"
     },
     "heading-font-weight": {
       "$value": "{text.h5.font-weight}",

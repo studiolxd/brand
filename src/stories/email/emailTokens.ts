@@ -21,7 +21,7 @@ export const emailTokens = {
   '--email-brand-padding-block': '16px',
   '--email-brand-padding-inline': '16px',
   '--email-opt-out-margin-block-start': '16px',
-  '--email-heading-font-size': '24px',
+  '--email-heading-font-size': '32px',
   '--email-heading-font-weight': '500',
   '--email-heading-line-height': '1.3',
   '--email-heading-margin-block-end': '12px',
