@@ -34,6 +34,31 @@ para breaking changes.
   logotipo del alta. La fila de `AvatarUpload` envuelve cuando el retrato ya no
   cabe con el botón al lado (a 375px, en `lg`).
 
+## v30.10.0
+
+- **`UptimeBars`** (nuevo, `./uptime-bars`): la tira de disponibilidad, una
+  barrita por punto con su porcentaje, su etiqueta y su detalle, la media del
+  periodo y los extremos etiquetados. Agnóstica del tiempo y del origen: no
+  sabe qué es un día. Un punto **sin dato** se pinta y se anuncia distinto, no
+  como 0 %. Tres tramos por umbral configurable, con el por defecto pensado en
+  tiempo caído por día: verde hasta 5 min, aviso hasta 1 h, error de ahí en
+  adelante — el margen del verde es deliberado, un fallo aislado de
+  comprobación no es un incidente. `summary` es obligatoria: es la alternativa
+  en texto a la tira, y cada barrita lleva su nombre accesible completo.
+- **Rol de feedback `warning`** (`color.warning-*`, con `-fill`, `-fill-text`,
+  `-text-on-light` y `-text-on-dark`), que no existía: `Alert`, `Tag` y `Toast`
+  pintaban su variante de aviso con **`accent-2`, el amarillo de marca** del
+  hover de los botones. **Los tres pasan al rol.** Cambio visual en componentes
+  en uso.
+- **`Avatar`: tallas `3xl` (128px) y `4xl` (192px)**, y `AvatarUpload` sube un
+  peldaño en cada contexto (sm→2xl, md→3xl, lg→4xl): el retrato de la foto de
+  perfil y del logotipo de la organización sale al doble. A 375px la fila
+  envuelve y el botón cae debajo.
+- Punto flojo declarado: en superficie oscura los tres tramos de la tira se
+  separan por el filete y no por luminancia (los `*-fill` son universales,
+  ~2,3:1 sobre el prusia). Arreglarlo pediría un relleno por superficie, que no
+  se ha inventado.
+
 ## v30.9.0
 
 - **Una sola superficie de diálogo: `Modal` y `Sheet` dejan de ser dos árboles
