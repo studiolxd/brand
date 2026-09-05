@@ -59,9 +59,9 @@ Con 30 puntos a 375px la tira encoge, no desborda ni saca barra horizontal: cada
 
 <Canvas of={UptimeBarsStories.EnSuperficieOscura} />
 
-Los rellenos de feedback son **universales**: el mismo color en las dos superficies, como manda el sufijo `-fill`. Contra el prusia se quedan en ~2,3:1, así que quien identifica la barrita en oscuro es su **filete** de tinta clara —el mismo recurso que usa el relleno de `ProgressBar`, y lo que WCAG 1.4.11 admite para un objeto gráfico—. En superficie clara el filete se declara transparente, para que la barrita mida igual en las dos.
+Los rellenos de feedback son **universales**: el mismo color en las dos superficies, como manda el sufijo `-fill`. Quien identifica cada barrita —también la del «sin dato»— es su **filete**: prusia en superficie clara, tinta clara en oscuro. Es el mismo recurso que usa el relleno de `ProgressBar`, y lo que WCAG 1.4.11 admite para un objeto gráfico.
 
-Con una excepción: **el tramo «tocado»**. Su relleno es el amarillo del rol de aviso, que da 1,50:1 sobre blanco —el verde y el rojo dan 7,2:1—, así que en claro la barrita se perdería contra el lienzo. Lleva filete también ahí (`degraded-border-color`), y el filete es la tinta del propio rol: el prusia. Es el mismo recurso de siempre, aplicado a la única barrita que lo necesita en las dos superficies.
+El filete no es un adorno en ninguna de las dos superficies. Contra el prusia, los tres rellenos se quedan en ~2,3:1. Y sobre blanco, el del tramo «tocado» —el amarillo del rol de aviso— da 1,50:1: el verde y el rojo se recortan solos contra el lienzo claro, pero el amarillo no, así que el recuadro es lo que hace que ese día se vea.
 
 Lo que esto **no** resuelve es distinguir los tres tramos entre sí por luminancia sobre el lienzo oscuro: los tres rellenos son oscuros y ahí solo los separa el tono. Se sostiene porque el color nunca es la única señal —el nombre accesible de cada barrita lleva el porcentaje y la media va en texto—, pero si el sistema quisiera arreglarlo del todo haría falta un rol de **relleno por superficie**, que hoy no existe y no se inventa en una pieza.
 

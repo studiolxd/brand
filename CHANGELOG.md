@@ -36,11 +36,13 @@ para breaking changes.
   cambio visual respecto de v30.9.x: relleno amarillo con tinta prusia. `Alert`
   y `Toast` mantienen su excepción de siempre — la raíz no declara
   `.surface-dark` en `warning`, porque ahí la superficie lee en claro.
-- **`UptimeBars`: el tramo «tocado» lleva filete también en superficie clara**
-  (`uptime-bars.degraded-border-color`, el prusia del rol). El amarillo del
-  aviso da 1,50:1 sobre blanco, por debajo del 3:1 que pide WCAG 1.4.11 para un
-  objeto gráfico; el filete es lo que identifica la barrita, el mismo recurso
-  que las tres usan ya en oscuro.
+- **`UptimeBars`, tres retoques de superficie clara.** El **filete** de cada
+  barrita pasa a ser el prusia (`{color.primary}`) en vez de transparente:
+  recuadra cada día —también el «sin dato»— y es lo que hace visible el tramo
+  intermedio, cuyo relleno amarillo se queda en 1,50:1 contra el blanco. **La
+  media** deja el peso fuerte y va en peso de cuerpo (`{font-weight.default}`).
+  Y **los extremos** (`startLabel`/`endLabel`) pasan de atenuados a la tinta
+  plena (`{color.text.on-light}` y su par oscuro).
 - **`Avatar` gana las tallas `3xl` (128px) y `4xl` (192px)**, y `AvatarUpload`
   remapea a `sm` → 96px, `md` → 128px y `lg` → 192px: cada contexto sale al
   doble de lo que salía. Cambio visual en la subida de la foto de perfil y en el
