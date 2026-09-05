@@ -11,7 +11,7 @@ function i() {
 	let e = document.documentElement;
 	return r(getComputedStyle(e).getPropertyValue("--popover-offset").trim());
 }
-function a({ trigger: r, children: a, label: o, open: s, defaultOpen: c, onOpenChange: l, onPointerDownOutside: u, onFocusOutside: d, onEscapeKeyDown: f, side: p = "bottom", align: m = "start", sideOffset: h, className: g }) {
+function a({ trigger: r, children: a, label: o, open: s, defaultOpen: c, onOpenChange: l, onPointerDownOutside: u, onFocusOutside: d, onEscapeKeyDown: f, side: p = "bottom", align: m = "start", sideOffset: h, initialFocus: g, className: _ }) {
 	return /* @__PURE__ */ t(n.Root, {
 		open: s,
 		defaultOpen: c,
@@ -25,7 +25,8 @@ function a({ trigger: r, children: a, label: o, open: s, defaultOpen: c, onOpenC
 			sideOffset: h ?? i,
 			children: /* @__PURE__ */ e(n.Popup, {
 				"aria-label": o,
-				className: ["popover", g].filter(Boolean).join(" "),
+				initialFocus: g,
+				className: ["popover", _].filter(Boolean).join(" "),
 				children: a
 			})
 		}) })]

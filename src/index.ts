@@ -238,6 +238,13 @@ export { MultiSelectField } from './stories/molecules/MultiSelectField/MultiSele
 export type { MultiSelectFieldProps } from './stories/molecules/MultiSelectField/MultiSelectField';
 export { NotificationButton } from './stories/molecules/NotificationButton/NotificationButton';
 export type { NotificationButtonProps } from './stories/molecules/NotificationButton/NotificationButton';
+export { NotificationPanel } from './stories/molecules/NotificationPanel/NotificationPanel';
+export type {
+  NotificationPanelProps,
+  NotificationPanelItem,
+  NotificationPanelLinkProps,
+  RenderNotificationPanelLink,
+} from './stories/molecules/NotificationPanel/NotificationPanel';
 export { DropdownField } from './stories/molecules/DropdownField/DropdownField';
 export type { DropdownFieldProps } from './stories/molecules/DropdownField/DropdownField';
 export { LanguageSwitcher } from './stories/molecules/LanguageSwitcher/LanguageSwitcher';

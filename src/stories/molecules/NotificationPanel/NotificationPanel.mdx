@@ -1,0 +1,60 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./NotificationPanel.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { notificationPanelTokens } from "../../../tokens/molecules/notification-panel";
+
+<Meta of={Stories} />
+
+# NotificationPanel
+
+La campana de la barra con su panel: el `NotificationButton` de siempre —contador incluido— que al pulsarlo abre un `Popover` anclado a él con el **adelanto** de las últimas notificaciones y, debajo, los enlaces a la bandeja y a las preferencias.
+
+<Canvas of={Stories.ConNoLeidas} />
+
+## Cuándo esto y cuándo la bandeja
+
+Son dos piezas con dos trabajos, y el panel no sustituye a la bandeja:
+
+- **El panel es un vistazo.** Cabe en una esquina de la pantalla, enseña cinco notificaciones como mucho —las recorta el consumidor, no el panel—, recorta el cuerpo a dos líneas y no pagina, no ordena, no filtra y no borra. Lo que se hace aquí es enterarse y marcar leído.
+- **La bandeja es la página.** Ahí está todo: la paginación, el texto entero, borrar una y borrar todas. Del panel se llega con «Ver todas las notificaciones».
+
+De ahí la regla de oro: **lo único que navega es el enlace de cada notificación**. Pulsar la fila la marca leída y la deja donde está; no abre nada y no cierra el panel. Si la fila navegara, marcar leído y perder el sitio serían el mismo gesto, y el panel dejaría de servir para lo que sirve.
+
+## La lista no salta bajo el dedo
+
+Al marcar una fila leída, la fila **cambia en el sitio**: pierde el punto y el peso, y se queda donde estaba. No desaparece ni se reordena, aunque el consumidor ya haya recargado sus datos: lo que el panel enseña mientras está abierto lo decide él. Al cerrarlo se olvida de lo marcado aquí y vuelve a mandar `items`.
+
+La fila ya leída sigue en el recorrido de teclado, pero se anuncia con `aria-disabled`: no hace nada. Se queda enfocable a propósito — deshabilitarla de verdad tiraría el foco al `body` justo después de pulsarla.
+
+<Canvas of={Stories.TodoLeido} />
+<Canvas of={Stories.Vacio} />
+
+## El pie
+
+Dos enlaces fijos —la bandeja y las preferencias— y un botón opcional. `onMarkAllRead` es lo que decide si «Marcar todas como leídas» se pinta: sin la prop no hay botón, porque no todos los productos tienen esa operación.
+
+<Canvas of={Stories.ConMarcarTodas} />
+
+Los tres se montan sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `LegalFooter`: el panel pone `href`, clase, `onClick` y el nombre accesible; el consumidor pone el `Link` (ver `Link`). Un `renderLink` que no propague todo lo que recibe rompe esas cuatro cosas.
+
+## Accesibilidad
+
+- El disparador es el `NotificationButton`, con `aria-expanded` y `aria-controls` puestos por Base UI; el panel es un `role="dialog"` nombrado con `panelLabel`.
+- **El foco entra por la primera notificación**, no por el panel: lo primero que se hace aquí es recorrer la lista. `Escape` cierra y devuelve el foco a la campana.
+- El punto rojo de no leída es decorativo y lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»), como hace la bandeja.
+- La `<ul>` se llama con el título visible de la cabecera (`aria-labelledby`), no con una etiqueta paralela.
+- El enlace de una notificación compone su nombre con su rótulo **y** el título de la notificación (`aria-labelledby` sobre los nodos que ya existen): en una lista de enlaces, tres «Ver» sueltos no se distinguirían. El orden lo pone el idioma, no una plantilla de texto.
+
+## Superficie oscura
+
+Todo el color sale de la regla de derivación: las dos líneas que enmarcan la lista y el anillo de foco pasan a `text.on-dark`, el fondo y el borde los pone el `Popover`, y la tinta atenuada la pone `Text tone="muted"`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
+
+<Canvas of={Stories.SuperficieOscura} />
+
+## Tokens
+
+<TokenTable tokens={notificationPanelTokens} />
+
+## Props
+
+<ArgTypes of={Stories} />

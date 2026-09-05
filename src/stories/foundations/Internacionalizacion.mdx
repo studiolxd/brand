@@ -104,6 +104,7 @@ pista, `maskLetters`:
 | `DatePicker` | `calendarLabel`, `openCalendarLabel`, `invalidMessage` y `maskLetters` — las letras de la máscara del campo (`dd/mm/aaaa`); el **orden** de día, mes y año no es prop: sale de `locale` con `Intl`. `placeholder` sustituye la máscara entera |
 | `Spinner`, `TypingIndicator` | `label` |
 | `NotificationButton` | `label` sin contador y `countLabel` con él — la frase se rehace con el número dentro |
+| `NotificationPanel` | los dos de `NotificationButton` (`label`, `countLabel`) más `panelLabel`, `unreadLabel`, `viewLabel`, `emptyLabel`, `allLabel`, `preferencesLabel` y `markAllReadLabel`. La fecha de cada notificación **no** es prop de texto: llega ya formateada en `items[].time` |
 | `ConsentBanner` | `title`, `description`, `policyLabel`, `acceptAllLabel`, `rejectAllLabel`, `preferencesLabel`, `regionLabel` |
 | `Carousel` | `label`, `roleDescription`, `trackLabel`, `prevLabel`, `nextLabel`, `indicatorLabel`, `pauseLabel`, `playLabel`, `slideStatusLabel` — y `roleDescription` en `CarouselSlide` |
 | `ProjectCard` | `tagsLabel` |

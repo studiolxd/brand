@@ -1,0 +1,52 @@
+{
+  "notification-panel": {
+    "inline-size":            { "$value": "min(22.5rem, calc(100vw - 2 * {spacing.5}))", "$type": "dimension", "$description": "Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas" },
+
+    "padding-inline":         { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire lateral de la cabecera, de las filas y del pie: el mismo, para que todo alinee en una sola columna" },
+    "header-padding-block":   { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire vertical de la cabecera" },
+    "separator-thickness":    { "$value": "{separator.thickness}",    "$type": "dimension", "$description": "Grosor de las dos líneas que enmarcan la lista (bajo la cabecera y sobre el pie) — el grosor de la línea del sistema" },
+    "separator-color":        { "$value": "{separator.color}",        "$type": "color",     "$description": "Color de esas dos líneas — el de la línea del sistema" },
+
+    "list-max-block-size":    { "$value": "21rem",                    "$type": "dimension", "$description": "Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta" },
+    "list-padding-block":     { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire vertical de la lista dentro del panel" },
+    "list-gap":               { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Separación entre notificaciones. Las filas no llevan línea: se separan con aire, y la línea queda reservada al hover" },
+
+    "item-padding-block":     { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire vertical de cada notificación" },
+    "item-border-radius":     { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio de cada notificación: recto, como todo el sistema" },
+    "item-gap":               { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre el punto de no leída y el texto" },
+    "item-text-gap":          { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Aire entre el título, el cuerpo y la fecha" },
+    "item-font-family":       { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Familia tipográfica de la notificación" },
+    "item-title-font-size":   { "$value": "{text.font-size}",         "$type": "dimension", "$description": "El título de una notificación es texto corriente: hereda el cuerpo de la superficie" },
+    "item-title-line-height": { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Interlineado del título" },
+    "item-unread-font-weight": { "$value": "{font-weight.emphasis}",  "$type": "number",    "$description": "Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno" },
+    "item-read-font-weight":  { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso del título ya leído: el del cuerpo de texto" },
+    "item-body-font-size":    { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie" },
+    "item-body-line-height":  { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Interlineado del cuerpo" },
+    "item-body-line-clamp":   { "$value": "2",                        "$type": "number",    "$description": "Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja" },
+    "item-time-font-size":    { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone=\"muted\"`)" },
+    "item-hover-line-width":  { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la línea que aparece bajo la fila con el puntero encima. Los estados no se rellenan (Foundations → Colores): se dicen con línea" },
+    "item-hover-line-color":  { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de esa línea: el prusia del sistema" },
+
+    "dot-size":               { "$value": "{icon.size-sm}",           "$type": "dimension", "$description": "Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que la bandeja pinta ese punto. El círculo dibujado dentro mide unos 7px" },
+    "dot-color":              { "$value": "{color.error-fill}",       "$type": "color",     "$description": "Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones" },
+    "dot-margin-block-start": { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Baja el punto hasta el centro óptico de la primera línea del título" },
+
+    "view-font-size":         { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Tamaño del enlace «Ver» de una notificación con destino: letra menor, como el pie" },
+
+    "empty-padding-block":    { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Aire vertical del estado vacío: el hueco de la lista sin encogerse" },
+
+    "footer-padding-block":   { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire vertical del pie" },
+    "footer-gap":             { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre los enlaces del pie" },
+    "footer-font-size":       { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Tamaño de los enlaces del pie: letra menor" },
+
+    "focus-ring-width":       { "$value": "{border-width.focus}",     "$type": "dimension", "$description": "Grosor del anillo de foco de una fila" },
+    "focus-ring-color":       { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del anillo de foco de una fila" },
+
+    "transition-duration":    { "$value": "{motion.duration.fast}",   "$type": "string",    "$description": "Duración de la transición de la fila" },
+    "transition-easing":      { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Curva de la transición de la fila" },
+
+    "surface-dark-separator-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de las líneas que enmarcan la lista — superficie oscura" },
+    "surface-dark-item-hover-line-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea de hover de la fila — superficie oscura" },
+    "surface-dark-focus-ring-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del anillo de foco — superficie oscura" }
+  }
+}

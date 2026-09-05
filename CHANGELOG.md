@@ -17,6 +17,29 @@ para breaking changes.
 
 ## [31.0.0] — 2026-09-05
 
+- **`NotificationPanel`: la campana abre un panel flotante** (molécula nueva,
+  export `@studiolxd/brand/notification-panel`). El `NotificationButton` de
+  siempre —contador incluido— montado sobre un `Popover` anclado a él, con el
+  adelanto de las últimas notificaciones (`items`: título, cuerpo recortado a
+  dos líneas por token, fecha ya formateada, punto de no leída y enlace «Ver»
+  cuando la notificación tiene destino), estado vacío («Estás al día») y un pie
+  con los enlaces a la bandeja y a las preferencias, más el botón opcional
+  «Marcar todas como leídas» (solo con `onMarkAllRead`). **Pulsar una fila la
+  marca leída y la deja en su sitio**: no navega, no cierra el panel y no
+  reordena la lista —lo único que navega es el enlace de cada notificación—;
+  al cerrar, el panel olvida lo marcado y vuelve a mandar `items`. El foco
+  entra por la primera notificación y `Escape` cierra devolviéndolo a la
+  campana; el panel es un `role="dialog"` nombrado y la lista una `<ul>` que se
+  llama con el título visible de la cabecera. Todos los textos por prop con
+  default castellano (fila nueva en Fundamentos › Internacionalización) y los
+  enlaces por `renderLink`, como en `SiteNav`. Tokens nuevos en
+  `tokens/molecule/notification-panel.json`, sin colores nuevos: el punto es el
+  mismo `error-fill` del contador de la campana y el hover de la fila es una
+  línea, no un relleno.
+- **`Popover` acepta `initialFocus`** (prop de Base UI, tal cual). Por defecto
+  el foco sigue yendo al propio panel, que es lo correcto para un panel de
+  lectura; un panel cuyo contenido es una lista de controles pasa aquí el
+  primero de ellos. Es lo que necesita `NotificationPanel`.
 - **La página de estado, en el catálogo** (`Pages/Estado del servicio`).
   `status.slxd.app` montado con piezas del DS y datos falsos: `AppRoot` +
   `PublicPageShell` con la cabecera de la marca **sin índice** —un panel que

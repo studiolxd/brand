@@ -43,6 +43,13 @@ export interface PopoverProps {
     align?: 'start' | 'center' | 'end';
     /** Separación en px con el disparador. Sin ella se lee el token `--popover-offset`. */
     sideOffset?: number;
+    /**
+     * Qué recibe el foco al abrirse. Por defecto lo recibe el propio panel, que
+     * es lo correcto para un panel de lectura. Un panel cuyo contenido es una
+     * lista de controles (el de notificaciones) pasa aquí el primero de ellos:
+     * un `ref`, o una función que lo devuelva. Es la prop de Base UI, tal cual.
+     */
+    initialFocus?: React.ComponentProps<typeof BasePopover.Popup>['initialFocus'];
     /** Clase adicional para el panel. */
     className?: string;
 }
@@ -56,4 +63,4 @@ export interface PopoverProps {
  * mantener el panel abierto cuando el clic cae en algo que el motor no
  * reconoce como suyo.
  */
-export declare function Popover({ trigger, children, label, open, defaultOpen, onOpenChange, onPointerDownOutside, onFocusOutside, onEscapeKeyDown, side, align, sideOffset, className, }: PopoverProps): import("react/jsx-runtime").JSX.Element;
+export declare function Popover({ trigger, children, label, open, defaultOpen, onOpenChange, onPointerDownOutside, onFocusOutside, onEscapeKeyDown, side, align, sideOffset, initialFocus, className, }: PopoverProps): import("react/jsx-runtime").JSX.Element;

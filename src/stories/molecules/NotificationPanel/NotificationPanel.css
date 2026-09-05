@@ -1,0 +1,178 @@
+/* El panel es el `Popup` del `Popover`: se le quita el aire propio del panel
+   —remapeando sus tokens en su ámbito, que es el único camino permitido— para
+   que la lista pueda hacer scroll de canto a canto y las líneas de la
+   cabecera y del pie lleguen a los bordes. El ancho es del panel. */
+.notification-panel {
+  --popover-padding-block: 0;
+  --popover-padding-inline: 0;
+  inline-size: var(--notification-panel-inline-size);
+}
+
+.notification-panel__body {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+}
+
+.notification-panel__header {
+  padding-block: var(--notification-panel-header-padding-block);
+  padding-inline: var(--notification-panel-padding-inline);
+  border-block-end: var(--notification-panel-separator-thickness) solid var(--notification-panel-separator-color);
+}
+
+/* El título del panel no arrastra el aire que un título deja bajo de sí: aquí
+   lo separa la línea de la cabecera. */
+.notification-panel__title {
+  margin-block: 0;
+}
+
+/* Pasado el alto máximo, lo que se mueve es la lista: la cabecera y el pie se
+   quedan quietos. */
+.notification-panel__list {
+  list-style: none;
+  margin: 0;
+  padding-block: var(--notification-panel-list-padding-block);
+  padding-inline: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--notification-panel-list-gap);
+  max-block-size: var(--notification-panel-list-max-block-size);
+  overflow-y: auto;
+}
+
+.notification-panel__item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.notification-panel__item-action {
+  display: flex;
+  align-items: start;
+  gap: var(--notification-panel-item-gap);
+  inline-size: 100%;
+  padding-block: var(--notification-panel-item-padding-block);
+  padding-inline: var(--notification-panel-padding-inline);
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-family: var(--notification-panel-item-font-family);
+  text-align: start;
+  cursor: pointer;
+  border-radius: var(--notification-panel-item-border-radius);
+  transition: box-shadow var(--notification-panel-transition-duration) var(--notification-panel-transition-easing);
+}
+
+/* Bajo el puntero la fila no se rellena (Foundations → Colores): se subraya
+   con la línea del sistema, como el ítem de la SidebarNav. */
+.notification-panel__item-action:hover {
+  box-shadow: inset 0 calc(-1 * var(--notification-panel-item-hover-line-width)) 0 0 var(--notification-panel-item-hover-line-color);
+}
+
+/* Ya leída, la fila sigue en el recorrido de teclado pero no hace nada: ni
+   cursor de acción ni línea de hover. */
+.notification-panel__item-action[aria-disabled='true'] {
+  cursor: default;
+}
+
+.notification-panel__item-action[aria-disabled='true']:hover {
+  box-shadow: none;
+}
+
+.notification-panel__item-action:focus-visible {
+  outline: var(--notification-panel-focus-ring-width) solid var(--notification-panel-focus-ring-color);
+  outline-offset: calc(-1 * var(--notification-panel-focus-ring-width));
+}
+
+/* El hueco del punto se reserva siempre: al marcar leída una fila, el texto
+   no se desplaza. */
+.notification-panel__indicator {
+  flex-shrink: 0;
+  inline-size: var(--notification-panel-dot-size);
+  margin-block-start: var(--notification-panel-dot-margin-block-start);
+}
+
+.notification-panel__dot {
+  display: block;
+  color: var(--notification-panel-dot-color);
+}
+
+.notification-panel__item-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--notification-panel-item-text-gap);
+  min-inline-size: 0;
+}
+
+/* Los tres textos de la fila son `Text`, cuyo `.text` iguala la tipografía a
+   la del contenedor (`font: inherit`). Se escriben anidados bajo la columna de
+   texto para ganarle en especificidad sin depender de en qué orden se junten
+   las hojas del paquete. */
+.notification-panel__item-text .notification-panel__item-title {
+  font-size: var(--notification-panel-item-title-font-size);
+  line-height: var(--notification-panel-item-title-line-height);
+  font-weight: var(--notification-panel-item-read-font-weight);
+}
+
+/* Doble clase: el modificador gana al selector base. */
+.notification-panel__item-text .notification-panel__item-title.notification-panel__item-title--unread {
+  font-weight: var(--notification-panel-item-unread-font-weight);
+}
+
+/* El cuerpo es un adelanto: se recorta a las líneas del token y el texto
+   entero está en la bandeja. */
+.notification-panel__item-text .notification-panel__item-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--notification-panel-item-body-line-clamp);
+  line-clamp: var(--notification-panel-item-body-line-clamp);
+  overflow: hidden;
+  font-size: var(--notification-panel-item-body-font-size);
+  line-height: var(--notification-panel-item-body-line-height);
+}
+
+.notification-panel__item-text .notification-panel__item-time {
+  font-size: var(--notification-panel-item-time-font-size);
+}
+
+/* El enlace de la fila hereda del enlace del sistema (color, línea, foco):
+   aquí solo cambia de talla y se alinea con el texto de la notificación. */
+.notification-panel__view {
+  font-size: var(--notification-panel-view-font-size);
+  margin-inline-start: calc(
+    var(--notification-panel-padding-inline) + var(--notification-panel-dot-size) +
+      var(--notification-panel-item-gap)
+  );
+  margin-block-end: var(--notification-panel-item-padding-block);
+}
+
+.notification-panel__empty {
+  padding-block: var(--notification-panel-empty-padding-block);
+  padding-inline: var(--notification-panel-padding-inline);
+  text-align: center;
+}
+
+.notification-panel__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--notification-panel-footer-gap);
+  padding-block: var(--notification-panel-footer-padding-block);
+  padding-inline: var(--notification-panel-padding-inline);
+  border-block-start: var(--notification-panel-separator-thickness) solid var(--notification-panel-separator-color);
+}
+
+.notification-panel__footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--notification-panel-footer-gap);
+}
+
+.notification-panel__footer-link {
+  font-size: var(--notification-panel-footer-font-size);
+}
+
+.notification-panel__mark-all {
+  --button-sm-font-size: var(--notification-panel-footer-font-size);
+}
