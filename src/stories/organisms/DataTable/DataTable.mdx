@@ -44,6 +44,22 @@ es, y una tabla sin nombre llega al lector de pantalla como «tabla» a secas.
 
 <Canvas of={DataTableStories.ConAcciones} />
 
+## Acciones en el pie
+
+`toolbar` y `footerActions` responden a preguntas distintas: `toolbar` son filtros y
+acciones sobre la **selección** (invitar, filtrar), y va arriba, junto al buscador —
+lo primero que se toca al entrar en la tabla. `footerActions` son acciones sobre el
+**conjunto** (exportar el listado completo, imprimir), y van abajo, junto a la
+paginación — se consultan una vez decidido qué hacer con toda la lista, no con una fila.
+
+`footerActions` se pinta en `.data-table__footer`, a la derecha de la paginación —del
+selector de registros por página incluido—, en la misma fila cuando cabe. Si la
+paginación apila en móvil, las acciones bajan a su propia línea alineadas al final,
+igual que ya hace `Pagination` con sus propios controles. Sin `footerActions` el pie
+no cambia: no se pinta ningún nodo vacío.
+
+<Canvas of={DataTableStories.AccionesEnElPie} />
+
 ## Columnas alineadas
 
 La alineación viaja en la **columna**, no en el marcado de cada celda: `meta.align` de

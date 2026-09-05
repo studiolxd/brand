@@ -79,6 +79,17 @@ export const ConAcciones: Story = {
   },
 };
 
+export const AccionesEnElPie: Story = {
+  name: 'Acciones en el pie',
+  args: {
+    columns,
+    data,
+    searchColumnId: 'name',
+    pageSize: 5,
+    footerActions: <Button variant="outline" size="sm">Exportar</Button>,
+  },
+};
+
 type Invoice = {
   id: string;
   number: string;

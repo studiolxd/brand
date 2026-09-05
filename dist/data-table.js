@@ -283,66 +283,66 @@ var O = (e, t, n, r, i, a, o) => {
 		n == null || n.createRow == null || n.createRow(s, e);
 	}
 	return s;
-}, ee = { createColumn: (e, t) => {
+}, k = { createColumn: (e, t) => {
 	e._getFacetedRowModel = t.options.getFacetedRowModel && t.options.getFacetedRowModel(t, e.id), e.getFacetedRowModel = () => e._getFacetedRowModel ? e._getFacetedRowModel() : t.getPreFilteredRowModel(), e._getFacetedUniqueValues = t.options.getFacetedUniqueValues && t.options.getFacetedUniqueValues(t, e.id), e.getFacetedUniqueValues = () => e._getFacetedUniqueValues ? e._getFacetedUniqueValues() : /* @__PURE__ */ new Map(), e._getFacetedMinMaxValues = t.options.getFacetedMinMaxValues && t.options.getFacetedMinMaxValues(t, e.id), e.getFacetedMinMaxValues = () => {
 		if (e._getFacetedMinMaxValues) return e._getFacetedMinMaxValues();
 	};
-} }, k = (e, t, n) => {
+} }, ee = (e, t, n) => {
 	var r, i;
 	let a = n == null || (r = n.toString()) == null ? void 0 : r.toLowerCase();
 	return !!(!((i = e.getValue(t)) == null || (i = i.toString()) == null || (i = i.toLowerCase()) == null) && i.includes(a));
 };
-k.autoRemove = (e) => I(e);
+ee.autoRemove = (e) => L(e);
 var te = (e, t, n) => {
 	var r;
 	return !!(!((r = e.getValue(t)) == null || (r = r.toString()) == null) && r.includes(n));
 };
-te.autoRemove = (e) => I(e);
+te.autoRemove = (e) => L(e);
 var ne = (e, t, n) => {
 	var r;
 	return ((r = e.getValue(t)) == null || (r = r.toString()) == null ? void 0 : r.toLowerCase()) === n?.toLowerCase();
 };
-ne.autoRemove = (e) => I(e);
-var re = (e, t, n) => e.getValue(t)?.includes(n);
-re.autoRemove = (e) => I(e);
-var A = (e, t, n) => !n.some((n) => {
+ne.autoRemove = (e) => L(e);
+var A = (e, t, n) => e.getValue(t)?.includes(n);
+A.autoRemove = (e) => L(e);
+var j = (e, t, n) => !n.some((n) => {
 	var r;
 	return !((r = e.getValue(t)) != null && r.includes(n));
 });
-A.autoRemove = (e) => I(e) || !(e != null && e.length);
-var j = (e, t, n) => n.some((n) => e.getValue(t)?.includes(n));
-j.autoRemove = (e) => I(e) || !(e != null && e.length);
-var M = (e, t, n) => e.getValue(t) === n;
-M.autoRemove = (e) => I(e);
-var N = (e, t, n) => e.getValue(t) == n;
-N.autoRemove = (e) => I(e);
-var P = (e, t, n) => {
+j.autoRemove = (e) => L(e) || !(e != null && e.length);
+var M = (e, t, n) => n.some((n) => e.getValue(t)?.includes(n));
+M.autoRemove = (e) => L(e) || !(e != null && e.length);
+var N = (e, t, n) => e.getValue(t) === n;
+N.autoRemove = (e) => L(e);
+var P = (e, t, n) => e.getValue(t) == n;
+P.autoRemove = (e) => L(e);
+var F = (e, t, n) => {
 	let [r, i] = n, a = e.getValue(t);
 	return a >= r && a <= i;
 };
-P.resolveFilterValue = (e) => {
+F.resolveFilterValue = (e) => {
 	let [t, n] = e, r = typeof t == "number" ? t : parseFloat(t), i = typeof n == "number" ? n : parseFloat(n), a = t === null || Number.isNaN(r) ? -Infinity : r, o = n === null || Number.isNaN(i) ? Infinity : i;
 	if (a > o) {
 		let e = a;
 		a = o, o = e;
 	}
 	return [a, o];
-}, P.autoRemove = (e) => I(e) || I(e[0]) && I(e[1]);
-var F = {
-	includesString: k,
+}, F.autoRemove = (e) => L(e) || L(e[0]) && L(e[1]);
+var I = {
+	includesString: ee,
 	includesStringSensitive: te,
 	equalsString: ne,
-	arrIncludes: re,
-	arrIncludesAll: A,
-	arrIncludesSome: j,
-	equals: M,
-	weakEquals: N,
-	inNumberRange: P
+	arrIncludes: A,
+	arrIncludesAll: j,
+	arrIncludesSome: M,
+	equals: N,
+	weakEquals: P,
+	inNumberRange: F
 };
-function I(e) {
+function L(e) {
 	return e == null || e === "";
 }
-var ie = {
+var re = {
 	getDefaultColumnDef: () => ({ filterFn: "auto" }),
 	getInitialState: (e) => ({
 		columnFilters: [],
@@ -356,14 +356,14 @@ var ie = {
 	createColumn: (e, t) => {
 		e.getAutoFilterFn = () => {
 			let n = t.getCoreRowModel().flatRows[0]?.getValue(e.id);
-			return typeof n == "string" ? F.includesString : typeof n == "number" ? F.inNumberRange : typeof n == "boolean" || typeof n == "object" && n ? F.equals : Array.isArray(n) ? F.arrIncludes : F.weakEquals;
-		}, e.getFilterFn = () => _(e.columnDef.filterFn) ? e.columnDef.filterFn : e.columnDef.filterFn === "auto" ? e.getAutoFilterFn() : t.options.filterFns?.[e.columnDef.filterFn] ?? F[e.columnDef.filterFn], e.getCanFilter = () => (e.columnDef.enableColumnFilter ?? !0) && (t.options.enableColumnFilters ?? !0) && (t.options.enableFilters ?? !0) && !!e.accessorFn, e.getIsFiltered = () => e.getFilterIndex() > -1, e.getFilterValue = () => {
+			return typeof n == "string" ? I.includesString : typeof n == "number" ? I.inNumberRange : typeof n == "boolean" || typeof n == "object" && n ? I.equals : Array.isArray(n) ? I.arrIncludes : I.weakEquals;
+		}, e.getFilterFn = () => _(e.columnDef.filterFn) ? e.columnDef.filterFn : e.columnDef.filterFn === "auto" ? e.getAutoFilterFn() : t.options.filterFns?.[e.columnDef.filterFn] ?? I[e.columnDef.filterFn], e.getCanFilter = () => (e.columnDef.enableColumnFilter ?? !0) && (t.options.enableColumnFilters ?? !0) && (t.options.enableFilters ?? !0) && !!e.accessorFn, e.getIsFiltered = () => e.getFilterIndex() > -1, e.getFilterValue = () => {
 			var n;
 			return (n = t.getState().columnFilters) == null || (n = n.find((t) => t.id === e.id)) == null ? void 0 : n.value;
 		}, e.getFilterIndex = () => t.getState().columnFilters?.findIndex((t) => t.id === e.id) ?? -1, e.setFilterValue = (n) => {
 			t.setColumnFilters((t) => {
 				let r = e.getFilterFn(), i = t?.find((t) => t.id === e.id), a = h(n, i ? i.value : void 0);
-				if (ae(r, a, e)) return t?.filter((t) => t.id !== e.id) ?? [];
+				if (ie(r, a, e)) return t?.filter((t) => t.id !== e.id) ?? [];
 				let o = {
 					id: e.id,
 					value: a
@@ -380,17 +380,17 @@ var ie = {
 			let n = e.getAllLeafColumns();
 			e.options.onColumnFiltersChange == null || e.options.onColumnFiltersChange((e) => h(t, e)?.filter((e) => {
 				let t = n.find((t) => t.id === e.id);
-				return !(t && ae(t.getFilterFn(), e.value, t));
+				return !(t && ie(t.getFilterFn(), e.value, t));
 			}));
 		}, e.resetColumnFilters = (t) => {
 			e.setColumnFilters(t ? [] : e.initialState?.columnFilters ?? []);
 		}, e.getPreFilteredRowModel = () => e.getCoreRowModel(), e.getFilteredRowModel = () => (!e._getFilteredRowModel && e.options.getFilteredRowModel && (e._getFilteredRowModel = e.options.getFilteredRowModel(e)), e.options.manualFiltering || !e._getFilteredRowModel ? e.getPreFilteredRowModel() : e._getFilteredRowModel());
 	}
 };
-function ae(e, t, n) {
+function ie(e, t, n) {
 	return (e && e.autoRemove ? e.autoRemove(t, n) : !1) || t === void 0 || typeof t == "string" && !t;
 }
-var L = {
+var R = {
 	sum: (e, t, n) => n.reduce((t, n) => {
 		let r = n.getValue(e);
 		return t + (typeof r == "number" ? r : 0);
@@ -434,7 +434,7 @@ var L = {
 	unique: (e, t) => Array.from(new Set(t.map((t) => t.getValue(e))).values()),
 	uniqueCount: (e, t) => new Set(t.map((t) => t.getValue(e))).size,
 	count: (e, t) => t.length
-}, oe = {
+}, ae = {
 	getDefaultColumnDef: () => ({
 		aggregatedCell: (e) => {
 			var t;
@@ -460,11 +460,11 @@ var L = {
 			};
 		}, e.getAutoAggregationFn = () => {
 			let n = t.getCoreRowModel().flatRows[0]?.getValue(e.id);
-			if (typeof n == "number") return L.sum;
-			if (Object.prototype.toString.call(n) === "[object Date]") return L.extent;
+			if (typeof n == "number") return R.sum;
+			if (Object.prototype.toString.call(n) === "[object Date]") return R.extent;
 		}, e.getAggregationFn = () => {
 			if (!e) throw Error();
-			return _(e.columnDef.aggregationFn) ? e.columnDef.aggregationFn : e.columnDef.aggregationFn === "auto" ? e.getAutoAggregationFn() : t.options.aggregationFns?.[e.columnDef.aggregationFn] ?? L[e.columnDef.aggregationFn];
+			return _(e.columnDef.aggregationFn) ? e.columnDef.aggregationFn : e.columnDef.aggregationFn === "auto" ? e.getAutoAggregationFn() : t.options.aggregationFns?.[e.columnDef.aggregationFn] ?? R[e.columnDef.aggregationFn];
 		};
 	},
 	createTable: (e) => {
@@ -486,20 +486,20 @@ var L = {
 		};
 	}
 };
-function se(e, t, n) {
+function oe(e, t, n) {
 	if (!(t != null && t.length) || !n) return e;
 	let r = e.filter((e) => !t.includes(e.id));
 	return n === "remove" ? r : [...t.map((t) => e.find((e) => e.id === t)).filter(Boolean), ...r];
 }
-var ce = {
+var se = {
 	getInitialState: (e) => ({
 		columnOrder: [],
 		...e
 	}),
 	getDefaultOptions: (e) => ({ onColumnOrderChange: g("columnOrder", e) }),
 	createColumn: (e, t) => {
-		e.getIndex = b((e) => [U(t, e)], (t) => t.findIndex((t) => t.id === e.id), x(t.options, "debugColumns", "getIndex")), e.getIsFirstColumn = (n) => U(t, n)[0]?.id === e.id, e.getIsLastColumn = (n) => {
-			let r = U(t, n);
+		e.getIndex = b((e) => [W(t, e)], (t) => t.findIndex((t) => t.id === e.id), x(t.options, "debugColumns", "getIndex")), e.getIsFirstColumn = (n) => W(t, n)[0]?.id === e.id, e.getIsLastColumn = (n) => {
+			let r = W(t, n);
 			return r[r.length - 1]?.id === e.id;
 		};
 	},
@@ -521,15 +521,15 @@ var ce = {
 				}
 				i = [...i, ...n];
 			}
-			return se(i, t, n);
+			return oe(i, t, n);
 		}, x(e.options, "debugTable", "_getOrderColumnsFn"));
 	}
-}, R = () => ({
+}, z = () => ({
 	left: [],
 	right: []
-}), le = {
+}), ce = {
 	getInitialState: (e) => ({
-		columnPinning: R(),
+		columnPinning: z(),
 		...e
 	}),
 	getDefaultOptions: (e) => ({ onColumnPinningChange: g("columnPinning", e) }),
@@ -572,7 +572,7 @@ var ce = {
 		})), x(t.options, "debugRows", "getRightVisibleCells"));
 	},
 	createTable: (e) => {
-		e.setColumnPinning = (t) => e.options.onColumnPinningChange == null ? void 0 : e.options.onColumnPinningChange(t), e.resetColumnPinning = (t) => e.setColumnPinning(t ? R() : e.initialState?.columnPinning ?? R()), e.getIsSomeColumnsPinned = (t) => {
+		e.setColumnPinning = (t) => e.options.onColumnPinningChange == null ? void 0 : e.options.onColumnPinningChange(t), e.resetColumnPinning = (t) => e.setColumnPinning(t ? z() : e.initialState?.columnPinning ?? z()), e.getIsSomeColumnsPinned = (t) => {
 			let n = e.getState().columnPinning;
 			return t ? !!n[t]?.length : !!(n.left?.length || n.right?.length);
 		}, e.getLeftLeafColumns = b(() => [e.getAllLeafColumns(), e.getState().columnPinning.left], (e, t) => (t ?? []).map((t) => e.find((e) => e.id === t)).filter(Boolean), x(e.options, "debugColumns", "getLeftLeafColumns")), e.getRightLeafColumns = b(() => [e.getAllLeafColumns(), e.getState().columnPinning.right], (e, t) => (t ?? []).map((t) => e.find((e) => e.id === t)).filter(Boolean), x(e.options, "debugColumns", "getRightLeafColumns")), e.getCenterLeafColumns = b(() => [
@@ -585,25 +585,25 @@ var ce = {
 		}, x(e.options, "debugColumns", "getCenterLeafColumns"));
 	}
 };
-function ue(e) {
+function le(e) {
 	return e || (typeof document < "u" ? document : null);
 }
-var z = {
+var B = {
 	size: 150,
 	minSize: 20,
 	maxSize: 2 ** 53 - 1
-}, B = () => ({
+}, V = () => ({
 	startOffset: null,
 	startSize: null,
 	deltaOffset: null,
 	deltaPercentage: null,
 	isResizingColumn: !1,
 	columnSizingStart: []
-}), de = {
-	getDefaultColumnDef: () => z,
+}), ue = {
+	getDefaultColumnDef: () => B,
 	getInitialState: (e) => ({
 		columnSizing: {},
-		columnSizingInfo: B(),
+		columnSizingInfo: V(),
 		...e
 	}),
 	getDefaultOptions: (e) => ({
@@ -615,14 +615,14 @@ var z = {
 	createColumn: (e, t) => {
 		e.getSize = () => {
 			let n = t.getState().columnSizing[e.id];
-			return Math.min(Math.max(e.columnDef.minSize ?? z.minSize, n ?? e.columnDef.size ?? z.size), e.columnDef.maxSize ?? z.maxSize);
+			return Math.min(Math.max(e.columnDef.minSize ?? B.minSize, n ?? e.columnDef.size ?? B.size), e.columnDef.maxSize ?? B.maxSize);
 		}, e.getStart = b((e) => [
 			e,
-			U(t, e),
+			W(t, e),
 			t.getState().columnSizing
 		], (t, n) => n.slice(0, e.getIndex(t)).reduce((e, t) => e + t.getSize(), 0), x(t.options, "debugColumns", "getStart")), e.getAfter = b((e) => [
 			e,
-			U(t, e),
+			W(t, e),
 			t.getState().columnSizing
 		], (t, n) => n.slice(e.getIndex(t) + 1).reduce((e, t) => e + t.getSize(), 0), x(t.options, "debugColumns", "getAfter")), e.resetSize = () => {
 			t.setColumnSizing((t) => {
@@ -646,8 +646,8 @@ var z = {
 		}, e.getResizeHandler = (n) => {
 			let r = t.getColumn(e.column.id), i = r?.getCanResize();
 			return (a) => {
-				if (!r || !i || (a.persist == null || a.persist(), H(a) && a.touches && a.touches.length > 1)) return;
-				let o = e.getSize(), s = e ? e.getLeafHeaders().map((e) => [e.column.id, e.column.getSize()]) : [[r.id, r.getSize()]], c = H(a) ? Math.round(a.touches[0].clientX) : a.clientX, l = {}, u = (e, n) => {
+				if (!r || !i || (a.persist == null || a.persist(), U(a) && a.touches && a.touches.length > 1)) return;
+				let o = e.getSize(), s = e ? e.getLeafHeaders().map((e) => [e.column.id, e.column.getSize()]) : [[r.id, r.getSize()]], c = U(a) ? Math.round(a.touches[0].clientX) : a.clientX, l = {}, u = (e, n) => {
 					typeof n == "number" && (t.setColumnSizingInfo((e) => {
 						let r = t.options.columnResizeDirection === "rtl" ? -1 : 1, i = (n - (e?.startOffset ?? 0)) * r, a = Math.max(i / (e?.startSize ?? 0), -.999999);
 						return e.columnSizingStart.forEach((e) => {
@@ -672,7 +672,7 @@ var z = {
 						deltaPercentage: null,
 						columnSizingStart: []
 					}));
-				}, p = ue(n), m = {
+				}, p = le(n), m = {
 					moveHandler: (e) => d(e.clientX),
 					upHandler: (e) => {
 						p?.removeEventListener("mousemove", m.moveHandler), p?.removeEventListener("mouseup", m.upHandler), f(e.clientX);
@@ -682,8 +682,8 @@ var z = {
 					upHandler: (e) => {
 						p?.removeEventListener("touchmove", h.moveHandler), p?.removeEventListener("touchend", h.upHandler), e.cancelable && (e.preventDefault(), e.stopPropagation()), f(e.touches[0]?.clientX);
 					}
-				}, g = fe() ? { passive: !1 } : !1;
-				H(a) ? (p?.addEventListener("touchmove", h.moveHandler, g), p?.addEventListener("touchend", h.upHandler, g)) : (p?.addEventListener("mousemove", m.moveHandler, g), p?.addEventListener("mouseup", m.upHandler, g)), t.setColumnSizingInfo((e) => ({
+				}, g = de() ? { passive: !1 } : !1;
+				U(a) ? (p?.addEventListener("touchmove", h.moveHandler, g), p?.addEventListener("touchend", h.upHandler, g)) : (p?.addEventListener("mousemove", m.moveHandler, g), p?.addEventListener("mouseup", m.upHandler, g)), t.setColumnSizingInfo((e) => ({
 					...e,
 					startOffset: c,
 					startSize: o,
@@ -699,12 +699,12 @@ var z = {
 		e.setColumnSizing = (t) => e.options.onColumnSizingChange == null ? void 0 : e.options.onColumnSizingChange(t), e.setColumnSizingInfo = (t) => e.options.onColumnSizingInfoChange == null ? void 0 : e.options.onColumnSizingInfoChange(t), e.resetColumnSizing = (t) => {
 			e.setColumnSizing(t ? {} : e.initialState.columnSizing ?? {});
 		}, e.resetHeaderSizeInfo = (t) => {
-			e.setColumnSizingInfo(t ? B() : e.initialState.columnSizingInfo ?? B());
+			e.setColumnSizingInfo(t ? V() : e.initialState.columnSizingInfo ?? V());
 		}, e.getTotalSize = () => e.getHeaderGroups()[0]?.headers.reduce((e, t) => e + t.getSize(), 0) ?? 0, e.getLeftTotalSize = () => e.getLeftHeaderGroups()[0]?.headers.reduce((e, t) => e + t.getSize(), 0) ?? 0, e.getCenterTotalSize = () => e.getCenterHeaderGroups()[0]?.headers.reduce((e, t) => e + t.getSize(), 0) ?? 0, e.getRightTotalSize = () => e.getRightHeaderGroups()[0]?.headers.reduce((e, t) => e + t.getSize(), 0) ?? 0;
 	}
-}, V = null;
-function fe() {
-	if (typeof V == "boolean") return V;
+}, H = null;
+function de() {
+	if (typeof H == "boolean") return H;
 	let e = !1;
 	try {
 		let t = { get passive() {
@@ -714,12 +714,12 @@ function fe() {
 	} catch {
 		e = !1;
 	}
-	return V = e, V;
+	return H = e, H;
 }
-function H(e) {
+function U(e) {
 	return e.type === "touchstart";
 }
-var pe = {
+var fe = {
 	getInitialState: (e) => ({
 		columnVisibility: {},
 		...e
@@ -763,14 +763,14 @@ var pe = {
 		};
 	}
 };
-function U(e, t) {
+function W(e, t) {
 	return t ? t === "center" ? e.getCenterVisibleLeafColumns() : t === "left" ? e.getLeftVisibleLeafColumns() : e.getRightVisibleLeafColumns() : e.getVisibleLeafColumns();
 }
-var me = { createTable: (e) => {
+var pe = { createTable: (e) => {
 	e._getGlobalFacetedRowModel = e.options.getFacetedRowModel && e.options.getFacetedRowModel(e, "__global__"), e.getGlobalFacetedRowModel = () => e.options.manualFiltering || !e._getGlobalFacetedRowModel ? e.getPreFilteredRowModel() : e._getGlobalFacetedRowModel(), e._getGlobalFacetedUniqueValues = e.options.getFacetedUniqueValues && e.options.getFacetedUniqueValues(e, "__global__"), e.getGlobalFacetedUniqueValues = () => e._getGlobalFacetedUniqueValues ? e._getGlobalFacetedUniqueValues() : /* @__PURE__ */ new Map(), e._getGlobalFacetedMinMaxValues = e.options.getFacetedMinMaxValues && e.options.getFacetedMinMaxValues(e, "__global__"), e.getGlobalFacetedMinMaxValues = () => {
 		if (e._getGlobalFacetedMinMaxValues) return e._getGlobalFacetedMinMaxValues();
 	};
-} }, he = {
+} }, me = {
 	getInitialState: (e) => ({
 		globalFilter: void 0,
 		...e
@@ -788,16 +788,16 @@ var me = { createTable: (e) => {
 		e.getCanGlobalFilter = () => (e.columnDef.enableGlobalFilter ?? !0) && (t.options.enableGlobalFilter ?? !0) && (t.options.enableFilters ?? !0) && ((t.options.getColumnCanGlobalFilter == null ? void 0 : t.options.getColumnCanGlobalFilter(e)) ?? !0) && !!e.accessorFn;
 	},
 	createTable: (e) => {
-		e.getGlobalAutoFilterFn = () => F.includesString, e.getGlobalFilterFn = () => {
+		e.getGlobalAutoFilterFn = () => I.includesString, e.getGlobalFilterFn = () => {
 			let { globalFilterFn: t } = e.options;
-			return _(t) ? t : t === "auto" ? e.getGlobalAutoFilterFn() : e.options.filterFns?.[t] ?? F[t];
+			return _(t) ? t : t === "auto" ? e.getGlobalAutoFilterFn() : e.options.filterFns?.[t] ?? I[t];
 		}, e.setGlobalFilter = (t) => {
 			e.options.onGlobalFilterChange == null || e.options.onGlobalFilterChange(t);
 		}, e.resetGlobalFilter = (t) => {
 			e.setGlobalFilter(t ? void 0 : e.initialState.globalFilter);
 		};
 	}
-}, ge = {
+}, he = {
 	getInitialState: (e) => ({
 		expanded: {},
 		...e
@@ -874,14 +874,14 @@ var me = { createTable: (e) => {
 			};
 		};
 	}
-}, W = 0, G = 10, K = () => ({
-	pageIndex: W,
-	pageSize: G
-}), _e = {
+}, G = 0, K = 10, q = () => ({
+	pageIndex: G,
+	pageSize: K
+}), ge = {
 	getInitialState: (e) => ({
 		...e,
 		pagination: {
-			...K(),
+			...q(),
 			...e?.pagination
 		}
 	}),
@@ -902,7 +902,7 @@ var me = { createTable: (e) => {
 				});
 			}
 		}, e.setPagination = (t) => e.options.onPaginationChange == null ? void 0 : e.options.onPaginationChange((e) => h(t, e)), e.resetPagination = (t) => {
-			e.setPagination(t ? K() : e.initialState.pagination ?? K());
+			e.setPagination(t ? q() : e.initialState.pagination ?? q());
 		}, e.setPageIndex = (t) => {
 			e.setPagination((n) => {
 				let r = h(t, n.pageIndex), i = e.options.pageCount === void 0 || e.options.pageCount === -1 ? 2 ** 53 - 1 : e.options.pageCount - 1;
@@ -913,10 +913,10 @@ var me = { createTable: (e) => {
 			});
 		}, e.resetPageIndex = (t) => {
 			var n;
-			e.setPageIndex(t ? W : ((n = e.initialState) == null || (n = n.pagination) == null ? void 0 : n.pageIndex) ?? W);
+			e.setPageIndex(t ? G : ((n = e.initialState) == null || (n = n.pagination) == null ? void 0 : n.pageIndex) ?? G);
 		}, e.resetPageSize = (t) => {
 			var n;
-			e.setPageSize(t ? G : ((n = e.initialState) == null || (n = n.pagination) == null ? void 0 : n.pageSize) ?? G);
+			e.setPageSize(t ? K : ((n = e.initialState) == null || (n = n.pagination) == null ? void 0 : n.pageSize) ?? K);
 		}, e.setPageSize = (t) => {
 			e.setPagination((e) => {
 				let n = Math.max(1, h(t, e.pageSize)), r = e.pageSize * e.pageIndex, i = Math.floor(r / n);
@@ -940,12 +940,12 @@ var me = { createTable: (e) => {
 			return n === -1 ? !0 : n === 0 ? !1 : t < n - 1;
 		}, e.previousPage = () => e.setPageIndex((e) => e - 1), e.nextPage = () => e.setPageIndex((e) => e + 1), e.firstPage = () => e.setPageIndex(0), e.lastPage = () => e.setPageIndex(e.getPageCount() - 1), e.getPrePaginationRowModel = () => e.getExpandedRowModel(), e.getPaginationRowModel = () => (!e._getPaginationRowModel && e.options.getPaginationRowModel && (e._getPaginationRowModel = e.options.getPaginationRowModel(e)), e.options.manualPagination || !e._getPaginationRowModel ? e.getPrePaginationRowModel() : e._getPaginationRowModel()), e.getPageCount = () => e.options.pageCount ?? Math.ceil(e.getRowCount() / e.getState().pagination.pageSize), e.getRowCount = () => e.options.rowCount ?? e.getPrePaginationRowModel().rows.length;
 	}
-}, q = () => ({
+}, J = () => ({
 	top: [],
 	bottom: []
-}), ve = {
+}), _e = {
 	getInitialState: (e) => ({
-		rowPinning: q(),
+		rowPinning: J(),
 		...e
 	}),
 	getDefaultOptions: (e) => ({ onRowPinningChange: g("rowPinning", e) }),
@@ -987,7 +987,7 @@ var me = { createTable: (e) => {
 		};
 	},
 	createTable: (e) => {
-		e.setRowPinning = (t) => e.options.onRowPinningChange == null ? void 0 : e.options.onRowPinningChange(t), e.resetRowPinning = (t) => e.setRowPinning(t ? q() : e.initialState?.rowPinning ?? q()), e.getIsSomeRowsPinned = (t) => {
+		e.setRowPinning = (t) => e.options.onRowPinningChange == null ? void 0 : e.options.onRowPinningChange(t), e.resetRowPinning = (t) => e.setRowPinning(t ? J() : e.initialState?.rowPinning ?? J()), e.getIsSomeRowsPinned = (t) => {
 			let n = e.getState().rowPinning;
 			return t ? !!n[t]?.length : !!(n.top?.length || n.bottom?.length);
 		}, e._getPinnedRows = (t, n, r) => (e.options.keepPinnedRows ?? !0 ? (n ?? []).map((t) => {
@@ -1005,7 +1005,7 @@ var me = { createTable: (e) => {
 			return e.filter((e) => !r.has(e.id));
 		}, x(e.options, "debugRows", "getCenterRows"));
 	}
-}, ye = {
+}, ve = {
 	getInitialState: (e) => ({
 		rowSelection: {},
 		...e
@@ -1030,17 +1030,17 @@ var me = { createTable: (e) => {
 		}, e.toggleAllPageRowsSelected = (t) => e.setRowSelection((n) => {
 			let r = t === void 0 ? !e.getIsAllPageRowsSelected() : t, i = { ...n };
 			return e.getRowModel().rows.forEach((t) => {
-				J(i, t.id, r, !0, e);
+				Y(i, t.id, r, !0, e);
 			}), i;
-		}), e.getPreSelectedRowModel = () => e.getCoreRowModel(), e.getSelectedRowModel = b(() => [e.getState().rowSelection, e.getCoreRowModel()], (t, n) => Object.keys(t).length ? Y(e, n) : {
+		}), e.getPreSelectedRowModel = () => e.getCoreRowModel(), e.getSelectedRowModel = b(() => [e.getState().rowSelection, e.getCoreRowModel()], (t, n) => Object.keys(t).length ? X(e, n) : {
 			rows: [],
 			flatRows: [],
 			rowsById: {}
-		}, x(e.options, "debugTable", "getSelectedRowModel")), e.getFilteredSelectedRowModel = b(() => [e.getState().rowSelection, e.getFilteredRowModel()], (t, n) => Object.keys(t).length ? Y(e, n) : {
+		}, x(e.options, "debugTable", "getSelectedRowModel")), e.getFilteredSelectedRowModel = b(() => [e.getState().rowSelection, e.getFilteredRowModel()], (t, n) => Object.keys(t).length ? X(e, n) : {
 			rows: [],
 			flatRows: [],
 			rowsById: {}
-		}, x(e.options, "debugTable", "getFilteredSelectedRowModel")), e.getGroupedSelectedRowModel = b(() => [e.getState().rowSelection, e.getSortedRowModel()], (t, n) => Object.keys(t).length ? Y(e, n) : {
+		}, x(e.options, "debugTable", "getFilteredSelectedRowModel")), e.getGroupedSelectedRowModel = b(() => [e.getState().rowSelection, e.getSortedRowModel()], (t, n) => Object.keys(t).length ? X(e, n) : {
 			rows: [],
 			flatRows: [],
 			rowsById: {}
@@ -1068,17 +1068,17 @@ var me = { createTable: (e) => {
 			t.setRowSelection((a) => {
 				if (n = n === void 0 ? !i : n, e.getCanSelect() && i === n) return a;
 				let o = { ...a };
-				return J(o, e.id, n, r?.selectChildren ?? !0, t), o;
+				return Y(o, e.id, n, r?.selectChildren ?? !0, t), o;
 			});
 		}, e.getIsSelected = () => {
 			let { rowSelection: n } = t.getState();
-			return X(e, n);
+			return Z(e, n);
 		}, e.getIsSomeSelected = () => {
 			let { rowSelection: n } = t.getState();
-			return Z(e, n) === "some";
+			return ye(e, n) === "some";
 		}, e.getIsAllSubRowsSelected = () => {
 			let { rowSelection: n } = t.getState();
-			return Z(e, n) === "all";
+			return ye(e, n) === "all";
 		}, e.getCanSelect = () => typeof t.options.enableRowSelection == "function" ? t.options.enableRowSelection(e) : t.options.enableRowSelection ?? !0, e.getCanSelectSubRows = () => typeof t.options.enableSubRowSelection == "function" ? t.options.enableSubRowSelection(e) : t.options.enableSubRowSelection ?? !0, e.getCanMultiSelect = () => typeof t.options.enableMultiRowSelection == "function" ? t.options.enableMultiRowSelection(e) : t.options.enableMultiRowSelection ?? !0, e.getToggleSelectedHandler = () => {
 			let t = e.getCanSelect();
 			return (n) => {
@@ -1086,16 +1086,16 @@ var me = { createTable: (e) => {
 			};
 		};
 	}
-}, J = (e, t, n, r, i) => {
+}, Y = (e, t, n, r, i) => {
 	var a;
 	let o = i.getRow(t, !0);
-	n ? (o.getCanMultiSelect() || Object.keys(e).forEach((t) => delete e[t]), o.getCanSelect() && (e[t] = !0)) : delete e[t], r && (a = o.subRows) != null && a.length && o.getCanSelectSubRows() && o.subRows.forEach((t) => J(e, t.id, n, r, i));
+	n ? (o.getCanMultiSelect() || Object.keys(e).forEach((t) => delete e[t]), o.getCanSelect() && (e[t] = !0)) : delete e[t], r && (a = o.subRows) != null && a.length && o.getCanSelectSubRows() && o.subRows.forEach((t) => Y(e, t.id, n, r, i));
 };
-function Y(e, t) {
+function X(e, t) {
 	let n = e.getState().rowSelection, r = [], i = {}, a = function(e, t) {
 		return e.map((e) => {
 			var t;
-			let o = X(e, n);
+			let o = Z(e, n);
 			if (o && (r.push(e), i[e.id] = e), (t = e.subRows) != null && t.length && (e = {
 				...e,
 				subRows: a(e.subRows)
@@ -1108,16 +1108,16 @@ function Y(e, t) {
 		rowsById: i
 	};
 }
-function X(e, t) {
+function Z(e, t) {
 	return t[e.id] ?? !1;
 }
-function Z(e, t, n) {
+function ye(e, t, n) {
 	var r;
 	if (!((r = e.subRows) != null && r.length)) return !1;
 	let i = !0, a = !1;
 	return e.subRows.forEach((e) => {
-		if (!(a && !i) && (e.getCanSelect() && (X(e, t) ? a = !0 : i = !1), e.subRows && e.subRows.length)) {
-			let n = Z(e, t);
+		if (!(a && !i) && (e.getCanSelect() && (Z(e, t) ? a = !0 : i = !1), e.subRows && e.subRows.length)) {
+			let n = ye(e, t);
 			n === "all" ? a = !0 : (n === "some" && (a = !0), i = !1);
 		}
 	}), i ? "all" : a ? "some" : !1;
@@ -1156,13 +1156,13 @@ var $ = {
 	basic: Ee
 }, ke = [
 	E,
-	pe,
+	fe,
+	se,
 	ce,
-	le,
-	ee,
-	ie,
+	k,
+	re,
+	pe,
 	me,
-	he,
 	{
 		getInitialState: (e) => ({
 			sorting: [],
@@ -1224,12 +1224,12 @@ var $ = {
 			}, e.getPreSortedRowModel = () => e.getGroupedRowModel(), e.getSortedRowModel = () => (!e._getSortedRowModel && e.options.getSortedRowModel && (e._getSortedRowModel = e.options.getSortedRowModel(e)), e.options.manualSorting || !e._getSortedRowModel ? e.getPreSortedRowModel() : e._getSortedRowModel());
 		}
 	},
-	oe,
+	ae,
+	he,
 	ge,
 	_e,
 	ve,
-	ye,
-	de
+	ue
 ];
 function Ae(e) {
 	process.env.NODE_ENV !== "production" && (e.debugAll || e.debugTable) && console.info("Creating Table Instance...");
@@ -1564,25 +1564,25 @@ function We(e, t) {
 	let n = t.columnDef.meta?.align;
 	return n && n !== "start" ? `data-table__${e}--${n}` : "";
 }
-function Ge({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumnId: v, search: y, searchPlaceholder: b, searchClearLabel: x, toolbar: S, pageSize: C = 10, emptyMessage: w = "Sin resultados", isLoading: T, pagination: E, headerLabels: D, paginationLabels: O, className: ee }) {
+function Ge({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumnId: v, search: y, searchPlaceholder: b, searchClearLabel: x, toolbar: S, footerActions: C, pageSize: w = 10, emptyMessage: T = "Sin resultados", isLoading: E, pagination: D, headerLabels: O, paginationLabels: k, className: ee }) {
 	"use no memo";
-	let [k, te] = m([]), [ne, re] = m([]), A = Ue({
+	let [te, ne] = m([]), [A, j] = m([]), M = Ue({
 		data: h,
 		columns: f,
 		state: {
-			sorting: k,
-			columnFilters: ne
+			sorting: te,
+			columnFilters: A
 		},
-		onSortingChange: te,
-		onColumnFiltersChange: re,
+		onSortingChange: ne,
+		onColumnFiltersChange: j,
 		getCoreRowModel: je(),
 		getSortedRowModel: Re(),
 		getFilteredRowModel: Ie(),
-		...E ? { manualPagination: !0 } : {
+		...D ? { manualPagination: !0 } : {
 			getPaginationRowModel: Le(),
-			initialState: { pagination: { pageSize: C } }
+			initialState: { pagination: { pageSize: w } }
 		}
-	}), j = E?.pageSize ?? C, M = b ?? "Buscar", N = `${p()}-search`;
+	}), N = D?.pageSize ?? w, P = b ?? "Buscar", F = `${p()}-search`;
 	return /* @__PURE__ */ d("div", {
 		className: ["data-table", ee].filter(Boolean).join(" "),
 		children: [
@@ -1590,24 +1590,24 @@ function Ge({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 				className: "data-table__toolbar",
 				children: [y ? /* @__PURE__ */ u(c, {
 					className: "data-table__search",
-					id: N,
+					id: F,
 					kind: "search",
 					clearable: !0,
-					label: M,
+					label: P,
 					labelHidden: !0,
 					...x ? { clearLabel: x } : {},
 					value: y.value,
 					onChange: (e) => y.onChange(e.target.value)
 				}) : v && /* @__PURE__ */ u(c, {
 					className: "data-table__search",
-					id: N,
+					id: F,
 					kind: "search",
 					clearable: !0,
-					label: M,
+					label: P,
 					labelHidden: !0,
 					...x ? { clearLabel: x } : {},
-					value: A.getColumn(v)?.getFilterValue() ?? "",
-					onChange: (e) => A.getColumn(v)?.setFilterValue(e.target.value)
+					value: M.getColumn(v)?.getFilterValue() ?? "",
+					onChange: (e) => M.getColumn(v)?.setFilterValue(e.target.value)
 				}), S && /* @__PURE__ */ u("div", {
 					className: "data-table__toolbar-actions",
 					children: S
@@ -1618,27 +1618,27 @@ function Ge({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 				children: /* @__PURE__ */ d(n, {
 					"aria-label": g,
 					"aria-labelledby": _,
-					"aria-busy": T || void 0,
-					children: [/* @__PURE__ */ u(a, { children: A.getHeaderGroups().map((e) => /* @__PURE__ */ u(s, { children: e.headers.map((e) => {
+					"aria-busy": E || void 0,
+					children: [/* @__PURE__ */ u(a, { children: M.getHeaderGroups().map((e) => /* @__PURE__ */ u(s, { children: e.headers.map((e) => {
 						let t = e.column.getIsSorted(), n = e.column.getCanSort();
 						return /* @__PURE__ */ u(o, {
 							className: ["data-table__header-cell", We("header-cell", e.column)].filter(Boolean).join(" "),
 							sortable: n,
 							sorted: t === "asc" || t === "desc" ? t : !1,
 							onSort: n ? () => e.column.toggleSorting() : void 0,
-							...D,
+							...O,
 							children: e.isPlaceholder ? null : ze(e.column.columnDef.header, e.getContext())
 						}, e.id);
-					}) }, e.id)) }), /* @__PURE__ */ u(r, { children: T ? Array.from({ length: j }).map((t, n) => /* @__PURE__ */ u(s, {
+					}) }, e.id)) }), /* @__PURE__ */ u(r, { children: E ? Array.from({ length: N }).map((t, n) => /* @__PURE__ */ u(s, {
 						"aria-hidden": "true",
 						children: f.map((t, n) => /* @__PURE__ */ u(i, { children: /* @__PURE__ */ u(e, {}) }, n))
-					}, n)) : A.getRowModel().rows.length === 0 ? /* @__PURE__ */ u(s, { children: /* @__PURE__ */ u(i, {
+					}, n)) : M.getRowModel().rows.length === 0 ? /* @__PURE__ */ u(s, { children: /* @__PURE__ */ u(i, {
 						colSpan: f.length,
 						children: /* @__PURE__ */ u(l, {
 							size: "sm",
-							title: w
+							title: T
 						})
-					}) }) : A.getRowModel().rows.map((e) => /* @__PURE__ */ u(s, {
+					}) }) : M.getRowModel().rows.map((e) => /* @__PURE__ */ u(s, {
 						selected: e.getIsSelected(),
 						children: e.getVisibleCells().map((e) => /* @__PURE__ */ u(i, {
 							className: ["data-table__cell", We("cell", e.column)].filter(Boolean).join(" "),
@@ -1647,23 +1647,26 @@ function Ge({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 					}, e.id)) })]
 				})
 			}),
-			/* @__PURE__ */ u("div", {
+			/* @__PURE__ */ d("div", {
 				className: "data-table__footer",
-				children: E ? /* @__PURE__ */ u(t, {
-					total: E.total,
-					page: E.page,
-					pageSize: E.pageSize,
-					onPageChange: E.onPageChange,
-					onPageSizeChange: E.onPageSizeChange,
+				children: [D ? /* @__PURE__ */ u(t, {
+					total: D.total,
+					page: D.page,
+					pageSize: D.pageSize,
+					onPageChange: D.onPageChange,
+					onPageSizeChange: D.onPageSizeChange,
 					showTotal: !0,
-					...O
+					...k
 				}) : /* @__PURE__ */ u(t, {
-					total: A.getFilteredRowModel().rows.length,
-					page: A.getState().pagination.pageIndex + 1,
-					pageSize: A.getState().pagination.pageSize,
-					onPageChange: (e) => A.setPageIndex(e - 1),
-					...O
-				})
+					total: M.getFilteredRowModel().rows.length,
+					page: M.getState().pagination.pageIndex + 1,
+					pageSize: M.getState().pagination.pageSize,
+					onPageChange: (e) => M.setPageIndex(e - 1),
+					...k
+				}), C && /* @__PURE__ */ u("div", {
+					className: "data-table__footer-actions",
+					children: C
+				})]
 			})
 		]
 	});

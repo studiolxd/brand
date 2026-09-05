@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+- **`DataTable`: acciones en el pie.** Nueva prop `footerActions?: ReactNode`, para
+  acciones sobre el conjunto (exportar, imprimir) — distintas de `toolbar`, que son
+  sobre la selección y van arriba. Se pinta en `.data-table__footer-actions`, a la
+  derecha de la paginación (del selector de registros por página incluido), en la
+  misma fila cuando cabe; si la paginación apila en móvil, baja a su propia línea
+  alineada al final, con el mismo truco de `margin-inline-start: auto` que ya usa
+  `Pagination` para sus propios controles. Sin `footerActions` el pie no cambia: no
+  se pinta ningún nodo vacío. Token nuevo por referencia,
+  `data-table.footer-actions-gap` → `{spacing.3}`, sin colores nuevos.
+
 ## [31.2.0] — 2026-09-05
 
 - **`DataTable`: alineación por columna.** `meta: { align: 'start' | 'center' | 'end' }`

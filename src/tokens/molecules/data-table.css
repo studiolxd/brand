@@ -5,4 +5,5 @@
 :root {
   --data-table-block-gap: var(--spacing-4); /** Separación entre buscador, tabla y paginación — corta, es un bloque cohesionado */
   --data-table-toolbar-gap: var(--spacing-2); /** Separación entre buscador y acciones de la barra */
+  --data-table-footer-actions-gap: var(--spacing-3); /** Separación entre la paginación y las acciones del pie */
 }
