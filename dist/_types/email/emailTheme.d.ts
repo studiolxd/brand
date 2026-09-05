@@ -128,11 +128,30 @@ export declare const emailStyles: {
     };
 };
 /**
- * Lo único que el correo no puede llevar inline: una pseudoclase.
+ * La única clase del correo. Existe porque el hover del botón no cabe inline y
+ * su regla necesita un gancho que no atrape a los demás enlaces.
+ */
+export declare const emailButtonClassName = "email-button";
+/**
+ * Lo único que el correo no puede llevar inline: las pseudoclases.
  *
  * Es toda la hoja de estilos del correo. Antes había un bloque mucho mayor con
  * las reglas de modo oscuro y las clases (`.email-body`, `.email-surface`,
  * `.email-text`…) que existían solo para que esas reglas pudieran engancharse;
  * al retirarse el modo oscuro se fueron con él.
+ *
+ * Dos reglas:
+ *
+ * 1. El enlace se desubraya bajo el puntero, como en la web.
+ * 2. El botón hace el salto de `Button primary`: del lavanda al amarillo, con
+ *    la tinta prusia quieta. Va con `!important` porque compite con el estilo
+ *    inline del propio botón, que le gana por especificidad. Y engancha por la
+ *    clase `email-button`, no por `a`: el enlace de respaldo y los de baja son
+ *    enlaces del correo y no deben ponerse amarillos.
+ *
+ * Esto solo se ve donde el cliente respeta el `<style>` del head —Gmail web,
+ * Apple Mail—; en Outlook de escritorio, que renderiza con el motor de Word, no,
+ * y en el móvil no hay puntero. Donde no llegue, el botón se queda en su reposo,
+ * que es la lectura correcta: es pulido, no una señal de la que dependa nada.
  */
-export declare const emailStyleSheet = "\n  a:hover { text-decoration: none !important; }\n";
+export declare const emailStyleSheet: string;

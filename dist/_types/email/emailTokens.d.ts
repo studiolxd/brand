@@ -13,7 +13,7 @@ export declare const emailTokens: {
     readonly '--email-brand-padding-block': "16px";
     readonly '--email-brand-padding-inline': "16px";
     readonly '--email-opt-out-margin-block-start': "16px";
-    readonly '--email-heading-font-size': "24px";
+    readonly '--email-heading-font-size': "32px";
     readonly '--email-heading-font-weight': "500";
     readonly '--email-heading-line-height': "1.3";
     readonly '--email-heading-margin-block-end': "12px";
@@ -22,6 +22,8 @@ export declare const emailTokens: {
     readonly '--email-note-line-height': "1.65";
     readonly '--email-button-bg': "#baabff";
     readonly '--email-button-color': "#111e30";
+    readonly '--email-button-hover-bg': "#ffcd00";
+    readonly '--email-button-hover-color': "#111e30";
     readonly '--email-button-font-size': "20px";
     readonly '--email-button-font-weight': "300";
     readonly '--email-button-padding-block': "16px";

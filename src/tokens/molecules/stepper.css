@@ -35,6 +35,8 @@
   --stepper-label-color: var(--color-text-on-light); /** Etiqueta de un paso completado o actual */
   --stepper-pending-color: var(--color-text-muted-on-light); /** Etiqueta de un paso pendiente: texto secundario */
   --stepper-description-color: var(--color-text-muted-on-light); /** Línea de detalle: texto secundario */
+  --stepper-label-hover-line-width: var(--border-width-default); /** Grosor de la línea bajo la etiqueta de un paso navegable con el puntero encima. Todo subrayado del DS es una línea de 1px, el grosor único del sistema. Apunta al rol de borde y no al grosor de subrayado de `Link` porque ese token vale 0 en superficie oscura —el enlace no lleva línea en reposo sobre prusia— y arrastrarlo borraría esta línea, que sí es de hover */
+  --stepper-label-hover-line-offset: var(--link-underline-offset); /** Separación entre la etiqueta y su línea de hover. La reserva el sitio siempre, aunque la línea solo se pinte en hover: si el hueco apareciese al pasar el puntero, la línea de detalle de debajo daría un salto */
   --stepper-compact-count-font-weight: var(--font-weight-emphasis); /** Peso del contador de la forma compacta */
   --stepper-compact-color: var(--color-text-on-light); /** Color del contador de la forma compacta */
   --stepper-compact-label-color: var(--color-text-muted-on-light); /** Color de la etiqueta del paso actual en la forma compacta */

@@ -39,7 +39,7 @@ una nota de baja a 13px es incómoda de leer y de tocar.
 El remapeo de la superficie pública se genera como CSS a partir de los tokens
 `site-shell.*`, y un correo no consume CSS. Así que los tokens del correo apuntan
 a **esos mismos tokens fuente** (`{site-shell.text-font-size}`,
-`{site-shell.heading-size-4}`, `{site-shell.paragraph-small-font-size}`,
+`{site-shell.heading-size-6}`, `{site-shell.paragraph-small-font-size}`,
 `{button.lg-font-size}`, `{button.lg-padding-inline}`), nunca a los
 `--site-shell-*` ya remapeados ni a valores escritos a mano.
 
@@ -111,11 +111,35 @@ aguanta la inversión sin quedarse sin marca.
 
 Lo que se gana: un solo juego de valores, ninguna regla que dependa de que el
 cliente conserve el `<body>` —que es por donde se rompía— y una hoja de estilos
-que se queda en una línea, la única cosa que un correo no puede llevar inline:
+reducida a lo único que un correo no puede llevar inline: las pseudoclases.
+
+## La hoja embebida: dos pseudoclases
+
+Un `:hover` no cabe en un atributo `style`, así que las dos únicas reglas del
+correo viven en el `<style>` que el layout monta en el `<head>`:
 
 ```css
 a:hover { text-decoration: none !important; }
+a.email-button:hover {
+  background-color: /* --email-button-hover-bg */ !important;
+  color: /* --email-button-hover-color */ !important;
+}
 ```
+
+- **El botón hace el mismo salto que `Button primary` en la web:** del lavanda
+  (`accent-1`) al amarillo (`accent-2`), con la tinta prusia quieta. Los valores
+  salen de los tokens del botón web, no escritos a mano.
+- **`!important` no es un atajo:** la regla compite con el estilo inline del
+  propio botón, que le gana por especificidad. Es el mismo motivo por el que lo
+  llevaban las reglas de modo oscuro cuando existían.
+- **Engancha por clase, no por `a`.** `email-button` es la única clase que queda
+  en el correo, y existe justo para eso: el enlace de respaldo y los del pie de
+  baja son enlaces del correo y no deben ponerse amarillos.
+- **Dónde se ve y dónde no, dicho sin adornos.** Funciona donde el cliente
+  respeta el `<style>` del head —Gmail web, Apple Mail—; **no** en Outlook de
+  escritorio, que renderiza con el motor de Word, y en el móvil no hay puntero
+  que lo dispare. Donde no llegue, el botón se queda en su reposo, que es la
+  lectura correcta: esto es pulido, no una señal de la que dependa nada.
 
 ## Pesos
 
@@ -157,7 +181,8 @@ Y sale así:
 >
 > **[ Verificar correo ]**
 >
-> O copia y pega esta dirección en el navegador: `https://…`
+> O copia y pega esta dirección en el navegador:
+> `https://…`
 >
 > Este enlace caduca en 24 horas. Si no creaste una cuenta, puedes ignorar este mensaje.
 
@@ -171,6 +196,14 @@ Cuatro decisiones que la sostienen:
   ni acortada: lo que se le pide es leerla y copiarla, así que no puede depender
   de un enlace que un cliente pueda vaciar o quitar. Los clientes que autoenlazan
   lo harán solos.
+- **En su propia línea, y a la talla del cuerpo.** La dirección va debajo de la
+  frase que la presenta, no a continuación: arrancando a media línea, una URL con
+  token entraba ya partida en el primer renglón y costaba encontrarle el
+  principio. El salto es un `<br />` dentro del mismo párrafo —no un segundo
+  `<Text>`—, porque las dos piezas son una sola frase y porque el margen que
+  cierra el bloque lo lleva el respaldo. Y se lee a 20px, la talla del cuerpo, no
+  a la de la nota: es una dirección que hay que leer carácter a carácter, no una
+  letra pequeña de pie de correo.
 - **Corte de palabra, no `overflow`.** Una URL con token no cabe en 600px.
   `word-break: break-all` para los clientes modernos y `word-wrap: break-word`
   —el nombre viejo— para el motor de Word de Outlook. Con `overflow` se

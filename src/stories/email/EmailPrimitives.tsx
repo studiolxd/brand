@@ -10,7 +10,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { Button, Heading, Link, Text } from 'react-email';
 
-import { emailStyles } from './emailTheme';
+import { emailButtonClassName, emailStyles } from './emailTheme';
 
 export interface EmailHeadingProps {
   children: ReactNode;
@@ -81,8 +81,8 @@ export interface EmailButtonProps {
   children: ReactNode;
   /**
    * La frase que presenta el enlace de respaldo, p. ej. «O copia y pega esta
-   * dirección en el navegador:». La dirección se pinta a continuación,
-   * separada por un espacio, así que la frase se escribe con su puntuación.
+   * dirección en el navegador:». La dirección se pinta debajo, en su propia
+   * línea, así que la frase se escribe con su puntuación.
    *
    * **Obligatoria, y sin valor por defecto** — la única prop de texto del DS
    * que no lo tiene. Es deliberado por partida doble: el correo vive en seis
@@ -106,17 +106,35 @@ export interface EmailButtonProps {
  * La dirección va como texto plano, no dentro de un `<a>`: lo que se pide de
  * ella es leerla y copiarla, y así no hay enlace que un cliente pueda vaciar
  * de estilo o quitar. Los que autoenlazan lo harán solos.
+ *
+ * Y va en su **propia línea**, bajo la frase que la presenta: arrancando a
+ * media línea, una dirección larga entraba partida desde el primer renglón y
+ * costaba encontrarle el principio. El salto es un `<br />` dentro del mismo
+ * párrafo —no un segundo `<Text>`— porque las dos piezas son una sola frase y
+ * porque el margen inferior del bloque lo cierra el respaldo: partirlo en dos
+ * párrafos metería el margen entre medias. `<br />` lo entiende cualquier
+ * cliente, incluido el motor de Word.
  */
 export function EmailButton({ href, children, fallbackLabel, style }: EmailButtonProps) {
   return (
     <>
       {/* El margen inferior lo lleva el respaldo, que es quien cierra el
-          bloque; si lo llevara también el botón, quedarían separados. */}
-      <Button href={href} style={{ ...emailStyles.button, marginBottom: 0, ...style }}>
+          bloque; si lo llevara también el botón, quedarían separados.
+
+          La clase es el gancho del hover: lo único del correo que no puede ir
+          inline, porque un `:hover` no cabe en un atributo `style`. La regla
+          vive en `emailStyleSheet`. */}
+      <Button
+        href={href}
+        className={emailButtonClassName}
+        style={{ ...emailStyles.button, marginBottom: 0, ...style }}
+      >
         {children}
       </Button>
       <Text style={emailStyles.buttonFallback}>
-        {fallbackLabel} <span style={emailStyles.buttonFallbackUrl}>{href}</span>
+        {fallbackLabel}
+        <br />
+        <span style={emailStyles.buttonFallbackUrl}>{href}</span>
       </Text>
     </>
   );

@@ -5,7 +5,7 @@ $lxd-project-card-gap: 0.75rem; // Aire entre las piezas de la tarjeta
 $lxd-project-card-media-aspect-ratio: 3 / 2; // Proporción de la imagen del proyecto
 $lxd-project-card-tags-gap: 0.5rem; // Aire entre etiquetas
 $lxd-project-card-title-hover-line-width: 1px; // Grosor de la línea bajo el título con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno
-$lxd-project-card-title-hover-line-offset: 0.25rem; // Separación entre el título y su línea de hover
+$lxd-project-card-title-hover-line-offset: 0.25rem; // Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo
 $lxd-project-card-focus-ring-color: #111e30; // Color del anillo de foco del enlace
 $lxd-project-card-focus-ring-width: 2px; // Grosor del anillo de foco
 $lxd-project-card-focus-ring-offset: 1px; // Separación del anillo de foco

@@ -19,6 +19,29 @@ El 2px existe por accesibilidad, no por estilo. WCAG 2.4.13 pide que el indicado
 
 El color del anillo lo pone cada componente según su superficie (primario en claro, blanco en oscuro); el grosor es el mismo en todas partes.
 
+## El subrayado es una línea, no `text-decoration`
+
+**En el DS no se usa `text-decoration: underline`.** Subrayar —un enlace, la variante `text` de `Button`, el título de una `ProjectCard`, el paso navegable de un `Stepper`— es pintar una línea bajo el elemento con una sombra interior y reservarle su hueco:
+
+```css
+padding-block-end: var(--link-underline-offset);
+box-shadow: inset 0 calc(-1 * var(--link-underline-width)) 0 0 currentColor;
+```
+
+Dos motivos, y ninguno es de gusto:
+
+- **`text-decoration` no cubre un SVG.** En un enlace o un botón con icono la línea se corta bajo el texto y desaparece bajo el icono. La línea cruza por debajo de los dos.
+- **Un solo grosor y una sola separación.** El grosor es el borde del sistema (1px, `--border-width-default`) y la separación es `--link-underline-offset`; los componentes apuntan a esos tokens. `text-decoration` trae su propio grosor y su propia posición, que dependen de la fuente y del navegador, así que dos subrayados hechos con las dos técnicas nunca coinciden — se nota al ponerlos juntos.
+
+La línea es siempre `currentColor`: subrayado y texto no pueden ir de distinto color.
+
+Un componente que **viste sus propios enlaces** anula la línea de la base con `box-shadow: none; padding-block-end: 0` antes de poner la suya —no basta con `text-decoration: none`, que ahí ya no decora nada.
+
+Hay **dos excepciones**, y no se amplían:
+
+- **`src/vendor/normalize.css`**, que es código de terceros y no se toca: su `abbr[title] { text-decoration: underline dotted }` es la normalización del navegador, no un subrayado del sistema. Si algún día molesta, se anula en el componente, no en el vendor.
+- **El correo (`src/stories/email/`)**, cuyo medio no es un navegador. Outlook de escritorio renderiza con el motor de Word, que no pinta `box-shadow`, y un correo no tiene hoja de estilos donde colgar la línea: todo va inline. Allí el enlace se subraya con `text-decoration: underline` y se desubraya en hover —el mismo dibujo que en la web, con la única técnica que el medio entiende.
+
 ---
 
 ## Tokens

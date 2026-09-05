@@ -24,15 +24,20 @@
   line-height: var(--breadcrumb-line-height);
 }
 
+/* Las migas son enlaces y se subrayan como cualquier enlace: la línea en reposo
+   que la base pone a todo `<a>` —sombra interior, no `text-decoration`— y que
+   desaparece bajo el puntero, donde el que cambia es el color. Antes el hover
+   cambiaba de mecanismo a mitad de camino: la línea del sistema se iba y en su
+   sitio entraba un `text-decoration: underline` de otro grosor y otra
+   separación. Los tokens `link-text-decoration*` quedaron en `none` y ya no
+   visten nada. */
 .breadcrumb__link {
   color: var(--breadcrumb-link-color);
-  text-decoration: var(--breadcrumb-link-text-decoration);
   cursor: pointer;
 }
 
 .breadcrumb__link:hover {
   color: var(--breadcrumb-link-color-hover);
-  text-decoration: var(--breadcrumb-link-text-decoration-hover);
 }
 
 .breadcrumb__link:focus-visible {
