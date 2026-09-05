@@ -7,6 +7,51 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+- **La página de estado, en el catálogo** (`Pages/Estado del servicio`).
+  `status.slxd.app` montado con piezas del DS y datos falsos: `AppRoot` +
+  `PublicPageShell` con la cabecera de la marca **sin índice** —un panel que
+  debe seguir en pie cuando la suite se cae no promete enlaces a servicios
+  caídos—, las preferencias de idioma y tema en el pie, `PageIntro`, el resumen
+  en `Alert`, y por aplicación un `Heading` con su enlace, su `Tag` de estado y
+  su `UptimeBars` de 30 días. Cinco situaciones: todo operativo, parcialmente
+  disponible, caído, sin datos (el monitor no contesta) y cargando. Dieciocho
+  aplicaciones en el orden real, con treinta días de historia creíble.
+- **`ImageCropDialog` deja de parecer roto mientras carga la imagen.** El área
+  de recorte **reserva su alto desde el primer render** (token nuevo
+  `image-crop-dialog.area-min-height`, que apunta a su propio `area-max-height`)
+  y enseña el `Spinner` del sistema con texto (`loadingLabel`, «Cargando
+  imagen…») hasta que la imagen dispara su `load`; entonces aparece en el hueco
+  ya reservado, **sin salto de maqueta**. Si falla, un `Alert` de error
+  (`errorMessage`) ocupa ese mismo hueco y la imagen rota no se pinta. Elegir
+  otra imagen vuelve a empezar por la carga. `AvatarUpload` los reexpone como
+  `cropLoadingLabel` y `cropErrorMessage`.
+- **`AvatarUpload`: el botón cierra a la altura del avatar y estrena pista de
+  arrastre.** La columna del botón se alinea con el borde inferior del retrato
+  en vez de flotar a media altura, y bajo el botón va `dropHintLabel` («…o
+  arrastra la imagen hasta el avatar»), lo único de la pieza que no se adivina
+  mirándola. Visible, con la tipografía y el color del texto de ayuda de los
+  campos (tokens nuevos `avatar-upload.hint.*` → `{form.helper.*}`). Los
+  formatos y el peso siguen donde estaban: en la descripción accesible del
+  botón. Con `dropHintLabel=""` no se pinta.
+- **`OnboardingShell` reparte la talla `lg` al paso entero**, no solo a su pie.
+  El alta es superficie pública: cualquier `Form`, campo o `AvatarUpload` del
+  cuerpo hereda ahora la talla sin que la aplicación tenga que pasarla. Antes,
+  el paso del logotipo salía con un botón de subir mediano bajo un formulario
+  grande.
+- **Las páginas del alta y las públicas, al día con producción.** El alta pierde
+  el botón «Atrás» (el progreso navega, y qué paso es alcanzable lo dice el
+  flujo), el perfil se queda en un solo campo y sin salida, la organización en
+  el campo que la crea, el logotipo pasa de `FileUploadField` a `AvatarUpload`
+  cuadrado, las invitaciones dicen «Rol» con dos papeles y cierran con
+  «Finalizar», y la sala de espera estrena los textos que el producto usa. En
+  las públicas se corrigen rótulos de botón, marcadores de posición, el texto de
+  las condiciones (dos enlaces), el estado «enlace enviado» —que sustituye al
+  formulario entero— y la pantalla de nueva contraseña. `Templates/App with
+  sidebar` pierde el saludo y el título de la barra, y monta el panel como lo
+  monta la suite.
+
 ## [30.10.1] — 2026-09-05
 
 - **`UptimeBars`, la tira de disponibilidad** (`Molecules/UptimeBars`, export

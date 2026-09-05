@@ -77,10 +77,11 @@ export interface OnboardingShellProps {
  * la principal sube a todo el ancho y la salida cae centrada debajo, como en
  * `Form` con acciones en bloque.
  *
- * **Y también la talla**: el pie reparte `lg` a lo que reciba por el contexto
- * de talla del sistema (`FormSizeContext`, el mismo que usa `Form` con sus
- * campos y `Hero` con sus acciones), así que las acciones del paso salen a la
- * talla de la superficie pública sin que cada pantalla tenga que acordarse de
- * pedirla — y a la misma que los campos del formulario que tienen encima.
+ * **Y también la talla**: la plantilla reparte `lg` al paso **entero**
+ * —progreso, cuerpo y acciones— por el contexto de talla del sistema
+ * (`FormSizeContext`, el mismo que usa `Form` con sus campos y `Hero` con sus
+ * acciones). El alta es superficie pública, así que todo lo que se ponga
+ * dentro —un `Form`, un campo suelto, un `AvatarUpload`— sale a la talla que
+ * le toca sin que la aplicación tenga que acordarse de pedirla.
  */
 export declare function OnboardingShell({ children, brand, switchers, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;

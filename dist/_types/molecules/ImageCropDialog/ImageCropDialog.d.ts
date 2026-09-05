@@ -18,6 +18,16 @@ export interface ImageCropDialogProps {
     confirmLabel: ReactNode;
     /** Etiqueta del botón de cierre del diálogo. */
     closeLabel?: string;
+    /**
+     * Lo que se dice mientras la imagen se descarga y descodifica. Se anuncia y
+     * se ve. Default castellano: «Cargando imagen…».
+     */
+    loadingLabel?: string;
+    /**
+     * Lo que se dice cuando la imagen no se puede cargar. Default castellano:
+     * «No hemos podido cargar la imagen. Prueba con otro archivo.».
+     */
+    errorMessage?: string;
     onConfirm: (blob: Blob) => void | Promise<void>;
     onClose: () => void;
     className?: string;
@@ -29,4 +39,4 @@ export interface ImageCropDialogProps {
  * `react-image-crop` aporta el gesto de selección; el DS pone el diálogo, las
  * acciones y el volcado a lienzo (`cropImageToBlob`).
  */
-export declare function ImageCropDialog({ sourceUrl, title, description, circularCrop, aspect, outputSize, outputMimeType, busy, cancelLabel, confirmLabel, closeLabel, onConfirm, onClose, className, }: ImageCropDialogProps): import("react/jsx-runtime").JSX.Element;
+export declare function ImageCropDialog({ sourceUrl, title, description, circularCrop, aspect, outputSize, outputMimeType, busy, cancelLabel, confirmLabel, closeLabel, loadingLabel, errorMessage, onConfirm, onClose, className, }: ImageCropDialogProps): import("react/jsx-runtime").JSX.Element;
