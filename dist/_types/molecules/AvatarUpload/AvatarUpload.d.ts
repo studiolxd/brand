@@ -11,8 +11,8 @@ export interface AvatarUploadProps {
     /** `circle` para personas, `square` para organizaciones. También decide la selección del recorte. */
     shape?: 'circle' | 'square';
     /**
-     * Talla del sistema: mueve a la vez el botón y el avatar (que va dos
-     * peldaños por encima: `sm` → 48px, `md` → 64px, `lg` → 96px).
+     * Talla del sistema: mueve a la vez el botón y el avatar (que va cuatro
+     * peldaños por encima: `sm` → 96px, `md` → 128px, `lg` → 192px).
      * Sin ella, la del `Form`/`FormSizeContext` que lo envuelva; sin contexto, `md`.
      */
     size?: FormSize;

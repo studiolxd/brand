@@ -15,10 +15,13 @@ La imagen de una persona o de una organización. Con `src`, un `<img>` recortado
 
 Las tres tallas del sistema (Foundations → Tallas): `sm` 32px en barras y menús, `md` 40px por defecto, `lg` 48px en cabeceras de perfil. Un avatar es un elemento cuadrado y toma su lado de la talla, como un botón de icono.
 
-Y dos más por encima, que ya no son tallas de control —48px es el control más alto que existe— sino tallas de marca:
+Y cuatro más por encima, que ya no son tallas de control —48px es el control más alto que existe— sino tallas de marca:
 
 - **`xl` (64px)**, para cuando el avatar **es** el asunto de la pantalla: una cabecera de perfil. Es el peldaño que el sistema ya usa por encima de la escala, `icon.size-xl`, el mismo que `logo.height-xl` y `logomark.size-xl`.
-- **`2xl` (96px)**, para cuando además es la **diana** donde se suelta una imagen: el `AvatarUpload` a talla `lg`, el paso del logotipo de un alta. Vez y media el peldaño anterior, en el múltiplo de 8, y a ese tamaño se acierta sin apuntar. Es el techo de la escala: con el botón al lado y el aire del sistema, la fila entera cabe todavía en un móvil de 375px.
+- **`2xl` (96px)**, para cuando además es la **diana** donde se suelta una imagen. Vez y media el peldaño anterior, en el múltiplo de 8, y a ese tamaño se acierta sin apuntar.
+- **`3xl` (128px)** y **`4xl` (192px)**, el retrato: la foto no acompaña a la pantalla, **es** la pantalla —el `AvatarUpload` de `/account` y el del alta—. Cada una es **el doble** de la talla que ese sitio usaba antes (`xl` y `2xl`), y entre ellas hay el mismo salto de vez y media que de `xl` a `2xl`; las dos siguen en el múltiplo de 8 y caen en rem redondos (8rem y 12rem).
+
+A partir de `3xl` el avatar ya no cabe en una fila estrecha con un botón al lado: quien lo componga tiene que dejar que la fila envuelva, como hace `AvatarUpload`.
 
 Retratos aún mayores (una reseña destacada) no son avatares: los pone el componente que los necesita con su propio token.
 

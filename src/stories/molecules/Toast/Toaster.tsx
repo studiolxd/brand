@@ -61,15 +61,17 @@ const VARIANT_CLASS: Record<string, string> = {
 };
 
 /**
- * El relleno del aviso es oscuro salvo en `warning` (amarillo): la raíz se
- * declara superficie oscura para que lo que se componga dentro —el aspa, el
- * botón de acción— tome su cara clara. Es el mismo criterio del `Alert`.
+ * El relleno del aviso es oscuro en las cuatro intenciones —también en
+ * `warning`, desde que el aviso se pinta con el ámbar de sistema y no con el
+ * amarillo de marca—: la raíz se declara superficie oscura para que lo que se
+ * componga dentro —el aspa, el botón de acción— tome su cara clara. Es el mismo
+ * criterio del `Alert`.
  */
 function toastClasses(type: string | undefined, dismissible: boolean) {
   return [
     'alert',
     VARIANT_CLASS[type ?? ''] ?? '',
-    type !== 'warning' ? 'surface-dark' : '',
+    'surface-dark',
     dismissible ? 'alert--dismissible' : '',
     'toast',
   ].filter(Boolean).join(' ');

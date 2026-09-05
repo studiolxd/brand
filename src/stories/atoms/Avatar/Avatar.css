@@ -17,6 +17,8 @@
 .avatar.avatar--lg { --avatar-size: var(--avatar-size-lg); --avatar-initials-font-size: var(--avatar-initials-font-size-lg); }
 .avatar.avatar--xl { --avatar-size: var(--avatar-size-xl); --avatar-initials-font-size: var(--avatar-initials-font-size-xl); }
 .avatar.avatar--2xl { --avatar-size: var(--avatar-size-2xl); --avatar-initials-font-size: var(--avatar-initials-font-size-2xl); }
+.avatar.avatar--3xl { --avatar-size: var(--avatar-size-3xl); --avatar-initials-font-size: var(--avatar-initials-font-size-3xl); }
+.avatar.avatar--4xl { --avatar-size: var(--avatar-size-4xl); --avatar-initials-font-size: var(--avatar-initials-font-size-4xl); }
 
 .avatar.avatar--square {
   border-radius: var(--avatar-border-radius-square);

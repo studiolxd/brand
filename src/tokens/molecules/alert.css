@@ -28,8 +28,8 @@
   --alert-error-border-color: var(--color-error-fill); /** Borde igual al fondo error */
   --alert-error-title-color: var(--color-error-fill-text); /** Título blanco sobre fondo error */
   --alert-error-description-color: var(--color-error-fill-text); /** Descripción blanca sobre fondo error */
-  --alert-warning-bg: var(--color-accent-2); /** Fondo warning — amarillo brand */
-  --alert-warning-border-color: var(--color-accent-2); /** Borde igual al fondo warning */
-  --alert-warning-title-color: var(--color-primary); /** Título prussian sobre fondo amarillo (contraste AAA) */
-  --alert-warning-description-color: var(--color-primary); /** Descripción prussian sobre fondo amarillo */
+  --alert-warning-bg: var(--color-warning-fill); /** Fondo warning — ámbar semántico. Era el amarillo de marca: el aviso es un estado, no identidad */
+  --alert-warning-border-color: var(--color-warning-fill); /** Borde igual al fondo warning */
+  --alert-warning-title-color: var(--color-warning-fill-text); /** Título blanco sobre fondo warning (7,23:1, AAA) */
+  --alert-warning-description-color: var(--color-warning-fill-text); /** Descripción blanca sobre fondo warning */
 }

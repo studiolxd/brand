@@ -144,6 +144,7 @@
 @import "./molecules/docs-search.css";
 @import "./molecules/search-form.css";
 @import "./molecules/stat-tile.css";
+@import "./molecules/uptime-bars.css";
 @import "./molecules/copy-button.css";
 @import "./molecules/confirm-dialog.css";
 @import "./molecules/avatar-upload.css";

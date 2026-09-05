@@ -1,0 +1,100 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as UptimeBarsStories from "./UptimeBars.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { uptimeBarsBaseTokens, uptimeBarsDarkTokens } from "../../../tokens/molecules/uptime-bars";
+
+<Meta of={UptimeBarsStories} />
+
+# UptimeBars
+
+La tira de disponibilidad: una barrita por punto de la serie y la media del periodo debajo. Es la pieza de un panel de estado.
+
+<Canvas of={UptimeBarsStories.PorDefecto} />
+
+## No sabe de tiempo ni de dónde salen los datos
+
+La tira recibe **N puntos** con un porcentaje y una etiqueta, y pinta. No hay días, ni monitores, ni husos horarios, ni una fecha que formatear: quien la usa decide si un punto es un día o una hora, y escribe las etiquetas con `Intl` (que sabe de idiomas y de zonas horarias, cosas que un sistema de diseño no tiene por qué saber).
+
+Tampoco calcula la media: se la pasan escrita, por lo mismo por lo que `StatTile` no formatea su cifra.
+
+## El punto sin dato no es un 0 %
+
+`value: null` es **la ausencia de medida** —el monitor todavía no existía ese día—, no una caída. Se pinta rayado sobre la superficie secundaria, sin ningún color de estado, y se anuncia «sin datos». Es también la barrita que se distingue **sin depender del color**: la trama la separa de las demás para quien no distingue el rojo del verde y también en una impresión en blanco y negro.
+
+<Canvas of={UptimeBarsStories.SinDatosAlPrincipio} />
+
+## Los tramos
+
+Tres, con los roles de feedback del sistema: `success`, `warning` y `error`. Los cortes por defecto están pensados en **tiempo caído al día**:
+
+| Tramo | Corte | Tiempo caído al día | Rol |
+|---|---|---|---|
+| Bueno | ≥ 99,65 % | hasta 5 min | `success-fill` |
+| Tocado | ≥ 95,83 % | de 5 min a 1 h | `warning-fill` |
+| Caído | < 95,83 % | más de 1 h | `error-fill` |
+
+**El margen del verde es deliberado.** Un fallo aislado de comprobación —una petición que se pierde, un reinicio de treinta segundos— no es un incidente, y pintar el día entero por él haría que la tira dejara de significar nada: si el verde exigiera el 100 % clavado, un panel sano se vería amarillo. Cinco minutos es el umbral por debajo del cual nadie se enteró.
+
+Los cortes son `thresholds`, no están clavados en el CSS: un servicio con un compromiso más duro los mueve sin tocar el sistema. La conversión de minutos a porcentaje la hace el consumidor, que es quien sabe qué periodo cubre un punto.
+
+<Canvas of={UptimeBarsStories.ConCaidas} />
+<Canvas of={UptimeBarsStories.OtrosCortes} />
+
+## Anatomía
+
+- **La tira** (`points`) — una lista ordenada, un elemento por punto. El ancho de cada barrita sale de repartir el contenedor: no hay ancho fijo.
+- **El pie** — los rótulos de los extremos (`startLabel`, `endLabel`) a los lados y **la media** (`summary`) centrada bajo la tira. El pie va siempre, aunque los extremos vengan vacíos: sus celdas se quedan para que la media caiga en el centro.
+
+`summary` es **obligatoria**, y es la única prop obligatoria además de `points`. No es un adorno: es la alternativa en texto a treinta rectángulos de colores, y por eso no puede faltar.
+
+Aquí no hay enlace al histórico: la tira enseña un periodo y se acaba ahí.
+
+## Responsivo
+
+Con 30 puntos a 375px la tira encoge, no desborda ni saca barra horizontal: cada punto es una fracción del contenedor (`flex: 1 1 0` con `min-inline-size: 0`), y la única medida fija de la barrita es el alto. Hay una story que lo mide.
+
+<Canvas of={UptimeBarsStories.EnMovil} />
+
+## Superficie oscura
+
+<Canvas of={UptimeBarsStories.EnSuperficieOscura} />
+
+Los rellenos de feedback son **universales**: el mismo color en las dos superficies, como manda el sufijo `-fill`. Contra el prusia se quedan en ~2,3:1, así que quien identifica la barrita en oscuro es su **filete** de tinta clara —el mismo recurso que usa el relleno de `ProgressBar`, y lo que WCAG 1.4.11 admite para un objeto gráfico—. El filete se declara transparente en superficie clara, donde los rellenos ya dan 7,2:1 sobre blanco, para que la barrita mida igual en las dos.
+
+Lo que esto **no** resuelve es distinguir los tres tramos entre sí por luminancia sobre el lienzo oscuro: los tres rellenos son oscuros y ahí solo los separa el tono. Se sostiene porque el color nunca es la única señal —el nombre accesible de cada barrita lleva el porcentaje y la media va en texto—, pero si el sistema quisiera arreglarlo del todo haría falta un rol de **relleno por superficie**, que hoy no existe y no se inventa en una pieza.
+
+## Accesibilidad
+
+Treinta rectángulos de colores no le dicen nada a un lector de pantalla ni a quien no distingue el rojo del verde. Lo que hace la tira:
+
+- **La serie es una lista ordenada** (`<ol>`) con nombre (`label`), no una imagen con descripción. Una imagen obligaría a resumir treinta valores en una frase; la lista deja recorrerlos uno a uno con el cursor virtual y, además, dice cuántos son.
+- **Cada barrita lleva su nombre accesible completo** —«5 de septiembre: 100 %. Sin incidencias»— como `role="img"` con `aria-label`. El sin dato dice «sin datos», nunca 0 %.
+- **La media en texto es la alternativa principal.** Está siempre y no depende de abrir nada: es lo que se lee cuando no se miran las barritas.
+- **El bocadillo se abre con el foco**, no solo con el puntero, y es el `Tooltip` del sistema (Base UI): el sistema no monta un segundo motor de bocadillos.
+- **La tira es una sola parada de tabulador.** Las flechas (← → ↑ ↓), `Inicio` y `Fin` recorren las barritas con tabulación itinerante. Con 30 puntos por servicio, una parada por barrita convertiría un panel de ocho aplicaciones en 240 tabulaciones.
+- **El estado se distingue por algo más que el color** en el peor caso: el sin dato va rayado.
+- Con `tooltips={false}` las barritas dejan de recibir el foco —no habría nada que enseñar—, pero su nombre accesible sigue completo.
+
+El bocadillo repite lo que ya dice el nombre accesible: no añade información para un lector de pantalla, está para el puntero, que no tiene otra forma de saber de qué día es la barrita.
+
+<Canvas of={UptimeBarsStories.SinBocadillos} />
+
+## Textos
+
+Todo el copy lo pone el consumidor. Los que la tira escribiría por su cuenta van en props con default castellano: `label` («Disponibilidad»), `noDataLabel` («sin datos») y `pointLabel`, que es una función porque interpola valores. El porcentaje no es copy: se formatea con `Intl` según `locale` (default `'es-ES'`) y `maximumFractionDigits`.
+
+---
+
+## Tokens
+
+### Base
+
+<TokenTable tokens={uptimeBarsBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={uptimeBarsDarkTokens} />
+
+## Props
+
+<ArgTypes of={UptimeBarsStories} />

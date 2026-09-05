@@ -62,17 +62,19 @@ El texto sale de `accept` y `maxSize` ("JPEG, PNG, WEBP · máx. 5.0 MB"); `hint
 
 `size` es la talla del sistema y, como en todos los campos, **sin ella la pone el contexto**: el `Form` que envuelva, el pie de `OnboardingShell`, cualquier `FormSizeContext`. En la superficie pública —el alta— los controles van a `lg` y esta pieza sube con ellos sin que nadie se acuerde de pasar nada.
 
-La talla mueve el botón y el avatar a la vez. El avatar va **dos peldaños por encima** del control: aquí no acompaña al botón, es el asunto de la pantalla y además la diana sobre la que se suelta el archivo.
+La talla mueve el botón y el avatar a la vez. El avatar va **cuatro peldaños por encima** del control: aquí no acompaña al botón, es el retrato —el asunto de la pantalla— y además la diana sobre la que se suelta el archivo.
 
 | Talla del control | Avatar |
 | --- | --- |
-| `sm` (32px) | `lg` — 48px |
-| `md` (40px) | `xl` — 64px |
-| `lg` (48px) | `2xl` — 96px |
+| `sm` (32px) | `2xl` — 96px |
+| `md` (40px) | `3xl` — 128px |
+| `lg` (48px) | `4xl` — 192px |
 
-Por encima de `lg` el sistema deja de medir con la escala de controles —48px es el control más alto que existe— y pasa a la de marca: `xl` (64px) es `icon.size-xl`, el mismo peldaño que `logo.height-xl` y `logomark.size-xl`, y `2xl` (96px) es vez y media ese, en el múltiplo de 8.
+Por encima de `lg` el sistema deja de medir con la escala de controles —48px es el control más alto que existe— y pasa a la de marca: `2xl` (96px), `3xl` (128px) y `4xl` (192px).
 
-**Por qué 96 y no más**: la diana tiene que acertarse sin apuntar —96px es más de tres veces el objetivo táctil mínimo, y a un avatar redondo el círculo le come esquinas—, y tiene que seguir cabiendo con su botón al lado en la pantalla más estrecha que servimos. A 375px, con el inset del contenedor, el avatar (96) más el aire (16) más el botón «Subir» a talla `lg` entran de sobra en una sola línea; el peldaño siguiente ya no. Hay un test de story que lo mide.
+**Por qué estas tres y no las de antes.** La pieza salía a 64px en `/account` y a 96px en el alta, y en las dos pantallas la foto **es** el asunto: se subía un retrato mirando una miniatura. Cada contexto pasa a **el doble** —96, 128 y 192—, que son peldaños de la escala de Avatar, no medidas de esta pieza: 128 es el doble de `xl`, 192 el doble de `2xl`, y entre ellos hay el mismo salto de vez y media que ya había de `xl` a `2xl`.
+
+**Y la fila envuelve.** A 375px el retrato de 192px ya no cabe con el botón al lado, así que el botón baja debajo del avatar. Lo decide el ancho disponible (`flex-wrap`), no una media query, así que también envuelve dentro de una columna estrecha de escritorio. Lo que no cambia es que la fila **no desborda** ni saca barra horizontal: hay un test de story que lo mide a 375px.
 
 <Canvas of={AvatarUploadStories.TallaPorContexto} />
 

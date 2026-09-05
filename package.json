@@ -596,6 +596,10 @@
       "types": "./dist/_types/atoms/TypingIndicator/TypingIndicator.d.ts",
       "import": "./dist/typing-indicator.js"
     },
+    "./uptime-bars": {
+      "types": "./dist/_types/molecules/UptimeBars/UptimeBars.d.ts",
+      "import": "./dist/uptime-bars.js"
+    },
     "./user-message": {
       "types": "./dist/_types/molecules/UserMessage/UserMessage.d.ts",
       "import": "./dist/user-message.js"

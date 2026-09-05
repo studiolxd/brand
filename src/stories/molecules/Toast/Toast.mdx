@@ -49,7 +49,7 @@ La tarjeta **es un `Alert`**: rectángulo de relleno sólido, borde de 1px y esq
 
 <Canvas of={ToastStories.Variantes} />
 
-Las cuatro del `Alert`: `toast()` es el neutro prusia, `toast.success()` y `toast.error()` toman el relleno sólido de feedback, y `toast.warning()` el amarillo de marca con tinta prusia. `toast.info()` no tiene relleno propio: cae en el neutro.
+Las cuatro del `Alert`: `toast()` es el neutro prusia, y `toast.success()`, `toast.error()` y `toast.warning()` toman el relleno sólido de feedback con su texto. `toast.info()` no tiene relleno propio: cae en el neutro.
 
 <Canvas of={ToastStories.ConDescripcion} />
 
@@ -88,7 +88,7 @@ Todos los métodos devuelven el `id` del aviso salvo `dismiss` (nada) y `promise
 | `toast(title, options?)` | Aviso neutro. Alias: `toast.message` |
 | `toast.success(title, options?)` | Relleno verde |
 | `toast.error(title, options?)` | Relleno rojo. **Interrumpe** al lector de pantalla |
-| `toast.warning(title, options?)` | Relleno amarillo. **Interrumpe** al lector de pantalla |
+| `toast.warning(title, options?)` | Relleno ámbar. **Interrumpe** al lector de pantalla |
 | `toast.info(title, options?)` | Cae en el neutro, como en el `Alert` |
 | `toast.loading(title, options?)` | No se cierra solo; se resuelve por `id` |
 | `toast.dismiss(id?)` | Cierra ese aviso, o todos los de la pantalla si no se pasa `id` |
@@ -136,7 +136,7 @@ El relleno, el borde, el aire, la tipografía y las cuatro intenciones salen del
 - La pila está **fuera del orden de tabulación normal**: se alcanza con **F6**, que lleva el foco a la región y despliega la pila. Mientras está recogida, **el aspa está oculta al lector de pantalla** (`aria-hidden`) porque el aviso ya se anuncia entero y su cierre es automático; al desplegarse —con el ratón o con el foco— aparece como el botón que es. La acción, en cambio, se anuncia siempre: es contenido del aviso, no un control del motor.
 - El **aspa** (`CloseButton`) y la **acción** (`Button` ghost) miden 32px de lado, la talla mínima del sistema, con el anillo de foco del sistema. El aspa lleva nombre accesible traducible (`closeLabel`, «Cerrar» por defecto) y no marca el hover.
 - **Movimiento**: la entrada, la salida y el apilado usan tokens de duración, así que con `prefers-reduced-motion: reduce` valen 0ms y el aviso aparece y desaparece sin animación.
-- **Contraste**: los cuatro pares de relleno y tinta son los del `Alert` — blanco sobre prusia, verde y rojo; prusia sobre el amarillo.
+- **Contraste**: los cuatro pares de relleno y tinta son los del `Alert` — blanco sobre prusia, verde, rojo y ámbar.
 
 ## Props
 

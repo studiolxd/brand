@@ -26,7 +26,7 @@ $lxd-alert-error-bg: #b30000; // Fondo error — rojo semántico
 $lxd-alert-error-border-color: #b30000; // Borde igual al fondo error
 $lxd-alert-error-title-color: #ffffff; // Título blanco sobre fondo error
 $lxd-alert-error-description-color: #ffffff; // Descripción blanca sobre fondo error
-$lxd-alert-warning-bg: #ffcd00; // Fondo warning — amarillo brand
-$lxd-alert-warning-border-color: #ffcd00; // Borde igual al fondo warning
-$lxd-alert-warning-title-color: #111e30; // Título prussian sobre fondo amarillo (contraste AAA)
-$lxd-alert-warning-description-color: #111e30; // Descripción prussian sobre fondo amarillo
+$lxd-alert-warning-bg: #7d4c00; // Fondo warning — ámbar semántico. Era el amarillo de marca: el aviso es un estado, no identidad
+$lxd-alert-warning-border-color: #7d4c00; // Borde igual al fondo warning
+$lxd-alert-warning-title-color: #ffffff; // Título blanco sobre fondo warning (7,23:1, AAA)
+$lxd-alert-warning-description-color: #ffffff; // Descripción blanca sobre fondo warning

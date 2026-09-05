@@ -60,6 +60,8 @@
   --color-red-light: #ff8585; /** System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo */
   --color-green: #006616; /** System green — base (AAA sobre blanco; fill universal de success) */
   --color-green-light: #00cc2c; /** System green light — SOLO texto/icono/borde sobre prussian, nunca como fondo */
+  --color-amber: #7d4c00; /** System amber — base (7,23:1 sobre blanco, AAA; fill universal de warning con blanco encima, mismo 7,23:1). Ámbar funcional, no el amarillo de marca */
+  --color-amber-light: #f59e0b; /** System amber light — SOLO texto/icono/borde sobre prussian (7,81:1, AAA), nunca como fondo (2,15:1 sobre blanco) */
   --color-primary: var(--color-prussian); /** Primary brand color — used ~50% of the time */
   --color-accent-1: var(--color-lavender); /** Accent 1 brand color — used ~20% of the time */
   --color-accent-2: var(--color-yellow); /** Accent 2 brand color — used ~20% of the time */
@@ -73,6 +75,10 @@
   --color-success-text-on-dark: var(--color-green-light); /** Success — texto/icono/borde sobre superficie oscura (prussian). Nunca como background */
   --color-success-fill: var(--color-green); /** Success — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto */
   --color-success-fill-text: var(--color-white); /** Success — contenido sobre success-fill */
+  --color-warning-text-on-light: var(--color-amber); /** Aviso — texto/icono/borde sobre superficie clara (7,23:1 sobre blanco, AAA). Nunca como background */
+  --color-warning-text-on-dark: var(--color-amber-light); /** Aviso — texto/icono/borde sobre superficie oscura (7,81:1 sobre prusia, AAA). Nunca como background */
+  --color-warning-fill: var(--color-amber); /** Aviso — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto */
+  --color-warning-fill-text: var(--color-white); /** Aviso — contenido sobre warning-fill (7,23:1, AAA) */
   --color-destructive-text-on-light: var(--color-red); /** Destructive — texto/icono/borde sobre superficie clara. Nunca como background */
   --color-destructive-text-on-dark: var(--color-red-light); /** Destructive — texto/icono/borde sobre superficie oscura (prussian). Nunca como background */
   --color-destructive-fill: var(--color-red); /** Destructive — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto */

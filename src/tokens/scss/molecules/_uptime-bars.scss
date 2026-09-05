@@ -1,0 +1,25 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-uptime-bars-gap: 0.25rem; // 4px — hueco entre barritas. El ancho de la barrita no es un token: sale de repartir el contenedor entre los puntos de la serie
+$lxd-uptime-bars-bar-height: 2rem; // 32px — alto de la barrita. Es la única medida fija: el ancho lo pone el contenedor
+$lxd-uptime-bars-bar-radius: 0px; // Esquina recta, como todo el sistema
+$lxd-uptime-bars-bar-border-width: 1px; // Filete de contorno de la barrita. Mismo recurso que el relleno de ProgressBar: en superficie oscura los rellenos de feedback no llegan a 3:1 contra el lienzo, y WCAG 1.4.11 admite que sea el contorno quien identifique el elemento
+$lxd-uptime-bars-bar-border-color: rgba(0, 0, 0, 0); // En superficie clara no hace falta filete —los rellenos de feedback dan 7,2:1 sobre blanco—, pero se declara transparente para que la barrita mida igual en las dos superficies
+$lxd-uptime-bars-ok-bg: #006616; // Tramo bueno — relleno sólido del rol success. Es un fondo, así que va el sufijo `-fill`
+$lxd-uptime-bars-degraded-bg: #7d4c00; // Tramo intermedio — relleno sólido del rol warning
+$lxd-uptime-bars-down-bg: #b30000; // Tramo malo — relleno sólido del rol error
+$lxd-uptime-bars-empty-bg: #f2f2f2; // Sin dato — superficie secundaria: no es un estado del servicio, es la ausencia de medida
+$lxd-uptime-bars-empty-pattern-color: #d0d0d0; // Rayas del «sin dato»: lo que distingue esa barrita de las demás sin depender del color
+$lxd-uptime-bars-empty-pattern-width: 2px; // 2px — grosor de cada raya del «sin dato»
+$lxd-uptime-bars-focus-ring-width: 2px; // Grosor del anillo de foco de la barrita
+$lxd-uptime-bars-focus-ring-offset: 2px; // Separación del anillo de foco. Es la del sistema encogida al hueco entre barritas: con 30 puntos a 375px el anillo se pisaría con el vecino
+$lxd-uptime-bars-focus-ring-color: #111e30; // Color del anillo de foco
+$lxd-uptime-bars-footer-gap: 0.5rem; // Aire entre la tira y la fila de pie (extremos y media)
+$lxd-uptime-bars-footer-font-size: 0.875rem; // Cuerpo del pie: letra menor, un peldaño por debajo del texto corriente
+$lxd-uptime-bars-footer-column-gap: 0.5rem; // Aire entre las tres celdas del pie
+$lxd-uptime-bars-edge-color: #4a4a4a; // Etiquetas de los extremos — atenuadas: son la escala, no el dato
+$lxd-uptime-bars-summary-color: #111e30; // La media — tinta del sistema: es el dato que se lee cuando no se miran las barritas
+$lxd-uptime-bars-summary-font-weight: 500; // Peso de la media
+$lxd-uptime-bars-tooltip-gap: 0.25rem; // Aire entre la etiqueta y el detalle dentro del bocadillo
+$lxd-uptime-bars-tooltip-label-font-weight: 500; // Peso de la etiqueta del punto dentro del bocadillo

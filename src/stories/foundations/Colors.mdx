@@ -43,7 +43,9 @@ Blanco, negro y cuatro grises para texto, fondos, bordes y estados. No forman pa
 
 ### Sistema
 
-Rojo y verde funcionales, independientes de la marca. Cada uno tiene una versión **base** (legible sobre blanco, y relleno universal) y una **light** (solo legible sobre prusia). No se usan con fines decorativos.
+Rojo, verde y ámbar funcionales, independientes de la marca. Cada uno tiene una versión **base** (legible sobre blanco, y relleno universal) y una **light** (solo legible sobre prusia). No se usan con fines decorativos.
+
+El ámbar **no es el amarillo de marca**: el amarillo (`accent-2`) es identidad —el relleno de un `Tag`, el hover de un botón— y no llega a 3:1 sobre blanco, así que no puede ser tinta. El ámbar de sistema se eligió midiendo, para que el aviso tenga la misma forma que el error y el éxito: base 7,23:1 sobre blanco (AAA, y el mismo número para el blanco encima del relleno) y light 7,81:1 sobre prusia (AAA).
 
 <ColorPalette>
   {systemSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
@@ -79,6 +81,10 @@ Asignan un rol a los colores de sistema. **El sufijo dice a qué propiedad CSS v
 | `*-fill-text` | Contenido colocado sobre un `*-fill` | Blanco |
 
 No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es siempre el color base con blanco encima, en cualquier superficie. `destructive-*` es un alias completo de `error-*` para acciones destructivas.
+
+Cuatro roles: `error-*`, `success-*`, `warning-*` y `destructive-*`. El **aviso** (`warning-*`) es el tramo intermedio —lo que ya no está bien pero todavía no está roto—, y se pinta con el ámbar de sistema, nunca con el amarillo de marca.
+
+**Por qué el aviso no es el amarillo de marca.** `Alert`, `Toast` y `Tag` lo pintaban con `accent-2` hasta que existió el rol. Dos motivos para separarlos: el amarillo es **identidad** —el relleno de un `Tag` de marca, el hover de un botón—, así que un aviso y un botón bajo el puntero acababan del mismo color y el usuario no podía distinguirlos; y el amarillo, al no llegar a 3:1 sobre blanco, obliga a tinta prusia encima, lo que dejaba al aviso como el único relleno del sistema que leía en claro mientras los otros tres leen en oscuro. El ámbar elegido no se confunde con el amarillo de marca: entre los dos hay 4,81:1, o sea que el de marca es casi cinco veces más claro.
 
 <ColorPalette>
   {feedbackSwatches.map((s) => <ColorItem key={s.title} {...s} />)}

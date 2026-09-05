@@ -52,8 +52,8 @@
 /* El aspa es el `CloseButton` del sistema: sin hover —era el relleno del
    `Button` ghost lo que sobraba aquí— y con el anillo de foco. El color no se
    remapea a propósito: el aspa toma la tinta de la superficie del relleno
-   (oscura salvo en `warning`) por la cascada de `.surface-dark`, igual que
-   antes. */
+   —oscura en las cuatro intenciones— por la cascada de `.surface-dark`, igual
+   que antes. */
 
 .alert .alert__close {
   position: absolute;
