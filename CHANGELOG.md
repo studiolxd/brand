@@ -41,6 +41,14 @@ para breaking changes.
   descripción del diálogo **deja de tener default**: lo que hay en pantalla es
   la imagen con su marco de selección, que se explica solo. `cropDescription`
   sigue existiendo para quien tenga algo que decir.
+- **`Avatar` gana `2xl` (96px) y `AvatarUpload` lo usa.** En el paso del
+  logotipo el avatar no acompaña al botón: es el asunto de la pantalla y
+  además la diana donde se suelta la imagen. La talla del avatar pasa a ir
+  **dos peldaños por encima** del control (`sm` → 48, `md` → 64, `lg` → 96),
+  y el icono del velo sube a `lg` en la talla grande. 96px es vez y media el
+  peldaño anterior, sigue en el múltiplo de 8 y —con el botón al lado y el
+  aire del sistema— la fila entera cabe todavía en un móvil de 375px; hay un
+  test de story que lo mide.
 
 ## v30.7.0
 

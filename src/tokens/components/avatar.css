@@ -3,6 +3,7 @@
  */
 
 :root {
+  --avatar-size-2xl: 6rem; /** 96px — el avatar es además la zona donde se suelta la imagen (`AvatarUpload` a talla `lg`, el paso del logotipo del alta). Vez y media el peldaño anterior, sigue en el múltiplo de 8, y a 96px la diana de arrastre se acierta sin apuntar. Es el techo: con el botón al lado y el aire del sistema, la fila entera cabe todavía en un móvil de 375px */
   --avatar-size-sm: var(--size-component-sm); /** 32px — en barras y menús (UserMenu, OrgSwitcher) */
   --avatar-size-md: var(--size-component-md); /** 40px — por defecto: listas, tarjetas */
   --avatar-size-lg: var(--size-component-lg); /** 48px — cabeceras de perfil */
@@ -11,6 +12,7 @@
   --avatar-initials-font-size-md: var(--font-size-2); /** Iniciales a talla md */
   --avatar-initials-font-size-lg: var(--font-size-3); /** Iniciales a talla lg */
   --avatar-initials-font-size-xl: var(--font-size-4); /** Iniciales a talla xl: un peldaño de la escala tipográfica por talla, como las tres anteriores */
+  --avatar-initials-font-size-2xl: var(--font-size-5); /** Iniciales a talla 2xl: un peldaño más, como en el resto de la escala */
   --avatar-border-radius: var(--border-radius-round); /** Personas: círculo */
   --avatar-border-radius-square: var(--border-radius-default); /** Organizaciones (logos): el radio del sistema */
   --avatar-initials-bg: var(--color-primary); /** Fondo de las iniciales */

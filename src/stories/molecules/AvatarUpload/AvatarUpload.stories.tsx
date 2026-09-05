@@ -188,7 +188,7 @@ export const ContratoArrastre: Story = {
     const avatar = canvasElement.querySelector('.avatar')!;
     await expect(Math.round(diana.getBoundingClientRect().width))
       .toBe(Math.round(avatar.getBoundingClientRect().width));
-    await expect(avatar).toHaveClass('avatar--lg');
+    await expect(avatar).toHaveClass('avatar--xl');
 
     soltar(diana, [imagen()]);
     await expect(args.onSelect).toHaveBeenCalledTimes(1);
@@ -210,6 +210,35 @@ export const ContratoTalla: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('button', { name: 'Subir avatar' })).toHaveClass('button--lg');
-    await expect(canvasElement.querySelector('.avatar')).toHaveClass('avatar--xl');
+    await expect(canvasElement.querySelector('.avatar')).toHaveClass('avatar--2xl');
+    await expect(
+      Math.round(canvasElement.querySelector('.avatar')!.getBoundingClientRect().width),
+    ).toBe(96);
+  },
+};
+
+/**
+ * El avatar de 96px es la diana del arrastre, y a la vez tiene que caber con
+ * su botón al lado en la pantalla más estrecha que servimos. La story mide la
+ * fila dentro de una caja de 375px con el inset del contenedor.
+ */
+export const ContratoCabeEnMovil: Story = {
+  name: 'Test — a talla lg la fila cabe en 375px',
+  tags: ['!dev'],
+  render: (args) => (
+    <div style={{ inlineSize: 375, paddingInline: 'var(--spacing-5)', boxSizing: 'border-box' }}>
+      <FormSizeContext.Provider value="lg">
+        <AvatarUpload {...args} />
+      </FormSizeContext.Provider>
+    </div>
+  ),
+  args: { src: undefined, buttonLabel: 'Subir', buttonAccessibleLabel: 'Subir logo', shape: 'square' },
+  play: async ({ canvasElement }) => {
+    const fila = canvasElement.querySelector('.avatar-upload') as HTMLElement;
+    // Una sola línea, sin desbordar: el avatar y el botón caben al lado.
+    await expect(fila.scrollWidth).toBeLessThanOrEqual(fila.clientWidth);
+    const avatar = canvasElement.querySelector('.avatar')!.getBoundingClientRect();
+    const boton = within(canvasElement).getByRole('button', { name: 'Subir logo' }).getBoundingClientRect();
+    await expect(Math.round(avatar.top)).toBe(Math.round(boton.top + (boton.height - avatar.height) / 2));
   },
 };

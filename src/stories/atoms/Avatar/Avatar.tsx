@@ -11,10 +11,11 @@ export interface AvatarProps {
   /** Nombre completo. Se usa para generar las iniciales cuando no hay `src`. */
   name?: string;
   /**
-   * Talla del avatar: las tres del sistema (32/40/48) más `xl` (64), la talla
-   * de marca para cuando el avatar es el asunto de la pantalla.
+   * Talla del avatar: las tres del sistema (32/40/48) más `xl` (64) y `2xl`
+   * (96), las tallas de marca para cuando el avatar es el asunto de la
+   * pantalla — y, en `2xl`, además la zona donde se suelta la imagen.
    */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   /** Forma del avatar. `circle` para personas, `square` para logos de organización. */
   shape?: 'circle' | 'square';
   /** Clase adicional. */

@@ -11,11 +11,18 @@ import { useFormSize, type FormSize } from '../../constants/form-size';
 import { isDevelopment } from '../../constants/env';
 import './AvatarUpload.css';
 
-/** La talla del avatar que le toca a cada talla de control: un peldaño por encima. */
-const AVATAR_SIZE = { sm: 'md', md: 'lg', lg: 'xl' } as const;
+/**
+ * La talla del avatar que le toca a cada talla de control: **dos peldaños por
+ * encima**. Aquí el avatar no acompaña al botón —es el asunto de la pantalla y
+ * además la diana sobre la que se suelta el archivo—, así que se mide con la
+ * escala de marca y no con la de controles. En `lg`, la talla del alta, son
+ * 96px: una diana que se acierta sin apuntar y que, con el botón al lado y el
+ * aire del sistema, sigue cabiendo en un móvil de 375px.
+ */
+const AVATAR_SIZE = { sm: 'lg', md: 'xl', lg: '2xl' } as const;
 
-/** El icono del velo: el de una fila de control para `sm`, el de siempre para el resto. */
-const OVERLAY_ICON_SIZE = { sm: 'sm', md: 'md', lg: 'md' } as const;
+/** El icono del velo: el de siempre, y el destacado cuando el avatar es de marca. */
+const OVERLAY_ICON_SIZE = { sm: 'md', md: 'md', lg: 'lg' } as const;
 
 export interface AvatarUploadProps {
   /** URL de la imagen actual. Sin ella, el avatar enseña las iniciales de `name`. */
@@ -27,8 +34,8 @@ export interface AvatarUploadProps {
   /** `circle` para personas, `square` para organizaciones. También decide la selección del recorte. */
   shape?: 'circle' | 'square';
   /**
-   * Talla del sistema: mueve a la vez el botón y el avatar (que va un peldaño
-   * por encima: `md` → 40px, `lg` → 48px, `xl` → 64px).
+   * Talla del sistema: mueve a la vez el botón y el avatar (que va dos
+   * peldaños por encima: `sm` → 48px, `md` → 64px, `lg` → 96px).
    * Sin ella, la del `Form`/`FormSizeContext` que lo envuelva; sin contexto, `md`.
    */
   size?: FormSize;
