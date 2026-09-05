@@ -4,7 +4,9 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # El alta
 
-Las cinco pantallas del alta de la suite —perfil, nombre de la organización, logotipo, invitaciones y la sala de espera— **montadas con las piezas del DS y datos falsos**: `AppRoot` + `OnboardingShell` (que a su vez cuelga de `PublicPageShell`) + `Stepper` + `PageIntro` + `Form`/`*Field`. Sin lógica: sin validación real, sin Better Auth, sin router.
+Las cinco pantallas del alta de las aplicaciones —perfil, nombre de la organización, logotipo, invitaciones y la sala de espera— **montadas con las piezas del DS y datos falsos**: `AppRoot` + `OnboardingShell` (que a su vez cuelga de `PublicPageShell`) + `Stepper` + `PageIntro` + `Form`/`*Field`/`AvatarUpload`. Sin lógica: sin validación real, sin Better Auth, sin router.
+
+**No hay «Atrás».** El progreso navega: sus cifras son los destinos, y qué paso es alcanzable lo dice el flujo (el perfil nunca, la organización siempre, el logotipo y las invitaciones solo con la organización ya creada). Un botón que repitiera eso sobraría.
 
 Son **la norma**, igual que las páginas públicas: si el hub las monta distinto, el hub está mal. No hay maqueta paralela — todo lo que se ve aquí sale de componentes publicados, así que una pantalla no puede quedarse atrás cuando el marco cambia.
 
@@ -19,7 +21,7 @@ Las decisiones de diseño, que son las que la hacen distinta:
 - **Se dice lo que pasa, no se disimula.** Nada de un estado vacío que insinúe que falta un clic. La entradilla dice que no hay nada más que hacer desde esa pantalla.
 - **Se dice quién le sacará de ahí y cómo.** Un `Steps` —el componente documental, aquí en su sitio— con las tres cosas que van a ocurrir: quién invita, a qué dirección llega el correo (escrita, para que se pueda comprobar que es la correcta) y qué pasa al aceptar.
 - **No hay acción principal.** Un botón primario sin nada que hacer detrás es una promesa falsa; el pie se queda solo con la salida. Es la excepción que justifica que `primaryAction` sea opcional en la plantilla.
-- **La salida es digna:** «Cerrar sesión» en `ghost`, con la frase que dice que no se pierde nada al hacerlo.
-- **Sin progreso.** Es un flujo de un solo paso, así que el `Stepper` no se pinta. Sirve de demostración de lo adaptativo: la plantilla monta la ranura igual que en los otros cuatro casos.
+- **La salida es digna:** «Cerrar sesión» en `text`, con la frase que dice que no se pierde nada al hacerlo.
+- **Sin progreso.** No es un paso —no hay nada que hacer—, así que la plantilla no recibe pasos y el `Stepper` no se monta. Sirve de demostración de lo adaptativo: la ranura se monta igual que en los otros cuatro casos.
 
 Lo que **no** va aquí: los formularios reales del hub, con su validación e i18n. Eso es producto.

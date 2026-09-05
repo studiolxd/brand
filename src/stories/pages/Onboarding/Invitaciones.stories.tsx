@@ -11,15 +11,14 @@ import { Icon } from '../../atoms/Icon/Icon';
 import { Stack } from '../../atoms/Stack/Stack';
 
 const ROLES = [
-  { value: 'admin', label: 'Administración' },
-  { value: 'editor', label: 'Edición' },
-  { value: 'lectura', label: 'Solo lectura' },
+  { value: 'member', label: 'Miembro' },
+  { value: 'admin', label: 'Administrador' },
 ];
 
 const FILAS = [
-  { id: '1', correo: 'nuria.serra@santcugat.cat', rol: 'admin' },
-  { id: '2', correo: 'marc.oliva@santcugat.cat', rol: 'editor' },
-  { id: '3', correo: '', rol: 'lectura' },
+  { id: '0', correo: 'nuria.serra@santcugat.cat', rol: 'admin' },
+  { id: '1', correo: 'marc.oliva@santcugat.cat', rol: 'member' },
+  { id: '2', correo: '', rol: 'member' },
 ];
 
 interface Args {
@@ -31,9 +30,8 @@ function Invitaciones({ theme }: Args) {
     <OnboardingPage
       current={3}
       theme={theme}
-      backAction={<Button variant="outline">Atrás</Button>}
-      primaryAction={<Button variant="primary" type="submit" form="alta-invitaciones">Enviar invitaciones</Button>}
-      exitAction={<Button variant="text">Omitir por ahora</Button>}
+      primaryAction={<Button variant="primary" type="submit" form="alta-invitaciones">Finalizar</Button>}
+      exitAction={<Button variant="text">Omitir</Button>}
     >
       <Stack align="stretch">
         <PageIntro title="Invita a tu equipo" />
@@ -41,7 +39,7 @@ function Invitaciones({ theme }: Args) {
           id="alta-invitaciones"
           size="lg"
           onSubmit={(e) => e.preventDefault()}
-          actions={<Button variant="outline">Añadir otra persona</Button>}
+          actions={<Button variant="outline">Añadir otra</Button>}
         >
           <FieldRows>
             {FILAS.map((fila) => (
@@ -53,23 +51,23 @@ function Invitaciones({ theme }: Args) {
                     variant="ghost"
                     iconOnly
                     disabled={FILAS.length === 1}
-                    aria-label={fila.correo ? `Quitar a ${fila.correo}` : 'Quitar la fila vacía'}
+                    aria-label={fila.correo ? `Quitar a ${fila.correo}` : 'Eliminar fila'}
                   >
                     <Icon name="close" />
                   </Button>
                 }
               >
                 <InputField
-                  id={`invitacion-correo-${fila.id}`}
+                  id={`invite-email-${fila.id}`}
                   label="Correo electrónico"
                   type="email"
                   autoComplete="off"
-                  placeholder="nombre@organizacion.cat"
+                  placeholder="Escribe el correo de la persona que invitas"
                   defaultValue={fila.correo}
                 />
                 <SelectField
-                  id={`invitacion-rol-${fila.id}`}
-                  label="Papel"
+                  id={`invite-role-${fila.id}`}
+                  label="Rol"
                   options={ROLES}
                   defaultValue={fila.rol}
                 />
@@ -92,7 +90,7 @@ const meta: Meta<typeof Invitaciones> = {
 export default meta;
 type Story = StoryObj<typeof Invitaciones>;
 
-/** Paso 4 de 4: la lista de invitaciones en `FieldRows`. El correo crece, el papel lleva su ancho y el aspa va al final, fuera de la columna de los campos; la etiqueta solo se ve en la primera fila. */
+/** Paso 4 de 4: la lista de invitaciones en `FieldRows`. El correo crece, el rol lleva su ancho y el aspa va al final, fuera de la columna de los campos; la etiqueta solo se ve en la primera fila. */
 export const PorDefecto: Story = {};
 
 export const EnSuperficieOscura: Story = {
@@ -102,14 +100,16 @@ export const EnSuperficieOscura: Story = {
 };
 
 export const Contrato: Story = {
-  name: 'Test — último paso, tres filas y la principal cierra el alta',
+  name: 'Test — último paso, tres filas, sin Atrás, y la principal cierra el alta',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvasElement).toHaveTextContent('Paso 4 de 4');
     await expect(canvas.getAllByLabelText('Correo electrónico')).toHaveLength(3);
-    await expect(canvas.getByRole('button', { name: 'Enviar invitaciones' })).toHaveClass('button--primary');
+    await expect(canvas.getByRole('button', { name: 'Finalizar' })).toHaveClass('button--primary');
+    await expect(canvas.queryByRole('button', { name: 'Atrás' })).toBeNull();
     const progreso = canvas.getByRole('list', { name: 'Progreso' });
-    await expect(within(progreso).getAllByRole('button')).toHaveLength(3);
+    // El perfil nunca es un destino: quedan la organización y el logotipo.
+    await expect(within(progreso).getAllByRole('button')).toHaveLength(2);
   },
 };

@@ -14,24 +14,48 @@ const PASOS_ALTA: StepperStep[] = [
   { id: 'invitaciones', label: 'Invitaciones' },
 ];
 
+/** Los seis idiomas de la suite, cada uno en el suyo. */
 const IDIOMAS = [
-  { code: 'es', label: 'Español' },
   { code: 'en', label: 'English' },
+  { code: 'es', label: 'Español' },
   { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'nl', label: 'Nederlands' },
+  { code: 'pt', label: 'Português' },
 ];
 
+/**
+ * Qué pasos se pueden pulsar en el progreso, que es la regla del alta:
+ *
+ * - **el perfil**, nunca: está hecho y su ruta rebota en cuanto se completa,
+ *   así que no es un destino al que se pueda llegar;
+ * - **la organización**, siempre: volver a ella con la organización ya creada
+ *   la renombra en lugar de crear otra;
+ * - **el logotipo y las invitaciones**, solo con la organización creada: el
+ *   paso de la organización *la crea*, y estos dos no existen sin ella.
+ *
+ * El paso actual nunca es alcanzable: eso lo impone el `Stepper`.
+ */
+function alcanzable(id: string | undefined, current: number): boolean {
+  if (id === 'organizacion') return true;
+  if (id === 'perfil') return false;
+  return current >= 2;
+}
+
 export interface OnboardingPageProps {
-  /** Los pasos del flujo. Con uno solo, el `Stepper` no se pinta. */
-  steps?: StepperStep[];
+  /**
+   * Los pasos del flujo. `null` es un flujo sin progreso —la sala de espera,
+   * que no es un paso porque no hay nada que hacer—, y entonces el `Stepper`
+   * no se monta.
+   */
+  steps?: StepperStep[] | null;
   /** Índice (base 0) del paso actual. */
   current?: number;
   /** El cuerpo del paso. */
   children: ReactNode;
-  /** «Atrás». En el primer paso no se pasa. */
-  backAction?: ReactNode;
   /** La acción principal del paso. */
   primaryAction?: ReactNode;
-  /** La salida: «Omitir por ahora», «Cerrar sesión». */
+  /** La salida: «Omitir», «Cerrar sesión». */
   exitAction?: ReactNode;
   /** Tema que enseña el conmutador. Solo eso: el oscuro del lienzo lo pone la story. */
   theme?: 'light' | 'dark';
@@ -42,8 +66,11 @@ export interface OnboardingPageProps {
  * con el `Stepper` dentro. Lo único que añade es lo que en el producto viene del
  * layout —la marca y los dos conmutadores— con datos falsos, para que las cinco
  * pantallas de `Pages/Onboarding` no lo repitan.
+ *
+ * **No hay «Atrás».** El progreso navega, así que un botón que repita lo que
+ * las cifras ya saben hacer sobraría: se retiró del alta y no vuelve.
  */
-export function OnboardingPage({ steps = PASOS_ALTA, current = 0, children, backAction, primaryAction, exitAction, theme = 'light' }: OnboardingPageProps) {
+export function OnboardingPage({ steps = PASOS_ALTA, current = 0, children, primaryAction, exitAction, theme = 'light' }: OnboardingPageProps) {
   return (
     <AppRoot>
       <OnboardingShell
@@ -54,8 +81,15 @@ export function OnboardingPage({ steps = PASOS_ALTA, current = 0, children, back
             <ThemeSwitcher size="lg" value={theme} />
           </>
         }
-        stepper={<Stepper steps={steps} current={current} onStepSelect={() => {}} />}
-        backAction={backAction}
+        stepper={
+          steps && (
+            <Stepper
+              steps={steps.map((step) => ({ ...step, reachable: alcanzable(step.id, current) }))}
+              current={current}
+              onStepSelect={() => {}}
+            />
+          )
+        }
         primaryAction={primaryAction}
         exitAction={exitAction}
       >
