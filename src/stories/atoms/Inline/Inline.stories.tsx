@@ -4,6 +4,7 @@ import { Inline } from './Inline';
 import { Button } from '../Button/Button';
 import { Link } from '../Link/Link';
 import { Tag } from '../Tag/Tag';
+import { Heading } from '../Heading/Heading';
 
 const meta: Meta<typeof Inline> = {
   title: 'Atoms/Inline',
@@ -117,6 +118,29 @@ export const Contrato: Story = {
     await expect(getComputedStyle(between).justifyContent).toBe('space-between');
     // `justify="start"` es el defecto y no añade clase: la base sigue limpia.
     await expect(getComputedStyle(base).justifyContent).toBe('normal');
+  },
+};
+
+export const ContratoTitulo: Story = {
+  name: 'Test — un título en la fila suelta su aire de debajo y centra por lo que se ve',
+  tags: ['!dev'],
+  render: () => (
+    <Inline gap="sm" align="center">
+      <Heading level={2}>Nombre (url)</Heading>
+      <Tag variant="success">Operativo</Tag>
+    </Inline>
+  ),
+  play: async ({ canvasElement }) => {
+    const titulo = canvasElement.querySelector('h2') as HTMLElement;
+    const etiqueta = canvasElement.querySelector('.tag') as HTMLElement;
+    // El margen del flujo vertical no viaja a la fila...
+    await expect(getComputedStyle(titulo).marginBlockEnd).toBe('0px');
+    // ...así que los dos centros coinciden (1px de holgura por el redondeo).
+    const centro = (el: HTMLElement) => {
+      const r = el.getBoundingClientRect();
+      return (r.top + r.bottom) / 2;
+    };
+    await expect(Math.abs(centro(titulo) - centro(etiqueta))).toBeLessThan(1);
   },
 };
 
