@@ -56,6 +56,15 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 <Calendar locale="de-DE" previousMonthLabel="Vorheriger Monat" nextMonthLabel="Nächster Monat" />
 ```
 
+Lo mismo vale para el **orden de la fecha escrita** en `DatePicker`: `25/09/2026` en `es`,
+`09/25/2026` en `en-US` y `25.09.2026` en `de` salen de `Intl.DateTimeFormat().formatToParts()`,
+no de una tabla por idioma. Lo único traducible son las letras de la máscara que se ve como
+pista, `maskLetters`:
+
+```tsx
+<DatePicker locale="en-US" maskLetters={{ day: 'dd', month: 'mm', year: 'yyyy' }} />
+```
+
 ## Componentes con props de texto
 
 | Componente | Props |
@@ -70,7 +79,7 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `OtpInput`, `OtpField` | `digitLabel` — el nombre de cada celda; `groupLabel` en `OtpInput` suelto (dentro de `OtpField` lo nombra la etiqueta) |
 | `TimeSelect` | `hoursLabel`, `minutesLabel`, `hoursPlaceholder`, `minutesPlaceholder` |
 | `InputPhone` | `countryLabel`, `internationalLabel` |
-| `Calendar` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel` — más `locale` |
+| `Calendar` | `previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`, `yearGridLabel`, `gridLabel` — más `locale` |
 | `CalendarPlanner` | `previousMonthLabel`, `nextMonthLabel`, `gridLabel`, `moreLabel` — más `locale` |
 | `CalendarRoster` | `previousMonthLabel`, `nextMonthLabel`, `legendLabel`, `legendItems`, `nameLabel`, `birthdayPrefix` — más `locale` |
 | `Table` (`TableHeader`) | `actionsLabel`, `sortedAscLabel`, `sortedDescLabel`, `sortableLabel` |
@@ -91,8 +100,8 @@ esos componentes cubren solo lo que `Intl` no da — los `aria-label` de navegac
 | `PasswordField` | `showPasswordLabel`, `hidePasswordLabel` |
 | `ContextMenu`, `DotsButton` | `label` / `aria-label` |
 | `Modal` | `fallbackTitle`, `closeLabel` |
-| `Select`, `MultiSelect`, `DatePicker` | `placeholder` |
-| `DatePicker` | `calendarLabel` |
+| `Select`, `MultiSelect` | `placeholder` |
+| `DatePicker` | `calendarLabel`, `openCalendarLabel`, `invalidMessage` y `maskLetters` — las letras de la máscara del campo (`dd/mm/aaaa`); el **orden** de día, mes y año no es prop: sale de `locale` con `Intl`. `placeholder` sustituye la máscara entera |
 | `Spinner`, `TypingIndicator` | `label` |
 | `NotificationButton` | `label` sin contador y `countLabel` con él — la frase se rehace con el número dentro |
 | `ConsentBanner` | `title`, `description`, `policyLabel`, `acceptAllLabel`, `rejectAllLabel`, `preferencesLabel`, `regionLabel` |

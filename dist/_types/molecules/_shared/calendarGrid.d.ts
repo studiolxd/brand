@@ -42,28 +42,42 @@ export declare function renderCalendarWeekdayRow({ block, rowModifier, weekdays 
 export interface CalendarMonthNavOptions {
     /** Bloque BEM del calendario que la monta */
     block: string;
-    /** Título del mes visible, ya formateado */
+    /** Título de lo que se ve, ya formateado: el mes, o el tramo de años */
     title: string;
     /** id del título, para `aria-labelledby` de la rejilla */
     titleId: string;
     /** Muestra los botones prev/next. Default: true */
     navigable?: boolean;
-    previousMonthLabel: string;
-    nextMonthLabel: string;
+    /**
+     * Nombre accesible del botón de retroceso. Depende de la vista: «Mes
+     * anterior» sobre la rejilla de días, «Años anteriores» sobre la de años.
+     */
+    previousLabel: string;
+    /** Nombre accesible del botón de avance, también según la vista. */
+    nextLabel: string;
     prevDisabled?: boolean;
     nextDisabled?: boolean;
     onPrev: () => void;
     onNext: () => void;
     chevronSize: 'xs' | 'sm' | 'md';
+    /**
+     * Convierte el título en un botón: es la puerta a otra vista (la rejilla de
+     * años). Sin él, el título es texto y no se pulsa.
+     */
+    onTitleClick?: () => void;
+    /** `aria-expanded` del título cuando es botón: si la otra vista está abierta. */
+    titleExpanded?: boolean;
+    /** ref del botón del título, para poder devolverle el foco al cambiar de vista. */
+    titleRef?: React.Ref<HTMLButtonElement>;
     /** Contenido extra a la derecha del título (acciones propias del calendario) */
     children?: ReactNode;
 }
 /**
- * Cabecera con los dos botones de mes y el nombre del mes vivo. El título es
- * una región `aria-live="polite"`: al cambiar de mes el lector lo anuncia sin
- * mover el foco.
+ * Cabecera con los dos botones de navegación y el nombre de lo que se ve. El
+ * título es una región `aria-live="polite"`: al cambiar el lector lo anuncia
+ * sin mover el foco.
  */
-export declare function renderCalendarMonthNav({ block, title, titleId, navigable, previousMonthLabel, nextMonthLabel, prevDisabled, nextDisabled, onPrev, onNext, chevronSize, children, }: CalendarMonthNavOptions): import("react/jsx-runtime").JSX.Element;
+export declare function renderCalendarMonthNav({ block, title, titleId, navigable, previousLabel, nextLabel, prevDisabled, nextDisabled, onPrev, onNext, chevronSize, onTitleClick, titleExpanded, titleRef, children, }: CalendarMonthNavOptions): import("react/jsx-runtime").JSX.Element;
 export interface UseCalendarGridNavigationOptions {
     /** Mes visible */
     month: Date;

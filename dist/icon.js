@@ -1596,6 +1596,33 @@ var r = (() => {
 			})
 		] })
 	},
+	calendar: {
+		viewBox: "0 0 24 24",
+		render: () => /* @__PURE__ */ n(e, { children: [
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				d: "M3 6 H21 V21 H3 Z"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				d: "M3 10 H21"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M8 4 V8"
+			}),
+			/* @__PURE__ */ t("path", {
+				vectorEffect: "non-scaling-stroke",
+				strokeWidth: "1",
+				strokeLinecap: "round",
+				d: "M16 4 V8"
+			})
+		] })
+	},
 	target: {
 		viewBox: "0 0 24 24",
 		render: () => /* @__PURE__ */ n(e, { children: [

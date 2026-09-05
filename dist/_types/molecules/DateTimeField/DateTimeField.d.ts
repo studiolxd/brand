@@ -37,11 +37,12 @@ export interface DateTimeFieldProps {
     /** aria-label del desplegable de minutos. Default: "Minutos" (castellano). */
     minutesLabel?: string;
     onChange?: (date: Date | null) => void;
-    onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+    /** Se llama al salir de cualquiera de los dos controles: el campo de fecha (un `<input>`) o los desplegables de hora (dos `<button>`). */
+    onBlur?: React.FocusEventHandler<HTMLElement>;
 }
 /**
  * Fecha y hora en un solo campo: un `DatePicker` y un `TimeSelect` que
- * comparten valor. El `ref` va al disparador de la fecha, que es el primero
- * que se enfoca; el `className`, al contenedor.
+ * comparten valor. El `ref` va al campo de la fecha, que es el primero que se
+ * enfoca; el `className`, al contenedor.
  */
-export declare const DateTimeField: import("react").ForwardRefExoticComponent<DateTimeFieldProps & import("react").RefAttributes<HTMLButtonElement>>;
+export declare const DateTimeField: import("react").ForwardRefExoticComponent<DateTimeFieldProps & import("react").RefAttributes<HTMLInputElement>>;

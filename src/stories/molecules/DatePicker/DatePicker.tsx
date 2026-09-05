@@ -1,13 +1,40 @@
-import { forwardRef, useState, useCallback } from 'react';
+'use client';
+
+import { forwardRef, useCallback, useId, useMemo, useRef, useState } from 'react';
+import { Icon } from '../../atoms/Icon/Icon';
+import { Input } from '../../atoms/Input/Input';
 import { Popover } from '../../atoms/Popover/Popover';
 import { Calendar } from '../Calendar/Calendar';
 import type { CalendarProps } from '../Calendar/Calendar';
+import { getDateMask, SPANISH_MASK_LETTERS, type DateMaskLetters } from './dateMask';
 import './DatePicker.css';
 
 export interface DatePickerProps {
   value?: Date | null;
-  onChange?: (date: Date) => void;
+  /**
+   * Se llama con la fecha escrita o elegida, y con `null` al vaciar el campo.
+   * Una fecha a medio escribir no lo llama: el campo se pone en error.
+   */
+  onChange?: (date: Date | null) => void;
+  /**
+   * Pista dentro del campo. Por defecto, la máscara del locale con las letras
+   * castellanas (`dd/mm/aaaa`, `mm/dd/aaaa` en `en-US`). Una app multiidioma
+   * pasa `maskLetters` para traducir las letras sin tocar el orden.
+   */
   placeholder?: string;
+  /**
+   * Letras de la máscara del marcador de posición. Default castellano
+   * (`{ day: 'dd', month: 'mm', year: 'aaaa' }`). El orden y el separador no
+   * son props: salen del `locale` con `Intl`.
+   */
+  maskLetters?: DateMaskLetters;
+  /**
+   * Mensaje cuando lo escrito no es una fecha completa y válida. Default
+   * castellano; se anuncia con `role="alert"`.
+   */
+  invalidMessage?: string;
+  /** Nombre accesible del botón que abre el calendario. Default castellano. */
+  openCalendarLabel?: string;
   minDate?: CalendarProps['minDate'];
   maxDate?: CalendarProps['maxDate'];
   disabledDates?: CalendarProps['disabledDates'];
@@ -16,7 +43,7 @@ export interface DatePickerProps {
   readOnly?: boolean;
   error?: boolean;
   locale?: string;
-  /** id aplicado al botón trigger */
+  /** id aplicado al campo de texto */
   id?: string;
   /** @deprecated Usa el atributo nativo `aria-describedby`. */
   describedBy?: string;
@@ -28,19 +55,10 @@ export interface DatePickerProps {
   calendarLabel?: string;
   /** Nombre del campo en el formulario: se monta un input oculto con la fecha en ISO. */
   name?: string;
-  /** Se llama al salir del disparador (react-hook-form lo usa para validar). */
-  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+  /** Se llama al salir del campo (react-hook-form lo usa para validar). */
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   /** Se añade DESPUÉS de las clases propias del componente. */
   className?: string;
-}
-
-function formatDate(date: Date, locale: string): string {
-  return new Intl.DateTimeFormat(locale, {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  }).format(date);
 }
 
 /**
@@ -55,13 +73,17 @@ function toLocalDateInputValue(date: Date): string {
 }
 
 /**
- * Selector de fecha. El `ref` va al **disparador**, para que react-hook-form
- * pueda enfocarlo al fallar la validación.
+ * Selector de fecha: un campo de texto que se escribe y se borra, con el
+ * calendario a un botón de distancia. El `ref` va al **campo**, para que
+ * react-hook-form pueda enfocarlo al fallar la validación.
  */
-export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(function DatePicker({
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function DatePicker({
   value,
   onChange,
-  placeholder = 'Seleccionar fecha…',
+  placeholder,
+  maskLetters = SPANISH_MASK_LETTERS,
+  invalidMessage = 'Escribe una fecha completa, con el día, el mes y el año.',
+  openCalendarLabel = 'Abrir calendario',
   minDate,
   maxDate,
   disabledDates,
@@ -80,56 +102,123 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
   className,
 }: DatePickerProps, ref) {
   const [open, setOpen] = useState(false);
+  const mask = useMemo(() => getDateMask(locale), [locale]);
+
+  // Lo que se ve escrito. Solo se vuelve a sincronizar cuando cambia la fecha
+  // de fuera —comparada por su texto, no por identidad de `Date`: un padre que
+  // reconstruye el objeto en cada render borraría lo que se está tecleando.
+  const valueText = value instanceof Date ? mask.format(value) : '';
+  const [text, setText] = useState(valueText);
+  const [lastValueText, setLastValueText] = useState(valueText);
+
+  // Ajuste de estado durante el render, el patrón de React para derivar de una
+  // prop: no es un efecto porque no hay nada externo que sincronizar.
+  if (valueText !== lastValueText) {
+    setLastValueText(valueText);
+    setText(valueText);
+  }
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const setInputRef = useCallback(
+    (el: HTMLInputElement | null) => {
+      inputRef.current = el;
+      if (typeof ref === 'function') ref(el);
+      else if (ref) ref.current = el;
+    },
+    [ref]
+  );
+
+  const typed = text.trim();
+  const parsed = typed ? mask.parse(text) : null;
+  // Una fecha a medio escribir es un error del campo, igual que uno de fuera.
+  const invalid = typed !== '' && !parsed;
+  const hasError = error || invalid;
+
+  const instanceId = useId();
+  const invalidId = `${instanceId}-date-picker-invalid`;
+  const describedByValue =
+    [describedBy ?? ariaDescribedBy, invalid ? invalidId : undefined].filter(Boolean).join(' ') ||
+    undefined;
 
   const handleOpenChange = useCallback(
     (nextOpen: boolean) => {
-      if (readOnly && nextOpen) return;
+      if ((readOnly || disabled) && nextOpen) return;
       setOpen(nextOpen);
     },
-    [readOnly]
+    [disabled, readOnly]
+  );
+
+  const handleInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const next = event.target.value;
+      setText(next);
+
+      if (next.trim() === '') {
+        // Vaciar el campo es borrar la fecha, no dejarla como estaba.
+        onChange?.(null);
+        return;
+      }
+
+      const date = mask.parse(next);
+      if (date) onChange?.(date);
+    },
+    [mask, onChange]
+  );
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'ArrowDown' && !readOnly && !disabled) {
+        event.preventDefault();
+        setOpen(true);
+        return;
+      }
+      if (event.key === 'Escape' && open) {
+        event.preventDefault();
+        setOpen(false);
+      }
+    },
+    [disabled, open, readOnly]
   );
 
   const handleSelect = useCallback(
     (date: Date) => {
+      setText(mask.format(date));
       onChange?.(date);
       setOpen(false);
+      // El motor devuelve el foco al disparador al cerrar; el sitio del que
+      // salió quien eligió con el ratón o el teclado es el campo, así que se
+      // recupera en el fotograma siguiente, ya cerrado el panel.
+      requestAnimationFrame(() => inputRef.current?.focus());
     },
-    [onChange]
+    [mask, onChange]
   );
-
-  const displayValue = value instanceof Date ? formatDate(value, locale) : null;
-
-  const triggerCls = [
-    'date-picker__trigger',
-    size !== 'md' ? `date-picker__trigger--${size}` : '',
-    error ? 'date-picker__trigger--error' : '',
-    !displayValue ? 'date-picker__trigger--placeholder' : '',
-    className ?? '',
-  ].filter(Boolean).join(' ');
 
   const trigger = (
     <button
-      ref={ref}
-      id={id}
       type="button"
-      className={triggerCls}
-      disabled={disabled}
+      className="date-picker__button"
+      aria-label={openCalendarLabel}
       aria-haspopup="dialog"
       aria-expanded={open}
-      aria-readonly={readOnly || undefined}
-      aria-invalid={error || undefined}
-      aria-label={ariaLabel}
-      aria-describedby={describedBy ?? ariaDescribedBy}
-      onBlur={onBlur}
+      disabled={disabled}
+      // De solo lectura el botón se queda a la vista pero fuera del recorrido:
+      // no abre nada —lo corta `handleOpenChange`— y una parada de tabulador
+      // que no hace nada es una trampa.
+      tabIndex={readOnly ? -1 : undefined}
     >
-      {displayValue ?? placeholder}
+      <Icon name="calendar" size="sm" className="date-picker__glyph" />
     </button>
   );
 
+  const rootClass = [
+    'date-picker',
+    size !== 'md' ? `date-picker--${size}` : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
+
   return (
-    <>
-      {/* Lo que se envía con el formulario: la fecha en ISO (yyyy-mm-dd).
-          Va fuera del disparador: un `<button>` no puede contener un input. */}
+    <div className={rootClass}>
+      {/* Lo que se envía con el formulario: la fecha en ISO (yyyy-mm-dd). */}
       {name && (
         <input
           type="hidden"
@@ -137,27 +226,53 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
           value={value instanceof Date ? toLocalDateInputValue(value) : ''}
         />
       )}
-    <Popover
-      trigger={trigger}
-      label={calendarLabel}
-      open={open}
-      onOpenChange={handleOpenChange}
-      side="bottom"
-      align="start"
-      sideOffset={-1}
-      className="date-picker__popover"
-    >
-      <Calendar
-        value={value ?? null}
-        onChange={handleSelect}
-        gridLabel={calendarLabel}
-        minDate={minDate}
-        maxDate={maxDate}
-        disabledDates={disabledDates}
-        locale={locale}
-        size={size}
-      />
-    </Popover>
-    </>
+      <div className="date-picker__control">
+        <Input
+          ref={setInputRef}
+          id={id}
+          className="date-picker__input"
+          type="text"
+          inputMode="numeric"
+          autoComplete="off"
+          size={size}
+          error={hasError}
+          value={text}
+          placeholder={placeholder ?? mask.mask(maskLetters)}
+          disabled={disabled}
+          readOnly={readOnly}
+          aria-label={ariaLabel}
+          aria-describedby={describedByValue}
+          onChange={handleInput}
+          onKeyDown={handleKeyDown}
+          onBlur={onBlur}
+        />
+        <Popover
+          trigger={trigger}
+          label={calendarLabel}
+          open={open}
+          onOpenChange={handleOpenChange}
+          side="bottom"
+          align="end"
+          sideOffset={-1}
+          className="date-picker__popover"
+        >
+          <Calendar
+            value={parsed ?? value ?? null}
+            onChange={handleSelect}
+            gridLabel={calendarLabel}
+            minDate={minDate}
+            maxDate={maxDate}
+            disabledDates={disabledDates}
+            locale={locale}
+            size={size}
+          />
+        </Popover>
+      </div>
+      {invalid && (
+        <span id={invalidId} className="date-picker__message" role="alert">
+          {invalidMessage}
+        </span>
+      )}
+    </div>
   );
 });

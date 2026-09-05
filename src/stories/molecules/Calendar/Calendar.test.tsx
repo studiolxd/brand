@@ -164,3 +164,86 @@ describe('Calendar — rejilla accesible', () => {
     expect(cabeceras[0].querySelector('abbr')).toHaveAttribute('title', expect.stringMatching(/lunes/i));
   });
 });
+
+describe('Calendar — elegir año desde el título', () => {
+  it('el título es un botón que abre una docena de años', async () => {
+    const user = userEvent.setup();
+    renderCalendar();
+
+    const titulo = screen.getByRole('button', { name: /enero de 2025/i });
+    await user.click(titulo);
+
+    const rejilla = screen.getByRole('grid', { name: 'Elegir año' });
+    const anos = within(rejilla).getAllByRole('gridcell');
+    expect(anos).toHaveLength(12);
+    expect(anos[0]).toHaveTextContent('2016');
+    expect(anos[11]).toHaveTextContent('2027');
+    expect(titulo).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('las flechas navegan de docena en docena y se llaman por su vista', async () => {
+    const user = userEvent.setup();
+    renderCalendar();
+
+    await user.click(screen.getByRole('button', { name: /enero de 2025/i }));
+    expect(screen.queryByLabelText('Mes anterior')).toBeNull();
+
+    await user.click(screen.getByLabelText('Años anteriores'));
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('2004–2015');
+
+    await user.click(screen.getByLabelText('Años siguientes'));
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('2016–2027');
+  });
+
+  it('elegir un año vuelve al mes, en ese año, y devuelve el foco al título', async () => {
+    const user = userEvent.setup();
+    const onMonthChange = vi.fn();
+    renderCalendar({ onMonthChange });
+
+    await user.click(screen.getByRole('button', { name: /enero de 2025/i }));
+    await user.click(screen.getByRole('gridcell', { name: '2019' }));
+
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(/enero de 2019/i);
+    expect(onMonthChange).toHaveBeenCalled();
+    expect((onMonthChange.mock.calls.at(-1)![0] as Date).getFullYear()).toBe(2019);
+    expect(document.activeElement).toHaveAccessibleName(/enero de 2019/i);
+  });
+
+  it('al abrir la vista el foco cae en el año vivo y las flechas lo recorren', async () => {
+    const user = userEvent.setup();
+    renderCalendar();
+
+    await user.click(screen.getByRole('button', { name: /enero de 2025/i }));
+    expect(document.activeElement).toHaveTextContent('2025');
+
+    await user.keyboard('{ArrowRight}');
+    expect(document.activeElement).toHaveTextContent('2026');
+
+    // Cuatro columnas: abajo son cuatro años más
+    await user.keyboard('{ArrowDown}');
+    expect(document.activeElement).toHaveTextContent('2030');
+  });
+
+  it('Escape en la rejilla de años vuelve al mes', async () => {
+    const user = userEvent.setup();
+    renderCalendar();
+
+    await user.click(screen.getByRole('button', { name: /enero de 2025/i }));
+    await user.keyboard('{Escape}');
+
+    expect(screen.getByRole('grid')).toHaveAccessibleName(/enero/i);
+  });
+
+  it('no ofrece años fuera del rango', async () => {
+    const user = userEvent.setup();
+    renderCalendar({ minDate: new Date(2024, 0, 1), maxDate: new Date(2026, 11, 31) });
+
+    await user.click(screen.getByRole('button', { name: /enero de 2025/i }));
+
+    expect(screen.getByRole('gridcell', { name: '2023' })).toHaveAttribute('aria-disabled', 'true');
+    expect(screen.getByRole('gridcell', { name: '2027' })).toHaveAttribute('aria-disabled', 'true');
+    expect(screen.getByRole('gridcell', { name: '2025' })).not.toHaveAttribute('aria-disabled');
+    expect(screen.getByLabelText('Años anteriores')).toBeDisabled();
+    expect(screen.getByLabelText('Años siguientes')).toBeDisabled();
+  });
+});

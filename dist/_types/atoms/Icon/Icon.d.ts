@@ -303,6 +303,10 @@ declare const ICONS: {
         readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;
     };
+    readonly calendar: {
+        readonly viewBox: "0 0 24 24";
+        readonly render: () => import("react/jsx-runtime").JSX.Element;
+    };
     readonly target: {
         readonly viewBox: "0 0 24 24";
         readonly render: () => import("react/jsx-runtime").JSX.Element;

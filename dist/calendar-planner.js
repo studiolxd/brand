@@ -40,8 +40,8 @@ function _({ events: _ = [], renderDay: v, maxItemsPerDay: y = 3, onMoreClick: b
 				title: W,
 				titleId: $,
 				navigable: E,
-				previousMonthLabel: O,
-				nextMonthLabel: k,
+				previousLabel: O,
+				nextLabel: k,
 				onPrev: () => V(Y),
 				onNext: () => V(X),
 				chevronSize: U

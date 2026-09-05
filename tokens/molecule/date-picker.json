@@ -1,37 +1,43 @@
 {
   "date-picker": {
-    "height":                    { "$value": "{input.height}",                   "$type": "dimension", "$description": "Altura del disparador: la del campo de texto" },
-    "sm-height":                 { "$value": "{input.sm-height}",                "$type": "dimension", "$description": "Altura — sm" },
-    "lg-height":                 { "$value": "{input.lg-height}",                "$type": "dimension", "$description": "Altura — lg" },
-    "padding-inline":            { "$value": "{input.padding-inline}",           "$type": "dimension", "$description": "Aire horizontal del disparador" },
-    "sm-padding-inline":         { "$value": "{input.sm-padding-inline}",        "$type": "dimension", "$description": "Aire horizontal — sm" },
-    "lg-padding-inline":         { "$value": "{input.lg-padding-inline}",        "$type": "dimension", "$description": "Aire horizontal — lg" },
-    "font-family":               { "$value": "{input.font-family}",              "$type": "string",    "$description": "Familia tipográfica del disparador" },
-    "font-size":                 { "$value": "{input.font-size}",                "$type": "dimension", "$description": "Tamaño de la fecha escrita" },
-    "sm-font-size":              { "$value": "{input.sm-font-size}",             "$type": "dimension", "$description": "Tamaño — sm" },
-    "lg-font-size":              { "$value": "{input.lg-font-size}",             "$type": "dimension", "$description": "Tamaño — lg" },
-    "font-weight":               { "$value": "{input.font-weight}",              "$type": "number",    "$description": "Peso de la fecha escrita" },
-    "line-height":               { "$value": "{input.line-height}",              "$type": "number",    "$description": "Interlineado del disparador" },
-    "cursor":                    { "$value": "pointer",                          "$type": "string",    "$description": "Cursor: el disparador abre un calendario, no se escribe en él" },
-    "color":                     { "$value": "{input.color}",                    "$type": "color",     "$description": "Color de la fecha escrita" },
-    "placeholder-color":         { "$value": "{input.placeholder-color}",        "$type": "color",     "$description": "Color de la pista cuando no hay fecha" },
-    "bg":                        { "$value": "{input.bg}",                       "$type": "color",     "$description": "Fondo del disparador" },
-    "border-width":              { "$value": "{input.border-width}",             "$type": "dimension", "$description": "Grosor del borde" },
-    "border-style":              { "$value": "{input.border-style}",             "$type": "string",    "$description": "Estilo del borde" },
-    "border-color":              { "$value": "{input.border-color}",             "$type": "color",     "$description": "Color del borde" },
-    "border-radius":             { "$value": "{input.border-radius}",            "$type": "dimension", "$description": "Radio del borde" },
-    "transition-duration":       { "$value": "{input.transition-duration}",      "$type": "number",    "$description": "Duración de la transición de borde y anillo" },
+    "inline-size":               { "$value": "{input.width}",                    "$type": "string",    "$description": "Anchura del control: la del campo, que siempre ocupa su contenedor" },
+    "border-width":              { "$value": "{input.border-width}",             "$type": "dimension", "$description": "Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea" },
+    "disabled-cursor":           { "$value": "{input.disabled-cursor}",          "$type": "string",    "$description": "Cursor con el control deshabilitado" },
+    "transition-duration":       { "$value": "{input.transition-duration}",      "$type": "number",    "$description": "Duración de la transición de tinta del botón" },
     "transition-easing":         { "$value": "{input.transition-easing}",        "$type": "string",    "$description": "Curva de la transición" },
-    "focus-border-color":        { "$value": "{input.focus-border-color}",       "$type": "color",     "$description": "Borde en foco" },
-    "focus-ring-width":          { "$value": "{input.focus-ring-width}",         "$type": "dimension", "$description": "Grosor del anillo de foco" },
-    "focus-ring-inset-offset":   { "$value": "{input.focus-ring-inset-offset}",  "$type": "dimension", "$description": "Separación entre borde y anillo de foco" },
-    "focus-ring-color":          { "$value": "{input.focus-ring-color}",         "$type": "color",     "$description": "Color del anillo de foco" },
-    "error-bg":                  { "$value": "{input.error-bg}",                 "$type": "color",     "$description": "Fondo en error" },
-    "error-border-color":        { "$value": "{input.error-border-color}",       "$type": "color",     "$description": "Borde en error" },
-    "error-focus-ring-color":    { "$value": "{input.error-focus-ring-color}",   "$type": "color",     "$description": "Anillo de foco en error" },
-    "disabled-cursor":           { "$value": "{input.disabled-cursor}",          "$type": "string",    "$description": "Cursor deshabilitado" },
-    "disabled-bg":               { "$value": "{input.disabled-bg}",              "$type": "color",     "$description": "Fondo deshabilitado" },
-    "disabled-color":            { "$value": "{input.disabled-color}",           "$type": "color",     "$description": "Texto deshabilitado" },
-    "disabled-border-color":     { "$value": "{input.disabled-border-color}",    "$type": "color",     "$description": "Borde deshabilitado" }
+
+    "button": {
+      "slot-size":        { "$value": "{size-component.md}", "$type": "dimension", "$description": "Lado del hueco que ocupa el botón del calendario dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control y su borde inferior coincide con el del campo" },
+      "sm-slot-size":     { "$value": "{size-component.sm}", "$type": "dimension", "$description": "Lado del hueco — sm" },
+      "lg-slot-size":     { "$value": "{size-component.lg}", "$type": "dimension", "$description": "Lado del hueco — lg" },
+
+      "icon-size":        { "$value": "{font-size.3}",       "$type": "dimension", "$description": "Tamaño del glifo del calendario — md (20px, acorde al campo de 40). El mismo peldaño que la flecha de `SearchForm`" },
+      "sm-icon-size":     { "$value": "{icon.size-sm}",      "$type": "dimension", "$description": "Tamaño del glifo — sm (16px)" },
+      "lg-icon-size":     { "$value": "{icon.size-md}",      "$type": "dimension", "$description": "Tamaño del glifo — lg (24px)" },
+
+      "cursor":           { "$value": "pointer",             "$type": "string",    "$description": "Cursor del botón: abre el calendario, no se escribe en él" },
+      "color":            { "$value": "{color.primary}",     "$type": "color",     "$description": "Color del glifo: la tinta del campo, prusia sobre claro" },
+      "hover-color":      { "$value": "{color.primary}",     "$type": "color",     "$description": "Color del glifo bajo el puntero: la misma tinta. El adorno no pinta fondo ni línea al pasar el puntero" },
+      "disabled-color":   { "$value": "{input.disabled-color}", "$type": "color",  "$description": "Color del glifo con el campo deshabilitado" },
+
+      "focus-ring-width": { "$value": "{control.focus-ring-width}", "$type": "dimension", "$description": "Grosor del anillo de foco del botón: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo" },
+      "focus-ring-color": { "$value": "{input.focus-border-color}", "$type": "color",     "$description": "Color del anillo de foco del botón: el del borde del campo en foco" },
+
+      "surface-dark-color":            { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del glifo — surface-dark" },
+      "surface-dark-hover-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del glifo bajo el puntero — surface-dark" },
+      "surface-dark-disabled-color":   { "$value": "{input.surface-dark-disabled-color}", "$type": "color", "$description": "Color del glifo deshabilitado — surface-dark" },
+      "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco del botón — surface-dark" }
+    },
+
+    "message": {
+      "gap":         { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Espacio entre el campo y el aviso de fecha incompleta: el mismo que separa las partes de un campo de formulario" },
+      "font-family": { "$value": "{form.error.font-family}", "$type": "string",    "$description": "Familia del aviso de fecha incompleta" },
+      "font-size":   { "$value": "{form.error.font-size}",   "$type": "dimension", "$description": "Cuerpo del aviso" },
+      "font-weight": { "$value": "{form.error.font-weight}", "$type": "number",    "$description": "Peso del aviso" },
+      "line-height": { "$value": "{form.error.line-height}", "$type": "number",    "$description": "Interlineado del aviso" },
+      "color":       { "$value": "{form.error.color}",       "$type": "color",     "$description": "Color del aviso: el del error de formulario — lo que se escribió no es una fecha" },
+
+      "surface-dark-color": { "$value": "{color.error-text-on-dark}", "$type": "color", "$description": "Color del aviso — surface-dark" }
+    }
   }
 }

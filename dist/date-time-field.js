@@ -4,7 +4,7 @@ import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
 import { TimeSelect as n } from "./time-select.js";
 import { n as r } from "./_shared/field-labels.js";
-import { DatePicker as i } from "./date-picker.js";
+import { t as i } from "./_shared/DatePicker.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 import { forwardRef as s, useCallback as c, useId as l } from "react";
 //#region src/stories/molecules/DateTimeField/DateTimeField.tsx
@@ -20,6 +20,10 @@ function d(e) {
 }
 var f = s(function({ id: s, label: f, labelHidden: p, value: m, placeholder: h, timeStep: g, minDate: _, maxDate: v, disabledDates: y, name: b, size: x, disabled: S, readOnly: C, error: w = !1, errorMessage: T, helperText: E, locale: D = "es-ES", className: O, hoursLabel: k, minutesLabel: A, onChange: j, onBlur: M }, N) {
 	let P = r(p), F = e(x), I = l(), L = s ?? I, R = `${L}-date`, z = T ? `${L}-error` : void 0, B = E ? `${L}-helper` : void 0, V = [z, B].filter(Boolean).join(" ") || void 0, H = w || !!T, U = c((e) => {
+		if (!e) {
+			j?.(null);
+			return;
+		}
 		let t = d(m) ?? {
 			h: 0,
 			m: 0

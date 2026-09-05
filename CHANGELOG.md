@@ -51,6 +51,59 @@ para breaking changes.
   formulario entero— y la pantalla de nueva contraseña. `Templates/App with
   sidebar` pierde el saludo y el título de la barra, y monta el panel como lo
   monta la suite.
+||||||| ef36f09d
+### Breaking
+
+- **`DatePicker`: el disparador deja de ser un botón con la fecha en largo y
+  pasa a ser un campo de texto editable.** Tres roturas para el consumidor:
+  - `onChange` pasa de `(date: Date) => void` a **`(date: Date | null) => void`**:
+    vaciar el campo borra la fecha y eso viaja como `null`. Un consumidor que
+    escribiera `onChange={(d: Date) => …}` deja de compilar. Arrastra a
+    `DatePickerField` y a `DateTimeField`, cuyo `onChange` ya era nullable pero
+    ahora sí emite `null`.
+  - El **`ref` pasa de `HTMLButtonElement` a `HTMLInputElement`** en
+    `DatePicker`, `DatePickerField` y `DateTimeField` —va al campo, que es lo
+    que react-hook-form debe enfocar al fallar—, y `onBlur` con él
+    (`FocusEventHandler<HTMLElement>` en `DateTimeField`, que lo comparte con
+    los desplegables de hora).
+  - **La clase `.date-picker__trigger` desaparece**, y con ella los tokens
+    `--date-picker-height|font-size|color|bg|border-*|focus-*|error-*|disabled-*`
+    y sus hermanos de talla: el campo es el `Input` del sistema y se viste con
+    `--input-*`. Quien apuntase a esa clase o a esos tokens, apunta ahora a los
+    del campo. El `className` del componente va al **contenedor**, no al control.
+
+### Añadido
+
+- **`DatePicker` se escribe y se borra.** Muestra y acepta el formato numérico
+  corto del locale (`25/09/2026` en `es`, `09/25/2026` en `en-US`, `25.09.2026`
+  en `de`), con el orden y el separador sacados de
+  `Intl.DateTimeFormat().formatToParts()` —no de una tabla por idioma— y las
+  cifras siempre en ASCII, para que lo que se pinta pueda volver a teclearse. La
+  fecha completa sube por `onChange`; la incompleta o imposible (`25/09`,
+  `31/02/2026`, un año de dos cifras) no sube nada y pone el campo en error con
+  un aviso `role="alert"`. El calendario lo abre un botón de icono al final del
+  campo —el patrón de adorno de `SearchForm`— o la flecha abajo; `Escape`
+  cierra, y al elegir un día el foco vuelve al campo.
+- Props de texto nuevas de `DatePicker`, todas con default castellano:
+  `invalidMessage`, `openCalendarLabel` y `maskLetters` (las letras de la
+  máscara del marcador de posición, `dd/mm/aaaa`).
+- **`Calendar`: el título del mes lleva a elegir año.** Pulsarlo abre una
+  rejilla de doce años en tres filas de cuatro; las mismas flechas navegan de
+  docena en docena («Años anteriores» / «Años siguientes»), al elegir uno se
+  vuelve al mes en ese año y el foco regresa al título. `Escape` vuelve sin
+  elegir. Sin paso intermedio de meses: las flechas ya recorren los meses, y lo
+  que falta en un viaje largo es el año. Props nuevas: `previousYearsLabel`,
+  `nextYearsLabel`, `yearGridLabel`.
+- Icono `calendar` en el catálogo de `Icon`.
+- Tokens nuevos por referencia: `calendar.year-*`, `calendar.title-button-*`,
+  `date-picker.button-*` y `date-picker.message-*`.
+
+### Cambiado
+
+- **Las flechas del `Calendar` ya no pintan línea de tinta bajo el puntero**:
+  son un glifo, y la línea del sistema subraya texto. Lo que las señala es el
+  anillo de foco. Los días la conservan, y ahora también el título y los años.
+  (`CalendarPlanner` mantiene la suya: queda fuera de este encargo.)
 
 ## [30.10.1] — 2026-09-05
 

@@ -155,6 +155,45 @@ export const Etiquetas: Story = {
   },
 };
 
+/**
+ * El título del mes lleva a una rejilla de doce años: las mismas flechas
+ * navegan de docena en docena y al elegir uno se vuelve al mes, ya en ese año.
+ */
+export const ElegirAno: Story = {
+  name: 'Elegir año',
+  render: (args) => {
+    const [value, setValue] = useState<Date | null>(new Date(2026, 8, 25));
+    return <Calendar {...args} value={value} onChange={setValue} />;
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: /septiembre de 2026/i }));
+    await expect(canvas.getByRole('grid', { name: 'Elegir año' })).toBeInTheDocument();
+  },
+};
+
+/** Test: la rejilla de años se recorre con el teclado y devuelve el foco al título. */
+export const TecladoAnos: Story = {
+  name: 'Test — teclado de la rejilla de años',
+  tags: ['!dev'],
+  render: () => <Calendar defaultMonth={new Date(2026, 8, 1)} value={new Date(2026, 8, 25)} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: /septiembre de 2026/i }));
+
+    // Al abrir, el foco cae en el año vivo
+    await expect(document.activeElement).toHaveTextContent('2026');
+
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(document.activeElement).toHaveTextContent('2027');
+
+    await userEvent.keyboard('{Enter}');
+    await expect(canvas.getByRole('heading', { level: 2 })).toHaveTextContent(/septiembre de 2027/i);
+    // Vuelto al mes, el foco está de nuevo en el título
+    await expect(document.activeElement).toHaveAccessibleName(/septiembre de 2027/i);
+  },
+};
+
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },

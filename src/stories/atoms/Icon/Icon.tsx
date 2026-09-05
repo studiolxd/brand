@@ -712,6 +712,19 @@ const ICONS = {
       </>
     ),
   },
+  // Hoja de calendario: marco recto (como toda esquina del sistema), la línea
+  // de la cabecera y las dos anillas que la cruzan por arriba.
+  calendar: {
+    viewBox: '0 0 24 24',
+    render: () => (
+      <>
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 6 H21 V21 H3 Z" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" d="M3 10 H21" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M8 4 V8" />
+        <path vectorEffect="non-scaling-stroke" strokeWidth="1" strokeLinecap="round" d="M16 4 V8" />
+      </>
+    ),
+  },
   target: {
     viewBox: '0 0 24 24',
     render: () => (

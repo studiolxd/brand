@@ -45,7 +45,8 @@ export interface DateTimeFieldProps {
   /** aria-label del desplegable de minutos. Default: "Minutos" (castellano). */
   minutesLabel?: string;
   onChange?: (date: Date | null) => void;
-  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+  /** Se llama al salir de cualquiera de los dos controles: el campo de fecha (un `<input>`) o los desplegables de hora (dos `<button>`). */
+  onBlur?: React.FocusEventHandler<HTMLElement>;
 }
 
 function mergeDateAndTime(date: Date, time: TimeValue): Date {
@@ -61,10 +62,10 @@ function getTimeValue(date: Date | null | undefined): TimeValue | null {
 
 /**
  * Fecha y hora en un solo campo: un `DatePicker` y un `TimeSelect` que
- * comparten valor. El `ref` va al disparador de la fecha, que es el primero
- * que se enfoca; el `className`, al contenedor.
+ * comparten valor. El `ref` va al campo de la fecha, que es el primero que se
+ * enfoca; el `className`, al contenedor.
  */
-export const DateTimeField = forwardRef<HTMLButtonElement, DateTimeFieldProps>(function DateTimeField({
+export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(function DateTimeField({
   id: idProp,
   label,
   labelHidden: labelHiddenProp,
@@ -100,7 +101,12 @@ export const DateTimeField = forwardRef<HTMLButtonElement, DateTimeFieldProps>(f
   const hasError = error || !!errorMessage;
 
   const handleDateChange = useCallback(
-    (date: Date) => {
+    (date: Date | null) => {
+      // Borrar la fecha borra el momento entero: una hora sin día no es nada.
+      if (!date) {
+        onChange?.(null);
+        return;
+      }
       const time = getTimeValue(value) ?? { h: 0, m: 0 };
       onChange?.(mergeDateAndTime(date, time));
     },

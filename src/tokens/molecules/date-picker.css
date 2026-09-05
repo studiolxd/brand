@@ -3,37 +3,37 @@
  */
 
 :root {
-  --date-picker-cursor: pointer; /** Cursor: el disparador abre un calendario, no se escribe en él */
-  --date-picker-border-style: var(--input-border-style); /** Estilo del borde */
-  --date-picker-disabled-cursor: var(--input-disabled-cursor); /** Cursor deshabilitado */
-  --date-picker-height: var(--input-height); /** Altura del disparador: la del campo de texto */
-  --date-picker-sm-height: var(--input-sm-height); /** Altura — sm */
-  --date-picker-lg-height: var(--input-lg-height); /** Altura — lg */
-  --date-picker-sm-padding-inline: var(--input-sm-padding-inline); /** Aire horizontal — sm */
-  --date-picker-lg-padding-inline: var(--input-lg-padding-inline); /** Aire horizontal — lg */
-  --date-picker-font-family: var(--input-font-family); /** Familia tipográfica del disparador */
-  --date-picker-font-size: var(--input-font-size); /** Tamaño de la fecha escrita */
-  --date-picker-sm-font-size: var(--input-sm-font-size); /** Tamaño — sm */
-  --date-picker-lg-font-size: var(--input-lg-font-size); /** Tamaño — lg */
-  --date-picker-line-height: var(--input-line-height); /** Interlineado del disparador */
-  --date-picker-bg: var(--input-bg); /** Fondo del disparador */
-  --date-picker-transition-duration: var(--input-transition-duration); /** Duración de la transición de borde y anillo */
+  --date-picker-button-cursor: pointer; /** Cursor del botón: abre el calendario, no se escribe en él */
+  --date-picker-inline-size: var(--input-width); /** Anchura del control: la del campo, que siempre ocupa su contenedor */
+  --date-picker-disabled-cursor: var(--input-disabled-cursor); /** Cursor con el control deshabilitado */
+  --date-picker-button-slot-size: var(--size-component-md); /** Lado del hueco que ocupa el botón del calendario dentro del campo: la talla md, la misma que el campo — así el adorno queda cuadrado sobre el control y su borde inferior coincide con el del campo */
+  --date-picker-button-sm-slot-size: var(--size-component-sm); /** Lado del hueco — sm */
+  --date-picker-button-lg-slot-size: var(--size-component-lg); /** Lado del hueco — lg */
+  --date-picker-button-icon-size: var(--font-size-3); /** Tamaño del glifo del calendario — md (20px, acorde al campo de 40). El mismo peldaño que la flecha de `SearchForm` */
+  --date-picker-button-sm-icon-size: var(--icon-size-sm); /** Tamaño del glifo — sm (16px) */
+  --date-picker-button-lg-icon-size: var(--icon-size-md); /** Tamaño del glifo — lg (24px) */
+  --date-picker-message-gap: var(--spacing-2); /** Espacio entre el campo y el aviso de fecha incompleta: el mismo que separa las partes de un campo de formulario */
+  --date-picker-transition-duration: var(--input-transition-duration); /** Duración de la transición de tinta del botón */
   --date-picker-transition-easing: var(--input-transition-easing); /** Curva de la transición */
-  --date-picker-error-bg: var(--input-error-bg); /** Fondo en error */
-  --date-picker-padding-inline: var(--input-padding-inline); /** Aire horizontal del disparador */
-  --date-picker-font-weight: var(--input-font-weight); /** Peso de la fecha escrita */
-  --date-picker-color: var(--input-color); /** Color de la fecha escrita */
-  --date-picker-placeholder-color: var(--input-placeholder-color); /** Color de la pista cuando no hay fecha */
-  --date-picker-border-width: var(--input-border-width); /** Grosor del borde */
-  --date-picker-border-color: var(--input-border-color); /** Color del borde */
-  --date-picker-border-radius: var(--input-border-radius); /** Radio del borde */
-  --date-picker-focus-border-color: var(--input-focus-border-color); /** Borde en foco */
-  --date-picker-focus-ring-inset-offset: var(--input-focus-ring-inset-offset); /** Separación entre borde y anillo de foco */
-  --date-picker-focus-ring-color: var(--input-focus-ring-color); /** Color del anillo de foco */
-  --date-picker-error-border-color: var(--input-error-border-color); /** Borde en error */
-  --date-picker-error-focus-ring-color: var(--input-error-focus-ring-color); /** Anillo de foco en error */
-  --date-picker-disabled-bg: var(--input-disabled-bg); /** Fondo deshabilitado */
-  --date-picker-disabled-color: var(--input-disabled-color); /** Texto deshabilitado */
-  --date-picker-disabled-border-color: var(--input-disabled-border-color); /** Borde deshabilitado */
-  --date-picker-focus-ring-width: var(--input-focus-ring-width); /** Grosor del anillo de foco */
+  --date-picker-button-color: var(--color-primary); /** Color del glifo: la tinta del campo, prusia sobre claro */
+  --date-picker-button-hover-color: var(--color-primary); /** Color del glifo bajo el puntero: la misma tinta. El adorno no pinta fondo ni línea al pasar el puntero */
+  --date-picker-message-font-family: var(--form-error-font-family); /** Familia del aviso de fecha incompleta */
+  --date-picker-message-line-height: var(--form-error-line-height); /** Interlineado del aviso */
+  --date-picker-border-width: var(--input-border-width); /** Grosor del borde del campo: el del sistema. Lo usa el anillo de foco del botón, que va justo por dentro de esa línea */
+  --date-picker-button-disabled-color: var(--input-disabled-color); /** Color del glifo con el campo deshabilitado */
+  --date-picker-button-focus-ring-width: var(--control-focus-ring-width); /** Grosor del anillo de foco del botón: el del sistema. Es lo único que marca el foco, porque el adorno no tiene fondo */
+  --date-picker-button-focus-ring-color: var(--input-focus-border-color); /** Color del anillo de foco del botón: el del borde del campo en foco */
+  --date-picker-message-font-size: var(--form-error-font-size); /** Cuerpo del aviso */
+  --date-picker-message-font-weight: var(--form-error-font-weight); /** Peso del aviso */
+  --date-picker-message-color: var(--form-error-color); /** Color del aviso: el del error de formulario — lo que se escribió no es una fecha */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --date-picker-button-color: var(--color-text-on-dark); /** Color del glifo — surface-dark */
+  --date-picker-button-hover-color: var(--color-text-on-dark); /** Color del glifo bajo el puntero — surface-dark */
+  --date-picker-button-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del botón — surface-dark */
+  --date-picker-message-color: var(--color-error-text-on-dark); /** Color del aviso — surface-dark */
+  --date-picker-button-disabled-color: var(--input-disabled-color); /** Color del glifo deshabilitado — surface-dark */
 }

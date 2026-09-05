@@ -60,7 +60,7 @@ export const ConRango: Story = {
   },
 };
 
-/** Las tres tallas del sistema: el disparador mide 32, 40 y 48. */
+/** Las tres tallas del sistema: el campo mide 32, 40 y 48. */
 export const Tallas: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '20rem' }}>
@@ -76,15 +76,17 @@ export const ElegirFecha: Story = {
   args: { value: new Date(2026, 4, 1) },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const trigger = canvas.getByRole('button', { name: /Fecha de inicio|mayo/ });
-    await userEvent.click(trigger);
-    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    const abrir = canvas.getByRole('button', { name: 'Abrir calendario' });
+    await userEvent.click(abrir);
+    await expect(abrir).toHaveAttribute('aria-expanded', 'true');
     // El calendario se monta en un portal de Base UI, fuera del canvas
     const body = within(canvasElement.ownerDocument.body);
     // El nombre accesible de la celda es la fecha entera, no el número suelto
     await userEvent.click(body.getByRole('gridcell', { name: /\b18 de \w+ de \d{4}$/ }));
     await expect(args.onChange).toHaveBeenCalled();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(abrir).toHaveAttribute('aria-expanded', 'false');
+    // El día elegido queda escrito en el campo, en el formato del locale
+    await expect(canvas.getByRole('textbox', { name: 'Fecha de inicio' })).toHaveValue('18/05/2026');
   },
 };
 
@@ -109,7 +111,7 @@ export const Contrato: Story = {
     await expect(canvasElement.querySelector('label[for="fecha"]')).toHaveTextContent('Fecha de inicio');
     await expect(control).toHaveAttribute('aria-invalid', 'true');
     await expect(control).toHaveAttribute('aria-describedby', 'fecha-error fecha-helper');
-    await expect(control).toHaveClass('date-picker__trigger--error');
+    await expect(control).toHaveClass('input--error');
     await expect(canvas.getByRole('alert')).toHaveTextContent('Obligatorio');
     await expect(canvas.getByText('Ayuda')).toHaveAttribute('id', 'fecha-helper');
   },
@@ -128,9 +130,9 @@ export const ContratoTallas: Story = {
   play: async ({ canvasElement }) => {
     const alto = (sel: string) =>
       Math.round(canvasElement.querySelector(sel)!.getBoundingClientRect().height);
-    await expect(alto('[data-t="sm"] .date-picker__trigger')).toBe(32);
-    await expect(alto('[data-t="md"] .date-picker__trigger')).toBe(40);
-    await expect(alto('[data-t="lg"] .date-picker__trigger')).toBe(48);
+    await expect(alto('[data-t="sm"] .date-picker__input')).toBe(32);
+    await expect(alto('[data-t="md"] .date-picker__input')).toBe(40);
+    await expect(alto('[data-t="lg"] .date-picker__input')).toBe(48);
   },
 };
 
@@ -174,7 +176,7 @@ function FormularioRhf() {
 
 /**
  * El control es de Base UI: el contrato es `value`/`onChange` + `name` + `ref`
- * al disparador, no el spread del `field`.
+ * al campo de texto, no el spread del `field`.
  */
 export const ConReactHookForm: Story = {
   name: 'Con react-hook-form',

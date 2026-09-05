@@ -31,6 +31,20 @@ export interface CalendarProps {
      */
     nextMonthLabel?: string;
     /**
+     * aria-label del botón de retroceso **en la vista de años**. Default: "Años
+     * anteriores" (castellano). Una app multiidioma debe pasarla traducida.
+     */
+    previousYearsLabel?: string;
+    /**
+     * aria-label del botón de avance en la vista de años. Default: "Años
+     * siguientes" (castellano).
+     */
+    nextYearsLabel?: string;
+    /**
+     * aria-label de la rejilla de años. Default: "Elegir año" (castellano).
+     */
+    yearGridLabel?: string;
+    /**
      * aria-label de la rejilla de días. Sin ella, la rejilla toma como nombre el
      * título del mes visible. Cuando el calendario vive dentro de un panel con
      * nombre propio (el `Popover` de `DatePicker`), conviene pasarlo aquí.
@@ -41,4 +55,4 @@ export interface CalendarProps {
     size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
-export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, previousMonthLabel, nextMonthLabel, gridLabel, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Calendar({ value, onChange, defaultMonth, month: monthProp, onMonthChange, navigable, disabledDates, minDate, maxDate, locale, previousMonthLabel, nextMonthLabel, previousYearsLabel, nextYearsLabel, yearGridLabel, gridLabel, size, className, }: CalendarProps): import("react/jsx-runtime").JSX.Element;

@@ -7,14 +7,32 @@ import { datePickerTokens } from "../../../tokens/molecules/date-picker";
 
 # DatePicker
 
-Elegir **una fecha**: un disparador con la fecha escrita en largo y un `Popover` con el `Calendar` dentro. Es el control suelto; dentro de un formulario se usa `DatePickerField`, que le pone etiqueta, ayuda y error, y `DateTimeField` cuando además hace falta la hora.
+Elegir **una fecha**: un campo de texto que se escribe y se borra, con un botón al final que abre el `Calendar` en un `Popover`. Es el control suelto; dentro de un formulario se usa `DatePickerField`, que le pone etiqueta, ayuda y error, y `DateTimeField` cuando además hace falta la hora.
 
 <Canvas of={DatePickerStories.Default} />
 <Canvas of={DatePickerStories.WithValue} />
 
 ## Qué guarda y qué enseña
 
-El valor es un `Date`, no una cadena: el componente no parsea texto. Lo que se ve es ese `Date` escrito con `Intl` según `locale` (día de la semana, día, mes y año en corto). Con `name`, además, se monta un `<input type="hidden">` con la fecha en `yyyy-mm-dd` **del huso local** — `toISOString()` recortaría a UTC y adelantaría un día en husos al este del meridiano a primera hora.
+El valor es un `Date`; lo que se ve es ese `Date` en el **formato numérico corto** del `locale` — `25/09/2026` en castellano, `09/25/2026` en `en-US`, `25.09.2026` en alemán. El orden de las tres partes y el separador salen de `Intl.DateTimeFormat().formatToParts()`, no de una tabla por idioma, y las cifras se escriben siempre en ASCII: lo que se pinta tiene que poder volver a teclearse.
+
+Con `name`, además, se monta un `<input type="hidden">` con la fecha en `yyyy-mm-dd` **del huso local** — `toISOString()` recortaría a UTC y adelantaría un día en husos al este del meridiano a primera hora.
+
+## Escribir y borrar
+
+El campo acepta la fecha tecleada, con ceros por delante o sin ellos (`5/9/2026` vale). En cuanto está **completa y existe**, sube por `onChange`. Si está a medias o es imposible —`25/09`, `31/02/2026`— no sube nada: el campo se pone en error y enseña `invalidMessage` (prop con default castellano) enlazado por `aria-describedby`. El año va entero: `26` no se convierte en 2026, porque adivinar el siglo cambiaría la fecha sin avisar.
+
+**Vaciar el campo borra la fecha**: `onChange` recibe `null`. Por eso su firma es `(date: Date | null) => void`.
+
+<Canvas of={DatePickerStories.Escribir} />
+
+El marcador de posición es la máscara del propio locale (`dd/mm/aaaa`). Las letras se traducen con `maskLetters`; el orden, no: es cosa de `locale`.
+
+<Canvas of={DatePickerStories.OtroLocale} />
+
+## El calendario
+
+Lo abre el botón del final del campo —un adorno dentro del borde, como la flecha de `SearchForm`— o la **flecha abajo** desde el campo. Al elegir un día el panel se cierra, la fecha queda escrita y el foco vuelve al campo. `Escape` cierra sin elegir.
 
 ## Rango y días vetados
 
@@ -24,21 +42,21 @@ El valor es un `Date`, no una cadena: el componente no parsea texto. Lo que se v
 
 ## Tallas
 
-`size` mide el disparador a la talla del sistema —32, 40 o 48— y viaja también al calendario del panel, que ajusta su rejilla. En las superficies públicas se usa `lg`; dentro de las aplicaciones, `md`.
+`size` mide el campo a la talla del sistema —32, 40 o 48— y viaja también al calendario del panel, que ajusta su rejilla. El hueco del botón es cuadrado a esa altura. En las superficies públicas se usa `lg`; dentro de las aplicaciones, `md`.
 
 <Canvas of={DatePickerStories.SizeSm} />
 <Canvas of={DatePickerStories.SizeLg} />
 
 ## Estados
 
-`error` marca el borde y pone `aria-invalid`; el mensaje lo escribe el campo que lo envuelve, no el control. `disabled` lo saca del tabulador; `readOnly` lo deja enfocable pero no abre el panel.
+`error` marca el borde y pone `aria-invalid`; el mensaje de validación de negocio lo escribe el campo que lo envuelve. El único mensaje que emite el control por su cuenta es el de fecha ilegible, que es cosa suya: nadie más sabe qué se tecleó. `disabled` lo saca del tabulador; `readOnly` deja el campo enfocable y a la vista, pero no abre el panel y saca el botón del recorrido.
 
 <Canvas of={DatePickerStories.Error} />
 <Canvas of={DatePickerStories.Disabled} />
 
 ## Con react-hook-form
 
-El `ref` va al **disparador**, para que la validación pueda enfocarlo al fallar; `onBlur` sale de él. El contrato es `value` / `onChange` + `name` + `ref`:
+El `ref` va al **campo de texto**, para que la validación pueda enfocarlo al fallar; `onBlur` sale de él. `onChange` entrega `Date | null`, así que el formulario recibe el borrado como un valor y no como un hueco. El contrato es `value` / `onChange` + `name` + `ref`:
 
 ```tsx
 <FormField
@@ -61,30 +79,30 @@ El `ref` va al **disparador**, para que la validación pueda enfocarlo al fallar
 
 ## En superficie oscura
 
-No tiene valores propios: el disparador es el `Input` del sistema y el calendario voltea con los tokens de `Calendar`.
+El campo es el `Input` del sistema y el calendario voltea con los tokens de `Calendar`; lo propio del control —la tinta del glifo, su anillo de foco y el aviso de fecha ilegible— tiene su par oscuro.
 
 <Canvas of={DatePickerStories.SuperficieOscura} />
 
 ## Accesibilidad
 
-- El disparador es un `<button>` con `aria-haspopup="dialog"` y `aria-expanded`; el panel es un `role="dialog"` cuyo nombre accesible es `calendarLabel` (por defecto «Calendario», en castellano).
+- El control es un `<input type="text">` con `inputMode="numeric"`; quien abre el panel es el botón del final, un `<button>` con nombre accesible propio (`openCalendarLabel`), `aria-haspopup="dialog"` y `aria-expanded`. El panel es un `role="dialog"` cuyo nombre accesible es `calendarLabel` (por defecto «Calendario», en castellano).
+- La flecha abajo abre el calendario desde el campo y `Escape` lo cierra.
+- Cuando lo escrito no es una fecha, el campo lleva `aria-invalid` y el aviso va en un `role="alert"` enlazado por `aria-describedby`.
 - Suelto, el nombre del control va en `aria-label`; dentro de un campo lo pone la etiqueta por `htmlFor`/`id`, y ahí **no** se pasa `aria-label`.
 - Los `id` de ayuda y error llegan por `aria-describedby`, que el campo compone.
 - La rejilla del calendario es una sola parada de tabulador y se recorre con las flechas, Inicio/Fin e RePág/AvPág: el detalle está en la doc de `Calendar`.
 
 ## Textos
 
-`placeholder` y `calendarLabel` son los dos textos que emite por su cuenta, los dos con default en castellano. Los nombres de mes y día no son props: salen de `locale` con `Intl`.
+`placeholder` (o solo sus letras, con `maskLetters`), `invalidMessage`, `openCalendarLabel` y `calendarLabel` son los textos que emite por su cuenta, todos con default en castellano. El orden de la fecha y los nombres de mes y día no son props: salen de `locale` con `Intl`.
 
 ## Tokens
 
-Cada token del disparador apunta al del `Input`: un campo de fecha y uno de texto son indistinguibles en un formulario porque así está cableado, no por casualidad. La capa de indirección es lo que permite retocar solo el disparador de fecha —dando valor propio a uno de estos tokens— sin mover todos los campos de texto de la aplicación. El panel sigue vistiendo con los del `Popover` y los del `Calendar`.
-
-El único que no hereda es `cursor`: el disparador abre un calendario, no se escribe en él.
+El campo es el `Input` del sistema y se viste con sus tokens: un campo de fecha y uno de texto son el mismo control. Lo que tiene tokens propios es lo que el `Input` no conoce —el hueco del botón, su glifo y su anillo, y el aviso de fecha ilegible—, y cada uno apunta a un token existente (la talla de control, la tinta del campo, el error de formulario). El panel sigue vistiendo con los del `Popover` y los del `Calendar`.
 
 <TokenTable tokens={datePickerTokens} />
 
-No hay tabla de superficie oscura: los tokens de los que cuelga (`--input-*`) ya tienen su par, y el fichero derivado los vuelve a declarar bajo los selectores oscuros.
+Los tokens que cuelgan de `--input-*` no necesitan tabla propia: ya tienen su par y el fichero derivado los vuelve a declarar bajo los selectores oscuros. Los del botón y el aviso llevan su `surface-dark-*` en el mismo JSON.
 
 ## Props
 
