@@ -7,6 +7,33 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+- **`UptimeBars`, la tira de disponibilidad** (`Molecules/UptimeBars`, export
+  `@studiolxd/brand/uptime-bars`). Una barrita por punto de la serie y la media
+  del periodo debajo, para el panel de estado. Agnóstica del tiempo y del origen
+  de los datos: recibe N puntos con porcentaje, etiqueta y detalle opcional, y
+  pinta. `value: null` es la ausencia de medida —no un 0 %—: va rayada y se
+  anuncia «sin datos». Tres tramos con los roles de feedback y cortes
+  configurables (`thresholds`), con un valor de fábrica pensado en tiempo caído
+  al día. Accesible sin depender del color: lista ordenada con nombre, nombre
+  accesible completo por barrita, la media siempre en texto, bocadillo también
+  por teclado y una sola parada de tabulador con flechas.
+- **Rol de feedback `warning`** (`color.warning-text-on-light|dark`,
+  `color.warning-fill`, `color.warning-fill-text`) sobre un ámbar de sistema
+  nuevo (`color.amber` #7D4C00, `color.amber-light` #F59E0B). Faltaba el tramo
+  intermedio: lo que ya no está bien pero todavía no está roto.
+- **`Alert`, `Toast` y `Tag` pintan el aviso con el rol, no con la marca.**
+  Cambio visual: su variante `warning` era el amarillo de marca (`accent-2`) con
+  tinta prusia y pasa a ser el relleno ámbar con texto blanco. Con ello, las
+  cuatro intenciones de `Alert`/`Toast` leen ya en oscuro y desaparece la
+  excepción que tenía `warning`.
+- **`Avatar` gana las tallas `3xl` (128px) y `4xl` (192px)**, y `AvatarUpload`
+  remapea a `sm` → 96px, `md` → 128px y `lg` → 192px: cada contexto sale al
+  doble de lo que salía. Cambio visual en la subida de la foto de perfil y en el
+  logotipo del alta. La fila de `AvatarUpload` envuelve cuando el retrato ya no
+  cabe con el botón al lado (a 375px, en `lg`).
+
 ## v30.9.0
 
 - **Una sola superficie de diálogo: `Modal` y `Sheet` dejan de ser dos árboles
