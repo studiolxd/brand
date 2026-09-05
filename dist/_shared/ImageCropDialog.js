@@ -432,7 +432,7 @@ function E({ sourceUrl: s, title: c, description: l, circularCrop: f = !1, aspec
 		!e || !M || M.width === 0 || (await E(await T(e, M, {
 			mimeType: h,
 			outputSize: m
-		})), j(void 0), N(void 0));
+		})), R());
 	};
 	return /* @__PURE__ */ a(r, {
 		open: s !== null,

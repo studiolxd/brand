@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [31.0.1] — 2026-09-05
+
+- **`ImageCropDialog` se cierra al confirmar.** Tras `await onConfirm(blob)` el
+  diálogo se quedaba abierto —el consumidor veía su toast de «actualizado» con
+  el recorte todavía en pantalla— porque nadie llamaba a `onClose`. Ahora, si
+  `onConfirm` resuelve, el diálogo se cierra y limpia la selección; si lanza,
+  se queda abierto con la selección intacta. Afecta a `AvatarUpload`.
+
 ## [31.0.0] — 2026-09-05
 
 - **La página de estado, en el catálogo** (`Pages/Estado del servicio`).

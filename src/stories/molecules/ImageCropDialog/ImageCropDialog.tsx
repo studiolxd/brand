@@ -105,9 +105,11 @@ export function ImageCropDialog({
       mimeType: outputMimeType,
       outputSize,
     });
+    // Confirmado y aceptado por quien escucha, el diálogo se cierra solo: la
+    // imagen ya está donde tenía que estar. Si `onConfirm` lanza, se queda
+    // abierto con la selección intacta para volver a intentarlo.
     await onConfirm(blob);
-    setCrop(undefined);
-    setCompletedCrop(undefined);
+    close();
   };
 
   return (
