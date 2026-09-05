@@ -120,8 +120,10 @@ export interface DataTableProps<TData, TValue> {
   /** Se renderiza a la derecha del buscador. */
   toolbar?: ReactNode;
   /**
-   * Se renderiza en el pie, a la derecha de la paginación — acciones sobre el
-   * conjunto (exportar…), no sobre la selección. Sin ella el pie no cambia.
+   * Se renderiza en el pie, **a continuación del selector de registros por
+   * página** (ranura `afterPageSize` de `Pagination`) — acciones sobre el
+   * conjunto (exportar…), no sobre la selección. Los botones de página se
+   * quedan solos, al otro extremo. Sin ella el pie no cambia.
    */
   footerActions?: ReactNode;
   /** Filas por página cuando la tabla pagina en cliente. */
@@ -300,6 +302,7 @@ export function DataTable<TData, TValue>({
             onPageChange={pagination.onPageChange}
             onPageSizeChange={pagination.onPageSizeChange}
             showTotal
+            afterPageSize={footerActions}
             {...paginationLabels}
           />
         ) : (
@@ -308,11 +311,9 @@ export function DataTable<TData, TValue>({
             page={table.getState().pagination.pageIndex + 1}
             pageSize={table.getState().pagination.pageSize}
             onPageChange={(page) => table.setPageIndex(page - 1)}
+            afterPageSize={footerActions}
             {...paginationLabels}
           />
-        )}
-        {footerActions && (
-          <div className="data-table__footer-actions">{footerActions}</div>
         )}
       </div>
     </div>

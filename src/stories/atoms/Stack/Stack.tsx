@@ -2,8 +2,12 @@ import type { ReactNode } from 'react';
 import './Stack.css';
 
 export interface StackProps extends React.ComponentPropsWithoutRef<'div'> {
-  /** Aire entre piezas: base o amplio. */
-  gap?: 'md' | 'lg';
+  /**
+   * Aire entre piezas: compacto, base o amplio. `sm` agrupa **líneas de un
+   * mismo dato** (nombre y correo, título y subtítulo); `md` (por defecto)
+   * separa campos y piezas distintas; `lg`, secciones.
+   */
+  gap?: 'sm' | 'md' | 'lg';
   /**
    * Alineación de las piezas en el eje cruzado. `'start'` (por defecto):
    * cada pieza mide lo suyo, sin estirarse —el caso de uso documentado de

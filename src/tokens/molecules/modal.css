@@ -14,6 +14,7 @@
   --modal-padding-inline: var(--spacing-6); /** Padding horizontal del panel */
   --modal-header-gap: var(--spacing-4); /** Gap entre título y botón ✕ */
   --modal-title-font-size: var(--font-size-6); /** Tamaño del título (2rem) */
+  --modal-title-line-height: var(--line-height-tight); /** Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar */
   --modal-transition-duration: var(--motion-duration-base); /** Duración de la animación entrada/salida */
   --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
   --modal-content-enter-offset: var(--spacing-2); /** Desplazamiento vertical del panel al entrar/salir (8px) */

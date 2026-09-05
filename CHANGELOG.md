@@ -7,6 +7,50 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+- **`Modal`: el aspa se alinea con la primera línea del título.** La cabecera del
+  diálogo (`dialog-header--inline`, compartida) pasa de `align-items: center` a
+  `flex-start`: con un título de dos líneas el aspa quedaba flotando en medio de la
+  cabecera. El ajuste óptico que la baja hasta el eje de esa primera línea sale de
+  los tokens del propio título —`title-font-size` × `title-line-height` menos
+  `close-size`, a la mitad—, así que cuadra igual si cambia el título o si el aspa
+  sube a `lg` en la superficie pública. Token nuevo por referencia,
+  `modal.title-line-height` → `{line-height.tight}`, que además retira el `1.2`
+  cableado que había en `Modal.css`. Sin título, el aspa se queda en su esquina.
+- **`Pagination`: ranura `afterPageSize`.** Nueva prop `afterPageSize?: ReactNode`,
+  que se pinta **justo detrás del selector de registros por página**, dentro del
+  mismo grupo que el total (`.pagination__after-page-size`); los botones de página
+  se quedan solos al otro extremo. Por debajo de `md` la ranura baja a su propia
+  línea, bajo el selector. Con la ranura llena el `nav` se pinta aunque no haya
+  páginas que recorrer: una lista vacía se sigue pudiendo exportar. Sin tokens ni
+  colores nuevos.
+- **`DataTable`: `footerActions` se muda junto al selector.** La prop no cambia de
+  forma, pero ya no se pinta al extremo derecho del pie (v31.3.0): viaja a la ranura
+  `afterPageSize` de `Pagination`, así que queda inmediatamente después del selector
+  de «elementos por página» y el paginador se queda solo, a la derecha. Desaparece el
+  nodo `.data-table__footer-actions`; quien lo tuviera enganchado por CSS debe mirar
+  ahora a `.pagination__after-page-size`.
+- **`Stack`: talla de aire `sm`.** `gap` acepta ahora `'sm' | 'md' | 'lg'` (antes solo
+  `md` y `lg`), con su clase `stack--gap-sm` y el token nuevo por referencia
+  `stack.gap-sm` → `{spacing.2}` (8px). Es el peldaño que faltaba para agrupar
+  **líneas de un mismo dato** —nombre y correo de un propietario, las tres líneas de
+  una sesión activa, título y subtítulo—: el mismo aire compacto que `inline.gap-sm`,
+  y por debajo del que separa dos párrafos, para que el grupo se lea como una sola
+  cosa. `md` sigue siendo el default y separa campos; `lg`, secciones. El criterio, en
+  la doc del componente.
+- **`FilterBar`: nueva molécula** (`@studiolxd/brand/filter-bar`). La barra de filtros
+  de un listado: ranura `search` en **su propia línea entera**, los filtros
+  (`children`) en una rejilla `auto-fit` que decide sola cuántas columnas caben —tres
+  o cuatro en escritorio, una a ancho completo en móvil, sin punto de ruptura— y una
+  ranura opcional `actions` al final de la fila, alineada con los controles. Es
+  maqueta y nada más: no guarda estado, no filtra y no pide datos. Punto de referencia
+  `search` con `ariaLabel` (default «Filtros»). Tokens nuevos en
+  `tokens/molecule/filter-bar.json`, todos por referencia (`{form.gap}`,
+  `{form.actions-gap}`, `{field-row.column-gap}`, `{field-row.row-gap}`,
+  `{field-row.cell-md}` para el ancho mínimo de columna); sin colores nuevos y sin par
+  oscuro, porque la barra no pinta ni un color.
+
 ## [31.3.0] — 2026-09-05
 
 - **`DataTable`: acciones en el pie.** Nueva prop `footerActions?: ReactNode`, para

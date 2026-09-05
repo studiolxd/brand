@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Select } from '../../atoms/Select/Select';
 import type { SelectOption } from '../../atoms/Select/Select';
@@ -49,6 +49,13 @@ export interface PaginationProps {
   onPageSizeChange?: (size: string) => void;
   /** Opciones del selector. Default: 10, 20, 50, 100, Todos */
   pageSizeOptions?: SelectOption[];
+  /**
+   * Ranura a continuación del selector de registros por página, dentro del
+   * mismo grupo que el total: acciones sobre el conjunto (exportar, imprimir).
+   * Los botones de página se quedan solos al otro extremo. Con la ranura llena
+   * el nav se pinta aunque no haya páginas que recorrer.
+   */
+  afterPageSize?: ReactNode;
   /** Mostrar "X resultados" antes de los controles. Default: false */
   showTotal?: boolean;
   /**
@@ -124,6 +131,7 @@ export function Pagination({
   linkComponent,
   onPageSizeChange,
   pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
+  afterPageSize,
   showTotal = false,
   size = 'md',
   ariaLabel = 'Paginación',
@@ -165,7 +173,10 @@ export function Pagination({
     );
   }
 
-  if (pageCount === undefined && total === 0) return null;
+  // Sin nada que paginar el nav no se pinta… salvo que traiga la ranura: lo
+  // que hay en ella no depende de que haya páginas (una tabla vacía sigue
+  // pudiendo exportarse).
+  if (pageCount === undefined && total === 0 && !afterPageSize) return null;
 
   const totalPages = pageCount ?? (pageSize === 'all' ? 1 : Math.ceil(total / pageSize));
   const pageItems = totalPages > 1 ? getPageWindow(page, totalPages) : [];
@@ -256,7 +267,7 @@ export function Pagination({
     );
   }
 
-  const hasMeta = showTotal || !!onPageSizeChange;
+  const hasMeta = showTotal || !!onPageSizeChange || !!afterPageSize;
 
   return (
     <nav
@@ -278,6 +289,9 @@ export function Pagination({
                 size={size}
               />
             </div>
+          )}
+          {afterPageSize && (
+            <div className="pagination__after-page-size">{afterPageSize}</div>
           )}
         </div>
       )}

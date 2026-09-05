@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Pagination } from './Pagination';
+import { Button } from '../../atoms/Button/Button';
 
 const meta: Meta<typeof Pagination> = {
   title: 'Molecules/Pagination',
@@ -148,6 +149,31 @@ export const Completo: Story = {
   },
 };
 
+/**
+ * `afterPageSize` es la ranura que va pegada al selector: acciones sobre el
+ * conjunto —exportar, imprimir—, no sobre una fila. Los botones de página se
+ * quedan solos al otro extremo.
+ */
+export const ConRanuraTrasElSelector: Story = {
+  name: 'Con acciones tras el selector',
+  render: (args) => {
+    const [page, setPage] = useState(args.page);
+    const [pageSize, setPageSize] = useState(String(args.pageSize));
+    const size = pageSize === 'all' ? 0 : Number(pageSize);
+    return (
+      <Pagination
+        {...args}
+        page={page}
+        pageSize={size}
+        onPageChange={setPage}
+        onPageSizeChange={(s) => { setPageSize(s); setPage(1); }}
+        showTotal
+        afterPageSize={<Button variant="outline" size="sm">Exportar</Button>}
+      />
+    );
+  },
+};
+
 export const PocasPaginas: Story = {
   name: 'Pocas páginas (sin ellipsis)',
   args: { total: 30, pageSize: 10 },
@@ -273,5 +299,43 @@ export const ContratoTypeButton: Story = {
     botones.forEach((b) => {
       if (b.tagName === 'BUTTON') expect(b).toHaveAttribute('type', 'button');
     });
+  },
+};
+
+/** Test: la ranura va tras el selector y los botones de página, aparte. */
+export const ContratoRanuraTrasElSelector: Story = {
+  name: 'Test — la ranura va tras el selector',
+  tags: ['!dev'],
+  render: (args) => (
+    <Pagination
+      {...args}
+      showTotal
+      onPageSizeChange={() => {}}
+      afterPageSize={<button type="button">Exportar</button>}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const meta = canvasElement.querySelector('.pagination__meta') as HTMLElement;
+    const selector = meta.querySelector('.pagination__size-selector') as HTMLElement;
+    const ranura = meta.querySelector('.pagination__after-page-size') as HTMLElement;
+    await expect(selector.nextElementSibling).toBe(ranura);
+    const controles = canvasElement.querySelector('.pagination__controls') as HTMLElement;
+    await expect(controles.getBoundingClientRect().left)
+      .toBeGreaterThan(ranura.getBoundingClientRect().right);
+  },
+};
+
+/** Test: con la ranura llena el nav se pinta aunque no haya nada que paginar. */
+export const ContratoRanuraSinPaginas: Story = {
+  name: 'Test — la ranura se pinta sin páginas',
+  tags: ['!dev'],
+  render: () => (
+    <Pagination total={0} afterPageSize={<button type="button">Exportar</button>} />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Exportar' })).toBeInTheDocument();
+    // Sin páginas no hay botones de página que recorrer.
+    await expect(canvasElement.querySelector('.pagination__controls')).toBeNull();
   },
 };

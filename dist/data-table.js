@@ -1647,26 +1647,25 @@ function Ge({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 					}, e.id)) })]
 				})
 			}),
-			/* @__PURE__ */ d("div", {
+			/* @__PURE__ */ u("div", {
 				className: "data-table__footer",
-				children: [D ? /* @__PURE__ */ u(t, {
+				children: D ? /* @__PURE__ */ u(t, {
 					total: D.total,
 					page: D.page,
 					pageSize: D.pageSize,
 					onPageChange: D.onPageChange,
 					onPageSizeChange: D.onPageSizeChange,
 					showTotal: !0,
+					afterPageSize: C,
 					...k
 				}) : /* @__PURE__ */ u(t, {
 					total: M.getFilteredRowModel().rows.length,
 					page: M.getState().pagination.pageIndex + 1,
 					pageSize: M.getState().pagination.pageSize,
 					onPageChange: (e) => M.setPageIndex(e - 1),
+					afterPageSize: C,
 					...k
-				}), C && /* @__PURE__ */ u("div", {
-					className: "data-table__footer-actions",
-					children: C
-				})]
+				})
 			})
 		]
 	});

@@ -1,5 +1,6 @@
 {
   "stack": {
+    "gap-sm": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre piezas apiladas — compacto (8px): líneas de un mismo dato (nombre y correo, título y subtítulo). Es el mismo peldaño que `inline.gap-sm`, y queda por debajo del aire entre dos párrafos (`prose.flow-space`, 16px): las líneas se leen como una sola cosa" },
     "gap-md": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre piezas apiladas — base" },
     "gap-lg": { "$value": "{spacing.7}", "$type": "dimension", "$description": "Aire entre piezas apiladas — amplio" }
   }

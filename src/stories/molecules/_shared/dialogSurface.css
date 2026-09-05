@@ -46,8 +46,12 @@
   gap: var(--dialog-header-gap);
 }
 
+/* El aspa se alinea con la PRIMERA línea del título, no con el centro del
+   bloque: con un título de dos líneas, centrada quedaba flotando en medio.
+   El ajuste óptico que la baja hasta el eje de esa primera línea lo pone el
+   contenedor, que es quien conoce el cuerpo y el interlineado de su título. */
 .dialog-header--inline {
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-block-end: var(--dialog-header-gap);
 }

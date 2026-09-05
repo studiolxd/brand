@@ -59,8 +59,10 @@ export interface DataTableProps<TData, TValue> {
     /** Se renderiza a la derecha del buscador. */
     toolbar?: ReactNode;
     /**
-     * Se renderiza en el pie, a la derecha de la paginación — acciones sobre el
-     * conjunto (exportar…), no sobre la selección. Sin ella el pie no cambia.
+     * Se renderiza en el pie, **a continuación del selector de registros por
+     * página** (ranura `afterPageSize` de `Pagination`) — acciones sobre el
+     * conjunto (exportar…), no sobre la selección. Los botones de página se
+     * quedan solos, al otro extremo. Sin ella el pie no cambia.
      */
     footerActions?: ReactNode;
     /** Filas por página cuando la tabla pagina en cliente. */

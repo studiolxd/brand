@@ -679,3 +679,66 @@ export const ContratoPieDelDialogo: Story = {
     await expect(pie.closest('.modal__body')).toBeNull();
   },
 };
+
+/**
+ * Un título que no cabe en una línea no mueve el aspa: sigue a la altura de la
+ * **primera** línea, que es donde la mano la busca y donde queda el borde
+ * superior del panel.
+ */
+export const TituloLargo: Story = {
+  name: 'Título de dos líneas',
+  render: () => {
+    const [open, setOpen] = useState(true);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Abrir modal</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Confirmar la baja de la organización y de todos sus proyectos"
+          footer={
+            <>
+              <Button variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
+              <Button onClick={() => setOpen(false)}>Dar de baja</Button>
+            </>
+          }
+        >
+          <p>Esta acción no se puede deshacer.</p>
+        </Modal>
+      </>
+    );
+  },
+};
+
+/** Test: con el título en dos líneas, el aspa se centra sobre la primera. */
+export const ContratoAspaEnLaPrimeraLinea: Story = {
+  name: 'Test — el aspa se alinea con la primera línea del título',
+  tags: ['!dev'],
+  render: () => (
+    <Modal
+      open
+      onClose={fn()}
+      title="Confirmar la baja de la organización y de todos sus proyectos"
+    >
+      <p>Contenido</p>
+    </Modal>
+  ),
+  play: async ({ canvasElement }) => {
+    const doc = canvasElement.ownerDocument;
+    const titulo = doc.querySelector('.modal__title') as HTMLElement;
+    const aspa = doc.querySelector('.modal__close') as HTMLElement;
+    const cajaTitulo = titulo.getBoundingClientRect();
+    const cajaAspa = aspa.getBoundingClientRect();
+    const interlineado = parseFloat(getComputedStyle(titulo).lineHeight);
+
+    // El caso que motiva la regla: el título ocupa más de una línea.
+    await expect(cajaTitulo.height).toBeGreaterThan(interlineado * 1.5);
+
+    // El aspa se centra sobre la primera línea, no sobre el bloque entero.
+    const centroPrimeraLinea = cajaTitulo.top + interlineado / 2;
+    const centroAspa = cajaAspa.top + cajaAspa.height / 2;
+    await expect(Math.abs(centroAspa - centroPrimeraLinea)).toBeLessThanOrEqual(1);
+    const centroBloque = cajaTitulo.top + cajaTitulo.height / 2;
+    await expect(Math.abs(centroAspa - centroBloque)).toBeGreaterThan(1);
+  },
+};

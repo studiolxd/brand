@@ -16,6 +16,7 @@
     "footer-margin-block-start":  { "$value": "{form.actions-margin-block-start}", "$type": "dimension", "$description": "Aire entre el cuerpo del diálogo y su pie — el mismo que separa el último campo de las acciones en un formulario" },
     "title-font-size":      { "$value": "{font-size.6}",              "$type": "dimension", "$description": "Tamaño del título (2rem)" },
     "title-font-weight":    { "$value": "{font-weight.emphasis}",     "$type": "number",    "$description": "Peso del título" },
+    "title-line-height":    { "$value": "{line-height.tight}",        "$type": "number",    "$description": "Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar" },
     "title-color":          { "$value": "{color.text.on-light}",      "$type": "color",     "$description": "Color del título" },
     "width-max":            { "$value": "560px",                      "$type": "dimension", "$description": "Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente" },
     "max-height":           { "$value": "90dvh",                      "$type": "dimension", "$description": "Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max" },

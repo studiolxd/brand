@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 import type { SelectOption } from '../../atoms/Select/Select';
 import './Pagination.css';
 export interface PaginationProps {
@@ -38,6 +38,13 @@ export interface PaginationProps {
     onPageSizeChange?: (size: string) => void;
     /** Opciones del selector. Default: 10, 20, 50, 100, Todos */
     pageSizeOptions?: SelectOption[];
+    /**
+     * Ranura a continuación del selector de registros por página, dentro del
+     * mismo grupo que el total: acciones sobre el conjunto (exportar, imprimir).
+     * Los botones de página se quedan solos al otro extremo. Con la ranura llena
+     * el nav se pinta aunque no haya páginas que recorrer.
+     */
+    afterPageSize?: ReactNode;
     /** Mostrar "X resultados" antes de los controles. Default: false */
     showTotal?: boolean;
     /**
@@ -82,4 +89,4 @@ export interface PaginationProps {
     totalLabel?: (total: number) => string;
     className?: string;
 }
-export declare function Pagination({ mode, total, pageCount, page, pageSize, hrefs, previousHref, nextHref, onPrevious, onNext, onPageChange, hrefBuilder: hrefBuilderProp, linkComponent, onPageSizeChange, pageSizeOptions, showTotal, size, ariaLabel, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;
+export declare function Pagination({ mode, total, pageCount, page, pageSize, hrefs, previousHref, nextHref, onPrevious, onNext, onPageChange, hrefBuilder: hrefBuilderProp, linkComponent, onPageSizeChange, pageSizeOptions, afterPageSize, showTotal, size, ariaLabel, pageLabel, previousLabel, nextLabel, pagesGroupLabel, pageSizeLabel, totalLabel, className, }: PaginationProps): import("react/jsx-runtime").JSX.Element | null;

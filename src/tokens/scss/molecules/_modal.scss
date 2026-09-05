@@ -17,6 +17,7 @@ $lxd-modal-footer-gap: 0.75rem; // Aire entre los botones del pie. Es el de las 
 $lxd-modal-footer-margin-block-start: 2rem; // Aire entre el cuerpo del diálogo y su pie — el mismo que separa el último campo de las acciones en un formulario
 $lxd-modal-title-font-size: 2rem; // Tamaño del título (2rem)
 $lxd-modal-title-font-weight: 500; // Peso del título
+$lxd-modal-title-line-height: 1.1; // Interlineado del título — el de un título grande. Con el cuerpo del título da la altura de su primera línea, que es sobre la que se centra el aspa de cerrar
 $lxd-modal-title-color: #111e30; // Color del título
 $lxd-modal-width-max: 560px; // Anchura máxima del panel. Medida de layout (como container.max-width-*), no de la escala de espaciado ni de tallas de componente
 $lxd-modal-max-height: 90dvh; // Altura máxima del panel modal (dvh para móviles con barra de navegador variable). Medida de layout, igual que width-max

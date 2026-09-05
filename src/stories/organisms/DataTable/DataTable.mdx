@@ -52,11 +52,13 @@ lo primero que se toca al entrar en la tabla. `footerActions` son acciones sobre
 **conjunto** (exportar el listado completo, imprimir), y van abajo, junto a la
 paginación — se consultan una vez decidido qué hacer con toda la lista, no con una fila.
 
-`footerActions` se pinta en `.data-table__footer`, a la derecha de la paginación —del
-selector de registros por página incluido—, en la misma fila cuando cabe. Si la
-paginación apila en móvil, las acciones bajan a su propia línea alineadas al final,
-igual que ya hace `Pagination` con sus propios controles. Sin `footerActions` el pie
-no cambia: no se pinta ningún nodo vacío.
+`footerActions` viaja a la ranura `afterPageSize` de
+[Pagination](?path=/docs/molecules-pagination--docs): se pinta **a continuación del
+selector de registros por página**, dentro del mismo grupo que el total, y los botones
+de página se quedan solos al otro extremo. Van juntos porque son lo mismo —qué parte de
+la lista miro y qué hago con ella entera—, mientras que recorrer páginas es otra tarea.
+Por debajo de `md` las acciones bajan a su propia línea, bajo el selector. Sin
+`footerActions` el pie no cambia: no se pinta ningún nodo vacío.
 
 <Canvas of={DataTableStories.AccionesEnElPie} />
 

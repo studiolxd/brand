@@ -197,6 +197,8 @@ export type { CodeBlockProps } from './stories/molecules/CodeBlock/CodeBlock';
 export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
 export { FieldRows, FieldRow } from './stories/molecules/FieldRow/FieldRow';
 export type { FieldRowsProps, FieldRowProps, FieldRowWidth } from './stories/molecules/FieldRow/FieldRow';
+export { FilterBar } from './stories/molecules/FilterBar/FilterBar';
+export type { FilterBarProps } from './stories/molecules/FilterBar/FilterBar';
 export { Form } from './stories/molecules/Form/Form';
 export { InputField } from './stories/molecules/InputField/InputField';
 export type { InputFieldProps } from './stories/molecules/InputField/InputField';
