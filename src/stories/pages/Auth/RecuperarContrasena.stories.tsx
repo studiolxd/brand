@@ -6,15 +6,23 @@ import { PasswordField } from '../../molecules/PasswordField/PasswordField';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
 
+const HINT = 'Al menos 8 caracteres, con una letra minúscula, una letra mayúscula, un número y un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?';
+
 interface Args { step: 'pedir' | 'enviado' | 'restablecer'; surface: 'light' | 'dark' }
 
 function Recuperar({ step, surface }: Args) {
   if (step === 'restablecer') {
     return (
-      <AuthPage title="Nueva contraseña" description="Elige una contraseña nueva para tu cuenta." surface={surface}>
-        <Form size="lg" blockActions onSubmit={(e) => e.preventDefault()} actions={<Button variant="primary" type="submit">Guardar contraseña</Button>}>
-          <PasswordField id="reset-password" label="Nueva contraseña" labelHidden={false} autoComplete="new-password" helperText="Al menos 8 caracteres, con una letra minúscula, una letra mayúscula, un número y un símbolo." />
-          <PasswordField id="reset-confirm" label="Repite la contraseña" labelHidden={false} autoComplete="new-password" />
+      <AuthPage title="Restablece tu contraseña" description="Ingresa tu nueva contraseña." surface={surface}>
+        <Form
+          size="lg"
+          blockActions
+          onSubmit={(e) => e.preventDefault()}
+          actions={<Button variant="primary" type="submit">Restablecer contraseña</Button>}
+          links={<Link href="#acceso" icon="arrow-left">Volver al inicio de sesión</Link>}
+        >
+          <PasswordField id="reset-password" label="Nueva contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} />
+          <PasswordField id="reset-password-confirm" label="Confirmar contraseña" labelHidden={false} autoComplete="new-password" />
         </Form>
       </AuthPage>
     );
@@ -26,15 +34,20 @@ function Recuperar({ step, surface }: Args) {
       aside={<Link href="#acceso" icon="arrow-left">Volver al inicio de sesión</Link>}
       surface={surface}
     >
-      <Form
-        size="lg"
-        blockActions
-        onSubmit={(e) => e.preventDefault()}
-        success={step === 'enviado' ? 'Si existe una cuenta con ese correo, te hemos enviado un enlace para restablecer la contraseña.' : undefined}
-        actions={<Button variant="primary" type="submit">Enviar enlace</Button>}
-      >
-        <InputField id="recuperar-email" label="Correo electrónico" type="email" autoComplete="email" />
-      </Form>
+      {step === 'enviado' ? (
+        // Enviado, el formulario desaparece entero: pedir otra vez el enlace
+        // desde la misma pantalla no lleva a ningún sitio.
+        <Form size="lg" success="Si existe una cuenta con ese correo, recibirás un enlace para restablecer tu contraseña." />
+      ) : (
+        <Form
+          size="lg"
+          blockActions
+          onSubmit={(e) => e.preventDefault()}
+          actions={<Button variant="primary" type="submit">Enviar enlace</Button>}
+        >
+          <InputField id="forgot-password-email" label="Correo electrónico" type="email" autoComplete="email" placeholder="Escribe tu correo electrónico" />
+        </Form>
+      )}
     </AuthPage>
   );
 }

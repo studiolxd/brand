@@ -13,7 +13,7 @@ interface Args { socialProviders: string[]; captcha: boolean; terms: boolean; pa
 
 function Registro({ socialProviders, captcha, terms, passwordError, surface }: Args) {
   return (
-    <AuthPage title="Crea una cuenta" description={<>¿Ya tienes una cuenta? <Link href="#acceso">Inicia sesión</Link>.</>} surface={surface}>
+    <AuthPage title="Crea una cuenta" description={<>¿Ya tienes una cuenta? <Link href="#acceso">Inicia sesión</Link></>} surface={surface}>
       <Form
         size="lg"
         blockActions
@@ -23,9 +23,19 @@ function Registro({ socialProviders, captcha, terms, passwordError, surface }: A
         alternativesLabel={socialProviders.length ? 'O continúa con' : undefined}
         alternatives={socialProviders.length ? <SocialButtons providers={socialProviders} /> : undefined}
       >
-        <InputField id="registro-email" label="Correo electrónico" type="email" autoComplete="email" />
-        <PasswordField id="registro-password" label="Contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} errorMessage={passwordError ? 'Incluye al menos un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?' : undefined} />
-        {terms && <CheckboxField id="registro-terms" label={<>Acepto los <Link href="#condiciones">términos y condiciones</Link></>} />}
+        <InputField id="sign-up-email" label="Correo electrónico" type="email" autoComplete="email" placeholder="Escribe tu correo electrónico" />
+        <PasswordField id="sign-up-password" label="Contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} errorMessage={passwordError ? 'Incluye al menos un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?' : undefined} />
+        {terms && (
+          <CheckboxField
+            id="sign-up-terms"
+            label={
+              <>
+                Acepto los <Link href="#condiciones" external>Términos del servicio</Link> y la{' '}
+                <Link href="#privacidad" external>Política de privacidad</Link>.
+              </>
+            }
+          />
+        )}
       </Form>
     </AuthPage>
   );

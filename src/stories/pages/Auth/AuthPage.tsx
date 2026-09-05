@@ -20,6 +20,16 @@ const INDICE = [
   ] },
 ];
 
+/** Los seis idiomas de la suite, cada uno en el suyo. */
+const IDIOMAS = [
+  { code: 'en', label: 'English' },
+  { code: 'es', label: 'Español' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'nl', label: 'Nederlands' },
+  { code: 'pt', label: 'Português' },
+];
+
 const LEGAL = [
   { id: 'aviso', label: 'Aviso legal', href: '#aviso' },
   { id: 'privacidad', label: 'Política de privacidad', href: '#privacidad' },
@@ -48,7 +58,7 @@ export function AuthPage({ title, description, intro, aside, children, surface =
     <PublicPageShell
       header={
         <SiteHeader
-          language={<LanguageSwitcher size="lg" value="es" languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }]} />}
+          language={<LanguageSwitcher size="lg" value="es" languages={IDIOMAS} />}
           settings={<ThemeSwitcher size="lg" value={surface === 'dark' ? 'dark' : 'light'} />}
         >
           <SiteNav groups={INDICE} />

@@ -8,6 +8,8 @@ import { Link } from '../../atoms/Link/Link';
 
 interface Args { state: 'sin-sesion' | 'con-sesion' | 'invalida' | 'registro-cerrado'; socialProviders: string[]; surface: 'light' | 'dark' }
 
+const HINT = 'Al menos 8 caracteres, con una letra minúscula, una letra mayúscula, un número y un símbolo: ! @ # $ % ^ & * ( ) - _ = + [ ] { } ; : , . ?';
+
 const DESCRIPCION = 'ana@studiolxd.com te ha invitado a unirte a Studio LXD. Te unirás como miembro.';
 
 function Invitacion({ state, socialProviders, surface }: Args) {
@@ -48,13 +50,13 @@ function Invitacion({ state, socialProviders, surface }: Args) {
         size="lg"
         blockActions
         onSubmit={(e) => e.preventDefault()}
-        actions={<Button variant="primary" type="submit">Crear cuenta y unirme</Button>}
+        actions={<Button variant="primary" type="submit">Crear cuenta</Button>}
         alternativesLabel={socialProviders.length ? 'O continúa con' : undefined}
         alternatives={socialProviders.length ? <SocialButtons providers={socialProviders} /> : undefined}
       >
-        <InputField id="inv-email" label="Correo electrónico" type="email" value="invitada@studiolxd.com" readOnly />
-        <InputField id="inv-name" label="Nombre completo" autoComplete="name" />
-        <PasswordField id="inv-password" label="Contraseña" labelHidden={false} autoComplete="new-password" helperText="Al menos 8 caracteres, con una letra minúscula, una letra mayúscula, un número y un símbolo." />
+        {/* El correo lo fija la invitación: se ve, pero no se toca. */}
+        <InputField id="invitation-email" label="Correo electrónico" type="email" value="invitada@studiolxd.com" readOnly disabled />
+        <PasswordField id="invitation-password" label="Contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} />
       </Form>
     </AuthPage>
   );
