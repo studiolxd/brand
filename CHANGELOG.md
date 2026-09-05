@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## [31.4.0] — 2026-09-05
 
 - **`Modal`: el aspa se alinea con la primera línea del título.** La cabecera del
   diálogo (`dialog-header--inline`, compartida) pasa de `align-items: center` a
