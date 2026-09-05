@@ -29,6 +29,8 @@ $lxd-stepper-label-color: #111e30; // Etiqueta de un paso completado o actual
 $lxd-stepper-pending-color: #4a4a4a; // Etiqueta de un paso pendiente: texto secundario
 $lxd-stepper-description-font-size: 0.75rem; // 12px — la línea de detalle bajo la etiqueta
 $lxd-stepper-description-color: #4a4a4a; // Línea de detalle: texto secundario
+$lxd-stepper-label-hover-line-width: 1px; // Grosor de la línea bajo la etiqueta de un paso navegable con el puntero encima. Todo subrayado del DS es una línea de 1px, el grosor único del sistema. Apunta al rol de borde y no al grosor de subrayado de `Link` porque ese token vale 0 en superficie oscura —el enlace no lleva línea en reposo sobre prusia— y arrastrarlo borraría esta línea, que sí es de hover
+$lxd-stepper-label-hover-line-offset: 0.25rem; // Separación entre la etiqueta y su línea de hover. La reserva el sitio siempre, aunque la línea solo se pinte en hover: si el hueco apareciese al pasar el puntero, la línea de detalle de debajo daría un salto
 $lxd-stepper-compact-gap: 0.5rem; // Aire entre el contador («Paso 2 de 4») y la etiqueta del paso actual en la forma compacta
 $lxd-stepper-compact-font-size: 0.875rem; // 14px — la forma compacta es una etiqueta de interfaz
 $lxd-stepper-compact-count-font-weight: 500; // Peso del contador de la forma compacta
