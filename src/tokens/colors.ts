@@ -92,6 +92,7 @@ export const neutralSwatches: Swatch[] = [
 export const systemSwatches: Swatch[] = [
   swatch('Rojo', 'base · light', ['red', 'red-light'], sys),
   swatch('Verde', 'base · light', ['green', 'green-light'], sys),
+  swatch('Ámbar', 'base · light', ['amber', 'amber-light'], sys),
 ];
 
 const role = (name: string, label: string): Swatch[] => [
@@ -101,6 +102,7 @@ const role = (name: string, label: string): Swatch[] => [
 export const feedbackSwatches: Swatch[] = [
   ...role('error', 'Error'),
   ...role('success', 'Éxito'),
+  ...role('warning', 'Aviso'),
   ...role('destructive', 'Destructivo'),
 ];
 
@@ -134,6 +136,8 @@ export const inks: NamedColor[] = [
   { name: 'Error — texto (oscuro)', token: '--color-error-text-on-dark', hex: hex(fb['error-text-on-dark'].$value) },
   { name: 'Éxito — texto', token: '--color-success-text-on-light', hex: hex(fb['success-text-on-light'].$value) },
   { name: 'Éxito — texto (oscuro)', token: '--color-success-text-on-dark', hex: hex(fb['success-text-on-dark'].$value) },
+  { name: 'Aviso — texto', token: '--color-warning-text-on-light', hex: hex(fb['warning-text-on-light'].$value) },
+  { name: 'Aviso — texto (oscuro)', token: '--color-warning-text-on-dark', hex: hex(fb['warning-text-on-dark'].$value) },
 ];
 
 /** Los rellenos de marca y feedback, con la tinta que llevan encima. */
@@ -146,6 +150,7 @@ export const fills: { name: string; fill: NamedColor; ink: NamedColor }[] = [
   { name: 'Primario', fill: { name: 'primary', token: '--color-primary', hex: hex(b.primary.$value) }, ink: { name: 'Texto (oscuro)', token: '--color-text-on-dark', hex: hex(txt['on-dark'].$value) } },
   { name: 'Error — relleno', fill: { name: 'error-fill', token: '--color-error-fill', hex: hex(fb['error-fill'].$value) }, ink: { name: 'error-fill-text', token: '--color-error-fill-text', hex: hex(fb['error-fill-text'].$value) } },
   { name: 'Éxito — relleno', fill: { name: 'success-fill', token: '--color-success-fill', hex: hex(fb['success-fill'].$value) }, ink: { name: 'success-fill-text', token: '--color-success-fill-text', hex: hex(fb['success-fill-text'].$value) } },
+  { name: 'Aviso — relleno', fill: { name: 'warning-fill', token: '--color-warning-fill', hex: hex(fb['warning-fill'].$value) }, ink: { name: 'warning-fill-text', token: '--color-warning-fill-text', hex: hex(fb['warning-fill-text'].$value) } },
 ];
 
 /* ---- Tag: lo consume la doc del componente, no la de fundamentos --------- */

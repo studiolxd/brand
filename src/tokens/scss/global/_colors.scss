@@ -56,6 +56,10 @@ $lxd-color-success-text-on-light: #006616; // Success — texto/icono/borde sobr
 $lxd-color-success-text-on-dark: #00cc2c; // Success — texto/icono/borde sobre superficie oscura (prussian). Nunca como background
 $lxd-color-success-fill: #006616; // Success — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto
 $lxd-color-success-fill-text: #ffffff; // Success — contenido sobre success-fill
+$lxd-color-warning-text-on-light: #7d4c00; // Aviso — texto/icono/borde sobre superficie clara (7,23:1 sobre blanco, AAA). Nunca como background
+$lxd-color-warning-text-on-dark: #f59e0b; // Aviso — texto/icono/borde sobre superficie oscura (7,81:1 sobre prusia, AAA). Nunca como background
+$lxd-color-warning-fill: #7d4c00; // Aviso — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto
+$lxd-color-warning-fill-text: #ffffff; // Aviso — contenido sobre warning-fill (7,23:1, AAA)
 $lxd-color-destructive-text-on-light: #b30000; // Destructive — texto/icono/borde sobre superficie clara. Nunca como background
 $lxd-color-destructive-text-on-dark: #ff8585; // Destructive — texto/icono/borde sobre superficie oscura (prussian). Nunca como background
 $lxd-color-destructive-fill: #b30000; // Destructive — fondo sólido universal (igual en superficie clara y oscura). Nunca como color de texto
@@ -97,3 +101,5 @@ $lxd-color-red: #b30000; // System red — base (AAA sobre blanco; fill universa
 $lxd-color-red-light: #ff8585; // System red light — SOLO texto/icono/borde sobre prussian, nunca como fondo
 $lxd-color-green: #006616; // System green — base (AAA sobre blanco; fill universal de success)
 $lxd-color-green-light: #00cc2c; // System green light — SOLO texto/icono/borde sobre prussian, nunca como fondo
+$lxd-color-amber: #7d4c00; // System amber — base (7,23:1 sobre blanco, AAA; fill universal de warning con blanco encima, mismo 7,23:1). Ámbar funcional, no el amarillo de marca
+$lxd-color-amber-light: #f59e0b; // System amber light — SOLO texto/icono/borde sobre prussian (7,81:1, AAA), nunca como fondo (2,15:1 sobre blanco)
