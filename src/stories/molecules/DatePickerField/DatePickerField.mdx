@@ -77,6 +77,12 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
 
+## Textos
+
+Los del `DatePicker` se reexponen tal cual, incluidos los del calendario
+(`previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`,
+`yearGridLabel`, `gridLabel`). `calendarLabel` cae por defecto a la etiqueta del campo.
+
 ## Tokens
 
 El campo solo aporta el ritmo (`gap`) y los textos de ayuda y error, que referencian los de `form.*`; el control es el `DatePicker`.

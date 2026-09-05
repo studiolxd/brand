@@ -18,73 +18,83 @@ function d(e) {
 		m: e.getMinutes()
 	} : null;
 }
-var f = s(function({ id: s, label: f, labelHidden: p, value: m, placeholder: h, timeStep: g, minDate: _, maxDate: v, disabledDates: y, name: b, size: x, disabled: S, readOnly: C, error: w = !1, errorMessage: T, helperText: E, locale: D = "es-ES", className: O, hoursLabel: k, minutesLabel: A, onChange: j, onBlur: M }, N) {
-	let P = r(p), F = e(x), I = l(), L = s ?? I, R = `${L}-date`, z = T ? `${L}-error` : void 0, B = E ? `${L}-helper` : void 0, V = [z, B].filter(Boolean).join(" ") || void 0, H = w || !!T, U = c((e) => {
+var f = s(function({ id: s, label: f, labelHidden: p, value: m, placeholder: h, timeStep: g, minDate: _, maxDate: v, disabledDates: y, name: b, size: x, disabled: S, readOnly: C, error: w = !1, errorMessage: T, helperText: E, locale: D = "es-ES", className: O, calendarLabel: k, openCalendarLabel: A, invalidMessage: j, maskLetters: M, previousMonthLabel: N, nextMonthLabel: P, previousYearsLabel: F, nextYearsLabel: I, yearGridLabel: L, gridLabel: R, hoursLabel: z, minutesLabel: B, onChange: V, onBlur: H }, U) {
+	let W = r(p), G = e(x), K = l(), q = s ?? K, J = `${q}-date`, Y = T ? `${q}-error` : void 0, X = E ? `${q}-helper` : void 0, Z = [Y, X].filter(Boolean).join(" ") || void 0, Q = w || !!T, $ = c((e) => {
 		if (!e) {
-			j?.(null);
+			V?.(null);
 			return;
 		}
 		let t = d(m) ?? {
 			h: 0,
 			m: 0
 		};
-		j?.(u(e, t));
-	}, [m, j]), W = c((e) => {
-		m && j?.(u(m, e));
-	}, [m, j]);
+		V?.(u(e, t));
+	}, [m, V]), ee = c((e) => {
+		m && V?.(u(m, e));
+	}, [m, V]);
 	return /* @__PURE__ */ o("div", {
 		className: ["date-time-field", O].filter(Boolean).join(" "),
 		children: [
 			/* @__PURE__ */ a(t, {
-				id: `${L}-label`,
-				htmlFor: R,
-				hidden: P,
-				size: F,
+				id: `${q}-label`,
+				htmlFor: J,
+				hidden: W,
+				size: G,
 				children: f
 			}),
 			/* @__PURE__ */ o("div", {
 				className: "date-time-field__controls",
 				role: "group",
-				"aria-labelledby": `${L}-label`,
-				"aria-describedby": V,
+				"aria-labelledby": `${q}-label`,
+				"aria-describedby": Z,
 				children: [/* @__PURE__ */ a(i, {
-					ref: N,
+					ref: U,
 					className: "date-time-field__date",
-					id: R,
+					id: J,
 					name: b,
 					value: m ?? null,
-					onChange: U,
-					onBlur: M,
+					onChange: $,
+					onBlur: H,
 					placeholder: h,
 					minDate: _,
 					maxDate: v,
 					disabledDates: y,
-					size: F,
+					size: G,
 					disabled: S,
 					readOnly: C,
-					error: H,
-					locale: D
+					error: Q,
+					locale: D,
+					calendarLabel: k ?? f,
+					openCalendarLabel: A,
+					invalidMessage: j,
+					maskLetters: M,
+					previousMonthLabel: N,
+					nextMonthLabel: P,
+					previousYearsLabel: F,
+					nextYearsLabel: I,
+					yearGridLabel: L,
+					gridLabel: R
 				}), /* @__PURE__ */ a(n, {
 					value: d(m),
-					onChange: W,
-					onBlur: M,
+					onChange: ee,
+					onBlur: H,
 					step: g,
-					size: F,
+					size: G,
 					disabled: S,
 					readOnly: C,
-					error: H,
-					hoursLabel: k,
-					minutesLabel: A
+					error: Q,
+					hoursLabel: z,
+					minutesLabel: B
 				})]
 			}),
 			T && /* @__PURE__ */ a("span", {
-				id: z,
+				id: Y,
 				className: "date-time-field__error",
 				role: "alert",
 				children: T
 			}),
 			E && /* @__PURE__ */ a("span", {
-				id: B,
+				id: X,
 				className: "date-time-field__helper",
 				children: E
 			})

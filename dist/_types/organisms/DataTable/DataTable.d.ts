@@ -1,8 +1,19 @@
 import { type ReactNode } from 'react';
-import { type ColumnDef } from '@tanstack/react-table';
+import { type ColumnDef, type RowData } from '@tanstack/react-table';
 import { type PaginationProps } from '../../molecules/Pagination/Pagination';
 import { type TableHeaderProps } from '../../molecules/Table/Table';
 import './DataTable.css';
+/** Alineación del contenido de una columna. `start` es el default. */
+export type DataTableAlign = 'start' | 'center' | 'end';
+declare module '@tanstack/react-table' {
+    interface ColumnMeta<TData extends RowData, TValue> {
+        /**
+         * Alineación del contenido de la columna, en cabecera y celda. Default
+         * `start`. Números a `end`; acciones y estados a `center`.
+         */
+        align?: DataTableAlign;
+    }
+}
 /**
  * Paginación en servidor: `data` es una página ya recortada y el pie refleja
  * los totales que devuelve el servidor. Sin ella la tabla pagina en cliente

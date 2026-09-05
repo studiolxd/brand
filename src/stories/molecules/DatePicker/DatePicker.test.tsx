@@ -124,6 +124,40 @@ describe('DatePicker — el calendario', () => {
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
+  it('reenvía al calendario los textos de sus flechas y de la vista de años', async () => {
+    const user = userEvent.setup();
+    render(
+      <DatePickerControlado
+        value={new Date(2026, 8, 1)}
+        calendarLabel="Calendar"
+        openCalendarLabel="Open calendar"
+        previousMonthLabel="Previous month"
+        nextMonthLabel="Next month"
+        previousYearsLabel="Previous years"
+        nextYearsLabel="Next years"
+        yearGridLabel="Choose year"
+      />,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Open calendar' }));
+    expect(screen.getByLabelText('Previous month')).toBeInTheDocument();
+    expect(screen.getByLabelText('Next month')).toBeInTheDocument();
+
+    // El título abre la vista de años, que es donde viven los otros tres.
+    await user.click(screen.getByRole('button', { name: /septiembre de 2026/i }));
+    expect(screen.getByRole('grid', { name: 'Choose year' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Previous years')).toBeInTheDocument();
+    expect(screen.getByLabelText('Next years')).toBeInTheDocument();
+  });
+
+  it('sin `gridLabel` la rejilla de días toma el nombre del panel', async () => {
+    const user = userEvent.setup();
+    render(<DatePickerControlado calendarLabel="Fecha de alta" />);
+
+    await user.click(screen.getByRole('button', { name: 'Abrir calendario' }));
+    expect(screen.getByRole('grid', { name: 'Fecha de alta' })).toBeInTheDocument();
+  });
+
   it('el input oculto del formulario lleva la fecha local, no la UTC', () => {
     const { container } = render(
       <DatePicker aria-label="Fecha" name="fecha" value={new Date(2026, 0, 1, 0, 30)} />

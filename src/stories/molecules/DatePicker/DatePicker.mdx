@@ -96,6 +96,27 @@ El campo es el `Input` del sistema y el calendario voltea con los tokens de `Cal
 
 `placeholder` (o solo sus letras, con `maskLetters`), `invalidMessage`, `openCalendarLabel` y `calendarLabel` son los textos que emite por su cuenta, todos con default en castellano. El orden de la fecha y los nombres de mes y día no son props: salen de `locale` con `Intl`.
 
+Los del **calendario** se reexponen sueltos, con los mismos nombres y defaults que en
+`Calendar` —no agrupados en un objeto, porque `Calendar` tampoco los agrupa—:
+`previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`,
+`yearGridLabel` y `gridLabel`. Los tres de años nombran la **vista de años**, la que abre
+el título del mes. `gridLabel` (el nombre de la rejilla de días) toma por defecto
+`calendarLabel`, que ya nombra el panel entero.
+
+```tsx
+<DatePicker
+  locale="en-GB"
+  calendarLabel="Start date"
+  previousMonthLabel="Previous month"
+  nextMonthLabel="Next month"
+  previousYearsLabel="Previous years"
+  nextYearsLabel="Next years"
+  yearGridLabel="Choose year"
+/>
+```
+
+`DatePickerField` y `DateTimeField` los reexponen tal cual.
+
 ## Tokens
 
 El campo es el `Input` del sistema y se viste con sus tokens: un campo de fecha y uno de texto son el mismo control. Lo que tiene tokens propios es lo que el `Input` no conoce —el hueco del botón, su glifo y su anillo, y el aviso de fecha ilegible—, y cada uno apunta a un token existente (la talla de control, la tinta del campo, el error de formulario). El panel sigue vistiendo con los del `Popover` y los del `Calendar`.

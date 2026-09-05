@@ -53,6 +53,33 @@ export interface DatePickerProps {
   'aria-label'?: string;
   /** Nombre accesible del panel del calendario (`role="dialog"`). */
   calendarLabel?: string;
+  /**
+   * aria-label del botón de mes anterior del calendario. Default: «Mes
+   * anterior» (castellano). Una app multiidioma debe pasarla traducida.
+   */
+  previousMonthLabel?: CalendarProps['previousMonthLabel'];
+  /**
+   * aria-label del botón de mes siguiente. Default: «Mes siguiente»
+   * (castellano).
+   */
+  nextMonthLabel?: CalendarProps['nextMonthLabel'];
+  /**
+   * aria-label del botón de retroceso **en la vista de años**. Default: «Años
+   * anteriores» (castellano).
+   */
+  previousYearsLabel?: CalendarProps['previousYearsLabel'];
+  /**
+   * aria-label del botón de avance en la vista de años. Default: «Años
+   * siguientes» (castellano).
+   */
+  nextYearsLabel?: CalendarProps['nextYearsLabel'];
+  /** aria-label de la rejilla de años. Default: «Elegir año» (castellano). */
+  yearGridLabel?: CalendarProps['yearGridLabel'];
+  /**
+   * aria-label de la rejilla de días. Por defecto toma `calendarLabel`, que ya
+   * nombra el panel entero.
+   */
+  gridLabel?: CalendarProps['gridLabel'];
   /** Nombre del campo en el formulario: se monta un input oculto con la fecha en ISO. */
   name?: string;
   /** Se llama al salir del campo (react-hook-form lo usa para validar). */
@@ -98,6 +125,12 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   'aria-describedby': ariaDescribedBy,
   'aria-label': ariaLabel,
   calendarLabel = 'Calendario',
+  previousMonthLabel,
+  nextMonthLabel,
+  previousYearsLabel,
+  nextYearsLabel,
+  yearGridLabel,
+  gridLabel,
   onBlur,
   className,
 }: DatePickerProps, ref) {
@@ -259,7 +292,12 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
           <Calendar
             value={parsed ?? value ?? null}
             onChange={handleSelect}
-            gridLabel={calendarLabel}
+            gridLabel={gridLabel ?? calendarLabel}
+            previousMonthLabel={previousMonthLabel}
+            nextMonthLabel={nextMonthLabel}
+            previousYearsLabel={previousYearsLabel}
+            nextYearsLabel={nextYearsLabel}
+            yearGridLabel={yearGridLabel}
             minDate={minDate}
             maxDate={maxDate}
             disabledDates={disabledDates}

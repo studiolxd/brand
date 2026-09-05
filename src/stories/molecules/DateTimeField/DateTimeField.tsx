@@ -3,6 +3,7 @@ import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { DatePicker } from '../DatePicker/DatePicker';
+import type { DatePickerProps } from '../DatePicker/DatePicker';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import type { CalendarProps } from '../Calendar/Calendar';
@@ -40,6 +41,26 @@ export interface DateTimeFieldProps {
   locale?: string;
   /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
   className?: string;
+  /** Nombre accesible del panel del calendario. Default: la etiqueta del campo. */
+  calendarLabel?: DatePickerProps['calendarLabel'];
+  /** Nombre accesible del botón que abre el calendario. Default castellano. */
+  openCalendarLabel?: DatePickerProps['openCalendarLabel'];
+  /** Mensaje de fecha incompleta del campo de texto. Default castellano. */
+  invalidMessage?: DatePickerProps['invalidMessage'];
+  /** Letras de la máscara del marcador de posición. Default castellano. */
+  maskLetters?: DatePickerProps['maskLetters'];
+  /** aria-label del botón de mes anterior del calendario. Default castellano. */
+  previousMonthLabel?: DatePickerProps['previousMonthLabel'];
+  /** aria-label del botón de mes siguiente. Default castellano. */
+  nextMonthLabel?: DatePickerProps['nextMonthLabel'];
+  /** aria-label del botón de retroceso en la vista de años. Default castellano. */
+  previousYearsLabel?: DatePickerProps['previousYearsLabel'];
+  /** aria-label del botón de avance en la vista de años. Default castellano. */
+  nextYearsLabel?: DatePickerProps['nextYearsLabel'];
+  /** aria-label de la rejilla de años. Default castellano. */
+  yearGridLabel?: DatePickerProps['yearGridLabel'];
+  /** aria-label de la rejilla de días. Default: `calendarLabel`. */
+  gridLabel?: DatePickerProps['gridLabel'];
   /** aria-label del desplegable de horas. Default: "Horas" (castellano). */
   hoursLabel?: string;
   /** aria-label del desplegable de minutos. Default: "Minutos" (castellano). */
@@ -84,6 +105,16 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
   helperText,
   locale = 'es-ES',
   className,
+  calendarLabel,
+  openCalendarLabel,
+  invalidMessage,
+  maskLetters,
+  previousMonthLabel,
+  nextMonthLabel,
+  previousYearsLabel,
+  nextYearsLabel,
+  yearGridLabel,
+  gridLabel,
   hoursLabel,
   minutesLabel,
   onChange,
@@ -147,6 +178,16 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
           readOnly={readOnly}
           error={hasError}
           locale={locale}
+          calendarLabel={calendarLabel ?? label}
+          openCalendarLabel={openCalendarLabel}
+          invalidMessage={invalidMessage}
+          maskLetters={maskLetters}
+          previousMonthLabel={previousMonthLabel}
+          nextMonthLabel={nextMonthLabel}
+          previousYearsLabel={previousYearsLabel}
+          nextYearsLabel={nextYearsLabel}
+          yearGridLabel={yearGridLabel}
+          gridLabel={gridLabel}
         />
         <TimeSelect
           value={getTimeValue(value)}

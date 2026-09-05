@@ -44,6 +44,38 @@ es, y una tabla sin nombre llega al lector de pantalla como «tabla» a secas.
 
 <Canvas of={DataTableStories.ConAcciones} />
 
+## Columnas alineadas
+
+La alineación viaja en la **columna**, no en el marcado de cada celda: `meta.align` de
+la definición de TanStack (`'start' | 'center' | 'end'`) y la tabla lo traduce a
+modificadores BEM en la **cabecera y la celda a la vez** —una columna alineada de una
+forma en el cuerpo y de otra en su rótulo se lee como dos columnas—. `start` es el
+default y no emite clase.
+
+```tsx
+const columns: ColumnDef<Invoice, unknown>[] = [
+  { accessorKey: 'number', header: 'Factura' },
+  { accessorKey: 'amount', header: 'Importe', meta: { align: 'end' } },
+  { id: 'actions', header: 'Acciones', cell: renderActions, meta: { align: 'center' } },
+];
+```
+
+Cuándo usar cada una:
+
+| Alineación | Para qué |
+| --- | --- |
+| `start` (default) | Texto: nombres, correos, descripciones. Se leen desde el margen. |
+| `end` | **Números** comparables: importes, cantidades, porcentajes. Alineados por la derecha las unidades quedan en columna y la magnitud se ve de un vistazo. |
+| `center` | **Acciones** y **estados**: un botón de menú o un `Tag` que no se lee en fila con los de arriba, sino que se localiza. |
+
+Un número que no se compara con el de la fila de al lado (un identificador, un año suelto)
+es texto: va a `start`.
+
+`meta` está tipado por **module augmentation** de `ColumnMeta`, como recomienda TanStack:
+`align` sale en el autocompletado de cualquier `ColumnDef` del proyecto.
+
+<Canvas of={DataTableStories.ColumnasAlineadas} />
+
 ## Cargando
 
 `isLoading` sustituye las filas por `Skeleton`, tantas como diga `pageSize`. Las filas de
@@ -103,6 +135,9 @@ Sin ellas, cada pieza cae a sus castellanos por defecto. La convención completa
 ---
 
 ## Tokens
+
+La alineación por columna no gasta tokens: `text-align` con valores lógicos
+(`center` / `end`) sobre `.data-table__cell--*` y `.data-table__header-cell--*`.
 
 Solo dos medidas propias: el resto lo ponen `Table`, `Pagination`, `EmptyState` y
 `Skeleton` con sus tokens.
