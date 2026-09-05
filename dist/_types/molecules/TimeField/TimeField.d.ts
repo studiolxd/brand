@@ -7,6 +7,8 @@ export interface TimeFieldProps {
     /**
      * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
      * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+     * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+     * es la primera de la lista, la etiqueta se oculta sola.
      */
     labelHidden?: boolean;
     value?: TimeValue | null;

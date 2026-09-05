@@ -8,6 +8,8 @@ export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'texta
      * Por defecto `false`: la etiqueta se ve, como en `SelectField`.
      * Con la etiqueta oculta y sin `placeholder`, el control usa el texto de la
      * etiqueta como placeholder para no quedarse sin pista visible.
+     * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+     * es la primera de la lista, la etiqueta se oculta sola.
      */
     labelHidden?: boolean;
     name?: string;

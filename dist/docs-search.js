@@ -9,7 +9,7 @@ import { Autocomplete as a } from "@base-ui/react/autocomplete";
 function o(e) {
 	return /* @__PURE__ */ r("a", { ...e });
 }
-function s({ id: s = "docs-search", query: c, onQueryChange: l, results: u, loading: d = !1, label: f = "Buscar en la documentación", labelHidden: p = !1, placeholder: m = "Buscar…", clearable: h = !0, clearLabel: g = "Borrar", resultsLabel: _ = "Resultados", emptyLabel: v = "Sin resultados.", loadingLabel: y = "Buscando…", size: b, renderLink: x = o, onSelect: S, className: C }) {
+function s({ id: s = "docs-search", query: c, onQueryChange: l, results: u, loading: d = !1, label: f = "Buscar en la documentación", labelHidden: p, placeholder: m = "Buscar…", clearable: h = !0, clearLabel: g = "Borrar", resultsLabel: _ = "Resultados", emptyLabel: v = "Sin resultados.", loadingLabel: y = "Buscando…", size: b, renderLink: x = o, onSelect: S, className: C }) {
 	let w = c.trim() !== "" && u.length === 0 ? d ? y : v : null;
 	return /* @__PURE__ */ r(a.Root, {
 		inline: !0,

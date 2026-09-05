@@ -3,46 +3,47 @@ import './dropdown-field.css';
 import { Icon as e } from "./icon.js";
 import { n as t } from "./_shared/form-size.js";
 import { Label as n } from "./label.js";
-import { Menu as r } from "./menu.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o, useId as s } from "react";
+import { n as r } from "./_shared/field-labels.js";
+import { Menu as i } from "./menu.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { forwardRef as s, useId as c } from "react";
 //#region src/stories/molecules/DropdownField/DropdownField.tsx
-var c = o(function({ id: o, label: c, labelHidden: l = !1, "aria-label": u, items: d, value: f, onValueChange: p, children: m, inline: h = !1, size: g, align: _ = "start", disabled: v = !1, name: y, error: b = !1, errorMessage: x, helperText: S, onBlur: C, className: w }, T) {
-	let E = t(g), D = s(), O = o ?? D, k = x ? `${O}-error` : void 0, A = S ? `${O}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0, M = b || !!x;
-	return /* @__PURE__ */ a("div", {
+var l = s(function({ id: s, label: l, labelHidden: u, "aria-label": d, items: f, value: p, onValueChange: m, children: h, inline: g = !1, size: _, align: v = "start", disabled: y = !1, name: b, error: x = !1, errorMessage: S, helperText: C, onBlur: w, className: T }, E) {
+	let D = r(u), O = t(_), k = c(), A = s ?? k, j = S ? `${A}-error` : void 0, M = C ? `${A}-helper` : void 0, N = [j, M].filter(Boolean).join(" ") || void 0, P = x || !!S;
+	return /* @__PURE__ */ o("div", {
 		className: [
 			"dropdown-field",
-			h ? "dropdown-field--inline" : "",
-			E === "md" ? "" : `dropdown-field--${E}`,
-			w
+			g ? "dropdown-field--inline" : "",
+			O === "md" ? "" : `dropdown-field--${O}`,
+			T
 		].filter(Boolean).join(" "),
 		children: [
-			c && /* @__PURE__ */ i(n, {
-				htmlFor: O,
-				hidden: l,
-				size: E,
-				children: c
+			l && /* @__PURE__ */ a(n, {
+				htmlFor: A,
+				hidden: D,
+				size: O,
+				children: l
 			}),
-			/* @__PURE__ */ i(r, {
-				align: _,
-				size: E,
-				value: f,
-				onValueChange: p,
-				items: d,
-				trigger: /* @__PURE__ */ a("button", {
-					ref: T,
+			/* @__PURE__ */ a(i, {
+				align: v,
+				size: O,
+				value: p,
+				onValueChange: m,
+				items: f,
+				trigger: /* @__PURE__ */ o("button", {
+					ref: E,
 					type: "button",
-					id: O,
+					id: A,
 					className: "dropdown-field__control",
-					"aria-label": c ? void 0 : u,
-					"aria-describedby": j,
-					"aria-invalid": M || void 0,
-					disabled: v,
-					onBlur: C,
-					children: [/* @__PURE__ */ i("span", {
+					"aria-label": l ? void 0 : d,
+					"aria-describedby": N,
+					"aria-invalid": P || void 0,
+					disabled: y,
+					onBlur: w,
+					children: [/* @__PURE__ */ a("span", {
 						className: "dropdown-field__value",
-						children: m
-					}), /* @__PURE__ */ i(e, {
+						children: h
+					}), /* @__PURE__ */ a(e, {
 						name: "chevron",
 						size: "sm",
 						className: "dropdown-field__icon",
@@ -50,24 +51,24 @@ var c = o(function({ id: o, label: c, labelHidden: l = !1, "aria-label": u, item
 					})]
 				})
 			}),
-			y && /* @__PURE__ */ i("input", {
+			b && /* @__PURE__ */ a("input", {
 				type: "hidden",
-				name: y,
-				value: f ?? ""
+				name: b,
+				value: p ?? ""
 			}),
-			x && /* @__PURE__ */ i("span", {
-				id: k,
+			S && /* @__PURE__ */ a("span", {
+				id: j,
 				className: "dropdown-field__error",
 				role: "alert",
-				children: x
-			}),
-			S && /* @__PURE__ */ i("span", {
-				id: A,
-				className: "dropdown-field__helper",
 				children: S
+			}),
+			C && /* @__PURE__ */ a("span", {
+				id: M,
+				className: "dropdown-field__helper",
+				children: C
 			})
 		]
 	});
 });
 //#endregion
-export { c as DropdownField };
+export { l as DropdownField };
