@@ -81,9 +81,9 @@
       "$description": "Peso del título"
     },
     "heading-line-height": {
-      "$value": "{text.h5.line-height}",
+      "$value": "{text.h3.line-height}",
       "$type": "number",
-      "$description": "Interlineado del título"
+      "$description": "Interlineado del título: el del peldaño en el que está el título (H3, `tight`), no el del peldaño anterior. Se quedó en el de H5 (`snug`) cuando el cuerpo subió de 24px a 32px, y a esa talla los asuntos de dos renglones se separaban de más"
     },
     "heading-margin-block-end": {
       "$value": "{spacing.3}",

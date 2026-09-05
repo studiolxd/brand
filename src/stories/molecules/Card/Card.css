@@ -1,8 +1,14 @@
+/* La tarjeta-enlace viste su propio enlace: el bloque entero es el destino, así
+   que se anula la línea que la base pone a todo `<a>` —sombra interior y su
+   hueco—, igual que hacen `ProjectCard` y el resto de componentes que visten
+   enlaces. Sin esto la tarjeta arrastraba una línea de 1px pegada a su borde
+   inferior. El hueco lo repone acto seguido el aire propio de la tarjeta. */
 .card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-decoration: none;
+  box-shadow: none;
   color: inherit;
   padding-inline: var(--card-padding-inline);
   padding-block-start: var(--card-padding-block-start);

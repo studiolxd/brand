@@ -15,7 +15,7 @@ export declare const emailTokens: {
     readonly '--email-opt-out-margin-block-start': "16px";
     readonly '--email-heading-font-size': "32px";
     readonly '--email-heading-font-weight': "500";
-    readonly '--email-heading-line-height': "1.3";
+    readonly '--email-heading-line-height': "1.1";
     readonly '--email-heading-margin-block-end': "12px";
     readonly '--email-text-margin-block-end': "16px";
     readonly '--email-note-font-size': "16px";

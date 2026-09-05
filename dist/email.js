@@ -18,7 +18,7 @@ var h = {
 	"--email-opt-out-margin-block-start": "16px",
 	"--email-heading-font-size": "32px",
 	"--email-heading-font-weight": "500",
-	"--email-heading-line-height": "1.3",
+	"--email-heading-line-height": "1.1",
 	"--email-heading-margin-block-end": "12px",
 	"--email-text-margin-block-end": "16px",
 	"--email-note-font-size": "16px",
