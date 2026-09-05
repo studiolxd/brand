@@ -26,6 +26,33 @@
   color: var(--calendar-title-color);
 }
 
+/* El título lleva a la rejilla de años: es un botón, y como todo control de
+   texto del sistema se subraya con la línea de tinta, no con `text-decoration`
+   —que no cubriría el glifo si algún día lo llevara. Hereda la letra del
+   título: el botón no se ve como una caja aparte. */
+.calendar__title-button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: transparent;
+  padding-block: 0;
+  padding-inline: var(--calendar-title-button-padding-inline);
+  cursor: var(--calendar-title-button-cursor);
+  border-radius: var(--calendar-day-radius);
+  transition-property: box-shadow;
+  transition-duration: var(--calendar-transition-duration);
+  transition-timing-function: var(--calendar-transition-easing);
+}
+
+.calendar__title-button:hover {
+  box-shadow: inset 0 calc(-1 * var(--calendar-hover-line-width)) 0 0 var(--calendar-hover-line-color);
+}
+
+.calendar__title-button:focus-visible {
+  outline: var(--calendar-nav-focus-ring-width) solid var(--calendar-nav-focus-ring-color);
+  outline-offset: var(--calendar-nav-focus-ring-offset);
+}
+
 /* ─── Nav buttons ─────────────────────────────────────────────────────────── */
 
 .calendar__nav {
@@ -44,10 +71,9 @@
   transition-timing-function: var(--calendar-transition-easing);
 }
 
-/* Sin relleno bajo el puntero (regla de Colores): línea de tinta debajo. */
-.calendar__nav:hover:not(:disabled) {
-  box-shadow: inset 0 calc(-1 * var(--calendar-hover-line-width)) 0 0 var(--calendar-hover-line-color);
-}
+/* Las flechas no llevan línea bajo el puntero: son un glifo, no una palabra, y
+   la línea del sistema subraya texto. Lo que las señala es el anillo de foco y
+   el propio cursor; la tinta no cambia. */
 
 .calendar__nav:focus-visible {
   outline: var(--calendar-nav-focus-ring-width) solid var(--calendar-nav-focus-ring-color);
@@ -167,6 +193,63 @@
   pointer-events: none;
 }
 
+/* ─── Rejilla de años ─────────────────────────────────────────────────────── */
+
+/* Una docena de años en cuatro columnas: ocupa el mismo hueco que el mes, así
+   que el panel no da un salto de altura al cambiar de vista. */
+.calendar__years {
+  display: grid;
+  grid-template-columns: repeat(var(--calendar-year-columns), 1fr);
+  gap: var(--calendar-grid-gap);
+}
+
+.calendar__year {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--calendar-year-height);
+  padding-block: 0;
+  padding-inline: var(--calendar-year-padding-inline);
+  border: none;
+  border-radius: var(--calendar-day-radius);
+  background-color: var(--calendar-year-bg);
+  color: var(--calendar-year-color);
+  font-family: var(--calendar-font-family);
+  font-size: var(--calendar-year-font-size);
+  font-weight: var(--calendar-day-font-weight);
+  cursor: pointer;
+  transition-property: box-shadow, background-color, color;
+  transition-duration: var(--calendar-transition-duration);
+  transition-timing-function: var(--calendar-transition-easing);
+}
+
+/* Igual que el día: bajo el puntero, línea de tinta; el relleno se reserva
+   para el año del valor, que es un valor y no un estado. */
+.calendar__year:hover:not(.calendar__year--disabled):not(.calendar__year--selected) {
+  box-shadow: inset 0 calc(-1 * var(--calendar-hover-line-width)) 0 0 var(--calendar-hover-line-color);
+}
+
+.calendar__year:focus-visible {
+  outline: var(--calendar-day-focus-ring-width) solid var(--calendar-day-focus-ring-color);
+  outline-offset: var(--calendar-day-focus-ring-offset);
+}
+
+.calendar__year.calendar__year--current {
+  color: var(--calendar-year-current-color);
+  font-weight: var(--calendar-year-current-font-weight);
+}
+
+.calendar__year.calendar__year--selected {
+  background-color: var(--calendar-year-selected-bg);
+  color: var(--calendar-year-selected-color);
+}
+
+.calendar__year.calendar__year--disabled {
+  color: var(--calendar-year-disabled-color);
+  cursor: var(--calendar-disabled-cursor);
+  pointer-events: none;
+}
+
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
 
 .calendar.calendar--sm .calendar__title {
@@ -193,4 +276,13 @@
 
 .calendar.calendar--lg .calendar__day {
   font-size: var(--calendar-lg-day-font-size);
+}
+
+.calendar.calendar--sm .calendar__year {
+  block-size: var(--calendar-sm-year-height);
+}
+
+.calendar.calendar--lg .calendar__year {
+  block-size: var(--calendar-lg-year-height);
+  font-size: var(--calendar-lg-year-font-size);
 }

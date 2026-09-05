@@ -121,10 +121,10 @@ export const SelectAndDisplay: Story = {
     );
   },
   play: async ({ canvas, canvasElement, args }) => {
-    const trigger = canvas.getByRole('button');
-    await userEvent.click(trigger);
+    const abrir = canvas.getByRole('button', { name: 'Abrir calendario' });
+    await userEvent.click(abrir);
 
-    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await expect(abrir).toHaveAttribute('aria-expanded', 'true');
 
     // El popover del calendario se monta en un portal de Base UI (document.body),
     // fuera del canvasElement de la story.
@@ -134,15 +134,60 @@ export const SelectAndDisplay: Story = {
     await userEvent.click(day18);
 
     await expect(args.onChange).toHaveBeenCalled();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(abrir).toHaveAttribute('aria-expanded', 'false');
+    await expect(canvas.getByRole('textbox')).toHaveValue('18/05/2026');
   },
 };
 
-/** Test: el panel del calendario es un diálogo con nombre accesible (`calendarLabel`). */
 /**
- * En superficie oscura el disparador es el `Input` del sistema (fondo del
- * lienzo, borde y tinta blancos) y el calendario del panel flotante voltea con
- * sus propios tokens. No hay valores propios del DatePicker: hereda.
+ * La fecha se teclea: el campo acepta el formato numérico corto del locale y
+ * emite en cuanto está completa. Vaciarlo borra la fecha.
+ */
+export const Escribir: Story = {
+  name: 'Escribir la fecha',
+  render: (args) => {
+    const [value, setValue] = useState<Date | null>(null);
+    return (
+      <DatePicker
+        {...args}
+        aria-label="Fecha"
+        value={value}
+        onChange={(d) => { setValue(d); args.onChange?.(d); }}
+      />
+    );
+  },
+  play: async ({ canvas, args }) => {
+    const campo = canvas.getByRole('textbox', { name: 'Fecha' });
+    await userEvent.type(campo, '25/09/2026');
+
+    const ultima = (args.onChange as ReturnType<typeof fn>).mock.calls.at(-1)![0] as Date;
+    await expect(ultima.getDate()).toBe(25);
+
+    await userEvent.clear(campo);
+    await expect(args.onChange).toHaveBeenLastCalledWith(null);
+  },
+};
+
+/** En otro locale cambia el orden de las partes y la pista del campo. */
+export const OtroLocale: Story = {
+  name: 'En otro locale (en-US)',
+  render: (args) => {
+    const [value, setValue] = useState<Date | null>(new Date(2026, 8, 25));
+    return (
+      <DatePicker
+        {...args}
+        locale="en-US"
+        value={value}
+        onChange={(d) => { setValue(d); args.onChange?.(d); }}
+      />
+    );
+  },
+};
+
+/**
+ * En superficie oscura el campo es el `Input` del sistema (fondo del lienzo,
+ * borde y tinta blancos) y el calendario del panel flotante voltea con sus
+ * propios tokens.
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
@@ -159,17 +204,48 @@ export const SuperficieOscura: Story = {
   },
 };
 
+/** Test: el panel del calendario es un diálogo con nombre accesible (`calendarLabel`). */
 export const ContratoNombreAccesible: Story = {
   name: 'Test — nombre accesible del panel',
   tags: ['!dev'],
   render: (args) => <DatePicker {...args} value={null} />,
   play: async ({ canvas, canvasElement }) => {
-    const trigger = canvas.getByRole('button');
-    await userEvent.click(trigger);
+    await userEvent.click(canvas.getByRole('button', { name: 'Abrir calendario' }));
 
     const body = within(canvasElement.ownerDocument.body);
     const panel = body.getByRole('dialog', { name: 'Calendario' });
     await expect(panel).toBeInTheDocument();
+  },
+};
+
+/** Test: la flecha abajo abre el calendario desde el campo; Escape lo cierra. */
+export const ContratoTeclado: Story = {
+  name: 'Test — flecha abajo abre, Escape cierra',
+  tags: ['!dev'],
+  render: () => <DatePicker aria-label="Fecha" value={null} />,
+  play: async ({ canvas, canvasElement }) => {
+    const body = within(canvasElement.ownerDocument.body);
+    canvas.getByRole('textbox', { name: 'Fecha' }).focus();
+
+    await userEvent.keyboard('{ArrowDown}');
+    await expect(body.getByRole('dialog', { name: 'Calendario' })).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+    await expect(body.queryByRole('dialog')).toBeNull();
+  },
+};
+
+/** Test: una fecha a medio escribir no sube y pone el campo en error. */
+export const ContratoFechaIncompleta: Story = {
+  name: 'Test — la fecha a medias no se emite',
+  tags: ['!dev'],
+  render: (args) => <DatePicker {...args} aria-label="Fecha" value={null} />,
+  play: async ({ canvas, args }) => {
+    await userEvent.type(canvas.getByRole('textbox', { name: 'Fecha' }), '25/09');
+
+    await expect(args.onChange).not.toHaveBeenCalled();
+    await expect(canvas.getByRole('textbox', { name: 'Fecha' })).toHaveAttribute('aria-invalid', 'true');
+    await expect(canvas.getByRole('alert')).toBeInTheDocument();
   },
 };
 
@@ -202,8 +278,8 @@ export const ContratoTalla: Story = {
   play: async ({ canvasElement }) => {
     const alto = (sel: string) =>
       Math.round(canvasElement.querySelector(sel)!.getBoundingClientRect().height);
-    await expect(alto('[data-t="sm"] .date-picker__trigger')).toBe(32);
-    await expect(alto('[data-t="md"] .date-picker__trigger')).toBe(40);
-    await expect(alto('[data-t="lg"] .date-picker__trigger')).toBe(48);
+    await expect(alto('[data-t="sm"] .date-picker__input')).toBe(32);
+    await expect(alto('[data-t="md"] .date-picker__input')).toBe(40);
+    await expect(alto('[data-t="lg"] .date-picker__input')).toBe(48);
   },
 };

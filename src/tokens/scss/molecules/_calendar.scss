@@ -44,5 +44,21 @@ $lxd-calendar-sm-title-font-size: 0.875rem; // Tamaño del título — sm
 $lxd-calendar-lg-day-size: 3rem; // Tamaño de los botones de día — lg
 $lxd-calendar-lg-title-font-size: 1rem; // Tamaño del título — lg
 $lxd-calendar-lg-day-font-size: 1rem; // Tamaño de fuente de los días — lg
-$lxd-calendar-hover-line-width: 1px; // Grosor de la línea de hover de los botones de navegación y de los días. Ni el día ni la flecha se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo
+$lxd-calendar-title-button-cursor: pointer; // Cursor del título: lleva a la rejilla de años
+$lxd-calendar-title-button-padding-inline: 0.25rem; // Aire a los lados del título pulsable: el mismo hueco que separa las celdas
+$lxd-calendar-year-columns: 4; // Columnas de la rejilla de años: doce años en tres filas de cuatro
+$lxd-calendar-year-height: 2rem; // Alto de la celda de año — md: el del día, para que la vista de años no cambie la altura del panel
+$lxd-calendar-year-padding-inline: 0.25rem; // Aire a los lados de la celda de año: el año lleva cuatro cifras y no cabe en el cuadrado del día
+$lxd-calendar-year-font-size: 0.875rem; // Cuerpo de letra del año
+$lxd-calendar-year-bg: rgba(0, 0, 0, 0); // Fondo base de la celda de año
+$lxd-calendar-year-color: #111e30; // Color de texto del año
+$lxd-calendar-year-current-color: #111e30; // Color del año en curso: el mismo que el día de hoy
+$lxd-calendar-year-current-font-weight: 500; // Peso del año en curso
+$lxd-calendar-year-selected-bg: #111e30; // Fondo del año de la fecha elegida
+$lxd-calendar-year-selected-color: #ffffff; // Texto del año de la fecha elegida
+$lxd-calendar-year-disabled-color: #6b6b6b; // Color de los años fuera de rango
+$lxd-calendar-sm-year-height: 1.5rem; // Alto de la celda de año — sm
+$lxd-calendar-lg-year-height: 3rem; // Alto de la celda de año — lg
+$lxd-calendar-lg-year-font-size: 1rem; // Cuerpo de letra del año — lg
+$lxd-calendar-hover-line-width: 1px; // Grosor de la línea de hover del día, del año y del título. Nada se rellena bajo el puntero (regla de Colores): lo que se puede pulsar y es texto deja una línea de tinta debajo. Las flechas no la llevan: son un glifo, y la línea del sistema subraya texto
 $lxd-calendar-hover-line-color: #111e30; // Color de la línea de hover — tinta de la superficie

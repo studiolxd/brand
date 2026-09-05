@@ -7,7 +7,7 @@ import { datePickerFieldBaseTokens, datePickerFieldErrorTokens, datePickerFieldH
 
 # DatePickerField
 
-El `DatePicker` como campo de formulario: etiqueta, disparador con la fecha elegida, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
+El `DatePicker` como campo de formulario: etiqueta, campo con la fecha escrita, ayuda y error, con el mismo ritmo que el resto de campos. Es el que se usa en formularios; el átomo suelto, solo fuera de ellos.
 
 Para fecha **y** hora, el campo es `DateTimeField`; para solo hora, `TimeField`.
 
@@ -15,7 +15,7 @@ Para fecha **y** hora, el campo es `DateTimeField`; para solo hora, `TimeField`.
 
 ## Etiqueta
 
-Siempre hay etiqueta (`label`), enlazada por `id` al disparador, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`.
+Siempre hay etiqueta (`label`), enlazada por `id` al campo, y **por defecto se ve**. Sin `id`, el campo genera uno con `useId`.
 
 <Canvas of={DatePickerFieldStories.EtiquetaOculta} />
 
@@ -36,7 +36,7 @@ El campo es **controlado**: `value` + `onChange`. El formato de la fecha mostrad
 
 ## Tallas
 
-`size` viaja al control: el disparador mide 32, 40 o 48, las tallas del sistema.
+`size` viaja al control: el campo mide 32, 40 o 48, las tallas del sistema.
 
 <Canvas of={DatePickerFieldStories.Tallas} />
 
@@ -47,7 +47,7 @@ El campo es **controlado**: `value` + `onChange`. El formato de la fecha mostrad
 
 ## Con react-hook-form
 
-El control es de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onChange` + `name` + `ref` al disparador. `onChange` entrega un `Date`, que es lo que guarda react-hook-form; el `name` monta además un input oculto con la fecha en `yyyy-mm-dd` **en el huso local** (no `toISOString()`, que es UTC y desplazaría un día) para el envío nativo.
+El control es de Base UI, así que el contrato **no** es el spread del `field`: es `value` / `onChange` + `name` + `ref` al campo de texto. `onChange` entrega `Date | null` —vaciar el campo borra la fecha—, que es lo que guarda react-hook-form; el `name` monta además un input oculto con la fecha en `yyyy-mm-dd` **en el huso local** (no `toISOString()`, que es UTC y desplazaría un día) para el envío nativo.
 
 ```tsx
 <FormField
@@ -72,7 +72,7 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 
 ## Accesibilidad
 
-- La etiqueta va enlazada por `htmlFor`/`id` al disparador (`aria-haspopup="dialog"`).
+- La etiqueta va enlazada por `htmlFor`/`id` al campo de texto; quien abre el calendario es el botón del final, con nombre accesible propio.
 - Los `id` de ayuda y error se derivan del del campo (`<id>-helper`, `<id>-error`) y llegan al control por `aria-describedby`, en ese orden.
 - El mensaje de error se anuncia (`role="alert"`) y marca el control con `aria-invalid`.
 - Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.

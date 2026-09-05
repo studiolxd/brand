@@ -54,6 +54,25 @@
     "lg-day-size":               { "$value": "{spacing.7}",                "$type": "dimension", "$description": "Tamaño de los botones de día — lg" },
     "lg-title-font-size":        { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño del título — lg" },
     "lg-day-font-size":          { "$value": "{font-size.2}",              "$type": "dimension", "$description": "Tamaño de fuente de los días — lg" },
+    "title-button-cursor":       { "$value": "pointer",                    "$type": "string",    "$description": "Cursor del título: lleva a la rejilla de años" },
+    "title-button-padding-inline":{ "$value": "{spacing.1}",                "$type": "dimension", "$description": "Aire a los lados del título pulsable: el mismo hueco que separa las celdas" },
+
+    "year-columns":              { "$value": "4",                          "$type": "number",    "$description": "Columnas de la rejilla de años: doce años en tres filas de cuatro" },
+    "year-height":               { "$value": "{calendar.day-size}",        "$type": "dimension", "$description": "Alto de la celda de año — md: el del día, para que la vista de años no cambie la altura del panel" },
+    "year-padding-inline":       { "$value": "{calendar.grid-gap}",        "$type": "dimension", "$description": "Aire a los lados de la celda de año: el año lleva cuatro cifras y no cabe en el cuadrado del día" },
+    "year-font-size":            { "$value": "{calendar.day-font-size}",   "$type": "dimension", "$description": "Cuerpo de letra del año" },
+    "year-bg":                   { "$value": "{calendar.day-bg}",          "$type": "color",     "$description": "Fondo base de la celda de año" },
+    "year-color":                { "$value": "{calendar.day-color}",       "$type": "color",     "$description": "Color de texto del año" },
+    "year-current-color":        { "$value": "{calendar.today-color}",     "$type": "color",     "$description": "Color del año en curso: el mismo que el día de hoy" },
+    "year-current-font-weight":  { "$value": "{calendar.today-font-weight}","$type": "number",   "$description": "Peso del año en curso" },
+    "year-selected-bg":          { "$value": "{calendar.selected-bg}",     "$type": "color",     "$description": "Fondo del año de la fecha elegida" },
+    "year-selected-color":       { "$value": "{calendar.selected-color}",  "$type": "color",     "$description": "Texto del año de la fecha elegida" },
+    "year-disabled-color":       { "$value": "{calendar.disabled-color}",  "$type": "color",     "$description": "Color de los años fuera de rango" },
+
+    "sm-year-height":            { "$value": "{calendar.sm-day-size}",     "$type": "dimension", "$description": "Alto de la celda de año — sm" },
+    "lg-year-height":            { "$value": "{calendar.lg-day-size}",     "$type": "dimension", "$description": "Alto de la celda de año — lg" },
+    "lg-year-font-size":         { "$value": "{calendar.lg-day-font-size}","$type": "dimension", "$description": "Cuerpo de letra del año — lg" },
+
     "surface-dark-nav-color":               { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color de navegación — surface-dark" },
     "surface-dark-nav-disabled-color":      { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color deshabilitado de navegación — surface-dark" },
     "surface-dark-nav-focus-ring-color":    { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring de navegación — surface-dark" },
@@ -67,7 +86,7 @@
     "surface-dark-selected-color":          { "$value": "{color.background.dark}",    "$type": "color", "$description": "Texto del día seleccionado — surface-dark" },
     "surface-dark-outside-color":           { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Días fuera de mes — surface-dark" },
     "surface-dark-disabled-color":          { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Días deshabilitados — surface-dark" },
-    "hover-line-width":              { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea de hover de los botones de navegación y de los días. Ni el día ni la flecha se rellenan bajo el puntero (regla de Colores): dejan una línea de tinta debajo" },
+    "hover-line-width":              { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea de hover del día, del año y del título. Nada se rellena bajo el puntero (regla de Colores): lo que se puede pulsar y es texto deja una línea de tinta debajo. Las flechas no la llevan: son un glifo, y la línea del sistema subraya texto" },
     "hover-line-color":              { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover — tinta de la superficie" },
     "surface-dark-hover-line-color": { "$value": "{color.text.on-dark}",   "$type": "color",     "$description": "Color de la línea de hover — surface-dark" }
   }

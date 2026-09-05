@@ -15,7 +15,7 @@ la interfaz y no el desplegable de un campo.
 
 ## Anatomía
 
-Cabecera (mes anterior · nombre del mes · mes siguiente) sobre una rejilla de
+Cabecera (anterior · nombre de lo que se ve · siguiente) sobre una rejilla de
 siete columnas: una fila de cabeceras de día y tantas filas de semana como
 ocupe el mes. La semana empieza en lunes y solo se dibujan las semanas que el
 mes realmente ocupa, así que la altura del componente varía de un mes a otro.
@@ -36,6 +36,22 @@ Con `navigable={false}` desaparecen los dos botones y el mes lo mueve quien
 consuma el componente.
 
 <Canvas of={CalendarStories.Controlado} />
+
+## Elegir año
+
+El nombre del mes es un botón: al pulsarlo, la rejilla de días deja sitio a una
+**docena de años** —tres filas de cuatro— y las mismas dos flechas navegan de
+docena en docena, ahora llamadas «Años anteriores» y «Años siguientes». Al
+elegir uno se vuelve al mes, ya en ese año, y el foco regresa al título, que es
+desde donde se salió. `Escape` vuelve sin elegir.
+
+No hay paso intermedio de meses, y es una decisión: la cabecera ya recorre los
+meses de uno en uno con las flechas, así que lo que falta cuando el destino
+está lejos —una fecha de nacimiento, un vencimiento a tres años— es el año, no
+el mes. Meter una rejilla de meses en medio añadiría un clic a **todos** los
+viajes para ahorrar once flechazos en algunos.
+
+<Canvas of={CalendarStories.ElegirAno} />
 
 ## Días no seleccionables
 
@@ -75,6 +91,11 @@ selección), y dentro se navega con el teclado.
 Cuando el movimiento cruza el borde del mes, el mes visible cambia solo y el
 foco cae en el día de destino.
 
+La rejilla de años se recorre igual: <kbd>←</kbd>/<kbd>→</kbd> un año,
+<kbd>↑</kbd>/<kbd>↓</kbd> una fila (cuatro), <kbd>Inicio</kbd>/<kbd>Fin</kbd>
+los extremos de la docena, <kbd>RePág</kbd>/<kbd>AvPág</kbd> la docena entera y
+<kbd>Esc</kbd> vuelve al mes.
+
 ## Tokens
 
 <TokenTable tokens={calendarTokens} />
@@ -89,8 +110,13 @@ foco cae en el día de destino.
   `role="columnheader"` y días `role="gridcell"`.
 - Su nombre accesible es el del mes visible; dentro de un panel con nombre
   propio (el `Popover` de `DatePicker`) se pasa por `gridLabel`.
-- El nombre del mes es una región `aria-live="polite"`: al cambiar de mes el
-  lector lo anuncia sin que el foco se mueva de sitio.
+- El nombre de lo que se ve es una región `aria-live="polite"`: al cambiar de
+  mes —o de docena de años— el lector lo anuncia sin que el foco se mueva de
+  sitio. Dentro va el botón que lleva a los años, con `aria-expanded`.
+- Las flechas se llaman según la vista: «Mes anterior»/«Mes siguiente» sobre
+  los días, «Años anteriores»/«Años siguientes» sobre los años.
+- Al entrar en la vista de años el foco cae en el año vivo; al salir vuelve al
+  título. Nunca se queda huérfano en un elemento que ya no está.
 - El nombre accesible de cada día es la **fecha entera** («lunes, 18 de mayo de
   2026»), formateada con `Intl` según `locale`: el número suelto no dice de qué
   día se habla cuando el foco llega a la celda.
@@ -99,10 +125,11 @@ foco cae en el día de destino.
   del recorrido).
 - Las cabeceras de día enseñan la inicial y llevan el nombre completo en un
   `<abbr>`: una letra suelta no es un nombre.
-- Ni el día ni las flechas de navegación se rellenan bajo el puntero: llevan
-  la línea de tinta del sistema (Foundations → Colores, «Estados: nada se
-  rellena»). El relleno se reserva para el día **elegido**, que es un valor y
-  no un estado.
+- Nada se rellena bajo el puntero (Foundations → Colores, «Estados: nada se
+  rellena»): el día, el año y el título llevan la línea de tinta del sistema.
+  Las flechas **no** la llevan —son un glifo, y la línea del sistema subraya
+  texto—: lo que las señala es el anillo de foco. El relleno se reserva para el
+  día **elegido**, que es un valor y no un estado.
 
 ## Props
 

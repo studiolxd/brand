@@ -66,7 +66,7 @@ function m({ block: e, rowModifier: n, weekdays: r }) {
 		}, r))
 	});
 }
-function h({ block: r, title: i, titleId: a, navigable: o = !0, previousMonthLabel: s, nextMonthLabel: c, prevDisabled: l = !1, nextDisabled: u = !1, onPrev: d, onNext: f, chevronSize: p, children: m }) {
+function h({ block: r, title: i, titleId: a, navigable: o = !0, previousLabel: s, nextLabel: c, prevDisabled: l = !1, nextDisabled: u = !1, onPrev: d, onNext: f, chevronSize: p, onTitleClick: m, titleExpanded: h, titleRef: g, children: _ }) {
 	return /* @__PURE__ */ n("div", {
 		className: `${r}__header`,
 		children: [
@@ -86,7 +86,14 @@ function h({ block: r, title: i, titleId: a, navigable: o = !0, previousMonthLab
 				id: a,
 				className: `${r}__title`,
 				"aria-live": "polite",
-				children: i
+				children: m ? /* @__PURE__ */ t("button", {
+					type: "button",
+					ref: g,
+					className: `${r}__title-button`,
+					"aria-expanded": h,
+					onClick: m,
+					children: i
+				}) : i
 			}),
 			o && /* @__PURE__ */ t("button", {
 				type: "button",
@@ -99,7 +106,7 @@ function h({ block: r, title: i, titleId: a, navigable: o = !0, previousMonthLab
 					size: p
 				})
 			}),
-			m
+			_
 		]
 	});
 }

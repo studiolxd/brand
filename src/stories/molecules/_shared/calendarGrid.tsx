@@ -133,40 +133,57 @@ export function renderCalendarWeekdayRow({ block, rowModifier, weekdays }: Calen
 export interface CalendarMonthNavOptions {
   /** Bloque BEM del calendario que la monta */
   block: string;
-  /** Título del mes visible, ya formateado */
+  /** Título de lo que se ve, ya formateado: el mes, o el tramo de años */
   title: string;
   /** id del título, para `aria-labelledby` de la rejilla */
   titleId: string;
   /** Muestra los botones prev/next. Default: true */
   navigable?: boolean;
-  previousMonthLabel: string;
-  nextMonthLabel: string;
+  /**
+   * Nombre accesible del botón de retroceso. Depende de la vista: «Mes
+   * anterior» sobre la rejilla de días, «Años anteriores» sobre la de años.
+   */
+  previousLabel: string;
+  /** Nombre accesible del botón de avance, también según la vista. */
+  nextLabel: string;
   prevDisabled?: boolean;
   nextDisabled?: boolean;
   onPrev: () => void;
   onNext: () => void;
   chevronSize: 'xs' | 'sm' | 'md';
+  /**
+   * Convierte el título en un botón: es la puerta a otra vista (la rejilla de
+   * años). Sin él, el título es texto y no se pulsa.
+   */
+  onTitleClick?: () => void;
+  /** `aria-expanded` del título cuando es botón: si la otra vista está abierta. */
+  titleExpanded?: boolean;
+  /** ref del botón del título, para poder devolverle el foco al cambiar de vista. */
+  titleRef?: React.Ref<HTMLButtonElement>;
   /** Contenido extra a la derecha del título (acciones propias del calendario) */
   children?: ReactNode;
 }
 
 /**
- * Cabecera con los dos botones de mes y el nombre del mes vivo. El título es
- * una región `aria-live="polite"`: al cambiar de mes el lector lo anuncia sin
- * mover el foco.
+ * Cabecera con los dos botones de navegación y el nombre de lo que se ve. El
+ * título es una región `aria-live="polite"`: al cambiar el lector lo anuncia
+ * sin mover el foco.
  */
 export function renderCalendarMonthNav({
   block,
   title,
   titleId,
   navigable = true,
-  previousMonthLabel,
-  nextMonthLabel,
+  previousLabel,
+  nextLabel,
   prevDisabled = false,
   nextDisabled = false,
   onPrev,
   onNext,
   chevronSize,
+  onTitleClick,
+  titleExpanded,
+  titleRef,
   children,
 }: CalendarMonthNavOptions) {
   return (
@@ -175,21 +192,37 @@ export function renderCalendarMonthNav({
         <button
           type="button"
           className={`${block}__nav`}
-          aria-label={previousMonthLabel}
+          aria-label={previousLabel}
           disabled={prevDisabled}
           onClick={onPrev}
         >
           <Icon name="chevron" size={chevronSize} className={`${block}__chevron--prev`} />
         </button>
       )}
+      {/* El título es el nombre de la rejilla y una región `polite`: al cambiar
+          de mes —o de tramo de años— el lector lo anuncia sin mover el foco.
+          Cuando lleva a otra vista, el texto va dentro de un botón: la región
+          sigue siendo el `<h2>`, que no se sustituye entero. */}
       <h2 id={titleId} className={`${block}__title`} aria-live="polite">
-        {title}
+        {onTitleClick ? (
+          <button
+            type="button"
+            ref={titleRef}
+            className={`${block}__title-button`}
+            aria-expanded={titleExpanded}
+            onClick={onTitleClick}
+          >
+            {title}
+          </button>
+        ) : (
+          title
+        )}
       </h2>
       {navigable && (
         <button
           type="button"
           className={`${block}__nav`}
-          aria-label={nextMonthLabel}
+          aria-label={nextLabel}
           disabled={nextDisabled}
           onClick={onNext}
         >

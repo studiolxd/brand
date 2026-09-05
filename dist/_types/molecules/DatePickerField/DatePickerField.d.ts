@@ -19,8 +19,8 @@ export interface DatePickerFieldProps extends Omit<DatePickerProps, 'id' | 'desc
     className?: string;
 }
 /**
- * El `DatePicker` como campo de formulario. El `ref` va al **disparador**,
+ * El `DatePicker` como campo de formulario. El `ref` va al **campo de texto**,
  * para que react-hook-form pueda enfocarlo al fallar la validación; el
  * `className`, al contenedor.
  */
-export declare const DatePickerField: import("react").ForwardRefExoticComponent<DatePickerFieldProps & import("react").RefAttributes<HTMLButtonElement>>;
+export declare const DatePickerField: import("react").ForwardRefExoticComponent<DatePickerFieldProps & import("react").RefAttributes<HTMLInputElement>>;

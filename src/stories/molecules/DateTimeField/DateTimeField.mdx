@@ -15,7 +15,7 @@ Para solo fecha, el campo es `DatePickerField`; para solo hora, `TimeField`.
 
 ## Etiqueta
 
-Siempre hay etiqueta (`label`) y **por defecto se ve**. Como hay dos controles, la etiqueta nombra al **grupo** (`role="group"` + `aria-labelledby`) y `htmlFor` apunta al disparador de la fecha, que es lo primero que se enfoca. Sin `id`, el campo genera uno con `useId`.
+Siempre hay etiqueta (`label`) y **por defecto se ve**. Como hay dos controles, la etiqueta nombra al **grupo** (`role="group"` + `aria-labelledby`) y `htmlFor` apunta al campo de la fecha, que es lo primero que se enfoca. Sin `id`, el campo genera uno con `useId`.
 
 <Canvas of={DateTimeFieldStories.EtiquetaOculta} />
 
@@ -47,7 +47,7 @@ El valor es un único `Date`: la fecha manda y la hora se aplica sobre ella. Mie
 
 ## Con react-hook-form
 
-El contrato es `value` / `onChange` + `name` + `ref` al disparador de la fecha. `onChange` entrega el `Date` completo (fecha y hora ya fusionadas); el `name` monta además un input oculto con la fecha en `yyyy-mm-dd` **en el huso local** (no `toISOString()`, que es UTC y desplazaría un día) para el envío nativo.
+El contrato es `value` / `onChange` + `name` + `ref` al campo de la fecha. `onChange` entrega el `Date` completo (fecha y hora ya fusionadas); el `name` monta además un input oculto con la fecha en `yyyy-mm-dd` **en el huso local** (no `toISOString()`, que es UTC y desplazaría un día) para el envío nativo.
 
 ```tsx
 <FormField

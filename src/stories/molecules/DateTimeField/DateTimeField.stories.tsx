@@ -76,7 +76,7 @@ export const ElegirFechaYHora: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const body = within(canvasElement.ownerDocument.body);
-    await userEvent.click(canvasElement.querySelector('#cita-date')!);
+    await userEvent.click(canvas.getByRole('button', { name: 'Abrir calendario' }));
     // El nombre accesible de la celda es la fecha entera, no el número suelto
     await userEvent.click(await body.findByRole('gridcell', { name: /\b18 de \w+ de \d{4}$/ }));
     await expect(args.onChange).toHaveBeenCalled();
@@ -110,9 +110,9 @@ export const Contrato: Story = {
     // El `aria-invalid` no va en el grupo —no está definido en `role="group"`—:
     // lo llevan los tres controles de dentro, que son los widgets de entrada
     await expect(grupo).not.toHaveAttribute('aria-invalid');
-    // La etiqueta apunta al disparador de la fecha, que es lo primero
+    // La etiqueta apunta al campo de la fecha, que es lo primero
     await expect(canvasElement.querySelector('label[for="cita-date"]')).toHaveTextContent('Fecha y hora de la cita');
-    await expect(canvasElement.querySelector('#cita-date')).toHaveClass('date-picker__trigger--error');
+    await expect(canvasElement.querySelector('#cita-date')).toHaveClass('input--error');
     await expect(canvasElement.querySelector('#cita-date')).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('combobox', { name: 'Horas' })).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('combobox', { name: 'Minutos' })).toHaveAttribute('aria-invalid', 'true');
@@ -180,7 +180,7 @@ function FormularioRhf() {
 
 /**
  * Los dos controles son de Base UI: el contrato es `value`/`onChange` + `name`
- * + `ref` al disparador de la fecha, no el spread del `field`.
+ * + `ref` al campo de la fecha, no el spread del `field`.
  */
 export const ConReactHookForm: Story = {
   name: 'Con react-hook-form',
@@ -192,7 +192,7 @@ export const ConReactHookForm: Story = {
     // El error del formulario marca los controles, no el grupo que los envuelve
     const grupo = canvas.getByRole('group', { name: 'Fecha y hora de la cita' });
     await expect(grupo).not.toHaveAttribute('aria-invalid');
-    await expect(grupo.querySelector('.date-picker__trigger')).toHaveAttribute('aria-invalid', 'true');
+    await expect(grupo.querySelector('.date-picker__input')).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('combobox', { name: 'Horas' })).toHaveAttribute('aria-invalid', 'true');
     await expect(canvas.getByRole('combobox', { name: 'Minutos' })).toHaveAttribute('aria-invalid', 'true');
   },

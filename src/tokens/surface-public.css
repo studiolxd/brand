@@ -78,6 +78,7 @@
   --conversation-list-item-font-size: var(--text-font-size);
   --date-picker-field-error-font-size: var(--form-error-font-size);
   --date-picker-field-helper-font-size: var(--form-helper-font-size);
+  --date-picker-message-font-size: var(--form-error-font-size);
   --date-time-field-error-font-size: var(--form-error-font-size);
   --date-time-field-helper-font-size: var(--form-helper-font-size);
   --docs-search-result-title-font-size: var(--text-font-size);
