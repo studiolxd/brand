@@ -1,0 +1,89 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Superficie de diálogo del sistema: velo, cabecera y pie. Escrita UNA vez y
+ * compartida por `Modal` (colocación centrada) y `Sheet` (colocación lateral).
+ *
+ * Cada uno sigue poniendo sus clases BEM y sus tokens: aquí no hay ni un color
+ * ni una medida propia, solo la estructura y las variables que el contenedor
+ * rellena —el mismo trato que `CloseButton` recibe de sus contenedores—. Así,
+ * quien sobrescriba `modal.*` o `sheet.*` sigue mandando.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Velo ──────────────────────────────────────────────────── */
+@keyframes dialog-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: var(--dialog-overlay-opacity); }
+}
+
+@keyframes dialog-overlay-out {
+  from { opacity: var(--dialog-overlay-opacity); }
+  to   { opacity: 0; }
+}
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--dialog-overlay-z-index);
+  background-color: var(--dialog-overlay-bg);
+  /* La opacidad en reposo es la del token, no 1: sin esto el velo solo tiene
+     su valor mientras dura la animación de entrada. */
+  opacity: var(--dialog-overlay-opacity);
+}
+
+.dialog-overlay[data-open] {
+  animation: dialog-overlay-in var(--dialog-transition-duration) var(--dialog-transition-easing) forwards;
+}
+
+.dialog-overlay[data-closed] {
+  animation: dialog-overlay-out var(--dialog-transition-duration) var(--dialog-transition-easing) forwards;
+}
+
+/* ── Cabecera ──────────────────────────────────────────────── */
+/* Dos colocaciones, no dos cabeceras: `inline` pone el título y el aspa en la
+   misma fila (el diálogo centrado); `stacked` apila título y descripción y
+   deja sitio al aspa, que el contenedor posiciona sobre la esquina (el cajón). */
+.dialog-header {
+  display: flex;
+  gap: var(--dialog-header-gap);
+}
+
+.dialog-header--inline {
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--dialog-header-gap);
+}
+
+/* Sin título solo queda el aspa, y va a su esquina. */
+.dialog-header--inline.dialog-header--no-title {
+  justify-content: flex-end;
+}
+
+.dialog-header--stacked {
+  flex-direction: column;
+  padding-inline-end: var(--dialog-header-close-room);
+}
+
+/* ── Pie de acciones ───────────────────────────────────────── */
+/* El mismo criterio que las acciones de `Form`, con su mismo detalle de orden:
+   por debajo del punto de ruptura los botones se apilan a todo el ancho en
+   `column-reverse`, de modo que la acción principal —la última del DOM, la de
+   la derecha en la fila— queda arriba, al alcance del pulgar. A partir de ahí
+   vuelve a ser una fila alineada a la derecha. */
+.dialog-footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--dialog-footer-gap);
+}
+
+.dialog-footer > * {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .dialog-footer {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .dialog-footer > * {
+    inline-size: auto;
+  }
+}

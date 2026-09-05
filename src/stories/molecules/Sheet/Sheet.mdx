@@ -13,6 +13,12 @@ todo. Base UI `Dialog` aporta el portal, el velo, la trampa de foco y el
 cierre con Escape o clic fuera; el DS pone la superficie y la dirección de
 entrada.
 
+El velo, la cabecera y el pie son **la misma superficie de diálogo que usa
+`Modal`**, escrita una sola vez: el cajón es su colocación lateral y el
+diálogo la centrada. Lo propio del cajón es lo que de verdad lo distingue —el
+borde por el que entra, el no centrarse, el aspa sobre la esquina— y sus
+tokens `sheet.*`, que siguen mandando sobre la superficie.
+
 <Canvas of={SheetStories.Default} />
 
 ## Anatomía

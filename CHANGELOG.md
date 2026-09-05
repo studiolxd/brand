@@ -7,6 +7,30 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.9.0
+
+- **Una sola superficie de diálogo: `Modal` y `Sheet` dejan de ser dos árboles
+  paralelos.** El velo, la cabecera y el pie viven ahora una sola vez en
+  `molecules/_shared/dialogSurface`, y cada uno es una **colocación** de ella:
+  el diálogo, centrada; el cajón, lateral. Mismo trato que recibió el aspa en
+  v30.8.0 — la superficie no tiene ni un color ni una medida propia, y cada
+  contenedor mapea encima sus tokens (`modal.*`, `sheet.*`), así que quien los
+  sobrescriba sigue mandando.
+- **No cambia ninguna API ni desaparece ninguna clase.** `modal__overlay`,
+  `sheet__header`, `modal__footer`… siguen en el DOM junto a las compartidas
+  (`dialog-overlay`, `dialog-header`, `dialog-footer`), de modo que quien
+  afinaba por esas clases —`ConfirmDialog` y `ImageCropDialog`, sin ir más
+  lejos— no se entera.
+- **Lo que no se ha unificado, porque no estaba duplicado**: la cabecera del
+  cajón apila título y descripción con el aspa sobre la esquina y la del
+  diálogo los pone en fila; son dos colocaciones declaradas (`stacked` /
+  `inline`) de la misma pieza, no dos maneras de hacer lo mismo. Y el
+  comportamiento de diálogo —foco, Escape, velo, scroll, `aria-modal`— nunca
+  estuvo duplicado: lo pone Base UI.
+- **Un arreglo de paso**: el velo tiene su opacidad de token también en
+  reposo. Antes solo la tenía mientras corría la animación de entrada, así que
+  con las animaciones desactivadas el diálogo se velaba a opacidad 1.
+
 ## v30.8.0
 
 - **`CloseButton` — una sola aspa para todo el sistema.** Hasta ahora había dos

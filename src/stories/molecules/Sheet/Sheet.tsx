@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Dialog } from '@base-ui/react/dialog';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { DialogFooter, DialogHeader, DialogOverlay } from '../_shared/dialogSurface';
 import './Sheet.css';
 
 export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
@@ -46,7 +47,7 @@ export interface SheetProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
  * en el que estén y lo renderizan dentro de su propio contenido.
  */
 export function SheetFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={['sheet__footer', className].filter(Boolean).join(' ')} {...props} />;
+  return <DialogFooter className={['sheet__footer', className].filter(Boolean).join(' ')} {...props} />;
 }
 
 /**
@@ -85,14 +86,14 @@ export function Sheet({
       )}
 
       <Dialog.Portal container={container}>
-        <Dialog.Backdrop className="sheet__overlay" />
+        <DialogOverlay className="sheet__overlay" />
         <Dialog.Popup
           className={['sheet', className].filter(Boolean).join(' ')}
           data-side={side}
           onAnimationEndCapture={onAnimationEndCapture}
           {...rest}
         >
-          <header className="sheet__header">
+          <DialogHeader layout="stacked" className="sheet__header">
             {titleHidden ? (
               <Dialog.Title render={<VisuallyHidden>{title}</VisuallyHidden>} />
             ) : (
@@ -103,7 +104,7 @@ export function Sheet({
                 {description}
               </Dialog.Description>
             )}
-          </header>
+          </DialogHeader>
 
           <Dialog.Close className="sheet__close" render={<CloseButton label={closeLabel} />} />
 

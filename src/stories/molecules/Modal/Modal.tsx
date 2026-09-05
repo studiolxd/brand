@@ -1,6 +1,7 @@
 import { Dialog } from '@base-ui/react/dialog';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { DialogFooter, DialogHeader, DialogOverlay } from '../_shared/dialogSurface';
 import './Modal.css';
 
 export interface ModalProps
@@ -102,19 +103,19 @@ export function Modal({
   return (
     <Dialog.Root open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <Dialog.Portal container={container}>
-        <Dialog.Backdrop className="modal__overlay" />
+        <DialogOverlay className="modal__overlay" />
         <Dialog.Popup className="modal__content" {...describedByProps} {...initialFocusProps} {...rest}>
           {title ? (
-            <header className="modal__header">
+            <DialogHeader layout="inline" className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
               <Dialog.Close className="modal__close" render={<CloseButton label={closeLabel} />} />
-            </header>
+            </DialogHeader>
           ) : (
             <>
               <Dialog.Title render={<VisuallyHidden>{fallbackTitle}</VisuallyHidden>} />
-              <header className="modal__header modal__header--no-title">
+              <DialogHeader layout="inline" noTitle className="modal__header modal__header--no-title">
                 <Dialog.Close className="modal__close" render={<CloseButton label={closeLabel} />} />
-              </header>
+              </DialogHeader>
             </>
           )}
           {description != null && (
@@ -122,7 +123,9 @@ export function Modal({
           )}
           <div className="modal__body">{children}</div>
           {footer != null && (
-            <div className={['modal__footer', footerClassName].filter(Boolean).join(' ')}>{footer}</div>
+            <DialogFooter className={['modal__footer', footerClassName].filter(Boolean).join(' ')}>
+              {footer}
+            </DialogFooter>
           )}
         </Dialog.Popup>
       </Dialog.Portal>

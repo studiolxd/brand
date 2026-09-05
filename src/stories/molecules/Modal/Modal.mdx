@@ -15,6 +15,11 @@ interacción con lo que hay detrás, tras un velo. Es la base de `Sheet`,
 - Para un aviso que convive con la página, `Alert`.
 - Para un panel lateral que deja ver el contexto, `Sheet`.
 
+**El velo, la cabecera y el pie no son suyos**: son la superficie de diálogo
+del sistema, escrita una sola vez y compartida con `Sheet` — este diálogo es
+su colocación centrada y el cajón, la lateral. Lo que pone cada uno son sus
+tokens (`modal.*` / `sheet.*`), así que sobrescribirlos sigue mandando.
+
 <Canvas of={ModalStories.WithForm} />
 
 ## Anatomía

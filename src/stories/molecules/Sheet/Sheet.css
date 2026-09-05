@@ -1,27 +1,13 @@
-@keyframes sheet-overlay-in {
-  from { opacity: 0; }
-  to   { opacity: var(--sheet-backdrop-opacity); }
-}
-
-@keyframes sheet-overlay-out {
-  from { opacity: var(--sheet-backdrop-opacity); }
-  to   { opacity: 0; }
-}
-
+/* El velo, la cabecera y el pie los pone la superficie de diálogo compartida
+   (`molecules/_shared/dialogSurface.css`), la misma que usa `Modal`; el cajón
+   solo dice con qué tokens se pintan y añade lo que es suyo: la dirección de
+   entrada y el aspa sobre la esquina. */
 .sheet__overlay {
-  position: fixed;
-  inset: 0;
-  z-index: var(--sheet-backdrop-z-index);
-  background-color: var(--sheet-backdrop-bg);
-  opacity: var(--sheet-backdrop-opacity);
-}
-
-.sheet__overlay[data-open] {
-  animation: sheet-overlay-in var(--sheet-transition-duration) var(--sheet-transition-easing) forwards;
-}
-
-.sheet__overlay[data-closed] {
-  animation: sheet-overlay-out var(--sheet-transition-duration) var(--sheet-transition-easing) forwards;
+  --dialog-overlay-bg:          var(--sheet-backdrop-bg);
+  --dialog-overlay-opacity:     var(--sheet-backdrop-opacity);
+  --dialog-overlay-z-index:     var(--sheet-backdrop-z-index);
+  --dialog-transition-duration: var(--sheet-transition-duration);
+  --dialog-transition-easing:   var(--sheet-transition-easing);
 }
 
 .sheet {
@@ -79,11 +65,9 @@
 .sheet[data-side='bottom'][data-closed] { animation-name: sheet-out-bottom; }
 
 .sheet__header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sheet-header-gap);
-  /* Deja sitio al botón de cierre, que va posicionado sobre la esquina. */
-  padding-inline-end: var(--sheet-padding-inline);
+  --dialog-header-gap: var(--sheet-header-gap);
+  /* Sitio para el aspa, que va posicionada sobre la esquina. */
+  --dialog-header-close-room: var(--sheet-padding-inline);
 }
 
 .sheet__title {
@@ -118,26 +102,6 @@
   min-height: 0;
 }
 
-/* Mismo criterio que el pie de `Modal` (ver Modal.css): por debajo del punto
-   de ruptura los botones se apilan a todo el ancho en `column-reverse`, con la
-   acción principal arriba, y a partir de ahí vuelven a la fila de la derecha.
-   Un cajón en un móvil estrecho lo necesita igual que un diálogo. */
 .sheet__footer {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: var(--sheet-footer-gap);
-}
-
-.sheet__footer > * {
-  inline-size: 100%;
-}
-
-@media (min-width: 768px) /* --breakpoint-md */ {
-  .sheet__footer {
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-  .sheet__footer > * {
-    inline-size: auto;
-  }
+  --dialog-footer-gap: var(--sheet-footer-gap);
 }
