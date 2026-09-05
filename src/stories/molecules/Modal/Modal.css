@@ -54,7 +54,7 @@
   font-size: var(--modal-title-font-size);
   font-weight: var(--modal-title-font-weight);
   color: var(--modal-title-color);
-  line-height: 1.2;
+  line-height: var(--modal-title-line-height);
   margin: 0;
   flex: 1;
 }
@@ -69,6 +69,18 @@
   --close-button-focus-ring-width:  var(--modal-close-focus-ring-width);
   --close-button-focus-ring-offset: var(--modal-close-focus-ring-offset);
   --close-button-focus-ring-color:  var(--modal-close-focus-ring-color);
+}
+
+/* El aspa se centra sobre la PRIMERA línea del título (la cabecera ya alinea
+   arriba): la mitad de lo que sobra entre la altura de esa línea —cuerpo por
+   interlineado, los dos del título— y la caja del propio aspa. Sale de los
+   tokens, así que sigue cuadrando si cambia el título o la talla del botón
+   (en la superficie pública el aspa sube a `lg`). Sin título no hay línea
+   con la que cuadrar: ahí el aspa se queda donde la deja su esquina. */
+.modal__header:not(.modal__header--no-title) .modal__close.close-button {
+  margin-block-start: calc(
+    (var(--modal-title-font-size) * var(--modal-title-line-height) - var(--modal-close-size)) / 2
+  );
 }
 
 .modal__description {

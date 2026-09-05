@@ -41,6 +41,19 @@ Escape o clic fuera; el DS pone la superficie, el título y el aspa.
 <Canvas of={ModalStories.WithDescription} />
 <Canvas of={ModalStories.WithExternalDescription} />
 
+### El aspa va con la primera línea del título
+
+Título y aspa se alinean **arriba**, no al centro: con un título de dos líneas,
+centrada, el aspa quedaba flotando en medio de la cabecera y lejos de la esquina
+donde la mano la busca. El ajuste óptico que la baja hasta el eje de esa primera
+línea sale de los tokens del propio título —`title-font-size` por
+`title-line-height`, menos la caja del aspa (`close-size`), a la mitad—, así que
+cuadra igual si cambia el cuerpo del título o si el aspa sube a `lg` en la
+superficie pública. Sin título no hay línea con la que cuadrar: ahí el aspa se
+queda en su esquina.
+
+<Canvas of={ModalStories.TituloLargo} />
+
 ## Confirmación
 
 <Canvas of={ModalStories.Confirm} />
