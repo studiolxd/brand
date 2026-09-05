@@ -12,7 +12,7 @@ import { ImageCropDialog } from './ImageCropDialog';
  */
 describe('ImageCropDialog', () => {
   const baseProps = {
-    title: 'Recorta tu avatar',
+    title: 'Recortar imagen',
     description: 'Arrastra para ajustar',
     outputMimeType: 'image/jpeg' as const,
     cancelLabel: 'Cancelar',
@@ -28,7 +28,7 @@ describe('ImageCropDialog', () => {
 
   it('abre con el título y la descripción accesibles al recibir una fuente', () => {
     render(<ImageCropDialog {...baseProps} sourceUrl="blob:fake" />);
-    const dialog = screen.getByRole('dialog', { name: 'Recorta tu avatar' });
+    const dialog = screen.getByRole('dialog', { name: 'Recortar imagen' });
     expect(dialog).toHaveAccessibleDescription('Arrastra para ajustar');
   });
 

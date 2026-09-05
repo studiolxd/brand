@@ -65,7 +65,7 @@ export const Organizacion: Story = {
     shape: 'square',
     outputMimeType: 'image/png',
     buttonAccessibleLabel: 'Subir logo',
-    cropTitle: 'Recorta el logotipo',
+    cropTitle: 'Recortar logotipo',
   },
 };
 

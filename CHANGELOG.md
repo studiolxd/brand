@@ -35,6 +35,12 @@ para breaking changes.
 - Tokens nuevos `modal.footer-margin-block-start` y `modal.footer-gap`
   repuntado a `{form.actions-gap}`: la fila de acciones del sistema es una
   sola, esté en un formulario o en un diálogo.
+- **`ImageCropDialog` — el copy del recorte.** El título nombra la acción y no
+  invita a hacerla: el default de `AvatarUpload` pasa de «Recorta la imagen» a
+  **«Recortar imagen»**, y los ejemplos de stories y docs van con él. La
+  descripción del diálogo **deja de tener default**: lo que hay en pantalla es
+  la imagen con su marco de selección, que se explica solo. `cropDescription`
+  sigue existiendo para quien tenga algo que decir.
 
 ## v30.7.0
 

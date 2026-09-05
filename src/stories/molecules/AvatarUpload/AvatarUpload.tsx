@@ -95,9 +95,17 @@ export interface AvatarUploadProps {
    */
   dropActiveMessage?: string;
 
-  /** Título del diálogo de recorte. Default: "Recorta la imagen". */
+  /**
+   * Título del diálogo de recorte. Default: "Recortar imagen" (castellano).
+   * Es una acción, no una invitación: nombra lo que va a pasar, sin segunda
+   * persona, como el resto de títulos de diálogo del sistema.
+   */
   cropTitle?: string;
-  /** Descripción del diálogo. Default: "Arrastra para ajustar la selección." */
+  /**
+   * Descripción del diálogo de recorte. **Sin default**: el diálogo enseña la
+   * imagen y su marco de selección, que se explican solos. Pásala solo si en
+   * tu caso hay algo que decir que no esté ya a la vista.
+   */
   cropDescription?: ReactNode;
   /** Default: "Cancelar". */
   cropCancelLabel?: ReactNode;
@@ -160,8 +168,8 @@ export function AvatarUpload({
   invalidTypeError = (formats) => `Formato no admitido. Se aceptan ${formats}.`,
   tooLargeError = (max) => `El archivo pesa demasiado. El máximo es ${max}.`,
   dropActiveMessage = 'Suelta la imagen sobre el avatar para subirla',
-  cropTitle = 'Recorta la imagen',
-  cropDescription = 'Arrastra para ajustar la selección.',
+  cropTitle = 'Recortar imagen',
+  cropDescription,
   cropCancelLabel = 'Cancelar',
   cropConfirmLabel = 'Guardar',
   cropCloseLabel = 'Cerrar',
