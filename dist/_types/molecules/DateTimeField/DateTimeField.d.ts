@@ -1,3 +1,4 @@
+import type { DatePickerProps } from '../DatePicker/DatePicker';
 import type { CalendarProps } from '../Calendar/Calendar';
 import './DateTimeField.css';
 export interface DateTimeFieldProps {
@@ -32,6 +33,26 @@ export interface DateTimeFieldProps {
     locale?: string;
     /** Se añade DESPUÉS de las clases propias (el consumidor añade, no sustituye). */
     className?: string;
+    /** Nombre accesible del panel del calendario. Default: la etiqueta del campo. */
+    calendarLabel?: DatePickerProps['calendarLabel'];
+    /** Nombre accesible del botón que abre el calendario. Default castellano. */
+    openCalendarLabel?: DatePickerProps['openCalendarLabel'];
+    /** Mensaje de fecha incompleta del campo de texto. Default castellano. */
+    invalidMessage?: DatePickerProps['invalidMessage'];
+    /** Letras de la máscara del marcador de posición. Default castellano. */
+    maskLetters?: DatePickerProps['maskLetters'];
+    /** aria-label del botón de mes anterior del calendario. Default castellano. */
+    previousMonthLabel?: DatePickerProps['previousMonthLabel'];
+    /** aria-label del botón de mes siguiente. Default castellano. */
+    nextMonthLabel?: DatePickerProps['nextMonthLabel'];
+    /** aria-label del botón de retroceso en la vista de años. Default castellano. */
+    previousYearsLabel?: DatePickerProps['previousYearsLabel'];
+    /** aria-label del botón de avance en la vista de años. Default castellano. */
+    nextYearsLabel?: DatePickerProps['nextYearsLabel'];
+    /** aria-label de la rejilla de años. Default castellano. */
+    yearGridLabel?: DatePickerProps['yearGridLabel'];
+    /** aria-label de la rejilla de días. Default: `calendarLabel`. */
+    gridLabel?: DatePickerProps['gridLabel'];
     /** aria-label del desplegable de horas. Default: "Horas" (castellano). */
     hoursLabel?: string;
     /** aria-label del desplegable de minutos. Default: "Minutos" (castellano). */

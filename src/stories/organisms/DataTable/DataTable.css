@@ -25,3 +25,24 @@
   flex: 1 1 auto;
   min-inline-size: 0;
 }
+
+/* ── Alineación por columna ──────────────────────────── */
+
+/* `meta.align` de la columna se traduce aquí, en cabecera y celda a la vez:
+   una columna alineada de una forma en el cuerpo y de otra en su rótulo se
+   lee como dos columnas. `start` es el default y no emite clase, así que la
+   cabecera se queda con el `text-align` de `Table`.
+
+   Doble clase para ganar a `.table__header`, que ya fija su alineación. El
+   contenido de la celda es inline (texto, un `Tag`, el botón de acciones, o
+   el `<button>` inline-flex de la cabecera ordenable), así que `text-align`
+   basta: no hay caja flex propia que alinear. */
+.data-table__cell.data-table__cell--center,
+.data-table__header-cell.data-table__header-cell--center {
+  text-align: center;
+}
+
+.data-table__cell.data-table__cell--end,
+.data-table__header-cell.data-table__header-cell--end {
+  text-align: end;
+}

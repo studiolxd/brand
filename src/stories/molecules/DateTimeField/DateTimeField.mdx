@@ -79,6 +79,15 @@ El contrato es `value` / `onChange` + `name` + `ref` al campo de la fecha. `onCh
 - El mensaje de error se anuncia (`role="alert"`).
 - Meses y días del calendario salen de `Intl` con el `locale`: no son props de texto.
 
+## Textos
+
+Todos los del `DatePicker` se reexponen con los mismos nombres y defaults
+(`openCalendarLabel`, `invalidMessage`, `maskLetters` y los del calendario:
+`previousMonthLabel`, `nextMonthLabel`, `previousYearsLabel`, `nextYearsLabel`,
+`yearGridLabel`, `gridLabel`), más `hoursLabel` y `minutesLabel` para el selector de
+hora. `calendarLabel` cae por defecto a la etiqueta del campo. La convención completa
+está en **Foundations › Internacionalización**.
+
 ## Tokens
 
 El campo aporta el ritmo (`gap`), el aire entre fecha y hora (`controls-gap`) y los textos de ayuda y error, que referencian los de `form.*`.

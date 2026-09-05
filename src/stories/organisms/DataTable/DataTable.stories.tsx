@@ -79,6 +79,52 @@ export const ConAcciones: Story = {
   },
 };
 
+type Invoice = {
+  id: string;
+  number: string;
+  status: 'paid' | 'pending';
+  amount: string;
+};
+
+const invoices: Invoice[] = [
+  { id: '1', number: 'F-2026-001', status: 'paid', amount: '1.240,00 €' },
+  { id: '2', number: 'F-2026-002', status: 'pending', amount: '380,50 €' },
+  { id: '3', number: 'F-2026-003', status: 'paid', amount: '12.900,00 €' },
+];
+
+const alignedColumns: ColumnDef<Invoice, unknown>[] = [
+  { accessorKey: 'number', header: 'Factura' },
+  {
+    accessorKey: 'status',
+    header: 'Estado',
+    cell: ({ row }) => (
+      <Tag variant={row.original.status === 'paid' ? 'success' : 'neutral'}>
+        {row.original.status === 'paid' ? 'Pagada' : 'Pendiente'}
+      </Tag>
+    ),
+    meta: { align: 'center' },
+  },
+  { accessorKey: 'amount', header: 'Importe', meta: { align: 'end' } },
+  {
+    id: 'actions',
+    header: 'Acciones',
+    cell: () => (
+      <Button variant="text" size="sm">Ver</Button>
+    ),
+    meta: { align: 'center' },
+  },
+];
+
+const InvoiceTable = DataTable<Invoice, unknown>;
+
+export const ColumnasAlineadas: StoryObj<typeof InvoiceTable> = {
+  name: 'Columnas alineadas',
+  args: { ariaLabel: 'Facturas' },
+  render: (args) => (
+    <InvoiceTable {...args} columns={alignedColumns} data={invoices} pageSize={5} />
+  ),
+};
+
 export const Cargando: Story = {
   args: { columns, data: [], isLoading: true, pageSize: 5 },
 };

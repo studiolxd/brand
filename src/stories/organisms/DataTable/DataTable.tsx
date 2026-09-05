@@ -8,8 +8,10 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  type Column,
   type ColumnDef,
   type ColumnFiltersState,
+  type RowData,
   type SortingState,
 } from '@tanstack/react-table';
 import { EmptyState } from '../../molecules/EmptyState/EmptyState';
@@ -26,6 +28,39 @@ import {
   type TableHeaderProps,
 } from '../../molecules/Table/Table';
 import './DataTable.css';
+
+/** Alineación del contenido de una columna. `start` es el default. */
+export type DataTableAlign = 'start' | 'center' | 'end';
+
+/*
+  Module augmentation de TanStack: `meta` es su punto de extensión tipado, y
+  así la alineación viaja con la definición de la columna (donde ya viven
+  `header` y `cell`) en vez de en una lista paralela de ids.
+*/
+declare module '@tanstack/react-table' {
+  // TanStack declara los dos parámetros; la interfaz no los usa, pero la
+  // firma debe coincidir para que la fusión sea válida.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    /**
+     * Alineación del contenido de la columna, en cabecera y celda. Default
+     * `start`. Números a `end`; acciones y estados a `center`.
+     */
+    align?: DataTableAlign;
+  }
+}
+
+/**
+ * Modificador BEM de alineación, o cadena vacía para `start` (el default no
+ * emite clase).
+ */
+function alignClass<TData, TValue>(
+  element: 'cell' | 'header-cell',
+  column: Column<TData, TValue>
+): string {
+  const align = column.columnDef.meta?.align;
+  return align && align !== 'start' ? `data-table__${element}--${align}` : '';
+}
 
 /**
  * Paginación en servidor: `data` es una página ya recortada y el pie refleja
@@ -194,9 +229,11 @@ export function DataTable<TData, TValue>({
                 {headerGroup.headers.map((header) => {
                   const sorted = header.column.getIsSorted();
                   const canSort = header.column.getCanSort();
+                  const align = alignClass('header-cell', header.column);
                   return (
                     <TableHeader
                       key={header.id}
+                      className={['data-table__header-cell', align].filter(Boolean).join(' ')}
                       sortable={canSort}
                       sorted={sorted === 'asc' || sorted === 'desc' ? sorted : false}
                       onSort={canSort ? () => header.column.toggleSorting() : undefined}
@@ -232,7 +269,12 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} selected={row.getIsSelected()}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={['data-table__cell', alignClass('cell', cell.column)]
+                        .filter(Boolean)
+                        .join(' ')}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

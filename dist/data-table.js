@@ -287,57 +287,57 @@ var O = (e, t, n, r, i, a, o) => {
 	e._getFacetedRowModel = t.options.getFacetedRowModel && t.options.getFacetedRowModel(t, e.id), e.getFacetedRowModel = () => e._getFacetedRowModel ? e._getFacetedRowModel() : t.getPreFilteredRowModel(), e._getFacetedUniqueValues = t.options.getFacetedUniqueValues && t.options.getFacetedUniqueValues(t, e.id), e.getFacetedUniqueValues = () => e._getFacetedUniqueValues ? e._getFacetedUniqueValues() : /* @__PURE__ */ new Map(), e._getFacetedMinMaxValues = t.options.getFacetedMinMaxValues && t.options.getFacetedMinMaxValues(t, e.id), e.getFacetedMinMaxValues = () => {
 		if (e._getFacetedMinMaxValues) return e._getFacetedMinMaxValues();
 	};
-} }, te = (e, t, n) => {
+} }, k = (e, t, n) => {
 	var r, i;
 	let a = n == null || (r = n.toString()) == null ? void 0 : r.toLowerCase();
 	return !!(!((i = e.getValue(t)) == null || (i = i.toString()) == null || (i = i.toLowerCase()) == null) && i.includes(a));
 };
-te.autoRemove = (e) => I(e);
-var ne = (e, t, n) => {
+k.autoRemove = (e) => I(e);
+var te = (e, t, n) => {
 	var r;
 	return !!(!((r = e.getValue(t)) == null || (r = r.toString()) == null) && r.includes(n));
 };
-ne.autoRemove = (e) => I(e);
-var k = (e, t, n) => {
+te.autoRemove = (e) => I(e);
+var ne = (e, t, n) => {
 	var r;
 	return ((r = e.getValue(t)) == null || (r = r.toString()) == null ? void 0 : r.toLowerCase()) === n?.toLowerCase();
 };
-k.autoRemove = (e) => I(e);
-var A = (e, t, n) => e.getValue(t)?.includes(n);
-A.autoRemove = (e) => I(e);
-var j = (e, t, n) => !n.some((n) => {
+ne.autoRemove = (e) => I(e);
+var re = (e, t, n) => e.getValue(t)?.includes(n);
+re.autoRemove = (e) => I(e);
+var A = (e, t, n) => !n.some((n) => {
 	var r;
 	return !((r = e.getValue(t)) != null && r.includes(n));
 });
+A.autoRemove = (e) => I(e) || !(e != null && e.length);
+var j = (e, t, n) => n.some((n) => e.getValue(t)?.includes(n));
 j.autoRemove = (e) => I(e) || !(e != null && e.length);
-var M = (e, t, n) => n.some((n) => e.getValue(t)?.includes(n));
-M.autoRemove = (e) => I(e) || !(e != null && e.length);
-var N = (e, t, n) => e.getValue(t) === n;
+var M = (e, t, n) => e.getValue(t) === n;
+M.autoRemove = (e) => I(e);
+var N = (e, t, n) => e.getValue(t) == n;
 N.autoRemove = (e) => I(e);
-var P = (e, t, n) => e.getValue(t) == n;
-P.autoRemove = (e) => I(e);
-var re = (e, t, n) => {
+var P = (e, t, n) => {
 	let [r, i] = n, a = e.getValue(t);
 	return a >= r && a <= i;
 };
-re.resolveFilterValue = (e) => {
+P.resolveFilterValue = (e) => {
 	let [t, n] = e, r = typeof t == "number" ? t : parseFloat(t), i = typeof n == "number" ? n : parseFloat(n), a = t === null || Number.isNaN(r) ? -Infinity : r, o = n === null || Number.isNaN(i) ? Infinity : i;
 	if (a > o) {
 		let e = a;
 		a = o, o = e;
 	}
 	return [a, o];
-}, re.autoRemove = (e) => I(e) || I(e[0]) && I(e[1]);
+}, P.autoRemove = (e) => I(e) || I(e[0]) && I(e[1]);
 var F = {
-	includesString: te,
-	includesStringSensitive: ne,
-	equalsString: k,
-	arrIncludes: A,
-	arrIncludesAll: j,
-	arrIncludesSome: M,
-	equals: N,
-	weakEquals: P,
-	inNumberRange: re
+	includesString: k,
+	includesStringSensitive: te,
+	equalsString: ne,
+	arrIncludes: re,
+	arrIncludesAll: A,
+	arrIncludesSome: j,
+	equals: M,
+	weakEquals: N,
+	inNumberRange: P
 };
 function I(e) {
 	return e == null || e === "";
@@ -1560,17 +1560,21 @@ function Ue(e) {
 }
 //#endregion
 //#region src/stories/organisms/DataTable/DataTable.tsx
-function We({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumnId: v, search: y, searchPlaceholder: b, searchClearLabel: x, toolbar: S, pageSize: C = 10, emptyMessage: w = "Sin resultados", isLoading: T, pagination: E, headerLabels: D, paginationLabels: O, className: ee }) {
+function We(e, t) {
+	let n = t.columnDef.meta?.align;
+	return n && n !== "start" ? `data-table__${e}--${n}` : "";
+}
+function Ge({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumnId: v, search: y, searchPlaceholder: b, searchClearLabel: x, toolbar: S, pageSize: C = 10, emptyMessage: w = "Sin resultados", isLoading: T, pagination: E, headerLabels: D, paginationLabels: O, className: ee }) {
 	"use no memo";
-	let [te, ne] = m([]), [k, A] = m([]), j = Ue({
+	let [k, te] = m([]), [ne, re] = m([]), A = Ue({
 		data: h,
 		columns: f,
 		state: {
-			sorting: te,
-			columnFilters: k
+			sorting: k,
+			columnFilters: ne
 		},
-		onSortingChange: ne,
-		onColumnFiltersChange: A,
+		onSortingChange: te,
+		onColumnFiltersChange: re,
 		getCoreRowModel: je(),
 		getSortedRowModel: Re(),
 		getFilteredRowModel: Ie(),
@@ -1578,7 +1582,7 @@ function We({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 			getPaginationRowModel: Le(),
 			initialState: { pagination: { pageSize: C } }
 		}
-	}), M = E?.pageSize ?? C, N = b ?? "Buscar", P = `${p()}-search`;
+	}), j = E?.pageSize ?? C, M = b ?? "Buscar", N = `${p()}-search`;
 	return /* @__PURE__ */ d("div", {
 		className: ["data-table", ee].filter(Boolean).join(" "),
 		children: [
@@ -1586,24 +1590,24 @@ function We({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 				className: "data-table__toolbar",
 				children: [y ? /* @__PURE__ */ u(c, {
 					className: "data-table__search",
-					id: P,
+					id: N,
 					kind: "search",
 					clearable: !0,
-					label: N,
+					label: M,
 					labelHidden: !0,
 					...x ? { clearLabel: x } : {},
 					value: y.value,
 					onChange: (e) => y.onChange(e.target.value)
 				}) : v && /* @__PURE__ */ u(c, {
 					className: "data-table__search",
-					id: P,
+					id: N,
 					kind: "search",
 					clearable: !0,
-					label: N,
+					label: M,
 					labelHidden: !0,
 					...x ? { clearLabel: x } : {},
-					value: j.getColumn(v)?.getFilterValue() ?? "",
-					onChange: (e) => j.getColumn(v)?.setFilterValue(e.target.value)
+					value: A.getColumn(v)?.getFilterValue() ?? "",
+					onChange: (e) => A.getColumn(v)?.setFilterValue(e.target.value)
 				}), S && /* @__PURE__ */ u("div", {
 					className: "data-table__toolbar-actions",
 					children: S
@@ -1615,27 +1619,31 @@ function We({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 					"aria-label": g,
 					"aria-labelledby": _,
 					"aria-busy": T || void 0,
-					children: [/* @__PURE__ */ u(a, { children: j.getHeaderGroups().map((e) => /* @__PURE__ */ u(s, { children: e.headers.map((e) => {
+					children: [/* @__PURE__ */ u(a, { children: A.getHeaderGroups().map((e) => /* @__PURE__ */ u(s, { children: e.headers.map((e) => {
 						let t = e.column.getIsSorted(), n = e.column.getCanSort();
 						return /* @__PURE__ */ u(o, {
+							className: ["data-table__header-cell", We("header-cell", e.column)].filter(Boolean).join(" "),
 							sortable: n,
 							sorted: t === "asc" || t === "desc" ? t : !1,
 							onSort: n ? () => e.column.toggleSorting() : void 0,
 							...D,
 							children: e.isPlaceholder ? null : ze(e.column.columnDef.header, e.getContext())
 						}, e.id);
-					}) }, e.id)) }), /* @__PURE__ */ u(r, { children: T ? Array.from({ length: M }).map((t, n) => /* @__PURE__ */ u(s, {
+					}) }, e.id)) }), /* @__PURE__ */ u(r, { children: T ? Array.from({ length: j }).map((t, n) => /* @__PURE__ */ u(s, {
 						"aria-hidden": "true",
 						children: f.map((t, n) => /* @__PURE__ */ u(i, { children: /* @__PURE__ */ u(e, {}) }, n))
-					}, n)) : j.getRowModel().rows.length === 0 ? /* @__PURE__ */ u(s, { children: /* @__PURE__ */ u(i, {
+					}, n)) : A.getRowModel().rows.length === 0 ? /* @__PURE__ */ u(s, { children: /* @__PURE__ */ u(i, {
 						colSpan: f.length,
 						children: /* @__PURE__ */ u(l, {
 							size: "sm",
 							title: w
 						})
-					}) }) : j.getRowModel().rows.map((e) => /* @__PURE__ */ u(s, {
+					}) }) : A.getRowModel().rows.map((e) => /* @__PURE__ */ u(s, {
 						selected: e.getIsSelected(),
-						children: e.getVisibleCells().map((e) => /* @__PURE__ */ u(i, { children: ze(e.column.columnDef.cell, e.getContext()) }, e.id))
+						children: e.getVisibleCells().map((e) => /* @__PURE__ */ u(i, {
+							className: ["data-table__cell", We("cell", e.column)].filter(Boolean).join(" "),
+							children: ze(e.column.columnDef.cell, e.getContext())
+						}, e.id))
 					}, e.id)) })]
 				})
 			}),
@@ -1650,10 +1658,10 @@ function We({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 					showTotal: !0,
 					...O
 				}) : /* @__PURE__ */ u(t, {
-					total: j.getFilteredRowModel().rows.length,
-					page: j.getState().pagination.pageIndex + 1,
-					pageSize: j.getState().pagination.pageSize,
-					onPageChange: (e) => j.setPageIndex(e - 1),
+					total: A.getFilteredRowModel().rows.length,
+					page: A.getState().pagination.pageIndex + 1,
+					pageSize: A.getState().pagination.pageSize,
+					onPageChange: (e) => A.setPageIndex(e - 1),
 					...O
 				})
 			})
@@ -1661,4 +1669,4 @@ function We({ columns: f, data: h, ariaLabel: g, ariaLabelledBy: _, searchColumn
 	});
 }
 //#endregion
-export { We as DataTable };
+export { Ge as DataTable };

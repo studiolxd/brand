@@ -20,8 +20,6 @@ del sistema, escrita una sola vez y compartida con `Sheet` — este diálogo es
 su colocación centrada y el cajón, la lateral. Lo que pone cada uno son sus
 tokens (`modal.*` / `sheet.*`), así que sobrescribirlos sigue mandando.
 
-<Canvas of={ModalStories.WithForm} />
-
 ## Anatomía
 
 Base UI `Dialog` aporta el portal, el velo, la trampa de foco y el cierre con
@@ -110,9 +108,7 @@ El tamaño del aspa no es una prop del consumidor: cambia solo por el token
 `modal.close-size` remapeado bajo `.site-shell` — el mismo `Modal`, montado en
 sitios distintos, se ve distinto.
 
-## Pie de acciones
-
-<Canvas of={ModalStories.ConPie} />
+## El pie: cuándo hay Cancelar
 
 La prop `footer` es el sitio de los botones del diálogo. El pie los reparte a
 la derecha en una fila y, **por debajo del punto de ruptura `md` (768px), los
@@ -121,7 +117,69 @@ apila a todo el ancho con la acción principal arriba**: es el mismo criterio
 Se pasan en el orden de la fila (la principal, la última) y el pie se encarga
 del resto.
 
-Vive en `Modal` una sola vez: `ConfirmDialog`, `ImageCropDialog`,
+<Canvas of={ModalStories.ConPie} />
+
+**Que haya `Cancelar` no lo decide el gusto: lo decide si el diálogo ejecuta
+algo.** El criterio del sistema, en tres reglas:
+
+### El diálogo ejecuta algo → lleva Cancelar
+
+Un formulario, una acción, una confirmación: hay un botón principal que **hace
+algo** al pulsarlo, así que hace falta la salida explícita que dice «no lo
+hagas».
+
+- `Cancelar` es un `Button variant="outline"` y va **el primero en el DOM** del
+  `footer`; el principal, después.
+- De ahí sale la colocación sola, sin CSS de producto: en escritorio `Cancelar`
+  a la izquierda y el principal a la derecha; por debajo de `md` el pie invierte
+  la columna (`column-reverse`) y el principal queda **arriba**, al alcance del
+  pulgar.
+
+<Canvas of={ModalStories.WithForm} />
+
+### Solo se mira, o elegir ya cierra → no lleva Cancelar
+
+Un diálogo **informativo** no ejecuta nada: no hay nada que cancelar. Un
+**selector** (elegir un ítem de una lista) tampoco: la elección *es* la acción y
+ya cierra el diálogo, así que un `Cancelar` sería un segundo camino a la misma
+salida que ya tienen el aspa y `Escape`.
+
+En los dos casos: se cierra con el aspa y con `Escape`, y **como mucho** un
+`Cerrar` en el pie —nunca un `Cancelar`, que promete deshacer algo que no ha
+pasado—.
+
+<Canvas of={ModalStories.Informativo} />
+<Canvas of={ModalStories.Selector} />
+
+### Los botones nunca van en las acciones del `Form`
+
+Dentro de un modal, un formulario **no** monta sus propios botones: irían en
+mitad del cuerpo con scroll, por encima del pie, y el diálogo acabaría con dos
+zonas de acción. Los botones van en el `footer` del `Modal` y el submit se ata
+al formulario con el atributo `form`:
+
+```tsx
+<Modal
+  title="Solicitar ausencia"
+  footer={
+    <>
+      <Button variant="outline" onClick={cerrar}>Cancelar</Button>
+      <Button type="submit" form="solicitar-ausencia">Guardar</Button>
+    </>
+  }
+>
+  <form id="solicitar-ausencia" onSubmit={enviar}>…</form>
+</Modal>
+```
+
+`form="<id>"` es HTML nativo: el botón envía ese formulario desde fuera de su
+árbol, con la validación del navegador intacta.
+
+`ConfirmDialog` ya cumple todo esto por construcción —es la primera regla
+horneada en un componente—: monta `Cancelar` en `outline` y primero, y el
+confirmar después. Un diálogo de confirmación se escribe con él, no a mano.
+
+El pie vive en `Modal` una sola vez: `ConfirmDialog`, `ImageCropDialog`,
 `CommandPalette` y `ConsentPreferences` son `Modal`, así que ninguno lo repite.
 `footerClassName` es el enganche para quien necesite ajustar solo el aire.
 

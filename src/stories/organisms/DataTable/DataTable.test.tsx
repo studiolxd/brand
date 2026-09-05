@@ -136,6 +136,39 @@ describe('DataTable', () => {
     expect(screen.getAllByRole('row')).toHaveLength(9); // 1 cabecera + las 8 recibidas
   });
 
+  it('alinea cabecera y celda con `meta.align`, y `start` no emite clase', () => {
+    const alineadas: ColumnDef<Row, unknown>[] = [
+      { accessorKey: 'name', header: 'Nombre' },
+      { accessorKey: 'email', header: 'Correo', meta: { align: 'start' } },
+      {
+        id: 'total',
+        header: 'Total',
+        cell: () => '42',
+        meta: { align: 'end' },
+      },
+      {
+        id: 'acciones',
+        header: 'Acciones',
+        cell: () => <button type="button">Abrir</button>,
+        meta: { align: 'center' },
+      },
+    ];
+    render(<DataTable columns={alineadas} data={data.slice(0, 1)} />);
+
+    const cabeceras = screen.getAllByRole('columnheader');
+    expect(cabeceras[0]).not.toHaveClass('data-table__header-cell--start');
+    expect(cabeceras[0].className).not.toMatch(/data-table__header-cell--/);
+    expect(cabeceras[1].className).not.toMatch(/data-table__header-cell--/);
+    expect(cabeceras[2]).toHaveClass('data-table__header-cell--end');
+    expect(cabeceras[3]).toHaveClass('data-table__header-cell--center');
+
+    const celdas = screen.getAllByRole('cell');
+    expect(celdas[0].className).not.toMatch(/data-table__cell--/);
+    expect(celdas[1].className).not.toMatch(/data-table__cell--/);
+    expect(celdas[2]).toHaveClass('data-table__cell--end');
+    expect(celdas[3]).toHaveClass('data-table__cell--center');
+  });
+
   it('reenvía las etiquetas accesibles a la paginación', () => {
     render(
       <DataTable
