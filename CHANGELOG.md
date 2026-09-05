@@ -7,6 +7,30 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.5.0
+
+- **Norma nueva del DS: el subrayado es una línea, no `text-decoration`.** Se
+  subraya con `box-shadow` y su `padding-block-end`, como ya hacían `Link` y
+  `Button --text`. Dos motivos: `text-decoration` no cubre un SVG —un elemento
+  con icono queda con la línea cortada— y su grosor y posición los deciden la
+  fuente y el navegador, así que no hay forma de que todos los subrayados
+  coincidan. Con **dos excepciones que no se amplían**: `vendor/normalize.css`,
+  que es de terceros, y `src/stories/email/`, donde Outlook renderiza con el
+  motor de Word y no pinta `box-shadow`.
+- **El barrido que trajo la norma**: `Stepper` (el hover de un paso navegable),
+  `ProjectCard` —que además arrastraba la línea en reposo sin anularla nunca,
+  contra lo que decía su propio MDX— y `Breadcrumb`, donde el subrayado entraba
+  **por token** y por eso no aparecía buscando en el CSS. Sus dos tokens quedan
+  en `none` y marcados obsoletos; retirarlos sería breaking.
+- **`OnboardingShell`**: más aire entre la salida y la acción principal del pie
+  (12 → 16px). No hizo falta separar el token: las tres acciones son hermanas.
+- **Correo**: el título sube a 32px por `{site-shell.heading-size-6}`, que es ese
+  valor en la escala de la superficie pública; el enlace de respaldo pasa a la
+  talla del cuerpo y **a su propia línea**, sin sacar barra horizontal a 320px
+  con una URL con token; y el botón **gana el hover** del `Button primary`
+  (lavanda → amarillo) en la hoja embebida, con el aviso escrito de dónde no
+  funciona: Outlook de escritorio lo ignora, y en móvil no hay hover.
+
 ## v30.4.1
 
 Los tres contratos que `test:stories` daba en rojo. La puerta llevaba tiempo sin
