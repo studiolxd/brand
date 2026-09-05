@@ -1,6 +1,6 @@
 # Nota de entrega — el campo de fecha se escribe, se borra y navega por años
 
-Rama `campo-fecha`, commit `a7f0647`. `pnpm release:check` en verde (lint · tsc ·
+Rama `campo-fecha`, commits `a7f0647` y `HEAD`. `pnpm release:check` en verde (lint · tsc ·
 test · build:all · `dist/` en sync). `test:stories` no se ha corrido: el brief lo
 deja al operador.
 
@@ -109,8 +109,13 @@ pedía el brief.
   (`.calendar-planner__nav:hover`). El brief hablaba solo de `.calendar__nav`; si
   la regla es del sistema y no de este componente, toca el mismo cambio ahí y en
   `CalendarRoster` si aplica.
-- Verificación visual en Storybook pendiente: el `localhost:6006` que hay en
-  marcha sirve otro checkout, no este worktree. La conducta está cubierta por
-  tests (Vitest jsdom: 16 del `DatePicker` + 6 nuevos del `Calendar`), pero el
-  ojo sobre el adorno dentro del campo y sobre la rejilla de años lo pongo como
-  paso del operador —o `pnpm storybook` en este directorio.
+- **Visto en Storybook** (instancia propia del worktree en el 6007, ya apagada):
+  campo con el glifo dentro del borde, panel colgando de la línea del control,
+  rejilla de años, error de fecha a medias y superficie oscura. De ahí salió el
+  único arreglo posterior: la vista de años encogía el panel unos 70 px —cuatro
+  columnas de año miden menos que siete de día—, así que la rejilla lleva ahora
+  un ancho mínimo igual al de la semana, por token y por talla. El
+  `localhost:6006` que hay en marcha sirve otro checkout, no este worktree.
+- Tests: 22 nuevos (Vitest) — 6 unitarios del formato/parseo, 10 del `DatePicker`
+  en jsdom y 6 de la vista de años del `Calendar`—, más las stories de prueba
+  (`Test — …`) que corren en `test:stories`.
