@@ -50,6 +50,7 @@
 @import "./components/hero.css";
 @import "./components/highlight.css";
 @import "./molecules/notification-button.css";
+@import "./molecules/notification-panel.css";
 @import "./molecules/textarea-field.css";
 @import "./molecules/select-field.css";
 @import "./molecules/multi-select-field.css";

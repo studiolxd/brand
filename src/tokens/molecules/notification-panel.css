@@ -1,0 +1,49 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --notification-panel-list-max-block-size: 21rem; /** Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta */
+  --notification-panel-item-body-line-clamp: 2; /** Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja */
+  --notification-panel-inline-size: min(22.5rem, calc(100vw - 2 * var(--spacing-5))); /** Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas */
+  --notification-panel-padding-inline: var(--spacing-4); /** Aire lateral de la cabecera, de las filas y del pie: el mismo, para que todo alinee en una sola columna */
+  --notification-panel-header-padding-block: var(--spacing-3); /** Aire vertical de la cabecera */
+  --notification-panel-list-padding-block: var(--spacing-2); /** Aire vertical de la lista dentro del panel */
+  --notification-panel-list-gap: var(--spacing-1); /** Separación entre notificaciones. Las filas no llevan línea: se separan con aire, y la línea queda reservada al hover */
+  --notification-panel-item-padding-block: var(--spacing-2); /** Aire vertical de cada notificación */
+  --notification-panel-item-gap: var(--spacing-2); /** Aire entre el punto de no leída y el texto */
+  --notification-panel-item-text-gap: var(--spacing-1); /** Aire entre el título, el cuerpo y la fecha */
+  --notification-panel-item-font-family: var(--font-family-sans); /** Familia tipográfica de la notificación */
+  --notification-panel-item-title-line-height: var(--line-height-snug); /** Interlineado del título */
+  --notification-panel-item-body-line-height: var(--line-height-snug); /** Interlineado del cuerpo */
+  --notification-panel-dot-size: var(--icon-size-sm); /** Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que la bandeja pinta ese punto. El círculo dibujado dentro mide unos 7px */
+  --notification-panel-dot-margin-block-start: var(--spacing-1); /** Baja el punto hasta el centro óptico de la primera línea del título */
+  --notification-panel-empty-padding-block: var(--spacing-6); /** Aire vertical del estado vacío: el hueco de la lista sin encogerse */
+  --notification-panel-footer-padding-block: var(--spacing-3); /** Aire vertical del pie */
+  --notification-panel-footer-gap: var(--spacing-2); /** Aire entre los enlaces del pie */
+  --notification-panel-transition-duration: var(--motion-duration-fast); /** Duración de la transición de la fila */
+  --notification-panel-transition-easing: var(--motion-easing-default); /** Curva de la transición de la fila */
+  --notification-panel-item-border-radius: var(--border-radius-default); /** Radio de cada notificación: recto, como todo el sistema */
+  --notification-panel-item-title-font-size: var(--text-font-size); /** El título de una notificación es texto corriente: hereda el cuerpo de la superficie */
+  --notification-panel-item-unread-font-weight: var(--font-weight-emphasis); /** Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno */
+  --notification-panel-item-read-font-weight: var(--font-weight-default); /** Peso del título ya leído: el del cuerpo de texto */
+  --notification-panel-item-body-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie */
+  --notification-panel-item-time-font-size: var(--text-paragraph-small-font-size); /** Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`) */
+  --notification-panel-item-hover-line-width: var(--border-width-default); /** Grosor de la línea que aparece bajo la fila con el puntero encima. Los estados no se rellenan (Foundations → Colores): se dicen con línea */
+  --notification-panel-item-hover-line-color: var(--color-primary); /** Color de esa línea: el prusia del sistema */
+  --notification-panel-dot-color: var(--color-error-fill); /** Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones */
+  --notification-panel-view-font-size: var(--text-paragraph-small-font-size); /** Tamaño del enlace «Ver» de una notificación con destino: letra menor, como el pie */
+  --notification-panel-footer-font-size: var(--text-paragraph-small-font-size); /** Tamaño de los enlaces del pie: letra menor */
+  --notification-panel-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco de una fila */
+  --notification-panel-focus-ring-color: var(--color-primary); /** Color del anillo de foco de una fila */
+  --notification-panel-separator-thickness: var(--separator-thickness); /** Grosor de las dos líneas que enmarcan la lista (bajo la cabecera y sobre el pie) — el grosor de la línea del sistema */
+  --notification-panel-separator-color: var(--separator-color); /** Color de esas dos líneas — el de la línea del sistema */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --notification-panel-separator-color: var(--color-text-on-dark); /** Color de las líneas que enmarcan la lista — superficie oscura */
+  --notification-panel-item-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover de la fila — superficie oscura */
+  --notification-panel-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */
+}

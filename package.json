@@ -335,6 +335,10 @@
       "types": "./dist/_types/molecules/NotificationButton/NotificationButton.d.ts",
       "import": "./dist/notification-button.js"
     },
+    "./notification-panel": {
+      "types": "./dist/_types/molecules/NotificationPanel/NotificationPanel.d.ts",
+      "import": "./dist/notification-panel.js"
+    },
     "./link": {
       "types": "./dist/_types/atoms/Link/Link.d.ts",
       "import": "./dist/link.js"
