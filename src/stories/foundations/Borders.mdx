@@ -42,6 +42,8 @@ Hay **dos excepciones**, y no se amplían:
 - **`src/vendor/normalize.css`**, que es código de terceros y no se toca: su `abbr[title] { text-decoration: underline dotted }` es la normalización del navegador, no un subrayado del sistema. Si algún día molesta, se anula en el componente, no en el vendor.
 - **El correo (`src/stories/email/`)**, cuyo medio no es un navegador. Outlook de escritorio renderiza con el motor de Word, que no pinta `box-shadow`, y un correo no tiene hoja de estilos donde colgar la línea: todo va inline. Allí el enlace se subraya con `text-decoration: underline` y se desubraya en hover —el mismo dibujo que en la web, con la única técnica que el medio entiende.
 
+La regla no depende de que alguien se acuerde: un test unitario (`src/stylesheets/underline.test.ts`) barre los `.css` de `src/` y los valores de los tokens de `tokens/` —por ahí entraba el subrayado sin aparecer en el CSS— y falla si vuelve a colarse un `text-decoration: underline`. Las dos excepciones, con su motivo, están escritas en el propio test: ampliarlas obliga a justificarlas ahí.
+
 ---
 
 ## Tokens
