@@ -1,0 +1,83 @@
+/* La lista: solo el aire entre filas. Cada fila trae su propio reparto.
+   Apiladas, las filas piden más aire que el que separa los campos dentro de
+   una: si fuera el mismo, la lista se leería como una sola pila de campos. */
+.field-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--field-row-rows-stack-gap);
+}
+
+.field-rows__empty {
+  font-size: var(--field-row-empty-font-size);
+  line-height: var(--field-row-empty-line-height);
+  color: var(--field-row-empty-color);
+}
+
+/* Móvil: los campos, apilados a ancho completo; la acción, la última y al
+   margen. `flex-wrap` es lo que la baja de línea sin duplicar la maqueta. */
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: var(--field-row-column-gap);
+  row-gap: var(--field-row-row-gap);
+}
+
+.field-row__cell {
+  flex: 1 1 100%;
+  min-inline-size: 0;
+}
+
+.field-row__action {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  /* Al margen: en móvil la empuja al final de su línea; en columnas no hace
+     nada, porque la celda que crece ya se ha comido el sobrante. */
+  margin-inline-start: auto;
+}
+
+/* El hueco de la etiqueta solo existe cuando hay columnas que alinear. */
+.field-row__action-offset {
+  display: none;
+}
+
+/* Tabletas y escritorio: el reparto mixto. */
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .field-rows {
+    gap: var(--field-row-rows-gap);
+  }
+
+  .field-row {
+    flex-wrap: nowrap;
+  }
+
+  /* La celda que absorbe el sobrante: el campo largo (un correo). */
+  .field-row__cell--grow { flex: 1 1 0; }
+  /* Anchos propios. Pueden encoger si la fila se queda sin sitio, nunca crecer. */
+  .field-row__cell--sm   { flex: 0 1 var(--field-row-cell-sm); }
+  .field-row__cell--md   { flex: 0 1 var(--field-row-cell-md); }
+  .field-row__cell--lg   { flex: 0 1 var(--field-row-cell-lg); }
+  /* Manda el contenido. */
+  .field-row__cell--auto { flex: 0 0 auto; }
+
+  .field-row__action-offset {
+    display: block;
+    block-size: calc(
+      var(--field-row-label-font-size) * var(--field-row-label-line-height) +
+      var(--field-row-label-gap)
+    );
+  }
+}
+
+/* Tallas: la etiqueta cambia de cuerpo con el control —y con ella el hueco que
+   baja la acción—, y los anchos propios suben un peldaño en `lg`: la misma
+   medida con letra de 20px se queda corta («Administración» bajo su flecha).
+   `sm` no cambia: su etiqueta y su letra son las de `md`. */
+.field-row.field-row--sm { --field-row-label-font-size: var(--field-row-sm-label-font-size); }
+.field-row.field-row--lg {
+  --field-row-label-font-size: var(--field-row-lg-label-font-size);
+  --field-row-cell-sm: var(--field-row-lg-cell-sm);
+  --field-row-cell-md: var(--field-row-lg-cell-md);
+  --field-row-cell-lg: var(--field-row-lg-cell-lg);
+}

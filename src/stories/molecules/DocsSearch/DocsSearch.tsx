@@ -113,7 +113,7 @@ export function DocsSearch({
   results,
   loading = false,
   label = 'Buscar en la documentación',
-  labelHidden = false,
+  labelHidden,
   placeholder = 'Buscar…',
   clearable = true,
   clearLabel = 'Borrar',

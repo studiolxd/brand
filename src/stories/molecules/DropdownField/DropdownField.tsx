@@ -2,6 +2,7 @@
 
 import { forwardRef, useId, type ReactNode } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu, type MenuItem } from '../Menu/Menu';
@@ -12,7 +13,9 @@ export interface DropdownFieldProps {
   id?: string;
   /** Etiqueta visible. Si no hay, es obligatorio `aria-label`. */
   label?: string;
-  /** Oculta la etiqueta visualmente sin quitarla a los lectores de pantalla. */
+  /** Oculta la etiqueta visualmente sin quitarla a los lectores de pantalla.   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
+ */
   labelHidden?: boolean;
   /** Nombre accesible cuando no hay etiqueta visible. */
   'aria-label'?: string;
@@ -52,7 +55,7 @@ export interface DropdownFieldProps {
 export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(function DropdownField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   'aria-label': ariaLabel,
   items,
   value,
@@ -69,6 +72,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
   onBlur,
   className,
 }: DropdownFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

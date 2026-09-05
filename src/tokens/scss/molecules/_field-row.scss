@@ -1,0 +1,21 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-field-row-column-gap: 1rem; // Aire entre las celdas de la fila, en columnas
+$lxd-field-row-row-gap: 0.75rem; // Aire entre las celdas apiladas (móvil)
+$lxd-field-row-rows-gap: 0.75rem; // Aire entre filas de la lista: el de los elementos de una lista, más apretado que el de campos sueltos de un formulario
+$lxd-field-row-rows-stack-gap: 1.5rem; // Aire entre filas cuando están apiladas (móvil): más que el que separa los campos dentro de una fila, o la lista se lee como una sola pila
+$lxd-field-row-cell-sm: 8rem; // Ancho propio de una celda estrecha (128px): un código postal, una cantidad
+$lxd-field-row-cell-md: 12rem; // Ancho propio de una celda normal (192px): el select de un papel («Administración»)
+$lxd-field-row-cell-lg: 16rem; // Ancho propio de una celda ancha (256px): un select de etiquetas largas
+$lxd-field-row-lg-cell-sm: 10rem; // Ancho propio de una celda estrecha — talla lg (160px): el mismo ancho, un peldaño arriba, porque la letra del control también sube
+$lxd-field-row-lg-cell-md: 15rem; // Ancho propio de una celda normal — talla lg (240px)
+$lxd-field-row-lg-cell-lg: 20rem; // Ancho propio de una celda ancha — talla lg (320px)
+$lxd-field-row-label-font-size: 0.875rem; // Cuerpo de la etiqueta que la fila reserva sobre la acción — el del Label
+$lxd-field-row-sm-label-font-size: 0.875rem; // Cuerpo de la etiqueta — talla sm
+$lxd-field-row-lg-label-font-size: 1.25rem; // Cuerpo de la etiqueta — talla lg
+$lxd-field-row-label-line-height: 1.5; // Interlineado de la etiqueta — el del Label: con el cuerpo, da la altura del hueco
+$lxd-field-row-label-gap: 0.5rem; // Aire entre la etiqueta y su control — el de los campos: completa el hueco que baja la acción hasta la línea de los controles
+$lxd-field-row-empty-font-size: 0.875rem; // Cuerpo del aviso de lista vacía
+$lxd-field-row-empty-line-height: 1.5; // Interlineado del aviso de lista vacía
+$lxd-field-row-empty-color: #4a4a4a; // Color del aviso de lista vacía — atenuado

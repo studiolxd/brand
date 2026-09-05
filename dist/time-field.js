@@ -3,52 +3,53 @@ import './time-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
 import { TimeSelect as n } from "./time-select.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { forwardRef as a, useId as o } from "react";
+import { n as r } from "./_shared/field-labels.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { forwardRef as o, useId as s } from "react";
 //#region src/stories/molecules/TimeField/TimeField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c = !1, value: l, step: u, name: d, size: f, disabled: p, readOnly: m, required: h, error: g = !1, errorMessage: _, helperText: v, className: y, hoursLabel: b, minutesLabel: x, onChange: S, onBlur: C }, w) {
-	let T = e(f), E = o(), D = a ?? E, O = _ ? `${D}-error` : void 0, k = v ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = g || !!_;
-	return /* @__PURE__ */ i("div", {
-		className: ["time-field", y].filter(Boolean).join(" "),
+var c = o(function({ id: o, label: c, labelHidden: l, value: u, step: d, name: f, size: p, disabled: m, readOnly: h, required: g, error: _ = !1, errorMessage: v, helperText: y, className: b, hoursLabel: x, minutesLabel: S, onChange: C, onBlur: w }, T) {
+	let E = r(l), D = e(p), O = s(), k = o ?? O, A = v ? `${k}-error` : void 0, j = y ? `${k}-helper` : void 0, M = [A, j].filter(Boolean).join(" ") || void 0, N = _ || !!v;
+	return /* @__PURE__ */ a("div", {
+		className: ["time-field", b].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r(t, {
-				id: `${D}-label`,
-				htmlFor: D,
-				hidden: c,
-				size: T,
-				children: s
+			/* @__PURE__ */ i(t, {
+				id: `${k}-label`,
+				htmlFor: k,
+				hidden: E,
+				size: D,
+				children: c
 			}),
-			/* @__PURE__ */ r(n, {
-				ref: w,
-				id: D,
-				name: d,
-				value: l,
-				step: u,
-				size: T,
-				disabled: p,
-				readOnly: m,
-				required: h,
-				error: j,
-				hoursLabel: b,
-				minutesLabel: x,
-				"aria-labelledby": `${D}-label`,
-				"aria-describedby": A,
-				onChange: S,
-				onBlur: C
+			/* @__PURE__ */ i(n, {
+				ref: T,
+				id: k,
+				name: f,
+				value: u,
+				step: d,
+				size: D,
+				disabled: m,
+				readOnly: h,
+				required: g,
+				error: N,
+				hoursLabel: x,
+				minutesLabel: S,
+				"aria-labelledby": `${k}-label`,
+				"aria-describedby": M,
+				onChange: C,
+				onBlur: w
 			}),
-			_ && /* @__PURE__ */ r("span", {
-				id: O,
+			v && /* @__PURE__ */ i("span", {
+				id: A,
 				className: "time-field__error",
 				role: "alert",
-				children: _
-			}),
-			v && /* @__PURE__ */ r("span", {
-				id: k,
-				className: "time-field__helper",
 				children: v
+			}),
+			y && /* @__PURE__ */ i("span", {
+				id: j,
+				className: "time-field__helper",
+				children: y
 			})
 		]
 	});
 });
 //#endregion
-export { s as TimeField };
+export { c as TimeField };

@@ -3,6 +3,7 @@
 import { forwardRef, useImperativeHandle, useRef, useState, type ComponentPropsWithoutRef } from 'react';
 import './InputField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 import { Icon } from '../../atoms/Icon/Icon';
@@ -15,6 +16,8 @@ export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>,
    * Por defecto `false`: la etiqueta se ve, como en `SelectField`.
    * Con la etiqueta oculta y sin `placeholder`, el control usa el texto de la
    * etiqueta como placeholder para no quedarse sin pista visible.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   name?: string;
@@ -66,7 +69,7 @@ export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>,
 export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function InputField({
   id,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   name,
   type,
   kind = 'text',
@@ -88,6 +91,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   className,
   ...rest
 }: InputFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const errorId = errorMessage ? `${id}-error` : undefined;
   const helperId = helperText ? `${id}-helper` : undefined;

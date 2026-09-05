@@ -7,6 +7,26 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+- **`FieldRow` / `FieldRows` — la fila de formulario repetible.** La pieza que
+  le faltaba al DS para cualquier **lista editable** (invitar personas,
+  dominios, redirecciones, variables de entorno): un campo que absorbe el
+  sobrante, otros con su ancho propio y **una acción al final, en su propia
+  celda**, fuera de la columna de cualquier campo. Antes esto se montaba con
+  `Columns ratio="2:1"` y el aspa dentro de la celda del select: la fila no
+  llenaba el ancho y la acción colgaba de la etiqueta de otra cosa.
+- **Las etiquetas, solo en la primera fila, sin trucos del consumidor.**
+  `FieldRows` conoce la posición y reparte el ocultado por contexto —el mismo
+  mecanismo con el que `Form` reparte la talla—, así que ya no hace falta
+  acordarse de `labelHidden={i > 0}` fila a fila. En las filas sin etiqueta
+  visible el `<label>` sigue en el árbol: **el campo conserva su nombre
+  accesible en todas**.
+- `labelHidden` pasa a heredarse en los dieciséis `*Field` que lo tenían: sin
+  valor, lo decide quien envuelva. Sin `FieldRow` alrededor el default sigue
+  siendo `false` — no cambia nada de lo ya escrito.
+- Tokens nuevos: `field-row.*` (anchos de celda, aire, hueco de la etiqueta).
+
 ## v30.5.0
 
 - **Norma nueva del DS: el subrayado es una línea, no `text-decoration`.** Se

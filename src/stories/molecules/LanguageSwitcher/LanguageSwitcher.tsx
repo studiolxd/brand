@@ -68,7 +68,7 @@ export function LanguageSwitcher({
   onChange,
   label = 'Idioma',
   id = 'language-switcher',
-  labelHidden = false,
+  labelHidden,
   variant = 'compact',
   size = 'md',
   hrefFor,

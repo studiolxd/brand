@@ -1,6 +1,7 @@
 import { forwardRef, useId, type ReactNode } from 'react';
 import './CheckboxField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 
@@ -13,6 +14,8 @@ export interface CheckboxFieldProps {
    * tabla o de una barra de acciones, donde el rótulo lo da la columna. Misma
    * prop que en `InputField`, `TextareaField`, `SelectField` y `FileUploadField`.
    * Default: `false`.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   checked?: boolean;
@@ -43,7 +46,7 @@ export interface CheckboxFieldProps {
  */
 export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(function CheckboxField({
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   checked,
   defaultChecked,
   disabled,
@@ -58,6 +61,7 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
   onCheckedChange,
   onBlur,
 }: CheckboxFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

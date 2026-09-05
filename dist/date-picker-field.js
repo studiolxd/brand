@@ -2,43 +2,44 @@
 import './date-picker-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { Label as t } from "./label.js";
-import { DatePicker as n } from "./date-picker.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { forwardRef as a, useId as o } from "react";
+import { n } from "./_shared/field-labels.js";
+import { DatePicker as r } from "./date-picker.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { forwardRef as o, useId as s } from "react";
 //#region src/stories/molecules/DatePickerField/DatePickerField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c = !1, errorMessage: l, helperText: u, error: d = !1, size: f, className: p, ...m }, h) {
-	let g = e(f), _ = o(), v = a ?? _, y = l ? `${v}-error` : void 0, b = u ? `${v}-helper` : void 0, x = [y, b].filter(Boolean).join(" ") || void 0, S = d || !!l;
-	return /* @__PURE__ */ i("div", {
-		className: ["date-picker-field", p].filter(Boolean).join(" "),
+var c = o(function({ id: o, label: c, labelHidden: l, errorMessage: u, helperText: d, error: f = !1, size: p, className: m, ...h }, g) {
+	let _ = n(l), v = e(p), y = s(), b = o ?? y, x = u ? `${b}-error` : void 0, S = d ? `${b}-helper` : void 0, C = [x, S].filter(Boolean).join(" ") || void 0, w = f || !!u;
+	return /* @__PURE__ */ a("div", {
+		className: ["date-picker-field", m].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r(t, {
-				htmlFor: v,
-				hidden: c,
-				size: g,
-				children: s
+			/* @__PURE__ */ i(t, {
+				htmlFor: b,
+				hidden: _,
+				size: v,
+				children: c
 			}),
-			/* @__PURE__ */ r(n, {
-				calendarLabel: s,
-				...m,
-				ref: h,
-				id: v,
-				size: g,
-				error: S,
-				"aria-describedby": x
+			/* @__PURE__ */ i(r, {
+				calendarLabel: c,
+				...h,
+				ref: g,
+				id: b,
+				size: v,
+				error: w,
+				"aria-describedby": C
 			}),
-			l && /* @__PURE__ */ r("span", {
-				id: y,
+			u && /* @__PURE__ */ i("span", {
+				id: x,
 				className: "date-picker-field__error",
 				role: "alert",
-				children: l
-			}),
-			u && /* @__PURE__ */ r("span", {
-				id: b,
-				className: "date-picker-field__helper",
 				children: u
+			}),
+			d && /* @__PURE__ */ i("span", {
+				id: S,
+				className: "date-picker-field__helper",
+				children: d
 			})
 		]
 	});
 });
 //#endregion
-export { s as DatePickerField };
+export { c as DatePickerField };

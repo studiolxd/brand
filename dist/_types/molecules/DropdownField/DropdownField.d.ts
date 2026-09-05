@@ -6,7 +6,9 @@ export interface DropdownFieldProps {
     id?: string;
     /** Etiqueta visible. Si no hay, es obligatorio `aria-label`. */
     label?: string;
-    /** Oculta la etiqueta visualmente sin quitarla a los lectores de pantalla. */
+    /** Oculta la etiqueta visualmente sin quitarla a los lectores de pantalla.   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+     * es la primera de la lista, la etiqueta se oculta sola.
+   */
     labelHidden?: boolean;
     /** Nombre accesible cuando no hay etiqueta visible. */
     'aria-label'?: string;

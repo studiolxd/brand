@@ -1,0 +1,118 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FieldRowStories from "./FieldRow.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { fieldRowBaseTokens, fieldRowDarkTokens } from "../../../tokens/molecules/field-row";
+
+<Meta of={FieldRowStories} />
+
+# FieldRow
+
+La fila de una **lista editable**: invitar personas, dominios, redirecciones, variables de entorno. Un campo que absorbe el sobrante, otros con su ancho propio y **una acción al final que no estira** — y las etiquetas una sola vez, arriba, sin que cada campo pierda su nombre.
+
+Son dos piezas: `FieldRows` es la lista (el aire entre filas y **la posición**, que es lo que decide qué fila enseña las etiquetas) y `FieldRow` es la fila (el reparto y la acción).
+
+<Canvas of={FieldRowStories.PorDefecto} />
+
+```tsx
+<FieldRows>
+  {filas.map((fila) => (
+    <FieldRow
+      key={fila.id}
+      widths={['grow', 'md']}
+      action={
+        <Button variant="ghost" iconOnly disabled={filas.length === 1}
+                aria-label={`Quitar a ${fila.correo}`} onClick={() => quitar(fila.id)}>
+          <Icon name="close" />
+        </Button>
+      }
+    >
+      <InputField id={`correo-${fila.id}`} label="Correo electrónico" type="email" />
+      <SelectField id={`rol-${fila.id}`} label="Papel" options={ROLES} />
+    </FieldRow>
+  ))}
+</FieldRows>
+```
+
+## Por qué no es `Columns`
+
+`Columns` reparte **proporciones** (`1:1`, `1:2`, `2:1`) sobre celdas iguales, y eso no es lo que pide una fila editable: aquí una celda crece, otras tienen su ancho y la acción ocupa lo justo. Metida en una columna de `Columns`, la acción se queda en el ancho de esa columna (la fila no llena el ancho) y **cuelga de la etiqueta del campo con el que comparte celda**, cuando actúa sobre la fila entera. `FieldRow` le da su propia celda al final, fuera de cualquier campo.
+
+`Inline` tampoco vale: pone piezas en fila con aire, pero no reparte anchos ni alinea columnas entre filas.
+
+## El reparto
+
+`widths` da el ancho de cada celda **por posición**:
+
+| Valor | Qué hace |
+| --- | --- |
+| `grow` | Absorbe el sobrante. Es el campo largo (un correo). |
+| `sm` `md` `lg` | Ancho propio (128 / 192 / 256px). Puede encoger si la fila se queda sin sitio; nunca crece. |
+| `auto` | Manda el contenido. |
+
+Sin la prop, la primera celda crece y las demás van a `md`. La acción no entra en `widths`: va en `action` y ocupa lo justo.
+
+Los tres anchos suben un peldaño en talla `lg` (160 / 240 / 320px): la misma medida con letra de 20px se queda corta —«Administración» acababa debajo de su propia flecha—. `sm` no cambia, porque su etiqueta y su letra son las de `md`.
+
+## Las etiquetas
+
+Las etiquetas se ven en la primera fila; en las demás el `<label>` sigue en el árbol, oculto con `visually-hidden`, así que **cada campo conserva su nombre accesible en todas las filas**. No hay que pasar `labelHidden` fila a fila: lo reparte `FieldRows`, que es quien conoce la posición, por el mismo mecanismo con el que `Form` reparte la talla. La prop del campo gana siempre: un `labelHidden={false}` en la tercera fila la enseña.
+
+`labels="every-row"` las enseña en todas, para una lista que se usa sobre todo en móvil.
+
+La acción se alinea con los **controles**, no con los rótulos: en la fila que enseña etiquetas, la pieza reserva encima el hueco de una etiqueta y su aire. Por eso sigue alineada cuando un campo pinta debajo su error o su ayuda.
+
+## Móvil
+
+Por debajo de `md` los campos se apilan a ancho completo y la acción cae al final de la fila, **alineada al margen**: es lo último que se lee, después de todo lo que afecta, y queda en el mismo lado en el que la mano ya la busca en escritorio. Las etiquetas siguen la misma regla que en columnas.
+
+<Canvas of={FieldRowStories.Movil} />
+
+## Vacío y mínimo
+
+Son dos cosas distintas y solo una es de la pieza:
+
+- **Vacío** — `empty` en `FieldRows` es lo que se pinta cuando no queda ninguna fila.
+- **Mínimo** — que la última fila no se pueda quitar lo decide **el consumidor**: la fila no cuenta filas ni sabe qué hace su acción. El `disabled` va en el botón que se le pasa (`disabled={filas.length === 1}`).
+
+<Canvas of={FieldRowStories.ListaEditable} />
+
+## Talla
+
+La fila hereda la talla del `Form` (`useFormSize`), que es lo que hace que el hueco de la etiqueta y los anchos propios suban con el control en la superficie pública. `size` la fuerza.
+
+<Canvas of={FieldRowStories.DentroDeUnFormulario} />
+
+## Nombres accesibles de la acción
+
+El nombre del botón lo pone el consumidor y **nombra la fila**, no la columna: «Quitar a nuria.serra@santcugat.cat», no «Quitar». Con etiquetas ocultas, es lo único que distingue una acción de la de al lado.
+
+## Superficie oscura
+
+No tiene colores propios más que el aviso de vacío: los campos y el botón traen los suyos.
+
+<Canvas of={FieldRowStories.EnSuperficieOscura} />
+
+## Tokens
+
+<TokenTable tokens={fieldRowBaseTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={fieldRowDarkTokens} />
+
+## Props
+
+### `FieldRow`
+
+<ArgTypes of={FieldRowStories} />
+
+### `FieldRows`
+
+| Prop | Tipo | Qué hace |
+| --- | --- | --- |
+| `labels` | `'first-row' \| 'every-row'` | Dónde se ven las etiquetas. Por defecto, solo en la primera fila. |
+| `empty` | `ReactNode` | Qué pintar cuando no queda ninguna fila. |
+| `children` | `ReactNode` | Las filas: una `FieldRow` por elemento de la lista. |
+| `className` | `string` | Se añade DESPUÉS de las clases propias. |
+
+Lo que no sea prop propia (`role`, `aria-label`, `id`, `data-*`…) viaja al `<div>` de la lista: puede ser un grupo con nombre sin envolverla en otro elemento.

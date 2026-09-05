@@ -9,6 +9,8 @@ export interface CheckboxFieldProps {
      * tabla o de una barra de acciones, donde el rótulo lo da la columna. Misma
      * prop que en `InputField`, `TextareaField`, `SelectField` y `FileUploadField`.
      * Default: `false`.
+     * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+     * es la primera de la lista, la etiqueta se oculta sola.
      */
     labelHidden?: boolean;
     checked?: boolean;

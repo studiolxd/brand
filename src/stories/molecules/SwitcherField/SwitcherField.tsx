@@ -1,6 +1,7 @@
 import { forwardRef, useId, type ReactNode } from 'react';
 import './SwitcherField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Switcher } from '../../atoms/Switcher/Switcher';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 
@@ -12,6 +13,8 @@ export interface SwitcherFieldProps {
    * interruptor sigue nombrándose con ella. Para filas de una tabla de
    * preferencias, donde el nombre del ajuste ya está en su columna.
    * Default: `false`.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -44,7 +47,7 @@ export interface SwitcherFieldProps {
  */
 export const SwitcherField = forwardRef<HTMLElement, SwitcherFieldProps>(function SwitcherField({
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   id: idProp,
   checked,
   defaultChecked,
@@ -60,6 +63,7 @@ export const SwitcherField = forwardRef<HTMLElement, SwitcherFieldProps>(functio
   onCheckedChange,
   onBlur,
 }: SwitcherFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

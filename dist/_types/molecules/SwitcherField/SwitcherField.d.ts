@@ -8,6 +8,8 @@ export interface SwitcherFieldProps {
      * interruptor sigue nombrándose con ella. Para filas de una tabla de
      * preferencias, donde el nombre del ajuste ya está en su columna.
      * Default: `false`.
+     * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+     * es la primera de la lista, la etiqueta se oculta sola.
      */
     labelHidden?: boolean;
     /** `id` del control. Si no se pasa, se genera con `useId`. */

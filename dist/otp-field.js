@@ -3,52 +3,53 @@ import './otp-field.css';
 import { n as e } from "./_shared/form-size.js";
 import { OtpInput as t } from "./otp-input.js";
 import { Label as n } from "./label.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
-import { forwardRef as a, useId as o } from "react";
+import { n as r } from "./_shared/field-labels.js";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+import { forwardRef as o, useId as s } from "react";
 //#region src/stories/molecules/OtpField/OtpField.tsx
-var s = a(function({ id: a, label: s, labelHidden: c = !1, length: l, value: u, defaultValue: d, name: f, disabled: p, readOnly: m, error: h = !1, errorMessage: g, helperText: _, size: v, className: y, digitLabel: b, onChange: x, onComplete: S, onBlur: C }, w) {
-	let T = e(v), E = o(), D = a ?? E, O = g ? `${D}-error` : void 0, k = _ ? `${D}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = h || !!g;
-	return /* @__PURE__ */ i("div", {
-		className: ["otp-field", y].filter(Boolean).join(" "),
+var c = o(function({ id: o, label: c, labelHidden: l, length: u, value: d, defaultValue: f, name: p, disabled: m, readOnly: h, error: g = !1, errorMessage: _, helperText: v, size: y, className: b, digitLabel: x, onChange: S, onComplete: C, onBlur: w }, T) {
+	let E = r(l), D = e(y), O = s(), k = o ?? O, A = _ ? `${k}-error` : void 0, j = v ? `${k}-helper` : void 0, M = [A, j].filter(Boolean).join(" ") || void 0, N = g || !!_;
+	return /* @__PURE__ */ a("div", {
+		className: ["otp-field", b].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ r(n, {
-				id: `${D}-label`,
-				htmlFor: `${D}-0`,
-				hidden: c,
-				size: T,
-				children: s
+			/* @__PURE__ */ i(n, {
+				id: `${k}-label`,
+				htmlFor: `${k}-0`,
+				hidden: E,
+				size: D,
+				children: c
 			}),
-			/* @__PURE__ */ r(t, {
-				ref: w,
-				id: D,
-				name: f,
-				length: l,
-				value: u,
-				defaultValue: d,
-				disabled: p,
-				readOnly: m,
-				error: j,
-				size: T,
-				digitLabel: b,
-				"aria-labelledby": `${D}-label`,
-				"aria-describedby": A,
-				onChange: x,
-				onComplete: S,
-				onBlur: C
+			/* @__PURE__ */ i(t, {
+				ref: T,
+				id: k,
+				name: p,
+				length: u,
+				value: d,
+				defaultValue: f,
+				disabled: m,
+				readOnly: h,
+				error: N,
+				size: D,
+				digitLabel: x,
+				"aria-labelledby": `${k}-label`,
+				"aria-describedby": M,
+				onChange: S,
+				onComplete: C,
+				onBlur: w
 			}),
-			g && /* @__PURE__ */ r("span", {
-				id: O,
+			_ && /* @__PURE__ */ i("span", {
+				id: A,
 				className: "otp-field__error",
 				role: "alert",
-				children: g
-			}),
-			_ && /* @__PURE__ */ r("span", {
-				id: k,
-				className: "otp-field__helper",
 				children: _
+			}),
+			v && /* @__PURE__ */ i("span", {
+				id: j,
+				className: "otp-field__helper",
+				children: v
 			})
 		]
 	});
 });
 //#endregion
-export { s as OtpField };
+export { c as OtpField };
