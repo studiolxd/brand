@@ -21,6 +21,11 @@ const meta: Meta<typeof Modal> = {
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
+/**
+ * Caso (a) del criterio del pie: el principal **ejecuta** algo, así que lleva
+ * `Cancelar`. Los botones no van dentro del `<form>`: van en el `footer` del
+ * modal, y el submit se ata al formulario con `form="<id>"`.
+ */
 export const WithForm: Story = {
   name: 'Formulario',
   render: () => {
@@ -28,16 +33,87 @@ export const WithForm: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)}>Abrir modal</Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Solicitar ausencia">
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Solicitar ausencia"
+          footer={
+            <>
+              <Button variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
+              <Button type="submit" form="solicitar-ausencia">Guardar</Button>
+            </>
+          }
+        >
           <form
+            id="solicitar-ausencia"
             onSubmit={(e) => { e.preventDefault(); setOpen(false); }}
             style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
           >
             <InputField id="motivo" label="Motivo" placeholder="Indica el motivo" />
             <InputField id="fecha-inicio" label="Fecha de inicio" placeholder="dd/mm/aaaa" />
             <InputField id="fecha-fin" label="Fecha de fin" placeholder="dd/mm/aaaa" />
-            <Button type="submit">Guardar</Button>
           </form>
+        </Modal>
+      </>
+    );
+  },
+};
+
+/**
+ * Caso (b), informativo: aquí no se ejecuta nada, solo se lee. Sin `Cancelar`
+ * —no hay nada que cancelar—: se cierra con el aspa, con Escape o, como mucho,
+ * con un `Cerrar` en el pie.
+ */
+export const Informativo: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button variant="outline" onClick={() => setOpen(true)}>Ver novedades</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Novedades de la versión"
+          footer={<Button variant="outline" onClick={() => setOpen(false)}>Cerrar</Button>}
+        >
+          <p style={{ margin: 0, color: 'var(--color-text-on-light)' }}>
+            Las ausencias ya se aprueban desde el listado, sin entrar en cada
+            solicitud. El calendario del equipo enseña los festivos del centro.
+          </p>
+        </Modal>
+      </>
+    );
+  },
+};
+
+const CENTROS = ['Barcelona', 'Madrid', 'Valencia', 'Sevilla'];
+
+/**
+ * Caso (b), selector: elegir un ítem **es** la acción y ya cierra el diálogo,
+ * así que no hay principal que confirmar ni, por tanto, `Cancelar`. Sin pie:
+ * el aspa y Escape son la salida.
+ */
+export const Selector: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const [centro, setCentro] = useState<string | null>(null);
+    return (
+      <>
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          {centro ? `Centro: ${centro}` : 'Elegir centro'}
+        </Button>
+        <Modal open={open} onClose={() => setOpen(false)} title="Elegir centro">
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', gap: '0.5rem' }}>
+            {CENTROS.map((nombre) => (
+              <Button
+                key={nombre}
+                variant="text"
+                onClick={() => { setCentro(nombre); setOpen(false); }}
+              >
+                {nombre}
+              </Button>
+            ))}
+          </div>
         </Modal>
       </>
     );
@@ -559,7 +635,7 @@ export const ConPie: Story = {
           title="Guardar cambios"
           footer={
             <>
-              <Button variant="ghost" onClick={() => setOpen(false)}>Cancelar</Button>
+              <Button variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
               <Button onClick={() => setOpen(false)}>Guardar</Button>
             </>
           }
@@ -581,7 +657,7 @@ export const ContratoPieDelDialogo: Story = {
       title="Guardar cambios"
       footer={
         <>
-          <Button variant="ghost">Cancelar</Button>
+          <Button variant="outline">Cancelar</Button>
           <Button>Guardar</Button>
         </>
       }

@@ -26,6 +26,15 @@ para breaking changes.
   `DateTimeField` las reexpone, y con ellas `calendarLabel` (por defecto la etiqueta
   del campo), `openCalendarLabel`, `invalidMessage` y `maskLetters`, que tampoco
   llegaban.
+- **Criterio del pie de los diálogos, escrito.** Norma 10 de `CLAUDE.md` y sección
+  «El pie: cuándo hay Cancelar» en la doc de `Modal`: `Cancelar` (`variant="outline"`,
+  primero en el DOM del `footer`) solo cuando el diálogo **ejecuta** algo; los
+  informativos y los selectores no lo llevan; los botones nunca van en las acciones
+  del `Form` dentro de un `Modal` —van en el `footer` y el submit se ata con
+  `form={id}`—; `ConfirmDialog` ya lo cumple por construcción. Stories nuevas
+  «Informativo» y «Selector», y la de «Formulario» reescrita al patrón. `Cancelar`
+  pasa de `ghost` a `outline` en las stories del pie, en línea con `ConfirmDialog`.
+  Solo documentación y stories: ningún componente cambia.
 
 ## [31.0.1] — 2026-09-05
 
