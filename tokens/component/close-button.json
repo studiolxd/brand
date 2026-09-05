@@ -1,0 +1,14 @@
+{
+  "close-button": {
+    "size-sm":           { "$value": "{size-component.sm}",   "$type": "dimension", "$description": "Lado del botón en talla sm (32px): dentro de una tarjeta compacta — un aviso, un panel del dock" },
+    "size-md":           { "$value": "{size-component.md}",   "$type": "dimension", "$description": "Lado del botón en talla md (40px, por defecto): la cabecera de un diálogo" },
+    "size-lg":           { "$value": "{size-component.lg}",   "$type": "dimension", "$description": "Lado del botón en talla lg (48px): objetivo táctil holgado" },
+    "icon-size":         { "$value": "{icon.size-md}",        "$type": "dimension", "$description": "Glifo del aspa (24px), la talla por defecto de icono-botón. No cambia con la talla del botón: lo que crece es el área sensible, no el dibujo" },
+    "color":             { "$value": "{color.text.on-light}", "$type": "color",     "$description": "Color del glifo: la tinta de la superficie, ya en reposo. El aspa NO tiene estado de hover —ni fondo ni cambio de color—: el único estado que marca es el foco" },
+    "focus-ring-width":  { "$value": "{border-width.focus}",  "$type": "dimension", "$description": "Grosor del anillo de foco" },
+    "focus-ring-offset": { "$value": "{border-width.focus}",  "$type": "dimension", "$description": "Separación del anillo de foco (el rol focus gobierna ancho y separación)" },
+    "focus-ring-color":  { "$value": "{color.text.on-light}", "$type": "color",     "$description": "Color del anillo de foco: la tinta de la superficie" },
+    "surface-dark-color":            { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del glifo — surface-dark" },
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
+  }
+}

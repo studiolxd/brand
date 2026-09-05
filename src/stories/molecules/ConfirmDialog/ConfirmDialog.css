@@ -1,6 +1,6 @@
-/* El reparto y el aire entre botones los pone `Inline justify="end"`. Lo
-   propio de este diálogo es la separación entre el cuerpo y la fila de
-   acciones: la pregunta arriba, la respuesta abajo. */
-.confirm-dialog__actions {
+/* El reparto del pie —fila a la derecha, apilado a todo el ancho en móvil con
+   la principal arriba— lo pone `Modal`. Lo propio de este diálogo es su aire
+   respecto al cuerpo: la pregunta arriba, la respuesta abajo. */
+.confirm-dialog__actions.modal__footer {
   margin-block-start: var(--confirm-dialog-actions-space-before);
 }

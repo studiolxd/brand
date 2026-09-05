@@ -13,7 +13,8 @@ $lxd-modal-shadow: none; // Sombra de elevación
 $lxd-modal-padding-block: 2rem; // Padding vertical del panel
 $lxd-modal-padding-inline: 2rem; // Padding horizontal del panel
 $lxd-modal-header-gap: 1rem; // Gap entre título y botón ✕
-$lxd-modal-footer-gap: 1rem; // Separación entre el cuerpo y el pie, para el consumidor que monta su propio pie dentro del contenido (Modal no tiene prop `footer`, a diferencia de Sheet)
+$lxd-modal-footer-gap: 0.75rem; // Aire entre los botones del pie. Es el de las acciones de un formulario: la fila de acciones del sistema es una sola, esté en un formulario o en un diálogo
+$lxd-modal-footer-margin-block-start: 2rem; // Aire entre el cuerpo del diálogo y su pie — el mismo que separa el último campo de las acciones en un formulario
 $lxd-modal-title-font-size: 2rem; // Tamaño del título (2rem)
 $lxd-modal-title-font-weight: 500; // Peso del título
 $lxd-modal-title-color: #111e30; // Color del título

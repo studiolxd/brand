@@ -44,6 +44,16 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
      * desde fuera: el gestor de foco de Base UI corre después y ganaría él.
      */
     initialFocus?: React.ComponentPropsWithoutRef<typeof Dialog.Popup>['initialFocus'];
+    /**
+     * Fila de acciones al pie del diálogo. Es el sitio de los botones: el pie
+     * los reparte a la derecha en una fila y, por debajo del punto de ruptura,
+     * los apila a todo el ancho con la acción principal arriba — el mismo
+     * criterio (y el mismo orden) que las acciones de `Form`. Pásalos en el
+     * orden de la fila: la principal, la última.
+     */
+    footer?: React.ReactNode;
+    /** Se añade DESPUÉS de las clases propias del pie. */
+    footerClassName?: string;
 }
 /**
  * Diálogo centrado sobre un velo. El motor (portal, velo, trampa de foco,
@@ -58,4 +68,4 @@ export interface ModalProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
  * `className` **no** se reenvía a propósito: la cara del diálogo la pone el
  * sistema, y se personaliza por tokens.
  */
-export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, initialFocus, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;
+export declare function Modal({ open, onClose, title, children, closeLabel, fallbackTitle, container, description, 'aria-describedby': ariaDescribedBy, initialFocus, footer, footerClassName, ...rest }: ModalProps): import("react/jsx-runtime").JSX.Element;

@@ -21,9 +21,24 @@ selección; el DS pone el diálogo, las acciones y el volcado a lienzo
 - **Área de recorte**: la imagen dentro de `ReactCrop`, con un fondo propio
   (`area-bg`) que se ve alrededor mientras la imagen no llena el ancho
   disponible.
-- **Acciones**: `cancelLabel` (outline) y `confirmLabel` (primary), alineadas
-  a la derecha. `confirmLabel` está deshabilitado hasta que hay una selección
-  completa.
+- **Acciones**: `cancelLabel` (outline) y `confirmLabel` (primary). Van en el
+  pie del `Modal`, así que se alinean a la derecha en una fila y se apilan a
+  todo el ancho en móvil, con la principal arriba. `confirmLabel` está
+  deshabilitado hasta que hay una selección completa.
+
+## El copy lo pone el consumidor
+
+`title`, `cancelLabel` y `confirmLabel` son obligatorias y no tienen default:
+el diálogo no sabe qué se está recortando. Dos criterios para escribirlas:
+
+- **El título nombra la acción, no invita a hacerla**: «Recortar imagen»,
+  «Recortar logotipo». Sin segunda persona («Recorta tu logo») — es un título
+  de diálogo, como los demás del sistema.
+- **`description` es opcional y casi siempre sobra.** Lo que hay en pantalla
+  es la imagen con su marco de selección, que se explica solo. Una frase que
+  nombre «la vista previa» está señalando justo lo que se está mirando, y
+  «reposicionar» no es lo que nadie cree estar haciendo con las manos. Pásala
+  solo si en tu caso hay algo que decir que no esté ya a la vista.
 
 ## Selección circular
 

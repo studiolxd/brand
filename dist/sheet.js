@@ -1,7 +1,7 @@
 'use client';
 import './sheet.css';
-import { Icon as e } from "./icon.js";
-import { VisuallyHidden as t } from "./visually-hidden.js";
+import { VisuallyHidden as e } from "./visually-hidden.js";
+import { CloseButton as t } from "./close-button.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { Dialog as i } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Sheet/Sheet.tsx
@@ -25,7 +25,7 @@ function o({ open: o, onOpenChange: s, side: c = "right", title: l, titleHidden:
 				children: [
 					/* @__PURE__ */ r("header", {
 						className: "sheet__header",
-						children: [u ? /* @__PURE__ */ n(i.Title, { render: /* @__PURE__ */ n(t, { children: l }) }) : /* @__PURE__ */ n(i.Title, {
+						children: [u ? /* @__PURE__ */ n(i.Title, { render: /* @__PURE__ */ n(e, { children: l }) }) : /* @__PURE__ */ n(i.Title, {
 							className: "sheet__title",
 							children: l
 						}), d != null && /* @__PURE__ */ n(i.Description, {
@@ -35,11 +35,7 @@ function o({ open: o, onOpenChange: s, side: c = "right", title: l, titleHidden:
 					}),
 					/* @__PURE__ */ n(i.Close, {
 						className: "sheet__close",
-						"aria-label": m,
-						children: /* @__PURE__ */ n(e, {
-							name: "close",
-							size: "md"
-						})
+						render: /* @__PURE__ */ n(t, { label: m })
 					}),
 					/* @__PURE__ */ n("div", {
 						className: "sheet__body",

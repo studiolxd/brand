@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "30.7.0",
+  "version": "30.8.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -354,6 +354,10 @@
     "./menu-button": {
       "types": "./dist/_types/atoms/MenuButton/MenuButton.d.ts",
       "import": "./dist/menu-button.js"
+    },
+    "./close-button": {
+      "types": "./dist/_types/atoms/CloseButton/CloseButton.d.ts",
+      "import": "./dist/close-button.js"
     },
     "./menu": {
       "types": "./dist/_types/molecules/Menu/Menu.d.ts",

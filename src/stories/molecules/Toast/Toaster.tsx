@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { Toast } from '@base-ui/react/toast';
 import { Button } from '../../atoms/Button/Button';
-import { Icon } from '../../atoms/Icon/Icon';
+import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import {
   TOAST_DURATION,
   setToastDefaultDuration,
@@ -116,11 +116,8 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
             {closeButton && (
               <Toast.Close
                 className="alert__close"
-                aria-label={closeLabel}
-                render={<Button variant="ghost" size="sm" iconOnly aria-label={closeLabel} />}
-              >
-                <Icon name="close" size="sm" />
-              </Toast.Close>
+                render={<CloseButton label={closeLabel} />}
+              />
             )}
           </Toast.Root>
         ))}

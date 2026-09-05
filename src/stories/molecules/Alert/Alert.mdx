@@ -21,7 +21,7 @@ Un rectángulo de relleno sólido con borde de 1px y esquina recta, y dentro:
 
 - **Título** (`title` o `<Alert.Title>`): el rótulo del aviso, en peso de énfasis.
 - **Descripción** (`description` o `<Alert.Description>`): el detalle, opcional. Apila sus hijos, así que admite un enlace o un botón de acción.
-- **Cierre** (`dismissible`): un `Button` ghost a talla `sm` en la esquina superior derecha.
+- **Cierre** (`dismissible`): el [CloseButton](?path=/docs/atoms-closebutton--docs) del sistema a talla `sm` en la esquina superior derecha. Hasta v30.7.0 era un `Button` ghost, que pintaba un relleno al pasar el puntero; el aspa del sistema no lo pinta.
 
 Los dos modos se combinan: `title`/`description` para el caso simple, `children` cuando el consumidor arma el contenido.
 
@@ -69,7 +69,7 @@ Lo mismo vale para el `Toast`, que comparte este juego de tokens.
 
 <TokenTable tokens={alertVariantTokens} />
 
-El color del aspa y su hover no son tokens del alert: los pone `Button` ghost, que voltea con la superficie del relleno.
+El color del aspa no es un token del alert: lo pone `CloseButton`, que toma la tinta de la superficie del relleno por la cascada de `.surface-dark`. El aviso solo le dice su talla (`alert.close-size`) y dónde va (`alert.close-inset`). El aspa **no tiene hover**.
 
 ## Accesibilidad
 

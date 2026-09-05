@@ -51,14 +51,20 @@ export const Confirm: Story = {
     return (
       <>
         <Button variant="outline" onClick={() => setOpen(true)}>Cancelar ausencia</Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Cancelar ausencia">
-          <p style={{ margin: '0 0 1.5rem', color: 'var(--color-text-on-light)' }}>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Cancelar ausencia"
+          footer={
+            <>
+              <Button variant="outline" onClick={() => setOpen(false)}>No, volver</Button>
+              <Button destructive onClick={() => setOpen(false)}>Sí, cancelar</Button>
+            </>
+          }
+        >
+          <p style={{ margin: 0, color: 'var(--color-text-on-light)' }}>
             ¿Seguro que quieres cancelar esta ausencia? Esta acción no se puede deshacer.
           </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
-            <Button variant="outline" onClick={() => setOpen(false)}>No, volver</Button>
-            <Button destructive onClick={() => setOpen(false)}>Sí, cancelar</Button>
-          </div>
         </Modal>
       </>
     );
@@ -531,5 +537,69 @@ export const ContratoFocoInicialPropio: Story = {
     await waitFor(async () => {
       await expect(within(popup).getByRole('textbox', { name: 'Motivo' })).toHaveFocus();
     });
+  },
+};
+
+/**
+ * El pie del diálogo: fila alineada a la derecha en escritorio y, por debajo
+ * del punto de ruptura `md`, botones a todo el ancho y apilados con la acción
+ * principal arriba. Es el criterio de las acciones de `Form`, `column-reverse`
+ * incluido — estrecha la ventana para verlo.
+ */
+export const ConPie: Story = {
+  name: 'Con pie de acciones',
+  render: () => {
+    const [open, setOpen] = useState(true);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Abrir modal</Button>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Guardar cambios"
+          footer={
+            <>
+              <Button variant="ghost" onClick={() => setOpen(false)}>Cancelar</Button>
+              <Button onClick={() => setOpen(false)}>Guardar</Button>
+            </>
+          }
+        >
+          <p style={{ margin: 0 }}>Los cambios se aplicarán a toda la organización.</p>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const ContratoPieDelDialogo: Story = {
+  name: 'Test — el pie apila con la principal arriba',
+  tags: ['!dev'],
+  render: () => (
+    <Modal
+      open
+      onClose={fn()}
+      title="Guardar cambios"
+      footer={
+        <>
+          <Button variant="ghost">Cancelar</Button>
+          <Button>Guardar</Button>
+        </>
+      }
+    >
+      <p>Contenido</p>
+    </Modal>
+  ),
+  play: async ({ canvasElement }) => {
+    const doc = canvasElement.ownerDocument;
+    const pie = doc.querySelector('.modal__footer') as HTMLElement;
+    await expect(pie).not.toBeNull();
+    // La principal va la última del DOM —el orden de la fila—, y en columna es
+    // `column-reverse` quien la sube arriba: el mismo trato que en `Form`.
+    const botones = Array.from(pie.querySelectorAll('button'));
+    await expect(botones.at(-1)?.textContent).toBe('Guardar');
+    await expect(getComputedStyle(pie).display).toBe('flex');
+    // El pie queda fuera del cuerpo desplazable: los botones no se van con el
+    // scroll del contenido.
+    await expect(pie.closest('.modal__body')).toBeNull();
   },
 };

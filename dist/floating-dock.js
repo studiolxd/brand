@@ -3,73 +3,70 @@ import './floating-dock.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Button as n } from "./button.js";
-import { NumberBadge as r } from "./number-badge.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { useState as o } from "react";
-import { Dialog as s } from "@base-ui/react/dialog";
+import { CloseButton as r } from "./close-button.js";
+import { NumberBadge as i } from "./number-badge.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { useState as s } from "react";
+import { Dialog as c } from "@base-ui/react/dialog";
 //#region src/stories/sections/FloatingDock/FloatingDock.tsx
-function c({ label: c, title: l, titleHidden: u = !1, description: d, children: f, icon: p, position: m = "bottom-end", open: h, defaultOpen: g, onOpenChange: _, closeLabel: v = "Cerrar", badge: y = 0, badgeMax: b = 99, badgeLabel: x = (e) => `${e} mensajes nuevos`, badgeLive: S = !0, dismissOnOutsidePress: C = !1, className: w, ...T }) {
-	let [E, D] = o(null);
-	return /* @__PURE__ */ i("div", {
-		ref: D,
-		className: ["floating-dock", w].filter(Boolean).join(" "),
-		"data-position": m,
-		...T,
-		children: /* @__PURE__ */ a(s.Root, {
-			open: h,
-			defaultOpen: g,
+function l({ label: l, title: u, titleHidden: d = !1, description: f, children: p, icon: m, position: h = "bottom-end", open: g, defaultOpen: _, onOpenChange: v, closeLabel: y = "Cerrar", badge: b = 0, badgeMax: x = 99, badgeLabel: S = (e) => `${e} mensajes nuevos`, badgeLive: C = !0, dismissOnOutsidePress: w = !1, className: T, ...E }) {
+	let [D, O] = s(null);
+	return /* @__PURE__ */ a("div", {
+		ref: O,
+		className: ["floating-dock", T].filter(Boolean).join(" "),
+		"data-position": h,
+		...E,
+		children: /* @__PURE__ */ o(c.Root, {
+			open: g,
+			defaultOpen: _,
 			modal: !1,
-			disablePointerDismissal: !C,
-			onOpenChange: (e) => _?.(e),
+			disablePointerDismissal: !w,
+			onOpenChange: (e) => v?.(e),
 			children: [
-				/* @__PURE__ */ i(s.Trigger, { render: /* @__PURE__ */ a(n, {
+				/* @__PURE__ */ a(c.Trigger, { render: /* @__PURE__ */ o(n, {
 					variant: "primary",
 					size: "lg",
 					iconOnly: !0,
-					"aria-label": c,
+					"aria-label": l,
 					className: "floating-dock__trigger",
-					children: [p ?? /* @__PURE__ */ i(e, {
+					children: [m ?? /* @__PURE__ */ a(e, {
 						name: "message",
 						size: "md"
-					}), y > 0 && /* @__PURE__ */ i(r, {
-						count: y,
-						max: b,
+					}), b > 0 && /* @__PURE__ */ a(i, {
+						count: b,
+						max: x,
 						variant: "danger",
 						"aria-hidden": "true",
 						className: "floating-dock__badge"
 					})]
 				}) }),
-				S && y > 0 && /* @__PURE__ */ i(t, {
+				C && b > 0 && /* @__PURE__ */ a(t, {
 					"aria-live": "polite",
-					children: x(y)
+					children: S(b)
 				}),
-				E && /* @__PURE__ */ i(s.Portal, {
-					container: E,
+				D && /* @__PURE__ */ a(c.Portal, {
+					container: D,
 					className: "floating-dock__portal",
-					children: /* @__PURE__ */ a(s.Popup, {
+					children: /* @__PURE__ */ o(c.Popup, {
 						className: "floating-dock__panel",
 						children: [
-							/* @__PURE__ */ a("header", {
+							/* @__PURE__ */ o("header", {
 								className: "floating-dock__header",
-								children: [u ? /* @__PURE__ */ i(s.Title, { render: /* @__PURE__ */ i(t, { children: l }) }) : /* @__PURE__ */ i(s.Title, {
+								children: [d ? /* @__PURE__ */ a(c.Title, { render: /* @__PURE__ */ a(t, { children: u }) }) : /* @__PURE__ */ a(c.Title, {
 									className: "floating-dock__title",
-									children: l
-								}), d != null && /* @__PURE__ */ i(s.Description, {
+									children: u
+								}), f != null && /* @__PURE__ */ a(c.Description, {
 									className: "floating-dock__description",
-									children: d
+									children: f
 								})]
 							}),
-							/* @__PURE__ */ i(s.Close, {
+							/* @__PURE__ */ a(c.Close, {
 								className: "floating-dock__close",
-								"aria-label": v,
-								children: /* @__PURE__ */ i(e, {
-									name: "close",
-									size: "md"
-								})
+								render: /* @__PURE__ */ a(r, { label: y })
 							}),
-							/* @__PURE__ */ i("div", {
+							/* @__PURE__ */ a("div", {
 								className: "floating-dock__body",
-								children: f
+								children: p
 							})
 						]
 					})
@@ -79,4 +76,4 @@ function c({ label: c, title: l, titleHidden: u = !1, description: d, children: 
 	});
 }
 //#endregion
-export { c as FloatingDock };
+export { l as FloatingDock };

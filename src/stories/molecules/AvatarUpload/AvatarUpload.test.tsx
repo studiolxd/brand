@@ -94,7 +94,7 @@ describe('AvatarUpload', () => {
     });
 
     expect(onSelect).toHaveBeenCalledTimes(1);
-    expect(screen.getByRole('dialog', { name: 'Recorta la imagen' })).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Recortar imagen' })).toBeInTheDocument();
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 

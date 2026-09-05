@@ -99,31 +99,18 @@
   color: var(--sheet-description-color);
 }
 
-/* Botón nativo, sin Button: el aspa no tiene la excepción de hover-con-relleno
-   de `ghost` — en reposo y en hover/foco solo cambia el color del glifo. */
-.sheet__close {
+/* El aspa es el `CloseButton` del sistema. El cajón solo pone dónde va y de
+   qué talla, desde los tokens `sheet.close-*` que ya tenía. */
+.sheet__close.close-button {
   position: absolute;
   inset-block-start: var(--sheet-close-inset);
   inset-inline-end: var(--sheet-close-inset);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--sheet-close-size);
-  block-size: var(--sheet-close-size);
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  color: var(--sheet-close-color);
-  cursor: pointer;
-}
-
-.sheet__close:focus-visible {
-  outline: var(--sheet-close-focus-ring-width) solid var(--sheet-close-focus-ring-color);
-  outline-offset: var(--sheet-close-focus-ring-offset);
-}
-
-.sheet__close .icon {
-  --icon-size: var(--sheet-close-icon-size);
+  --close-button-size:              var(--sheet-close-size);
+  --close-button-icon-size:         var(--sheet-close-icon-size);
+  --close-button-color:             var(--sheet-close-color);
+  --close-button-focus-ring-width:  var(--sheet-close-focus-ring-width);
+  --close-button-focus-ring-offset: var(--sheet-close-focus-ring-offset);
+  --close-button-focus-ring-color:  var(--sheet-close-focus-ring-color);
 }
 
 .sheet__body {
@@ -131,8 +118,26 @@
   min-height: 0;
 }
 
+/* Mismo criterio que el pie de `Modal` (ver Modal.css): por debajo del punto
+   de ruptura los botones se apilan a todo el ancho en `column-reverse`, con la
+   acción principal arriba, y a partir de ahí vuelven a la fila de la derecha.
+   Un cajón en un móvil estrecho lo necesita igual que un diálogo. */
 .sheet__footer {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
   gap: var(--sheet-footer-gap);
+}
+
+.sheet__footer > * {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .sheet__footer {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .sheet__footer > * {
+    inline-size: auto;
+  }
 }

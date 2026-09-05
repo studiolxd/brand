@@ -6,8 +6,7 @@
    patrón es intencional (DX cliente + RSC-safe) y fast-refresh no aplica a source
    de librería. */
 import { forwardRef, useState } from 'react';
-import { Button } from '../../atoms/Button/Button';
-import { Icon } from '../../atoms/Icon/Icon';
+import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import './Alert.css';
 
 export type AlertVariant = 'default' | 'success' | 'error' | 'warning';
@@ -148,16 +147,7 @@ const AlertRoot = forwardRef<HTMLDivElement, AlertProps>(function Alert({
         {children}
       </div>
       {dismissible && (
-        <Button
-          variant="ghost"
-          size="sm"
-          iconOnly
-          className="alert__close"
-          aria-label={closeLabel}
-          onClick={handleDismiss}
-        >
-          <Icon name="close" size="sm" />
-        </Button>
+        <CloseButton className="alert__close" label={closeLabel} onClick={handleDismiss} />
       )}
     </div>
   );

@@ -125,32 +125,18 @@
   color: var(--floating-dock-description-color);
 }
 
-/* Botón nativo, sin Button: el aspa va en la tinta desde el reposo y en
-   hover/foco no cambia ni de fondo ni de color — el foco se marca con el
-   anillo. Mismo trato que en Modal y Sheet. */
-.floating-dock__close {
+/* El aspa es el `CloseButton` del sistema. El dock solo pone dónde va y de qué
+   talla, desde los tokens `floating-dock.close-*` que ya tenía. */
+.floating-dock__close.close-button {
   position: absolute;
   inset-block-start: var(--floating-dock-panel-padding-block);
   inset-inline-end: var(--floating-dock-panel-padding-inline);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--floating-dock-close-size);
-  block-size: var(--floating-dock-close-size);
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  color: var(--floating-dock-close-color);
-  cursor: pointer;
-}
-
-.floating-dock__close:focus-visible {
-  outline: var(--floating-dock-close-focus-ring-width) solid var(--floating-dock-close-focus-ring-color);
-  outline-offset: var(--floating-dock-close-focus-ring-offset);
-}
-
-.floating-dock__close .icon {
-  --icon-size: var(--floating-dock-close-icon-size);
+  --close-button-size:              var(--floating-dock-close-size);
+  --close-button-icon-size:         var(--floating-dock-close-icon-size);
+  --close-button-color:             var(--floating-dock-close-color);
+  --close-button-focus-ring-width:  var(--floating-dock-close-focus-ring-width);
+  --close-button-focus-ring-offset: var(--floating-dock-close-focus-ring-offset);
+  --close-button-focus-ring-color:  var(--floating-dock-close-focus-ring-color);
 }
 
 /* El cuerpo es lo único que se desplaza: la cabecera y el aspa se quedan. */

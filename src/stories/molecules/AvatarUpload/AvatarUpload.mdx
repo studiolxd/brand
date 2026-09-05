@@ -62,15 +62,17 @@ El texto sale de `accept` y `maxSize` ("JPEG, PNG, WEBP · máx. 5.0 MB"); `hint
 
 `size` es la talla del sistema y, como en todos los campos, **sin ella la pone el contexto**: el `Form` que envuelva, el pie de `OnboardingShell`, cualquier `FormSizeContext`. En la superficie pública —el alta— los controles van a `lg` y esta pieza sube con ellos sin que nadie se acuerde de pasar nada.
 
-La talla mueve el botón y el avatar a la vez. El avatar va **un peldaño por encima** del control, porque aquí es el asunto de la pantalla y además hay que soltarle algo encima:
+La talla mueve el botón y el avatar a la vez. El avatar va **dos peldaños por encima** del control: aquí no acompaña al botón, es el asunto de la pantalla y además la diana sobre la que se suelta el archivo.
 
 | Talla del control | Avatar |
 | --- | --- |
-| `sm` (32px) | `md` — 40px |
-| `md` (40px) | `lg` — 48px |
-| `lg` (48px) | `xl` — 64px |
+| `sm` (32px) | `lg` — 48px |
+| `md` (40px) | `xl` — 64px |
+| `lg` (48px) | `2xl` — 96px |
 
-`xl` es la talla que le faltaba al `Avatar`, y no es de esta pieza: una cabecera de perfil a 48px también se queda corta. 64px es el peldaño que el sistema ya usa por encima de la escala de controles —`icon.size-xl`, el mismo que `logo.height-xl` y `logomark.size-xl`—, y sigue en el múltiplo de 8. Por encima de `lg` el sistema deja de medir con la escala de controles: 48px es el control más alto que existe.
+Por encima de `lg` el sistema deja de medir con la escala de controles —48px es el control más alto que existe— y pasa a la de marca: `xl` (64px) es `icon.size-xl`, el mismo peldaño que `logo.height-xl` y `logomark.size-xl`, y `2xl` (96px) es vez y media ese, en el múltiplo de 8.
+
+**Por qué 96 y no más**: la diana tiene que acertarse sin apuntar —96px es más de tres veces el objetivo táctil mínimo, y a un avatar redondo el círculo le come esquinas—, y tiene que seguir cabiendo con su botón al lado en la pantalla más estrecha que servimos. A 375px, con el inset del contenedor, el avatar (96) más el aire (16) más el botón «Subir» a talla `lg` entran de sobra en una sola línea; el peldaño siguiente ya no. Hay un test de story que lo mide.
 
 <Canvas of={AvatarUploadStories.TallaPorContexto} />
 

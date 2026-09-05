@@ -1,27 +1,27 @@
 import '../ImageCropDialog.css';
 import { Button as e } from "../button.js";
 import { Modal as t } from "../modal.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import i, { PureComponent as a, createRef as o, useRef as s, useState as c } from "react";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
+import a, { PureComponent as o, createRef as s, useRef as c, useState as l } from "react";
 //#region node_modules/.pnpm/react-image-crop@11.1.2_react@19.2.4/node_modules/react-image-crop/dist/index.js
-var l = {
+var u = {
 	x: 0,
 	y: 0,
 	width: 0,
 	height: 0,
 	unit: "px"
-}, u = (e, t, n) => Math.min(Math.max(e, t), n), d = (...e) => e.filter((e) => e && typeof e == "string").join(" "), f = (e, t) => e === t || e.width === t.width && e.height === t.height && e.x === t.x && e.y === t.y && e.unit === t.unit;
-function p(e, t, n, r) {
-	let i = g(e, n, r);
-	return e.width && (i.height = i.width / t), e.height && (i.width = i.height * t), i.y + i.height > r && (i.height = r - i.y, i.width = i.height * t), i.x + i.width > n && (i.width = n - i.x, i.height = i.width / t), e.unit === "%" ? h(i, n, r) : i;
-}
-function m(e, t, n) {
-	let r = g(e, t, n);
-	return r.x = (t - r.width) / 2, r.y = (n - r.height) / 2, e.unit === "%" ? h(r, t, n) : r;
+}, d = (e, t, n) => Math.min(Math.max(e, t), n), f = (...e) => e.filter((e) => e && typeof e == "string").join(" "), p = (e, t) => e === t || e.width === t.width && e.height === t.height && e.x === t.x && e.y === t.y && e.unit === t.unit;
+function m(e, t, n, r) {
+	let i = _(e, n, r);
+	return e.width && (i.height = i.width / t), e.height && (i.width = i.height * t), i.y + i.height > r && (i.height = r - i.y, i.width = i.height * t), i.x + i.width > n && (i.width = n - i.x, i.height = i.width / t), e.unit === "%" ? g(i, n, r) : i;
 }
 function h(e, t, n) {
+	let r = _(e, t, n);
+	return r.x = (t - r.width) / 2, r.y = (n - r.height) / 2, e.unit === "%" ? g(r, t, n) : r;
+}
+function g(e, t, n) {
 	return e.unit === "%" ? {
-		...l,
+		...u,
 		...e,
 		unit: "%"
 	} : {
@@ -32,9 +32,9 @@ function h(e, t, n) {
 		height: e.height ? e.height / n * 100 : 0
 	};
 }
-function g(e, t, n) {
+function _(e, t, n) {
 	return !e.unit || e.unit === "px" ? {
-		...l,
+		...u,
 		...e,
 		unit: "px"
 	} : {
@@ -45,7 +45,7 @@ function g(e, t, n) {
 		height: e.height ? e.height * n / 100 : 0
 	};
 }
-function _(e, t, n, r, i, a = 0, o = 0, s = r, c = i) {
+function v(e, t, n, r, i, a = 0, o = 0, s = r, c = i) {
 	let l = { ...e }, u = Math.min(a, r), d = Math.min(o, i), f = Math.min(s, r), p = Math.min(c, i);
 	t && (t > 1 ? (u = o ? o * t : u, d = u / t, f = s * t) : (d = a ? a / t : d, u = d * t, p = c / t)), l.y < 0 && (l.height = Math.max(l.height + l.y, d), l.y = 0), l.x < 0 && (l.width = Math.max(l.width + l.x, u), l.x = 0);
 	let m = r - (l.x + l.width);
@@ -63,14 +63,14 @@ function _(e, t, n, r, i, a = 0, o = 0, s = r, c = i) {
 	}
 	return l;
 }
-function v(e, t, n, r) {
+function y(e, t, n, r) {
 	let i = { ...e };
 	return t === "ArrowLeft" ? r === "nw" ? (i.x -= n, i.y -= n, i.width += n, i.height += n) : r === "w" ? (i.x -= n, i.width += n) : r === "sw" ? (i.x -= n, i.width += n, i.height += n) : r === "ne" ? (i.y += n, i.width -= n, i.height -= n) : r === "e" ? i.width -= n : r === "se" && (i.width -= n, i.height -= n) : t === "ArrowRight" && (r === "nw" ? (i.x += n, i.y += n, i.width -= n, i.height -= n) : r === "w" ? (i.x += n, i.width -= n) : r === "sw" ? (i.x += n, i.width -= n, i.height -= n) : r === "ne" ? (i.y -= n, i.width += n, i.height += n) : r === "e" ? i.width += n : r === "se" && (i.width += n, i.height += n)), t === "ArrowUp" ? r === "nw" ? (i.x -= n, i.y -= n, i.width += n, i.height += n) : r === "n" ? (i.y -= n, i.height += n) : r === "ne" ? (i.y -= n, i.width += n, i.height += n) : r === "sw" ? (i.x += n, i.width -= n, i.height -= n) : r === "s" ? i.height -= n : r === "se" && (i.width -= n, i.height -= n) : t === "ArrowDown" && (r === "nw" ? (i.x += n, i.y += n, i.width -= n, i.height -= n) : r === "n" ? (i.y += n, i.height -= n) : r === "ne" ? (i.y += n, i.width -= n, i.height -= n) : r === "sw" ? (i.x -= n, i.width += n, i.height += n) : r === "s" ? i.height += n : r === "se" && (i.width += n, i.height += n)), i;
 }
-var y = {
+var b = {
 	capture: !0,
 	passive: !1
-}, b = 0, x = class e extends a {
+}, x = 0, S = class e extends o {
 	static xOrds = ["e", "w"];
 	static yOrds = ["n", "s"];
 	static xyOrds = [
@@ -108,11 +108,11 @@ var y = {
 		clientY: 0,
 		isResize: !0
 	};
-	componentRef = o();
-	mediaRef = o();
+	componentRef = s();
+	mediaRef = s();
 	resizeObserver;
 	initChangeCalled = !1;
-	instanceId = `rc-${b++}`;
+	instanceId = `rc-${x++}`;
 	state = {
 		cropIsActive: !1,
 		newCropIsBeingDrawn: !1
@@ -137,22 +137,22 @@ var y = {
 		let { crop: t, onComplete: n } = this.props;
 		if (n && !e.crop && t) {
 			let { width: e, height: r } = this.getBox();
-			e && r && n(g(t, e, r), h(t, e, r));
+			e && r && n(_(t, e, r), g(t, e, r));
 		}
 	}
 	componentWillUnmount() {
 		this.resizeObserver && this.resizeObserver.disconnect(), this.unbindDocMove();
 	}
 	bindDocMove() {
-		this.docMoveBound ||= (this.document.addEventListener("pointermove", this.onDocPointerMove, y), this.document.addEventListener("pointerup", this.onDocPointerDone, y), this.document.addEventListener("pointercancel", this.onDocPointerDone, y), !0);
+		this.docMoveBound ||= (this.document.addEventListener("pointermove", this.onDocPointerMove, b), this.document.addEventListener("pointerup", this.onDocPointerDone, b), this.document.addEventListener("pointercancel", this.onDocPointerDone, b), !0);
 	}
 	unbindDocMove() {
-		this.docMoveBound &&= (this.document.removeEventListener("pointermove", this.onDocPointerMove, y), this.document.removeEventListener("pointerup", this.onDocPointerDone, y), this.document.removeEventListener("pointercancel", this.onDocPointerDone, y), !1);
+		this.docMoveBound &&= (this.document.removeEventListener("pointermove", this.onDocPointerMove, b), this.document.removeEventListener("pointerup", this.onDocPointerDone, b), this.document.removeEventListener("pointercancel", this.onDocPointerDone, b), !1);
 	}
 	onCropPointerDown = (e) => {
 		let { crop: t, disabled: n } = this.props, r = this.getBox();
 		if (!t) return;
-		let i = g(t, r.width, r.height);
+		let i = _(t, r.width, r.height);
 		if (n) return;
 		e.cancelable && e.preventDefault(), this.bindDocMove(), this.componentRef.current.focus({ preventScroll: !0 });
 		let a = e.target.dataset.ord, o = !!a, s = e.clientX, c = e.clientY, l = i.x, u = i.y;
@@ -190,7 +190,7 @@ var y = {
 			clientX: e.clientX,
 			clientY: e.clientY,
 			isResize: !0
-		}, this.mouseDownOnCrop = !0, a(g(l, o.width, o.height), h(l, o.width, o.height)), this.setState({
+		}, this.mouseDownOnCrop = !0, a(_(l, o.width, o.height), g(l, o.width, o.height)), this.setState({
 			cropIsActive: !0,
 			newCropIsBeingDrawn: !0
 		});
@@ -202,34 +202,34 @@ var y = {
 		let { evData: o } = this;
 		o.clientX = e.clientX, o.clientY = e.clientY;
 		let s;
-		s = o.isResize ? this.resizeCrop() : this.dragCrop(), f(t, s) || r(g(s, a.width, a.height), h(s, a.width, a.height));
+		s = o.isResize ? this.resizeCrop() : this.dragCrop(), p(t, s) || r(_(s, a.width, a.height), g(s, a.width, a.height));
 	};
 	onComponentKeyDown = (t) => {
 		let { crop: n, disabled: r, onChange: i, onComplete: a } = this.props;
 		if (r) return;
 		let o = t.key, s = !1;
 		if (!n) return;
-		let c = this.getBox(), l = this.makePixelCrop(c), d = (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) ? e.nudgeStepLarge : t.shiftKey ? e.nudgeStepMedium : e.nudgeStep;
-		if (o === "ArrowLeft" ? (l.x -= d, s = !0) : o === "ArrowRight" ? (l.x += d, s = !0) : o === "ArrowUp" ? (l.y -= d, s = !0) : o === "ArrowDown" && (l.y += d, s = !0), s) {
-			t.cancelable && t.preventDefault(), l.x = u(l.x, 0, c.width - l.width), l.y = u(l.y, 0, c.height - l.height);
-			let e = g(l, c.width, c.height), n = h(l, c.width, c.height);
+		let c = this.getBox(), l = this.makePixelCrop(c), u = (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) ? e.nudgeStepLarge : t.shiftKey ? e.nudgeStepMedium : e.nudgeStep;
+		if (o === "ArrowLeft" ? (l.x -= u, s = !0) : o === "ArrowRight" ? (l.x += u, s = !0) : o === "ArrowUp" ? (l.y -= u, s = !0) : o === "ArrowDown" && (l.y += u, s = !0), s) {
+			t.cancelable && t.preventDefault(), l.x = d(l.x, 0, c.width - l.width), l.y = d(l.y, 0, c.height - l.height);
+			let e = _(l, c.width, c.height), n = g(l, c.width, c.height);
 			i(e, n), a && a(e, n);
 		}
 	};
 	onHandlerKeyDown = (t, n) => {
-		let { aspect: r = 0, crop: i, disabled: a, minWidth: o = 0, minHeight: s = 0, maxWidth: c, maxHeight: l, onChange: u, onComplete: d } = this.props, p = this.getBox();
+		let { aspect: r = 0, crop: i, disabled: a, minWidth: o = 0, minHeight: s = 0, maxWidth: c, maxHeight: l, onChange: u, onComplete: d } = this.props, f = this.getBox();
 		if (a || !i) return;
 		if (t.key === "ArrowUp" || t.key === "ArrowDown" || t.key === "ArrowLeft" || t.key === "ArrowRight") t.stopPropagation(), t.preventDefault();
 		else return;
-		let m = (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) ? e.nudgeStepLarge : t.shiftKey ? e.nudgeStepMedium : e.nudgeStep, y = _(v(g(i, p.width, p.height), t.key, m, n), r, n, p.width, p.height, o, s, c, l);
-		if (!f(i, y)) {
-			let e = h(y, p.width, p.height);
-			u(y, e), d && d(y, e);
+		let m = (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) ? e.nudgeStepLarge : t.shiftKey ? e.nudgeStepMedium : e.nudgeStep, h = v(y(_(i, f.width, f.height), t.key, m, n), r, n, f.width, f.height, o, s, c, l);
+		if (!p(i, h)) {
+			let e = g(h, f.width, f.height);
+			u(h, e), d && d(h, e);
 		}
 	};
 	onDocPointerDone = (e) => {
 		let { crop: t, disabled: n, onComplete: r, onDragEnd: i } = this.props, a = this.getBox();
-		this.unbindDocMove(), !(n || !t) && this.mouseDownOnCrop && (this.mouseDownOnCrop = !1, this.dragStarted = !1, i && i(e), r && r(g(t, a.width, a.height), h(t, a.width, a.height)), this.setState({
+		this.unbindDocMove(), !(n || !t) && this.mouseDownOnCrop && (this.mouseDownOnCrop = !1, this.dragStarted = !1, i && i(e), r && r(_(t, a.width, a.height), g(t, a.width, a.height)), this.setState({
 			cropIsActive: !1,
 			newCropIsBeingDrawn: !1
 		}));
@@ -248,7 +248,7 @@ var y = {
 	}
 	dragCrop() {
 		let { evData: e } = this, t = this.getBox(), n = this.makePixelCrop(t), r = e.clientX - e.startClientX, i = e.clientY - e.startClientY;
-		return n.x = u(e.startCropX + r, 0, t.width - n.width), n.y = u(e.startCropY + i, 0, t.height - n.height), n;
+		return n.x = d(e.startCropX + r, 0, t.width - n.width), n.y = d(e.startCropY + i, 0, t.height - n.height), n;
 	}
 	getPointRegion(e, t, n, r) {
 		let { evData: i } = this, a = i.clientX - e.x, o = i.clientY - e.y, s;
@@ -261,8 +261,8 @@ var y = {
 		return !t || !i && !a ? [i, a] : t > 1 ? i ? [i, i / t] : [a * t, a] : a ? [a * t, a] : [i, i / t];
 	}
 	resizeCrop() {
-		let { evData: t } = this, { aspect: n = 0, maxWidth: r, maxHeight: i } = this.props, a = this.getBox(), [o, s] = this.resolveMinDimensions(a, n, this.props.minWidth, this.props.minHeight), c = this.makePixelCrop(a), l = this.getPointRegion(a, t.ord, o, s), d = t.ord || l, f = t.clientX - t.startClientX, p = t.clientY - t.startClientY;
-		(o && d === "nw" || d === "w" || d === "sw") && (f = Math.min(f, -o)), (s && d === "nw" || d === "n" || d === "ne") && (p = Math.min(p, -s));
+		let { evData: t } = this, { aspect: n = 0, maxWidth: r, maxHeight: i } = this.props, a = this.getBox(), [o, s] = this.resolveMinDimensions(a, n, this.props.minWidth, this.props.minHeight), c = this.makePixelCrop(a), l = this.getPointRegion(a, t.ord, o, s), u = t.ord || l, f = t.clientX - t.startClientX, p = t.clientY - t.startClientY;
+		(o && u === "nw" || u === "w" || u === "sw") && (f = Math.min(f, -o)), (s && u === "nw" || u === "n" || u === "ne") && (p = Math.min(p, -s));
 		let m = {
 			unit: "px",
 			x: 0,
@@ -271,12 +271,12 @@ var y = {
 			height: 0
 		};
 		l === "ne" ? (m.x = t.startCropX, m.width = f, n ? (m.height = m.width / n, m.y = t.startCropY - m.height) : (m.height = Math.abs(p), m.y = t.startCropY - m.height)) : l === "se" ? (m.x = t.startCropX, m.y = t.startCropY, m.width = f, n ? m.height = m.width / n : m.height = p) : l === "sw" ? (m.x = t.startCropX + f, m.y = t.startCropY, m.width = Math.abs(f), n ? m.height = m.width / n : m.height = p) : l === "nw" && (m.x = t.startCropX + f, m.width = Math.abs(f), n ? (m.height = m.width / n, m.y = t.startCropY - m.height) : (m.height = Math.abs(p), m.y = t.startCropY + p));
-		let h = _(m, n, l, a.width, a.height, o, s, r, i);
-		return n || e.xyOrds.indexOf(d) > -1 ? c = h : e.xOrds.indexOf(d) > -1 ? (c.x = h.x, c.width = h.width) : e.yOrds.indexOf(d) > -1 && (c.y = h.y, c.height = h.height), c.x = u(c.x, 0, a.width - c.width), c.y = u(c.y, 0, a.height - c.height), c;
+		let h = v(m, n, l, a.width, a.height, o, s, r, i);
+		return n || e.xyOrds.indexOf(u) > -1 ? c = h : e.xOrds.indexOf(u) > -1 ? (c.x = h.x, c.width = h.width) : e.yOrds.indexOf(u) > -1 && (c.y = h.y, c.height = h.height), c.x = d(c.x, 0, a.width - c.width), c.y = d(c.y, 0, a.height - c.height), c;
 	}
 	renderCropSelection() {
-		let { ariaLabels: t = e.defaultProps.ariaLabels, disabled: n, locked: r, renderSelectionAddon: a, ruleOfThirds: o, crop: s } = this.props, c = this.getCropStyle();
-		if (s) return /* @__PURE__ */ i.createElement("div", {
+		let { ariaLabels: t = e.defaultProps.ariaLabels, disabled: n, locked: r, renderSelectionAddon: i, ruleOfThirds: o, crop: s } = this.props, c = this.getCropStyle();
+		if (s) return /* @__PURE__ */ a.createElement("div", {
 			style: c,
 			className: "ReactCrop__crop-selection",
 			onPointerDown: this.onCropPointerDown,
@@ -284,119 +284,119 @@ var y = {
 			tabIndex: 0,
 			onKeyDown: this.onComponentKeyDown,
 			role: "group"
-		}, !n && !r && /* @__PURE__ */ i.createElement("div", {
+		}, !n && !r && /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-elements",
 			onFocus: this.onDragFocus
-		}, /* @__PURE__ */ i.createElement("div", {
+		}, /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-n",
 			"data-ord": "n"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-e",
 			"data-ord": "e"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-s",
 			"data-ord": "s"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-bar ord-w",
 			"data-ord": "w"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-nw",
 			"data-ord": "nw",
 			tabIndex: 0,
 			"aria-label": t.nwDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "nw"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-n",
 			"data-ord": "n",
 			tabIndex: 0,
 			"aria-label": t.nDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "n"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-ne",
 			"data-ord": "ne",
 			tabIndex: 0,
 			"aria-label": t.neDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "ne"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-e",
 			"data-ord": "e",
 			tabIndex: 0,
 			"aria-label": t.eDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "e"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-se",
 			"data-ord": "se",
 			tabIndex: 0,
 			"aria-label": t.seDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "se"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-s",
 			"data-ord": "s",
 			tabIndex: 0,
 			"aria-label": t.sDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "s"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-sw",
 			"data-ord": "sw",
 			tabIndex: 0,
 			"aria-label": t.swDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "sw"),
 			role: "button"
-		}), /* @__PURE__ */ i.createElement("div", {
+		}), /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__drag-handle ord-w",
 			"data-ord": "w",
 			tabIndex: 0,
 			"aria-label": t.wDragHandle,
 			onKeyDown: (e) => this.onHandlerKeyDown(e, "w"),
 			role: "button"
-		})), a && /* @__PURE__ */ i.createElement("div", {
+		})), i && /* @__PURE__ */ a.createElement("div", {
 			className: "ReactCrop__selection-addon",
 			onPointerDown: (e) => e.stopPropagation()
-		}, a(this.state)), o && /* @__PURE__ */ i.createElement(i.Fragment, null, /* @__PURE__ */ i.createElement("div", { className: "ReactCrop__rule-of-thirds-hz" }), /* @__PURE__ */ i.createElement("div", { className: "ReactCrop__rule-of-thirds-vt" })));
+		}, i(this.state)), o && /* @__PURE__ */ a.createElement(a.Fragment, null, /* @__PURE__ */ a.createElement("div", { className: "ReactCrop__rule-of-thirds-hz" }), /* @__PURE__ */ a.createElement("div", { className: "ReactCrop__rule-of-thirds-vt" })));
 	}
 	makePixelCrop(e) {
-		return g({
-			...l,
+		return _({
+			...u,
 			...this.props.crop || {}
 		}, e.width, e.height);
 	}
 	render() {
-		let { aspect: e, children: t, circularCrop: n, className: r, crop: a, disabled: o, locked: s, style: c, ruleOfThirds: l } = this.props, { cropIsActive: u, newCropIsBeingDrawn: f } = this.state, p = a ? this.renderCropSelection() : null, m = d("ReactCrop", r, u && "ReactCrop--active", o && "ReactCrop--disabled", s && "ReactCrop--locked", f && "ReactCrop--new-crop", a && e && "ReactCrop--fixed-aspect", a && n && "ReactCrop--circular-crop", a && l && "ReactCrop--rule-of-thirds", !this.dragStarted && a && !a.width && !a.height && "ReactCrop--invisible-crop", n && "ReactCrop--no-animate");
-		return /* @__PURE__ */ i.createElement("div", {
+		let { aspect: e, children: t, circularCrop: n, className: r, crop: i, disabled: o, locked: s, style: c, ruleOfThirds: l } = this.props, { cropIsActive: u, newCropIsBeingDrawn: d } = this.state, p = i ? this.renderCropSelection() : null, m = f("ReactCrop", r, u && "ReactCrop--active", o && "ReactCrop--disabled", s && "ReactCrop--locked", d && "ReactCrop--new-crop", i && e && "ReactCrop--fixed-aspect", i && n && "ReactCrop--circular-crop", i && l && "ReactCrop--rule-of-thirds", !this.dragStarted && i && !i.width && !i.height && "ReactCrop--invisible-crop", n && "ReactCrop--no-animate");
+		return /* @__PURE__ */ a.createElement("div", {
 			ref: this.componentRef,
 			className: m,
 			style: c
-		}, /* @__PURE__ */ i.createElement("div", {
+		}, /* @__PURE__ */ a.createElement("div", {
 			ref: this.mediaRef,
 			className: "ReactCrop__child-wrapper",
 			onPointerDown: this.onComponentPointerDown
-		}, t), a ? /* @__PURE__ */ i.createElement("svg", {
+		}, t), i ? /* @__PURE__ */ a.createElement("svg", {
 			className: "ReactCrop__crop-mask",
 			width: "100%",
 			height: "100%"
-		}, /* @__PURE__ */ i.createElement("defs", null, /* @__PURE__ */ i.createElement("mask", { id: `hole-${this.instanceId}` }, /* @__PURE__ */ i.createElement("rect", {
+		}, /* @__PURE__ */ a.createElement("defs", null, /* @__PURE__ */ a.createElement("mask", { id: `hole-${this.instanceId}` }, /* @__PURE__ */ a.createElement("rect", {
 			width: "100%",
 			height: "100%",
 			fill: "white"
-		}), n ? /* @__PURE__ */ i.createElement("ellipse", {
-			cx: `${a.x + a.width / 2}${a.unit}`,
-			cy: `${a.y + a.height / 2}${a.unit}`,
-			rx: `${a.width / 2}${a.unit}`,
-			ry: `${a.height / 2}${a.unit}`,
+		}), n ? /* @__PURE__ */ a.createElement("ellipse", {
+			cx: `${i.x + i.width / 2}${i.unit}`,
+			cy: `${i.y + i.height / 2}${i.unit}`,
+			rx: `${i.width / 2}${i.unit}`,
+			ry: `${i.height / 2}${i.unit}`,
 			fill: "black"
-		}) : /* @__PURE__ */ i.createElement("rect", {
-			x: `${a.x}${a.unit}`,
-			y: `${a.y}${a.unit}`,
-			width: `${a.width}${a.unit}`,
-			height: `${a.height}${a.unit}`,
+		}) : /* @__PURE__ */ a.createElement("rect", {
+			x: `${i.x}${i.unit}`,
+			y: `${i.y}${i.unit}`,
+			width: `${i.width}${i.unit}`,
+			height: `${i.height}${i.unit}`,
 			fill: "black"
-		}))), /* @__PURE__ */ i.createElement("rect", {
+		}))), /* @__PURE__ */ a.createElement("rect", {
 			fill: "black",
 			fillOpacity: .5,
 			width: "100%",
@@ -408,7 +408,7 @@ var y = {
 Math.PI / 180;
 //#endregion
 //#region src/stories/molecules/ImageCropDialog/crop.ts
-async function S(e, t, n = {}) {
+async function C(e, t, n = {}) {
 	let r = n.outputSize ?? 512, i = n.mimeType ?? "image/jpeg", a = n.quality ?? .9, o = document.createElement("canvas");
 	o.width = r, o.height = r;
 	let s = o.getContext("2d");
@@ -420,64 +420,63 @@ async function S(e, t, n = {}) {
 }
 //#endregion
 //#region src/stories/molecules/ImageCropDialog/ImageCropDialog.tsx
-function C({ sourceUrl: i, title: a, description: o, circularCrop: l = !1, aspect: u = 1, outputSize: d = 512, outputMimeType: f, busy: h = !1, cancelLabel: g, confirmLabel: _, closeLabel: v, onConfirm: y, onClose: b, className: C }) {
-	let w = s(null), [T, E] = c(), [D, O] = c(), k = () => {
-		E(void 0), O(void 0), b();
-	}, A = async () => {
-		let e = w.current;
-		!e || !D || D.width === 0 || (await y(await S(e, D, {
-			mimeType: f,
-			outputSize: d
-		})), E(void 0), O(void 0));
+function w({ sourceUrl: a, title: o, description: s, circularCrop: u = !1, aspect: d = 1, outputSize: f = 512, outputMimeType: p, busy: g = !1, cancelLabel: _, confirmLabel: v, closeLabel: y, onConfirm: b, onClose: x, className: w }) {
+	let T = c(null), [E, D] = l(), [O, k] = l(), A = () => {
+		D(void 0), k(void 0), x();
+	}, j = async () => {
+		let e = T.current;
+		!e || !O || O.width === 0 || (await b(await C(e, O, {
+			mimeType: p,
+			outputSize: f
+		})), D(void 0), k(void 0));
 	};
-	return /* @__PURE__ */ n(t, {
-		open: i !== null,
+	return /* @__PURE__ */ r(t, {
+		open: a !== null,
 		onClose: () => {
-			h || k();
+			g || A();
 		},
-		title: a,
-		...v ? { closeLabel: v } : {},
-		...o == null ? {} : { description: o },
+		title: o,
+		...y ? { closeLabel: y } : {},
+		...s == null ? {} : { description: s },
+		footerClassName: "image-crop-dialog__actions",
+		footer: /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(e, {
+			variant: "outline",
+			disabled: g,
+			onClick: A,
+			children: _
+		}), /* @__PURE__ */ r(e, {
+			disabled: g || !O?.width,
+			onClick: j,
+			children: v
+		})] }),
 		children: /* @__PURE__ */ r("div", {
-			className: ["image-crop-dialog", C].filter(Boolean).join(" "),
-			children: [i && /* @__PURE__ */ n("div", {
+			className: ["image-crop-dialog", w].filter(Boolean).join(" "),
+			children: a && /* @__PURE__ */ r("div", {
 				className: "image-crop-dialog__area",
-				children: /* @__PURE__ */ n(x, {
-					crop: T,
-					onChange: (e, t) => E(t),
-					onComplete: (e) => O(e),
-					aspect: u,
-					circularCrop: l,
+				children: /* @__PURE__ */ r(S, {
+					crop: E,
+					onChange: (e, t) => D(t),
+					onComplete: (e) => k(e),
+					aspect: d,
+					circularCrop: u,
 					minWidth: 64,
 					keepSelection: !0,
-					children: /* @__PURE__ */ n("img", {
-						ref: w,
-						src: i,
+					children: /* @__PURE__ */ r("img", {
+						ref: T,
+						src: a,
 						alt: "",
 						onLoad: (e) => {
 							let { width: t, height: n } = e.currentTarget;
-							E(m(p({
+							D(h(m({
 								unit: "%",
 								width: 80
-							}, u, t, n), t, n));
+							}, d, t, n), t, n));
 						}
 					})
 				})
-			}), /* @__PURE__ */ r("div", {
-				className: "image-crop-dialog__actions",
-				children: [/* @__PURE__ */ n(e, {
-					variant: "outline",
-					disabled: h,
-					onClick: k,
-					children: g
-				}), /* @__PURE__ */ n(e, {
-					disabled: h || !D?.width,
-					onClick: A,
-					children: _
-				})]
-			})]
+			})
 		})
 	});
 }
 //#endregion
-export { C as t };
+export { w as t };

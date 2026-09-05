@@ -7,6 +7,56 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## v30.8.0
+
+- **`CloseButton` — una sola aspa para todo el sistema.** Hasta ahora había dos
+  maneras de pintar lo mismo: `Modal`, `Sheet` y `FloatingDock` montaban un
+  botón nativo propio con sus tokens `*-close-*`, y `Alert` y `Toaster` un
+  `Button iconOnly variant="ghost"`, que pinta un relleno al pasar el puntero.
+  Ahora las cinco montan el mismo átomo, **sin hover**: ni fondo ni cambio de
+  color; el único estado que marca es el foco.
+- **Es una pieza propia, no una variante de `Button`.** Un aspa no tiene rótulo,
+  ni relleno, ni el hover de un botón de acción; y `ghost` revela justo el fondo
+  que aquí sobra. Se suma a la familia de iconos-botón del sistema
+  (`MenuButton`, `DotsButton`), y es el aspa en la que termina la animación de
+  `MenuButton`. Nuevo export `@studiolxd/brand/close-button` y tokens
+  `close-button.*`.
+- **Ningún token desaparece**: cada contenedor sigue mandando su talla y su
+  tinta desde los tokens `*-close-*` que ya tenía, remapeados sobre el átomo.
+  El aspa del `Alert` pasa de 16 a 24px de glifo, la talla de icono-botón del
+  sistema, la misma que ya tenían el diálogo y el dock.
+- **El pie de los diálogos, a ancho completo en móvil.** `Modal` gana la prop
+  `footer` (y `footerClassName`): reparte los botones a la derecha en una fila
+  y, por debajo del punto de ruptura `md`, los apila a todo el ancho con la
+  acción principal arriba. Es el mismo criterio —y el mismo `column-reverse`—
+  que las acciones de `Form`, y vive en `Modal` una sola vez: `ConfirmDialog`,
+  `ImageCropDialog`, `CommandPalette` y `ConsentPreferences` son `Modal`, así
+  que ninguno lo repite. El pie queda además fuera del cuerpo desplazable.
+- Tokens nuevos `modal.footer-margin-block-start` y `modal.footer-gap`
+  repuntado a `{form.actions-gap}`: la fila de acciones del sistema es una
+  sola, esté en un formulario o en un diálogo.
+- **`ImageCropDialog` — el copy del recorte.** El título nombra la acción y no
+  invita a hacerla: el default de `AvatarUpload` pasa de «Recorta la imagen» a
+  **«Recortar imagen»**, y los ejemplos de stories y docs van con él. La
+  descripción del diálogo **deja de tener default**: lo que hay en pantalla es
+  la imagen con su marco de selección, que se explica solo. `cropDescription`
+  sigue existiendo para quien tenga algo que decir.
+- **`Avatar` gana `2xl` (96px) y `AvatarUpload` lo usa.** En el paso del
+  logotipo el avatar no acompaña al botón: es el asunto de la pantalla y
+  además la diana donde se suelta la imagen. La talla del avatar pasa a ir
+  **dos peldaños por encima** del control (`sm` → 48, `md` → 64, `lg` → 96),
+  y el icono del velo sube a `lg` en la talla grande. 96px es vez y media el
+  peldaño anterior, sigue en el múltiplo de 8 y —con el botón al lado y el
+  aire del sistema— la fila entera cabe todavía en un móvil de 375px; hay un
+  test de story que lo mide.
+
+- **El pie del `Sheet`, también a ancho completo en móvil.** El cajón repetía
+  la fila alineada a la derecha del diálogo pero se quedó sin el apilado que
+  `Modal` acaba de ganar, y es la única de las duplicaciones entre los dos que
+  producía una diferencia de comportamiento: un cajón con dos acciones en un
+  móvil de 375 apretaba los botones. Mismo criterio y mismo punto de ruptura
+  (`md`) que el diálogo y que las acciones de `Form`.
+
 ## v30.7.0
 
 - **`AvatarUpload` — el avatar de una entidad con su subida.** Una sola pieza

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
-import { Inline } from '../../atoms/Inline/Inline';
 import { Modal, type ModalProps } from '../Modal/Modal';
 import './ConfirmDialog.css';
 
@@ -55,7 +54,7 @@ export interface ConfirmDialogProps {
   closeLabel?: string;
   /** Nodo donde montar el portal, como en `Modal`. */
   container?: ModalProps['container'];
-  /** Se añade DESPUÉS de las clases propias de la fila de acciones. */
+  /** Se añade DESPUÉS de las clases propias del pie del diálogo. */
   className?: string;
 }
 
@@ -130,23 +129,26 @@ export function ConfirmDialog({
       // mano tras el montaje: él corre el último y ganaría él.
       initialFocus={cancelRef}
       {...(description != null ? { description } : {})}
+      // El pie lo reparte `Modal`: fila a la derecha, y apilado a todo el
+      // ancho con la acción principal arriba por debajo del punto de ruptura.
+      footerClassName={['confirm-dialog__actions', className].filter(Boolean).join(' ')}
+      footer={
+        <>
+          <Button ref={cancelRef} variant="ghost" onClick={handleCancel} disabled={pending}>
+            {cancelLabel}
+          </Button>
+          <Button
+            variant={destructive ? 'outline' : 'primary'}
+            destructive={destructive}
+            onClick={handleConfirm}
+            disabled={pending}
+          >
+            {pending ? pendingLabel : confirmLabel}
+          </Button>
+        </>
+      }
     >
       {children}
-      {/* `Inline justify="end"` es el reparto del sistema para una fila de
-          acciones; aquí solo se le añade su aire respecto al cuerpo. */}
-      <Inline gap="sm" justify="end" className={['confirm-dialog__actions', className].filter(Boolean).join(' ')}>
-        <Button ref={cancelRef} variant="ghost" onClick={handleCancel} disabled={pending}>
-          {cancelLabel}
-        </Button>
-        <Button
-          variant={destructive ? 'outline' : 'primary'}
-          destructive={destructive}
-          onClick={handleConfirm}
-          disabled={pending}
-        >
-          {pending ? pendingLabel : confirmLabel}
-        </Button>
-      </Inline>
     </Modal>
   );
 }

@@ -26,8 +26,7 @@ const SAMPLE =
 
 const base = {
   sourceUrl: SAMPLE,
-  title: 'Recorta tu avatar',
-  description: 'Arrastra para ajustar la selección.',
+  title: 'Recortar imagen',
   outputMimeType: 'image/jpeg' as const,
   cancelLabel: 'Cancelar',
   confirmLabel: 'Guardar',
@@ -48,7 +47,7 @@ export const Circular: Story = {
 
 export const Panoramico: Story = {
   name: 'Relación 16:9 (portada)',
-  args: { ...base, title: 'Recorta la portada', aspect: 16 / 9, outputSize: 1024 },
+  args: { ...base, title: 'Recortar portada', aspect: 16 / 9, outputSize: 1024 },
 };
 
 export const Ocupado: Story = {

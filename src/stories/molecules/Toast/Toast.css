@@ -1,8 +1,8 @@
 /* El relleno, el borde, la tipografía y las intenciones del toast son los del
    `Alert`: comparten cara y juego de tokens (`alert.*`). Aquí vive solo lo que
    es propio de un aviso flotante — la capa, la posición, el apilado y el
-   movimiento de entrada y salida. El aspa y el botón de acción son `Button`
-   ghost, así que no ponen CSS propio. */
+   movimiento de entrada y salida. El aspa es el `CloseButton` del sistema y el
+   botón de acción un `Button` ghost, así que no ponen CSS propio. */
 @import '../../../tokens/components/button.css';
 @import '../../../tokens/molecules/alert.css';
 @import '../../../tokens/molecules/toast.css';

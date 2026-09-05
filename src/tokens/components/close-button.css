@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --close-button-size-sm: var(--size-component-sm); /** Lado del botón en talla sm (32px): dentro de una tarjeta compacta — un aviso, un panel del dock */
+  --close-button-size-md: var(--size-component-md); /** Lado del botón en talla md (40px, por defecto): la cabecera de un diálogo */
+  --close-button-size-lg: var(--size-component-lg); /** Lado del botón en talla lg (48px): objetivo táctil holgado */
+  --close-button-icon-size: var(--icon-size-md); /** Glifo del aspa (24px), la talla por defecto de icono-botón. No cambia con la talla del botón: lo que crece es el área sensible, no el dibujo */
+  --close-button-color: var(--color-text-on-light); /** Color del glifo: la tinta de la superficie, ya en reposo. El aspa NO tiene estado de hover —ni fondo ni cambio de color—: el único estado que marca es el foco */
+  --close-button-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --close-button-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco (el rol focus gobierna ancho y separación) */
+  --close-button-focus-ring-color: var(--color-text-on-light); /** Color del anillo de foco: la tinta de la superficie */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --close-button-color: var(--color-text-on-dark); /** Color del glifo — surface-dark */
+  --close-button-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+}

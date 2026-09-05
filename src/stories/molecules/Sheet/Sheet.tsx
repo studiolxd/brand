@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { Dialog } from '@base-ui/react/dialog';
-import { Icon } from '../../atoms/Icon/Icon';
+import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Sheet.css';
 
@@ -105,9 +105,7 @@ export function Sheet({
             )}
           </header>
 
-          <Dialog.Close className="sheet__close" aria-label={closeLabel}>
-            <Icon name="close" size="md" />
-          </Dialog.Close>
+          <Dialog.Close className="sheet__close" render={<CloseButton label={closeLabel} />} />
 
           <div className="sheet__body">{children}</div>
 

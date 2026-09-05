@@ -7,7 +7,7 @@ const meta: Meta<typeof Avatar> = {
   component: Avatar,
   parameters: { layout: 'centered' },
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg', 'xl'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg', 'xl', '2xl'] },
     shape: { control: 'select', options: ['circle', 'square'] },
     className: { table: { disable: true } },
   },
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof Avatar>;
 
 export const PorDefecto: Story = {};
 
-/** Las tres tallas del sistema —32, 40 y 48— más la de marca: 64. */
+/** Las tres tallas del sistema —32, 40 y 48— más las dos de marca: 64 y 96. */
 export const Tallas: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -32,6 +32,7 @@ export const Tallas: Story = {
       <Avatar {...args} size="md" />
       <Avatar {...args} size="lg" />
       <Avatar {...args} size="xl" />
+      <Avatar {...args} size="2xl" />
     </div>
   ),
 };
@@ -56,6 +57,7 @@ export const Contrato: Story = {
       <Avatar name="Studio LXD" alt="" size="lg" shape="square" />
       <Avatar src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" name="Con imagen" />
       <Avatar name="Chus Pi" size="xl" />
+      <Avatar name="Lu Ma" size="2xl" />
     </>
   ),
   play: async ({ canvasElement }) => {
@@ -71,6 +73,8 @@ export const Contrato: Story = {
     await expect(Math.round(lg.getBoundingClientRect().width)).toBe(48);
     const xl = canvasElement.querySelector('.avatar--xl')!;
     await expect(Math.round(xl.getBoundingClientRect().width)).toBe(64);
+    const xxl = canvasElement.querySelector('.avatar--2xl')!;
+    await expect(Math.round(xxl.getBoundingClientRect().width)).toBe(96);
   },
 };
 

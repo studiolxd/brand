@@ -1,0 +1,11 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-close-button-size-sm: 2rem; // Lado del botón en talla sm (32px): dentro de una tarjeta compacta — un aviso, un panel del dock
+$lxd-close-button-size-md: 2.5rem; // Lado del botón en talla md (40px, por defecto): la cabecera de un diálogo
+$lxd-close-button-size-lg: 3rem; // Lado del botón en talla lg (48px): objetivo táctil holgado
+$lxd-close-button-icon-size: 24px; // Glifo del aspa (24px), la talla por defecto de icono-botón. No cambia con la talla del botón: lo que crece es el área sensible, no el dibujo
+$lxd-close-button-color: #111e30; // Color del glifo: la tinta de la superficie, ya en reposo. El aspa NO tiene estado de hover —ni fondo ni cambio de color—: el único estado que marca es el foco
+$lxd-close-button-focus-ring-width: 2px; // Grosor del anillo de foco
+$lxd-close-button-focus-ring-offset: 2px; // Separación del anillo de foco (el rol focus gobierna ancho y separación)
+$lxd-close-button-focus-ring-color: #111e30; // Color del anillo de foco: la tinta de la superficie

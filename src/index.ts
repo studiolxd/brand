@@ -31,6 +31,8 @@ export { DotsButton } from './stories/atoms/DotsButton/DotsButton';
 export type { DotsButtonProps } from './stories/atoms/DotsButton/DotsButton';
 export { MenuButton } from './stories/atoms/MenuButton/MenuButton';
 export type { MenuButtonProps } from './stories/atoms/MenuButton/MenuButton';
+export { CloseButton } from './stories/atoms/CloseButton/CloseButton';
+export type { CloseButtonProps } from './stories/atoms/CloseButton/CloseButton';
 export { Fieldset } from './stories/atoms/Fieldset/Fieldset';
 export type { FieldsetProps } from './stories/atoms/Fieldset/Fieldset';
 export { Figure } from './stories/atoms/Figure/Figure';
