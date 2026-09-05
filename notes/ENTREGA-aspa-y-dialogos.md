@@ -209,9 +209,11 @@ Lo que sí está duplicado, y es lo que se puede señalar:
   literalmente como `{modal.close-*}`). El aspa ya está unificada por esta
   entrega; el resto de la cabecera no.
 - **El pie.** `.sheet__footer` es la fila a la derecha que `.modal__footer`
-  también es —pero **sin** el apilado a ancho completo en móvil que se acaba de
-  añadir al diálogo—. Es la duplicación que ya cuesta algo: un cajón en un
-  móvil de 375 querría exactamente el mismo trato, y hoy no lo tiene.
+  también es. Era la duplicación que ya costaba algo —un cajón en un móvil de
+  375 apretaba los botones—, así que **se ha pagado en esta misma entrega**
+  (2026-09-05, al cerrar el release): el pie del cajón se apila igual, con el
+  mismo criterio y el mismo punto de ruptura. Sigue siendo CSS duplicado, pero
+  ya no produce una diferencia de comportamiento.
 - **El passthrough.** El mismo párrafo de JSDoc sobre `{...rest}` al popup y la
   barrera de eventos, y el mismo `container` con la misma explicación de
   portales y superficies.
@@ -222,11 +224,10 @@ entrada (`data-side`, cuatro bordes, cuatro animaciones), el no centrarse, el
 ver el contexto detrás.
 
 **Propuesta, si algún día se paga**: extraer una superficie de diálogo común
-—velo + cabecera + pie, con el pie ya responsive— y que `Modal` y `Sheet` sean
-dos colocaciones de ella, en vez de dos árboles paralelos. Lo mínimo y más
-barato, si no se quiere tocar la estructura: llevar el `column-reverse` a
-`.sheet__footer` también, que es la única de las cuatro duplicaciones que hoy
-produce una diferencia de comportamiento en móvil.
+—velo + cabecera + pie— y que `Modal` y `Sheet` sean dos colocaciones de ella,
+en vez de dos árboles paralelos. Lo urgente ya está hecho (el pie); lo que
+queda —velo, cabecera y el párrafo de passthrough— es duplicación que cuesta
+mantenimiento, no comportamiento.
 
 ---
 
@@ -235,5 +236,5 @@ produce una diferencia de comportamiento en móvil.
 - **La versión y el CHANGELOG publicado.** Entrada bajo «Sin publicar».
 - **El monorepo `slxd`.** La adopción va después del release.
 - **`SiteHeader` / `AppHeader`.** Ver § 1.
-- **El diálogo del `Sheet`.** Ver § 5.
+- **El diálogo del `Sheet`.** Ver § 5 — salvo el pie, que sí se ha pagado.
 - **«Cancelar».** Sigue siendo secundario, no ha pasado a `text`.

@@ -118,8 +118,26 @@
   min-height: 0;
 }
 
+/* Mismo criterio que el pie de `Modal` (ver Modal.css): por debajo del punto
+   de ruptura los botones se apilan a todo el ancho en `column-reverse`, con la
+   acción principal arriba, y a partir de ahí vuelven a la fila de la derecha.
+   Un cajón en un móvil estrecho lo necesita igual que un diálogo. */
 .sheet__footer {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
   gap: var(--sheet-footer-gap);
+}
+
+.sheet__footer > * {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .sheet__footer {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .sheet__footer > * {
+    inline-size: auto;
+  }
 }

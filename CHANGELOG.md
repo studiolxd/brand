@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## v30.8.0
 
 - **`CloseButton` — una sola aspa para todo el sistema.** Hasta ahora había dos
   maneras de pintar lo mismo: `Modal`, `Sheet` y `FloatingDock` montaban un
@@ -49,6 +49,13 @@ para breaking changes.
   peldaño anterior, sigue en el múltiplo de 8 y —con el botón al lado y el
   aire del sistema— la fila entera cabe todavía en un móvil de 375px; hay un
   test de story que lo mide.
+
+- **El pie del `Sheet`, también a ancho completo en móvil.** El cajón repetía
+  la fila alineada a la derecha del diálogo pero se quedó sin el apilado que
+  `Modal` acaba de ganar, y es la única de las duplicaciones entre los dos que
+  producía una diferencia de comportamiento: un cajón con dos acciones en un
+  móvil de 375 apretaba los botones. Mismo criterio y mismo punto de ruptura
+  (`md`) que el diálogo y que las acciones de `Form`.
 
 ## v30.7.0
 
