@@ -22,8 +22,8 @@ $lxd-tag-neutral-bg: #4a4a4a; // Neutral — relleno gris oscuro (AAA con texto 
 $lxd-tag-neutral-color: #ffffff; // Neutral — texto sobre el relleno
 $lxd-tag-info-bg: #111e30; // Información — relleno prusia (AAA con texto blanco)
 $lxd-tag-info-color: #ffffff; // Información — texto sobre el relleno
-$lxd-tag-warning-bg: #ffcd00; // Aviso — relleno amarillo de marca (AAA con texto prusia)
-$lxd-tag-warning-color: #111e30; // Aviso — texto sobre el relleno
+$lxd-tag-warning-bg: #7d4c00; // Aviso — relleno universal del sistema. Era el amarillo de marca: el aviso es un estado, no identidad
+$lxd-tag-warning-color: #ffffff; // Aviso — contenido sobre el relleno (7,23:1, AAA)
 $lxd-tag-success-bg: #006616; // Éxito — relleno universal del sistema
 $lxd-tag-success-color: #ffffff; // Éxito — contenido sobre el relleno
 $lxd-tag-danger-bg: #b30000; // Peligro — relleno universal del sistema

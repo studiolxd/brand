@@ -84,6 +84,8 @@ No existe un relleno "para dark" ni un contenedor suave ("tint"): el relleno es 
 
 Cuatro roles: `error-*`, `success-*`, `warning-*` y `destructive-*`. El **aviso** (`warning-*`) es el tramo intermedio —lo que ya no está bien pero todavía no está roto—, y se pinta con el ámbar de sistema, nunca con el amarillo de marca.
 
+**Por qué el aviso no es el amarillo de marca.** `Alert`, `Toast` y `Tag` lo pintaban con `accent-2` hasta que existió el rol. Dos motivos para separarlos: el amarillo es **identidad** —el relleno de un `Tag` de marca, el hover de un botón—, así que un aviso y un botón bajo el puntero acababan del mismo color y el usuario no podía distinguirlos; y el amarillo, al no llegar a 3:1 sobre blanco, obliga a tinta prusia encima, lo que dejaba al aviso como el único relleno del sistema que leía en claro mientras los otros tres leen en oscuro. El ámbar elegido no se confunde con el amarillo de marca: entre los dos hay 4,81:1, o sea que el de marca es casi cinco veces más claro.
+
 <ColorPalette>
   {feedbackSwatches.map((s) => <ColorItem key={s.title} {...s} />)}
 </ColorPalette>
