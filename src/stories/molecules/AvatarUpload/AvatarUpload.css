@@ -1,5 +1,9 @@
+/* La fila envuelve: a talla `lg` el avatar mide 192px y en un móvil de 375px ya
+   no cabe con el botón al lado, así que el botón baja debajo. Sin media query:
+   lo decide el ancho que haya, no el de la ventana. */
 .avatar-upload {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--avatar-upload-gap);
 }

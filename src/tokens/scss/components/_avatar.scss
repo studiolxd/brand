@@ -5,7 +5,9 @@ $lxd-avatar-size-sm: 2rem; // 32px — en barras y menús (UserMenu, OrgSwitcher
 $lxd-avatar-size-md: 2.5rem; // 40px — por defecto: listas, tarjetas
 $lxd-avatar-size-lg: 3rem; // 48px — cabeceras de perfil
 $lxd-avatar-size-xl: 64px; // 64px — el avatar es el asunto de la pantalla (una cabecera de perfil, la subida de la foto). Es la talla ilustrativa de la escala de iconos, la misma que usan `logo.height-xl` y `logomark.size-xl`, no una talla de control: por encima de `lg` el sistema ya no mide con la escala de controles
-$lxd-avatar-size-2xl: 6rem; // 96px — el avatar es además la zona donde se suelta la imagen (`AvatarUpload` a talla `lg`, el paso del logotipo del alta). Vez y media el peldaño anterior, sigue en el múltiplo de 8, y a 96px la diana de arrastre se acierta sin apuntar. Es el techo: con el botón al lado y el aire del sistema, la fila entera cabe todavía en un móvil de 375px
+$lxd-avatar-size-2xl: 6rem; // 96px — el avatar es además la zona donde se suelta la imagen (`AvatarUpload` a talla `sm`). Vez y media el peldaño anterior, sigue en el múltiplo de 8, y a 96px la diana de arrastre se acierta sin apuntar
+$lxd-avatar-size-3xl: 8rem; // 128px — el doble de `xl`. Retrato de la superficie de aplicación cuando la foto es el asunto de la pantalla y la diana del arrastre (`AvatarUpload` a talla `md`, /account)
+$lxd-avatar-size-4xl: 12rem; // 192px — el doble de `2xl`, y vez y media `3xl`: el mismo salto que hay de `xl` a `2xl`. Retrato de la superficie pública, donde el avatar es el paso entero de la pantalla (`AvatarUpload` a talla `lg`, el logotipo del alta). A 375px ya no cabe con el botón al lado: la fila del AvatarUpload envuelve y el botón baja
 $lxd-avatar-border-radius: 9999px; // Personas: círculo
 $lxd-avatar-border-radius-square: 0px; // Organizaciones (logos): el radio del sistema
 $lxd-avatar-initials-bg: #111e30; // Fondo de las iniciales
@@ -16,3 +18,5 @@ $lxd-avatar-initials-font-size-md: 1rem; // Iniciales a talla md
 $lxd-avatar-initials-font-size-lg: 1.25rem; // Iniciales a talla lg
 $lxd-avatar-initials-font-size-xl: 1.5rem; // Iniciales a talla xl: un peldaño de la escala tipográfica por talla, como las tres anteriores
 $lxd-avatar-initials-font-size-2xl: 1.75rem; // Iniciales a talla 2xl: un peldaño más, como en el resto de la escala
+$lxd-avatar-initials-font-size-3xl: 2rem; // Iniciales a talla 3xl: un peldaño más
+$lxd-avatar-initials-font-size-4xl: 2.5rem; // Iniciales a talla 4xl: un peldaño más

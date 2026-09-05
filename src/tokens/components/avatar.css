@@ -3,7 +3,9 @@
  */
 
 :root {
-  --avatar-size-2xl: 6rem; /** 96px — el avatar es además la zona donde se suelta la imagen (`AvatarUpload` a talla `lg`, el paso del logotipo del alta). Vez y media el peldaño anterior, sigue en el múltiplo de 8, y a 96px la diana de arrastre se acierta sin apuntar. Es el techo: con el botón al lado y el aire del sistema, la fila entera cabe todavía en un móvil de 375px */
+  --avatar-size-2xl: 6rem; /** 96px — el avatar es además la zona donde se suelta la imagen (`AvatarUpload` a talla `sm`). Vez y media el peldaño anterior, sigue en el múltiplo de 8, y a 96px la diana de arrastre se acierta sin apuntar */
+  --avatar-size-3xl: 8rem; /** 128px — el doble de `xl`. Retrato de la superficie de aplicación cuando la foto es el asunto de la pantalla y la diana del arrastre (`AvatarUpload` a talla `md`, /account) */
+  --avatar-size-4xl: 12rem; /** 192px — el doble de `2xl`, y vez y media `3xl`: el mismo salto que hay de `xl` a `2xl`. Retrato de la superficie pública, donde el avatar es el paso entero de la pantalla (`AvatarUpload` a talla `lg`, el logotipo del alta). A 375px ya no cabe con el botón al lado: la fila del AvatarUpload envuelve y el botón baja */
   --avatar-size-sm: var(--size-component-sm); /** 32px — en barras y menús (UserMenu, OrgSwitcher) */
   --avatar-size-md: var(--size-component-md); /** 40px — por defecto: listas, tarjetas */
   --avatar-size-lg: var(--size-component-lg); /** 48px — cabeceras de perfil */
@@ -13,6 +15,8 @@
   --avatar-initials-font-size-lg: var(--font-size-3); /** Iniciales a talla lg */
   --avatar-initials-font-size-xl: var(--font-size-4); /** Iniciales a talla xl: un peldaño de la escala tipográfica por talla, como las tres anteriores */
   --avatar-initials-font-size-2xl: var(--font-size-5); /** Iniciales a talla 2xl: un peldaño más, como en el resto de la escala */
+  --avatar-initials-font-size-3xl: var(--font-size-6); /** Iniciales a talla 3xl: un peldaño más */
+  --avatar-initials-font-size-4xl: var(--font-size-7); /** Iniciales a talla 4xl: un peldaño más */
   --avatar-border-radius: var(--border-radius-round); /** Personas: círculo */
   --avatar-border-radius-square: var(--border-radius-default); /** Organizaciones (logos): el radio del sistema */
   --avatar-initials-bg: var(--color-primary); /** Fondo de las iniciales */

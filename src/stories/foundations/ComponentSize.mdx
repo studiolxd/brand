@@ -29,6 +29,8 @@ Las marcas de checkbox y radio **no** son tallas de componente: son el tamaño d
 
 Por encima de `lg` el sistema deja de medir con esta escala: 48px es el control más alto que existe. Lo que sube más es **marca**, no control —el logotipo de la cabecera (`logo.height-xl`), el isotipo (`logomark.size-xl`) y el avatar cuando es el asunto de la pantalla (`avatar.size-xl`)—, y toma su lado del peldaño ilustrativo de la escala de iconos: 64px, en el mismo múltiplo de 8.
 
+La escala de marca sigue por encima solo donde hace falta: el avatar la estira hasta `2xl` (96px), `3xl` (128px) y `4xl` (192px) porque hay pantallas —la subida de la foto de perfil, el logotipo de un alta— donde el retrato **es** el asunto. Cada peldaño es vez y media o el doble del anterior, en el múltiplo de 8. A partir de `3xl` el elemento ya no cabe en una fila estrecha con un control al lado: quien lo componga deja que la fila envuelva.
+
 ## El objetivo de puntero no es la talla
 
 `sm` es la talla mínima **visible**, pero hay marcas que se dibujan por debajo: la de un checkbox `sm` mide 16px. Lo que WCAG 2.5.8 mide no es el dibujo, es el **área que responde al puntero**, y ahí el mínimo es 24×24 px.
