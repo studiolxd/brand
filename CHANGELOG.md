@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## [31.2.0] — 2026-09-05
 
 - **`DataTable`: alineación por columna.** `meta: { align: 'start' | 'center' | 'end' }`
   en la definición de la columna (`ColumnMeta` tipado por module augmentation de
