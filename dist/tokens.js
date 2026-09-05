@@ -663,7 +663,7 @@ var e = {
 	"--email-opt-out-margin-block-start": "1rem",
 	"--email-heading-font-size": "2rem",
 	"--email-heading-font-weight": "500",
-	"--email-heading-line-height": "1.3",
+	"--email-heading-line-height": "1.1",
 	"--email-heading-margin-block-end": "0.75rem",
 	"--email-text-margin-block-end": "1rem",
 	"--email-note-font-size": "1rem",
