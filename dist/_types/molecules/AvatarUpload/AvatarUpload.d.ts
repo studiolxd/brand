@@ -11,8 +11,8 @@ export interface AvatarUploadProps {
     /** `circle` para personas, `square` para organizaciones. También decide la selección del recorte. */
     shape?: 'circle' | 'square';
     /**
-     * Talla del sistema: mueve a la vez el botón y el avatar (que va un peldaño
-     * por encima: `md` → 40px, `lg` → 48px, `xl` → 64px).
+     * Talla del sistema: mueve a la vez el botón y el avatar (que va dos
+     * peldaños por encima: `sm` → 48px, `md` → 64px, `lg` → 96px).
      * Sin ella, la del `Form`/`FormSizeContext` que lo envuelva; sin contexto, `md`.
      */
     size?: FormSize;
@@ -76,9 +76,17 @@ export interface AvatarUploadProps {
      * Default: "Suelta la imagen sobre el avatar para subirla".
      */
     dropActiveMessage?: string;
-    /** Título del diálogo de recorte. Default: "Recorta la imagen". */
+    /**
+     * Título del diálogo de recorte. Default: "Recortar imagen" (castellano).
+     * Es una acción, no una invitación: nombra lo que va a pasar, sin segunda
+     * persona, como el resto de títulos de diálogo del sistema.
+     */
     cropTitle?: string;
-    /** Descripción del diálogo. Default: "Arrastra para ajustar la selección." */
+    /**
+     * Descripción del diálogo de recorte. **Sin default**: el diálogo enseña la
+     * imagen y su marco de selección, que se explican solos. Pásala solo si en
+     * tu caso hay algo que decir que no esté ya a la vista.
+     */
     cropDescription?: ReactNode;
     /** Default: "Cancelar". */
     cropCancelLabel?: ReactNode;

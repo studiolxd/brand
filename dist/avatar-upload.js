@@ -12,18 +12,18 @@ import { jsx as a, jsxs as o } from "react/jsx-runtime";
 import { useCallback as ie, useEffect as s, useId as ae, useRef as c, useState as l } from "react";
 //#region src/stories/molecules/AvatarUpload/AvatarUpload.tsx
 var u = {
-	sm: "md",
-	md: "lg",
-	lg: "xl"
+	sm: "lg",
+	md: "xl",
+	lg: "2xl"
 }, oe = {
-	sm: "sm",
+	sm: "md",
 	md: "md",
-	lg: "md"
+	lg: "lg"
 };
 function d(e) {
 	return e.split(",").map((e) => e.trim()).filter(Boolean).map((e) => e.startsWith(".") ? e.slice(1) : e.split("/")[1] ?? e).map((e) => e.toUpperCase()).join(", ");
 }
-function f({ src: f, name: p, alt: m, shape: h = "circle", size: se, accept: g = "image/jpeg,image/png,image/webp", maxSize: _, outputMimeType: v = "image/jpeg", outputSize: y, disabled: b = !1, busy: x = !1, errorMessage: S, onChange: C, onSelect: w, onError: T, buttonLabel: E = "Subir", buttonAccessibleLabel: ce, hintLabel: le, formatsLabel: ue, maxSizeHint: de = (e) => `máx. ${e}`, invalidTypeError: D = (e) => `Formato no admitido. Se aceptan ${e}.`, tooLargeError: O = (e) => `El archivo pesa demasiado. El máximo es ${e}.`, dropActiveMessage: fe = "Suelta la imagen sobre el avatar para subirla", cropTitle: k = "Recorta la imagen", cropDescription: A = "Arrastra para ajustar la selección.", cropCancelLabel: j = "Cancelar", cropConfirmLabel: M = "Guardar", cropCloseLabel: N = "Cerrar", className: P }) {
+function f({ src: f, name: p, alt: m, shape: h = "circle", size: se, accept: g = "image/jpeg,image/png,image/webp", maxSize: _, outputMimeType: v = "image/jpeg", outputSize: y, disabled: b = !1, busy: x = !1, errorMessage: S, onChange: C, onSelect: w, onError: T, buttonLabel: E = "Subir", buttonAccessibleLabel: ce, hintLabel: le, formatsLabel: ue, maxSizeHint: de = (e) => `máx. ${e}`, invalidTypeError: D = (e) => `Formato no admitido. Se aceptan ${e}.`, tooLargeError: O = (e) => `El archivo pesa demasiado. El máximo es ${e}.`, dropActiveMessage: fe = "Suelta la imagen sobre el avatar para subirla", cropTitle: k = "Recortar imagen", cropDescription: A, cropCancelLabel: j = "Cancelar", cropConfirmLabel: M = "Guardar", cropCloseLabel: N = "Cerrar", className: P }) {
 	let F = r(se), I = c(null), L = c(null), [R, z] = l(null), [B, V] = l(!1), [pe, H] = l(!1), [U, W] = l(null), G = ae(), K = `${G}-hint`, q = `${G}-error`, J = ue ?? d(g), Y = le ?? [J, _ === void 0 ? null : de(te(_))].filter(Boolean).join(" · "), X = U ?? S, Z = b || x, Q = ce ?? E;
 	ne() && !Q.toLowerCase().includes(E.toLowerCase()) && console.warn(`[AvatarUpload] El nombre accesible del botón ("${Q}") no contiene su texto visible ("${E}"). WCAG 2.5.3 (Label in Name) lo exige: quien navega por voz dice lo que ve, y con estos textos no encontraría el control.`), s(() => {
 		L.current = R;

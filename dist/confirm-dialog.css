@@ -1,1 +1,1 @@
-.confirm-dialog__actions{margin-block-start:var(--confirm-dialog-actions-space-before)}
+.confirm-dialog__actions.modal__footer{margin-block-start:var(--confirm-dialog-actions-space-before)}

@@ -1,7 +1,7 @@
 'use client';
 import './toaster.css';
-import { Icon as e } from "./icon.js";
-import { Button as t } from "./button.js";
+import { Button as e } from "./button.js";
+import { CloseButton as t } from "./close-button.js";
 import { TOAST_DURATION as n, setToastDefaultDuration as r, syncLiveToasts as i, toastManager as a } from "./toast.js";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
 import { useEffect as c } from "react";
@@ -46,7 +46,7 @@ function p({ position: n, containerAriaLabel: r, closeLabel: a, closeButton: u, 
 					/* @__PURE__ */ o(l.Description, { className: "alert__description" }),
 					/* @__PURE__ */ o(l.Action, {
 						className: "toast__action",
-						render: /* @__PURE__ */ o(t, {
+						render: /* @__PURE__ */ o(e, {
 							variant: "ghost",
 							size: "sm"
 						})
@@ -54,17 +54,7 @@ function p({ position: n, containerAriaLabel: r, closeLabel: a, closeButton: u, 
 				]
 			}), u && /* @__PURE__ */ o(l.Close, {
 				className: "alert__close",
-				"aria-label": a,
-				render: /* @__PURE__ */ o(t, {
-					variant: "ghost",
-					size: "sm",
-					iconOnly: !0,
-					"aria-label": a
-				}),
-				children: /* @__PURE__ */ o(e, {
-					name: "close",
-					size: "sm"
-				})
+				render: /* @__PURE__ */ o(t, { label: a })
 			})]
 		}, n.id))
 	}) });

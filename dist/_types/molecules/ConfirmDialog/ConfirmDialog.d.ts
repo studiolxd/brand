@@ -50,7 +50,7 @@ export interface ConfirmDialogProps {
     closeLabel?: string;
     /** Nodo donde montar el portal, como en `Modal`. */
     container?: ModalProps['container'];
-    /** Se añade DESPUÉS de las clases propias de la fila de acciones. */
+    /** Se añade DESPUÉS de las clases propias del pie del diálogo. */
     className?: string;
 }
 /**

@@ -1,9 +1,8 @@
 'use client';
 import './confirm-dialog.css';
 import { Button as e } from "./button.js";
-import { Inline as t } from "./inline.js";
-import { Modal as n } from "./modal.js";
-import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { Modal as t } from "./modal.js";
+import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 import { useEffect as a, useRef as o, useState as s } from "react";
 //#region src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx
 function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCancel: p, onConfirmError: m, destructive: h = !1, confirmLabel: g = "Confirmar", cancelLabel: _ = "Cancelar", pendingLabel: v = "Confirmando…", closeLabel: y = "Cerrar", container: b, className: x }) {
@@ -27,7 +26,7 @@ function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCan
 			}
 		}
 	};
-	return /* @__PURE__ */ i(n, {
+	return /* @__PURE__ */ r(t, {
 		open: c,
 		onClose: T,
 		title: l,
@@ -35,24 +34,21 @@ function c({ open: c, title: l, description: u, children: d, onConfirm: f, onCan
 		container: b,
 		initialFocus: S,
 		...u == null ? {} : { description: u },
-		children: [d, /* @__PURE__ */ i(t, {
-			gap: "sm",
-			justify: "end",
-			className: ["confirm-dialog__actions", x].filter(Boolean).join(" "),
-			children: [/* @__PURE__ */ r(e, {
-				ref: S,
-				variant: "ghost",
-				onClick: T,
-				disabled: C,
-				children: _
-			}), /* @__PURE__ */ r(e, {
-				variant: h ? "outline" : "primary",
-				destructive: h,
-				onClick: E,
-				disabled: C,
-				children: C ? v : g
-			})]
-		})]
+		footerClassName: ["confirm-dialog__actions", x].filter(Boolean).join(" "),
+		footer: /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(e, {
+			ref: S,
+			variant: "ghost",
+			onClick: T,
+			disabled: C,
+			children: _
+		}), /* @__PURE__ */ r(e, {
+			variant: h ? "outline" : "primary",
+			destructive: h,
+			onClick: E,
+			disabled: C,
+			children: C ? v : g
+		})] }),
+		children: d
 	});
 }
 //#endregion

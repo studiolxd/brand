@@ -1,42 +1,41 @@
 'use client';
 import './alert.css';
-import { Icon as e } from "./icon.js";
-import { Button as t } from "./button.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { forwardRef as i, useState as a } from "react";
+import { CloseButton as e } from "./close-button.js";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { forwardRef as r, useState as i } from "react";
 //#region src/stories/molecules/Alert/Alert.tsx
-var o = {
+var a = {
 	default: "status",
 	success: "status",
 	error: "alert",
 	warning: "alert"
-}, s = i(function({ className: e, children: t, ...r }, i) {
-	return /* @__PURE__ */ n("p", {
+}, o = r(function({ className: e, children: n, ...r }, i) {
+	return /* @__PURE__ */ t("p", {
 		ref: i,
 		className: ["alert__title", e ?? ""].filter(Boolean).join(" "),
 		...r,
-		children: t
+		children: n
 	});
-}), c = i(function({ className: e, children: t, ...r }, i) {
-	return /* @__PURE__ */ n("div", {
+}), s = r(function({ className: e, children: n, ...r }, i) {
+	return /* @__PURE__ */ t("div", {
 		ref: i,
 		className: ["alert__description", e ?? ""].filter(Boolean).join(" "),
 		...r,
-		children: t
+		children: n
 	});
-}), l = i(function({ variant: i = "default", title: s, description: c, dismissible: l = !1, onDismiss: u, finalFocus: d, closeLabel: f = "Cerrar", className: p, children: m, role: h, ...g }, _) {
-	let [v, y] = a(!1);
-	if (v) return null;
-	let b = [
+}), c = r(function({ variant: r = "default", title: o, description: s, dismissible: c = !1, onDismiss: l, finalFocus: u, closeLabel: d = "Cerrar", className: f, children: p, role: m, ...h }, g) {
+	let [_, v] = i(!1);
+	if (_) return null;
+	let y = [
 		"alert",
-		i === "default" ? "" : `alert--${i}`,
-		i === "warning" ? "" : "surface-dark",
-		l ? "alert--dismissible" : "",
-		p ?? ""
+		r === "default" ? "" : `alert--${r}`,
+		r === "warning" ? "" : "surface-dark",
+		c ? "alert--dismissible" : "",
+		f ?? ""
 	].filter(Boolean).join(" ");
-	function x() {
+	function b() {
 		if (typeof document > "u") return;
-		let e = d?.current;
+		let e = u?.current;
 		if (e) {
 			e.focus();
 			return;
@@ -44,43 +43,36 @@ var o = {
 		let t = document.body, n = t.hasAttribute("tabindex");
 		n || t.setAttribute("tabindex", "-1"), t.focus(), n || t.removeAttribute("tabindex");
 	}
-	function S() {
-		x(), u ? u() : y(!0);
+	function x() {
+		b(), l ? l() : v(!0);
 	}
-	return /* @__PURE__ */ r("div", {
-		ref: _,
-		role: h ?? o[i],
-		className: b,
-		...g,
-		children: [/* @__PURE__ */ r("div", {
+	return /* @__PURE__ */ n("div", {
+		ref: g,
+		role: m ?? a[r],
+		className: y,
+		...h,
+		children: [/* @__PURE__ */ n("div", {
 			className: "alert__content",
 			children: [
-				s && /* @__PURE__ */ n("p", {
+				o && /* @__PURE__ */ t("p", {
 					className: "alert__title",
+					children: o
+				}),
+				s && /* @__PURE__ */ t("div", {
+					className: "alert__description",
 					children: s
 				}),
-				c && /* @__PURE__ */ n("div", {
-					className: "alert__description",
-					children: c
-				}),
-				m
+				p
 			]
-		}), l && /* @__PURE__ */ n(t, {
-			variant: "ghost",
-			size: "sm",
-			iconOnly: !0,
+		}), c && /* @__PURE__ */ t(e, {
 			className: "alert__close",
-			"aria-label": f,
-			onClick: S,
-			children: /* @__PURE__ */ n(e, {
-				name: "close",
-				size: "sm"
-			})
+			label: d,
+			onClick: x
 		})]
 	});
-}), u = Object.assign(l, {
-	Title: s,
-	Description: c
+}), l = Object.assign(c, {
+	Title: o,
+	Description: s
 });
 //#endregion
-export { u as Alert, c as AlertDescription, s as AlertTitle };
+export { l as Alert, s as AlertDescription, o as AlertTitle };
