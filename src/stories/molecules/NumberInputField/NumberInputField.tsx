@@ -1,6 +1,7 @@
 import { forwardRef, useId, type ComponentPropsWithoutRef } from 'react';
 import './NumberInputField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { NumberInput } from '../../atoms/NumberInput/NumberInput';
 
@@ -12,6 +13,8 @@ export interface NumberInputFieldProps
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   value?: number;
@@ -42,7 +45,7 @@ export interface NumberInputFieldProps
 export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldProps>(function NumberInputField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   value,
   defaultValue,
   min,
@@ -59,6 +62,7 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
   onChange,
   ...rest
 }: NumberInputFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

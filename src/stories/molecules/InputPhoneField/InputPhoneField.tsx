@@ -1,6 +1,7 @@
 import { forwardRef, useId } from 'react';
 import { InputPhone } from '../../atoms/InputPhone/InputPhone';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
@@ -12,6 +13,8 @@ export interface InputPhoneFieldProps {
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   value?: string;
@@ -49,7 +52,7 @@ export interface InputPhoneFieldProps {
 export const InputPhoneField = forwardRef<HTMLInputElement, InputPhoneFieldProps>(function InputPhoneField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   value,
   defaultCountry,
   placeholder,
@@ -69,6 +72,7 @@ export const InputPhoneField = forwardRef<HTMLInputElement, InputPhoneFieldProps
   onBlur,
   onFocus,
 }: InputPhoneFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

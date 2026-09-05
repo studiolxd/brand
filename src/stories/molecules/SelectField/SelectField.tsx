@@ -1,6 +1,7 @@
 import { forwardRef, useId } from 'react';
 import './SelectField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { Select, isSelectOptionGroup } from '../../atoms/Select/Select';
 import type { SelectOption, SelectOptionOrGroup } from '../../atoms/Select/Select';
@@ -12,6 +13,8 @@ export interface SelectFieldProps {
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   /**
@@ -74,7 +77,7 @@ function encodeOption(option: SelectOption): SelectOption {
 export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(function SelectField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   options,
   value,
   defaultValue,
@@ -90,6 +93,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
   onValueChange,
   onBlur,
 }: SelectFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

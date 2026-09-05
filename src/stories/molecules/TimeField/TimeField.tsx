@@ -1,5 +1,6 @@
 import { forwardRef, useId } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
@@ -12,6 +13,8 @@ export interface TimeFieldProps {
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   value?: TimeValue | null;
@@ -48,7 +51,7 @@ export interface TimeFieldProps {
 export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function TimeField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   value,
   step,
   name,
@@ -65,6 +68,7 @@ export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function 
   onChange,
   onBlur,
 }: TimeFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

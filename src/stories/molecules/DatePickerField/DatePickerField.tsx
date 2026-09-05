@@ -1,5 +1,6 @@
 import { forwardRef, useId } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { DatePicker } from '../DatePicker/DatePicker';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
@@ -13,6 +14,8 @@ export interface DatePickerFieldProps
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -31,7 +34,7 @@ export interface DatePickerFieldProps
 export const DatePickerField = forwardRef<HTMLButtonElement, DatePickerFieldProps>(function DatePickerField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   errorMessage,
   helperText,
   error = false,
@@ -39,6 +42,7 @@ export const DatePickerField = forwardRef<HTMLButtonElement, DatePickerFieldProp
   className,
   ...pickerProps
 }: DatePickerFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

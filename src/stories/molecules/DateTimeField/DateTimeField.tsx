@@ -1,5 +1,6 @@
 import { forwardRef, useCallback, useId } from 'react';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { DatePicker } from '../DatePicker/DatePicker';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
@@ -14,6 +15,8 @@ export interface DateTimeFieldProps {
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   value?: Date | null;
@@ -64,7 +67,7 @@ function getTimeValue(date: Date | null | undefined): TimeValue | null {
 export const DateTimeField = forwardRef<HTMLButtonElement, DateTimeFieldProps>(function DateTimeField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   value,
   placeholder,
   timeStep,
@@ -85,6 +88,7 @@ export const DateTimeField = forwardRef<HTMLButtonElement, DateTimeFieldProps>(f
   onChange,
   onBlur,
 }: DateTimeFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

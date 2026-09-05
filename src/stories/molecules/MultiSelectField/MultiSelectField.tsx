@@ -1,6 +1,7 @@
 import { forwardRef, useId } from 'react';
 import './MultiSelectField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { MultiSelect } from '../../atoms/MultiSelect/MultiSelect';
 import type { MultiSelectOption } from '../../atoms/MultiSelect/MultiSelect';
@@ -14,6 +15,8 @@ export interface MultiSelectFieldProps {
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   options: MultiSelectOption[];
@@ -47,7 +50,7 @@ export interface MultiSelectFieldProps {
 export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps>(function MultiSelectField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   options,
   value,
   defaultValue,
@@ -64,6 +67,7 @@ export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps
   onValueChange,
   onBlur,
 }: MultiSelectFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

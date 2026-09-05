@@ -1,6 +1,7 @@
 import { forwardRef, useId } from 'react';
 import './AsyncSelectField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { AsyncSelect } from '../../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncSelectOption } from '../../atoms/AsyncSelect/AsyncSelect';
@@ -14,6 +15,8 @@ export interface AsyncSelectFieldProps {
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   onSearch: (query: string) => Promise<AsyncSelectOption[]>;
@@ -57,7 +60,7 @@ export interface AsyncSelectFieldProps {
 export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldProps>(function AsyncSelectField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   onSearch,
   value,
   onValueChange,
@@ -79,6 +82,7 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
   container,
   onBlur,
 }: AsyncSelectFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

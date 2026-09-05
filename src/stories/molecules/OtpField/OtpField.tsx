@@ -1,6 +1,7 @@
 import { forwardRef, useId } from 'react';
 import './OtpField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { OtpInput } from '../../atoms/OtpInput/OtpInput';
 
@@ -11,6 +12,8 @@ export interface OtpFieldProps {
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   /** Número de celdas. */
@@ -45,7 +48,7 @@ export interface OtpFieldProps {
 export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function OtpField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   length,
   value,
   defaultValue,
@@ -62,6 +65,7 @@ export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function Otp
   onComplete,
   onBlur,
 }: OtpFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;

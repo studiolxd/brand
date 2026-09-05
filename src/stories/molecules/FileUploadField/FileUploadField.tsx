@@ -1,6 +1,7 @@
 import { forwardRef, useId } from 'react';
 import './FileUploadField.css';
 import { useFormSize } from '../../constants/form-size';
+import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { FileUpload } from '../../atoms/FileUpload/FileUpload';
 import type { FileUploadProps } from '../../atoms/FileUpload/FileUpload';
@@ -13,6 +14,8 @@ export interface FileUploadFieldProps
   /**
    * Oculta la etiqueta a la vista (sigue leyéndola el lector de pantalla).
    * Por defecto `false`: la etiqueta se ve, como en el resto de campos.
+   * Sin valor, lo decide quien lo envuelva: dentro de un `FieldRow` que no
+   * es la primera de la lista, la etiqueta se oculta sola.
    */
   labelHidden?: boolean;
   /** Mensaje de error: se anuncia (`role="alert"`) y pone el control en error. */
@@ -35,7 +38,7 @@ export interface FileUploadFieldProps
 export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps>(function FileUploadField({
   id: idProp,
   label,
-  labelHidden = false,
+  labelHidden: labelHiddenProp,
   errorMessage,
   helperText,
   error = false,
@@ -43,6 +46,7 @@ export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps
   className,
   ...rest
 }: FileUploadFieldProps, ref) {
+  const labelHidden = useLabelHidden(labelHiddenProp);
   const size = useFormSize(sizeProp);
   const generatedId = useId();
   const id = idProp ?? generatedId;
