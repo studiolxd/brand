@@ -1,0 +1,9 @@
+{
+  "filter-bar": {
+    "gap":        { "$value": "{form.gap}",             "$type": "dimension", "$description": "Aire entre la línea del buscador y la de los filtros: el mismo que separa dos campos de un formulario, porque eso es lo que son" },
+    "column-gap": { "$value": "{field-row.column-gap}", "$type": "dimension", "$description": "Aire entre las columnas de filtros — el de las celdas de una fila de campos" },
+    "row-gap":    { "$value": "{field-row.row-gap}",    "$type": "dimension", "$description": "Aire entre las filas de filtros cuando la rejilla envuelve, y entre los filtros apilados en móvil" },
+    "column-min-inline-size": { "$value": "{field-row.cell-md}", "$type": "dimension", "$description": "Ancho mínimo de una columna de filtros (192px, el de una celda normal de `FieldRow`): es lo que decide cuántas caben por fila —tres o cuatro en una tabla de administración— antes de apilarse" },
+    "actions-gap": { "$value": "{form.actions-gap}",    "$type": "dimension", "$description": "Aire entre las acciones de la barra — el de los botones de un formulario: la fila de acciones del sistema es una sola" }
+  }
+}

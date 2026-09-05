@@ -88,6 +88,7 @@ export const entryPoints = {
   'switcher-field':      'src/stories/molecules/SwitcherField/SwitcherField.tsx',
   'form':                'src/stories/molecules/Form/Form.tsx',
   'field-row':           'src/stories/molecules/FieldRow/FieldRow.tsx',
+  'filter-bar':          'src/stories/molecules/FilterBar/FilterBar.tsx',
   'input-field':         'src/stories/molecules/InputField/InputField.tsx',
   'otp-field':           'src/stories/molecules/OtpField/OtpField.tsx',
   'multi-select-field':  'src/stories/molecules/MultiSelectField/MultiSelectField.tsx',

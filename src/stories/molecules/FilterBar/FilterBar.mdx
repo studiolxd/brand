@@ -1,0 +1,90 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as FilterBarStories from "./FilterBar.stories";
+import { FilterBar } from "./FilterBar";
+import { TokenTable } from "../../foundations/TokenTable";
+import { filterBarTokens } from "../../../tokens/molecules/filter-bar";
+
+<Meta of={FilterBarStories} />
+
+# FilterBar
+
+La barra de filtros de un listado: **el buscador en su línea** y, debajo, los filtros en columnas. Es maqueta y nada más — no sabe qué se filtra, no guarda estado y no pide datos: cada filtro es un campo controlado por el consumidor, igual que en un formulario.
+
+<Canvas of={FilterBarStories.ConFiltros} />
+
+```tsx
+<FilterBar
+  search={
+    <InputField
+      id="buscar" kind="search" clearable label="Buscar" labelHidden
+      placeholder="Buscar por nombre o correo…"
+      value={query} onChange={(e) => setQuery(e.target.value)}
+    />
+  }
+  actions={<Button variant="outline" onClick={limpiar}>Limpiar filtros</Button>}
+>
+  <SelectField id="estado" label="Estado" options={ESTADOS} value={estado} onValueChange={setEstado} />
+  <SelectField id="papel" label="Papel" options={PAPELES} value={papel} onValueChange={setPapel} />
+  <DatePickerField id="desde" label="Desde" value={desde} onValueChange={setDesde} />
+</FilterBar>
+```
+
+## Cuándo usarla
+
+Cuando un listado se filtra por **más de una cosa**: un buscador y dos, tres o cuatro campos. Con un solo filtro junto al buscador no hace falta — cabe en el `toolbar` de la tabla.
+
+Existe porque montar esa barra a mano en un `Inline` se rompe en pantalla estrecha: los campos no encogen por debajo de su contenido y la fila se sale. Aquí la rejilla es `auto-fit` sobre un ancho mínimo por token (`column-min-inline-size`), así que **el número de columnas lo decide el sitio disponible** y en móvil queda una sola, a ancho completo.
+
+## Anatomía
+
+- **`search`**: el campo de búsqueda del sistema —un `InputField kind="search"`, que es el que trae la lupa, o el [SearchForm](?path=/docs/molecules-searchform--docs) cuando la consulta viaja a otra página—. Ocupa **su propia línea entera, siempre**: es lo primero que se toca y lo que más se escribe, y compartir línea con un select lo dejaría en un tercio del ancho.
+- **`children`**: los filtros, un campo por filtro, **con su etiqueta visible**. Un filtro sin rótulo obliga a abrirlo para saber qué filtra; es la diferencia entre un buscador (uno solo, evidente) y una rejilla de tres.
+- **`actions`**: opcional, al final de la fila de filtros y alineada **con los controles**, no con sus rótulos. Es el sitio de «Limpiar filtros».
+
+Sin filtros ni acciones no se pinta la fila; sin buscador, no se pinta su línea.
+
+<Canvas of={FilterBarStories.SoloBuscador} />
+<Canvas of={FilterBarStories.ConAcciones} />
+
+## En móvil
+
+Los filtros se apilan a ancho completo y las acciones caen al final, alineadas al margen. No hay punto de ruptura: lo hace `minmax(min(<mínimo>, 100%), 1fr)`, que deja la columna encoger cuando la pantalla es más estrecha que el mínimo.
+
+<Canvas of={FilterBarStories.Movil} />
+
+## Cómo se conecta con `DataTable`
+
+**Encima de la tabla**, como hermana, no en la prop `toolbar`:
+
+```tsx
+<Stack gap="md">
+  <FilterBar search={…}>{…}</FilterBar>
+  <DataTable columns={columns} data={rows} pagination={…} />
+</Stack>
+```
+
+El `toolbar` de [DataTable](?path=/docs/organisms-datatable--docs) es una **fila** a la derecha de su propio buscador: cabe un botón o un filtro suelto, no una rejilla de cuatro campos con sus etiquetas. Y la tabla ya trae buscador (`search` / `searchColumnId`), así que meter la barra dentro dejaría dos campos de búsqueda en la misma caja.
+
+La regla, entonces: **o el buscador de la tabla, o el de la barra, nunca los dos**. En cuanto hay filtros, el buscador se lleva a la barra —viven juntos, se leen juntos y se limpian juntos— y la tabla se queda sin `search` ni `searchColumnId`, solo con sus datos ya filtrados. Filtrar es del consumidor: la barra emite valores y quien pide los datos decide qué hacer con ellos.
+
+## Superficie oscura
+
+La barra no pinta ni un color: lo que se ve es de los campos, que ya traen su par oscuro. Por eso no tiene tokens `surface-dark-*`.
+
+<Canvas of={FilterBarStories.EnSuperficieOscura} />
+
+## Accesibilidad
+
+- La barra es un punto de referencia `search` con nombre accesible (`ariaLabel`, default «Filtros»): el lector de pantalla la anuncia como el bloque de búsqueda del listado, y se salta a ella sin recorrer la tabla.
+- Las etiquetas de los filtros van **visibles**. Ocultarlas (`labelHidden`) deja el nombre accesible pero quita el rótulo a quien mira, que es justo a quien le hace falta con tres filtros seguidos.
+- El orden del DOM es el de lectura: buscador, filtros, acciones.
+
+## Props
+
+<ArgTypes of={FilterBar} />
+
+## Tokens
+
+<TokenTable tokens={filterBarTokens} />
+
+`column-min-inline-size` es lo único que decide cuántas columnas caben: subirlo da filas de tres, bajarlo de cuatro o cinco. Los demás son aire, y salen por referencia del formulario (`form.gap`, `form.actions-gap`) y de la fila de campos (`field-row.column-gap`, `field-row.row-gap`): la barra no inventa medidas propias.

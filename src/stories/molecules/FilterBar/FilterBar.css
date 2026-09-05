@@ -1,0 +1,56 @@
+/* Dos líneas: el buscador y, debajo, los filtros. El buscador nunca comparte
+   línea con un filtro —es lo que más se escribe y lo primero que se toca—, y
+   por eso es una fila propia y no una celda más de la rejilla. */
+.filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--filter-bar-gap);
+}
+
+.filter-bar__search {
+  inline-size: 100%;
+}
+
+/* Los filtros y, al final, sus acciones. Alineadas abajo (`flex-end`): el
+   botón cuadra con los controles, no con los rótulos que llevan encima. */
+.filter-bar__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  column-gap: var(--filter-bar-column-gap);
+  row-gap: var(--filter-bar-row-gap);
+}
+
+/* La rejilla decide sola cuántas columnas caben: `auto-fit` sobre el ancho
+   mínimo del token. El `min(…, 100%)` es lo que la deja apilar en móvil —sin
+   él, una columna de 192px desborda una pantalla de 320px—, así que no hace
+   falta punto de ruptura. `1 1 <mínimo>` deja que las acciones compartan
+   línea cuando queda sitio y que bajen a la suya cuando no. */
+.filter-bar__filters {
+  flex: 1 1 var(--filter-bar-column-min-inline-size);
+  min-inline-size: 0;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(var(--filter-bar-column-min-inline-size), 100%), 1fr)
+  );
+  column-gap: var(--filter-bar-column-gap);
+  row-gap: var(--filter-bar-row-gap);
+}
+
+/* Cada filtro es una celda que puede encoger por debajo de su contenido: es lo
+   que impide que un select con etiquetas largas ensanche la columna. */
+.filter-bar__filter {
+  min-inline-size: 0;
+}
+
+/* Al final de la fila: el margen automático las ancla al extremo, compartan
+   línea con los filtros o hayan bajado a la suya. */
+.filter-bar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--filter-bar-actions-gap);
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+}

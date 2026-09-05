@@ -223,6 +223,10 @@
       "types": "./dist/_types/molecules/FieldRow/FieldRow.d.ts",
       "import": "./dist/field-row.js"
     },
+    "./filter-bar": {
+      "types": "./dist/_types/molecules/FilterBar/FilterBar.d.ts",
+      "import": "./dist/filter-bar.js"
+    },
     "./heading": {
       "types": "./dist/_types/atoms/Heading/Heading.d.ts",
       "import": "./dist/heading.js"
