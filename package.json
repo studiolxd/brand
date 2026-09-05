@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "30.10.1",
+  "version": "31.0.0",
   "type": "module",
   "exports": {
     "./accordion": {

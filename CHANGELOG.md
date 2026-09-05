@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## [31.0.0] — 2026-09-05
 
 - **La página de estado, en el catálogo** (`Pages/Estado del servicio`).
   `status.slxd.app` montado con piezas del DS y datos falsos: `AppRoot` +
