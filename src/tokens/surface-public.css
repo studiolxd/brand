@@ -133,6 +133,7 @@
   --textarea-field-helper-font-size: var(--form-helper-font-size);
   --time-field-error-font-size: var(--form-error-font-size);
   --time-field-helper-font-size: var(--form-helper-font-size);
+  --uptime-bars-footer-font-size: var(--text-paragraph-small-font-size);
   --user-message-author-font-size: var(--text-paragraph-small-font-size);
   --user-message-timestamp-font-size: var(--text-paragraph-small-font-size);
   --annotation-thread-author-font-size: var(--text-paragraph-small-font-size);
