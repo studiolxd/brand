@@ -1,10 +1,14 @@
 /* La fila envuelve: a talla `lg` el avatar mide 192px y en un móvil de 375px ya
    no cabe con el botón al lado, así que el botón baja debajo. Sin media query:
-   lo decide el ancho que haya, no el de la ventana. */
+   lo decide el ancho que haya, no el de la ventana.
+
+   Al pie: el botón y su pista se alinean con el borde inferior del avatar, no
+   con su centro. La pista habla del avatar («…o arrastra la imagen hasta el
+   avatar»), así que la columna termina donde termina aquello de lo que habla. */
 .avatar-upload {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--avatar-upload-gap);
 }
 
@@ -76,6 +80,17 @@
    esto el navegador pinta su propio «Elegir archivo». */
 .avatar-upload__input {
   display: none;
+}
+
+/* La pista de arrastre: se ve, y dice lo único que el botón no puede decir por
+   sí mismo. Los formatos y el peso siguen donde estaban —en la descripción
+   accesible—, porque ensucian la pantalla y el avatar es el asunto. */
+.avatar-upload__hint {
+  font-family: var(--avatar-upload-hint-font-family);
+  font-size: var(--avatar-upload-hint-font-size);
+  font-weight: var(--avatar-upload-hint-font-weight);
+  line-height: var(--avatar-upload-hint-line-height);
+  color: var(--avatar-upload-hint-color);
 }
 
 .avatar-upload__error {

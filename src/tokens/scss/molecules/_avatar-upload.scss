@@ -11,6 +11,11 @@ $lxd-avatar-upload-overlay-opacity: 0.6; // Opacidad del velo — la del scrim d
 $lxd-avatar-upload-overlay-icon-color: #ffffff; // Icono de subida sobre el velo — tinta sobre oscuro
 $lxd-avatar-upload-transition-duration: 150ms; // Duración de la aparición del anillo y del velo
 $lxd-avatar-upload-transition-easing: ease; // Easing de la aparición del anillo y del velo
+$lxd-avatar-upload-hint-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía de la pista de arrastre — la del texto de ayuda de los campos
+$lxd-avatar-upload-hint-font-size: 0.875rem; // Cuerpo de la pista de arrastre — el del texto de ayuda de los campos
+$lxd-avatar-upload-hint-font-weight: 300; // Peso de la pista de arrastre — el del texto de ayuda de los campos
+$lxd-avatar-upload-hint-line-height: 1.5; // Interlineado de la pista de arrastre — el del texto de ayuda de los campos
+$lxd-avatar-upload-hint-color: #111e30; // Color de la pista de arrastre — el del texto de ayuda de los campos
 $lxd-avatar-upload-error-font-family: "Google Sans Flex", system-ui, sans-serif; // Tipografía del mensaje de error — la de los campos
 $lxd-avatar-upload-error-font-size: 0.875rem; // Cuerpo del mensaje de error — el de los campos
 $lxd-avatar-upload-error-font-weight: 300; // Peso del mensaje de error — el de los campos

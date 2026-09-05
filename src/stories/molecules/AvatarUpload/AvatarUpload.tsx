@@ -101,6 +101,12 @@ export interface AvatarUploadProps {
    * Default: "Suelta la imagen sobre el avatar para subirla".
    */
   dropActiveMessage?: string;
+  /**
+   * Pista **visible** bajo el botón: dice que además se puede arrastrar, que
+   * es lo único de esta pieza que no se adivina mirándola. Default castellano:
+   * "…o arrastra la imagen hasta el avatar". Con cadena vacía no se pinta.
+   */
+  dropHintLabel?: string;
 
   /**
    * Título del diálogo de recorte. Default: "Recortar imagen" (castellano).
@@ -120,6 +126,10 @@ export interface AvatarUploadProps {
   cropConfirmLabel?: ReactNode;
   /** Etiqueta del aspa de cerrar. Default: "Cerrar". */
   cropCloseLabel?: string;
+  /** Lo que se dice mientras la imagen se carga en el diálogo. Default: "Cargando imagen…". */
+  cropLoadingLabel?: string;
+  /** Lo que se dice cuando la imagen no se puede cargar. Default: "No hemos podido cargar la imagen. Prueba con otro archivo.". */
+  cropErrorMessage?: string;
 
   /** Se añade DESPUÉS de las clases propias del componente. */
   className?: string;
@@ -175,11 +185,14 @@ export function AvatarUpload({
   invalidTypeError = (formats) => `Formato no admitido. Se aceptan ${formats}.`,
   tooLargeError = (max) => `El archivo pesa demasiado. El máximo es ${max}.`,
   dropActiveMessage = 'Suelta la imagen sobre el avatar para subirla',
+  dropHintLabel = '…o arrastra la imagen hasta el avatar',
   cropTitle = 'Recortar imagen',
   cropDescription,
   cropCancelLabel = 'Cancelar',
   cropConfirmLabel = 'Guardar',
   cropCloseLabel = 'Cerrar',
+  cropLoadingLabel,
+  cropErrorMessage,
   className,
 }: AvatarUploadProps) {
   const size = useFormSize(sizeProp);
@@ -353,6 +366,7 @@ export function AvatarUpload({
           {buttonLabel}
         </Button>
         {hint && <VisuallyHidden id={hintId}>{hint}</VisuallyHidden>}
+        {dropHintLabel && <span className="avatar-upload__hint">{dropHintLabel}</span>}
         {message && (
           <span id={errorId} className="avatar-upload__error" role="alert">{message}</span>
         )}
@@ -373,6 +387,8 @@ export function AvatarUpload({
         cancelLabel={cropCancelLabel}
         confirmLabel={cropConfirmLabel}
         closeLabel={cropCloseLabel}
+        {...(cropLoadingLabel !== undefined ? { loadingLabel: cropLoadingLabel } : {})}
+        {...(cropErrorMessage !== undefined ? { errorMessage: cropErrorMessage } : {})}
         onConfirm={handleConfirm}
         onClose={closeDialog}
       />
