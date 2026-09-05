@@ -119,6 +119,11 @@ export interface DataTableProps<TData, TValue> {
   searchClearLabel?: string;
   /** Se renderiza a la derecha del buscador. */
   toolbar?: ReactNode;
+  /**
+   * Se renderiza en el pie, a la derecha de la paginación — acciones sobre el
+   * conjunto (exportar…), no sobre la selección. Sin ella el pie no cambia.
+   */
+  footerActions?: ReactNode;
   /** Filas por página cuando la tabla pagina en cliente. */
   pageSize?: number;
   /** Texto del estado vacío. */
@@ -148,6 +153,7 @@ export function DataTable<TData, TValue>({
   searchPlaceholder,
   searchClearLabel,
   toolbar,
+  footerActions,
   pageSize = 10,
   emptyMessage = 'Sin resultados',
   isLoading,
@@ -304,6 +310,9 @@ export function DataTable<TData, TValue>({
             onPageChange={(page) => table.setPageIndex(page - 1)}
             {...paginationLabels}
           />
+        )}
+        {footerActions && (
+          <div className="data-table__footer-actions">{footerActions}</div>
         )}
       </div>
     </div>

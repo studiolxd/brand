@@ -58,6 +58,11 @@ export interface DataTableProps<TData, TValue> {
     searchClearLabel?: string;
     /** Se renderiza a la derecha del buscador. */
     toolbar?: ReactNode;
+    /**
+     * Se renderiza en el pie, a la derecha de la paginación — acciones sobre el
+     * conjunto (exportar…), no sobre la selección. Sin ella el pie no cambia.
+     */
+    footerActions?: ReactNode;
     /** Filas por página cuando la tabla pagina en cliente. */
     pageSize?: number;
     /** Texto del estado vacío. */
@@ -76,4 +81,4 @@ export interface DataTableProps<TData, TValue> {
  * Los textos accesibles llegan por props (el DS no habla de i18n): sin ellos
  * caen a los castellanos por defecto de `Table` y `Pagination`.
  */
-export declare function DataTable<TData, TValue>({ columns, data, ariaLabel, ariaLabelledBy, searchColumnId, search, searchPlaceholder, searchClearLabel, toolbar, pageSize, emptyMessage, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;
+export declare function DataTable<TData, TValue>({ columns, data, ariaLabel, ariaLabelledBy, searchColumnId, search, searchPlaceholder, searchClearLabel, toolbar, footerActions, pageSize, emptyMessage, isLoading, pagination, headerLabels, paginationLabels, className, }: DataTableProps<TData, TValue>): import("react/jsx-runtime").JSX.Element;

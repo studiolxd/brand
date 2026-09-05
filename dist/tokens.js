@@ -3050,6 +3050,7 @@ var e = {
 	"--chat-shell-breakpoint": "1024px",
 	"--data-table-block-gap": "1rem",
 	"--data-table-toolbar-gap": "0.5rem",
+	"--data-table-footer-actions-gap": "0.75rem",
 	"--onboarding-shell-max-width": "768px",
 	"--onboarding-shell-gap": "2rem",
 	"--onboarding-shell-brand-margin-inline-start": "calc(-1 * 1rem)",

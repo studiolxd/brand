@@ -17,6 +17,32 @@
   overflow-x: auto;
 }
 
+/* Tercer bloque del pie, tras la paginación. `Pagination` ya empuja sus
+   propios controles al final de su caja con `margin-inline-start: auto`
+   (ver Pagination.css): aquí se repite el mismo truco para que las acciones
+   queden a la derecha de todo, en la misma fila cuando cabe y, si la
+   paginación apila, en su propia línea alineadas al final — el margen
+   automático ancla al extremo de la línea flex en la que caiga, esté sola
+   o compartida. */
+.data-table__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--data-table-footer-actions-gap);
+}
+
+.data-table__footer > .pagination {
+  flex: 1 1 auto;
+}
+
+.data-table__footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--data-table-footer-actions-gap);
+  margin-inline-start: auto;
+}
+
 /* El buscador se queda con el espacio libre de la barra; `min-inline-size: 0`
    es lo que permite que un ítem flex encoja por debajo del ancho de su
    contenido, para que las acciones de la derecha no se vayan de la línea.

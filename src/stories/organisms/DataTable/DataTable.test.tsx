@@ -169,6 +169,21 @@ describe('DataTable', () => {
     expect(celdas[3]).toHaveClass('data-table__cell--center');
   });
 
+  it('pinta las acciones del pie cuando llegan, no cuando no', () => {
+    const { rerender } = render(<DataTable columns={columns} data={data} pageSize={5} />);
+    expect(screen.queryByRole('button', { name: 'Exportar' })).not.toBeInTheDocument();
+
+    rerender(
+      <DataTable
+        columns={columns}
+        data={data}
+        pageSize={5}
+        footerActions={<button type="button">Exportar</button>}
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Exportar' })).toBeInTheDocument();
+  });
+
   it('reenvía las etiquetas accesibles a la paginación', () => {
     render(
       <DataTable
