@@ -3,6 +3,7 @@
  */
 
 :root {
+  --stack-gap-sm: var(--spacing-2); /** Aire entre piezas apiladas — compacto (8px): líneas de un mismo dato (nombre y correo, título y subtítulo). Es el mismo peldaño que `inline.gap-sm`, y queda por debajo del aire entre dos párrafos (`prose.flow-space`, 16px): las líneas se leen como una sola cosa */
   --stack-gap-md: var(--spacing-5); /** Aire entre piezas apiladas — base */
   --stack-gap-lg: var(--spacing-7); /** Aire entre piezas apiladas — amplio */
 }

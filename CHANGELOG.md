@@ -31,6 +31,14 @@ para breaking changes.
   de «elementos por página» y el paginador se queda solo, a la derecha. Desaparece el
   nodo `.data-table__footer-actions`; quien lo tuviera enganchado por CSS debe mirar
   ahora a `.pagination__after-page-size`.
+- **`Stack`: talla de aire `sm`.** `gap` acepta ahora `'sm' | 'md' | 'lg'` (antes solo
+  `md` y `lg`), con su clase `stack--gap-sm` y el token nuevo por referencia
+  `stack.gap-sm` → `{spacing.2}` (8px). Es el peldaño que faltaba para agrupar
+  **líneas de un mismo dato** —nombre y correo de un propietario, las tres líneas de
+  una sesión activa, título y subtítulo—: el mismo aire compacto que `inline.gap-sm`,
+  y por debajo del que separa dos párrafos, para que el grupo se lea como una sola
+  cosa. `md` sigue siendo el default y separa campos; `lg`, secciones. El criterio, en
+  la doc del componente.
 - **`FilterBar`: nueva molécula** (`@studiolxd/brand/filter-bar`). La barra de filtros
   de un listado: ranura `search` en **su propia línea entera**, los filtros
   (`children`) en una rejilla `auto-fit` que decide sola cuántas columnas caben —tres

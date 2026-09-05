@@ -18,7 +18,7 @@ const meta: Meta<typeof Stack> = {
     ),
   },
   argTypes: {
-    gap: { control: { type: 'radio' }, options: ['md', 'lg'] },
+    gap: { control: { type: 'radio' }, options: ['sm', 'md', 'lg'] },
     align: { control: { type: 'radio' }, options: ['start', 'stretch'] },
     mobileOrder: { control: { type: 'radio' }, options: ['normal', 'reverse'] },
     children: { table: { disable: true } },
@@ -33,6 +33,29 @@ export const PorDefecto: Story = {};
 
 /** `mobileOrder="reverse"`: en móvil el enlace de vuelta queda por encima de la cabecera; en escritorio, debajo. */
 export const VueltaArribaEnMovil: Story = { args: { mobileOrder: 'reverse' } };
+
+/**
+ * `gap="sm"`: las líneas de un mismo dato —el propietario de una organización,
+ * una sesión activa— van juntas; entre un dato y el siguiente, el aire base.
+ */
+export const GapCompacto: Story = {
+  name: 'Aire compacto (sm)',
+  args: {
+    children: (
+      <>
+        <Stack gap="sm">
+          <strong>Nuria Serra</strong>
+          <span>nuria.serra@santcugat.cat</span>
+        </Stack>
+        <Stack gap="sm">
+          <strong>Chrome · macOS</strong>
+          <span>83.12.44.9 — Barcelona</span>
+          <span>Última actividad: hace 3 minutos</span>
+        </Stack>
+      </>
+    ),
+  },
+};
 
 const tarjetaAncha = (
   <Card>
@@ -101,5 +124,32 @@ export const ContratoPassthrough: Story = {
     await expect(stack).toHaveAttribute('id', 'pila');
     await expect(stack).toHaveAttribute('data-zona', 'contacto');
     await expect(stack).toHaveClass('stack');
+  },
+};
+
+/** Test: `sm` aprieta el aire respecto al base, y sale de su propio token. */
+export const ContratoGapCompacto: Story = {
+  name: 'Test — el aire compacto aprieta',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Stack gap="sm" data-testid="compacto">
+        <strong>Nuria Serra</strong>
+        <span>nuria.serra@santcugat.cat</span>
+      </Stack>
+      <Stack data-testid="base">
+        <strong>Nuria Serra</strong>
+        <span>nuria.serra@santcugat.cat</span>
+      </Stack>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const compacto = canvasElement.querySelector('[data-testid="compacto"]') as HTMLElement;
+    const base = canvasElement.querySelector('[data-testid="base"]') as HTMLElement;
+    await expect(compacto).toHaveClass('stack--gap-sm');
+    // El aire sale del token, y el token aprieta: menos que el base.
+    await expect(getComputedStyle(compacto).rowGap).not.toBe('normal');
+    await expect(parseFloat(getComputedStyle(compacto).rowGap))
+      .toBeLessThan(parseFloat(getComputedStyle(base).rowGap));
   },
 };

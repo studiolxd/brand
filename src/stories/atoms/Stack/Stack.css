@@ -9,6 +9,10 @@
 .stack > * {
   max-inline-size: 100%;
 }
+/* Compacto: las líneas de un mismo dato, más juntas que dos párrafos. */
+.stack.stack--gap-sm {
+  gap: var(--stack-gap-sm);
+}
 .stack.stack--gap-lg {
   gap: var(--stack-gap-lg);
 }

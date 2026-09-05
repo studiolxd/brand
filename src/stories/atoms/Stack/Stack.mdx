@@ -11,6 +11,22 @@ Apila piezas con aire por token. Es el envoltorio **explícito** de «estas piez
 
 <Canvas of={StackStories.PorDefecto} />
 
+## Aire: `gap`
+
+Tres peldaños, y la elección no es de gusto: la dice **qué relación** hay entre las piezas.
+
+| `gap` | Aire | Cuándo |
+| --- | --- | --- |
+| `sm` | 8px | **Líneas de un mismo dato**: nombre y correo de un propietario, las tres líneas de una sesión activa, título y subtítulo. Se leen como una sola cosa, así que van más juntas que dos párrafos. |
+| `md` (default) | 24px | **Piezas distintas**: campos de un formulario, una cabecera y lo que va debajo, tarjetas de una lista. |
+| `lg` | 48px | **Secciones** de una página: la introducción y la tabla, un bloque y el siguiente. |
+
+`sm` es el mismo peldaño que `Inline gap="sm"`: la fila y la pila miden el aire compacto igual.
+La prueba de si `sm` es lo que toca: si al mirar el grupo se leen **dos cosas** en vez de una,
+el aire sobra y es `md`.
+
+<Canvas of={StackStories.GapCompacto} />
+
 ## Orden en móvil
 
 `mobileOrder="reverse"` pone la última pieza arriba por debajo de `md`; en escritorio manda el JSX. Es solo orden **visual**: el DOM y la tabulación no cambian, así que se usa únicamente donde eso no importa —un enlace de vuelta sobre la cabecera en las páginas de acceso—, no para contenido que se lea en secuencia. Cada página decide: una que quiera cabecera y algo debajo en el mismo orden en móvil no lo pasa.
