@@ -98,7 +98,7 @@
     "note-font-size": {
       "$value": "{site-shell.paragraph-small-font-size}",
       "$type": "dimension",
-      "$description": "Letra menor del correo (16px): el peldaño de párrafo pequeño de la superficie pública. Sube también porque el correo se lee sobre todo en el móvil, y una nota de baja a 13px es incómoda de leer y de tocar"
+      "$description": "Letra menor del correo (16px): el peldaño de párrafo pequeño de la superficie pública. Sube también porque el correo se lee sobre todo en el móvil, y una nota de baja a 13px es incómoda de leer y de tocar. Viste las notas —la de dentro del recuadro y la de fuera—, y ya NO el enlace de respaldo del botón, que pasó al cuerpo (`font-size`): es una dirección para leer y copiar, no una nota al pie"
     },
     "note-line-height": {
       "$value": "{text.paragraph.small.line-height}",
@@ -114,6 +114,16 @@
       "$value": "{button.primary.color}",
       "$type": "color",
       "$description": "Tinta del botón, emparejada con su relleno"
+    },
+    "button-hover-bg": {
+      "$value": "{button.primary.hover-bg}",
+      "$type": "color",
+      "$description": "Relleno del botón bajo el puntero: el mismo salto que `Button primary` en la web, del lavanda al amarillo (`accent-2`), con la tinta prusia sin moverse. Es lo único del correo que no puede ir inline —un `:hover` no cabe en un atributo `style`—, así que sale por la hoja embebida del layout y solo funciona donde el cliente respeta el `<style>` del head"
+    },
+    "button-hover-color": {
+      "$value": "{button.primary.hover-color}",
+      "$type": "color",
+      "$description": "Tinta del botón bajo el puntero: la prusia del reposo. Se declara aunque no cambie porque la regla de hover tiene que llevar `!important` para ganar al estilo inline, y dejar fuera el color abriría la puerta a que un cliente lo recalculase por su cuenta sobre el relleno nuevo"
     },
     "button-font-size": {
       "$value": "{button.lg-font-size}",

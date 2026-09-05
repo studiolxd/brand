@@ -76,8 +76,12 @@ describe('EmailLayout', () => {
     const hojas = [...out.matchAll(/<style>([\s\S]*?)<\/style>/g)].map((m) => m[1]);
 
     expect(hojas.some((hoja) => hoja.includes('a:hover'))).toBe(true);
-    // Y ninguna clase `email-*`: existían solo para enganchar el modo oscuro.
-    expect(out).not.toContain('email-');
+    // El hover del botón es la otra pseudoclase, y engancha por la única clase
+    // del correo. Las clases `email-*` del modo oscuro no vuelven: la lista de
+    // las que puede haber es esta y nada más.
+    expect(hojas.some((hoja) => hoja.includes('a.email-button:hover'))).toBe(true);
+    const clases = new Set([...out.matchAll(/\bemail-[a-z-]+/g)].map((m) => m[0]));
+    expect([...clases]).toEqual(['email-button']);
   });
 
   it('no escribe ningún valor a mano: todo sale de los tokens', async () => {
@@ -146,6 +150,9 @@ describe('EmailLayout', () => {
     // Y con el corte de palabra que evita la barra horizontal, en sus dos
     // dialectos: `word-break` para los clientes modernos, `word-wrap` para el
     // motor de Word de Outlook.
+    // Y en su propia línea, debajo de la frase: una dirección que arranca a
+    // media línea entra ya partida y cuesta encontrarle el principio.
+    expect(out).toContain('O copia y pega esta dirección:<br/>');
     const respaldo = out.match(/<span style="[^"]*word-break[^"]*"/)?.[0] ?? '';
     expect(respaldo).toContain('word-break:break-all');
     expect(respaldo).toContain('word-wrap:break-word');

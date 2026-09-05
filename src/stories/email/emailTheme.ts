@@ -173,15 +173,18 @@ export const emailStyles = {
   },
   /*
    * El enlace de respaldo que va bajo el botón: la misma dirección en texto,
-   * para copiar y pegar. Letra menor y tinta secundaria, como la nota — el
-   * único elemento con peso fuerte del correo es el título.
+   * para copiar y pegar. Va a la talla del CUERPO, no a la de la nota: es una
+   * dirección que hay que leer carácter a carácter y copiar a mano, no una
+   * letra pequeña de pie de correo. La tinta de la frase sí es la secundaria
+   * —el único elemento con peso fuerte del correo es el título—, y la
+   * dirección en sí recupera la normal (`buttonFallbackUrl`).
    */
   buttonFallback: {
     color: emailPalette.muted,
     fontFamily: emailFontFamily,
-    fontSize: emailToken('--email-note-font-size'),
+    fontSize: emailToken('--email-font-size'),
     fontWeight: Number(emailToken('--email-font-weight')),
-    lineHeight: emailToken('--email-note-line-height'),
+    lineHeight: emailToken('--email-line-height'),
     margin: `${emailToken('--email-button-fallback-margin-block-start')} 0 ${emailToken('--email-button-margin-block-end')}`,
   },
   /*
@@ -209,13 +212,37 @@ export const emailStyles = {
 } as const satisfies Record<string, CSSProperties>;
 
 /**
- * Lo único que el correo no puede llevar inline: una pseudoclase.
+ * La única clase del correo. Existe porque el hover del botón no cabe inline y
+ * su regla necesita un gancho que no atrape a los demás enlaces.
+ */
+export const emailButtonClassName = 'email-button';
+
+/**
+ * Lo único que el correo no puede llevar inline: las pseudoclases.
  *
  * Es toda la hoja de estilos del correo. Antes había un bloque mucho mayor con
  * las reglas de modo oscuro y las clases (`.email-body`, `.email-surface`,
  * `.email-text`…) que existían solo para que esas reglas pudieran engancharse;
  * al retirarse el modo oscuro se fueron con él.
+ *
+ * Dos reglas:
+ *
+ * 1. El enlace se desubraya bajo el puntero, como en la web.
+ * 2. El botón hace el salto de `Button primary`: del lavanda al amarillo, con
+ *    la tinta prusia quieta. Va con `!important` porque compite con el estilo
+ *    inline del propio botón, que le gana por especificidad. Y engancha por la
+ *    clase `email-button`, no por `a`: el enlace de respaldo y los de baja son
+ *    enlaces del correo y no deben ponerse amarillos.
+ *
+ * Esto solo se ve donde el cliente respeta el `<style>` del head —Gmail web,
+ * Apple Mail—; en Outlook de escritorio, que renderiza con el motor de Word, no,
+ * y en el móvil no hay puntero. Donde no llegue, el botón se queda en su reposo,
+ * que es la lectura correcta: es pulido, no una señal de la que dependa nada.
  */
 export const emailStyleSheet = `
   a:hover { text-decoration: none !important; }
+  a.${emailButtonClassName}:hover {
+    background-color: ${emailToken('--email-button-hover-bg')} !important;
+    color: ${emailToken('--email-button-hover-color')} !important;
+  }
 `;

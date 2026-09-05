@@ -30,6 +30,8 @@ export const emailTokens = {
   '--email-note-line-height': '1.65',
   '--email-button-bg': '#baabff',
   '--email-button-color': '#111e30',
+  '--email-button-hover-bg': '#ffcd00',
+  '--email-button-hover-color': '#111e30',
   '--email-button-font-size': '20px',
   '--email-button-font-weight': '300',
   '--email-button-padding-block': '16px',
