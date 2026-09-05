@@ -16,7 +16,7 @@ function f(e, t) {
 	return [
 		"alert",
 		d[e ?? ""] ?? "",
-		"surface-dark",
+		e === "warning" ? "" : "surface-dark",
 		t ? "alert--dismissible" : "",
 		"toast"
 	].filter(Boolean).join(" ");
