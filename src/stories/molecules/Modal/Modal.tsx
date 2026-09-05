@@ -1,5 +1,5 @@
 import { Dialog } from '@base-ui/react/dialog';
-import { Icon } from '../../atoms/Icon/Icon';
+import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Modal.css';
 
@@ -95,17 +95,13 @@ export function Modal({
           {title ? (
             <header className="modal__header">
               <Dialog.Title className="modal__title">{title}</Dialog.Title>
-              <Dialog.Close className="modal__close" aria-label={closeLabel}>
-                <Icon name="close" size="md" />
-              </Dialog.Close>
+              <Dialog.Close className="modal__close" render={<CloseButton label={closeLabel} />} />
             </header>
           ) : (
             <>
               <Dialog.Title render={<VisuallyHidden>{fallbackTitle}</VisuallyHidden>} />
               <header className="modal__header modal__header--no-title">
-                <Dialog.Close className="modal__close" aria-label={closeLabel}>
-                  <Icon name="close" size="md" />
-                </Dialog.Close>
+                <Dialog.Close className="modal__close" render={<CloseButton label={closeLabel} />} />
               </header>
             </>
           )}

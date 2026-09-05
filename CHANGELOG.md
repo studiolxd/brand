@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+- **`CloseButton` — una sola aspa para todo el sistema.** Hasta ahora había dos
+  maneras de pintar lo mismo: `Modal`, `Sheet` y `FloatingDock` montaban un
+  botón nativo propio con sus tokens `*-close-*`, y `Alert` y `Toaster` un
+  `Button iconOnly variant="ghost"`, que pinta un relleno al pasar el puntero.
+  Ahora las cinco montan el mismo átomo, **sin hover**: ni fondo ni cambio de
+  color; el único estado que marca es el foco.
+- **Es una pieza propia, no una variante de `Button`.** Un aspa no tiene rótulo,
+  ni relleno, ni el hover de un botón de acción; y `ghost` revela justo el fondo
+  que aquí sobra. Se suma a la familia de iconos-botón del sistema
+  (`MenuButton`, `DotsButton`), y es el aspa en la que termina la animación de
+  `MenuButton`. Nuevo export `@studiolxd/brand/close-button` y tokens
+  `close-button.*`.
+- **Ningún token desaparece**: cada contenedor sigue mandando su talla y su
+  tinta desde los tokens `*-close-*` que ya tenía, remapeados sobre el átomo.
+  El aspa del `Alert` pasa de 16 a 24px de glifo, la talla de icono-botón del
+  sistema, la misma que ya tenían el diálogo y el dock.
+
 ## v30.7.0
 
 - **`AvatarUpload` — el avatar de una entidad con su subida.** Una sola pieza

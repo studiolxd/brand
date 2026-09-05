@@ -81,29 +81,16 @@
   flex: 1;
 }
 
-/* Botón nativo, sin Button: el aspa va en tinta desde el reposo y no cambia de
-   color al pasar el puntero — el único estado que se marca es el foco. */
-.modal__close {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--modal-close-size);
-  block-size: var(--modal-close-size);
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  color: var(--modal-close-color);
-  cursor: pointer;
-}
-
-.modal__close:focus-visible {
-  outline: var(--modal-close-focus-ring-width) solid var(--modal-close-focus-ring-color);
-  outline-offset: var(--modal-close-focus-ring-offset);
-}
-
-.modal__close .icon {
-  --icon-size: var(--modal-close-icon-size);
+/* El aspa es el `CloseButton` del sistema —sin hover, con anillo de foco—; lo
+   que pone el diálogo es su talla y su tinta, desde los tokens `modal.close-*`
+   que ya tenía, para que quien los sobrescriba siga mandando. */
+.modal__close.close-button {
+  --close-button-size:              var(--modal-close-size);
+  --close-button-icon-size:         var(--modal-close-icon-size);
+  --close-button-color:             var(--modal-close-color);
+  --close-button-focus-ring-width:  var(--modal-close-focus-ring-width);
+  --close-button-focus-ring-offset: var(--modal-close-focus-ring-offset);
+  --close-button-focus-ring-color:  var(--modal-close-focus-ring-color);
 }
 
 .modal__description {
@@ -118,3 +105,4 @@
   flex: 1;
   min-height: 0;
 }
+

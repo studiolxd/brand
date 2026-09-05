@@ -1,0 +1,55 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as CloseButtonStories from "./CloseButton.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { closeButtonTokens } from "../../../tokens/components/close-button";
+
+<Meta of={CloseButtonStories} />
+
+# CloseButton
+
+El aspa del sistema: el botón que cierra lo que lo contiene. Es la misma pieza en el diálogo (`Modal`), en el cajón (`Sheet`), en el panel del dock (`FloatingDock`) y en el aviso (`Alert`, `Toast`), que antes la resolvían de dos maneras distintas.
+
+Dibuja el icono `close` del catálogo, el mismo en el que termina la animación de [MenuButton](?path=/docs/atoms-menubutton--docs): las dos formas son la misma geometría.
+
+<Canvas of={CloseButtonStories.PorDefecto} />
+
+## No tiene hover
+
+El aspa **no marca el paso del puntero**: ni fondo, ni cambio de color. Ya está en la tinta de la superficie desde el reposo, así que no hay nada que revelar al acercarse; lo único que señala es el foco, con el anillo del sistema.
+
+Por eso es una pieza propia y no un `Button` de solo icono: la variante `ghost` pinta un relleno en hover —lo correcto para un botón de acción, que en reposo es casi invisible— y ese relleno es justo lo que sobra en un aspa.
+
+<Canvas of={CloseButtonStories.FocoVisible} />
+
+## Tallas
+
+Tres cuadrados: 32, 40 (por defecto) y 48px. **El glifo mide 24px en las tres**: lo que crece con la talla es el área sensible, no el dibujo.
+
+<Canvas of={CloseButtonStories.Compacto} />
+
+<Canvas of={CloseButtonStories.Grande} />
+
+## Superficie
+
+Sobre superficie oscura toma la tinta clara por la cascada de `.surface-dark`, sin configuración. Es lo que hace que el aspa de un `Alert` de relleno oscuro se vea sin que el aviso tenga que decir nada.
+
+<Canvas of={CloseButtonStories.SuperficieOscura} />
+
+## Accesibilidad
+
+- `label` es el nombre accesible y dice **qué** se cierra o se quita, no qué forma tiene el glifo. «Cerrar» sirve para un diálogo; un aviso descartable quiere «Descartar aviso», y quitar a alguien de una lista, «Quitar a Ana». No se uniforman: dicen cosas distintas.
+- El default es castellano (`'Cerrar'`); una app multiidioma lo pasa traducido, como todo texto de componente.
+- Es un `<button type="button">`: no envía formularios por accidente.
+- El anillo de foco es el del sistema: 2px, separado 2px.
+
+<Canvas of={CloseButtonStories.ConNombrePropio} />
+
+## Tokens
+
+<TokenTable tokens={closeButtonTokens} />
+
+Un contenedor que quiera su propia talla o su propia tinta remapea estas variables sobre el aspa, sin tocar CSS del átomo — es lo que hacen `Modal`, `Sheet` y `FloatingDock` desde sus tokens `*-close-*`.
+
+## Props
+
+<ArgTypes of={CloseButtonStories} />

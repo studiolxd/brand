@@ -25,10 +25,11 @@ Escape o clic fuera; el DS pone la superficie, el título y el aspa.
 - **Título** (`title`): opcional. Sin él, `fallbackTitle` (default «Diálogo»)
   se renderiza oculto solo para el nombre accesible — el modal siempre tiene
   uno, lo vea o no el usuario.
-- **Cierre**: `Dialog.Close` con su propio botón nativo (sin `Button`, sin
-  variante `ghost`): en reposo, hover y foco solo cambia el color del glifo —
-  nunca el fondo ni el borde, la única excepción al hover del sistema. Tokens
-  propios `modal.close-*`.
+- **Cierre**: `Dialog.Close` sobre el [CloseButton](?path=/docs/atoms-closebutton--docs)
+  del sistema, el mismo aspa que el cajón, el dock y los avisos. No tiene
+  hover: ni fondo ni cambio de color al pasar el puntero; el único estado que
+  marca es el foco. Su talla y su tinta salen de los tokens `modal.close-*`,
+  que el diálogo remapea sobre el átomo.
 - **Descripción** (`description` o `aria-describedby`): opcional, bajo el
   título.
 - **Cuerpo** (`children`): con scroll propio si el contenido no cabe.

@@ -1,0 +1,31 @@
+@import '../../../tokens/components/close-button.css';
+
+/* Un control cuadrado a su talla con el glifo `close` centrado dentro. Sin
+   fondo, sin borde y —a propósito— sin regla de hover: el aspa va en la tinta
+   de la superficie desde el reposo y el único estado que marca es el foco. */
+.close-button {
+  --close-button-size: var(--close-button-size-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: var(--close-button-size);
+  block-size: var(--close-button-size);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--close-button-color);
+  cursor: pointer;
+}
+
+.close-button.close-button--sm { --close-button-size: var(--close-button-size-sm); }
+.close-button.close-button--lg { --close-button-size: var(--close-button-size-lg); }
+
+.close-button:focus-visible {
+  outline: var(--close-button-focus-ring-width) solid var(--close-button-focus-ring-color);
+  outline-offset: var(--close-button-focus-ring-offset);
+}
+
+.close-button .icon {
+  --icon-size: var(--close-button-icon-size);
+}

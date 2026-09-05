@@ -21,6 +21,7 @@ export const entryPoints = {
   'radio':               'src/stories/atoms/Radio/Radio.tsx',
   'icon':                'src/stories/atoms/Icon/Icon.tsx',
   'menu-button':         'src/stories/atoms/MenuButton/MenuButton.tsx',
+  'close-button':        'src/stories/atoms/CloseButton/CloseButton.tsx',
   'code':                'src/stories/atoms/Code/Code.tsx',
   'fieldset':            'src/stories/atoms/Fieldset/Fieldset.tsx',
   'figure':              'src/stories/atoms/Figure/Figure.tsx',
@@ -162,7 +163,7 @@ export const entryPoints = {
 
 export const clientComponents = new Set([
   'alert', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
-  'button', 'checkbox', 'radio', 'radio-group', 'switcher', 'menu-button', 'input',
+  'button', 'checkbox', 'radio', 'radio-group', 'switcher', 'menu-button', 'close-button', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form', 'hero',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',
   'steps', 'stepper',

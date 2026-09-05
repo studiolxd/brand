@@ -43,7 +43,7 @@ La tarjeta **es un `Alert`**: rectángulo de relleno sólido, borde de 1px y esq
 
 - **La capa** (`.toaster`, el `Toast.Viewport` de Base UI): posición fija en una esquina de la ventana, a `toast.inset-block` / `toast.inset-inline` del borde, en la capa `z-index.toast`. Su ancho es `toast.max-width`, y en una ventana estrecha cede al ancho disponible menos el aire lateral.
 - **El apilado**: los avisos se ordenan por llegada, el más nuevo delante. Recogida, la pila deja asomar `toast.stack-offset` de cada aviso de detrás y lo encoge `toast.stack-scale` por peldaño; desplegada, cada uno se aparta la altura de los que tiene delante más `toast.gap`. Se despliega sola al pasar el ratón o al entrar el foco, y `expand` la deja desplegada siempre. `visibleToasts` limita cuántos se ven a la vez.
-- **El aspa y la acción**: los dos son `Button variant="ghost" size="sm"` —el aspa además `iconOnly`—, montados sobre `Toast.Close` y `Toast.Action` con la prop `render`. No tienen cara propia: la ponen los tokens del `Button`, que voltea con la superficie del relleno igual que en el `Alert`.
+- **El aspa y la acción**: el aspa es el [CloseButton](?path=/docs/atoms-closebutton--docs) del sistema y la acción un `Button variant="ghost" size="sm"`, montados sobre `Toast.Close` y `Toast.Action` con la prop `render`. Ninguno tiene cara propia: la toman de la superficie del relleno, igual que en el `Alert`. El aspa **no pinta fondo al pasar el puntero** — hasta v30.7.0 era también un `Button` ghost y sí lo hacía.
 
 ## Intenciones
 
@@ -134,7 +134,7 @@ El relleno, el borde, el aire, la tipografía y las cuatro intenciones salen del
 - La pila es una **región** con nombre accesible (`containerAriaLabel`, «Notificaciones» por defecto).
 - El **auto-cierre se pausa** con el puntero encima o con el foco dentro, así que un aviso no se escapa mientras se lee o mientras se tabula hasta su aspa. Un aviso que el usuario deba poder consultar sin prisa se lanza con `duration: Infinity`.
 - La pila está **fuera del orden de tabulación normal**: se alcanza con **F6**, que lleva el foco a la región y despliega la pila. Mientras está recogida, **el aspa está oculta al lector de pantalla** (`aria-hidden`) porque el aviso ya se anuncia entero y su cierre es automático; al desplegarse —con el ratón o con el foco— aparece como el botón que es. La acción, en cambio, se anuncia siempre: es contenido del aviso, no un control del motor.
-- El **aspa** y la **acción** son `Button` ghost de talla `sm`: 32px de lado, la talla mínima del sistema, con el anillo de foco del sistema. El aspa lleva nombre accesible traducible (`closeLabel`, «Cerrar» por defecto).
+- El **aspa** (`CloseButton`) y la **acción** (`Button` ghost) miden 32px de lado, la talla mínima del sistema, con el anillo de foco del sistema. El aspa lleva nombre accesible traducible (`closeLabel`, «Cerrar» por defecto) y no marca el hover.
 - **Movimiento**: la entrada, la salida y el apilado usan tokens de duración, así que con `prefers-reduced-motion: reduce` valen 0ms y el aviso aparece y desaparece sin animación.
 - **Contraste**: los cuatro pares de relleno y tinta son los del `Alert` — blanco sobre prusia, verde y rojo; prusia sobre el amarillo.
 

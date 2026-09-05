@@ -49,13 +49,17 @@
 }
 
 /* ── Botón de cierre — esquina superior derecha ─────────────── */
-/* El color, el hover y el anillo de foco los pone `Button` ghost, que voltea
-   con la superficie del relleno (oscura salvo en `warning`). */
+/* El aspa es el `CloseButton` del sistema: sin hover —era el relleno del
+   `Button` ghost lo que sobraba aquí— y con el anillo de foco. El color no se
+   remapea a propósito: el aspa toma la tinta de la superficie del relleno
+   (oscura salvo en `warning`) por la cascada de `.surface-dark`, igual que
+   antes. */
 
 .alert .alert__close {
   position: absolute;
   inset-block-start: var(--alert-close-inset);
   inset-inline-end: var(--alert-close-inset);
+  --close-button-size: var(--alert-close-size);
 }
 
 /* ── Variantes ──────────────────────────────────────────────── */

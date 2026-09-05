@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from 'react';
 import { Dialog } from '@base-ui/react/dialog';
 import { Button } from '../../atoms/Button/Button';
+import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import { Icon } from '../../atoms/Icon/Icon';
 import { NumberBadge } from '../../atoms/NumberBadge/NumberBadge';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
@@ -164,9 +165,7 @@ export function FloatingDock({
                 )}
               </header>
 
-              <Dialog.Close className="floating-dock__close" aria-label={closeLabel}>
-                <Icon name="close" size="md" />
-              </Dialog.Close>
+              <Dialog.Close className="floating-dock__close" render={<CloseButton label={closeLabel} />} />
 
               <div className="floating-dock__body">{children}</div>
             </Dialog.Popup>

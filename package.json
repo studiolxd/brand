@@ -355,6 +355,10 @@
       "types": "./dist/_types/atoms/MenuButton/MenuButton.d.ts",
       "import": "./dist/menu-button.js"
     },
+    "./close-button": {
+      "types": "./dist/_types/atoms/CloseButton/CloseButton.d.ts",
+      "import": "./dist/close-button.js"
+    },
     "./menu": {
       "types": "./dist/_types/molecules/Menu/Menu.d.ts",
       "import": "./dist/menu.js"
