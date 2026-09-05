@@ -3,7 +3,8 @@
     "size": {
       "sm": { "$value": "{size-component.sm}", "$type": "dimension", "$description": "32px — en barras y menús (UserMenu, OrgSwitcher)" },
       "md": { "$value": "{size-component.md}", "$type": "dimension", "$description": "40px — por defecto: listas, tarjetas" },
-      "lg": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "48px — cabeceras de perfil" }
+      "lg": { "$value": "{size-component.lg}", "$type": "dimension", "$description": "48px — cabeceras de perfil" },
+      "xl": { "$value": "{icon.size-xl}", "$type": "dimension", "$description": "64px — el avatar es el asunto de la pantalla (una cabecera de perfil, la subida de la foto). Es la talla ilustrativa de la escala de iconos, la misma que usan `logo.height-xl` y `logomark.size-xl`, no una talla de control: por encima de `lg` el sistema ya no mide con la escala de controles" }
     },
     "border-radius":        { "$value": "{border-radius.round}",   "$type": "dimension", "$description": "Personas: círculo" },
     "border-radius-square": { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Organizaciones (logos): el radio del sistema" },
@@ -13,6 +14,7 @@
     "initials-font-size-sm": { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Iniciales a talla sm" },
     "initials-font-size-md": { "$value": "{font-size.2}",          "$type": "dimension", "$description": "Iniciales a talla md" },
     "initials-font-size-lg": { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Iniciales a talla lg" },
+    "initials-font-size-xl": { "$value": "{font-size.4}",          "$type": "dimension", "$description": "Iniciales a talla xl: un peldaño de la escala tipográfica por talla, como las tres anteriores" },
     "surface-dark-initials-bg":    { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Iniciales — surface-dark: se invierten" },
     "surface-dark-initials-color": { "$value": "{color.primary}",      "$type": "color", "$description": "Iniciales — surface-dark" }
   }

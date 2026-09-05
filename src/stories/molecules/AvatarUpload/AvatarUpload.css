@@ -1,0 +1,83 @@
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--avatar-upload-gap);
+}
+
+/* ── La diana ─────────────────────────────────────────── */
+
+/* Mide exactamente lo que mide el avatar: la zona que acepta el archivo es el
+   avatar, ni un píxel más. Lo que la anuncia (el anillo) se pinta con
+   `outline`, que ni ocupa maqueta ni recibe puntero. */
+.avatar-upload__target {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  border-radius: var(--avatar-border-radius);
+  outline: var(--avatar-upload-ring-width) dashed transparent;
+  outline-offset: var(--avatar-upload-ring-offset);
+  transition: outline-color var(--avatar-upload-transition-duration) var(--avatar-upload-transition-easing);
+}
+
+/* El anillo sigue la forma del avatar: redondo en personas, recto en organizaciones. */
+.avatar-upload.avatar-upload--square .avatar-upload__target {
+  border-radius: var(--avatar-border-radius-square);
+}
+
+/* Hay un arrastre en la ventana: la diana se anuncia antes de que llegue. */
+.avatar-upload.avatar-upload--armed .avatar-upload__target {
+  outline-color: var(--avatar-upload-ring-color);
+}
+
+/* Ya está encima: el trazo se cierra y el velo dice que se puede soltar. */
+.avatar-upload.avatar-upload--over .avatar-upload__target {
+  outline-style: solid;
+}
+
+.avatar-upload.avatar-upload--inert .avatar-upload__target {
+  cursor: var(--input-disabled-cursor);
+  pointer-events: none;
+}
+
+/* ── El velo ──────────────────────────────────────────── */
+
+.avatar-upload__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  color: var(--avatar-upload-overlay-icon-color);
+  background-color: var(--avatar-upload-overlay-bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--avatar-upload-transition-duration) var(--avatar-upload-transition-easing);
+}
+
+.avatar-upload.avatar-upload--over .avatar-upload__overlay {
+  opacity: var(--avatar-upload-overlay-opacity);
+}
+
+/* ── El botón y su mensaje ────────────────────────────── */
+
+.avatar-upload__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--avatar-upload-body-gap);
+}
+
+/* El control real: lo dispara el botón, así que no se ve ni se tabula. Sin
+   esto el navegador pinta su propio «Elegir archivo». */
+.avatar-upload__input {
+  display: none;
+}
+
+.avatar-upload__error {
+  font-family: var(--avatar-upload-error-font-family);
+  font-size: var(--avatar-upload-error-font-size);
+  font-weight: var(--avatar-upload-error-font-weight);
+  line-height: var(--avatar-upload-error-line-height);
+  color: var(--avatar-upload-error-color);
+}

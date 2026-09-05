@@ -3,6 +3,7 @@ import { Icon } from '../Icon/Icon';
 import { ProgressBar } from '../ProgressBar/ProgressBar';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import { useFormSize, type FormSize } from '../../constants/form-size';
+import { formatBytes, validateFile } from './validate';
 import './FileUpload.css';
 
 export interface FileUploadProps {
@@ -62,34 +63,6 @@ export interface FileUploadProps {
   tooLargeError?: (maxSize: string) => string;
   /** Error de tipo no admitido. Default: "Tipo de archivo no permitido" */
   invalidTypeError?: string;
-}
-
-function formatBytes(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
-
-function validateFile(
-  file: File,
-  accept: string | undefined,
-  maxSize: number | undefined,
-  tooLargeError: (maxSize: string) => string,
-  invalidTypeError: string,
-): string | null {
-  if (maxSize !== undefined && file.size > maxSize) {
-    return tooLargeError(formatBytes(maxSize));
-  }
-  if (accept) {
-    const patterns = accept.split(',').map(s => s.trim());
-    const ok = patterns.some(p => {
-      if (p.startsWith('.')) return file.name.toLowerCase().endsWith(p.toLowerCase());
-      if (p.endsWith('/*')) return file.type.startsWith(p.slice(0, -2));
-      return file.type === p;
-    });
-    if (!ok) return invalidTypeError;
-  }
-  return null;
 }
 
 /**

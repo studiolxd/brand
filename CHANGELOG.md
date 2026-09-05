@@ -7,6 +7,39 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+- **`AvatarUpload` — el avatar de una entidad con su subida.** Una sola pieza
+  para persona (redondo) y organización (cuadrado): avatar, subida por clic y
+  por arrastre, validación de cliente y recorte. Compone lo que ya existía
+  —`Avatar`, la validación del `FileUpload`, `ImageCropDialog` y `Button`— y
+  entrega el recorte por `onChange(blob, file)`; la subida de verdad sigue
+  siendo del producto.
+- **La diana es el avatar**, no el bloque: se anuncia con un anillo en cuanto
+  empieza un arrastre sobre la ventana, y el anillo se pinta con `outline`, así
+  que la zona sensible no crece más allá del avatar. El botón se queda siempre:
+  es la vía accesible, no un respaldo.
+- **Dos textos para el botón**: `buttonLabel` (visible, «Subir») y
+  `buttonAccessibleLabel` (el nombre completo, «Subir logo»). En desarrollo
+  avisa si el accesible no contiene el visible — WCAG 2.5.3.
+- **Los formatos y el peso ya no se pintan**: los dice el error de la
+  validación —que ahora dice qué **sí** se acepta— y la descripción accesible
+  del botón, porque el `accept` del input no lo anuncia ningún lector.
+- **La talla la manda el contexto** (`FormSizeContext`): sin `size`, botón y
+  avatar suben juntos con el `Form`/`OnboardingShell` que los envuelva.
+- **`Avatar` gana la talla `xl` (64px)**, para cuando el avatar es el asunto de
+  la pantalla. No es una talla de control —48px sigue siendo el control más
+  alto—: es el peldaño de marca de la escala de iconos, el mismo de
+  `logo.height-xl` y `logomark.size-xl`.
+- Tokens nuevos: `avatar-upload.*` y `avatar.size-xl` /
+  `avatar.initials-font-size-xl`.
+- **El CSS de un chunk compartido ya no se queda huérfano.** Cuando dos
+  entradas comparten un componente, rollup saca su cuerpo a `dist/_shared/` y
+  su CSS al raíz con el nombre del chunk, sin nadie que lo importe:
+  `scripts/post-build.mjs` lo engancha ahora igual que el de las entradas. Le
+  pasaba ya a `ProgressBar` (`dist/ProgressBar.css` estaba huérfano en
+  v30.6.0), que queda arreglado.
+
 ## v30.6.0
 
 - **`FieldRow` / `FieldRows` — la fila de formulario repetible.** La pieza que

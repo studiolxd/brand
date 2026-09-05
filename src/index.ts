@@ -83,6 +83,8 @@ export type { ToggleProps } from './stories/atoms/Toggle/Toggle';
 export { ToggleGroup } from './stories/atoms/ToggleGroup/ToggleGroup';
 export type { ToggleGroupProps } from './stories/atoms/ToggleGroup/ToggleGroup';
 export { Tooltip, TooltipProvider } from './stories/atoms/Tooltip/Tooltip';
+export { AvatarUpload } from './stories/molecules/AvatarUpload/AvatarUpload';
+export type { AvatarUploadProps } from './stories/molecules/AvatarUpload/AvatarUpload';
 export { ImageCropDialog } from './stories/molecules/ImageCropDialog/ImageCropDialog';
 export type { ImageCropDialogProps } from './stories/molecules/ImageCropDialog/ImageCropDialog';
 export { cropImageToBlob } from './stories/molecules/ImageCropDialog/crop';

@@ -1,0 +1,101 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as AvatarUploadStories from "./AvatarUpload.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { avatarUploadBaseTokens, avatarUploadDarkTokens } from "../../../tokens/molecules/avatar-upload";
+
+<Meta of={AvatarUploadStories} />
+
+# AvatarUpload
+
+El avatar de una **entidad** —una persona o una organización— con su subida: se elige la imagen con el botón o soltándola sobre el avatar, se recorta y se entrega el recorte. Es la pieza única para los dos casos: lo que distingue a una organización es el cuadrado (`shape="square"`), no otro componente.
+
+No reimplementa nada: el retrato es `Avatar`, la validación de peso y tipo es la del `FileUpload`, el recorte es `ImageCropDialog` y el botón es `Button`.
+
+<Canvas of={AvatarUploadStories.Persona} />
+
+## Personas y organizaciones
+
+`shape="circle"` (por defecto) para personas; `shape="square"` para organizaciones. La forma decide tres cosas a la vez: el radio del avatar, el del anillo que anuncia la diana y la selección del recorte (circular o cuadrada). El archivo que sale es cuadrado en ambos casos.
+
+<Canvas of={AvatarUploadStories.Organizacion} />
+
+## La diana es el avatar
+
+Lo que acepta el archivo es lo que se va a sustituir: el avatar, no el bloque entero. Es una diana pequeña, y por eso se compensa de tres maneras:
+
+- **Se anuncia antes de llegar.** En cuanto empieza un arrastre en cualquier punto de la ventana, el avatar se rodea de un anillo discontinuo. No hace falta acertar a ciegas: la diana se ve desde que el archivo sale del escritorio.
+- **Al pasar por encima, el trazo se cierra y cae un velo con el icono de subir.** Lo que va a pasar al soltar se ve antes de soltar.
+- **La zona sensible es todo el cuadro del avatar**, esquinas incluidas: un avatar redondo acepta el archivo también en las cuatro esquinas de su caja. El anillo se pinta con `outline`, que ni ocupa maqueta ni recibe puntero, así que **la zona no crece más allá del avatar** por mucho que el anillo se vea por fuera.
+
+Un clic sobre el avatar abre el diálogo del sistema, igual que el botón. Es un atajo de puntero: no es una parada del tabulador, porque duplicaría el control.
+
+## El botón se queda siempre
+
+Arrastrar no existe para el teclado. El botón es **la vía principal**, no un respaldo ni un extra: está siempre, es lo que se enfoca y es lo único que hay que saber usar. El arrastre es el atajo de quien ya tiene el archivo a la vista.
+
+El `<input type="file">` real vive oculto y fuera del tabulador; el botón lo dispara. Así hay **una** parada de teclado por control, con su nombre, su foco visible y su descripción.
+
+## Los dos textos del botón
+
+El texto **visible** es corto —"Subir"— y el nombre **accesible** dice de qué es —"Subir avatar", "Subir logo"—. Son dos props, `buttonLabel` y `buttonAccessibleLabel`, y el consumidor pone las dos.
+
+> **WCAG 2.5.3 (Label in Name).** El nombre accesible tiene que **contener** el texto visible. Quien navega por voz dice lo que ve ("pulsa Subir"), y el asistente busca ese texto en el nombre del control.
+>
+> - ✓ visible `Subir` · accesible `Subir logo`
+> - ✓ visible `Subir` · accesible `Subir avatar`
+> - ✗ visible `Subir` · accesible `Cargar imagen de la organización` — el control queda inalcanzable por voz.
+>
+> En desarrollo, el componente avisa por consola si el nombre accesible no contiene el visible.
+
+## Lo que se acepta no se enseña de primeras
+
+Los formatos y el peso máximo **no se pintan**: ensucian una pantalla en la que el avatar es el asunto. Pero no se pierden:
+
+- **Se dicen cuando la validación falla**, y el mensaje dice qué SÍ vale: `Formato no admitido. Se aceptan JPEG, PNG, WEBP.` Por el camino del botón este error es imposible —el `accept` filtra el diálogo del sistema—, pero arrastrando no hay filtro: ahí se puede soltar un PDF de 40 MB.
+- **Siguen siendo la descripción accesible del botón** (`aria-describedby` sobre texto oculto), porque el `accept` del input no lo anuncia ningún lector de pantalla: sin ese texto, quien no ve la pantalla no sabe qué puede subir.
+
+El texto sale de `accept` y `maxSize` ("JPEG, PNG, WEBP · máx. 5.0 MB"); `hintLabel`, `formatsLabel`, `invalidTypeError` y `tooLargeError` lo sustituyen entero cuando el producto quiere su propia redacción — como todo texto del DS.
+
+<Canvas of={AvatarUploadStories.ArchivoInvalido} />
+
+## La talla la manda el contexto
+
+`size` es la talla del sistema y, como en todos los campos, **sin ella la pone el contexto**: el `Form` que envuelva, el pie de `OnboardingShell`, cualquier `FormSizeContext`. En la superficie pública —el alta— los controles van a `lg` y esta pieza sube con ellos sin que nadie se acuerde de pasar nada.
+
+La talla mueve el botón y el avatar a la vez. El avatar va **un peldaño por encima** del control, porque aquí es el asunto de la pantalla y además hay que soltarle algo encima:
+
+| Talla del control | Avatar |
+| --- | --- |
+| `sm` (32px) | `md` — 40px |
+| `md` (40px) | `lg` — 48px |
+| `lg` (48px) | `xl` — 64px |
+
+`xl` es la talla que le faltaba al `Avatar`, y no es de esta pieza: una cabecera de perfil a 48px también se queda corta. 64px es el peldaño que el sistema ya usa por encima de la escala de controles —`icon.size-xl`, el mismo que `logo.height-xl` y `logomark.size-xl`—, y sigue en el múltiplo de 8. Por encima de `lg` el sistema deja de medir con la escala de controles: 48px es el control más alto que existe.
+
+<Canvas of={AvatarUploadStories.TallaPorContexto} />
+
+## Lo que NO hace
+
+La subida de verdad —el endpoint, el tRPC, a dónde va el archivo— es del producto. La pieza pone presentación, interacción, validación de cliente y recorte, y entrega el resultado por `onChange(blob, file)`: el recorte ya reescalado y el archivo del que salió. Mientras el producto sube, `busy` bloquea el botón, la diana y el diálogo; si el servidor devuelve un error, entra por `errorMessage` y se enseña donde el de la validación.
+
+<Canvas of={AvatarUploadStories.Interactiva} />
+
+## Accesibilidad
+
+- **Una parada de teclado**: el botón. El input real está fuera del tabulador y el avatar no es focusable.
+- El botón lleva `aria-describedby` con los formatos y el peso admitidos, aunque no se vean.
+- El arrastre se anuncia en una región `role="status"`: quien usa lector de pantalla puede estar arrastrando con el ratón y oír dónde soltar.
+- El error se anuncia con `role="alert"` y se escribe en texto, nunca solo en color.
+- El avatar toma su nombre accesible de `name` (o de `alt`), como en cualquier otro sitio.
+
+## Tokens
+
+<TokenTable tokens={avatarUploadBaseTokens} />
+
+En superficie oscura, el anillo pasa a ser la tinta de la superficie —la misma regla que el borde del `FileUpload`— y el error, el rojo sobre oscuro:
+
+<TokenTable tokens={avatarUploadDarkTokens} />
+
+## Props
+
+<ArgTypes of={AvatarUploadStories} />

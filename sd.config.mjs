@@ -157,6 +157,7 @@ const filters = {
   'tree-view':          (t) => t.path[0] === 'tree-view',
   'annotation-thread':  (t) => t.path[0] === 'annotation-thread',
   'text-inline':        (t) => t.path[0] === 'text-inline',
+  'avatar-upload':      (t) => t.path[0] === 'avatar-upload',
 };
 
 function cssFile(destination, filterKey) {
@@ -229,6 +230,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/input-field.css',       'input-field'),
         cssFile('molecules/form-field.css',        'form-field'),
         cssFile('molecules/field-row.css',         'field-row'),
+        cssFile('molecules/avatar-upload.css',     'avatar-upload'),
         cssFile('molecules/site-nav.css',           'site-nav'),
         cssFile('molecules/language-switcher.css',  'language-switcher'),
         cssFile('molecules/theme-switcher.css',     'theme-switcher'),
@@ -383,6 +385,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_input-field.scss',       'input-field'),
         scssFile('molecules/_form-field.scss',        'form-field'),
         scssFile('molecules/_field-row.scss',         'field-row'),
+        scssFile('molecules/_avatar-upload.scss',     'avatar-upload'),
         scssFile('molecules/_site-nav.scss',           'site-nav'),
         scssFile('molecules/_language-switcher.scss',  'language-switcher'),
         scssFile('molecules/_theme-switcher.scss',     'theme-switcher'),

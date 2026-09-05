@@ -33,6 +33,33 @@ for (const name of Object.keys(entryPoints)) {
   console.log(`✔︎ dist/${name}.js${isClient ? ' [use client]' : ''}`);
 }
 
+/* Chunks compartidos: cuando dos entradas comparten un componente, rollup saca
+   su cuerpo a `dist/_shared/<Componente>.js` y su CSS al raíz de dist con el
+   nombre del chunk (`dist/<Componente>.css`) — un fichero que no importa nadie.
+   Sin este paso, la entrada del componente compartido y todas las que lo
+   componen se publican sin estilos. */
+const sharedDir = `${dist}/_shared`;
+if (existsSync(sharedDir)) {
+  for (const file of readdirSync(sharedDir).filter((f) => f.endsWith('.js'))) {
+    const cssFile = `${dist}/${file.replace(/\.js$/, '.css')}`;
+    if (!existsSync(cssFile)) continue;
+
+    const jsFile = `${sharedDir}/${file}`;
+    const cssImport = `import '../${file.replace(/\.js$/, '.css')}';`;
+    let content = readFileSync(jsFile, 'utf-8');
+    if (content.includes(cssImport)) continue;
+
+    const directive = /^[ \t]*(['"])use client\1;?[ \t]*\r?\n/m;
+    const hadDirective = directive.test(content);
+    if (hadDirective) content = content.replace(directive, '');
+    content = `${cssImport}\n${content}`;
+    if (hadDirective) content = `'use client';\n${content}`;
+
+    writeFileSync(jsFile, content);
+    console.log(`✔︎ dist/_shared/${file} [css]`);
+  }
+}
+
 // Activos de marca: los SVG del isotipo viajan tal cual a dist/assets, para
 // servirlos o copiarlos (favicon, iconos PWA) sin pasar por el bundler. Solo el
 // isotipo: en src/assets también viven activos de desarrollo que no se publican.
