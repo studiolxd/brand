@@ -32,3 +32,4 @@ temp_web
 .env
 .env.*
 .worktrees/
+*.local.md
