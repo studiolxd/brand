@@ -2,6 +2,7 @@
   "image-crop-dialog": {
     "gap":              { "$value": "{spacing.4}",           "$type": "dimension", "$description": "Separación entre el área de recorte y las acciones" },
     "area-max-height":  { "$value": "60vh",                  "$type": "dimension", "$description": "Alto máximo del área de recorte — la imagen se ajusta dentro" },
+    "area-min-height":  { "$value": "{image-crop-dialog.area-max-height}", "$type": "dimension", "$description": "Alto reservado para el área de recorte desde el primer render: el mismo que su máximo, para que la imagen no mueva la maqueta al cargar" },
     "area-bg":          { "$value": "{color.surface.secondary-on-light}", "$type": "color",     "$description": "Fondo tras la imagen mientras se recorta: la superficie clara secundaria del sistema" },
     "area-border-radius": { "$value": "{border-radius.default}",  "$type": "dimension", "$description": "Radio del área de recorte" },
     "actions-gap":      { "$value": "{spacing.2}",           "$type": "dimension", "$description": "Separación entre los botones de acción" },

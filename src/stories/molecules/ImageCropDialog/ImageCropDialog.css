@@ -4,12 +4,24 @@
   gap: var(--image-crop-dialog-gap);
 }
 
+/* Una sola celda: la señal de carga, el error y la imagen se apilan en el
+   mismo sitio, y el hueco mide lo mismo antes y después de que la imagen
+   llegue — sin salto de maqueta al cargar. */
 .image-crop-dialog__area {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  min-block-size: var(--image-crop-dialog-area-min-height);
   background-color: var(--image-crop-dialog-area-bg);
   border-radius: var(--image-crop-dialog-area-border-radius);
   overflow: hidden;
+}
+
+.image-crop-dialog__area > * {
+  grid-area: 1 / 1;
+}
+
+.image-crop-dialog__error {
+  max-inline-size: 100%;
 }
 
 .image-crop-dialog__area img {
