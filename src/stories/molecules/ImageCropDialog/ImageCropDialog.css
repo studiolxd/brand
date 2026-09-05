@@ -18,8 +18,8 @@
   display: block;
 }
 
-.image-crop-dialog__actions {
-  display: flex;
-  justify-content: flex-end;
+/* El pie es el del `Modal`; lo propio de este diálogo es el aire más ceñido
+   entre sus dos botones. */
+.image-crop-dialog__actions.modal__footer {
   gap: var(--image-crop-dialog-actions-gap);
 }

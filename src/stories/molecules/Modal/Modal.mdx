@@ -105,6 +105,21 @@ El tamaño del aspa no es una prop del consumidor: cambia solo por el token
 `modal.close-size` remapeado bajo `.site-shell` — el mismo `Modal`, montado en
 sitios distintos, se ve distinto.
 
+## Pie de acciones
+
+<Canvas of={ModalStories.ConPie} />
+
+La prop `footer` es el sitio de los botones del diálogo. El pie los reparte a
+la derecha en una fila y, **por debajo del punto de ruptura `md` (768px), los
+apila a todo el ancho con la acción principal arriba**: es el mismo criterio
+—y el mismo detalle de orden, un `column-reverse`— que las acciones de `Form`.
+Se pasan en el orden de la fila (la principal, la última) y el pie se encarga
+del resto.
+
+Vive en `Modal` una sola vez: `ConfirmDialog`, `ImageCropDialog`,
+`CommandPalette` y `ConsentPreferences` son `Modal`, así que ninguno lo repite.
+`footerClassName` es el enganche para quien necesite ajustar solo el aire.
+
 ## Textos personalizados (i18n)
 
 <Canvas of={ModalStories.CustomLabels} />

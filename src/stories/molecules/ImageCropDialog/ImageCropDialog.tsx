@@ -92,6 +92,18 @@ export function ImageCropDialog({
       title={title}
       {...(closeLabel ? { closeLabel } : {})}
       {...(description != null ? { description } : {})}
+      // El pie lo reparte `Modal`, igual que en el resto de diálogos.
+      footerClassName="image-crop-dialog__actions"
+      footer={
+        <>
+          <Button variant="outline" disabled={busy} onClick={close}>
+            {cancelLabel}
+          </Button>
+          <Button disabled={busy || !completedCrop?.width} onClick={handleConfirm}>
+            {confirmLabel}
+          </Button>
+        </>
+      }
     >
       <div className={['image-crop-dialog', className].filter(Boolean).join(' ')}>
         {sourceUrl && (
@@ -124,14 +136,6 @@ export function ImageCropDialog({
           </div>
         )}
 
-        <div className="image-crop-dialog__actions">
-          <Button variant="outline" disabled={busy} onClick={close}>
-            {cancelLabel}
-          </Button>
-          <Button disabled={busy || !completedCrop?.width} onClick={handleConfirm}>
-            {confirmLabel}
-          </Button>
-        </div>
       </div>
     </Modal>
   );

@@ -48,6 +48,16 @@ export interface ModalProps
    * desde fuera: el gestor de foco de Base UI corre después y ganaría él.
    */
   initialFocus?: React.ComponentPropsWithoutRef<typeof Dialog.Popup>['initialFocus'];
+  /**
+   * Fila de acciones al pie del diálogo. Es el sitio de los botones: el pie
+   * los reparte a la derecha en una fila y, por debajo del punto de ruptura,
+   * los apila a todo el ancho con la acción principal arriba — el mismo
+   * criterio (y el mismo orden) que las acciones de `Form`. Pásalos en el
+   * orden de la fila: la principal, la última.
+   */
+  footer?: React.ReactNode;
+  /** Se añade DESPUÉS de las clases propias del pie. */
+  footerClassName?: string;
 }
 
 /**
@@ -75,6 +85,8 @@ export function Modal({
   description,
   'aria-describedby': ariaDescribedBy,
   initialFocus,
+  footer,
+  footerClassName,
   ...rest
 }: ModalProps) {
   // Base UI solo enlaza `aria-describedby` cuando hay un `Dialog.Description`
@@ -109,6 +121,9 @@ export function Modal({
             <Dialog.Description className="modal__description">{description}</Dialog.Description>
           )}
           <div className="modal__body">{children}</div>
+          {footer != null && (
+            <div className={['modal__footer', footerClassName].filter(Boolean).join(' ')}>{footer}</div>
+          )}
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

@@ -13,7 +13,6 @@
   --modal-padding-block: var(--spacing-6); /** Padding vertical del panel */
   --modal-padding-inline: var(--spacing-6); /** Padding horizontal del panel */
   --modal-header-gap: var(--spacing-4); /** Gap entre título y botón ✕ */
-  --modal-footer-gap: var(--spacing-4); /** Separación entre el cuerpo y el pie, para el consumidor que monta su propio pie dentro del contenido (Modal no tiene prop `footer`, a diferencia de Sheet) */
   --modal-title-font-size: var(--font-size-6); /** Tamaño del título (2rem) */
   --modal-transition-duration: var(--motion-duration-base); /** Duración de la animación entrada/salida */
   --modal-transition-easing: var(--motion-easing-in-out); /** Easing de la animación */
@@ -25,6 +24,8 @@
   --modal-border-width: var(--border-width-default); /** Grosor del borde del panel */
   --modal-border-radius: var(--border-radius-default); /** Radio del panel */
   --modal-shadow: var(--shadow-default); /** Sombra de elevación */
+  --modal-footer-gap: var(--form-actions-gap); /** Aire entre los botones del pie. Es el de las acciones de un formulario: la fila de acciones del sistema es una sola, esté en un formulario o en un diálogo */
+  --modal-footer-margin-block-start: var(--form-actions-margin-block-start); /** Aire entre el cuerpo del diálogo y su pie — el mismo que separa el último campo de las acciones en un formulario */
   --modal-title-font-weight: var(--font-weight-emphasis); /** Peso del título */
   --modal-title-color: var(--color-text-on-light); /** Color del título */
   --modal-description-font-size: var(--text-font-size); /** La descripción hereda el cuerpo de la superficie (16px en aplicación, 20px en la pública) */

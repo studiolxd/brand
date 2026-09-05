@@ -25,6 +25,16 @@ para breaking changes.
   tinta desde los tokens `*-close-*` que ya tenía, remapeados sobre el átomo.
   El aspa del `Alert` pasa de 16 a 24px de glifo, la talla de icono-botón del
   sistema, la misma que ya tenían el diálogo y el dock.
+- **El pie de los diálogos, a ancho completo en móvil.** `Modal` gana la prop
+  `footer` (y `footerClassName`): reparte los botones a la derecha en una fila
+  y, por debajo del punto de ruptura `md`, los apila a todo el ancho con la
+  acción principal arriba. Es el mismo criterio —y el mismo `column-reverse`—
+  que las acciones de `Form`, y vive en `Modal` una sola vez: `ConfirmDialog`,
+  `ImageCropDialog`, `CommandPalette` y `ConsentPreferences` son `Modal`, así
+  que ninguno lo repite. El pie queda además fuera del cuerpo desplazable.
+- Tokens nuevos `modal.footer-margin-block-start` y `modal.footer-gap`
+  repuntado a `{form.actions-gap}`: la fila de acciones del sistema es una
+  sola, esté en un formulario o en un diálogo.
 
 ## v30.7.0
 

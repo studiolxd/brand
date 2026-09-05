@@ -106,3 +106,30 @@
   min-height: 0;
 }
 
+/* ── Pie de acciones ────────────────────────────────────────── */
+/* El mismo criterio que las acciones de `Form`, con su mismo detalle de orden:
+   por debajo del punto de ruptura los botones se apilan a todo el ancho en
+   `column-reverse`, de modo que la acción principal —la última del DOM, la de
+   la derecha en la fila— queda arriba, al alcance del pulgar. A partir de ahí
+   vuelve a ser una fila alineada a la derecha. Vive aquí una sola vez: todo
+   diálogo del sistema es un `Modal`, así que ninguno lo repite. */
+.modal__footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--modal-footer-gap);
+  margin-block-start: var(--modal-footer-margin-block-start);
+}
+
+.modal__footer > * {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .modal__footer {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .modal__footer > * {
+    inline-size: auto;
+  }
+}
