@@ -12,13 +12,13 @@ import { jsx as a, jsxs as o } from "react/jsx-runtime";
 import { useCallback as ie, useEffect as s, useId as ae, useRef as c, useState as l } from "react";
 //#region src/stories/molecules/AvatarUpload/AvatarUpload.tsx
 var u = {
-	sm: "lg",
-	md: "xl",
-	lg: "2xl"
+	sm: "2xl",
+	md: "3xl",
+	lg: "4xl"
 }, oe = {
 	sm: "md",
-	md: "md",
-	lg: "lg"
+	md: "lg",
+	lg: "xl"
 };
 function d(e) {
 	return e.split(",").map((e) => e.trim()).filter(Boolean).map((e) => e.startsWith(".") ? e.slice(1) : e.split("/")[1] ?? e).map((e) => e.toUpperCase()).join(", ");
