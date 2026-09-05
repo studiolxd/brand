@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## v30.6.0
 
 - **`FieldRow` / `FieldRows` — la fila de formulario repetible.** La pieza que
   le faltaba al DS para cualquier **lista editable** (invitar personas,
@@ -26,6 +26,18 @@ para breaking changes.
   valor, lo decide quien envuelva. Sin `FieldRow` alrededor el default sigue
   siendo `false` — no cambia nada de lo ya escrito.
 - Tokens nuevos: `field-row.*` (anchos de celda, aire, hueco de la etiqueta).
+
+- **`Card` con `href` ya no arrastra la línea de la base**, el mismo defecto que
+  tenía `ProjectCard`: la tarjeta-enlace llevaba una línea de 1px pegada a su
+  borde inferior, heredada del subrayado de la base y nunca anulada.
+- **El título del correo lee con el interlineado de su peldaño.** Subió a 32px
+  pero conservaba el interlineado del anterior; se nota en un asunto de dos
+  renglones.
+- **La norma 7 la vigila un test, no la memoria**
+  (`src/stylesheets/underline.test.ts`): barre los `.css` de `src/` **y los JSON
+  de `tokens/`** —por donde se había colado el `Breadcrumb`, invisible al buscar
+  en el CSS— y falla si aparece `text-decoration: underline` fuera de las dos
+  excepciones, que están escritas en el propio test con su motivo.
 
 ## v30.5.0
 
