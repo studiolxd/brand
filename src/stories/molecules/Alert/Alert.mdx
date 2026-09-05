@@ -31,7 +31,9 @@ Los dos modos se combinan: `title`/`description` para el caso simple, `children`
 
 `default` es prusia con borde blanco; `success`, `error` y `warning` toman el relleno sólido de feedback (`*-fill`) con su texto (`*-fill-text`). Las cuatro leen en oscuro: la raíz se declara `.surface-dark`, así que lo que se componga dentro —enlaces, botones, el propio cierre— toma su cara clara sin que el consumidor haga nada.
 
-`warning` era el amarillo de marca con tinta prusia hasta que el sistema tuvo rol de aviso. El amarillo es identidad —el hover de un botón, un `Tag` de marca—, no un estado, y usarlo aquí hacía que un aviso y un botón bajo el puntero se pintaran del mismo color. Ahora es `warning-fill`, el ámbar de sistema.
+`warning` es el amarillo con tinta prusia, pero desde el rol de aviso ya no lo pide como color de marca: lo pide como `warning-fill` / `warning-fill-text`. El píxel es el mismo; lo que cambia es de dónde viene, y que si el aviso deja de ser amarillo se cambia en un sitio.
+
+Ese amarillo es también el hover del botón primario. **Se distinguen por contexto y por forma, no por color**: un aviso es un bloque con icono y texto que se queda ahí; el hover es una superficie transitoria bajo el puntero. Es una decisión, no un descuido — está anotada en Fundamentos › Colores § «El aviso tiene dos tokens, no cuatro».
 
 <Canvas of={AlertStories.ConDescripcion} />
 
@@ -78,7 +80,7 @@ El color del aspa no es un token del alert: lo pone `CloseButton`, que toma la t
 - **Rol por intención**: `error` y `warning` son `role="alert"` (live assertive, interrumpe al lector de pantalla); `default` y `success`, `role="status"` (live polite, espera turno). La prop `role` lo fuerza cuando el consumidor sabe más que el componente.
 - Un alert que ya está en la página al cargarla **no se anuncia**: las regiones live solo anuncian cambios. Si el aviso aparece como respuesta a una acción, móntalo en ese momento.
 - El **cierre** es un `<button>` con nombre accesible (`closeLabel`, «Cerrar» por defecto), de 32px de lado —la talla mínima del sistema— y con el anillo de foco del `Button`.
-- **Contraste**: texto blanco sobre los cuatro rellenos —prusia, verde, rojo y ámbar—. Los cuatro pares pasan AAA (el ámbar con blanco, 7,23:1).
+- **Contraste**: los cuatro pares pasan AAA — texto blanco sobre prusia, verde y rojo, y **tinta prusia** sobre el amarillo del aviso (11,17:1), que es el único relleno que lee en claro.
 - Al **descartar**, el foco no se pierde: va a `finalFocus` si se ha pasado y, si no, al `<body>`. Un foco huérfano manda al lector de pantalla al principio del documento.
 - El alert **no es un `Modal`**: no atrapa el foco ni bloquea la página.
 

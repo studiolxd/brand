@@ -29,7 +29,7 @@ var a = {
 	let y = [
 		"alert",
 		r === "default" ? "" : `alert--${r}`,
-		"surface-dark",
+		r === "warning" ? "" : "surface-dark",
 		c ? "alert--dismissible" : "",
 		f ?? ""
 	].filter(Boolean).join(" ");

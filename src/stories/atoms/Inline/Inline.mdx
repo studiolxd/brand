@@ -23,6 +23,15 @@ Tres pasos, `gap`: `sm` (8px) para piezas pequeñas y muchas —etiquetas, chips
 
 <Canvas of={InlineStories.AlineadoArriba} />
 
+**Un título dentro de la fila suelta su aire de debajo.** Un `h1`–`h6` lleva un margen inferior que lo separa del párrafo que viene después: es aire del flujo vertical. Dentro de una fila no separa nada —el hueco lo pone el `gap`— y además descuadraba el eje, porque `align-items` alinea la caja **con** su margen: el título quedaba alto y lo que iba a su lado (un `Tag` de estado, un contador) caía justo la mitad de ese aire por debajo. `Inline` se lo quita a sus hijos directos, así que `align="center"` centra **lo que se ve**. Vale para las tres alineaciones.
+
+```tsx
+<Inline gap="sm" align="center">
+  <Heading level={2}>Nombre (url)</Heading>
+  <Tag variant="success">Operativo</Tag>
+</Inline>
+```
+
 ## Reparto
 
 `justify` reparte las piezas a lo ancho de la fila: `start` (por defecto), `center`, `end` y `between`. `end` es el que resuelve la fila de acciones alineada a la derecha —al pie de un formulario, de una tarjeta o de un diálogo—, que hasta ahora obligaba a cada producto a inventarse una clase propia.

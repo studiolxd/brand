@@ -52,8 +52,8 @@
 /* El aspa es el `CloseButton` del sistema: sin hover —era el relleno del
    `Button` ghost lo que sobraba aquí— y con el anillo de foco. El color no se
    remapea a propósito: el aspa toma la tinta de la superficie del relleno
-   —oscura en las cuatro intenciones— por la cascada de `.surface-dark`, igual
-   que antes. */
+   —oscura en tres de las cuatro intenciones, clara en el aviso— por la cascada
+   de `.surface-dark`, que la raíz pone salvo en `warning`. */
 
 .alert .alert__close {
   position: absolute;
@@ -83,4 +83,8 @@
   --alert-border-color:         var(--alert-warning-border-color);
   --alert-title-color:          var(--alert-warning-title-color);
   --alert-description-color:    var(--alert-warning-description-color);
+  /* El aviso es el único relleno claro: el aspa no puede heredar la tinta
+     ambiente, que en tema oscuro es blanca. Se fija a la tinta del rol. */
+  --close-button-color:            var(--alert-warning-close-color);
+  --close-button-focus-ring-color: var(--alert-warning-close-color);
 }

@@ -11,6 +11,17 @@
 .inline.inline--gap-lg {
   gap: var(--inline-gap-lg);
 }
+/* El aire bajo un título es del flujo vertical, no de la fila: separa el título
+   del párrafo que viene debajo. Dentro de `Inline` ese margen no separa nada
+   —el hueco lo pone el `gap`— y además descuadra el eje, porque `align-items`
+   alinea la caja CON su margen: el título queda alto y lo que va a su lado
+   (un `Tag`, un contador) cae justo la mitad de ese aire por debajo. Así
+   `align="center"` centra lo que se ve. Vale para las tres alineaciones: en una
+   fila, el aire de debajo de un título nunca pinta nada. */
+.inline > :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-end: 0;
+}
+
 .inline.inline--align-start {
   align-items: flex-start;
 }

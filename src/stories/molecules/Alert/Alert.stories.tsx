@@ -29,7 +29,7 @@ type Story = StoryObj<typeof meta>;
 
 export const PorDefecto: Story = {};
 
-/** Las cuatro intenciones. El relleno es sólido en todas y las cuatro leen en oscuro. */
+/** Las cuatro intenciones. El relleno es sólido en todas; solo `warning` lee en claro. */
 export const Variantes: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: '1rem' }}>

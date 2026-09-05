@@ -33,8 +33,9 @@
   inline-size: 100%;
   block-size: var(--uptime-bars-bar-height);
   border-radius: var(--uptime-bars-bar-radius);
-  /* El filete va siempre, aunque en superficie clara sea transparente: así la
-     barrita mide igual en las dos superficies. */
+  /* El filete recuadra la barrita en las dos superficies: prusia en claro,
+     tinta clara en oscuro. Es quien identifica cada día —y el «sin dato»—
+     cuando el relleno no llega a 3:1 contra el lienzo. */
   border: var(--uptime-bars-bar-border-width) solid var(--uptime-bars-bar-border-color);
 }
 

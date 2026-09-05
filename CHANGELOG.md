@@ -19,15 +19,30 @@ para breaking changes.
   al día. Accesible sin depender del color: lista ordenada con nombre, nombre
   accesible completo por barrita, la media siempre en texto, bocadillo también
   por teclado y una sola parada de tabulador con flechas.
-- **Rol de feedback `warning`** (`color.warning-text-on-light|dark`,
-  `color.warning-fill`, `color.warning-fill-text`) sobre un ámbar de sistema
-  nuevo (`color.amber` #7D4C00, `color.amber-light` #F59E0B). Faltaba el tramo
-  intermedio: lo que ya no está bien pero todavía no está roto.
-- **`Alert`, `Toast` y `Tag` pintan el aviso con el rol, no con la marca.**
-  Cambio visual: su variante `warning` era el amarillo de marca (`accent-2`) con
-  tinta prusia y pasa a ser el relleno ámbar con texto blanco. Con ello, las
-  cuatro intenciones de `Alert`/`Toast` leen ya en oscuro y desaparece la
-  excepción que tenía `warning`.
+- **Rol de feedback `warning`, con dos tokens: `color.warning-fill`
+  (`{color.yellow}`) y `color.warning-fill-text` (`{color.primary}`).** Faltaba
+  el tramo intermedio: lo que ya no está bien pero todavía no está roto. **Un
+  aviso siempre va como relleno, con la tinta prusia encima** (11,17:1, AAA);
+  por eso el rol no tiene `-text-on-light` ni `-text-on-dark` y no los tendrá:
+  el amarillo da 1,50:1 sobre blanco y sobre prusia se confundiría con la marca.
+  Excepción declarada en `CLAUDE.md` y explicada en Fundamentos › Colores.
+- **Retirados `color.amber` y `color.amber-light`.** El primer intento del rol
+  (v30.10.0) inventó dos colores de sistema para el aviso; la paleta no se
+  amplía por la puerta de atrás. El aviso vuelve a ser el amarillo que `Alert` y
+  `Tag` ya pintaban — mismo píxel, otra procedencia: llega por el rol de
+  feedback, no por `accent-2`, así que se cambia en un sitio si deja de ser
+  amarillo.
+- **`Alert`, `Toast` y `Tag` pintan el aviso con el rol, no con la marca.** Sin
+  cambio visual respecto de v30.9.x: relleno amarillo con tinta prusia. `Alert`
+  y `Toast` mantienen su excepción de siempre — la raíz no declara
+  `.surface-dark` en `warning`, porque ahí la superficie lee en claro.
+- **`UptimeBars`, tres retoques de superficie clara.** El **filete** de cada
+  barrita pasa a ser el prusia (`{color.primary}`) en vez de transparente:
+  recuadra cada día —también el «sin dato»— y es lo que hace visible el tramo
+  intermedio, cuyo relleno amarillo se queda en 1,50:1 contra el blanco. **La
+  media** deja el peso fuerte y va en peso de cuerpo (`{font-weight.default}`).
+  Y **los extremos** (`startLabel`/`endLabel`) pasan de atenuados a la tinta
+  plena (`{color.text.on-light}` y su par oscuro).
 - **`Avatar` gana las tallas `3xl` (128px) y `4xl` (192px)**, y `AvatarUpload`
   remapea a `sm` → 96px, `md` → 128px y `lg` → 192px: cada contexto sale al
   doble de lo que salía. Cambio visual en la subida de la foto de perfil y en el

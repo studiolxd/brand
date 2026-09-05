@@ -3,7 +3,6 @@
  */
 
 :root {
-  --uptime-bars-bar-border-color: rgba(0, 0, 0, 0); /** En superficie clara no hace falta filete —los rellenos de feedback dan 7,2:1 sobre blanco—, pero se declara transparente para que la barrita mida igual en las dos superficies */
   --uptime-bars-gap: var(--spacing-1); /** 4px — hueco entre barritas. El ancho de la barrita no es un token: sale de repartir el contenedor entre los puntos de la serie */
   --uptime-bars-bar-height: var(--spacing-6); /** 32px — alto de la barrita. Es la única medida fija: el ancho lo pone el contenedor */
   --uptime-bars-empty-pattern-width: var(--border-width-md); /** 2px — grosor de cada raya del «sin dato» */
@@ -12,6 +11,7 @@
   --uptime-bars-tooltip-gap: var(--spacing-1); /** Aire entre la etiqueta y el detalle dentro del bocadillo */
   --uptime-bars-bar-radius: var(--border-radius-default); /** Esquina recta, como todo el sistema */
   --uptime-bars-bar-border-width: var(--border-width-default); /** Filete de contorno de la barrita. Mismo recurso que el relleno de ProgressBar: en superficie oscura los rellenos de feedback no llegan a 3:1 contra el lienzo, y WCAG 1.4.11 admite que sea el contorno quien identifique el elemento */
+  --uptime-bars-bar-border-color: var(--color-primary); /** Filete de la barrita en superficie clara: el prusia. Recuadra cada día —también el «sin dato»— y es quien identifica el tramo intermedio, cuyo relleno amarillo se queda en 1,50:1 contra el blanco */
   --uptime-bars-ok-bg: var(--color-success-fill); /** Tramo bueno — relleno sólido del rol success. Es un fondo, así que va el sufijo `-fill` */
   --uptime-bars-degraded-bg: var(--color-warning-fill); /** Tramo intermedio — relleno sólido del rol warning */
   --uptime-bars-down-bg: var(--color-error-fill); /** Tramo malo — relleno sólido del rol error */
@@ -21,9 +21,9 @@
   --uptime-bars-focus-ring-offset: var(--border-width-focus); /** Separación del anillo de foco. Es la del sistema encogida al hueco entre barritas: con 30 puntos a 375px el anillo se pisaría con el vecino */
   --uptime-bars-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
   --uptime-bars-footer-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del pie: letra menor, un peldaño por debajo del texto corriente */
-  --uptime-bars-edge-color: var(--color-text-muted-on-light); /** Etiquetas de los extremos — atenuadas: son la escala, no el dato */
+  --uptime-bars-edge-color: var(--color-text-on-light); /** Etiquetas de los extremos — la tinta del sistema: acotan la tira y se leen igual que la media */
   --uptime-bars-summary-color: var(--color-text-on-light); /** La media — tinta del sistema: es el dato que se lee cuando no se miran las barritas */
-  --uptime-bars-summary-font-weight: var(--font-weight-emphasis); /** Peso de la media */
+  --uptime-bars-summary-font-weight: var(--font-weight-default); /** Peso de la media: el del cuerpo. Es un dato que se lee, no un titular — lo que lo destaca es la tinta plena frente a los extremos, no el peso */
   --uptime-bars-tooltip-label-font-weight: var(--font-weight-emphasis); /** Peso de la etiqueta del punto dentro del bocadillo */
 }
 
@@ -34,6 +34,6 @@ html.dark {
   --uptime-bars-empty-bg: var(--color-surface-secondary-on-dark); /** Sin dato — surface-dark */
   --uptime-bars-empty-pattern-color: var(--color-disabled-border-on-dark); /** Rayas del «sin dato» — surface-dark */
   --uptime-bars-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
-  --uptime-bars-edge-color: var(--color-text-muted-on-dark); /** Etiquetas de los extremos — surface-dark */
+  --uptime-bars-edge-color: var(--color-text-on-dark); /** Etiquetas de los extremos — surface-dark */
   --uptime-bars-summary-color: var(--color-text-on-dark); /** La media — surface-dark */
 }

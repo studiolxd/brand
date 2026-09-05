@@ -92,17 +92,18 @@ export const neutralSwatches: Swatch[] = [
 export const systemSwatches: Swatch[] = [
   swatch('Rojo', 'base · light', ['red', 'red-light'], sys),
   swatch('Verde', 'base · light', ['green', 'green-light'], sys),
-  swatch('Ámbar', 'base · light', ['amber', 'amber-light'], sys),
 ];
 
-const role = (name: string, label: string): Swatch[] => [
-  swatch(`${label} — texto`, `${name}-text-on-light · ${name}-text-on-dark`, [`${name}-text-on-light`, `${name}-text-on-dark`], fb),
-  swatch(`${label} — relleno`, `${name}-fill · ${name}-fill-text`, [`${name}-fill`, `${name}-fill-text`], fb),
-];
+const inkPair = (name: string, label: string): Swatch =>
+  swatch(`${label} — texto`, `${name}-text-on-light · ${name}-text-on-dark`, [`${name}-text-on-light`, `${name}-text-on-dark`], fb);
+const fillPair = (name: string, label: string): Swatch =>
+  swatch(`${label} — relleno`, `${name}-fill · ${name}-fill-text`, [`${name}-fill`, `${name}-fill-text`], fb);
+const role = (name: string, label: string): Swatch[] => [inkPair(name, label), fillPair(name, label)];
 export const feedbackSwatches: Swatch[] = [
   ...role('error', 'Error'),
   ...role('success', 'Éxito'),
-  ...role('warning', 'Aviso'),
+  // El aviso no tiene par de tinta: solo va como relleno. Ver Colors.mdx.
+  fillPair('warning', 'Aviso'),
   ...role('destructive', 'Destructivo'),
 ];
 
@@ -136,8 +137,6 @@ export const inks: NamedColor[] = [
   { name: 'Error — texto (oscuro)', token: '--color-error-text-on-dark', hex: hex(fb['error-text-on-dark'].$value) },
   { name: 'Éxito — texto', token: '--color-success-text-on-light', hex: hex(fb['success-text-on-light'].$value) },
   { name: 'Éxito — texto (oscuro)', token: '--color-success-text-on-dark', hex: hex(fb['success-text-on-dark'].$value) },
-  { name: 'Aviso — texto', token: '--color-warning-text-on-light', hex: hex(fb['warning-text-on-light'].$value) },
-  { name: 'Aviso — texto (oscuro)', token: '--color-warning-text-on-dark', hex: hex(fb['warning-text-on-dark'].$value) },
 ];
 
 /** Los rellenos de marca y feedback, con la tinta que llevan encima. */

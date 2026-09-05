@@ -5,7 +5,7 @@
     "bar-radius": { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Esquina recta, como todo el sistema" },
 
     "bar-border-width": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Filete de contorno de la barrita. Mismo recurso que el relleno de ProgressBar: en superficie oscura los rellenos de feedback no llegan a 3:1 contra el lienzo, y WCAG 1.4.11 admite que sea el contorno quien identifique el elemento" },
-    "bar-border-color": { "$value": "transparent",           "$type": "color",     "$description": "En superficie clara no hace falta filete —los rellenos de feedback dan 7,2:1 sobre blanco—, pero se declara transparente para que la barrita mida igual en las dos superficies" },
+    "bar-border-color": { "$value": "{color.primary}",        "$type": "color",     "$description": "Filete de la barrita en superficie clara: el prusia. Recuadra cada día —también el «sin dato»— y es quien identifica el tramo intermedio, cuyo relleno amarillo se queda en 1,50:1 contra el blanco" },
 
     "ok-bg":       { "$value": "{color.success-fill}", "$type": "color", "$description": "Tramo bueno — relleno sólido del rol success. Es un fondo, así que va el sufijo `-fill`" },
     "degraded-bg": { "$value": "{color.warning-fill}", "$type": "color", "$description": "Tramo intermedio — relleno sólido del rol warning" },
@@ -23,9 +23,9 @@
     "footer-font-size": { "$value": "{text.paragraph.small.font-size}",  "$type": "dimension", "$description": "Cuerpo del pie: letra menor, un peldaño por debajo del texto corriente" },
     "footer-column-gap":{ "$value": "{spacing.2}",                       "$type": "dimension", "$description": "Aire entre las tres celdas del pie" },
 
-    "edge-color":          { "$value": "{color.text.muted-on-light}", "$type": "color",  "$description": "Etiquetas de los extremos — atenuadas: son la escala, no el dato" },
+    "edge-color":          { "$value": "{color.text.on-light}",       "$type": "color",  "$description": "Etiquetas de los extremos — la tinta del sistema: acotan la tira y se leen igual que la media" },
     "summary-color":       { "$value": "{color.text.on-light}",       "$type": "color",  "$description": "La media — tinta del sistema: es el dato que se lee cuando no se miran las barritas" },
-    "summary-font-weight": { "$value": "{font-weight.emphasis}",      "$type": "number", "$description": "Peso de la media" },
+    "summary-font-weight": { "$value": "{font-weight.default}",       "$type": "number", "$description": "Peso de la media: el del cuerpo. Es un dato que se lee, no un titular — lo que lo destaca es la tinta plena frente a los extremos, no el peso" },
 
     "tooltip-gap":              { "$value": "{spacing.1}",                      "$type": "dimension", "$description": "Aire entre la etiqueta y el detalle dentro del bocadillo" },
     "tooltip-label-font-weight":{ "$value": "{font-weight.emphasis}",           "$type": "number",    "$description": "Peso de la etiqueta del punto dentro del bocadillo" },
@@ -34,7 +34,7 @@
     "surface-dark-empty-bg":            { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Sin dato — surface-dark" },
     "surface-dark-empty-pattern-color": { "$value": "{color.disabled.border-on-dark}",   "$type": "color", "$description": "Rayas del «sin dato» — surface-dark" },
     "surface-dark-focus-ring-color":    { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Anillo de foco — surface-dark" },
-    "surface-dark-edge-color":          { "$value": "{color.text.muted-on-dark}",        "$type": "color", "$description": "Etiquetas de los extremos — surface-dark" },
+    "surface-dark-edge-color":          { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "Etiquetas de los extremos — surface-dark" },
     "surface-dark-summary-color":       { "$value": "{color.text.on-dark}",              "$type": "color", "$description": "La media — surface-dark" }
   }
 }
