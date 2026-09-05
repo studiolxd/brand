@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## v30.7.0
 
 - **`AvatarUpload` — el avatar de una entidad con su subida.** Una sola pieza
   para persona (redondo) y organización (cuadrado): avatar, subida por clic y
@@ -39,6 +39,12 @@ para breaking changes.
   `scripts/post-build.mjs` lo engancha ahora igual que el de las entradas. Le
   pasaba ya a `ProgressBar` (`dist/ProgressBar.css` estaba huérfano en
   v30.6.0), que queda arreglado.
+
+- **Arreglado: los chunks compartidos salían sin su CSS.** Cuando dos entradas
+  comparten un componente, rollup saca su cuerpo a `dist/_shared/` y su hoja al
+  raíz con el nombre del chunk, **sin que nadie la importe**. `post-build.mjs`
+  engancha ahora ese CSS. **`ProgressBar` ya venía así desde v30.6.0**
+  (`dist/ProgressBar.css` huérfano): quien lo usara lo recibía sin estilos.
 
 ## v30.6.0
 
