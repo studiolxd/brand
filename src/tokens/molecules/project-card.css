@@ -6,8 +6,8 @@
   --project-card-media-aspect-ratio: 3 / 2; /** Proporción de la imagen del proyecto */
   --project-card-gap: var(--spacing-3); /** Aire entre las piezas de la tarjeta */
   --project-card-tags-gap: var(--spacing-2); /** Aire entre etiquetas */
-  --project-card-title-hover-line-offset: var(--spacing-1); /** Separación entre el título y su línea de hover */
   --project-card-title-hover-line-width: var(--border-width-default); /** Grosor de la línea bajo el título con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno */
+  --project-card-title-hover-line-offset: var(--link-underline-offset); /** Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo */
   --project-card-focus-ring-color: var(--color-primary); /** Color del anillo de foco del enlace */
   --project-card-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --project-card-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */

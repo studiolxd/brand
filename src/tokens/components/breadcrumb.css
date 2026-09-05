@@ -4,8 +4,8 @@
 
 :root {
   --breadcrumb-padding-inline: 0; /** Sin padding lateral */
-  --breadcrumb-link-text-decoration: none; /** Sin subrayado por defecto */
-  --breadcrumb-link-text-decoration-hover: underline; /** Subrayado en hover */
+  --breadcrumb-link-text-decoration: none; /** OBSOLETO — no viste nada. El subrayado de las migas es la línea del sistema, la misma de cualquier enlace, y no `text-decoration`. Se conserva en `none` para no romper a quien lo tenga referenciado; a retirar en el próximo major */
+  --breadcrumb-link-text-decoration-hover: none; /** OBSOLETO — no viste nada. Valía `underline` y era la vía por la que el subrayado de `text-decoration` seguía entrando en el DS. A retirar en el próximo major */
   --breadcrumb-font-family: var(--font-family-sans); /** Font family */
   --breadcrumb-line-height: var(--line-height-none); /** Single-line */
   --breadcrumb-gap: var(--spacing-2); /** Gap entre items y separadores */

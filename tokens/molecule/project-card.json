@@ -5,7 +5,7 @@
     "tags-gap":         { "$value": "{spacing.2}", "$type": "dimension", "$description": "Aire entre etiquetas" },
 
     "title-hover-line-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor de la línea bajo el título con el puntero encima. Un estado se marca con una línea de tinta, nunca con relleno" },
-    "title-hover-line-offset": { "$value": "{spacing.1}",            "$type": "dimension", "$description": "Separación entre el título y su línea de hover" },
+    "title-hover-line-offset": { "$value": "{link.underline-offset}", "$type": "dimension", "$description": "Separación entre el título y su línea de hover. Apunta a la del enlace: en el DS todo subrayado se separa del texto lo mismo" },
 
     "focus-ring-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del anillo de foco del enlace" },
     "focus-ring-width":  { "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del anillo de foco" },

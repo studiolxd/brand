@@ -33,9 +33,15 @@
   margin: 0;
 }
 
+/* El título viste su propio enlace: aquí la línea es un estado del puntero, no
+   una marca en reposo, así que se anula la que la base pone a todo `<a>`
+   —sombra interior y su hueco—, igual que hacen el resto de componentes que
+   visten enlaces. */
 .project-card__link {
   color: inherit;
   text-decoration: none;
+  box-shadow: none;
+  padding-block-end: 0;
 }
 
 /* El área pulsable del título se estira sobre toda la tarjeta: se pulsa donde
@@ -47,11 +53,13 @@
   inset: 0;
 }
 
-/* Bajo el puntero, una línea de tinta: un estado no se rellena. */
+/* Bajo el puntero, una línea de tinta: un estado no se rellena. Es la línea del
+   sistema —sombra interior más su hueco, como en `Link`—, no
+   `text-decoration`. El enlace es inline, así que el hueco no mueve nada de
+   sitio al aparecer. */
 .project-card__link:hover {
-  text-decoration: underline;
-  text-decoration-thickness: var(--project-card-title-hover-line-width);
-  text-underline-offset: var(--project-card-title-hover-line-offset);
+  padding-block-end: var(--project-card-title-hover-line-offset);
+  box-shadow: inset 0 calc(-1 * var(--project-card-title-hover-line-width)) 0 0 currentColor;
 }
 
 .project-card__link:focus-visible {
