@@ -57,6 +57,9 @@ $lxd-calendar-year-current-font-weight: 500; // Peso del año en curso
 $lxd-calendar-year-selected-bg: #111e30; // Fondo del año de la fecha elegida
 $lxd-calendar-year-selected-color: #ffffff; // Texto del año de la fecha elegida
 $lxd-calendar-year-disabled-color: #6b6b6b; // Color de los años fuera de rango
+$lxd-calendar-year-grid-min-inline-size: calc(7 * 2rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — md: el de la semana (siete días y sus seis huecos), para que el panel no encoja al pasar de los días a los años
+$lxd-calendar-sm-year-grid-min-inline-size: calc(7 * 1.5rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — sm
+$lxd-calendar-lg-year-grid-min-inline-size: calc(7 * 3rem + 6 * 0.25rem); // Ancho mínimo de la rejilla de años — lg
 $lxd-calendar-sm-year-height: 1.5rem; // Alto de la celda de año — sm
 $lxd-calendar-lg-year-height: 3rem; // Alto de la celda de año — lg
 $lxd-calendar-lg-year-font-size: 1rem; // Cuerpo de letra del año — lg

@@ -53,6 +53,9 @@
   --calendar-year-height: var(--calendar-day-size); /** Alto de la celda de año — md: el del día, para que la vista de años no cambie la altura del panel */
   --calendar-year-padding-inline: var(--calendar-grid-gap); /** Aire a los lados de la celda de año: el año lleva cuatro cifras y no cabe en el cuadrado del día */
   --calendar-year-font-size: var(--calendar-day-font-size); /** Cuerpo de letra del año */
+  --calendar-year-grid-min-inline-size: calc(7 * var(--calendar-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — md: el de la semana (siete días y sus seis huecos), para que el panel no encoja al pasar de los días a los años */
+  --calendar-sm-year-grid-min-inline-size: calc(7 * var(--calendar-sm-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — sm */
+  --calendar-lg-year-grid-min-inline-size: calc(7 * var(--calendar-lg-day-size) + 6 * var(--calendar-grid-gap)); /** Ancho mínimo de la rejilla de años — lg */
   --calendar-sm-year-height: var(--calendar-sm-day-size); /** Alto de la celda de año — sm */
   --calendar-lg-year-height: var(--calendar-lg-day-size); /** Alto de la celda de año — lg */
   --calendar-lg-year-font-size: var(--calendar-lg-day-font-size); /** Cuerpo de letra del año — lg */

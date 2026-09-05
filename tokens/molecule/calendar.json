@@ -69,6 +69,10 @@
     "year-selected-color":       { "$value": "{calendar.selected-color}",  "$type": "color",     "$description": "Texto del año de la fecha elegida" },
     "year-disabled-color":       { "$value": "{calendar.disabled-color}",  "$type": "color",     "$description": "Color de los años fuera de rango" },
 
+    "year-grid-min-inline-size":    { "$value": "calc(7 * {calendar.day-size} + 6 * {calendar.grid-gap})",    "$type": "dimension", "$description": "Ancho mínimo de la rejilla de años — md: el de la semana (siete días y sus seis huecos), para que el panel no encoja al pasar de los días a los años" },
+    "sm-year-grid-min-inline-size": { "$value": "calc(7 * {calendar.sm-day-size} + 6 * {calendar.grid-gap})", "$type": "dimension", "$description": "Ancho mínimo de la rejilla de años — sm" },
+    "lg-year-grid-min-inline-size": { "$value": "calc(7 * {calendar.lg-day-size} + 6 * {calendar.grid-gap})", "$type": "dimension", "$description": "Ancho mínimo de la rejilla de años — lg" },
+
     "sm-year-height":            { "$value": "{calendar.sm-day-size}",     "$type": "dimension", "$description": "Alto de la celda de año — sm" },
     "lg-year-height":            { "$value": "{calendar.lg-day-size}",     "$type": "dimension", "$description": "Alto de la celda de año — lg" },
     "lg-year-font-size":         { "$value": "{calendar.lg-day-font-size}","$type": "dimension", "$description": "Cuerpo de letra del año — lg" },
