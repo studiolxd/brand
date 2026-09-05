@@ -15,10 +15,29 @@
   color: var(--pagination-summary-color);
 }
 
+/* Total, selector y la ranura que va tras él: el grupo de la izquierda. Envuelve
+   porque en pantallas estrechas la ranura baja bajo el selector, no lo estruja. */
 .pagination__meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--pagination-gap);
+}
+
+/* La ranura `afterPageSize`: pegada al selector en escritorio y, por debajo del
+   punto de ruptura, en su propia línea —de ahí la base al 100%—. */
+.pagination__after-page-size {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pagination-gap);
+  flex: 0 0 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .pagination__after-page-size {
+    flex: 0 1 auto;
+  }
 }
 
 .pagination__size-selector {

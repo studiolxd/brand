@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 import type { ColumnDef } from '@tanstack/react-table';
 import { Button } from '../../atoms/Button/Button';
 import { Tag } from '../../atoms/Tag/Tag';
@@ -79,14 +80,37 @@ export const ConAcciones: Story = {
   },
 };
 
+/**
+ * Las acciones del pie van pegadas al selector de registros por página —el
+ * grupo de la izquierda, con el total—; los botones de página se quedan solos
+ * al otro extremo.
+ */
 export const AccionesEnElPie: Story = {
   name: 'Acciones en el pie',
   args: {
     columns,
     data,
-    searchColumnId: 'name',
-    pageSize: 5,
     footerActions: <Button variant="outline" size="sm">Exportar</Button>,
+  },
+  render: (args) => {
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+    return (
+      <MemberTable
+        {...args}
+        data={data.slice((page - 1) * pageSize, page * pageSize)}
+        pagination={{
+          page,
+          pageSize,
+          total: data.length,
+          onPageChange: setPage,
+          onPageSizeChange: (size) => {
+            setPageSize(size === 'all' ? data.length : Number(size));
+            setPage(1);
+          },
+        }}
+      />
+    );
   },
 };
 
@@ -189,4 +213,43 @@ export const CargandoEnSuperficieOscura: Story = {
   name: 'Cargando en superficie oscura',
   parameters: { surface: 'dark' },
   args: { columns, data: [], isLoading: true, pageSize: 5 },
+};
+
+/** Test: las acciones del pie van tras el selector, y el paginador, solo. */
+export const ContratoAccionesTrasElSelector: Story = {
+  name: 'Test — las acciones van tras el selector de página',
+  tags: ['!dev'],
+  args: {
+    columns,
+    data,
+    footerActions: <Button variant="outline" size="sm">Exportar</Button>,
+  },
+  render: (args) => (
+    <MemberTable
+      {...args}
+      data={data.slice(0, 5)}
+      pagination={{
+        page: 1,
+        pageSize: 5,
+        total: data.length,
+        onPageChange: () => {},
+        onPageSizeChange: () => {},
+      }}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const meta = canvasElement.querySelector('.pagination__meta') as HTMLElement;
+    const selector = meta.querySelector('.pagination__size-selector') as HTMLElement;
+    const acciones = meta.querySelector('.pagination__after-page-size') as HTMLElement;
+    await expect(selector).not.toBeNull();
+    await expect(acciones).not.toBeNull();
+    // Hermanas y en ese orden: el selector primero, las acciones justo detrás.
+    await expect(selector.nextElementSibling).toBe(acciones);
+    await expect(acciones.textContent).toContain('Exportar');
+
+    // Y el paginador, solo al otro extremo.
+    const controles = canvasElement.querySelector('.pagination__controls') as HTMLElement;
+    await expect(controles.getBoundingClientRect().left)
+      .toBeGreaterThan(acciones.getBoundingClientRect().right);
+  },
 };

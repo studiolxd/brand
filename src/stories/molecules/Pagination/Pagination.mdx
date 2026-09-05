@@ -33,6 +33,20 @@ Total de resultados + selector de página + controles.
 
 <Canvas of={PaginationStories.Completo} />
 
+## Acciones tras el selector (`afterPageSize`)
+
+`afterPageSize` es una ranura que se pinta **justo después** del selector de registros
+por página, dentro del mismo grupo que el total. Es el sitio de las acciones sobre el
+**conjunto** —exportar el listado, imprimirlo—: van con el selector porque responden a
+la misma pregunta (qué parte de la lista miro y qué hago con ella entera), mientras que
+recorrer páginas es otra tarea, y por eso los botones de página se quedan solos al otro
+extremo. Por debajo de `md` la ranura baja a su propia línea, bajo el selector.
+
+Con la ranura llena el `nav` se pinta aunque no haya páginas que recorrer: una lista
+vacía se sigue pudiendo exportar. `DataTable` la usa para su prop `footerActions`.
+
+<Canvas of={PaginationStories.ConRanuraTrasElSelector} />
+
 ## Pocas páginas
 
 Con tres páginas o menos no aparece ellipsis.

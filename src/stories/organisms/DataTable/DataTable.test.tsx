@@ -184,6 +184,31 @@ describe('DataTable', () => {
     expect(screen.getByRole('button', { name: 'Exportar' })).toBeInTheDocument();
   });
 
+  it('pinta las acciones del pie tras el selector de registros por página', () => {
+    const { container } = render(
+      <DataTable
+        columns={columns}
+        data={data}
+        pagination={{
+          page: 1,
+          pageSize: 5,
+          total: 12,
+          onPageChange: () => {},
+          onPageSizeChange: () => {},
+        }}
+        footerActions={<button type="button">Exportar</button>}
+      />,
+    );
+    const meta = container.querySelector('.pagination__meta');
+    const selector = meta?.querySelector('.pagination__size-selector');
+    const acciones = meta?.querySelector('.pagination__after-page-size');
+    expect(selector).not.toBeNull();
+    expect(selector?.nextElementSibling).toBe(acciones);
+    expect(acciones).toHaveTextContent('Exportar');
+    // Y no cuelgan de los botones de página.
+    expect(acciones?.closest('.pagination__controls')).toBeNull();
+  });
+
   it('reenvía las etiquetas accesibles a la paginación', () => {
     render(
       <DataTable
