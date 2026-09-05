@@ -1,0 +1,28 @@
+{
+  "field-row": {
+    "column-gap": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Aire entre las celdas de la fila, en columnas" },
+    "row-gap":    { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre las celdas apiladas (móvil)" },
+    "rows-gap":   { "$value": "{spacing.3}", "$type": "dimension", "$description": "Aire entre filas de la lista: el de los elementos de una lista, más apretado que el de campos sueltos de un formulario" },
+    "rows-stack-gap": { "$value": "{spacing.5}", "$type": "dimension", "$description": "Aire entre filas cuando están apiladas (móvil): más que el que separa los campos dentro de una fila, o la lista se lee como una sola pila" },
+
+    "cell-sm": { "$value": "8rem",  "$type": "dimension", "$description": "Ancho propio de una celda estrecha (128px): un código postal, una cantidad" },
+    "cell-md": { "$value": "12rem", "$type": "dimension", "$description": "Ancho propio de una celda normal (192px): el select de un papel («Administración»)" },
+    "cell-lg": { "$value": "16rem", "$type": "dimension", "$description": "Ancho propio de una celda ancha (256px): un select de etiquetas largas" },
+
+    "lg-cell-sm": { "$value": "10rem", "$type": "dimension", "$description": "Ancho propio de una celda estrecha — talla lg (160px): el mismo ancho, un peldaño arriba, porque la letra del control también sube" },
+    "lg-cell-md": { "$value": "15rem", "$type": "dimension", "$description": "Ancho propio de una celda normal — talla lg (240px)" },
+    "lg-cell-lg": { "$value": "20rem", "$type": "dimension", "$description": "Ancho propio de una celda ancha — talla lg (320px)" },
+
+    "label-font-size":    { "$value": "{label.font-size}",    "$type": "dimension", "$description": "Cuerpo de la etiqueta que la fila reserva sobre la acción — el del Label" },
+    "sm-label-font-size": { "$value": "{label.sm-font-size}", "$type": "dimension", "$description": "Cuerpo de la etiqueta — talla sm" },
+    "lg-label-font-size": { "$value": "{label.lg-font-size}", "$type": "dimension", "$description": "Cuerpo de la etiqueta — talla lg" },
+    "label-line-height":  { "$value": "{label.line-height}",  "$type": "number",    "$description": "Interlineado de la etiqueta — el del Label: con el cuerpo, da la altura del hueco" },
+    "label-gap":          { "$value": "{input-field.gap}",    "$type": "dimension", "$description": "Aire entre la etiqueta y su control — el de los campos: completa el hueco que baja la acción hasta la línea de los controles" },
+
+    "empty-font-size":   { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del aviso de lista vacía" },
+    "empty-line-height": { "$value": "{line-height.normal}",            "$type": "number",    "$description": "Interlineado del aviso de lista vacía" },
+    "empty-color":       { "$value": "{color.text.muted-on-light}",     "$type": "color",     "$description": "Color del aviso de lista vacía — atenuado" },
+
+    "surface-dark-empty-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del aviso de lista vacía — surface-dark" }
+  }
+}

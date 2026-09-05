@@ -1,0 +1,30 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --field-row-cell-sm: 8rem; /** Ancho propio de una celda estrecha (128px): un código postal, una cantidad */
+  --field-row-cell-md: 12rem; /** Ancho propio de una celda normal (192px): el select de un papel («Administración») */
+  --field-row-cell-lg: 16rem; /** Ancho propio de una celda ancha (256px): un select de etiquetas largas */
+  --field-row-lg-cell-sm: 10rem; /** Ancho propio de una celda estrecha — talla lg (160px): el mismo ancho, un peldaño arriba, porque la letra del control también sube */
+  --field-row-lg-cell-md: 15rem; /** Ancho propio de una celda normal — talla lg (240px) */
+  --field-row-lg-cell-lg: 20rem; /** Ancho propio de una celda ancha — talla lg (320px) */
+  --field-row-column-gap: var(--spacing-4); /** Aire entre las celdas de la fila, en columnas */
+  --field-row-row-gap: var(--spacing-3); /** Aire entre las celdas apiladas (móvil) */
+  --field-row-rows-gap: var(--spacing-3); /** Aire entre filas de la lista: el de los elementos de una lista, más apretado que el de campos sueltos de un formulario */
+  --field-row-rows-stack-gap: var(--spacing-5); /** Aire entre filas cuando están apiladas (móvil): más que el que separa los campos dentro de una fila, o la lista se lee como una sola pila */
+  --field-row-empty-line-height: var(--line-height-normal); /** Interlineado del aviso de lista vacía */
+  --field-row-label-font-size: var(--label-font-size); /** Cuerpo de la etiqueta que la fila reserva sobre la acción — el del Label */
+  --field-row-sm-label-font-size: var(--label-sm-font-size); /** Cuerpo de la etiqueta — talla sm */
+  --field-row-lg-label-font-size: var(--label-lg-font-size); /** Cuerpo de la etiqueta — talla lg */
+  --field-row-label-line-height: var(--label-line-height); /** Interlineado de la etiqueta — el del Label: con el cuerpo, da la altura del hueco */
+  --field-row-label-gap: var(--input-field-gap); /** Aire entre la etiqueta y su control — el de los campos: completa el hueco que baja la acción hasta la línea de los controles */
+  --field-row-empty-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del aviso de lista vacía */
+  --field-row-empty-color: var(--color-text-muted-on-light); /** Color del aviso de lista vacía — atenuado */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --field-row-empty-color: var(--color-text-muted-on-dark); /** Color del aviso de lista vacía — surface-dark */
+}

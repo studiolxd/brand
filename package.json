@@ -215,6 +215,10 @@
       "types": "./dist/_types/molecules/FormField/FormField.d.ts",
       "import": "./dist/form-field.js"
     },
+    "./field-row": {
+      "types": "./dist/_types/molecules/FieldRow/FieldRow.d.ts",
+      "import": "./dist/field-row.js"
+    },
     "./heading": {
       "types": "./dist/_types/atoms/Heading/Heading.d.ts",
       "import": "./dist/heading.js"

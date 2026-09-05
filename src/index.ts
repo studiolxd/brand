@@ -191,6 +191,8 @@ export type { CarouselProps, CarouselSlideProps } from './stories/molecules/Caro
 export { CodeBlock } from './stories/molecules/CodeBlock/CodeBlock';
 export type { CodeBlockProps } from './stories/molecules/CodeBlock/CodeBlock';
 export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
+export { FieldRows, FieldRow } from './stories/molecules/FieldRow/FieldRow';
+export type { FieldRowsProps, FieldRowProps, FieldRowWidth } from './stories/molecules/FieldRow/FieldRow';
 export { Form } from './stories/molecules/Form/Form';
 export { InputField } from './stories/molecules/InputField/InputField';
 export type { InputFieldProps } from './stories/molecules/InputField/InputField';
