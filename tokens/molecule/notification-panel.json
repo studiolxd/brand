@@ -2,10 +2,9 @@
   "notification-panel": {
     "inline-size":            { "$value": "min(22.5rem, calc(100vw - 2 * {spacing.5}))", "$type": "dimension", "$description": "Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas" },
 
-    "padding-inline":         { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire lateral de la cabecera, de las filas y del pie: el mismo, para que todo alinee en una sola columna" },
-    "header-padding-block":   { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire vertical de la cabecera" },
-    "separator-thickness":    { "$value": "{separator.thickness}",    "$type": "dimension", "$description": "Grosor de las dos líneas que enmarcan la lista (bajo la cabecera y sobre el pie) — el grosor de la línea del sistema" },
-    "separator-color":        { "$value": "{separator.color}",        "$type": "color",     "$description": "Color de esas dos líneas — el de la línea del sistema" },
+    "padding-inline":         { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire lateral de las filas y del pie: el mismo, para que todo alinee en una sola columna" },
+    "separator-thickness":    { "$value": "{separator.thickness}",    "$type": "dimension", "$description": "Grosor de la línea que separa la lista del pie — el grosor de la línea del sistema" },
+    "separator-color":        { "$value": "{separator.color}",        "$type": "color",     "$description": "Color de esa línea — el de la línea del sistema" },
 
     "list-max-block-size":    { "$value": "21rem",                    "$type": "dimension", "$description": "Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta" },
     "list-padding-block":     { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire vertical de la lista dentro del panel" },
@@ -24,14 +23,13 @@
     "item-body-line-height":  { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Interlineado del cuerpo" },
     "item-body-line-clamp":   { "$value": "2",                        "$type": "number",    "$description": "Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja" },
     "item-time-font-size":    { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone=\"muted\"`)" },
-    "item-hover-line-width":  { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor de la línea que aparece bajo la fila con el puntero encima. Los estados no se rellenan (Foundations → Colores): se dicen con línea" },
-    "item-hover-line-color":  { "$value": "{color.primary}",          "$type": "color",     "$description": "Color de esa línea: el prusia del sistema" },
+    "item-hover-marker-width": { "$value": "{border-width.focus}",    "$type": "dimension", "$description": "Grosor de la barra que marca la fila bajo el puntero. Los estados no se rellenan (Foundations → Colores) y una fila no es un enlace, así que tampoco se subraya: se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la fila interactiva de `Table`" },
+    "item-hover-marker-color": { "$value": "{color.primary}",         "$type": "color",     "$description": "Color de esa barra: el prusia del sistema" },
 
     "dot-size":               { "$value": "{icon.size-sm}",           "$type": "dimension", "$description": "Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que la bandeja pinta ese punto. El círculo dibujado dentro mide unos 7px" },
     "dot-color":              { "$value": "{color.error-fill}",       "$type": "color",     "$description": "Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones" },
     "dot-margin-block-start": { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Baja el punto hasta el centro óptico de la primera línea del título" },
 
-    "view-font-size":         { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Tamaño del enlace «Ver» de una notificación con destino: letra menor, como el pie" },
 
     "empty-padding-block":    { "$value": "{spacing.6}",              "$type": "dimension", "$description": "Aire vertical del estado vacío: el hueco de la lista sin encogerse" },
 
@@ -45,8 +43,8 @@
     "transition-duration":    { "$value": "{motion.duration.fast}",   "$type": "string",    "$description": "Duración de la transición de la fila" },
     "transition-easing":      { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Curva de la transición de la fila" },
 
-    "surface-dark-separator-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de las líneas que enmarcan la lista — superficie oscura" },
-    "surface-dark-item-hover-line-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea de hover de la fila — superficie oscura" },
+    "surface-dark-separator-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea del pie — superficie oscura" },
+    "surface-dark-item-hover-marker-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la barra de hover de la fila — superficie oscura" },
     "surface-dark-focus-ring-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del anillo de foco — superficie oscura" }
   }
 }

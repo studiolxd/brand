@@ -17,6 +17,7 @@ import {
 import { EmptyState } from '../../molecules/EmptyState/EmptyState';
 import { InputField } from '../../molecules/InputField/InputField';
 import { Skeleton } from '../../atoms/Skeleton/Skeleton';
+import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Pagination, type PaginationProps } from '../../molecules/Pagination/Pagination';
 import {
   Table,
@@ -47,6 +48,13 @@ declare module '@tanstack/react-table' {
      * `start`. Números a `end`; acciones y estados a `center`.
      */
     align?: DataTableAlign;
+    /**
+     * La cabecera de la columna se pinta **solo para lectores de pantalla**:
+     * el `header` sigue nombrando la columna, pero no se ve. Es lo que lleva
+     * la columna de acciones, cuyo rótulo no aporta nada a quien ve los
+     * botones. La celda de cabecera sigue ahí, con su alineación.
+     */
+    headerHidden?: boolean;
   }
 }
 
@@ -238,6 +246,10 @@ export function DataTable<TData, TValue>({
                   const sorted = header.column.getIsSorted();
                   const canSort = header.column.getCanSort();
                   const align = alignClass('header-cell', header.column);
+                  const hidden = header.column.columnDef.meta?.headerHidden === true;
+                  const content = header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.header, header.getContext());
                   return (
                     <TableHeader
                       key={header.id}
@@ -247,9 +259,7 @@ export function DataTable<TData, TValue>({
                       onSort={canSort ? () => header.column.toggleSorting() : undefined}
                       {...headerLabels}
                     >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
+                      {hidden ? <VisuallyHidden>{content}</VisuallyHidden> : content}
                     </TableHeader>
                   );
                 })}

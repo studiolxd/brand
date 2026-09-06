@@ -74,7 +74,7 @@ default y no emite clase.
 const columns: ColumnDef<Invoice, unknown>[] = [
   { accessorKey: 'number', header: 'Factura' },
   { accessorKey: 'amount', header: 'Importe', meta: { align: 'end' } },
-  { id: 'actions', header: 'Acciones', cell: renderActions, meta: { align: 'center' } },
+  { id: 'actions', header: 'Acciones', cell: renderActions, meta: { align: 'center', headerHidden: true } },
 ];
 ```
 
@@ -90,9 +90,30 @@ Un número que no se compara con el de la fila de al lado (un identificador, un 
 es texto: va a `start`.
 
 `meta` está tipado por **module augmentation** de `ColumnMeta`, como recomienda TanStack:
-`align` sale en el autocompletado de cualquier `ColumnDef` del proyecto.
+`align` y `headerHidden` salen en el autocompletado de cualquier `ColumnDef` del proyecto.
 
 <Canvas of={DataTableStories.ColumnasAlineadas} />
+
+## La columna de acciones no enseña su rótulo
+
+**La columna de acciones se escribe siempre así: `meta: { align: 'center', headerHidden:
+true }`.** El rótulo «Acciones» no aporta nada a quien ve la columna —los botones ya dicen
+lo que hacen— y sí ocupa sitio en la cabecera, así que no se pinta.
+
+Lo que **no** se hace es dejar el `header` vacío: una columna sin nombre es una columna que
+un lector de pantalla no sabe anunciar al recorrer la fila. Con `headerHidden` el `header`
+se sigue pintando, dentro de `VisuallyHidden`: la columna conserva su nombre, y la celda de
+cabecera sigue en la fila con su alineación y su ancho.
+
+```tsx
+{ id: 'actions', header: 'Acciones', enableSorting: false, cell: renderActions,
+  meta: { align: 'center', headerHidden: true } }
+```
+
+`headerHidden` no es solo para las acciones: vale para cualquier columna cuyo rótulo sea
+ruido a la vista (la del aspa de borrar, la del avatar) y necesario al oído.
+
+<Canvas of={DataTableStories.AccionesSinRotulo} />
 
 ## Cargando
 

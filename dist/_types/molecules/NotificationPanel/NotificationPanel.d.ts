@@ -12,8 +12,6 @@ export interface NotificationPanelItem {
     time: string;
     /** Sin leer: punto, peso en el título y tinta plena. */
     unread: boolean;
-    /** Destino de la notificación. Con él aparece el enlace «Ver»; sin él, la fila no navega a ninguna parte. */
-    link?: string;
 }
 /** Lo que el panel pasa al `Link` del router de la aplicación. */
 export interface NotificationPanelLinkProps {
@@ -39,8 +37,8 @@ export interface NotificationPanelProps {
     /** Tope del contador de la campana («99+»). */
     max?: number;
     /**
-     * Se llama al pulsar una fila sin leer, y también al pulsar su enlace «Ver».
-     * El panel la pinta como leída en el sitio sin esperar respuesta.
+     * Se llama al pulsar una fila sin leer. El panel la pinta como leída en el
+     * sitio sin esperar respuesta.
      */
     onRead: (id: string) => void;
     /** Con ella el pie pinta «Marcar todas como leídas»; sin ella, no. */
@@ -59,12 +57,13 @@ export interface NotificationPanelProps {
     label?: string;
     /** Nombre accesible de la campana con contador. Recibe el número. Default castellano. */
     countLabel?: (count: number) => string;
-    /** Nombre del panel (`role="dialog"`) y título visible de la cabecera. Default «Notificaciones». */
+    /**
+     * Nombre del panel (`role="dialog"`) y de la lista. **No se pinta**: el
+     * panel no lleva cabecera visible. Default «Notificaciones».
+     */
     panelLabel?: string;
     /** Texto solo para lectores de pantalla que marca una fila sin leer. Default «Sin leer». */
     unreadLabel?: string;
-    /** Rótulo del enlace de una notificación con destino. Default «Ver». */
-    viewLabel?: string;
     /** Mensaje cuando no hay notificaciones. Default «Estás al día». */
     emptyLabel?: string;
     /** Rótulo del enlace a la bandeja. Default «Ver todas las notificaciones». */
@@ -85,8 +84,8 @@ export interface NotificationPanelProps {
  * los enlaces a la bandeja y a las preferencias.
  *
  * Es un **adelanto**, no la bandeja: aquí se lee y se marca leído, y lo único
- * que navega es el enlace de cada notificación. Pulsar una fila la marca
- * leída y la deja donde está —el panel no se reordena bajo el dedo—; al
- * cerrarlo, la lista vuelve a ser la que diga el consumidor.
+ * que navega son los dos enlaces del pie. Pulsar una fila la marca leída y la
+ * deja donde está —el panel no se reordena bajo el dedo—; al cerrarlo, la
+ * lista vuelve a ser la que diga el consumidor.
  */
-export declare function NotificationPanel({ items, count, max, onRead, onMarkAllRead, allHref, preferencesHref, renderLink, label, countLabel, panelLabel, unreadLabel, viewLabel, emptyLabel, allLabel, preferencesLabel, markAllReadLabel, open, defaultOpen, onOpenChange, className, }: NotificationPanelProps): import("react/jsx-runtime").JSX.Element;
+export declare function NotificationPanel({ items, count, max, onRead, onMarkAllRead, allHref, preferencesHref, renderLink, label, countLabel, panelLabel, unreadLabel, emptyLabel, allLabel, preferencesLabel, markAllReadLabel, open, defaultOpen, onOpenChange, className, }: NotificationPanelProps): import("react/jsx-runtime").JSX.Element;

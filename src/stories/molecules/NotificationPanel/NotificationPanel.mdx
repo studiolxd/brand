@@ -18,7 +18,17 @@ Son dos piezas con dos trabajos, y el panel no sustituye a la bandeja:
 - **El panel es un vistazo.** Cabe en una esquina de la pantalla, enseña cinco notificaciones como mucho —las recorta el consumidor, no el panel—, recorta el cuerpo a dos líneas y no pagina, no ordena, no filtra y no borra. Lo que se hace aquí es enterarse y marcar leído.
 - **La bandeja es la página.** Ahí está todo: la paginación, el texto entero, borrar una y borrar todas. Del panel se llega con «Ver todas las notificaciones».
 
-De ahí la regla de oro: **lo único que navega es el enlace de cada notificación**. Pulsar la fila la marca leída y la deja donde está; no abre nada y no cierra el panel. Si la fila navegara, marcar leído y perder el sitio serían el mismo gesto, y el panel dejaría de servir para lo que sirve.
+De ahí la regla de oro: **del panel no se navega a una notificación**. Pulsar la fila la marca leída y la deja donde está; no abre nada y no cierra el panel. Lo único que navega son los dos enlaces del pie. Si la fila navegara, marcar leído y perder el sitio serían el mismo gesto, y el panel dejaría de servir para lo que sirve.
+
+## El panel no lleva cabecera
+
+El título «Notificaciones» **no se pinta**: la campana que se acaba de pulsar ya dice qué es esto, y una cabecera con esa palabra sola se comía la primera notificación. `panelLabel` sigue existiendo y sigue haciendo su trabajo —nombra el `role="dialog"` y, dentro de un `VisuallyHidden`, la lista—, pero no ocupa: la lista empieza en el borde de arriba del panel, sin hueco vacío ni línea.
+
+## La fila
+
+Tres cosas y en dos líneas: el punto de no leída, el título con **la fecha relativa al otro extremo de su misma línea** —es un dato de un vistazo, no algo que se lea en orden— y debajo el cuerpo recortado a dos líneas.
+
+Bajo el puntero la fila no se rellena ni se subraya: una fila no es un enlace. Se marca con la **barra de tinta en su borde de inicio**, el mismo grafismo que la fila interactiva de `Table` y que la sección activa del `SidebarNav` en rail. El foco, con el anillo de siempre.
 
 ## La lista no salta bajo el dedo
 
@@ -31,23 +41,25 @@ La fila ya leída sigue en el recorrido de teclado, pero se anuncia con `aria-di
 
 ## El pie
 
-Dos enlaces fijos —la bandeja y las preferencias— y un botón opcional. `onMarkAllRead` es lo que decide si «Marcar todas como leídas» se pinta: sin la prop no hay botón, porque no todos los productos tienen esa operación.
+Dos enlaces fijos —la bandeja y las preferencias— y un botón opcional, **todo centrado**. `onMarkAllRead` es lo que decide si «Marcar todas como leídas» se pinta: sin la prop no hay botón, porque no todos los productos tienen esa operación. Es un `Button variant="outline"` en talla `sm`: marcar todas es una acción sobre el conjunto, y un texto suelto no se leía como tal.
+
+Los dos enlaces van en **tono tinta** (`link--ink`, la variante utilitaria del átomo `Link`) y **uno por línea**: son destinos de servicio, no la acción de marca del panel, y a 360 px los dos rótulos no caben en la misma línea.
 
 <Canvas of={Stories.ConMarcarTodas} />
 
-Los tres se montan sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `LegalFooter`: el panel pone `href`, clase, `onClick` y el nombre accesible; el consumidor pone el `Link` (ver `Link`). Un `renderLink` que no propague todo lo que recibe rompe esas cuatro cosas.
+Los dos se montan sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `LegalFooter`: el panel pone `href` y la clase que les da la cara de enlace de tinta; el consumidor pone el `Link` (ver `Link`). Un `renderLink` que no propague todo lo que recibe se deja por el camino esa cara.
 
 ## Accesibilidad
 
 - El disparador es el `NotificationButton`, con `aria-expanded` y `aria-controls` puestos por Base UI; el panel es un `role="dialog"` nombrado con `panelLabel`.
 - **El foco entra por la primera notificación**, no por el panel: lo primero que se hace aquí es recorrer la lista. `Escape` cierra y devuelve el foco a la campana.
 - El punto rojo de no leída es decorativo y lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»), como hace la bandeja.
-- La `<ul>` se llama con el título visible de la cabecera (`aria-labelledby`), no con una etiqueta paralela.
-- El enlace de una notificación compone su nombre con su rótulo **y** el título de la notificación (`aria-labelledby` sobre los nodos que ya existen): en una lista de enlaces, tres «Ver» sueltos no se distinguirían. El orden lo pone el idioma, no una plantilla de texto.
+- La `<ul>` se llama con el título del panel (`aria-labelledby`), no con una etiqueta paralela.
+- El título del panel está siempre, aunque no se vea: nombra el diálogo y la lista. Un panel sin nombre llega al lector de pantalla como «diálogo» a secas.
 
 ## Superficie oscura
 
-Todo el color sale de la regla de derivación: las dos líneas que enmarcan la lista y el anillo de foco pasan a `text.on-dark`, el fondo y el borde los pone el `Popover`, y la tinta atenuada la pone `Text tone="muted"`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
+Todo el color sale de la regla de derivación: la línea del pie, la barra de hover de la fila y el anillo de foco pasan a `text.on-dark`, el fondo y el borde los pone el `Popover`, y la tinta atenuada la pone `Text tone="muted"`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
 
 <Canvas of={Stories.SuperficieOscura} />
 
