@@ -7,6 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.4.1] — 2026-09-06
+
+- **`Pagination`: los chevrones sin inset lateral.** En talla `lg` icono +
+  padding superaban el lado de la caja cuadrada (50 px frente a 48). Un
+  chevrón no necesita padding: la caja lo centra.
+
 ## [32.4.0] — 2026-09-06
 
 > **Minor.**
