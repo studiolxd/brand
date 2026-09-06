@@ -9,6 +9,8 @@ import { Stack } from '../../atoms/Stack/Stack';
 import { SiteHeader } from '../../sections/SiteHeader/SiteHeader';
 import { SiteNav } from '../../molecules/SiteNav/SiteNav';
 import { LegalFooter } from '../../sections/LegalFooter/LegalFooter';
+import { LanguageSwitcher } from '../../molecules/LanguageSwitcher/LanguageSwitcher';
+import { ThemeSwitcher } from '../../molecules/ThemeSwitcher/ThemeSwitcher';
 
 const indice = [{ id: 'sitio', label: 'Sitio', href: '#sitio', items: [{ id: 'inicio', label: 'Inicio', href: '#inicio' }, { id: 'precios', label: 'Precios', href: '#precios' }] }];
 const legal = [
@@ -22,6 +24,14 @@ const categorias: ConsentCategory[] = [
 ];
 
 const decisionInicial: ConsentValue = { necessary: true, analytics: false };
+
+/** Los dos conmutadores de la banda de preferencias, sueltos: la banda es del marco. */
+const conmutadores = (
+  <>
+    <LanguageSwitcher size="lg" value="es" languages={[{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }]} />
+    <ThemeSwitcher size="lg" value="light" />
+  </>
+);
 
 function CabeceraRota(): never {
   throw new Error('La cabecera lanza al renderizar');
@@ -43,6 +53,7 @@ const meta: Meta<typeof PublicPageShell> = {
     children: { table: { disable: true } },
     header: { table: { disable: true } },
     footer: { table: { disable: true } },
+    preferences: { table: { disable: true } },
     id: { table: { disable: true } },
   },
 };
@@ -57,6 +68,20 @@ export const ConCabeceraYPie: Story = {
   name: 'Con cabecera y pie',
   args: {
     header: <SiteHeader><SiteNav groups={indice} /></SiteHeader>,
+    footer: <LegalFooter links={legal} />,
+  },
+};
+
+/**
+ * La banda de preferencias entre el contenido y el pie: idioma y tema, en una
+ * `section` con nombre y al ancho de la página. Es lo que cierra el panel de
+ * estado y el alta.
+ */
+export const ConPreferencias: Story = {
+  name: 'Con preferencias',
+  args: {
+    header: <SiteHeader><SiteNav groups={indice} /></SiteHeader>,
+    preferences: conmutadores,
     footer: <LegalFooter links={legal} />,
   },
 };
@@ -130,6 +155,35 @@ export const Contrato: Story = {
   },
 };
 
+export const ContratoPreferencias: Story = {
+  name: 'Test — la banda de preferencias, nombrada y entre el contenido y el pie',
+  tags: ['!dev'],
+  args: ConPreferencias.args,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const banda = canvas.getByRole('region', { name: 'Preferencias' });
+    await expect(banda.tagName).toBe('SECTION');
+    // Entre el contenido y el pie: ni dentro del `main` ni dentro del pie
+    // legal, que es un `footer` y no admite invitados.
+    const main = canvas.getByRole('main');
+    const pie = canvas.getByRole('contentinfo');
+    await expect(main).not.toContainElement(banda);
+    await expect(pie).not.toContainElement(banda);
+    await expect(main.compareDocumentPosition(banda) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    await expect(banda.compareDocumentPosition(pie) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    await expect(banda.querySelector('.public-page-shell__preferences-row')).not.toBeNull();
+  },
+};
+
+export const ContratoPreferenciasLabel: Story = {
+  name: 'Test — el nombre de la banda es una prop, no un texto cableado',
+  tags: ['!dev'],
+  args: { ...ConPreferencias.args, preferencesLabel: 'Settings' },
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByRole('region', { name: 'Settings' })).toBeInTheDocument();
+  },
+};
+
 export const ContratoCabeceraRota: Story = {
   name: 'Test — una cabecera que lanza no tumba la página',
   tags: ['!dev'],
@@ -166,11 +220,14 @@ export const ContratoRef: Story = {
 export const ContratoSinShell: Story = {
   name: 'Test — sin shell no hay SiteShell ni main propio',
   tags: ['!dev'],
-  args: { ...ConCabeceraYPie.args, shell: false },
+  args: { ...ConPreferencias.args, shell: false },
   play: async ({ canvasElement }) => {
     await expect(canvasElement.querySelector('.site-shell')).not.toBeInTheDocument();
     await expect(canvasElement.querySelector('main')).not.toBeInTheDocument();
     await expect(canvasElement.querySelector('.site-header')).not.toBeInTheDocument();
     await expect(within(canvasElement).getByRole('heading', { level: 1 })).toBeInTheDocument();
+    // Sin marco tampoco hay banda de preferencias: no hay ranura de pie donde
+    // ponerla, igual que con `header` y `footer`.
+    await expect(canvasElement.querySelector('.public-page-shell__preferences')).not.toBeInTheDocument();
   },
 };

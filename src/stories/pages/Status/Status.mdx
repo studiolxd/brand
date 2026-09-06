@@ -11,7 +11,7 @@ Es **la norma**, igual que el resto de páginas: si la aplicación lo monta dist
 ## Lo que lo hace distinto de las demás páginas públicas
 
 - **La cabecera no lleva índice.** El panel es un sitio de una sola página que debe seguir de pie cuando las aplicaciones no lo están, y un menú lleno de enlaces a servicios caídos sería una promesa que no puede cumplir. Al no recibir ni índice ni ajustes ni idioma, `SiteHeader` deja de montar el panel y su botón de menú desaparece solo. El logotipo sí enlaza —a la web—: es una invitación a volver, no una promesa de servicio.
-- **Las preferencias van al pie.** Idioma y tema son preferencias globales: no son navegación ni son una acción del contenido, así que viven al borde inferior, en una `section` con nombre, encima de las legales. Es el mismo criterio del alta.
+- **Las preferencias van al pie.** Idioma y tema son preferencias globales: no son navegación ni son una acción del contenido, así que viven al borde inferior, en una `section` con nombre, encima de las legales. Es el mismo criterio del alta, y es la misma pieza: la banda la pone el marco (`PublicPageShell`, prop `preferences`) y la página solo le pasa los dos conmutadores.
 - **Las legales son las suyas.** El panel vive en otro servidor justo para seguir en pie cuando la suite se cae; unos enlaces que mueran con ella serían el único trozo roto de la página que la gente mira precisamente durante la caída.
 
 ## Los cinco estados

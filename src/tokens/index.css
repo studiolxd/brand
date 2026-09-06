@@ -130,6 +130,7 @@
 @import "./molecules/assistant-message.css";
 @import "./molecules/chat-shell.css";
 @import "./molecules/onboarding-shell.css";
+@import "./molecules/public-page-shell.css";
 @import "./molecules/chart.css";
 @import "./components/sparkline.css";
 @import "./components/star-rating.css";

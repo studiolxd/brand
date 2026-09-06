@@ -1,0 +1,29 @@
+/* La banda de preferencias: idioma y tema, entre el contenido y el pie legal.
+
+   Va aparte del pie a propósito. Una preferencia global no es una legal ni una
+   acción del contenido: es chrome, y el `footer` legal es un `footer` que no
+   admite invitados. De ahí que sea una `section` con nombre —«Preferencias»—,
+   para que los dos controles queden dentro de una región nombrada en vez de
+   sueltos entre el contenido y el pie.
+
+   Como banda, el `Container` le da el aire lateral y el ancho de página; lo
+   único propio es su aire vertical, y es el del pie público: el mismo token
+   que el `LegalFooter` que va justo debajo. El aire que la separa del
+   contenido ya lo pone el `main` al cerrar. */
+.public-page-shell__preferences {
+  padding-block: var(--public-page-shell-preferences-padding-block);
+}
+
+/* Los conmutadores en fila, con envoltura: en teléfono caen uno debajo de
+   otro sin que haga falta una media query.
+
+   `flex-end` y no `center`: la etiqueta de un conmutador puede partirse en dos
+   líneas —«Idioma de la interfaz» en alemán— y, alineados al centro, el otro
+   control se descolgaba media línea. Al final, los dos comparten renglón
+   pase lo que pase. */
+.public-page-shell__preferences-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--public-page-shell-preferences-gap);
+}
