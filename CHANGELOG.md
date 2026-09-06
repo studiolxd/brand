@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+> **Minor.**
+
+- **`AppLauncher`: el disparador puede pintar texto además del icono.** Nueva
+  `labels.trigger?: string` en `AppLauncherLabels`: con ella, el botón pinta `Icon
+  grid` + el texto, se lee como un ítem de `SidebarNav` (tipografía, alto, radio y
+  aire por referencia a sus tokens — `trigger-label-*` → `{sidebar-nav.item-*}`) y su
+  hover deja de pintar línea (mismo criterio que `.sidebar-nav__item:hover`: solo
+  `color`). Sin `trigger`, el disparador se queda exactamente como antes: solo icono,
+  con `labels.open` de nombre accesible y su línea de tinta en hover. Con texto
+  visible, el nombre accesible pasa a ser ese texto — no se duplica con `aria-label`.
+
 ## [32.0.0] — 2026-09-06
 
 > **Major.** Retira `NotificationPanelItem['link']` y la prop `viewLabel`: el próximo

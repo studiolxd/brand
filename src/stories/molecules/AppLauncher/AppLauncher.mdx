@@ -13,6 +13,23 @@ Rejilla de acceso a las apps de la suite, en un panel flotante (`Popover` de
 
 <Canvas of={AppLauncherStories.Default} />
 
+## Disparador: icono solo o con texto
+
+Sin `labels.trigger`, el disparador es solo el botón de icono de rejilla, con `labels.open` de
+nombre accesible — el uso por defecto, pensado para una cabecera apretada donde el icono ya se
+reconoce (el launcher de la suite, por ejemplo). Con `labels.trigger`, pinta el icono más el texto
+a su derecha y se lee como un ítem de `SidebarNav` — tipografía, alto, radio y aire por referencia
+a sus tokens (`trigger-label-*` → `{sidebar-nav.item-*}`) — pensado para un sitio donde el
+disparador convive con otros ítems de navegación con texto y el icono solo desentonaría. Con texto
+visible el nombre accesible es ese texto: no se duplica con `aria-label`.
+
+<Canvas of={AppLauncherStories.ConTexto} />
+
+Su hover tampoco pinta línea (mismo criterio que `.sidebar-nav__item:hover`, excepción declarada a
+la regla general de Colores): con el disparador leyéndose como un ítem más de una navegación, la
+línea de tinta del icono-solo (`hover-line-*`) desentonaría igual que en un ítem de `SidebarNav`.
+El disparador de solo icono no cambia: conserva su línea.
+
 ## App actual
 
 `currentAppId` marca la app activa (`aria-current="page"`) con la barra de tinta al borde de inicio del tile (`tile-active-marker-*`) y el nombre en énfasis. La barra se distingue del tile bajo el puntero, que se rellena invirtiendo la marca (`tile-highlighted-bg` / `tile-highlighted-color`): una dice dónde estás, el otro dónde está el ratón, y se apilan sin pelearse.
@@ -47,6 +64,8 @@ la prop.
 ## Accesibilidad
 
 - El disparador anuncia `aria-haspopup="dialog"` (lo pone `Popover.Trigger` de Base UI).
+- El nombre accesible del disparador es `labels.open` cuando es solo icono, y el propio texto
+  visible (`labels.trigger`) cuando lo hay — nunca los dos a la vez.
 - El panel va en un `Portal`: vive fuera del árbol de la página, así que ningún selector CSS
   descendiente (`.surface-dark .app-launcher__…`) lo alcanza. El tema oscuro le llega por la
   activación root-level (`html.dark`/`[data-theme="dark"]`), que sí cascada a cualquier
