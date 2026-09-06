@@ -115,6 +115,23 @@ ruido a la vista (la del aspa de borrar, la del avatar) y necesario al oído.
 
 <Canvas of={DataTableStories.AccionesSinRotulo} />
 
+## La columna de acciones no se pierde al desbordar
+
+Con muchas columnas la tabla mide más que su contenedor: sin `sticky`, la columna de
+acciones cae fuera del recorte de `.table__wrapper` y —sin barra de scroll visible en
+macOS— el menú de fila queda inalcanzable. **La columna de acciones se escribe siempre
+así: `meta: { align: 'center', headerHidden: true, sticky: 'end' }`.** `sticky: 'end'`
+la pega al borde final (`inset-inline-end: 0`): se queda alcanzable con scroll horizontal,
+con un fondo opaco que tapa el resto de columnas al deslizarse por debajo y un filete de
+inicio recesivo que marca el desbordamiento.
+
+```tsx
+{ id: 'actions', header: 'Acciones', enableSorting: false, cell: renderActions,
+  meta: { align: 'center', headerHidden: true, sticky: 'end' } }
+```
+
+<Canvas of={DataTableStories.MuchasColumnas} />
+
 ## Cargando
 
 `isLoading` sustituye las filas por `Skeleton`, tantas como diga `pageSize`. Las filas de

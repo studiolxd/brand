@@ -194,6 +194,27 @@ describe('DataTable', () => {
     expect(ocultos.map((nodo) => nodo.textContent)).not.toContain('Nombre');
   });
 
+  it('con `meta.sticky` la cabecera y la celda de esa columna llevan la clase pegajosa', () => {
+    const conAccionesPegajosas: ColumnDef<Row, unknown>[] = [
+      { accessorKey: 'name', header: 'Nombre' },
+      {
+        id: 'acciones',
+        header: 'Acciones',
+        cell: () => <button type="button">Abrir</button>,
+        meta: { align: 'center', headerHidden: true, sticky: 'end' },
+      },
+    ];
+    render(<DataTable columns={conAccionesPegajosas} data={data.slice(0, 1)} />);
+
+    const cabeceras = screen.getAllByRole('columnheader');
+    expect(cabeceras[0]).not.toHaveClass('table__header--sticky');
+    expect(cabeceras[1]).toHaveClass('table__header--sticky');
+
+    const celdas = screen.getAllByRole('cell');
+    expect(celdas[0]).not.toHaveClass('table__cell--sticky');
+    expect(celdas[1]).toHaveClass('table__cell--sticky');
+  });
+
   it('pinta las acciones del pie cuando llegan, no cuando no', () => {
     const { rerender } = render(<DataTable columns={columns} data={data} pageSize={5} />);
     expect(screen.queryByRole('button', { name: 'Exportar' })).not.toBeInTheDocument();

@@ -246,6 +246,93 @@ export const PaginadaEnServidor: Story = {
   },
 };
 
+type WideRow = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  department: string;
+  location: string;
+  startDate: string;
+  status: string;
+  manager: string;
+};
+
+const wideData: WideRow[] = NAMES.map((name, index) => ({
+  id: String(index),
+  name,
+  email: `${name.toLowerCase().replace(/\s+/g, '.')}@studiolxd.com`,
+  role: index === 0 ? 'Propietario' : 'Miembro',
+  department: 'Ingeniería',
+  location: 'Madrid',
+  startDate: '01/01/2024',
+  status: 'Activo',
+  manager: 'Ada Lovelace',
+}));
+
+// La columna de acciones se escribe siempre así: `align: 'center'`,
+// `headerHidden: true` y, cuando la tabla puede desbordar, `sticky: 'end'`.
+const wideColumns: ColumnDef<WideRow, unknown>[] = [
+  { accessorKey: 'name', header: 'Nombre' },
+  { accessorKey: 'email', header: 'Correo' },
+  { accessorKey: 'role', header: 'Rol' },
+  { accessorKey: 'department', header: 'Departamento' },
+  { accessorKey: 'location', header: 'Ubicación' },
+  { accessorKey: 'startDate', header: 'Fecha de alta' },
+  { accessorKey: 'status', header: 'Estado' },
+  { accessorKey: 'manager', header: 'Responsable' },
+  {
+    id: 'actions',
+    header: 'Acciones',
+    cell: () => <Button variant="text" size="sm">Editar</Button>,
+    meta: { align: 'center', headerHidden: true, sticky: 'end' },
+  },
+];
+
+const WideTable = DataTable<WideRow, unknown>;
+
+/**
+ * Con muchas columnas la tabla mide más que su contenedor: la columna de
+ * acciones se queda pegada al borde final con scroll horizontal, en vez de
+ * caer fuera del recorte del wrapper sin barra de scroll visible (macOS).
+ */
+export const MuchasColumnas: StoryObj<typeof WideTable> = {
+  name: 'Muchas columnas',
+  args: { ariaLabel: 'Miembros del equipo, muchas columnas' },
+  render: (args) => (
+    <div style={{ maxWidth: '480px' }}>
+      <WideTable {...args} columns={wideColumns} data={wideData} pageSize={5} />
+    </div>
+  ),
+};
+
+/** Test: con scroll a 0, la celda de acciones está dentro del viewport del wrapper. */
+export const ContratoColumnaDeAccionesPegajosa: StoryObj<typeof WideTable> = {
+  name: 'Test — la columna de acciones pegajosa queda dentro del viewport',
+  tags: ['!dev'],
+  args: { ariaLabel: 'Miembros del equipo, muchas columnas' },
+  render: (args) => (
+    <div style={{ maxWidth: '480px' }}>
+      <WideTable {...args} columns={wideColumns} data={wideData} pageSize={5} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const wrapper = canvasElement.querySelector('.table__wrapper') as HTMLElement;
+    await expect(wrapper).not.toBeNull();
+    // La tabla desborda de verdad: si no, el contrato no prueba nada.
+    const table = wrapper.querySelector('table') as HTMLElement;
+    await expect(table.scrollWidth).toBeGreaterThan(wrapper.clientWidth);
+
+    wrapper.scrollLeft = 0;
+    const accionesCell = wrapper.querySelector('.table__cell--sticky') as HTMLElement;
+    await expect(accionesCell).not.toBeNull();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const cellRect = accionesCell.getBoundingClientRect();
+    await expect(cellRect.right).toBeLessThanOrEqual(wrapperRect.right + 1);
+    await expect(cellRect.left).toBeGreaterThanOrEqual(wrapperRect.left);
+  },
+};
+
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },

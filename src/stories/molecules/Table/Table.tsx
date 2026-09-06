@@ -26,6 +26,13 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
   /** Texto accesible de la cabecera de acciones. Default: «Acciones» (castellano). Una app multiidioma debe pasarlo traducido. */
   actionsLabel?: string;
   /**
+   * Pega la columna al borde final (`inset-inline-end: 0`) cuando la tabla
+   * desborda su contenedor: la columna de acciones se queda alcanzable con
+   * scroll horizontal en vez de caer fuera del recorte. Requiere el mismo
+   * `sticky="end"` en la `Table.Cell` equivalente de cada fila.
+   */
+  sticky?: 'end';
+  /**
    * Texto accesible del estado de ordenación ascendente. Default: "Ordenado ascendente"
    * (castellano). Una app multiidioma debe pasarlo traducido.
    */
@@ -55,6 +62,12 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
 }
 
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+  /**
+   * Pega la celda al borde final (`inset-inline-end: 0`) cuando la tabla
+   * desborda su contenedor. Mismo valor que el `sticky` de la `Table.Header`
+   * de esta columna.
+   */
+  sticky?: 'end';
   children?: ReactNode;
 }
 
@@ -79,6 +92,7 @@ export function TableHeader({
   sortedAscLabel = 'Ordenado ascendente',
   sortedDescLabel = 'Ordenado descendente',
   sortableLabel = 'Activar ordenación',
+  sticky,
   children,
   className,
   scope = 'col',
@@ -90,6 +104,7 @@ export function TableHeader({
     sorted === 'asc' ? 'table__header--sorted-asc' : '',
     sorted === 'desc' ? 'table__header--sorted-desc' : '',
     actions ? 'table__header--actions' : '',
+    sticky === 'end' ? 'table__header--sticky' : '',
     className,
   ]
     .filter(Boolean)
@@ -192,8 +207,14 @@ export function TableRow({
   );
 }
 
-export function TableCell({ children, className, ...rest }: TableCellProps) {
-  const classes = ['table__cell', className].filter(Boolean).join(' ');
+export function TableCell({ sticky, children, className, ...rest }: TableCellProps) {
+  const classes = [
+    'table__cell',
+    sticky === 'end' ? 'table__cell--sticky' : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
   return (
     <td {...rest} className={classes}>
       {children}

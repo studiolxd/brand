@@ -22,6 +22,13 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
     /** Texto accesible de la cabecera de acciones. Default: «Acciones» (castellano). Una app multiidioma debe pasarlo traducido. */
     actionsLabel?: string;
     /**
+     * Pega la columna al borde final (`inset-inline-end: 0`) cuando la tabla
+     * desborda su contenedor: la columna de acciones se queda alcanzable con
+     * scroll horizontal en vez de caer fuera del recorte. Requiere el mismo
+     * `sticky="end"` en la `Table.Cell` equivalente de cada fila.
+     */
+    sticky?: 'end';
+    /**
      * Texto accesible del estado de ordenación ascendente. Default: "Ordenado ascendente"
      * (castellano). Una app multiidioma debe pasarlo traducido.
      */
@@ -49,14 +56,20 @@ export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowEle
     children: ReactNode;
 }
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+    /**
+     * Pega la celda al borde final (`inset-inline-end: 0`) cuando la tabla
+     * desborda su contenedor. Mismo valor que el `sticky` de la `Table.Header`
+     * de esta columna.
+     */
+    sticky?: 'end';
     children?: ReactNode;
 }
 export declare function TableHead({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableFooter({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
-export declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, sortedAscLabel, sortedDescLabel, sortableLabel, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, sortedAscLabel, sortedDescLabel, sortableLabel, sticky, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
 export declare function TableRow({ onClick, interactive, selected, label, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
-export declare function TableCell({ children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
+export declare function TableCell({ sticky, children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
 export declare function Table({ caption, children, size, className, ...rest }: TableProps): import("react/jsx-runtime").JSX.Element;
 export declare namespace Table {
     var Head: typeof TableHead;

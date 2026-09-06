@@ -22,40 +22,41 @@ function o({ children: e, ...t }) {
 		children: e
 	});
 }
-function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", sortedAscLabel: l = "Ordenado ascendente", sortedDescLabel: u = "Ordenado descendente", sortableLabel: d = "Activar ordenación", children: f, className: p, scope: m = "col", ...h }) {
-	let g = [
+function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", sortedAscLabel: l = "Ordenado ascendente", sortedDescLabel: u = "Ordenado descendente", sortableLabel: d = "Activar ordenación", sticky: f, children: p, className: m, scope: h = "col", ...g }) {
+	let _ = [
 		"table__header",
 		i ? "table__header--sortable" : "",
 		a === "asc" ? "table__header--sorted-asc" : "",
 		a === "desc" ? "table__header--sorted-desc" : "",
 		s ? "table__header--actions" : "",
-		p
+		f === "end" ? "table__header--sticky" : "",
+		m
 	].filter(Boolean).join(" ");
 	return i ? /* @__PURE__ */ r("th", {
-		...h,
-		scope: m,
-		className: g,
+		...g,
+		scope: h,
+		className: _,
 		"aria-sort": a === "asc" ? "ascending" : a === "desc" ? "descending" : "none",
 		children: [/* @__PURE__ */ r("button", {
 			type: "button",
 			className: "table__header-content",
 			onClick: o,
-			children: [f, /* @__PURE__ */ n(e, {
+			children: [p, /* @__PURE__ */ n(e, {
 				name: "chevron",
 				size: "xs",
 				className: "table__sort-icon"
 			})]
 		}), /* @__PURE__ */ n(t, { children: a === "asc" ? l : a === "desc" ? u : d })]
 	}) : s ? /* @__PURE__ */ n("th", {
-		...h,
-		scope: m,
-		className: g,
-		children: /* @__PURE__ */ n(t, { children: f ?? c })
+		...g,
+		scope: h,
+		className: _,
+		children: /* @__PURE__ */ n(t, { children: p ?? c })
 	}) : /* @__PURE__ */ n("th", {
-		...h,
-		scope: m,
-		className: g,
-		children: f
+		...g,
+		scope: h,
+		className: _,
+		children: p
 	});
 }
 function c({ onClick: e, interactive: t = !1, selected: r = !1, label: i, children: a, className: o, ...s }) {
@@ -84,12 +85,16 @@ function c({ onClick: e, interactive: t = !1, selected: r = !1, label: i, childr
 		children: a
 	});
 }
-function l({ children: e, className: t, ...r }) {
-	let i = ["table__cell", t].filter(Boolean).join(" ");
+function l({ sticky: e, children: t, className: r, ...i }) {
+	let a = [
+		"table__cell",
+		e === "end" ? "table__cell--sticky" : "",
+		r
+	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ n("td", {
-		...r,
-		className: i,
-		children: e
+		...i,
+		className: a,
+		children: t
 	});
 }
 function u({ caption: e, children: t, size: i = "md", className: a, ...o }) {

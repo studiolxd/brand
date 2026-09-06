@@ -92,6 +92,7 @@
   --color-surface-inverse-on-dark: var(--color-grey-lightest); /** Superficie invertida — variante para superficie oscura */
   --color-surface-highlight-on-dark: var(--color-grey-dark); /** Brillo que recorre una superficie secundaria en carga (Skeleton) sobre superficie oscura — un paso más claro que el fondo secundario oscuro */
   --color-border-default-on-light: var(--color-grey-light); /** Borde general sobre superficie clara: divisores, separadores, carriles y guías sin recorrer. Por la regla de derivación el par en superficie oscura no es un primitivo gris, es `color.text.on-dark` (cada componente lo referencia directamente) */
+  --color-border-recessive-on-dark: var(--color-grey-darkest); /** Línea recesiva sobre superficie oscura — no un borde que deba destacar (ese es `color.text.on-dark`, la derivación por defecto), sino un filete de cromo que se retira hacia el lienzo: la rejilla de `Chart`. Mismo `grey-darkest` que ya usaba por error `color.surface.secondary-on-dark` (una superficie, no una línea) — el valor visual no cambia, solo su procedencia semántica */
   --color-disabled-bg-on-light: var(--color-grey-lightest); /** Fondo de un control deshabilitado sobre superficie clara */
   --color-disabled-bg-on-dark: var(--color-grey-darkest); /** Fondo de un control deshabilitado — superficie oscura */
   --color-disabled-text-on-light: var(--color-grey-darkest); /** Texto o borde de un control de texto (Button, Input, Textarea) deshabilitado sobre superficie clara */

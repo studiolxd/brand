@@ -7,6 +7,27 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+> **Minor.**
+
+- **`Table`/`DataTable`: columna de acciones pegajosa al desbordar.** Con muchas
+  columnas la tabla mide más que su contenedor y la columna de acciones caía fuera
+  del recorte de `.table__wrapper` —en macOS, sin barra de scroll visible, el menú de
+  fila quedaba inalcanzable. `Table.Header`/`Table.Cell` aceptan `sticky="end"` (y
+  `DataTable`, `meta: { sticky: 'end' }`, junto a `align`/`headerHidden`): la columna se
+  pega al borde final (`inset-inline-end: 0`) con un fondo opaco por token
+  (`table.sticky-bg`) que tapa el resto de columnas al deslizarse por debajo, y un
+  filete de inicio recesivo (`table.sticky-separator-color`) que marca el
+  desbordamiento — no un borde con peso de dato, el mismo criterio que la rejilla de
+  `Chart`.
+- **`Chart`: la rejilla en superficie oscura corrige su procedencia.**
+  `chart.surface-dark-grid-color` apuntaba a `color.surface.secondary-on-dark`, un
+  token de SUPERFICIE — el mismo defecto de origen que hizo invisible el carril del
+  Stepper. El valor visual era correcto (la rejilla es cromo recesivo a propósito) y
+  no cambia: ahora apunta al nuevo token de línea `color.border.recessive-on-dark`
+  (mismo `grey-darkest`).
+
 ## [32.2.0] — 2026-09-06
 
 > **Minor.**
