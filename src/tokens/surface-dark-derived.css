@@ -27,6 +27,8 @@ html.dark {
   --async-select-error-border-color: var(--select-error-border-color);
   --async-select-focus-ring-color: var(--select-focus-ring-color);
   --async-select-placeholder-color: var(--multi-select-placeholder-color);
+  --code-bg: var(--code-block-bg);
+  --code-color: var(--code-block-color);
   --floating-dock-panel-bg: var(--floating-panel-bg);
   --floating-dock-panel-border-color: var(--floating-panel-border-color);
   --floating-dock-title-color: var(--modal-title-color);
@@ -64,6 +66,10 @@ html.dark {
   --command-palette-input-border-color: var(--floating-panel-border-color);
   --prose-color: var(--text-color);
   --prose-quote-border-color: var(--separator-color);
+  --prose-code-bg: var(--code-bg);
+  --prose-code-color: var(--code-color);
+  --prose-pre-bg: var(--code-block-bg);
+  --prose-pre-color: var(--code-block-color);
   --prose-pre-border-color: var(--code-block-border-color);
   --prose-table-border-color: var(--table-row-border-color);
   --prose-table-header-border-color: var(--table-header-border-color);

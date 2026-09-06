@@ -39,13 +39,17 @@ La fila ya leída sigue en el recorrido de teclado, pero se anuncia con `aria-di
 <Canvas of={Stories.TodoLeido} />
 <Canvas of={Stories.Vacio} />
 
-## El pie
+## «Marcar todas como leídas»
 
-Dos enlaces fijos —la bandeja y las preferencias— y un botón opcional, **todo centrado**. `onMarkAllRead` es lo que decide si «Marcar todas como leídas» se pinta: sin la prop no hay botón, porque no todos los productos tienen esa operación. Es un `Button variant="outline"` en talla `sm`: marcar todas es una acción sobre el conjunto, y un texto suelto no se leía como tal.
-
-Los dos enlaces van en **tono tinta** (`link--ink`, la variante utilitaria del átomo `Link`) y **uno por línea**: son destinos de servicio, no la acción de marca del panel, y a 360 px los dos rótulos no caben en la misma línea.
+Va **encima de la lista**, no en el pie: es una acción sobre el conjunto, y se decide antes de leerlo, no después. Una fila propia con el botón alineado al final (derecha) — no centrado, que es como se leen los dos enlaces del pie, de naturaleza distinta. `onMarkAllRead` es lo que decide si se pinta: sin la prop no hay fila ni botón, porque no todos los productos tienen esa operación. Es un `Button variant="outline"` en talla `sm`.
 
 <Canvas of={Stories.ConMarcarTodas} />
+
+## El pie
+
+Dos enlaces fijos —la bandeja y las preferencias—, **todo centrado** y sin línea que lo separe de la lista: el aire de su padding ya marca el cambio de bloque.
+
+Los dos enlaces van en **tono tinta** (`link--ink`, la variante utilitaria del átomo `Link`) y **uno por línea**: son destinos de servicio, no la acción de marca del panel, y a 360 px los dos rótulos no caben en la misma línea.
 
 Los dos se montan sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `LegalFooter`: el panel pone `href` y la clase que les da la cara de enlace de tinta; el consumidor pone el `Link` (ver `Link`). Un `renderLink` que no propague todo lo que recibe se deja por el camino esa cara.
 

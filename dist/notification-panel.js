@@ -23,7 +23,10 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 		H(e) && (V((t) => [...t, e.id]), x(e.id));
 	}, W = () => {
 		V(v.map((e) => e.id)), S?.();
-	}, G = d(() => z.current?.querySelector(g) ?? null, []), K = (e, t) => {
+	}, G = d(() => {
+		let e = z.current;
+		return e ? e.querySelector(".notification-panel__item-action") ?? e.querySelector(g) : null;
+	}, []), K = (e, t) => {
 		e || V([]), I?.(e, t);
 	}, q = `${R}-title`;
 	return /* @__PURE__ */ l(a, {
@@ -50,6 +53,15 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 					id: q,
 					children: O
 				}) }),
+				S && /* @__PURE__ */ l("div", {
+					className: "notification-panel__mark-all-row",
+					children: /* @__PURE__ */ l(n, {
+						variant: "outline",
+						size: "sm",
+						onClick: W,
+						children: N
+					})
+				}),
 				v.length === 0 ? /* @__PURE__ */ l("div", {
 					className: "notification-panel__empty",
 					children: /* @__PURE__ */ l(i, {
@@ -99,15 +111,9 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 						}, n.id);
 					})
 				}),
-				/* @__PURE__ */ u("div", {
+				/* @__PURE__ */ l("div", {
 					className: "notification-panel__footer",
-					children: [S && /* @__PURE__ */ l(n, {
-						variant: "outline",
-						size: "sm",
-						className: "notification-panel__mark-all",
-						onClick: W,
-						children: N
-					}), /* @__PURE__ */ u("div", {
+					children: /* @__PURE__ */ u("div", {
 						className: "notification-panel__footer-links",
 						children: [T({
 							href: C,
@@ -118,7 +124,7 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 							className: _,
 							children: M
 						})]
-					})]
+					})
 				})
 			]
 		})

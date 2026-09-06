@@ -2,9 +2,8 @@
 // Do not edit directly, this file was auto-generated.
 
 $lxd-notification-panel-inline-size: min(22.5rem, calc(100vw - 2 * 1.5rem)); // Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas
-$lxd-notification-panel-padding-inline: 1rem; // Aire lateral de las filas y del pie: el mismo, para que todo alinee en una sola columna
-$lxd-notification-panel-separator-thickness: 1px; // Grosor de la línea que separa la lista del pie — el grosor de la línea del sistema
-$lxd-notification-panel-separator-color: #111e30; // Color de esa línea — el de la línea del sistema
+$lxd-notification-panel-padding-inline: 1rem; // Aire lateral de las filas, de la fila de marcar todas y del pie: el mismo, para que todo alinee en una sola columna
+$lxd-notification-panel-mark-all-padding-block: 0.75rem; // Aire vertical de la fila de «Marcar todas», encima de la lista
 $lxd-notification-panel-list-max-block-size: 21rem; // Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta
 $lxd-notification-panel-list-padding-block: 0.5rem; // Aire vertical de la lista dentro del panel
 $lxd-notification-panel-list-gap: 0.25rem; // Separación entre notificaciones. Las filas no llevan línea: se separan con aire, y la línea queda reservada al hover

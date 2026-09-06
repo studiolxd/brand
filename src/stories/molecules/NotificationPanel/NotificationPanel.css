@@ -139,14 +139,24 @@
   white-space: nowrap;
 }
 
+/* Fila propia encima de la lista, alineada al final: es una acción sobre el
+   conjunto, no una fila más de la lista ni un destino de servicio del pie. */
+.notification-panel__mark-all-row {
+  display: flex;
+  justify-content: flex-end;
+  padding-block: var(--notification-panel-mark-all-padding-block);
+  padding-inline: var(--notification-panel-padding-inline);
+}
+
 .notification-panel__empty {
   padding-block: var(--notification-panel-empty-padding-block);
   padding-inline: var(--notification-panel-padding-inline);
   text-align: center;
 }
 
-/* El pie se lee centrado: el botón de marcar todas y, debajo, los dos enlaces
-   utilitarios uno por línea — a 360 px no caben los dos en la misma. */
+/* El pie se lee centrado: los dos enlaces utilitarios uno por línea — a
+   360 px no caben los dos en la misma. Sin línea que lo separe de la lista:
+   el aire de su padding ya marca el cambio de bloque. */
 .notification-panel__footer {
   display: flex;
   flex-direction: column;
@@ -154,7 +164,6 @@
   gap: var(--notification-panel-footer-gap);
   padding-block: var(--notification-panel-footer-padding-block);
   padding-inline: var(--notification-panel-padding-inline);
-  border-block-start: var(--notification-panel-separator-thickness) solid var(--notification-panel-separator-color);
 }
 
 .notification-panel__footer-links {
