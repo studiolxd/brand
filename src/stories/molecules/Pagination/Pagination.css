@@ -60,6 +60,9 @@
    el chevron mida lo mismo que un «1»: si no, la fila de botones se ve
    descuadrada en los extremos. */
 .pagination__btn {
+  /* La caja incluye el borde: altura y lado mínimo miden lo que dice el
+     token (48 en lg), no 48 + 2 de borde. */
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -103,12 +106,6 @@
   font-weight: var(--pagination-btn-current-font-weight);
   cursor: default;
   pointer-events: none;
-}
-
-.pagination__btn.pagination__btn--nav {
-  /* Un chevrón no lleva inset lateral: la caja cuadrada ya lo centra, y en
-     lg icono + padding superaban el lado (50 > 48). */
-  padding-inline: 0;
 }
 
 .pagination__chevron--prev {
@@ -171,4 +168,13 @@
 
 .pagination.pagination--lg .pagination__btn {
   min-inline-size: var(--pagination-lg-btn-height);
+}
+
+/* Un chevrón no lleva inset lateral: la caja cuadrada ya lo centra, y en lg
+   icono + padding superaban el lado (50 > 48). Va al final y con la
+   especificidad de las reglas por talla, que también fijan padding-inline. */
+.pagination .pagination__btn.pagination__btn--nav,
+.pagination.pagination--sm .pagination__btn.pagination__btn--nav,
+.pagination.pagination--lg .pagination__btn.pagination__btn--nav {
+  padding-inline: 0;
 }

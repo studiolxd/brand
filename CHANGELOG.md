@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.4.3] — 2026-09-06
+
+- **`Pagination`: los chevrones cuadrados también en `sm` y `lg`.** La regla
+  por talla volvía a poner `padding-inline` a los chevrones; ahora la del
+  chevrón va al final con la misma especificidad. (32.4.1 y 32.4.2 lo
+  anunciaron sin conseguirlo; la caja además incluye el borde.)
+
 ## [32.4.2] — 2026-09-06
 
 - **`Pagination`: los chevrones sin inset lateral, de verdad** (la 32.4.1
