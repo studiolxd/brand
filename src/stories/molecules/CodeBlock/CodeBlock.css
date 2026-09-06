@@ -19,8 +19,30 @@
   margin-block-end: var(--code-block-header-gap);
 }
 
-.code-block__copy {
+.code-block__header .code-block__copy {
   margin-inline-start: auto;
+}
+
+/* Variante de una línea: el código a la izquierda con su propio scroll
+   horizontal y, a la derecha, el lenguaje y el botón de copiar centrados en
+   vertical — una sola fila, sin la cabecera aparte que dejaba un hueco vacío
+   encima del texto en un bloque corto. */
+.code-block__row {
+  display: flex;
+  align-items: center;
+  gap: var(--code-block-header-gap);
+}
+
+.code-block__row .code-block__pre {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.code-block__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--code-block-header-gap);
+  flex-shrink: 0;
 }
 
 /* El área de código hace su propio scroll horizontal: es focalizable con

@@ -7,7 +7,7 @@
   --code-padding-inline: var(--spacing-1); /** Aire horizontal, el único que se puede dar sin desalinear la línea */
   --code-font-family: var(--code-block-font-family); /** Monoespaciada (Google Sans Code) — la de CodeBlock: un fragmento en línea y un bloque suelto se ven igual */
   --code-font-size: var(--code-block-font-size); /** Tamaño del fragmento — el de CodeBlock (un peldaño por debajo del cuerpo) */
-  --code-bg: var(--code-block-bg); /** Fondo del fragmento — el de CodeBlock: par autocontenido, idéntico en las dos superficies */
+  --code-bg: var(--code-block-bg); /** Fondo del fragmento — el de CodeBlock, con su mismo par oscuro */
   --code-color: var(--code-block-color); /** Tinta del fragmento — la de CodeBlock */
   --code-border-radius: var(--code-block-border-radius); /** Esquina recta, como todo el sistema */
 }

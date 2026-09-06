@@ -7,6 +7,37 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+> **Minor.**
+
+- **`NotificationPanel`: «Marcar todas como leídas» sube encima de la lista.** Deja
+  de vivir en el pie (donde compartía fila con los enlaces de servicio) y pasa a una
+  fila propia justo encima de la lista, con el botón alineado al final. Sigue
+  dependiendo solo de `onMarkAllRead`: sin la prop no hay fila. El foco de apertura
+  sigue entrando por la primera notificación (no por este botón nuevo).
+- **`NotificationPanel`: fuera la línea entre la lista y el pie.** Ya no hay
+  `border-block-start` en el pie: el cambio de bloque lo marca solo el aire de su
+  padding. Se retiran los tokens `notification-panel.separator-thickness`,
+  `notification-panel.separator-color` y `notification-panel.surface-dark-separator-color`
+  (sin más uso); nuevo `notification-panel.mark-all-padding-block` para el aire de la
+  fila del botón.
+- **`CodeBlock`: variante de una línea.** Sin saltos de línea en `children` (o con la
+  prop explícita `singleLine`), el bloque pasa a ser una fila: el código a la
+  izquierda con su propio scroll horizontal y, a la derecha, el lenguaje y el botón
+  de copiar centrados en vertical — sin la cabecera aparte que dejaba un hueco vacío
+  encima del texto en un bloque corto (por ejemplo, una URL con botón de copiar).
+  Multilínea, o con nodos ya resaltados por un highlighter externo, se queda con la
+  cabecera de siempre.
+- **`CodeBlock`: fondo, borde y tinta pasan a su par oscuro.** Hasta ahora el bloque
+  se pintaba igual en `.surface-dark` que en claro (gris claro con tinta oscura), sin
+  contraste sobre fondo oscuro. Nuevos tokens `code-block.surface-dark-bg` (la misma
+  superficie clara secundaria, en su variante oscura — la que ya usan `Kbd` y el pie
+  de `Table`), `code-block.surface-dark-color` y `code-block.surface-dark-focus-ring-color`
+  (`color.text.on-dark`, por la regla de derivación); `code-block.surface-dark-border-color`
+  cambia de `color.primary` a `color.text.on-dark` por el mismo motivo. `Code` (el
+  átomo en línea) y `Prose` heredan el par nuevo sin cambios propios, por referencia.
+
 ## [32.1.0] — 2026-09-06
 
 > **Minor.**

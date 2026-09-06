@@ -7,6 +7,16 @@ export interface CodeBlockProps extends React.ComponentPropsWithoutRef<'div'> {
     /** Muestra un botón de copiar al portapapeles en la cabecera. Default: `false`. */
     copyable?: boolean;
     /**
+     * Fuerza la variante de una línea (código a la izquierda con su propio
+     * scroll horizontal, lenguaje y botón de copiar a la derecha, centrados en
+     * vertical, sin cabecera aparte) o la multilínea (cabecera arriba, código
+     * debajo). Sin la prop se detecta solo: `children` como cadena sin saltos
+     * de línea es una línea; con saltos de línea, o con nodos ya resaltados por
+     * un highlighter externo (no se pueden inspeccionar como cadena), es
+     * multilínea.
+     */
+    singleLine?: boolean;
+    /**
      * aria-label del botón de copiar. Default: "Copiar código" (castellano).
      * Una app multiidioma debe pasarla traducida.
      */
@@ -29,4 +39,4 @@ export interface CodeBlockProps extends React.ComponentPropsWithoutRef<'div'> {
  * botón de copiar opcionales. Extiende los atributos nativos de `<div>` y
  * reenvía `{...rest}` al raíz.
  */
-export declare function CodeBlock({ children, language, copyable, copyLabel, copiedLabel, codeLabel, className, ...rest }: CodeBlockProps): import("react/jsx-runtime").JSX.Element;
+export declare function CodeBlock({ children, language, copyable, singleLine, copyLabel, copiedLabel, codeLabel, className, ...rest }: CodeBlockProps): import("react/jsx-runtime").JSX.Element;
