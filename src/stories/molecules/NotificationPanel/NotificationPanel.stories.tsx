@@ -191,7 +191,8 @@ export const ContratoMarcarTodasEncimaDeLaLista: Story = {
     const filaRect = fila.getBoundingClientRect();
     const botonRect = boton.getBoundingClientRect();
     const paddingEnd = parseFloat(getComputedStyle(fila).paddingInlineEnd);
-    await expect(botonRect.right).toBeCloseTo(filaRect.right - paddingEnd, 0);
+    // Tolerancia de un píxel: el redondeo subpíxel del navegador.
+    await expect(Math.abs(botonRect.right - (filaRect.right - paddingEnd))).toBeLessThanOrEqual(1);
 
     // Y sigue entrando el foco por la primera notificación, no por el botón.
     await waitFor(() => expect(primeraFila).toHaveFocus());
