@@ -4,10 +4,14 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # Páginas públicas
 
-Las pantallas públicas de la suite —acceso, registro, recuperar contraseña, verificar correo, aceptar invitación, contacto— **montadas con piezas del DS y datos falsos**: `SiteShell` + `SiteHeader` + `Container` + `Columns` + `PageIntro` + `Form`/`*Field` + `LegalFooter`. Sin lógica: sin react-hook-form real, sin Better Auth, sin router.
+Las pantallas públicas de la suite —acceso, segundo factor, enlace mágico enviado, registro, recuperar contraseña, verificar correo, aceptar invitación, contacto— **montadas con piezas del DS y datos falsos**: `SiteShell` + `SiteHeader` + `Container` + `Columns` + `PageIntro` + `Form`/`*Field` + `LegalFooter`. Sin lógica: sin react-hook-form real, sin Better Auth, sin router.
 
 Son **la norma**: si hub las monta distinto, hub está mal. Sirven para ver el conjunto (ritmo vertical, tallas `lg`, dos columnas, móvil, superficie oscura) sin arrancar la aplicación, y para probar el contrato a nivel página (un solo `h1`, `main#main-content`, el salto de `AppRoot`).
 
 Cada página lleva controles para lo que puede aparecer: proveedores de acceso con terceros, captcha, enlace mágico, registro abierto o cerrado, error del servidor, estado (enviado, con sesión, inválida…).
+
+**El acceso son tres pantallas, no una.** `/sign-in` puede acabar en el formulario de siempre, en el segundo factor (**Pages › Segundo factor**) o en el aviso del enlace mágico (**Pages › Enlace mágico enviado**). Las tres comparten el `h1` de la página —«Inicia sesión»—: no son páginas distintas, son tramos del mismo paso, y por eso el título del segundo factor es un `h2` dentro de la columna del formulario. Lo mismo pasa con la invitación caída: cambia según haya sesión o no (**Pages › Aceptar invitación**, estados «Inválida» e «Inválida con sesión»), porque sin sesión la salida es volver al acceso y con sesión es el panel.
+
+Los textos son los de los catálogos de hub (`packages/messages/messages/es.json` › `auth.*`), copiados tal cual: si aquí se leen raros, se arreglan allí.
 
 Lo que **no** va aquí: los formularios reales de hub (`SignInForm`…), con su validación, i18n y Better Auth. Eso es producto y vive en hub con sus tests.
