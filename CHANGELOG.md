@@ -7,6 +7,11 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.4.2] — 2026-09-06
+
+- **`Pagination`: los chevrones sin inset lateral, de verdad** (la 32.4.1
+  anunció el arreglo sin aplicarlo).
+
 ## [32.4.1] — 2026-09-06
 
 - **`Pagination`: los chevrones sin inset lateral.** En talla `lg` icono +

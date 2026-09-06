@@ -105,6 +105,12 @@
   pointer-events: none;
 }
 
+.pagination__btn.pagination__btn--nav {
+  /* Un chevrón no lleva inset lateral: la caja cuadrada ya lo centra, y en
+     lg icono + padding superaban el lado (50 > 48). */
+  padding-inline: 0;
+}
+
 .pagination__chevron--prev {
   transform: rotate(180deg);
 }
