@@ -7,6 +7,43 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+> **Minor.**
+
+- **`PublicPageShell`: ranura `preferences`.** La banda de «idioma + tema» que el
+  panel de estado y el alta montaban cada uno por su cuenta pasa a ser del marco.
+  Nueva prop `preferences?: ReactNode` —se le pasan los conmutadores sueltos— que
+  pinta una `section` con nombre accesible (`preferencesLabel`, «Preferencias» por
+  defecto) **entre el contenido y el `footer`**, al ancho de página, con los
+  controles alineados al final y con envoltura. Va en su propio `ErrorBoundary`,
+  como `header` y `footer`; con `shell={false}` no se pinta, porque no hay ranura
+  de pie donde ponerla. Tokens nuevos: `public-page-shell.preferences-padding-block`
+  (→ `legal-footer.padding-block`, el aire del pie público) y
+  `public-page-shell.preferences-gap` (→ `spacing.3`).
+- **`OnboardingShell` usa esa ranura por debajo.** Nueva prop `preferences`, con
+  `switchers` conservada como **alias** (si se pasan las dos, manda `preferences`)
+  para no romper a quien ya la usa. Con marco, la banda la pinta ahora
+  `PublicPageShell`: desaparecen la clase `.onboarding-shell__settings--band` y el
+  envoltorio `.onboarding-shell__switchers`, y con ellos el token
+  `onboarding-shell.settings-padding-block` (sin más uso: el aire lo decide el
+  marco, y sigue saliendo de `legal-footer.padding-block`). Sin marco
+  (`shell={false}`) las preferencias vuelven a la columna del alta, ahora con
+  nombre accesible. Nueva prop `preferencesLabel`.
+- **`Pages/Estado del servicio` usa la ranura.** La página deja de montar su
+  `Container as="section"` + `Inline` a mano: solo pasa los dos conmutadores. La
+  banda cierra con el aire del pie público (24px) en vez del `space="sm"` (12px)
+  que tenía cuando la montaba ella.
+- **Fundamentos › Tipografía: «Un enlace dentro de un título».** Cuándo vale meter
+  un `Link` dentro de un `Heading` (el «nombre (dominio)» del panel de estado), por
+  qué no se envuelve el título entero, cómo queda el nombre accesible de cada uno,
+  dónde va la puntuación y por qué el subrayado no se quita.
+- **Tres pantallas públicas de hub, con story.** `Pages/Segundo factor` (el
+  `OtpField` de seis dígitos, el código de recuperación y las dos salidas en
+  `outline`), `Pages/Enlace mágico enviado` (el aviso que sustituye al formulario)
+  y el estado «Inválida con sesión» de `Pages/Aceptar invitación` (con quién se
+  entró y una sola salida, al panel). Textos copiados de los catálogos de hub.
+
 ## [32.2.0] — 2026-09-06
 
 > **Minor.**

@@ -1,23 +1,34 @@
 'use client';
+import './public-page-shell.css';
 import { Container as e } from "./container.js";
 import { ErrorBoundary as t } from "./error-boundary.js";
 import { SiteShell as n } from "./site-shell.js";
-import { Fragment as r, jsx as i } from "react/jsx-runtime";
-import { forwardRef as a } from "react";
+import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
+import { forwardRef as o } from "react";
 //#region src/stories/templates/PublicPageShell/PublicPageShell.tsx
-var o = a(function({ children: a, header: o, footer: s, id: c = "main-content", shell: l = !0 }, u) {
-	return l ? /* @__PURE__ */ i(n, {
-		ref: u,
-		header: o && /* @__PURE__ */ i(t, { children: o }),
-		footer: s && /* @__PURE__ */ i(t, { children: s }),
+var s = o(function({ children: o, header: s, footer: c, preferences: l, preferencesLabel: u = "Preferencias", id: d = "main-content", shell: f = !0 }, p) {
+	if (!f) return /* @__PURE__ */ i(r, { children: o });
+	let m = l && /* @__PURE__ */ i(e, {
+		as: "section",
+		className: "public-page-shell__preferences",
+		"aria-label": u,
+		children: /* @__PURE__ */ i("div", {
+			className: "public-page-shell__preferences-row",
+			children: l
+		})
+	});
+	return /* @__PURE__ */ i(n, {
+		ref: p,
+		header: s && /* @__PURE__ */ i(t, { children: s }),
+		footer: (m || c) && /* @__PURE__ */ a(r, { children: [m && /* @__PURE__ */ i(t, { children: m }), c && /* @__PURE__ */ i(t, { children: c })] }),
 		children: /* @__PURE__ */ i(e, {
 			as: "main",
-			id: c,
+			id: d,
 			tabIndex: -1,
 			space: "xl",
-			children: a
+			children: o
 		})
-	}) : /* @__PURE__ */ i(r, { children: a });
+	});
 });
 //#endregion
-export { o as PublicPageShell };
+export { s as PublicPageShell };

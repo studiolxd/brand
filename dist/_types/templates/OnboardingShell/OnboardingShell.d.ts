@@ -13,13 +13,24 @@ export interface OnboardingShellProps {
      */
     brand?: ReactNode;
     /**
-     * Las preferencias globales de la pantalla: idioma y tema. Se pintan en un
-     * **pie de chrome propio**, al final y separadas del pie de acciones del
-     * paso — una preferencia global no es una acción del flujo y no puede
-     * parecerlo. En el alta no hay cabecera pública —el usuario ya tiene sesión,
-     * no hay nada que navegar—, así que estos dos son todo el chrome que queda.
+     * Las preferencias globales de la pantalla: idioma y tema. Se pintan en la
+     * **banda de preferencias del marco** (`PublicPageShell`), al final y
+     * separadas del pie de acciones del paso — una preferencia global no es una
+     * acción del flujo y no puede parecerlo. En el alta no hay cabecera pública
+     * —el usuario ya tiene sesión, no hay nada que navegar—, así que estos dos
+     * son todo el chrome que queda.
+     */
+    preferences?: ReactNode;
+    /**
+     * Alias histórico de `preferences`, de cuando el alta montaba la banda por
+     * su cuenta. Se conserva para no romper a quien ya lo pasa; en pantallas
+     * nuevas, `preferences`. Si se pasan los dos, manda `preferences`.
+     *
+     * @deprecated Usa `preferences`.
      */
     switchers?: ReactNode;
+    /** Nombre accesible de la banda de preferencias. Default: «Preferencias» (castellano). */
+    preferencesLabel?: string;
     /**
      * El progreso: un `Stepper`. La ranura se monta siempre; es el `Stepper`
      * quien decide no pintarse cuando el flujo tiene un solo paso.
@@ -84,4 +95,4 @@ export interface OnboardingShellProps {
  * dentro —un `Form`, un campo suelto, un `AvatarUpload`— sale a la talla que
  * le toca sin que la aplicación tenga que acordarse de pedirla.
  */
-export declare function OnboardingShell({ children, brand, switchers, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function OnboardingShell({ children, brand, preferences, switchers, preferencesLabel, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;
