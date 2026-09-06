@@ -22,8 +22,6 @@ export interface NotificationPanelItem {
   time: string;
   /** Sin leer: punto, peso en el título y tinta plena. */
   unread: boolean;
-  /** Destino de la notificación. Con él aparece el enlace «Ver»; sin él, la fila no navega a ninguna parte. */
-  link?: string;
 }
 
 /** Lo que el panel pasa al `Link` del router de la aplicación. */
@@ -52,8 +50,8 @@ export interface NotificationPanelProps {
   /** Tope del contador de la campana («99+»). */
   max?: number;
   /**
-   * Se llama al pulsar una fila sin leer, y también al pulsar su enlace «Ver».
-   * El panel la pinta como leída en el sitio sin esperar respuesta.
+   * Se llama al pulsar una fila sin leer. El panel la pinta como leída en el
+   * sitio sin esperar respuesta.
    */
   onRead: (id: string) => void;
   /** Con ella el pie pinta «Marcar todas como leídas»; sin ella, no. */
@@ -73,12 +71,13 @@ export interface NotificationPanelProps {
   label?: string;
   /** Nombre accesible de la campana con contador. Recibe el número. Default castellano. */
   countLabel?: (count: number) => string;
-  /** Nombre del panel (`role="dialog"`) y título visible de la cabecera. Default «Notificaciones». */
+  /**
+   * Nombre del panel (`role="dialog"`) y de la lista. **No se pinta**: el
+   * panel no lleva cabecera visible. Default «Notificaciones».
+   */
   panelLabel?: string;
   /** Texto solo para lectores de pantalla que marca una fila sin leer. Default «Sin leer». */
   unreadLabel?: string;
-  /** Rótulo del enlace de una notificación con destino. Default «Ver». */
-  viewLabel?: string;
   /** Mensaje cuando no hay notificaciones. Default «Estás al día». */
   emptyLabel?: string;
   /** Rótulo del enlace a la bandeja. Default «Ver todas las notificaciones». */
@@ -95,9 +94,9 @@ export interface NotificationPanelProps {
   className?: string;
 }
 
-// Reenvía TODO lo que recibe: el panel pone clase, `onClick` y el nombre
-// accesible compuesto del enlace «Ver». Un renderLink que solo copie `href`
-// rompe las tres cosas.
+// Reenvía TODO lo que recibe: el panel pone clase y, cuando toca, `onClick`.
+// Un renderLink que solo copie `href` se deja por el camino la cara del
+// enlace de tinta del pie.
 function defaultRenderLink({ children, ...props }: NotificationPanelLinkProps) {
   return <a {...props}>{children}</a>;
 }
@@ -105,15 +104,18 @@ function defaultRenderLink({ children, ...props }: NotificationPanelLinkProps) {
 /** Lo primero que se puede enfocar dentro del panel: la primera fila, o el pie si no hay filas. */
 const FOCUSABLE = 'button, a[href]';
 
+/** Los enlaces del pie visten el tono de tinta del átomo `Link`. */
+const FOOTER_LINK_CLASS = 'link--ink notification-panel__footer-link';
+
 /**
  * La campana de la barra con su panel: al pulsarla se abre un `Popover`
  * anclado al botón con el adelanto de las últimas notificaciones, y debajo
  * los enlaces a la bandeja y a las preferencias.
  *
  * Es un **adelanto**, no la bandeja: aquí se lee y se marca leído, y lo único
- * que navega es el enlace de cada notificación. Pulsar una fila la marca
- * leída y la deja donde está —el panel no se reordena bajo el dedo—; al
- * cerrarlo, la lista vuelve a ser la que diga el consumidor.
+ * que navega son los dos enlaces del pie. Pulsar una fila la marca leída y la
+ * deja donde está —el panel no se reordena bajo el dedo—; al cerrarlo, la
+ * lista vuelve a ser la que diga el consumidor.
  */
 export function NotificationPanel({
   items = [],
@@ -128,7 +130,6 @@ export function NotificationPanel({
   countLabel,
   panelLabel = 'Notificaciones',
   unreadLabel = 'Sin leer',
-  viewLabel = 'Ver',
   emptyLabel = 'Estás al día',
   allLabel = 'Ver todas las notificaciones',
   preferencesLabel = 'Preferencias de notificaciones',
@@ -186,11 +187,13 @@ export function NotificationPanel({
       className={['notification-panel', className].filter(Boolean).join(' ')}
     >
       <div className="notification-panel__body" ref={panelRef}>
-        <div className="notification-panel__header">
-          <Heading level={2} size={3} id={headingId} className="notification-panel__title">
+        {/* El panel no lleva cabecera visible: el título se queda solo para
+            nombrar la lista y para quien lee con lector de pantalla. */}
+        <VisuallyHidden>
+          <Heading level={2} size={3} id={headingId}>
             {panelLabel}
           </Heading>
-        </div>
+        </VisuallyHidden>
 
         {items.length === 0 ? (
           <div className="notification-panel__empty">
@@ -201,7 +204,6 @@ export function NotificationPanel({
             {items.map((item, index) => {
               const unread = isUnread(item);
               const titleId = `${baseId}-t-${index}`;
-              const viewId = `${baseId}-v-${index}`;
               return (
                 <li key={item.id} className="notification-panel__item">
                   {/* Ya leída, la fila sigue enfocable pero no hace nada:
@@ -223,40 +225,30 @@ export function NotificationPanel({
                       )}
                     </span>
                     <span className="notification-panel__item-text">
-                      <Text
-                        id={titleId}
-                        tone={unread ? 'default' : 'muted'}
-                        className={[
-                          'notification-panel__item-title',
-                          unread ? 'notification-panel__item-title--unread' : '',
-                        ].filter(Boolean).join(' ')}
-                      >
-                        {item.title}
-                      </Text>
+                      {/* Título y fecha comparten línea: la fecha se va al
+                          extremo y no roba altura a la fila. */}
+                      <span className="notification-panel__item-head">
+                        <Text
+                          id={titleId}
+                          tone={unread ? 'default' : 'muted'}
+                          className={[
+                            'notification-panel__item-title',
+                            unread ? 'notification-panel__item-title--unread' : '',
+                          ].filter(Boolean).join(' ')}
+                        >
+                          {item.title}
+                        </Text>
+                        <Text tone="muted" className="notification-panel__item-time">
+                          {item.time}
+                        </Text>
+                      </span>
                       {item.body && (
                         <Text tone="muted" className="notification-panel__item-body">
                           {item.body}
                         </Text>
                       )}
-                      <Text tone="muted" className="notification-panel__item-time">
-                        {item.time}
-                      </Text>
                     </span>
                   </button>
-
-                  {/* Lo único que navega. Su nombre accesible se compone de su
-                      propio rótulo y del título de la notificación, con los
-                      nodos que ya existen: así «Ver» no se repite suelto y el
-                      orden lo pone el idioma, no una plantilla de texto. */}
-                  {item.link !== undefined &&
-                    renderLink({
-                      href: item.link,
-                      id: viewId,
-                      className: 'notification-panel__view',
-                      'aria-labelledby': `${viewId} ${titleId}`,
-                      onClick: () => markRead(item),
-                      children: viewLabel,
-                    })}
                 </li>
               );
             })}
@@ -266,7 +258,7 @@ export function NotificationPanel({
         <div className="notification-panel__footer">
           {onMarkAllRead && (
             <Button
-              variant="text"
+              variant="outline"
               size="sm"
               className="notification-panel__mark-all"
               onClick={markAll}
@@ -274,11 +266,14 @@ export function NotificationPanel({
               {markAllReadLabel}
             </Button>
           )}
+          {/* Los dos enlaces del pie son utilitarios, no acciones de marca:
+              van en tinta (`link--ink`, el tono del átomo `Link`) y uno por
+              línea, que es lo que cabe centrado a 360 px. */}
           <div className="notification-panel__footer-links">
-            {renderLink({ href: allHref, className: 'notification-panel__footer-link', children: allLabel })}
+            {renderLink({ href: allHref, className: FOOTER_LINK_CLASS, children: allLabel })}
             {renderLink({
               href: preferencesHref,
-              className: 'notification-panel__footer-link',
+              className: FOOTER_LINK_CLASS,
               children: preferencesLabel,
             })}
           </div>

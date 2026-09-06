@@ -12,6 +12,13 @@ declare module '@tanstack/react-table' {
          * `start`. Números a `end`; acciones y estados a `center`.
          */
         align?: DataTableAlign;
+        /**
+         * La cabecera de la columna se pinta **solo para lectores de pantalla**:
+         * el `header` sigue nombrando la columna, pero no se ve. Es lo que lleva
+         * la columna de acciones, cuyo rótulo no aporta nada a quien ve los
+         * botones. La celda de cabecera sigue ahí, con su alineación.
+         */
+        headerHidden?: boolean;
     }
 }
 /**

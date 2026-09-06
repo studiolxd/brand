@@ -6,8 +6,7 @@
   --notification-panel-list-max-block-size: 21rem; /** Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta */
   --notification-panel-item-body-line-clamp: 2; /** Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja */
   --notification-panel-inline-size: min(22.5rem, calc(100vw - 2 * var(--spacing-5))); /** Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas */
-  --notification-panel-padding-inline: var(--spacing-4); /** Aire lateral de la cabecera, de las filas y del pie: el mismo, para que todo alinee en una sola columna */
-  --notification-panel-header-padding-block: var(--spacing-3); /** Aire vertical de la cabecera */
+  --notification-panel-padding-inline: var(--spacing-4); /** Aire lateral de las filas y del pie: el mismo, para que todo alinee en una sola columna */
   --notification-panel-list-padding-block: var(--spacing-2); /** Aire vertical de la lista dentro del panel */
   --notification-panel-list-gap: var(--spacing-1); /** Separación entre notificaciones. Las filas no llevan línea: se separan con aire, y la línea queda reservada al hover */
   --notification-panel-item-padding-block: var(--spacing-2); /** Aire vertical de cada notificación */
@@ -29,21 +28,20 @@
   --notification-panel-item-read-font-weight: var(--font-weight-default); /** Peso del título ya leído: el del cuerpo de texto */
   --notification-panel-item-body-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie */
   --notification-panel-item-time-font-size: var(--text-paragraph-small-font-size); /** Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`) */
-  --notification-panel-item-hover-line-width: var(--border-width-default); /** Grosor de la línea que aparece bajo la fila con el puntero encima. Los estados no se rellenan (Foundations → Colores): se dicen con línea */
-  --notification-panel-item-hover-line-color: var(--color-primary); /** Color de esa línea: el prusia del sistema */
+  --notification-panel-item-hover-marker-width: var(--border-width-focus); /** Grosor de la barra que marca la fila bajo el puntero. Los estados no se rellenan (Foundations → Colores) y una fila no es un enlace, así que tampoco se subraya: se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la fila interactiva de `Table` */
+  --notification-panel-item-hover-marker-color: var(--color-primary); /** Color de esa barra: el prusia del sistema */
   --notification-panel-dot-color: var(--color-error-fill); /** Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones */
-  --notification-panel-view-font-size: var(--text-paragraph-small-font-size); /** Tamaño del enlace «Ver» de una notificación con destino: letra menor, como el pie */
   --notification-panel-footer-font-size: var(--text-paragraph-small-font-size); /** Tamaño de los enlaces del pie: letra menor */
   --notification-panel-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco de una fila */
   --notification-panel-focus-ring-color: var(--color-primary); /** Color del anillo de foco de una fila */
-  --notification-panel-separator-thickness: var(--separator-thickness); /** Grosor de las dos líneas que enmarcan la lista (bajo la cabecera y sobre el pie) — el grosor de la línea del sistema */
-  --notification-panel-separator-color: var(--separator-color); /** Color de esas dos líneas — el de la línea del sistema */
+  --notification-panel-separator-thickness: var(--separator-thickness); /** Grosor de la línea que separa la lista del pie — el grosor de la línea del sistema */
+  --notification-panel-separator-color: var(--separator-color); /** Color de esa línea — el de la línea del sistema */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --notification-panel-separator-color: var(--color-text-on-dark); /** Color de las líneas que enmarcan la lista — superficie oscura */
-  --notification-panel-item-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover de la fila — superficie oscura */
+  --notification-panel-separator-color: var(--color-text-on-dark); /** Color de la línea del pie — superficie oscura */
+  --notification-panel-item-hover-marker-color: var(--color-text-on-dark); /** Color de la barra de hover de la fila — superficie oscura */
   --notification-panel-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */
 }

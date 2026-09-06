@@ -8,7 +8,7 @@ import {
 } from './NotificationPanel';
 
 const items: NotificationPanelItem[] = [
-  { id: '1', title: 'Marta ha comentado', body: 'Revisa la fase 2', time: 'hace 5 min', unread: true, link: '/c/1' },
+  { id: '1', title: 'Marta ha comentado', body: 'Revisa la fase 2', time: 'hace 5 min', unread: true },
   { id: '2', title: 'Vacaciones aprobadas', time: 'hace 2 h', unread: true },
   { id: '3', title: 'Parte de horas', time: 'ayer', unread: false },
 ];
@@ -58,7 +58,7 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
     const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
     expect(bell).toHaveAttribute('aria-expanded', 'true');
     expect(bell).toHaveAttribute('aria-controls', panel.id);
-    // La lista se llama con el título visible de la cabecera.
+    // La lista se llama con el título del panel, que ya no se pinta.
     expect(within(panel).getByRole('list', { name: 'Notificaciones' })).toBeInTheDocument();
   });
 
@@ -88,7 +88,6 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
       panelLabel: 'Notifications',
       allLabel: 'See all notifications',
       preferencesLabel: 'Notification preferences',
-      viewLabel: 'View',
       unreadLabel: 'Unread',
       label: 'Notifications',
       countLabel: (n) => `Notifications: ${n} unread`,
@@ -97,7 +96,17 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
     const panel = await screen.findByRole('dialog', { name: 'Notifications' });
     expect(within(panel).getByRole('link', { name: 'See all notifications' })).toBeInTheDocument();
     expect(within(panel).getByRole('link', { name: 'Notification preferences' })).toBeInTheDocument();
-    expect(within(panel).getByRole('link', { name: 'View Marta ha comentado' })).toBeInTheDocument();
+  });
+
+  it('el título del panel no se pinta: nombra el diálogo y la lista y nada más', async () => {
+    const user = userEvent.setup();
+    setup();
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+
+    const titulo = within(panel).getByRole('heading', { name: 'Notificaciones' });
+    expect(titulo.closest('.visually-hidden')).not.toBeNull();
+    expect(within(panel).getByRole('list', { name: 'Notificaciones' })).toBeInTheDocument();
   });
 });
 
@@ -131,16 +140,6 @@ describe('NotificationPanel — marcar leído', () => {
     expect(onRead).not.toHaveBeenCalled();
   });
 
-  it('el enlace «Ver» también marca leído', async () => {
-    const user = userEvent.setup();
-    const { onRead } = setup();
-    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
-    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
-
-    await user.click(within(panel).getByRole('link', { name: 'Ver Marta ha comentado' }));
-    expect(onRead).toHaveBeenCalledWith('1');
-  });
-
   it('al cerrar el panel se olvida lo marcado aquí: manda otra vez el consumidor', async () => {
     const user = userEvent.setup();
     setup();
@@ -158,6 +157,31 @@ describe('NotificationPanel — marcar leído', () => {
 });
 
 describe('NotificationPanel — pie y estado vacío', () => {
+  it('los únicos enlaces son los dos del pie, y van en tinta', async () => {
+    const user = userEvent.setup();
+    setup();
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+
+    // Ninguna fila navega: pulsarla solo marca leído.
+    const enlaces = within(panel).getAllByRole('link');
+    expect(enlaces.map((a) => a.textContent)).toEqual([
+      'Ver todas las notificaciones',
+      'Preferencias de notificaciones',
+    ]);
+    for (const enlace of enlaces) expect(enlace).toHaveClass('link--ink');
+  });
+
+  it('«Marcar todas como leídas» es un botón de contorno', async () => {
+    const user = userEvent.setup();
+    setup({ onMarkAllRead: vi.fn() });
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    expect(within(panel).getByRole('button', { name: 'Marcar todas como leídas' })).toHaveClass(
+      'button--outline',
+    );
+  });
+
   it('sin `onMarkAllRead` el pie no pinta el botón; con ella, sí, y marca todas', async () => {
     const user = userEvent.setup();
     const onMarkAllRead = vi.fn();

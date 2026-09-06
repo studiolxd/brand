@@ -169,6 +169,31 @@ describe('DataTable', () => {
     expect(celdas[3]).toHaveClass('data-table__cell--center');
   });
 
+  it('con `meta.headerHidden` el rótulo solo lo leen los lectores de pantalla, y la celda sigue ahí', () => {
+    const conAcciones: ColumnDef<Row, unknown>[] = [
+      { accessorKey: 'name', header: 'Nombre' },
+      {
+        id: 'acciones',
+        header: 'Acciones',
+        cell: () => <button type="button">Abrir</button>,
+        meta: { align: 'center', headerHidden: true },
+      },
+    ];
+    render(<DataTable columns={conAcciones} data={data.slice(0, 1)} />);
+
+    const cabeceras = screen.getAllByRole('columnheader');
+    expect(cabeceras).toHaveLength(2);
+    // La columna sigue nombrada: lo que cambia es que no se ve.
+    expect(cabeceras[1]).toHaveTextContent('Acciones');
+    expect(cabeceras[1].querySelector('.visually-hidden')).toHaveTextContent('Acciones');
+    // Y conserva su alineación.
+    expect(cabeceras[1]).toHaveClass('data-table__header-cell--center');
+    // Sin la meta, el rótulo se pinta a la vista: lo único oculto de esa
+    // cabecera es el texto de estado que pone `Table.Header` si es ordenable.
+    const ocultos = [...cabeceras[0].querySelectorAll('.visually-hidden')];
+    expect(ocultos.map((nodo) => nodo.textContent)).not.toContain('Nombre');
+  });
+
   it('pinta las acciones del pie cuando llegan, no cuando no', () => {
     const { rerender } = render(<DataTable columns={columns} data={data} pageSize={5} />);
     expect(screen.queryByRole('button', { name: 'Exportar' })).not.toBeInTheDocument();

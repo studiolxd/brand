@@ -7,6 +7,51 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+> **Major.** Retira `NotificationPanelItem['link']` y la prop `viewLabel`: el próximo
+> tag es `v32.0.0`.
+
+- **`NotificationPanel`: el panel pierde la cabecera, y la fila el enlace.** Cuatro
+  decisiones que le cambian la cara y una que le cambia la API:
+  - **El título «Notificaciones» ya no se pinta.** `panelLabel` sigue nombrando el
+    `role="dialog"` y, dentro de un `VisuallyHidden`, la `<ul>` — pero la cabecera
+    entera (con su línea y su aire) desaparece: la campana que se acaba de pulsar ya
+    dice qué es esto. La lista empieza en el borde de arriba del panel, sin hueco.
+    Fuera el token `notification-panel.header-padding-block`, y `separator-*` pasa a
+    describir solo la línea del pie.
+  - **Fuera el enlace «Ver» de cada notificación** (*breaking*). Se retiran el campo
+    `link` de `NotificationPanelItem`, la prop de texto `viewLabel`, el nodo
+    `.notification-panel__view` y el token `notification-panel.view-font-size`. Del
+    panel no se navega a una notificación: pulsar la fila la marca leída y la deja
+    donde está, y lo único que navega son los dos enlaces del pie. **Migración:** basta
+    con dejar de pasar `link` en los `items` (y `viewLabel`, si se pasaba); nada más
+    cambia. El único consumidor conocido es el `NotificationBell` de `@slxd/app-shell`,
+    que lo pasa en una línea.
+  - **La fila ya no se subraya en hover.** Una fila no es un enlace: bajo el puntero se
+    marca con la **barra de tinta en su borde de inicio**, el mismo grafismo que la fila
+    interactiva de `Table` y que la sección activa del `SidebarNav` en rail. Los tokens
+    `item-hover-line-{width,color}` pasan a `item-hover-marker-{width,color}` (y su par
+    `surface-dark-`), y el grosor sube de `border-width.default` a `border-width.focus`,
+    el de la barra de `Table`.
+  - **La fecha relativa se va al extremo derecho de la línea del título.** El título y
+    la fecha comparten línea en un nodo nuevo, `.notification-panel__item-head`: el
+    título se encoge, la fecha se queda entera y la fila baja una línea de alto.
+  - **El pie se lee centrado.** «Marcar todas como leídas» pasa de `Button variant="text"`
+    a `variant="outline"` —es una acción sobre el conjunto, no un enlace— y los dos
+    enlaces (bandeja y preferencias) van en **tono tinta** (`link--ink`, la variante
+    utilitaria del átomo `Link`), centrados y uno por línea: a 360 px los dos rótulos no
+    caben en la misma. Fuera el remapeo `--button-sm-font-size` del botón.
+  Sin colores nuevos: todos los tokens tocados siguen apuntando por referencia a roles
+  que ya existían.
+- **`DataTable`: la columna de acciones sin rótulo visible.** Nueva entrada en el `meta`
+  de columna (module augmentation de `ColumnMeta`, junto a `align`):
+  `headerHidden?: boolean`. Con ella el `header` se sigue pintando, pero dentro de
+  `VisuallyHidden`: la columna conserva su nombre para quien lee con lector de pantalla
+  —dejar el `header` vacío la deja sin nombre que anunciar— y la celda de cabecera sigue
+  en la fila con su alineación. **La columna de acciones se escribe siempre así:**
+  `meta: { align: 'center', headerHidden: true }`. Sin tokens ni CSS nuevos.
+
 ## [31.4.0] — 2026-09-05
 
 - **`Modal`: el aspa se alinea con la primera línea del título.** La cabecera del

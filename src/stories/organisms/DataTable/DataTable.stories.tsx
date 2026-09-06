@@ -146,7 +146,7 @@ const alignedColumns: ColumnDef<Invoice, unknown>[] = [
     cell: () => (
       <Button variant="text" size="sm">Ver</Button>
     ),
-    meta: { align: 'center' },
+    meta: { align: 'center', headerHidden: true },
   },
 ];
 
@@ -158,6 +158,55 @@ export const ColumnasAlineadas: StoryObj<typeof InvoiceTable> = {
   render: (args) => (
     <InvoiceTable {...args} columns={alignedColumns} data={invoices} pageSize={5} />
   ),
+};
+
+// La columna de acciones, tal y como se escribe siempre: centrada y con el
+// rótulo solo para lectores de pantalla.
+const columnsConAcciones: ColumnDef<Member, unknown>[] = [
+  ...columns,
+  {
+    id: 'actions',
+    header: 'Acciones',
+    enableSorting: false,
+    cell: () => (
+      <Button variant="text" size="sm">Editar</Button>
+    ),
+    meta: { align: 'center', headerHidden: true },
+  },
+];
+
+/**
+ * La columna de acciones no enseña su rótulo: los botones ya dicen lo que
+ * hacen, y «Acciones» solo ocupaba sitio en la cabecera. Con
+ * `meta: { headerHidden: true }` el `header` se sigue pintando —dentro de
+ * `VisuallyHidden`—, así que la columna conserva su nombre para quien lee con
+ * lector de pantalla y su celda de cabecera sigue en la fila con su
+ * alineación.
+ */
+export const AccionesSinRotulo: Story = {
+  name: 'Acciones sin rótulo',
+  args: { columns: columnsConAcciones, data: data.slice(0, 4), pageSize: 5 },
+};
+
+/** Test: el rótulo no se ve, pero sigue nombrando la columna. */
+export const ContratoAccionesSinRotulo: Story = {
+  name: 'Test — el rótulo de acciones solo lo leen los lectores de pantalla',
+  tags: ['!dev'],
+  args: { columns: columnsConAcciones, data: data.slice(0, 4), pageSize: 5 },
+  play: async ({ canvasElement }) => {
+    const cabeceras = canvasElement.querySelectorAll('thead th');
+    // La celda de cabecera sigue ahí: una por columna, acciones incluida.
+    await expect(cabeceras).toHaveLength(4);
+
+    const acciones = cabeceras[3] as HTMLElement;
+    await expect(acciones.textContent).toContain('Acciones');
+    // Y no ocupa: el texto está en un nodo de 1×1 px fuera de la vista.
+    const rotulo = acciones.querySelector('.visually-hidden') as HTMLElement;
+    await expect(rotulo).not.toBeNull();
+    await expect(rotulo.getBoundingClientRect().height).toBeLessThan(2);
+    // La alineación de la columna se conserva.
+    await expect(acciones.classList.contains('data-table__header-cell--center')).toBe(true);
+  },
 };
 
 export const Cargando: Story = {

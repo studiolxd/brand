@@ -10,7 +10,6 @@ const items: NotificationPanelItem[] = [
     body: '«Me cuadra el enfoque, pero revisemos el calendario de la fase 2 antes de enviarla al cliente.»',
     time: 'hace 5 min',
     unread: true,
-    link: '/proyectos/9/comentarios/33',
   },
   {
     id: '2',
@@ -18,7 +17,6 @@ const items: NotificationPanelItem[] = [
     body: 'Del 4 al 15 de agosto.',
     time: 'hace 2 h',
     unread: true,
-    link: '/ausencias/181',
   },
   {
     id: '3',
@@ -32,7 +30,6 @@ const items: NotificationPanelItem[] = [
     body: 'Factura F-2026-0184 del proveedor Nordeste Servicios, pendiente de validación.',
     time: 'hace 3 días',
     unread: false,
-    link: '/facturas/184',
   },
 ];
 
@@ -55,7 +52,7 @@ type Story = StoryObj<typeof meta>;
 
 /**
  * El adelanto con dos notificaciones sin leer: punto rojo, título en énfasis y
- * el enlace «Ver» en las que tienen destino.
+ * la fecha relativa al otro extremo de esa misma línea.
  */
 export const ConNoLeidas: Story = {
   name: 'Con no leídas',
@@ -106,7 +103,7 @@ export const ContratoApertura: Story = {
     const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
     await expect(bell).toHaveAttribute('aria-expanded', 'true');
     await expect(bell).toHaveAttribute('aria-controls', panel.id);
-    // La lista se llama con el título visible de la cabecera.
+    // La lista se llama con el título del panel, que ya no se pinta.
     await expect(screen.getByRole('list', { name: 'Notificaciones' })).toBeInTheDocument();
 
     await userEvent.keyboard('{Escape}');
@@ -170,26 +167,39 @@ export const ContratoMarcarLeido: Story = {
   },
 };
 
-export const ContratoVer: Story = {
-  name: 'Test — «Ver» solo en las que tienen destino, y con nombre propio',
+export const ContratoPie: Story = {
+  name: 'Test — los únicos enlaces son los dos del pie, en tinta',
   tags: ['!dev'],
   args: { defaultOpen: true },
   play: async () => {
     const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
-    // El nombre del enlace se compone de su rótulo y del título de la
-    // notificación: tres «Ver» sueltos no se distinguirían en una lista de
-    // enlaces. Los otros dos del panel son los del pie.
+    // Ninguna fila navega: los únicos enlaces del panel son los del pie.
     const enlaces = within(panel).getAllByRole('link');
     await expect(enlaces.map((a) => a.textContent)).toEqual([
-      'Ver',
-      'Ver',
-      'Ver',
       'Ver todas las notificaciones',
       'Preferencias de notificaciones',
     ]);
-    const ver = within(panel).getByRole('link', { name: 'Ver Marta Ruiz ha comentado tu propuesta' });
-    await expect(ver).toHaveAttribute('href', '/proyectos/9/comentarios/33');
-    // La tercera notificación no tiene destino: no estrena enlace.
-    await expect(within(panel).queryByRole('link', { name: /parte de horas/ })).toBeNull();
+    for (const enlace of enlaces) {
+      await expect(enlace).toHaveClass('link--ink');
+    }
+  },
+};
+
+export const ContratoSinCabecera: Story = {
+  name: 'Test — el título no se ve, pero sigue nombrando panel y lista',
+  tags: ['!dev'],
+  args: { defaultOpen: true },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const titulo = within(panel).getByRole('heading', { name: 'Notificaciones' });
+    // El título vive dentro de `VisuallyHidden`: nombra la lista y no ocupa.
+    const oculto = titulo.closest('.visually-hidden') as HTMLElement;
+    await expect(oculto).not.toBeNull();
+    await expect(oculto.getBoundingClientRect().height).toBeLessThan(2);
+    await expect(within(panel).getByRole('list', { name: 'Notificaciones' })).toBeInTheDocument();
+    // Lo primero que se ve es la primera notificación, sin hueco encima.
+    const primera = within(panel).getAllByRole('button')[0];
+    await expect(primera.getBoundingClientRect().top - panel.getBoundingClientRect().top)
+      .toBeLessThan(24);
   },
 };
