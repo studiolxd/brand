@@ -21,6 +21,11 @@
   --app-launcher-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --app-launcher-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
   --app-launcher-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
+  --app-launcher-trigger-label-gap: var(--sidebar-nav-item-icon-gap); /** Espacio entre icono y texto del disparador con texto — el mismo aire que entre icono y texto de un ítem de SidebarNav */
+  --app-launcher-trigger-label-padding-block: var(--sidebar-nav-item-padding-block); /** Padding vertical del disparador con texto — el de un ítem de SidebarNav */
+  --app-launcher-trigger-label-padding-inline: var(--sidebar-nav-item-padding-inline); /** Padding horizontal del disparador con texto — el de un ítem de SidebarNav */
+  --app-launcher-trigger-label-font-size: var(--sidebar-nav-item-font-size); /** Tamaño de texto del disparador con texto — el de un ítem de SidebarNav */
+  --app-launcher-trigger-label-line-height: var(--sidebar-nav-item-line-height); /** Interlineado del disparador con texto — el de un ítem de SidebarNav */
   --app-launcher-content-z-index: var(--floating-panel-z-index); /** Z-index del popover */
   --app-launcher-transition-duration: var(--floating-panel-transition-duration); /** Duración de la animación de entrada/salida */
   --app-launcher-transition-easing: var(--floating-panel-transition-easing); /** Easing de la animación */
@@ -34,6 +39,9 @@
   --app-launcher-hover-line-color: var(--color-primary); /** Color de la línea de hover del disparador — tinta de la superficie */
   --app-launcher-tile-active-marker-width: var(--border-width-focus); /** Grosor de la barra que marca la app actual, en el borde de inicio del tile */
   --app-launcher-tile-active-marker-color: var(--color-primary); /** Color de la barra de la app actual */
+  --app-launcher-trigger-label-border-radius: var(--sidebar-nav-item-border-radius); /** Radio del disparador con texto — el de un ítem de SidebarNav */
+  --app-launcher-trigger-label-font-weight: var(--sidebar-nav-item-font-weight); /** Peso de texto del disparador con texto — el de un ítem de SidebarNav */
+  --app-launcher-trigger-label-color: var(--sidebar-nav-item-color); /** Color del disparador con texto (icono y texto, por `currentColor`/herencia) — el de un ítem de SidebarNav */
   --app-launcher-content-bg: var(--floating-panel-bg); /** Fondo del panel */
   --app-launcher-content-border-width: var(--floating-panel-border-width); /** Borde del panel */
   --app-launcher-content-border-color: var(--floating-panel-border-color); /** Color del borde del panel */
@@ -51,6 +59,7 @@ html.dark {
   --app-launcher-tile-name-color: var(--color-text-on-dark); /** Nombre de app — surface-dark */
   --app-launcher-hover-line-color: var(--color-text-on-dark); /** Color de la línea de hover del disparador — surface-dark */
   --app-launcher-tile-active-marker-color: var(--color-accent-1); /** Color de la barra de la app actual — surface-dark: lavanda, el acento de estado activo del sistema (como SidebarNav y Table) */
+  --app-launcher-trigger-label-color: var(--sidebar-nav-item-color); /** Disparador con texto — surface-dark. Por referencia al par oscuro del ítem de SidebarNav */
   --app-launcher-content-bg: var(--floating-panel-bg); /** Fondo del panel — surface-dark */
   --app-launcher-content-border-color: var(--floating-panel-border-color); /** Borde del panel — surface-dark */
   --app-launcher-tile-highlighted-bg: var(--menu-item-highlighted-bg); /** Relleno del tile resaltado — surface-dark */

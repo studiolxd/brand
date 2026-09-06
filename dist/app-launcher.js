@@ -13,7 +13,17 @@ function o({ apps: o, labels: s, currentAppId: c, open: l, defaultOpen: u, onOpe
 		open: l,
 		defaultOpen: u,
 		onOpenChange: (e) => d?.(e),
-		children: [/* @__PURE__ */ n(i.Trigger, { render: /* @__PURE__ */ n("button", {
+		children: [/* @__PURE__ */ n(i.Trigger, { render: s.trigger ? /* @__PURE__ */ r("button", {
+			type: "button",
+			className: "app-launcher__trigger app-launcher__trigger--label",
+			children: [/* @__PURE__ */ n(e, {
+				name: "grid",
+				size: "md"
+			}), /* @__PURE__ */ n("span", {
+				className: "app-launcher__trigger-label",
+				children: s.trigger
+			})]
+		}) : /* @__PURE__ */ n("button", {
 			type: "button",
 			className: "app-launcher__trigger",
 			"aria-label": s.open,

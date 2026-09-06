@@ -12,10 +12,16 @@ export interface LauncherApp {
     isNew?: boolean;
 }
 export interface AppLauncherLabels {
-    /** Texto accesible del trigger («Abrir launcher de apps»). */
+    /** Texto accesible del trigger («Abrir launcher de apps»). Solo se usa como `aria-label` cuando no hay `trigger`: con texto visible, el nombre accesible es ese texto. */
     open: string;
     /** Texto del badge de app nueva. */
     new: string;
+    /**
+     * Texto visible del disparador (p. ej. «Aplicaciones»), a la derecha del
+     * icono de rejilla. Sin él, el disparador se queda como hoy: solo icono,
+     * con `open` de nombre accesible.
+     */
+    trigger?: string;
 }
 export interface AppLauncherProps {
     apps: LauncherApp[];

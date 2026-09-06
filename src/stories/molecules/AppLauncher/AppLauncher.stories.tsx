@@ -59,6 +59,14 @@ export const Cerrado: Story = {
   },
 };
 
+export const ConTexto: Story = {
+  name: 'Con texto',
+  args: {
+    apps: demoApps,
+    labels: { ...labels, trigger: 'Aplicaciones' },
+  },
+};
+
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },
@@ -89,5 +97,20 @@ export const TestContrato: Story = {
 
     const current = within(list).getByRole('link', { name: /Bricks/ });
     await expect(current).toHaveAttribute('aria-current', 'page');
+  },
+};
+
+export const TestContratoConTexto: Story = {
+  name: 'Test — disparador con texto',
+  tags: ['!dev'],
+  args: {
+    apps: demoApps.slice(0, 3),
+    labels: { ...labels, trigger: 'Aplicaciones' },
+  },
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole('button', { name: 'Aplicaciones' });
+    await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
+    // El nombre accesible es el texto visible: no hay `aria-label` duplicado.
+    await expect(trigger).not.toHaveAttribute('aria-label');
   },
 };

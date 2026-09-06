@@ -7,6 +7,15 @@
     "focus-ring-width":       { "$value": "{border-width.focus}",            "$type": "dimension", "$description": "Grosor del focus ring" },
     "focus-ring-offset":      { "$value": "{border-width.default}",            "$type": "dimension", "$description": "Separación del focus ring" },
 
+    "trigger-label-gap":            { "$value": "{sidebar-nav.item-icon-gap}",       "$type": "dimension", "$description": "Espacio entre icono y texto del disparador con texto — el mismo aire que entre icono y texto de un ítem de SidebarNav" },
+    "trigger-label-padding-block":  { "$value": "{sidebar-nav.item-padding-block}",  "$type": "dimension", "$description": "Padding vertical del disparador con texto — el de un ítem de SidebarNav" },
+    "trigger-label-padding-inline": { "$value": "{sidebar-nav.item-padding-inline}", "$type": "dimension", "$description": "Padding horizontal del disparador con texto — el de un ítem de SidebarNav" },
+    "trigger-label-border-radius":  { "$value": "{sidebar-nav.item-border-radius}",  "$type": "dimension", "$description": "Radio del disparador con texto — el de un ítem de SidebarNav" },
+    "trigger-label-font-size":      { "$value": "{sidebar-nav.item-font-size}",      "$type": "dimension", "$description": "Tamaño de texto del disparador con texto — el de un ítem de SidebarNav" },
+    "trigger-label-font-weight":    { "$value": "{sidebar-nav.item-font-weight}",    "$type": "number",    "$description": "Peso de texto del disparador con texto — el de un ítem de SidebarNav" },
+    "trigger-label-line-height":    { "$value": "{sidebar-nav.item-line-height}",    "$type": "number",    "$description": "Interlineado del disparador con texto — el de un ítem de SidebarNav" },
+    "trigger-label-color":          { "$value": "{sidebar-nav.item-color}",          "$type": "color",     "$description": "Color del disparador con texto (icono y texto, por `currentColor`/herencia) — el de un ítem de SidebarNav" },
+
     "content-min-width":      { "$value": "20rem",                        "$type": "dimension", "$description": "Ancho mínimo del popover" },
     "content-columns":        { "$value": "3",                            "$type": "number",    "$description": "Número de columnas de la rejilla de apps" },
     "content-gap":            { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre tiles" },
@@ -38,6 +47,7 @@
     "tile-name-active-font-weight": { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso del nombre — app actual" },
 
     "surface-dark-trigger-color":       { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Icono de rejilla — surface-dark" },
+    "surface-dark-trigger-label-color": { "$value": "{sidebar-nav.surface-dark-item-color}", "$type": "color", "$description": "Disparador con texto — surface-dark. Por referencia al par oscuro del ítem de SidebarNav" },
     "surface-dark-focus-ring-color":  { "$value": "{color.text.on-dark}",      "$type": "color", "$description": "Focus ring — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro." },
     "surface-dark-content-bg":            { "$value": "{floating-panel.surface-dark-bg}",           "$type": "color", "$description": "Fondo del panel — surface-dark" },
     "surface-dark-content-border-color":  { "$value": "{floating-panel.surface-dark-border-color}", "$type": "color", "$description": "Borde del panel — surface-dark" },
