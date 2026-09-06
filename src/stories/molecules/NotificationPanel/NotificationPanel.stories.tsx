@@ -186,9 +186,12 @@ export const ContratoMarcarTodasEncimaDeLaLista: Story = {
     // Alineado al final (derecha) de su fila, no centrado como el pie.
     const fila = boton.closest('.notification-panel__mark-all-row') as HTMLElement;
     await expect(fila).not.toBeNull();
+    // El botón se pega al borde de CONTENIDO de la fila (dentro de su
+    // padding-inline), no al borde de la caja.
     const filaRect = fila.getBoundingClientRect();
     const botonRect = boton.getBoundingClientRect();
-    await expect(botonRect.right).toBeCloseTo(filaRect.right, 0);
+    const paddingEnd = parseFloat(getComputedStyle(fila).paddingInlineEnd);
+    await expect(botonRect.right).toBeCloseTo(filaRect.right - paddingEnd, 0);
 
     // Y sigue entrando el foco por la primera notificación, no por el botón.
     await waitFor(() => expect(primeraFila).toHaveFocus());
