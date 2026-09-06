@@ -11,6 +11,10 @@ const meta: Meta<typeof CodeBlock> = {
   argTypes: {
     language: { control: 'text', description: 'Etiqueta de lenguaje de la cabecera.' },
     copyable: { control: 'boolean', description: 'Añade el botón de copiar.' },
+    singleLine: {
+      control: 'boolean',
+      description: 'Fuerza la variante de una línea o la multilínea. Sin ella, se detecta del contenido.',
+    },
     copyLabel: { control: 'text', description: 'Etiqueta accesible del botón de copiar.' },
     copiedLabel: { control: 'text', description: 'Anuncio para lectores de pantalla tras copiar.' },
   },
@@ -77,6 +81,40 @@ export const LineaLarga: Story = {
   ),
 };
 
+/**
+ * Sin saltos de línea, el bloque se detecta solo como una línea: el código a
+ * la izquierda con su propio scroll horizontal y, a la derecha, el botón de
+ * copiar centrado en vertical — sin la cabecera aparte que dejaba un hueco
+ * vacío encima del texto.
+ */
+export const UnaLinea: Story = {
+  name: 'Una línea',
+  args: {
+    copyable: true,
+    children: 'https://api.ejemplo.com/mcp/aipricing',
+  },
+  render: (args) => (
+    <div style={{ maxWidth: '24rem' }}>
+      <CodeBlock {...args} />
+    </div>
+  ),
+};
+
+/** La misma variante de una línea, en superficie oscura: su propio par oscuro. */
+export const UnaLineaSuperficieOscura: Story = {
+  name: 'Una línea — en superficie oscura',
+  parameters: { surface: 'dark' },
+  args: {
+    copyable: true,
+    children: 'https://api.ejemplo.com/mcp/aipricing',
+  },
+  render: (args) => (
+    <div style={{ maxWidth: '24rem' }}>
+      <CodeBlock {...args} />
+    </div>
+  ),
+};
+
 /** `children` como nodos ya resaltados por un highlighter externo, no como texto plano. */
 export const ConNodosResaltados: Story = {
   render: () => (
@@ -88,8 +126,9 @@ export const ConNodosResaltados: Story = {
 };
 
 /**
- * Superficie oscura. El bloque es una superficie clara autocontenida (gris claro
- * con tinta prusia): se ve igual sobre una página clara y sobre una oscura.
+ * Superficie oscura: fondo, borde y tinta pasan a su par oscuro (la misma
+ * superficie clara secundaria que usan `Kbd` y el pie de `Table`, en su
+ * variante para `.surface-dark`).
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
@@ -184,6 +223,61 @@ export const ContratoScroll: Story = {
     // la línea larga desborda dentro del <pre>, no del contenedor
     await expect(pre.scrollWidth).toBeGreaterThan(pre.clientWidth);
     await expect(canvasElement.scrollWidth).toBe(canvasElement.clientWidth);
+  },
+};
+
+/**
+ * Test: sin saltos de línea, el bloque es una fila (código + controles), sin
+ * cabecera aparte ni hueco encima del texto; con saltos de línea, o forzando
+ * `singleLine={false}`, sigue siendo la cabecera de siempre.
+ */
+export const ContratoUnaLinea: Story = {
+  name: 'Test — variante de una línea: fila, sin cabecera aparte',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <div data-testid="una-linea" style={{ maxWidth: '20rem' }}>
+        <CodeBlock copyable language="bash">https://ejemplo.com/x</CodeBlock>
+      </div>
+      <div data-testid="multilinea">
+        <CodeBlock copyable language="bash">{'línea uno\nlínea dos'}</CodeBlock>
+      </div>
+      <div data-testid="forzada-multilinea">
+        <CodeBlock copyable singleLine={false}>https://ejemplo.com/x</CodeBlock>
+      </div>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const unaLinea = canvasElement.querySelector('[data-testid="una-linea"]') as HTMLElement;
+    const root = unaLinea.querySelector('.code-block') as HTMLElement;
+    await expect(root).toHaveClass('code-block--single-line');
+    await expect(root.querySelector('.code-block__header')).toBeNull();
+    const fila = root.querySelector('.code-block__row') as HTMLElement;
+    await expect(fila).not.toBeNull();
+
+    // Código a la izquierda, controles a la derecha, sin hueco encima del texto.
+    const pre = fila.querySelector('.code-block__pre') as HTMLElement;
+    const controles = fila.querySelector('.code-block__controls') as HTMLElement;
+    await expect(pre.compareDocumentPosition(controles) & Node.DOCUMENT_POSITION_FOLLOWING)
+      .toBeTruthy();
+    await expect(pre.getBoundingClientRect().top - root.getBoundingClientRect().top)
+      .toBeLessThan(24);
+
+    // El botón queda centrado en vertical respecto a la fila.
+    const boton = within(controles).getByRole('button', { name: 'Copiar código' });
+    const filaRect = fila.getBoundingClientRect();
+    const botonRect = boton.getBoundingClientRect();
+    const centroFila = filaRect.top + filaRect.height / 2;
+    const centroBoton = botonRect.top + botonRect.height / 2;
+    await expect(Math.abs(centroFila - centroBoton)).toBeLessThan(2);
+
+    const multilinea = canvasElement.querySelector('[data-testid="multilinea"] .code-block') as HTMLElement;
+    await expect(multilinea).not.toHaveClass('code-block--single-line');
+    await expect(multilinea.querySelector('.code-block__header')).not.toBeNull();
+
+    const forzada = canvasElement.querySelector('[data-testid="forzada-multilinea"] .code-block') as HTMLElement;
+    await expect(forzada).not.toHaveClass('code-block--single-line');
+    await expect(forzada.querySelector('.code-block__header')).not.toBeNull();
   },
 };
 

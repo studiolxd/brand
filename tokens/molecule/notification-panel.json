@@ -2,9 +2,8 @@
   "notification-panel": {
     "inline-size":            { "$value": "min(22.5rem, calc(100vw - 2 * {spacing.5}))", "$type": "dimension", "$description": "Ancho del panel (360px), con tope para que no se salga en una pantalla estrecha. Medida de maqueta, como la de la Sidebar: no pertenece a la escala de tallas" },
 
-    "padding-inline":         { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire lateral de las filas y del pie: el mismo, para que todo alinee en una sola columna" },
-    "separator-thickness":    { "$value": "{separator.thickness}",    "$type": "dimension", "$description": "Grosor de la línea que separa la lista del pie — el grosor de la línea del sistema" },
-    "separator-color":        { "$value": "{separator.color}",        "$type": "color",     "$description": "Color de esa línea — el de la línea del sistema" },
+    "padding-inline":         { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire lateral de las filas, de la fila de marcar todas y del pie: el mismo, para que todo alinee en una sola columna" },
+    "mark-all-padding-block": { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire vertical de la fila de «Marcar todas», encima de la lista" },
 
     "list-max-block-size":    { "$value": "21rem",                    "$type": "dimension", "$description": "Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta" },
     "list-padding-block":     { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire vertical de la lista dentro del panel" },
@@ -43,7 +42,6 @@
     "transition-duration":    { "$value": "{motion.duration.fast}",   "$type": "string",    "$description": "Duración de la transición de la fila" },
     "transition-easing":      { "$value": "{motion.easing.default}",  "$type": "string",    "$description": "Curva de la transición de la fila" },
 
-    "surface-dark-separator-color":       { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea del pie — superficie oscura" },
     "surface-dark-item-hover-marker-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la barra de hover de la fila — superficie oscura" },
     "surface-dark-focus-ring-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del anillo de foco — superficie oscura" }
   }

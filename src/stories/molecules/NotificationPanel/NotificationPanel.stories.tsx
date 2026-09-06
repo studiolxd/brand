@@ -167,6 +167,34 @@ export const ContratoMarcarLeido: Story = {
   },
 };
 
+export const ContratoMarcarTodasEncimaDeLaLista: Story = {
+  name: 'Test — «Marcar todas» va encima de la lista, alineado al final',
+  tags: ['!dev'],
+  args: { defaultOpen: true, onMarkAllRead: fn() },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const boton = within(panel).getByRole('button', { name: 'Marcar todas como leídas' });
+    const primeraFila = within(panel).getByRole('button', {
+      name: /Marta Ruiz ha comentado tu propuesta/,
+    });
+
+    // Antes que la lista en el documento: encima, no en el pie.
+    await expect(
+      boton.compareDocumentPosition(primeraFila) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+
+    // Alineado al final (derecha) de su fila, no centrado como el pie.
+    const fila = boton.closest('.notification-panel__mark-all-row') as HTMLElement;
+    await expect(fila).not.toBeNull();
+    const filaRect = fila.getBoundingClientRect();
+    const botonRect = boton.getBoundingClientRect();
+    await expect(botonRect.right).toBeCloseTo(filaRect.right, 0);
+
+    // Y sigue entrando el foco por la primera notificación, no por el botón.
+    await waitFor(() => expect(primeraFila).toHaveFocus());
+  },
+};
+
 export const ContratoPie: Story = {
   name: 'Test — los únicos enlaces son los dos del pie, en tinta',
   tags: ['!dev'],

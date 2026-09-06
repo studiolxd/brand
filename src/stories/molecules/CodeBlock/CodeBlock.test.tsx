@@ -56,6 +56,48 @@ describe('CodeBlock', () => {
     expect(region).toHaveAttribute('tabindex', '0');
   });
 
+  it('sin saltos de línea se detecta como una línea: fila, sin cabecera aparte', () => {
+    const { container } = render(
+      <CodeBlock copyable language="bash">https://ejemplo.com/x</CodeBlock>,
+    );
+    const root = container.querySelector('.code-block') as HTMLElement;
+    expect(root).toHaveClass('code-block--single-line');
+    expect(root.querySelector('.code-block__header')).toBeNull();
+    expect(root.querySelector('.code-block__row')).not.toBeNull();
+    expect(root.querySelector('.code-block__controls')).not.toBeNull();
+  });
+
+  it('con saltos de línea sigue siendo multilínea: cabecera arriba, código debajo', () => {
+    const { container } = render(
+      <CodeBlock copyable language="bash">{'línea uno\nlínea dos'}</CodeBlock>,
+    );
+    const root = container.querySelector('.code-block') as HTMLElement;
+    expect(root).not.toHaveClass('code-block--single-line');
+    expect(root.querySelector('.code-block__header')).not.toBeNull();
+    expect(root.querySelector('.code-block__row')).toBeNull();
+  });
+
+  it('`singleLine` explícita gana a la detección automática', () => {
+    const { container: unaLinea } = render(
+      <CodeBlock singleLine={false} copyable>https://ejemplo.com/x</CodeBlock>,
+    );
+    expect(unaLinea.querySelector('.code-block')).not.toHaveClass('code-block--single-line');
+
+    const { container: multilinea } = render(
+      <CodeBlock singleLine copyable>{'línea uno\nlínea dos'}</CodeBlock>,
+    );
+    expect(multilinea.querySelector('.code-block')).toHaveClass('code-block--single-line');
+  });
+
+  it('con nodos ya resaltados (no cadena), por defecto es multilínea', () => {
+    const { container } = render(
+      <CodeBlock copyable>
+        <span>const</span> a = 1;
+      </CodeBlock>,
+    );
+    expect(container.querySelector('.code-block')).not.toHaveClass('code-block--single-line');
+  });
+
   it('las etiquetas se traducen por prop', async () => {
     mockClipboard(async () => {});
     render(

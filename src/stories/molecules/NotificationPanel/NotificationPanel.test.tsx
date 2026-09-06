@@ -82,6 +82,15 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
     await waitFor(() => expect(within(panel).getAllByRole('button')[0]).toHaveFocus());
   });
 
+  it('con «Marcar todas» encima de la lista, el foco sigue entrando por la primera fila', async () => {
+    const user = userEvent.setup();
+    setup({ onMarkAllRead: vi.fn() });
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const primeraFila = within(panel).getByRole('button', { name: /Marta ha comentado/ });
+    await waitFor(() => expect(primeraFila).toHaveFocus());
+  });
+
   it('los textos son props: sin ellas, castellano', async () => {
     const user = userEvent.setup();
     setup({
@@ -172,14 +181,19 @@ describe('NotificationPanel — pie y estado vacío', () => {
     for (const enlace of enlaces) expect(enlace).toHaveClass('link--ink');
   });
 
-  it('«Marcar todas como leídas» es un botón de contorno', async () => {
+  it('«Marcar todas como leídas» es un botón de contorno, encima de la lista', async () => {
     const user = userEvent.setup();
     setup({ onMarkAllRead: vi.fn() });
     await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
     const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
-    expect(within(panel).getByRole('button', { name: 'Marcar todas como leídas' })).toHaveClass(
-      'button--outline',
-    );
+    const boton = within(panel).getByRole('button', { name: 'Marcar todas como leídas' });
+    expect(boton).toHaveClass('button--outline');
+
+    // Va antes que la lista en el orden del documento: encima, no en el pie.
+    const primeraFila = within(panel).getByRole('button', { name: /Marta ha comentado/ });
+    expect(
+      boton.compareDocumentPosition(primeraFila) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 
   it('sin `onMarkAllRead` el pie no pinta el botón; con ella, sí, y marca todas', async () => {

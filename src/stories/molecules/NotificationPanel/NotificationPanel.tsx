@@ -162,11 +162,17 @@ export function NotificationPanel({
   };
 
   // El foco entra en el panel por su primer control, no por el panel entero:
-  // lo primero que se hace aquí es recorrer notificaciones.
-  const initialFocus = useCallback(
-    () => panelRef.current?.querySelector<HTMLElement>(FOCUSABLE) ?? null,
-    [],
-  );
+  // lo primero que se hace aquí es recorrer notificaciones. El botón de
+  // marcar todas vive ahora encima de la lista, así que se le da preferencia
+  // a la fila antes que a él o a los enlaces del pie.
+  const initialFocus = useCallback(() => {
+    const panel = panelRef.current;
+    if (!panel) return null;
+    return (
+      panel.querySelector<HTMLElement>('.notification-panel__item-action') ??
+      panel.querySelector<HTMLElement>(FOCUSABLE)
+    );
+  }, []);
 
   const handleOpenChange = (next: boolean, details: PopoverChangeDetails) => {
     if (!next) setReadHere([]);
@@ -194,6 +200,16 @@ export function NotificationPanel({
             {panelLabel}
           </Heading>
         </VisuallyHidden>
+
+        {/* Encima de la lista, no en el pie: es una acción sobre el conjunto
+            que se pulsa antes de leer la lista, no un destino de servicio. */}
+        {onMarkAllRead && (
+          <div className="notification-panel__mark-all-row">
+            <Button variant="outline" size="sm" onClick={markAll}>
+              {markAllReadLabel}
+            </Button>
+          </div>
+        )}
 
         {items.length === 0 ? (
           <div className="notification-panel__empty">
@@ -255,20 +271,11 @@ export function NotificationPanel({
           </ul>
         )}
 
+        {/* Los dos enlaces del pie son utilitarios, no acciones de marca: van
+            en tinta (`link--ink`, el tono del átomo `Link`) y uno por línea,
+            que es lo que cabe centrado a 360 px. Sin línea que lo separe de
+            la lista: solo el aire del pie. */}
         <div className="notification-panel__footer">
-          {onMarkAllRead && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="notification-panel__mark-all"
-              onClick={markAll}
-            >
-              {markAllReadLabel}
-            </Button>
-          )}
-          {/* Los dos enlaces del pie son utilitarios, no acciones de marca:
-              van en tinta (`link--ink`, el tono del átomo `Link`) y uno por
-              línea, que es lo que cabe centrado a 360 px. */}
           <div className="notification-panel__footer-links">
             {renderLink({ href: allHref, className: FOOTER_LINK_CLASS, children: allLabel })}
             {renderLink({

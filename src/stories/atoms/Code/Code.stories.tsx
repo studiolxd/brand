@@ -35,8 +35,9 @@ export const EnSuperficieOscura: Story = {
   parameters: { surface: 'dark' },
   render: () => (
     <Paragraph>
-      El fondo del fragmento es un par autocontenido: se ve igual sobre{' '}
-      <Code>.surface-dark</Code> que en claro, como el de <Code>CodeBlock</Code>.
+      El fondo y la tinta del fragmento son el par oscuro de{' '}
+      <Code>CodeBlock</Code>: la misma superficie clara secundaria, en su
+      variante para <Code>.surface-dark</Code>.
     </Paragraph>
   ),
 };

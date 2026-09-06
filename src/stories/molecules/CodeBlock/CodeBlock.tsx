@@ -15,6 +15,16 @@ export interface CodeBlockProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Muestra un botón de copiar al portapapeles en la cabecera. Default: `false`. */
   copyable?: boolean;
   /**
+   * Fuerza la variante de una línea (código a la izquierda con su propio
+   * scroll horizontal, lenguaje y botón de copiar a la derecha, centrados en
+   * vertical, sin cabecera aparte) o la multilínea (cabecera arriba, código
+   * debajo). Sin la prop se detecta solo: `children` como cadena sin saltos
+   * de línea es una línea; con saltos de línea, o con nodos ya resaltados por
+   * un highlighter externo (no se pueden inspeccionar como cadena), es
+   * multilínea.
+   */
+  singleLine?: boolean;
+  /**
    * aria-label del botón de copiar. Default: "Copiar código" (castellano).
    * Una app multiidioma debe pasarla traducida.
    */
@@ -47,6 +57,7 @@ export function CodeBlock({
   children,
   language,
   copyable = false,
+  singleLine,
   copyLabel = 'Copiar código',
   copiedLabel = 'Copiado',
   codeLabel = defaultCodeLabel,
@@ -74,40 +85,72 @@ export function CodeBlock({
     }
   };
 
-  const hasHeader = Boolean(language) || copyable;
-  const classes = ['code-block', className ?? ''].filter(Boolean).join(' ');
+  const detectedSingleLine = typeof children === 'string' && !children.includes('\n');
+  const isSingleLine = singleLine ?? detectedSingleLine;
+  const hasControls = Boolean(language) || copyable;
+  const classes = [
+    'code-block',
+    isSingleLine ? 'code-block--single-line' : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
+
+  const languageTag = language && (
+    <Tag variant="neutral" className="code-block__language">{language}</Tag>
+  );
+
+  const copyButton = copyable && (
+    <>
+      <Button
+        iconOnly
+        variant="ghost"
+        size="sm"
+        aria-label={copyLabel}
+        onClick={handleCopy}
+        className="code-block__copy"
+      >
+        <Icon name={copied ? 'check' : 'copy'} size="sm" />
+      </Button>
+      {/* El icono cambia para quien ve; para quien escucha, este anuncio. */}
+      <VisuallyHidden role="status">{copied ? copiedLabel : ''}</VisuallyHidden>
+    </>
+  );
+
+  const code = (
+    <pre
+      className="code-block__pre"
+      tabIndex={0}
+      role="region"
+      aria-label={codeLabel(language)}
+    >
+      <code ref={codeRef} className="code-block__code">{children}</code>
+    </pre>
+  );
+
+  if (isSingleLine) {
+    return (
+      <div className={classes} {...rest}>
+        <div className="code-block__row">
+          {code}
+          {hasControls && (
+            <div className="code-block__controls">
+              {languageTag}
+              {copyButton}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={classes} {...rest}>
-      {hasHeader && (
+      {hasControls && (
         <div className="code-block__header">
-          {language && <Tag variant="neutral" className="code-block__language">{language}</Tag>}
-          {copyable && (
-            <>
-              <Button
-                iconOnly
-                variant="ghost"
-                size="sm"
-                aria-label={copyLabel}
-                onClick={handleCopy}
-                className="code-block__copy"
-              >
-                <Icon name={copied ? 'check' : 'copy'} size="sm" />
-              </Button>
-              {/* El icono cambia para quien ve; para quien escucha, este anuncio. */}
-              <VisuallyHidden role="status">{copied ? copiedLabel : ''}</VisuallyHidden>
-            </>
-          )}
+          {languageTag}
+          {copyButton}
         </div>
       )}
-      <pre
-        className="code-block__pre"
-        tabIndex={0}
-        role="region"
-        aria-label={codeLabel(language)}
-      >
-        <code ref={codeRef} className="code-block__code">{children}</code>
-      </pre>
+      {code}
     </div>
   );
 }
