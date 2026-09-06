@@ -20,7 +20,8 @@
       "highlight-on-dark":  { "$value": "{color.grey-dark}",     "$type": "color", "$description": "Brillo que recorre una superficie secundaria en carga (Skeleton) sobre superficie oscura — un paso más claro que el fondo secundario oscuro" }
     },
     "border": {
-      "default-on-light": { "$value": "{color.grey-light}", "$type": "color", "$description": "Borde general sobre superficie clara: divisores, separadores, carriles y guías sin recorrer. Por la regla de derivación el par en superficie oscura no es un primitivo gris, es `color.text.on-dark` (cada componente lo referencia directamente)" }
+      "default-on-light": { "$value": "{color.grey-light}", "$type": "color", "$description": "Borde general sobre superficie clara: divisores, separadores, carriles y guías sin recorrer. Por la regla de derivación el par en superficie oscura no es un primitivo gris, es `color.text.on-dark` (cada componente lo referencia directamente)" },
+      "recessive-on-dark": { "$value": "{color.grey-darkest}", "$type": "color", "$description": "Línea recesiva sobre superficie oscura — no un borde que deba destacar (ese es `color.text.on-dark`, la derivación por defecto), sino un filete de cromo que se retira hacia el lienzo: la rejilla de `Chart`. Mismo `grey-darkest` que ya usaba por error `color.surface.secondary-on-dark` (una superficie, no una línea) — el valor visual no cambia, solo su procedencia semántica" }
     },
     "disabled": {
       "bg-on-light":     { "$value": "{color.grey-lightest}", "$type": "color", "$description": "Fondo de un control deshabilitado sobre superficie clara" },
