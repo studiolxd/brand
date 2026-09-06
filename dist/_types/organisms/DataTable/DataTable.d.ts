@@ -19,6 +19,13 @@ declare module '@tanstack/react-table' {
          * botones. La celda de cabecera sigue ahí, con su alineación.
          */
         headerHidden?: boolean;
+        /**
+         * Pega la columna al borde final cuando la tabla desborda su contenedor:
+         * la columna de acciones se queda alcanzable con scroll horizontal en vez
+         * de caer fuera del recorte. La columna de acciones se escribe siempre
+         * `{ align: 'center', headerHidden: true, sticky: 'end' }`.
+         */
+        sticky?: 'end';
     }
 }
 /**

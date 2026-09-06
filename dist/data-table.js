@@ -1627,6 +1627,7 @@ function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumn
 							sortable: r,
 							sorted: n === "asc" || n === "desc" ? n : !1,
 							onSort: r ? () => t.column.toggleSorting() : void 0,
+							sticky: t.column.columnDef.meta?.sticky,
 							...D,
 							children: a ? /* @__PURE__ */ d(e, { children: o }) : o
 						}, t.id);
@@ -1643,6 +1644,7 @@ function Ke({ columns: p, data: g, ariaLabel: _, ariaLabelledBy: v, searchColumn
 						selected: e.getIsSelected(),
 						children: e.getVisibleCells().map((e) => /* @__PURE__ */ d(a, {
 							className: ["data-table__cell", Ge("cell", e.column)].filter(Boolean).join(" "),
+							sticky: e.column.columnDef.meta?.sticky,
 							children: Be(e.column.columnDef.cell, e.getContext())
 						}, e.id))
 					}, e.id)) })]
