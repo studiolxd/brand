@@ -7,7 +7,7 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
-## Sin publicar
+## [32.4.0] — 2026-09-06
 
 > **Minor.**
 
@@ -66,7 +66,6 @@ para breaking changes.
   Stepper. El valor visual era correcto (la rejilla es cromo recesivo a propósito) y
   no cambia: ahora apunta al nuevo token de línea `color.border.recessive-on-dark`
   (mismo `grey-darkest`).
-||||||| 2ea79f85
 - **`PublicPageShell`: ranura `preferences`.** La banda de «idioma + tema» que el
   panel de estado y el alta montaban cada uno por su cuenta pasa a ser del marco.
   Nueva prop `preferences?: ReactNode` —se le pasan los conmutadores sueltos— que
@@ -349,7 +348,6 @@ para breaking changes.
   formulario entero— y la pantalla de nueva contraseña. `Templates/App with
   sidebar` pierde el saludo y el título de la barra, y monta el panel como lo
   monta la suite.
-||||||| ef36f09d
 ### Breaking
 
 - **`DatePicker`: el disparador deja de ser un botón con la fecha en largo y
