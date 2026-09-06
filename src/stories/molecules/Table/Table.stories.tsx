@@ -337,6 +337,111 @@ export const ConColumnaDeAcciones: Story = {
   ),
 };
 
+const COLUMNAS_ANCHAS = [
+  { nombre: 'Virtualización Rise Cofidis', cliente: 'Cofidis', fecha: '15/05/2026', responsable: 'Ada Lovelace', departamento: 'Ingeniería', ubicacion: 'Madrid', estado: 'Activo' },
+  { nombre: 'Rediseño portal B2B', cliente: 'Mapfre', fecha: '10/04/2026', responsable: 'Grace Hopper', departamento: 'Producto', ubicacion: 'Barcelona', estado: 'En revisión' },
+  { nombre: 'App móvil inversiones', cliente: 'Caixabank', fecha: '01/03/2026', responsable: 'Alan Turing', departamento: 'Ingeniería', ubicacion: 'Madrid', estado: 'Entregado' },
+];
+
+/**
+ * `sticky="end"` en `Table.Header` y en la `Table.Cell` equivalente de cada
+ * fila pega la columna de acciones al borde final cuando la tabla desborda su
+ * contenedor: se queda alcanzable con scroll horizontal en vez de caer fuera
+ * del recorte del wrapper. Para las tablas escritas a mano (sin `DataTable`),
+ * que hace lo mismo con `meta: { sticky: 'end' }`.
+ */
+export const ColumnaDeAccionesPegajosa: Story = {
+  name: 'Columna de acciones pegajosa',
+  render: () => (
+    <div style={{ maxWidth: '480px' }}>
+      <Table caption="Listado de proyectos con acciones pegajosas">
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>Nombre</Table.Header>
+            <Table.Header>Cliente</Table.Header>
+            <Table.Header>Fecha</Table.Header>
+            <Table.Header>Responsable</Table.Header>
+            <Table.Header>Departamento</Table.Header>
+            <Table.Header>Ubicación</Table.Header>
+            <Table.Header>Estado</Table.Header>
+            <Table.Header actions sticky="end" />
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          {COLUMNAS_ANCHAS.map((p) => (
+            <Table.Row key={p.nombre}>
+              <Table.Cell>{p.nombre}</Table.Cell>
+              <Table.Cell>{p.cliente}</Table.Cell>
+              <Table.Cell>{p.fecha}</Table.Cell>
+              <Table.Cell>{p.responsable}</Table.Cell>
+              <Table.Cell>{p.departamento}</Table.Cell>
+              <Table.Cell>{p.ubicacion}</Table.Cell>
+              <Table.Cell>{p.estado}</Table.Cell>
+              <Table.Cell sticky="end">
+                <Button variant="ghost" size="sm">Editar</Button>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </div>
+  ),
+};
+
+/** Test: con scroll a 0, la celda pegajosa está dentro del viewport del wrapper. */
+export const ContratoColumnaPegajosa: Story = {
+  name: 'Test — la columna pegajosa queda dentro del viewport',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ maxWidth: '480px' }}>
+      <Table caption="Listado de proyectos con acciones pegajosas">
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>Nombre</Table.Header>
+            <Table.Header>Cliente</Table.Header>
+            <Table.Header>Fecha</Table.Header>
+            <Table.Header>Responsable</Table.Header>
+            <Table.Header>Departamento</Table.Header>
+            <Table.Header>Ubicación</Table.Header>
+            <Table.Header>Estado</Table.Header>
+            <Table.Header actions sticky="end" />
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          {COLUMNAS_ANCHAS.map((p) => (
+            <Table.Row key={p.nombre}>
+              <Table.Cell>{p.nombre}</Table.Cell>
+              <Table.Cell>{p.cliente}</Table.Cell>
+              <Table.Cell>{p.fecha}</Table.Cell>
+              <Table.Cell>{p.responsable}</Table.Cell>
+              <Table.Cell>{p.departamento}</Table.Cell>
+              <Table.Cell>{p.ubicacion}</Table.Cell>
+              <Table.Cell>{p.estado}</Table.Cell>
+              <Table.Cell sticky="end">
+                <Button variant="ghost" size="sm">Editar</Button>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const wrapper = canvasElement.querySelector('.table__wrapper') as HTMLElement;
+    await expect(wrapper).not.toBeNull();
+    const table = wrapper.querySelector('table') as HTMLElement;
+    await expect(table.scrollWidth).toBeGreaterThan(wrapper.clientWidth);
+
+    wrapper.scrollLeft = 0;
+    const celdaAcciones = wrapper.querySelector('.table__cell--sticky') as HTMLElement;
+    await expect(celdaAcciones).not.toBeNull();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const celdaRect = celdaAcciones.getBoundingClientRect();
+    await expect(celdaRect.right).toBeLessThanOrEqual(wrapperRect.right + 1);
+    await expect(celdaRect.left).toBeGreaterThanOrEqual(wrapperRect.left);
+  },
+};
+
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },

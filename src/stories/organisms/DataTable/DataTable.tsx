@@ -55,6 +55,13 @@ declare module '@tanstack/react-table' {
      * botones. La celda de cabecera sigue ahí, con su alineación.
      */
     headerHidden?: boolean;
+    /**
+     * Pega la columna al borde final cuando la tabla desborda su contenedor:
+     * la columna de acciones se queda alcanzable con scroll horizontal en vez
+     * de caer fuera del recorte. La columna de acciones se escribe siempre
+     * `{ align: 'center', headerHidden: true, sticky: 'end' }`.
+     */
+    sticky?: 'end';
   }
 }
 
@@ -257,6 +264,7 @@ export function DataTable<TData, TValue>({
                       sortable={canSort}
                       sorted={sorted === 'asc' || sorted === 'desc' ? sorted : false}
                       onSort={canSort ? () => header.column.toggleSorting() : undefined}
+                      sticky={header.column.columnDef.meta?.sticky}
                       {...headerLabels}
                     >
                       {hidden ? <VisuallyHidden>{content}</VisuallyHidden> : content}
@@ -292,6 +300,7 @@ export function DataTable<TData, TValue>({
                       className={['data-table__cell', alignClass('cell', cell.column)]
                         .filter(Boolean)
                         .join(' ')}
+                      sticky={cell.column.columnDef.meta?.sticky}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>

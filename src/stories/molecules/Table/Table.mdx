@@ -60,6 +60,29 @@ solo iconos, códigos crípticos—: entonces se pasa el nombre a mano.
 
 <Canvas of={TableStories.ConColumnaDeAcciones} />
 
+## Columna de acciones pegajosa
+
+Con muchas columnas la tabla mide más que su contenedor y la columna de acciones puede
+caer fuera del recorte de `.table__wrapper` — sin barra de scroll visible en macOS, el
+menú de fila queda inalcanzable. `sticky="end"` en `Table.Header` **y** en la `Table.Cell`
+equivalente de cada fila la pega al borde final (`inset-inline-end: 0`): se queda alcanzable
+con scroll horizontal.
+
+El fondo de la celda pegajosa tapa el resto de columnas que se deslizan debajo
+(`sticky-bg`), y un filete de inicio (`sticky-separator-color`) marca el desbordamiento —
+es cromo recesivo, no un borde con peso de dato, el mismo criterio que la rejilla de
+`Chart`.
+
+```tsx
+<Table.Header actions sticky="end" />
+{/* … */}
+<Table.Cell sticky="end">
+  <Button variant="ghost" size="sm">Editar</Button>
+</Table.Cell>
+```
+
+<Canvas of={TableStories.ColumnaDeAccionesPegajosa} />
+
 ## Densidad compacta
 
 <Canvas of={TableStories.Sm} />
