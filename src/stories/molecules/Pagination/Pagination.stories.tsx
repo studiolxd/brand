@@ -15,6 +15,7 @@ const meta: Meta<typeof Pagination> = {
     page:            { control: { type: 'number' } },
     pageSize:        { control: { type: 'number' } },
     showTotal:       { control: { type: 'boolean' } },
+    size:            { control: { type: 'inline-radio' }, options: ['sm', 'md', 'lg'] },
     ariaLabel:       { control: { type: 'text' } },
     onPageChange:    { control: false },
     onPageSizeChange:{ control: false },
@@ -168,7 +169,7 @@ export const ConRanuraTrasElSelector: Story = {
         onPageChange={setPage}
         onPageSizeChange={(s) => { setPageSize(s); setPage(1); }}
         showTotal
-        afterPageSize={<Button variant="outline" size="sm">Exportar</Button>}
+        afterPageSize={<Button variant="outline">Exportar</Button>}
       />
     );
   },
@@ -217,6 +218,31 @@ export const ConLinks: Story = {
   },
 };
 
+/**
+ * Las tres tallas, emparejadas con las del `Button`: `sm` (32px) para una tabla
+ * densa, `md` (40px, la de por defecto) para la aplicación y `lg` (48px) para la
+ * superficie pública. En cada fila se ven a la vez el **reposo**, el **activo**
+ * (la página vigente, con el relleno del hover y el peso enfático) y el
+ * **deshabilitado** (el chevron anterior, que en la página 1 no lleva a ningún
+ * sitio). El **hover** invierte el outline: pásale el puntero por encima.
+ */
+export const Tallas: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {(['sm', 'md', 'lg'] as const).map((talla) => (
+        <Pagination
+          key={talla}
+          size={talla}
+          total={200}
+          page={1}
+          pageSize={10}
+          ariaLabel={`Paginación ${talla}`}
+        />
+      ))}
+    </div>
+  ),
+};
+
 export const Sm: Story = {
   name: 'Sm — compacto',
   render: (args) => {
@@ -235,6 +261,36 @@ export const Sm: Story = {
       />
     );
   },
+};
+
+export const Lg: Story = {
+  name: 'Lg — la talla pública',
+  render: (args) => {
+    const [page, setPage] = useState(args.page);
+    return (
+      <Pagination {...args} size="lg" total={200} page={page} pageSize={10} onPageChange={setPage} />
+    );
+  },
+};
+
+/** Las tres tallas sobre superficie oscura, con los mismos estados. */
+export const TallasEnSuperficieOscura: Story = {
+  name: 'Tallas en superficie oscura',
+  parameters: { surface: 'dark' },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {(['sm', 'md', 'lg'] as const).map((talla) => (
+        <Pagination
+          key={talla}
+          size={talla}
+          total={200}
+          page={1}
+          pageSize={10}
+          ariaLabel={`Paginación ${talla}`}
+        />
+      ))}
+    </div>
+  ),
 };
 
 export const EnSuperficieOscura: Story = {
@@ -337,5 +393,76 @@ export const ContratoRanuraSinPaginas: Story = {
     await expect(canvas.getByRole('button', { name: 'Exportar' })).toBeInTheDocument();
     // Sin páginas no hay botones de página que recorrer.
     await expect(canvasElement.querySelector('.pagination__controls')).toBeNull();
+  },
+};
+
+/** Test: `md` es la talla por defecto y cada talla pone su clase en el `nav`. */
+export const ContratoTallas: Story = {
+  name: 'Test — la talla por defecto es md',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Pagination total={100} page={2} pageSize={10} ariaLabel="Por defecto" />
+      <Pagination total={100} page={2} pageSize={10} size="sm" ariaLabel="Compacta" />
+      <Pagination total={100} page={2} pageSize={10} size="lg" ariaLabel="Pública" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('navigation', { name: 'Por defecto' })).toHaveClass('pagination--md');
+    await expect(canvas.getByRole('navigation', { name: 'Compacta' })).toHaveClass('pagination--sm');
+    await expect(canvas.getByRole('navigation', { name: 'Pública' })).toHaveClass('pagination--lg');
+  },
+};
+
+/**
+ * Test: el chevron ocupa la misma caja que un número —cuadrada, del lado de la
+ * altura de la talla— para que la fila de botones no se descuadre en los
+ * extremos. Y el botón es un outline: sin subrayado en ninguno de sus estados.
+ */
+export const ContratoCajaCuadrada: Story = {
+  name: 'Test — el chevron mide lo mismo que un número',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Pagination total={100} page={2} pageSize={10} size="sm" ariaLabel="Compacta" />
+      <Pagination total={100} page={2} pageSize={10} ariaLabel="Media" />
+      <Pagination total={100} page={2} pageSize={10} size="lg" ariaLabel="Pública" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    for (const nombre of ['Compacta', 'Media', 'Pública']) {
+      const nav = canvas.getByRole('navigation', { name: nombre });
+      const numero = nav.querySelector('.pagination__btn:not(.pagination__btn--nav)') as HTMLElement;
+      const chevron = nav.querySelector('.pagination__btn--nav') as HTMLElement;
+      const cajaNumero = numero.getBoundingClientRect();
+      const cajaChevron = chevron.getBoundingClientRect();
+      // misma caja, y cuadrada
+      await expect(Math.round(cajaChevron.width)).toBe(Math.round(cajaNumero.width));
+      await expect(Math.round(cajaChevron.width)).toBe(Math.round(cajaChevron.height));
+      // outline, no enlace: ni subrayado de sombra ni text-decoration
+      const estilo = getComputedStyle(numero);
+      await expect(estilo.boxShadow).toBe('none');
+      await expect(estilo.textDecorationLine).toBe('none');
+    }
+  },
+};
+
+/** Test: la página vigente y el chevron sin destino llevan su estado en el DOM. */
+export const ContratoEstados: Story = {
+  name: 'Test — activo y deshabilitado',
+  tags: ['!dev'],
+  render: () => <Pagination total={100} page={1} pageSize={10} ariaLabel="Páginas" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nav = canvas.getByRole('navigation', { name: 'Páginas' });
+    const actual = within(nav).getByRole('button', { name: 'Página 1' });
+    await expect(actual).toHaveClass('pagination__btn--current');
+    await expect(actual).toHaveAttribute('aria-current', 'page');
+    // sobre el activo, el hover no cambia nada: no hay nada a lo que navegar
+    await expect(getComputedStyle(actual).pointerEvents).toBe('none');
+    await expect(within(nav).getByRole('button', { name: 'Página anterior' })).toBeDisabled();
+    await expect(within(nav).getByRole('button', { name: 'Página siguiente' })).toBeEnabled();
   },
 };

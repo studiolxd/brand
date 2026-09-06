@@ -4,50 +4,64 @@
 
 :root {
   --pagination-padding-inline: 0; /** Sin padding lateral */
-  --pagination-btn-hover-text-decoration: none; /** Decoración de texto en hover — estilo ghost */
+  --pagination-btn-bg: rgba(0, 0, 0, 0); /** Relleno en reposo: ninguno — es un botón outline */
+  --pagination-btn-disabled-bg: rgba(0, 0, 0, 0); /** Relleno cuando está deshabilitado: ninguno */
   --pagination-btn-disabled-cursor: not-allowed; /** Cursor cuando está deshabilitado */
   --pagination-font-family: var(--font-family-sans); /** Font family */
-  --pagination-font-size: var(--font-size-1); /** 14px — UI nav label */
+  --pagination-font-size: var(--font-size-2); /** 16px — texto del nav (sumario) en la talla md */
   --pagination-line-height: var(--line-height-none); /** Single line */
   --pagination-gap: var(--spacing-3); /** Gap entre secciones del nav */
   --pagination-controls-gap: var(--spacing-1); /** Gap entre botones de paginación */
   --pagination-padding-block: var(--spacing-1); /** Padding vertical del nav */
-  --pagination-btn-min-width: var(--spacing-6); /** Ancho mínimo de los botones de página */
-  --pagination-btn-padding-block: var(--spacing-2); /** Padding vertical de los botones */
-  --pagination-btn-padding-inline: var(--spacing-2); /** Padding horizontal de los botones */
+  --pagination-btn-padding-inline: var(--spacing-2); /** Padding horizontal del botón: el inset interior del control, no el del rótulo de un `Button` (aquí el rótulo es una cifra y la caja ya es cuadrada por `btn-height`); solo entra en juego cuando el número tiene tres o más dígitos */
+  --pagination-btn-border-style: var(--button-border-style); /** Estilo del borde del botón — el del `Button` */
   --pagination-transition-duration: var(--motion-duration-fast); /** Duración de las transiciones */
   --pagination-transition-easing: var(--motion-easing-default); /** Easing de las transiciones */
-  --pagination-sm-btn-padding-block: var(--spacing-1); /** Padding block de botones — variante sm */
-  --pagination-sm-btn-padding-inline: var(--spacing-1); /** Padding inline de botones — variante sm */
-  --pagination-sm-btn-min-width: var(--spacing-5); /** Ancho mínimo de botones de página — variante sm */
-  --pagination-md-font-size: var(--font-size-2); /** Font size — variante md (16px) */
-  --pagination-lg-font-size: var(--font-size-3); /** Font size — variante lg (20px) */
-  --pagination-lg-btn-padding-block: var(--spacing-3); /** Padding block de botones — variante lg */
-  --pagination-lg-btn-padding-inline: var(--spacing-3); /** Padding inline de botones — variante lg */
-  --pagination-lg-btn-min-width: var(--spacing-7); /** Ancho mínimo de botones de página — variante lg */
+  --pagination-sm-font-size: var(--font-size-1); /** Texto del nav — talla sm */
+  --pagination-sm-btn-padding-inline: var(--spacing-1); /** Padding horizontal del botón — talla sm */
+  --pagination-lg-font-size: var(--font-size-3); /** Texto del nav — talla lg (la pública) */
+  --pagination-lg-btn-padding-inline: var(--spacing-3); /** Padding horizontal del botón — talla lg */
   --pagination-font-weight: var(--font-weight-default); /** Font weight base */
   --pagination-summary-color: var(--color-text-on-light); /** Color del texto de total de resultados */
-  --pagination-btn-radius: var(--border-radius-default); /** Radio de borde de los botones */
-  --pagination-btn-color: var(--color-text-on-light); /** Color de texto de los botones */
-  --pagination-btn-hover-color: var(--color-text-on-light); /** Texto en hover */
-  --pagination-btn-hover-underline-width: var(--border-width-default); /** Grosor del subrayado en hover — token propio, no el de Link */
-  --pagination-btn-current-color: var(--color-text-on-light); /** Texto de la página activa */
+  --pagination-btn-height: var(--button-height); /** Altura del botón de página — la del `Button md` (40px). También su lado mínimo: la caja es cuadrada */
+  --pagination-btn-font-size: var(--button-font-size); /** Tipografía del botón de página — la del `Button md` */
+  --pagination-btn-color: var(--color-primary); /** Tinta del botón en reposo */
+  --pagination-btn-border-color: var(--color-primary); /** Borde del botón en reposo */
+  --pagination-btn-hover-bg: var(--color-primary); /** Relleno en hover — el outline se invierte, sin subrayado */
+  --pagination-btn-hover-color: var(--color-text-on-dark); /** Tinta en hover */
+  --pagination-btn-hover-border-color: var(--color-primary); /** Borde en hover */
+  --pagination-btn-current-bg: var(--color-primary); /** Relleno de la página activa: el mismo dibujo que el hover */
+  --pagination-btn-current-color: var(--color-text-on-dark); /** Tinta de la página activa */
+  --pagination-btn-current-border-color: var(--color-primary); /** Borde de la página activa */
   --pagination-btn-current-font-weight: var(--font-weight-emphasis); /** Peso tipográfico de la página activa */
-  --pagination-btn-disabled-color: var(--color-icon-secondary-on-light); /** Texto cuando está deshabilitado */
+  --pagination-btn-disabled-color: var(--color-disabled-border-on-light); /** Tinta cuando está deshabilitado — el mismo rol que el `Button outline` */
+  --pagination-btn-disabled-border-color: var(--color-disabled-border-on-light); /** Borde cuando está deshabilitado — el mismo rol que el `Button outline` */
   --pagination-ellipsis-color: var(--color-text-muted-on-light); /** Color del ellipsis */
   --pagination-focus-ring-color: var(--color-primary); /** Color del focus ring */
   --pagination-focus-ring-width: var(--border-width-focus); /** Grosor del focus ring */
   --pagination-focus-ring-offset: var(--border-width-default); /** Separación del focus ring */
+  --pagination-sm-btn-height: var(--button-sm-height); /** Altura y lado mínimo del botón — la del `Button sm` (32px) */
+  --pagination-sm-btn-font-size: var(--button-sm-font-size); /** Tipografía del botón — la del `Button sm` */
+  --pagination-lg-btn-height: var(--button-lg-height); /** Altura y lado mínimo del botón — la del `Button lg` (48px) */
+  --pagination-lg-btn-font-size: var(--button-lg-font-size); /** Tipografía del botón — la del `Button lg` */
+  --pagination-btn-radius: var(--button-border-radius); /** Radio de borde del botón — el del `Button` */
+  --pagination-btn-border-width: var(--button-border-width); /** Grosor del borde del botón (1px) — el del `Button` */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
   --pagination-summary-color: var(--color-text-on-dark); /** Color del resumen — surface-dark */
-  --pagination-btn-color: var(--color-text-on-dark); /** Color de botones — surface-dark */
-  --pagination-btn-hover-color: var(--color-text-on-dark); /** Texto hover — surface-dark */
-  --pagination-btn-current-color: var(--color-text-on-dark); /** Texto de la página activa — surface-dark */
-  --pagination-btn-disabled-color: var(--color-text-muted-on-dark); /** Texto deshabilitado — surface-dark */
+  --pagination-btn-color: var(--color-text-on-dark); /** Tinta del botón en reposo — surface-dark */
+  --pagination-btn-border-color: var(--color-text-on-dark); /** Borde del botón en reposo — surface-dark */
+  --pagination-btn-hover-bg: var(--color-text-on-dark); /** Relleno en hover — surface-dark: el blanco puro, como el `Button outline` */
+  --pagination-btn-hover-color: var(--color-primary); /** Tinta en hover — surface-dark */
+  --pagination-btn-hover-border-color: var(--color-text-on-dark); /** Borde en hover — surface-dark */
+  --pagination-btn-current-bg: var(--color-text-on-dark); /** Relleno de la página activa — surface-dark */
+  --pagination-btn-current-color: var(--color-primary); /** Tinta de la página activa — surface-dark */
+  --pagination-btn-current-border-color: var(--color-text-on-dark); /** Borde de la página activa — surface-dark */
+  --pagination-btn-disabled-color: var(--color-disabled-border-on-dark); /** Tinta deshabilitada — surface-dark */
+  --pagination-btn-disabled-border-color: var(--color-disabled-border-on-dark); /** Borde deshabilitado — surface-dark */
   --pagination-ellipsis-color: var(--color-text-muted-on-dark); /** Color del ellipsis — surface-dark */
   --pagination-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */
 }
