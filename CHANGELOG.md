@@ -7,6 +7,45 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+> **Minor.**
+
+- **`Pagination`: los botones son `outline`, en tres tallas.** Los números y los
+  chevrones dejan de ser texto plano con subrayado en hover y pasan a dibujarse como un
+  `Button variant="outline"` en miniatura, con sus estados y por referencia a sus tokens:
+  reposo con borde y tinta `color.primary` sin relleno; hover con relleno `color.primary`
+  y tinta clara —**sin subrayado**—; página vigente (`aria-current="page"`) con ese mismo
+  dibujo más `font-weight.emphasis` y sin cambio al pasar por encima; deshabilitado con
+  borde y cifra en `color.disabled.border-on-light`. En superficie oscura, el par del
+  `Button outline`: borde y tinta blancos en reposo, relleno blanco con tinta prusia en
+  hover y en la página activa, `color.disabled.border-on-dark` deshabilitado.
+  La caja de todos los botones es **cuadrada** (`min-inline-size` igual a la altura), de
+  modo que un «1» mide lo mismo que un «‹»; los puntos suspensivos conservan la caja pero
+  siguen sin borde.
+- **`Pagination`: prop `size` (`sm` | `md` | `lg`, por defecto `md`).** Altura,
+  tipografía y caja de cada talla salen de los tokens del `Button` de esa talla —32/40/48
+  px—; `sm` para una tabla densa, `md` para la aplicación (la que usan `DataTable` y el
+  pie de las tablas) y `lg` para la superficie pública. La talla viaja al `Select` de
+  registros por página. `FormSizeContext` no aplica: el paginador no es un campo.
+  Lo que va en `afterPageSize` lo dimensiona quien lo pasa — las stories de `Pagination`
+  y `DataTable` suben su botón «Exportar» a la talla del paginador.
+  - Tokens nuevos: `pagination.btn-height`, `btn-font-size`, `btn-border-width`,
+    `btn-border-style`, `btn-bg`, `btn-border-color`, `btn-hover-bg`,
+    `btn-hover-border-color`, `btn-current-bg`, `btn-current-border-color`,
+    `btn-disabled-bg`, `btn-disabled-border-color`, `sm-btn-height`, `sm-btn-font-size`,
+    `lg-btn-height`, `lg-btn-font-size`, `sm-font-size`, y sus pares `surface-dark-*`.
+  - Tokens retirados: `pagination.btn-hover-underline-width` y
+    `btn-hover-text-decoration` (ya no hay subrayado), `btn-min-width`,
+    `btn-padding-block`, `sm-btn-min-width`, `sm-btn-padding-block`, `lg-btn-min-width`,
+    `lg-btn-padding-block` (la caja la fija la altura) y `md-font-size` (la talla `md` es
+    ahora la base, `pagination.font-size`).
+- **`Table`/`DataTable`: la columna pegajosa pierde el filete de inicio.** Lo que la
+  distingue del contenido que pasa por debajo es su fondo opaco (`table.sticky-bg`), y
+  nada más: una línea ahí se leía como un borde con peso de dato en una tabla que ya
+  tiene los suyos. Tokens retirados: `table.sticky-separator-width`,
+  `table.sticky-separator-color` y `table.surface-dark-sticky-separator-color`.
+
 ## [32.3.0] — 2026-09-06
 
 > **Minor.**

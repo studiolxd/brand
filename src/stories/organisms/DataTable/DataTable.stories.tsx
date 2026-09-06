@@ -90,7 +90,7 @@ export const AccionesEnElPie: Story = {
   args: {
     columns,
     data,
-    footerActions: <Button variant="outline" size="sm">Exportar</Button>,
+    footerActions: <Button variant="outline">Exportar</Button>,
   },
   render: (args) => {
     const [page, setPage] = useState(1);
@@ -358,7 +358,7 @@ export const ContratoAccionesTrasElSelector: Story = {
   args: {
     columns,
     data,
-    footerActions: <Button variant="outline" size="sm">Exportar</Button>,
+    footerActions: <Button variant="outline">Exportar</Button>,
   },
   render: (args) => (
     <MemberTable

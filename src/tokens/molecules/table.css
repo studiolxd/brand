@@ -33,8 +33,6 @@
   --table-row-hover-marker-color: var(--color-primary); /** Color de la barra de hover — tinta de la superficie */
   --table-row-selected-font-weight: var(--font-weight-emphasis); /** Peso de la fila seleccionada */
   --table-sticky-bg: var(--color-background-light); /** Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal */
-  --table-sticky-separator-width: var(--border-width-default); /** Grosor del filete de inicio de la columna pegajosa */
-  --table-sticky-separator-color: var(--color-border-default-on-light); /** Filete de inicio de la columna pegajosa: cromo recesivo (marca el desbordamiento, no es un borde con peso de dato), como la rejilla de `Chart` */
   --table-footer-bg: var(--color-surface-secondary-on-light); /** Fondo del tfoot: superficie clara secundaria, no un fondo de estado */
   --table-footer-border-width: var(--border-width-default); /** Borde superior del tfoot — 1px, como el del thead */
   --table-footer-border-color: var(--color-text-on-light); /** Color del borde superior del tfoot */
@@ -54,7 +52,6 @@ html.dark {
   --table-row-border-color: var(--color-text-on-dark); /** Separador entre filas — surface-dark */
   --table-row-selected-color: var(--color-accent-1); /** Tinta de la fila seleccionada — surface-dark: lavanda, como en el SidebarNav */
   --table-sticky-bg: var(--color-background-dark); /** Fondo de la columna pegajosa — surface-dark */
-  --table-sticky-separator-color: var(--color-border-recessive-on-dark); /** Filete de la columna pegajosa — surface-dark: la misma línea recesiva que la rejilla de `Chart` (`grey-darkest`), no `color.text.on-dark` (la derivación estándar de un borde) — este filete tampoco es un borde con peso de dato */
   --table-footer-bg: var(--color-surface-secondary-on-dark); /** Fondo del tfoot — surface-dark */
   --table-footer-border-color: var(--color-text-on-dark); /** Borde superior del tfoot — surface-dark */
   --table-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark */

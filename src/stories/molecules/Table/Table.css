@@ -147,16 +147,15 @@
 /* Pega la columna al borde final cuando la tabla desborda `.table__wrapper`:
    la acción de fila se queda alcanzable con scroll horizontal en vez de caer
    fuera del recorte (y sin barra de scroll visible en macOS, inalcanzable).
-   El fondo tapa el resto de columnas que se deslizan debajo; el filete de
-   inicio es cromo recesivo que marca el desbordamiento, no un borde con peso
-   de dato — mismo criterio que la rejilla de `Chart`. */
+   Lo que distingue la columna del contenido que pasa por debajo es su fondo
+   opaco, y nada más: no lleva filete de inicio. Una línea ahí leería como un
+   borde con peso de dato en una tabla que ya tiene los suyos. */
 .table__header.table__header--sticky,
 .table__cell.table__cell--sticky {
   position: sticky;
   inset-inline-end: 0;
   z-index: 1;
   background-color: var(--table-sticky-bg);
-  box-shadow: inset var(--table-sticky-separator-width) 0 0 var(--table-sticky-separator-color);
 }
 
 /* ── Size: sm ────────────────────────────────────────── */

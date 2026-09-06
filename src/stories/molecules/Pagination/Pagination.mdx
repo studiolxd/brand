@@ -15,6 +15,46 @@ Componente de paginación controlado. Muestra controles de navegación (Anterior
 
 <Canvas of={PaginationStories.Default} />
 
+## Tallas
+
+`size` acepta `sm`, `md` (por defecto) y `lg`. Cada talla toma **altura, tipografía y
+caja** de los tokens del `Button` de esa misma talla, de modo que un paginador nunca
+desentona con los botones que lo rodean:
+
+| `size` | Altura | Dónde |
+| --- | --- | --- |
+| `sm` | 32px (`button.sm-height`) | dentro de una tabla densa |
+| `md` | 40px (`button.height`) | la aplicación — lo que usan `DataTable` y el pie de las tablas |
+| `lg` | 48px (`button.lg-height`) | listados de la superficie pública |
+
+La talla viaja también al `Select` de registros por página, así que el pie queda alineado
+sin tocar nada. Lo que va en `afterPageSize` lo pone quien lo usa: **para que quede a la
+misma altura, ese botón debe llevar la talla del paginador** (con `md`, un `Button` sin
+`size`). `FormSizeContext` no aplica: el paginador no es un campo, así que no hereda la
+talla del formulario que lo envuelva — se pasa por `size`.
+
+<Canvas of={PaginationStories.Tallas} />
+<Canvas of={PaginationStories.TallasEnSuperficieOscura} />
+
+## Los botones son botones `outline`
+
+Los números y los chevrones se dibujan como un `Button variant="outline"` en miniatura,
+con sus mismos estados y por referencia a sus mismos tokens:
+
+| Estado | Superficie clara | Superficie oscura |
+| --- | --- | --- |
+| Reposo | borde y tinta prusia, sin relleno | borde y tinta blancos, sin relleno |
+| Hover | relleno prusia, tinta clara | relleno blanco, tinta prusia |
+| Activo (`aria-current="page"`) | como el hover, con `font-weight.emphasis` | ídem |
+| Deshabilitado | borde y cifra en `color.disabled.border-on-*`, sin relleno | ídem |
+
+Dos consecuencias que se ven: sobre la **página vigente el hover no cambia nada**
+(`pointer-events: none` — no hay adónde ir), y la caja de todos los botones es
+**cuadrada** (`min-inline-size` igual a la altura de la talla), para que un «1» no salga
+más estrecho que un «‹» y la fila no se descuadre en los extremos. Los puntos suspensivos
+conservan la caja pero no llevan borde: no son un control.
+
+
 ## Con total de resultados
 
 La prop `showTotal` añade el texto "X resultados" antes de los controles.
@@ -139,12 +179,12 @@ fechas) está en **Foundations › Internacionalización**.
   página a la que ir se pintan como `<button>` (con `aria-current="page"` la primera,
   deshabilitado las segundas), nunca como un `<a>` sin `href` — que no es enfocable por
   teclado ni se anuncia como enlace. Con `hrefBuilder`, el resto sí son enlaces de verdad.
-- El subrayado del botón en hover usa `pagination.btn-hover-underline-width`, un token propio —
-  no `link.underline-width` — porque el botón de página no es un `Link`, aunque comparta la misma
-  técnica visual (borde inferior, no `text-decoration`).
-- `btn-disabled-color` (`grey-dark`) está exento de la regla «todo texto va en prusia o
-  grey-darkest»: es un control deshabilitado, y `grey-dark` es justo el rol reservado para
-  controles deshabilitados e iconos de acción secundarios.
+- El botón de página **no se subraya en ningún estado**: no es un enlace disfrazado, es un
+  control con caja, y lo que marca el hover es la inversión del outline. De ahí que se
+  retiraran los tokens del subrayado (`btn-hover-underline-width`, `btn-hover-text-decoration`).
+- El deshabilitado toma el mismo rol que el `Button outline`
+  (`color.disabled.border-on-light` / `-on-dark`): el borde y la cifra son la misma cosa
+  apagada, y sobre ella el hover tampoco cambia nada.
 
 ---
 

@@ -24,8 +24,6 @@ $lxd-table-row-hover-marker-width: 2px; // Grosor de la barra que marca la fila 
 $lxd-table-row-hover-marker-color: #111e30; // Color de la barra de hover — tinta de la superficie
 $lxd-table-row-selected-font-weight: 500; // Peso de la fila seleccionada
 $lxd-table-sticky-bg: #ffffff; // Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal
-$lxd-table-sticky-separator-width: 1px; // Grosor del filete de inicio de la columna pegajosa
-$lxd-table-sticky-separator-color: #d0d0d0; // Filete de inicio de la columna pegajosa: cromo recesivo (marca el desbordamiento, no es un borde con peso de dato), como la rejilla de `Chart`
 $lxd-table-footer-bg: #f2f2f2; // Fondo del tfoot: superficie clara secundaria, no un fondo de estado
 $lxd-table-footer-border-width: 1px; // Borde superior del tfoot — 1px, como el del thead
 $lxd-table-footer-border-color: #111e30; // Color del borde superior del tfoot

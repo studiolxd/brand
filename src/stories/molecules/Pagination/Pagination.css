@@ -53,29 +53,39 @@
   margin-inline-start: auto;
 }
 
+/* El botón de página es un `Button outline` en miniatura: borde en reposo,
+   relleno invertido en hover y en la página vigente. No lleva subrayado —el
+   recurso del DS para un enlace— porque aquí no es un enlace disfrazado, es un
+   control con caja. La caja es CUADRADA (`min-inline-size` = altura) para que
+   el chevron mida lo mismo que un «1»: si no, la fila de botones se ve
+   descuadrada en los extremos. */
 .pagination__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: var(--pagination-btn-min-width);
-  padding-block: var(--pagination-btn-padding-block);
+  block-size: var(--pagination-btn-height);
+  min-inline-size: var(--pagination-btn-height);
+  padding-block: 0;
   padding-inline: var(--pagination-btn-padding-inline);
+  font-size: var(--pagination-btn-font-size);
   border-radius: var(--pagination-btn-radius);
+  border-width: var(--pagination-btn-border-width);
+  border-style: var(--pagination-btn-border-style);
+  border-color: var(--pagination-btn-border-color);
+  background-color: var(--pagination-btn-bg);
   color: var(--pagination-btn-color);
-  border: none;
   cursor: pointer;
   text-decoration: none;
   box-shadow: none;
-  transition-property: box-shadow, color;
+  transition-property: background-color, border-color, color;
   transition-duration: var(--pagination-transition-duration);
   transition-timing-function: var(--pagination-transition-easing);
 }
 
 .pagination__btn:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--pagination-btn-hover-bg);
+  border-color: var(--pagination-btn-hover-border-color);
   color: var(--pagination-btn-hover-color);
-  text-decoration: var(--pagination-btn-hover-text-decoration);
-  padding-block-end: var(--link-underline-offset);
-  box-shadow: inset 0 calc(-1 * var(--pagination-btn-hover-underline-width)) 0 0 currentColor;
 }
 
 .pagination__btn:focus-visible {
@@ -83,15 +93,16 @@
   outline-offset: var(--pagination-focus-ring-offset);
 }
 
+/* La página vigente lleva el mismo dibujo que el hover, con el peso enfático.
+   `pointer-events: none` es lo que hace que pasar por encima no la cambie: no
+   hay nada a lo que navegar. */
 .pagination__btn.pagination__btn--current {
+  background-color: var(--pagination-btn-current-bg);
+  border-color: var(--pagination-btn-current-border-color);
   color: var(--pagination-btn-current-color);
   font-weight: var(--pagination-btn-current-font-weight);
   cursor: default;
   pointer-events: none;
-}
-
-.pagination__btn--nav {
-  min-width: auto;
 }
 
 .pagination__chevron--prev {
@@ -100,47 +111,44 @@
 
 .pagination__btn:disabled,
 .pagination__btn[aria-disabled='true'] {
+  background-color: var(--pagination-btn-disabled-bg);
+  border-color: var(--pagination-btn-disabled-border-color);
   color: var(--pagination-btn-disabled-color);
   cursor: var(--pagination-btn-disabled-cursor);
+  pointer-events: none;
 }
 
+/* Los puntos suspensivos no son un control: sin borde ni relleno, solo la
+   misma caja para que no rompan la línea de botones. */
 .pagination__ellipsis {
-  padding-block: var(--pagination-btn-padding-block);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--pagination-btn-height);
   padding-inline: var(--pagination-btn-padding-inline);
+  font-size: var(--pagination-btn-font-size);
   color: var(--pagination-ellipsis-color);
 }
 
 /* ─── Sm variant ─────────────────────────────────────────────────────────── */
 .pagination.pagination--sm {
-  font-size: var(--pagination-font-size);
+  font-size: var(--pagination-sm-font-size);
+}
+
+.pagination.pagination--sm .pagination__btn,
+.pagination.pagination--sm .pagination__ellipsis {
+  block-size: var(--pagination-sm-btn-height);
+  padding-inline: var(--pagination-sm-btn-padding-inline);
+  font-size: var(--pagination-sm-btn-font-size);
 }
 
 .pagination.pagination--sm .pagination__btn {
-  padding-block: var(--pagination-sm-btn-padding-block);
-  padding-inline: var(--pagination-sm-btn-padding-inline);
-  min-width: var(--pagination-sm-btn-min-width);
-}
-
-.pagination.pagination--sm .pagination__btn--nav {
-  min-width: auto;
-}
-
-.pagination.pagination--sm .pagination__ellipsis {
-  padding-block: var(--pagination-sm-btn-padding-block);
-  padding-inline: var(--pagination-sm-btn-padding-inline);
+  min-inline-size: var(--pagination-sm-btn-height);
 }
 
 /* ─── Md variant ─────────────────────────────────────────────────────────── */
 .pagination.pagination--md {
-  font-size: var(--pagination-md-font-size);
-}
-
-.pagination.pagination--md .pagination__btn {
-  font-size: var(--pagination-md-font-size);
-}
-
-.pagination.pagination--md .pagination__ellipsis {
-  font-size: var(--pagination-md-font-size);
+  font-size: var(--pagination-font-size);
 }
 
 /* ─── Lg variant ─────────────────────────────────────────────────────────── */
@@ -148,19 +156,13 @@
   font-size: var(--pagination-lg-font-size);
 }
 
-.pagination.pagination--lg .pagination__btn {
-  font-size: var(--pagination-lg-font-size);
-  padding-block: var(--pagination-lg-btn-padding-block);
-  padding-inline: var(--pagination-lg-btn-padding-inline);
-  min-width: var(--pagination-lg-btn-min-width);
-}
-
-.pagination.pagination--lg .pagination__btn--nav {
-  min-width: auto;
-}
-
+.pagination.pagination--lg .pagination__btn,
 .pagination.pagination--lg .pagination__ellipsis {
-  font-size: var(--pagination-lg-font-size);
-  padding-block: var(--pagination-lg-btn-padding-block);
+  block-size: var(--pagination-lg-btn-height);
   padding-inline: var(--pagination-lg-btn-padding-inline);
+  font-size: var(--pagination-lg-btn-font-size);
+}
+
+.pagination.pagination--lg .pagination__btn {
+  min-inline-size: var(--pagination-lg-btn-height);
 }

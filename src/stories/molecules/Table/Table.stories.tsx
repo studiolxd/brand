@@ -349,6 +349,9 @@ const COLUMNAS_ANCHAS = [
  * contenedor: se queda alcanzable con scroll horizontal en vez de caer fuera
  * del recorte del wrapper. Para las tablas escritas a mano (sin `DataTable`),
  * que hace lo mismo con `meta: { sticky: 'end' }`.
+ *
+ * Lo que la distingue del contenido que pasa por debajo es su fondo opaco, y
+ * nada más: no lleva filete de inicio.
  */
 export const ColumnaDeAccionesPegajosa: Story = {
   name: 'Columna de acciones pegajosa',
@@ -439,6 +442,10 @@ export const ContratoColumnaPegajosa: Story = {
     const celdaRect = celdaAcciones.getBoundingClientRect();
     await expect(celdaRect.right).toBeLessThanOrEqual(wrapperRect.right + 1);
     await expect(celdaRect.left).toBeGreaterThanOrEqual(wrapperRect.left);
+
+    // Sin filete de inicio: la columna se distingue solo por su fondo opaco.
+    const estilo = getComputedStyle(celdaAcciones);
+    await expect(estilo.boxShadow).toBe('none');
   },
 };
 
