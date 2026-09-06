@@ -122,8 +122,8 @@ acciones cae fuera del recorte de `.table__wrapper` y —sin barra de scroll vis
 macOS— el menú de fila queda inalcanzable. **La columna de acciones se escribe siempre
 así: `meta: { align: 'center', headerHidden: true, sticky: 'end' }`.** `sticky: 'end'`
 la pega al borde final (`inset-inline-end: 0`): se queda alcanzable con scroll horizontal,
-con un fondo opaco que tapa el resto de columnas al deslizarse por debajo y un filete de
-inicio recesivo que marca el desbordamiento.
+con un fondo opaco que tapa el resto de columnas al deslizarse por debajo. No hay filete de
+inicio: el fondo opaco basta, y una línea ahí se leería como un borde con peso de dato.
 
 ```tsx
 { id: 'actions', header: 'Acciones', enableSorting: false, cell: renderActions,

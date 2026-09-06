@@ -29,8 +29,6 @@
     "row-selected-font-weight": { "$value": "{font-weight.emphasis}", "$type": "number",    "$description": "Peso de la fila seleccionada" },
 
     "sticky-bg":               { "$value": "{color.background.light}", "$type": "color", "$description": "Fondo de la columna de acciones pegajosa (cabecera y celda): opaco, para tapar el resto de columnas que se deslizan debajo al hacer scroll horizontal" },
-    "sticky-separator-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Grosor del filete de inicio de la columna pegajosa" },
-    "sticky-separator-color":  { "$value": "{color.border.default-on-light}", "$type": "color", "$description": "Filete de inicio de la columna pegajosa: cromo recesivo (marca el desbordamiento, no es un borde con peso de dato), como la rejilla de `Chart`" },
 
     "footer-bg":              { "$value": "{color.surface.secondary-on-light}", "$type": "color", "$description": "Fondo del tfoot: superficie clara secundaria, no un fondo de estado" },
     "footer-border-width":    { "$value": "{border-width.default}",        "$type": "dimension", "$description": "Borde superior del tfoot — 1px, como el del thead" },
@@ -56,7 +54,6 @@
     "surface-dark-row-border-color":   { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Separador entre filas — surface-dark" },
     "surface-dark-row-selected-color": { "$value": "{color.accent-1}",          "$type": "color", "$description": "Tinta de la fila seleccionada — surface-dark: lavanda, como en el SidebarNav" },
     "surface-dark-sticky-bg":             { "$value": "{color.background.dark}", "$type": "color", "$description": "Fondo de la columna pegajosa — surface-dark" },
-    "surface-dark-sticky-separator-color":{ "$value": "{color.border.recessive-on-dark}", "$type": "color", "$description": "Filete de la columna pegajosa — surface-dark: la misma línea recesiva que la rejilla de `Chart` (`grey-darkest`), no `color.text.on-dark` (la derivación estándar de un borde) — este filete tampoco es un borde con peso de dato" },
     "surface-dark-footer-bg":          { "$value": "{color.surface.secondary-on-dark}", "$type": "color", "$description": "Fondo del tfoot — surface-dark" },
     "surface-dark-footer-border-color":{ "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Borde superior del tfoot — surface-dark" },
     "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Focus ring color — surface-dark" },

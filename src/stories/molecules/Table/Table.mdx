@@ -68,10 +68,10 @@ menú de fila queda inalcanzable. `sticky="end"` en `Table.Header` **y** en la `
 equivalente de cada fila la pega al borde final (`inset-inline-end: 0`): se queda alcanzable
 con scroll horizontal.
 
-El fondo de la celda pegajosa tapa el resto de columnas que se deslizan debajo
-(`sticky-bg`), y un filete de inicio (`sticky-separator-color`) marca el desbordamiento —
-es cromo recesivo, no un borde con peso de dato, el mismo criterio que la rejilla de
-`Chart`.
+Lo único que separa la columna pegajosa del contenido que pasa por debajo es su **fondo
+opaco** (`sticky-bg`): no lleva filete de inicio. Una línea ahí se leería como un borde
+con peso de dato en una tabla que ya tiene los suyos, y el fondo ya hace todo el trabajo
+de distinguir la columna cuando la tabla desborda.
 
 ```tsx
 <Table.Header actions sticky="end" />
