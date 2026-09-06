@@ -1,0 +1,5 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-public-page-shell-preferences-padding-block: 1.5rem; // Aire arriba y abajo de la banda de preferencias, la de idioma y tema que cierra una página pública por encima del pie legal. Apunta al aire del pie público —`legal-footer.padding-block`—, no al del `main`: la banda es chrome, no contenido, y tiene que cerrar la pantalla con la misma medida con la que la cierra el `LegalFooter` que va justo debajo. El aire que la separa del contenido ya lo pone el `main` al cerrar
+$lxd-public-page-shell-preferences-gap: 0.75rem; // Aire entre los conmutadores de la banda —idioma y tema—: el aire de dentro de un componente. Los dos controles son las dos caras de la misma preferencia de pantalla y se leen como un par, no como dos bloques

@@ -19,13 +19,24 @@ export interface OnboardingShellProps {
    */
   brand?: ReactNode;
   /**
-   * Las preferencias globales de la pantalla: idioma y tema. Se pintan en un
-   * **pie de chrome propio**, al final y separadas del pie de acciones del
-   * paso — una preferencia global no es una acción del flujo y no puede
-   * parecerlo. En el alta no hay cabecera pública —el usuario ya tiene sesión,
-   * no hay nada que navegar—, así que estos dos son todo el chrome que queda.
+   * Las preferencias globales de la pantalla: idioma y tema. Se pintan en la
+   * **banda de preferencias del marco** (`PublicPageShell`), al final y
+   * separadas del pie de acciones del paso — una preferencia global no es una
+   * acción del flujo y no puede parecerlo. En el alta no hay cabecera pública
+   * —el usuario ya tiene sesión, no hay nada que navegar—, así que estos dos
+   * son todo el chrome que queda.
+   */
+  preferences?: ReactNode;
+  /**
+   * Alias histórico de `preferences`, de cuando el alta montaba la banda por
+   * su cuenta. Se conserva para no romper a quien ya lo pasa; en pantallas
+   * nuevas, `preferences`. Si se pasan los dos, manda `preferences`.
+   *
+   * @deprecated Usa `preferences`.
    */
   switchers?: ReactNode;
+  /** Nombre accesible de la banda de preferencias. Default: «Preferencias» (castellano). */
+  preferencesLabel?: string;
   /**
    * El progreso: un `Stepper`. La ranura se monta siempre; es el `Stepper`
    * quien decide no pintarse cuando el flujo tiene un solo paso.
@@ -94,7 +105,9 @@ export interface OnboardingShellProps {
 export function OnboardingShell({
   children,
   brand,
+  preferences,
   switchers,
+  preferencesLabel,
   stepper,
   primaryAction,
   backAction,
@@ -105,7 +118,8 @@ export function OnboardingShell({
   className,
 }: OnboardingShellProps) {
   const hayAcciones = Boolean(primaryAction || backAction || exitAction);
-  const preferencias = switchers && <div className="onboarding-shell__switchers">{switchers}</div>;
+  // `switchers` es el nombre viejo de la misma ranura: manda el nuevo.
+  const conmutadores = preferences ?? switchers;
   const marca = brand && <div className="onboarding-shell__brand">{brand}</div>;
 
   return (
@@ -123,13 +137,8 @@ export function OnboardingShell({
           </Container>
         )
       }
-      footer={
-        preferencias && (
-          <Container as="footer" className="onboarding-shell__settings onboarding-shell__settings--band">
-            {preferencias}
-          </Container>
-        )
-      }
+      preferences={conmutadores}
+      preferencesLabel={preferencesLabel}
     >
       <div className={['onboarding-shell', className].filter(Boolean).join(' ')}>
         {!shell && marca && <header className="onboarding-shell__top onboarding-shell__bar">{marca}</header>}
@@ -159,7 +168,11 @@ export function OnboardingShell({
           </div>
         </FormSizeContext.Provider>
 
-        {!shell && preferencias && <footer className="onboarding-shell__settings">{preferencias}</footer>}
+        {!shell && conmutadores && (
+          <section className="onboarding-shell__settings" aria-label={preferencesLabel ?? 'Preferencias'}>
+            {conmutadores}
+          </section>
+        )}
       </div>
     </PublicPageShell>
   );

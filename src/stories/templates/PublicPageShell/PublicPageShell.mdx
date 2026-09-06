@@ -12,15 +12,40 @@ Es el molde **único**. `ErrorPage`, `NotFoundPage`, `OnboardingShell` y la maqu
 <Canvas of={PublicPageShellStories.SinCabeceraNiPie} />
 <Canvas of={PublicPageShellStories.ConCabeceraYPie} />
 
+## La banda de preferencias
+
+Idioma y tema no son navegación, no son contenido y no son una legal: son ajustes de la pantalla. Por eso tienen banda propia, `preferences`, **entre el contenido y el `footer`** — el pie legal es un `footer` y no admite invitados, y la cabecera pública, cuando la hay, ya está llena de sitios a los que ir.
+
+Se pasan los conmutadores sueltos. La banda la pone la plantilla: una `section` con nombre accesible (`preferencesLabel`, «Preferencias» por defecto), el ancho de página del `Container`, el aire de chrome —el mismo token que el `LegalFooter` que va justo debajo— y la fila con envoltura. Los controles se alinean **al final**: la etiqueta de un conmutador puede partirse en dos líneas y, centrados, el otro se descolgaba media línea.
+
+```tsx
+<PublicPageShell
+  header={<SiteHeader />}
+  preferences={
+    <>
+      <LanguageSwitcher size="lg" value={locale} languages={IDIOMAS} />
+      <ThemeSwitcher size="lg" value={tema} />
+    </>
+  }
+  footer={<LegalFooter links={LEGAL} />}
+>
+  {children}
+</PublicPageShell>
+```
+
+<Canvas of={PublicPageShellStories.ConPreferencias} />
+
+Es la banda que cierra el panel de estado y el alta (`OnboardingShell`, que la pasa por debajo con su prop `preferences`): las dos pantallas la montaban a mano, cada una con su aire, y ahora la decisión vive en un solo sitio. Con `shell={false}` no se pinta, igual que `header` y `footer`: sin marco no hay ranura de pie.
+
 ## Cabecera y pie, a salvo
 
-`header` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si la cabecera lanza al renderizar, desaparece ella y la página sigue. Nació de la página de error —que no puede depender del layout que pudo fallar—, y el resto de plantillas hereda la garantía sin pedirla.
+`header`, `preferences` y `footer` van cada uno dentro de un `ErrorBoundary` (fallback `null`): si la cabecera lanza al renderizar, desaparece ella y la página sigue. Nació de la página de error —que no puede depender del layout que pudo fallar—, y el resto de plantillas hereda la garantía sin pedirla.
 
 <Canvas of={PublicPageShellStories.CabeceraQueFalla} />
 
 ## Dentro de una app
 
-Una app con `AppShell` ya tiene su `main`; una página pública pintada dentro no puede montar otro marco ni otro `main`. Con `shell={false}` la plantilla devuelve **solo los `children`**. Sin marco, `header`, `footer` e `id` no aplican.
+Una app con `AppShell` ya tiene su `main`; una página pública pintada dentro no puede montar otro marco ni otro `main`. Con `shell={false}` la plantilla devuelve **solo los `children`**. Sin marco, `header`, `preferences`, `footer` e `id` no aplican.
 
 <Canvas of={PublicPageShellStories.DentroDeUnaApp} />
 

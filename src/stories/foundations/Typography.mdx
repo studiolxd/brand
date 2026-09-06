@@ -123,6 +123,30 @@ Con Google Sans Flex a 16px, 70ch son unos 505px. Es el ancho máximo de los com
 
 ---
 
+## Un enlace dentro de un título
+
+Un título puede llevar un enlace **dentro**, para una parte de él. El caso del sistema es el panel de estado: cada aplicación se titula con su nombre y, entre paréntesis, su dominio, que sí es un enlace.
+
+```tsx
+<Heading level={2} size={5}>
+  Localizia{' ('}
+  <Link href="https://localizia.cat" external>localizia.cat</Link>
+  {')'}
+</Heading>
+```
+
+**Cuándo vale.** Cuando el título nombra una cosa que además **está en algún sitio**, y ese sitio es una parte del título, no el título entero: el nombre identifica, el dominio lleva. Fuera de ahí, no: si lo enlazable es el título completo —una tarjeta, la entrada de un listado— el enlace va donde va la navegación, en el cuerpo o en la propia tarjeta, y el título se queda como título.
+
+**Lo que no se hace: envolver el título entero.** Un `<h2>` que es todo él un enlace se anuncia como «enlace, título nivel 2» y convierte un punto de orientación en una acción. El índice de titulares del lector de pantalla —la lista con la que se recorre una página larga— pasa a estar hecho de enlaces, y quien lo usa para saber dónde está acaba navegando sin querer. El título orienta; el enlace lleva. Si el título entero tiene destino, es que no era un título.
+
+**Cómo se nombra.** El nombre accesible del título es su texto completo, enlace incluido («Localizia (localizia.cat)»), y el del enlace es solo lo que hay dentro: el dominio. Por eso el enlace tiene que **decir su destino por sí solo** —un dominio, un nombre propio— y nunca ser «aquí», «más» ni «ver». Un enlace suelto en la lista de enlaces del lector de pantalla, sin el título alrededor, tiene que seguir siendo comprensible.
+
+**La puntuación va fuera.** Los paréntesis, la coma o el punto que rodean al enlace no forman parte de él: se quedan en el título. Es la misma regla que la frase de un `PageIntro` («¿No tienes una cuenta? <Link>Regístrate</Link>.»), y por el mismo motivo — un paréntesis subrayado no es información, y ensucia el nombre accesible del enlace.
+
+**El aspecto lo pone el enlace.** Hereda del título el tamaño, el peso y la familia, y trae lo suyo: el color de enlace y la línea inferior del sistema (`box-shadow`, no `text-decoration` — la regla está en Fundamentos › Bordes). No se le quita el subrayado por «ir dentro de un título»: es lo único que distingue la parte que lleva a un sitio de la que no, y un título no es un sitio donde el color solo baste.
+
+---
+
 ## Tokens
 
 ### Familias

@@ -90,36 +90,22 @@
   }
 }
 
-/* El pie de chrome: idioma y tema, por debajo del pie de acciones del paso.
-   Va aparte a propósito —una preferencia global no puede leerse como una
-   acción del flujo— y sigue el ancho del chrome, no el de la columna, así que
-   cierra la pantalla en la misma vertical que abre la marca.
+/* Las preferencias —idioma y tema— cuando la plantilla va SIN marco
+   (`shell` a `false`). Con marco no se pintan aquí: se pasan a la ranura
+   `preferences` del marco (`PublicPageShell`), que es quien pone la banda con
+   su nombre accesible, su ancho de página y su aire de chrome — el mismo que
+   el pie legal del sitio. Así el alta y el resto de páginas públicas cierran
+   igual, y la decisión vive en un solo sitio.
 
-   No vive en esta rejilla: se pinta en la ranura de pie del `SiteShell`, la
-   que el marco ya sujeta abajo (columna de `100dvh` con el `main` a `flex: 1`).
-   Así el pie cae al borde inferior de la ventana cuando el paso es corto —el
-   del perfil, un campo— y lo empuja el contenido cuando es largo —el de las
-   invitaciones—, sin que la plantilla tenga que declarar alto mínimo: repetir
-   `100dvh` aquí dentro sumaría el aire del `main` y sacaría una barra de
-   scroll que no toca.
-
-   Como banda, `Container` le da el aire lateral y el ancho de página; lo único
-   propio es su aire vertical, y es el del pie público: el mismo token que el
-   `LegalFooter` del sitio (`--legal-footer-padding-block`), arriba y abajo. El
-   aire que lo separa del paso ya lo pone el `main` al cerrar, exactamente como
-   en la web; sumarle encima el aire del contenido —lo que hacía el
-   `padding-block-end` de `space="xl"`, 48px— cerraba la pantalla con el doble
-   de aire del que cierra una página pública. Con `shell={false}` no hay marco
-   ni banda: el pie vuelve a la columna, sin este aire, porque abajo manda el
-   `AppShell` de la app. */
-.onboarding-shell__settings.onboarding-shell__settings--band {
-  padding-block: var(--onboarding-shell-settings-padding-block);
-}
-
-.onboarding-shell__switchers {
+   Sin marco vuelven a esta rejilla, separadas por el `gap` del alta y sin aire
+   propio, porque abajo manda el `AppShell` de la app. Lo único que hace falta
+   aquí es ponerlas en fila: los dos controles son las dos caras de la misma
+   preferencia y se leen como un par. `flex-end`, como en la banda del marco:
+   si una etiqueta se parte en dos líneas, el otro control no se descuelga. */
+.onboarding-shell__settings {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--onboarding-shell-switchers-gap);
 }
 

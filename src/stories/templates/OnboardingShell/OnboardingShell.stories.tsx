@@ -56,7 +56,7 @@ const meta: Meta<typeof OnboardingShell> = {
   parameters: { layout: 'fullscreen' },
   args: {
     brand: <Logo size="md" />,
-    switchers: conmutadores,
+    preferences: conmutadores,
     stepper: <Stepper steps={PASOS} current={1} />,
     children: cuerpo,
     backAction: <Button variant="outline">Atrás</Button>,
@@ -65,6 +65,7 @@ const meta: Meta<typeof OnboardingShell> = {
   },
   argTypes: {
     brand: { table: { disable: true } },
+    preferences: { table: { disable: true } },
     switchers: { table: { disable: true } },
     stepper: { table: { disable: true } },
     children: { table: { disable: true } },
@@ -151,24 +152,27 @@ export const Contrato: Story = {
     const paso = canvasElement.querySelector('.onboarding-shell__step')!;
     await expect(paso).toContainElement(canvas.getByRole('list', { name: 'Progreso' }));
     const barra = canvasElement.querySelector('.onboarding-shell__top')!;
-    await expect(barra).not.toContainElement(canvasElement.querySelector('.onboarding-shell__switchers'));
+    await expect(barra).not.toContainElement(canvasElement.querySelector('.public-page-shell__preferences'));
     // La marca es chrome: va en la ranura de cabecera del marco, no dentro del
     // `main`. Es lo que la separa del aire del contenido (`space="xl"`) y le
     // deja el del chrome público.
     await expect(main).not.toContainElement(barra as HTMLElement);
     await expect(barra.parentElement).toBe(canvasElement.querySelector('.site-shell'));
     await expect(canvasElement.querySelector('.site-shell')!.firstElementChild).toBe(barra);
-    // Las preferencias, en su propio pie y las últimas del documento: ni se
-    // mezclan con las acciones del paso ni se tabulan antes que ellas.
-    const ajustes = canvasElement.querySelector('.onboarding-shell__settings')!;
-    await expect(ajustes.querySelector('.onboarding-shell__switchers')).not.toBeNull();
+    // Las preferencias, en la banda del marco y las últimas del documento: ni
+    // se mezclan con las acciones del paso ni se tabulan antes que ellas. La
+    // banda la pone `PublicPageShell`, así que el alta y el resto de páginas
+    // públicas cierran con la misma pieza.
+    const ajustes = canvasElement.querySelector('.public-page-shell__preferences')!;
+    await expect(ajustes).toHaveAttribute('aria-label', 'Preferencias');
+    await expect(ajustes.querySelector('.public-page-shell__preferences-row')).not.toBeNull();
     await expect(paso.compareDocumentPosition(ajustes) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     // …y en la ranura de pie del marco, no dentro del `main`: es esa ranura la
     // que ya sujeta el pie al borde inferior cuando el paso es corto.
     await expect(main).not.toContainElement(ajustes as HTMLElement);
     const shell = canvasElement.querySelector('.site-shell')!;
-    await expect(ajustes.parentElement).toBe(shell);
-    await expect(shell.lastElementChild).toBe(ajustes);
+    await expect(shell).toContainElement(ajustes as HTMLElement);
+    await expect(shell.lastElementChild).toContainElement(ajustes as HTMLElement);
     const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
     await expect(within(acciones).getByRole('button', { name: 'Continuar' })).toHaveClass('button--primary');
     await expect(within(acciones).getByRole('button', { name: 'Omitir por ahora' })).toHaveClass('button--text');
@@ -215,8 +219,8 @@ export const ContratoAireDelChrome: Story = {
     await expect(barra.paddingBottom).toBe(barra.paddingTop);
 
     // Abajo: el aire del pie público, arriba y abajo, como el `LegalFooter`.
-    const ajustes = getComputedStyle(canvasElement.querySelector('.onboarding-shell__settings')!);
-    await expect(ajustes.paddingTop).toBe(resuelto('--legal-footer-padding-block'));
+    const ajustes = getComputedStyle(canvasElement.querySelector('.public-page-shell__preferences')!);
+    await expect(ajustes.paddingTop).toBe(resuelto('--public-page-shell-preferences-padding-block'));
     await expect(ajustes.paddingBottom).toBe(ajustes.paddingTop);
 
     // Y el aire del contenido sigue siendo el del `Container` con `space="xl"`:

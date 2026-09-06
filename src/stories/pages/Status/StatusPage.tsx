@@ -70,24 +70,18 @@ export interface StatusPageProps {
 export function StatusPage({ children, theme = 'light' }: StatusPageProps) {
   return (
     <AppRoot>
+      {/* La banda de preferencias es del marco: la `section` con nombre, el
+          ancho de página y el aire de chrome salen de `PublicPageShell`, no de
+          esta página. Aquí solo van los dos conmutadores. */}
       <PublicPageShell
         header={<SiteHeader logoHref="https://slxd.app" logoLabel="Ir a slxd.app" />}
-        footer={
+        preferences={
           <>
-            {/* Una `section` con nombre: los dos controles siguen dentro de una
-                región nombrada en vez de quedar sueltos entre el contenido y el
-                pie legal, que es un `footer` y no admite invitados. */}
-            <Container as="section" space="sm" aria-label="Preferencias">
-              {/* `end`: si una etiqueta se parte en dos líneas, los controles
-                  siguen compartiendo renglón. */}
-              <Inline gap="md" align="end">
-                <LanguageSwitcher size="lg" value="es" languages={IDIOMAS} />
-                <ThemeSwitcher size="lg" value={theme} />
-              </Inline>
-            </Container>
-            <LegalFooter links={LEGAL} />
+            <LanguageSwitcher size="lg" value="es" languages={IDIOMAS} />
+            <ThemeSwitcher size="lg" value={theme} />
           </>
         }
+        footer={<LegalFooter links={LEGAL} />}
       >
         <Stack gap="lg">
           <PageIntro title="Estado del servicio" />

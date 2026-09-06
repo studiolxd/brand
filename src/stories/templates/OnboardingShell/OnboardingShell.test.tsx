@@ -46,37 +46,61 @@ describe('OnboardingShell — el pie de acciones', () => {
 });
 
 /**
- * La marca y las preferencias son chrome: van en las ranuras de cabecera y pie
- * del marco, fuera del `main`. Es lo que las saca del aire del contenido —el
- * `Container` con `space="xl"`— y les deja el del chrome público. Sin marco
- * (`shell={false}`) vuelven a la columna, porque ahí manda el `AppShell`.
+ * La marca y las preferencias son chrome: van en las ranuras de cabecera y de
+ * preferencias del marco, fuera del `main`. Es lo que las saca del aire del
+ * contenido —el `Container` con `space="xl"`— y les deja el del chrome
+ * público. Sin marco (`shell={false}`) vuelven a la columna, porque ahí manda
+ * el `AppShell`.
  */
 describe('OnboardingShell — el chrome, fuera del `main`', () => {
-  it('la marca va en la ranura de cabecera, no dentro del `main`', () => {
+  it('la marca va en la ranura de cabecera y las preferencias en la banda del marco', () => {
     const { container } = render(
-      <OnboardingShell brand={<span>Marca</span>} switchers={<span>Idioma</span>}>
+      <OnboardingShell brand={<span>Marca</span>} preferences={<span>Idioma</span>}>
         <p>el paso</p>
       </OnboardingShell>,
     );
     const main = screen.getByRole('main');
     const barra = container.querySelector('.onboarding-shell__top')!;
-    const ajustes = container.querySelector('.onboarding-shell__settings')!;
+    const ajustes = container.querySelector('.public-page-shell__preferences')!;
     const marco = container.querySelector('.site-shell')!;
 
     expect(main).not.toContainElement(barra as HTMLElement);
     expect(main).not.toContainElement(ajustes as HTMLElement);
     expect(marco.firstElementChild).toBe(barra);
-    expect(marco.lastElementChild).toBe(ajustes);
+    expect(marco.lastElementChild).toContainElement(ajustes as HTMLElement);
     expect(barra).toHaveClass('onboarding-shell__top--band');
     // La marca cuelga de la barra en los dos modos: es de ahí de donde hereda
     // los peldaños de alto de móvil y teléfono.
     expect(barra).toContainElement(container.querySelector('.onboarding-shell__brand'));
-    expect(ajustes).toHaveClass('onboarding-shell__settings--band');
+    // La banda del alta ya no es suya: es la del marco, con su nombre.
+    expect(container.querySelector('.onboarding-shell__settings')).toBeNull();
+    expect(ajustes).toHaveAttribute('aria-label', 'Preferencias');
+  });
+
+  it('`switchers` sigue valiendo como alias de `preferences`', () => {
+    const { container } = render(
+      <OnboardingShell brand={<span>Marca</span>} switchers={<span>Idioma</span>}>
+        <p>el paso</p>
+      </OnboardingShell>,
+    );
+    const banda = container.querySelector('.public-page-shell__preferences')!;
+    expect(banda).toHaveTextContent('Idioma');
+  });
+
+  it('con los dos, manda `preferences`', () => {
+    const { container } = render(
+      <OnboardingShell preferences={<span>Nuevo</span>} switchers={<span>Viejo</span>}>
+        <p>el paso</p>
+      </OnboardingShell>,
+    );
+    const banda = container.querySelector('.public-page-shell__preferences')!;
+    expect(banda).toHaveTextContent('Nuevo');
+    expect(banda).not.toHaveTextContent('Viejo');
   });
 
   it('sin marco, marca y preferencias vuelven a la columna y sin la banda', () => {
     const { container } = render(
-      <OnboardingShell shell={false} brand={<span>Marca</span>} switchers={<span>Idioma</span>}>
+      <OnboardingShell shell={false} brand={<span>Marca</span>} preferences={<span>Idioma</span>}>
         <p>el paso</p>
       </OnboardingShell>,
     );
@@ -86,8 +110,11 @@ describe('OnboardingShell — el chrome, fuera del `main`', () => {
     expect(alta).toContainElement(barra as HTMLElement);
     expect(barra).not.toHaveClass('onboarding-shell__top--band');
     expect(barra).toContainElement(container.querySelector('.onboarding-shell__brand'));
-    expect(container.querySelector('.onboarding-shell__settings')).not.toHaveClass(
-      'onboarding-shell__settings--band',
-    );
+    // Sin marco no hay banda: las preferencias vuelven a la rejilla del alta,
+    // pero conservan su nombre accesible.
+    expect(container.querySelector('.public-page-shell__preferences')).toBeNull();
+    const ajustes = container.querySelector('.onboarding-shell__settings')!;
+    expect(alta).toContainElement(ajustes as HTMLElement);
+    expect(ajustes).toHaveAttribute('aria-label', 'Preferencias');
   });
 });
