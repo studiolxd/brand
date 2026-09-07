@@ -8,14 +8,18 @@ interface Args { sent: boolean; surface: 'light' | 'dark' }
 
 function Verificar({ sent, surface }: Args) {
   return (
-    <AuthPage title="Revisa tu correo" description="Enviamos un enlace de verificación a ana@studiolxd.com" surface={surface}>
+    <AuthPage
+      title="Revisa tu correo"
+      description="Enviamos un enlace de verificación a ana@studiolxd.com"
+      aside={<Link href="#acceso" icon="arrow-left">Iniciar sesión con otra cuenta</Link>}
+      surface={surface}
+    >
       <Form
         size="lg"
         blockActions
         onSubmit={(e) => e.preventDefault()}
         success={sent ? 'Correo de verificación enviado.' : undefined}
-        actions={<Button variant="outline">Reenviar correo</Button>}
-        links={<Link href="#acceso" icon="arrow-left">Iniciar sesión con otra cuenta</Link>}
+        actions={<Button>Reenviar correo</Button>}
       />
     </AuthPage>
   );
@@ -31,7 +35,7 @@ const meta: Meta<typeof Verificar> = {
 export default meta;
 type Story = StoryObj<typeof Verificar>;
 
-/** `/verify-email`: un Form sin campos — reenviar, y el enlace para entrar con otra cuenta. */
+/** `/verify-email`: un Form sin campos —reenviar, en primary— y, en la columna de la introducción, el enlace para entrar con otra cuenta (como «Recuperar contraseña»). */
 export const PorDefecto: Story = {};
 export const Reenviado: Story = { args: { sent: true } };
 

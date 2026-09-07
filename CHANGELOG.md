@@ -7,6 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.10.5] — 2026-09-07
+
+- **Pages/Verificar correo**: la story refleja la página real — «Reenviar
+  correo» en primary y «Iniciar sesión con otra cuenta» en la columna de la
+  introducción (`aside`), como «Recuperar contraseña». Solo Storybook.
+
 ## [32.10.4] — 2026-09-07
 
 - **`SidebarNav`: los enlaces de nivel principal van en tinta de ítem.**
