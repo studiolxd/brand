@@ -1,228 +1,1104 @@
 {
   "button": {
-    "border-radius":       { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Rectangular: el radio del sistema (0), como los campos" },
-    "border-width":        { "$value": "{border-width.default}",      "$type": "dimension", "$description": "Border width" },
-    "border-style":        { "$value": "solid",                  "$type": "string",    "$description": "Border style" },
-    "border-color":        { "$value": "transparent",            "$type": "color",     "$description": "Default border color — overridden by variants" },
-    "justify-content":     { "$value": "center",                 "$type": "string",    "$description": "Justify content" },
-    "font-family":         { "$value": "{font-family.sans}",     "$type": "string",    "$description": "Font family" },
-    "font-size":           { "$value": "{font-size.2}",          "$type": "dimension", "$description": "Font size" },
-    "font-weight":         { "$value": "{font-weight.default}",  "$type": "number",    "$description": "Font weight" },
-    "line-height":         { "$value": "{line-height.none}",     "$type": "number",    "$description": "Line height" },
-    "cursor":              { "$value": "pointer",                "$type": "string",    "$description": "Cursor" },
-    "white-space":         { "$value": "nowrap",                 "$type": "string",    "$description": "White space" },
-    "text-decoration":     { "$value": "none",                   "$type": "string",    "$description": "Text decoration" },
-    "transition-duration": { "$value": "{motion.duration.fast}", "$type": "number",    "$description": "Transition duration" },
-    "transition-easing":   { "$value": "{motion.easing.default}","$type": "string",    "$description": "Transition easing" },
-    "disabled-cursor":     { "$value": "not-allowed",            "$type": "string",    "$description": "Cursor when disabled" },
-    "disabled-bg":         { "$value": "{color.disabled.bg-on-light}",   "$type": "color",     "$description": "Background when disabled — only form button changes bg" },
-    "disabled-color":      { "$value": "{color.disabled.text-on-light}", "$type": "color",     "$description": "Text color when disabled — light surface" },
-    "disabled-border":     { "$value": "{color.disabled.text-on-light}", "$type": "color",     "$description": "Border color when disabled — light surface, matches text for contrast" },
-    "height":              { "$value": "{size-component.md}",   "$type": "dimension", "$description": "Altura fija del botón (talla md): el contenido se centra, no se hace por padding" },
-    "sm-height":           { "$value": "{size-component.sm}",   "$type": "dimension", "$description": "Altura — sm" },
-    "lg-height":           { "$value": "{size-component.lg}",   "$type": "dimension", "$description": "Altura — lg" },
-    "padding-inline":      { "$value": "{spacing.6}",            "$type": "dimension", "$description": "Inline (horizontal) padding" },
-    "focus-ring-width":    { "$value": "{border-width.focus}",      "$type": "dimension", "$description": "Focus ring width" },
-    "focus-ring-style":    { "$value": "solid",                  "$type": "string",    "$description": "Focus ring border style" },
-    "focus-ring-offset":   { "$value": "{spacing.1}",             "$type": "dimension", "$description": "Separación entre el botón y el anillo de foco (4px): el hueco es el fondo de la superficie, y eso lo hace leerse como foco y no como un borde más" },
-    "sm-padding-inline":   { "$value": "{spacing.5}",            "$type": "dimension", "$description": "Inline padding — sm" },
-    "sm-font-size":        { "$value": "{font-size.1}",          "$type": "dimension", "$description": "Font size — sm" },
-    "lg-padding-inline":   { "$value": "{spacing.8}",            "$type": "dimension", "$description": "Inline padding — lg" },
-    "lg-font-size":        { "$value": "{font-size.3}",          "$type": "dimension", "$description": "Font size — lg" },
-    "block-width":         { "$value": "100%",                   "$type": "string",    "$description": "Width when block modifier is applied" },
+    "border-radius": {
+      "$value": "{border-radius.default}",
+      "$type": "dimension",
+      "$description": "Rectangular: el radio del sistema (0), como los campos"
+    },
+    "border-width": {
+      "$value": "{border-width.default}",
+      "$type": "dimension",
+      "$description": "Border width"
+    },
+    "border-style": {
+      "$value": "solid",
+      "$type": "string",
+      "$description": "Border style"
+    },
+    "border-color": {
+      "$value": "transparent",
+      "$type": "color",
+      "$description": "Default border color — overridden by variants"
+    },
+    "justify-content": {
+      "$value": "center",
+      "$type": "string",
+      "$description": "Justify content"
+    },
+    "font-family": {
+      "$value": "{font-family.sans}",
+      "$type": "string",
+      "$description": "Font family"
+    },
+    "font-size": {
+      "$value": "{font-size.2}",
+      "$type": "dimension",
+      "$description": "Font size"
+    },
+    "font-weight": {
+      "$value": "{font-weight.default}",
+      "$type": "number",
+      "$description": "Font weight"
+    },
+    "line-height": {
+      "$value": "{line-height.none}",
+      "$type": "number",
+      "$description": "Line height"
+    },
+    "cursor": {
+      "$value": "pointer",
+      "$type": "string",
+      "$description": "Cursor"
+    },
+    "white-space": {
+      "$value": "nowrap",
+      "$type": "string",
+      "$description": "White space"
+    },
+    "text-decoration": {
+      "$value": "none",
+      "$type": "string",
+      "$description": "Text decoration"
+    },
+    "transition-duration": {
+      "$value": "{motion.duration.fast}",
+      "$type": "number",
+      "$description": "Transition duration"
+    },
+    "transition-easing": {
+      "$value": "{motion.easing.default}",
+      "$type": "string",
+      "$description": "Transition easing"
+    },
+    "disabled-cursor": {
+      "$value": "not-allowed",
+      "$type": "string",
+      "$description": "Cursor when disabled"
+    },
+    "disabled-bg": {
+      "$value": "{color.disabled.bg-on-light}",
+      "$type": "color",
+      "$description": "Background when disabled — only form button changes bg"
+    },
+    "disabled-color": {
+      "$value": "{color.disabled.text-on-light}",
+      "$type": "color",
+      "$description": "Text color when disabled — light surface"
+    },
+    "disabled-border": {
+      "$value": "{color.disabled.text-on-light}",
+      "$type": "color",
+      "$description": "Border color when disabled — light surface, matches text for contrast"
+    },
+    "height": {
+      "$value": "{size-component.md}",
+      "$type": "dimension",
+      "$description": "Altura fija del botón (talla md): el contenido se centra, no se hace por padding"
+    },
+    "sm-height": {
+      "$value": "{size-component.sm}",
+      "$type": "dimension",
+      "$description": "Altura — sm"
+    },
+    "lg-height": {
+      "$value": "{size-component.lg}",
+      "$type": "dimension",
+      "$description": "Altura — lg"
+    },
+    "padding-inline": {
+      "$value": "{spacing.6}",
+      "$type": "dimension",
+      "$description": "Inline (horizontal) padding"
+    },
+    "focus-ring-width": {
+      "$value": "{border-width.focus}",
+      "$type": "dimension",
+      "$description": "Focus ring width"
+    },
+    "focus-ring-style": {
+      "$value": "solid",
+      "$type": "string",
+      "$description": "Focus ring border style"
+    },
+    "focus-ring-offset": {
+      "$value": "{spacing.1}",
+      "$type": "dimension",
+      "$description": "Separación entre el botón y el anillo de foco (4px): el hueco es el fondo de la superficie, y eso lo hace leerse como foco y no como un borde más"
+    },
+    "sm-padding-inline": {
+      "$value": "{spacing.5}",
+      "$type": "dimension",
+      "$description": "Inline padding — sm"
+    },
+    "sm-font-size": {
+      "$value": "{font-size.1}",
+      "$type": "dimension",
+      "$description": "Font size — sm"
+    },
+    "lg-padding-inline": {
+      "$value": "{spacing.8}",
+      "$type": "dimension",
+      "$description": "Inline padding — lg"
+    },
+    "lg-font-size": {
+      "$value": "{font-size.3}",
+      "$type": "dimension",
+      "$description": "Font size — lg"
+    },
+    "block-width": {
+      "$value": "100%",
+      "$type": "string",
+      "$description": "Width when block modifier is applied"
+    },
     "primary": {
-      "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
-      "border-width":       { "$value": "{button.border-width}",       "$type": "dimension", "$description": "Border width" },
-      "border-style":       { "$value": "{button.border-style}",       "$type": "string",    "$description": "Border style" },
-      "justify-content":    { "$value": "{button.justify-content}",    "$type": "string",    "$description": "Justify content" },
-      "font-family":        { "$value": "{button.font-family}",        "$type": "string",    "$description": "Font family" },
-      "font-size":          { "$value": "{button.font-size}",          "$type": "dimension", "$description": "Font size" },
-      "font-weight":        { "$value": "{button.font-weight}",        "$type": "number",    "$description": "Font weight" },
-      "line-height":        { "$value": "{button.line-height}",        "$type": "number",    "$description": "Line height" },
-      "cursor":             { "$value": "{button.cursor}",             "$type": "string",    "$description": "Cursor" },
-      "white-space":        { "$value": "{button.white-space}",        "$type": "string",    "$description": "White space" },
-      "text-decoration":    { "$value": "{button.text-decoration}",    "$type": "string",    "$description": "Text decoration" },
-      "transition-duration":{ "$value": "{button.transition-duration}","$type": "number",    "$description": "Transition duration" },
-      "transition-easing":  { "$value": "{button.transition-easing}",  "$type": "string",    "$description": "Transition easing" },
-      "disabled-cursor":    { "$value": "{button.disabled-cursor}",    "$type": "string",    "$description": "Cursor when disabled" },
-      "disabled-bg":        { "$value": "{button.disabled-border}",    "$type": "color",     "$description": "Background when disabled — filled with the disabled border color" },
-      "disabled-color":     { "$value": "{color.white}",               "$type": "color",     "$description": "Text color when disabled — white on grey background" },
-      "disabled-border":    { "$value": "{button.disabled-border}",    "$type": "color",     "$description": "Border color when disabled" },
-      "padding-inline":     { "$value": "{button.padding-inline}",     "$type": "dimension", "$description": "Inline (horizontal) padding" },
-      "focus-ring-width":   { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
-      "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
-      "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
-      "focus-ring-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Anillo de foco: la tinta de la superficie (prusia), no el lavanda del botón — así se ve como foco, no como borde" },
-      "bg":                 { "$value": "{color.accent-1}",            "$type": "color",     "$description": "Background" },
-      "color":              { "$value": "{color.primary}",             "$type": "color",     "$description": "Text color" },
-      "border":             { "$value": "{color.accent-1}",            "$type": "color",     "$description": "Border color" },
-      "hover-bg":           { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover background" },
-      "hover-color":        { "$value": "{color.primary}",             "$type": "color",     "$description": "Hover text color" },
-      "hover-border":       { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Hover border color" },
-      "active-bg":          { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active background" },
-      "active-color":       { "$value": "{color.primary}",             "$type": "color",     "$description": "Active text color" },
-      "active-border":      { "$value": "{color.accent-2}",            "$type": "color",     "$description": "Active border color" },
-      "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark (blanco)" }
-},
+      "border-radius": {
+        "$value": "{button.border-radius}",
+        "$type": "dimension",
+        "$description": "Border radius"
+      },
+      "border-width": {
+        "$value": "{button.border-width}",
+        "$type": "dimension",
+        "$description": "Border width"
+      },
+      "border-style": {
+        "$value": "{button.border-style}",
+        "$type": "string",
+        "$description": "Border style"
+      },
+      "justify-content": {
+        "$value": "{button.justify-content}",
+        "$type": "string",
+        "$description": "Justify content"
+      },
+      "font-family": {
+        "$value": "{button.font-family}",
+        "$type": "string",
+        "$description": "Font family"
+      },
+      "font-size": {
+        "$value": "{button.font-size}",
+        "$type": "dimension",
+        "$description": "Font size"
+      },
+      "font-weight": {
+        "$value": "{button.font-weight}",
+        "$type": "number",
+        "$description": "Font weight"
+      },
+      "line-height": {
+        "$value": "{button.line-height}",
+        "$type": "number",
+        "$description": "Line height"
+      },
+      "cursor": {
+        "$value": "{button.cursor}",
+        "$type": "string",
+        "$description": "Cursor"
+      },
+      "white-space": {
+        "$value": "{button.white-space}",
+        "$type": "string",
+        "$description": "White space"
+      },
+      "text-decoration": {
+        "$value": "{button.text-decoration}",
+        "$type": "string",
+        "$description": "Text decoration"
+      },
+      "transition-duration": {
+        "$value": "{button.transition-duration}",
+        "$type": "number",
+        "$description": "Transition duration"
+      },
+      "transition-easing": {
+        "$value": "{button.transition-easing}",
+        "$type": "string",
+        "$description": "Transition easing"
+      },
+      "disabled-cursor": {
+        "$value": "{button.disabled-cursor}",
+        "$type": "string",
+        "$description": "Cursor when disabled"
+      },
+      "disabled-bg": {
+        "$value": "{button.disabled-border}",
+        "$type": "color",
+        "$description": "Background when disabled — filled with the disabled border color"
+      },
+      "disabled-color": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Text color when disabled — white on grey background"
+      },
+      "disabled-border": {
+        "$value": "{button.disabled-border}",
+        "$type": "color",
+        "$description": "Border color when disabled"
+      },
+      "padding-inline": {
+        "$value": "{button.padding-inline}",
+        "$type": "dimension",
+        "$description": "Inline (horizontal) padding"
+      },
+      "focus-ring-width": {
+        "$value": "{button.focus-ring-width}",
+        "$type": "dimension",
+        "$description": "Focus ring width"
+      },
+      "focus-ring-style": {
+        "$value": "{button.focus-ring-style}",
+        "$type": "string",
+        "$description": "Focus ring border style"
+      },
+      "focus-ring-offset": {
+        "$value": "{button.focus-ring-offset}",
+        "$type": "dimension",
+        "$description": "Focus ring offset"
+      },
+      "focus-ring-color": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Anillo de foco: la tinta de la superficie (prusia), no el lavanda del botón — así se ve como foco, no como borde"
+      },
+      "bg": {
+        "$value": "{color.accent-1}",
+        "$type": "color",
+        "$description": "Background"
+      },
+      "color": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Text color"
+      },
+      "border": {
+        "$value": "{color.accent-1}",
+        "$type": "color",
+        "$description": "Border color"
+      },
+      "hover-bg": {
+        "$value": "{color.accent-2}",
+        "$type": "color",
+        "$description": "Hover background"
+      },
+      "hover-color": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Hover text color"
+      },
+      "hover-border": {
+        "$value": "{color.accent-2}",
+        "$type": "color",
+        "$description": "Hover border color"
+      },
+      "active-bg": {
+        "$value": "{color.accent-2}",
+        "$type": "color",
+        "$description": "Active background"
+      },
+      "active-color": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Active text color"
+      },
+      "active-border": {
+        "$value": "{color.accent-2}",
+        "$type": "color",
+        "$description": "Active border color"
+      },
+      "surface-dark-focus-ring-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Anillo de foco — surface-dark (blanco)"
+      }
+    },
     "destructive": {
-      "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
-      "border-width":       { "$value": "{button.border-width}",       "$type": "dimension", "$description": "Border width" },
-      "border-style":       { "$value": "{button.border-style}",       "$type": "string",    "$description": "Border style" },
-      "justify-content":    { "$value": "{button.justify-content}",    "$type": "string",    "$description": "Justify content" },
-      "font-family":        { "$value": "{button.font-family}",        "$type": "string",    "$description": "Font family" },
-      "font-size":          { "$value": "{button.font-size}",          "$type": "dimension", "$description": "Font size" },
-      "font-weight":        { "$value": "{button.font-weight}",        "$type": "number",    "$description": "Font weight" },
-      "line-height":        { "$value": "{button.line-height}",        "$type": "number",    "$description": "Line height" },
-      "cursor":             { "$value": "{button.cursor}",             "$type": "string",    "$description": "Cursor" },
-      "white-space":        { "$value": "{button.white-space}",        "$type": "string",    "$description": "White space" },
-      "text-decoration":    { "$value": "{button.text-decoration}",    "$type": "string",    "$description": "Text decoration" },
-      "transition-duration":{ "$value": "{button.transition-duration}","$type": "number",    "$description": "Transition duration" },
-      "transition-easing":  { "$value": "{button.transition-easing}",  "$type": "string",    "$description": "Transition easing" },
-      "disabled-cursor":    { "$value": "{button.disabled-cursor}",    "$type": "string",    "$description": "Cursor when disabled" },
-      "disabled-color":     { "$value": "{button.disabled-color}",     "$type": "color",     "$description": "Text color when disabled" },
-      "disabled-border":    { "$value": "{button.disabled-border}",    "$type": "color",     "$description": "Border color when disabled" },
-      "padding-inline":     { "$value": "{button.padding-inline}",     "$type": "dimension", "$description": "Inline (horizontal) padding" },
-      "focus-ring-width":   { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
-      "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
-      "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
-      "focus-ring-color":   { "$value": "{color.destructive-text-on-light}","$type": "color",     "$description": "Focus ring color" },
-      "bg":                 { "$value": "{color.white}",               "$type": "color",     "$description": "Background" },
-      "color":              { "$value": "{color.destructive-text-on-light}","$type": "color",     "$description": "Text color" },
-      "border":             { "$value": "{color.destructive-text-on-light}","$type": "color",     "$description": "Border color" },
-      "hover-bg":           { "$value": "{color.destructive-fill}",    "$type": "color",     "$description": "Hover background" },
-      "hover-color":        { "$value": "{color.destructive-fill-text}", "$type": "color",   "$description": "Hover text color" },
-      "hover-border":       { "$value": "{color.destructive-fill}",    "$type": "color",     "$description": "Hover border color" },
-      "active-bg":          { "$value": "{color.destructive-fill}",    "$type": "color",     "$description": "Active background" },
-      "active-color":       { "$value": "{color.destructive-fill-text}", "$type": "color",   "$description": "Active text color" },
-      "active-border":      { "$value": "{color.destructive-fill}",    "$type": "color",     "$description": "Active border color" },
-      "surface-dark-color":              { "$value": "{color.destructive-text-on-dark}",  "$type": "color", "$description": "Text color — surface-dark" },
-      "surface-dark-border":             { "$value": "{color.destructive-text-on-dark}",  "$type": "color", "$description": "Border color — surface-dark" },
-      "surface-dark-hover-bg":           { "$value": "{color.destructive-fill}",  "$type": "color", "$description": "Hover background — surface-dark (fill universal, mismo rojo que en claro)" },
-      "surface-dark-hover-color":        { "$value": "{color.destructive-fill-text}",  "$type": "color", "$description": "Hover text color — surface-dark" },
-      "surface-dark-hover-border":       { "$value": "{color.destructive-fill}",  "$type": "color", "$description": "Hover border color — surface-dark" },
-      "surface-dark-active-bg":          { "$value": "{color.destructive-fill}",  "$type": "color", "$description": "Active background — surface-dark" },
-      "surface-dark-active-color":       { "$value": "{color.destructive-fill-text}",  "$type": "color", "$description": "Active text color — surface-dark" },
-      "surface-dark-active-border":      { "$value": "{color.destructive-fill}",  "$type": "color", "$description": "Active border color — surface-dark" },
-      "surface-dark-focus-ring-color":   { "$value": "{color.destructive-text-on-dark}",  "$type": "color", "$description": "Focus ring color — surface-dark" }
+      "border-radius": {
+        "$value": "{button.border-radius}",
+        "$type": "dimension",
+        "$description": "Border radius"
+      },
+      "border-width": {
+        "$value": "{button.border-width}",
+        "$type": "dimension",
+        "$description": "Border width"
+      },
+      "border-style": {
+        "$value": "{button.border-style}",
+        "$type": "string",
+        "$description": "Border style"
+      },
+      "justify-content": {
+        "$value": "{button.justify-content}",
+        "$type": "string",
+        "$description": "Justify content"
+      },
+      "font-family": {
+        "$value": "{button.font-family}",
+        "$type": "string",
+        "$description": "Font family"
+      },
+      "font-size": {
+        "$value": "{button.font-size}",
+        "$type": "dimension",
+        "$description": "Font size"
+      },
+      "font-weight": {
+        "$value": "{button.font-weight}",
+        "$type": "number",
+        "$description": "Font weight"
+      },
+      "line-height": {
+        "$value": "{button.line-height}",
+        "$type": "number",
+        "$description": "Line height"
+      },
+      "cursor": {
+        "$value": "{button.cursor}",
+        "$type": "string",
+        "$description": "Cursor"
+      },
+      "white-space": {
+        "$value": "{button.white-space}",
+        "$type": "string",
+        "$description": "White space"
+      },
+      "text-decoration": {
+        "$value": "{button.text-decoration}",
+        "$type": "string",
+        "$description": "Text decoration"
+      },
+      "transition-duration": {
+        "$value": "{button.transition-duration}",
+        "$type": "number",
+        "$description": "Transition duration"
+      },
+      "transition-easing": {
+        "$value": "{button.transition-easing}",
+        "$type": "string",
+        "$description": "Transition easing"
+      },
+      "disabled-cursor": {
+        "$value": "{button.disabled-cursor}",
+        "$type": "string",
+        "$description": "Cursor when disabled"
+      },
+      "disabled-color": {
+        "$value": "{button.disabled-color}",
+        "$type": "color",
+        "$description": "Text color when disabled"
+      },
+      "disabled-border": {
+        "$value": "{button.disabled-border}",
+        "$type": "color",
+        "$description": "Border color when disabled"
+      },
+      "padding-inline": {
+        "$value": "{button.padding-inline}",
+        "$type": "dimension",
+        "$description": "Inline (horizontal) padding"
+      },
+      "focus-ring-width": {
+        "$value": "{button.focus-ring-width}",
+        "$type": "dimension",
+        "$description": "Focus ring width"
+      },
+      "focus-ring-style": {
+        "$value": "{button.focus-ring-style}",
+        "$type": "string",
+        "$description": "Focus ring border style"
+      },
+      "focus-ring-offset": {
+        "$value": "{button.focus-ring-offset}",
+        "$type": "dimension",
+        "$description": "Focus ring offset"
+      },
+      "focus-ring-color": {
+        "$value": "{color.destructive-text-on-light}",
+        "$type": "color",
+        "$description": "Focus ring color"
+      },
+      "bg": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Background"
+      },
+      "color": {
+        "$value": "{color.destructive-text-on-light}",
+        "$type": "color",
+        "$description": "Text color"
+      },
+      "border": {
+        "$value": "{color.destructive-text-on-light}",
+        "$type": "color",
+        "$description": "Border color"
+      },
+      "hover-bg": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Hover background"
+      },
+      "hover-color": {
+        "$value": "{color.destructive-fill-text}",
+        "$type": "color",
+        "$description": "Hover text color"
+      },
+      "hover-border": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Hover border color"
+      },
+      "active-bg": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Active background"
+      },
+      "active-color": {
+        "$value": "{color.destructive-fill-text}",
+        "$type": "color",
+        "$description": "Active text color"
+      },
+      "active-border": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Active border color"
+      },
+      "surface-dark-color": {
+        "$value": "{color.destructive-text-on-dark}",
+        "$type": "color",
+        "$description": "Text color — surface-dark"
+      },
+      "surface-dark-border": {
+        "$value": "{color.destructive-text-on-dark}",
+        "$type": "color",
+        "$description": "Border color — surface-dark"
+      },
+      "surface-dark-hover-bg": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Hover background — surface-dark (fill universal, mismo rojo que en claro)"
+      },
+      "surface-dark-hover-color": {
+        "$value": "{color.destructive-fill-text}",
+        "$type": "color",
+        "$description": "Hover text color — surface-dark"
+      },
+      "surface-dark-hover-border": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Hover border color — surface-dark"
+      },
+      "surface-dark-active-bg": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Active background — surface-dark"
+      },
+      "surface-dark-active-color": {
+        "$value": "{color.destructive-fill-text}",
+        "$type": "color",
+        "$description": "Active text color — surface-dark"
+      },
+      "surface-dark-active-border": {
+        "$value": "{color.destructive-fill}",
+        "$type": "color",
+        "$description": "Active border color — surface-dark"
+      },
+      "surface-dark-focus-ring-color": {
+        "$value": "{color.destructive-text-on-dark}",
+        "$type": "color",
+        "$description": "Focus ring color — surface-dark"
+      }
     },
     "outline": {
-      "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
-      "border-width":       { "$value": "{button.border-width}",       "$type": "dimension", "$description": "Border width" },
-      "border-style":       { "$value": "{button.border-style}",       "$type": "string",    "$description": "Border style" },
-      "justify-content":    { "$value": "{button.justify-content}",    "$type": "string",    "$description": "Justify content" },
-      "font-family":        { "$value": "{button.font-family}",        "$type": "string",    "$description": "Font family" },
-      "font-size":          { "$value": "{button.font-size}",          "$type": "dimension", "$description": "Font size" },
-      "font-weight":        { "$value": "{button.font-weight}",        "$type": "number",    "$description": "Font weight" },
-      "line-height":        { "$value": "{button.line-height}",        "$type": "number",    "$description": "Line height" },
-      "cursor":             { "$value": "{button.cursor}",             "$type": "string",    "$description": "Cursor" },
-      "white-space":        { "$value": "{button.white-space}",        "$type": "string",    "$description": "White space" },
-      "text-decoration":    { "$value": "{button.text-decoration}",    "$type": "string",    "$description": "Text decoration" },
-      "transition-duration":{ "$value": "{button.transition-duration}","$type": "number",    "$description": "Transition duration" },
-      "transition-easing":  { "$value": "{button.transition-easing}",  "$type": "string",    "$description": "Transition easing" },
-      "disabled-cursor":    { "$value": "{button.disabled-cursor}",    "$type": "string",    "$description": "Cursor when disabled" },
-      "disabled-color":     { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Text color when disabled" },
-      "disabled-border":    { "$value": "{color.disabled.border-on-light}", "$type": "color",     "$description": "Border color when disabled" },
-      "padding-inline":     { "$value": "{button.padding-inline}",     "$type": "dimension", "$description": "Inline (horizontal) padding" },
-      "focus-ring-width":   { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
-      "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
-      "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
-      "focus-ring-color":   { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Focus ring color — dark on light backgrounds" },
-      "bg":                 { "$value": "transparent",                 "$type": "color",     "$description": "Background" },
-      "color":              { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Text color" },
-      "border":             { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Border color" },
-      "hover-bg":           { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Hover background" },
-      "hover-color":        { "$value": "{color.text.on-dark}",        "$type": "color",     "$description": "Hover text color" },
-      "hover-border":       { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Hover border color" },
-      "active-bg":          { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Active background" },
-      "active-color":       { "$value": "{color.text.on-dark}",        "$type": "color",     "$description": "Active text color" },
-      "active-border":      { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Active border color" },
-      "surface-dark-color":              { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Text color — surface-dark" },
-      "surface-dark-border":             { "$value": "{color.text.on-dark}",  "$type": "color", "$description": "Border color — surface-dark" },
-      "surface-dark-hover-bg":           { "$value": "{color.white}",         "$type": "color", "$description": "Hover background — surface-dark" },
-      "surface-dark-hover-color":        { "$value": "{color.text.on-light}", "$type": "color", "$description": "Hover text color — surface-dark" },
-      "surface-dark-hover-border":       { "$value": "{color.white}",         "$type": "color", "$description": "Hover border color — surface-dark" },
-      "surface-dark-active-bg":          { "$value": "{color.white}",         "$type": "color", "$description": "Active background — surface-dark" },
-      "surface-dark-active-color":       { "$value": "{color.text.on-light}", "$type": "color", "$description": "Active text color — surface-dark" },
-      "surface-dark-active-border":      { "$value": "{color.white}",         "$type": "color", "$description": "Active border color — surface-dark" },
-      "surface-dark-focus-ring-color":   { "$value": "{color.white}",         "$type": "color", "$description": "Focus ring color — surface-dark" }
+      "border-radius": {
+        "$value": "{button.border-radius}",
+        "$type": "dimension",
+        "$description": "Border radius"
+      },
+      "border-width": {
+        "$value": "{button.border-width}",
+        "$type": "dimension",
+        "$description": "Border width"
+      },
+      "border-style": {
+        "$value": "{button.border-style}",
+        "$type": "string",
+        "$description": "Border style"
+      },
+      "justify-content": {
+        "$value": "{button.justify-content}",
+        "$type": "string",
+        "$description": "Justify content"
+      },
+      "font-family": {
+        "$value": "{button.font-family}",
+        "$type": "string",
+        "$description": "Font family"
+      },
+      "font-size": {
+        "$value": "{button.font-size}",
+        "$type": "dimension",
+        "$description": "Font size"
+      },
+      "font-weight": {
+        "$value": "{button.font-weight}",
+        "$type": "number",
+        "$description": "Font weight"
+      },
+      "line-height": {
+        "$value": "{button.line-height}",
+        "$type": "number",
+        "$description": "Line height"
+      },
+      "cursor": {
+        "$value": "{button.cursor}",
+        "$type": "string",
+        "$description": "Cursor"
+      },
+      "white-space": {
+        "$value": "{button.white-space}",
+        "$type": "string",
+        "$description": "White space"
+      },
+      "text-decoration": {
+        "$value": "{button.text-decoration}",
+        "$type": "string",
+        "$description": "Text decoration"
+      },
+      "transition-duration": {
+        "$value": "{button.transition-duration}",
+        "$type": "number",
+        "$description": "Transition duration"
+      },
+      "transition-easing": {
+        "$value": "{button.transition-easing}",
+        "$type": "string",
+        "$description": "Transition easing"
+      },
+      "disabled-cursor": {
+        "$value": "{button.disabled-cursor}",
+        "$type": "string",
+        "$description": "Cursor when disabled"
+      },
+      "disabled-color": {
+        "$value": "{color.disabled.border-on-light}",
+        "$type": "color",
+        "$description": "Text color when disabled"
+      },
+      "disabled-border": {
+        "$value": "{color.disabled.border-on-light}",
+        "$type": "color",
+        "$description": "Border color when disabled"
+      },
+      "padding-inline": {
+        "$value": "{button.padding-inline}",
+        "$type": "dimension",
+        "$description": "Inline (horizontal) padding"
+      },
+      "focus-ring-width": {
+        "$value": "{button.focus-ring-width}",
+        "$type": "dimension",
+        "$description": "Focus ring width"
+      },
+      "focus-ring-style": {
+        "$value": "{button.focus-ring-style}",
+        "$type": "string",
+        "$description": "Focus ring border style"
+      },
+      "focus-ring-offset": {
+        "$value": "{button.focus-ring-offset}",
+        "$type": "dimension",
+        "$description": "Focus ring offset"
+      },
+      "focus-ring-color": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Focus ring color — dark on light backgrounds"
+      },
+      "bg": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Background"
+      },
+      "color": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Text color"
+      },
+      "border": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Border color"
+      },
+      "hover-bg": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Hover background"
+      },
+      "hover-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Hover text color"
+      },
+      "hover-border": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Hover border color"
+      },
+      "active-bg": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Active background"
+      },
+      "active-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Active text color"
+      },
+      "active-border": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Active border color"
+      },
+      "surface-dark-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Text color — surface-dark"
+      },
+      "surface-dark-border": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Border color — surface-dark"
+      },
+      "surface-dark-hover-bg": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Hover background — surface-dark"
+      },
+      "surface-dark-hover-color": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Hover text color — surface-dark"
+      },
+      "surface-dark-hover-border": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Hover border color — surface-dark"
+      },
+      "surface-dark-active-bg": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Active background — surface-dark"
+      },
+      "surface-dark-active-color": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Active text color — surface-dark"
+      },
+      "surface-dark-active-border": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Active border color — surface-dark"
+      },
+      "surface-dark-focus-ring-color": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Focus ring color — surface-dark"
+      }
     },
     "text": {
-      "border-radius":        { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
-      "border-width":         { "$value": "0",                           "$type": "dimension", "$description": "Border width — 0 para uso inline en texto" },
-      "border-style":         { "$value": "{button.border-style}",       "$type": "string",    "$description": "Border style" },
-      "justify-content":      { "$value": "{button.justify-content}",    "$type": "string",    "$description": "Justify content" },
-      "font-family":          { "$value": "{button.font-family}",        "$type": "string",    "$description": "Font family" },
-      "font-size":            { "$value": "{button.font-size}",          "$type": "dimension", "$description": "Font size" },
-      "font-weight":          { "$value": "{button.font-weight}",        "$type": "number",    "$description": "Font weight" },
-      "line-height":          { "$value": "{button.line-height}",        "$type": "number",    "$description": "Line height" },
-      "cursor":               { "$value": "{link.cursor}",             "$type": "string",    "$description": "Cursor" },
-      "white-space":          { "$value": "{button.white-space}",        "$type": "string",    "$description": "White space" },
-      "underline-width":       { "$value": "{link.underline-width}",       "$type": "dimension", "$description": "Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse" },
-      "hover-underline-width": { "$value": "{link.hover-underline-width}", "$type": "dimension", "$description": "Grosor de la línea en hover y en activo — el de `Link`" },
-      "underline-offset":      { "$value": "{link.underline-offset}",      "$type": "dimension", "$description": "Separación entre el texto y su línea — la de `Link`. Va como `padding-block-end`, así que la línea cae por debajo del icono igual que del texto" },
-      "transition-duration":  { "$value": "{button.transition-duration}","$type": "number",    "$description": "Transition duration" },
-      "transition-easing":    { "$value": "{button.transition-easing}",  "$type": "string",    "$description": "Transition easing" },
-      "disabled-cursor":      { "$value": "{button.disabled-cursor}",    "$type": "string",    "$description": "Cursor when disabled" },
-      "disabled-color":       { "$value": "{button.disabled-color}",     "$type": "color",     "$description": "Text color when disabled — light surface" },
-      "padding-inline":       { "$value": "0",                           "$type": "dimension", "$description": "Inline (horizontal) padding — 0 para uso inline en texto" },
-      "focus-ring-width":     { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
-      "focus-ring-style":     { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
-      "focus-ring-offset":    { "$value": "{link.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
-      "focus-ring-color":     { "$value": "{link.focus-ring-color}",             "$type": "color",     "$description": "Focus ring color — light surface" },
-      "bg":                   { "$value": "transparent",                 "$type": "color",     "$description": "Background — always transparent" },
-      "color":                { "$value": "{link.color}",       "$type": "color",     "$description": "Text color — light surface" },
-      "border":               { "$value": "transparent",                 "$type": "color",     "$description": "Border color — transparent" },
-      "hover-bg":             { "$value": "transparent",                 "$type": "color",     "$description": "Hover background — stays transparent" },
-      "hover-color":          { "$value": "{link.hover-color}",       "$type": "color",     "$description": "Hover text color — unchanged" },
-      "hover-border":         { "$value": "transparent",                 "$type": "color",     "$description": "Hover border — stays transparent" },
-      "active-bg":            { "$value": "transparent",                 "$type": "color",     "$description": "Active background — stays transparent" },
-      "active-color":         { "$value": "{link.hover-color}",       "$type": "color",     "$description": "Active text color — unchanged" },
-      "active-border":        { "$value": "transparent",                 "$type": "color",     "$description": "Active border — stays transparent" },
-      "surface-dark-underline-width":       { "$value": "{link.surface-dark-underline-width}",       "$type": "dimension", "$description": "Grosor de la línea en reposo — surface-dark: el de `Link`, que sobre fondo oscuro no lleva línea en reposo" },
-      "surface-dark-hover-underline-width": { "$value": "{link.surface-dark-hover-underline-width}", "$type": "dimension", "$description": "Grosor de la línea en hover y activo — surface-dark: el de `Link`, que sobre fondo oscuro pone la línea en el hover" },
-      "surface-dark-color":              { "$value": "{link.surface-dark-color}", "$type": "color", "$description": "Text color — surface-dark" },
-      "surface-dark-hover-color":        { "$value": "{link.surface-dark-hover-color}", "$type": "color", "$description": "Hover text color — surface-dark" },
-      "surface-dark-active-color":       { "$value": "{link.surface-dark-hover-color}", "$type": "color", "$description": "Active text color — surface-dark" },
-      "surface-dark-focus-ring-color":   { "$value": "{link.surface-dark-focus-ring-color}", "$type": "color", "$description": "Focus ring color — surface-dark" },
-      "surface-dark-disabled-color":     { "$value": "{color.text.muted-on-dark}",   "$type": "color", "$description": "Text color when disabled — surface-dark" }
+      "border-radius": {
+        "$value": "{button.border-radius}",
+        "$type": "dimension",
+        "$description": "Border radius"
+      },
+      "border-width": {
+        "$value": "0",
+        "$type": "dimension",
+        "$description": "Border width — 0 para uso inline en texto"
+      },
+      "border-style": {
+        "$value": "{button.border-style}",
+        "$type": "string",
+        "$description": "Border style"
+      },
+      "justify-content": {
+        "$value": "{button.justify-content}",
+        "$type": "string",
+        "$description": "Justify content"
+      },
+      "font-family": {
+        "$value": "{button.font-family}",
+        "$type": "string",
+        "$description": "Font family"
+      },
+      "font-size": {
+        "$value": "{button.font-size}",
+        "$type": "dimension",
+        "$description": "Font size"
+      },
+      "font-weight": {
+        "$value": "{button.font-weight}",
+        "$type": "number",
+        "$description": "Font weight"
+      },
+      "line-height": {
+        "$value": "{button.line-height}",
+        "$type": "number",
+        "$description": "Line height"
+      },
+      "cursor": {
+        "$value": "{link.cursor}",
+        "$type": "string",
+        "$description": "Cursor"
+      },
+      "white-space": {
+        "$value": "{button.white-space}",
+        "$type": "string",
+        "$description": "White space"
+      },
+      "underline-width": {
+        "$value": "{link.underline-width}",
+        "$type": "dimension",
+        "$description": "Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse"
+      },
+      "hover-underline-width": {
+        "$value": "{link.hover-underline-width}",
+        "$type": "dimension",
+        "$description": "Grosor de la línea en hover y en activo — el de `Link`"
+      },
+      "ink-color": {
+        "$value": "{link.ink-color}",
+        "$type": "color",
+        "$description": "tone=ink: la tinta de la superficie, como en Link"
+      },
+      "ink-underline-width": {
+        "$value": "{link.ink-underline-width}",
+        "$type": "dimension",
+        "$description": "tone=ink: grosor del subrayado en reposo"
+      },
+      "ink-hover-underline-width": {
+        "$value": "{link.ink-hover-underline-width}",
+        "$type": "dimension",
+        "$description": "tone=ink: grosor del subrayado en hover"
+      },
+      "underline-offset": {
+        "$value": "{link.underline-offset}",
+        "$type": "dimension",
+        "$description": "Separación entre el texto y su línea — la de `Link`. Va como `padding-block-end`, así que la línea cae por debajo del icono igual que del texto"
+      },
+      "transition-duration": {
+        "$value": "{button.transition-duration}",
+        "$type": "number",
+        "$description": "Transition duration"
+      },
+      "transition-easing": {
+        "$value": "{button.transition-easing}",
+        "$type": "string",
+        "$description": "Transition easing"
+      },
+      "disabled-cursor": {
+        "$value": "{button.disabled-cursor}",
+        "$type": "string",
+        "$description": "Cursor when disabled"
+      },
+      "disabled-color": {
+        "$value": "{button.disabled-color}",
+        "$type": "color",
+        "$description": "Text color when disabled — light surface"
+      },
+      "padding-inline": {
+        "$value": "0",
+        "$type": "dimension",
+        "$description": "Inline (horizontal) padding — 0 para uso inline en texto"
+      },
+      "focus-ring-width": {
+        "$value": "{button.focus-ring-width}",
+        "$type": "dimension",
+        "$description": "Focus ring width"
+      },
+      "focus-ring-style": {
+        "$value": "{button.focus-ring-style}",
+        "$type": "string",
+        "$description": "Focus ring border style"
+      },
+      "focus-ring-offset": {
+        "$value": "{link.focus-ring-offset}",
+        "$type": "dimension",
+        "$description": "Focus ring offset"
+      },
+      "focus-ring-color": {
+        "$value": "{link.focus-ring-color}",
+        "$type": "color",
+        "$description": "Focus ring color — light surface"
+      },
+      "bg": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Background — always transparent"
+      },
+      "color": {
+        "$value": "{link.color}",
+        "$type": "color",
+        "$description": "Text color — light surface"
+      },
+      "border": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Border color — transparent"
+      },
+      "hover-bg": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Hover background — stays transparent"
+      },
+      "hover-color": {
+        "$value": "{link.hover-color}",
+        "$type": "color",
+        "$description": "Hover text color — unchanged"
+      },
+      "hover-border": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Hover border — stays transparent"
+      },
+      "active-bg": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Active background — stays transparent"
+      },
+      "active-color": {
+        "$value": "{link.hover-color}",
+        "$type": "color",
+        "$description": "Active text color — unchanged"
+      },
+      "active-border": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Active border — stays transparent"
+      },
+      "surface-dark-underline-width": {
+        "$value": "{link.surface-dark-underline-width}",
+        "$type": "dimension",
+        "$description": "Grosor de la línea en reposo — surface-dark: el de `Link`, que sobre fondo oscuro no lleva línea en reposo"
+      },
+      "surface-dark-hover-underline-width": {
+        "$value": "{link.surface-dark-hover-underline-width}",
+        "$type": "dimension",
+        "$description": "Grosor de la línea en hover y activo — surface-dark: el de `Link`, que sobre fondo oscuro pone la línea en el hover"
+      },
+      "surface-dark-color": {
+        "$value": "{link.surface-dark-color}",
+        "$type": "color",
+        "$description": "Text color — surface-dark"
+      },
+      "surface-dark-hover-color": {
+        "$value": "{link.surface-dark-hover-color}",
+        "$type": "color",
+        "$description": "Hover text color — surface-dark"
+      },
+      "surface-dark-ink-color": {
+        "$value": "{link.surface-dark-ink-color}",
+        "$type": "color",
+        "$description": "tone=ink sobre superficie oscura"
+      },
+      "surface-dark-active-color": {
+        "$value": "{link.surface-dark-hover-color}",
+        "$type": "color",
+        "$description": "Active text color — surface-dark"
+      },
+      "surface-dark-focus-ring-color": {
+        "$value": "{link.surface-dark-focus-ring-color}",
+        "$type": "color",
+        "$description": "Focus ring color — surface-dark"
+      },
+      "surface-dark-disabled-color": {
+        "$value": "{color.text.muted-on-dark}",
+        "$type": "color",
+        "$description": "Text color when disabled — surface-dark"
+      }
     },
     "ghost": {
-      "border-radius":      { "$value": "{button.border-radius}",      "$type": "dimension", "$description": "Border radius" },
-      "border-width":       { "$value": "0",                           "$type": "dimension", "$description": "Sin borde — fondo reemplaza al borde en hover" },
-      "border-style":       { "$value": "{button.border-style}",       "$type": "string",    "$description": "Border style" },
-      "justify-content":    { "$value": "{button.justify-content}",    "$type": "string",    "$description": "Justify content" },
-      "font-family":        { "$value": "{button.font-family}",        "$type": "string",    "$description": "Font family" },
-      "font-size":          { "$value": "{button.font-size}",          "$type": "dimension", "$description": "Font size" },
-      "font-weight":        { "$value": "{button.font-weight}",        "$type": "number",    "$description": "Font weight" },
-      "line-height":        { "$value": "{button.line-height}",        "$type": "number",    "$description": "Line height" },
-      "cursor":             { "$value": "{button.cursor}",             "$type": "string",    "$description": "Cursor" },
-      "white-space":        { "$value": "{button.white-space}",        "$type": "string",    "$description": "White space" },
-      "text-decoration":    { "$value": "{button.text-decoration}",    "$type": "string",    "$description": "Text decoration" },
-      "transition-duration":{ "$value": "{button.transition-duration}","$type": "number",    "$description": "Transition duration" },
-      "transition-easing":  { "$value": "{button.transition-easing}",  "$type": "string",    "$description": "Transition easing" },
-      "disabled-cursor":    { "$value": "{button.disabled-cursor}",    "$type": "string",    "$description": "Cursor when disabled" },
-      "disabled-color":     { "$value": "{button.disabled-color}",     "$type": "color",     "$description": "Text color when disabled" },
-      "padding-inline":     { "$value": "{button.padding-inline}",     "$type": "dimension", "$description": "Inline (horizontal) padding" },
-      "focus-ring-width":   { "$value": "{button.focus-ring-width}",   "$type": "dimension", "$description": "Focus ring width" },
-      "focus-ring-style":   { "$value": "{button.focus-ring-style}",   "$type": "string",    "$description": "Focus ring border style" },
-      "focus-ring-offset":  { "$value": "{button.focus-ring-offset}",  "$type": "dimension", "$description": "Focus ring offset" },
-      "focus-ring-color":   { "$value": "{color.primary}",             "$type": "color",     "$description": "Focus ring color" },
-      "bg":                 { "$value": "transparent",                 "$type": "color",     "$description": "Background — transparente en reposo" },
-      "color":              { "$value": "{color.text.on-light}",       "$type": "color",     "$description": "Text color" },
-      "border":             { "$value": "transparent",                 "$type": "color",     "$description": "Border color — transparent" },
-      "hover-bg":           { "$value": "{color.primary}",       "$type": "color",     "$description": "Hover background — fondo sutil" },
-      "hover-color":        { "$value": "{color.text.on-dark}",       "$type": "color",     "$description": "Hover text color — sin cambio" },
-      "hover-border":       { "$value": "transparent",                 "$type": "color",     "$description": "Hover border — transparent" },
-      "active-bg":          { "$value": "{color.primary}",          "$type": "color",     "$description": "Active background" },
-      "active-color":       { "$value": "{color.text.on-dark}",       "$type": "color",     "$description": "Active text color" },
-      "active-border":      { "$value": "transparent",                 "$type": "color",     "$description": "Active border — transparent" },
-      "surface-dark-color":              { "$value": "{color.text.on-dark}",             "$type": "color", "$description": "Text color — surface-dark" },
-      "surface-dark-hover-color":        { "$value": "{color.primary}",             "$type": "color", "$description": "Hover text color — surface-dark" },
-      "surface-dark-active-color":       { "$value": "{color.primary}",             "$type": "color", "$description": "Active text color — surface-dark" },
-      "surface-dark-focus-ring-color":   { "$value": "{color.text.on-dark}",             "$type": "color", "$description": "Focus ring color — surface-dark" },
-      "surface-dark-hover-bg":           { "$value": "{color.text.on-dark}",         "$type": "color", "$description": "Hover background — surface-dark" },
-      "surface-dark-active-bg":          { "$value": "{color.text.on-dark}",        "$type": "color", "$description": "Active background — surface-dark" },
-      "surface-dark-disabled-color":     { "$value": "{color.text.muted-on-dark}",               "$type": "color", "$description": "Text color when disabled — surface-dark" }
+      "border-radius": {
+        "$value": "{button.border-radius}",
+        "$type": "dimension",
+        "$description": "Border radius"
+      },
+      "border-width": {
+        "$value": "0",
+        "$type": "dimension",
+        "$description": "Sin borde — fondo reemplaza al borde en hover"
+      },
+      "border-style": {
+        "$value": "{button.border-style}",
+        "$type": "string",
+        "$description": "Border style"
+      },
+      "justify-content": {
+        "$value": "{button.justify-content}",
+        "$type": "string",
+        "$description": "Justify content"
+      },
+      "font-family": {
+        "$value": "{button.font-family}",
+        "$type": "string",
+        "$description": "Font family"
+      },
+      "font-size": {
+        "$value": "{button.font-size}",
+        "$type": "dimension",
+        "$description": "Font size"
+      },
+      "font-weight": {
+        "$value": "{button.font-weight}",
+        "$type": "number",
+        "$description": "Font weight"
+      },
+      "line-height": {
+        "$value": "{button.line-height}",
+        "$type": "number",
+        "$description": "Line height"
+      },
+      "cursor": {
+        "$value": "{button.cursor}",
+        "$type": "string",
+        "$description": "Cursor"
+      },
+      "white-space": {
+        "$value": "{button.white-space}",
+        "$type": "string",
+        "$description": "White space"
+      },
+      "text-decoration": {
+        "$value": "{button.text-decoration}",
+        "$type": "string",
+        "$description": "Text decoration"
+      },
+      "transition-duration": {
+        "$value": "{button.transition-duration}",
+        "$type": "number",
+        "$description": "Transition duration"
+      },
+      "transition-easing": {
+        "$value": "{button.transition-easing}",
+        "$type": "string",
+        "$description": "Transition easing"
+      },
+      "disabled-cursor": {
+        "$value": "{button.disabled-cursor}",
+        "$type": "string",
+        "$description": "Cursor when disabled"
+      },
+      "disabled-color": {
+        "$value": "{button.disabled-color}",
+        "$type": "color",
+        "$description": "Text color when disabled"
+      },
+      "padding-inline": {
+        "$value": "{button.padding-inline}",
+        "$type": "dimension",
+        "$description": "Inline (horizontal) padding"
+      },
+      "focus-ring-width": {
+        "$value": "{button.focus-ring-width}",
+        "$type": "dimension",
+        "$description": "Focus ring width"
+      },
+      "focus-ring-style": {
+        "$value": "{button.focus-ring-style}",
+        "$type": "string",
+        "$description": "Focus ring border style"
+      },
+      "focus-ring-offset": {
+        "$value": "{button.focus-ring-offset}",
+        "$type": "dimension",
+        "$description": "Focus ring offset"
+      },
+      "focus-ring-color": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Focus ring color"
+      },
+      "bg": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Background — transparente en reposo"
+      },
+      "color": {
+        "$value": "{color.text.on-light}",
+        "$type": "color",
+        "$description": "Text color"
+      },
+      "border": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Border color — transparent"
+      },
+      "hover-bg": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Hover background — fondo sutil"
+      },
+      "hover-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Hover text color — sin cambio"
+      },
+      "hover-border": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Hover border — transparent"
+      },
+      "active-bg": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Active background"
+      },
+      "active-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Active text color"
+      },
+      "active-border": {
+        "$value": "transparent",
+        "$type": "color",
+        "$description": "Active border — transparent"
+      },
+      "surface-dark-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Text color — surface-dark"
+      },
+      "surface-dark-hover-color": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Hover text color — surface-dark"
+      },
+      "surface-dark-active-color": {
+        "$value": "{color.primary}",
+        "$type": "color",
+        "$description": "Active text color — surface-dark"
+      },
+      "surface-dark-focus-ring-color": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Focus ring color — surface-dark"
+      },
+      "surface-dark-hover-bg": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Hover background — surface-dark"
+      },
+      "surface-dark-active-bg": {
+        "$value": "{color.text.on-dark}",
+        "$type": "color",
+        "$description": "Active background — surface-dark"
+      },
+      "surface-dark-disabled-color": {
+        "$value": "{color.text.muted-on-dark}",
+        "$type": "color",
+        "$description": "Text color when disabled — surface-dark"
+      }
     }
   }
 }

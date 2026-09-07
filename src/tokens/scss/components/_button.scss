@@ -134,6 +134,9 @@ $lxd-button-text-cursor: pointer; // Cursor
 $lxd-button-text-white-space: nowrap; // White space
 $lxd-button-text-underline-width: 1px; // Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse
 $lxd-button-text-hover-underline-width: 0px; // Grosor de la línea en hover y en activo — el de `Link`
+$lxd-button-text-ink-color: #111e30; // tone=ink: la tinta de la superficie, como en Link
+$lxd-button-text-ink-underline-width: 1px; // tone=ink: grosor del subrayado en reposo
+$lxd-button-text-ink-hover-underline-width: 0px; // tone=ink: grosor del subrayado en hover
 $lxd-button-text-underline-offset: 0.25rem; // Separación entre el texto y su línea — la de `Link`. Va como `padding-block-end`, así que la línea cae por debajo del icono igual que del texto
 $lxd-button-text-transition-duration: 150ms; // Transition duration
 $lxd-button-text-transition-easing: ease; // Transition easing

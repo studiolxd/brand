@@ -49,6 +49,12 @@ El subrayado es **una línea bajo el botón entero** —sombra interior más `pa
 
 <Canvas of={ButtonStories.TextConIcono} />
 
+Con `tone="ink"` toma la tinta de la superficie y el subrayado de `Link tone="ink"`
+(`button.text.ink-*` → `link.ink-*`): para acciones utilitarias que no deben leerse como
+enlace de acento —abrir o cerrar un bloque, deshacer—. Solo tiene efecto en la variante `text`.
+
+<Canvas of={ButtonStories.TextInk} />
+
 ## Block
 
 Cualquier variante admite el modificador `block` para ocupar todo el ancho del contenedor.

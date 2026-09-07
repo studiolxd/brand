@@ -116,6 +116,12 @@ export const TextOnLight: Story = {
  * así que cruza por debajo del icono igual que del texto. Con
  * `text-decoration` la línea se cortaba en el SVG.
  */
+/** `tone="ink"`: tinta de la superficie, como `Link tone="ink"`. */
+export const TextInk: Story = {
+  name: 'Text — tone ink',
+  args: { variant: 'text', tone: 'ink', children: 'Comparar planes' },
+};
+
 export const TextConIcono: Story = {
   name: 'Text — con icono',
   args: { variant: 'text' },

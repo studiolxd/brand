@@ -68,6 +68,7 @@
   --button-text-cursor: var(--link-cursor); /** Cursor */
   --button-text-white-space: var(--button-white-space); /** White space */
   --button-text-hover-underline-width: var(--link-hover-underline-width); /** Grosor de la línea en hover y en activo — el de `Link` */
+  --button-text-ink-hover-underline-width: var(--link-ink-hover-underline-width); /** tone=ink: grosor del subrayado en hover */
   --button-text-disabled-cursor: var(--button-disabled-cursor); /** Cursor when disabled */
   --button-text-focus-ring-style: var(--button-focus-ring-style); /** Focus ring border style */
   --button-ghost-border-style: var(--button-border-style); /** Border style */
@@ -173,6 +174,8 @@
   --button-text-border-radius: var(--button-border-radius); /** Border radius */
   --button-text-font-weight: var(--button-font-weight); /** Font weight */
   --button-text-underline-width: var(--link-underline-width); /** Grosor de la línea en reposo. La variante `text` se subraya con la misma técnica que `Link` —sombra interior, no `text-decoration`— porque `text-decoration` no cubre un SVG y un botón con icono quedaba con la línea cortada. Apunta al token de `Link` para que las dos piezas no puedan separarse */
+  --button-text-ink-color: var(--link-ink-color); /** tone=ink: la tinta de la superficie, como en Link */
+  --button-text-ink-underline-width: var(--link-ink-underline-width); /** tone=ink: grosor del subrayado en reposo */
   --button-text-disabled-color: var(--button-disabled-color); /** Text color when disabled — light surface */
   --button-text-focus-ring-width: var(--button-focus-ring-width); /** Focus ring width */
   --button-text-focus-ring-offset: var(--link-focus-ring-offset); /** Focus ring offset */
@@ -220,6 +223,7 @@ html.dark {
   --button-text-hover-underline-width: var(--link-hover-underline-width); /** Grosor de la línea en hover y activo — surface-dark: el de `Link`, que sobre fondo oscuro pone la línea en el hover */
   --button-text-color: var(--link-color); /** Text color — surface-dark */
   --button-text-hover-color: var(--link-hover-color); /** Hover text color — surface-dark */
+  --button-text-ink-color: var(--link-ink-color); /** tone=ink sobre superficie oscura */
   --button-text-active-color: var(--link-hover-color); /** Active text color — surface-dark */
   --button-text-focus-ring-color: var(--link-focus-ring-color); /** Focus ring color — surface-dark */
 }

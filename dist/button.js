@@ -5,54 +5,55 @@ import { jsx as t } from "react/jsx-runtime";
 import { forwardRef as n } from "react";
 import { useRender as r } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Button/Button.tsx
-var i = n(function({ variant: n = "primary", destructive: i = !1, size: a, block: o = !1, iconOnly: s = !1, children: c, type: l = "button", disabled: u, onClick: d, href: f, external: p = !1, render: m, className: h, ...g }, _) {
-	let v = e(a), y = [
+var i = n(function({ variant: n = "primary", tone: i = "accent", destructive: a = !1, size: o, block: s = !1, iconOnly: c = !1, children: l, type: u = "button", disabled: d, onClick: f, href: p, external: m = !1, render: h, className: g, ..._ }, v) {
+	let y = e(o), b = [
 		"button",
 		`button--${n}`,
-		i ? "button--destructive-intent" : "",
-		v === "md" ? "" : `button--${v}`,
-		o ? "button--block" : "",
-		s ? "button--icon-only" : "",
-		h ?? ""
-	].filter(Boolean).join(" "), b = (e) => {
-		if (u) {
+		n === "text" && i === "ink" ? "button--ink" : "",
+		a ? "button--destructive-intent" : "",
+		y === "md" ? "" : `button--${y}`,
+		s ? "button--block" : "",
+		c ? "button--icon-only" : "",
+		g ?? ""
+	].filter(Boolean).join(" "), x = (e) => {
+		if (d) {
 			e.preventDefault(), e.stopPropagation();
 			return;
 		}
-		d?.(e);
+		f?.(e);
 	};
 	return r({
-		render: m,
-		ref: _,
-		enabled: m !== void 0,
+		render: h,
+		ref: v,
+		enabled: h !== void 0,
 		props: {
-			className: y,
-			"aria-disabled": u ? !0 : void 0,
-			onClick: b,
-			...g,
-			children: c
+			className: b,
+			"aria-disabled": d ? !0 : void 0,
+			onClick: x,
+			..._,
+			children: l
 		}
-	}) || (f === void 0 ? /* @__PURE__ */ t("button", {
-		ref: _,
-		className: y,
-		type: l,
-		disabled: u,
-		onClick: d,
-		...g,
-		children: c
+	}) || (p === void 0 ? /* @__PURE__ */ t("button", {
+		ref: v,
+		className: b,
+		type: u,
+		disabled: d,
+		onClick: f,
+		..._,
+		children: l
 	}) : /* @__PURE__ */ t("a", {
-		ref: _,
-		className: y,
-		href: u ? void 0 : f,
-		"aria-disabled": u ? !0 : void 0,
-		role: u ? "link" : void 0,
-		onClick: b,
-		...p ? {
+		ref: v,
+		className: b,
+		href: d ? void 0 : p,
+		"aria-disabled": d ? !0 : void 0,
+		role: d ? "link" : void 0,
+		onClick: x,
+		...m ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		...g,
-		children: c
+		..._,
+		children: l
 	}));
 });
 //#endregion

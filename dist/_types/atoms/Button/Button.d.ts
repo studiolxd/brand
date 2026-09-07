@@ -17,6 +17,12 @@ export type ButtonIconOnlyProps = {
 export interface ButtonBaseProps extends Omit<React.ComponentPropsWithoutRef<'button'>, 'onClick'> {
     /** Visual variant of the button */
     variant?: 'primary' | 'outline' | 'ghost' | 'text';
+    /**
+     * Solo con `variant="text"`: `ink` lo pinta con la tinta de la superficie,
+     * como `Link tone="ink"`, para acciones que no deben leerse como enlace de
+     * acento (abrir o cerrar un bloque, deshacer).
+     */
+    tone?: 'accent' | 'ink';
     /** Applies destructive (red) color intent — composable with outline and text */
     destructive?: boolean;
     /** Size of the button */

@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.7.0] — 2026-09-07
+
+> **Minor.**
+
+- **`Button variant="text" tone="ink"`.** La misma pareja de tonos que `Link`:
+  con `ink` el botón-enlace toma la tinta de la superficie y su subrayado
+  (`button.text.ink-*` → `link.ink-*`). Para acciones utilitarias que no
+  deben leerse como enlace de acento (abrir o cerrar un bloque, deshacer).
+
 ## [32.6.0] — 2026-09-07
 
 > **Minor.**
