@@ -63,6 +63,12 @@ export interface OnboardingShellProps {
    * `true`.
    */
   shell?: boolean;
+  /**
+   * Ancho de la columna del paso. `md` (por defecto) es la medida estrecha de
+   * lectura, la de un formulario; `wide` es el ancho de página pública, para
+   * un paso que enseña una fila de tarjetas (la elección de plan).
+   */
+  width?: 'md' | 'wide';
   /** Se añade DESPUÉS de las clases propias del componente. */
   className?: string;
 }
@@ -115,6 +121,7 @@ export function OnboardingShell({
   actionsLabel = 'Acciones del paso',
   id = 'main-content',
   shell = true,
+  width = 'md',
   className,
 }: OnboardingShellProps) {
   const hayAcciones = Boolean(primaryAction || backAction || exitAction);
@@ -149,7 +156,7 @@ export function OnboardingShell({
             quedaban en `md` salvo que la aplicación se acordara de pasar la
             talla a mano — que es exactamente lo que no debe hacer falta. */}
         <FormSizeContext.Provider value="lg">
-          <div className="onboarding-shell__step">
+          <div className={['onboarding-shell__step', width === 'wide' ? 'onboarding-shell__step--wide' : ''].filter(Boolean).join(' ')}>
             {stepper && <div className="onboarding-shell__progress">{stepper}</div>}
 
             <div className="onboarding-shell__body">{children}</div>

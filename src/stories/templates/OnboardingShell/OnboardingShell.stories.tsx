@@ -243,3 +243,9 @@ export const ContratoUnPaso: Story = {
     await expect(canvasElement.querySelector('.onboarding-shell__decisions')?.textContent).toBe('Cerrar sesión');
   },
 };
+
+/** `width="wide"`: la columna al ancho de página pública, para una fila de tarjetas. */
+export const Ancho: Story = {
+  name: 'Ancho (width="wide")',
+  args: { width: 'wide' },
+};

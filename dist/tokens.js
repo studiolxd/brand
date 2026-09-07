@@ -3080,6 +3080,7 @@ var e = {
 	"--data-table-toolbar-gap": "0.5rem",
 	"--data-table-footer-actions-gap": "0.75rem",
 	"--onboarding-shell-max-width": "768px",
+	"--onboarding-shell-max-width-wide": "1280px",
 	"--onboarding-shell-gap": "2rem",
 	"--onboarding-shell-brand-margin-inline-start": "calc(-1 * 1rem)",
 	"--onboarding-shell-brand-padding-block": "0.5rem",

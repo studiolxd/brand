@@ -51,6 +51,12 @@
   margin-inline: auto;
 }
 
+/* `width="wide"`: la columna crece al ancho de página pública para un paso
+   con una fila de tarjetas. */
+.onboarding-shell__step.onboarding-shell__step--wide {
+  max-inline-size: var(--onboarding-shell-max-width-wide);
+}
+
 /* La marca mide lo que le da la plantilla, no lo que diga su prop `size`:
    igual que en `SiteHeader`, manda el sitio donde se pinta. Así el alta y el
    chrome público enseñan el logotipo al mismo tamaño y el consumidor no puede

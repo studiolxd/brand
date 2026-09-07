@@ -87,6 +87,14 @@ La ranura `stepper` se pasa siempre; es el `Stepper` quien decide no pintarse cu
 
 Las pantallas completas del alta, montadas sobre esta plantilla y con datos falsos, están en **Pages › Onboarding**.
 
+## Un paso ancho
+
+La columna del paso mide la medida estrecha de lectura (768px): es un formulario. Un paso que
+enseña una fila de tarjetas —la elección de plan— la pide con `width="wide"` y crece al ancho
+de página pública (1280px, `onboarding-shell.max-width-wide`). Los demás pasos siguen estrechos.
+
+<Canvas of={OnboardingShellStories.Ancho} />
+
 ## Props
 
 <ArgTypes of={OnboardingShellStories} />

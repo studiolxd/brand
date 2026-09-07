@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.10.0] — 2026-09-07
+
+> **Minor.**
+
+- **`OnboardingShell width="wide"`.** La columna del paso crece al ancho de
+  página pública (token `onboarding-shell.max-width-wide` → 1280px) para un
+  paso con una fila de tarjetas, como la elección de plan. Por defecto sigue
+  la medida estrecha.
+
 ## [32.9.0] — 2026-09-07
 
 > **Minor.**

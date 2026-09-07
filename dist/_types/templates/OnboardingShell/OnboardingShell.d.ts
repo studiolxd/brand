@@ -57,6 +57,12 @@ export interface OnboardingShellProps {
      * `true`.
      */
     shell?: boolean;
+    /**
+     * Ancho de la columna del paso. `md` (por defecto) es la medida estrecha de
+     * lectura, la de un formulario; `wide` es el ancho de página pública, para
+     * un paso que enseña una fila de tarjetas (la elección de plan).
+     */
+    width?: 'md' | 'wide';
     /** Se añade DESPUÉS de las clases propias del componente. */
     className?: string;
 }
@@ -95,4 +101,4 @@ export interface OnboardingShellProps {
  * dentro —un `Form`, un campo suelto, un `AvatarUpload`— sale a la talla que
  * le toca sin que la aplicación tenga que acordarse de pedirla.
  */
-export declare function OnboardingShell({ children, brand, preferences, switchers, preferencesLabel, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;
+export declare function OnboardingShell({ children, brand, preferences, switchers, preferencesLabel, stepper, primaryAction, backAction, exitAction, actionsLabel, id, shell, width, className, }: OnboardingShellProps): import("react/jsx-runtime").JSX.Element;
