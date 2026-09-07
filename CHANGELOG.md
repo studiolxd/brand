@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.10.4] — 2026-09-07
+
+- **`SidebarNav`: los enlaces de nivel principal van en tinta de ítem.**
+  Tomaban el color de etiqueta de grupo, que en superficie oscura es gris
+  atenuado: los enlaces no activos se leían como apagados. Ahora
+  `sidebar-nav.item-color` (prusia en claro, blanco en oscuro).
+
 ## [32.10.3] — 2026-09-07
 
 - **`Sidebar` en rail: el `AppLauncher` con texto vuelve a ser icono.** Con

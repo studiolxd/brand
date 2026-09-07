@@ -167,7 +167,9 @@ a.sidebar-nav__group-label:focus-visible {
   /* No negrita: un enlace de nivel principal es un ítem más, no una
      cabecera de grupo — solo compartía la talla, no el peso. */
   font-weight: var(--sidebar-nav-item-font-weight);
-  color: var(--sidebar-nav-group-label-color);
+  /* Tinta de ítem, no de etiqueta de grupo: en oscuro la etiqueta es gris
+     atenuado y el enlace se leía como inactivo. */
+  color: var(--sidebar-nav-item-color);
   text-decoration: none;
   box-shadow: none;
   transition: color var(--sidebar-nav-transition-duration) var(--sidebar-nav-transition-easing);
@@ -180,7 +182,7 @@ a.sidebar-nav__group-label:focus-visible {
    ninguno. */
 .sidebar-nav__top-link:hover {
   box-shadow: none;
-  color: var(--sidebar-nav-group-label-color);
+  color: var(--sidebar-nav-item-color);
 }
 
 .sidebar-nav__top-link:focus-visible {
