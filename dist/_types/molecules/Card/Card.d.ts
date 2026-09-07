@@ -113,5 +113,13 @@ export declare const CardDescription: import("react").ForwardRefExoticComponent<
 export declare const CardAction: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
 /** Cuerpo de la tarjeta. */
 export declare const CardContent: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
-/** Pie con las acciones de la tarjeta. */
-export declare const CardFooter: import("react").ForwardRefExoticComponent<Omit<import("react").DetailedHTMLProps<import("react").HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & import("react").RefAttributes<HTMLDivElement>>;
+export interface CardFooterProps extends CardPartProps {
+    /**
+     * `row` (por defecto): las acciones en fila. `column`: apiladas y a todo
+     * el ancho — para un pie con una línea de texto sobre el botón (una nota
+     * de prueba, una condición) que debe quedar pegada a él.
+     */
+    direction?: 'row' | 'column';
+}
+/** Pie de la tarjeta: sus acciones, en fila o apiladas. */
+export declare const CardFooter: import("react").ForwardRefExoticComponent<CardFooterProps & import("react").RefAttributes<HTMLDivElement>>;

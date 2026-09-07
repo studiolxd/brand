@@ -29,6 +29,12 @@
   margin-block-start: auto;
 }
 
+/* `direction="column"`: las piezas del pie apiladas y a todo el ancho. */
+.card__footer.card__footer--column {
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .card.card--primary {
   background-color: var(--card-primary-bg);
   color: var(--card-primary-color);

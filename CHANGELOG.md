@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.8.0] — 2026-09-07
+
+> **Minor.**
+
+- **`CardFooter direction="column"`.** Las piezas del pie apiladas y a todo
+  el ancho, para una línea de texto pegada sobre el botón (una nota de
+  prueba, una condición). Por defecto sigue siendo `row`.
+
 ## [32.7.0] — 2026-09-07
 
 > **Minor.**

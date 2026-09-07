@@ -269,10 +269,27 @@ export const CardContent = forwardRef<HTMLDivElement, CardPartProps>(function Ca
   return <div ref={ref} className={['card__content', className].filter(Boolean).join(' ')} {...rest} />;
 });
 
-/** Pie con las acciones de la tarjeta. */
-export const CardFooter = forwardRef<HTMLDivElement, CardPartProps>(function CardFooter(
-  { className, ...rest },
+export interface CardFooterProps extends CardPartProps {
+  /**
+   * `row` (por defecto): las acciones en fila. `column`: apiladas y a todo
+   * el ancho — para un pie con una línea de texto sobre el botón (una nota
+   * de prueba, una condición) que debe quedar pegada a él.
+   */
+  direction?: 'row' | 'column';
+}
+
+/** Pie de la tarjeta: sus acciones, en fila o apiladas. */
+export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(function CardFooter(
+  { direction = 'row', className, ...rest },
   ref,
 ) {
-  return <div ref={ref} className={['card__footer', className].filter(Boolean).join(' ')} {...rest} />;
+  return (
+    <div
+      ref={ref}
+      className={['card__footer', direction === 'column' ? 'card__footer--column' : '', className]
+        .filter(Boolean)
+        .join(' ')}
+      {...rest}
+    />
+  );
 });

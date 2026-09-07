@@ -98,11 +98,15 @@ var l = s(function({ href: r, render: s, external: l = !1, title: u, description
 		className: ["card__content", e].filter(Boolean).join(" "),
 		...t
 	});
-}), h = s(function({ className: e, ...t }, n) {
+}), h = s(function({ direction: e = "row", className: t, ...n }, r) {
 	return /* @__PURE__ */ a("div", {
-		ref: n,
-		className: ["card__footer", e].filter(Boolean).join(" "),
-		...t
+		ref: r,
+		className: [
+			"card__footer",
+			e === "column" ? "card__footer--column" : "",
+			t
+		].filter(Boolean).join(" "),
+		...n
 	});
 });
 //#endregion
