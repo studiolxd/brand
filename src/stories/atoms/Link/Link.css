@@ -7,8 +7,29 @@
    sombra interior para no tocar bordes ni maquetación. Especificidad mínima
    (:where): los componentes que visten sus propios enlaces la anulan con
    `box-shadow: none; padding-block-end: 0`, igual que anulaban el subrayado.
-   Los botones-enlace (`a.button`) quedan fuera. */
-a:where(:not(.button)) {
+   Los botones-enlace (`a.button`) quedan fuera.
+
+   La misma cara la lleva la clase `link`, que el componente pone siempre: con
+   `render` sobre un `<button>` —una acción que no navega pero se lee como
+   enlace (deshacer, volver un paso)— sale vestido igual que un `<a>`. Con la
+   misma especificidad mínima (`:where`). */
+
+/* El `<button>` con cara de enlace: fuera el cromo del botón nativo antes de
+   vestirlo. Va antes que la cara para que el `padding-block-end` del subrayado
+   gane al `padding: 0`. */
+:where(button.link) {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
+}
+
+a:where(:not(.button)),
+:where(.link) {
   color: var(--link-color);
   text-decoration: none;
   padding-block-end: var(--link-underline-offset);
@@ -16,12 +37,14 @@ a:where(:not(.button)) {
   cursor: var(--link-cursor);
 }
 
-a:where(:not(.button)):hover {
+a:where(:not(.button)):hover,
+:where(.link):hover {
   color: var(--link-hover-color);
   box-shadow: inset 0 calc(-1 * var(--link-hover-underline-width)) 0 0 currentColor;
 }
 
-a:focus-visible {
+a:focus-visible,
+:where(.link):focus-visible {
   outline: var(--link-focus-ring-width) solid var(--link-focus-ring-color);
   outline-offset: var(--link-focus-ring-offset);
 }

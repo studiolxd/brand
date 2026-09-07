@@ -72,6 +72,45 @@ export const ConRender: Story = {
   render: () => <Link icon="arrow-left" render={<a href="#acceso" data-router="sí" />}>Volver a iniciar sesión</Link>,
 };
 
+/**
+ * Una acción que no navega pero se lee como enlace (deshacer, volver un paso
+ * del formulario): `render` sobre un `<button type="button">`. La semántica
+ * es la del botón; la cara, la del enlace — nunca un `<a href="#">`.
+ */
+export const ComoBoton: Story = {
+  name: 'Como botón de acción',
+  render: () => (
+    <Link icon="arrow-left" render={<button type="button" onClick={() => undefined} />}>
+      Volver al inicio de sesión
+    </Link>
+  ),
+};
+
+export const ContratoBoton: Story = {
+  name: 'Test — sobre <button>, misma cara que un <a>',
+  tags: ['!dev'],
+  render: () => (
+    <>
+      <Link render={<button type="button" data-testid="boton" />}>Deshacer</Link>
+      <a href="#" data-testid="crudo">Crudo</a>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: 'Deshacer' });
+    await expect(boton.tagName).toBe('BUTTON');
+    await expect(boton).toHaveClass('link');
+    const a = getComputedStyle(boton); const b = getComputedStyle(canvas.getByTestId('crudo'));
+    await expect(a.color).toBe(b.color);
+    await expect(a.boxShadow).toBe(b.boxShadow);
+    await expect(a.paddingBottom).toBe(b.paddingBottom);
+    await expect(a.fontSize).toBe(b.fontSize);
+    await expect(a.fontFamily).toBe(b.fontFamily);
+    await expect(a.backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    await expect(a.borderTopWidth).toBe('0px');
+  },
+};
+
 /** Dos tonos: `accent` para texto y acciones; `ink` para lo utilitario (legal, volver, ¿olvidaste la contraseña?). */
 export const Tonos: Story = {
   render: () => (

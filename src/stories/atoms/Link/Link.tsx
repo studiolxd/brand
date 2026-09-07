@@ -36,7 +36,10 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   { href, children, external = false, tone = 'accent', icon, iconPosition = 'start', render, className, ...rest },
   ref,
 ) {
-  const classes = [tone === 'ink' ? 'link--ink' : '', icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ') || undefined;
+  // `link` siempre: la cara del enlace cuelga de la clase además de la etiqueta
+  // `a`, así que con `render` sobre un `<button>` (una acción que se lee como
+  // enlace) sale vestido igual.
+  const classes = ['link', tone === 'ink' ? 'link--ink' : '', icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ');
   const glyph = icon ? <Icon name={icon} size="sm" className="link__icon" /> : null;
   const content = (
     <>

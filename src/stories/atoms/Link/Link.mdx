@@ -20,7 +20,11 @@ La cara la pone `brand.css` sobre cualquier `<a>`, sin clases: el HTML de un CMS
 
 ## Botón con cara de enlace
 
-`Button variant="text"` toma su cara de estos mismos tokens (`button.text.*` → `link.*`): una acción que no navega (abrir un panel, deshacer) pero que se lee como un enlace. Y al revés, `Button href` es un `<a>` con cara de botón. Semántica según lo que hace; cara según lo que pide la maqueta.
+Una acción que no navega (deshacer, volver un paso de un formulario) pero que se lee como un enlace es un `<button>`: se escribe `Link` con `render={<button type="button" onClick={…} />}`. El componente pone siempre la clase `link`, y la cara —color, subrayado, hover, foco— cuelga de esa clase además de la etiqueta `a`, así que el botón sale vestido igual que un `<a>`; el cromo del botón nativo se retira. Nunca un `<a href="#">`.
+
+<Canvas of={LinkStories.ComoBoton} />
+
+`Button variant="text"` sigue existiendo y toma su cara de estos mismos tokens (`button.text.*` → `link.*`): es el botón-enlace que vive entre botones (un pie de formulario, una barra de acciones). Y al revés, `Button href` es un `<a>` con cara de botón. Semántica según lo que hace; cara según lo que pide la maqueta.
 
 ## Tokens
 

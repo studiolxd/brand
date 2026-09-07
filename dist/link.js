@@ -7,10 +7,11 @@ import { useRender as a } from "@base-ui/react/use-render";
 //#region src/stories/atoms/Link/Link.tsx
 var o = i(function({ href: i, children: o, external: s = !1, tone: c = "accent", icon: l, iconPosition: u = "start", render: d, className: f, ...p }, m) {
 	let h = [
+		"link",
 		c === "ink" ? "link--ink" : "",
 		l ? "link--with-icon" : "",
 		f
-	].filter(Boolean).join(" ") || void 0, g = l ? /* @__PURE__ */ n(e, {
+	].filter(Boolean).join(" "), g = l ? /* @__PURE__ */ n(e, {
 		name: l,
 		size: "sm",
 		className: "link__icon"

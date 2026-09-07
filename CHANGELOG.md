@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.11.0] — 2026-09-07
+
+> **Minor.**
+
+- **`Link` viste también por clase.** El componente pone siempre `link`, y la
+  cara del enlace (color, subrayado, hover, foco) cuelga de `:where(.link)`
+  además de la etiqueta `a`, con la misma especificidad mínima. Así
+  `render={<button type="button" />}` —una acción que se lee como enlace—
+  sale igual que un `<a>`; el cromo del botón nativo se retira. Story «Como
+  botón de acción» con su contrato. Los enlaces crudos siguen vestidos por la
+  etiqueta.
+
 ## [32.10.6] — 2026-09-07
 
 - **Pages/Segundo factor** y **Pages/Enlace mágico enviado** reflejan las
