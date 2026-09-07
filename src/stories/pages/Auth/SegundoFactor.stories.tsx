@@ -4,6 +4,7 @@ import { AuthPage } from './AuthPage';
 import { Form } from '../../molecules/Form/Form';
 import { InputField } from '../../molecules/InputField/InputField';
 import { OtpField } from '../../molecules/OtpField/OtpField';
+import { Link } from '../../atoms/Link/Link';
 import { Button } from '../../atoms/Button/Button';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
@@ -29,7 +30,13 @@ function SegundoFactor({ recovery, invalidCode, surface }: Args) {
     // El título de la página sigue siendo el del acceso: el segundo factor no
     // es otra pantalla, es el segundo tramo de la misma. De ahí que su
     // encabezado sea un `h2` dentro de la columna del formulario.
-    <AuthPage title="Inicia sesión" surface={surface}>
+    <AuthPage
+      title="Inicia sesión"
+      // La vuelta al formulario de acceso es un enlace en la columna de la
+      // introducción, como en el resto de pantallas de auth; no un botón del pie.
+      aside={<Link href="#acceso" icon="arrow-left">Volver al inicio de sesión</Link>}
+      surface={surface}
+    >
       {/* Título, explicación y formulario con el aire del sistema entre ellos:
           sin el `Stack`, la etiqueta del código queda pegada al párrafo. */}
       <Stack gap="lg" align="stretch">
@@ -42,16 +49,11 @@ function SegundoFactor({ recovery, invalidCode, surface }: Args) {
           onSubmit={(e) => e.preventDefault()}
           actions={<Button variant="primary" type="submit">Verificar</Button>}
           links={
-            <>
-              {/* Las dos salidas del paso: cambiar de método y volver al
-                  formulario de acceso. Van en `outline` —no en `text`— porque
-                  no son enlaces a otra página: son las dos únicas maneras de
-                  salir de aquí, y las dos pesan lo mismo. */}
-              <Button variant="outline" type="button">
-                {recovery ? 'Usar la app de autenticación' : 'Usar un código de recuperación'}
-              </Button>
-              <Button variant="outline" type="button">Volver</Button>
-            </>
+            // Cambiar de método: en `outline` —no en `text`— porque no es un
+            // enlace a otra página, y a todo el ancho, como la acción.
+            <Button variant="outline" type="button" block>
+              {recovery ? 'Usar la app de autenticación' : 'Usar un código de recuperación'}
+            </Button>
           }
         >
           {recovery ? (
@@ -90,7 +92,7 @@ const meta: Meta<typeof SegundoFactor> = {
 export default meta;
 type Story = StoryObj<typeof SegundoFactor>;
 
-/** El segundo tramo de `/sign-in`: seis celdas y las dos salidas. */
+/** El segundo tramo de `/sign-in`: seis celdas, cambiar de método y, en la columna de la introducción, la vuelta al acceso. */
 export const PorDefecto: Story = {};
 
 /** El código no vale: el mensaje cuelga del campo y las celdas quedan en error. */

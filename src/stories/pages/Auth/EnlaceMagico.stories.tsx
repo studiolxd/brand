@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { AuthPage } from './AuthPage';
-import { Alert } from '../../molecules/Alert/Alert';
+import { Form } from '../../molecules/Form/Form';
 import { Link } from '../../atoms/Link/Link';
 
 const AVISO = 'Revisa tu correo para encontrar el enlace de acceso.';
@@ -26,10 +26,10 @@ function EnlaceMagico({ signupOpen, surface }: Args) {
       description={signupOpen ? <>¿No tienes una cuenta? <Link href="#registro">Regístrate</Link></> : undefined}
       surface={surface}
     >
-      {/* `default` y no `success`: el correo se ha enviado, pero lo que hay que
-          hacer todavía está por hacer —abrirlo—, y un check verde se lee como
-          «ya está». El rol es `status`, que anuncia sin interrumpir. */}
-      <Alert description={AVISO} />
+      {/* Como «Recuperar contraseña» enviado: el formulario desaparece entero
+          y en su sitio queda el aviso del propio `Form`, solo texto — sin
+          caja. El rol es `status`, que anuncia sin interrumpir. */}
+      <Form size="lg" success={AVISO} />
     </AuthPage>
   );
 }

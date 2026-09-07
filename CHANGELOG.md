@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.10.6] — 2026-09-07
+
+- **Pages/Segundo factor** y **Pages/Enlace mágico enviado** reflejan las
+  pantallas reales: la vuelta al acceso es un enlace en la columna de la
+  introducción (`aside`) y cambiar de método va `outline` a todo el ancho;
+  el aviso del enlace enviado es el `success` del `Form` (solo texto, sin
+  caja), como «Recuperar contraseña». Solo Storybook.
+
 ## [32.10.5] — 2026-09-07
 
 - **Pages/Verificar correo**: la story refleja la página real — «Reenviar
