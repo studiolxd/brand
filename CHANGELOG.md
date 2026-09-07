@@ -7,6 +7,26 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## Sin publicar
+
+> **Minor.**
+
+- **`Columns`: salto intermedio opcional (`intermediate`).** Con 3 o 4
+  columnas, por defecto la rejilla pasa por un tramo de dos columnas entre
+  `md` y `lg`. Con `intermediate={false}` se salta ese paso: de una columna
+  en móvil a las definitivas directamente en `lg` — para piezas que nunca
+  deben leerse como "dos y una suelta" (tres packs de crédito).
+- **`Columns`: con `align="stretch"`, las celdas de la fila miden igual.**
+  El hijo directo de cada `.columns__col` ahora ocupa toda la altura de su
+  celda (sin depender de que sea una `Card`), así que tarjetas con
+  contenido de distinta longitud quedan alineadas en la fila.
+- **`Switcher`: talla `lg` más contenida.** `lg-track-width`/`lg-track-height`/
+  `lg-thumb-size` pasan de `em` a `rem` (3rem × 1.625rem, thumb 1.25rem):
+  antes se escalaban también con la fuente del párrafo `large` del campo y el
+  control salía casi el doble de grande que `md` en vez de un paso por
+  encima. El ancho del track queda alineado con `size-component.lg` (48px),
+  como el resto de campos en `lg`. `sm`/`md` no cambian.
+
 ## [32.4.3] — 2026-09-06
 
 - **`Pagination`: los chevrones cuadrados también en `sm` y `lg`.** La regla

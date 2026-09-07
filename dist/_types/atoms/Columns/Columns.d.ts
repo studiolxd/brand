@@ -7,10 +7,18 @@ export interface ColumnsProps extends React.ComponentPropsWithoutRef<'div'> {
     columns?: ColumnsCount;
     /** Reparto del ancho, solo con dos columnas: `1:1` (mitad y mitad), `1:2`, `2:1`. Con 3 o 4 se ignora. */
     ratio?: ColumnsRatio;
-    /** Alineación vertical de las celdas: arriba, centradas o estiradas. */
+    /** Alineación vertical de las celdas: arriba, centradas o estiradas. Con `stretch`, el hijo directo de cada celda ocupa toda su altura. */
     align?: 'start' | 'center' | 'stretch';
     /** Aire entre celdas: base o amplio. */
     gap?: 'md' | 'lg';
+    /**
+     * Solo con 3 o 4 columnas. Con el valor por defecto (`true`), en el tramo
+     * intermedio (`md`) la rejilla pasa a dos columnas antes de llegar a las
+     * definitivas en `lg`. Con `false` se salta ese paso: de una columna en
+     * móvil a las definitivas directamente en `lg` (p. ej. tres packs de
+     * crédito que nunca deben verse como "dos y uno suelto").
+     */
+    intermediate?: boolean;
     /** En móvil, orden de apilado: el del JSX o el inverso (la última celda arriba). */
     stackOrder?: 'normal' | 'reverse';
     /** Las celdas, en orden. Cada hija es una columna; la semántica (`header`, `aside`…) la pone la hija. */
@@ -28,4 +36,4 @@ export interface ColumnsProps extends React.ComponentPropsWithoutRef<'div'> {
  * `{...rest}` (`role`, `aria-*`, `id`, `data-*`…) se reenvía al `<div>` de la
  * rejilla, no a las celdas.
  */
-export declare function Columns({ columns, ratio, align, gap, stackOrder, children, className, ...rest }: ColumnsProps): import("react/jsx-runtime").JSX.Element;
+export declare function Columns({ columns, ratio, align, gap, intermediate, stackOrder, children, className, ...rest }: ColumnsProps): import("react/jsx-runtime").JSX.Element;

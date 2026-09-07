@@ -25,10 +25,17 @@ El caso de las páginas de acceso: a la izquierda el título (y una frase), a la
 <Canvas of={ColumnsStories.TresColumnas} />
 <Canvas of={ColumnsStories.CuatroColumnas} />
 
+## Sin salto intermedio
+
+Con 3 o 4 columnas, por defecto (`intermediate` a `true`) la rejilla pasa por un tramo de dos columnas entre `md` y `lg` antes de llegar a las definitivas. Con `intermediate={false}` se salta ese paso: de una columna en móvil a las definitivas directamente en `lg`. Es el caso de tres piezas que nunca deben leerse como "dos y una suelta" — tres packs de crédito, no un formulario con un campo huérfano.
+
+<Canvas of={ColumnsStories.SinSaltoIntermedio} />
+
 ## Alineación, aire y orden
 
-`align` alinea las celdas verticalmente (`start` por defecto, `center`, `stretch`). `gap` es base o amplio, con un valor para columnas y otro para el apilado. `stackOrder="reverse"` pone la última celda arriba en móvil (una imagen que en escritorio va a la derecha y en móvil debe abrir).
+`align` alinea las celdas verticalmente (`start` por defecto, `center`, `stretch`). Con `stretch`, además de estirar la celda, el hijo directo de cada celda ocupa toda su altura: una `Card` (flex column, contenido a `flex: 1`) reparte ese alto y su `CardFooter` queda alineado en la fila con las demás, aunque el texto de cada tarjeta mida distinto. `gap` es base o amplio, con un valor para columnas y otro para el apilado. `stackOrder="reverse"` pone la última celda arriba en móvil (una imagen que en escritorio va a la derecha y en móvil debe abrir).
 
+<Canvas of={ColumnsStories.TarjetasDelMismoAlto} />
 <Canvas of={ColumnsStories.ApiladoInverso} />
 
 ## Lo que no hace

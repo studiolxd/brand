@@ -24,6 +24,6 @@ $lxd-switcher-error-ring-color: #b30000; // Color del anillo de error
 $lxd-switcher-sm-track-width: 2.25em; // Ancho del track — variante sm
 $lxd-switcher-sm-track-height: 1.25em; // Alto del track — variante sm
 $lxd-switcher-sm-thumb-size: 0.875em; // Tamaño del thumb — variante sm
-$lxd-switcher-lg-track-width: 3.5em; // Ancho del track — variante lg
-$lxd-switcher-lg-track-height: 1.875em; // Alto del track — variante lg
-$lxd-switcher-lg-thumb-size: 1.5em; // Tamaño del thumb — variante lg
+$lxd-switcher-lg-track-width: 3rem; // Ancho del track — variante lg (48px, alineado con la talla lg del sistema, size-component.lg). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo
+$lxd-switcher-lg-track-height: 1.625rem; // Alto del track — variante lg. En rem, ver lg-track-width
+$lxd-switcher-lg-thumb-size: 1.25rem; // Tamaño del thumb — variante lg. En rem, ver lg-track-width

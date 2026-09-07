@@ -34,7 +34,7 @@ export const ConError: Story = {
 
 export const Deshabilitado: Story = { args: { disabled: true, defaultChecked: true } };
 
-/** El interruptor es una marca, no un control de una línea: mide 20, 24 y 30 de alto. */
+/** El interruptor es una marca, no un control de una línea: mide 20, 24 y 26 de alto. */
 export const Tallas: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -124,7 +124,7 @@ export const ContratoTallas: Story = {
       Math.round(canvas.getByRole('switch', { name }).getBoundingClientRect().height);
     await expect(box('Pequeño')).toBe(20);
     await expect(box('Mediano')).toBe(24);
-    await expect(box('Grande')).toBe(30);
+    await expect(box('Grande')).toBe(26);
   },
 };
 
