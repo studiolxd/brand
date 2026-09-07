@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.6.0] — 2026-09-07
+
+> **Minor.**
+
+- **`CardDescription lines={1|2|3}`.** Reserva esa altura (`min-block-size`
+  en `lh`) aunque el texto sea más corto: en una fila de tarjetas de precio,
+  la cifra queda a la misma altura tenga la descripción una línea o dos.
+
 ## [32.5.2] — 2026-09-07
 
 - **`Columns intermediate={false}` ya llega a sus columnas en escritorio.**

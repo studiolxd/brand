@@ -97,6 +97,12 @@ export interface CardTitleProps extends Omit<React.ComponentPropsWithoutRef<'h3'
 export declare const CardTitle: import("react").ForwardRefExoticComponent<CardTitleProps & import("react").RefAttributes<HTMLHeadingElement>>;
 export interface CardDescriptionProps extends Omit<ParagraphProps, 'children'> {
     children: React.ReactNode;
+    /**
+     * Líneas que reserva aunque el texto ocupe menos (altura mínima en `lh`).
+     * Para tarjetas hermanas cuyo siguiente bloque —un precio, una cifra— debe
+     * quedar a la misma altura tengan la descripción que tengan.
+     */
+    lines?: 1 | 2 | 3;
 }
 /**
  * Texto secundario bajo el título. Es un párrafo del sistema (`Paragraph`):

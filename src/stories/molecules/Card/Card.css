@@ -168,6 +168,12 @@
   color: inherit;
 }
 
+/* `lines`: la descripción reserva su altura aunque el texto sea más corto,
+   para que lo que viene debajo quede a la misma altura en tarjetas hermanas. */
+.card__description--lines-1 { min-block-size: 1lh; }
+.card__description--lines-2 { min-block-size: 2lh; }
+.card__description--lines-3 { min-block-size: 3lh; }
+
 /* El pie se ancla abajo: cuando la tarjeta se estira más que su contenido
    (una rejilla con `align="stretch"`), los botones de tarjetas hermanas
    quedan a la misma altura aunque el texto de cada una mida distinto. */

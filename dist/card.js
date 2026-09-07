@@ -74,13 +74,17 @@ var l = s(function({ href: r, render: s, external: l = !1, title: u, description
 		...o,
 		children: i
 	});
-}), f = s(function({ size: e = "small", className: t, children: n, ...i }, o) {
+}), f = s(function({ size: e = "small", lines: t, className: n, children: i, ...o }, s) {
 	return /* @__PURE__ */ a(r, {
-		ref: o,
+		ref: s,
 		size: e,
-		className: ["card__description", t].filter(Boolean).join(" "),
-		...i,
-		children: n
+		className: [
+			"card__description",
+			t ? `card__description--lines-${t}` : "",
+			n
+		].filter(Boolean).join(" "),
+		...o,
+		children: i
 	});
 }), p = s(function({ className: e, ...t }, n) {
 	return /* @__PURE__ */ a("div", {

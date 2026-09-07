@@ -105,7 +105,7 @@ escriben en el orden en que se leen, sin envoltorios.
 |---|---|---|
 | `CardHeader` | `<div class="card__header">` | Rejilla de dos columnas: el texto a la izquierda, la acción anclada arriba a la derecha |
 | `CardTitle` | `Heading` | El título. Encabezado de verdad: cuenta para el esquema del documento |
-| `CardDescription` | `Paragraph` | El texto secundario bajo el título |
+| `CardDescription` | `Paragraph` | El texto secundario bajo el título. `lines={1\|2\|3}` reserva esa altura aunque el texto sea más corto, para que lo que sigue (un precio) quede a la misma altura en tarjetas hermanas |
 | `CardAction` | `<div class="card__action">` | La acción de la cabecera: un menú, un botón |
 | `CardContent` | `<div class="card__content">` | El cuerpo |
 | `CardFooter` | `<div class="card__footer">` | El pie, con sus acciones en fila |

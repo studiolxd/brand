@@ -220,6 +220,12 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(function
 
 export interface CardDescriptionProps extends Omit<ParagraphProps, 'children'> {
   children: React.ReactNode;
+  /**
+   * Líneas que reserva aunque el texto ocupe menos (altura mínima en `lh`).
+   * Para tarjetas hermanas cuyo siguiente bloque —un precio, una cifra— debe
+   * quedar a la misma altura tengan la descripción que tengan.
+   */
+  lines?: 1 | 2 | 3;
 }
 
 /**
@@ -227,12 +233,18 @@ export interface CardDescriptionProps extends Omit<ParagraphProps, 'children'> {
  * hereda el cuerpo de la superficie en la que viva la tarjeta.
  */
 export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
-  function CardDescription({ size = 'small', className, children, ...rest }, ref) {
+  function CardDescription({ size = 'small', lines, className, children, ...rest }, ref) {
     return (
       <Paragraph
         ref={ref}
         size={size}
-        className={['card__description', className].filter(Boolean).join(' ')}
+        className={[
+          'card__description',
+          lines ? `card__description--lines-${lines}` : '',
+          className,
+        ]
+          .filter(Boolean)
+          .join(' ')}
         {...rest}
       >
         {children}
