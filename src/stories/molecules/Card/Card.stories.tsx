@@ -15,7 +15,7 @@ import { Inline } from '../../atoms/Inline/Inline';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag } from '../../atoms/Tag/Tag';
 import { RadioField } from '../RadioField/RadioField';
-import { RadioGroup } from '../RadioGroup/RadioGroup';
+import { RadioGroup } from '../../atoms/RadioGroup/RadioGroup';
 import { useState } from 'react';
 
 const foto = {
