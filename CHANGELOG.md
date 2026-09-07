@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.10.2] — 2026-09-07
+
+- **`Input` y `Textarea`: el placeholder vuelve al gris de placeholder del
+  sistema** (`color.text.placeholder-on-light|dark`), también en error y en
+  superficie oscura. Iba en tinta y un campo vacío parecía relleno. Se alinea
+  con `MultiSelect` y `CommandPalette`, que ya lo hacían.
+
 ## [32.10.1] — 2026-09-07
 
 - **`Card`: la `List` de dentro toma la tinta de la tarjeta.** `List` pinta
