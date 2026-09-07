@@ -19,6 +19,18 @@
   min-inline-size: 0;
 }
 
+/* Con align="stretch", el hijo directo ocupa toda la altura de la celda —
+   sin saber qué es: si es flex column con contenido a `flex: 1` (como
+   `Card`), su pie queda abajo solo. */
+.columns.columns--align-stretch > .columns__col {
+  display: flex;
+  flex-direction: column;
+}
+.columns.columns--align-stretch > .columns__col > * {
+  flex: 1 1 auto;
+  min-block-size: 0;
+}
+
 /* Tableta: 3 y 4 columnas pasan a dos; 2 columnas ya reparte. */
 @media (min-width: 768px) /* --breakpoint-md */ {
   .columns {
@@ -34,6 +46,10 @@
   .columns.columns--4 { grid-template-columns: repeat(2, 1fr); }
   .columns.columns--reverse > .columns__col,
   .columns.columns--reverse > .columns__col:last-child { order: 0; }
+
+  /* Sin salto intermedio: se queda en una columna hasta el punto de corte final (lg). */
+  .columns.columns--no-intermediate.columns--3,
+  .columns.columns--no-intermediate.columns--4 { grid-template-columns: 1fr; }
 }
 
 /* Escritorio: el total. */

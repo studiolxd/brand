@@ -3,6 +3,8 @@ import { expect } from 'storybook/test';
 import { Columns } from './Columns';
 import { Heading } from '../Heading/Heading';
 import { Paragraph } from '../Paragraph/Paragraph';
+import { Card, CardContent, CardFooter, CardTitle } from '../../molecules/Card/Card';
+import { Button } from '../Button/Button';
 
 const Celda = ({ children }: { children: React.ReactNode }) => (
   <div style={{ padding: 'var(--spacing-5)', border: '1px solid currentColor' }}>{children}</div>
@@ -25,6 +27,7 @@ const meta: Meta<typeof Columns> = {
     ratio: { control: { type: 'radio' }, options: ['1:1', '1:2', '2:1'] },
     align: { control: { type: 'radio' }, options: ['start', 'center', 'stretch'] },
     gap: { control: { type: 'radio' }, options: ['md', 'lg'] },
+    intermediate: { control: { type: 'boolean' } },
     stackOrder: { control: { type: 'radio' }, options: ['normal', 'reverse'] },
     children: { table: { disable: true } },
     className: { table: { disable: true } },
@@ -94,6 +97,100 @@ export const Contrato: Story = {
     await expect(celdas).toHaveLength(2);
     await expect(root.querySelector('aside, main, section')).toBeNull();
     await expect(getComputedStyle(root).display).toBe('grid');
+  },
+};
+
+/** 1 → 3 directamente: sin el paso de dos columnas en el tramo intermedio (tres packs de crédito, nunca dos y uno suelto). */
+export const SinSaltoIntermedio: Story = {
+  name: 'Sin salto intermedio',
+  args: {
+    columns: 3,
+    intermediate: false,
+    children: <><Celda>Uno</Celda><Celda>Dos</Celda><Celda>Tres</Celda></>,
+  },
+};
+
+/** Con `align="stretch"`, el hijo directo de cada celda ocupa toda su altura: la `Card` es flex column con el contenido a `flex: 1`, así que el `CardFooter` queda alineado en la fila. */
+export const TarjetasDelMismoAlto: Story = {
+  name: 'Tarjetas del mismo alto',
+  args: {
+    columns: 3,
+    align: 'stretch',
+    children: (
+      <>
+        <Card color="outline">
+          <CardTitle>Básico</CardTitle>
+          <CardContent><Paragraph size="small">Un plan corto.</Paragraph></CardContent>
+          <CardFooter><Button variant="outline">Elegir</Button></CardFooter>
+        </Card>
+        <Card color="outline">
+          <CardTitle>Pro</CardTitle>
+          <CardContent>
+            <Paragraph size="small">
+              Un plan con una descripción bastante más larga, que ocupa varias
+              líneas de texto y empuja el pie hacia abajo en su propia celda.
+            </Paragraph>
+          </CardContent>
+          <CardFooter><Button variant="outline">Elegir</Button></CardFooter>
+        </Card>
+        <Card color="outline">
+          <CardTitle>Equipo</CardTitle>
+          <CardContent>
+            <Paragraph size="small">
+              Descripción de longitud intermedia, ni tan corta como la primera
+              ni tan larga como la segunda.
+            </Paragraph>
+          </CardContent>
+          <CardFooter><Button variant="outline">Elegir</Button></CardFooter>
+        </Card>
+      </>
+    ),
+  },
+};
+
+export const ContratoSinSaltoIntermedio: Story = {
+  name: 'Test — sin salto intermedio: sigue en una columna en el tramo md-lg',
+  tags: ['!dev'],
+  // Ancho de tableta (md-lg): con el salto intermedio de siempre ya serían dos columnas.
+  globals: { viewport: { value: 'tablet' } },
+  args: {
+    columns: 3,
+    intermediate: false,
+    children: <><Celda>Uno</Celda><Celda>Dos</Celda><Celda>Tres</Celda></>,
+  },
+  play: async ({ canvasElement }) => {
+    const root = canvasElement.querySelector('.columns')!;
+    await expect(root).toHaveClass('columns--3', 'columns--no-intermediate');
+    await expect(getComputedStyle(root).gridTemplateColumns.trim().split(/\s+/)).toHaveLength(1);
+  },
+};
+
+export const ContratoAlturaCeldas: Story = {
+  name: 'Test — align="stretch" iguala el alto de las celdas',
+  tags: ['!dev'],
+  // Ancho de escritorio: las tres celdas caen en la misma fila del grid.
+  globals: { viewport: { value: { width: '1280px', height: '800px' } } },
+  args: {
+    columns: 3,
+    align: 'stretch',
+    children: (
+      <>
+        <Celda>Corta</Celda>
+        <Celda>
+          Una celda con bastante más contenido, para forzar que su alto natural
+          sea mayor que el de las otras dos.
+        </Celda>
+        <Celda>Media</Celda>
+      </>
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const celdas = Array.from(canvasElement.querySelectorAll('.columns__col'));
+    await expect(celdas).toHaveLength(3);
+    const alturas = celdas.map((c) => c.getBoundingClientRect().height);
+    for (const altura of alturas) {
+      await expect(altura).toBeCloseTo(alturas[0], 0);
+    }
   },
 };
 
