@@ -168,7 +168,11 @@
   color: inherit;
 }
 
+/* El pie se ancla abajo: cuando la tarjeta se estira más que su contenido
+   (una rejilla con `align="stretch"`), los botones de tarjetas hermanas
+   quedan a la misma altura aunque el texto de cada una mida distinto. */
 .card__footer {
   display: flex;
   gap: var(--card-footer-gap);
+  margin-block-start: auto;
 }

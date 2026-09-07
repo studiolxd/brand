@@ -52,8 +52,12 @@
   .columns.columns--no-intermediate.columns--4 { grid-template-columns: 1fr; }
 }
 
-/* Escritorio: el total. */
+/* Escritorio: el total. La variante sin salto intermedio se nombra aparte:
+   su regla de `md` pesa más (tres clases) y, sin esta, seguiría en una
+   columna también aquí. */
 @media (min-width: 1024px) /* --breakpoint-lg */ {
-  .columns.columns--3 { grid-template-columns: repeat(3, 1fr); }
-  .columns.columns--4 { grid-template-columns: repeat(4, 1fr); }
+  .columns.columns--3,
+  .columns.columns--no-intermediate.columns--3 { grid-template-columns: repeat(3, 1fr); }
+  .columns.columns--4,
+  .columns.columns--no-intermediate.columns--4 { grid-template-columns: repeat(4, 1fr); }
 }

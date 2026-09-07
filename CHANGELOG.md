@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.5.2] — 2026-09-07
+
+- **`Columns intermediate={false}` ya llega a sus columnas en escritorio.**
+  La regla del tramo `md` (una columna) pesaba más que la de `lg` y ganaba
+  también allí: tres o cuatro columnas «sin salto intermedio» se quedaban
+  apiladas en escritorio. Ahora `lg` nombra la variante y reparte.
+- **`CardFooter` se ancla abajo** (`margin-block-start: auto`): en una rejilla
+  estirada, los botones de tarjetas hermanas quedan a la misma altura aunque
+  el contenido de cada una mida distinto.
+
 ## [32.5.1] — 2026-09-07
 
 - **Las etiquetas `sm`/`lg` de `SwitcherField`, `CheckboxField` y `RadioField`
