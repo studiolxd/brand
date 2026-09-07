@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.10.1] — 2026-09-07
+
+- **`Card`: la `List` de dentro toma la tinta de la tarjeta.** `List` pinta
+  con su propio token de texto y no heredaba: en tema oscuro, sobre una
+  tarjeta `accent-1` (o `selected`), la lista salía clara sobre lavanda. Las
+  variantes de color y la tarjeta-opción marcada remapean `--text-list-color`.
+
 ## [32.10.0] — 2026-09-07
 
 > **Minor.**

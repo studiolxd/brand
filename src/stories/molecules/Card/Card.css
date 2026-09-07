@@ -38,6 +38,7 @@
 .card.card--primary {
   background-color: var(--card-primary-bg);
   color: var(--card-primary-color);
+  --text-list-color: var(--card-primary-color);
   --text-h1-color: var(--card-primary-color);
   --text-h2-color: var(--card-primary-color);
   --text-h3-color: var(--card-primary-color);
@@ -52,10 +53,11 @@
   border: var(--card-outline-border-width) solid var(--card-outline-border-color);
 }
 
-.card.card--accent-1  { background-color: var(--card-accent-1-bg);  color: var(--card-accent-1-color); }
-.card.card--accent-2  { background-color: var(--card-accent-2-bg);  color: var(--card-accent-2-color); }
-.card.card--support-1 { background-color: var(--card-support-1-bg); color: var(--card-support-1-color); }
-.card.card--support-2 { background-color: var(--card-support-2-bg); color: var(--card-support-2-color); }
+/* Las variantes de color remapean también el texto de `List`, que no hereda. */
+.card.card--accent-1  { background-color: var(--card-accent-1-bg);  color: var(--card-accent-1-color);  --text-list-color: var(--card-accent-1-color); }
+.card.card--accent-2  { background-color: var(--card-accent-2-bg);  color: var(--card-accent-2-color);  --text-list-color: var(--card-accent-2-color); }
+.card.card--support-1 { background-color: var(--card-support-1-bg); color: var(--card-support-1-color); --text-list-color: var(--card-support-1-color); }
+.card.card--support-2 { background-color: var(--card-support-2-bg); color: var(--card-support-2-color); --text-list-color: var(--card-support-2-color); }
 
 /* --------------------------------------------------------------------------
    Maquetas de marketing: `square` (imagen arriba, en cuadrado) y `split` (el
@@ -225,4 +227,8 @@
   background-color: var(--card-accent-1-bg);
   color: var(--card-accent-1-color);
   border-color: var(--card-accent-1-bg);
+  /* La lista no hereda: pinta con su propio token de texto, que en tema
+     oscuro es claro y se perdía sobre el lavanda. Se remapea a la tinta de la
+     tarjeta, igual que hace `primary` con los encabezados. */
+  --text-list-color: var(--card-accent-1-color);
 }
