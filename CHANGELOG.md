@@ -7,6 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.8.1] — 2026-09-07
+
+- **`Table`: la última fila tampoco subraya su cabecera de fila.** Con
+  `TableHeader scope="row"` en el cuerpo, la última fila perdía la línea en
+  las celdas pero la conservaba bajo la primera columna.
+
 ## [32.8.0] — 2026-09-07
 
 > **Minor.**

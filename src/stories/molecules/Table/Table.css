@@ -83,7 +83,11 @@
     color var(--table-transition-duration) var(--table-transition-easing);
 }
 
-.table tbody .table__row:last-child .table__cell {
+/* La última fila no lleva línea inferior: ni sus celdas ni su cabecera de
+   fila (`TableHeader scope="row"`), que antes la conservaba y dejaba un
+   trazo suelto bajo la primera columna. */
+.table tbody .table__row:last-child .table__cell,
+.table tbody .table__row:last-child .table__header {
   border-bottom: none;
 }
 
