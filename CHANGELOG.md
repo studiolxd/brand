@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.5.1] — 2026-09-07
+
+- **Las etiquetas `sm`/`lg` de `SwitcherField`, `CheckboxField` y `RadioField`
+  siguen al `Label`, no al párrafo.** Apuntaban a `text.paragraph.large`, que
+  en la superficie pública crece con la escala de prosa: el conmutador de
+  precios salía con una etiqueta enorme. Ahora `{label.lg-font-size}` /
+  `{label.sm-font-size}`, como el resto de campos.
+
 ## [32.5.0] — 2026-09-07
 
 > **Minor.**
