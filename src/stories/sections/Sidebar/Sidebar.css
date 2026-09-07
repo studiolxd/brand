@@ -93,6 +93,17 @@
 /* En rail no cabe el logotipo: la marca ya está en la barra superior del producto */
 .sidebar--rail .sidebar__header { display: none; }
 
+/* En rail el `AppLauncher` del pie vuelve a ser el cuadrado de icono: el texto
+   del disparador (`labels.trigger`) no cabe en 56px y se oculta; el botón
+   recupera la talla y el centrado del disparador sin texto. */
+.sidebar--rail .app-launcher__trigger-label { display: none; }
+.sidebar--rail .app-launcher__trigger--label {
+  width: var(--app-launcher-trigger-size);
+  height: var(--app-launcher-trigger-size);
+  padding: 0;
+  justify-content: center;
+}
+
 /* ── Asa de redimensión: sobre el borde derecho ── */
 .sidebar__resizer {
   position: absolute;

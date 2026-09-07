@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.10.3] — 2026-09-07
+
+- **`Sidebar` en rail: el `AppLauncher` con texto vuelve a ser icono.** Con
+  `labels.trigger` el disparador enseña «Aplicaciones» a la derecha del
+  icono; en el rail (56px) ese texto no cabe: se oculta y el botón recupera
+  la talla cuadrada del disparador sin texto.
+
 ## [32.10.2] — 2026-09-07
 
 - **`Input` y `Textarea`: el placeholder vuelve al gris de placeholder del
