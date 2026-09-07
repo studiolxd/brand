@@ -13,8 +13,8 @@
     "lg-gap":           { "$value": "{spacing.4}",             "$type": "dimension", "$description": "Gap — variante lg" },
     "lg-padding-inline":{ "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding inline — variante lg" },
     "lg-padding-block": { "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding block — variante lg" },
-    "sm-label-font-size": { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie" },
-    "lg-label-font-size": { "$value": "{text.paragraph.large.font-size}", "$type": "dimension", "$description": "Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie" },
+    "sm-label-font-size": { "$value": "{label.sm-font-size}", "$type": "dimension", "$description": "Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie" },
+    "lg-label-font-size": { "$value": "{label.lg-font-size}", "$type": "dimension", "$description": "Tamaño de la etiqueta en lg — el del Label lg (no el párrafo large, que en superficie pública crece con la prosa)" },
     "label": {
       "font-family":    { "$value": "{text.font-family}",      "$type": "string",    "$description": "Familia tipográfica" },
       "font-size":      { "$value": "{text.font-size}",        "$type": "dimension", "$description": "Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública)" },

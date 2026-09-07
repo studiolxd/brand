@@ -68,8 +68,6 @@
   --async-select-field-helper-font-size: var(--form-helper-font-size);
   --avatar-upload-hint-font-size: var(--form-helper-font-size);
   --avatar-upload-error-font-size: var(--form-error-font-size);
-  --checkbox-field-sm-label-font-size: var(--text-paragraph-small-font-size);
-  --checkbox-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --checkbox-field-label-font-size: var(--text-font-size);
   --checkbox-field-label-line-height: var(--text-line-height);
   --checkbox-field-error-font-size: var(--form-error-font-size);
@@ -113,8 +111,6 @@
   --prose-pre-font-size: var(--code-block-font-size);
   --prose-table-font-size: var(--table-font-size);
   --prose-caption-font-size: var(--text-paragraph-small-font-size);
-  --radio-field-sm-label-font-size: var(--text-paragraph-small-font-size);
-  --radio-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --radio-field-label-font-size: var(--text-font-size);
   --radio-field-label-line-height: var(--text-line-height);
   --radio-field-error-font-size: var(--form-error-font-size);
@@ -128,8 +124,6 @@
   --stat-tile-value-font-size: var(--text-size-7);
   --stat-tile-sm-value-font-size: var(--text-size-5);
   --stat-tile-description-font-size: var(--text-paragraph-small-font-size);
-  --switcher-field-sm-label-font-size: var(--text-paragraph-small-font-size);
-  --switcher-field-lg-label-font-size: var(--text-paragraph-large-font-size);
   --switcher-field-label-font-size: var(--text-font-size);
   --switcher-field-label-line-height: var(--text-line-height);
   --switcher-field-error-font-size: var(--form-error-font-size);

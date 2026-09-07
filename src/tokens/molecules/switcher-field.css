@@ -15,8 +15,8 @@
   --switcher-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
   --switcher-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
   --switcher-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
-  --switcher-field-sm-label-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
-  --switcher-field-lg-label-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie */
+  --switcher-field-sm-label-font-size: var(--label-sm-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
+  --switcher-field-lg-label-font-size: var(--label-lg-font-size); /** Tamaño de la etiqueta en lg — el del Label lg (no el párrafo large, que en superficie pública crece con la prosa) */
   --switcher-field-label-font-family: var(--text-font-family); /** Familia tipográfica */
   --switcher-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --switcher-field-label-line-height: var(--text-line-height); /** Interlineado */

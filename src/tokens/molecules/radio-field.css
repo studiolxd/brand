@@ -15,8 +15,8 @@
   --radio-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
   --radio-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
   --radio-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
-  --radio-field-sm-label-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
-  --radio-field-lg-label-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie */
+  --radio-field-sm-label-font-size: var(--label-sm-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
+  --radio-field-lg-label-font-size: var(--label-lg-font-size); /** Tamaño de la etiqueta en lg — el del Label lg (no el párrafo large, que en superficie pública crece con la prosa) */
   --radio-field-label-font-family: var(--text-font-family); /** Familia tipográfica */
   --radio-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --radio-field-label-line-height: var(--text-line-height); /** Interlineado */

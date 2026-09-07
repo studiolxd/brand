@@ -16,8 +16,8 @@
   --checkbox-field-lg-padding-block: var(--spacing-5); /** Padding block — variante lg */
   --checkbox-field-padding-inline: var(--control-padding-inline); /** Padding inline — hereda de control */
   --checkbox-field-padding-block: var(--control-padding-block); /** Padding block — hereda de control */
-  --checkbox-field-sm-label-font-size: var(--text-paragraph-small-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
-  --checkbox-field-lg-label-font-size: var(--text-paragraph-large-font-size); /** Cuerpo del texto — variante lg: un peldaño por encima del cuerpo de la superficie */
+  --checkbox-field-sm-label-font-size: var(--label-sm-font-size); /** Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie */
+  --checkbox-field-lg-label-font-size: var(--label-lg-font-size); /** Tamaño de la etiqueta en lg — el del Label lg (no el párrafo large, que en superficie pública crece con la prosa) */
   --checkbox-field-label-font-family: var(--text-font-family); /** Familia tipográfica */
   --checkbox-field-label-font-size: var(--text-font-size); /** Es texto corriente: el cuerpo de la superficie (16px en aplicación, 20px en la pública) */
   --checkbox-field-label-line-height: var(--text-line-height); /** Interlineado */
