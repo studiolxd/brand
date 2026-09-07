@@ -26,3 +26,6 @@ $lxd-card-outline-bg: #ffffff; // Variante outline — fondo blanco (light)
 $lxd-card-outline-color: #111e30; // Variante outline — texto oscuro sobre blanco
 $lxd-card-outline-border-color: #111e30; // Variante outline — borde prussian
 $lxd-card-outline-border-width: 1px; // Variante outline — grosor de borde
+$lxd-card-selectable-focus-ring-width: 2px; // Tarjeta-opción: grosor del anillo de foco, el del botón
+$lxd-card-selectable-focus-ring-color: #111e30; // Tarjeta-opción: color del anillo de foco (prusia), el del botón primario
+$lxd-card-selectable-focus-ring-offset: 0.25rem; // Tarjeta-opción: separación del anillo, la del botón

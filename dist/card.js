@@ -8,56 +8,58 @@ import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
 import { forwardRef as s } from "react";
 import { useRender as c } from "@base-ui/react/use-render";
 //#region src/stories/molecules/Card/Card.tsx
-var l = s(function({ href: r, render: s, external: l = !1, title: u, description: d, ctaLabel: f, color: p = "outline", variant: m = "default", media: h, className: g, children: _, ...v }, y) {
-	let b = [
+var l = s(function({ href: r, render: s, external: l = !1, title: u, description: d, ctaLabel: f, color: p = "outline", variant: m = "default", media: h, selectable: g = !1, selected: _ = !1, className: v, children: y, ...b }, x) {
+	let S = [
 		"card",
 		`card--${p}`,
 		m === "default" ? "" : `card--${m}`,
-		g ?? ""
-	].filter(Boolean).join(" "), x = /* @__PURE__ */ o(i, { children: [
+		g ? "card--selectable" : "",
+		g && _ ? "card--selected" : "",
+		v ?? ""
+	].filter(Boolean).join(" "), C = /* @__PURE__ */ o(i, { children: [
 		u !== void 0 && /* @__PURE__ */ a(n, {
 			level: 2,
 			size: 8,
 			children: u
 		}),
 		d && (typeof d == "string" ? /* @__PURE__ */ a("p", { children: d }) : d),
-		_,
+		y,
 		f !== void 0 && /* @__PURE__ */ a(e, { children: f }),
 		/* @__PURE__ */ a(t, { size: "lg" })
-	] }), S = h && /* @__PURE__ */ a("div", {
+	] }), w = h && /* @__PURE__ */ a("div", {
 		className: "card__media",
 		children: /* @__PURE__ */ a("img", {
 			src: h.src,
 			alt: h.alt
 		})
-	}), C = m === "default" && !h ? x : /* @__PURE__ */ o(i, { children: [S, /* @__PURE__ */ a("div", {
+	}), T = m === "default" && !h ? C : /* @__PURE__ */ o(i, { children: [w, /* @__PURE__ */ a("div", {
 		className: "card__body",
-		children: x
+		children: C
 	})] });
 	return c({
 		render: s,
-		ref: y,
+		ref: x,
 		enabled: s !== void 0,
 		props: {
-			className: b,
-			...v,
-			children: C
+			className: S,
+			...b,
+			children: T
 		}
 	}) || (r === void 0 ? /* @__PURE__ */ a("div", {
-		ref: y,
-		className: b,
-		...v,
-		children: _
+		ref: x,
+		className: S,
+		...b,
+		children: y
 	}) : /* @__PURE__ */ a("a", {
-		ref: y,
+		ref: x,
 		href: r,
-		className: b,
+		className: S,
 		...l ? {
 			target: "_blank",
 			rel: "noopener noreferrer"
 		} : {},
-		...v,
-		children: C
+		...b,
+		children: T
 	}));
 }), u = s(function({ className: e, ...t }, n) {
 	return /* @__PURE__ */ a("div", {

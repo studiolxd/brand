@@ -27,6 +27,7 @@ html.dark {
   --async-select-error-border-color: var(--select-error-border-color);
   --async-select-focus-ring-color: var(--select-focus-ring-color);
   --async-select-placeholder-color: var(--multi-select-placeholder-color);
+  --card-selectable-focus-ring-color: var(--button-primary-focus-ring-color);
   --code-bg: var(--code-block-bg);
   --code-color: var(--code-block-color);
   --floating-dock-panel-bg: var(--floating-panel-bg);

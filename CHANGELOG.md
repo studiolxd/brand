@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.9.0] — 2026-09-07
+
+> **Minor.**
+
+- **`Card selectable` / `selected`** (modo contenedor). La tarjeta entera es
+  la opción de un grupo: el `RadioField`/`CheckboxField` que lleva dentro se
+  extiende a todo el bloque, invisible, y pulsar en cualquier punto marca la
+  opción; el foco se dibuja sobre la tarjeta. La marcada (`selected`) toma
+  accent-1. Tokens `card.selectable-focus-ring-*`.
+
 ## [32.8.1] — 2026-09-07
 
 - **`Table`: la última fila tampoco subraya su cabecera de fila.** Con

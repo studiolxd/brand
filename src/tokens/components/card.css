@@ -28,6 +28,9 @@
   --card-outline-color: var(--color-text-on-light); /** Variante outline — texto oscuro sobre blanco */
   --card-outline-border-color: var(--color-primary); /** Variante outline — borde prussian */
   --card-outline-border-width: var(--border-width-default); /** Variante outline — grosor de borde */
+  --card-selectable-focus-ring-offset: var(--button-focus-ring-offset); /** Tarjeta-opción: separación del anillo, la del botón */
+  --card-selectable-focus-ring-width: var(--button-focus-ring-width); /** Tarjeta-opción: grosor del anillo de foco, el del botón */
+  --card-selectable-focus-ring-color: var(--button-primary-focus-ring-color); /** Tarjeta-opción: color del anillo de foco (prusia), el del botón primario */
 }
 
 .surface-dark,

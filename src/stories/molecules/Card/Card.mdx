@@ -96,6 +96,17 @@ Sin `href` ni `render`, `Card` es una superficie con `children` libres.
 
 <Canvas of={CardStories.Container} />
 
+## Tarjeta-opción (`selectable`)
+
+En modo contenedor, `selectable` convierte la tarjeta en la opción de un grupo: dentro va un
+`RadioField` (o `CheckboxField`) del DS, que la tarjeta extiende a todo su bloque y deja
+invisible. Pulsar en cualquier punto marca la opción, el control sigue en el árbol de
+accesibilidad (nombre, estado, teclado) y el foco se dibuja sobre la tarjeta. Con `selected`
+la marcada se pinta en accent-1. Nada más dentro puede ser interactivo: el control cubre la
+tarjeta entera.
+
+<Canvas of={CardStories.Opciones} />
+
 ## Subpartes
 
 Seis piezas para no volver a maquetar a mano la cabecera, el pie ni el título. Son hermanas: se

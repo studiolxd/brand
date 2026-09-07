@@ -59,6 +59,16 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
   /** Maqueta de la tarjeta. Default: `'default'`. */
   variant?: CardVariant;
   /**
+   * Modo contenedor: la tarjeta entera es la opción de un grupo. Dentro va
+   * un `RadioField` (o `CheckboxField`) del DS, que la tarjeta extiende a todo
+   * su bloque y deja invisible: pulsar en cualquier punto marca la opción y
+   * el foco del teclado se dibuja sobre la tarjeta. Nada más dentro puede ser
+   * interactivo.
+   */
+  selectable?: boolean;
+  /** Con `selectable`: la opción marcada se pinta en accent-1. */
+  selected?: boolean;
+  /**
    * Imagen de la tarjeta: arriba en `square`, al lado del panel de color en
    * `split`, y sobre el texto en `default`. Sin ella la tarjeta es solo texto,
    * como hasta ahora.
@@ -89,6 +99,8 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
   color = 'outline',
   variant = 'default',
   media,
+  selectable = false,
+  selected = false,
   className,
   children,
   ...rest
@@ -97,6 +109,8 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card({
     'card',
     `card--${color}`,
     variant !== 'default' ? `card--${variant}` : '',
+    selectable ? 'card--selectable' : '',
+    selectable && selected ? 'card--selected' : '',
     className ?? '',
   ].filter(Boolean).join(' ');
 

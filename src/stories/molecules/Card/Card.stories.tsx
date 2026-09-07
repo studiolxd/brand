@@ -14,6 +14,9 @@ import { Heading } from '../../atoms/Heading/Heading';
 import { Inline } from '../../atoms/Inline/Inline';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Tag } from '../../atoms/Tag/Tag';
+import { RadioField } from '../RadioField/RadioField';
+import { RadioGroup } from '../RadioGroup/RadioGroup';
+import { useState } from 'react';
 
 const foto = {
   src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=960&q=80',
@@ -474,5 +477,49 @@ export const ContratoMaquetas: Story = {
     const imagen = canvas.getByRole('img', { name: /Un aula/ });
     await expect(imagen.parentElement).toHaveClass('card__media');
     await expect(canvas.getByRole('heading', { level: 2 }).parentElement).toHaveClass('card__body');
+  },
+};
+
+/**
+ * Tarjeta-opción: cada tarjeta lleva dentro un `RadioField` del DS que la
+ * tarjeta extiende a todo su bloque y deja invisible. Pulsar en cualquier
+ * punto marca la opción; la marcada se pinta en accent-1; el foco del
+ * teclado se dibuja sobre la tarjeta.
+ */
+function OpcionesDemo() {
+  const [value, setValue] = useState('free');
+  const planes = [
+    { id: 'free', name: 'Free', price: 'Gratis' },
+    { id: 'team', name: 'Team', price: '15 €/asiento/mes' },
+  ];
+  return (
+    <RadioGroup value={value} onValueChange={setValue} name="plan" aria-label="Planes">
+      <Inline gap="md">
+        {planes.map((p) => (
+          <Card key={p.id} color="outline" selectable selected={value === p.id}>
+            <CardHeader>
+              <CardTitle size={5}>{p.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Paragraph size="large">{p.price}</Paragraph>
+            </CardContent>
+            <CardFooter>
+              <RadioField value={p.id} label={p.name} />
+            </CardFooter>
+          </Card>
+        ))}
+      </Inline>
+    </RadioGroup>
+  );
+}
+
+export const Opciones: Story = {
+  name: 'Tarjeta-opción (selectable)',
+  render: () => <OpcionesDemo />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('radio', { name: 'Free' })).toBeChecked();
+    await expect(canvas.getByRole('radio', { name: 'Free' }).closest('.card')).toHaveClass('card--selected');
+    await expect(canvas.getByRole('radio', { name: 'Team' }).closest('.card')).not.toHaveClass('card--selected');
   },
 };
