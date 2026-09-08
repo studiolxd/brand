@@ -117,9 +117,13 @@ export const Contrato: Story = {
     await expect(canvas.getByRole('heading', { level: 2 }).textContent).toBe('Autenticación de dos factores');
     await expect(canvasElement.querySelector('main#main-content')).not.toBeNull();
     await expect(canvasElement.querySelectorAll('.otp-input__cell')).toHaveLength(DIGITOS);
-    for (const rotulo of ['Usar un código de recuperación', 'Volver']) {
-      await expect(canvas.getByRole('button', { name: rotulo })).toHaveClass('button--outline');
-    }
+    // Cambiar de método: outline y a todo el ancho. La vuelta ya no es un
+    // botón del pie: es el enlace de la columna de la introducción.
+    const cambiar = canvas.getByRole('button', { name: 'Usar un código de recuperación' });
+    await expect(cambiar).toHaveClass('button--outline');
+    await expect(cambiar).toHaveClass('button--block');
+    await expect(canvas.queryByRole('button', { name: 'Volver' })).toBeNull();
+    await expect(canvas.getByRole('link', { name: 'Volver al inicio de sesión' })).toBeVisible();
     // La talla la reparte el `Form`: superficie pública, controles `lg`.
     await expect(canvas.getByRole('button', { name: 'Verificar' })).toHaveClass('button--lg');
   },

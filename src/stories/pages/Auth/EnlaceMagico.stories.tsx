@@ -60,7 +60,7 @@ export const EnSuperficieOscura: Story = {
 };
 
 export const Contrato: Story = {
-  name: 'Test — un h1, el aviso anunciado y ningún formulario',
+  name: 'Test — un h1, el aviso anunciado y ningún campo',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -68,6 +68,8 @@ export const Contrato: Story = {
     await expect(canvasElement.querySelector('main#main-content')).not.toBeNull();
     // Anuncia sin interrumpir: es información, no un error.
     await expect(canvas.getByRole('status').textContent).toContain(AVISO);
-    await expect(canvasElement.querySelector('.form')).toBeNull();
+    // El aviso es el `success` del propio Form: sin campos ni acciones.
+    await expect(canvasElement.querySelector('.form__fields')).toBeNull();
+    await expect(canvasElement.querySelector('.form__success')).not.toBeNull();
   },
 };
