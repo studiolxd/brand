@@ -56,17 +56,107 @@ tan seleccionable como una hoja.
 
 ## Cómo se marcan los estados
 
-La selección se lee con **tinta y peso**, y el paso del ratón deja una **línea**
-bajo el rótulo —el mismo grafismo del subrayado de `Link` y de `SidebarNav`—.
-Ninguna fila se rellena: el relleno está reservado a los controles que dicen
-«este es el valor elegido».
+La fila del árbol **es un ítem de la barra lateral**: la elegida se marca solo
+con el **peso**, sin color de marca, y el paso del ratón no pinta nada. El único
+relleno del componente es el de la carpeta que puede recibir lo que se arrastra
+(ver más abajo).
 
 ## Superficie oscura
 
-La tinta, la guía de las ramas, la línea de hover y el acento de selección
-(lavanda) salen de tokens `surface-dark-*`.
+La tinta es blanca, la elegida sigue siendo blanca en negrita y la lavanda queda
+reservada al destino de arrastre. Todo sale de tokens `surface-dark-*` que
+apuntan a los del ítem de `SidebarNav`.
 
 <Canvas of={TreeViewStories.EnSuperficieOscura} />
+
+## Como árbol de carpetas de una barra lateral
+
+El caso que dio forma a todo lo de esta sección es el árbol de carpetas de
+`bricks`: la raíz «Todos los contenidos», carpetas anidadas, un menú de acciones
+por carpeta, cada carpeta como destino de un arrastre de contenidos y la
+papelera aparte. La página entera está en
+**Pages › Bricks — barra lateral con carpetas**.
+
+### La fila es un ítem de la barra, no un control
+
+Los tokens de `TreeView` ya no apuntan a `control.*`: **referencian** los del
+ítem de `SidebarNav` (`sidebar-nav.item-*`) — tipografía, aire vertical y
+horizontal, radio y hueco icono-texto. Es una referencia, no una copia: si
+cambia el ítem de la barra, cambia la fila del árbol. Y de ahí salen las tres
+decisiones de cara:
+
+- **Elegido: solo negrita.** `selected-color` es la tinta normal. En la barra
+  lateral el color de marca —lavanda en oscuro, prusia en claro— dice «esta es
+  la sección activa»; una carpeta abierta no es eso. Mismo criterio que
+  `.sidebar-nav__item--active` y que la opción marcada de `Select`.
+- **Hover: nada.** Ni relleno ni línea. La versión anterior subrayaba el
+  rótulo; el ítem de la barra no lo hace, y el árbol vive dentro de la barra.
+  El token `color` se declara igual en `:hover` aunque no cambie, por el mismo
+  motivo que en `SidebarNav`: sin él el hover del átomo `Link` empata en
+  especificidad y cuela su amarillo en oscuro.
+- **Sin guías verticales.** Solo sangría. En una barra estrecha la guía compite
+  con el texto y la jerarquía ya se lee.
+
+### Sangría, chevron y marca
+
+`--tree-view-indent` es exactamente **la marca más su hueco**
+(`icon-size` + `row-gap`), así que cada nivel se desplaza justo lo que ocupa el
+icono de su padre. A partir del **cuarto** nivel (`truncateFromLevel`) el rótulo
+se corta con puntos suspensivos y el nombre entero queda en `title`: la sangría
+ya se ha llevado el ancho útil de la barra.
+
+El **chevron** solo aparece en los nodos con hijos —en las hojas se reserva el
+hueco, para que los rótulos sigan alineados—, gira al abrir y va en tinta
+atenuada (`chevron-color`) para no competir con el rótulo. La **marca** es la
+carpeta: `icon` cerrada, `iconExpanded` abierta.
+
+<Canvas of={TreeViewStories.IconosAbiertoYCerrado} />
+
+<Canvas of={TreeViewStories.CuatroNiveles} />
+
+### Acciones por carpeta
+
+`TreeViewNode.actions` es una ranura a la derecha de la fila: ahí va el `Menu`
+de la carpeta con su `Button variant="ghost" iconOnly`. **Ocupa su sitio
+siempre** —el rótulo no se mueve nunca— y solo se ve al pasar el puntero por la
+fila o cuando el foco está dentro de ella, el mismo trato que el aspa de
+`ConversationList`. Con el teclado se llega con `Tab` desde la fila.
+
+Abrir el menú **no elige la fila ni le roba el foco**: la ranura corta el clic y
+el teclado antes de que lleguen al árbol (si no, teclear en el menú dispararía
+el salto por letra), y al cerrar, Base UI devuelve el foco al disparador, que
+vive dentro de la propia fila.
+
+<Canvas of={TreeViewStories.ConAcciones} />
+
+### Destino de arrastre
+
+El arrastre lo lleva la aplicación (en `bricks`, dnd-kit); el árbol solo **viste
+el estado** y da dónde colgarlo:
+
+- `dropTarget` — la carpeta puede recibir lo que se arrastra: se rellena con el
+  acento de estado activo del sistema y se rodea de un borde discontinuo. Es el
+  único relleno del componente, y es un par autocontenido (lavanda con tinta
+  prusia, el de `Button primary`), así que no cambia en oscuro. Sin animación:
+  durante un arrastre la fila tiene que responder al instante.
+- `dropDisabled` — prohibido soltar ahí: se atenúa y el cursor lo dice. **No es
+  un nodo deshabilitado**: sigue navegable y elegible, así que no lleva
+  `aria-disabled`. El estado se lee en `data-drop="target" | "disabled"`.
+- `nodeRef(id, el)` — recibe el elemento de **la fila** (no el `<li>`, que
+  envuelve también al subárbol abierto: colgar ahí el destino haría que soltar
+  sobre un hijo contara como soltar sobre el padre). Es lo que se le pasa a
+  `setNodeRef` de dnd-kit. El marcado no cambia: la fila sigue siendo el
+  `role="treeitem"`.
+
+<Canvas of={TreeViewStories.DestinoDeArrastre} />
+
+### La raíz y la papelera
+
+«Todos los contenidos» **no es un nivel extra**: es el primer nodo del árbol, al
+mismo nivel que los demás, y se distingue por su marca (una bandeja, no una
+carpeta). La **papelera** es *otro* `TreeView`, con su propio grupo y su propia
+raíz: son dos espacios distintos, no dos ramas del mismo, y la aplicación decide
+si la pinta.
 
 ---
 
@@ -97,6 +187,13 @@ La tinta, la guía de las ramas, la línea de hover y el acento de selección
   buscan el prefijo entero. En un árbol grande —la matriz de un curso— es la
   forma rápida de llegar.
 - **`*`** abre de una vez todas las ramas hermanas del nivel donde está el foco.
+- Las **acciones** de una fila (`actions`) están en el orden natural de
+  tabulación: `Tab` desde la fila entra en el botón de tres puntos. Su clic y su
+  teclado no llegan al árbol, y el nombre accesible de la fila sale solo del
+  rótulo (`aria-labelledby`), así que las acciones no lo ensucian.
+- `dropDisabled` **no** es `aria-disabled`: la fila sigue navegable y elegible,
+  lo único que no puede es recibir lo que se arrastra. El estado se anuncia
+  visualmente y se lee en `data-drop`.
 - Un nodo `disabled` **sigue en el recorrido de teclado** y se anuncia como
   deshabilitado (`aria-disabled`): el patrón prefiere que se pueda llegar a él a
   que desaparezca del árbol al navegar. Lo que no puede es elegirse, ni con

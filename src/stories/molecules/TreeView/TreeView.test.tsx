@@ -154,4 +154,136 @@ describe('TreeView', () => {
     expect(screen.getByRole('treeitem', { name: 'Lección A1' })).toBeInTheDocument();
     expect(screen.getByRole('treeitem', { name: 'Lección B1' })).toBeInTheDocument();
   });
+
+  it('la carpeta abierta puede tener su propia marca', () => {
+    const conMarcas: TreeViewNode[] = [
+      {
+        id: 'a',
+        label: 'Carpeta',
+        icon: <span data-testid="cerrada" />,
+        iconExpanded: <span data-testid="abierta" />,
+        children: [{ id: 'a1', label: 'Hija' }],
+      },
+    ];
+    const { rerender } = render(<TreeView items={conMarcas} />);
+    expect(screen.getByTestId('cerrada')).toBeInTheDocument();
+
+    rerender(<TreeView items={conMarcas} expanded={['a']} />);
+    expect(screen.getByTestId('abierta')).toBeInTheDocument();
+    expect(screen.queryByTestId('cerrada')).not.toBeInTheDocument();
+  });
+
+  it('el menú de acciones no elige la fila ni le roba el foco al cerrarse', async () => {
+    const user = userEvent.setup();
+    const onSelectedChange = vi.fn();
+    const conAcciones: TreeViewNode[] = [
+      { id: 'a', label: 'Carpeta', actions: <button type="button">Acciones de Carpeta</button> },
+      { id: 'b', label: 'Otra' },
+    ];
+    render(<TreeView items={conAcciones} defaultSelected="b" onSelectedChange={onSelectedChange} />);
+
+    const fila = screen.getByRole('treeitem', { name: 'Carpeta' });
+    const boton = screen.getByRole('button', { name: 'Acciones de Carpeta' });
+
+    await user.click(boton);
+    // El clic se queda en la ranura: ni elige la fila ni cambia la selección.
+    expect(onSelectedChange).not.toHaveBeenCalled();
+    expect(fila).toHaveAttribute('aria-selected', 'false');
+    expect(screen.getByRole('treeitem', { name: 'Otra' })).toHaveAttribute('aria-selected', 'true');
+    // El foco sigue dentro de la fila, en el disparador.
+    expect(boton).toHaveFocus();
+    expect(fila.contains(document.activeElement)).toBe(true);
+  });
+
+  it('el nombre accesible de la fila no se lleva las acciones', () => {
+    render(<TreeView items={[{ id: 'a', label: 'Carpeta', actions: <button type="button">Acciones</button> }]} />);
+    expect(screen.getByRole('treeitem', { name: 'Carpeta' })).toBeInTheDocument();
+  });
+
+  it('teclear dentro de las acciones no mueve el foco del árbol', async () => {
+    const user = userEvent.setup();
+    const conAcciones: TreeViewNode[] = [
+      { id: 'a', label: 'Ana', actions: <input aria-label="Renombrar" /> },
+      { id: 'b', label: 'Berta' },
+    ];
+    render(<TreeView items={conAcciones} />);
+
+    const campo = screen.getByLabelText('Renombrar');
+    campo.focus();
+    await user.keyboard('b');
+    // Sin el corte, el salto por letra del árbol se habría llevado el foco a «Berta».
+    expect(campo).toHaveFocus();
+    expect(campo).toHaveValue('b');
+  });
+
+  it('`dropTarget` y `dropDisabled` marcan la fila sin deshabilitarla', () => {
+    const conArrastre: TreeViewNode[] = [
+      { id: 'a', label: 'Destino', dropTarget: true },
+      { id: 'b', label: 'Prohibida', dropDisabled: true },
+      { id: 'c', label: 'Neutra' },
+    ];
+    render(<TreeView items={conArrastre} />);
+
+    const destino = screen.getByRole('treeitem', { name: 'Destino' });
+    const prohibida = screen.getByRole('treeitem', { name: 'Prohibida' });
+
+    expect(destino).toHaveAttribute('data-drop', 'target');
+    expect(destino).toHaveClass('tree-view__item--drop-target');
+    expect(prohibida).toHaveAttribute('data-drop', 'disabled');
+    expect(prohibida).toHaveClass('tree-view__item--drop-disabled');
+    // Prohibida para soltar, pero NO deshabilitada: sigue navegable y elegible.
+    expect(prohibida).not.toHaveAttribute('aria-disabled');
+    expect(screen.getByRole('treeitem', { name: 'Neutra' })).not.toHaveAttribute('data-drop');
+  });
+
+  it('una fila prohibida para soltar se sigue pudiendo elegir', async () => {
+    const user = userEvent.setup();
+    const onSelectedChange = vi.fn();
+    render(
+      <TreeView
+        items={[{ id: 'a', label: 'Prohibida', dropDisabled: true }]}
+        onSelectedChange={onSelectedChange}
+      />,
+    );
+    await user.click(screen.getByRole('treeitem', { name: 'Prohibida' }));
+    expect(onSelectedChange).toHaveBeenCalledWith('a');
+  });
+
+  it('`nodeRef` entrega el elemento de la fila, no el `<li>` con su subárbol', () => {
+    const recibidos = new Map<string, HTMLElement | null>();
+    render(
+      <TreeView
+        items={items}
+        defaultExpanded={['a']}
+        nodeRef={(id, el) => recibidos.set(id, el)}
+      />,
+    );
+    const fila = recibidos.get('a');
+    expect(fila).toHaveClass('tree-view__row');
+    // La fila del padre no contiene al hijo: soltar sobre «Lección A1» no
+    // cuenta como soltar sobre «Módulo A».
+    expect(fila?.contains(screen.getByRole('treeitem', { name: 'Lección A1' }))).toBe(false);
+  });
+
+  it('a partir del cuarto nivel el rótulo se trunca y guarda el nombre en `title`', () => {
+    const hondo: TreeViewNode[] = [
+      { id: 'n1', label: 'Uno', children: [
+        { id: 'n2', label: 'Dos', children: [
+          { id: 'n3', label: 'Tres', children: [
+            { id: 'n4', label: 'Cuatro, con un nombre largo de verdad' },
+          ] },
+        ] },
+      ] },
+    ];
+    render(<TreeView items={hondo} defaultExpanded={['n1', 'n2', 'n3']} />);
+
+    const tercero = screen.getByRole('treeitem', { name: 'Tres' }).querySelector('.tree-view__label');
+    expect(tercero).not.toHaveClass('tree-view__label--truncated');
+
+    const cuarto = screen
+      .getByRole('treeitem', { name: 'Cuatro, con un nombre largo de verdad' })
+      .querySelector('.tree-view__label');
+    expect(cuarto).toHaveClass('tree-view__label--truncated');
+    expect(cuarto).toHaveAttribute('title', 'Cuatro, con un nombre largo de verdad');
+  });
 });
