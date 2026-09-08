@@ -3,38 +3,44 @@
  */
 
 :root {
+  --tree-view-drop-target-border-style: dashed; /** Estilo del borde del destino: discontinuo, el dibujo universal de «suéltalo aquí» */
+  --tree-view-drop-disabled-cursor: not-allowed; /** Cursor sobre una carpeta que no puede recibir lo que se arrastra */
   --tree-view-cursor: pointer; /** Cursor sobre una fila */
   --tree-view-disabled-cursor: not-allowed; /** Cursor de una fila deshabilitada */
-  --tree-view-indent: var(--spacing-5); /** Sangría que gana cada nivel del árbol */
-  --tree-view-row-gap: var(--spacing-2); /** Separación entre el chevron, el icono y el rótulo */
-  --tree-view-row-padding-block: var(--spacing-1); /** Aire vertical de cada fila */
-  --tree-view-row-padding-inline: var(--spacing-2); /** Aire horizontal de cada fila */
-  --tree-view-line-height: var(--line-height-snug); /** Interlineado de las filas */
+  --tree-view-icon-size: var(--icon-size-sm); /** Tamaño de la marca (la carpeta) de cada fila */
+  --tree-view-font-family: var(--font-family-sans); /** Familia tipográfica de las filas */
   --tree-view-chevron-size: var(--icon-size-sm); /** Tamaño del chevron que abre y cierra una rama */
+  --tree-view-actions-gap: var(--spacing-1); /** Hueco entre el rótulo y las acciones de la fila */
+  --tree-view-drop-disabled-opacity: var(--opacity-disabled); /** Opacidad de una carpeta que NO puede recibir lo que se arrastra */
   --tree-view-disabled-opacity: var(--opacity-disabled); /** Opacidad de una fila deshabilitada */
-  --tree-view-transition-duration: var(--motion-duration-fast); /** Duración del giro del chevron */
-  --tree-view-transition-easing: var(--motion-easing-default); /** Easing del giro del chevron */
-  --tree-view-font-family: var(--control-font-family); /** Familia tipográfica de las filas */
-  --tree-view-font-size: var(--control-font-size); /** Tamaño de fuente de las filas */
-  --tree-view-font-weight: var(--font-weight-default); /** Peso de una fila cualquiera */
-  --tree-view-color: var(--color-text-on-light); /** Tinta de las filas */
-  --tree-view-selected-color: var(--color-primary); /** Tinta de la fila seleccionada */
-  --tree-view-selected-font-weight: var(--font-weight-emphasis); /** Peso de la fila seleccionada. La selección se marca con tinta y peso, no con relleno */
-  --tree-view-hover-line-width: var(--border-width-default); /** Grosor de la línea que marca la fila bajo el puntero. El hover no pinta relleno: deja una línea, el mismo grafismo del subrayado de `Link` */
-  --tree-view-hover-line-color: var(--color-primary); /** Color de la línea de hover */
-  --tree-view-guide-width: var(--border-width-default); /** Grosor de la guía vertical que acompaña a una rama abierta */
-  --tree-view-guide-color: var(--color-border-default-on-light); /** Color de la guía vertical */
-  --tree-view-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
+  --tree-view-transition-duration: var(--motion-duration-fast); /** Duración del giro del chevron y de la aparición de las acciones */
+  --tree-view-transition-easing: var(--motion-easing-default); /** Easing del giro del chevron y de la aparición de las acciones */
+  --tree-view-row-gap: var(--sidebar-nav-item-icon-gap); /** Separación entre el chevron, la marca y el rótulo — el hueco icono-texto del ítem de la barra */
+  --tree-view-indent: calc(var(--tree-view-icon-size) + var(--tree-view-row-gap)); /** Sangría que gana cada nivel: exactamente lo que ocupa la marca de la fila padre más su hueco, de modo que el nivel de un hijo se lee contra el rótulo del padre */
+  --tree-view-row-padding-block: var(--sidebar-nav-item-padding-block); /** Aire vertical de cada fila — el del ítem de la barra */
+  --tree-view-row-padding-inline: var(--sidebar-nav-item-padding-inline); /** Aire horizontal de cada fila — el del ítem de la barra */
+  --tree-view-font-size: var(--sidebar-nav-item-font-size); /** Tamaño de fuente de las filas — el del ítem de la barra */
+  --tree-view-line-height: var(--sidebar-nav-item-line-height); /** Interlineado de las filas — el del ítem de la barra */
+  --tree-view-chevron-color: var(--color-text-muted-on-light); /** Tinta del chevron: atenuada, para que no compita con el rótulo */
+  --tree-view-drop-target-bg: var(--color-accent-1); /** Relleno de la carpeta que puede recibir lo que se arrastra: el acento de estado activo del sistema */
+  --tree-view-drop-target-color: var(--color-primary); /** Tinta sobre el relleno de destino. Es el par autocontenido de `Button primary`: se lee igual en claro y en oscuro, así que no lleva par `surface-dark-*` */
+  --tree-view-drop-target-border-width: var(--border-width-default); /** Grosor del borde discontinuo del destino de arrastre */
+  --tree-view-drop-target-border-color: var(--color-primary); /** Color del borde discontinuo del destino de arrastre */
   --tree-view-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco */
-  --tree-view-focus-ring-color: var(--color-primary); /** Color del anillo de foco */
+  --tree-view-row-border-radius: var(--sidebar-nav-item-border-radius); /** Radio de la fila — el del ítem de la barra */
+  --tree-view-font-weight: var(--sidebar-nav-item-font-weight); /** Peso de una fila cualquiera — el del ítem de la barra */
+  --tree-view-color: var(--sidebar-nav-item-color); /** Tinta de las filas — la del ítem de la barra */
+  --tree-view-selected-color: var(--sidebar-nav-item-color); /** Tinta de la fila elegida: la MISMA tinta, no un acento. En la barra lateral solo el activo lleva color de marca; una carpeta elegida se marca únicamente con el peso */
+  --tree-view-selected-font-weight: var(--sidebar-nav-item-active-font-weight); /** Peso de la fila elegida — el del ítem activo de la barra */
+  --tree-view-focus-ring-width: var(--sidebar-nav-focus-ring-width); /** Grosor del anillo de foco — el de la barra */
+  --tree-view-focus-ring-color: var(--sidebar-nav-focus-ring-color); /** Color del anillo de foco — el de la barra */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --tree-view-color: var(--color-text-on-dark); /** Tinta de las filas — surface-dark */
-  --tree-view-selected-color: var(--color-accent-1); /** Tinta de la fila seleccionada — surface-dark. El prusia coincide con el fondo; el acento de estado es lavanda, igual que en `SidebarNav` */
-  --tree-view-hover-line-color: var(--color-text-on-dark); /** Línea de hover — surface-dark */
-  --tree-view-guide-color: var(--color-text-on-dark); /** Guía vertical — surface-dark */
-  --tree-view-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */
+  --tree-view-chevron-color: var(--color-text-muted-on-dark); /** Tinta del chevron — surface-dark */
+  --tree-view-color: var(--sidebar-nav-item-color); /** Tinta de las filas — surface-dark. Blanca, la del ítem de la barra */
+  --tree-view-selected-color: var(--sidebar-nav-item-color); /** Tinta de la fila elegida — surface-dark. También blanca: en oscuro la lavanda queda reservada al destino de arrastre */
+  --tree-view-focus-ring-color: var(--sidebar-nav-focus-ring-color); /** Anillo de foco — surface-dark */
 }
