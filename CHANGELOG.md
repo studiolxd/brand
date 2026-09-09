@@ -7,6 +7,23 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.12.0] — 2026-09-09
+
+> **Minor.**
+
+- **`TreeView` como árbol de carpetas de una barra lateral.** Acciones por
+  nodo (`actions`, visibles al pasar el puntero o con el foco, sin robar
+  selección ni foco), estados de destino de arrastre (`dropTarget`,
+  `dropDisabled`, `data-drop`, `nodeRef` para dnd-kit), `iconExpanded`,
+  truncado desde el cuarto nivel. La fila toma los tokens del ítem de
+  `SidebarNav` por referencia: elegido solo en negrita, sin línea de hover,
+  sin guías verticales. Tokens de arrastre nuevos en `tree-view.*`, sin
+  colores nuevos. `SidebarNav` no cambia.
+- **`Icon`: `folder-open` y `trash`.**
+- **Pages/Bricks — barra lateral con carpetas**: la referencia visual del
+  árbol dentro de la barra, desplegada y en rail, con menú, arrastre y
+  papelera.
+
 ## [32.11.0] — 2026-09-07
 
 > **Minor.**
