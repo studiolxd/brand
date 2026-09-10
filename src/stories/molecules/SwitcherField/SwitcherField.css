@@ -31,13 +31,8 @@
   cursor: var(--switcher-field-disabled-cursor);
 }
 
-.switcher-field__error {
+.switcher-field > .error-text {
   padding-inline: var(--switcher-field-padding-inline);
-  font-family: var(--switcher-field-error-font-family);
-  font-size: var(--switcher-field-error-font-size);
-  font-weight: var(--switcher-field-error-font-weight);
-  line-height: var(--switcher-field-error-line-height);
-  color: var(--switcher-field-error-color);
 }
 
 .switcher-field__helper {

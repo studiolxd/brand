@@ -4,6 +4,7 @@ import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Switcher } from '../../atoms/Switcher/Switcher';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface SwitcherFieldProps {
   /** Texto del interruptor, a su derecha. Acepta JSX. */
@@ -108,7 +109,7 @@ export const SwitcherField = forwardRef<HTMLElement, SwitcherFieldProps>(functio
         )}
       </label>
       {errorMessage && (
-        <span id={errorId} className="switcher-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="switcher-field__helper">{helperText}</span>

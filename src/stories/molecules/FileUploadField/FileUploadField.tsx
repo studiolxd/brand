@@ -5,6 +5,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { FileUpload } from '../../atoms/FileUpload/FileUpload';
 import type { FileUploadProps } from '../../atoms/FileUpload/FileUpload';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface FileUploadFieldProps
   extends Omit<FileUploadProps, 'describedBy' | 'ariaLabel' | 'aria-describedby' | 'id'> {
@@ -68,7 +69,7 @@ export const FileUploadField = forwardRef<HTMLInputElement, FileUploadFieldProps
         aria-describedby={describedBy}
       />
       {errorMessage && (
-        <span id={errorId} className="file-upload-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="file-upload-field__helper">{helperText}</span>

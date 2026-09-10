@@ -7,6 +7,29 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [34.0.0] — 2026-09-11
+
+> **Major.**
+
+- **Todos los `*Field` pintan su error con el átomo `ErrorText`**, en vez de
+  un `<span>`/`<p>` propio con una clase `*__error` duplicada. Mismo `id`
+  (para el `aria-describedby` del control), mismo `role="alert"`, misma
+  condición de render y mismo resultado visual — ahora exacto, no solo
+  parecido, porque es literalmente el mismo átomo.
+  Campos tocados: `InputField`, `PasswordField`, `TextareaField`,
+  `NumberInputField`, `SelectField`, `DropdownField`, `MultiSelectField`,
+  `AsyncSelectField`, `AsyncMultiSelectField`, `CheckboxField`, `RadioField`,
+  `SwitcherField`, `TimeField`, `DateTimeField`, `DatePickerField`,
+  `InputPhoneField`, `OtpField`, `FileUploadField`, `AvatarUpload` y el
+  `errors` de `Form`.
+- **Ruptura**: se retiran las clases `*__error` de los campos de arriba
+  (`.input-field__error`, `.checkbox-field__error`, `.form__error`…) y sus
+  reglas de color/tamaño/margen. Quien las estilara desde fuera del sistema
+  ya no tiene ese selector — el error se sigue pudiendo posicionar apuntando
+  a `.error-text` (la clase del átomo) dentro del campo.
+  `ImageCropDialog` no se toca: su error ya es un `Alert` de bloque, no una
+  línea de texto — no hay clase de texto duplicada que unificar ahí.
+
 ## [33.5.1] — 2026-09-10
 
 > **Patch.**

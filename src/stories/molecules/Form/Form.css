@@ -26,14 +26,6 @@
   gap: var(--form-errors-gap);
 }
 
-.form__error {
-  font-family: var(--form-error-font-family);
-  font-size: var(--form-error-font-size);
-  font-weight: var(--form-error-font-weight);
-  line-height: var(--form-error-line-height);
-  color: var(--form-error-color);
-}
-
 /* Acciones: en móvil el botón ocupa el ancho; en escritorio, a la derecha. */
 .form__actions {
   display: flex;

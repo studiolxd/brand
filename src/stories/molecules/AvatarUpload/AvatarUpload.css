@@ -93,10 +93,3 @@
   color: var(--avatar-upload-hint-color);
 }
 
-.avatar-upload__error {
-  font-family: var(--avatar-upload-error-font-family);
-  font-size: var(--avatar-upload-error-font-size);
-  font-weight: var(--avatar-upload-error-font-weight);
-  line-height: var(--avatar-upload-error-line-height);
-  color: var(--avatar-upload-error-color);
-}

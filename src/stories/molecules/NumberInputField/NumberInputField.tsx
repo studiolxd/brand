@@ -4,6 +4,7 @@ import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { NumberInput } from '../../atoms/NumberInput/NumberInput';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface NumberInputFieldProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
@@ -93,7 +94,7 @@ export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldPro
         onChange={onChange}
       />
       {errorMessage && (
-        <span id={errorId} className="number-input-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="number-input-field__helper">{helperText}</span>

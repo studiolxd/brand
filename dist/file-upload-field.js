@@ -1,44 +1,43 @@
 'use client';
 import './file-upload-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { Label as t } from "./label.js";
-import { FileUpload as n } from "./file-upload.js";
-import { n as r } from "./_shared/field-labels.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o, useId as s } from "react";
+import { ErrorText as t } from "./error-text.js";
+import { Label as n } from "./label.js";
+import { FileUpload as r } from "./file-upload.js";
+import { n as i } from "./_shared/field-labels.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { forwardRef as s, useId as c } from "react";
 //#region src/stories/molecules/FileUploadField/FileUploadField.tsx
-var c = o(function({ id: o, label: c, labelHidden: l, errorMessage: u, helperText: d, error: f = !1, size: p, className: m, ...h }, g) {
-	let _ = r(l), v = e(p), y = s(), b = o ?? y, x = u ? `${b}-error` : void 0, S = d ? `${b}-helper` : void 0, C = [x, S].filter(Boolean).join(" ") || void 0, w = f || !!u;
-	return /* @__PURE__ */ a("div", {
-		className: ["file-upload-field", m].filter(Boolean).join(" "),
+var l = s(function({ id: s, label: l, labelHidden: u, errorMessage: d, helperText: f, error: p = !1, size: m, className: h, ...g }, _) {
+	let v = i(u), y = e(m), b = c(), x = s ?? b, S = d ? `${x}-error` : void 0, C = f ? `${x}-helper` : void 0, w = [S, C].filter(Boolean).join(" ") || void 0, T = p || !!d;
+	return /* @__PURE__ */ o("div", {
+		className: ["file-upload-field", h].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ i(t, {
-				htmlFor: b,
-				hidden: _,
-				size: v,
-				children: c
+			/* @__PURE__ */ a(n, {
+				htmlFor: x,
+				hidden: v,
+				size: y,
+				children: l
 			}),
-			/* @__PURE__ */ i(n, {
-				ref: g,
-				...h,
-				id: b,
-				size: v,
-				error: w,
-				"aria-describedby": C
-			}),
-			u && /* @__PURE__ */ i("span", {
+			/* @__PURE__ */ a(r, {
+				ref: _,
+				...g,
 				id: x,
-				className: "file-upload-field__error",
-				role: "alert",
-				children: u
+				size: y,
+				error: T,
+				"aria-describedby": w
 			}),
-			d && /* @__PURE__ */ i("span", {
+			d && /* @__PURE__ */ a(t, {
 				id: S,
-				className: "file-upload-field__helper",
 				children: d
+			}),
+			f && /* @__PURE__ */ a("span", {
+				id: C,
+				className: "file-upload-field__helper",
+				children: f
 			})
 		]
 	});
 });
 //#endregion
-export { c as FileUploadField };
+export { l as FileUploadField };

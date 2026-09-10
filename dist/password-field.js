@@ -3,64 +3,63 @@ import './password-field.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { n } from "./_shared/form-size.js";
-import { Input as r } from "./input.js";
-import { Label as i } from "./label.js";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-import { forwardRef as s, useId as c, useState as l } from "react";
+import { ErrorText as r } from "./error-text.js";
+import { Input as i } from "./input.js";
+import { Label as a } from "./label.js";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
+import { forwardRef as c, useId as l, useState as u } from "react";
 //#region src/stories/molecules/PasswordField/PasswordField.tsx
-var u = s(function({ label: s, labelHidden: u = !0, error: d = !1, errorMessage: f, helperText: p, action: m, size: h, showPasswordLabel: g = "Mostrar contraseña", hidePasswordLabel: _ = "Ocultar contraseña", className: v, id: y, disabled: b, placeholder: x, ...S }, C) {
-	let w = n(h), T = c(), E = y ?? T, [D, O] = l(!1), k = f ? `${E}-error` : void 0, A = p ? `${E}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0;
-	return /* @__PURE__ */ o("div", {
-		className: ["password-field", v ?? ""].filter(Boolean).join(" "),
+var d = c(function({ label: c, labelHidden: d = !0, error: f = !1, errorMessage: p, helperText: m, action: h, size: g, showPasswordLabel: _ = "Mostrar contraseña", hidePasswordLabel: v = "Ocultar contraseña", className: y, id: b, disabled: x, placeholder: S, ...C }, w) {
+	let T = n(g), E = l(), D = b ?? E, [O, k] = u(!1), A = p ? `${D}-error` : void 0, j = m ? `${D}-helper` : void 0, M = [A, j].filter(Boolean).join(" ") || void 0;
+	return /* @__PURE__ */ s("div", {
+		className: ["password-field", y ?? ""].filter(Boolean).join(" "),
 		children: [
-			s && /* @__PURE__ */ a(i, {
-				htmlFor: E,
-				hidden: u,
-				size: w,
-				children: s
+			c && /* @__PURE__ */ o(a, {
+				htmlFor: D,
+				hidden: d,
+				size: T,
+				children: c
 			}),
-			/* @__PURE__ */ o("div", {
-				className: ["password-field__wrapper", w === "md" ? "" : `password-field__wrapper--${w}`].filter(Boolean).join(" "),
-				children: [/* @__PURE__ */ a(r, {
-					ref: C,
-					id: E,
-					size: w,
-					error: d || !!f,
-					placeholder: x ?? (s && u ? s : void 0),
-					"aria-describedby": j,
-					...S,
-					type: D ? "text" : "password",
-					disabled: b
-				}), /* @__PURE__ */ o("button", {
+			/* @__PURE__ */ s("div", {
+				className: ["password-field__wrapper", T === "md" ? "" : `password-field__wrapper--${T}`].filter(Boolean).join(" "),
+				children: [/* @__PURE__ */ o(i, {
+					ref: w,
+					id: D,
+					size: T,
+					error: f || !!p,
+					placeholder: S ?? (c && d ? c : void 0),
+					"aria-describedby": M,
+					...C,
+					type: O ? "text" : "password",
+					disabled: x
+				}), /* @__PURE__ */ s("button", {
 					type: "button",
 					className: "password-field__toggle",
-					onClick: () => O((e) => !e),
-					disabled: b,
-					"aria-controls": E,
-					"aria-pressed": D,
-					children: [/* @__PURE__ */ a(t, { children: D ? _ : g }), /* @__PURE__ */ a(e, {
-						name: D ? "eye-off" : "eye",
+					onClick: () => k((e) => !e),
+					disabled: x,
+					"aria-controls": D,
+					"aria-pressed": O,
+					children: [/* @__PURE__ */ o(t, { children: O ? v : _ }), /* @__PURE__ */ o(e, {
+						name: O ? "eye-off" : "eye",
 						className: "password-field__icon"
 					})]
 				})]
 			}),
-			f && /* @__PURE__ */ a("span", {
-				id: k,
-				className: "password-field__error",
-				role: "alert",
-				children: f
-			}),
-			p && /* @__PURE__ */ a("span", {
+			p && /* @__PURE__ */ o(r, {
 				id: A,
-				className: "password-field__helper",
 				children: p
 			}),
-			m && /* @__PURE__ */ a("div", {
-				className: "password-field__action",
+			m && /* @__PURE__ */ o("span", {
+				id: j,
+				className: "password-field__helper",
 				children: m
+			}),
+			h && /* @__PURE__ */ o("div", {
+				className: "password-field__action",
+				children: h
 			})
 		]
 	});
 });
 //#endregion
-export { u as PasswordField };
+export { d as PasswordField };

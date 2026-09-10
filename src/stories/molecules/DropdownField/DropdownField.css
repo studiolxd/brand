@@ -11,7 +11,7 @@
 }
 
 /* En línea, la ayuda y el error siguen debajo: ocupan la fila entera. */
-.dropdown-field--inline .dropdown-field__error,
+.dropdown-field--inline .error-text,
 .dropdown-field--inline .dropdown-field__helper {
   flex-basis: 100%;
 }
@@ -96,14 +96,6 @@
 }
 .dropdown-field__control[data-popup-open] .dropdown-field__icon {
   transform: rotate(-90deg);
-}
-
-.dropdown-field__error {
-  font-family: var(--dropdown-field-error-font-family);
-  font-size: var(--dropdown-field-error-font-size);
-  font-weight: var(--dropdown-field-error-font-weight);
-  line-height: var(--dropdown-field-error-line-height);
-  color: var(--dropdown-field-error-color);
 }
 
 .dropdown-field__helper {

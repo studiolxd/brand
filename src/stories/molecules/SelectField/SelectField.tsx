@@ -5,6 +5,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { Select, isSelectOptionGroup } from '../../atoms/Select/Select';
 import type { SelectOption, SelectOptionOrGroup } from '../../atoms/Select/Select';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface SelectFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -138,7 +139,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(funct
         onBlur={onBlur}
       />
       {errorMessage && (
-        <span id={errorId} className="select-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="select-field__helper">{helperText}</span>

@@ -5,6 +5,7 @@ import { Label } from '../../atoms/Label/Label';
 import { DatePicker } from '../DatePicker/DatePicker';
 import type { DatePickerProps } from '../DatePicker/DatePicker';
 import './DatePickerField.css';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface DatePickerFieldProps
   extends Omit<DatePickerProps, 'id' | 'describedBy' | 'aria-describedby' | 'aria-label'> {
@@ -65,7 +66,7 @@ export const DatePickerField = forwardRef<HTMLInputElement, DatePickerFieldProps
         aria-describedby={describedBy}
       />
       {errorMessage && (
-        <span id={errorId} className="date-picker-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="date-picker-field__helper">{helperText}</span>

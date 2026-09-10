@@ -4,6 +4,7 @@ import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { Textarea } from '../../atoms/Textarea/Textarea';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface TextareaFieldProps extends Omit<ComponentPropsWithoutRef<'textarea'>, 'value' | 'defaultValue' | 'rows'> {
   id: string;
@@ -89,7 +90,7 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
         onFocus={onFocus}
       />
       {errorMessage && (
-        <span id={errorId} className="textarea-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="textarea-field__helper">{helperText}</span>

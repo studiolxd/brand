@@ -1,53 +1,52 @@
 'use client';
 import './number-input-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { Label as t } from "./label.js";
-import { NumberInput as n } from "./number-input.js";
-import { n as r } from "./_shared/field-labels.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o, useId as s } from "react";
+import { ErrorText as t } from "./error-text.js";
+import { Label as n } from "./label.js";
+import { NumberInput as r } from "./number-input.js";
+import { n as i } from "./_shared/field-labels.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { forwardRef as s, useId as c } from "react";
 //#region src/stories/molecules/NumberInputField/NumberInputField.tsx
-var c = o(function({ id: o, label: c, labelHidden: l, value: u, defaultValue: d, min: f, max: p, step: m = 1, decimal: h, disabled: g, readOnly: _, size: v, error: y = !1, errorMessage: b, helperText: x, className: S, onChange: C, ...w }, T) {
-	let E = r(l), D = e(v), O = s(), k = o ?? O, A = b ? `${k}-error` : void 0, j = x ? `${k}-helper` : void 0, M = [A, j].filter(Boolean).join(" ") || void 0, N = y || !!b;
-	return /* @__PURE__ */ a("div", {
-		className: ["number-input-field", S].filter(Boolean).join(" "),
+var l = s(function({ id: s, label: l, labelHidden: u, value: d, defaultValue: f, min: p, max: m, step: h = 1, decimal: g, disabled: _, readOnly: v, size: y, error: b = !1, errorMessage: x, helperText: S, className: C, onChange: w, ...T }, E) {
+	let D = i(u), O = e(y), k = c(), A = s ?? k, j = x ? `${A}-error` : void 0, M = S ? `${A}-helper` : void 0, N = [j, M].filter(Boolean).join(" ") || void 0, P = b || !!x;
+	return /* @__PURE__ */ o("div", {
+		className: ["number-input-field", C].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ i(t, {
-				htmlFor: k,
-				hidden: E,
-				size: D,
-				children: c
+			/* @__PURE__ */ a(n, {
+				htmlFor: A,
+				hidden: D,
+				size: O,
+				children: l
 			}),
-			/* @__PURE__ */ i(n, {
-				ref: T,
-				...w,
-				id: k,
-				value: u,
-				defaultValue: d,
-				min: f,
-				max: p,
-				step: m,
-				decimal: h,
-				disabled: g,
-				readOnly: _,
-				size: D,
-				error: N,
-				"aria-describedby": M,
-				onChange: C
-			}),
-			b && /* @__PURE__ */ i("span", {
+			/* @__PURE__ */ a(r, {
+				ref: E,
+				...T,
 				id: A,
-				className: "number-input-field__error",
-				role: "alert",
-				children: b
+				value: d,
+				defaultValue: f,
+				min: p,
+				max: m,
+				step: h,
+				decimal: g,
+				disabled: _,
+				readOnly: v,
+				size: O,
+				error: P,
+				"aria-describedby": N,
+				onChange: w
 			}),
-			x && /* @__PURE__ */ i("span", {
+			x && /* @__PURE__ */ a(t, {
 				id: j,
-				className: "number-input-field__helper",
 				children: x
+			}),
+			S && /* @__PURE__ */ a("span", {
+				id: M,
+				className: "number-input-field__helper",
+				children: S
 			})
 		]
 	});
 });
 //#endregion
-export { c as NumberInputField };
+export { l as NumberInputField };

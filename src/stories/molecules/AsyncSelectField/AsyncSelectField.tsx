@@ -5,6 +5,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { AsyncSelect } from '../../atoms/AsyncSelect/AsyncSelect';
 import type { AsyncSelectOption } from '../../atoms/AsyncSelect/AsyncSelect';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export type { AsyncSelectOption };
 
@@ -120,7 +121,7 @@ export const AsyncSelectField = forwardRef<HTMLInputElement, AsyncSelectFieldPro
         onBlur={onBlur}
       />
       {errorMessage && (
-        <span id={errorId} className="async-select-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="async-select-field__helper">{helperText}</span>

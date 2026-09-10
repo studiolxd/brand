@@ -5,6 +5,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { MultiSelect } from '../../atoms/MultiSelect/MultiSelect';
 import type { MultiSelectOption } from '../../atoms/MultiSelect/MultiSelect';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export type { MultiSelectOption };
 
@@ -103,7 +104,7 @@ export const MultiSelectField = forwardRef<HTMLDivElement, MultiSelectFieldProps
         onBlur={onBlur}
       />
       {errorMessage && (
-        <span id={errorId} className="multi-select-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="multi-select-field__helper">{helperText}</span>

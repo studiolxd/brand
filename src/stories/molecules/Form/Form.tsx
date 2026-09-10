@@ -1,5 +1,6 @@
 import { forwardRef, type ComponentProps, type ReactNode } from 'react';
 import { FormSizeContext, type FormSize } from '../../constants/form-size';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 import './Form.css';
 
 export interface FormProps extends Omit<ComponentProps<'form'>, 'children'> {
@@ -45,9 +46,9 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
         {!success && children && <div className="form__fields">{children}</div>}
         {!success && captcha && <div className="form__captcha">{captcha}</div>}
         {!success && errors && errors.length > 0 && (
-          <ul role="alert" className="form__errors">
+          <ul className="form__errors">
             {errors.map((error) => (
-              <li key={error} className="form__error">{error}</li>
+              <li key={error}><ErrorText as="span">{error}</ErrorText></li>
             ))}
           </ul>
         )}

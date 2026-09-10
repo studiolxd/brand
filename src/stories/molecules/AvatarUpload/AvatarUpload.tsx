@@ -10,6 +10,7 @@ import { ImageCropDialog } from '../ImageCropDialog/ImageCropDialog';
 import { useFormSize, type FormSize } from '../../constants/form-size';
 import { isDevelopment } from '../../constants/env';
 import './AvatarUpload.css';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 /**
  * La talla del avatar que le toca a cada talla de control: **cuatro peldaños por
@@ -368,7 +369,7 @@ export function AvatarUpload({
         {hint && <VisuallyHidden id={hintId}>{hint}</VisuallyHidden>}
         {dropHintLabel && <span className="avatar-upload__hint">{dropHintLabel}</span>}
         {message && (
-          <span id={errorId} className="avatar-upload__error" role="alert">{message}</span>
+          <ErrorText id={errorId}>{message}</ErrorText>
         )}
       </div>
 

@@ -3,6 +3,7 @@ import './RadioField.css';
 import { useFormSize } from '../../constants/form-size';
 import { Radio } from '../../atoms/Radio/Radio';
 import { useRadioGroup } from '../../atoms/RadioGroup/RadioGroupContext';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface RadioFieldProps
   extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'id'> {
@@ -76,7 +77,7 @@ export const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>(function
         <span className="radio-field__label">{label}</span>
       </label>
       {errorMessage && (
-        <span id={errorId} className="radio-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="radio-field__helper">{helperText}</span>

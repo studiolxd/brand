@@ -5,12 +5,13 @@ import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import { Icon } from '../../atoms/Icon/Icon';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface PasswordFieldProps
   extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'type'> {
   /**
    * Etiqueta del campo. **Opcional**: si se omite, el componente renderiza solo
-   * el campo + toggle (sin `<label>`, sin `__error`/`__helper`), para componerlo
+   * el campo + toggle (sin `<label>`, sin error ni ayuda), para componerlo
    * dentro de una capa de formulario propia.
    */
   label?: string;
@@ -98,7 +99,7 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
         </button>
       </div>
       {errorMessage && (
-        <span id={errorId} className="password-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="password-field__helper">{helperText}</span>

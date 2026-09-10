@@ -2,58 +2,57 @@
 import './async-multi-select-field.css';
 import { AsyncMultiSelect as e } from "./async-multi-select.js";
 import { n as t } from "./_shared/form-size.js";
-import { Label as n } from "./label.js";
-import { n as r } from "./_shared/field-labels.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o, useId as s } from "react";
+import { ErrorText as n } from "./error-text.js";
+import { Label as r } from "./label.js";
+import { n as i } from "./_shared/field-labels.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { forwardRef as s, useId as c } from "react";
 //#region src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx
-var c = o(function({ id: o, label: c, labelHidden: l, onSearch: u, value: d, defaultValue: f, onValueChange: p, selectedOptions: m, placeholder: h, name: g, disabled: _, readOnly: v, size: y, debounceMs: b, required: x, error: S = !1, errorMessage: C, helperText: w, className: T, emptyMessage: E, removeLabel: D, loadingLabel: O, container: k, onBlur: A }, j) {
-	let M = r(l), N = t(y), P = s(), F = o ?? P, I = C ? `${F}-error` : void 0, L = w ? `${F}-helper` : void 0, R = [I, L].filter(Boolean).join(" ") || void 0, z = S || !!C;
-	return /* @__PURE__ */ a("div", {
-		className: ["async-multi-select-field", T].filter(Boolean).join(" "),
+var l = s(function({ id: s, label: l, labelHidden: u, onSearch: d, value: f, defaultValue: p, onValueChange: m, selectedOptions: h, placeholder: g, name: _, disabled: v, readOnly: y, size: b, debounceMs: x, required: S, error: C = !1, errorMessage: w, helperText: T, className: E, emptyMessage: D, removeLabel: O, loadingLabel: k, container: A, onBlur: j }, M) {
+	let N = i(u), P = t(b), F = c(), I = s ?? F, L = w ? `${I}-error` : void 0, R = T ? `${I}-helper` : void 0, z = [L, R].filter(Boolean).join(" ") || void 0, B = C || !!w;
+	return /* @__PURE__ */ o("div", {
+		className: ["async-multi-select-field", E].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ i(n, {
-				htmlFor: F,
-				hidden: M,
-				size: N,
-				children: c
+			/* @__PURE__ */ a(r, {
+				htmlFor: I,
+				hidden: N,
+				size: P,
+				children: l
 			}),
-			/* @__PURE__ */ i(e, {
-				ref: j,
-				id: F,
-				name: g,
-				onSearch: u,
-				value: d,
-				defaultValue: f,
-				onValueChange: p,
-				selectedOptions: m,
-				placeholder: h,
-				disabled: _,
-				readOnly: v,
-				size: N,
-				debounceMs: b,
-				required: x,
-				error: z,
-				emptyMessage: E,
-				removeLabel: D,
-				loadingLabel: O,
-				container: k,
-				"aria-describedby": R,
-				onBlur: A
-			}),
-			C && /* @__PURE__ */ i("span", {
+			/* @__PURE__ */ a(e, {
+				ref: M,
 				id: I,
-				className: "async-multi-select-field__error",
-				role: "alert",
-				children: C
+				name: _,
+				onSearch: d,
+				value: f,
+				defaultValue: p,
+				onValueChange: m,
+				selectedOptions: h,
+				placeholder: g,
+				disabled: v,
+				readOnly: y,
+				size: P,
+				debounceMs: x,
+				required: S,
+				error: B,
+				emptyMessage: D,
+				removeLabel: O,
+				loadingLabel: k,
+				container: A,
+				"aria-describedby": z,
+				onBlur: j
 			}),
-			w && /* @__PURE__ */ i("span", {
+			w && /* @__PURE__ */ a(n, {
 				id: L,
-				className: "async-multi-select-field__helper",
 				children: w
+			}),
+			T && /* @__PURE__ */ a("span", {
+				id: R,
+				className: "async-multi-select-field__helper",
+				children: T
 			})
 		]
 	});
 });
 //#endregion
-export { c as AsyncMultiSelectField };
+export { l as AsyncMultiSelectField };

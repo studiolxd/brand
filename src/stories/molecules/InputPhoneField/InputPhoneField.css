@@ -4,14 +4,6 @@
   gap: var(--input-phone-field-gap);
 }
 
-.input-phone-field__error {
-  font-family: var(--input-phone-field-error-font-family);
-  font-size: var(--input-phone-field-error-font-size);
-  font-weight: var(--input-phone-field-error-font-weight);
-  line-height: var(--input-phone-field-error-line-height);
-  color: var(--input-phone-field-error-color);
-}
-
 .input-phone-field__helper {
   font-family: var(--input-phone-field-helper-font-family);
   font-size: var(--input-phone-field-helper-font-size);

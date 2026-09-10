@@ -5,6 +5,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import type { Country } from 'react-phone-number-input';
 import './InputPhoneField.css';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface InputPhoneFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -106,7 +107,7 @@ export const InputPhoneField = forwardRef<HTMLInputElement, InputPhoneFieldProps
         onFocus={onFocus}
       />
       {errorMessage && (
-        <span id={errorId} className="input-phone-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="input-phone-field__helper">{helperText}</span>

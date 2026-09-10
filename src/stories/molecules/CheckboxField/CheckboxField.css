@@ -50,13 +50,8 @@
   cursor: var(--checkbox-field-disabled-cursor);
 }
 
-.checkbox-field__error {
+.checkbox-field > .error-text {
   padding-inline: var(--checkbox-field-padding-inline);
-  font-family: var(--checkbox-field-error-font-family);
-  font-size: var(--checkbox-field-error-font-size);
-  font-weight: var(--checkbox-field-error-font-weight);
-  line-height: var(--checkbox-field-error-line-height);
-  color: var(--checkbox-field-error-color);
 }
 
 .checkbox-field__helper {

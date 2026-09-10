@@ -7,6 +7,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { Input } from '../../atoms/Input/Input';
 import { Icon } from '../../atoms/Icon/Icon';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface InputFieldProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size' | 'type' | 'value' | 'defaultValue'> {
   id: string;
@@ -185,7 +186,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
         </div>
       ) : field}
       {errorMessage && (
-        <span id={errorId} className="input-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="input-field__helper">{helperText}</span>

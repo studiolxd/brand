@@ -1,54 +1,53 @@
 'use client';
 import './textarea-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { Label as t } from "./label.js";
-import { Textarea as n } from "./textarea.js";
-import { n as r } from "./_shared/field-labels.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o } from "react";
+import { ErrorText as t } from "./error-text.js";
+import { Label as n } from "./label.js";
+import { Textarea as r } from "./textarea.js";
+import { n as i } from "./_shared/field-labels.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { forwardRef as s } from "react";
 //#region src/stories/molecules/TextareaField/TextareaField.tsx
-var s = o(function({ id: o, label: s, labelHidden: c, name: l, placeholder: u, value: d, defaultValue: f, rows: p, disabled: m, readOnly: h, size: g, error: _ = !1, errorMessage: v, helperText: y, onChange: b, onBlur: x, onFocus: S, className: C, ...w }, T) {
-	let E = r(c), D = e(g), O = v ? `${o}-error` : void 0, k = y ? `${o}-helper` : void 0, A = [O, k].filter(Boolean).join(" ") || void 0, j = _ || !!v;
-	return /* @__PURE__ */ a("div", {
-		className: ["textarea-field", C].filter(Boolean).join(" "),
+var c = s(function({ id: s, label: c, labelHidden: l, name: u, placeholder: d, value: f, defaultValue: p, rows: m, disabled: h, readOnly: g, size: _, error: v = !1, errorMessage: y, helperText: b, onChange: x, onBlur: S, onFocus: C, className: w, ...T }, E) {
+	let D = i(l), O = e(_), k = y ? `${s}-error` : void 0, A = b ? `${s}-helper` : void 0, j = [k, A].filter(Boolean).join(" ") || void 0, M = v || !!y;
+	return /* @__PURE__ */ o("div", {
+		className: ["textarea-field", w].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ i(t, {
-				htmlFor: o,
-				hidden: E,
-				size: D,
-				children: s
+			/* @__PURE__ */ a(n, {
+				htmlFor: s,
+				hidden: D,
+				size: O,
+				children: c
 			}),
-			/* @__PURE__ */ i(n, {
-				ref: T,
-				...w,
-				id: o,
-				name: l,
-				placeholder: u ?? (E ? s : void 0),
-				value: d,
-				defaultValue: f,
-				rows: p,
-				disabled: m,
-				readOnly: h,
-				size: D,
-				error: j,
-				"aria-describedby": A,
-				onChange: b,
-				onBlur: x,
-				onFocus: S
+			/* @__PURE__ */ a(r, {
+				ref: E,
+				...T,
+				id: s,
+				name: u,
+				placeholder: d ?? (D ? c : void 0),
+				value: f,
+				defaultValue: p,
+				rows: m,
+				disabled: h,
+				readOnly: g,
+				size: O,
+				error: M,
+				"aria-describedby": j,
+				onChange: x,
+				onBlur: S,
+				onFocus: C
 			}),
-			v && /* @__PURE__ */ i("span", {
-				id: O,
-				className: "textarea-field__error",
-				role: "alert",
-				children: v
-			}),
-			y && /* @__PURE__ */ i("span", {
+			y && /* @__PURE__ */ a(t, {
 				id: k,
-				className: "textarea-field__helper",
 				children: y
+			}),
+			b && /* @__PURE__ */ a("span", {
+				id: A,
+				className: "textarea-field__helper",
+				children: b
 			})
 		]
 	});
 });
 //#endregion
-export { s as TextareaField };
+export { c as TextareaField };

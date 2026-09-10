@@ -4,14 +4,6 @@
   gap: var(--async-multi-select-field-gap);
 }
 
-.async-multi-select-field__error {
-  font-family: var(--async-multi-select-field-error-font-family);
-  font-size: var(--async-multi-select-field-error-font-size);
-  font-weight: var(--async-multi-select-field-error-font-weight);
-  line-height: var(--async-multi-select-field-error-line-height);
-  color: var(--async-multi-select-field-error-color);
-}
-
 .async-multi-select-field__helper {
   font-family: var(--async-multi-select-field-helper-font-family);
   font-size: var(--async-multi-select-field-helper-font-size);

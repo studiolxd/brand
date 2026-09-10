@@ -8,6 +8,7 @@ import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import type { CalendarProps } from '../Calendar/Calendar';
 import './DateTimeField.css';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface DateTimeFieldProps {
   /** `id` del campo. Si no se pasa, se genera con `useId`. */
@@ -203,7 +204,7 @@ export const DateTimeField = forwardRef<HTMLInputElement, DateTimeFieldProps>(fu
         />
       </div>
       {errorMessage && (
-        <span id={errorId} className="date-time-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="date-time-field__helper">{helperText}</span>

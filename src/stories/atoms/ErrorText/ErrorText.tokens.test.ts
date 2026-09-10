@@ -4,10 +4,11 @@ import { fileURLToPath } from 'node:url';
 
 /**
  * La razón de ser del átomo es que un error suelto se lea igual que el de un
- * campo. Eso no es una coincidencia de valores: es que las dos reglas beben del
- * MISMO juego de tokens compartido (`--form-error-*`), del que ya cuelga cada
- * `*Field` por su alias propio. Este test lo vigila leyendo el CSS: si alguien
- * cablea un valor o cambia una de las dos caras, salta.
+ * campo. Desde que todos los `*Field` pintan su error con este átomo (en vez
+ * de una clase `__error` propia), esa igualdad ya no hay que comprobarla
+ * comparando dos hojas de estilo: solo queda vigilar que `ErrorText` sigue
+ * bebiendo del juego de tokens compartido (`--form-error-*`), no de un valor
+ * propio.
  *
  * El estilo ya calculado por el navegador se comprueba en la story
  * «Test — la cara es la del error de un campo» (`test:stories`), que es donde
@@ -37,28 +38,10 @@ const PROPIEDADES = ['font-family', 'font-size', 'font-weight', 'line-height', '
 
 describe('ErrorText — la cara del error de formulario', () => {
   const atomo = declaraciones(lee('src/stories/atoms/ErrorText/ErrorText.css'), '.error-text');
-  const campo = declaraciones(
-    lee('src/stories/molecules/InputField/InputField.css'),
-    '.input-field__error',
-  );
-  const alias = lee('src/tokens/molecules/input-field.css');
 
   it('gasta los tokens compartidos del error, no un valor propio', () => {
     for (const propiedad of PROPIEDADES) {
       expect(atomo[propiedad], propiedad).toBe(`var(--form-error-${propiedad})`);
-    }
-  });
-
-  it('son los mismos tokens que gasta el error de un campo', () => {
-    for (const propiedad of PROPIEDADES) {
-      // El campo apunta a su alias (`--input-field-error-*`), que en el CSS de
-      // tokens no es más que el token compartido con otro nombre.
-      const aliasDelCampo = campo[propiedad];
-      expect(aliasDelCampo, propiedad).toMatch(/^var\(--input-field-error-/);
-      const nombre = aliasDelCampo.slice('var('.length, -1);
-      expect(alias, `${nombre} debe colgar del token compartido`).toContain(
-        `${nombre}: ${atomo[propiedad]};`,
-      );
     }
   });
 });

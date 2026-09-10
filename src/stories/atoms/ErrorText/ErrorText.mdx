@@ -34,7 +34,7 @@ Lo que decide no es la gravedad, es **de qué se habla**.
 | Qué pinta | Texto, sin caja ni icono | Bloque con su fondo, su icono y, si hace falta, su acción |
 | Quién lo tiene ya resuelto | — | Los errores del `Form` (`errors`), que ya se pintan solos |
 
-Y hay un tercer caso que no es ninguno de los dos: si el error **sí** pertenece a un campo, no se usa `ErrorText`. En un `*Field` es la prop `errorMessage`; en un campo controlado con react-hook-form, `FormMessage`. Los dos pintan esta misma cara y además atan el mensaje al control y al `formState`; escribirlo a mano pierde las dos cosas.
+Y hay un tercer caso que no es ninguno de los dos: si el error **sí** pertenece a un campo, no se usa `ErrorText` directamente desde fuera. En un `*Field` es la prop `errorMessage`; en un campo controlado con react-hook-form, `FormMessage`. Los dos atan el mensaje al control y al `formState`; escribirlo a mano pierde eso. Por dentro, sin embargo, la cara es literalmente este átomo: todos los `*Field` pintan su error con `ErrorText`, no con una clase `__error` propia — es lo que hace que la comparación de arriba sea exacta y no una coincidencia de tokens.
 
 ## Que se anuncie sirve de algo
 

@@ -4,14 +4,6 @@
   gap: var(--time-field-gap);
 }
 
-.time-field__error {
-  font-family: var(--time-field-error-font-family);
-  font-size: var(--time-field-error-font-size);
-  font-weight: var(--time-field-error-font-weight);
-  line-height: var(--time-field-error-line-height);
-  color: var(--time-field-error-color);
-}
-
 .time-field__helper {
   font-family: var(--time-field-helper-font-family);
   font-size: var(--time-field-helper-font-size);

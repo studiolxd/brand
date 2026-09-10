@@ -4,6 +4,7 @@ import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { OtpInput } from '../../atoms/OtpInput/OtpInput';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface OtpFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -99,7 +100,7 @@ export const OtpField = forwardRef<HTMLInputElement, OtpFieldProps>(function Otp
         onBlur={onBlur}
       />
       {errorMessage && (
-        <span id={errorId} className="otp-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="otp-field__helper">{helperText}</span>

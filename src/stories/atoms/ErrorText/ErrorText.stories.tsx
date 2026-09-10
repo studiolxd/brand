@@ -118,7 +118,7 @@ export const TestMismosTokens: Story = {
 
     expect(suelto).toHaveAttribute('role', 'alert');
     expect(suelto).toHaveClass('error-text');
-    expect(delCampo).toHaveClass('input-field__error');
+    expect(delCampo).toHaveClass('error-text');
 
     const a = getComputedStyle(suelto);
     const b = getComputedStyle(delCampo);

@@ -4,6 +4,7 @@ import { useFormSize } from '../../constants/form-size';
 import { useLabelHidden } from '../../constants/field-labels';
 import { Checkbox } from '../../atoms/Checkbox/Checkbox';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface CheckboxFieldProps {
   /** Texto de la opción, a la derecha de la marca. Acepta JSX (un enlace, por ejemplo). */
@@ -100,7 +101,7 @@ export const CheckboxField = forwardRef<HTMLElement, CheckboxFieldProps>(functio
           : <span className="checkbox-field__label">{label}</span>}
       </label>
       {errorMessage && (
-        <span id={errorId} className="checkbox-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="checkbox-field__helper">{helperText}</span>

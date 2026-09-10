@@ -1,56 +1,55 @@
 'use client';
 import './input-phone-field.css';
 import { n as e } from "./_shared/form-size.js";
-import { InputPhone as t } from "./input-phone.js";
-import { Label as n } from "./label.js";
-import { n as r } from "./_shared/field-labels.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o, useId as s } from "react";
+import { ErrorText as t } from "./error-text.js";
+import { InputPhone as n } from "./input-phone.js";
+import { Label as r } from "./label.js";
+import { n as i } from "./_shared/field-labels.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { forwardRef as s, useId as c } from "react";
 //#region src/stories/molecules/InputPhoneField/InputPhoneField.tsx
-var c = o(function({ id: o, label: c, labelHidden: l, value: u, defaultCountry: d, placeholder: f, disabled: p, readOnly: m, required: h, name: g, autoComplete: _, error: v = !1, errorMessage: y, helperText: b, size: x, className: S, countryLabel: C, internationalLabel: w, onChange: T, onBlur: E, onFocus: D }, O) {
-	let k = r(l), A = e(x), j = s(), M = o ?? j, N = y ? `${M}-error` : void 0, P = b ? `${M}-helper` : void 0, F = [N, P].filter(Boolean).join(" ") || void 0, I = v || !!y;
-	return /* @__PURE__ */ a("div", {
-		className: ["input-phone-field", S].filter(Boolean).join(" "),
+var l = s(function({ id: s, label: l, labelHidden: u, value: d, defaultCountry: f, placeholder: p, disabled: m, readOnly: h, required: g, name: _, autoComplete: v, error: y = !1, errorMessage: b, helperText: x, size: S, className: C, countryLabel: w, internationalLabel: T, onChange: E, onBlur: D, onFocus: O }, k) {
+	let A = i(u), j = e(S), M = c(), N = s ?? M, P = b ? `${N}-error` : void 0, F = x ? `${N}-helper` : void 0, I = [P, F].filter(Boolean).join(" ") || void 0, L = y || !!b;
+	return /* @__PURE__ */ o("div", {
+		className: ["input-phone-field", C].filter(Boolean).join(" "),
 		children: [
-			/* @__PURE__ */ i(n, {
-				htmlFor: M,
-				hidden: k,
-				size: A,
-				children: c
+			/* @__PURE__ */ a(r, {
+				htmlFor: N,
+				hidden: A,
+				size: j,
+				children: l
 			}),
-			/* @__PURE__ */ i(t, {
-				ref: O,
-				id: M,
-				name: g,
-				value: u,
-				defaultCountry: d,
-				placeholder: f,
-				disabled: p,
-				readOnly: m,
-				required: h,
-				autoComplete: _,
-				countryLabel: C,
-				internationalLabel: w,
-				error: I,
-				size: A,
-				"aria-describedby": F,
-				onChange: T,
-				onBlur: E,
-				onFocus: D
-			}),
-			y && /* @__PURE__ */ i("span", {
+			/* @__PURE__ */ a(n, {
+				ref: k,
 				id: N,
-				className: "input-phone-field__error",
-				role: "alert",
-				children: y
+				name: _,
+				value: d,
+				defaultCountry: f,
+				placeholder: p,
+				disabled: m,
+				readOnly: h,
+				required: g,
+				autoComplete: v,
+				countryLabel: w,
+				internationalLabel: T,
+				error: L,
+				size: j,
+				"aria-describedby": I,
+				onChange: E,
+				onBlur: D,
+				onFocus: O
 			}),
-			b && /* @__PURE__ */ i("span", {
+			b && /* @__PURE__ */ a(t, {
 				id: P,
-				className: "input-phone-field__helper",
 				children: b
+			}),
+			x && /* @__PURE__ */ a("span", {
+				id: F,
+				className: "input-phone-field__helper",
+				children: x
 			})
 		]
 	});
 });
 //#endregion
-export { c as InputPhoneField };
+export { l as InputPhoneField };

@@ -5,6 +5,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { AsyncMultiSelect } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
 import type { AsyncMultiSelectOption } from '../../atoms/AsyncMultiSelect/AsyncMultiSelect';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export type { AsyncMultiSelectOption };
 
@@ -123,7 +124,7 @@ export const AsyncMultiSelectField = forwardRef<HTMLInputElement, AsyncMultiSele
         onBlur={onBlur}
       />
       {errorMessage && (
-        <span id={errorId} className="async-multi-select-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="async-multi-select-field__helper">{helperText}</span>

@@ -6,6 +6,7 @@ import { useLabelHidden } from '../../constants/field-labels';
 import { Label } from '../../atoms/Label/Label';
 import { Icon } from '../../atoms/Icon/Icon';
 import { Menu, type MenuItem } from '../Menu/Menu';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 import './DropdownField.css';
 
 export interface DropdownFieldProps {
@@ -111,7 +112,7 @@ export const DropdownField = forwardRef<HTMLButtonElement, DropdownFieldProps>(f
       {/* Lo que se envía con el formulario. */}
       {name && <input type="hidden" name={name} value={value ?? ''} />}
       {errorMessage && (
-        <span id={errorId} className="dropdown-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="dropdown-field__helper">{helperText}</span>

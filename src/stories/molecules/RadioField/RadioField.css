@@ -55,13 +55,8 @@
   cursor: var(--radio-field-disabled-cursor);
 }
 
-.radio-field__error {
+.radio-field > .error-text {
   padding-inline: var(--radio-field-padding-inline);
-  font-family: var(--radio-field-error-font-family);
-  font-size: var(--radio-field-error-font-size);
-  font-weight: var(--radio-field-error-font-weight);
-  line-height: var(--radio-field-error-line-height);
-  color: var(--radio-field-error-color);
 }
 
 .radio-field__helper {

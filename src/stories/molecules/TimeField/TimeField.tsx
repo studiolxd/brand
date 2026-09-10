@@ -5,6 +5,7 @@ import { Label } from '../../atoms/Label/Label';
 import { TimeSelect } from '../../atoms/TimeSelect/TimeSelect';
 import type { TimeValue } from '../../atoms/TimeSelect/TimeSelect';
 import './TimeField.css';
+import { ErrorText } from '../../atoms/ErrorText/ErrorText';
 
 export interface TimeFieldProps {
   /** `id` del control. Si no se pasa, se genera con `useId`. */
@@ -102,7 +103,7 @@ export const TimeField = forwardRef<HTMLButtonElement, TimeFieldProps>(function 
         onBlur={onBlur}
       />
       {errorMessage && (
-        <span id={errorId} className="time-field__error" role="alert">{errorMessage}</span>
+        <ErrorText id={errorId}>{errorMessage}</ErrorText>
       )}
       {helperText && (
         <span id={helperId} className="time-field__helper">{helperText}</span>

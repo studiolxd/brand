@@ -4,14 +4,6 @@
   gap: var(--select-field-gap);
 }
 
-.select-field__error {
-  font-family: var(--select-field-error-font-family);
-  font-size: var(--select-field-error-font-size);
-  font-weight: var(--select-field-error-font-weight);
-  line-height: var(--select-field-error-line-height);
-  color: var(--select-field-error-color);
-}
-
 .select-field__helper {
   font-family: var(--select-field-helper-font-family);
   font-size: var(--select-field-helper-font-size);

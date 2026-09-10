@@ -1,63 +1,63 @@
 'use client';
 import './form.css';
 import { t as e } from "./_shared/form-size.js";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
-import { forwardRef as r } from "react";
+import { ErrorText as t } from "./error-text.js";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+import { forwardRef as i } from "react";
 //#region src/stories/molecules/Form/Form.tsx
-var i = r(function({ errors: r, actions: i, links: a, alternatives: o, alternativesLabel: s, captcha: c, size: l, blockActions: u = !1, success: d, className: f, children: p, ...m }, h) {
-	let g = [
+var a = i(function({ errors: i, actions: a, links: o, alternatives: s, alternativesLabel: c, captcha: l, size: u, blockActions: d = !1, success: f, className: p, children: m, ...h }, g) {
+	let _ = [
 		"form",
-		l && l !== "md" ? `form--${l}` : "",
-		u ? "form--block-actions" : "",
-		f
+		u && u !== "md" ? `form--${u}` : "",
+		d ? "form--block-actions" : "",
+		p
 	].filter(Boolean).join(" ");
-	return /* @__PURE__ */ t(e.Provider, {
-		value: l,
-		children: /* @__PURE__ */ n("form", {
-			ref: h,
-			className: g,
+	return /* @__PURE__ */ n(e.Provider, {
+		value: u,
+		children: /* @__PURE__ */ r("form", {
+			ref: g,
+			className: _,
 			noValidate: !0,
-			...m,
+			...h,
 			children: [
-				d && /* @__PURE__ */ t("p", {
+				f && /* @__PURE__ */ n("p", {
 					className: "form__success",
 					role: "status",
-					children: d
+					children: f
 				}),
-				!d && p && /* @__PURE__ */ t("div", {
+				!f && m && /* @__PURE__ */ n("div", {
 					className: "form__fields",
-					children: p
+					children: m
 				}),
-				!d && c && /* @__PURE__ */ t("div", {
+				!f && l && /* @__PURE__ */ n("div", {
 					className: "form__captcha",
-					children: c
+					children: l
 				}),
-				!d && r && r.length > 0 && /* @__PURE__ */ t("ul", {
-					role: "alert",
+				!f && i && i.length > 0 && /* @__PURE__ */ n("ul", {
 					className: "form__errors",
-					children: r.map((e) => /* @__PURE__ */ t("li", {
-						className: "form__error",
+					children: i.map((e) => /* @__PURE__ */ n("li", { children: /* @__PURE__ */ n(t, {
+						as: "span",
 						children: e
-					}, e))
+					}) }, e))
 				}),
-				!d && i && /* @__PURE__ */ t("div", {
-					className: ["form__actions", u ? "form__actions--block" : ""].filter(Boolean).join(" "),
-					children: i
-				}),
-				a && /* @__PURE__ */ t("div", {
-					className: "form__links",
+				!f && a && /* @__PURE__ */ n("div", {
+					className: ["form__actions", d ? "form__actions--block" : ""].filter(Boolean).join(" "),
 					children: a
 				}),
-				!d && o && /* @__PURE__ */ n("div", {
+				o && /* @__PURE__ */ n("div", {
+					className: "form__links",
+					children: o
+				}),
+				!f && s && /* @__PURE__ */ r("div", {
 					className: "form__alternatives",
-					children: [s && /* @__PURE__ */ t("p", {
+					children: [c && /* @__PURE__ */ n("p", {
 						className: "form__alternatives-label",
-						children: s
-					}), o]
+						children: c
+					}), s]
 				})
 			]
 		})
 	});
 });
 //#endregion
-export { i as Form };
+export { a as Form };
