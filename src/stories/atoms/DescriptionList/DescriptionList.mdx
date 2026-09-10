@@ -45,6 +45,45 @@ par no cuelga de un `<dl>` real y hay que dar el rol a mano (`as="div"
 role="term"` / `role="definition"`). Solo entonces: dentro de una
 `DescriptionList` los elementos correctos son `<dt>` y `<dd>`.
 
+## Valores que se copian
+
+`DescriptionDetails` acepta `copyable`: el valor gana un botón de copiar al
+final de la fila, pegado al margen derecho. Es lo que pide una **ficha de
+conexión** —la URL de callback de un SSO, la URL de acceso, el nombre y el valor
+de un registro TXT—: datos que nadie teclea a mano.
+
+<Canvas of={DescriptionListStories.Copiable} />
+
+**Un valor que se copia va en texto, no en un bloque de código.** La tentación
+es meterlo en un `CodeBlock` para heredar su botón, y entonces una URL o un
+identificador se ven como código —tipografía monoespaciada, superficie gris—
+cuando no lo son. `CodeBlock` queda para lo que sí es código: un comando, un
+fragmento que se pega en un editor. Aquí el valor mantiene la tipografía del
+`<dd>` y lo único que se añade es el botón.
+
+Los textos van por prop, con default castellano: `copyLabel` (nombre accesible
+del botón, «Copiar») y `copiedLabel` (el acuse, «Copiado»). Por defecto se copia
+el texto de `children`; `copyText` solo hace falta cuando lo que se ve y lo que
+se copia no coinciden —un valor abreviado, una URL con el protocolo escondido—.
+
+```tsx
+<DescriptionList aria-label="Conexión SSO">
+  <DescriptionTerm>URL de callback</DescriptionTerm>
+  <DescriptionDetails copyable copyLabel="Copiar la URL de callback">
+    https://cuenta.studiolxd.com/realms/slxd/broker/oidc/endpoint/callback
+  </DescriptionDetails>
+</DescriptionList>
+```
+
+Fuera de un `<dl>` —un dato suelto en una tarjeta, en una cabecera— no hay `<dd>`
+que pueda ponerlo por su cuenta: ahí el botón se compone a mano con `CopyButton`.
+
+Un valor copiable puede ser largo y no tener dónde partir: se parte con
+`overflow-wrap: anywhere` y el botón no se encoge. El botón es más alto que una
+línea de texto, así que lo que lo centra con la **primera** línea es el aire del
+valor (`--description-list-copy-value-padding-block`), no un desplazamiento del
+botón; con varias líneas, ese aire es simétrico y el bloque sigue equilibrado.
+
 ## Pantalla estrecha
 
 Por debajo de `--breakpoint-md` (768px) el término se apila sobre su
@@ -79,6 +118,9 @@ Bordes, término y valor pasan a blanco por tokens `surface-dark-*`.
   el término.
 - Cuando hay más de una ficha en la página, dale un `aria-label` a cada una para
   distinguirlas.
+- El acuse de `copyable` es doble: el icono pasa a un tic para quien ve y una
+  región viva (`role="status"`) anuncia `copiedLabel` para quien escucha. Un
+  cambio de icono, solo, no es feedback accesible.
 - Término y valor van en la tinta de la superficie (prusia o blanco), ambos AAA:
   la jerarquía la marca el cuerpo de la letra, no un gris más claro.
 

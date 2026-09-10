@@ -1,9 +1,10 @@
 'use client';
 
-import { forwardRef, useEffect, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { COPY_FEEDBACK_MS, useCopyToClipboard } from '../../constants/copy-to-clipboard';
 import './CopyButton.css';
 
 export interface CopyButtonProps
@@ -50,10 +51,6 @@ export interface CopyButtonProps
   className?: string;
 }
 
-type Status = 'idle' | 'copied' | 'error';
-
-const FEEDBACK_MS = 1500;
-
 /**
  * Copiar al portapapeles con acuse: una clave de API, un identificador, un
  * fragmento de código. Es el `Button` del sistema con el icono de copiar y la
@@ -74,30 +71,18 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(functio
   errorLabel = 'No se pudo copiar',
   variant = 'ghost',
   size,
-  feedbackDuration = FEEDBACK_MS,
+  feedbackDuration = COPY_FEEDBACK_MS,
   onCopy,
   onCopyError,
   className,
   ...rest
 }: CopyButtonProps, ref) {
-  const [status, setStatus] = useState<Status>('idle');
-
-  useEffect(() => {
-    if (status === 'idle') return;
-    const timeout = setTimeout(() => setStatus('idle'), feedbackDuration);
-    return () => clearTimeout(timeout);
-  }, [status, feedbackDuration]);
+  const { status, copy } = useCopyToClipboard(feedbackDuration);
 
   const handleClick = async () => {
-    const text = typeof value === 'function' ? value() : value;
-    try {
-      await navigator.clipboard.writeText(text);
-      setStatus('copied');
-      onCopy?.(text);
-    } catch (error) {
-      setStatus('error');
-      onCopyError?.(error);
-    }
+    const result = await copy(value);
+    if (result.ok) onCopy?.(result.text);
+    else onCopyError?.(result.error);
   };
 
   const announcement = status === 'copied' ? copiedLabel : status === 'error' ? errorLabel : '';

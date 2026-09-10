@@ -1,4 +1,10 @@
-import { forwardRef } from 'react';
+'use client';
+
+import { forwardRef, useRef } from 'react';
+import { Button } from '../Button/Button';
+import { Icon } from '../Icon/Icon';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
+import { useCopyToClipboard } from '../../constants/copy-to-clipboard';
 import './DescriptionList.css';
 
 export interface DescriptionTermProps extends React.ComponentPropsWithoutRef<'dt'> {
@@ -20,6 +26,28 @@ export interface DescriptionDetailsProps extends React.ComponentPropsWithoutRef<
    */
   as?: React.ElementType;
   children?: React.ReactNode;
+  /**
+   * Añade un botón de copiar al final del valor, alineado al margen derecho.
+   * Es para los datos que se copian —una URL de callback, un identificador, el
+   * valor de un registro TXT—: siguen siendo texto corriente, no código.
+   */
+  copyable?: boolean;
+  /**
+   * Qué se copia. Por defecto, el texto de `children`. Solo hace falta cuando
+   * lo que se ve y lo que se copia no coinciden (un valor abreviado, una URL
+   * con el protocolo escondido).
+   */
+  copyText?: string;
+  /**
+   * Nombre accesible del botón de copiar. Default castellano.
+   * @default 'Copiar'
+   */
+  copyLabel?: string;
+  /**
+   * Acuse tras copiar, anunciado en una región viva. Default castellano.
+   * @default 'Copiado'
+   */
+  copiedLabel?: string;
 }
 
 export interface DescriptionListProps extends React.ComponentPropsWithoutRef<'dl'> {
@@ -71,13 +99,56 @@ export const DescriptionTerm = forwardRef<HTMLElement, DescriptionTermProps>(
  * Valor de una `DescriptionList`. Es el `<dd>` de siempre con la clase
  * `description-list__details`; mismas razones y mismo contrato que
  * `DescriptionTerm`. Varios seguidos son varios valores de un mismo término.
+ *
+ * Con `copyable`, el valor gana un botón de copiar al final de la fila. El
+ * valor sigue siendo **texto corriente**: un dato que se copia no es código, y
+ * meterlo en un `CodeBlock` solo para tener el botón lo disfrazaba de código.
+ * Sin `copyable`, el marcado y el dibujo son exactamente los de siempre.
  */
 export const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProps>(
-  function DescriptionDetails({ as: Element = 'dd', className, children, ...rest }, ref) {
-    const classes = ['description-list__details', className].filter(Boolean).join(' ');
+  function DescriptionDetails({
+    as: Element = 'dd',
+    className,
+    children,
+    copyable = false,
+    copyText,
+    copyLabel = 'Copiar',
+    copiedLabel = 'Copiado',
+    ...rest
+  }, ref) {
+    const valueRef = useRef<HTMLSpanElement>(null);
+    const { status, copy } = useCopyToClipboard();
+    const copied = status === 'copied';
+
+    const classes = [
+      'description-list__details',
+      copyable ? 'description-list__details--copyable' : '',
+      className,
+    ].filter(Boolean).join(' ');
+
+    if (!copyable) {
+      return (
+        <Element ref={ref} className={classes} {...rest}>
+          {children}
+        </Element>
+      );
+    }
+
     return (
       <Element ref={ref} className={classes} {...rest}>
-        {children}
+        <span ref={valueRef} className="description-list__value">{children}</span>
+        <Button
+          iconOnly
+          variant="ghost"
+          size="sm"
+          aria-label={copyLabel}
+          onClick={() => copy(() => copyText ?? valueRef.current?.textContent ?? '')}
+          className="description-list__copy"
+        >
+          <Icon name={copied ? 'check' : 'copy'} size="sm" />
+        </Button>
+        {/* El icono cambia para quien ve; para quien escucha, este anuncio. */}
+        <VisuallyHidden role="status">{copied ? copiedLabel : ''}</VisuallyHidden>
       </Element>
     );
   },

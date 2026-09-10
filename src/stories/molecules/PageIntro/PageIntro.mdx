@@ -11,6 +11,22 @@ La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace fal
 <Canvas of={PageIntroStories.SoloTitulo} />
 <Canvas of={PageIntroStories.ConMasTexto} />
 
+## La entradilla es una frase
+
+`description` **es una frase y termina con puntuación final**: un punto, o el signo que le toque —«¿Olvidaste tu contraseña?»—. No es un rótulo ni un subtítulo, así que no se queda a medias.
+
+```tsx
+// ✓ Correcto
+<PageIntro title="Miembros" description="Quién entra en la organización y con qué permisos." />
+
+// ✗ Incorrecto — sin punto, la entradilla se lee como un rótulo
+<PageIntro title="Miembros" description="Quién entra en la organización y con qué permisos" />
+```
+
+La razón es de dibujo, no de gramática: la entradilla se pinta como cuerpo (`Paragraph size="large"`), a un peldaño del título y con su mismo ancho de lectura. Sin el punto, ese párrafo parece un `Heading` menor y la jerarquía de la cabecera —un título, un texto— se deshace. Si lo que hay que decir no llega a frase, no es una entradilla: o cabe en el título, o va en `children`.
+
+Vale para las dos caras de la pieza, la cabecera de página y la de sección. Lo que va en `children` es cuerpo normal y sigue las reglas del cuerpo.
+
 ## La acción principal de la página
 
 `actions` pone la acción que abre la página —«Invitar miembro», «Crear webhook», «Nueva organización»— **a la derecha del título, en su misma fila**. Es el sitio estable: se lee con el nombre de la página, no se mezcla con los filtros y no se pierde al hacer scroll por la tabla.

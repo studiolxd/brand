@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { CodeBlock } from '../CodeBlock/CodeBlock';
-import { DescriptionList } from '../../atoms/DescriptionList/DescriptionList';
+import {
+  DescriptionList,
+  DescriptionTerm,
+  DescriptionDetails,
+} from '../../atoms/DescriptionList/DescriptionList';
 import { Inline } from '../../atoms/Inline/Inline';
 import { CopyButton } from './CopyButton';
 
@@ -47,21 +51,36 @@ export const Tallas: Story = {
 };
 
 /**
- * Como función, el valor se evalúa en el clic: aquí se copia el identificador
- * que hay en la fila, junto a lo que copia.
+ * Como función, el valor se evalúa en el clic: aquí se copia la URL que hay al
+ * lado, junto a lo que copia. Es el caso del botón suelto: el dato no cuelga
+ * de una lista de definiciones, así que no hay `<dd>` que pueda ponerlo por su
+ * cuenta.
  */
 export const JuntoAlDato: Story = {
   name: 'Junto al dato',
-  args: { value: 'org_8f2c19ab' },
+  args: { value: () => 'https://api.studiolxd.com/hooks/8f2c19ab' },
   render: (args) => (
-    <DescriptionList>
-      <dt>Identificador de la organización</dt>
-      <dd>
-        <Inline gap="sm">
-          org_8f2c19ab
-          <CopyButton {...args} size="sm" label="Copiar el identificador" />
-        </Inline>
-      </dd>
+    <Inline gap="sm">
+      https://api.studiolxd.com/hooks/8f2c19ab
+      <CopyButton {...args} size="sm" label="Copiar la URL del webhook" />
+    </Inline>
+  ),
+};
+
+/**
+ * Dentro de una ficha, el botón no se pone a mano: `DescriptionDetails` con
+ * `copyable` monta este mismo gesto y además lo alinea al margen derecho de la
+ * fila. El `CopyButton` suelto queda para los datos que no están en un `<dl>`.
+ */
+export const EnUnaFicha: Story = {
+  name: 'En una ficha',
+  args: { value: 'org_8f2c19ab' },
+  render: () => (
+    <DescriptionList aria-label="Ficha de la organización">
+      <DescriptionTerm>Identificador de la organización</DescriptionTerm>
+      <DescriptionDetails copyable copyLabel="Copiar el identificador">
+        org_8f2c19ab
+      </DescriptionDetails>
     </DescriptionList>
   ),
 };

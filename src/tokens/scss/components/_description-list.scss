@@ -17,3 +17,5 @@ $lxd-description-list-value-font-size: 1rem; // El valor hereda el cuerpo de la 
 $lxd-description-list-value-font-weight: 300; // Peso del valor
 $lxd-description-list-value-line-height: 1.5; // Interlineado heredado del cuerpo de la superficie
 $lxd-description-list-value-color: #111e30; // Color del valor
+$lxd-description-list-copy-gap: 0.75rem; // Aire mínimo entre el valor y el botón de copiar de una fila `copyable`
+$lxd-description-list-copy-value-padding-block: max(0px, calc((2rem - 1lh) / 2)); // Aire que se le da al valor de una fila `copyable` para que su PRIMERA línea quede centrada con el botón: la mitad de lo que el botón (`2rem`, la talla `sm` de `Button`) le saca a una línea de texto. La línea va en `lh` —no en font-size × line-height— para que el valor lo resuelva el propio elemento y salga bien en las dos superficies de lectura sin pasar por `surface-public.css`. Con varias líneas el aire es simétrico, así que el bloque sigue equilibrado
