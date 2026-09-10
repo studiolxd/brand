@@ -7,6 +7,34 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [34.0.1] — 2026-09-11
+
+> **Patch.** Bug fix.
+
+- **`color-scheme` sigue al tema del brand, no a la preferencia del sistema.**
+  `base.css` anunciaba `color-scheme: light dark` en `html`, de forma estática:
+  le prometía al navegador un modo oscuro automático por `prefers-color-scheme`
+  que el sistema de tokens no hace — aquí el tema se voltea por clase o
+  atributo (`.surface-dark`, `[data-theme="dark"]`, `html.dark`) y no hay ni una
+  media query de esquema en todo el CSS generado.
+  El desajuste se veía con **el SO en oscuro y la aplicación en claro**: el
+  navegador oscurecía por su cuenta todo lo que el CSS no puede repintar
+  —scrollbars, *pickers* nativos de fecha y hora, el desplegable nativo de un
+  `<select>`— y, sobre todo, el fondo del autorrelleno de Chrome, que quedaba
+  como una barra negra ilegible sobre un campo que el CSS seguía calculando en
+  claro.
+  Ahora `html` declara `color-scheme: light` y el par `dark` va bajo esos mismos
+  tres selectores, así que el chrome nativo voltea a la vez que los tokens.
+  Como la propiedad se hereda, una banda `.surface-dark` anidada también
+  oscurece los controles nativos que contiene.
+  **No cambia el contrato:** el tema lo sigue decidiendo el producto. Quien
+  quiera seguir al sistema escucha `prefers-color-scheme` y aplica `html.dark`
+  —el `system` del `ThemeSwitcher`—, y a partir de aquí eso voltea los tokens
+  **y** el chrome nativo. Una aplicación con un selector de tema oscuro propio,
+  distinto de los tres, debe declarar `color-scheme: dark` en él.
+  Lo vigila `src/stylesheets/color-scheme.test.ts` contra el `DARK_SELECTORS`
+  de `sd.formats.mjs`, que pasa a exportarse para eso.
+
 ## [34.0.0] — 2026-09-11
 
 > **Major.**
