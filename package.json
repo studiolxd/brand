@@ -616,6 +616,10 @@
       "types": "./dist/_types/email/Email.d.ts",
       "import": "./dist/email.js"
     },
+    "./og": {
+      "types": "./dist/_types/og/index.d.ts",
+      "import": "./dist/og.js"
+    },
     "./tokens": {
       "types": "./dist/_types/tokens/tokens.d.ts",
       "import": "./dist/tokens.js"
