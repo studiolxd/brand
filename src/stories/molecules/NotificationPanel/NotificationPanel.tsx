@@ -54,7 +54,7 @@ export interface NotificationPanelProps {
    * sitio sin esperar respuesta.
    */
   onRead: (id: string) => void;
-  /** Con ella el pie pinta «Marcar todas como leídas»; sin ella, no. */
+  /** Con ella se pinta «Marcar todas como leídas» bajo la lista; sin ella, no. */
   onMarkAllRead?: () => void;
   /** Destino de la bandeja completa. */
   allHref: string;
@@ -162,9 +162,9 @@ export function NotificationPanel({
   };
 
   // El foco entra en el panel por su primer control, no por el panel entero:
-  // lo primero que se hace aquí es recorrer notificaciones. El botón de
-  // marcar todas vive ahora encima de la lista, así que se le da preferencia
-  // a la fila antes que a él o a los enlaces del pie.
+  // lo primero que se hace aquí es recorrer notificaciones. La fila va
+  // primero también en el documento, pero se busca por su clase para que
+  // seguir mandando aunque el orden del panel cambie.
   const initialFocus = useCallback(() => {
     const panel = panelRef.current;
     if (!panel) return null;
@@ -200,16 +200,6 @@ export function NotificationPanel({
             {panelLabel}
           </Heading>
         </VisuallyHidden>
-
-        {/* Encima de la lista, no en el pie: es una acción sobre el conjunto
-            que se pulsa antes de leer la lista, no un destino de servicio. */}
-        {onMarkAllRead && (
-          <div className="notification-panel__mark-all-row">
-            <Button variant="outline" size="sm" onClick={markAll}>
-              {markAllReadLabel}
-            </Button>
-          </div>
-        )}
 
         {items.length === 0 ? (
           <div className="notification-panel__empty">
@@ -269,6 +259,18 @@ export function NotificationPanel({
               );
             })}
           </ul>
+        )}
+
+        {/* Debajo de la lista y encima de los enlaces del pie: la acción sobre
+            el conjunto se ofrece después de ver el conjunto, y va separada de
+            los destinos de servicio. A ancho completo, que es lo que la
+            distingue de un enlace más del pie. */}
+        {onMarkAllRead && (
+          <div className="notification-panel__mark-all">
+            <Button variant="outline" size="sm" block onClick={markAll}>
+              {markAllReadLabel}
+            </Button>
+          </div>
         )}
 
         {/* Los dos enlaces del pie son utilitarios, no acciones de marca: van

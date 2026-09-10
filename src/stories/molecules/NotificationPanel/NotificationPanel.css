@@ -139,11 +139,12 @@
   white-space: nowrap;
 }
 
-/* Fila propia encima de la lista, alineada al final: es una acción sobre el
-   conjunto, no una fila más de la lista ni un destino de servicio del pie. */
-.notification-panel__mark-all-row {
-  display: flex;
-  justify-content: flex-end;
+/* Bloque propio entre la lista y el pie: es una acción sobre el conjunto, que
+   se ofrece después de verlo, y no un destino de servicio de los del pie. El
+   botón va a ancho completo (`block`), que es lo que lo separa de un enlace
+   más del pie; el aire lateral es el mismo de las filas, para que todo alinee
+   en una sola columna. */
+.notification-panel__mark-all {
   padding-block: var(--notification-panel-mark-all-padding-block);
   padding-inline: var(--notification-panel-padding-inline);
 }

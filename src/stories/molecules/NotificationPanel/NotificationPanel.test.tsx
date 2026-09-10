@@ -82,7 +82,7 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
     await waitFor(() => expect(within(panel).getAllByRole('button')[0]).toHaveFocus());
   });
 
-  it('con «Marcar todas» encima de la lista, el foco sigue entrando por la primera fila', async () => {
+  it('con «Marcar todas» bajo la lista, el foco sigue entrando por la primera fila', async () => {
     const user = userEvent.setup();
     setup({ onMarkAllRead: vi.fn() });
     await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
@@ -181,22 +181,27 @@ describe('NotificationPanel — pie y estado vacío', () => {
     for (const enlace of enlaces) expect(enlace).toHaveClass('link--ink');
   });
 
-  it('«Marcar todas como leídas» es un botón de contorno, encima de la lista', async () => {
+  it('«Marcar todas como leídas» es un botón de contorno a ancho completo, bajo la lista', async () => {
     const user = userEvent.setup();
     setup({ onMarkAllRead: vi.fn() });
     await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
     const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
     const boton = within(panel).getByRole('button', { name: 'Marcar todas como leídas' });
     expect(boton).toHaveClass('button--outline');
+    expect(boton).toHaveClass('button--block');
 
-    // Va antes que la lista en el orden del documento: encima, no en el pie.
+    // El orden del panel: lista → botón → enlaces del pie.
     const primeraFila = within(panel).getByRole('button', { name: /Marta ha comentado/ });
+    const [primerEnlace] = within(panel).getAllByRole('link');
     expect(
-      boton.compareDocumentPosition(primeraFila) & Node.DOCUMENT_POSITION_FOLLOWING,
+      primeraFila.compareDocumentPosition(boton) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      boton.compareDocumentPosition(primerEnlace) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
 
-  it('sin `onMarkAllRead` el pie no pinta el botón; con ella, sí, y marca todas', async () => {
+  it('sin `onMarkAllRead` no se pinta el botón; con ella, sí, y marca todas', async () => {
     const user = userEvent.setup();
     const onMarkAllRead = vi.fn();
     const { unmount } = setup();

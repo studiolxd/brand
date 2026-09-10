@@ -75,7 +75,10 @@ export const Vacio: Story = {
   args: { defaultOpen: true, count: 0, items: [] },
 };
 
-/** Con `onMarkAllRead` el pie estrena su botón; sin la prop no se pinta. */
+/**
+ * Con `onMarkAllRead` aparece el botón a ancho completo entre la lista y los
+ * enlaces del pie; sin la prop no se pinta.
+ */
 export const ConMarcarTodas: Story = {
   name: 'Con «Marcar todas»',
   args: { defaultOpen: true, onMarkAllRead: fn() },
@@ -167,8 +170,8 @@ export const ContratoMarcarLeido: Story = {
   },
 };
 
-export const ContratoMarcarTodasEncimaDeLaLista: Story = {
-  name: 'Test — «Marcar todas» va encima de la lista, alineado al final',
+export const ContratoMarcarTodasBajoLaLista: Story = {
+  name: 'Test — «Marcar todas» va bajo la lista, a ancho completo',
   tags: ['!dev'],
   args: { defaultOpen: true, onMarkAllRead: fn() },
   play: async () => {
@@ -177,22 +180,26 @@ export const ContratoMarcarTodasEncimaDeLaLista: Story = {
     const primeraFila = within(panel).getByRole('button', {
       name: /Marta Ruiz ha comentado tu propuesta/,
     });
+    const [primerEnlace] = within(panel).getAllByRole('link');
 
-    // Antes que la lista en el documento: encima, no en el pie.
+    // El orden del panel: lista → botón → enlaces del pie.
     await expect(
-      boton.compareDocumentPosition(primeraFila) & Node.DOCUMENT_POSITION_FOLLOWING,
+      primeraFila.compareDocumentPosition(boton) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    await expect(
+      boton.compareDocumentPosition(primerEnlace) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
 
-    // Alineado al final (derecha) de su fila, no centrado como el pie.
-    const fila = boton.closest('.notification-panel__mark-all-row') as HTMLElement;
-    await expect(fila).not.toBeNull();
-    // El botón se pega al borde de CONTENIDO de la fila (dentro de su
-    // padding-inline), no al borde de la caja.
-    const filaRect = fila.getBoundingClientRect();
-    const botonRect = boton.getBoundingClientRect();
-    const paddingEnd = parseFloat(getComputedStyle(fila).paddingInlineEnd);
+    // A ancho completo: ocupa el contenido de su bloque de canto a canto.
+    const bloque = boton.closest('.notification-panel__mark-all') as HTMLElement;
+    await expect(bloque).not.toBeNull();
+    const estilo = getComputedStyle(bloque);
+    const contenido =
+      bloque.getBoundingClientRect().width -
+      parseFloat(estilo.paddingInlineStart) -
+      parseFloat(estilo.paddingInlineEnd);
     // Tolerancia de un píxel: el redondeo subpíxel del navegador.
-    await expect(Math.abs(botonRect.right - (filaRect.right - paddingEnd))).toBeLessThanOrEqual(1);
+    await expect(Math.abs(boton.getBoundingClientRect().width - contenido)).toBeLessThanOrEqual(1);
 
     // Y sigue entrando el foco por la primera notificación, no por el botón.
     await waitFor(() => expect(primeraFila).toHaveFocus());
