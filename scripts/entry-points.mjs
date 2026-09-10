@@ -222,6 +222,7 @@ export const clientComponents = new Set([
   'notification-list',
   'docs-search',
   'copy-button',
+  'description-list',
   'uptime-bars',
   'confirm-dialog',
   'search-form',

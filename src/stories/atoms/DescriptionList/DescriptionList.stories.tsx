@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { DescriptionList, DescriptionTerm, DescriptionDetails } from './DescriptionList';
 
 const meta = {
@@ -58,6 +58,29 @@ export const VariosValores: Story = {
   ),
 };
 
+/**
+ * Ficha de conexión: los valores que se copian —una URL de callback, el valor
+ * de un TXT— van con `copyable`. Siguen siendo texto corriente; el botón se
+ * alinea al margen derecho de la fila.
+ */
+export const Copiable: Story = {
+  args: { children: null },
+  render: () => (
+    <DescriptionList aria-label="Conexión SSO">
+      <DescriptionTerm>URL de callback</DescriptionTerm>
+      <DescriptionDetails copyable copyLabel="Copiar la URL de callback">
+        https://cuenta.studiolxd.com/realms/slxd/broker/oidc/endpoint/callback
+      </DescriptionDetails>
+      <DescriptionTerm>Valor del TXT</DescriptionTerm>
+      <DescriptionDetails copyable copyLabel="Copiar el valor del registro TXT">
+        slxd-verify=8f2c19ab
+      </DescriptionDetails>
+      <DescriptionTerm>Estado</DescriptionTerm>
+      <DescriptionDetails>Pendiente de verificar</DescriptionDetails>
+    </DescriptionList>
+  ),
+};
+
 /** Sobre superficie oscura los bordes y los dos textos pasan a blanco por token. */
 export const SuperficieOscura: Story = {
   name: 'Superficie oscura',
@@ -68,6 +91,8 @@ export const SuperficieOscura: Story = {
       <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
       <DescriptionTerm>Servicio</DescriptionTerm><DescriptionDetails>Diseño de producto y marca</DescriptionDetails>
       <DescriptionTerm>Año</DescriptionTerm><DescriptionDetails>2024</DescriptionDetails>
+      <DescriptionTerm>Identificador</DescriptionTerm>
+      <DescriptionDetails copyable>org_8f2c19ab</DescriptionDetails>
     </DescriptionList>
   ),
 };
@@ -170,5 +195,69 @@ export const ContratoTerminoYValor: Story = {
     await expect(terminoDiv).toHaveClass('description-list__term');
     await expect(valorDiv.tagName).toBe('DIV');
     await expect(valorDiv).toHaveClass('description-list__details');
+  },
+};
+
+/**
+ * Test: `copyable` mete el botón en el propio `<dd>`, después del valor, y al
+ * pulsarlo copia el texto y lo acusa. Sin la prop, el `<dd>` no cambia.
+ */
+export const ContratoCopiable: Story = {
+  name: 'Test — copyable',
+  tags: ['!dev'],
+  args: { children: null },
+  render: () => (
+    <>
+      <DescriptionList aria-label="sin copiar">
+        <DescriptionTerm>Identificador</DescriptionTerm>
+        <DescriptionDetails>org_8f2c19ab</DescriptionDetails>
+      </DescriptionList>
+      <DescriptionList aria-label="copiable">
+        <DescriptionTerm>Identificador</DescriptionTerm>
+        <DescriptionDetails copyable copyLabel="Copiar el identificador">
+          org_8f2c19ab
+        </DescriptionDetails>
+      </DescriptionList>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Sin `copyable`, el `<dd>` es el de siempre: el texto y nada más.
+    const sinCopiar = canvas.getByLabelText('sin copiar').querySelector('dd')!;
+    await expect(sinCopiar).not.toHaveClass('description-list__details--copyable');
+    await expect(sinCopiar.querySelector('button')).toBe(null);
+    await expect(sinCopiar.children).toHaveLength(0);
+
+    const copiable = canvas.getByLabelText('copiable').querySelector('dd')!;
+    const boton = canvas.getByRole('button', { name: 'Copiar el identificador' });
+    await expect(copiable).toContainElement(boton);
+    // El botón va DESPUÉS del valor dentro del `<dd>`.
+    await expect(copiable.querySelector('.description-list__value')!.compareDocumentPosition(boton))
+      .toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+
+    // El botón se centra con la PRIMERA línea del valor, no con el bloque
+    // entero: es lo que sostiene el aire del valor, así que se comprueba.
+    const primeraLinea = document.createRange();
+    primeraLinea.selectNodeContents(copiable.querySelector('.description-list__value')!);
+    const [rectLinea] = Array.from(primeraLinea.getClientRects());
+    const rectBoton = boton.getBoundingClientRect();
+    const centro = (rect: DOMRect) => rect.top + rect.height / 2;
+    await expect(Math.abs(centro(rectLinea as DOMRect) - centro(rectBoton))).toBeLessThan(1.5);
+
+    // El navegador del test no concede permiso de portapapeles real: sin este
+    // mock, `writeText` rechaza y no hay acuse (mismo patrón que `CopyButton`).
+    let copiado = '';
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async (texto: string) => { copiado = texto; } },
+    });
+
+    await userEvent.click(boton);
+
+    await waitFor(async () => {
+      await expect(copiado).toBe('org_8f2c19ab');
+      await expect(within(copiable).getByRole('status')).toHaveTextContent('Copiado');
+    });
   },
 };

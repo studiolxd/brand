@@ -81,3 +81,28 @@
   line-height: var(--description-list-value-line-height);
   color: var(--description-list-value-color);
 }
+
+/* Fila copiable: el valor a la izquierda y el botón de copiar pegado al margen
+   derecho. Sigue siendo el mismo `<dd>` con la misma tipografía — lo único que
+   cambia es que su contenido pasa a una fila. */
+.description-list > .description-list__details--copyable {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--description-list-copy-gap);
+}
+
+/* Un valor copiable suele ser una URL o un token: sin punto donde partir, una
+   línea larga desbordaba la celda. */
+.description-list__details--copyable .description-list__value {
+  min-inline-size: 0;
+  padding-block: var(--description-list-copy-value-padding-block);
+  overflow-wrap: anywhere;
+}
+
+/* Al margen derecho, y sin encogerse por muy largo que sea el valor. El botón
+   es más alto que una línea de texto: lo que lo centra con la PRIMERA línea es
+   el aire del valor, no un desplazamiento del botón. */
+.description-list__details--copyable .description-list__copy {
+  margin-inline-start: auto;
+  flex: none;
+}

@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import './CodeBlock.css';
 import { Tag } from '../../atoms/Tag/Tag';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { useCopyToClipboard } from '../../constants/copy-to-clipboard';
 
 export interface CodeBlockProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Código a mostrar. Texto plano o nodos ya resaltados por un highlighter externo. */
@@ -43,8 +44,6 @@ export interface CodeBlockProps extends React.ComponentPropsWithoutRef<'div'> {
   className?: string;
 }
 
-const COPIED_FEEDBACK_MS = 1500;
-
 const defaultCodeLabel = (language?: string) =>
   language ? `Bloque de código ${language}` : 'Bloque de código';
 
@@ -65,25 +64,13 @@ export function CodeBlock({
   ...rest
 }: CodeBlockProps) {
   const codeRef = useRef<HTMLElement>(null);
-  const [copied, setCopied] = useState(false);
+  // Portapapeles no disponible (contexto no seguro, permiso denegado): el
+  // estado `error` del hook no se pinta aquí, así que no hay acuse. El código
+  // sigue seleccionable a mano.
+  const { status, copy } = useCopyToClipboard();
+  const copied = status === 'copied';
 
-  useEffect(() => {
-    if (!copied) return;
-    const timeout = setTimeout(() => setCopied(false), COPIED_FEEDBACK_MS);
-    return () => clearTimeout(timeout);
-  }, [copied]);
-
-  const handleCopy = async () => {
-    const text = codeRef.current?.textContent ?? '';
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-    } catch {
-      // Portapapeles no disponible (contexto no seguro, permiso denegado): sin
-      // feedback de copiado. El código sigue seleccionable a mano.
-      setCopied(false);
-    }
-  };
+  const handleCopy = () => copy(() => codeRef.current?.textContent ?? '');
 
   const detectedSingleLine = typeof children === 'string' && !children.includes('\n');
   const isSingleLine = singleLine ?? detectedSingleLine;
