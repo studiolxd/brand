@@ -50,6 +50,9 @@ La entradilla y los `children` quedan **fuera de la fila**, a ancho completo: el
 - **A partir de `md`**, título y acciones comparten fila y las acciones van pegadas al margen derecho, alineadas **a la línea base del título**. Con un título de una línea el botón queda ópticamente centrado con él; con uno de dos líneas se queda arriba, con la primera —que es donde empieza la página—, en lugar de flotar en mitad del bloque como haría `center`.
 - **Por debajo de `md`** las acciones caen **bajo el título** y van **en bloque: cada una a todo el ancho y una por línea**. En una pantalla estrecha un botón que mide lo que dice su etiqueta queda perdido bajo el título, y dos seguidos se parten a mitad de fila; a ancho completo se leen como lo que son, las salidas de la página. Lo hace la propia ranura (`align-items: stretch`), así que **no hay que pasarle `block` a los botones**. El aire entre el título y las acciones es `--page-intro-row-gap`, y el que hay entre ellas, `--page-intro-actions-gap`.
 - El título encoge por debajo de su contenido (`min-inline-size: 0`), así que un nombre largo parte líneas en lugar de empujar el botón fuera del margen.
+- `PageIntro` ocupa siempre todo el ancho disponible (`inline-size: 100%`) y no depende de que el padre lo estire: dentro de un `Stack` con el `align` por defecto (`start`) las acciones se quedan igualmente al margen derecho, no pegadas al título.
+
+<Canvas of={PageIntroStories.DentroDeUnStack} />
 
 Sin `actions` no hay fila: el título vuelve a ser hijo directo de la cabecera y el marcado es exactamente el de siempre.
 

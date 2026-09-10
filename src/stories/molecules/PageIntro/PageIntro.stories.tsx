@@ -86,6 +86,25 @@ export const ConEntradillaYAccion: Story = {
 };
 
 /**
+ * Dentro de un `Stack` sin `align` (el valor por defecto, `start`), la
+ * cabecera sigue ocupando todo el ancho y las acciones quedan al margen
+ * derecho: `PageIntro` no depende de que el padre lo estire.
+ */
+export const DentroDeUnStack: Story = {
+  name: 'Dentro de un Stack',
+  render: () => (
+    <Stack>
+      <PageIntro
+        title="Miembros"
+        description="Quién entra en la organización y con qué permisos."
+        actions={<Button>Invitar miembro</Button>}
+      />
+      <Paragraph>Resto del contenido de la página.</Paragraph>
+    </Stack>
+  ),
+};
+
+/**
  * Cabecera de una sección dentro de la página: `level={2}` y `as="div"` cuando
  * la sección ya vive dentro de otro `header`.
  */

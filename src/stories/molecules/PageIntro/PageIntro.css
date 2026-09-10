@@ -1,9 +1,14 @@
 /* Título y frase apilados. El aire bajo el título lo pone el propio título
    (`--text-heading-space-after`, en em: escala con su tamaño); aquí solo el
    aire entre la frase y lo que venga detrás (children), que ya es cuerpo. */
+/* Una cabecera de página siempre ocupa todo el ancho disponible: sin esto,
+   dentro de un padre flex/grid con alineación por defecto (`align-items:
+   flex-start`, `justify-items: start`) el bloque se encoge a su contenido y
+   las acciones quedan pegadas al título en vez de al margen derecho. */
 .page-intro {
   display: flex;
   flex-direction: column;
+  inline-size: 100%;
 }
 
 .page-intro .paragraph {
