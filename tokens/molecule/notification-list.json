@@ -1,6 +1,6 @@
 {
   "notification-list": {
-    "item-padding-block":     { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire vertical de cada notificación. Es una fila de página, no de popover: respira más que la del `NotificationPanel`" },
+    "item-padding-block":     { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire vertical de cada notificación. No hay línea entre filas: este aire, dos veces, es lo único que separa una notificación de la siguiente. Es una fila de página, no de popover: respira más que la del `NotificationPanel`" },
     "item-gap":               { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire entre la columna del punto y el texto" },
     "item-row-gap":           { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre el texto y la columna de acciones cuando esta cae debajo (por debajo de `md`)" },
     "item-column-gap":        { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Aire entre el texto y la columna de acciones cuando comparten fila (a partir de `md`)" },
@@ -15,20 +15,16 @@
     "body-font-size":         { "$value": "{text.font-size}",         "$type": "dimension", "$description": "Cuerpo de la notificación: texto corriente. En la página se lee entero y a la talla de lectura, no recortado como en el panel" },
     "body-line-height":       { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado del cuerpo: el de un texto que se lee entero" },
 
-    "aside-gap":              { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre las acciones de la fila y la hora, que va debajo de ellas" },
+    "aside-gap":              { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre las acciones de la fila y la hora, que va debajo de ellas. A partir de `md` es el mínimo: ahí la hora baja al final de la fila" },
     "actions-gap":            { "$value": "{form.actions-gap}",       "$type": "dimension", "$description": "Aire entre las acciones de una fila — el de los botones de un formulario: la fila de acciones del sistema es una sola" },
     "time-font-size":         { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone=\"muted\"`)" },
 
     "time-color":             { "$value": "{color.text.muted-on-light}", "$type": "color",   "$description": "Tinta de la hora: el gris de texto secundario del sistema, el mismo que da `Text tone=\"muted\"` al resto de textos secundarios" },
 
-    "separator-width":        { "$value": "{border-width.default}",   "$type": "dimension", "$description": "Grosor del separador entre filas: 1px, como todo borde del sistema" },
-    "separator-color":        { "$value": "{color.primary}",          "$type": "color",     "$description": "Color del separador entre filas: el mismo que separa las filas de una `Table`. La lista va a sangre, sin tarjeta: lo único que separa una notificación de la siguiente es esta línea" },
-
     "dot-size":               { "$value": "{icon.size-sm}",           "$type": "dimension", "$description": "Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que el panel pinta ese punto" },
     "dot-color":              { "$value": "{color.error-fill}",       "$type": "color",     "$description": "Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones" },
     "dot-margin-block-start": { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Baja el punto hasta el centro óptico de la primera línea del título" },
 
-    "surface-dark-separator-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Color del separador entre filas — superficie oscura" },
     "surface-dark-time-color":      { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Tinta de la hora — superficie oscura" }
   }
 }
