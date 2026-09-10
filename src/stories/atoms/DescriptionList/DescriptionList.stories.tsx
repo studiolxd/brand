@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { DescriptionList } from './DescriptionList';
+import { DescriptionList, DescriptionTerm, DescriptionDetails } from './DescriptionList';
 
 const meta = {
   title: 'Atoms/DescriptionList',
@@ -16,11 +16,11 @@ export const PorDefecto: Story = {
   args: { children: null },
   render: () => (
     <DescriptionList>
-      <dt>Cliente</dt><dd>Studio LXD</dd>
-      <dt>Servicio</dt><dd>Diseño de producto y marca</dd>
-      <dt>Año</dt><dd>2024</dd>
-      <dt>Sector</dt><dd>Tecnología creativa</dd>
-      <dt>Sitio web</dt><dd>studiolxd.com</dd>
+      <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
+      <DescriptionTerm>Servicio</DescriptionTerm><DescriptionDetails>Diseño de producto y marca</DescriptionDetails>
+      <DescriptionTerm>Año</DescriptionTerm><DescriptionDetails>2024</DescriptionDetails>
+      <DescriptionTerm>Sector</DescriptionTerm><DescriptionDetails>Tecnología creativa</DescriptionDetails>
+      <DescriptionTerm>Sitio web</DescriptionTerm><DescriptionDetails>studiolxd.com</DescriptionDetails>
     </DescriptionList>
   ),
 };
@@ -31,14 +31,14 @@ export const ConTextoLargo: Story = {
   args: { children: null },
   render: () => (
     <DescriptionList>
-      <dt>Descripción</dt>
-      <dd>
+      <DescriptionTerm>Descripción</DescriptionTerm>
+      <DescriptionDetails>
         Estudio de diseño especializado en identidad visual, sistemas de diseño y
         desarrollo de producto digital para empresas tecnológicas.
-      </dd>
-      <dt>Tecnologías</dt>
-      <dd>React, TypeScript, Figma, Storybook, Style Dictionary</dd>
-      <dt>Estado</dt><dd>Activo</dd>
+      </DescriptionDetails>
+      <DescriptionTerm>Tecnologías</DescriptionTerm>
+      <DescriptionDetails>React, TypeScript, Figma, Storybook, Style Dictionary</DescriptionDetails>
+      <DescriptionTerm>Estado</DescriptionTerm><DescriptionDetails>Activo</DescriptionDetails>
     </DescriptionList>
   ),
 };
@@ -49,11 +49,11 @@ export const VariosValores: Story = {
   args: { children: null },
   render: () => (
     <DescriptionList>
-      <dt>Idiomas</dt>
-      <dd>Castellano</dd>
-      <dd>Inglés</dd>
-      <dt>Formato</dt>
-      <dd>SCORM 1.2</dd>
+      <DescriptionTerm>Idiomas</DescriptionTerm>
+      <DescriptionDetails>Castellano</DescriptionDetails>
+      <DescriptionDetails>Inglés</DescriptionDetails>
+      <DescriptionTerm>Formato</DescriptionTerm>
+      <DescriptionDetails>SCORM 1.2</DescriptionDetails>
     </DescriptionList>
   ),
 };
@@ -65,9 +65,9 @@ export const SuperficieOscura: Story = {
   args: { children: null },
   render: () => (
     <DescriptionList>
-      <dt>Cliente</dt><dd>Studio LXD</dd>
-      <dt>Servicio</dt><dd>Diseño de producto y marca</dd>
-      <dt>Año</dt><dd>2024</dd>
+      <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
+      <DescriptionTerm>Servicio</DescriptionTerm><DescriptionDetails>Diseño de producto y marca</DescriptionDetails>
+      <DescriptionTerm>Año</DescriptionTerm><DescriptionDetails>2024</DescriptionDetails>
     </DescriptionList>
   ),
 };
@@ -79,9 +79,9 @@ export const Estrecha: Story = {
   args: { children: null },
   render: () => (
     <DescriptionList>
-      <dt>Cliente</dt><dd>Studio LXD</dd>
-      <dt>Servicio</dt><dd>Diseño de producto y marca</dd>
-      <dt>Año</dt><dd>2024</dd>
+      <DescriptionTerm>Cliente</DescriptionTerm><DescriptionDetails>Studio LXD</DescriptionDetails>
+      <DescriptionTerm>Servicio</DescriptionTerm><DescriptionDetails>Diseño de producto y marca</DescriptionDetails>
+      <DescriptionTerm>Año</DescriptionTerm><DescriptionDetails>2024</DescriptionDetails>
     </DescriptionList>
   ),
 };
@@ -104,5 +104,71 @@ export const Contrato: Story = {
     await expect(lista).toHaveAttribute('data-ficha', 'proyecto');
     await expect(lista.querySelectorAll('dt')).toHaveLength(1);
     await expect(lista.querySelectorAll('dd')).toHaveLength(1);
+  },
+};
+
+/**
+ * Test: los subcomponentes ponen su clase, respetan `as`, reenvían props y
+ * dibujan exactamente igual que un `<dt>`/`<dd>` suelto.
+ */
+export const ContratoTerminoYValor: Story = {
+  name: 'Test — DescriptionTerm y DescriptionDetails',
+  tags: ['!dev'],
+  args: { children: null },
+  render: () => (
+    <>
+      <DescriptionList aria-label="con clase">
+        <DescriptionTerm className="extra" data-uso="prueba">Cliente</DescriptionTerm>
+        <DescriptionDetails className="extra" data-uso="prueba">Studio LXD</DescriptionDetails>
+      </DescriptionList>
+      <DescriptionList aria-label="sin clase">
+        <dt>Cliente</dt>
+        <dd>Studio LXD</dd>
+      </DescriptionList>
+      <DescriptionList aria-label="con as">
+        <DescriptionTerm as="div" role="term">Cliente</DescriptionTerm>
+        <DescriptionDetails as="div" role="definition">Studio LXD</DescriptionDetails>
+      </DescriptionList>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const conClase = canvas.getByLabelText('con clase');
+    const termino = conClase.querySelector('dt')!;
+    const valor = conClase.querySelector('dd')!;
+    await expect(termino.tagName).toBe('DT');
+    await expect(termino).toHaveClass('description-list__term', 'extra');
+    await expect(termino).toHaveAttribute('data-uso', 'prueba');
+    await expect(valor.tagName).toBe('DD');
+    await expect(valor).toHaveClass('description-list__details', 'extra');
+
+    // El dibujo es el mismo con clase y sin ella: las clases no pintan nada nuevo.
+    const sinClase = canvas.getByLabelText('sin clase');
+    const terminoSuelto = sinClase.querySelector('dt')!;
+    const valorSuelto = sinClase.querySelector('dd')!;
+    const propiedades = [
+      'paddingBlockStart',
+      'paddingInlineStart',
+      'fontFamily',
+      'fontSize',
+      'fontWeight',
+      'lineHeight',
+      'color',
+      'borderBlockEndWidth',
+      'borderInlineEndWidth',
+    ] as const;
+    for (const propiedad of propiedades) {
+      await expect(getComputedStyle(termino)[propiedad])
+        .toBe(getComputedStyle(terminoSuelto)[propiedad]);
+      await expect(getComputedStyle(valor)[propiedad])
+        .toBe(getComputedStyle(valorSuelto)[propiedad]);
+    }
+
+    const conAs = canvas.getByLabelText('con as');
+    const [terminoDiv, valorDiv] = Array.from(conAs.children);
+    await expect(terminoDiv.tagName).toBe('DIV');
+    await expect(terminoDiv).toHaveClass('description-list__term');
+    await expect(valorDiv.tagName).toBe('DIV');
+    await expect(valorDiv).toHaveClass('description-list__details');
   },
 };
