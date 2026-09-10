@@ -12,6 +12,9 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        // Builtins de Node: los usa `@studiolxd/brand/og` para leer las fuentes
+        // del disco. Empaquetarlos no tendría sentido y rompería el build.
+        /^node:/,
         'react',
         'react-dom',
         'react/jsx-runtime',

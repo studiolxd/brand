@@ -5,6 +5,9 @@ export const entryPoints = {
   // Email
   'email':               'src/stories/email/Email.ts',
 
+  // Tarjeta social (Open Graph)
+  'og':                  'src/og/index.ts',
+
   // Atoms
   'accordion':           'src/stories/atoms/Accordion/Accordion.tsx',
   'async-multi-select':  'src/stories/atoms/AsyncMultiSelect/AsyncMultiSelect.tsx',

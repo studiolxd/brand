@@ -1,0 +1,63 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+
+import * as OgCardStories from "./OgCard.stories";
+
+<Meta title="Foundations/Tarjeta social" />
+
+# Tarjeta social (Open Graph)
+
+La imagen que se ve cuando alguien pega un enlace de la suite en Slack, WhatsApp, LinkedIn o X. Vive aquí, en el sistema, y no en cada aplicación: hasta hoy cada una copiaba los colores a mano y ninguna copiaba los mismos.
+
+<Canvas of={OgCardStories.Completa} />
+
+Una aplicación solo pone el texto. El lienzo, la tipografía, el isotipo y la franja de marca los pone el sistema.
+
+<Canvas of={OgCardStories.SoloTitulo} />
+
+## Cómo se usa
+
+```tsx
+// app/og/route.tsx
+import { ImageResponse } from 'next/og';
+import { ogCard, ogFonts, OG_SIZE, OG_CONTENT_TYPE } from '@studiolxd/brand/og';
+
+export const size = OG_SIZE;
+export const contentType = OG_CONTENT_TYPE;
+
+export default async function Og() {
+  return new ImageResponse(
+    ogCard({
+      appName: 'Bricks',
+      eyebrow: 'Documentación',
+      title: 'Cómo montar una lección con plantillas',
+      subtitle: 'De la plantilla al alumno, en cinco pasos.',
+    }),
+    { ...OG_SIZE, fonts: await ogFonts() },
+  );
+}
+```
+
+| Export | Qué es |
+| --- | --- |
+| `ogCard({ title, subtitle?, eyebrow?, appName })` | El árbol de la tarjeta, listo para `ImageResponse` o para `satori` a pelo |
+| `ogFonts()` | Las dos caras de marca en el formato que pide satori: `{ name, data, weight, style }` |
+| `OG_SIZE` | `{ width: 1200, height: 630 }` — lo que pide Open Graph |
+| `OG_CONTENT_TYPE` | `'image/png'`, para la cabecera de la ruta |
+
+De los cuatro textos, solo `title` y `appName` son obligatorios: `eyebrow` (la etiqueta de arriba a la derecha: sección, categoría, fecha) y `subtitle` desaparecen del árbol si no se pasan, en vez de dejar un hueco.
+
+## Por qué esto no se parece al resto del sistema
+
+Porque el medio no es un navegador, igual que pasa con [el correo](/docs/email-emaillayout--docs). Lo pinta **satori**, el motor que hay debajo de `ImageResponse`, y satori no carga hojas de estilo, no resuelve `var()` y solo entiende un subconjunto de flexbox. De ahí las tres rarezas del módulo:
+
+- **Los estilos van en línea.** Es la excepción declarada a la regla de «sin `style`»: aquí no hay CSS que pueda ganar. Los valores salen todos de [`@studiolxd/brand/tokens`](/docs/foundations-tokens-desde-javascript--docs) —el mismo sitio del que sale el `:root`—, así que la tarjeta no puede irse del sistema sin que se note.
+- **Las propiedades son físicas, no lógicas.** Satori no conoce `padding-inline`: un eje lógico se ignora en silencio y la tarjeta sale sin márgenes. Misma excepción que el correo, mismo motivo.
+- **La tarjeta lee a la talla pública.** Como el correo: es parte pública de la suite, no interfaz de aplicación, así que el título y el subtítulo salen de la escala de `SiteShell` (`--site-shell-heading-size-*`) y no de la de aplicación. Los 1200×630 sí son del medio, no de la retícula, igual que los 600 px de ancho del correo.
+
+## Las fuentes
+
+**Satori no lee woff2**, que es el formato en el que la web sirve la sans, y tampoco interpola ejes variables: renderiza la instancia por defecto de la fuente. Por eso `ogFonts()` no reutiliza los woff2 de `@studiolxd/brand/fonts`, sino dos TTF estáticos que viven junto a ellos —bajados de la misma API de Google Fonts, bajo la misma licencia OFL, con la procedencia anotada en el README de esa carpeta.
+
+Los dos pesos son los del sistema, no los de imprenta: **300** (`--font-weight-default`, la ligera en la que escribe la marca) y **500** (`--font-weight-emphasis`, con la que enfatiza).
+
+`ogFonts()` lee del disco, así que pide un sistema de ficheros: vale en **Node** —el runtime por defecto de una ruta OG— y no en Edge. `ogCard()` sí es puro y corre en cualquier sitio; quien necesite Edge trae los mismos ficheros por `fetch` y arma el array a mano.
