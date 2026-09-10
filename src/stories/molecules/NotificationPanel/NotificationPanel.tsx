@@ -99,7 +99,7 @@ export interface NotificationPanelProps {
 
 // Reenvía TODO lo que recibe: el panel pone clase y, cuando toca, `onClick`.
 // Un renderLink que solo copie `href` se deja por el camino la cara del
-// enlace de tinta del pie.
+// enlace del pie.
 function defaultRenderLink({ children, ...props }: NotificationPanelLinkProps) {
   return <a {...props}>{children}</a>;
 }
@@ -107,8 +107,8 @@ function defaultRenderLink({ children, ...props }: NotificationPanelLinkProps) {
 /** Lo primero que se puede enfocar dentro del panel: la primera fila, o el pie si no hay filas. */
 const FOCUSABLE = 'button, a[href]';
 
-/** Los enlaces del pie visten el tono de tinta del átomo `Link`. */
-const FOOTER_LINK_CLASS = 'link--ink notification-panel__footer-link';
+/** Los enlaces del pie son enlaces del sistema: el tono `accent` de `Link`, el de siempre. */
+const FOOTER_LINK_CLASS = 'notification-panel__footer-link';
 
 /**
  * La campana de la barra con su panel: al pulsarla se abre un `Popover`
@@ -276,10 +276,10 @@ export function NotificationPanel({
           </div>
         )}
 
-        {/* Los dos enlaces del pie son utilitarios, no acciones de marca: van
-            en tinta (`link--ink`, el tono del átomo `Link`) y uno por línea,
-            que es lo que cabe centrado a 360 px. Sin línea que lo separe de
-            la lista: solo el aire del pie. */}
+        {/* Los dos enlaces del pie son enlaces corrientes del sistema —el
+            tono `accent` de `Link`, el que tiene cualquier enlace de una
+            app— y van uno por línea, que es lo que cabe centrado a 360 px.
+            Sin línea que lo separe de la lista: solo el aire del pie. */}
         <div className="notification-panel__footer">
           <div className="notification-panel__footer-links">
             {renderLink({ href: allHref, className: FOOTER_LINK_CLASS, children: allLabel })}

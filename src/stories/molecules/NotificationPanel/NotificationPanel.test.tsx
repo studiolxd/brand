@@ -203,7 +203,12 @@ describe('NotificationPanel — pie y estado vacío', () => {
       'Ver todas las notificaciones',
       'Preferencias de notificaciones',
     ]);
-    for (const enlace of enlaces) expect(enlace).toHaveClass('link--ink');
+    // Y son enlaces corrientes del sistema: sin el tono de tinta, que los
+    // dejaba subrayados en reposo y sin subrayar en hover.
+    for (const enlace of enlaces) {
+      expect(enlace).not.toHaveClass('link--ink');
+      expect(enlace).toHaveClass('notification-panel__footer-link');
+    }
   });
 
   it('«Marcar todas como leídas» es un botón de contorno a ancho completo, bajo la lista', async () => {
