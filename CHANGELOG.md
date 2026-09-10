@@ -7,6 +7,20 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.5.1] — 2026-09-10
+
+> **Patch.**
+
+- **`PageIntro`**: la cabecera ocupa siempre todo el ancho disponible
+  (`inline-size: 100%`). Dentro de un `Stack` con el `align` por defecto
+  (`start`) se encogía a su contenido y, con `actions`, el botón quedaba
+  pegado al título en vez de al margen derecho.
+- **`Table`**: nuevo modificador `Table.Cell actions` (`white-space: nowrap`)
+  para la columna de acciones — mismo valor que el `actions` de su
+  `Table.Header`. Sin él, un enlace o botón de dos palabras («Ver recibo») se
+  partía en dos líneas aunque la columna, encogida a `min-content` por
+  `.table__header--actions`, tuviera ancho de sobra.
+
 ## [33.5.0] — 2026-09-10
 
 > **Minor.**
