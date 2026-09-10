@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.4.2] — 2026-09-10
+
+> **Patch.**
+
+- **`ImageCropDialog`**: una imagen vertical ya no se recorta por abajo. El
+  tope de alto del área va en la raíz de `ReactCrop`, que es de donde su
+  hoja hace heredar el `max-height` al envoltorio y a la imagen.
+
 ## [33.4.1] — 2026-09-10
 
 > **Patch.**
