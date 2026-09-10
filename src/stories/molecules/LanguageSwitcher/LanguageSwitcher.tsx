@@ -32,7 +32,7 @@ export interface LanguageSwitcherProps {
   /** Oculta la etiqueta (visible por defecto: en el panel va con su nombre, como el de tema). */
   labelHidden?: boolean;
   /**
-   * `compact`: un botón con el código (ES) que abre un menú — el de la barra.
+   * `compact`: un campo desplegable con el nombre del idioma actual, en su idioma, que abre un menú — el de los ajustes y la barra.
    * `list`: los idiomas desplegados en línea — el del pie.
    */
   variant?: 'compact' | 'list';
