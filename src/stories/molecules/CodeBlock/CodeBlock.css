@@ -63,3 +63,47 @@
   line-height: var(--code-block-line-height);
   white-space: pre;
 }
+
+/* ---------------------------------------------------------------------------
+   Vocabulario de resaltado.
+
+   `CodeBlock` no resalta: el resaltador es del producto. Lo que pone el sistema
+   son las CLASES y sus tokens, para que el consumidor mapee tipo → clase y no
+   tenga que pintar cada trozo con un `style={{ color }}` inline, que se salta
+   la cascada, el tema oscuro y la superficie pública.
+
+   El color de cada tipo vive en `--code-block-token-<tipo>-color`, con su par
+   oscuro por token: aquí no hay ningún color escrito.
+   --------------------------------------------------------------------------- */
+.code-block__token {
+  color: inherit;
+}
+
+.code-block__token.code-block__token--keyword     { color: var(--code-block-token-keyword-color); }
+.code-block__token.code-block__token--tag         { color: var(--code-block-token-tag-color); }
+.code-block__token.code-block__token--constant    { color: var(--code-block-token-constant-color); }
+.code-block__token.code-block__token--string      { color: var(--code-block-token-string-color); }
+.code-block__token.code-block__token--regexp      { color: var(--code-block-token-regexp-color); }
+.code-block__token.code-block__token--attribute   { color: var(--code-block-token-attribute-color); }
+.code-block__token.code-block__token--number      { color: var(--code-block-token-number-color); }
+.code-block__token.code-block__token--function    { color: var(--code-block-token-function-color); }
+.code-block__token.code-block__token--comment     { color: var(--code-block-token-comment-color); }
+.code-block__token.code-block__token--punctuation { color: var(--code-block-token-punctuation-color); }
+.code-block__token.code-block__token--operator    { color: var(--code-block-token-operator-color); }
+.code-block__token.code-block__token--variable    { color: var(--code-block-token-variable-color); }
+.code-block__token.code-block__token--property    { color: var(--code-block-token-property-color); }
+
+/* Las dos del diff son la excepción: van como RELLENO, no como tinta suelta
+   —el mismo dibujo que los `*-fill` de feedback— y marcan la línea entera, así
+   que son de bloque. */
+.code-block__token.code-block__token--inserted {
+  display: block;
+  background-color: var(--code-block-token-inserted-bg);
+  color: var(--code-block-token-inserted-color);
+}
+
+.code-block__token.code-block__token--deleted {
+  display: block;
+  background-color: var(--code-block-token-deleted-bg);
+  color: var(--code-block-token-deleted-color);
+}

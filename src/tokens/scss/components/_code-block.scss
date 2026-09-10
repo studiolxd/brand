@@ -17,3 +17,20 @@ $lxd-code-block-focus-ring-width: 2px; // Grosor del anillo de foco del área de
 $lxd-code-block-focus-ring-style: solid; // Estilo del anillo de foco del área de código
 $lxd-code-block-focus-ring-offset: 1px; // Separación del anillo de foco respecto al área de código
 $lxd-code-block-focus-ring-color: #111e30; // Color del anillo de foco — prusia, como el borde
+$lxd-code-block-token-keyword-color: #164b90; // Palabra reservada (`const`, `return`, `if`) — el azul prusia del extremo de la rampa secuencial, 7,68:1 sobre el gris del bloque
+$lxd-code-block-token-tag-color: #164b90; // Nombre de etiqueta en marcado (`<div>`) — misma tinta que la palabra reservada: es la palabra del lenguaje
+$lxd-code-block-token-constant-color: #164b90; // Constante del lenguaje (`true`, `null`, `undefined`) — misma tinta que la palabra reservada
+$lxd-code-block-token-string-color: #006616; // Literal de cadena — el verde base del sistema, 6,4:1 sobre el gris del bloque
+$lxd-code-block-token-regexp-color: #006616; // Expresión regular — misma tinta que la cadena: también es un literal
+$lxd-code-block-token-attribute-color: #006616; // Nombre de atributo en marcado (`class=`) — misma tinta que la cadena, con la que forma pareja visual
+$lxd-code-block-token-number-color: #9f431f; // Literal numérico — el extremo del brazo cálido de la divergente, 5,7:1 sobre el gris del bloque
+$lxd-code-block-token-function-color: #9f431f; // Nombre de función invocada o declarada — misma tinta cálida que el número
+$lxd-code-block-token-comment-color: #4a4a4a; // Comentario — la tinta secundaria del sistema, que es exactamente lo que un comentario es: 7,9:1 sobre el gris del bloque
+$lxd-code-block-token-punctuation-color: #4a4a4a; // Signos de puntuación y delimitadores (`{}`, `;`, `,`) — tinta secundaria: se retiran para que se lea lo que separan
+$lxd-code-block-token-operator-color: #4a4a4a; // Operadores (`=`, `=>`, `+`) — tinta secundaria, como la puntuación
+$lxd-code-block-token-variable-color: #111e30; // Identificador (nombre de variable o parámetro) — la tinta del bloque: los nombres que pone quien escribe el código son el texto corriente del fragmento, no una categoría del lenguaje
+$lxd-code-block-token-property-color: #111e30; // Nombre de propiedad de un objeto — la tinta del bloque, como el identificador
+$lxd-code-block-token-inserted-bg: #006616; // Línea añadida en un diff — relleno sólido universal (mismo color en las dos superficies), no tinta suelta: es el mismo dibujo que el resto de rellenos de feedback del sistema
+$lxd-code-block-token-inserted-color: #ffffff; // Línea añadida — contenido sobre el relleno, 7,2:1
+$lxd-code-block-token-deleted-bg: #b30000; // Línea eliminada en un diff — relleno sólido universal, por el mismo motivo que la añadida
+$lxd-code-block-token-deleted-color: #ffffff; // Línea eliminada — contenido sobre el relleno, 7,2:1

@@ -23,6 +23,44 @@
     "focus-ring-style":  { "$value": "solid",                  "$type": "string",    "$description": "Estilo del anillo de foco del área de código" },
     "focus-ring-offset": { "$value": "{border-width.default}", "$type": "dimension", "$description": "Separación del anillo de foco respecto al área de código" },
     "focus-ring-color":  { "$value": "{color.primary}",        "$type": "color",     "$description": "Color del anillo de foco — prusia, como el borde" },
-    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del anillo de foco — surface-dark, por la regla de derivación" }
+    "surface-dark-focus-ring-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color del anillo de foco — surface-dark, por la regla de derivación" },
+
+    "token": {
+      "keyword":     { "color": { "$value": "{color.chart.sequential-700}", "$type": "color", "$description": "Palabra reservada (`const`, `return`, `if`) — el azul prusia del extremo de la rampa secuencial, 7,68:1 sobre el gris del bloque" },
+                       "surface-dark-color": { "$value": "{color.chart.sequential-700-on-dark}", "$type": "color", "$description": "Palabra reservada — surface-dark: el mismo extremo de la rampa en su paso oscuro, 5,79:1 sobre el gris oscuro del bloque" } },
+      "tag":         { "color": { "$value": "{code-block.token.keyword.color}", "$type": "color", "$description": "Nombre de etiqueta en marcado (`<div>`) — misma tinta que la palabra reservada: es la palabra del lenguaje" },
+                       "surface-dark-color": { "$value": "{code-block.token.keyword.surface-dark-color}", "$type": "color", "$description": "Nombre de etiqueta — surface-dark" } },
+      "constant":    { "color": { "$value": "{code-block.token.keyword.color}", "$type": "color", "$description": "Constante del lenguaje (`true`, `null`, `undefined`) — misma tinta que la palabra reservada" },
+                       "surface-dark-color": { "$value": "{code-block.token.keyword.surface-dark-color}", "$type": "color", "$description": "Constante del lenguaje — surface-dark" } },
+
+      "string":      { "color": { "$value": "{color.green}", "$type": "color", "$description": "Literal de cadena — el verde base del sistema, 6,4:1 sobre el gris del bloque" },
+                       "surface-dark-color": { "$value": "{color.emerald}", "$type": "color", "$description": "Literal de cadena — surface-dark: la esmeralda de marca, el paso claro de la misma familia, 5,25:1 sobre el gris oscuro del bloque" } },
+      "regexp":      { "color": { "$value": "{code-block.token.string.color}", "$type": "color", "$description": "Expresión regular — misma tinta que la cadena: también es un literal" },
+                       "surface-dark-color": { "$value": "{code-block.token.string.surface-dark-color}", "$type": "color", "$description": "Expresión regular — surface-dark" } },
+      "attribute":   { "color": { "$value": "{code-block.token.string.color}", "$type": "color", "$description": "Nombre de atributo en marcado (`class=`) — misma tinta que la cadena, con la que forma pareja visual" },
+                       "surface-dark-color": { "$value": "{code-block.token.string.surface-dark-color}", "$type": "color", "$description": "Nombre de atributo — surface-dark" } },
+
+      "number":      { "color": { "$value": "{color.chart.diverging-warm-3}", "$type": "color", "$description": "Literal numérico — el extremo del brazo cálido de la divergente, 5,7:1 sobre el gris del bloque" },
+                       "surface-dark-color": { "$value": "{color.yellow}", "$type": "color", "$description": "Literal numérico — surface-dark: el amarillo de marca, el paso claro de la misma familia cálida, 5,9:1 sobre el gris oscuro del bloque" } },
+      "function":    { "color": { "$value": "{code-block.token.number.color}", "$type": "color", "$description": "Nombre de función invocada o declarada — misma tinta cálida que el número" },
+                       "surface-dark-color": { "$value": "{code-block.token.number.surface-dark-color}", "$type": "color", "$description": "Nombre de función — surface-dark" } },
+
+      "comment":     { "color": { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Comentario — la tinta secundaria del sistema, que es exactamente lo que un comentario es: 7,9:1 sobre el gris del bloque" },
+                       "surface-dark-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Comentario — surface-dark, por la regla de derivación (el par `-on-dark` del mismo rol)" } },
+      "punctuation": { "color": { "$value": "{code-block.token.comment.color}", "$type": "color", "$description": "Signos de puntuación y delimitadores (`{}`, `;`, `,`) — tinta secundaria: se retiran para que se lea lo que separan" },
+                       "surface-dark-color": { "$value": "{code-block.token.comment.surface-dark-color}", "$type": "color", "$description": "Puntuación — surface-dark" } },
+      "operator":    { "color": { "$value": "{code-block.token.comment.color}", "$type": "color", "$description": "Operadores (`=`, `=>`, `+`) — tinta secundaria, como la puntuación" },
+                       "surface-dark-color": { "$value": "{code-block.token.comment.surface-dark-color}", "$type": "color", "$description": "Operadores — surface-dark" } },
+
+      "variable":    { "color": { "$value": "{code-block.color}", "$type": "color", "$description": "Identificador (nombre de variable o parámetro) — la tinta del bloque: los nombres que pone quien escribe el código son el texto corriente del fragmento, no una categoría del lenguaje" },
+                       "surface-dark-color": { "$value": "{code-block.surface-dark-color}", "$type": "color", "$description": "Identificador — surface-dark" } },
+      "property":    { "color": { "$value": "{code-block.token.variable.color}", "$type": "color", "$description": "Nombre de propiedad de un objeto — la tinta del bloque, como el identificador" },
+                       "surface-dark-color": { "$value": "{code-block.token.variable.surface-dark-color}", "$type": "color", "$description": "Nombre de propiedad — surface-dark" } },
+
+      "inserted":    { "bg":    { "$value": "{color.success-fill}",      "$type": "color", "$description": "Línea añadida en un diff — relleno sólido universal (mismo color en las dos superficies), no tinta suelta: es el mismo dibujo que el resto de rellenos de feedback del sistema" },
+                       "color": { "$value": "{color.success-fill-text}", "$type": "color", "$description": "Línea añadida — contenido sobre el relleno, 7,2:1" } },
+      "deleted":     { "bg":    { "$value": "{color.destructive-fill}",      "$type": "color", "$description": "Línea eliminada en un diff — relleno sólido universal, por el mismo motivo que la añadida" },
+                       "color": { "$value": "{color.destructive-fill-text}", "$type": "color", "$description": "Línea eliminada — contenido sobre el relleno, 7,2:1" } }
+    }
   }
 }

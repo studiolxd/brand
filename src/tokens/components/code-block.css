@@ -6,6 +6,9 @@
   --code-block-focus-ring-style: solid; /** Estilo del anillo de foco del área de código */
   --code-block-font-family: var(--font-family-mono); /** Monoespaciada (Google Sans Code) — propia del componente (card no define tipografía) */
   --code-block-header-gap: var(--spacing-2); /** Separación en la cabecera (entre language tag y botón copiar) y entre la cabecera y el código */
+  --code-block-token-keyword-color: var(--color-chart-sequential-700); /** Palabra reservada (`const`, `return`, `if`) — el azul prusia del extremo de la rampa secuencial, 7,68:1 sobre el gris del bloque */
+  --code-block-token-string-color: var(--color-green); /** Literal de cadena — el verde base del sistema, 6,4:1 sobre el gris del bloque */
+  --code-block-token-number-color: var(--color-chart-diverging-warm-3); /** Literal numérico — el extremo del brazo cálido de la divergente, 5,7:1 sobre el gris del bloque */
   --code-block-padding-inline: var(--card-padding-inline); /** Padding horizontal — heredado de card */
   --code-block-padding-block-start: var(--card-padding-block-start); /** Padding block start — heredado de card */
   --code-block-padding-block-end: var(--card-padding-block-end); /** Padding block end — heredado de card */
@@ -16,16 +19,43 @@
   --code-block-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco del área de código: el `<pre>` con scroll horizontal es focalizable con teclado */
   --code-block-focus-ring-offset: var(--border-width-default); /** Separación del anillo de foco respecto al área de código */
   --code-block-focus-ring-color: var(--color-primary); /** Color del anillo de foco — prusia, como el borde */
+  --code-block-token-tag-color: var(--code-block-token-keyword-color); /** Nombre de etiqueta en marcado (`<div>`) — misma tinta que la palabra reservada: es la palabra del lenguaje */
+  --code-block-token-constant-color: var(--code-block-token-keyword-color); /** Constante del lenguaje (`true`, `null`, `undefined`) — misma tinta que la palabra reservada */
+  --code-block-token-regexp-color: var(--code-block-token-string-color); /** Expresión regular — misma tinta que la cadena: también es un literal */
+  --code-block-token-attribute-color: var(--code-block-token-string-color); /** Nombre de atributo en marcado (`class=`) — misma tinta que la cadena, con la que forma pareja visual */
+  --code-block-token-function-color: var(--code-block-token-number-color); /** Nombre de función invocada o declarada — misma tinta cálida que el número */
+  --code-block-token-comment-color: var(--color-text-muted-on-light); /** Comentario — la tinta secundaria del sistema, que es exactamente lo que un comentario es: 7,9:1 sobre el gris del bloque */
+  --code-block-token-inserted-bg: var(--color-success-fill); /** Línea añadida en un diff — relleno sólido universal (mismo color en las dos superficies), no tinta suelta: es el mismo dibujo que el resto de rellenos de feedback del sistema */
+  --code-block-token-inserted-color: var(--color-success-fill-text); /** Línea añadida — contenido sobre el relleno, 7,2:1 */
+  --code-block-token-deleted-bg: var(--color-destructive-fill); /** Línea eliminada en un diff — relleno sólido universal, por el mismo motivo que la añadida */
+  --code-block-token-deleted-color: var(--color-destructive-fill-text); /** Línea eliminada — contenido sobre el relleno, 7,2:1 */
   --code-block-border-radius: var(--card-border-radius); /** Radio de esquinas — heredado de card */
   --code-block-border-width: var(--card-outline-border-width); /** Grosor de borde — heredado de card (variante outline) */
   --code-block-border-color: var(--card-outline-border-color); /** Color de borde — heredado de card (variante outline, prussian), para dar contraste frente al fondo gris claro */
+  --code-block-token-punctuation-color: var(--code-block-token-comment-color); /** Signos de puntuación y delimitadores (`{}`, `;`, `,`) — tinta secundaria: se retiran para que se lea lo que separan */
+  --code-block-token-operator-color: var(--code-block-token-comment-color); /** Operadores (`=`, `=>`, `+`) — tinta secundaria, como la puntuación */
+  --code-block-token-variable-color: var(--code-block-color); /** Identificador (nombre de variable o parámetro) — la tinta del bloque: los nombres que pone quien escribe el código son el texto corriente del fragmento, no una categoría del lenguaje */
+  --code-block-token-property-color: var(--code-block-token-variable-color); /** Nombre de propiedad de un objeto — la tinta del bloque, como el identificador */
 }
 
 .surface-dark,
 [data-theme="dark"],
 html.dark {
+  --code-block-token-keyword-color: var(--color-chart-sequential-700-on-dark); /** Palabra reservada — surface-dark: el mismo extremo de la rampa en su paso oscuro, 5,79:1 sobre el gris oscuro del bloque */
+  --code-block-token-string-color: var(--color-emerald); /** Literal de cadena — surface-dark: la esmeralda de marca, el paso claro de la misma familia, 5,25:1 sobre el gris oscuro del bloque */
+  --code-block-token-number-color: var(--color-yellow); /** Literal numérico — surface-dark: el amarillo de marca, el paso claro de la misma familia cálida, 5,9:1 sobre el gris oscuro del bloque */
   --code-block-border-color: var(--color-text-on-dark); /** Color de borde — surface-dark, por la regla de derivación (como el borde de Kbd) */
   --code-block-color: var(--color-text-on-dark); /** Color de texto — surface-dark, por la regla de derivación */
   --code-block-bg: var(--color-surface-secondary-on-dark); /** Fondo — surface-dark: el mismo rol de superficie clara secundaria, en su variante oscura (el que ya usan Kbd/ProgressBar/tfoot de Table sobre `.surface-dark`) */
   --code-block-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — surface-dark, por la regla de derivación */
+  --code-block-token-tag-color: var(--code-block-token-keyword-color); /** Nombre de etiqueta — surface-dark */
+  --code-block-token-constant-color: var(--code-block-token-keyword-color); /** Constante del lenguaje — surface-dark */
+  --code-block-token-regexp-color: var(--code-block-token-string-color); /** Expresión regular — surface-dark */
+  --code-block-token-attribute-color: var(--code-block-token-string-color); /** Nombre de atributo — surface-dark */
+  --code-block-token-function-color: var(--code-block-token-number-color); /** Nombre de función — surface-dark */
+  --code-block-token-comment-color: var(--color-text-muted-on-dark); /** Comentario — surface-dark, por la regla de derivación (el par `-on-dark` del mismo rol) */
+  --code-block-token-punctuation-color: var(--code-block-token-comment-color); /** Puntuación — surface-dark */
+  --code-block-token-operator-color: var(--code-block-token-comment-color); /** Operadores — surface-dark */
+  --code-block-token-variable-color: var(--code-block-color); /** Identificador — surface-dark */
+  --code-block-token-property-color: var(--code-block-token-variable-color); /** Nombre de propiedad — surface-dark */
 }

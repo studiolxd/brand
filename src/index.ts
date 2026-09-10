@@ -194,8 +194,8 @@ export { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, 
 export type { CardProps, CardColor, CardVariant, CardMedia, CardPartProps, CardTitleProps, CardDescriptionProps } from './stories/molecules/Card/Card';
 export { Carousel, CarouselSlide } from './stories/molecules/Carousel/Carousel';
 export type { CarouselProps, CarouselSlideProps } from './stories/molecules/Carousel/Carousel';
-export { CodeBlock } from './stories/molecules/CodeBlock/CodeBlock';
-export type { CodeBlockProps } from './stories/molecules/CodeBlock/CodeBlock';
+export { CodeBlock, CodeToken } from './stories/molecules/CodeBlock/CodeBlock';
+export type { CodeBlockProps, CodeTokenProps, CodeTokenType } from './stories/molecules/CodeBlock/CodeBlock';
 export { CheckboxField } from './stories/molecules/CheckboxField/CheckboxField';
 export { FieldRows, FieldRow } from './stories/molecules/FieldRow/FieldRow';
 export type { FieldRowsProps, FieldRowProps, FieldRowWidth } from './stories/molecules/FieldRow/FieldRow';
