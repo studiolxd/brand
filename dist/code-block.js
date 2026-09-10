@@ -74,5 +74,16 @@ function f({ children: f, language: p, copyable: m = !1, singleLine: h, copyLabe
 		}), j]
 	});
 }
+function p({ type: e, className: t, children: n, ...r }) {
+	return /* @__PURE__ */ a("span", {
+		className: [
+			"code-block__token",
+			`code-block__token--${e}`,
+			t ?? ""
+		].filter(Boolean).join(" "),
+		...r,
+		children: n
+	});
+}
 //#endregion
-export { f as CodeBlock };
+export { f as CodeBlock, p as CodeToken };

@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.14.0] — 2026-09-10
+
+> **Minor.**
+
+- **`CodeToken`** en `./code-block`: resaltado de sintaxis por clases
+  (`code-block__token--<tipo>`, quince tipos en `CodeTokenType`) sobre seis
+  tintas derivadas de primitivos existentes (`code-block.token.*`, con par
+  oscuro). El resaltador sigue siendo del producto; brand solo pone la clase
+  y el color. Tabla de ámbitos TextMate → tipo en el MDX.
+- **`LineBreak`** en `./text`: el `<br>` dentro de una frase como componente.
+- **`./og`**: `OgFont.weight` tipado como `OgFontWeight` (100…900), sin casts
+  en los consumidores.
+
 ## [32.13.0] — 2026-09-10
 
 > **Minor.**

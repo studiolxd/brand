@@ -13,6 +13,12 @@ var n = t(function({ as: t = "span", tone: n = "default", className: r, children
 		...a,
 		children: i
 	});
+}), r = t(function({ className: t, ...n }, r) {
+	return /* @__PURE__ */ e("br", {
+		ref: r,
+		className: ["text__break", t ?? ""].filter(Boolean).join(" "),
+		...n
+	});
 });
 //#endregion
-export { n as Text };
+export { r as LineBreak, n as Text };
