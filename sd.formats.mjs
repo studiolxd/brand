@@ -6,7 +6,10 @@ import { formattedVariables, fileHeader } from 'style-dictionary/utils';
 // atributo en <html>). Las custom properties se heredan por cascada, así
 // que un único selector sirve tanto para el caso contextual como para el
 // root-level — no hace falta lógica distinta.
-const DARK_SELECTORS = ['.surface-dark', '[data-theme="dark"]', 'html.dark'];
+// Se exporta para que `src/stylesheets/color-scheme.test.ts` compruebe contra la
+// fuente de verdad que el `color-scheme: dark` de base.css cubre estos mismos
+// tres selectores, en vez de mantener una copia de la lista que se desincronice.
+export const DARK_SELECTORS = ['.surface-dark', '[data-theme="dark"]', 'html.dark'];
 
 // Marcador de los tokens auto-remapeados por este formato. Deliberadamente
 // distinto de "dark-" a secas: algunos componentes (ej. header.json:

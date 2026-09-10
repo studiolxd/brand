@@ -202,6 +202,14 @@ Las custom properties se heredan por cascada, así que basta con que el selector
 
 **El lienzo va emparejado.** `body` fija a la vez `background-color` y `color` con `--text-background` y `--text-color`, ambos con par oscuro. Fijar un fondo sin su color —o al revés— es el error clásico: los componentes de superficie oscura se vuelven ilegibles sobre un fondo que no volteó con ellos.
 
+**El chrome nativo va con el lienzo.** Hay una parte de la página que no pinta el CSS sino el navegador: los scrollbars, los *pickers* nativos de fecha y hora, el desplegable de un `<select>` y el fondo del autorrelleno. Eso lo decide `color-scheme`, y por eso viaja con los mismos tres selectores: `base.css` declara `color-scheme: light` en `html` y `color-scheme: dark` bajo `.surface-dark`, `[data-theme="dark"]` y `html.dark`. Como la propiedad se hereda, una banda oscura anidada también oscurece los controles nativos que contiene.
+
+Lo que **no** se hace es anunciar `color-scheme: light dark`. Eso le dice al navegador «sigo la preferencia del sistema», y el sistema de tokens no la sigue: aquí el tema se voltea por clase o atributo, nunca con `prefers-color-scheme`. Un producto que quiera seguir al SO lo escucha él y aplica `html.dark` —es el `system` del `ThemeSwitcher`—, y entonces los tokens y el chrome nativo voltean juntos. Anunciar los dos esquemas rompía justo ese emparejado: con el SO en oscuro y la app en claro, el navegador oscurecía los controles nativos por encima de un CSS que seguía calculando en claro, y los campos autorrellenados quedaban como barras negras ilegibles.
+
+Los controles del DS no dependen de esto: van repintados enteros con tokens (`all: unset` en `Checkbox` y `Switcher`, `appearance: none` en `Radio`, disparador propio en `Select`). `color-scheme` solo alcanza a lo que no se puede repintar.
+
+**Si tu aplicación tiene su propio selector de tema oscuro** —uno que no sea ninguno de los tres— declara también `color-scheme: dark` en él. Los tokens del brand tampoco voltean con un selector propio, así que el modo oscuro completo es cosa tuya: esta es la línea que se olvida.
+
 ### La regla de derivación
 
 El valor oscuro de un token **no se decide, se deriva**. Se mira a qué rol apunta el token claro y se toma su gemelo:

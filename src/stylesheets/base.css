@@ -13,9 +13,14 @@
 }
 
 html {
-  /* El lienzo tiene par claro/oscuro (ver body): el navegador debe conocer
-     los dos para pintar scrollbars y controles nativos en consonancia. */
-  color-scheme: light dark;
+  /* Lo que no podemos repintar —scrollbars, pickers nativos de fecha/hora, el
+     desplegable nativo de un <select>, el fondo de autofill— lo pinta el
+     navegador según este esquema, así que va acoplado al tema del brand y no a
+     la preferencia del SO: el DS voltea por clase/atributo y nunca por
+     `prefers-color-scheme`. Anunciar `light dark` le prometía al motor un modo
+     oscuro automático que los tokens no cumplen, y el chrome nativo salía
+     oscuro sobre un CSS que seguía calculando en claro. */
+  color-scheme: light;
 
   @media (prefers-reduced-motion: no-preference) {
     scroll-behavior: smooth;
@@ -41,6 +46,16 @@ body {
 .surface-dark {
   background-color: var(--text-background);
   color: var(--text-color);
+}
+
+/* El chrome nativo va con el lienzo, por los mismos tres selectores que voltean
+   los tokens (sd.formats.mjs › DARK_SELECTORS). `color-scheme` se hereda, así
+   que una banda `.surface-dark` anidada oscurece también los controles nativos
+   que contiene, y la raíz (`[data-theme="dark"]`, `html.dark`) la página entera. */
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  color-scheme: dark;
 }
 
 /* El aire bajo un título es del título y escala con su tamaño (em): un h1
