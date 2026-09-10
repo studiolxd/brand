@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.4.0] — 2026-09-10
+
+> **Minor.**
+
+- **`DescriptionDetails` copiable** (`copyable`, `copyText`, `copyLabel`,
+  `copiedLabel`): el valor se lee como texto normal y el botón de copiar va
+  al final del `<dd>`. Regla: un valor que se copia va en texto, no en
+  `CodeBlock`. Conducta de copiado compartida en `useCopyToClipboard`
+  (`CopyButton`, `CodeBlock`, `DescriptionDetails`). `./description-list`
+  pasa a componente cliente.
+- **`NotificationList`**: la hora en su propia línea bajo el cuerpo y las
+  acciones (retirado el token `aside-gap`); los títulos sin leer ya no van en
+  negrita (tokens `*unread-font-weight` retirados; `read-font-weight` →
+  `title-font-weight`). Lo mismo en `NotificationPanel`, cuyos enlaces del
+  pie pasan al tono `accent` (en oscuro: amarillo, línea en hover).
+- **`PageIntro`**: la entradilla es una frase y termina con puntuación
+  (MDX y JSDoc).
+- Docs: el ejemplo de enlace en la frase de Tipografía, como código.
+
 ## [33.3.1] — 2026-09-10
 
 > **Patch.**

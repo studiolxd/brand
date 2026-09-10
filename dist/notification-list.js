@@ -17,7 +17,7 @@ function c({ items: c, renderLink: l = s, renderActions: u, onItemClick: d, onMa
 		className: ["notification-list", g].filter(Boolean).join(" "),
 		"aria-label": p,
 		children: c.map((s) => {
-			let c = s.unread, p = u?.(s), g = ["notification-list__title", c ? "notification-list__title--unread" : ""].filter(Boolean).join(" ");
+			let c = s.unread, p = u?.(s);
 			return /* @__PURE__ */ o("li", {
 				className: "notification-list__item",
 				children: [
@@ -33,11 +33,11 @@ function c({ items: c, renderLink: l = s, renderActions: u, onItemClick: d, onMa
 						className: "notification-list__text",
 						children: [s.href ? l({
 							href: s.href,
-							className: g,
+							className: "notification-list__title",
 							onClick: d ? () => d(s) : void 0,
 							children: s.title
 						}) : /* @__PURE__ */ a(r, {
-							className: g,
+							className: "notification-list__title",
 							children: s.title
 						}), s.body && /* @__PURE__ */ a(r, {
 							tone: "muted",
@@ -45,24 +45,22 @@ function c({ items: c, renderLink: l = s, renderActions: u, onItemClick: d, onMa
 							children: s.body
 						})]
 					}),
-					/* @__PURE__ */ o("div", {
-						className: "notification-list__aside",
-						children: [(f || p) && /* @__PURE__ */ o("div", {
-							className: "notification-list__actions",
-							children: [f && c && /* @__PURE__ */ a(n, {
-								variant: "text",
-								size: "sm",
-								onClick: () => f(s.id),
-								children: h
-							}), p]
-						}), s.timeDateTime ? /* @__PURE__ */ a("time", {
-							className: "notification-list__time",
-							dateTime: s.timeDateTime,
-							children: s.time
-						}) : /* @__PURE__ */ a("span", {
-							className: "notification-list__time",
-							children: s.time
-						})]
+					(f || p) && /* @__PURE__ */ o("div", {
+						className: "notification-list__actions",
+						children: [f && c && /* @__PURE__ */ a(n, {
+							variant: "text",
+							size: "sm",
+							onClick: () => f(s.id),
+							children: h
+						}), p]
+					}),
+					s.timeDateTime ? /* @__PURE__ */ a("time", {
+						className: "notification-list__time",
+						dateTime: s.timeDateTime,
+						children: s.time
+					}) : /* @__PURE__ */ a("span", {
+						className: "notification-list__time",
+						children: s.time
 					})
 				]
 			}, s.id);

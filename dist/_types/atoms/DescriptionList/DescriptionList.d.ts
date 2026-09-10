@@ -17,6 +17,28 @@ export interface DescriptionDetailsProps extends React.ComponentPropsWithoutRef<
      */
     as?: React.ElementType;
     children?: React.ReactNode;
+    /**
+     * Añade un botón de copiar al final del valor, alineado al margen derecho.
+     * Es para los datos que se copian —una URL de callback, un identificador, el
+     * valor de un registro TXT—: siguen siendo texto corriente, no código.
+     */
+    copyable?: boolean;
+    /**
+     * Qué se copia. Por defecto, el texto de `children`. Solo hace falta cuando
+     * lo que se ve y lo que se copia no coinciden (un valor abreviado, una URL
+     * con el protocolo escondido).
+     */
+    copyText?: string;
+    /**
+     * Nombre accesible del botón de copiar. Default castellano.
+     * @default 'Copiar'
+     */
+    copyLabel?: string;
+    /**
+     * Acuse tras copiar, anunciado en una región viva. Default castellano.
+     * @default 'Copiado'
+     */
+    copiedLabel?: string;
 }
 export interface DescriptionListProps extends React.ComponentPropsWithoutRef<'dl'> {
     /** Pares `<dt>` término y `<dd>` valor, en ese orden. */
@@ -46,5 +68,10 @@ export declare const DescriptionTerm: import("react").ForwardRefExoticComponent<
  * Valor de una `DescriptionList`. Es el `<dd>` de siempre con la clase
  * `description-list__details`; mismas razones y mismo contrato que
  * `DescriptionTerm`. Varios seguidos son varios valores de un mismo término.
+ *
+ * Con `copyable`, el valor gana un botón de copiar al final de la fila. El
+ * valor sigue siendo **texto corriente**: un dato que se copia no es código, y
+ * meterlo en un `CodeBlock` solo para tener el botón lo disfrazaba de código.
+ * Sin `copyable`, el marcado y el dibujo son exactamente los de siempre.
  */
 export declare const DescriptionDetails: import("react").ForwardRefExoticComponent<DescriptionDetailsProps & import("react").RefAttributes<HTMLElement>>;

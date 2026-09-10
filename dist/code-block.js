@@ -3,79 +3,67 @@ import './code-block.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Button as n } from "./button.js";
-import { Tag as r } from "./tag.js";
-import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
-import { useEffect as s, useRef as c, useState as l } from "react";
+import { n as r } from "./_shared/copy-to-clipboard.js";
+import { Tag as i } from "./tag.js";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+import { useRef as c } from "react";
 //#region src/stories/molecules/CodeBlock/CodeBlock.tsx
-var u = 1500, d = (e) => e ? `Bloque de código ${e}` : "Bloque de código";
-function f({ children: f, language: p, copyable: m = !1, singleLine: h, copyLabel: g = "Copiar código", copiedLabel: _ = "Copiado", codeLabel: v = d, className: y, ...b }) {
-	let x = c(null), [S, C] = l(!1);
-	s(() => {
-		if (!S) return;
-		let e = setTimeout(() => C(!1), u);
-		return () => clearTimeout(e);
-	}, [S]);
-	let w = async () => {
-		let e = x.current?.textContent ?? "";
-		try {
-			await navigator.clipboard.writeText(e), C(!0);
-		} catch {
-			C(!1);
-		}
-	}, T = typeof f == "string" && !f.includes("\n"), E = h ?? T, D = !!p || m, O = [
+var l = (e) => e ? `Bloque de código ${e}` : "Bloque de código";
+function u({ children: u, language: d, copyable: f = !1, singleLine: p, copyLabel: m = "Copiar código", copiedLabel: h = "Copiado", codeLabel: g = l, className: _, ...v }) {
+	let y = c(null), { status: b, copy: x } = r(), S = b === "copied", C = () => x(() => y.current?.textContent ?? ""), w = typeof u == "string" && !u.includes("\n"), T = p ?? w, E = !!d || f, D = [
 		"code-block",
-		E ? "code-block--single-line" : "",
-		y ?? ""
-	].filter(Boolean).join(" "), k = p && /* @__PURE__ */ a(r, {
+		T ? "code-block--single-line" : "",
+		_ ?? ""
+	].filter(Boolean).join(" "), O = d && /* @__PURE__ */ o(i, {
 		variant: "neutral",
 		className: "code-block__language",
-		children: p
-	}), A = m && /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a(n, {
+		children: d
+	}), k = f && /* @__PURE__ */ s(a, { children: [/* @__PURE__ */ o(n, {
 		iconOnly: !0,
 		variant: "ghost",
 		size: "sm",
-		"aria-label": g,
-		onClick: w,
+		"aria-label": m,
+		onClick: C,
 		className: "code-block__copy",
-		children: /* @__PURE__ */ a(e, {
+		children: /* @__PURE__ */ o(e, {
 			name: S ? "check" : "copy",
 			size: "sm"
 		})
-	}), /* @__PURE__ */ a(t, {
+	}), /* @__PURE__ */ o(t, {
 		role: "status",
-		children: S ? _ : ""
-	})] }), j = /* @__PURE__ */ a("pre", {
+		children: S ? h : ""
+	})] }), A = /* @__PURE__ */ o("pre", {
 		className: "code-block__pre",
 		tabIndex: 0,
 		role: "region",
-		"aria-label": v(p),
-		children: /* @__PURE__ */ a("code", {
-			ref: x,
+		"aria-label": g(d),
+		children: /* @__PURE__ */ o("code", {
+			ref: y,
 			className: "code-block__code",
-			children: f
+			children: u
 		})
 	});
-	return E ? /* @__PURE__ */ a("div", {
-		className: O,
-		...b,
-		children: /* @__PURE__ */ o("div", {
+	return T ? /* @__PURE__ */ o("div", {
+		className: D,
+		...v,
+		children: /* @__PURE__ */ s("div", {
 			className: "code-block__row",
-			children: [j, D && /* @__PURE__ */ o("div", {
+			children: [A, E && /* @__PURE__ */ s("div", {
 				className: "code-block__controls",
-				children: [k, A]
+				children: [O, k]
 			})]
 		})
-	}) : /* @__PURE__ */ o("div", {
-		className: O,
-		...b,
-		children: [D && /* @__PURE__ */ o("div", {
+	}) : /* @__PURE__ */ s("div", {
+		className: D,
+		...v,
+		children: [E && /* @__PURE__ */ s("div", {
 			className: "code-block__header",
-			children: [k, A]
-		}), j]
+			children: [O, k]
+		}), A]
 	});
 }
-function p({ type: e, className: t, children: n, ...r }) {
-	return /* @__PURE__ */ a("span", {
+function d({ type: e, className: t, children: n, ...r }) {
+	return /* @__PURE__ */ o("span", {
 		className: [
 			"code-block__token",
 			`code-block__token--${e}`,
@@ -86,4 +74,4 @@ function p({ type: e, className: t, children: n, ...r }) {
 	});
 }
 //#endregion
-export { f as CodeBlock, p as CodeToken };
+export { u as CodeBlock, d as CodeToken };

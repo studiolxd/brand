@@ -15,7 +15,7 @@ export interface NotificationListItem {
      */
     timeDateTime?: string;
     /**
-     * Sin leer: punto y peso en el título. Se dice igual que en el
+     * Sin leer: el punto del indicador. Se dice igual que en el
      * `NotificationPanel`, con el mismo booleano y en el mismo sentido.
      */
     unread: boolean;
@@ -48,8 +48,8 @@ export interface NotificationListProps {
      */
     renderLink?: RenderNotificationListLink;
     /**
-     * Las acciones **propias del producto** de cada fila («Eliminar»…), en la
-     * columna del final. Van como `Button variant="text" size="sm"`.
+     * Las acciones **propias del producto** de cada fila («Eliminar»…), al
+     * final de la fila. Van como `Button variant="text" size="sm"`.
      */
     renderActions?: (item: NotificationListItem) => ReactNode;
     /** Se llama al pulsar el título de una fila con `href`, antes de navegar. */

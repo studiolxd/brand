@@ -2,9 +2,9 @@
 import './avatar-upload.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
-import { Avatar as n } from "./avatar.js";
-import { n as r } from "./_shared/form-size.js";
-import { Button as i } from "./button.js";
+import { n } from "./_shared/form-size.js";
+import { Button as r } from "./button.js";
+import { Avatar as i } from "./avatar.js";
 import { n as ee, t as te } from "./_shared/validate.js";
 import { t as a } from "./_shared/env.js";
 import { t as o } from "./_shared/ImageCropDialog.js";
@@ -24,7 +24,7 @@ function ie(e) {
 	return e.split(",").map((e) => e.trim()).filter(Boolean).map((e) => e.startsWith(".") ? e.slice(1) : e.split("/")[1] ?? e).map((e) => e.toUpperCase()).join(", ");
 }
 function m({ src: m, name: ae, alt: h, shape: g = "circle", size: oe, accept: _ = "image/jpeg,image/png,image/webp", maxSize: v, outputMimeType: y = "image/jpeg", outputSize: b, disabled: se = !1, busy: x = !1, errorMessage: ce, onChange: le, onSelect: S, onError: C, buttonLabel: w = "Subir", buttonAccessibleLabel: T, hintLabel: ue, formatsLabel: de, maxSizeHint: fe = (e) => `máx. ${e}`, invalidTypeError: E = (e) => `Formato no admitido. Se aceptan ${e}.`, tooLargeError: D = (e) => `El archivo pesa demasiado. El máximo es ${e}.`, dropActiveMessage: pe = "Suelta la imagen sobre el avatar para subirla", dropHintLabel: O = "…o arrastra la imagen hasta el avatar", cropTitle: me = "Recortar imagen", cropDescription: k, cropCancelLabel: A = "Cancelar", cropConfirmLabel: j = "Guardar", cropCloseLabel: M = "Cerrar", cropLoadingLabel: N, cropErrorMessage: P, className: F }) {
-	let I = r(oe), L = f(null), R = f(null), [z, B] = p(null), [V, H] = p(!1), [he, U] = p(!1), [ge, W] = p(null), G = d(), K = `${G}-hint`, q = `${G}-error`, J = de ?? ie(_), Y = ue ?? [J, v === void 0 ? null : fe(te(v))].filter(Boolean).join(" · "), X = ge ?? ce, Z = se || x, Q = T ?? w;
+	let I = n(oe), L = f(null), R = f(null), [z, B] = p(null), [V, H] = p(!1), [he, U] = p(!1), [ge, W] = p(null), G = d(), K = `${G}-hint`, q = `${G}-error`, J = de ?? ie(_), Y = ue ?? [J, v === void 0 ? null : fe(te(v))].filter(Boolean).join(" · "), X = ge ?? ce, Z = se || x, Q = T ?? w;
 	a() && !Q.toLowerCase().includes(w.toLowerCase()) && console.warn(`[AvatarUpload] El nombre accesible del botón ("${Q}") no contiene su texto visible ("${w}"). WCAG 2.5.3 (Label in Name) lo exige: quien navega por voz dice lo que ve, y con estos textos no encontraría el control.`), u(() => {
 		R.current = z;
 	}, [z]), u(() => () => {
@@ -94,7 +94,7 @@ function m({ src: m, name: ae, alt: h, shape: g = "circle", size: oe, accept: _ 
 					let t = e.dataTransfer.files?.[0];
 					t && $(t);
 				},
-				children: [/* @__PURE__ */ s(n, {
+				children: [/* @__PURE__ */ s(i, {
 					src: m ?? void 0,
 					name: ae,
 					...h === void 0 ? {} : { alt: h },
@@ -125,7 +125,7 @@ function m({ src: m, name: ae, alt: h, shape: g = "circle", size: oe, accept: _ 
 							t && $(t), e.target.value = "";
 						}
 					}),
-					/* @__PURE__ */ s(i, {
+					/* @__PURE__ */ s(r, {
 						variant: "outline",
 						size: I,
 						disabled: Z,

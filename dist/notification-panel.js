@@ -17,7 +17,7 @@ function h({ children: e, ...t }) {
 		children: e
 	});
 }
-var g = "button, a[href]", _ = "link--ink notification-panel__footer-link";
+var g = "button, a[href]", _ = "notification-panel__footer-link";
 function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, allHref: C, preferencesHref: w, renderLink: T = h, label: E, countLabel: D, panelLabel: O = "Notificaciones", unreadLabel: k = "Sin leer", emptyLabel: A = "Estás al día", allLabel: j = "Ver todas las notificaciones", preferencesLabel: M = "Preferencias de notificaciones", markAllReadLabel: N = "Marcar todas como leídas", open: P, defaultOpen: F, onOpenChange: I, className: L }) {
 	let R = f(), z = p(null), [B, V] = m([]), H = (e) => e.unread && !B.includes(e.id), U = v.some(H), W = (e) => {
 		H(e) && (V((t) => [...t, e.id]), x(e.id));
@@ -84,7 +84,7 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 										/* @__PURE__ */ l(o, {
 											id: a,
 											tone: i ? "default" : "muted",
-											className: ["notification-panel__item-title", i ? "notification-panel__item-title--unread" : ""].filter(Boolean).join(" "),
+											className: "notification-panel__item-title",
 											children: n.title
 										}),
 										n.body && /* @__PURE__ */ l(o, {

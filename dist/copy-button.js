@@ -3,52 +3,43 @@ import './copy-button.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { Button as n } from "./button.js";
-import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o, useEffect as s, useState as c } from "react";
+import { n as r, t as i } from "./_shared/copy-to-clipboard.js";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+import { forwardRef as c } from "react";
 //#region src/stories/molecules/CopyButton/CopyButton.tsx
-var l = 1500, u = o(function({ value: o, children: u, label: d = "Copiar", copiedLabel: f = "Copiado", errorLabel: p = "No se pudo copiar", variant: m = "ghost", size: h, feedbackDuration: g = l, onCopy: _, onCopyError: v, className: y, ...b }, x) {
-	let [S, C] = c("idle");
-	s(() => {
-		if (S === "idle") return;
-		let e = setTimeout(() => C("idle"), g);
-		return () => clearTimeout(e);
-	}, [S, g]);
-	let w = async () => {
-		let e = typeof o == "function" ? o() : o;
-		try {
-			await navigator.clipboard.writeText(e), C("copied"), _?.(e);
-		} catch (e) {
-			C("error"), v?.(e);
-		}
-	}, T = S === "copied" ? f : S === "error" ? p : "", E = u == null ? null : S === "copied" ? f : S === "error" ? p : u;
-	return /* @__PURE__ */ a(r, { children: [u == null ? /* @__PURE__ */ i(n, {
-		...b,
-		ref: x,
-		variant: m,
-		...h ? { size: h } : {},
+var l = c(function({ value: c, children: l, label: u = "Copiar", copiedLabel: d = "Copiado", errorLabel: f = "No se pudo copiar", variant: p = "ghost", size: m, feedbackDuration: h = i, onCopy: g, onCopyError: _, className: v, ...y }, b) {
+	let { status: x, copy: S } = r(h), C = async () => {
+		let e = await S(c);
+		e.ok ? g?.(e.text) : _?.(e.error);
+	}, w = x === "copied" ? d : x === "error" ? f : "", T = l == null ? null : x === "copied" ? d : x === "error" ? f : l;
+	return /* @__PURE__ */ s(a, { children: [l == null ? /* @__PURE__ */ o(n, {
+		...y,
+		ref: b,
+		variant: p,
+		...m ? { size: m } : {},
 		iconOnly: !0,
-		"aria-label": d,
-		onClick: w,
-		className: ["copy-button", y].filter(Boolean).join(" "),
-		children: /* @__PURE__ */ i(e, {
-			name: S === "copied" ? "check" : "copy",
+		"aria-label": u,
+		onClick: C,
+		className: ["copy-button", v].filter(Boolean).join(" "),
+		children: /* @__PURE__ */ o(e, {
+			name: x === "copied" ? "check" : "copy",
 			size: "sm"
 		})
-	}) : /* @__PURE__ */ a(n, {
-		...b,
-		ref: x,
-		variant: m,
-		...h ? { size: h } : {},
-		onClick: w,
-		className: ["copy-button", y].filter(Boolean).join(" "),
-		children: [/* @__PURE__ */ i(e, {
-			name: S === "copied" ? "check" : "copy",
+	}) : /* @__PURE__ */ s(n, {
+		...y,
+		ref: b,
+		variant: p,
+		...m ? { size: m } : {},
+		onClick: C,
+		className: ["copy-button", v].filter(Boolean).join(" "),
+		children: [/* @__PURE__ */ o(e, {
+			name: x === "copied" ? "check" : "copy",
 			size: "sm"
-		}), E]
-	}), /* @__PURE__ */ i(t, {
+		}), T]
+	}), /* @__PURE__ */ o(t, {
 		role: "status",
-		children: T
+		children: w
 	})] });
 });
 //#endregion
-export { u as CopyButton };
+export { l as CopyButton };
