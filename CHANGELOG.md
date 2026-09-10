@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.1.0] — 2026-09-10
+
+> **Minor.**
+
+- **`PageIntro` con `actions`**: la acción principal de la página a la derecha
+  del título (fila `page-intro__row`, alineación `baseline` desde `md`; bajo
+  `md`, las acciones bajo el título). `as?: 'header' | 'div'` para usarlo
+  como cabecera de sección. Sin `actions` el marcado no cambia. Tokens
+  `page-intro.*` de aire. El MDX fija los tres niveles de acciones: cabecera
+  (acción principal), `FilterBar` (limpiar filtros) y `DataTable.toolbar`
+  (acciones sobre la tabla), con una página de listado de ejemplo.
+
 ## [33.0.1] — 2026-09-10
 
 > **Patch.**
