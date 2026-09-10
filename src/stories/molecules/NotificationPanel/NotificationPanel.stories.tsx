@@ -310,8 +310,26 @@ export const ContratoHoraBajoElCuerpo: Story = {
   },
 };
 
+export const ContratoSinNegrita: Story = {
+  name: 'Test — el título de una fila sin leer no va en negrita',
+  tags: ['!dev'],
+  args: { defaultOpen: true },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const titulos = Array.from(
+      panel.querySelectorAll<HTMLElement>('.notification-panel__item-title'),
+    );
+    await expect(titulos.length).toBeGreaterThan(1);
+    // Igual que en la bandeja: un solo peso para todos los títulos, leídos o
+    // no. Lo no leído lo dice el punto.
+    const pesos = titulos.map((titulo) => getComputedStyle(titulo).fontWeight);
+    await expect(new Set(pesos).size).toBe(1);
+    await expect(panel.querySelector('.notification-panel__dot')).not.toBeNull();
+  },
+};
+
 export const ContratoPie: Story = {
-  name: 'Test — los únicos enlaces son los dos del pie, en tinta',
+  name: 'Test — los únicos enlaces son los dos del pie, en tono accent',
   tags: ['!dev'],
   args: { defaultOpen: true },
   play: async () => {
@@ -322,8 +340,34 @@ export const ContratoPie: Story = {
       'Ver todas las notificaciones',
       'Preferencias de notificaciones',
     ]);
-    for (const enlace of enlaces) {
-      await expect(enlace).toHaveClass('link--ink');
+    // Y se ven como cualquier enlace del sistema: el tono por defecto de
+    // `Link`, el mismo que un `<a>` crudo, no el de tinta. En claro los dos
+    // tonos coinciden, así que la comprobación se hace también en oscuro, que
+    // es donde se separan (amarillo sin línea, frente a blanco con línea).
+    const patron = document.createElement('a');
+    patron.href = '#';
+    patron.textContent = 'patrón';
+    document.body.appendChild(patron);
+
+    const raiz = document.documentElement;
+    const temaPrevio = raiz.getAttribute('data-theme');
+    try {
+      for (const tema of [null, 'dark']) {
+        if (tema) raiz.setAttribute('data-theme', tema);
+        else raiz.removeAttribute('data-theme');
+
+        const referencia = getComputedStyle(patron);
+        for (const enlace of enlaces) {
+          const estilo = getComputedStyle(enlace);
+          await expect(enlace).not.toHaveClass('link--ink');
+          await expect(estilo.color).toBe(referencia.color);
+          await expect(estilo.boxShadow).toBe(referencia.boxShadow);
+        }
+      }
+    } finally {
+      if (temaPrevio) raiz.setAttribute('data-theme', temaPrevio);
+      else raiz.removeAttribute('data-theme');
+      patron.remove();
     }
   },
 };

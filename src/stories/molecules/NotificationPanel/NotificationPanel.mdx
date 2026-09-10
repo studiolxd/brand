@@ -32,7 +32,7 @@ Bajo el puntero **la fila no pinta nada**: ni relleno —los estados no se relle
 
 ## La lista no salta bajo el dedo
 
-Al marcar una fila leída, la fila **cambia en el sitio**: pierde el punto y el peso, y se queda donde estaba. No desaparece ni se reordena, aunque el consumidor ya haya recargado sus datos: lo que el panel enseña mientras está abierto lo decide él. Al cerrarlo se olvida de lo marcado aquí y vuelve a mandar `items`.
+Al marcar una fila leída, la fila **cambia en el sitio**: pierde el punto y se queda donde estaba. El título no cambia de peso —va siempre al del cuerpo de texto, igual que en la bandeja—: lo no leído lo dice el punto, y nada más. No desaparece ni se reordena, aunque el consumidor ya haya recargado sus datos: lo que el panel enseña mientras está abierto lo decide él. Al cerrarlo se olvida de lo marcado aquí y vuelve a mandar `items`.
 
 La fila ya leída sigue en el recorrido de teclado, pero se anuncia con `aria-disabled`: no hace nada. Se queda enfocable a propósito — deshabilitarla de verdad tiraría el foco al `body` justo después de pulsarla.
 
@@ -51,9 +51,11 @@ Se pinta con dos condiciones, y hacen falta las dos: `onMarkAllRead` —sin la p
 
 Dos enlaces fijos —la bandeja y las preferencias—, debajo del botón de marcar todas si lo hay, **todo centrado** y sin línea que lo separe de la lista: el aire de su padding ya marca el cambio de bloque.
 
-Los dos enlaces van en **tono tinta** (`link--ink`, la variante utilitaria del átomo `Link`) y **uno por línea**: son destinos de servicio, no la acción de marca del panel, y a 360 px los dos rótulos no caben en la misma línea.
+Los dos enlaces son **enlaces corrientes del sistema** —el tono por defecto de `Link`, el que tiene cualquier enlace dentro de una app— y van **uno por línea**, que es lo que cabe centrado a 360 px. Son los únicos sitios a los que se navega desde el panel: tienen que verse y comportarse como enlaces, no como una variante aparte.
 
-Los dos se montan sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `LegalFooter`: el panel pone `href` y la clase que les da la cara de enlace de tinta; el consumidor pone el `Link` (ver `Link`). Un `renderLink` que no propague todo lo que recibe se deja por el camino esa cara.
+Iban en tono tinta (`link--ink`). **En claro los dos tonos son idénticos** —tinta, línea en reposo y ninguna en hover: el enlace por defecto del sistema tampoco tiene color propio (ver `Link`)—, así que el cambio no se nota ahí. Donde sí se nota es **en superficie oscura**: en tinta salían en blanco y con línea en reposo, y ahora salen en amarillo, sin línea en reposo y con línea en hover, que es como se lee cualquier otro enlace del sistema sobre fondo oscuro.
+
+Los dos se montan sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `LegalFooter`: el panel pone `href` y la clase que les da su talla; el consumidor pone el `Link` (ver `Link`). Un `renderLink` que no propague todo lo que recibe se deja por el camino esa cara.
 
 ## Accesibilidad
 

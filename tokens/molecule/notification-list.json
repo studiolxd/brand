@@ -2,20 +2,18 @@
   "notification-list": {
     "item-padding-block":     { "$value": "{spacing.4}",              "$type": "dimension", "$description": "Aire vertical de cada notificación. No hay línea entre filas: este aire, dos veces, es lo único que separa una notificación de la siguiente. Es una fila de página, no de popover: respira más que la del `NotificationPanel`" },
     "item-gap":               { "$value": "{spacing.3}",              "$type": "dimension", "$description": "Aire entre la columna del punto y el texto" },
-    "item-row-gap":           { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre el texto y la columna de acciones cuando esta cae debajo (por debajo de `md`)" },
-    "item-column-gap":        { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Aire entre el texto y la columna de acciones cuando comparten fila (a partir de `md`)" },
+    "item-row-gap":           { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre las líneas de una fila: entre el texto y las acciones (por debajo de `md`) y entre el texto y la hora, que va siempre en una línea propia" },
+    "item-column-gap":        { "$value": "{spacing.5}",              "$type": "dimension", "$description": "Aire entre el texto y las acciones cuando comparten línea (a partir de `md`)" },
     "item-text-gap":          { "$value": "{spacing.1}",              "$type": "dimension", "$description": "Aire entre el título y el cuerpo" },
     "item-font-family":       { "$value": "{font-family.sans}",       "$type": "string",    "$description": "Familia tipográfica de la notificación" },
 
     "title-font-size":        { "$value": "{text.font-size}",         "$type": "dimension", "$description": "El título de una notificación es texto corriente: hereda el cuerpo de la superficie" },
     "title-line-height":      { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Interlineado del título" },
-    "unread-font-weight":     { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno" },
-    "read-font-weight":       { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso del título ya leído: el del cuerpo de texto" },
+    "title-font-weight":      { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso" },
 
     "body-font-size":         { "$value": "{text.font-size}",         "$type": "dimension", "$description": "Cuerpo de la notificación: texto corriente. En la página se lee entero y a la talla de lectura, no recortado como en el panel" },
     "body-line-height":       { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado del cuerpo: el de un texto que se lee entero" },
 
-    "aside-gap":              { "$value": "{spacing.2}",              "$type": "dimension", "$description": "Aire entre las acciones de la fila y la hora, que va debajo de ellas. A partir de `md` es el mínimo: ahí la hora baja al final de la fila" },
     "actions-gap":            { "$value": "{form.actions-gap}",       "$type": "dimension", "$description": "Aire entre las acciones de una fila — el de los botones de un formulario: la fila de acciones del sistema es una sola" },
     "time-font-size":         { "$value": "{text.paragraph.small.font-size}", "$type": "dimension", "$description": "Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone=\"muted\"`)" },
 

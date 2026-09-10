@@ -23,8 +23,7 @@
   --notification-panel-footer-gap: var(--spacing-2); /** Aire entre los enlaces del pie */
   --notification-panel-item-border-radius: var(--border-radius-default); /** Radio de cada notificación: recto, como todo el sistema */
   --notification-panel-item-title-font-size: var(--text-font-size); /** El título de una notificación es texto corriente: hereda el cuerpo de la superficie */
-  --notification-panel-item-unread-font-weight: var(--font-weight-emphasis); /** Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno */
-  --notification-panel-item-read-font-weight: var(--font-weight-default); /** Peso del título ya leído: el del cuerpo de texto */
+  --notification-panel-item-title-font-weight: var(--font-weight-default); /** Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso */
   --notification-panel-item-body-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie */
   --notification-panel-item-time-font-size: var(--text-paragraph-small-font-size); /** Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`) */
   --notification-panel-dot-color: var(--color-error-fill); /** Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones */

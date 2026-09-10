@@ -22,7 +22,7 @@ export interface NotificationListItem {
    */
   timeDateTime?: string;
   /**
-   * Sin leer: punto y peso en el título. Se dice igual que en el
+   * Sin leer: el punto del indicador. Se dice igual que en el
    * `NotificationPanel`, con el mismo booleano y en el mismo sentido.
    */
   unread: boolean;
@@ -58,8 +58,8 @@ export interface NotificationListProps {
    */
   renderLink?: RenderNotificationListLink;
   /**
-   * Las acciones **propias del producto** de cada fila («Eliminar»…), en la
-   * columna del final. Van como `Button variant="text" size="sm"`.
+   * Las acciones **propias del producto** de cada fila («Eliminar»…), al
+   * final de la fila. Van como `Button variant="text" size="sm"`.
    */
   renderActions?: (item: NotificationListItem) => ReactNode;
   /** Se llama al pulsar el título de una fila con `href`, antes de navegar. */
@@ -120,10 +120,6 @@ export function NotificationList({
       {items.map((item) => {
         const unread = item.unread;
         const acciones = renderActions?.(item);
-        const titleClass = [
-          'notification-list__title',
-          unread ? 'notification-list__title--unread' : '',
-        ].filter(Boolean).join(' ');
 
         return (
           <li key={item.id} className="notification-list__item">
@@ -142,12 +138,12 @@ export function NotificationList({
               {item.href
                 ? renderLink({
                     href: item.href,
-                    className: titleClass,
+                    className: 'notification-list__title',
                     onClick: onItemClick ? () => onItemClick(item) : undefined,
                     children: item.title,
                   })
                 : (
-                  <Text className={titleClass}>
+                  <Text className="notification-list__title">
                     {item.title}
                   </Text>
                 )}
@@ -158,36 +154,35 @@ export function NotificationList({
               )}
             </div>
 
-            {/* La columna del final: primero lo que se puede hacer con la
-                notificación y, debajo, la hora — contexto del mensaje, no
-                parte de él. Las dos cosas alineadas al extremo final. A partir
-                de `md` la columna se estira y la hora cae al final de la fila,
-                a la altura de la última línea del texto; por debajo de `md`
-                esta columna cae bajo el texto, sin cambiar de orden ni de
-                alineación. */}
-            <div className="notification-list__aside">
-              {(onMarkRead || acciones) && (
-                <div className="notification-list__actions">
-                  {onMarkRead && unread && (
-                    <Button variant="text" size="sm" onClick={() => onMarkRead(item.id)}>
-                      {markReadLabel}
-                    </Button>
-                  )}
-                  {acciones}
-                </div>
-              )}
-              {/* Con fecha máquina, la hora es un `<time datetime>`; sin
-                  ella no puede serlo —«hace 5 min» no es una fecha válida— y
-                  se queda en texto corriente. La tinta atenuada la pone la
-                  hoja, igual en los dos casos. */}
-              {item.timeDateTime ? (
-                <time className="notification-list__time" dateTime={item.timeDateTime}>
-                  {item.time}
-                </time>
-              ) : (
-                <span className="notification-list__time">{item.time}</span>
-              )}
-            </div>
+            {/* Lo que se puede hacer con la notificación. A partir de `md`
+                sube a la derecha del texto, a la altura del título; por debajo
+                cae bajo el texto, al final de línea. */}
+            {(onMarkRead || acciones) && (
+              <div className="notification-list__actions">
+                {onMarkRead && unread && (
+                  <Button variant="text" size="sm" onClick={() => onMarkRead(item.id)}>
+                    {markReadLabel}
+                  </Button>
+                )}
+                {acciones}
+              </div>
+            )}
+
+            {/* La hora cierra la fila en una línea propia, por debajo del
+                cuerpo y de las acciones, alineada al final: es contexto del
+                mensaje, no parte de él.
+
+                Con fecha máquina es un `<time datetime>`; sin ella no puede
+                serlo —«hace 5 min» no es una fecha válida— y se queda en texto
+                corriente. La tinta atenuada la pone la hoja, igual en los dos
+                casos. */}
+            {item.timeDateTime ? (
+              <time className="notification-list__time" dateTime={item.timeDateTime}>
+                {item.time}
+              </time>
+            ) : (
+              <span className="notification-list__time">{item.time}</span>
+            )}
           </li>
         );
       })}
