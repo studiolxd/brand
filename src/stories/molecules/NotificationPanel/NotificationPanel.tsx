@@ -230,29 +230,28 @@ export function NotificationPanel({
                         </>
                       )}
                     </span>
+                    {/* La fila se lee en orden: título, cuerpo y, de última,
+                        la hora — un dato de contexto, no parte del mensaje.
+                        Va alineada al final de la columna de texto. */}
                     <span className="notification-panel__item-text">
-                      {/* Título y fecha comparten línea: la fecha se va al
-                          extremo y no roba altura a la fila. */}
-                      <span className="notification-panel__item-head">
-                        <Text
-                          id={titleId}
-                          tone={unread ? 'default' : 'muted'}
-                          className={[
-                            'notification-panel__item-title',
-                            unread ? 'notification-panel__item-title--unread' : '',
-                          ].filter(Boolean).join(' ')}
-                        >
-                          {item.title}
-                        </Text>
-                        <Text tone="muted" className="notification-panel__item-time">
-                          {item.time}
-                        </Text>
-                      </span>
+                      <Text
+                        id={titleId}
+                        tone={unread ? 'default' : 'muted'}
+                        className={[
+                          'notification-panel__item-title',
+                          unread ? 'notification-panel__item-title--unread' : '',
+                        ].filter(Boolean).join(' ')}
+                      >
+                        {item.title}
+                      </Text>
                       {item.body && (
                         <Text tone="muted" className="notification-panel__item-body">
                           {item.body}
                         </Text>
                       )}
+                      <Text tone="muted" className="notification-panel__item-time">
+                        {item.time}
+                      </Text>
                     </span>
                   </button>
                 </li>

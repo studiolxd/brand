@@ -80,20 +80,14 @@
   color: var(--notification-panel-dot-color);
 }
 
+/* La columna de texto ocupa todo lo que queda de la fila: es lo que le da a
+   la hora un extremo al que alinearse. */
 .notification-panel__item-text {
   display: flex;
   flex-direction: column;
   gap: var(--notification-panel-item-text-gap);
   min-inline-size: 0;
-}
-
-/* Título y fecha, en la misma línea: el título se encoge y la fecha se queda
-   entera, alineada al extremo de la fila. */
-.notification-panel__item-head {
-  display: flex;
-  align-items: baseline;
-  gap: var(--notification-panel-item-gap);
-  inline-size: 100%;
+  flex: 1;
 }
 
 /* Los textos de la fila son `Text`, cuyo `.text` iguala la tipografía a
@@ -105,7 +99,6 @@
   line-height: var(--notification-panel-item-title-line-height);
   font-weight: var(--notification-panel-item-read-font-weight);
   min-inline-size: 0;
-  flex: 1;
 }
 
 /* Doble clase: el modificador gana al selector base. */
@@ -125,10 +118,12 @@
   line-height: var(--notification-panel-item-body-line-height);
 }
 
-/* La fecha no se parte ni se encoge: es lo que ancla la línea por la derecha. */
+/* La hora cierra la fila: última línea de la columna de texto, pegada a su
+   extremo final y sin partirse. Sin cuerpo va justo debajo del título. */
 .notification-panel__item-text .notification-panel__item-time {
   font-size: var(--notification-panel-item-time-font-size);
-  flex-shrink: 0;
+  align-self: flex-end;
+  text-align: end;
   white-space: nowrap;
 }
 

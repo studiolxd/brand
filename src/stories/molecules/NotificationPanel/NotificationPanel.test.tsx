@@ -119,6 +119,31 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
   });
 });
 
+describe('NotificationPanel — la fila', () => {
+  it('la hora va después del cuerpo, no en la línea del título', async () => {
+    const user = userEvent.setup();
+    setup();
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+
+    const fila = within(panel).getByRole('button', { name: /Marta ha comentado/ });
+    const textos = Array.from(fila.querySelectorAll('.text')).map((nodo) => nodo.textContent);
+    expect(textos).toEqual(['Marta ha comentado', 'Revisa la fase 2', 'hace 5 min']);
+  });
+
+  it('sin cuerpo, la hora va justo debajo del título', async () => {
+    const user = userEvent.setup();
+    setup();
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+
+    const fila = within(panel).getByRole('button', { name: /Vacaciones aprobadas/ });
+    expect(fila.querySelector('.notification-panel__item-body')).toBeNull();
+    const textos = Array.from(fila.querySelectorAll('.text')).map((nodo) => nodo.textContent);
+    expect(textos).toEqual(['Vacaciones aprobadas', 'hace 2 h']);
+  });
+});
+
 describe('NotificationPanel — marcar leído', () => {
   it('pulsar una fila avisa, no cierra el panel y la deja en su sitio', async () => {
     const user = userEvent.setup();

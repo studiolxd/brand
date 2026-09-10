@@ -51,8 +51,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * El adelanto con dos notificaciones sin leer: punto rojo, título en énfasis y
- * la fecha relativa al otro extremo de esa misma línea.
+ * El adelanto con dos notificaciones sin leer: punto rojo, título en énfasis,
+ * el cuerpo debajo y la hora cerrando la fila, alineada al extremo final.
  */
 export const ConNoLeidas: Story = {
   name: 'Con no leídas',
@@ -66,6 +66,33 @@ export const TodoLeido: Story = {
     defaultOpen: true,
     count: 0,
     items: items.map((item) => ({ ...item, unread: false })),
+  },
+};
+
+/**
+ * Con el cuerpo largo, recortado a dos líneas: la hora sigue siendo la última
+ * línea de la fila, alineada al final, y no se mete entre el título y el texto.
+ */
+export const ConCuerpoLargo: Story = {
+  name: 'Con cuerpo largo',
+  args: {
+    defaultOpen: true,
+    items: [
+      {
+        id: '1',
+        title: 'Marta Ruiz ha comentado tu propuesta',
+        body: '«Me cuadra el enfoque general y el reparto de fases, pero antes de enviársela al cliente revisemos el calendario de la fase 2: las dos semanas de validación se solapan con el cierre de agosto y no llegamos.»',
+        time: 'hace 5 min',
+        unread: true,
+      },
+      {
+        id: '2',
+        title: 'Sin cuerpo, la hora va justo debajo del título',
+        time: 'ayer',
+        unread: false,
+      },
+    ],
+    count: 1,
   },
 };
 
@@ -224,6 +251,37 @@ export const ContratoHoverSinBarra: Story = {
     const estilo = getComputedStyle(fila);
     await expect(estilo.boxShadow).toBe('none');
     await expect(estilo.cursor).toBe('pointer');
+  },
+};
+
+export const ContratoHoraBajoElCuerpo: Story = {
+  name: 'Test — la hora va después del cuerpo, alineada al final',
+  tags: ['!dev'],
+  args: { defaultOpen: true },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const fila = within(panel).getByRole('button', {
+      name: /Marta Ruiz ha comentado tu propuesta/,
+    });
+    const cuerpo = fila.querySelector('.notification-panel__item-body') as HTMLElement;
+    const hora = fila.querySelector('.notification-panel__item-time') as HTMLElement;
+    await expect(cuerpo).not.toBeNull();
+    await expect(hora).not.toBeNull();
+
+    // Después del cuerpo en el documento…
+    await expect(
+      cuerpo.compareDocumentPosition(hora) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    // …y también debajo, en su propia línea.
+    await expect(hora.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      cuerpo.getBoundingClientRect().bottom - 1,
+    );
+
+    // Pegada al extremo final de la columna de texto.
+    const columna = fila.querySelector('.notification-panel__item-text') as HTMLElement;
+    await expect(
+      Math.abs(hora.getBoundingClientRect().right - columna.getBoundingClientRect().right),
+    ).toBeLessThanOrEqual(1);
   },
 };
 
