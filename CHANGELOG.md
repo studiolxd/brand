@@ -7,6 +7,17 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.5.0] — 2026-09-10
+
+> **Minor.**
+
+- **`ErrorText`** (`./error-text`): el error de formulario suelto, para un
+  error que pertenece a un control o a un dato que no es un campo
+  (`<p role="alert" class="error-text">`, `as`, `id` para
+  `aria-describedby`). Misma cara que el `errorMessage` de los `*Field`, por
+  los tokens compartidos `form.error.*`. El MDX fija cuándo `ErrorText`,
+  cuándo `Alert` y cuándo `errorMessage`.
+
 ## [33.4.2] — 2026-09-10
 
 > **Patch.**
