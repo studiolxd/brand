@@ -11,6 +11,80 @@ La cabecera de una página: el **título** (`Heading` de nivel 1) y, si hace fal
 <Canvas of={PageIntroStories.SoloTitulo} />
 <Canvas of={PageIntroStories.ConMasTexto} />
 
+## La acción principal de la página
+
+`actions` pone la acción que abre la página —«Invitar miembro», «Crear webhook», «Nueva organización»— **a la derecha del título, en su misma fila**. Es el sitio estable: se lee con el nombre de la página, no se mezcla con los filtros y no se pierde al hacer scroll por la tabla.
+
+<Canvas of={PageIntroStories.ConAccion} />
+
+Una acción, o dos como mucho: la principal y una alternativa (`Button variant="outline"`), en ese orden en el JSX. Si hacen falta más, la tercera y siguientes son un menú, no un botón más.
+
+<Canvas of={PageIntroStories.ConDosAcciones} />
+
+La entradilla y los `children` quedan **fuera de la fila**, a ancho completo: el texto de la página lee de margen a margen aunque haya un botón arriba.
+
+<Canvas of={PageIntroStories.ConEntradillaYAccion} />
+
+### Cómo se alinean
+
+- **A partir de `md`**, título y acciones comparten fila y las acciones van pegadas al margen derecho, alineadas **a la línea base del título**. Con un título de una línea el botón queda ópticamente centrado con él; con uno de dos líneas se queda arriba, con la primera —que es donde empieza la página—, en lugar de flotar en mitad del bloque como haría `center`.
+- **Por debajo de `md`** las acciones caen **bajo el título, al inicio** (no a ancho completo: el botón mide lo que dice su etiqueta). El aire entre los dos es `--page-intro-row-gap`.
+- El título encoge por debajo de su contenido (`min-inline-size: 0`), así que un nombre largo parte líneas en lugar de empujar el botón fuera del margen.
+
+Sin `actions` no hay fila: el título vuelve a ser hijo directo de la cabecera y el marcado es exactamente el de siempre.
+
+## Cabecera de sección
+
+La misma pieza sirve para abrir una **sección dentro de la página**: `level={2}` para el título y, si hace falta, `as="div"` cuando esa sección ya vive dentro de otro `header` o el molde de fuera pide un elemento neutro. Una sección de ajustes —«Sesiones activas» con su botón de cerrar todas— es esto y no un montaje a mano de `Heading` + `Paragraph` + `Stack`.
+
+<Canvas of={PageIntroStories.CabeceraDeSeccion} />
+
+<Canvas of={PageIntroStories.EnSuperficieOscura} />
+
+## Los tres niveles de acción de una página
+
+Una página de listado tiene acciones de tres alcances distintos, y cada una tiene su sitio. Mezclarlas es lo que deja la acción principal perdida entre los filtros:
+
+| Alcance | Dónde va | Ejemplo |
+| --- | --- | --- |
+| **La página** | `PageIntro actions` | «Invitar miembro», «Crear webhook», «Nueva organización» |
+| **Los filtros** | `FilterBar actions` | «Limpiar filtros» |
+| **La tabla** | `DataTable toolbar` (o `footerActions`) | «Exportar», columnas visibles, acciones en lote |
+
+<Canvas of={PageIntroStories.PaginaCompleta} />
+
+```tsx
+<Stack gap="lg">
+  <PageIntro
+    title="Miembros"
+    description="Quién entra en la organización y con qué permisos."
+    actions={<Button>Invitar miembro</Button>}
+  />
+
+  <FilterBar actions={<Button variant="outline">Limpiar filtros</Button>}>
+    <SelectField label="Rol" options={roles} value={rol} onValueChange={setRol} />
+    <SelectField label="Estado" options={estados} value={estado} onValueChange={setEstado} />
+  </FilterBar>
+
+  <DataTable
+    columns={columns}
+    data={miembros}
+    ariaLabel="Miembros de la organización"
+    searchColumnId="name"
+    toolbar={<Button variant="outline">Exportar</Button>}
+  />
+</Stack>
+```
+
+## Tokens
+
+| Token | Qué mide |
+| --- | --- |
+| `--page-intro-title-space-after` | Aire bajo el título cuando comparte fila con las acciones: el mismo em que deja un título suelto, para que una cabecera con acciones y una sin ellas separen igual el título de la entradilla |
+| `--page-intro-row-column-gap` | Aire entre el título y las acciones cuando comparten fila (a partir de `md`) |
+| `--page-intro-row-gap` | Aire entre el título y las acciones cuando caen debajo (por debajo de `md`) |
+| `--page-intro-actions-gap` | Aire entre las acciones entre sí |
+
 ## Props
 
 <ArgTypes of={PageIntroStories} />

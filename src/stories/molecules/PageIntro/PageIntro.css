@@ -13,3 +13,65 @@
 .page-intro > :not(.heading) + * {
   margin-block-start: var(--spacing-3);
 }
+
+/* La fila del título: solo existe cuando hay acciones. Sin ellas el título
+   sigue siendo hijo directo de la cabecera y nada de esto se aplica.
+
+   Por debajo de `md` las acciones caen bajo el título, al inicio: el aire
+   entre los dos lo pone la fila (`row-gap`) y el margen en em del título se
+   anula, porque ahí ya no separa el título de la entradilla sino de un botón.
+   El aire bajo la fila lo pone entonces la regla general de arriba. */
+.page-intro__row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: var(--page-intro-row-gap);
+}
+
+.page-intro__row > .heading {
+  margin-block-end: 0;
+}
+
+/* Las acciones entre sí, y con su propio aire: una fila que envuelve si no
+   caben. `flex: 0 0 auto` para que midan lo suyo y no roben ancho al título. */
+.page-intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--page-intro-actions-gap);
+  flex: 0 0 auto;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  /* Título a la izquierda y acciones al margen derecho, alineadas a la línea
+     base del título: con un título de una línea el botón queda ópticamente
+     centrado con él, y con uno de dos líneas se queda arriba, con la primera
+     —que es donde empieza la página—, en lugar de flotar en mitad del bloque
+     como haría `center`. */
+  .page-intro__row {
+    flex-direction: row;
+    align-items: baseline;
+    column-gap: var(--page-intro-row-column-gap);
+    row-gap: 0;
+  }
+
+  /* El título se queda con el ancho sobrante y puede encoger por debajo de su
+     contenido: sin `min-inline-size: 0` un título largo empujaría las acciones
+     fuera del margen. Y el aire bajo el bloque vuelve a ponerlo el título en
+     em, igual que en una cabecera sin acciones. */
+  .page-intro__row > .heading {
+    flex: 1;
+    min-inline-size: 0;
+    margin-block-end: var(--page-intro-title-space-after);
+  }
+
+  /* Si la fila cierra la cabecera no deja hueco al final: la misma regla que
+     un título suelto (`:last-child` de la base). */
+  .page-intro__row:last-child > .heading {
+    margin-block-end: 0;
+  }
+
+  .page-intro > .page-intro__row + * {
+    margin-block-start: 0;
+  }
+}

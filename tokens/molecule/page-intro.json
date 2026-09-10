@@ -1,0 +1,8 @@
+{
+  "page-intro": {
+    "title-space-after": { "$value": "{text.heading.space-after}", "$type": "dimension", "$description": "Aire bajo el título cuando comparte fila con las acciones: el mismo em que deja un título suelto, para que una cabecera con acciones y una sin ellas separen igual el título de la entradilla" },
+    "row-column-gap":    { "$value": "{spacing.5}",                "$type": "dimension", "$description": "Aire entre el título y las acciones cuando comparten fila (a partir de `md`)" },
+    "row-gap":           { "$value": "{spacing.3}",                "$type": "dimension", "$description": "Aire entre el título y las acciones cuando las acciones caen debajo (por debajo de `md`)" },
+    "actions-gap":       { "$value": "{form.actions-gap}",         "$type": "dimension", "$description": "Aire entre las acciones — el de los botones de un formulario: la fila de acciones del sistema es una sola" }
+  }
+}

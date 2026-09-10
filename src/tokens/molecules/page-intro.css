@@ -1,0 +1,10 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --page-intro-title-space-after: var(--text-heading-space-after); /** Aire bajo el título cuando comparte fila con las acciones: el mismo em que deja un título suelto, para que una cabecera con acciones y una sin ellas separen igual el título de la entradilla */
+  --page-intro-row-column-gap: var(--spacing-5); /** Aire entre el título y las acciones cuando comparten fila (a partir de `md`) */
+  --page-intro-row-gap: var(--spacing-3); /** Aire entre el título y las acciones cuando las acciones caen debajo (por debajo de `md`) */
+  --page-intro-actions-gap: var(--form-actions-gap); /** Aire entre las acciones — el de los botones de un formulario: la fila de acciones del sistema es una sola */
+}
