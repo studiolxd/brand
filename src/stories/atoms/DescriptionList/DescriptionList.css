@@ -16,24 +16,33 @@
   }
 }
 
+/* `DescriptionTerm` y `DescriptionDetails` no añaden pintura: la lista ya viste
+   sus hijos por selector de elemento y el dibujo tiene que ser idéntico con
+   clase o sin ella. Por eso cada clase se suma al selector de elemento que ya
+   existía, en vez de declarar nada por su cuenta. */
 .description-list > dt,
-.description-list > dd {
+.description-list > dd,
+.description-list > .description-list__term,
+.description-list > .description-list__details {
   padding-block: var(--description-list-cell-padding-block);
   padding-inline: var(--description-list-cell-padding-inline);
   margin: 0;
 }
 
-.description-list > dd {
+.description-list > dd,
+.description-list > .description-list__details {
   border-block-end-width: var(--description-list-border-width);
   border-block-end-style: var(--description-list-border-style);
   border-block-end-color: var(--description-list-border-color);
 }
 
-.description-list > dd:last-of-type {
+.description-list > dd:last-of-type,
+.description-list > .description-list__details:last-of-type {
   border-block-end: none;
 }
 
-.description-list > dt {
+.description-list > dt,
+.description-list > .description-list__term {
   display: flex;
   align-items: center;
   font-family: var(--description-list-term-font-family);
@@ -48,7 +57,8 @@
    lo pinta también el término (no solo la descripción), y el término gana
    además el borde vertical que lo separa de su valor. */
 @media (min-width: 768px) /* --breakpoint-md */ {
-  .description-list > dt {
+  .description-list > dt,
+  .description-list > .description-list__term {
     border-block-end-width: var(--description-list-border-width);
     border-block-end-style: var(--description-list-border-style);
     border-block-end-color: var(--description-list-border-color);
@@ -57,12 +67,14 @@
     border-inline-end-color: var(--description-list-border-color);
   }
 
-  .description-list > dt:last-of-type {
+  .description-list > dt:last-of-type,
+  .description-list > .description-list__term:last-of-type {
     border-block-end: none;
   }
 }
 
-.description-list > dd {
+.description-list > dd,
+.description-list > .description-list__details {
   font-family: var(--description-list-value-font-family);
   font-size: var(--description-list-value-font-size);
   font-weight: var(--description-list-value-font-weight);

@@ -16,8 +16,9 @@ cosas comparables, con las mismas columnas, lo que toca es una `Table`.
 ## Anatomía
 
 Un `<dl>` en rejilla de dos columnas: la del término se ajusta a su contenido y
-la del valor ocupa el resto. Los `<dt>` y `<dd>` los pone quien la usa, en ese
-orden; el componente solo aporta la caja, los separadores y la tipografía.
+la del valor ocupa el resto. Dentro van pares de término y valor en ese orden
+—`DescriptionTerm` y `DescriptionDetails`, o los `<dt>`/`<dd>` a pelo—; el
+componente solo aporta la caja, los separadores y la tipografía.
 
 El término se viste como una **etiqueta** (el cuerpo de interfaz, 14px) y el
 valor como **texto corriente**, que sigue el cuerpo de la superficie: 16px en
@@ -25,10 +26,24 @@ aplicación, 20px dentro de un `SiteShell`.
 
 <Canvas of={DescriptionListStories.ConTextoLargo} />
 
-Un término puede llevar varios valores: se encadenan `<dd>` debajo del mismo
-`<dt>`.
+Un término puede llevar varios valores: se encadenan `DescriptionDetails` debajo
+del mismo `DescriptionTerm`.
 
 <Canvas of={DescriptionListStories.VariosValores} />
+
+## DescriptionTerm y DescriptionDetails
+
+`DescriptionTerm` es el `<dt>` con la clase `description-list__term` y
+`DescriptionDetails` el `<dd>` con `description-list__details`. La lista ya viste
+sus hijos por selector de elemento, así que las clases **no pintan nada nuevo**:
+el dibujo es idéntico se usen los átomos o las etiquetas sueltas. Están para las
+apps que no pueden escribir HTML a pelo, que reciben así una pieza del sistema
+para cada hueco.
+
+Su prop `as` cambia el elemento —default `'dt'` y `'dd'`— para el caso en que el
+par no cuelga de un `<dl>` real y hay que dar el rol a mano (`as="div"
+role="term"` / `role="definition"`). Solo entonces: dentro de una
+`DescriptionList` los elementos correctos son `<dt>` y `<dd>`.
 
 ## Pantalla estrecha
 
@@ -59,8 +74,9 @@ Bordes, término y valor pasan a blanco por tokens `surface-dark-*`.
 - El elemento es `<dl>` con `<dt>`/`<dd>`: los lectores de pantalla anuncian la
   relación término→valor, que es justo la información que aporta la ficha. Una
   rejilla de `<div>` con la misma pinta no dice nada.
-- El orden importa: cada `<dd>` pertenece al `<dt>` que lo precede. Para varios
-  valores de un mismo término, varios `<dd>` seguidos; no repitas el término.
+- El orden importa: cada valor pertenece al término que lo precede. Para varios
+  valores de un mismo término, varios `DescriptionDetails` seguidos; no repitas
+  el término.
 - Cuando hay más de una ficha en la página, dale un `aria-label` a cada una para
   distinguirlas.
 - Término y valor van en la tinta de la superficie (prusia o blanco), ambos AAA:
