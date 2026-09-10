@@ -1,4 +1,4 @@
-import { token } from '../tokens/tokens';
+import { token } from '../../tokens/tokens';
 
 /**
  * El nombre de la familia de marca, tal y como lo registran `ogFonts()` y lo

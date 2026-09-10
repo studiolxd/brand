@@ -30,8 +30,8 @@
  */
 import { createElement, type ReactElement } from 'react';
 
-import { logomarkPaths, logomarkViewBox } from '../stories/atoms/Logomark/logomarkAssets';
-import { token, tokenPx } from '../tokens/tokens';
+import { logomarkPaths, logomarkViewBox } from '../atoms/Logomark/logomarkAssets';
+import { token, tokenPx } from '../../tokens/tokens';
 
 import { OG_FONT_FAMILY } from './ogTypeface';
 

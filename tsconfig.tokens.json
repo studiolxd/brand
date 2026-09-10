@@ -1,9 +1,29 @@
+/*
+ * El módulo de tokens (`@studiolxd/brand/tokens`), que vive fuera de
+ * `src/stories/` y por eso no cabe en el programa de la librería: su raíz
+ * común es otra.
+ *
+ * Va como proyecto COMPUESTO (`composite`) porque `tsconfig.lib.json` lo
+ * referencia: un módulo publicado que lea tokens —hoy `@studiolxd/brand/og`—
+ * los importa por su `.d.ts` ya emitido y no por el fuente. Si entrara el
+ * fuente, la raíz común del programa de la librería subiría de `src/stories`
+ * a `src`, y TODOS los tipos caerían en `dist/_types/stories/…` en vez de
+ * `dist/_types/atoms/…`: se romperían de golpe los `types` de cada export.
+ *
+ * Extiende `tsconfig.app.json` y no `tsconfig.lib.json` a propósito: si
+ * extendiera el de la librería heredaría su referencia a este mismo fichero.
+ */
 {
-  "extends": "./tsconfig.lib.json",
+  "extends": "./tsconfig.app.json",
   "compilerOptions": {
+    "composite": true,
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tokens.tsbuildinfo",
     "rootDir": "src/tokens",
     "declarationDir": "./dist/_types/tokens"
   },
-  "include": ["src/tokens/tokens.ts"]
+  "include": ["src/tokens/tokens.ts", "src/tokens/tokens.json"]
 }

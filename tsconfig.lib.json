@@ -1,11 +1,35 @@
+/*
+ * Los tipos de la librería: un `.d.ts` por componente bajo `dist/_types/`.
+ *
+ * La raíz común del programa es `src/stories`, y de ahí sale el layout que
+ * apuntan los `types` de cada entrada de `package.json#exports`
+ * (`dist/_types/atoms/Button/Button.d.ts`…). Cualquier fichero de fuera de
+ * `src/stories` que entre en el programa sube esa raíz a `src` y desplaza el
+ * árbol entero: por eso el módulo de tokens entra por REFERENCIA de proyecto
+ * —`tsc` resuelve su import al `.d.ts` que ya emitió `tsconfig.tokens.json`,
+ * no al fuente—. De ahí que `build:lib` invoque `tsc -b --force`, no `tsc -p`:
+ * `-b` construye el proyecto referenciado antes que este, y `--force` porque
+ * `build:lib` acaba de borrar `dist/` y el `.tsbuildinfo` que sobrevive en
+ * `node_modules/.tmp` daría por emitido lo que ya no está (TS6305).
+ *
+ * `types` incluye `node` por `@studiolxd/brand/og`, que lee las fuentes del
+ * disco con `node:fs/promises`.
+ */
 {
   "extends": "./tsconfig.app.json",
+  "references": [{ "path": "./tsconfig.tokens.json" }],
   "compilerOptions": {
+    /* Propio, y no el que hereda de `tsconfig.app.json`: `tsc -b` escribe un
+       `.tsbuildinfo` por proyecto, y con el nombre heredado este build pisaba
+       el del proyecto `app` —el que typechequea `tsc -b` en la raíz— con su
+       lista de ficheros, mucho más corta. */
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo",
     "noEmit": false,
     "allowImportingTsExtensions": false,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "./dist/_types"
+    "declarationDir": "./dist/_types",
+    "types": ["vite/client", "node"]
   },
   "include": [
     "src/stories/**/*.tsx",
