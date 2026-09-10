@@ -60,4 +60,6 @@ Porque el medio no es un navegador, igual que pasa con [el correo](/docs/email-e
 
 Los dos pesos son los del sistema, no los de imprenta: **300** (`--font-weight-default`, la ligera en la que escribe la marca) y **500** (`--font-weight-emphasis`, con la que enfatiza).
 
+El campo `weight` de `OgFont` está tipado con `OgFontWeight` (`100 | 200 | … | 900`), la misma unión literal que pide satori: quien arma el array a mano no tiene que castear.
+
 `ogFonts()` lee del disco, así que pide un sistema de ficheros: vale en **Node** —el runtime por defecto de una ruta OG— y no en Edge. `ogCard()` sí es puro y corre en cualquier sitio; quien necesite Edge trae los mismos ficheros por `fetch` y arma el array a mano.
