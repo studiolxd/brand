@@ -1,6 +1,10 @@
 .checkbox-field {
   display: flex;
   flex-direction: column;
+  /* Los hijos no se estiran: la etiqueta pulsable termina donde termina su
+     texto, no en el borde del formulario (si no, el hueco vacío a la derecha
+     también conmutaba el control). */
+  align-items: flex-start;
   gap: var(--checkbox-field-stack-gap);
 }
 

@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.0.1] — 2026-09-10
+
+> **Patch.**
+
+- **`SwitcherField`, `CheckboxField`, `RadioField`**: la etiqueta pulsable
+  termina donde termina su texto. La raíz es una columna flex y estiraba el
+  `label` al ancho del formulario, así que el hueco vacío a la derecha también
+  conmutaba el control (`align-items: flex-start` en la raíz).
+- `LanguageSwitcher`: el comentario del compacto dice nombre, no código.
+
 ## [33.0.0] — 2026-09-10
 
 > **Major.** Ningún componente emite ya un atributo `style` en el HTML del
