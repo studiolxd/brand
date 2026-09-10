@@ -33,6 +33,18 @@ La región se monta siempre, vacía, y se le mete el texto al copiar: si apareci
 
 <Canvas of={CopyButtonStories.JuntoAlDato} />
 
+## Dónde NO se pone a mano
+
+Hay dos sitios del sistema que ya montan este gesto por su cuenta, y en ellos el `CopyButton` suelto sobra.
+
+**En una ficha**, el camino por defecto es `DescriptionDetails` con `copyable`: pone el mismo botón, lo alinea al margen derecho de la fila y deja el valor como texto corriente. El `CopyButton` suelto queda para el dato que **no** cuelga de una lista de definiciones —el de arriba, sin `<dl>` alrededor—.
+
+<Canvas of={CopyButtonStories.EnUnaFicha} />
+
+**En un bloque de código**, lo mismo con `CodeBlock` y `copyable`: el botón va en su cabecera. Ojo con la frontera — un dato que se copia (una URL, un identificador, el valor de un TXT) es texto, no código: eso es una ficha con `copyable`, no un `CodeBlock`.
+
+<Canvas of={CopyButtonStories.EnUnBloqueDeCodigo} />
+
 ## Cuando el portapapeles no está
 
 `navigator.clipboard` no existe en contextos no seguros y puede tener el permiso denegado. Ahí el botón **lo dice** (`errorLabel`) en vez de fingir que ha copiado, y llama a `onCopyError`. Un acuse falso es peor que ninguno: el usuario pega y no hay nada.
@@ -43,10 +55,6 @@ La región se monta siempre, vacía, y se le mete el texto al copiar: si apareci
 <Canvas of={CopyButtonStories.Tallas} />
 
 `ghost` por defecto —vive pegado al dato que copia, no compite con él—; `outline` cuando va suelto y necesita caja propia.
-
-`CodeBlock` con `copyable` ya monta este mismo gesto en su cabecera: ahí no hace falta ponerlo a mano.
-
-<Canvas of={CopyButtonStories.EnUnBloqueDeCodigo} />
 
 ## Superficie oscura
 
