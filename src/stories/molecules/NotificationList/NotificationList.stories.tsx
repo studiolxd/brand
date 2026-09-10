@@ -10,7 +10,7 @@ const items: NotificationListItem[] = [
     body: '«Me cuadra el enfoque general y el reparto de fases, pero antes de enviársela al cliente revisemos el calendario de la fase 2: las dos semanas de validación se solapan con el cierre de agosto.»',
     time: 'hace 5 min',
     timeDateTime: '2026-09-10T09:12:00Z',
-    read: false,
+    unread: true,
     href: '/propuestas/48#comentario-12',
   },
   {
@@ -19,7 +19,7 @@ const items: NotificationListItem[] = [
     body: 'Del 4 al 15 de agosto.',
     time: 'hace 2 h',
     timeDateTime: '2026-09-10T07:20:00Z',
-    read: false,
+    unread: true,
     href: '/ausencias/312',
   },
   {
@@ -27,7 +27,7 @@ const items: NotificationListItem[] = [
     title: 'Quedan 3 días para cerrar el parte de horas',
     time: 'ayer',
     timeDateTime: '2026-09-09T08:00:00Z',
-    read: true,
+    unread: false,
   },
   {
     id: '4',
@@ -35,7 +35,7 @@ const items: NotificationListItem[] = [
     body: 'Factura F-2026-0184 del proveedor Nordeste Servicios, pendiente de validación.',
     time: 'hace 3 días',
     timeDateTime: '2026-09-07T11:45:00Z',
-    read: true,
+    unread: false,
     href: '/facturas/F-2026-0184',
   },
 ];
@@ -80,7 +80,7 @@ export const SinAcciones: Story = {
 /** Todo leído: sin puntos y sin «Marcar como leída», que solo sale en las no leídas. */
 export const TodoLeido: Story = {
   name: 'Con todo leído',
-  args: { items: items.map((item) => ({ ...item, read: true })) },
+  args: { items: items.map((item) => ({ ...item, unread: false })) },
 };
 
 /**

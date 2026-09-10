@@ -32,7 +32,7 @@ Tres bloques, y el orden en el que se leen:
 2. **El texto**: el título —enlace a la notificación si trae `href`— y el cuerpo debajo, entero.
 3. **La columna del final**: las acciones y, **debajo de ellas, la hora**, las dos alineadas al extremo final. La hora cierra la fila porque es contexto del mensaje, no parte de él.
 
-Lo no leído se dice con **el punto y el peso del título**, nunca con un relleno (Foundations → Colores), y el punto lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»).
+Lo no leído se dice con **el punto y el peso del título**, nunca con un relleno (Foundations → Colores), y el punto lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»). El estado va en `unread`, **el mismo booleano y en el mismo sentido que el del `NotificationPanel`**: los mismos datos sirven para la página y para el adelanto, sin invertir nada por el camino.
 
 Por debajo de `md` la columna del final **cae bajo el texto** —empezando en la misma columna que él, con el hueco del punto respetado— con las acciones y la hora al final de línea.
 

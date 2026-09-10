@@ -21,8 +21,11 @@ export interface NotificationListItem {
    * hora se pinta en un `<time datetime>`; sin ella, en texto corriente.
    */
   timeDateTime?: string;
-  /** Ya leída: sin punto, título en peso de cuerpo. */
-  read: boolean;
+  /**
+   * Sin leer: punto y peso en el título. Se dice igual que en el
+   * `NotificationPanel`, con el mismo booleano y en el mismo sentido.
+   */
+  unread: boolean;
   /** Destino de la notificación. Sin él, el título no es un enlace. */
   href?: string;
   /**
@@ -115,7 +118,7 @@ export function NotificationList({
       aria-label={label}
     >
       {items.map((item) => {
-        const unread = !item.read;
+        const unread = item.unread;
         const acciones = renderActions?.(item);
         const titleClass = [
           'notification-list__title',

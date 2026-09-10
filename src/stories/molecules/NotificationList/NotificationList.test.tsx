@@ -15,11 +15,11 @@ const items: NotificationListItem[] = [
     body: 'Revisa la fase 2',
     time: 'hace 5 min',
     timeDateTime: '2026-09-10T09:12:00Z',
-    read: false,
+    unread: true,
     href: '/propuestas/48',
   },
-  { id: '2', title: 'Vacaciones aprobadas', time: 'hace 2 h', read: false },
-  { id: '3', title: 'Parte de horas', time: 'ayer', read: true, href: '/horas' },
+  { id: '2', title: 'Vacaciones aprobadas', time: 'hace 2 h', unread: true },
+  { id: '3', title: 'Parte de horas', time: 'ayer', unread: false, href: '/horas' },
 ];
 
 /**
