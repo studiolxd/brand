@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react
 import { AppShellContext, type SidebarState } from './AppShellContext';
 import { TooltipProvider } from '../../atoms/Tooltip/Tooltip';
 import { SkipLink } from '../../atoms/SkipLink/SkipLink';
+import { useCssProperties } from '../../constants/css-properties';
 import './AppShell.css';
 
 // Re-export de API pública del subpath ./app-shell; solo penaliza el HMR de
@@ -127,15 +128,20 @@ export function AppShell({
 
   // Al cruzar a escritorio el cajón deja de existir por construcción (`drawer`
   // exige !isDesktop); su flag se limpia en el siguiente cierre.
+  const shellRef = useCssProperties({ '--app-shell-sidebar-width': width ? `${width}px` : undefined });
   const drawer = !isDesktop && drawerOpen;
+  // El ancho de la barra lo fija el usuario arrastrando: es un dato de cliente
+  // y se escribe por el CSSOM, no en un atributo `style` (que una app con
+  // `style-src 'self'` descartaría sin avisar). En el HTML del servidor la
+  // barra sale con el ancho del token `sidebar.width`.
   return (
     <AppShellContext.Provider value={value}>
       <TooltipProvider>
         <SkipLink href="#main-content">{skipLabel}</SkipLink>
         <div
+          ref={shellRef}
           className="app-shell"
           data-sidebar={sidebarValue}
-          style={width ? ({ '--app-shell-sidebar-width': `${width}px` } as React.CSSProperties) : undefined}
         >
           {header}
           <div className="app-shell__body">

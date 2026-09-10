@@ -74,7 +74,10 @@ const COLUMNS_MAX = 5;
  *
  * En el breakpoint ancho el número de columnas sigue al número de grupos
  * (hasta `COLUMNS_MAX`), para que un quinto grupo no caiga solo en una
- * segunda fila; en `md` y `lg` el número de columnas es fijo.
+ * segunda fila; en `md` y `lg` el número de columnas es fijo. El dato viaja
+ * en `data-columns`, no en un atributo `style`: una app con
+ * `style-src 'self'` descarta el atributo sin avisar y el grupo de más caía
+ * a la segunda fila.
  */
 export function SiteNav({
   groups,
@@ -84,9 +87,8 @@ export function SiteNav({
 }: SiteNavProps) {
   const classes = ['site-nav', className].filter(Boolean).join(' ');
   const wideColumns = Math.min(groups.length, COLUMNS_MAX) || 1;
-  const style = { '--site-nav-wide-columns': wideColumns } as React.CSSProperties;
   return (
-    <nav className={classes} aria-label={label} style={style}>
+    <nav className={classes} aria-label={label} data-columns={wideColumns}>
       {groups.map((group) => (
         <div key={group.id} className="site-nav__group">
           <Heading level={2} size={6} className="site-nav__label">

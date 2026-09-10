@@ -15,7 +15,7 @@ Va en el **gris de atenuación** y el punto final en el acento: lo que se lee es
 
 <Canvas of={SparklineStories.Area} />
 
-Con `color` toma una ranura de serie —**solo una referencia a token**— para emparejarla con un gráfico que esté al lado.
+Con `series` toma una de las **ocho ranuras categóricas** del sistema (1–8) para emparejarla con un gráfico que esté al lado. La ranura viaja en `data-series` y la resuelve la hoja: el color no pasa nunca por un atributo `style`.
 
 <Canvas of={SparklineStories.ConColorDeSerie} />
 

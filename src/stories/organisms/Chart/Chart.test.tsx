@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { Chart, type ChartDatum, type ChartSeries } from './Chart';
 
 const porciones: ChartDatum[] = [
@@ -23,13 +24,18 @@ const seriesCompetencias: ChartSeries[] = [
   { key: 'despues', label: 'Al terminar' },
 ];
 
+// El color no viaja nunca en un atributo `style` (una app con `style-src
+// 'self'` lo descartaría): el de dato va como atributo de presentación de SVG
+// y la ranura de token, en `data-slot`.
 describe('Chart — color por dato', () => {
   it('la paleta de dato gana a la ranura de token', () => {
     const { container } = render(
       <Chart type="bar" data={porciones} series={seriePorciones} xKey="paso"
         colors={['#1E7FF6']} ariaLabel="Barras" />,
     );
-    expect(container.querySelector('.chart__bar')).toHaveStyle({ '--chart-mark-color': '#1E7FF6' });
+    const bar = container.querySelector('.chart__bar');
+    expect(bar).toHaveAttribute('fill', '#1E7FF6');
+    expect(bar).not.toHaveAttribute('data-slot');
   });
 
   it('el color propio de la serie gana a la paleta de dato', () => {
@@ -37,14 +43,39 @@ describe('Chart — color por dato', () => {
       <Chart type="bar" data={porciones} series={[{ key: 'personas', label: 'Personas', color: '#123456' }]}
         xKey="paso" colors={['#1E7FF6']} ariaLabel="Barras" />,
     );
-    expect(container.querySelector('.chart__bar')).toHaveStyle({ '--chart-mark-color': '#123456' });
+    const bar = container.querySelector('.chart__bar');
+    expect(bar).toHaveAttribute('fill', '#123456');
+    expect(bar).not.toHaveAttribute('data-slot');
   });
 
   it('sin paleta ni color, la serie toma su ranura de token', () => {
     const { container } = render(
       <Chart type="bar" data={porciones} series={seriePorciones} xKey="paso" ariaLabel="Barras" />,
     );
-    expect(container.querySelector('.chart__bar')).toHaveStyle({ '--chart-mark-color': 'var(--chart-series-1)' });
+    const bar = container.querySelector('.chart__bar');
+    expect(bar).toHaveAttribute('data-slot', '1');
+    expect(bar).not.toHaveAttribute('fill');
+  });
+});
+
+// Lo que importa es el HTML del servidor: una app con `style-src 'self'` (sin
+// `style-src-attr 'unsafe-inline'`) descarta ahí todo atributo `style`, sin
+// violación en consola. Lo que el componente escriba después por el CSSOM no
+// pasa por esa puerta.
+describe('Chart — sin atributo style en el HTML del servidor', () => {
+  it('ni las marcas ni las muestras salen con style, ni con paleta de dato', () => {
+    const html = renderToStaticMarkup(
+      <Chart type="bar" data={porciones} series={seriePorciones} xKey="paso"
+        colors={['#1E7FF6']} ariaLabel="Barras" />,
+    );
+    expect(html).not.toContain('style=');
+  });
+
+  it('tampoco las formas de porción, que colorean por categoría', () => {
+    const html = renderToStaticMarkup(
+      <Chart type="treemap" data={porciones} series={seriePorciones} xKey="paso" ariaLabel="Treemap" />,
+    );
+    expect(html).not.toContain('style=');
   });
 });
 

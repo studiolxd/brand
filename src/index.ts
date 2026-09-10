@@ -130,7 +130,7 @@ export { TimeSelect } from './stories/atoms/TimeSelect/TimeSelect';
 export type { TimeSelectProps, TimeValue } from './stories/atoms/TimeSelect/TimeSelect';
 export { SkipLink } from './stories/atoms/SkipLink/SkipLink';
 export { Sparkline } from './stories/atoms/Sparkline/Sparkline';
-export type { SparklineProps } from './stories/atoms/Sparkline/Sparkline';
+export type { SparklineProps, SparklineSeries } from './stories/atoms/Sparkline/Sparkline';
 export { Slider } from './stories/atoms/Slider/Slider';
 export type { SliderProps } from './stories/atoms/Slider/Slider';
 export { Spinner } from './stories/atoms/Spinner/Spinner';

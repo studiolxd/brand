@@ -7,6 +7,18 @@
   --sparkline-mark-color: var(--sparkline-color);
 }
 
+/* La ranura de serie llega en `data-series` (1–8) y se resuelve aquí: en un
+   atributo `style` una app con `style-src 'self'` la perdería sin avisar y la
+   chispa saldría siempre en el gris de atenuación. */
+.sparkline[data-series="1"] { --sparkline-mark-color: var(--chart-series-1); }
+.sparkline[data-series="2"] { --sparkline-mark-color: var(--chart-series-2); }
+.sparkline[data-series="3"] { --sparkline-mark-color: var(--chart-series-3); }
+.sparkline[data-series="4"] { --sparkline-mark-color: var(--chart-series-4); }
+.sparkline[data-series="5"] { --sparkline-mark-color: var(--chart-series-5); }
+.sparkline[data-series="6"] { --sparkline-mark-color: var(--chart-series-6); }
+.sparkline[data-series="7"] { --sparkline-mark-color: var(--chart-series-7); }
+.sparkline[data-series="8"] { --sparkline-mark-color: var(--chart-series-8); }
+
 .sparkline__line {
   fill: none;
   stroke: var(--sparkline-mark-color);

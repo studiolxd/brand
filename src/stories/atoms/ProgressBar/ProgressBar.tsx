@@ -26,6 +26,10 @@ export interface ProgressBarProps {
  *
  * La cifra se escribe dentro del relleno cuando cabe y fuera cuando no; siempre
  * es decorativa (`aria-hidden`), porque el valor lo anuncia `aria-valuenow`.
+ *
+ * El porcentaje viaja en `data-value` (0–100) y la hoja lo traduce a la
+ * fracción del carril: en un atributo `style` una app con `style-src 'self'`
+ * lo descartaría sin avisar y la barra se quedaría a cero.
  */
 const INSIDE_THRESHOLD = Number(progressBarTokens['progress-bar']['inside-label-threshold'].$value);
 
@@ -51,8 +55,9 @@ export function ProgressBar({
         aria-valuemax={100}
         aria-valuetext={`${clamped}%`}
         aria-label={label}
+        data-value={clamped}
       >
-        <div className="progress-bar__fill" style={{ width: `${clamped}%` }}>
+        <div className="progress-bar__fill">
           {labelInside && (
             <span className="progress-bar__label progress-bar__label--inside" aria-hidden="true">
               {clamped}%
@@ -63,7 +68,6 @@ export function ProgressBar({
           <span
             className="progress-bar__label progress-bar__label--outside"
             aria-hidden="true"
-            style={{ insetInlineStart: `${clamped}%` }}
           >
             {clamped}%
           </span>

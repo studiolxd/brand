@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Menu as BaseMenu } from '@base-ui/react/menu';
+import { useCssProperties } from '../../constants/css-properties';
 import {
   renderDropdownItems,
   defaultRenderLink,
@@ -84,14 +85,18 @@ export function Menu({
   // (el chevron no gira). Se le pasa el id del elemento al Trigger.
   const triggerElement = trigger as React.ReactElement<Record<string, unknown>>;
   const triggerId = typeof triggerElement.props?.id === 'string' ? triggerElement.props.id : undefined;
+  // El popup vive en un portal y solo existe en cliente: sus anchos se escriben
+  // por el CSSOM, nunca en un atributo `style` (que una app con
+  // `style-src 'self'` descartaría sin avisar).
+  const popupRef = useCssProperties({ 'min-width': minWidth, 'max-width': maxWidth });
   return (
     <BaseMenu.Root open={open} defaultOpen={defaultOpen} onOpenChange={(next) => onOpenChange?.(next)}>
       <BaseMenu.Trigger id={triggerId} render={triggerElement} openOnHover={openOnHover} delay={hoverDelay} />
       <BaseMenu.Portal>
         <BaseMenu.Positioner className="menu__positioner" side={side} align={align} sideOffset={sideOffset}>
           <BaseMenu.Popup
+            ref={popupRef}
             className={['menu__content', size !== 'md' ? `menu__content--${size}` : '', className].filter(Boolean).join(' ')}
-            style={{ minWidth, ...(maxWidth ? { maxWidth } : {}) }}
           >
             {renderDropdownItems({
               items,

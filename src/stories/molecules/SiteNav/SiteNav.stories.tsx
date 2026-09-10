@@ -77,9 +77,9 @@ export const ContratoCincoColumnas: Story = {
   play: async ({ canvasElement }) => {
     const nav = canvasElement.querySelector('.site-nav')!;
     // El runner no garantiza el ancho de --breakpoint-xl (1280px): se
-    // comprueba la variable que fija el tope de columnas para ese breakpoint,
+    // comprueba el atributo que fija el tope de columnas para ese breakpoint,
     // no el número de columnas realmente pintado a un ancho dado.
-    await expect(getComputedStyle(nav).getPropertyValue('--site-nav-wide-columns').trim()).toBe('5');
+    await expect(nav.getAttribute('data-columns')).toBe('5');
   },
 };
 
@@ -90,7 +90,7 @@ export const ContratoTopeDeColumnas: Story = {
   play: async ({ canvasElement }) => {
     const nav = canvasElement.querySelector('.site-nav')!;
     // Seis grupos: el tope sigue en 5, no sigue creciendo.
-    await expect(getComputedStyle(nav).getPropertyValue('--site-nav-wide-columns').trim()).toBe('5');
+    await expect(nav.getAttribute('data-columns')).toBe('5');
   },
 };
 

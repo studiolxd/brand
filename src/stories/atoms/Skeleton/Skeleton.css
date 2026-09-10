@@ -3,10 +3,12 @@
   to   { background-position: -200% 0; }
 }
 
+/* El bloque es un `<svg>` vacío: `width` y `height` llegan como atributos de
+   presentación (que la CSP no descarta), y la hoja solo pone el valor por
+   defecto cuando el atributo no viene — un atributo de presentación pierde
+   contra cualquier regla, así que la regla se acota con `:not([width])`. */
 .skeleton {
   display: block;
-  width: 100%;
-  height: var(--skeleton-height);
   border-radius: var(--skeleton-border-radius);
   background-color: var(--skeleton-bg);
   background-image: linear-gradient(
@@ -20,11 +22,14 @@
   animation: skeleton-sweep var(--skeleton-duration) linear infinite;
 }
 
+.skeleton:not([width]) { width: 100%; }
+.skeleton:not([height]) { height: var(--skeleton-height); }
+
 .skeleton.skeleton--circle {
   border-radius: var(--skeleton-circle-border-radius);
   aspect-ratio: 1;
-  width: auto;
 }
+.skeleton.skeleton--circle:not([width]) { width: auto; }
 
 /* Movimiento reducido: sin barrido, el bloque se muestra como fondo plano. */
 @media (prefers-reduced-motion: reduce) {
