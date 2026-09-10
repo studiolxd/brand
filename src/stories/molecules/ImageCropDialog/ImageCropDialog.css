@@ -24,6 +24,13 @@
   max-inline-size: 100%;
 }
 
+/* El tope de alto va en la raíz de ReactCrop: su hoja hace que el envoltorio
+   y la imagen lo HEREDEN (`max-height: inherit`), y si solo se fija en la
+   imagen el envoltorio queda sin tope y el área lo recorta por abajo. */
+.image-crop-dialog__area .ReactCrop {
+  max-height: var(--image-crop-dialog-area-max-height);
+}
+
 .image-crop-dialog__area img {
   max-height: var(--image-crop-dialog-area-max-height);
   max-width: 100%;
