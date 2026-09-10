@@ -10,6 +10,7 @@ import { Columns } from '../../atoms/Columns/Columns';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Stack } from '../../atoms/Stack/Stack';
 import { Button } from '../../atoms/Button/Button';
+import './AuthPage.css';
 
 const PROVIDER_LABELS: Record<string, string> = { google: 'Google', github: 'GitHub', keycloak: 'Keycloak' };
 
@@ -100,7 +101,7 @@ export function SocialButtons({ providers }: { providers: string[] }) {
 /** El hueco del captcha (Turnstile mide 300×65). */
 export function Captcha() {
   return (
-    <div aria-label="Captcha" role="img" style={{ inlineSize: '300px', blockSize: '65px', border: '1px dashed currentColor', display: 'grid', placeItems: 'center' }}>
+    <div aria-label="Captcha" role="img" className="auth-captcha">
       Captcha
     </div>
   );

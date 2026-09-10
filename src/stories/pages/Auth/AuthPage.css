@@ -1,0 +1,13 @@
+/* El hueco del captcha: un marcador de la página de catálogo, no un componente
+   del sistema. Las medidas son las de Turnstile (300×65), no una talla del DS,
+   y por eso van en cifras y no en tokens; el filete sí sale del sistema.
+
+   Vive en la hoja y no en un atributo `style` porque una app servida con
+   `style-src 'self'` descarta el atributo sin avisar. */
+.auth-captcha {
+  inline-size: 300px;
+  block-size: 65px;
+  border: var(--border-width-default) dashed currentColor;
+  display: grid;
+  place-items: center;
+}
