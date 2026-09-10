@@ -1,3 +1,4 @@
+import { type Crop } from 'react-image-crop';
 export type CropRegion = {
     /** Desplazamiento en píxeles sobre la imagen mostrada. */
     x: number;
@@ -23,3 +24,10 @@ export type CropToBlobOptions = {
  * recortar siempre sobre los píxeles originales.
  */
 export declare function cropImageToBlob(src: HTMLImageElement, region: CropRegion, opts?: CropToBlobOptions): Promise<Blob>;
+/**
+ * La selección inicial es la mayor que cabe con la proporción pedida, centrada:
+ * en una imagen cuadrada (para `aspect` 1) lo ocupa todo; en una vertical va
+ * al 100 % de ancho, centrada en vertical; en una apaisada, al 100 % de alto,
+ * centrada en horizontal. Quien recorta parte del máximo y reduce, no al revés.
+ */
+export declare function initialCrop(aspect: number, width: number, height: number): Crop;

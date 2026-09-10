@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.4.1] — 2026-09-10
+
+> **Patch.**
+
+- **`ImageCropDialog`**: la selección inicial es la mayor que cabe con la
+  proporción pedida, centrada: la imagen cuadrada entera; la vertical al
+  100 % de ancho, centrada en vertical; la apaisada al 100 % de alto,
+  centrada en horizontal (antes, el 80 % del ancho). `initialCrop` en
+  `crop.ts`.
+
 ## [33.4.0] — 2026-09-10
 
 > **Minor.**
