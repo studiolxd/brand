@@ -190,16 +190,19 @@ export const ContratoMarcarTodasBajoLaLista: Story = {
       boton.compareDocumentPosition(primerEnlace) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
 
-    // A ancho completo: ocupa el contenido de su bloque de canto a canto.
+    // A ancho completo: ocupa el contenido de su bloque de canto a canto. Se
+    // mide en píxeles de maqueta (`clientWidth`/`offsetWidth`) y no con los
+    // rectángulos, que vienen escalados por la animación de entrada del
+    // `Popover`.
     const bloque = boton.closest('.notification-panel__mark-all') as HTMLElement;
     await expect(bloque).not.toBeNull();
     const estilo = getComputedStyle(bloque);
     const contenido =
-      bloque.getBoundingClientRect().width -
+      bloque.clientWidth -
       parseFloat(estilo.paddingInlineStart) -
       parseFloat(estilo.paddingInlineEnd);
-    // Tolerancia de un píxel: el redondeo subpíxel del navegador.
-    await expect(Math.abs(boton.getBoundingClientRect().width - contenido)).toBeLessThanOrEqual(1);
+    // `offsetWidth`, no `clientWidth`: la caja del botón incluye su contorno.
+    await expect(Math.abs(boton.offsetWidth - contenido)).toBeLessThanOrEqual(1);
 
     // Y sigue entrando el foco por la primera notificación, no por el botón.
     await waitFor(() => expect(primeraFila).toHaveFocus());
