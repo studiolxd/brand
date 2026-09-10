@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 
-import { ogCard } from '../../og/ogCard';
+import { ogCard } from '../og/ogCard';
 
 import { OgPreview } from './OgPreview';
 

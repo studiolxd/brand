@@ -17,7 +17,7 @@
  * corre en cualquier sitio; quien necesite Edge trae los mismos ficheros por
  * `fetch` y arma el array a mano.
  */
-import { token } from '../tokens/tokens';
+import { token } from '../../tokens/tokens';
 
 import { OG_FONT_FAMILY } from './ogTypeface';
 
@@ -38,10 +38,10 @@ const CARAS = [
  * Las rutas se resuelven contra el módulo, no contra el directorio de trabajo:
  * esto corre desde `node_modules` de otra aplicación. Y el módulo vive en dos
  * sitios con distinta profundidad —`dist/og.js` en el paquete publicado,
- * `src/og/ogFonts.ts` en el repo (tests y catálogo)—, así que se prueban las
- * dos y se usa la que exista.
+ * `src/stories/og/ogFonts.ts` en el repo (tests y catálogo)—, así que se
+ * prueban las dos y se usa la que exista.
  */
-const CARPETAS = ['./assets/fonts/google-sans-flex/', '../assets/fonts/google-sans-flex/'];
+const CARPETAS = ['./assets/fonts/google-sans-flex/', '../../assets/fonts/google-sans-flex/'];
 
 /** El `Buffer` de Node como `ArrayBuffer` suelto, que es lo que satori quiere. */
 function arrayBuffer(buffer: Uint8Array): ArrayBuffer {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { token } from '../tokens/tokens';
+import { token } from '../../tokens/tokens';
 
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from './ogCard';
 import { ogFonts } from './ogFonts';

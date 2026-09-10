@@ -15,7 +15,7 @@ import type { ReactElement } from 'react';
 
 /* Del módulo de la tarjeta, no del barril: `ogFonts()` lee del disco y el
    catálogo corre en un navegador. */
-import { OG_SIZE } from '../../og/ogCard';
+import { OG_SIZE } from '../og/ogCard';
 
 /** Cuánto se encoge el lienzo para caber en la página del catálogo. */
 const ESCALA = 0.5;
