@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { Text } from './Text';
+import { Text, LineBreak } from './Text';
 
 describe('Text', () => {
   it('por defecto es un span sin más significado', () => {
@@ -48,5 +48,19 @@ describe('Text', () => {
   it('reenvía atributos al elemento', () => {
     render(<Text id="cita" data-testid="fragmento">texto</Text>);
     expect(screen.getByTestId('fragmento')).toHaveAttribute('id', 'cita');
+  });
+});
+
+describe('LineBreak', () => {
+  it('es un <br> con la clase del sistema', () => {
+    const { container } = render(<LineBreak />);
+    const salto = container.firstElementChild as HTMLElement;
+    expect(salto.tagName).toBe('BR');
+    expect(salto.className).toBe('text__break');
+  });
+
+  it('className se añade DESPUÉS de la clase propia', () => {
+    const { container } = render(<LineBreak className="propia" />);
+    expect(container.firstElementChild).toHaveClass('text__break', 'propia');
   });
 });

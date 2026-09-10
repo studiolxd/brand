@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { Text } from './Text';
+import { Text, LineBreak } from './Text';
 import { Paragraph } from '../Paragraph/Paragraph';
 import { Stack } from '../Stack/Stack';
 
@@ -88,6 +88,18 @@ export const EnSuperficieOscura: Story = {
   ),
 };
 
+/** `LineBreak` corta la línea dentro de la frase, sin separar párrafos. */
+export const SaltoDeLinea: Story = {
+  name: 'Salto de línea',
+  render: () => (
+    <Paragraph>
+      Studio LXD, S.L.<LineBreak />
+      Calle Mayor 1, 3.º B<LineBreak />
+      28013 Madrid
+    </Paragraph>
+  ),
+};
+
 export const TestIdiomaYTono: Story = {
   name: 'Test — el fragmento lleva su idioma y su intención',
   tags: ['!dev'],
@@ -104,5 +116,21 @@ export const TestIdiomaYTono: Story = {
     const destructivo = canvas.getByText('borran');
     await expect(destructivo.tagName).toBe('STRONG');
     await expect(destructivo).toHaveClass('text--destructive');
+  },
+};
+
+export const TestSaltoDeLinea: Story = {
+  name: 'Test — el salto es un <br> con la clase del sistema',
+  tags: ['!dev'],
+  render: () => (
+    <Paragraph data-testid="lema">
+      Se aprende<LineBreak />produciendo
+    </Paragraph>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const salto = canvas.getByTestId('lema').querySelector('br');
+    await expect(salto).toBeInTheDocument();
+    await expect(salto).toHaveClass('text__break');
   },
 };
