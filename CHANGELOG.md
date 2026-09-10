@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.3.0] — 2026-09-10
+
+> **Minor.**
+
+- **`NotificationList`** (`./notification-list`): la lista de notificaciones a
+  página completa, sin `Card`: filas a sangre con separador, columna del
+  indicador siempre reservada, título y cuerpo a la izquierda y, a la
+  derecha, las acciones de la fila (`renderActions`, más «Marcar como leída»
+  si hay `onMarkRead`) con la hora debajo; bajo `md` la columna derecha cae
+  bajo el texto. El ítem usa `unread`, como el panel.
+- **`PageIntro`**: bajo `md`, las acciones van en bloque, una por línea y a
+  todo el ancho.
+
 ## [33.2.0] — 2026-09-10
 
 > **Minor.**
