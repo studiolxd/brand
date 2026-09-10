@@ -20,7 +20,7 @@ Son dos piezas con dos trabajos (la regla completa, en `NotificationPanel` § «
 
 ## La lista va a sangre
 
-Sin `Card` y sin borde alrededor: la lista ocupa la columna de la página y **lo único que separa una notificación de la siguiente es la línea de fila del sistema**, la misma de la `Table`. Una tarjeta por notificación mete un marco a cada mensaje, dos veces el aire y una sombra por fila, y el listado deja de leerse como un listado.
+Sin `Card`, sin borde alrededor y **sin línea entre filas**: la lista ocupa la columna de la página y lo único que separa una notificación de la siguiente es **el aire de la propia fila** (`item-padding-block`, dos veces entre fila y fila). Una tarjeta por notificación mete un marco a cada mensaje, dos veces el aire y una sombra por fila, y el listado deja de leerse como un listado; una línea entre filas hace lo mismo en pequeño —parte el listado en casillas cuando lo que hay que leer es una notificación detrás de otra—, así que la separación la pone el hueco.
 
 La lista **no ordena, no pagina y no filtra**: eso es de la página (`Pagination`, `FilterBar`). Y con la lista vacía **no pinta nada** — ese hueco es de un `EmptyState`, que dice qué pasa y qué hacer.
 
@@ -30,7 +30,9 @@ Tres bloques, y el orden en el que se leen:
 
 1. **La columna del punto**, que **se reserva siempre**, haya bolita o no. Es lo que mantiene todos los títulos en la misma vertical y lo que impide que la fila salte al marcarla leída.
 2. **El texto**: el título —enlace a la notificación si trae `href`— y el cuerpo debajo, entero.
-3. **La columna del final**: las acciones y, **debajo de ellas, la hora**, las dos alineadas al extremo final. La hora cierra la fila porque es contexto del mensaje, no parte de él.
+3. **La columna del final**: las acciones y, **debajo de ellas, la hora**, las dos alineadas al extremo final. La hora cierra la fila porque es contexto del mensaje, no parte de él. De `md` para arriba esa columna ocupa **toda la altura de la fila** y reparte sus dos bloques por los extremos: las acciones arriba, a la altura del título, y **la hora abajo del todo, a la altura de la última línea del texto**. Así la fila queda cerrada por sus cuatro esquinas en vez de con las dos cosas apelotonadas arriba.
+
+**El título mide su texto**, no la columna: lo clicable es el título y no la línea entera, que es lo que se espera de un enlace y lo que evita abrir una notificación al pulsar el hueco vacío de su derecha.
 
 Lo no leído se dice con **el punto y el peso del título**, nunca con un relleno (Foundations → Colores), y el punto lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»). El estado va en `unread`, **el mismo booleano y en el mismo sentido que el del `NotificationPanel`**: los mismos datos sirven para la página y para el adelanto, sin invertir nada por el camino.
 
@@ -80,7 +82,7 @@ Con `href`, el título es el enlace de la fila y se monta sobre el router de la 
 
 ## Superficie oscura
 
-Todo el color sale de la regla de derivación: el separador pasa a `text.on-dark` y la hora a `text.muted-on-dark`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
+Todo el color sale de la regla de derivación: la hora pasa a `text.muted-on-dark`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
 
 <Canvas of={Stories.EnSuperficieOscura} />
 

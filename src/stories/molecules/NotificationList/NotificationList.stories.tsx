@@ -65,9 +65,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * La bandeja: filas a sangre separadas por la línea de fila del sistema, dos
- * sin leer y dos leídas, con y sin cuerpo, con y sin enlace. La columna del
- * punto se reserva en todas, así que los títulos alinean.
+ * La bandeja: filas a sangre separadas solo por su propio aire, dos sin leer y
+ * dos leídas, con y sin cuerpo, con y sin enlace. La columna del punto se
+ * reserva en todas, así que los títulos alinean; la hora de cada fila cierra
+ * abajo, a la altura de su última línea de texto.
  */
 export const Bandeja: Story = {};
 
@@ -157,6 +158,62 @@ export const ContratoColumnaFinal: Story = {
   },
 };
 
+export const ContratoHoraAlFinalDeLaFila: Story = {
+  name: 'Test — a partir de md la hora cierra la fila por abajo',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    // La primera fila es la del cuerpo largo: la columna del final es mucho más
+    // corta que el texto, así que si la hora no bajara se quedaría arriba.
+    const fila = canvasElement.querySelector('.notification-list__item') as HTMLElement;
+    const texto = fila.querySelector('.notification-list__text') as HTMLElement;
+    const aside = fila.querySelector('.notification-list__aside') as HTMLElement;
+    const acciones = fila.querySelector('.notification-list__actions') as HTMLElement;
+    const hora = fila.querySelector('.notification-list__time') as HTMLElement;
+
+    // La columna del final ocupa toda la altura de la fila…
+    await expect(aside.getBoundingClientRect().height).toBeCloseTo(
+      texto.getBoundingClientRect().height,
+      0,
+    );
+    // …con las acciones arriba…
+    await expect(
+      Math.abs(acciones.getBoundingClientRect().top - aside.getBoundingClientRect().top),
+    ).toBeLessThanOrEqual(1);
+    // …y la hora abajo del todo, a la altura de la última línea del texto.
+    await expect(
+      Math.abs(hora.getBoundingClientRect().bottom - aside.getBoundingClientRect().bottom),
+    ).toBeLessThanOrEqual(1);
+    await expect(
+      Math.abs(hora.getBoundingClientRect().bottom - texto.getBoundingClientRect().bottom),
+    ).toBeLessThanOrEqual(2);
+  },
+};
+
+export const ContratoTituloASuAncho: Story = {
+  name: 'Test — el enlace del título mide su texto, no la columna',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    // La segunda fila lleva un título corto y enlace: si el enlace se estirara,
+    // toda la línea sería clicable.
+    const filas = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.notification-list__item'),
+    );
+    const fila = filas[1];
+    const texto = fila.querySelector('.notification-list__text') as HTMLElement;
+    const titulo = fila.querySelector('.notification-list__title') as HTMLElement;
+
+    await expect(titulo.tagName).toBe('A');
+    await expect(titulo.getBoundingClientRect().width).toBeLessThan(
+      texto.getBoundingClientRect().width,
+    );
+    // Y empieza donde empieza la columna: mide su texto, no se centra.
+    await expect(titulo.getBoundingClientRect().left).toBeCloseTo(
+      texto.getBoundingClientRect().left,
+      0,
+    );
+  },
+};
+
 export const ContratoEnMovil: Story = {
   name: 'Test — bajo md la columna final cae bajo el texto',
   tags: ['!dev'],
@@ -184,7 +241,7 @@ export const ContratoEnMovil: Story = {
 };
 
 export const ContratoSinTarjeta: Story = {
-  name: 'Test — filas a sangre, separadas por una línea y sin Card',
+  name: 'Test — filas a sangre, sin Card y sin línea entre ellas',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const lista = canvasElement.querySelector('.notification-list') as HTMLElement;
@@ -193,15 +250,15 @@ export const ContratoSinTarjeta: Story = {
     const filas = Array.from(
       canvasElement.querySelectorAll<HTMLElement>('.notification-list__item'),
     );
-    // La primera fila no lleva línea encima: la lista no se cierra por arriba.
-    await expect(parseFloat(getComputedStyle(filas[0]).borderBlockStartWidth)).toBe(0);
-    // Las demás sí, y ninguna lleva contorno alrededor.
-    for (const fila of filas.slice(1)) {
+    // Ninguna fila lleva borde por ningún lado: lo que las separa es su aire.
+    for (const fila of filas) {
       const estilo = getComputedStyle(fila);
-      await expect(parseFloat(estilo.borderBlockStartWidth)).toBeGreaterThan(0);
-      await expect(estilo.borderBlockStartStyle).toBe('solid');
-      await expect(parseFloat(estilo.borderInlineStartWidth)).toBe(0);
+      await expect(parseFloat(estilo.borderBlockStartWidth)).toBe(0);
       await expect(parseFloat(estilo.borderBlockEndWidth)).toBe(0);
+      await expect(parseFloat(estilo.borderInlineStartWidth)).toBe(0);
+      await expect(parseFloat(estilo.borderInlineEndWidth)).toBe(0);
+      await expect(parseFloat(estilo.paddingBlockStart)).toBeGreaterThan(0);
+      await expect(parseFloat(estilo.paddingBlockEnd)).toBeGreaterThan(0);
     }
   },
 };

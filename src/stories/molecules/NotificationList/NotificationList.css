@@ -1,6 +1,7 @@
 /* La bandeja va a sangre en la columna de la página: sin tarjeta, sin borde
-   alrededor y sin aire lateral propio — el de la página ya lo pone el molde
-   de fuera. */
+   alrededor, sin línea entre filas y sin aire lateral propio — el de la
+   página ya lo pone el molde de fuera. Lo que separa una notificación de la
+   siguiente es el aire de `item-padding-block`, dos veces entre fila y fila. */
 .notification-list {
   list-style: none;
   margin: 0;
@@ -20,13 +21,6 @@
   column-gap: var(--notification-list-item-gap);
   row-gap: var(--notification-list-item-row-gap);
   padding-block: var(--notification-list-item-padding-block);
-}
-
-/* Lo único que separa una notificación de la siguiente: la línea de fila del
-   sistema, la misma de la `Table`. Entre filas y no alrededor — la lista no
-   se cierra por arriba ni por abajo. */
-.notification-list__item + .notification-list__item {
-  border-block-start: var(--notification-list-separator-width) solid var(--notification-list-separator-color);
 }
 
 .notification-list__indicator {
@@ -55,6 +49,10 @@
 /* El título es texto corriente, o un enlace con la cara de enlace del sistema
    (la línea la pinta `Link`, no esta hoja). El peso lo decide el estado. */
 .notification-list__title {
+  /* La columna de texto es un flex en columna, así que por defecto estiraría
+     el título a todo el ancho y toda la línea quedaría clicable. El título
+     mide su texto: lo clicable es el título, no la fila. */
+  align-self: start;
   font-size: var(--notification-list-title-font-size);
   line-height: var(--notification-list-title-line-height);
   font-weight: var(--notification-list-read-font-weight);
@@ -75,7 +73,8 @@
 }
 
 /* La columna del final: las acciones y, debajo, la hora; las dos alineadas al
-   extremo final, compartan fila con el texto o caigan bajo él. */
+   extremo final, compartan fila con el texto o caigan bajo él. A partir de
+   `md` esta columna se estira y la hora baja al final de la fila. */
 .notification-list__aside {
   grid-column: 2;
   grid-row: 2;
@@ -114,8 +113,19 @@
   .notification-list__aside {
     grid-column: 3;
     grid-row: 1;
+    /* La columna ocupa toda la altura de la fila para poder repartir sus dos
+       bloques por los extremos: las acciones arriba, a la altura del título, y
+       la hora abajo del todo, a la altura de la última línea del cuerpo. */
+    align-self: stretch;
+    justify-content: space-between;
     margin-inline-start: calc(
       var(--notification-list-item-column-gap) - var(--notification-list-item-gap)
     );
+  }
+
+  /* Sin acciones no hay dos bloques que repartir, así que el margen automático
+     es lo que baja la hora igualmente al final de la fila. */
+  .notification-list__time {
+    margin-block-start: auto;
   }
 }
