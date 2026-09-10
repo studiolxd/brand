@@ -33,3 +33,9 @@ temp_web
 .env.*
 .worktrees/
 *.local.md
+
+# Chromatic — informes y logs de cada ejecución del CLI
+chromatic-diagnostics.json
+chromatic.log
+diag.json
+chromatic-build-*

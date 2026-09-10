@@ -28,10 +28,20 @@ export const TestCargaDeFuentes: Story = {
   name: 'Test — las fuentes las trae el DS',
   tags: ['!dev'],
   play: async () => {
-    await document.fonts.ready;
+    // El `play` corre justo después del commit de React, antes de que el
+    // navegador haya hecho maqueta: en ese momento no hay ninguna descarga de
+    // fuente pendiente, así que `document.fonts.ready` resuelve sin haber
+    // traído nada y `check()` responde `false`. Se piden las tres caras a
+    // mano, que no depende de cuándo pinte el navegador.
+    const caras = [
+      '300 16px "Google Sans Flex"',
+      'italic 400 16px "Google Sans Code"',
+      'italic 400 16px "Libre Bodoni"',
+    ];
+    await Promise.all(caras.map((cara) => document.fonts.load(cara)));
 
-    await expect(document.fonts.check('300 16px "Google Sans Flex"')).toBe(true);
-    await expect(document.fonts.check('italic 400 16px "Google Sans Code"')).toBe(true);
-    await expect(document.fonts.check('italic 400 16px "Libre Bodoni"')).toBe(true);
+    for (const cara of caras) {
+      await expect(document.fonts.check(cara)).toBe(true);
+    }
   },
 };

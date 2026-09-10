@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
+import { expect, fn, screen, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Sheet } from './Sheet';
@@ -153,7 +153,7 @@ export const ContratoPassthrough: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const popup = document.querySelector('.sheet') as HTMLElement;
+    const popup = await screen.findByRole('dialog');
     await expect(popup).toHaveAttribute('id', 'panel');
     await expect(popup).toHaveAttribute('data-zona', 'tarjeta');
     // La clase propia sigue en su sitio y el lado no se pierde.
@@ -216,7 +216,8 @@ export const ContratoTallaPorSuperficie: Story = {
     );
   },
   play: async () => {
-    const close = document.querySelector('.sheet__close') as HTMLElement;
+    const popup = await screen.findByRole('dialog');
+    const close = popup.querySelector('.sheet__close') as HTMLElement;
     await expect(close).toBeInTheDocument();
     await expect(getComputedStyle(close).inlineSize).toBe('48px');
     await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('48px');
@@ -234,7 +235,8 @@ export const ContratoTallaAplicacion: Story = {
     </Sheet>
   ),
   play: async () => {
-    const close = document.querySelector('.sheet__close') as HTMLElement;
+    const popup = await screen.findByRole('dialog');
+    const close = popup.querySelector('.sheet__close') as HTMLElement;
     await expect(getComputedStyle(close).inlineSize).toBe('40px');
     await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('24px');
   },
@@ -250,12 +252,12 @@ export const ContratoSinHoverEnCerrar: Story = {
       <p>Contenido</p>
     </Sheet>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.ownerDocument.body);
-    const close = canvas.getByRole('button', { name: 'Cerrar' });
+  play: async () => {
+    const popup = within(await screen.findByRole('dialog'));
+    const close = popup.getByRole('button', { name: 'Cerrar' });
     const before = getComputedStyle(close).backgroundColor;
     // La tinta ya está puesta en reposo: es la misma del título del diálogo.
-    const tinta = getComputedStyle(canvas.getByRole('heading')).color;
+    const tinta = getComputedStyle(popup.getByRole('heading')).color;
     await expect(getComputedStyle(close).color).toBe(tinta);
     await userEvent.hover(close);
     const during = getComputedStyle(close).backgroundColor;
@@ -277,11 +279,15 @@ export const ContratoPanelOpaco: Story = {
     </Sheet>
   ),
   play: async () => {
-    const panel = document.querySelector('.sheet') as HTMLElement;
-    await new Promise((resolve) => panel.addEventListener('animationend', resolve, { once: true }));
-    const cs = getComputedStyle(panel);
-    await expect(cs.opacity).toBe('1');
-    await expect(cs.backgroundColor).toBe('rgb(255, 255, 255)');
+    const panel = await screen.findByRole('dialog');
+    // Se espera al valor final de la animación de entrada, no al evento
+    // `animationend`: donde las animaciones están desactivadas —el navegador de
+    // captura de Chromatic— ese evento no llega nunca y el `play` se cuelga.
+    await waitFor(() => {
+      const cs = getComputedStyle(panel);
+      expect(cs.opacity).toBe('1');
+      expect(cs.backgroundColor).toBe('rgb(255, 255, 255)');
+    });
   },
 };
 
@@ -297,10 +303,14 @@ export const ContratoPanelOpacoOscuro: Story = {
     </Sheet>
   ),
   play: async () => {
-    const panel = document.querySelector('.sheet') as HTMLElement;
-    await new Promise((resolve) => panel.addEventListener('animationend', resolve, { once: true }));
-    const cs = getComputedStyle(panel);
-    await expect(cs.opacity).toBe('1');
-    await expect(cs.backgroundColor).toBe('rgb(17, 30, 48)');
+    const panel = await screen.findByRole('dialog');
+    // Se espera al valor final de la animación de entrada, no al evento
+    // `animationend`: donde las animaciones están desactivadas —el navegador de
+    // captura de Chromatic— ese evento no llega nunca y el `play` se cuelga.
+    await waitFor(() => {
+      const cs = getComputedStyle(panel);
+      expect(cs.opacity).toBe('1');
+      expect(cs.backgroundColor).toBe('rgb(17, 30, 48)');
+    });
   },
 };

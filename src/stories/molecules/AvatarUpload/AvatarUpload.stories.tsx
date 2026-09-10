@@ -177,8 +177,15 @@ export const ContratoArrastre: Story = {
 
     // Empieza un arrastre en cualquier punto de la ventana: la diana se anuncia
     // antes de que el archivo llegue, y se dice en voz alta.
-    arrastre(window, 'dragenter', [imagen()]);
-    await waitFor(() => expect(bloque).toHaveClass('avatar-upload--armed'));
+    // El escucha de `dragenter` lo instala un efecto, y el `play` arranca justo
+    // tras el commit de React: en un navegador de verdad puede llegar antes de
+    // que el efecto haya montado nada (en local no se nota porque el runner
+    // renderiza dentro de `act`, que vacía los efectos). Se reintenta el
+    // arrastre hasta que el bloque se arma.
+    await waitFor(() => {
+      arrastre(window, 'dragenter', [imagen()]);
+      expect(bloque).toHaveClass('avatar-upload--armed');
+    });
     await expect(canvas.getByRole('status')).toHaveTextContent(
       'Suelta la imagen sobre el avatar para subirla',
     );

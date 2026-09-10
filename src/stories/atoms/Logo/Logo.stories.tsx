@@ -20,6 +20,21 @@ export default meta;
 
 type Story = StoryObj<typeof Logo>;
 
+/**
+ * El valor de un token de color, resuelto por el navegador al mismo `rgb(...)`
+ * que devuelve `getComputedStyle`. El hexadecimal no se parsea a mano porque
+ * el CSS del Storybook compilado va minificado y ahí `#ffffff` viaja como
+ * `#fff`: tres dígitos que un troceado de dos en dos lee como `NaN`.
+ */
+function colorDeToken(token: string, contexto: Element): string {
+  const sonda = document.createElement('span');
+  sonda.style.color = `var(${token})`;
+  contexto.appendChild(sonda);
+  const color = getComputedStyle(sonda).color;
+  sonda.remove();
+  return color;
+}
+
 /** Talla `md`, la de una cabecera. */
 export const PorDefecto: Story = {};
 
@@ -48,9 +63,12 @@ export const Talla: Story = {
   play: async ({ canvasElement }) => {
     const sm = canvasElement.querySelector('.logo--sm')!;
     await expect(Math.round(sm.getBoundingClientRect().height)).toBe(32);
-    const oscuro = canvasElement.querySelector('[data-testid="oscura"] .logo')!;
-    const claro = getComputedStyle(oscuro).getPropertyValue('--color-text-on-dark').trim();
-    const toRgb = (hex: string) => { const v = hex.replace('#', ''); return `rgb(${parseInt(v.slice(0, 2), 16)}, ${parseInt(v.slice(2, 4), 16)}, ${parseInt(v.slice(4, 6), 16)})`; };
-    await expect(getComputedStyle(oscuro).color).toBe(toRgb(claro));
+    const banda = canvasElement.querySelector('[data-testid="oscura"]')!;
+    const oscuro = banda.querySelector('.logo')!;
+    // La sonda va en la banda, no en el `<svg>`: dentro de SVG un `<span>` no
+    // es contenido renderizable.
+    await expect(getComputedStyle(oscuro).color).toBe(
+      colorDeToken('--color-text-on-dark', banda),
+    );
   },
 };

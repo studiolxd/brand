@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
+import { expect, fn, screen, userEvent, waitFor, within } from 'storybook/test';
 import { Modal } from './Modal';
 import { Button } from '../../atoms/Button/Button';
 import { InputField } from '../InputField/InputField';
@@ -224,7 +224,8 @@ export const ContratoTallaPorSuperficie: Story = {
     );
   },
   play: async () => {
-    const close = document.querySelector('.modal__close') as HTMLElement;
+    const popup = await screen.findByRole('dialog');
+    const close = popup.querySelector('.modal__close') as HTMLElement;
     await expect(close).toBeInTheDocument();
     await expect(getComputedStyle(close).inlineSize).toBe('48px');
     await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('48px');
@@ -241,7 +242,8 @@ export const ContratoTallaAplicacion: Story = {
     </Modal>
   ),
   play: async () => {
-    const close = document.querySelector('.modal__close') as HTMLElement;
+    const popup = await screen.findByRole('dialog');
+    const close = popup.querySelector('.modal__close') as HTMLElement;
     await expect(getComputedStyle(close).inlineSize).toBe('40px');
     await expect(getComputedStyle(close.querySelector('.icon')!).width).toBe('24px');
   },
@@ -256,12 +258,12 @@ export const ContratoSinHoverEnCerrar: Story = {
       <p>Contenido</p>
     </Modal>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.ownerDocument.body);
-    const close = canvas.getByRole('button', { name: 'Cerrar' });
+  play: async () => {
+    const popup = within(await screen.findByRole('dialog'));
+    const close = popup.getByRole('button', { name: 'Cerrar' });
     const before = getComputedStyle(close).backgroundColor;
     // La tinta ya está puesta en reposo: es la misma del título del diálogo.
-    const tinta = getComputedStyle(canvas.getByRole('heading')).color;
+    const tinta = getComputedStyle(popup.getByRole('heading')).color;
     await expect(getComputedStyle(close).color).toBe(tinta);
     await userEvent.hover(close);
     const during = getComputedStyle(close).backgroundColor;
@@ -282,12 +284,15 @@ export const ContratoPanelOpaco: Story = {
     </Modal>
   ),
   play: async () => {
-    const panel = document.querySelector('.modal__content') as HTMLElement;
-    // Espera a que termine la animación de entrada (motion.duration.base).
-    await new Promise((resolve) => panel.addEventListener('animationend', resolve, { once: true }));
-    const cs = getComputedStyle(panel);
-    await expect(cs.opacity).toBe('1');
-    await expect(cs.backgroundColor).toBe('rgb(255, 255, 255)');
+    const panel = await screen.findByRole('dialog');
+    // Se espera al valor final de la animación de entrada, no al evento
+    // `animationend`: donde las animaciones están desactivadas —el navegador de
+    // captura de Chromatic— ese evento no llega nunca y el `play` se cuelga.
+    await waitFor(() => {
+      const cs = getComputedStyle(panel);
+      expect(cs.opacity).toBe('1');
+      expect(cs.backgroundColor).toBe('rgb(255, 255, 255)');
+    });
   },
 };
 
@@ -302,11 +307,15 @@ export const ContratoPanelOpacoOscuro: Story = {
     </Modal>
   ),
   play: async () => {
-    const panel = document.querySelector('.modal__content') as HTMLElement;
-    await new Promise((resolve) => panel.addEventListener('animationend', resolve, { once: true }));
-    const cs = getComputedStyle(panel);
-    await expect(cs.opacity).toBe('1');
-    await expect(cs.backgroundColor).toBe('rgb(17, 30, 48)');
+    const panel = await screen.findByRole('dialog');
+    // Se espera al valor final de la animación de entrada, no al evento
+    // `animationend`: donde las animaciones están desactivadas —el navegador de
+    // captura de Chromatic— ese evento no llega nunca y el `play` se cuelga.
+    await waitFor(() => {
+      const cs = getComputedStyle(panel);
+      expect(cs.opacity).toBe('1');
+      expect(cs.backgroundColor).toBe('rgb(17, 30, 48)');
+    });
   },
 };
 
@@ -433,9 +442,8 @@ export const WithDescription: Story = {
       </Modal>
     );
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.ownerDocument.body);
-    await expect(canvas.getByRole('dialog')).toHaveAccessibleDescription(
+  play: async () => {
+    await expect(await screen.findByRole('dialog')).toHaveAccessibleDescription(
       'Se notificará a tu responsable y la ausencia dejará de contar en el calendario del equipo.',
     );
   },
@@ -462,9 +470,8 @@ export const WithExternalDescription: Story = {
       </Modal>
     );
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.ownerDocument.body);
-    await expect(canvas.getByRole('dialog')).toHaveAccessibleDescription(
+  play: async () => {
+    await expect(await screen.findByRole('dialog')).toHaveAccessibleDescription(
       'El proyecto y todas sus tareas se eliminarán de forma permanente.',
     );
   },
@@ -487,10 +494,10 @@ export const CustomLabels: Story = {
       </Modal>
     );
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.ownerDocument.body);
-    await expect(canvas.getByRole('button', { name: 'Close' })).toBeInTheDocument();
-    await expect(canvas.getByText('Dialog')).toBeInTheDocument();
+  play: async () => {
+    const popup = within(await screen.findByRole('dialog'));
+    await expect(popup.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await expect(popup.getByText('Dialog')).toBeInTheDocument();
   },
 };
 
@@ -549,7 +556,8 @@ export const ContratoPassthrough: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const popup = document.querySelector('.modal__content') as HTMLElement;
+    const popup = await screen.findByRole('dialog');
+    await expect(popup).toHaveClass('modal__content');
     await expect(popup).toHaveAttribute('id', 'dialogo');
     await expect(popup).toHaveAttribute('data-zona', 'tarjeta');
 
@@ -665,9 +673,9 @@ export const ContratoPieDelDialogo: Story = {
       <p>Contenido</p>
     </Modal>
   ),
-  play: async ({ canvasElement }) => {
-    const doc = canvasElement.ownerDocument;
-    const pie = doc.querySelector('.modal__footer') as HTMLElement;
+  play: async () => {
+    const popup = await screen.findByRole('dialog');
+    const pie = popup.querySelector('.modal__footer') as HTMLElement;
     await expect(pie).not.toBeNull();
     // La principal va la última del DOM —el orden de la fila—, y en columna es
     // `column-reverse` quien la sube arriba: el mismo trato que en `Form`.
@@ -723,10 +731,14 @@ export const ContratoAspaEnLaPrimeraLinea: Story = {
       <p>Contenido</p>
     </Modal>
   ),
-  play: async ({ canvasElement }) => {
-    const doc = canvasElement.ownerDocument;
-    const titulo = doc.querySelector('.modal__title') as HTMLElement;
-    const aspa = doc.querySelector('.modal__close') as HTMLElement;
+  play: async () => {
+    const popup = await screen.findByRole('dialog');
+    // El título se mide, así que tiene que estar con su letra puesta: con la
+    // de respaldo el bloque puede caber en una línea y la prueba pierde su
+    // caso.
+    await document.fonts.ready;
+    const titulo = popup.querySelector('.modal__title') as HTMLElement;
+    const aspa = popup.querySelector('.modal__close') as HTMLElement;
     const cajaTitulo = titulo.getBoundingClientRect();
     const cajaAspa = aspa.getBoundingClientRect();
     const interlineado = parseFloat(getComputedStyle(titulo).lineHeight);

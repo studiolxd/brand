@@ -40,7 +40,17 @@ Fundamentos y componentes no se pisan: **Foundations explica el sistema** (regla
 
 Tests de story: toda story de prueba se llama `Test — …` y lleva `tags: ['!dev']`. Sigue ejecutándose en `test:stories` (cada story es un test; `play` añade las afirmaciones), pero no aparece en el catálogo ni en las docs: el Storybook solo enseña usos reales.
 
-Chromatic: el token del proyecto NO va en el package.json ni en el repo. Vive en `.env` (ignorado por git) como `CHROMATIC_PROJECT_TOKEN`; el CLI lo lee solo. `pnpm chromatic` publica de verdad — para validar sin consumir snapshots, `npx chromatic --dry-run`.
+**Un `play` no puede dar por hecho lo que en local le regala el runner.** `pnpm test:stories` renderiza dentro de `act()`, que vacía los efectos de React antes de llamar al `play`; un navegador de verdad —el Storybook compilado, el de captura de Chromatic— no lo hace. De ahí tres reglas, salidas de las 19 stories que rompían en Chromatic y pasaban en local (v34.0.2):
+
+- **Lo que monta un efecto se espera, no se busca.** Un portal (`Modal`, `Sheet`, `Popover`) o un escucha de `window` (el arrastre de `AvatarUpload`) puede no existir todavía cuando arranca el `play`: `await screen.findByRole('dialog')` en vez de `document.querySelector('.modal__content')`, y el evento sintético dentro del `waitFor` que comprueba su efecto, para que se reintente.
+- **Se espera al valor final, nunca a `animationend`/`transitionend`.** Donde las animaciones están desactivadas —el navegador de captura— ese evento no llega nunca y el `play` se cuelga hasta el timeout, que Chromatic cuenta como *component error*. `await waitFor(() => expect(getComputedStyle(el).opacity).toBe('1'))`.
+- **Un color no se parsea a mano y una fuente no se da por cargada.** El CSS del Storybook compilado va minificado, así que un token puede llegar como `#fff` y no como `#ffffff`: el valor se resuelve con el navegador (una sonda con `color: var(--token)` y su `getComputedStyle`). Y `document.fonts.ready` resuelve en vacío si el `play` corre antes de la primera maqueta: las caras que se vayan a comprobar o a medir se piden con `document.fonts.load(...)`.
+
+Chromatic (regresión visual): el token del proyecto NO va en el `package.json` ni en el repo. Vive **fuera del repo**, en `~/.config/slxd/chromatic.env` como `CHROMATIC_PROJECT_TOKEN`; se carga con `set -a; . ~/.config/slxd/chromatic.env; set +a` antes de llamar al CLI, que lo lee solo.
+
+Se corre **en cada release, después de `pnpm release:check` y antes del `git tag`**: `pnpm chromatic`, que ya lleva `--exit-zero-on-changes` (un cambio visual no rompe el flujo; un error de componente sí devuelve código distinto de cero). Para iterar sobre un subconjunto sin subir las 1532 stories, `pnpm chromatic --only-story-names "Molecules/Modal/**"`; para validar sin consumir snapshots, `npx chromatic --dry-run`.
+
+La **revisión y la aceptación** de los cambios visuales se hacen en chromatic.com, nunca desde el CLI: no se usa `--auto-accept-changes`.
 
 ## Architecture
 

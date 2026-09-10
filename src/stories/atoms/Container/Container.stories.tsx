@@ -25,6 +25,21 @@ export default meta;
 
 type Story = StoryObj<typeof Container>;
 
+/**
+ * El valor de un token de color, resuelto por el navegador al mismo `rgb(...)`
+ * que devuelve `getComputedStyle`. El hexadecimal no se parsea a mano porque
+ * el CSS del Storybook compilado va minificado y ahí `#ffffff` viaja como
+ * `#fff`: tres dígitos que un troceado de dos en dos lee como `NaN`.
+ */
+function colorDeToken(token: string, contexto: Element): string {
+  const sonda = document.createElement('span');
+  sonda.style.color = `var(${token})`;
+  contexto.appendChild(sonda);
+  const color = getComputedStyle(sonda).color;
+  sonda.remove();
+  return color;
+}
+
 const Demo = () => (
   <>
     <Heading level={3} size={6}>Contenido acotado</Heading>
@@ -106,14 +121,8 @@ export const SuperficieEmparejada: Story = {
   play: async ({ canvasElement }) => {
     const banda = canvasElement.querySelector('[data-testid="oscura"]')!;
     const cs = getComputedStyle(banda);
-    const oscuro = getComputedStyle(banda).getPropertyValue('--color-background-dark').trim();
-    const claro = getComputedStyle(banda).getPropertyValue('--color-text-on-dark').trim();
-    const toRgb = (hex: string) => {
-      const v = hex.replace('#', '');
-      return `rgb(${parseInt(v.slice(0, 2), 16)}, ${parseInt(v.slice(2, 4), 16)}, ${parseInt(v.slice(4, 6), 16)})`;
-    };
-    await expect(cs.backgroundColor).toBe(toRgb(oscuro));
-    await expect(cs.color).toBe(toRgb(claro));
+    await expect(cs.backgroundColor).toBe(colorDeToken('--color-background-dark', banda));
+    await expect(cs.color).toBe(colorDeToken('--color-text-on-dark', banda));
   },
 };
 
