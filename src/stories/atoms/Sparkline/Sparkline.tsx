@@ -1,5 +1,8 @@
-import { forwardRef, type CSSProperties } from 'react';
+import { forwardRef } from 'react';
 import './Sparkline.css';
+
+/** Las ocho ranuras categóricas del sistema — `chart-series-1`…`8`. */
+export type SparklineSeries = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 export interface SparklineProps extends Omit<React.ComponentPropsWithoutRef<'svg'>, 'width' | 'height' | 'values' | 'color'> {
   /** Serie a dibujar, en orden. Doce puntos es la longitud de referencia. */
@@ -15,11 +18,11 @@ export interface SparklineProps extends Omit<React.ComponentPropsWithoutRef<'svg
   /** Línea del cero cuando la serie lo cruza. Default `true`. */
   baseline?: boolean;
   /**
-   * Color del trazo. Solo una referencia a token (`'var(--chart-series-3)'`).
-   * Sin este dato, la chispa va en el gris de atenuación: el dato que se lee es
-   * la cifra que tiene al lado.
+   * Ranura de serie del trazo (1–8), para emparejar la chispa con un gráfico
+   * que esté al lado. Sin ella la chispa va en el gris de atenuación: el dato
+   * que se lee es la cifra que tiene al lado.
    */
-  color?: string;
+  series?: SparklineSeries;
   /**
    * Descripción para lectores de pantalla. Sin ella la chispa se marca como
    * decorativa —lo correcto dentro de un `StatTile`, donde la cifra y su
@@ -41,6 +44,10 @@ const GEOMETRY = {
  * La chispa: una serie diminuta sin ejes ni rótulos, para acompañar a una cifra
  * dentro de un `StatTile`. No es un gráfico —no se leen valores en ella—, es la
  * forma de la tendencia.
+ *
+ * La ranura de color viaja en `data-series` y la resuelve la hoja: un atributo
+ * `style` con la referencia al token lo descartaría una app servida con
+ * `style-src 'self'`.
  */
 export const Sparkline = forwardRef<SVGSVGElement, SparklineProps>(function Sparkline({
   values,
@@ -49,7 +56,7 @@ export const Sparkline = forwardRef<SVGSVGElement, SparklineProps>(function Spar
   height = GEOMETRY.height,
   marker = true,
   baseline = true,
-  color,
+  series,
   ariaLabel,
   className,
   ...rest
@@ -60,7 +67,6 @@ export const Sparkline = forwardRef<SVGSVGElement, SparklineProps>(function Spar
   const min = clean.length ? Math.min(...clean) : 0;
   const max = clean.length ? Math.max(...clean) : 1;
   const span = max - min || 1;
-  const style = color ? ({ '--sparkline-mark-color': color } as CSSProperties) : undefined;
 
   const points = clean.map((value, i) => ({
     x: pad + (clean.length > 1 ? (i * (width - pad * 2)) / (clean.length - 1) : (width - pad * 2) / 2),
@@ -77,7 +83,7 @@ export const Sparkline = forwardRef<SVGSVGElement, SparklineProps>(function Spar
     <svg
       ref={ref}
       className={classes}
-      style={style}
+      data-series={series}
       viewBox={`0 0 ${width} ${height}`}
       width={width}
       height={height}

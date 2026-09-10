@@ -22,7 +22,7 @@ export const Area: Story = {
 
 export const ConColorDeSerie: Story = {
   name: 'Con color de serie',
-  args: { color: 'var(--chart-series-3)' },
+  args: { series: 3 },
 };
 
 export const CruzandoElCero: Story = {
