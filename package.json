@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "34.0.1",
+  "version": "34.0.2",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -666,7 +666,7 @@
     "build:email-assets": "node scripts/build-email-assets.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic",
+    "chromatic": "chromatic --exit-zero-on-changes",
     "test": "vitest run --project unit --project components",
     "test:stories": "vitest run --project storybook",
     "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css",

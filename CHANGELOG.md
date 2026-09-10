@@ -7,6 +7,46 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [34.0.2] — 2026-09-11
+
+> **Patch.** Solo stories, tests y documentación: ni un cambio en componentes,
+> CSS ni tokens. `dist/` no se mueve.
+
+- **Chromatic entra en el flujo del DS, y las 19 stories que rompían en él ya
+  no rompen.** La primera subida capturaba las 1532 stories pero fallaba con 19
+  *component errors*: stories con `play` que pasan en `pnpm test:stories` y
+  revientan en el navegador de captura. La causa no era Chromatic sino los
+  propios `play`, que daban por hecho lo que en local les regala el runner:
+  `@storybook/addon-vitest` renderiza dentro de `act()`, que vacía los efectos
+  de React antes de llamar al `play`; un navegador de verdad no lo hace.
+  - `Modal` y `Sheet` (14 + 5 stories) buscaban el popup con
+    `document.querySelector('.modal__content')` / `.sheet` nada más arrancar,
+    cuando el portal todavía no existía → `null`. Ahora se espera con
+    `await screen.findByRole('dialog')`.
+  - Los dos «panel opaco en reposo» de cada uno esperaban a `animationend`.
+    Donde las animaciones están desactivadas ese evento no llega nunca y el
+    `play` se colgaba hasta el timeout. Ahora se espera al **valor final** con
+    `waitFor`, que vale con animación y sin ella.
+  - `AvatarUpload` › «la diana se anuncia y acepta el archivo» disparaba
+    `dragenter` sobre `window` antes de que el efecto hubiera instalado el
+    escucha. Ahora el evento va dentro del `waitFor`, que lo reintenta.
+  - `Container` › «fondo y color voltean juntos» y `Logo` › «mide su talla y
+    hereda la superficie» troceaban el hexadecimal del token de dos en dos. El
+    CSS del Storybook compilado va minificado y ahí `#ffffff` viaja como
+    `#fff`: salía `rgb(255, 15, NaN)`. Ahora el color lo resuelve el navegador
+    con una sonda `color: var(--token)`.
+  - `Tipografía` › «las fuentes las trae el DS» esperaba a
+    `document.fonts.ready`, que resuelve en vacío cuando el `play` corre antes
+    de la primera maqueta: no hay descarga pendiente y `check()` responde
+    `false`. Ahora las tres caras se piden con `document.fonts.load(...)`.
+- **El flujo queda escrito en CLAUDE.md**: dónde vive el token (fuera del repo,
+  `~/.config/slxd/chromatic.env`), cuándo se corre (en cada release, después de
+  `release:check` y antes del tag) y que la revisión y la aceptación se hacen en
+  chromatic.com. El script `pnpm chromatic` lleva ya `--exit-zero-on-changes`, y
+  los informes del CLI (`chromatic-diagnostics.json`, `chromatic.log`…) van al
+  `.gitignore`. Se añaden además las tres reglas para escribir un `play` que
+  aguante fuera de local.
+
 ## [34.0.1] — 2026-09-11
 
 > **Patch.** Bug fix.
