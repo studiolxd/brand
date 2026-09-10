@@ -7,6 +7,18 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.2.0] — 2026-09-10
+
+> **Minor.**
+
+- **`NotificationPanel`**: «Marcar todas como leídas» pasa bajo la lista y
+  sobre los enlaces del pie, como botón a ancho completo (`block`), y solo se
+  pinta con `onMarkAllRead` y alguna notificación sin leer. La fila ya no
+  pinta la barra de tinta en hover (retirados los tokens
+  `item-hover-marker-*`); solo el cursor, como `SidebarNav`. La hora va bajo
+  la descripción, alineada al final. Clase `notification-panel__mark-all-row`
+  → `notification-panel__mark-all` (CSS interno del componente).
+
 ## [33.1.0] — 2026-09-10
 
 > **Minor.**

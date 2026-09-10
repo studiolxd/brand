@@ -19,16 +19,16 @@ function h({ children: e, ...t }) {
 }
 var g = "button, a[href]", _ = "link--ink notification-panel__footer-link";
 function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, allHref: C, preferencesHref: w, renderLink: T = h, label: E, countLabel: D, panelLabel: O = "Notificaciones", unreadLabel: k = "Sin leer", emptyLabel: A = "Estás al día", allLabel: j = "Ver todas las notificaciones", preferencesLabel: M = "Preferencias de notificaciones", markAllReadLabel: N = "Marcar todas como leídas", open: P, defaultOpen: F, onOpenChange: I, className: L }) {
-	let R = f(), z = p(null), [B, V] = m([]), H = (e) => e.unread && !B.includes(e.id), U = (e) => {
+	let R = f(), z = p(null), [B, V] = m([]), H = (e) => e.unread && !B.includes(e.id), U = v.some(H), W = (e) => {
 		H(e) && (V((t) => [...t, e.id]), x(e.id));
-	}, W = () => {
+	}, G = () => {
 		V(v.map((e) => e.id)), S?.();
-	}, G = d(() => {
+	}, K = d(() => {
 		let e = z.current;
 		return e ? e.querySelector(".notification-panel__item-action") ?? e.querySelector(g) : null;
-	}, []), K = (e, t) => {
+	}, []), q = (e, t) => {
 		e || V([]), I?.(e, t);
-	}, q = `${R}-title`;
+	}, J = `${R}-title`;
 	return /* @__PURE__ */ l(a, {
 		trigger: /* @__PURE__ */ l(s, {
 			count: y,
@@ -40,8 +40,8 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 		align: "end",
 		open: P,
 		defaultOpen: F,
-		onOpenChange: K,
-		initialFocus: G,
+		onOpenChange: q,
+		initialFocus: K,
 		className: ["notification-panel", L].filter(Boolean).join(" "),
 		children: /* @__PURE__ */ u("div", {
 			className: "notification-panel__body",
@@ -50,18 +50,9 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 				/* @__PURE__ */ l(t, { children: /* @__PURE__ */ l(r, {
 					level: 2,
 					size: 3,
-					id: q,
+					id: J,
 					children: O
 				}) }),
-				S && /* @__PURE__ */ l("div", {
-					className: "notification-panel__mark-all-row",
-					children: /* @__PURE__ */ l(n, {
-						variant: "outline",
-						size: "sm",
-						onClick: W,
-						children: N
-					})
-				}),
 				v.length === 0 ? /* @__PURE__ */ l("div", {
 					className: "notification-panel__empty",
 					children: /* @__PURE__ */ l(i, {
@@ -70,7 +61,7 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 					})
 				}) : /* @__PURE__ */ l("ul", {
 					className: "notification-panel__list",
-					"aria-labelledby": q,
+					"aria-labelledby": J,
 					children: v.map((n, r) => {
 						let i = H(n), a = `${R}-t-${r}`;
 						return /* @__PURE__ */ l("li", {
@@ -79,7 +70,7 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 								type: "button",
 								className: "notification-panel__item-action",
 								"aria-disabled": i ? void 0 : !0,
-								onClick: () => U(n),
+								onClick: () => W(n),
 								children: [/* @__PURE__ */ l("span", {
 									className: "notification-panel__indicator",
 									children: i && /* @__PURE__ */ u(c, { children: [/* @__PURE__ */ l(e, {
@@ -89,26 +80,37 @@ function v({ items: v = [], count: y = 0, max: b, onRead: x, onMarkAllRead: S, a
 									}), /* @__PURE__ */ l(t, { children: k })] })
 								}), /* @__PURE__ */ u("span", {
 									className: "notification-panel__item-text",
-									children: [/* @__PURE__ */ u("span", {
-										className: "notification-panel__item-head",
-										children: [/* @__PURE__ */ l(o, {
+									children: [
+										/* @__PURE__ */ l(o, {
 											id: a,
 											tone: i ? "default" : "muted",
 											className: ["notification-panel__item-title", i ? "notification-panel__item-title--unread" : ""].filter(Boolean).join(" "),
 											children: n.title
-										}), /* @__PURE__ */ l(o, {
+										}),
+										n.body && /* @__PURE__ */ l(o, {
+											tone: "muted",
+											className: "notification-panel__item-body",
+											children: n.body
+										}),
+										/* @__PURE__ */ l(o, {
 											tone: "muted",
 											className: "notification-panel__item-time",
 											children: n.time
-										})]
-									}), n.body && /* @__PURE__ */ l(o, {
-										tone: "muted",
-										className: "notification-panel__item-body",
-										children: n.body
-									})]
+										})
+									]
 								})]
 							})
 						}, n.id);
+					})
+				}),
+				S && U && /* @__PURE__ */ l("div", {
+					className: "notification-panel__mark-all",
+					children: /* @__PURE__ */ l(n, {
+						variant: "outline",
+						size: "sm",
+						block: !0,
+						onClick: G,
+						children: N
 					})
 				}),
 				/* @__PURE__ */ l("div", {

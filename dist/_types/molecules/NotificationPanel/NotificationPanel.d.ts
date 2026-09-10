@@ -41,7 +41,10 @@ export interface NotificationPanelProps {
      * sitio sin esperar respuesta.
      */
     onRead: (id: string) => void;
-    /** Con ella el pie pinta «Marcar todas como leídas»; sin ella, no. */
+    /**
+     * Con ella se pinta «Marcar todas como leídas» bajo la lista, **y solo
+     * mientras quede alguna sin leer**; sin ella, no se pinta nunca.
+     */
     onMarkAllRead?: () => void;
     /** Destino de la bandeja completa. */
     allHref: string;
