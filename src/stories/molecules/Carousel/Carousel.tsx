@@ -2,6 +2,7 @@ import { Children, useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '../../atoms/Button/Button';
 import { Icon } from '../../atoms/Icon/Icon';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
+import { useCssProperties } from '../../constants/css-properties';
 import './Carousel.css';
 
 export interface CarouselProps {
@@ -151,13 +152,17 @@ export function Carousel({
     }
   };
 
-  const style = slideSize ? ({ '--carousel-slide-size': slideSize } as React.CSSProperties) : undefined;
+  // El ancho de diapositiva es una medida libre del consumidor: se escribe por
+  // el CSSOM, no en un atributo `style` (que una app con `style-src 'self'`
+  // descartaría sin avisar). En el HTML del servidor el carrusel sale con el
+  // ancho por defecto de la hoja hasta que hidrata.
+  const rootRef = useCssProperties({ '--carousel-slide-size': slideSize });
 
   return (
     <div
       id={id}
+      ref={rootRef}
       className={['carousel', className].filter(Boolean).join(' ')}
-      style={style}
       role="region"
       aria-roledescription={roleDescription}
       aria-label={label}

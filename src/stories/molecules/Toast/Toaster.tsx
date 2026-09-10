@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { Toast } from '@base-ui/react/toast';
+import { useCssProperties } from '../../constants/css-properties';
 import { Button } from '../../atoms/Button/Button';
 import { CloseButton } from '../../atoms/CloseButton/CloseButton';
 import {
@@ -90,6 +91,11 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
     syncLiveToasts(ids ? ids.split(',') : []);
   }, [ids]);
 
+  // El viewport vive en un portal y solo existe en cliente: la separación se
+  // escribe por el CSSOM, nunca en un atributo `style` (que una app con
+  // `style-src 'self'` descartaría sin avisar).
+  const viewportRef = useCssProperties({ '--toast-gap': `${gap}px` });
+
   const classes = [
     'toaster',
     side === 'top' ? 'toaster--top' : '',
@@ -100,9 +106,9 @@ function ToastList({ position, containerAriaLabel, closeLabel, closeButton, gap,
   return (
     <Toast.Portal>
       <Toast.Viewport
+        ref={viewportRef}
         className={classes}
         aria-label={containerAriaLabel}
-        style={{ '--toast-gap': `${gap}px` } as React.CSSProperties}
       >
         {toasts.map((item) => (
           <Toast.Root
