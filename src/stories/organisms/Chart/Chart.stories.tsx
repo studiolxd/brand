@@ -409,7 +409,10 @@ export const TestColorPorDato: Story = {
     formatValue: undefined,
   },
   play: async ({ canvasElement }) => {
-    const barra = canvasElement.querySelector('.chart__bar');
-    await expect(barra).toHaveStyle({ '--chart-mark-color': '#1E7FF6' });
+    const barra = canvasElement.querySelector('.chart__bar')!;
+    // El color de dato llega como atributo de presentación, no en `style`: se
+    // comprueba que efectivamente pinta, que es el contrato.
+    await expect(barra).toHaveAttribute('fill', '#1E7FF6');
+    await expect(getComputedStyle(barra).fill).toBe('rgb(30, 127, 246)');
   },
 };
