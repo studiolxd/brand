@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CodeBlock } from './CodeBlock';
+import { CodeBlock, CodeToken } from './CodeBlock';
 
 function mockClipboard(writeText: (text: string) => Promise<void>) {
   Object.defineProperty(navigator, 'clipboard', {
@@ -108,5 +108,25 @@ describe('CodeBlock', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Copy code' }));
     expect(screen.getByRole('status')).toHaveTextContent('Copied');
     expect(screen.getByRole('region', { name: 'ts code' })).toBeInTheDocument();
+  });
+});
+
+describe('CodeToken', () => {
+  it('pone la clase base y la del tipo, y ningún estilo inline', () => {
+    render(<CodeToken type="keyword">const</CodeToken>);
+    const token = screen.getByText('const');
+    expect(token.tagName).toBe('SPAN');
+    expect(token).toHaveClass('code-block__token', 'code-block__token--keyword');
+    expect(token.getAttribute('style')).toBeNull();
+  });
+
+  it('className se añade DESPUÉS de las clases propias', () => {
+    render(<CodeToken type="string" className="propia">&apos;hola&apos;</CodeToken>);
+    expect(screen.getByText("'hola'")).toHaveClass('code-block__token', 'code-block__token--string', 'propia');
+  });
+
+  it('reenvía atributos al span', () => {
+    render(<CodeToken type="comment" data-testid="nota">// nota</CodeToken>);
+    expect(screen.getByTestId('nota')).toHaveClass('code-block__token--comment');
   });
 });

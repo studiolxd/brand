@@ -21,17 +21,27 @@ import { token } from '../../tokens/tokens';
 
 import { OG_FONT_FAMILY } from './ogTypeface';
 
+/**
+ * Los nueve pesos que admite satori, que no acepta un `number` cualquiera. Se
+ * declara aquí —y no se importa de `satori`— porque satori no es dependencia
+ * de este paquete: la tarjeta se arma con `ogCard()` y la renderiza la
+ * aplicación, que es quien lo trae.
+ */
+export type OgFontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+
 /** Una cara, en la forma exacta que espera la opción `fonts` de satori. */
 export interface OgFont {
   name: string;
   data: ArrayBuffer;
-  weight: number;
+  weight: OgFontWeight;
   style: 'normal';
 }
 
+/* Los dos pesos salen de tokens (`300` y `500`), así que el valor es uno de la
+   unión aunque `Number()` lo devuelva ensanchado a `number`. */
 const CARAS = [
-  { weight: Number(token('--font-weight-default')), file: 'google-sans-flex-normal-300.ttf' },
-  { weight: Number(token('--font-weight-emphasis')), file: 'google-sans-flex-normal-500.ttf' },
+  { weight: Number(token('--font-weight-default')) as OgFontWeight, file: 'google-sans-flex-normal-300.ttf' },
+  { weight: Number(token('--font-weight-emphasis')) as OgFontWeight, file: 'google-sans-flex-normal-500.ttf' },
 ] as const;
 
 /*

@@ -54,6 +54,18 @@ no es información para quien no lo distingue.
 | `em` | Énfasis de lectura: cambia cómo se dice la frase. |
 | `strong` | Importancia: esto es lo que no puede pasarse por alto. |
 
+## Salto de línea
+
+`LineBreak` es un `<br>` con nombre y sin pintura propia. Está aquí por los
+textos traducidos: una app escribe `t.rich('…', { br: () => <LineBreak /> })`
+porque en el catálogo de cadenas no puede escribir marcado.
+
+<Canvas of={TextStories.SaltoDeLinea} />
+
+Solo **dentro de una frase** —un lema, una dirección postal, un verso—, donde el
+corte es parte de lo que se dice. **Entre párrafos no**: eso es separación, y la
+dan `Paragraph` y `Stack`.
+
 ## Superficie oscura
 
 Las tres tintas pasan a su par `*-on-dark` por token `surface-dark-*`.

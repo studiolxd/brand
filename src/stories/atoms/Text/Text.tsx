@@ -63,3 +63,27 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text({
     </Element>
   );
 });
+
+export interface LineBreakProps extends React.ComponentPropsWithoutRef<'br'> {
+  /** Se añade DESPUÉS de las clases propias. */
+  className?: string;
+}
+
+/**
+ * Salto de línea **dentro de una frase**: un `<br>` con nombre, sin pintura
+ * propia. Existe porque un texto traducido no puede traer marcado —una app
+ * escribe `t.rich('…', { br: () => <LineBreak /> })` y no puede escribir
+ * `<br>` en el catálogo de cadenas.
+ *
+ * Solo para cortar una línea dentro de una misma frase: un lema, una
+ * dirección, un verso. **Entre párrafos no**: eso es separación, y la dan
+ * `Paragraph` y `Stack`.
+ */
+export const LineBreak = forwardRef<HTMLBRElement, LineBreakProps>(function LineBreak({
+  className,
+  ...rest
+}, ref) {
+  const classes = ['text__break', className ?? ''].filter(Boolean).join(' ');
+
+  return <br ref={ref} className={classes} {...rest} />;
+});

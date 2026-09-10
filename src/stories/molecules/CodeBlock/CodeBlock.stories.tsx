@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
-import { CodeBlock } from './CodeBlock';
+import { CodeBlock, CodeToken } from './CodeBlock';
 
 const meta: Meta<typeof CodeBlock> = {
   title: 'Molecules/CodeBlock',
@@ -119,8 +119,68 @@ export const UnaLineaSuperficieOscura: Story = {
 export const ConNodosResaltados: Story = {
   render: () => (
     <CodeBlock language="tsx" copyable>
-      <span style={{ color: 'var(--color-accent-1)' }}>const</span> mensaje ={' '}
-      <span style={{ color: 'var(--color-support-1)' }}>&apos;resaltado externo&apos;</span>;
+      <CodeToken type="keyword">const</CodeToken> <CodeToken type="variable">mensaje</CodeToken>{' '}
+      <CodeToken type="operator">=</CodeToken>{' '}
+      <CodeToken type="string">&apos;resaltado externo&apos;</CodeToken>
+      <CodeToken type="punctuation">;</CodeToken>
+    </CodeBlock>
+  ),
+};
+
+/* El fragmento de las dos stories de resaltado, marcado a mano: aquí no hay
+   resaltador, que es justo lo que se quiere enseñar — el vocabulario de clases
+   con el que un producto traduce la salida del suyo. */
+const fragmentoResaltado = (
+  <>
+    <CodeToken type="comment">{'// Precio del plan, en céntimos'}</CodeToken>{'\n'}
+    <CodeToken type="keyword">export</CodeToken> <CodeToken type="keyword">const</CodeToken>{' '}
+    <CodeToken type="variable">PRECIO</CodeToken> <CodeToken type="operator">=</CodeToken>{' '}
+    <CodeToken type="number">2900</CodeToken><CodeToken type="punctuation">;</CodeToken>{'\n\n'}
+    <CodeToken type="keyword">export</CodeToken> <CodeToken type="keyword">function</CodeToken>{' '}
+    <CodeToken type="function">formatea</CodeToken><CodeToken type="punctuation">(</CodeToken>
+    <CodeToken type="variable">céntimos</CodeToken><CodeToken type="punctuation">)</CodeToken>{' '}
+    <CodeToken type="punctuation">{'{'}</CodeToken>{'\n  '}
+    <CodeToken type="keyword">if</CodeToken> <CodeToken type="punctuation">(</CodeToken>
+    <CodeToken type="variable">céntimos</CodeToken> <CodeToken type="operator">==</CodeToken>{' '}
+    <CodeToken type="constant">null</CodeToken><CodeToken type="punctuation">)</CodeToken>{' '}
+    <CodeToken type="keyword">return</CodeToken>{' '}
+    <CodeToken type="string">&apos;—&apos;</CodeToken><CodeToken type="punctuation">;</CodeToken>{'\n  '}
+    <CodeToken type="keyword">return</CodeToken> <CodeToken type="variable">euros</CodeToken>
+    <CodeToken type="punctuation">.</CodeToken><CodeToken type="property">format</CodeToken>
+    <CodeToken type="punctuation">(</CodeToken><CodeToken type="variable">céntimos</CodeToken>{' '}
+    <CodeToken type="operator">/</CodeToken> <CodeToken type="number">100</CodeToken>
+    <CodeToken type="punctuation">);</CodeToken>{'\n'}
+    <CodeToken type="punctuation">{'}'}</CodeToken>
+  </>
+);
+
+/**
+ * El vocabulario de clases, con un fragmento marcado a mano. El resaltador es
+ * del producto: `CodeBlock` solo pone los tipos y su tinta.
+ */
+export const Resaltado: Story = {
+  name: 'Resaltado de sintaxis',
+  render: () => (
+    <CodeBlock language="ts" copyable singleLine={false}>{fragmentoResaltado}</CodeBlock>
+  ),
+};
+
+/** Las mismas tintas en superficie oscura: cada tipo pasa a su par por token. */
+export const ResaltadoSuperficieOscura: Story = {
+  name: 'Resaltado de sintaxis — en superficie oscura',
+  parameters: { surface: 'dark' },
+  render: () => (
+    <CodeBlock language="ts" copyable singleLine={false}>{fragmentoResaltado}</CodeBlock>
+  ),
+};
+
+/** Las dos líneas de un diff van como relleno, no como tinta suelta. */
+export const ResaltadoDiff: Story = {
+  name: 'Resaltado de sintaxis — diff',
+  render: () => (
+    <CodeBlock language="diff" singleLine={false}>
+      <CodeToken type="deleted">- const precio = 29;</CodeToken>
+      <CodeToken type="inserted">+ const precio = 2900;</CodeToken>
     </CodeBlock>
   ),
 };
@@ -289,5 +349,36 @@ export const ContratoSinCabecera: Story = {
   play: async ({ canvasElement }) => {
     await expect(canvasElement.querySelector('.code-block__header')).toBeNull();
     await expect(within(canvasElement).getByRole('region', { name: 'Bloque de código' })).toBeInTheDocument();
+  },
+};
+
+export const ContratoCodeToken: Story = {
+  name: 'Test — CodeToken pone las clases del tipo y ningún estilo inline',
+  tags: ['!dev'],
+  render: () => (
+    <div data-testid="resaltado">
+      <CodeBlock language="ts" singleLine={false}>
+        <CodeToken type="keyword">const</CodeToken>
+        <CodeToken type="string">&apos;hola&apos;</CodeToken>
+        <CodeToken type="inserted">+ añadida</CodeToken>
+      </CodeBlock>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const bloque = canvas.getByTestId('resaltado');
+
+    const keyword = canvas.getByText('const');
+    await expect(keyword.tagName).toBe('SPAN');
+    await expect(keyword).toHaveClass('code-block__token');
+    await expect(keyword).toHaveClass('code-block__token--keyword');
+
+    // La razón de existir del componente: el color sale de un token, no de un
+    // `style` inline como el que hoy pone el consumidor.
+    for (const token of bloque.querySelectorAll('.code-block__token')) {
+      await expect(token.getAttribute('style')).toBeNull();
+    }
+
+    await expect(canvas.getByText('+ añadida')).toHaveClass('code-block__token--inserted');
   },
 };

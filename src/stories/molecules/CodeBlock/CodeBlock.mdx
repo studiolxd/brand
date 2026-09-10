@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as CodeBlockStories from "./CodeBlock.stories";
 import { TokenTable } from "../../foundations/TokenTable";
-import { codeBlockTokens } from "../../../tokens/components/code-block";
+import { codeBlockTokens, codeBlockSyntaxTokens, codeBlockDarkTokens } from "../../../tokens/components/code-block";
 
 <Meta of={CodeBlockStories} />
 
@@ -9,7 +9,7 @@ import { codeBlockTokens } from "../../../tokens/components/code-block";
 
 Un fragmento de código listo para leer y copiar: un comando de instalación, un ejemplo de uso, la respuesta de una API. Es una **superficie clara secundaria** —el gris claro que el sistema reserva para código, teclas y burbujas— sobre el fondo de la página.
 
-No resalta sintaxis: acepta texto plano o nodos ya formateados por un highlighter externo. Para una tecla suelta (`⌘K`), `Kbd`; para código dentro de un párrafo, el `<code>` de la prosa.
+No resalta sintaxis —el resaltador es del producto—, pero sí pone el **vocabulario** con el que pintarlo: acepta texto plano o nodos ya formateados por un highlighter externo, y `CodeToken` les da la tinta del sistema (ver § «Resaltado de sintaxis»). Para una tecla suelta (`⌘K`), `Kbd`; para código dentro de un párrafo, el `<code>` de la prosa.
 
 <Canvas of={CodeBlockStories.PorDefecto} />
 
@@ -50,6 +50,86 @@ El `<pre>` interno usa `overflow-x: auto`: una línea muy larga hace scroll dent
 
 <Canvas of={CodeBlockStories.ConNodosResaltados} />
 
+## Resaltado de sintaxis
+
+El **resaltador es del producto** —shiki, prism, el que sea—: no entra en el paquete, que no debe arrastrar una gramática de cada lenguaje. Lo que pone el sistema es el **vocabulario**: quince tipos de token, cada uno con su clase y su tinta.
+
+<Canvas of={CodeBlockStories.Resaltado} />
+
+`CodeToken` es la pieza: un `<span class="code-block__token code-block__token--<tipo>">` cuyo `type` está tipado por la unión `CodeTokenType`.
+
+```tsx
+import { CodeBlock, CodeToken } from '@studiolxd/brand';
+
+<CodeBlock language="ts" copyable>
+  {tokens.map((token, i) => (
+    <CodeToken key={i} type={tipo(token.scopes)}>{token.content}</CodeToken>
+  ))}
+</CodeBlock>
+```
+
+Existe por una razón concreta: sin él, el consumidor pinta cada trozo con `style={{ color: token.color }}` —el color que le devuelve su resaltador—, y un color inline se salta la cascada, el tema oscuro y la superficie pública. Con la clase, la tinta la decide el sistema y el par oscuro sale solo.
+
+### Las quince categorías
+
+Quince tipos, **seis tintas**: varios tipos comparten color a propósito, porque la paleta de marca no da quince colores que lleguen a AA sobre las dos superficies del bloque (el gris claro y su par oscuro) y **no se inventan colores**. Un resaltador emite decenas de ámbitos; el mapeo hacia estos quince lo hace el producto.
+
+| Tinta | Tipos | Claro | Oscuro |
+|---|---|---|---|
+| Palabra del lenguaje | `keyword`, `tag`, `constant` | `color.chart.sequential-700` | `color.chart.sequential-700-on-dark` |
+| Literal | `string`, `regexp`, `attribute` | `color.green` | `color.emerald` |
+| Cálida | `number`, `function` | `color.chart.diverging-warm-3` | `color.yellow` |
+| Secundaria | `comment`, `punctuation`, `operator` | `color.text.muted-on-light` | `color.text.muted-on-dark` |
+| Del bloque | `variable`, `property` | `code-block.color` | `code-block.surface-dark-color` |
+| Relleno | `inserted`, `deleted` | `color.success-fill` / `color.destructive-fill` | *(universal, no cambia)* |
+
+Los nombres que pone quien escribe el código —variables y propiedades— van en la **tinta del bloque**: son el texto corriente del fragmento, no una categoría del lenguaje. Y las dos del diff van como **relleno**, no como tinta suelta, que es el mismo dibujo que el resto de rellenos de feedback del sistema.
+
+<Canvas of={CodeBlockStories.ResaltadoDiff} />
+
+### Mapear la salida de shiki
+
+shiki no devuelve tipos: devuelve **ámbitos TextMate** (`keyword.control.flow.ts`, `string.quoted.single.ts`) junto al color del tema. Se descarta el color y se traduce el ámbito, quedándose con el prefijo:
+
+```ts
+import type { CodeTokenType } from '@studiolxd/brand';
+
+const AMBITOS: [string, CodeTokenType][] = [
+  ['comment',                 'comment'],
+  ['string.regexp',           'regexp'],
+  ['string',                  'string'],
+  ['constant.numeric',        'number'],
+  ['constant',                'constant'],
+  ['keyword.operator',        'operator'],
+  ['keyword',                 'keyword'],
+  ['storage',                 'keyword'],
+  ['entity.name.function',    'function'],
+  ['support.function',        'function'],
+  ['entity.name.tag',         'tag'],
+  ['entity.other.attribute-name', 'attribute'],
+  ['variable.other.property', 'property'],
+  ['support.type.property-name', 'property'],
+  ['variable',                'variable'],
+  ['punctuation',             'punctuation'],
+  ['markup.inserted',         'inserted'],
+  ['markup.deleted',          'deleted'],
+];
+
+/** El primer prefijo que casa gana: la lista va de más específico a más general. */
+export function tipo(scopes: string[]): CodeTokenType {
+  for (const [prefijo, resultado] of AMBITOS) {
+    if (scopes.some((s) => s.startsWith(prefijo))) return resultado;
+  }
+  return 'variable';
+}
+```
+
+El orden importa: `string.regexp` va antes que `string`, y `keyword.operator` antes que `keyword`. Lo que no casa cae en `variable`, que es la tinta del bloque —un token sin categoría se lee como texto corriente, que es exactamente lo que es.
+
+Con prism el mecanismo es el mismo cambiando la tabla: sus tipos (`token keyword`, `token punctuation`) ya se parecen a estos quince.
+
+<Canvas of={CodeBlockStories.ResaltadoSuperficieOscura} />
+
 ## Una línea
 
 Para enseñar un valor de una sola línea —una URL, un comando corto— con botón de copiar: el código a la izquierda, con su propio scroll horizontal si no cabe, y el lenguaje y el botón de copiar a la derecha, **centrados en vertical**, en una sola fila. Sin la cabecera aparte de la variante multilínea, que dejaba un hueco vacío encima del texto cuando el bloque era corto.
@@ -71,12 +151,21 @@ El fondo, el borde y la tinta pasan a su par oscuro por la regla de derivación:
 
 <TokenTable tokens={codeBlockTokens} />
 
+### Resaltado de sintaxis
+
+<TokenTable tokens={codeBlockSyntaxTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={codeBlockDarkTokens} />
+
 ## Accesibilidad
 
 - El **área de código** lleva `tabindex="0"` y `role="region"` con nombre accesible (`codeLabel`): un contenedor con scroll debe poder recorrerse con teclado, y al ser focalizable necesita anillo de foco propio — el del sistema, con los tokens `focus-ring-*`.
 - El **botón de copiar** mantiene siempre el mismo nombre accesible (`copyLabel`): cambiarlo bajo el foco haría que el lector de pantalla renombrase el botón que el usuario está usando. El resultado se anuncia por separado, en una región `role="status"` (live polite) con `copiedLabel`.
 - Si el portapapeles no está disponible (contexto no seguro, permiso denegado), no hay anuncio de copiado y el código sigue siendo seleccionable a mano.
-- **Contraste**: tinta prusia sobre gris claro, AAA en ambos temas.
+- **Contraste**: tinta prusia sobre gris claro, AAA en ambos temas. Las seis tintas del resaltado llegan a AA (4,5:1) sobre las dos superficies del bloque; los valores están anotados token a token.
+- El resaltado es **solo color**: un token no dice nada a quien no distingue el color, y no hace falta que lo diga — el código se lee igual sin tintas.
 
 ## Props
 
