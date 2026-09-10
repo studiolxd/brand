@@ -42,6 +42,7 @@
 @import "./molecules/form-field.css";
 @import "./molecules/field-row.css";
 @import "./molecules/filter-bar.css";
+@import "./molecules/page-intro.css";
 @import "./molecules/site-nav.css";
 @import "./molecules/language-switcher.css";
 @import "./molecules/theme-switcher.css";

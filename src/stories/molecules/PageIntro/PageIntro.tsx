@@ -10,10 +10,24 @@ export interface PageIntroProps {
   description?: ReactNode;
   /** Más texto bajo la frase (otro `Paragraph`, una lista…): mismo aire. */
   children?: ReactNode;
+  /**
+   * La acción principal de la página —«Invitar miembro», «Crear webhook»—, a la
+   * derecha del título y en su misma fila. Una, o dos como mucho: la principal
+   * y una alternativa (`Button variant="outline"`), en ese orden en el JSX. Las
+   * acciones sobre los filtros van en `FilterBar actions`, y las que operan
+   * sobre la tabla, en el `toolbar` del `DataTable`.
+   */
+  actions?: ReactNode;
   /** Nivel del título: 1 por defecto (una cabecera de página). */
   level?: HeadingProps['level'];
   /** Talla tipográfica del título; si no, la que el Heading da a su nivel. */
   size?: HeadingProps['size'];
+  /**
+   * El elemento que envuelve la cabecera: `header` por defecto. `div` para
+   * cuando la cabecera abre una sección que ya vive dentro de otro `header`, o
+   * cuando el molde de fuera necesita un elemento neutro.
+   */
+  as?: 'header' | 'div';
   className?: string;
 }
 
@@ -22,13 +36,34 @@ export interface PageIntroProps {
  * el aire justo entre los dos. Es un `header`: lo que abre acceso, registro,
  * recuperación… y cualquier página que empiece por su nombre. Va como celda
  * de `Columns` o directamente en el `Container`.
+ *
+ * Con `actions` sirve además de cabecera de una sección dentro de la página
+ * (`level={2}`): el título a la izquierda y la acción principal a la derecha.
  */
-export function PageIntro({ title, description, level = 1, size, className, children }: PageIntroProps) {
+export function PageIntro({
+  title,
+  description,
+  actions,
+  level = 1,
+  size,
+  as: Tag = 'header',
+  className,
+  children,
+}: PageIntroProps) {
+  const heading = <Heading level={level} size={size}>{title}</Heading>;
+
   return (
-    <header className={['page-intro', className].filter(Boolean).join(' ')}>
-      <Heading level={level} size={size}>{title}</Heading>
+    <Tag className={['page-intro', className].filter(Boolean).join(' ')}>
+      {actions ? (
+        <div className="page-intro__row">
+          {heading}
+          <div className="page-intro__actions">{actions}</div>
+        </div>
+      ) : (
+        heading
+      )}
       {description && <Paragraph size="large">{description}</Paragraph>}
       {children}
-    </header>
+    </Tag>
   );
 }
