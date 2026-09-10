@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
+import { Link } from '../../atoms/Link/Link';
 import { Table, TableHead, TableBody, TableFooter, TableHeader, TableRow, TableCell } from './Table';
 
 const meta: Meta<typeof Table> = {
@@ -327,8 +328,40 @@ export const ConColumnaDeAcciones: Story = {
           <Table.Row key={p.nombre}>
             <Table.Cell>{p.nombre}</Table.Cell>
             <Table.Cell>{p.cliente}</Table.Cell>
-            <Table.Cell>
+            <Table.Cell actions>
               <Button variant="ghost" size="sm">Editar</Button>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  ),
+};
+
+/**
+ * `Table.Cell actions` evita que el contenido de la columna de acciones se
+ * parta en dos líneas: la cabecera (`width: 1px`) encoge la columna a
+ * min-content, y un enlace de dos palabras como «Ver recibo» tiene sobra de
+ * ancho para partirse ahí sin el `white-space: nowrap` de este modificador.
+ */
+export const ColumnaDeAccionesSinPartir: Story = {
+  name: 'Columna de acciones sin partir',
+  render: () => (
+    <Table caption="Listado de facturas con acciones">
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>Número</Table.Header>
+          <Table.Header>Cliente</Table.Header>
+          <Table.Header actions />
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {PROYECTOS.map((p) => (
+          <Table.Row key={p.nombre}>
+            <Table.Cell>{p.fecha}</Table.Cell>
+            <Table.Cell>{p.cliente}</Table.Cell>
+            <Table.Cell actions>
+              <Link href="#">Ver recibo</Link>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -446,6 +479,48 @@ export const ContratoColumnaPegajosa: Story = {
     // Sin filete de inicio: la columna se distingue solo por su fondo opaco.
     const estilo = getComputedStyle(celdaAcciones);
     await expect(estilo.boxShadow).toBe('none');
+  },
+};
+
+/**
+ * Test: `Table.Cell actions` no deja partir su contenido en dos líneas aunque
+ * la columna, encogida a min-content por la cabecera, le sobre ancho.
+ */
+export const ContratoColumnaDeAccionesSinPartir: Story = {
+  name: 'Test — la columna de acciones no parte su contenido',
+  tags: ['!dev'],
+  render: () => (
+    <Table caption="Listado de facturas con acciones">
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>Número</Table.Header>
+          <Table.Header>Cliente</Table.Header>
+          <Table.Header actions />
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>0001</Table.Cell>
+          <Table.Cell>Cofidis</Table.Cell>
+          <Table.Cell actions>
+            <Link href="#">Ver recibo</Link>
+          </Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const celda = canvasElement.querySelector('.table__cell--actions') as HTMLElement;
+    await expect(celda).not.toBeNull();
+    await expect(getComputedStyle(celda).whiteSpace).toBe('nowrap');
+
+    const enlace = canvas.getByRole('link', { name: 'Ver recibo' });
+    // Una sola línea: el `top` del texto no varía entre el inicio y el final.
+    const rango = document.createRange();
+    rango.selectNodeContents(enlace);
+    const rects = Array.from(rango.getClientRects());
+    await expect(rects).toHaveLength(1);
   },
 };
 

@@ -85,16 +85,17 @@ function c({ onClick: e, interactive: t = !1, selected: r = !1, label: i, childr
 		children: a
 	});
 }
-function l({ sticky: e, children: t, className: r, ...i }) {
-	let a = [
+function l({ sticky: e, actions: t = !1, children: r, className: i, ...a }) {
+	let o = [
 		"table__cell",
 		e === "end" ? "table__cell--sticky" : "",
-		r
+		t ? "table__cell--actions" : "",
+		i
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ n("td", {
-		...i,
-		className: a,
-		children: t
+		...a,
+		className: o,
+		children: r
 	});
 }
 function u({ caption: e, children: t, size: i = "md", className: a, ...o }) {

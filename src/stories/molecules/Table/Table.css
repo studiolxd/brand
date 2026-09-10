@@ -146,6 +146,13 @@
   width: 1px;
 }
 
+/* La columna se encoge a min-content por el `width: 1px` de arriba, así que
+   un enlace de dos palabras («Ver recibo») sobra espacio para partirse en dos
+   líneas. La celda no se encoge: solo impide el salto de línea. */
+.table__cell.table__cell--actions {
+  white-space: nowrap;
+}
+
 /* ── Sticky actions column ───────────────────────────── */
 
 /* Pega la columna al borde final cuando la tabla desborda `.table__wrapper`:

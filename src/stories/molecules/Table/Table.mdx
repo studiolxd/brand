@@ -113,6 +113,13 @@ de distinguir la columna cuando la tabla desborda.
 de `<table>` el navegador da el sobrante a las demás columnas y encoge esta a su
 contenido. Es la forma estándar de decir «esta columna ocupa lo mínimo».
 
+Esa columna encogida puede sobrar ancho a la celda: un enlace o botón de dos palabras
+(«Ver recibo») se parte en dos líneas aunque haya sitio de sobra. `Table.Cell actions`
+—mismo valor que el `actions` de su `Table.Header`— evita el salto de línea
+(`white-space: nowrap`).
+
+<Canvas of={TableStories.ColumnaDeAccionesSinPartir} />
+
 ## Accesibilidad
 
 - La cabecera ordenable es un **`<button>` dentro del `<th>`** (patrón WAI-ARIA). El `th`

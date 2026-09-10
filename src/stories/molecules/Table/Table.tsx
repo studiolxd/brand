@@ -68,6 +68,13 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
    * de esta columna.
    */
   sticky?: 'end';
+  /**
+   * Marca esta celda como parte de la columna de acciones: mismo valor que el
+   * `actions` de la `Table.Header` de esta columna. Impide que su contenido
+   * (un enlace o botón de dos palabras) se parta en dos líneas cuando la
+   * columna, ya encogida a su mínimo, sobra ancho.
+   */
+  actions?: boolean;
   children?: ReactNode;
 }
 
@@ -207,10 +214,11 @@ export function TableRow({
   );
 }
 
-export function TableCell({ sticky, children, className, ...rest }: TableCellProps) {
+export function TableCell({ sticky, actions = false, children, className, ...rest }: TableCellProps) {
   const classes = [
     'table__cell',
     sticky === 'end' ? 'table__cell--sticky' : '',
+    actions ? 'table__cell--actions' : '',
     className,
   ]
     .filter(Boolean)

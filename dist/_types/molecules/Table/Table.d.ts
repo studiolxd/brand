@@ -62,6 +62,13 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
      * de esta columna.
      */
     sticky?: 'end';
+    /**
+     * Marca esta celda como parte de la columna de acciones: mismo valor que el
+     * `actions` de la `Table.Header` de esta columna. Impide que su contenido
+     * (un enlace o botón de dos palabras) se parta en dos líneas cuando la
+     * columna, ya encogida a su mínimo, sobra ancho.
+     */
+    actions?: boolean;
     children?: ReactNode;
 }
 export declare function TableHead({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
@@ -69,7 +76,7 @@ export declare function TableFooter({ children, ...rest }: React.HTMLAttributes<
 export declare function TableBody({ children, ...rest }: React.HTMLAttributes<HTMLTableSectionElement>): import("react/jsx-runtime").JSX.Element;
 export declare function TableHeader({ sortable, sorted, onSort, actions, actionsLabel, sortedAscLabel, sortedDescLabel, sortableLabel, sticky, children, className, scope, ...rest }: TableHeaderProps): import("react/jsx-runtime").JSX.Element;
 export declare function TableRow({ onClick, interactive, selected, label, children, className, ...rest }: TableRowProps): import("react/jsx-runtime").JSX.Element;
-export declare function TableCell({ sticky, children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
+export declare function TableCell({ sticky, actions, children, className, ...rest }: TableCellProps): import("react/jsx-runtime").JSX.Element;
 export declare function Table({ caption, children, size, className, ...rest }: TableProps): import("react/jsx-runtime").JSX.Element;
 export declare namespace Table {
     var Head: typeof TableHead;
