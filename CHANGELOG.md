@@ -7,6 +7,30 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.0.0] — 2026-09-10
+
+> **Major.** Ningún componente emite ya un atributo `style` en el HTML del
+> servidor: las apps pueden servir `style-src 'self'` sin `style-src-attr`.
+
+- **Breaking — `Skeleton`**: desaparece la prop `style`; el bloque pasa de
+  `<span>` a `<svg>` y `width`/`height` son atributos de presentación (las
+  props sueltas se tipan como `SVGProps<SVGSVGElement>`).
+- **Breaking — `Sparkline`**: `color?: string` se sustituye por
+  `series?: 1…8` (`SparklineSeries` exportado); la ranura se resuelve en la
+  hoja por `data-series`.
+- `SiteNav`: columnas por `data-columns` (tope `site-nav.columns-max`).
+- `ProgressBar`: valor por `data-value` (0…100) resuelto en la hoja.
+- `Chart`: ranuras de color por `data-slot`, colores de dato por `fill`/
+  `stroke` de SVG; muestras de leyenda y bocadillo como `<svg><rect>`. Atenuar
+  una serie vuelve a apagar su color (antes el `style` ganaba al modificador).
+  El rótulo de baldosa más allá de la octava ranura cae al token base.
+- `Menu`, `Toaster`, `AppShell`, `Carousel`, `AppLauncher` (`LauncherTile`):
+  medidas y acentos por el CSSOM con `useCssProperties`, solo en cliente;
+  en SSR mandan los defectos de la hoja.
+- `AuthPage`: el hueco del captcha por clase.
+- Regla ESLint contra el atributo `style` en `src/stories/**` (regla 11 de
+  CLAUDE.md § CSS y tokens).
+
 ## [32.14.0] — 2026-09-10
 
 > **Minor.**

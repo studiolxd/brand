@@ -2,76 +2,77 @@
 import './app-shell.css';
 import { SkipLink as e } from "./skip-link.js";
 import { TooltipProvider as t } from "./tooltip.js";
-import { n, t as r } from "./_shared/AppShellContext.js";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-import { useCallback as o, useEffect as s, useMemo as c, useState as l } from "react";
+import { t as n } from "./_shared/css-properties.js";
+import { n as r, t as i } from "./_shared/AppShellContext.js";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+import { useCallback as s, useEffect as c, useMemo as l, useState as u } from "react";
 //#region src/stories/sections/AppShell/AppShell.tsx
-var u = "(min-width: 1024px)";
-function d() {
-	let [e, t] = l(() => typeof window > "u" ? !0 : window.matchMedia(u).matches);
-	return s(() => {
-		let e = window.matchMedia(u), n = () => t(e.matches);
+var d = "(min-width: 1024px)";
+function f() {
+	let [e, t] = u(() => typeof window > "u" ? !0 : window.matchMedia(d).matches);
+	return c(() => {
+		let e = window.matchMedia(d), n = () => t(e.matches);
 		return n(), e.addEventListener("change", n), () => e.removeEventListener("change", n);
 	}, []), e;
 }
-function f({ header: n, sidebar: u, children: f, defaultSidebar: p = "open", sidebarState: m, onSidebarChange: h, defaultSidebarWidth: g, onSidebarWidthChange: _, skipLabel: v = "Saltar al contenido principal" }) {
-	let y = d(), [b, x] = l(p), [S, C] = l(!1), [w, T] = l(g), E = y ? m ?? b : S ? "open" : "closed", D = o((e) => {
-		y ? (x(e), h?.(e)) : C(e === "open");
-	}, [y, h]), O = o(() => D(E === "open" ? "closed" : "open"), [D, E]), k = o(() => D("closed"), [D]), A = o((e) => {
-		T(e), _?.(e);
-	}, [_]);
-	s(() => {
-		if (y || !S) return;
+function p({ header: r, sidebar: d, children: p, defaultSidebar: m = "open", sidebarState: h, onSidebarChange: g, defaultSidebarWidth: _, onSidebarWidthChange: v, skipLabel: y = "Saltar al contenido principal" }) {
+	let b = f(), [x, S] = u(m), [C, w] = u(!1), [T, E] = u(_), D = b ? h ?? x : C ? "open" : "closed", O = s((e) => {
+		b ? (S(e), g?.(e)) : w(e === "open");
+	}, [b, g]), k = s(() => O(D === "open" ? "closed" : "open"), [O, D]), A = s(() => O("closed"), [O]), j = s((e) => {
+		E(e), v?.(e);
+	}, [v]);
+	c(() => {
+		if (b || !C) return;
 		let e = (e) => {
-			e.key === "Escape" && C(!1);
+			e.key === "Escape" && w(!1);
 		};
 		document.addEventListener("keydown", e);
 		let t = document.body.style.overflow;
 		return document.body.style.overflow = "hidden", () => {
 			document.removeEventListener("keydown", e), document.body.style.overflow = t;
 		};
-	}, [y, S]);
-	let j = c(() => ({
-		sidebar: E,
-		setSidebar: D,
-		sidebarWidth: w ?? 0,
-		setSidebarWidth: A,
-		toggleSidebar: O,
-		closeSidebar: k,
-		isDesktop: y
+	}, [b, C]);
+	let M = l(() => ({
+		sidebar: D,
+		setSidebar: O,
+		sidebarWidth: T ?? 0,
+		setSidebarWidth: j,
+		toggleSidebar: k,
+		closeSidebar: A,
+		isDesktop: b
 	}), [
-		E,
 		D,
-		w,
-		A,
 		O,
+		T,
+		j,
 		k,
-		y
-	]), M = !y && S;
-	return /* @__PURE__ */ i(r.Provider, {
-		value: j,
-		children: /* @__PURE__ */ a(t, { children: [/* @__PURE__ */ i(e, {
+		A,
+		b
+	]), N = n({ "--app-shell-sidebar-width": T ? `${T}px` : void 0 }), P = !b && C;
+	return /* @__PURE__ */ a(i.Provider, {
+		value: M,
+		children: /* @__PURE__ */ o(t, { children: [/* @__PURE__ */ a(e, {
 			href: "#main-content",
-			children: v
-		}), /* @__PURE__ */ a("div", {
+			children: y
+		}), /* @__PURE__ */ o("div", {
+			ref: N,
 			className: "app-shell",
-			"data-sidebar": E,
-			style: w ? { "--app-shell-sidebar-width": `${w}px` } : void 0,
-			children: [n, /* @__PURE__ */ a("div", {
+			"data-sidebar": D,
+			children: [r, /* @__PURE__ */ o("div", {
 				className: "app-shell__body",
 				children: [
-					u,
-					M && /* @__PURE__ */ i("div", {
+					d,
+					P && /* @__PURE__ */ a("div", {
 						className: "app-shell__backdrop",
-						onClick: k,
+						onClick: A,
 						"aria-hidden": "true"
 					}),
-					/* @__PURE__ */ i("main", {
+					/* @__PURE__ */ a("main", {
 						id: "main-content",
 						tabIndex: -1,
 						className: "app-shell__content",
-						inert: M || void 0,
-						children: f
+						inert: P || void 0,
+						children: p
 					})
 				]
 			})]
@@ -79,4 +80,4 @@ function f({ header: n, sidebar: u, children: f, defaultSidebar: p = "open", sid
 	});
 }
 //#endregion
-export { f as AppShell, n as useAppShell };
+export { p as AppShell, r as useAppShell };

@@ -2,73 +2,79 @@
 import './app-launcher.css';
 import { Icon as e } from "./icon.js";
 import { Tag as t } from "./tag.js";
-import { jsx as n, jsxs as r } from "react/jsx-runtime";
-import { Popover as i } from "@base-ui/react/popover";
+import { t as n } from "./_shared/css-properties.js";
+import { jsx as r, jsxs as i } from "react/jsx-runtime";
+import { Popover as a } from "@base-ui/react/popover";
 //#region src/stories/molecules/AppLauncher/AppLauncher.tsx
-function a(e) {
+function o(e) {
 	return e.trim().slice(0, 1).toUpperCase();
 }
-function o({ apps: o, labels: s, currentAppId: c, open: l, defaultOpen: u, onOpenChange: d }) {
-	return /* @__PURE__ */ r(i.Root, {
-		open: l,
-		defaultOpen: u,
-		onOpenChange: (e) => d?.(e),
-		children: [/* @__PURE__ */ n(i.Trigger, { render: s.trigger ? /* @__PURE__ */ r("button", {
+function s({ app: e, isCurrent: a, newLabel: s }) {
+	let c = n({ "background-color": e.accent });
+	return /* @__PURE__ */ i("a", {
+		href: e.url,
+		className: `app-launcher__tile${a ? " app-launcher__tile--active" : ""}`,
+		"aria-current": a ? "page" : void 0,
+		children: [
+			/* @__PURE__ */ r("span", {
+				ref: c,
+				className: "app-launcher__tile-icon",
+				"aria-hidden": "true",
+				children: o(e.name)
+			}),
+			/* @__PURE__ */ r("span", {
+				className: "app-launcher__tile-name",
+				children: e.name
+			}),
+			e.isNew && /* @__PURE__ */ r(t, {
+				variant: "info",
+				className: "app-launcher__tile-badge",
+				children: s
+			})
+		]
+	});
+}
+function c({ apps: t, labels: n, currentAppId: o, open: c, defaultOpen: l, onOpenChange: u }) {
+	return /* @__PURE__ */ i(a.Root, {
+		open: c,
+		defaultOpen: l,
+		onOpenChange: (e) => u?.(e),
+		children: [/* @__PURE__ */ r(a.Trigger, { render: n.trigger ? /* @__PURE__ */ i("button", {
 			type: "button",
 			className: "app-launcher__trigger app-launcher__trigger--label",
-			children: [/* @__PURE__ */ n(e, {
+			children: [/* @__PURE__ */ r(e, {
 				name: "grid",
 				size: "md"
-			}), /* @__PURE__ */ n("span", {
+			}), /* @__PURE__ */ r("span", {
 				className: "app-launcher__trigger-label",
-				children: s.trigger
+				children: n.trigger
 			})]
-		}) : /* @__PURE__ */ n("button", {
+		}) : /* @__PURE__ */ r("button", {
 			type: "button",
 			className: "app-launcher__trigger",
-			"aria-label": s.open,
-			children: /* @__PURE__ */ n(e, {
+			"aria-label": n.open,
+			children: /* @__PURE__ */ r(e, {
 				name: "grid",
 				size: "md"
 			})
-		}) }), /* @__PURE__ */ n(i.Portal, { children: /* @__PURE__ */ n(i.Positioner, {
+		}) }), /* @__PURE__ */ r(a.Portal, { children: /* @__PURE__ */ r(a.Positioner, {
 			className: "app-launcher__positioner",
 			sideOffset: 4,
 			align: "end",
-			children: /* @__PURE__ */ n(i.Popup, {
+			children: /* @__PURE__ */ r(a.Popup, {
 				className: "app-launcher__content",
-				children: /* @__PURE__ */ n("ul", {
+				children: /* @__PURE__ */ r("ul", {
 					className: "app-launcher__grid",
 					role: "list",
-					children: o.map((e) => {
-						let i = e.id === c;
-						return /* @__PURE__ */ n("li", { children: /* @__PURE__ */ r("a", {
-							href: e.url,
-							className: `app-launcher__tile${i ? " app-launcher__tile--active" : ""}`,
-							"aria-current": i ? "page" : void 0,
-							children: [
-								/* @__PURE__ */ n("span", {
-									className: "app-launcher__tile-icon",
-									style: { backgroundColor: e.accent },
-									"aria-hidden": "true",
-									children: a(e.name)
-								}),
-								/* @__PURE__ */ n("span", {
-									className: "app-launcher__tile-name",
-									children: e.name
-								}),
-								e.isNew && /* @__PURE__ */ n(t, {
-									variant: "info",
-									className: "app-launcher__tile-badge",
-									children: s.new
-								})
-							]
-						}) }, e.id);
-					})
+					children: t.map((e) => /* @__PURE__ */ r("li", { children: /* @__PURE__ */ r(s, {
+						app: e,
+						isCurrent: e.id === o,
+						newLabel: n.new
+					}) }, e.id))
 				})
 			})
 		}) })]
 	});
 }
 //#endregion
-export { o as AppLauncher };
+export { c as AppLauncher };

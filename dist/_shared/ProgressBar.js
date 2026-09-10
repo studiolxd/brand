@@ -181,9 +181,9 @@ function r({ value: r, variant: i = "primary", size: a = "md", label: o = "Progr
 			"aria-valuemax": 100,
 			"aria-valuetext": `${c}%`,
 			"aria-label": o,
+			"data-value": c,
 			children: [/* @__PURE__ */ e("div", {
 				className: "progress-bar__fill",
-				style: { width: `${c}%` },
 				children: u && /* @__PURE__ */ t("span", {
 					className: "progress-bar__label progress-bar__label--inside",
 					"aria-hidden": "true",
@@ -192,7 +192,6 @@ function r({ value: r, variant: i = "primary", size: a = "md", label: o = "Progr
 			}), d && /* @__PURE__ */ t("span", {
 				className: "progress-bar__label progress-bar__label--outside",
 				"aria-hidden": "true",
-				style: { insetInlineStart: `${c}%` },
 				children: [c, "%"]
 			})]
 		})

@@ -3,10 +3,11 @@ import './chart.css';
 import { VisuallyHidden as e } from "./visually-hidden.js";
 import { Inline as t } from "./inline.js";
 import { Tag as n } from "./tag.js";
-import { Fragment as r, jsx as i, jsxs as a } from "react/jsx-runtime";
-import { forwardRef as o, useEffect as s, useId as c, useMemo as l, useRef as u, useState as d } from "react";
+import { t as r } from "./_shared/css-properties.js";
+import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
+import { forwardRef as s, useEffect as c, useId as l, useMemo as u, useRef as d, useState as f } from "react";
 //#region src/stories/organisms/Chart/Chart.tsx
-var f = {
+var p = {
 	barRadius: 4,
 	barMaxThickness: 24,
 	markGap: 2,
@@ -19,27 +20,39 @@ var f = {
 	treemapGap: 2,
 	radialBarGap: 4,
 	dotSize: 10
-}, p = f.labelFontSize * .6, m = 640, h = 8;
-function g(e) {
+}, m = p.labelFontSize * .6, h = 640, g = 8;
+function _(e) {
 	return typeof e == "number" && Number.isFinite(e) ? e : 0;
 }
-function _(e, t) {
+function v(e, t) {
 	let n = e[t];
 	return typeof n == "number" ? n : String(n ?? "");
 }
-function v(e, t, n) {
-	let r = t ?? n?.[e] ?? (e < h ? `var(--chart-series-${e + 1})` : "var(--chart-muted-color)");
-	return { "--chart-mark-color": r };
+function y(e, t, n) {
+	if (!(t ?? n?.[e])) return e < g ? String(e + 1) : "muted";
+}
+function b(e, t, n) {
+	return t ?? n?.[e];
 }
 function ee(e, t, n) {
-	if (t || n?.[e]) return;
-	let r = e < h ? `${e + 1}` : "muted";
-	return { "--chart-tile-label-color": `var(--chart-tile-label-color-${r})` };
+	if (!(t || n?.[e])) return e < g ? String(e + 1) : "muted";
 }
-function y(e, t, n, r, i) {
-	return `M ${e - r / 2} ${t} L ${e + r / 2} ${t} L ${e + i / 2} ${t + n} L ${e - i / 2} ${t + n} Z`;
+function x({ className: e, index: t, color: n, palette: r, muted: i }) {
+	return /* @__PURE__ */ a("svg", {
+		className: e,
+		"aria-hidden": "true",
+		"data-slot": y(t, n, r),
+		children: /* @__PURE__ */ a("rect", {
+			width: "100%",
+			height: "100%",
+			fill: i ? void 0 : b(t, n, r)
+		})
+	});
 }
 function te(e, t, n, r, i) {
+	return `M ${e - r / 2} ${t} L ${e + r / 2} ${t} L ${e + i / 2} ${t + n} L ${e - i / 2} ${t + n} Z`;
+}
+function ne(e, t, n, r, i) {
 	let a = e.reduce((e, t) => e + t.value, 0);
 	if (a <= 0 || r <= 0 || i <= 0) return [];
 	let o = r * i, s = e.map((e) => ({
@@ -76,7 +89,7 @@ function te(e, t, n, r, i) {
 	}
 	return p.length > 0 && g(), c;
 }
-function ne(e, t, n) {
+function re(e, t, n) {
 	let r = Math.min(0, e), i = Math.max(0, t);
 	if (i === r) return [0, 1];
 	let a = (i - r) / Math.max(1, n), o = 10 ** Math.floor(Math.log10(a)), s = [
@@ -89,9 +102,9 @@ function ne(e, t, n) {
 	for (let e = c; e <= l + s / 2; e += s) u.push(Math.round(e / s) * s);
 	return u;
 }
-function re(e, t, n, r, i) {
+function ie(e, t, n, r, i) {
 	if (n <= 0 || r <= 0) return "";
-	let a = Math.max(0, Math.min(f.barRadius, i === "top" || i === "bottom" ? r : n, (i === "top" || i === "bottom" ? n : r) / 2));
+	let a = Math.max(0, Math.min(p.barRadius, i === "top" || i === "bottom" ? r : n, (i === "top" || i === "bottom" ? n : r) / 2));
 	switch (i) {
 		case "top": return `M ${e} ${t + r} L ${e} ${t + a} Q ${e} ${t} ${e + a} ${t} L ${e + n - a} ${t} Q ${e + n} ${t} ${e + n} ${t + a} L ${e + n} ${t + r} Z`;
 		case "bottom": return `M ${e} ${t} L ${e} ${t + r - a} Q ${e} ${t + r} ${e + a} ${t + r} L ${e + n - a} ${t + r} Q ${e + n} ${t + r} ${e + n} ${t + r - a} L ${e + n} ${t} Z`;
@@ -99,13 +112,13 @@ function re(e, t, n, r, i) {
 		default: return `M ${e + n} ${t} L ${e + a} ${t} Q ${e} ${t} ${e} ${t + a} L ${e} ${t + r - a} Q ${e} ${t + r} ${e + a} ${t + r} L ${e + n} ${t + r} Z`;
 	}
 }
-function ie(e, t, n, r, i, a) {
+function ae(e, t, n, r, i, a) {
 	let o = a - i > Math.PI ? 1 : 0, s = (n, r) => `${e + n * Math.cos(r)} ${t + n * Math.sin(r)}`;
 	return r <= 0 ? `M ${e} ${t} L ${s(n, i)} A ${n} ${n} 0 ${o} 1 ${s(n, a)} Z` : `M ${s(n, i)} A ${n} ${n} 0 ${o} 1 ${s(n, a)} L ${s(r, a)} A ${r} ${r} 0 ${o} 0 ${s(r, i)} Z`;
 }
-function ae(e) {
-	let t = u(null), [n, r] = d(e);
-	return s(() => {
+function oe(e) {
+	let t = d(null), [n, r] = f(e);
+	return c(() => {
 		let e = t.current;
 		if (!e || typeof ResizeObserver > "u") return;
 		let n = new ResizeObserver((e) => {
@@ -115,454 +128,467 @@ function ae(e) {
 		return n.observe(e), () => n.disconnect();
 	}, []), [t, n];
 }
-var b = o(function({ type: o = "line", data: s, series: u, xKey: h, colors: b, orientation: oe = "vertical", stacked: x = !1, emphasis: se, height: ce = 256, ariaLabel: le, title: ue, caption: de, formatValue: fe, formatX: pe, yTicks: me = 5, legend: he, grid: ge = !0, tooltip: S = !0, valueLabels: _e, locale: ve = "es-ES", tableCaption: ye = "Datos del gráfico", tableHint: be = "Los datos completos están en la tabla que sigue; flechas para recorrer el gráfico.", categoryLabel: xe = "Categoría", valueLabel: Se = "Valor", shareLabel: Ce = "Porcentaje", emptyMessage: we = "Sin datos que mostrar", className: Te, ...Ee }, De) {
-	let [Oe, ke] = ae(m), [C, w] = d(null), [Ae, je] = d(!1), Me = c(), Ne = l(() => new Intl.NumberFormat(ve), [ve]), Pe = l(() => new Intl.NumberFormat(ve, {
+var S = s(function({ type: s = "line", data: c, series: d, xKey: g, colors: S, orientation: se = "vertical", stacked: C = !1, emphasis: ce, height: le = 256, ariaLabel: ue, title: de, caption: fe, formatValue: pe, formatX: me, yTicks: he = 5, legend: ge, grid: _e = !0, tooltip: w = !0, valueLabels: ve, locale: ye = "es-ES", tableCaption: be = "Datos del gráfico", tableHint: xe = "Los datos completos están en la tabla que sigue; flechas para recorrer el gráfico.", categoryLabel: Se = "Categoría", valueLabel: Ce = "Valor", shareLabel: we = "Porcentaje", emptyMessage: Te = "Sin datos que mostrar", className: Ee, ...De }, Oe) {
+	let [ke, Ae] = oe(h), [T, E] = f(null), [je, Me] = f(!1), Ne = l(), Pe = u(() => new Intl.NumberFormat(ye), [ye]), Fe = u(() => new Intl.NumberFormat(ye, {
 		style: "percent",
 		maximumFractionDigits: 1
-	}), [ve]), T = (e, t) => fe ? fe(e, t) : Ne.format(e), E = (e) => pe ? pe(e) : String(e), Fe = o === "pie" || o === "donut", D = Fe || o === "funnel" || o === "treemap" || o === "radial-bar", O = o === "scatter", Ie = o === "radar", k = D || Ie, Le = he ?? (D ? s.length > 1 : u.length > 1), Re = _e ?? (o === "line" || o === "area" ? "last" : "none"), A = s, j = A.length === 0 || u.length === 0, ze = [
+	}), [ye]), D = (e, t) => pe ? pe(e, t) : Pe.format(e), O = (e) => me ? me(e) : String(e), Ie = s === "pie" || s === "donut", k = Ie || s === "funnel" || s === "treemap" || s === "radial-bar", A = s === "scatter", Le = s === "radar", j = k || Le, Re = ge ?? (k ? c.length > 1 : d.length > 1), ze = ve ?? (s === "line" || s === "area" ? "last" : "none"), M = c, N = M.length === 0 || d.length === 0, Be = [
 		"chart",
-		`chart--${o}`,
-		o === "bar" ? `chart--${oe}` : "",
-		x ? "chart--stacked" : "",
-		Te
-	].filter(Boolean).join(" "), Be = A.map((e) => u.map((t) => g(e[t.key]))), Ve = Be.map((e) => e.reduce((e, t) => e + t, 0)), He = Be.flat(), M = ne(He.length ? Math.min(0, ...He) : 0, x ? Math.max(0, ...Ve) : He.length ? Math.max(0, ...He) : 1, me), Ue = M[0] ?? 0, N = M[M.length - 1] ?? 1, We = N - Ue || 1, Ge = M.map((e) => T(e)), P = A.map((e) => typeof e[h] == "number" ? e[h] : 0), F = O ? ne(Math.min(...P, 0), Math.max(...P, 1), me) : [], Ke = F[0] ?? 0, qe = (F[F.length - 1] ?? 1) - Ke || 1, Je = O ? F.map((e) => T(e)) : A.map((e) => E(_(e, h))), I = o === "bar" && oe === "horizontal", Ye = I ? Je : Ge, Xe = k ? f.padding : f.padding + Math.max(...Ye.map((e) => e.length), 1) * p + f.axisGap, Ze = k ? 0 : Math.round(f.labelFontSize * 1.4) + f.axisGap, L = Xe, Qe = Math.max(L + 1, ke - f.padding), R = f.padding, z = Math.max(R + 1, ce - f.padding), B = Qe - L, V = z - R, $e = ce + Ze, H = (e) => z - (e - Ue) / We * V, U = (e) => L + (e - Ue) / We * B, et = H(0), tt = U(0), nt = A.length ? (I ? V : B) / A.length : 0, W = (e) => A.length > 1 ? L + e * B / (A.length - 1) : L + B / 2, rt = (e) => (I ? R : L) + nt * (e + .5), G = (e) => L + (e - Ke) / qe * B, it = u[0]?.key ?? "", K = A.map((e) => g(e[it])), q = K.reduce((e, t) => e + t, 0), J = Math.max(1, Math.min(B, V) / 2 - f.labelFontSize * 2), Y = L + B / 2, X = R + V / 2, at = K.map((e, t) => {
+		`chart--${s}`,
+		s === "bar" ? `chart--${se}` : "",
+		C ? "chart--stacked" : "",
+		Ee
+	].filter(Boolean).join(" "), Ve = M.map((e) => d.map((t) => _(e[t.key]))), He = Ve.map((e) => e.reduce((e, t) => e + t, 0)), Ue = Ve.flat(), P = re(Ue.length ? Math.min(0, ...Ue) : 0, C ? Math.max(0, ...He) : Ue.length ? Math.max(0, ...Ue) : 1, he), We = P[0] ?? 0, F = P[P.length - 1] ?? 1, Ge = F - We || 1, Ke = P.map((e) => D(e)), qe = M.map((e) => typeof e[g] == "number" ? e[g] : 0), I = A ? re(Math.min(...qe, 0), Math.max(...qe, 1), he) : [], Je = I[0] ?? 0, Ye = (I[I.length - 1] ?? 1) - Je || 1, Xe = A ? I.map((e) => D(e)) : M.map((e) => O(v(e, g))), L = s === "bar" && se === "horizontal", Ze = L ? Xe : Ke, Qe = j ? p.padding : p.padding + Math.max(...Ze.map((e) => e.length), 1) * m + p.axisGap, $e = j ? 0 : Math.round(p.labelFontSize * 1.4) + p.axisGap, R = Qe, et = Math.max(R + 1, Ae - p.padding), z = p.padding, B = Math.max(z + 1, le - p.padding), V = et - R, H = B - z, tt = le + $e, U = (e) => B - (e - We) / Ge * H, W = (e) => R + (e - We) / Ge * V, nt = U(0), rt = W(0), it = M.length ? (L ? H : V) / M.length : 0, at = (e) => M.length > 1 ? R + e * V / (M.length - 1) : R + V / 2, ot = (e) => (L ? z : R) + it * (e + .5), G = (e) => R + (e - Je) / Ye * V, st = d[0]?.key ?? "", K = M.map((e) => _(e[st])), q = K.reduce((e, t) => e + t, 0), J = Math.max(1, Math.min(V, H) / 2 - p.labelFontSize * 2), Y = R + V / 2, X = z + H / 2, ct = K.map((e, t) => {
 		let n = K.slice(0, t).reduce((e, t) => e + t, 0), r = -Math.PI / 2 + (q > 0 ? n / q * Math.PI * 2 : 0);
 		return {
 			from: r,
 			to: r + (q > 0 ? e / q * Math.PI * 2 : 0),
 			share: q > 0 ? e / q : 0
 		};
-	}), ot = A.map((e, t) => -Math.PI / 2 + (A.length ? t * Math.PI * 2 / A.length : 0)), st = (e, t) => {
-		let n = J * Math.max(0, Math.min(1, N > 0 ? e / N : 0)), r = ot[t] ?? 0;
+	}), lt = M.map((e, t) => -Math.PI / 2 + (M.length ? t * Math.PI * 2 / M.length : 0)), ut = (e, t) => {
+		let n = J * Math.max(0, Math.min(1, F > 0 ? e / F : 0)), r = lt[t] ?? 0;
 		return {
 			x: Y + n * Math.cos(r),
 			y: X + n * Math.sin(r)
 		};
-	}, Z = (e) => !!se && se !== e, ct = (e) => {
-		if (k || A.length === 0) return null;
+	}, Z = (e) => !!ce && ce !== e, dt = (e) => {
+		if (j || M.length === 0) return null;
 		let t = e.currentTarget.getBoundingClientRect();
-		if (o === "line" || o === "area") {
-			let n = e.clientX - t.left, r = A.length > 1 ? B / (A.length - 1) : B;
-			return Math.max(0, Math.min(A.length - 1, Math.round(n / r)));
+		if (s === "line" || s === "area") {
+			let n = e.clientX - t.left, r = M.length > 1 ? V / (M.length - 1) : V;
+			return Math.max(0, Math.min(M.length - 1, Math.round(n / r)));
 		}
-		if (O) {
-			let n = e.clientX - t.left + L, r = 0, i = Infinity;
-			return P.forEach((e, t) => {
+		if (A) {
+			let n = e.clientX - t.left + R, r = 0, i = Infinity;
+			return qe.forEach((e, t) => {
 				let a = Math.abs(G(e) - n);
 				a < i && (i = a, r = t);
 			}), r;
 		}
-		let n = I ? e.clientY - t.top : e.clientX - t.left;
-		return Math.max(0, Math.min(A.length - 1, Math.floor(n / (nt || 1))));
-	}, lt = (e) => {
-		w((t) => {
+		let n = L ? e.clientY - t.top : e.clientX - t.left;
+		return Math.max(0, Math.min(M.length - 1, Math.floor(n / (it || 1))));
+	}, ft = (e) => {
+		E((t) => {
 			let n = (t ?? 0) + e;
-			return Math.max(0, Math.min(A.length - 1, n));
+			return Math.max(0, Math.min(M.length - 1, n));
 		});
-	}, ut = (e) => {
-		je(!0), e.key === "ArrowRight" || e.key === "ArrowDown" ? (e.preventDefault(), lt(1)) : e.key === "ArrowLeft" || e.key === "ArrowUp" ? (e.preventDefault(), lt(-1)) : e.key === "Home" ? (e.preventDefault(), w(0)) : e.key === "End" ? (e.preventDefault(), w(A.length - 1)) : e.key === "Escape" && w(null);
+	}, pt = (e) => {
+		Me(!0), e.key === "ArrowRight" || e.key === "ArrowDown" ? (e.preventDefault(), ft(1)) : e.key === "ArrowLeft" || e.key === "ArrowUp" ? (e.preventDefault(), ft(-1)) : e.key === "Home" ? (e.preventDefault(), E(0)) : e.key === "End" ? (e.preventDefault(), E(M.length - 1)) : e.key === "Escape" && E(null);
 	}, Q = [];
-	if (!j && (o === "line" || o === "area")) {
-		let e = A.map(() => 0), t = null, n = [];
-		u.forEach((r, a) => {
-			let s = A.map((t, n) => {
-				let i = g(t[r.key]), a = i;
-				return x && (e[n] = (e[n] ?? 0) + i, a = e[n]), {
-					x: W(n),
-					y: H(a),
+	if (!N && (s === "line" || s === "area")) {
+		let e = M.map(() => 0), t = null, n = [];
+		d.forEach((r, i) => {
+			let o = M.map((t, n) => {
+				let i = _(t[r.key]), a = i;
+				return C && (e[n] = (e[n] ?? 0) + i, a = e[n]), {
+					x: at(n),
+					y: U(a),
 					value: i
 				};
-			}), c = s.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" "), l = Z(r.key), u = v(a, r.color, b), d = s[0], p = s[s.length - 1];
-			if (o === "area" && d && p) {
-				let e = x && t ? [...t].reverse().map((e) => `L ${e.x} ${e.y}`).join(" ") : `L ${p.x} ${et} L ${d.x} ${et}`;
-				Q.push(/* @__PURE__ */ i("path", {
+			}), c = o.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" "), l = Z(r.key), u = y(i, r.color, S), d = l ? void 0 : b(i, r.color, S), f = o[0], m = o[o.length - 1];
+			if (s === "area" && f && m) {
+				let e = C && t ? [...t].reverse().map((e) => `L ${e.x} ${e.y}`).join(" ") : `L ${m.x} ${nt} L ${f.x} ${nt}`;
+				Q.push(/* @__PURE__ */ a("path", {
 					className: `chart__area${l ? " chart__area--muted" : ""}`,
-					style: u,
+					"data-slot": u,
+					fill: d,
 					d: `${c} ${e} Z`
 				}, `area-${r.key}`));
 			}
-			Q.push(/* @__PURE__ */ i("path", {
+			Q.push(/* @__PURE__ */ a("path", {
 				className: `chart__line${l ? " chart__line--muted" : ""}`,
-				style: u,
+				"data-slot": u,
+				stroke: d,
 				d: c
-			}, `line-${r.key}`)), s.forEach((e, t) => {
-				let n = t === s.length - 1, a = C === t;
-				!n && !a || Q.push(/* @__PURE__ */ i("circle", {
+			}, `line-${r.key}`)), o.forEach((e, t) => {
+				let n = t === o.length - 1, i = T === t;
+				!n && !i || Q.push(/* @__PURE__ */ a("circle", {
 					className: `chart__marker${l ? " chart__marker--muted" : ""}`,
-					style: u,
+					"data-slot": u,
+					fill: d,
 					cx: e.x,
 					cy: e.y,
-					r: f.markerSize / 2,
-					"data-active": a || void 0
+					r: p.markerSize / 2,
+					"data-active": i || void 0
 				}, `dot-${r.key}-${t}`));
-			}), (Re === "all" ? s : Re === "last" && p ? [p] : Re === "extremes" ? [d, p].filter(Boolean) : []).forEach((e, t) => {
+			}), (ze === "all" ? o : ze === "last" && m ? [m] : ze === "extremes" ? [f, m].filter(Boolean) : []).forEach((e, t) => {
 				e && n.push({
 					key: `label-${r.key}-${t}`,
 					x: e.x,
-					y: e.y - f.axisGap,
-					text: T(e.value, r)
+					y: e.y - p.axisGap,
+					text: D(e.value, r)
 				});
-			}), t = s.map((e) => ({
+			}), t = o.map((e) => ({
 				x: e.x,
 				y: e.y
 			}));
 		});
 		let r = [];
 		n.forEach((e) => {
-			r.some((t) => Math.abs(t.x - e.x) < p * e.text.length && Math.abs(t.y - e.y) < f.labelFontSize * 1.2) || (r.push({
+			r.some((t) => Math.abs(t.x - e.x) < m * e.text.length && Math.abs(t.y - e.y) < p.labelFontSize * 1.2) || (r.push({
 				x: e.x,
 				y: e.y
-			}), Q.push(/* @__PURE__ */ i("text", {
+			}), Q.push(/* @__PURE__ */ a("text", {
 				className: "chart__value-label",
 				x: e.x,
 				y: e.y,
-				textAnchor: e.x > Qe - f.barMaxThickness * 2 ? "end" : "middle",
+				textAnchor: e.x > et - p.barMaxThickness * 2 ? "end" : "middle",
 				children: e.text
 			}, e.key)));
 		});
 	}
-	if (!j && o === "bar") {
-		let e = Math.min(f.barMaxThickness * u.length + f.markGap * (u.length - 1), nt * .72), t = x ? Math.min(f.barMaxThickness, nt * .72) : Math.max(1, (e - f.markGap * (u.length - 1)) / u.length);
-		A.forEach((e, n) => {
-			let r = rt(n), a = 0, o = 0;
-			u.forEach((s, c) => {
-				let l = g(e[s.key]), d = Z(s.key), p = v(c, s.color, b), m = r + (x ? 0 : (c - (u.length - 1) / 2) * (t + f.markGap)) - t / 2, h = x ? l >= 0 ? a : o : 0, _ = h + l;
-				x && (l >= 0 ? a = _ : o = _);
-				let ee = x && h !== 0 ? f.markGap : 0, y = "";
-				if (I) {
-					let e = U(h) + (l >= 0 ? ee : 0), n = U(_);
-					y = re(Math.min(e, n), m, Math.abs(n - e), t, l >= 0 ? "right" : "left");
+	if (!N && s === "bar") {
+		let e = Math.min(p.barMaxThickness * d.length + p.markGap * (d.length - 1), it * .72), t = C ? Math.min(p.barMaxThickness, it * .72) : Math.max(1, (e - p.markGap * (d.length - 1)) / d.length);
+		M.forEach((e, n) => {
+			let r = ot(n), i = 0, o = 0;
+			d.forEach((s, c) => {
+				let l = _(e[s.key]), u = Z(s.key), f = y(c, s.color, S), m = u ? void 0 : b(c, s.color, S), h = r + (C ? 0 : (c - (d.length - 1) / 2) * (t + p.markGap)) - t / 2, g = C ? l >= 0 ? i : o : 0, v = g + l;
+				C && (l >= 0 ? i = v : o = v);
+				let ee = C && g !== 0 ? p.markGap : 0, x = "";
+				if (L) {
+					let e = W(g) + (l >= 0 ? ee : 0), n = W(v);
+					x = ie(Math.min(e, n), h, Math.abs(n - e), t, l >= 0 ? "right" : "left");
 				} else {
-					let e = H(h) - (l >= 0 ? ee : 0), n = H(_);
-					y = re(m, Math.min(e, n), t, Math.abs(n - e), l >= 0 ? "top" : "bottom");
+					let e = U(g) - (l >= 0 ? ee : 0), n = U(v);
+					x = ie(h, Math.min(e, n), t, Math.abs(n - e), l >= 0 ? "top" : "bottom");
 				}
-				if (y && (Q.push(/* @__PURE__ */ i("path", {
-					className: `chart__bar${d ? " chart__bar--muted" : ""}`,
-					style: p,
-					d: y,
-					"data-active": C === n || void 0
-				}, `bar-${n}-${s.key}`)), Re === "all" && !x)) {
-					let e = I ? U(_) : H(_);
-					Q.push(/* @__PURE__ */ i("text", {
+				if (x && (Q.push(/* @__PURE__ */ a("path", {
+					className: `chart__bar${u ? " chart__bar--muted" : ""}`,
+					"data-slot": f,
+					fill: m,
+					d: x,
+					"data-active": T === n || void 0
+				}, `bar-${n}-${s.key}`)), ze === "all" && !C)) {
+					let e = L ? W(v) : U(v);
+					Q.push(/* @__PURE__ */ a("text", {
 						className: "chart__value-label",
-						x: I ? e + f.axisGap : m + t / 2,
-						y: I ? m + t / 2 : e - f.axisGap,
-						textAnchor: I ? "start" : "middle",
-						dominantBaseline: I ? "middle" : "auto",
-						children: T(l, s)
+						x: L ? e + p.axisGap : h + t / 2,
+						y: L ? h + t / 2 : e - p.axisGap,
+						textAnchor: L ? "start" : "middle",
+						dominantBaseline: L ? "middle" : "auto",
+						children: D(l, s)
 					}, `bar-label-${n}-${s.key}`));
 				}
 			});
 		});
 	}
-	if (!j && Fe) {
-		let e = o === "donut" ? J * (1 - f.donutThickness) : 0;
-		at.forEach((t, n) => {
+	if (!N && Ie) {
+		let e = s === "donut" ? J * (1 - p.donutThickness) : 0;
+		ct.forEach((t, n) => {
 			if (t.to - t.from <= 0) return;
-			let r = String(_(A[n], h));
-			if (Q.push(/* @__PURE__ */ i("path", {
+			let r = String(v(M[n], g));
+			if (Q.push(/* @__PURE__ */ a("path", {
 				className: `chart__slice${Z(r) ? " chart__slice--muted" : ""}`,
-				style: v(n, void 0, b),
-				d: ie(Y, X, J, e, t.from, t.to),
-				"data-active": C === n || void 0
+				"data-slot": y(n, void 0, S),
+				fill: Z(r) ? void 0 : b(n, void 0, S),
+				d: ae(Y, X, J, e, t.from, t.to),
+				"data-active": T === n || void 0
 			}, `slice-${n}`)), t.share >= .05) {
-				let e = (t.from + t.to) / 2, r = Y + (J + f.axisGap) * Math.cos(e), a = X + (J + f.axisGap) * Math.sin(e);
-				Q.push(/* @__PURE__ */ i("text", {
+				let e = (t.from + t.to) / 2, r = Y + (J + p.axisGap) * Math.cos(e), i = X + (J + p.axisGap) * Math.sin(e);
+				Q.push(/* @__PURE__ */ a("text", {
 					className: "chart__value-label",
 					x: r,
-					y: a,
+					y: i,
 					textAnchor: Math.cos(e) < -.1 ? "end" : Math.cos(e) > .1 ? "start" : "middle",
 					dominantBaseline: "middle",
-					children: Pe.format(t.share)
+					children: Fe.format(t.share)
 				}, `slice-label-${n}`));
 			}
 		});
 	}
-	if (!j && o === "funnel") {
-		let e = Math.max(...K, 1), t = V / Math.max(1, A.length), n = (t) => Math.max(0, t) / e * B;
+	if (!N && s === "funnel") {
+		let e = Math.max(...K, 1), t = H / Math.max(1, M.length), n = (t) => Math.max(0, t) / e * V;
 		K.forEach((e, r) => {
-			let a = R + t * r, o = Math.max(0, t - f.funnelGap), s = K[r + 1], c = String(_(A[r], h));
-			Q.push(/* @__PURE__ */ i("path", {
+			let i = z + t * r, o = Math.max(0, t - p.funnelGap), s = K[r + 1], c = String(v(M[r], g));
+			Q.push(/* @__PURE__ */ a("path", {
 				className: `chart__funnel-step${Z(c) ? " chart__funnel-step--muted" : ""}`,
-				style: v(r, void 0, b),
-				"data-active": C === r || void 0,
-				d: y(Y, a, o, n(e), n(s ?? e))
-			}, `funnel-${r}`)), Q.push(/* @__PURE__ */ i("text", {
+				"data-slot": y(r, void 0, S),
+				fill: Z(c) ? void 0 : b(r, void 0, S),
+				"data-active": T === r || void 0,
+				d: te(Y, i, o, n(e), n(s ?? e))
+			}, `funnel-${r}`)), Q.push(/* @__PURE__ */ a("text", {
 				className: "chart__value-label",
 				x: Y,
-				y: a + o / 2,
+				y: i + o / 2,
 				textAnchor: "middle",
 				dominantBaseline: "middle",
-				children: `${E(_(A[r], h))} · ${T(e)}`
+				children: `${O(v(M[r], g))} · ${D(e)}`
 			}, `funnel-label-${r}`));
 		});
 	}
-	if (!j && o === "treemap" && te(K.map((e, t) => ({
+	if (!N && s === "treemap" && ne(K.map((e, t) => ({
 		value: Math.max(0, e),
 		index: t
-	})).filter((e) => e.value > 0), L, R, B, V).forEach((e) => {
-		let t = String(_(A[e.index], h)), n = Math.max(0, e.w - f.treemapGap), r = Math.max(0, e.h - f.treemapGap);
-		Q.push(/* @__PURE__ */ i("rect", {
+	})).filter((e) => e.value > 0), R, z, V, H).forEach((e) => {
+		let t = String(v(M[e.index], g)), n = Math.max(0, e.w - p.treemapGap), r = Math.max(0, e.h - p.treemapGap);
+		Q.push(/* @__PURE__ */ a("rect", {
 			className: `chart__tile${Z(t) ? " chart__tile--muted" : ""}`,
-			style: v(e.index, void 0, b),
-			"data-active": C === e.index || void 0,
+			"data-slot": y(e.index, void 0, S),
+			fill: Z(t) ? void 0 : b(e.index, void 0, S),
+			"data-active": T === e.index || void 0,
 			x: e.x,
 			y: e.y,
 			width: n,
 			height: r
-		}, `tile-${e.index}`)), n > p * 4 && r > f.labelFontSize * 2 && Q.push(/* @__PURE__ */ i("text", {
+		}, `tile-${e.index}`)), n > m * 4 && r > p.labelFontSize * 2 && Q.push(/* @__PURE__ */ a("text", {
 			className: "chart__tile-label",
-			style: ee(e.index, void 0, b),
-			x: e.x + f.axisGap,
-			y: e.y + f.axisGap + f.labelFontSize,
-			children: E(_(A[e.index], h))
+			"data-slot": ee(e.index, void 0, S),
+			x: e.x + p.axisGap,
+			y: e.y + p.axisGap + p.labelFontSize,
+			children: O(v(M[e.index], g))
 		}, `tile-label-${e.index}`));
-	}), !j && o === "radial-bar") {
-		let e = Math.max(...K, 1), t = J / Math.max(1, A.length), n = Math.max(1, t - f.radialBarGap);
-		K.forEach((r, a) => {
-			let o = J - t * a, s = o - n, c = String(_(A[a], h)), l = Math.max(0, r) / e * Math.PI * 1.999;
-			Q.push(/* @__PURE__ */ i("path", {
+	}), !N && s === "radial-bar") {
+		let e = Math.max(...K, 1), t = J / Math.max(1, M.length), n = Math.max(1, t - p.radialBarGap);
+		K.forEach((r, i) => {
+			let o = J - t * i, s = o - n, c = String(v(M[i], g)), l = Math.max(0, r) / e * Math.PI * 1.999;
+			Q.push(/* @__PURE__ */ a("path", {
 				className: "chart__radial-track",
-				d: ie(Y, X, o, s, -Math.PI / 2, -Math.PI / 2 + Math.PI * 1.999)
-			}, `radial-track-${a}`)), !(l <= 0) && Q.push(/* @__PURE__ */ i("path", {
+				d: ae(Y, X, o, s, -Math.PI / 2, -Math.PI / 2 + Math.PI * 1.999)
+			}, `radial-track-${i}`)), !(l <= 0) && Q.push(/* @__PURE__ */ a("path", {
 				className: `chart__radial-bar${Z(c) ? " chart__radial-bar--muted" : ""}`,
-				style: v(a, void 0, b),
-				"data-active": C === a || void 0,
-				d: ie(Y, X, o, s, -Math.PI / 2, -Math.PI / 2 + l)
-			}, `radial-bar-${a}`));
+				"data-slot": y(i, void 0, S),
+				fill: Z(c) ? void 0 : b(i, void 0, S),
+				"data-active": T === i || void 0,
+				d: ae(Y, X, o, s, -Math.PI / 2, -Math.PI / 2 + l)
+			}, `radial-bar-${i}`));
 		});
 	}
-	!j && O && u.forEach((e, t) => {
-		let n = Z(e.key), r = v(t, e.color, b);
-		A.forEach((t, a) => {
-			let o = t[e.key];
-			typeof o != "number" || !Number.isFinite(o) || Q.push(/* @__PURE__ */ i("circle", {
+	!N && A && d.forEach((e, t) => {
+		let n = Z(e.key), r = y(t, e.color, S), i = n ? void 0 : b(t, e.color, S);
+		M.forEach((t, o) => {
+			let s = t[e.key];
+			typeof s != "number" || !Number.isFinite(s) || Q.push(/* @__PURE__ */ a("circle", {
 				className: `chart__point${n ? " chart__point--muted" : ""}`,
-				style: r,
-				cx: G(P[a] ?? 0),
-				cy: H(o),
-				r: f.dotSize / 2,
-				"data-active": C === a || void 0
-			}, `point-${e.key}-${a}`));
+				"data-slot": r,
+				fill: i,
+				cx: G(qe[o] ?? 0),
+				cy: U(s),
+				r: p.dotSize / 2,
+				"data-active": T === o || void 0
+			}, `point-${e.key}-${o}`));
 		});
-	}), !j && Ie && u.forEach((e, t) => {
-		let n = Z(e.key), r = v(t, e.color, b), a = A.map((t, n) => st(g(t[e.key]), n));
-		if (a.length === 0) return;
-		let o = `${a.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" ")} Z`;
-		Q.push(/* @__PURE__ */ i("path", {
+	}), !N && Le && d.forEach((e, t) => {
+		let n = Z(e.key), r = y(t, e.color, S), i = n ? void 0 : b(t, e.color, S), o = M.map((t, n) => ut(_(t[e.key]), n));
+		if (o.length === 0) return;
+		let s = `${o.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" ")} Z`;
+		Q.push(/* @__PURE__ */ a("path", {
 			className: `chart__radar-shape${n ? " chart__radar-shape--muted" : ""}`,
-			style: r,
-			d: o
-		}, `radar-${e.key}`)), a.forEach((t, a) => {
-			Q.push(/* @__PURE__ */ i("circle", {
+			"data-slot": r,
+			fill: i,
+			stroke: i,
+			d: s
+		}, `radar-${e.key}`)), o.forEach((t, o) => {
+			Q.push(/* @__PURE__ */ a("circle", {
 				className: `chart__marker${n ? " chart__marker--muted" : ""}`,
-				style: r,
+				"data-slot": r,
+				fill: i,
 				cx: t.x,
 				cy: t.y,
-				r: f.markerSize / 2,
-				"data-active": C === a || void 0
-			}, `radar-dot-${e.key}-${a}`));
+				r: p.markerSize / 2,
+				"data-active": T === o || void 0
+			}, `radar-dot-${e.key}-${o}`));
 		});
 	});
-	let $ = C === null ? void 0 : A[C], dt = $ ? D ? [{
-		key: it,
-		label: String(_($, h)),
-		value: T(g($[it])),
-		index: C ?? 0
-	}] : u.map((e, t) => ({
+	let $ = T === null ? void 0 : M[T], mt = $ ? k ? [{
+		key: st,
+		label: String(v($, g)),
+		value: D(_($[st])),
+		index: T ?? 0
+	}] : d.map((e, t) => ({
 		key: e.key,
 		label: e.label,
-		value: T(g($[e.key]), e),
+		value: D(_($[e.key]), e),
 		index: t
-	})) : [], ft = C === null ? 0 : k ? Y : O ? G(P[C] ?? 0) : o === "bar" && I ? U(N) : o === "bar" ? rt(C) : W(C), pt = C === null ? 0 : k ? X - J : o === "bar" && I ? rt(C) : R, mt = Ae && $ ? [D ? T(q) : E(_($, h)), ...dt.map((e) => `${e.label}: ${e.value}`)].join(" · ") : "";
-	return /* @__PURE__ */ a("figure", {
-		ref: De,
-		className: ze,
-		...Ee,
+	})) : [], ht = T === null ? 0 : j ? Y : A ? G(qe[T] ?? 0) : s === "bar" && L ? W(F) : s === "bar" ? ot(T) : at(T), gt = T === null ? 0 : j ? X - J : s === "bar" && L ? ot(T) : z, _t = je && $ ? [k ? D(q) : O(v($, g)), ...mt.map((e) => `${e.label}: ${e.value}`)].join(" · ") : "", vt = r({
+		"inset-inline-start": `${R}px`,
+		"inset-block-start": `${z}px`,
+		width: `${V}px`,
+		height: `${H}px`
+	}), yt = r({
+		left: `${ht}px`,
+		top: `${gt}px`
+	});
+	return /* @__PURE__ */ o("figure", {
+		ref: Oe,
+		className: Be,
+		...De,
 		children: [
-			ue ? /* @__PURE__ */ i("figcaption", {
+			de ? /* @__PURE__ */ a("figcaption", {
 				className: "chart__title",
-				children: ue
+				children: de
 			}) : null,
-			j ? /* @__PURE__ */ i("p", {
+			N ? /* @__PURE__ */ a("p", {
 				className: "chart__empty",
-				children: we
-			}) : /* @__PURE__ */ a("div", {
+				children: Te
+			}) : /* @__PURE__ */ o("div", {
 				className: "chart__plot",
-				ref: Oe,
+				ref: ke,
 				children: [
-					/* @__PURE__ */ a("svg", {
+					/* @__PURE__ */ o("svg", {
 						className: "chart__canvas",
-						viewBox: `0 0 ${ke} ${$e}`,
-						width: ke,
-						height: $e,
+						viewBox: `0 0 ${Ae} ${tt}`,
+						width: Ae,
+						height: tt,
 						"aria-hidden": "true",
 						children: [
-							ge && !k ? /* @__PURE__ */ i("g", {
+							_e && !j ? /* @__PURE__ */ a("g", {
 								className: "chart__grid",
 								"aria-hidden": "true",
-								children: M.map((e) => I ? /* @__PURE__ */ i("line", {
+								children: P.map((e) => L ? /* @__PURE__ */ a("line", {
 									className: "chart__grid-line",
-									x1: U(e),
-									y1: R,
-									x2: U(e),
-									y2: z
-								}, e) : /* @__PURE__ */ i("line", {
+									x1: W(e),
+									y1: z,
+									x2: W(e),
+									y2: B
+								}, e) : /* @__PURE__ */ a("line", {
 									className: "chart__grid-line",
-									x1: L,
-									y1: H(e),
-									x2: Qe,
-									y2: H(e)
+									x1: R,
+									y1: U(e),
+									x2: et,
+									y2: U(e)
 								}, e))
 							}) : null,
-							k ? null : /* @__PURE__ */ a("g", {
+							j ? null : /* @__PURE__ */ o("g", {
 								className: "chart__axes",
 								"aria-hidden": "true",
 								children: [
-									/* @__PURE__ */ i("line", {
+									/* @__PURE__ */ a("line", {
 										className: "chart__axis",
-										x1: I ? tt : L,
-										y1: I ? R : et,
-										x2: I ? tt : Qe,
-										y2: I ? z : et
+										x1: L ? rt : R,
+										y1: L ? z : nt,
+										x2: L ? rt : et,
+										y2: L ? B : nt
 									}),
-									I ? Je.map((e, t) => /* @__PURE__ */ i("text", {
+									L ? Xe.map((e, t) => /* @__PURE__ */ a("text", {
 										className: "chart__axis-label",
-										x: L - f.axisGap,
-										y: rt(t),
+										x: R - p.axisGap,
+										y: ot(t),
 										textAnchor: "end",
 										dominantBaseline: "middle",
 										children: e
-									}, `cat-${t}`)) : M.map((e, t) => /* @__PURE__ */ i("text", {
+									}, `cat-${t}`)) : P.map((e, t) => /* @__PURE__ */ a("text", {
 										className: "chart__axis-label",
-										x: L - f.axisGap,
-										y: H(e),
+										x: R - p.axisGap,
+										y: U(e),
 										textAnchor: "end",
 										dominantBaseline: "middle",
-										children: Ge[t]
+										children: Ke[t]
 									}, `tick-${e}`)),
-									I ? M.map((e, t) => /* @__PURE__ */ i("text", {
+									L ? P.map((e, t) => /* @__PURE__ */ a("text", {
 										className: "chart__axis-label",
-										x: U(e),
-										y: z + f.axisGap + f.labelFontSize,
+										x: W(e),
+										y: B + p.axisGap + p.labelFontSize,
 										textAnchor: "middle",
-										children: Ge[t]
-									}, `vtick-${e}`)) : Je.map((e, t) => /* @__PURE__ */ i("text", {
+										children: Ke[t]
+									}, `vtick-${e}`)) : Xe.map((e, t) => /* @__PURE__ */ a("text", {
 										className: "chart__axis-label",
-										x: O ? G(F[t] ?? 0) : o === "bar" ? rt(t) : W(t),
-										y: z + f.axisGap + f.labelFontSize,
-										textAnchor: O ? "middle" : t === 0 && o !== "bar" ? "start" : t === A.length - 1 && o !== "bar" ? "end" : "middle",
+										x: A ? G(I[t] ?? 0) : s === "bar" ? ot(t) : at(t),
+										y: B + p.axisGap + p.labelFontSize,
+										textAnchor: A ? "middle" : t === 0 && s !== "bar" ? "start" : t === M.length - 1 && s !== "bar" ? "end" : "middle",
 										children: e
 									}, `cat-${t}`))
 								]
 							}),
-							ge && O ? /* @__PURE__ */ i("g", {
+							_e && A ? /* @__PURE__ */ a("g", {
 								className: "chart__grid",
 								"aria-hidden": "true",
-								children: F.map((e) => /* @__PURE__ */ i("line", {
+								children: I.map((e) => /* @__PURE__ */ a("line", {
 									className: "chart__grid-line",
 									x1: G(e),
-									y1: R,
+									y1: z,
 									x2: G(e),
-									y2: z
+									y2: B
 								}, `xgrid-${e}`))
 							}) : null,
-							Ie && A.length > 0 ? /* @__PURE__ */ a("g", {
+							Le && M.length > 0 ? /* @__PURE__ */ o("g", {
 								className: "chart__radar-grid",
 								"aria-hidden": "true",
 								children: [
-									M.filter((e) => e > 0).map((e) => /* @__PURE__ */ i("path", {
+									P.filter((e) => e > 0).map((e) => /* @__PURE__ */ a("path", {
 										className: "chart__grid-line",
-										d: `${ot.map((t, n) => {
-											let r = J * (N > 0 ? e / N : 0);
+										d: `${lt.map((t, n) => {
+											let r = J * (F > 0 ? e / F : 0);
 											return `${n === 0 ? "M" : "L"} ${Y + r * Math.cos(t)} ${X + r * Math.sin(t)}`;
 										}).join(" ")} Z`
 									}, `web-${e}`)),
-									ot.map((e, t) => /* @__PURE__ */ i("line", {
+									lt.map((e, t) => /* @__PURE__ */ a("line", {
 										className: "chart__grid-line",
 										x1: Y,
 										y1: X,
 										x2: Y + J * Math.cos(e),
 										y2: X + J * Math.sin(e)
 									}, `spoke-${t}`)),
-									ot.map((e, t) => /* @__PURE__ */ i("text", {
+									lt.map((e, t) => /* @__PURE__ */ a("text", {
 										className: "chart__axis-label",
-										x: Y + (J + f.axisGap) * Math.cos(e),
-										y: X + (J + f.axisGap) * Math.sin(e),
+										x: Y + (J + p.axisGap) * Math.cos(e),
+										y: X + (J + p.axisGap) * Math.sin(e),
 										textAnchor: Math.cos(e) < -.1 ? "end" : Math.cos(e) > .1 ? "start" : "middle",
 										dominantBaseline: "middle",
-										children: Je[t]
+										children: Xe[t]
 									}, `radar-cat-${t}`))
 								]
 							}) : null,
-							C !== null && S && (o === "line" || o === "area") ? /* @__PURE__ */ i("line", {
+							T !== null && w && (s === "line" || s === "area") ? /* @__PURE__ */ a("line", {
 								className: "chart__crosshair",
 								"aria-hidden": "true",
-								x1: W(C),
-								y1: R,
-								x2: W(C),
-								y2: z
+								x1: at(T),
+								y1: z,
+								x2: at(T),
+								y2: B
 							}) : null,
-							/* @__PURE__ */ i("g", {
+							/* @__PURE__ */ a("g", {
 								className: "chart__marks",
 								children: Q
 							}),
-							o === "donut" ? /* @__PURE__ */ i("text", {
+							s === "donut" ? /* @__PURE__ */ a("text", {
 								className: "chart__center-value",
 								x: Y,
 								y: X,
 								textAnchor: "middle",
 								dominantBaseline: "middle",
-								children: T(q)
+								children: D(q)
 							}) : null
 						]
 					}),
-					/* @__PURE__ */ i("div", {
+					/* @__PURE__ */ a("div", {
+						ref: vt,
 						className: "chart__hit-layer",
 						role: "img",
-						"aria-label": le,
-						"aria-describedby": Me,
-						tabIndex: S ? 0 : void 0,
-						style: {
-							insetInlineStart: `${L}px`,
-							insetBlockStart: `${R}px`,
-							width: `${B}px`,
-							height: `${V}px`
-						},
-						onPointerMove: S ? (e) => {
-							je(!1), w(ct(e));
+						"aria-label": ue,
+						"aria-describedby": Ne,
+						tabIndex: w ? 0 : void 0,
+						onPointerMove: w ? (e) => {
+							Me(!1), E(dt(e));
 						} : void 0,
-						onPointerLeave: S ? () => w(null) : void 0,
-						onKeyDown: S ? ut : void 0,
-						onBlur: S ? () => {
-							je(!1), w(null);
+						onPointerLeave: w ? () => E(null) : void 0,
+						onKeyDown: w ? pt : void 0,
+						onBlur: w ? () => {
+							Me(!1), E(null);
 						} : void 0
 					}),
-					S && C !== null && $ ? /* @__PURE__ */ a("div", {
+					w && T !== null && $ ? /* @__PURE__ */ o("div", {
+						ref: yt,
 						className: "chart__tooltip",
 						"aria-hidden": "true",
-						style: {
-							left: `${ft}px`,
-							top: `${pt}px`
-						},
-						children: [/* @__PURE__ */ i("p", {
+						children: [/* @__PURE__ */ a("p", {
 							className: "chart__tooltip-header",
-							children: D ? T(q) : E(_($, h))
-						}), /* @__PURE__ */ i("ul", {
+							children: k ? D(q) : O(v($, g))
+						}), /* @__PURE__ */ a("ul", {
 							className: "chart__tooltip-list",
-							children: dt.map((e) => /* @__PURE__ */ a("li", {
+							children: mt.map((e) => /* @__PURE__ */ o("li", {
 								className: "chart__tooltip-row",
 								children: [
-									/* @__PURE__ */ i("span", {
+									/* @__PURE__ */ a(x, {
 										className: "chart__tooltip-key",
-										style: v(e.index, D ? void 0 : u[e.index]?.color, b),
-										"aria-hidden": "true"
+										index: e.index,
+										color: k ? void 0 : d[e.index]?.color,
+										palette: S
 									}),
-									/* @__PURE__ */ i("span", {
+									/* @__PURE__ */ a("span", {
 										className: "chart__tooltip-value",
 										children: e.value
 									}),
-									/* @__PURE__ */ i("span", {
+									/* @__PURE__ */ a("span", {
 										className: "chart__tooltip-label",
 										children: e.label
 									})
@@ -572,66 +598,68 @@ var b = o(function({ type: o = "line", data: s, series: u, xKey: h, colors: b, o
 					}) : null
 				]
 			}),
-			Le && !j ? /* @__PURE__ */ i("div", {
+			Re && !N ? /* @__PURE__ */ a("div", {
 				className: "chart__legend",
-				children: /* @__PURE__ */ i(t, {
+				children: /* @__PURE__ */ a(t, {
 					gap: "sm",
-					children: (D ? A.map((e, t) => ({
-						key: String(_(e, h)),
-						label: E(_(e, h)),
+					children: (k ? M.map((e, t) => ({
+						key: String(v(e, g)),
+						label: O(v(e, g)),
 						index: t,
 						color: void 0
-					})) : u.map((e, t) => ({
+					})) : d.map((e, t) => ({
 						key: e.key,
 						label: e.label,
 						index: t,
 						color: e.color
-					}))).map((e) => /* @__PURE__ */ a(n, {
+					}))).map((e) => /* @__PURE__ */ o(n, {
 						variant: "neutral",
 						className: `chart__legend-item${Z(e.key) ? " chart__legend-item--muted" : ""}`,
-						children: [/* @__PURE__ */ i("span", {
-							className: `chart__legend-swatch${o === "line" ? " chart__legend-swatch--line" : ""}`,
-							style: v(e.index, e.color, b),
-							"aria-hidden": "true"
+						children: [/* @__PURE__ */ a(x, {
+							className: `chart__legend-swatch${s === "line" ? " chart__legend-swatch--line" : ""}`,
+							index: e.index,
+							color: e.color,
+							palette: S,
+							muted: Z(e.key)
 						}), e.label]
 					}, e.key))
 				})
 			}) : null,
-			de ? /* @__PURE__ */ i("p", {
+			fe ? /* @__PURE__ */ a("p", {
 				className: "chart__caption",
-				children: de
+				children: fe
 			}) : null,
-			/* @__PURE__ */ i(e, {
+			/* @__PURE__ */ a(e, {
 				role: "status",
-				children: mt
+				children: _t
 			}),
-			/* @__PURE__ */ i(e, {
-				id: Me,
-				children: be
+			/* @__PURE__ */ a(e, {
+				id: Ne,
+				children: xe
 			}),
-			/* @__PURE__ */ i(e, {
+			/* @__PURE__ */ a(e, {
 				as: "div",
-				children: /* @__PURE__ */ a("table", {
+				children: /* @__PURE__ */ o("table", {
 					className: "chart__table",
 					children: [
-						/* @__PURE__ */ i("caption", { children: ye }),
-						/* @__PURE__ */ i("thead", { children: /* @__PURE__ */ a("tr", { children: [/* @__PURE__ */ i("th", {
-							scope: "col",
-							children: xe
-						}), D ? /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i("th", {
+						/* @__PURE__ */ a("caption", { children: be }),
+						/* @__PURE__ */ a("thead", { children: /* @__PURE__ */ o("tr", { children: [/* @__PURE__ */ a("th", {
 							scope: "col",
 							children: Se
-						}), /* @__PURE__ */ i("th", {
+						}), k ? /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a("th", {
 							scope: "col",
 							children: Ce
-						})] }) : u.map((e) => /* @__PURE__ */ i("th", {
+						}), /* @__PURE__ */ a("th", {
+							scope: "col",
+							children: we
+						})] }) : d.map((e) => /* @__PURE__ */ a("th", {
 							scope: "col",
 							children: e.label
 						}, e.key))] }) }),
-						/* @__PURE__ */ i("tbody", { children: A.map((e, t) => /* @__PURE__ */ a("tr", { children: [/* @__PURE__ */ i("th", {
+						/* @__PURE__ */ a("tbody", { children: M.map((e, t) => /* @__PURE__ */ o("tr", { children: [/* @__PURE__ */ a("th", {
 							scope: "row",
-							children: E(_(e, h))
-						}), D ? /* @__PURE__ */ a(r, { children: [/* @__PURE__ */ i("td", { children: T(g(e[it])) }), /* @__PURE__ */ i("td", { children: Pe.format(at[t]?.share ?? 0) })] }) : u.map((t) => /* @__PURE__ */ i("td", { children: T(g(e[t.key]), t) }, t.key))] }, `row-${t}`)) })
+							children: O(v(e, g))
+						}), k ? /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a("td", { children: D(_(e[st])) }), /* @__PURE__ */ a("td", { children: Fe.format(ct[t]?.share ?? 0) })] }) : d.map((t) => /* @__PURE__ */ a("td", { children: D(_(e[t.key]), t) }, t.key))] }, `row-${t}`)) })
 					]
 				})
 			})
@@ -639,4 +667,4 @@ var b = o(function({ type: o = "line", data: s, series: u, xKey: h, colors: b, o
 	});
 });
 //#endregion
-export { b as Chart };
+export { S as Chart };

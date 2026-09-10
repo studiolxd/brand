@@ -17,11 +17,11 @@ function i(e, t) {
 }
 var a = 5;
 function o({ groups: o, label: s = "Navegación del sitio", renderLink: c = r, className: l }) {
-	let u = ["site-nav", l].filter(Boolean).join(" "), d = Math.min(o.length, a) || 1, f = { "--site-nav-wide-columns": d };
+	let u = ["site-nav", l].filter(Boolean).join(" "), d = Math.min(o.length, a) || 1;
 	return /* @__PURE__ */ t("nav", {
 		className: u,
 		"aria-label": s,
-		style: f,
+		"data-columns": d,
 		children: o.map((r) => /* @__PURE__ */ n("div", {
 			className: "site-nav__group",
 			children: [/* @__PURE__ */ t(e, {

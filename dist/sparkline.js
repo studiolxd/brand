@@ -6,19 +6,19 @@ var r = {
 	width: 80,
 	height: 24,
 	markerSize: 8
-}, i = n(function({ values: n, type: i = "line", width: a = r.width, height: o = r.height, marker: s = !0, baseline: c = !0, color: l, ariaLabel: u, className: d, ...f }, p) {
+}, i = n(function({ values: n, type: i = "line", width: a = r.width, height: o = r.height, marker: s = !0, baseline: c = !0, series: l, ariaLabel: u, className: d, ...f }, p) {
 	let m = [
 		"sparkline",
 		`sparkline--${i}`,
 		d
-	].filter(Boolean).join(" "), h = n.filter((e) => Number.isFinite(e)), g = r.markerSize / 2, _ = h.length ? Math.min(...h) : 0, v = h.length ? Math.max(...h) : 1, y = v - _ || 1, b = l ? { "--sparkline-mark-color": l } : void 0, x = h.map((e, t) => ({
+	].filter(Boolean).join(" "), h = n.filter((e) => Number.isFinite(e)), g = r.markerSize / 2, _ = h.length ? Math.min(...h) : 0, v = h.length ? Math.max(...h) : 1, y = v - _ || 1, b = h.map((e, t) => ({
 		x: g + (h.length > 1 ? t * (a - g * 2) / (h.length - 1) : (a - g * 2) / 2),
 		y: o - g - (e - _) / y * (o - g * 2)
-	})), S = x.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" "), C = x[x.length - 1], w = _ < 0 && v > 0, T = o - g - (0 - _) / y * (o - g * 2);
-	return x.length === 0 ? null : /* @__PURE__ */ t("svg", {
+	})), x = b.map((e, t) => `${t === 0 ? "M" : "L"} ${e.x} ${e.y}`).join(" "), S = b[b.length - 1], C = _ < 0 && v > 0, w = o - g - (0 - _) / y * (o - g * 2);
+	return b.length === 0 ? null : /* @__PURE__ */ t("svg", {
 		ref: p,
 		className: m,
-		style: b,
+		"data-series": l,
 		viewBox: `0 0 ${a} ${o}`,
 		width: a,
 		height: o,
@@ -27,25 +27,25 @@ var r = {
 		"aria-hidden": u ? void 0 : !0,
 		...f,
 		children: [
-			c && w ? /* @__PURE__ */ e("line", {
+			c && C ? /* @__PURE__ */ e("line", {
 				className: "sparkline__baseline",
 				x1: 0,
-				y1: T,
+				y1: w,
 				x2: a,
-				y2: T
+				y2: w
 			}) : null,
-			i === "area" && C ? /* @__PURE__ */ e("path", {
+			i === "area" && S ? /* @__PURE__ */ e("path", {
 				className: "sparkline__area",
-				d: `${S} L ${C.x} ${o} L ${x[0]?.x ?? 0} ${o} Z`
+				d: `${x} L ${S.x} ${o} L ${b[0]?.x ?? 0} ${o} Z`
 			}) : null,
 			/* @__PURE__ */ e("path", {
 				className: "sparkline__line",
-				d: S
+				d: x
 			}),
-			s && C ? /* @__PURE__ */ e("circle", {
+			s && S ? /* @__PURE__ */ e("circle", {
 				className: "sparkline__marker",
-				cx: C.x,
-				cy: C.y,
+				cx: S.x,
+				cy: S.y,
 				r: r.markerSize / 2
 			}) : null
 		]

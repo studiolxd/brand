@@ -44,6 +44,9 @@ export interface SiteNavProps {
  *
  * En el breakpoint ancho el número de columnas sigue al número de grupos
  * (hasta `COLUMNS_MAX`), para que un quinto grupo no caiga solo en una
- * segunda fila; en `md` y `lg` el número de columnas es fijo.
+ * segunda fila; en `md` y `lg` el número de columnas es fijo. El dato viaja
+ * en `data-columns`, no en un atributo `style`: una app con
+ * `style-src 'self'` descarta el atributo sin avisar y el grupo de más caía
+ * a la segunda fila.
  */
 export declare function SiteNav({ groups, label, renderLink, className, }: SiteNavProps): import("react/jsx-runtime").JSX.Element;

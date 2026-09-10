@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import './AuthPage.css';
 export interface AuthPageProps {
     /** Título de la página. */
     title: string;

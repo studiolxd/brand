@@ -1,4 +1,6 @@
 import './Sparkline.css';
+/** Las ocho ranuras categóricas del sistema — `chart-series-1`…`8`. */
+export type SparklineSeries = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export interface SparklineProps extends Omit<React.ComponentPropsWithoutRef<'svg'>, 'width' | 'height' | 'values' | 'color'> {
     /** Serie a dibujar, en orden. Doce puntos es la longitud de referencia. */
     values: number[];
@@ -13,11 +15,11 @@ export interface SparklineProps extends Omit<React.ComponentPropsWithoutRef<'svg
     /** Línea del cero cuando la serie lo cruza. Default `true`. */
     baseline?: boolean;
     /**
-     * Color del trazo. Solo una referencia a token (`'var(--chart-series-3)'`).
-     * Sin este dato, la chispa va en el gris de atenuación: el dato que se lee es
-     * la cifra que tiene al lado.
+     * Ranura de serie del trazo (1–8), para emparejar la chispa con un gráfico
+     * que esté al lado. Sin ella la chispa va en el gris de atenuación: el dato
+     * que se lee es la cifra que tiene al lado.
      */
-    color?: string;
+    series?: SparklineSeries;
     /**
      * Descripción para lectores de pantalla. Sin ella la chispa se marca como
      * decorativa —lo correcto dentro de un `StatTile`, donde la cifra y su
@@ -31,5 +33,9 @@ export interface SparklineProps extends Omit<React.ComponentPropsWithoutRef<'svg
  * La chispa: una serie diminuta sin ejes ni rótulos, para acompañar a una cifra
  * dentro de un `StatTile`. No es un gráfico —no se leen valores en ella—, es la
  * forma de la tendencia.
+ *
+ * La ranura de color viaja en `data-series` y la resuelve la hoja: un atributo
+ * `style` con la referencia al token lo descartaría una app servida con
+ * `style-src 'self'`.
  */
 export declare const Sparkline: import("react").ForwardRefExoticComponent<SparklineProps & import("react").RefAttributes<SVGSVGElement>>;
