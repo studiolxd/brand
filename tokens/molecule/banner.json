@@ -1,0 +1,21 @@
+{
+  "banner": {
+    "padding-block":     { "$value": "{spacing.3}",             "$type": "dimension", "$description": "Padding vertical de la barra (12px). Con una línea de texto y el aspa a 8px de la esquina, el aspa queda centrada sin más reglas" },
+    "padding-inline":    { "$value": "{spacing.5}",             "$type": "dimension", "$description": "Padding horizontal de la barra (24px) — el mismo inset que el alert" },
+    "gap":               { "$value": "{spacing.4}",             "$type": "dimension", "$description": "Aire entre el mensaje y las acciones (16px). Es también el aire vertical cuando la fila apila por debajo de md" },
+    "border-width":      { "$value": "{border-width.default}",  "$type": "dimension", "$description": "Grosor de los filetes superior e inferior. La barra va a ancho completo: en los cantos laterales no hay nada que separar, así que no lleva borde inline" },
+    "font-size":         { "$value": "{text.font-size}",        "$type": "dimension", "$description": "El mensaje lee al cuerpo de la superficie (16px en aplicación, 20px en la pública)" },
+    "line-height":       { "$value": "{text.line-height}",      "$type": "number",    "$description": "Interlineado del mensaje — el del cuerpo" },
+    "close-size":        { "$value": "{size-component.sm}",     "$type": "dimension", "$description": "Lado del botón de cierre — talla sm (32px), la mínima del sistema" },
+    "close-inset":       { "$value": "{spacing.2}",             "$type": "dimension", "$description": "Distancia del botón de cierre a la esquina superior derecha (8px)" },
+
+    "info-bg":           { "$value": "{color.primary}",         "$type": "color",     "$description": "Información — relleno prusia. Es el mismo en las dos superficies: el relleno es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`)" },
+    "info-color":        { "$value": "{color.text.on-dark}",    "$type": "color",     "$description": "Información — mensaje blanco sobre el relleno prusia" },
+    "info-border-color": { "$value": "{color.text.on-dark}",    "$type": "color",     "$description": "Información — filete blanco. Dibuja el canto también cuando la página ya es oscura y el relleno prusia coincide con el fondo, igual que en el alert `default`" },
+
+    "warning-bg":           { "$value": "{color.warning-fill}",      "$type": "color", "$description": "Aviso — el relleno del rol: el amarillo de marca, aquí como feedback. Universal, igual en las dos superficies" },
+    "warning-color":        { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA)" },
+    "warning-border-color": { "$value": "{color.warning-fill}",      "$type": "color", "$description": "Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema" },
+    "warning-close-color":  { "$value": "{color.warning-fill-text}", "$type": "color", "$description": "Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme=\"dark\"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal" }
+  }
+}

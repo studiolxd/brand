@@ -1,0 +1,21 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --banner-padding-block: var(--spacing-3); /** Padding vertical de la barra (12px). Con una línea de texto y el aspa a 8px de la esquina, el aspa queda centrada sin más reglas */
+  --banner-padding-inline: var(--spacing-5); /** Padding horizontal de la barra (24px) — el mismo inset que el alert */
+  --banner-gap: var(--spacing-4); /** Aire entre el mensaje y las acciones (16px). Es también el aire vertical cuando la fila apila por debajo de md */
+  --banner-close-size: var(--size-component-sm); /** Lado del botón de cierre — talla sm (32px), la mínima del sistema */
+  --banner-close-inset: var(--spacing-2); /** Distancia del botón de cierre a la esquina superior derecha (8px) */
+  --banner-border-width: var(--border-width-default); /** Grosor de los filetes superior e inferior. La barra va a ancho completo: en los cantos laterales no hay nada que separar, así que no lleva borde inline */
+  --banner-font-size: var(--text-font-size); /** El mensaje lee al cuerpo de la superficie (16px en aplicación, 20px en la pública) */
+  --banner-line-height: var(--text-line-height); /** Interlineado del mensaje — el del cuerpo */
+  --banner-info-bg: var(--color-primary); /** Información — relleno prusia. Es el mismo en las dos superficies: el relleno es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`) */
+  --banner-info-color: var(--color-text-on-dark); /** Información — mensaje blanco sobre el relleno prusia */
+  --banner-info-border-color: var(--color-text-on-dark); /** Información — filete blanco. Dibuja el canto también cuando la página ya es oscura y el relleno prusia coincide con el fondo, igual que en el alert `default` */
+  --banner-warning-bg: var(--color-warning-fill); /** Aviso — el relleno del rol: el amarillo de marca, aquí como feedback. Universal, igual en las dos superficies */
+  --banner-warning-border-color: var(--color-warning-fill); /** Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema */
+  --banner-warning-color: var(--color-warning-fill-text); /** Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA) */
+  --banner-warning-close-color: var(--color-warning-fill-text); /** Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal */
+}

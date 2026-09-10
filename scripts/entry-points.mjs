@@ -69,6 +69,7 @@ export const entryPoints = {
   'tooltip':             'src/stories/atoms/Tooltip/Tooltip.tsx',
   // Molecules
   'alert':                   'src/stories/molecules/Alert/Alert.tsx',
+  'banner':                  'src/stories/molecules/Banner/Banner.tsx',
   'async-multi-select-field': 'src/stories/molecules/AsyncMultiSelectField/AsyncMultiSelectField.tsx',
   'async-select-field':  'src/stories/molecules/AsyncSelectField/AsyncSelectField.tsx',
   'breadcrumb':          'src/stories/molecules/Breadcrumb/Breadcrumb.tsx',
@@ -165,7 +166,7 @@ export const entryPoints = {
 };
 
 export const clientComponents = new Set([
-  'alert', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
+  'alert', 'banner', 'accordion', 'async-multi-select', 'async-multi-select-field', 'async-select', 'async-select-field', 'code-block',
   'button', 'checkbox', 'radio', 'radio-group', 'switcher', 'menu-button', 'close-button', 'input',
   'input-phone', 'link', 'multi-select', 'select', 'time-select', 'textarea', 'checkbox-field', 'radio-field', 'switcher-field', 'form', 'hero',
   'input-field', 'otp-input', 'otp-field', 'multi-select-field', 'select-field', 'input-phone-field', 'textarea-field', 'dots-button', 'context-menu', 'popover', 'pagination', 'table',

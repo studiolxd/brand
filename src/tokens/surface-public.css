@@ -68,6 +68,8 @@
   --async-select-field-helper-font-size: var(--form-helper-font-size);
   --avatar-upload-hint-font-size: var(--form-helper-font-size);
   --avatar-upload-error-font-size: var(--form-error-font-size);
+  --banner-font-size: var(--text-font-size);
+  --banner-line-height: var(--text-line-height);
   --checkbox-field-label-font-size: var(--text-font-size);
   --checkbox-field-label-line-height: var(--text-line-height);
   --checkbox-field-error-font-size: var(--form-error-font-size);

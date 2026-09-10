@@ -1,0 +1,88 @@
+@import '../../../tokens/molecules/banner.css';
+
+/* ── La barra ───────────────────────────────────────────────── */
+
+.banner {
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+
+  background-color: var(--banner-bg);
+  color: var(--banner-color);
+  /* Solo filetes arriba y abajo: la barra va a ancho completo, así que en los
+     cantos laterales no hay nada de lo que separarla. */
+  border-block: var(--banner-border-width) solid var(--banner-border-color);
+  border-inline: 0;
+
+  padding-block: var(--banner-padding-block);
+  padding-inline: var(--banner-padding-inline);
+
+  font-size: var(--banner-font-size);
+  line-height: var(--banner-line-height);
+
+  /* Por debajo de md el mensaje y las acciones apilan; a partir de md van en
+     una fila. Móvil primero. */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--banner-gap);
+}
+
+/* Deja espacio para el aspa, que va absoluta en la esquina */
+.banner.banner--dismissible {
+  padding-inline-end: calc(var(--banner-close-inset) * 2 + var(--banner-close-size));
+}
+
+.banner__content {
+  min-inline-size: 0;
+}
+
+.banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--banner-gap);
+}
+
+/* ── Botón de cierre — esquina superior derecha ─────────────── */
+/* Con una sola línea de mensaje el aspa queda centrada sin más reglas: el
+   inset (8px) y el padding vertical (12px) suman justo el aire que le sobra a
+   un cuadrado de 32 dentro de una fila de 24. El color lo toma de la tinta de
+   la superficie del relleno por la cascada de `.surface-dark`, salvo en el
+   aviso, donde se fija abajo. */
+
+.banner .banner__close {
+  position: absolute;
+  inset-block-start: var(--banner-close-inset);
+  inset-inline-end: var(--banner-close-inset);
+  --close-button-size: var(--banner-close-size);
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .banner {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .banner__content {
+    flex: 1;
+  }
+}
+
+/* ── Variantes ──────────────────────────────────────────────── */
+
+.banner.banner--info {
+  --banner-bg:           var(--banner-info-bg);
+  --banner-color:        var(--banner-info-color);
+  --banner-border-color: var(--banner-info-border-color);
+}
+
+.banner.banner--warning {
+  --banner-bg:           var(--banner-warning-bg);
+  --banner-color:        var(--banner-warning-color);
+  --banner-border-color: var(--banner-warning-border-color);
+  /* El aviso es el único relleno claro: el aspa no puede heredar la tinta
+     ambiente, que en tema oscuro es blanca. Se fija a la tinta del rol. */
+  --close-button-color:            var(--banner-warning-close-color);
+  --close-button-focus-ring-color: var(--banner-warning-close-color);
+}

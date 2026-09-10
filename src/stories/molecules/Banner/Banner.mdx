@@ -1,0 +1,99 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as BannerStories from "./Banner.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { bannerBaseTokens, bannerVariantTokens } from "../../../tokens/molecules/banner";
+
+<Meta of={BannerStories} />
+
+# Banner
+
+Una barra de sistema: un aviso persistente, a ancho completo, que acompaña a
+toda la sesión. El caso de referencia es la suplantación —«estás viendo la
+aplicación como alguien», con el botón de dejar de hacerlo—: mientras dure ese
+estado, la barra está.
+
+<Canvas of={BannerStories.PorDefecto} />
+
+## Banner o Alert
+
+Se distinguen por **dónde viven**, no por cómo se ven:
+
+| | `Banner` | `Alert` |
+|---|---|---|
+| Sitio | Fuera del contenido: pegado al chrome, arriba o abajo | En el flujo, dentro del contenido |
+| De qué habla | Del estado de la sesión entera | De lo que tiene alrededor: un formulario que falló, un dato que falta |
+| Cuánto dura | Toda la sesión, o mientras dure la condición | Lo que dure el asunto al que acompaña |
+| Ancho | El del contenedor, a sangre | El de la columna de contenido |
+
+Si el mensaje se entiende leyendo solo el trozo de página que tiene al lado, es
+un `Alert`. Si habla de algo que sigue siendo verdad en cualquier pantalla de la
+aplicación, es un `Banner`. Para lo efímero —«guardado», «copiado»— no es ni uno
+ni otro: es un `Toast`.
+
+## Anatomía
+
+Mensaje y acciones en una fila que **apila por debajo de `md`**. El aspa, cuando
+la hay, va en la esquina superior derecha y la fila le reserva el hueco.
+
+El banner **no fija su posición**: `sticky` lo decide la aplicación con el
+layout del sistema. Y **no se oculta solo**: `onDismiss` avisa y la aplicación
+decide si la barra sigue en pantalla, porque es ella la que sabe si la condición
+que la provocó sigue vigente.
+
+Los filetes van solo arriba y abajo. La barra ocupa el ancho completo: en los
+cantos laterales no hay nada de lo que separarla.
+
+## Variantes
+
+`info` (por defecto) es el relleno prusia, para el estado que no es un problema,
+solo un hecho que conviene tener delante. `warning` es el relleno de aviso del
+sistema —el amarillo de marca con tinta prusia— para cuando el estado sí pide
+atención.
+
+<Canvas of={BannerStories.Aviso} />
+
+## Acciones
+
+`actions` es una ranura: recibe un `Button` del sistema. Sobre el relleno prusia
+el botón lee en su cara clara sin configurarlo, porque la barra se declara
+superficie oscura.
+
+<Canvas of={BannerStories.ConAccion} />
+
+## Cierre
+
+<Canvas of={BannerStories.ConCierre} />
+
+## Superficie oscura
+
+`info` mantiene el relleno prusia en las dos superficies —es autocontenido, como
+el `Alert` por defecto— y es su filete blanco el que dibuja el canto cuando la
+página ya es oscura. El aviso tampoco cambia: su relleno es universal, y solo el
+aspa se fija a la tinta del rol para no salir blanca sobre amarillo.
+
+<Canvas of={BannerStories.EnSuperficieOscura} />
+
+---
+
+## Tokens
+
+<TokenTable tokens={bannerBaseTokens} />
+
+### Variantes
+
+<TokenTable tokens={bannerVariantTokens} />
+
+## Accesibilidad
+
+- Anuncia como `role="status"` con `aria-live="polite"`: un aviso de sesión no
+  interrumpe lo que se esté haciendo. Ambos se pueden sobrescribir si el caso lo
+  pide (un corte de servicio inminente sí querría `alert` / `assertive`).
+- El aspa lleva nombre accesible por `dismissLabel`, que dice **qué** descarta.
+  Default «Descartar aviso»; una app multiidioma lo pasa traducido.
+- Si el banner es `sticky`, la aplicación debe dejarle sitio al contenido: una
+  barra que tapa el primer encabezado de la página se lleva por delante el
+  salto al contenido.
+
+## Props
+
+<ArgTypes of={BannerStories} />

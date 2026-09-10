@@ -17,6 +17,14 @@
   margin-block-start: var(--text-list-gap);
 }
 
+/* `ListItem` no añade pintura: la lista ya viste sus hijos por selector de
+   elemento y el resultado debe ser idéntico con clase o sin ella. La clase
+   solo repite aquí la misma declaración de aire para el caso en que el ítem
+   no sea un `<li>` (prop `as`), donde el selector de elemento no llegaría. */
+.list > .list__item + .list__item {
+  margin-block-start: var(--text-list-gap);
+}
+
 .list.list--unordered {
   list-style-type: disc;
 }

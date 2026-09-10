@@ -11,6 +11,10 @@
       "types": "./dist/_types/molecules/Alert/Alert.d.ts",
       "import": "./dist/alert.js"
     },
+    "./banner": {
+      "types": "./dist/_types/molecules/Banner/Banner.d.ts",
+      "import": "./dist/banner.js"
+    },
     "./app-launcher": {
       "types": "./dist/_types/molecules/AppLauncher/AppLauncher.d.ts",
       "import": "./dist/app-launcher.js"

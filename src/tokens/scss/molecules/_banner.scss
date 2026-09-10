@@ -1,0 +1,18 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-banner-padding-block: 0.75rem; // Padding vertical de la barra (12px). Con una línea de texto y el aspa a 8px de la esquina, el aspa queda centrada sin más reglas
+$lxd-banner-padding-inline: 1.5rem; // Padding horizontal de la barra (24px) — el mismo inset que el alert
+$lxd-banner-gap: 1rem; // Aire entre el mensaje y las acciones (16px). Es también el aire vertical cuando la fila apila por debajo de md
+$lxd-banner-border-width: 1px; // Grosor de los filetes superior e inferior. La barra va a ancho completo: en los cantos laterales no hay nada que separar, así que no lleva borde inline
+$lxd-banner-font-size: 1rem; // El mensaje lee al cuerpo de la superficie (16px en aplicación, 20px en la pública)
+$lxd-banner-line-height: 1.5; // Interlineado del mensaje — el del cuerpo
+$lxd-banner-close-size: 2rem; // Lado del botón de cierre — talla sm (32px), la mínima del sistema
+$lxd-banner-close-inset: 0.5rem; // Distancia del botón de cierre a la esquina superior derecha (8px)
+$lxd-banner-info-bg: #111e30; // Información — relleno prusia. Es el mismo en las dos superficies: el relleno es autocontenido y su contenido lee siempre en oscuro (la raíz lleva `.surface-dark`)
+$lxd-banner-info-color: #ffffff; // Información — mensaje blanco sobre el relleno prusia
+$lxd-banner-info-border-color: #ffffff; // Información — filete blanco. Dibuja el canto también cuando la página ya es oscura y el relleno prusia coincide con el fondo, igual que en el alert `default`
+$lxd-banner-warning-bg: #ffcd00; // Aviso — el relleno del rol: el amarillo de marca, aquí como feedback. Universal, igual en las dos superficies
+$lxd-banner-warning-color: #111e30; // Aviso — mensaje prusia sobre el relleno amarillo (11,17:1, AAA)
+$lxd-banner-warning-border-color: #ffcd00; // Aviso — filete igual al relleno: el amarillo ya se separa de cualquier fondo del sistema
+$lxd-banner-warning-close-color: #111e30; // Aviso — aspa y su anillo de foco. Es el único relleno claro de la barra, así que el aspa no puede tomar la tinta ambiente: con `[data-theme="dark"]` en la raíz saldría blanca sobre amarillo (1,50:1). Va fijada a la tinta del rol, que es universal

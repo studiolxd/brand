@@ -113,6 +113,7 @@
 @import "./components/spinner.css";
 @import "./components/skeleton.css";
 @import "./molecules/alert.css";
+@import "./molecules/banner.css";
 @import "./molecules/toast.css";
 @import "./components/number-input.css";
 @import "./molecules/number-input-field.css";

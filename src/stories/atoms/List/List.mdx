@@ -38,6 +38,21 @@ siendo marcas de lista en todos los navegadores.
 `plain` es la que se usa para listas de navegación, enlaces sociales o cualquier
 sitio donde la semántica de lista importa y las viñetas estorban.
 
+## ListItem
+
+`ListItem` es el `<li>` de la lista con la clase `list__item`. La `List` ya viste
+sus hijos por selector de elemento, así que la clase **no pinta nada nuevo**: el
+dibujo es idéntico se use el átomo o una etiqueta suelta. Está para las apps que
+no pueden escribir HTML a pelo, que reciben así una pieza del sistema para cada
+hueco.
+
+<Canvas of={ListStories.ConListItem} />
+
+Su prop `as` cambia el elemento —default `'li'`— para el caso en que el ítem no
+cuelga de una lista real y hay que darle el rol a mano (`as="div"
+role="listitem"`). Solo entonces: dentro de una `List` el elemento correcto es
+`<li>`.
+
 ## Anidada
 
 Una lista dentro de un `<li>` mantiene su sangría y su aire.
