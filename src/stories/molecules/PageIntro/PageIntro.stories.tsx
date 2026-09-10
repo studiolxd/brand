@@ -33,7 +33,7 @@ export const ConMasTexto: Story = {
 
 /**
  * La acción principal de la página, a la derecha del título. En pantalla
- * estrecha cae bajo el título, al inicio.
+ * estrecha cae bajo el título, a todo el ancho.
  */
 export const ConAccion: Story = {
   args: {
@@ -45,6 +45,25 @@ export const ConAccion: Story = {
 
 /** Dos acciones: la principal y una alternativa (`outline`), en ese orden. */
 export const ConDosAcciones: Story = {
+  args: {
+    title: 'Webhooks',
+    description: undefined,
+    actions: (
+      <>
+        <Button>Crear webhook</Button>
+        <Button variant="outline">Ver registro</Button>
+      </>
+    ),
+  },
+};
+
+/**
+ * Las mismas dos acciones a 375 px: bajo el título, **cada una a todo el ancho
+ * y una por línea**, en el orden del JSX. No hace falta pasarles `block`.
+ */
+export const ConDosAccionesMovil: Story = {
+  name: 'Con dos acciones (móvil)',
+  globals: { viewport: { value: { width: '375px', height: '720px' } } },
   args: {
     title: 'Webhooks',
     description: undefined,
@@ -183,6 +202,75 @@ export const ContratoFila: Story = {
     await expect(actions).toContainElement(canvas.getByRole('button', { name: 'Invitar miembro' }));
     // La entradilla queda fuera de la fila, a ancho completo.
     await expect(row.contains(canvas.getByText(/Quién entra/))).toBe(false);
+  },
+};
+
+export const ContratoAccionesEnBloque: Story = {
+  name: 'Test — bajo md cada acción ocupa el ancho de la ranura',
+  tags: ['!dev'],
+  globals: { viewport: { value: 'mobile1' } },
+  args: {
+    title: 'Webhooks',
+    description: undefined,
+    actions: (
+      <>
+        <Button>Crear webhook</Button>
+        <Button variant="outline">Ver registro</Button>
+      </>
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const acciones = canvasElement.querySelector('.page-intro__actions') as HTMLElement;
+    const botones = Array.from(acciones.querySelectorAll<HTMLElement>('.button'));
+    await expect(botones).toHaveLength(2);
+
+    // La ranura se estira a todo el ancho de la fila…
+    const fila = canvasElement.querySelector('.page-intro__row') as HTMLElement;
+    await expect(acciones.getBoundingClientRect().width)
+      .toBeCloseTo(fila.getBoundingClientRect().width, 0);
+
+    // …y cada botón, al ancho de la ranura: en bloque, sin pasarles `block`.
+    const anchoRanura = acciones.getBoundingClientRect().width;
+    for (const boton of botones) {
+      await expect(boton).not.toHaveClass('button--block');
+      await expect(boton.getBoundingClientRect().width).toBeCloseTo(anchoRanura, 0);
+    }
+
+    // Una por línea, en el orden del JSX.
+    await expect(botones[1].getBoundingClientRect().top)
+      .toBeGreaterThanOrEqual(botones[0].getBoundingClientRect().bottom);
+  },
+};
+
+export const ContratoAccionesEnEscritorio: Story = {
+  name: 'Test — en escritorio cada acción mide su contenido',
+  tags: ['!dev'],
+  args: {
+    title: 'Webhooks',
+    description: undefined,
+    actions: (
+      <>
+        <Button>Crear webhook</Button>
+        <Button variant="outline">Ver registro</Button>
+      </>
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const acciones = canvasElement.querySelector('.page-intro__actions') as HTMLElement;
+    const botones = Array.from(acciones.querySelectorAll<HTMLElement>('.button'));
+
+    // En la misma línea, y ninguno a ancho de la ranura: miden su etiqueta.
+    await expect(botones[0].getBoundingClientRect().top)
+      .toBeCloseTo(botones[1].getBoundingClientRect().top, 0);
+    const anchoRanura = acciones.getBoundingClientRect().width;
+    for (const boton of botones) {
+      await expect(boton.getBoundingClientRect().width).toBeLessThan(anchoRanura);
+    }
+
+    // Y la ranura, pegada al margen final de la fila.
+    const fila = canvasElement.querySelector('.page-intro__row') as HTMLElement;
+    await expect(acciones.getBoundingClientRect().right)
+      .toBeCloseTo(fila.getBoundingClientRect().right, 0);
   },
 };
 
