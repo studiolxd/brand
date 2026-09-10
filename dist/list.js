@@ -13,6 +13,13 @@ var n = t(function({ type: t = "unordered", className: n, children: r, ...i }, a
 		...i,
 		children: r
 	});
+}), r = t(function({ as: t = "li", className: n, children: r, ...i }, a) {
+	return /* @__PURE__ */ e(t, {
+		ref: a,
+		className: ["list__item", n ?? ""].filter(Boolean).join(" "),
+		...i,
+		children: r
+	});
 });
 //#endregion
-export { n as List };
+export { n as List, r as ListItem };

@@ -9,6 +9,20 @@ var n = t(function({ className: t, children: n, ...r }, i) {
 		...r,
 		children: n
 	});
+}), r = t(function({ as: t = "dt", className: n, children: r, ...i }, a) {
+	return /* @__PURE__ */ e(t, {
+		ref: a,
+		className: ["description-list__term", n].filter(Boolean).join(" "),
+		...i,
+		children: r
+	});
+}), i = t(function({ as: t = "dd", className: n, children: r, ...i }, a) {
+	return /* @__PURE__ */ e(t, {
+		ref: a,
+		className: ["description-list__details", n].filter(Boolean).join(" "),
+		...i,
+		children: r
+	});
 });
 //#endregion
-export { n as DescriptionList };
+export { i as DescriptionDetails, n as DescriptionList, r as DescriptionTerm };

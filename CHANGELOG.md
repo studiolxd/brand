@@ -7,6 +7,28 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [32.13.0] — 2026-09-10
+
+> **Minor.**
+
+- **`ListItem`** en `./list`: el `<li>` de una `List` como componente, con
+  `as`. No pinta nada nuevo: la lista ya vestía sus hijos por elemento y la
+  clase `list__item` repite el mismo aire para que una app sin HTML suelto
+  tenga qué poner dentro de `List`.
+- **`DescriptionTerm` y `DescriptionDetails`** en `./description-list`: el
+  `<dt>`/`<dd>` como componentes, con `as`. Sin pintura nueva: las clases se
+  suman a los selectores de elemento que ya existían.
+- **`Banner`** (`./banner`): barra de sistema persistente, a ancho completo,
+  fuera del contenido — «estás viendo la aplicación como…». Variantes `info`
+  (relleno prusia, raíz `.surface-dark`) y `warning` (relleno de aviso, tinta
+  del rol); ranura `actions`, `onDismiss` + `dismissLabel` (no se oculta
+  sola). Tokens `banner.*` sin colores nuevos. El MDX abre con Banner vs Alert.
+- **Tarjeta social (`./og`)**: `ogCard()`, `ogFonts()`, `OG_SIZE` y
+  `OG_CONTENT_TYPE` para `next/og`/satori. Árbol con estilos en línea leídos
+  de `tokens.ts` (excepción declarada: satori no lee CSS) y dos TTF estáticos
+  de Google Sans Flex (300 y 500) en `assets/fonts` porque satori no acepta
+  woff2 ni ejes variables. `ogFonts()` lee del disco (Node, no Edge).
+
 ## [32.12.0] — 2026-09-09
 
 > **Minor.**
