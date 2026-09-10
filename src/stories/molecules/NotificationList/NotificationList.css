@@ -13,8 +13,8 @@
    columna del punto se reserva siempre, con bolita o sin ella, para que los
    títulos de todas las filas empiecen en la misma vertical.
 
-   Por debajo de `md` la columna de acciones y hora cae bajo el texto (segunda
-   línea de la rejilla, misma columna), alineada al final de línea. */
+   Por debajo de `md` la fila se lee de arriba abajo en tres líneas de rejilla,
+   todas en la columna del texto: texto, acciones y hora. */
 .notification-list__item {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -72,19 +72,10 @@
   line-height: var(--notification-list-body-line-height);
 }
 
-/* La columna del final: las acciones y, debajo, la hora; las dos alineadas al
-   extremo final, compartan fila con el texto o caigan bajo él. A partir de
-   `md` esta columna se estira y la hora baja al final de la fila. */
-.notification-list__aside {
-  grid-column: 2;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--notification-list-aside-gap);
-}
-
+/* Las acciones van en la columna del texto, en su propia línea de rejilla y al
+   extremo final. A partir de `md` suben a la derecha del texto. */
 .notification-list__actions {
+  grid-column: 2;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -92,8 +83,10 @@
   gap: var(--notification-list-actions-gap);
 }
 
-/* La hora no se parte: es un dato corto y cierra la fila. */
+/* La hora cierra la fila en una línea propia: por debajo del cuerpo y de las
+   acciones, alineada al final. No se parte: es un dato corto. */
 .notification-list__time {
+  grid-column: 2;
   font-size: var(--notification-list-time-font-size);
   color: var(--notification-list-time-color);
   text-align: end;
@@ -101,31 +94,29 @@
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {
-  /* A partir de `md` la columna del final sube a la fila del texto y se queda
-     con lo que mide, pegada al margen final. */
+  /* A partir de `md` la fila es de dos líneas: arriba, punto | texto |
+     acciones; abajo, la hora. Las acciones se quedan con lo que miden, pegadas
+     al margen final y a la altura del título. */
   .notification-list__item {
     grid-template-columns: auto 1fr auto;
   }
 
-  /* El aire entre el texto y las acciones es mayor que el que separa el punto
-     del texto —son dos bloques, no dos partes del mismo—, así que lo pone la
-     propia columna y no el `column-gap` de la rejilla, que es uno para todas. */
-  .notification-list__aside {
+  .notification-list__actions {
     grid-column: 3;
     grid-row: 1;
-    /* La columna ocupa toda la altura de la fila para poder repartir sus dos
-       bloques por los extremos: las acciones arriba, a la altura del título, y
-       la hora abajo del todo, a la altura de la última línea del cuerpo. */
-    align-self: stretch;
-    justify-content: space-between;
+    align-self: start;
+    /* El aire entre el texto y las acciones es mayor que el que separa el punto
+       del texto —son dos bloques, no dos partes del mismo—, así que lo pone la
+       propia columna y no el `column-gap` de la rejilla, que es uno para todas. */
     margin-inline-start: calc(
       var(--notification-list-item-column-gap) - var(--notification-list-item-gap)
     );
   }
 
-  /* Sin acciones no hay dos bloques que repartir, así que el margen automático
-     es lo que baja la hora igualmente al final de la fila. */
+  /* La hora abarca el texto y las acciones para cerrar la fila por su extremo
+     final, esté la columna de acciones vacía o no. */
   .notification-list__time {
-    margin-block-start: auto;
+    grid-column: 2 / -1;
+    grid-row: 2;
   }
 }

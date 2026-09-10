@@ -103,17 +103,20 @@ describe('NotificationList — la fila', () => {
     expect(segunda).toHaveTextContent('hace 2 h');
   });
 
-  it('la hora va después del texto, en la columna del final', () => {
+  it('la fila se lee texto → acciones → hora, y la hora cierra en su propia línea', () => {
     const { container } = setup({ onMarkRead: vi.fn() });
     const fila = container.querySelector('.notification-list__item')!;
     const texto = fila.querySelector('.notification-list__text')!;
-    const aside = fila.querySelector('.notification-list__aside')!;
+    const acciones = fila.querySelector('.notification-list__actions')!;
+    const hora = fila.querySelector('.notification-list__time')!;
+
+    // Los tres son hermanos de la fila: la hora no cuelga del bloque de
+    // acciones, va en una línea propia de la rejilla.
+    expect(acciones.parentElement).toBe(fila);
+    expect(hora.parentElement).toBe(fila);
     expect(
-      texto.compareDocumentPosition(aside) & Node.DOCUMENT_POSITION_FOLLOWING,
+      texto.compareDocumentPosition(acciones) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
-    // Dentro de la columna: primero las acciones, después la hora.
-    const acciones = aside.querySelector('.notification-list__actions')!;
-    const hora = aside.querySelector('.notification-list__time')!;
     expect(
       acciones.compareDocumentPosition(hora) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();

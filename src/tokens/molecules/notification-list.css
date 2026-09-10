@@ -5,13 +5,12 @@
 :root {
   --notification-list-item-padding-block: var(--spacing-4); /** Aire vertical de cada notificación. No hay línea entre filas: este aire, dos veces, es lo único que separa una notificación de la siguiente. Es una fila de página, no de popover: respira más que la del `NotificationPanel` */
   --notification-list-item-gap: var(--spacing-3); /** Aire entre la columna del punto y el texto */
-  --notification-list-item-row-gap: var(--spacing-2); /** Aire entre el texto y la columna de acciones cuando esta cae debajo (por debajo de `md`) */
-  --notification-list-item-column-gap: var(--spacing-5); /** Aire entre el texto y la columna de acciones cuando comparten fila (a partir de `md`) */
+  --notification-list-item-row-gap: var(--spacing-2); /** Aire entre las líneas de una fila: entre el texto y las acciones (por debajo de `md`) y entre el texto y la hora, que va siempre en una línea propia */
+  --notification-list-item-column-gap: var(--spacing-5); /** Aire entre el texto y las acciones cuando comparten línea (a partir de `md`) */
   --notification-list-item-text-gap: var(--spacing-1); /** Aire entre el título y el cuerpo */
   --notification-list-item-font-family: var(--font-family-sans); /** Familia tipográfica de la notificación */
   --notification-list-title-line-height: var(--line-height-snug); /** Interlineado del título */
   --notification-list-body-line-height: var(--line-height-normal); /** Interlineado del cuerpo: el de un texto que se lee entero */
-  --notification-list-aside-gap: var(--spacing-2); /** Aire entre las acciones de la fila y la hora, que va debajo de ellas. A partir de `md` es el mínimo: ahí la hora baja al final de la fila */
   --notification-list-dot-size: var(--icon-size-sm); /** Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que el panel pinta ese punto */
   --notification-list-dot-margin-block-start: var(--spacing-1); /** Baja el punto hasta el centro óptico de la primera línea del título */
   --notification-list-title-font-size: var(--text-font-size); /** El título de una notificación es texto corriente: hereda el cuerpo de la superficie */

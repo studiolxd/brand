@@ -26,17 +26,18 @@ La lista **no ordena, no pagina y no filtra**: eso es de la página (`Pagination
 
 ## La fila
 
-Tres bloques, y el orden en el que se leen:
+Cuatro bloques, y el orden en el que se leen:
 
 1. **La columna del punto**, que **se reserva siempre**, haya bolita o no. Es lo que mantiene todos los títulos en la misma vertical y lo que impide que la fila salte al marcarla leída.
 2. **El texto**: el título —enlace a la notificación si trae `href`— y el cuerpo debajo, entero.
-3. **La columna del final**: las acciones y, **debajo de ellas, la hora**, las dos alineadas al extremo final. La hora cierra la fila porque es contexto del mensaje, no parte de él. De `md` para arriba esa columna ocupa **toda la altura de la fila** y reparte sus dos bloques por los extremos: las acciones arriba, a la altura del título, y **la hora abajo del todo, a la altura de la última línea del texto**. Así la fila queda cerrada por sus cuatro esquinas en vez de con las dos cosas apelotonadas arriba.
+3. **Las acciones**, al extremo final. De `md` para arriba van a la derecha del texto, **a la altura del título**; por debajo caen bajo el texto, al final de línea.
+4. **La hora**, en **una línea propia por debajo de todo lo anterior** y alineada al final. La fila se lee título → cuerpo → hora: la hora cierra porque es contexto del mensaje, no parte de él, y por eso no comparte línea ni con el cuerpo ni con las acciones. Puesta a la altura de la última línea del cuerpo se leía como si fuera parte de ella; en su propia línea es lo último que se lee y cierra la fila por abajo.
 
 **El título mide su texto**, no la columna: lo clicable es el título y no la línea entera, que es lo que se espera de un enlace y lo que evita abrir una notificación al pulsar el hueco vacío de su derecha.
 
 Lo no leído se dice con **el punto y el peso del título**, nunca con un relleno (Foundations → Colores), y el punto lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»). El estado va en `unread`, **el mismo booleano y en el mismo sentido que el del `NotificationPanel`**: los mismos datos sirven para la página y para el adelanto, sin invertir nada por el camino.
 
-Por debajo de `md` la columna del final **cae bajo el texto** —empezando en la misma columna que él, con el hueco del punto respetado— con las acciones y la hora al final de línea.
+Por debajo de `md` las acciones **caen bajo el texto** —empezando en la misma columna que él, con el hueco del punto respetado— y la hora, debajo de ellas: tres líneas, todas al final de línea. Tampoco ahí la hora comparte línea con las acciones.
 
 <Canvas of={Stories.EnMovil} />
 
@@ -71,6 +72,8 @@ Con `href`, el título es el enlace de la fila y se monta sobre el router de la 
 `onItemClick` es lo que permite marcar leída la notificación al abrirla, que es lo que espera cualquiera que la pulse. Sin `href` no hay a qué engancharlo: el título es texto y la fila se marca leída con su botón.
 
 ## La hora
+
+La hora va **siempre en su propia línea**, la última de la fila y al extremo final (§ «La fila»).
 
 `time` es la fecha **ya formateada** por el consumidor («hace 5 min»): la lista no formatea fechas ni conoce el idioma. `timeDateTime` es la misma fecha en formato máquina; con ella la hora se pinta en un `<time datetime>` —que es lo que la hace legible para el navegador y para un lector de pantalla— y sin ella se queda en texto corriente, porque «hace 5 min» no es una fecha válida para el atributo.
 

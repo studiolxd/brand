@@ -68,11 +68,11 @@ type Story = StoryObj<typeof meta>;
  * La bandeja: filas a sangre separadas solo por su propio aire, dos sin leer y
  * dos leídas, con y sin cuerpo, con y sin enlace. La columna del punto se
  * reserva en todas, así que los títulos alinean; la hora de cada fila cierra
- * abajo, a la altura de su última línea de texto.
+ * abajo, en una línea propia por debajo del cuerpo.
  */
 export const Bandeja: Story = {};
 
-/** Sin `onMarkRead` ni `renderActions`, la fila se queda con el texto y la hora. */
+/** Sin `onMarkRead` ni `renderActions`, la fila se queda con el texto y la hora debajo. */
 export const SinAcciones: Story = {
   name: 'Sin acciones',
   args: { onMarkRead: undefined, renderActions: undefined },
@@ -85,8 +85,8 @@ export const TodoLeido: Story = {
 };
 
 /**
- * A 375 px la columna del final cae bajo el texto, con las acciones y la hora
- * al final de línea.
+ * A 375 px las acciones caen bajo el texto y la hora, debajo de ellas: tres
+ * líneas, todas al final de línea.
  */
 export const EnMovil: Story = {
   name: 'En móvil',
@@ -135,21 +135,16 @@ export const ContratoColumnaFinal: Story = {
   play: async ({ canvasElement }) => {
     const fila = canvasElement.querySelector('.notification-list__item') as HTMLElement;
     const texto = fila.querySelector('.notification-list__text') as HTMLElement;
-    const aside = fila.querySelector('.notification-list__aside') as HTMLElement;
     const acciones = fila.querySelector('.notification-list__actions') as HTMLElement;
     const hora = fila.querySelector('.notification-list__time') as HTMLElement;
 
-    // Después del texto en el documento.
+    // En el documento: primero el texto, después las acciones y la hora al final.
     await expect(
-      texto.compareDocumentPosition(aside) & Node.DOCUMENT_POSITION_FOLLOWING,
+      texto.compareDocumentPosition(acciones) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
-    // Y la hora, después de las acciones y debajo de ellas.
     await expect(
       acciones.compareDocumentPosition(hora) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
-    await expect(hora.getBoundingClientRect().top).toBeGreaterThanOrEqual(
-      acciones.getBoundingClientRect().bottom - 1,
-    );
 
     // Las dos, pegadas al extremo final de la fila.
     const final = fila.getBoundingClientRect().right;
@@ -159,33 +154,33 @@ export const ContratoColumnaFinal: Story = {
 };
 
 export const ContratoHoraAlFinalDeLaFila: Story = {
-  name: 'Test — a partir de md la hora cierra la fila por abajo',
+  name: 'Test — la hora va en su propia línea, por debajo del cuerpo',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
-    // La primera fila es la del cuerpo largo: la columna del final es mucho más
-    // corta que el texto, así que si la hora no bajara se quedaría arriba.
+    // La primera fila es la del cuerpo largo: la hora tiene que empezar por
+    // debajo de su última línea, no compartirla.
     const fila = canvasElement.querySelector('.notification-list__item') as HTMLElement;
     const texto = fila.querySelector('.notification-list__text') as HTMLElement;
-    const aside = fila.querySelector('.notification-list__aside') as HTMLElement;
     const acciones = fila.querySelector('.notification-list__actions') as HTMLElement;
     const hora = fila.querySelector('.notification-list__time') as HTMLElement;
 
-    // La columna del final ocupa toda la altura de la fila…
-    await expect(aside.getBoundingClientRect().height).toBeCloseTo(
-      texto.getBoundingClientRect().height,
-      0,
+    // Una línea propia: empieza por debajo del borde inferior del cuerpo…
+    await expect(hora.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      texto.getBoundingClientRect().bottom - 1,
     );
-    // …con las acciones arriba…
+    // …y también por debajo de las acciones, que se quedan arriba, a la altura
+    // del título.
+    await expect(hora.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      acciones.getBoundingClientRect().bottom - 1,
+    );
     await expect(
-      Math.abs(acciones.getBoundingClientRect().top - aside.getBoundingClientRect().top),
-    ).toBeLessThanOrEqual(1);
-    // …y la hora abajo del todo, a la altura de la última línea del texto.
-    await expect(
-      Math.abs(hora.getBoundingClientRect().bottom - aside.getBoundingClientRect().bottom),
-    ).toBeLessThanOrEqual(1);
-    await expect(
-      Math.abs(hora.getBoundingClientRect().bottom - texto.getBoundingClientRect().bottom),
+      Math.abs(acciones.getBoundingClientRect().top - texto.getBoundingClientRect().top),
     ).toBeLessThanOrEqual(2);
+
+    // Y sigue cerrando la fila por su extremo final.
+    await expect(
+      Math.abs(hora.getBoundingClientRect().right - fila.getBoundingClientRect().right),
+    ).toBeLessThanOrEqual(1);
   },
 };
 
@@ -215,28 +210,35 @@ export const ContratoTituloASuAncho: Story = {
 };
 
 export const ContratoEnMovil: Story = {
-  name: 'Test — bajo md la columna final cae bajo el texto',
+  name: 'Test — bajo md, acciones y hora caen bajo el texto, cada una en su línea',
   tags: ['!dev'],
   globals: { viewport: { value: 'mobile1' } },
   play: async ({ canvasElement }) => {
     const fila = canvasElement.querySelector('.notification-list__item') as HTMLElement;
     const texto = fila.querySelector('.notification-list__text') as HTMLElement;
-    const aside = fila.querySelector('.notification-list__aside') as HTMLElement;
+    const acciones = fila.querySelector('.notification-list__actions') as HTMLElement;
+    const hora = fila.querySelector('.notification-list__time') as HTMLElement;
 
-    // Debajo del texto, no a su lado.
-    await expect(aside.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+    // Debajo del texto, no a su lado…
+    await expect(acciones.getBoundingClientRect().top).toBeGreaterThanOrEqual(
       texto.getBoundingClientRect().bottom - 1,
     );
-    // Y empieza en la misma columna que el texto: el hueco del punto se
-    // respeta también aquí.
-    await expect(aside.getBoundingClientRect().left).toBeCloseTo(
-      texto.getBoundingClientRect().left,
-      0,
+    // …y la hora en su propia línea, debajo de las acciones.
+    await expect(hora.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      acciones.getBoundingClientRect().bottom - 1,
     );
-    // Al final de línea.
-    await expect(
-      Math.abs(aside.getBoundingClientRect().right - fila.getBoundingClientRect().right),
-    ).toBeLessThanOrEqual(1);
+
+    // Las dos empiezan en la misma columna que el texto: el hueco del punto se
+    // respeta también aquí.
+    for (const bloque of [acciones, hora]) {
+      await expect(bloque.getBoundingClientRect().left).toBeCloseTo(
+        texto.getBoundingClientRect().left,
+        0,
+      );
+      await expect(
+        Math.abs(bloque.getBoundingClientRect().right - fila.getBoundingClientRect().right),
+      ).toBeLessThanOrEqual(1);
+    }
   },
 };
 
