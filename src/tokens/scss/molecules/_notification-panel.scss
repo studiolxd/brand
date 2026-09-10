@@ -14,8 +14,7 @@ $lxd-notification-panel-item-text-gap: 0.25rem; // Aire entre el título, el cue
 $lxd-notification-panel-item-font-family: "Google Sans Flex", system-ui, sans-serif; // Familia tipográfica de la notificación
 $lxd-notification-panel-item-title-font-size: 1rem; // El título de una notificación es texto corriente: hereda el cuerpo de la superficie
 $lxd-notification-panel-item-title-line-height: 1.3; // Interlineado del título
-$lxd-notification-panel-item-unread-font-weight: 500; // Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno
-$lxd-notification-panel-item-read-font-weight: 300; // Peso del título ya leído: el del cuerpo de texto
+$lxd-notification-panel-item-title-font-weight: 300; // Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso
 $lxd-notification-panel-item-body-font-size: 0.875rem; // Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie
 $lxd-notification-panel-item-body-line-height: 1.3; // Interlineado del cuerpo
 $lxd-notification-panel-item-body-line-clamp: 2; // Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja

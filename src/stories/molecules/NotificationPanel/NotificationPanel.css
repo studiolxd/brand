@@ -97,13 +97,8 @@
 .notification-panel__item-text .notification-panel__item-title {
   font-size: var(--notification-panel-item-title-font-size);
   line-height: var(--notification-panel-item-title-line-height);
-  font-weight: var(--notification-panel-item-read-font-weight);
+  font-weight: var(--notification-panel-item-title-font-weight);
   min-inline-size: 0;
-}
-
-/* Doble clase: el modificador gana al selector base. */
-.notification-panel__item-text .notification-panel__item-title.notification-panel__item-title--unread {
-  font-weight: var(--notification-panel-item-unread-font-weight);
 }
 
 /* El cuerpo es un adelanto: se recorta a las líneas del token y el texto

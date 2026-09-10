@@ -9,8 +9,7 @@
 
     "title-font-size":        { "$value": "{text.font-size}",         "$type": "dimension", "$description": "El título de una notificación es texto corriente: hereda el cuerpo de la superficie" },
     "title-line-height":      { "$value": "{line-height.snug}",       "$type": "number",    "$description": "Interlineado del título" },
-    "unread-font-weight":     { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno" },
-    "read-font-weight":       { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso del título ya leído: el del cuerpo de texto" },
+    "title-font-weight":      { "$value": "{font-weight.default}",    "$type": "number",    "$description": "Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso" },
 
     "body-font-size":         { "$value": "{text.font-size}",         "$type": "dimension", "$description": "Cuerpo de la notificación: texto corriente. En la página se lee entero y a la talla de lectura, no recortado como en el panel" },
     "body-line-height":       { "$value": "{line-height.normal}",     "$type": "number",    "$description": "Interlineado del cuerpo: el de un texto que se lee entero" },

@@ -47,7 +47,8 @@
 }
 
 /* El título es texto corriente, o un enlace con la cara de enlace del sistema
-   (la línea la pinta `Link`, no esta hoja). El peso lo decide el estado. */
+   (la línea la pinta `Link`, no esta hoja). Un solo peso, leída o sin leer: lo
+   no leído lo dice el punto del indicador y nada más. */
 .notification-list__title {
   /* La columna de texto es un flex en columna, así que por defecto estiraría
      el título a todo el ancho y toda la línea quedaría clicable. El título
@@ -55,12 +56,7 @@
   align-self: start;
   font-size: var(--notification-list-title-font-size);
   line-height: var(--notification-list-title-line-height);
-  font-weight: var(--notification-list-read-font-weight);
-}
-
-/* Doble clase: el modificador gana al selector base. */
-.notification-list__title.notification-list__title--unread {
-  font-weight: var(--notification-list-unread-font-weight);
+  font-weight: var(--notification-list-title-font-weight);
 }
 
 /* El cuerpo se lee entero: en la página no se recorta a dos líneas como en el

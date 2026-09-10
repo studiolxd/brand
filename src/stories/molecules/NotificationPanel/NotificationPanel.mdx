@@ -32,7 +32,7 @@ Bajo el puntero **la fila no pinta nada**: ni relleno —los estados no se relle
 
 ## La lista no salta bajo el dedo
 
-Al marcar una fila leída, la fila **cambia en el sitio**: pierde el punto y el peso, y se queda donde estaba. No desaparece ni se reordena, aunque el consumidor ya haya recargado sus datos: lo que el panel enseña mientras está abierto lo decide él. Al cerrarlo se olvida de lo marcado aquí y vuelve a mandar `items`.
+Al marcar una fila leída, la fila **cambia en el sitio**: pierde el punto y se queda donde estaba. El título no cambia de peso —va siempre al del cuerpo de texto, igual que en la bandeja—: lo no leído lo dice el punto, y nada más. No desaparece ni se reordena, aunque el consumidor ya haya recargado sus datos: lo que el panel enseña mientras está abierto lo decide él. Al cerrarlo se olvida de lo marcado aquí y vuelve a mandar `items`.
 
 La fila ya leída sigue en el recorrido de teclado, pero se anuncia con `aria-disabled`: no hace nada. Se queda enfocable a propósito — deshabilitarla de verdad tiraría el foco al `body` justo después de pulsarla.
 

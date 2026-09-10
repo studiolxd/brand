@@ -35,7 +35,7 @@ Cuatro bloques, y el orden en el que se leen:
 
 **El título mide su texto**, no la columna: lo clicable es el título y no la línea entera, que es lo que se espera de un enlace y lo que evita abrir una notificación al pulsar el hueco vacío de su derecha.
 
-Lo no leído se dice con **el punto y el peso del título**, nunca con un relleno (Foundations → Colores), y el punto lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»). El estado va en `unread`, **el mismo booleano y en el mismo sentido que el del `NotificationPanel`**: los mismos datos sirven para la página y para el adelanto, sin invertir nada por el camino.
+Lo no leído se dice **solo con el punto**, nunca con un relleno (Foundations → Colores) y tampoco con el peso del título: todos los títulos van al peso del cuerpo de texto, leída o sin leer. Una lista de páginas enteras con la mitad de los títulos en negrita se lee como dos listas y no como una, y el punto ya dice lo mismo sin tocar la tipografía. El punto lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»). El estado va en `unread`, **el mismo booleano y en el mismo sentido que el del `NotificationPanel`**: los mismos datos sirven para la página y para el adelanto, sin invertir nada por el camino.
 
 Por debajo de `md` las acciones **caen bajo el texto** —empezando en la misma columna que él, con el hueco del punto respetado— y la hora, debajo de ellas: tres líneas, todas al final de línea. Tampoco ahí la hora comparte línea con las acciones.
 

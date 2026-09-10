@@ -243,10 +243,7 @@ export function NotificationPanel({
                       <Text
                         id={titleId}
                         tone={unread ? 'default' : 'muted'}
-                        className={[
-                          'notification-panel__item-title',
-                          unread ? 'notification-panel__item-title--unread' : '',
-                        ].filter(Boolean).join(' ')}
+                        className="notification-panel__item-title"
                       >
                         {item.title}
                       </Text>

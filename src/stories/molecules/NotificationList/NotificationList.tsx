@@ -22,7 +22,7 @@ export interface NotificationListItem {
    */
   timeDateTime?: string;
   /**
-   * Sin leer: punto y peso en el título. Se dice igual que en el
+   * Sin leer: el punto del indicador. Se dice igual que en el
    * `NotificationPanel`, con el mismo booleano y en el mismo sentido.
    */
   unread: boolean;
@@ -120,10 +120,6 @@ export function NotificationList({
       {items.map((item) => {
         const unread = item.unread;
         const acciones = renderActions?.(item);
-        const titleClass = [
-          'notification-list__title',
-          unread ? 'notification-list__title--unread' : '',
-        ].filter(Boolean).join(' ');
 
         return (
           <li key={item.id} className="notification-list__item">
@@ -142,12 +138,12 @@ export function NotificationList({
               {item.href
                 ? renderLink({
                     href: item.href,
-                    className: titleClass,
+                    className: 'notification-list__title',
                     onClick: onItemClick ? () => onItemClick(item) : undefined,
                     children: item.title,
                   })
                 : (
-                  <Text className={titleClass}>
+                  <Text className="notification-list__title">
                     {item.title}
                   </Text>
                 )}

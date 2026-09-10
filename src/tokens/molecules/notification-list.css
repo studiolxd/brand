@@ -14,8 +14,7 @@
   --notification-list-dot-size: var(--icon-size-sm); /** Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que el panel pinta ese punto */
   --notification-list-dot-margin-block-start: var(--spacing-1); /** Baja el punto hasta el centro óptico de la primera línea del título */
   --notification-list-title-font-size: var(--text-font-size); /** El título de una notificación es texto corriente: hereda el cuerpo de la superficie */
-  --notification-list-unread-font-weight: var(--font-weight-emphasis); /** Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno */
-  --notification-list-read-font-weight: var(--font-weight-default); /** Peso del título ya leído: el del cuerpo de texto */
+  --notification-list-title-font-weight: var(--font-weight-default); /** Peso del título, leída o sin leer: el del cuerpo de texto. Lo no leído lo dice el punto del indicador, no el peso */
   --notification-list-body-font-size: var(--text-font-size); /** Cuerpo de la notificación: texto corriente. En la página se lee entero y a la talla de lectura, no recortado como en el panel */
   --notification-list-actions-gap: var(--form-actions-gap); /** Aire entre las acciones de una fila — el de los botones de un formulario: la fila de acciones del sistema es una sola */
   --notification-list-time-font-size: var(--text-paragraph-small-font-size); /** Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`) */

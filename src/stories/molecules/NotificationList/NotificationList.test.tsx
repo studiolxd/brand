@@ -62,16 +62,18 @@ describe('NotificationList — la fila', () => {
     expect(filas[2].querySelector('.notification-list__dot')).toBeNull();
   });
 
-  it('lo no leído se dice con el punto y con el peso, y se dobla en texto oculto', () => {
+  it('lo no leído se dice solo con el punto, doblado en texto oculto; el título no cambia', () => {
     const { container } = setup();
     const filas = Array.from(container.querySelectorAll('.notification-list__item'));
     expect(within(filas[0] as HTMLElement).getByText('Sin leer')).toHaveClass('visually-hidden');
-    expect(filas[0].querySelector('.notification-list__title')).toHaveClass(
-      'notification-list__title--unread',
-    );
-    expect(filas[2].querySelector('.notification-list__title')).not.toHaveClass(
-      'notification-list__title--unread',
-    );
+
+    // El título de una fila sin leer se escribe igual que el de una leída: sin
+    // modificador y, por tanto, sin negrita. Las dos filas llevan enlace, así
+    // que son el mismo elemento con las mismas clases.
+    const sinLeer = filas[0].querySelector('.notification-list__title')!;
+    const leida = filas[2].querySelector('.notification-list__title')!;
+    expect(sinLeer.className).toBe(leida.className);
+    expect(sinLeer.className).not.toMatch(/unread/);
   });
 
   it('con `href` el título es un enlace y avisa antes de navegar; sin él, texto', async () => {

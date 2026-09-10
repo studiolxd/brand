@@ -310,6 +310,24 @@ export const ContratoHoraBajoElCuerpo: Story = {
   },
 };
 
+export const ContratoSinNegrita: Story = {
+  name: 'Test — el título de una fila sin leer no va en negrita',
+  tags: ['!dev'],
+  args: { defaultOpen: true },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const titulos = Array.from(
+      panel.querySelectorAll<HTMLElement>('.notification-panel__item-title'),
+    );
+    await expect(titulos.length).toBeGreaterThan(1);
+    // Igual que en la bandeja: un solo peso para todos los títulos, leídos o
+    // no. Lo no leído lo dice el punto.
+    const pesos = titulos.map((titulo) => getComputedStyle(titulo).fontWeight);
+    await expect(new Set(pesos).size).toBe(1);
+    await expect(panel.querySelector('.notification-panel__dot')).not.toBeNull();
+  },
+};
+
 export const ContratoPie: Story = {
   name: 'Test — los únicos enlaces son los dos del pie, en tinta',
   tags: ['!dev'],

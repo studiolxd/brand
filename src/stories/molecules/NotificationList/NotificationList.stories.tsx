@@ -129,6 +129,26 @@ export const ContratoIndicador: Story = {
   },
 };
 
+export const ContratoSinNegrita: Story = {
+  name: 'Test — el título de una fila sin leer no va en negrita',
+  tags: ['!dev'],
+  play: async ({ canvasElement }) => {
+    const titulos = Array.from(
+      canvasElement.querySelectorAll<HTMLElement>('.notification-list__title'),
+    );
+    // Las dos primeras filas están sin leer y las dos últimas leídas: los
+    // cuatro títulos pesan lo mismo, que es el peso del cuerpo de texto.
+    const pesos = titulos.map((titulo) => getComputedStyle(titulo).fontWeight);
+    await expect(new Set(pesos).size).toBe(1);
+
+    const fila = canvasElement.querySelector('.notification-list__item') as HTMLElement;
+    const cuerpo = fila.querySelector('.notification-list__body') as HTMLElement;
+    await expect(pesos[0]).toBe(getComputedStyle(cuerpo).fontWeight);
+    // Y la fila sin leer sigue diciéndose con el punto.
+    await expect(fila.querySelector('.notification-list__dot')).not.toBeNull();
+  },
+};
+
 export const ContratoColumnaFinal: Story = {
   name: 'Test — acciones y hora, después del texto y al extremo final',
   tags: ['!dev'],
