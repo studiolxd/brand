@@ -9,7 +9,7 @@
   --notification-panel-padding-inline: var(--spacing-4); /** Aire lateral de las filas, del bloque de marcar todas y del pie: el mismo, para que todo alinee en una sola columna */
   --notification-panel-mark-all-padding-block: var(--spacing-3); /** Aire vertical del bloque de «Marcar todas», entre la lista y el pie */
   --notification-panel-list-padding-block: var(--spacing-2); /** Aire vertical de la lista dentro del panel */
-  --notification-panel-list-gap: var(--spacing-1); /** Separación entre notificaciones. Las filas no llevan línea: se separan con aire, y la línea queda reservada al hover */
+  --notification-panel-list-gap: var(--spacing-1); /** Separación entre notificaciones. Las filas no llevan línea: se separan con aire */
   --notification-panel-item-padding-block: var(--spacing-2); /** Aire vertical de cada notificación */
   --notification-panel-item-gap: var(--spacing-2); /** Aire entre el punto de no leída y el texto */
   --notification-panel-item-text-gap: var(--spacing-1); /** Aire entre el título, el cuerpo y la fecha */
@@ -21,16 +21,12 @@
   --notification-panel-empty-padding-block: var(--spacing-6); /** Aire vertical del estado vacío: el hueco de la lista sin encogerse */
   --notification-panel-footer-padding-block: var(--spacing-3); /** Aire vertical del pie */
   --notification-panel-footer-gap: var(--spacing-2); /** Aire entre los enlaces del pie */
-  --notification-panel-transition-duration: var(--motion-duration-fast); /** Duración de la transición de la fila */
-  --notification-panel-transition-easing: var(--motion-easing-default); /** Curva de la transición de la fila */
   --notification-panel-item-border-radius: var(--border-radius-default); /** Radio de cada notificación: recto, como todo el sistema */
   --notification-panel-item-title-font-size: var(--text-font-size); /** El título de una notificación es texto corriente: hereda el cuerpo de la superficie */
   --notification-panel-item-unread-font-weight: var(--font-weight-emphasis); /** Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno */
   --notification-panel-item-read-font-weight: var(--font-weight-default); /** Peso del título ya leído: el del cuerpo de texto */
   --notification-panel-item-body-font-size: var(--text-paragraph-small-font-size); /** Cuerpo de la notificación: letra menor, un peldaño por debajo del cuerpo de la superficie */
   --notification-panel-item-time-font-size: var(--text-paragraph-small-font-size); /** Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`) */
-  --notification-panel-item-hover-marker-width: var(--border-width-focus); /** Grosor de la barra que marca la fila bajo el puntero. Los estados no se rellenan (Foundations → Colores) y una fila no es un enlace, así que tampoco se subraya: se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la fila interactiva de `Table` */
-  --notification-panel-item-hover-marker-color: var(--color-primary); /** Color de esa barra: el prusia del sistema */
   --notification-panel-dot-color: var(--color-error-fill); /** Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones */
   --notification-panel-footer-font-size: var(--text-paragraph-small-font-size); /** Tamaño de los enlaces del pie: letra menor */
   --notification-panel-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco de una fila */
@@ -40,6 +36,5 @@
 .surface-dark,
 [data-theme="dark"],
 html.dark {
-  --notification-panel-item-hover-marker-color: var(--color-text-on-dark); /** Color de la barra de hover de la fila — superficie oscura */
   --notification-panel-focus-ring-color: var(--color-text-on-dark); /** Color del anillo de foco — superficie oscura */
 }

@@ -6,7 +6,7 @@ $lxd-notification-panel-padding-inline: 1rem; // Aire lateral de las filas, del 
 $lxd-notification-panel-mark-all-padding-block: 0.75rem; // Aire vertical del bloque de «Marcar todas», entre la lista y el pie
 $lxd-notification-panel-list-max-block-size: 21rem; // Alto máximo de la lista (336px): pasado ese alto la lista hace scroll y la cabecera y el pie se quedan quietos. Medida de maqueta
 $lxd-notification-panel-list-padding-block: 0.5rem; // Aire vertical de la lista dentro del panel
-$lxd-notification-panel-list-gap: 0.25rem; // Separación entre notificaciones. Las filas no llevan línea: se separan con aire, y la línea queda reservada al hover
+$lxd-notification-panel-list-gap: 0.25rem; // Separación entre notificaciones. Las filas no llevan línea: se separan con aire
 $lxd-notification-panel-item-padding-block: 0.5rem; // Aire vertical de cada notificación
 $lxd-notification-panel-item-border-radius: 0px; // Radio de cada notificación: recto, como todo el sistema
 $lxd-notification-panel-item-gap: 0.5rem; // Aire entre el punto de no leída y el texto
@@ -20,8 +20,6 @@ $lxd-notification-panel-item-body-font-size: 0.875rem; // Cuerpo de la notificac
 $lxd-notification-panel-item-body-line-height: 1.3; // Interlineado del cuerpo
 $lxd-notification-panel-item-body-line-clamp: 2; // Cuántas líneas del cuerpo se ven antes de recortar con elipsis. El panel es un adelanto: el texto entero está en la bandeja
 $lxd-notification-panel-item-time-font-size: 0.875rem; // Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`)
-$lxd-notification-panel-item-hover-marker-width: 2px; // Grosor de la barra que marca la fila bajo el puntero. Los estados no se rellenan (Foundations → Colores) y una fila no es un enlace, así que tampoco se subraya: se señala con una barra de tinta en su borde de inicio, el mismo grafismo que la fila interactiva de `Table`
-$lxd-notification-panel-item-hover-marker-color: #111e30; // Color de esa barra: el prusia del sistema
 $lxd-notification-panel-dot-size: 16px; // Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que la bandeja pinta ese punto. El círculo dibujado dentro mide unos 7px
 $lxd-notification-panel-dot-color: #b30000; // Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones
 $lxd-notification-panel-dot-margin-block-start: 0.25rem; // Baja el punto hasta el centro óptico de la primera línea del título
@@ -31,5 +29,3 @@ $lxd-notification-panel-footer-gap: 0.5rem; // Aire entre los enlaces del pie
 $lxd-notification-panel-footer-font-size: 0.875rem; // Tamaño de los enlaces del pie: letra menor
 $lxd-notification-panel-focus-ring-width: 2px; // Grosor del anillo de foco de una fila
 $lxd-notification-panel-focus-ring-color: #111e30; // Color del anillo de foco de una fila
-$lxd-notification-panel-transition-duration: 150ms; // Duración de la transición de la fila
-$lxd-notification-panel-transition-easing: ease; // Curva de la transición de la fila

@@ -48,25 +48,18 @@
   text-align: start;
   cursor: pointer;
   border-radius: var(--notification-panel-item-border-radius);
-  transition: box-shadow var(--notification-panel-transition-duration) var(--notification-panel-transition-easing);
 }
 
-/* Bajo el puntero la fila no se rellena ni se subraya (una fila no es un
-   enlace): se marca con la barra de tinta en su borde de inicio, el mismo
-   grafismo que la fila interactiva de `Table` y la sección activa del
-   SidebarNav en rail. */
-.notification-panel__item-action:hover {
-  box-shadow: inset var(--notification-panel-item-hover-marker-width) 0 0 var(--notification-panel-item-hover-marker-color);
-}
+/* Bajo el puntero la fila no pinta nada: ni relleno (los estados no se
+   rellenan, Foundations → Colores), ni subrayado (una fila no es un enlace),
+   ni barra de tinta en el borde de inicio — la señal de que se puede pulsar
+   la da el cursor, como en los ítems del `SidebarNav`. El foco sí se ve, con
+   el anillo de siempre. */
 
-/* Ya leída, la fila sigue en el recorrido de teclado pero no hace nada: ni
-   cursor de acción ni barra de hover. */
+/* Ya leída, la fila sigue en el recorrido de teclado pero no hace nada, y el
+   cursor lo dice. */
 .notification-panel__item-action[aria-disabled='true'] {
   cursor: default;
-}
-
-.notification-panel__item-action[aria-disabled='true']:hover {
-  box-shadow: none;
 }
 
 .notification-panel__item-action:focus-visible {

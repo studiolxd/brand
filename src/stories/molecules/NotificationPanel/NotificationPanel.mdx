@@ -28,7 +28,7 @@ El título «Notificaciones» **no se pinta**: la campana que se acaba de pulsar
 
 Tres cosas y en dos líneas: el punto de no leída, el título con **la fecha relativa al otro extremo de su misma línea** —es un dato de un vistazo, no algo que se lea en orden— y debajo el cuerpo recortado a dos líneas.
 
-Bajo el puntero la fila no se rellena ni se subraya: una fila no es un enlace. Se marca con la **barra de tinta en su borde de inicio**, el mismo grafismo que la fila interactiva de `Table` y que la sección activa del `SidebarNav` en rail. El foco, con el anillo de siempre.
+Bajo el puntero **la fila no pinta nada**: ni relleno —los estados no se rellenan (Foundations → Colores)—, ni subrayado —una fila no es un enlace—, ni barra de tinta en el borde de inicio. Lo que dice que se puede pulsar es el cursor, como en los ítems del `SidebarNav`. El foco sí se ve, con el anillo de siempre.
 
 ## La lista no salta bajo el dedo
 
@@ -65,7 +65,7 @@ Los dos se montan sobre el router de la aplicación con `renderLink`, igual que 
 
 ## Superficie oscura
 
-Todo el color sale de la regla de derivación: la línea del pie, la barra de hover de la fila y el anillo de foco pasan a `text.on-dark`, el fondo y el borde los pone el `Popover`, y la tinta atenuada la pone `Text tone="muted"`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
+Todo el color sale de la regla de derivación: el anillo de foco de la fila pasa a `text.on-dark`, el fondo y el borde los pone el `Popover`, y la tinta atenuada la pone `Text tone="muted"`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
 
 <Canvas of={Stories.SuperficieOscura} />
 

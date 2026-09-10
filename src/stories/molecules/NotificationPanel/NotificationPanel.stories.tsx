@@ -206,6 +206,24 @@ export const ContratoMarcarTodasBajoLaLista: Story = {
   },
 };
 
+export const ContratoHoverSinBarra: Story = {
+  name: 'Test — bajo el puntero la fila no pinta ninguna barra',
+  tags: ['!dev'],
+  args: { defaultOpen: true },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const fila = within(panel).getByRole('button', {
+      name: /Marta Ruiz ha comentado tu propuesta/,
+    });
+
+    await userEvent.hover(fila);
+    // Ni barra de inicio ni relleno: lo único que cambia es el cursor.
+    const estilo = getComputedStyle(fila);
+    await expect(estilo.boxShadow).toBe('none');
+    await expect(estilo.cursor).toBe('pointer');
+  },
+};
+
 export const ContratoPie: Story = {
   name: 'Test — los únicos enlaces son los dos del pie, en tinta',
   tags: ['!dev'],
