@@ -97,6 +97,9 @@
   --message-composer-helper-font-size: var(--text-paragraph-small-font-size);
   --multi-select-field-error-font-size: var(--form-error-font-size);
   --multi-select-field-helper-font-size: var(--form-helper-font-size);
+  --notification-list-title-font-size: var(--text-font-size);
+  --notification-list-body-font-size: var(--text-font-size);
+  --notification-list-time-font-size: var(--text-paragraph-small-font-size);
   --notification-panel-item-title-font-size: var(--text-font-size);
   --notification-panel-item-body-font-size: var(--text-paragraph-small-font-size);
   --notification-panel-item-time-font-size: var(--text-paragraph-small-font-size);

@@ -1,0 +1,34 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --notification-list-item-padding-block: var(--spacing-4); /** Aire vertical de cada notificación. Es una fila de página, no de popover: respira más que la del `NotificationPanel` */
+  --notification-list-item-gap: var(--spacing-3); /** Aire entre la columna del punto y el texto */
+  --notification-list-item-row-gap: var(--spacing-2); /** Aire entre el texto y la columna de acciones cuando esta cae debajo (por debajo de `md`) */
+  --notification-list-item-column-gap: var(--spacing-5); /** Aire entre el texto y la columna de acciones cuando comparten fila (a partir de `md`) */
+  --notification-list-item-text-gap: var(--spacing-1); /** Aire entre el título y el cuerpo */
+  --notification-list-item-font-family: var(--font-family-sans); /** Familia tipográfica de la notificación */
+  --notification-list-title-line-height: var(--line-height-snug); /** Interlineado del título */
+  --notification-list-body-line-height: var(--line-height-normal); /** Interlineado del cuerpo: el de un texto que se lee entero */
+  --notification-list-aside-gap: var(--spacing-2); /** Aire entre las acciones de la fila y la hora, que va debajo de ellas */
+  --notification-list-dot-size: var(--icon-size-sm); /** Caja del punto de no leída: la talla de icono dentro de un texto (16px), la misma con la que el panel pinta ese punto */
+  --notification-list-dot-margin-block-start: var(--spacing-1); /** Baja el punto hasta el centro óptico de la primera línea del título */
+  --notification-list-title-font-size: var(--text-font-size); /** El título de una notificación es texto corriente: hereda el cuerpo de la superficie */
+  --notification-list-unread-font-weight: var(--font-weight-emphasis); /** Peso del título sin leer: lo no leído se dice con peso y con el punto, no con un relleno */
+  --notification-list-read-font-weight: var(--font-weight-default); /** Peso del título ya leído: el del cuerpo de texto */
+  --notification-list-body-font-size: var(--text-font-size); /** Cuerpo de la notificación: texto corriente. En la página se lee entero y a la talla de lectura, no recortado como en el panel */
+  --notification-list-actions-gap: var(--form-actions-gap); /** Aire entre las acciones de una fila — el de los botones de un formulario: la fila de acciones del sistema es una sola */
+  --notification-list-time-font-size: var(--text-paragraph-small-font-size); /** Fecha relativa: letra menor y tinta atenuada (la del texto secundario, vía `Text tone="muted"`) */
+  --notification-list-time-color: var(--color-text-muted-on-light); /** Tinta de la hora: el gris de texto secundario del sistema, el mismo que da `Text tone="muted"` al resto de textos secundarios */
+  --notification-list-separator-width: var(--border-width-default); /** Grosor del separador entre filas: 1px, como todo borde del sistema */
+  --notification-list-separator-color: var(--color-primary); /** Color del separador entre filas: el mismo que separa las filas de una `Table`. La lista va a sangre, sin tarjeta: lo único que separa una notificación de la siguiente es esta línea */
+  --notification-list-dot-color: var(--color-error-fill); /** Color del punto: el mismo rojo del contador de la campana (`error-fill`), que es universal en claro y oscuro. No hay un rojo aparte para notificaciones */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --notification-list-separator-color: var(--color-text-on-dark); /** Color del separador entre filas — superficie oscura */
+  --notification-list-time-color: var(--color-text-muted-on-dark); /** Tinta de la hora — superficie oscura */
+}

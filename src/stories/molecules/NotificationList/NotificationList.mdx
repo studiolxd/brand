@@ -1,0 +1,93 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./NotificationList.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { notificationListTokens } from "../../../tokens/molecules/notification-list";
+
+<Meta of={Stories} />
+
+# NotificationList
+
+La **bandeja**: todas las notificaciones, a página completa. La misma fila del `NotificationPanel` —el punto de no leída, el título y el cuerpo— pero leída a la talla de la página, con el texto entero y con lo que se puede hacer con cada notificación a la vista.
+
+<Canvas of={Stories.Bandeja} />
+
+## Cuándo esto y cuándo el panel
+
+Son dos piezas con dos trabajos (la regla completa, en `NotificationPanel` § «Cuándo esto y cuándo la bandeja»):
+
+- **El panel es un vistazo**: cinco filas como mucho, el cuerpo recortado a dos líneas y, de ahí, no se navega. Lo único que se hace es enterarse y marcar leído.
+- **Esto es la página**: están todas, el cuerpo se lee entero, **el título lleva al sitio** y cada fila trae sus acciones.
+
+## La lista va a sangre
+
+Sin `Card` y sin borde alrededor: la lista ocupa la columna de la página y **lo único que separa una notificación de la siguiente es la línea de fila del sistema**, la misma de la `Table`. Una tarjeta por notificación mete un marco a cada mensaje, dos veces el aire y una sombra por fila, y el listado deja de leerse como un listado.
+
+La lista **no ordena, no pagina y no filtra**: eso es de la página (`Pagination`, `FilterBar`). Y con la lista vacía **no pinta nada** — ese hueco es de un `EmptyState`, que dice qué pasa y qué hacer.
+
+## La fila
+
+Tres bloques, y el orden en el que se leen:
+
+1. **La columna del punto**, que **se reserva siempre**, haya bolita o no. Es lo que mantiene todos los títulos en la misma vertical y lo que impide que la fila salte al marcarla leída.
+2. **El texto**: el título —enlace a la notificación si trae `href`— y el cuerpo debajo, entero.
+3. **La columna del final**: las acciones y, **debajo de ellas, la hora**, las dos alineadas al extremo final. La hora cierra la fila porque es contexto del mensaje, no parte de él.
+
+Lo no leído se dice con **el punto y el peso del título**, nunca con un relleno (Foundations → Colores), y el punto lo dobla un texto solo para lectores de pantalla (`unreadLabel`, «Sin leer»).
+
+Por debajo de `md` la columna del final **cae bajo el texto** —empezando en la misma columna que él, con el hueco del punto respetado— con las acciones y la hora al final de línea.
+
+<Canvas of={Stories.EnMovil} />
+
+## Las acciones de una fila
+
+Dos orígenes, y en este orden:
+
+- **`onMarkRead`** pone «Marcar como leída» en las filas **sin leer**. Sin la prop no se pinta; en una fila ya leída tampoco, porque no hay nada que marcar.
+- **`renderActions`** pone lo que sea del producto —«Eliminar», «Archivar»…— detrás. Van como `Button variant="text" size="sm"`: son acciones de fila, repetidas tantas veces como filas haya, y un botón de contorno por fila convertiría la lista en una parrilla de botones.
+
+<Canvas of={Stories.SinAcciones} />
+<Canvas of={Stories.TodoLeido} />
+
+```tsx
+<NotificationList
+  items={notificaciones}
+  renderLink={(props) => <Link {...props} />}
+  onMarkRead={marcarLeida}
+  onItemClick={(item) => marcarLeida(item.id)}
+  renderActions={(item) => (
+    <Button variant="text" size="sm" onClick={() => eliminar(item.id)}>
+      Eliminar
+    </Button>
+  )}
+/>
+```
+
+## El título y el router
+
+Con `href`, el título es el enlace de la fila y se monta sobre el router de la aplicación con `renderLink`, igual que en `SiteNav` o `NotificationPanel`: la lista pone `href`, la clase y —si hay `onItemClick`— el `onClick`; el consumidor pone su `Link` (ver `Link`). Un `renderLink` que no propague **todo** lo que recibe se deja por el camino la cara del enlace y el aviso de `onItemClick`.
+
+`onItemClick` es lo que permite marcar leída la notificación al abrirla, que es lo que espera cualquiera que la pulse. Sin `href` no hay a qué engancharlo: el título es texto y la fila se marca leída con su botón.
+
+## La hora
+
+`time` es la fecha **ya formateada** por el consumidor («hace 5 min»): la lista no formatea fechas ni conoce el idioma. `timeDateTime` es la misma fecha en formato máquina; con ella la hora se pinta en un `<time datetime>` —que es lo que la hace legible para el navegador y para un lector de pantalla— y sin ella se queda en texto corriente, porque «hace 5 min» no es una fecha válida para el atributo.
+
+## Accesibilidad
+
+- La lista es una `<ul>` nombrada con `label` («Notificaciones»), que **no se pinta**: el título de la página ya lo dice, y ahí sirve para que un lector de pantalla anuncie de qué lista se trata.
+- El punto rojo es decorativo y lo dobla `unreadLabel` en texto oculto; una fila puede traer el suyo (`item.unreadLabel`) cuando el de la lista no valga.
+- Las acciones son botones de verdad, uno por fila, con su rótulo escrito: nada de iconos sin nombre.
+
+## Superficie oscura
+
+Todo el color sale de la regla de derivación: el separador pasa a `text.on-dark` y la hora a `text.muted-on-dark`. El punto rojo **no cambia**: `error-fill` es universal, igual que el contador de la campana.
+
+<Canvas of={Stories.EnSuperficieOscura} />
+
+## Tokens
+
+<TokenTable tokens={notificationListTokens} />
+
+## Props
+
+<ArgTypes of={Stories} />
