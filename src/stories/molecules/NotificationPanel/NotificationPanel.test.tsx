@@ -82,7 +82,7 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
     await waitFor(() => expect(within(panel).getAllByRole('button')[0]).toHaveFocus());
   });
 
-  it('con «Marcar todas» encima de la lista, el foco sigue entrando por la primera fila', async () => {
+  it('con «Marcar todas» bajo la lista, el foco sigue entrando por la primera fila', async () => {
     const user = userEvent.setup();
     setup({ onMarkAllRead: vi.fn() });
     await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
@@ -116,6 +116,31 @@ describe('NotificationPanel — apertura y contrato ARIA', () => {
     const titulo = within(panel).getByRole('heading', { name: 'Notificaciones' });
     expect(titulo.closest('.visually-hidden')).not.toBeNull();
     expect(within(panel).getByRole('list', { name: 'Notificaciones' })).toBeInTheDocument();
+  });
+});
+
+describe('NotificationPanel — la fila', () => {
+  it('la hora va después del cuerpo, no en la línea del título', async () => {
+    const user = userEvent.setup();
+    setup();
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+
+    const fila = within(panel).getByRole('button', { name: /Marta ha comentado/ });
+    const textos = Array.from(fila.querySelectorAll('.text')).map((nodo) => nodo.textContent);
+    expect(textos).toEqual(['Marta ha comentado', 'Revisa la fase 2', 'hace 5 min']);
+  });
+
+  it('sin cuerpo, la hora va justo debajo del título', async () => {
+    const user = userEvent.setup();
+    setup();
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+
+    const fila = within(panel).getByRole('button', { name: /Vacaciones aprobadas/ });
+    expect(fila.querySelector('.notification-panel__item-body')).toBeNull();
+    const textos = Array.from(fila.querySelectorAll('.text')).map((nodo) => nodo.textContent);
+    expect(textos).toEqual(['Vacaciones aprobadas', 'hace 2 h']);
   });
 });
 
@@ -181,22 +206,50 @@ describe('NotificationPanel — pie y estado vacío', () => {
     for (const enlace of enlaces) expect(enlace).toHaveClass('link--ink');
   });
 
-  it('«Marcar todas como leídas» es un botón de contorno, encima de la lista', async () => {
+  it('«Marcar todas como leídas» es un botón de contorno a ancho completo, bajo la lista', async () => {
     const user = userEvent.setup();
     setup({ onMarkAllRead: vi.fn() });
     await user.click(screen.getByRole('button', { name: 'Notificaciones: 2 sin leer' }));
     const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
     const boton = within(panel).getByRole('button', { name: 'Marcar todas como leídas' });
     expect(boton).toHaveClass('button--outline');
+    expect(boton).toHaveClass('button--block');
 
-    // Va antes que la lista en el orden del documento: encima, no en el pie.
+    // El orden del panel: lista → botón → enlaces del pie.
     const primeraFila = within(panel).getByRole('button', { name: /Marta ha comentado/ });
+    const [primerEnlace] = within(panel).getAllByRole('link');
     expect(
-      boton.compareDocumentPosition(primeraFila) & Node.DOCUMENT_POSITION_FOLLOWING,
+      primeraFila.compareDocumentPosition(boton) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      boton.compareDocumentPosition(primerEnlace) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
 
-  it('sin `onMarkAllRead` el pie no pinta el botón; con ella, sí, y marca todas', async () => {
+  it('con todo leído no se pinta el botón, aunque haya `onMarkAllRead`', async () => {
+    const user = userEvent.setup();
+    setup({
+      onMarkAllRead: vi.fn(),
+      count: 0,
+      items: items.map((item) => ({ ...item, unread: false })),
+    });
+    await user.click(screen.getByRole('button', { name: 'Notificaciones' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    expect(within(panel).queryByRole('button', { name: 'Marcar todas como leídas' })).toBeNull();
+  });
+
+  it('marcadas todas las no leídas a mano, el botón desaparece', async () => {
+    const user = userEvent.setup();
+    setup({ onMarkAllRead: vi.fn(), count: 1, items: [items[0], items[2]] });
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 1 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    expect(within(panel).getByRole('button', { name: 'Marcar todas como leídas' })).toBeInTheDocument();
+
+    await user.click(within(panel).getByRole('button', { name: /Marta ha comentado/ }));
+    expect(within(panel).queryByRole('button', { name: 'Marcar todas como leídas' })).toBeNull();
+  });
+
+  it('sin `onMarkAllRead` no se pinta el botón; con ella, sí, y marca todas', async () => {
     const user = userEvent.setup();
     const onMarkAllRead = vi.fn();
     const { unmount } = setup();

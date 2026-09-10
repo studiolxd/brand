@@ -51,21 +51,52 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * El adelanto con dos notificaciones sin leer: punto rojo, título en énfasis y
- * la fecha relativa al otro extremo de esa misma línea.
+ * El adelanto con dos notificaciones sin leer: punto rojo, título en énfasis,
+ * el cuerpo debajo y la hora cerrando la fila, alineada al extremo final.
  */
 export const ConNoLeidas: Story = {
   name: 'Con no leídas',
   args: { defaultOpen: true },
 };
 
-/** Todo leído: sin puntos y con la lista entera en tinta atenuada. */
+/**
+ * Todo leído: sin puntos y con la lista entera en tinta atenuada. Aunque hay
+ * `onMarkAllRead`, el botón no se pinta — no queda nada que marcar.
+ */
 export const TodoLeido: Story = {
   name: 'Con todo leído',
   args: {
     defaultOpen: true,
     count: 0,
     items: items.map((item) => ({ ...item, unread: false })),
+    onMarkAllRead: fn(),
+  },
+};
+
+/**
+ * Con el cuerpo largo, recortado a dos líneas: la hora sigue siendo la última
+ * línea de la fila, alineada al final, y no se mete entre el título y el texto.
+ */
+export const ConCuerpoLargo: Story = {
+  name: 'Con cuerpo largo',
+  args: {
+    defaultOpen: true,
+    items: [
+      {
+        id: '1',
+        title: 'Marta Ruiz ha comentado tu propuesta',
+        body: '«Me cuadra el enfoque general y el reparto de fases, pero antes de enviársela al cliente revisemos el calendario de la fase 2: las dos semanas de validación se solapan con el cierre de agosto y no llegamos.»',
+        time: 'hace 5 min',
+        unread: true,
+      },
+      {
+        id: '2',
+        title: 'Sin cuerpo, la hora va justo debajo del título',
+        time: 'ayer',
+        unread: false,
+      },
+    ],
+    count: 1,
   },
 };
 
@@ -75,7 +106,10 @@ export const Vacio: Story = {
   args: { defaultOpen: true, count: 0, items: [] },
 };
 
-/** Con `onMarkAllRead` el pie estrena su botón; sin la prop no se pinta. */
+/**
+ * Con `onMarkAllRead` aparece el botón a ancho completo entre la lista y los
+ * enlaces del pie; sin la prop no se pinta.
+ */
 export const ConMarcarTodas: Story = {
   name: 'Con «Marcar todas»',
   args: { defaultOpen: true, onMarkAllRead: fn() },
@@ -167,8 +201,8 @@ export const ContratoMarcarLeido: Story = {
   },
 };
 
-export const ContratoMarcarTodasEncimaDeLaLista: Story = {
-  name: 'Test — «Marcar todas» va encima de la lista, alineado al final',
+export const ContratoMarcarTodasBajoLaLista: Story = {
+  name: 'Test — «Marcar todas» va bajo la lista, a ancho completo',
   tags: ['!dev'],
   args: { defaultOpen: true, onMarkAllRead: fn() },
   play: async () => {
@@ -177,25 +211,102 @@ export const ContratoMarcarTodasEncimaDeLaLista: Story = {
     const primeraFila = within(panel).getByRole('button', {
       name: /Marta Ruiz ha comentado tu propuesta/,
     });
+    const [primerEnlace] = within(panel).getAllByRole('link');
 
-    // Antes que la lista en el documento: encima, no en el pie.
+    // El orden del panel: lista → botón → enlaces del pie.
     await expect(
-      boton.compareDocumentPosition(primeraFila) & Node.DOCUMENT_POSITION_FOLLOWING,
+      primeraFila.compareDocumentPosition(boton) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    await expect(
+      boton.compareDocumentPosition(primerEnlace) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
 
-    // Alineado al final (derecha) de su fila, no centrado como el pie.
-    const fila = boton.closest('.notification-panel__mark-all-row') as HTMLElement;
-    await expect(fila).not.toBeNull();
-    // El botón se pega al borde de CONTENIDO de la fila (dentro de su
-    // padding-inline), no al borde de la caja.
-    const filaRect = fila.getBoundingClientRect();
-    const botonRect = boton.getBoundingClientRect();
-    const paddingEnd = parseFloat(getComputedStyle(fila).paddingInlineEnd);
-    // Tolerancia de un píxel: el redondeo subpíxel del navegador.
-    await expect(Math.abs(botonRect.right - (filaRect.right - paddingEnd))).toBeLessThanOrEqual(1);
+    // A ancho completo: ocupa el contenido de su bloque de canto a canto. Se
+    // mide en píxeles de maqueta (`clientWidth`/`offsetWidth`) y no con los
+    // rectángulos, que vienen escalados por la animación de entrada del
+    // `Popover`.
+    const bloque = boton.closest('.notification-panel__mark-all') as HTMLElement;
+    await expect(bloque).not.toBeNull();
+    const estilo = getComputedStyle(bloque);
+    const contenido =
+      bloque.clientWidth -
+      parseFloat(estilo.paddingInlineStart) -
+      parseFloat(estilo.paddingInlineEnd);
+    // `offsetWidth`, no `clientWidth`: la caja del botón incluye su contorno.
+    await expect(Math.abs(boton.offsetWidth - contenido)).toBeLessThanOrEqual(1);
 
     // Y sigue entrando el foco por la primera notificación, no por el botón.
     await waitFor(() => expect(primeraFila).toHaveFocus());
+  },
+};
+
+export const ContratoMarcarTodasSoloConNoLeidas: Story = {
+  name: 'Test — «Marcar todas» solo mientras quede alguna sin leer',
+  tags: ['!dev'],
+  args: {
+    defaultOpen: true,
+    count: 1,
+    onMarkAllRead: fn(),
+    items: [items[0], { ...items[2], unread: false }],
+  },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const boton = within(panel).getByRole('button', { name: 'Marcar todas como leídas' });
+
+    // Marcada la única sin leer, el botón desaparece en el sitio.
+    await userEvent.click(
+      within(panel).getByRole('button', { name: /Marta Ruiz ha comentado tu propuesta/ }),
+    );
+    await waitFor(() => expect(boton).not.toBeInTheDocument());
+  },
+};
+
+export const ContratoHoverSinBarra: Story = {
+  name: 'Test — bajo el puntero la fila no pinta ninguna barra',
+  tags: ['!dev'],
+  args: { defaultOpen: true },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const fila = within(panel).getByRole('button', {
+      name: /Marta Ruiz ha comentado tu propuesta/,
+    });
+
+    await userEvent.hover(fila);
+    // Ni barra de inicio ni relleno: lo único que cambia es el cursor.
+    const estilo = getComputedStyle(fila);
+    await expect(estilo.boxShadow).toBe('none');
+    await expect(estilo.cursor).toBe('pointer');
+  },
+};
+
+export const ContratoHoraBajoElCuerpo: Story = {
+  name: 'Test — la hora va después del cuerpo, alineada al final',
+  tags: ['!dev'],
+  args: { defaultOpen: true },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const fila = within(panel).getByRole('button', {
+      name: /Marta Ruiz ha comentado tu propuesta/,
+    });
+    const cuerpo = fila.querySelector('.notification-panel__item-body') as HTMLElement;
+    const hora = fila.querySelector('.notification-panel__item-time') as HTMLElement;
+    await expect(cuerpo).not.toBeNull();
+    await expect(hora).not.toBeNull();
+
+    // Después del cuerpo en el documento…
+    await expect(
+      cuerpo.compareDocumentPosition(hora) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    // …y también debajo, en su propia línea.
+    await expect(hora.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      cuerpo.getBoundingClientRect().bottom - 1,
+    );
+
+    // Pegada al extremo final de la columna de texto.
+    const columna = fila.querySelector('.notification-panel__item-text') as HTMLElement;
+    await expect(
+      Math.abs(hora.getBoundingClientRect().right - columna.getBoundingClientRect().right),
+    ).toBeLessThanOrEqual(1);
   },
 };
 
