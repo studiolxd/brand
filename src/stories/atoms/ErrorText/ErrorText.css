@@ -1,0 +1,16 @@
+/* La cara del error de formulario, en un átomo: los mismos tokens que gastan el
+   `errorMessage` de los `*Field` y el `FormMessage` de un campo controlado
+   —`--form-error-*`, el juego compartido—, para que un error que no cuelga de
+   ningún campo no se distinga del que sí. El par oscuro ya viene con el token,
+   así que no hay regla de superficie aquí.
+
+   Sin margen propio: el aire lo pone quien lo coloca (el `gap` del campo, del
+   `Stack` o de la fila). Como `span`, va en línea sin romper la frase. */
+.error-text {
+  font-family: var(--form-error-font-family);
+  font-size: var(--form-error-font-size);
+  font-weight: var(--form-error-font-weight);
+  line-height: var(--form-error-line-height);
+  color: var(--form-error-color);
+  margin: 0;
+}

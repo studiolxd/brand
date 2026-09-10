@@ -1,0 +1,74 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as ErrorTextStories from "./ErrorText.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { formErrorTokens, formErrorDarkTokens } from "../../../tokens/form";
+
+<Meta of={ErrorTextStories} />
+
+# ErrorText
+
+El **error de formulario suelto**: la misma cara que el `errorMessage` de un `*Field`, pero sin campo del que colgar.
+
+<Canvas of={ErrorTextStories.PorDefecto} />
+
+## Por qué existe
+
+Un formulario tiene cosas que no son campos y que fallan igual: el importe de un complemento que no se pudo calcular junto al interruptor que lo activa, el resultado de una comprobación que acompaña a un control compuesto, un total que depende de una llamada que se cayó. Hasta ahora eso no tenía cómo pintarse, y la salida era un `Paragraph` con `Text tone="destructive"`: otro cuerpo y otra tinta que el error del campo de al lado, en la misma pantalla y a la misma altura.
+
+`ErrorText` es esa cara —cuerpo, peso, interlineado y tinta del error— en un átomo que se puede poner en cualquier sitio.
+
+<Canvas of={ErrorTextStories.JuntoAUnControlQueNoEsCampo} />
+
+No es una variante nueva: bebe del mismo juego de tokens compartido (`--form-error-*`) del que ya cuelga el error de cada campo, así que los dos errores de una pantalla se leen como lo que son, la misma cosa.
+
+<Canvas of={ErrorTextStories.LaMismaCaraQueUnCampo} />
+
+## Cuándo `ErrorText` y cuándo `Alert`
+
+Lo que decide no es la gravedad, es **de qué se habla**.
+
+| | `ErrorText` | `Alert` |
+|---|---|---|
+| De qué habla | De **ese** control o **ese** dato: lo que hay justo al lado no vale | De la **página** o de la **operación**: no se pudo guardar, el servicio no responde, la sesión caducó |
+| Dónde va | Pegado al control, dentro del flujo del formulario | Arriba del bloque o del formulario entero, como bloque aparte |
+| Qué pinta | Texto, sin caja ni icono | Bloque con su fondo, su icono y, si hace falta, su acción |
+| Quién lo tiene ya resuelto | — | Los errores del `Form` (`errors`), que ya se pintan solos |
+
+Y hay un tercer caso que no es ninguno de los dos: si el error **sí** pertenece a un campo, no se usa `ErrorText`. En un `*Field` es la prop `errorMessage`; en un campo controlado con react-hook-form, `FormMessage`. Los dos pintan esta misma cara y además atan el mensaje al control y al `formState`; escribirlo a mano pierde las dos cosas.
+
+## Que se anuncie sirve de algo
+
+El átomo lleva `role="alert"`, así que **aparecer ya es hablar**: el lector de pantalla lo lee en cuanto se monta. De ahí dos consecuencias:
+
+- Se **monta cuando hay error y se desmonta cuando deja de haberlo**. Un `ErrorText` vacío que vive siempre en el árbol no anuncia nada al llenarse en algunos lectores, y no hay nada que anunciar mientras no hay error.
+- El `id` no es decorativo: es lo que permite apuntarlo desde el control con `aria-describedby`, para que quien llegue tabulando —y no estaba escuchando cuando apareció— también lo oiga.
+
+## `as` es el sitio, no la pinta
+
+`p` es lo normal: un error es una frase. `div` está para cuando el sitio del DOM no admite un párrafo —dentro de otro `<p>`, en una celda que ya lo tiene— y `span` para cuando el error va en línea, en la misma fila que el control.
+
+<Canvas of={ErrorTextStories.EnLinea} />
+
+Ninguno de los tres cambia el rol ni la pinta.
+
+## Superficie oscura
+
+No hay regla de superficie propia: el par oscuro viene con el token (`--form-error-color` remapea a `color.error-text-on-dark`), por la regla de derivación de feedback.
+
+<Canvas of={ErrorTextStories.EnSuperficieOscura} />
+
+## API
+
+<ArgTypes of={ErrorTextStories} />
+
+El aire alrededor no es suyo: no lleva margen, lo pone quien lo coloca (el `gap` del campo, del `Stack` o de la fila).
+
+## Tokens
+
+Los del error de formulario, compartidos con los `*Field`. Cambiarlos aquí cambia todos los errores del sistema a la vez, que es justo lo que se quiere.
+
+<TokenTable tokens={formErrorTokens} />
+
+### Superficie oscura
+
+<TokenTable tokens={formErrorDarkTokens} />
