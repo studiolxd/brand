@@ -32,14 +32,18 @@
   margin-block-end: 0;
 }
 
-/* Las acciones entre sí, y con su propio aire: una fila que envuelve si no
-   caben. `flex: 0 0 auto` para que midan lo suyo y no roben ancho al título. */
+/* Por debajo de `md` las acciones van en bloque, una por línea y a todo el
+   ancho de la cabecera: en una pantalla estrecha un botón que mide lo que
+   dice su etiqueta queda perdido, y dos seguidos se parten a mitad de fila.
+   La ranura se estira en la fila (`align-self: stretch`) y estira a su vez a
+   los botones (`align-items: stretch`), así que el consumidor no tiene que
+   pasarles `block` uno a uno. */
 .page-intro__actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: stretch;
   gap: var(--page-intro-actions-gap);
-  flex: 0 0 auto;
 }
 
 @media (min-width: 768px) /* --breakpoint-md */ {
@@ -69,6 +73,17 @@
      un título suelto (`:last-child` de la base). */
   .page-intro__row:last-child > .heading {
     margin-block-end: 0;
+  }
+
+  /* A partir de `md` vuelven a ser una fila que envuelve si no cabe, y cada
+     botón vuelve a medir lo que dice su etiqueta. `flex: 0 0 auto` para que
+     no roben ancho al título. */
+  .page-intro__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: auto;
+    flex: 0 0 auto;
   }
 
   .page-intro > .page-intro__row + * {

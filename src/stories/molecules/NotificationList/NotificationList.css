@@ -1,0 +1,121 @@
+/* La bandeja va a sangre en la columna de la página: sin tarjeta, sin borde
+   alrededor y sin aire lateral propio — el de la página ya lo pone el molde
+   de fuera. */
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--notification-list-item-font-family);
+}
+
+/* La fila es una rejilla de dos columnas: el hueco del punto y el texto. La
+   columna del punto se reserva siempre, con bolita o sin ella, para que los
+   títulos de todas las filas empiecen en la misma vertical.
+
+   Por debajo de `md` la columna de acciones y hora cae bajo el texto (segunda
+   línea de la rejilla, misma columna), alineada al final de línea. */
+.notification-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--notification-list-item-gap);
+  row-gap: var(--notification-list-item-row-gap);
+  padding-block: var(--notification-list-item-padding-block);
+}
+
+/* Lo único que separa una notificación de la siguiente: la línea de fila del
+   sistema, la misma de la `Table`. Entre filas y no alrededor — la lista no
+   se cierra por arriba ni por abajo. */
+.notification-list__item + .notification-list__item {
+  border-block-start: var(--notification-list-separator-width) solid var(--notification-list-separator-color);
+}
+
+.notification-list__indicator {
+  grid-column: 1;
+  grid-row: 1;
+  inline-size: var(--notification-list-dot-size);
+  margin-block-start: var(--notification-list-dot-margin-block-start);
+}
+
+.notification-list__dot {
+  display: block;
+  color: var(--notification-list-dot-color);
+}
+
+/* La columna de texto puede encoger por debajo de su contenido: sin
+   `min-inline-size: 0` un título largo empujaría las acciones fuera. */
+.notification-list__text {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--notification-list-item-text-gap);
+  min-inline-size: 0;
+}
+
+/* El título es texto corriente, o un enlace con la cara de enlace del sistema
+   (la línea la pinta `Link`, no esta hoja). El peso lo decide el estado. */
+.notification-list__title {
+  font-size: var(--notification-list-title-font-size);
+  line-height: var(--notification-list-title-line-height);
+  font-weight: var(--notification-list-read-font-weight);
+}
+
+/* Doble clase: el modificador gana al selector base. */
+.notification-list__title.notification-list__title--unread {
+  font-weight: var(--notification-list-unread-font-weight);
+}
+
+/* El cuerpo se lee entero: en la página no se recorta a dos líneas como en el
+   panel. Se escribe anidado bajo la columna de texto para ganarle en
+   especificidad al `.text` del átomo (`font: inherit`) sin depender del orden
+   en que se junten las hojas del paquete. */
+.notification-list__text .notification-list__body {
+  font-size: var(--notification-list-body-font-size);
+  line-height: var(--notification-list-body-line-height);
+}
+
+/* La columna del final: las acciones y, debajo, la hora; las dos alineadas al
+   extremo final, compartan fila con el texto o caigan bajo él. */
+.notification-list__aside {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--notification-list-aside-gap);
+}
+
+.notification-list__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--notification-list-actions-gap);
+}
+
+/* La hora no se parte: es un dato corto y cierra la fila. */
+.notification-list__time {
+  font-size: var(--notification-list-time-font-size);
+  color: var(--notification-list-time-color);
+  text-align: end;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  /* A partir de `md` la columna del final sube a la fila del texto y se queda
+     con lo que mide, pegada al margen final. */
+  .notification-list__item {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  /* El aire entre el texto y las acciones es mayor que el que separa el punto
+     del texto —son dos bloques, no dos partes del mismo—, así que lo pone la
+     propia columna y no el `column-gap` de la rejilla, que es uno para todas. */
+  .notification-list__aside {
+    grid-column: 3;
+    grid-row: 1;
+    margin-inline-start: calc(
+      var(--notification-list-item-column-gap) - var(--notification-list-item-gap)
+    );
+  }
+}

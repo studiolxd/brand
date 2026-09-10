@@ -242,6 +242,13 @@ export { MultiSelectField } from './stories/molecules/MultiSelectField/MultiSele
 export type { MultiSelectFieldProps } from './stories/molecules/MultiSelectField/MultiSelectField';
 export { NotificationButton } from './stories/molecules/NotificationButton/NotificationButton';
 export type { NotificationButtonProps } from './stories/molecules/NotificationButton/NotificationButton';
+export { NotificationList } from './stories/molecules/NotificationList/NotificationList';
+export type {
+  NotificationListProps,
+  NotificationListItem,
+  NotificationListLinkProps,
+  RenderNotificationListLink,
+} from './stories/molecules/NotificationList/NotificationList';
 export { NotificationPanel } from './stories/molecules/NotificationPanel/NotificationPanel';
 export type {
   NotificationPanelProps,
