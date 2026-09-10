@@ -226,6 +226,29 @@ describe('NotificationPanel — pie y estado vacío', () => {
     ).toBeTruthy();
   });
 
+  it('con todo leído no se pinta el botón, aunque haya `onMarkAllRead`', async () => {
+    const user = userEvent.setup();
+    setup({
+      onMarkAllRead: vi.fn(),
+      count: 0,
+      items: items.map((item) => ({ ...item, unread: false })),
+    });
+    await user.click(screen.getByRole('button', { name: 'Notificaciones' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    expect(within(panel).queryByRole('button', { name: 'Marcar todas como leídas' })).toBeNull();
+  });
+
+  it('marcadas todas las no leídas a mano, el botón desaparece', async () => {
+    const user = userEvent.setup();
+    setup({ onMarkAllRead: vi.fn(), count: 1, items: [items[0], items[2]] });
+    await user.click(screen.getByRole('button', { name: 'Notificaciones: 1 sin leer' }));
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    expect(within(panel).getByRole('button', { name: 'Marcar todas como leídas' })).toBeInTheDocument();
+
+    await user.click(within(panel).getByRole('button', { name: /Marta ha comentado/ }));
+    expect(within(panel).queryByRole('button', { name: 'Marcar todas como leídas' })).toBeNull();
+  });
+
   it('sin `onMarkAllRead` no se pinta el botón; con ella, sí, y marca todas', async () => {
     const user = userEvent.setup();
     const onMarkAllRead = vi.fn();

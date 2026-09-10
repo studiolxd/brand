@@ -59,13 +59,17 @@ export const ConNoLeidas: Story = {
   args: { defaultOpen: true },
 };
 
-/** Todo leído: sin puntos y con la lista entera en tinta atenuada. */
+/**
+ * Todo leído: sin puntos y con la lista entera en tinta atenuada. Aunque hay
+ * `onMarkAllRead`, el botón no se pinta — no queda nada que marcar.
+ */
 export const TodoLeido: Story = {
   name: 'Con todo leído',
   args: {
     defaultOpen: true,
     count: 0,
     items: items.map((item) => ({ ...item, unread: false })),
+    onMarkAllRead: fn(),
   },
 };
 
@@ -233,6 +237,27 @@ export const ContratoMarcarTodasBajoLaLista: Story = {
 
     // Y sigue entrando el foco por la primera notificación, no por el botón.
     await waitFor(() => expect(primeraFila).toHaveFocus());
+  },
+};
+
+export const ContratoMarcarTodasSoloConNoLeidas: Story = {
+  name: 'Test — «Marcar todas» solo mientras quede alguna sin leer',
+  tags: ['!dev'],
+  args: {
+    defaultOpen: true,
+    count: 1,
+    onMarkAllRead: fn(),
+    items: [items[0], { ...items[2], unread: false }],
+  },
+  play: async () => {
+    const panel = await screen.findByRole('dialog', { name: 'Notificaciones' });
+    const boton = within(panel).getByRole('button', { name: 'Marcar todas como leídas' });
+
+    // Marcada la única sin leer, el botón desaparece en el sitio.
+    await userEvent.click(
+      within(panel).getByRole('button', { name: /Marta Ruiz ha comentado tu propuesta/ }),
+    );
+    await waitFor(() => expect(boton).not.toBeInTheDocument());
   },
 };
 

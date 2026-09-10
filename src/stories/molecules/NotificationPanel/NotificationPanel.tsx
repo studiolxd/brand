@@ -54,7 +54,10 @@ export interface NotificationPanelProps {
    * sitio sin esperar respuesta.
    */
   onRead: (id: string) => void;
-  /** Con ella se pinta «Marcar todas como leídas» bajo la lista; sin ella, no. */
+  /**
+   * Con ella se pinta «Marcar todas como leídas» bajo la lista, **y solo
+   * mientras quede alguna sin leer**; sin ella, no se pinta nunca.
+   */
   onMarkAllRead?: () => void;
   /** Destino de la bandeja completa. */
   allHref: string;
@@ -149,6 +152,9 @@ export function NotificationPanel({
   const [readHere, setReadHere] = useState<string[]>([]);
 
   const isUnread = (item: NotificationPanelItem) => item.unread && !readHere.includes(item.id);
+
+  /** Con todo leído no hay nada que marcar, y el botón no se pinta. */
+  const hayNoLeidas = items.some(isUnread);
 
   const markRead = (item: NotificationPanelItem) => {
     if (!isUnread(item)) return;
@@ -263,8 +269,9 @@ export function NotificationPanel({
         {/* Debajo de la lista y encima de los enlaces del pie: la acción sobre
             el conjunto se ofrece después de ver el conjunto, y va separada de
             los destinos de servicio. A ancho completo, que es lo que la
-            distingue de un enlace más del pie. */}
-        {onMarkAllRead && (
+            distingue de un enlace más del pie. Solo con algo que marcar: sin
+            no leídas —o al marcarlas aquí— desaparece. */}
+        {onMarkAllRead && hayNoLeidas && (
           <div className="notification-panel__mark-all">
             <Button variant="outline" size="sm" block onClick={markAll}>
               {markAllReadLabel}
