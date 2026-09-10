@@ -2558,8 +2558,6 @@ var e = {
 	"--notification-list-actions-gap": "0.75rem",
 	"--notification-list-time-font-size": "0.875rem",
 	"--notification-list-time-color": "#4a4a4a",
-	"--notification-list-separator-width": "1px",
-	"--notification-list-separator-color": "#111e30",
 	"--notification-list-dot-size": "16px",
 	"--notification-list-dot-color": "#b30000",
 	"--notification-list-dot-margin-block-start": "0.25rem",

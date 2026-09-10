@@ -74,9 +74,9 @@ export interface NotificationListProps {
  * talla de la página, con el texto entero y con las acciones de cada
  * notificación a la vista.
  *
- * Va a sangre en la columna de la página: sin tarjeta y sin borde alrededor.
- * Lo único que separa una notificación de la siguiente es la línea de fila del
- * sistema, la misma de la `Table`.
+ * Va a sangre en la columna de la página: sin tarjeta, sin borde alrededor y
+ * sin línea entre filas. Lo único que separa una notificación de la siguiente
+ * es el aire de la propia fila.
  *
  * No ordena, no pagina y no filtra: eso es de la página (`Pagination`,
  * `FilterBar`). Con la lista vacía no pinta nada — el hueco es de un

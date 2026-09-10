@@ -7,6 +7,15 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [33.3.1] — 2026-09-10
+
+> **Patch.**
+
+- **`NotificationList`**: sin línea entre filas (retirados los tokens
+  `separator-*`); a partir de `md` la hora cierra la fila por abajo, a la
+  altura de la última línea del texto; el título mide su texto y no toda la
+  columna (el enlace ya no ocupa la línea entera).
+
 ## [33.3.0] — 2026-09-10
 
 > **Minor.**
