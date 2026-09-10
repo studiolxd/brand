@@ -1,6 +1,7 @@
 'use client';
 
-import { forwardRef, useEffect, useId, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { forwardRef, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCssProperties } from '../../constants/css-properties';
 import { Inline } from '../../atoms/Inline/Inline';
 import { Tag } from '../../atoms/Tag/Tag';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
@@ -152,15 +153,28 @@ function xValue(row: ChartDatum, xKey: string): string | number {
 }
 
 /**
- * Color de una marca, por prioridad: el `color` propio de la serie, la paleta de
- * dato (`colors`) y, si no hay ninguno, la ranura de token que toca por orden.
- * Pasada la octava, la marca es «Otros»: gris.
+ * El color de una marca sale de dos sitios que no se pintan igual, porque una
+ * app servida con `style-src 'self'` descarta en silencio todo atributo
+ * `style` y ahí es donde viajaba antes:
+ *
+ * - La **ranura de token** que toca por orden (pasada la octava, «Otros»:
+ *   gris) es un conjunto cerrado: viaja en `data-slot` y la resuelve la hoja.
+ * - El **color de dato** que pone el producto (`color` de la serie o `colors`)
+ *   no puede estar en la hoja: viaja como **atributo de presentación** de SVG
+ *   (`fill`/`stroke`), que la CSP no toca. La hoja cede el color a esos
+ *   elementos con `:not([fill])` / `:not([stroke])`, porque un atributo de
+ *   presentación pierde contra cualquier regla.
+ *
+ * Los dos son excluyentes: con color de dato no hay ranura, y al revés.
  */
-function markStyle(index: number, color?: string, palette?: string[]): CSSProperties {
-  const slot = color
-    ?? palette?.[index]
-    ?? (index < SLOTS ? `var(--chart-series-${index + 1})` : 'var(--chart-muted-color)');
-  return { '--chart-mark-color': slot } as CSSProperties;
+function markSlot(index: number, color?: string, palette?: string[]): string | undefined {
+  if (color ?? palette?.[index]) return undefined;
+  return index < SLOTS ? String(index + 1) : 'muted';
+}
+
+/** El color de dato de una marca, si el producto puso uno. */
+function markInk(index: number, color?: string, palette?: string[]): string | undefined {
+  return color ?? palette?.[index];
 }
 
 /**
@@ -170,10 +184,25 @@ function markStyle(index: number, color?: string, palette?: string[]): CSSProper
  * (`color` de la serie o `colors`) el sistema no puede saberlo y se queda con
  * la tinta por defecto.
  */
-function tileLabelStyle(index: number, color?: string, palette?: string[]): CSSProperties | undefined {
+function tileLabelSlot(index: number, color?: string, palette?: string[]): string | undefined {
   if (color || palette?.[index]) return undefined;
-  const slot = index < SLOTS ? `${index + 1}` : 'muted';
-  return { '--chart-tile-label-color': `var(--chart-tile-label-color-${slot})` } as CSSProperties;
+  return index < SLOTS ? String(index + 1) : 'muted';
+}
+
+/**
+ * La muestra de color de la leyenda y del bocadillo. Es un `<svg>` y no un
+ * `<span>` con `background` porque el color de dato que pone el producto solo
+ * puede pintarse sin atributo `style` como atributo de presentación, y eso pide
+ * una forma SVG. El tamaño lo sigue poniendo la hoja.
+ */
+function ChartSwatch({ className, index, color, palette, muted }: {
+  className: string; index: number; color?: string; palette?: string[]; muted?: boolean;
+}) {
+  return (
+    <svg className={className} aria-hidden="true" data-slot={markSlot(index, color, palette)}>
+      <rect width="100%" height="100%" fill={muted ? undefined : markInk(index, color, palette)} />
+    </svg>
+  );
 }
 
 /** Trapecio de un tramo de embudo: ancho superior e inferior distintos, centrados. */
@@ -495,7 +524,10 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       });
       const line = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
       const muted = isMuted(s.key);
-      const style = markStyle(si, s.color, colors);
+      const slot = markSlot(si, s.color, colors);
+      // Atenuada, la marca cede su color a la hoja: el atributo de presentación
+      // ganaría al `--chart-mark-color` del modificador.
+      const ink = muted ? undefined : markInk(si, s.color, colors);
       const first = points[0];
       const last = points[points.length - 1];
       if (type === 'area' && first && last) {
@@ -504,17 +536,17 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
           ? [...previous].reverse().map((p) => `L ${p.x} ${p.y}`).join(' ')
           : `L ${last.x} ${zeroY} L ${first.x} ${zeroY}`;
         marks.push(
-          <path key={`area-${s.key}`} className={`chart__area${muted ? ' chart__area--muted' : ''}`} style={style}
+          <path key={`area-${s.key}`} className={`chart__area${muted ? ' chart__area--muted' : ''}`} data-slot={slot} fill={ink}
             d={`${line} ${floor} Z`} />,
         );
       }
-      marks.push(<path key={`line-${s.key}`} className={`chart__line${muted ? ' chart__line--muted' : ''}`} style={style} d={line} />);
+      marks.push(<path key={`line-${s.key}`} className={`chart__line${muted ? ' chart__line--muted' : ''}`} data-slot={slot} stroke={ink} d={line} />);
       points.forEach((p, i) => {
         const isEnd = i === points.length - 1;
         const isActive = active === i;
         if (!isEnd && !isActive) return;
         marks.push(
-          <circle key={`dot-${s.key}-${i}`} className={`chart__marker${muted ? ' chart__marker--muted' : ''}`} style={style}
+          <circle key={`dot-${s.key}-${i}`} className={`chart__marker${muted ? ' chart__marker--muted' : ''}`} data-slot={slot} fill={ink}
             cx={p.x} cy={p.y} r={GEOMETRY.markerSize / 2} data-active={isActive || undefined} />,
         );
       });
@@ -555,7 +587,8 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       series.forEach((s, si) => {
         const raw = toNumber(row[s.key]);
         const muted = isMuted(s.key);
-        const style = markStyle(si, s.color, colors);
+        const slot = markSlot(si, s.color, colors);
+        const ink = muted ? undefined : markInk(si, s.color, colors);
         const offset = stacked ? 0 : (si - (series.length - 1) / 2) * (thickness + GEOMETRY.markGap);
         const start = center + offset - thickness / 2;
         const base = stacked ? (raw >= 0 ? positive : negative) : 0;
@@ -574,7 +607,7 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
         }
         if (!d) return;
         marks.push(
-          <path key={`bar-${i}-${s.key}`} className={`chart__bar${muted ? ' chart__bar--muted' : ''}`} style={style} d={d}
+          <path key={`bar-${i}-${s.key}`} className={`chart__bar${muted ? ' chart__bar--muted' : ''}`} data-slot={slot} fill={ink} d={d}
             data-active={active === i || undefined} />,
         );
         if (labels === 'all' && !stacked) {
@@ -598,7 +631,8 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       if (slice.to - slice.from <= 0) return;
       const category = String(xValue(rows[i] as ChartDatum, xKey));
       marks.push(
-        <path key={`slice-${i}`} className={`chart__slice${isMuted(category) ? ' chart__slice--muted' : ''}`} style={markStyle(i, undefined, colors)}
+        <path key={`slice-${i}`} className={`chart__slice${isMuted(category) ? ' chart__slice--muted' : ''}`}
+          data-slot={markSlot(i, undefined, colors)} fill={isMuted(category) ? undefined : markInk(i, undefined, colors)}
           d={arcPath(centerX, centerY, radius, inner, slice.from, slice.to)} data-active={active === i || undefined} />,
       );
       if (slice.share >= 0.05) {
@@ -628,7 +662,8 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       const category = String(xValue(rows[i] as ChartDatum, xKey));
       marks.push(
         <path key={`funnel-${i}`} className={`chart__funnel-step${isMuted(category) ? ' chart__funnel-step--muted' : ''}`}
-          style={markStyle(i, undefined, colors)} data-active={active === i || undefined}
+          data-slot={markSlot(i, undefined, colors)} fill={isMuted(category) ? undefined : markInk(i, undefined, colors)}
+          data-active={active === i || undefined}
           d={funnelPath(centerX, y, h, anchoDe(v), anchoDe(siguiente ?? v))} />,
       );
       marks.push(
@@ -651,14 +686,16 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       const h = Math.max(0, rect.h - GEOMETRY.treemapGap);
       marks.push(
         <rect key={`tile-${rect.index}`} className={`chart__tile${isMuted(category) ? ' chart__tile--muted' : ''}`}
-          style={markStyle(rect.index, undefined, colors)} data-active={active === rect.index || undefined}
+          data-slot={markSlot(rect.index, undefined, colors)}
+          fill={isMuted(category) ? undefined : markInk(rect.index, undefined, colors)}
+          data-active={active === rect.index || undefined}
           x={rect.x} y={rect.y} width={w} height={h} />,
       );
       // El rótulo solo cabe si la baldosa lo aguanta: si no, está en la tabla.
       if (w > CHAR_WIDTH * 4 && h > GEOMETRY.labelFontSize * 2) {
         marks.push(
           <text key={`tile-label-${rect.index}`} className="chart__tile-label"
-            style={tileLabelStyle(rect.index, undefined, colors)}
+            data-slot={tileLabelSlot(rect.index, undefined, colors)}
             x={rect.x + GEOMETRY.axisGap} y={rect.y + GEOMETRY.axisGap + GEOMETRY.labelFontSize}>
             {fmtX(xValue(rows[rect.index] as ChartDatum, xKey))}
           </text>,
@@ -685,7 +722,8 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
       if (sweep <= 0) return;
       marks.push(
         <path key={`radial-bar-${i}`} className={`chart__radial-bar${isMuted(category) ? ' chart__radial-bar--muted' : ''}`}
-          style={markStyle(i, undefined, colors)} data-active={active === i || undefined}
+          data-slot={markSlot(i, undefined, colors)} fill={isMuted(category) ? undefined : markInk(i, undefined, colors)}
+          data-active={active === i || undefined}
           d={arcPath(centerX, centerY, outer, inner, -Math.PI / 2, -Math.PI / 2 + sweep)} />,
       );
     });
@@ -694,12 +732,13 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   if (!empty && isScatter) {
     series.forEach((s, si) => {
       const muted = isMuted(s.key);
-      const style = markStyle(si, s.color, colors);
+      const slot = markSlot(si, s.color, colors);
+      const ink = muted ? undefined : markInk(si, s.color, colors);
       rows.forEach((row, i) => {
         const value = row[s.key];
         if (typeof value !== 'number' || !Number.isFinite(value)) return;
         marks.push(
-          <circle key={`point-${s.key}-${i}`} className={`chart__point${muted ? ' chart__point--muted' : ''}`} style={style}
+          <circle key={`point-${s.key}-${i}`} className={`chart__point${muted ? ' chart__point--muted' : ''}`} data-slot={slot} fill={ink}
             cx={scatterX(xNumbers[i] ?? 0)} cy={valueToY(value)} r={GEOMETRY.dotSize / 2}
             data-active={active === i || undefined} />,
         );
@@ -710,14 +749,15 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
   if (!empty && isRadar) {
     series.forEach((s, si) => {
       const muted = isMuted(s.key);
-      const style = markStyle(si, s.color, colors);
+      const slot = markSlot(si, s.color, colors);
+      const ink = muted ? undefined : markInk(si, s.color, colors);
       const puntos = rows.map((row, i) => radarPoint(toNumber(row[s.key]), i));
       if (puntos.length === 0) return;
       const d = `${puntos.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ')} Z`;
-      marks.push(<path key={`radar-${s.key}`} className={`chart__radar-shape${muted ? ' chart__radar-shape--muted' : ''}`} style={style} d={d} />);
+      marks.push(<path key={`radar-${s.key}`} className={`chart__radar-shape${muted ? ' chart__radar-shape--muted' : ''}`} data-slot={slot} fill={ink} stroke={ink} d={d} />);
       puntos.forEach((p, i) => {
         marks.push(
-          <circle key={`radar-dot-${s.key}-${i}`} className={`chart__marker${muted ? ' chart__marker--muted' : ''}`} style={style}
+          <circle key={`radar-dot-${s.key}-${i}`} className={`chart__marker${muted ? ' chart__marker--muted' : ''}`} data-slot={slot} fill={ink}
             cx={p.x} cy={p.y} r={GEOMETRY.markerSize / 2} data-active={active === i || undefined} />,
         );
       });
@@ -748,6 +788,19 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
           ...tooltipRows.map((row) => `${row.label}: ${row.value}`),
         ].join(' · ')
       : '';
+
+  // La capa de exploración y el bocadillo se colocan con medidas en píxeles que
+  // salen del ancho medido: son geometría de cliente y se escriben por el
+  // CSSOM, no en un atributo `style` (que una app con `style-src 'self'`
+  // descartaría sin avisar). La capa no se ve —es área sensible— y el bocadillo
+  // solo existe tras interactuar, así que ninguno depende del primer render.
+  const hitLayerRef = useCssProperties({
+    'inset-inline-start': `${x0}px`,
+    'inset-block-start': `${y0}px`,
+    width: `${plotWidth}px`,
+    height: `${plotHeight}px`,
+  });
+  const tooltipRef = useCssProperties({ left: `${tooltipX}px`, top: `${tooltipY}px` });
 
   return (
     <figure ref={ref} className={classes} {...rest}>
@@ -850,12 +903,12 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
               gráfico y el puntero se enfoca con el teclado sin meter un elemento
               focusable dentro de una imagen. */}
           <div
+            ref={hitLayerRef}
             className="chart__hit-layer"
             role="img"
             aria-label={ariaLabel}
             aria-describedby={hintId}
             tabIndex={tooltip ? 0 : undefined}
-            style={{ insetInlineStart: `${x0}px`, insetBlockStart: `${y0}px`, width: `${plotWidth}px`, height: `${plotHeight}px` } as CSSProperties}
             onPointerMove={tooltip ? (event) => { setAnnouncing(false); setActive(indexFromPointer(event)); } : undefined}
             onPointerLeave={tooltip ? () => setActive(null) : undefined}
             onKeyDown={tooltip ? onKeyDown : undefined}
@@ -863,12 +916,13 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
           />
 
           {tooltip && active !== null && activeRow ? (
-            <div className="chart__tooltip" aria-hidden="true" style={{ left: `${tooltipX}px`, top: `${tooltipY}px` } as CSSProperties}>
+            <div ref={tooltipRef} className="chart__tooltip" aria-hidden="true">
               <p className="chart__tooltip-header">{isSlice ? fmtValue(sliceTotal) : fmtX(xValue(activeRow, xKey))}</p>
               <ul className="chart__tooltip-list">
                 {tooltipRows.map((row) => (
                   <li key={row.key + row.label} className="chart__tooltip-row">
-                    <span className="chart__tooltip-key" style={markStyle(row.index, isSlice ? undefined : series[row.index]?.color, colors)} aria-hidden="true" />
+                    <ChartSwatch className="chart__tooltip-key" index={row.index}
+                      color={isSlice ? undefined : series[row.index]?.color} palette={colors} />
                     <span className="chart__tooltip-value">{row.value}</span>
                     <span className="chart__tooltip-label">{row.label}</span>
                   </li>
@@ -886,10 +940,12 @@ export const Chart = forwardRef<HTMLElement, ChartProps>(function Chart({
               : series.map((s, i) => ({ key: s.key, label: s.label, index: i, color: s.color }))
             ).map((item) => (
               <Tag key={item.key} variant="neutral" className={`chart__legend-item${isMuted(item.key) ? ' chart__legend-item--muted' : ''}`}>
-                <span
+                <ChartSwatch
                   className={`chart__legend-swatch${type === 'line' ? ' chart__legend-swatch--line' : ''}`}
-                  style={markStyle(item.index, item.color, colors)}
-                  aria-hidden="true"
+                  index={item.index}
+                  color={item.color}
+                  palette={colors}
+                  muted={isMuted(item.key)}
                 />
                 {item.label}
               </Tag>

@@ -41,6 +41,8 @@ Hay un caso en que el color **es dato y no diseño**: el que eligió el autor de
 
 `colors[i]` pinta la serie `i` —o, en los gráficos de porción, la categoría `i`—. La prioridad es: `series[i].color` › `colors[i]` › la ranura de token que toca por orden. Para la interfaz del sistema, las ranuras siguen siendo lo correcto: `colors` es para cuando el color viene del documento.
 
+Los dos caminos se pintan distinto, y ninguno es un atributo `style` —una app servida con `style-src 'self'` lo descarta en silencio—: la **ranura de token** viaja en `data-slot` y la resuelve la hoja; el **color de dato** viaja como atributo de presentación de SVG (`fill`/`stroke`), que la CSP no toca.
+
 <Canvas of={ChartStories.ColorPorDato} />
 
 ## Las formas
