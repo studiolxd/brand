@@ -1,3 +1,4 @@
+import { centerCrop, makeAspectCrop, type Crop } from 'react-image-crop';
 export type CropRegion = {
   /** Desplazamiento en píxeles sobre la imagen mostrada. */
   x: number;
@@ -61,4 +62,16 @@ export async function cropImageToBlob(
       quality,
     );
   });
+}
+
+/**
+ * La selección inicial es la mayor que cabe con la proporción pedida, centrada:
+ * en una imagen cuadrada (para `aspect` 1) lo ocupa todo; en una vertical va
+ * al 100 % de ancho, centrada en vertical; en una apaisada, al 100 % de alto,
+ * centrada en horizontal. Quien recorta parte del máximo y reduce, no al revés.
+ */
+export function initialCrop(aspect: number, width: number, height: number): Crop {
+  const landscape = width / height >= aspect;
+  const seed = landscape ? { unit: '%' as const, height: 100 } : { unit: '%' as const, width: 100 };
+  return centerCrop(makeAspectCrop(seed, aspect, width, height), width, height);
 }

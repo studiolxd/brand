@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ImageCropDialog } from './ImageCropDialog';
+import { initialCrop } from './crop';
 
 /**
  * Contrato del ImageCropDialog — modal de "elige una región" sobre el object
@@ -103,5 +104,28 @@ describe('ImageCropDialog', () => {
     render(<ImageCropDialog {...baseProps} sourceUrl="blob:fake" busy />);
     expect(screen.getByRole('button', { name: 'Cancelar' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Guardar' })).toBeDisabled();
+  });
+});
+
+describe('initialCrop', () => {
+  it('cuadrada: la selección ocupa toda la imagen', () => {
+    const crop = initialCrop(1, 400, 400);
+    expect(crop).toMatchObject({ unit: '%', x: 0, y: 0, width: 100, height: 100 });
+  });
+
+  it('vertical: al 100 % de ancho, centrada en vertical', () => {
+    const crop = initialCrop(1, 300, 600);
+    expect(crop.width).toBeCloseTo(100);
+    expect(crop.height).toBeCloseTo(50);
+    expect(crop.x).toBeCloseTo(0);
+    expect(crop.y).toBeCloseTo(25);
+  });
+
+  it('apaisada: al 100 % de alto, centrada en horizontal', () => {
+    const crop = initialCrop(1, 800, 400);
+    expect(crop.height).toBeCloseTo(100);
+    expect(crop.width).toBeCloseTo(50);
+    expect(crop.y).toBeCloseTo(0);
+    expect(crop.x).toBeCloseTo(25);
   });
 });

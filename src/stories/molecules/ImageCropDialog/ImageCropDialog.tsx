@@ -1,17 +1,12 @@
 'use client';
 
 import { useRef, useState, type ReactNode } from 'react';
-import ReactCrop, {
-  centerCrop,
-  makeAspectCrop,
-  type Crop,
-  type PixelCrop,
-} from 'react-image-crop';
+import ReactCrop, { type Crop, type PixelCrop } from 'react-image-crop';
 import { Button } from '../../atoms/Button/Button';
 import { Spinner } from '../../atoms/Spinner/Spinner';
 import { Alert } from '../Alert/Alert';
 import { Modal } from '../Modal/Modal';
-import { cropImageToBlob } from './crop';
+import { cropImageToBlob, initialCrop } from './crop';
 // El recortador es inservible sin su propia hoja (marco de selección y
 // tiradores). El DS la carga aquí para que ningún consumidor tenga que
 // acordarse — misma regla que el CSS BEM de cualquier otro componente.
@@ -160,13 +155,7 @@ export function ImageCropDialog({
                 onLoad={(e) => {
                   const { width, height } = e.currentTarget;
                   setStatus('ready');
-                  setCrop(
-                    centerCrop(
-                      makeAspectCrop({ unit: '%', width: 80 }, aspect, width, height),
-                      width,
-                      height,
-                    ),
-                  );
+                  setCrop(initialCrop(aspect, width, height));
                 }}
                 onError={() => setStatus('error')}
               />
