@@ -27,6 +27,19 @@ La escala se cierra ahí. `xxl` no es un valor suelto: es la talla `xl` con el m
 
 El trazado toma su color de un token con par oscuro. Dentro de `surface-dark` —una banda oscura, la barra lateral— pasa a claro solo, sin ninguna prop.
 
+## Fuera de React
+
+El mismo trazado sale también como datos, para generar activos sin montar el componente:
+
+```ts
+import { logoSvg, logoPaths, logoViewBox } from '@studiolxd/brand/logo';
+```
+
+- **`logoSvg`** — el documento SVG completo, con `role="img"` y `<title>Studio LXD</title>`: se anuncia solo, sin depender de quien lo envuelva. La tinta es `currentColor`.
+- **`logoPaths`** y **`logoViewBox`** — los trazados sueltos, para `next/og`/satori o un SVG a mano.
+
+El fichero viaja además en el paquete, tal cual: `@studiolxd/brand/assets/logo.svg`. Ficha completa de los activos de marca —logotipo, isotipo, iconos de aplicación— en [Foundations → Marca](?path=/docs/foundations-marca--docs).
+
 ## Accesibilidad
 
 El SVG es decorativo (`aria-hidden`). El nombre lo pone el elemento que lo envuelve: el enlace de la cabecera lleva su `aria-label` ("Studio LXD — ir al inicio"), y así el logo se lee como lo que es, un enlace al inicio, y no como una imagen sin texto.

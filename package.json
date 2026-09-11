@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "37.4.0",
+  "version": "37.5.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -372,7 +372,7 @@
       "import": "./dist/list.js"
     },
     "./logo": {
-      "types": "./dist/_types/atoms/Logo/Logo.d.ts",
+      "types": "./dist/_types/atoms/Logo/index.d.ts",
       "import": "./dist/logo.js"
     },
     "./logomark": {
@@ -645,6 +645,10 @@
       "import": "./dist/tokens.js"
     },
     "./tokens.json": "./src/tokens/tokens.json",
+    "./brand-assets": {
+      "types": "./dist/_types/assets/brand-assets.d.ts",
+      "import": "./dist/brand-assets.js"
+    },
     "./tokens.css": "./dist/tokens.css",
     "./user-menu": {
       "types": "./dist/_types/molecules/UserMenu/UserMenu.d.ts",
@@ -668,6 +672,7 @@
     "build:css": "postcss src/index.css --use postcss-import -o dist/brand.css",
     "build:tokens-css": "postcss src/tokens/index.css --use postcss-import -o dist/tokens.css",
     "build:fonts-css": "node scripts/build-fonts-css.mjs",
+  "build:icons": "node scripts/build-icons.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "build:tokens": "node sd.config.mjs",
@@ -677,7 +682,7 @@
     "chromatic": "chromatic --exit-zero-on-changes",
     "test": "vitest run --project unit --project components",
     "test:stories": "vitest run --project storybook",
-    "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css",
+    "build:all": "pnpm build:tokens && pnpm build:lib && pnpm build:css && pnpm build:tokens-css && pnpm build:fonts-css && pnpm build:icons",
     "release:check": "node scripts/release-check.mjs"
   },
   "dependencies": {
@@ -732,6 +737,7 @@
     "react-hook-form": "^7.85.0",
     "react-phone-number-input": "^3.4.16",
     "remark-gfm": "^4.0.1",
+    "sharp": "^0.35.4",
     "storybook": "^10.6.0",
     "storybook-addon-pseudo-states": "^10.6.0",
     "style-dictionary": "^4.4.0",

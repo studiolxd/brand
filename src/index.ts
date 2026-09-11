@@ -66,6 +66,7 @@ export { List, ListItem } from './stories/atoms/List/List';
 export type { ListProps, ListType, ListItemProps } from './stories/atoms/List/List';
 export { Logo } from './stories/atoms/Logo/Logo';
 export type { LogoProps, LogoSize } from './stories/atoms/Logo/Logo';
+export { logoPaths, logoSvg, logoViewBox } from './stories/atoms/Logo/logoAssets';
 export { Logomark } from './stories/atoms/Logomark/Logomark';
 export type { LogomarkProps, LogomarkSize } from './stories/atoms/Logomark/Logomark';
 export {

@@ -1,0 +1,25 @@
+/*
+ * El módulo de metadatos de activos de marca (`@studiolxd/brand/brand-assets`),
+ * que vive fuera de `src/stories/` y por eso no cabe en el programa de la
+ * librería: su raíz común es otra. Mismo motivo y mismo mecanismo que
+ * `tsconfig.tokens.json` — ver su comentario.
+ *
+ * Va como proyecto COMPUESTO (`composite`) porque `tsconfig.lib.json` lo
+ * referencia. Extiende `tsconfig.app.json` y no `tsconfig.lib.json` a
+ * propósito: si extendiera el de la librería heredaría su referencia a este
+ * mismo fichero.
+ */
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.assets.tsbuildinfo",
+    "rootDir": "src/assets",
+    "declarationDir": "./dist/_types/assets"
+  },
+  "include": ["src/assets/brand-assets.ts"]
+}
