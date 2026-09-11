@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { CalendarRoster, type RosterRow } from './CalendarRoster';
+import { STORY_TODAY } from '../../utils/storyDate';
 
 const meta: Meta<typeof CalendarRoster> = {
   title: 'Molecules/CalendarRoster',
@@ -171,10 +172,9 @@ export const SinLeyenda: Story = {
 export const FijaConMesActual: Story = {
   name: 'Mes actual',
   render: (args) => {
-    const [month, setMonth] = useState(() => {
-      const now = new Date();
-      return new Date(now.getFullYear(), now.getMonth(), 1);
-    });
+    const [month, setMonth] = useState(
+      () => new Date(STORY_TODAY.getFullYear(), STORY_TODAY.getMonth(), 1),
+    );
     return (
       <CalendarRoster
         {...args}

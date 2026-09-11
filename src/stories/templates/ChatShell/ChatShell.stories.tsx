@@ -9,6 +9,7 @@ import type { ConversationMessage } from '../../organisms/ConversationThread/Con
 import { MessageComposer } from '../../molecules/MessageComposer/MessageComposer';
 import { Heading } from '../../atoms/Heading/Heading';
 import { SelectField } from '../../molecules/SelectField/SelectField';
+import { STORY_TODAY } from '../../utils/storyDate';
 
 const MODELOS = [
   { value: 'opus', label: 'Claude Opus 5' },
@@ -181,7 +182,7 @@ export const Integracion: Story = {
     }
 
     function enviar() {
-      const ahora = new Date();
+      const ahora = STORY_TODAY;
       const enCurso = `a-${mensajes.length}`;
       setMensajes((prev) => [
         ...prev,
@@ -201,7 +202,7 @@ export const Integracion: Story = {
                   model: modeloLabel,
                   content:
                     'Esta es una respuesta simulada. En una integración real aquí llegaría lo que genere el modelo.',
-                  timestamp: new Date(),
+                  timestamp: STORY_TODAY,
                 }
               : m,
           ),

@@ -1,9 +1,28 @@
 import { useEffect } from 'react'
+import MockDate from 'mockdate'
 import type { Preview, Decorator } from '@storybook/react-vite'
 import '../src/index.css'
 import '../src/stylesheets/fonts.css'
 import './preview.css'
 import studiolxdTheme from './studiolxdTheme'
+import { STORY_TODAY } from '../src/stories/utils/storyDate'
+
+/**
+ * El catálogo vive siempre en la misma fecha. Sin esto, cualquier componente o
+ * story que calcule sobre `new Date()` (el «hoy» de `Calendar`, el mes por
+ * defecto de `CalendarPlanner`…) cambia de captura en Chromatic cada día —
+ * pasó el 11 de septiembre de 2026 con la línea base del día anterior: el
+ * marcador de «hoy» se había movido una casilla y Chromatic lo señaló como
+ * cambio visual. `mockdate` sustituye el constructor global `Date` (y
+ * `Date.now`), así que congela tanto el código de los componentes como el de
+ * las stories sin tocar ninguno de los dos; se fija al cargar este módulo,
+ * antes de que se monte cualquier story, y aplica igual en el navegador de
+ * Storybook en local, en `pnpm test:stories` (Chromium vía
+ * `@storybook/addon-vitest`) y en la captura de Chromatic — los tres son el
+ * mismo entorno de navegador real, nunca jsdom. No usar `Date.now()`/`new
+ * Date()` sin argumentos en una story para «hoy»: usar `STORY_TODAY`.
+ */
+MockDate.set(STORY_TODAY)
 
 /**
  * Superficie oscura para una story. Se activa de dos formas:

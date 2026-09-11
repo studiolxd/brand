@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "34.1.0",
+  "version": "34.1.2",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -714,6 +714,7 @@
     "globals": "^17.4.0",
     "jsdom": "^30.0.1",
     "libphonenumber-js": "^1.12.41",
+    "mockdate": "^3.0.5",
     "playwright": "^1.58.2",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",

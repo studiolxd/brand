@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Tag } from '../../atoms/Tag/Tag';
 import { CalendarPlanner, type PlannerEvent } from './CalendarPlanner';
+import { STORY_TODAY } from '../../utils/storyDate';
 
 const meta: Meta<typeof CalendarPlanner> = {
   title: 'Molecules/CalendarPlanner',
@@ -35,11 +36,10 @@ const meta: Meta<typeof CalendarPlanner> = {
 export default meta;
 type Story = StoryObj<typeof CalendarPlanner>;
 
-// Eventos de ejemplo centrados en el mes actual
+// Eventos de ejemplo centrados en el mes de STORY_TODAY
 function makeEvents(): PlannerEvent[] {
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = now.getMonth();
+  const y = STORY_TODAY.getFullYear();
+  const m = STORY_TODAY.getMonth();
 
   return [
     { id: '1',  date: new Date(y, m, 2),  label: 'Reunión equipo',      variant: 'primary' },
@@ -121,7 +121,7 @@ export const ConRenderDay: Story = {
 export const Controlado: Story = {
   name: 'Mes controlado externamente',
   render: (args) => {
-    const [month, setMonth] = useState(new Date());
+    const [month, setMonth] = useState(STORY_TODAY);
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -133,7 +133,7 @@ export const Controlado: Story = {
           </button>
           <button
             type="button"
-            onClick={() => setMonth(new Date())}
+            onClick={() => setMonth(STORY_TODAY)}
           >
             Hoy
           </button>
