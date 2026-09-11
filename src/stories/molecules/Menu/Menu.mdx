@@ -41,6 +41,8 @@ El desplegable de acciones del sistema, con el disparador que haga falta. Define
 
 `side` y `align` colocan el panel respecto al disparador; `sideOffset` lo separa. Si no cabe, el motor lo recoloca solo. El panel vive en la capa `floating`: por encima de un modal, para que un menú dentro de un diálogo se abra sobre él.
 
+Con muchos ítems, el panel no se sale de la pantalla: `content-max-height` lo limita al espacio disponible que calcula Base UI (`--available-height`) y hace scroll interno cuando la lista no cabe — el mismo mecanismo que `Select`, `MultiSelect` y el resto de popups del sistema.
+
 ## Tallas
 
 `size` (`sm`/`md`/`lg`) pone los ítems a la talla del disparador: cuerpo y padding vertical de las opciones del `Select`, para que el panel desplegado case con el control plegado. `DropdownField` (y con él idioma y tema) lo propaga solo.

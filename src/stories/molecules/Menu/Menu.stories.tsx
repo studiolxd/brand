@@ -122,6 +122,52 @@ export const Mixto: Story = {
   },
 };
 
+/**
+ * Con muchos ítems en un móvil, el panel no puede salirse de la pantalla: se
+ * limita a la altura disponible y hace scroll (Foundations → Menu § «Altura
+ * y scroll»). Recorrer la lista con flechas hasta el último ítem hace scroll
+ * hasta él — lo hace Base UI, aquí solo se comprueba.
+ */
+export const MuchasOpciones: Story = {
+  name: 'Muchas opciones',
+  globals: { viewport: { value: 'mobile1' } },
+  args: {
+    trigger: <Button variant="outline">Ver los 32 países</Button>,
+    align: 'start',
+    items: Array.from({ length: 32 }, (_, i) => ({
+      type: 'button' as const,
+      label: `País ${String(i + 1).padStart(2, '0')}`,
+      onClick: () => {},
+    })),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Ver los 32 países' }));
+
+    const body = within(document.body);
+    const menu = await body.findByRole('menu');
+    const primero = await body.findByRole('menuitem', { name: 'País 01' });
+    const ultimo = body.getByRole('menuitem', { name: 'País 32' });
+
+    // El panel se limita a la pantalla y hace scroll: no cabrían los 32 sin él.
+    await waitFor(() => {
+      expect(menu.scrollHeight).toBeGreaterThan(menu.clientHeight);
+      expect(menu.getBoundingClientRect().bottom).toBeLessThanOrEqual(window.innerHeight);
+    });
+
+    // Recorrer con flechas hasta el final hace scroll al ítem enfocado.
+    primero.focus();
+    for (let i = 0; i < 31; i++) {
+      await userEvent.keyboard('{ArrowDown}');
+    }
+    await waitFor(() => {
+      expect(ultimo).toHaveFocus();
+      expect(ultimo.getBoundingClientRect().bottom).toBeLessThanOrEqual(menu.getBoundingClientRect().bottom + 1);
+      expect(ultimo.getBoundingClientRect().top).toBeGreaterThanOrEqual(menu.getBoundingClientRect().top - 1);
+    });
+  },
+};
+
 /** Test: el ítem bajo el puntero invierte la marca — la excepción de las listas de opciones. */
 export const ContratoResaltado: Story = {
   name: 'Test — el ítem resaltado invierte la marca',

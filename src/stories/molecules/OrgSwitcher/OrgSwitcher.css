@@ -78,6 +78,9 @@
   min-width: var(--org-switcher-content-min-width);
   outline: none;
   transform-origin: var(--transform-origin);
+  max-height: var(--org-switcher-content-max-height, var(--available-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .org-switcher__content[data-open] {

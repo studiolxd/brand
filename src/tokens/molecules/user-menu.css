@@ -4,6 +4,7 @@
 
 :root {
   --user-menu-content-min-width: 14rem; /** Ancho mínimo del panel: que quepan nombre y correo en una línea (no es una talla de componente) */
+  --user-menu-content-max-height: var(--available-height); /** Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla */
   --user-menu-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger */
   --user-menu-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger */
   --user-menu-trigger-compact-padding-inline: var(--spacing-1); /** Padding horizontal del botón compacto (solo avatar) */

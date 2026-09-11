@@ -80,6 +80,9 @@
   border-style: var(--async-select-border-style);
   border-color: var(--async-select-content-border-color);
   min-width: var(--anchor-width);
+  max-height: var(--async-select-content-max-height, var(--available-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
 
   &[data-side='bottom'] {
     border-top: none;

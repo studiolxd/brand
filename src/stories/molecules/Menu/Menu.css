@@ -20,6 +20,9 @@
   padding-inline: 0;
   outline: none;
   transform-origin: var(--transform-origin);
+  max-height: var(--menu-content-max-height, var(--available-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .menu__content[data-open] {

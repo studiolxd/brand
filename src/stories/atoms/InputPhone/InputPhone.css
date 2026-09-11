@@ -85,6 +85,7 @@
   min-width: var(--anchor-width);
   max-height: var(--input-phone-content-max-height);
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .input-phone__country-item {

@@ -7,6 +7,41 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.1.0] — 2026-09-11
+
+> **Minor.** Todo popup posicionado por Base UI (`Menu` y todo lo que lo monta por dentro —
+> `ContextMenu`, `DropdownField`, `LanguageSwitcher`, `ThemeSwitcher` —, `Popover`,
+> `AsyncSelect`, `AsyncMultiSelect`, `UserMenu`, `OrgSwitcher`, `AppLauncher`) limita su
+> altura al espacio disponible y hace scroll en vez de salirse de la pantalla. Caso real: el
+> `LanguageSwitcher` con ~30 idiomas en un móvil, el panel sobresalía por arriba y las
+> primeras opciones quedaban inalcanzables.
+
+- **Popups: altura máxima + scroll interno, como ya hacía `Select`.** `Select` y
+  `MultiSelect` ya limitaban su panel a `--available-height` (el espacio que calcula el
+  `Positioner` de Base UI) y hacían `overflow-y: auto`; el resto de popups del sistema no lo
+  hacía. Se añade el mismo mecanismo — token `<bloque>-content-max-height` (o
+  `popover-max-height`, que no tiene "content") con valor `var(--available-height)`, más
+  `overflow-y: auto` y `overscroll-behavior: contain` para que el scroll del panel no arrastre
+  la página de detrás — a `Menu.css`, `Popover.css`, `AsyncSelect.css`,
+  `AsyncMultiSelect.css`, `UserMenu.css`, `OrgSwitcher.css` y `AppLauncher.css`.
+  `ContextMenu` y `DropdownField` (y con él `LanguageSwitcher`/`ThemeSwitcher`) lo heredan
+  sin cambios propios: montan `Menu` por dentro.
+  - **Tokens nuevos:** `menu.content-max-height`, `popover.max-height`,
+    `async-select.content-max-height` (hereda de `select.content-max-height`),
+    `async-multi-select.content-max-height` (hereda de `multi-select.content-max-height`),
+    `user-menu.content-max-height`, `org-switcher.content-max-height`,
+    `app-launcher.content-max-height`.
+  - `Select.css` y `MultiSelect.css` ganan `overscroll-behavior: contain`, que les faltaba,
+    para quedar en el mismo punto que el resto.
+  - `InputPhone.css` (el desplegable de país, que ya limitaba su altura con un token propio
+    `input-phone.content-max-height` fijo en rem) gana también `overscroll-behavior: contain`.
+  - Documentado en `Menu.mdx` y `Popover.mdx`, § «Colocación» / «Contenido».
+  - Stories «Muchas opciones» en `Menu` y `LanguageSwitcher` (≥30 ítems, viewport móvil) con
+    `play` que comprueba que el panel hace scroll (`scrollHeight > clientHeight`) y que no se
+    sale de la ventana (`getBoundingClientRect().bottom <= window.innerHeight`); la de `Menu`
+    comprueba además que recorrer la lista con flechas hasta el último ítem lo deja visible
+    dentro del panel (scroll automático de Base UI).
+
 ## [37.0.0] — 2026-09-11
 
 > **Major.** `CheckboxField`/`RadioField`/`SwitcherField` pierden el `padding-inline` de su

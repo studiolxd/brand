@@ -21,6 +21,7 @@ $lxd-user-menu-content-border-color: #111e30; // Color del borde del panel
 $lxd-user-menu-content-border-radius: 0px; // Radio del panel
 $lxd-user-menu-content-shadow: none; // Sombra del panel
 $lxd-user-menu-content-z-index: 400; // Z-index del dropdown (por encima del sidebar en mobile)
+$lxd-user-menu-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla
 $lxd-user-menu-content-padding-block: 0.5rem; // Padding vertical del panel
 $lxd-user-menu-content-padding-inline: 0.5rem; // Padding horizontal del panel
 $lxd-user-menu-header-padding-block: 0.75rem; // Padding vertical de la cabecera del dropdown

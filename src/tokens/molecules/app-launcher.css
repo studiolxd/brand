@@ -5,6 +5,7 @@
 :root {
   --app-launcher-content-min-width: 20rem; /** Ancho mínimo del popover */
   --app-launcher-content-columns: 3; /** Número de columnas de la rejilla de apps */
+  --app-launcher-content-max-height: var(--available-height); /** Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas apps, el panel hace scroll en vez de salirse de la pantalla */
   --app-launcher-trigger-size: var(--size-component-md); /** Tamaño (cuadrado) del botón de rejilla */
   --app-launcher-content-gap: var(--spacing-1); /** Espacio entre tiles */
   --app-launcher-content-padding-block: var(--spacing-3); /** Padding vertical del panel */

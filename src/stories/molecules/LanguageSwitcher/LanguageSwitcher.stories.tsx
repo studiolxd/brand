@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within, userEvent } from 'storybook/test';
+import { expect, within, userEvent, waitFor } from 'storybook/test';
 import { LanguageSwitcher, type Language } from './LanguageSwitcher';
 
 const idiomas: Language[] = [
@@ -10,6 +10,42 @@ const idiomas: Language[] = [
   { code: 'de', label: 'Deutsch' },
   { code: 'nl', label: 'Nederlands' },
   { code: 'pt', label: 'Português' },
+];
+
+/** ~30 idiomas: el caso real que sacó el bug (el panel se salía de la pantalla en móvil). */
+const muchosIdiomas: Language[] = [
+  { code: 'es', label: 'Español' },
+  { code: 'en', label: 'English' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'nl', label: 'Nederlands' },
+  { code: 'pt', label: 'Português' },
+  { code: 'it', label: 'Italiano' },
+  { code: 'ca', label: 'Català' },
+  { code: 'eu', label: 'Euskara' },
+  { code: 'gl', label: 'Galego' },
+  { code: 'pl', label: 'Polski' },
+  { code: 'ro', label: 'Română' },
+  { code: 'sv', label: 'Svenska' },
+  { code: 'no', label: 'Norsk' },
+  { code: 'da', label: 'Dansk' },
+  { code: 'fi', label: 'Suomi' },
+  { code: 'is', label: 'Íslenska' },
+  { code: 'cs', label: 'Čeština' },
+  { code: 'sk', label: 'Slovenčina' },
+  { code: 'hu', label: 'Magyar' },
+  { code: 'el', label: 'Ελληνικά' },
+  { code: 'tr', label: 'Türkçe' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'uk', label: 'Українська' },
+  { code: 'ar', label: 'العربية' },
+  { code: 'he', label: 'עברית' },
+  { code: 'ja', label: '日本語' },
+  { code: 'ko', label: '한국어' },
+  { code: 'zh', label: '中文' },
+  { code: 'hi', label: 'हिन्दी' },
+  { code: 'th', label: 'ไทย' },
+  { code: 'vi', label: 'Tiếng Việt' },
 ];
 
 function Controlado(props: React.ComponentProps<typeof LanguageSwitcher>) {
@@ -58,6 +94,29 @@ export const Contrato: Story = {
     await expect(fr).toHaveAttribute('lang', 'fr');
     await userEvent.click(fr);
     await expect(boton.textContent).toContain('Français');
+  },
+};
+
+/**
+ * Con ~30 idiomas en un móvil, el panel no puede salirse de la pantalla: se
+ * limita a la altura disponible y hace scroll (Foundations → Menu § «Altura
+ * y scroll»).
+ */
+export const MuchasOpciones: Story = {
+  name: 'Muchas opciones',
+  args: { languages: muchosIdiomas },
+  globals: { viewport: { value: 'mobile1' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Idioma' }));
+
+    // El panel va en un portal, fuera del canvas de la story.
+    const menu = await within(document.body).findByRole('menu');
+
+    await waitFor(() => {
+      expect(menu.scrollHeight).toBeGreaterThan(menu.clientHeight);
+      expect(menu.getBoundingClientRect().bottom).toBeLessThanOrEqual(window.innerHeight);
+    });
   },
 };
 

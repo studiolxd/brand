@@ -7,6 +7,7 @@ $lxd-menu-border-color: #111e30; // Color del borde del panel
 $lxd-menu-border-radius: 0px; // Radio del panel
 $lxd-menu-shadow: none; // Sombra del panel
 $lxd-menu-z-index: 400; // Capa z del panel flotante
+$lxd-menu-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla
 $lxd-menu-padding-block: 0.5rem; // Padding vertical del panel
 $lxd-menu-padding-inline: 0.5rem; // Padding lateral del panel
 $lxd-menu-item-padding-block: 0.5rem; // Padding vertical de cada ítem

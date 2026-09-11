@@ -24,6 +24,7 @@ $lxd-app-launcher-content-border-color: #111e30; // Color del borde del panel
 $lxd-app-launcher-content-border-radius: 0px; // Radio del panel
 $lxd-app-launcher-content-shadow: none; // Sombra del panel
 $lxd-app-launcher-content-z-index: 400; // Z-index del popover
+$lxd-app-launcher-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas apps, el panel hace scroll en vez de salirse de la pantalla
 $lxd-app-launcher-content-padding-block: 0.75rem; // Padding vertical del panel
 $lxd-app-launcher-content-padding-inline: 0.75rem; // Padding horizontal del panel
 $lxd-app-launcher-transition-duration: 150ms; // Duración de la animación de entrada/salida

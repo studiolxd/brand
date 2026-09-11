@@ -18,6 +18,7 @@ $lxd-org-switcher-content-border-color: #111e30; // Color del borde del panel
 $lxd-org-switcher-content-border-radius: 0px; // Radio del panel
 $lxd-org-switcher-content-shadow: none; // Sombra del panel
 $lxd-org-switcher-content-z-index: 400; // Z-index del dropdown (por encima del sidebar en mobile)
+$lxd-org-switcher-content-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas organizaciones, el panel hace scroll en vez de salirse de la pantalla
 $lxd-org-switcher-content-padding-block: 0.5rem; // Padding vertical del panel
 $lxd-org-switcher-content-padding-inline: 0.5rem; // Padding horizontal del panel
 $lxd-org-switcher-item-padding-block: 0.5rem; // Padding vertical de cada ítem

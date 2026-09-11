@@ -123,6 +123,7 @@
   min-width: var(--anchor-width);
   max-height: var(--multi-select-content-max-height, var(--available-height));
   overflow-y: auto;
+  overscroll-behavior: contain;
 
   &[data-side='bottom'] {
     border-top: none;

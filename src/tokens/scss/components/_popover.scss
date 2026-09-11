@@ -8,6 +8,7 @@ $lxd-popover-border-radius: 0px; // Radio del panel: esquina recta
 $lxd-popover-padding-block: 1rem; // Aire vertical del panel
 $lxd-popover-padding-inline: 1rem; // Aire horizontal del panel
 $lxd-popover-offset: 0.5rem; // Separación entre el disparador y el panel (8px). De aquí sale el `sideOffset` por defecto
+$lxd-popover-max-height: var(--available-height); // Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — un contenido largo hace scroll en vez de salirse de la pantalla
 $lxd-popover-z-index: 400; // Capa del panel flotante
 $lxd-popover-transition-duration: 150ms; // Duración de la entrada y la salida
 $lxd-popover-transition-easing: ease; // Curva de la entrada y la salida

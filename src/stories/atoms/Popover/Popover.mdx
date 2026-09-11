@@ -112,6 +112,8 @@ través de `--floating-panel-*`. Y si además esas filas son acciones, casi
 siempre lo correcto es usar `ContextMenu` directamente en vez de rehacerlo
 dentro de un `Popover`.
 
+Un contenido largo no saca el panel de la pantalla: `--popover-max-height` lo limita al espacio disponible que calcula Base UI (`--available-height`) y el panel hace scroll interno — el mismo mecanismo que `Select`, `Menu` y el resto de popups del sistema.
+
 ---
 
 ## Tokens

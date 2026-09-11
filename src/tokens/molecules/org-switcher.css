@@ -4,6 +4,7 @@
 
 :root {
   --org-switcher-content-min-width: 14rem; /** Ancho mínimo del panel: nombres de organización (no es una talla de componente) */
+  --org-switcher-content-max-height: var(--available-height); /** Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchas organizaciones, el panel hace scroll en vez de salirse de la pantalla */
   --org-switcher-trigger-padding-block: var(--spacing-2); /** Padding vertical del trigger */
   --org-switcher-trigger-padding-inline: var(--spacing-3); /** Padding horizontal del trigger */
   --org-switcher-trigger-gap: var(--spacing-3); /** Espacio entre logo y nombre */

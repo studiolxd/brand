@@ -3,6 +3,7 @@
  */
 
 :root {
+  --menu-content-max-height: var(--available-height); /** Altura máxima del panel (por defecto, el espacio disponible en viewport que expone Base UI) — con muchos ítems, el panel hace scroll en vez de salirse de la pantalla */
   --menu-item-cursor: pointer; /** Cursor de ítems */
   --menu-padding-block: var(--spacing-2); /** Padding vertical del panel */
   --menu-padding-inline: var(--spacing-2); /** Padding lateral del panel */

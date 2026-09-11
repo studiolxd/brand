@@ -107,6 +107,9 @@
   border-style: var(--async-multi-select-border-style);
   border-color: var(--async-multi-select-content-border-color);
   min-width: var(--anchor-width);
+  max-height: var(--async-multi-select-content-max-height, var(--available-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
 
   &[data-side='bottom'] {
     border-top: none;
