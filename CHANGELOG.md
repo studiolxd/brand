@@ -7,6 +7,10 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.5.4] — 2026-09-11
+
+> **Patch (tooling).** `release-check.mjs` gana un guardián que habría cazado la 37.5.2 directamente: compara el ÍNDICE de git de `dist/` contra el disco (no solo el disco consigo mismo) y falla si difieren en caja, con el comando de arreglo en el propio mensaje. El check de imports existente también compara ahora contra el índice, no solo contra el disco. Lógica pura extraída a `scripts/lib/case-guard.mjs` con tests (`scripts/lib/case-guard.test.ts`, ya en el proyecto `unit` de Vitest). CLAUDE.md documenta `git config core.ignorecase false` para este repo en macOS.
+
 ## [37.5.3] — 2026-09-11
 
 > **Patch.** Corrige la 37.5.2: el índice de git en macOS (`core.ignorecase`) no registró los renombrados a minúscula de `dist/`, así que la etiqueta llevaba ficheros con mayúscula e imports en minúscula y nada resolvía. Reindexado con la caja exacta del disco.

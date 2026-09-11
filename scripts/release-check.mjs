@@ -10,6 +10,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
+import { findIndexDiskCaseMismatches } from './lib/case-guard.mjs';
 
 const withStories = process.argv.includes('--with-stories');
 
@@ -62,6 +63,22 @@ function walkJsFiles(dir) {
 
 const distJsFiles = existsSync('dist') ? walkJsFiles('dist') : [];
 
+// Ficheros de dist/ tal y como los tiene el ÍNDICE de git (no el disco): un
+// rename a otra caja puede dejar el disco al día y el índice con el nombre
+// viejo (macOS, core.ignorecase=true) — B17/v37.5.2. `git ls-files -z` evita
+// el problema de nombres con espacios/newlines de un `\n`-split normal.
+const gitLsFiles = existsSync('dist')
+  ? spawnSync('git', ['ls-files', '-z', '--', 'dist'], { encoding: 'utf-8' })
+  : null;
+const indexDistFiles = gitLsFiles?.stdout ? gitLsFiles.stdout.split('\0').filter(Boolean) : [];
+const indexBasenamesByDir = new Map();
+for (const indexPath of indexDistFiles) {
+  const dir = dirname(indexPath);
+  const name = indexPath.slice(dir.length + 1);
+  if (!indexBasenamesByDir.has(dir)) indexBasenamesByDir.set(dir, []);
+  indexBasenamesByDir.get(dir).push(name);
+}
+
 for (const file of distJsFiles) {
   const content = readFileSync(file, 'utf-8');
   for (const match of content.matchAll(relativeImportPattern)) {
@@ -78,6 +95,16 @@ for (const file of distJsFiles) {
     const actualNames = readdirSync(importedDir);
     if (!actualNames.includes(importedName)) {
       caseMismatches.push({ file, importPath, reason: `en disco: ${actualNames.join(', ') || '(vacío)'}` });
+      continue;
+    }
+
+    const indexNames = indexBasenamesByDir.get(importedDir) ?? [];
+    if (indexNames.length > 0 && !indexNames.includes(importedName)) {
+      caseMismatches.push({
+        file,
+        importPath,
+        reason: `en disco sí, pero el ÍNDICE de git tiene otra caja: ${indexNames.join(', ')}`,
+      });
     }
   }
 }
@@ -122,6 +149,36 @@ if (caseCollisions.length > 0) {
 }
 
 console.log('✔ sin colisiones de mayúsculas en dist/');
+
+// --- Índice de git vs disco: mismo fichero de dist/, distinta caja ---
+// El check anterior (imports) solo detecta el problema si algún import lo
+// referencia; este cubre TODO dist/, incluyendo ficheros que nadie importa
+// por nombre relativo (entries top-level, ficheros de tipos…). Es el
+// guardián que habría cazado la 37.5.2 directamente: el disco (recién
+// regenerado por build:all) tenía los 18 ficheros en minúscula, pero el
+// índice de git seguía con la caja vieja — `git status --porcelain` no lo
+// marca como sucio porque en un filesystem insensible a mayúsculas ambos
+// nombres «son» el mismo fichero.
+console.log('\n▶ comprobando que el índice de git y el disco de dist/ tienen la misma caja');
+
+const distDiskFiles = existsSync('dist') ? walkAllFiles('dist') : [];
+const indexDiskCaseMismatches = findIndexDiskCaseMismatches(indexDistFiles, distDiskFiles);
+
+if (indexDiskCaseMismatches.length > 0) {
+  console.error('\n✗ release:check — el índice de git y el disco de dist/ no coinciden en caja:');
+  for (const { expected, foundAs } of indexDiskCaseMismatches) {
+    console.error(`  - ${expected}  (la otra caja: ${foundAs.join(', ')})`);
+  }
+  console.error(
+    '\nEsto es el bug de la 37.5.2: en macOS (core.ignorecase=true) un rename a otra caja deja el disco ' +
+      'al día pero el índice de git con el nombre viejo, y `git status` no lo ve sucio. Arreglo:\n' +
+      '  git rm -r --cached dist && git -c core.ignorecase=false add -A dist\n' +
+      'Y considera `git config core.ignorecase false` en este repo (ver CLAUDE.md § «Flujo al publicar cambios»).',
+  );
+  process.exit(1);
+}
+
+console.log('✔ índice de git y disco de dist/ coinciden en caja');
 
 // --- Referencias de tokens sin resolver en dist/*.css ---
 // Style Dictionary 4.4.0 tiene un bug de resolución (getReferences.js hace
