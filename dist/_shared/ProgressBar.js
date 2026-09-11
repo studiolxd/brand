@@ -1,4 +1,4 @@
-import '../ProgressBar.css';
+import '../progressbar.css';
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
 //#endregion
 //#region src/stories/atoms/ProgressBar/ProgressBar.tsx

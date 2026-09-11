@@ -3,7 +3,7 @@ import './user-menu.css';
 import { Icon as e } from "./icon.js";
 import { Avatar as t } from "./avatar.js";
 import { NumberBadge as n } from "./number-badge.js";
-import { n as r } from "./_shared/dropdownItems.js";
+import { n as r } from "./_shared/dropdownitems.js";
 import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
 import { Menu as s } from "@base-ui/react/menu";
 //#region src/stories/molecules/UserMenu/UserMenu.tsx

@@ -2,7 +2,7 @@
 import './sheet.css';
 import { VisuallyHidden as e } from "./visually-hidden.js";
 import { CloseButton as t } from "./close-button.js";
-import { n, r, t as i } from "./_shared/dialogSurface.js";
+import { n, r, t as i } from "./_shared/dialogsurface.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 import { Dialog as s } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Sheet/Sheet.tsx

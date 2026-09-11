@@ -1,2 +1,2 @@
-import { t as e } from "./_shared/ProgressBar.js";
+import { t as e } from "./_shared/progressbar.js";
 export { e as ProgressBar };

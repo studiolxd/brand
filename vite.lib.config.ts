@@ -39,8 +39,15 @@ export default defineConfig({
       ],
       output: {
         entryFileNames: '[name].js',
-        chunkFileNames: '_shared/[name].js',
-        assetFileNames: '[name][extname]',
+        // `[name]` en un chunk compartido sale del nombre del módulo fuente
+        // (p. ej. `Logo.tsx` → `Logo`), no de la clave de `entryPoints`: en
+        // minúscula para que coincida siempre con el asset CSS asociado
+        // (`assetFileNames` abajo, que si el chunk solo tiene CSS también
+        // hereda `[name]`) — de lo contrario un `import '../Logo.css'`
+        // puede apuntar a un fichero que en disco se llama `logo.css`, cosa
+        // que solo revienta en un filesystem sensible a mayúsculas (Linux).
+        chunkFileNames: (chunkInfo) => `_shared/${chunkInfo.name.toLowerCase()}.js`,
+        assetFileNames: (assetInfo) => (assetInfo.names[0] ?? 'asset').toLowerCase(),
       },
     },
     cssCodeSplit: true,

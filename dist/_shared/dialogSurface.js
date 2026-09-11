@@ -1,4 +1,4 @@
-import '../dialogSurface.css';
+import '../dialogsurface.css';
 import { jsx as e } from "react/jsx-runtime";
 import { Dialog as t } from "@base-ui/react/dialog";
 //#region src/stories/molecules/_shared/dialogSurface.tsx

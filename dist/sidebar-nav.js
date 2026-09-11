@@ -3,7 +3,7 @@ import './sidebar-nav.css';
 import { Icon as e } from "./icon.js";
 import { Tooltip as t } from "./tooltip.js";
 import { Menu as n } from "./menu.js";
-import { n as r } from "./_shared/SidebarContext.js";
+import { n as r } from "./_shared/sidebarcontext.js";
 import { Fragment as i, jsx as a, jsxs as o } from "react/jsx-runtime";
 import { Accordion as s } from "@base-ui/react/accordion";
 //#region src/stories/molecules/SidebarNav/SidebarNav.tsx

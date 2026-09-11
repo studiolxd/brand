@@ -3,7 +3,7 @@ import './app-shell.css';
 import { SkipLink as e } from "./skip-link.js";
 import { TooltipProvider as t } from "./tooltip.js";
 import { t as n } from "./_shared/css-properties.js";
-import { n as r, t as i } from "./_shared/AppShellContext.js";
+import { n as r, t as i } from "./_shared/appshellcontext.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 import { useCallback as s, useEffect as c, useMemo as l, useState as u } from "react";
 //#region src/stories/sections/AppShell/AppShell.tsx

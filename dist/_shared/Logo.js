@@ -1,4 +1,4 @@
-import '../Logo.css';
+import '../logo.css';
 import { jsx as e } from "react/jsx-runtime";
 //#region src/stories/atoms/Logo/logoAssets.ts
 var t = "0 0 925.5 265.5", n = [

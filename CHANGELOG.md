@@ -7,6 +7,30 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.5.2] — 2026-09-11
+
+> **Patch.** `next build` en Linux/producción vuelve a resolver el CSS del logotipo (B16).
+
+- **`Logo`: el CSS del chunk compartido resuelve en cualquier filesystem, no solo en macOS.**
+  Desde v37.5.0, cuando el entry de `Logo` pasó a `Logo/index.ts` para reexportar
+  `logoSvg`/`logoPaths` (8fe5a9bf), `Logo.tsx` quedó compartido entre tres entries
+  (`logo`, `site-header`, `site-footer`) y Vite lo separó en un chunk propio —
+  `_shared/Logo.js`, nombrado por el fichero fuente (`Logo.tsx`, con mayúscula) — que
+  importaba `../Logo.css`. El CSS en sí se publicaba como `dist/logo.css`, en minúscula,
+  porque ese nombre sale de la clave de `entryPoints` (`logo`), no del fichero fuente: dos
+  reglas de nombrado distintas para el mismo par JS/CSS. En APFS (macOS), insensible a
+  mayúsculas, el import resolvía igual; en Linux (`next build` en producción) o bajo
+  Turbopack, sensibles a mayúsculas, fallaba con «Can't resolve '../Logo.css'» en
+  cualquier app que montara `SiteHeader`/`PublicHeader`. `vite.lib.config.ts` fija
+  `chunkFileNames`/`assetFileNames` para que ambos deriven siempre en minúscula del mismo
+  nombre — ya no pueden divergir en caja. Sin cambios de API, props ni tokens.
+- **Guardián nuevo en `pnpm release:check`**: tras `build:all`, recorre `dist/**/*.js`,
+  extrae cada import relativo y comprueba con `readdirSync` (comparación exacta, sensible a
+  mayúsculas — no `existsSync`, que en un filesystem insensible da un falso OK) que el
+  fichero importado existe con ese nombre exacto; y comprueba además que `dist/` no tiene
+  dos ficheros que solo difieran en mayúsculas (colisionarían al empaquetar en un
+  filesystem insensible). Falla el release antes de taggear si vuelve a pasar.
+
 ## [37.5.1] — 2026-09-11
 
 > **Patch.** El conector de `Steps` vuelve a llegar de una marca a la siguiente.

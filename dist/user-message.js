@@ -1,6 +1,6 @@
 import './user-message.css';
 import { MessageBubble as e } from "./message-bubble.js";
-import { t } from "./_shared/messageTimestamp.js";
+import { t } from "./_shared/messagetimestamp.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { forwardRef as i } from "react";
 //#region src/stories/molecules/UserMessage/UserMessage.tsx

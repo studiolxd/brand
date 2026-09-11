@@ -1,4 +1,4 @@
-import '../DatePicker.css';
+import '../datepicker.css';
 import { Icon as e } from "../icon.js";
 import { Input as t } from "../input.js";
 import { Popover as n } from "../popover.js";

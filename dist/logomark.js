@@ -1,5 +1,5 @@
 import './logomark.css';
-import { a as e, i as t, n, r, t as i } from "./_shared/logomarkAssets.js";
+import { a as e, i as t, n, r, t as i } from "./_shared/logomarkassets.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/atoms/Logomark/Logomark.tsx
 function s({ size: t = "md", title: n, className: r }) {

@@ -1,6 +1,6 @@
 'use client';
 import './toggle-group.css';
-import { t as e } from "./_shared/ToggleGroupContext.js";
+import { t as e } from "./_shared/togglegroupcontext.js";
 import { jsx as t } from "react/jsx-runtime";
 import { forwardRef as n, useMemo as r } from "react";
 import { ToggleGroup as i } from "@base-ui/react/toggle-group";

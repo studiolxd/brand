@@ -1,7 +1,7 @@
 'use client';
 import './app-header.css';
 import { MenuButton as e } from "./menu-button.js";
-import { t } from "./_shared/AppShellContext.js";
+import { t } from "./_shared/appshellcontext.js";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 import { useContext as i, useState as a } from "react";
 //#region src/stories/sections/AppHeader/AppHeader.tsx

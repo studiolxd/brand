@@ -1,4 +1,4 @@
-import '../ImageCropDialog.css';
+import '../imagecropdialog.css';
 import { Spinner as e } from "../spinner.js";
 import { Button as t } from "../button.js";
 import { Alert as n } from "../alert.js";

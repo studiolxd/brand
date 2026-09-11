@@ -1,7 +1,7 @@
 'use client';
 import './menu.css';
 import { t as e } from "./_shared/css-properties.js";
-import { n as t, t as n } from "./_shared/dropdownItems.js";
+import { n as t, t as n } from "./_shared/dropdownitems.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 import { Menu as a } from "@base-ui/react/menu";
 //#region src/stories/molecules/Menu/Menu.tsx

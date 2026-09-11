@@ -9,7 +9,7 @@
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 
 const withStories = process.argv.includes('--with-stories');
 
@@ -31,6 +31,97 @@ if (withStories) {
   console.log('\n○ test:stories omitido (usa --with-stories para incluirlo; depende de Chromium/Playwright)');
 }
 run('build:all', 'pnpm', ['build:all']);
+
+// --- Imports relativos de dist/**/*.js apuntan a un fichero que existe con
+// EXACTAMENTE ese nombre (sensible a mayúsculas) ---
+// APFS (macOS) resuelve un import mal capitalizado por insensibilidad a
+// mayúsculas; Linux/Turbopack no, y `next build` en producción revienta con
+// «Can't resolve '…'». Pasó en v37.5.0-37.5.1: un chunk compartido de Vite
+// (nombrado por el fichero fuente, p. ej. `Logo.tsx` → `Logo.js`) importaba
+// el CSS de un entry nombrado por su clave de `entryPoints` (`logo.css`) —
+// mismo contenido, distinta caja. `readdirSync` + comparación exacta de
+// string, no `existsSync` (que en un filesystem insensible da un falso OK).
+console.log('\n▶ comprobando que los imports relativos de dist/**/*.js resuelven con la caja exacta');
+
+const relativeImportPattern = /(?:from\s+|import\s+)['"](\.\.?\/[^'"]+)['"]/g;
+const caseMismatches = [];
+
+function walkAllFiles(dir) {
+  const files = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) files.push(...walkAllFiles(path));
+    else files.push(path);
+  }
+  return files;
+}
+
+function walkJsFiles(dir) {
+  return walkAllFiles(dir).filter((f) => f.endsWith('.js'));
+}
+
+const distJsFiles = existsSync('dist') ? walkJsFiles('dist') : [];
+
+for (const file of distJsFiles) {
+  const content = readFileSync(file, 'utf-8');
+  for (const match of content.matchAll(relativeImportPattern)) {
+    const importPath = match[1];
+    const importedFile = join(dirname(file), importPath);
+    const importedDir = dirname(importedFile);
+    const importedName = importedFile.slice(importedDir.length + 1);
+
+    if (!existsSync(importedDir)) {
+      caseMismatches.push({ file, importPath, reason: 'directorio inexistente' });
+      continue;
+    }
+
+    const actualNames = readdirSync(importedDir);
+    if (!actualNames.includes(importedName)) {
+      caseMismatches.push({ file, importPath, reason: `en disco: ${actualNames.join(', ') || '(vacío)'}` });
+    }
+  }
+}
+
+if (caseMismatches.length > 0) {
+  console.error('\n✗ release:check — dist/**/*.js tiene imports que no resuelven con la caja exacta:');
+  for (const { file, importPath, reason } of caseMismatches) {
+    console.error(`  - ${relative('.', file)}: import '${importPath}' (${reason})`);
+  }
+  console.error(
+    '\nProbable causa: `chunkFileNames`/`assetFileNames` de vite.lib.config.ts generando nombres con ' +
+      'distinta caja para un mismo chunk/asset compartido entre varios entries. Revisa el pattern en ' +
+      'ese fichero antes de tocar dist/ a mano.',
+  );
+  process.exit(1);
+}
+
+console.log('✔ todos los imports relativos de dist/**/*.js resuelven con la caja exacta');
+
+// --- Ficheros de dist/ que solo difieren en mayúsculas (colisionarían al
+// empaquetar en un filesystem insensible, como macOS/APFS) ---
+console.log('\n▶ comprobando que no hay ficheros de dist/ que solo difieran en mayúsculas');
+
+const lowerCaseSeen = new Map();
+const caseCollisions = [];
+
+for (const file of existsSync('dist') ? walkAllFiles('dist') : []) {
+  const lower = file.toLowerCase();
+  if (lowerCaseSeen.has(lower) && lowerCaseSeen.get(lower) !== file) {
+    caseCollisions.push([lowerCaseSeen.get(lower), file]);
+  } else {
+    lowerCaseSeen.set(lower, file);
+  }
+}
+
+if (caseCollisions.length > 0) {
+  console.error('\n✗ release:check — dist/ tiene ficheros que solo difieren en mayúsculas:');
+  for (const [a, b] of caseCollisions) {
+    console.error(`  - ${a} / ${b}`);
+  }
+  process.exit(1);
+}
+
+console.log('✔ sin colisiones de mayúsculas en dist/');
 
 // --- Referencias de tokens sin resolver en dist/*.css ---
 // Style Dictionary 4.4.0 tiene un bug de resolución (getReferences.js hace

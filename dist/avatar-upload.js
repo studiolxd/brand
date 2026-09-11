@@ -8,7 +8,7 @@ import { Avatar as i } from "./avatar.js";
 import { ErrorText as ee } from "./error-text.js";
 import { n as te, t as a } from "./_shared/validate.js";
 import { t as o } from "./_shared/env.js";
-import { t as ne } from "./_shared/ImageCropDialog.js";
+import { t as ne } from "./_shared/imagecropdialog.js";
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 import { useCallback as l, useEffect as u, useId as re, useRef as d, useState as f } from "react";
 //#region src/stories/molecules/AvatarUpload/AvatarUpload.tsx

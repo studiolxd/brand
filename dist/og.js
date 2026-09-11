@@ -1,5 +1,5 @@
 import { n as e, t } from "./_shared/tokens.js";
-import { a as n, t as r } from "./_shared/logomarkAssets.js";
+import { a as n, t as r } from "./_shared/logomarkassets.js";
 import { createElement as i } from "react";
 //#region src/stories/og/ogTypeface.ts
 var a = t("--font-family-sans").split(",")[0].trim().replace(/^["']|["']$/g, ""), o = {

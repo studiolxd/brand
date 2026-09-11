@@ -2,7 +2,7 @@
 import './modal.css';
 import { VisuallyHidden as e } from "./visually-hidden.js";
 import { CloseButton as t } from "./close-button.js";
-import { n, r, t as i } from "./_shared/dialogSurface.js";
+import { n, r, t as i } from "./_shared/dialogsurface.js";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 import { Dialog as c } from "@base-ui/react/dialog";
 //#region src/stories/molecules/Modal/Modal.tsx

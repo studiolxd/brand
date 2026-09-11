@@ -2,8 +2,8 @@
 import './org-switcher.css';
 import { Icon as e } from "./icon.js";
 import { Avatar as t } from "./avatar.js";
-import { n, t as r } from "./_shared/dropdownItems.js";
-import { n as i } from "./_shared/SidebarContext.js";
+import { n, t as r } from "./_shared/dropdownitems.js";
+import { n as i } from "./_shared/sidebarcontext.js";
 import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
 import { Menu as c } from "@base-ui/react/menu";
 //#region src/stories/molecules/OrgSwitcher/OrgSwitcher.tsx

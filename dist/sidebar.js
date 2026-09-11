@@ -1,7 +1,7 @@
 'use client';
 import './sidebar.css';
-import { n as e, t } from "./_shared/SidebarContext.js";
-import { t as n } from "./_shared/AppShellContext.js";
+import { n as e, t } from "./_shared/sidebarcontext.js";
+import { t as n } from "./_shared/appshellcontext.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 import { useCallback as a, useContext as o, useEffect as s, useRef as c, useState as l } from "react";
 //#region src/stories/sections/Sidebar/Sidebar.tsx

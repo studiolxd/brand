@@ -1,7 +1,7 @@
 import './assistant-message.css';
 import { MessageBubble as e } from "./message-bubble.js";
 import { TypingIndicator as t } from "./typing-indicator.js";
-import { t as n } from "./_shared/messageTimestamp.js";
+import { t as n } from "./_shared/messagetimestamp.js";
 import { jsx as r, jsxs as i } from "react/jsx-runtime";
 import { forwardRef as a } from "react";
 //#region src/stories/molecules/AssistantMessage/AssistantMessage.tsx

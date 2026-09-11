@@ -3,7 +3,7 @@ import './file-upload.css';
 import { Icon as e } from "./icon.js";
 import { VisuallyHidden as t } from "./visually-hidden.js";
 import { n } from "./_shared/form-size.js";
-import { t as r } from "./_shared/ProgressBar.js";
+import { t as r } from "./_shared/progressbar.js";
 import { n as i, t as a } from "./_shared/validate.js";
 import { jsx as o, jsxs as s } from "react/jsx-runtime";
 import { forwardRef as c, useCallback as l, useEffect as u, useId as ee, useRef as d, useState as f } from "react";
