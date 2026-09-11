@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within, screen } from 'storybook/test';
+import { expect, userEvent, within, screen, waitFor } from 'storybook/test';
 import { AppLauncher } from './AppLauncher';
 import type { LauncherApp } from './AppLauncher';
 
@@ -138,7 +138,7 @@ export const TestContrato: Story = {
     await expect(current).toHaveAttribute('aria-current', 'page');
 
     await userEvent.keyboard('{Escape}');
-    await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
   },
 };
 
@@ -182,6 +182,6 @@ export const TestContratoPopover: Story = {
     await expect(current).toHaveAttribute('aria-current', 'page');
 
     await userEvent.keyboard('{Escape}');
-    await expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByRole('list')).not.toBeInTheDocument());
   },
 };
