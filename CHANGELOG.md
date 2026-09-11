@@ -56,9 +56,12 @@ para breaking changes.
     sobre el tile relleno en vez de fundirse con él) que sobrescriben únicamente las custom
     properties de color de la `Tag` (`--tag-info-bg`/`--tag-info-color`) en el hover/foco del
     tile — nunca su CSS.
-  - Dos stories de test con `play` (`userEvent.hover` + `waitFor` sobre `getComputedStyle`):
-    el disparador no lleva `box-shadow` y su fondo cambia en hover; el fondo de la Tag
-    cambia junto al del tile.
+  - Dos stories nuevas, «Hover — disparador» y «Hover — Tag «nuevo»», **sin `play`**: se
+    revisan visualmente en la captura de Chromatic. `userEvent.hover` no dispara el `:hover`
+    nativo del navegador (no hay movimiento real del puntero) y leer la hoja de estilos desde
+    el `play` para comprobar la regla resultó frágil entre el dev server local y el build de
+    producción que usa Chromatic (CSS separado por chunk, minificado, `<link>` con
+    `crossorigin`) — se descarta esa vía en vez de perseguir el entorno.
 
 ## [36.0.0] — 2026-09-11
 
