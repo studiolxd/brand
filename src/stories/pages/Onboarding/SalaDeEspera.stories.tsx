@@ -5,7 +5,6 @@ import { Button } from '../../atoms/Button/Button';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Columns } from '../../atoms/Columns/Columns';
-import './SalaDeEspera.css';
 
 const CORREO = 'nuria.serra@santcugat.cat';
 
@@ -16,16 +15,14 @@ interface Args {
 function SalaDeEspera({ theme }: Args) {
   return (
     <OnboardingPage steps={null} theme={theme} width="wide">
-      <Columns columns={2} ratio="2:1" align="start">
+      <Columns columns={2} ratio="1:1" align="start">
         <PageIntro
           title="El acceso está restringido a invitaciones"
           description="Tu cuenta está lista, pero para entrar en una organización necesitas que alguien de su equipo te invite."
         >
           <Paragraph>Recibirás un correo en {CORREO} desde el que podrás aceptar la invitación.</Paragraph>
         </PageIntro>
-        <div className="sala-de-espera__exit">
-          <Button>Cerrar sesión</Button>
-        </div>
+        <Button block>Cerrar sesión</Button>
       </Columns>
     </OnboardingPage>
   );

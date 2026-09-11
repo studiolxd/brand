@@ -7,6 +7,12 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.1.2] — 2026-09-11
+
+> **Patch.** Solo la página de referencia «Sala de espera».
+
+- **Sala de espera a mitades**: `Columns` pasa de `2:1` a `1:1`, como las páginas de acceso, y el botón «Cerrar sesión» usa `block` del DS en todas las tallas. Desaparece `SalaDeEspera.css`: no hacía falta CSS propio.
+
 ## [37.1.1] — 2026-09-11
 
 > **Patch.** Rediseño de la página de referencia `Pages/Onboarding · Sala de espera`: de
