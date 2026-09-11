@@ -33,10 +33,10 @@
     "focus-ring-color":    { "$value": "{color.primary}",           "$type": "color",     "$description": "Color del anillo de foco" },
     "surface-dark-border-color":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde sin pulsar — surface-dark" },
     "surface-dark-color":                { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Texto sin pulsar — surface-dark" },
-    "surface-dark-hover-border-color":   { "$value": "{color.accent-1}",     "$type": "color", "$description": "Borde al pasar el ratón — surface-dark" },
+    "surface-dark-hover-border-color":   { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Borde al pasar el ratón — surface-dark. El toggle es un control de contorno, como `Button variant=\"outline\"`: en oscuro el hover marca con la tinta (`color.text.on-dark`, igual que ese botón), no con el acento — el lavanda queda reservado al pulsado" },
     "surface-dark-pressed-bg":           { "$value": "{color.accent-1}",     "$type": "color", "$description": "Fondo pulsado — surface-dark. El prusia coincide con el fondo de la superficie; el par es el de `Button primary`" },
     "surface-dark-pressed-color":        { "$value": "{color.primary}",      "$type": "color", "$description": "Texto pulsado — surface-dark" },
-    "surface-dark-pressed-border-color": { "$value": "{color.accent-1}",     "$type": "color", "$description": "Borde pulsado — surface-dark" },
+    "surface-dark-pressed-border-color": { "$value": "{color.accent-1}",     "$type": "color", "$description": "Borde pulsado — surface-dark. Coincide a propósito con `surface-dark-pressed-bg`: el borde pulsado es el del relleno, la misma regla que sigue el modo claro (`pressed-border-color = primary = pressed-bg`)" },
     "surface-dark-focus-ring-color":     { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Anillo de foco — surface-dark" }
   }
 }

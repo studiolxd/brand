@@ -7,6 +7,19 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.0.1] — 2026-09-12
+
+> **Patch.** `Toggle`/`ToggleGroup` en superficie oscura ya no marcan el hover con borde `accent-1`.
+
+- **El hover en oscuro marca con tinta, no con acento.** `surface-dark-hover-border-color`
+  pasa de `{color.accent-1}` a `{color.text.on-dark}` — el toggle es un control de contorno,
+  como `Button variant="outline"`, y ese botón ya usa la tinta (blanco) para el borde de
+  hover en oscuro. El lavanda queda reservado al pulsado, que es el único estado con relleno.
+- **`surface-dark-pressed-border-color` documentado, sin cambio de valor.** Ya coincidía con
+  `surface-dark-pressed-bg` (ambos `{color.accent-1}`), que es la misma regla del modo claro
+  (`pressed-border-color = primary = pressed-bg`): el borde pulsado es el del relleno. Solo
+  se aclara el porqué en la `$description`.
+
 ## [38.0.0] — 2026-09-11
 
 > **Major (breaking).** La tarjeta social (`@studiolxd/brand/og`) se rediseña y `ogCard` pierde la prop obligatoria `appName`.
