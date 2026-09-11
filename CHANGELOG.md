@@ -7,6 +7,32 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [34.1.1] — 2026-09-11
+
+> **Patch.** Solo stories y configuración de Storybook: ni un cambio en
+> componentes, CSS ni tokens. `dist/` no se mueve (solo el `.d.ts` nuevo del
+> helper de fecha).
+
+- **El catálogo vive siempre en la misma fecha: «hoy» ya no cambia de
+  captura cada noche en Chromatic.** `Calendar` marca el día actual con
+  `new Date()` en el propio componente, y `Calendar.stories.tsx`,
+  `CalendarRoster.stories.tsx`, `CalendarPlanner.stories.tsx` y
+  `ChatShell.stories.tsx` calculaban mes/eventos/marca de tiempo sobre
+  `new Date()`. La línea base capturada un día quedaba desalineada al
+  siguiente: pasó el 11 de septiembre con la línea base del día 10 (el
+  marcador de «hoy» se había movido una casilla) y volvería a pasar cada
+  noche.
+  - `.storybook/preview.tsx` fija `Date` con `mockdate` a `STORY_TODAY`
+    (domingo 15 de marzo de 2026 — mes de 31 días que empieza en domingo, para
+    que la rejilla salga completa), una constante exportada desde
+    `src/stories/utils/storyDate.ts`. El mock se fija al cargar el módulo,
+    antes de montar ninguna story, y cubre el navegador de Storybook en local,
+    `pnpm test:stories` (Chromium vía `@storybook/addon-vitest`) y la captura
+    de Chromatic — los tres son el mismo entorno de navegador real.
+  - Las cuatro stories dejan además de calcular sobre `new Date()` y derivan
+    de `STORY_TODAY` explícitamente, para que se lean sin depender
+    implícitamente del mock global.
+
 ## [34.0.2] — 2026-09-11
 
 > **Patch.** Solo stories, tests y documentación: ni un cambio en componentes,
