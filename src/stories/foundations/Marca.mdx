@@ -36,7 +36,12 @@ El isotipo: la parte gráfica del logotipo, sin la firma. Cuadrado, para donde e
 
 Decisión de marca (2026-09-11): **un solo favicon para todas las aplicaciones de la suite, sin variantes por producto.** Ninguna app pinta su propio icono — todas sirven el mismo juego, generado una vez aquí y consumido tal cual.
 
-El dibujo es `logomark-safe.svg` en **blanco** sobre el **violeta de marca**. La paleta (`tokens/color/palette.json`) no tiene un primitivo llamado "violeta": el más próximo por familia es `color.lavender` (`#BAABFF`, el mismo que usa `color.accent-1`). No se ha creado un primitivo nuevo para esto — la regla del sistema es no inventar color (CLAUDE.md § «No se inventan colores»): si hiciera falta un violeta más saturado, sería una decisión de paleta explícita y aparte, no un efecto lateral de este encargo.
+El dibujo es `logomark-safe.svg` sobre **dos tokens**, con el mismo criterio que ya usa el aviso del DS (CLAUDE.md § «Tokens de feedback», regla 8: relleno claro + tinta prusia, nunca tinta suelta): un **relleno** violeta y una **tinta** prusia encima, nunca el isotipo suelto sobre el fondo del sistema operativo.
+
+- **Relleno** — `color.lavender` (`#BAABFF`, el mismo que usa `color.accent-1`). La paleta (`tokens/color/palette.json`) no tiene un primitivo llamado "violeta": este es el más próximo por familia.
+- **Tinta** — `color.primary` (`#111E30`, el prusia). El mismo rol que pinta el texto sobre un `*-fill` de feedback: nunca blanco suelto, nunca un gris inventado.
+
+Ninguno de los dos es un hex nuevo — la regla del sistema es no inventar color (CLAUDE.md § «No se inventan colores»): si hiciera falta un violeta más saturado, sería una decisión de paleta explícita y aparte, no un efecto lateral de este encargo.
 
 <div style={{
   display: 'flex',
@@ -44,10 +49,10 @@ El dibujo es `logomark-safe.svg` en **blanco** sobre el **violeta de marca**. La
   gap: 'var(--spacing-4)',
   padding: 'var(--spacing-4)',
 }}>
-  <img src="/brand/icons/icon.svg" width={96} height={96} alt="Icono de aplicación: el isotipo en blanco sobre el violeta de marca" />
+  <img src="/brand/icons/icon.svg" width={96} height={96} alt="Icono de aplicación: el isotipo en tinta prusia sobre el relleno lavanda" />
   <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-1)' }}>
-    <strong>#BAABFF</strong>
-    <span>{'{color.lavender}'} — {'{button.primary.bg}'}, {'{color.accent-1}'}</span>
+    <span><strong>#BAABFF</strong> — relleno — {'{color.lavender}'}, {'{color.accent-1}'}</span>
+    <span><strong>#111E30</strong> — tinta — {'{color.primary}'}, {'{color.prussian}'}</span>
   </div>
 </div>
 
@@ -67,7 +72,7 @@ El dibujo es `logomark-safe.svg` en **blanco** sobre el **violeta de marca**. La
 
 `icon-512-maskable.png` lleva un margen del **20 % por lado** (no el 10 % de `logomark-safe.svg`): el spec ["maskable" del Web App Manifest](https://www.w3.org/TR/appmanifest/#icon-masks) exige que el contenido visible quepa en el 80 % central del icono, porque cada plataforma lo recorta a su propia forma (círculo, squircle, redondeado…) y solo esa zona segura sobrevive en todas.
 
-Todos —el `icon.svg` incluido— llevan el fondo violeta pintado en el propio fichero: ninguno depende de que el sistema operativo lo rellene, así que se ven igual en cualquier lanzador, pestaña o pantalla de inicio.
+Todos —el `icon.svg` incluido— llevan el relleno y la tinta pintados en el propio fichero: ninguno depende de que el sistema operativo lo rellene, así que se ven igual en cualquier lanzador, pestaña o pantalla de inicio.
 
 El favicon del propio Storybook (`public/favicon.svg`) es el mismo `icon.svg` generado — el script lo copia ahí en cada build, no hay un segundo dibujo que mantener sincronizado.
 
@@ -76,15 +81,16 @@ El favicon del propio Storybook (`public/favicon.svg`) es el mismo `icon.svg` ge
 ```ts
 import {
   BRAND_ICON_ASSETS,
-  BRAND_ICON_COLOR,
+  BRAND_ICON_BG_COLOR,
+  BRAND_ICON_INK_COLOR,
   BRAND_SOURCE_ASSETS,
 } from '@studiolxd/brand/brand-assets';
 ```
 
-`BRAND_ICON_ASSETS` da la ruta (`assets/icons/...`, bajo `@studiolxd/brand/assets/...`), la talla y el propósito de cada fichero generado; `BRAND_SOURCE_ASSETS` lo mismo para el logotipo y el isotipo sueltos. Un script de instalación puede recorrer la lista y copiar cada fichero a `public/` sin tener que conocer los nombres de memoria. `BRAND_ICON_COLOR` es el mismo `#BAABFF` en texto, para quien necesite pintar el `theme-color` de una `<meta>` a mano.
+`BRAND_ICON_ASSETS` da la ruta (`assets/icons/...`, bajo `@studiolxd/brand/assets/...`), la talla y el propósito de cada fichero generado; `BRAND_SOURCE_ASSETS` lo mismo para el logotipo y el isotipo sueltos. Un script de instalación puede recorrer la lista y copiar cada fichero a `public/` sin tener que conocer los nombres de memoria. `BRAND_ICON_BG_COLOR` (`#BAABFF`) y `BRAND_ICON_INK_COLOR` (`#111E30`) son el relleno y la tinta en texto, para quien necesite pintar el `theme-color` de una `<meta>` a mano.
 
 Cada app sigue poniendo su propio `name`/`short_name` en su manifest — el `manifest.webmanifest` publicado aquí es la plantilla mínima (`"SLXD"`, los tres iconos, `theme_color`/`background_color`), no el manifest final de nadie.
 
 ## Tokens
 
-El violeta de fondo (`BRAND_ICON_COLOR`) no tiene tokens de componente propios — sale directo del primitivo `color.lavender` en el script de build, porque el correo, el favicon y los iconos de aplicación son los tres rincones del sistema que no consumen CSS y necesitan el valor como dato (ver [Tokens desde JavaScript](?path=/docs/foundations-tokens-desde-javascript--docs)). Los tokens de `Logo` y `Logomark` —tallas, color del trazado, par oscuro— están en sus propias fichas.
+El relleno (`BRAND_ICON_BG_COLOR`) y la tinta (`BRAND_ICON_INK_COLOR`) no tienen tokens de componente propios — salen directo de los primitivos `color.lavender` y `color.primary` en el script de build, porque el correo, el favicon y los iconos de aplicación son los tres rincones del sistema que no consumen CSS y necesitan el valor como dato (ver [Tokens desde JavaScript](?path=/docs/foundations-tokens-desde-javascript--docs)). Los tokens de `Logo` y `Logomark` —tallas, color del trazado, par oscuro— están en sus propias fichas.

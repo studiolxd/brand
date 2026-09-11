@@ -4,7 +4,8 @@ import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
 import {
   BRAND_ICON_ASSETS,
-  BRAND_ICON_COLOR,
+  BRAND_ICON_BG_COLOR,
+  BRAND_ICON_INK_COLOR,
   BRAND_SOURCE_ASSETS,
 } from './brand-assets';
 
@@ -16,6 +17,7 @@ let buildIcons: BuildIcons['buildIcons'];
 let composeIconSvg: BuildIcons['composeIconSvg'];
 let packIco: BuildIcons['packIco'];
 let BRAND_ICON_BG: BuildIcons['BRAND_ICON_BG'];
+let BRAND_ICON_INK: BuildIcons['BRAND_ICON_INK'];
 
 beforeAll(async () => {
   const mod = await import('../../scripts/build-icons.mjs');
@@ -23,6 +25,7 @@ beforeAll(async () => {
   composeIconSvg = mod.composeIconSvg;
   packIco = mod.packIco;
   BRAND_ICON_BG = mod.BRAND_ICON_BG;
+  BRAND_ICON_INK = mod.BRAND_ICON_INK;
 });
 
 const pngDimensions = (buf: Buffer) => ({
@@ -31,16 +34,18 @@ const pngDimensions = (buf: Buffer) => ({
 });
 
 describe('build-icons.mjs', () => {
-  it('el violeta de fondo es el primitivo de paleta color.lavender, sin hex inventado', () => {
-    expect(BRAND_ICON_BG.toLowerCase()).toBe(BRAND_ICON_COLOR.toLowerCase());
+  it('el relleno es el primitivo de paleta color.lavender y la tinta color.primary, sin hex inventado', () => {
+    expect(BRAND_ICON_BG.toLowerCase()).toBe(BRAND_ICON_BG_COLOR.toLowerCase());
     expect(BRAND_ICON_BG.toLowerCase()).toBe('#baabff');
+    expect(BRAND_ICON_INK.toLowerCase()).toBe(BRAND_ICON_INK_COLOR.toLowerCase());
+    expect(BRAND_ICON_INK.toLowerCase()).toBe('#111e30');
   });
 
-  it('composeIconSvg pinta un fondo cuadrado del color de marca con el isotipo en blanco', () => {
+  it('composeIconSvg pinta un fondo cuadrado del relleno de marca con el isotipo en la tinta prusia', () => {
     const svg = composeIconSvg('src/assets/logomark-safe.svg', { side: 100, marginRatio: 0 });
     expect(svg).toContain('viewBox="0 0 100 100"');
     expect(svg).toContain(`fill="${BRAND_ICON_BG}"`);
-    expect(svg).toContain('fill="#FFFFFF"');
+    expect(svg).toContain(`fill="${BRAND_ICON_INK}"`);
   });
 
   it('rechaza una fuente sin viewBox cuadrado', () => {
@@ -90,8 +95,8 @@ describe('build-icons.mjs', () => {
       const manifest = JSON.parse(readFileSync(join(outDir, 'manifest.webmanifest'), 'utf-8'));
       expect(manifest.icons).toHaveLength(3);
       expect(manifest.icons.find((i: { purpose?: string }) => i.purpose === 'maskable')).toBeTruthy();
-      expect(manifest.theme_color.toLowerCase()).toBe(BRAND_ICON_COLOR.toLowerCase());
-      expect(manifest.background_color.toLowerCase()).toBe(BRAND_ICON_COLOR.toLowerCase());
+      expect(manifest.theme_color.toLowerCase()).toBe(BRAND_ICON_BG_COLOR.toLowerCase());
+      expect(manifest.background_color.toLowerCase()).toBe(BRAND_ICON_BG_COLOR.toLowerCase());
 
       rmSync(tmp, { recursive: true, force: true });
     });

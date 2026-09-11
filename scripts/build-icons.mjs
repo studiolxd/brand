@@ -3,10 +3,13 @@
  * / `logomark.svg`) sobre el violeta de marca: un solo favicon para todas las
  * apps de slxd, sin variantes por producto (decisión 2026-09-11).
  *
- * Por qué un solo color de fondo y de dónde sale: la paleta (`tokens/color/palette.json`)
- * no tiene un primitivo "violeta" — el más cercano por familia es `color.lavender`
- * (`#BAABFF`, ya usado como `color.accent-1`). No se inventa un hex nuevo para
- * esto (regla 9 de CLAUDE.md): se usa el primitivo existente más próximo.
+ * Por qué estos dos colores y de dónde salen — mismo criterio que la regla 8 de
+ * CLAUDE.md para el aviso del DS (relleno claro + tinta prusia, nunca tinta
+ * suelta): fondo `color.lavender` (`#BAABFF`, ya usado como `color.accent-1` —
+ * la paleta no tiene un primitivo "violeta" y este es el más cercano por
+ * familia) + isotipo en `color.primary` (`#111E30`, el prusia). Ninguno de los
+ * dos es un hex a mano (regla 9 de CLAUDE.md): los dos son primitivos/roles ya
+ * existentes en `tokens/color/`.
  *
  * Salidas, todas en `dist/assets/icons/`:
  *   - icon.svg                 — el isotipo con margen del 10 % (logomark-safe)
@@ -40,8 +43,8 @@ const STORYBOOK_BRAND_DIR = 'public/brand';
 
 /** El violeta de marca: el primitivo de paleta más cercano a "violeta" (ver cabecera). */
 export const BRAND_ICON_BG = tokens['--color-lavender'];
-/** El isotipo va en blanco sobre ese fondo (decisión 2026-09-11: "logomark-safe en blanco sobre el violeta de marca"). */
-export const BRAND_ICON_FG = '#FFFFFF';
+/** La tinta del isotipo: `color.primary` (el prusia) sobre el relleno lavanda — mismo criterio que el aviso del DS (regla 8 de CLAUDE.md). */
+export const BRAND_ICON_INK = tokens['--color-primary'];
 
 function readSvgPaths(source) {
   const raw = readFileSync(source, 'utf-8');
@@ -55,10 +58,10 @@ function readSvgPaths(source) {
 }
 
 /**
- * Compone un SVG cuadrado: fondo violeta de marca + isotipo en blanco, con un
- * margen (`marginRatio`, 0–0.5 por lado) adicional sobre el que ya trae la
- * fuente. `side` es el tamaño del lienzo en unidades de usuario del SVG
- * resultante (no depende de a qué píxel se rasterice luego).
+ * Compone un SVG cuadrado: fondo violeta de marca + isotipo en tinta prusia,
+ * con un margen (`marginRatio`, 0–0.5 por lado) adicional sobre el que ya
+ * trae la fuente. `side` es el tamaño del lienzo en unidades de usuario del
+ * SVG resultante (no depende de a qué píxel se rasterice luego).
  */
 export function composeIconSvg(source, { side = 512, marginRatio = 0 } = {}) {
   const { minX, minY, size, paths } = readSvgPaths(source);
@@ -68,7 +71,7 @@ export function composeIconSvg(source, { side = 512, marginRatio = 0 } = {}) {
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${side}" height="${side}" viewBox="0 0 ${side} ${side}">`,
     `  <rect width="${side}" height="${side}" fill="${BRAND_ICON_BG}"/>`,
-    `  <g fill="${BRAND_ICON_FG}" transform="translate(${inset} ${inset}) scale(${scale}) translate(${-minX} ${-minY})">`,
+    `  <g fill="${BRAND_ICON_INK}" transform="translate(${inset} ${inset}) scale(${scale}) translate(${-minX} ${-minY})">`,
     ...paths.map((p) => `    ${p}`),
     '  </g>',
     '</svg>',
@@ -163,7 +166,7 @@ export async function buildIcons({
   writeFileSync(`${outDir}/icon-192.png`, png192);
   writeFileSync(`${outDir}/icon-512.png`, png512);
 
-  // apple-touch-icon: 180×180, mismo dibujo, sin transparencia (el fondo violeta
+  // apple-touch-icon: 180×180, mismo dibujo, sin transparencia (el fondo lavanda
   // cubre el lienzo entero, así que ya no la lleva).
   const applePng = await rasterize(iconSvg, 180);
   writeFileSync(`${outDir}/apple-touch-icon.png`, applePng);

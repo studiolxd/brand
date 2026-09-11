@@ -1,5 +1,5 @@
 //#region src/assets/brand-assets.ts
-var e = "#BAABFF", t = [
+var e = "#BAABFF", t = "#111E30", n = [
 	{
 		path: "assets/logo.svg",
 		type: "image/svg+xml",
@@ -15,7 +15,7 @@ var e = "#BAABFF", t = [
 		type: "image/svg+xml",
 		purpose: "source"
 	}
-], n = [
+], r = [
 	{
 		path: "assets/icons/icon.svg",
 		type: "image/svg+xml",
@@ -57,4 +57,4 @@ var e = "#BAABFF", t = [
 	}
 ];
 //#endregion
-export { n as BRAND_ICON_ASSETS, e as BRAND_ICON_COLOR, t as BRAND_SOURCE_ASSETS };
+export { r as BRAND_ICON_ASSETS, e as BRAND_ICON_BG_COLOR, t as BRAND_ICON_INK_COLOR, n as BRAND_SOURCE_ASSETS };

@@ -5,14 +5,20 @@
  * app consumidora los copie o los sirva sin adivinar nombres de fichero.
  *
  * Un solo juego de iconos para toda la suite —sin variantes por producto—,
- * ver Foundations → Marca. El violeta de fondo es `BRAND_ICON_COLOR`: el
- * primitivo de paleta `color.lavender` (`#BAABFF`), el más cercano a
- * "violeta" que tiene `tokens/color/palette.json` — no se inventó un hex
- * nuevo para esto (regla 9 de CLAUDE.md).
+ * ver Foundations → Marca. Dos tokens, mismo criterio que la regla 8 de
+ * CLAUDE.md para el aviso del DS (relleno claro + tinta prusia, nunca tinta
+ * suelta): `BRAND_ICON_BG_COLOR` es el relleno, `color.lavender` (`#BAABFF`,
+ * el primitivo de paleta más próximo a "violeta" que tiene
+ * `tokens/color/palette.json`); `BRAND_ICON_INK_COLOR` es la tinta del
+ * isotipo sobre ese relleno, `color.primary` (`#111E30`, el prusia). Ninguno
+ * de los dos es un hex inventado (regla 9 de CLAUDE.md): los dos son
+ * primitivos/roles que ya existían.
  */
 
 /** El violeta de marca usado como fondo de los iconos de aplicación (`color.lavender`, `--color-lavender`). */
-export const BRAND_ICON_COLOR = '#BAABFF';
+export const BRAND_ICON_BG_COLOR = '#BAABFF';
+/** La tinta del isotipo sobre ese fondo (`color.primary`, `--color-primary` — el prusia). */
+export const BRAND_ICON_INK_COLOR = '#111E30';
 
 export interface BrandIconAsset {
   /** Ruta bajo `@studiolxd/brand/assets/...`. */
