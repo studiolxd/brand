@@ -1,5 +1,5 @@
 /* Proceso numerado. La lista es un `ol` sin marcas propias: el número lo pinta
-   el `NumberBadge`, y la numeración semántica la sigue poniendo el elemento. */
+   el `StepMarker`, y la numeración semántica la sigue poniendo el elemento. */
 .steps {
   display: grid;
   gap: var(--steps-gap);
