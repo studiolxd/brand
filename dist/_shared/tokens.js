@@ -217,8 +217,6 @@ var e = {
 	"--app-launcher-tile-highlighted-color": "#ffffff",
 	"--app-launcher-tile-badge-hover-bg": "#ffffff",
 	"--app-launcher-tile-badge-hover-color": "#111e30",
-	"--app-launcher-tile-active-border-width": "2px",
-	"--app-launcher-tile-active-border-color": "#111e30",
 	"--arrow-width-sm": "max(1.5625vw, 24px)",
 	"--arrow-width-md": "max(3.125vw, 48px)",
 	"--arrow-width-lg": "clamp(72px, 9.375vw, 144px)",

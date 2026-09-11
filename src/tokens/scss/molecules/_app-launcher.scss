@@ -44,5 +44,3 @@ $lxd-app-launcher-tile-highlighted-bg: #111e30; // Relleno del tile bajo el punt
 $lxd-app-launcher-tile-highlighted-color: #ffffff; // Texto del tile resaltado — el del Menu: nombre e inicial invierten con el relleno
 $lxd-app-launcher-tile-badge-hover-bg: #ffffff; // Fondo de la Tag «nuevo» cuando su tile está resaltado — invertido respecto al tile (`tile-highlighted-color`) para seguir leyéndose como una píldora de contraste sobre el relleno
 $lxd-app-launcher-tile-badge-hover-color: #111e30; // Texto de la Tag «nuevo» cuando su tile está resaltado — el mismo par invertido que `tile-badge-hover-bg`
-$lxd-app-launcher-tile-active-border-width: 2px; // Grosor del borde que marca la app actual, alrededor de todo el tile. Va por `box-shadow` inset (no por `border`): no reserva espacio ni desplaza el texto
-$lxd-app-launcher-tile-active-border-color: #111e30; // Color del borde de la app actual — la misma tinta que el focus ring, el borde de énfasis del sistema

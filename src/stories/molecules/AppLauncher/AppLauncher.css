@@ -149,13 +149,7 @@
   outline-offset: var(--app-launcher-focus-ring-offset);
 }
 
-/* La app actual: borde completo alrededor del tile y nombre en énfasis.
-   Va por `box-shadow` inset, no por `border`: no reserva espacio propio, así
-   que el texto no se desplaza entre el estado normal y el activo. */
-.app-launcher__tile.app-launcher__tile--active {
-  box-shadow: inset 0 0 0 var(--app-launcher-tile-active-border-width) var(--app-launcher-tile-active-border-color);
-}
-
+/* La app actual se distingue solo por el peso del nombre — sin borde. */
 .app-launcher__tile--active .app-launcher__tile-name {
   font-weight: var(--app-launcher-tile-name-active-font-weight);
 }

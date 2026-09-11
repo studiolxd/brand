@@ -7,6 +7,17 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.0.2] — 2026-09-12
+
+> **Patch.** La baldosa de la app actual del `AppLauncher` ya no lleva borde.
+
+- **`AppLauncher`: fuera el borde de la app actual.** `.app-launcher__tile--active` deja de
+  pintar el `box-shadow` inset; la app actual se sigue distinguiendo por el peso del nombre
+  (`tile-name-active-font-weight`), que se mantiene. Se retiran `tile-active-border-width`,
+  `tile-active-border-color` y `surface-dark-tile-active-border-color` (claro y oscuro): el
+  borde no era accesible de todos modos — la baldosa ya llevaba `aria-current="page"`, que
+  se conserva como el marcado real de «app actual».
+
 ## [38.0.1] — 2026-09-12
 
 > **Patch.** `Toggle`/`ToggleGroup` en superficie oscura ya no marcan el hover con borde `accent-1`.

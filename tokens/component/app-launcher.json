@@ -54,14 +54,11 @@
     "tile-highlighted-color":  { "$value": "{menu.item-highlighted-color}", "$type": "color", "$description": "Texto del tile resaltado — el del Menu: nombre e inicial invierten con el relleno" },
     "tile-badge-hover-bg":     { "$value": "{menu.item-highlighted-color}", "$type": "color", "$description": "Fondo de la Tag «nuevo» cuando su tile está resaltado — invertido respecto al tile (`tile-highlighted-color`) para seguir leyéndose como una píldora de contraste sobre el relleno" },
     "tile-badge-hover-color":  { "$value": "{menu.item-highlighted-bg}", "$type": "color",  "$description": "Texto de la Tag «nuevo» cuando su tile está resaltado — el mismo par invertido que `tile-badge-hover-bg`" },
-    "tile-active-border-width":{ "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del borde que marca la app actual, alrededor de todo el tile. Va por `box-shadow` inset (no por `border`): no reserva espacio ni desplaza el texto" },
-    "tile-active-border-color":{ "$value": "{color.primary}",        "$type": "color",     "$description": "Color del borde de la app actual — la misma tinta que el focus ring, el borde de énfasis del sistema" },
     "surface-dark-trigger-hover-bg":         { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Fondo del disparador bajo el puntero — surface-dark" },
     "surface-dark-trigger-hover-color":      { "$value": "{menu.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Color del icono bajo el puntero — surface-dark" },
     "surface-dark-tile-highlighted-bg":      { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno del tile resaltado — surface-dark" },
     "surface-dark-tile-highlighted-color":   { "$value": "{menu.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Texto del tile resaltado — surface-dark" },
     "surface-dark-tile-badge-hover-bg":      { "$value": "{menu.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Fondo de la Tag «nuevo» resaltada — surface-dark" },
-    "surface-dark-tile-badge-hover-color":   { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Texto de la Tag «nuevo» resaltada — surface-dark" },
-    "surface-dark-tile-active-border-color": { "$value": "{color.accent-1}",     "$type": "color", "$description": "Color del borde de la app actual — surface-dark: lavanda, el acento de estado activo del sistema (como SidebarNav y Table)" }
+    "surface-dark-tile-badge-hover-color":   { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Texto de la Tag «nuevo» resaltada — surface-dark" }
   }
 }
