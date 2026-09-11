@@ -7,6 +7,10 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.5.3] — 2026-09-11
+
+> **Patch.** Corrige la 37.5.2: el índice de git en macOS (`core.ignorecase`) no registró los renombrados a minúscula de `dist/`, así que la etiqueta llevaba ficheros con mayúscula e imports en minúscula y nada resolvía. Reindexado con la caja exacta del disco.
+
 ## [37.5.2] — 2026-09-11
 
 > **Patch.** `next build` en Linux/producción vuelve a resolver el CSS del logotipo (B16).
