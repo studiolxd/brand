@@ -38,8 +38,9 @@ function Invitacion({ state, socialProviders, surface }: Args) {
     // se entró. Lo que falta no es la cuenta, es la invitación, así que la
     // pantalla dice con quién se entró —por si la invitación iba a otra
     // dirección, que es la mitad de los casos— y deja una sola salida, al
-    // panel. Va en `links` y no en `actions`: no es una acción del paso, es la
-    // manera de irse de una pantalla que ya no tiene nada que hacer.
+    // panel. Es la acción del paso, así que va en `actions` como
+    // `Button variant="primary"`, igual que «Crear cuenta» en el estado
+    // `invalida`.
     return (
       <AuthPage
         title="Invitación no disponible"
@@ -47,7 +48,7 @@ function Invitacion({ state, socialProviders, surface }: Args) {
         intro={<Paragraph>Has iniciado sesión como ana@studiolxd.com.</Paragraph>}
         surface={surface}
       >
-        <Form size="lg" links={<Link href="#panel">Ir al panel</Link>} />
+        <Form size="lg" blockActions actions={<Button variant="primary" href="#panel">Ir al panel</Button>} />
       </AuthPage>
     );
   }
@@ -128,8 +129,7 @@ export const ContratoInvalidaConSesion: Story = {
     await expect(canvas.getByText('Has iniciado sesión como ana@studiolxd.com.')).toBeInTheDocument();
     await expect(canvas.getByRole('link', { name: 'Ir al panel' })).toBeInTheDocument();
     await expect(canvas.queryByRole('link', { name: 'Volver al inicio de sesión' })).toBeNull();
-    // Un `Form` sin campos ni acciones: solo la salida.
-    await expect(canvasElement.querySelector('.form__actions')).toBeNull();
+    // Un `Form` sin campos: la única acción es la salida.
     await expect(canvasElement.querySelector('input')).toBeNull();
   },
 };
