@@ -1,6 +1,7 @@
 .switcher {
   all: unset;
   box-sizing: border-box;
+  position: relative;
   display: inline-flex;
   align-items: center;
   width: var(--switcher-track-width);
@@ -11,6 +12,19 @@
   cursor: var(--switcher-cursor);
   flex-shrink: 0;
   transition: background-color var(--switcher-transition-duration) var(--switcher-transition-easing);
+}
+
+/* El track mide 24px de bloque en talla sm; el área sensible al puntero
+   llega siempre a 24×24 (WCAG 2.5.8) por una capa invisible centrada que no
+   ocupa sitio en la maqueta — mismo patrón que Checkbox/Radio. */
+.switcher::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+  inline-size: max(100%, var(--switcher-target-size));
+  block-size: max(100%, var(--switcher-target-size));
 }
 
 .switcher[data-checked] {

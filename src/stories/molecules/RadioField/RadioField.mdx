@@ -68,6 +68,10 @@ El campo reenvía el `ref` y las props nativas al `<input type="radio">`, así q
 marcado los toma el `Radio` de dentro. Es la forma normal de montar un grupo de opciones: un
 `Fieldset` con su `legend`, un `RadioGroup` dentro y un `RadioField` por opción.
 
+## Alineación con otros campos
+
+`__control` no lleva `padding-inline`: el área sensible al puntero (24×24 px, WCAG 2.5.8) la garantiza el propio átomo `Radio` con una capa invisible (`::after`) que no ocupa sitio en la maqueta, así que no hace falta sangrar el control para dar margen al dedo. El borde izquierdo del radio coincide con el de un `InputField` en la misma columna.
+
 ## Accesibilidad
 
 - El texto está enlazado por `htmlFor`/`id`; sin `id`, el campo genera uno con `useId`.

@@ -7,6 +7,59 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.0.0] — 2026-09-11
+
+> **Major.** `CheckboxField`/`RadioField`/`SwitcherField` pierden el `padding-inline` de su
+> `__control` (los custom properties `--checkbox-field-padding-inline`,
+> `--radio-field-padding-inline` y `--switcher-field-padding-inline`, con sus variantes
+> `sm-`/`lg-`, desaparecen). `AppLauncher` cambia el hover de su disparador solo-icono.
+
+- **`CheckboxField`/`RadioField`/`SwitcherField`: el control ya no sangra respecto al resto
+  de campos de un formulario.** Decisión del usuario (informe de un consumidor externo, el
+  tema de login de Keycloak — opción 1): su `__control` llevaba `padding-inline` heredado de
+  `control.padding-inline`, así que en una columna de `InputField` el cuadro de la casilla
+  arrancaba 16px (24/32px en `lg`) a la derecha del borde de su propio campo. El área
+  sensible al puntero ya la garantiza el átomo (`Checkbox`/`Radio` ya tenían un `::after`
+  invisible de `size-target.min`, 24×24px, que no ocupa sitio en la maqueta; `Switcher` no lo
+  tenía —su track mide 24px de bloque en `sm`— y se le añade con el mismo patrón, token
+  `switcher.target-size`), así que el padding no hacía falta para el objetivo táctil.
+  - `padding-block` se conserva: sigue dando aire vertical entre opciones apiladas.
+  - Se retira también el `padding-inline` que heredaban el `.error-text` y el texto de ayuda
+    de los tres campos (estaban sangrados para alinearse con el control, no con el borde de
+    la columna).
+  - **Ruptura:** desaparecen `checkbox-field.padding-inline` (+ `sm-`/`lg-`),
+    `radio-field.padding-inline` (+ `sm-`/`lg-`) y `switcher-field.padding-inline` (+
+    `sm-`/`lg-`) — y sus custom properties `--checkbox-field-padding-inline`,
+    `--radio-field-padding-inline`, `--switcher-field-padding-inline` (y sm/lg). Ningún otro
+    componente los leía (comprobado con grep).
+  - Story «Alineado con otros campos» en `CheckboxField.stories.tsx`, con `play` que
+    comprueba que el borde izquierdo del checkbox/radio/switcher coincide (±1px) con el de
+    un `InputField` en la misma columna.
+  - MDX de los tres campos: nueva sección «Alineación con otros campos».
+
+- **`AppLauncher`: el disparador solo-icono ya no deja una línea bajo el icono de rejilla en
+  hover, y la Tag «nuevo» acompaña el hover del tile.**
+  - El disparador solo-icono (sin `labels.trigger`) dejaba, bajo el puntero, la misma línea
+    de tinta que el resto de estados del sistema (`hover-line-width`/`-color`) — pero esa
+    línea subraya texto, y bajo un glifo suelto se leía como un subrayado del propio icono
+    (mismo razonamiento por el que las flechas de `Calendar` no la llevan). Se sustituye por
+    la inversión de marca que ya usan los tiles del panel que abre: nuevos tokens
+    `trigger-hover-bg`/`trigger-hover-color` (`{menu.item-highlighted-bg}`/`-color`, con par
+    `surface-dark-*`). El disparador con texto (`labels.trigger`) no cambia: seguía sin
+    pintar nada en hover, como un ítem de `SidebarNav`, y ahora resetea explícitamente
+    `background-color` para no heredar el relleno de la variante solo-icono.
+    - **Ruptura:** `app-launcher.hover-line-width`/`-color` (+ `surface-dark-hover-line-color`)
+      desaparecen — sin sustituto directo, los sustituyen `trigger-hover-bg`/`-color`.
+  - La `Tag` «nuevo» del tile no cambiaba de color en el hover de la entrada, mientras el
+    nombre sí. Nuevos tokens `tile-badge-hover-bg`/`-color` (el par invertido de
+    `tile-highlighted-bg`/`-color`, para que la Tag siga leyéndose como píldora de contraste
+    sobre el tile relleno en vez de fundirse con él) que sobrescriben únicamente las custom
+    properties de color de la `Tag` (`--tag-info-bg`/`--tag-info-color`) en el hover/foco del
+    tile — nunca su CSS.
+  - Dos stories de test con `play` (`userEvent.hover` + `waitFor` sobre `getComputedStyle`):
+    el disparador no lleva `box-shadow` y su fondo cambia en hover; el fondo de la Tag
+    cambia junto al del tile.
+
 ## [36.0.0] — 2026-09-11
 
 > **Major.** `AppLauncher` retira el cuadrado de color/inicial de cada entrada: `accent` e

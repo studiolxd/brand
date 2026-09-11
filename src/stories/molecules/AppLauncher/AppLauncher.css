@@ -13,9 +13,13 @@
   transition: box-shadow var(--app-launcher-transition-duration) var(--app-launcher-transition-easing);
 }
 
-/* El disparador no se rellena bajo el puntero (regla de Colores): línea de tinta debajo. */
+/* Excepción a «el hover no pinta relleno»: la línea de tinta del sistema
+   subraya texto, y bajo un glifo suelto —sin palabra al lado— se lee como un
+   subrayado del icono. El disparador se rellena, la misma inversión de marca
+   que ya llevan los tiles del panel que abre. */
 .app-launcher__trigger:hover {
-  box-shadow: inset 0 calc(-1 * var(--app-launcher-hover-line-width)) 0 0 var(--app-launcher-hover-line-color);
+  background-color: var(--app-launcher-trigger-hover-bg);
+  color: var(--app-launcher-trigger-hover-color);
 }
 
 .app-launcher__trigger:focus-visible {
@@ -44,13 +48,14 @@
   line-height: var(--app-launcher-trigger-label-line-height);
 }
 
-/* Excepción a la regla general de Colores ("el hover no pinta relleno, deja
-   una línea"): con texto visible el disparador se lee como un ítem de
-   `SidebarNav`, y ahí el hover no pinta ninguna línea (mismo criterio, ver
-   el comentario de `.sidebar-nav__item:hover` en SidebarNav.css ~l.138).
-   `color` se mantiene explícito aunque no cambie, mismo patrón. */
+/* Excepción a la excepción: con texto visible el disparador se lee como un
+   ítem de `SidebarNav`, y ahí el hover no pinta nada — ni línea ni relleno
+   (mismo criterio, ver el comentario de `.sidebar-nav__item:hover` en
+   SidebarNav.css ~l.138). `color` se mantiene explícito aunque no cambie,
+   mismo patrón; `background-color` anula el relleno que sí lleva la variante
+   solo-icono. */
 .app-launcher__trigger--label:hover {
-  box-shadow: none;
+  background-color: transparent;
   color: var(--app-launcher-trigger-label-color);
 }
 
@@ -163,6 +168,16 @@
 /* ─── Badge «nuevo» ──────────────────────────────────────── */
 .app-launcher__tile-badge {
   pointer-events: none;
+}
+
+/* La Tag acompaña el hover del tile: mismo par invertido que el tile pero al
+   revés, para seguir leyéndose como una píldora de contraste sobre el
+   relleno (no la misma tinta plana que el nombre, que se fundiría con ella).
+   Solo se toca la variable de color de la Tag, nunca su CSS. */
+.app-launcher__tile:hover .app-launcher__tile-badge,
+.app-launcher__tile:focus-visible .app-launcher__tile-badge {
+  --tag-info-bg: var(--app-launcher-tile-badge-hover-bg);
+  --tag-info-color: var(--app-launcher-tile-badge-hover-color);
 }
 
 /* El z-index va en el Positioner de Base UI (el popup hereda su stacking). */

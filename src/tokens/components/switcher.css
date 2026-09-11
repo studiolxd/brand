@@ -15,6 +15,7 @@
   --switcher-lg-track-width: 3rem; /** Ancho del track — variante lg (48px, alineado con la talla lg del sistema, size-component.lg). En rem, no en em: como el resto de campos en lg, no se escala además con la fuente del párrafo large del campo */
   --switcher-lg-track-height: 1.625rem; /** Alto del track — variante lg. En rem, ver lg-track-width */
   --switcher-lg-thumb-size: 1.25rem; /** Tamaño del thumb — variante lg. En rem, ver lg-track-width */
+  --switcher-target-size: var(--size-target-min); /** Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el track (sm) sea menor en bloque. Se extiende de forma invisible y centrada, sin mover la maqueta */
   --switcher-thumb-bg: var(--color-white); /** Color del thumb */
   --switcher-disabled-opacity: var(--opacity-disabled); /** Opacidad cuando está deshabilitado */
   --switcher-transition-duration: var(--motion-duration-fast); /** Duración de la transición */

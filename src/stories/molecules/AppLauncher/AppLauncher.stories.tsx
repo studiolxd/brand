@@ -160,6 +160,54 @@ export const TestContratoConTexto: Story = {
   },
 };
 
+/** El disparador solo-icono se rellena bajo el puntero; no deja línea bajo el glifo. */
+export const TestHoverDisparador: Story = {
+  name: 'Test — el disparador no subraya el icono en hover',
+  tags: ['!dev'],
+  args: {
+    apps: demoApps,
+    labels,
+  },
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole('button', { name: labels.open });
+    const reposo = getComputedStyle(trigger);
+    await expect(reposo.boxShadow).toBe('none');
+    const bgReposo = reposo.backgroundColor;
+
+    await userEvent.hover(trigger);
+    await waitFor(() => {
+      const hover = getComputedStyle(trigger);
+      expect(hover.boxShadow).toBe('none');
+      expect(hover.backgroundColor).not.toBe(bgReposo);
+    });
+  },
+};
+
+/** La Tag «nuevo» acompaña el hover del tile: su fondo cambia junto al del tile. */
+export const TestHoverBadge: Story = {
+  name: 'Test — la Tag «nuevo» acompaña el hover del tile',
+  tags: ['!dev'],
+  args: {
+    apps: demoApps,
+    labels,
+  },
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole('button', { name: labels.open });
+    await userEvent.click(trigger);
+    const dialog = await screen.findByRole('dialog');
+    const tile = within(dialog).getByRole('link', { name: /Tender/ });
+    const badge = tile.querySelector('.app-launcher__tile-badge');
+    if (!badge) throw new Error('No se encuentra la Tag «nuevo» del tile');
+
+    const bgReposo = getComputedStyle(badge).backgroundColor;
+
+    await userEvent.hover(tile);
+    await waitFor(() => {
+      expect(getComputedStyle(badge).backgroundColor).not.toBe(bgReposo);
+    });
+  },
+};
+
 export const TestContratoPopover: Story = {
   name: 'Test — abrir, apps y app actual (popover)',
   tags: ['!dev'],

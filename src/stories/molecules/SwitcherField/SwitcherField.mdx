@@ -66,6 +66,10 @@ El control es de Base UI, así que el contrato **no** es el spread del `field`: 
 
 <Canvas of={SwitcherFieldStories.ConReactHookForm} />
 
+## Alineación con otros campos
+
+`__control` no lleva `padding-inline`: el área sensible al puntero (24×24 px, WCAG 2.5.8) la garantiza el propio átomo `Switcher` con una capa invisible (`::after`) que no ocupa sitio en la maqueta, así que no hace falta sangrar el control para dar margen al dedo. El borde izquierdo del track coincide con el de un `InputField` en la misma columna.
+
 ## Accesibilidad
 
 - El texto está enlazado por `htmlFor`/`id`, y además por `aria-labelledby` desde el disparador.

@@ -37,9 +37,11 @@ $lxd-app-launcher-tile-name-font-weight: 300; // Peso del nombre de app
 $lxd-app-launcher-tile-name-line-height: 1.3; // Interlineado del nombre de app — el de un ítem de Menu, para que la altura case con las listas de opciones del DS
 $lxd-app-launcher-tile-name-color: #111e30; // Color del nombre de app
 $lxd-app-launcher-tile-name-active-font-weight: 500; // Peso del nombre — app actual
-$lxd-app-launcher-hover-line-width: 1px; // Grosor de la línea de hover del disparador. El botón de rejilla no se rellena bajo el puntero (regla de Colores): deja una línea de tinta debajo. Los tiles sí se rellenan: son la lista de opciones del panel
-$lxd-app-launcher-hover-line-color: #111e30; // Color de la línea de hover del disparador — tinta de la superficie
+$lxd-app-launcher-trigger-hover-bg: #111e30; // Fondo del disparador (solo icono) bajo el puntero. Antes dejaba una línea de tinta debajo (regla de Colores), pero la línea bajo un glifo suelto —sin texto— se lee como un subrayado del icono; se sustituye por la misma inversión de marca que ya llevan los tiles del panel, la excepción declarada de este componente
+$lxd-app-launcher-trigger-hover-color: #ffffff; // Color del icono de rejilla bajo el puntero — el mismo par que `trigger-hover-bg`
 $lxd-app-launcher-tile-highlighted-bg: #111e30; // Relleno del tile bajo el puntero o el teclado — el del Menu: la inversión de marca. La rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores)
 $lxd-app-launcher-tile-highlighted-color: #ffffff; // Texto del tile resaltado — el del Menu: nombre e inicial invierten con el relleno
+$lxd-app-launcher-tile-badge-hover-bg: #ffffff; // Fondo de la Tag «nuevo» cuando su tile está resaltado — invertido respecto al tile (`tile-highlighted-color`) para seguir leyéndose como una píldora de contraste sobre el relleno
+$lxd-app-launcher-tile-badge-hover-color: #111e30; // Texto de la Tag «nuevo» cuando su tile está resaltado — el mismo par invertido que `tile-badge-hover-bg`
 $lxd-app-launcher-tile-active-border-width: 2px; // Grosor del borde que marca la app actual, alrededor de todo el tile. Va por `box-shadow` inset (no por `border`): no reserva espacio ni desplaza el texto
 $lxd-app-launcher-tile-active-border-color: #111e30; // Color del borde de la app actual — la misma tinta que el focus ring, el borde de énfasis del sistema

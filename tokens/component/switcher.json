@@ -1,5 +1,6 @@
 {
   "switcher": {
+    "target-size":         { "$value": "{size-target.min}",           "$type": "dimension", "$description": "Área sensible al puntero: 24×24 px como pide WCAG 2.5.8, aunque el track (sm) sea menor en bloque. Se extiende de forma invisible y centrada, sin mover la maqueta" },
     "track-width":         { "$value": "2.75em",                      "$type": "dimension", "$description": "Ancho del track" },
     "track-height":        { "$value": "1.5em",                       "$type": "dimension", "$description": "Alto del track" },
     "track-bg":            { "$value": "{color.border.default-on-light}", "$type": "color",     "$description": "Fondo del track — estado off" },

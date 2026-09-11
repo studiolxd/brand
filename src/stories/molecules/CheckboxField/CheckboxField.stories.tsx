@@ -3,6 +3,9 @@ import { expect, userEvent, within } from 'storybook/test';
 import { useForm, type ResolverResult } from 'react-hook-form';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
+import { InputField } from '../InputField/InputField';
+import { RadioField } from '../RadioField/RadioField';
+import { SwitcherField } from '../SwitcherField/SwitcherField';
 import { FormProvider, FormField } from '../FormField/FormField';
 import { CheckboxField } from './CheckboxField';
 
@@ -176,6 +179,36 @@ function FormularioRhf() {
     </FormProvider>
   );
 }
+
+/**
+ * Los campos de casilla, radio e interruptor no llevan `padding-inline` en su
+ * `__control`: el área táctil ya la garantiza el átomo (`::after`), así que
+ * el borde izquierdo del control coincide con el de un `InputField` en la
+ * misma columna.
+ */
+export const AlineadoConOtrosCampos: Story = {
+  name: 'Alineado con otros campos',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '20rem' }}>
+      <InputField id="alineacion-nombre" label="Nombre completo" />
+      <CheckboxField label="Acepto los términos y condiciones" />
+      <RadioField name="alineacion-plan" value="pro" label="Plan Pro" />
+      <SwitcherField label="Recibir novedades por email" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = await canvas.findByRole('textbox', { name: 'Nombre completo' });
+    const checkbox = canvas.getByRole('checkbox', { name: 'Acepto los términos y condiciones' });
+    const radio = canvas.getByRole('radio', { name: 'Plan Pro' });
+    const switcher = canvas.getByRole('switch', { name: 'Recibir novedades por email' });
+
+    const inputLeft = input.getBoundingClientRect().left;
+    for (const control of [checkbox, radio, switcher]) {
+      await expect(Math.abs(control.getBoundingClientRect().left - inputLeft)).toBeLessThanOrEqual(1);
+    }
+  },
+};
 
 /**
  * El control es de Base UI: el contrato es `checked`/`onCheckedChange` + `name`

@@ -12,7 +12,6 @@
   display: inline-flex;
   align-items: center;
   gap: var(--switcher-field-gap);
-  padding-inline: var(--switcher-field-padding-inline);
   padding-block: var(--switcher-field-padding-block);
   cursor: var(--switcher-field-cursor);
 }
@@ -31,12 +30,7 @@
   cursor: var(--switcher-field-disabled-cursor);
 }
 
-.switcher-field > .error-text {
-  padding-inline: var(--switcher-field-padding-inline);
-}
-
 .switcher-field__helper {
-  padding-inline: var(--switcher-field-padding-inline);
   font-family: var(--switcher-field-helper-font-family);
   font-size: var(--switcher-field-helper-font-size);
   font-weight: var(--switcher-field-helper-font-weight);
@@ -47,14 +41,12 @@
 /* ─── Size variants ──────────────────────────────────────────── */
 .switcher-field.switcher-field--sm {
   --switcher-field-gap: var(--switcher-field-sm-gap);
-  --switcher-field-padding-inline: var(--switcher-field-sm-padding-inline);
   --switcher-field-padding-block: var(--switcher-field-sm-padding-block);
   --switcher-field-label-font-size: var(--switcher-field-sm-label-font-size);
 }
 
 .switcher-field.switcher-field--lg {
   --switcher-field-gap: var(--switcher-field-lg-gap);
-  --switcher-field-padding-inline: var(--switcher-field-lg-padding-inline);
   --switcher-field-padding-block: var(--switcher-field-lg-padding-block);
   --switcher-field-label-font-size: var(--switcher-field-lg-label-font-size);
 }

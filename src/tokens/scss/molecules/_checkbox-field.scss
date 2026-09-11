@@ -3,16 +3,13 @@
 
 $lxd-checkbox-field-stack-gap: 0.5rem; // Espacio entre el checkbox, la ayuda y el error — el ritmo del resto de campos
 $lxd-checkbox-field-gap: 0.75rem; // Separación entre el checkbox y el texto
-$lxd-checkbox-field-padding-inline: 1rem; // Padding inline — hereda de control
 $lxd-checkbox-field-padding-block: 1rem; // Padding block — hereda de control
 $lxd-checkbox-field-checkbox-offset: 3px; // Desplazamiento vertical del checkbox para alinearlo con la primera línea de texto
 $lxd-checkbox-field-cursor: pointer; // Cursor
 $lxd-checkbox-field-disabled-cursor: not-allowed; // Cursor cuando está deshabilitado
 $lxd-checkbox-field-sm-gap: 0.5rem; // Gap — variante sm
-$lxd-checkbox-field-sm-padding-inline: 0.75rem; // Padding inline — variante sm
 $lxd-checkbox-field-sm-padding-block: 0.5rem; // Padding block — variante sm
 $lxd-checkbox-field-lg-gap: 1rem; // Gap — variante lg
-$lxd-checkbox-field-lg-padding-inline: 1.5rem; // Padding inline — variante lg
 $lxd-checkbox-field-lg-padding-block: 1.5rem; // Padding block — variante lg
 $lxd-checkbox-field-sm-label-font-size: 0.875rem; // Cuerpo del texto — variante sm: un peldaño por debajo del cuerpo de la superficie
 $lxd-checkbox-field-lg-label-font-size: 1.25rem; // Tamaño de la etiqueta en lg — el del Label lg (no el párrafo large, que en superficie pública crece con la prosa)
