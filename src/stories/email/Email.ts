@@ -14,12 +14,40 @@ export type {
   EmailOptOutGuest,
 } from './EmailLayout';
 
-export { EmailButton, EmailHeading, EmailLink, EmailNote, EmailText } from './EmailPrimitives';
+export {
+  EmailButton,
+  EmailCallout,
+  EmailCode,
+  EmailColumn,
+  EmailColumns,
+  EmailDivider,
+  EmailHeading,
+  EmailKeyValue,
+  EmailLink,
+  EmailList,
+  EmailListItem,
+  EmailNote,
+  EmailQuote,
+  EmailSectionTitle,
+  EmailTag,
+  EmailText,
+} from './EmailPrimitives';
 export type {
   EmailButtonProps,
+  EmailCalloutProps,
+  EmailCodeProps,
+  EmailColumnProps,
+  EmailColumnsProps,
+  EmailDividerProps,
   EmailHeadingProps,
+  EmailKeyValueProps,
   EmailLinkProps,
+  EmailListItemProps,
+  EmailListProps,
   EmailNoteProps,
+  EmailQuoteProps,
+  EmailSectionTitleProps,
+  EmailTagProps,
   EmailTextProps,
 } from './EmailPrimitives';
 
@@ -32,4 +60,6 @@ export {
   emailPalette,
   emailStyleSheet,
   emailStyles,
+  emailTones,
 } from './emailTheme';
+export type { EmailTone } from './emailTheme';

@@ -7,6 +7,65 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [34.1.0] — 2026-09-11
+
+> **Minor.** Once primitivas de correo nuevas y sus tokens. Nada cambia de sitio:
+> `EmailLayout` y las cinco primitivas que ya había siguen igual.
+
+- **Los correos de producto de las apps ya se pueden montar sin escribir un solo
+  objeto de estilo.** El inventario de los ocho correos de la suite que no son
+  del hub dejó el hueco a la vista: `tender` escribía once objetos de estilo a
+  nivel de módulo para su aviso de licitaciones (título de bloque en versalitas
+  grises, ítems con un bolo delante, fichas con barra a la izquierda, filas y
+  columnas sueltas sobre `Row`/`Column`/`Hr` de react-email), `lmsmarketplace`
+  tenía copiados a mano los tres hexes de estado (`#006616`, `#ffcd00`,
+  `#b30000` — exactamente los del sistema) y un bloque de cita con su propio
+  `borderLeft`. Ahora todo eso son primitivas:
+  - `EmailSectionTitle` — el título de un bloque, como `<h2>`, dos peldaños por
+    debajo del título del correo. No es una versalita gris: el sistema no tiene
+    rol de versalita y no se le añade uno para el correo.
+  - `EmailList` / `EmailListItem` — `<ul>`/`<ol>` de verdad, con `ordered` para
+    la numerada. Un bolo escrito a mano deja al lector de pantalla sin saber
+    cuántos elementos hay, y el sangrado de la segunda línea lo tiene que fingir
+    cada plantilla.
+  - `EmailCallout` — el bloque que destaca, con `tone` `info`/`success`/
+    `warning`/`error`.
+  - `EmailTag` — el veredicto como pastilla, con la **misma** tabla de tonos:
+    un error es del mismo rojo en el recuadro y en la etiqueta.
+  - `EmailQuote` — palabras que no son nuestras, con su barra al lado. Sin tono:
+    citar no es avisar.
+  - `EmailKeyValue` — un dato con su nombre encima (expediente, importe, fecha).
+    Las dos piezas en el mismo párrafo, partidas por un `<br />`: en dos `<Text>`
+    el margen de párrafo se metería entre el nombre y su dato.
+  - `EmailColumns` / `EmailColumn` — dos datos en paralelo. La calle la reparte
+    la fila, no quien la escribe: el motor de Word no conoce `gap`.
+  - `EmailDivider` — la línea que parte el correo, con el `border: 0` que anula
+    el relieve que el `<hr>` trae de serie.
+  - `EmailCode` — la clave que solo se enseña una vez, en mono y cortable.
+  - `EmailText` gana `emphasis`: la frase que resume el correo antes del detalle.
+- **Los cuatro tonos son rellenos, y lo decide el aviso.** El amarillo de marca
+  da 1,50:1 sobre blanco y no llega al 3:1 de WCAG 1.4.11, así que el aviso solo
+  existe como relleno con tinta prusia — no hay `warning-text-on-light` en el
+  sistema y no se inventa uno. Darles a los otros tres una forma distinta habría
+  dejado cuatro avisos que no se parecen entre sí. El medio lo agradece de paso:
+  un cliente que se coma un borde deja el bloque sin señal, y uno que invierta
+  los colores sigue teniendo un bloque. `info` es el prusia de la marca y no sale
+  de `tokens/color/feedback.json`: informar no es dar feedback de una acción.
+- **Ningún color nuevo.** Los 47 tokens que entran en `tokens/component/email.json`
+  referencian todos a un token que ya existía — la escala pública, los roles de
+  feedback, la paleta neutra. Los tonos resuelven exactamente a los hexes que
+  `lmsmarketplace` tenía copiados, así que la migración de la app es un cambio
+  de nombres, no de colores.
+- **Doc y catálogo.** `EmailLayout.mdx` estrena § «Correos de producto» con la
+  regla (las apps componen; ninguna escribe objetos de estilo propios), la tabla
+  de las catorce primitivas, el porqué de los tonos y el aviso de que las
+  columnas no se apilan en el móvil. En el catálogo, «Primitivas» se parte en
+  «Texto y acción» y «Bloques», y «Correos de ejemplo» suma dos correos de
+  producto enteros —«Aviso de nuevas licitaciones» y «Credenciales rotadas»—
+  montados solo con primitivas. `EmailPrimitives.test.tsx` vigila el contrato
+  sobre el HTML renderizado, incluido que no se cuele un hex que no venga de un
+  token del correo.
+
 ## [34.0.2] — 2026-09-11
 
 > **Patch.** Solo stories, tests y documentación: ni un cambio en componentes,

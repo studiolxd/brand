@@ -112,6 +112,14 @@ export const emailStyles = {
     lineHeight: emailToken('--email-line-height'),
     margin: `0 0 ${emailToken('--email-text-margin-block-end')}`,
   },
+  /*
+   * El párrafo destacado: la frase que resume el correo antes de entrar en el
+   * detalle. Solo cambia el peso — mismo tamaño, misma tinta, mismo aire—,
+   * porque lo que hace es entonar, no titular.
+   */
+  textEmphasis: {
+    fontWeight: Number(emailToken('--email-text-emphasis-font-weight')),
+  },
   /** Letra menor y tinta secundaria, dentro del recuadro. */
   muted: {
     color: emailPalette.muted,
@@ -209,7 +217,178 @@ export const emailStyles = {
     fontWeight: Number(emailToken('--email-font-weight')),
     textDecoration: 'underline',
   },
+  /*
+   * El título de un bloque dentro del cuerpo. Es un título más pequeño, no un
+   * metadato: ni versalitas ni gris. Las apps lo escribían a 12px, en
+   * mayúsculas y en gris — tres decisiones que el sistema no tiene y que se
+   * inventaron por bloque.
+   *
+   * El margen superior es lo que hace de él un corte: separa del bloque
+   * anterior más de lo que lo une a su propio texto.
+   */
+  sectionTitle: {
+    color: emailToken('--email-section-title-color'),
+    fontFamily: emailFontFamily,
+    fontSize: emailToken('--email-section-title-font-size'),
+    fontWeight: Number(emailToken('--email-section-title-font-weight')),
+    lineHeight: emailToken('--email-section-title-line-height'),
+    margin: `${emailToken('--email-section-title-margin-block-start')} 0 ${emailToken('--email-section-title-margin-block-end')}`,
+  },
+  /*
+   * La lista. El sangrado va aquí, en el `<ul>`, y no en el ítem: el
+   * `padding-left` de la lista es lo único que respetan todos los clientes,
+   * el motor de Word incluido.
+   */
+  list: {
+    color: emailPalette.text,
+    fontFamily: emailFontFamily,
+    fontSize: emailToken('--email-font-size'),
+    fontWeight: Number(emailToken('--email-font-weight')),
+    lineHeight: emailToken('--email-line-height'),
+    margin: `0 0 ${emailToken('--email-list-margin-block-end')}`,
+    paddingLeft: emailToken('--email-list-padding-inline-start'),
+  },
+  listItem: {
+    margin: `0 0 ${emailToken('--email-list-item-margin-block-end')}`,
+  },
+  /*
+   * La cita: una barra a la izquierda y el texto separado de ella. Marca
+   * palabras que no son nuestras —lo que escribió quien denunció un plugin, el
+   * motivo de un rechazo— y por eso la barra va en la tinta secundaria.
+   *
+   * `borderLeft` en físicas y en la shorthand, como todo aquí: el motor de Word
+   * no conoce `border-inline-start`.
+   */
+  quote: {
+    borderLeft: `${emailToken('--email-quote-border-width')} solid ${emailToken('--email-quote-border-color')}`,
+    margin: `0 0 ${emailToken('--email-quote-margin-block-end')}`,
+    paddingLeft: emailToken('--email-quote-padding-inline-start'),
+  },
+  /*
+   * El recuadro de aviso, sin su tono: el color lo pone `emailTones`.
+   *
+   * Los cuatro tonos son RELLENOS, no barras de color ni tinta suelta, y eso lo
+   * decide el tono que menos margen tiene: el aviso solo existe como relleno
+   * —el amarillo de marca da 1,50:1 sobre blanco y no llega al 3:1 de WCAG—,
+   * así que darle a los otros tres una forma distinta habría dejado cuatro
+   * avisos que no se parecen entre sí.
+   */
+  callout: {
+    fontFamily: emailFontFamily,
+    fontSize: emailToken('--email-font-size'),
+    fontWeight: Number(emailToken('--email-font-weight')),
+    lineHeight: emailToken('--email-line-height'),
+    margin: `0 0 ${emailToken('--email-callout-margin-block-end')}`,
+    padding: `${emailToken('--email-callout-padding-block')} ${emailToken('--email-callout-padding-inline')}`,
+  },
+  /*
+   * La etiqueta de estado. En línea, para que pueda ir dentro de un párrafo o
+   * suelta sobre su propia línea.
+   *
+   * `display: inline-block` es lo que le da el padding vertical; sin él, un
+   * `<span>` en línea pinta el relleno pero no empuja la línea, y la etiqueta
+   * se come el renglón de arriba.
+   */
+  tag: {
+    borderRadius: emailToken('--email-tag-border-radius'),
+    display: 'inline-block',
+    fontFamily: emailFontFamily,
+    fontSize: emailToken('--email-tag-font-size'),
+    fontWeight: Number(emailToken('--email-tag-font-weight')),
+    padding: `${emailToken('--email-tag-padding-block')} ${emailToken('--email-tag-padding-inline')}`,
+  },
+  /*
+   * El separador. `border: 0` + `borderTop` porque el `<hr>` trae de serie un
+   * borde en relieve de los cuatro lados que los clientes heredan del navegador.
+   */
+  divider: {
+    border: 0,
+    borderTop: `${emailToken('--email-divider-width')} solid ${emailToken('--email-divider-color')}`,
+    margin: `${emailToken('--email-divider-margin-block')} 0`,
+    width: '100%',
+  },
+  /*
+   * El par etiqueta/valor: un identificador, un importe, una fecha. Los dos en
+   * el mismo párrafo, separados por un salto de línea — no en dos `<Text>`,
+   * que meterían el margen de párrafo entre la etiqueta y su valor.
+   */
+  keyValue: {
+    color: emailPalette.text,
+    fontFamily: emailFontFamily,
+    fontSize: emailToken('--email-font-size'),
+    fontWeight: Number(emailToken('--email-font-weight')),
+    lineHeight: emailToken('--email-line-height'),
+    margin: `0 0 ${emailToken('--email-key-value-margin-block-end')}`,
+  },
+  keyValueLabel: {
+    color: emailToken('--email-key-value-label-color'),
+    fontSize: emailToken('--email-key-value-label-font-size'),
+    fontWeight: Number(emailToken('--email-key-value-label-font-weight')),
+  },
+  /*
+   * La clave o el token que el correo enseña una sola vez. Mismo corte de
+   * palabra que el enlace de respaldo del botón, y por lo mismo: es para
+   * copiarla a mano, así que nada puede esconderla.
+   */
+  code: {
+    backgroundColor: emailToken('--email-code-bg'),
+    color: emailToken('--email-code-color'),
+    fontFamily: emailToken('--email-code-font-family'),
+    fontSize: emailToken('--email-code-font-size'),
+    lineHeight: emailToken('--email-line-height'),
+    margin: `0 0 ${emailToken('--email-code-margin-block-end')}`,
+    padding: `${emailToken('--email-code-padding-block')} ${emailToken('--email-code-padding-inline')}`,
+    wordBreak: 'break-all',
+    wordWrap: 'break-word',
+  },
+  /** La fila de columnas. El ancho de cada una lo decide quien la escribe. */
+  columns: {
+    marginBottom: emailToken('--email-columns-margin-block-end'),
+    width: '100%',
+  },
+  column: {
+    color: emailPalette.text,
+    fontFamily: emailFontFamily,
+    fontSize: emailToken('--email-font-size'),
+    fontWeight: Number(emailToken('--email-font-weight')),
+    lineHeight: emailToken('--email-line-height'),
+    verticalAlign: 'top',
+  },
 } as const satisfies Record<string, CSSProperties>;
+
+/**
+ * Los cuatro tonos del correo, cada uno un par relleno/tinta autocontenido.
+ *
+ * Los usan `EmailCallout` y `EmailTag`, que son la misma idea a dos tamaños: un
+ * bloque que avisa y una pastilla que etiqueta. Comparten tabla para que un
+ * «error» no sea de un rojo en el recuadro y de otro en la etiqueta.
+ *
+ * `info` no sale de `tokens/color/feedback.json` y no es un descuido: informar
+ * no es dar feedback de una acción, así que su color es el prusia de la marca
+ * —el mismo par que `Tag info` y `Alert default` en la web— y no un color de
+ * sistema.
+ */
+export const emailTones = {
+  info: {
+    backgroundColor: emailToken('--email-tone-info-bg'),
+    color: emailToken('--email-tone-info-color'),
+  },
+  success: {
+    backgroundColor: emailToken('--email-tone-success-bg'),
+    color: emailToken('--email-tone-success-color'),
+  },
+  warning: {
+    backgroundColor: emailToken('--email-tone-warning-bg'),
+    color: emailToken('--email-tone-warning-color'),
+  },
+  error: {
+    backgroundColor: emailToken('--email-tone-error-bg'),
+    color: emailToken('--email-tone-error-color'),
+  },
+} as const satisfies Record<string, CSSProperties>;
+
+/** El tono de un aviso o de una etiqueta de estado. */
+export type EmailTone = keyof typeof emailTones;
 
 /**
  * La única clase del correo. Existe porque el hover del botón no cabe inline y

@@ -77,6 +77,9 @@ export declare const emailStyles: {
         readonly lineHeight: string;
         readonly margin: `0 0 ${string}`;
     };
+    readonly textEmphasis: {
+        readonly fontWeight: number;
+    };
     /** Letra menor y tinta secundaria, dentro del recuadro. */
     readonly muted: {
         readonly color: string;
@@ -126,7 +129,123 @@ export declare const emailStyles: {
         readonly fontWeight: number;
         readonly textDecoration: "underline";
     };
+    readonly sectionTitle: {
+        readonly color: string;
+        readonly fontFamily: string;
+        readonly fontSize: string;
+        readonly fontWeight: number;
+        readonly lineHeight: string;
+        readonly margin: `${string} 0 ${string}`;
+    };
+    readonly list: {
+        readonly color: string;
+        readonly fontFamily: string;
+        readonly fontSize: string;
+        readonly fontWeight: number;
+        readonly lineHeight: string;
+        readonly margin: `0 0 ${string}`;
+        readonly paddingLeft: string;
+    };
+    readonly listItem: {
+        readonly margin: `0 0 ${string}`;
+    };
+    readonly quote: {
+        readonly borderLeft: `${string} solid ${string}`;
+        readonly margin: `0 0 ${string}`;
+        readonly paddingLeft: string;
+    };
+    readonly callout: {
+        readonly fontFamily: string;
+        readonly fontSize: string;
+        readonly fontWeight: number;
+        readonly lineHeight: string;
+        readonly margin: `0 0 ${string}`;
+        readonly padding: `${string} ${string}`;
+    };
+    readonly tag: {
+        readonly borderRadius: string;
+        readonly display: "inline-block";
+        readonly fontFamily: string;
+        readonly fontSize: string;
+        readonly fontWeight: number;
+        readonly padding: `${string} ${string}`;
+    };
+    readonly divider: {
+        readonly border: 0;
+        readonly borderTop: `${string} solid ${string}`;
+        readonly margin: `${string} 0`;
+        readonly width: "100%";
+    };
+    readonly keyValue: {
+        readonly color: string;
+        readonly fontFamily: string;
+        readonly fontSize: string;
+        readonly fontWeight: number;
+        readonly lineHeight: string;
+        readonly margin: `0 0 ${string}`;
+    };
+    readonly keyValueLabel: {
+        readonly color: string;
+        readonly fontSize: string;
+        readonly fontWeight: number;
+    };
+    readonly code: {
+        readonly backgroundColor: string;
+        readonly color: string;
+        readonly fontFamily: string;
+        readonly fontSize: string;
+        readonly lineHeight: string;
+        readonly margin: `0 0 ${string}`;
+        readonly padding: `${string} ${string}`;
+        readonly wordBreak: "break-all";
+        readonly wordWrap: "break-word";
+    };
+    /** La fila de columnas. El ancho de cada una lo decide quien la escribe. */
+    readonly columns: {
+        readonly marginBottom: string;
+        readonly width: "100%";
+    };
+    readonly column: {
+        readonly color: string;
+        readonly fontFamily: string;
+        readonly fontSize: string;
+        readonly fontWeight: number;
+        readonly lineHeight: string;
+        readonly verticalAlign: "top";
+    };
 };
+/**
+ * Los cuatro tonos del correo, cada uno un par relleno/tinta autocontenido.
+ *
+ * Los usan `EmailCallout` y `EmailTag`, que son la misma idea a dos tamaños: un
+ * bloque que avisa y una pastilla que etiqueta. Comparten tabla para que un
+ * «error» no sea de un rojo en el recuadro y de otro en la etiqueta.
+ *
+ * `info` no sale de `tokens/color/feedback.json` y no es un descuido: informar
+ * no es dar feedback de una acción, así que su color es el prusia de la marca
+ * —el mismo par que `Tag info` y `Alert default` en la web— y no un color de
+ * sistema.
+ */
+export declare const emailTones: {
+    readonly info: {
+        readonly backgroundColor: string;
+        readonly color: string;
+    };
+    readonly success: {
+        readonly backgroundColor: string;
+        readonly color: string;
+    };
+    readonly warning: {
+        readonly backgroundColor: string;
+        readonly color: string;
+    };
+    readonly error: {
+        readonly backgroundColor: string;
+        readonly color: string;
+    };
+};
+/** El tono de un aviso o de una etiqueta de estado. */
+export type EmailTone = keyof typeof emailTones;
 /**
  * La única clase del correo. Existe porque el hover del botón no cabe inline y
  * su regla necesita un gancho que no atrape a los demás enlaces.

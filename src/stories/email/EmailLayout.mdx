@@ -214,6 +214,91 @@ Cuatro decisiones que la sostienen:
   respaldo, que son la misma acción, y 24px antes de la nota. El margen inferior
   lo lleva el respaldo, que es quien cierra el bloque.
 
+## Correos de producto
+
+Los correos de las apps —el aviso de licitaciones de Tender, el resultado de una
+validación en el Marketplace, las credenciales rotadas de LMS MCP— son nuestros,
+y se montan **componiendo estas primitivas**. La regla es corta:
+
+> **Ninguna app escribe objetos de estilo propios para un correo.** Si algo no
+> se puede decir con las primitivas, lo que falta se añade aquí, con su story;
+> no se resuelve con un `style` en la plantilla.
+
+No es una regla de orden. Un objeto de estilo en una plantilla es un valor que
+nadie va a volver a mirar: cuando el correo subió a la talla pública, las apps
+que tenían sus 12px y sus 13px escritos a mano se quedaron atrás sin que nada
+fallara, y los tres hexes de estado que una copió a mano (`#006616`, `#ffcd00`,
+`#b30000`) son exactamente los que el sistema ya tenía. Un correo que compone
+primitivas se mueve con el sistema; uno que escribe píxeles, no.
+
+Lo que sí es del producto: **el texto**, en sus seis idiomas, y **el orden** en
+que van los bloques. Eso es lo que dice un correo, y el DS no opina.
+
+### Las piezas
+
+| Primitiva | Para qué | Notas |
+| --- | --- | --- |
+| `EmailHeading` | El título del mensaje. Uno por correo, como `<h1>` | |
+| `EmailText` | El párrafo del cuerpo | `emphasis` lo sube al peso de énfasis: la frase que resume antes del detalle |
+| `EmailSectionTitle` | El título de un bloque, como `<h2>` | Dos peldaños por debajo del título del correo. **No** es una versalita gris |
+| `EmailList` / `EmailListItem` | Riesgos, requisitos, lo que cambió | `<ul>`/`<ol>` de verdad: un bolo escrito a mano deja al lector de pantalla sin lista |
+| `EmailCallout` | Un bloque que destaca: lo que salió mal, lo que hay que mirar | `tone`: `info` (por defecto), `success`, `warning`, `error` |
+| `EmailTag` | El veredicto como pastilla: «Validado con avisos» | El mismo `tone`. En línea, dentro de un `EmailText` |
+| `EmailQuote` | Palabras que no son nuestras | Sin tono: citar no es avisar |
+| `EmailKeyValue` | Un dato con su nombre: expediente, importe, fecha | La etiqueta va **encima** del valor |
+| `EmailColumns` / `EmailColumn` | Dos datos en paralelo | La calle la reparte la fila. **No se apilan en el móvil** |
+| `EmailDivider` | La línea que parte el correo en dos | |
+| `EmailCode` | La clave que solo se enseña una vez | En mono, y cortable: es para copiarla a mano |
+| `EmailLink` | Un enlace dentro del texto | Subrayado: en un correo el color solo no basta |
+| `EmailButton` | La acción, con su enlace de respaldo debajo | `fallbackLabel` obligatoria |
+| `EmailNote` | Letra menor: descargos, caducidades | `tone="plain"` para la que va fuera del recuadro |
+
+Todas aceptan `style`, que se mezcla **encima** del estilo base y nunca lo
+sustituye. Es la válvula para un caso que el sistema no cubra todavía — y cada
+vez que se usa para algo que se repite, eso es una primitiva que falta.
+
+Se ven todas juntas en [Primitivas › Bloques](/story/email-primitivas--bloques),
+y compuestas en un correo entero en
+[Correos de ejemplo › Aviso de nuevas licitaciones](/story/email-correos-de-ejemplo--nuevas-licitaciones).
+
+### Los cuatro tonos son rellenos
+
+`EmailCallout` y `EmailTag` comparten tabla de tonos —un error es del mismo rojo
+en el recuadro y en la pastilla— y los cuatro son **rellenos**, no barras de
+color ni tinta suelta.
+
+Lo decide el tono con menos margen. El aviso solo existe como relleno con tinta
+prusia: el amarillo de marca da 1,50:1 sobre blanco, lejos del 3:1 que pide
+WCAG 1.4.11 para un elemento no textual, y no hay `warning-text-on-light` en el
+sistema ni se va a inventar uno para el correo. Darle a los otros tres una forma
+distinta habría dejado cuatro avisos que no se parecen entre sí.
+
+El medio lo agradece de paso: un cliente que se coma un borde deja el bloque sin
+señal ninguna, y uno que invierta los colores por su cuenta sigue teniendo un
+bloque.
+
+| Tono | Relleno | Tinta |
+| --- | --- | --- |
+| `info` | `color.primary` — el prusia de la marca, como `Tag info` | Blanco |
+| `success` | `color.success-fill` | `color.success-fill-text` |
+| `warning` | `color.warning-fill` — el amarillo de marca | `color.warning-fill-text` — prusia, 11,17:1 |
+| `error` | `color.error-fill` | `color.error-fill-text` |
+
+`info` no sale de `tokens/color/feedback.json`, y no es un descuido: informar no
+es dar feedback de una acción. Su color es la voz de la casa.
+
+### Las columnas no se apilan
+
+`EmailColumns` es una `<table>`, porque en un correo no hay otra cosa. Outlook
+ignora las media queries, así que **una fila de tres columnas se lee a un tercio
+de ancho en una pantalla de 375px**. Dos columnas como mucho, y de cosas cortas;
+para cualquier otra cosa, un bloque debajo de otro.
+
+La calle entre columnas la reparte la fila —le pone el hueco a cada una menos a
+la última— y no quien la escribe: el motor de Word no conoce `gap`, así que sin
+esto cada plantilla acaba decidiendo su propio `paddingRight` y ninguna coincide
+con la de al lado.
+
 ## La caja
 
 Tres superficies, tres tokens:
