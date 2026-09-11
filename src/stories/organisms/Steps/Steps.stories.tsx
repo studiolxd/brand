@@ -39,6 +39,24 @@ export const SinIconos: Story = {
   args: { items: metodologia.map(({ id, title, description }) => ({ id, title, description })) },
 };
 
+/**
+ * Los mismos cuatro textos que `Stepper` › «Lado a lado»: la misma marca
+ * cuadrada y el mismo conector, pero aquí sin estado —ningún paso es «el
+ * actual»— donde `Stepper` acompaña un flujo en marcha.
+ */
+export const LadoALado: Story = {
+  name: 'Lado a lado',
+  args: {
+    items: [
+      { id: 'datos', title: 'Datos' },
+      { id: 'verificacion', title: 'Verificación' },
+      { id: 'pago', title: 'Pago' },
+      { id: 'confirmacion', title: 'Confirmación' },
+    ],
+    orientation: 'horizontal',
+  },
+};
+
 /** Sobre superficie oscura: el número y la línea voltean con la superficie. */
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
@@ -111,9 +129,9 @@ export const ContratoCompuesto: Story = {
     await expect(pasos[0]).toHaveAttribute('data-paso', 'uno');
 
     // El número lo pone la lista, no el consumidor, y sigue siendo decorativo.
-    const marcadores = lista.querySelectorAll('.steps__marker');
-    await expect(marcadores[0].querySelector('.number-badge')).toHaveTextContent('1');
-    await expect(marcadores[1].querySelector('.number-badge')).toHaveTextContent('2');
+    const marcadores = lista.querySelectorAll('.step-marker');
+    await expect(marcadores[0]).toHaveTextContent('1');
+    await expect(marcadores[1]).toHaveTextContent('2');
     await expect(marcadores[0]).toHaveAttribute('aria-hidden', 'true');
 
     // El cuerpo rico entra tal cual: párrafo y lista dentro del mismo paso.
@@ -135,10 +153,12 @@ export const Contrato: Story = {
     await expect(lista.tagName).toBe('OL');
     await expect(canvas.getAllByRole('listitem')).toHaveLength(4);
 
-    // El número es decorativo: la posición ya la da el `ol`.
-    const marcador = canvasElement.querySelector('.steps__marker')!;
+    // El número es decorativo: la posición ya la da el `ol`. Con icono, la
+    // marca lo muestra a él en vez de la cifra (`metodologia` trae icono en
+    // los cuatro pasos).
+    const marcador = canvasElement.querySelector('.step-marker')!;
     await expect(marcador).toHaveAttribute('aria-hidden', 'true');
-    await expect(marcador.querySelector('.number-badge')).toHaveTextContent('1');
+    await expect(marcador.querySelector('svg')).not.toBeNull();
 
     // Cada paso es un encabezado de verdad, al nivel que se le pase.
     await expect(canvas.getByRole('heading', { level: 3, name: /Escuchamos/ })).toBeInTheDocument();

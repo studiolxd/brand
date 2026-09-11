@@ -1,0 +1,55 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --step-size-sm: var(--spacing-5); /** 24px — marca compacta: listas de proceso densas */
+  --step-size-md: var(--spacing-6); /** 32px — por defecto: la talla que ya usaba Stepper */
+  --step-icon-size: var(--icon-size-sm); /** El check de un paso `done`, o el icono que trae el paso: el icono dentro de un control */
+  --step-font-family: var(--font-family-sans); /** Tipografía de la cifra */
+  --step-font-size-sm: var(--font-size-0); /** 12px — cifra en marca `sm` */
+  --step-font-size-md: var(--font-size-1); /** 14px — cifra en marca `md` */
+  --step-transition-duration: var(--motion-duration-fast); /** Duración del cambio de fondo de la marca (un paso que pasa a completado, o vuelve a pendiente) */
+  --step-transition-easing: var(--motion-easing-default); /** Curva del cambio de fondo */
+  --step-border-radius: var(--border-radius-default); /** Marca cuadrada, el radio del sistema — no `round`: la marca de un paso es identidad de marca, no un avatar ni una píldora */
+  --step-border-width: var(--border-width-default); /** Filete de la marca hueca (estado `pending`). Todo borde del sistema mide lo mismo */
+  --step-font-weight: var(--font-weight-default); /** Peso de la cifra: dentro de una marca rellena de otro color el peso no señala nada — el estado ya lo dicen el relleno y el filete */
+  --step-pending-bg: var(--color-background-light); /** Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad */
+  --step-pending-border-color: var(--color-border-default-on-light); /** Filete de una marca hueca: el borde general del sistema */
+  --step-pending-color: var(--color-text-muted-on-light); /** Cifra de una marca hueca: texto secundario */
+  --step-tone-primary-bg: var(--color-primary); /** Relleno tono primary: la marca del sistema */
+  --step-tone-primary-color: var(--color-text-on-dark); /** Tinta sobre el relleno primary */
+  --step-tone-accent-1-bg: var(--color-accent-1); /** Relleno tono accent-1 (lavender) */
+  --step-tone-accent-1-color: var(--color-text-on-light); /** Tinta sobre accent-1 */
+  --step-tone-accent-2-bg: var(--color-accent-2); /** Relleno tono accent-2 (yellow) */
+  --step-tone-accent-2-color: var(--color-text-on-light); /** Tinta sobre accent-2 */
+  --step-tone-support-1-bg: var(--color-support-1); /** Relleno tono support-1 (emerald) */
+  --step-tone-support-1-color: var(--color-text-on-light); /** Tinta sobre support-1 */
+  --step-tone-support-2-bg: var(--color-support-2); /** Relleno tono support-2 (cayenne) */
+  --step-tone-support-2-color: var(--color-text-on-light); /** Tinta sobre support-2 */
+  --step-tone-danger-bg: var(--color-error-fill); /** Relleno tono danger */
+  --step-tone-danger-color: var(--color-error-fill-text); /** Tinta sobre danger */
+  --step-tone-success-bg: var(--color-success-fill); /** Relleno tono success */
+  --step-tone-success-color: var(--color-success-fill-text); /** Tinta sobre success */
+  --step-tone-neutral-bg: var(--color-surface-inverse-on-light); /** Relleno tono neutral (gris oscuro) */
+  --step-tone-neutral-color: var(--color-text-on-dark); /** Tinta sobre neutral */
+  --step-connector-thickness: var(--border-width-default); /** Grosor de la línea entre pasos. Compartido por Stepper y Steps */
+  --step-connector-color: var(--color-border-default-on-light); /** Tramo sin recorrer / línea de unión: el rol de borde del sistema, el mismo que el filete de la marca `pending` */
+  --step-connector-done-color: var(--color-primary); /** Tramo recorrido (solo Stepper, que tiene estado): la marca del sistema */
+  --step-description-color: var(--color-text-muted-on-light); /** Línea de detalle bajo una marca: texto secundario. La usan la descripción de Stepper y la de Steps, para que digan lo mismo con el mismo color */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --step-pending-bg: var(--color-background-dark); /** Fondo de la marca hueca — surface-dark */
+  --step-pending-border-color: var(--color-text-on-dark); /** Filete de la marca hueca — surface-dark */
+  --step-pending-color: var(--color-text-muted-on-dark); /** Cifra de la marca hueca — surface-dark */
+  --step-tone-primary-bg: var(--color-accent-2); /** Relleno primary — surface-dark. El prusia es el lienzo; se aparta de la derivación (lavanda, el par de Button primary) a propósito, en amarillo, para que el progreso no se confunda con una acción — decisión heredada de Stepper */
+  --step-tone-primary-color: var(--color-primary); /** Tinta sobre el relleno primary — surface-dark: 11,2:1 sobre accent-2 */
+  --step-tone-neutral-bg: var(--color-surface-inverse-on-dark); /** Relleno neutral — surface-dark: la superficie invertida, como en NumberBadge/Tag */
+  --step-tone-neutral-color: var(--color-text-on-light); /** Tinta sobre neutral — surface-dark */
+  --step-connector-color: var(--color-text-on-dark); /** Tramo sin recorrer / línea de unión — surface-dark */
+  --step-connector-done-color: var(--color-accent-2); /** Tramo recorrido — surface-dark: el mismo amarillo que la marca hecha */
+  --step-description-color: var(--color-text-muted-on-dark); /** Línea de detalle bajo una marca — surface-dark */
+}

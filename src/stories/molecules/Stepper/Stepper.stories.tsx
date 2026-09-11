@@ -94,6 +94,24 @@ export const HaciaDelante: Story = {
   },
 };
 
+/**
+ * Los mismos cuatro textos que `Steps` › «Lado a lado»: la misma marca
+ * cuadrada y el mismo conector, pero aquí con estado —completado, actual,
+ * pendiente— donde `Steps` solo cuenta.
+ */
+export const LadoALado: Story = {
+  name: 'Lado a lado',
+  args: {
+    steps: [
+      { id: 'datos', label: 'Datos' },
+      { id: 'verificacion', label: 'Verificación' },
+      { id: 'pago', label: 'Pago' },
+      { id: 'confirmacion', label: 'Confirmación' },
+    ],
+    current: 1,
+  },
+};
+
 export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },

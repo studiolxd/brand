@@ -13,9 +13,17 @@ Un proceso numerado: los pasos de una metodología, de un alta, de una matrícul
 
 ## Es una lista ordenada
 
-`Steps` pinta un `<ol>` de verdad, no una rejilla de tarjetas: el lector de pantalla anuncia cuántos pasos hay y en qué orden va cada uno sin que nadie lo escriba. Por eso el número que se ve —un `NumberBadge`— va marcado como **decorativo** (`aria-hidden`): repetir «1» en voz alta después de «elemento 1 de 4» sobra.
+`Steps` pinta un `<ol>` de verdad, no una rejilla de tarjetas: el lector de pantalla anuncia cuántos pasos hay y en qué orden va cada uno sin que nadie lo escriba. Por eso el número que se ve —un [`StepMarker`](/docs/atoms-stepmarker--docs) en estado `neutral`— va marcado como **decorativo** (`aria-hidden`): repetir «1» en voz alta después de «elemento 1 de 4» sobra.
 
-El título de cada paso es un `Heading` de verdad, con el nivel y la talla por separado: `titleLevel` dice de dónde cuelga el paso en el esquema del documento (por defecto `3`, colgando del `h2` de la sección), y `titleSize` cómo se ve (por defecto `4`, 20px).
+El título de cada paso es un `Heading` de verdad, con el nivel y la talla por separado: `titleLevel` dice de dónde cuelga el paso en el esquema del documento (por defecto `3`, colgando del `h2` de la sección), y `titleSize` cómo se ve (por defecto `1`, 14px — la talla de la etiqueta de `Stepper`).
+
+## La misma marca que `Stepper`
+
+`Steps` y `Stepper` no se fusionan —uno documenta un proceso, el otro acompaña un flujo con estado, ver [`Stepper` › «No es `Steps`»](/docs/molecules-stepper--docs#no-es-steps)— pero comparten la misma base visual: el átomo [`StepMarker`](/docs/atoms-stepmarker--docs) y sus tokens `step.*`. La marca es **cuadrada**, con el radio del sistema (`{border-radius.default}`, rectas) y no `round`: es identidad de marca, no un avatar ni una píldora. `Steps` la usa siempre en estado `neutral` —relleno con la cifra o el icono del paso, nunca hueca: no tiene noción de «pendiente»—, mientras que `Stepper` recorre los cuatro estados según el progreso. El conector entre marcas y la línea de detalle bajo el título comparten también color y grosor con `Stepper` (`step.connector-*`, `step.description-color`).
+
+`badgeVariant` sigue existiendo por compatibilidad, pero pasa a llamarse `tone`: es el color del relleno de la marca, las mismas variantes que admitía antes.
+
+<Canvas of={StepsStories.LadoALado} />
 
 ## Dos formas: datos o composición
 
@@ -52,7 +60,7 @@ En vertical, el número va a la izquierda y la línea baja hasta el siguiente. E
 
 ## Sobre superficie oscura
 
-Solo la línea que une los pasos tiene par oscuro propio; el número lo resuelve `NumberBadge` y el texto, la superficie.
+La marca y la línea que une los pasos resuelven su par oscuro por `step.*` (ver `StepMarker`); el texto, por la superficie.
 
 <Canvas of={StepsStories.EnSuperficieOscura} />
 

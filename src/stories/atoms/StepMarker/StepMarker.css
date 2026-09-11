@@ -1,0 +1,51 @@
+/* La marca de un paso: un cuadrado, no un círculo — es identidad de marca,
+   no un avatar. Compartida por `Stepper` (con estado) y `Steps` (sin él,
+   estado `neutral`). */
+.step-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--step-border-radius);
+  font-family: var(--step-font-family);
+  font-weight: var(--step-font-weight);
+  transition: background-color var(--step-transition-duration) var(--step-transition-easing);
+}
+
+.step-marker--sm {
+  inline-size: var(--step-size-sm);
+  block-size: var(--step-size-sm);
+  font-size: var(--step-font-size-sm);
+}
+
+.step-marker--md {
+  inline-size: var(--step-size-md);
+  block-size: var(--step-size-md);
+  font-size: var(--step-font-size-md);
+}
+
+/* ── Rellena (done / current / neutral), por tono ───────────────────────── */
+
+.step-marker--tone-primary   { background-color: var(--step-tone-primary-bg);   color: var(--step-tone-primary-color); }
+.step-marker--tone-accent-1  { background-color: var(--step-tone-accent-1-bg);  color: var(--step-tone-accent-1-color); }
+.step-marker--tone-accent-2  { background-color: var(--step-tone-accent-2-bg);  color: var(--step-tone-accent-2-color); }
+.step-marker--tone-support-1 { background-color: var(--step-tone-support-1-bg); color: var(--step-tone-support-1-color); }
+.step-marker--tone-support-2 { background-color: var(--step-tone-support-2-bg); color: var(--step-tone-support-2-color); }
+.step-marker--tone-danger    { background-color: var(--step-tone-danger-bg);    color: var(--step-tone-danger-color); }
+.step-marker--tone-success   { background-color: var(--step-tone-success-bg);  color: var(--step-tone-success-color); }
+.step-marker--tone-neutral   { background-color: var(--step-tone-neutral-bg);  color: var(--step-tone-neutral-color); }
+
+/* ── Hueca (pending): filete y cifra secundaria, sin tono ───────────────── */
+
+.step-marker--state-pending {
+  background-color: var(--step-pending-bg);
+  border-width: var(--step-border-width);
+  border-style: solid;
+  border-color: var(--step-pending-border-color);
+  color: var(--step-pending-color);
+}
+
+.step-marker__icon {
+  inline-size: var(--step-icon-size);
+  block-size: var(--step-icon-size);
+}

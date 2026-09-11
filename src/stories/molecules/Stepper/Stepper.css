@@ -68,10 +68,10 @@
   position: absolute;
   inset-inline-end: 50%;
   inline-size: calc(100% + var(--stepper-gap));
-  inset-block-start: calc(var(--stepper-padding-block) + var(--stepper-marker-size) / 2);
-  block-size: var(--stepper-connector-thickness);
-  translate: 0 calc(-1 * var(--stepper-connector-thickness) / 2);
-  background-color: var(--stepper-connector-color);
+  inset-block-start: calc(var(--stepper-padding-block) + var(--step-size-md) / 2);
+  block-size: var(--step-connector-thickness);
+  translate: 0 calc(-1 * var(--step-connector-thickness) / 2);
+  background-color: var(--step-connector-color);
   z-index: 0;
 }
 
@@ -79,7 +79,7 @@
    camino recorrido. */
 .stepper__step--completed::before,
 .stepper__step--current::before {
-  background-color: var(--stepper-connector-done-color);
+  background-color: var(--step-connector-done-color);
 }
 
 /* El contenido va SIEMPRE sobre el carril. No basta con el orden del documento:
@@ -108,35 +108,10 @@
   font-weight: var(--stepper-current-font-weight);
 }
 
+/* La geometría, el relleno y el estado hueco de la marca los pone `StepMarker`
+   (ver `step.*`); aquí solo su sitio dentro del paso. */
 .stepper__marker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--stepper-marker-size);
-  block-size: var(--stepper-marker-size);
-  border-radius: var(--stepper-marker-radius);
-  background-color: var(--stepper-marker-done-bg);
-  color: var(--stepper-marker-done-color);
-  font-family: var(--stepper-marker-font-family);
-  font-size: var(--stepper-marker-font-size);
-  font-weight: var(--stepper-marker-font-weight);
-  transition: background-color var(--stepper-transition-duration) var(--stepper-transition-easing);
-}
-
-/* Un paso pendiente es una marca hueca: filete y cifra secundaria. El fondo no
-   es transparente sino el lienzo, para que el carril no se vea cruzando el
-   círculo — la marca rellena ya lo tapa con su propio color. */
-.stepper__step--pending .stepper__marker {
-  background-color: var(--stepper-marker-pending-bg);
-  border-width: var(--stepper-marker-border-width);
-  border-style: solid;
-  border-color: var(--stepper-marker-pending-border-color);
-  color: var(--stepper-marker-pending-color);
-}
-
-.stepper__check {
-  inline-size: var(--stepper-marker-icon-size);
-  block-size: var(--stepper-marker-icon-size);
+  flex-shrink: 0;
 }
 
 .stepper__text {

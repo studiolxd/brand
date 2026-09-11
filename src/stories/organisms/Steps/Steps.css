@@ -1,5 +1,5 @@
 /* Proceso numerado. La lista es un `ol` sin marcas propias: el número lo pinta
-   el `NumberBadge`, y la numeración semántica la sigue poniendo el elemento. */
+   el `StepMarker`, y la numeración semántica la sigue poniendo el elemento. */
 .steps {
   display: grid;
   gap: var(--steps-gap);
@@ -44,16 +44,16 @@
 .steps__item:not(:last-child) .steps__marker::after {
   content: '';
   flex: 1 1 auto;
-  background-color: var(--steps-connector-color);
+  background-color: var(--step-connector-color);
 }
 
 .steps--vertical .steps__item:not(:last-child) .steps__marker::after {
-  inline-size: var(--steps-connector-thickness);
+  inline-size: var(--step-connector-thickness);
   margin-block: var(--steps-body-gap) calc(-1 * var(--steps-gap));
 }
 
 .steps--horizontal .steps__item:not(:last-child) .steps__marker::after {
-  block-size: var(--steps-connector-thickness);
+  block-size: var(--step-connector-thickness);
   margin-inline: var(--steps-body-gap) calc(-1 * var(--steps-gap));
 }
 
@@ -72,6 +72,7 @@
 
 .steps .steps__description {
   margin: 0;
+  color: var(--step-description-color);
 }
 
 /* En la forma compuesta el cuerpo lo trae el consumidor (párrafos, listas,

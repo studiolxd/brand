@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as StepMarkerStories from "./StepMarker.stories";
+
+<Meta of={StepMarkerStories} />
+
+# StepMarker
+
+La marca de un paso: un cuadrado —el radio del sistema, no un círculo, porque es identidad de marca— con una cifra, un icono o el check de completado dentro. La comparten [`Stepper`](/docs/molecules-stepper--docs), que tiene estado (completado, actual, pendiente), y [`Steps`](/docs/organisms-steps--docs), que no lo tiene y usa el estado `neutral`.
+
+<Canvas of={StepMarkerStories.PorDefecto} />
+
+Es puramente decorativa: siempre lleva `aria-hidden`, porque la numeración semántica la da el `<ol>` que la contiene, no la cifra pintada dentro de la marca.
+
+## Estados
+
+`done` y `current` van rellenos con el tono; `pending` es una marca hueca —filete y cifra secundaria, sin tono—; `neutral` va relleno con el tono, igual que `current`, y es el que usa `Steps`.
+
+<Canvas of={StepMarkerStories.Estados} />
+
+## Tono
+
+El tono decide el color del relleno en los estados rellenos. Son las mismas variantes que `NumberBadgeVariant`, mapeadas 1:1.
+
+<Canvas of={StepMarkerStories.Tonos} />
+
+## Tallas
+
+`sm` (24px) y `md` (32px, por defecto — la que ya usaba `Stepper`).
+
+<Canvas of={StepMarkerStories.Tallas} />
+
+## Contenido
+
+Cifra por defecto (`count`), o un icono del catálogo (`icon`) en su lugar. `done` siempre muestra el check, ignore lo que se le pase.
+
+<Canvas of={StepMarkerStories.ConIcono} />
+
+## En superficie oscura
+
+Solo los tonos `primary` y `neutral` se invierten: el resto son colores saturados que ya contrastan en cualquier superficie.
+
+<Canvas of={StepMarkerStories.SuperficieOscura} />
+
+## Props
+
+<ArgTypes of={StepMarkerStories} />

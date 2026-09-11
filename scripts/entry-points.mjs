@@ -84,6 +84,7 @@ export const entryPoints = {
   'context-menu':        'src/stories/molecules/ContextMenu/ContextMenu.tsx',
   'card':                'src/stories/molecules/Card/Card.tsx',
   'carousel':            'src/stories/molecules/Carousel/Carousel.tsx',
+  'step-marker':         'src/stories/atoms/StepMarker/StepMarker.tsx',
   'steps':               'src/stories/organisms/Steps/Steps.tsx',
   'stepper':             'src/stories/molecules/Stepper/Stepper.tsx',
   'project-card':        'src/stories/molecules/ProjectCard/ProjectCard.tsx',

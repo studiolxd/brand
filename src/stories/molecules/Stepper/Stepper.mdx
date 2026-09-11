@@ -33,6 +33,12 @@ Cada paso admite una línea de detalle bajo la etiqueta, para flujos donde el no
 
 <Canvas of={StepperStories.ConDetalle} />
 
+## La misma marca que `Steps`
+
+La marca de cada paso es el átomo [`StepMarker`](/docs/atoms-stepmarker--docs), compartido con `Steps`: un cuadrado con el radio del sistema (`{border-radius.default}`, rectas), no un círculo — es identidad de marca. `Stepper` la usa en sus tres estados (`done`, `current`, `pending`); `Steps`, que no tiene progreso, siempre en `neutral`. El conector entre marcas y el color de la línea de detalle salen de los mismos tokens `step.*` en los dos componentes.
+
+<Canvas of={StepperStories.LadoALado} />
+
 ## Adaptativo
 
 Por debajo de `md` no caben cuatro etiquetas en fila, así que el progreso degrada a su forma compacta: el contador y la etiqueta del paso actual. Solo una de las dos formas está en el árbol a la vez, así que un lector de pantalla nunca oye el progreso dos veces. El texto del contador es una prop (`compactLabel`), no una cadena fija: recibe el número de paso y el total.

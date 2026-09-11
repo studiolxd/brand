@@ -7,6 +7,32 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.3.0] — 2026-09-11
+
+> **Minor.** Átomo nuevo `StepMarker`, compartido por `Steps` y `Stepper`; sus marcas pasan de círculo a cuadrado.
+
+- **`StepMarker` (atoms), nuevo.** La marca de un paso: un cuadrado —el radio del sistema
+  (`{border-radius.default}`, rectas), no `round`— con una cifra, un icono del catálogo o el
+  check de completado dentro. Es puramente decorativa (`aria-hidden` siempre). Props: `state`
+  (`done` | `current` | `pending` | `neutral`, default `neutral`), `tone` (las mismas
+  variantes que `NumberBadgeVariant`, default `primary`), `size` (`sm` | `md`, default `md`),
+  `count`, `icon`.
+- **Tokens `step.*` (`tokens/component/step.json`), nuevos.** Tamaño de marca `sm`/`md`,
+  radio, tipografía de la cifra, fondo y tinta por tono, estilo hueco de `pending`, conector
+  (grosor y color, recorrido y sin recorrer) y color de la descripción — compartidos por
+  `Stepper` y `Steps`.
+- **`Stepper` adopta `StepMarker`.** Misma API y los mismos tres estados; su marca pasa de
+  círculo a cuadrado. `stepper.*` pierde los tokens de la marca (superseded por `step.*`) y
+  conserva solo los suyos: etiqueta, forma compacta, subrayado de hover y anillo de foco.
+- **`Steps` sustituye `NumberBadge` por `StepMarker state="neutral"`**, con el icono del paso
+  dentro de la marca cuando lo trae. `badgeVariant` se renombra a `tone` (se mantiene como
+  alias deprecado). El título por defecto pasa de talla `4` (20px) a talla `1` (14px, la de
+  la etiqueta de `Stepper`), y la descripción y el conector comparten color y grosor con
+  `Stepper` (`step.description-color`, `step.connector-*`). `steps.*` pierde los tokens de
+  conector (superseded por `step.*`).
+- Stories «Lado a lado» en `Steps` y `Stepper`, con los mismos textos, para comparar la base
+  común y la diferencia (estado vs. contenido).
+
 ## [37.2.0] — 2026-09-11
 
 > **Minor.** `OtpInput` en formularios nativos y molécula `RecoveryCodes`.
