@@ -129,7 +129,7 @@ export declare const emailStyles: {
         readonly fontWeight: number;
         readonly textDecoration: "underline";
     };
-    readonly sectionTitle: {
+    readonly heading2: {
         readonly color: string;
         readonly fontFamily: string;
         readonly fontSize: string;
@@ -154,14 +154,6 @@ export declare const emailStyles: {
         readonly margin: `0 0 ${string}`;
         readonly paddingLeft: string;
     };
-    readonly callout: {
-        readonly fontFamily: string;
-        readonly fontSize: string;
-        readonly fontWeight: number;
-        readonly lineHeight: string;
-        readonly margin: `0 0 ${string}`;
-        readonly padding: `${string} ${string}`;
-    };
     readonly tag: {
         readonly borderRadius: string;
         readonly display: "inline-block";
@@ -176,61 +168,21 @@ export declare const emailStyles: {
         readonly margin: `${string} 0`;
         readonly width: "100%";
     };
-    readonly keyValue: {
-        readonly color: string;
-        readonly fontFamily: string;
-        readonly fontSize: string;
-        readonly fontWeight: number;
-        readonly lineHeight: string;
-        readonly margin: `0 0 ${string}`;
-    };
-    readonly keyValueLabel: {
-        readonly color: string;
-        readonly fontSize: string;
-        readonly fontWeight: number;
-    };
-    readonly code: {
-        readonly backgroundColor: string;
-        readonly color: string;
-        readonly fontFamily: string;
-        readonly fontSize: string;
-        readonly lineHeight: string;
-        readonly margin: `0 0 ${string}`;
-        readonly padding: `${string} ${string}`;
-        readonly wordBreak: "break-all";
-        readonly wordWrap: "break-word";
-    };
-    /** La fila de columnas. El ancho de cada una lo decide quien la escribe. */
-    readonly columns: {
-        readonly marginBottom: string;
-        readonly width: "100%";
-    };
-    readonly column: {
-        readonly color: string;
-        readonly fontFamily: string;
-        readonly fontSize: string;
-        readonly fontWeight: number;
-        readonly lineHeight: string;
-        readonly verticalAlign: "top";
-    };
 };
 /**
- * Los cuatro tonos del correo, cada uno un par relleno/tinta autocontenido.
+ * Los tres tonos de `EmailTag`, cada uno un par relleno/tinta autocontenido.
  *
- * Los usan `EmailCallout` y `EmailTag`, que son la misma idea a dos tamaños: un
- * bloque que avisa y una pastilla que etiqueta. Comparten tabla para que un
- * «error» no sea de un rojo en el recuadro y de otro en la etiqueta.
+ * Son los tres veredictos que hoy pinta un correo de la suite —el de validación
+ * de `lmsmarketplace`, que los tenía escritos a mano como `#006616`, `#ffcd00` y
+ * `#b30000`: exactamente estos—. No hay un cuarto tono neutro ni uno
+ * informativo porque ningún correo los pide todavía.
  *
- * `info` no sale de `tokens/color/feedback.json` y no es un descuido: informar
- * no es dar feedback de una acción, así que su color es el prusia de la marca
- * —el mismo par que `Tag info` y `Alert default` en la web— y no un color de
- * sistema.
+ * Son RELLENOS, los tres, y lo decide el aviso: el amarillo de marca da 1,50:1
+ * sobre blanco y no llega al 3:1 de WCAG como tinta, así que solo existe como
+ * relleno con tinta prusia. Darles a los otros dos otra forma habría dejado
+ * tres veredictos que no se parecen entre sí.
  */
 export declare const emailTones: {
-    readonly info: {
-        readonly backgroundColor: string;
-        readonly color: string;
-    };
     readonly success: {
         readonly backgroundColor: string;
         readonly color: string;
@@ -244,7 +196,7 @@ export declare const emailTones: {
         readonly color: string;
     };
 };
-/** El tono de un aviso o de una etiqueta de estado. */
+/** El veredicto que pinta una `EmailTag`. */
 export type EmailTone = keyof typeof emailTones;
 /**
  * La única clase del correo. Existe porque el hover del botón no cabe inline y

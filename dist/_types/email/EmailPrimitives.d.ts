@@ -1,11 +1,28 @@
-import { type CSSProperties, type ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { type EmailTone } from './emailTheme';
 export interface EmailHeadingProps {
     children: ReactNode;
+    /**
+     * `1` (por defecto) es el título del mensaje, uno por correo. `2` es el
+     * título de un bloque dentro del cuerpo — «Riesgos», «Requisitos», «También
+     * han encajado»— para un correo que tiene demasiado que decir de un tirón.
+     *
+     * Son dos escalones del mismo componente y no dos componentes, porque es lo
+     * que son: un título más pequeño. El de bloque es **dos peldaños** más bajo y
+     * lleva aire por encima, que es lo que hace de él un corte.
+     */
+    level?: 1 | 2;
     style?: CSSProperties;
 }
-/** El título del mensaje. Un correo es un documento suelto: va como `<h1>`. */
-export declare function EmailHeading({ children, style }: EmailHeadingProps): import("react/jsx-runtime").JSX.Element;
+/**
+ * El título del mensaje y, en `level={2}`, el de cada bloque del cuerpo.
+ *
+ * Un correo es un documento suelto: su título va como `<h1>`, y los bloques que
+ * lo dividen como `<h2>`. Lo que **no** es un título de bloque es una versalita
+ * gris a 12px: eso es lo que se inventó `TenderBatchEmail` por su cuenta, y el
+ * sistema no tiene rol de versalita ni se le añade uno para el correo.
+ */
+export declare function EmailHeading({ children, level, style }: EmailHeadingProps): import("react/jsx-runtime").JSX.Element;
 export interface EmailTextProps {
     children: ReactNode;
     /**
@@ -18,21 +35,6 @@ export interface EmailTextProps {
 }
 /** Un párrafo del cuerpo del correo. */
 export declare function EmailText({ children, emphasis, style }: EmailTextProps): import("react/jsx-runtime").JSX.Element;
-export interface EmailSectionTitleProps {
-    children: ReactNode;
-    style?: CSSProperties;
-}
-/**
- * El título de un bloque dentro del cuerpo: «Riesgos», «Requisitos», «Lotes».
- *
- * Es un título más pequeño que el del correo —dos peldaños por debajo— y no una
- * versalita gris, que es lo que cada app se inventaba por su cuenta: el sistema
- * no tiene rol de versalita y no se le añade uno para el correo.
- *
- * Va como `<h2>`: el `<h1>` es el título del mensaje, y un correo largo con
- * bloques tiene jerarquía de documento igual que cualquier otra página.
- */
-export declare function EmailSectionTitle({ children, style }: EmailSectionTitleProps): import("react/jsx-runtime").JSX.Element;
 export interface EmailListProps {
     /** Los `EmailListItem`. */
     children: ReactNode;
@@ -67,36 +69,21 @@ export interface EmailQuoteProps {
  * correo no está diciendo. Para avisar está `EmailCallout`.
  */
 export declare function EmailQuote({ children, style }: EmailQuoteProps): import("react/jsx-runtime").JSX.Element;
-export interface EmailCalloutProps {
-    children: ReactNode;
-    /**
-     * `info` (por defecto) para la voz de la casa, y `success`/`warning`/`error`
-     * para el desenlace de algo que el destinatario había puesto en marcha.
-     */
-    tone?: EmailTone;
-    style?: CSSProperties;
-}
-/**
- * Un bloque que destaca sobre el cuerpo: lo que salió mal, lo que hay que
- * mirar, lo que terminó bien.
- *
- * Los cuatro tonos son **rellenos**, no barras de color ni tinta suelta. Lo
- * decide el tono con menos margen: el aviso solo existe como relleno —el
- * amarillo de marca da 1,50:1 sobre blanco, lejos del 3:1 que pide WCAG—, así
- * que darles a los otros tres otra forma habría dejado cuatro avisos que no se
- * parecen entre sí. Y un relleno es además lo que mejor aguanta el medio: un
- * cliente que se coma un borde deja el bloque sin señal, y uno que invierta los
- * colores sigue teniendo un bloque.
- */
-export declare function EmailCallout({ children, tone, style }: EmailCalloutProps): import("react/jsx-runtime").JSX.Element;
 export interface EmailTagProps {
     children: ReactNode;
-    /** El mismo juego de tonos que `EmailCallout`: un error es del mismo rojo en los dos. */
-    tone?: EmailTone;
+    /**
+     * El veredicto: `success`, `warning` o `error`. **Obligatorio y sin valor por
+     * defecto**: una etiqueta de estado sin estado no significa nada, y no hay un
+     * tono neutro al que caer porque ningún correo de la suite lo pide todavía.
+     */
+    tone: EmailTone;
     style?: CSSProperties;
 }
 /**
- * El veredicto como pastilla: «Validado con avisos», «Resuelto», «Rechazado».
+ * El veredicto como pastilla: «Validado con avisos», «Validado», «Rechazado».
+ *
+ * Es lo que hoy pinta a mano el correo de validación de `lmsmarketplace`, con
+ * sus tres hexes copiados —que son exactamente los del sistema—.
  *
  * Acompaña a una frase, no la sustituye — el color va antes que la palabra para
  * quien mira por encima, pero el correo tiene que leerse igual sin él, porque
@@ -117,77 +104,6 @@ export interface EmailDividerProps {
  * borde en relieve por los cuatro lados que los clientes heredan tal cual.
  */
 export declare function EmailDivider({ style }: EmailDividerProps): import("react/jsx-runtime").JSX.Element;
-export interface EmailColumnsProps {
-    /** Los `EmailColumn`. */
-    children: ReactNode;
-    style?: CSSProperties;
-}
-/**
- * Una fila de columnas: un dato a la izquierda y su cifra a la derecha, dos
- * fichas en paralelo.
- *
- * **La calle la reparte la fila, no quien la escribe.** Le pone el hueco a cada
- * columna menos a la última, porque una fila de correo es una `<table>` y el
- * motor de Word no conoce `gap`: sin esto, cada plantilla acaba decidiendo su
- * propio `paddingRight` y ninguna coincide con la de al lado.
- *
- * Y un aviso del medio: **las columnas no se apilan en el móvil.** Outlook
- * ignora las media queries, así que una fila de tres columnas se lee a un
- * tercio de ancho en una pantalla de 375px. Dos columnas, y de cosas cortas.
- */
-export declare function EmailColumns({ children, style }: EmailColumnsProps): import("react/jsx-runtime").JSX.Element;
-export interface EmailColumnProps {
-    children: ReactNode;
-    /**
-     * Ancho de la columna, en porcentaje (`'50%'`). Sin él, las columnas se
-     * reparten la fila a partes iguales.
-     */
-    width?: string;
-    style?: CSSProperties;
-}
-/**
- * Una columna de `EmailColumns`.
- *
- * No pinta la celda —eso lo hace la fila, que es quien sabe cuál es la última y
- * le toca quedarse sin calle—: pone el ancho y envuelve el contenido.
- */
-export declare function EmailColumn({ children, width, style }: EmailColumnProps): import("react/jsx-runtime").JSX.Element;
-export interface EmailKeyValueProps {
-    /** El nombre del dato: «Identificador», «Importe», «Vence el». */
-    label: ReactNode;
-    /** El dato. */
-    children: ReactNode;
-    style?: CSSProperties;
-}
-/**
- * Un dato con su nombre: un identificador de expediente, un importe, una fecha
- * límite, el usuario de unas credenciales.
- *
- * La etiqueta va **encima** del valor y no delante: en 375px un par en la misma
- * línea parte por donde cae, y lo que queda huérfano en el renglón siguiente es
- * justo el dato. Las dos piezas van en el **mismo** párrafo, separadas por un
- * `<br />`: en dos `<Text>` el margen de párrafo se metería entre el nombre y su
- * dato, y dejarían de leerse como una sola cosa.
- */
-export declare function EmailKeyValue({ label, children, style }: EmailKeyValueProps): import("react/jsx-runtime").JSX.Element;
-export interface EmailCodeProps {
-    /** La clave, entera. */
-    children: ReactNode;
-    style?: CSSProperties;
-}
-/**
- * La clave o el token que el correo enseña **una sola vez**: una contraseña
- * temporal, un secreto rotado, un código de acceso.
- *
- * En mono, sobre la superficie secundaria del sistema, y con el mismo corte de
- * palabra que el enlace de respaldo del botón — y por la misma razón: es para
- * copiarla a mano, así que nada puede esconderla ni sacar barra horizontal.
- *
- * El correo solo carga la cara latina de la sans, así que esto cae al
- * `ui-monospace, monospace` del token de la mono. Está bien que caiga: lo que se
- * le pide aquí a una mono es que la ele y el uno no se confundan.
- */
-export declare function EmailCode({ children, style }: EmailCodeProps): import("react/jsx-runtime").JSX.Element;
 export interface EmailNoteProps {
     children: ReactNode;
     /**

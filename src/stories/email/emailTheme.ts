@@ -218,21 +218,21 @@ export const emailStyles = {
     textDecoration: 'underline',
   },
   /*
-   * El título de un bloque dentro del cuerpo. Es un título más pequeño, no un
-   * metadato: ni versalitas ni gris. Las apps lo escribían a 12px, en
-   * mayúsculas y en gris — tres decisiones que el sistema no tiene y que se
-   * inventaron por bloque.
+   * El segundo escalón de `EmailHeading`: el título de un bloque dentro del
+   * cuerpo. Es un título más pequeño, no un metadato — ni versalitas ni gris,
+   * que son las tres decisiones que `TenderBatchEmail` se inventó por su cuenta
+   * (12px, mayúsculas, gris) y que el sistema no tiene.
    *
    * El margen superior es lo que hace de él un corte: separa del bloque
    * anterior más de lo que lo une a su propio texto.
    */
-  sectionTitle: {
-    color: emailToken('--email-section-title-color'),
+  heading2: {
+    color: emailToken('--email-heading-2-color'),
     fontFamily: emailFontFamily,
-    fontSize: emailToken('--email-section-title-font-size'),
-    fontWeight: Number(emailToken('--email-section-title-font-weight')),
-    lineHeight: emailToken('--email-section-title-line-height'),
-    margin: `${emailToken('--email-section-title-margin-block-start')} 0 ${emailToken('--email-section-title-margin-block-end')}`,
+    fontSize: emailToken('--email-heading-2-font-size'),
+    fontWeight: Number(emailToken('--email-heading-2-font-weight')),
+    lineHeight: emailToken('--email-heading-2-line-height'),
+    margin: `${emailToken('--email-heading-2-margin-block-start')} 0 ${emailToken('--email-heading-2-margin-block-end')}`,
   },
   /*
    * La lista. El sangrado va aquí, en el `<ul>`, y no en el ítem: el
@@ -265,23 +265,6 @@ export const emailStyles = {
     paddingLeft: emailToken('--email-quote-padding-inline-start'),
   },
   /*
-   * El recuadro de aviso, sin su tono: el color lo pone `emailTones`.
-   *
-   * Los cuatro tonos son RELLENOS, no barras de color ni tinta suelta, y eso lo
-   * decide el tono que menos margen tiene: el aviso solo existe como relleno
-   * —el amarillo de marca da 1,50:1 sobre blanco y no llega al 3:1 de WCAG—,
-   * así que darle a los otros tres una forma distinta habría dejado cuatro
-   * avisos que no se parecen entre sí.
-   */
-  callout: {
-    fontFamily: emailFontFamily,
-    fontSize: emailToken('--email-font-size'),
-    fontWeight: Number(emailToken('--email-font-weight')),
-    lineHeight: emailToken('--email-line-height'),
-    margin: `0 0 ${emailToken('--email-callout-margin-block-end')}`,
-    padding: `${emailToken('--email-callout-padding-block')} ${emailToken('--email-callout-padding-inline')}`,
-  },
-  /*
    * La etiqueta de estado. En línea, para que pueda ir dentro de un párrafo o
    * suelta sobre su propia línea.
    *
@@ -307,72 +290,22 @@ export const emailStyles = {
     margin: `${emailToken('--email-divider-margin-block')} 0`,
     width: '100%',
   },
-  /*
-   * El par etiqueta/valor: un identificador, un importe, una fecha. Los dos en
-   * el mismo párrafo, separados por un salto de línea — no en dos `<Text>`,
-   * que meterían el margen de párrafo entre la etiqueta y su valor.
-   */
-  keyValue: {
-    color: emailPalette.text,
-    fontFamily: emailFontFamily,
-    fontSize: emailToken('--email-font-size'),
-    fontWeight: Number(emailToken('--email-font-weight')),
-    lineHeight: emailToken('--email-line-height'),
-    margin: `0 0 ${emailToken('--email-key-value-margin-block-end')}`,
-  },
-  keyValueLabel: {
-    color: emailToken('--email-key-value-label-color'),
-    fontSize: emailToken('--email-key-value-label-font-size'),
-    fontWeight: Number(emailToken('--email-key-value-label-font-weight')),
-  },
-  /*
-   * La clave o el token que el correo enseña una sola vez. Mismo corte de
-   * palabra que el enlace de respaldo del botón, y por lo mismo: es para
-   * copiarla a mano, así que nada puede esconderla.
-   */
-  code: {
-    backgroundColor: emailToken('--email-code-bg'),
-    color: emailToken('--email-code-color'),
-    fontFamily: emailToken('--email-code-font-family'),
-    fontSize: emailToken('--email-code-font-size'),
-    lineHeight: emailToken('--email-line-height'),
-    margin: `0 0 ${emailToken('--email-code-margin-block-end')}`,
-    padding: `${emailToken('--email-code-padding-block')} ${emailToken('--email-code-padding-inline')}`,
-    wordBreak: 'break-all',
-    wordWrap: 'break-word',
-  },
-  /** La fila de columnas. El ancho de cada una lo decide quien la escribe. */
-  columns: {
-    marginBottom: emailToken('--email-columns-margin-block-end'),
-    width: '100%',
-  },
-  column: {
-    color: emailPalette.text,
-    fontFamily: emailFontFamily,
-    fontSize: emailToken('--email-font-size'),
-    fontWeight: Number(emailToken('--email-font-weight')),
-    lineHeight: emailToken('--email-line-height'),
-    verticalAlign: 'top',
-  },
 } as const satisfies Record<string, CSSProperties>;
 
 /**
- * Los cuatro tonos del correo, cada uno un par relleno/tinta autocontenido.
+ * Los tres tonos de `EmailTag`, cada uno un par relleno/tinta autocontenido.
  *
- * Los usan `EmailCallout` y `EmailTag`, que son la misma idea a dos tamaños: un
- * bloque que avisa y una pastilla que etiqueta. Comparten tabla para que un
- * «error» no sea de un rojo en el recuadro y de otro en la etiqueta.
+ * Son los tres veredictos que hoy pinta un correo de la suite —el de validación
+ * de `lmsmarketplace`, que los tenía escritos a mano como `#006616`, `#ffcd00` y
+ * `#b30000`: exactamente estos—. No hay un cuarto tono neutro ni uno
+ * informativo porque ningún correo los pide todavía.
  *
- * `info` no sale de `tokens/color/feedback.json` y no es un descuido: informar
- * no es dar feedback de una acción, así que su color es el prusia de la marca
- * —el mismo par que `Tag info` y `Alert default` en la web— y no un color de
- * sistema.
+ * Son RELLENOS, los tres, y lo decide el aviso: el amarillo de marca da 1,50:1
+ * sobre blanco y no llega al 3:1 de WCAG como tinta, así que solo existe como
+ * relleno con tinta prusia. Darles a los otros dos otra forma habría dejado
+ * tres veredictos que no se parecen entre sí.
  */
 export const emailTones = {
-  info: {
-    backgroundColor: emailToken('--email-tone-info-bg'),
-    color: emailToken('--email-tone-info-color'),
-  },
   success: {
     backgroundColor: emailToken('--email-tone-success-bg'),
     color: emailToken('--email-tone-success-color'),
@@ -387,7 +320,7 @@ export const emailTones = {
   },
 } as const satisfies Record<string, CSSProperties>;
 
-/** El tono de un aviso o de una etiqueta de estado. */
+/** El veredicto que pinta una `EmailTag`. */
 export type EmailTone = keyof typeof emailTones;
 
 /**

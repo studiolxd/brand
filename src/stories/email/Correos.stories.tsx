@@ -5,19 +5,13 @@ import { EmailLayout } from './EmailLayout';
 import { EmailPreview } from './EmailPreview';
 import {
   EmailButton,
-  EmailCallout,
-  EmailCode,
-  EmailColumn,
-  EmailColumns,
   EmailDivider,
   EmailHeading,
-  EmailKeyValue,
   EmailLink,
   EmailList,
   EmailListItem,
   EmailNote,
   EmailQuote,
-  EmailSectionTitle,
   EmailTag,
   EmailText,
 } from './EmailPrimitives';
@@ -27,9 +21,9 @@ import {
  * la suite. Las direcciones son largas de verdad, con su token: es el caso que
  * rompe el ancho, y el que tiene que verse en el catálogo.
  *
- * Los cuatro correos son: uno transaccional (sin categoría, sin baja), uno de aviso
- * (con categoría, con baja y preferencias) y dos de producto —un resumen largo y
- * una clave que solo se ve una vez— montados con todas las primitivas.
+ * Los tres correos son: uno transaccional (sin categoría, sin baja), uno de aviso
+ * (con categoría, con baja y preferencias) y uno de producto largo, el aviso de
+ * licitaciones de Tender, montado solo con primitivas.
  *
  * Las plantillas de verdad NO viven aquí —son producto y se quedan en su
  * repo—; esto es el catálogo enseñando qué sale del sistema cuando se monta un
@@ -91,10 +85,11 @@ const exportacion = (
 
 
 /*
- * El tercero es un correo de PRODUCTO montado entero con primitivas: el aviso
- * de licitaciones que hoy escribe `tender` con veintitantos objetos de estilo a
- * mano. Está aquí para enseñar que no hacen falta — y para que, cuando una app
- * necesite algo que no está, se vea contra qué se compara.
+ * El tercero es un correo de PRODUCTO montado entero con primitivas: el aviso de
+ * licitaciones de `tender`, que hoy escribe once objetos de estilo a nivel de
+ * módulo para decir esto mismo. Está aquí porque es el correo que más pide del
+ * sistema —bloques, listas, una cita del pliego, un veredicto y un corte— y
+ * porque cuando una app necesite algo que no está, se vea contra qué se compara.
  */
 const licitaciones = (
   <EmailLayout
@@ -109,31 +104,19 @@ const licitaciones = (
       cierra en nueve días.
     </EmailText>
 
-    <EmailSectionTitle>Servicio de mantenimiento de zonas verdes</EmailSectionTitle>
+    <EmailHeading level={2}>Mantenimiento de zonas verdes</EmailHeading>
     <EmailText>
-      <EmailTag tone="success">Encaje 92</EmailTag>
+      <EmailTag tone="warning">Encaje parcial</EmailTag>
     </EmailText>
-    <EmailColumns>
-      <EmailColumn width="50%">
-        <EmailKeyValue label="Órgano de contratación">
-          Ayuntamiento de Valdepeñas
-        </EmailKeyValue>
-      </EmailColumn>
-      <EmailColumn width="50%">
-        <EmailKeyValue label="Presupuesto base">412.500,00 €</EmailKeyValue>
-      </EmailColumn>
-    </EmailColumns>
-    <EmailKeyValue label="Expediente">2026/CON/0184</EmailKeyValue>
-
-    <EmailCallout tone="warning">
-      <EmailText style={{ margin: 0 }}>Tres cosas que mirar antes de presentarse:</EmailText>
-      <EmailList>
-        <EmailListItem>Exige clasificación O-6-2, que no consta en tu perfil.</EmailListItem>
-        <EmailListItem>La garantía definitiva sube al 5 % del importe de adjudicación.</EmailListItem>
-        <EmailListItem>El plazo de presentación no admite prórroga.</EmailListItem>
-      </EmailList>
-    </EmailCallout>
-
+    <EmailText>
+      Ayuntamiento de Valdepeñas · 412.500,00 € · expediente 2026/CON/0184 · cierra el 20 de
+      septiembre.
+    </EmailText>
+    <EmailList>
+      <EmailListItem>Exige clasificación O-6-2, que no consta en tu perfil.</EmailListItem>
+      <EmailListItem>La garantía definitiva sube al 5 % del importe de adjudicación.</EmailListItem>
+      <EmailListItem>El plazo de presentación no admite prórroga.</EmailListItem>
+    </EmailList>
     <EmailText>El pliego lo justifica así:</EmailText>
     <EmailQuote>
       <EmailText style={{ margin: 0 }}>
@@ -144,7 +127,7 @@ const licitaciones = (
 
     <EmailDivider />
 
-    <EmailSectionTitle>También han encajado</EmailSectionTitle>
+    <EmailHeading level={2}>También han encajado</EmailHeading>
     <EmailList>
       <EmailListItem>
         <EmailLink href="#limpieza">Limpieza viaria</EmailLink> — Diputación de Cuenca, 1.204.000,00 €
@@ -167,34 +150,6 @@ const licitaciones = (
   </EmailLayout>
 );
 
-/*
- * Y un cuarto, corto, para lo que el anterior no puede enseñar sin forzarlo: la
- * clave que solo se ve una vez. Es el correo de credenciales rotadas de
- * `lmsmcp`, que hoy lo cuenta todo en prosa.
- */
-const credenciales = (
-  <EmailLayout
-    preview="Las credenciales del conector de Acme se han rotado"
-    appName="LMS MCP"
-    assetsBaseUrl="/email"
-  >
-    <EmailHeading>Credenciales rotadas</EmailHeading>
-    <EmailText>
-      Ana Prieto ha rotado las credenciales del conector de Acme. El plugin de Moodle dejará de
-      sincronizar hasta que se actualicen.
-    </EmailText>
-    <EmailKeyValue label="Organización">Acme Formación</EmailKeyValue>
-    <EmailKeyValue label="Moodle">moodle.acme.example</EmailKeyValue>
-    <EmailText>La clave nueva, que no volveremos a enseñar:</EmailText>
-    <EmailCode>slxd_lk_7f2b9c41e08a4d5fb63e19a70c8d425f</EmailCode>
-    <EmailCallout tone="error">
-      <EmailText style={{ margin: 0 }}>
-        La clave anterior ya no vale. Cópiala ahora: este correo es el único sitio donde aparece.
-      </EmailText>
-    </EmailCallout>
-  </EmailLayout>
-);
-
 /** Correo transaccional: verificación de dirección. Sin pie de baja. */
 export const VerificarCorreo: Story = {
   name: 'Verificar el correo',
@@ -211,12 +166,6 @@ export const ExportacionLista: Story = {
 export const NuevasLicitaciones: Story = {
   name: 'Aviso de nuevas licitaciones',
   render: () => <EmailPreview>{licitaciones}</EmailPreview>,
-};
-
-/** El secreto que solo se enseña una vez: `EmailCode` con su aviso. */
-export const CredencialesRotadas: Story = {
-  name: 'Credenciales rotadas',
-  render: () => <EmailPreview>{credenciales}</EmailPreview>,
 };
 
 /*
@@ -250,15 +199,16 @@ export const ContratoLicitaciones: Story = {
     );
     await expect(
       correo.getAllByRole('heading', { level: 2 }).map((titulo) => titulo.textContent),
-    ).toEqual(['Servicio de mantenimiento de zonas verdes', 'También han encajado']);
+    ).toEqual(['Mantenimiento de zonas verdes', 'También han encajado']);
 
     // Las listas son listas de verdad, no párrafos con un bolo delante.
     await expect(correo.getAllByRole('list')).toHaveLength(2);
     await expect(correo.getAllByRole('listitem')).toHaveLength(5);
 
-    // Los pares etiqueta/valor llegan con las dos piezas.
+    // El veredicto y los datos de la ficha llegan como texto, no solo como color:
+    // hay clientes que se comen los fondos.
     const cuerpo = marco.contentDocument!.body.textContent ?? '';
-    for (const dato of ['Órgano de contratación', 'Ayuntamiento de Valdepeñas', 'Expediente', '2026/CON/0184']) {
+    for (const dato of ['Encaje parcial', 'Ayuntamiento de Valdepeñas', '2026/CON/0184']) {
       await expect(cuerpo).toContain(dato);
     }
 

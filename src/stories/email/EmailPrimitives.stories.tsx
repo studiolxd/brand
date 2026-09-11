@@ -4,19 +4,13 @@ import { EmailLayout } from './EmailLayout';
 import { EmailPreview } from './EmailPreview';
 import {
   EmailButton,
-  EmailCallout,
-  EmailCode,
-  EmailColumn,
-  EmailColumns,
   EmailDivider,
   EmailHeading,
-  EmailKeyValue,
   EmailLink,
   EmailList,
   EmailListItem,
   EmailNote,
   EmailQuote,
-  EmailSectionTitle,
   EmailTag,
   EmailText,
 } from './EmailPrimitives';
@@ -27,8 +21,8 @@ import {
  * un correo, que además es como se usan.
  *
  * Van en dos correos porque son dos oficios distintos: lo que el correo DICE
- * (título, prosa, enlace, acción) y lo que el correo ORDENA cuando tiene mucho
- * que decir (bloques, listas, avisos, datos).
+ * —título, prosa, enlace, acción— y lo que el correo necesita cuando tiene
+ * demasiado que decir de un tirón: bloques, listas, citas y veredictos.
  */
 const meta: Meta = {
   title: 'Email/Primitivas',
@@ -65,80 +59,57 @@ const texto = (
 
 const bloques = (
   <EmailLayout preview="Los bloques del correo" appName="Studio LXD" assetsBaseUrl="/email">
-    <EmailHeading>Bloques</EmailHeading>
-    <EmailText>
-      Un correo con mucho que decir se parte en bloques. Estas son las piezas con las que se
-      parte, y son las mismas para las diez apps de la suite.
+    <EmailHeading>Un correo largo</EmailHeading>
+    <EmailText emphasis>
+      Cuatro piezas para un correo que no cabe en tres párrafos. Son las que hoy escribe a mano
+      algún correo de la suite, y ninguna más.
     </EmailText>
 
-    <EmailSectionTitle>EmailSectionTitle</EmailSectionTitle>
+    <EmailHeading level={2}>EmailHeading level=2</EmailHeading>
     <EmailText>
-      Encabeza un bloque. Es un título más pequeño que el del correo —dos peldaños por debajo— y
-      va como «h2»: ni versalitas ni gris, que es lo que se inventaba cada plantilla.
+      El título de un bloque: el segundo escalón del mismo componente, dos peldaños por debajo
+      del título del mensaje y con aire por encima, que es lo que hace de él un corte. No es una
+      versalita gris a 12px, que es lo que se inventó el aviso de licitaciones de Tender.
     </EmailText>
 
-    <EmailSectionTitle>EmailList / EmailListItem</EmailSectionTitle>
+    <EmailHeading level={2}>EmailList / EmailListItem</EmailHeading>
     <EmailList>
       <EmailListItem>Una lista de verdad, con su «ul» y sus «li».</EmailListItem>
       <EmailListItem>
-        Un lector de pantalla sabe cuántos elementos hay; con un bolo escrito a mano, no.
+        Un lector de pantalla sabe cuántos elementos hay; con un bolo escrito a mano delante de
+        un párrafo, no.
       </EmailListItem>
       <EmailListItem>«ordered» la vuelve numerada, para pasos que van en orden.</EmailListItem>
     </EmailList>
 
-    <EmailSectionTitle>EmailCallout</EmailSectionTitle>
-    <EmailCallout tone="info">
-      <EmailText style={{ margin: 0 }}>«info»: la voz de la casa, en el prusia de la marca.</EmailText>
-    </EmailCallout>
-    <EmailCallout tone="success">
-      <EmailText style={{ margin: 0 }}>«success»: salió bien.</EmailText>
-    </EmailCallout>
-    <EmailCallout tone="warning">
-      <EmailText style={{ margin: 0 }}>«warning»: mira esto antes de seguir.</EmailText>
-    </EmailCallout>
-    <EmailCallout tone="error">
-      <EmailText style={{ margin: 0 }}>«error»: no salió.</EmailText>
-    </EmailCallout>
-    <EmailNote tone="plain">
-      Los cuatro son rellenos, no barras de color: el aviso solo existe como relleno —el amarillo
-      de marca no llega al contraste que pide WCAG como tinta— y el tono con menos margen manda
-      sobre la forma de los cuatro.
-    </EmailNote>
+    <EmailHeading level={2}>EmailQuote</EmailHeading>
+    <EmailQuote>
+      <EmailText style={{ margin: 0 }}>
+        Palabras que no son nuestras: lo que escribió quien denunció un plugin, el motivo con el
+        que se rechazó algo. No lleva tono — citar no es avisar.
+      </EmailText>
+    </EmailQuote>
 
-    <EmailSectionTitle>EmailTag</EmailSectionTitle>
+    <EmailHeading level={2}>EmailTag</EmailHeading>
     <EmailText>
-      El mismo juego de tonos a tamaño de pastilla:{' '}
+      El veredicto como pastilla, en sus tres tonos:{' '}
       <EmailTag tone="success">Validado</EmailTag>{' '}
       <EmailTag tone="warning">Con avisos</EmailTag>{' '}
       <EmailTag tone="error">Rechazado</EmailTag>
     </EmailText>
-
-    <EmailSectionTitle>EmailQuote</EmailSectionTitle>
-    <EmailQuote>
-      <EmailText style={{ margin: 0 }}>
-        Palabras que no son nuestras. No lleva tono: citar no es avisar.
-      </EmailText>
-    </EmailQuote>
-
-    <EmailSectionTitle>EmailColumns / EmailColumn</EmailSectionTitle>
-    <EmailColumns>
-      <EmailColumn width="50%">
-        <EmailKeyValue label="EmailKeyValue">Un dato con su nombre encima</EmailKeyValue>
-      </EmailColumn>
-      <EmailColumn width="50%">
-        <EmailKeyValue label="Importe">412.500,00 €</EmailKeyValue>
-      </EmailColumn>
-    </EmailColumns>
     <EmailNote tone="plain">
-      Las columnas no se apilan en el móvil: Outlook ignora las media queries. Dos, y de cosas
-      cortas.
+      Los tres son rellenos, no tinta suelta: el amarillo de marca no llega al contraste que pide
+      WCAG como color de texto, así que el aviso solo existe como relleno — y el tono con menos
+      margen manda sobre la forma de los tres.
     </EmailNote>
 
     <EmailDivider />
 
-    <EmailSectionTitle>EmailCode</EmailSectionTitle>
-    <EmailText>La clave que solo se enseña una vez, en mono y cortable:</EmailText>
-    <EmailCode>slxd_lk_7f2b9c41e08a4d5fb63e19a70c8d425f</EmailCode>
+    <EmailHeading level={2}>EmailDivider</EmailHeading>
+    <EmailText>
+      La línea de ahí arriba. Parte el correo en dos: lo que se cuenta con detalle y lo que solo
+      se lista.
+    </EmailText>
   </EmailLayout>
 );
 
@@ -148,7 +119,7 @@ export const TextoYAccion: Story = {
   render: () => <EmailPreview>{texto}</EmailPreview>,
 };
 
-/** El correo como documento: bloques, listas, avisos, datos y claves. */
+/** El correo como documento: bloques, listas, citas y veredictos. */
 export const Bloques: Story = {
   render: () => <EmailPreview>{bloques}</EmailPreview>,
 };

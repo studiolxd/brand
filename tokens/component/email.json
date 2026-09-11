@@ -110,32 +110,32 @@
       "$type": "number",
       "$description": "Peso del párrafo destacado (`EmailText emphasis`): la frase que resume el correo antes de entrar en el detalle. Es el rol de énfasis del sistema, no una negrita escrita a mano"
     },
-    "section-title-font-size": {
+    "heading-2-font-size": {
       "$value": "{site-shell.heading-size-4}",
       "$type": "dimension",
-      "$description": "Título de bloque dentro del cuerpo (24px): el peldaño 4 de la escala pública, dos por debajo del título del correo. Un correo largo se divide en bloques, y un bloque se encabeza con un título más pequeño — no con versalitas grises, que es lo que escribían las apps: el sistema no tiene rol de versalita y no se inventa uno para el correo"
+      "$description": "Título de un bloque dentro del cuerpo (24px): el peldaño 4 de la escala pública, dos por debajo del título del mensaje. Es el segundo escalón de `EmailHeading`, no un componente aparte. No es una versalita gris —que es lo que escribía `TenderBatchEmail` a mano, a 12px y en mayúsculas—: el sistema no tiene rol de versalita y no se inventa uno para el correo"
     },
-    "section-title-font-weight": {
+    "heading-2-font-weight": {
       "$value": "{text.h5.font-weight}",
       "$type": "number",
       "$description": "Peso del título de bloque: el mismo que el título del correo"
     },
-    "section-title-line-height": {
+    "heading-2-line-height": {
       "$value": "{text.h5.line-height}",
       "$type": "number",
       "$description": "Interlineado del título de bloque: el del peldaño en el que está, un escalón más suelto que el del título del correo"
     },
-    "section-title-margin-block-start": {
+    "heading-2-margin-block-start": {
       "$value": "{spacing.5}",
       "$type": "dimension",
-      "$description": "Aire por encima del título de bloque. Es el que separa un bloque del anterior: más que el que lo une a su propio texto, para que el corte se lea"
+      "$description": "Aire por encima del título de bloque. Es el que separa un bloque del anterior: más que el que lo une a su propio texto, para que el corte se lea. El título del mensaje no lo lleva, porque abre el correo"
     },
-    "section-title-margin-block-end": {
+    "heading-2-margin-block-end": {
       "$value": "{spacing.3}",
       "$type": "dimension",
       "$description": "Separación entre el título de bloque y lo que encabeza: la misma que la del título del correo"
     },
-    "section-title-color": {
+    "heading-2-color": {
       "$value": "{color.text.on-light}",
       "$type": "color",
       "$description": "Tinta del título de bloque: la del correo. No es un metadato en gris, es un título"
@@ -175,31 +175,6 @@
       "$type": "dimension",
       "$description": "Separación bajo una cita: la de entre párrafos"
     },
-    "callout-padding-block": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Aire interior del recuadro de aviso, por arriba y por abajo"
-    },
-    "callout-padding-inline": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Aire interior del recuadro de aviso a los lados"
-    },
-    "callout-margin-block-end": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Separación bajo el recuadro de aviso: la de entre párrafos"
-    },
-    "columns-margin-block-end": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Separación bajo una fila de columnas: la de entre párrafos"
-    },
-    "column-gutter": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Calle entre columnas. Va como `padding-right` de cada columna menos la última, no como `gap`: una fila de correo es una `<table>` y el motor de Word no conoce `gap`"
-    },
     "divider-width": {
       "$value": "{border-width.default}",
       "$type": "dimension",
@@ -214,61 +189,6 @@
       "$value": "{spacing.5}",
       "$type": "dimension",
       "$description": "Aire por encima y por debajo del separador. El peldaño de entre componentes: un separador parte el correo en dos, y el aire tiene que decir eso"
-    },
-    "key-value-margin-block-end": {
-      "$value": "{spacing.3}",
-      "$type": "dimension",
-      "$description": "Aire entre un par etiqueta/valor y el siguiente. Menor que el de entre párrafos: una lista de datos es una sola cosa"
-    },
-    "key-value-label-font-size": {
-      "$value": "{site-shell.paragraph-small-font-size}",
-      "$type": "dimension",
-      "$description": "Tamaño de la etiqueta de un par etiqueta/valor: la letra menor del correo. El dato es el valor, no su nombre"
-    },
-    "key-value-label-font-weight": {
-      "$value": "{font-weight.emphasis}",
-      "$type": "number",
-      "$description": "Peso de la etiqueta: el rol de énfasis, que es lo que la distingue del valor sin recurrir al color"
-    },
-    "key-value-label-color": {
-      "$value": "{color.text.muted-on-light}",
-      "$type": "color",
-      "$description": "Tinta de la etiqueta: la secundaria. El valor se queda con la normal, que es lo que hay que leer"
-    },
-    "code-font-family": {
-      "$value": "{font-family.mono}",
-      "$type": "string",
-      "$description": "La mono del sistema con su pila de reserva, para la clave o el token que el correo enseña una sola vez. El correo solo carga la cara latina de la sans, así que esto cae casi siempre al `ui-monospace, monospace` del propio token — y está bien que caiga: lo que se le pide a una mono aquí es que la l y el 1 no se confundan"
-    },
-    "code-font-size": {
-      "$value": "{site-shell.paragraph-small-font-size}",
-      "$type": "dimension",
-      "$description": "Tamaño de la clave. La letra menor del correo: una mono ocupa más ancho por carácter y a la talla del cuerpo una clave larga parte en tres líneas"
-    },
-    "code-bg": {
-      "$value": "{color.surface.secondary-on-light}",
-      "$type": "color",
-      "$description": "Fondo del bloque de clave: la superficie clara secundaria, la misma que viste el bloque de código en la web"
-    },
-    "code-color": {
-      "$value": "{color.text.on-light}",
-      "$type": "color",
-      "$description": "Tinta de la clave: la del correo. Es lo que hay que copiar carácter a carácter"
-    },
-    "code-padding-block": {
-      "$value": "{spacing.3}",
-      "$type": "dimension",
-      "$description": "Aire interior del bloque de clave, por arriba y por abajo"
-    },
-    "code-padding-inline": {
-      "$value": "{spacing.3}",
-      "$type": "dimension",
-      "$description": "Aire interior del bloque de clave a los lados"
-    },
-    "code-margin-block-end": {
-      "$value": "{spacing.4}",
-      "$type": "dimension",
-      "$description": "Separación bajo el bloque de clave: la de entre párrafos"
     },
     "tag-font-size": {
       "$value": "{site-shell.paragraph-small-font-size}",
@@ -299,16 +219,6 @@
       "$value": "{spacing.4}",
       "$type": "dimension",
       "$description": "Separación bajo la línea de la etiqueta de estado: la de entre párrafos"
-    },
-    "tone-info-bg": {
-      "$value": "{color.primary}",
-      "$type": "color",
-      "$description": "Relleno del tono informativo: el prusia de la marca, el mismo par que usan `Tag info` y `Alert default`. El rol `info` no está en `tokens/color/feedback.json` —no es feedback, es la voz de la casa— y por eso apunta a la marca y no a un color de sistema"
-    },
-    "tone-info-color": {
-      "$value": "{color.text.on-dark}",
-      "$type": "color",
-      "$description": "Tinta sobre el relleno informativo: blanco sobre prusia"
     },
     "tone-success-bg": {
       "$value": "{color.success-fill}",

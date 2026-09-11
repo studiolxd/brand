@@ -10,16 +10,11 @@ import { render } from 'react-email';
 import { describe, expect, it } from 'vitest';
 
 import {
-  EmailCallout,
-  EmailCode,
-  EmailColumn,
-  EmailColumns,
   EmailDivider,
-  EmailKeyValue,
+  EmailHeading,
   EmailList,
   EmailListItem,
   EmailQuote,
-  EmailSectionTitle,
   EmailTag,
   EmailText,
 } from './EmailPrimitives';
@@ -33,19 +28,34 @@ const correo = (contenido: ReactElement) =>
     </EmailLayout>,
   );
 
-describe('EmailSectionTitle', () => {
-  it('va como h2, bajo el h1 del título del mensaje', async () => {
-    const out = await correo(<EmailSectionTitle>Riesgos</EmailSectionTitle>);
+describe('EmailHeading', () => {
+  it('sin `level` es el h1 del mensaje', async () => {
+    const out = await correo(<EmailHeading>Tres licitaciones nuevas</EmailHeading>);
+
+    expect(out).toContain('<h1');
+    expect(out).toContain(emailTokens['--email-heading-font-size']);
+  });
+
+  it('`level={2}` es el título de un bloque, dos peldaños por debajo', async () => {
+    const out = await correo(<EmailHeading level={2}>Riesgos</EmailHeading>);
 
     expect(out).toContain('<h2');
-    expect(out).toContain('Riesgos');
+    expect(out).toContain(`font-size:${emailTokens['--email-heading-2-font-size']}`);
+  });
+
+  it('el de bloque lleva aire por encima; el del mensaje, no', async () => {
+    const bloque = await correo(<EmailHeading level={2}>Riesgos</EmailHeading>);
+    const mensaje = await correo(<EmailHeading>Riesgos</EmailHeading>);
+
+    expect(bloque).toContain(`margin:${emailTokens['--email-heading-2-margin-block-start']} 0`);
+    expect(mensaje).toContain('margin:0 0');
   });
 
   it('no es una versalita gris: ni mayúsculas forzadas ni tinta secundaria', async () => {
-    const out = await correo(<EmailSectionTitle>Riesgos</EmailSectionTitle>);
+    const out = await correo(<EmailHeading level={2}>Riesgos</EmailHeading>);
 
     expect(out).not.toContain('text-transform:uppercase');
-    expect(out).toContain(emailTokens['--email-section-title-color']);
+    expect(out).toContain(emailTokens['--email-heading-2-color']);
   });
 });
 
@@ -84,43 +94,25 @@ describe('EmailList', () => {
   });
 });
 
-describe('EmailCallout', () => {
+describe('EmailTag', () => {
   /*
-   * Los cuatro tonos son rellenos. Lo decide el aviso, que no puede ser otra
-   * cosa: el amarillo de marca da 1,50:1 sobre blanco y no llega al 3:1 de
-   * WCAG como tinta. Si alguien le quita el fondo a uno, deja de parecerse a
-   * los otros tres.
+   * Los tres son rellenos, y lo decide el aviso: el amarillo de marca da 1,50:1
+   * sobre blanco y no llega al 3:1 de WCAG como tinta. Si alguien le quita el
+   * fondo a uno, deja de parecerse a los otros dos.
    */
   it.each([
-    ['info', '--email-tone-info-bg', '--email-tone-info-color'],
     ['success', '--email-tone-success-bg', '--email-tone-success-color'],
     ['warning', '--email-tone-warning-bg', '--email-tone-warning-color'],
     ['error', '--email-tone-error-bg', '--email-tone-error-color'],
   ] as const)('el tono %s es un relleno con su tinta emparejada', async (tone, bg, color) => {
-    const out = await correo(<EmailCallout tone={tone}>Aviso</EmailCallout>);
+    const out = await correo(<EmailText><EmailTag tone={tone}>Veredicto</EmailTag></EmailText>);
 
     expect(out).toContain(`background-color:${emailTokens[bg]}`);
     expect(out).toContain(`color:${emailTokens[color]}`);
   });
 
-  it('sin tono es «info», la voz de la casa', async () => {
-    const out = await correo(<EmailCallout>Aviso</EmailCallout>);
-
-    expect(out).toContain(`background-color:${emailTokens['--email-tone-info-bg']}`);
-  });
-});
-
-describe('EmailTag', () => {
-  it('comparte tabla de tonos con el recuadro: un error es del mismo rojo en los dos', async () => {
-    const recuadro = await correo(<EmailCallout tone="error">Falló</EmailCallout>);
-    const pastilla = await correo(<EmailText><EmailTag tone="error">Falló</EmailTag></EmailText>);
-
-    expect(recuadro).toContain(`background-color:${emailTokens['--email-tone-error-bg']}`);
-    expect(pastilla).toContain(`background-color:${emailTokens['--email-tone-error-bg']}`);
-  });
-
   it('es inline-block, para que el padding vertical empuje la línea', async () => {
-    const out = await correo(<EmailText><EmailTag>Nuevo</EmailTag></EmailText>);
+    const out = await correo(<EmailText><EmailTag tone="success">Nuevo</EmailTag></EmailText>);
 
     expect(out).toContain('display:inline-block');
   });
@@ -147,70 +139,19 @@ describe('EmailDivider', () => {
   });
 });
 
-describe('EmailColumns', () => {
-  it('la calle la reparte la fila: la última columna se queda sin ella', async () => {
-    const out = await correo(
-      <EmailColumns>
-        <EmailColumn width="50%">Izquierda</EmailColumn>
-        <EmailColumn width="50%">Derecha</EmailColumn>
-      </EmailColumns>,
-    );
-
-    expect(out).toContain(`padding-right:${emailTokens['--email-column-gutter']}`);
-    expect(out).toContain('padding-right:0');
-  });
-
-  it('sin `gap`, que el motor de Word no conoce', async () => {
-    const out = await correo(
-      <EmailColumns>
-        <EmailColumn>Sola</EmailColumn>
-      </EmailColumns>,
-    );
-
-    expect(out).not.toContain('gap:');
-  });
-});
-
-describe('EmailKeyValue', () => {
-  it('etiqueta y valor van en el mismo párrafo, partidos por un salto', async () => {
-    const out = await correo(<EmailKeyValue label="Importe">412.500,00 €</EmailKeyValue>);
-
-    expect(out).toContain('Importe');
-    expect(out).toContain('412.500,00 €');
-    expect(out).toContain('<br');
-    // Un solo <p>: en dos, el margen de párrafo se metería entre el nombre y su dato.
-    expect(out.match(/412\.500,00/g)).toHaveLength(1);
-  });
-
-  it('la etiqueta va en la tinta secundaria y el valor en la normal', async () => {
-    const out = await correo(<EmailKeyValue label="Importe">412.500,00 €</EmailKeyValue>);
-
-    expect(out).toContain(`color:${emailTokens['--email-key-value-label-color']}`);
-  });
-});
-
-describe('EmailCode', () => {
-  it('va en mono y se corta, que es lo que hace que se pueda copiar entera', async () => {
-    const out = await correo(<EmailCode>slxd_lk_7f2b9c41e08a4d5f</EmailCode>);
-
-    expect(out).toContain('ui-monospace');
-    expect(out).toContain('word-break:break-all');
-    expect(out).toContain('word-wrap:break-word');
-  });
-});
-
 describe('las primitivas de bloque', () => {
   /*
    * La razón de ser de todo esto: que ninguna app vuelva a escribir un hex. Los
-   * tres que hoy están copiados a mano en `lmsmarketplace` salen de aquí.
+   * tres que hoy están copiados a mano en el correo de validación de
+   * `lmsmarketplace` —#006616, #ffcd00 y #b30000— salen de aquí.
    */
   it('no pintan un solo color que no venga de un token del correo', async () => {
     const out = await correo(
       <>
-        <EmailSectionTitle>Bloque</EmailSectionTitle>
-        <EmailCallout tone="warning">Aviso</EmailCallout>
+        <EmailHeading level={2}>Bloque</EmailHeading>
+        <EmailText><EmailTag tone="warning">Con avisos</EmailTag></EmailText>
         <EmailQuote><EmailText>Cita</EmailText></EmailQuote>
-        <EmailCode>clave</EmailCode>
+        <EmailList><EmailListItem>Uno</EmailListItem></EmailList>
         <EmailDivider />
       </>,
     );
