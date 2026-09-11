@@ -7,6 +7,21 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.5.1] — 2026-09-11
+
+> **Patch.** El conector de `Steps` vuelve a llegar de una marca a la siguiente.
+
+- **`Steps`: el conector entre marcas, arreglado (B15).** Desde que `StepMarker` pasó a ser
+  de talla fija (v37.3.0), el conector seguía intentando estirarse con `flex-grow` y un
+  margen negativo dentro del propio flujo — la técnica que usaba cuando la marca era un
+  `NumberBadge` flexible. Ese margen negativo corrompía el alto mínimo que la rejilla usa
+  para dimensionar la fila: en un paso sin descripción (solo título), la fila salía más baja
+  que los 32px de la marca y esta se salía de su sitio, sin línea visible. El conector pasa a
+  ser un `::after` fuera de flujo, anclado con `top`/`bottom` (o `left`/`right` en horizontal)
+  a la celda de la marca — que la rejilla sigue estirando a la altura/ancho real de la fila —
+  en vez de `flex-grow`: no participa en el cálculo del alto de la fila, así que no puede
+  volver a romperlo. Sin cambios de API ni de tokens.
+
 ## [37.5.0] — 2026-09-11
 
 > **Minor.** La marca como activos publicados: logotipo suelto, favicon único de suite y
