@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import { type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { type IconName } from '../../atoms/Icon/Icon';
-import { type NumberBadgeVariant } from '../../atoms/NumberBadge/NumberBadge';
+import { type StepMarkerTone } from '../../atoms/StepMarker/StepMarker';
 import './Steps.css';
 export interface StepItem {
     /** Clave de React. Sin ella se usa la posición. */
@@ -22,11 +22,13 @@ export interface StepsProps {
     items?: StepItem[];
     /** Uno debajo de otro (por defecto) o en fila. */
     orientation?: 'vertical' | 'horizontal';
-    /** Color del número. Por defecto `primary`. */
-    badgeVariant?: NumberBadgeVariant;
+    /** Color de la marca. Por defecto `primary`. */
+    tone?: StepMarkerTone;
+    /** @deprecated Usar `tone`. Se mantiene como alias por compatibilidad. */
+    badgeVariant?: StepMarkerTone;
     /** Nivel semántico del título de cada paso. Por defecto `3`. */
     titleLevel?: HeadingLevel;
-    /** Talla del título de cada paso. Por defecto `4` (20px). */
+    /** Talla del título de cada paso. Por defecto `1` (14px, la de la etiqueta de `Stepper`). */
     titleSize?: HeadingSize;
     /** Nombre accesible de la lista, si la sección que la contiene no lo da ya. */
     label?: string;
@@ -44,11 +46,12 @@ export interface StepsProps {
  * matrícula. Es una lista ordenada de verdad (`ol`), así que el lector de
  * pantalla anuncia «lista de 4 elementos» y el orden sin que nadie lo escriba.
  *
- * El número se pinta con `NumberBadge` y va marcado como decorativo: la
- * posición ya la da el `ol`, y repetirla en voz alta sobraría. La línea que
- * une un paso con el siguiente es la línea de separación del sistema.
+ * La marca es un `StepMarker` en estado `neutral` —Steps no tiene noción de
+ * progreso— y va marcada como decorativa: la posición ya la da el `ol`, y
+ * repetirla en voz alta sobraría. La línea que une un paso con el siguiente
+ * comparte color y grosor con la de `Stepper` (`step.connector-*`).
  */
-export declare function Steps({ items, orientation, badgeVariant, titleLevel, titleSize, label, children, className, id, }: StepsProps): import("react/jsx-runtime").JSX.Element;
+export declare function Steps({ items, orientation, tone, badgeVariant, titleLevel, titleSize, label, children, className, id, }: StepsProps): import("react/jsx-runtime").JSX.Element;
 export interface StepProps extends Omit<React.ComponentPropsWithoutRef<'li'>, 'title'> {
     /** Título del paso. */
     title: ReactNode;

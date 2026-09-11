@@ -1,7 +1,7 @@
 import { Children, createContext, useContext, type ReactNode } from 'react';
 import { Heading, type HeadingLevel, type HeadingSize } from '../../atoms/Heading/Heading';
 import { Icon, type IconName } from '../../atoms/Icon/Icon';
-import { NumberBadge, type NumberBadgeVariant } from '../../atoms/NumberBadge/NumberBadge';
+import { StepMarker, type StepMarkerTone } from '../../atoms/StepMarker/StepMarker';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import './Steps.css';
 
@@ -25,11 +25,13 @@ export interface StepsProps {
   items?: StepItem[];
   /** Uno debajo de otro (por defecto) o en fila. */
   orientation?: 'vertical' | 'horizontal';
-  /** Color del número. Por defecto `primary`. */
-  badgeVariant?: NumberBadgeVariant;
+  /** Color de la marca. Por defecto `primary`. */
+  tone?: StepMarkerTone;
+  /** @deprecated Usar `tone`. Se mantiene como alias por compatibilidad. */
+  badgeVariant?: StepMarkerTone;
   /** Nivel semántico del título de cada paso. Por defecto `3`. */
   titleLevel?: HeadingLevel;
-  /** Talla del título de cada paso. Por defecto `4` (20px). */
+  /** Talla del título de cada paso. Por defecto `1` (14px, la de la etiqueta de `Stepper`). */
   titleSize?: HeadingSize;
   /** Nombre accesible de la lista, si la sección que la contiene no lo da ya. */
   label?: string;
@@ -49,7 +51,7 @@ export interface StepsProps {
  */
 interface StepsContextValue {
   index: number;
-  badgeVariant: NumberBadgeVariant;
+  tone: StepMarkerTone;
   titleLevel: HeadingLevel;
   titleSize: HeadingSize;
 }
@@ -61,22 +63,25 @@ const StepsContext = createContext<StepsContextValue | null>(null);
  * matrícula. Es una lista ordenada de verdad (`ol`), así que el lector de
  * pantalla anuncia «lista de 4 elementos» y el orden sin que nadie lo escriba.
  *
- * El número se pinta con `NumberBadge` y va marcado como decorativo: la
- * posición ya la da el `ol`, y repetirla en voz alta sobraría. La línea que
- * une un paso con el siguiente es la línea de separación del sistema.
+ * La marca es un `StepMarker` en estado `neutral` —Steps no tiene noción de
+ * progreso— y va marcada como decorativa: la posición ya la da el `ol`, y
+ * repetirla en voz alta sobraría. La línea que une un paso con el siguiente
+ * comparte color y grosor con la de `Stepper` (`step.connector-*`).
  */
 export function Steps({
   items,
   orientation = 'vertical',
-  badgeVariant = 'primary',
+  tone,
+  badgeVariant,
   titleLevel = 3,
-  titleSize = 4,
+  titleSize = 1,
   label,
   children,
   className,
   id,
 }: StepsProps) {
   const classes = ['steps', `steps--${orientation}`, className].filter(Boolean).join(' ');
+  const marcaTono = tone ?? badgeVariant ?? 'primary';
 
   // Forma compuesta: cada hijo es un paso y la lista le dice qué número le
   // toca. El consumidor nunca escribe el número, igual que con `items`.
@@ -84,7 +89,7 @@ export function Steps({
     return (
       <ol id={id} className={classes} aria-label={label}>
         {Children.map(children, (child, index) => (
-          <StepsContext.Provider value={{ index, badgeVariant, titleLevel, titleSize }}>
+          <StepsContext.Provider value={{ index, tone: marcaTono, titleLevel, titleSize }}>
             {child}
           </StepsContext.Provider>
         ))}
@@ -96,8 +101,8 @@ export function Steps({
     <ol id={id} className={classes} aria-label={label}>
       {(items ?? []).map((step, index) => (
         <li key={step.id ?? index} className="steps__item">
-          <span className="steps__marker" aria-hidden="true">
-            <NumberBadge count={index + 1} variant={badgeVariant} className="steps__number" />
+          <span className="steps__marker">
+            <StepMarker state="neutral" tone={marcaTono} count={index + 1} icon={step.icon} className="steps__number" />
           </span>
           <div className="steps__body">
             <Heading level={titleLevel} size={titleSize} className="steps__title">
@@ -132,12 +137,12 @@ export function Step({ title, icon, children, className, ...rest }: StepProps) {
   if (contexto === null) {
     throw new Error('`Step` solo funciona dentro de `Steps`: de ahí saca su número.');
   }
-  const { index, badgeVariant, titleLevel, titleSize } = contexto;
+  const { index, tone, titleLevel, titleSize } = contexto;
 
   return (
     <li className={['steps__item', className].filter(Boolean).join(' ')} {...rest}>
-      <span className="steps__marker" aria-hidden="true">
-        <NumberBadge count={index + 1} variant={badgeVariant} className="steps__number" />
+      <span className="steps__marker">
+        <StepMarker state="neutral" tone={tone} count={index + 1} icon={icon} className="steps__number" />
       </span>
       <div className="steps__body">
         <Heading level={titleLevel} size={titleSize} className="steps__title">

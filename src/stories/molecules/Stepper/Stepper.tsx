@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { Icon } from '../../atoms/Icon/Icon';
+import { StepMarker } from '../../atoms/StepMarker/StepMarker';
 import { VisuallyHidden } from '../../atoms/VisuallyHidden/VisuallyHidden';
 import './Stepper.css';
 
@@ -129,9 +129,11 @@ export function Stepper({
             onStepSelect !== undefined && status !== 'current' && (step.reachable ?? status === 'completed');
           const contenido = (
             <>
-              <span className="stepper__marker" aria-hidden="true">
-                {status === 'completed' ? <Icon name="check" size="sm" className="stepper__check" /> : index + 1}
-              </span>
+              <StepMarker
+                state={status === 'completed' ? 'done' : status === 'current' ? 'current' : 'pending'}
+                count={index + 1}
+                className="stepper__marker"
+              />
               <span className="stepper__text">
                 <VisuallyHidden>{texto[status]}: </VisuallyHidden>
                 <span className="stepper__label">{step.label}</span>

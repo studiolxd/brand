@@ -1,0 +1,58 @@
+{
+  "step": {
+    "size-sm":       { "$value": "{spacing.5}",           "$type": "dimension", "$description": "24px — marca compacta: listas de proceso densas" },
+    "size-md":       { "$value": "{spacing.6}",           "$type": "dimension", "$description": "32px — por defecto: la talla que ya usaba Stepper" },
+    "border-radius": { "$value": "{border-radius.default}", "$type": "dimension", "$description": "Marca cuadrada, el radio del sistema — no `round`: la marca de un paso es identidad de marca, no un avatar ni una píldora" },
+    "border-width":  { "$value": "{border-width.default}", "$type": "dimension", "$description": "Filete de la marca hueca (estado `pending`). Todo borde del sistema mide lo mismo" },
+    "icon-size":     { "$value": "{icon.size-sm}",        "$type": "dimension", "$description": "El check de un paso `done`, o el icono que trae el paso: el icono dentro de un control" },
+
+    "font-family":   { "$value": "{font-family.sans}",    "$type": "string",    "$description": "Tipografía de la cifra" },
+    "font-size-sm":  { "$value": "{font-size.0}",         "$type": "dimension", "$description": "12px — cifra en marca `sm`" },
+    "font-size-md":  { "$value": "{font-size.1}",         "$type": "dimension", "$description": "14px — cifra en marca `md`" },
+    "font-weight":   { "$value": "{font-weight.default}", "$type": "number",    "$description": "Peso de la cifra: dentro de una marca rellena de otro color el peso no señala nada — el estado ya lo dicen el relleno y el filete" },
+
+    "pending-bg":            { "$value": "{color.background.light}",         "$type": "color", "$description": "Fondo de una marca hueca (`pending`): el lienzo de la página. Tiene que tapar el carril igual que una marca rellena — transparente, la línea lo cruzaría por la mitad" },
+    "pending-border-color":  { "$value": "{color.border.default-on-light}",  "$type": "color", "$description": "Filete de una marca hueca: el borde general del sistema" },
+    "pending-color":         { "$value": "{color.text.muted-on-light}",      "$type": "color", "$description": "Cifra de una marca hueca: texto secundario" },
+
+    "tone-primary-bg":     { "$value": "{color.primary}",                      "$type": "color", "$description": "Relleno tono primary: la marca del sistema" },
+    "tone-primary-color":  { "$value": "{color.text.on-dark}",                 "$type": "color", "$description": "Tinta sobre el relleno primary" },
+    "tone-accent-1-bg":    { "$value": "{color.accent-1}",                     "$type": "color", "$description": "Relleno tono accent-1 (lavender)" },
+    "tone-accent-1-color": { "$value": "{color.text.on-light}",                "$type": "color", "$description": "Tinta sobre accent-1" },
+    "tone-accent-2-bg":    { "$value": "{color.accent-2}",                     "$type": "color", "$description": "Relleno tono accent-2 (yellow)" },
+    "tone-accent-2-color": { "$value": "{color.text.on-light}",                "$type": "color", "$description": "Tinta sobre accent-2" },
+    "tone-support-1-bg":   { "$value": "{color.support-1}",                    "$type": "color", "$description": "Relleno tono support-1 (emerald)" },
+    "tone-support-1-color":{ "$value": "{color.text.on-light}",                "$type": "color", "$description": "Tinta sobre support-1" },
+    "tone-support-2-bg":   { "$value": "{color.support-2}",                    "$type": "color", "$description": "Relleno tono support-2 (cayenne)" },
+    "tone-support-2-color":{ "$value": "{color.text.on-light}",                "$type": "color", "$description": "Tinta sobre support-2" },
+    "tone-danger-bg":      { "$value": "{color.error-fill}",                   "$type": "color", "$description": "Relleno tono danger" },
+    "tone-danger-color":   { "$value": "{color.error-fill-text}",              "$type": "color", "$description": "Tinta sobre danger" },
+    "tone-success-bg":     { "$value": "{color.success-fill}",                 "$type": "color", "$description": "Relleno tono success" },
+    "tone-success-color":  { "$value": "{color.success-fill-text}",            "$type": "color", "$description": "Tinta sobre success" },
+    "tone-neutral-bg":     { "$value": "{color.surface.inverse-on-light}",     "$type": "color", "$description": "Relleno tono neutral (gris oscuro)" },
+    "tone-neutral-color":  { "$value": "{color.text.on-dark}",                 "$type": "color", "$description": "Tinta sobre neutral" },
+
+    "connector-thickness":  { "$value": "{border-width.default}",            "$type": "dimension", "$description": "Grosor de la línea entre pasos. Compartido por Stepper y Steps" },
+    "connector-color":      { "$value": "{color.border.default-on-light}",   "$type": "color",     "$description": "Tramo sin recorrer / línea de unión: el rol de borde del sistema, el mismo que el filete de la marca `pending`" },
+    "connector-done-color": { "$value": "{color.primary}",                   "$type": "color",     "$description": "Tramo recorrido (solo Stepper, que tiene estado): la marca del sistema" },
+
+    "description-color": { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Línea de detalle bajo una marca: texto secundario. La usan la descripción de Stepper y la de Steps, para que digan lo mismo con el mismo color" },
+
+    "transition-duration": { "$value": "{motion.duration.fast}", "$type": "number", "$description": "Duración del cambio de fondo de la marca (un paso que pasa a completado, o vuelve a pendiente)" },
+    "transition-easing":   { "$value": "{motion.easing.default}","$type": "string", "$description": "Curva del cambio de fondo" },
+
+    "surface-dark-pending-bg":           { "$value": "{color.background.dark}",    "$type": "color", "$description": "Fondo de la marca hueca — surface-dark" },
+    "surface-dark-pending-border-color": { "$value": "{color.text.on-dark}",       "$type": "color", "$description": "Filete de la marca hueca — surface-dark" },
+    "surface-dark-pending-color":        { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Cifra de la marca hueca — surface-dark" },
+
+    "surface-dark-tone-primary-bg":    { "$value": "{color.accent-2}", "$type": "color", "$description": "Relleno primary — surface-dark. El prusia es el lienzo; se aparta de la derivación (lavanda, el par de Button primary) a propósito, en amarillo, para que el progreso no se confunda con una acción — decisión heredada de Stepper" },
+    "surface-dark-tone-primary-color": { "$value": "{color.primary}",  "$type": "color", "$description": "Tinta sobre el relleno primary — surface-dark: 11,2:1 sobre accent-2" },
+    "surface-dark-tone-neutral-bg":    { "$value": "{color.surface.inverse-on-dark}", "$type": "color", "$description": "Relleno neutral — surface-dark: la superficie invertida, como en NumberBadge/Tag" },
+    "surface-dark-tone-neutral-color": { "$value": "{color.text.on-light}",          "$type": "color", "$description": "Tinta sobre neutral — surface-dark" },
+
+    "surface-dark-connector-color":      { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Tramo sin recorrer / línea de unión — surface-dark" },
+    "surface-dark-connector-done-color": { "$value": "{color.accent-2}",    "$type": "color", "$description": "Tramo recorrido — surface-dark: el mismo amarillo que la marca hecha" },
+
+    "surface-dark-description-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Línea de detalle bajo una marca — surface-dark" }
+  }
+}

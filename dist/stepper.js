@@ -1,7 +1,7 @@
 'use client';
 import './stepper.css';
-import { Icon as e } from "./icon.js";
-import { VisuallyHidden as t } from "./visually-hidden.js";
+import { VisuallyHidden as e } from "./visually-hidden.js";
+import { StepMarker as t } from "./step-marker.js";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/stories/molecules/Stepper/Stepper.tsx
 function a({ steps: a, current: o, onStepSelect: s, label: c = "Progreso", compactLabel: l = (e, t) => `Paso ${e} de ${t}`, labels: u, className: d, id: f }) {
@@ -28,18 +28,14 @@ function a({ steps: a, current: o, onStepSelect: s, label: c = "Progreso", compa
 			className: "stepper__list",
 			"aria-label": c,
 			children: a.map((a, o) => {
-				let c = o < h ? "completed" : o === h ? "current" : "pending", l = s !== void 0 && c !== "current" && (a.reachable ?? c === "completed"), u = /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r("span", {
-					className: "stepper__marker",
-					"aria-hidden": "true",
-					children: c === "completed" ? /* @__PURE__ */ r(e, {
-						name: "check",
-						size: "sm",
-						className: "stepper__check"
-					}) : o + 1
+				let c = o < h ? "completed" : o === h ? "current" : "pending", l = s !== void 0 && c !== "current" && (a.reachable ?? c === "completed"), u = /* @__PURE__ */ i(n, { children: [/* @__PURE__ */ r(t, {
+					state: c === "completed" ? "done" : c === "current" ? "current" : "pending",
+					count: o + 1,
+					className: "stepper__marker"
 				}), /* @__PURE__ */ i("span", {
 					className: "stepper__text",
 					children: [
-						/* @__PURE__ */ i(t, { children: [p[c], ": "] }),
+						/* @__PURE__ */ i(e, { children: [p[c], ": "] }),
 						/* @__PURE__ */ r("span", {
 							className: "stepper__label",
 							children: a.label
