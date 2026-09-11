@@ -89,6 +89,7 @@
 @import "./molecules/project-card.css";
 @import "./molecules/table.css";
 @import "./molecules/data-table.css";
+@import "./components/step.css";
 @import "./molecules/steps.css";
 @import "./molecules/stepper.css";
 @import "./components/sidebar.css";

@@ -153,10 +153,12 @@ export const Contrato: Story = {
     await expect(lista.tagName).toBe('OL');
     await expect(canvas.getAllByRole('listitem')).toHaveLength(4);
 
-    // El número es decorativo: la posición ya la da el `ol`.
+    // El número es decorativo: la posición ya la da el `ol`. Con icono, la
+    // marca lo muestra a él en vez de la cifra (`metodologia` trae icono en
+    // los cuatro pasos).
     const marcador = canvasElement.querySelector('.step-marker')!;
     await expect(marcador).toHaveAttribute('aria-hidden', 'true');
-    await expect(marcador).toHaveTextContent('1');
+    await expect(marcador.querySelector('svg')).not.toBeNull();
 
     // Cada paso es un encabezado de verdad, al nivel que se le pase.
     await expect(canvas.getByRole('heading', { level: 3, name: /Escuchamos/ })).toBeInTheDocument();
