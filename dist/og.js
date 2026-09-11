@@ -1,52 +1,30 @@
 import { n as e, t } from "./_shared/tokens.js";
-import { a as n, t as r } from "./_shared/logomarkassets.js";
+import { r as n, t as r } from "./_shared/logoassets.js";
 import { createElement as i } from "react";
 //#region src/stories/og/ogTypeface.ts
 var a = t("--font-family-sans").split(",")[0].trim().replace(/^["']|["']$/g, ""), o = {
 	width: 1200,
 	height: 630
-}, s = "image/png", c = t("--color-text-on-dark"), l = t("--color-text-muted-on-dark"), u = t("--color-background-dark"), d = t("--color-accent-2"), f = e("--spacing-8"), p = Number.parseFloat(e("--logomark-size-xl")), m = Number(t("--font-weight-default")), h = Number(t("--font-weight-emphasis"));
-function g({ title: s, subtitle: g, eyebrow: _, appName: v }) {
-	let y = i("div", {
-		key: "cabecera",
+}, s = "image/png", c = t("--color-primary"), l = t("--color-accent-1"), u = e("--spacing-8"), [, , d, f] = n.split(" ").map(Number), p = 2 * Number.parseFloat(e("--logo-height-xl")), m = Math.round(p * d / f), h = Number(t("--font-weight-default")), g = Number(t("--font-weight-emphasis"));
+function _({ title: s, subtitle: d, eyebrow: f }) {
+	let _ = i("div", {
+		key: "firma",
 		style: {
 			display: "flex",
-			alignItems: "center",
-			justifyContent: "space-between"
-		}
-	}, i("div", {
-		key: "marca",
-		style: {
-			display: "flex",
-			alignItems: "center",
-			gap: e("--spacing-4")
+			justifyContent: "flex-end",
+			alignItems: "flex-start"
 		}
 	}, i("svg", {
-		key: "isotipo",
-		width: p,
+		key: "marca",
+		width: m,
 		height: p,
 		viewBox: n,
-		fill: c
-	}, r.map((e, t) => i("path", {
-		key: t,
-		d: e
-	}))), i("div", {
-		key: "nombre",
-		style: {
-			display: "flex",
-			fontSize: e("--site-shell-heading-size-5"),
-			fontWeight: h,
-			color: c
-		}
-	}, v)), _ ? i("div", {
-		key: "eyebrow",
-		style: {
-			display: "flex",
-			fontSize: e("--site-shell-heading-size-5"),
-			fontWeight: m,
-			color: l
-		}
-	}, _) : null), b = i("div", {
+		fill: c,
+		children: r.map((e, t) => i("path", {
+			key: t,
+			d: e
+		}))
+	})), v = i("div", {
 		key: "cuerpo",
 		style: {
 			display: "flex",
@@ -56,72 +34,80 @@ function g({ title: s, subtitle: g, eyebrow: _, appName: v }) {
 			gap: e("--spacing-5")
 		}
 	}, i("div", {
+		key: "titular",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: e("--spacing-2")
+		}
+	}, f ? i("div", {
+		key: "eyebrow",
+		style: {
+			display: "flex",
+			fontSize: e("--site-shell-heading-size-6"),
+			fontWeight: g,
+			color: c
+		}
+	}, f) : null, i("div", {
 		key: "titulo",
 		style: {
 			display: "flex",
 			fontSize: e("--site-shell-heading-size-9"),
-			fontWeight: h,
+			fontWeight: g,
 			lineHeight: Number(t("--line-height-tight")),
 			color: c
 		}
-	}, s), g ? i("div", {
+	}, s)), d ? i("div", {
 		key: "subtitulo",
 		style: {
 			display: "flex",
-			fontSize: e("--site-shell-heading-size-6"),
-			fontWeight: m,
+			fontSize: e("--site-shell-heading-size-7"),
+			fontWeight: h,
 			lineHeight: Number(t("--line-height-snug")),
-			color: l
+			color: c
 		}
-	}, g) : null), x = i("div", {
-		key: "franja",
-		style: {
-			display: "flex",
-			height: e("--spacing-3"),
-			backgroundColor: d
-		}
-	}), S = i("div", {
+	}, d) : null), y = i("div", {
 		key: "contenido",
 		style: {
 			display: "flex",
 			flexDirection: "column",
 			flexGrow: 1,
-			paddingTop: f,
-			paddingBottom: f,
-			paddingLeft: f,
-			paddingRight: f
+			paddingTop: u,
+			paddingBottom: u,
+			paddingLeft: u,
+			paddingRight: u
 		}
-	}, y, b);
+	}, _, v);
 	return i("div", { style: {
 		display: "flex",
 		flexDirection: "column",
 		width: o.width,
 		height: o.height,
-		backgroundColor: u,
+		backgroundColor: l,
 		color: c,
 		fontFamily: a
-	} }, S, x);
+	} }, y);
 }
 //#endregion
 //#region src/stories/og/ogFonts.ts
-var _ = [{
+var v = [{
 	weight: Number(t("--font-weight-default")),
 	file: "google-sans-flex-normal-300.ttf"
 }, {
 	weight: Number(t("--font-weight-emphasis")),
 	file: "google-sans-flex-normal-500.ttf"
-}], v = ["./assets/fonts/google-sans-flex/", "../../assets/fonts/google-sans-flex/"];
-function y(e) {
+}], y = ["./assets/fonts/google-sans-flex/", "../../assets/fonts/google-sans-flex/"];
+function b(e) {
 	return e.buffer.slice(e.byteOffset, e.byteOffset + e.byteLength);
 }
-async function b() {
+async function x() {
 	let { readFile: e } = await import("node:fs/promises");
-	return Promise.all(_.map(async ({ weight: t, file: n }) => {
+	return Promise.all(v.map(async ({ weight: t, file: n }) => {
 		let r;
-		for (let i of v) try {
+		for (let i of y) try {
 			return {
 				name: a,
-				data: y(await e(new URL(i + n, import.meta.url))),
+				data: b(await e(new URL(i + n, import.meta.url))),
 				weight: t,
 				style: "normal"
 			};
@@ -132,4 +118,4 @@ async function b() {
 	}));
 }
 //#endregion
-export { s as OG_CONTENT_TYPE, a as OG_FONT_FAMILY, o as OG_SIZE, g as ogCard, b as ogFonts };
+export { s as OG_CONTENT_TYPE, a as OG_FONT_FAMILY, o as OG_SIZE, _ as ogCard, x as ogFonts };

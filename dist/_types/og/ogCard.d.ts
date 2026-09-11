@@ -13,17 +13,15 @@ export interface OgCardProps {
     subtitle?: string;
     /** Una etiqueta corta arriba a la derecha: sección, categoría, fecha. Opcional. */
     eyebrow?: string;
-    /** El nombre de la aplicación, junto al isotipo. */
-    appName: string;
 }
 /**
  * El árbol de la tarjeta social de marca, listo para satori.
  *
  * ```ts
- * new ImageResponse(ogCard({ title, appName: 'Bricks' }), {
+ * new ImageResponse(ogCard({ title }), {
  *   ...OG_SIZE,
  *   fonts: await ogFonts(),
  * });
  * ```
  */
-export declare function ogCard({ title, subtitle, eyebrow, appName }: OgCardProps): ReactElement;
+export declare function ogCard({ title, subtitle, eyebrow }: OgCardProps): ReactElement;

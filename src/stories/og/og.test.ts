@@ -10,7 +10,6 @@ describe('ogCard', () => {
   it('pinta el árbol completo', () => {
     expect(
       ogCard({
-        appName: 'Bricks',
         eyebrow: 'Documentación',
         title: 'Cómo montar una lección',
         subtitle: 'De la plantilla al alumno, en cinco pasos.',
@@ -19,19 +18,19 @@ describe('ogCard', () => {
   });
 
   it('sin subtítulo ni eyebrow deja fuera los dos nodos, no los pinta vacíos', () => {
-    const arbol = JSON.stringify(ogCard({ appName: 'Bricks', title: 'Solo título' }));
+    const arbol = JSON.stringify(ogCard({ title: 'Solo título' }));
 
     expect(arbol).not.toContain('"subtitulo"');
     expect(arbol).not.toContain('"eyebrow"');
   });
 
   it('lleva el lienzo, el tamaño y la fuente de marca', () => {
-    const { props } = ogCard({ appName: 'Bricks', title: 'Solo título' });
+    const { props } = ogCard({ title: 'Solo título' });
 
     expect(props.style).toMatchObject({
       width: OG_SIZE.width,
       height: OG_SIZE.height,
-      backgroundColor: token('--color-background-dark'),
+      backgroundColor: token('--color-accent-1'),
       fontFamily: OG_FONT_FAMILY,
     });
   });

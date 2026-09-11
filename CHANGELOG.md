@@ -7,6 +7,34 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.0.0] — 2026-09-11
+
+> **Major (breaking).** La tarjeta social (`@studiolxd/brand/og`) se rediseña y `ogCard` pierde la prop obligatoria `appName`.
+
+- **`ogCard`: fuera `appName`.** La tarjeta ya no firma con el isotipo más el nombre de la
+  aplicación, sino con el **logotipo completo de Studio LXD**, arriba a la derecha. La
+  aplicación no se identifica: la tarjeta es de Studio LXD y la app se deduce del enlace.
+  Quien quiera nombrarla, la pasa en `eyebrow` (`'Bricks · Documentación'`).
+  **Migración:** quitar `appName` de la llamada; es un error de tipo si se deja.
+- **Lienzo lavanda con tinta prusia.** El fondo pasa de `color.background.dark` a
+  `color.accent-1`, y todo el texto —eyebrow, título, subtítulo— y el logotipo a
+  `color.primary`. Es el par autocontenido de `Button primary`, así que no depende de la
+  superficie ambiente. Desaparece la tinta secundaria (`color.text.muted-on-dark`) de la
+  tarjeta.
+- **Fuera la franja amarilla del pie** (`color.accent-2`): el color de marca lo pone ahora
+  el lienzo entero.
+- **El eyebrow se lee como antetítulo, no como una línea suelta.** Sigue la receta del
+  eyebrow de `PrevNextNav`: va pegado al título (`spacing.2`; el aire grande, `spacing.5`,
+  queda solo antes del subtítulo) y se distingue por peso (`font-weight.emphasis`), no por
+  tamaño, mayúsculas ni caja. La tinta no cambia porque la tarjeta lee toda en prusia.
+- **Escala.** Eyebrow a `site-shell.heading-size-6` y subtítulo a `site-shell.heading-size-7`
+  (antes `-5` y `-6`); el título se queda en `-9`. El logotipo va al doble de
+  `logo.height-xl`: a la talla de una cabecera la firma no se lee en una miniatura.
+- **El margen vuelve a un nodo interior.** El lienzo lleva ancho fijo y satori lo mide como
+  `border-box`, pero el navegador del catálogo no: con el padding en el lienzo, el logotipo
+  se salía por la derecha en el preview HTML. Con el margen dentro, los dos motores dibujan
+  lo mismo.
+
 ## [37.5.4] — 2026-09-11
 
 > **Patch (tooling).** `release-check.mjs` gana un guardián que habría cazado la 37.5.2 directamente: compara el ÍNDICE de git de `dist/` contra el disco (no solo el disco consigo mismo) y falla si difieren en caja, con el comando de arreglo en el propio mensaje. El check de imports existente también compara ahora contra el índice, no solo contra el disco. Lógica pura extraída a `scripts/lib/case-guard.mjs` con tests (`scripts/lib/case-guard.test.ts`, ya en el proyecto `unit` de Vitest). CLAUDE.md documenta `git config core.ignorecase false` para este repo en macOS.

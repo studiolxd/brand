@@ -30,7 +30,7 @@
  */
 import { createElement, type ReactElement } from 'react';
 
-import { logomarkPaths, logomarkViewBox } from '../atoms/Logomark/logomarkAssets';
+import { logoPaths, logoViewBox } from '../atoms/Logo/logoAssets';
 import { token, tokenPx } from '../../tokens/tokens';
 
 import { OG_FONT_FAMILY } from './ogTypeface';
@@ -48,8 +48,6 @@ export interface OgCardProps {
   subtitle?: string;
   /** Una etiqueta corta arriba a la derecha: sección, categoría, fecha. Opcional. */
   eyebrow?: string;
-  /** El nombre de la aplicación, junto al isotipo. */
-  appName: string;
 }
 
 /*
@@ -58,15 +56,20 @@ export interface OgCardProps {
  * pública se genera en CSS y aquí no hay CSS, así que se apunta directamente a
  * los tokens fuente `--site-shell-*` en vez de a la escala de aplicación.
  */
-const ink = token('--color-text-on-dark');
-const inkMuted = token('--color-text-muted-on-dark');
-const paper = token('--color-background-dark');
-const brandBand = token('--color-accent-2');
+const ink = token('--color-primary');
+const paper = token('--color-accent-1');
 
 const gutter = tokenPx('--spacing-8');
+
 /* En números, no en `px`: los atributos `width`/`height` de un `<svg>` no son
-   estilo, y satori los quiere como medida cruda. */
-const markSize = Number.parseFloat(tokenPx('--logomark-size-xl'));
+   estilo, y satori los quiere como medida cruda. El ancho sale del propio
+   `viewBox`, para no cablear una proporción que es del trazado. */
+const [, , logoWidthRatio, logoHeightRatio] = logoViewBox.split(' ').map(Number);
+/* El doble de la talla mayor de interfaz: el lienzo es 1200 px, casi el doble de
+   un ancho de lectura, y la tarjeta se mira reducida en un hilo — a la talla de
+   una cabecera la firma no se lee. El factor es del medio, como los 1200×630. */
+const logoHeight = 2 * Number.parseFloat(tokenPx('--logo-height-xl'));
+const logoWidth = Math.round((logoHeight * logoWidthRatio) / logoHeightRatio);
 
 const weightDefault = Number(token('--font-weight-default'));
 const weightEmphasis = Number(token('--font-weight-emphasis'));
@@ -75,68 +78,31 @@ const weightEmphasis = Number(token('--font-weight-emphasis'));
  * El árbol de la tarjeta social de marca, listo para satori.
  *
  * ```ts
- * new ImageResponse(ogCard({ title, appName: 'Bricks' }), {
+ * new ImageResponse(ogCard({ title }), {
  *   ...OG_SIZE,
  *   fonts: await ogFonts(),
  * });
  * ```
  */
-export function ogCard({ title, subtitle, eyebrow, appName }: OgCardProps): ReactElement {
-  const marca = createElement(
-    'div',
-    { key: 'marca', style: { display: 'flex', alignItems: 'center', gap: tokenPx('--spacing-4') } },
-    createElement(
-      'svg',
-      {
-        key: 'isotipo',
-        width: markSize,
-        height: markSize,
-        viewBox: logomarkViewBox,
-        fill: ink,
-      },
-      logomarkPaths.map((d, i) => createElement('path', { key: i, d })),
-    ),
-    createElement(
-      'div',
-      {
-        key: 'nombre',
-        style: {
-          display: 'flex',
-          fontSize: tokenPx('--site-shell-heading-size-5'),
-          fontWeight: weightEmphasis,
-          color: ink,
-        },
-      },
-      appName,
-    ),
-  );
-
-  const cabecera = createElement(
+export function ogCard({ title, subtitle, eyebrow }: OgCardProps): ReactElement {
+  /* El logotipo firma arriba a la derecha, así que va en su propia fila: un
+     `alignSelf` no vale porque satori solo implementa un subconjunto de flex. */
+  const firma = createElement(
     'div',
     {
-      key: 'cabecera',
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      },
+      key: 'firma',
+      /* `flex-start` en el eje cruzado: sin él la fila estira el `<svg>` a lo
+         alto y el trazado, que conserva su proporción, se sale por la derecha. */
+      style: { display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start' },
     },
-    marca,
-    eyebrow
-      ? createElement(
-          'div',
-          {
-            key: 'eyebrow',
-            style: {
-              display: 'flex',
-              fontSize: tokenPx('--site-shell-heading-size-5'),
-              fontWeight: weightDefault,
-              color: inkMuted,
-            },
-          },
-          eyebrow,
-        )
-      : null,
+    createElement('svg', {
+      key: 'marca',
+      width: logoWidth,
+      height: logoHeight,
+      viewBox: logoViewBox,
+      fill: ink,
+      children: logoPaths.map((d, i) => createElement('path', { key: i, d })),
+    }),
   );
 
   const cuerpo = createElement(
@@ -151,19 +117,49 @@ export function ogCard({ title, subtitle, eyebrow, appName }: OgCardProps): Reac
         gap: tokenPx('--spacing-5'),
       },
     },
+    /* El eyebrow se pega al título y el aire grande queda solo antes del
+       subtítulo: es la proximidad del eyebrow de `PrevNextNav`, lo que hace que
+       se lea como antetítulo y no como una línea suelta. El énfasis lo lleva por
+       peso, que es como el sistema separa jerarquías sin cambiar de tinta. */
     createElement(
       'div',
       {
-        key: 'titulo',
+        key: 'titular',
         style: {
           display: 'flex',
-          fontSize: tokenPx('--site-shell-heading-size-9'),
-          fontWeight: weightEmphasis,
-          lineHeight: Number(token('--line-height-tight')),
-          color: ink,
+          flexDirection: 'column',
+          gap: tokenPx('--spacing-2'),
         },
       },
-      title,
+      eyebrow
+        ? createElement(
+            'div',
+            {
+              key: 'eyebrow',
+              style: {
+                display: 'flex',
+                fontSize: tokenPx('--site-shell-heading-size-6'),
+                fontWeight: weightEmphasis,
+                color: ink,
+              },
+            },
+            eyebrow,
+          )
+        : null,
+      createElement(
+        'div',
+        {
+          key: 'titulo',
+          style: {
+            display: 'flex',
+            fontSize: tokenPx('--site-shell-heading-size-9'),
+            fontWeight: weightEmphasis,
+            lineHeight: Number(token('--line-height-tight')),
+            color: ink,
+          },
+        },
+        title,
+      ),
     ),
     subtitle
       ? createElement(
@@ -172,10 +168,10 @@ export function ogCard({ title, subtitle, eyebrow, appName }: OgCardProps): Reac
             key: 'subtitulo',
             style: {
               display: 'flex',
-              fontSize: tokenPx('--site-shell-heading-size-6'),
+              fontSize: tokenPx('--site-shell-heading-size-7'),
               fontWeight: weightDefault,
               lineHeight: Number(token('--line-height-snug')),
-              color: inkMuted,
+              color: ink,
             },
           },
           subtitle,
@@ -183,17 +179,9 @@ export function ogCard({ title, subtitle, eyebrow, appName }: OgCardProps): Reac
       : null,
   );
 
-  /* La franja de marca va a sangre, así que cuelga del lienzo y no del texto:
-     es el único nodo que se queda fuera del margen. */
-  const franja = createElement('div', {
-    key: 'franja',
-    style: {
-      display: 'flex',
-      height: tokenPx('--spacing-3'),
-      backgroundColor: brandBand,
-    },
-  });
-
+  /* El margen va en un nodo interior, no en el lienzo: el lienzo lleva un ancho
+     fijo y satori lo mide como `border-box`, pero el navegador del catálogo no
+     —sumaría el padding y se saldría el logotipo—. Así dibujan lo mismo. */
   const contenido = createElement(
     'div',
     {
@@ -208,7 +196,7 @@ export function ogCard({ title, subtitle, eyebrow, appName }: OgCardProps): Reac
         paddingRight: gutter,
       },
     },
-    cabecera,
+    firma,
     cuerpo,
   );
 
@@ -226,6 +214,5 @@ export function ogCard({ title, subtitle, eyebrow, appName }: OgCardProps): Reac
       },
     },
     contenido,
-    franja,
   );
 }

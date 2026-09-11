@@ -10,7 +10,11 @@ La imagen que se ve cuando alguien pega un enlace de la suite en Slack, WhatsApp
 
 <Canvas of={OgCardStories.Completa} />
 
-Una aplicación solo pone el texto. El lienzo, la tipografía, el isotipo y la franja de marca los pone el sistema.
+Una aplicación solo pone el texto. El lienzo, la tipografía y el logotipo los pone el sistema.
+
+El logotipo de Studio LXD firma arriba a la derecha y el texto se apila debajo, alineado a la izquierda: el eyebrow como antetítulo, el título y, si lo hay, el subtítulo. No lleva el nombre de la aplicación: la tarjeta es de Studio LXD y la aplicación se deduce del enlace.
+
+El eyebrow sigue la receta del eyebrow de [`PrevNextNav`](/docs/molecules-prevnextnav--docs): va pegado al título —el aire grande queda solo antes del subtítulo— y se distingue por peso, no por tamaño ni por caja. Aquí no cambia de tinta porque la tarjeta lee toda en prusia.
 
 <Canvas of={OgCardStories.SoloTitulo} />
 
@@ -27,7 +31,6 @@ export const contentType = OG_CONTENT_TYPE;
 export default async function Og() {
   return new ImageResponse(
     ogCard({
-      appName: 'Bricks',
       eyebrow: 'Documentación',
       title: 'Cómo montar una lección con plantillas',
       subtitle: 'De la plantilla al alumno, en cinco pasos.',
@@ -39,12 +42,12 @@ export default async function Og() {
 
 | Export | Qué es |
 | --- | --- |
-| `ogCard({ title, subtitle?, eyebrow?, appName })` | El árbol de la tarjeta, listo para `ImageResponse` o para `satori` a pelo |
+| `ogCard({ title, subtitle?, eyebrow? })` | El árbol de la tarjeta, listo para `ImageResponse` o para `satori` a pelo |
 | `ogFonts()` | Las dos caras de marca en el formato que pide satori: `{ name, data, weight, style }` |
 | `OG_SIZE` | `{ width: 1200, height: 630 }` — lo que pide Open Graph |
 | `OG_CONTENT_TYPE` | `'image/png'`, para la cabecera de la ruta |
 
-De los cuatro textos, solo `title` y `appName` son obligatorios: `eyebrow` (la etiqueta de arriba a la derecha: sección, categoría, fecha) y `subtitle` desaparecen del árbol si no se pasan, en vez de dejar un hueco.
+De los tres textos, solo `title` es obligatorio: `eyebrow` (la etiqueta de arriba a la derecha: sección, categoría, fecha) y `subtitle` desaparecen del árbol si no se pasan, en vez de dejar un hueco.
 
 ## Por qué esto no se parece al resto del sistema
 

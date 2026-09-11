@@ -21,7 +21,6 @@ export const Completa: Story = {
   render: () => (
     <OgPreview>
       {ogCard({
-        appName: 'Bricks',
         eyebrow: 'Documentación',
         title: 'Cómo montar una lección con plantillas',
         subtitle: 'De la plantilla al alumno, en cinco pasos.',
@@ -32,9 +31,7 @@ export const Completa: Story = {
 
 export const SoloTitulo: Story = {
   name: 'Solo el título',
-  render: () => (
-    <OgPreview>{ogCard({ appName: '360', title: 'Panel de operaciones' })}</OgPreview>
-  ),
+  render: () => <OgPreview>{ogCard({ title: 'Panel de operaciones' })}</OgPreview>,
 };
 
 export const TestElArbolEsElQueSePinta: Story = {
@@ -43,7 +40,6 @@ export const TestElArbolEsElQueSePinta: Story = {
   render: () => (
     <OgPreview>
       {ogCard({
-        appName: 'Bricks',
         eyebrow: 'Documentación',
         title: 'Cómo montar una lección',
         subtitle: 'De la plantilla al alumno.',
@@ -53,7 +49,6 @@ export const TestElArbolEsElQueSePinta: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByText('Bricks')).toBeInTheDocument();
     await expect(canvas.getByText('Documentación')).toBeInTheDocument();
     await expect(canvas.getByText('Cómo montar una lección')).toBeInTheDocument();
     await expect(canvas.getByText('De la plantilla al alumno.')).toBeInTheDocument();
