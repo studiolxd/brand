@@ -17,7 +17,7 @@
  */
 {
   "extends": "./tsconfig.app.json",
-  "references": [{ "path": "./tsconfig.tokens.json" }],
+  "references": [{ "path": "./tsconfig.tokens.json" }, { "path": "./tsconfig.assets.json" }],
   "compilerOptions": {
     /* Propio, y no el que hereda de `tsconfig.app.json`: `tsc -b` escribe un
        `.tsbuildinfo` por proyecto, y con el nombre heredado este build pisaba

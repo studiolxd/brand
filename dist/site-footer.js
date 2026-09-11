@@ -2,7 +2,7 @@ import './site-footer.css';
 import { Container as e } from "./container.js";
 import { Heading as t } from "./heading.js";
 import { List as n } from "./list.js";
-import { Logo as r } from "./logo.js";
+import { t as r } from "./_shared/Logo.js";
 import { Paragraph as i } from "./paragraph.js";
 import { jsx as a, jsxs as o } from "react/jsx-runtime";
 //#region src/stories/sections/SiteFooter/SiteFooter.tsx

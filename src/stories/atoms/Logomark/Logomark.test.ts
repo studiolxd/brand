@@ -7,6 +7,7 @@ import {
   logomarkSvg,
   logomarkViewBox,
 } from './index';
+import { logoPaths } from '../Logo/logoAssets';
 
 const leer = (nombre: string) => readFileSync(new URL(`../../../assets/${nombre}`, import.meta.url), 'utf8').trim();
 
@@ -29,9 +30,7 @@ describe('activos del isotipo', () => {
   });
 
   it('los trazados salen del logotipo, sin redibujar', () => {
-    const logo = readFileSync(new URL('../Logo/Logo.tsx', import.meta.url), 'utf8');
-    const enLogo = [...logo.matchAll(/<path d="([^"]+)"/g)].map((m) => m[1].replace(/\s+/g, ' ').trim());
-    for (const d of logomarkPaths) expect(enLogo).toContain(d);
+    for (const d of logomarkPaths) expect(logoPaths).toContain(d);
   });
 
   it('la tinta es currentColor, sin imágenes incrustadas', () => {

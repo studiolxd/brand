@@ -7,6 +7,17 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [SIN VERSIÓN TODAVÍA — pendiente de asignar la próxima minor sobre `main`] — 2026-09-11
+
+> **Minor.** La marca como activos publicados: logotipo suelto, favicon único de suite y
+> juego de iconos de aplicación.
+
+- **`logo.svg`**: el logotipo completo, hasta ahora solo inline en `Logo.tsx`, existe también como fichero suelto (`src/assets/logo.svg`, publicado en `@studiolxd/brand/assets/logo.svg`) y como datos (`logoSvg`, `logoPaths`, `logoViewBox`, subpath `@studiolxd/brand/logo` y barril principal) — mismo patrón que ya tenía `Logomark` con `logomarkAssets.ts`. `Logo.tsx` pasa a consumir esos mismos trazados (`logoAssets.ts`) en vez de tenerlos repetidos inline; sin cambios de API, CSS ni clases BEM.
+- **Un solo favicon para toda la suite, sin variantes por producto** (decisión de marca, 2026-09-11): nuevo script `scripts/build-icons.mjs` (`pnpm build:icons`, dentro de `pnpm build:all`) genera en `dist/assets/icons/` `icon.svg`, `favicon.ico` (16/32/48), `icon-192.png`, `icon-512.png`, `icon-512-maskable.png` (margen del 20 % por lado, spec "maskable"), `apple-touch-icon.png` (180×180) y `manifest.webmanifest` — todos a partir de `logomark-safe.svg` en blanco sobre `color.lavender` (`#BAABFF`), el primitivo de paleta más próximo a "violeta de marca" que ya existía (no se ha inventado un hex nuevo, regla de CLAUDE.md § «No se inventan colores»). Determinista: misma entrada, mismos bytes. El favicon del propio Storybook (`public/favicon.svg`) pasa a ser el mismo `icon.svg` generado.
+- **Nuevo export `@studiolxd/brand/brand-assets`** (`src/assets/brand-assets.ts`): metadatos tipados (`BRAND_ICON_ASSETS`, `BRAND_SOURCE_ASSETS`, `BRAND_ICON_COLOR`) con la ruta, talla y propósito de cada activo publicado, para que un script de instalación en una app consumidora los copie sin adivinar nombres de fichero.
+- **Nueva página Foundations → Marca** (`src/stories/foundations/Marca.mdx`): catálogo de logotipo, isotipo (y su área de seguridad del 10 %), el favicon único de suite y el juego de iconos generado, con enlaces de descarga de cada fichero.
+- Tests nuevos: `Logo.test.ts` (paridad `logoSvg` ↔ `src/assets/logo.svg`, como ya tenía `Logomark`) y `src/assets/build-icons.test.ts` (el script produce los siete ficheros con las tallas del spec, es determinista, y el color de fondo es el primitivo de paleta esperado).
+
 ## [37.2.0] — 2026-09-11
 
 > **Minor.** `OtpInput` en formularios nativos y molécula `RecoveryCodes`.

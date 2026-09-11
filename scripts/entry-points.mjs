@@ -2,6 +2,9 @@ export const entryPoints = {
   // Tokens
   'tokens':              'src/tokens/tokens.ts',
 
+  // Activos de marca (metadatos, no componentes)
+  'brand-assets':        'src/assets/brand-assets.ts',
+
   // Email
   'email':               'src/stories/email/Email.ts',
 
@@ -36,7 +39,7 @@ export const entryPoints = {
   'label':               'src/stories/atoms/Label/Label.tsx',
   'link':                'src/stories/atoms/Link/Link.tsx',
   'list':                'src/stories/atoms/List/List.tsx',
-  'logo':                'src/stories/atoms/Logo/Logo.tsx',
+  'logo':                'src/stories/atoms/Logo/index.ts',
   'logomark':            'src/stories/atoms/Logomark/index.ts',
   'dots-button':         'src/stories/atoms/DotsButton/DotsButton.tsx',
   'paragraph':           'src/stories/atoms/Paragraph/Paragraph.tsx',
