@@ -59,6 +59,13 @@ export interface OnboardingPageProps {
   exitAction?: ReactNode;
   /** Tema que enseña el conmutador. Solo eso: el oscuro del lienzo lo pone la story. */
   theme?: 'light' | 'dark';
+  /**
+   * Ancho de la columna del paso, tal cual lo recibe `OnboardingShell`: `md`
+   * (por defecto) es la medida de lectura de un formulario; `wide` es el
+   * ancho de página pública, para un paso que reparte el contenido en
+   * columnas (la sala de espera, dos columnas).
+   */
+  width?: 'md' | 'wide';
 }
 
 /**
@@ -70,10 +77,11 @@ export interface OnboardingPageProps {
  * **No hay «Atrás».** El progreso navega, así que un botón que repita lo que
  * las cifras ya saben hacer sobraría: se retiró del alta y no vuelve.
  */
-export function OnboardingPage({ steps = PASOS_ALTA, current = 0, children, primaryAction, exitAction, theme = 'light' }: OnboardingPageProps) {
+export function OnboardingPage({ steps = PASOS_ALTA, current = 0, children, primaryAction, exitAction, theme = 'light', width = 'md' }: OnboardingPageProps) {
   return (
     <AppRoot>
       <OnboardingShell
+        width={width}
         brand={<Logo />}
         switchers={
           <>

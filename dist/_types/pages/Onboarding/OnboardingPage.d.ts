@@ -17,6 +17,13 @@ export interface OnboardingPageProps {
     exitAction?: ReactNode;
     /** Tema que enseña el conmutador. Solo eso: el oscuro del lienzo lo pone la story. */
     theme?: 'light' | 'dark';
+    /**
+     * Ancho de la columna del paso, tal cual lo recibe `OnboardingShell`: `md`
+     * (por defecto) es la medida de lectura de un formulario; `wide` es el
+     * ancho de página pública, para un paso que reparte el contenido en
+     * columnas (la sala de espera, dos columnas).
+     */
+    width?: 'md' | 'wide';
 }
 /**
  * El alta del hub montada sobre las piezas reales: `AppRoot` + `OnboardingShell`
@@ -27,4 +34,4 @@ export interface OnboardingPageProps {
  * **No hay «Atrás».** El progreso navega, así que un botón que repita lo que
  * las cifras ya saben hacer sobraría: se retiró del alta y no vuelve.
  */
-export declare function OnboardingPage({ steps, current, children, primaryAction, exitAction, theme }: OnboardingPageProps): import("react/jsx-runtime").JSX.Element;
+export declare function OnboardingPage({ steps, current, children, primaryAction, exitAction, theme, width }: OnboardingPageProps): import("react/jsx-runtime").JSX.Element;

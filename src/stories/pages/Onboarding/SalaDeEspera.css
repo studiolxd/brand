@@ -1,0 +1,12 @@
+/* La columna de la salida: el botón nace a ancho completo, bajo el texto, en
+   móvil (una sola columna apilada) y pasa a su ancho de contenido en cuanto
+   `Columns` reparte en dos — mismo criterio que el pie de un `Form`. */
+.sala-de-espera__exit > .button {
+  inline-size: 100%;
+}
+
+@media (min-width: 768px) /* --breakpoint-md */ {
+  .sala-de-espera__exit > .button {
+    inline-size: auto;
+  }
+}

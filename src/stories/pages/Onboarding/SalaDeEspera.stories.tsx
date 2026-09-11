@@ -2,34 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { OnboardingPage } from './OnboardingPage';
 import { Button } from '../../atoms/Button/Button';
-import { Steps } from '../../organisms/Steps/Steps';
-import { Heading } from '../../atoms/Heading/Heading';
 import { PageIntro } from '../../molecules/PageIntro/PageIntro';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
-import { Stack } from '../../atoms/Stack/Stack';
+import { Columns } from '../../atoms/Columns/Columns';
+import './SalaDeEspera.css';
 
 const CORREO = 'nuria.serra@santcugat.cat';
-
-const QUE_PASARA = [
-  {
-    id: 'invitacion',
-    title: 'Alguien te invita a su organización',
-    description: 'La invitación la envía quien administre el espacio: normalmente, quien te pidió que te dieras de alta.',
-    icon: 'send' as const,
-  },
-  {
-    id: 'correo',
-    title: `Te llega un correo a ${CORREO}`,
-    description: 'Llega en cuanto te invitan. Si no lo ves, comprueba la carpeta de correo no deseado.',
-    icon: 'inbox' as const,
-  },
-  {
-    id: 'entrada',
-    title: 'Aceptas y entras',
-    description: 'Al abrir el enlace del correo entras directamente en el espacio de tu organización. Esta pantalla no vuelve a aparecer.',
-    icon: 'check' as const,
-  },
-];
 
 interface Args {
   theme: 'light' | 'dark';
@@ -37,26 +15,18 @@ interface Args {
 
 function SalaDeEspera({ theme }: Args) {
   return (
-    <OnboardingPage
-      steps={null}
-      theme={theme}
-      exitAction={<Button variant="text">Cerrar sesión</Button>}
-    >
-      <Stack align="stretch" gap="lg">
-        <PageIntro title="Ya casi está" />
-        <Paragraph>
-          Esta aplicación funciona por invitación. Pide a un administrador de la organización que te
-          invite; el correo de invitación te traerá de vuelta aquí.
-        </Paragraph>
-        <section>
-          <Heading level={2} size={5}>Qué pasará</Heading>
-          <Steps items={QUE_PASARA} />
-        </section>
-        <Paragraph>
-          Puedes cerrar sesión sin perder nada: tu perfil queda guardado y te espera aquí cuando
-          abras el enlace del correo.
-        </Paragraph>
-      </Stack>
+    <OnboardingPage steps={null} theme={theme} width="wide">
+      <Columns columns={2} ratio="2:1" align="start">
+        <PageIntro
+          title="El acceso está restringido a invitaciones"
+          description="Tu cuenta está lista, pero para entrar en una organización necesitas que alguien de su equipo te invite."
+        >
+          <Paragraph>Recibirás un correo en {CORREO} desde el que podrás aceptar la invitación.</Paragraph>
+        </PageIntro>
+        <div className="sala-de-espera__exit">
+          <Button>Cerrar sesión</Button>
+        </div>
+      </Columns>
     </OnboardingPage>
   );
 }
@@ -75,7 +45,10 @@ type Story = StoryObj<typeof SalaDeEspera>;
  * El usuario completó su perfil, no pertenece a ninguna organización y la
  * creación es solo por invitación: no puede hacer nada salvo esperar. Es un
  * flujo sin pasos, así que el `Stepper` no se monta — la misma plantilla que
- * las cuatro pantallas anteriores, sin condicionales.
+ * las cuatro pantallas anteriores, sin condicionales. La única acción,
+ * «Cerrar sesión», vive en su propia columna y no en el pie del marco: no hay
+ * nada que confirmar ni cancelar, así que el pie de acciones del `Onboarding-
+ * Shell` no se monta tampoco.
  */
 export const PorDefecto: Story = {};
 
@@ -86,17 +59,20 @@ export const EnSuperficieOscura: Story = {
 };
 
 export const Contrato: Story = {
-  name: 'Test — sin progreso, sin acción principal, con salida',
+  name: 'Test — dos columnas, sin pie de acciones, con salida',
   tags: ['!dev'],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+    const titulo = await canvas.findByRole('heading', { level: 1, name: 'El acceso está restringido a invitaciones' });
+    await expect(titulo).toBeInTheDocument();
+    await expect(canvas.getByText('Tu cuenta está lista, pero para entrar en una organización necesitas que alguien de su equipo te invite.')).toBeInTheDocument();
+    await expect(canvas.getByText(`Recibirás un correo en ${CORREO} desde el que podrás aceptar la invitación.`)).toBeInTheDocument();
     await expect(canvasElement.querySelector('.stepper')).not.toBeInTheDocument();
-    await expect(canvasElement).not.toHaveTextContent('Paso 1 de 1');
-    const acciones = canvas.getByRole('group', { name: 'Acciones del paso' });
-    const botones = within(acciones).getAllByRole('button');
+    await expect(canvasElement.querySelector('.onboarding-shell__actions')).not.toBeInTheDocument();
+    const main = canvasElement.querySelector('#main-content') as HTMLElement;
+    const botones = within(main).getAllByRole('button');
     await expect(botones).toHaveLength(1);
     await expect(botones[0]).toHaveAccessibleName('Cerrar sesión');
-    await expect(botones[0]).toHaveClass('button--text');
+    await expect(botones[0]).toHaveClass('button--primary');
   },
 };

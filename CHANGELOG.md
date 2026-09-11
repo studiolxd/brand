@@ -7,6 +7,24 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.1.1] — 2026-09-11
+
+> **Patch.** Rediseño de la página de referencia `Pages/Onboarding · Sala de espera`: de
+> «Qué pasará» con tres pasos a dos columnas — la explicación a la izquierda, la salida sola
+> a la derecha.
+
+- **`Pages/Onboarding · Sala de espera`: dos columnas en vez de `Steps`.** La columna
+  izquierda lleva un `PageIntro` («El acceso está restringido a invitaciones» + entradilla)
+  y un `Paragraph` con el correo de invitación; la derecha, solo el botón «Cerrar sesión»
+  como acción primaria, alineado arriba y al inicio (a ancho completo en móvil, bajo el
+  texto). El `exitAction` de texto del marco y el pie de acciones del `OnboardingShell` se
+  retiran de esta pantalla: la única acción vive en su columna, no hay nada que cancelar.
+  - **`OnboardingPage`** (interno, sin exportar): nueva prop `width` (`'md' | 'wide'`,
+    reenviada a `OnboardingShell`) para que un paso pueda pedir el ancho de página pública
+    cuando reparte el contenido en columnas.
+  - Nuevo `SalaDeEspera.css`, colocalizado con la story: el único CSS propio, la regla del
+    botón a ancho completo en móvil (mismo criterio que el pie de `Form`).
+
 ## [37.1.0] — 2026-09-11
 
 > **Minor.** Todo popup posicionado por Base UI (`Menu` y todo lo que lo monta por dentro —
