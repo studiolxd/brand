@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Calendar } from './Calendar';
+import { STORY_TODAY } from '../../utils/storyDate';
 
 const meta: Meta<typeof Calendar> = {
   title: 'Molecules/Calendar',
@@ -43,7 +44,7 @@ export const Default: Story = {
 export const ConSeleccion: Story = {
   name: 'Con selección inicial',
   render: (args) => {
-    const [value, setValue] = useState<Date | null>(new Date());
+    const [value, setValue] = useState<Date | null>(STORY_TODAY);
     return <Calendar {...args} value={value} onChange={setValue} />;
   },
 };
@@ -94,7 +95,7 @@ export const ConFechasDeshabilitadas: Story = {
   name: 'Con fechas deshabilitadas',
   render: (args) => {
     const [value, setValue] = useState<Date | null>(null);
-    const today = new Date();
+    const today = STORY_TODAY;
     const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
     const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 20);
     const disabledDates = [
@@ -198,7 +199,7 @@ export const EnSuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark' },
   render: (args) => {
-    const [value, setValue] = useState<Date | null>(new Date());
+    const [value, setValue] = useState<Date | null>(STORY_TODAY);
     return <Calendar {...args} value={value} onChange={setValue} />;
   },
 };
