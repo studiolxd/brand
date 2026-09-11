@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useRef, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { Input } from '../Input/Input';
 import './OtpInput.css';
 
@@ -30,6 +30,12 @@ export interface OtpInputProps {
    */
   groupLabel?: string;
   id?: string;
+  /**
+   * Nombre de cada celda es `${name}-${i}`. Además, si se pasa, se añade un
+   * `<input type="hidden">` con este `name` y el código completo, para que un
+   * `<form>` nativo (sin react-hook-form ni otro gestor JS) reciba el valor
+   * entero en un único campo de `FormData`.
+   */
   name?: string;
   /** Se llama al salir de la última celda (react-hook-form lo usa para validar). */
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -79,6 +85,23 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
   const cells = isControlled
     ? Array.from({ length }, (_, i) => value[i] ?? '')
     : internalCells;
+
+  // El `reset` nativo no toca el estado de React: sin este listener, un
+  // formulario sin librería (sin react-hook-form) que resetea con
+  // `<button type="reset">` dejaba las celdas (controladas por `cells`) con
+  // el último valor tecleado. Solo aplica al no controlado: con `value`,
+  // quien controla el estado es el consumidor.
+  useEffect(() => {
+    if (isControlled) return;
+    const form = containerRef.current?.closest('form');
+    if (!form) return;
+    const handleReset = () => {
+      const initial = defaultValue ?? '';
+      setInternalCells(Array.from({ length }, (_, i) => initial[i] ?? ''));
+    };
+    form.addEventListener('reset', handleReset);
+    return () => form.removeEventListener('reset', handleReset);
+  }, [isControlled, defaultValue, length]);
 
   const focusCell = useCallback((index: number) => {
     const inputs = containerRef.current?.querySelectorAll('input');
@@ -179,6 +202,12 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
           onBlur={onBlur}
         />
       ))}
+      {/* El código completo, para un `<form>` nativo (sin JS de por medio):
+          las celdas van por separado (`${name}-${i}`) porque cada una es su
+          propio control, pero lo que quiere un backend es el código entero
+          bajo `name`. Se actualiza en cada cambio porque es un input
+          controlado más, como las celdas. */}
+      {name && <input type="hidden" name={name} value={cells.join('')} />}
     </div>
   );
 });

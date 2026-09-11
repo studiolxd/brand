@@ -1,0 +1,22 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --recovery-codes-column-gap: var(--spacing-6); /** Separación entre columnas de la rejilla de códigos (CSS `columns`) */
+  --recovery-codes-item-margin-block-end: var(--spacing-2); /** Separación vertical entre un código y el siguiente dentro de una columna */
+  --recovery-codes-actions-margin-block-start: var(--spacing-4); /** Separación entre la rejilla de códigos y la fila de acciones (el aire entre los propios botones lo pone `Inline`) */
+  --recovery-codes-font-family: var(--font-family-mono); /** Monoespaciada, como CodeBlock y Kbd — cada código es una credencial y se lee carácter a carácter */
+  --recovery-codes-padding-inline-start: var(--text-list-padding-inline-start); /** Sangría de la numeración — el mismo indent que `List` (`ol`) */
+  --recovery-codes-font-size: var(--text-paragraph-small-font-size); /** Tamaño de cada código — mismo criterio que CodeBlock */
+  --recovery-codes-line-height: var(--text-paragraph-small-line-height); /** Interlineado de cada código */
+  --recovery-codes-color: var(--color-text-on-light); /** Tinta de cada código */
+  --recovery-codes-index-color: var(--color-text-muted-on-light); /** Color del número de orden (`::marker`) — tinta secundaria, como el comentario de CodeBlock: el número orienta, no es el dato */
+}
+
+.surface-dark,
+[data-theme="dark"],
+html.dark {
+  --recovery-codes-color: var(--color-text-on-dark); /** Tinta — surface-dark, por la regla de derivación */
+  --recovery-codes-index-color: var(--color-text-muted-on-dark); /** Color del número — surface-dark, por la regla de derivación */
+}

@@ -7,6 +7,13 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.2.0] — 2026-09-11
+
+> **Minor.** `OtpInput` en formularios nativos y molécula `RecoveryCodes`.
+
+- **`OtpInput` en un `<form>` nativo**: si se pasa `name`, además de las celdas (`${name}-${i}`) se añade un `<input type="hidden">` con ese `name` y el código completo, actualizado en cada cambio — `new FormData(form).get(name)` devuelve el código sin depender de react-hook-form ni de ningún otro gestor JS. `form.reset()` vacía a la vez las celdas y el input oculto.
+- **Nueva molécula `RecoveryCodes`**: códigos de recuperación de un solo uso (2FA) en una lista numerada real (`<ol>`), monoespaciada, en rejilla de 1 a 3 columnas CSS. Trae el botón de copiar todos (`CopyButton`); descargar o imprimir es decisión de cada producto, vía el slot `actions` — `brand` no implementa ninguno de los dos.
+
 ## [37.1.2] — 2026-09-11
 
 > **Patch.** Solo la página de referencia «Sala de espera».

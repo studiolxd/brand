@@ -1,0 +1,12 @@
+
+// Do not edit directly, this file was auto-generated.
+
+$lxd-recovery-codes-column-gap: 2rem; // Separación entre columnas de la rejilla de códigos (CSS `columns`)
+$lxd-recovery-codes-item-margin-block-end: 0.5rem; // Separación vertical entre un código y el siguiente dentro de una columna
+$lxd-recovery-codes-padding-inline-start: 2rem; // Sangría de la numeración — el mismo indent que `List` (`ol`)
+$lxd-recovery-codes-actions-margin-block-start: 1rem; // Separación entre la rejilla de códigos y la fila de acciones (el aire entre los propios botones lo pone `Inline`)
+$lxd-recovery-codes-font-family: "Google Sans Code", ui-monospace, monospace; // Monoespaciada, como CodeBlock y Kbd — cada código es una credencial y se lee carácter a carácter
+$lxd-recovery-codes-font-size: 0.875rem; // Tamaño de cada código — mismo criterio que CodeBlock
+$lxd-recovery-codes-line-height: 1.65; // Interlineado de cada código
+$lxd-recovery-codes-color: #111e30; // Tinta de cada código
+$lxd-recovery-codes-index-color: #4a4a4a; // Color del número de orden (`::marker`) — tinta secundaria, como el comentario de CodeBlock: el número orienta, no es el dato

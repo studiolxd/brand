@@ -36,6 +36,17 @@ Las celdas miden lo que mide cualquier control del sistema: 32, 40 y 48px.
 
 <Canvas of={OtpInputStories.Prefilled} />
 
+## En un formulario nativo
+
+Cada celda es su propio control (`name="${name}-${i}"`, para el foco y el pegado por
+celda), así que un `<form>` sin gestor JS (sin react-hook-form) no tiene de dónde sacar el
+código entero. Por eso, si se pasa `name`, el componente añade además un
+`<input type="hidden">` con ese `name` y el código completo, que se actualiza en cada
+cambio: `new FormData(form).get(name)` devuelve el código, y `form.reset()` vacía a la vez
+las celdas y ese input oculto.
+
+<Canvas of={OtpInputStories.InANativeForm} />
+
 ---
 
 ## Superficie oscura

@@ -120,6 +120,7 @@
   --radio-field-label-line-height: var(--text-line-height);
   --radio-field-error-font-size: var(--form-error-font-size);
   --radio-field-helper-font-size: var(--form-helper-font-size);
+  --recovery-codes-font-size: var(--text-paragraph-small-font-size);
   --select-field-error-font-size: var(--form-error-font-size);
   --select-field-helper-font-size: var(--form-helper-font-size);
   --sheet-description-font-size: var(--modal-description-font-size);

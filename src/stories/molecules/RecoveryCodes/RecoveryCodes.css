@@ -1,0 +1,52 @@
+/* La rejilla es CSS `columns`, no `grid`: con `columns` el orden de lectura
+   sigue siendo el del documento (de arriba a abajo dentro de una columna, y
+   luego la siguiente), que es el mismo orden que anuncia el `<ol>` numerado.
+   Un `grid` habría numerado en zigzag entre columnas.
+
+   El número de columnas va en `data-columns`, que escribe el componente, y no
+   en un atributo `style`: una app servida con `style-src 'self'` (sin
+   `style-src-attr 'unsafe-inline'`) lo descarta en silencio. En móvil siempre
+   es 1, tope de legibilidad del código más corto. */
+.recovery-codes__list {
+  list-style: decimal;
+  margin: 0;
+  padding-inline-start: var(--recovery-codes-padding-inline-start);
+  columns: 1;
+  column-gap: var(--recovery-codes-column-gap);
+}
+
+@media (min-width: 480px) /* --breakpoint-sm */ {
+  .recovery-codes__list[data-columns="2"] { columns: 2; }
+  .recovery-codes__list[data-columns="3"] { columns: 3; }
+}
+
+.recovery-codes__item {
+  break-inside: avoid;
+  margin-block-end: var(--recovery-codes-item-margin-block-end);
+}
+
+.recovery-codes__code {
+  font-family: var(--recovery-codes-font-family);
+  font-size: var(--recovery-codes-font-size);
+  line-height: var(--recovery-codes-line-height);
+  color: var(--recovery-codes-color);
+}
+
+.recovery-codes__list::marker,
+.recovery-codes__item::marker {
+  color: var(--recovery-codes-index-color);
+  font-family: var(--recovery-codes-font-family);
+}
+
+.recovery-codes__actions {
+  margin-block-start: var(--recovery-codes-actions-margin-block-start);
+}
+
+/* Impreso, solo la rejilla numerada: sin botones que no significan nada en
+   papel. No hay `window.print()` en este repo — si el producto imprime la
+   página, esta regla es lo único que hace falta para que salga limpia. */
+@media print {
+  .recovery-codes__actions {
+    display: none;
+  }
+}

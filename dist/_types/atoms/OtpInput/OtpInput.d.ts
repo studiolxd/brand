@@ -27,6 +27,12 @@ export interface OtpInputProps {
      */
     groupLabel?: string;
     id?: string;
+    /**
+     * Nombre de cada celda es `${name}-${i}`. Además, si se pasa, se añade un
+     * `<input type="hidden">` con este `name` y el código completo, para que un
+     * `<form>` nativo (sin react-hook-form ni otro gestor JS) reciba el valor
+     * entero en un único campo de `FormData`.
+     */
     name?: string;
     /** Se llama al salir de la última celda (react-hook-form lo usa para validar). */
     onBlur?: React.FocusEventHandler<HTMLInputElement>;

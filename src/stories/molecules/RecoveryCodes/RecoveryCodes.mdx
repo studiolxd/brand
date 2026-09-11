@@ -1,0 +1,83 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as RecoveryCodesStories from "./RecoveryCodes.stories";
+import { TokenTable } from "../../foundations/TokenTable";
+import { recoveryCodesTokens } from "../../../tokens/molecules/recovery-codes";
+
+<Meta of={RecoveryCodesStories} />
+
+# RecoveryCodes
+
+Códigos de recuperación de un solo uso (2FA): una lista numerada de credenciales que se
+enseña **una vez**. No es un `CodeBlock` — no hay lenguaje que resaltar ni código que
+ejecutar, son credenciales de seguridad —, y no ofrece "mostrar otra vez": si el producto
+necesita volver a verlos, esa decisión (y el riesgo que implica) es suya, no del
+componente.
+
+<Canvas of={RecoveryCodesStories.PorDefecto} />
+
+## Anatomía
+
+Una lista `<ol>` numerada de verdad —no una numeración decorativa con CSS—, en tipografía
+monoespaciada, más una fila de acciones con el botón de copiar todos. El componente no
+persiste nada ni lleva estado propio más allá del que ya trae `CopyButton` (el acuse de la
+copia).
+
+## Columnas
+
+`columns` reparte los códigos en 1, 2 o 3 columnas CSS (`columns`, no `grid`): el orden de
+lectura sigue siendo el del documento, de arriba a abajo dentro de una columna y luego la
+siguiente, que es el mismo orden que anuncia la numeración. Un grid en su lugar numeraría
+en zigzag entre columnas, que es lo que el `<ol>` no puede prometer. En móvil siempre es
+una columna, tope de legibilidad del código más corto.
+
+<Canvas of={RecoveryCodesStories.UnaColumna} />
+
+## Copiar todos
+
+El botón de la fila de acciones copia los códigos completos, uno por línea, con el mismo
+`CopyButton` del resto del sistema — el acuse doble (icono + región viva) sale de ahí sin
+nada propio.
+
+## Lo que NO hace: descargar o imprimir
+
+`brand` no implementa descarga ni impresión de los códigos: el nombre del archivo, el
+formato (`.txt`, `.pdf`…) y el disparo de `window.print()` dependen de cada producto y no
+son responsabilidad de una librería de componentes. El slot `actions` es el sitio para esos
+botones — se renderizan justo después del de copiar, con el mismo `Inline` que los alinea.
+
+<Canvas of={RecoveryCodesStories.ConAccionesDelProducto} />
+
+Si el producto imprime la página que contiene `RecoveryCodes`, la fila de acciones se
+oculta sola por una regla `@media print` del componente: en papel solo queda la rejilla
+numerada.
+
+## Superficie oscura
+
+<Canvas of={RecoveryCodesStories.EnSuperficieOscura} />
+
+## Textos
+
+`labels` no tiene default: los tres campos (`list`, `copy`, `copiado`) son obligatorios.
+Un código de recuperación es una credencial de seguridad y el texto que lo rodea no debe
+quedarse a medio traducir por accidente.
+
+| Campo | Uso |
+| --- | --- |
+| `labels.list` | Nombre accesible de la lista numerada (`aria-label`) |
+| `labels.copy` | Rótulo visible del botón que copia todos los códigos |
+| `labels.copied` | Acuse del botón de copiar, mientras dura |
+
+## Accesibilidad
+
+- La numeración es un `<ol>` real: un lector de pantalla anuncia "código 3 de 10", no una
+  lista plana sin orden.
+- El botón de copiar hereda de `CopyButton` el acuse doble: el icono cambia para quien ve,
+  y una región viva lo anuncia para quien escucha.
+
+## Tokens
+
+<TokenTable tokens={recoveryCodesTokens} />
+
+## Props
+
+<ArgTypes of={RecoveryCodesStories} />

@@ -232,6 +232,8 @@ export { AppLauncher } from './stories/molecules/AppLauncher/AppLauncher';
 export type { AppLauncherProps, LauncherApp, AppLauncherLabels } from './stories/molecules/AppLauncher/AppLauncher';
 export { RadioField } from './stories/molecules/RadioField/RadioField';
 export type { RadioFieldProps } from './stories/molecules/RadioField/RadioField';
+export { RecoveryCodes } from './stories/molecules/RecoveryCodes/RecoveryCodes';
+export type { RecoveryCodesProps, RecoveryCodesLabels } from './stories/molecules/RecoveryCodes/RecoveryCodes';
 export { StatTile } from './stories/molecules/StatTile/StatTile';
 export type { StatTileProps, StatTileDelta, StatTileDirection, StatTileTone } from './stories/molecules/StatTile/StatTile';
 export { UptimeBars } from './stories/molecules/UptimeBars/UptimeBars';

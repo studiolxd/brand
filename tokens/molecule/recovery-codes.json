@@ -1,0 +1,18 @@
+{
+  "recovery-codes": {
+    "column-gap": { "$value": "{spacing.6}", "$type": "dimension", "$description": "Separación entre columnas de la rejilla de códigos (CSS `columns`)" },
+    "item-margin-block-end": { "$value": "{spacing.2}", "$type": "dimension", "$description": "Separación vertical entre un código y el siguiente dentro de una columna" },
+    "padding-inline-start": { "$value": "{text.list.padding-inline-start}", "$type": "dimension", "$description": "Sangría de la numeración — el mismo indent que `List` (`ol`)" },
+    "actions-margin-block-start": { "$value": "{spacing.4}", "$type": "dimension", "$description": "Separación entre la rejilla de códigos y la fila de acciones (el aire entre los propios botones lo pone `Inline`)" },
+
+    "font-family": { "$value": "{font-family.mono}", "$type": "string", "$description": "Monoespaciada, como CodeBlock y Kbd — cada código es una credencial y se lee carácter a carácter" },
+    "font-size":   { "$value": "{text.paragraph.small.font-size}",   "$type": "dimension", "$description": "Tamaño de cada código — mismo criterio que CodeBlock" },
+    "line-height": { "$value": "{text.paragraph.small.line-height}", "$type": "number",    "$description": "Interlineado de cada código" },
+
+    "color": { "$value": "{color.text.on-light}", "$type": "color", "$description": "Tinta de cada código" },
+    "surface-dark-color": { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Tinta — surface-dark, por la regla de derivación" },
+
+    "index-color": { "$value": "{color.text.muted-on-light}", "$type": "color", "$description": "Color del número de orden (`::marker`) — tinta secundaria, como el comentario de CodeBlock: el número orienta, no es el dato" },
+    "surface-dark-index-color": { "$value": "{color.text.muted-on-dark}", "$type": "color", "$description": "Color del número — surface-dark, por la regla de derivación" }
+  }
+}

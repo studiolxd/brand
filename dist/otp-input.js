@@ -1,96 +1,115 @@
 'use client';
 import './otp-input.css';
 import { Input as e } from "./input.js";
-import { jsx as t } from "react/jsx-runtime";
-import { forwardRef as n, useCallback as r, useRef as i, useState as a } from "react";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import { forwardRef as r, useCallback as i, useEffect as a, useRef as o, useState as s } from "react";
 //#region src/stories/atoms/OtpInput/OtpInput.tsx
-var o = n(function({ length: n, value: o, defaultValue: s, onChange: c, onComplete: l, disabled: u, readOnly: d, error: f = !1, size: p = "md", describedBy: m, "aria-describedby": h, "aria-label": g, "aria-labelledby": _, groupLabel: v = "Código de verificación", id: y, name: b, onBlur: x, className: S, digitLabel: C = (e, t) => `Dígito ${e} de ${t}` }, w) {
-	let T = o !== void 0, [E, D] = a(() => {
-		let e = s ?? "";
-		return Array.from({ length: n }, (t, n) => e[n] ?? "");
-	}), O = i(null), k = T ? Array.from({ length: n }, (e, t) => o[t] ?? "") : E, A = r((e) => {
-		let t = O.current?.querySelectorAll("input");
+var c = r(function({ length: r, value: c, defaultValue: l, onChange: u, onComplete: d, disabled: f, readOnly: p, error: m = !1, size: h = "md", describedBy: g, "aria-describedby": _, "aria-label": v, "aria-labelledby": y, groupLabel: b = "Código de verificación", id: x, name: S, onBlur: C, className: w, digitLabel: T = (e, t) => `Dígito ${e} de ${t}` }, E) {
+	let D = c !== void 0, [O, k] = s(() => {
+		let e = l ?? "";
+		return Array.from({ length: r }, (t, n) => e[n] ?? "");
+	}), A = o(null), j = D ? Array.from({ length: r }, (e, t) => c[t] ?? "") : O;
+	a(() => {
+		if (D) return;
+		let e = A.current?.closest("form");
+		if (!e) return;
+		let t = () => {
+			let e = l ?? "";
+			k(Array.from({ length: r }, (t, n) => e[n] ?? ""));
+		};
+		return e.addEventListener("reset", t), () => e.removeEventListener("reset", t);
+	}, [
+		D,
+		l,
+		r
+	]);
+	let M = i((e) => {
+		let t = A.current?.querySelectorAll("input");
 		t?.[e] && t[e].focus();
-	}, []), j = r((e) => {
-		T || D(e);
+	}, []), N = i((e) => {
+		D || k(e);
 		let t = e.join("");
-		c?.(t), e.length === n && e.every((e) => e !== "") && l?.(t);
+		u?.(t), e.length === r && e.every((e) => e !== "") && d?.(t);
 	}, [
-		T,
-		n,
-		c,
-		l
-	]), M = r((e) => (t) => {
-		let r = t.target.value.replace(/\D/g, "").slice(-1);
-		if (!r) return;
-		let i = [...k];
-		i[e] = r, j(i), e < n - 1 && A(e + 1);
+		D,
+		r,
+		u,
+		d
+	]), P = i((e) => (t) => {
+		let n = t.target.value.replace(/\D/g, "").slice(-1);
+		if (!n) return;
+		let i = [...j];
+		i[e] = n, N(i), e < r - 1 && M(e + 1);
 	}, [
-		k,
-		n,
-		A,
-		j
-	]), N = r((e) => (t) => {
+		j,
+		r,
+		M,
+		N
+	]), F = i((e) => (t) => {
 		if (t.key === "Backspace") {
 			t.preventDefault();
-			let n = [...k];
-			n[e] === "" ? e > 0 && (n[e - 1] = "", j(n), A(e - 1)) : (n[e] = "", j(n));
-		} else t.key === "ArrowLeft" ? (t.preventDefault(), e > 0 && A(e - 1)) : t.key === "ArrowRight" && (t.preventDefault(), e < n - 1 && A(e + 1));
+			let n = [...j];
+			n[e] === "" ? e > 0 && (n[e - 1] = "", N(n), M(e - 1)) : (n[e] = "", N(n));
+		} else t.key === "ArrowLeft" ? (t.preventDefault(), e > 0 && M(e - 1)) : t.key === "ArrowRight" && (t.preventDefault(), e < r - 1 && M(e + 1));
 	}, [
-		k,
-		n,
-		A,
-		j
-	]), P = r((e) => (t) => {
+		j,
+		r,
+		M,
+		N
+	]), I = i((e) => (t) => {
 		t.preventDefault();
-		let r = t.clipboardData.getData("text").replace(/\D/g, "");
-		if (!r) return;
-		let i = [...k], a = e;
-		for (let t = 0; t < r.length && e + t < n; t++) i[e + t] = r[t], a = e + t;
-		j(i), A(Math.min(a + 1, n - 1));
+		let n = t.clipboardData.getData("text").replace(/\D/g, "");
+		if (!n) return;
+		let i = [...j], a = e;
+		for (let t = 0; t < n.length && e + t < r; t++) i[e + t] = n[t], a = e + t;
+		N(i), M(Math.min(a + 1, r - 1));
 	}, [
-		k,
-		n,
-		A,
-		j
+		j,
+		r,
+		M,
+		N
 	]);
-	return /* @__PURE__ */ t("div", {
-		ref: O,
+	return /* @__PURE__ */ n("div", {
+		ref: A,
 		role: "group",
-		"aria-label": _ ? void 0 : g ?? v,
-		"aria-labelledby": _,
-		"aria-describedby": m ?? h,
-		"aria-invalid": f || void 0,
+		"aria-label": y ? void 0 : v ?? b,
+		"aria-labelledby": y,
+		"aria-describedby": g ?? _,
+		"aria-invalid": m || void 0,
 		className: [
 			"otp-input",
-			p === "md" ? "" : `otp-input--${p}`,
-			f ? "otp-input--error" : "",
-			u ? "otp-input--disabled" : "",
-			S ?? ""
+			h === "md" ? "" : `otp-input--${h}`,
+			m ? "otp-input--error" : "",
+			f ? "otp-input--disabled" : "",
+			w ?? ""
 		].filter(Boolean).join(" "),
-		children: Array.from({ length: n }, (r, i) => /* @__PURE__ */ t(e, {
+		children: [Array.from({ length: r }, (n, i) => /* @__PURE__ */ t(e, {
 			className: "otp-input__cell",
-			ref: i === 0 ? w : void 0,
-			id: y ? `${y}-${i}` : void 0,
-			name: b ? `${b}-${i}` : void 0,
+			ref: i === 0 ? E : void 0,
+			id: x ? `${x}-${i}` : void 0,
+			name: S ? `${S}-${i}` : void 0,
 			type: "text",
-			size: p,
-			error: f,
-			disabled: u,
-			readOnly: d,
-			"aria-describedby": i === 0 ? m ?? h : void 0,
+			size: h,
+			error: m,
+			disabled: f,
+			readOnly: p,
+			"aria-describedby": i === 0 ? g ?? _ : void 0,
 			inputMode: "numeric",
 			pattern: "\\d*",
 			maxLength: 1,
 			autoComplete: i === 0 ? "one-time-code" : "off",
-			"aria-label": C(i + 1, n),
-			value: k[i],
-			onChange: M(i),
-			onKeyDown: N(i),
-			onPaste: P(i),
-			onBlur: x
-		}, i))
+			"aria-label": T(i + 1, r),
+			value: j[i],
+			onChange: P(i),
+			onKeyDown: F(i),
+			onPaste: I(i),
+			onBlur: C
+		}, i)), S && /* @__PURE__ */ t("input", {
+			type: "hidden",
+			name: S,
+			value: j.join("")
+		})]
 	});
 });
 //#endregion
-export { o as OtpInput };
+export { c as OtpInput };

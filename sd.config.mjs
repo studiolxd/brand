@@ -166,6 +166,7 @@ const filters = {
   'text-inline':        (t) => t.path[0] === 'text-inline',
   'avatar-upload':      (t) => t.path[0] === 'avatar-upload',
   'uptime-bars':        (t) => t.path[0] === 'uptime-bars',
+  'recovery-codes':     (t) => t.path[0] === 'recovery-codes',
 };
 
 function cssFile(destination, filterKey) {
@@ -344,6 +345,7 @@ const sd = new StyleDictionary({
         cssFile('molecules/annotation-thread.css',  'annotation-thread'),
         cssFile('components/text-inline.css',       'text-inline'),
         cssFile('molecules/uptime-bars.css',        'uptime-bars'),
+        cssFile('molecules/recovery-codes.css',     'recovery-codes'),
       ],
     },
     scss: {
@@ -507,6 +509,7 @@ const sd = new StyleDictionary({
         scssFile('molecules/_annotation-thread.scss','annotation-thread'),
         scssFile('components/_text-inline.scss',     'text-inline'),
         scssFile('molecules/_uptime-bars.scss',      'uptime-bars'),
+        scssFile('molecules/_recovery-codes.scss',   'recovery-codes'),
       ],
     },
     /*

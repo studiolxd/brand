@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/brand",
-  "version": "37.1.2",
+  "version": "37.2.0",
   "type": "module",
   "exports": {
     "./accordion": {
@@ -145,6 +145,10 @@
     "./copy-button": {
       "types": "./dist/_types/molecules/CopyButton/CopyButton.d.ts",
       "import": "./dist/copy-button.js"
+    },
+    "./recovery-codes": {
+      "types": "./dist/_types/molecules/RecoveryCodes/RecoveryCodes.d.ts",
+      "import": "./dist/recovery-codes.js"
     },
     "./search-form": {
       "types": "./dist/_types/molecules/SearchForm/SearchForm.d.ts",

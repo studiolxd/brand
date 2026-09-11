@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn, expect, userEvent } from 'storybook/test';
+import { fn, expect, userEvent, waitFor } from 'storybook/test';
 import { useState } from 'react';
 import { OtpInput } from './OtpInput';
 
@@ -137,6 +137,28 @@ export const PasteSupport: Story = {
     await userEvent.paste('123456');
     await expect(inputs[0]).toHaveValue('1');
     await expect(inputs[5]).toHaveValue('6');
+  },
+};
+
+export const InANativeForm: Story = {
+  name: 'En un formulario nativo',
+  render: () => (
+    <form aria-label="Formulario de prueba">
+      <OtpInput length={4} name="otp" id="otp-native-form" />
+    </form>
+  ),
+  play: async ({ canvas, canvasElement }) => {
+    const inputs = canvas.getAllByRole('textbox');
+    await userEvent.click(inputs[0]);
+    await userEvent.keyboard('1234');
+
+    // El input oculto es un input controlado más: se espera al valor final
+    // en vez de asumir que ya está ahí al terminar de teclear (regla de
+    // fiabilidad de los `play`, CLAUDE.md).
+    const form = canvasElement.querySelector('form') as HTMLFormElement;
+    await waitFor(() => {
+      expect(new FormData(form).get('otp')).toBe('1234');
+    });
   },
 };
 

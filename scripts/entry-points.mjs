@@ -143,6 +143,7 @@ export const entryPoints = {
   'stat-tile':           'src/stories/molecules/StatTile/StatTile.tsx',
   'uptime-bars':         'src/stories/molecules/UptimeBars/UptimeBars.tsx',
   'copy-button':         'src/stories/molecules/CopyButton/CopyButton.tsx',
+  'recovery-codes':      'src/stories/molecules/RecoveryCodes/RecoveryCodes.tsx',
   'confirm-dialog':      'src/stories/molecules/ConfirmDialog/ConfirmDialog.tsx',
   'search-form':         'src/stories/molecules/SearchForm/SearchForm.tsx',
   // Sections
@@ -223,6 +224,7 @@ export const clientComponents = new Set([
   'notification-list',
   'docs-search',
   'copy-button',
+  'recovery-codes',
   'description-list',
   'uptime-bars',
   'confirm-dialog',
