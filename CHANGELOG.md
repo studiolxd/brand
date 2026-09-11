@@ -7,6 +7,25 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [35.0.0] — 2026-09-11
+
+> **Major.** `AppLauncher` cambia su contenedor por defecto: rompe a quien confiaba en el
+> panel flotante sin fijar `presentation`.
+
+- **`AppLauncher` abre un modal por defecto, no un popover.** Nueva prop
+  `presentation?: 'modal' | 'popover'` (default `'modal'`): con `'modal'` el disparador abre
+  un `Modal` centrado, como `CommandPalette` — foco atrapado, aspa, cierre con Escape y
+  título (`labels.title`, nueva etiqueta opcional con default «Aplicaciones»). `'popover'`
+  recupera el panel flotante anclado al disparador que tenía el componente hasta v34. La
+  rejilla de apps (`app-launcher__grid`, `__tile`…) es el mismo componente interno
+  compartido por las dos presentaciones — sin cambios de aspecto en esta tanda, solo de
+  contenedor.
+  - **Ruptura:** un consumidor que instanciaba `<AppLauncher apps labels currentAppId />`
+    sin `presentation` pasaba a abrir un popover; al actualizar a v35 pasa a abrir un modal.
+    Para conservar el comportamiento anterior, pasar `presentation="popover"` explícitamente.
+  - API por lo demás compatible: `apps`, `currentAppId`, `open`/`defaultOpen`/`onOpenChange`
+    y `labels.open`/`labels.new`/`labels.trigger` no cambian.
+
 ## [34.1.2] — 2026-09-11
 
 > Nota: la etiqueta `v34.1.1` de GitHub se cortó por error sobre el contenido de

@@ -7,11 +7,40 @@ import { appLauncherTokens, appLauncherDarkTokens } from "../../../tokens/compon
 
 # AppLauncher
 
-Rejilla de acceso a las apps de la suite, en un panel flotante (`Popover` de
-`@base-ui/react`) que se abre desde un botón de cuadrícula. Cada app es un enlace real
-(`<a href>`), no un `onClick`: funciona con cmd+click y SEO.
+Rejilla de acceso a las apps de la suite, que se abre desde un botón de cuadrícula. Cada
+app es un enlace real (`<a href>`), no un `onClick`: funciona con cmd+click y SEO.
+
+## Presentación: modal o popover
+
+`presentation` decide el contenedor de la rejilla — el contenido (la rejilla de apps) es
+el mismo en los dos casos, solo cambia lo que lo envuelve:
+
+- **`'modal'`** (por defecto desde v35): diálogo centrado, como `CommandPalette` — foco
+  atrapado con `Modal`, título (`labels.title`, por defecto «Aplicaciones») y más sitio
+  para crecer (descripciones, más apps) sin pelearse con el ancho de un popover anclado.
+- **`'popover'`**: el panel flotante anclado al disparador que tenía el componente hasta
+  v34. Se pide explícitamente con `presentation="popover"` — un consumidor que ya lo usaba
+  sin fijar la prop pasa a `'modal'` al actualizar a v35 (ver «Migración» más abajo).
 
 <Canvas of={AppLauncherStories.Default} />
+
+### `presentation="popover"`
+
+<Canvas of={AppLauncherStories.ComoPopover} />
+
+### Migración desde v34
+
+Antes de v35 el único contenedor era el popover. Un consumidor que instanciaba
+`<AppLauncher apps labels currentAppId />` sin fijar `presentation` pasa a abrir un modal
+al actualizar — para conservar el popover, añadir `presentation="popover"` explícitamente.
+
+## Título del modal
+
+Con `presentation="modal"`, `labels.title` es el título del diálogo (`Dialog.Title` de
+`Modal`) — por defecto «Aplicaciones». Sin uso en `presentation="popover"`, que no tiene
+título.
+
+<Canvas of={AppLauncherStories.ConTitulo} />
 
 ## Disparador: icono solo o con texto
 
@@ -63,14 +92,18 @@ la prop.
 
 ## Accesibilidad
 
-- El disparador anuncia `aria-haspopup="dialog"` (lo pone `Popover.Trigger` de Base UI).
+- El disparador siempre anuncia `aria-haspopup="dialog"`: en `'popover'` lo pone
+  `Popover.Trigger` de Base UI; en `'modal'` lo pone el propio componente, porque el botón
+  no está gestionado por Base UI (el `Dialog` que abre es `Modal`, montado aparte).
 - El nombre accesible del disparador es `labels.open` cuando es solo icono, y el propio texto
   visible (`labels.trigger`) cuando lo hay — nunca los dos a la vez.
-- El panel va en un `Portal`: vive fuera del árbol de la página, así que ningún selector CSS
-  descendiente (`.surface-dark .app-launcher__…`) lo alcanza. El tema oscuro le llega por la
-  activación root-level (`html.dark`/`[data-theme="dark"]`), que sí cascada a cualquier
-  descendiente de `<html>` — incluido el portal.
-- El z-index vive en el `Positioner`, no en el `Popup` (el popup hereda su stacking context).
+- En `'modal'`, el foco atrapado, el cierre con Escape, el aspa y el título los pone `Modal`
+  (ver su doc). En `'popover'`, el panel va en un `Portal` de Base UI: vive fuera del árbol
+  de la página, así que ningún selector CSS descendiente (`.surface-dark .app-launcher__…`)
+  lo alcanza — el tema oscuro le llega por la activación root-level
+  (`html.dark`/`[data-theme="dark"]`), que sí cascada a cualquier descendiente de `<html>`,
+  portal incluido. El z-index del popover vive en el `Positioner`, no en el `Popup` (el popup
+  hereda su stacking context).
 
 ## Props
 

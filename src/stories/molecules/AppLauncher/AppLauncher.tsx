@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../../atoms/Icon/Icon';
 import { useCssProperties } from '../../constants/css-properties';
 import { Tag } from '../../atoms/Tag/Tag';
+import { Modal } from '../Modal/Modal';
 import './AppLauncher.css';
 
 export interface LauncherApp {
@@ -30,6 +32,11 @@ export interface AppLauncherLabels {
    * con `open` de nombre accesible.
    */
   trigger?: string;
+  /**
+   * Título del diálogo cuando `presentation="modal"`. Default: «Aplicaciones»
+   * (castellano). Sin uso en `presentation="popover"`, que no lleva título.
+   */
+  title?: string;
 }
 
 export interface AppLauncherProps {
@@ -40,6 +47,14 @@ export interface AppLauncherProps {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Contenedor del panel. `'modal'` (por defecto): diálogo centrado, como
+   * `CommandPalette` — foco atrapado, más sitio para crecer y el mismo lugar
+   * de la suite para descripciones o más aplicaciones. `'popover'`: el panel
+   * flotante anclado al disparador que tenía el componente antes de v35 —
+   * quien lo prefiera lo pide explícitamente.
+   */
+  presentation?: 'modal' | 'popover';
 }
 
 function initial(name: string): string {
@@ -68,14 +83,44 @@ function LauncherTile({ app, isCurrent, newLabel }: { app: LauncherApp; isCurren
   );
 }
 
-export function AppLauncher({
+/** La rejilla de apps: el contenido, compartido por las dos presentaciones — solo cambia el contenedor. */
+function AppLauncherGrid({
+  apps,
+  currentAppId,
+  newLabel,
+}: {
+  apps: LauncherApp[];
+  currentAppId?: string;
+  newLabel: string;
+}) {
+  return (
+    <ul className="app-launcher__grid" role="list">
+      {apps.map((app) => (
+        <li key={app.id}>
+          <LauncherTile app={app} isCurrent={app.id === currentAppId} newLabel={newLabel} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+interface AppLauncherPresentationProps {
+  apps: LauncherApp[];
+  labels: AppLauncherLabels;
+  currentAppId?: string;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+function AppLauncherPopover({
   apps,
   labels,
   currentAppId,
   open,
   defaultOpen,
   onOpenChange,
-}: AppLauncherProps) {
+}: AppLauncherPresentationProps) {
   return (
     <BasePopover.Root
       open={open}
@@ -100,16 +145,70 @@ export function AppLauncher({
       <BasePopover.Portal>
         <BasePopover.Positioner className="app-launcher__positioner" sideOffset={4} align="end">
           <BasePopover.Popup className="app-launcher__content">
-            <ul className="app-launcher__grid" role="list">
-              {apps.map((app) => (
-                <li key={app.id}>
-                  <LauncherTile app={app} isCurrent={app.id === currentAppId} newLabel={labels.new} />
-                </li>
-              ))}
-            </ul>
+            <AppLauncherGrid apps={apps} currentAppId={currentAppId} newLabel={labels.new} />
           </BasePopover.Popup>
         </BasePopover.Positioner>
       </BasePopover.Portal>
     </BasePopover.Root>
   );
+}
+
+/** Abre/cierra en modo no controlado cuando el consumidor no trae `open`. */
+function useAppLauncherOpenState(
+  open: boolean | undefined,
+  defaultOpen: boolean | undefined,
+  onOpenChange: ((open: boolean) => void) | undefined,
+) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false);
+  const isOpen = open ?? uncontrolledOpen;
+  const setOpen = (next: boolean) => {
+    if (open === undefined) setUncontrolledOpen(next);
+    onOpenChange?.(next);
+  };
+  return [isOpen, setOpen] as const;
+}
+
+function AppLauncherModal({
+  apps,
+  labels,
+  currentAppId,
+  open,
+  defaultOpen,
+  onOpenChange,
+}: AppLauncherPresentationProps) {
+  const [isOpen, setOpen] = useAppLauncherOpenState(open, defaultOpen, onOpenChange);
+
+  return (
+    <>
+      {labels.trigger ? (
+        <button
+          type="button"
+          className="app-launcher__trigger app-launcher__trigger--label"
+          aria-haspopup="dialog"
+          onClick={() => setOpen(true)}
+        >
+          <Icon name="grid" size="md" />
+          <span className="app-launcher__trigger-label">{labels.trigger}</span>
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="app-launcher__trigger"
+          aria-label={labels.open}
+          aria-haspopup="dialog"
+          onClick={() => setOpen(true)}
+        >
+          <Icon name="grid" size="md" />
+        </button>
+      )}
+
+      <Modal open={isOpen} onClose={() => setOpen(false)} title={labels.title ?? 'Aplicaciones'}>
+        <AppLauncherGrid apps={apps} currentAppId={currentAppId} newLabel={labels.new} />
+      </Modal>
+    </>
+  );
+}
+
+export function AppLauncher({ presentation = 'modal', ...rest }: AppLauncherProps) {
+  return presentation === 'popover' ? <AppLauncherPopover {...rest} /> : <AppLauncherModal {...rest} />;
 }
