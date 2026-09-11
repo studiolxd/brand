@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, waitFor, within } from 'storybook/test';
 import { Steps, Step } from './Steps';
 import { Code } from '../../atoms/Code/Code';
 import { List } from '../../atoms/List/List';
@@ -162,5 +162,74 @@ export const Contrato: Story = {
 
     // Cada paso es un encabezado de verdad, al nivel que se le pase.
     await expect(canvas.getByRole('heading', { level: 3, name: /Escuchamos/ })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Items con y sin descripción alternados: el alto del cuerpo varía de un
+ * paso a otro, que es justo lo que rompía el conector (v37.3.0, B15) al
+ * depender de la altura intrínseca del propio marcador para estirarse.
+ */
+const pasosAlturaVariable = [
+  { id: 'uno', title: 'Uno', description: 'Con descripción, para que el cuerpo sea más alto que la marca.' },
+  { id: 'dos', title: 'Dos' },
+  { id: 'tres', title: 'Tres', description: 'Otra vez con descripción.' },
+  { id: 'cuatro', title: 'Cuatro' },
+];
+
+/**
+ * El tramo entre dos marcas consecutivas —el conector es un `::after` fuera
+ * de flujo, así que no se puede tomar su propio `getBoundingClientRect`—: se
+ * reconstruye su rectángulo a partir del `top`/`left`/`width`/`height` ya
+ * resueltos que da `getComputedStyle` sobre `.steps__marker` (position:
+ * absolute con valores explícitos, nunca `auto`) más la posición de esa
+ * celda, y se compara contra las marcas real y siguiente con el margen de
+ * 1px que pide el brief. Envuelto en `waitFor` porque en Chromatic el primer
+ * marco no es de fiar (ver CLAUDE.md § «play» y Chromatic).
+ */
+function comprobarConector(canvasElement: HTMLElement, eje: 'vertical' | 'horizontal') {
+  return waitFor(() => {
+    const items = Array.from(canvasElement.querySelectorAll<HTMLElement>('.steps__item'));
+    expect(items.length).toBeGreaterThan(1);
+
+    for (let i = 0; i < items.length - 1; i++) {
+      const actual = items[i];
+      const siguiente = items[i + 1];
+      const celdaActual = actual.querySelector<HTMLElement>('.steps__marker')!;
+      const marcaActual = actual.querySelector('.step-marker')!;
+      const marcaSiguiente = siguiente.querySelector('.step-marker')!;
+      const celdaRect = celdaActual.getBoundingClientRect();
+      const after = getComputedStyle(celdaActual, '::after');
+
+      if (eje === 'vertical') {
+        const inicio = celdaRect.top + parseFloat(after.top);
+        const fin = inicio + parseFloat(after.height);
+        expect(inicio).toBeLessThanOrEqual(marcaActual.getBoundingClientRect().bottom + 1);
+        expect(fin).toBeGreaterThanOrEqual(marcaSiguiente.getBoundingClientRect().top - 1);
+      } else {
+        const inicio = celdaRect.left + parseFloat(after.left);
+        const fin = inicio + parseFloat(after.width);
+        expect(inicio).toBeLessThanOrEqual(marcaActual.getBoundingClientRect().right + 1);
+        expect(fin).toBeGreaterThanOrEqual(marcaSiguiente.getBoundingClientRect().left - 1);
+      }
+    }
+  });
+}
+
+export const ContratoConectorVertical: Story = {
+  name: 'Test — el conector llega de una marca a la siguiente (vertical)',
+  tags: ['!dev'],
+  args: { items: pasosAlturaVariable },
+  play: async ({ canvasElement }) => {
+    await comprobarConector(canvasElement, 'vertical');
+  },
+};
+
+export const ContratoConectorHorizontal: Story = {
+  name: 'Test — el conector llega de una marca a la siguiente (horizontal)',
+  tags: ['!dev'],
+  args: { items: pasosAlturaVariable, orientation: 'horizontal' },
+  play: async ({ canvasElement }) => {
+    await comprobarConector(canvasElement, 'horizontal');
   },
 };

@@ -23,38 +23,45 @@
    lee de arriba abajo. */
 .steps--horizontal .steps__item {
   grid-template-columns: 1fr;
-  align-items: start;
 }
 
+/* La celda de la marca: la rejilla la estira a la altura real de la fila (en
+   vertical) o al ancho real de la celda (en horizontal) —la marque o no la
+   descripción, tenga el título una línea o dos—, y es sobre esa caja ya
+   estirada sobre la que se ancla el conector. */
 .steps__marker {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
 }
 
-.steps--horizontal .steps__marker {
-  flex-direction: row;
-  align-items: center;
-}
-
-/* La línea que une un paso con el siguiente crece con el espacio que le queda
-   al marcador —que se estira a la altura del paso— y se mete en el hueco de la
-   lista con un margen negativo, para llegar al número siguiente. El último
-   paso no la lleva. */
-.steps__item:not(:last-child) .steps__marker::after {
+/* El conector es un tramo de longitud fija —el hueco entre pasos,
+   `--steps-gap`— anclado al final de la celda de la marca: arranca donde
+   termina la marca misma (talla fija, `step.size-md`) y llega hasta el borde
+   de la celda extendido ese mismo hueco hacia fuera, que es exactamente
+   donde empieza la marca siguiente (alineada al borde de SU celda). Al ir
+   fuera de flujo (`position: absolute`) no participa en el cálculo del alto
+   de la fila: por eso no repite el error de v37.3.0 (B15), donde un margen
+   negativo dentro del propio flujo flexible hacía que la rejilla calculara
+   mal el alto mínimo del marcador cuando el cuerpo del paso era más bajo que
+   él —solo título, sin descripción— y la marca se salía de su fila. El
+   último paso no lo lleva. */
+.steps--vertical .steps__item:not(:last-child) .steps__marker::after {
   content: '';
-  flex: 1 1 auto;
+  position: absolute;
+  inset-inline-start: calc((var(--step-size-md) - var(--step-connector-thickness)) / 2);
+  inset-block-start: var(--step-size-md);
+  inset-block-end: calc(-1 * var(--steps-gap));
+  inline-size: var(--step-connector-thickness);
   background-color: var(--step-connector-color);
 }
 
-.steps--vertical .steps__item:not(:last-child) .steps__marker::after {
-  inline-size: var(--step-connector-thickness);
-  margin-block: var(--steps-body-gap) calc(-1 * var(--steps-gap));
-}
-
 .steps--horizontal .steps__item:not(:last-child) .steps__marker::after {
+  content: '';
+  position: absolute;
+  inset-block-start: calc((var(--step-size-md) - var(--step-connector-thickness)) / 2);
+  inset-inline-start: var(--step-size-md);
+  inset-inline-end: calc(-1 * var(--steps-gap));
   block-size: var(--step-connector-thickness);
-  margin-inline: var(--steps-body-gap) calc(-1 * var(--steps-gap));
+  background-color: var(--step-connector-color);
 }
 
 .steps__body {
