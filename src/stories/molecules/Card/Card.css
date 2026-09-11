@@ -29,6 +29,27 @@
   margin-block-start: auto;
 }
 
+/* Tarjeta-acción: el modo enlace puede montarse con `render` sobre un
+   `<button>` en vez de un `<a>` —un submit nativo que se comporta como una
+   opción de avance, no de navegación; el caso que la motiva es el
+   `authenticationExecution` del tema de Keycloak, formulario nativo sin
+   router—. El CSS de arriba (`.card`, `.card--<color>`) ya no depende de que
+   el elemento sea un enlace: aquí se retira lo que un `<button>` trae de
+   serie —chrome nativo, tipografía de sistema, ancho de contenido— antes de
+   que esas reglas lo vistan igual. Especificidad mínima (`:where`), mismo
+   patrón que `button.link`: cualquier regla de la tarjeta gana sin pelear el
+   orden de aparición. */
+:where(button.card) {
+  appearance: none;
+  background: none;
+  border: 0;
+  margin: 0;
+  font: inherit;
+  text-align: start;
+  inline-size: 100%;
+  cursor: pointer;
+}
+
 /* `direction="column"`: las piezas del pie apiladas y a todo el ancho. */
 .card__footer.card__footer--column {
   flex-direction: column;
@@ -223,7 +244,15 @@
   outline-offset: var(--card-selectable-focus-ring-offset);
 }
 
-.card.card--selectable.card--selected {
+/* `selected` es la vía controlada (el consumidor lleva el estado en React).
+   `:has(input:checked)` es la vía sin estado: un radio no controlado
+   (`defaultChecked`, o un formulario nativo sin React alrededor —el caso que
+   la motiva es el tema de Keycloak) no tiene un valor de React que pasar a
+   `selected`, y la tarjeta se pinta igual de todos modos porque el propio
+   input ya sabe si está marcado. Las dos reglas pintan lo mismo; `selected`
+   sigue mandando cuando el consumidor sí lo pasa (misma declaración). */
+.card.card--selectable.card--selected,
+.card.card--selectable:has(input:checked) {
   background-color: var(--card-accent-1-bg);
   color: var(--card-accent-1-color);
   border-color: var(--card-accent-1-bg);

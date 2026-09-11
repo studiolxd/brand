@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, within } from 'storybook/test';
+import { expect, within, userEvent, waitFor } from 'storybook/test';
 import {
   Card,
   CardHeader,
@@ -521,5 +521,146 @@ export const Opciones: Story = {
     await expect(canvas.getByRole('radio', { name: 'Free' })).toBeChecked();
     await expect(canvas.getByRole('radio', { name: 'Free' }).closest('.card')).toHaveClass('card--selected');
     await expect(canvas.getByRole('radio', { name: 'Team' }).closest('.card')).not.toHaveClass('card--selected');
+  },
+};
+
+/**
+ * Sin `selected`: cada tarjeta lleva su `RadioField` dentro de un
+ * `RadioGroup` NO controlado (`defaultValue`, sin `value`/`onValueChange`).
+ * No hay ningún valor de React que pasarle a `selected` — es el caso de un
+ * `<input type="radio" defaultChecked>` suelto, o de un formulario nativo sin
+ * React alrededor (el tema de Keycloak). La marcada se pinta igual: la regla
+ * `.card--selectable:has(input:checked)` la pinta a partir del propio input,
+ * no de una prop.
+ */
+function OpcionesSinEstadoDemo() {
+  const planes = [
+    { id: 'free', name: 'Free', price: 'Gratis' },
+    { id: 'team', name: 'Team', price: '15 €/asiento/mes' },
+  ];
+  return (
+    <RadioGroup defaultValue="free" name="plan-sin-estado" aria-label="Planes">
+      <Inline gap="md">
+        {planes.map((p) => (
+          <Card key={p.id} color="outline" selectable>
+            <CardHeader>
+              <CardTitle size={5}>{p.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Paragraph size="large">{p.price}</Paragraph>
+            </CardContent>
+            <CardFooter>
+              <RadioField value={p.id} label={p.name} />
+            </CardFooter>
+          </Card>
+        ))}
+      </Inline>
+    </RadioGroup>
+  );
+}
+
+export const OpcionesSinEstado: Story = {
+  name: 'Opciones sin estado',
+  render: () => <OpcionesSinEstadoDemo />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const free = canvas.getByRole('radio', { name: 'Free' }) as HTMLInputElement;
+    const team = canvas.getByRole('radio', { name: 'Team' }) as HTMLInputElement;
+    await expect(free).toBeChecked();
+    await expect(free.closest('.card')).not.toHaveClass('card--selected');
+
+    await userEvent.click(team);
+    await waitFor(async () => {
+      await expect(team).toBeChecked();
+    });
+
+    // Ninguna de las dos tarjetas tiene la clase `card--selected` (no hay
+    // prop `selected` en ningún momento): el color viene de `:has()`, no de
+    // una clase. Se comprueba con el color resuelto por el propio navegador,
+    // nunca a mano — el CSS del Storybook compilado va minificado.
+    const probe = document.createElement('div');
+    probe.style.backgroundColor = 'var(--card-accent-1-bg)';
+    document.body.appendChild(probe);
+    const marcada = getComputedStyle(probe).backgroundColor;
+    probe.remove();
+
+    await waitFor(() => {
+      expect(getComputedStyle(team.closest('.card')!).backgroundColor).toBe(marcada);
+    });
+    await expect(getComputedStyle(free.closest('.card')!).backgroundColor).not.toBe(marcada);
+  },
+};
+
+/**
+ * Tarjeta-acción: `render` sobre un `<button type="submit">` en vez de un
+ * `<a>`. Pulsar la tarjeta no navega, envía su `name`/`value` en el
+ * formulario que la contiene — el caso que la motiva es el
+ * `authenticationExecution` de un paso de verificación (el tema de Keycloak,
+ * un formulario nativo sin router). El contrato de link-card no cambia:
+ * título, descripción, CTA accesible y flecha.
+ */
+function TarjetaAccionDemo() {
+  const [elegido, setElegido] = useState<string | null>(null);
+  return (
+    <form
+      aria-label="Verificación en dos pasos"
+      onSubmit={(event) => {
+        event.preventDefault();
+        const submitter = (event.nativeEvent as SubmitEvent).submitter;
+        const data = new FormData(event.currentTarget, submitter);
+        setElegido(String(data.get('authenticationExecution')));
+      }}
+    >
+      <Inline gap="md">
+        <Card
+          render={<button type="submit" name="authenticationExecution" value="otp" />}
+          color="outline"
+          title="Aplicación de autenticación"
+          description="Genera un código de un solo uso en tu móvil."
+          ctaLabel="Continuar con la aplicación de autenticación"
+        />
+        <Card
+          render={<button type="submit" name="authenticationExecution" value="webauthn" />}
+          color="outline"
+          title="Llave de seguridad"
+          description="Usa una llave física o el sensor del dispositivo."
+          ctaLabel="Continuar con la llave de seguridad"
+        />
+      </Inline>
+      {elegido && <Paragraph>Elegido: {elegido}</Paragraph>}
+    </form>
+  );
+}
+
+export const TarjetaAccion: Story = {
+  name: 'Tarjeta-acción (formulario)',
+  render: () => <TarjetaAccionDemo />,
+};
+
+/**
+ * Test: la tarjeta-acción es un `<button>` de verdad —sin `<a>` anidado, con
+ * el `type`/`name`/`value` del elemento que se le pasa por `render`— y
+ * pulsarla envía ese par en el `FormData` del formulario.
+ */
+export const ContratoAccion: Story = {
+  name: 'Test — tarjeta-acción envía el valor del formulario',
+  tags: ['!dev'],
+  render: () => <TarjetaAccionDemo />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const boton = canvas.getByRole('button', { name: /Continuar con la llave de seguridad/ });
+
+    await expect(boton.tagName).toBe('BUTTON');
+    await expect(boton).toHaveAttribute('type', 'submit');
+    await expect(boton).toHaveAttribute('name', 'authenticationExecution');
+    await expect(boton).toHaveAttribute('value', 'webauthn');
+    await expect(boton).toHaveClass('card', 'card--outline');
+    // La tarjeta ES el botón: nada anidado, ni un <a> ni otro control.
+    await expect(boton.querySelector('a, button')).toBeNull();
+
+    await userEvent.click(boton);
+    await waitFor(async () => {
+      await expect(canvas.getByText('Elegido: webauthn')).toBeInTheDocument();
+    });
   },
 };

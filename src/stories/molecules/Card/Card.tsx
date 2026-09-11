@@ -37,6 +37,12 @@ export interface CardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, '
    * Next.js): recibe las clases y el contenido del Card. Es el modo enlace
    * cuando la navegación la lleva el router de la aplicación, y sustituye al
    * patrón `asChild`. Manda sobre `href`.
+   *
+   * También admite un `<button type="submit" name="…" value="…" />`: la
+   * tarjeta-acción, para un formulario nativo donde pulsar la tarjeta envía
+   * un valor en vez de navegar (el `authenticationExecution` del tema de
+   * Keycloak es el caso que lo motiva). El CSS del modo enlace no depende de
+   * que el elemento sea un `<a>`.
    */
   render?: React.ReactElement<Record<string, unknown>>;
   /**

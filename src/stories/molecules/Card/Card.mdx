@@ -107,6 +107,40 @@ tarjeta entera.
 
 <Canvas of={CardStories.Opciones} />
 
+`selected` es la vía controlada: el consumidor lleva el valor marcado en React y se lo pasa a
+cada tarjeta. Sin ella, la misma marca sale sola con `.card--selectable:has(input:checked)` —
+para un `RadioField`/`CheckboxField` no controlado (`defaultChecked`, sin `value` de React que
+darle a `selected`) o para un formulario nativo sin React alrededor. Las dos vías pintan lo
+mismo; `selected` manda cuando se pasa.
+
+<Canvas of={CardStories.OpcionesSinEstado} />
+
+## Tarjeta-acción
+
+El modo enlace no exige un `<a>`: `render` también admite un `<button type="submit" name="…"
+value="…" />`. Pulsar la tarjeta no navega, envía ese par en el `FormData` del formulario que
+la contiene — la diferencia con la tarjeta-opción es que aquí no se **marca** una elección para
+enviarla después, se **pulsa** y el formulario avanza en el acto. Es el caso de un paso de
+verificación donde cada método es una tarjeta y elegir una ya envía el paso siguiente (el
+`authenticationExecution` del tema de Keycloak, un formulario nativo sin router). El contrato
+de link-card no cambia: título, descripción, CTA accesible y flecha; el CSS del modo enlace no
+depende de que el elemento sea un `<a>`.
+
+```tsx
+<Card
+  render={<button type="submit" name="authenticationExecution" value="webauthn" />}
+  title="Llave de seguridad"
+  description="Usa una llave física o el sensor del dispositivo."
+  ctaLabel="Continuar con la llave de seguridad"
+/>
+```
+
+<Canvas of={CardStories.TarjetaAccion} />
+
+**Opción vs. acción, en una frase:** si pulsar la tarjeta *marca* algo que se envía más tarde
+(un plan, una preferencia), es `selectable` con un `RadioField`/`CheckboxField` dentro; si
+pulsarla *ya* envía y avanza el formulario, es `render` sobre un `<button type="submit">`.
+
 ## Subpartes
 
 Seis piezas para no volver a maquetar a mano la cabecera, el pie ni el título. Son hermanas: se

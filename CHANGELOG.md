@@ -7,6 +7,14 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [37.4.0] — 2026-09-11
+
+> **Minor.** `Card`: tarjeta-opción marcada también por `:checked` (sin estado de React) y tarjeta-acción sobre `<button>`.
+
+- **Tarjeta-opción (`selectable`) marcada también sin estado de React.** `.card--selectable:has(input:checked)` pinta la misma variante accent-1 que `selected`, a partir del propio input marcado — para un `RadioField`/`CheckboxField` no controlado (`defaultChecked`) o un formulario nativo sin React alrededor (el tema de Keycloak es el caso que lo motiva). `selected` sigue funcionando igual y manda cuando el consumidor sí lleva el estado. Story «Opciones sin estado».
+- **Tarjeta-acción: el modo enlace admite `render` sobre un `<button type="submit">`.** Pulsar la tarjeta no navega, envía su `name`/`value` en el `FormData` del formulario que la contiene. El CSS del modo enlace ya no depende de que el elemento sea un `<a>`: `:where(button.card)` retira el chrome nativo del botón (appearance, borde, tipografía, ancho de contenido) antes de que las reglas de color lo vistan igual. Story «Tarjeta-acción (formulario)»; test unitario del contrato `render` + `FormData`.
+- MDX: sección «Tarjeta-acción» junto a «Tarjeta-opción», con la regla para elegir entre las dos.
+
 ## [37.3.0] — 2026-09-11
 
 > **Minor.** Átomo nuevo `StepMarker`, compartido por `Steps` y `Stepper`; sus marcas pasan de círculo a cuadrado.
