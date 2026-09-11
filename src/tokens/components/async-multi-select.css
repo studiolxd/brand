@@ -3,7 +3,6 @@
  */
 
 :root {
-  --async-multi-select-values-gap: {multi-select.values-gap}; /** Hereda de `multi-select.values-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-disabled-cursor: var(--input-disabled-cursor); /** Cursor cuando está deshabilitado: el de los campos */
   --async-multi-select-border-style: var(--multi-select-border-style); /** Hereda de `multi-select.border-style`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-content-gap: var(--multi-select-content-gap); /** Hereda de `multi-select.content-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
@@ -15,6 +14,7 @@
   --async-multi-select-pill-gap: var(--multi-select-pill-gap); /** Hereda de `multi-select.pill-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-pill-padding-block: var(--multi-select-pill-padding-block); /** Hereda de `multi-select.pill-padding-block`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-pill-padding-inline: var(--multi-select-pill-padding-inline); /** Hereda de `multi-select.pill-padding-inline`: el buscador múltiple tiene la misma cara que el control síncrono */
+  --async-multi-select-selection-gap: var(--multi-select-selection-gap); /** Hereda de `multi-select.selection-gap`: el buscador múltiple tiene la misma cara que el control síncrono */
   --async-multi-select-item-selected-font-weight: var(--font-weight-emphasis); /** Peso de la opción ya elegida dentro de la lista de resultados */
   --async-multi-select-empty-color: var(--color-text-muted-on-light); /** Tinta del mensaje de lista vacía: es texto secundario, no un valor */
   --async-multi-select-bg: var(--multi-select-bg); /** Hereda de `multi-select.bg`: el buscador múltiple tiene la misma cara que el control síncrono */

@@ -100,11 +100,13 @@
   list-style: none;
 }
 
-/* ─── Tile ───────────────────────────────────────────────── */
+/* ─── Tile ───────────────────────────────────────────────────
+   Solo texto: fila como un ítem de Menu, no columna centrada como cuando
+   había icono. Alto y padding vienen de `tile-padding-*` (referencian
+   `{menu.item-padding-*}`) para que casen con las listas de opciones del DS. */
 .app-launcher__tile {
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: var(--app-launcher-tile-gap);
   padding-block: var(--app-launcher-tile-padding-block);
@@ -112,7 +114,7 @@
   border-radius: var(--app-launcher-tile-border-radius);
   text-decoration: none;
   box-shadow: none;
-  text-align: center;
+  text-align: start;
   cursor: pointer;
   outline: none;
   transition:
@@ -122,15 +124,13 @@
 
 /* El tile bajo el puntero o el teclado se rellena con la inversión de marca:
    la rejilla de apps es la lista de opciones del panel (Foundations → Colores,
-   la excepción declarada). Nombre e inicial invierten con el relleno. */
+   la excepción declarada). El nombre invierte con el relleno. */
 .app-launcher__tile:hover,
 .app-launcher__tile:focus-visible {
   background-color: var(--app-launcher-tile-highlighted-bg);
   color: var(--app-launcher-tile-highlighted-color);
 }
 
-.app-launcher__tile:hover .app-launcher__tile-icon,
-.app-launcher__tile:focus-visible .app-launcher__tile-icon,
 .app-launcher__tile:hover .app-launcher__tile-name,
 .app-launcher__tile:focus-visible .app-launcher__tile-name {
   color: inherit;
@@ -141,33 +141,22 @@
   outline-offset: var(--app-launcher-focus-ring-offset);
 }
 
-/* La app actual: barra de tinta en el borde de inicio y nombre en énfasis. */
+/* La app actual: borde completo alrededor del tile y nombre en énfasis.
+   Va por `box-shadow` inset, no por `border`: no reserva espacio propio, así
+   que el texto no se desplaza entre el estado normal y el activo. */
 .app-launcher__tile.app-launcher__tile--active {
-  box-shadow: inset var(--app-launcher-tile-active-marker-width) 0 0 var(--app-launcher-tile-active-marker-color);
+  box-shadow: inset 0 0 0 var(--app-launcher-tile-active-border-width) var(--app-launcher-tile-active-border-color);
 }
 
 .app-launcher__tile--active .app-launcher__tile-name {
   font-weight: var(--app-launcher-tile-name-active-font-weight);
 }
 
-/* ─── Icono / inicial ────────────────────────────────────── */
-.app-launcher__tile-icon {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--app-launcher-tile-icon-size);
-  height: var(--app-launcher-tile-icon-size);
-  border-radius: var(--app-launcher-tile-icon-border-radius);
-  font-size: var(--app-launcher-tile-icon-font-size);
-  font-weight: var(--app-launcher-tile-icon-font-weight);
-  color: var(--app-launcher-tile-icon-color);
-}
-
 /* ─── Nombre ─────────────────────────────────────────────── */
 .app-launcher__tile-name {
   font-size: var(--app-launcher-tile-name-font-size);
   font-weight: var(--app-launcher-tile-name-font-weight);
+  line-height: var(--app-launcher-tile-name-line-height);
   color: var(--app-launcher-tile-name-color);
 }
 

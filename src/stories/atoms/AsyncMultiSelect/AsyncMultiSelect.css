@@ -40,7 +40,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--async-multi-select-values-gap);
+  gap: var(--async-multi-select-selection-gap);
   flex: 1;
   min-width: 0;
 }

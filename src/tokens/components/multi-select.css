@@ -21,7 +21,7 @@
   --multi-select-pill-remove-hover-opacity: var(--opacity-full); /** Opacidad del aspa bajo el puntero */
   --multi-select-item-selected-font-weight: var(--font-weight-bold); /** Peso de la opción ya elegida en la lista: lo elegido se dice con peso, no con relleno */
   --multi-select-icon-transition-easing: var(--motion-easing-default); /** Curva del giro del chevron al abrir */
-  --multi-select-values-gap: var(--spacing-1); /** Separación entre pills */
+  --multi-select-selection-gap: var(--spacing-1); /** Separación entre pills. Nombrado `selection-gap`, no `values-gap`: Style Dictionary 4.4.0 confunde un segmento de ruta que empieza por «value» (`values-gap`) con el sufijo `.value`/`.$value` del propio alias DTCG (`getReferences.js`, `variable.replace('.value', '')` con un `String.replace` de texto plano, no una regex anclada) y no resuelve la referencia encadenada — ver `surface-dark-derived.css`/release-check § tokens sin resolver */
   --multi-select-error-border-color: var(--color-error-text-on-light); /** Borde en error: el color de error */
   --multi-select-font-family: var(--select-font-family); /** Familia tipográfica */
   --multi-select-font-size: var(--select-font-size); /** Tamaño de fuente */

@@ -3,14 +3,6 @@ export interface LauncherApp {
     id: string;
     name: string;
     url: string;
-    /**
-     * Color de acento de la app. Es un color de dato (cada app externa trae el
-     * suyo, fuera del control del DS), no un token. La rejilla vive en un portal
-     * y solo existe en cliente, así que el acento se escribe por el CSSOM sobre
-     * `.app-launcher__tile-icon`: en un atributo `style` una app con
-     * `style-src 'self'` lo descartaría sin avisar.
-     */
-    accent: string;
     isNew?: boolean;
 }
 export interface AppLauncherLabels {

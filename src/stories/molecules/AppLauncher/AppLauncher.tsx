@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import { Icon } from '../../atoms/Icon/Icon';
-import { useCssProperties } from '../../constants/css-properties';
 import { Tag } from '../../atoms/Tag/Tag';
 import { Modal } from '../Modal/Modal';
 import './AppLauncher.css';
@@ -10,14 +9,6 @@ export interface LauncherApp {
   id: string;
   name: string;
   url: string;
-  /**
-   * Color de acento de la app. Es un color de dato (cada app externa trae el
-   * suyo, fuera del control del DS), no un token. La rejilla vive en un portal
-   * y solo existe en cliente, así que el acento se escribe por el CSSOM sobre
-   * `.app-launcher__tile-icon`: en un atributo `style` una app con
-   * `style-src 'self'` lo descartaría sin avisar.
-   */
-  accent: string;
   isNew?: boolean;
 }
 
@@ -57,22 +48,13 @@ export interface AppLauncherProps {
   presentation?: 'modal' | 'popover';
 }
 
-function initial(name: string): string {
-  return name.trim().slice(0, 1).toUpperCase();
-}
-
-/** La baldosa, aparte porque su acento necesita un `ref` propio por app. */
 function LauncherTile({ app, isCurrent, newLabel }: { app: LauncherApp; isCurrent: boolean; newLabel: string }) {
-  const iconRef = useCssProperties({ 'background-color': app.accent });
   return (
     <a
       href={app.url}
       className={`app-launcher__tile${isCurrent ? ' app-launcher__tile--active' : ''}`}
       aria-current={isCurrent ? 'page' : undefined}
     >
-      <span ref={iconRef} className="app-launcher__tile-icon" aria-hidden="true">
-        {initial(app.name)}
-      </span>
       <span className="app-launcher__tile-name">{app.name}</span>
       {app.isNew && (
         <Tag variant="info" className="app-launcher__tile-badge">

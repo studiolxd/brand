@@ -60,7 +60,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--multi-select-values-gap);
+  gap: var(--multi-select-selection-gap);
   flex: 1;
   min-width: 0;
 }

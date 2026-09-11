@@ -39,7 +39,7 @@
     "pill-gap":                    { "$value": "{multi-select.pill-gap}", "$type": "dimension", "$description": "Hereda de `multi-select.pill-gap`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "pill-padding-block":          { "$value": "{multi-select.pill-padding-block}", "$type": "dimension", "$description": "Hereda de `multi-select.pill-padding-block`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "pill-padding-inline":         { "$value": "{multi-select.pill-padding-inline}", "$type": "dimension", "$description": "Hereda de `multi-select.pill-padding-inline`: el buscador múltiple tiene la misma cara que el control síncrono" },
-    "values-gap":                  { "$value": "{multi-select.values-gap}", "$type": "dimension", "$description": "Hereda de `multi-select.values-gap`: el buscador múltiple tiene la misma cara que el control síncrono" },
+    "selection-gap":               { "$value": "{multi-select.selection-gap}", "$type": "dimension", "$description": "Hereda de `multi-select.selection-gap`: el buscador múltiple tiene la misma cara que el control síncrono" },
     "item-selected-font-weight":   { "$value": "{font-weight.emphasis}", "$type": "number", "$description": "Peso de la opción ya elegida dentro de la lista de resultados" },
     "loading-padding-block":       { "$value": "{multi-select.item-padding-block}", "$type": "dimension", "$description": "Aire vertical de la fila de carga: la misma caja que una opción, para que la lista no salte al llegar los resultados" },
     "loading-padding-inline":      { "$value": "{multi-select.padding-inline}", "$type": "dimension", "$description": "Aire horizontal de la fila de carga" },

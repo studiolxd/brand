@@ -15,14 +15,14 @@ export default meta;
 type Story = StoryObj<typeof AppLauncher>;
 
 const demoApps: LauncherApp[] = [
-  { id: 'lmsmarketplace', name: 'LMS Marketplace', url: 'https://lmsmarketplace.slxd.app', accent: '#1a2b4a' },
-  { id: 'bricks', name: 'Bricks', url: 'https://bricks.slxd.app', accent: '#e0574c' },
-  { id: 'tender', name: 'Tender', url: 'https://tender.slxd.app', accent: '#2f8f5b', isNew: true },
-  { id: 'localizia', name: 'Localizia', url: 'https://localizia.slxd.app', accent: '#7c5cf0' },
-  { id: 'lrs', name: 'LRS', url: 'https://lrs.slxd.app', accent: '#d99a2b' },
-  { id: 'sharescorm', name: 'ShareScorm', url: 'https://sharescorm.slxd.app', accent: '#1f9bb0' },
-  { id: 'moodlemcp', name: 'MoodleMCP', url: 'https://moodlemcp.slxd.app', accent: '#c2477f' },
-  { id: 'aipricing', name: 'AI Pricing', url: 'https://aipricing.slxd.app', accent: '#4a5568', isNew: true },
+  { id: 'lmsmarketplace', name: 'LMS Marketplace', url: 'https://lmsmarketplace.slxd.app' },
+  { id: 'bricks', name: 'Bricks', url: 'https://bricks.slxd.app' },
+  { id: 'tender', name: 'Tender', url: 'https://tender.slxd.app', isNew: true },
+  { id: 'localizia', name: 'Localizia', url: 'https://localizia.slxd.app' },
+  { id: 'lrs', name: 'LRS', url: 'https://lrs.slxd.app' },
+  { id: 'sharescorm', name: 'ShareScorm', url: 'https://sharescorm.slxd.app' },
+  { id: 'moodlemcp', name: 'MoodleMCP', url: 'https://moodlemcp.slxd.app' },
+  { id: 'aipricing', name: 'AI Pricing', url: 'https://aipricing.slxd.app', isNew: true },
 ];
 
 const labels = { open: 'Abrir launcher de apps', new: 'Nuevo' };

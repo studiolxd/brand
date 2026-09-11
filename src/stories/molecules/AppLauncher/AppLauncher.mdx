@@ -61,7 +61,7 @@ El disparador de solo icono no cambia: conserva su línea.
 
 ## App actual
 
-`currentAppId` marca la app activa (`aria-current="page"`) con la barra de tinta al borde de inicio del tile (`tile-active-marker-*`) y el nombre en énfasis. La barra se distingue del tile bajo el puntero, que se rellena invirtiendo la marca (`tile-highlighted-bg` / `tile-highlighted-color`): una dice dónde estás, el otro dónde está el ratón, y se apilan sin pelearse.
+`currentAppId` marca la app activa (`aria-current="page"`) con un borde completo alrededor del tile (`tile-active-border-*`) y el nombre en énfasis. El borde va por `box-shadow` inset, no por `border`: no reserva espacio propio y el texto no se desplaza entre el estado normal y el activo. Se distingue del tile bajo el puntero, que se rellena invirtiendo la marca (`tile-highlighted-bg` / `tile-highlighted-color`): uno dice dónde estás, el otro dónde está el ratón, y se apilan sin pelearse.
 
 <Canvas of={AppLauncherStories.ConAppActual} />
 

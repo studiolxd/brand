@@ -40,7 +40,7 @@
     "pill-remove-hover-opacity": { "$value": "{opacity.full}",              "$type": "number",    "$description": "Opacidad del aspa bajo el puntero" },
     "item-selected-font-weight": { "$value": "{font-weight.bold}",          "$type": "number",    "$description": "Peso de la opción ya elegida en la lista: lo elegido se dice con peso, no con relleno" },
     "icon-transition-easing": { "$value": "{motion.easing.default}",        "$type": "string",    "$description": "Curva del giro del chevron al abrir" },
-    "values-gap":             { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Separación entre pills" },
+    "selection-gap":          { "$value": "{spacing.1}",                     "$type": "dimension", "$description": "Separación entre pills. Nombrado `selection-gap`, no `values-gap`: Style Dictionary 4.4.0 confunde un segmento de ruta que empieza por «value» (`values-gap`) con el sufijo `.value`/`.$value` del propio alias DTCG (`getReferences.js`, `variable.replace('.value', '')` con un `String.replace` de texto plano, no una regex anclada) y no resuelve la referencia encadenada — ver `surface-dark-derived.css`/release-check § tokens sin resolver" },
     "sm-font-size":           { "$value": "{select.sm-font-size}",           "$type": "dimension", "$description": "Tamaño de fuente — variante sm" },
     "sm-padding-inline":      { "$value": "{select.sm-padding-inline}",      "$type": "dimension", "$description": "Padding inline del trigger — variante sm" },
     "sm-item-padding-block":  { "$value": "{select.sm-item-padding-block}",  "$type": "dimension", "$description": "Padding block de cada opción — variante sm" },

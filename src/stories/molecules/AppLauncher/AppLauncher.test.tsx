@@ -4,9 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { AppLauncher, type LauncherApp } from './AppLauncher';
 
 const apps: LauncherApp[] = [
-  { id: 'a', name: 'Alfa', url: 'https://alfa.slxd.app', accent: '#111111' },
-  { id: 'b', name: 'Beta', url: 'https://beta.slxd.app', accent: '#222222', isNew: true },
-  { id: 'c', name: 'Gamma', url: 'https://gamma.slxd.app', accent: '#333333' },
+  { id: 'a', name: 'Alfa', url: 'https://alfa.slxd.app' },
+  { id: 'b', name: 'Beta', url: 'https://beta.slxd.app', isNew: true },
+  { id: 'c', name: 'Gamma', url: 'https://gamma.slxd.app' },
 ];
 
 const labels = { open: 'Abrir launcher de apps', new: 'Nuevo' };
@@ -24,7 +24,15 @@ describe('AppLauncher — presentation="modal" (por defecto)', () => {
     const dialog = screen.getByRole('dialog', { name: 'Aplicaciones' });
     const links = within(dialog).getAllByRole('link');
     expect(links).toHaveLength(3);
-    expect(within(dialog).getByRole('link', { name: /Beta/ })).toHaveAttribute('aria-current', 'page');
+    const current = within(dialog).getByRole('link', { name: /Beta/ });
+    expect(current).toHaveAttribute('aria-current', 'page');
+    expect(current).toHaveClass('app-launcher__tile--active');
+  });
+
+  it('no pinta ningún icono junto al nombre de la app: solo texto', () => {
+    render(<AppLauncher apps={apps} labels={labels} defaultOpen />);
+    const grid = screen.getByRole('list');
+    expect(grid.querySelector('[aria-hidden="true"]')).not.toBeInTheDocument();
   });
 
   it('usa `labels.title` cuando se pasa', async () => {

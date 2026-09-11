@@ -30,19 +30,14 @@
     "transition-duration":    { "$value": "{floating-panel.transition-duration}", "$type": "number", "$description": "Duración de la animación de entrada/salida" },
     "transition-easing":      { "$value": "{floating-panel.transition-easing}",   "$type": "string",  "$description": "Easing de la animación" },
 
-    "tile-padding-block":     { "$value": "{spacing.2}",                  "$type": "dimension", "$description": "Padding vertical de cada tile" },
-    "tile-padding-inline":    { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Padding horizontal de cada tile" },
-    "tile-gap":               { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre icono y nombre dentro del tile" },
+    "tile-padding-block":     { "$value": "{menu.item-padding-block}",    "$type": "dimension", "$description": "Padding vertical de cada tile — el de un ítem de Menu, para que la altura case con las listas de opciones del DS" },
+    "tile-padding-inline":    { "$value": "{menu.item-padding-inline}",   "$type": "dimension", "$description": "Padding horizontal de cada tile — el de un ítem de Menu" },
+    "tile-gap":               { "$value": "{spacing.1}",                  "$type": "dimension", "$description": "Espacio entre el nombre y el badge «nuevo» dentro del tile" },
     "tile-border-radius":     { "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio de cada tile" },
-
-    "tile-icon-size":         { "$value": "{size-component.md}",          "$type": "dimension", "$description": "Tamaño del cuadrado de icono/inicial" },
-    "tile-icon-border-radius":{ "$value": "{border-radius.default}",           "$type": "dimension", "$description": "Radio del cuadrado de icono/inicial" },
-    "tile-icon-font-size":    { "$value": "{font-size.3}",                "$type": "dimension", "$description": "Tamaño de la inicial cuando no hay icono" },
-    "tile-icon-font-weight":  { "$value": "{font-weight.emphasis}",         "$type": "number",    "$description": "Peso de la inicial" },
-    "tile-icon-color":        { "$value": "{color.white}",                "$type": "color",     "$description": "Color de la inicial sobre el fondo accent" },
 
     "tile-name-font-size":    { "$value": "{font-size.1}",                "$type": "dimension", "$description": "Tamaño de texto del nombre de app" },
     "tile-name-font-weight":  { "$value": "{font-weight.default}",        "$type": "number",    "$description": "Peso del nombre de app" },
+    "tile-name-line-height":  { "$value": "{menu.item-line-height}",      "$type": "number",    "$description": "Interlineado del nombre de app — el de un ítem de Menu, para que la altura case con las listas de opciones del DS" },
     "tile-name-color":        { "$value": "{color.text.on-light}",        "$type": "color",     "$description": "Color del nombre de app" },
     "tile-name-active-font-weight": { "$value": "{font-weight.emphasis}",   "$type": "number",    "$description": "Peso del nombre — app actual" },
 
@@ -56,11 +51,11 @@
     "hover-line-color":        { "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la línea de hover del disparador — tinta de la superficie" },
     "tile-highlighted-bg":     { "$value": "{menu.item-highlighted-bg}", "$type": "color",  "$description": "Relleno del tile bajo el puntero o el teclado — el del Menu: la inversión de marca. La rejilla de apps es la lista de opciones del panel, excepción declarada a «los estados no se rellenan» (Foundations → Colores)" },
     "tile-highlighted-color":  { "$value": "{menu.item-highlighted-color}", "$type": "color", "$description": "Texto del tile resaltado — el del Menu: nombre e inicial invierten con el relleno" },
-    "tile-active-marker-width":{ "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor de la barra que marca la app actual, en el borde de inicio del tile" },
-    "tile-active-marker-color":{ "$value": "{color.primary}",        "$type": "color",     "$description": "Color de la barra de la app actual" },
+    "tile-active-border-width":{ "$value": "{border-width.focus}",   "$type": "dimension", "$description": "Grosor del borde que marca la app actual, alrededor de todo el tile. Va por `box-shadow` inset (no por `border`): no reserva espacio ni desplaza el texto" },
+    "tile-active-border-color":{ "$value": "{color.primary}",        "$type": "color",     "$description": "Color del borde de la app actual — la misma tinta que el focus ring, el borde de énfasis del sistema" },
     "surface-dark-hover-line-color":         { "$value": "{color.text.on-dark}", "$type": "color", "$description": "Color de la línea de hover del disparador — surface-dark" },
     "surface-dark-tile-highlighted-bg":      { "$value": "{menu.surface-dark-item-highlighted-bg}", "$type": "color", "$description": "Relleno del tile resaltado — surface-dark" },
     "surface-dark-tile-highlighted-color":   { "$value": "{menu.surface-dark-item-highlighted-color}", "$type": "color", "$description": "Texto del tile resaltado — surface-dark" },
-    "surface-dark-tile-active-marker-color": { "$value": "{color.accent-1}",     "$type": "color", "$description": "Color de la barra de la app actual — surface-dark: lavanda, el acento de estado activo del sistema (como SidebarNav y Table)" }
+    "surface-dark-tile-active-border-color": { "$value": "{color.accent-1}",     "$type": "color", "$description": "Color del borde de la app actual — surface-dark: lavanda, el acento de estado activo del sistema (como SidebarNav y Table)" }
   }
 }

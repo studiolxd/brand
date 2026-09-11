@@ -7,6 +7,55 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [36.0.0] — 2026-09-11
+
+> **Major.** `AppLauncher` retira el cuadrado de color/inicial de cada entrada: `accent` e
+> `initial` desaparecen del tipo `LauncherApp`.
+
+- **`AppLauncher`: cada entrada es solo el nombre de la app, sin el cuadrado de color con la
+  inicial.** Decisión del usuario: el icono (`.app-launcher__tile-icon`, relleno con
+  `app.accent` vía CSSOM) se retira del marcado y del CSS en las dos presentaciones
+  (`modal`/`popover`). El icono de rejilla del botón disparador (`<Icon name="grid">`) no
+  cambia — es el disparador, no una entrada.
+  - **Ruptura:** `LauncherApp.accent` y la función interna `initial()` desaparecen. Ningún
+    consumidor de la suite pasaba `accent` con otro propósito (se comprobó con grep en
+    slxd) — no hay migración más allá de quitar el campo si algún consumidor lo pasaba.
+  - El tile pasa de columna centrada (icono encima, nombre debajo) a fila alineada al
+    inicio, coherente con un ítem de `Menu`: `tile-padding-block`/`tile-padding-inline`
+    pasan a referenciar `{menu.item-padding-block}`/`{menu.item-padding-inline}` y se añade
+    `tile-name-line-height` (`{menu.item-line-height}`), para que alto y aire casen con las
+    listas de opciones del DS.
+  - **La app actual (`currentAppId`) pasa de barra lateral a borde completo alrededor del
+    tile**, por `box-shadow` inset (no `border`: no reserva espacio ni desplaza el texto).
+    Tokens renombrados: `tile-active-marker-width`/`-color` → `tile-active-border-width`/
+    `-color` (mismo valor: `{border-width.focus}` / `{color.primary}`, el par oscuro sigue
+    en `{color.accent-1}`).
+  - Tokens retirados (sin sustituto — la inicial ya no existe): `tile-icon-size`,
+    `tile-icon-border-radius`, `tile-icon-font-size`, `tile-icon-font-weight`,
+    `tile-icon-color`.
+  - MDX y test actualizados: se quita la mención al icono/inicial y a `accent` (§ «Color de
+    dato» del MDX desaparece entera), y el test de contrato comprueba que la rejilla no
+    pinta ningún elemento `aria-hidden` junto al nombre.
+
+- **`multi-select`/`async-multi-select`: el token `values-gap` se renombra a
+  `selection-gap`.** No es un cambio de diseño — Style Dictionary 4.4.0 tiene un bug de
+  resolución de referencias (`getReferences.js` hace `variable.replace('.value', '')` con
+  un `String.replace` de texto plano, sin anclar al final del string) que confunde
+  cualquier segmento de ruta que *empiece* por «value» — no solo «value» a secas, también
+  «values-gap» — con el sufijo `.value`/`.$value` del propio alias DTCG. El resultado:
+  `--async-multi-select-values-gap` salía sin resolver en `dist/tokens.css` y
+  `dist/brand.css` (`{multi-select.values-gap}` literal en vez de
+  `var(--multi-select-values-gap)`), una propiedad CSS inválida que el navegador descarta
+  en silencio. Renombrar el segmento evita el bug sin romper la cascada de tokens (la
+  alternativa — resolver el valor a mano en vez de referenciar — habría estado bien pero
+  no hacía falta: el bug es del segmento de nombre, no de encadenar componente→componente).
+  - **Ruptura:** `--multi-select-values-gap` y `--multi-select-selection-gap` (SCSS
+    `$multi-select-values-gap` → `$multi-select-selection-gap`, e igual en
+    `async-multi-select`). Quien sobreescribía la custom property a mano debe renombrarla.
+  - `pnpm release:check` gana un paso nuevo: falla si `dist/*.css` contiene alguna
+    referencia de token sin resolver (`scripts/release-check.mjs`), para que este bug de
+    Style Dictionary no vuelva a colarse sin que nadie lo note.
+
 ## [35.0.0] — 2026-09-11
 
 > **Major.** `AppLauncher` cambia su contenedor por defecto: rompe a quien confiaba en el

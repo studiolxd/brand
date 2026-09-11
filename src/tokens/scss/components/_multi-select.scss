@@ -40,7 +40,7 @@ $lxd-multi-select-pill-remove-opacity: 0.7; // Opacidad del aspa en reposo: pres
 $lxd-multi-select-pill-remove-hover-opacity: 1; // Opacidad del aspa bajo el puntero
 $lxd-multi-select-item-selected-font-weight: 700; // Peso de la opción ya elegida en la lista: lo elegido se dice con peso, no con relleno
 $lxd-multi-select-icon-transition-easing: ease; // Curva del giro del chevron al abrir
-$lxd-multi-select-values-gap: 0.25rem; // Separación entre pills
+$lxd-multi-select-selection-gap: 0.25rem; // Separación entre pills. Nombrado `selection-gap`, no `values-gap`: Style Dictionary 4.4.0 confunde un segmento de ruta que empieza por «value» (`values-gap`) con el sufijo `.value`/`.$value` del propio alias DTCG (`getReferences.js`, `variable.replace('.value', '')` con un `String.replace` de texto plano, no una regex anclada) y no resuelve la referencia encadenada — ver `surface-dark-derived.css`/release-check § tokens sin resolver
 $lxd-multi-select-sm-font-size: 0.875rem; // Tamaño de fuente — variante sm
 $lxd-multi-select-sm-padding-inline: 0.5rem; // Padding inline del trigger — variante sm
 $lxd-multi-select-sm-item-padding-block: 0.25rem; // Padding block de cada opción — variante sm
