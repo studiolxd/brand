@@ -98,7 +98,7 @@
     "note-font-size": {
       "$value": "{site-shell.paragraph-small-font-size}",
       "$type": "dimension",
-      "$description": "Letra menor del correo (16px): el peldaño de párrafo pequeño de la superficie pública. Sube también porque el correo se lee sobre todo en el móvil, y una nota de baja a 13px es incómoda de leer y de tocar. Viste las notas —la de dentro del recuadro y la de fuera—, y ya NO el enlace de respaldo del botón, que pasó al cuerpo (`font-size`): es una dirección para leer y copiar, no una nota al pie"
+      "$description": "Letra menor del correo (16px): el peldaño de párrafo pequeño de la superficie pública. Sube también porque el correo se lee sobre todo en el móvil, y una nota de baja a 13px es incómoda de leer y de tocar. Viste las notas —la de dentro del recuadro y la de fuera— y también el enlace de respaldo del botón (`buttonFallback`), que se pinta con el mismo formato que la nota"
     },
     "note-line-height": {
       "$value": "{text.paragraph.small.line-height}",

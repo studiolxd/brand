@@ -95,6 +95,21 @@ export const emailFontFilename = 'google-sans-flex-normal-latin-v1.woff2';
  * bloque compuesto), y ahí la alternativa a esto es volver a escribir píxeles
  * a mano.
  */
+/**
+ * Letra menor y tinta secundaria, dentro del recuadro. Se extrae de
+ * `emailStyles` porque `buttonFallback` deriva de ella (mismo color, tamaño y
+ * altura de línea que la nota) y un objeto no puede referenciarse a sí mismo
+ * dentro de su propio literal.
+ */
+const muted = {
+  color: emailPalette.muted,
+  fontFamily: emailFontFamily,
+  fontWeight: Number(emailToken('--email-font-weight')),
+  fontSize: emailToken('--email-note-font-size'),
+  lineHeight: emailToken('--email-note-line-height'),
+  margin: 0,
+} as const satisfies CSSProperties;
+
 export const emailStyles = {
   heading: {
     color: emailPalette.text,
@@ -120,15 +135,7 @@ export const emailStyles = {
   textEmphasis: {
     fontWeight: Number(emailToken('--email-text-emphasis-font-weight')),
   },
-  /** Letra menor y tinta secundaria, dentro del recuadro. */
-  muted: {
-    color: emailPalette.muted,
-    fontFamily: emailFontFamily,
-    fontWeight: Number(emailToken('--email-font-weight')),
-    fontSize: emailToken('--email-note-font-size'),
-    lineHeight: emailToken('--email-note-line-height'),
-    margin: 0,
-  },
+  muted,
   /*
    * Como `muted` pero en la tinta normal: esta nota va FUERA del recuadro,
    * sobre el fondo de la página, donde el gris se lee como deshabilitado y no
@@ -181,18 +188,14 @@ export const emailStyles = {
   },
   /*
    * El enlace de respaldo que va bajo el botón: la misma dirección en texto,
-   * para copiar y pegar. Va a la talla del CUERPO, no a la de la nota: es una
-   * dirección que hay que leer carácter a carácter y copiar a mano, no una
-   * letra pequeña de pie de correo. La tinta de la frase sí es la secundaria
-   * —el único elemento con peso fuerte del correo es el título—, y la
-   * dirección en sí recupera la normal (`buttonFallbackUrl`).
+   * para copiar y pegar. Va con el mismo formato que `EmailNote` —color,
+   * tamaño y altura de línea de la nota (`muted`)—, porque es letra de pie de
+   * correo, no un párrafo del cuerpo; conserva solo sus propios márgenes, que
+   * son los del bloque botón + respaldo. La dirección en sí recupera la tinta
+   * normal (`buttonFallbackUrl`): es lo que hay que leer y copiar.
    */
   buttonFallback: {
-    color: emailPalette.muted,
-    fontFamily: emailFontFamily,
-    fontSize: emailToken('--email-font-size'),
-    fontWeight: Number(emailToken('--email-font-weight')),
-    lineHeight: emailToken('--email-line-height'),
+    ...muted,
     margin: `${emailToken('--email-button-fallback-margin-block-start')} 0 ${emailToken('--email-button-margin-block-end')}`,
   },
   /*

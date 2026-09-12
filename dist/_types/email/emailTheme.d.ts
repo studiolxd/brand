@@ -52,14 +52,6 @@ export declare const emailLogo: {
 export declare const emailAssetsBaseUrl = "https://slxd.app/brand/email";
 /** La cara latina de la sans, servida desde el mismo sitio que el logotipo. */
 export declare const emailFontFilename = "google-sans-flex-normal-latin-v1.woff2";
-/**
- * Estilos inline compartidos por las plantillas.
- *
- * Se exportan además de las primitivas porque una plantilla siempre acaba
- * necesitando un caso que las primitivas no cubren (una celda de tabla, un
- * bloque compuesto), y ahí la alternativa a esto es volver a escribir píxeles
- * a mano.
- */
 export declare const emailStyles: {
     readonly heading: {
         readonly color: string;
@@ -80,7 +72,6 @@ export declare const emailStyles: {
     readonly textEmphasis: {
         readonly fontWeight: number;
     };
-    /** Letra menor y tinta secundaria, dentro del recuadro. */
     readonly muted: {
         readonly color: string;
         readonly fontFamily: string;
@@ -111,12 +102,12 @@ export declare const emailStyles: {
         readonly marginBottom: string;
     };
     readonly buttonFallback: {
+        readonly margin: `${string} 0 ${string}`;
         readonly color: string;
         readonly fontFamily: string;
-        readonly fontSize: string;
         readonly fontWeight: number;
+        readonly fontSize: string;
         readonly lineHeight: string;
-        readonly margin: `${string} 0 ${string}`;
     };
     readonly buttonFallbackUrl: {
         readonly color: string;

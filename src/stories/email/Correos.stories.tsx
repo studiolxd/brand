@@ -99,7 +99,7 @@ const licitaciones = (
     optOut={{ unsubscribeUrl: '#baja', preferencesUrl: '#preferencias' }}
   >
     <EmailHeading>Tres licitaciones nuevas</EmailHeading>
-    <EmailText emphasis>
+    <EmailText>
       Tres anuncios publicados esta semana encajan con tus perfiles de interés. El más ajustado
       cierra en nueve días.
     </EmailText>

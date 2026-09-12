@@ -7,6 +7,22 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.0.4] — 2026-09-12
+
+> **Patch.** Ajustes en los correos de ejemplo: la entrada de «Nuevas licitaciones» ya no
+> lleva énfasis, y el enlace de respaldo bajo `EmailButton` pasa al formato de `EmailNote`.
+
+- **`Correos.stories.tsx`: la entrada de «Nuevas licitaciones» ya no lleva `emphasis`.** El
+  párrafo «Tres anuncios publicados esta semana encajan con tus perfiles de interés…» es texto
+  corriente, no una frase destacada; era el único `<EmailText emphasis>` de entrada de todo el
+  fichero.
+- **`EmailButton`: el enlace de respaldo se pinta con el formato de `EmailNote`.** `emailStyles.
+  buttonFallback` deriva ahora de `emailStyles.muted` (mismo color, tamaño y altura de línea que
+  la nota), en vez de la talla del cuerpo; conserva sus propios márgenes
+  (`--email-button-fallback-margin-block-start` / `--email-button-margin-block-end`) y el
+  `<br/>` + URL en su propia línea. Afecta a los 18 correos de la suite que usan `fallbackLabel`,
+  sin tocar ninguna app consumidora.
+
 ## [38.0.3] — 2026-09-12
 
 > **Patch.** `CommandPalette` ya no revienta con un `keydown` sin `key`.
