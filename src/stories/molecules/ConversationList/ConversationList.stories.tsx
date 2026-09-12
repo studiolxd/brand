@@ -66,11 +66,6 @@ export const Internacionalizado: Story = {
   },
 };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const Interactivo: Story = {
   render: (args) => {
     const [conversations, setConversations] = useState(SAMPLE);

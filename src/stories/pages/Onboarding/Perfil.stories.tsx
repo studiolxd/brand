@@ -45,12 +45,6 @@ type Story = StoryObj<typeof Perfil>;
  */
 export const PorDefecto: Story = {};
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { theme: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — un h1, main-content, un solo campo y sin salida',
   tags: ['!dev'],

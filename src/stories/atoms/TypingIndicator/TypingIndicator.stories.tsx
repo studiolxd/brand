@@ -16,12 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-/** Los puntos toman su tinta del par oscuro (`surface-dark-dot-color`): blancos sobre prusia. */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /** Test: rol, anuncio y tres puntos cuadrados (sin border-radius). */
 export const Accesibilidad: Story = {
   name: 'Test — rol, label y puntos cuadrados',

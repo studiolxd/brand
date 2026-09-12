@@ -76,23 +76,6 @@ export const EnLinea: Story = {
   ),
 };
 
-/** El par oscuro viene con el token: no hay regla de superficie propia. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Stack>
-      <InputField
-        id="correo-facturacion-oscuro"
-        label="Correo de facturación"
-        defaultValue="no-es-un-correo"
-        errorMessage="Escribe una dirección de correo válida."
-      />
-      <ErrorText>No se pudo calcular el importe del complemento.</ErrorText>
-    </Stack>
-  ),
-};
-
 /**
  * La cara del átomo y la del `errorMessage` de un `InputField` son la misma,
  * comprobada sobre el estilo ya calculado por el navegador.

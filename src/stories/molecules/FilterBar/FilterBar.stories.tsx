@@ -94,21 +94,6 @@ export const Movil: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <FilterBar
-      search={<Buscador />}
-      actions={<Button variant="outline">Limpiar filtros</Button>}
-    >
-      <SelectField id="filtro-estado-oscuro" label="Estado" options={ESTADOS} defaultValue="todos" />
-      <SelectField id="filtro-papel-oscuro" label="Papel" options={PAPELES} defaultValue="todos" />
-      <DatePickerField id="filtro-desde-oscuro" label="Desde" />
-    </FilterBar>
-  ),
-};
-
 /** Test: el buscador ocupa su línea entera y los filtros van en columnas. */
 export const ContratoBuscadorEnSuLinea: Story = {
   name: 'Test — el buscador ocupa su propia línea',

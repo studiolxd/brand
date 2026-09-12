@@ -72,22 +72,6 @@ export const Significado: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Stack>
-      <Paragraph>
-        Al confirmar se <Text as="strong" tone="destructive">borran</Text> las respuestas ya enviadas.
-      </Paragraph>
-      <Paragraph>
-        La revisión terminó <Text as="strong" tone="success">sin incidencias</Text>{' '}
-        <Text tone="muted">(hace tres semanas)</Text>.
-      </Paragraph>
-    </Stack>
-  ),
-};
-
 /** `LineBreak` corta la línea dentro de la frase, sin separar párrafos. */
 export const SaltoDeLinea: Story = {
   name: 'Salto de línea',

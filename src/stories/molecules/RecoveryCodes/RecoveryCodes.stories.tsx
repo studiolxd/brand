@@ -62,11 +62,6 @@ export const ConAccionesDelProducto: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /**
  * Test: la lista es una numeración real (`role="list"` / `listitem`, `N`
  * ítems), y el botón de copiar todos copia los códigos unidos por salto de

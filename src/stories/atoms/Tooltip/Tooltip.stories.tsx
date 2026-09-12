@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, waitFor, within } from 'storybook/test';
 import { Button } from '../Button/Button';
 import { Tooltip, TooltipProvider } from './Tooltip';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
   title: 'Atoms/Tooltip',
@@ -149,7 +150,7 @@ export const GeometriaFlecha: Story = {
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   args: {
     label: 'Guardar los cambios',
     children: <Button variant="outline">Guardar</Button>,

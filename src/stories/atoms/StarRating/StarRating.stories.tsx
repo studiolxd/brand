@@ -74,17 +74,6 @@ export const Deshabilitada: Story = {
   args: { readOnly: false, disabled: true, defaultValue: 3 },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Stack>
-      <StarRating value={3.5} />
-      <StarRating readOnly={false} defaultValue={4} />
-    </Stack>
-  ),
-};
-
 export const TestNombreAccesible: Story = {
   name: 'Test — el nombre accesible lleva el valor exacto',
   tags: ['!dev'],

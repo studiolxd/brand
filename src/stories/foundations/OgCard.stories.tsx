@@ -4,12 +4,15 @@ import { expect, within } from 'storybook/test';
 import { ogCard } from '../og/ogCard';
 
 import { OgPreview } from './OgPreview';
+import { SOLO_CLARO } from '../utils/chromaticModes';
 
 const meta: Meta<typeof OgPreview> = {
   title: 'Foundations/Tarjeta social',
   component: OgPreview,
+  // La tarjeta social es una imagen de colores fijos: no tiene superficie oscura.
   parameters: {
     layout: 'padded',
+    chromatic: SOLO_CLARO,
   },
 };
 export default meta;

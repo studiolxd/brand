@@ -112,20 +112,6 @@ export const EnLinea: Story = {
   ),
 };
 
-/** Sobre superficie oscura el keycap remapea fondo, símbolo y borde por token. */
-export const SuperficieOscura: Story = {
-  name: 'Superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <div style={fila}>
-      <Kbd size="sm">Esc</Kbd>
-      <Kbd>⌘</Kbd>
-      <Kbd>K</Kbd>
-      <Kbd size="lg">Tab</Kbd>
-    </div>
-  ),
-};
-
 /** Test: elemento semántico, clases de talla y paso de props. */
 export const Contrato: Story = {
   name: 'Test — elemento, talla y paso de props',

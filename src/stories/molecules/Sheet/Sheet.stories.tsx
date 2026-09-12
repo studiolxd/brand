@@ -5,6 +5,7 @@ import { Button } from '../../atoms/Button/Button';
 import { Paragraph } from '../../atoms/Paragraph/Paragraph';
 import { Sheet } from './Sheet';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
   title: 'Molecules/Sheet',
@@ -84,20 +85,6 @@ export const TituloOculto: Story = {
     titleHidden: true,
     description: undefined,
   },
-  render: Demo,
-};
-
-/**
- * El decorator `withSurface` activa `data-theme="dark"` en `document.documentElement`;
- * como el panel se monta en el portal de Base UI (`document.body`), las
- * custom properties `surface-dark-*` de `Modal` —de las que `Sheet` toma
- * prestadas `bg`, `title-color`, `description-color` y las del aspa— cascadean
- * hasta él sin configuración adicional.
- */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: Default.args,
   render: Demo,
 };
 
@@ -295,7 +282,7 @@ export const ContratoPanelOpaco: Story = {
 export const ContratoPanelOpacoOscuro: Story = {
   name: 'Test — panel opaco en reposo (oscuro)',
   tags: ['!dev'],
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   args: { open: true, onOpenChange: () => {}, title: 'Detalle', children: null },
   render: () => (
     <Sheet open onOpenChange={fn()} title="Detalle">

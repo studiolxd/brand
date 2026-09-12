@@ -240,15 +240,6 @@ export const Etiquetas: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: (args) => {
-    const month = new Date(2026, 4, 1);
-    return <CalendarRoster {...args} month={month} rows={makeRows(month)} />;
-  },
-};
-
 /**
  * Test: la navegación de mes es `PrevNextNav` — con `hrefBuilder` los controles
  * son enlaces de verdad y, si además hay `onMonthChange`, el handler corta la

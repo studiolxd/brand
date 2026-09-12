@@ -3,6 +3,7 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from '../../atoms/Button/Button';
 import { Toaster } from './Toaster';
 import { toast } from './toast';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
   title: 'Molecules/Toast',
@@ -170,7 +171,7 @@ export const Espera: Story = {
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
       <Button onClick={() => toast('Cambios guardados')}>Neutro</Button>

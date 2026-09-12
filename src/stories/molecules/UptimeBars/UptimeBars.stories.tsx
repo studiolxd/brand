@@ -96,13 +96,6 @@ export const SinDatosAlPrincipio: Story = {
   args: { ...pie, points: RECIEN_ESTRENADA, summary: '99,76 % de disponibilidad (12 días medidos)' },
 };
 
-/** La misma tira sobre el lienzo oscuro del sistema. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { ...pie, points: CON_CAIDAS, summary: '98,53 % de disponibilidad' },
-};
-
 /**
  * A 375px las 30 barritas siguen cabiendo: el ancho de cada una sale de repartir
  * el contenedor, así que la tira encoge en vez de desbordar.

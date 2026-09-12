@@ -524,37 +524,6 @@ export const ContratoColumnaDeAccionesSinPartir: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Table caption="Listado de proyectos sobre superficie oscura">
-      <Table.Head>
-        <Table.Row>
-          <Table.Header sortable sorted="asc" onSort={() => {}}>Nombre</Table.Header>
-          <Table.Header sortable onSort={() => {}}>Cliente</Table.Header>
-          <Table.Header>Estado</Table.Header>
-        </Table.Row>
-      </Table.Head>
-      <Table.Body>
-        {PROYECTOS.map((p, i) => (
-          <Table.Row key={p.nombre} interactive selected={i === 1}>
-            <Table.Cell>{p.nombre}</Table.Cell>
-            <Table.Cell>{p.cliente}</Table.Cell>
-            <Table.Cell>{p.estado}</Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
-      <Table.Footer>
-        <Table.Row>
-          <Table.Cell colSpan={2}>Total proyectos</Table.Cell>
-          <Table.Cell>{PROYECTOS.length}</Table.Cell>
-        </Table.Row>
-      </Table.Footer>
-    </Table>
-  ),
-};
-
 /**
  * Test: la cabecera ordenable es un `<button>` dentro del `<th>` — el estado
  * vive en el `aria-sort` de la celda y el nombre accesible del botón es solo el

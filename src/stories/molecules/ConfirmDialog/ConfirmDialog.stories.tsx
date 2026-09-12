@@ -79,12 +79,6 @@ export const ConPromesa: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { ...base, destructive: true, confirmLabel: 'Borrar' },
-};
-
 /**
  * Test: el diálogo abre con el foco en «Cancelar» —no en el botón que
  * destruye— y expone su título y su descripción.

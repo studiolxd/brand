@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent } from 'storybook/test';
 import { SkipLink } from './SkipLink';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof SkipLink> = {
   title: 'Atoms/SkipLink',
@@ -25,7 +26,7 @@ export const Revelado: Story = {
     (`surface-dark-bg`, `surface-dark-color`), no el de la superficie. */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark', pseudo: { focusVisible: true } },
+  parameters: { surface: 'dark', pseudo: { focusVisible: true }, chromatic: SOLO_OSCURO },
 };
 
 export const Contrato: Story = {

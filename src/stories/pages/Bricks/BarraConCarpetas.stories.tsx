@@ -306,12 +306,6 @@ export const EnRail: Story = {
   args: { header, children: contenido, sidebar: <Pagina />, defaultSidebar: 'rail' },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { header, children: contenido, sidebar: <Pagina arrastrando /> },
-};
-
 export const TestBarra: Story = {
   name: 'Test — los dos árboles conviven en la barra',
   tags: ['!dev'],

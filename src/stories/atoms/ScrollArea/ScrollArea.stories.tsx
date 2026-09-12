@@ -43,16 +43,6 @@ export const HorizontalYVertical: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <ScrollArea label="Condiciones del servicio" style={{ blockSize: '12rem', maxInlineSize: '32rem' }}>
-      <Stack>{parrafos}</Stack>
-    </ScrollArea>
-  ),
-};
-
 export const TestRegion: Story = {
   name: 'Test — con label es una región anunciable',
   tags: ['!dev'],

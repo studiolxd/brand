@@ -127,12 +127,6 @@ export const ConAcciones: Story = {
   },
 };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { value: 'Necesito ayuda con mi proyecto.' },
-};
-
 /** Test: el nombre accesible del botón es su texto visible, sin `aria-label` que lo contradiga. */
 export const ContratoBoton: Story = {
   name: 'Test — el botón se llama como lo que pone',

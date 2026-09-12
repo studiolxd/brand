@@ -3,7 +3,6 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Toggle } from './Toggle';
 import { Icon } from '../Icon/Icon';
 import { Inline } from '../Inline/Inline';
-import { Stack } from '../Stack/Stack';
 
 const meta: Meta<typeof Toggle> = {
   title: 'Atoms/Toggle',
@@ -56,19 +55,6 @@ export const Deshabilitado: Story = {
       <Toggle disabled>Sin pulsar</Toggle>
       <Toggle disabled defaultPressed>Pulsado</Toggle>
     </Inline>
-  ),
-};
-
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <Stack>
-      <Inline gap="sm">
-        <Toggle>Sin pulsar</Toggle>
-        <Toggle defaultPressed>Pulsado</Toggle>
-      </Inline>
-    </Stack>
   ),
 };
 

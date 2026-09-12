@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { Stack } from '../../atoms/Stack/Stack';
 import { SearchForm } from './SearchForm';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
   title: 'Molecules/SearchForm',
@@ -62,7 +63,7 @@ export const AnchuraAcotada: Story = {
 /** Su sitio real: el panel del menú del sitio, a talla `xl` y sobre superficie oscura. */
 export const EnElPanelDelMenu: Story = {
   name: 'En el panel del menú',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   args: { size: 'xl', onSubmit: fn() },
 };
 

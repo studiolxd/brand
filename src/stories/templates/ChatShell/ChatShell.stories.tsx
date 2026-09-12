@@ -127,12 +127,6 @@ export const CajonDeConversaciones: Story = {
   args: PorDefecto.args,
 };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: PorDefecto.args,
-};
-
 /**
  * La pantalla entera funcionando: abrir conversaciones, borrarlas, escribir y
  * recibir respuesta. El estado lo lleva la story, que es el papel del producto;

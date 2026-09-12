@@ -82,17 +82,6 @@ export const ConTitulo: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    apps: demoApps.slice(0, 4),
-    labels,
-    currentAppId: 'tender',
-    defaultOpen: true,
-  },
-};
-
 /**
  * `presentation="popover"`: el panel flotante anclado al disparador, el
  * comportamiento del componente hasta v34 — se mantiene para quien lo pida

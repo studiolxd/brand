@@ -6,6 +6,7 @@ import '../src/stylesheets/fonts.css'
 import './preview.css'
 import studiolxdTheme from './studiolxdTheme'
 import { STORY_TODAY } from '../src/stories/utils/storyDate'
+import { MODOS_CHROMATIC } from '../src/stories/utils/chromaticModes'
 
 /**
  * El catálogo vive siempre en la misma fecha. Sin esto, cualquier componente o
@@ -26,10 +27,13 @@ MockDate.set(STORY_TODAY)
 
 /**
  * Superficie oscura para una story. Se activa de dos formas:
- * - desde el switcher de fondos de Storybook (globals.backgrounds = 'dark'),
- *   para explorar cualquier story en oscuro sin duplicarla;
- * - desde la propia story, con `parameters: { surface: 'dark' }`, para una
- *   story que ENSEÑA ese uso en el catálogo («En superficie oscura»).
+ * - desde el global `backgrounds` (el switcher de fondos de Storybook, y el
+ *   mismo que mueven los modos de Chromatic: cada story se fotografía en claro
+ *   y en oscuro sin duplicarla en el catálogo);
+ * - desde la propia story, con `parameters: { surface: 'dark' }`, para la que
+ *   ENSEÑA ese uso porque el oscuro le cambia algo (una variante que invierte,
+ *   un relleno autocontenido que NO cambia). Esa se acompaña de
+ *   `chromatic: SOLO_OSCURO`: en el modo claro daría la misma captura.
  * En vez de envolver en `.surface-dark` (que no llega a los portales — Popover,
  * Menu, Tooltip, Modal, Select renderizan fuera del árbol de la story, en
  * `document.body`), pone `data-theme="dark"` en `document.documentElement`:
@@ -81,7 +85,9 @@ const withSurface: Decorator = (Story, context) => {
 const preview: Preview = {
   decorators: [withSurface],
   initialGlobals: {
-    backgrounds: { value: '#ffffff' },
+    // La clave de la opción, no el color: es lo que espera el addon de fondos
+    // (y lo que mueven los modos de Chromatic).
+    backgrounds: { value: 'light' },
   },
   parameters: {
     backgrounds: {
@@ -90,6 +96,10 @@ const preview: Preview = {
         dark:  { name: 'Dark', value: '#111e30' },
       },
     },
+    // Cada story se captura en las dos superficies. El oscuro del catálogo son
+    // estos modos, no stories duplicadas (ver `src/stories/utils/chromaticModes.ts`).
+    chromatic: { modes: MODOS_CHROMATIC },
+
     docs: {
       theme: studiolxdTheme,
       toc: {

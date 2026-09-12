@@ -115,17 +115,6 @@ export const ConMarcarTodas: Story = {
   args: { defaultOpen: true, onMarkAllRead: fn() },
 };
 
-/**
- * En la barra oscura de la aplicación. El panel flota fuera del árbol de la
- * story, así que el tema se lee del `<html>`: en el catálogo, con el fondo
- * oscuro del switcher.
- */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  args: { defaultOpen: true, onMarkAllRead: fn() },
-  parameters: { surface: 'dark' },
-};
-
 export const ContratoApertura: Story = {
   name: 'Test — abrir, cerrar con Escape y devolver el foco',
   tags: ['!dev'],

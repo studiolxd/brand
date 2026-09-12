@@ -208,12 +208,6 @@ export const ContratoError: Story = {
   },
 };
 
-/** Campo, etiqueta y ayuda heredan el modo oscuro del `InputField`; el ojo es un `Button ghost`. */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /**
  * Test (B3, auditoría 2026-08-30): el botón de ver/ocultar tenía
  * `outline: none` y un color de foco idéntico al de reposo — ningún indicador

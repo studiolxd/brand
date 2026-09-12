@@ -112,11 +112,6 @@ export const LadoALado: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — lista ordenada, aria-current y estados',
   tags: ['!dev'],

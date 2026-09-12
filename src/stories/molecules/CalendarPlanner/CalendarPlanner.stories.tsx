@@ -209,12 +209,6 @@ export const Etiquetas: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: (args) => <CalendarPlanner {...args} events={makeEvents()} />,
-};
-
 /**
  * Test: con `onDayClick` la parrilla es una rejilla operable con teclado —
  * una sola parada de tabulador y flechas para moverse entre días.

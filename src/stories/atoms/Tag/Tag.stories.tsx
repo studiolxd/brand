@@ -3,6 +3,7 @@ import { expect, within } from 'storybook/test';
 import { Tag } from './Tag';
 import { Paragraph } from '../Paragraph/Paragraph';
 import { Stack } from '../Stack/Stack';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof Tag> = {
   title: 'Atoms/Tag',
@@ -120,7 +121,7 @@ export const EnUso: Story = {
  */
 export const SuperficieOscura: Story = {
   name: 'Superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={fila}>
       <Tag variant="primary">Primaria</Tag>

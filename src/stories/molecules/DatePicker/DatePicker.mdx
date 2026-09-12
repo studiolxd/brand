@@ -81,8 +81,6 @@ El `ref` va al **campo de texto**, para que la validación pueda enfocarlo al fa
 
 El campo es el `Input` del sistema y el calendario voltea con los tokens de `Calendar`; lo propio del control —la tinta del glifo, su anillo de foco y el aviso de fecha ilegible— tiene su par oscuro.
 
-<Canvas of={DatePickerStories.SuperficieOscura} />
-
 ## Accesibilidad
 
 - El control es un `<input type="text">` con `inputMode="numeric"`; quien abre el panel es el botón del final, un `<button>` con nombre accesible propio (`openCalendarLabel`), `aria-haspopup="dialog"` y `aria-expanded`. El panel es un `role="dialog"` cuyo nombre accesible es `calendarLabel` (por defecto «Calendario», en castellano).

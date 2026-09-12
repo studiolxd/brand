@@ -88,17 +88,6 @@ export const Deshabilitado: Story = { args: { disabled: true, defaultValue: 'No 
 
 export const SoloLectura: Story = { args: { readOnly: true, defaultValue: 'Valor de solo lectura' } };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', inlineSize: '24rem' }}>
-      <Textarea {...args} rows={3} />
-      <Textarea {...args} rows={3} error />
-    </div>
-  ),
-};
-
 /** Navega con Tab hasta el campo para ver el anillo de foco. */
 export const Foco: Story = {
   name: 'Foco visible',

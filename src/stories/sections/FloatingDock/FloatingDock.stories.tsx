@@ -132,13 +132,6 @@ export const Controlado: Story = {
   },
 };
 
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: Default.args,
-  render: Demo,
-};
-
 /* ── Tests ────────────────────────────────────────────────────── */
 
 export const ContratoTeclado: Story = {

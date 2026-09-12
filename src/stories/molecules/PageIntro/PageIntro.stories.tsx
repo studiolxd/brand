@@ -117,16 +117,6 @@ export const CabeceraDeSeccion: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    title: 'Miembros',
-    description: 'Quién entra en la organización y con qué permisos.',
-    actions: <Button>Invitar miembro</Button>,
-  },
-};
-
 type Member = { id: string; name: string; email: string; role: string };
 
 const columns: ColumnDef<Member, unknown>[] = [

@@ -35,11 +35,6 @@ export const Disabled: Story = {
   args: { disabled: true },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /** Navega con Tab hasta el input para verificar el focus ring */
 export const FocusVisible: Story = {
   name: 'Focus visible',

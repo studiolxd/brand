@@ -3,11 +3,13 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { EmailLayout } from './EmailLayout';
 import { EmailPreview } from './EmailPreview';
 import { EmailButton, EmailHeading, EmailNote, EmailText } from './EmailPrimitives';
+import { SOLO_CLARO } from '../utils/chromaticModes';
 
 const meta: Meta<typeof EmailLayout> = {
   title: 'Email/EmailLayout',
   component: EmailLayout,
-  parameters: { layout: 'fullscreen' },
+  // El correo no gestiona modo oscuro (ver § «El correo» en CLAUDE.md).
+  parameters: { layout: 'fullscreen', chromatic: SOLO_CLARO },
   args: {
     preview: 'Confirma tu dirección para terminar de crear tu cuenta',
     appName: 'Bricks',

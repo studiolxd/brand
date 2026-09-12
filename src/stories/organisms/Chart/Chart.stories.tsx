@@ -326,21 +326,6 @@ export const Vacio: Story = {
   args: { data: [], title: 'Precio por millón de tokens' },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    type: 'bar',
-    data: USO_SCORM,
-    series: SERIES_SCORM,
-    xKey: 'mes',
-    stacked: true,
-    title: 'Usuarios del paquete, facturables y excluidos',
-    ariaLabel: 'Usuarios facturables y excluidos por mes, apilados',
-    formatValue: undefined,
-  },
-};
-
 export const TestTablaEquivalente: Story = {
   name: 'Test — la tabla equivalente lleva todos los valores',
   tags: ['!dev'],

@@ -185,17 +185,6 @@ export const Etiquetas: Story = {
   },
 };
 
-/** Todos los colores del dropzone tienen par oscuro: superficie secundaria, tinta y borde. */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    multiple: true,
-    accept: 'image/*,.pdf',
-    ariaLabel: 'Subir archivos',
-  },
-};
-
 /** Las tres tallas: cambian el aire, el cuerpo del texto, el icono y la miniatura. */
 export const Tallas: Story = {
   render: () => (

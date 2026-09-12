@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Switcher } from './Switcher';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof Switcher> = {
   title: 'Atoms/Switcher',
@@ -138,6 +139,6 @@ export const ContratoError: Story = {
 /** El track encendido pasa a lavanda en oscuro: el prusia sería el propio lienzo. */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   args: { defaultChecked: true },
 };

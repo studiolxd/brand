@@ -135,12 +135,6 @@ export const Interactiva: Story = {
   args: { src: undefined },
 };
 
-/** En superficie oscura el anillo de la diana es la tinta de la superficie. */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const ContratoTeclado: Story = {
   name: 'Test — el teclado llega al botón y abre el diálogo del sistema',
   tags: ['!dev'],

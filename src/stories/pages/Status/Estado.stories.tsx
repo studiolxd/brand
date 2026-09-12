@@ -57,12 +57,6 @@ export const SinDatos: Story = { name: 'Sin datos', args: { estado: 'incomunicad
 /** Mientras se pregunta al monitor: el aviso en texto y el hueco de lo que va a llegar. */
 export const Cargando: Story = { args: { estado: 'cargando' } };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { theme: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — un h1, main-content, dieciocho aplicaciones y sus tiras',
   tags: ['!dev'],

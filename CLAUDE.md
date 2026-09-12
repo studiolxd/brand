@@ -50,7 +50,9 @@ Tests de story: toda story de prueba se llama `Test — …` y lleva `tags: ['!d
 
 Chromatic (regresión visual): el token del proyecto NO va en el `package.json` ni en el repo. Vive **fuera del repo**, en `~/.config/slxd/chromatic.env` como `CHROMATIC_PROJECT_TOKEN`; se carga con `set -a; . ~/.config/slxd/chromatic.env; set +a` antes de llamar al CLI, que lo lee solo.
 
-Se corre **en cada release, después de `pnpm release:check` y antes del `git tag`**: `pnpm chromatic`, que ya lleva `--exit-zero-on-changes` (un cambio visual no rompe el flujo; un error de componente sí devuelve código distinto de cero). Para iterar sobre un subconjunto sin subir las 1532 stories, `pnpm chromatic --only-story-names "Molecules/Modal/**"`; para validar sin consumir snapshots, `npx chromatic --dry-run`.
+Se corre **en cada release, después de `pnpm release:check` y antes del `git tag`**: `pnpm chromatic`, que ya lleva `--exit-zero-on-changes` (un cambio visual no rompe el flujo; un error de componente sí devuelve código distinto de cero). Para iterar sobre un subconjunto sin subir el catálogo entero, `pnpm chromatic --only-story-names "Molecules/Modal/**"`; para validar sin consumir snapshots, `npx chromatic --dry-run`.
+
+Cada story se captura en **dos modos**, `claro` y `oscuro` (§ «Stories de dark mode y superficie oscura»), así que el coste por story es de dos snapshots. Lo que acota la factura no es recortar modos sino `onlyChanged` (TurboSnap, ya activo en `chromatic.config.json`): solo se vuelve a fotografiar lo que toca el commit.
 
 La **revisión y la aceptación** de los cambios visuales se hacen en chromatic.com, nunca desde el CLI: no se usa `--auto-accept-changes`.
 
@@ -272,20 +274,32 @@ import type { Meta, StoryObj } from '@storybook/react';
 ```
 
 ### Stories de dark mode y superficie oscura
-No crear stories dedicadas para dark mode. El decorator global `withSurface` en `preview.tsx` activa el tema oscuro automáticamente al cambiar el fondo a oscuro desde el switcher de Storybook. Cualquier story se puede explorar en dark mode sin necesidad de duplicarla.
 
-`withSurface` no envuelve la story en un `<div class="surface-dark">`: eso deja fuera los portales (Popover, Menu, Tooltip, Modal, Select renderizan en `document.body`, fuera del árbol de la story). En su lugar pone `data-theme="dark"` en `document.documentElement` (con `useEffect`, limpiando el atributo al desmontar o al volver a claro) — las custom properties `surface-dark-*` cascadean por herencia a cualquier descendiente del `<html>`, portales incluidos, y `body` ya pinta su propio fondo/color desde esos tokens (`base.css`), así que el lienzo del canvas queda coherente sin div adicional.
+**No se crean stories «en oscuro» de un componente.** Chromatic fotografía **cada** story en las dos superficies con dos modos (`claro` y `oscuro`, declarados en `parameters.chromatic.modes` de `.storybook/preview.tsx` desde `src/stories/utils/chromaticModes.ts`), y el switcher de fondos de Storybook enseña lo mismo en local: el decorator global `withSurface` lee el global `backgrounds` y activa el tema. Duplicar la story solo duplica la captura. Se borraron 110 stories así el 2026-09-12.
 
-Distinto es **enseñar** en el catálogo que un componente vive sobre superficie oscura (un `Hero` en una banda oscura, un `SiteNav` en la cabecera). Para eso el mismo decorator lee `parameters.surface`:
+Solo se hace story oscura cuando el oscuro **cambia el componente**, y entonces se cuenta en su texto:
+
+- una **prop** lo pinta (`AuthPage surface="dark"`, `Container surface="dark"`): es una story de esa prop, no de la superficie;
+- una **variante invierte** (`Tag`/`NumberBadge`/`ProgressBar` primary, `Switcher`, `Tooltip`, `StepMarker`);
+- un **relleno autocontenido NO cambia** y eso es lo que hay que enseñar (`Alert`/`Toast`/`Banner`/`Card`);
+- es un **test** (`Test — …` con `tags: ['!dev']`) que comprueba valores oscuros.
+
+Esa story fuerza el oscuro con `parameters.surface` y apaga el modo claro, que daría la misma captura:
 
 ```ts
-export const EnSuperficieOscura: Story = {
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
+
+export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
 };
 ```
 
-Envuelve la story en `.surface-dark` —el lienzo del sistema (fondo y color emparejados en `base.css`), el mismo que pinta `Container surface="dark"`— sin estilos inline ni `background` a mano. Es el patrón para toda story oscura: no usar `<div className="surface-dark" style={{ background: … }}>` ni la utilidad `.bg-dark` en stories nuevas. Si lo que se enseña es la banda en sí (no el componente sobre ella), `Container surface="dark"` dentro del `render` sigue siendo válido.
+Al revés, lo que no tiene superficie oscura apaga el modo oscuro en su `meta` con `parameters: { chromatic: SOLO_CLARO }`: el correo (`Email/*`, ver § «El correo») y la tarjeta social (`Foundations/Tarjeta social`), que es una imagen de colores fijos.
+
+`withSurface` no envuelve la story en un `<div class="surface-dark">`: eso deja fuera los portales (Popover, Menu, Tooltip, Modal, Select renderizan en `document.body`, fuera del árbol de la story). En su lugar pone `data-theme="dark"` en `document.documentElement` (con `useEffect`, limpiando el atributo al desmontar o al volver a claro) — las custom properties `surface-dark-*` cascadean por herencia a cualquier descendiente del `<html>`, portales incluidos, y `body` ya pinta su propio fondo/color desde esos tokens (`base.css`), así que el lienzo del canvas queda coherente sin div adicional. En la página de **docs** sí acota el oscuro a un contenedor `.surface-dark` por story, para no teñir a las demás.
+
+Nunca con estilos inline: no usar `<div className="surface-dark" style={{ background: … }}>` ni la utilidad `.bg-dark` en stories nuevas. Si lo que se enseña es la banda en sí (no el componente sobre ella), `Container surface="dark"` dentro del `render` sigue siendo válido.
 
 ## TypeScript
 

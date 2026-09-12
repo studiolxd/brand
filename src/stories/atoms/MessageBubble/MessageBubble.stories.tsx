@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { MessageBubble } from './MessageBubble';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta = {
   title: 'Atoms/MessageBubble',
@@ -70,7 +71,7 @@ export const MensajeLargo: Story = {
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <>
       <MessageBubble role="assistant">Hola, ¿en qué puedo ayudarte hoy?</MessageBubble>

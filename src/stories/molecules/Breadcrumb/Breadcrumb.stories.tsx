@@ -68,11 +68,6 @@ export const SeparadorChevron: Story = {
   },
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 export const TestContrato: Story = {
   name: 'Test — nombre accesible y página actual',
   tags: ['!dev'],

@@ -72,12 +72,6 @@ type Story = StoryObj<typeof Logotipo>;
  */
 export const PorDefecto: Story = {};
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { theme: 'dark' },
-};
-
 export const Contrato: Story = {
   name: 'Test — tercer paso, la subida en lg y dos pasos alcanzables',
   tags: ['!dev'],

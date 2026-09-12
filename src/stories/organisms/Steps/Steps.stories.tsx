@@ -57,12 +57,6 @@ export const LadoALado: Story = {
   },
 };
 
-/** Sobre superficie oscura: el número y la línea voltean con la superficie. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-};
-
 /**
  * Forma compuesta: un `Step` por paso, con el cuerpo que haga falta dentro
  * (varios párrafos, una lista, un fragmento de código). Es la forma para MDX,

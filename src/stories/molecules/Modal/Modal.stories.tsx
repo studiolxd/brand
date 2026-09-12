@@ -9,6 +9,7 @@ import type { AsyncSelectOption } from '../AsyncSelectField/AsyncSelectField';
 import { AsyncMultiSelectField } from '../AsyncMultiSelectField/AsyncMultiSelectField';
 import type { AsyncMultiSelectOption } from '../AsyncMultiSelectField/AsyncMultiSelectField';
 import { SiteShell } from '../../sections/SiteShell/SiteShell';
+import { SOLO_OSCURO } from '../../utils/chromaticModes';
 
 const meta: Meta<typeof Modal> = {
   title: 'Molecules/Modal',
@@ -148,34 +149,6 @@ export const Confirm: Story = {
 };
 
 /**
- * El decorator `withSurface` activa `data-theme="dark"` en `document.documentElement`
- * (no envuelve la story en `.surface-dark`), así que las custom properties
- * `surface-dark-*` cascadean hasta el portal del modal en `document.body` sin
- * configuración adicional.
- */
-export const SuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => {
-    const [open, setOpen] = useState(true);
-    return (
-      <>
-        <Button onClick={() => setOpen(true)}>Abrir modal</Button>
-        <Modal open={open} onClose={() => setOpen(false)} title="Solicitar ausencia">
-          <form
-            onSubmit={(e) => { e.preventDefault(); setOpen(false); }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
-          >
-            <InputField id="motivo-dark" label="Motivo" placeholder="Indica el motivo" />
-            <Button type="submit">Guardar</Button>
-          </form>
-        </Modal>
-      </>
-    );
-  },
-};
-
-/**
  * Dentro de `SiteShell` el aspa de cerrar remapea de `md` (caja 40px, glifo
  * 24px: el resto de la aplicación) a `lg` (caja y glifo 48px): el `container`
  * apunta al nodo de `SiteShell` para que el portal —que por defecto monta en
@@ -300,7 +273,7 @@ export const ContratoPanelOpaco: Story = {
 export const ContratoPanelOpacoOscuro: Story = {
   name: 'Test — panel opaco en reposo (oscuro)',
   tags: ['!dev'],
-  parameters: { surface: 'dark' },
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <Modal open onClose={fn()} title="Detalle">
       <p>Contenido</p>

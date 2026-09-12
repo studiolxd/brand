@@ -96,12 +96,6 @@ export const EnUnBloqueDeCodigo: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: { value: 'sk-live-3f9a2b7c41d8', children: 'Copiar clave', variant: 'outline' },
-};
-
 /**
  * Test: al copiar, el acuse llega por dos caminos — el icono cambia para quien
  * ve y una región viva lo anuncia para quien escucha.

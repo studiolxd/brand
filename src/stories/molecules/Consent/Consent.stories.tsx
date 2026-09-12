@@ -215,18 +215,6 @@ export const FlujoCompleto: Story = {
   },
 };
 
-/** Sobre superficie oscura la banda remapea fondo, texto y línea por token. */
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: (args) => (
-    <>
-      <Pagina />
-      <ConsentBanner {...args} onAcceptAll={() => {}} onRejectAll={() => {}} onOpenPreferences={() => {}} />
-    </>
-  ),
-};
-
 /** Test: la banda es una región con nombre, no un diálogo, y no atrapa el foco. */
 export const ContratoBanner: Story = {
   name: 'Test — región, no diálogo',

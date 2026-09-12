@@ -90,18 +90,6 @@ export const TallaPequena: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  args: {
-    label: 'Ingresos recurrentes',
-    value: '48.900 €',
-    icon: <Icon name="report-money" />,
-    delta: { value: '+12,4 %', direction: 'up' },
-    description: 'Frente a los 43.500 € del mes anterior.',
-  },
-};
-
 /**
  * Test: la etiqueta va antes de la cifra en el DOM, y la dirección del delta
  * llega al lector de pantalla con texto, no solo con la flecha.

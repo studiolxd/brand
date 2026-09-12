@@ -42,20 +42,6 @@ export const Ficha: Story = {
   ),
 };
 
-export const EnSuperficieOscura: Story = {
-  name: 'En superficie oscura',
-  parameters: { surface: 'dark' },
-  render: () => (
-    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', maxWidth: '24rem' }}>
-      <Skeleton circle height="2.5rem" />
-      <div style={{ display: 'grid', gap: '0.4rem', flex: 1 }}>
-        <Skeleton width="40%" />
-        <Skeleton width="70%" />
-      </div>
-    </div>
-  ),
-};
-
 export const TestContrato: Story = {
   name: 'Test — decorativo, circular y sin animación con reduced-motion',
   tags: ['!dev'],
