@@ -15,6 +15,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --recovery-codes-color: var(--color-text-on-dark); /** Tinta — surface-dark, por la regla de derivación */

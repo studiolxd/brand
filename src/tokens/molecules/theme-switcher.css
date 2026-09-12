@@ -13,6 +13,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --theme-switcher-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco — surface-dark */

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within, fn } from 'storybook/test';
+import { expect, userEvent, waitFor, within, fn } from 'storybook/test';
 import { Alert, AlertTitle, AlertDescription } from './Alert';
 import { Button } from '../../atoms/Button/Button';
 import { Link } from '../../atoms/Link/Link';
@@ -83,21 +83,75 @@ export const Composicion: Story = {
 };
 
 /**
- * Superficie oscura. El relleno del alert es autocontenido: se ve igual sobre una
- * página clara y sobre una oscura, y el borde blanco del `default` lo separa del
- * fondo cuando la página ya es prusia.
+ * Superficie oscura. El `default` invierte: relleno blanco con tinta prusia, y el
+ * borde igual al fondo. Lo que se compone dentro voltea con él —el enlace y el
+ * aspa leen en claro—, porque el contenido declara `.surface-invert`. Los tres
+ * rellenos saturados son universales y no cambian.
  */
 export const SuperficieOscura: Story = {
   name: 'En superficie oscura',
   parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
   render: () => (
     <div style={{ display: 'grid', gap: '1rem' }}>
-      <Alert dismissible title="Aviso" description="Sobre una página oscura." />
+      <Alert dismissible title="Aviso">
+        <Alert.Description>
+          Sobre una página oscura.
+          <Link href="#detalle">Ver el detalle</Link>
+        </Alert.Description>
+      </Alert>
       <Alert variant="success" title="Operación completada" />
       <Alert variant="error" title="Ha ocurrido un error" />
       <Alert variant="warning" title="Atención requerida" />
     </div>
   ),
+};
+
+/**
+ * Test: sobre página oscura el `default` invierte —relleno blanco, tinta prusia— y
+ * su interior lee en claro (el enlace toma la tinta clara, no el amarillo de
+ * superficie oscura). Los valores se resuelven con el navegador, no a mano: en el
+ * Storybook compilado el CSS va minificado y un token puede llegar como `#fff`.
+ */
+export const InversionEnOscuro: Story = {
+  name: 'Test — el default invierte en superficie oscura',
+  tags: ['!dev'],
+  parameters: { surface: 'dark', chromatic: SOLO_OSCURO },
+  render: () => (
+    <Alert dismissible title="Aviso">
+      <Alert.Description>
+        Con un enlace dentro.
+        <Link href="#detalle">Ver el detalle</Link>
+      </Alert.Description>
+    </Alert>
+  ),
+  play: async ({ canvasElement }) => {
+    const resolver = (valor: string) => {
+      const sonda = document.createElement('span');
+      sonda.style.color = valor;
+      document.body.appendChild(sonda);
+      const color = getComputedStyle(sonda).color;
+      sonda.remove();
+      return color;
+    };
+    const blanco = resolver('var(--color-white)');
+    const prusia = resolver('var(--color-primary)');
+
+    await waitFor(async () => {
+      const alerta = canvasElement.querySelector('.alert')!;
+      const estilo = getComputedStyle(alerta);
+      await expect(estilo.backgroundColor).toBe(blanco);
+      await expect(estilo.borderTopColor).toBe(blanco);
+      await expect(getComputedStyle(canvasElement.querySelector('.alert__title')!).color).toBe(prusia);
+      // El interior voltea con el relleno: en superficie oscura el enlace sería
+      // amarillo (`link.surface-dark-color`); dentro del aviso invertido, no.
+      await expect(getComputedStyle(within(canvasElement).getByRole('link')).color).toBe(prusia);
+      // El aspa queda fuera del contenido, así que declara la superficie por su
+      // cuenta: sin ella saldría blanca sobre el relleno blanco.
+      await expect(
+        getComputedStyle(within(canvasElement).getByRole('button', { name: 'Cerrar' })).color,
+      ).toBe(prusia);
+    });
+  },
 };
 
 /**

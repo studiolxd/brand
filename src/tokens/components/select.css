@@ -41,6 +41,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --select-error-border-color: var(--color-error-text-on-dark); /** Borde en error — surface-dark */

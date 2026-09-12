@@ -56,6 +56,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --user-menu-focus-ring-color: var(--color-text-on-dark); /** Focus ring color — surface-dark. `focus-ring-color` (prussian) sería invisible sobre fondo oscuro. */

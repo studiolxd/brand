@@ -49,6 +49,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --app-launcher-trigger-color: var(--color-text-on-dark); /** Icono de rejilla — surface-dark */

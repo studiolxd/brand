@@ -21,6 +21,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --collapsible-trigger-color: var(--color-text-on-dark); /** Tinta del disparador — surface-dark */

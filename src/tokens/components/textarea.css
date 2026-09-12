@@ -57,6 +57,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --textarea-bg: var(--color-background-dark); /** Background — surface-dark */

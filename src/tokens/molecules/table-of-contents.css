@@ -30,6 +30,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --table-of-contents-title-color: var(--color-text-muted-on-dark); /** Color del rótulo — surface-dark */

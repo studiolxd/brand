@@ -16,6 +16,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --assistant-message-model-color: var(--color-text-on-dark); /** Tinta del nombre del modelo — superficie oscura */

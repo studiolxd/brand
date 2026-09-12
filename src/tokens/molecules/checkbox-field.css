@@ -34,6 +34,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --checkbox-field-label-color: var(--color-text-on-dark); /** Color del texto — surface-dark */

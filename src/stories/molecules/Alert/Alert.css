@@ -14,6 +14,15 @@
   align-items: flex-start;
   gap: var(--alert-gap);
   box-sizing: border-box;
+
+  /* La tinta del alert se copia aquí, en la raíz, y el texto consume la copia.
+     El título y la descripción viven dentro de la superficie interior
+     (`.alert__content.surface-invert`), que vuelve a declarar los tokens del
+     alert con el valor de la otra cara: leer `--alert-title-color` ahí dentro
+     daría blanco sobre blanco. La raíz sí está en la superficie ambiente, que
+     es la que decide el relleno. */
+  --alert-title-ink: var(--alert-title-color);
+  --alert-description-ink: var(--alert-description-color);
 }
 
 /* Deja espacio para el botón de cierre absoluto */
@@ -31,14 +40,14 @@
 .alert__title {
   font-size: var(--alert-title-font-size);
   font-weight: var(--alert-title-font-weight);
-  color: var(--alert-title-color);
+  color: var(--alert-title-ink);
   line-height: var(--alert-title-line-height);
   margin: 0;
 }
 
 .alert__description {
   font-size: var(--alert-description-font-size);
-  color: var(--alert-description-color);
+  color: var(--alert-description-ink);
   line-height: var(--alert-description-line-height);
   margin: 0;
   margin-block-start: var(--alert-content-gap);
@@ -51,9 +60,11 @@
 /* ── Botón de cierre — esquina superior derecha ─────────────── */
 /* El aspa es el `CloseButton` del sistema: sin hover —era el relleno del
    `Button` ghost lo que sobraba aquí— y con el anillo de foco. El color no se
-   remapea a propósito: el aspa toma la tinta de la superficie del relleno
-   —oscura en tres de las cuatro intenciones, clara en el aviso— por la cascada
-   de `.surface-dark`, que la raíz pone salvo en `warning`. */
+   remapea a propósito: el aspa toma la tinta de la superficie del relleno por
+   la cascada — `.surface-dark` en `success`/`error` (desde la raíz) y
+   `.surface-invert` en `default` (sobre el propio aspa, que queda fuera del
+   contenido). El aviso es el único que la fija por token, porque no declara
+   ninguna superficie. */
 
 .alert .alert__close {
   position: absolute;

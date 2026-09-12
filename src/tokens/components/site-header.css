@@ -27,6 +27,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --site-header-bg: var(--color-background-dark); /** Fondo de la barra — surface-dark */

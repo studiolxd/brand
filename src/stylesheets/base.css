@@ -48,14 +48,35 @@ body {
   color: var(--text-color);
 }
 
-/* El chrome nativo va con el lienzo, por los mismos tres selectores que voltean
+/* El chrome nativo va con el lienzo, por los mismos selectores que voltean
    los tokens (sd.formats.mjs › DARK_SELECTORS). `color-scheme` se hereda, así
    que una banda `.surface-dark` anidada oscurece también los controles nativos
    que contiene, y la raíz (`[data-theme="dark"]`, `html.dark`) la página entera. */
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   color-scheme: dark;
+}
+
+/* La superficie CONTRARIA a la ambiente: el interior de un relleno que invierte
+   el lienzo (el `Alert` `default`, prusia sobre página clara y blanco sobre
+   página oscura). Sobre página clara `.surface-invert` ya es uno de los
+   selectores oscuros de arriba; sobre página oscura, `src/tokens/surface-invert.css`
+   devuelve los tokens a su valor claro y aquí va con ellos el chrome nativo.
+
+   A diferencia de `.surface-dark`, NO pinta el lienzo: se aplica dentro de un
+   relleno que ya está pintado por el componente que la abre, y pintar otra vez
+   solo taparía ese relleno. Sí lleva la tinta, para que el texto suelto que se
+   componga dentro lea sobre él. */
+.surface-invert {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .surface-invert,
+html.dark .surface-invert,
+.surface-dark .surface-invert {
+  color-scheme: light;
 }
 
 /* El aire bajo un título es del título y escala con su tamaño (em): un h1

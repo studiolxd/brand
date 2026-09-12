@@ -12,6 +12,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --skeleton-bg: var(--color-surface-secondary-on-dark); /** Fondo base — surface-dark */

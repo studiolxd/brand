@@ -19,6 +19,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --link-underline-width: 0px; /** Sin línea en reposo — surface-dark */

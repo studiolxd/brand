@@ -17,6 +17,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --select-field-error-color: var(--color-error-text-on-dark); /** Mensaje de error — surface-dark */

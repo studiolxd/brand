@@ -76,6 +76,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --text-color: var(--color-text-on-dark); /** Color de texto por defecto — surface-dark */

@@ -27,6 +27,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --conversation-list-item-color: var(--color-text-muted-on-dark); /** Tinta de una conversación en reposo — superficie oscura */

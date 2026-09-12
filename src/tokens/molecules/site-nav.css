@@ -21,6 +21,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --site-nav-item-hover-line-width: 0px; /** Enlaces en hover — surface-dark: sin línea, cambia el color */

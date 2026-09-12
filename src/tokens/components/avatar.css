@@ -25,6 +25,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --avatar-initials-bg: var(--color-text-on-dark); /** Iniciales — surface-dark: se invierten */

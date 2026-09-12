@@ -75,6 +75,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --file-upload-border-color: var(--color-text-on-dark); /** Borde del dropzone — surface-dark: la tinta de la superficie */

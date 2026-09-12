@@ -20,6 +20,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --input-phone-country-border-color: var(--color-text-on-dark); /** Separador del selector de país — surface-dark */

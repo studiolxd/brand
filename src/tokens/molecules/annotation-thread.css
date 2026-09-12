@@ -31,6 +31,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --annotation-thread-border-color: var(--color-text-on-dark); /** Borde del hilo — surface-dark */

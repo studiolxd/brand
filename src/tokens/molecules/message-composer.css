@@ -24,6 +24,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --message-composer-bg: var(--color-background-dark); /** Fondo del marco — superficie oscura */

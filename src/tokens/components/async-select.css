@@ -47,6 +47,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --async-select-empty-color: var(--color-text-muted-on-dark); /** Tinta del mensaje de lista vacía — surface-dark */

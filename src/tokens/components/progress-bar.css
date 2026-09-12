@@ -33,6 +33,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --progress-bar-fill-border-color: var(--color-text-on-dark); /** Filete del relleno — surface-dark */

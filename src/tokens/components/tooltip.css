@@ -19,6 +19,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --tooltip-bg: var(--color-background-light); /** Fondo del bocadillo — surface-dark. Mismo patrón de superficie invertida que en claro (ahí: fondo `background.dark`), pero simétrico para lienzo oscuro: fondo claro, texto oscuro. Sin acento de marca */

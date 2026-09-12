@@ -162,6 +162,11 @@
    `:root` de arriba, así que gana el último. */
 @import "./surface-dark-derived.css";
 
+/* Superficie invertida dentro de una oscura: devuelve a claro los tokens que el
+   modo oscuro voltea. Va después del bloque de arriba, aunque gane por
+   especificidad, para que se lea en el orden en que actúa. */
+@import "./surface-invert.css";
+
 /* Remapeo de la superficie pública (`.site-shell`) — va al final: los tokens
    que redefine tienen la misma especificidad que los `:root` de arriba. */
 @import "./surface-public.css";

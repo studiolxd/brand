@@ -14,6 +14,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --floating-panel-bg: var(--color-background-dark); /** Fondo — surface-dark */

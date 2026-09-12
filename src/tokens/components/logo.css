@@ -12,6 +12,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --logo-color: var(--color-text-on-dark); /** Color del trazado — surface-dark */

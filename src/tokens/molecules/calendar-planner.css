@@ -49,6 +49,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --calendar-planner-nav-color: var(--color-text-on-dark); /** Color de navegación — surface-dark */

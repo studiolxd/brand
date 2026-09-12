@@ -21,6 +21,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --consent-banner-bg: var(--color-background-dark); /** Fondo de la banda — surface-dark */

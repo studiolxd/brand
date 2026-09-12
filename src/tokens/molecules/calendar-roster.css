@@ -48,6 +48,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --calendar-roster-cell-bg: rgba(0, 0, 0, 0); /** Fondo de celdas — surface-dark */

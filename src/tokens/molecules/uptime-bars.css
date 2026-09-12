@@ -28,6 +28,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --uptime-bars-bar-border-color: var(--color-text-on-dark); /** Filete de la barrita — surface-dark: la tinta clara. Es quien identifica la barrita cuando el relleno de feedback se queda en ~2,3:1 contra el prusia */

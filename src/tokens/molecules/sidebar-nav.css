@@ -40,6 +40,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --sidebar-nav-group-label-color: var(--color-text-muted-on-dark); /** Color de la etiqueta de grupo — surface-dark. `group-label-color` (prussian) sería invisible sobre fondo oscuro. */

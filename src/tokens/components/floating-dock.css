@@ -43,6 +43,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --floating-dock-focus-ring-color: var(--color-text-on-dark); /** Anillo de foco del panel — surface-dark */

@@ -23,6 +23,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --accordion-index-color: var(--color-text-muted-on-dark); /** Número — surface-dark */

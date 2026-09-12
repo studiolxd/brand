@@ -12,6 +12,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --image-crop-dialog-area-bg: var(--color-surface-secondary-on-dark); /** Fondo del área de recorte — surface-dark */

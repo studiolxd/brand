@@ -39,6 +39,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --code-block-token-keyword-color: var(--color-chart-sequential-700-on-dark); /** Palabra reservada — surface-dark: el mismo extremo de la rampa en su paso oscuro, 5,79:1 sobre el gris oscuro del bloque */

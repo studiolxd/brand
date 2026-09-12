@@ -23,6 +23,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --breadcrumb-link-color: var(--color-text-on-dark); /** Link color — surface-dark */

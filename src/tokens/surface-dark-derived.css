@@ -7,6 +7,7 @@
  */
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --async-multi-select-bg: var(--multi-select-bg);

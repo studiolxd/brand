@@ -31,6 +31,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --input-field-search-icon-color: var(--color-text-on-dark); /** Color de la lupa — surface-dark (blanco) */

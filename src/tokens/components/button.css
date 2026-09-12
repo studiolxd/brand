@@ -190,6 +190,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --button-outline-hover-bg: var(--color-white); /** Hover background — surface-dark */

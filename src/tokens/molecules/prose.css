@@ -50,6 +50,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --prose-quote-color: var(--color-text-muted-on-dark); /** Color del texto citado — surface-dark */

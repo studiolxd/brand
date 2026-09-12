@@ -28,6 +28,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --slider-track-bg: var(--color-text-on-dark); /** Carril sin recorrer — surface-dark */

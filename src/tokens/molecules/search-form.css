@@ -24,6 +24,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --search-form-submit-color: var(--color-text-on-dark); /** Color de la flecha — surface-dark (blanco) */

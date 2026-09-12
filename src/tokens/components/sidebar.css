@@ -32,6 +32,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --sidebar-bg: var(--color-background-dark); /** Fondo — surface-dark */

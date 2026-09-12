@@ -23,6 +23,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --notification-list-time-color: var(--color-text-muted-on-dark); /** Tinta de la hora — superficie oscura */

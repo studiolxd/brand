@@ -26,6 +26,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --kbd-bg: rgba(255, 255, 255, 0.08); /** Fondo del keycap — surface-dark: el gris claro no existe en superficie oscura, y el velo translúcido es el mismo recurso que usan Skeleton y Table */

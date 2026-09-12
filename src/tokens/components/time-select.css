@@ -10,6 +10,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --time-select-sep-color: var(--color-text-on-dark); /** Color del separador «:» — surface-dark */

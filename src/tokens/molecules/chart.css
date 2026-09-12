@@ -85,6 +85,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --chart-tile-label-color-muted: var(--color-black); /** Rótulo de «Otros» — surface-dark: el gris de atenuación en oscuro es claro */

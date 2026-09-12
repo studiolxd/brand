@@ -23,6 +23,7 @@
 }
 
 .surface-dark,
+.surface-invert,
 [data-theme="dark"],
 html.dark {
   --description-list-border-color: var(--color-text-on-dark); /** Borde — surface-dark */
