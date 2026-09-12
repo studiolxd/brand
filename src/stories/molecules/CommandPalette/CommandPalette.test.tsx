@@ -235,4 +235,24 @@ describe('CommandPalette', () => {
     await user.keyboard('{Control>}k{/Control}');
     expect(onOpenChange).not.toHaveBeenCalled();
   });
+
+  it('no revienta con un keydown sintético sin key (autocompletado del navegador)', () => {
+    const onOpenChange = vi.fn();
+    const { groups } = makeGroups();
+    render(
+      <CommandPalette
+        open={false}
+        onOpenChange={onOpenChange}
+        groups={groups}
+        title="Buscar un comando"
+        placeholder="Escribe para buscar…"
+        emptyLabel="Sin resultados."
+        listLabel="Sugerencias"
+      />,
+    );
+    expect(() => {
+      window.dispatchEvent(new KeyboardEvent('keydown', {}));
+    }).not.toThrow();
+    expect(onOpenChange).not.toHaveBeenCalled();
+  });
 });

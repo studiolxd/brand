@@ -7,6 +7,16 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.0.3] — 2026-09-12
+
+> **Patch.** `CommandPalette` ya no revienta con un `keydown` sin `key`.
+
+- **`CommandPalette`: guarda contra `keydown` sintéticos sin `key`.** El atajo global (⌘K/Ctrl+K)
+  hacía `event.key.toLowerCase()` sin comprobar antes que `event.key` fuera una cadena. El
+  autocompletado de Chrome y los gestores de contraseñas disparan `keydown` sintéticos sin `key`
+  al rellenar un campo, y la página entera caía con `Cannot read properties of undefined
+  (reading 'toLowerCase')`. Se descartan ahora esos eventos antes de leer `key`.
+
 ## [38.0.2] — 2026-09-12
 
 > **Patch.** La baldosa de la app actual del `AppLauncher` ya no lleva borde.

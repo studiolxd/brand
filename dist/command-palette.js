@@ -9,7 +9,7 @@ function o({ open: o, onOpenChange: s, groups: c, title: l, placeholder: u, empt
 	i(() => {
 		if (m === !1) return;
 		let e = (e) => {
-			e.key.toLowerCase() === m && (e.metaKey || e.ctrlKey) && (e.preventDefault(), s(!o));
+			typeof e.key == "string" && e.key.toLowerCase() === m && (e.metaKey || e.ctrlKey) && (e.preventDefault(), s(!o));
 		};
 		return window.addEventListener("keydown", e), () => window.removeEventListener("keydown", e);
 	}, [

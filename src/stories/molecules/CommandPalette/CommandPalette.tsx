@@ -81,6 +81,9 @@ export function CommandPalette({
   useEffect(() => {
     if (shortcut === false) return;
     const onKeyDown = (event: KeyboardEvent) => {
+      // El autocompletado de Chrome y los gestores de contraseñas disparan
+      // `keydown` sintéticos sin `key` al rellenar un campo.
+      if (typeof event.key !== 'string') return;
       if (event.key.toLowerCase() === shortcut && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         onOpenChange(!open);
