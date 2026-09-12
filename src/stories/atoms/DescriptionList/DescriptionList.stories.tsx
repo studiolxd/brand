@@ -11,6 +11,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * `Range.getClientRects()` da un rect por CAJA (texto, botón…), no uno por
+ * línea visual: un texto y un botón en la misma línea ya son dos rects. Para
+ * comprobar "todo en una sola línea" se mira que TODOS los rects compartan
+ * una franja vertical, no que la lista tenga longitud 1.
+ */
+function enUnaSolaLinea(rects: DOMRect[]): boolean {
+  if (rects.length === 0) return true;
+  const maxTop = Math.max(...rects.map((r) => r.top));
+  const minBottom = Math.min(...rects.map((r) => r.bottom));
+  return maxTop < minBottom;
+}
+
 /** Ficha de datos: cada fila es un término y su valor. */
 export const PorDefecto: Story = {
   args: { children: null },
@@ -236,19 +249,19 @@ export const ContratoCopiable: Story = {
     const copiable = canvas.getByLabelText('copiable').querySelector('dd')!;
     const boton = canvas.getByRole('button', { name: 'Copiar el identificador' });
     await expect(copiable).toContainElement(boton);
-    // El botón va DESPUÉS del valor dentro del `<dd>`.
-    await expect(copiable.querySelector('.copyable-value__value')!.compareDocumentPosition(boton))
-      .toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    // El botón vive en la COLA del valor (los últimos caracteres, ver
+    // `splitTail` en `CopyableValue`): dentro de `.copyable-value__value`,
+    // no como hermano después de él.
+    const valorEl = copiable.querySelector('.copyable-value__value')!;
+    await expect(valorEl).toContainElement(boton);
 
     // El botón es un nodo en línea pegado al final del valor: comparte línea
-    // con la última línea de texto (aquí, la única), no queda arriba a la
-    // derecha ni suelto debajo de ella.
+    // con la única línea de texto, no queda arriba a la derecha ni suelto
+    // debajo de ella.
     const rangoValor = document.createRange();
-    rangoValor.selectNodeContents(copiable.querySelector('.copyable-value__value')!);
-    const [rectValor] = Array.from(rangoValor.getClientRects()).slice(-1);
-    const rectBoton = boton.getBoundingClientRect();
-    const centro = (rect: DOMRect) => rect.top + rect.height / 2;
-    await expect(Math.abs(centro(rectValor as DOMRect) - centro(rectBoton))).toBeLessThan(6);
+    rangoValor.selectNodeContents(valorEl);
+    const rectsValor = Array.from(rangoValor.getClientRects()).filter((r) => r.width > 0);
+    await expect(enUnaSolaLinea(rectsValor)).toBe(true);
 
     // El navegador del test no concede permiso de portapapeles real: sin este
     // mock, `writeText` rechaza y no hay acuse (mismo patrón que `CopyButton`).
@@ -290,25 +303,21 @@ export const ContratoCopiableValorLargo: Story = {
     const canvas = within(canvasElement);
     const copiable = canvas.getByLabelText('conexión').querySelector('dd')!;
     const valor = copiable.querySelector('.copyable-value__value')!;
-    const boton = canvas.getByRole('button', { name: 'Copiar la URL de callback' });
+    const cola = copiable.querySelector('.copyable-value__tail')!;
 
     const rangoCompleto = document.createRange();
     rangoCompleto.selectNodeContents(valor);
-    const lineas = Array.from(rangoCompleto.getClientRects());
+    const lineas = Array.from(rangoCompleto.getClientRects()).filter((r) => r.width > 0);
     // El ancho de la maqueta estrecha fuerza varias líneas: si esto fallara,
     // la comprobación de abajo no probaría nada.
     await expect(lineas.length).toBeGreaterThan(1);
 
-    const ultimaLinea = lineas[lineas.length - 1] as DOMRect;
-    const rectBoton = boton.getBoundingClientRect();
-    const solapaVerticalmente = (rect: DOMRect) =>
-      rectBoton.top < rect.bottom && rectBoton.bottom > rect.top;
-    // Comparte línea (solapa en vertical) con la última línea del valor…
-    await expect(solapaVerticalmente(ultimaLinea)).toBe(true);
-    // …y no con ninguna de las anteriores, que es justo el bug que se corrigió:
-    // el botón arriba a la derecha, lejos del final del valor.
-    for (const linea of lineas.slice(0, -1)) {
-      await expect(solapaVerticalmente(linea as DOMRect)).toBe(false);
-    }
+    // La cola (los últimos caracteres + el botón, ver `splitTail` en
+    // `CopyableValue`) nunca se reparte en dos líneas — es justo el bug que
+    // se corrigió: el botón cayendo suelto, separado del valor.
+    const rangoCola = document.createRange();
+    rangoCola.selectNodeContents(cola);
+    const rectsCola = Array.from(rangoCola.getClientRects()).filter((r) => r.width > 0);
+    await expect(enUnaSolaLinea(rectsCola)).toBe(true);
   },
 };

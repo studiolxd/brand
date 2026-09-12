@@ -7,6 +7,33 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.2.1] — 2026-09-12
+
+> **Patch.** `CopyableValue`: el botón ya no salta solo a su propia línea en Chrome. `Table`:
+> nueva prop `nowrap` en `Table.Cell`/`Table.Header` para valores que no deben partirse.
+
+### `CopyableValue`
+
+- **El botón ya no queda solo en su propia línea.** El WORD JOINER entre el valor y el botón
+  sellaba el corte ENTRE caracteres, pero Chrome (y el resto de motores) abren oportunidad de
+  salto antes de un inline atómico (`inline-flex`) aunque el carácter previo sea el joiner: con
+  una celda estrecha, el botón se iba solo a la línea siguiente. Cuando `children` es una cadena,
+  ahora se parte en `head` + `tail` (cola: desde el último separador `/ - _ .` si cae a menos de
+  12 caracteres del final, si no los últimos 6) y la cola viaja con el botón en un tramo
+  `white-space: nowrap` (`.copyable-value__tail`): si no caben, el flujo manda TODO el tramo a la
+  siguiente línea, nunca solo el botón. Con `children` no textual, se aplica la misma idea cuando
+  el nodo es corto (sin espacios, ≤ 24 caracteres); un nodo largo, con espacios, o cuyo texto no
+  se puede determinar de antemano deja el comportamiento anterior (límite conocido, documentado
+  en `CopyableValue.mdx`). `copyText` por defecto sigue siendo el texto completo, nunca la cola.
+  `DescriptionDetails copyable` hereda la corrección sin cambios de API.
+
+### `Table`
+
+- **Nueva prop `nowrap` en `Table.Cell` (y `Table.Header`)**: impide el salto de línea del
+  contenido de esa celda concreta (`table__cell--nowrap` / `table__header--nowrap`, misma técnica
+  que `actions`) para un valor que no debe partirse —una URL, un identificador— sin encoger la
+  columna a su mínimo. La tabla sigue resolviendo el desborde con scroll horizontal.
+
 ## [38.2.0] — 2026-09-12
 
 > **Minor.** Nuevo átomo `CopyableValue`: el valor con su botón de copiar pegado, reutilizable

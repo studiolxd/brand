@@ -34,7 +34,7 @@ describe('DescriptionDetails copiable', () => {
     expect(valor.innerHTML).toBe('org_8f2c19ab');
   });
 
-  it('con `copyable`, el botón va dentro del `<dd>` y después del valor', () => {
+  it('con `copyable`, el botón vive en la cola del valor, dentro del `<dd>`', () => {
     mockClipboard();
     render(ficha({ copyable: true, children: 'org_8f2c19ab' }));
 
@@ -43,8 +43,11 @@ describe('DescriptionDetails copiable', () => {
 
     const boton = within(valor).getByRole('button', { name: 'Copiar' });
     const texto = valor.querySelector('.copyable-value__value')!;
-    expect(texto).toHaveTextContent('org_8f2c19ab');
-    expect(texto.compareDocumentPosition(boton)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    // El botón viaja en `.copyable-value__tail` (los últimos caracteres del
+    // valor, ver `splitTail` en `CopyableValue`), nested dentro del propio
+    // valor — no como hermano después de él.
+    expect(texto).toContainElement(boton);
+    expect(texto.textContent?.replace('⁠', '')).toBe('org_8f2c19ab');
   });
 
   it('copia el texto del valor y acusa en una región viva', async () => {

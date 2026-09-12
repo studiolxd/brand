@@ -370,6 +370,38 @@ export const ColumnaDeAccionesSinPartir: Story = {
   ),
 };
 
+/**
+ * `Table.Cell nowrap` impide que un valor que no debe partirse (una URL, un
+ * identificador) se reparta en dos líneas cuando su columna es estrecha. La
+ * tabla ya resuelve el desborde con scroll horizontal (`table__wrapper`):
+ * `nowrap` no lo sustituye, solo evita que este valor concreto se parta.
+ */
+export const CeldaSinPartir: Story = {
+  name: 'Celda sin partir',
+  render: () => (
+    <div style={{ maxWidth: '420px' }}>
+      <Table caption="Endpoints con URL sin partir">
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>Servicio</Table.Header>
+            <Table.Header>URL</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>Autenticación</Table.Cell>
+            <Table.Cell nowrap>https://lms.studiolxd.com/mcp/auth/token</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Webhook</Table.Cell>
+            <Table.Cell nowrap>https://lms.studiolxd.com/mcp/webhooks/inscripciones</Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </div>
+  ),
+};
+
 const COLUMNAS_ANCHAS = [
   { nombre: 'Virtualización Rise Cofidis', cliente: 'Cofidis', fecha: '15/05/2026', responsable: 'Ada Lovelace', departamento: 'Ingeniería', ubicacion: 'Madrid', estado: 'Activo' },
   { nombre: 'Rediseño portal B2B', cliente: 'Mapfre', fecha: '10/04/2026', responsable: 'Grace Hopper', departamento: 'Producto', ubicacion: 'Barcelona', estado: 'En revisión' },
@@ -519,6 +551,43 @@ export const ContratoColumnaDeAccionesSinPartir: Story = {
     // Una sola línea: el `top` del texto no varía entre el inicio y el final.
     const rango = document.createRange();
     rango.selectNodeContents(enlace);
+    const rects = Array.from(rango.getClientRects());
+    await expect(rects).toHaveLength(1);
+  },
+};
+
+/**
+ * Test: `Table.Cell nowrap` no deja partir su valor en dos líneas aunque la
+ * columna sea estrecha. Misma técnica que `actions`, pero sin encoger la
+ * columna a min-content — la marca es solo sobre el contenido de esta celda.
+ */
+export const ContratoCeldaSinPartir: Story = {
+  name: 'Test — la celda nowrap no parte su contenido',
+  tags: ['!dev'],
+  render: () => (
+    <div style={{ maxWidth: '260px' }}>
+      <Table caption="Endpoint con URL sin partir">
+        <Table.Head>
+          <Table.Row>
+            <Table.Header>URL</Table.Header>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell nowrap>https://lms.studiolxd.com/mcp/auth/token</Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const celda = canvasElement.querySelector('.table__cell--nowrap') as HTMLElement;
+    await expect(celda).not.toBeNull();
+    await expect(getComputedStyle(celda).whiteSpace).toBe('nowrap');
+
+    // Una sola línea: el valor no se reparte aunque la columna sea estrecha.
+    const rango = document.createRange();
+    rango.selectNodeContents(celda);
     const rects = Array.from(rango.getClientRects());
     await expect(rects).toHaveLength(1);
   },

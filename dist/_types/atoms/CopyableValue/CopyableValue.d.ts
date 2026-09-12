@@ -22,12 +22,4 @@ export interface CopyableValueProps {
     /** Se añade DESPUÉS de las clases propias. */
     className?: string;
 }
-/**
- * Un valor con su botón de copiar pegado al final: nunca al margen ni en su
- * propia línea. Es el mecanismo de `DescriptionDetails copyable` suelto de la
- * lista de definición, para el dato que se copia y no vive en una `<dl>` —una
- * celda de tabla con una URL de endpoint, un identificador dentro de un
- * párrafo—. El valor sigue siendo **texto corriente**: un dato que se copia no
- * es código.
- */
 export declare const CopyableValue: import("react").ForwardRefExoticComponent<CopyableValueProps & import("react").RefAttributes<HTMLSpanElement>>;

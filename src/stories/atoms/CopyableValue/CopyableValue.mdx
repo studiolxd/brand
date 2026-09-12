@@ -33,12 +33,33 @@ de un párrafo.
 ## Cómo se pega el botón
 
 Un valor copiable puede ser largo y no tener dónde partir: se parte con
-`overflow-wrap: anywhere`. El botón fluye como un nodo más del texto —en
-línea, centrado en su propia línea (siempre la última, la que termina con el
-valor) con `vertical-align: middle`— y un separador de unión sin ancho entre
-el último carácter del valor y el botón impide que este salte solo a la línea
-siguiente. Con un valor de varias líneas, el botón se queda pegado al final de
-la última, nunca arriba a la derecha ni suelto debajo.
+`overflow-wrap: anywhere`. Un WORD JOINER (U+2060) entre el valor y el botón
+impide el salto de línea justo en ese punto — pero Chrome (y el resto de
+motores) abren oportunidad de salto **antes de un inline atómico**
+(`inline-flex`, el botón) aunque el carácter previo sea el joiner: el joiner
+solo sella cortes entre caracteres, no el hueco que un elemento atómico abre
+por su cuenta. Con eso solo, el botón podía acabar solo en su propia línea,
+separado del valor por el margen en blanco.
+
+Por eso, cuando `children` es una cadena, el valor se parte en **`head` +
+`tail`**: `tail` es el tramo final (la cola) que viaja en un `<span
+class="copyable-value__tail">` con `white-space: nowrap`, junto con el
+joiner y el botón — si no caben en lo que queda de línea, el flujo normal
+manda TODO el tramo a la siguiente, nunca solo el botón. La cola corta en el
+**último separador de ruta/identificador** (`/`, `-`, `_`, `.`) si cae a
+menos de 12 caracteres del final —así es un segmento con sentido, «/token»
+en vez de una porción a ciegas—; si no hay separador ahí, cae a los últimos 6
+caracteres. Un valor de 6 caracteres o menos va entero en la cola, sin head.
+
+Cuando `children` no es una cadena (un `Code`, un icono), se aplica la misma
+idea si el nodo es **corto**: sin espacios y hasta 24 caracteres de texto, el
+nodo entero viaja en el tramo `nowrap` junto al botón. Un nodo más largo, con
+espacios, o cuyo texto no se puede determinar de antemano (contiene otro
+componente, no solo texto) **deja el comportamiento por defecto** —solo el
+joiner entre valor y botón, sin tramo `nowrap`—: en ese caso el botón puede
+seguir cayendo solo en su línea si el valor es muy largo. Es un límite
+conocido, no un bug: `CopyableValue` no puede medir con antelación un nodo
+arbitrario para decidir si conviene envolverlo entero.
 
 ## Qué se copia
 

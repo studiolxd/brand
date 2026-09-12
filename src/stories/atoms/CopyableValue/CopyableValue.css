@@ -8,6 +8,26 @@
   overflow-wrap: anywhere;
 }
 
+/* La cola (los últimos caracteres del valor, ver `splitTail` en el TSX) y el
+   botón nunca se separan: si no caben en lo que queda de la última línea,
+   el flujo normal los manda juntos a la siguiente. Un WORD JOINER solo sella
+   cortes ENTRE caracteres — no el hueco que Chrome abre antes de un inline
+   atómico (el botón, `inline-flex`) aunque el carácter anterior sea el
+   joiner —, así que aquí hace falta además este `nowrap` sobre el tramo. */
+.copyable-value__tail {
+  white-space: nowrap;
+  /*
+    `.copyable-value__value` hereda `overflow-wrap: anywhere` (necesario para
+    que el HEAD largo sí se parta). `overflow-wrap` es una propiedad
+    heredada y actúa como escape incluso con `white-space: nowrap`: un
+    navegador con `anywhere` heredado seguía partiendo la cola a mitad de
+    carácter para no desbordar, aunque `nowrap` diga que no hay puntos de
+    corte. Se corta la herencia aquí para que `nowrap` sea la única palabra
+    en juego dentro de la cola.
+  */
+  overflow-wrap: normal;
+}
+
 /* En línea con el texto, centrado en su propia línea (la última del valor,
    que es donde cae siempre al ir pegado al final). `margin-inline-start` pone
    el aire mínimo hacia el valor; como no hay hueco en blanco entre el `span`

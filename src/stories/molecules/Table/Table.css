@@ -153,6 +153,19 @@
   white-space: nowrap;
 }
 
+/* ── Nowrap cell/header ──────────────────────────────── */
+
+/* Igual que `table__cell--actions`, pero para un valor concreto (una URL, un
+   id) en vez de para toda una columna de acciones: no encoge la columna, solo
+   impide que este contenido se reparta en dos líneas. */
+.table__cell.table__cell--nowrap {
+  white-space: nowrap;
+}
+
+.table__header.table__header--nowrap {
+  white-space: nowrap;
+}
+
 /* ── Sticky actions column ───────────────────────────── */
 
 /* Pega la columna al borde final cuando la tabla desborda `.table__wrapper`:

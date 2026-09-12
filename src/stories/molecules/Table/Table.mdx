@@ -116,6 +116,21 @@ Esa columna encogida puede sobrar ancho a la celda: un enlace o botón de dos pa
 
 <Canvas of={TableStories.ColumnaDeAccionesSinPartir} />
 
+## Celda sin partir
+
+`Table.Cell nowrap` (y `Table.Header nowrap` si el rótulo comparte el motivo) impide el
+salto de línea del contenido de esa celda concreta: la misma técnica que `actions`
+(`white-space: nowrap`, clase `table__cell--nowrap`), pero sin encoger la columna a su
+mínimo. Es para un valor que no debe partirse —una URL, un identificador— en una columna
+que, a diferencia de la de acciones, sí puede seguir ocupando el ancho que le toque.
+
+La tabla ya resuelve el desborde con **scroll horizontal** (`table__wrapper`) y, si hace
+falta, con una columna de acciones fija (`sticky`): `nowrap` no sustituye ese mecanismo,
+solo evita que este valor concreto se reparta en dos líneas dentro de su celda cuando la
+columna se queda estrecha.
+
+<Canvas of={TableStories.CeldaSinPartir} />
+
 ## Accesibilidad
 
 - La cabecera ordenable es un **`<button>` dentro del `<th>`** (patrón WAI-ARIA). El `th`

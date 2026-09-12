@@ -17,14 +17,49 @@ describe('CopyableValue', () => {
     vi.restoreAllMocks();
   });
 
-  it('el botón va dentro del envoltorio, pegado después del valor', () => {
+  it('el botón va dentro del valor, pegado a su cola', () => {
     mockClipboard();
-    render(<CopyableValue>org_8f2c19ab</CopyableValue>);
+    const { container } = render(<CopyableValue>org_8f2c19ab</CopyableValue>);
 
     const boton = screen.getByRole('button', { name: 'Copiar' });
-    const valor = screen.getByText('org_8f2c19ab');
-    expect(valor).toHaveClass('copyable-value__value');
-    expect(valor.compareDocumentPosition(boton)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    const valor = container.querySelector('.copyable-value__value')!;
+    const cola = container.querySelector('.copyable-value__tail')!;
+    expect(valor).toContainElement(boton);
+    expect(cola).toContainElement(boton);
+    // El WORD JOINER (U+2060) viaja pegado al botón dentro de la cola.
+    expect(valor.textContent?.replace('⁠', '')).toBe('org_8f2c19ab');
+  });
+
+  it('parte el valor en head + tail: la cola corta en el último separador dentro de la ventana', () => {
+    mockClipboard();
+    const { container } = render(<CopyableValue>org_8f2c19ab</CopyableValue>);
+
+    const valor = container.querySelector('.copyable-value__value')!;
+    const cola = container.querySelector('.copyable-value__tail')!;
+    // El único separador ("_") cae a 9 caracteres del final: la cola arranca ahí.
+    expect(valor.firstChild?.textContent).toBe('org');
+    expect(cola.textContent?.startsWith('_8f2c19ab')).toBe(true);
+  });
+
+  it('sin separador en la ventana, la cola cae a los últimos 6 caracteres', () => {
+    mockClipboard();
+    const { container } = render(<CopyableValue>abcdefghijklmnop</CopyableValue>);
+
+    const valor = container.querySelector('.copyable-value__value')!;
+    const cola = container.querySelector('.copyable-value__tail')!;
+    expect(valor.firstChild?.textContent).toBe('abcdefghij');
+    expect(cola.textContent?.startsWith('klmnop')).toBe(true);
+  });
+
+  it('un valor corto (≤ 6 caracteres) va entero en la cola, sin head', () => {
+    mockClipboard();
+    const { container } = render(<CopyableValue>ab_cd</CopyableValue>);
+
+    const valor = container.querySelector('.copyable-value__value')!;
+    const cola = container.querySelector('.copyable-value__tail')!;
+    // Sin head: el valor entero (menos el joiner) es exactamente la cola.
+    expect(valor.textContent?.replace('⁠', '')).toBe('ab_cd');
+    expect(cola.textContent?.startsWith('ab_cd')).toBe(true);
   });
 
   it('copia el texto del valor y acusa en una región viva', async () => {
@@ -74,15 +109,35 @@ describe('CopyableValue', () => {
 
   it('copia el texto de `children` cuando no es texto plano (nodos)', async () => {
     const writeText = mockClipboard();
-    render(
+    const { container } = render(
       <CopyableValue>
         <code>LMSMCP_API_KEY</code>
       </CopyableValue>,
     );
 
-    await userEvent.click(screen.getByRole('button', { name: 'Copiar' }));
+    // Nodo corto (sin espacios, ≤ 24 caracteres): el botón viaja en el mismo
+    // tramo `nowrap` que el valor, igual que la cola de un string.
+    const boton = screen.getByRole('button', { name: 'Copiar' });
+    const cola = container.querySelector('.copyable-value__tail')!;
+    expect(cola).toContainElement(boton);
+
+    await userEvent.click(boton);
 
     expect(writeText).toHaveBeenCalledWith('LMSMCP_API_KEY');
+  });
+
+  it('un nodo no textual largo o con espacios deja el botón fuera del valor (límite conocido)', () => {
+    mockClipboard();
+    const { container } = render(
+      <CopyableValue>
+        <code>Copiar la variable de entorno larga</code>
+      </CopyableValue>,
+    );
+
+    const boton = screen.getByRole('button', { name: 'Copiar' });
+    const valor = container.querySelector('.copyable-value__value')!;
+    expect(valor).not.toContainElement(boton);
+    expect(container.querySelector('.copyable-value__tail')).toBeNull();
   });
 
   it('reenvía `className` tras la clase propia', () => {

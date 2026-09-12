@@ -41,6 +41,12 @@ export interface TableHeaderProps extends React.ThHTMLAttributes<HTMLTableCellEl
   sortedDescLabel?: string;
   /** Texto accesible de la columna ordenable sin ordenar. Default: «Activar ordenación» (castellano). Una app multiidioma debe pasarlo traducido. */
   sortableLabel?: string;
+  /**
+   * Impide que el rótulo de esta columna se parta en dos líneas. Mismo valor
+   * que el `nowrap` de la `Table.Cell` de esta columna cuando el encabezado
+   * comparte el motivo (un rótulo con una unidad pegada, «Importe (€)»).
+   */
+  nowrap?: boolean;
   children?: ReactNode;
 }
 
@@ -75,6 +81,15 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
    * columna, ya encogida a su mínimo, sobra ancho.
    */
   actions?: boolean;
+  /**
+   * Impide el salto de línea del contenido de esta celda: un valor que no
+   * debe partirse (una URL, un identificador). La tabla ya resuelve el
+   * desborde con scroll horizontal (`table__wrapper`) y, si la columna lo
+   * necesita, con una columna de acciones fija (`sticky`) — `nowrap` no
+   * cambia ese mecanismo, solo evita que este valor concreto se reparta en
+   * dos líneas dentro de su celda.
+   */
+  nowrap?: boolean;
   children?: ReactNode;
 }
 
@@ -100,6 +115,7 @@ export function TableHeader({
   sortedDescLabel = 'Ordenado descendente',
   sortableLabel = 'Activar ordenación',
   sticky,
+  nowrap = false,
   children,
   className,
   scope = 'col',
@@ -112,6 +128,7 @@ export function TableHeader({
     sorted === 'desc' ? 'table__header--sorted-desc' : '',
     actions ? 'table__header--actions' : '',
     sticky === 'end' ? 'table__header--sticky' : '',
+    nowrap ? 'table__header--nowrap' : '',
     className,
   ]
     .filter(Boolean)
@@ -214,11 +231,19 @@ export function TableRow({
   );
 }
 
-export function TableCell({ sticky, actions = false, children, className, ...rest }: TableCellProps) {
+export function TableCell({
+  sticky,
+  actions = false,
+  nowrap = false,
+  children,
+  className,
+  ...rest
+}: TableCellProps) {
   const classes = [
     'table__cell',
     sticky === 'end' ? 'table__cell--sticky' : '',
     actions ? 'table__cell--actions' : '',
+    nowrap ? 'table__cell--nowrap' : '',
     className,
   ]
     .filter(Boolean)

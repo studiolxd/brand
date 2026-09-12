@@ -22,41 +22,42 @@ function o({ children: e, ...t }) {
 		children: e
 	});
 }
-function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", sortedAscLabel: l = "Ordenado ascendente", sortedDescLabel: u = "Ordenado descendente", sortableLabel: d = "Activar ordenación", sticky: f, children: p, className: m, scope: h = "col", ...g }) {
-	let _ = [
+function s({ sortable: i = !1, sorted: a = !1, onSort: o, actions: s = !1, actionsLabel: c = "Acciones", sortedAscLabel: l = "Ordenado ascendente", sortedDescLabel: u = "Ordenado descendente", sortableLabel: d = "Activar ordenación", sticky: f, nowrap: p = !1, children: m, className: h, scope: g = "col", ..._ }) {
+	let v = [
 		"table__header",
 		i ? "table__header--sortable" : "",
 		a === "asc" ? "table__header--sorted-asc" : "",
 		a === "desc" ? "table__header--sorted-desc" : "",
 		s ? "table__header--actions" : "",
 		f === "end" ? "table__header--sticky" : "",
-		m
+		p ? "table__header--nowrap" : "",
+		h
 	].filter(Boolean).join(" ");
 	return i ? /* @__PURE__ */ r("th", {
-		...g,
-		scope: h,
-		className: _,
+		..._,
+		scope: g,
+		className: v,
 		"aria-sort": a === "asc" ? "ascending" : a === "desc" ? "descending" : "none",
 		children: [/* @__PURE__ */ r("button", {
 			type: "button",
 			className: "table__header-content",
 			onClick: o,
-			children: [p, /* @__PURE__ */ n(e, {
+			children: [m, /* @__PURE__ */ n(e, {
 				name: "chevron",
 				size: "xs",
 				className: "table__sort-icon"
 			})]
 		}), /* @__PURE__ */ n(t, { children: a === "asc" ? l : a === "desc" ? u : d })]
 	}) : s ? /* @__PURE__ */ n("th", {
-		...g,
-		scope: h,
-		className: _,
-		children: /* @__PURE__ */ n(t, { children: p ?? c })
+		..._,
+		scope: g,
+		className: v,
+		children: /* @__PURE__ */ n(t, { children: m ?? c })
 	}) : /* @__PURE__ */ n("th", {
-		...g,
-		scope: h,
-		className: _,
-		children: p
+		..._,
+		scope: g,
+		className: v,
+		children: m
 	});
 }
 function c({ onClick: e, interactive: t = !1, selected: r = !1, label: i, children: a, className: o, ...s }) {
@@ -85,17 +86,18 @@ function c({ onClick: e, interactive: t = !1, selected: r = !1, label: i, childr
 		children: a
 	});
 }
-function l({ sticky: e, actions: t = !1, children: r, className: i, ...a }) {
-	let o = [
+function l({ sticky: e, actions: t = !1, nowrap: r = !1, children: i, className: a, ...o }) {
+	let s = [
 		"table__cell",
 		e === "end" ? "table__cell--sticky" : "",
 		t ? "table__cell--actions" : "",
-		i
+		r ? "table__cell--nowrap" : "",
+		a
 	].filter(Boolean).join(" ");
 	return /* @__PURE__ */ n("td", {
-		...a,
-		className: o,
-		children: r
+		...o,
+		className: s,
+		children: i
 	});
 }
 function u({ caption: e, children: t, size: i = "md", className: a, ...o }) {

@@ -1,1 +1,1 @@
-.copyable-value__value{overflow-wrap:anywhere}.copyable-value__copy{vertical-align:middle;margin-inline-start:var(--copyable-value-gap)}
+.copyable-value__value{overflow-wrap:anywhere}.copyable-value__tail{white-space:nowrap;overflow-wrap:normal}.copyable-value__copy{vertical-align:middle;margin-inline-start:var(--copyable-value-gap)}
