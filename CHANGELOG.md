@@ -7,6 +7,21 @@ El paquete sigue [semver](https://semver.org/lang/es/): **patch** para bug fixes
 regeneración de `dist`, **minor** para componentes/props/variantes/tokens nuevos, **major**
 para breaking changes.
 
+## [38.3.0] — 2026-09-12
+
+> **Minor.** `Link`: nuevo tono `accent-1`.
+
+### `Link`
+
+- **Nuevo tono `accent-1`.** Además de `accent` (texto y acciones) e `ink` (utilitario: legal,
+  volver), `Link` gana `accent-1`: pinta el enlace con el acento 1 de la paleta (lavanda,
+  `color.accent-1`) — color saturado que ya contrasta en cualquier superficie, sin par
+  surface-dark (mismo motivo que `Card`, `Step` o `ProgressBar`). Línea en reposo que desaparece
+  en hover, igual en las dos superficies, coherente con cómo lo hace `accent`. Nuevos tokens
+  `link.accent-1-color`, `link.accent-1-hover-color`, `link.accent-1-underline-width` y
+  `link.accent-1-hover-underline-width`. El ejemplo de «¿olvidaste la contraseña?» de la story
+  pasa de `ink` a `accent-1`; `ink` mantiene su ejemplo con «Aviso legal».
+
 ## [38.2.1] — 2026-09-12
 
 > **Patch.** `CopyableValue`: el botón ya no salta solo a su propia línea en Chrome. `Table`:

@@ -78,7 +78,7 @@
     "ink-color": {
       "$value": "{color.text.on-light}",
       "$type": "color",
-      "$description": "Tono ink (enlaces utilitarios: legal, volver, ¿olvidaste…?): tinta"
+      "$description": "Tono ink (enlaces utilitarios: legal, volver): tinta"
     },
     "ink-underline-width": {
       "$value": "{border-width.default}",
@@ -94,6 +94,26 @@
       "$value": "{color.text.on-dark}",
       "$type": "color",
       "$description": "Tono ink — surface-dark: blanco, no amarillo"
+    },
+    "accent-1-color": {
+      "$value": "{color.accent-1}",
+      "$type": "color",
+      "$description": "Tono accent-1 (lavanda): color saturado que ya contrasta en cualquier superficie, sin par surface-dark (mismo motivo que Card/Step/ProgressBar)"
+    },
+    "accent-1-hover-color": {
+      "$value": "{color.accent-1}",
+      "$type": "color",
+      "$description": "Tono accent-1: mismo color en hover, como accent — lo que cambia es la línea"
+    },
+    "accent-1-underline-width": {
+      "$value": "{border-width.default}",
+      "$type": "dimension",
+      "$description": "Tono accent-1: línea en reposo, igual en las dos superficies (el color no cambia)"
+    },
+    "accent-1-hover-underline-width": {
+      "$value": "0px",
+      "$type": "dimension",
+      "$description": "Tono accent-1: sin línea en hover, como accent"
     }
   }
 }

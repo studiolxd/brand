@@ -12,10 +12,13 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
   /**
    * Tono. `accent` (por defecto): el enlace de texto y de acción — prusia con
    * línea en claro, amarillo con línea en hover en oscuro. `ink`: el enlace
-   * utilitario (legal, volver, ¿olvidaste la contraseña?) — tinta, línea en
-   * reposo y ninguna en hover, en las dos superficies.
+   * utilitario (legal, volver) — tinta, línea en reposo y ninguna en hover,
+   * en las dos superficies. `accent-1`: acento 1 de la paleta (lavanda) —
+   * color saturado que ya contrasta en cualquier superficie, línea en reposo
+   * que desaparece en hover, igual en las dos (el ejemplo es «¿olvidaste la
+   * contraseña?»).
    */
-  tone?: 'accent' | 'ink';
+  tone?: 'accent' | 'ink' | 'accent-1';
   /** Un icono junto al texto («← Volver», «Descargar ↓»). Decorativo: el texto ya lo dice. */
   icon?: IconName;
   /** Dónde va el icono: delante (`start`, por defecto) o detrás del texto. */
@@ -39,7 +42,8 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   // `link` siempre: la cara del enlace cuelga de la clase además de la etiqueta
   // `a`, así que con `render` sobre un `<button>` (una acción que se lee como
   // enlace) sale vestido igual.
-  const classes = ['link', tone === 'ink' ? 'link--ink' : '', icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ');
+  const toneClass = tone === 'ink' ? 'link--ink' : tone === 'accent-1' ? 'link--accent-1' : '';
+  const classes = ['link', toneClass, icon ? 'link--with-icon' : '', className].filter(Boolean).join(' ');
   const glyph = icon ? <Icon name={icon} size="sm" className="link__icon" /> : null;
   const content = (
     <>

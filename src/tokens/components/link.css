@@ -6,6 +6,7 @@
   --link-hover-underline-width: 0px; /** Grosor de la línea en hover (en claro desaparece) */
   --link-cursor: pointer; /** Cursor */
   --link-ink-hover-underline-width: 0px; /** Tono ink: sin línea en hover */
+  --link-accent-1-hover-underline-width: 0px; /** Tono accent-1: sin línea en hover, como accent */
   --link-underline-offset: var(--spacing-1); /** Separación entre el texto y la línea */
   --link-icon-gap: var(--spacing-2); /** Aire entre el icono y el texto del enlace */
   --link-color: var(--color-text-on-light); /** El enlace no tiene color propio: es texto, y lo distingue el subrayado */
@@ -14,8 +15,11 @@
   --link-focus-ring-width: var(--border-width-focus); /** Grosor del anillo de foco */
   --link-focus-ring-offset: var(--border-width-default); /** Separación entre el enlace y el anillo */
   --link-focus-ring-color: var(--color-primary); /** Anillo de foco */
-  --link-ink-color: var(--color-text-on-light); /** Tono ink (enlaces utilitarios: legal, volver, ¿olvidaste…?): tinta */
+  --link-ink-color: var(--color-text-on-light); /** Tono ink (enlaces utilitarios: legal, volver): tinta */
   --link-ink-underline-width: var(--border-width-default); /** Tono ink: línea en reposo, en las dos superficies */
+  --link-accent-1-color: var(--color-accent-1); /** Tono accent-1 (lavanda): color saturado que ya contrasta en cualquier superficie, sin par surface-dark (mismo motivo que Card/Step/ProgressBar) */
+  --link-accent-1-hover-color: var(--color-accent-1); /** Tono accent-1: mismo color en hover, como accent — lo que cambia es la línea */
+  --link-accent-1-underline-width: var(--border-width-default); /** Tono accent-1: línea en reposo, igual en las dos superficies (el color no cambia) */
 }
 
 .surface-dark,
