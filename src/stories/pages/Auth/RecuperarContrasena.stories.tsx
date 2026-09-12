@@ -13,13 +13,17 @@ interface Args { step: 'pedir' | 'enviado' | 'restablecer'; surface: 'light' | '
 function Recuperar({ step, surface }: Args) {
   if (step === 'restablecer') {
     return (
-      <AuthPage title="Restablece tu contraseña" description="Ingresa tu nueva contraseña." surface={surface}>
+      <AuthPage
+        title="Restablece tu contraseña"
+        description="Ingresa tu nueva contraseña."
+        aside={<Link href="#acceso" icon="arrow-left">Volver al inicio de sesión</Link>}
+        surface={surface}
+      >
         <Form
           size="lg"
           blockActions
           onSubmit={(e) => e.preventDefault()}
           actions={<Button variant="primary" type="submit">Restablecer contraseña</Button>}
-          links={<Link href="#acceso" icon="arrow-left">Volver al inicio de sesión</Link>}
         >
           <PasswordField id="reset-password" label="Nueva contraseña" labelHidden={false} autoComplete="new-password" helperText={HINT} />
           <PasswordField id="reset-password-confirm" label="Confirmar contraseña" labelHidden={false} autoComplete="new-password" />
